@@ -1,33 +1,24 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 94DBF65F1E
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8431A65DB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 07:45:13 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1XKN3Z-0004zy-Mt for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Aug 2014 09:45:13 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 09:45:13 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 21 Aug 2014 09:20:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7L9KkSP023601
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 09:45:13 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 21 Aug 2014 09:44:59 +0200
-Message-ID: <lt481r$hms$1@ger.gmane.org>
-References: <CAHQecY6bxmkDi3U6nN3MhF4x6-ysPnXyb0nwrjXwq3-xX5NdcQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <CAHQecY6bxmkDi3U6nN3MhF4x6-ysPnXyb0nwrjXwq3-xX5NdcQ@mail.gmail.com>
-Subject: Re: [META-OE][PATCH 1/1] oscam: fixed QA issue where binary was being stripped
+	Thu, 21 Aug 2014 02:20:46 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 21 Aug 2014 02:20:45 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Aug 2014 05:20:43 -0400
+Message-ID: <1408612843-22017-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] lmbench: remove debianutils from RDEPENDS and add perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,47 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Aug 2014 07:45:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Aug 2014 09:20:50 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Tom King schreef op 21-08-14 08:13:
-> http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095778.html
->
->  WARNING: QA Issue: File '/usr/bin/oscam' from oscam was already
-> stripped, this will prevent future debugging! [already-stripped]
-> 
-> Fix above warning by telling cmake to do Debug type build, which
-> prevents linking with '-s' flag that removed symbols before bitbake could
-> put them into dbg package.
-> 
-> Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com> Signed-off-by: Tom
-> King<ka6sox@gmail.com> --- meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-> |    2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb 
-> b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb index e3f2708..c4a4d99
-> 100644 --- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb +++
-> b/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb @@ -14,5 +14,5 @@ S =
-> "${WORKDIR}/trunk"
-> 
-> inherit cmake
-> 
-> -EXTRA_OECMAKE = "-DDEFAULT_CS_CONFDIR=${sysconfdir}" +EXTRA_OECMAKE =
-> "-DDEFAULT_CS_CONFDIR=${sysconfdir} -DCMAKE_BUILD_TYPE=Debug"
+- I don't see any evdidence that lmbench needs debianutils to run:
+  debianutils provides:
+    run-parts, tempfile, savelog, which, ischroot,
+    add-shell, installkernel, remove-shell
+  but none of them is used by lmbench scripts and I tested it work
+  fine without debianutils, so remove debianutils from RDEPENDS
 
-Whitespace damage due to mailer?
+- Some scripts in lmbench are perl scripts, so add
+  RDEPENDS on perl (no addtional perl module is needed).
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-iD8DBQFT9aN7MkyGM64RGpERAocuAJ41630bimczFzLdBtpxDkCRY33h6QCeO80c
-myBws3uS1pXaavua8+O9vo8=
-=xjKT
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index 38e0d2e..0586d72 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -74,5 +74,5 @@ pkg_postinst_${PN} () {
+     fi
+ }
+ 
+-RDEPENDS_${PN} = "debianutils"
++RDEPENDS_${PN} = "perl"
+ FILES_${PN} += "${datadir}/lmbench ${libdir}/lmbench"
+-- 
+2.0.0
 
 
