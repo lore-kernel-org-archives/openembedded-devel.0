@@ -1,40 +1,36 @@
 Return-Path: <sujith.h@gmail.com>
-Received: from mail-qg0-f53.google.com (mail-qg0-f53.google.com
-	[209.85.192.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 61F2265DA3
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id AF93865D56
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Aug 2014 06:19:55 +0000 (UTC)
-Received: by mail-qg0-f53.google.com with SMTP id z60so6445576qgd.12
+	Fri, 22 Aug 2014 06:29:02 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id lf10so16129527pab.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 23:19:56 -0700 (PDT)
+	Thu, 21 Aug 2014 23:29:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=DpjjFRgzTvYc/9KbY17h7mC1M+bfDK4kqlICcHuwqmE=;
-	b=bKlYVtZJ8kgLKOE3kwjvmpdbeCwAlL1yy6lNPqT6bMa5wpjysfkgXPsDGVW9vHAqrK
-	uIL9Dm/4eCxm+XXIf0KrW9+K2zUgfgh6IYViZlU8YNenh2FYk2POKE10pnAIM8WBRyV9
-	eKnaubK233D7d3voUOUvmDiJukwOa0+qMhkWX/zZWh5bGjAFbFvZzUJ2PTPSZ6503rv1
-	oXR1l3hp1jDyJL5YyrQMLtvG5PxHjDqK0TwdTITH2CIibV/P3Y2ZigA/vS06qHDAlSJ+
-	kII2KEctoZuGZdSo8GLJZGpSkJ4KvEu7fb1Strv3p/ItYgt3Fl1+iWuu1/LGgtVOuRbo
-	D4Ig==
-X-Received: by 10.140.81.134 with SMTP id f6mr4774784qgd.60.1408688395972;
-	Thu, 21 Aug 2014 23:19:55 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.41.148 with HTTP; Thu, 21 Aug 2014 23:19:35 -0700 (PDT)
-In-Reply-To: <CANx9H-DwW-abesYFg1TLz-zGszB3pRA2gUbUnZjpQvMieWf-cA@mail.gmail.com>
-References: <1408603607-32536-1-git-send-email-sujith.h@gmail.com>
-	<2646587.gJzHJE2pH7@peggleto-mobl5.ger.corp.intel.com>
-	<CANx9H-DwW-abesYFg1TLz-zGszB3pRA2gUbUnZjpQvMieWf-cA@mail.gmail.com>
-From: sujith h <sujith.h@gmail.com>
-Date: Fri, 22 Aug 2014 11:49:35 +0530
-Message-ID: <CADyYWLkj+2zHtaPP-GicQMGaehaq9JP_POVV=4Av2R+aLC_MwA@mail.gmail.com>
-To: Tim Orling <ticotimo@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	h=from:to:cc:subject:date:message-id;
+	bh=u0I0C+LcKaozy35ZUmTsChZ7sZyP0aMJbAlbc71nO8k=;
+	b=O/ndAIiqBhQZejM3EHWsaMorwduQmU74fPljOsysGmqoNXHsYDHh3CCjD0R/qXzyHd
+	y4WT9cDLX0txWlJY0CmgFCx7qF8uvHvSPNBYt21saOix30Ln0QUYoT0wjhT97GCds5Pd
+	8eN6oEfDTUDYHLSJpRKVk4aMuWkjFa/keCxqzpnjwuxi35gfWLxkwHxAXBC/6Ibdhazq
+	l+Zj7Q85//45lDKRreI+AQ1AW+NcWQrlOZtL4P+EEG2Sw/cFXNw+acJC9Jlib9WudIq7
+	UK2c/byFVrkietktuakvbaMQ30YVx169ZIIqchBB23HunDU+L7Pdr+MCSEdaodfi6xSZ
+	mWEw==
+X-Received: by 10.68.220.71 with SMTP id pu7mr4144776pbc.22.1408688943077;
+	Thu, 21 Aug 2014 23:29:03 -0700 (PDT)
+Received: from linux-z8xt.inp.mentorg.com ([139.181.35.34])
+	by mx.google.com with ESMTPSA id
+	lq4sm98744763pab.48.2014.08.21.23.29.00 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 21 Aug 2014 23:29:02 -0700 (PDT)
+From: Sujith H <sujith.h@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 22 Aug 2014 11:55:05 +0530
+Message-Id: <1408688705-20179-1-git-send-email-sujith.h@gmail.com>
+X-Mailer: git-send-email 1.8.4
 Cc: Sujith H <Sujith_Haridasan@mentor.com>,
-	Christopher Larson <chris_larson@mentor.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-pyparted: Add recipe
+	Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-python][PATCH v3] python-pyparted: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,113 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Aug 2014 06:20:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Aug 2014 06:29:09 -0000
 
-On Fri, Aug 22, 2014 at 10:06 AM, Tim Orling <ticotimo@gmail.com> wrote:
+From: Sujith H <Sujith_Haridasan@mentor.com>
 
->
-> On Thu, Aug 21, 2014 at 6:47 AM, Paul Eggleton <
-> paul.eggleton@linux.intel.com> wrote:
->
->> Hi Sujith,
->>
->> I think this recipe is almost there, just some minor tweaks:
->>
->> On Thursday 21 August 2014 12:16:47 Sujith H wrote:
->> > From: Sujith H <Sujith_Haridasan@mentor.com>
->> >
->> > This recipe will provide a set of Python modules that
->> > provide Python programmers an interface to libparted,
->> > the GNU parted library for disk partitioning and filesystem
->> > manipulation.
->> >
->> > Signed-off-by: Christopher Larson <chris_larson@mentor.com>
->> > Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
->>
-> Tested-by: Tim Orling <TicoTimo@gmail.com>
-> (qemuarm, core-image-sato)
->
-> NOTES:
-> (1) In order to get help for this module,
-> IMAGE_INSTALL_append =3D " python-pyparted python-pydoc python-pkgutil
-> python-io"
-> $ python
-> >>>import parted
-> >>>help(parted)
->
-> (2) I used the examples (list_devices.py, list_partitions.py) from the
-> following to test:
-> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D692503
->
->  > ---
->> >  .../python-pyparted/python-pyparted_3.9.bb          | 21
->> > +++++++++++++++++++++ 1 file changed, 21 insertions(+)
->> >  create mode 100644
->> > meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
->> >
->> > diff --git
->> > a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
->> > b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
->> new
->> > file mode 100644
->> > index 0000000..db1b936
->> > --- /dev/null
->> > +++ b/meta-python/recipes-extended/python-pyparted/
->> python-pyparted_3.9.bb
->> > @@ -0,0 +1,21 @@
->> > +DESCRIPTION =3D "pyparted is a set of Python modules that provide Pyt=
-hon
->> > programmers \ +an interface to libparted, the GNU parted library for
->> disk
->> > partitioning and \ +filesystem manipulation."
->> > +SUMMARY =3D "Python bindings for libparted"
->> > +HOMEPAGE =3D "https://fedorahosted.org/pyparted/"
->> > +LICENSE =3D "GPL-2.0+"
->> > +LIC_FILES_CHKSUM =3D "\
->> > +    file://COPYING;md5=3D8ca43cbc842c2336e835926c2166c28b \
->> > +
->> >
->> file://src/_pedmodule.c;startline=3D10;endline=3D22;md5=3D70c62bd73782a0=
-3f56a0571
->> > a9f08ea46 \ +"
->> > +DEPENDS +=3D "parted"
->> > +RDEPENDS_${PN} +=3D "python-stringold python-codecs python-math"
->>
->> Could you please move the RDEPENDS line down to just before the
->> BBCLASSEXTEND
->> line? (i.e. where any other definitions that concern packaging would
->> appear).
->>
->> > +
->> > +S=3D"${WORKDIR}/pyparted-${PV}"
->>
->> Please move this after the SRC_URI / checksums and add spaces around the
->> =3D .
->>
->> if you could also please ensure that your next version is marked [PATCH
->> v3]
->> (if it will be the third version of this patch) rather than just [PATCH]
->> so
->> that it's clear that it supersedes an earlier version.
->>
->
-> I agree completely with Paul and meant to mention that on the previous
-> patch [PATCH v2].
->
+This recipe will provide a set of Python modules that
+provide Python programmers an interface to libparted,
+the GNU parted library for disk partitioning and filesystem
+manipulation.
 
-Sure the next patch will be mentioned as [PATCH v3].
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
+---
+ .../python-pyparted/python-pyparted_3.9.bb          | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
 
-Thanks and Regards,
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+new file mode 100644
+index 0000000..919b301
+--- /dev/null
++++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
++an interface to libparted, the GNU parted library for disk partitioning and \
++filesystem manipulation."
++SUMMARY = "Python bindings for libparted"
++HOMEPAGE = "https://fedorahosted.org/pyparted/"
++LICENSE = "GPL-2.0+"
++LIC_FILES_CHKSUM = "\
++    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
++    file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571a9f08ea46 \
++"
++DEPENDS += "parted"
++
++SRC_URI = "https://fedorahosted.org/releases/p/y/pyparted/pyparted-${PV}.tar.gz"
++SRC_URI[md5sum] = "f16c7ef7f5fa4a43fcb2a4654b487e39"
++SRC_URI[sha256sum] = "a56712e3d058ce3d859c158236dbbf45224018919efd3d880ea80f9e0d0bebbb"
++S = "${WORKDIR}/pyparted-${PV}"
++
++inherit distutils
++
++RDEPENDS_${PN} += "python-stringold python-codecs python-math"
++BBCLASSEXTEND += "native"
+-- 
+1.8.4
 
-Sujith H
-
---=20
-=E0=B4=B8=E0=B5=81=E0=B4=9C=E0=B4=BF=E0=B4=A4=E0=B5=8D =E0=B4=B9=E0=B4=B0=
-=E0=B4=BF=E0=B4=A6=E0=B4=BE=E0=B4=B8=E0=B4=A8=E0=B5=8D
-Bangalore
-<Project>Contributor to KDE project
-http://fci.wikia.com/wiki/Anti-DRM-Campaign
-<Blog> http://sujithh.info
 
