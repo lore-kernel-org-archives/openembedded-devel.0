@@ -1,23 +1,26 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A6BD065D53
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BA6F70E71
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Aug 2014 01:25:07 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7M1P6WW027272
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 21 Aug 2014 18:25:07 -0700 (PDT)
-Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 21 Aug 2014 18:25:06 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
+	Fri, 22 Aug 2014 02:37:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7M2b676007367
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Aug 2014 19:37:07 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 21 Aug 2014 19:37:06 -0700
+From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Aug 2014 09:25:01 +0800
-Message-ID: <1408670701-9201-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 22 Aug 2014 10:37:34 +0800
+Message-ID: <1408675054-4549-2-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
+References: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: change the group of /var/lib/mysql from 'nogroup' to 'mysql'.
+Subject: [meta-webserver][PATCH 2/2] apache2: add systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +34,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Aug 2014 01:25:10 -0000
+X-List-Received-Date: Fri, 22 Aug 2014 02:37:10 -0000
 Content-Type: text/plain
 
-The commit 8f637f9bbcdda1dc7a1998d243708c727aa6016f added
-mysql group, we should change the group of /var/lib/mysql
-from 'nogroup' to 'mysql' also.
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Add systemd unit file for apache2.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-support/mysql/mariadb_5.5.38.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-httpd/apache2/apache2_2.4.10.bb        |   13 +++++++++++--
+ .../recipes-httpd/apache2/files/apache2.service    |   14 ++++++++++++++
+ 2 files changed, 25 insertions(+), 2 deletions(-)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2.service
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-index 8a73833..06c7aba 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-@@ -123,7 +123,7 @@ pkg_postinst_${PN}-server () {
-     test -d /usr/bin || mkdir -p /usr/bin
-     test -e /usr/bin/hostname || ln -s /bin/hostname /usr/bin/hostname
-     mkdir /var/lib/mysql
--    chown mysql.nogroup /var/lib/mysql
-+    chown mysql.mysql /var/lib/mysql
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
+index 614dd4e..0356029 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
+@@ -18,7 +18,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://npn-patch-2.4.7.patch \
+            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+            file://init \
+-           file://apache2-volatile.conf"
++           file://apache2-volatile.conf \
++           file://apache2.service"
  
-     mysql_install_db --basedir=${prefix} --user=mysql
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+ SRC_URI[md5sum] = "44543dff14a4ebc1e9e2d86780507156"
+@@ -26,7 +27,10 @@ SRC_URI[sha256sum] = "176c4dac1a745f07b7b91e7f4fd48f9c48049fa6f088efe758d61d9738
  
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+-inherit autotools update-rc.d pkgconfig
++inherit autotools update-rc.d pkgconfig systemd
++
++SYSTEMD_SERVICE_${PN} = "apache2.service"
++SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+ 
+ SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
+ 
+@@ -81,6 +85,11 @@ do_install_append() {
+         install -d ${D}${sysconfdir}/tmpfiles.d/
+         install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
+     fi
++
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
++    sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
++    sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
+ }
+ 
+ SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
+diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2.service b/meta-webserver/recipes-httpd/apache2/files/apache2.service
+new file mode 100644
+index 0000000..f4bcf9e
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/files/apache2.service
+@@ -0,0 +1,14 @@
++[Unit]
++Decription=The Apache HTTP Server
++After=network.target remote-fs.target nss-lookup.target
++
++[Service]
++Type=simple
++Environment=LANG=C
++ExecStart=@SBINDIR@/httpd -DFOREGROUND -D SSL -D PHP5 -k start
++ExecStop=@BASE_BINDIR@/kill -WINCH ${MAINPID}
++KillSignal=SIGCONT
++PrivateTmp=true
++
++[Install]
++WantedBy=multi-user.target
 -- 
-1.9.1
+1.7.9.5
 
 
