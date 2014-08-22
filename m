@@ -1,26 +1,24 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BA6F70E71
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 53F9C70E75
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 22 Aug 2014 02:37:05 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7M2b676007367
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7M2b5c4004378
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 19:37:07 -0700 (PDT)
+	Thu, 21 Aug 2014 19:37:05 -0700 (PDT)
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 21 Aug 2014 19:37:06 -0700
+	14.3.174.1; Thu, 21 Aug 2014 19:37:05 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Aug 2014 10:37:34 +0800
-Message-ID: <1408675054-4549-2-git-send-email-Qi.Chen@windriver.com>
+Date: Fri, 22 Aug 2014 10:37:33 +0800
+Message-ID: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
-References: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-webserver][PATCH 2/2] apache2: add systemd unit file
+Subject: [meta-oe][PATCH 1/2] mariadb: add systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,73 +37,97 @@ Content-Type: text/plain
 
 From: Chen Qi <Qi.Chen@windriver.com>
 
-Add systemd unit file for apache2.
+The service file mainly comes from Fedora20.
+
+This patch also adds a configuration file under /etc/tmpfiles.d so
+that mysqld could start correctly.
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-httpd/apache2/apache2_2.4.10.bb        |   13 +++++++++++--
- .../recipes-httpd/apache2/files/apache2.service    |   14 ++++++++++++++
- 2 files changed, 25 insertions(+), 2 deletions(-)
- create mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2.service
+ .../recipes-support/mysql/mariadb/mysqld.service   |   15 +++++++++++++++
+ meta-oe/recipes-support/mysql/mariadb_5.5.38.inc   |   19 +++++++++++++++++--
+ 2 files changed, 32 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/mysql/mariadb/mysqld.service
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
-index 614dd4e..0356029 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
-@@ -18,7 +18,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://npn-patch-2.4.7.patch \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-            file://init \
--           file://apache2-volatile.conf"
-+           file://apache2-volatile.conf \
-+           file://apache2.service"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
- SRC_URI[md5sum] = "44543dff14a4ebc1e9e2d86780507156"
-@@ -26,7 +27,10 @@ SRC_URI[sha256sum] = "176c4dac1a745f07b7b91e7f4fd48f9c48049fa6f088efe758d61d9738
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
--inherit autotools update-rc.d pkgconfig
-+inherit autotools update-rc.d pkgconfig systemd
-+
-+SYSTEMD_SERVICE_${PN} = "apache2.service"
-+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
- 
- SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
- 
-@@ -81,6 +85,11 @@ do_install_append() {
-         install -d ${D}${sysconfdir}/tmpfiles.d/
-         install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
-     fi
-+
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
-+    sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
-+    sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
- }
- 
- SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
-diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2.service b/meta-webserver/recipes-httpd/apache2/files/apache2.service
+diff --git a/meta-oe/recipes-support/mysql/mariadb/mysqld.service b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
 new file mode 100644
-index 0000000..f4bcf9e
+index 0000000..698e52d
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/files/apache2.service
-@@ -0,0 +1,14 @@
++++ b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
+@@ -0,0 +1,15 @@
 +[Unit]
-+Decription=The Apache HTTP Server
-+After=network.target remote-fs.target nss-lookup.target
++Description=MariaDB database server
++After=syslog.target
++After=network.target
 +
 +[Service]
 +Type=simple
-+Environment=LANG=C
-+ExecStart=@SBINDIR@/httpd -DFOREGROUND -D SSL -D PHP5 -k start
-+ExecStop=@BASE_BINDIR@/kill -WINCH ${MAINPID}
-+KillSignal=SIGCONT
++User=mysql
++Group=mysql
++ExecStart=/usr/bin/mysqld_safe --basedir=/usr
++TimeoutSec=300
 +PrivateTmp=true
 +
 +[Install]
 +WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
+index 8a73833..83f2a92 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
++++ b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
+@@ -9,6 +9,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
+            file://remove-bad-path.patch \
+            file://fix-mysqlclient-r-version.patch \
+            file://my.cnf \
++           file://mysqld.service \
+           "
+ 
+ SRC_URI[md5sum] = "fa9ba00b084b95a45fab70860c412f10"
+@@ -18,7 +19,7 @@ S = "${WORKDIR}/mariadb-${PV}"
+ 
+ BINCONFIG_GLOB = "mysql_config"
+ 
+-inherit cmake gettext binconfig update-rc.d useradd
++inherit cmake gettext binconfig update-rc.d useradd systemd
+ 
+ INITSCRIPT_PACKAGES = "${PN}-server"
+ INITSCRIPT_NAME = "mysqld"
+@@ -28,6 +29,10 @@ USERADD_PACKAGES = "${PN}-server"
+ USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
+ GROUPADD_PARAM_${PN}-server = "--system mysql"
+ 
++SYSTEMD_PACKAGES = "mariadb-server"
++SYSTEMD_SERVICE_mariadb-server = "mysqld.service"
++SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
++
+ EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
+ 
+ python __anonymous() {
+@@ -112,6 +117,15 @@ do_install() {
+     install -d ${D}/${sysconfdir}/init.d
+     install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdir}/
+     mv ${D}/${sysconfdir}/init.d/mysql ${D}/${sysconfdir}/init.d/mysqld
++
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/mysqld.service ${D}${systemd_unitdir}/system
++
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++	install -d ${D}${sysconfdir}/tmpfiles.d
++	echo "f /var/log/mysqld.err 0640 mysql mysql -" \
++            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
++    fi
+ }
+ 
+ pkg_postinst_${PN}-server () {
+@@ -247,7 +261,8 @@ FILES_${PN}-server = "\
+     ${datadir}/mysql/ \
+     ${localstatedir}/mysql/ \
+     ${sysconfdir}/init.d \
+-    ${sysconfdir}/my.cnf"
++    ${sysconfdir}/my.cnf \
++    ${sysconfdir}/tmpfiles.d"
+ 
+ DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
+ FILES_${PN}-leftovers = "/"
 -- 
 1.7.9.5
 
