@@ -1,24 +1,38 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 53F9C70E75
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
+	[209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A080707D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Aug 2014 02:37:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7M2b5c4004378
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 22 Aug 2014 04:36:15 +0000 (UTC)
+Received: by mail-lb0-f178.google.com with SMTP id c11so8962511lbj.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Aug 2014 19:37:05 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 21 Aug 2014 19:37:05 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Aug 2014 10:37:33 +0800
-Message-ID: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Thu, 21 Aug 2014 21:36:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=312oUNI1NYtlGjklcGXqCq4A2z2bxbIngylCJj49T1s=;
+	b=UPlwiLgCHEXXsfhYkcU3L9ejA3cMH2WLG8arONsrtJsBnI6woEjqoHRMx3tz0lMxqB
+	NvTTMiIcx+U9E6O7djXS6z2wqb8H9OuKTHUqXE+d+er2r6B1C0bkU/CTLWS7EfSxqa11
+	gmniMmfRcWfTiwOYPbv5mBRZ92STQnPdY3pPINJOlzp9lqTjwjbXZcGC3WnpS17yvzW6
+	mQyDZYCuVPknq3MsOe/eFBBPRRnbHj7pnmUDRAVcgxWZeOAEk9fTyT1d5l9xlLAJ7JQy
+	ioLbk3GlbWqXaD+l/Wqe4zoTgRe8szlhuv+vOXm2p/n+Mo14fUtIIbAURECPlRJNevAH
+	pZpg==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] mariadb: add systemd unit file
+X-Received: by 10.112.128.233 with SMTP id nr9mr2267447lbb.43.1408682175814;
+	Thu, 21 Aug 2014 21:36:15 -0700 (PDT)
+Received: by 10.25.209.81 with HTTP; Thu, 21 Aug 2014 21:36:15 -0700 (PDT)
+In-Reply-To: <2646587.gJzHJE2pH7@peggleto-mobl5.ger.corp.intel.com>
+References: <1408603607-32536-1-git-send-email-sujith.h@gmail.com>
+	<2646587.gJzHJE2pH7@peggleto-mobl5.ger.corp.intel.com>
+Date: Thu, 21 Aug 2014 21:36:15 -0700
+Message-ID: <CANx9H-DwW-abesYFg1TLz-zGszB3pRA2gUbUnZjpQvMieWf-cA@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Sujith H <Sujith_Haridasan@mentor.com>,
+	Christopher Larson <chris_larson@mentor.com>
+Subject: Re: [meta-python][PATCH] python-pyparted: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,103 +46,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Aug 2014 02:37:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Aug 2014 04:36:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Chen Qi <Qi.Chen@windriver.com>
+On Thu, Aug 21, 2014 at 6:47 AM, Paul Eggleton <
+paul.eggleton@linux.intel.com> wrote:
 
-The service file mainly comes from Fedora20.
+> Hi Sujith,
+>
+> I think this recipe is almost there, just some minor tweaks:
+>
+> On Thursday 21 August 2014 12:16:47 Sujith H wrote:
+> > From: Sujith H <Sujith_Haridasan@mentor.com>
+> >
+> > This recipe will provide a set of Python modules that
+> > provide Python programmers an interface to libparted,
+> > the GNU parted library for disk partitioning and filesystem
+> > manipulation.
+> >
+> > Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+> > Signed-off-by: Sujith H <Sujith_Haridasan@mentor.com>
+>
+Tested-by: Tim Orling <TicoTimo@gmail.com>
+(qemuarm, core-image-sato)
 
-This patch also adds a configuration file under /etc/tmpfiles.d so
-that mysqld could start correctly.
+NOTES:
+(1) In order to get help for this module,
+IMAGE_INSTALL_append = " python-pyparted python-pydoc python-pkgutil
+python-io"
+$ python
+>>>import parted
+>>>help(parted)
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../recipes-support/mysql/mariadb/mysqld.service   |   15 +++++++++++++++
- meta-oe/recipes-support/mysql/mariadb_5.5.38.inc   |   19 +++++++++++++++++--
- 2 files changed, 32 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/mysql/mariadb/mysqld.service
+(2) I used the examples (list_devices.py, list_partitions.py) from the
+following to test:
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=692503
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb/mysqld.service b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
-new file mode 100644
-index 0000000..698e52d
---- /dev/null
-+++ b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
-@@ -0,0 +1,15 @@
-+[Unit]
-+Description=MariaDB database server
-+After=syslog.target
-+After=network.target
-+
-+[Service]
-+Type=simple
-+User=mysql
-+Group=mysql
-+ExecStart=/usr/bin/mysqld_safe --basedir=/usr
-+TimeoutSec=300
-+PrivateTmp=true
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-index 8a73833..83f2a92 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-@@ -9,6 +9,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
-            file://remove-bad-path.patch \
-            file://fix-mysqlclient-r-version.patch \
-            file://my.cnf \
-+           file://mysqld.service \
-           "
- 
- SRC_URI[md5sum] = "fa9ba00b084b95a45fab70860c412f10"
-@@ -18,7 +19,7 @@ S = "${WORKDIR}/mariadb-${PV}"
- 
- BINCONFIG_GLOB = "mysql_config"
- 
--inherit cmake gettext binconfig update-rc.d useradd
-+inherit cmake gettext binconfig update-rc.d useradd systemd
- 
- INITSCRIPT_PACKAGES = "${PN}-server"
- INITSCRIPT_NAME = "mysqld"
-@@ -28,6 +29,10 @@ USERADD_PACKAGES = "${PN}-server"
- USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
- GROUPADD_PARAM_${PN}-server = "--system mysql"
- 
-+SYSTEMD_PACKAGES = "mariadb-server"
-+SYSTEMD_SERVICE_mariadb-server = "mysqld.service"
-+SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
-+
- EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
- 
- python __anonymous() {
-@@ -112,6 +117,15 @@ do_install() {
-     install -d ${D}/${sysconfdir}/init.d
-     install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdir}/
-     mv ${D}/${sysconfdir}/init.d/mysql ${D}/${sysconfdir}/init.d/mysqld
-+
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/mysqld.service ${D}${systemd_unitdir}/system
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+	install -d ${D}${sysconfdir}/tmpfiles.d
-+	echo "f /var/log/mysqld.err 0640 mysql mysql -" \
-+            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
-+    fi
- }
- 
- pkg_postinst_${PN}-server () {
-@@ -247,7 +261,8 @@ FILES_${PN}-server = "\
-     ${datadir}/mysql/ \
-     ${localstatedir}/mysql/ \
-     ${sysconfdir}/init.d \
--    ${sysconfdir}/my.cnf"
-+    ${sysconfdir}/my.cnf \
-+    ${sysconfdir}/tmpfiles.d"
- 
- DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
- FILES_${PN}-leftovers = "/"
--- 
-1.7.9.5
+ > ---
+> >  .../python-pyparted/python-pyparted_3.9.bb          | 21
+> > +++++++++++++++++++++ 1 file changed, 21 insertions(+)
+> >  create mode 100644
+> > meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+> >
+> > diff --git
+> > a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+> > b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+> new
+> > file mode 100644
+> > index 0000000..db1b936
+> > --- /dev/null
+> > +++ b/meta-python/recipes-extended/python-pyparted/
+> python-pyparted_3.9.bb
+> > @@ -0,0 +1,21 @@
+> > +DESCRIPTION = "pyparted is a set of Python modules that provide Python
+> > programmers \ +an interface to libparted, the GNU parted library for disk
+> > partitioning and \ +filesystem manipulation."
+> > +SUMMARY = "Python bindings for libparted"
+> > +HOMEPAGE = "https://fedorahosted.org/pyparted/"
+> > +LICENSE = "GPL-2.0+"
+> > +LIC_FILES_CHKSUM = "\
+> > +    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+> > +
+> >
+> file://src/_pedmodule.c;startline=10;endline=22;md5=70c62bd73782a03f56a0571
+> > a9f08ea46 \ +"
+> > +DEPENDS += "parted"
+> > +RDEPENDS_${PN} += "python-stringold python-codecs python-math"
+>
+> Could you please move the RDEPENDS line down to just before the
+> BBCLASSEXTEND
+> line? (i.e. where any other definitions that concern packaging would
+> appear).
+>
+> > +
+> > +S="${WORKDIR}/pyparted-${PV}"
+>
+> Please move this after the SRC_URI / checksums and add spaces around the =
+> .
+>
+> if you could also please ensure that your next version is marked [PATCH v3]
+> (if it will be the third version of this patch) rather than just [PATCH] so
+> that it's clear that it supersedes an earlier version.
+>
 
+I agree completely with Paul and meant to mention that on the previous
+patch [PATCH v2].
+
+Regards,
+
+Tim
 
