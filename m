@@ -1,36 +1,37 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 9813270738
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 21:04:17 +0000 (UTC)
-Received: by mail-yh0-f46.google.com with SMTP id a41so10334515yho.33
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 14:04:19 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id BD0E170F2E;
+	Sun, 24 Aug 2014 22:31:21 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id b13so12275584wgh.18
+	for <multiple recipients>; Sun, 24 Aug 2014 15:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=CHy41m1tm+RxZRjwy9iQ/baZXMj6+691Xp5xTNVGEBY=;
-	b=jV1594kplBUbyalTL18F9cNNZdTDg3QXQWPsmkVrfyoa77NQdS7Ae+tythXo3Zf/VQ
-	SBntT2ItPI9LMlWymlImNgyuKsMMfyjjPIokoU1hTIYe/h1ZnVGFJJyQNF1wiBLNWMdo
-	jOuee1pS6zTowJjCDSrNMET5Rbr+yNr5oSRzoCYb7SJVu4SWaNlhErvc8YuSO1O7oMi4
-	hL1II3PpDci1pvoqn93sUflAzz5mHiuCN3q1Yrv1wMiRIHH5TRbaOGgRYmbijobFopwL
-	UD2TPh26RAvTpMdiaSeYZiT+xcvGcIyfjse8v159yRK9LD49yWRF6SYWvf/uYzLd8Fo2
-	aYhA==
-X-Received: by 10.236.145.97 with SMTP id o61mr28725212yhj.45.1408914259279;
-	Sun, 24 Aug 2014 14:04:19 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.35.70.10])
-	by mx.google.com with ESMTPSA id s9sm3015583yhp.39.2014.08.24.14.04.17
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 24 Aug 2014 14:04:18 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=IAfzJrK+HKGaizz1ZKz6KwvPxDUa2A237W7u1pRA1Y8=;
+	b=sPivObeM+K9rM4cvg13aL511R7E0DrNMtA0iJkIG79BHRLgDgftnDHzPQa/HJBxEA6
+	5q2RlkwIxYlp44JsRJVUTu2AO/Rd336mf/YY61C8lsc7bg9Jfb8wExzuR6fS7UIDozAH
+	Fxcnslp24LsI/ggaEFoLQYElSee3F+uxPFxsPjC144YbprropsKSYmjmzTcD/aqzU7Of
+	FQUUs7bfp+Cqs5RZNBFDgjhSlrlLYZu6zqziSnHbDImTZ6csuw6+FtS/TprIM4ptLiAX
+	Yz/T/vfG7ZOPVoFZzt/2lmX5jPag9Q6Gu2yK5SrDEwinO3iGVyjVDgvb1Yz0tzdiNEMh
+	CTcQ==
+X-Received: by 10.180.149.169 with SMTP id ub9mr11599925wib.32.1408919482148; 
+	Sun, 24 Aug 2014 15:31:22 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	s4sm24823828wik.23.2014.08.24.15.31.21 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 24 Aug 2014 15:31:21 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 25 Aug 2014 00:31:27 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Aug 2014 18:03:59 -0300
-Message-Id: <1408914239-11562-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][for-daisy][PATCH] php: Fix native build due mistakenly linking against host's iconv
+Message-ID: <20140824223127.GN20524@jama>
+References: <20140823082635.A959850251@opal.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <20140823082635.A959850251@opal.openembedded.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: mkvtoolnix broken by boost upgrade Was: [oe-commits] Saul Wold : boost: Upgrade to 1.56.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +45,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Aug 2014 21:04:18 -0000
+X-List-Received-Date: Sun, 24 Aug 2014 22:31:25 -0000
+X-Groupsio-MsgNum: 51837
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="s3R87C3fwYeCSZ0b"
+Content-Disposition: inline
 
-The configure script has mistakenly choose to enable iconv support,
-due host to provide it, adding '/usr/lib' to the linking flags and
-failing as:
+--s3R87C3fwYeCSZ0b
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-,----[ Linking error while testing 'fork' support ]
-| conftest.c:268: warning: conflicting types for built-in function 'fork'
-| .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
-|     undefined reference to `gzopen64@ZLIB_1.2.3.3'
-| collect2: ld returned 1 exit status
-`----
+On Sat, Aug 23, 2014 at 08:26:35AM +0000, git@git.openembedded.org wrote:
+> Module: openembedded-core.git
+> Branch: master
+> Commit: a6afd754290cecbe57392d13477557051b438817
+> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
+;h=3Da6afd754290cecbe57392d13477557051b438817
+>=20
+> Author: Saul Wold <sgw@linux.intel.com>
+> Date:   Tue Aug 19 07:49:09 2014 -0700
+>=20
+> boost: Upgrade to 1.56.0
+>=20
+> Rebase boostconfig to handle moved user-config file
 
-This patch disables iconv support for native builds fixing the error.
+FYI: This breaks mkvtoolnix:
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-devtools/php/php.inc |    1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index b1bf79c..1e2aa72 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -37,6 +37,7 @@ EXTRA_OECONF = "--enable-mbstring \
- EXTRA_OECONF_virtclass-native = " \
-                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
-                 --with-libxml-dir=${STAGING_BINDIR_NATIVE} \
-+                --without-iconv \
-                 ${COMMON_EXTRA_OECONF} \
- "
- 
--- 
-1.7.10.4
+|      CXX src/common/iso639.cpp
+| src/common/iso639.cpp: In function 'int map_to_iso639_2_code(const string=
+&, bool)':
+| src/common/iso639.cpp:595:30: error: 'class boost::range::index_value<con=
+st iso639_language_t&, int>' has no member named 'english_name'
+|      auto names =3D split(lang->english_name, ";");
+|                               ^
 
 
+> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+>=20
+> ---
+>=20
+>  .../boost/{bjam-native_1.55.0.bb =3D> bjam-native_1.56.0.bb}        | 0
+>  meta/recipes-support/boost/{boost-1.55.0.inc =3D> boost-1.56.0.inc} | 4 =
+++--
+>  meta/recipes-support/boost/boost.inc                              | 8 ++=
+++----
+>  meta/recipes-support/boost/{boost_1.55.0.bb =3D> boost_1.56.0.bb}   | 0
+>  4 files changed, 6 insertions(+), 6 deletions(-)
+
+--s3R87C3fwYeCSZ0b
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlP6Z78ACgkQN1Ujt2V2gBzZMACeJ3lZsGCME3+Cz64eTH3NK8HF
+E7IAoIMYjRid0KtkVjmjIVqTqHPCp22A
+=bme0
+-----END PGP SIGNATURE-----
+
+--s3R87C3fwYeCSZ0b--
