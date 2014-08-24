@@ -1,37 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id BD0E170F2E;
-	Sun, 24 Aug 2014 22:31:21 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id b13so12275584wgh.18
-	for <multiple recipients>; Sun, 24 Aug 2014 15:31:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=IAfzJrK+HKGaizz1ZKz6KwvPxDUa2A237W7u1pRA1Y8=;
-	b=sPivObeM+K9rM4cvg13aL511R7E0DrNMtA0iJkIG79BHRLgDgftnDHzPQa/HJBxEA6
-	5q2RlkwIxYlp44JsRJVUTu2AO/Rd336mf/YY61C8lsc7bg9Jfb8wExzuR6fS7UIDozAH
-	Fxcnslp24LsI/ggaEFoLQYElSee3F+uxPFxsPjC144YbprropsKSYmjmzTcD/aqzU7Of
-	FQUUs7bfp+Cqs5RZNBFDgjhSlrlLYZu6zqziSnHbDImTZ6csuw6+FtS/TprIM4ptLiAX
-	Yz/T/vfG7ZOPVoFZzt/2lmX5jPag9Q6Gu2yK5SrDEwinO3iGVyjVDgvb1Yz0tzdiNEMh
-	CTcQ==
-X-Received: by 10.180.149.169 with SMTP id ub9mr11599925wib.32.1408919482148; 
-	Sun, 24 Aug 2014 15:31:22 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+Return-Path: <eduardo@monkey.io>
+Received: from mail-vc0-f182.google.com (mail-vc0-f182.google.com
+	[209.85.220.182])
+	by mail.openembedded.org (Postfix) with ESMTP id AB08C70FC5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Aug 2014 23:22:54 +0000 (UTC)
+Received: by mail-vc0-f182.google.com with SMTP id hy4so14206466vcb.41
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Aug 2014 16:22:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=WrSlQtPItKAvKQqXKbp5y67ReiWOOXXjxPJCn4sIE1o=;
+	b=f2l3+yNesRb+WZ7OvXltRO9YhzcIru6Ssig0GZhZQMqhXOSdgDHNztsr/IKhDCnZfe
+	JLAg6Buy6zneVY8LG4UxQjzJEOdUbJ1Zd501c4wnfGcM3OT6QZCAga0p+PAcNdt10J0H
+	ccw51jPZQyXDcUuug6wk/yhj0ehmxg9Q0/OZe5eHITfwCNPpQtzF/w16PqVoFSHRC1xN
+	H9VxAouN5fgfBWrkywAMl6jtaA96En3xjDPrcAiOQK6+1MsUIDJFpUdL81JsxAH0FuP0
+	mHmHavM27JmkjJooJ/K1VHA099G45ow9Df77xY+3CYboMHF9zTDBoQn7P/n/krD38GXc
+	Ftcw==
+X-Gm-Message-State: ALoCoQnPwGAZf69kkGpOSnrxJYmuix/gz0Iv5K/GzxhHzdTSD0czo7EIqplR3/h6NMAF51eHn1F1
+X-Received: by 10.52.246.198 with SMTP id xy6mr13020272vdc.7.1408922575494;
+	Sun, 24 Aug 2014 16:22:55 -0700 (PDT)
+Received: from localhost.localdomain ([186.32.221.184])
 	by mx.google.com with ESMTPSA id
-	s4sm24823828wik.23.2014.08.24.15.31.21 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Aug 2014 15:31:21 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 25 Aug 2014 00:31:27 +0200
+	pa15sm111940826vdb.14.2014.08.24.16.22.54 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 24 Aug 2014 16:22:54 -0700 (PDT)
+From: Eduardo Silva <eduardo@monkey.io>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140824223127.GN20524@jama>
-References: <20140823082635.A959850251@opal.openembedded.org>
-MIME-Version: 1.0
-In-Reply-To: <20140823082635.A959850251@opal.openembedded.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: mkvtoolnix broken by boost upgrade Was: [oe-commits] Saul Wold : boost: Upgrade to 1.56.0
+Date: Sun, 24 Aug 2014 17:23:06 -0600
+Message-Id: <1408922586-29697-1-git-send-email-eduardo@monkey.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-webserver][PATCH] monkey: new v1.5.3 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,65 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Aug 2014 22:31:25 -0000
-X-Groupsio-MsgNum: 51837
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="s3R87C3fwYeCSZ0b"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 24 Aug 2014 23:23:01 -0000
 
---s3R87C3fwYeCSZ0b
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This patch add the new Monkey HTTP Server v1.5.3.
 
-On Sat, Aug 23, 2014 at 08:26:35AM +0000, git@git.openembedded.org wrote:
-> Module: openembedded-core.git
-> Branch: master
-> Commit: a6afd754290cecbe57392d13477557051b438817
-> URL:    http://git.openembedded.org/?p=3Dopenembedded-core.git&a=3Dcommit=
-;h=3Da6afd754290cecbe57392d13477557051b438817
->=20
-> Author: Saul Wold <sgw@linux.intel.com>
-> Date:   Tue Aug 19 07:49:09 2014 -0700
->=20
-> boost: Upgrade to 1.56.0
->=20
-> Rebase boostconfig to handle moved user-config file
+For more details about software changes please visit:
 
-FYI: This breaks mkvtoolnix:
+   http://monkey-project.com/Announcements/v1.5.3
 
-|      CXX src/common/iso639.cpp
-| src/common/iso639.cpp: In function 'int map_to_iso639_2_code(const string=
-&, bool)':
-| src/common/iso639.cpp:595:30: error: 'class boost::range::index_value<con=
-st iso639_language_t&, int>' has no member named 'english_name'
-|      auto names =3D split(lang->english_name, ";");
-|                               ^
+=== Build Tests ==
+
+This version have been tested on Yocto/Daisy being packaged and
+deployed on images based on RPM successfully.
+
+monkey-yocto/672eadb254e754b91efe691a6594985ee6d9a22e
+
+Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+---
+ .../recipes-httpd/monkey/{monkey_1.5.2.bb => monkey_1.5.3.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/monkey/{monkey_1.5.2.bb => monkey_1.5.3.bb} (94%)
+
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.2.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb
+similarity index 94%
+rename from meta-webserver/recipes-httpd/monkey/monkey_1.5.2.bb
+rename to meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb
+index fcd40e0..06095ba 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.2.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb
+@@ -11,8 +11,8 @@ SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
+            file://monkey.service \
+            file://monkey.init"
+ 
+-SRC_URI[md5sum] = "c90ccba23a814265c7e0fd3a75f883fd"
+-SRC_URI[sha256sum] = "2048d49662895f83df475e22d87c45ea8022c0b1565bba222bda2192fd02c349"
++SRC_URI[md5sum] = "1fa9ddbb4c0100b22f2fc4b8da56dbe9"
++SRC_URI[sha256sum] = "0ac300e04f052818bc26b7da0183c3c5cd13be8090aaabd3505838587be8c0ec"
+ 
+ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
+                 --logdir=${localstatedir}/log/monkey/ \
+-- 
+1.9.1
 
 
-> Signed-off-by: Saul Wold <sgw@linux.intel.com>
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
->=20
-> ---
->=20
->  .../boost/{bjam-native_1.55.0.bb =3D> bjam-native_1.56.0.bb}        | 0
->  meta/recipes-support/boost/{boost-1.55.0.inc =3D> boost-1.56.0.inc} | 4 =
-++--
->  meta/recipes-support/boost/boost.inc                              | 8 ++=
-++----
->  meta/recipes-support/boost/{boost_1.55.0.bb =3D> boost_1.56.0.bb}   | 0
->  4 files changed, 6 insertions(+), 6 deletions(-)
-
---s3R87C3fwYeCSZ0b
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlP6Z78ACgkQN1Ujt2V2gBzZMACeJ3lZsGCME3+Cz64eTH3NK8HF
-E7IAoIMYjRid0KtkVjmjIVqTqHPCp22A
-=bme0
------END PGP SIGNATURE-----
-
---s3R87C3fwYeCSZ0b--
