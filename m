@@ -1,41 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
-	[74.125.82.180])
-	by mail.openembedded.org (Postfix) with ESMTP id C2A6265E94
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D81670F3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 09:24:43 +0000 (UTC)
-Received: by mail-we0-f180.google.com with SMTP id w61so12133240wes.39
+	Sun, 24 Aug 2014 16:01:54 +0000 (UTC)
+Received: by mail-wg0-f49.google.com with SMTP id k14so12102781wgh.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 02:24:44 -0700 (PDT)
+	Sun, 24 Aug 2014 09:01:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=s4Df2ggxT8Gm1xRLOAlmDNrzI04UoAD4PF2b2ifXl/A=;
-	b=j6Mx2yqhPmdL4Mc27UhVuoW5sKNlj85PiI26MkZeXN9nypg2rWfQ1UgYvxMOG6grcN
-	aTIok7SpDrR59EkJYRIVpwbQbtP8W1JqBmkpmZC5C/vPafzJNazHAhzrhXwNon1q7pwR
-	yaVkx0J2iBojHYMK+SKKNkzp3F9gRoE0k1SCgHtJuV0sudofL03bwkfdcY07Za31sSd2
-	B/g+dC5Wz94EzjvULNUVwHxmGMoeoJDiC+3OkY+kn8kOdnLF9y1tWeA0WCMDj4doMO3a
-	O+Xb47Mr4L+L8Vcy4pqG6vNcs+iEhBdQlzeFfOXEvDwOgd0g3+jZ+r+hegJre5tvktIN
-	ZEAQ==
-X-Received: by 10.180.184.99 with SMTP id et3mr8270763wic.31.1408872284360;
-	Sun, 24 Aug 2014 02:24:44 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=XHG/8dgB1xPreG18zUL8BECGqmlbCAZ90U67Djb4IXA=;
+	b=0ovGgNgANdLpClDslnHhRXY+f3sJvCLwphYICKVim36i0bCDr6NkxgPMTPOjV+z0Em
+	JtvFdieamtjWClZ9FAnNd0cRDlFRlMkETcKWFmHziVcBcT3Qombxd7uUAR7/aVwfPlJF
+	8/LiNOuHwSHMFxkj+QH5wzobsc/XfYPPhW+LrmCHqylOtImjNPgRvmqcDB3HA/sJx+ya
+	U3n3PkzjgGvxXwj3JXb5c5Omc7b3wgPMJtGiNRXXfpL5RdDkK3r7C6EULK8teVv4EgA3
+	r+MwZtXyO8kOaAzTyy1C6FvEtFE9Hgi8pw1McFgFOywC5mpr8ib5YaSSV8/g+J7gysv1
+	RvXQ==
+X-Received: by 10.180.14.170 with SMTP id q10mr9859911wic.56.1408896115391;
+	Sun, 24 Aug 2014 09:01:55 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fr2sm18551734wib.7.2014.08.24.02.24.43
-	for <openembedded-devel@lists.openembedded.org>
+	w14sm21778749wij.2.2014.08.24.09.01.54 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Aug 2014 02:24:43 -0700 (PDT)
+	Sun, 24 Aug 2014 09:01:54 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 24 Aug 2014 11:24:49 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140824092449.GI20524@jama>
-References: <1408795335-10619-1-git-send-email-Martin.Jansa@gmail.com>
-	<CANx9H-Ar4bYGkmWQaJZpnkRS8idBOXxtOTrEBfN1-o4jdLDSUw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CANx9H-Ar4bYGkmWQaJZpnkRS8idBOXxtOTrEBfN1-o4jdLDSUw@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] python-cython: Fix missing deps for native
+Date: Sun, 24 Aug 2014 18:01:58 +0200
+Message-Id: <1408896118-20829-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.0.4
+Subject: [meta-oe][PATCH] packagegroup*: set PACKAGE_ARCH before packagegroup inherit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,76 +42,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Aug 2014 09:24:49 -0000
-X-Groupsio-MsgNum: 51830
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="IJFRpmOek+ZRSQoz"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 24 Aug 2014 16:01:59 -0000
 
---IJFRpmOek+ZRSQoz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* The required order was changed in oe-core commit:
+  allarch: Add warning about packagegroup
+  Since we want to start including this class conditionally, detect cases
+  where packagegroup files use the old ordering and inform the user they
+  need to update this.
+* drop PACKAGE_ARCH setting from xorg-fonts-100dpi - nothing seems MACHINE
+  specific in it
 
-On Sat, Aug 23, 2014 at 06:03:01PM -0700, Tim Orling wrote:
-> On Sat, Aug 23, 2014 at 5:02 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->=20
-> > * ERROR: Nothing RPROVIDES 'python-netserver-native' (but
-> > virtual:native:/OE/build/shr-core/meta-openembedded/meta-python/recipes=
--devtools/python/
-> > python-cython_0.20.2.bb RDEPENDS on or otherwise requires it)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-core/packagegroups/packagegroup-basic.bb | 5 +----
+ meta-oe/recipes-core/packagegroups/packagegroup-boot.bb  | 5 +----
+ meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb  | 2 --
+ 3 files changed, 2 insertions(+), 10 deletions(-)
 
-FYI: I'll squash this into the master-next commit which added the
-RDEPENDS_${PN}
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+index ad1cd83..20b1652 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+@@ -7,11 +7,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
+ 
+ PR = "r13"
+ 
+-inherit packagegroup
+-
+-# packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
+-#
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
++inherit packagegroup
+ 
+ # Poke extra recomendations into the list using your machine.conf
+ #
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
+index 61a519d..f50443d 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
+@@ -4,11 +4,8 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
+ 
+ PR = "r58"
+ 
+-inherit packagegroup
+-
+-# packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
+-#
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
++inherit packagegroup
+ 
+ #
+ # those ones can be set in machine config to supply packages needed to get machine booting
+diff --git a/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb b/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb
+index aacf379..fd6c992 100644
+--- a/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb
++++ b/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb
+@@ -3,8 +3,6 @@ LICENSE = "Custom"
+ 
+ inherit packagegroup
+ 
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-
+ RDEPENDS_${PN} = "\
+ 	font-adobe-100dpi \
+ 	font-adobe-utopia-100dpi \
+-- 
+2.0.4
 
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> >
-> Acked-by: Tim Orling <TicoTimo@gmail.com>
->=20
-> > ---
-> >  meta-python/recipes-devtools/python/python-cython_0.20.2.bb | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> > b/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> > index 8578a14..3966e0b 100644
-> > --- a/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> > +++ b/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> > @@ -21,3 +21,4 @@ RDEPENDS_${PN} +=3D "\
-> >      python-subprocess \
-> >      python-shell \
-> >  "
-> > +RDEPENDS_${PN}_class-native =3D ""
-> > --
-> > 2.0.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---IJFRpmOek+ZRSQoz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlP5r2EACgkQN1Ujt2V2gBy15gCfXZREOfVadBH+OUNBi4nxpMUi
-bpoAnAoGxgyeGKtNRjhZnbddPp0cRL7T
-=O2L5
------END PGP SIGNATURE-----
-
---IJFRpmOek+ZRSQoz--
