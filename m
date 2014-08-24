@@ -1,34 +1,36 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-la0-f47.google.com (mail-la0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 17D3670E6E
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 76F866FCE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 01:03:00 +0000 (UTC)
-Received: by mail-la0-f47.google.com with SMTP id mc6so11514004lab.34
+	Sun, 24 Aug 2014 01:37:52 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id ey11so18311329pad.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Aug 2014 18:03:01 -0700 (PDT)
+	Sat, 23 Aug 2014 18:37:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=0+qPnC5kIFCGfg5J0A33BSZn/6guAXvfyIYILWVWuqA=;
-	b=qY9PnyHxEgJNSDTXezhFJXLfd3XrE62L2YsvXs1STdAf1V/KuP+hPF1Il7xhDAPPqM
-	xOZpFKH5W86dpa2ko2/2DqpBGMehlZ0t2eAoZ/+XTYBo7qExKINB+SIiVd/t+5vATwA/
-	N/EEcr0gPKVL1WZOqiB+COVamOzWTIM/JY/njmdaDhh/XjgfahYxFEizWMlrqZDO3Wjq
-	qfpCGM25uWn4YhZeraXepOndj13uq01oxCWO6jGHHJXxNKJs0ncg1lEL7dNcuqCOJKMS
-	bDhYMhmRvD3Xk2P9S7qQwN7MbS+OZVk+JTjIbwO1t/G9cth82agK2I0hJnnUK2EnWyda
-	RUSg==
-MIME-Version: 1.0
-X-Received: by 10.152.161.225 with SMTP id xv1mr6487846lab.59.1408842181090;
-	Sat, 23 Aug 2014 18:03:01 -0700 (PDT)
-Received: by 10.25.209.81 with HTTP; Sat, 23 Aug 2014 18:03:01 -0700 (PDT)
-In-Reply-To: <1408795335-10619-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1408795335-10619-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Sat, 23 Aug 2014 18:03:01 -0700
-Message-ID: <CANx9H-Ar4bYGkmWQaJZpnkRS8idBOXxtOTrEBfN1-o4jdLDSUw@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=YsFdKXWuHUtw2YsVcUb9H4fMqMufp4BmQsVHrhcwYT4=;
+	b=zSXV6NkcZiFUkbmSHg4WrSLBNt3cpAtiEE4Jvvws018WkwXlhN98LRRC4QJmzr8OJm
+	tdyPD1qXPSb+D5ihQUp8UmlizXCTjlxfyHijqWz2Q7WaAxeZrllvoC/eHc1JdluD4mZk
+	0ozWZ/HOFLF3vxWJ7pZFYe1fWOm5uTjMwaeu+k+5QHs+dohmYPLzbX+whHyYZVTP9rM4
+	zzZUIDKZEvsC8sboZlPFdn8qISFNxqwmz4WurHfLMP7RXh5KBRdUELp69m3eMoIEoMrg
+	3Ota0o57YjXVKBLDKefKx13X4MyKa3yZCKxBVKht4W/pOqLnadiFnHFlwLvkIoLFOlll
+	wmWQ==
+X-Received: by 10.68.69.46 with SMTP id b14mr12023021pbu.70.1408844273336;
+	Sat, 23 Aug 2014 18:37:53 -0700 (PDT)
+Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
+	[75.128.22.150])
+	by mx.google.com with ESMTPSA id e2sm50481859pdk.54.2014.08.23.18.37.44
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 23 Aug 2014 18:37:52 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] python-cython: Fix missing deps for native
+X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 23 Aug 2014 18:36:17 -0700
+Message-Id: <1408844177-15282-1-git-send-email-TicoTimo@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-python][PATCH] python-pyparted: fix rdeps for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,41 +44,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Aug 2014 01:03:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 24 Aug 2014 01:37:58 -0000
 
-On Sat, Aug 23, 2014 at 5:02 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+---
+ meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> * ERROR: Nothing RPROVIDES 'python-netserver-native' (but
-> virtual:native:/OE/build/shr-core/meta-openembedded/meta-python/recipes-devtools/python/
-> python-cython_0.20.2.bb RDEPENDS on or otherwise requires it)
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->
-Acked-by: Tim Orling <TicoTimo@gmail.com>
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+index 919b301..bfb4f6f 100644
+--- a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
++++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.9.bb
+@@ -18,4 +18,6 @@ S = "${WORKDIR}/pyparted-${PV}"
+ inherit distutils
+ 
+ RDEPENDS_${PN} += "python-stringold python-codecs python-math"
++RDEPENDS_${PN}_class-native = ""
++
+ BBCLASSEXTEND += "native"
+-- 
+1.9.3
 
-> ---
->  meta-python/recipes-devtools/python/python-cython_0.20.2.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> b/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> index 8578a14..3966e0b 100644
-> --- a/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> +++ b/meta-python/recipes-devtools/python/python-cython_0.20.2.bb
-> @@ -21,3 +21,4 @@ RDEPENDS_${PN} += "\
->      python-subprocess \
->      python-shell \
->  "
-> +RDEPENDS_${PN}_class-native = ""
-> --
-> 2.0.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
