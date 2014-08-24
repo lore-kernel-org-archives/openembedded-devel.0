@@ -1,41 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 07A6660169
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 9813270738
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 20:36:29 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id ho1so1679197wib.8
+	Sun, 24 Aug 2014 21:04:17 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id a41so10334515yho.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 13:36:29 -0700 (PDT)
+	Sun, 24 Aug 2014 14:04:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=G7BKRxxA2RabuRqahkRzwkNjjLPhM5RMCJFYP2QxFJc=;
-	b=EmBziWExBrS/eczqb6th4g752g06OmRIqBOGFzLF9GqQoFnOwnVSMrGl7e9a+6+dYq
-	j0PnVJt0hafcdXpFPDwgEO9ML1KOMJd6qGQH4IREchXJ0jis+F+4le1EysBk3H9ZKGDz
-	v2+PeNTtc7up5RIxSRWc3unA6YWO6n6GkD+FXd3R1e7NadBHKtWom2vUrs8A4PvndBwn
-	oNv6muN9PqR4MX8pdrBTit3xmaQsS7mPZGdhXvKVSHqlhb4HeiuQHKX8iS/hqtiPkCGz
-	p3s0Q9nOvdE7iEffymVpn02pkn0DGVqRIRuE+Syd5EJhBEFCxhWsSZCN5SznE8tKyQCI
-	Uvng==
-X-Received: by 10.194.221.74 with SMTP id qc10mr17981232wjc.39.1408912589855; 
-	Sun, 24 Aug 2014 13:36:29 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	a4sm23930562wie.21.2014.08.24.13.36.28 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Aug 2014 13:36:29 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 24 Aug 2014 22:36:35 +0200
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=CHy41m1tm+RxZRjwy9iQ/baZXMj6+691Xp5xTNVGEBY=;
+	b=jV1594kplBUbyalTL18F9cNNZdTDg3QXQWPsmkVrfyoa77NQdS7Ae+tythXo3Zf/VQ
+	SBntT2ItPI9LMlWymlImNgyuKsMMfyjjPIokoU1hTIYe/h1ZnVGFJJyQNF1wiBLNWMdo
+	jOuee1pS6zTowJjCDSrNMET5Rbr+yNr5oSRzoCYb7SJVu4SWaNlhErvc8YuSO1O7oMi4
+	hL1II3PpDci1pvoqn93sUflAzz5mHiuCN3q1Yrv1wMiRIHH5TRbaOGgRYmbijobFopwL
+	UD2TPh26RAvTpMdiaSeYZiT+xcvGcIyfjse8v159yRK9LD49yWRF6SYWvf/uYzLd8Fo2
+	aYhA==
+X-Received: by 10.236.145.97 with SMTP id o61mr28725212yhj.45.1408914259279;
+	Sun, 24 Aug 2014 14:04:19 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.35.70.10])
+	by mx.google.com with ESMTPSA id s9sm3015583yhp.39.2014.08.24.14.04.17
+	for <multiple recipients>
+	(version=TLSv1 cipher=RC4-SHA bits=128/128);
+	Sun, 24 Aug 2014 14:04:18 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140824203635.GL20524@jama>
-References: <1408909187-29642-1-git-send-email-otavio@ossystems.com.br>
-	<CAP9ODKoDCx4yHcKrfMiZr85vorRm-8fcsy6zG-r+YDxpp17bPQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKoDCx4yHcKrfMiZr85vorRm-8fcsy6zG-r+YDxpp17bPQ@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+Date: Sun, 24 Aug 2014 18:03:59 -0300
+Message-Id: <1408914239-11562-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH] php: Fix native build due mistakenly linking against host's iconv
+Subject: [meta-oe][for-daisy][PATCH] php: Fix native build due mistakenly linking against host's iconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,57 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Aug 2014 20:36:31 -0000
-X-Groupsio-MsgNum: 51835
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zROEGoKAXsG5UqGB"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 24 Aug 2014 21:04:18 -0000
 
---zROEGoKAXsG5UqGB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The configure script has mistakenly choose to enable iconv support,
+due host to provide it, adding '/usr/lib' to the linking flags and
+failing as:
 
-On Sun, Aug 24, 2014 at 04:45:22PM -0300, Otavio Salvador wrote:
-> On Sun, Aug 24, 2014 at 4:39 PM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
-> > The configure script has mistakenly choose to enable iconv support,
-> > due host to provide it, adding '/usr/lib' to the linking flags and
-> > failing as:
-> >
-> > ,----[ Linking error while testing 'fork' support ]
-> > | conftest.c:268: warning: conflicting types for built-in function 'for=
-k'
-> > | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
-> > |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
-> > | collect2: ld returned 1 exit status
-> > `----
-> >
-> > This patch disables iconv support for native builds fixing the error.
-> >
-> > Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->=20
-> Same error exist in Daisy.
->=20
-> I did the rebase here and I can send a patch for it, as it has a minor
-> conflict due the pkgconfig rework. Martin, do you want me to send the
-> patch on top of Daisy as well or do you resolve the conflict yourself?
+,----[ Linking error while testing 'fork' support ]
+| conftest.c:268: warning: conflicting types for built-in function 'fork'
+| .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
+|     undefined reference to `gzopen64@ZLIB_1.2.3.3'
+| collect2: ld returned 1 exit status
+`----
 
-Please send it.
+This patch disables iconv support for native builds fixing the error.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ meta-oe/recipes-devtools/php/php.inc |    1 +
+ 1 file changed, 1 insertion(+)
 
---zROEGoKAXsG5UqGB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index b1bf79c..1e2aa72 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -37,6 +37,7 @@ EXTRA_OECONF = "--enable-mbstring \
+ EXTRA_OECONF_virtclass-native = " \
+                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
+                 --with-libxml-dir=${STAGING_BINDIR_NATIVE} \
++                --without-iconv \
+                 ${COMMON_EXTRA_OECONF} \
+ "
+ 
+-- 
+1.7.10.4
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlP6TNMACgkQN1Ujt2V2gBzjYACfcuvfSkjIS/xdLg+OzBfociCE
-4IgAniWZKXlEiZf06H09mHrHV0JfPTK1
-=b4l4
------END PGP SIGNATURE-----
-
---zROEGoKAXsG5UqGB--
