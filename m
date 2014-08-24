@@ -1,36 +1,36 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f42.google.com (mail-yh0-f42.google.com
-	[209.85.213.42])
-	by mail.openembedded.org (Postfix) with ESMTP id CA83670E5A
+Received: from mail-yh0-f41.google.com (mail-yh0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id EB12565E94
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 19:39:54 +0000 (UTC)
-Received: by mail-yh0-f42.google.com with SMTP id a41so10405584yho.29
+	Sun, 24 Aug 2014 19:45:21 +0000 (UTC)
+Received: by mail-yh0-f41.google.com with SMTP id b6so10382128yha.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 12:39:56 -0700 (PDT)
+	Sun, 24 Aug 2014 12:45:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=+hFglS+9gl1LRalCZpYEFDAeqsmZuVxDUx1PoKu4fso=;
-	b=Uw1JsqUkMRF1kGh9OrgMAuUufgM0tWjqEtVwsDxwOADp0950q2ZZ2Mu15b5GLpB/lu
-	dgApZZ+Wbv4XJPknpisfWJvveJD3pXdQ+C2LAk84IvO75+NyHvls3TcsbJnH2NPCi9Sm
-	GFBBpr/B2QOA9zq3edZiA2ylcx5pBwGBj9ETmOwVV81eI/Gb/5jsReSPNpaUWIqRqARO
-	kG091ay0wQmp4EVC9K8ycSt9FOQkvFzGgjp5uPvHyEF0YJw+J72myPy3ygvJxU6wnC8C
-	2ggQmv14TQcV2g0BnzXbxMBmunq8Lo6l2UUMTkb9N6u2EXo2uEQVspmt0iuc3r9REKNv
-	Id6g==
-X-Received: by 10.236.100.147 with SMTP id z19mr27749382yhf.70.1408909195939; 
-	Sun, 24 Aug 2014 12:39:55 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.35.70.10])
-	by mx.google.com with ESMTPSA id d66sm2937767yhd.41.2014.08.24.12.39.53
-	for <multiple recipients>
-	(version=TLSv1 cipher=RC4-SHA bits=128/128);
-	Sun, 24 Aug 2014 12:39:55 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=1X0Do+427v3NzfRcnZWyjZ60q7LPBiKwLNhx98ZWGyQ=;
+	b=e/bypqoecqmLef/yU9PxiRG5KO1KtbbZTPg4ESK7jh4AxDPXUiTGo4VtvtH6QAH6cK
+	OFRU+Bgd72MMCK3vxWAqwyseN2Q4oJhH2A5gUAePyTwxNwzA+kpC+ziKqb6yn1nmZwEi
+	SjikNFRHW/Evm57GSXh1ya7mYhCn7CYyW0xJDN+2Op5YfO+jJS7fVCIJ+9e6c97fhGeW
+	5huTEEcZQiNRZwmRm4L5fZvRpLFtK+66HqRDh6aX+rtK2dMwGwWUsZojlgWI6+8XhHct
+	oyIcQpP9cITJaIeo1Oy1d/vmYyGkFbiU2fpibGGvgx5NkCXT3RPcNNI1D0cNsRtsSMBP
+	NlZQ==
+MIME-Version: 1.0
+X-Received: by 10.236.15.6 with SMTP id e6mr27124018yhe.43.1408909522259; Sun,
+	24 Aug 2014 12:45:22 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Sun, 24 Aug 2014 12:45:22 -0700 (PDT)
+In-Reply-To: <1408909187-29642-1-git-send-email-otavio@ossystems.com.br>
+References: <1408909187-29642-1-git-send-email-otavio@ossystems.com.br>
+Date: Sun, 24 Aug 2014 16:45:22 -0300
+X-Google-Sender-Auth: rgRINSz8ke5oBQJrO4yW3XQpKDA
+Message-ID: <CAP9ODKoDCx4yHcKrfMiZr85vorRm-8fcsy6zG-r+YDxpp17bPQ@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Aug 2014 16:39:47 -0300
-Message-Id: <1408909187-29642-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] php: Fix native build due mistakenly linking against host's iconv
+Subject: Re: [meta-oe][PATCH] php: Fix native build due mistakenly linking against host's iconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Aug 2014 19:39:56 -0000
+X-List-Received-Date: Sun, 24 Aug 2014 19:45:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The configure script has mistakenly choose to enable iconv support,
-due host to provide it, adding '/usr/lib' to the linking flags and
-failing as:
+On Sun, Aug 24, 2014 at 4:39 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> The configure script has mistakenly choose to enable iconv support,
+> due host to provide it, adding '/usr/lib' to the linking flags and
+> failing as:
+>
+> ,----[ Linking error while testing 'fork' support ]
+> | conftest.c:268: warning: conflicting types for built-in function 'fork'
+> | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
+> |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
+> | collect2: ld returned 1 exit status
+> `----
+>
+> This patch disables iconv support for native builds fixing the error.
+>
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-,----[ Linking error while testing 'fork' support ]
-| conftest.c:268: warning: conflicting types for built-in function 'fork'
-| .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
-|     undefined reference to `gzopen64@ZLIB_1.2.3.3'
-| collect2: ld returned 1 exit status
-`----
+Same error exist in Daisy.
 
-This patch disables iconv support for native builds fixing the error.
+I did the rebase here and I can send a patch for it, as it has a minor
+conflict due the pkgconfig rework. Martin, do you want me to send the
+patch on top of Daisy as well or do you resolve the conflict yourself?
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-devtools/php/php.inc |    1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 030c090..6bdae78 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -35,6 +35,7 @@ EXTRA_OECONF = "--enable-mbstring \
- "
- EXTRA_OECONF_virtclass-native = " \
-                 --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
-+                --without-iconv \
-                 ${COMMON_EXTRA_OECONF} \
- "
- 
 -- 
-1.7.10.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
