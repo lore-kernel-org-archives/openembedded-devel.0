@@ -1,28 +1,39 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 30E7565D00
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 1CA3460169
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Aug 2014 02:10:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7P2AnP5014291
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 25 Aug 2014 05:21:37 +0000 (UTC)
+Received: by mail-pd0-f182.google.com with SMTP id fp1so19533819pdb.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 19:10:50 -0700 (PDT)
-Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Sun, 24 Aug 2014 19:10:49 -0700
-Message-ID: <53FA9B26.5030301@windriver.com>
-Date: Mon, 25 Aug 2014 10:10:46 +0800
-From: Chong Lu <Chong.Lu@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
+	Sun, 24 Aug 2014 22:21:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=qcysXXD+htgyRm70hVCN/oSPnWEQpfpOVFWnlmEdpZU=;
+	b=a12neoQ/JKkJabnP6ftbrTSvxJQFutOrg2ToO0FIt1zRKKxptED92wDcs2j0i5UBge
+	OoBWB0vzrZ/eNtLz1/8oz0Dv6jQ1TEOG+/x5/sN6i3wFZUutmjjkBChvSSKQmxEZHom+
+	enI9tW2eb8tA9dEs4oLTEFZz4a+CoFjJZTbZNs/KY8QumWBiVA3qjyZeXoAR5uI2VqEK
+	/5Uk9jWchhI32Reg9tySCdtBapMofzQbZiNmQkpD8eNV/gA4UBKSN//xwa8nqtRmliq8
+	HJqr7bDcBt22+EX1kkhESLq2qBfLCfYJEOh/2ogzaFAFMTxUpODiQXxvJyExJxEc5PQu
+	CDYQ==
+X-Received: by 10.70.19.166 with SMTP id g6mr25000901pde.99.1408944098879;
+	Sun, 24 Aug 2014 22:21:38 -0700 (PDT)
+Received: from haswell ([2601:9:3580:7a5:baca:3aff:fe80:aa8f])
+	by mx.google.com with ESMTPSA id
+	wc3sm131732298pac.18.2014.08.24.22.21.37
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 24 Aug 2014 22:21:38 -0700 (PDT)
+Date: Sun, 24 Aug 2014 22:25:26 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140825052525.GC1014@haswell>
+References: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1408441112-10650-1-git-send-email-Chong.Lu@windriver.com>
-In-Reply-To: <1408441112-10650-1-git-send-email-Chong.Lu@windriver.com>
-X-Originating-IP: [128.224.162.204]
-Subject: Re: [meta-networking][PATCH] memcached: add knob to detect whether hugetlbfs are checked
+In-Reply-To: <1408675054-4549-1-git-send-email-Qi.Chen@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH 1/2] mariadb: add systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,95 +47,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Aug 2014 02:10:56 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Aug 2014 05:21:47 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-ping
+On 14-08-22 10:37:33, Qi.Chen@windriver.com wrote:
+> From: Chen Qi <Qi.Chen@windriver.com>
+> 
+> The service file mainly comes from Fedora20.
+> 
+> This patch also adds a configuration file under /etc/tmpfiles.d so
+> that mysqld could start correctly.
 
-On 08/19/2014 05:38 PM, Chong Lu wrote:
-> Add knob to detect whether hugetlbfs are checked or not.
-> This patch fixed the error:
->      ld: cannot find -lhugetlbfs
->
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+the next patch for apache does the execdir replacement on install. Why
+not here too ?
+> 
+> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 > ---
->   .../memcached/memcached-add-hugetlbfs-check.patch  | 32 ++++++++++++++++++++++
->   .../recipes-support/memcached/memcached_1.4.17.bb  | 13 +++++++--
->   2 files changed, 42 insertions(+), 3 deletions(-)
->   create mode 100644 meta-networking/recipes-support/memcached/memcached/memcached-add-hugetlbfs-check.patch
->
-> diff --git a/meta-networking/recipes-support/memcached/memcached/memcached-add-hugetlbfs-check.patch b/meta-networking/recipes-support/memcached/memcached/memcached-add-hugetlbfs-check.patch
+>  .../recipes-support/mysql/mariadb/mysqld.service   |   15 +++++++++++++++
+>  meta-oe/recipes-support/mysql/mariadb_5.5.38.inc   |   19 +++++++++++++++++--
+>  2 files changed, 32 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/mysql/mariadb/mysqld.service
+> 
+> diff --git a/meta-oe/recipes-support/mysql/mariadb/mysqld.service b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
 > new file mode 100644
-> index 0000000..544b840
+> index 0000000..698e52d
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/memcached/memcached/memcached-add-hugetlbfs-check.patch
-> @@ -0,0 +1,32 @@
-> +memcached: add knob to detect whether hugetlbfs are checked
+> +++ b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
+> @@ -0,0 +1,15 @@
+> +[Unit]
+> +Description=MariaDB database server
+> +After=syslog.target
+> +After=network.target
 > +
-> +Add knob to detect whether hugetlbfs are checked or not.
+> +[Service]
+> +Type=simple
+> +User=mysql
+> +Group=mysql
+> +ExecStart=/usr/bin/mysqld_safe --basedir=/usr
+> +TimeoutSec=300
+> +PrivateTmp=true
 > +
-> +Upstream-Status: Pending
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
+> index 8a73833..83f2a92 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
+> +++ b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
+> @@ -9,6 +9,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
+>             file://remove-bad-path.patch \
+>             file://fix-mysqlclient-r-version.patch \
+>             file://my.cnf \
+> +           file://mysqld.service \
+>            "
+>  
+>  SRC_URI[md5sum] = "fa9ba00b084b95a45fab70860c412f10"
+> @@ -18,7 +19,7 @@ S = "${WORKDIR}/mariadb-${PV}"
+>  
+>  BINCONFIG_GLOB = "mysql_config"
+>  
+> -inherit cmake gettext binconfig update-rc.d useradd
+> +inherit cmake gettext binconfig update-rc.d useradd systemd
+>  
+>  INITSCRIPT_PACKAGES = "${PN}-server"
+>  INITSCRIPT_NAME = "mysqld"
+> @@ -28,6 +29,10 @@ USERADD_PACKAGES = "${PN}-server"
+>  USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
+>  GROUPADD_PARAM_${PN}-server = "--system mysql"
+>  
+> +SYSTEMD_PACKAGES = "mariadb-server"
+> +SYSTEMD_SERVICE_mariadb-server = "mysqld.service"
+> +SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
 > +
-> +Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
-> +---
-> + configure.ac | 7 ++++++-
-> + 1 file changed, 6 insertions(+), 1 deletion(-)
+>  EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
+>  
+>  python __anonymous() {
+> @@ -112,6 +117,15 @@ do_install() {
+>      install -d ${D}/${sysconfdir}/init.d
+>      install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdir}/
+>      mv ${D}/${sysconfdir}/init.d/mysql ${D}/${sysconfdir}/init.d/mysqld
 > +
-> +diff --git a/configure.ac b/configure.ac
-> +index 7f22f21..21691b9 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -314,7 +314,12 @@ fi
-> + dnl ----------------------------------------------------------------------------
+> +    install -d ${D}${systemd_unitdir}/system
+> +    install -m 0644 ${WORKDIR}/mysqld.service ${D}${systemd_unitdir}/system
 > +
-> + AC_SEARCH_LIBS(umem_cache_create, umem)
-> +-AC_SEARCH_LIBS(gethugepagesizes, hugetlbfs)
-> ++AC_ARG_ENABLE(hugetlbfs,
-> ++  [AS_HELP_STRING([--enable-hugetlbfs],[Enable hugetlbfs])])
-> ++
-> ++if test "x$enable_hugetlbfs" = "xyes"; then
-> ++  AC_SEARCH_LIBS(gethugepagesizes, hugetlbfs)
-> ++fi
-> +
-> + AC_HEADER_STDBOOL
-> + AH_BOTTOM([#if HAVE_STDBOOL_H
-> +--
-> +1.8.3.4
-> +
-> diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-> index 5d37df0..e61bc74 100644
-> --- a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-> +++ b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-> @@ -18,7 +18,11 @@ DEPENDS += "libevent"
->   RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
->   
->   SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
-> -           file://configure.patch"
-> +           file://configure.patch \
-> +           file://memcached-add-hugetlbfs-check.patch"
-> +
-> +# set the same COMPATIBLE_HOST as libhugetlbfs
-> +COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
->   
->   SRC_URI[md5sum] = "46402dfbd7faadf6182283dbbd18b1a6"
->   SRC_URI[sha256sum] = "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf9926a89999d8cdc0458"
-> @@ -26,11 +30,14 @@ SRC_URI[sha256sum] = "d9173ef6d99ba798c982ea4566cb4f0e64eb23859fdbf9926a89999d8c
->   python __anonymous () {
->       endianness = d.getVar('SITEINFO_ENDIANNESS', True)
->       if endianness == 'le':
-> -        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=little")
-> +        d.appendVar('EXTRA_OECONF', " ac_cv_c_endian=little")
->       else:
-> -        d.setVar('EXTRA_OECONF', "ac_cv_c_endian=big")
-> +        d.appendVar('EXTRA_OECONF', " ac_cv_c_endian=big")
->   }
->   
-> +PACKAGECONFIG ??= ""
-> +PACKAGECONFIG[hugetlbfs] = "--enable-hugetlbfs, --disable-hugetlbfs, libhugetlbfs"
-> +
->   inherit update-rc.d
->   
->   INITSCRIPT_NAME = "memcached"
-
+> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+> +	install -d ${D}${sysconfdir}/tmpfiles.d
+> +	echo "f /var/log/mysqld.err 0640 mysql mysql -" \
+> +            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
+> +    fi
+>  }
+>  
+>  pkg_postinst_${PN}-server () {
+> @@ -247,7 +261,8 @@ FILES_${PN}-server = "\
+>      ${datadir}/mysql/ \
+>      ${localstatedir}/mysql/ \
+>      ${sysconfdir}/init.d \
+> -    ${sysconfdir}/my.cnf"
+> +    ${sysconfdir}/my.cnf \
+> +    ${sysconfdir}/tmpfiles.d"
+>  
+>  DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
+>  FILES_${PN}-leftovers = "/"
+> -- 
+> 1.7.9.5
+> 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
