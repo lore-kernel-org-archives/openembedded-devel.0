@@ -1,40 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id C8DB46AC7B
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B4FC65D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Aug 2014 06:33:19 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id kx10so20219583pab.6
+	Mon, 25 Aug 2014 06:46:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7P6klf7001618
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 23:33:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=XOYhv66aYWnbqHF1W3MlPF72/p/Z23YbGztzNVLtllI=;
-	b=zakGPjlN8Q2vLo9j+WgSsLw/OvFDZZLFMSQusiPn8/gZoYpWClJmPZZf0nG6Gyrc/I
-	kQM45hGbGpSToO6uAHVQT56amRYKTYwhC2uI3xxEbgpUn17ikce/+MaA6r1g5D0Xge8C
-	MrpmxYWrzud7z4ao4lZlUS5cXkBTTv5p64T454NqOgVLFbKoV5Zjm4XdyKrget+REeMK
-	QnaETupj6HhRgT/NfkumJV5mHYaIwyWqnSThx4CGVYw7nHH/1paGmMt1+96hyz/McwQR
-	BEp/cKSmOlOFs0D6Tlgd/Q3CB3OsI1Mvl3cdEzxfZGetvlM878q7ORTjdbHqCcvSNxlO
-	1OPg==
-X-Received: by 10.68.202.196 with SMTP id kk4mr25391251pbc.37.1408948401050;
-	Sun, 24 Aug 2014 23:33:21 -0700 (PDT)
-Received: from haswell ([2601:9:3580:7a5:baca:3aff:fe80:aa8f])
-	by mx.google.com with ESMTPSA id
-	nn3sm54972067pdb.58.2014.08.24.23.33.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Aug 2014 23:33:20 -0700 (PDT)
-Date: Sun, 24 Aug 2014 23:37:08 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140825063708.GE1014@haswell>
-References: <1408612843-22017-1-git-send-email-jackie.huang@windriver.com>
-	<20140821193142.GB3660@jama>
+	Sun, 24 Aug 2014 23:46:47 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 24 Aug 2014 23:46:47 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 25 Aug 2014 14:47:19 +0800
+Message-ID: <1408949241-13129-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-In-Reply-To: <20140821193142.GB3660@jama>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] lmbench: remove debianutils from RDEPENDS and add perl
+Subject: [PATCH V2 1/2] mariadb: add systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,30 +32,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Aug 2014 06:33:21 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 25 Aug 2014 06:46:49 -0000
+Content-Type: text/plain
 
-On 14-08-21 21:31:42, Martin Jansa wrote:
-> On Thu, Aug 21, 2014 at 05:20:43AM -0400, jackie.huang@windriver.com wrote:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> > 
-> > - I don't see any evdidence that lmbench needs debianutils to run:
-> >   debianutils provides:
-> >     run-parts, tempfile, savelog, which, ischroot,
-> >     add-shell, installkernel, remove-shell
-> >   but none of them is used by lmbench scripts and I tested it work
-> >   fine without debianutils, so remove debianutils from RDEPENDS
-> 
-> Lets see how far Tom's memory goes :)
-> 
-> commit 6dbe8d71c465fdf86310ca7f83332ff32baf12f5
-> Author: Tom Rini <trini@embeddedalley.com>
-> Date:   Fri Feb 13 01:14:22 2009 -0500
-> 
->     lmbench: Fix config file location in lmbench-run add RDEP on debianutils, bump PR
-> 
+From: Chen Qi <Qi.Chen@windriver.com>
 
-that was lmbench2 and probably some config script might have needed it
-but clearly I dont see any need for it now with lmbench3
+The service file mainly comes from Fedora20.
+
+This patch also adds a configuration file under /etc/tmpfiles.d so
+that mysqld could start correctly.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../recipes-support/mysql/mariadb/mysqld.service   |   15 +++++++++++++++
+ meta-oe/recipes-support/mysql/mariadb_5.5.38.inc   |   20 ++++++++++++++++++--
+ 2 files changed, 33 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/mysql/mariadb/mysqld.service
+
+diff --git a/meta-oe/recipes-support/mysql/mariadb/mysqld.service b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
+new file mode 100644
+index 0000000..18ad8d5
+--- /dev/null
++++ b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
+@@ -0,0 +1,15 @@
++[Unit]
++Description=MariaDB database server
++After=syslog.target
++After=network.target
++
++[Service]
++Type=simple
++User=mysql
++Group=mysql
++ExecStart=@BINDIR@/mysqld_safe --basedir=@PREFIX@
++TimeoutSec=300
++PrivateTmp=true
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
+index 8a73833..4e9a9e5 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
++++ b/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
+@@ -9,6 +9,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
+            file://remove-bad-path.patch \
+            file://fix-mysqlclient-r-version.patch \
+            file://my.cnf \
++           file://mysqld.service \
+           "
+ 
+ SRC_URI[md5sum] = "fa9ba00b084b95a45fab70860c412f10"
+@@ -18,7 +19,7 @@ S = "${WORKDIR}/mariadb-${PV}"
+ 
+ BINCONFIG_GLOB = "mysql_config"
+ 
+-inherit cmake gettext binconfig update-rc.d useradd
++inherit cmake gettext binconfig update-rc.d useradd systemd
+ 
+ INITSCRIPT_PACKAGES = "${PN}-server"
+ INITSCRIPT_NAME = "mysqld"
+@@ -28,6 +29,10 @@ USERADD_PACKAGES = "${PN}-server"
+ USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
+ GROUPADD_PARAM_${PN}-server = "--system mysql"
+ 
++SYSTEMD_PACKAGES = "mariadb-server"
++SYSTEMD_SERVICE_mariadb-server = "mysqld.service"
++SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
++
+ EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
+ 
+ python __anonymous() {
+@@ -112,6 +117,16 @@ do_install() {
+     install -d ${D}/${sysconfdir}/init.d
+     install -m 0644 ${WORKDIR}/my.cnf ${D}/${sysconfdir}/
+     mv ${D}/${sysconfdir}/init.d/mysql ${D}/${sysconfdir}/init.d/mysqld
++
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/mysqld.service ${D}${systemd_unitdir}/system
++    sed -i -e 's,@BINDIR@,${bindir},g' -e 's,@PREFIX@,${prefix},g' ${D}${systemd_unitdir}/system/mysqld.service
++
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++	install -d ${D}${sysconfdir}/tmpfiles.d
++	echo "f /var/log/mysqld.err 0640 mysql mysql -" \
++            > ${D}${sysconfdir}/tmpfiles.d/99-mysqld.conf
++    fi
+ }
+ 
+ pkg_postinst_${PN}-server () {
+@@ -247,7 +262,8 @@ FILES_${PN}-server = "\
+     ${datadir}/mysql/ \
+     ${localstatedir}/mysql/ \
+     ${sysconfdir}/init.d \
+-    ${sysconfdir}/my.cnf"
++    ${sysconfdir}/my.cnf \
++    ${sysconfdir}/tmpfiles.d"
+ 
+ DESCRIPTION_${PN}-leftovers = "unpackaged and probably unneeded files for ${PN}"
+ FILES_${PN}-leftovers = "/"
+-- 
+1.7.9.5
+
 
