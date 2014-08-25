@@ -1,41 +1,39 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F33165D00
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 693B062252
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Aug 2014 06:58:07 +0000 (UTC)
-Received: by mail-pd0-f180.google.com with SMTP id v10so19383354pde.25
+	Mon, 25 Aug 2014 07:14:34 +0000 (UTC)
+Received: by mail-pd0-f174.google.com with SMTP id fp1so19522656pdb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 23:58:05 -0700 (PDT)
+	Mon, 25 Aug 2014 00:14:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=8fZXpEc/EiRDRFEqkyZ+qWPibmqRJxPFRxNlLkDDrWg=;
-	b=OjmawZme4bid0rip0kwpgIQMq1maS84dCDWGOTMjD3qSMftqLOcWPyeXlacxkTPKQD
-	mi+sGoGAUF8x6Sv/vxDDeo8n5bScqu8YNDpOBg+pOiZfEXC1tionnG9WO1iahT+fpY2G
-	UvDzJtSAH62tHekxx519kqTIfO01I+hN0gbR2HsyyqAvwF0iOAd5fUONSQmO1vIE6KIQ
-	7x29c7+6zrRH+A0dtAi4VD24doEqsM6LViEwVX9FoCL8+N2Bq+MgeUEvjZww5gLqfM5i
-	YVYuN+kbZOWv/h+Apv+0+mLBnuPLiv3WHp5hv3Vb4x4RB5oD98gCXFIdMBnVE34k/qsW
-	D+Cw==
-X-Received: by 10.70.98.203 with SMTP id ek11mr25978513pdb.32.1408949885745;
-	Sun, 24 Aug 2014 23:58:05 -0700 (PDT)
+	bh=149zJSKIQjE+TvmHHswsqRl2mj1duWuo+THGS7/xA7g=;
+	b=EZf9pQQ6o/fVXSI4dENjRvoSf3U1JC5IjvCHGXxieKpDcmy7bduImq4EO+W/EoPYvq
+	GvJvejAD2ZNt0BQiN214Q5e2eZlYGBwkqK52R4XyIYIvAmAM1OLmu3ByBiyZ4Wevxxwx
+	QeoLMlfMS9WzO5xxF57V/5YYP1k8IhQTcyAvM/LGzbOo+Vr9qT2r8pPLUhttmrBheDLw
+	IAUC7P65W/4ba5zjUfJLHU7bvOWG7Bjqei05YDA+aP+qPGIfMAzvtMm854XNBZheNSnG
+	15JD2gYkLcRRUWLp3dI8Auy9ErTnQ8CHld9TK1kYxj+1f6EduOnyYeQFzpeCARfEKAdj
+	CC7Q==
+X-Received: by 10.70.49.166 with SMTP id v6mr8542023pdn.142.1408950872026;
+	Mon, 25 Aug 2014 00:14:32 -0700 (PDT)
 Received: from haswell ([2601:9:3580:7a5:baca:3aff:fe80:aa8f])
-	by mx.google.com with ESMTPSA id
-	ki7sm36400858pbc.65.2014.08.24.23.58.04
+	by mx.google.com with ESMTPSA id t7sm55963173pdj.94.2014.08.25.00.14.31
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 24 Aug 2014 23:58:05 -0700 (PDT)
-Date: Mon, 25 Aug 2014 00:01:52 -0700
+	Mon, 25 Aug 2014 00:14:31 -0700 (PDT)
+Date: Mon, 25 Aug 2014 00:18:17 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140825070152.GG1014@haswell>
-References: <674e63b93b3c0bfe18d58d6c11c1cc7a.squirrel@webmail.prtelecom.hu>
-	<55c56fabb920e066ba8915e51fb4ecdf.squirrel@webmail.prtelecom.hu>
-	<20140821111443.GX3660@jama>
+Message-ID: <20140825071817.GH1014@haswell>
+References: <CAHQecY4aMx0ytkLRf_0wjwO2uGvt6H8=sCaebzCAWL5FDR4-AQ@mail.gmail.com>
+	<20140819133612.GS3660@jama>
 MIME-Version: 1.0
-In-Reply-To: <20140821111443.GX3660@jama>
+In-Reply-To: <20140819133612.GS3660@jama>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] PHP 5.5.15
+Subject: Re: [meta-oe][Patch 1/1 v2] gypsy: fix QA issue by removing EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,46 +47,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Aug 2014 06:58:11 -0000
+X-List-Received-Date: Mon, 25 Aug 2014 07:14:41 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 
-On 14-08-21 13:14:43, Martin Jansa wrote:
-> On Thu, Aug 21, 2014 at 12:13:05PM +0200, zboszor@pr.hu wrote:
-> > > Hello,
-> > >
-> > > as a follow-up to my yesterday's mail about "[PATCH] Allow using a more
-> > > recent php", here's the proof of the pudding.
-> > >
-> > > I needed GD support in PHP, and it turned out that PHP 5.4.x only supports
-> > > GD 2.0, while current OE has 2.1. Not wanting to downgrade GD, I chose to
-> > > upgrade PHP.
-> > >
-> > > I had to update imap-fix-autofoo.patch so it applies cleanly and I also
-> > > had to fix https://bugs.php.net/bug.php?id=66103 so it can be cross
-> > > compiled. (I also submitted the patch at the link).
-> > >
-> > > I enabled more extensions in PHP than what was in the previous version,
-> > > this is what I needed locally.
-> > >
-> > > Comments?
-> > >
-> > > Feel free to use it in any way.
+On 14-08-19 15:36:12, Martin Jansa wrote:
+> On Mon, Aug 18, 2014 at 01:26:45PM -0700, Tom King wrote:
+> > Addresses QA issue in:
 > > 
-> > This time with the patch attached. :-)
+> > http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095778.html
+> > 
+> > "4 gypsy-0.9: gypsy: configure was passed unrecognised options:
+> > --with-distro [unknown-configure-option]"
 > 
-> Can you please send inline patch (preferably with git send-email as
-> README suggests)?
-> 
-> There is also issue with some files not being tracked by sstate:
-> [^/]*/usr/lib/php/\.channels.*
-> [^/]*/usr/lib/php/\.registry.*
-> [^/]*/usr/lib/php/\.depdb.*
-> [^/]*/usr/lib/php/\.filemap
-> [^/]*/usr/lib/php/\.lock
-> 
+> For some reason patchwork changes author to "root root"
+> http://patchwork.openembedded.org/patch/78537/
 
-they should be packaged in FILES_${PN}-pear, so sstate should track them
-is it because they start with a 'dot' ?
-
+Thats because Tom's email ID is associated with root user. I guess we
+need to change that.
 
