@@ -1,35 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D8736AC6B
+Return-Path: <Yasir_Khan@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 9649565D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Aug 2014 14:46:46 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id ho1so2660370wib.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Aug 2014 07:46:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Pgo9aqN1GbNDpubie2tXjpzQAFv0ZuBwsfotz0md2uI=;
-	b=msCh66egKm7kw+XWRi/VWwx3N0pHJt4VTYulZ6Q8j2gYEhMiofV9n7AM1fHQ7xQPSS
-	yzS2vRbliQBct+U+ABn15OqgBLI9DgMgA7ByxlH36Bpjy4LEmzJF1CGMpI5t5L19GIlV
-	MFHIqCYHuDOxV1dCxGq+z4QZV9uP5VQ8rh69EGxpt0oqjbYahqE3Px8fcZgwkv7kJrrW
-	ZIYhCnaUpUYdxFXTPBGFG/E04RcjMiU1Ktj69KruOBMHyxLyDgEoCUc2vyU/oPgR/SCD
-	y1NwWNkniaA2vcbjph/4vFKa8DyLgVQXAzydRkcSbKO/z1ytU79AgbZUDs1zH2heDCtA
-	z6PQ==
-X-Received: by 10.180.212.78 with SMTP id ni14mr16130163wic.44.1408978007396; 
-	Mon, 25 Aug 2014 07:46:47 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	v16sm1328597wia.14.2014.08.25.07.46.46 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 25 Aug 2014 07:46:46 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Mon, 25 Aug 2014 18:39:14 +0000 (UTC)
+Received: from svr-orw-exc-10.mgc.mentorg.com ([147.34.98.58])
+	by relay1.mentorg.com with esmtp 
+	id 1XLzAh-0006q3-Uh from Yasir_Khan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Aug 2014 11:39:15 -0700
+Received: from svr-pkl-eng-06.pkl.mentorg.com ([137.202.156.65]) by
+	SVR-ORW-EXC-10.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.4675); Mon, 25 Aug 2014 11:39:15 -0700
+From: Yasir-Khan <yasir_khan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Aug 2014 16:46:49 +0200
-Message-Id: <1408978009-16769-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.0.4
-Subject: [meta-efl][PATCH] e-wm: add git recipe with latest revision
+Date: Mon, 25 Aug 2014 23:38:31 +0500
+Message-Id: <1408991911-47249-1-git-send-email-yasir_khan@mentor.com>
+X-Mailer: git-send-email 1.7.9.5
+X-OriginalArrivalTime: 25 Aug 2014 18:39:15.0694 (UTC)
+	FILETIME=[DF5970E0:01CFC093]
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH] lmbench: add lmbench-exception LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,133 +33,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Aug 2014 14:46:49 -0000
+X-List-Received-Date: Mon, 25 Aug 2014 18:39:21 -0000
 
-* E19 is still in alpha stage, but I was told that many things work
-  there better than old(ish) E18
-* last announcement:
-  https://phab.enlightenment.org/phame/live/3/post/e19_alpha2_now_with_50_more_explosions/
-* but be aware that illume2 modules are gone and config mobile
-  doesn't work without them
-* there is new tiling config
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Yasir-Khan <yasir_khan@mentor.com>
 ---
- meta-efl/recipes-efl/e17/e-wm.inc                  |  5 ++++
- .../e17/e-wm/0001-configure.ac-add-foreign.patch   | 29 ++++++++++++++++++++++
- meta-efl/recipes-efl/e17/e-wm_0.18.8.bb            |  6 -----
- meta-efl/recipes-efl/e17/e-wm_git.bb               | 14 +++++++++++
- 4 files changed, 48 insertions(+), 6 deletions(-)
- create mode 100644 meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch
- create mode 100644 meta-efl/recipes-efl/e17/e-wm_git.bb
+ meta-oe/licenses/GPL-2.0-with-lmbench-restriction  |  108 ++++++++++++++++++++
+ .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |    2 +-
+ 2 files changed, 109 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/licenses/GPL-2.0-with-lmbench-restriction
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm.inc b/meta-efl/recipes-efl/e17/e-wm.inc
-index 122a60e..0ff26ef 100644
---- a/meta-efl/recipes-efl/e17/e-wm.inc
-+++ b/meta-efl/recipes-efl/e17/e-wm.inc
-@@ -10,6 +10,8 @@ S = "${WORKDIR}/${SRCNAME}"
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
-                    ${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
-+PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
-+
- 
- EXTRA_OECONF = "\
-     --with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc \
-@@ -21,6 +23,7 @@ EXTRA_OECONF = "\
- 
- do_configure_prepend() {
-     autopoint || true
-+    sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
- }
- 
- do_install_append() {
-@@ -70,6 +73,7 @@ PACKAGES =+ "\
-     ${PN}-config-netbook \
-     ${PN}-config-scaleable \
-     ${PN}-config-standard \
-+    ${PN}-config-tiling \
-     ${PN}-theme-default \
-     ${PN}-background-dark-gradient \
-     ${PN}-background-light-gradient \
-@@ -126,6 +130,7 @@ FILES_${PN}-config-minimalist = "${datadir}/enlightenment/data/config/minimalist
- FILES_${PN}-config-netbook = "${datadir}/enlightenment/data/config/netbook"
- FILES_${PN}-config-scaleable = "${datadir}/enlightenment/data/config/scaleable"
- FILES_${PN}-config-standard = "${datadir}/enlightenment/data/config/standard"
-+FILES_${PN}-config-tiling = "${datadir}/enlightenment/data/config/tiling"
- FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
- FILES_${PN}-theme-default = "${datadir}/enlightenment/data/themes/default.edj"
- FILES_${PN}-background-dark-gradient = "${datadir}/enlightenment/data/backgrounds/Dark_Gradient.edj"
-diff --git a/meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch b/meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch
+diff --git a/meta-oe/licenses/GPL-2.0-with-lmbench-restriction b/meta-oe/licenses/GPL-2.0-with-lmbench-restriction
 new file mode 100644
-index 0000000..14899d5
+index 0000000..3e1f7cc
 --- /dev/null
-+++ b/meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch
-@@ -0,0 +1,29 @@
-+From 8526270c418a5dc3d737a8eaff315209433f69d2 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Mon, 25 Aug 2014 16:06:03 +0200
-+Subject: [PATCH] configure.ac: add foreign
++++ b/meta-oe/licenses/GPL-2.0-with-lmbench-restriction
+@@ -0,0 +1,108 @@
++%M% %I% %E%
 +
-+* fixes:
-+  | configure.ac:312: error: required file './ABOUT-NLS' not found
++The set of programs and documentation known as "lmbench" are distributed
++under the Free Software Foundation's General Public License with the
++following additional restrictions (which override any conflicting
++restrictions in the GPL):
 +
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++1. You may not distribute results in any public forum, in any publication,
++   or in any other way if you have modified the benchmarks.  
 +
-+diff --git a/configure.ac b/configure.ac
-+index 62c0f6d..49b290b 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -34,7 +34,7 @@ AH_BOTTOM([
-+ #endif /* EFL_CONFIG_H__ */
-+ ])
-+ 
-+-AM_INIT_AUTOMAKE([1.11 dist-bzip2 -Wno-portability])
-++AM_INIT_AUTOMAKE([1.11 dist-bzip2 -Wno-portability foreign])
-+ AM_SILENT_RULES([yes])
-+ 
-+ AC_USE_SYSTEM_EXTENSIONS
-+-- 
-+2.0.4
++2. You may not distribute the results for a fee of any kind.  This includes
++   web sites which generate revenue from advertising.
 +
-diff --git a/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb b/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb
-index 0d65ca0..6b4c9fc 100644
---- a/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb
-@@ -13,9 +13,3 @@ SRC_URI = "\
++If you have modifications or enhancements that you wish included in
++future versions, please mail those to me, Larry McVoy, at lm@bitmover.com.
++
++=========================================================================
++
++Rationale for the publication restrictions:
++
++In summary:
++
++    a) LMbench is designed to measure enough of an OS that if you do well in
++       all catagories, you've covered latency and bandwidth in networking,
++       disks, file systems, VM systems, and memory systems.
++    b) Multiple times in the past people have wanted to report partial results.
++       Without exception, they were doing so to show a skewed view of whatever
++       it was they were measuring (for example, one OS fit small processes into
++       segments and used the segment register to switch them, getting good 
++       results, but did not want to report large process context switches 
++       because those didn't look as good).
++    c) We insist that if you formally report LMbench results, you have to
++       report all of them and make the raw results file easily available.
++       Reporting all of them means in that same publication, a pointer
++       does not count.  Formally, in this context, means in a paper,
++       on a web site, etc., but does not mean the exchange of results
++       between OS developers who are tuning a particular subsystem.
++
++We have a lot of history with benchmarking and feel strongly that there
++is little to be gained and a lot to be lost if we allowed the results
++to be published in isolation, without the complete story being told.
++
++There has been a lot of discussion about this, with people not liking this
++restriction, more or less on the freedom principle as far as I can tell.
++We're not swayed by that, our position is that we are doing the right
++thing for the OS community and will stick to our guns on this one.
++
++It would be a different matter if there were 3 other competing
++benchmarking systems out there that did what LMbench does and didn't have
++the same reporting rules.  There aren't and as long as that is the case,
++I see no reason to change my mind and lots of reasons not to do so.  I'm
++sorry if I'm a pain in the ass on this topic, but I'm doing the right
++thing for you and the sooner people realize that the sooner we can get on
++to real work.
++
++Operating system design is a largely an art of balancing tradeoffs.
++In many cases improving one part of the system has negative effects
++on other parts of the system.  The art is choosing which parts to
++optimize and which to not optimize.  Just like in computer architecture,
++you can optimize the common instructions (RISC) or the uncommon
++instructions (CISC), but in either case there is usually a cost to
++pay (in RISC uncommon instructions are more expensive than common
++instructions, and in CISC common instructions are more expensive
++than required).  The art lies in knowing which operations are 
++important and optmizing those while minimizing the impact on the
++rest of the system.  
++
++Since lmbench gives a good overview of many important system features,
++users may see the performance of the system as a whole, and can
++see where tradeoffs may have been made.  This is the driving force
++behind the publication restriction: any idiot can optimize certain
++subsystems while completely destroying overall system performance.
++If said idiot publishes *only* the numbers relating to the optimized
++subsystem, then the costs of the optimization are hidden and readers
++will mistakenly believe that the optimization is a good idea.  By
++including the publication restriction readers would be able to
++detect that the optimization improved the subsystem performance
++while damaging the rest of the system performance and would be able
++to make an informed decision as to the merits of the optimization.
++
++Note that these restrictions only apply to *publications*.  We
++intend and encourage lmbench's use during design, development,
++and tweaking of systems and applications.  If you are tuning the
++linux or BSD TCP stack, then by all means, use the networking
++benchmarks to evaluate the performance effects of various 
++modifications; Swap results with other developers; use the
++networking numbers in isolation.  The restrictions only kick
++in when you go to *publish* the results.  If you sped up the
++TCP stack by a factor of 2 and want to publish a paper with the
++various tweaks or algorithms used to accomplish this goal, then
++you can publish the networking numbers to show the improvement.
++However, the paper *must* also include the rest of the standard
++lmbench numbers to show how your tweaks may (or may not) have
++impacted the rest of the system.  The full set of numbers may
++be included in an appendix, but they *must* be included in the
++paper.
++
++This helps protect the community from adopting flawed technologies
++based on incomplete data.  It also helps protect the community from
++misleading marketing which tries to sell systems based on partial
++(skewed) lmbench performance results.  
++
++We have seen many cases in the past where partial or misleading
++benchmark results have caused great harm to the community, and
++we want to ensure that our benchmark is not used to perpetrate
++further harm and support false or misleading claims.
++
++
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index a3873a6..ba0d10d 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Tools for performance analysis"
+ HOMEPAGE = "http://lmbench.sourceforge.net/"
+ SECTION = "console/utils"
+-LICENSE = "GPLv2"
++LICENSE = "GPLv2 & GPL-2.0-with-lmbench-restriction"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+                     file://COPYING-2;md5=8e9aee2ccc75d61d107e43794a25cdf9"
  
- SRC_URI[md5sum] = "79c9f524e1d0510061c62c4b038a8ece"
- SRC_URI[sha256sum] = "14c9bde4334d2f8b0776c6113d02b923ab159eea1cbf7013489e4f3bf37a51bb"
--
--do_configure_prepend() {
--    sed '/^ *EFL_PKG_CHECK_VAR/ s/systemduserunitdir/systemdsystemunitdir/g' -i ${S}/configure.ac
--}
--
--PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
-diff --git a/meta-efl/recipes-efl/e17/e-wm_git.bb b/meta-efl/recipes-efl/e17/e-wm_git.bb
-new file mode 100644
-index 0000000..4bf1b96
---- /dev/null
-+++ b/meta-efl/recipes-efl/e17/e-wm_git.bb
-@@ -0,0 +1,14 @@
-+require ${BPN}.inc
-+
-+PV = "0.18.999+0.19-alpha2+git${SRCPV}"
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRC_URI = " \
-+    git://git.enlightenment.org/core/enlightenment.git \
-+    file://0001-configure.ac-add-foreign.patch \
-+    file://enlightenment_start.oe \
-+    file://applications.menu \
-+"
-+S = "${WORKDIR}/git"
-+
-+SRCREV = "525b963133d7168226b8e07ba26730212a8b7e82"
 -- 
-2.0.4
+1.7.9.5
 
 
