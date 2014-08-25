@@ -1,26 +1,41 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FD116AC7B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F33165D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Aug 2014 06:46:47 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7P6kmml014429
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 25 Aug 2014 06:58:07 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id v10so19383354pde.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Aug 2014 23:46:48 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 24 Aug 2014 23:46:48 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Aug 2014 14:47:20 +0800
-Message-ID: <1408949241-13129-2-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1408949241-13129-1-git-send-email-Qi.Chen@windriver.com>
-References: <1408949241-13129-1-git-send-email-Qi.Chen@windriver.com>
+	Sun, 24 Aug 2014 23:58:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=8fZXpEc/EiRDRFEqkyZ+qWPibmqRJxPFRxNlLkDDrWg=;
+	b=OjmawZme4bid0rip0kwpgIQMq1maS84dCDWGOTMjD3qSMftqLOcWPyeXlacxkTPKQD
+	mi+sGoGAUF8x6Sv/vxDDeo8n5bScqu8YNDpOBg+pOiZfEXC1tionnG9WO1iahT+fpY2G
+	UvDzJtSAH62tHekxx519kqTIfO01I+hN0gbR2HsyyqAvwF0iOAd5fUONSQmO1vIE6KIQ
+	7x29c7+6zrRH+A0dtAi4VD24doEqsM6LViEwVX9FoCL8+N2Bq+MgeUEvjZww5gLqfM5i
+	YVYuN+kbZOWv/h+Apv+0+mLBnuPLiv3WHp5hv3Vb4x4RB5oD98gCXFIdMBnVE34k/qsW
+	D+Cw==
+X-Received: by 10.70.98.203 with SMTP id ek11mr25978513pdb.32.1408949885745;
+	Sun, 24 Aug 2014 23:58:05 -0700 (PDT)
+Received: from haswell ([2601:9:3580:7a5:baca:3aff:fe80:aa8f])
+	by mx.google.com with ESMTPSA id
+	ki7sm36400858pbc.65.2014.08.24.23.58.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 24 Aug 2014 23:58:05 -0700 (PDT)
+Date: Mon, 25 Aug 2014 00:01:52 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140825070152.GG1014@haswell>
+References: <674e63b93b3c0bfe18d58d6c11c1cc7a.squirrel@webmail.prtelecom.hu>
+	<55c56fabb920e066ba8915e51fb4ecdf.squirrel@webmail.prtelecom.hu>
+	<20140821111443.GX3660@jama>
 MIME-Version: 1.0
-Subject: [PATCH V2 2/2] apache2: add systemd unit file
+In-Reply-To: <20140821111443.GX3660@jama>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH] PHP 5.5.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,79 +49,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Aug 2014 06:46:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 25 Aug 2014 06:58:11 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Chen Qi <Qi.Chen@windriver.com>
+On 14-08-21 13:14:43, Martin Jansa wrote:
+> On Thu, Aug 21, 2014 at 12:13:05PM +0200, zboszor@pr.hu wrote:
+> > > Hello,
+> > >
+> > > as a follow-up to my yesterday's mail about "[PATCH] Allow using a more
+> > > recent php", here's the proof of the pudding.
+> > >
+> > > I needed GD support in PHP, and it turned out that PHP 5.4.x only supports
+> > > GD 2.0, while current OE has 2.1. Not wanting to downgrade GD, I chose to
+> > > upgrade PHP.
+> > >
+> > > I had to update imap-fix-autofoo.patch so it applies cleanly and I also
+> > > had to fix https://bugs.php.net/bug.php?id=66103 so it can be cross
+> > > compiled. (I also submitted the patch at the link).
+> > >
+> > > I enabled more extensions in PHP than what was in the previous version,
+> > > this is what I needed locally.
+> > >
+> > > Comments?
+> > >
+> > > Feel free to use it in any way.
+> > 
+> > This time with the patch attached. :-)
+> 
+> Can you please send inline patch (preferably with git send-email as
+> README suggests)?
+> 
+> There is also issue with some files not being tracked by sstate:
+> [^/]*/usr/lib/php/\.channels.*
+> [^/]*/usr/lib/php/\.registry.*
+> [^/]*/usr/lib/php/\.depdb.*
+> [^/]*/usr/lib/php/\.filemap
+> [^/]*/usr/lib/php/\.lock
+> 
 
-Add systemd unit file for apache2.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../recipes-httpd/apache2/apache2_2.4.10.bb        |   13 +++++++++++--
- .../recipes-httpd/apache2/files/apache2.service    |   14 ++++++++++++++
- 2 files changed, 25 insertions(+), 2 deletions(-)
- create mode 100644 meta-webserver/recipes-httpd/apache2/files/apache2.service
-
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
-index 614dd4e..0356029 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
-@@ -18,7 +18,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://npn-patch-2.4.7.patch \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-            file://init \
--           file://apache2-volatile.conf"
-+           file://apache2-volatile.conf \
-+           file://apache2.service"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
- SRC_URI[md5sum] = "44543dff14a4ebc1e9e2d86780507156"
-@@ -26,7 +27,10 @@ SRC_URI[sha256sum] = "176c4dac1a745f07b7b91e7f4fd48f9c48049fa6f088efe758d61d9738
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
--inherit autotools update-rc.d pkgconfig
-+inherit autotools update-rc.d pkgconfig systemd
-+
-+SYSTEMD_SERVICE_${PN} = "apache2.service"
-+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
- 
- SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
- 
-@@ -81,6 +85,11 @@ do_install_append() {
-         install -d ${D}${sysconfdir}/tmpfiles.d/
-         install -m 0644 ${WORKDIR}/apache2-volatile.conf ${D}${sysconfdir}/tmpfiles.d/
-     fi
-+
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${WORKDIR}/apache2.service ${D}${systemd_unitdir}/system
-+    sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/apache2.service
-+    sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' ${D}${systemd_unitdir}/system/apache2.service
- }
- 
- SYSROOT_PREPROCESS_FUNCS += "apache_sysroot_preprocess"
-diff --git a/meta-webserver/recipes-httpd/apache2/files/apache2.service b/meta-webserver/recipes-httpd/apache2/files/apache2.service
-new file mode 100644
-index 0000000..f4bcf9e
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/files/apache2.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Decription=The Apache HTTP Server
-+After=network.target remote-fs.target nss-lookup.target
-+
-+[Service]
-+Type=simple
-+Environment=LANG=C
-+ExecStart=@SBINDIR@/httpd -DFOREGROUND -D SSL -D PHP5 -k start
-+ExecStop=@BASE_BINDIR@/kill -WINCH ${MAINPID}
-+KillSignal=SIGCONT
-+PrivateTmp=true
-+
-+[Install]
-+WantedBy=multi-user.target
--- 
-1.7.9.5
+they should be packaged in FILES_${PN}-pear, so sstate should track them
+is it because they start with a 'dot' ?
 
 
