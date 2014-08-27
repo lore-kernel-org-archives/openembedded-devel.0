@@ -1,39 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 98401710CE
+Return-Path: <pab@pabigot.com>
+Received: from p3plsmtpa09-08.prod.phx3.secureserver.net
+	(p3plsmtpa09-08.prod.phx3.secureserver.net [173.201.193.237])
+	by mail.openembedded.org (Postfix) with ESMTP id 55A9D6FC68
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 10:52:18 +0000 (UTC)
-Received: by mail-la0-f51.google.com with SMTP id pn19so29591lab.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 03:52:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=kIeW8fICBTVUwjN7GHT/uq/GSb5Aho2pLH+lk/Za6Zs=;
-	b=V1GwrJ0ELoZxQDUoVQoA5AQBV5tVoOYBN+mv3ixVeiQuEzv2CaKGrq5RefjRPvOnND
-	+J8xb+O4T8M8587vObnQ0K4uFD7ags/yPy7C6iEYQvohADgylwcCg4H+CIY/X14Nw/ya
-	H6zSAgw/Riso9xqDOywBt5v4pfbBXQY3YpRPOx6DQOVaRXdicldfHXzf1LT4+Bkl8tSG
-	YfJHa+jGEfu0lFkczOXz7LmbTgUp5jf9c4VUhx9O1rsYtchau2aQTdlb+zBcsVyZH7NC
-	/99TuHChJnXg/zZgFVjYUKH2CtCbWyFj0l5EgCe4flP5y9MGeIaSYUYZwGIdZs+FXb2D
-	xQVw==
-X-Received: by 10.152.207.99 with SMTP id lv3mr8939509lac.22.1409136739700;
-	Wed, 27 Aug 2014 03:52:19 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id py4sm73558lbb.4.2014.08.27.03.52.18
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 27 Aug 2014 03:52:18 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 27 Aug 2014 12:52:26 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140827105226.GB20524@jama>
-References: <1409018848-4649-1-git-send-email-xiao.zhang@windriver.com>
+	Wed, 27 Aug 2014 11:38:39 +0000 (UTC)
+Received: from [192.168.65.10] ([66.41.60.82])
+	by p3plsmtpa09-08.prod.phx3.secureserver.net with 
+	id jned1o0031mTNtu01nedZM; Wed, 27 Aug 2014 04:38:38 -0700
+Message-ID: <53FDC33C.7060208@pabigot.com>
+Date: Wed, 27 Aug 2014 06:38:36 -0500
+From: "Peter A. Bigot" <pab@pabigot.com>
+Organization: Peter Bigot Consulting, LLC
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-In-Reply-To: <1409018848-4649-1-git-send-email-xiao.zhang@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] beecrypt: add config option --with-dev-dsp
+To: openembedded-devel@lists.openembedded.org, 
+	xufeng.zhang@windriver.com, rongqing.li@windriver.com
+References: <1407986086-29096-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1407986086-29096-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [meta-networking][PATCH 1/2] ntp: Disable debugging by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,113 +32,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Aug 2014 10:52:20 -0000
-X-Groupsio-MsgNum: 51869
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pcjGMRtmGLNVN1Bo"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 27 Aug 2014 11:38:50 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---pcjGMRtmGLNVN1Bo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 08/13/2014 10:14 PM, rongqing.li@windriver.com wrote:
+> From: Xufeng Zhang<xufeng.zhang@windriver.com>
+>
+> There is a problem in configure.ac file that whether or not
+> '--enable-debugging' is specified in configure cmdline, debugging
+> is always enabled.
 
-On Tue, Aug 26, 2014 at 10:07:28AM +0800, Zhang Xiao wrote:
-> Add this configure option for developer to control if the
-> /dev/dsp should be used on target. Instead of judging it
-> based on the very device file of build server.
+ From my testing this is incorrect.  Both --disable-debugging and 
+--enable-debugging=no correctly override the upstream decision to enable 
+debugging by default.
 
-wrong ML.. belongs to oe-core
+> We should disable ntp debugging by default.
 
->=20
-> Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+Could we have more of an explanation why this is a good thing?  It 
+doesn't seem relevant to the security patch it accompanied.
+
+I've got a patch I'm validating that will revert this fix and use 
+PACKAGECONFIG to control whether debugging is supported. Personally, I'd 
+rather have the default be to keep debugging enabled.
+
+Upstream ntp enables debugging support by default, and OE's build has 
+never disabled it before.  ntp is a tricky beast and is very terse about 
+what it's doing.  Having the ability to make it explain why (for 
+example) it's disabling a reference clock is very useful in 
+diagnostics.  Disabling debugging during the build makes it impossible 
+to get that information out of an installed system.
+
+Peter
+
+>
+> Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
 > ---
->  .../beecrypt/beecrypt/add-option-dev-dsp.patch     | 34 ++++++++++++++++=
-++++++
->  meta/recipes-support/beecrypt/beecrypt_4.2.1.bb    |  1 +
->  2 files changed, 35 insertions(+)
->  create mode 100644 meta/recipes-support/beecrypt/beecrypt/add-option-dev=
--dsp.patch
->=20
-> diff --git a/meta/recipes-support/beecrypt/beecrypt/add-option-dev-dsp.pa=
-tch b/meta/recipes-support/beecrypt/beecrypt/add-option-dev-dsp.patch
+>   .../ntp/files/ntp-disable-debugging.patch          |   23 ++++++++++++++++++++
+>   meta-networking/recipes-support/ntp/ntp.inc        |    1 +
+>   2 files changed, 24 insertions(+)
+>   create mode 100644 meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch
+>
+> diff --git a/meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch b/meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch
 > new file mode 100644
-> index 0000000..83b6f7a
+> index 0000000..3c94d8d
 > --- /dev/null
-> +++ b/meta/recipes-support/beecrypt/beecrypt/add-option-dev-dsp.patch
-> @@ -0,0 +1,34 @@
-> +Upstream-Status: Pending
+> +++ b/meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch
+> @@ -0,0 +1,23 @@
+> +set ntp_ok to no if ntp debugging is not enabled.
+> +
+> +Upstream-status: Pending
+> +
+> +There is a problem in configure.ac file that whether or not
+> +'--enable-debugging' is specified in configure cmdline, debugging
+> +is always enabled.
+> +We should disable ntp debugging by default.
+> +
+> +Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
 > +
 > +---
-> + configure.ac |   12 +++++++++++-
-> + 1 file changed, 11 insertions(+), 1 deletion(-)
-> +
 > +--- a/configure.ac
 > ++++ b/configure.ac
-> +@@ -106,6 +106,16 @@ AC_ARG_WITH(python,[  --with-python[[=3DAR
-> +   fi
-> +   ])
-> +=20
-> ++AC_ARG_WITH(dev-dsp,[  --with-dev-dsp          enables dev/dsp for entr=
-opy producing. auto for auto-detecting dev/dep on host. [[default=3Dno]]],[
-> ++  if test "$withval" =3D yes; then
-> ++    AC_DEFINE([HAVE_DEV_DSP], 1)
-> ++  else
-> ++    if test "$withval" =3D auto;  then
-> ++      ac_detect_dev_dsp=3Dyes
-> ++    fi
-> ++  fi
-> ++  ],[ac_detect_dev_dsp=3Dno])
-> ++
-> + # Check for expert mode
-> + if test "$ac_enable_expert_mode" =3D yes; then
-> +   BEE_EXPERT_MODE
-> +@@ -464,7 +474,7 @@ linux*)
-> +       ac_cv_have_dev_dsp=3Dno
-> +     fi
-> +     ])
-> +-  if test "$ac_cv_have_dev_dsp" =3D yes; then
-> ++  if test "$ac_cv_have_dev_dsp" =3D yes && test "$ac_detect_dev_dsp" =
-=3D yes; then
-> +     AC_DEFINE([HAVE_DEV_DSP], 1)
-> +   fi
-> +   ;;
-> diff --git a/meta/recipes-support/beecrypt/beecrypt_4.2.1.bb b/meta/recip=
-es-support/beecrypt/beecrypt_4.2.1.bb
-> index 209b92e..1e626f1 100644
-> --- a/meta/recipes-support/beecrypt/beecrypt_4.2.1.bb
-> +++ b/meta/recipes-support/beecrypt/beecrypt_4.2.1.bb
-> @@ -11,6 +11,7 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/beecrypt/beecrypt-${=
-PV}.tar.gz \
->             file://fix-for-gcc-4.7.patch \
->             file://run-ptest \
->             file://beecrypt-enable-ptest-support.patch \
-> +           file://add-option-dev-dsp.patch \
->            "
-> =20
->  SRC_URI[md5sum] =3D "8441c014170823f2dff97e33df55af1e"
-> --=20
-> 1.8.5.2.233.g932f7e4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> +@@ -2458,7 +2458,7 @@
+> +         [+ include ntpd debugging code]
+> +     )],
+> +     [ntp_ok=$enableval],
+> +-    [ntp_ok=yes]
+> ++    [ntp_ok=no]
+> + )
+> + case "$ntp_ok" in
+> +  yes)
+> diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+> index 49f9901..2c8f488 100644
+> --- a/meta-networking/recipes-support/ntp/ntp.inc
+> +++ b/meta-networking/recipes-support/ntp/ntp.inc
+> @@ -23,6 +23,7 @@ SRC_URI ="http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+>              file://sntp.service \
+>              file://sntp \
+>              file://ntpd.list \
+> +           file://ntp-disable-debugging.patch \
+>   "
+>   
+>   inherit autotools update-rc.d useradd systemd
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---pcjGMRtmGLNVN1Bo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlP9uGoACgkQN1Ujt2V2gBwk0ACgsgW1YTJG5UpDMyIIoHcDCXKz
-34wAnRqYFxWbWJfNhhpYxqT08IVj7b4t
-=+PHr
------END PGP SIGNATURE-----
-
---pcjGMRtmGLNVN1Bo--
