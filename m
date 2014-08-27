@@ -1,31 +1,37 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id F2C54706F1
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id BDD1465E94
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 07:01:57 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1XMXEx-00072A-Oy for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Aug 2014 09:01:55 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 09:01:55 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 27 Aug 2014 07:24:27 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id ho1so5321075wib.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 09:01:55 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
+	Wed, 27 Aug 2014 00:24:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=bXwrj2xSKBgn4FQUkO6duVWpSSKZH+zAeyRX7ct1FYU=;
+	b=MBQOBznblQU6V03+zovHv0J3DCIeP9iQKEtW5GWfv9cCY1mQQZH+ocvIEb0aXhYwtJ
+	Pv6gR411tQBx6SzJhtchg/WybQYCvlNfNvyhZ8osPBDRg19xrdBR7hdHrtYLjYETWYII
+	peM8b8dMnrLyiXjMybZ9EovRSWr6dm/TllzhWmnYIlK41GW7e3j4vhkvDjvEhtRTAciO
+	yN90zS5ss1il6DKdE5uUxIwm5ppmmzV3nOJPoY+MGus4wSe0FjqtSVRm78eq7lMQVpvw
+	/ETJIfBoodLJWVwZVmQMOHEjFz06Xp8X/YttYNFu+WJs3R4EoSffTXoRn2E2qmorxucu
+	jfnw==
+X-Gm-Message-State: ALoCoQlgHLvyb+JPg2xwMyl4tsScO/muCQbOBVtkY/PKB/igmzCMMWZBSfFFDrirJhNILaNnV6KG
+X-Received: by 10.194.77.212 with SMTP id u20mr35034935wjw.27.1409124268662;
+	Wed, 27 Aug 2014 00:24:28 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+	by mx.google.com with ESMTPSA id ju1sm14736222wjc.1.2014.08.27.00.24.27
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Wed, 27 Aug 2014 00:24:27 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 27 Aug 2014 09:01:42 +0200
-Message-ID: <ltjvom$a0v$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-Subject: meta-oe maintenance in september
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 27 Aug 2014 09:24:25 +0200
+Message-Id: <1409124265-9548-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] mkvtoolnix: update to 7.1.0+git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,30 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Aug 2014 07:02:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 27 Aug 2014 07:24:31 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+This fixes compilation with boot 1.56+
 
-Hi,
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ .../mkvtoolnix/{mkvtoolnix_7.0.0.bb => mkvtoolnix_git.bb}         | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-multimedia/recipes-mkv/mkvtoolnix/{mkvtoolnix_7.0.0.bb => mkvtoolnix_git.bb} (84%)
 
-It turns out both Martin and I independently had the same idea: Let's do a
-long roadtrip in september before business travel. We even picked the same
-area :)
-So the first weeks of september will be very slow for meta-oe commits.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFT/YJVMkyGM64RGpERAq57AJ4zqNpOsYbDoDtVsWkdfk7jKjq9wQCguB9q
-VHlxEXRxKCg6NVhEih0YVfQ=
-=yh4P
------END PGP SIGNATURE-----
+diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_7.0.0.bb b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+similarity index 84%
+rename from meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_7.0.0.bb
+rename to meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+index bd752af..8d77024 100644
+--- a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_7.0.0.bb
++++ b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
+@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis bzip2 lzo file ruby-native"
+ 
+-SRC_URI = "http://www.bunkus.org/videotools/mkvtoolnix/sources/mkvtoolnix-${PV}.tar.xz"
+-SRC_URI[md5sum] = "ddd5ce6288d2fdaa6b79cb6d7bfffb04"
+-SRC_URI[sha256sum] = "2bbdf060e193d4a7f961f84d28b28d67d859be66e3f2cdf8ee4ae380f8d15725"
++PV = "7.1.0+git${SRCPV}"
++SRCREV = "0c89ff941bfdd9f3378312f293a84f13cf3e2a96"
++SRC_URI = "git://github.com/mbunkus/mkvtoolnix.git"
++
++S = "${WORKDIR}/git"
+ 
+ inherit autotools-brokensep gettext
+ 
+-- 
+1.9.0
 
 
