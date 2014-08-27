@@ -1,34 +1,39 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
-	[209.85.217.176])
-	by mail.openembedded.org (Postfix) with ESMTP id F00DD70EE6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
+	[209.85.215.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 98401710CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 08:39:14 +0000 (UTC)
-Received: by mail-lb0-f176.google.com with SMTP id c11so2739681lbj.35
+	Wed, 27 Aug 2014 10:52:18 +0000 (UTC)
+Received: by mail-la0-f51.google.com with SMTP id pn19so29591lab.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 01:39:15 -0700 (PDT)
+	Wed, 27 Aug 2014 03:52:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=oZA1JvxIMqGWn/63mwwYxCQ/uI6iDImrY7yHD00iY1A=;
-	b=x4jHpBuDfie1koELMcxzAk2f0N1AxsA55UhsVvInFhfWl54HdEgV4+Tb0A4nUhsT0r
-	xQZoTauICo2afkYb9371LiyS025pW0fGmIEDsbADXZ8XjzwvAQIMgtqEMiA/nhELzVxg
-	7VEvY8UkZR87iEBcR3+ba7NgjaQBpKftFOMVQEEwjzGCXXCsNQHNte0yctwAUh16GxCA
-	WlBCqsGgwSw72ccr3SuclPvMNJxSH4atnqiL+EvNFJInmpTQtg1sOkz1/t3qwHstxCY1
-	chLXhEnYfdl4QD6DqqJYf9Q5s4Pf3YdUNeUA1xIFPnSNqqUS25hpXJ1pJwPpk2v3KyWw
-	UZUA==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=kIeW8fICBTVUwjN7GHT/uq/GSb5Aho2pLH+lk/Za6Zs=;
+	b=V1GwrJ0ELoZxQDUoVQoA5AQBV5tVoOYBN+mv3ixVeiQuEzv2CaKGrq5RefjRPvOnND
+	+J8xb+O4T8M8587vObnQ0K4uFD7ags/yPy7C6iEYQvohADgylwcCg4H+CIY/X14Nw/ya
+	H6zSAgw/Riso9xqDOywBt5v4pfbBXQY3YpRPOx6DQOVaRXdicldfHXzf1LT4+Bkl8tSG
+	YfJHa+jGEfu0lFkczOXz7LmbTgUp5jf9c4VUhx9O1rsYtchau2aQTdlb+zBcsVyZH7NC
+	/99TuHChJnXg/zZgFVjYUKH2CtCbWyFj0l5EgCe4flP5y9MGeIaSYUYZwGIdZs+FXb2D
+	xQVw==
+X-Received: by 10.152.207.99 with SMTP id lv3mr8939509lac.22.1409136739700;
+	Wed, 27 Aug 2014 03:52:19 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id py4sm73558lbb.4.2014.08.27.03.52.18
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 27 Aug 2014 03:52:18 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 27 Aug 2014 12:52:26 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140827105226.GB20524@jama>
+References: <1409018848-4649-1-git-send-email-xiao.zhang@windriver.com>
 MIME-Version: 1.0
-X-Received: by 10.152.6.193 with SMTP id d1mr621705laa.69.1409128755061; Wed,
-	27 Aug 2014 01:39:15 -0700 (PDT)
-Received: by 10.112.88.130 with HTTP; Wed, 27 Aug 2014 01:39:15 -0700 (PDT)
-In-Reply-To: <20140826164149.GC18989@haswell>
-References: <CAAQYJAsPwYZSmpxbKJAX5wHexHK-EOEjsjrxLT_PT-MV6Y338w@mail.gmail.com>
-	<CAAQYJAuuvOz4mXJ7V3pbaSBpfABTc_gjuGTgW4BxQ0n2DtPZGA@mail.gmail.com>
-	<20140826164149.GC18989@haswell>
-Date: Wed, 27 Aug 2014 10:39:15 +0200
-Message-ID: <CAAQYJAsFYzohZV4NfcJbQeznOSGnhLcvbRbcAtXbdBi4KmB6zA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: klibc: armv4 bx strikes again
+In-Reply-To: <1409018848-4649-1-git-send-email-xiao.zhang@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH] beecrypt: add config option --with-dev-dsp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,91 +47,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Aug 2014 08:39:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 27 Aug 2014 10:52:20 -0000
+X-Groupsio-MsgNum: 51869
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="pcjGMRtmGLNVN1Bo"
+Content-Disposition: inline
 
-On Tue, Aug 26, 2014 at 6:41 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On 14-08-26 11:36:34, Andrea Adami wrote:
->> On Mon, Aug 25, 2014 at 10:08 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
->> > I've recently discovered that the static klibc binaries produced for
->> > armv4 contain Illegal instructions.
->> >
->> > Eglibc armv4 binaries are ok.
->> >
->> > I verified it happens to kexec-tools-klibc and kexecboot-klibc:
->> >
->> > andrea@mizar:/oe/oe-core/build/tmp-eglibc/sysroots/x86_64-linux/usr/bin/arm-oe-linux-gnueabi$
->> > ./arm-oe-linux-gnueabi-objdump -S ./kexecboot-armv4 | grep bx
->> >    110dc:       012fff1e        bxeq    lr
->> >    11154:       e12fff1e        bx      lr
->> >    11160:       e12fff1e        bx      lr
->> >    11170:       e12fff1e        bx      lr
->> >    1119c:       e12fff1e        bx      lr
->> >    11234:       e12fff1e        bx      lr
->> >    11240:       e12fff1e        bx      lr
->> >    11250:       e12fff1e        bx      lr
->> >    11268:       e12fff1e        bx      lr
->> >    11298:       e12fff1e        bx      lr
->> >    112b4:       e12fff1e        bx      lr
->> >    112f0:       e12fff1e        bx      lr
->> >    115f4:       e12fff1e        bx      lr
->> > andrea@mizar:/oe/oe-core/build/tmp-eglibc/sysroots/x86_64-linux/usr/bin/arm-oe-linux-gnueabi$
->> >
->> > The binaries end-up compiled with following flags:
->> >
->> > arm-oe-linux-gnueabi-klcc -march=armv4 -mthumb-interwork -Wall    -o
->> > kexecboot util.o cfgparser.o devicescan.o evdevs.o fb.o gui.o menu.o
->> > xpm.o rgb.o tui.o kexecboot.o fstype/fstype.o machine/zaurus.o
->
-> what is content of arm-oe-linux-gnueabi-klcc ? is it also used at link
-> step ? the option
->
->> >
->> > This is rather unexpected because klibc carries one specific patch to fix that:
->> >
->> > http://cgit.openembedded.org/meta-openembedded/tree/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/armv4-fix-v4bx.patch
->> >
->> > and in fact looking at the produced klibc.config I see indeed LDFLAGS=
->> > --fix-v4bx and that goes in  *arm-oe-linux-gnueabi-klcc.
->> >
->> > There have been big toolchain changes recently so I suspect something
->> > got broken in oe-core.
->> > Then there is a patch touching armv4/thumb but it doesn't look
->> > suspicious at first:
->> >
->> > http://cgit.openembedded.org/openembedded-core/commit/meta/conf/machine/include?id=1250d3e009363d20f15bbfaced622c5912a7fb93
->> >
->
-> for tests
-> can you use FIX_V4BX_ARMV4 in
-> meta-initramfs/recipes-devtools/klibc/klibc.inc
-> and see if it helps
-> --
+--pcjGMRtmGLNVN1Bo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Aug 26, 2014 at 10:07:28AM +0800, Zhang Xiao wrote:
+> Add this configure option for developer to control if the
+> /dev/dsp should be used on target. Instead of judging it
+> based on the very device file of build server.
+
+wrong ML.. belongs to oe-core
+
+>=20
+> Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+> ---
+>  .../beecrypt/beecrypt/add-option-dev-dsp.patch     | 34 ++++++++++++++++=
+++++++
+>  meta/recipes-support/beecrypt/beecrypt_4.2.1.bb    |  1 +
+>  2 files changed, 35 insertions(+)
+>  create mode 100644 meta/recipes-support/beecrypt/beecrypt/add-option-dev=
+-dsp.patch
+>=20
+> diff --git a/meta/recipes-support/beecrypt/beecrypt/add-option-dev-dsp.pa=
+tch b/meta/recipes-support/beecrypt/beecrypt/add-option-dev-dsp.patch
+> new file mode 100644
+> index 0000000..83b6f7a
+> --- /dev/null
+> +++ b/meta/recipes-support/beecrypt/beecrypt/add-option-dev-dsp.patch
+> @@ -0,0 +1,34 @@
+> +Upstream-Status: Pending
+> +
+> +---
+> + configure.ac |   12 +++++++++++-
+> + 1 file changed, 11 insertions(+), 1 deletion(-)
+> +
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -106,6 +106,16 @@ AC_ARG_WITH(python,[  --with-python[[=3DAR
+> +   fi
+> +   ])
+> +=20
+> ++AC_ARG_WITH(dev-dsp,[  --with-dev-dsp          enables dev/dsp for entr=
+opy producing. auto for auto-detecting dev/dep on host. [[default=3Dno]]],[
+> ++  if test "$withval" =3D yes; then
+> ++    AC_DEFINE([HAVE_DEV_DSP], 1)
+> ++  else
+> ++    if test "$withval" =3D auto;  then
+> ++      ac_detect_dev_dsp=3Dyes
+> ++    fi
+> ++  fi
+> ++  ],[ac_detect_dev_dsp=3Dno])
+> ++
+> + # Check for expert mode
+> + if test "$ac_enable_expert_mode" =3D yes; then
+> +   BEE_EXPERT_MODE
+> +@@ -464,7 +474,7 @@ linux*)
+> +       ac_cv_have_dev_dsp=3Dno
+> +     fi
+> +     ])
+> +-  if test "$ac_cv_have_dev_dsp" =3D yes; then
+> ++  if test "$ac_cv_have_dev_dsp" =3D yes && test "$ac_detect_dev_dsp" =
+=3D yes; then
+> +     AC_DEFINE([HAVE_DEV_DSP], 1)
+> +   fi
+> +   ;;
+> diff --git a/meta/recipes-support/beecrypt/beecrypt_4.2.1.bb b/meta/recip=
+es-support/beecrypt/beecrypt_4.2.1.bb
+> index 209b92e..1e626f1 100644
+> --- a/meta/recipes-support/beecrypt/beecrypt_4.2.1.bb
+> +++ b/meta/recipes-support/beecrypt/beecrypt_4.2.1.bb
+> @@ -11,6 +11,7 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/beecrypt/beecrypt-${=
+PV}.tar.gz \
+>             file://fix-for-gcc-4.7.patch \
+>             file://run-ptest \
+>             file://beecrypt-enable-ptest-support.patch \
+> +           file://add-option-dev-dsp.patch \
+>            "
+> =20
+>  SRC_URI[md5sum] =3D "8441c014170823f2dff97e33df55af1e"
+> --=20
+> 1.8.5.2.233.g932f7e4
+>=20
+> --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Hi,
+--pcjGMRtmGLNVN1Bo
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-I've added more output for klcc in klibc.bbclass
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
--export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4
--mthumb-interwork"
-+export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -v -march=armv4
--mthumb-interwork"
+iEYEARECAAYFAlP9uGoACgkQN1Ujt2V2gBwk0ACgsgW1YTJG5UpDMyIIoHcDCXKz
+34wAnRqYFxWbWJfNhhpYxqT08IVj7b4t
+=+PHr
+-----END PGP SIGNATURE-----
 
-The resulting log is  http://pastebin.com/rXQ0Vy1P
-
-I'm very surprised to see that  --with-gxx-include-dir, --with-sysroot
-and  --with-build-sysroot  are absolutely wrong, peeking at another
-machine sysroot.
-It mixes armv4 and armv5...how can that happen?
-
-I'll retry a build from scratch for the single armv4 arch asap.
-
-Cheers
-
-Andrea
-
+--pcjGMRtmGLNVN1Bo--
