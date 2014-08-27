@@ -1,25 +1,31 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E4BDE707BE
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id F2C54706F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 05:55:04 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s7R5t4au017970
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 26 Aug 2014 22:55:04 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Tue, 26 Aug 2014 22:55:04 -0700
-From: Kai Kang <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 27 Aug 2014 13:49:43 +0800
-Message-ID: <1409118583-30139-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [128.224.153.152]
-Cc: paul.eggleton@linux.intel.com
-Subject: [meta-oe][PATCH] mariadb: upgrade from 5.5.38 to 39
+	Wed, 27 Aug 2014 07:01:57 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1XMXEx-00072A-Oy for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Aug 2014 09:01:55 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Aug 2014 09:01:55 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Aug 2014 09:01:55 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 27 Aug 2014 09:01:42 +0200
+Message-ID: <ltjvom$a0v$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+Subject: meta-oe maintenance in september
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,49 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Aug 2014 05:55:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 27 Aug 2014 07:02:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Upgrade mariadb from 5.5.38 to 5.5.39. Previous upgrade made a lot of
-work, so it is easy this time.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../mysql/{mariadb-native_5.5.38.bb => mariadb-native_5.5.39.bb}      | 0
- .../recipes-support/mysql/{mariadb_5.5.38.bb => mariadb_5.5.39.bb}    | 0
- .../recipes-support/mysql/{mariadb_5.5.38.inc => mariadb_5.5.39.inc}  | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.38.bb => mariadb-native_5.5.39.bb} (100%)
- rename meta-oe/recipes-support/mysql/{mariadb_5.5.38.bb => mariadb_5.5.39.bb} (100%)
- rename meta-oe/recipes-support/mysql/{mariadb_5.5.38.inc => mariadb_5.5.39.inc} (98%)
+Hi,
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.38.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.39.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.38.bb
-rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.39.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.38.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.39.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.38.bb
-rename to meta-oe/recipes-support/mysql/mariadb_5.5.39.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-similarity index 98%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-rename to meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-index 8a73833..a9a050e 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.5.38.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-@@ -11,8 +11,8 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
-            file://my.cnf \
-           "
- 
--SRC_URI[md5sum] = "fa9ba00b084b95a45fab70860c412f10"
--SRC_URI[sha256sum] = "efc839e6627064b3b5c6c39854198f0d34907f48937804758d4c09c7717be8d3"
-+SRC_URI[md5sum] = "917a807d8cf2c8ef9deedd2a89b6decd"
-+SRC_URI[sha256sum] = "cb850865ab55ce5f01c99a612cc75b76ead5d75adfa75a606f453d32f9089d14"
- 
- S = "${WORKDIR}/mariadb-${PV}"
- 
--- 
-1.9.1
+It turns out both Martin and I independently had the same idea: Let's do a
+long roadtrip in september before business travel. We even picked the same
+area :)
+So the first weeks of september will be very slow for meta-oe commits.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFT/YJVMkyGM64RGpERAq57AJ4zqNpOsYbDoDtVsWkdfk7jKjq9wQCguB9q
+VHlxEXRxKCg6NVhEih0YVfQ=
+=yh4P
+-----END PGP SIGNATURE-----
 
 
