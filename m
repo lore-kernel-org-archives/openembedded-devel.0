@@ -1,37 +1,40 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id BDD1465E94
+Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
+	[74.125.82.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 4849165E94
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 07:24:27 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id ho1so5321075wib.14
+	Wed, 27 Aug 2014 07:29:07 +0000 (UTC)
+Received: by mail-we0-f174.google.com with SMTP id x48so15799765wes.33
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 00:24:28 -0700 (PDT)
+	Wed, 27 Aug 2014 00:29:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bXwrj2xSKBgn4FQUkO6duVWpSSKZH+zAeyRX7ct1FYU=;
-	b=MBQOBznblQU6V03+zovHv0J3DCIeP9iQKEtW5GWfv9cCY1mQQZH+ocvIEb0aXhYwtJ
-	Pv6gR411tQBx6SzJhtchg/WybQYCvlNfNvyhZ8osPBDRg19xrdBR7hdHrtYLjYETWYII
-	peM8b8dMnrLyiXjMybZ9EovRSWr6dm/TllzhWmnYIlK41GW7e3j4vhkvDjvEhtRTAciO
-	yN90zS5ss1il6DKdE5uUxIwm5ppmmzV3nOJPoY+MGus4wSe0FjqtSVRm78eq7lMQVpvw
-	/ETJIfBoodLJWVwZVmQMOHEjFz06Xp8X/YttYNFu+WJs3R4EoSffTXoRn2E2qmorxucu
-	jfnw==
-X-Gm-Message-State: ALoCoQlgHLvyb+JPg2xwMyl4tsScO/muCQbOBVtkY/PKB/igmzCMMWZBSfFFDrirJhNILaNnV6KG
-X-Received: by 10.194.77.212 with SMTP id u20mr35034935wjw.27.1409124268662;
-	Wed, 27 Aug 2014 00:24:28 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=zLjdTDue+rAl2Tt5VSjLgCmR7vMsS2V+RqYIvlLSt8E=;
+	b=JgJDGLwMMmti8TqLx3lZaBkX8KSfaZkVxdNS01fkDE1b61W7NNrSZeKBQPyVSoTvwr
+	Qb2D27knG7t6jZMU5u+WwIXuAHy9tiIykEUMbHLedB6+X1W7ceTWU5yUHFqXWrYbD8mA
+	0dAPSPk6VCMCqikxWFHBExU/gfhxQBjHkIeDqQc351UD5YYh9X3P8crQG13D4HhioraQ
+	anl0shWTZZOTLriMc8rMbpKhIFMyqV3708lBNYfwzO/XW0uxUMt5PXgyyQewX1DcQ0X7
+	HvTQMGEe0cAxjU2miahhWocdpDe9UVHAX0+RLVe5fBe5hV87twMZ81ox5vgqss1lrSV8
+	eu5A==
+X-Gm-Message-State: ALoCoQkLvZ80UsjYiz51J38tA13AD8mU7wWiK/wl5w4xznQ/jLWqbXcjicJwF97Y1pEg9cuVJBiu
+X-Received: by 10.180.99.97 with SMTP id ep1mr25656647wib.33.1409124548722;
+	Wed, 27 Aug 2014 00:29:08 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
-	by mx.google.com with ESMTPSA id ju1sm14736222wjc.1.2014.08.27.00.24.27
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id
+	cy10sm14699398wjb.21.2014.08.27.00.29.07 for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 27 Aug 2014 00:24:27 -0700 (PDT)
+	Wed, 27 Aug 2014 00:29:07 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Aug 2014 09:24:25 +0200
-Message-Id: <1409124265-9548-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 27 Aug 2014 09:29:01 +0200
+Message-Id: <1409124541-12549-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.9.0
+In-Reply-To: <1409124541-12549-1-git-send-email-koen@dominion.thruhere.net>
+References: <1409124541-12549-1-git-send-email-koen@dominion.thruhere.net>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] mkvtoolnix: update to 7.1.0+git
+Subject: [meta-initramfs][PATCH 2/2] dracut: update to 038
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,38 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Aug 2014 07:24:31 -0000
-
-This fixes compilation with boot 1.56+
+X-List-Received-Date: Wed, 27 Aug 2014 07:29:13 -0000
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../mkvtoolnix/{mkvtoolnix_7.0.0.bb => mkvtoolnix_git.bb}         | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-multimedia/recipes-mkv/mkvtoolnix/{mkvtoolnix_7.0.0.bb => mkvtoolnix_git.bb} (84%)
+ meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_7.0.0.bb b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
-similarity index 84%
-rename from meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_7.0.0.bb
-rename to meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
-index bd752af..8d77024 100644
---- a/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_7.0.0.bb
-+++ b/meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb
-@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index 9909a6d..ea55a4d 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -5,10 +5,10 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis bzip2 lzo file ruby-native"
+ PE = "1"
+-PV = "036"
++PV = "038"
  
--SRC_URI = "http://www.bunkus.org/videotools/mkvtoolnix/sources/mkvtoolnix-${PV}.tar.xz"
--SRC_URI[md5sum] = "ddd5ce6288d2fdaa6b79cb6d7bfffb04"
--SRC_URI[sha256sum] = "2bbdf060e193d4a7f961f84d28b28d67d859be66e3f2cdf8ee4ae380f8d15725"
-+PV = "7.1.0+git${SRCPV}"
-+SRCREV = "0c89ff941bfdd9f3378312f293a84f13cf3e2a96"
-+SRC_URI = "git://github.com/mbunkus/mkvtoolnix.git"
-+
-+S = "${WORKDIR}/git"
+-# v036 tag
+-SRCREV = "d50a99c5ceeb7107f624c5d3238d37509b2217a8"
++# v038 tag
++SRCREV = "267a109a81715c8957f14659593deb7b6255d40e"
+ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
  
- inherit autotools-brokensep gettext
- 
+ S = "${WORKDIR}/git"
 -- 
 1.9.0
 
