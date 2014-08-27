@@ -1,40 +1,36 @@
 Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
-	[74.125.82.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 4849165E94
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C6D270EF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 07:29:07 +0000 (UTC)
-Received: by mail-we0-f174.google.com with SMTP id x48so15799765wes.33
+	Wed, 27 Aug 2014 07:29:05 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id l18so15285480wgh.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 00:29:08 -0700 (PDT)
+	Wed, 27 Aug 2014 00:29:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=zLjdTDue+rAl2Tt5VSjLgCmR7vMsS2V+RqYIvlLSt8E=;
-	b=JgJDGLwMMmti8TqLx3lZaBkX8KSfaZkVxdNS01fkDE1b61W7NNrSZeKBQPyVSoTvwr
-	Qb2D27knG7t6jZMU5u+WwIXuAHy9tiIykEUMbHLedB6+X1W7ceTWU5yUHFqXWrYbD8mA
-	0dAPSPk6VCMCqikxWFHBExU/gfhxQBjHkIeDqQc351UD5YYh9X3P8crQG13D4HhioraQ
-	anl0shWTZZOTLriMc8rMbpKhIFMyqV3708lBNYfwzO/XW0uxUMt5PXgyyQewX1DcQ0X7
-	HvTQMGEe0cAxjU2miahhWocdpDe9UVHAX0+RLVe5fBe5hV87twMZ81ox5vgqss1lrSV8
-	eu5A==
-X-Gm-Message-State: ALoCoQkLvZ80UsjYiz51J38tA13AD8mU7wWiK/wl5w4xznQ/jLWqbXcjicJwF97Y1pEg9cuVJBiu
-X-Received: by 10.180.99.97 with SMTP id ep1mr25656647wib.33.1409124548722;
-	Wed, 27 Aug 2014 00:29:08 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=6eJzcYH8Z5SzvfU8mCccJZ1Waoqg2F9RGvj3AqdAv1A=;
+	b=Gk32uFwrA8P2pzx0KrbKHp9Cmg6QOEdtmyhZrUDTdAZmC3vktyRH+zl5LdN2Uf2Wd+
+	nesE1isEwcX+MxtX1AxYbfnmDFqUWWPOEADsdVWFxEoAuBfPPPJyoncgpsNMyymiub2+
+	VUXXs5B1qwCjp3UthXqKtP5YsyAwwcYpcqcp2SYuEnbmIA3fEYh58hUvsAP5XPMrZ9Jx
+	J1vep5HzpGwcGtGfNp3bZr/cCALBrKrLt2eB8mBCgfKo/01WE9PJqixWwWpzkCh1Uw16
+	p3jArRESWM6/ets1wTDWrQ0LNkkvFFhHWSQz39VXWUh7YUKZyPzhEY8+lzKT04SjyDFq
+	3ArQ==
+X-Gm-Message-State: ALoCoQndBr4y1450f6w8otwUsi3ev7mIoUQyYXa93zXMPfy8XLHMyNN7tibZoMwD5rOUmMzzZEyx
+X-Received: by 10.180.10.166 with SMTP id j6mr26652933wib.73.1409124546866;
+	Wed, 27 Aug 2014 00:29:06 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
-	by mx.google.com with ESMTPSA id
-	cy10sm14699398wjb.21.2014.08.27.00.29.07 for <multiple recipients>
+	by mx.google.com with ESMTPSA id o10sm5979410wia.0.2014.08.27.00.29.05
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 27 Aug 2014 00:29:07 -0700 (PDT)
+	Wed, 27 Aug 2014 00:29:06 -0700 (PDT)
 From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Aug 2014 09:29:01 +0200
-Message-Id: <1409124541-12549-2-git-send-email-koen@dominion.thruhere.net>
+Date: Wed, 27 Aug 2014 09:29:00 +0200
+Message-Id: <1409124541-12549-1-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.9.0
-In-Reply-To: <1409124541-12549-1-git-send-email-koen@dominion.thruhere.net>
-References: <1409124541-12549-1-git-send-email-koen@dominion.thruhere.net>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-initramfs][PATCH 2/2] dracut: update to 038
+Subject: [meta-initramfs][PATCH 1/2] dracut: add 'getopt' to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,29 +46,28 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 27 Aug 2014 07:29:13 -0000
 
+This drags in full util-linux, a future TODO is to split up util-linux
+completely in OE-core.
+
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-initramfs/recipes-devtools/dracut/dracut_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-index 9909a6d..ea55a4d 100644
+index 945ba0f..9909a6d 100644
 --- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
 +++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-@@ -5,10 +5,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+@@ -33,7 +33,8 @@ FILES_${PN} += "${datadir}/bash-completion \
+                 ${libdir}/kernel \
+                "
  
- PE = "1"
--PV = "036"
-+PV = "038"
- 
--# v036 tag
--SRCREV = "d50a99c5ceeb7107f624c5d3238d37509b2217a8"
-+# v038 tag
-+SRCREV = "267a109a81715c8957f14659593deb7b6255d40e"
- SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
- 
- S = "${WORKDIR}/git"
+-RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid bash ldd"
++# 'getopt' is in the util-linux main package
++RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux bash ldd"
+ # This could be optimized a bit, but let's avoid non-booting systems :)
+ RRECOMMENDS_${PN} = " \
+                      kernel-modules \
 -- 
 1.9.0
 
