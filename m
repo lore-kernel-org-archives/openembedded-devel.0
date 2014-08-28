@@ -1,20 +1,42 @@
-Return-Path: <pab@pabigot.com>
-Received: from p3plsmtpa06-05.prod.phx3.secureserver.net
-	(p3plsmtpa06-05.prod.phx3.secureserver.net [173.201.192.106])
-	by mail.openembedded.org (Postfix) with ESMTP id 920687119B
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id ACC2170E5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 17:43:19 +0000 (UTC)
-Received: from llc.pab ([66.41.60.82])
-	by p3plsmtpa06-05.prod.phx3.secureserver.net with 
-	id kHjK1o00P1mTNtu01HjLbP; Thu, 28 Aug 2014 10:43:20 -0700
-From: "Peter A. Bigot" <pab@pabigot.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Aug 2014 12:43:11 -0500
-Message-Id: <1409247791-29772-1-git-send-email-pab@pabigot.com>
-X-Mailer: git-send-email 1.8.5.5
-In-Reply-To: <1409227581-20888-6-git-send-email-pab@pabigot.com>
-References: <1409227581-20888-6-git-send-email-pab@pabigot.com>
-Subject: [meta-networking][PATCH v2] ntp: add deterministic support for KPPS interface
+	Thu, 28 Aug 2014 19:37:10 +0000 (UTC)
+Received: by mail-pa0-f54.google.com with SMTP id fb1so3826474pad.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Aug 2014 12:37:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=LayZc8zZOCMEfJLf1yXYOdtv1pSC2Z/GDBzuIxJcTJw=;
+	b=yZWWnwzecst0GaDDPWUxGcnNCPd5rooFJpliQxpSNaRKDzUkiLg5tCG79eDlvPDmwS
+	fnxPMzUrf7YPp1wNFqd4rUYZGlRZ53sKUzSYq/M+D253Pzp9mszFQb4xktpyBkjo0wA6
+	p3lD+5CWppZZw0NH5VyU0EdDtFvyW9a7FPU5O6H/t3mZCA8mS7Wsan0EUzkKgx+lMAzY
+	b07mpiUr3A12IZmPQXLeeuW296wecd1pYFriHEb9z5ehIj/eTOiS3je8C6sUEIB77Z4l
+	s7gdeG/IsAW04Ap9KNKGg44FRY2GEaz/hdHE1cVRJQcm9QB+Kpxh/3VYH//6ydUQOgxi
+	ldYg==
+X-Received: by 10.70.52.199 with SMTP id v7mr9198626pdo.49.1409254628070;
+	Thu, 28 Aug 2014 12:37:08 -0700 (PDT)
+Received: from [10.7.100.251] (64.2.3.195.ptr.us.xo.net. [64.2.3.195])
+	by mx.google.com with ESMTPSA id
+	ny7sm15623008pab.38.2014.08.28.12.37.05 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 28 Aug 2014 12:37:06 -0700 (PDT)
+Message-ID: <53FF84DE.7040402@gmail.com>
+Date: Thu, 28 Aug 2014 12:37:02 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
+MIME-Version: 1.0
+To: Otavio Salvador <otavio@ossystems.com.br>, 
+	Cliff Brake <cliff.brake@gmail.com>, Martin Jansa <martin.jansa@gmail.com>
+References: <1408914239-11562-1-git-send-email-otavio@ossystems.com.br>	<CAMKF1sqRuJ2Ncy=FR09ir4N0teHWvN3CfxGQR97niSDFAcHHzQ@mail.gmail.com>	<CAP9ODKoX8jUYPoZDqF4WYK45p3tYT8g-MUsox6=frigEY_Eo+Q@mail.gmail.com>	<CAP9ODKowYPXHShXiBVTG=2_r1_qm=E0gXRAtXDTUUYqD7vmmNQ@mail.gmail.com>
+	<CAP9ODKrzJAW+NXr7LmzQ0+CnmJE_pc5786Xq64AMqeRN_X6=kg@mail.gmail.com>
+In-Reply-To: <CAP9ODKrzJAW+NXr7LmzQ0+CnmJE_pc5786Xq64AMqeRN_X6=kg@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][for-daisy][PATCH] php: Fix native build due mistakenly linking against host's iconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,38 +50,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 17:43:22 -0000
+X-List-Received-Date: Thu, 28 Aug 2014 19:37:11 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-ntp checks for presence of sys/timepps.h to determine whether the kernel
-supports the RFC 2783 KPPS interface.  Under Linux the pps-tools package
-installs this header.  Without this feature the ATOM clock driver does
-not work, and other drivers like NMEA have reduced precision.  Remove
-the feature non-determinism and increase ntpd capabilities by adding an
-explicit dependency.
+  Acked-by: Armin Kuster <akuster808@gmail.com>
 
-See: http://doc.ntp.org/4.2.6/kernpps.html
 
-Signed-off-by: Peter A. Bigot <pab@pabigot.com>
----
-V2: replace PACKAGECONFIG with DEPENDS to remove nondeterminism
+might have acked the wrong one.
 
- meta-networking/recipes-support/ntp/ntp.inc | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index 55926e0..f55a39a 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -8,6 +8,8 @@ SECTION = "console/network"
- LICENSE = "NTP"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fea4b50c33b18c2194b4b1c9ca512670"
- 
-+DEPENDS = "pps-tools"
-+
- INC_PR = "r6"
- 
- SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
--- 
-1.8.5.5
 
+On 08/28/2014 06:54 AM, Otavio Salvador wrote:
+> Martin,
+>
+> On Wed, Aug 27, 2014 at 11:04 PM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+>> On Mon, Aug 25, 2014 at 10:15 AM, Otavio Salvador
+>> <otavio@ossystems.com.br> wrote:
+>>> On Sun, Aug 24, 2014 at 8:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>>> On Sun, Aug 24, 2014 at 2:03 PM, Otavio Salvador
+>>>> <otavio@ossystems.com.br> wrote:
+>>>>> The configure script has mistakenly choose to enable iconv support,
+>>>>> due host to provide it, adding '/usr/lib' to the linking flags and
+>>>>> failing as:
+>>>>>
+>>>>> ,----[ Linking error while testing 'fork' support ]
+>>>>> | conftest.c:268: warning: conflicting types for built-in function 'fork'
+>>>>> | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
+>>>>> |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
+>>>>> | collect2: ld returned 1 exit status
+>>>>> `----
+>>>>>
+>>>>> This patch disables iconv support for native builds fixing the error.
+>>>>>
+>>>>
+>>>> the patch subject is confusing. enabling iconv is not mistake but its
+>>>> probed and if found its used. in this case libz against which libxml2
+>>>> is linked is not used here and that ends up in error.
+>>>>
+>>>> Can you try to add --with-iconv-dir=${STAGING_LIBDIR_NATIVE}
+>>>> and see if it helps ?
+>>>
+>>> The native does not depends on virtual/iconv. So the natural thing is
+>>> to disable it.
+>>
+>> Hey guys, can you review this one for backporting?
+>
+> This is the Daisy backport one.
+>
 
