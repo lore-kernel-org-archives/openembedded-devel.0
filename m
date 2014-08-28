@@ -1,38 +1,41 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f181.google.com (mail-yk0-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 39D507067B
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id C6FE97070B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 02:04:13 +0000 (UTC)
-Received: by mail-yk0-f181.google.com with SMTP id 131so84456ykp.12
+	Thu, 28 Aug 2014 02:38:02 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id lj1so555310pab.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Aug 2014 19:04:14 -0700 (PDT)
+	Wed, 27 Aug 2014 19:38:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=uv38PewlzP05Fpufg8iXv3yNz2LhPH0jOYFILv+Jwg8=;
-	b=X1ACqxa2tcHbVLW1JmWrNTR1DdwyTajYjkjuX2YWKmDiGnsB12LIy95lr+77jgCre+
-	XJM1IH4ybZxs5uEtG3YMftKZF/RvIj0SvpTKWhn+hqAOZsa78+px2glafj7xaR/7osbi
-	WcusyX4hkoNnlbzu8KrpEtyX/u8QZgwZ6nHUhObCRUorT04lDf+ot8FUes7Xz0SbcBqt
-	lVkXAffkDvi+xpFy5mJnUk49di8MvYj1b4eo7CDsuIG4bb+xa+UOAd0rADK25pYiLJ+5
-	HpsYpvSX/+SxUQZoA9ORzunG/bn/2wm2xKB1zn/J181Kybd8jiz4GlToERWOxLYYMXvI
-	wR6w==
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=Ovl94SlHzi8zli+wJCwSn9vce9hN2HY3I9eEMsmtcNw=;
+	b=K/K122CYVs5+ztS/y0+mbqk2ohFs8aioOBxu5anbx+4ruFWLzlTlR/1M/JdqdmxEsb
+	vskXDoNZAkw1njNVh4jRBzMahEz9NJkX0k+RhTwbZ1BEgUpAUtsBM240eOpJgK7cMLFY
+	VCtCx4kIaULmIQpmMwYDeleS1cjYmjxNpduR7BKKtyQ0ol8n4rmzLqmMNvFPTX1YCxJy
+	louasXrAfnmYWivMStNa8d8zK0ILkYB60CpT8kocJ9ueg0J+mn9ed1F91Dc3AGEpBbDD
+	whEivki7gn73VsJEQzrI9of9Mp2mxzfY2yItVT3cKuDG+OlQtoI5EAsOvmrkYi/jiU3y
+	MylQ==
+X-Received: by 10.70.5.33 with SMTP id p1mr1419900pdp.134.1409193483256;
+	Wed, 27 Aug 2014 19:38:03 -0700 (PDT)
+Received: from ?IPv6:2601:c:9380:601:9477:310d:a6a1:d73f?
+	([2601:c:9380:601:9477:310d:a6a1:d73f])
+	by mx.google.com with ESMTPSA id we5sm7389548pab.28.2014.08.27.19.38.01
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 27 Aug 2014 19:38:02 -0700 (PDT)
+Message-ID: <53FE9607.3000203@gmail.com>
+Date: Wed, 27 Aug 2014 19:37:59 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-X-Received: by 10.236.79.230 with SMTP id i66mr1309083yhe.136.1409191454758;
-	Wed, 27 Aug 2014 19:04:14 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.56.201 with HTTP; Wed, 27 Aug 2014 19:04:14 -0700 (PDT)
-In-Reply-To: <CAP9ODKoX8jUYPoZDqF4WYK45p3tYT8g-MUsox6=frigEY_Eo+Q@mail.gmail.com>
-References: <1408914239-11562-1-git-send-email-otavio@ossystems.com.br>
-	<CAMKF1sqRuJ2Ncy=FR09ir4N0teHWvN3CfxGQR97niSDFAcHHzQ@mail.gmail.com>
-	<CAP9ODKoX8jUYPoZDqF4WYK45p3tYT8g-MUsox6=frigEY_Eo+Q@mail.gmail.com>
-Date: Wed, 27 Aug 2014 23:04:14 -0300
-X-Google-Sender-Auth: jEj78g94luXDbt-mj3cO2N2QdTA
-Message-ID: <CAP9ODKowYPXHShXiBVTG=2_r1_qm=E0gXRAtXDTUUYqD7vmmNQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Cliff Brake <cliff.brake@gmail.com>, Armin Kuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][for-daisy][PATCH] php: Fix native build due mistakenly linking against host's iconv
+To: openembedded-devel@lists.openembedded.org
+References: <1408909187-29642-1-git-send-email-otavio@ossystems.com.br>
+In-Reply-To: <1408909187-29642-1-git-send-email-otavio@ossystems.com.br>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH] php: Fix native build due mistakenly linking against host's iconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,42 +49,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 02:04:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 28 Aug 2014 02:38:02 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 25, 2014 at 10:15 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Sun, Aug 24, 2014 at 8:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Sun, Aug 24, 2014 at 2:03 PM, Otavio Salvador
->> <otavio@ossystems.com.br> wrote:
->>> The configure script has mistakenly choose to enable iconv support,
->>> due host to provide it, adding '/usr/lib' to the linking flags and
->>> failing as:
->>>
->>> ,----[ Linking error while testing 'fork' support ]
->>> | conftest.c:268: warning: conflicting types for built-in function 'fork'
->>> | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
->>> |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
->>> | collect2: ld returned 1 exit status
->>> `----
->>>
->>> This patch disables iconv support for native builds fixing the error.
->>>
->>
->> the patch subject is confusing. enabling iconv is not mistake but its
->> probed and if found its used. in this case libz against which libxml2
->> is linked is not used here and that ends up in error.
->>
->> Can you try to add --with-iconv-dir=${STAGING_LIBDIR_NATIVE}
->> and see if it helps ?
+
+Acked-by: Armin Kuster <akuster808@gmail.com>
+
+On 08/24/2014 12:39 PM, Otavio Salvador wrote:
+> The configure script has mistakenly choose to enable iconv support,
+> due host to provide it, adding '/usr/lib' to the linking flags and
+> failing as:
 >
-> The native does not depends on virtual/iconv. So the natural thing is
-> to disable it.
-
-Hey guys, can you review this one for backporting?
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> ,----[ Linking error while testing 'fork' support ]
+> | conftest.c:268: warning: conflicting types for built-in function 'fork'
+> | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
+> |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
+> | collect2: ld returned 1 exit status
+> `----
+>
+> This patch disables iconv support for native builds fixing the error.
+>
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>   meta-oe/recipes-devtools/php/php.inc |    1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+> index 030c090..6bdae78 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -35,6 +35,7 @@ EXTRA_OECONF = "--enable-mbstring \
+>   "
+>   EXTRA_OECONF_virtclass-native = " \
+>                   --with-zlib=${STAGING_LIBDIR_NATIVE}/.. \
+> +                --without-iconv \
+>                   ${COMMON_EXTRA_OECONF} \
+>   "
+>
+>
 
