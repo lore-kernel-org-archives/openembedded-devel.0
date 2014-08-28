@@ -1,24 +1,40 @@
-Return-Path: <pab@pabigot.com>
-Received: from p3plsmtpa07-02.prod.phx3.secureserver.net
-	(p3plsmtpa07-02.prod.phx3.secureserver.net [173.201.192.231])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EDAC60E49
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f48.google.com (mail-yh0-f48.google.com
+	[209.85.213.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 5EB0E710C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 13:05:54 +0000 (UTC)
-Received: from [192.168.65.10] ([66.41.60.82])
-	by p3plsmtpa07-02.prod.phx3.secureserver.net with 
-	id kD5u1o00L1mTNtu01D5vaU; Thu, 28 Aug 2014 06:05:56 -0700
-Message-ID: <53FF2932.7080505@pabigot.com>
-Date: Thu, 28 Aug 2014 08:05:54 -0500
-From: "Peter A. Bigot" <pab@pabigot.com>
-Organization: Peter Bigot Consulting, LLC
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+	Thu, 28 Aug 2014 13:54:35 +0000 (UTC)
+Received: by mail-yh0-f48.google.com with SMTP id b6so505109yha.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Aug 2014 06:54:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=ibZ4dCVzv/7JdYFHf7RkcojnErC1o4aAHIWI9vkdBfY=;
+	b=ccazpKHuzHn9LC3qYhTYTUDfPz7FNb7589sctQHtHDVbMLNam9LRRMgQ+JwS94Udes
+	jFERJ/m6Lhi7rTFMydyoSOQlThSPm7kiueE7NZmiV+/XvFFQd08O3jxgkDuNDT4fFwTV
+	Zl0p5X/Jgwu4AzvV+Yc2amPoxAe8kkRh42mEfOPtL0YlaSb5CUq0jhog/1NW774PecAm
+	49erVZZ1CjqotUaF/+RlrW/goHpEgDyuzoe5bnnfnp9/0ZniYeCQO3tnjdoxuNMb16yd
+	6tlp3NP8i9R4bWeG20jnTQzHIFIL2nYL4MKnoop9dUt9gtdQ6t1sCkMZKZUJZZ5cDNZ8
+	LKng==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1409227581-20888-1-git-send-email-pab@pabigot.com>	<1409227581-20888-5-git-send-email-pab@pabigot.com>
-	<CAJTo0LZtEMeRoxAd9h9K7dQX6peSJRdB+vFGtWQXDSNUC_UPTg@mail.gmail.com>
-In-Reply-To: <CAJTo0LZtEMeRoxAd9h9K7dQX6peSJRdB+vFGtWQXDSNUC_UPTg@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH 4/5] gpsd: add optional support for KPPS interface
+X-Received: by 10.236.129.3 with SMTP id g3mr4779438yhi.67.1409234076745; Thu,
+	28 Aug 2014 06:54:36 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.56.201 with HTTP; Thu, 28 Aug 2014 06:54:36 -0700 (PDT)
+In-Reply-To: <CAP9ODKowYPXHShXiBVTG=2_r1_qm=E0gXRAtXDTUUYqD7vmmNQ@mail.gmail.com>
+References: <1408914239-11562-1-git-send-email-otavio@ossystems.com.br>
+	<CAMKF1sqRuJ2Ncy=FR09ir4N0teHWvN3CfxGQR97niSDFAcHHzQ@mail.gmail.com>
+	<CAP9ODKoX8jUYPoZDqF4WYK45p3tYT8g-MUsox6=frigEY_Eo+Q@mail.gmail.com>
+	<CAP9ODKowYPXHShXiBVTG=2_r1_qm=E0gXRAtXDTUUYqD7vmmNQ@mail.gmail.com>
+Date: Thu, 28 Aug 2014 10:54:36 -0300
+X-Google-Sender-Auth: HYbINLtKqX1BRHG3cgTVKQsYogc
+Message-ID: <CAP9ODKrzJAW+NXr7LmzQ0+CnmJE_pc5786Xq64AMqeRN_X6=kg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Cliff Brake <cliff.brake@gmail.com>, Armin Kuster <akuster808@gmail.com>, 
+	Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][for-daisy][PATCH] php: Fix native build due mistakenly linking against host's iconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 13:05:57 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Aug 2014 13:54:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 08/28/2014 07:53 AM, Burton, Ross wrote:
-> On 28 August 2014 13:06, Peter A. Bigot <pab@pabigot.com> wrote:
->> +PACKAGECONFIG ??= ""
->> +PACKAGECONFIG[kpps] = ",,pps-tools"
-> That's not actually deterministic - if pps-tools is installed but the
-> packageconfig option is disabled then gpsd will still enable the
-> support.
+Martin,
 
-Yeah, I'm aware of that.  It's also not something that can be 
-controlled, since gpsd's author doesn't believe in configuration options 
-to enable features: every capability is enabled or disabled by 
-inspecting the environment at compile-time.
+On Wed, Aug 27, 2014 at 11:04 PM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Mon, Aug 25, 2014 at 10:15 AM, Otavio Salvador
+> <otavio@ossystems.com.br> wrote:
+>> On Sun, Aug 24, 2014 at 8:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> On Sun, Aug 24, 2014 at 2:03 PM, Otavio Salvador
+>>> <otavio@ossystems.com.br> wrote:
+>>>> The configure script has mistakenly choose to enable iconv support,
+>>>> due host to provide it, adding '/usr/lib' to the linking flags and
+>>>> failing as:
+>>>>
+>>>> ,----[ Linking error while testing 'fork' support ]
+>>>> | conftest.c:268: warning: conflicting types for built-in function 'fork'
+>>>> | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
+>>>> |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
+>>>> | collect2: ld returned 1 exit status
+>>>> `----
+>>>>
+>>>> This patch disables iconv support for native builds fixing the error.
+>>>>
+>>>
+>>> the patch subject is confusing. enabling iconv is not mistake but its
+>>> probed and if found its used. in this case libz against which libxml2
+>>> is linked is not used here and that ends up in error.
+>>>
+>>> Can you try to add --with-iconv-dir=${STAGING_LIBDIR_NATIVE}
+>>> and see if it helps ?
+>>
+>> The native does not depends on virtual/iconv. So the natural thing is
+>> to disable it.
+>
+> Hey guys, can you review this one for backporting?
 
-Although ntp does support some explicit enable/disable flags, it too 
-fails to provide a way to say "Pay no attention to that PPS header, it 
-isn't really there."
+This is the Daisy backport one.
 
-For this situation I don't think there's a big issue.  The PACKAGECONFIG 
-setting ensures that the header will be available if the feature is 
-desired.  If it happens to be present but PPS support isn't explicitly 
-requested, there's no failure in either build or runtime: it's still 
-gated by runtime checks for PPS sources and the option being enabled in 
-the Linux kernel.  (There are no runtime libraries that need to be 
-installed to use KPPS.)
-
-Is this going to be a problem with the patch being accepted?
-
-Peter
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
