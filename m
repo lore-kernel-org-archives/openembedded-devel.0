@@ -1,39 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id CC407710C5
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 80F8A711CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 14:29:43 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id u57so834786wes.23
+	Thu, 28 Aug 2014 14:32:17 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id e4so1001550wiv.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 07:29:41 -0700 (PDT)
+	Thu, 28 Aug 2014 07:32:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=gJEr5J69HEpWud3uO5Q9y49bqGn22wa3l7WaffKXffw=;
-	b=KrE2wnNq2azS0ryXC/31mXwWsbitRyUNHGPEqp14o4WYGHQzXjKd1gc8E16SpsMeog
-	/7Vn17P5dT0NAGoYv2xpOFtDOzad+BULIh1XDEnaTvqxGi7NJRFc8tnMoU5wm6z/BTo6
-	+PR5yiYqUF4fzXuC/qzJTma26IUY0LvvGaJklekwB5/ifWXJNSuV42wOq+HiTeMrRSp3
-	VrWg+ZMn4VDf/J2ICehVL96nnyoEhq3mLCuGeoZ2WRalo+0O9hzX+adA751CYIStj62Q
-	cMeJGyly17T2zoP9q9H81R7mFBbXc+BGmY/qtsKex/f0lqb6ehN83x1y3axngUpZL8k8
-	YniA==
-X-Received: by 10.194.118.201 with SMTP id ko9mr5669518wjb.26.1409236181121;
-	Thu, 28 Aug 2014 07:29:41 -0700 (PDT)
+	bh=u03mSmAkzouGukXvuzZvPKdr0zF5FuqQF4s4Hty7FtU=;
+	b=DogNEiGAGHaWXZ5eVNQe/QZmB136hEiJsuJsnQmA4rEhRI2E/tBCPBgGvnT4QUEGUE
+	fN6ris+d/ZCMTty9bAd5fS3wLUZj4zuqGLd8HQpDkQKNK8cJXljSw0VWS9kh3DUo7i9Y
+	fYifsk4gcNwwTYjnEp7tidwKwDO3fg90EYn/eml20r8VOhX6LT9MAcU+3rd4121p7c1d
+	w8OYnnAGpOveW5e9bl5Q+in5n2WR1SEBn0U2bd9VhdAGJUW3M5UcMTZ0Lw+dxr0nAGZO
+	xXHP3xNP+kezJdTdHEYcU2pSHaiShl/uIkiMsFcHAUf50wCUkU67TBhxZfDie4p5Gfm+
+	AuUQ==
+X-Received: by 10.194.59.244 with SMTP id c20mr5671574wjr.59.1409236339136;
+	Thu, 28 Aug 2014 07:32:19 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	au4sm10417712wjc.15.2014.08.28.07.29.40
+	ot5sm10344170wjc.42.2014.08.28.07.32.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 28 Aug 2014 07:29:40 -0700 (PDT)
+	Thu, 28 Aug 2014 07:32:18 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 28 Aug 2014 16:29:50 +0200
+Date: Thu, 28 Aug 2014 16:32:28 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140828142950.GE16066@jama>
+Message-ID: <20140828143228.GF16066@jama>
 References: <1409227581-20888-1-git-send-email-pab@pabigot.com>
 	<1409227581-20888-5-git-send-email-pab@pabigot.com>
+	<CAJTo0LZtEMeRoxAd9h9K7dQX6peSJRdB+vFGtWQXDSNUC_UPTg@mail.gmail.com>
+	<53FF2932.7080505@pabigot.com>
 MIME-Version: 1.0
-In-Reply-To: <1409227581-20888-5-git-send-email-pab@pabigot.com>
+In-Reply-To: <53FF2932.7080505@pabigot.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
 Subject: Re: [meta-oe][PATCH 4/5] gpsd: add optional support for KPPS interface
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -49,73 +51,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 14:29:47 -0000
-X-Groupsio-MsgNum: 51899
+X-List-Received-Date: Thu, 28 Aug 2014 14:32:20 -0000
+X-Groupsio-MsgNum: 51900
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="C94crkcyjafcjHxo"
+	protocol="application/pgp-signature"; boundary="m1UC1K4AOz1Ywdkx"
 Content-Disposition: inline
 
---C94crkcyjafcjHxo
+--m1UC1K4AOz1Ywdkx
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 28, 2014 at 07:06:20AM -0500, Peter A. Bigot wrote:
-> gpsd by default builds with PPS (pulse-per-second) support, but without
-> kernel support to capture the edge of the pulse the accuracy is only
-> +/-5us.  Under Linux the pps-tools package installs the header required
-> for the user-level API to the RFC 2783 KPPS interface.  If gpsd detects
-> this header, it will use the API to improve accuracy to +/-1us.
+On Thu, Aug 28, 2014 at 08:05:54AM -0500, Peter A. Bigot wrote:
+> On 08/28/2014 07:53 AM, Burton, Ross wrote:
+> > On 28 August 2014 13:06, Peter A. Bigot <pab@pabigot.com> wrote:
+> >> +PACKAGECONFIG ??=3D ""
+> >> +PACKAGECONFIG[kpps] =3D ",,pps-tools"
+> > That's not actually deterministic - if pps-tools is installed but the
+> > packageconfig option is disabled then gpsd will still enable the
+> > support.
 >=20
-> See: http://www.catb.org/gpsd/gpsd-time-service-howto.html#_enabling_pps
+> Yeah, I'm aware of that.  It's also not something that can be=20
+> controlled, since gpsd's author doesn't believe in configuration options=
+=20
+> to enable features: every capability is enabled or disabled by=20
+> inspecting the environment at compile-time.
 >=20
-> Signed-off-by: Peter A. Bigot <pab@pabigot.com>
-> ---
->  meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/recip=
-es-navigation/gpsd/gpsd_3.10.bb
-> index d12c7a8..1c2d9eb 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
-> @@ -20,6 +20,9 @@ SRC_URI =3D "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz=
- \
->  SRC_URI[md5sum] =3D "fc5b03aae38b9b5b6880b31924d0ace3"
->  SRC_URI[sha256sum] =3D "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec40=
-7dcbf2f70b854320"
-> =20
-> +PACKAGECONFIG ??=3D ""
-> +PACKAGECONFIG[kpps] =3D ",,pps-tools"
+> Although ntp does support some explicit enable/disable flags, it too=20
+> fails to provide a way to say "Pay no attention to that PPS header, it=20
+> isn't really there."
 
-Both recipes need some way of explicit disable of pps-tools, so that the
-result is the same when building gpsd or ntp before or after pps-tools.
+Then we need to patch their configure.
 
->  inherit scons update-rc.d python-dir pythonnative systemd
-> =20
->  INITSCRIPT_NAME =3D "gpsd"
-> --=20
-> 1.8.5.5
+> For this situation I don't think there's a big issue.  The PACKAGECONFIG=
+=20
+> setting ensures that the header will be available if the feature is=20
+> desired.  If it happens to be present but PPS support isn't explicitly=20
+> requested, there's no failure in either build or runtime: it's still=20
+> gated by runtime checks for PPS sources and the option being enabled in=
+=20
+> the Linux kernel.  (There are no runtime libraries that need to be=20
+> installed to use KPPS.)
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Is this going to be a problem with the patch being accepted?
+
+Yes
+
+people can be used to have KPPS support enabled by "accident" e.g.
+because they are building ntp with KPPS support and pps-tools is almost
+always built before gpsd..
+
+and then once it's built in different order and end-user will be
+surprised by lost KPPS support from gpsd.
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---C94crkcyjafcjHxo
+--m1UC1K4AOz1Ywdkx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlP/PN4ACgkQN1Ujt2V2gBy+qACeIxPWyFxbdPa9K+SdCOgM0fLU
-F9AAnR78DySuh5KNe2whX+fzxb7ACEkR
-=CquV
+iEYEARECAAYFAlP/PXwACgkQN1Ujt2V2gBwlEACeM2hI/rH/z7cr7qiokwoyYVkC
+GhMAnRltxupwsqrZpA3grYY2B7ihRehk
+=S1eo
 -----END PGP SIGNATURE-----
 
---C94crkcyjafcjHxo--
+--m1UC1K4AOz1Ywdkx--
