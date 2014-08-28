@@ -1,40 +1,41 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f48.google.com (mail-yh0-f48.google.com
-	[209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 5EB0E710C5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id AF5B97121A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 13:54:35 +0000 (UTC)
-Received: by mail-yh0-f48.google.com with SMTP id b6so505109yha.35
+	Thu, 28 Aug 2014 14:27:50 +0000 (UTC)
+Received: by mail-wg0-f44.google.com with SMTP id m15so834841wgh.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 06:54:36 -0700 (PDT)
+	Thu, 28 Aug 2014 07:27:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=ibZ4dCVzv/7JdYFHf7RkcojnErC1o4aAHIWI9vkdBfY=;
-	b=ccazpKHuzHn9LC3qYhTYTUDfPz7FNb7589sctQHtHDVbMLNam9LRRMgQ+JwS94Udes
-	jFERJ/m6Lhi7rTFMydyoSOQlThSPm7kiueE7NZmiV+/XvFFQd08O3jxgkDuNDT4fFwTV
-	Zl0p5X/Jgwu4AzvV+Yc2amPoxAe8kkRh42mEfOPtL0YlaSb5CUq0jhog/1NW774PecAm
-	49erVZZ1CjqotUaF/+RlrW/goHpEgDyuzoe5bnnfnp9/0ZniYeCQO3tnjdoxuNMb16yd
-	6tlp3NP8i9R4bWeG20jnTQzHIFIL2nYL4MKnoop9dUt9gtdQ6t1sCkMZKZUJZZ5cDNZ8
-	LKng==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=hNJ5kJUHfNW81aU96XjWizeZWPl5PVOz1V0suHhVy8U=;
+	b=gwy/P32FktzLoZNi+TkVaHFkjMLVVkOMZc4/Vn6Kxan3RPQJdEGsgyMDJm5yQAw/79
+	s96lffbeu4F/IdfTFXKHeDZCj4l7m3TXOuglcV99eReMndpIlY3vRrg+70FLN6j/drac
+	9nZKKMuV1YCBdrzHjwrUB+wrstzZGZa8Y4D8EKT8iRkHvNsAl33VTgvbSnb+PfrrLimE
+	o4k+VhFN1uIKij/dQuCyri3ZlmnYUfJxLeClpKjHWjpwfmxE57krsBbHbc+1SexIcnQU
+	f11u8kW5oqrRDTJzk06aS+09NIbvhkWWVkSd3BxJ/3CHkmvUvikH+f38Jk/oScw8wcxJ
+	ZT7A==
+X-Received: by 10.180.99.4 with SMTP id em4mr6686031wib.8.1409236070949;
+	Thu, 28 Aug 2014 07:27:50 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	s3sm36242713wis.3.2014.08.28.07.27.49
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 28 Aug 2014 07:27:49 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 28 Aug 2014 16:27:59 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140828142759.GD16066@jama>
+References: <20140827223659.1fb55fb4@symphony.aura-online.co.uk>
+	<20140828074208.GG13139@haswell> <20140828092944.GB16066@jama>
+	<20140828103826.3b133eb0@red.yakaraplc.local>
 MIME-Version: 1.0
-X-Received: by 10.236.129.3 with SMTP id g3mr4779438yhi.67.1409234076745; Thu,
-	28 Aug 2014 06:54:36 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.56.201 with HTTP; Thu, 28 Aug 2014 06:54:36 -0700 (PDT)
-In-Reply-To: <CAP9ODKowYPXHShXiBVTG=2_r1_qm=E0gXRAtXDTUUYqD7vmmNQ@mail.gmail.com>
-References: <1408914239-11562-1-git-send-email-otavio@ossystems.com.br>
-	<CAMKF1sqRuJ2Ncy=FR09ir4N0teHWvN3CfxGQR97niSDFAcHHzQ@mail.gmail.com>
-	<CAP9ODKoX8jUYPoZDqF4WYK45p3tYT8g-MUsox6=frigEY_Eo+Q@mail.gmail.com>
-	<CAP9ODKowYPXHShXiBVTG=2_r1_qm=E0gXRAtXDTUUYqD7vmmNQ@mail.gmail.com>
-Date: Thu, 28 Aug 2014 10:54:36 -0300
-X-Google-Sender-Auth: HYbINLtKqX1BRHG3cgTVKQsYogc
-Message-ID: <CAP9ODKrzJAW+NXr7LmzQ0+CnmJE_pc5786Xq64AMqeRN_X6=kg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Cliff Brake <cliff.brake@gmail.com>, Armin Kuster <akuster808@gmail.com>, 
-	Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][for-daisy][PATCH] php: Fix native build due mistakenly linking against host's iconv
+In-Reply-To: <20140828103826.3b133eb0@red.yakaraplc.local>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-webserver] nginx 1.7.4 cross-compiling patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,48 +49,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 13:54:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 28 Aug 2014 14:27:54 -0000
+X-Groupsio-MsgNum: 51898
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="zS7rBR6csb6tI2e1"
+Content-Disposition: inline
 
-Martin,
+--zS7rBR6csb6tI2e1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 27, 2014 at 11:04 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Mon, Aug 25, 2014 at 10:15 AM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
->> On Sun, Aug 24, 2014 at 8:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>> On Sun, Aug 24, 2014 at 2:03 PM, Otavio Salvador
->>> <otavio@ossystems.com.br> wrote:
->>>> The configure script has mistakenly choose to enable iconv support,
->>>> due host to provide it, adding '/usr/lib' to the linking flags and
->>>> failing as:
->>>>
->>>> ,----[ Linking error while testing 'fork' support ]
->>>> | conftest.c:268: warning: conflicting types for built-in function 'fork'
->>>> | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
->>>> |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
->>>> | collect2: ld returned 1 exit status
->>>> `----
->>>>
->>>> This patch disables iconv support for native builds fixing the error.
->>>>
->>>
->>> the patch subject is confusing. enabling iconv is not mistake but its
->>> probed and if found its used. in this case libz against which libxml2
->>> is linked is not used here and that ends up in error.
->>>
->>> Can you try to add --with-iconv-dir=${STAGING_LIBDIR_NATIVE}
->>> and see if it helps ?
->>
->> The native does not depends on virtual/iconv. So the natural thing is
->> to disable it.
->
-> Hey guys, can you review this one for backporting?
+On Thu, Aug 28, 2014 at 10:38:26AM +0100, James Le Cuirot wrote:
+> On Thu, 28 Aug 2014 11:29:44 +0200
+> Martin Jansa <martin.jansa@gmail.com> wrote:
+>=20
+> > On Thu, Aug 28, 2014 at 12:42:08AM -0700, Khem Raj wrote:
+> > > On 14-08-27 22:36:59, James Le Cuirot wrote: =20
+> > > > Hello,
+> > > >=20
+> > > > I was trying to cross-compile nginx 1.7.4 on Gentoo and found your
+> > > > nginx-cross.patch. It almost applied, despite being prepared
+> > > > against 1.0.11. I recreated it and everything worked except that
+> > > > the --with-endian option is not actually effective. I have
+> > > > attached the new nginx-cross.patch as well as a --with-endian
+> > > > fix. Hope this helps. As I don't use OpenEmbedded, I'll leave
+> > > > updating the nginx package to you. =20
+> > >=20
+> > > thanks for the patch. I hope it will appear in patchwork and can be
+> > > picked by someone doing package upgrade =20
+> >=20
+> > It's not correctly picked by patchwork
+> > http://patchwork.openembedded.org/patch/79247/
+> >=20
+> > James: Please resend with git send-email as README suggests
+> > http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+>=20
+> Hi Martin. I was going to but I figured that wouldn't really make sense
+> unless the package script was updated as well. If it were just merged
+> as-is, it would break the package. Would you still like it submitted in
+> this form anyway?
 
-This is the Daisy backport one.
+Please submit it together with upgrade from 1.4.4. to newer 1.7.4 version.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--zS7rBR6csb6tI2e1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlP/PG8ACgkQN1Ujt2V2gBxVlwCglMFfK4rVinPNoeK/2V7ugQlf
+GBIAn2IuXWmyC/o1A0Q3kZ7XlMj6nvKh
+=cYL5
+-----END PGP SIGNATURE-----
+
+--zS7rBR6csb6tI2e1--
