@@ -1,29 +1,38 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 97E847117C;
-	Thu, 28 Aug 2014 07:19:04 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	s7S7J2TC005096; Thu, 28 Aug 2014 08:19:02 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id D42h7vauOkbs; Thu, 28 Aug 2014 08:19:02 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	s7S7IuDa005092
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Thu, 28 Aug 2014 08:18:57 +0100
-Message-ID: <1409210337.29296.131.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Aug 2014 08:18:57 +0100
-In-Reply-To: <20140828064051.GA13139@haswell>
-References: <20140828064051.GA13139@haswell>
-X-Mailer: Evolution 3.10.4-0ubuntu2 
-Mime-Version: 1.0
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] [RFT] Moving on from eglibc to glibc 2.20
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E4C126FA94
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Aug 2014 07:38:30 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id rd3so1464626pab.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Aug 2014 00:38:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=YwVdUPZzAqtKW+UJHGF8uDpW/8L9IfFatTyi7ogJhIE=;
+	b=wyVKkZWPk4ncluDI9CcJJnZdPi3txWq2P1qggJ3ret51CuGDBuJzszqgke4lHfNbUI
+	5ir9eDna0eMvk6CQby0pMp9lcL75ZQKpMOGCXCGmiHR1ih/y2EjKpi5bBJtIxNyeFBlg
+	d1OrbpfM2A2ma54b0VuinxogCmeZYVUI/jD6E0kET5TXn8gB9dN6bdx49qZaY3RNw2de
+	gsGuw33zyqvMOsQM2rLSdnTynRoMngDUUpnEkoLC77FEx0+n11HHKpzPFEL3NvuPHKXb
+	2k5chP7Z7PhP7bIc9r18QTWy35IAcazs0zkwc4oWzhGc9/3MTUmYRaH/o+Hqrr+z4Iu4
+	wDVg==
+X-Received: by 10.68.136.164 with SMTP id qb4mr3072682pbb.39.1409211508993;
+	Thu, 28 Aug 2014 00:38:28 -0700 (PDT)
+Received: from haswell ([2601:9:3580:7a5:baca:3aff:fe80:aa8f])
+	by mx.google.com with ESMTPSA id dl8sm4051677pdb.65.2014.08.28.00.38.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 28 Aug 2014 00:38:28 -0700 (PDT)
+Date: Thu, 28 Aug 2014 00:42:08 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140828074208.GG13139@haswell>
+References: <20140827223659.1fb55fb4@symphony.aura-online.co.uk>
+MIME-Version: 1.0
+In-Reply-To: <20140827223659.1fb55fb4@symphony.aura-online.co.uk>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-webserver] nginx 1.7.4 cross-compiling patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,50 +46,306 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 07:19:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Aug 2014 07:38:32 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Wed, 2014-08-27 at 23:41 -0700, Khem Raj wrote:
-> Hi All
+On 14-08-27 22:36:59, James Le Cuirot wrote:
+> Hello,
 > 
-> As we all know eglibc has been merged back into glibc and 2.19 was the
-> last release, here I have put together the recipes for upcoming glibc
-> 2.20 release and removed eglibc 2.19 in favor of move.
-> 
-> I also thought about leaving eglibc in there but then eglibc and glibc
-> were pretty much same as they always have been that it would be an
-> incremental change with lot more patches this time.
-> 
-> The tree is here
-> 
-> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/eglibc-to-glibc-2.20
-> 
-> This has not recieved much testing yet and I am looking out for helping
-> hands here, so try it out in your buid environments and machines of
-> interest and report back on issues.
-> 
-> The patches also forward port the options group support and few other
-> patches from eglibc, details are in commit logs, which I think would make 
-> good candidates for future glibc merge.
-> 
-> This tree will be reworked and rebased so sync back if you see issues
-> which we will address here
-> 
-> Thanks for your help
+> I was trying to cross-compile nginx 1.7.4 on Gentoo and found your
+> nginx-cross.patch. It almost applied, despite being prepared against
+> 1.0.11. I recreated it and everything worked except that the
+> --with-endian option is not actually effective. I have attached
+> the new nginx-cross.patch as well as a --with-endian fix. Hope this
+> helps. As I don't use OpenEmbedded, I'll leave updating the nginx
+> package to you.
 
-Thanks for doing this Khem, its quite some work and much appreciated!
+thanks for the patch. I hope it will appear in patchwork and can be
+picked by someone doing package upgrade
 
-Just to be clear, what is the intent here? Is it intended to get this
-into 1.7 or is this 1.8 material at this point? We're effectively past
-the toolchain freeze point for 1.7, just about at complete feature
-freeze but I'd like to make sure we're thinking the same things.
+> 
+> Regards,
+> James
 
-I'm certainly happy to get this through the autobuilder and see what
-happens...
+> diff -Naur nginx-1.7.4.orig/auto/feature nginx-1.7.4/auto/feature
+> --- nginx-1.7.4.orig/auto/feature	2014-08-25 22:50:58.969186351 +0100
+> +++ nginx-1.7.4/auto/feature	2014-08-25 22:52:04.518208640 +0100
+> @@ -49,12 +49,20 @@
+>  
+>  if [ -x $NGX_AUTOTEST ]; then
+>  
+> +    if [ ".$NGX_CROSS_COMPILE" = ".yes" ]; then
+> +        NGX_AUTOTEST_EXEC="true"
+> +	NGX_FOUND_MSG=" (not tested, cross compiling)"
+> +    else
+> +        NGX_AUTOTEST_EXEC="$NGX_AUTOTEST"
+> +	NGX_FOUND_MSG=""
+> +    fi
+> +
+>      case "$ngx_feature_run" in
+>  
+>          yes)
+>              # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+> -            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
+> -                echo " found"
+> +            if /bin/sh -c $NGX_AUTOTEST_EXEC >> $NGX_AUTOCONF_ERR 2>&1; then
+> +                echo " found$NGX_FOUND_MSG"
+>                  ngx_found=yes
+>  
+>                  if test -n "$ngx_feature_name"; then
+> @@ -68,17 +76,27 @@
+>  
+>          value)
+>              # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+> -            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
+> -                echo " found"
+> +            if /bin/sh -c $NGX_AUTOTEST_EXEC >> $NGX_AUTOCONF_ERR 2>&1; then
+> +                echo " found$NGX_FOUND_MSG"
+>                  ngx_found=yes
+>  
+> -                cat << END >> $NGX_AUTO_CONFIG_H
+> +                if [ ".$NGX_CROSS_COMPILE" = ".yes" ]; then
+> +                    cat << END >> $NGX_AUTO_CONFIG_H
+>  
+>  #ifndef $ngx_feature_name
+> -#define $ngx_feature_name  `$NGX_AUTOTEST`
+> +#define $ngx_feature_name  $(eval "echo \$NGX_WITH_${ngx_feature_name}")
+>  #endif
+>  
+>  END
+> +		else
+> +                    cat << END >> $NGX_AUTO_CONFIG_H
+> +
+> +#ifndef $ngx_feature_name
+> +#define $ngx_feature_name  `$NGX_AUTOTEST_EXEC`
+> +#endif
+> +
+> +END
+> +                fi
+>              else
+>                  echo " found but is not working"
+>              fi
+> @@ -86,7 +104,7 @@
+>  
+>          bug)
+>              # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+> -            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
+> +            if /bin/sh -c $NGX_AUTOTEST_EXEC >> $NGX_AUTOCONF_ERR 2>&1; then
+>                  echo " not found"
+>  
+>              else
+> diff -Naur nginx-1.7.4.orig/auto/options nginx-1.7.4/auto/options
+> --- nginx-1.7.4.orig/auto/options	2014-08-25 22:50:58.959186500 +0100
+> +++ nginx-1.7.4/auto/options	2014-08-25 22:52:04.518208640 +0100
+> @@ -316,6 +316,18 @@
+>          --test-build-rtsig)              NGX_TEST_BUILD_RTSIG=YES   ;;
+>          --test-build-solaris-sendfilev)  NGX_TEST_BUILD_SOLARIS_SENDFILEV=YES ;;
+>  
+> +        # cross compile support
+> +        --with-int=*)                    NGX_WITH_INT="$value"          ;;
+> +        --with-long=*)                   NGX_WITH_LONG="$value"         ;;
+> +        --with-long-long=*)              NGX_WITH_LONG_LONG="$value"    ;;
+> +        --with-ptr-size=*)               NGX_WITH_PTR_SIZE="$value"     ;;
+> +        --with-sig-atomic-t=*)           NGX_WITH_SIG_ATOMIC_T="$value" ;;
+> +        --with-size-t=*)                 NGX_WITH_SIZE_T="$value"       ;;
+> +        --with-off-t=*)                  NGX_WITH_OFF_T="$value"        ;;
+> +        --with-time-t=*)                 NGX_WITH_TIME_T="$value"       ;;
+> +        --with-sys-nerr=*)               NGX_WITH_NGX_SYS_NERR="$value" ;;
+> +        --with-endian=*)                 NGX_WITH_ENDIAN="$value"       ;;
+> +
+>          *)
+>              echo "$0: error: invalid option \"$option\""
+>              exit 1
+> @@ -472,6 +484,17 @@
+>  
+>    --with-debug                       enable debug logging
+>  
+> +  --with-int=VALUE                   force int size
+> +  --with-long=VALUE                  force long size
+> +  --with-long-long=VALUE             force long long size
+> +  --with-ptr-size=VALUE              force pointer size
+> +  --with-sig-atomic-t=VALUE          force sig_atomic_t size
+> +  --with-size-t=VALUE                force size_t size
+> +  --with-off-t=VALUE                 force off_t size
+> +  --with-time-t=VALUE                force time_t size
+> +  --with-sys-nerr=VALUE              force sys_nerr value
+> +  --with-endian=VALUE                force system endianess
+> +
+>  END
+>  
+>      exit 1
+> @@ -493,6 +516,8 @@
+>  
+>  if [ ".$NGX_PLATFORM" = ".win32" ]; then
+>      NGX_WINE=$WINE
+> +elif [ ! -z "$NGX_PLATFORM" ]; then
+> +    NGX_CROSS_COMPILE="yes"
+>  fi
+>  
+>  
+> diff -Naur nginx-1.7.4.orig/auto/types/sizeof nginx-1.7.4/auto/types/sizeof
+> --- nginx-1.7.4.orig/auto/types/sizeof	2014-08-25 22:50:58.961186470 +0100
+> +++ nginx-1.7.4/auto/types/sizeof	2014-08-25 22:54:10.785324255 +0100
+> @@ -12,9 +12,12 @@
+>  
+>  END
+>  
+> -ngx_size=
+> +ngx_size=$(eval "echo \$NGX_WITH_${ngx_param}")
+>  
+> -cat << END > $NGX_AUTOTEST.c
+> +if [ ".$ngx_size" != "." ]; then
+> +    echo " $ngx_size bytes"
+> +else
+> +    cat << END > $NGX_AUTOTEST.c
+>  
+>  #include <sys/types.h>
+>  #include <sys/time.h>
+> @@ -33,19 +36,20 @@
+>  END
+>  
+>  
+> -ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
+> -          -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
+> +    ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
+> +              -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
+>  
+> -eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
+> +    eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
+>  
+>  
+> -if [ -x $NGX_AUTOTEST ]; then
+> -    ngx_size=`$NGX_AUTOTEST`
+> -    echo " $ngx_size bytes"
+> -fi
+> +    if [ -x $NGX_AUTOTEST ]; then
+> +        ngx_size=`$NGX_AUTOTEST`
+> +        echo " $ngx_size bytes"
+> +    fi
+>  
+>  
+> -rm -rf $NGX_AUTOTEST*
+> +    rm -rf $NGX_AUTOTEST*
+> +fi
+>  
+>  
+>  case $ngx_size in
+> diff -Naur nginx-1.7.4.orig/auto/unix nginx-1.7.4/auto/unix
+> --- nginx-1.7.4.orig/auto/unix	2014-08-25 22:50:58.954186575 +0100
+> +++ nginx-1.7.4/auto/unix	2014-08-25 22:52:04.520208607 +0100
+> @@ -460,13 +460,13 @@
+>  
+>  # C types
+>  
+> -ngx_type="int"; . auto/types/sizeof
+> +ngx_type="int"; ngx_param="INT"; . auto/types/sizeof
+>  
+> -ngx_type="long"; . auto/types/sizeof
+> +ngx_type="long"; ngx_param="LONG"; . auto/types/sizeof
+>  
+> -ngx_type="long long"; . auto/types/sizeof
+> +ngx_type="long long"; ngx_param="LONG_LONG"; . auto/types/sizeof
+>  
+> -ngx_type="void *"; . auto/types/sizeof; ngx_ptr_size=$ngx_size
+> +ngx_type="void *"; ngx_param="PTR_SIZE"; . auto/types/sizeof; ngx_ptr_size=$ngx_size
+>  ngx_param=NGX_PTR_SIZE; ngx_value=$ngx_size; . auto/types/value
+>  
+>  
+> @@ -483,7 +483,7 @@
+>  
+>  ngx_type="uint64_t"; ngx_types="u_int64_t"; . auto/types/typedef
+>  
+> -ngx_type="sig_atomic_t"; ngx_types="int"; . auto/types/typedef
+> +ngx_type="sig_atomic_t"; ngx_param="SIG_ATOMIC_T"; ngx_types="int"; . auto/types/typedef
+>  . auto/types/sizeof
+>  ngx_param=NGX_SIG_ATOMIC_T_SIZE; ngx_value=$ngx_size; . auto/types/value
+>  
+> @@ -499,15 +499,15 @@
+>  
+>  . auto/endianness
+>  
+> -ngx_type="size_t"; . auto/types/sizeof
+> +ngx_type="size_t"; ngx_param="SIZE_T"; . auto/types/sizeof
+>  ngx_param=NGX_MAX_SIZE_T_VALUE; ngx_value=$ngx_max_value; . auto/types/value
+>  ngx_param=NGX_SIZE_T_LEN; ngx_value=$ngx_max_len; . auto/types/value
+>  
+> -ngx_type="off_t"; . auto/types/sizeof
+> +ngx_type="off_t"; ngx_param="OFF_T"; . auto/types/sizeof
+>  ngx_param=NGX_MAX_OFF_T_VALUE; ngx_value=$ngx_max_value; . auto/types/value
+>  ngx_param=NGX_OFF_T_LEN; ngx_value=$ngx_max_len; . auto/types/value
+>  
+> -ngx_type="time_t"; . auto/types/sizeof
+> +ngx_type="time_t"; ngx_param="TIME_T"; . auto/types/sizeof
+>  ngx_param=NGX_TIME_T_SIZE; ngx_value=$ngx_size; . auto/types/value
+>  ngx_param=NGX_TIME_T_LEN; ngx_value=$ngx_max_len; . auto/types/value
+>  
 
-Cheers,
+> --- auto/endianness.orig	2014-08-26 23:43:47.590339891 +0100
+> +++ auto/endianness	2014-08-26 23:44:02.915106075 +0100
+> @@ -8,7 +8,13 @@
+>  echo "checking for system byte ordering" >> $NGX_ERR
+>  
+>  
+> -cat << END > $NGX_AUTOTEST.c
+> +if [ ".$NGX_WITH_ENDIAN" = ".little" ]; then
+> +    echo " little endian"
+> +    have=NGX_HAVE_LITTLE_ENDIAN . auto/have
+> +elif [ ".$NGX_WITH_ENDIAN" = ".big" ]; then
+> +    echo " big endian"
+> +else
+> +    cat << END > $NGX_AUTOTEST.c
+>  
+>  int main() {
+>      int i = 0x11223344;
+> @@ -21,25 +27,26 @@
+>  
+>  END
+>  
+> -ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
+> -          -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
+> +    ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
+> +              -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
+>  
+> -eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
+> +    eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
+>  
+> -if [ -x $NGX_AUTOTEST ]; then
+> -    if $NGX_AUTOTEST >/dev/null 2>&1; then
+> -        echo " little endian"
+> -        have=NGX_HAVE_LITTLE_ENDIAN . auto/have
+> -    else
+> -        echo " big endian"
+> -    fi
+> +    if [ -x $NGX_AUTOTEST ]; then
+> +        if $NGX_AUTOTEST >/dev/null 2>&1; then
+> +            echo " little endian"
+> +            have=NGX_HAVE_LITTLE_ENDIAN . auto/have
+> +        else
+> +            echo " big endian"
+> +        fi
+>  
+> -    rm -rf $NGX_AUTOTEST*
+> +        rm -rf $NGX_AUTOTEST*
+>  
+> -else
+> -    rm -rf $NGX_AUTOTEST*
+> +    else
+> +        rm -rf $NGX_AUTOTEST*
+>  
+> -    echo
+> -    echo "$0: error: cannot detect system byte ordering"
+> -    exit 1
+> +        echo
+> +        echo "$0: error: cannot detect system byte ordering"
+> +        exit 1
+> +    fi
+>  fi
 
-Richard
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
