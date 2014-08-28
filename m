@@ -1,37 +1,22 @@
-Return-Path: <chewi@aura-online.co.uk>
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
-	[66.111.4.26])
-	by mail.openembedded.org (Postfix) with ESMTP id BAC1F6AC85
+Return-Path: <pab@pabigot.com>
+X-Greylist: delayed 434 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 28 Aug 2014 12:13:42 UTC
+Received: from p3plsmtpa12-08.prod.phx3.secureserver.net
+	(p3plsmtpa12-08.prod.phx3.secureserver.net [68.178.252.237])
+	by mail.openembedded.org (Postfix) with ESMTP id F091B65D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 09:38:33 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by gateway2.nyi.internal (Postfix) with ESMTP id 37333204A5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 05:38:34 -0400 (EDT)
-Received: from frontend2 ([10.202.2.161])
-	by compute1.internal (MEProxy); Thu, 28 Aug 2014 05:38:34 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=
-	messagingengine.com; h=date:from:to:subject:message-id
-	:in-reply-to:references:mime-version:content-type
-	:content-transfer-encoding; s=smtpout; bh=QN4InXIW67tJfbTFP0aqxs
-	fNb+8=; b=Vfv0ahf1fuvH5j979fQOwotmca6oGuFeeDkfeOIuCJ+7QVlJho50Ve
-	7XBKlBk0Rx9V9iq0trfE56AQIkrhiXBgMMUK5kAUfRNzDNWTYTA1lrtCEVRGkqrM
-	xFElo4fdnLErb4kkAShFs34HlOBo3t7BeN5j50nenwr9LRbzzAAKQ=
-X-Sasl-enc: eSAycQe5KqygJ4AmV7QpVHElXIIpomw2ovqTb7diBbaX 1409218713
-Received: from red.yakaraplc.local (unknown [213.123.185.55])
-	by mail.messagingengine.com (Postfix) with ESMTPA id D6664680182
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 05:38:33 -0400 (EDT)
-Date: Thu, 28 Aug 2014 10:38:26 +0100
-From: James Le Cuirot <chewi@aura-online.co.uk>
+	Thu, 28 Aug 2014 12:13:42 +0000 (UTC)
+Received: from llc.pab ([66.41.60.82])
+	by p3plsmtpa12-08.prod.phx3.secureserver.net with 
+	id kC6Q1o0081mTNtu01C6WDu; Thu, 28 Aug 2014 05:06:30 -0700
+From: "Peter A. Bigot" <pab@pabigot.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140828103826.3b133eb0@red.yakaraplc.local>
-In-Reply-To: <20140828092944.GB16066@jama>
-References: <20140827223659.1fb55fb4@symphony.aura-online.co.uk>
-	<20140828074208.GG13139@haswell> <20140828092944.GB16066@jama>
-X-Mailer: Claws Mail 3.10.1 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-Subject: Re: [meta-webserver] nginx 1.7.4 cross-compiling patches
+Date: Thu, 28 Aug 2014 07:06:20 -0500
+Message-Id: <1409227581-20888-5-git-send-email-pab@pabigot.com>
+X-Mailer: git-send-email 1.8.5.5
+In-Reply-To: <1409227581-20888-1-git-send-email-pab@pabigot.com>
+References: <1409227581-20888-1-git-send-email-pab@pabigot.com>
+Subject: [meta-oe][PATCH 4/5] gpsd: add optional support for KPPS interface
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,36 +30,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 09:38:37 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Aug 2014 12:13:43 -0000
 
-On Thu, 28 Aug 2014 11:29:44 +0200
-Martin Jansa <martin.jansa@gmail.com> wrote:
+gpsd by default builds with PPS (pulse-per-second) support, but without
+kernel support to capture the edge of the pulse the accuracy is only
++/-5us.  Under Linux the pps-tools package installs the header required
+for the user-level API to the RFC 2783 KPPS interface.  If gpsd detects
+this header, it will use the API to improve accuracy to +/-1us.
 
-> On Thu, Aug 28, 2014 at 12:42:08AM -0700, Khem Raj wrote:
-> > On 14-08-27 22:36:59, James Le Cuirot wrote:  
-> > > Hello,
-> > > 
-> > > I was trying to cross-compile nginx 1.7.4 on Gentoo and found your
-> > > nginx-cross.patch. It almost applied, despite being prepared
-> > > against 1.0.11. I recreated it and everything worked except that
-> > > the --with-endian option is not actually effective. I have
-> > > attached the new nginx-cross.patch as well as a --with-endian
-> > > fix. Hope this helps. As I don't use OpenEmbedded, I'll leave
-> > > updating the nginx package to you.  
-> > 
-> > thanks for the patch. I hope it will appear in patchwork and can be
-> > picked by someone doing package upgrade  
-> 
-> It's not correctly picked by patchwork
-> http://patchwork.openembedded.org/patch/79247/
-> 
-> James: Please resend with git send-email as README suggests
-> http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+See: http://www.catb.org/gpsd/gpsd-time-service-howto.html#_enabling_pps
 
-Hi Martin. I was going to but I figured that wouldn't really make sense
-unless the package script was updated as well. If it were just merged
-as-is, it would break the package. Would you still like it submitted in
-this form anyway?
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+---
+ meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+index d12c7a8..1c2d9eb 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+@@ -20,6 +20,9 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+ SRC_URI[md5sum] = "fc5b03aae38b9b5b6880b31924d0ace3"
+ SRC_URI[sha256sum] = "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[kpps] = ",,pps-tools"
++
+ inherit scons update-rc.d python-dir pythonnative systemd
+ 
+ INITSCRIPT_NAME = "gpsd"
+-- 
+1.8.5.5
+
 
