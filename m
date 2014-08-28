@@ -1,41 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id AF5B97121A
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CC407710C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 14:27:50 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id m15so834841wgh.15
+	Thu, 28 Aug 2014 14:29:43 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id u57so834786wes.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Aug 2014 07:27:52 -0700 (PDT)
+	Thu, 28 Aug 2014 07:29:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=hNJ5kJUHfNW81aU96XjWizeZWPl5PVOz1V0suHhVy8U=;
-	b=gwy/P32FktzLoZNi+TkVaHFkjMLVVkOMZc4/Vn6Kxan3RPQJdEGsgyMDJm5yQAw/79
-	s96lffbeu4F/IdfTFXKHeDZCj4l7m3TXOuglcV99eReMndpIlY3vRrg+70FLN6j/drac
-	9nZKKMuV1YCBdrzHjwrUB+wrstzZGZa8Y4D8EKT8iRkHvNsAl33VTgvbSnb+PfrrLimE
-	o4k+VhFN1uIKij/dQuCyri3ZlmnYUfJxLeClpKjHWjpwfmxE57krsBbHbc+1SexIcnQU
-	f11u8kW5oqrRDTJzk06aS+09NIbvhkWWVkSd3BxJ/3CHkmvUvikH+f38Jk/oScw8wcxJ
-	ZT7A==
-X-Received: by 10.180.99.4 with SMTP id em4mr6686031wib.8.1409236070949;
-	Thu, 28 Aug 2014 07:27:50 -0700 (PDT)
+	bh=gJEr5J69HEpWud3uO5Q9y49bqGn22wa3l7WaffKXffw=;
+	b=KrE2wnNq2azS0ryXC/31mXwWsbitRyUNHGPEqp14o4WYGHQzXjKd1gc8E16SpsMeog
+	/7Vn17P5dT0NAGoYv2xpOFtDOzad+BULIh1XDEnaTvqxGi7NJRFc8tnMoU5wm6z/BTo6
+	+PR5yiYqUF4fzXuC/qzJTma26IUY0LvvGaJklekwB5/ifWXJNSuV42wOq+HiTeMrRSp3
+	VrWg+ZMn4VDf/J2ICehVL96nnyoEhq3mLCuGeoZ2WRalo+0O9hzX+adA751CYIStj62Q
+	cMeJGyly17T2zoP9q9H81R7mFBbXc+BGmY/qtsKex/f0lqb6ehN83x1y3axngUpZL8k8
+	YniA==
+X-Received: by 10.194.118.201 with SMTP id ko9mr5669518wjb.26.1409236181121;
+	Thu, 28 Aug 2014 07:29:41 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	s3sm36242713wis.3.2014.08.28.07.27.49
+	au4sm10417712wjc.15.2014.08.28.07.29.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 28 Aug 2014 07:27:49 -0700 (PDT)
+	Thu, 28 Aug 2014 07:29:40 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 28 Aug 2014 16:27:59 +0200
+Date: Thu, 28 Aug 2014 16:29:50 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140828142759.GD16066@jama>
-References: <20140827223659.1fb55fb4@symphony.aura-online.co.uk>
-	<20140828074208.GG13139@haswell> <20140828092944.GB16066@jama>
-	<20140828103826.3b133eb0@red.yakaraplc.local>
+Message-ID: <20140828142950.GE16066@jama>
+References: <1409227581-20888-1-git-send-email-pab@pabigot.com>
+	<1409227581-20888-5-git-send-email-pab@pabigot.com>
 MIME-Version: 1.0
-In-Reply-To: <20140828103826.3b133eb0@red.yakaraplc.local>
+In-Reply-To: <1409227581-20888-5-git-send-email-pab@pabigot.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-webserver] nginx 1.7.4 cross-compiling patches
+Subject: Re: [meta-oe][PATCH 4/5] gpsd: add optional support for KPPS interface
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,62 +49,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 14:27:54 -0000
-X-Groupsio-MsgNum: 51898
+X-List-Received-Date: Thu, 28 Aug 2014 14:29:47 -0000
+X-Groupsio-MsgNum: 51899
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zS7rBR6csb6tI2e1"
+	protocol="application/pgp-signature"; boundary="C94crkcyjafcjHxo"
 Content-Disposition: inline
 
---zS7rBR6csb6tI2e1
+--C94crkcyjafcjHxo
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 28, 2014 at 10:38:26AM +0100, James Le Cuirot wrote:
-> On Thu, 28 Aug 2014 11:29:44 +0200
-> Martin Jansa <martin.jansa@gmail.com> wrote:
+On Thu, Aug 28, 2014 at 07:06:20AM -0500, Peter A. Bigot wrote:
+> gpsd by default builds with PPS (pulse-per-second) support, but without
+> kernel support to capture the edge of the pulse the accuracy is only
+> +/-5us.  Under Linux the pps-tools package installs the header required
+> for the user-level API to the RFC 2783 KPPS interface.  If gpsd detects
+> this header, it will use the API to improve accuracy to +/-1us.
 >=20
-> > On Thu, Aug 28, 2014 at 12:42:08AM -0700, Khem Raj wrote:
-> > > On 14-08-27 22:36:59, James Le Cuirot wrote: =20
-> > > > Hello,
-> > > >=20
-> > > > I was trying to cross-compile nginx 1.7.4 on Gentoo and found your
-> > > > nginx-cross.patch. It almost applied, despite being prepared
-> > > > against 1.0.11. I recreated it and everything worked except that
-> > > > the --with-endian option is not actually effective. I have
-> > > > attached the new nginx-cross.patch as well as a --with-endian
-> > > > fix. Hope this helps. As I don't use OpenEmbedded, I'll leave
-> > > > updating the nginx package to you. =20
-> > >=20
-> > > thanks for the patch. I hope it will appear in patchwork and can be
-> > > picked by someone doing package upgrade =20
-> >=20
-> > It's not correctly picked by patchwork
-> > http://patchwork.openembedded.org/patch/79247/
-> >=20
-> > James: Please resend with git send-email as README suggests
-> > http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+> See: http://www.catb.org/gpsd/gpsd-time-service-howto.html#_enabling_pps
 >=20
-> Hi Martin. I was going to but I figured that wouldn't really make sense
-> unless the package script was updated as well. If it were just merged
-> as-is, it would break the package. Would you still like it submitted in
-> this form anyway?
+> Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+> ---
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/recip=
+es-navigation/gpsd/gpsd_3.10.bb
+> index d12c7a8..1c2d9eb 100644
+> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+> @@ -20,6 +20,9 @@ SRC_URI =3D "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz=
+ \
+>  SRC_URI[md5sum] =3D "fc5b03aae38b9b5b6880b31924d0ace3"
+>  SRC_URI[sha256sum] =3D "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec40=
+7dcbf2f70b854320"
+> =20
+> +PACKAGECONFIG ??=3D ""
+> +PACKAGECONFIG[kpps] =3D ",,pps-tools"
 
-Please submit it together with upgrade from 1.4.4. to newer 1.7.4 version.
+Both recipes need some way of explicit disable of pps-tools, so that the
+result is the same when building gpsd or ntp before or after pps-tools.
+
+>  inherit scons update-rc.d python-dir pythonnative systemd
+> =20
+>  INITSCRIPT_NAME =3D "gpsd"
+> --=20
+> 1.8.5.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---zS7rBR6csb6tI2e1
+--C94crkcyjafcjHxo
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlP/PG8ACgkQN1Ujt2V2gBxVlwCglMFfK4rVinPNoeK/2V7ugQlf
-GBIAn2IuXWmyC/o1A0Q3kZ7XlMj6nvKh
-=cYL5
+iEYEARECAAYFAlP/PN4ACgkQN1Ujt2V2gBy+qACeIxPWyFxbdPa9K+SdCOgM0fLU
+F9AAnR78DySuh5KNe2whX+fzxb7ACEkR
+=CquV
 -----END PGP SIGNATURE-----
 
---zS7rBR6csb6tI2e1--
+--C94crkcyjafcjHxo--
