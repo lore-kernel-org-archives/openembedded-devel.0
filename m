@@ -1,28 +1,34 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 294A76FE64;
-	Thu, 28 Aug 2014 22:51:34 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	s7SMpWVO012548; Thu, 28 Aug 2014 23:51:32 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id AetZWRoOni8S; Thu, 28 Aug 2014 23:51:32 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	s7SMpTxA012545
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Thu, 28 Aug 2014 23:51:31 +0100
-Message-ID: <1409266291.29296.147.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Aug 2014 23:51:31 +0100
-In-Reply-To: <20140828064051.GA13139@haswell>
-References: <20140828064051.GA13139@haswell>
-X-Mailer: Evolution 3.10.4-0ubuntu2 
-Mime-Version: 1.0
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
+	[209.85.213.173])
+	by mail.openembedded.org (Postfix) with ESMTP id CAC1A71044;
+	Fri, 29 Aug 2014 00:41:25 +0000 (UTC)
+Received: by mail-ig0-f173.google.com with SMTP id h18so8910466igc.12
+	for <multiple recipients>; Thu, 28 Aug 2014 17:41:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=IIJZjsndcDQpfWH0gLlAKI3MstS51hC0vYPN+zXJMjM=;
+	b=fYie9kR1MBkgEmgWjGKm0H+iePdFrCc4DHe54aGsFUbxXzKHc+UYDEPjI54nOraG21
+	gaCltTPNmN6wM4DcwXOtZEGrHjj5M94hTElkFcxobjlnErCiV5tZQhWAwux3sYXnvXK+
+	nRgjR+LtWbJlnuZUj/F7XPyoITcwtKvlMefjcvsTnvRJDDjJjVr1Lz2IQ9p/uKR8TBqk
+	rEXrW31hCcQikARDqfHF1N4kC0Lf8svzV65wrA9dqoJgLiisFGIySSpRAkYxOXEuohZr
+	ae9nxchAnrEe3DIeVQXvAl0kVle6AOi7eMzjXB2+dnWYYZURTn7RJsp9ByZrSjgdJTzU
+	blOw==
+X-Received: by 10.42.26.74 with SMTP id e10mr7939384icc.25.1409272885907; Thu,
+	28 Aug 2014 17:41:25 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.50.102.67 with HTTP; Thu, 28 Aug 2014 17:40:55 -0700 (PDT)
+In-Reply-To: <1409261727.29296.144.camel@ted>
+References: <20140828064051.GA13139@haswell> <1409261727.29296.144.camel@ted>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 28 Aug 2014 17:40:55 -0700
+Message-ID: <CAMKF1sqn2Bj--Mke7SA-wONxeaRYcCa_JZ5EGkmo=phdf3EoBg@mail.gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] [RFT] Moving on from eglibc to glibc 2.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -37,39 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Aug 2014 22:51:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Aug 2014 00:41:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, 2014-08-27 at 23:41 -0700, Khem Raj wrote:
-> Hi All
-> 
-> As we all know eglibc has been merged back into glibc and 2.19 was the
-> last release, here I have put together the recipes for upcoming glibc
-> 2.20 release and removed eglibc 2.19 in favor of move.
-> 
-> I also thought about leaving eglibc in there but then eglibc and glibc
-> were pretty much same as they always have been that it would be an
-> incremental change with lot more patches this time.
-> 
-> The tree is here
-> 
-> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/eglibc-to-glibc-2.20
-> 
-> This has not recieved much testing yet and I am looking out for helping
-> hands here, so try it out in your buid environments and machines of
-> interest and report back on issues.
+On Thu, Aug 28, 2014 at 2:35 PM, Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+> On Wed, 2014-08-27 at 23:41 -0700, Khem Raj wrote:
+>> As we all know eglibc has been merged back into glibc and 2.19 was the
+>> last release, here I have put together the recipes for upcoming glibc
+>> 2.20 release and removed eglibc 2.19 in favor of move.
+>>
+>> I also thought about leaving eglibc in there but then eglibc and glibc
+>> were pretty much same as they always have been that it would be an
+>> incremental change with lot more patches this time.
+>>
+>> The tree is here
+>>
+>> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/eglibc-to-glibc-2.20
+>>
+>> This has not recieved much testing yet and I am looking out for helping
+>> hands here, so try it out in your buid environments and machines of
+>> interest and report back on issues.
+>
+> The one I've seen so far looks like a patch wasn't updated:
+>
+> http://errors.yoctoproject.org/Errors/Search/Details/3783/3/10/1fc811ecd57be21ae6ab78e15204ffa76494c6b8
+>
 
-We're also seeing:
+Yes.
+have forgotten the squash when I updated patches earlier today Fixed
+and pushed now.
 
-https://autobuilder.yoctoproject.org/main/builders/build-appliance/builds/15/steps/BuildImages_1/logs/stdio
-
-which turns out to be triggered by the libc change (I confirmed on a
-local build). I haven't looked into why. There is also a similar issue
-from the synaptics driver.
-
-Cheers,
-
-Richard
-
+> Cheers,
+>
+> Richard
+>
+>
 
