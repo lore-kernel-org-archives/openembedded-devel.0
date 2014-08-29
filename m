@@ -1,35 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BCB1711D6;
-	Fri, 29 Aug 2014 00:42:00 +0000 (UTC)
-Received: by mail-ie0-f179.google.com with SMTP id tr6so1946440ieb.38
-	for <multiple recipients>; Thu, 28 Aug 2014 17:42:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=19juPVEq+LL7m2sakrAvCRZcl88I5NVWteUPmFrtG2o=;
-	b=B3j/fNTWBsI0kiTsc2QexEHur0h5MQAXTowsVuh6RQamPADPR4cej172FMueLKgL2t
-	ta31Is5aWCuJ2w1TatX1iq5aV8ueqdmTUQGv9Olz/r9BKM1LfCurbR2DU0j6PVybuoFp
-	QbO8Q1EyeY1J4ryAvQWYTdK/nrOR5n3StgAGps2pPiGtkvSgdqFjIAy4JVJrhokSWiUz
-	He9pov8bRN9CcjhZqN/UsKUSDDuddM1bTcPJy50DX0cg11Img1VZLnXXRELlDa4NH8Tp
-	r9XQQbc29DVWIgXF0LauKJ0YZawQM2XMjQfxjppeHSG7mIEjYjRSwpwDLNzdcq7Budlf
-	Z3LQ==
-X-Received: by 10.50.85.74 with SMTP id f10mr586910igz.4.1409272922233; Thu,
-	28 Aug 2014 17:42:02 -0700 (PDT)
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C635B7113B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Aug 2014 01:02:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s7T1265A001242
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 28 Aug 2014 18:02:06 -0700 (PDT)
+Received: from [128.224.162.141] (128.224.162.141) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 28 Aug 2014 18:02:05 -0700
+Message-ID: <53FFD113.7050307@windriver.com>
+Date: Fri, 29 Aug 2014 09:02:11 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-Received: by 10.50.102.67 with HTTP; Thu, 28 Aug 2014 17:41:32 -0700 (PDT)
-In-Reply-To: <1409266291.29296.147.camel@ted>
-References: <20140828064051.GA13139@haswell> <1409266291.29296.147.camel@ted>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Aug 2014 17:41:32 -0700
-Message-ID: <CAMKF1spz2KoO6NDSkZwh=V=pkyYi6e7-G0fpka5P2ifbjnNn6w@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] Moving on from eglibc to glibc 2.20
+To: "Peter A. Bigot" <pab@pabigot.com>
+References: <1407986086-29096-1-git-send-email-rongqing.li@windriver.com>
+	<53FDC33C.7060208@pabigot.com>
+In-Reply-To: <53FDC33C.7060208@pabigot.com>
+Cc: xufeng.zhang@windriver.com, openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 1/2] ntp: Disable debugging by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,19 +36,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Aug 2014 00:42:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 29 Aug 2014 01:02:10 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Aug 28, 2014 at 3:51 PM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> We're also seeing:
+
+
+On 08/27/2014 07:38 PM, Peter A. Bigot wrote:
+> On 08/13/2014 10:14 PM, rongqing.li@windriver.com wrote:
+>> From: Xufeng Zhang<xufeng.zhang@windriver.com>
+>>
+>> There is a problem in configure.ac file that whether or not
+>> '--enable-debugging' is specified in configure cmdline, debugging
+>> is always enabled.
 >
-> https://autobuilder.yoctoproject.org/main/builders/build-appliance/builds/15/steps/BuildImages_1/logs/stdio
+>  From my testing this is incorrect.  Both --disable-debugging and
+> --enable-debugging=no correctly override the upstream decision to enable
+> debugging by default.
 >
-> which turns out to be triggered by the libc change (I confirmed on a
-> local build). I haven't looked into why. There is also a similar issue
-> from the synaptics driver.
+>> We should disable ntp debugging by default.
+>
+> Could we have more of an explanation why this is a good thing?  It
+> doesn't seem relevant to the security patch it accompanied.
+>
+> I've got a patch I'm validating that will revert this fix and use
+> PACKAGECONFIG to control whether debugging is supported. Personally, I'd
+> rather have the default be to keep debugging enabled.
+>
+> Upstream ntp enables debugging support by default, and OE's build has
+> never disabled it before.  ntp is a tricky beast and is very terse about
+> what it's doing.  Having the ability to make it explain why (for
+> example) it's disabling a reference clock is very useful in
+> diagnostics.  Disabling debugging during the build makes it impossible
+> to get that information out of an installed system.
 >
 
-reproduced. will apprise as I have some fix.
+Ok, Please send your patch out, thanks
+
+-Roy
+
+
+> Peter
+>
+>>
+>> Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+>> ---
+>>   .../ntp/files/ntp-disable-debugging.patch          |   23
+>> ++++++++++++++++++++
+>>   meta-networking/recipes-support/ntp/ntp.inc        |    1 +
+>>   2 files changed, 24 insertions(+)
+>>   create mode 100644
+>> meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch
+>>
+>> diff --git
+>> a/meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch b/meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch
+>>
+>> new file mode 100644
+>> index 0000000..3c94d8d
+>> --- /dev/null
+>> +++
+>> b/meta-networking/recipes-support/ntp/files/ntp-disable-debugging.patch
+>> @@ -0,0 +1,23 @@
+>> +set ntp_ok to no if ntp debugging is not enabled.
+>> +
+>> +Upstream-status: Pending
+>> +
+>> +There is a problem in configure.ac file that whether or not
+>> +'--enable-debugging' is specified in configure cmdline, debugging
+>> +is always enabled.
+>> +We should disable ntp debugging by default.
+>> +
+>> +Signed-off-by: Xufeng Zhang<xufeng.zhang@windriver.com>
+>> +
+>> +---
+>> +--- a/configure.ac
+>> ++++ b/configure.ac
+>> +@@ -2458,7 +2458,7 @@
+>> +         [+ include ntpd debugging code]
+>> +     )],
+>> +     [ntp_ok=$enableval],
+>> +-    [ntp_ok=yes]
+>> ++    [ntp_ok=no]
+>> + )
+>> + case "$ntp_ok" in
+>> +  yes)
+>> diff --git a/meta-networking/recipes-support/ntp/ntp.inc
+>> b/meta-networking/recipes-support/ntp/ntp.inc
+>> index 49f9901..2c8f488 100644
+>> --- a/meta-networking/recipes-support/ntp/ntp.inc
+>> +++ b/meta-networking/recipes-support/ntp/ntp.inc
+>> @@ -23,6 +23,7 @@ SRC_URI
+>> ="http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+>>              file://sntp.service \
+>>              file://sntp \
+>>              file://ntpd.list \
+>> +           file://ntp-disable-debugging.patch \
+>>   "
+>>   inherit autotools update-rc.d useradd systemd
+>
+>
+>
+
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
