@@ -1,33 +1,40 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F74B65D56;
-	Fri, 29 Aug 2014 12:20:50 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	s7TCKnqg032563; Fri, 29 Aug 2014 13:20:49 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id GLf_SseQnCyK; Fri, 29 Aug 2014 13:20:49 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	s7TCKilf032560
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NOT);
-	Fri, 29 Aug 2014 13:20:45 +0100
-Message-ID: <1409314846.29296.171.camel@ted>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 29 Aug 2014 13:20:46 +0100
-In-Reply-To: <CAMKF1spj67i2i_50m=oTUpS3x2J=de0UxGf70zLhn-a7c4M3QA@mail.gmail.com>
-References: <20140828064051.GA13139@haswell> <1409266291.29296.147.camel@ted>
-	<CAMKF1spz2KoO6NDSkZwh=V=pkyYi6e7-G0fpka5P2ifbjnNn6w@mail.gmail.com>
-	<CAMKF1spj67i2i_50m=oTUpS3x2J=de0UxGf70zLhn-a7c4M3QA@mail.gmail.com>
-X-Mailer: Evolution 3.10.4-0ubuntu2 
-Mime-Version: 1.0
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] Moving on from eglibc to glibc 2.20
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
+	[209.85.192.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 87B8560E49
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Aug 2014 18:11:23 +0000 (UTC)
+Received: by mail-qg0-f54.google.com with SMTP id q107so2651887qgd.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Aug 2014 11:11:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=IJ5hdCunDjALUDJUEeojvxxnfaIpEfDpGe6tiBu7+Qc=;
+	b=eIeeYs/MCZeTkV88qvLaB/G0yDmFK4beWLmSyhQazkIl1zF5tGZyAtS9bxhgjVNVyW
+	tyGLF19kAzbnDNCytKjxqEinJrQD0wT8JdXsLk7OkiE94bEo2ftoRF/qxyUJV14VLctX
+	jewawseGLgqz3KpU3bC//i79slG70ug6/HYVzlaqPKymcKJADKvXaKXpjGh8zP8aRc8h
+	HiyJOq4nTCwxttSQtDcOI5gh0miWRf+rbzthjuzw5PIjguRdddCF7Dsn7LfOUUAjSQfG
+	hByvcPhtfC4Aof4KxHv9QNbKCpctMm29E3PcZ/Xb6UaAF5BTr2m1Z7CishyHIH0c6nFB
+	ohVw==
+MIME-Version: 1.0
+X-Received: by 10.224.93.11 with SMTP id t11mr20343434qam.102.1409335885005;
+	Fri, 29 Aug 2014 11:11:25 -0700 (PDT)
+Received: by 10.140.88.233 with HTTP; Fri, 29 Aug 2014 11:11:24 -0700 (PDT)
+In-Reply-To: <53FF84DE.7040402@gmail.com>
+References: <1408914239-11562-1-git-send-email-otavio@ossystems.com.br>
+	<CAMKF1sqRuJ2Ncy=FR09ir4N0teHWvN3CfxGQR97niSDFAcHHzQ@mail.gmail.com>
+	<CAP9ODKoX8jUYPoZDqF4WYK45p3tYT8g-MUsox6=frigEY_Eo+Q@mail.gmail.com>
+	<CAP9ODKowYPXHShXiBVTG=2_r1_qm=E0gXRAtXDTUUYqD7vmmNQ@mail.gmail.com>
+	<CAP9ODKrzJAW+NXr7LmzQ0+CnmJE_pc5786Xq64AMqeRN_X6=kg@mail.gmail.com>
+	<53FF84DE.7040402@gmail.com>
+Date: Fri, 29 Aug 2014 14:11:24 -0400
+Message-ID: <CAOd_LFyq4QeFRViJsxYtST3fTWaPAH5=fmbFjx1b58bCxkitQA@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][for-daisy][PATCH] php: Fix native build due mistakenly linking against host's iconv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,26 +48,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Aug 2014 12:20:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Aug 2014 18:11:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, 2014-08-28 at 18:46 -0700, Khem Raj wrote:
-> On Thu, Aug 28, 2014 at 5:41 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > reproduced. will apprise as I have some fix.
-> 
-> OK pushed another patch to the contrib tree that should take care of both
-> xf86-input-synaptics xf86-input-vmmouse
+Acked-by: Cliff Brake <cbrake@bec-systems.com>
 
-Also, meta-fsl-ppc fails:
+On Thu, Aug 28, 2014 at 3:37 PM, akuster808 <akuster808@gmail.com> wrote:
+>  Acked-by: Armin Kuster <akuster808@gmail.com>
+>
+>
+> might have acked the wrong one.
+>
+>
+>
+>
+> On 08/28/2014 06:54 AM, Otavio Salvador wrote:
+>>
+>> Martin,
+>>
+>> On Wed, Aug 27, 2014 at 11:04 PM, Otavio Salvador
+>> <otavio@ossystems.com.br> wrote:
+>>>
+>>> On Mon, Aug 25, 2014 at 10:15 AM, Otavio Salvador
+>>> <otavio@ossystems.com.br> wrote:
+>>>>
+>>>> On Sun, Aug 24, 2014 at 8:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>>>>
+>>>>> On Sun, Aug 24, 2014 at 2:03 PM, Otavio Salvador
+>>>>> <otavio@ossystems.com.br> wrote:
+>>>>>>
+>>>>>> The configure script has mistakenly choose to enable iconv support,
+>>>>>> due host to provide it, adding '/usr/lib' to the linking flags and
+>>>>>> failing as:
+>>>>>>
+>>>>>> ,----[ Linking error while testing 'fork' support ]
+>>>>>> | conftest.c:268: warning: conflicting types for built-in function
+>>>>>> 'fork'
+>>>>>> | .../build/tmp/sysroots/x86_64-linux/usr/lib/libxml2.so:
+>>>>>> |     undefined reference to `gzopen64@ZLIB_1.2.3.3'
+>>>>>> | collect2: ld returned 1 exit status
+>>>>>> `----
+>>>>>>
+>>>>>> This patch disables iconv support for native builds fixing the error.
+>>>>>>
+>>>>>
+>>>>> the patch subject is confusing. enabling iconv is not mistake but its
+>>>>> probed and if found its used. in this case libz against which libxml2
+>>>>> is linked is not used here and that ends up in error.
+>>>>>
+>>>>> Can you try to add --with-iconv-dir=${STAGING_LIBDIR_NATIVE}
+>>>>> and see if it helps ?
+>>>>
+>>>>
+>>>> The native does not depends on virtual/iconv. So the natural thing is
+>>>> to disable it.
+>>>
+>>>
+>>> Hey guys, can you review this one for backporting?
+>>
+>>
+>> This is the Daisy backport one.
+>>
+>
 
-https://autobuilder.yoctoproject.org/main/builders/nightly-fsl-ppc/builds/17/steps/BuildImages/logs/stdio
-
-with a do_compile glibc failure.
-
-Cheers,
-
-Richard
 
 
+-- 
+=================
+http://bec-systems.com
 
