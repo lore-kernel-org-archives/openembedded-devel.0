@@ -1,38 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F7EE70E45;
-	Sat, 30 Aug 2014 00:01:35 +0000 (UTC)
-Received: by mail-ie0-f176.google.com with SMTP id x19so3649207ier.35
-	for <multiple recipients>; Fri, 29 Aug 2014 17:01:36 -0700 (PDT)
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
+	[209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 45D426ACE5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Aug 2014 02:05:29 +0000 (UTC)
+Received: by mail-lb0-f178.google.com with SMTP id v6so3440219lbi.23
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Aug 2014 19:05:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=wf/JPXUYmXTxfjNg6Muu2mQ7XuUIVT5sJdllMWRzogU=;
-	b=V+t07lrpQS65P6RO/oNVlPQd65mTbBdVOZOQ9NQASMw0UG8XE0CBZz2mUCKF2DHdcw
-	wBMZHo2et5NDQFVEbvYKogxUECOgA766Hs4mReh8/+05B929g1lZggvj/Qt8MXU58KFD
-	4WquRKTZce7EGqRoWAhjMshl5frmpJ9PC/ATfuGW0rp5VPLtKXetItdaA/U1QoqfeL9S
-	JnY9XBnz/tq0F7cwE283knu015i60DXrpLF3EH5/CcVpnJ5jnnrsareDKdSGlTecDyaQ
-	uaepIp9n1BSy9NKbsdKopavMGEiThuYMTLEChFmZIKsH+7MFAIQG/nOpA9yiHQxzB+4k
-	5/ig==
-X-Received: by 10.50.21.3 with SMTP id r3mr7904616ige.13.1409356896574; Fri,
-	29 Aug 2014 17:01:36 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=+rstowqvPbS6TFVPiki/kgq38KbftCUoqbYbeBG01eo=;
+	b=jOGWjd+pVb8ATgR3T3N/mRyinHGEN0NF/ChFA0D8qAdaCtweROO+zCHmjyFk1Piw7T
+	vVLWZH9HC3RBnCsUO2kg4NSPizvZJZ3hLDOo/vFOClRdRiUbZ5drgOJUePWjtXaoZef5
+	piK5Ntb4oHg918qok/90xgkGzGZAM+wsk011lca1APZxJ5uRSMzeZhpyxPuMbOzRw0gp
+	Jb/aUqGXg46VVGpP6N4vHxeg/PFs2mauYYwmC17maOkpQzPOG6/mGVnWzioPJEbNtkjW
+	MLLzMRRWsTHGGBUVYQQs002nSl0abLvjm1kke2x/MLclOeQhH5kHfTLhwF75agwFey0m
+	2o1g==
 MIME-Version: 1.0
-Received: by 10.50.102.67 with HTTP; Fri, 29 Aug 2014 17:01:06 -0700 (PDT)
-In-Reply-To: <1409308755.29296.148.camel@ted>
-References: <20140828064051.GA13139@haswell> <1409266291.29296.147.camel@ted>
-	<CAMKF1spz2KoO6NDSkZwh=V=pkyYi6e7-G0fpka5P2ifbjnNn6w@mail.gmail.com>
-	<CAMKF1spj67i2i_50m=oTUpS3x2J=de0UxGf70zLhn-a7c4M3QA@mail.gmail.com>
-	<1409308755.29296.148.camel@ted>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 29 Aug 2014 17:01:06 -0700
-Message-ID: <CAMKF1sq4NwaFhZCXysdJ53G=3UY2CnHgKZmgpG7H-X=vhG0W9w@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] Moving on from eglibc to glibc 2.20
+X-Received: by 10.113.4.132 with SMTP id ce4mr13886842lbd.2.1409364330029;
+	Fri, 29 Aug 2014 19:05:30 -0700 (PDT)
+Received: by 10.25.209.81 with HTTP; Fri, 29 Aug 2014 19:05:29 -0700 (PDT)
+In-Reply-To: <CAK18fxEBqgkznp0dBMeP+6X=VwMzzR4RgZ6Jc6F=d3o9JqousA@mail.gmail.com>
+References: <1408903501-5728-1-git-send-email-andrei@gherzan.ro>
+	<20140827120857.GD20524@jama>
+	<CAK18fxEBqgkznp0dBMeP+6X=VwMzzR4RgZ6Jc6F=d3o9JqousA@mail.gmail.com>
+Date: Fri, 29 Aug 2014 19:05:29 -0700
+Message-ID: <CANx9H-C0O1WzvJ7NyRO8W73rQfr2N53NYycsBpFYJ1_=xnehjg@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-multimedia][PATCH V2 1/1] xbmc: Update to v13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,31 +44,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Aug 2014 00:01:35 -0000
+X-List-Received-Date: Sat, 30 Aug 2014 02:05:37 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Aug 29, 2014 at 3:39 AM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> On Thu, 2014-08-28 at 18:46 -0700, Khem Raj wrote:
->> On Thu, Aug 28, 2014 at 5:41 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> > reproduced. will apprise as I have some fix.
->>
->> OK pushed another patch to the contrib tree that should take care of both
->> xf86-input-synaptics xf86-input-vmmouse
+On Fri, Aug 29, 2014 at 4:06 PM, Andrei Gherzan <andrei@gherzan.ro> wrote:
+
+> On Wed, Aug 27, 2014 at 2:08 PM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
 >
-> Thanks. I'm having one heck of a problem unentangling all the different
-> build failures (from these and other patches) but this one looks like
-> glibc:
->
-> https://autobuilder.yoctoproject.org/main/builders/poky-tiny/builds/18/steps/BuildImages/logs/stdio
+> > On Sun, Aug 24, 2014 at 08:05:01PM +0200, Andrei Gherzan wrote:
+> > > * refactor dependencies
+> > > * remove already merged patches
+> > > * define PACKAGECONFIG for different configurations
+> > > * have above PACKAGECONFIG values activated by default
+> > > * various cleanups and refactoring
+> > > * use internal ffmpeg - there are some known issues while compiling
+> > > with external libav
+> > > * define --with-arch to be passed to internal ffmpeg configuration
+> > > script
+> > > * add support for qemuarm
+> > > * add libcec, rtmpdump to DEPENDS
+> > > * add libpulsecommon to RDEPENDS
+> > >
+> > > Tested on Fedora 20 host using poky + meta-oe master:
+> > > 1. build only qemux86
+> > > 2. build only qemuarm
+> > > 3. build and runtime test raspberrypi - (patches to come).
+> >
+> > Fails in world builds for qemux86-64 with:
+> >
+> > | [ 48%] Building CXX object CMakeFiles/projectM.dir/fftsg.cpp.o
+> > | CC    libavfilter/vf_histeq.o
+> > | CC    libavfilter/vf_histogram.o
+> > | CPP     xbmc/utils/SortUtils.o
+> > | CPP     xbmc/utils/Splash.o
+> > | depbase=`echo ../common.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+> > |       x86_64-oe-linux-g++  -m64 -march=core2 -mtune=core2 -msse3
+> > -mfpmath=sse
+> > --sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-64
+> > -DHAVE_CONFIG_H -I. -I../..  -DPKGDATADIR=\"/usr/share/rsxs\" -I./..
+> > -I../../lib  -D_LINUX -DXBMC    -O2  -O2 -pipe -g
+> > -feliminate-unused-debug-types -fvisibility-inlines-hidden -fPIC -DPIC
+> > -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -g -D_DEBUG
+> -Wall
+> > -MT ../common.o -MD -MP -MF $depbase.Tpo -c -o ../common.o ../common.cc
+> &&\
+> > |       mv -f $depbase.Tpo $depbase.Po
+> > | CC    libavfilter/vf_hqdn3d.o
+> > | CPP     xbmc/guilib/GUIListGroup.o
+> > | CPP     xbmc/utils/Stopwatch.o
+> > | CPP     xbmc/utils/StreamDetails.o
+> > | CC    libavfilter/vf_hue.o
+> > | In file included from ../common.cc:50:0:
+> > |
+> >
+> /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/c++/4.9.1/ctime:70:11:
+> > error: '::gmtime' has not been declared
+> > |    using ::gmtime;
+> > |            ^
+> > |
+> >
+> /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/include/c++/4.9.1/ctime:71:11:
+> > error: '::localtime' has not been declared
+> > |    using ::localtime;
+> > |            ^
+> > | make[5]: *** [../common.o] Error 1
+> > | make[5]: Leaving directory
+> >
+> `/home/jenkins/oe/world/shr-core/tmp-eglibc/work/core2-64-oe-linux/xbmc/13.2-r0/git/xbmc/screensavers/rsxs-0.9/src/euphoria'
+> > | make[4]: *** [all-recursive] Error 1
+> >
+> > (this is the same error which was mentioned in PNBLACKLIST before)
+> >
 >
 
-Trying to reproduce it locally. Once I have, I will update.
+I am fairly certain I had my disable rsxs patch applied locally (which JaMa
+is applying in master-next), so I did not see this error.
 
-> Cheers,
 >
-> Richard
->
+> Will try to reproduce it on 64.
 >
 >
+> >
+> > and qemuarm:
+> > | CC      lib/vgmstream/src/coding/mpeg_decoder.o
+> > | OpenMaxVideo.cpp:59:8: error: 'PFNEGLCREATEIMAGEKHRPROC' does not name
+> a
+> > type
+> > |  static PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR;
+> > |         ^
+> > | OpenMaxVideo.cpp:60:8: error: 'PFNEGLDESTROYIMAGEKHRPROC' does not name
+> > a type
+> > |  static PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR;
+> > |         ^
+> > ....
+> > | In file included from OpenMaxVideo.cpp:32:0:
+> > | DVDVideoCodec.h:48:7: error: forward declaration of 'class
+> COpenMaxVideo'
+> > |  class COpenMaxVideo;
+> > |        ^
+> >
+> >
+> I tested build on quemuarm and it worked on my host. This is strange...
+>
+> Likewise, I saw no problem on Fedora 20 building for distroless qemuarm.
+However, running in core-image-sato is still seg faulting for me. I have
+not had time to dig any deeper on that front.
+
+--Tim
 
