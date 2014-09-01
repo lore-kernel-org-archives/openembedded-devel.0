@@ -1,42 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 29CD062252
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 32BD3617B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Aug 2014 08:37:13 +0000 (UTC)
-Received: by mail-wg0-f46.google.com with SMTP id x13so3110580wgg.5
+	Mon,  1 Sep 2014 06:15:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s816FdeP022006
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Aug 2014 01:37:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PymM6v7dzmlZQ7V/sJIgHjHPnSeqMbWEU7+ROVYTWfA=;
-	b=EQJl7xwvIkBRAv9QktfmKmAp1ztyHMI8hu2Q65KIeo42FUT09NKY6YaPAhRAmYKO9y
-	jRwscTUdpBAnwz+t1u0oCMOqgwhDWv2C16x4lG63dDKgQc+1YX+3HCjKq4txk4BMtOZR
-	qxF0WNqoNZIAHskHslTeLcIGRro5YG++89X2gbpznN50QOGtz/YpJbuFuWs1T44o6Ru4
-	ltcYKOdaHqg3TtEGML5J+gJAXDTdq+52q4/TNhdQDNq5MiQBxXSqkRcmPIRpmpL5xnOi
-	1GhbaNiT3ar+pdfUhq5trqHAOD1rLIH31LV9kT3v8688FpHIcmEc/tzHeoVZCQlTR01I
-	h3qQ==
-X-Received: by 10.180.108.147 with SMTP id hk19mr9091730wib.4.1409387834190;
-	Sat, 30 Aug 2014 01:37:14 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	s14sm3627203wik.23.2014.08.30.01.37.13
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 30 Aug 2014 01:37:13 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 30 Aug 2014 10:37:24 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140830083724.GQ16066@jama>
-References: <1408903501-5728-1-git-send-email-andrei@gherzan.ro>
-	<20140827120857.GD20524@jama>
-	<CAK18fxEBqgkznp0dBMeP+6X=VwMzzR4RgZ6Jc6F=d3o9JqousA@mail.gmail.com>
-	<CANx9H-C0O1WzvJ7NyRO8W73rQfr2N53NYycsBpFYJ1_=xnehjg@mail.gmail.com>
+	Sun, 31 Aug 2014 23:15:39 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 31 Aug 2014 23:15:38 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 1 Sep 2014 14:15:47 +0800
+Message-ID: <1409552147-23457-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-In-Reply-To: <CANx9H-C0O1WzvJ7NyRO8W73rQfr2N53NYycsBpFYJ1_=xnehjg@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-multimedia][PATCH V2 1/1] xbmc: Update to v13.2
+Subject: [PATCH][meta-networking] inetutils: uprev to 1.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,156 +32,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Aug 2014 08:37:17 -0000
-X-Groupsio-MsgNum: 51929
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="sr8SBrQ3fbgntwtR"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Sep 2014 06:15:43 -0000
+Content-Type: text/plain
 
---sr8SBrQ3fbgntwtR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Roy Li <rongqing.li@windriver.com>
 
-On Fri, Aug 29, 2014 at 07:05:29PM -0700, Tim Orling wrote:
-> On Fri, Aug 29, 2014 at 4:06 PM, Andrei Gherzan <andrei@gherzan.ro> wrote:
->=20
-> > On Wed, Aug 27, 2014 at 2:08 PM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >
-> > > On Sun, Aug 24, 2014 at 08:05:01PM +0200, Andrei Gherzan wrote:
-> > > > * refactor dependencies
-> > > > * remove already merged patches
-> > > > * define PACKAGECONFIG for different configurations
-> > > > * have above PACKAGECONFIG values activated by default
-> > > > * various cleanups and refactoring
-> > > > * use internal ffmpeg - there are some known issues while compiling
-> > > > with external libav
-> > > > * define --with-arch to be passed to internal ffmpeg configuration
-> > > > script
-> > > > * add support for qemuarm
-> > > > * add libcec, rtmpdump to DEPENDS
-> > > > * add libpulsecommon to RDEPENDS
-> > > >
-> > > > Tested on Fedora 20 host using poky + meta-oe master:
-> > > > 1. build only qemux86
-> > > > 2. build only qemuarm
-> > > > 3. build and runtime test raspberrypi - (patches to come).
-> > >
-> > > Fails in world builds for qemux86-64 with:
-> > >
-> > > | [ 48%] Building CXX object CMakeFiles/projectM.dir/fftsg.cpp.o
-> > > | CC    libavfilter/vf_histeq.o
-> > > | CC    libavfilter/vf_histogram.o
-> > > | CPP     xbmc/utils/SortUtils.o
-> > > | CPP     xbmc/utils/Splash.o
-> > > | depbase=3D`echo ../common.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-> > > |       x86_64-oe-linux-g++  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3
-> > > -mfpmath=3Dsse
-> > > --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux=
-86-64
-> > > -DHAVE_CONFIG_H -I. -I../..  -DPKGDATADIR=3D\"/usr/share/rsxs\" -I./..
-> > > -I../../lib  -D_LINUX -DXBMC    -O2  -O2 -pipe -g
-> > > -feliminate-unused-debug-types -fvisibility-inlines-hidden -fPIC -DPIC
-> > > -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=3D64 -g -D_DEB=
-UG
-> > -Wall
-> > > -MT ../common.o -MD -MP -MF $depbase.Tpo -c -o ../common.o ../common.=
-cc
-> > &&\
-> > > |       mv -f $depbase.Tpo $depbase.Po
-> > > | CC    libavfilter/vf_hqdn3d.o
-> > > | CPP     xbmc/guilib/GUIListGroup.o
-> > > | CPP     xbmc/utils/Stopwatch.o
-> > > | CPP     xbmc/utils/StreamDetails.o
-> > > | CC    libavfilter/vf_hue.o
-> > > | In file included from ../common.cc:50:0:
-> > > |
-> > >
-> > /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/incl=
-ude/c++/4.9.1/ctime:70:11:
-> > > error: '::gmtime' has not been declared
-> > > |    using ::gmtime;
-> > > |            ^
-> > > |
-> > >
-> > /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemux86-64/usr/incl=
-ude/c++/4.9.1/ctime:71:11:
-> > > error: '::localtime' has not been declared
-> > > |    using ::localtime;
-> > > |            ^
-> > > | make[5]: *** [../common.o] Error 1
-> > > | make[5]: Leaving directory
-> > >
-> > `/home/jenkins/oe/world/shr-core/tmp-eglibc/work/core2-64-oe-linux/xbmc=
-/13.2-r0/git/xbmc/screensavers/rsxs-0.9/src/euphoria'
-> > > | make[4]: *** [all-recursive] Error 1
-> > >
-> > > (this is the same error which was mentioned in PNBLACKLIST before)
-> > >
-> >
->=20
-> I am fairly certain I had my disable rsxs patch applied locally (which Ja=
-Ma
-> is applying in master-next), so I did not see this error.
+1. remove unneeded patches:
+ inetutils-1.9.1/disable-pre-ANSI-compilers.patch
+ inetutils-1.9.1/remove-gets.patch
+2. Update the version from 1.9.1 to 1.9.2 in version.patch
+3. remove PR
 
-I've re-cherry-picked that one into master next after reporting the
-failure, but it doesn't work because:
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../disable-pre-ANSI-compilers.patch               |   16 ---------------
+ .../inetutils/inetutils-1.9.1/remove-gets.patch    |   21 --------------------
+ .../fix-disable-ipv6.patch                         |    0
+ ...tf-parse-pull-in-features.h-for-__GLIBC__.patch |    0
+ .../inetutils-1.8-0003-wchar.patch                 |    0
+ .../inetutils-1.9-PATH_PROCNET_DEV.patch           |    0
+ .../rexec.xinetd.inetutils                         |    0
+ .../rlogin.xinetd.inetutils                        |    0
+ .../rsh.xinetd.inetutils                           |    0
+ .../telnet.xinetd.inetutils                        |    0
+ .../tftpd.xinetd.inetutils                         |    0
+ .../version.patch                                  |    2 +-
+ .../{inetutils_1.9.1.bb => inetutils_1.9.2.bb}     |    7 ++-----
+ 13 files changed, 3 insertions(+), 43 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch
+ delete mode 100644 meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/fix-disable-ipv6.patch (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/inetutils-1.8-0003-wchar.patch (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/inetutils-1.9-PATH_PROCNET_DEV.patch (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/rexec.xinetd.inetutils (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/rlogin.xinetd.inetutils (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/rsh.xinetd.inetutils (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/telnet.xinetd.inetutils (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/tftpd.xinetd.inetutils (100%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils-1.9.1 => inetutils-1.9.2}/version.patch (93%)
+ rename meta-networking/recipes-connectivity/inetutils/{inetutils_1.9.1.bb => inetutils_1.9.2.bb} (96%)
 
-xbmc-13.2: xbmc: configure was passed unrecognised options:
---disable-rxsx [unknown-configure-option]
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch
+deleted file mode 100644
+index a7fa61c..0000000
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/disable-pre-ANSI-compilers.patch
++++ /dev/null
+@@ -1,16 +0,0 @@
+-Upstream-Status: Pending
+-
+-disable pre-ANSI compilers
+-
+-Signed-off-by: Chunrong Guo <b40290@freescale.com>
+---- inetutils-1.9.1/configure.ac	2012-01-06 22:05:05.000000000 +0800
+-+++ inetutils-1.9.1/configure.ac	2012-11-12 14:05:30.756957063 +0800
+-@@ -586,7 +586,7 @@
+- 		  #include <arpa/tftp.h>])
+- 
+- ### Checks for compiler characteristics.
+--AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
+-+#AM_C_PROTOTYPES dnl FIXME: Does inetutils even compile on pre-ANSI compilers?
+- AC_C_CONST
+- 
+- dnl See if `weak refs' are possible; these make it possible (with shared
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch
+deleted file mode 100644
+index 61d16e3..0000000
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/remove-gets.patch
++++ /dev/null
+@@ -1,21 +0,0 @@
+-Uptream-Status: Pending
+-
+-remove gets function
+-
+-Signed-off-by: Chunrong Guo <b40290@freescale.com>
+---- inetutils-1.9.1.org/lib/stdio.in.h	2012-01-06 22:11:13.000000000 +0800
+-+++ inetutils-1.9.1/lib/stdio.in.h	2012-11-12 14:30:49.044958001 +0800
+-@@ -715,9 +715,13 @@
+- /* It is very rare that the developer ever has full control of stdin,
+-    so any use of gets warrants an unconditional warning.  Assume it is
+-    always declared, since it is required by C89.  */
+-+#if defined gets
+-+#undef gets
+- _GL_WARN_ON_USE (gets, "gets is a security hole - use fgets instead");
+- #endif
+- 
+-+#endif
+-+
+- 
+- #if @GNULIB_OBSTACK_PRINTF@ || @GNULIB_OBSTACK_PRINTF_POSIX@
+- struct obstack;
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/fix-disable-ipv6.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/fix-disable-ipv6.patch
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/fix-disable-ipv6.patch
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.8-0003-wchar.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.8-0003-wchar.patch
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.8-0003-wchar.patch
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.9-PATH_PROCNET_DEV.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/inetutils-1.9-PATH_PROCNET_DEV.patch
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/inetutils-1.9-PATH_PROCNET_DEV.patch
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rexec.xinetd.inetutils
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rlogin.xinetd.inetutils
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/rsh.xinetd.inetutils
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/telnet.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/telnet.xinetd.inetutils
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/tftpd.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
+similarity index 100%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/tftpd.xinetd.inetutils
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/version.patch b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
+similarity index 93%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/version.patch
+rename to meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
+index ac3181d..1caa2d3 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.1/version.patch
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/version.patch
+@@ -11,7 +11,7 @@ Signed-off-by: Chunrong Guo <b40290@freescale.com>
+  
+ -AC_INIT([GNU inetutils],
+ - m4_esyscmd([build-aux/git-version-gen .tarball-version 's/inetutils-/v/;s/_/./g']),
+-+AC_INIT([GNU inetutils],[1.9.1],
+++AC_INIT([GNU inetutils],[1.9.2],
+   [bug-inetutils@gnu.org])
+  
+  AC_CONFIG_SRCDIR([src/inetd.c])
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
+rename to meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
+index 315e374..2bae3ee 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.1.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
+@@ -8,11 +8,8 @@ LICENSE = "GPLv3"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0c7051aef9219dc7237f206c5c4179a7"
+ 
+-PR = "r1"
+ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
+-           file://disable-pre-ANSI-compilers.patch \
+            file://version.patch \
+-           file://remove-gets.patch \
+            file://inetutils-1.8-0001-printf-parse-pull-in-features.h-for-__GLIBC__.patch \
+            file://inetutils-1.8-0003-wchar.patch \
+            file://rexec.xinetd.inetutils  \
+@@ -23,8 +20,8 @@ SRC_URI = "${GNU_MIRROR}/inetutils/inetutils-${PV}.tar.gz \
+            file://inetutils-1.9-PATH_PROCNET_DEV.patch \
+ "
+ 
+-SRC_URI[md5sum] = "944f7196a2b3dba2d400e9088576000c"
+-SRC_URI[sha256sum] = "02a9ebde8a198cb85f87545b9d88fb103a183958139864a85fe9e027ad79ff2b"
++SRC_URI[md5sum] = "aa1a9a132259db83e66c1f3265065ba2"
++SRC_URI[sha256sum] = "0423ea40a160cd4630f817e247df5c08ecc625378d2bb56a0509117a36a89913"
+ 
+ inherit autotools gettext update-alternatives
+ 
+-- 
+1.7.10.4
 
-> > Will try to reproduce it on 64.
-> >
-> >
-> > >
-> > > and qemuarm:
-> > > | CC      lib/vgmstream/src/coding/mpeg_decoder.o
-> > > | OpenMaxVideo.cpp:59:8: error: 'PFNEGLCREATEIMAGEKHRPROC' does not n=
-ame
-> > a
-> > > type
-> > > |  static PFNEGLCREATEIMAGEKHRPROC eglCreateImageKHR;
-> > > |         ^
-> > > | OpenMaxVideo.cpp:60:8: error: 'PFNEGLDESTROYIMAGEKHRPROC' does not =
-name
-> > > a type
-> > > |  static PFNEGLDESTROYIMAGEKHRPROC eglDestroyImageKHR;
-> > > |         ^
-> > > ....
-> > > | In file included from OpenMaxVideo.cpp:32:0:
-> > > | DVDVideoCodec.h:48:7: error: forward declaration of 'class
-> > COpenMaxVideo'
-> > > |  class COpenMaxVideo;
-> > > |        ^
-> > >
-> > >
-> > I tested build on quemuarm and it worked on my host. This is strange...
-> >
-> > Likewise, I saw no problem on Fedora 20 building for distroless qemuarm.
-> However, running in core-image-sato is still seg faulting for me. I have
-> not had time to dig any deeper on that front.
->=20
-> --Tim
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---sr8SBrQ3fbgntwtR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlQBjUQACgkQN1Ujt2V2gBxEZgCbB1e+qqctB72/Kpl0omEgvYgo
-tkMAn1sD7KYK5QvE882wnO5i4IMlQGxD
-=992z
------END PGP SIGNATURE-----
-
---sr8SBrQ3fbgntwtR--
