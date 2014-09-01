@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 598AE71313
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EB1F7130F
 	for <Openembedded-devel@lists.openembedded.org>;
 	Mon,  1 Sep 2014 15:18:38 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s81FIdwc029617
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s81FIdLY026593
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Sep 2014 08:18:39 -0700 (PDT)
+	Mon, 1 Sep 2014 08:18:40 -0700 (PDT)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
 	Mon, 1 Sep 2014 08:18:39 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <Openembedded-devel@lists.openembedded.org>
-Date: Mon, 1 Sep 2014 08:18:29 -0700
-Message-ID: <289865628664658437831a14469c067ff040dd38.1409584344.git.liezhi.yang@windriver.com>
+Date: Mon, 1 Sep 2014 08:18:30 -0700
+Message-ID: <c9e1bb4031a18bad388af6336a4af09959e7c1fc.1409584344.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1409584344.git.liezhi.yang@windriver.com>
 References: <cover.1409584344.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 07/13] memcached: add bash to RDEPENDS_memcached
+Subject: [PATCH 08/13] phpmyadmin: add bash to RDEPENDS_phpmyadmin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,43 +38,31 @@ X-List-Received-Date: Mon, 01 Sep 2014 15:18:38 -0000
 Content-Type: text/plain
 
 Bashism:
-possible bashism in memcached/etc/init.d/memcached line 40 (bash arrays, ${name[0|*|@]}):
-if [ -r "${FILES[0]}" ]; then
-possible bashism in memcached/etc/init.d/memcached line 42 (bash arrays, ${name[0|*|@]}):
-  for FILE in "${FILES[@]}";
-possible bashism in memcached/etc/init.d/memcached line 53 (should be VAR="${VAR}foo"):
-      CONFIGS+=($NAME)
-possible bashism in memcached/etc/init.d/memcached line 54 (should be 'b = a'):
-    elif [ "memcached_$2" == "$NAME" ];
-possible bashism in memcached/etc/init.d/memcached line 62 (bash arrays, ${name[0|*|@]}):
-  if [ ${#CONFIGS[@]} == 0 ];
-possible bashism in memcached/etc/init.d/memcached line 71 (bash arrays, ${name[0|*|@]}):
-CONFIG_NUM=${#CONFIGS[@]}
-possible bashism in memcached/etc/init.d/memcached line 72 ('((' should be '$(('):
-for ((i=0; i < $CONFIG_NUM; i++)); do
-possible bashism in memcached/etc/init.d/memcached line 73 (bash arrays, ${name[0|*|@]}):
-  NAME=${CONFIGS[${i}]}
+possible bashism in plugins/transformations/generator_plugin.sh line 16 (echo -e):
+  echo -e "Usage: ./generator_plugin.sh MIMEType MIMESubtype TransformationName [Description]\n"
+possible bashism in plugins/transformations/generator_plugin.sh line 28 (${parm,[,][pat]} or ${parm^[^][pat]}):
+MT="${MT^}"
+possible bashism in plugins/transformations/generator_plugin.sh line 29 (${parm,[,][pat]} or ${parm^[^][pat]}):
+MS="${MS^}"
+possible bashism in plugins/transformations/generator_plugin.sh line 30 (${parm,[,][pat]} or ${parm^[^][pat]}):
+TN="${TN^}"
+possible bashism in plugins/transformations/generator_plugin.sh line 51 (should be 'b = a'):
+    if [ "$4" == "--generate_only_main_class" ]; then
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../recipes-support/memcached/memcached_1.4.17.bb  |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb     |    1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-index 5d37df0..2c7b9fb 100644
---- a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-+++ b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
-@@ -15,7 +15,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7e5ded7363d335e1bb18013ca08046ff"
- inherit autotools
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
+index 8054c35..0de3f6d 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
+@@ -29,3 +29,4 @@ do_install() {
+ FILES_${PN} = "${datadir}/${BPN} \
+                ${sysconfdir}/apache2/conf.d"
  
- DEPENDS += "libevent"
--RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
-+RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
-+    perl-module-tie-hash bash \
-+    "
- 
- SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
-            file://configure.patch"
++RDEPENDS_${PN} += "bash"
 -- 
 1.7.9.5
 
