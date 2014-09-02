@@ -1,27 +1,23 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DD3CE6AC7B
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F90960DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Sep 2014 02:45:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s822j79r010629
+	Tue,  2 Sep 2014 03:16:46 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s823GhxN003873
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 1 Sep 2014 19:45:07 -0700 (PDT)
-Received: from [128.224.162.141] (128.224.162.141) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 1 Sep 2014 19:45:07 -0700
-Message-ID: <54052F3C.6090006@windriver.com>
-Date: Tue, 2 Sep 2014 10:45:16 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
+	Mon, 1 Sep 2014 20:16:46 -0700 (PDT)
+Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 1 Sep 2014 20:16:42 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
+Date: Tue, 2 Sep 2014 11:16:35 +0800
+Message-ID: <cover.1409626676.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1406686961-21142-1-git-send-email-rongqing.li@windriver.com>
-	<20140730072555.GF16445@jama>
-In-Reply-To: <20140730072555.GF16445@jama>
-Subject: Re: [PATCH v2][meta-networking] tcpslice: add recipe under tcpdump
+Subject: [PATCH 0/1] proftpd: fix integer overflow CVE-2013-4359
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,33 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2014 02:45:14 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Sep 2014 03:16:48 -0000
+Content-Type: text/plain
 
+The following changes since commit b45472a29b60d46cca313bd629561e674befe386:
 
+  at: rename bbappend to match any version from oe-core (2014-09-01 12:49:00 +0200)
 
-On 07/30/2014 03:25 PM, Martin Jansa wrote:
-> On Wed, Jul 30, 2014 at 10:22:41AM +0800,rongqing.li@windriver.com  wrote:
->> >From: Roy Li<rongqing.li@windriver.com>
->> >
->> >tcpslice is a tool for extracting parts of a tcpdump packet trace,
->> >so put it under tcpdump dir
->> >
->> >Signed-off-by: Roy Li<rongqing.li@windriver.com>
->> >---
+are available in the git repository at:
 
+  git://git.pokylinux.org/poky-contrib hongxu/fix-proftpd
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-proftpd
 
-Hi Martin:
+Hongxu Jia (1):
+  proftpd: fix integer overflow CVE-2013-4359
 
-I see this recipes has been merged into master-next for a long time,
-Could you cherry-pick it to master?
-
-
--Roy
-
+ .../proftpd/files/proftpd-sftp.patch               | 140 +++++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |   3 +-
+ 2 files changed, 142 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
 
 -- 
-Best Reagrds,
-Roy | RongQing Li
+1.9.1
+
 
