@@ -1,26 +1,37 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DE9BA71301
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AA4170281
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Sep 2014 03:25:39 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s823Pfb2013580
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 1 Sep 2014 20:25:41 -0700 (PDT)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 1 Sep 2014 20:25:40 -0700
-Message-ID: <540538AF.1020601@windriver.com>
-Date: Tue, 2 Sep 2014 11:25:35 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
-References: <1409628257-26644-1-git-send-email-hongxu.jia@windriver.com>
-In-Reply-To: <1409628257-26644-1-git-send-email-hongxu.jia@windriver.com>
-Subject: Re: [PATCH V2] proftpd: fix integer overflow CVE-2013-4359
+	Tue,  2 Sep 2014 07:35:57 +0000 (UTC)
+Received: by mail-pd0-f176.google.com with SMTP id g10so7883857pdj.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Sep 2014 00:35:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=+ZdFrWiamObGzs8CwHgL9EvJPN+rx+HY6KC2Yg3zSHg=;
+	b=Bcy3C/kuzxLqN0QQJU8CTJQNTohksXnxhpXrzm9j0MHtKeih24jgzvMututGfG4R8B
+	sbX35c6BYayoOEJ8vhCsMCwUc7a9WxVxMvO+J96vdOfYDtaBWJJiYDp9cKO2A1/6MZQU
+	Whn6vK0a0ZHchjOJ7RW4zP1RuWK5yzxYj6crFNM7PwIyD00Fpi9fUpJ83toEAP+4J6VR
+	BbcZA9yIsG19R7zJuCIsbdqhiJ+d+XKJjANBKeVA2qebmQ1VElT9FwRGhVDPjlLHlipv
+	uZHkW/96SRi1VviBLTlIjcpsVabbKaMjKXUr8BcTid82Bt1HyHXQrVkPjwURs+hqqNdD
+	7RIw==
+X-Received: by 10.66.155.2 with SMTP id vs2mr44736736pab.60.1409643356663;
+	Tue, 02 Sep 2014 00:35:56 -0700 (PDT)
+Received: from haswell.localdomain (c-98-207-177-218.hsd1.ca.comcast.net.
+	[98.207.177.218])
+	by mx.google.com with ESMTPSA id q1sm4253564pdq.67.2014.09.02.00.35.55
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 02 Sep 2014 00:35:56 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Sep 2014 00:39:35 -0700
+Message-Id: <1409643577-4088-2-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1409643577-4088-1-git-send-email-raj.khem@gmail.com>
+References: <1409643577-4088-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 2/5] nautilus: Drop using autotools-brokensep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,200 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2014 03:25:40 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Sep 2014 07:35:57 -0000
 
-Changed in V2:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Add the missing 'Upstream-Status' tag
-
-//Hongxu
-
-On 09/02/2014 11:24 AM, Hongxu Jia wrote:
-> Integrate a patch from proftpd upstream to fix an integer overflow bug
-> described in the CVE-2013-4359, which allows remote attachers to cause
-> a denial of service (memory consumption) attack.
->
-> Refer: http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-4359
->
-> Signed-off-by: Shan Hai <shan.hai@windriver.com>
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->   .../proftpd/files/proftpd-sftp.patch               | 142 +++++++++++++++++++++
->   .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |   3 +-
->   2 files changed, 144 insertions(+), 1 deletion(-)
->   create mode 100644 meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
->
-> diff --git a/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch b/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
-> new file mode 100644
-> index 0000000..8c71263
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
-> @@ -0,0 +1,142 @@
-> +proftpd/mod_sftp: fix too much memory allocation bug of mod_sftp
-> +
-> +This patch fixes the too much memory allocation bug of the mod_sftp by
-> +ensuring both that a) the received response count matches the number of
-> +challenges sent, and b) that the received response count is not too high
-> +(as an additional sanity check); the upper bound is still set to 500.
-> +
-> +The patch is picked from: http://bugs.proftpd.org/show_bug.cgi?id=3973
-> +
-> +Upstream-Status: Backport CVE-2013-4359
-> +
-> +diff --git a/contrib/mod_sftp/kbdint.c b/contrib/mod_sftp/kbdint.c
-> +index 0271fb2..de651fa 100644
-> +--- a/contrib/mod_sftp/kbdint.c
-> ++++ b/contrib/mod_sftp/kbdint.c
-> +@@ -1,6 +1,6 @@
-> + /*
-> +  * ProFTPD - mod_sftp keyboard-interactive driver mgmt
-> +- * Copyright (c) 2008-2009 TJ Saunders
-> ++ * Copyright (c) 2008-2013 TJ Saunders
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License as published by
-> +@@ -31,6 +31,8 @@
-> + #include "utf8.h"
-> + #include "kbdint.h"
-> +
-> ++#define SFTP_KBDINT_MAX_RESPONSES	500
-> ++
-> + struct kbdint_driver {
-> +   struct kbdint_driver *next, *prev;
-> +
-> +@@ -252,8 +254,8 @@ int sftp_kbdint_send_challenge(const char *user, const char *instruction,
-> +   return res;
-> + }
-> +
-> +-int sftp_kbdint_recv_response(pool *p, unsigned int *count,
-> +-    const char ***responses) {
-> ++int sftp_kbdint_recv_response(pool *p, unsigned int expected_count,
-> ++    unsigned int *rcvd_count, const char ***responses) {
-> +   register unsigned int i;
-> +   char *buf;
-> +   cmd_rec *cmd;
-> +@@ -264,7 +266,7 @@ int sftp_kbdint_recv_response(pool *p, unsigned int *count,
-> +   int res;
-> +
-> +   if (p == NULL ||
-> +-      count == NULL ||
-> ++      rcvd_count == NULL ||
-> +       responses == NULL) {
-> +     errno = EINVAL;
-> +     return -1;
-> +@@ -299,6 +301,29 @@ int sftp_kbdint_recv_response(pool *p, unsigned int *count,
-> +
-> +   resp_count = sftp_msg_read_int(pkt->pool, &buf, &buflen);
-> +
-> ++  /* Ensure that the number of responses sent by the client is the same
-> ++   * as the number of challenges sent, lest a malicious client attempt to
-> ++   * trick us into allocating too much memory (Bug#3973).
-> ++   */
-> ++  if (resp_count != expected_count) {
-> ++    (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
-> ++      "sent %lu %s, but received %lu %s", (unsigned long) expected_count,
-> ++      expected_count != 1 ? "challenges" : "challenge",
-> ++      (unsigned long) resp_count, resp_count != 1 ? "responses" : "response");
-> ++    destroy_pool(pkt->pool);
-> ++    errno = EPERM;
-> ++    return -1;
-> ++  }
-> ++
-> ++  if (resp_count > SFTP_KBDINT_MAX_RESPONSES) {
-> ++    (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
-> ++      "received too many responses (%lu > max %lu), rejecting",
-> ++      (unsigned long) resp_count, (unsigned long) SFTP_KBDINT_MAX_RESPONSES);
-> ++    destroy_pool(pkt->pool);
-> ++    errno = EPERM;
-> ++    return -1;
-> ++  }
-> ++
-> +   list = make_array(p, resp_count, sizeof(char *));
-> +   for (i = 0; i < resp_count; i++) {
-> +     char *resp;
-> +@@ -307,7 +332,7 @@ int sftp_kbdint_recv_response(pool *p, unsigned int *count,
-> +     *((char **) push_array(list)) = pstrdup(p, sftp_utf8_decode_str(p, resp));
-> +   }
-> +
-> +-  *count = (unsigned int) resp_count;
-> ++  *rcvd_count = (unsigned int) resp_count;
-> +   *responses = ((const char **) list->elts);
-> +   return 0;
-> + }
-> +diff --git a/contrib/mod_sftp/mod_sftp.h.in b/contrib/mod_sftp/mod_sftp.h.in
-> +index 3e91390..c547be0 100644
-> +--- a/contrib/mod_sftp/mod_sftp.h.in
-> ++++ b/contrib/mod_sftp/mod_sftp.h.in
-> +@@ -1,6 +1,6 @@
-> + /*
-> +  * ProFTPD - mod_sftp
-> +- * Copyright (c) 2008-2011 TJ Saunders
-> ++ * Copyright (c) 2008-2013 TJ Saunders
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License as published by
-> +@@ -174,7 +174,8 @@ int sftp_kbdint_register_driver(const char *name, sftp_kbdint_driver_t *driver);
-> + int sftp_kbdint_unregister_driver(const char *name);
-> + int sftp_kbdint_send_challenge(const char *, const char *, unsigned int,
-> +   sftp_kbdint_challenge_t *);
-> +-int sftp_kbdint_recv_response(pool *, unsigned int *, const char ***);
-> ++int sftp_kbdint_recv_response(pool *, unsigned int, unsigned int *,
-> ++  const char ***);
-> +
-> + /* API for modules that which to register keystores, for the
-> +  * SFTPAuthorizedHostKeys and SFTPAuthorizedUserKeys directives.
-> +diff --git a/contrib/mod_sftp_pam.c b/contrib/mod_sftp_pam.c
-> +index 6c32df0..81aa113 100644
-> +--- a/contrib/mod_sftp_pam.c
-> ++++ b/contrib/mod_sftp_pam.c
-> +@@ -179,22 +179,13 @@ static int sftppam_converse(int nmsgs, PR_PAM_CONST struct pam_message **msgs,
-> +     return PAM_CONV_ERR;
-> +   }
-> +
-> +-  if (sftp_kbdint_recv_response(sftppam_driver.driver_pool, &recvd_count,
-> +-      &recvd_responses) < 0) {
-> ++  if (sftp_kbdint_recv_response(sftppam_driver.driver_pool, list->nelts,
-> ++      &recvd_count, &recvd_responses) < 0) {
-> +     pr_trace_msg(trace_channel, 3,
-> +       "error receiving keyboard-interactive responses: %s", strerror(errno));
-> +     return PAM_CONV_ERR;
-> +   }
-> +
-> +-  /* Make sure that the count of responses matches the challenge count. */
-> +-  if (recvd_count != list->nelts) {
-> +-    (void) pr_log_writefile(sftp_logfd, MOD_SFTP_PAM_VERSION,
-> +-      "sent %d %s, but received %u %s", nmsgs,
-> +-      list->nelts != 1 ? "challenges" : "challenge", recvd_count,
-> +-      recvd_count != 1 ? "responses" : "response");
-> +-    return PAM_CONV_ERR;
-> +-  }
-> +-
-> +   res = calloc(nmsgs, sizeof(struct pam_response));
-> +   if (res == NULL) {
-> +     pr_log_pri(PR_LOG_CRIT, "Out of memory!");
-> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> index c154c6d..feaf05a 100644
-> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
-> @@ -4,7 +4,7 @@ HOMEPAGE = "http://www.proftpd.org"
->   LICENSE = "GPLv2+"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
->   
-> -PR = "r3"
-> +PR = "r4"
->   
->   SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
->              file://make.patch \
-> @@ -15,6 +15,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
->              file://move-pidfile-to-var-run.patch \
->              file://close-RequireValidShell-check.patch \
->              file://move-runfile-to-var-run.patch \
-> +           file://proftpd-sftp.patch \
->   "
->   
->   SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
+index 58a45b1..4be3f08 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
+@@ -11,7 +11,7 @@ PR = "r6"
+ DEPENDS = "gdk-pixbuf gtk+ libunique gvfs librsvg libexif esound gnome-desktop orbit2-native"
+ # optional: tracker
+ 
+-inherit gnome autotools-brokensep
++inherit gnome
+ 
+ SRC_URI[archive.md5sum] = "51565aa10d1625dff56e381228346911"
+ SRC_URI[archive.sha256sum] = "2d4ff28c7a7aa5d40eb2468149954a564c257a305183773057584d22d15347a2"
+@@ -26,10 +26,10 @@ EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb "
+ export SYSROOT = "${STAGING_DIR_HOST}"
+ 
+ do_configure() {
+-    sed -i -e /docs/d Makefile.am
++    sed -i -e /docs/d ${S}/Makefile.am
+     autotools_do_configure
+     # We need native orbit-idl with target idl files. No way to say it in a clean way:
+-    find -name Makefile -exec sed -i '/\/usr\/bin\/orbit-idl-2/{s:/usr/bin:${STAGING_BINDIR_NATIVE}:;s:/usr/share:${STAGING_DATADIR}:g}' {} \;
++    find ${B} -name Makefile -exec sed -i '/\/usr\/bin\/orbit-idl-2/{s:/usr/bin:${STAGING_BINDIR_NATIVE}:;s:/usr/share:${STAGING_DATADIR}:g}' {} \;
+ }
+ 
+ RDEPENDS_${PN} = "gvfs gvfsd-ftp gvfsd-sftp gvfsd-trash glib-networking"
+-- 
+2.1.0
 
 
