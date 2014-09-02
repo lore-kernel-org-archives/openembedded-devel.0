@@ -1,37 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A63871223
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EBE06AC85
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Sep 2014 07:35:59 +0000 (UTC)
-Received: by mail-pd0-f171.google.com with SMTP id y13so7909894pdi.30
+	Tue,  2 Sep 2014 07:49:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s827nwIv006556
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Sep 2014 00:35:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=bLCLy31QTMRT3Peq6pwNjr+6IElwxi6MInuRSponnTk=;
-	b=KcnIAc8cX+vBylFsxxIWfC74ZpyWTY9NfWUZVf4uTTHlbm/DydcHZoEJz/saQfJpUw
-	ggae0V69w0rO3FOLCXJp1hzGI2R4e4DxQcJn5hTJfT7Byx+RPQY6MQG1wML4+33IXzDf
-	Sj49pX67QHydgVv+bAJNIxYaBCgDYSSVp94Q5ss6GtemrPjUSdmaaoEzDOAqTaCIADmJ
-	zXqez6AyY207bY0r33AfbGRP7N5wUi71DSVfVgnqrDpvVzr08Zb+JqRckdvfagcODfcw
-	DQoaAUA22Bs9Ymo1k2mVwO3/1W7GxDQc8zROsFpMf/OZEPz2eSovu7csBzJST3AHn3TN
-	C69w==
-X-Received: by 10.66.178.231 with SMTP id db7mr3407688pac.63.1409643357606;
-	Tue, 02 Sep 2014 00:35:57 -0700 (PDT)
-Received: from haswell.localdomain (c-98-207-177-218.hsd1.ca.comcast.net.
-	[98.207.177.218])
-	by mx.google.com with ESMTPSA id q1sm4253564pdq.67.2014.09.02.00.35.56
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 02 Sep 2014 00:35:57 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Sep 2014 00:39:36 -0700
-Message-Id: <1409643577-4088-3-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1409643577-4088-1-git-send-email-raj.khem@gmail.com>
-References: <1409643577-4088-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/5] glade3: Enable gnome support in meta-gnome instead of meta-oe
+	Tue, 2 Sep 2014 00:49:58 -0700 (PDT)
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 2 Sep 2014 00:49:57 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 2 Sep 2014 00:49:57 -0700
+Message-ID: <1409644197-4457-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [meta-webserver] [PATCH] webmin: fix hardcode of python2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,47 +32,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2014 07:36:00 -0000
+X-List-Received-Date: Tue, 02 Sep 2014 07:50:02 -0000
+Content-Type: text/plain
 
-This decouples meta-oe dependencies on meta-gnome, right now
-we have to use meta-gnome as dependent layer
+Use "/usr/bin/env python" to fix it.
 
-ERROR: Nothing PROVIDES 'libbonoboui' (but
-meta-openembedded/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-DEPENDS on or otherwise requires it)
-
-ERROR: Required build target 'glade3' has no buildable providers.
-
-Missing or unbuildable dependency chain was: ['glade3', 'libbonoboui']
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-gnome/recipe-devtools/glade/glade3_%.bbappend | 1 +
- meta-oe/recipes-devtools/glade/glade3_3.8.2.bb     | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipe-devtools/glade/glade3_%.bbappend
+ .../webmin/files/remove-python2.3.patch            |   25 ++++++++++++++++++++
+ .../recipes-webadmin/webmin/webmin_1.700.bb        |    4 +++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch
 
-diff --git a/meta-gnome/recipe-devtools/glade/glade3_%.bbappend b/meta-gnome/recipe-devtools/glade/glade3_%.bbappend
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch b/meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch
 new file mode 100644
-index 0000000..3abacfb
+index 0000000..b93ac52
 --- /dev/null
-+++ b/meta-gnome/recipe-devtools/glade/glade3_%.bbappend
-@@ -0,0 +1 @@
-+PACKAGECONFIG ??= "gnome"
-diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-index d0657e4..69d9eae 100644
---- a/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-+++ b/meta-oe/recipes-devtools/glade/glade3_3.8.2.bb
-@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "f180a5018eee6e3fe574854cb025af897dd9962b01d17d5752e626876d
++++ b/meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch
+@@ -0,0 +1,25 @@
++From 6f04699d5d417122b67e8118fd1955c769f17e76 Mon Sep 17 00:00:00 2001
++From: Robert Yang <liezhi.yang@windriver.com>
++Date: Tue, 2 Sep 2014 00:11:05 -0700
++Subject: [PATCH] ajaxterm/ajaxterm/qweb.py: fix hardcode of python2.3
++
++Upstream-Status: Pending
++
++Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
++---
++ ajaxterm/ajaxterm/qweb.py |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/meta-webserver/ajaxterm/ajaxterm/qweb.py b/meta-webserver/ajaxterm/ajaxterm/qweb.py
++index 20c5092..c658a6b 100644
++--- a/meta-webserver/ajaxterm/ajaxterm/qweb.py
+++++ b/meta-webserver/ajaxterm/ajaxterm/qweb.py
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python2.3
+++#!/usr/bin/env python
++ #
++ # vim:set et ts=4 fdc=0 fdn=2 fdl=0:
++ #
++-- 
++1.7.9.5
++
+diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb
+index 45d635e..2a363cb 100644
+--- a/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb
++++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb
+@@ -15,7 +15,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
+            file://samba-config-fix.patch \
+            file://proftpd-config-fix.patch \
+            file://net-lib.pl.patch \
+-           file://media-tomb.patch"
++           file://media-tomb.patch \
++           file://remove-python2.3.patch \
++            "
  
- EXTRA_OECONF += "--disable-scrollkeeper"
- 
--PACKAGECONFIG ??= "gnome"
-+PACKAGECONFIG ??= ""
- PACKAGECONFIG[gnome] = "--enable-gnome,--disable-gnome,libbonoboui libgnomeui"
- 
- do_configure_prepend() {
+ SRC_URI[md5sum] = "e5261114a6a6ed10caf570d3239ed5b7"
+ SRC_URI[sha256sum] = "1a6a8aa62c32c04932b902d17fc1864ee8f3fba03012bd25f709aa65e7e9b0f2"
 -- 
-2.1.0
+1.7.9.5
 
 
