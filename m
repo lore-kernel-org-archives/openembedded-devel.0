@@ -1,25 +1,23 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 839A76FE64
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B03E7070B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Sep 2014 03:16:46 +0000 (UTC)
+	Tue,  2 Sep 2014 03:24:22 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s823GmDi012931
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s823ONMA003929
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 1 Sep 2014 20:16:48 -0700 (PDT)
+	Mon, 1 Sep 2014 20:24:23 -0700 (PDT)
 Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 1 Sep 2014 20:16:47 -0700
+	14.3.174.1; Mon, 1 Sep 2014 20:24:22 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
-Date: Tue, 2 Sep 2014 11:16:36 +0800
-Message-ID: <be2914f68887041b65bea7140af6324a3bae34c4.1409626676.git.hongxu.jia@windriver.com>
+Date: Tue, 2 Sep 2014 11:24:17 +0800
+Message-ID: <1409628257-26644-1-git-send-email-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1409626676.git.hongxu.jia@windriver.com>
-References: <cover.1409626676.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/1] proftpd: fix integer overflow CVE-2013-4359
+Subject: [PATCH V2] proftpd: fix integer overflow CVE-2013-4359
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2014 03:16:48 -0000
+X-List-Received-Date: Tue, 02 Sep 2014 03:24:23 -0000
 Content-Type: text/plain
 
 Integrate a patch from proftpd upstream to fix an integer overflow bug
@@ -46,17 +44,17 @@ Signed-off-by: Shan Hai <shan.hai@windriver.com>
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../proftpd/files/proftpd-sftp.patch               | 140 +++++++++++++++++++++
+ .../proftpd/files/proftpd-sftp.patch               | 142 +++++++++++++++++++++
  .../recipes-daemons/proftpd/proftpd_1.3.4b.bb      |   3 +-
- 2 files changed, 142 insertions(+), 1 deletion(-)
+ 2 files changed, 144 insertions(+), 1 deletion(-)
  create mode 100644 meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
 
 diff --git a/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch b/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
 new file mode 100644
-index 0000000..bdc0a46
+index 0000000..8c71263
 --- /dev/null
 +++ b/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
-@@ -0,0 +1,140 @@
+@@ -0,0 +1,142 @@
 +proftpd/mod_sftp: fix too much memory allocation bug of mod_sftp
 +
 +This patch fixes the too much memory allocation bug of the mod_sftp by
@@ -65,6 +63,8 @@ index 0000000..bdc0a46
 +(as an additional sanity check); the upper bound is still set to 500.
 +
 +The patch is picked from: http://bugs.proftpd.org/show_bug.cgi?id=3973
++
++Upstream-Status: Backport CVE-2013-4359
 +
 +diff --git a/contrib/mod_sftp/kbdint.c b/contrib/mod_sftp/kbdint.c
 +index 0271fb2..de651fa 100644
