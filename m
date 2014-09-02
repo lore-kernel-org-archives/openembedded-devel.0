@@ -1,31 +1,28 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 027B76FCE0
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A95B6AC85
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Sep 2014 12:20:50 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1XOn4r-0000D1-5z from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Sep 2014 05:20:49 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.2.247.3; Tue, 2 Sep 2014
-	05:19:45 -0700
-Received: by burninator (Postfix, from userid 1000)	id 45807581728; Tue,  2
-	Sep 2014 08:19:45 -0400 (EDT)
-Date: Tue, 2 Sep 2014 08:19:45 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20140902121944.GE7949@mentor.com>
-References: <1406686961-21142-1-git-send-email-rongqing.li@windriver.com>
-	<20140730072555.GF16445@jama> <54052F3C.6090006@windriver.com>
+	Tue,  2 Sep 2014 12:54:53 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s82CskZg020571
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 2 Sep 2014 05:54:54 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 2 Sep 2014 05:54:49 -0700
+Message-ID: <5405BE18.3080806@windriver.com>
+Date: Tue, 2 Sep 2014 20:54:48 +0800
+From: Robert Yang <liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-In-Reply-To: <54052F3C.6090006@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH v2][meta-networking] tcpslice: add recipe under tcpdump
+To: <openembedded-devel@lists.openembedded.org>
+References: <cover.1409584344.git.liezhi.yang@windriver.com>	<2016151778c10b65ff66b9b885b647bed934d640.1409584344.git.liezhi.yang@windriver.com>
+	<20140902083121.GC21392@axis.com>
+In-Reply-To: <20140902083121.GC21392@axis.com>
+Subject: Re: [PATCH 09/13] apache2: split apache2-scripts subpkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,75 +36,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Sep 2014 12:21:00 -0000
-X-Groupsio-MsgNum: 51964
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cPi+lWm09sJ+d57q"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 02 Sep 2014 12:54:56 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---cPi+lWm09sJ+d57q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-[Re: [oe] [PATCH v2][meta-networking] tcpslice: add recipe under tcpdump] O=
-n 14.09.02 (Tue 10:45) Rongqing Li wrote:
+I updated this commit in the original repo:
 
->=20
->=20
-> On 07/30/2014 03:25 PM, Martin Jansa wrote:
-> >On Wed, Jul 30, 2014 at 10:22:41AM +0800,rongqing.li@windriver.com  wrot=
-e:
-> >>>From: Roy Li<rongqing.li@windriver.com>
-> >>>
-> >>>tcpslice is a tool for extracting parts of a tcpdump packet trace,
-> >>>so put it under tcpdump dir
-> >>>
-> >>>Signed-off-by: Roy Li<rongqing.li@windriver.com>
-> >>>---
->=20
->=20
-> Hi Martin:
->=20
-> I see this recipes has been merged into master-next for a long time,
-> Could you cherry-pick it to master?
+   git://git.openembedded.org/meta-openembedded-contrib rbt/rdeps
 
-I had asked for some kind of clarification on the license for tcpslice.
-I didn't notice a follow-up on it yet, did you get a chance to check
-into it?
+// Robert
 
-I don't think anyone has any concern about the stability of the package
-itself, though, if we'd had some kind of response on the license
-question I had I would've merged it long ago.
+And the patch is:
+Subject: [PATCH] apache2: split apache2-scripts subpkg
 
--J.
+Split apache2-scripts subpkg to put the perl script dbmmanage, so that
+apache2 doesn't have to RDEPEND on perl.
 
->=20
->=20
-> -Roy
->=20
->=20
-> --=20
-> Best Reagrds,
-> Roy | RongQing Li
---=20
--Joe MacDonald.
-:wq
+Add another perl script apxs to apache2-dev pkg as Olof Johansson
+suggested.
 
---cPi+lWm09sJ+d57q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+  .../recipes-httpd/apache2/apache2_2.4.10.bb        |   10 ++++++++--
+  1 file changed, 8 insertions(+), 2 deletions(-)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb 
+b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
+index 0356029..573cd6f 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
+@@ -112,7 +112,7 @@ INITSCRIPT_NAME = "apache2"
+  INITSCRIPT_PARAMS = "defaults 91 20"
+  LEAD_SONAME = "libapr-1.so.0"
 
-iQEcBAEBAgAGBQJUBbXdAAoJEEn8ffcsOfaWuGIH/im74U54QCg90gqK/BA+O5Vu
-PR46gbOJc//Prph1XRp0Vx/WQ+54Ez3iIosRzxBzXUqDf3lqh7+v9hqbeSNS1/lv
-V7luFuQca6Soqj50sRC+InFcUJheBtVcEyGj7Ha6zymrSMEYatVDOjBppNv7RWER
-8FQ/fWSLv4TSmaT56VVuVlRa3iPk6r0jxF72ATRd+e65wVHsQ4Ibn05p1sAgYyeh
-S1wNR5sqbwbQJUMmZc5zUHj+MYD5fw7KgeVHkBZggzWY8O53Gb8wSvaAhMMc2d0G
-gc8/JESgvmksX5lJ5DYJoSz8BzX2gnctccf8dU6fDc4Cjq3Xa7Croi/zVXNTxpA=
-=F6st
------END PGP SIGNATURE-----
+-PACKAGES = "${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
++PACKAGES = "${PN}-scripts ${PN}-doc ${PN}-dev ${PN}-dbg ${PN}"
 
---cPi+lWm09sJ+d57q--
+  CONFFILES_${PN} = "${sysconfdir}/${BPN}/httpd.conf \
+                     ${sysconfdir}/${BPN}/magic \
+@@ -129,11 +129,16 @@ FILES_${PN}-dev = "${datadir}/${BPN}/build \
+                     ${libdir}/apr*.exp \
+                     ${includedir}/${BPN} \
+                     ${libdir}/*.la \
+-                   ${libdir}/*.a"
++                   ${libdir}/*.a \
++                   ${bindir}/apxs \
++                "
++
+
+  # manual to manual
+  FILES_${PN}-doc += " ${datadir}/${BPN}/manual"
+
++FILES_${PN}-scripts += "${bindir}/dbmmanage"
++
+  #
+  # override this too - here is the default, less datadir
+  #
+@@ -150,3 +155,4 @@ FILES_${PN} += "${libdir}/lib*.so ${libdir}/pkgconfig/*"
+  FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
+
+  RDEPENDS_${PN} += "openssl libgcc"
++RDEPENDS_${PN}-scripts += "perl ${PN}"
+-- 
+1.7.9.5
+
+
+On 09/02/2014 04:31 PM, Olof Johansson wrote:
+> On 14-09-01 17:18 +0200, Robert Yang wrote:
+>> Perl:
+>> apache2/usr/bin/dbmmanage:#!/usr/bin/perl
+>> apache2/usr/bin/apxs:#!/usr/bin/perl -w
+>>
+>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+>> ---
+>>   .../recipes-httpd/apache2/apache2_2.4.10.bb        |    2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
+>> index 0356029..5989a05 100644
+>> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
+>> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.10.bb
+>> @@ -149,4 +149,4 @@ FILES_${PN} += "${libdir}/lib*.so ${libdir}/pkgconfig/*"
+>>
+>>   FILES_${PN}-dbg += "${libdir}/${BPN}/modules/.debug"
+>>
+>> -RDEPENDS_${PN} += "openssl libgcc"
+>> +RDEPENDS_${PN} += "openssl libgcc perl"
+>
+> This would probably be nice to separate to a -scripts package if
+> those two scripts are the only reason they would rdepend on perl.
+> I think apxs could be included in the -dev package.
+>
+> Regards,
+>
+
