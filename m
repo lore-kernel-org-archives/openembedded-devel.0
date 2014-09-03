@@ -1,34 +1,35 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-qg0-f53.google.com (mail-qg0-f53.google.com
-	[209.85.192.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BCB46A941
+Received: from mail-qa0-f54.google.com (mail-qa0-f54.google.com
+	[209.85.216.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 4446B713E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Sep 2014 10:15:49 +0000 (UTC)
-Received: by mail-qg0-f53.google.com with SMTP id z107so8030707qgd.12
+	Wed,  3 Sep 2014 10:16:53 +0000 (UTC)
+Received: by mail-qa0-f54.google.com with SMTP id x12so7437538qac.41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Sep 2014 03:15:51 -0700 (PDT)
+	Wed, 03 Sep 2014 03:16:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc:content-type;
-	bh=B4PGNGDaVc0RwqELZvSQ1pY5aj30Nzs7CsXfVs5tHcE=;
-	b=O13IKFlGxc7LTGww0115I/Y02Trwbkckit0w9gVR2Agt8UpySdLbH0/RCzb1oEGFLa
-	n8UUxPAFZX3bRYGUMks0b+uiuGTxO3qx1UFCWppirsxplbDh5ojkrPu8QL5JvGW6nWah
-	mho10ZFtky05sCY4F9hpOuKoBL4c9sbFUZVnqFXudLatMBe/TL9GN6RC+1JEQAFHPzYO
-	EMo357oePkJcffiSkavD5kBiAaTbCUFGjIdhc54XwOS76wLdjImgtQRLJGZU+XCJari8
-	V59Zsc3zq5aI0/sNBkt3MuEII/xwzwEQemGWwMghHX334d1XbX/6j98eGdzLWCf326is
-	zNJw==
-X-Gm-Message-State: ALoCoQlsdg1pbuDJ7PZf+lFeZLVnB9mec4a/tmvBeYIv84eqMnS9ZiDaTkq5WiuLmfMMZqhZSRai
-X-Received: by 10.140.94.234 with SMTP id g97mr5105331qge.77.1409739351119;
-	Wed, 03 Sep 2014 03:15:51 -0700 (PDT)
+	bh=5R539BT28Z4wcPer5Rf3OBDYA3Z/CLP2bxFSBNCfNvw=;
+	b=Qdb/ecj2OvZyFlLmhtcBlYkM+QIVE9Mjhp+jqAWHBEQ+Kox5CL/pEIZZtIZd+5SolT
+	MaYURdgBnML15u1mg3Q0UrUuKDqPpY0rRyzOMv2O5L3FSsyvz0MPtrFXtSxnZvnIsHd7
+	zToiqKgtLO/i/azuxtajOIv0akKX43haUX9xnmQMWBvv7ZR4wFmsTjnbg7do8OEsngqT
+	xpXat1X6abk4myx3iJOX0s3h2JHjZ0ud0QthqxLtr4kJIT1X9KzqWKb0tSo7kwn7jOhM
+	3BEf5qAlqCPclhHE7FrOxd9iTNv4HmKVbWtnokV4KUjdEvE0a+SuiQPun0MWndNhhtL9
+	5VZw==
+X-Gm-Message-State: ALoCoQnHyB/gGeXbS+OJuiX5ZOQwgo7e0NBB34JnaUrNLt71RVvnppxrAZWcZXIzfeUPGbL2/15N
+X-Received: by 10.140.97.131 with SMTP id m3mr59597525qge.80.1409739415033;
+	Wed, 03 Sep 2014 03:16:55 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.29.183 with HTTP; Wed, 3 Sep 2014 03:15:31 -0700 (PDT)
-In-Reply-To: <54067424.8050600@windriver.com>
+Received: by 10.140.29.183 with HTTP; Wed, 3 Sep 2014 03:16:34 -0700 (PDT)
+In-Reply-To: <CAJTo0Lbb8uWBKYUTrqvbuo0VEQm=g3uRMv1KPOPi1YNrYL619w@mail.gmail.com>
 References: <20140902135015.93AF7504BC@opal.openembedded.org>
 	<54067424.8050600@windriver.com>
+	<CAJTo0Lbb8uWBKYUTrqvbuo0VEQm=g3uRMv1KPOPi1YNrYL619w@mail.gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 3 Sep 2014 11:15:31 +0100
-Message-ID: <CAJTo0Lbb8uWBKYUTrqvbuo0VEQm=g3uRMv1KPOPi1YNrYL619w@mail.gmail.com>
+Date: Wed, 3 Sep 2014 11:16:34 +0100
+Message-ID: <CAJTo0LZCjHOZ_ve_DJDTHN2P6REWFVCWDSbmVouNwPVK1HUkWg@mail.gmail.com>
 To: OE-devel <openembedded-devel@lists.openembedded.org>
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
 Subject: Re: [oe-commits] Richard Purdie : package_rpm: Add custom extension support for spec generation.
@@ -45,13 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 10:16:00 -0000
+X-List-Received-Date: Wed, 03 Sep 2014 10:16:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 3 September 2014 02:51, Hongxu Jia <hongxu.jia@windriver.com> wrote:
-> Exception: NameError: global name 'package_rpm_extra_pkgdata' is not defined
+Actually, that patch has a typo in the logic:
 
-If you set the variable you also need to provide the function.
++    extra_pkgdata = (d.getVar("RPM_EXTRA_PKGDATA", True) or "0") == "0"
+
+== "1", surely.
 
 Ross
+
+On 3 September 2014 11:15, Burton, Ross <ross.burton@intel.com> wrote:
+> On 3 September 2014 02:51, Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>> Exception: NameError: global name 'package_rpm_extra_pkgdata' is not defined
+>
+> If you set the variable you also need to provide the function.
+>
+> Ross
 
