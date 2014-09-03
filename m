@@ -1,35 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f47.google.com (mail-yh0-f47.google.com
-	[209.85.213.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FB55713BC
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D77F70F28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Sep 2014 15:26:16 +0000 (UTC)
-Received: by mail-yh0-f47.google.com with SMTP id c41so5387126yho.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Sep 2014 08:26:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=1xVE434RqZFqoZjNLnYxSzEnuS7sgGTnrxl+DnpOncI=;
-	b=raWbiKp87gu7MoLRhlWzKMBrXTA5Sx5cWSZP+WJTV+OCFdAJ5/oK1FYB1Sw69CHSAv
-	bCtzvnXFAmzSgmDl17FT2BuBlZqdtdU804/Qu90XMM4kUdmBUXPvA8JiBTjlJuv/JEs5
-	/B9Ml9uP/aA8L3zdxMlz8+yZGpXgdO0F6LDxNuaMM244ye/9aifiSYYWeV7IPExIzHxc
-	cuKKyN+MQcTrsmKCapMYSDOM8f5y55dtCPExh65NDNLKQeDce3yboRX//a0WWbiqpeud
-	1t1zZ2aPTrpxl5zK/jDOX0UIja6LQnKSwgQNS8mPuNXfdfFEFp7qQ1lFuZFV/hCN+zPr
-	JPDA==
+	Wed,  3 Sep 2014 15:56:59 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 03 Sep 2014 08:50:53 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.04,458,1406617200"; d="scan'208";a="597371408"
+Received: from svgunawa-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.16])
+	by orsmga002.jf.intel.com with ESMTP; 03 Sep 2014 08:56:54 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Randy MacLeod <randy.macleod@windriver.com>
+Date: Wed, 03 Sep 2014 16:56:53 +0100
+Message-ID: <1666530.MBVyTItIEP@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.3 (Linux/3.15.10-201.fc20.x86_64; KDE/4.13.3; x86_64; ;
+	)
+In-Reply-To: <54072E52.208@windriver.com>
+References: <5406C319.3030402@windriver.com> <54072E52.208@windriver.com>
 MIME-Version: 1.0
-X-Received: by 10.236.207.73 with SMTP id m49mr15741263yho.90.1409757977960;
-	Wed, 03 Sep 2014 08:26:17 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.56.201 with HTTP; Wed, 3 Sep 2014 08:26:17 -0700 (PDT)
-In-Reply-To: <1409647021-15057-1-git-send-email-dv@pseudoterminal.org>
-References: <1409647021-15057-1-git-send-email-dv@pseudoterminal.org>
-Date: Wed, 3 Sep 2014 12:26:17 -0300
-X-Google-Sender-Auth: puIGnr1RFwjntOVrjA-O5UxBL5U
-Message-ID: <CAP9ODKq=FQO26_OLKZCK_vxqLO_8r1Vexbb76XB9g55NZdChRg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] Disable fatal linker warnings related to SQLite
+Cc: koen@dominion.thruhere.net, openembedded-devel@lists.openembedded.org
+Subject: Re: systemd support for recipes in meta-openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,37 +35,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 15:26:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Sep 2014 15:57:01 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Tue, Sep 2, 2014 at 5:37 AM, Carlos Rafael Giani
-<dv@pseudoterminal.org> wrote:
-> With the gold linker, problems with hidden sqlite3 symbols occur. Example:
->
->   warning: hidden symbol 'sqlite3_temp_directory' in obj/third_party/sqlite/libsqlite3.a
->   (obj/third_party/sqlite/amalgamation/sqlite.sqlite3.o) is referenced by DSO
->   /mnt/ramdisk/yocto/qemu-test-build/tmp//sysroots/qemux86/usr/lib/../lib/libsoftokn3.so
->
-> The problem is known, and a solution would be to set the build scripts
-> to not build sqlite3 and use the system's sqlite3 library instead.
-> However, currently, this is not possible:
->
->   https://code.google.com/p/chromium/issues/detail?id=22208
->
-> The Crosswalk project fixed this by setting the warnings to non-fatal:
->
->   https://github.com/crosswalk-project/crosswalk/commit/83d22586852a3d64300fd024e24ade9a4ac325be
->
-> The disable_fatal_linker_warnings GYP flag used in that commit is already
-> part of Chromium 37. It just needs to be enabled. This commit does
-> precisely that.
->
-> Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+On Wednesday 03 September 2014 11:05:54 Randy MacLeod wrote:
+> On 14-09-03 03:28 AM, ChenQi wrote:
+> > In the next period, we are going to add systemd support (mostly systemd
+> > unit files) to recipes in meta-oe, meta-networking and meta-webserver.
+> > 
+> > If some of you are interested in doing such work, or you have being
+> > doing work in this area, please let us know so that we don't duplicate
+> > work.
+> 
+> Here's the list of recipes for which we _intend_ to
+> add systemd support over the coming weeks:
+> 
+> meta-oe:
+> 
+>   collectd        Script: collectd
+>   postgresql      Script: postgresql-server
+>   samba           Script: samba winbind
+>   smartmontools   Script: smartd
+> 
+> 
+> meta-networking:
+> 
+>   arptables       Script: arptables
+>   conntrack-tools Script: conntrackd conntrack-failover
+>   ebtables        Script: ebtables
+>   init-ifupdown   Script: networking
+>   memcached       Script: memcached
+>   netcf           Script: (?????)
+>   proftpd         Script: proftpd
+>   quagga          Script: quagga watchquagga
+>   radvd           Script: radvd
+>   rp-pppoe        Script: pppoe-server
+>   snort           Script: snort
+>   tftp-hpa        Script: tftpd-hpa
+>   vsftpd          Script: vsftpd
+>   xl2tpd          Script: xl2tpd
+> 
+> 
+> meta-webserver:
+> 
+>   nginx           Script: nginx
+>   nostromo        Script: nostromo
+>   webmin          Script: webmin
+> 
+> I looked for systemd bbappends using:
+>     http://layers.openembedded.org/layerindex/branch/master/recipes/
+> but didn't find any.
+> 
+> 
+> I need to figure out what if anything to do with meta-systemd.
+> The intent of that layer has probably been explained in the email logs
+> and I suspect that I should look at how meta-angstrom uses it but
+> I won't have time to do those investigations until later today.
 
-Applied.
+There's not a lot left in meta-systemd; it been chipped away as the relevant 
+support has been added into the corresponding recipes.
+
+Here is a quick script that shows the parts that may still need looking at:
+
+  https://gist.github.com/bluelightning/fd4a54d64b5619e20d5f
+
+It looks like Chen's patchset has just landed in OE-Core master; I haven't 
+looked at the changes closely but it seems like a few of the remaining non-
+trivial bbappends may now be able to be pared down to just the 
+RDEPENDS/RRECOMMENDS/RREPLACES lines (e.g. keymaps, dhcp, at).
+
+The sooner meta-systemd can be labelled as only interesting to those needing 
+the RDEPENDS/RRECOMMENDS/RREPLACES for the old packaging, the better IMO, so I 
+really appreciate this work, thanks!
+
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
