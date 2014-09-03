@@ -1,32 +1,28 @@
-Return-Path: <sujith.h@gmail.com>
-Received: from mail-qa0-f54.google.com (mail-qa0-f54.google.com
-	[209.85.216.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D80F713BF
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BDB07136A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Sep 2014 10:48:32 +0000 (UTC)
-Received: by mail-qa0-f54.google.com with SMTP id x12so7665474qac.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Sep 2014 03:48:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=Tg8RdHmFZQM1XzqkyFs2qbktfH4GPDlJdAzIO3eMQu4=;
-	b=OCXduwHWDtoz40byiYSKyOWqC/Jhv2DHQU11+2Zyt3HaJ6N7jOWdd8z+1m3YzRaMFJ
-	cVbKcdBvbh1Wdd5x5JowDUZCsMtaSC5epHLQ8XR5eXNjaiVp51mKSmzeJahyRsKyJ4+c
-	3AKvAhs7MKKIRXsPOuVcmzpsMDQ9CB7/NL2IaJ7m/JQluxhdY1lzMn6vA8wzdOOrcUkM
-	gNLT89zUoSVkbnbIUbJ+aHY8Qp5hrZAGSDmquDj3N2hodTnSIYHQOT5ERM2v9uUD+csh
-	0NjpmG4p/Yk4i6/4ezLS1kKK4vvdMFwLqaGVhDyVGAmsxLFlvyOFNhqS19hTyK6sAeX0
-	vJtg==
-X-Received: by 10.224.114.136 with SMTP id e8mr24905060qaq.67.1409741314028;
-	Wed, 03 Sep 2014 03:48:34 -0700 (PDT)
+	Wed,  3 Sep 2014 15:07:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s83F5tFg010885
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 3 Sep 2014 08:05:56 -0700 (PDT)
+Received: from [128.224.56.84] (128.224.56.84) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Wed, 3 Sep 2014 08:05:55 -0700
+Message-ID: <54072E52.208@windriver.com>
+Date: Wed, 3 Sep 2014 11:05:54 -0400
+From: Randy MacLeod <randy.macleod@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-Received: by 10.140.41.148 with HTTP; Wed, 3 Sep 2014 03:48:13 -0700 (PDT)
-From: sujith h <sujith.h@gmail.com>
-Date: Wed, 3 Sep 2014 16:18:13 +0530
-Message-ID: <CADyYWLk5auD9_xirCJ2KCJyc5W1kXf9J0J7hWsP9vm68H06rsw@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] Issue with QML running on qemuarm
+To: ChenQi <Qi.Chen@windriver.com>, <openembedded-devel@lists.openembedded.org>
+References: <5406C319.3030402@windriver.com>
+In-Reply-To: <5406C319.3030402@windriver.com>
+X-Originating-IP: [128.224.56.84]
+Cc: koen@dominion.thruhere.net
+Subject: Re: systemd support for recipes in meta-openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,39 +36,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 10:48:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Sep 2014 15:07:11 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 14-09-03 03:28 AM, ChenQi wrote:
+> Hi All,
+>
+> In the next period, we are going to add systemd support (mostly systemd
+> unit files) to recipes in meta-oe, meta-networking and meta-webserver.
+>
+> If some of you are interested in doing such work, or you have being
+> doing work in this area, please let us know so that we don't duplicate
+> work.
+>
+> Best Regards,
+> Chen Qi
 
-When I tried to build core-image-sato with meta-qt5 with machine as
-qemuarm, I am noticing that qml examples are not running. The error I am
-getting is as shown below:
 
-root@qemuarm:/usr/share/qt5/examples# ./quick/animation/animation
-libEGL warning: DRI2: failed to authenticate
-Qt Warning: Could not find a location of the system's Compose files.
-Consider setting the QTCOMPOSE environment variable.
-Qt Warning: Could not find a location of the system's Compose files.
-Consider setting the QTCOMPOSE environment variable.
-Unable to find an X11 visual which matches EGL config 77
-Could not initialize OpenGL
-Aborted
-root@qemuarm:/usr/share/qt5/examples#
+Here's the list of recipes for which we _intend_ to
+add systemd support over the coming weeks:
 
-At the same time when I use machine qemuppc or qemux86_64, I am able to run
-the qml examples properly. Any clue what could be the reason for the
-failure in qemuarm?
+meta-oe:
 
-Thanks,
-Sujith H
+  collectd        Script: collectd
+  postgresql      Script: postgresql-server
+  samba           Script: samba winbind
+  smartmontools   Script: smartd
 
---=20
-=E0=B4=B8=E0=B5=81=E0=B4=9C=E0=B4=BF=E0=B4=A4=E0=B5=8D =E0=B4=B9=E0=B4=B0=
-=E0=B4=BF=E0=B4=A6=E0=B4=BE=E0=B4=B8=E0=B4=A8=E0=B5=8D
-Bangalore
-<Project>Contributor to KDE project
-http://fci.wikia.com/wiki/Anti-DRM-Campaign
-<Blog> http://sujithh.info
+
+meta-networking:
+
+  arptables       Script: arptables
+  conntrack-tools Script: conntrackd conntrack-failover
+  ebtables        Script: ebtables
+  init-ifupdown   Script: networking
+  memcached       Script: memcached
+  netcf           Script: (?????)
+  proftpd         Script: proftpd
+  quagga          Script: quagga watchquagga
+  radvd           Script: radvd
+  rp-pppoe        Script: pppoe-server
+  snort           Script: snort
+  tftp-hpa        Script: tftpd-hpa
+  vsftpd          Script: vsftpd
+  xl2tpd          Script: xl2tpd
+
+
+meta-webserver:
+
+  nginx           Script: nginx
+  nostromo        Script: nostromo
+  webmin          Script: webmin
+
+I looked for systemd bbappends using:
+    http://layers.openembedded.org/layerindex/branch/master/recipes/
+but didn't find any.
+
+
+I need to figure out what if anything to do with meta-systemd.
+The intent of that layer has probably been explained in the email logs
+and I suspect that I should look at how meta-angstrom uses it but
+I won't have time to do those investigations until later today.
+
+
+-- 
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350
 
