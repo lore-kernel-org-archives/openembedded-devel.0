@@ -1,24 +1,18 @@
-Return-Path: <xiao.zhang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 19CE171435
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FEAE71347
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 09:40:23 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s849eNEn029680
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  4 Sep 2014 09:45:09 +0000 (UTC)
+Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 11EAA2253E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Sep 2014 02:40:23 -0700 (PDT)
-Received: from localhost.localdomain (128.224.163.132) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 4 Sep 2014 02:40:22 -0700
-From: Zhang Xiao <xiao.zhang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Sep 2014 17:40:17 +0800
-Message-ID: <1409823617-1310-1-git-send-email-xiao.zhang@windriver.com>
-X-Mailer: git-send-email 1.7.0.4
-MIME-Version: 1.0
-Subject: [PATCH] tftp-hpa: bug fix on empty file put error
+	Thu,  4 Sep 2014 11:45:08 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  4 Sep 2014 11:44:33 +0200
+Message-Id: <1409823873-19321-1-git-send-email-dv@pseudoterminal.org>
+X-Mailer: git-send-email 1.8.3.2
+Subject: [meta-browser][PATCH] chromium: Upgrade to version 37.0.2062.94
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,73 +26,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 09:40:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 Sep 2014 09:45:14 -0000
 
-With the feature that checking the disk filled up, the return value of
-function write_behind was checked and used to detect the disk status.
-While for empty file, without data being written, this function will
-return -1 thus the disk filled up error was miss-raised. Fix it.
+This is the current stable release of the 37 series. Since it is no longer
+a beta, the DEFAULT_PREFERENCE = "-1" bit is removed. Furthermore, this
+version adds the angle_use_commit_id flag, which makes the related patch
+obsolete.
 
-Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- .../tftp-hpa-bug-fix-on-empty-file-put-error.patch | 33 ++++++++++++++++++++++
- .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
+ .../{chromium_37.0.2062.0.bb => chromium_37.0.2062.94.bb} | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
+ rename recipes-browser/chromium/{chromium_37.0.2062.0.bb => chromium_37.0.2062.94.bb} (93%)
 
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
-new file mode 100644
-index 0000000..aa29d9c
---- /dev/null
-+++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
-@@ -0,0 +1,33 @@
-+tftp-hpa: bug fix on empty file put error
-+
-+With the feature that checking the disk filled up, the return value of
-+function write_behind was checked and used to detect the disk status.
-+While for empty file, without data being written, this function will
-+return -1 thus the disk filled up error was miss-raised. Fix it.
-+
-+Upstream-Status: pending
-+
-+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
-+---
-+ tftpd/tftpd.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+--- a/tftpd/tftpd.c
-++++ b/tftpd/tftpd.c
-+@@ -1692,7 +1692,7 @@ static void tftp_recvfile(const struct f
-+             syslog(LOG_WARNING, "tftpd: write(ack): %m");
-+             goto abort;
-+         }
-+-        if(write_behind(file, pf->f_convert) < 0) {
-++        if(write_behind(file, pf->f_convert) < -1) {
-+             nak(ENOSPACE, NULL);
-+             (void)fclose(file);
-+             goto abort;
-+@@ -1727,7 +1727,7 @@ static void tftp_recvfile(const struct f
-+             goto abort;
-+         }
-+     } while (size == segsize);
-+-    if(write_behind(file, pf->f_convert) < 0) {
-++    if(write_behind(file, pf->f_convert) < -1) {
-+         nak(ENOSPACE, NULL);
-+         (void)fclose(file);
-+         goto abort;
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-index 1951747..e58a4b1 100644
---- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-+++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-@@ -25,6 +25,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
-            file://init \
-            file://add-error-check-for-disk-filled-up.patch \
-            file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
-+           file://tftp-hpa-bug-fix-on-empty-file-put-error.patch \
+diff --git a/recipes-browser/chromium/chromium_37.0.2062.0.bb b/recipes-browser/chromium/chromium_37.0.2062.94.bb
+similarity index 93%
+rename from recipes-browser/chromium/chromium_37.0.2062.0.bb
+rename to recipes-browser/chromium/chromium_37.0.2062.94.bb
+index c0e3b36..510b644 100644
+--- a/recipes-browser/chromium/chromium_37.0.2062.0.bb
++++ b/recipes-browser/chromium/chromium_37.0.2062.94.bb
+@@ -11,16 +11,11 @@ SRC_URI = "\
+         ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://disable-rasterization-whitelist-unlocking-impl-side-painting.patch', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://0002-Disable-API-keys-info-bar.patch', '', d)} \
+         file://unistd-2.patch \
+-        file://0001-Disable-ANGLE-commit-ID-generation.patch \
+         file://google-chrome \
+         file://google-chrome.desktop \
+ "
+-SRC_URI[md5sum] = "327e528a919239f18db581a8a6d1adea"
+-SRC_URI[sha256sum] = "6b9ce84df2b6f9d20b209aab16034079cea981b00b8d20660571555f53c815cb"
+-
+-# Chromium 37 is currently in beta status
+-DEFAULT_PREFERENCE = "-1"
+-
++SRC_URI[md5sum] = "49bcf221a2e2e5406ae2e69964d01093"
++SRC_URI[sha256sum] = "d27c19580b74cbe143131f0bc097557b3b2fb3d2be966e688d8af51a779ce533"
+ 
+ # conditionally add ozone-wayland and its patches to the Chromium sources
+ 
+@@ -38,7 +33,10 @@ OZONE_WAYLAND_EXTRA_PATCHES = " \
+         file://0001-Remove-X-libraries-from-GYP-files.patch \
  "
  
- SRC_URI[md5sum] = "46c9bd20bbffa62f79c958c7b99aac21"
+-SRC_URI += "${@base_conditional('ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=ozone-wayland-git;branch=Milestone-Summer;rev=a68f96aa1668de6f2a922a37b48d713d5d809ee0', '', d)}"
++OZONE_WAYLAND_GIT_DESTSUFFIX = "ozone-wayland-git"
++OZONE_WAYLAND_GIT_BRANCH = "Milestone-Summer"
++OZONE_WAYLAND_GIT_SRCREV = "8346e3cecb5c1331a25ba235f29b72f3f049966a"
++SRC_URI += "${@base_conditional('ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
+ 
+ do_unpack[postfuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
+ do_patch[prefuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
+@@ -81,6 +79,7 @@ PACKAGECONFIG ??= "use-egl"
+ PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
+ 
+ EXTRA_OEGYP =	" \
++	-Dangle_use_commit_id=0 \
+ 	-Ddisable_fatal_linker_warnings=1 \
+ 	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_binary=0', d)} \
+ 	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
 -- 
-1.8.5.2.233.g932f7e4
+1.8.3.2
 
 
