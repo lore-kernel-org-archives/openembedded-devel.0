@@ -1,34 +1,35 @@
-Return-Path: <switesh.fulpagare@mindastoneridge.com>
-Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 498E871399
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
+	[209.85.192.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B564701F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 07:10:01 +0000 (UTC)
-Received: by mail-vc0-f175.google.com with SMTP id lf12so10018840vcb.20
+	Thu,  4 Sep 2014 07:28:54 +0000 (UTC)
+Received: by mail-pd0-f181.google.com with SMTP id fp1so13086572pdb.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Sep 2014 00:10:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=CmIxhaTTxIOHZ8TysUVqinBfdPoJd2/h+OzKGMD52As=;
-	b=IFlcrI0tkAfytiMCzon42ZlPtHlGWK57NRnup5w2Xeup2VqrP3TQLOndRndQArFWod
-	SY6nD9GNIGv8DYNHcpYx668r27CzpLO3wb6OcZTqTpvHW2xPtGZuOl3MrGx/PctojJIC
-	tilUWZ6u4VSMgVupeQmJLPOuf/Y3fMhRL2shYkLsAOKwocLMIWRiSDB/8V7YLSukhYEu
-	WnrO979/gEf/T3vDYbg+4lq560NPIWfiIj9lIi106wIM3MzEUSsu3l2UZCNnSWaFsTbO
-	DZDulKZ2GCikrG6U7gpCiRr+QCn56OZIQWMFs421lPW7S4P+2bqjIwoncE++u+jeR9T8
-	HmrA==
-X-Gm-Message-State: ALoCoQm8+DpHI5hUm+hS1M/03tNwgOueZjhluhIb7EGrVo2yszTSfDicUhe0nb/i01e2owq+hhv+tyQb8tUbu597bk8+YhiETmy4/ZwwB8nPRMUyyhCSnaKE1dLNEvdPTadrig3s905QUPcDWyCExhstC5SHjcliow==
-MIME-Version: 1.0
-X-Received: by 10.220.182.1 with SMTP id ca1mr1944811vcb.21.1409814602391;
-	Thu, 04 Sep 2014 00:10:02 -0700 (PDT)
-Received: by 10.52.245.73 with HTTP; Thu, 4 Sep 2014 00:10:02 -0700 (PDT)
-Date: Thu, 4 Sep 2014 12:40:02 +0530
-Message-ID: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
-From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
+	Thu, 04 Sep 2014 00:28:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=sA3GmAUFmgPk1+JcNCsn237Llyiav8CnxbCsuvS3jfI=;
+	b=zQQH7tElsefOP42jMKCpVGFzywUo4LK+8ruKJf+XA10kId5VKUxDRakUu4pFDQVmL5
+	6iS6l+ujgprLH1D+vfaRnaB8zBNd9hIlkZREzVBuc8H6JI9P/Ci2rU4aE7bGUD0EaMHV
+	sy+b05Ec0cvRwNt93N+T3o691tNu3wMxKx2VGNj/qpRvT8o1eAFC/R67sRy1Q78p5bl+
+	0aPb5iIGtybacXoBlRWVIzb3CpHNtcujmJgb8oCW+tEfaVrcKKoPrwWLcjk3CNJsBr6P
+	fIdIBwTTGSpm0b2cCtLs4u5pt1eG3Oq5F4e8tiHIjsfpQUQLI2YtkVHbTglqs4wrVAqQ
+	dJ8Q==
+X-Received: by 10.70.41.136 with SMTP id f8mr5726953pdl.46.1409815734282;
+	Thu, 04 Sep 2014 00:28:54 -0700 (PDT)
+Received: from haswell.localdomain (c-98-207-177-218.hsd1.ca.comcast.net.
+	[98.207.177.218])
+	by mx.google.com with ESMTPSA id pn13sm845213pdb.53.2014.09.04.00.28.53
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 04 Sep 2014 00:28:53 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Error while bitbake meta-toolchain-qt5
+Date: Thu,  4 Sep 2014 00:32:33 -0700
+Message-Id: <1409815958-24314-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-networking][PATCH 1/6] ipsec-tools: Fix build with glibc 2.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,39 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 07:10:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 04 Sep 2014 07:28:55 -0000
 
-Hi,
- I am getting error while Building Qt5 using yocto on Wandboard refering to
-the link
-http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboard
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../ipsec-tools/ipsec-tools/glibc-2.20.patch       | 23 ++++++++++++++++++++++
+ .../ipsec-tools/ipsec-tools_0.8.2.bb               |  1 +
+ 2 files changed, 24 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch
 
-At the time of
-$ bitbake meta-toolchain-qt5
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch
+new file mode 100644
+index 0000000..36efc49
+--- /dev/null
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/glibc-2.20.patch
+@@ -0,0 +1,23 @@
++squahes below warning
++  warning: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
++
++Seen with glibc 2.20
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Pending
++Index: ipsec-tools-0.8.2/src/include-glibc/glibc-bugs.h
++===================================================================
++--- ipsec-tools-0.8.2.orig/src/include-glibc/glibc-bugs.h	2006-09-09 09:22:08.000000000 -0700
+++++ ipsec-tools-0.8.2/src/include-glibc/glibc-bugs.h	2014-09-03 22:27:22.551563888 -0700
++@@ -4,7 +4,11 @@
++ #define __GLIBC_BUGS_H__ 1
++ 
++ #define _XOPEN_SOURCE 500
+++/* Legacy feature macro.*/
++ #define _BSD_SOURCE
+++/* New feature macro that provides everything _BSD_SOURCE and
+++ * _SVID_SOURCE provided and possibly more.  */
+++#define _DEFAULT_SOURCE
++ 
++ #include <features.h>
++ #include <sys/types.h>
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+index 208268f..babce40 100644
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV
+            file://0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch \
+            file://racoon-check-invalid-pointers.patch \
+            file://racoon-check-invalid-ivm.patch \
++           file://glibc-2.20.patch \
+           "
+ SRC_URI[md5sum] = "d53ec14a0a3ece64e09e5e34b3350b41"
+ SRC_URI[sha256sum] = "8eb6b38716e2f3a8a72f1f549c9444c2bc28d52c9536792690564c74fe722f2d"
+-- 
+2.1.0
 
-I am getting error, i have posted that error in wandboard forum -
-http://forums.wandboard.org/viewtopic.php?f=3D10&t=3D573&p=3D2520&sid=3D45c=
-e5e714aa2ae65ffc52cb7bedf31b3#p2520
-
-Can you please look at this post? I think it is problem with 'git://
-qt.gitorious.org/qt/qtwayland.git
-
-Thanking you in advance.
-
-- Switesh.
-
---=20
-=E2=80=9CThe contents of this e-mail message and any attachments are confid=
-ential=20
-and are intended solely for addressee. The information may also be legally=
-=20
-privileged. This transmission is sent in trust, for the sole purpose of=20
-delivery to the intended recipient. If you have received this transmission=
-=20
-in error, any use, reproduction or dissemination of this transmission is=20
-strictly prohibited. If you are not the intended recipient, please=20
-immediately notify the sender by reply e-mail or phone and delete this=20
-message and its attachments, if any.=E2=80=9D
 
