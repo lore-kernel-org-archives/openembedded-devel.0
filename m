@@ -1,40 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 30C2E71044;
-	Thu,  4 Sep 2014 15:41:47 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id r10so13745647pdi.8
-	for <multiple recipients>; Thu, 04 Sep 2014 08:41:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=P4NEeI0vq/ibP9vxt2X+snNlI5MKg6LSCUl+pHuuJRg=;
-	b=1CXqSHuH2mLIBSUyBDiYjvlBQYl9URpW5Y6QQDpYys5QRAsvNhU8tmD5OJfWZbDzd0
-	DOOyxKWyJ73+sqOA0vVp1oGnabPgHhV47WDnq7wCzq2e69735oySKrEIMCPJb8lCkVG+
-	6KBIdGfQioofO7Vm6glD+cVbt6fDXA83RBiKi9evd8pgTAOyvAa3rpbbyNk0cINMEcnp
-	ajPXTgbYvlwpHWCN2J44hc1T11G+wXCvg1AVpdJ+FQBccbR0OEq95wTCCjYZ8sau+0u8
-	YjN16nWN2rlk42pd0yUpZoOJVmM4vgW0P6bIsdN+OIoUDCu2gaASBr4ZTpI8OA32T8xm
-	+wcg==
-X-Received: by 10.66.155.2 with SMTP id vs2mr9857276pab.60.1409845305154;
-	Thu, 04 Sep 2014 08:41:45 -0700 (PDT)
-Received: from ?IPv6:2601:c:9380:601:9d66:e68f:e0f4:6f0b?
-	([2601:c:9380:601:9d66:e68f:e0f4:6f0b])
-	by mx.google.com with ESMTPSA id qy1sm2000313pbc.27.2014.09.04.08.41.42
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 Sep 2014 08:41:43 -0700 (PDT)
-Message-ID: <5408882C.6020506@gmail.com>
-Date: Thu, 04 Sep 2014 08:41:32 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f50.google.com (mail-qa0-f50.google.com
+	[209.85.216.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 8015C71422
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  4 Sep 2014 16:27:10 +0000 (UTC)
+Received: by mail-qa0-f50.google.com with SMTP id cm18so9848409qab.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Sep 2014 09:27:11 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=vQKH8w/9+lUXLnqNgKcSwX/nc1JYBFK+elwIMvu2X88=;
+	b=F6v6Fo/DuuPq9gHOBTg/ZLBLIbhP0R1KkUx+4gPyVNK9+HYU4c0W6qLYBqpU1lskaI
+	IXckMbZvg6l5nxNouEDTzWKlSf8j6d5k1WDr2oLLTZsMZQzl/GRi80YPg97L4ZRJsWwo
+	bUZs7C6OTnfdfoh8SCa2g3kBqpmcEHns+J+WwbYU+ceh5y7TvjBYeo4uujCKVUV7Tidp
+	FSAXiWn0beaFchR866JXNftlAUn95JsT53Emsc54vy48AIA/JfzKyDOYXurukaaktQ45
+	xg7n0FcYdhvD/Aj0zrpVydxr0LguPPkEw4wSRGWu1RBhi+pMyO+WolsF5bsDqKSPr4kh
+	6Olw==
+X-Gm-Message-State: ALoCoQkCn/VCjeUz+6Y8YxG3af2rKsk3vvLqPuzGENtfhBrEmv/lDfObILTB/U1rbw0ALD6G21Ku
+X-Received: by 10.140.27.173 with SMTP id 42mr8211238qgx.59.1409848031259;
+	Thu, 04 Sep 2014 09:27:11 -0700 (PDT)
 MIME-Version: 1.0
-To: Robert Yang <liezhi.yang@windriver.com>, 
-	openembedded-devel@lists.openembedded.org, 
-	OE-core <openembedded-core@lists.openembedded.org>
+Received: by 10.140.29.183 with HTTP; Thu, 4 Sep 2014 09:26:51 -0700 (PDT)
+In-Reply-To: <5408882C.6020506@gmail.com>
 References: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
-	<54087F3F.2040103@windriver.com>
-In-Reply-To: <54087F3F.2040103@windriver.com>
+	<54087F3F.2040103@windriver.com> <5408882C.6020506@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 4 Sep 2014 17:26:51 +0100
+Message-ID: <CAJTo0LZYDn2vZt49Sj40W3GJ7RLiTZjVs8OjbrEU-2NBoTdyOQ@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Cc: OE-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] Style issue for recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -49,43 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 15:41:49 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Sep 2014 16:27:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-
-
-On 09/04/2014 08:03 AM, Robert Yang wrote:
+On 4 September 2014 16:41, akuster808 <akuster808@gmail.com> wrote:
+> This is the same reason why I have split a bb into two parts when I submit
+> upgrades. I feel it makes reviewing easier the next time a package gets
+> upgraded. Trying to find the actual changes between a file being deleted and
+> the new one being added might lead to missing something.
 >
-> On 09/04/2014 10:12 PM, Burton, Ross wrote:
->> Hi,
->>
->> Quick question of style for the community to bikeshed on:  in the
->> general case should recipes be split into foo_1.2.bb and foo.inc, or
->> should they only split to bb/inc if there are multiple versions and
->> generally there should just be foo_1.2.bb.
->
-> I think that put the constants in .inc is helpful for upgrading, for
-> example, the SUMMARY, DESCRIPTION, HOMEPAGE, SECTION, inherit and so on,
-> they are unlikely to change when upgrade.
+> If there are unintentional consequence by doing this, that is a problem.
 
-This is the same reason why I have split a bb into two parts when I 
-submit upgrades. I feel it makes reviewing easier the next time a 
-package gets upgraded. Trying to find the actual changes between a file 
-being deleted and the new one being added might lead to missing something.
+This is what git format-patch -M is for: it detects the rename and
+shows a "proper" diff.
 
-If there are unintentional consequence by doing this, that is a problem.
-
-- Armin
-
-> // Robert
->
->>
->> Specifically I'm looking at the libunwind patch for oe-core (moving
->> from meta-oe) which adds libunwind_1.1.bb and libunwind.inc.
->> Personally I feel that splitting them up complicates packaging and
->> should only be done if there's actually multiple versions being used.
->>
->> Ross
->>
+Ross
 
