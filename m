@@ -1,18 +1,34 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FEAE71347
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
+	[209.85.192.41])
+	by mail.openembedded.org (Postfix) with ESMTP id EC726713EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 09:45:09 +0000 (UTC)
-Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 11EAA2253E
+	Thu,  4 Sep 2014 14:12:23 +0000 (UTC)
+Received: by mail-qg0-f41.google.com with SMTP id i50so10177696qgf.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 11:45:08 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Sep 2014 11:44:33 +0200
-Message-Id: <1409823873-19321-1-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 1.8.3.2
-Subject: [meta-browser][PATCH] chromium: Upgrade to version 37.0.2062.94
+	Thu, 04 Sep 2014 07:12:24 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=P1XJ1I7iH/XMKYO1dJTV79mzg30uKRynLop3BcZrOwA=;
+	b=c9h16rfLAEPbqHCBzQuqDQb57IBgTg9OUBMmqgFE4w+zXVfNa2+NazH9oyk8kHWXjq
+	yzOJUwOhwyREoEm6wGQADrLIdCPdIg9dXfAHUZ/laG785w5xrmS5JaSUhWcZii7P5hgE
+	aYwdKcxPxXA9dQcDJA2LRhI14cDRfnMjBxSddicAFcpLKWKq53lpr4q2vRDCpQBddHbs
+	V9pTe4Izg2WJxyRO/jdiKouSXzFi1hxvENfWAsD4G461lFaDkEVIh0n5f8oobybx7vXU
+	JTyzYE2BICn1SDc7+GGYJqUql1i1ity4IK5bge5FWNQfW4m7haZoosR+iXzWY6EPSKd1
+	QNpg==
+X-Gm-Message-State: ALoCoQlR26iys0y6pmI8AbeqxjC+S79spPxD8yqNa1XhXftjPdgWI7SsrWrgnJ/c4kAW3HYkysSe
+X-Received: by 10.140.94.234 with SMTP id g97mr7044324qge.77.1409839943907;
+	Thu, 04 Sep 2014 07:12:23 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.29.183 with HTTP; Thu, 4 Sep 2014 07:12:02 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 4 Sep 2014 15:12:02 +0100
+Message-ID: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Style issue for recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,66 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 09:45:14 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 14:12:28 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This is the current stable release of the 37 series. Since it is no longer
-a beta, the DEFAULT_PREFERENCE = "-1" bit is removed. Furthermore, this
-version adds the angle_use_commit_id flag, which makes the related patch
-obsolete.
+Hi,
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
----
- .../{chromium_37.0.2062.0.bb => chromium_37.0.2062.94.bb} | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
- rename recipes-browser/chromium/{chromium_37.0.2062.0.bb => chromium_37.0.2062.94.bb} (93%)
+Quick question of style for the community to bikeshed on:  in the
+general case should recipes be split into foo_1.2.bb and foo.inc, or
+should they only split to bb/inc if there are multiple versions and
+generally there should just be foo_1.2.bb.
 
-diff --git a/recipes-browser/chromium/chromium_37.0.2062.0.bb b/recipes-browser/chromium/chromium_37.0.2062.94.bb
-similarity index 93%
-rename from recipes-browser/chromium/chromium_37.0.2062.0.bb
-rename to recipes-browser/chromium/chromium_37.0.2062.94.bb
-index c0e3b36..510b644 100644
---- a/recipes-browser/chromium/chromium_37.0.2062.0.bb
-+++ b/recipes-browser/chromium/chromium_37.0.2062.94.bb
-@@ -11,16 +11,11 @@ SRC_URI = "\
-         ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://disable-rasterization-whitelist-unlocking-impl-side-painting.patch', '', d)} \
-         ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://0002-Disable-API-keys-info-bar.patch', '', d)} \
-         file://unistd-2.patch \
--        file://0001-Disable-ANGLE-commit-ID-generation.patch \
-         file://google-chrome \
-         file://google-chrome.desktop \
- "
--SRC_URI[md5sum] = "327e528a919239f18db581a8a6d1adea"
--SRC_URI[sha256sum] = "6b9ce84df2b6f9d20b209aab16034079cea981b00b8d20660571555f53c815cb"
--
--# Chromium 37 is currently in beta status
--DEFAULT_PREFERENCE = "-1"
--
-+SRC_URI[md5sum] = "49bcf221a2e2e5406ae2e69964d01093"
-+SRC_URI[sha256sum] = "d27c19580b74cbe143131f0bc097557b3b2fb3d2be966e688d8af51a779ce533"
- 
- # conditionally add ozone-wayland and its patches to the Chromium sources
- 
-@@ -38,7 +33,10 @@ OZONE_WAYLAND_EXTRA_PATCHES = " \
-         file://0001-Remove-X-libraries-from-GYP-files.patch \
- "
- 
--SRC_URI += "${@base_conditional('ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=ozone-wayland-git;branch=Milestone-Summer;rev=a68f96aa1668de6f2a922a37b48d713d5d809ee0', '', d)}"
-+OZONE_WAYLAND_GIT_DESTSUFFIX = "ozone-wayland-git"
-+OZONE_WAYLAND_GIT_BRANCH = "Milestone-Summer"
-+OZONE_WAYLAND_GIT_SRCREV = "8346e3cecb5c1331a25ba235f29b72f3f049966a"
-+SRC_URI += "${@base_conditional('ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
- 
- do_unpack[postfuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
- do_patch[prefuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
-@@ -81,6 +79,7 @@ PACKAGECONFIG ??= "use-egl"
- PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
- 
- EXTRA_OEGYP =	" \
-+	-Dangle_use_commit_id=0 \
- 	-Ddisable_fatal_linker_warnings=1 \
- 	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_binary=0', d)} \
- 	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
--- 
-1.8.3.2
+Specifically I'm looking at the libunwind patch for oe-core (moving
+from meta-oe) which adds libunwind_1.1.bb and libunwind.inc.
+Personally I feel that splitting them up complicates packaging and
+should only be done if there's actually multiple versions being used.
 
+Ross
 
