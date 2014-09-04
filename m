@@ -1,35 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
-	[209.85.192.176])
-	by mail.openembedded.org (Postfix) with ESMTP id CE02971353
+Return-Path: <switesh.fulpagare@mindastoneridge.com>
+Received: from mail-vc0-f175.google.com (mail-vc0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 498E871399
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Sep 2014 16:53:08 +0000 (UTC)
-Received: by mail-pd0-f176.google.com with SMTP id w10so2093165pde.7
+	Thu,  4 Sep 2014 07:10:01 +0000 (UTC)
+Received: by mail-vc0-f175.google.com with SMTP id lf12so10018840vcb.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Sep 2014 09:53:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=5KjZBPP0cJC16tcq87A3jaht9duJh3ESFEFIdyI4jdw=;
-	b=cJH3hqbDIBqLgC/Ov/lQCcSlJkfJkGqc9/r76Aobi58W7LIpAZXgcXSCRY7RrX14Bt
-	ETjUIAGVKG4GX00upySEY46VZ64ecdGjR2CSrvf3OAujx0b5TsjUWwUrUFcGUwDD+EdB
-	91Q3V2OkxTVtD1lBnbkDr/sHJh792gJy+ZH1U2kpsOBU53N6yhBYEVJv3A3GoPHoRNc4
-	kEHli6avQmaYG98/tZWAEtHWltO9zlxNFpTAfWvaKszu3V6zXOLiM/Gdt0JyIGqTc87k
-	NJfI2XtRD7YP0WA1EAs8R+C4Vdh9R8qEy69yHXvzTrvxVCIAxDZQwaR84lA+bijrrmyT
-	Kh7Q==
-X-Received: by 10.70.91.35 with SMTP id cb3mr20807329pdb.127.1409763183621;
-	Wed, 03 Sep 2014 09:53:03 -0700 (PDT)
-Received: from haswell.localdomain (c-98-207-177-218.hsd1.ca.comcast.net.
-	[98.207.177.218])
-	by mx.google.com with ESMTPSA id b9sm7287738pbu.91.2014.09.03.09.53.02
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 03 Sep 2014 09:53:02 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 04 Sep 2014 00:10:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=CmIxhaTTxIOHZ8TysUVqinBfdPoJd2/h+OzKGMD52As=;
+	b=IFlcrI0tkAfytiMCzon42ZlPtHlGWK57NRnup5w2Xeup2VqrP3TQLOndRndQArFWod
+	SY6nD9GNIGv8DYNHcpYx668r27CzpLO3wb6OcZTqTpvHW2xPtGZuOl3MrGx/PctojJIC
+	tilUWZ6u4VSMgVupeQmJLPOuf/Y3fMhRL2shYkLsAOKwocLMIWRiSDB/8V7YLSukhYEu
+	WnrO979/gEf/T3vDYbg+4lq560NPIWfiIj9lIi106wIM3MzEUSsu3l2UZCNnSWaFsTbO
+	DZDulKZ2GCikrG6U7gpCiRr+QCn56OZIQWMFs421lPW7S4P+2bqjIwoncE++u+jeR9T8
+	HmrA==
+X-Gm-Message-State: ALoCoQm8+DpHI5hUm+hS1M/03tNwgOueZjhluhIb7EGrVo2yszTSfDicUhe0nb/i01e2owq+hhv+tyQb8tUbu597bk8+YhiETmy4/ZwwB8nPRMUyyhCSnaKE1dLNEvdPTadrig3s905QUPcDWyCExhstC5SHjcliow==
+MIME-Version: 1.0
+X-Received: by 10.220.182.1 with SMTP id ca1mr1944811vcb.21.1409814602391;
+	Thu, 04 Sep 2014 00:10:02 -0700 (PDT)
+Received: by 10.52.245.73 with HTTP; Thu, 4 Sep 2014 00:10:02 -0700 (PDT)
+Date: Thu, 4 Sep 2014 12:40:02 +0530
+Message-ID: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
+From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Sep 2014 09:56:48 -0700
-Message-Id: <1409763408-2398-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][PATCH] collectd: Upgrade to 5.4.1 and fix with glibc 2.20
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Error while bitbake meta-toolchain-qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,174 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Sep 2014 16:53:15 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 07:10:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../collectd/glibc-2.20-compatiblity.patch         | 102 +++++++++++++++++++++
- .../collectd/collectd/no-gcrypt-badpath.patch      |  10 +-
- .../{collectd_5.2.2.bb => collectd_5.4.1.bb}       |   8 +-
- 3 files changed, 111 insertions(+), 9 deletions(-)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/glibc-2.20-compatiblity.patch
- rename meta-oe/recipes-extended/collectd/{collectd_5.2.2.bb => collectd_5.4.1.bb} (93%)
+Hi,
+ I am getting error while Building Qt5 using yocto on Wandboard refering to
+the link
+http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboard
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd/glibc-2.20-compatiblity.patch b/meta-oe/recipes-extended/collectd/collectd/glibc-2.20-compatiblity.patch
-new file mode 100644
-index 0000000..2596bed
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/glibc-2.20-compatiblity.patch
-@@ -0,0 +1,102 @@
-+This makes it forward compatible with glibc 2.20+ where _BSD_SOURCE
-+macro has been deprecated.
-+
-+Fixes warnings like
-+
-+usr/include/features.h:148:3: error: #warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE" [-Werror=cpp]
-+|  # warning "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Pending
-+Index: collectd-5.4.1/configure.ac
-+===================================================================
-+--- collectd-5.4.1.orig/configure.ac	2014-09-03 01:21:10.666084244 -0700
-++++ collectd-5.4.1/configure.ac	2014-09-03 01:31:27.794084244 -0700
-+@@ -1288,6 +1288,7 @@
-+ 
-+ AC_CHECK_MEMBERS([struct udphdr.uh_dport, struct udphdr.uh_sport], [], [],
-+ [#define _BSD_SOURCE
-++#define _DEFAULT_SOURCE 1
-+ #if HAVE_STDINT_H
-+ # include <stdint.h>
-+ #endif
-+@@ -1309,6 +1310,7 @@
-+ ])
-+ AC_CHECK_MEMBERS([struct udphdr.dest, struct udphdr.source], [], [],
-+ [#define _BSD_SOURCE
-++#define _DEFAULT_SOURCE 1
-+ #if HAVE_STDINT_H
-+ # include <stdint.h>
-+ #endif
-+Index: collectd-5.4.1/src/dns.c
-+===================================================================
-+--- collectd-5.4.1.orig/src/dns.c	2014-01-26 00:09:14.856391886 -0800
-++++ collectd-5.4.1/src/dns.c	2014-09-03 01:32:37.666084244 -0700
-+@@ -22,6 +22,7 @@
-+  **/
-+ 
-+ #define _BSD_SOURCE
-++#define _DEFAULT_SOURCE 1
-+ 
-+ #include "collectd.h"
-+ #include "common.h"
-+Index: collectd-5.4.1/src/exec.c
-+===================================================================
-+--- collectd-5.4.1.orig/src/exec.c	2014-01-26 00:09:14.860391963 -0800
-++++ collectd-5.4.1/src/exec.c	2014-09-03 01:32:28.874084244 -0700
-+@@ -24,6 +24,7 @@
-+  **/
-+ 
-+ #define _BSD_SOURCE /* For setgroups */
-++#define _DEFAULT_SOURCE 1
-+ 
-+ #include "collectd.h"
-+ #include "common.h"
-+Index: collectd-5.4.1/src/load.c
-+===================================================================
-+--- collectd-5.4.1.orig/src/load.c	2014-01-26 00:09:23.532559941 -0800
-++++ collectd-5.4.1/src/load.c	2014-09-03 01:32:51.462084244 -0700
-+@@ -22,6 +22,7 @@
-+  **/
-+ 
-+ #define _BSD_SOURCE
-++#define _DEFAULT_SOURCE 1
-+ 
-+ #include "collectd.h"
-+ #include "common.h"
-+Index: collectd-5.4.1/src/network.c
-+===================================================================
-+--- collectd-5.4.1.orig/src/network.c	2014-01-26 00:09:23.532559941 -0800
-++++ collectd-5.4.1/src/network.c	2014-09-03 01:32:44.522084244 -0700
-+@@ -23,6 +23,7 @@
-+  **/
-+ 
-+ #define _BSD_SOURCE /* For struct ip_mreq */
-++#define _DEFAULT_SOURCE 1
-+ 
-+ #include "collectd.h"
-+ #include "plugin.h"
-+Index: collectd-5.4.1/src/ntpd.c
-+===================================================================
-+--- collectd-5.4.1.orig/src/ntpd.c	2014-01-26 00:09:14.880392351 -0800
-++++ collectd-5.4.1/src/ntpd.c	2014-09-03 01:32:20.350084244 -0700
-+@@ -20,6 +20,7 @@
-+  **/
-+ 
-+ #define _BSD_SOURCE /* For NI_MAXHOST */
-++#define _DEFAULT_SOURCE 1
-+ 
-+ #include "collectd.h"
-+ #include "common.h"
-+Index: collectd-5.4.1/src/utils_dns.c
-+===================================================================
-+--- collectd-5.4.1.orig/src/utils_dns.c	2014-01-26 00:09:14.908392893 -0800
-++++ collectd-5.4.1/src/utils_dns.c	2014-09-03 01:31:47.062084244 -0700
-+@@ -34,6 +34,7 @@
-+  */
-+ 
-+ #define _BSD_SOURCE
-++#define _DEFAULT_SOURCE 1
-+ 
-+ #include "collectd.h"
-+ #include "plugin.h"
-diff --git a/meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch b/meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch
-index 02b1601..0e876ae 100644
---- a/meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch
-+++ b/meta-oe/recipes-extended/collectd/collectd/no-gcrypt-badpath.patch
-@@ -7,11 +7,11 @@ Upstream-Status: Inappropriate [configuration]
- 
- Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
- 
--diff --git a/configure.in b/configure.in
--index 98395ed..81c3a2c 100644
----- a/configure.in
--+++ b/configure.in
--@@ -1777,11 +1777,11 @@ then
-+Index: collectd-5.4.1/configure.ac
-+===================================================================
-+--- collectd-5.4.1.orig/configure.ac	2014-09-03 01:20:22.062084244 -0700
-++++ collectd-5.4.1/configure.ac	2014-09-03 01:20:22.058084244 -0700
-+@@ -1867,11 +1867,11 @@
-  		GCRYPT_CPPFLAGS=`"$with_libgcrypt_config" --cflags 2>/dev/null`
-  	fi
-  
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-similarity index 93%
-rename from meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-rename to meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-index 69a5a7e..dc5f88f 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.2.2.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-@@ -3,15 +3,15 @@ DESCRIPTION = "collectd is a daemon which collects system performance statistics
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool"
-+DEPENDS = "rrdtool curl mysql5 libpcap libxml2 yajl libgcrypt libtool lvm2 libmnl"
- 
- SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-            file://no-gcrypt-badpath.patch \
-            file://collectd-version.patch \
-+           file://glibc-2.20-compatiblity.patch \
-            file://collectd.init"
--
--SRC_URI[md5sum] = "29e61411e51845d5ae71ab676078867e"
--SRC_URI[sha256sum] = "7b8906d1c8866155b31820ef108be92abcee7fcd278d386bf0d449e704ba4696"
-+SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
-+SRC_URI[sha256sum] = "75452129f271cb0aad28e57f12a49070618bbb7b6a9d64cf869e8766fa2f66e0"
- 
- inherit autotools pythonnative update-rc.d pkgconfig
- 
--- 
-2.1.0
+At the time of
+$ bitbake meta-toolchain-qt5
 
+I am getting error, i have posted that error in wandboard forum -
+http://forums.wandboard.org/viewtopic.php?f=3D10&t=3D573&p=3D2520&sid=3D45c=
+e5e714aa2ae65ffc52cb7bedf31b3#p2520
+
+Can you please look at this post? I think it is problem with 'git://
+qt.gitorious.org/qt/qtwayland.git
+
+Thanking you in advance.
+
+- Switesh.
+
+--=20
+=E2=80=9CThe contents of this e-mail message and any attachments are confid=
+ential=20
+and are intended solely for addressee. The information may also be legally=
+=20
+privileged. This transmission is sent in trust, for the sole purpose of=20
+delivery to the intended recipient. If you have received this transmission=
+=20
+in error, any use, reproduction or dissemination of this transmission is=20
+strictly prohibited. If you are not the intended recipient, please=20
+immediately notify the sender by reply e-mail or phone and delete this=20
+message and its attachments, if any.=E2=80=9D
 
