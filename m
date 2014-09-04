@@ -1,24 +1,41 @@
-Return-Path: <pab@pabigot.com>
-Received: from p3plsmtpa09-01.prod.phx3.secureserver.net
-	(p3plsmtpa09-01.prod.phx3.secureserver.net [173.201.193.230])
-	by mail.openembedded.org (Postfix) with ESMTP id DE60471477
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 15:29:49 +0000 (UTC)
-Received: from [192.168.65.10] ([66.41.60.82])
-	by p3plsmtpa09-01.prod.phx3.secureserver.net with 
-	id n3Vm1o00k1mTNtu013VnDA; Thu, 04 Sep 2014 08:29:50 -0700
-Message-ID: <5408856A.5080806@pabigot.com>
-Date: Thu, 04 Sep 2014 10:29:46 -0500
-From: "Peter A. Bigot" <pab@pabigot.com>
-Organization: Peter Bigot Consulting, LLC
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 30C2E71044;
+	Thu,  4 Sep 2014 15:41:47 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id r10so13745647pdi.8
+	for <multiple recipients>; Thu, 04 Sep 2014 08:41:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=P4NEeI0vq/ibP9vxt2X+snNlI5MKg6LSCUl+pHuuJRg=;
+	b=1CXqSHuH2mLIBSUyBDiYjvlBQYl9URpW5Y6QQDpYys5QRAsvNhU8tmD5OJfWZbDzd0
+	DOOyxKWyJ73+sqOA0vVp1oGnabPgHhV47WDnq7wCzq2e69735oySKrEIMCPJb8lCkVG+
+	6KBIdGfQioofO7Vm6glD+cVbt6fDXA83RBiKi9evd8pgTAOyvAa3rpbbyNk0cINMEcnp
+	ajPXTgbYvlwpHWCN2J44hc1T11G+wXCvg1AVpdJ+FQBccbR0OEq95wTCCjYZ8sau+0u8
+	YjN16nWN2rlk42pd0yUpZoOJVmM4vgW0P6bIsdN+OIoUDCu2gaASBr4ZTpI8OA32T8xm
+	+wcg==
+X-Received: by 10.66.155.2 with SMTP id vs2mr9857276pab.60.1409845305154;
+	Thu, 04 Sep 2014 08:41:45 -0700 (PDT)
+Received: from ?IPv6:2601:c:9380:601:9d66:e68f:e0f4:6f0b?
+	([2601:c:9380:601:9d66:e68f:e0f4:6f0b])
+	by mx.google.com with ESMTPSA id qy1sm2000313pbc.27.2014.09.04.08.41.42
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 04 Sep 2014 08:41:43 -0700 (PDT)
+Message-ID: <5408882C.6020506@gmail.com>
+Date: Thu, 04 Sep 2014 08:41:32 -0700
+From: akuster808 <akuster808@gmail.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+To: Robert Yang <liezhi.yang@windriver.com>, 
+	openembedded-devel@lists.openembedded.org, 
+	OE-core <openembedded-core@lists.openembedded.org>
 References: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
 	<54087F3F.2040103@windriver.com>
 In-Reply-To: <54087F3F.2040103@windriver.com>
-Subject: Re: Style issue for recipes
+Subject: Re: [OE-core] Style issue for recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,11 +49,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 15:29:55 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 15:41:49 -0000
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 09/04/2014 10:03 AM, Robert Yang wrote:
+
+
+On 09/04/2014 08:03 AM, Robert Yang wrote:
 >
 > On 09/04/2014 10:12 PM, Burton, Ross wrote:
 >> Hi,
@@ -50,14 +69,23 @@ On 09/04/2014 10:03 AM, Robert Yang wrote:
 > example, the SUMMARY, DESCRIPTION, HOMEPAGE, SECTION, inherit and so on,
 > they are unlikely to change when upgrade.
 
-I believe most of those carry over when an upgrade is simply a matter of 
-renaming the recipe from foo_1.2.bb to foo_3.4.bb and changing the 
-checksums.  I don't think foo.inc is warranted when only one file will 
-ever include it.
+This is the same reason why I have split a bb into two parts when I 
+submit upgrades. I feel it makes reviewing easier the next time a 
+package gets upgraded. Trying to find the actual changes between a file 
+being deleted and the new one being added might lead to missing something.
 
-I agree libunwind is a perfect example of where they can be merged into 
-one file to simplify things, as long as everybody remembers to use -M 
-when generating the patch.
+If there are unintentional consequence by doing this, that is a problem.
 
-Peter
+- Armin
+
+> // Robert
+>
+>>
+>> Specifically I'm looking at the libunwind patch for oe-core (moving
+>> from meta-oe) which adds libunwind_1.1.bb and libunwind.inc.
+>> Personally I feel that splitting them up complicates packaging and
+>> should only be done if there's actually multiple versions being used.
+>>
+>> Ross
+>>
 
