@@ -1,23 +1,40 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 2CB4C71492
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B7F371472
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 17:54:48 +0000 (UTC)
-Received: (qmail 10786 invoked by uid 1003); 4 Sep 2014 17:54:49 -0000
-Received: from unknown (HELO ?192.168.1.123?) (philip@opensdr.com@71.171.37.28)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	4 Sep 2014 17:54:49 -0000
-Message-ID: <5408A766.5000605@balister.org>
-Date: Thu, 04 Sep 2014 13:54:46 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.7.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>	<CAJTo0LYhvZHJEEQLWuCsfxqqbBCSXnxR3cxJZJt2Z0fgYgwEww@mail.gmail.com>
-	<CALbNGRRVvT7Qv868RNWbo8_DjLwkbUjOH_cCNMjPNifFEcHu3g@mail.gmail.com>
-In-Reply-To: <CALbNGRRVvT7Qv868RNWbo8_DjLwkbUjOH_cCNMjPNifFEcHu3g@mail.gmail.com>
-Subject: Re: Style issue for recipes
+	Thu,  4 Sep 2014 18:36:01 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id q200so6364785ykb.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Sep 2014 11:36:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=hD4GhKxAj3L92KAJZdpbRaWWw6+Sb3ys5zzkxE2ktHM=;
+	b=GN6xV+dm9gVpTromu6PDzknxJ732YhQfnnx3cTC7KyUeRZyHPEqeCcNj5pgBkWcIs2
+	WWYqCCPHng3iECRKPLqz40rm1etzLEdYDRHfcwUiatWGS508LB7Lgg8xsCJQ5j5a8Yds
+	7/32cg8BeqftOlG6FJ3HubXdF9+AA1id2nnROCgB1fZ5tuCW+KSm53o8/4cIY5gNaL0J
+	Jyxytuysw3DrKgimgpXqvBZbhYl+GEHRkTa7Itikun+SRUedJQyCbAPYUbgR39bbx8Yc
+	9sPh8PLHTxF3rtQGsqzoBuEVbhQEL34UYN5+Jd6JN/YyTML6cAztJaKgtfri6RhtU0nr
+	TXRA==
+X-Received: by 10.236.86.144 with SMTP id w16mr7649625yhe.5.1409855762301;
+	Thu, 04 Sep 2014 11:36:02 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.35.70.10])
+	by mx.google.com with ESMTPSA id p29sm8961053yho.39.2014.09.04.11.36.01
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 04 Sep 2014 11:36:01 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id C8B591C4B576F; Thu,  4 Sep 2014 15:35:57 -0300 (BRT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu,  4 Sep 2014 15:35:56 -0300
+Message-Id: <1409855756-19821-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.1.0
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][PATCH] qtwayland: Change module branch for 5.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,48 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 17:54:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 04 Sep 2014 18:36:08 -0000
 
-On 09/04/2014 01:29 PM, Andreas Müller wrote:
-> On Thu, Sep 4, 2014 at 6:34 PM, Burton, Ross <ross.burton@intel.com> wrote:
->> On 4 September 2014 15:12, Burton, Ross <ross.burton@intel.com> wrote:
->>> Quick question of style for the community to bikeshed on:  in the
->>> general case should recipes be split into foo_1.2.bb and foo.inc, or
->>> should they only split to bb/inc if there are multiple versions and
->>> generally there should just be foo_1.2.bb.
->>
->> Another argument against widespread inc files: they encourage the
->> impression that maintaining multiple versions is just a matter of
->> having a .inc file.  The moment you start having to put
->> version-specific statements into a .bb you've entered a world of pain
->> in keeping the .bb files in sync, moving options into the .inc as they
->> become used by all versions, and purging old version-specific
->> statements.
->>
->> Ross
->> --
-> I agree with Ross: It often took me time to find out where
-> functionality comes from. Inc-files do only make sense for multiple
-> versions of recipes or if different recipes share same code (only
-> example I can remember is meta-gnome gvfs/gvfs-gdu-volume-monitor
-> circular-dependency hack).
-> 
-> My feeling is that the inc-files are still from classic oe times where
-> we had multiple versions for many recipes and most can be merged into
-> recipes without loosing something.
+This is to fix the fetcher failure as the "stable" branch has been
+removed. We does not change the revision we are using so this is
+a safe change.
 
-The qwt recipe uses an include file and two bb files for qt versus
-qt-embedded builds. I do not know if this is wise, but it is a case not
-mentioned here.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
+ recipes-qt/qt5/qtwayland_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-Philip
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index 28a3760..0bbb5ab 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -5,6 +5,7 @@ require ${PN}.inc
+ # qt5-git PV is only to indicate that this recipe is compatible with qt5 5.2.1
+ 
+ SRCREV = "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
++QT_MODULE_BRANCH = "5.4"
+ 
+ SRC_URI += " \
+     file://0001-examples.pro-include-server-buffer-only-when-buildin.patch \
+-- 
+2.1.0
 
-
-
-
-> 
-> Andreas
-> 
 
