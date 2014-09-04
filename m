@@ -1,35 +1,38 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
-	[209.85.160.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 61CED7149F
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f181.google.com (mail-qc0-f181.google.com
+	[209.85.216.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C6A3713DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 18:36:15 +0000 (UTC)
-Received: by mail-yk0-f177.google.com with SMTP id q9so3737623ykb.36
+	Thu,  4 Sep 2014 19:11:05 +0000 (UTC)
+Received: by mail-qc0-f181.google.com with SMTP id i17so11122267qcy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Sep 2014 11:36:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=6U0ky3NisAGLc8WkNfWIx+cuU0wSHPDoxDrOcOi9TPs=;
-	b=SFPuCexK0e8LeS+yW36uVdrouo0+tkMzVPgs9NeMxu2HE46qMFFMGPb7vc6Ko2x33l
-	FeWD/sgPGXNtXRRZFaL2Pw5Tc+DLD/roWdyVB13NzFsUOc1vr/YSQpdl9W97i6fxSFjc
-	wf4NeBADc/9FHXp7HYzbnQmrQsEqwvrUf9P9tOi6eVEpch2qjm/6jIz1CWEVX0kN9avO
-	vn9kohH2DoBwYPo07gRtkT8uXm0E9T24SoNEtRG3kSr1mlXInndUBpIBrxG9e63Hfvs9
-	fxHnazykNsPgsO5CTRBxFnvjPH8v4NqSKKa42hJko2LM6D6nEuAwrxI8JuNUMa9oVxvI
-	Rq8g==
+	Thu, 04 Sep 2014 12:11:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=oR6QAk1Uy4epL8nRC4qR/69jDQq4gG77CZ14xD0dBeA=;
+	b=akAqdmnt7TxE8Cic2qpA6Oo3fqtiGqGtCjyNRijex/JR0P1v9sRjRO/bKF7CWlAFWj
+	SkdhdtnMMPSS6FKSqzJn8xOdwucB69Wn2Wzxs5+hkCjB/8iVsHlfY1nTruqYdDFTAHh3
+	owdN/bn10A5xb9LOaVvKynxJbZzRb+N+U5PsWYEhpsYfX2TKjT7hTQY9brcQDp4YjsaX
+	3MDy52ELRxnscL46eQBnLJ0yhxTqwSqubpswQhhecZCAvByq6XDGX/4dZv1BcxC57r7T
+	oEbcT6vPROZQLRdbaW6dwWvXD3yxWyuvV4KUHeP30bL8Xni5SW8REeMbs1fEZMqwwZ/U
+	xwfg==
+X-Gm-Message-State: ALoCoQlgIyGkEZ9lcPeFuo7oWg/jtbn864okNs8+GiKQs5BcWlyH2xwdfsh7qyI3WPjFDnqV+ULp
+X-Received: by 10.140.105.138 with SMTP id c10mr9800274qgf.15.1409857865035;
+	Thu, 04 Sep 2014 12:11:05 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.236.130.210 with SMTP id k58mr7145391yhi.102.1409855776845; 
-	Thu, 04 Sep 2014 11:36:16 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.56.201 with HTTP; Thu, 4 Sep 2014 11:36:16 -0700 (PDT)
-In-Reply-To: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
-References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
-Date: Thu, 4 Sep 2014 15:36:16 -0300
-X-Google-Sender-Auth: IH62O8IJ9i_UhkKY9IShgfEi3Nc
-Message-ID: <CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Error while bitbake meta-toolchain-qt5
+Received: by 10.140.29.183 with HTTP; Thu, 4 Sep 2014 12:10:44 -0700 (PDT)
+In-Reply-To: <5408A766.5000605@balister.org>
+References: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
+	<CAJTo0LYhvZHJEEQLWuCsfxqqbBCSXnxR3cxJZJt2Z0fgYgwEww@mail.gmail.com>
+	<CALbNGRRVvT7Qv868RNWbo8_DjLwkbUjOH_cCNMjPNifFEcHu3g@mail.gmail.com>
+	<5408A766.5000605@balister.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 4 Sep 2014 20:10:44 +0100
+Message-ID: <CAJTo0Laq3M2RKLmSrp5j7uVK5tvdDfZC=OMhxXadugDrBdsh_w@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Style issue for recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,18 +46,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 18:36:19 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 19:11:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Sep 4, 2014 at 4:10 AM, Switesh Fulpagare
-<switesh.fulpagare@mindastoneridge.com> wrote:
-> Can you please look at this post? I think it is problem with 'git://
-> qt.gitorious.org/qt/qtwayland.git
+On 4 September 2014 18:54, Philip Balister <philip@balister.org> wrote:
+> The qwt recipe uses an include file and two bb files for qt versus
+> qt-embedded builds. I do not know if this is wise, but it is a case not
+> mentioned here.
 
-I just sent a patch fixing it; please try it.
+That seems a perfectly legitimate use of an inc as it's factoring out
+common code.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Ross
 
