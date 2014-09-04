@@ -1,37 +1,36 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-qa0-f50.google.com (mail-qa0-f50.google.com
-	[209.85.216.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 8015C71422
+Received: from mail-qc0-f175.google.com (mail-qc0-f175.google.com
+	[209.85.216.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 85A14712AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 16:27:10 +0000 (UTC)
-Received: by mail-qa0-f50.google.com with SMTP id cm18so9848409qab.9
+	Thu,  4 Sep 2014 16:34:47 +0000 (UTC)
+Received: by mail-qc0-f175.google.com with SMTP id c9so10787252qcz.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Sep 2014 09:27:11 -0700 (PDT)
+	Thu, 04 Sep 2014 09:34:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=vQKH8w/9+lUXLnqNgKcSwX/nc1JYBFK+elwIMvu2X88=;
-	b=F6v6Fo/DuuPq9gHOBTg/ZLBLIbhP0R1KkUx+4gPyVNK9+HYU4c0W6qLYBqpU1lskaI
-	IXckMbZvg6l5nxNouEDTzWKlSf8j6d5k1WDr2oLLTZsMZQzl/GRi80YPg97L4ZRJsWwo
-	bUZs7C6OTnfdfoh8SCa2g3kBqpmcEHns+J+WwbYU+ceh5y7TvjBYeo4uujCKVUV7Tidp
-	FSAXiWn0beaFchR866JXNftlAUn95JsT53Emsc54vy48AIA/JfzKyDOYXurukaaktQ45
-	xg7n0FcYdhvD/Aj0zrpVydxr0LguPPkEw4wSRGWu1RBhi+pMyO+WolsF5bsDqKSPr4kh
-	6Olw==
-X-Gm-Message-State: ALoCoQkCn/VCjeUz+6Y8YxG3af2rKsk3vvLqPuzGENtfhBrEmv/lDfObILTB/U1rbw0ALD6G21Ku
-X-Received: by 10.140.27.173 with SMTP id 42mr8211238qgx.59.1409848031259;
-	Thu, 04 Sep 2014 09:27:11 -0700 (PDT)
+	:message-id:subject:to:content-type;
+	bh=HU7OLAew7EZbFEelvALBWoi3rLISmYYlk7py0Zl2rKg=;
+	b=OJ6+xDIqmYvepRV6sX6cR6eNSSOZai4awGvrBaUaEzPtU+POgrVO8Tv08W+Yiia1Zc
+	GwIOYChe3KGZCSaQ5ARnTc8cqoSNQAGqQ53OqpXAd3a60iUHG4Cx1crxqgI8gFftSZZv
+	ixPArbpgJPo8ppzNQPcO5oBMF3PptY1JdLDdPbg32DAih9jgaJnSs7nyRJKvL25zdK8g
+	27q90G23n81l/Isi7O52U/qdz4DSCuCwdNZmbWSwMtnQL5fp1gDaZr+7mdBnl2aHn8Mo
+	L+6UN38bfzmSiaQurcNtEPyk77Hz88UmAAP2m1KcGQ6AT67H5wX/p73+zQHoTEPvp0pX
+	VGnw==
+X-Gm-Message-State: ALoCoQn4G4nMo3wQ7vghmi5f+aOAMRtye5aIxwm3gr2BpsevdjOX3DwvNevTWIZKdFCNSRKEyKHa
+X-Received: by 10.140.27.173 with SMTP id 42mr8280498qgx.59.1409848487255;
+	Thu, 04 Sep 2014 09:34:47 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.29.183 with HTTP; Thu, 4 Sep 2014 09:26:51 -0700 (PDT)
-In-Reply-To: <5408882C.6020506@gmail.com>
+Received: by 10.140.29.183 with HTTP; Thu, 4 Sep 2014 09:34:26 -0700 (PDT)
+In-Reply-To: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
 References: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
-	<54087F3F.2040103@windriver.com> <5408882C.6020506@gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 4 Sep 2014 17:26:51 +0100
-Message-ID: <CAJTo0LZYDn2vZt49Sj40W3GJ7RLiTZjVs8OjbrEU-2NBoTdyOQ@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
-Cc: OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Style issue for recipes
+Date: Thu, 4 Sep 2014 17:34:26 +0100
+Message-ID: <CAJTo0LYhvZHJEEQLWuCsfxqqbBCSXnxR3cxJZJt2Z0fgYgwEww@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Style issue for recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,19 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 16:27:16 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 16:34:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 4 September 2014 16:41, akuster808 <akuster808@gmail.com> wrote:
-> This is the same reason why I have split a bb into two parts when I submit
-> upgrades. I feel it makes reviewing easier the next time a package gets
-> upgraded. Trying to find the actual changes between a file being deleted and
-> the new one being added might lead to missing something.
->
-> If there are unintentional consequence by doing this, that is a problem.
+On 4 September 2014 15:12, Burton, Ross <ross.burton@intel.com> wrote:
+> Quick question of style for the community to bikeshed on:  in the
+> general case should recipes be split into foo_1.2.bb and foo.inc, or
+> should they only split to bb/inc if there are multiple versions and
+> generally there should just be foo_1.2.bb.
 
-This is what git format-patch -M is for: it detects the rename and
-shows a "proper" diff.
+Another argument against widespread inc files: they encourage the
+impression that maintaining multiple versions is just a matter of
+having a .inc file.  The moment you start having to put
+version-specific statements into a .bb you've entered a world of pain
+in keeping the .bb files in sync, moving options into the .inc as they
+become used by all versions, and purging old version-specific
+statements.
 
 Ross
 
