@@ -1,35 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id E14B2710C5
+Return-Path: <xiao.zhang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 19CE171435
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Sep 2014 07:48:14 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id bj1so19279686pad.4
+	Thu,  4 Sep 2014 09:40:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s849eNEn029680
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Sep 2014 00:48:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=iRIIlh5wNOxZ4TwPBfUYX4x6S9X7LSjBA0Q0/6LD5m8=;
-	b=jDHxLlo+ZFHciPilsUV6mz6Dcncywah01KXRKd1gOIh+9NIcyejW4rte3Zw9xQPh6K
-	ELmeNrXcmnH9tMZXJsdYmdM9qz6vEfhKYE397vW6v+cICqc+sdTkt9Y4Jjb1n9NxsG8m
-	rkiHRqQmtkVW+6Fe0ym7asqsnM3pQmVB5/Cn+D2WdvLAKjwrxL6MFovLcJ/jRFoJCeto
-	U3C9+I3KSK1ffdZ6AR3qbndX5X3uJnie1la+Gwr95pE2N+S/tQyYh9IctX/YygBTh98u
-	Nrs9mjr3bM3DU8nWS+vBd6n/0MvGPr+KfYqVeJPyU/XRfGRsCqm/kOq/uRyMEaJADJgJ
-	AlZQ==
-X-Received: by 10.70.102.129 with SMTP id fo1mr5905649pdb.14.1409816893318;
-	Thu, 04 Sep 2014 00:48:13 -0700 (PDT)
-Received: from haswell.localdomain (c-98-207-177-218.hsd1.ca.comcast.net.
-	[98.207.177.218])
-	by mx.google.com with ESMTPSA id oy9sm895174pdb.54.2014.09.04.00.48.12
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Sep 2014 00:48:12 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Sep 2014 00:51:57 -0700
-Message-Id: <1409817117-25303-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][PATCH V2 2/6] ckermit: Update recipe ckermit_301.bb -> ckermit_302.bb
+	Thu, 4 Sep 2014 02:40:23 -0700 (PDT)
+Received: from localhost.localdomain (128.224.163.132) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 4 Sep 2014 02:40:22 -0700
+From: Zhang Xiao <xiao.zhang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 4 Sep 2014 17:40:17 +0800
+Message-ID: <1409823617-1310-1-git-send-email-xiao.zhang@windriver.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+Subject: [PATCH] tftp-hpa: bug fix on empty file put error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,42 +32,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Sep 2014 07:48:22 -0000
+X-List-Received-Date: Thu, 04 Sep 2014 09:40:28 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+With the feature that checking the disk filled up, the return value of
+function write_behind was checked and used to detect the disk status.
+While for empty file, without data being written, this function will
+return -1 thus the disk filled up error was miss-raised. Fix it.
+
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
 ---
- .../recipes-support/ckermit/{ckermit_301.bb => ckermit_302.bb}   | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-support/ckermit/{ckermit_301.bb => ckermit_302.bb} (90%)
+ .../tftp-hpa-bug-fix-on-empty-file-put-error.patch | 33 ++++++++++++++++++++++
+ .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
 
-diff --git a/meta-oe/recipes-support/ckermit/ckermit_301.bb b/meta-oe/recipes-support/ckermit/ckermit_302.bb
-similarity index 90%
-rename from meta-oe/recipes-support/ckermit/ckermit_301.bb
-rename to meta-oe/recipes-support/ckermit/ckermit_302.bb
-index b255f5e..32a6c03 100644
---- a/meta-oe/recipes-support/ckermit/ckermit_301.bb
-+++ b/meta-oe/recipes-support/ckermit/ckermit_302.bb
-@@ -7,7 +7,11 @@ HOMEPAGE = "http://www.columbia.edu/kermit/"
- SECTION = "console/network"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.TXT;md5=932ca542d6c6cb8a59a0bcd76ab67cc3"
--SRC_URI = "ftp://kermit.columbia.edu/kermit/archives/cku${PV}.tar.gz;subdir=${BPN}-${PV}"
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
+new file mode 100644
+index 0000000..aa29d9c
+--- /dev/null
++++ b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
+@@ -0,0 +1,33 @@
++tftp-hpa: bug fix on empty file put error
 +
-+SRC_URI = "ftp://ftp.kermitproject.org/kermit/archives/cku${PV}.tar.gz;subdir=${BPN}-${PV}"
-+SRC_URI[md5sum] = "eac4dbf18b45775e4cdee5a7c74762b0"
-+SRC_URI[sha256sum] = "0d5f2cd12bdab9401b4c836854ebbf241675051875557783c332a6a40dac0711"
++With the feature that checking the disk filled up, the return value of
++function write_behind was checked and used to detect the disk status.
++While for empty file, without data being written, this function will
++return -1 thus the disk filled up error was miss-raised. Fix it.
 +
++Upstream-Status: pending
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ tftpd/tftpd.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++--- a/tftpd/tftpd.c
+++++ b/tftpd/tftpd.c
++@@ -1692,7 +1692,7 @@ static void tftp_recvfile(const struct f
++             syslog(LOG_WARNING, "tftpd: write(ack): %m");
++             goto abort;
++         }
++-        if(write_behind(file, pf->f_convert) < 0) {
+++        if(write_behind(file, pf->f_convert) < -1) {
++             nak(ENOSPACE, NULL);
++             (void)fclose(file);
++             goto abort;
++@@ -1727,7 +1727,7 @@ static void tftp_recvfile(const struct f
++             goto abort;
++         }
++     } while (size == segsize);
++-    if(write_behind(file, pf->f_convert) < 0) {
+++    if(write_behind(file, pf->f_convert) < -1) {
++         nak(ENOSPACE, NULL);
++         (void)fclose(file);
++         goto abort;
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+index 1951747..e58a4b1 100644
+--- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
++++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+@@ -25,6 +25,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
+            file://init \
+            file://add-error-check-for-disk-filled-up.patch \
+            file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
++           file://tftp-hpa-bug-fix-on-empty-file-put-error.patch \
+ "
  
- export CC2 = "${CC}"
- export BINDIR = "${bindir}"
-@@ -52,6 +56,3 @@ do_install () {
-     rm ${D}${BINDIR}/kermit-sshsub
-     (cd ${D}${BINDIR} && ln -s ${BINDIR}/kermit kermit-sshusb)
- }
--
--SRC_URI[md5sum] = "59e80f909edf305933af8e0348dcc5d7"
--SRC_URI[sha256sum] = "9793eb125f8936b079c6d7e5c3d2ff885cfedc07f9d2dd1e7db928e3029a211a"
+ SRC_URI[md5sum] = "46c9bd20bbffa62f79c958c7b99aac21"
 -- 
-2.1.0
+1.8.5.2.233.g932f7e4
 
 
