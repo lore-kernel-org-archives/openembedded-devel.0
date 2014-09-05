@@ -1,33 +1,34 @@
 Return-Path: <switesh.fulpagare@mindastoneridge.com>
-Received: from mail-vc0-f171.google.com (mail-vc0-f171.google.com
-	[209.85.220.171])
-	by mail.openembedded.org (Postfix) with ESMTP id E6B6A71422
+Received: from mail-vc0-f172.google.com (mail-vc0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C3C371490
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Sep 2014 10:10:31 +0000 (UTC)
-Received: by mail-vc0-f171.google.com with SMTP id id10so12024007vcb.2
+	Fri,  5 Sep 2014 11:08:27 +0000 (UTC)
+Received: by mail-vc0-f172.google.com with SMTP id le20so767409vcb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Sep 2014 03:10:32 -0700 (PDT)
+	Fri, 05 Sep 2014 04:08:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=BId3UQsQmrYlHjGCyxsXe/wGfkn+Fy9lXWG46HPZjf8=;
-	b=EFmlAewc+BPknNWOSKo/K9OwfgTsu9y9Mhd/uqiqTX/eqgTsIvQgFs1CUMr6iKUhA1
-	0bizMwG5zeh0k/YtaO/MaBZX8lTRiQzftJIECpr80pa8Z/1PSynYrE+hgpFu0P0ei/Da
-	Sz70JKJW6UeLz7RJS9vA8qO7t/f58hWk5ti4wQ9iDrvQ9GbKQKRZbpvkSpVbhblHUAub
-	3OBYy5pVxiotMrRHY+ZPHot+ZyJsclhu0LEZpOgnzBkprg3Ez0tkD+mdvFq9rYI4Szoz
-	UxEVc+OWnmRytd10xjMgp0VIVE/NWaeKmmNYh1D+EODLoyB+1yiBJEI5gMNDecIJsyn1
-	gzwg==
-X-Gm-Message-State: ALoCoQl7rjSK5HGWjQBb3Ho8ZP3L9BxCd44SIbGW4anM9jkCseQe3XDVpOal7ZYwiUvLEWJhbBoL24eUfLtygMsx2Gvu69Cd9wLoJQ9KTbnGx/ImcpKgqPhh86yYHz1/G4vuEB8wx3uHv0wjoXFmqyTXaWU1dWGfKQ==
+	bh=vGLWWYEkh0YXcUkSac3/nnaW949QHA+mJ4g1q6chMYk=;
+	b=RFq+a6Uht/8XwSsN/CXZ4pPlgAPOq0l3p7hlXiZpc6F4zcFlOa/XJj1VUVemI5j2T+
+	w/GbruMsUWkVHPEAz6KtkgxGlndyd+5ZaFHAJTVzi2Hivk4I49YifqL5w2FEp1YLur/P
+	XiA+l4q4z51FPCaKwytnghkOfarUadtmf9x5QV8dKT0bxG5Cz0TEb9RC1FGlvzSguQ8+
+	T03zv7gD5kinYoeiIeQFeMrGeQDg5/Qz/aRZiKFvjbfVESTfMdugwmc+9iCLoTvm1Iee
+	7tmzQsY6eDO+YjW64MZu2DrgCDwbucTrkaEJUp6scTEVmh3JHAgYRpJL+cLmecdeGGGs
+	FEnA==
+X-Gm-Message-State: ALoCoQk5HG0wsTz+9pCy6wVZqA26XZ7FdCiyLdjChverdo/lrriHQCBTc/eM7r2jRD5SM8KuGPrOP57qkvLBE7lsGSWEysmg9y1WvT9860ZQ4TASTwp6mKMtSHE/e/oGLRpez3s2QGTqUcsraxdQY1NnccAwndOlMw==
 MIME-Version: 1.0
-X-Received: by 10.52.129.200 with SMTP id ny8mr7842203vdb.27.1409911832264;
-	Fri, 05 Sep 2014 03:10:32 -0700 (PDT)
-Received: by 10.52.245.73 with HTTP; Fri, 5 Sep 2014 03:10:32 -0700 (PDT)
-In-Reply-To: <CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
+X-Received: by 10.53.7.225 with SMTP id df1mr8218300vdd.9.1409915308403; Fri,
+	05 Sep 2014 04:08:28 -0700 (PDT)
+Received: by 10.52.245.73 with HTTP; Fri, 5 Sep 2014 04:08:28 -0700 (PDT)
+In-Reply-To: <CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
 References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
 	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
-Date: Fri, 5 Sep 2014 15:40:32 +0530
-Message-ID: <CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
+	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
+Date: Fri, 5 Sep 2014 16:38:28 +0530
+Message-ID: <CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
 From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
@@ -45,37 +46,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Sep 2014 10:10:40 -0000
+X-List-Received-Date: Fri, 05 Sep 2014 11:08:33 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Hi Otavio,
    Thanks for your reply.
 I have applied the patch, now it is fetching qtwayland_git.bb but it is
-giving error as shown log file in below link.
+giving error for do unpack as shown in below link and
+qtwayland-native_git.bb is not going to fetch.
 
-http://pastebin.com/mzqsp6Nh
+
+http://pastebin.com/dk2gFin0
 
 
-On Fri, Sep 5, 2014 at 12:06 AM, Otavio Salvador <otavio@ossystems.com.br>
-wrote:
+On Fri, Sep 5, 2014 at 3:40 PM, Switesh Fulpagare <
+switesh.fulpagare@mindastoneridge.com> wrote:
 
-> On Thu, Sep 4, 2014 at 4:10 AM, Switesh Fulpagare
-> <switesh.fulpagare@mindastoneridge.com> wrote:
-> > Can you please look at this post? I think it is problem with 'git://
-> > qt.gitorious.org/qt/qtwayland.git
+> Hi Otavio,
+>    Thanks for your reply.
+> I have applied the patch, now it is fetching qtwayland_git.bb but it is
+> giving error as shown log file in below link.
 >
-> I just sent a patch fixing it; please try it.
+> http://pastebin.com/mzqsp6Nh
 >
-> --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> On Fri, Sep 5, 2014 at 12:06 AM, Otavio Salvador <otavio@ossystems.com.br=
+>
+> wrote:
+>
+>> On Thu, Sep 4, 2014 at 4:10 AM, Switesh Fulpagare
+>> <switesh.fulpagare@mindastoneridge.com> wrote:
+>> > Can you please look at this post? I think it is problem with 'git://
+>> > qt.gitorious.org/qt/qtwayland.git
+>>
+>> I just sent a patch fixing it; please try it.
+>>
+>> --
+>> Otavio Salvador                             O.S. Systems
+>> http://www.ossystems.com.br        http://code.ossystems.com.br
+>> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
 >
 
 --=20
