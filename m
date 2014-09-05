@@ -1,27 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 144DB71425;
-	Fri,  5 Sep 2014 09:11:54 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga102.fm.intel.com with ESMTP; 05 Sep 2014 02:11:55 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="381825983"
-Received: from sydealwi-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.158])
-	by FMSMGA003.fm.intel.com with ESMTP; 05 Sep 2014 02:07:09 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 05 Sep 2014 10:11:53 +0100
-Message-ID: <7503608.dirsGt1W6p@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.15.10-201.fc20.x86_64; KDE/4.13.3; x86_64; ;
-	)
-In-Reply-To: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
-References: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
+Return-Path: <switesh.fulpagare@mindastoneridge.com>
+Received: from mail-vc0-f171.google.com (mail-vc0-f171.google.com
+	[209.85.220.171])
+	by mail.openembedded.org (Postfix) with ESMTP id E6B6A71422
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Sep 2014 10:10:31 +0000 (UTC)
+Received: by mail-vc0-f171.google.com with SMTP id id10so12024007vcb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Sep 2014 03:10:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=BId3UQsQmrYlHjGCyxsXe/wGfkn+Fy9lXWG46HPZjf8=;
+	b=EFmlAewc+BPknNWOSKo/K9OwfgTsu9y9Mhd/uqiqTX/eqgTsIvQgFs1CUMr6iKUhA1
+	0bizMwG5zeh0k/YtaO/MaBZX8lTRiQzftJIECpr80pa8Z/1PSynYrE+hgpFu0P0ei/Da
+	Sz70JKJW6UeLz7RJS9vA8qO7t/f58hWk5ti4wQ9iDrvQ9GbKQKRZbpvkSpVbhblHUAub
+	3OBYy5pVxiotMrRHY+ZPHot+ZyJsclhu0LEZpOgnzBkprg3Ez0tkD+mdvFq9rYI4Szoz
+	UxEVc+OWnmRytd10xjMgp0VIVE/NWaeKmmNYh1D+EODLoyB+1yiBJEI5gMNDecIJsyn1
+	gzwg==
+X-Gm-Message-State: ALoCoQl7rjSK5HGWjQBb3Ho8ZP3L9BxCd44SIbGW4anM9jkCseQe3XDVpOal7ZYwiUvLEWJhbBoL24eUfLtygMsx2Gvu69Cd9wLoJQ9KTbnGx/ImcpKgqPhh86yYHz1/G4vuEB8wx3uHv0wjoXFmqyTXaWU1dWGfKQ==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Style issue for recipes
+X-Received: by 10.52.129.200 with SMTP id ny8mr7842203vdb.27.1409911832264;
+	Fri, 05 Sep 2014 03:10:32 -0700 (PDT)
+Received: by 10.52.245.73 with HTTP; Fri, 5 Sep 2014 03:10:32 -0700 (PDT)
+In-Reply-To: <CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
+References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
+	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
+Date: Fri, 5 Sep 2014 15:40:32 +0530
+Message-ID: <CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
+From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Error while bitbake meta-toolchain-qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,32 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Sep 2014 09:11:57 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 05 Sep 2014 10:10:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday 04 September 2014 15:12:02 Burton, Ross wrote:
-> Quick question of style for the community to bikeshed on:  in the
-> general case should recipes be split into foo_1.2.bb and foo.inc, or
-> should they only split to bb/inc if there are multiple versions and
-> generally there should just be foo_1.2.bb.
-> 
-> Specifically I'm looking at the libunwind patch for oe-core (moving
-> from meta-oe) which adds libunwind_1.1.bb and libunwind.inc.
-> Personally I feel that splitting them up complicates packaging and
-> should only be done if there's actually multiple versions being used.
+Hi Otavio,
+   Thanks for your reply.
+I have applied the patch, now it is fetching qtwayland_git.bb but it is
+giving error as shown log file in below link.
 
-I think the conclusion we've come to is let's not have inc files just for the 
-sake of having them; if we need to add them to share common functionality we 
-will, but as time goes on it may be appropriate to factor some of them out. 
-(Having said that I think it would cause more harm than good to go on a huge 
-spree and merge a load of them away, at least at this point.)
+http://pastebin.com/mzqsp6Nh
 
-Cheers,
-Paul
 
--- 
+On Fri, Sep 5, 2014 at 12:06 AM, Otavio Salvador <otavio@ossystems.com.br>
+wrote:
 
-Paul Eggleton
-Intel Open Source Technology Centre
+> On Thu, Sep 4, 2014 at 4:10 AM, Switesh Fulpagare
+> <switesh.fulpagare@mindastoneridge.com> wrote:
+> > Can you please look at this post? I think it is problem with 'git://
+> > qt.gitorious.org/qt/qtwayland.git
+>
+> I just sent a patch fixing it; please try it.
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
+--=20
+=E2=80=9CThe contents of this e-mail message and any attachments are confid=
+ential=20
+and are intended solely for addressee. The information may also be legally=
+=20
+privileged. This transmission is sent in trust, for the sole purpose of=20
+delivery to the intended recipient. If you have received this transmission=
+=20
+in error, any use, reproduction or dissemination of this transmission is=20
+strictly prohibited. If you are not the intended recipient, please=20
+immediately notify the sender by reply e-mail or phone and delete this=20
+message and its attachments, if any.=E2=80=9D
 
