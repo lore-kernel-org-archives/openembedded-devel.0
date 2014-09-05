@@ -1,24 +1,38 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CA34713C1
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
+	[209.85.192.52])
+	by mail.openembedded.org (Postfix) with ESMTP id F341371399
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Sep 2014 15:07:59 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s85F7TIV021662
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 5 Sep 2014 08:07:29 -0700 (PDT)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Fri, 5 Sep 2014 08:07:28 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <Martin.Jansa@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Sep 2014 11:07:12 -0400
-Message-ID: <1409929633-12730-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 1.8.3.2
+	Fri,  5 Sep 2014 16:14:05 +0000 (UTC)
+Received: by mail-qg0-f52.google.com with SMTP id z60so11937597qgd.39
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Sep 2014 09:14:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=oAFsZRNm4FrWHp9k9/qgJ/6Lv9V0c8whiwhVEBQnUUw=;
+	b=Ob5woJe21730dwI1kgngyGgwSHhP3mj3oO2KvtupxdBofnhrZB6xg6TtOdek4Dz1rO
+	aiz4VWwKjTLfXshp1HnxQVenumqvJgoWmIleGplA6L7hcBZgWD+GDei7saBZMjW+537T
+	K/2UhXviKe6yGmNo7MSir9rAOYqIT6dztjdWzVvon9v59uVXmBvsjM9kUJn1VATpoH8g
+	wTzln61vBJ5cAstGUDLjSZzSz7PcIUN/GB1AgZIj18T/xymZ5Awa1tHh3xJGQrzxYsLd
+	MGEw+Zm6ZSHD37QGz4XZwo3U97Wfyo6Vtz4ZTW9MdgPIyLjYn/XAJiNp7m0nk7PDEpcB
+	JSBg==
+X-Gm-Message-State: ALoCoQkmAJR/cN2TWv4eXc8zrXKCXFwOk6yFVHuHCaw/yNNnsbZnbS/pAYZB/05L6SPcI7VmGxQw
+X-Received: by 10.224.38.10 with SMTP id z10mr20325727qad.52.1409933646235;
+	Fri, 05 Sep 2014 09:14:06 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [128.224.56.18]
-Subject: [meta-ruby][0/1] introduce a class to assist in building gems
+Received: by 10.140.29.183 with HTTP; Fri, 5 Sep 2014 09:13:46 -0700 (PDT)
+In-Reply-To: <5409C186.8050200@topic.nl>
+References: <CAJTo0LaRETJdKG-bL+40YtGrVjs4MLVLiydybSUj5ALa2tyxUQ@mail.gmail.com>
+	<CAJTo0LYhvZHJEEQLWuCsfxqqbBCSXnxR3cxJZJt2Z0fgYgwEww@mail.gmail.com>
+	<CALbNGRRVvT7Qv868RNWbo8_DjLwkbUjOH_cCNMjPNifFEcHu3g@mail.gmail.com>
+	<5409C186.8050200@topic.nl>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 5 Sep 2014 17:13:46 +0100
+Message-ID: <CAJTo0LadRYbxRJHPMeyNymTJpAwF-OYWzsOk6Ov7ifY-+Td7pQ@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Style issue for recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,68 +46,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Sep 2014 15:08:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 05 Sep 2014 16:14:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-For a while now we have had functionality in meta-cloud-services in
-Yocto to assist in building Ruby gems in to the rootfs images. Many of
-these gems and the ruby.bbclass that was written to facilitate the
-building of gems are not specific to our work in meta-cloud-services
-and should be made more widely available by moving them to
-meta-ruby. So this is my first attempt to get things moved and in
-doing so make the meta-ruby layer more comprehensive.
+On 5 September 2014 14:58, Mike Looijmans <mike.looijmans@topic.nl> wrote:
+> Why not take it one step further and remove the version from the bb
+> filename? Only use the "versioned" filename if there actually is more than
+> one version.
 
-We have used this ruby.bbclass in meta-cloud-services to build about
-25 gems and in doing so we have worked out a number of issues and have
-been successful in adding new gem recipes easily. Although at this
-time focus has been on x86 and x86-64 so we have not yet attempting
-any cross ARCH cross compiling. Since there are many parallels between
-Ruby and Python we expect that when we do start to cross-compile we
-will run into similar issues and don't anticipate major obstacles.
+I wonder what happens if there are multiple layers in place that all
+have a foo.bb with different PVs set inside them.  Do they overlay as
+they share the same name, or correctly as if the version was in the
+filename?
 
-For now I have included a recipe for single gem, bundler. Including
-this gem in your image will demonstrate that the class is able to
-perform as advertised and examining bundler on the target we can
-confirm the validity of the build:
-
---
-root@qemux86-64:~# cat Gemfile
-source 'https://rubygems.org'
-gem 'rspec', :require => 'spec'
-
-root@qemux86-64:~# bundle install
-Don't run Bundler as root. Bundler can ask for sudo if it is needed, and
-installing your bundle as root will break this application for all non-root
-users on this machine.
-Fetching gem metadata from https://rubygems.org/.........
-Resolving dependencies...
-Using diff-lcs 1.2.5
-Installing rspec-support 3.1.0
-Installing rspec-core 3.1.0
-Installing rspec-expectations 3.1.0
-Installing rspec-mocks 3.1.0
-Installing rspec 3.1.0
-Using bundler 1.6.2
-Your bundle is complete!
-Use `bundle show [gemname]` to see where a bundled gem is installed.
-
-root@qemux86-64:~# bundle show
-Gems included by the bundle:
-  * bundler (1.6.2)
-  * diff-lcs (1.2.5)
-  * rspec (3.1.0)
-  * rspec-core (3.1.0)
-  * rspec-expectations (3.1.0)
-  * rspec-mocks (3.1.0)
-  * rspec-support (3.1.0)
---
-
-Once ruby.bbclass is accepted in to meta-ruby I will submit additional
-reviews to copy more of our gem recipes from meta-cloud-services.
-
-I look forward to hearing feedback and hope that I can get things to a
-point where we can get this merged.
-
-Regards,
-Mark
+Ross
 
