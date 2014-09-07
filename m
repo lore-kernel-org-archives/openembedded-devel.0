@@ -1,40 +1,36 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
-	[209.85.160.178])
-	by mail.openembedded.org (Postfix) with ESMTP id A14DD712AC
+Return-Path: <openembedded@mindchasers.com>
+X-Greylist: delayed 493 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sun, 07 Sep 2014 18:52:17 UTC
+Received: from qmta15.westchester.pa.mail.comcast.net
+	(qmta15.westchester.pa.mail.comcast.net [76.96.59.228])
+	by mail.openembedded.org (Postfix) with ESMTP id 98E8E70F06
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Sep 2014 17:51:46 +0000 (UTC)
-Received: by mail-yk0-f178.google.com with SMTP id q200so7780840ykb.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Sep 2014 10:51:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=39fli/bBKbBpE+UM01ViQ1ivRu/mzm8CBUUgNSzWt+0=;
-	b=Rj+h/GxY11vstVG80kotWyUkm2/5yWWXhismiQVgK4HFp8MsPx6Ut5eB7iuYiBw7t+
-	NWcf96DHyE7gehCGkXLw2pldjh/xomssVybvNRg4XcVIhVwcGnPE0jmxU75qkXKBQuqj
-	Dpesou+Mv1Vry3emMjOOvFHS1uYI39z+Z66OWo6+key96RtF4/PujnkN01D85bBzE8sU
-	9pGHj44rGZaHuUv3DHWDVn2px2uhPKPY+gH/WZTQnslhx48Y3v6SG3vxWIpuCBYVFYWX
-	rwwpf6bMY0f0pLR0GtQGhWI2uouzQ822awUOUg9A6IpVucHFa6eA7Q6T217ll91rLQ35
-	/StQ==
+	Sun,  7 Sep 2014 18:52:17 +0000 (UTC)
+Received: from omta05.westchester.pa.mail.comcast.net ([76.96.62.43])
+	by qmta15.westchester.pa.mail.comcast.net with comcast
+	id oJeT1o0010vyq2s5FJk5rM; Sun, 07 Sep 2014 18:44:05 +0000
+Received: from [192.168.1.10] ([68.38.40.177])
+	by omta05.westchester.pa.mail.comcast.net with comcast
+	id oJk51o0033pLAh83RJk5Sb; Sun, 07 Sep 2014 18:44:05 +0000
+Message-ID: <540CA774.4060908@mindchasers.com>
+Date: Sun, 07 Sep 2014 14:44:04 -0400
+From: Bob Cochran <openembedded@mindchasers.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-X-Received: by 10.236.157.134 with SMTP id o6mr26487227yhk.92.1410025907295;
-	Sat, 06 Sep 2014 10:51:47 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.44.19 with HTTP; Sat, 6 Sep 2014 10:51:47 -0700 (PDT)
-In-Reply-To: <CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
-References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
-	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
-	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
-	<CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
-	<CAP9ODKp=xaS+WoQe-zKTpcKiqmdk4mHteoZ8a9BqO1w96hcbxg@mail.gmail.com>
-	<CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
-Date: Sat, 6 Sep 2014 14:51:47 -0300
-X-Google-Sender-Auth: Rk9dw86fVUhBfIq7r7xxOjromuE
-Message-ID: <CAP9ODKoBFp7Pskwch4nLq4mkJOB-uFh1m2w7zz46LZ=CUp5JAg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Error while bitbake meta-toolchain-qt5
+To: openembedded-devel@lists.openembedded.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
+	s=q20140121; t=1410115445;
+	bh=OiGllkXonorfKVEi9/91JSsgE0AvxCm+taRY07WKLRk=;
+	h=Received:Received:Message-ID:Date:From:MIME-Version:To:Subject:
+	Content-Type;
+	b=lhpG4vV68i05wu88v/OFqZhQ40u7bEzafoBEvjYEwXAOs5+OsZcZpEtRMr+pjWJj4
+	YHgzHldj4DCvWzRp5Eoymk6g606hcU6whjDB+OCIQgXPlT6w471RM9hZHEqOgwQrJw
+	FVYsvQp+WBNdy3m9LRJuNztOa4udcRKT8TyZKk/niP1kAfb0s7cq9CN9rZrOr5uw5/
+	zqdEx81U6mGO2mqDb/kj8lu8FyuLeKmDnij3453+9+Y5uJhOFP4g6V7/KAWfr4f/+N
+	4lKy2BzYrip38nzhv7pXm9U8DqkBGM08V6DdmnAJotlc1hWn9+eDXcY+kz4MvUi+lu
+	ngnIlliEZ6aMw==
+Subject: issue about git and XDL_FAST_HASH on big endian (powerpc) machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,34 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Sep 2014 17:51:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 07 Sep 2014 18:52:20 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, Sep 6, 2014 at 12:55 AM, Switesh Fulpagare
-<switesh.fulpagare@mindastoneridge.com> wrote:
-> Hi Otavio,
->      Thanks for your mail.
-> Yes, Otavio you are right.
-> There is  / at the end of DL_DIR in the local.conf file.
-> I had removed that and once again given bitbake meta-toolchain-qt5
-> but as result as earlier. See the link below.
->
-> http://pastebin.com/a8VjfKXh
+Hi,
 
-WARNING: Failed to fetch URL
-git://qt.gitorious.org/qt/qtwayland.git;branch=stable, attempting
-MIRRORS if available
-ERROR: Fetcher failure: Unable to find revision
-a237778666666ab77c4e8e6b501cf0fbe7c9223e in branch stable even from
-upstream
-ERROR: Function failed: Fetcher failure for URL:
-'git://qt.gitorious.org/qt/qtwayland.git;branch=stable'. Unable to
-fetch URL from any source.
+On my ppc64 e5500, 'git commit' fails with
 
-It seems you didn't apply the patch.
+git: xdiff/xutils.c:358: xdl_hash_record: Assertion `*ptr == '\n'' failed.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+I built git with git_2.0.1 on poky / meta master branch: 669c07d60221
+
+I found a related patch on OpenWRT that tracked the bug assertion on big 
+endian machines to the inclusion of XDL_FAST_HASH in config.mak.uname. 
+They state that XDL_FAST_HASH won't work on big endian machines.
+
+https://dev.openwrt.org/changeset/37239
+
+For my cross compile build, I patched out XDL_FAST_HASH to verify that 
+the bug would go away on my target,  which it did.
+
+Would anyone care to comment on how to best create a patch for this?
+
+A quick search showed that there has been activity on patching 
+XDL_FAST_HASH for big endian machines, so maybe just patching it out of 
+the make file isn't the best course of action for building a big endian 
+target.
+
+Thanks,
+
+Bob
 
