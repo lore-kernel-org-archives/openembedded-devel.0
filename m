@@ -1,26 +1,24 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A56965D59
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D30EB7107F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 07:30:33 +0000 (UTC)
+	Tue,  9 Sep 2014 07:30:31 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s897UXhV005747
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s897UVH1000727
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 Sep 2014 00:30:33 -0700 (PDT)
+	Tue, 9 Sep 2014 00:30:32 -0700 (PDT)
 Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 9 Sep 2014 00:30:33 -0700
+	14.3.174.1; Tue, 9 Sep 2014 00:30:31 -0700
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 Sep 2014 03:30:29 -0400
-Message-ID: <a503177d7497f66c46e8471e43b38f2530a224f4.1410247589.git.wenzong.fan@windriver.com>
+Date: Tue, 9 Sep 2014 03:30:28 -0400
+Message-ID: <cover.1410247589.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1410247589.git.wenzong.fan@windriver.com>
-References: <cover.1410247589.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/1][meta-oe] talloc: ignore exit status of rmdir
+Subject: [PATCH 0/1][meta-oe] talloc: ignore exit status of rmdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,24 +41,21 @@ From: Wenzong Fan <wenzong.fan@windriver.com>
   rmdir: failed to remove `.../talloc/2.0.1-r2/image/usr/bin': \
   No such file or directory
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
+The following changes since commit 46824934fa4ac6a61bebe2c92faa31c0a8e85392:
+
+  meta-networking: Update layer dependency information (2014-09-08 16:34:25 -0400)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib wenzong/fix-talloc
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/fix-talloc
+
+Wenzong Fan (1):
+  talloc: ignore exit status of rmdir
+
  meta-oe/recipes-support/talloc/talloc_2.0.1.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-index 48c0915..ed3e2c1 100644
---- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-+++ b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-@@ -29,7 +29,7 @@ do_install_append() {
-     ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
-     ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
-     ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
--    rmdir ${D}${bindir}
-+    rmdir ${D}${bindir} || true
- }
- 
- PACKAGES += "${PN}-swig"
 -- 
 1.7.9.5
 
