@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E20C871388
+	by mail.openembedded.org (Postfix) with ESMTP id E7EC0713E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 16:28:01 +0000 (UTC)
+	Tue,  9 Sep 2014 16:27:59 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s89GS3Ev005038
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s89GS1bg005025
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 Sep 2014 09:28:03 -0700 (PDT)
+	Tue, 9 Sep 2014 09:28:01 -0700 (PDT)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 9 Sep 2014 09:28:03 -0700
+	Tue, 9 Sep 2014 09:28:00 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 Sep 2014 09:27:57 -0700
-Message-ID: <fa60938bc7caa7ac8eee0eff4039e873626790ec.1410279874.git.liezhi.yang@windriver.com>
+Date: Tue, 9 Sep 2014 09:27:51 -0700
+Message-ID: <13a81d27a5717322d1b4f9c3da6f7b95ae7190d4.1410279874.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1410279874.git.liezhi.yang@windriver.com>
 References: <cover.1410279874.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 13/14] rrdtool: use rrdtool rather than PN
+Subject: [PATCH 07/14] memcached: add bash to RDEPENDS_memcached
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,27 +37,44 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 09 Sep 2014 16:28:02 -0000
 Content-Type: text/plain
 
-The "${datadir}/${PN}" will be changed to "${datadir}/lib32-rrdtool"
-when multilib which isn't what need, use rrdtool to fix the problem.
+Bashism:
+possible bashism in memcached/etc/init.d/memcached line 40 (bash arrays, ${name[0|*|@]}):
+if [ -r "${FILES[0]}" ]; then
+possible bashism in memcached/etc/init.d/memcached line 42 (bash arrays, ${name[0|*|@]}):
+  for FILE in "${FILES[@]}";
+possible bashism in memcached/etc/init.d/memcached line 53 (should be VAR="${VAR}foo"):
+      CONFIGS+=($NAME)
+possible bashism in memcached/etc/init.d/memcached line 54 (should be 'b = a'):
+    elif [ "memcached_$2" == "$NAME" ];
+possible bashism in memcached/etc/init.d/memcached line 62 (bash arrays, ${name[0|*|@]}):
+  if [ ${#CONFIGS[@]} == 0 ];
+possible bashism in memcached/etc/init.d/memcached line 71 (bash arrays, ${name[0|*|@]}):
+CONFIG_NUM=${#CONFIGS[@]}
+possible bashism in memcached/etc/init.d/memcached line 72 ('((' should be '$(('):
+for ((i=0; i < $CONFIG_NUM; i++)); do
+possible bashism in memcached/etc/init.d/memcached line 73 (bash arrays, ${name[0|*|@]}):
+  NAME=${CONFIGS[${i}]}
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/memcached/memcached_1.4.17.bb  |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb
-index c3d3b7c..449a923 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb
-@@ -108,7 +108,7 @@ FILES_${PN}-doc += "${datadir}/examples"
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
+index e61bc74..4d93f04 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.4.17.bb
+@@ -15,7 +15,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7e5ded7363d335e1bb18013ca08046ff"
+ inherit autotools
  
- DESCRIPTION_${PN}-perl = \
- "The ${PN}-perl package includes RRDtool bindings for perl."
--FILES_${PN}-perl = "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/${PN}/examples \
-+FILES_${PN}-perl = "${libdir}/perl/vendor_perl/*/*.pm ${datadir}/rrdtool/examples \
-     ${libdir}/perl/vendor_perl/*/auto/RRDs/RRDs.*"
- RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-time-hires \
-     perl-module-io-file perl-module-ipc-open2 perl-module-io-socket"
+ DEPENDS += "libevent"
+-RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader perl-module-tie-hash"
++RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
++    perl-module-tie-hash bash \
++    "
+ 
+ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
+            file://configure.patch \
 -- 
 1.7.9.5
 
