@@ -1,32 +1,27 @@
-Return-Path: <just4tech83@gmail.com>
-Received: from mail-qa0-f53.google.com (mail-qa0-f53.google.com
-	[209.85.216.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EC4D7130F;
-	Tue,  9 Sep 2014 12:53:23 +0000 (UTC)
-Received: by mail-qa0-f53.google.com with SMTP id w8so15702369qac.12
-	for <multiple recipients>; Tue, 09 Sep 2014 05:53:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=ss1njvrB4ULb7QCD7xNzg/KAnkk/peFNtz5MyZIbEd4=;
-	b=QYmen1aBKs/GB77qN7PeuiQSFrMMS3rR+TZUXzGEW+C4jH3+i2aZ+3/L3+zfKLVsdm
-	1WdsTy3/JtsFTOAuh0pzQf4ztNhlr2VFx1u/eg1RVg1bB/hBNDsAKexVN85ELFSkhir1
-	NMYM62SpWzF7aokZsRQvsm0L2+NhnRnT9P1HoVpBt/EJevRWI/6Jdyb1n5adVoL8hd2G
-	vh6202IanKnRKsyBFiFLrzkCr/9AT940dhDZGio4ZlYH72I1h4dE+wKGoSjjtgM+BP1L
-	ZyYtSwqEmTv8PZpevrwk4uQeTQplHH0PZbZA2Gy6N9v6pq82ubMnTn3URurac5WE5bwM
-	FOtQ==
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 45A65605BD;
+	Tue,  9 Sep 2014 13:02:29 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 09 Sep 2014 05:56:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.04,491,1406617200"; d="scan'208";a="600221887"
+Received: from mcorkery-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.35])
+	by orsmga002.jf.intel.com with ESMTP; 09 Sep 2014 06:02:26 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Bryan <just4tech83@gmail.com>
+Date: Tue, 09 Sep 2014 14:02:25 +0100
+Message-ID: <48633854.zRbls2qSnV@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.3 (Linux/3.15.10-201.fc20.x86_64; KDE/4.13.3; x86_64; ;
+	)
+In-Reply-To: <CAD2C2VTOgCMRsq4em2Bd0hQ4Nz2Zq=B2vXezAw7QXQmhkQOsRQ@mail.gmail.com>
+References: <CAD2C2VTOgCMRsq4em2Bd0hQ4Nz2Zq=B2vXezAw7QXQmhkQOsRQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.224.47.67 with SMTP id m3mr4702356qaf.28.1410267204444; Tue,
-	09 Sep 2014 05:53:24 -0700 (PDT)
-Received: by 10.140.16.144 with HTTP; Tue, 9 Sep 2014 05:53:24 -0700 (PDT)
-Received: by 10.140.16.144 with HTTP; Tue, 9 Sep 2014 05:53:24 -0700 (PDT)
-Date: Tue, 9 Sep 2014 18:23:24 +0530
-Message-ID: <CAD2C2VTOgCMRsq4em2Bd0hQ4Nz2Zq=B2vXezAw7QXQmhkQOsRQ@mail.gmail.com>
-From: Bryan <just4tech83@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-core@lists.openembedded.org, 
-	bitbake-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Backporting of latest recipes on oe-classic
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: Backporting of latest recipes on oe-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,27 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Sep 2014 12:53:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 09 Sep 2014 13:02:34 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi,
-   We have some queries regarding OE-Classic.
-1. Where can we find latest recipes for oe-classic. Does oe-classic is
-still get updation for latest package support?
+On Tuesday 09 September 2014 18:23:24 Bryan wrote:
+>    We have some queries regarding OE-Classic.
+> 1. Where can we find latest recipes for oe-classic. 
 
-2. How can we compile latest recipes of oe-core on oe-classic and ofcourse
-there bitbake version would be different.Basically, we can say we need to
-backport the recipe to classic.
-e.g. gtk+2.20.1 & above, glibc-2.11.3 & above
+http://cgit.openembedded.org/cgit.cgi/openembedded/
 
-3. Does anybody have latest bitbake recipe for ICAClient(Citrix Receiver)
-13 version.
-Though we have created one but not sure whether it is installing all
-components properly.
+That's as up-to-date as it gets. There might be other forked repositories 
+floating around, but that is the last official one.
 
-4. How can we install package like libwebkit or libwebkitgtk 1.0 on
-oe-classic.
+> Does oe-classic is still get updation for latest package support?
 
-Thanks in advance
-Bryan
+No, as discussed on IRC, OE-Classic is now unmaintained. OE-Core and layers on 
+top of it should ideally be used instead.
+ 
+> 2. How can we compile latest recipes of oe-core on oe-classic and ofcourse
+> there bitbake version would be different.Basically, we can say we need to
+> backport the recipe to classic.
+> e.g. gtk+2.20.1 & above, glibc-2.11.3 & above
+
+If you are determined to stay with OE-Classic I think you'd be better off just 
+upgrading the recipes in OE-Classic - going backwards is going to be more 
+painful.
+
+Here's the only semi-related information we have, which is about migration in 
+the other direction; it could be helpful in terms of providing pointers:
+
+  http://www.openembedded.org/wiki/Migrating_metadata_to_OE-Core
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
