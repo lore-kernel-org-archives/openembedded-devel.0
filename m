@@ -1,30 +1,30 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id BBDA0710C7
+	by mail.openembedded.org (Postfix) with ESMTP id 10A1D713BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 14:33:58 +0000 (UTC)
+	Tue,  9 Sep 2014 14:34:29 +0000 (UTC)
 Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
 	by relay1.mentorg.com with esmtp 
-	id 1XRMUZ-00027i-PR from Joe_MacDonald@mentor.com 
+	id 1XRMV4-0002D4-M2 from Joe_MacDonald@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Sep 2014 07:33:59 -0700
+	Tue, 09 Sep 2014 07:34:30 -0700
 Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
 	(147.34.97.120) with Microsoft SMTP Server id 14.2.247.3;
-	Tue, 9 Sep 2014 07:33:59 -0700
-Received: by burninator (Postfix, from userid 1000)	id AE3225814C3; Tue,  9
-	Sep 2014 10:33:58 -0400 (EDT)
-Date: Tue, 9 Sep 2014 10:33:58 -0400
+	Tue, 9 Sep 2014 07:34:30 -0700
+Received: by burninator (Postfix, from userid 1000)	id B7CB85814C3; Tue,  9
+	Sep 2014 10:34:29 -0400 (EDT)
+Date: Tue, 9 Sep 2014 10:34:29 -0400
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20140909143358.GI2125@mentor.com>
-References: <1410246680-19344-1-git-send-email-rongqing.li@windriver.com>
+Message-ID: <20140909143429.GJ2125@mentor.com>
+References: <1410222085-31153-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1410246680-19344-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1410222085-31153-1-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH][meta-networking] dnsmasq: uprev it to 2.71
+Subject: Re: [PATCH][meta-networking][v4] tcpslice: add recipe under tcpdump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,124 +38,200 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Sep 2014 14:34:09 -0000
-X-Groupsio-MsgNum: 52047
+X-List-Received-Date: Tue, 09 Sep 2014 14:34:30 -0000
+X-Groupsio-MsgNum: 52048
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2xeD/fx0+7k8I/QN"
+	protocol="application/pgp-signature"; boundary="QnBU6tTI9sljzm9u"
 Content-Disposition: inline
 
---2xeD/fx0+7k8I/QN
+--QnBU6tTI9sljzm9u
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Merged.
+And merged.  Thanks for all of the updates and for squishing this into
+one commit, Roy.
 
 -J.
 
-[[oe] [PATCH][meta-networking] dnsmasq: uprev it to 2.71] On 14.09.09 (Tue =
-15:11) rongqing.li@windriver.com wrote:
+[[oe] [PATCH][meta-networking][v4] tcpslice: add recipe under tcpdump] On 1=
+4.09.09 (Tue 08:21) rongqing.li@windriver.com wrote:
 
 > From: Roy Li <rongqing.li@windriver.com>
 >=20
-> Update lua.patch
+> tcpslice is a tool for extracting parts of a tcpdump packet trace,
+> so put it under tcpdump dir
 >=20
 > Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > ---
->  .../recipes-support/dnsmasq/dnsmasq/lua.patch      |   21 ++++++++++----=
-------
->  .../recipes-support/dnsmasq/dnsmasq_2.68.bb        |    9 ---------
->  .../recipes-support/dnsmasq/dnsmasq_2.71.bb        |    9 +++++++++
->  3 files changed, 19 insertions(+), 20 deletions(-)
->  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.=
-bb
->  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.71.=
-bb
+> Fix the license
 >=20
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch b/=
-meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-> index aac7b97..06d15fe 100644
-> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-> @@ -1,16 +1,15 @@
->  Upstream-status: Inappropriate [OE specific]
->  Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-> -
->  --- dnsmasq-2.68.orig/Makefile	2014-08-11 09:05:17.000000000 -0700
->  +++ dnsmasq-2.68/Makefile	2014-08-11 09:05:51.930648617 -0700
->  @@ -57,8 +57,8 @@
-> - idn_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_IDN $(PKG_=
-CONFIG) --libs libidn`=20
-> - ct_cflags =3D   `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK =
-$(PKG_CONFIG) --cflags libnetfilter_conntrack`
-> - ct_libs =3D     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK =
-$(PKG_CONFIG) --libs libnetfilter_conntrack`
-> --lua_cflags =3D  `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT =
-$(PKG_CONFIG) --cflags lua5.1`=20
-> --lua_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT =
-$(PKG_CONFIG) --libs lua5.1`=20
-> -+lua_cflags =3D  `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT =
-$(PKG_CONFIG) --cflags lua`
-> -+lua_libs =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT =
-$(PKG_CONFIG) --libs lua`
-> - sunos_libs =3D  `if uname | grep SunOS >/dev/null 2>&1; then echo -lsoc=
-ket -lnsl -lposix4; fi`
-> - version =3D     -DVERSION=3D'\"`$(top)/bld/get-version $(top)`\"'
-> -=20
-> + idn_libs =3D      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_IDN $(PK=
-G_CONFIG) --libs libidn`=20
-> + ct_cflags =3D     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRAC=
-K $(PKG_CONFIG) --cflags libnetfilter_conntrack`
-> + ct_libs =3D       `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRAC=
-K $(PKG_CONFIG) --libs libnetfilter_conntrack`
-> +-lua_cflags =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIP=
-T $(PKG_CONFIG) --cflags lua5.1`=20
-> +-lua_libs =3D      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIP=
-T $(PKG_CONFIG) --libs lua5.1`=20
-> ++lua_cflags =3D    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIP=
-T $(PKG_CONFIG) --cflags lua`=20
-> ++lua_libs =3D      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIP=
-T $(PKG_CONFIG) --libs lua`=20
-> + nettle_cflags =3D `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC $=
-(PKG_CONFIG) --cflags nettle hogweed`
-> + nettle_libs =3D   `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC $=
-(PKG_CONFIG) --libs nettle hogweed`
-> + gmp_libs =3D      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC $=
-(PKG_CONFIG) --copy -lgmp`
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb b/me=
-ta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
-> deleted file mode 100644
-> index 61b94a0..0000000
-> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.68.bb
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -require dnsmasq.inc
-> -
-> -SRC_URI +=3D "\
-> -    file://parallel-make.patch \
-> -    file://lua.patch \
-> -"
-> -
-> -SRC_URI[dnsmasq-2.68.md5sum] =3D "6f8351ca0901f248efdb81532778d2ef"
-> -SRC_URI[dnsmasq-2.68.sha256sum] =3D "402019d61f53f1ccc04cc6218719fd3b158=
-ea3fca9a83ab55471f981a2097c2f"
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.71.bb b/me=
-ta-networking/recipes-support/dnsmasq/dnsmasq_2.71.bb
+>  .../tcpdump/tcpslice/tcpslice-1.2a3-time.patch     |   75 ++++++++++++++=
+++++++
+>  .../tcpslice/tcpslice-CVS.20010207-bpf.patch       |   15 ++++
+>  .../recipes-support/tcpdump/tcpslice_1.2a3.bb      |   35 +++++++++
+>  3 files changed, 125 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcps=
+lice-1.2a3-time.patch
+>  create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcps=
+lice-CVS.20010207-bpf.patch
+>  create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice_1.2a=
+3.bb
+>=20
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.=
+2a3-time.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-=
+1.2a3-time.patch
 > new file mode 100644
-> index 0000000..48d9bbf
+> index 0000000..386b7f8
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.71.bb
-> @@ -0,0 +1,9 @@
-> +require dnsmasq.inc
+> +++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-tim=
+e.patch
+> @@ -0,0 +1,75 @@
+> +Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
 > +
-> +SRC_URI +=3D "\
-> +    file://parallel-make.patch \
-> +    file://lua.patch \
-> +"
+> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > +
-> +SRC_URI[dnsmasq-2.71.md5sum] =3D "15a68f7f6cc0119e843f67d2f79598f1"
-> +SRC_URI[dnsmasq-2.71.sha256sum] =3D "7d8c64f66a396442e01b639df3ea6b4e02b=
-a88cbe206c80be8de68b6841634c4"
+> +--- tcpslice-1.2a3.orig/search.c	2000-09-10 10:52:40.000000000 +0200
+> ++++ tcpslice-1.2a3/search.c	2006-07-28 14:56:55.000000000 +0200
+> +@@ -53,7 +53,7 @@
+> + /* Size of a packet header in bytes; easier than typing the sizeof() all
+> +  * the time ...
+> +  */
+> +-#define PACKET_HDR_LEN (sizeof( struct pcap_pkthdr ))
+> ++#define PACKET_HDR_LEN (sizeof( struct pcap_sf_pkthdr ))
+> +=20
+> + extern int snaplen;
+> +=20
+> +@@ -111,16 +111,24 @@
+> + static void
+> + extract_header( pcap_t *p, u_char *buf, struct pcap_pkthdr *hdr )
+> + 	{
+> +-	memcpy((char *) hdr, (char *) buf, sizeof(struct pcap_pkthdr));
+> ++	struct pcap_sf_pkthdr hdri;
+> ++
+> ++	memcpy((char *) &hdri, (char *) buf, sizeof(struct pcap_sf_pkthdr));
+> +=20
+> + 	if ( pcap_is_swapped( p ) )
+> + 		{
+> +-		hdr->ts.tv_sec =3D SWAPLONG(hdr->ts.tv_sec);
+> +-		hdr->ts.tv_usec =3D SWAPLONG(hdr->ts.tv_usec);
+> +-		hdr->len =3D SWAPLONG(hdr->len);
+> +-		hdr->caplen =3D SWAPLONG(hdr->caplen);
+> ++		hdr->ts.tv_sec =3D SWAPLONG(hdri.ts.tv_sec);
+> ++		hdr->ts.tv_usec =3D SWAPLONG(hdri.ts.tv_usec);
+> ++		hdr->len =3D SWAPLONG(hdri.len);
+> ++		hdr->caplen =3D SWAPLONG(hdri.caplen);
+> ++		}
+> ++	else
+> ++		{
+> ++		hdr->ts.tv_sec =3D hdri.ts.tv_sec;
+> ++		hdr->ts.tv_usec =3D hdri.ts.tv_usec;
+> ++		hdr->len =3D hdri.len;
+> ++		hdr->caplen =3D hdri.caplen;
+> + 		}
+> +-
+> + 	/*
+> + 	 * From bpf/libpcap/savefile.c:
+> + 	 *
+> +--- tcpslice-1.2a3.orig/tcpslice.h	1995-11-02 00:40:53.000000000 +0100
+> ++++ tcpslice-1.2a3/tcpslice.h	2006-07-28 14:56:55.000000000 +0200
+> +@@ -20,6 +20,26 @@
+> +  */
+> +=20
+> +=20
+> ++#include <time.h>
+> ++/* #include <net/bpf.h> */
+> ++
+> ++/*
+> ++ * This is a timeval as stored in disk in a dumpfile.
+> ++ * It has to use the same types everywhere, independent of the actual
+> ++ * `struct timeval'
+> ++ */
+> ++
+> ++struct pcap_timeval {
+> ++    bpf_int32 tv_sec;           /* seconds */
+> ++    bpf_int32 tv_usec;          /* microseconds */
+> ++};
+> ++
+> ++struct pcap_sf_pkthdr {
+> ++    struct pcap_timeval ts;     /* time stamp */
+> ++    bpf_u_int32 caplen;         /* length of portion present */
+> ++    bpf_u_int32 len;            /* length this packet (off wire) */
+> ++};
+> ++
+> + time_t	gwtm2secs( struct tm *tm );
+> +=20
+> + int	sf_find_end( struct pcap *p, struct timeval *first_timestamp,
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CV=
+S.20010207-bpf.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcp=
+slice-CVS.20010207-bpf.patch
+> new file mode 100644
+> index 0000000..0a73593
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010=
+207-bpf.patch
+> @@ -0,0 +1,15 @@
+> +Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
+> +
+> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +diff -ur tcpdump-3.8.1/tcpslice/tcpslice.c tcpdump-3.8.1.new/tcpslice/tc=
+pslice.c
+> +--- tcpslice/tcpslice.c	2004-01-15 17:35:53.000000000 +0100
+> ++++ tcpslice/tcpslice.c	2004-01-15 16:12:57.000000000 +0100
+> +@@ -35,7 +35,7 @@
+> + #include <sys/file.h>
+> + #include <sys/stat.h>
+> +=20
+> +-#include <net/bpf.h>
+> ++/* #include <net/bpf.h> */
+> +=20
+> + #include <ctype.h>
+> + #ifdef HAVE_FCNTL_H
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb b/=
+meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
+> new file mode 100644
+> index 0000000..203d143
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
+> @@ -0,0 +1,35 @@
+> +SUMMARY =3D "tcpslice"
+> +DESCRIPTION =3D "A tool for extracting parts of a tcpdump packet trace."
+> +HOMEPAGE =3D "http://www.tcpdump.org/related.html"
+> +SECTION =3D "console/network"
+> +
+> +LICENSE =3D "BSD-4-Clause"
+> +LIC_FILES_CHKSUM =3D "file://tcpslice.c;endline=3D20;md5=3D99519e2e5234d=
+1662a4ce16baa62c64e"
+> +
+> +SRC_URI =3D "ftp://ftp.ee.lbl.gov/${BP}.tar.gz \
+> +           file://tcpslice-1.2a3-time.patch \
+> +           file://tcpslice-CVS.20010207-bpf.patch \
+> +           "
+> +SRC_URI[md5sum] =3D "e329cbeb7e589f132d92c3447c477190"
+> +SRC_URI[sha256sum] =3D "4096e8debc898cfaa16b5306f1c42f8d18b19e30e60da8d4=
+deb781c8f684c840"
+> +
+> +inherit autotools-brokensep
+> +
+> +DEPENDS +=3D "libpcap"
+> +
+> +# We do not want to autoreconf.  We must specify srcdir as ".".
+> +# We have to set the ac_cv_* cache variables as well as pass the normal
+> +# cross-compilation options to configure!
+> +#
+> +do_configure () {
+> +	oe_runconf \
+> +            --srcdir=3D"." \
+> +            ac_cv_build=3D${BUILD_SYS} \
+> +            ac_cv_host=3D${HOST_SYS} \
+> +            ac_cv_target=3D${HOST_SYS}
+> +}
+> +
+> +do_install_prepend () {
+> +	mkdir -p ${D}/usr/sbin
+> +}
+> +
 > --=20
 > 1.7.10.4
 >=20
@@ -163,20 +239,20 @@ a88cbe206c80be8de68b6841634c4"
 -Joe MacDonald.
 :wq
 
---2xeD/fx0+7k8I/QN
+--QnBU6tTI9sljzm9u
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJUDw/WAAoJEEn8ffcsOfaWMuoIAMFiokV8shC2H9q3Ik0zy+qi
-FIRsLRtfUL40VIaLVVVBlcBkrIvvXdl6fPFuFUEJWnlplLAKKoOzEaUdXrkA9KXb
-fcOuyKelHvJDdtlvZZ7RY+hwkkx2T2/N6PToYUEtZdx6Q739rsGheohKV7jOUjjm
-GwDxei45md1GraSZxbi0rzxff9MiVIeKtSIH5ueeZHC24rt0gH4OZIcJUnNqMSzJ
-HxXNx2y15yr/wP0EAReewwMAFw2Lnc99zpG9GvLqfz45VFi+LBpDNFpmxlojffOl
-EfJds4QwLpKo42pGhVewoXc0dd5ewgPATOhOF5EwNzEOjAqx685PI0+hMfeEmL4=
-=/BWS
+iQEcBAEBAgAGBQJUDw/1AAoJEEn8ffcsOfaW7BoH/A4JBaf36iEZRq8C8L7tjPso
+jSAOLvOXO3idlXGh0aEAB36awAj+CfU1dHAxdgLE/tEbkJDGBKYplv4okEIIRHod
++X9SFPlmCDKuUN2VeV1kVE1AG5eoNNw8T0KGoi3vsMrc9k+J9Qf4hsg6ht9elG//
+sON1dKXxOfi1++e1+E+YL3rf3b/T6vS8vY7NpwyOvVob8splK+0ZeXNT1EcjJlUm
+egCsPYBhT9u0+jhpiOnRDhG9GseVLIWCUf89erEb5vN5YYrYPznJkTbAKh0Y2OEa
+ftme/Vvg0BCU3F6EGvV/ctrYTM6TdYGs4kgJxDyB62T8hofqCNZTGciryWriHgE=
+=roy9
 -----END PGP SIGNATURE-----
 
---2xeD/fx0+7k8I/QN--
+--QnBU6tTI9sljzm9u--
