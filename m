@@ -1,43 +1,32 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
-	[209.85.160.177])
-	by mail.openembedded.org (Postfix) with ESMTP id B3467702D9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 12:38:29 +0000 (UTC)
-Received: by mail-yk0-f177.google.com with SMTP id 79so2907362ykr.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Sep 2014 05:38:30 -0700 (PDT)
+Return-Path: <just4tech83@gmail.com>
+Received: from mail-qa0-f53.google.com (mail-qa0-f53.google.com
+	[209.85.216.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EC4D7130F;
+	Tue,  9 Sep 2014 12:53:23 +0000 (UTC)
+Received: by mail-qa0-f53.google.com with SMTP id w8so15702369qac.12
+	for <multiple recipients>; Tue, 09 Sep 2014 05:53:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=eHLEeINrszeRn597c4/bpc2sxPl9QQrFffo63im5tV8=;
-	b=k8+oUUkEslwGVcsDNTBzRPH2Oh8H/GG0kfWvEkfEfWAltWkpx7Lrb/g4BZdMy/vuYq
-	13QGCYCUoEWJVOlpbDbx8JtpXAFZWmuCJaeDO9jWjreHdTQ0QETdsDJhOdAqFNdEPQ3n
-	Fb6YLpT+cJxHZxd+a5KA2N6Qnj4v+Xg5rEHiE9Kfu2KVeNzEeMFx8gUX1d9o08gVoNEJ
-	lu7pKIP3AsUwmsKMYdcNFHNLmPaMhqW7/Svc+RLsU6xiOtVDPUP9rjd34k5dj7Bmogyt
-	S5MqQgFoSB/82HCCLD2TlBAJ+hru5nwYgBFpnYrA1PLbnApPots6RQZV06TrmOUBs8Xq
-	vNMQ==
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=ss1njvrB4ULb7QCD7xNzg/KAnkk/peFNtz5MyZIbEd4=;
+	b=QYmen1aBKs/GB77qN7PeuiQSFrMMS3rR+TZUXzGEW+C4jH3+i2aZ+3/L3+zfKLVsdm
+	1WdsTy3/JtsFTOAuh0pzQf4ztNhlr2VFx1u/eg1RVg1bB/hBNDsAKexVN85ELFSkhir1
+	NMYM62SpWzF7aokZsRQvsm0L2+NhnRnT9P1HoVpBt/EJevRWI/6Jdyb1n5adVoL8hd2G
+	vh6202IanKnRKsyBFiFLrzkCr/9AT940dhDZGio4ZlYH72I1h4dE+wKGoSjjtgM+BP1L
+	ZyYtSwqEmTv8PZpevrwk4uQeTQplHH0PZbZA2Gy6N9v6pq82ubMnTn3URurac5WE5bwM
+	FOtQ==
 MIME-Version: 1.0
-X-Received: by 10.236.96.167 with SMTP id r27mr51713030yhf.42.1410266310217;
-	Tue, 09 Sep 2014 05:38:30 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.44.19 with HTTP; Tue, 9 Sep 2014 05:38:29 -0700 (PDT)
-In-Reply-To: <CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
-References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
-	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
-	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
-	<CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
-	<CAP9ODKp=xaS+WoQe-zKTpcKiqmdk4mHteoZ8a9BqO1w96hcbxg@mail.gmail.com>
-	<CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
-	<CAP9ODKoBFp7Pskwch4nLq4mkJOB-uFh1m2w7zz46LZ=CUp5JAg@mail.gmail.com>
-	<CALRGHr9iRe3j9j0ce2RnOz7TP+1UzaPqtE5vsooBze_A0fAuyA@mail.gmail.com>
-	<CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
-Date: Tue, 9 Sep 2014 09:38:29 -0300
-X-Google-Sender-Auth: hOmgiPfFgtG-JlBYVzSQmaKDDEE
-Message-ID: <CAP9ODKqbwXrieO8yUJYu6+vBK6qerCCZsamkbz6RO5vS0Wq_oA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Error while bitbake meta-toolchain-qt5
+X-Received: by 10.224.47.67 with SMTP id m3mr4702356qaf.28.1410267204444; Tue,
+	09 Sep 2014 05:53:24 -0700 (PDT)
+Received: by 10.140.16.144 with HTTP; Tue, 9 Sep 2014 05:53:24 -0700 (PDT)
+Received: by 10.140.16.144 with HTTP; Tue, 9 Sep 2014 05:53:24 -0700 (PDT)
+Date: Tue, 9 Sep 2014 18:23:24 +0530
+Message-ID: <CAD2C2VTOgCMRsq4em2Bd0hQ4Nz2Zq=B2vXezAw7QXQmhkQOsRQ@mail.gmail.com>
+From: Bryan <just4tech83@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-core@lists.openembedded.org, 
+	bitbake-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Backporting of latest recipes on oe-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,19 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Sep 2014 12:38:29 -0000
+X-List-Received-Date: Tue, 09 Sep 2014 12:53:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Tue, Sep 9, 2014 at 6:12 AM, Switesh Fulpagare
-<switesh.fulpagare@mindastoneridge.com> wrote:
-> Correction in last mail,
->
-> But now only one error is encountering as  qtwayland-native_git.bb, do_fetch
+Hi,
+   We have some queries regarding OE-Classic.
+1. Where can we find latest recipes for oe-classic. Does oe-classic is
+still get updation for latest package support?
 
-I pushed the fix.
+2. How can we compile latest recipes of oe-core on oe-classic and ofcourse
+there bitbake version would be different.Basically, we can say we need to
+backport the recipe to classic.
+e.g. gtk+2.20.1 & above, glibc-2.11.3 & above
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+3. Does anybody have latest bitbake recipe for ICAClient(Citrix Receiver)
+13 version.
+Though we have created one but not sure whether it is installing all
+components properly.
+
+4. How can we install package like libwebkit or libwebkitgtk 1.0 on
+oe-classic.
+
+Thanks in advance
+Bryan
 
