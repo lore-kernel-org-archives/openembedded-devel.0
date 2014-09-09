@@ -1,31 +1,30 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D338702CC
+	by mail.openembedded.org (Postfix) with ESMTP id B2C5871387
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 13:17:28 +0000 (UTC)
+	Tue,  9 Sep 2014 13:18:41 +0000 (UTC)
 Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
 	by relay1.mentorg.com with esmtp 
-	id 1XRLIX-0000md-Oc from Joe_MacDonald@mentor.com 
+	id 1XRLJi-0000zQ-MQ from Joe_MacDonald@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Sep 2014 06:17:29 -0700
+	Tue, 09 Sep 2014 06:18:42 -0700
 Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
 	(147.34.97.43) with Microsoft SMTP Server id 14.2.247.3; Tue, 9 Sep 2014
-	06:17:29 -0700
-Received: by burninator (Postfix, from userid 1000)	id DF6DA5814C3; Tue,  9
-	Sep 2014 09:17:28 -0400 (EDT)
-Date: Tue, 9 Sep 2014 09:17:28 -0400
+	06:18:42 -0700
+Received: by burninator (Postfix, from userid 1000)	id D3B395814C3; Tue,  9
+	Sep 2014 09:18:41 -0400 (EDT)
+Date: Tue, 9 Sep 2014 09:18:41 -0400
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20140909131728.GF2125@mentor.com>
-References: <1409815958-24314-1-git-send-email-raj.khem@gmail.com>
-	<1409815958-24314-5-git-send-email-raj.khem@gmail.com>
+Message-ID: <20140909131841.GG2125@mentor.com>
+References: <1409555496-16040-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1409815958-24314-5-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1409555496-16040-1-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-703 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH 5/6] lowpan-tools: Move to 0.3.1 release
+Subject: Re: [PATCH][meta-networking] aoetools: uprev to version 36
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,73 +38,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Sep 2014 13:17:36 -0000
-X-Groupsio-MsgNum: 52043
+X-List-Received-Date: Tue, 09 Sep 2014 13:18:41 -0000
+X-Groupsio-MsgNum: 52044
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JSkcQAAxhB1h8DcT"
+	protocol="application/pgp-signature"; boundary="JbKQpFqZXJ2T76Sg"
 Content-Disposition: inline
 
---JSkcQAAxhB1h8DcT
+--JbKQpFqZXJ2T76Sg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Also merged, thanks.
+Merged, thanks Roy.
 -J.
 
-[[oe] [meta-networking][PATCH 5/6] lowpan-tools: Move to 0.3.1 release] On =
-14.09.04 (Thu 00:32) Khem Raj wrote:
+[[oe] [PATCH][meta-networking] aoetools: uprev to version 36] On 14.09.01 (=
+Mon 15:11) rongqing.li@windriver.com wrote:
 
-> Also fix the git SRC_URI location
+> From: Roy Li <rongqing.li@windriver.com>
 >=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb | 6 +++=
----
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  .../recipes-support/aoetools/{aoetools_34.bb =3D> aoetools_36.bb}    |  =
+  4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-support/aoetools/{aoetools_34.bb =3D> aoe=
+tools_36.bb} (84%)
 >=20
-> diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_gi=
-t.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> index d8e1ddb..ca10262 100644
-> --- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> +++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-> @@ -7,10 +7,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa9=
-54499f7abaabaa882bbe"
+> diff --git a/meta-networking/recipes-support/aoetools/aoetools_34.bb b/me=
+ta-networking/recipes-support/aoetools/aoetools_36.bb
+> similarity index 84%
+> rename from meta-networking/recipes-support/aoetools/aoetools_34.bb
+> rename to meta-networking/recipes-support/aoetools/aoetools_36.bb
+> index eb1e0fe..5bb486f 100644
+> --- a/meta-networking/recipes-support/aoetools/aoetools_34.bb
+> +++ b/meta-networking/recipes-support/aoetools/aoetools_36.bb
+> @@ -11,8 +11,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9b=
+a36caa9b7df079bae19f"
+>  RRECOMMENDS_${PN} =3D "kernel-module-aoe"
 > =20
->  DEPENDS =3D "libnl python"
+>  SRC_URI =3D "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-=
+${PV}.tar.gz"
+> -SRC_URI[md5sum] =3D "cde7f7cedc7cd9938a5ebfd009dd3ec0"
+> -SRC_URI[sha256sum] =3D "fd6c57244e9458d7cbe7a0171295ddee4d8cdcae291e40d6=
+acbc641df7296d85"
+> +SRC_URI[md5sum] =3D "bff30daa988a65f69d4448ce4726a6db"
+> +SRC_URI[sha256sum] =3D "fb5e2cd0de7644cc1ec04ee3aeb43211cf7445a0c19e13d6=
+b3ed5a8fbdf215ff"
 > =20
-> -PV =3D "0.3+git${SRCPV}"
-> -SRC_URI =3D "git://linux-zigbee.git.sourceforge.net/gitroot/linux-zigbee=
-/linux-zigbee \
-> +PV =3D "0.3.1+git${SRCPV}"
-> +SRC_URI =3D "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
->             file://no-help2man.patch"
-> -SRCREV =3D "a1d9615adde6d1a568813c24a128273ed755af04"
-> +SRCREV =3D "38f42dbfce9e13629263db3bd3b81f14c69bb733"
-> =20
->  S =3D "${WORKDIR}/git"
-> =20
+>  # EXTRA_OEMAKE is typically: -e MAKEFLAGS=3D
+>  # the -e causes problems as CFLAGS is modified in the Makefile.
 > --=20
-> 2.1.0
+> 1.7.10.4
 >=20
 --=20
 -Joe MacDonald.
 :wq
 
---JSkcQAAxhB1h8DcT
+--JbKQpFqZXJ2T76Sg
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJUDv3oAAoJEEn8ffcsOfaWD1oH/2vJjHH19MTFRhhSrkxU9OAG
-R4+1xJ3Zff+hKRvvi7JSGphHNE2nr/1/Mlv6ms8EfQoolPAb/jneBCeH+7eZXBnB
-RRM72bucGlkcxB32ogNcuXZTR8/jXvWtVdmy/B0+3CEd9q7E3/YEimp8lQ1j2dYO
-/EA3jJ82EEtIXcEYRGl/UNKRWvuHkcsgJJFFi/WXQQtO9t2lNOewa6GzC09GiXph
-AVCVL6TMHc7BduzsVITZ0hQ38fwAT6/7ZuiUD6khydIidLGka3rIe+Iarug/LoHE
-f0KM5GQ/qjPJW0kwtbKnUsH9DXvg0Gz4LG7Dc+ddzv9QSuuAycgY2lqDNgOOAns=
-=mzNs
+iQEcBAEBAgAGBQJUDv4xAAoJEEn8ffcsOfaW4MkIAMJ4JpzjWAZg0XNJkPQrMyKo
+akZBxAR1DRfEI5zbl/pbrFnNdwDDwDesOCOrmXXM56RhDWqus+Y8UGkxj8Lel5GT
+uKFflRf1yUmQVuukKLPrbQ4RB8DVZrhV3dAK7f0HNuIwE7Tj+8SjkxDr+51gG2sh
+R+q9Y1YA3Y73PGsx2gX4jQrv21FwA54e2EVc2PKWnzERip17hjLjgveEBlrL2PAJ
+zKen0zYdHoBrS11LG/fDOTckvZTuQgB8vzONtmI+fKXbnVb8LyWeUU6WJCh+4liA
+F1ANqLwuhaAykTfIEM+gTNvZUQ3wUYnEr88Rc5c6WiTvYEHPYRI3b1roFpsKsgw=
+=yeTU
 -----END PGP SIGNATURE-----
 
---JSkcQAAxhB1h8DcT--
+--JbKQpFqZXJ2T76Sg--
