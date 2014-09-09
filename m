@@ -1,27 +1,43 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8ADAD62252
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id B3467702D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 09:23:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s899NxWi023640
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  9 Sep 2014 12:38:29 +0000 (UTC)
+Received: by mail-yk0-f177.google.com with SMTP id 79so2907362ykr.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 Sep 2014 02:23:59 -0700 (PDT)
-Received: from [128.224.162.160] (128.224.162.160) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 9 Sep 2014 02:23:58 -0700
-Message-ID: <540EC72D.20802@windriver.com>
-Date: Tue, 9 Sep 2014 17:23:57 +0800
-From: wenzong fan <wenzong.fan@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+	Tue, 09 Sep 2014 05:38:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=eHLEeINrszeRn597c4/bpc2sxPl9QQrFffo63im5tV8=;
+	b=k8+oUUkEslwGVcsDNTBzRPH2Oh8H/GG0kfWvEkfEfWAltWkpx7Lrb/g4BZdMy/vuYq
+	13QGCYCUoEWJVOlpbDbx8JtpXAFZWmuCJaeDO9jWjreHdTQ0QETdsDJhOdAqFNdEPQ3n
+	Fb6YLpT+cJxHZxd+a5KA2N6Qnj4v+Xg5rEHiE9Kfu2KVeNzEeMFx8gUX1d9o08gVoNEJ
+	lu7pKIP3AsUwmsKMYdcNFHNLmPaMhqW7/Svc+RLsU6xiOtVDPUP9rjd34k5dj7Bmogyt
+	S5MqQgFoSB/82HCCLD2TlBAJ+hru5nwYgBFpnYrA1PLbnApPots6RQZV06TrmOUBs8Xq
+	vNMQ==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1410247589.git.wenzong.fan@windriver.com>
-In-Reply-To: <cover.1410247589.git.wenzong.fan@windriver.com>
-Subject: Re: [PATCH 0/1][meta-oe] talloc: ignore exit status of rmdir
+X-Received: by 10.236.96.167 with SMTP id r27mr51713030yhf.42.1410266310217;
+	Tue, 09 Sep 2014 05:38:30 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.44.19 with HTTP; Tue, 9 Sep 2014 05:38:29 -0700 (PDT)
+In-Reply-To: <CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
+References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
+	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
+	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
+	<CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
+	<CAP9ODKp=xaS+WoQe-zKTpcKiqmdk4mHteoZ8a9BqO1w96hcbxg@mail.gmail.com>
+	<CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
+	<CAP9ODKoBFp7Pskwch4nLq4mkJOB-uFh1m2w7zz46LZ=CUp5JAg@mail.gmail.com>
+	<CALRGHr9iRe3j9j0ce2RnOz7TP+1UzaPqtE5vsooBze_A0fAuyA@mail.gmail.com>
+	<CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
+Date: Tue, 9 Sep 2014 09:38:29 -0300
+X-Google-Sender-Auth: hOmgiPfFgtG-JlBYVzSQmaKDDEE
+Message-ID: <CAP9ODKqbwXrieO8yUJYu6+vBK6qerCCZsamkbz6RO5vS0Wq_oA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Error while bitbake meta-toolchain-qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,38 +51,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Sep 2014 09:23:59 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Sep 2014 12:38:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Recall this patch, it should be fixed from the dependency of swig. I'll 
-send out another patches later ...
+On Tue, Sep 9, 2014 at 6:12 AM, Switesh Fulpagare
+<switesh.fulpagare@mindastoneridge.com> wrote:
+> Correction in last mail,
+>
+> But now only one error is encountering as  qtwayland-native_git.bb, do_fetch
 
-Sorry for the inconvenience.
+I pushed the fix.
 
-// Wenzong
-
-
-On 09/09/2014 03:30 PM, wenzong.fan@windriver.com wrote:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
->
-> * fix do_insall errors:
->    rmdir: failed to remove `.../talloc/2.0.1-r2/image/usr/bin': \
->    No such file or directory
->
-> The following changes since commit 46824934fa4ac6a61bebe2c92faa31c0a8e85392:
->
->    meta-networking: Update layer dependency information (2014-09-08 16:34:25 -0400)
->
-> are available in the git repository at:
->
->    git://git.pokylinux.org/poky-contrib wenzong/fix-talloc
->    http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/fix-talloc
->
-> Wenzong Fan (1):
->    talloc: ignore exit status of rmdir
->
->   meta-oe/recipes-support/talloc/talloc_2.0.1.bb |    2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
