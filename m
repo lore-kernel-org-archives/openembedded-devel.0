@@ -1,30 +1,33 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id B2C5871387
+Return-Path: <marek.andrus@wp.pl>
+X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 09 Sep 2014 13:21:32 UTC
+Received: from mx4.wp.pl (mx4.wp.pl [212.77.101.12])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BA1571301
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 13:18:41 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1XRLJi-0000zQ-MQ from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Sep 2014 06:18:42 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.2.247.3; Tue, 9 Sep 2014
-	06:18:42 -0700
-Received: by burninator (Postfix, from userid 1000)	id D3B395814C3; Tue,  9
-	Sep 2014 09:18:41 -0400 (EDT)
-Date: Tue, 9 Sep 2014 09:18:41 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20140909131841.GG2125@mentor.com>
-References: <1409555496-16040-1-git-send-email-rongqing.li@windriver.com>
+	Tue,  9 Sep 2014 13:21:32 +0000 (UTC)
+Received: (wp-smtpd smtp.wp.pl 21566 invoked from network);
+	9 Sep 2014 15:14:51 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wp.pl; s=1024a;
+	t=1410268491; bh=UErIVgQ0J3xYvTjElx2aQdfnMed1lwQ9eq2Zth2ThZg=;
+	h=From:To:Subject;
+	b=BSypfcnly8ZjXjWY7SHG4kDkdADtLIscC4asZA1XBbvjZ565KO09PIR8w8+rVgrg1
+	l96eFD84NC8soSzmAghg9H4uMbBn394TwY/P0BTTpsBVBMsmHxOOdbrOeV9uu2fuIs
+	Dqlth8fdFjfd0oBXN4clqxaJE3RGdAFoIJF0L65o=
+Received: from unknown (HELO [62.159.77.167]) (marek.andrus@[62.159.77.167])
+	(envelope-sender <marek.andrus@wp.pl>)
+	by smtp.wp.pl (WP-SMTPD) with AES128-SHA encrypted SMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	9 Sep 2014 15:14:51 +0200
+Message-ID: <540EFD49.8070202@wp.pl>
+Date: Tue, 09 Sep 2014 15:14:49 +0200
+From: Marek Andrus <marek.andrus@wp.pl>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Icedove/24.7.0
 MIME-Version: 1.0
-In-Reply-To: <1409555496-16040-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH][meta-networking] aoetools: uprev to version 36
+To: openembedded-devel@lists.openembedded.org
+X-WP-AV: skaner antywirusowy poczty Wirtualnej Polski S. A.
+X-WP-SPAM: NO 0000000 [YdPX]                               
+Subject: selecting a range of package versions that my package depends on
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,77 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Sep 2014 13:18:41 -0000
-X-Groupsio-MsgNum: 52044
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JbKQpFqZXJ2T76Sg"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Sep 2014 13:21:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---JbKQpFqZXJ2T76Sg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Merged, thanks Roy.
--J.
+I used to work with portage and expected possibility to specify what 
+particular version (or range of versions) of package my package depends 
+on. I found sth like:
+DEPENDS += "libgcrypt (>= 1.4.2)"
+in gnutls.inc file. Unfortunately it doesn't work for me.
+I found only one way to choose version of package: to add:
+PREFERRED_VERSION_package = "versionstring"
+to some global conf file like local.conf. In addition this method 
+doesn't work with ranges (like >=1.15) or I don't know how...
 
-[[oe] [PATCH][meta-networking] aoetools: uprev to version 36] On 14.09.01 (=
-Mon 15:11) rongqing.li@windriver.com wrote:
+I'm package maintainer so I don't want to add anything to files like 
+local.conf, but I'd like to specify exact dependencies.
 
-> From: Roy Li <rongqing.li@windriver.com>
->=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  .../recipes-support/aoetools/{aoetools_34.bb =3D> aoetools_36.bb}    |  =
-  4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/aoetools/{aoetools_34.bb =3D> aoe=
-tools_36.bb} (84%)
->=20
-> diff --git a/meta-networking/recipes-support/aoetools/aoetools_34.bb b/me=
-ta-networking/recipes-support/aoetools/aoetools_36.bb
-> similarity index 84%
-> rename from meta-networking/recipes-support/aoetools/aoetools_34.bb
-> rename to meta-networking/recipes-support/aoetools/aoetools_36.bb
-> index eb1e0fe..5bb486f 100644
-> --- a/meta-networking/recipes-support/aoetools/aoetools_34.bb
-> +++ b/meta-networking/recipes-support/aoetools/aoetools_36.bb
-> @@ -11,8 +11,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9b=
-a36caa9b7df079bae19f"
->  RRECOMMENDS_${PN} =3D "kernel-module-aoe"
-> =20
->  SRC_URI =3D "http://sourceforge.net/projects/${BPN}/files/${BPN}/${BPN}-=
-${PV}.tar.gz"
-> -SRC_URI[md5sum] =3D "cde7f7cedc7cd9938a5ebfd009dd3ec0"
-> -SRC_URI[sha256sum] =3D "fd6c57244e9458d7cbe7a0171295ddee4d8cdcae291e40d6=
-acbc641df7296d85"
-> +SRC_URI[md5sum] =3D "bff30daa988a65f69d4448ce4726a6db"
-> +SRC_URI[sha256sum] =3D "fb5e2cd0de7644cc1ec04ee3aeb43211cf7445a0c19e13d6=
-b3ed5a8fbdf215ff"
-> =20
->  # EXTRA_OEMAKE is typically: -e MAKEFLAGS=3D
->  # the -e causes problems as CFLAGS is modified in the Makefile.
-> --=20
-> 1.7.10.4
->=20
---=20
--Joe MacDonald.
-:wq
+1. Is there any other way to choose what version of package should be 
+chosen?
+2. Is there any way to specify range of preferred versions?
+3. Is there any way to specify what version (or range) my package 
+depends on (not touching global conf files)?
 
---JbKQpFqZXJ2T76Sg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Best Regards,
+Marek
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUDv4xAAoJEEn8ffcsOfaW4MkIAMJ4JpzjWAZg0XNJkPQrMyKo
-akZBxAR1DRfEI5zbl/pbrFnNdwDDwDesOCOrmXXM56RhDWqus+Y8UGkxj8Lel5GT
-uKFflRf1yUmQVuukKLPrbQ4RB8DVZrhV3dAK7f0HNuIwE7Tj+8SjkxDr+51gG2sh
-R+q9Y1YA3Y73PGsx2gX4jQrv21FwA54e2EVc2PKWnzERip17hjLjgveEBlrL2PAJ
-zKen0zYdHoBrS11LG/fDOTckvZTuQgB8vzONtmI+fKXbnVb8LyWeUU6WJCh+4liA
-F1ANqLwuhaAykTfIEM+gTNvZUQ3wUYnEr88Rc5c6WiTvYEHPYRI3b1roFpsKsgw=
-=yeTU
------END PGP SIGNATURE-----
-
---JbKQpFqZXJ2T76Sg--
