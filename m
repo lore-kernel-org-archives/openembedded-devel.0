@@ -1,31 +1,24 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E01F6FE3B
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 363CC7108D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Sep 2014 20:29:12 +0000 (UTC)
-Received: from svr-orw-fem-02.mgc.mentorg.com ([147.34.96.168])
-	by relay1.mentorg.com with esmtp 
-	id 1XR5Yn-0001wR-S3 from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Sep 2014 13:29:13 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.2.247.3;
-	Mon, 8 Sep 2014 13:29:13 -0700
-Received: by burninator (Postfix, from userid 1000)	id 02601580CED; Mon,  8
-	Sep 2014 16:29:12 -0400 (EDT)
-Date: Mon, 8 Sep 2014 16:29:12 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
+	Tue,  9 Sep 2014 00:21:21 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s890LMvH000828
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 8 Sep 2014 17:21:22 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 8 Sep 2014 17:21:21 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20140908202912.GB2125@mentor.com>
-References: <1409643577-4088-1-git-send-email-raj.khem@gmail.com>
-	<1409643577-4088-4-git-send-email-raj.khem@gmail.com>
+Date: Tue, 9 Sep 2014 08:21:25 +0800
+Message-ID: <1410222085-31153-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-In-Reply-To: <1409643577-4088-4-git-send-email-raj.khem@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-703 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking][PATCH 5/5] meta-networking: Update layer dependency information
+Subject: [PATCH][meta-networking][v4] tcpslice: add recipe under tcpdump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,102 +32,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Sep 2014 20:29:15 -0000
-X-Groupsio-MsgNum: 52027
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/NkBOFFp2J2Af1nK"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Sep 2014 00:21:21 -0000
+Content-Type: text/plain
 
---/NkBOFFp2J2Af1nK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Roy Li <rongqing.li@windriver.com>
 
-Merged, thanks.
--J.
+tcpslice is a tool for extracting parts of a tcpdump packet trace,
+so put it under tcpdump dir
 
-[[oe] [meta-networking][PATCH 5/5] meta-networking: Update layer dependency=
- information] On 14.09.02 (Tue 00:39) Khem Raj wrote:
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+Fix the license
 
-> since python recipes are now spun out into its own layer
-> and there are recipes like crda which depend on M2Crypto
-> python module, of which the recipe is now moved from meta-oe
-> into meta-python, we need to express this change of layers
-> otherwise if you are not using meta-python then you end up
-> with errors e.g.
->=20
-> Nothing PROVIDES 'python-m2crypto-native' (but
-> meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
-> DEPENDS on or otherwise requires it).
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-networking/README          | 8 ++++++--
->  meta-networking/conf/layer.conf | 2 ++
->  2 files changed, 8 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-networking/README b/meta-networking/README
-> index 339d40e..e1ba27d 100644
-> --- a/meta-networking/README
-> +++ b/meta-networking/README
-> @@ -17,17 +17,21 @@ Dependencies
-> =20
->  This layer depends on:
-> =20
-> -URI: git://github.com/openembedded/oe-core.git
-> +URI: git://github.com/openembedded/openembedded-core.git
->  branch: master
->  revision: HEAD
-> =20
->  For some recipes, the meta-oe layer is required:
-> =20
-> -URI: git://github.com/openembedded/meta-oe.git
-> +URI: git://github.com/openembedded/meta-openembedded.git
->  subdirectory: meta-oe
->  branch: master
->  revision: HEAD
-> =20
-> +URI: git://github.com/openembedded/meta-openembedded.git
-> +subdirectory: meta-python
-> +branch: master
-> +revision: HEAD
-> =20
->  Maintenance
->  -----------
-> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer=
-=2Econf
-> index 39c2ceb..d99d738 100644
-> --- a/meta-networking/conf/layer.conf
-> +++ b/meta-networking/conf/layer.conf
-> @@ -14,5 +14,7 @@ BBFILE_PRIORITY_networking-layer =3D "5"
->  LAYERVERSION_networking-layer =3D "1"
-> =20
->  LAYERDEPENDS_networking-layer =3D "core"
-> +LAYERDEPENDS_networking-layer =3D "openembedded-layer"
-> +LAYERDEPENDS_networking-layer =3D "meta-python"
-> =20
->  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-> --=20
-> 2.1.0
->=20
---=20
--Joe MacDonald.
-:wq
+ .../tcpdump/tcpslice/tcpslice-1.2a3-time.patch     |   75 ++++++++++++++++++++
+ .../tcpslice/tcpslice-CVS.20010207-bpf.patch       |   15 ++++
+ .../recipes-support/tcpdump/tcpslice_1.2a3.bb      |   35 +++++++++
+ 3 files changed, 125 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
+ create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
+ create mode 100644 meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
 
---/NkBOFFp2J2Af1nK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
+new file mode 100644
+index 0000000..386b7f8
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-1.2a3-time.patch
+@@ -0,0 +1,75 @@
++Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++
++--- tcpslice-1.2a3.orig/search.c	2000-09-10 10:52:40.000000000 +0200
+++++ tcpslice-1.2a3/search.c	2006-07-28 14:56:55.000000000 +0200
++@@ -53,7 +53,7 @@
++ /* Size of a packet header in bytes; easier than typing the sizeof() all
++  * the time ...
++  */
++-#define PACKET_HDR_LEN (sizeof( struct pcap_pkthdr ))
+++#define PACKET_HDR_LEN (sizeof( struct pcap_sf_pkthdr ))
++ 
++ extern int snaplen;
++ 
++@@ -111,16 +111,24 @@
++ static void
++ extract_header( pcap_t *p, u_char *buf, struct pcap_pkthdr *hdr )
++ 	{
++-	memcpy((char *) hdr, (char *) buf, sizeof(struct pcap_pkthdr));
+++	struct pcap_sf_pkthdr hdri;
+++
+++	memcpy((char *) &hdri, (char *) buf, sizeof(struct pcap_sf_pkthdr));
++ 
++ 	if ( pcap_is_swapped( p ) )
++ 		{
++-		hdr->ts.tv_sec = SWAPLONG(hdr->ts.tv_sec);
++-		hdr->ts.tv_usec = SWAPLONG(hdr->ts.tv_usec);
++-		hdr->len = SWAPLONG(hdr->len);
++-		hdr->caplen = SWAPLONG(hdr->caplen);
+++		hdr->ts.tv_sec = SWAPLONG(hdri.ts.tv_sec);
+++		hdr->ts.tv_usec = SWAPLONG(hdri.ts.tv_usec);
+++		hdr->len = SWAPLONG(hdri.len);
+++		hdr->caplen = SWAPLONG(hdri.caplen);
+++		}
+++	else
+++		{
+++		hdr->ts.tv_sec = hdri.ts.tv_sec;
+++		hdr->ts.tv_usec = hdri.ts.tv_usec;
+++		hdr->len = hdri.len;
+++		hdr->caplen = hdri.caplen;
++ 		}
++-
++ 	/*
++ 	 * From bpf/libpcap/savefile.c:
++ 	 *
++--- tcpslice-1.2a3.orig/tcpslice.h	1995-11-02 00:40:53.000000000 +0100
+++++ tcpslice-1.2a3/tcpslice.h	2006-07-28 14:56:55.000000000 +0200
++@@ -20,6 +20,26 @@
++  */
++ 
++ 
+++#include <time.h>
+++/* #include <net/bpf.h> */
+++
+++/*
+++ * This is a timeval as stored in disk in a dumpfile.
+++ * It has to use the same types everywhere, independent of the actual
+++ * `struct timeval'
+++ */
+++
+++struct pcap_timeval {
+++    bpf_int32 tv_sec;           /* seconds */
+++    bpf_int32 tv_usec;          /* microseconds */
+++};
+++
+++struct pcap_sf_pkthdr {
+++    struct pcap_timeval ts;     /* time stamp */
+++    bpf_u_int32 caplen;         /* length of portion present */
+++    bpf_u_int32 len;            /* length this packet (off wire) */
+++};
+++
++ time_t	gwtm2secs( struct tm *tm );
++ 
++ int	sf_find_end( struct pcap *p, struct timeval *first_timestamp,
+diff --git a/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
+new file mode 100644
+index 0000000..0a73593
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpdump/tcpslice/tcpslice-CVS.20010207-bpf.patch
+@@ -0,0 +1,15 @@
++Upstream-Status: Pending [from tcpdump-4.1.1-1.fc14.src.rpm]
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++diff -ur tcpdump-3.8.1/tcpslice/tcpslice.c tcpdump-3.8.1.new/tcpslice/tcpslice.c
++--- tcpslice/tcpslice.c	2004-01-15 17:35:53.000000000 +0100
+++++ tcpslice/tcpslice.c	2004-01-15 16:12:57.000000000 +0100
++@@ -35,7 +35,7 @@
++ #include <sys/file.h>
++ #include <sys/stat.h>
++ 
++-#include <net/bpf.h>
+++/* #include <net/bpf.h> */
++ 
++ #include <ctype.h>
++ #ifdef HAVE_FCNTL_H
+diff --git a/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
+new file mode 100644
+index 0000000..203d143
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "tcpslice"
++DESCRIPTION = "A tool for extracting parts of a tcpdump packet trace."
++HOMEPAGE = "http://www.tcpdump.org/related.html"
++SECTION = "console/network"
++
++LICENSE = "BSD-4-Clause"
++LIC_FILES_CHKSUM = "file://tcpslice.c;endline=20;md5=99519e2e5234d1662a4ce16baa62c64e"
++
++SRC_URI = "ftp://ftp.ee.lbl.gov/${BP}.tar.gz \
++           file://tcpslice-1.2a3-time.patch \
++           file://tcpslice-CVS.20010207-bpf.patch \
++           "
++SRC_URI[md5sum] = "e329cbeb7e589f132d92c3447c477190"
++SRC_URI[sha256sum] = "4096e8debc898cfaa16b5306f1c42f8d18b19e30e60da8d4deb781c8f684c840"
++
++inherit autotools-brokensep
++
++DEPENDS += "libpcap"
++
++# We do not want to autoreconf.  We must specify srcdir as ".".
++# We have to set the ac_cv_* cache variables as well as pass the normal
++# cross-compilation options to configure!
++#
++do_configure () {
++	oe_runconf \
++            --srcdir="." \
++            ac_cv_build=${BUILD_SYS} \
++            ac_cv_host=${HOST_SYS} \
++            ac_cv_target=${HOST_SYS}
++}
++
++do_install_prepend () {
++	mkdir -p ${D}/usr/sbin
++}
++
+-- 
+1.7.10.4
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJUDhGYAAoJEEn8ffcsOfaWwzoIAI4dXZ4DEzrbu/5KZ2hIcZTE
-sU1v8D7aD0euU0PBSfirczvjvBUw5ZPBMKJgBfvr9DdfhoFn2w7aJclxH5d6l6xO
-TOyIrzPFwm7LwXiMVvUVJBqiql/z2AewUFf5KXyP4p9EEKKrof7VZ6t2mez79hpD
-07qV/20ches0cUT8yCZsrOMFG+1iLSzg/PbcqqiWrcZ6PwfMKDWtk57ShFLuVxk+
-RIuI7n0xFfPb+k3XIsWp5/OSynzwMPa/5D3hoYjQxE17cxTp635efB0tbIdjveNu
-hHGqacEQuIYY1rY0EgTEePC61ZMax4QYzdQCU65WEc/r9+l0matyPEo00rms9k0=
-=Nxbm
------END PGP SIGNATURE-----
-
---/NkBOFFp2J2Af1nK--
