@@ -1,31 +1,37 @@
-Return-Path: <mike.looijmans@topic.nl>
-X-Greylist: delayed 602 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 10 Sep 2014 17:18:41 UTC
-Received: from smtp04.online.nl (smtp04.online.nl [194.134.41.34])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EE3371321
+Return-Path: <trevor.woerner@linaro.org>
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F81A711EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Sep 2014 17:18:41 +0000 (UTC)
-Received: from smtp04.online.nl (localhost [127.0.0.1])
-	by smtp04.online.nl (Postfix) with ESMTP id 7FF5AE287
+	Wed, 10 Sep 2014 18:37:53 +0000 (UTC)
+Received: by mail-ie0-f171.google.com with SMTP id y20so1637735ier.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Sep 2014 19:08:38 +0200 (CEST)
-Received: from [192.168.1.6] (s55969068.adsl.online.nl [85.150.144.104])
-	by smtp04.online.nl (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Sep 2014 19:08:38 +0200 (CEST)
-Message-ID: <54108595.6080809@topic.nl>
-Date: Wed, 10 Sep 2014 19:08:37 +0200
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: Topic
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-MIME-Version: 1.0
+	Wed, 10 Sep 2014 11:37:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nSD/kIdRkX+DcpJNdOPdM/XghWlwyQj66eDu9KFSZ9A=;
+	b=j4/ls0t+4LAVJUsAqUXgwZnxLAafSDzoy0YEksttxj8zXDpcOLIAfNs141c/Kf1T+h
+	WojVFhiU/RmJBo0KZUHDgzm5wNfAF18SbyzUr7njfDn5cHtLWLSaDtHAGr9WBPsXpE7q
+	ytXQPtVvIv1HJLrieY/cWi9hfFRsm9lBPbdylC8jrsSP4wObic4t8DkChXkThx2LxkK3
+	7Z5R6L4rA6qJLRufPa33TbJnQ/QGstQEQy6hnBKft4HMXxMmPHtj8hAEj2aVR2yYzdfW
+	V0r8UhyhsqBT0jUiQO8p9tpDBS6laAYDXTN520DzIp290KRmxAVHnZE2LVoofjVQyszh
+	oZlQ==
+X-Gm-Message-State: ALoCoQmZErZtGTTdNL29xRA/NGBvoC56OfCGvMVNZBtwjAeZ+IDDymE5J72IkTG5PFiMEJK5PxRZ
+X-Received: by 10.43.136.134 with SMTP id ik6mr47205395icc.6.1410374274487;
+	Wed, 10 Sep 2014 11:37:54 -0700 (PDT)
+Received: from openSUSE-i7.site (dsl-67-204-8-249.acanac.net. [67.204.8.249])
+	by mx.google.com with ESMTPSA id
+	cz10sm2688298igc.5.2014.09.10.11.37.52 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 10 Sep 2014 11:37:53 -0700 (PDT)
+From: Trevor Woerner <trevor.woerner@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-References: <cover.1410279874.git.liezhi.yang@windriver.com>
-	<63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>
-In-Reply-To: <63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>
-X-Online-Scanned: by Cloudmark authority (on smtp04.online.nl)
-Subject: Re: [PATCH 02/14] autofs: add bash to RDEPENDS_autofs
+Date: Wed, 10 Sep 2014 14:37:41 -0400
+Message-Id: <1410374261-10233-1-git-send-email-trevor.woerner@linaro.org>
+X-Mailer: git-send-email 2.0.1.563.g66f467c
+Cc: otavio@ossystems.com.br, eric@eukrea.com
+Subject: [meta-browser][PATCH] nspr: rename .bbappend to match new version from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,47 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Sep 2014 17:18:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Sep 2014 18:38:02 -0000
 
-Wouldn't it be a LOT more constructive to fix the bashism. I fail to see 
-the virtue in adding 2MB of "bash" to an embedded system just for a text 
-echo statement that no-one will actually read unless they hook up a 
-serial console to their TV set or so.
+Signed-off-by: Trevor Woerner <trevor.woerner@linaro.org>
+---
+ recipes-support/nspr/{nspr_4.10.3.bbappend => nspr_4.10.7.bbappend} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename recipes-support/nspr/{nspr_4.10.3.bbappend => nspr_4.10.7.bbappend} (100%)
 
-
-On 9-9-2014 18:27, Robert Yang wrote:
-> Bashism:
-> [snip]
-> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be eval_gettext "foo"):
->                  echo $"$prog not running"
-> possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be eval_gettext "foo"):
->                  echo $"Reloading maps"
-> possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be eval_gettext "foo"):
->                  echo $"Usage: $0 {start|forcestart|stop|restart|forcerestart|reload}"
-> [snip]
->
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> ---
->   .../recipes-daemons/autofs/autofs_5.1.0.bb         |    1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
-> index aab2187..06ee77b 100644
-> --- a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
-> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
-> @@ -4,6 +4,7 @@ LICENSE = "GPL-2.0"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
->
->   DEPENDS += "libtirpc flex-native bison-native"
-> +RDEPENDS_${PN} += "bash"
->
->   inherit autotools-brokensep systemd
->
->
-
-
+diff --git a/recipes-support/nspr/nspr_4.10.3.bbappend b/recipes-support/nspr/nspr_4.10.7.bbappend
+similarity index 100%
+rename from recipes-support/nspr/nspr_4.10.3.bbappend
+rename to recipes-support/nspr/nspr_4.10.7.bbappend
 -- 
-Mike Looijmans
+2.0.1.563.g66f467c
+
 
