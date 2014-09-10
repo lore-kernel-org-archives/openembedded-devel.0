@@ -1,26 +1,45 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AB5C71395
+Return-Path: <switesh.fulpagare@mindastoneridge.com>
+Received: from mail-vc0-f174.google.com (mail-vc0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id CBFAB713DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Sep 2014 16:28:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s89GS6LE014940
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 10 Sep 2014 04:17:13 +0000 (UTC)
+Received: by mail-vc0-f174.google.com with SMTP id hy10so3625615vcb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 Sep 2014 09:28:06 -0700 (PDT)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 9 Sep 2014 09:28:03 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 Sep 2014 09:27:58 -0700
-Message-ID: <cfa36e1533d507bd3f2dca77b622c24a7f687ceb.1410279874.git.liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1410279874.git.liezhi.yang@windriver.com>
-References: <cover.1410279874.git.liezhi.yang@windriver.com>
+	Tue, 09 Sep 2014 21:17:14 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=26LVn2umKzKxldMKn9A2eLl9uxQlePfRK41aWJ/l1xE=;
+	b=PAjUXsUyclzpTyWpFPCUlGESsl4dQCR32xr8hNfrB+5w3utMSHRJsO/NLdGs/+4h71
+	riggwKqvI/menv31IO644P1mruNzjd8lXjrM8+ZV+XRZ0sSoO90Vmfm6blAxIRMBo0vp
+	W2YWtASRApmgUVdtrD7wfD4WA9HhC/Iyusobx1grUJH+TpRDi1IY6kV2ikmkffUv4adV
+	petSzH5JCyz7XpVkt/JTwUeztIvLFFZF1+pDsCnzGVh+AjT834CaYsRkGO0YEJ0sq55T
+	NSsLWUu1TewKq74ok1O3b6+s1OfiEQkoxdRzbaBPyJPROIINvhHMpjQNokvbAsiFgkOT
+	dv/w==
+X-Gm-Message-State: ALoCoQkCRJphQF14kAzObQph3qwUyNNIJTua8zkXPpHatAFAS9ncRXXLKnL0XX6Dzng0AxCf41OHo4+SmtEj4JW0csKAuKNeWQdIxFOLU/luzMBJNwWeM7oHV6uL93zqIjlU14lnqApo3PcCoIZmwJnbz3/w/XNhYg==
 MIME-Version: 1.0
-Subject: [PATCH 14/14] webmin: fix hardcode of python2.3
+X-Received: by 10.52.3.40 with SMTP id 8mr28711305vdz.24.1410322634617; Tue,
+	09 Sep 2014 21:17:14 -0700 (PDT)
+Received: by 10.52.245.73 with HTTP; Tue, 9 Sep 2014 21:17:14 -0700 (PDT)
+In-Reply-To: <CAP9ODKqbwXrieO8yUJYu6+vBK6qerCCZsamkbz6RO5vS0Wq_oA@mail.gmail.com>
+References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
+	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
+	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
+	<CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
+	<CAP9ODKp=xaS+WoQe-zKTpcKiqmdk4mHteoZ8a9BqO1w96hcbxg@mail.gmail.com>
+	<CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
+	<CAP9ODKoBFp7Pskwch4nLq4mkJOB-uFh1m2w7zz46LZ=CUp5JAg@mail.gmail.com>
+	<CALRGHr9iRe3j9j0ce2RnOz7TP+1UzaPqtE5vsooBze_A0fAuyA@mail.gmail.com>
+	<CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
+	<CAP9ODKqbwXrieO8yUJYu6+vBK6qerCCZsamkbz6RO5vS0Wq_oA@mail.gmail.com>
+Date: Wed, 10 Sep 2014 09:47:14 +0530
+Message-ID: <CALRGHr-kpOc88VED2YM3ZaS6beSXz_+xujK7UW6PmvO5BwzP2A@mail.gmail.com>
+From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Error while bitbake meta-toolchain-qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,65 +53,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Sep 2014 16:28:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Sep 2014 04:17:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Use "/usr/bin/env python" to fix it.
+Hi Otavio,
+     Please confirm the following that i had understood -
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../webmin/files/remove-python2.3.patch            |   25 ++++++++++++++++++++
- .../recipes-webadmin/webmin/webmin_1.700.bb        |    4 +++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch
+1. You have pushed the fix.
+2. Now, i have to apply the patch, with
 
-diff --git a/meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch b/meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch
-new file mode 100644
-index 0000000..75e5bd1
---- /dev/null
-+++ b/meta-webserver/recipes-webadmin/webmin/files/remove-python2.3.patch
-@@ -0,0 +1,25 @@
-+From 6f04699d5d417122b67e8118fd1955c769f17e76 Mon Sep 17 00:00:00 2001
-+From: Robert Yang <liezhi.yang@windriver.com>
-+Date: Tue, 2 Sep 2014 00:11:05 -0700
-+Subject: [PATCH] ajaxterm/ajaxterm/qweb.py: fix hardcode of python2.3
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-+---
-+ ajaxterm/ajaxterm/qweb.py |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/ajaxterm/ajaxterm/qweb.py b/ajaxterm/ajaxterm/qweb.py
-+index 20c5092..c658a6b 100644
-+--- a/ajaxterm/ajaxterm/qweb.py
-++++ b/ajaxterm/ajaxterm/qweb.py
-+@@ -1,4 +1,4 @@
-+-#!/usr/bin/python2.3
-++#!/usr/bin/env python
-+ #
-+ # vim:set et ts=4 fdc=0 fdn=2 fdl=0:
-+ #
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb
-index 45d635e..2a363cb 100644
---- a/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb
-+++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.700.bb
-@@ -15,7 +15,9 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
-            file://samba-config-fix.patch \
-            file://proftpd-config-fix.patch \
-            file://net-lib.pl.patch \
--           file://media-tomb.patch"
-+           file://media-tomb.patch \
-+           file://remove-python2.3.patch \
-+            "
- 
- SRC_URI[md5sum] = "e5261114a6a6ed10caf570d3239ed5b7"
- SRC_URI[sha256sum] = "1a6a8aa62c32c04932b902d17fc1864ee8f3fba03012bd25f709aa65e7e9b0f2"
--- 
-1.7.9.5
+    SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
++QT_MODULE_BRANCH =3D "5.4"
 
+ SRC_URI +=3D " \
+     file://0001-examples.pro-include-server-buffer-only-when-buildin.patch
+\
+
+3. I need to write
+    SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
+    +QT_MODULE_BRANCH =3D "5.4"
+in the file,   Home/bin/fsl-community-bsp/sources/meta-qt5//recipes-qt/qt5/
+qtwayland_git.bb
+
+4. Then apply patch
+    $ patch <
+file://0001-examples.pro-include-server-buffer-only-when-buildin.patch \
+
+Are the above steps are right? Please Otavio consider that i m beginner in
+the Linux platform.
+
+Thanking you.
+Switesh.
+
+On Tue, Sep 9, 2014 at 6:08 PM, Otavio Salvador <otavio@ossystems.com.br>
+wrote:
+
+> On Tue, Sep 9, 2014 at 6:12 AM, Switesh Fulpagare
+> <switesh.fulpagare@mindastoneridge.com> wrote:
+> > Correction in last mail,
+> >
+> > But now only one error is encountering as  qtwayland-native_git.bb,
+> do_fetch
+>
+> I pushed the fix.
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
+--=20
+=E2=80=9CThe contents of this e-mail message and any attachments are confid=
+ential=20
+and are intended solely for addressee. The information may also be legally=
+=20
+privileged. This transmission is sent in trust, for the sole purpose of=20
+delivery to the intended recipient. If you have received this transmission=
+=20
+in error, any use, reproduction or dissemination of this transmission is=20
+strictly prohibited. If you are not the intended recipient, please=20
+immediately notify the sender by reply e-mail or phone and delete this=20
+message and its attachments, if any.=E2=80=9D
 
