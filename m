@@ -1,47 +1,36 @@
-Return-Path: <switesh.fulpagare@mindastoneridge.com>
-Received: from mail-vc0-f178.google.com (mail-vc0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 897E0713E7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Sep 2014 11:43:10 +0000 (UTC)
-Received: by mail-vc0-f178.google.com with SMTP id hy4so3683259vcb.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Sep 2014 04:43:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=4/32K9HJMiFq97rtkEFSbjzFp71kEFnVZgXKDJZcRv0=;
-	b=LYLoYaVaZVoTzfcIR7Y0KxtdHvxSv4ucwwgEizqtfwmfD79iuL5l7JZLUJyzepi9lh
-	sYnMY995m+ubCPTCqp6nxRrvvftAM5k20zAkdamcTZKUXxQo5RszjuFL94RNlf9jmYJo
-	Ux7Zs7+dpJ1O9/+xUQPgQq6LGb5COm916OYjuCRsNvdTTdiNjoIA0uG473XErytbrPs4
-	fUhm0k8Oi7H8GtoCCggpEh3GrR8ZrYtF7XUF0t3fTuDrME5m33xWxPv/sP5t8yZR3Jeq
-	oqmf7Em+Nmd4WC2mDvu1doolINGRGbkE49oIRe32cWtoP843EffIINJGJY5CYViMD6/g
-	xpuA==
-X-Gm-Message-State: ALoCoQnj9rsuGkFnuxRkyjX/0b53QEU4FbyLR9YjrtzLKnH6nLboqc/s84WGBxtKRPCqZyeoaPW/vCps6IalW49hjb4783yDf9CKpLTT8HtOQDOW2CionfC0QzaGdsmcLO+FdhwRsm+AjIOOtS+GGQnmbKlSrgyYcQ==
+Return-Path: <just4tech83@gmail.com>
+Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
+	[209.85.192.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 3ACA371044;
+	Wed, 10 Sep 2014 13:43:58 +0000 (UTC)
+Received: by mail-qg0-f49.google.com with SMTP id j5so5701203qga.22
+	for <multiple recipients>; Wed, 10 Sep 2014 06:43:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Xx3eHmdgJ28MXqFCtSqYiqVCZAe3B6SuOwoy3biyz9Y=;
+	b=mxO9DZz/OVRFJxcLGVsdopOLIMyUkzM+WXFWmVGCbwB7a8IQlFCq71rLq2dldOLSmc
+	Aq5tbe72QdALE36XETQKNb8WuXAWO1fJY+vtH/bEkdD5TK9HdOk7wKwbPmr2v4sGESUB
+	q/fqtcpvG8qx4r94IucuqXpIpzGUBIKXMAb9XmJuoPoGu0/Rw5X83w/Vj1ze/ELsIAwl
+	2A5fRn4kBBBSx/ytAQQgAFMLJRBvXcR37I10z5PsG8Ss+Bme3h/xCyaGGIeB/Zw1ZA6a
+	jyIHeN9sGj9V+2bYyQhmvc0aKjSloAuNnlbCNojzHzoeF/TsfLJZLP58ukH7KfhTP2BY
+	Nsnw==
 MIME-Version: 1.0
-X-Received: by 10.52.227.72 with SMTP id ry8mr5839842vdc.64.1410349391704;
-	Wed, 10 Sep 2014 04:43:11 -0700 (PDT)
-Received: by 10.52.245.73 with HTTP; Wed, 10 Sep 2014 04:43:11 -0700 (PDT)
-In-Reply-To: <CAP9ODKocrq=t1GHqnVqt=SpfGsMXTr_60_K5GaOspuY6gCgm2g@mail.gmail.com>
-References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
-	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
-	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
-	<CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
-	<CAP9ODKp=xaS+WoQe-zKTpcKiqmdk4mHteoZ8a9BqO1w96hcbxg@mail.gmail.com>
-	<CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
-	<CAP9ODKoBFp7Pskwch4nLq4mkJOB-uFh1m2w7zz46LZ=CUp5JAg@mail.gmail.com>
-	<CALRGHr9iRe3j9j0ce2RnOz7TP+1UzaPqtE5vsooBze_A0fAuyA@mail.gmail.com>
-	<CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
-	<CAP9ODKqbwXrieO8yUJYu6+vBK6qerCCZsamkbz6RO5vS0Wq_oA@mail.gmail.com>
-	<CALRGHr-kpOc88VED2YM3ZaS6beSXz_+xujK7UW6PmvO5BwzP2A@mail.gmail.com>
-	<CAP9ODKocrq=t1GHqnVqt=SpfGsMXTr_60_K5GaOspuY6gCgm2g@mail.gmail.com>
-Date: Wed, 10 Sep 2014 17:13:11 +0530
-Message-ID: <CALRGHr-hpQdTxEeG9pk6MEXzzw6TbUBCgUFQ90tFn5FD2UX5Mg@mail.gmail.com>
-From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
-To: openembedded-devel@lists.openembedded.org
+X-Received: by 10.140.38.169 with SMTP id t38mr58721202qgt.3.1410356639132;
+	Wed, 10 Sep 2014 06:43:59 -0700 (PDT)
+Received: by 10.140.16.144 with HTTP; Wed, 10 Sep 2014 06:43:58 -0700 (PDT)
+Received: by 10.140.16.144 with HTTP; Wed, 10 Sep 2014 06:43:58 -0700 (PDT)
+In-Reply-To: <48633854.zRbls2qSnV@peggleto-mobl5.ger.corp.intel.com>
+References: <CAD2C2VTOgCMRsq4em2Bd0hQ4Nz2Zq=B2vXezAw7QXQmhkQOsRQ@mail.gmail.com>
+	<48633854.zRbls2qSnV@peggleto-mobl5.ger.corp.intel.com>
+Date: Wed, 10 Sep 2014 19:13:58 +0530
+Message-ID: <CAD2C2VR10GCLaH8CoWtv=ASUX7_W9wwBmFP2uey9WhAaNWbCfA@mail.gmail.com>
+From: Bryan <just4tech83@gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>, raj.khem@gmail.com
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Error while bitbake meta-toolchain-qt5
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: Backporting of latest recipes on oe-classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,71 +44,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Sep 2014 11:43:16 -0000
+X-List-Received-Date: Wed, 10 Sep 2014 13:44:06 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-i am using Daisy branch.
+Hi Paul,
+              Do you know any forked repository where we can found support
+for glibc 2.11.x, 2.12.x onwards.
 
-On Wed, Sep 10, 2014 at 4:47 PM, Otavio Salvador <otavio@ossystems.com.br>
+One more query is related to glibc version. Does it become eglibc in later
+versions as we could not get later version recipes.
+
+Actually i have an old infra and i need to support icaclient 13 (citrix
+receiver) which require libraries of later versions e.g. glibc, gtk,
+libwebkit...
+
+Regards
+Bryan
+ On Sep 9, 2014 6:32 PM, "Paul Eggleton" <paul.eggleton@linux.intel.com>
 wrote:
 
-> On Wed, Sep 10, 2014 at 1:17 AM, Switesh Fulpagare
-> <switesh.fulpagare@mindastoneridge.com> wrote:
-> > Hi Otavio,
-> >      Please confirm the following that i had understood -
-> >
-> > 1. You have pushed the fix.
-> > 2. Now, i have to apply the patch, with
-> >
-> >     SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
-> > +QT_MODULE_BRANCH =3D "5.4"
-> >
-> >  SRC_URI +=3D " \
-> >
-> file://0001-examples.pro-include-server-buffer-only-when-buildin.patch
-> > \
-> >
-> > 3. I need to write
-> >     SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
-> >     +QT_MODULE_BRANCH =3D "5.4"
-> > in the file,
->  Home/bin/fsl-community-bsp/sources/meta-qt5//recipes-qt/qt5/
-> > qtwayland_git.bb
-> >
-> > 4. Then apply patch
-> >     $ patch <
-> > file://0001-examples.pro-include-server-buffer-only-when-buildin.patch =
-\
-> >
-> > Are the above steps are right? Please Otavio consider that i m beginner
+> On Tuesday 09 September 2014 18:23:24 Bryan wrote:
+> >    We have some queries regarding OE-Classic.
+> > 1. Where can we find latest recipes for oe-classic.
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/
+>
+> That's as up-to-date as it gets. There might be other forked repositories
+> floating around, but that is the last official one.
+>
+> > Does oe-classic is still get updation for latest package support?
+>
+> No, as discussed on IRC, OE-Classic is now unmaintained. OE-Core and
+> layers on
+> top of it should ideally be used instead.
+>
+> > 2. How can we compile latest recipes of oe-core on oe-classic and
+> ofcourse
+> > there bitbake version would be different.Basically, we can say we need to
+> > backport the recipe to classic.
+> > e.g. gtk+2.20.1 & above, glibc-2.11.3 & above
+>
+> If you are determined to stay with OE-Classic I think you'd be better off
+> just
+> upgrading the recipes in OE-Classic - going backwards is going to be more
+> painful.
+>
+> Here's the only semi-related information we have, which is about migration
 > in
-> > the Linux platform.
+> the other direction; it could be helpful in terms of providing pointers:
 >
-> Are you using Daisy or master?
+>   http://www.openembedded.org/wiki/Migrating_metadata_to_OE-Core
 >
+> Cheers,
+> Paul
 >
 > --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-
---=20
-=E2=80=9CThe contents of this e-mail message and any attachments are confid=
-ential=20
-and are intended solely for addressee. The information may also be legally=
-=20
-privileged. This transmission is sent in trust, for the sole purpose of=20
-delivery to the intended recipient. If you have received this transmission=
-=20
-in error, any use, reproduction or dissemination of this transmission is=20
-strictly prohibited. If you are not the intended recipient, please=20
-immediately notify the sender by reply e-mail or phone and delete this=20
-message and its attachments, if any.=E2=80=9D
+> Paul Eggleton
+> Intel Open Source Technology Centre
+>
 
