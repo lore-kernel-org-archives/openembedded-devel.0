@@ -1,33 +1,36 @@
-Return-Path: <SimonG@seaward.co.uk>
-X-Greylist: delayed 399 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 11 Sep 2014 09:13:35 UTC
-Received: from mail1.bemta5.messagelabs.com (mail1.bemta5.messagelabs.com
-	[195.245.231.151])
-	by mail.openembedded.org (Postfix) with ESMTP id 29464605BD
+Return-Path: <switesh.fulpagare@mindastoneridge.com>
+Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 276EF65D58
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 09:13:35 +0000 (UTC)
-Received: from [85.158.139.211:23971] by server-15.bemta-5.messagelabs.com id
-	C4/30-12002-03661145; Thu, 11 Sep 2014 09:06:56 +0000
-X-Env-Sender: SimonG@seaward.co.uk
-X-Msg-Ref: server-8.tower-206.messagelabs.com!1410426414!13759821!1
-X-Originating-IP: [89.206.246.114]
-X-StarScan-Received: 
-X-StarScan-Version: 6.11.3; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 10762 invoked from network); 11 Sep 2014 09:06:54 -0000
-Received: from unknown (HELO smtp.seaward.co.uk) (89.206.246.114)
-	by server-8.tower-206.messagelabs.com with SMTP;
-	11 Sep 2014 09:06:54 -0000
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <OFDBB8BDB4.AD422CF3-ON80257D50.0031C1EB-80257D50.00321358@LocalDomain>
-From: "Simon George" <SimonG@seaward.co.uk>
-Date: Thu, 11 Sep 2014 10:06:54 +0100
+	Thu, 11 Sep 2014 10:15:04 +0000 (UTC)
+Received: by mail-vc0-f176.google.com with SMTP id la4so3835911vcb.35
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Sep 2014 03:15:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:content-type;
+	bh=lovIIwGwVRssMOsJkEOxx0tB44i4gj4BwMFsmJC6R2s=;
+	b=c6H5786+8/ho7lYo+QXtJo6TbLYNLYRk/qMYfGYZOPuaPXG+RbOCB4SspmZYOuXUCJ
+	ix+VIL/8z/J7XuZtyCuM23Pwjl2X1oM9TO6jon5YhCGISITJOSE1LahfaRUk6XogjhKA
+	UJFmOOCv1IRuXmLlmKtelbpqTLHfqqj4uieTeC0kOxpZBGQjnM7KqVvitTtNN4oIEiiY
+	aTx6cTfeLzRWMkCR8bjR59AQccbBhXX1x+YslSozXIaRA4GBNla47K6OXqVXPFQ1Fn5B
+	PwFU+AbSjqa4YwwvNFfRlJFbVKqV8GOQPvCRHgg6b8K42M3qI50qvXcutONPWDjF5iq3
+	gnrA==
+X-Gm-Message-State: ALoCoQnHLfNBpgRZHBlEHKdoqz27i3zAgB593RjuZcu3LNXGb5MqZDHS2BZmMFkM48dF+8dLEWuMCeg0DpGFOuPBMdAZSrTn1FWOxr1+mHr++qIFYVL7MlQPkI30A2y/qqTgjt/7Rs6qYs45SETgBxYReqdhRpPngw==
 MIME-Version: 1.0
-X-KeepSent: DBB8BDB4:AD422CF3-80257D50:0031C1EB; name=$KeepSent; type=4
-X-Mailer: Lotus Notes Release 8.5.1FP4 July 25, 2010
-X-Disclaimed: 15879
+X-Received: by 10.220.186.196 with SMTP id ct4mr33129vcb.51.1410430505482;
+	Thu, 11 Sep 2014 03:15:05 -0700 (PDT)
+Received: by 10.52.245.73 with HTTP; Thu, 11 Sep 2014 03:15:05 -0700 (PDT)
+In-Reply-To: <54107627.9060100@phoenixsoftware.it>
+References: <54107627.9060100@phoenixsoftware.it>
+Date: Thu, 11 Sep 2014 15:45:05 +0530
+Message-ID: <CALRGHr-E87NH+oyB0o5mASWTn3vffzBVF6_8d_uA9KfC4=wFGQ@mail.gmail.com>
+From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Error while bitbake meta-toolchain-qt5
+Subject: Re: [meta-qt5] [daisy] qtwayland fetch fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,103 +44,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Sep 2014 09:13:40 -0000
-Content-Type: text/plain; charset="US-ASCII"
+X-List-Received-Date: Thu, 11 Sep 2014 10:15:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-I think I am also having the same issue that Switesh originally reported,=20
-is there a solution?=20
-If so I would be grateful if you could tell me the steps to take to solve=20
-the issue.
+Hi Pierluigi,
+  Thanks for this patch, it is working and my problem of
+qtwayland-native_git.bb, do_fetch
+qtwayland_git.bb, do_fetch
+is solved now.
 
-My console output is:
+Thank you.
 
-engineering@SELLT099:~/fsl-community-bsp/build$ bitbake meta-toolchain-qt5
-...
-...=20
-NOTE: Preparing runqueue
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-WARNING: Failed to fetch URL=20
-git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable, attempting MIRRORS=
+On Wed, Sep 10, 2014 at 9:32 PM, Pierluigi Passaro <
+pierluigi.passaro@phoenixsoftware.it> wrote:
+
+> Hi all,
+> working on daisy, it looks like the fetching url of qtwayland is no longe=
+r
+> available.
+>
+> The following patch helped me to solve the problem, hope it will help...
+>
+> Regards
+> Pierluigi
+>
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+> diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/
+> qtwayland-native_git.bb
+> index 988aa98..64485de 100644
+> --- a/recipes-qt/qt5/qtwayland-native_git.bb
+> +++ b/recipes-qt/qt5/qtwayland-native_git.bb
+> @@ -4,4 +4,5 @@ require ${PN}.inc
+>  # qtwayland wasn't released yet, last tag before this SRCREV is
+> 5.0.0-beta1
+>  # qt5-git PV is only to indicate that this recipe is compatible with qt5
+> 5.2.1
+>
+> -SRCREV =3D "a237778666666ab77c4e8e6b501cf0fbe7c9223e"
+> +QT_MODULE_BRANCH =3D "dev"
+> +SRCREV =3D "573d0ee5ba86d99095f217ea9e19172bfc5e75fd"
+> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_
+> git.bb
+> index 789a882..c192914 100644
+> --- a/recipes-qt/qt5/qtwayland_git.bb
+> +++ b/recipes-qt/qt5/qtwayland_git.bb
+> @@ -4,6 +4,7 @@ require ${PN}.inc
+>  # qtwayland wasn't released yet, last tag before this SRCREV is
+> 5.0.0-beta1
+>  # qt5-git PV is only to indicate that this recipe is compatible with qt5
+> 5.2.1
+>
+> +QT_MODULE_BRANCH =3D "dev"
+>  SRCREV =3D "573d0ee5ba86d99095f217ea9e19172bfc5e75fd"
+>
+>  SRC_URI +=3D " \
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
+--=20
+=E2=80=9CThe contents of this e-mail message and any attachments are confid=
+ential=20
+and are intended solely for addressee. The information may also be legally=
 =20
-if available
-ERROR: Fetcher failure: Unable to find revision=20
-a237778666666ab77c4e8e6b501cf0fbe7c9223e in branch stable even from=20
-upstream
-ERROR: Function failed: Fetcher failure for URL:=20
-'git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable'. Unable to fetch 
-
-URL from any source.
-ERROR: Logfile of failure stored in:=20
-/home/engineering/fsl-community-bsp/build/tmp/work/i686-linux/qtwayland-nat=
-ive/5.2.1+gitAUTOINC+a237778666-r0/temp/log.do=5Ffetch.2882
-ERROR: Task 1763=20
-(/home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/qtwayl=
-and-native=5Fgit.bb,=20
-do=5Ffetch) failed with exit code '1'
-WARNING: Failed to fetch URL=20
-git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable, attempting MIRRORS=
+privileged. This transmission is sent in trust, for the sole purpose of=20
+delivery to the intended recipient. If you have received this transmission=
 =20
-if available
-ERROR: Fetcher failure: Unable to find revision=20
-573d0ee5ba86d99095f217ea9e19172bfc5e75fd in branch stable even from=20
-upstream
-ERROR: Function failed: Fetcher failure for URL:=20
-'git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable'. Unable to fetch 
-
-URL from any source.
-ERROR: Logfile of failure stored in:=20
-/home/engineering/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky=
--linux-gnueabi/qtwayland/5.2.1+gitAUTOINC+573d0ee5ba-r0/temp/log.do=5Ffetch=
-.2883
-ERROR: Task 827=20
-(/home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/qtwayl=
-and=5Fgit.bb,=20
-do=5Ffetch) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 4147 tasks of which 4145 didn't need to be=20
-rerun and 2 failed.
-Waiting for 0 running tasks to finish:
-=20
-Summary: 2 tasks failed:
- =20
-/home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/qtwayla=
-nd-native=5Fgit.bb,=20
-do=5Ffetch
- =20
-/home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/qtwayla=
-nd=5Fgit.bb,=20
-do=5Ffetch
-Summary: There were 2 WARNING messages shown.
-Summary: There were 4 ERROR messages shown, returning a non-zero exit=20
-code.
-engineering@SELLT099:~/fsl-community-bsp/build$
-
-the 2 log files mentioned are here:
-
-        log.do=5Ffetch.2882  http://pastebin.com/3Nk1Z4D9
-        log.do=5Ffetch.2883 http://pastebin.com/MWeML9Wt
-
-        I am also on branch daisy and as of the time of this email the=20
-branch was up to date.=20
-
-        any help would be appreciated.=20
-
-regards,
-        Simon
-
-
-------------------------------------------------
-This email and any files transmitted with it are confidential and intended =
-solely for the use of the individual or entity to whom they are addressed. =
-If you have received this email in error please notify the system manager.
-
-This footnote also confirms that this email message has been swept by the M=
-essageLabs Email Security System for the presence of computer viruses.
-
-Seaward Group, Bracken Hill, South West Industrial Estate, Peterlee, County=
- Durham. SR8 2SW, England. Company Registration: 1674384
-
-For the sake of the environment, please do not print this email unless you =
-really need to.
+in error, any use, reproduction or dissemination of this transmission is=20
+strictly prohibited. If you are not the intended recipient, please=20
+immediately notify the sender by reply e-mail or phone and delete this=20
+message and its attachments, if any.=E2=80=9D
 
