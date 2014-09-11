@@ -1,27 +1,54 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5364E65CB1
+Return-Path: <enrico.scholz@sigma-chemnitz.de>
+X-Greylist: delayed 796 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 11 Sep 2014 16:15:28 UTC
+Received: from mail.cvg.de (mail.cvg.de [62.153.82.30])
+	by mail.openembedded.org (Postfix) with ESMTP id F3EAB65CA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 15:28:37 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8BFSbnL026576
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 11 Sep 2014 16:15:28 +0000 (UTC)
+Received: from mail.cvg.de (mail.cvg.de [62.153.82.30])
+	by mailout-1.intern.sigma-chemnitz.de (8.14.4/8.14.4) with ESMTP id
+	s8BG28v9026929
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 08:28:38 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 11 Sep 2014 08:28:37 -0700
-Message-ID: <5411BFA4.4050206@windriver.com>
-Date: Thu, 11 Sep 2014 23:28:36 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+	Thu, 11 Sep 2014 18:02:11 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sigma-chemnitz.de;
+	s=v2012061000; t=1410451331;
+	bh=lSK+un7DiY/HzDtkfOq1PgpaNUoM8z4xbmdnGMH6fbg=;
+	h=From:To:Subject:References:Date:In-Reply-To:Message-ID:
+	MIME-Version:Content-Type:Sender;
+	b=jnOnhsVpjSZKfxjqIksN0txS1mmjS6KaLbnnNKiv++oDL7+bdgc66nNlY599HdSX0
+	33yzdw7Gf+ta5ik0/YXeY99cXVzaRYZ69LcalKjUXmlHRPit6KlaGEXx2qUcrt8fdv
+	cdQkqqi5b2Fhev5d9W12C6mAUlZYhYLC0GWQDyV0=
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id s8BG21gQ001746
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Sep 2014 18:02:03 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.80.1) (envelope-from <ensc@sigma-chemnitz.de>) id 1XS6or-0004Sh-4a
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Sep 2014 18:02:01 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1410279874.git.liezhi.yang@windriver.com>
+	<63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>
+Mail-Followup-To: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Date: Thu, 11 Sep 2014 18:02:01 +0200
+In-Reply-To: <63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>
+	(Robert Yang's message of "Tue, 9 Sep 2014 09:27:46 -0700")
+Message-ID: <lyha0ei1s6.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.3 (gnu/linux)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1410279874.git.liezhi.yang@windriver.com>	<63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>
-	<54108595.6080809@topic.nl>
-In-Reply-To: <54108595.6080809@topic.nl>
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-DSPAM-Result: Innocent
+X-DSPAM-Probability: 0
+X-DSPAM-Confidence: 1
+X-Spam-Score: -6.2
+X-Spam-Level: ------
+X-Spam-Tests: AWL, BAYES_00, DKIM_ADSP_ALL, RP_MATCHES_RCVD, SPF_NEUTRAL,
+	DSPAM_INNOCENT
+X-Scanned-By: MIMEDefang 2.75
 Subject: Re: [PATCH 02/14] autofs: add bash to RDEPENDS_autofs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -36,84 +63,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Sep 2014 15:28:44 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Sep 2014 16:15:38 -0000
+Content-Type: text/plain
 
+Robert Yang <liezhi.yang@windriver.com> writes:
 
-
-On 09/11/2014 01:08 AM, Mike Looijmans wrote:
-> Wouldn't it be a LOT more constructive to fix the bashism. I fail to see the
-> virtue in adding 2MB of "bash" to an embedded system just for a text echo
-> statement that no-one will actually read unless they hook up a serial console to
-> their TV set or so.
-
-The problem is that there are more bashism, here is the full list:
-
-possible bashism in autofs/etc/init.d/autofs line 39 ('function' is useless):
-function start() {
-possible bashism in autofs/etc/init.d/autofs line 52 ([^] should be [!]):
-         elif ([ -f /proc/modules ] && lsmod) | grep -q autofs[^4]
-possible bashism in autofs/etc/init.d/autofs line 88 ('function' is useless):
-function stop() {
-possible bashism in autofs/etc/init.d/autofs line 89 ($"foo" should be 
-eval_gettext "foo"):
-         echo -n $"Stopping $prog: "
-possible bashism in autofs/etc/init.d/autofs line 92 (should be >word 2>&1):
-                 killall -TERM $prog >& /dev/null
-possible bashism in autofs/etc/init.d/autofs line 105 ('function' is useless):
-function restart() {
-possible bashism in autofs/etc/init.d/autofs line 113 ('function' is useless):
-function reload() {
-possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be 
-eval_gettext "foo"):
-                 echo $"$prog not running"
-possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be 
-eval_gettext "foo"):
-                 echo $"Reloading maps"
-possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be 
-eval_gettext "foo"):
-                 echo $"Usage: $0 
-{start|forcestart|stop|restart|forcerestart|reload}"
-
-// Robert
-
+> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be eval_gettext "foo"):
 >
->
-> On 9-9-2014 18:27, Robert Yang wrote:
->> Bashism:
->> [snip]
->> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be
->> eval_gettext "foo"):
->>                  echo $"$prog not running"
->> possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be
->> eval_gettext "foo"):
->>                  echo $"Reloading maps"
->> possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be
->> eval_gettext "foo"):
->>                  echo $"Usage: $0
->> {start|forcestart|stop|restart|forcerestart|reload}"
->> [snip]
->>
->> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->> ---
->>   .../recipes-daemons/autofs/autofs_5.1.0.bb         |    1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->> b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->> index aab2187..06ee77b 100644
->> --- a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->> @@ -4,6 +4,7 @@ LICENSE = "GPL-2.0"
->>   LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
->>
->>   DEPENDS += "libtirpc flex-native bison-native"
->> +RDEPENDS_${PN} += "bash"
->>
->>   inherit autotools-brokensep systemd
->>
->>
->
->
+> +RDEPENDS_${PN} += "bash"
+
+Is this bashism only in the initscript, or somewhere else too?  If it is
+only in the initscript, the RDEPENDS should be a RRECOMMENDS because
+package seems to contain also a systemd service.
+
+
+Enrico
 
