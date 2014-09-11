@@ -1,48 +1,33 @@
-Return-Path: <switesh.fulpagare@mindastoneridge.com>
-Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
-	[209.85.220.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FCC26FE64
+Return-Path: <SimonG@seaward.co.uk>
+X-Greylist: delayed 421 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 11 Sep 2014 12:23:33 UTC
+Received: from mail1.bemta3.messagelabs.com (mail1.bemta3.messagelabs.com
+	[195.245.230.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 23DFC6A941
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 10:21:03 +0000 (UTC)
-Received: by mail-vc0-f177.google.com with SMTP id la4so3392002vcb.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 03:21:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=8bppzqhDczjsxDt/DXsKI8fFJvxOMJ6Lm8M00HACaZI=;
-	b=aiNoguTnbb45NRZAot5fHD7mAjFbbH1KfwbjEecS5rDYw/UErfE0ZJGej9Yjcj69HL
-	kUrbIWO/dPA0oSTIc7EPSE4aNBZ1zvxv3roCXdsFu3SF4OJq8nxFeYIkBAwa4BhvL71X
-	vtjWLK1fIc60Zb1aK1V9pK5tqnlojWQhTu+0ffhVHUoGpfx3JHMXFYi+Pmf9Yc3dRri+
-	eilgfyhHO2m5eoid/b5aKYIOhyIJA3VHy0di+MiJAMeBQDVUHgrRmp18hXuHmQw//ZsC
-	u1+TW8CU1RTK15isdZJETA46zY5kuB2lRiT+5Usnkemx6kW4RHQ9X6v+1Xkl40tMJcr+
-	TlEQ==
-X-Gm-Message-State: ALoCoQmEDl617w+KN68VkERFmjkoz0M9ILRdNadwms3JRdkZRCSSJigo9b9EFgBVTT2Pggc0jHVhsWuxrxkmRBEYOcoBDGY7NdU5Ezg74qWANYltpw+EM83JHbb+4T4eQV2ASzNt04d9THVNAdCNyrd7PFo5pezVVQ==
-MIME-Version: 1.0
-X-Received: by 10.52.92.79 with SMTP id ck15mr25013vdb.26.1410430864471; Thu,
-	11 Sep 2014 03:21:04 -0700 (PDT)
-Received: by 10.52.245.73 with HTTP; Thu, 11 Sep 2014 03:21:04 -0700 (PDT)
-In-Reply-To: <CALRGHr-hpQdTxEeG9pk6MEXzzw6TbUBCgUFQ90tFn5FD2UX5Mg@mail.gmail.com>
-References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
-	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
-	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
-	<CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
-	<CAP9ODKp=xaS+WoQe-zKTpcKiqmdk4mHteoZ8a9BqO1w96hcbxg@mail.gmail.com>
-	<CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
-	<CAP9ODKoBFp7Pskwch4nLq4mkJOB-uFh1m2w7zz46LZ=CUp5JAg@mail.gmail.com>
-	<CALRGHr9iRe3j9j0ce2RnOz7TP+1UzaPqtE5vsooBze_A0fAuyA@mail.gmail.com>
-	<CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
-	<CAP9ODKqbwXrieO8yUJYu6+vBK6qerCCZsamkbz6RO5vS0Wq_oA@mail.gmail.com>
-	<CALRGHr-kpOc88VED2YM3ZaS6beSXz_+xujK7UW6PmvO5BwzP2A@mail.gmail.com>
-	<CAP9ODKocrq=t1GHqnVqt=SpfGsMXTr_60_K5GaOspuY6gCgm2g@mail.gmail.com>
-	<CALRGHr-hpQdTxEeG9pk6MEXzzw6TbUBCgUFQ90tFn5FD2UX5Mg@mail.gmail.com>
-Date: Thu, 11 Sep 2014 15:51:04 +0530
-Message-ID: <CALRGHr9uXLm2ZuWua76p3jOroNuv1R1fWTjL9hGZ54WZru=yxQ@mail.gmail.com>
-From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
+	Thu, 11 Sep 2014 12:23:33 +0000 (UTC)
+Received: from [85.158.137.68:59277] by server-11.bemta-3.messagelabs.com id
+	92/AD-01568-F9291145; Thu, 11 Sep 2014 12:16:31 +0000
+X-Env-Sender: SimonG@seaward.co.uk
+X-Msg-Ref: server-3.tower-31.messagelabs.com!1410437783!13220013!1
+X-Originating-IP: [89.206.246.114]
+X-StarScan-Received: 
+X-StarScan-Version: 6.11.3; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 32092 invoked from network); 11 Sep 2014 12:16:24 -0000
+Received: from unknown (HELO smtp.seaward.co.uk) (89.206.246.114)
+	by server-3.tower-31.messagelabs.com with SMTP;
+	11 Sep 2014 12:16:24 -0000
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <OF5EEF0A15.1F72D1B0-ON80257D50.00434D23-80257D50.00436C78@LocalDomain>
+From: "Simon George" <SimonG@seaward.co.uk>
+Date: Thu, 11 Sep 2014 13:16:23 +0100
+MIME-Version: 1.0
+X-KeepSent: 5EEF0A15:1F72D1B0-80257D50:00434D23; name=$KeepSent; type=4
+X-Mailer: Lotus Notes Release 8.5.1FP4 July 25, 2010
+X-Disclaimed: 223
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Error while bitbake meta-toolchain-qt5
+Subject: Re: [meta-qt5] [daisy] qtwayland fetch fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,84 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Sep 2014 10:21:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Sep 2014 12:23:36 -0000
+Content-Type: text/plain; charset="US-ASCII"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Otavio,
-   This problem is solved.
-Thanks for your valuable support.
+Hi Pierluigi,
 
-- Switesh.
+I have tried this patch and it has solved the issue, thanks for sharing.=20
 
-On Wed, Sep 10, 2014 at 5:13 PM, Switesh Fulpagare <
-switesh.fulpagare@mindastoneridge.com> wrote:
+regards,
+Simon
 
-> i am using Daisy branch.
->
-> On Wed, Sep 10, 2014 at 4:47 PM, Otavio Salvador <otavio@ossystems.com.br=
->
-> wrote:
->
->> On Wed, Sep 10, 2014 at 1:17 AM, Switesh Fulpagare
->> <switesh.fulpagare@mindastoneridge.com> wrote:
->> > Hi Otavio,
->> >      Please confirm the following that i had understood -
->> >
->> > 1. You have pushed the fix.
->> > 2. Now, i have to apply the patch, with
->> >
->> >     SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
->> > +QT_MODULE_BRANCH =3D "5.4"
->> >
->> >  SRC_URI +=3D " \
->> >
->> file://0001-examples.pro-include-server-buffer-only-when-buildin.patch
->> > \
->> >
->> > 3. I need to write
->> >     SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
->> >     +QT_MODULE_BRANCH =3D "5.4"
->> > in the file,
->>  Home/bin/fsl-community-bsp/sources/meta-qt5//recipes-qt/qt5/
->> > qtwayland_git.bb
->> >
->> > 4. Then apply patch
->> >     $ patch <
->> > file://0001-examples.pro-include-server-buffer-only-when-buildin.patch=
- \
->> >
->> > Are the above steps are right? Please Otavio consider that i m beginne=
-r
->> in
->> > the Linux platform.
->>
->> Are you using Daisy or master?
->>
->>
->> --
->> Otavio Salvador                             O.S. Systems
->> http://www.ossystems.com.br        http://code.ossystems.com.br
->> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
+------------------------------------------------
+This email and any files transmitted with it are confidential and intended =
+solely for the use of the individual or entity to whom they are addressed. =
+If you have received this email in error please notify the system manager.
 
---=20
-=E2=80=9CThe contents of this e-mail message and any attachments are confid=
-ential=20
-and are intended solely for addressee. The information may also be legally=
-=20
-privileged. This transmission is sent in trust, for the sole purpose of=20
-delivery to the intended recipient. If you have received this transmission=
-=20
-in error, any use, reproduction or dissemination of this transmission is=20
-strictly prohibited. If you are not the intended recipient, please=20
-immediately notify the sender by reply e-mail or phone and delete this=20
-message and its attachments, if any.=E2=80=9D
+This footnote also confirms that this email message has been swept by the M=
+essageLabs Email Security System for the presence of computer viruses.
+
+Seaward Group, Bracken Hill, South West Industrial Estate, Peterlee, County=
+ Durham. SR8 2SW, England. Company Registration: 1674384
+
+For the sake of the environment, please do not print this email unless you =
+really need to.
 
