@@ -1,28 +1,28 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CECBE6FE3B
+	by mail.openembedded.org (Postfix) with ESMTP id 5364E65CB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 15:16:45 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8BFGire026126
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 11 Sep 2014 08:16:44 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 11 Sep 2014 08:16:44 -0700
-Message-ID: <5411BCDB.7040500@windriver.com>
-Date: Thu, 11 Sep 2014 23:16:43 +0800
+	Thu, 11 Sep 2014 15:28:37 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8BFSbnL026576
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Sep 2014 08:28:38 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 11 Sep 2014 08:28:37 -0700
+Message-ID: <5411BFA4.4050206@windriver.com>
+Date: Thu, 11 Sep 2014 23:28:36 +0800
 From: Robert Yang <liezhi.yang@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux i686;
 	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <1410274929-16519-1-git-send-email-liezhi.yang@windriver.com>
-	<2640190.uKkUWoK2di@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <2640190.uKkUWoK2di@peggleto-mobl5.ger.corp.intel.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-perl] [PATCH] meta-perl: fix for eglibc-gconvs
+To: <openembedded-devel@lists.openembedded.org>
+References: <cover.1410279874.git.liezhi.yang@windriver.com>	<63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>
+	<54108595.6080809@topic.nl>
+In-Reply-To: <54108595.6080809@topic.nl>
+Subject: Re: [PATCH 02/14] autofs: add bash to RDEPENDS_autofs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,48 +36,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Sep 2014 15:16:48 -0000
+X-List-Received-Date: Thu, 11 Sep 2014 15:28:44 -0000
 Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 
-On 09/11/2014 11:03 PM, Paul Eggleton wrote:
-> Hi Robert,
->
-> On Tuesday 09 September 2014 08:02:09 Robert Yang wrote:
->> There is no eglibc-gconvs now, but glibc-gconvs.
->>
->> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->> ---
->>   .../recipes-perl/libnet/libnet-libidn-perl_0.12.bb |    4 ++--
->>   .../recipes-perl/libtext/libtext-iconv-perl_1.7.bb |    2 +-
->>   2 files changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
->> b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb index
->> 42b213d..f896d11 100644
->> --- a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
->> +++ b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
->> @@ -8,9 +8,9 @@ SECTION = "libs"
->>   LICENSE = "Artistic-1.0 | GPLv1+"
->>   HOMEPAGE = "http://search.cpan.org/dist/Net-LibIDN/"
->>   DEPENDS += "libidn"
->> -# We must need eglibc-gconvs to enable charset related functions,
->> +# We must need glibc-gconv to enable charset related functions,
->>   # such as Net::LibIDN::idn_to_ascii().
->> -RDEPENDS_${PN} += "eglibc-gconvs"
->> +RDEPENDS_${PN} += "glibc-gconv"
->
-> Ah, should that be glibc-gconvs?
+On 09/11/2014 01:08 AM, Mike Looijmans wrote:
+> Wouldn't it be a LOT more constructive to fix the bashism. I fail to see the
+> virtue in adding 2MB of "bash" to an embedded system just for a text echo
+> statement that no-one will actually read unless they hook up a serial console to
+> their TV set or so.
 
-Yes, I think so, sorry, I was confused by glibc-gconv and glibc-gconvs,
-will send a V2 tomorrow.
+The problem is that there are more bashism, here is the full list:
+
+possible bashism in autofs/etc/init.d/autofs line 39 ('function' is useless):
+function start() {
+possible bashism in autofs/etc/init.d/autofs line 52 ([^] should be [!]):
+         elif ([ -f /proc/modules ] && lsmod) | grep -q autofs[^4]
+possible bashism in autofs/etc/init.d/autofs line 88 ('function' is useless):
+function stop() {
+possible bashism in autofs/etc/init.d/autofs line 89 ($"foo" should be 
+eval_gettext "foo"):
+         echo -n $"Stopping $prog: "
+possible bashism in autofs/etc/init.d/autofs line 92 (should be >word 2>&1):
+                 killall -TERM $prog >& /dev/null
+possible bashism in autofs/etc/init.d/autofs line 105 ('function' is useless):
+function restart() {
+possible bashism in autofs/etc/init.d/autofs line 113 ('function' is useless):
+function reload() {
+possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be 
+eval_gettext "foo"):
+                 echo $"$prog not running"
+possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be 
+eval_gettext "foo"):
+                 echo $"Reloading maps"
+possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be 
+eval_gettext "foo"):
+                 echo $"Usage: $0 
+{start|forcestart|stop|restart|forcerestart|reload}"
 
 // Robert
 
 >
-> Cheers,
-> Paul
+>
+> On 9-9-2014 18:27, Robert Yang wrote:
+>> Bashism:
+>> [snip]
+>> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be
+>> eval_gettext "foo"):
+>>                  echo $"$prog not running"
+>> possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be
+>> eval_gettext "foo"):
+>>                  echo $"Reloading maps"
+>> possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be
+>> eval_gettext "foo"):
+>>                  echo $"Usage: $0
+>> {start|forcestart|stop|restart|forcerestart|reload}"
+>> [snip]
+>>
+>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+>> ---
+>>   .../recipes-daemons/autofs/autofs_5.1.0.bb         |    1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>> b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>> index aab2187..06ee77b 100644
+>> --- a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>> @@ -4,6 +4,7 @@ LICENSE = "GPL-2.0"
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+>>
+>>   DEPENDS += "libtirpc flex-native bison-native"
+>> +RDEPENDS_${PN} += "bash"
+>>
+>>   inherit autotools-brokensep systemd
+>>
+>>
+>
 >
 
