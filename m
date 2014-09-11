@@ -1,32 +1,44 @@
 Return-Path: <switesh.fulpagare@mindastoneridge.com>
-Received: from mail-vc0-f171.google.com (mail-vc0-f171.google.com
-	[209.85.220.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 22B2971462
+Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FCC26FE64
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 10:18:52 +0000 (UTC)
-Received: by mail-vc0-f171.google.com with SMTP id im17so483759vcb.16
+	Thu, 11 Sep 2014 10:21:03 +0000 (UTC)
+Received: by mail-vc0-f177.google.com with SMTP id la4so3392002vcb.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Sep 2014 03:18:53 -0700 (PDT)
+	Thu, 11 Sep 2014 03:21:04 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=ct3j5jBwnehBm2GaQtaXYe3hp0nXrKeYFREw3tcOwKc=;
-	b=doKcq1S854cK/fHhWYxn6pDhoBeDH3xQH7xrtRF9ZuFz4Ih0i7EqrLbfab4jc4wYAY
-	r11O1MERw5UDcaqtKnaxPPhQfgCvYB0MizRvM+qez8rsT6mlXh5f+KB+HdHL8e1HEbX+
-	vuJy9cyYWUFAAHLhWP/XWH7sgOb+miEPOOTjLizYxL52VAPEPMzhrWYepj1xvCkDjIQY
-	k/OXIbxHEvppoSWVU2fRWpYnYZUTF5MjckLIdzSiQ0tM32l1uhyG7r1s4QIfj+1LWeED
-	uQaVUxuhY9Py3lcN+HSo9ytPbvElJvingkH1A9rDsYMBGkCz28/53GibVYPqIOY9NzY7
-	7IbQ==
-X-Gm-Message-State: ALoCoQmLnCmBG83PiZYrm5oCeN+byt2bHL/H8YVgVBp3Dx5cpncWDywkt4twfgMHYdvvq3O2V4OR1jxdFXRj5ry3SAyBXrhOT7yp5JOweUW90EBXXR4UXUz91XOt4cnU7MecjjA/Q7piAuEIk76l/psu+wjnHwadeA==
+	bh=8bppzqhDczjsxDt/DXsKI8fFJvxOMJ6Lm8M00HACaZI=;
+	b=aiNoguTnbb45NRZAot5fHD7mAjFbbH1KfwbjEecS5rDYw/UErfE0ZJGej9Yjcj69HL
+	kUrbIWO/dPA0oSTIc7EPSE4aNBZ1zvxv3roCXdsFu3SF4OJq8nxFeYIkBAwa4BhvL71X
+	vtjWLK1fIc60Zb1aK1V9pK5tqnlojWQhTu+0ffhVHUoGpfx3JHMXFYi+Pmf9Yc3dRri+
+	eilgfyhHO2m5eoid/b5aKYIOhyIJA3VHy0di+MiJAMeBQDVUHgrRmp18hXuHmQw//ZsC
+	u1+TW8CU1RTK15isdZJETA46zY5kuB2lRiT+5Usnkemx6kW4RHQ9X6v+1Xkl40tMJcr+
+	TlEQ==
+X-Gm-Message-State: ALoCoQmEDl617w+KN68VkERFmjkoz0M9ILRdNadwms3JRdkZRCSSJigo9b9EFgBVTT2Pggc0jHVhsWuxrxkmRBEYOcoBDGY7NdU5Ezg74qWANYltpw+EM83JHbb+4T4eQV2ASzNt04d9THVNAdCNyrd7PFo5pezVVQ==
 MIME-Version: 1.0
-X-Received: by 10.52.163.52 with SMTP id yf20mr12259vdb.40.1410430733251; Thu,
-	11 Sep 2014 03:18:53 -0700 (PDT)
-Received: by 10.52.245.73 with HTTP; Thu, 11 Sep 2014 03:18:53 -0700 (PDT)
-In-Reply-To: <OFDBB8BDB4.AD422CF3-ON80257D50.0031C1EB-80257D50.00321358@LocalDomain>
-References: <OFDBB8BDB4.AD422CF3-ON80257D50.0031C1EB-80257D50.00321358@LocalDomain>
-Date: Thu, 11 Sep 2014 15:48:53 +0530
-Message-ID: <CALRGHr_Uf9qWFreNHoVXQi8pekRUzZDhrvBOLBr1hZ--4uMLGA@mail.gmail.com>
+X-Received: by 10.52.92.79 with SMTP id ck15mr25013vdb.26.1410430864471; Thu,
+	11 Sep 2014 03:21:04 -0700 (PDT)
+Received: by 10.52.245.73 with HTTP; Thu, 11 Sep 2014 03:21:04 -0700 (PDT)
+In-Reply-To: <CALRGHr-hpQdTxEeG9pk6MEXzzw6TbUBCgUFQ90tFn5FD2UX5Mg@mail.gmail.com>
+References: <CALRGHr-x0HHMz8paVPVFxmoZ41zRGBZ4GmY3N35VKfYx57v6Lg@mail.gmail.com>
+	<CAP9ODKqZyLwdSGVSResWqOsxTLfPMXhGbh9a1mZL16RTG8nPsQ@mail.gmail.com>
+	<CALRGHr9ts28vt-JN2v4SPKjd7-btmWrqVd7G=_cfcv4bGD_z1g@mail.gmail.com>
+	<CALRGHr_u5LULhoxx0NLYK6Uux4uZ5Kr7+ikOY-TKqMvDfUfYmg@mail.gmail.com>
+	<CAP9ODKp=xaS+WoQe-zKTpcKiqmdk4mHteoZ8a9BqO1w96hcbxg@mail.gmail.com>
+	<CALRGHr_OiFeW60BsKxe0XdrBbkcXAE+usv3-=pHnhXCzONK_vg@mail.gmail.com>
+	<CAP9ODKoBFp7Pskwch4nLq4mkJOB-uFh1m2w7zz46LZ=CUp5JAg@mail.gmail.com>
+	<CALRGHr9iRe3j9j0ce2RnOz7TP+1UzaPqtE5vsooBze_A0fAuyA@mail.gmail.com>
+	<CALRGHr98gwgsSQQ9tnLBan-XybFqXN=VoMKYueh5YWhOVXFWXQ@mail.gmail.com>
+	<CAP9ODKqbwXrieO8yUJYu6+vBK6qerCCZsamkbz6RO5vS0Wq_oA@mail.gmail.com>
+	<CALRGHr-kpOc88VED2YM3ZaS6beSXz_+xujK7UW6PmvO5BwzP2A@mail.gmail.com>
+	<CAP9ODKocrq=t1GHqnVqt=SpfGsMXTr_60_K5GaOspuY6gCgm2g@mail.gmail.com>
+	<CALRGHr-hpQdTxEeG9pk6MEXzzw6TbUBCgUFQ90tFn5FD2UX5Mg@mail.gmail.com>
+Date: Thu, 11 Sep 2014 15:51:04 +0530
+Message-ID: <CALRGHr9uXLm2ZuWua76p3jOroNuv1R1fWTjL9hGZ54WZru=yxQ@mail.gmail.com>
 From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
@@ -44,159 +56,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Sep 2014 10:19:00 -0000
+X-List-Received-Date: Thu, 11 Sep 2014 10:21:09 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Simon,
-  This fetcher failure problem is solved by following patch -
+Hi Otavio,
+   This problem is solved.
+Thanks for your valuable support.
 
-diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/
-qtwayland-native_git.bb
-index 988aa98..64485de 100644
---- a/recipes-qt/qt5/qtwayland-native_git.bb
-+++ b/recipes-qt/qt5/qtwayland-native_git.bb
-@@ -4,4 +4,5 @@ require ${PN}.inc
- # qtwayland wasn't released yet, last tag before this SRCREV is 5.0.0-beta=
-1
- # qt5-git PV is only to indicate that this recipe is compatible with qt5
-5.2.1
+- Switesh.
 
--SRCREV =3D "a237778666666ab77c4e8e6b501cf
-0fbe7c9223e"
-+QT_MODULE_BRANCH =3D "dev"
-+SRCREV =3D "573d0ee5ba86d99095f217ea9e19172bfc5e75fd"
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/
-qtwayland_git.bb
-index 789a882..c192914 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -4,6 +4,7 @@ require ${PN}.inc
- # qtwayland wasn't released yet, last tag before this SRCREV is 5.0.0-beta=
-1
- # qt5-git PV is only to indicate that this recipe is compatible with qt5
-5.2.1
+On Wed, Sep 10, 2014 at 5:13 PM, Switesh Fulpagare <
+switesh.fulpagare@mindastoneridge.com> wrote:
 
-+QT_MODULE_BRANCH =3D "dev"
- SRCREV =3D "573d0ee5ba86d99095f217ea9e19172bfc5e75fd"
-
- SRC_URI +=3D " \
-
-
-If you till have any doubt please revert.
-
-
-On Thu, Sep 11, 2014 at 2:36 PM, Simon George <SimonG@seaward.co.uk> wrote:
-
-> I think I am also having the same issue that Switesh originally reported,
-> is there a solution?
-> If so I would be grateful if you could tell me the steps to take to solve
-> the issue.
+> i am using Daisy branch.
 >
-> My console output is:
+> On Wed, Sep 10, 2014 at 4:47 PM, Otavio Salvador <otavio@ossystems.com.br=
 >
-> engineering@SELLT099:~/fsl-community-bsp/build$ bitbake meta-toolchain-qt=
-5
-> ...
-> ...
-> NOTE: Preparing runqueue
-> NOTE: Executing SetScene Tasks
-> NOTE: Executing RunQueue Tasks
-> WARNING: Failed to fetch URL
-> git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable, attempting MIRRO=
-RS
-> if available
-> ERROR: Fetcher failure: Unable to find revision
-> a237778666666ab77c4e8e6b501cf0fbe7c9223e in branch stable even from
-> upstream
-> ERROR: Function failed: Fetcher failure for URL:
-> 'git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable'. Unable to fetc=
-h
+> wrote:
 >
-> URL from any source.
-> ERROR: Logfile of failure stored in:
+>> On Wed, Sep 10, 2014 at 1:17 AM, Switesh Fulpagare
+>> <switesh.fulpagare@mindastoneridge.com> wrote:
+>> > Hi Otavio,
+>> >      Please confirm the following that i had understood -
+>> >
+>> > 1. You have pushed the fix.
+>> > 2. Now, i have to apply the patch, with
+>> >
+>> >     SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
+>> > +QT_MODULE_BRANCH =3D "5.4"
+>> >
+>> >  SRC_URI +=3D " \
+>> >
+>> file://0001-examples.pro-include-server-buffer-only-when-buildin.patch
+>> > \
+>> >
+>> > 3. I need to write
+>> >     SRCREV =3D "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
+>> >     +QT_MODULE_BRANCH =3D "5.4"
+>> > in the file,
+>>  Home/bin/fsl-community-bsp/sources/meta-qt5//recipes-qt/qt5/
+>> > qtwayland_git.bb
+>> >
+>> > 4. Then apply patch
+>> >     $ patch <
+>> > file://0001-examples.pro-include-server-buffer-only-when-buildin.patch=
+ \
+>> >
+>> > Are the above steps are right? Please Otavio consider that i m beginne=
+r
+>> in
+>> > the Linux platform.
+>>
+>> Are you using Daisy or master?
+>>
+>>
+>> --
+>> Otavio Salvador                             O.S. Systems
+>> http://www.ossystems.com.br        http://code.ossystems.com.br
+>> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
-> /home/engineering/fsl-community-bsp/build/tmp/work/i686-linux/qtwayland-n=
-ative/5.2.1+gitAUTOINC+a237778666-r0/temp/log.do_fetch.2882
-> ERROR: Task 1763
-> (/home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-> qtwayland-native_git.bb,
-> do_fetch) failed with exit code '1'
-> WARNING: Failed to fetch URL
-> git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable, attempting MIRRO=
-RS
-> if available
-> ERROR: Fetcher failure: Unable to find revision
-> 573d0ee5ba86d99095f217ea9e19172bfc5e75fd in branch stable even from
-> upstream
-> ERROR: Function failed: Fetcher failure for URL:
-> 'git://qt.gitorious.org/qt/qtwayland.git;branch=3Dstable'. Unable to fetc=
-h
->
-> URL from any source.
-> ERROR: Logfile of failure stored in:
->
-> /home/engineering/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-po=
-ky-linux-gnueabi/qtwayland/5.2.1+gitAUTOINC+573d0ee5ba-r0/temp/log.do_fetch=
-.2883
-> ERROR: Task 827
-> (/home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-> qtwayland_git.bb,
-> do_fetch) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 4147 tasks of which 4145 didn't need to be
-> rerun and 2 failed.
-> Waiting for 0 running tasks to finish:
->
-> Summary: 2 tasks failed:
->
-> /home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-> qtwayland-native_git.bb,
-> do_fetch
->
-> /home/engineering/fsl-community-bsp/sources/meta-qt5/recipes-qt/qt5/
-> qtwayland_git.bb,
-> do_fetch
-> Summary: There were 2 WARNING messages shown.
-> Summary: There were 4 ERROR messages shown, returning a non-zero exit
-> code.
-> engineering@SELLT099:~/fsl-community-bsp/build$
->
-> the 2 log files mentioned are here:
->
->         log.do_fetch.2882  http://pastebin.com/3Nk1Z4D9
->         log.do_fetch.2883 http://pastebin.com/MWeML9Wt
->
->         I am also on branch daisy and as of the time of this email the
-> branch was up to date.
->
->         any help would be appreciated.
->
-> regards,
->         Simon
->
->
-> ------------------------------------------------
-> This email and any files transmitted with it are confidential and intende=
-d
-> solely for the use of the individual or entity to whom they are addressed=
-.
-> If you have received this email in error please notify the system manager=
-.
->
-> This footnote also confirms that this email message has been swept by the
-> MessageLabs Email Security System for the presence of computer viruses.
->
-> Seaward Group, Bracken Hill, South West Industrial Estate, Peterlee,
-> County Durham. SR8 2SW, England. Company Registration: 1674384
->
-> For the sake of the environment, please do not print this email unless yo=
-u
-> really need to.
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
 --=20
