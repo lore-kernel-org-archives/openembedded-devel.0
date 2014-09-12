@@ -1,28 +1,36 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E677965E2B
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
+	[209.85.192.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 97F577142F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2014 13:01:12 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8CD1Ds4012262
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 12 Sep 2014 13:04:35 +0000 (UTC)
+Received: by mail-qg0-f50.google.com with SMTP id z60so652091qgd.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2014 06:01:13 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 12 Sep 2014 06:01:12 -0700
-Message-ID: <5412EE97.4040902@windriver.com>
-Date: Fri, 12 Sep 2014 21:01:11 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+	Fri, 12 Sep 2014 06:04:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=SuIZlbZrOPbuT6OFqIArRPr275zmR7GfV4bKdplLJ+I=;
+	b=hqCM5kBRSSPIGF4htFLnuhXQ/0K6um8taKxDimMVO2GiRnXTUGV0vW4+Vnhp1g/s4Z
+	mQ0pag6Ty77XuQXhIl3TJfcUMPye8SxKESpVCcL16nx87fbT/yWsgGQHVkPajYG/9iiT
+	MowYZqzfVoZKY+tls32eUFbP+flDIOHRSdA1mTBnnpfIBzUtmU2zr9Vza42uiXsTSkJK
+	XRk8F1ReaAMz00VdJo6JTOlChkcZQTzKsp4Yaidb7MxKLIHobxOaclEJzRh3kQcMrkf9
+	ZpknLITb3loBrONqi9RVatmTss+JrCfJFAAB98bqIx3EfqutEbi59srvTilJ8R/28+US
+	gFEA==
+X-Gm-Message-State: ALoCoQn4kAepnDnmwyA23sBn/TrJCinysk5/HvsKFCRlfVEtptSHKokCpemiHjaqLpRoYeCHU55Z
+X-Received: by 10.224.79.139 with SMTP id p11mr11203514qak.93.1410527076924;
+	Fri, 12 Sep 2014 06:04:36 -0700 (PDT)
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1410279874.git.liezhi.yang@windriver.com>	<63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>	<54108595.6080809@topic.nl>	<5411BFA4.4050206@windriver.com>
-	<5412EDC0.8090000@topic.nl>
-In-Reply-To: <5412EDC0.8090000@topic.nl>
-Subject: Re: [PATCH 02/14] autofs: add bash to RDEPENDS_autofs
+Received: by 10.140.29.183 with HTTP; Fri, 12 Sep 2014 06:04:16 -0700 (PDT)
+In-Reply-To: <1410512089-10975-1-git-send-email-marie.kowalczyk@vodalys.com>
+References: <1410512089-10975-1-git-send-email-marie.kowalczyk@vodalys.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 12 Sep 2014 14:04:16 +0100
+Message-ID: <CAJTo0LaDmKWFBN0-9Uc1oCe0n-nUR_p5yr0hL7reeUOJ1XxcLw@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+Cc: jean-michel.hautbois@vodalys.com
+Subject: Re: [meta-multimedia][PATCH] gstreamer1.0-plugins-bad.inc : Add rtmp support in gstreamer.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,122 +44,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2014 13:01:14 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Sep 2014 13:04:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On 12 September 2014 09:54, Marie Kowalczyk <marie.kowalczyk@vodalys.com> wrote:
+> RTMP feature depends on rtmpdump.
+>
+> Signed-off-by: Marie Kowalczyk <marie.kowalczyk@vodalys.com>
 
+I've queued this for oe-core, but for future reference patches against
+oe-core should go to the oe-core@ list, not oe-devel@.
 
-On 09/12/2014 08:57 PM, Mike  wrote:
-> On 09/11/2014 05:28 PM, Robert Yang wrote:
->>
->>
->> On 09/11/2014 01:08 AM, Mike Looijmans wrote:
->>> Wouldn't it be a LOT more constructive to fix the bashism. I fail to
->>> see the
->>> virtue in adding 2MB of "bash" to an embedded system just for a text echo
->>> statement that no-one will actually read unless they hook up a serial
->>> console to
->>> their TV set or so.
->>
->> The problem is that there are more bashism, here is the full list:
->>
->> possible bashism in autofs/etc/init.d/autofs line 39 ('function' is
->> useless):
->> function start() {
->> possible bashism in autofs/etc/init.d/autofs line 52 ([^] should be [!]):
->>          elif ([ -f /proc/modules ] && lsmod) | grep -q autofs[^4]
->> possible bashism in autofs/etc/init.d/autofs line 88 ('function' is
->> useless):
->> function stop() {
->> possible bashism in autofs/etc/init.d/autofs line 89 ($"foo" should be
->> eval_gettext "foo"):
->>          echo -n $"Stopping $prog: "
->> possible bashism in autofs/etc/init.d/autofs line 92 (should be >word
->> 2>&1):
->>                  killall -TERM $prog >& /dev/null
->> possible bashism in autofs/etc/init.d/autofs line 105 ('function' is
->> useless):
->> function restart() {
->> possible bashism in autofs/etc/init.d/autofs line 113 ('function' is
->> useless):
->> function reload() {
->> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be
->> eval_gettext "foo"):
->>                  echo $"$prog not running"
->> possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be
->> eval_gettext "foo"):
->>                  echo $"Reloading maps"
->> possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be
->> eval_gettext "foo"):
->>                  echo $"Usage: $0
->> {start|forcestart|stop|restart|forcerestart|reload}"
->>
->> // Robert
->>
->
-> I put the following in a bbappend to work around the bashism, this was enough to
-> make the scripts work just fine with busybox's shell:
-
-Good, thanks, I will update it with your signed-off.
-
-// Robert
-
->
->
-> # Remove bash scripting from init script (meaning, remove "function"
-> # from each shell function)
-> do_configure_prepend () {
->      for bashfile in redhat/autofs.init.in samples/rc.autofs.in
->      do
->          sed -i 's.#!/bin/bash.#!/bin/sh.' $bashfile
->          sed -i 's/^function //g' $bashfile
->      done
-> }
->
->
-> I wanted to point to the commit on sourceforge, but the site is unresponsive at
-> the moment.
->
->>>
->>>
->>> On 9-9-2014 18:27, Robert Yang wrote:
->>>> Bashism:
->>>> [snip]
->>>> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be
->>>> eval_gettext "foo"):
->>>>                  echo $"$prog not running"
->>>> possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be
->>>> eval_gettext "foo"):
->>>>                  echo $"Reloading maps"
->>>> possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be
->>>> eval_gettext "foo"):
->>>>                  echo $"Usage: $0
->>>> {start|forcestart|stop|restart|forcerestart|reload}"
->>>> [snip]
->>>>
->>>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->>>> ---
->>>>   .../recipes-daemons/autofs/autofs_5.1.0.bb         |    1 +
->>>>   1 file changed, 1 insertion(+)
->>>>
->>>> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->>>> b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->>>> index aab2187..06ee77b 100644
->>>> --- a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->>>> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
->>>> @@ -4,6 +4,7 @@ LICENSE = "GPL-2.0"
->>>>   LIC_FILES_CHKSUM =
->>>> "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
->>>>
->>>>   DEPENDS += "libtirpc flex-native bison-native"
->>>> +RDEPENDS_${PN} += "bash"
->>>>
->>>>   inherit autotools-brokensep systemd
->>>>
->>>>
->>>
->>>
->
->
+Cheers,
+Ross
 
