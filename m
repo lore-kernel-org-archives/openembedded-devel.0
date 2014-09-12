@@ -1,26 +1,29 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B96117144E
+Return-Path: <mike.looijmans@topic.nl>
+Received: from smtp08.online.nl (smtp08.online.nl [194.134.42.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FE1E65CE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2014 08:58:47 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8C8wn6I005836
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 12 Sep 2014 12:57:37 +0000 (UTC)
+Received: from smtp08.online.nl (localhost [127.0.0.1])
+	by smtp08.online.nl (Postfix) with ESMTP id C14266618C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2014 01:58:49 -0700 (PDT)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Fri, 12 Sep 2014 01:58:48 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Sep 2014 04:58:46 -0400
-Message-ID: <f9381bf9bb70cb6ff496c3489edae44fba442f86.1410511720.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1410511720.git.wenzong.fan@windriver.com>
-References: <cover.1410511720.git.wenzong.fan@windriver.com>
+	Fri, 12 Sep 2014 14:57:36 +0200 (CEST)
+Received: from [192.168.1.6] (s55969068.adsl.online.nl [85.150.144.104])
+	by smtp08.online.nl (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Sep 2014 14:57:36 +0200 (CEST)
+Message-ID: <5412EDC0.8090000@topic.nl>
+Date: Fri, 12 Sep 2014 14:57:36 +0200
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: Topic
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-Subject: [PATCH 1/1][meta-oe] talloc: fix swig dependencies
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1410279874.git.liezhi.yang@windriver.com>	<63e89adc5ffc2c1e30a4b2a41ca0988e95158554.1410279874.git.liezhi.yang@windriver.com>	<54108595.6080809@topic.nl>
+	<5411BFA4.4050206@windriver.com>
+In-Reply-To: <5411BFA4.4050206@windriver.com>
+X-Online-Scanned: by Cloudmark authority (on smtp08.online.nl)
+Subject: Re: [PATCH 02/14] autofs: add bash to RDEPENDS_autofs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,68 +37,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2014 08:58:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 12 Sep 2014 12:57:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+On 09/11/2014 05:28 PM, Robert Yang wrote:
+>
+>
+> On 09/11/2014 01:08 AM, Mike Looijmans wrote:
+>> Wouldn't it be a LOT more constructive to fix the bashism. I fail to
+>> see the
+>> virtue in adding 2MB of "bash" to an embedded system just for a text echo
+>> statement that no-one will actually read unless they hook up a serial
+>> console to
+>> their TV set or so.
+>
+> The problem is that there are more bashism, here is the full list:
+>
+> possible bashism in autofs/etc/init.d/autofs line 39 ('function' is
+> useless):
+> function start() {
+> possible bashism in autofs/etc/init.d/autofs line 52 ([^] should be [!]):
+>          elif ([ -f /proc/modules ] && lsmod) | grep -q autofs[^4]
+> possible bashism in autofs/etc/init.d/autofs line 88 ('function' is
+> useless):
+> function stop() {
+> possible bashism in autofs/etc/init.d/autofs line 89 ($"foo" should be
+> eval_gettext "foo"):
+>          echo -n $"Stopping $prog: "
+> possible bashism in autofs/etc/init.d/autofs line 92 (should be >word
+> 2>&1):
+>                  killall -TERM $prog >& /dev/null
+> possible bashism in autofs/etc/init.d/autofs line 105 ('function' is
+> useless):
+> function restart() {
+> possible bashism in autofs/etc/init.d/autofs line 113 ('function' is
+> useless):
+> function reload() {
+> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be
+> eval_gettext "foo"):
+>                  echo $"$prog not running"
+> possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be
+> eval_gettext "foo"):
+>                  echo $"Reloading maps"
+> possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be
+> eval_gettext "foo"):
+>                  echo $"Usage: $0
+> {start|forcestart|stop|restart|forcerestart|reload}"
+>
+> // Robert
+>
 
-* depens on swig-native to make sure that the talloc.i always be
-  installed;
+I put the following in a bbappend to work around the bashism, this was 
+enough to make the scripts work just fine with busybox's shell:
 
-* remove relative path that from `swig -swiglib`:
 
-    ${D}/usr/bin/../share -> ${D}/usr/share
+# Remove bash scripting from init script (meaning, remove "function"
+# from each shell function)
+do_configure_prepend () {
+	for bashfile in redhat/autofs.init.in samples/rc.autofs.in
+	do
+		sed -i 's.#!/bin/bash.#!/bin/sh.' $bashfile
+		sed -i 's/^function //g' $bashfile
+	done
+}
 
-  This prevents 'install' from creraing empty dir: ${D}${bindir};
 
-* fix the path to talloc.i for separate build.
+I wanted to point to the commit on sourceforge, but the site is 
+unresponsive at the moment.
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../install-swig-interface-in-SWINGLIBDIR.patch    |    2 +-
- meta-oe/recipes-support/talloc/talloc_2.0.1.bb     |    5 +++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+>>
+>>
+>> On 9-9-2014 18:27, Robert Yang wrote:
+>>> Bashism:
+>>> [snip]
+>>> possible bashism in autofs/etc/init.d/autofs line 116 ($"foo" should be
+>>> eval_gettext "foo"):
+>>>                  echo $"$prog not running"
+>>> possible bashism in autofs/etc/init.d/autofs line 120 ($"foo" should be
+>>> eval_gettext "foo"):
+>>>                  echo $"Reloading maps"
+>>> possible bashism in autofs/etc/init.d/autofs line 150 ($"foo" should be
+>>> eval_gettext "foo"):
+>>>                  echo $"Usage: $0
+>>> {start|forcestart|stop|restart|forcerestart|reload}"
+>>> [snip]
+>>>
+>>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+>>> ---
+>>>   .../recipes-daemons/autofs/autofs_5.1.0.bb         |    1 +
+>>>   1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>>> b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>>> index aab2187..06ee77b 100644
+>>> --- a/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>>> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb
+>>> @@ -4,6 +4,7 @@ LICENSE = "GPL-2.0"
+>>>   LIC_FILES_CHKSUM =
+>>> "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+>>>
+>>>   DEPENDS += "libtirpc flex-native bison-native"
+>>> +RDEPENDS_${PN} += "bash"
+>>>
+>>>   inherit autotools-brokensep systemd
+>>>
+>>>
+>>
+>>
 
-diff --git a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch b/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-index e1339a0..635c60e 100644
---- a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-+++ b/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-@@ -17,7 +17,7 @@ Index: talloc-2.0.1/talloc.mk
- -	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)`swig -swiglib` || true
- -	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)`swig -swiglib` || true
- +	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)/$(SWIGLIBDIR) || true
--+	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)/$(SWIGLIBDIR) || true
-++	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 $(srcdir)/$(tallocdir)/talloc.i $(DESTDIR)/$(SWIGLIBDIR) || true
-  
-  doc:: talloc.3 talloc.3.html
-  
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-index 48c0915..9cf3e43 100644
---- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-+++ b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-@@ -18,10 +18,12 @@ PR = "r2"
- 
- EXTRA_AUTORECONF = "--exclude=autopoint --exclude=aclocal"
- 
-+DEPENDS += "swig-native"
-+
- do_install_prepend() {
-     # Hack the way swig interface for talloc is installed
-     # This hack is accompanied by install-swig-interface-in-SWINGLIBDIR.patch
--    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
-+    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=`readlink -f ${SWIGLIBDIR}` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
- }
- 
- do_install_append() {
-@@ -29,7 +31,6 @@ do_install_append() {
-     ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
-     ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
-     ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
--    rmdir ${D}${bindir}
- }
- 
- PACKAGES += "${PN}-swig"
+
 -- 
-1.7.9.5
-
+Mike Looijmans
 
