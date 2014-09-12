@@ -1,24 +1,25 @@
-Return-Path: <oliver.staebler@bytesatwork.ch>
-X-Greylist: delayed 437 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 12 Sep 2014 15:51:12 UTC
-Received: from bytesatwork.ch (bytesatwork.ch [91.135.72.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E42865CA7
+Return-Path: <denis@denix.org>
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BBFF65E2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2014 15:51:12 +0000 (UTC)
-Received: from [192.168.2.37] (201-97.77-83.cust.bluewin.ch [83.77.97.201])
-	(using TLSv1 with cipher ECDHE-RSA-AES128-SHA (128/128 bits))
-	(No client certificate requested) (Authenticated sender: oliver)
-	by bytesatwork.ch (Postfix) with ESMTPSA id 6E10D18012EA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Sep 2014 17:44:46 +0200 (CEST)
-Message-ID: <541314BE.2020105@bytesatwork.ch>
-Date: Fri, 12 Sep 2014 17:43:58 +0200
-From: =?UTF-8?B?T2xpdmVyIFN0w6RibGVy?= <oliver.staebler@bytesatwork.ch>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.8.0
-MIME-Version: 1.0
+	Fri, 12 Sep 2014 17:55:26 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [108.18.33.160])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0NBS00G06V3PUP00@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	12 Sep 2014 12:55:12 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id B34D92001F; Fri,
+	12 Sep 2014 13:55:00 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][daisy][PATCH] libmikmod: Adjust SRC_URI
+Date: Fri, 12 Sep 2014 13:55:00 -0400
+Message-id: <1410544500-20781-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.0.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] ltp-ddt: keep do_make_scripts as separate task to lock correctly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Sep 2014 15:51:16 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 12 Sep 2014 17:55:28 -0000
 
-The path to download libmikmod has changed on sourceforge. Adjust the
-path so the tar.gz can be downloaded again.
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: Oliver Stäbler <oliver.staebler@bytesatwork.ch>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
-  meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-index 6a3077f..2fadd75 100644
---- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-+++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
-  DEPENDS = "alsa-lib texinfo"
-  
-  SRC_URI = "\
--    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-+    ${SOURCEFORGE_MIRROR}/project/mikmod/outdated_versions/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-  "
-  SRC_URI[md5sum] = "0e0f9bce8f8e598ca292b41e0ae385c8"
-  SRC_URI[sha256sum] = "79f02478c5abd8b2af73df4cc5f9d52625aa044327c01563168e270cf79b2437"
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
+index d0b84ad..db62ac6 100644
+--- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
++++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
+@@ -13,7 +13,7 @@ inherit autotools-brokensep module-base kernel-module-split
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "088356602220dd8b48aeb138d4976c05c0879574"
++SRCREV = "903f70a11eb77cbad62d7ecbe7dcbaf61be8ff99"
+ BRANCH ?= "master"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
+@@ -67,10 +67,6 @@ do_configure() {
+ 
+ kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
+ 
+-do_compile_prepend () {
+-    do_make_scripts
+-}
+-
+ do_compile_append () {
+     oe_runmake modules
+ }
+@@ -83,3 +79,8 @@ do_install() {
+     rm -rf ${D}${LTPROOT}/share/
+     mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
+ }
++
++# do_make_scripts should be a separate task for the lock to work
++addtask make_scripts before do_compile
++do_make_scripts[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
++do_make_scripts[deptask] = "do_populate_sysroot"
 -- 
-1.8.5.5
+2.0.4
 
 
