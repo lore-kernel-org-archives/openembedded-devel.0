@@ -1,24 +1,26 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E6BE671467
+Return-Path: <lchristina26@hotmail.com>
+Received: from BLU004-OMC4S2.hotmail.com (blu004-omc4s2.hotmail.com
+	[65.55.111.141])
+	by mail.openembedded.org (Postfix) with ESMTP id 903897143F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Sep 2014 14:47:00 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8FEl1v2018549
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Sep 2014 07:47:01 -0700 (PDT)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Mon, 15 Sep 2014 07:47:01 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Sep 2014 07:47:01 -0700
-Message-ID: <1410792421-34501-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Mon, 15 Sep 2014 22:00:23 +0000 (UTC)
+Received: from BLU436-SMTP33 ([65.55.111.135]) by BLU004-OMC4S2.hotmail.com
+	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22724);
+	Mon, 15 Sep 2014 15:00:24 -0700
+X-TMN: [d97f+drnD3C7m+tBMmRQofQM69qefN+b]
+X-Originating-Email: [lchristina26@hotmail.com]
+Message-ID: <BLU436-SMTP33002726F1A5BBA17F19CBD6C80@phx.gbl>
+Received: from localhost.localdomain ([72.175.105.82]) by
+	BLU436-SMTP33.smtp.hotmail.com over TLS secured channel with
+	Microsoft SMTPSVC(8.0.9200.16384); Mon, 15 Sep 2014 15:00:21 -0700
+From: lchristina26 <lchristina26@hotmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Sep 2014 16:00:01 -0600
+X-Mailer: git-send-email 1.9.1
+X-OriginalArrivalTime: 15 Sep 2014 22:00:21.0893 (UTC)
+	FILETIME=[720A0B50:01CFD130]
 MIME-Version: 1.0
-Subject: [PATCH V2] meta-perl: fix for eglibc-gconvs
+Subject: [meta-oe][PATCH] cyassl: version 3.2.0 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,47 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Sep 2014 14:47:02 -0000
+X-List-Received-Date: Mon, 15 Sep 2014 22:00:25 -0000
 Content-Type: text/plain
 
-There is no eglibc-gconvs now, but glibc-gconvs.
+This release includes bug fixes and several new features
+which we think will be beneficial to our user and customer base.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Leah Thompson <lchristina26@hotmail.com>
 ---
- .../recipes-perl/libnet/libnet-libidn-perl_0.12.bb |    4 ++--
- .../recipes-perl/libtext/libtext-iconv-perl_1.7.bb |    2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ .../recipes-connectivity/cyassl/cyassl_3.2.0.bb        | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-index 42b213d..fd3ff8d 100644
---- a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-@@ -8,9 +8,9 @@ SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPLv1+"
- HOMEPAGE = "http://search.cpan.org/dist/Net-LibIDN/"
- DEPENDS += "libidn"
--# We must need eglibc-gconvs to enable charset related functions, 
-+# We must need glibc-gconvs to enable charset related functions,
- # such as Net::LibIDN::idn_to_ascii().
--RDEPENDS_${PN} += "eglibc-gconvs"
-+RDEPENDS_${PN} += "glibc-gconvs"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TH/THOR/Net-LibIDN-${PV}.tar.gz"
- SRC_URI[md5sum] = "c3e4de2065009d67bcb1df0afb473e12"
-diff --git a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
-index fb4182d..934be03 100644
---- a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
-+++ b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
-@@ -10,7 +10,7 @@ documentation."
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://README;beginline=3;endline=6;md5=fadf2919c7128e887d26b4d905f90649"
--RRECOMMENDS_${PN} += "eglibc-gconvs"
-+RRECOMMENDS_${PN} += "glibc-gconvs"
- 
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MP/MPIOTR/Text-Iconv-${PV}.tar.gz"
- 
+diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+new file mode 100644
+index 0000000..0c0cac2
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "CyaSSL Embedded SSL Library"
++DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
++               optimized for embedded and RTOS environments. It can be \
++               Up to 20 times smaller than OpenSSL while still supporting \
++               a full TLS 1.2 client and server."
++HOMEPAGE = "http://www.yassl.com/yaSSL/Products-cyassl.html"
++BUGTRACKER = "http://github.com/cyassl/cyassl/issues"
++SECTION = "libs/network"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "http://www.yassl.com/${BP}.zip"
++
++SRC_URI[md5sum] = "72477eb50697e759d309c49cb1aef18a"
++SRC_URI[sha256sum] = "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2adc16d2507b5d0b03e"
++
++inherit autotools
++
 -- 
-1.7.9.5
+1.9.1
 
 
