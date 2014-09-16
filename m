@@ -1,24 +1,32 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 600B260167
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id C380B609BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Sep 2014 23:43:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8FNhpwb025440
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 16 Sep 2014 01:01:01 +0000 (UTC)
+Received: by mail-ig0-f178.google.com with SMTP id a13so4963340igq.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Sep 2014 16:43:51 -0700 (PDT)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 15 Sep 2014 16:43:51 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Sep 2014 16:43:51 -0700
-Message-ID: <1410824631-1845-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Mon, 15 Sep 2014 18:01:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=0Bm3Inita+c/G6raINqm2/8ZlnE9U03pq2tcSaLOTxM=;
+	b=MytI9D2Bc1pc7JtEnETwR9nDMahAgJwkz7L0IFtXP75dq2NFrpe8e84rlxAEhwd+IB
+	vzDizGyYR2yIiuQ05z+V78Bygu/+PH8g/bNmQewzoBa3g5yUqr+mmB6pMH72Hv04/qrr
+	p5a82p1g7ZV7d/JDrELUnh837nbADoooDfqYZKmaCPxAH2TtsvSvSdMNUBE6fKppgIXk
+	OdhqSzBBDYx1uR/4bsol0rV67BzXKK/jG0A6zQeq4nClwE1rUB422/rxSwUfWIXgHeoU
+	zT9EHEBz65UjoM/W7UxkBgJcmtb/PVQ2wSbAQyY8I6ZKsfX0SRkDX/Tay7eAVg3dmKv/
+	OQNA==
+X-Received: by 10.50.18.42 with SMTP id t10mr25021288igd.30.1410829262463;
+	Mon, 15 Sep 2014 18:01:02 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] vftpd: update to version 3.0.2
+Received: by 10.50.102.67 with HTTP; Mon, 15 Sep 2014 18:00:32 -0700 (PDT)
+In-Reply-To: <BLU436-SMTP33002726F1A5BBA17F19CBD6C80@phx.gbl>
+References: <BLU436-SMTP33002726F1A5BBA17F19CBD6C80@phx.gbl>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 15 Sep 2014 18:00:32 -0700
+Message-ID: <CAMKF1srne=jbjtzKrhdM6Q0bpNVDKVSBgoE+f7SPAYRjdy=YwA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] cyassl: version 3.2.0 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,73 +40,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Sep 2014 23:43:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Sep 2014 01:01:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-No changes other than source checksum.
+On Mon, Sep 15, 2014 at 3:00 PM, lchristina26 <lchristina26@hotmail.com> wrote:
+> This release includes bug fixes and several new features
+> which we think will be beneficial to our user and customer base.
+>
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../makefile-destdir.patch                         |    0
- .../makefile-libs.patch                            |    0
- .../makefile-strip.patch                           |    0
- .../nopam-with-tcp_wrappers.patch                  |    0
- .../{vsftpd-3.0.0 => vsftpd-3.0.2}/nopam.patch     |    0
- .../vsftpd-tcp_wrappers-support.patch              |    0
- .../vsftpd/{vsftpd_3.0.0.bb => vsftpd_3.0.2.bb}    |    5 +++--
- 7 files changed, 3 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-daemons/vsftpd/{vsftpd-3.0.0 => vsftpd-3.0.2}/makefile-destdir.patch (100%)
- rename meta-networking/recipes-daemons/vsftpd/{vsftpd-3.0.0 => vsftpd-3.0.2}/makefile-libs.patch (100%)
- rename meta-networking/recipes-daemons/vsftpd/{vsftpd-3.0.0 => vsftpd-3.0.2}/makefile-strip.patch (100%)
- rename meta-networking/recipes-daemons/vsftpd/{vsftpd-3.0.0 => vsftpd-3.0.2}/nopam-with-tcp_wrappers.patch (100%)
- rename meta-networking/recipes-daemons/vsftpd/{vsftpd-3.0.0 => vsftpd-3.0.2}/nopam.patch (100%)
- rename meta-networking/recipes-daemons/vsftpd/{vsftpd-3.0.0 => vsftpd-3.0.2}/vsftpd-tcp_wrappers-support.patch (100%)
- rename meta-networking/recipes-daemons/vsftpd/{vsftpd_3.0.0.bb => vsftpd_3.0.2.bb} (96%)
+Patch subject line should have said [meta-networking] instead of [meta-oe]
+see the readme for the layer.
 
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-destdir.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-destdir.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-destdir.patch
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-destdir.patch
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-libs.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-libs.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-libs.patch
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-libs.patch
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-strip.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-strip.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/makefile-strip.patch
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/makefile-strip.patch
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/nopam-with-tcp_wrappers.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam-with-tcp_wrappers.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/nopam-with-tcp_wrappers.patch
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam-with-tcp_wrappers.patch
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/nopam.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/nopam.patch
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/nopam.patch
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/vsftpd-tcp_wrappers-support.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-tcp_wrappers-support.patch
-similarity index 100%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.0/vsftpd-tcp_wrappers-support.patch
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.2/vsftpd-tcp_wrappers-support.patch
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
-similarity index 96%
-rename from meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-rename to meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
-index 5df8211..a1c4ff4 100644
---- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.0.bb
-+++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
-@@ -21,8 +21,9 @@ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
-                         file://COPYRIGHT;md5=04251b2eb0f298dae376d92454f6f72e \
-                         file://LICENSE;md5=654df2042d44b8cac8a5654fc5be63eb"
--SRC_URI[md5sum] = "ad9fa952558c2c5b0426ccaccff0f972"
--SRC_URI[sha256sum] = "ef70205dcd0c7f03b008b9578fb44c0cbe31e66daab8cfafb9904747c17fc2a8"
-+SRC_URI[md5sum] = "8b00c749719089401315bd3c44dddbb2"
-+SRC_URI[sha256sum] = "be46f0e2c5528fe021fafc8dab1ecfea0c1f183063a06977f8537fcd0b195e56"
-+
- 
- PACKAGECONFIG ??= "tcp-wrappers"
- PACKAGECONFIG[tcp-wrappers] = ",,tcp-wrappers"
--- 
-1.7.3.4
+Secondly, you should be deleting the old 3.1 recipe along with this new recipe.
 
+
+> Signed-off-by: Leah Thompson <lchristina26@hotmail.com>
+> ---
+>  .../recipes-connectivity/cyassl/cyassl_3.2.0.bb        | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+>
+> diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+> new file mode 100644
+> index 0000000..0c0cac2
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "CyaSSL Embedded SSL Library"
+> +DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
+> +               optimized for embedded and RTOS environments. It can be \
+> +               Up to 20 times smaller than OpenSSL while still supporting \
+> +               a full TLS 1.2 client and server."
+> +HOMEPAGE = "http://www.yassl.com/yaSSL/Products-cyassl.html"
+> +BUGTRACKER = "http://github.com/cyassl/cyassl/issues"
+> +SECTION = "libs/network"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +
+> +SRC_URI = "http://www.yassl.com/${BP}.zip"
+> +
+> +SRC_URI[md5sum] = "72477eb50697e759d309c49cb1aef18a"
+> +SRC_URI[sha256sum] = "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2adc16d2507b5d0b03e"
+> +
+> +inherit autotools
+> +
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
