@@ -1,28 +1,26 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 82C1D701F3
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 877C371449
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 14:39:36 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8GEda3k006445
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 16 Sep 2014 07:39:36 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 16 Sep 2014 07:39:35 -0700
-Message-ID: <54184BA6.9020907@windriver.com>
-Date: Tue, 16 Sep 2014 22:39:34 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+	Tue, 16 Sep 2014 17:32:18 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP; 16 Sep 2014 10:32:07 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.04,535,1406617200"; d="scan'208";a="603709359"
+Received: from ryanpete-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.169])
+	by orsmga002.jf.intel.com with ESMTP; 16 Sep 2014 10:32:06 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: YangHaibo <b40869@freescale.com>
+Date: Tue, 16 Sep 2014 18:32:05 +0100
+Message-ID: <2081672.Qnn2s3x9XX@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.3 (Linux/3.16.2-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <1410835738-27343-1-git-send-email-b40869@freescale.com>
+References: <1410835738-27343-1-git-send-email-b40869@freescale.com>
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-References: <1410875680-1588-1-git-send-email-liezhi.yang@windriver.com>
-	<1569682.xrAECxOGjv@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <1569682.xrAECxOGjv@peggleto-mobl5.ger.corp.intel.com>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe] [PATCH] mariadb: drop anonymous function
+Subject: Re: [meta-networking][PATCH] pimd: add recipe for pimd-2.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,90 +34,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Sep 2014 14:39:39 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Sep 2014 17:32:28 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+Hi there,
 
+On Tuesday 16 September 2014 10:48:58 YangHaibo wrote:
+> Signed-off-by: YangHaibo <b40869@freescale.com>
+> ---
+>  meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+> 
+> diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+> b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb new file mode 100644
+> index 0000000..4d1137f
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+> @@ -0,0 +1,9 @@
+> +DESCRIPTION = "pimd is a lightweight stand-alone PIM-SM v2 multicast
+> routing daemon." 
 
-On 09/16/2014 10:30 PM, Paul Eggleton wrote:
-> Hi Robert,
->
-> On Tuesday 16 September 2014 06:54:40 Robert Yang wrote:
->> The anonymous function redefined bindir to bindir_noprefix (and others),
->> which broke the sstate between build dirs. After checked the vars in
->> CMakeCache.txt, we can drop it safely, and the builds are OK.
->>
->> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->> ---
->>   meta-oe/recipes-support/mysql/mariadb_5.5.39.inc |   28
->> +++++++--------------- 1 file changed, 8 insertions(+), 20 deletions(-)
->>
->> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
->> b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc index 9cc2cc9..f5c0a1f
->> 100644
->> --- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
->> +++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
->> @@ -35,18 +35,6 @@ SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
->>
->>   EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
->>
->> -python __anonymous() {
->> -    # This is a pain but it's the only way to pass these in since
->> -    # MariaDB's cmake scripts insist on prepending the prefix to the
->> -    # specified values for INSTALL_*
->> -    localdata = d.createCopy()
->> -    localdata.setVar('prefix', '')
->> -    localdata.setVar('exec_prefix', '')
->> -    d.setVar('bindir_noprefix', localdata.getVar('bindir',
->> True).lstrip('/')) -    d.setVar('sbindir_noprefix',
->> localdata.getVar('sbindir', True).lstrip('/')) -
->> d.setVar('datadir_noprefix', localdata.getVar('datadir', True).lstrip('/'))
->> -    d.setVar('libdir_noprefix', localdata.getVar('libdir',
->> True).lstrip('/')) -}
->>
->>   PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam',
->> '', d)}" PACKAGECONFIG_class-native = ""
->> @@ -64,15 +52,15 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
->>                    -DNROFF=FALSE \
->>                    -DENABLE_DTRACE=FALSE \
->>                    -DWITH_PIC=ON \
->> -                 -DINSTALL_DOCDIR:PATH=${datadir_noprefix}/doc/${BPN} \
->> -                 -DINSTALL_BINDIR:PATH=${bindir_noprefix} \
->> -                 -DINSTALL_SBINDIR:PATH=${sbindir_noprefix} \
->> -                 -DINSTALL_SCRIPTDIR:PATH=${bindir_noprefix} \
->> -                 -DINSTALL_LIBDIR:PATH=${libdir_noprefix} \
->> -                 -DINSTALL_PLUGINDIR:PATH=${libdir_noprefix}/plugin \
->> +                 -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
->> +                 -DINSTALL_BINDIR:PATH=${bindir} \
->> +                 -DINSTALL_SBINDIR:PATH=${sbindir} \
->> +                 -DINSTALL_SCRIPTDIR:PATH=${bindir} \
->> +                 -DINSTALL_LIBDIR:PATH=${libdir} \
->> +                 -DINSTALL_PLUGINDIR:PATH=${libdir}/plugin \
->>                    -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
->> -                 -DINSTALL_MYSQLSHAREDIR:PATH=${datadir_noprefix}/mysql \
->> -
->> -DINSTALL_SUPPORTFILESDIR:PATH=${datadir_noprefix}/mysql-support-files \ +
->>                 -DINSTALL_MYSQLSHAREDIR:PATH=${datadir}/mysql \
->> +
->> -DINSTALL_SUPPORTFILESDIR:PATH=${datadir}/mysql-support-files \
->> -DMYSQL_DATADIR:PATH=/var/mysql \
->>                    -DCAT_EXECUTABLE=`which cat` \
->>                    -DCMAKE_AR:FILEPATH=${AR}"
->
-> I'm pretty sure I tested this beforehand; the problem I found is that some of
-> the scripts end up with the prefix twice in substituted paths because it is
-> expected that the paths supplied at configuration time do not include the
-> prefix, but our paths normally include them.
->
-> Did you do runtime tests with this change?
+Please set SUMMARY for one-line descriptions like this.
 
-Thanks, not yet, I will do and reply later.
+> +HOMEPAGE = "http://troglobit.com/pimd.html"
+> +LICENSE = "BSD"
 
-// Robert
+Please be specific and say "BSD-3-Clause" (since that appears to be the variant 
+upstream is using).
 
->
-> Cheers,
-> Paul
->
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
+> +
+> +SRC_URI = "ftp://troglobit.com/pimd/pimd-2.1.8.tar.bz2"
+
+Please use ${PV} instead of hardcoding 2.1.8 .
+
+> +SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
+
+Please also add a sha256sum.
+
+> +CFLAGS_prepend = "-I ${S}/include "
+
+Thanks,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
