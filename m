@@ -1,31 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
-	[209.85.213.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 66D316FAEC
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 05:44:21 +0000 (UTC)
-Received: by mail-ig0-f182.google.com with SMTP id h18so5177514igc.9
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Sep 2014 22:44:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	bh=/tbZFoHxNtsHUp723yNLU3FEheGpNpThjPSGmVFCPuk=;
-	b=AXIShT/6hfvvS2UTzo41Z8oTFsjjvlo5Mw4UZYLB8ZiNRZOzp912Zwy8+wNXL9RSko
-	HVCDxDFO2Twp3lVCQGkBw67LVY/0aEvQx71HmJ/FTDcuUp61j+M1n/Gv7865cDa1aJce
-	YwM55Pog+A06GwmM9re3IRn/NklJ9cRaAw49gBHrMlQ5FADkLsYHHK1J7dp/skptcmqj
-	knTC8kLd5/LI6zCojn0n5XwTMtH4oslX/t2oWM7WQKyfmGqKLvDoEs0kdxQSrBfpTVNC
-	0kFe0ZtMVD79Q7Qfjm7wCUZ4eibbosMyUwYt6sydY4/BiHyAq7WWiyogZjODKb5Gj4+P
-	d7Jw==
-X-Received: by 10.50.4.67 with SMTP id i3mr29801igi.4.1410846262048; Mon, 15
-	Sep 2014 22:44:22 -0700 (PDT)
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D6B57701F3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Sep 2014 08:14:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8G8E4nY029816
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Sep 2014 01:14:04 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 16 Sep 2014 01:14:03 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 16 Sep 2014 16:14:32 +0800
+Message-ID: <1410855272-15776-2-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1410855272-15776-1-git-send-email-Qi.Chen@windriver.com>
+References: <1410855272-15776-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Received: by 10.50.102.67 with HTTP; Mon, 15 Sep 2014 22:43:52 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 15 Sep 2014 22:43:52 -0700
-Message-ID: <CAMKF1srKjh-imfCPMTW9EiZNRFVydO71LSMPzhnAFuoUWtocZg@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Carlos Rafael Giani <dv@pseudoterminal.org>
-Subject: mpg123 recipe LICENSE_FLAGS = "commercial" issue
+Subject: [meta-oe][PATCH 2/2] hostapd: use ${PN} for SYSTEMD_SERVICE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,24 +34,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Sep 2014 05:44:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 16 Sep 2014 08:14:07 -0000
+Content-Type: text/plain
 
-Hi Carlos/All
+From: Chen Qi <Qi.Chen@windriver.com>
 
-I want to understand why LICENSE_FLAGS = "commercial" was added to
+Use ${PN} for SYSTEMD_SERVICE to avoid errors in case of multilib.
 
-meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../recipes-connectivity/hostapd/hostapd_2.2.bb    |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-in initial commit and has been carried over upgrades ever since
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
+index f1c6b3a..b75f2b9 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
+@@ -7,9 +7,9 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
+ 
+ inherit update-rc.d systemd
+ INITSCRIPT_NAME = "hostapd"
+-SYSTEMD_PACKAGES = "hostapd"
+-SYSTEMD_SERVICE_hostapd = "hostapd.service"
+-SYSTEMD_AUTO_ENABLE_hostapd = "disable"
++
++SYSTEMD_SERVICE_${PN} = "hostapd.service"
++SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-- 
+1.7.9.5
 
-The license seems to be LGPL 2.0 and is explained in greater detail here
-
-http://mpg123.org/cgi-bin/scm/mpg123/trunk/doc/ROAD_TO_LGPL?revision=2607
-
-So what portions of it are having different terms for commercial distribution ?
-
-Thanks
-
--Khem
 
