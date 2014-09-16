@@ -1,26 +1,24 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D6B57701F3
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C4FFE71478
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 08:14:02 +0000 (UTC)
+	Tue, 16 Sep 2014 08:14:00 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8G8E4nY029816
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8G8E2CZ026163
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 01:14:04 -0700 (PDT)
+	Tue, 16 Sep 2014 01:14:02 -0700 (PDT)
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 16 Sep 2014 01:14:03 -0700
+	14.3.174.1; Tue, 16 Sep 2014 01:14:01 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 16 Sep 2014 16:14:32 +0800
-Message-ID: <1410855272-15776-2-git-send-email-Qi.Chen@windriver.com>
+Date: Tue, 16 Sep 2014 16:14:31 +0800
+Message-ID: <1410855272-15776-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1410855272-15776-1-git-send-email-Qi.Chen@windriver.com>
-References: <1410855272-15776-1-git-send-email-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] hostapd: use ${PN} for SYSTEMD_SERVICE
+Subject: [meta-oe][PATCH 1/2] mariadb: use ${PN} for SYSTEMD_SERVICE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,26 +41,24 @@ Use ${PN} for SYSTEMD_SERVICE to avoid errors in case of multilib.
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-connectivity/hostapd/hostapd_2.2.bb    |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/mysql/mariadb_5.5.39.inc |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
-index f1c6b3a..b75f2b9 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.2.bb
-@@ -7,9 +7,9 @@ SUMMARY = "User space daemon for extended IEEE 802.11 management"
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
+index 9cc2cc9..4d7499d 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
++++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
+@@ -29,8 +29,8 @@ USERADD_PACKAGES = "${PN}-server"
+ USERADD_PARAM_${PN}-server = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
+ GROUPADD_PARAM_${PN}-server = "--system mysql"
  
- inherit update-rc.d systemd
- INITSCRIPT_NAME = "hostapd"
--SYSTEMD_PACKAGES = "hostapd"
--SYSTEMD_SERVICE_hostapd = "hostapd.service"
--SYSTEMD_AUTO_ENABLE_hostapd = "disable"
-+
-+SYSTEMD_SERVICE_${PN} = "hostapd.service"
-+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+-SYSTEMD_PACKAGES = "mariadb-server"
+-SYSTEMD_SERVICE_mariadb-server = "mysqld.service"
++SYSTEMD_PACKAGES = "${PN}-server"
++SYSTEMD_SERVICE_${PN}-server = "mysqld.service"
+ SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
  
- DEFAULT_PREFERENCE = "-1"
- 
+ EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
 -- 
 1.7.9.5
 
