@@ -1,26 +1,33 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 877C371449
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-lb0-f170.google.com (mail-lb0-f170.google.com
+	[209.85.217.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 34D3C710C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 17:32:18 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 16 Sep 2014 10:32:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.04,535,1406617200"; d="scan'208";a="603709359"
-Received: from ryanpete-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.123.169])
-	by orsmga002.jf.intel.com with ESMTP; 16 Sep 2014 10:32:06 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: YangHaibo <b40869@freescale.com>
-Date: Tue, 16 Sep 2014 18:32:05 +0100
-Message-ID: <2081672.Qnn2s3x9XX@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.13.3 (Linux/3.16.2-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
-In-Reply-To: <1410835738-27343-1-git-send-email-b40869@freescale.com>
-References: <1410835738-27343-1-git-send-email-b40869@freescale.com>
+	Tue, 16 Sep 2014 19:04:23 +0000 (UTC)
+Received: by mail-lb0-f170.google.com with SMTP id c11so418996lbj.15
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Sep 2014 12:04:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=NHUfMvsn/9/ezDahARIlxjLaFzBYM4f+nUbFuS0DQQc=;
+	b=MifSh9FE7Ya6psOhvgR8RbdZUunn+cajnI+5QaknMPs8wuyZxB9NLuGRPNLaK1LIr1
+	Ck4SvZ4oShsl0DWH59hIze9aDR9kZvr2KBOVUsYDmBy6Aoaw8+ZULqWaRYxMygQzlRI1
+	mxbTfb2Y+eq97bWNo5ZHWYw9SBhHfA/LYfYVgzU+gwfh5G16jaxsMjWJaI+7I/wUp7//
+	3JNxXSg95IPr22iHLh3REu9gvUgkGCLW1j/TztuhzeDID9TwfM6WNvxvus5Wr8LyjfM2
+	0ihhlxRhu/DMrBUBRszyxNWPzlD/NgPTCGLV8ag3JumMPXB2OkPAfxGfdQsef7XlauZq
+	rwUg==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] pimd: add recipe for pimd-2.1.8
+X-Received: by 10.152.9.132 with SMTP id z4mr31688725laa.8.1410894263235; Tue,
+	16 Sep 2014 12:04:23 -0700 (PDT)
+Received: by 10.112.189.38 with HTTP; Tue, 16 Sep 2014 12:04:23 -0700 (PDT)
+In-Reply-To: <CAMKF1so5eBfgKzF+xoWzS=H656DM9L+MVGM+5mxUayTrXdS+uQ@mail.gmail.com>
+References: <1409609700-13719-1-git-send-email-andrea.adami@gmail.com>
+	<CAMKF1so5eBfgKzF+xoWzS=H656DM9L+MVGM+5mxUayTrXdS+uQ@mail.gmail.com>
+Date: Tue, 16 Sep 2014 21:04:23 +0200
+Message-ID: <CAAQYJAtg1QcpqmnvFVq2T2437jTM8VmHEzbCOt+o2GQewiF69g@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-initramfs][PATCH] klibc: klcc: consider --sysroot option and override gcc-cross encoded sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,53 +41,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Sep 2014 17:32:28 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 16 Sep 2014 19:04:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi there,
+On Thu, Sep 4, 2014 at 9:57 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Monday, September 1, 2014, Andrea Adami <andrea.adami@gmail.com> wrote:
+>
+>> For the recipes built with klcc-cross it is necessary to
+>> pass --sysroot otherwise we default to the one encoded in gcc-cross which
+>> actually is the 'first one' built.
+>> The issue was revealed when building for armv4 after having built for
+>> armv5te:
+>> the produced binaries did contain Illegal Instruction (bx lr).
+>>
+>> Signed-off-by: Andrea Adami <andrea.adami@gmail.com <javascript:;>>
+>> ---
+>>  meta-initramfs/classes/klibc.bbclass                       |  4 ++--
+>>  .../klibc/klibc-2.0.4/klcc-consider-sysroot.patch          | 14
+>> ++++++++++++++
+>>  meta-initramfs/recipes-devtools/klibc/klibc.inc            |  1 +
+>>  3 files changed, 17 insertions(+), 2 deletions(-)
+>>  create mode 100644
+>> meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+>>
+>> diff --git a/meta-initramfs/classes/klibc.bbclass
+>> b/meta-initramfs/classes/klibc.bbclass
+>> index ca741cd..8690472 100644
+>> --- a/meta-initramfs/classes/klibc.bbclass
+>> +++ b/meta-initramfs/classes/klibc.bbclass
+>> @@ -4,8 +4,8 @@ DEPENDS =+ "klcc-cross"
+>>  # Default for klcc is to build static binaries.
+>>  # Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
+>>
+>> -export CC = "${TARGET_PREFIX}klcc"
+>> -export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4
+>> -mthumb-interwork"
+>> +export CC = "${TARGET_PREFIX}klcc --sysroot=${STAGING_DIR_TARGET}"
+>> +export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc
+>> --sysroot=${STAGING_DIR_TARGET} -march=armv4 -mthumb-interwork"
+>>
+>> May be you can use TOOLCHAIN_OPTIONS
+> here
+>
+Yes, if you advise I'd use that.
 
-On Tuesday 16 September 2014 10:48:58 YangHaibo wrote:
-> Signed-off-by: YangHaibo <b40869@freescale.com>
-> ---
->  meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 9 +++++++++
->  1 file changed, 9 insertions(+)
->  create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-> 
-> diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-> b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb new file mode 100644
-> index 0000000..4d1137f
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-> @@ -0,0 +1,9 @@
-> +DESCRIPTION = "pimd is a lightweight stand-alone PIM-SM v2 multicast
-> routing daemon." 
+I am a bit scared looking at the mangling happening to TOOLCHAIN_OPTIONS...
+http://cgit.openembedded.org/openembedded-core/log/?qt=grep&q=TOOLCHAIN_OPTIONS
 
-Please set SUMMARY for one-line descriptions like this.
+Just few months ago klcc-cross recipe was inheriting cross so I can
+imagine it would have fallen
+(a195950 cross.bbclass: Set TOOLCHAIN_OPTIONS to an empty value
+instead of duplicating...)
 
-> +HOMEPAGE = "http://troglobit.com/pimd.html"
-> +LICENSE = "BSD"
+I can guess what will happen to klibc-bbclass if that value will be changed...
 
-Please be specific and say "BSD-3-Clause" (since that appears to be the variant 
-upstream is using).
+Thanks for reviewing
+Cheers
 
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
-> +
-> +SRC_URI = "ftp://troglobit.com/pimd/pimd-2.1.8.tar.bz2"
+Andrea
 
-Please use ${PV} instead of hardcoding 2.1.8 .
-
-> +SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
-
-Please also add a sha256sum.
-
-> +CFLAGS_prepend = "-I ${S}/include "
-
-Thanks,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+>
+>  export CPP = "${CC} -E"
+>>
+>> diff --git
+>> a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+>> b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+>> new file mode 100644
+>> index 0000000..9bc4835
+>> --- /dev/null
+>> +++
+>> b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+>> @@ -0,0 +1,14 @@
+>> +diff --git a/klcc/klcc.in b/klcc/klcc.in
+>> +index 43d0984..61e9385 100644
+>> +--- a/klcc/klcc.in
+>> ++++ b/klcc/klcc.in
+>> +@@ -204,6 +204,9 @@ while ( defined($a = shift(@ARGV)) ) {
+>> +       # Libraries
+>> +       push(@libs, $a);
+>> +       push(@libs, shift(@ARGV)) if ( $2 eq '' );
+>> ++    } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
+>> ++      # Override gcc encoded sysroot
+>> ++      push(@ccopt, $a);
+>> +     } else {
+>> +       die "$0: unknown option: $a\n";
+>> +     }
+>> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+>> b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+>> index 0209b20..f3e9972 100644
+>> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+>> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+>> @@ -16,6 +16,7 @@ SRC_URI_append_linux-uclibceabi = "
+>> file://klibc-config-eabi.patch \
+>>                                      "
+>>  SRC_URI += "file://klibc-linux-libc-dev.patch \
+>>              file://staging.patch \
+>> +            file://klcc-consider-sysroot.patch \
+>>              "
+>>
+>>  S = "${WORKDIR}/git"
+>> --
+>> 1.9.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org <javascript:;>
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
