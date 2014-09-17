@@ -1,41 +1,54 @@
 Return-Path: <B40869@freescale.com>
-X-Greylist: delayed 145323 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 17 Sep 2014 03:21:14 UTC
 Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1on0112.outbound.protection.outlook.com [157.56.110.112])
-	by mail.openembedded.org (Postfix) with ESMTP id 60AF6714D3
+	(mail-bn1on0140.outbound.protection.outlook.com [157.56.110.140])
+	by mail.openembedded.org (Postfix) with ESMTP id C9123714C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 03:21:14 +0000 (UTC)
-Received: from BY2PR0301MB0757.namprd03.prod.outlook.com (25.160.63.26) by
-	BY2PR0301MB0760.namprd03.prod.outlook.com (25.160.63.24) with Microsoft
-	SMTP Server (TLS) id 15.0.1019.16; Wed, 17 Sep 2014 03:21:13 +0000
-Received: from BY2PR0301MB0757.namprd03.prod.outlook.com ([25.160.63.26]) by
-	BY2PR0301MB0757.namprd03.prod.outlook.com ([25.160.63.26]) with mapi id
-	15.00.1019.015; Wed, 17 Sep 2014 03:21:13 +0000
-From: "B40869@freescale.com" <B40869@freescale.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-networking][PATCH V2] pimd: add recipe for pimd-2.1.8
-Thread-Index: AQHP0iHzgkzay2Pt5UyQ7lRmTAkn65wEqFtB
-Date: Wed, 17 Sep 2014 03:21:12 +0000
-Message-ID: <1410924647639.22034@freescale.com>
-References: <1410921525-20513-1-git-send-email-b40869@freescale.com>
-In-Reply-To: <1410921525-20513-1-git-send-email-b40869@freescale.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [192.88.158.211]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;UriScan:;
-x-forefront-prvs: 0337AFFE9A
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(377454003)(199003)(189002)(36756003)(83322001)(110136001)(74502003)(85852003)(90102001)(74662003)(92726001)(106356001)(99286002)(80022003)(77982003)(86362001)(92566001)(50986999)(81542003)(46102003)(76176999)(97736003)(76482002)(2351001)(81342003)(87936001)(95666004)(101416001)(105586002)(85306004)(106116001)(19580395003)(15975445006)(20776003)(21056001)(77096002)(31966008)(19580405001)(117636001)(107046002)(54356999)(66066001)(107886001)(99396002)(4396001)(64706001)(2656002)(15395725005)(83072002)(79102003)(15202345003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BY2PR0301MB0760;
-	H:BY2PR0301MB0757.namprd03.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+	Wed, 17 Sep 2014 03:24:29 +0000 (UTC)
+Received: from CY1PR0301MB0763.namprd03.prod.outlook.com (25.160.160.11) by
+	CY1PR0301MB1194.namprd03.prod.outlook.com (25.160.165.25) with
+	Microsoft SMTP
+	Server (TLS) id 15.0.1024.12; Wed, 17 Sep 2014 03:24:29 +0000
+Received: from BN3PR0301CA0045.namprd03.prod.outlook.com (25.160.152.141) by
+	CY1PR0301MB0763.namprd03.prod.outlook.com (25.160.160.11) with
+	Microsoft SMTP
+	Server (TLS) id 15.0.1024.12; Wed, 17 Sep 2014 03:24:27 +0000
+Received: from BN1AFFO11FD060.protection.gbl (2a01:111:f400:7c10::106) by
+	BN3PR0301CA0045.outlook.office365.com (2a01:111:e400:401e::13) with
+	Microsoft SMTP Server (TLS) id 15.0.1029.13 via Frontend Transport;
+	Wed, 17 Sep 2014 03:24:05 +0000
+Received: from tx30smr01.am.freescale.net (192.88.168.50) by
+	BN1AFFO11FD060.mail.protection.outlook.com (10.58.53.75) with Microsoft
+	SMTP
+	Server (TLS) id 15.0.1019.14 via Frontend Transport; Wed, 17 Sep 2014
+	03:24:06 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	s8H3Nron018322; Tue, 16 Sep 2014 20:23:59 -0700
+From: YangHaibo <b40869@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Sep 2014 11:13:42 +0800
+Message-ID: <1410923622-13103-1-git-send-email-b40869@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:CAL; IPV:NLI;
+	EFV:NLI; SFV:NSPM;
+	SFS:(10019020)(6009001)(189002)(199003)(104166001)(95666004)(36756003)(4396001)(97736003)(31966008)(107046002)(48376002)(68736004)(105606002)(15202345003)(50226001)(93916002)(26826002)(85306004)(20776003)(83072002)(90102001)(92726001)(86362001)(89996001)(2351001)(19580405001)(110136001)(33646002)(229853001)(19580395003)(81342003)(106466001)(74502003)(104016003)(74662003)(79102003)(21056001)(77156001)(87286001)(15975445006)(85852003)(87936001)(44976005)(50466002)(88136002)(84676001)(50986999)(83322001)(102836001)(80022003)(6806004)(92566001)(64706001)(99396002)(76482002)(47776003)(62966002)(81542003)(46102003)(77982003);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:CY1PR0301MB0763;
+	H:tx30smr01.am.freescale.net; FPR:; MLV:ovrnspm;
+	PTR:InfoDomainNonexistent; MX:1; A:1; LANG:en; 
 MIME-Version: 1.0
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;UriScan:;UriScan:;
+X-Forefront-PRVS: 0337AFFE9A
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.168.50 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.168.50; helo=tx30smr01.am.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.168.50)
+	smtp.mailfrom=B40869@freescale.com; 
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;
 X-OriginatorOrg: freescale.com
-Subject: Re: [meta-networking][PATCH V2] pimd: add recipe for pimd-2.1.8
+Cc: YangHaibo <b40869@freescale.com>
+Subject: [meta-networking][PATCH] pimd: add recipe for ssmping-0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,46 +62,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 03:21:15 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Sep 2014 03:24:32 -0000
+Content-Type: text/plain
 
-There is a typo error, will resubmit it=0A=
-________________________________________=0A=
-From: YangHaibo <b40869@freescale.com>=0A=
-Sent: Wednesday, September 17, 2014 10:38 AM=0A=
-To: openembedded-devel@lists.openembedded.org=0A=
-Cc: Yang Haibo-B40869=0A=
-Subject: [meta-networking][PATCH V2] pimd: add recipe for pimd-2.1.8=0A=
-=0A=
-Signed-off-by: YangHaibo <b40869@freescale.com>=0A=
----=0A=
- meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 10 ++++++++++=0A=
- 1 file changed, 10 insertions(+)=0A=
- create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb=0A=
-=0A=
-diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb b/meta-netw=
-orking/recipes-support/pimd/pimd_2.1.8.bb=0A=
-new file mode 100644=0A=
-index 0000000..0cb7979=0A=
---- /dev/null=0A=
-+++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb=0A=
-@@ -0,0 +1,10 @@=0A=
-+SUMMARY =3D "pimd is a lightweight stand-alone PIM-SM v2 multicast routing=
- daemon."=0A=
-+HOMEPAGE =3D "http://troglobit.com/pimd.html"=0A=
-+LICENSE =3D "BSD-3-Clause"=0A=
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D94f108f91fab720d62425770b70dd79=
-0"=0A=
-+=0A=
-+SRC_URI =3D "ftp://troglobit.com/pimd/${BP}.tar.bz2"=0A=
-+SRC_URI[md5sum] =3D "a12448bc7c9bfcebf51a13ebf1ffa962"=0A=
-+SRC_URI[sha256] =3D "3379436c16caccdef9b40a49fbdfdbb45aad8ecb05870834490b8=
-fb080126009"=0A=
-+=0A=
-+CFLAGS_prepend =3D "-I ${S}/include "=0A=
---=0A=
-1.9.2=0A=
-=0A=
+Signed-off-by: YangHaibo <b40869@freescale.com>
+---
+ meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
+
+diff --git a/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
+new file mode 100644
+index 0000000..ec56024
+--- /dev/null
++++ b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "ssmping is a tool for checking whether one can receive SSM from a given host"
++HOMEPAGE = "http://www.venaas.no/multicast/ssmping/"
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://asmping.c;beginline=2;endline=11;md5=1ca8d1a1ca931e5cfe604ebf20a78b71"
++
++SRC_URI = "http://www.venaas.no/multicast/ssmping/${BP}.tar.gz"
++SRC_URI[md5sum] = "ad8e3d13f6d72918f73be7e7975d7fad"
++SRC_URI[sha256sum] = "22103a37eaa28489169a0927bc01e0596c3485fc4d29fc8456c07fd2c70fca6d"
++
++CFLAGS_prepend = "-D_GNU_SOURCE "
+-- 
+1.9.2
+
 
