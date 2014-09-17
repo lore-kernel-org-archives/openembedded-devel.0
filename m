@@ -1,24 +1,24 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 547FE65CE7
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 07:09:17 +0000 (UTC)
-Received: from [192.168.178.14] (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 7DD0622EDE;
-	Wed, 17 Sep 2014 09:09:18 +0200 (CEST)
-Message-ID: <5419339D.5060807@pseudoterminal.org>
-Date: Wed, 17 Sep 2014 09:09:17 +0200
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
+Return-Path: <changhyeok.bae@lge.com>
+X-Greylist: delayed 903 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 17 Sep 2014 08:38:50 UTC
+Received: from lgeamrelo01.lge.com (lgeamrelo01.lge.com [156.147.1.125])
+	by mail.openembedded.org (Postfix) with ESMTP id 11993609B2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Sep 2014 08:38:49 +0000 (UTC)
+Received: from unknown (HELO CHBae0915) (10.177.232.191)
+	by 156.147.1.125 with ESMTP; 17 Sep 2014 17:23:47 +0900
+X-Original-SENDERIP: 10.177.232.191
+X-Original-MAILFROM: changhyeok.bae@lge.com
+From: "Changhyeok Bae" <changhyeok.bae@lge.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <1410923404-1311-1-git-send-email-b40869@freescale.com>
+In-Reply-To: <1410923404-1311-1-git-send-email-b40869@freescale.com>
+Date: Wed, 17 Sep 2014 17:24:05 +0900
+Message-ID: <029101cfd250$bedbdb90$3c9392b0$@lge.com>
 MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>
-References: <CAMKF1srKjh-imfCPMTW9EiZNRFVydO71LSMPzhnAFuoUWtocZg@mail.gmail.com>	<5417FED2.1030106@pseudoterminal.org>
-	<CAMKF1src0wJ6vStvRp1sJdpRy_tf-=FDcz_LMdAoA-QsgrE_Gg@mail.gmail.com>
-In-Reply-To: <CAMKF1src0wJ6vStvRp1sJdpRy_tf-=FDcz_LMdAoA-QsgrE_Gg@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: mpg123 recipe LICENSE_FLAGS = "commercial" issue
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQE7OaggyDHZ98GjKzYBxZothUc2Gp0uLFbw
+Subject: Re: [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,66 +32,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 07:09:19 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Wed, 17 Sep 2014 08:38:55 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Language: ko
 
-On 2014-09-17 02:20, Khem Raj wrote:
->
->
-> On Tuesday, September 16, 2014, Carlos Rafael Giani 
-> <dv@pseudoterminal.org <mailto:dv@pseudoterminal.org>> wrote:
->
->     On 2014-09-16 07:43, Khem Raj wrote:
->
->         Hi Carlos/All
->
->         I want to understand why LICENSE_FLAGS = "commercial" was added to
->
->         meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
->         <http://mpg123_1.15.3.bb>
->
->         in initial commit and has been carried over upgrades ever since
->
->         The license seems to be LGPL 2.0 and is explained in greater
->         detail here
->
->         http://mpg123.org/cgi-bin/scm/mpg123/trunk/doc/ROAD_TO_LGPL?revision=2607
->
->         So what portions of it are having different terms for
->         commercial distribution ?
->
->         Thanks
->
->         -Khem
->
->
->     It's because MPEG audio is subject to royalties
->
->
-> In what way where the component is lgpl I would like to understand
->
->      This is also the reason why gst-plugins-ugly and
->     gstreamer1.0-plugins-ugly have this flag.
->
->     Carlos
->
+The sha256sum is wrong. Please recheck.
 
-*mpg123* is LGPL. But mpg123 is an implementation of an MPEG 1 audio 
-layer 1/2/3 and MPEG 2 audio. MPEG-1 layer 3 is what everybody calls 
-mp3. (mp1 and mp2 are pretty much dead by now.) mp3 itself contains 
-patents, and these are subject to royalties. Technicolor (formerly 
-Thomson) does enforce these royalties. See 
-http://mp3licensing.com/royalty/software.html for their price model.
-MPEG-2 is controlled by the MPEG LA.
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+YangHaibo
+Sent: Wednesday, September 17, 2014 12:10 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: YangHaibo
+Subject: [oe] [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
 
-Note that these royalties cover the audio technology itself (say, mp3), 
-*not* the implementations. Implementations themselves can be subject to 
-any license, it's up to the authors of the implementations. But if you 
-actually want to use these implementations in a commercial product, 
-you'll have to pay the royalty fees.
+Signed-off-by: YangHaibo <b40869@freescale.com>
+---
+ meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
 
-This is part of the reason why Ogg Vorbis (and Opus) exist. They are an 
-alternative that doesn't require such fees. Therefore, the Vorbis 
-decoder isn't in gst-plugins-ugly, but in gst-plugins-good.
+diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+new file mode 100644
+index 0000000..7c03dd6
+--- /dev/null
++++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast routing
+daemon."
++HOMEPAGE = "http://troglobit.com/pimd.html"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
++
++SRC_URI = "ftp://troglobit.com/pimd/${BP}.tar.bz2"
++SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
++SRC_URI[sha256sum] =
+"3379436c16caccdef9b40a49fbdfdbb45aad8ecb05870834490b8fb080126009"
++
++CFLAGS_prepend = "-I ${S}/include "
+-- 
+1.9.2
+
+-- 
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
