@@ -1,54 +1,24 @@
-Return-Path: <B40869@freescale.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1on0140.outbound.protection.outlook.com [157.56.110.140])
-	by mail.openembedded.org (Postfix) with ESMTP id C9123714C2
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EC6270F28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 03:24:29 +0000 (UTC)
-Received: from CY1PR0301MB0763.namprd03.prod.outlook.com (25.160.160.11) by
-	CY1PR0301MB1194.namprd03.prod.outlook.com (25.160.165.25) with
-	Microsoft SMTP
-	Server (TLS) id 15.0.1024.12; Wed, 17 Sep 2014 03:24:29 +0000
-Received: from BN3PR0301CA0045.namprd03.prod.outlook.com (25.160.152.141) by
-	CY1PR0301MB0763.namprd03.prod.outlook.com (25.160.160.11) with
-	Microsoft SMTP
-	Server (TLS) id 15.0.1024.12; Wed, 17 Sep 2014 03:24:27 +0000
-Received: from BN1AFFO11FD060.protection.gbl (2a01:111:f400:7c10::106) by
-	BN3PR0301CA0045.outlook.office365.com (2a01:111:e400:401e::13) with
-	Microsoft SMTP Server (TLS) id 15.0.1029.13 via Frontend Transport;
-	Wed, 17 Sep 2014 03:24:05 +0000
-Received: from tx30smr01.am.freescale.net (192.88.168.50) by
-	BN1AFFO11FD060.mail.protection.outlook.com (10.58.53.75) with Microsoft
-	SMTP
-	Server (TLS) id 15.0.1019.14 via Frontend Transport; Wed, 17 Sep 2014
-	03:24:06 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	s8H3Nron018322; Tue, 16 Sep 2014 20:23:59 -0700
-From: YangHaibo <b40869@freescale.com>
+	Wed, 17 Sep 2014 05:07:58 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8H57wdF015766
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Sep 2014 22:07:59 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 16 Sep 2014 22:07:58 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Sep 2014 11:13:42 +0800
-Message-ID: <1410923622-13103-1-git-send-email-b40869@freescale.com>
-X-Mailer: git-send-email 1.9.2
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:CAL; IPV:NLI;
-	EFV:NLI; SFV:NSPM;
-	SFS:(10019020)(6009001)(189002)(199003)(104166001)(95666004)(36756003)(4396001)(97736003)(31966008)(107046002)(48376002)(68736004)(105606002)(15202345003)(50226001)(93916002)(26826002)(85306004)(20776003)(83072002)(90102001)(92726001)(86362001)(89996001)(2351001)(19580405001)(110136001)(33646002)(229853001)(19580395003)(81342003)(106466001)(74502003)(104016003)(74662003)(79102003)(21056001)(77156001)(87286001)(15975445006)(85852003)(87936001)(44976005)(50466002)(88136002)(84676001)(50986999)(83322001)(102836001)(80022003)(6806004)(92566001)(64706001)(99396002)(76482002)(47776003)(62966002)(81542003)(46102003)(77982003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:CY1PR0301MB0763;
-	H:tx30smr01.am.freescale.net; FPR:; MLV:ovrnspm;
-	PTR:InfoDomainNonexistent; MX:1; A:1; LANG:en; 
+Date: Wed, 17 Sep 2014 13:08:01 +0800
+Message-ID: <1410930481-10381-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;UriScan:;UriScan:;
-X-Forefront-PRVS: 0337AFFE9A
-Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
-	designate 192.88.168.50 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=192.88.168.50; helo=tx30smr01.am.freescale.net;
-Authentication-Results: spf=fail (sender IP is 192.88.168.50)
-	smtp.mailfrom=B40869@freescale.com; 
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;
-X-OriginatorOrg: freescale.com
-Cc: YangHaibo <b40869@freescale.com>
-Subject: [meta-networking][PATCH] pimd: add recipe for ssmping-0.9.1
+Subject: [PATCH] wireshark: not put the CC options into CFLAGS_FOR_BUILD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,32 +32,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 03:24:32 -0000
+X-List-Received-Date: Wed, 17 Sep 2014 05:08:06 -0000
 Content-Type: text/plain
 
-Signed-off-by: YangHaibo <b40869@freescale.com>
----
- meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
+From: "Roy.Li" <rongqing.li@windriver.com>
 
-diff --git a/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../files/Do-not-set-CC_FOR_BUILD-flags.patch      |   46 ++++++++++++++++++++
+ .../recipes-support/wireshark/wireshark_1.12.0.bb  |    1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch
+
+diff --git a/meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch b/meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch
 new file mode 100644
-index 0000000..ec56024
+index 0000000..64a08ad
 --- /dev/null
-+++ b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "ssmping is a tool for checking whether one can receive SSM from a given host"
-+HOMEPAGE = "http://www.venaas.no/multicast/ssmping/"
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://asmping.c;beginline=2;endline=11;md5=1ca8d1a1ca931e5cfe604ebf20a78b71"
++++ b/meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch
+@@ -0,0 +1,46 @@
++[PATCH] Do not set CC_FOR_BUILD flags
 +
-+SRC_URI = "http://www.venaas.no/multicast/ssmping/${BP}.tar.gz"
-+SRC_URI[md5sum] = "ad8e3d13f6d72918f73be7e7975d7fad"
-+SRC_URI[sha256sum] = "22103a37eaa28489169a0927bc01e0596c3485fc4d29fc8456c07fd2c70fca6d"
++Upstream-status: Pending
 +
-+CFLAGS_prepend = "-D_GNU_SOURCE "
++AC_WIRESHARK_COMPILER_FLAGS_CHECK() is checking which options CC is supported,
++and put the supported options into CFLAGS, but it should not put them into 
++CFLAGS_FOR_BUILD. since CC and BUILD_CC can be different, CFLAGS_FOR_BUILD is
++used by BUILD_CC 
++
++BUILD_CC is used to generated host tools, do not use the gcc's optimised options,
++do not effect the running of host tools. so do not set CC_FOR_BUILD flags.
++
++Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++---
++ acinclude.m4 | 8 --------
++ 1 file changed, 8 deletions(-)
++
++diff --git a/acinclude.m4 b/acinclude.m4
++index 136fc27..8d3d360 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -1755,10 +1755,6 @@ if test "x$ac_supports_gcc_flags" = "xyes" ; then
++               # just the new option.
++               #
++               CFLAGS="$CFLAGS_saved $GCC_OPTION"
++-              #
++-              # Add it to the flags we use when building build tools.
++-              #
++-              CFLAGS_FOR_BUILD="$CFLAGS_FOR_BUILD $GCC_OPTION"
++             ],
++             [
++               AC_MSG_RESULT(yes)
++@@ -1771,10 +1767,6 @@ if test "x$ac_supports_gcc_flags" = "xyes" ; then
++           # just the new option.
++           #
++           CFLAGS="$CFLAGS_saved $GCC_OPTION"
++-          #
++-          # Add it to the flags we use when building build tools.
++-          #
++-          CFLAGS_FOR_BUILD="$CFLAGS_FOR_BUILD $GCC_OPTION"
++         fi
++       ],
++       [
++-- 
++1.9.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
+index 39a24dc..675519b 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
+@@ -30,6 +30,7 @@ EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares
+ LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
+ SRC_URI = " \
+     http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0.tar.bz2 \
++    file://Do-not-set-CC_FOR_BUILD-flags.patch \
+ "
+ 
+ PE = "1"
 -- 
-1.9.2
+1.7.10.4
 
 
