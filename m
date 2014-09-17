@@ -1,35 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id ED58D714C5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 23:50:29 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id hz1so829561pad.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 16:50:31 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id F05FD71490
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Sep 2014 00:20:56 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id h15so342157igd.14
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Sep 2014 17:20:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=n0XUAhCLmB3L5gQxfPI4AMOv8JidosPtiijB3CXAvdg=;
-	b=oBNtr7ER/uR/f6GbGMEQ2S+V46P66YZ17XCVT837B7sz/rsEkYsXkYw5WNKlyJ6dxA
-	H8HHh9+7YURzdHZkR2SlAfI19z46lbtB+Tr7l9S7gmCXsOpWM2RZljPlW2Aw5K/wI5NU
-	OTaS5gXoUdx8oGRtkp8L2UZBPtiBEjhWhYgvknh/pl1tXMzs36N1UWNN3PHIplSWMUIk
-	zrc+pW1WnNgKenA3TIW9baIB5FqxdBcvMWs/OSKS+IqX+6CtIkkgAQW/WbQ+1+c1gQi/
-	fdz6ihfkVVyQtHBVGS+48Ps0VJb25lHrlq0Sa6d/vADBysZqkTBpuJjWlG2vqtNb8464
-	ky8w==
-X-Received: by 10.70.128.137 with SMTP id no9mr26489003pdb.143.1410911431126; 
-	Tue, 16 Sep 2014 16:50:31 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id j9sm15100581pdr.77.2014.09.16.16.50.29
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 16 Sep 2014 16:50:30 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Sep 2014 16:50:19 -0700
-Message-Id: <1410911419-466-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] wireshark: update to 12.1
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=Z5guNX8RVKGIiLQkdZ2AcyFhPskx8F6kItyquErdZXQ=;
+	b=Lg8RTQFkVnGUYppss/gzRYDmQ/+JbXA2LUIGUDZ/dvGDccE7dN722iykORcF95PrkL
+	2N8ZWIgmbZwjghNj8+ZuSmh3rmVY54J/Coq/s4NFvmwZ4C159qc0iI0FR03NICf07D5F
+	smgr0RykHd7UZ9dKggKoVBx+WzW8Qvav8GSCqlXuyKAmEMjjka+17uBYp5C2Lism55ez
+	mt8K5CEEeiF4I1xqB1zSgJiIOccR70q8kGA8TyHB0zyJ4FFyrIgjn6//BKqcRgwxFZbh
+	v2Ejj5pUysOgQRgk/UTrUcGSp4q3i51HfxqRuyWWRXLqOZ5cMt8FDoVryFR+8PpXVp/X
+	YFhg==
+MIME-Version: 1.0
+X-Received: by 10.50.20.4 with SMTP id j4mr2388061ige.13.1410913257979; Tue,
+	16 Sep 2014 17:20:57 -0700 (PDT)
+Received: by 10.50.240.6 with HTTP; Tue, 16 Sep 2014 17:20:57 -0700 (PDT)
+In-Reply-To: <5417FED2.1030106@pseudoterminal.org>
+References: <CAMKF1srKjh-imfCPMTW9EiZNRFVydO71LSMPzhnAFuoUWtocZg@mail.gmail.com>
+	<5417FED2.1030106@pseudoterminal.org>
+Date: Tue, 16 Sep 2014 17:20:57 -0700
+Message-ID: <CAMKF1src0wJ6vStvRp1sJdpRy_tf-=FDcz_LMdAoA-QsgrE_Gg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: Carlos Rafael Giani <dv@pseudoterminal.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: mpg123 recipe LICENSE_FLAGS = "commercial" issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,75 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Sep 2014 23:50:37 -0000
+X-List-Received-Date: Wed, 17 Sep 2014 00:21:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
-following security fixes included:
-MEGACO dissector infinite loop. (Bug 10333) CVE-2014-6423
-Netflow dissector crash. (Bug 10370) CVE-2014-6424
-CUPS dissector crash. (Bug 10353) CVE-2014-6425
-HIP dissector infinite loop. CVE-2014-6426
-RTSP dissector crash. (Bug 10381) CVE-2014-6427
-SES dissector crash. (Bug 10454) CVE-2014-6428
-Sniffer file parser crash. (Bug 10461) CVE-2014-6429 CVE-2014-6430 CVE-2014-6431 CVE-2014-6432
+On Tuesday, September 16, 2014, Carlos Rafael Giani <dv@pseudoterminal.org>
+wrote:
 
-re-org'd dd file to be more in-line with style guide.
+> On 2014-09-16 07:43, Khem Raj wrote:
+>
+>> Hi Carlos/All
+>>
+>> I want to understand why LICENSE_FLAGS = "commercial" was added to
+>>
+>> meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+>>
+>> in initial commit and has been carried over upgrades ever since
+>>
+>> The license seems to be LGPL 2.0 and is explained in greater detail here
+>>
+>> http://mpg123.org/cgi-bin/scm/mpg123/trunk/doc/ROAD_TO_LGPL?revision=2607
+>>
+>> So what portions of it are having different terms for commercial
+>> distribution ?
+>>
+>> Thanks
+>>
+>> -Khem
+>>
+>
+> It's because MPEG audio is subject to royalties
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../{wireshark_1.12.0.bb => wireshark_1.12.1.bb}    | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_1.12.0.bb => wireshark_1.12.1.bb} (90%)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
-similarity index 90%
-rename from meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
-index 39a24dc..71cc082 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
-@@ -2,9 +2,19 @@ DESCRIPTION = "wireshark - a popular network protocol analyzer"
- HOMEPAGE = "http://www.wireshark.org"
- SECTION = "network"
- LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
- 
- DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libnl sbc"
- 
-+SRC_URI = " \
-+    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-${PV}.tar.bz2 \
-+"
-+
-+PE = "1"
-+
-+SRC_URI[md5sum] = "14b3e3d8979d1eb27ff085bb5f400e67"
-+SRC_URI[sha256sum]= "82b26bd416ec15903b27785e35a622687008a743342054e96eaaeaa249be584b"
-+
- inherit autotools pkgconfig
- 
- ARM_INSTRUCTION_SET = "arm"
-@@ -27,16 +37,6 @@ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
- 
- EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
- 
--LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
--SRC_URI = " \
--    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0.tar.bz2 \
--"
--
--PE = "1"
--
--SRC_URI[md5sum] = "8dcfe451d8769901129809d2e19c1fb7"
--SRC_URI[sha256sum]= "0f59fea1c5b35de90af681067e49113fee0dd7a901750a97fa25f4256dbf13c7"
--
- do_configure_prepend() {
-     # force to use fallback 
-     sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
-@@ -44,4 +44,3 @@ do_configure_prepend() {
- 
- ALLOW_EMPTY_${PN} = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
--
--- 
-1.9.1
+In what way where the component is lgpl I would like to understand
 
+
+
+>  This is also the reason why gst-plugins-ugly and
+> gstreamer1.0-plugins-ugly have this flag.
+>
+> Carlos
+>
 
