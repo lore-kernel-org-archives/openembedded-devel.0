@@ -1,26 +1,26 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E40C714D4
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FD3B714E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 05:56:41 +0000 (UTC)
+	Wed, 17 Sep 2014 05:56:43 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8H5uhoA016675
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8H5uiQD011888
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 22:56:43 -0700 (PDT)
+	Tue, 16 Sep 2014 22:56:44 -0700 (PDT)
 Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 16 Sep 2014 22:56:43 -0700
+	14.3.174.1; Tue, 16 Sep 2014 22:56:44 -0700
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Sep 2014 01:56:38 -0400
-Message-ID: <f9381bf9bb70cb6ff496c3489edae44fba442f86.1410932659.git.wenzong.fan@windriver.com>
+Date: Wed, 17 Sep 2014 01:56:39 -0400
+Message-ID: <6e4c40833f63ef374fde8aab5feb21c7e6f6aa7e.1410932659.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1410932659.git.wenzong.fan@windriver.com>
 References: <cover.1410932659.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2][meta-oe] talloc: fix swig dependencies
+Subject: [PATCH 2/2][meta-oe] talloc: fixes for sstate cache reuse
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,64 +37,42 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 17 Sep 2014 05:56:45 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Robert Yang <liezhi.yang@windriver.com>
 
-* depens on swig-native to make sure that the talloc.i always be
-  installed;
+Fixes for sstate cache reuse between different build dirs. The
+${SWIGLIBDIR##${STAGING_DIR_NATIVE}} had confused bitbake, bitbake would
+add the "SWIGLIBDIR##${STAGING_DIR_NATIVE}" to the deps of do_install,
+which caused the sstate cached can't be re-used.
 
-* remove relative path that from `swig -swiglib`:
+Use another way for SWIGLIBDIR to fix the problem.
 
-    ${D}/usr/bin/../share -> ${D}/usr/share
-
-  This prevents 'install' from creraing empty dir: ${D}${bindir};
-
-* fix the path to talloc.i for separate build.
-
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- .../install-swig-interface-in-SWINGLIBDIR.patch    |    2 +-
- meta-oe/recipes-support/talloc/talloc_2.0.1.bb     |    5 +++--
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/talloc/talloc_2.0.1.bb |   10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch b/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-index e1339a0..635c60e 100644
---- a/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-+++ b/meta-oe/recipes-support/talloc/talloc/install-swig-interface-in-SWINGLIBDIR.patch
-@@ -17,7 +17,7 @@ Index: talloc-2.0.1/talloc.mk
- -	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)`swig -swiglib` || true
- -	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)`swig -swiglib` || true
- +	which swig >/dev/null 2>&1 && ${INSTALLCMD} -d $(DESTDIR)/$(SWIGLIBDIR) || true
--+	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 talloc.i $(DESTDIR)/$(SWIGLIBDIR) || true
-++	which swig >/dev/null 2>&1 && ${INSTALLCMD} -m 644 $(srcdir)/$(tallocdir)/talloc.i $(DESTDIR)/$(SWIGLIBDIR) || true
-  
-  doc:: talloc.3 talloc.3.html
-  
 diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-index 48c0915..9cf3e43 100644
+index 9cf3e43..7bbfbc2 100644
 --- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
 +++ b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-@@ -18,10 +18,12 @@ PR = "r2"
- 
- EXTRA_AUTORECONF = "--exclude=autopoint --exclude=aclocal"
- 
-+DEPENDS += "swig-native"
-+
+@@ -23,7 +23,15 @@ DEPENDS += "swig-native"
  do_install_prepend() {
      # Hack the way swig interface for talloc is installed
      # This hack is accompanied by install-swig-interface-in-SWINGLIBDIR.patch
--    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
-+    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=`readlink -f ${SWIGLIBDIR}` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
+-    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=`readlink -f ${SWIGLIBDIR}` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
++    if which swig > /dev/null; then
++        SWIGLIBDIR="$(echo $(readlink -f $(swig -swiglib)) | \
++            sed -e 's#^${STAGING_DIR_NATIVE}##')"
++    fi
++    if [ -n "$SWIGLIBDIR" ]; then
++        export SWIGLIBDIR
++    else
++        echo "No swig found"
++    fi
  }
  
  do_install_append() {
-@@ -29,7 +31,6 @@ do_install_append() {
-     ln -s libtalloc.so.2.0.1 ${D}${libdir}/libtalloc.so.2.0
-     ln -s libtalloc.so.2.0 ${D}${libdir}/libtalloc.so.2
-     ln -s libtalloc.so.2 ${D}${libdir}/libtalloc.so
--    rmdir ${D}${bindir}
- }
- 
- PACKAGES += "${PN}-swig"
 -- 
 1.7.9.5
 
