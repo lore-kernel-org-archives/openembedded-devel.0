@@ -1,24 +1,26 @@
-Return-Path: <changhyeok.bae@lge.com>
-X-Greylist: delayed 903 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 17 Sep 2014 08:38:50 UTC
-Received: from lgeamrelo01.lge.com (lgeamrelo01.lge.com [156.147.1.125])
-	by mail.openembedded.org (Postfix) with ESMTP id 11993609B2
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id A52787148D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 08:38:49 +0000 (UTC)
-Received: from unknown (HELO CHBae0915) (10.177.232.191)
-	by 156.147.1.125 with ESMTP; 17 Sep 2014 17:23:47 +0900
-X-Original-SENDERIP: 10.177.232.191
-X-Original-MAILFROM: changhyeok.bae@lge.com
-From: "Changhyeok Bae" <changhyeok.bae@lge.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <1410923404-1311-1-git-send-email-b40869@freescale.com>
-In-Reply-To: <1410923404-1311-1-git-send-email-b40869@freescale.com>
-Date: Wed, 17 Sep 2014 17:24:05 +0900
-Message-ID: <029101cfd250$bedbdb90$3c9392b0$@lge.com>
+	Wed, 17 Sep 2014 10:26:30 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 17 Sep 2014 03:26:31 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.04,540,1406617200"; d="scan'208";a="592545265"
+Received: from cfitzsim-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.123])
+	by fmsmga001.fm.intel.com with ESMTP; 17 Sep 2014 03:26:30 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Rongqing Li <rongqing.li@windriver.com>
+Date: Wed, 17 Sep 2014 11:26:29 +0100
+Message-ID: <2290847.YcZyNWaetr@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.13.3 (Linux/3.16.2-200.fc20.x86_64; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <53F40A50.4030509@windriver.com>
+References: <53F40A50.4030509@windriver.com>
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AQE7OaggyDHZ98GjKzYBxZothUc2Gp0uLFbw
-Subject: Re: [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Should we set the LICENSE_FLAGS = "commercial" in meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,55 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 08:38:55 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: ko
+X-List-Received-Date: Wed, 17 Sep 2014 10:26:36 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The sha256sum is wrong. Please recheck.
+Hi Roy,
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-YangHaibo
-Sent: Wednesday, September 17, 2014 12:10 PM
-To: openembedded-devel@lists.openembedded.org
-Cc: YangHaibo
-Subject: [oe] [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
+On Wednesday 20 August 2014 10:39:12 Rongqing Li wrote:
+>      I see the recipes is using the binary file,
+> http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.1
+> 1-regulatory.bin Should we set the LICENSE_FLAGS = "commercial" in ]
+> meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 
-Signed-off-by: YangHaibo <b40869@freescale.com>
----
- meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+It depends on what the terms of distribution are for that binary. I could be 
+wrong, but it looks to me as if this is a binary version of the wireless-regdb 
+database [1], which is ISC licensed. If that is the case then LICENSE_FLAGS = 
+"commercial" wouldn't be needed.
 
-diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-new file mode 100644
-index 0000000..7c03dd6
---- /dev/null
-+++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast routing
-daemon."
-+HOMEPAGE = "http://troglobit.com/pimd.html"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
-+
-+SRC_URI = "ftp://troglobit.com/pimd/${BP}.tar.bz2"
-+SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
-+SRC_URI[sha256sum] =
-"3379436c16caccdef9b40a49fbdfdbb45aad8ecb05870834490b8fb080126009"
-+
-+CFLAGS_prepend = "-I ${S}/include "
--- 
-1.9.2
+Cheers,
+Paul
+
+[1] http://wireless.kernel.org/en/developers/Regulatory/wireless-regdb
 
 -- 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
