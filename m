@@ -1,24 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EC6270F28
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5781E71482
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 05:07:58 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8H57wdF015766
+	Wed, 17 Sep 2014 05:56:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8H5ufqX011841
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 22:07:59 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 16 Sep 2014 22:07:58 -0700
-From: <rongqing.li@windriver.com>
+	Tue, 16 Sep 2014 22:56:42 -0700 (PDT)
+Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 16 Sep 2014 22:56:41 -0700
+From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Sep 2014 13:08:01 +0800
-Message-ID: <1410930481-10381-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+Date: Wed, 17 Sep 2014 01:56:37 -0400
+Message-ID: <cover.1410932659.git.wenzong.fan@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] wireshark: not put the CC options into CFLAGS_FOR_BUILD
+Subject: [PATCH 0/2][meta-oe] talloc: fixes for sstate cache reuse & swig dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,83 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 05:08:06 -0000
+X-List-Received-Date: Wed, 17 Sep 2014 05:56:41 -0000
 Content-Type: text/plain
 
-From: "Roy.Li" <rongqing.li@windriver.com>
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../files/Do-not-set-CC_FOR_BUILD-flags.patch      |   46 ++++++++++++++++++++
- .../recipes-support/wireshark/wireshark_1.12.0.bb  |    1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch
+Patch 2/2:
 
-diff --git a/meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch b/meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch
-new file mode 100644
-index 0000000..64a08ad
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/Do-not-set-CC_FOR_BUILD-flags.patch
-@@ -0,0 +1,46 @@
-+[PATCH] Do not set CC_FOR_BUILD flags
-+
-+Upstream-status: Pending
-+
-+AC_WIRESHARK_COMPILER_FLAGS_CHECK() is checking which options CC is supported,
-+and put the supported options into CFLAGS, but it should not put them into 
-+CFLAGS_FOR_BUILD. since CC and BUILD_CC can be different, CFLAGS_FOR_BUILD is
-+used by BUILD_CC 
-+
-+BUILD_CC is used to generated host tools, do not use the gcc's optimised options,
-+do not effect the running of host tools. so do not set CC_FOR_BUILD flags.
-+
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-+---
-+ acinclude.m4 | 8 --------
-+ 1 file changed, 8 deletions(-)
-+
-+diff --git a/acinclude.m4 b/acinclude.m4
-+index 136fc27..8d3d360 100644
-+--- a/acinclude.m4
-++++ b/acinclude.m4
-+@@ -1755,10 +1755,6 @@ if test "x$ac_supports_gcc_flags" = "xyes" ; then
-+               # just the new option.
-+               #
-+               CFLAGS="$CFLAGS_saved $GCC_OPTION"
-+-              #
-+-              # Add it to the flags we use when building build tools.
-+-              #
-+-              CFLAGS_FOR_BUILD="$CFLAGS_FOR_BUILD $GCC_OPTION"
-+             ],
-+             [
-+               AC_MSG_RESULT(yes)
-+@@ -1771,10 +1767,6 @@ if test "x$ac_supports_gcc_flags" = "xyes" ; then
-+           # just the new option.
-+           #
-+           CFLAGS="$CFLAGS_saved $GCC_OPTION"
-+-          #
-+-          # Add it to the flags we use when building build tools.
-+-          #
-+-          CFLAGS_FOR_BUILD="$CFLAGS_FOR_BUILD $GCC_OPTION"
-+         fi
-+       ],
-+       [
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
-index 39a24dc..675519b 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
-@@ -30,6 +30,7 @@ EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares
- LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
- SRC_URI = " \
-     http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0.tar.bz2 \
-+    file://Do-not-set-CC_FOR_BUILD-flags.patch \
- "
- 
- PE = "1"
+Fixes for sstate cache reuse between different build dirs. The
+${SWIGLIBDIR##${STAGING_DIR_NATIVE}} had confused bitbake, bitbake would
+add the "SWIGLIBDIR##${STAGING_DIR_NATIVE}" to the deps of do_install,
+which caused the sstate cached can't be re-used.
+
+Use another way for SWIGLIBDIR to fix the problem.
+
+Patch 1/2:
+
+* talloc: fix swig dependencies
+
+This patch had been sent before, to avoid merge conflict just put them
+to the same contrib branch.
+
+The following changes since commit 28e26a9b0ad37d0c92ba42b2727215eef1edf5a2:
+
+  tcpslice: add recipe under tcpdump (2014-09-09 10:32:51 -0400)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib wenzong/fix-talloc
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/fix-talloc
+
+Robert Yang (1):
+  talloc: fixes for sstate cache reuse
+
+Wenzong Fan (1):
+  talloc: fix swig dependencies
+
+ .../install-swig-interface-in-SWINGLIBDIR.patch    |    2 +-
+ meta-oe/recipes-support/talloc/talloc_2.0.1.bb     |   13 +++++++++++--
+ 2 files changed, 12 insertions(+), 3 deletions(-)
+
 -- 
-1.7.10.4
+1.7.9.5
 
 
