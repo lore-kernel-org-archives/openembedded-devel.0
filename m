@@ -1,36 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id F05FD71490
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 00:20:56 +0000 (UTC)
-Received: by mail-ig0-f175.google.com with SMTP id h15so342157igd.14
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 17:20:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Z5guNX8RVKGIiLQkdZ2AcyFhPskx8F6kItyquErdZXQ=;
-	b=Lg8RTQFkVnGUYppss/gzRYDmQ/+JbXA2LUIGUDZ/dvGDccE7dN722iykORcF95PrkL
-	2N8ZWIgmbZwjghNj8+ZuSmh3rmVY54J/Coq/s4NFvmwZ4C159qc0iI0FR03NICf07D5F
-	smgr0RykHd7UZ9dKggKoVBx+WzW8Qvav8GSCqlXuyKAmEMjjka+17uBYp5C2Lism55ez
-	mt8K5CEEeiF4I1xqB1zSgJiIOccR70q8kGA8TyHB0zyJ4FFyrIgjn6//BKqcRgwxFZbh
-	v2Ejj5pUysOgQRgk/UTrUcGSp4q3i51HfxqRuyWWRXLqOZ5cMt8FDoVryFR+8PpXVp/X
-	YFhg==
+Return-Path: <B40869@freescale.com>
+X-Greylist: delayed 911 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 17 Sep 2014 03:04:18 UTC
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2on0104.outbound.protection.outlook.com [207.46.100.104])
+	by mail.openembedded.org (Postfix) with ESMTP id 36B716B8F6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Sep 2014 03:04:18 +0000 (UTC)
+Received: from BY2PR03CA067.namprd03.prod.outlook.com (10.141.249.40) by
+	BY2PR0301MB0760.namprd03.prod.outlook.com (25.160.63.24) with Microsoft
+	SMTP Server (TLS) id 15.0.1019.16; Wed, 17 Sep 2014 02:49:06 +0000
+Received: from BN1AFFO11FD039.protection.gbl (2a01:111:f400:7c10::193) by
+	BY2PR03CA067.outlook.office365.com (2a01:111:e400:2c5d::40) with
+	Microsoft SMTP Server (TLS) id 15.0.1029.13 via Frontend Transport;
+	Wed, 17 Sep 2014 02:49:05 +0000
+Received: from tx30smr01.am.freescale.net (192.88.168.50) by
+	BN1AFFO11FD039.mail.protection.outlook.com (10.58.52.243) with
+	Microsoft SMTP
+	Server (TLS) id 15.0.1019.14 via Frontend Transport; Wed, 17 Sep 2014
+	02:49:05 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	s8H2mw5F025096; Tue, 16 Sep 2014 19:49:00 -0700
+From: YangHaibo <b40869@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Sep 2014 10:38:45 +0800
+Message-ID: <1410921525-20513-1-git-send-email-b40869@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:CAL; IPV:NLI;
+	EFV:NLI; SFV:NSPM;
+	SFS:(10019020)(6009001)(199003)(189002)(88136002)(84676001)(44976005)(87286001)(36756003)(83322001)(93916002)(110136001)(74502003)(68736004)(85852003)(74662003)(81342003)(92726001)(80022003)(77982003)(86362001)(90102001)(62966002)(92566001)(46102003)(81542003)(50986999)(97736003)(50466002)(2351001)(76482002)(33646002)(47776003)(87936001)(105606002)(95666004)(50226001)(85306004)(104016003)(6806004)(19580395003)(106466001)(15975445006)(20776003)(102836001)(21056001)(31966008)(19580405001)(229853001)(107046002)(104166001)(77156001)(48376002)(99396002)(4396001)(64706001)(26826002)(15395725005)(83072002)(79102003)(15202345003)(89996001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BY2PR0301MB0760;
+	H:tx30smr01.am.freescale.net; FPR:; MLV:ovrnspm;
+	PTR:InfoDomainNonexistent; A:1; MX:1; LANG:en; 
 MIME-Version: 1.0
-X-Received: by 10.50.20.4 with SMTP id j4mr2388061ige.13.1410913257979; Tue,
-	16 Sep 2014 17:20:57 -0700 (PDT)
-Received: by 10.50.240.6 with HTTP; Tue, 16 Sep 2014 17:20:57 -0700 (PDT)
-In-Reply-To: <5417FED2.1030106@pseudoterminal.org>
-References: <CAMKF1srKjh-imfCPMTW9EiZNRFVydO71LSMPzhnAFuoUWtocZg@mail.gmail.com>
-	<5417FED2.1030106@pseudoterminal.org>
-Date: Tue, 16 Sep 2014 17:20:57 -0700
-Message-ID: <CAMKF1src0wJ6vStvRp1sJdpRy_tf-=FDcz_LMdAoA-QsgrE_Gg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: Carlos Rafael Giani <dv@pseudoterminal.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: mpg123 recipe LICENSE_FLAGS = "commercial" issue
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;UriScan:;
+X-Forefront-PRVS: 0337AFFE9A
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.168.50 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.168.50; helo=tx30smr01.am.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.168.50)
+	smtp.mailfrom=B40869@freescale.com; 
+X-OriginatorOrg: freescale.com
+Cc: YangHaibo <b40869@freescale.com>
+Subject: [meta-networking][PATCH V2] pimd: add recipe for pimd-2.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,44 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 00:21:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Sep 2014 03:04:23 -0000
+Content-Type: text/plain
 
-On Tuesday, September 16, 2014, Carlos Rafael Giani <dv@pseudoterminal.org>
-wrote:
+Signed-off-by: YangHaibo <b40869@freescale.com>
+---
+ meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
 
-> On 2014-09-16 07:43, Khem Raj wrote:
->
->> Hi Carlos/All
->>
->> I want to understand why LICENSE_FLAGS = "commercial" was added to
->>
->> meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
->>
->> in initial commit and has been carried over upgrades ever since
->>
->> The license seems to be LGPL 2.0 and is explained in greater detail here
->>
->> http://mpg123.org/cgi-bin/scm/mpg123/trunk/doc/ROAD_TO_LGPL?revision=2607
->>
->> So what portions of it are having different terms for commercial
->> distribution ?
->>
->> Thanks
->>
->> -Khem
->>
->
-> It's because MPEG audio is subject to royalties
+diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+new file mode 100644
+index 0000000..0cb7979
+--- /dev/null
++++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast routing daemon."
++HOMEPAGE = "http://troglobit.com/pimd.html"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
++
++SRC_URI = "ftp://troglobit.com/pimd/${BP}.tar.bz2"
++SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
++SRC_URI[sha256] = "3379436c16caccdef9b40a49fbdfdbb45aad8ecb05870834490b8fb080126009"
++
++CFLAGS_prepend = "-I ${S}/include "
+-- 
+1.9.2
 
-
-In what way where the component is lgpl I would like to understand
-
-
-
->  This is also the reason why gst-plugins-ugly and
-> gstreamer1.0-plugins-ugly have this flag.
->
-> Carlos
->
 
