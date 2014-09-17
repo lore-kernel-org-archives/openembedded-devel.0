@@ -1,26 +1,24 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FD3B714E1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 05:56:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8H5uiQD011888
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Sep 2014 22:56:44 -0700 (PDT)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 16 Sep 2014 22:56:44 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Sep 2014 01:56:39 -0400
-Message-ID: <6e4c40833f63ef374fde8aab5feb21c7e6f6aa7e.1410932659.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1410932659.git.wenzong.fan@windriver.com>
-References: <cover.1410932659.git.wenzong.fan@windriver.com>
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 547FE65CE7
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Sep 2014 07:09:17 +0000 (UTC)
+Received: from [192.168.178.14] (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 7DD0622EDE;
+	Wed, 17 Sep 2014 09:09:18 +0200 (CEST)
+Message-ID: <5419339D.5060807@pseudoterminal.org>
+Date: Wed, 17 Sep 2014 09:09:17 +0200
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
 MIME-Version: 1.0
-Subject: [PATCH 2/2][meta-oe] talloc: fixes for sstate cache reuse
+To: Khem Raj <raj.khem@gmail.com>
+References: <CAMKF1srKjh-imfCPMTW9EiZNRFVydO71LSMPzhnAFuoUWtocZg@mail.gmail.com>	<5417FED2.1030106@pseudoterminal.org>
+	<CAMKF1src0wJ6vStvRp1sJdpRy_tf-=FDcz_LMdAoA-QsgrE_Gg@mail.gmail.com>
+In-Reply-To: <CAMKF1src0wJ6vStvRp1sJdpRy_tf-=FDcz_LMdAoA-QsgrE_Gg@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: mpg123 recipe LICENSE_FLAGS = "commercial" issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,46 +32,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 05:56:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 17 Sep 2014 07:09:19 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Robert Yang <liezhi.yang@windriver.com>
+On 2014-09-17 02:20, Khem Raj wrote:
+>
+>
+> On Tuesday, September 16, 2014, Carlos Rafael Giani 
+> <dv@pseudoterminal.org <mailto:dv@pseudoterminal.org>> wrote:
+>
+>     On 2014-09-16 07:43, Khem Raj wrote:
+>
+>         Hi Carlos/All
+>
+>         I want to understand why LICENSE_FLAGS = "commercial" was added to
+>
+>         meta-multimedia/recipes-multimedia/mpg123/mpg123_1.15.3.bb
+>         <http://mpg123_1.15.3.bb>
+>
+>         in initial commit and has been carried over upgrades ever since
+>
+>         The license seems to be LGPL 2.0 and is explained in greater
+>         detail here
+>
+>         http://mpg123.org/cgi-bin/scm/mpg123/trunk/doc/ROAD_TO_LGPL?revision=2607
+>
+>         So what portions of it are having different terms for
+>         commercial distribution ?
+>
+>         Thanks
+>
+>         -Khem
+>
+>
+>     It's because MPEG audio is subject to royalties
+>
+>
+> In what way where the component is lgpl I would like to understand
+>
+>      This is also the reason why gst-plugins-ugly and
+>     gstreamer1.0-plugins-ugly have this flag.
+>
+>     Carlos
+>
 
-Fixes for sstate cache reuse between different build dirs. The
-${SWIGLIBDIR##${STAGING_DIR_NATIVE}} had confused bitbake, bitbake would
-add the "SWIGLIBDIR##${STAGING_DIR_NATIVE}" to the deps of do_install,
-which caused the sstate cached can't be re-used.
+*mpg123* is LGPL. But mpg123 is an implementation of an MPEG 1 audio 
+layer 1/2/3 and MPEG 2 audio. MPEG-1 layer 3 is what everybody calls 
+mp3. (mp1 and mp2 are pretty much dead by now.) mp3 itself contains 
+patents, and these are subject to royalties. Technicolor (formerly 
+Thomson) does enforce these royalties. See 
+http://mp3licensing.com/royalty/software.html for their price model.
+MPEG-2 is controlled by the MPEG LA.
 
-Use another way for SWIGLIBDIR to fix the problem.
+Note that these royalties cover the audio technology itself (say, mp3), 
+*not* the implementations. Implementations themselves can be subject to 
+any license, it's up to the authors of the implementations. But if you 
+actually want to use these implementations in a commercial product, 
+you'll have to pay the royalty fees.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- meta-oe/recipes-support/talloc/talloc_2.0.1.bb |   10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-index 9cf3e43..7bbfbc2 100644
---- a/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-+++ b/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-@@ -23,7 +23,15 @@ DEPENDS += "swig-native"
- do_install_prepend() {
-     # Hack the way swig interface for talloc is installed
-     # This hack is accompanied by install-swig-interface-in-SWINGLIBDIR.patch
--    type swig > /dev/null 2>&1 && SWIGLIBDIR=`swig -swiglib` && SWIGLIBDIR=`readlink -f ${SWIGLIBDIR}` && SWIGLIBDIR=${SWIGLIBDIR##${STAGING_DIR_NATIVE}} && export SWIGLIBDIR || echo "No swig found"
-+    if which swig > /dev/null; then
-+        SWIGLIBDIR="$(echo $(readlink -f $(swig -swiglib)) | \
-+            sed -e 's#^${STAGING_DIR_NATIVE}##')"
-+    fi
-+    if [ -n "$SWIGLIBDIR" ]; then
-+        export SWIGLIBDIR
-+    else
-+        echo "No swig found"
-+    fi
- }
- 
- do_install_append() {
--- 
-1.7.9.5
-
+This is part of the reason why Ogg Vorbis (and Opus) exist. They are an 
+alternative that doesn't require such fees. Therefore, the Vorbis 
+decoder isn't in gst-plugins-ugly, but in gst-plugins-good.
 
