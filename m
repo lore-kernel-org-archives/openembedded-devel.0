@@ -1,25 +1,25 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AA6D7107F
+	by mail.openembedded.org (Postfix) with ESMTP id 8BFEF714A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 14:41:48 +0000 (UTC)
+	Wed, 17 Sep 2014 14:41:55 +0000 (UTC)
 Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga103.fm.intel.com with ESMTP; 17 Sep 2014 07:32:50 -0700
+	by fmsmga103.fm.intel.com with ESMTP; 17 Sep 2014 07:32:51 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="387425241"
+X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="387425244"
 Received: from cfitzsim-mobl.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.120.123])
-	by FMSMGA003.fm.intel.com with ESMTP; 17 Sep 2014 07:36:12 -0700
+	by FMSMGA003.fm.intel.com with ESMTP; 17 Sep 2014 07:36:13 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Sep 2014 15:41:23 +0100
-Message-Id: <9a9c74c9c8113fa640095956e4d4d8d1fcf4402f.1410964797.git.paul.eggleton@linux.intel.com>
+Date: Wed, 17 Sep 2014 15:41:24 +0100
+Message-Id: <b670f5b2000ab1a7b31f124deff0cdf31be0572d.1410964797.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <cover.1410964797.git.paul.eggleton@linux.intel.com>
 References: <cover.1410964797.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1410964797.git.paul.eggleton@linux.intel.com>
 References: <cover.1410964797.git.paul.eggleton@linux.intel.com>
-Subject: [meta-oe][PATCH 1/4] libunwind: remove as recipe is now in OE-Core
+Subject: [meta-systemd][PATCH 2/4] dhcp: remove parts now merged into OE-Core recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,58 +37,90 @@ X-List-Received-Date: Wed, 17 Sep 2014 14:41:55 -0000
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- meta-oe/recipes-support/libunwind/libunwind.inc    | 30 ----------------------
- meta-oe/recipes-support/libunwind/libunwind_1.1.bb |  4 ---
- 2 files changed, 34 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libunwind/libunwind.inc
- delete mode 100644 meta-oe/recipes-support/libunwind/libunwind_1.1.bb
+ .../recipes-connectivity/dhcp/dhcp/dhcpd.service   | 12 -----------
+ .../dhcp/dhcp/dhcrelay.service                     | 10 ----------
+ .../recipes-connectivity/dhcp/dhcp_%.bbappend      | 23 +++-------------------
+ 3 files changed, 3 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcpd.service
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcrelay.service
 
-diff --git a/meta-oe/recipes-support/libunwind/libunwind.inc b/meta-oe/recipes-support/libunwind/libunwind.inc
+diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcpd.service b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcpd.service
 deleted file mode 100644
-index b27b9e5..0000000
---- a/meta-oe/recipes-support/libunwind/libunwind.inc
+index 70beee9..0000000
+--- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcpd.service
 +++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "a portable and efficient C programming interface (API) to determine the call-chain of a program"
--HOMEPAGE = "http://www.nongnu.org/libunwind"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3fced11d6df719b47505837a51c16ae5"
+@@ -1,12 +0,0 @@
+-[Unit]
+-Description=Dynamic Host Configuration Protocol (DHCP)
+-After=syslog.target network.target
 -
--SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
+-[Service]
+-Type=forking
+-PIDFile=/var/run/dhcpd.pid
+-EnvironmentFile=-/etc/default/dhcp-server
+-ExecStart=/usr/sbin/dhcpd -cf /etc/dhcp/dhcpd.conf -q $INTERFACES
 -
--inherit autotools
--
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[lzma] = "--enable-minidebuginfo,--disable-minidebuginfo,lzma"
--
--EXTRA_OECONF_arm = "--enable-debug-frame"
--
--CFLAGS += "${ATOMICOPS}"
--ATOMICOPS_armv5 = "-DAO_USE_PTHREAD_DEFS=1"
--ATOMICOPS_armv4 = "-DAO_USE_PTHREAD_DEFS=1"
--ATOMICOPS ?= ""
--
--LDFLAGS += "${LIBATOMICS}"
--LIBATOMICS_armv5 = "-latomic_ops"
--LIBATOMICS_armv4 = "-latomic_ops"
--LIBATOMICS ?= ""
--
--DEPENDS += "${DEPLIBATOMICS}"
--DEPLIBATOMICS_armv5 = "libatomics-ops"
--DEPLIBATOMICS_armv4 = "libatomics-ops"
--DEPLIBATOMICS ?= ""
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/libunwind/libunwind_1.1.bb b/meta-oe/recipes-support/libunwind/libunwind_1.1.bb
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcrelay.service b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcrelay.service
 deleted file mode 100644
-index bc38e36..0000000
---- a/meta-oe/recipes-support/libunwind/libunwind_1.1.bb
+index f68f468..0000000
+--- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhcrelay.service
 +++ /dev/null
-@@ -1,4 +0,0 @@
--require libunwind.inc
+@@ -1,10 +0,0 @@
+-[Unit]
+-Description=DHCP Relay Agent Daemon
+-After=syslog.target network.target
 -
--SRC_URI[md5sum] = "fb4ea2f6fbbe45bf032cd36e586883ce"
--SRC_URI[sha256sum] = "9dfe0fcae2a866de9d3942c66995e4b460230446887dbdab302d41a8aee8d09a"
+-[Service]
+-EnvironmentFile=/etc/default/dhcp-relay
+-ExecStart=/usr/sbin/dhcrelay -d $DHCRELAYARGS
+-
+-[Install]
+-WantedBy=multi-user.target
+diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
+index 1dd6d58..d2a577e 100644
+--- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
++++ b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
+@@ -1,35 +1,18 @@
+ # look for files in the layer first
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+ 
+-inherit systemd
+-
+-SYSTEMD_PACKAGES = "dhcp-server dhcp-relay dhcp-client"
+-SYSTEMD_SERVICE_dhcp-server = "dhcpd.service"
+-SYSTEMD_SERVICE_dhcp-relay = "dhcrelay.service"
++SYSTEMD_PACKAGES += "dhcp-client"
+ SYSTEMD_SERVICE_dhcp-client = "dhclient.service"
+ SYSTEMD_AUTO_ENABLE_dhcp-client = "disable"
+ 
+-FILES_dhcp-server += "${systemd_unitdir}/system/dhcpd.service"
+-FILES_dhcp-relay += "${systemd_unitdir}/system/dhrelay.service"
+ FILES_dhcp-client += "${systemd_unitdir}/system/dhclient.service"
+-RPROVIDES_dhcp-server += "dhcp-server-systemd"
+-RREPLACES_dhcp-server += "dhcp-server-systemd"
+-RCONFLICTS_dhcp-server += "dhcp-server-systemd"
+-RPROVIDES_dhcp-relay += "dhcp-relay-systemd"
+-RREPLACES_dhcp-relay += "dhcp-relay-systemd"
+-RCONFLICTS_dhcp-relay += "dhcp-relay-systemd"
+ RPROVIDES_dhcp-client += "dhcp-client-systemd"
+ RREPLACES_dhcp-client += "dhcp-client-systemd"
+ RCONFLICTS_dhcp-client += "dhcp-client-systemd"
+ 
+-SRC_URI += "file://dhcpd.service \
+-            file://dhclient.service \
+-            file://dhcrelay.service \
+-"
++SRC_URI += "file://dhclient.service"
++
+ do_install_append() {
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/dhcpd.service ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/dhclient.service ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/dhcrelay.service ${D}${systemd_unitdir}/system
+ }
+ 
 -- 
 1.9.3
 
