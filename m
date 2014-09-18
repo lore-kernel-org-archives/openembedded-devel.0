@@ -1,23 +1,22 @@
 Return-Path: <changhyeok.bae@lge.com>
-Received: from lgeamrelo02.lge.com (lgeamrelo02.lge.com [156.147.1.126])
-	by mail.openembedded.org (Postfix) with ESMTP id C37EA60CFC
+Received: from lgeamrelo01.lge.com (lgeamrelo01.lge.com [156.147.1.125])
+	by mail.openembedded.org (Postfix) with ESMTP id 0117B714D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Sep 2014 04:45:33 +0000 (UTC)
+	Thu, 18 Sep 2014 04:45:58 +0000 (UTC)
 Received: from unknown (HELO CHBae0915) (10.177.232.191)
-	by 156.147.1.126 with ESMTP; 18 Sep 2014 13:45:19 +0900
+	by 156.147.1.125 with ESMTP; 18 Sep 2014 13:45:58 +0900
 X-Original-SENDERIP: 10.177.232.191
 X-Original-MAILFROM: changhyeok.bae@lge.com
 From: "Changhyeok Bae" <changhyeok.bae@lge.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1410923404-1311-1-git-send-email-b40869@freescale.com>
-	<029101cfd250$bedbdb90$3c9392b0$@lge.com>
-In-Reply-To: <029101cfd250$bedbdb90$3c9392b0$@lge.com>
-Date: Thu, 18 Sep 2014 13:45:50 +0900
-Message-ID: <004d01cfd2fb$6cc81570$46584050$@lge.com>
+References: <1410923622-13103-1-git-send-email-b40869@freescale.com>
+In-Reply-To: <1410923622-13103-1-git-send-email-b40869@freescale.com>
+Date: Thu, 18 Sep 2014 13:46:17 +0900
+Message-ID: <004e01cfd2fb$7bbc8390$73358ab0$@lge.com>
 MIME-Version: 1.0
 X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AQE7OaggyDHZ98GjKzYBxZothUc2GgKc9DJBnRqbz7A=
-Subject: Re: [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
+Thread-Index: AQM8H7JJ9VOVfuKX1SYAA/3CNDeorpktt4vw
+Subject: Re: [meta-networking][PATCH] pimd: add recipe for ssmping-0.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,70 +30,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Sep 2014 04:45:36 -0000
+X-List-Received-Date: Thu, 18 Sep 2014 04:46:06 -0000
 Content-Type: text/plain;
 	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Content-Language: ko
 
-Also there is no install stage
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Changhyeok Bae
-Sent: Wednesday, September 17, 2014 5:24 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-networking][PATCH V3] pimd: add recipe for
-pimd-2.1.8
-
-The sha256sum is wrong. Please recheck.
+there is no install stage
 
 -----Original Message-----
 From: openembedded-devel-bounces@lists.openembedded.org
 [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
 YangHaibo
-Sent: Wednesday, September 17, 2014 12:10 PM
+Sent: Wednesday, September 17, 2014 12:14 PM
 To: openembedded-devel@lists.openembedded.org
 Cc: YangHaibo
-Subject: [oe] [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
+Subject: [oe] [meta-networking][PATCH] pimd: add recipe for ssmping-0.9.1
 
 Signed-off-by: YangHaibo <b40869@freescale.com>
 ---
- meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 10 ++++++++++
+ meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb | 10 ++++++++++
  1 file changed, 10 insertions(+)
- create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+ create mode 100644 meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
 
-diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+diff --git a/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
+b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
 new file mode 100644
-index 0000000..7c03dd6
+index 0000000..ec56024
 --- /dev/null
-+++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
++++ b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
 @@ -0,0 +1,10 @@
-+SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast 
-+routing
-daemon."
-+HOMEPAGE = "http://troglobit.com/pimd.html"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
++SUMMARY = "ssmping is a tool for checking whether one can receive SSM from
+a given host"
++HOMEPAGE = "http://www.venaas.no/multicast/ssmping/"
++LICENSE = "ISC"
++LIC_FILES_CHKSUM =
+"file://asmping.c;beginline=2;endline=11;md5=1ca8d1a1ca931e5cfe604ebf20a78b7
+1"
 +
-+SRC_URI = "ftp://troglobit.com/pimd/${BP}.tar.bz2"
-+SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
++SRC_URI = "http://www.venaas.no/multicast/ssmping/${BP}.tar.gz"
++SRC_URI[md5sum] = "ad8e3d13f6d72918f73be7e7975d7fad"
 +SRC_URI[sha256sum] =
-"3379436c16caccdef9b40a49fbdfdbb45aad8ecb05870834490b8fb080126009"
+"22103a37eaa28489169a0927bc01e0596c3485fc4d29fc8456c07fd2c70fca6d"
 +
-+CFLAGS_prepend = "-I ${S}/include "
---
++CFLAGS_prepend = "-D_GNU_SOURCE "
+-- 
 1.9.2
 
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---
+-- 
 _______________________________________________
 Openembedded-devel mailing list
 Openembedded-devel@lists.openembedded.org
