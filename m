@@ -1,34 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-oi0-f43.google.com (mail-oi0-f43.google.com
-	[209.85.218.43])
-	by mail.openembedded.org (Postfix) with ESMTP id C42157117E
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 47DB771467
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 23:13:18 +0000 (UTC)
-Received: by mail-oi0-f43.google.com with SMTP id v63so40810oia.16
+	Thu, 18 Sep 2014 01:24:12 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8I1OD9d004891
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 16:13:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=XdodXLtOo5mxQN2tkL96UoBkF21stlngzRug1kWiDQo=;
-	b=QA5SFa9KCKuXei4bay9N6lSB8Pffii8kMkjazHJlTFt36vdyhe/Eue9FvcDt54lKNA
-	j58pOhSACFk4nFlDLyUwA3wxmsoyki8CbPvHYfk8YObJ41cQc3XZm8uX2fRqcZy+NPtI
-	+XcyRbX+3zznaJhMCc8vBTojoI91Xfc5X/e2s0rN/XsrG2ZcHRitPuJ+rSTcNGTg3d09
-	OlM2/qCV7gAJpKSNmAWoKbAM9RG+NZF26vGQMjfrPp/h8jrno+tz8iMhKPA0dlb1Ykl+
-	m+x+K3dIEpmIu+hxP7tGv9zACGNmFHzSAlCJ/uK19X5oX/jnm6VytGvk1tDEva3DCXV6
-	/baQ==
-X-Received: by 10.182.29.101 with SMTP id j5mr565566obh.20.1410995599504; Wed,
-	17 Sep 2014 16:13:19 -0700 (PDT)
+	Wed, 17 Sep 2014 18:24:14 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Wed, 17 Sep 2014 18:24:12 -0700
+From: Chong Lu <Chong.Lu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 Sep 2014 09:23:59 +0800
+Message-ID: <1411003439-20287-1-git-send-email-Chong.Lu@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.202.95.213 with HTTP; Wed, 17 Sep 2014 16:12:48 -0700 (PDT)
-In-Reply-To: <1410921525-20513-1-git-send-email-b40869@freescale.com>
-References: <1410921525-20513-1-git-send-email-b40869@freescale.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 17 Sep 2014 16:12:48 -0700
-Message-ID: <CAMKF1sr34LcpU_EGoG2MFdsSekarU7sGw9KaBiuLFkx9ggrDTQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: YangHaibo <b40869@freescale.com>
-Subject: Re: [meta-networking][PATCH V2] pimd: add recipe for pimd-2.1.8
+Subject: [meta-oe][PATCH] collectd: add systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,11 +32,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Sep 2014 23:13:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Sep 2014 01:24:21 -0000
+Content-Type: text/plain
 
-On Tue, Sep 16, 2014 at 7:38 PM, YangHaibo <b40869@freescale.com> wrote:
-> +CFLAGS_prepend = "-I ${S}/include "
+Add systemd unit file for collectd.
 
-can you explain this change ?
+Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+---
+ meta-oe/recipes-extended/collectd/collectd/collectd.service | 12 ++++++++++++
+ meta-oe/recipes-extended/collectd/collectd_5.4.1.bb         | 13 +++++++++++--
+ 2 files changed, 23 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/collectd/collectd/collectd.service
+
+diff --git a/meta-oe/recipes-extended/collectd/collectd/collectd.service b/meta-oe/recipes-extended/collectd/collectd/collectd.service
+new file mode 100644
+index 0000000..d835b73
+--- /dev/null
++++ b/meta-oe/recipes-extended/collectd/collectd/collectd.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Collectd
++After=local-fs.target network.target
++Requires=local-fs.target network.target
++
++[Service]
++ExecStart=@SBINDIR@/collectd -C /etc/collectd.conf -f
++Restart=always
++RestartSec=10
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
+index dc5f88f..46752c8 100644
+--- a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
++++ b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
+@@ -9,11 +9,14 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
+            file://no-gcrypt-badpath.patch \
+            file://collectd-version.patch \
+            file://glibc-2.20-compatiblity.patch \
+-           file://collectd.init"
++           file://collectd.init \
++           file://collectd.service"
+ SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
+ SRC_URI[sha256sum] = "75452129f271cb0aad28e57f12a49070618bbb7b6a9d64cf869e8766fa2f66e0"
+ 
+-inherit autotools pythonnative update-rc.d pkgconfig
++inherit autotools pythonnative update-rc.d pkgconfig systemd
++
++SYSTEMD_SERVICE_${PN} = "collectd.service"
+ 
+ # Floatingpoint layout, architecture dependent
+ # 'nothing', 'endianflip' or 'intswap'
+@@ -55,6 +58,12 @@ do_install_append() {
+ 
+     rmdir "${D}${localstatedir}/run"
+     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
++
++    # Install systemd unit files
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/collectd.service ${D}${systemd_unitdir}/system
++    sed -i -e 's,@SBINDIR@,${sbindir},g' \
++        ${D}${systemd_unitdir}/system/collectd.service
+ }
+ 
+ INITSCRIPT_NAME = "collectd"
+-- 
+1.9.1
+
 
