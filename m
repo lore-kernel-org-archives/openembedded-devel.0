@@ -1,22 +1,41 @@
-Return-Path: <changhyeok.bae@lge.com>
-Received: from lgeamrelo01.lge.com (lgeamrelo01.lge.com [156.147.1.125])
-	by mail.openembedded.org (Postfix) with ESMTP id 0117B714D2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
+	[209.85.220.53])
+	by mail.openembedded.org (Postfix) with ESMTP id AEFD46FC4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Sep 2014 04:45:58 +0000 (UTC)
-Received: from unknown (HELO CHBae0915) (10.177.232.191)
-	by 156.147.1.125 with ESMTP; 18 Sep 2014 13:45:58 +0900
-X-Original-SENDERIP: 10.177.232.191
-X-Original-MAILFROM: changhyeok.bae@lge.com
-From: "Changhyeok Bae" <changhyeok.bae@lge.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <1410923622-13103-1-git-send-email-b40869@freescale.com>
-In-Reply-To: <1410923622-13103-1-git-send-email-b40869@freescale.com>
-Date: Thu, 18 Sep 2014 13:46:17 +0900
-Message-ID: <004e01cfd2fb$7bbc8390$73358ab0$@lge.com>
+	Thu, 18 Sep 2014 07:42:22 +0000 (UTC)
+Received: by mail-pa0-f53.google.com with SMTP id rd3so903316pab.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Sep 2014 00:42:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=i29YglWys6uP1K3zzpvN4cLiSGAOxR1J1Z4bEQnirNw=;
+	b=tbJzw8oR2r0T/acP7bzvPy8/T+sgIiD7/qZ2ZOTcfrai/sJDduUraT8K/bSsGTlD4F
+	m2CManTce4M3lGhoipb59IS9m8/ZKlKBg2sE17gWwKR8SrFfkrhbGxHYuT00C6VpfJ2O
+	yM1omaA4s5bQM89BirciZVkpGQaAxKWLk+ThxgLQ5uDvdmjznTXhqF6j++J461d8yWvG
+	4UlKlPGYGlUNgZCOunBZmJfeZbJkl0uc45YxLcUmOp9WRGHk/nfH2pYU7MO2FgKC0piZ
+	fXtX7jnRpqJw+VGVhzfLISH4ZlaJlguyA/gjDsMQkmVsrM2ajXJ8BZGtm1uyW1gER4/W
+	ETeg==
+X-Received: by 10.70.135.137 with SMTP id ps9mr3387276pdb.13.1411026143026;
+	Thu, 18 Sep 2014 00:42:23 -0700 (PDT)
+Received: from CACSVMO-14452.local ([2601:9:3580:7a5:c0c6:c4a3:f3e7:1968])
+	by mx.google.com with ESMTPSA id
+	gr5sm18875274pbc.33.2014.09.18.00.42.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 18 Sep 2014 00:42:22 -0700 (PDT)
+Message-ID: <541A8CDD.6000303@gmail.com>
+Date: Thu, 18 Sep 2014 00:42:21 -0700
+From: Khem Raj <raj.khem@gmail.com>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AQM8H7JJ9VOVfuKX1SYAA/3CNDeorpktt4vw
-Subject: Re: [meta-networking][PATCH] pimd: add recipe for ssmping-0.9.1
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1409584344.git.liezhi.yang@windriver.com>
+	<1ab2a6a84a7ad1e930aadb138a807a58ee65d065.1409584344.git.liezhi.yang@windriver.com>
+In-Reply-To: <1ab2a6a84a7ad1e930aadb138a807a58ee65d065.1409584344.git.liezhi.yang@windriver.com>
+Subject: Re: [PATCH 03/13] arptables: add bash to RDEPENDS_arptables
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,57 +49,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Sep 2014 04:46:06 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Thu, 18 Sep 2014 07:42:24 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
-Content-Language: ko
 
-there is no install stage
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-YangHaibo
-Sent: Wednesday, September 17, 2014 12:14 PM
-To: openembedded-devel@lists.openembedded.org
-Cc: YangHaibo
-Subject: [oe] [meta-networking][PATCH] pimd: add recipe for ssmping-0.9.1
 
-Signed-off-by: YangHaibo <b40869@freescale.com>
----
- meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
 
-diff --git a/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
-b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
-new file mode 100644
-index 0000000..ec56024
---- /dev/null
-+++ b/meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "ssmping is a tool for checking whether one can receive SSM from
-a given host"
-+HOMEPAGE = "http://www.venaas.no/multicast/ssmping/"
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM =
-"file://asmping.c;beginline=2;endline=11;md5=1ca8d1a1ca931e5cfe604ebf20a78b7
-1"
-+
-+SRC_URI = "http://www.venaas.no/multicast/ssmping/${BP}.tar.gz"
-+SRC_URI[md5sum] = "ad8e3d13f6d72918f73be7e7975d7fad"
-+SRC_URI[sha256sum] =
-"22103a37eaa28489169a0927bc01e0596c3485fc4d29fc8456c07fd2c70fca6d"
-+
-+CFLAGS_prepend = "-D_GNU_SOURCE "
--- 
-1.9.2
+On 9/1/14 8:18 AM, Robert Yang wrote:
+> Bashism:
+> possible bashism in arptables/etc/init.d/arptables line 14 (should be '.', not 'source'):
+> source /etc/init.d/functions
+> possible bashism in arptables/etc/init.d/arptables line 96 ($"foo" should be eval_gettext "foo"):
+>         echo $"Usage $0 {start|stop|restart|condrestart|save|status}"
 
--- 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+could these be patched instead of rdepending on bash
+> 
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  .../recipes-support/arptables/arptables_0.0.3-4.bb |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> index 74f81b5..94920f9 100644
+> --- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> +++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
+> @@ -5,7 +5,7 @@ SECTION = "console/network"
+>  
+>  PR = "r2"
+>  
+> -RDEPENDS_${PN} += "perl"
+> +RDEPENDS_${PN} += "perl bash"
+>  
+>  LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+>  SRC_URI = " \
+> 
 
+- -- 
+- -Khem
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlQajN0ACgkQuwUzVZGdMxSHuACdFnp3LZpRjZsN3IVLm2tCCb8L
+y2kAnRFWsf2R9HDvvAp1xUoSnQB9bZfQ
+=ZfQX
+-----END PGP SIGNATURE-----
 
