@@ -1,34 +1,23 @@
-Return-Path: <switesh.fulpagare@mindastoneridge.com>
-Received: from mail-vc0-f170.google.com (mail-vc0-f170.google.com
-	[209.85.220.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 77B9B65DEC
+Return-Path: <changhyeok.bae@lge.com>
+Received: from lgeamrelo02.lge.com (lgeamrelo02.lge.com [156.147.1.126])
+	by mail.openembedded.org (Postfix) with ESMTP id C37EA60CFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Sep 2014 04:02:42 +0000 (UTC)
-Received: by mail-vc0-f170.google.com with SMTP id hy4so244169vcb.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Sep 2014 21:02:43 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=Ttum1skcMU7MJsa64efcCGQ5tJiuekvePMMeScSXiCA=;
-	b=Pc/rfeM3DNqmJapfnQybbHK2AUUFb7BEohf0rke6fiFrFIsJFFnVsjkvWVGCrCsXgP
-	KZ6aAEDG8AQLsfkm1e1HBhJTN355WdTmpHrf7GX6lMSMoSz2M3ktaSQ25IWXl8WbIiSW
-	ExYToieXkg8tkX/+ji1VEPbeXuh1LavifWNTNmvgKW8MmJx3tXsm4lXMtKWMIgIkAaYY
-	5S90tV5Wfcw6ih3jn2AYChH45pk+J069ttL98HFPeOp82R5VkeqNKRwBhHno6X6T4TiE
-	m3JWEYDCtVAow5B8/NINgxnrY7hQUtt2ZlJmTsfaEfU131RWp2gHH/rwqQOWrxNbvCI0
-	Gvqw==
-X-Gm-Message-State: ALoCoQnE+4YykRFYwrhjlk+hxScrtzVYCt4fy6DOHd8fCwc6Jyu1eVSkeLAcHvpI7Pmqm8uY02ER
+	Thu, 18 Sep 2014 04:45:33 +0000 (UTC)
+Received: from unknown (HELO CHBae0915) (10.177.232.191)
+	by 156.147.1.126 with ESMTP; 18 Sep 2014 13:45:19 +0900
+X-Original-SENDERIP: 10.177.232.191
+X-Original-MAILFROM: changhyeok.bae@lge.com
+From: "Changhyeok Bae" <changhyeok.bae@lge.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <1410923404-1311-1-git-send-email-b40869@freescale.com>
+	<029101cfd250$bedbdb90$3c9392b0$@lge.com>
+In-Reply-To: <029101cfd250$bedbdb90$3c9392b0$@lge.com>
+Date: Thu, 18 Sep 2014 13:45:50 +0900
+Message-ID: <004d01cfd2fb$6cc81570$46584050$@lge.com>
 MIME-Version: 1.0
-X-Received: by 10.52.89.198 with SMTP id bq6mr1110278vdb.41.1411012963320;
-	Wed, 17 Sep 2014 21:02:43 -0700 (PDT)
-Received: by 10.52.245.73 with HTTP; Wed, 17 Sep 2014 21:02:43 -0700 (PDT)
-Date: Thu, 18 Sep 2014 09:32:43 +0530
-Message-ID: <CALRGHr_N0Aj7yoL0jXWES84MUHEUBt7dy1DaHwVrqxrfGJXqzg@mail.gmail.com>
-From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Yocto - LVDS
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQE7OaggyDHZ98GjKzYBxZothUc2GgKc9DJBnRqbz7A=
+Subject: Re: [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,15 +31,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Sep 2014 04:02:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Sep 2014 04:45:36 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: ko
 
-Hi,
-   We are using yocto bsp with kernel 3.10.17 and want to putput on LVDS
-interfaced LCD. Can anyone please reply on the below post -
+Also there is no install stage
 
-http://forums.wandboard.org/viewtopic.php?f=10&t=626&sid=a2621cb3d630ed8e295690556441a7bc
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+Changhyeok Bae
+Sent: Wednesday, September 17, 2014 5:24 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [meta-networking][PATCH V3] pimd: add recipe for
+pimd-2.1.8
 
+The sha256sum is wrong. Please recheck.
 
-- Switesh.
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+YangHaibo
+Sent: Wednesday, September 17, 2014 12:10 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: YangHaibo
+Subject: [oe] [meta-networking][PATCH V3] pimd: add recipe for pimd-2.1.8
+
+Signed-off-by: YangHaibo <b40869@freescale.com>
+---
+ meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+
+diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+new file mode 100644
+index 0000000..7c03dd6
+--- /dev/null
++++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast 
++routing
+daemon."
++HOMEPAGE = "http://troglobit.com/pimd.html"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
++
++SRC_URI = "ftp://troglobit.com/pimd/${BP}.tar.bz2"
++SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
++SRC_URI[sha256sum] =
+"3379436c16caccdef9b40a49fbdfdbb45aad8ecb05870834490b8fb080126009"
++
++CFLAGS_prepend = "-I ${S}/include "
+--
+1.9.2
+
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
