@@ -1,24 +1,34 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0545C7142A
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 468736FAEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 19:22:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8JJMnWx005360
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 19 Sep 2014 21:09:37 +0000 (UTC)
+Received: by mail-wi0-f179.google.com with SMTP id d1so221727wiv.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 12:22:50 -0700 (PDT)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Fri, 19 Sep 2014 12:22:49 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Sep 2014 12:22:49 -0700
-Message-ID: <1411154569-2625-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] radvd: update to 1.14
+	Fri, 19 Sep 2014 14:09:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=A18YT5/r9/lYvfy5q6vrLkVKLiOxf85snkYW5ine6NY=;
+	b=d315aHcEvOnrCJqUaxuNvnWHSukDk+522zNXKlgIXHBK3xrpAtC3JYzYQq0DXR72b6
+	V20Cw0ITCgFBJdGEMZaLmlxOykbUxWo+1uNIIxqYwoMiXG/THaAcl0vhhawKHESke3//
+	H6QwKJgC/sXtHzFkocKPLN0CrfxVetvDABWXEI8bxAJ7p9YNSNqJkZm1nOqsFefuteEy
+	+6VBBcVv0L7Bd0S/+uEox/4j4twPl9ilmFtYbQWPhoRzQ+REWZsLIlVcTcRv90K8ijct
+	ScWX6sfy3dnhNREOFWsU3QQCi7TOozCMV76rz1OIddKnNqVJ0m1WaqYxgYlK73kxFgrH
+	DZXw==
+X-Received: by 10.180.84.193 with SMTP id b1mr585135wiz.40.1411160978703;
+	Fri, 19 Sep 2014 14:09:38 -0700 (PDT)
+Received: from mizar.208.67.220.220 ([87.13.50.36])
+	by mx.google.com with ESMTPSA id mc20sm3312135wic.2.2014.09.19.14.09.37
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 19 Sep 2014 14:09:37 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Sep 2014 23:09:29 +0200
+Message-Id: <1411160969-15259-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-initramfs][PATCH v2] klibc: klcc: consider --sysroot option and override gcc-cross encoded sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,44 +42,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Sep 2014 19:23:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 19 Sep 2014 21:09:39 -0000
 
-No changes except to source version.
+For the recipes built with klcc-cross it is necessary to
+pass --sysroot otherwise we default to the one encoded in gcc-cross which
+actually is the 'first one' built.
+The issue was revealed when building for armv4 after having built for armv5te:
+the produced binaries did contain Illegal Instruction (bx lr).
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
+Use ${TOOLCHAIN_OPTIONS} variable to specify --sysroot=${STAGING_DIR_TARGET}
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../recipes-daemons/radvd/radvd_1.14.bb            |    6 ++++++
- .../recipes-daemons/radvd/radvd_1.9.8.bb           |    6 ------
- 2 files changed, 6 insertions(+), 6 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/radvd/radvd_1.14.bb
- delete mode 100644 meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
+ meta-initramfs/classes/klibc.bbclass                       |  4 ++--
+ .../klibc/klibc-2.0.4/klcc-consider-sysroot.patch          | 14 ++++++++++++++
+ meta-initramfs/recipes-devtools/klibc/klibc.inc            |  1 +
+ 3 files changed, 17 insertions(+), 2 deletions(-)
+ create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
 
-diff --git a/meta-networking/recipes-daemons/radvd/radvd_1.14.bb b/meta-networking/recipes-daemons/radvd/radvd_1.14.bb
+diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
+index ca741cd..f864104 100644
+--- a/meta-initramfs/classes/klibc.bbclass
++++ b/meta-initramfs/classes/klibc.bbclass
+@@ -4,8 +4,8 @@ DEPENDS =+ "klcc-cross"
+ # Default for klcc is to build static binaries.
+ # Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
+ 
+-export CC = "${TARGET_PREFIX}klcc"
+-export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4 -mthumb-interwork"
++export CC = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
++export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
+ 
+ export CPP = "${CC} -E"
+ 
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
 new file mode 100644
-index 0000000..bf572e3
+index 0000000..9bc4835
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/radvd/radvd_1.14.bb
-@@ -0,0 +1,6 @@
-+
-+require radvd.inc
-+
-+SRC_URI[md5sum] = "a257e05bd6a435ef948d3b407726d56f"
-+SRC_URI[sha256sum] = "3b16dd9ef3d6c8b889cdabfdb16c81db8bd61b0f1fc42f6acc52d3cf300c6d07"
-+
-diff --git a/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb b/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
-deleted file mode 100644
-index 407eb43..0000000
---- a/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--PR = "r0"
--
--require radvd.inc
--
--SRC_URI[md5sum] = "7a96a38252c3964ee18bbc1fdeae25fa"
--SRC_URI[sha256sum] = "645ccf1c9b16e769ff4179813712e580e2c8786d64a888d8afa1e296c057c1c1"
++++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+@@ -0,0 +1,14 @@
++diff --git a/klcc/klcc.in b/klcc/klcc.in
++index 43d0984..61e9385 100644
++--- a/klcc/klcc.in
+++++ b/klcc/klcc.in
++@@ -204,6 +204,9 @@ while ( defined($a = shift(@ARGV)) ) {
++ 	# Libraries
++ 	push(@libs, $a);
++ 	push(@libs, shift(@ARGV)) if ( $2 eq '' );
+++    } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
+++	# Override gcc encoded sysroot
+++	push(@ccopt, $a);
++     } else {
++ 	die "$0: unknown option: $a\n";
++     }
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 0209b20..f3e9972 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -16,6 +16,7 @@ SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
+                                     "
+ SRC_URI += "file://klibc-linux-libc-dev.patch \
+             file://staging.patch \
++            file://klcc-consider-sysroot.patch \
+             "
+ 
+ S = "${WORKDIR}/git"
 -- 
-1.7.3.4
+1.9.1
 
 
