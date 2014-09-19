@@ -1,28 +1,26 @@
-Return-Path: <Liezhi.Yang@windriver.com>
+Return-Path: <Wenzong.Fan@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A59D470A0B
+	by mail.openembedded.org (Postfix) with ESMTP id 8AF0970A0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 03:03:26 +0000 (UTC)
+	Fri, 19 Sep 2014 03:10:04 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8J33PvF000594
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8J3A6Fu001245
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Sep 2014 20:03:25 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 18 Sep 2014 20:03:25 -0700
-Message-ID: <541B9CFB.4060400@windriver.com>
-Date: Fri, 19 Sep 2014 11:03:23 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
-MIME-Version: 1.0
+	Thu, 18 Sep 2014 20:10:06 -0700 (PDT)
+Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 18 Sep 2014 20:10:05 -0700
+From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1409584344.git.liezhi.yang@windriver.com>	<1ab2a6a84a7ad1e930aadb138a807a58ee65d065.1409584344.git.liezhi.yang@windriver.com>
-	<541A8CDD.6000303@gmail.com>
-In-Reply-To: <541A8CDD.6000303@gmail.com>
-Subject: Re: [PATCH 03/13] arptables: add bash to RDEPENDS_arptables
+Date: Thu, 18 Sep 2014 23:10:02 -0400
+Message-ID: <2b3f477519a9ff09ab1b7620241ba1bc9eb792ec.1411095911.git.wenzong.fan@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <cover.1411095911.git.wenzong.fan@windriver.com>
+References: <cover.1411095911.git.wenzong.fan@windriver.com>
+MIME-Version: 1.0
+Subject: [PATCH 1/1][meta-oe] imagemagick: do not install magick-baseconfig.h repeatedly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,130 +34,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Sep 2014 03:03:28 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Sep 2014 03:10:11 -0000
+Content-Type: text/plain
 
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-On 09/18/2014 03:42 PM, Khem Raj wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
->
->
-> On 9/1/14 8:18 AM, Robert Yang wrote:
->> Bashism:
->> possible bashism in arptables/etc/init.d/arptables line 14 (should be '.', not 'source'):
->> source /etc/init.d/functions
->> possible bashism in arptables/etc/init.d/arptables line 96 ($"foo" should be eval_gettext "foo"):
->>          echo $"Usage $0 {start|stop|restart|condrestart|save|status}"
->
-> could these be patched instead of rdepending on bash
+Both targets install-data-local & install-includeHEADERS will install
+header file magick-baseconfig.h to the same location, and they might
+be run in the same time while enabling parallel build:
 
-Thanks, I updated in the repo (V2, but V1 and V2 uses the same repo):
+* target dependencies:
+  + install-data-am: ... install-data-local ... install-includeHEADERS
 
-git://git.openembedded.org/meta-openembedded-contrib rbt/rdeps
+* make install error:
+  /usr/bin/install: cannot create regular file \
+  `.../usr/include/ImageMagick-6/magick/magick-baseconfig.h': \
+  File exists \
+  make[3]: *** [install-magickincarchHEADERS] Error 1
 
-And here is the patch:
+* reproduce the error:
+  $ /usr/bin/install test /tmp & /usr/bin/install test /tmp
+  [1] 4052
+  /usr/bin/install: cannot create regular file `/tmp/test': File exists
+  [1]+  Exit 1                  /usr/bin/install test /tmp
 
-commit e8848953ff6815c2335dc23d18ee40277e04103f
-Author: Robert Yang <liezhi.yang@windriver.com>
-Date:   Sun Aug 31 23:22:11 2014 -0700
+Just disable the one from install-data-local to remove this race issue.
 
-     arptables: remove bashism
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ ...ot-install-magick-baseconfig.h-repeatedly.patch |   49 ++++++++++++++++++++
+ .../imagemagick/imagemagick_6.8.8.bb               |    1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/do-not-install-magick-baseconfig.h-repeatedly.patch
 
-     Bashism:
-     possible bashism in arptables/etc/init.d/arptables line 14 (should be '.', 
-not 'source'):
-     source /etc/init.d/functions
-     possible bashism in arptables/etc/init.d/arptables line 96 ($"foo" should 
-be eval_gettext "foo"):
-             echo $"Usage $0 {start|stop|restart|condrestart|save|status}"
-
-     Use "." to replace of "source", and change /bin/bash to /bin/sh, the
-     echo $"foo" works well in our busybox.
-
-     Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-
-diff --git 
-a/meta-networking/recipes-support/arptables/arptables-0.0.3-4/arptables-remove-bashism.patch 
-b/meta-networking/recipes-support/arptables/arptables-0.0.3-4/arptables-remove-bashism.
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/do-not-install-magick-baseconfig.h-repeatedly.patch b/meta-oe/recipes-support/imagemagick/imagemagick/do-not-install-magick-baseconfig.h-repeatedly.patch
 new file mode 100644
-index 0000000..f332658
+index 0000000..114fb5e
 --- /dev/null
-+++ 
-b/meta-networking/recipes-support/arptables/arptables-0.0.3-4/arptables-remove-bashism.patch
-@@ -0,0 +1,37 @@
-+From cd312bc0e3686404428878d23b8888cba09a20e1 Mon Sep 17 00:00:00 2001
-+From: Robert Yang <liezhi.yang@windriver.com>
-+Date: Thu, 18 Sep 2014 19:46:58 -0700
-+Subject: [PATCH] arptables.sysv: remove bashism
++++ b/meta-oe/recipes-support/imagemagick/imagemagick/do-not-install-magick-baseconfig.h-repeatedly.patch
+@@ -0,0 +1,49 @@
++From bbdd42384d0b5f3ccb11465f63d90097579a1897 Mon Sep 17 00:00:00 2001
++From: Konrad Scherer <konrad.scherer@windriver.com>
++Date: Tue, 10 Jun 2014 15:43:16 +0800
++Subject: [PATCH] imagemagick: do not install magick-baseconfig.h repeatedly
 +
-+Use "." to replace of "source", and change /bin/bash to /bin/sh, the
-+echo $"foo" works well in busybox.
++Both targets install-data-local & install-includeHEADERS will install
++header file magick-baseconfig.h to the same location, and they might
++be run in the same time while enabling parallel build:
 +
-+Upstream-Status: Pending
++* target dependencies:
++  + install-data-am: ... install-data-local ... install-includeHEADERS
 +
-+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
++* make install error:
++  /usr/bin/install: cannot create regular file \
++  `.../usr/include/ImageMagick-6/magick/magick-baseconfig.h': \
++  File exists \
++  make[3]: *** [install-magickincarchHEADERS] Error 1
++
++* reproduce the error:
++  $ /usr/bin/install test /tmp & /usr/bin/install test /tmp
++  [1] 4052
++  /usr/bin/install: cannot create regular file `/tmp/test': File exists
++  [1]+  Exit 1                  /usr/bin/install test /tmp
++
++Just disable the one from install-data-local to remove this race issue.
++
++Upstream-Status: pending
++
++Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 +---
-+ arptables.sysv |    4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ magick/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/arptables.sysv b/arptables.sysv
-+index 7a90bd2..7710376 100644
-+--- a/arptables.sysv
-++++ b/arptables.sysv
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+ #
-+ # init script for arptables
-+ #
-+@@ -11,7 +11,7 @@
-+ #
-+ # config: __SYSCONFIG__/arptables
++diff --git a/magick/Makefile.am b/magick/Makefile.am
++index 2f72461..e45466c 100644
++--- a/magick/Makefile.am
+++++ b/magick/Makefile.am
++@@ -468,7 +468,7 @@ MAGICK_EXTRA_DIST = \
++ 	magick/xwdfile.h_vms 
++ 
++ # Install magick-baseconfig.h
++-MAGICK_INSTALL_DATA_LOCAL_TARGETS = magick-install-data-local
+++MAGICK_INSTALL_DATA_LOCAL_TARGETS =
++ magick-install-data-local:
++ 	$(mkinstalldirs) $(DESTDIR)$(magickincarchdir)
++ 	$(INSTALL_HEADER) magick/magick-baseconfig.h $(DESTDIR)$(magickincarchdir)/magick-baseconfig.h
++-- 
++1.8.2.1
 +
-+-source /etc/init.d/functions
-++. /etc/init.d/functions
-+ # source /etc/sysconfig/network
-+
-+ # Check that networking is up.
-+--
-+1.7.9.5
-+
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
+index 31207da..847ab34 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
+@@ -8,6 +8,7 @@ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
+ PATCHSET = "10"
+ SRC_URI = "http://www.imagemagick.org/download/legacy/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
+            file://remove.dist-lzip.patch \
++           file://do-not-install-magick-baseconfig.h-repeatedly.patch \
+ "
+ SRC_URI[md5sum] = "a3a0fa301965d6fde68fccd066f62b0b"
+ SRC_URI[sha256sum] = "8c0982b2bc0c1cea8ac9627b4e1e5d37f8171ef8282ee09aef32529cf68e1820"
+-- 
+1.7.9.5
 
-// Robert
-
->>
->> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->> ---
->>   .../recipes-support/arptables/arptables_0.0.3-4.bb |    2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
->> index 74f81b5..94920f9 100644
->> --- a/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
->> +++ b/meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb
->> @@ -5,7 +5,7 @@ SECTION = "console/network"
->>
->>   PR = "r2"
->>
->> -RDEPENDS_${PN} += "perl"
->> +RDEPENDS_${PN} += "perl bash"
->>
->>   LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
->>   SRC_URI = " \
->>
->
-> - --
-> - -Khem
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
-> Comment: GPGTools - https://gpgtools.org
->
-> iEYEARECAAYFAlQajN0ACgkQuwUzVZGdMxSHuACdFnp3LZpRjZsN3IVLm2tCCb8L
-> y2kAnRFWsf2R9HDvvAp1xUoSnQB9bZfQ
-> =ZfQX
-> -----END PGP SIGNATURE-----
->
 
