@@ -1,28 +1,28 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BBF57122B
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D8D770A0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 02:02:41 +0000 (UTC)
+	Fri, 19 Sep 2014 03:01:25 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8J22Uiw023083
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8J31PfT023100
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 18 Sep 2014 19:02:31 -0700 (PDT)
-Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 18 Sep 2014 19:02:30 -0700
-Message-ID: <541B8EB5.9030700@windriver.com>
-Date: Fri, 19 Sep 2014 10:02:29 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.0
+	Thu, 18 Sep 2014 20:01:25 -0700 (PDT)
+Received: from [128.224.162.141] (128.224.162.141) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 18 Sep 2014 20:01:25 -0700
+Message-ID: <541B9C89.3050508@windriver.com>
+Date: Fri, 19 Sep 2014 11:01:29 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:17.0) Gecko/20130623 Thunderbird/17.0.7
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Paul Eggleton
-	<paul.eggleton@linux.intel.com>
-References: <1410875680-1588-1-git-send-email-liezhi.yang@windriver.com>	<1569682.xrAECxOGjv@peggleto-mobl5.ger.corp.intel.com>
-	<54184BA6.9020907@windriver.com>
-In-Reply-To: <54184BA6.9020907@windriver.com>
-Subject: Re: [meta-oe] [PATCH] mariadb: drop anonymous function
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <53F40A50.4030509@windriver.com>
+	<2290847.YcZyNWaetr@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <2290847.YcZyNWaetr@peggleto-mobl5.ger.corp.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Should we set the LICENSE_FLAGS = "commercial" in meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,102 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Sep 2014 02:02:52 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
+X-List-Received-Date: Fri, 19 Sep 2014 03:01:29 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
 
 
-On 09/16/2014 10:39 PM, Robert Yang wrote:
+On 09/17/2014 06:26 PM, Paul Eggleton wrote:
+> Hi Roy,
 >
+> On Wednesday 20 August 2014 10:39:12 Rongqing Li wrote:
+>>       I see the recipes is using the binary file,
+>> http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.1
+>> 1-regulatory.bin Should we set the LICENSE_FLAGS = "commercial" in ]
+>> meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
 >
-> On 09/16/2014 10:30 PM, Paul Eggleton wrote:
->> Hi Robert,
->>
->> On Tuesday 16 September 2014 06:54:40 Robert Yang wrote:
->>> The anonymous function redefined bindir to bindir_noprefix (and others),
->>> which broke the sstate between build dirs. After checked the vars in
->>> CMakeCache.txt, we can drop it safely, and the builds are OK.
->>>
->>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
->>> ---
->>>   meta-oe/recipes-support/mysql/mariadb_5.5.39.inc |   28
->>> +++++++--------------- 1 file changed, 8 insertions(+), 20 deletions(-)
->>>
->>> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
->>> b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc index 9cc2cc9..f5c0a1f
->>> 100644
->>> --- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
->>> +++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
->>> @@ -35,18 +35,6 @@ SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
->>>
->>>   EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
->>>
->>> -python __anonymous() {
->>> -    # This is a pain but it's the only way to pass these in since
->>> -    # MariaDB's cmake scripts insist on prepending the prefix to the
->>> -    # specified values for INSTALL_*
->>> -    localdata = d.createCopy()
->>> -    localdata.setVar('prefix', '')
->>> -    localdata.setVar('exec_prefix', '')
->>> -    d.setVar('bindir_noprefix', localdata.getVar('bindir',
->>> True).lstrip('/')) -    d.setVar('sbindir_noprefix',
->>> localdata.getVar('sbindir', True).lstrip('/')) -
->>> d.setVar('datadir_noprefix', localdata.getVar('datadir', True).lstrip('/'))
->>> -    d.setVar('libdir_noprefix', localdata.getVar('libdir',
->>> True).lstrip('/')) -}
->>>
->>>   PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam',
->>> '', d)}" PACKAGECONFIG_class-native = ""
->>> @@ -64,15 +52,15 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
->>>                    -DNROFF=FALSE \
->>>                    -DENABLE_DTRACE=FALSE \
->>>                    -DWITH_PIC=ON \
->>> -                 -DINSTALL_DOCDIR:PATH=${datadir_noprefix}/doc/${BPN} \
->>> -                 -DINSTALL_BINDIR:PATH=${bindir_noprefix} \
->>> -                 -DINSTALL_SBINDIR:PATH=${sbindir_noprefix} \
->>> -                 -DINSTALL_SCRIPTDIR:PATH=${bindir_noprefix} \
->>> -                 -DINSTALL_LIBDIR:PATH=${libdir_noprefix} \
->>> -                 -DINSTALL_PLUGINDIR:PATH=${libdir_noprefix}/plugin \
->>> +                 -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
->>> +                 -DINSTALL_BINDIR:PATH=${bindir} \
->>> +                 -DINSTALL_SBINDIR:PATH=${sbindir} \
->>> +                 -DINSTALL_SCRIPTDIR:PATH=${bindir} \
->>> +                 -DINSTALL_LIBDIR:PATH=${libdir} \
->>> +                 -DINSTALL_PLUGINDIR:PATH=${libdir}/plugin \
->>>                    -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
->>> -                 -DINSTALL_MYSQLSHAREDIR:PATH=${datadir_noprefix}/mysql \
->>> -
->>> -DINSTALL_SUPPORTFILESDIR:PATH=${datadir_noprefix}/mysql-support-files \ +
->>>                 -DINSTALL_MYSQLSHAREDIR:PATH=${datadir}/mysql \
->>> +
->>> -DINSTALL_SUPPORTFILESDIR:PATH=${datadir}/mysql-support-files \
->>> -DMYSQL_DATADIR:PATH=/var/mysql \
->>>                    -DCAT_EXECUTABLE=`which cat` \
->>>                    -DCMAKE_AR:FILEPATH=${AR}"
->>
->> I'm pretty sure I tested this beforehand; the problem I found is that some of
->> the scripts end up with the prefix twice in substituted paths because it is
->> expected that the paths supplied at configuration time do not include the
->> prefix, but our paths normally include them.
->>
->> Did you do runtime tests with this change?
+> It depends on what the terms of distribution are for that binary. I could be
+> wrong, but it looks to me as if this is a binary version of the wireless-regdb
+> database [1], which is ISC licensed. If that is the case then LICENSE_FLAGS =
+> "commercial" wouldn't be needed.
 >
-> Thanks, not yet, I will do and reply later.
+> Cheers,
+> Paul
 
-Hi Paul,
+I see, thanks for your reply.
 
-You are right, there are problems when runtime testing. I will try to fix
-it in another way, we need fix it is because it breaks the sstate which depends
-on mariadb. (and several ones)
-
-// Robert
+-Roy
 
 >
-> // Robert
+> [1] http://wireless.kernel.org/en/developers/Regulatory/wireless-regdb
 >
->>
->> Cheers,
->> Paul
->>
+
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
