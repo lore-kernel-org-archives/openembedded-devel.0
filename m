@@ -1,33 +1,28 @@
-Return-Path: <zboszor@pr.hu>
-Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id D9A1B6FEA8
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BBF57122B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Sep 2014 13:17:18 +0000 (UTC)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>)
-	id 1XUbaH-0001RS-9g; Thu, 18 Sep 2014 15:17:17 +0200
-Received: from host-87-242-31-61.prtelecom.hu ([87.242.31.61]
-	helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>)
-	id 1XUbaC-0001Ha-RP; Thu, 18 Sep 2014 15:17:15 +0200
-Message-ID: <541ADB55.8080108@pr.hu>
-Date: Thu, 18 Sep 2014 15:17:09 +0200
-From: Boszormenyi Zoltan <zboszor@pr.hu>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	Fri, 19 Sep 2014 02:02:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8J22Uiw023083
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 18 Sep 2014 19:02:31 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.174.1;
+	Thu, 18 Sep 2014 19:02:30 -0700
+Message-ID: <541B8EB5.9030700@windriver.com>
+Date: Fri, 19 Sep 2014 10:02:29 +0800
+From: Robert Yang <liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
 	rv:31.0) Gecko/20100101 Thunderbird/31.0
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>, 
-	openembedded-devel@lists.openembedded.org
-References: <541AD1C0.8000008@pr.hu>
-	<1614913.ETddqcUbxW@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <1614913.ETddqcUbxW@peggleto-mobl5.ger.corp.intel.com>
-X-Spam-Score: 0.8 (/)
-X-Scan-Signature: 85009d953b1791c297252820971497a4
-X-Spam-Tracer: backend.mail.pr.hu 0.8 20140918131715Z
-Cc: angstrom-distro-devel@linuxtogo.org, Christian Betz <cbetz@sicom.com>
-Subject: Re: SSL crypto broken in Daisy?
+To: <openembedded-devel@lists.openembedded.org>, Paul Eggleton
+	<paul.eggleton@linux.intel.com>
+References: <1410875680-1588-1-git-send-email-liezhi.yang@windriver.com>	<1569682.xrAECxOGjv@peggleto-mobl5.ger.corp.intel.com>
+	<54184BA6.9020907@windriver.com>
+In-Reply-To: <54184BA6.9020907@windriver.com>
+Subject: Re: [meta-oe] [PATCH] mariadb: drop anonymous function
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,69 +36,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Sep 2014 13:17:22 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Sep 2014 02:02:52 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
 
-2014-09-18 14:41 keltezéssel, Paul Eggleton írta:
-> Hi Zoltán,
+
+On 09/16/2014 10:39 PM, Robert Yang wrote:
 >
-> On Thursday 18 September 2014 14:36:16 Boszormenyi Zoltan wrote:
->> I have built systemd-gnome-image from Daisy-based Angström using
->> instructions from
->>
->> http://wp.angstrom-distribution.org/?page_id=53
->>
->> The set of layers include "meta-intel" and I use the "genericx86" CPU.
->>
->> The image I have has curl installed and whenever I want to use an https://
->> URL from the internal LAN it fails with:
->>
->> ========================================
->> curl: (35) gnutls_handshake() failed: Handshake failed
->> ========================================
->>
->> The same happens with and without option "-k" (or "--insecure") to curl.
->>
->> The webserver's cert is not actually right, as I get this when I use curl
->> from Fedora 19, 20 or 21Alpha:
->>
->> ========================================
->> curl: (60) Peer's Certificate issuer is not recognized.
->> More details here: http://curl.haxx.se/docs/sslcerts.html
->>
->> curl performs SSL certificate verification by default, using a "bundle"
->>  of Certificate Authority (CA) public keys (CA certs). If the default
->>  bundle file isn't adequate, you can specify an alternate file
->>  using the --cacert option.
->> If this HTTPS server uses a certificate signed by a CA represented in
->>  the bundle, the certificate verification probably failed due to a
->>  problem with the certificate (it might be expired, or the name might
->>  not match the domain name in the URL).
->> If you'd like to turn off curl's verification of the certificate, use
->>  the -k (or --insecure) option.
->> ========================================
->>
->> But using "curl -k" with the same URL from the *Fedora client* fetches the
->> data properly.
->>
->> Is this problem already known in Daisy or Daisy-based Angström?
-> Hmm, this sounds like it might be related to the following bug:
 >
-> https://bugzilla.yoctoproject.org/show_bug.cgi?id=6708
+> On 09/16/2014 10:30 PM, Paul Eggleton wrote:
+>> Hi Robert,
+>>
+>> On Tuesday 16 September 2014 06:54:40 Robert Yang wrote:
+>>> The anonymous function redefined bindir to bindir_noprefix (and others),
+>>> which broke the sstate between build dirs. After checked the vars in
+>>> CMakeCache.txt, we can drop it safely, and the builds are OK.
+>>>
+>>> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+>>> ---
+>>>   meta-oe/recipes-support/mysql/mariadb_5.5.39.inc |   28
+>>> +++++++--------------- 1 file changed, 8 insertions(+), 20 deletions(-)
+>>>
+>>> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
+>>> b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc index 9cc2cc9..f5c0a1f
+>>> 100644
+>>> --- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
+>>> +++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
+>>> @@ -35,18 +35,6 @@ SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
+>>>
+>>>   EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
+>>>
+>>> -python __anonymous() {
+>>> -    # This is a pain but it's the only way to pass these in since
+>>> -    # MariaDB's cmake scripts insist on prepending the prefix to the
+>>> -    # specified values for INSTALL_*
+>>> -    localdata = d.createCopy()
+>>> -    localdata.setVar('prefix', '')
+>>> -    localdata.setVar('exec_prefix', '')
+>>> -    d.setVar('bindir_noprefix', localdata.getVar('bindir',
+>>> True).lstrip('/')) -    d.setVar('sbindir_noprefix',
+>>> localdata.getVar('sbindir', True).lstrip('/')) -
+>>> d.setVar('datadir_noprefix', localdata.getVar('datadir', True).lstrip('/'))
+>>> -    d.setVar('libdir_noprefix', localdata.getVar('libdir',
+>>> True).lstrip('/')) -}
+>>>
+>>>   PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam',
+>>> '', d)}" PACKAGECONFIG_class-native = ""
+>>> @@ -64,15 +52,15 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
+>>>                    -DNROFF=FALSE \
+>>>                    -DENABLE_DTRACE=FALSE \
+>>>                    -DWITH_PIC=ON \
+>>> -                 -DINSTALL_DOCDIR:PATH=${datadir_noprefix}/doc/${BPN} \
+>>> -                 -DINSTALL_BINDIR:PATH=${bindir_noprefix} \
+>>> -                 -DINSTALL_SBINDIR:PATH=${sbindir_noprefix} \
+>>> -                 -DINSTALL_SCRIPTDIR:PATH=${bindir_noprefix} \
+>>> -                 -DINSTALL_LIBDIR:PATH=${libdir_noprefix} \
+>>> -                 -DINSTALL_PLUGINDIR:PATH=${libdir_noprefix}/plugin \
+>>> +                 -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
+>>> +                 -DINSTALL_BINDIR:PATH=${bindir} \
+>>> +                 -DINSTALL_SBINDIR:PATH=${sbindir} \
+>>> +                 -DINSTALL_SCRIPTDIR:PATH=${bindir} \
+>>> +                 -DINSTALL_LIBDIR:PATH=${libdir} \
+>>> +                 -DINSTALL_PLUGINDIR:PATH=${libdir}/plugin \
+>>>                    -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
+>>> -                 -DINSTALL_MYSQLSHAREDIR:PATH=${datadir_noprefix}/mysql \
+>>> -
+>>> -DINSTALL_SUPPORTFILESDIR:PATH=${datadir_noprefix}/mysql-support-files \ +
+>>>                 -DINSTALL_MYSQLSHAREDIR:PATH=${datadir}/mysql \
+>>> +
+>>> -DINSTALL_SUPPORTFILESDIR:PATH=${datadir}/mysql-support-files \
+>>> -DMYSQL_DATADIR:PATH=/var/mysql \
+>>>                    -DCAT_EXECUTABLE=`which cat` \
+>>>                    -DCMAKE_AR:FILEPATH=${AR}"
+>>
+>> I'm pretty sure I tested this beforehand; the problem I found is that some of
+>> the scripts end up with the prefix twice in substituted paths because it is
+>> expected that the paths supplied at configuration time do not include the
+>> prefix, but our paths normally include them.
+>>
+>> Did you do runtime tests with this change?
+>
+> Thanks, not yet, I will do and reply later.
 
-Yes, it sounds like it, but wget (in my tree currently built against gnutls) works when
-the cert is ignored.
-I'll try building curl against OpenSSL in my tree.
+Hi Paul,
 
-Thanks,
-Zoltán Böszörményi
+You are right, there are problems when runtime testing. I will try to fix
+it in another way, we need fix it is because it breaks the sstate which depends
+on mariadb. (and several ones)
+
+// Robert
 
 >
-> Cheers,
-> Paul
+> // Robert
 >
-
+>>
+>> Cheers,
+>> Paul
+>>
 
