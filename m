@@ -1,27 +1,24 @@
-Return-Path: <Pengyu.Ma@windriver.com>
+Return-Path: <joe.slater@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B31B6FE3B
+	by mail.openembedded.org (Postfix) with ESMTP id 0545C7142A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 10:38:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8JAc8FF029532
+	Fri, 19 Sep 2014 19:22:49 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8JJMnWx005360
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 03:38:08 -0700 (PDT)
-Received: from pek-bsp-build1.wrs.com (128.224.179.105) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.174.1; Fri, 19 Sep 2014 03:38:08 -0700
-From: Pengyu Ma <pengyu.ma@windriver.com>
-To: <pengyu.ma@windriver.com>, <Bruce.Ashfield@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Sep 2014 18:33:37 +0800
-Message-ID: <1411122818-121055-3-git-send-email-pengyu.ma@windriver.com>
-X-Mailer: git-send-email 1.8.1.2
-In-Reply-To: <1411122818-121055-1-git-send-email-pengyu.ma@windriver.com>
-References: <1411122818-121055-1-git-send-email-pengyu.ma@windriver.com>
+	Fri, 19 Sep 2014 12:22:50 -0700 (PDT)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Fri, 19 Sep 2014 12:22:49 -0700
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Sep 2014 12:22:49 -0700
+Message-ID: <1411154569-2625-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-Subject: [PATCH 2/3] kexec/kdump: add metadata for to enable kexec/dump.
+Subject: [meta-networking][PATCH 1/1] radvd: update to 1.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,95 +32,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Sep 2014 10:38:11 -0000
+X-List-Received-Date: Fri, 19 Sep 2014 19:23:01 -0000
 Content-Type: text/plain
 
-Signed-off-by: Pengyu Ma <pengyu.ma@windriver.com>
----
- meta/cfg/kernel-cache/features/kdump/e500-kdump.cfg   | 2 ++
- meta/cfg/kernel-cache/features/kdump/e500-kdump.scc   | 1 +
- meta/cfg/kernel-cache/features/kdump/kdump-enable.scc | 4 ++++
- meta/cfg/kernel-cache/features/kdump/kdump.cfg        | 3 +++
- meta/cfg/kernel-cache/features/kexec/e500-kexec.cfg   | 1 +
- meta/cfg/kernel-cache/features/kexec/e500-kexec.scc   | 1 +
- meta/cfg/kernel-cache/features/kexec/kexec-enable.scc | 4 ++++
- meta/cfg/kernel-cache/features/kexec/kexec.cfg        | 1 +
- 8 files changed, 17 insertions(+)
- create mode 100644 meta/cfg/kernel-cache/features/kdump/e500-kdump.cfg
- create mode 100644 meta/cfg/kernel-cache/features/kdump/e500-kdump.scc
- create mode 100644 meta/cfg/kernel-cache/features/kdump/kdump-enable.scc
- create mode 100644 meta/cfg/kernel-cache/features/kdump/kdump.cfg
- create mode 100644 meta/cfg/kernel-cache/features/kexec/e500-kexec.cfg
- create mode 100644 meta/cfg/kernel-cache/features/kexec/e500-kexec.scc
- create mode 100644 meta/cfg/kernel-cache/features/kexec/kexec-enable.scc
- create mode 100644 meta/cfg/kernel-cache/features/kexec/kexec.cfg
+No changes except to source version.
 
-diff --git a/meta/cfg/kernel-cache/features/kdump/e500-kdump.cfg b/meta/cfg/kernel-cache/features/kdump/e500-kdump.cfg
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../recipes-daemons/radvd/radvd_1.14.bb            |    6 ++++++
+ .../recipes-daemons/radvd/radvd_1.9.8.bb           |    6 ------
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/radvd/radvd_1.14.bb
+ delete mode 100644 meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
+
+diff --git a/meta-networking/recipes-daemons/radvd/radvd_1.14.bb b/meta-networking/recipes-daemons/radvd/radvd_1.14.bb
 new file mode 100644
-index 0000000..25ac017
+index 0000000..bf572e3
 --- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kdump/e500-kdump.cfg
-@@ -0,0 +1,2 @@
-+CONFIG_ADVANCED_OPTIONS=y
-+CONFIG_DYNAMIC_MEMSTART=y
-diff --git a/meta/cfg/kernel-cache/features/kdump/e500-kdump.scc b/meta/cfg/kernel-cache/features/kdump/e500-kdump.scc
-new file mode 100644
-index 0000000..299742d
---- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kdump/e500-kdump.scc
-@@ -0,0 +1 @@
-+kconf non-hardware e500-kdump.cfg
-diff --git a/meta/cfg/kernel-cache/features/kdump/kdump-enable.scc b/meta/cfg/kernel-cache/features/kdump/kdump-enable.scc
-new file mode 100644
-index 0000000..69a7dd3
---- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kdump/kdump-enable.scc
-@@ -0,0 +1,4 @@
-+define KFEATURE_DESCRIPTION "Enable Kdump - The kexec-based Crash Dumping Solution"
-+define KFEATURE_COMPATIBILITY optional
++++ b/meta-networking/recipes-daemons/radvd/radvd_1.14.bb
+@@ -0,0 +1,6 @@
 +
-+kconf non-hardware kdump.cfg
-diff --git a/meta/cfg/kernel-cache/features/kdump/kdump.cfg b/meta/cfg/kernel-cache/features/kdump/kdump.cfg
-new file mode 100644
-index 0000000..8429ad8
---- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kdump/kdump.cfg
-@@ -0,0 +1,3 @@
-+CONFIG_CRASH_DUMP=y
-+CONFIG_PROC_VMCORE=y
-+# CONFIG_STRICT_DEVMEM is not set
-diff --git a/meta/cfg/kernel-cache/features/kexec/e500-kexec.cfg b/meta/cfg/kernel-cache/features/kexec/e500-kexec.cfg
-new file mode 100644
-index 0000000..7cf51ea
---- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kexec/e500-kexec.cfg
-@@ -0,0 +1 @@
-+CONFIG_PROC_DEVICETREE=y
-diff --git a/meta/cfg/kernel-cache/features/kexec/e500-kexec.scc b/meta/cfg/kernel-cache/features/kexec/e500-kexec.scc
-new file mode 100644
-index 0000000..6c58fa5
---- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kexec/e500-kexec.scc
-@@ -0,0 +1 @@
-+kconf non-hardware e500-kexec.cfg
-diff --git a/meta/cfg/kernel-cache/features/kexec/kexec-enable.scc b/meta/cfg/kernel-cache/features/kexec/kexec-enable.scc
-new file mode 100644
-index 0000000..54181ab
---- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kexec/kexec-enable.scc
-@@ -0,0 +1,4 @@
-+define KFEATURE_DESCRIPTION "Enable Kexec - live kernel execution"
-+define KFEATURE_COMPATIBILITY optional
++require radvd.inc
 +
-+kconf non-hardware kexec.cfg
-diff --git a/meta/cfg/kernel-cache/features/kexec/kexec.cfg b/meta/cfg/kernel-cache/features/kexec/kexec.cfg
-new file mode 100644
-index 0000000..b45488d
---- /dev/null
-+++ b/meta/cfg/kernel-cache/features/kexec/kexec.cfg
-@@ -0,0 +1 @@
-+CONFIG_KEXEC=y
++SRC_URI[md5sum] = "a257e05bd6a435ef948d3b407726d56f"
++SRC_URI[sha256sum] = "3b16dd9ef3d6c8b889cdabfdb16c81db8bd61b0f1fc42f6acc52d3cf300c6d07"
++
+diff --git a/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb b/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
+deleted file mode 100644
+index 407eb43..0000000
+--- a/meta-networking/recipes-daemons/radvd/radvd_1.9.8.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-PR = "r0"
+-
+-require radvd.inc
+-
+-SRC_URI[md5sum] = "7a96a38252c3964ee18bbc1fdeae25fa"
+-SRC_URI[sha256sum] = "645ccf1c9b16e769ff4179813712e580e2c8786d64a888d8afa1e296c057c1c1"
 -- 
-1.8.1.2
+1.7.3.4
 
 
