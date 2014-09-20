@@ -1,34 +1,22 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 468736FAEC
+Return-Path: <todd.e.brandt@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 915A270FAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 21:09:37 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id d1so221727wiv.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Sep 2014 14:09:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=A18YT5/r9/lYvfy5q6vrLkVKLiOxf85snkYW5ine6NY=;
-	b=d315aHcEvOnrCJqUaxuNvnWHSukDk+522zNXKlgIXHBK3xrpAtC3JYzYQq0DXR72b6
-	V20Cw0ITCgFBJdGEMZaLmlxOykbUxWo+1uNIIxqYwoMiXG/THaAcl0vhhawKHESke3//
-	H6QwKJgC/sXtHzFkocKPLN0CrfxVetvDABWXEI8bxAJ7p9YNSNqJkZm1nOqsFefuteEy
-	+6VBBcVv0L7Bd0S/+uEox/4j4twPl9ilmFtYbQWPhoRzQ+REWZsLIlVcTcRv90K8ijct
-	ScWX6sfy3dnhNREOFWsU3QQCi7TOozCMV76rz1OIddKnNqVJ0m1WaqYxgYlK73kxFgrH
-	DZXw==
-X-Received: by 10.180.84.193 with SMTP id b1mr585135wiz.40.1411160978703;
-	Fri, 19 Sep 2014 14:09:38 -0700 (PDT)
-Received: from mizar.208.67.220.220 ([87.13.50.36])
-	by mx.google.com with ESMTPSA id mc20sm3312135wic.2.2014.09.19.14.09.37
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 19 Sep 2014 14:09:37 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 20 Sep 2014 00:30:43 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga102.fm.intel.com with ESMTP; 19 Sep 2014 17:30:45 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="388868936"
+Received: from gmacartn-mobl.ger.corp.intel.com (HELO linux.intel.com)
+	([10.255.13.38])
+	by FMSMGA003.fm.intel.com with ESMTP; 19 Sep 2014 17:25:06 -0700
+Date: Fri, 19 Sep 2014 17:30:45 -0700
+From: Todd E Brandt <todd.e.brandt@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Sep 2014 23:09:29 +0200
-Message-Id: <1411160969-15259-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH v2] klibc: klcc: consider --sysroot option and override gcc-cross encoded sysroot
+Message-ID: <20140920003044.GA30844@linux.intel.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [PATCH v2] Phoronix Test Suite package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,72 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Sep 2014 21:09:39 -0000
+X-List-Received-Date: Sat, 20 Sep 2014 00:30:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-For the recipes built with klcc-cross it is necessary to
-pass --sysroot otherwise we default to the one encoded in gcc-cross which
-actually is the 'first one' built.
-The issue was revealed when building for armv4 after having built for armv5te:
-the produced binaries did contain Illegal Instruction (bx lr).
+This is the package recipe for the phoronix test suite v5.2.1. The
+tool is for benchmarking and testing of the system.
 
-Use ${TOOLCHAIN_OPTIONS} variable to specify --sysroot=${STAGING_DIR_TARGET}
+Signed-off-by: Todd Brandt <todd.e.brandt@linux.intel.com>
+----
+ meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/classes/klibc.bbclass                       |  4 ++--
- .../klibc/klibc-2.0.4/klcc-consider-sysroot.patch          | 14 ++++++++++++++
- meta-initramfs/recipes-devtools/klibc/klibc.inc            |  1 +
- 3 files changed, 17 insertions(+), 2 deletions(-)
- create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+v2:
+- changes based on Ross Burton's comments. However, I kept this line:
+S = "${WORKDIR}/phoronix-test-suite", since the tarball folder doesn't
+include the version number.
+- moved the recipe from recipes-devtools to recipes-benchmark
+- changed the section from tests to console/tests
 
-diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
-index ca741cd..f864104 100644
---- a/meta-initramfs/classes/klibc.bbclass
-+++ b/meta-initramfs/classes/klibc.bbclass
-@@ -4,8 +4,8 @@ DEPENDS =+ "klcc-cross"
- # Default for klcc is to build static binaries.
- # Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
- 
--export CC = "${TARGET_PREFIX}klcc"
--export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc -march=armv4 -mthumb-interwork"
-+export CC = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
-+export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
- 
- export CPP = "${CC} -E"
- 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
 new file mode 100644
-index 0000000..9bc4835
+index 0000000..af5eb54
 --- /dev/null
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/klcc-consider-sysroot.patch
-@@ -0,0 +1,14 @@
-+diff --git a/klcc/klcc.in b/klcc/klcc.in
-+index 43d0984..61e9385 100644
-+--- a/klcc/klcc.in
-++++ b/klcc/klcc.in
-+@@ -204,6 +204,9 @@ while ( defined($a = shift(@ARGV)) ) {
-+ 	# Libraries
-+ 	push(@libs, $a);
-+ 	push(@libs, shift(@ARGV)) if ( $2 eq '' );
-++    } elsif ( $a =~ /^--([sysroot=])(.*)$/ ) {
-++	# Override gcc encoded sysroot
-++	push(@ccopt, $a);
-+     } else {
-+ 	die "$0: unknown option: $a\n";
-+     }
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 0209b20..f3e9972 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -16,6 +16,7 @@ SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
-                                     "
- SRC_URI += "file://klibc-linux-libc-dev.patch \
-             file://staging.patch \
-+            file://klcc-consider-sysroot.patch \
-             "
- 
- S = "${WORKDIR}/git"
--- 
-1.9.1
-
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Phoronix Test Suite"
++DESCRIPTION = "The Phoronix Test Suite is designed to carry out both qualitative \
++and quantitative benchmarks in a clean, reproducible, and easy-to-use manner."
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://../phoronix-test-suite/COPYING;md5=d32239bcb673463ab874e80d47fae504"
++RDEPENDS_${PN} = "php-cli"
++SECTION = "console/tests"
++
++SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
++SRC_URI[md5sum] = "51e52d883710dc516c5494bd1c377219"
++SRC_URI[sha256sum] = "1186f460691e2fe7a07df5edb8d8ed1ac0c65327512e646da2b2e3a60dda6cd9"
++S = "${WORKDIR}/phoronix-test-suite"
++
++do_install() {
++	DESTDIR=${D} ./install-sh ${exec_prefix}
++}
++
++FILES_${PN} += " \
++	${datadir}/phoronix-test-suite \
++	${datadir}/appdata/phoronix-test-suite.appdata.xml \
++	${datadir}/icons/hicolor/48x48/apps/phoronix-test-suite.png \
++	${datadir}/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png \
++	${datadir}/mime/packages/openbenchmarking-mime.xml \
++"
 
