@@ -1,34 +1,38 @@
 Return-Path: <damann@sensoft.ca>
-Received: from p02c12o141.mxlogic.net (p02c12o141.mxlogic.net [208.65.145.74])
-	by mail.openembedded.org (Postfix) with ESMTP id 88BC77148B
+Received: from p01c12o147.mxlogic.net (p01c12o147.mxlogic.net [208.65.145.70])
+	by mail.openembedded.org (Postfix) with ESMTP id C2A8B7148B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Sep 2014 15:28:29 +0000 (UTC)
+	Mon, 22 Sep 2014 15:28:40 +0000 (UTC)
 Received: from unknown [66.252.158.210] (EHLO SS08EX01.sensoft.ca)
-	by p02c12o141.mxlogic.net(mxl_mta-8.1.0-0) over TLS secured channel
-	with ESMTP id f1040245.0.623.00-317.1551.p02c12o141.mxlogic.net
+	by p01c12o147.mxlogic.net(mxl_mta-8.1.0-0) with ESMTP id
+	d2040245.2b4256803940.54110.00-526.158536.p01c12o147.mxlogic.net
 	(envelope-from <damann@sensoft.ca>); 
-	Mon, 22 Sep 2014 09:28:34 -0600 (MDT)
-X-MXL-Hash: 5420402226b35687-db5503bb829a3d2fdce30417f40ba4a02e86e774
+	Mon, 22 Sep 2014 09:28:45 -0600 (MDT)
+X-MXL-Hash: 5420402d39f558a9-e1453677109fcd81e8930abc23a82e72dbd5bec6
+Received: from unknown [66.252.158.210] (EHLO SS08EX01.sensoft.ca)
+	by p01c12o147.mxlogic.net(mxl_mta-8.1.0-0) over TLS secured channel
+	with ESMTP id 55e30245.0.48353.00-336.141499.p01c12o147.mxlogic.net
+	(envelope-from <damann@sensoft.ca>); 
+	Mon, 22 Sep 2014 09:20:57 -0600 (MDT)
+X-MXL-Hash: 54203e5940e1f99c-4c9dd97e186f068f9f96db78725d769060488c95
 Received: from smart-dev.sensoft.ca (192.168.20.10) by SS08EX01.sensoft.ca
 	(192.168.1.251) with Microsoft SMTP Server (TLS) id 14.3.181.6;
-	Mon, 22 Sep 2014 11:28:30 -0400
+	Mon, 22 Sep 2014 11:20:52 -0400
 From: Dominic Amann <damann@sensoft.ca>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 22 Sep 2014 11:28:07 -0400
-Message-ID: <1411399687-11026-2-git-send-email-damann@sensoft.ca>
+Date: Mon, 22 Sep 2014 11:20:32 -0400
+Message-ID: <1411399233-10947-1-git-send-email-damann@sensoft.ca>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1411399687-11026-1-git-send-email-damann@sensoft.ca>
-References: <1411399687-11026-1-git-send-email-damann@sensoft.ca>
 MIME-Version: 1.0
 X-Originating-IP: [192.168.20.10]
-X-AnalysisOut: [v=2.1 cv=dd+U3Bne c=1 sm=1 tr=0 a=+YBCmPgfixlKXhXEnacbWQ==]
-X-AnalysisOut: [:117 a=+YBCmPgfixlKXhXEnacbWQ==:17 a=_N-Zv5Bu6F4A:10 a=sSX]
-X-AnalysisOut: [SHqx3E8cA:10 a=czRwm6Ba6okA:10 a=BLceEmwcHowA:10 a=YlVTAMx]
+X-AnalysisOut: [v=2.1 cv=eLkHjRZ1 c=1 sm=1 tr=0 a=+YBCmPgfixlKXhXEnacbWQ==]
+X-AnalysisOut: [:117 a=+YBCmPgfixlKXhXEnacbWQ==:17 a=_sLur_I5wLgA:10 a=VIn]
+X-AnalysisOut: [PDrAyZ4UA:10 a=czRwm6Ba6okA:10 a=BLceEmwcHowA:10 a=YlVTAMx]
 X-AnalysisOut: [IAAAA:8 a=-dGsusbfJyfx8UUQddIA:9]
 X-Spam: [F=0.5000000000; CM=0.500; MH=0.500(2014092212); S=0.200(2014051901)]
 X-MAIL-FROM: <damann@sensoft.ca>
 X-SOURCE-IP: [66.252.158.210]
-Subject: [meta-oe][daisy][PATCH] Fixed repo path for libmikmod, was changed in sourceforge
+Subject: [meta-fsl-arm][PATCH] Fixed repo path for libmikmod, was changed in sourceforge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,9 +46,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Sep 2014 15:28:33 -0000
+X-List-Received-Date: Mon, 22 Sep 2014 15:28:44 -0000
 Content-Type: text/plain
 
+
+Signed-off-by: Dominic Amann <damann@sensoft.ca>
 ---
  .../recipes-multimedia/mikmod/libmikmod_3.3.3.bb   |    4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
