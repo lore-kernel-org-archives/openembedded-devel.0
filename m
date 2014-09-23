@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
-	[74.125.82.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D8C69609BF
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6327260167
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 16:50:35 +0000 (UTC)
-Received: by mail-we0-f180.google.com with SMTP id u56so4899736wes.39
+	Tue, 23 Sep 2014 16:56:14 +0000 (UTC)
+Received: by mail-wi0-f179.google.com with SMTP id d1so5530324wiv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 09:50:36 -0700 (PDT)
+	Tue, 23 Sep 2014 09:56:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=UPahVMdRQa6mFK8qxwOk3xATLCYDsKtRkxmkpIqdWVQ=;
-	b=zavtXknuvHltRCG/iNATKemXW+SKfCqQyPAIiGSF4FPfn/ZtFqLLk/5gsGXGsA7Woj
-	m6xDnA4TTO1uqc9BY/GxGhsG+WoHl3l0g5CoSk+1fVsrV8RHXCMbZZbhcxefFm21CPwU
-	/uZCLTLkNk6RokOarSKBKM5pqZ+EMRJ/PGIGrA2sb1PtUIDvv479UIQpzvXrcQ8SQDMe
-	WBNfeRGHYS9CotsB92kE/+t+9UuGyUnLUo89m0W+aYjoE6Ir9HX+JyLJ0aOY4fChzJ7R
-	ApPHgyyM9kgz/2KqKlrOdzOmKI1Cp1YaqUHAdhbSHCFzk2lvwPzKMmcBYaQrLuDsIt7g
-	NHNQ==
-X-Received: by 10.180.96.36 with SMTP id dp4mr4816203wib.33.1411491036483;
-	Tue, 23 Sep 2014 09:50:36 -0700 (PDT)
+	bh=yrVPhZsTXmukqh/1vZ7/UV8v/+Dc4dvsHHfhh/QuHB8=;
+	b=G2LmrdrgM6tzQYlmObSQBcNtPRyYQbUb96TEgFUS07kN9n70atHD0nH6CtYjA/LIWM
+	wUtevPSI9OeL63QckcoO8+UAaI+w6nCoW5fNlOCQtiqWohgikNaEWA65vm8fnpRp4smY
+	Lf+5nrhuGBcHH7hw+Y5IN0U9Si92cpFnC8hS1uELStYaQk94bHwpQuByZoOOarWsgx/L
+	tyiZfOKDpFRJTLM8FRoGugdVXhQmzcd8fN1obF7bBvAQ0M/AUvQxnSG1vFOhd20/7qc1
+	S9ElfxH71yzBJmF+kvu3sy2lBem9MwMdx+amVEBgUIh+bMvJpY+MWsnZTSPQzorUL5pg
+	j2yA==
+X-Received: by 10.180.78.226 with SMTP id e2mr4994512wix.68.1411491375065;
+	Tue, 23 Sep 2014 09:56:15 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	hh7sm6297344wjb.34.2014.09.23.09.50.35
+	ic8sm16535859wjb.25.2014.09.23.09.56.14
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Sep 2014 09:50:35 -0700 (PDT)
+	Tue, 23 Sep 2014 09:56:14 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 23 Sep 2014 18:51:20 +0200
+Date: Tue, 23 Sep 2014 18:56:59 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140923165120.GB25706@jama>
-References: <1411399687-11026-1-git-send-email-damann@sensoft.ca>
+Message-ID: <20140923165659.GC25706@jama>
+References: <BLU436-SMTP9355D4FBC3BF05DD79ABFBD6B60@phx.gbl>
 MIME-Version: 1.0
-In-Reply-To: <1411399687-11026-1-git-send-email-damann@sensoft.ca>
+In-Reply-To: <BLU436-SMTP9355D4FBC3BF05DD79ABFBD6B60@phx.gbl>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-fsl-arm][PATCH] Fixed repo path for libmikmod, was changed in sourceforge
+Subject: Re: [meta-networking][PATCH] cyassl: update to version 3.2.0, remove 3.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,56 +48,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2014 16:50:39 -0000
-X-Groupsio-MsgNum: 52191
+X-List-Received-Date: Tue, 23 Sep 2014 16:56:17 -0000
+X-Groupsio-MsgNum: 52192
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="R3G7APHDIzY6R/pk"
+	protocol="application/pgp-signature"; boundary="JWEK1jqKZ6MHAcjA"
 Content-Disposition: inline
 
---R3G7APHDIzY6R/pk
+--JWEK1jqKZ6MHAcjA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 22, 2014 at 11:28:06AM -0400, Dominic Amann wrote:
+On Wed, Sep 17, 2014 at 10:34:49AM -0600, lchristina26 wrote:
+> This release includes bug fixes and several new features
+> which we think will be beneficial to our user and customer base.
+
+You haven't added 3.2.0 version in this patch and your earlier patch
+contains exactly the same SRC_URI checksums as 3.1.0 version which looks
+very suspicious.
+
+Please re-test and re-send.
+
 >=20
-
-Doesn't apply, because we have 3.3.6 for some time:
-commit 033964b269f448b2f330ef48e51dfa5611f1a650
-Author: Tim Orling <TicoTimo@gmail.com>
-Date:   Tue May 27 08:12:14 2014 -0700
-
-    libmikmod: update to 3.3.6
-
-also the meta-fsl-arm tag is incorrect.
-
-> Signed-off-by: Dominic Amann <damann@sensoft.ca>
+> Signed-off-by: Leah Thompson <lchristina26@hotmail.com>
 > ---
->  .../recipes-multimedia/mikmod/libmikmod_3.3.3.bb   |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  .../recipes-connectivity/cyassl/cyassl_3.1.0.bb        | 18 ------------=
+------
+>  1 file changed, 18 deletions(-)
+>  delete mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.=
+1.0.bb
 >=20
-> diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb b/meta-=
-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-> index 6a3077f..7f9651f 100644
-> --- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-> +++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
-> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING.LESSER;md5=3Db2b941d=
-484c442e5c031a51463d8e11b"
->  DEPENDS =3D "alsa-lib texinfo"
-> =20
->  SRC_URI =3D "\
-> -    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.g=
-z \
-> -"
-> +    ${SOURCEFORGE_MIRROR}/project/mikmod/outdated_versions/${BPN}/${PV}/=
-${BPN}-${PV}.tar.gz\
-> +	"
->  SRC_URI[md5sum] =3D "0e0f9bce8f8e598ca292b41e0ae385c8"
->  SRC_URI[sha256sum] =3D "79f02478c5abd8b2af73df4cc5f9d52625aa044327c01563=
-168e270cf79b2437"
-> =20
+> diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb =
+b/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+> deleted file mode 100644
+> index 0c0cac2..0000000
+> --- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.1.0.bb
+> +++ /dev/null
+> @@ -1,18 +0,0 @@
+> -SUMMARY =3D "CyaSSL Embedded SSL Library"
+> -DESCRIPTION =3D "CyaSSL is a lightweight SSL library written in C and \
+> -               optimized for embedded and RTOS environments. It can be \
+> -               Up to 20 times smaller than OpenSSL while still supportin=
+g \
+> -               a full TLS 1.2 client and server."
+> -HOMEPAGE =3D "http://www.yassl.com/yaSSL/Products-cyassl.html"
+> -BUGTRACKER =3D "http://github.com/cyassl/cyassl/issues"
+> -SECTION =3D "libs/network"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
+> -
+> -SRC_URI =3D "http://www.yassl.com/${BP}.zip"
+> -
+> -SRC_URI[md5sum] =3D "72477eb50697e759d309c49cb1aef18a"
+> -SRC_URI[sha256sum] =3D "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2ad=
+c16d2507b5d0b03e"
+> -
+> -inherit autotools
+> -
 > --=20
-> 1.7.9.5
+> 1.9.1
 >=20
 > --=20
 > _______________________________________________
@@ -108,16 +118,16 @@ ${BPN}-${PV}.tar.gz\
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---R3G7APHDIzY6R/pk
+--JWEK1jqKZ6MHAcjA
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlQhpQgACgkQN1Ujt2V2gBz29QCcDlqIwHLe3V0c7UndQFCniNPy
-JTUAoLu2kPn0uDoYjH6eNNiD/H8G1mOJ
-=Ky77
+iEYEARECAAYFAlQhplsACgkQN1Ujt2V2gBzZDgCglN5lXVJRNEj+kasmGEeeEelU
+yD4AoLpfVR1SP/CFZV8KwqBGpmbyCWq6
+=08/s
 -----END PGP SIGNATURE-----
 
---R3G7APHDIzY6R/pk--
+--JWEK1jqKZ6MHAcjA--
