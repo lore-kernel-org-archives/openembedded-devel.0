@@ -1,33 +1,40 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id B128160167
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
+	[74.125.82.181])
+	by mail.openembedded.org (Postfix) with ESMTP id E33EB65FFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 11:23:27 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1XWOBp-0000wm-Bp for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Sep 2014 13:23:25 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 13:23:25 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 23 Sep 2014 16:28:36 +0000 (UTC)
+Received: by mail-we0-f181.google.com with SMTP id w61so2982461wes.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 13:23:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 23 Sep 2014 09:28:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Oj4QOv9GZHmo+WrboAYJU5S+nbo0GwdJWA+U5V88/oA=;
+	b=DYTkZx1jN7JZyrH4BHdLFW/t62eG/DF9tHSRG6W5LWTxoUADcMssP9Fgr5Rtd2om95
+	nZW91fv2pS9TnrNp0Gr12uNE5/W2czwcaqkX3mGMxTcheDuZzeM+2n60Uiq4w5T341gC
+	dKbmc+IUO7gig68K8wiTeNoWvea45xkCDT6p/iXN5ou6xxXYfC9/HudwckjuXozQZt1D
+	6jBMLYCvRwmC2UU9T0ZLeJFk/IlBtw4lsPabCnI0wnL7/+ms46ZRuhXtHToEOv4a/ex4
+	+ljkliPuYHYwTIl5fzsU4gtTGONTf91vOYyZD+4NCfvr38EMU0nbMGwZAnKp4/sip3FQ
+	gN8Q==
+X-Received: by 10.194.119.67 with SMTP id ks3mr940544wjb.96.1411489717325;
+	Tue, 23 Sep 2014 09:28:37 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	u8sm2810033wia.24.2014.09.23.09.28.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 23 Sep 2014 09:28:36 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 23 Sep 2014 18:29:21 +0200
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 23 Sep 2014 13:23:11 +0200
-Message-ID: <lvrl6v$psb$1@ger.gmane.org>
-References: <20140920003044.GA30844@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <20140920003044.GA30844@linux.intel.com>
-Subject: Re: [PATCH v2] Phoronix Test Suite package
+Message-ID: <20140923162921.GA25706@jama>
+References: <1411282139-8785-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1411282139-8785-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] packagegroups: Move inheriting packagegroup below PACKAGE_ARCH assignment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,73 +48,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2014 11:23:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Sep 2014 16:28:40 -0000
+X-Groupsio-MsgNum: 52190
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="82I3+IH0IqGh5yIs"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--82I3+IH0IqGh5yIs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Todd E Brandt schreef op 20-09-14 02:30:
-> This is the package recipe for the phoronix test suite v5.2.1. The tool
-> is for benchmarking and testing of the system.
-> 
-> Signed-off-by: Todd Brandt <todd.e.brandt@linux.intel.com> ---- 
-> meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
-> | 24 ++++++++++++++++++++++++ 1 file changed, 24 insertions(+)
-> 
-> v2: - changes based on Ross Burton's comments. However, I kept this
-> line: S = "${WORKDIR}/phoronix-test-suite", since the tarball folder
-> doesn't include the version number. - moved the recipe from
-> recipes-devtools to recipes-benchmark - changed the section from tests to
-> console/tests
-> 
-> diff --git
-> a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
-> b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
->
-> 
-new file mode 100644
-> index 0000000..af5eb54 --- /dev/null +++
-> b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
->
-> 
-@@ -0,0 +1,24 @@
-> +SUMMARY = "Phoronix Test Suite" +DESCRIPTION = "The Phoronix Test Suite
-> is designed to carry out both qualitative \ +and quantitative benchmarks
-> in a clean, reproducible, and easy-to-use manner." +LICENSE = "GPLv3" 
-> +LIC_FILES_CHKSUM =
-> "file://../phoronix-test-suite/COPYING;md5=d32239bcb673463ab874e80d47fae504"
+On Sat, Sep 20, 2014 at 11:48:59PM -0700, Khem Raj wrote:
+> Fixes errors
+>=20
+> sets PACKAGE_ARCH before inherit packagegroup
 
-This
-> 
-is relative to ${S}, so
-file://COPYING;md5=d32239bcb673463ab874e80d47fae504 should work as well.
+wasn't this already resolved in:
+commit 5a25dde053e93e64b945776ab3fbf8b67c8c0773
+Author: Martin Jansa <Martin.Jansa@gmail.com>
+Date:   Sun Aug 24 18:01:11 2014 +0200
 
-> +RDEPENDS_${PN} = "php-cli"
+    packagegroup*: set PACKAGE_ARCH before packagegroup inherit
 
-R* variables go below do_install, since those are related to packaging
+?
 
-> +SECTION = "console/tests" + +SRC_URI =
-> "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz" 
-> +SRC_URI[md5sum] = "51e52d883710dc516c5494bd1c377219" +SRC_URI[sha256sum]
-> = "1186f460691e2fe7a07df5edb8d8ed1ac0c65327512e646da2b2e3a60dda6cd9" +S =
-> "${WORKDIR}/phoronix-test-suite" + +do_install() { +	DESTDIR=${D}
-> ./install-sh ${exec_prefix} +} + +FILES_${PN} += " \ +
-> ${datadir}/phoronix-test-suite \ +
-> ${datadir}/appdata/phoronix-test-suite.appdata.xml \ +
-> ${datadir}/icons/hicolor/48x48/apps/phoronix-test-suite.png \ +
-> ${datadir}/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
-> \ +	${datadir}/mime/packages/openbenchmarking-mime.xml \ +"
-> 
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-core/packagegroups/packagegroup-basic.bb | 5 +++--
+>  meta-oe/recipes-core/packagegroups/packagegroup-boot.bb  | 5 +++--
+>  2 files changed, 6 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/m=
+eta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+> index 08db943..9412df2 100644
+> --- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+> @@ -7,12 +7,13 @@ LIC_FILES_CHKSUM =3D "file://${COREBASE}/LICENSE;md5=3D=
+4d92cd373abda3937c2bc47fbc49d
+> =20
+>  PR =3D "r13"
+> =20
+> -inherit packagegroup
+> -
+> +#
+>  # packages which content depend on MACHINE_FEATURES need to be MACHINE_A=
+RCH
+>  #
+>  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> =20
+> +inherit packagegroup
+> +
+>  # Poke extra recomendations into the list using your machine.conf
+>  #
+>  MACHINE_EXTRA_RRECOMMENDS ?=3D ""
+> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb b/me=
+ta-oe/recipes-core/packagegroups/packagegroup-boot.bb
+> index 3b634f3..ae7e989 100644
+> --- a/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
+> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-boot.bb
+> @@ -4,12 +4,13 @@ LIC_FILES_CHKSUM =3D "file://${COREBASE}/LICENSE;md5=3D=
+4d92cd373abda3937c2bc47fbc49d
+> =20
+>  PR =3D "r58"
+> =20
+> -inherit packagegroup
+> -
+> +#
+>  # packages which content depend on MACHINE_FEATURES need to be MACHINE_A=
+RCH
+>  #
+>  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> =20
+> +inherit packagegroup
+> +
+>  #
+>  # those ones can be set in machine config to supply packages needed to g=
+et machine booting
+>  #
+> --=20
+> 2.1.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--82I3+IH0IqGh5yIs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2
 
-iD8DBQFUIVgeMkyGM64RGpERAu6ZAJ9poIrB6ApzSg2x30g1fGs62VCCewCfT6nK
-92MuQa/1ctapiTfm43uNI6M=
-=Xtr9
+iEYEARECAAYFAlQhn+EACgkQN1Ujt2V2gBwPxwCgkRHAJMISdhTfI6L8e/VhwJI8
+uEsAoJiHQeJkNagdcbaNL+v68cl7J2Fy
+=vOsQ
 -----END PGP SIGNATURE-----
 
-
+--82I3+IH0IqGh5yIs--
