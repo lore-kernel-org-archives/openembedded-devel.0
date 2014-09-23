@@ -1,38 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 98BEB7156E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id ADE0B609BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 17:45:16 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id r20so5409214wiv.2
+	Tue, 23 Sep 2014 17:56:16 +0000 (UTC)
+Received: by mail-ie0-f170.google.com with SMTP id x19so7102705ier.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 10:45:17 -0700 (PDT)
+	Tue, 23 Sep 2014 10:56:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=AoaA/C7d4qnHlp+0PwElAs7ZwoHBfmv4XCCXWQ2Ot58=;
-	b=aHg+vxoxgshS0wnLQSSjjotdO7MNgnmQIQ8z3W7rd1xN3EUeBzcJZTGOoONZl7yQSG
-	LYq6EZPCTCMF4S5B0IuvcgzRUDEtmt3spd96pqkmlYI2lavGmj3Ervl2H0ZkT//GNA+l
-	pytIEyuZ9t0lkpMdp3eEJd2zohiR+PsTppdFCCCAu7KiLuKk+F+LVsnSqtDXS+lO/Ttx
-	qUGhnu9Ue2p6i2ZeYZEk2/u8Sr8w7XaUqaWoFlVkuijJnPOE/SeEGwbGv2mFC4ZnEbmf
-	4lnpLRaPJiZvICmCQEgvLDGChTYgqWrDOniHDeNp0PQPiN91DAMhRqkUetGnjemg1mG0
-	ST5w==
-X-Received: by 10.180.74.227 with SMTP id x3mr5273436wiv.80.1411494317625;
-	Tue, 23 Sep 2014 10:45:17 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	ll20sm3053808wic.14.2014.09.23.10.45.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Sep 2014 10:45:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 23 Sep 2014 19:46:02 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140923174602.GG25706@jama>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=kTDay8M8eWkayuK3/dHpybrVdNYQkyXDM51MMwdTgtY=;
+	b=hBiFdhI7nL7NupdqWyNNkTFllHUaMYAw0TdmuIs1gPnjkgaPZVytxej0SZDOr6BUyj
+	vd1GapFN7L81QNcKEq3NX8dfbSMjvtb6Og63frcLqcfH4TxABBxCSrLJUUARQLLo98XJ
+	n2vk8si9hi9sLMHrIcZxMLzx8r06sP0i+/jlbyrcoB7KmsEwkUnpme4hDVLl2Vb2GWB2
+	Wn6VeJRMAGcFKjhZbOubNxnaw3j8WC+UdHKmaSdh1jS0iBeltP940kLrU4i4SixvT4tg
+	m57WBAKQVxrvdQLKXbaqSv4APDvXVF56rB78mYCN1TRW0tJqHVEaJzChq3SPJOnrdM9A
+	fmbA==
+X-Received: by 10.50.87.99 with SMTP id w3mr5705846igz.4.1411494977453; Tue,
+	23 Sep 2014 10:56:17 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Patches from patchwork queued in master-next for jenkins build
+Received: by 10.50.240.6 with HTTP; Tue, 23 Sep 2014 10:55:47 -0700 (PDT)
+In-Reply-To: <20140923162921.GA25706@jama>
+References: <1411282139-8785-1-git-send-email-raj.khem@gmail.com>
+	<20140923162921.GA25706@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Sep 2014 10:55:47 -0700
+Message-ID: <CAMKF1sq=stznnrk7jeNPcbXwofpAGT6PYhzJeQdcKNN8HeAfOg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] packagegroups: Move inheriting packagegroup below PACKAGE_ARCH assignment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,49 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Sep 2014 17:45:18 -0000
-X-Groupsio-MsgNum: 52196
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bFsKbPszpzYNtEU6"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Sep 2014 17:56:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
---bFsKbPszpzYNtEU6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Sep 23, 2014 at 9:29 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sat, Sep 20, 2014 at 11:48:59PM -0700, Khem Raj wrote:
+>> Fixes errors
+>>
+>> sets PACKAGE_ARCH before inherit packagegroup
+>
+> wasn't this already resolved in:
+> commit 5a25dde053e93e64b945776ab3fbf8b67c8c0773
+> Author: Martin Jansa <Martin.Jansa@gmail.com>
+> Date:   Sun Aug 24 18:01:11 2014 +0200
+>
+>     packagegroup*: set PACKAGE_ARCH before packagegroup inherit
+>
+> ?
+>
 
-Hi,
+Yes. I was on a prior SHA, ignore it
 
-all pending changes should be now in master-next, please verify that
-I haven't missed any.
-
-I've replied on few which didn't apply and will probably reply on few more
-after the build verification (if failures are detected).
-
-Especially after long windows like this, it would be really helpful if
-more contributors update status of patches on patchwork. There was a lot
-of superseeded patches I had to manually find and mark as such.
-
-Also it's safer to send vN patch every time you update the branch with
-your whole pull request, I've noticed it 2 times in the e-mails, so I've
-fetched them from repo instead of patchwork, but patchwork is my primary
-tool to track the changes, so PATCHvN sent in e-mail is safer way for me
-to notice that I need to refresh some patch.
-
-Cheers,
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---bFsKbPszpzYNtEU6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlQhsdoACgkQN1Ujt2V2gBxU2wCgkPwnP6a0xzNSrORr3YlGwSFL
-TqsAn0wBesumkJ190xRtyJU0wdQmb3EO
-=tW4g
------END PGP SIGNATURE-----
-
---bFsKbPszpzYNtEU6--
