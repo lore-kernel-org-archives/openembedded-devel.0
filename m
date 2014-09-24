@@ -1,42 +1,42 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 194A871397
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id D20586116C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 16:01:26 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id bj1so1668703pad.35
+	Wed, 24 Sep 2014 16:16:09 +0000 (UTC)
+Received: by mail-pa0-f44.google.com with SMTP id eu11so8202953pac.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 09:01:27 -0700 (PDT)
+	Wed, 24 Sep 2014 09:16:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=message-id:date:from:user-agent:mime-version:to:cc:subject
 	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=aVHPPyw+HnAu/MzvU+UP+oJIaBYWdQrHTjiaUhZFAi0=;
-	b=Dz32NRv0tAk8bHSmHlh5nK2j7UBCcF/wgZ/axTjMM6WtMyL7KgbjAdONbIdjTrvhM5
-	ynlQB3YvN2t6AAHoIAOIqm/4yPnWbA/vt3HME6u1+aYVcLUpaznmoDz58jWAuX7xIS7k
-	Wa4YujT55apRLzq8URGyKuZ5+cgBuDvgGKK0BBmy7RhSgz0RsYZTERHehelOVcXMqcbo
-	mPZ2yIWI2gEPA40hhAazwKWKJ1pz71fjSGyF5nFJJbxPoxthpLukq6NKtY2/kmi7Pw7Z
-	9c/JjCmvjhAnJo6kxUkGC5WNzbYzlRo/3yXfzdKAQ6PYo2HAS0eJSaX6ZHDQv4ILJ/Fe
-	Twlw==
-X-Received: by 10.66.222.132 with SMTP id qm4mr10600433pac.140.1411574487418; 
-	Wed, 24 Sep 2014 09:01:27 -0700 (PDT)
+	bh=cT37ejkxVDQduCdw1Sn9268IQ5dHKBjVFbGncWQEIeg=;
+	b=aOXltUx4UmjJXpzAgifU+1WpUtccS34DvAR2KKX8Xi0V+cIexmLUcYl9jjVcskAO/Y
+	VfH2Gy/G17sK9ZnyHvd1leLipzBhwtERCqFv6ApOdzbSft3RuT4FurHRaUhFy1GOCVr5
+	xYvxLYHdefj7tu9qQwm8RMtovKZqJ6FsQVX1kbrPfC0wpdq5TZfj15s4DAyYbNaRx+uO
+	3PGFFR53DMFuW1yOi9CNbIZKv/SQ9KNDzjvq4loza0TVeQ+iPEEuXzWqGvflxqikCp5T
+	v3+TR0vDLuaDtBz7okZNO/56rsg14u4R9c3KGeZjzaZpJS9vdsjrl6/LBOyTBmBDGa72
+	QGEg==
+X-Received: by 10.68.212.134 with SMTP id nk6mr10561208pbc.61.1411575370284;
+	Wed, 24 Sep 2014 09:16:10 -0700 (PDT)
 Received: from ?IPv6:2601:c:9380:601:ec77:7fc4:f575:b70e?
 	([2601:c:9380:601:ec77:7fc4:f575:b70e])
 	by mx.google.com with ESMTPSA id
-	tc5sm15105792pbc.51.2014.09.24.09.01.25 for <multiple recipients>
+	rl4sm12093820pbc.69.2014.09.24.09.16.08 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 24 Sep 2014 09:01:26 -0700 (PDT)
-Message-ID: <5422EAD4.4080905@gmail.com>
-Date: Wed, 24 Sep 2014 09:01:24 -0700
+	Wed, 24 Sep 2014 09:16:09 -0700 (PDT)
+Message-ID: <5422EE47.1060202@gmail.com>
+Date: Wed, 24 Sep 2014 09:16:07 -0700
 From: akuster808 <akuster808@gmail.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
 MIME-Version: 1.0
-To: "joe@deserted.net >> Joe MacDonald" <joe@deserted.net>
-References: <1410911419-466-1-git-send-email-akuster808@gmail.com>
-	<20140924020402.GC16953@deserted.net>
-In-Reply-To: <20140924020402.GC16953@deserted.net>
+To: damann@sensoft.ca
+References: <1411399687-11026-1-git-send-email-damann@sensoft.ca>
+	<1411399687-11026-2-git-send-email-damann@sensoft.ca>
+In-Reply-To: <1411399687-11026-2-git-send-email-damann@sensoft.ca>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] wireshark: update to 12.1
+Subject: Re: [meta-oe][daisy][PATCH] Fixed repo path for libmikmod, was changed in sourceforge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,100 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2014 16:01:27 -0000
+X-List-Received-Date: Wed, 24 Sep 2014 16:16:17 -0000
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
+Dominic,
 
-
-On 09/23/2014 07:04 PM, Joe MacDonald wrote:
-> Merged, thanks Armin.
-
-Thanks.
-
-  I also included Roy's patch for the BUILD_CFLAGS
-> since, looking at my own build logs when cross-building, it looks like
-> it is required, but please let me know if you think it's inappropriate.
-
-no problems here.
+how is this fix different than the patch sent on Sept 12th? The patch on 
+the 12th has more of a description in the header.
 
 - Armin
 
+On 09/22/2014 08:28 AM, Dominic Amann wrote:
+> ---
+>   .../recipes-multimedia/mikmod/libmikmod_3.3.3.bb   |    4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> Thanks,
-> -J.
+> diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
+> index 6a3077f..7f9651f 100644
+> --- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
+> +++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb
+> @@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=b2b941d484c442e5c031a51463d8e11b"
+>   DEPENDS = "alsa-lib texinfo"
 >
-> [[oe] [meta-networking][PATCH] wireshark: update to 12.1] On 14.09.16 (Tue 16:50) Armin Kuster wrote:
+>   SRC_URI = "\
+> -    ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+> -"
+> +    ${SOURCEFORGE_MIRROR}/project/mikmod/outdated_versions/${BPN}/${PV}/${BPN}-${PV}.tar.gz\
+> +	"
+>   SRC_URI[md5sum] = "0e0f9bce8f8e598ca292b41e0ae385c8"
+>   SRC_URI[sha256sum] = "79f02478c5abd8b2af73df4cc5f9d52625aa044327c01563168e270cf79b2437"
 >
->> following security fixes included:
->> MEGACO dissector infinite loop. (Bug 10333) CVE-2014-6423
->> Netflow dissector crash. (Bug 10370) CVE-2014-6424
->> CUPS dissector crash. (Bug 10353) CVE-2014-6425
->> HIP dissector infinite loop. CVE-2014-6426
->> RTSP dissector crash. (Bug 10381) CVE-2014-6427
->> SES dissector crash. (Bug 10454) CVE-2014-6428
->> Sniffer file parser crash. (Bug 10461) CVE-2014-6429 CVE-2014-6430 CVE-2014-6431 CVE-2014-6432
->>
->> re-org'd dd file to be more in-line with style guide.
->>
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
->>   .../{wireshark_1.12.0.bb => wireshark_1.12.1.bb}    | 21 ++++++++++-----------
->>   1 file changed, 10 insertions(+), 11 deletions(-)
->>   rename meta-networking/recipes-support/wireshark/{wireshark_1.12.0.bb => wireshark_1.12.1.bb} (90%)
->>
->> diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
->> similarity index 90%
->> rename from meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
->> rename to meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
->> index 39a24dc..71cc082 100644
->> --- a/meta-networking/recipes-support/wireshark/wireshark_1.12.0.bb
->> +++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
->> @@ -2,9 +2,19 @@ DESCRIPTION = "wireshark - a popular network protocol analyzer"
->>   HOMEPAGE = "http://www.wireshark.org"
->>   SECTION = "network"
->>   LICENSE = "GPL-2.0"
->> +LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
->>
->>   DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libnl sbc"
->>
->> +SRC_URI = " \
->> +    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-${PV}.tar.bz2 \
->> +"
->> +
->> +PE = "1"
->> +
->> +SRC_URI[md5sum] = "14b3e3d8979d1eb27ff085bb5f400e67"
->> +SRC_URI[sha256sum]= "82b26bd416ec15903b27785e35a622687008a743342054e96eaaeaa249be584b"
->> +
->>   inherit autotools pkgconfig
->>
->>   ARM_INSTRUCTION_SET = "arm"
->> @@ -27,16 +37,6 @@ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
->>
->>   EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
->>
->> -LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
->> -SRC_URI = " \
->> -    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-1.12.0.tar.bz2 \
->> -"
->> -
->> -PE = "1"
->> -
->> -SRC_URI[md5sum] = "8dcfe451d8769901129809d2e19c1fb7"
->> -SRC_URI[sha256sum]= "0f59fea1c5b35de90af681067e49113fee0dd7a901750a97fa25f4256dbf13c7"
->> -
->>   do_configure_prepend() {
->>       # force to use fallback
->>       sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
->> @@ -44,4 +44,3 @@ do_configure_prepend() {
->>
->>   ALLOW_EMPTY_${PN} = "1"
->>   INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
->> -
->> --
->> 1.9.1
->>
->>
->>
+>
 
