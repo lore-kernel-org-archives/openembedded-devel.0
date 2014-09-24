@@ -1,24 +1,33 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7110760809
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D5EA60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 05:42:03 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8O5g3ub008038
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 24 Sep 2014 06:27:15 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1XWg2m-00013s-Qv for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Sep 2014 08:27:16 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Sep 2014 08:27:16 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 22:42:04 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 23 Sep 2014 22:42:03 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Sep 2014 13:42:03 +0800
-Message-ID: <1411537323-29871-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
-MIME-Version: 1.0
-Subject: [PATCH] iscsi-initiator-utils: add recipe file
+	Wed, 24 Sep 2014 08:27:16 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 24 Sep 2014 08:27:07 +0200
+Message-ID: <lvto7r$7em$1@ger.gmane.org>
+References: <1411537323-29871-1-git-send-email-rongqing.li@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+In-Reply-To: <1411537323-29871-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH] iscsi-initiator-utils: add recipe file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,574 +41,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2014 05:42:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 24 Sep 2014 06:27:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Roy Li <rongqing.li@windriver.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The package provides the server daemon for the iSCSI protocol, as
-well as the utility programs used to manage it. iSCSI is a protocol
-for distributed disk access using SCSI commands sent over Internet
-Protocol networks
+rongqing.li@windriver.com schreef op 24-09-14 07:42:
+> From: Roy Li <rongqing.li@windriver.com>
+> 
+> The package provides the server daemon for the iSCSI protocol, as well as
+> the utility programs used to manage it. iSCSI is a protocol for
+> distributed disk access using SCSI commands sent over Internet Protocol
+> networks
+> 
+> It's a fairly basic utility, so copy it from meta-cloud-service to
+> meta-oe
+> 
+> Signed-off-by: Roy Li <rongqing.li@windriver.com> ---
 
-It's a fairly basic utility, so copy it from meta-cloud-service to meta-oe
+[..]
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../files/99_iscsi-initiator-utils                 |    2 +
- .../iscsi-initiator-utils/files/initd.debian       |  119 ++++++++++
- .../iscsi-initiator-utils-dont-use-static.patch    |   21 ++
- .../iscsi-initiator-utils-use-var-for-config.patch |  240 ++++++++++++++++++++
- .../iscsi-initiator-utils.inc                      |  112 +++++++++
- .../iscsi-initiator-utils_2.0-873.bb               |    9 +
- 6 files changed, 503 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils.inc
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+> +++
+> b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils.inc
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils
+Is
+> 
+there a specific reason to use an .inc+.bb instead of just a .bb?
+
+> @@ -0,0 +1,112 @@ +SUMMARY = "iSCSI daemon and utility programs" 
+> +DESCRIPTION = \ +"Open-iSCSI project is a high performance, transport
+> independent, \ +multi-platform implementation of RFC3720. The iscsi
+> package provides \ +the server daemon for the iSCSI protocol, as well as
+> the utility \ +programs used to manage it. iSCSI is a protocol for
+> distributed \ +disk access using SCSI commands sent over Internet
+> Protocol networks." +SECTION = "console/network" + +HOMEPAGE =
+> "http://www.open-iscsi.org/" + +UPSTREAM_name = "open-iscsi"
+
+This variable is not used in OE-core, remove it
+
+> + +#iscsi-initiator-utils-{use-var-for-config}.patch are from fedora 
+> +#change nodes,send_targets... from /etc/iscsi to /var/lib/iscsi +SRC_URI
+> = "http://www.open-iscsi.org/bits/${UPSTREAM_name}-${PV}.tar.gz \ +
+> file://iscsi-initiator-utils-use-var-for-config.patch \ +
+> file://iscsi-initiator-utils-dont-use-static.patch	\ +
+> file://initd.debian	\ +           file://99_iscsi-initiator-utils \ +" +S
+> = "${WORKDIR}/${UPSTREAM_name}-${PV}" +TARGET_CC_ARCH += "${LDFLAGS}"
+
+Move TARGET_CC_ARCH to be right above do_configure
+
+> + +#utils/fwparam_ibft/prom_parse.y utils/fwparam_ibft/prom_lex.l 
+> +#already parsed in source 2.0 but still depends on flex and bison 
+> +#native in case future version they are not parsed +DEPENDS += "openssl
+> flex-native bison-native"
+
+DEPENDS goes at the top, somewhere between HOMEPAGE and SRC_URI
+
+> + +PACKAGES =+ "${PN}-tests" + +FILES_${PN}-tests =
+> "/opt/${BPN}-tests/*" +RDEPENDS_${PN}-tests = "perl"
+
+PACKAGES, FILES, R* go below do_install
+
+> + +inherit update-rc.d
+
+inherits go above SRC_URI
+
+> + +do_configure () { +	#need to support cross-compiling in open-isns
+> only +	(cd utils/open-isns; \ +	 ./configure --host=${TARGET_SYS}
+> --build=${BUILD_SYS} --with-security=no ) +}
+
+You should run at least 'gnu-configize' if it's autotools based.
+
+> + +do_compile () { +	#make iscsistart one of PROGRAMS if install_user in
+> do_install +	#sed -i -e '/^PROGRAMS = /s;$; usr/iscsistart;' Makefile + +
+> #fix the ar used in open-isns +	sed -i -e 's:ar cr :$(AR) cr :'
+> ${S}/utils/open-isns/Makefile +	oe_runmake user + +} + +do_install () { +
+> #completely override the install_user as bugs in Makefile +	#oe_runmake
+> DESTDIR="${D}" install_user + +	#install necessary directories +	install
+> -d ${D}${base_sbindir} \ +		${D}${sysconfdir}/init.d \ +
+> ${D}${sysconfdir}/iscsi \ +		${D}${localstatedir}/lib/iscsi/nodes \ +
+> ${D}${localstatedir}/lib/iscsi/send_targets \ +
+> ${D}${localstatedir}/lib/iscsi/static \ +
+> ${D}${localstatedir}/lib/iscsi/isns \ +
+> ${D}${localstatedir}/lib/iscsi/slp \ +
+> ${D}${localstatedir}/lib/iscsi/ifaces \ +		${D}/${mandir}/man8 + +
+> install -p -m 755 ${S}/usr/iscsid ${S}/usr/iscsiadm \ +
+> ${S}/utils/iscsi-iname \ +		${S}/usr/iscsistart ${D}/${base_sbindir} + +
+> install -p -m 644 ${S}/doc/iscsiadm.8 ${S}/doc/iscsid.8
+> ${D}/${mandir}/man8 +	install -p -m 644 ${S}/etc/iscsid.conf
+> ${D}${sysconfdir}/iscsi +	install -p -m 755 ${WORKDIR}/initd.debian
+> ${D}${sysconfdir}/init.d/iscsid + +	#install regression tests +	[ ! -d
+> ${D}/opt/${BPN}-tests ] && mkdir -p ${D}/opt/${BPN}-tests +	install
+> ${S}/test/regression.dat ${S}/test/regression.sh ${D}/opt/${BPN}-tests/ 
+> + +	#open-isns tests +	mkdir -p ${D}/opt/${BPN}-tests/isns-tests +
+> install ${S}/utils/open-isns/tests/*.pl
+> ${D}/opt/${BPN}-tests/isns-tests/ +	install
+> ${S}/utils/open-isns/tests/genkey \ +
+> ${S}/utils/open-isns/tests/client.conf \ +
+> ${S}/utils/open-isns/tests/server.conf \ +
+> ${D}/opt/${BPN}-tests/isns-tests/ +	cp -a ${S}/utils/open-isns/tests/data
+> ${D}/opt/${BPN}-tests/isns-tests/
+
+/opt shouldn't be used in normal packaging, ${datadir} would be a better place
+
+> +	install -d ${D}/etc/default/volatiles +	install -m 0644
+> ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles +} + 
+> +pkg_postinst_${PN}() { +	#default there is no initiatorname.iscsi
+> installed +	#but it is needed or iscsid will fail + +	#will run only when
+> postinst on target +	if [ "x$D" != "x" ]; then +		exit 1 +	fi +	if [ ! -f
+> ${sysconfdir}/iscsi/initiatorname.iscsi ]; then +		echo
+> "InitiatorName=$(${base_sbindir}/iscsi-iname)" > \ +
+> ${sysconfdir}/iscsi/initiatorname.iscsi +	fi + +	if [ -e
+> /etc/init.d/populate-volatile.sh ]; then +
+> /etc/init.d/populate-volatile.sh update +	fi +} + +INITSCRIPT_NAME =
+> "iscsid" +INITSCRIPT_PARAMS = "start 30 1 2 3 4 5 . stop 70 0 1 2 3 4 5 6
+> ." diff --git
+> a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+> b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+>
+> 
 new file mode 100644
-index 0000000..42fdd60
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils
-@@ -0,0 +1,2 @@
-+# <type> <owner> <group> <mode> <path> <linksource>
-+d root root 0755 /var/lock/iscsi none
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
-new file mode 100644
-index 0000000..eb8eea7
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
-@@ -0,0 +1,119 @@
-+#! /bin/sh
-+### BEGIN INIT INFO
-+# Provides:
-+# Required-Start:
-+# Required-Stop:
-+# Default-Start:
-+# Default-Stop:
-+# Short-Description: Starts and stops the iSCSI initiator services and logins to default targets
-+### END INIT INFO
-+#set -x
-+PATH=/sbin:/bin:/usr/sbin:/usr/bin
-+DAEMON=/sbin/iscsid
-+ADM=/sbin/iscsiadm
-+PIDFILE=/var/run/iscsid.pid
-+
-+[ -x "$DAEMON" ] || exit 0
-+
-+if [ ! -d /sys/class/ ]; then
-+  echo "Failure:" "iSCSI requires a mounted sysfs, not started."
-+  exit 1
-+fi
-+
-+nodestartup_re='s/^node\.conn\[0]\.startup[ 	]*=[ 	]*//p'
-+
-+RETVAL=0
-+
-+start() {
-+	echo "Starting iSCSI initiator service" "iscsid"
-+	modprobe -q iscsi_tcp 2>/dev/null || :
-+	modprobe -q ib_iser 2>/dev/null || :
-+	if [ ! -f /etc/iscsi/initiatorname.iscsi ]; then
-+		INITIATORNAME=$(iscsi-iname)
-+		cat >/etc/iscsi/initiatorname.iscsi <<EOF
-+## DO NOT EDIT OR REMOVE THIS FILE!
-+## If you remove this file, the iSCSI daemon will not start.
-+## If you change the InitiatorName, existing access control lists
-+## may reject this initiator.  The InitiatorName must be unique
-+## for each iSCSI initiator.  Do NOT duplicate iSCSI InitiatorNames.
-+InitiatorName=$INITIATORNAME
-+EOF
-+	fi
-+	start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON
-+	RETVAL=$?
-+	starttargets
-+}
-+
-+starttargets() {
-+	echo "Setting up iSCSI targets"
-+	$ADM -m node --loginall=automatic
-+}
-+
-+stoptargets() {
-+	echo "Disconnecting iSCSI targets"
-+	sync
-+	$ADM -m node --logoutall=all
-+	RETVAL=$?
-+	#if RETVAL is 21, means no active sessions, consider ok
-+	if [ "$RETVAL" = "21" ]; then
-+		RETVAL=0
-+	fi
-+}
-+
-+stop() {
-+	stoptargets
-+	if [ $RETVAL -ne 0 ]; then
-+		echo "Failure:" "Could not stop all targets, try again later"
-+		return $RETVAL
-+	fi
-+
-+	echo "Stopping iSCSI initiator service"
-+	start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
-+	rm -f $PIDFILE
-+	status=0
-+	modprobe -r ib_iser 2>/dev/null
-+	if [ "$?" -ne "0" -a "$?" -ne "1" ]; then
-+		status=1
-+	fi
-+	modprobe -r iscsi_tcp 2>/dev/null
-+	if [ "$?" -ne "0" -a "$?" -ne "1" ]; then
-+		status=1
-+	fi
-+}
-+
-+restart() {
-+	stop
-+	if [ $RETVAL -ne 0 ]; then
-+		echo "Failure:" "Stopping iSCSI initiator service failed, not starting"
-+		return $RETVAL
-+	fi
-+	start
-+}
-+
-+restarttargets() {
-+	stoptargets
-+	if [ $RETVAL -ne 0 ]; then
-+		echo "Failure:" "Could not stop all targets, try again later"
-+		return $RETVAL
-+	fi
-+	starttargets
-+}
-+
-+status() {
-+	#XXX FIXME: what to do here?
-+	#status iscsid
-+	# list active sessions
-+	echo Current active iSCSI sessions:
-+	$ADM -m session
-+}
-+
-+case "$1" in
-+	start|starttargets|stop|stoptargets|restart|restarttargets|status)
-+		$1
-+		;;
-+	*)
-+		echo "Usage: $0 {start|stop|restart|status}"
-+		exit 1
-+		;;
-+esac
-+exit $RETVAL
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
-new file mode 100644
-index 0000000..ce48e2b
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
-@@ -0,0 +1,21 @@
-+iscsi-initiator-utils not to use static
-+
-+Upstream-status: Backport
-+This patch is from fedora17.
-+
-+Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-+Signed-off-by: Vu Tran <vu.tran@windriver.com>
-+
-+diff --git a/usr/Makefile b/usr/Makefile
-+index 673b7f1..fd14a10 100644
-+--- a/usr/Makefile
-++++ b/usr/Makefile
-+@@ -61,7 +61,7 @@ iscsiadm: $(ISCSI_LIB_SRCS) $(DISCOVERY_SRCS) iscsiadm.o session_mgmt.o
-+ 
-+ iscsistart: $(ISCSI_LIB_SRCS) $(INITIATOR_SRCS) $(FW_BOOT_SRCS) \
-+ 		iscsistart.o statics.o
-+-	$(CC) $(CFLAGS) -static $^ -o $@
-++	$(CC) $(CFLAGS) $^ -o $@
-+ clean:
-+ 	rm -f *.o $(PROGRAMS) .depend $(LIBSYS)
-+ 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
-new file mode 100644
-index 0000000..50227a7
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
-@@ -0,0 +1,240 @@
-+iscsi-initiator-utils to use var for config
-+
-+Upstream-status: Backport
-+This patch is from fedora.
-+
-+Use /var/lib/iscsi/ instead of /etc/iscsi/ for holding
-+state files.
-+
-+Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-+Signed-off-by: Vu Tran <vu.tran@windriver.com>
-+
-+diff --git a/README b/README
-+index 7364b2d..5e8bff8 100644
-+--- a/README
-++++ b/README
-+@@ -164,10 +164,10 @@ available on all Linux installations.
-+ 
-+ The database contains two tables:
-+ 
-+-- Discovery table (/etc/iscsi/send_targets);
-+-- Node table (/etc/iscsi/nodes).
-++- Discovery table (/var/lib/iscsi/send_targets);
-++- Node table (/var/lib/iscsi/nodes).
-+ 
-+-The regular place for iSCSI database files: /etc/iscsi/nodes
-++The regular place for iSCSI database files: /var/lib/iscsi/nodes
-+ 
-+ The iscsiadm utility is a command-line tool to manage (update, delete,
-+ insert, query) the persistent database.
-+@@ -444,7 +444,7 @@ a scsi_host per HBA port).
-+ To manage both types of initiator stacks, iscsiadm uses the interface (iface)
-+ structure. For each HBA port or for software iscsi for each network
-+ device (ethX) or NIC, that you wish to bind sessions to you must create
-+-a iface config /etc/iscsi/ifaces.
-++a iface config /var/lib/iscsi/ifaces.
-+ 
-+ Prep:
-+ 
-+@@ -478,29 +478,29 @@ Running:
-+ iface0 qla4xxx,00:c0:dd:08:63:e8,20.15.0.7,default,iqn.2005-06.com.redhat:madmax
-+ iface1 qla4xxx,00:c0:dd:08:63:ea,20.15.0.9,default,iqn.2005-06.com.redhat:madmax
-+ 
-+-Will report iface configurations that are setup in /etc/iscsi/ifaces.
-++Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
-+ The format is:
-+ 
-+ iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
-+ 
-+ For software iscsi, you can create the iface configs by hand, but it is
-+ reccomended that you use iscsiadm's iface mode. There is a iface.example in
-+-/etc/iscsi/ifaces which can be used as a template for the daring.
-++/var/lib/iscsi/ifaces which can be used as a template for the daring.
-+ 
-+ For each network object you wish to bind a session to you must create
-+-a seperate iface config in /etc/iscsi/ifaces and each iface config file
-++a seperate iface config in /var/lib/iscsi/ifaces and each iface config file
-+ must have a unique name which is less than or equal to 64 characters.
-+ 
-+ Example:
-+ 
-+ If you have NIC1 with MAC address 00:0F:1F:92:6B:BF and NIC2 with
-+ MAC address 00:C0:DD:08:63:E7 and you wanted to do software iscsi over
-+-TCP/IP. Then in /etc/iscsi/ifaces/iface0 you would enter:
-++TCP/IP. Then in /var/lib/iscsi/ifaces/iface0 you would enter:
-+ 
-+ iface.transport_name = tcp
-+ iface.hwaddress = 00:0F:1F:92:6B:BF
-+ 
-+-and in /etc/iscsi/ifaces/iface1 you would enter:
-++and in /var/lib/iscsi/ifaces/iface1 you would enter:
-+ 
-+ iface.transport_name = tcp
-+ iface.hwaddress = 00:C0:DD:08:63:E7
-+@@ -550,7 +550,7 @@ cxgb3i.00:07:43:05:97:07 cxgb3i,00:07:43:05:97:07,<empty>,<empty>,<empty>
-+ qla4xxx.00:0e:1e:04:8b:2e qla4xxx,00:0e:1e:04:8b:2e,<empty>,<empty>,<empty>
-+ 
-+ 
-+-Will report iface configurations that are setup in /etc/iscsi/ifaces.
-++Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
-+ The format is:
-+ 
-+ iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
-+@@ -636,7 +636,7 @@ need a seperate network connection to the target for discovery purposes.
-+ *This will be fixed in the next version of open-iscsi*
-+ 
-+ For compatibility reasons, when you run iscsiadm to do discovery, it
-+-will check for interfaces in /etc/iscsi/iscsi/ifaces that are using
-++will check for interfaces in /var/lib/iscsi/iscsi/ifaces that are using
-+ tcp for the iface.transport and it will bind the portals that are discovered
-+ so that they will be logged in through those ifaces. This behavior can also
-+ be overriden by passing in the interfaces you want to use. For the case
-+@@ -654,7 +654,7 @@ we do not bind a session to a iface, then you can use the special iface
-+ 
-+ iscsiadm -m discoverydb -t st -p ip:port -I default --discover -P 1
-+ 
-+-And if you did not define any interfaces in /etc/iscsi/ifaces and do
-++And if you did not define any interfaces in /var/lib/iscsi/ifaces and do
-+ not pass anything into iscsiadm, running iscsiadm will do the default
-+ behavior, where we allow the network subsystem to decide which
-+ device to use.
-+@@ -696,7 +696,7 @@ To now log into targets it is the same as with sofware iscsi. See section
-+ 
-+ 	    ./iscsiadm -m discoverydb -t st -p 192.168.1.1:3260 --discover
-+ 
-+-	This will search /etc/iscsi/send_targets for a record with the
-++	This will search /var/lib/iscsi/send_targets for a record with the
-+ 	ID [portal = 192.168.1.1:3260 and type = sendtargets. If found it
-+ 	will perform discovery using the settings stored in the record.
-+ 	If a record does not exist, it will be created using the iscsid.conf
-+@@ -705,7 +705,7 @@ To now log into targets it is the same as with sofware iscsi. See section
-+ 	The argument to -p may also be a hostname instead of an address.
-+ 	    ./iscsiadm -m discoverydb -t st -p smoehost --discover
-+ 
-+-	For the ifaces, iscsiadm will first search /etc/iscsi/ifaces for
-++	For the ifaces, iscsiadm will first search /var/lib/iscsi/ifaces for
-+ 	interfaces using software iscsi. If any are found then nodes found
-+ 	during discovery will be setup so that they can logged in through
-+ 	those interfaces. To specify a specific iface, pass the
-+@@ -761,7 +761,7 @@ To now log into targets it is the same as with sofware iscsi. See section
-+ 	This command will perform discovery, but not manipulate the node DB.
-+ 
-+   - SendTargets iSCSI Discovery with a specific interface. If you
-+-	wish to only use a subset of the interfaces in /etc/iscsi/ifaces
-++	wish to only use a subset of the interfaces in /var/lib/iscsi/ifaces
-+ 	then you can pass them in during discovery:
-+ 
-+ 	     ./iscsiadm -m discoverydb -t sendtargets -p 192.168.1.1:3260 \
-+@@ -1072,8 +1072,8 @@ where targetname is the name of the target and ip_address:port is the address
-+ and port of the portal. tpgt, is the portal group tag of
-+ the portal, and is not used in iscsiadm commands except for static
-+ record creation. And iface name is the name of the iscsi interface
-+-defined in /etc/iscsi/ifaces. If no interface was defined in
-+-/etc/iscsi/ifaces or passed in, the default behavior is used.
-++defined in /var/lib/iscsi/ifaces. If no interface was defined in
-++/var/lib/iscsi/ifaces or passed in, the default behavior is used.
-+ Default here is iscsi_tcp/tcp to be used over which ever NIC the
-+ network layer decides is best.
-+ 
-+@@ -1188,7 +1188,7 @@ If set, iscsid will perform discovery to the address every
-+ discovery.isns.discoveryd_poll_inval or
-+ discovery.sendtargets.discoveryd_poll_inval seconds,
-+ and it will log into any portals found from the discovery source using
-+-the ifaces in /etc/iscsi/ifaces.
-++the ifaces in /var/lib/iscsi/ifaces.
-+ 
-+ Note that for iSNS the poll_interval does not have to be set. If not set,
-+ iscsid will only perform rediscovery when it gets a SCN from the server.
-+diff --git a/doc/iscsiadm.8 b/doc/iscsiadm.8
-+index 7c209f6..e94cca0 100644
-+--- a/doc/iscsiadm.8
-++++ b/doc/iscsiadm.8
-+@@ -89,7 +89,7 @@ This option is only valid for ping submode.
-+ .TP
-+ \fB\-I\fR, \fB\-\-interface=\fI[iface]\fR
-+ The interface argument specifies the iSCSI interface to use for the operation.
-+-iSCSI interfaces (iface) are defined in /etc/iscsi/ifaces. For hardware
-++iSCSI interfaces (iface) are defined in /var/lib/iscsi/ifaces. For hardware
-+ iSCSI (qla4xxx) the iface config must have the hardware address
-+ (iface.hwaddress = port's MAC address)
-+ and the driver/transport_name (iface.transport_name). The iface's name is
-+@@ -166,7 +166,7 @@ If no other options are specified: for \fIdiscoverydb\fR and \fInode\fR, all
-+ of their respective records are displayed; for \fIsession\fR, all active
-+ sessions and connections are displayed; for \fIfw\fR, all boot firmware
-+ values are displayed; for \fIhost\fR, all iSCSI hosts are displayed; and
-+-for \fIiface\fR, all ifaces setup in /etc/iscsi/ifaces are displayed.
-++for \fIiface\fR, all ifaces setup in /var/lib/iscsi/ifaces are displayed.
-+ 
-+ .TP
-+ \fB\-n\fR, \fB\-\-name=\fIname\fR
-+@@ -535,10 +535,10 @@ The configuration file read by \fBiscsid\fR and \fBiscsiadm\fR on startup.
-+ The file containing the iSCSI InitiatorName and InitiatorAlias read by
-+ \fBiscsid\fR and \fBiscsiadm\fR on startup.
-+ .TP
-+-/etc/iscsi/nodes/
-++/var/lib/iscsi/nodes/
-+ This directory contains the nodes with their targets.
-+ .TP
-+-/etc/iscsi/send_targets
-++/var/lib/iscsi/send_targets
-+ This directory contains the portals.
-+ 
-+ .SH "SEE ALSO"
-+diff --git a/usr/idbm.c b/usr/idbm.c
-+index 4d30aa9..316e54f 100644
-+--- a/usr/idbm.c
-++++ b/usr/idbm.c
-+@@ -2468,9 +2468,9 @@ free_info:
-+ int idbm_init(idbm_get_config_file_fn *fn)
-+ {
-+ 	/* make sure root db dir is there */
-+-	if (access(ISCSI_CONFIG_ROOT, F_OK) != 0) {
-+-		if (mkdir(ISCSI_CONFIG_ROOT, 0660) != 0) {
-+-			log_error("Could not make %s %d\n", ISCSI_CONFIG_ROOT,
-++	if (access(ISCSIVAR, F_OK) != 0) {
-++		if (mkdir(ISCSIVAR, 0660) != 0) {
-++			log_error("Could not make %s %d\n", ISCSIVAR,
-+ 				   errno);
-+ 			return errno;
-+ 		}
-+diff --git a/usr/idbm.h b/usr/idbm.h
-+index 245f046..f45e86e 100644
-+--- a/usr/idbm.h
-++++ b/usr/idbm.h
-+@@ -28,12 +28,16 @@
-+ #include "config.h"
-+ #include "list.h"
-+ 
-+-#define NODE_CONFIG_DIR		ISCSI_CONFIG_ROOT"nodes"
-+-#define SLP_CONFIG_DIR		ISCSI_CONFIG_ROOT"slp"
-+-#define ISNS_CONFIG_DIR		ISCSI_CONFIG_ROOT"isns"
-+-#define STATIC_CONFIG_DIR	ISCSI_CONFIG_ROOT"static"
-+-#define FW_CONFIG_DIR		ISCSI_CONFIG_ROOT"fw"
-+-#define ST_CONFIG_DIR		ISCSI_CONFIG_ROOT"send_targets"
-++#define ISCSIVAR			"/var/lib/iscsi/"
-++
-++#define NODE_CONFIG_DIR    ISCSIVAR"nodes"
-++#define SLP_CONFIG_DIR     ISCSIVAR"slp"
-++#define ISNS_CONFIG_DIR    ISCSIVAR"isns"
-++#define STATIC_CONFIG_DIR  ISCSIVAR"static"
-++#define FW_CONFIG_DIR      ISCSIVAR"fw"
-++#define ST_CONFIG_DIR      ISCSIVAR"send_targets"
-++
-++
-+ #define ST_CONFIG_NAME		"st_config"
-+ #define ISNS_CONFIG_NAME	"isns_config"
-+ 
-+diff --git a/usr/iface.h b/usr/iface.h
-+index 01f7074..2c6ef72 100644
-+--- a/usr/iface.h
-++++ b/usr/iface.h
-+@@ -20,7 +20,8 @@
-+ #ifndef ISCSI_IFACE_H
-+ #define ISCSI_IFACE_H
-+ 
-+-#define IFACE_CONFIG_DIR	ISCSI_CONFIG_ROOT"ifaces"
-++#include "idbm.h"
-++#define IFACE_CONFIG_DIR	ISCSIVAR"ifaces"
-+ 
-+ struct iface_rec;
-+ struct list_head;
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils.inc b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils.inc
-new file mode 100644
-index 0000000..8fac35f
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils.inc
-@@ -0,0 +1,112 @@
-+SUMMARY = "iSCSI daemon and utility programs"
-+DESCRIPTION = \
-+"Open-iSCSI project is a high performance, transport independent, \
-+multi-platform implementation of RFC3720. The iscsi package provides \
-+the server daemon for the iSCSI protocol, as well as the utility \
-+programs used to manage it. iSCSI is a protocol for distributed \
-+disk access using SCSI commands sent over Internet Protocol networks."
-+SECTION = "console/network"
-+
-+HOMEPAGE = "http://www.open-iscsi.org/"
-+
-+UPSTREAM_name = "open-iscsi"
-+
-+#iscsi-initiator-utils-{use-var-for-config}.patch are from fedora
-+#change nodes,send_targets... from /etc/iscsi to /var/lib/iscsi
-+SRC_URI = "http://www.open-iscsi.org/bits/${UPSTREAM_name}-${PV}.tar.gz \
-+           file://iscsi-initiator-utils-use-var-for-config.patch \
-+           file://iscsi-initiator-utils-dont-use-static.patch	\
-+           file://initd.debian	\
-+           file://99_iscsi-initiator-utils \
-+"
-+S = "${WORKDIR}/${UPSTREAM_name}-${PV}"
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
-+#utils/fwparam_ibft/prom_parse.y utils/fwparam_ibft/prom_lex.l
-+#already parsed in source 2.0 but still depends on flex and bison
-+#native in case future version they are not parsed
-+DEPENDS += "openssl flex-native bison-native"
-+
-+PACKAGES =+ "${PN}-tests"
-+
-+FILES_${PN}-tests = "/opt/${BPN}-tests/*"
-+RDEPENDS_${PN}-tests = "perl"
-+
-+inherit update-rc.d
-+
-+do_configure () {
-+	#need to support cross-compiling in open-isns only
-+	(cd utils/open-isns; \
-+	 ./configure --host=${TARGET_SYS} --build=${BUILD_SYS} --with-security=no )
-+}
-+
-+do_compile () {
-+	#make iscsistart one of PROGRAMS if install_user in do_install
-+	#sed -i -e '/^PROGRAMS = /s;$; usr/iscsistart;' Makefile
-+
-+	#fix the ar used in open-isns
-+	sed -i -e 's:ar cr :$(AR) cr :' ${S}/utils/open-isns/Makefile
-+	oe_runmake user
-+
-+}
-+
-+do_install () {
-+	#completely override the install_user as bugs in Makefile
-+	#oe_runmake DESTDIR="${D}" install_user
-+
-+	#install necessary directories
-+	install -d ${D}${base_sbindir} \
-+		${D}${sysconfdir}/init.d \
-+		${D}${sysconfdir}/iscsi \
-+		${D}${localstatedir}/lib/iscsi/nodes \
-+		${D}${localstatedir}/lib/iscsi/send_targets \
-+		${D}${localstatedir}/lib/iscsi/static \
-+		${D}${localstatedir}/lib/iscsi/isns \
-+		${D}${localstatedir}/lib/iscsi/slp \
-+		${D}${localstatedir}/lib/iscsi/ifaces \
-+		${D}/${mandir}/man8
-+
-+	install -p -m 755 ${S}/usr/iscsid ${S}/usr/iscsiadm \
-+		${S}/utils/iscsi-iname \
-+		${S}/usr/iscsistart ${D}/${base_sbindir}
-+
-+	install -p -m 644 ${S}/doc/iscsiadm.8 ${S}/doc/iscsid.8 ${D}/${mandir}/man8
-+	install -p -m 644 ${S}/etc/iscsid.conf ${D}${sysconfdir}/iscsi
-+	install -p -m 755 ${WORKDIR}/initd.debian ${D}${sysconfdir}/init.d/iscsid
-+
-+	#install regression tests
-+	[ ! -d ${D}/opt/${BPN}-tests ] && mkdir -p ${D}/opt/${BPN}-tests
-+	install ${S}/test/regression.dat ${S}/test/regression.sh ${D}/opt/${BPN}-tests/
-+
-+	#open-isns tests
-+	mkdir -p ${D}/opt/${BPN}-tests/isns-tests
-+	install ${S}/utils/open-isns/tests/*.pl ${D}/opt/${BPN}-tests/isns-tests/
-+	install ${S}/utils/open-isns/tests/genkey \
-+		${S}/utils/open-isns/tests/client.conf \
-+		${S}/utils/open-isns/tests/server.conf \
-+		${D}/opt/${BPN}-tests/isns-tests/
-+	cp -a ${S}/utils/open-isns/tests/data ${D}/opt/${BPN}-tests/isns-tests/
-+	install -d ${D}/etc/default/volatiles
-+	install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
-+}
-+
-+pkg_postinst_${PN}() {
-+	#default there is no initiatorname.iscsi installed
-+	#but it is needed or iscsid will fail
-+	
-+	#will run only when postinst on target
-+	if [ "x$D" != "x" ]; then
-+		exit 1
-+	fi
-+	if [ ! -f ${sysconfdir}/iscsi/initiatorname.iscsi ]; then
-+		echo "InitiatorName=$(${base_sbindir}/iscsi-iname)" > \
-+		${sysconfdir}/iscsi/initiatorname.iscsi
-+	fi
-+
-+	if [ -e /etc/init.d/populate-volatile.sh ]; then
-+		/etc/init.d/populate-volatile.sh update
-+	fi
-+}
-+
-+INITSCRIPT_NAME = "iscsid"
-+INITSCRIPT_PARAMS = "start 30 1 2 3 4 5 . stop 70 0 1 2 3 4 5 6 ."
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-new file mode 100644
-index 0000000..e85a5d2
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+> index 0000000..e85a5d2 --- /dev/null +++
+> b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+>
+> 
 @@ -0,0 +1,9 @@
-+LICENSE = "GPLv2 & LGPLv2.1"
-+LIC_FILES_CHKSUM = \
-+	"file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
-+	 file://utils/open-isns/COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
-+
-+SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
-+SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
-+
-+require ${PN}.inc
--- 
-1.7.10.4
+> +LICENSE = "GPLv2 & LGPLv2.1" +LIC_FILES_CHKSUM = \ +
+> "file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \ +
+> file://utils/open-isns/COPYING;md5=7fbc338309ac38fefcd64b04bb903e34" + 
+> +SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7" +SRC_URI[sha256sum]
+> = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9" + 
+> +require ${PN}.inc
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFUImQ7MkyGM64RGpERAqcMAKCBpCVSNZRwECsE5NAWMaKE97fjqACfQB+j
+Z4q+8rh/QYRnQ+kUQKTYsEU=
+=kCre
+-----END PGP SIGNATURE-----
 
 
