@@ -1,24 +1,24 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F8B765D53
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D604071503
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 06:51:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8O6p4Qm022515
+	Wed, 24 Sep 2014 06:52:55 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8O6qtfa010260
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Sep 2014 23:51:04 -0700 (PDT)
+	Tue, 23 Sep 2014 23:52:56 -0700 (PDT)
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 23 Sep 2014 23:51:03 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 23 Sep 2014 23:52:55 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Sep 2014 14:51:47 +0800
-Message-ID: <1411541507-16688-1-git-send-email-Qi.Chen@windriver.com>
+Date: Wed, 24 Sep 2014 14:53:39 +0800
+Message-ID: <1411541619-16755-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH] radvd: add systemd service file
+Subject: [meta-networking][PATCH] radvd: add systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2014 06:51:07 -0000
+X-List-Received-Date: Wed, 24 Sep 2014 06:52:57 -0000
 Content-Type: text/plain
 
 From: Chen Qi <Qi.Chen@windriver.com>
