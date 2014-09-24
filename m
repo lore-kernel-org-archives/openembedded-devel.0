@@ -1,30 +1,40 @@
-Return-Path: <Bruce.Ashfield@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BDA1065CD8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 363E36FD28
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 12:14:01 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8OCDwCS029229
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 24 Sep 2014 05:13:58 -0700 (PDT)
-Received: from server.local (128.224.20.249) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 24 Sep 2014 05:13:57 -0700
-Message-ID: <5422B583.1010905@windriver.com>
-Date: Wed, 24 Sep 2014 08:13:55 -0400
-From: Bruce Ashfield <bruce.ashfield@windriver.com>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+	Wed, 24 Sep 2014 15:18:42 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id x48so4962867wes.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Sep 2014 08:18:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=887cuWPXUnQcAXqbFNm1ErBnDotEg48tO5OmpmFCuaU=;
+	b=qZNeypqJBKmSpdZT2+U1v2TobPwmsmYkTO/JutncjUvZ+xRAF6AHf9A0fmbF0XiYCO
+	/YqbV0H+2G2A73+DE6Lu+zIHWdeaXDtbES6qWF196EJU0NLAu5jMdgdxtnQZM8scSSH6
+	icFU0B/imwyMijQ+J6bOWRnD9MgIr9y1VXVr1P8qb/onHZchgH1EzohaMCZqKPZRfTDQ
+	5rnNEMfmg2wMNTzquqr7raoLS2CqZH/1IgyAN4zh0aiR+Qm+tuVqxXbV8O6+Xhxqx1Z8
+	s2L+8loat+o5UkgChD8pp05wNaEdyNdjINElVcrshp5pHA9GN689ZvSnsX6Q0rxgQjhi
+	2ElA==
+X-Received: by 10.180.14.104 with SMTP id o8mr32121097wic.66.1411571922636;
+	Wed, 24 Sep 2014 08:18:42 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	bt9sm19732317wjc.44.2014.09.24.08.18.40
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 24 Sep 2014 08:18:40 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 24 Sep 2014 17:19:27 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140924151927.GI25706@jama>
+References: <1411041927-9041-1-git-send-email-nickdademo@gmail.com>
 MIME-Version: 1.0
-To: Rongqing Li <rongqing.li@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1411537323-29871-1-git-send-email-rongqing.li@windriver.com>
-	<lvto7r$7em$1@ger.gmane.org> <542274B2.7080300@windriver.com>
-	<54227A95.2050700@windriver.com>
-In-Reply-To: <54227A95.2050700@windriver.com>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [PATCH] iscsi-initiator-utils: add recipe file
+In-Reply-To: <1411041927-9041-1-git-send-email-nickdademo@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] opencv: Add recipe for OpenCV v3.0.0-alpha.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,66 +48,912 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2014 12:14:02 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 24 Sep 2014 15:18:46 -0000
+X-Groupsio-MsgNum: 52216
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IbA9xpzOQlG26JSn"
+Content-Disposition: inline
 
-On 2014-09-24, 4:02 AM, Rongqing Li wrote:
->
->
-> On 09/24/2014 03:37 PM, Rongqing Li wrote:
->>
->> I see there are two recipes for iscsi under meta-cloud-service,
->> one is called iscsi-initiator-utils, other is called open-iscsi.
->> and open-iscsi provides the systemd support and kernel modules,
->> so I will copy open-iscsi into meta-oe/meta-oe.
->>
->>
->
->
-> Giveup to use open-iscsi, and continue to use  iscsi-initiator-utils ,
-> since open-iscsi-kernel can not pass compile.
+--IbA9xpzOQlG26JSn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-And FWIW, I'm going to continue to carry my own version in 
-meta-cloud-services.
+On Thu, Sep 18, 2014 at 10:05:27PM +1000, Nick D'Ademo wrote:
+> Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
+> ---
+>  meta-oe/recipes-support/opencv/opencv_3.0.0.bb | 95 ++++++++++++++++++++=
+++++++
+>  1 file changed, 95 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/opencv/opencv_3.0.0.bb
+>=20
+> diff --git a/meta-oe/recipes-support/opencv/opencv_3.0.0.bb b/meta-oe/rec=
+ipes-support/opencv/opencv_3.0.0.bb
+> new file mode 100644
+> index 0000000..3922964
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/opencv/opencv_3.0.0.bb
+> @@ -0,0 +1,95 @@
+> +DESCRIPTION =3D "Opencv : The Open Computer Vision Library"
+> +HOMEPAGE =3D "http://opencv.org/"
+> +SECTION =3D "libs"
+> +
+> +LICENSE =3D "BSD"
+> +LIC_FILES_CHKSUM =3D "file://include/opencv2/opencv.hpp;endline=3D41;md5=
+=3D6d690d8488a6fca7a2c192932466bb14"
+> +
+> +ARM_INSTRUCTION_SET =3D "arm"
+> +
+> +DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib gli=
+b-2.0 gstreamer gst-plugins-base"
+> +
+> +# Commit hash for 3.0.0-alpha tag
+> +SRCREV =3D "fb9a143429f86603ff93e5bcb2d94b94780b7234"
+> +SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3Dmaster \
+> +           file://opencv-fix-pkgconfig-generation.patch \
+> +"
+> +
+> +PV =3D "3.0.0+git${SRCPV}"
 
-We are heavily version dependent on all the components in the cloud
-space, so we can't follow the cadence of pretty much any other layer.
+subject says alpha, so it should be lower PV than 3.0.0
 
-Out of curiosity, if you need it .. why not just use it out of
-meta-cloud-services ?
+Fails to build for qemuarm:
 
-Bruce
+CMakeFiles/opencv_core.dir/src/tables.cpp.o CMakeFiles/opencv_core.dir/src/=
+types.cpp.o CMakeFiles/opencv_core.dir/src/umatrix.cpp.o CMakeFiles/opencv_=
+core.dir/opencl_kernels_core.cpp.o -lz -ldl -lm -lpthread -lrt /home/jenkin=
+s/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gi=
+tAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libip=
+picv.a
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(ippinit.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(ippmalloc.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16s_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiSum_8u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_Inf_8s_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMin_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_L1_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_32f_C4IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_8u32s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMinMaxIndx_8u_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiOr_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsFlip_16u_I_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L2_32f_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMul_8u_C1RSfs_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMinMaxIndx_8s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsFlip_8u_I_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16u_C4IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiSet_16s_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCompare_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsInvSqrt_32f_A21_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16s_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L1_16s_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_Inf_16u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L2_32f_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L2_16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L1_16u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_32s_C4IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_32f_C1IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsSortAscend_8u_I_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsMaxEvery_32f_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_16s_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsMaxEvery_8u_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiDFTInit_C_32fc_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_8u16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L2_16s_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_Inf_32f_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_8u_C4IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsFlip_32f_I_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCopy_8u_C3MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_Inf_8u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_L2_16u_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_16u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCompare_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiSum_32f_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCopy_16u_C3MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L1_8u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L1_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiXor_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_Inf_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_StdDev_8u_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCopy_32s_C4MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_32s_C1IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_StdDev_32f_C3CR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_8u_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiAbsDiff_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_32f_C4IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16u_C1IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsMaxEvery_16u_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L2_32f_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L2_8s_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMin_16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L1_16s_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiDotProd_16s64f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_Inf_16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_Inf_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_8s16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_16u_C4IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsDFTFwd_CToC_64fc_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiSet_32s_C4MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_32s_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_StdDev_32f_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_StdDev_16u_C3CMR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsPolarToCart_64f_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L2_16s_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsMaxEvery_64f_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_32f_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiDCTInvInitAlloc_32f_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L1_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsDFTGetSize_R_32f_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_32s32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_32s16s_C1RSfs_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_32s_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_16u32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiSub_8u_C1RSfs_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiSet_16u_C3MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_16u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L2_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMax_16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_8u_C1IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiDCTFwdGetBufSize_32f_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_Inf_32f_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L2_32f_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_8u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCopy_16u_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsSqrt_32f_A21_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L2_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_8u_C3IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_8s16u_C1Rs_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_16s_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsDFTInv_CToC_32fc_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_StdDev_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_Inf_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_8u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L2_8u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsDFTInit_C_64fc_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L2_8u_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_32f_C1IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiAnd_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_L2_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_L1_32f_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiAdd_16u_C1RSfs_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMin_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_8u_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsDFTInv_CToC_64fc_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippsDFTFwd_CToC_32fc_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_Inf_8u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_8u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiSet_32s_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_16s_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiDotProd_16u64f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiLUTPalette_8u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiAdd_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L1_32f_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_32s_C1IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMean_16u_C3CMR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiDFTGetSize_C_32fc_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiTranspose_32s_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiDFTFwd_RToPack_32f_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_8u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMax_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_L1_16u_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCopy_8u_C1MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiCopy_32s_C3MR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_32f8u_C1RSfs_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormDiff_L1_16u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiConvert_16u16s_C1RSfs_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_16u_C3IR_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiMirror_32f_C4R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_L1_16s_C1R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNorm_L2_8u_C3R_as.s.o): incompatible target
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: error: /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0=
++gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/li=
+bippicv.a(jmp_ippiNormRel_Inf_16u_C1MR_as.s.o): incompatible target
+=2E..
 
->
->
-> -R
->> -Roy
->>
->>
->>
->>
->> On 09/24/2014 02:27 PM, Koen Kooi wrote:
->>> rongqing.li@windriver.com  schreef op 24-09-14 07:42:
->>>> >From: Roy Li<rongqing.li@windriver.com>
->>>> >
->>>> >The package provides the server daemon for the iSCSI protocol, as
->>>> well as
->>>> >the utility programs used to manage it. iSCSI is a protocol for
->>>> >distributed disk access using SCSI commands sent over Internet
->>>> Protocol
->>>> >networks
->>>> >
->>>> >It's a fairly basic utility, so copy it from meta-cloud-service to
->>>> >meta-oe
->>>> >
->>>> >Signed-off-by: Roy Li<rongqing.li@windriver.com>  ---
->>> [..]
->>>
->>>> >+++
->>>> >b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils.inc
->>>>
->>
->
 
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +# Do an out-of-tree build
+> +OECMAKE_SOURCEPATH =3D "${S}"
+> +OECMAKE_BUILDPATH =3D "${WORKDIR}/build-${TARGET_ARCH}"
+> +
+> +EXTRA_OECMAKE =3D "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=3D${STAGING_LIBDIR}/$=
+{PYTHON_DIR}/site-packages/numpy/core/include \
+> +                 -DBUILD_PYTHON_SUPPORT=3DON \
+> +                 -DWITH_FFMPEG=3DON \
+> +                 -DCMAKE_SKIP_RPATH=3DON \
+> +                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENA=
+BLE_SSE=3D1 -DENABLE_SSE2=3D1 -DENABLE_SSE3=3D1 -DENABLE_SSSE3=3D1", "", d)=
+} \
+> +                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFF=
+IX=3D64", "", d)} \
+> +                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFF=
+IX=3D32", "", d)} \
+> +"
+> +
+> +PACKAGECONFIG ??=3D "eigen gtk jpeg libav png tiff v4l jasper"
+> +PACKAGECONFIG[eigen] =3D "-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeigen,"
+> +PACKAGECONFIG[gtk] =3D "-DWITH_GTK=3DON,-DWITH_GTK=3DOFF,gtk+,"
+> +PACKAGECONFIG[jpeg] =3D "-DWITH_JPEG=3DON,-DWITH_JPEG=3DOFF,jpeg,"
+> +PACKAGECONFIG[libav] =3D "-DWITH_FFMPEG=3DON,-DWITH_FFMPEG=3DOFF,libav,"
+> +PACKAGECONFIG[png] =3D "-DWITH_PNG=3DON,-DWITH_PNG=3DOFF,libpng,"
+> +PACKAGECONFIG[tiff] =3D "-DWITH_TIFF=3DON,-DWITH_TIFF=3DOFF,tiff,"
+> +PACKAGECONFIG[v4l] =3D "-DWITH_V4L=3DON,-DWITH_V4L=3DOFF,v4l-utils,"
+> +PACKAGECONFIG[jasper] =3D "-DBUILD_JASPER=3DON,-DBUILD_JASPER=3DOFF,jasp=
+er"
+> +PACKAGECONFIG[pvapi] =3D '-DWITH_PVAPI=3DON -DPVAPI_LIBRARY=3D"${STAGING=
+_LIBDIR}/libPvAPI.a",-DWITH_PVAPI=3DOFF,pvapi'
+> +
+> +inherit distutils-base pkgconfig cmake
+> +
+> +export BUILD_SYS
+> +export HOST_SYS
+> +export PYTHON_CSPEC=3D"-I${STAGING_INCDIR}/${PYTHON_DIR}"
+> +export PYTHON=3D"${STAGING_BINDIR_NATIVE}/python"
+> +
+> +TARGET_CC_ARCH +=3D "-I${S}/include "
+> +
+> +PACKAGES +=3D "${PN}-apps python-opencv"
+> +
+> +python populate_packages_prepend () {
+> +    cv_libdir =3D d.expand('${libdir}')
+> +    do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'OpenC=
+V %s development package', extra_depends=3D'${PN}-dev', allow_links=3DTrue)
+> +    do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'OpenC=
+V %s development package', extra_depends=3D'${PN}-dev')
+> +    do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenCV=
+ %s development package', extra_depends=3D'${PN}-dev')
+> +    do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV =
+%s library', extra_depends=3D'', allow_links=3DTrue)
+> +
+> +    pn =3D d.getVar('PN', 1)
+> +    metapkg =3D  pn + '-dev'
+> +    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+> +    blacklist =3D [ metapkg ]
+> +    metapkg_rdepends =3D [ ]=20
+> +    packages =3D d.getVar('PACKAGES', 1).split()
+> +    for pkg in packages[1:]:
+> +        if not pkg in blacklist and not pkg in metapkg_rdepends and pkg.=
+endswith('-dev'):
+> +            metapkg_rdepends.append(pkg)
+> +    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
+> +}
+> +
+> +PACKAGES_DYNAMIC +=3D "^libopencv-.*"
+> +
+> +FILES_${PN} =3D ""
+> +FILES_${PN}-apps =3D "${bindir}/* ${datadir}/OpenCV"
+> +FILES_${PN}-dbg +=3D "${libdir}/.debug"
+> +FILES_${PN}-dev =3D "${includedir} ${libdir}/pkgconfig"
+> +FILES_${PN}-doc =3D "${datadir}/OpenCV/doc"
+> +FILES_${PN}-staticdev +=3D "${datadir}/OpenCV/3rdparty${base_libdir}"
+> +
+> +ALLOW_EMPTY_${PN} =3D "1"
+> +
+> +INSANE_SKIP_python-opencv =3D "True"
+> +DESCRIPTION_python-opencv =3D "Python bindings to opencv"
+> +FILES_python-opencv =3D "${PYTHON_SITEPACKAGES_DIR}/*"
+> +RDEPENDS_python-opencv =3D "python-core python-numpy"
+> +
+> +do_install_append() {
+> +    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
+> +    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
+> +}
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--IbA9xpzOQlG26JSn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQi4P8ACgkQN1Ujt2V2gByMsACgu37Ty7VKBPDa95IBaZ4+NIH/
+ZlEAoLiRk+4wbWu9ZJ1aUpvcGsZA5FH/
+=YeXQ
+-----END PGP SIGNATURE-----
+
+--IbA9xpzOQlG26JSn--
