@@ -1,26 +1,18 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1980660144
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 9410E609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2014 08:47:54 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8P8ltcm001961
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 25 Sep 2014 09:32:34 +0000 (UTC)
+Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 54A0222ED6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2014 01:47:56 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 25 Sep 2014 01:47:54 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 Sep 2014 16:48:38 +0800
-Message-ID: <1411634918-22497-2-git-send-email-Qi.Chen@windriver.com>
+	Thu, 25 Sep 2014 11:32:35 +0200 (CEST)
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 25 Sep 2014 11:32:29 +0200
+Message-Id: <1411637549-5623-1-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1411634918-22497-1-git-send-email-Qi.Chen@windriver.com>
-References: <1411634918-22497-1-git-send-email-Qi.Chen@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] smartmontools: add systemd service file
+Subject: [meta-browser][PATCH] chromium: Add missing impl side painting patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,79 +26,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2014 08:47:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Sep 2014 09:32:40 -0000
 
-From: Chen Qi <Qi.Chen@windriver.com>
-
-Add systemd service file for smartmontools.
-The service is disabled by default.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- .../smartmontools/files/smartd.service             |   12 ++++++++++++
- .../smartmontools/smartmontools_6.2.bb             |   14 +++++++++++++-
- 2 files changed, 25 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/smartmontools/files/smartd.service
+ ...terization-whitelist-unlocking-impl-side-.patch | 73 ++++++++++++++++++++++
+ recipes-browser/chromium/chromium_37.0.2062.94.bb  |  2 +-
+ 2 files changed, 74 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-browser/chromium/chromium/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch
 
-diff --git a/meta-oe/recipes-extended/smartmontools/files/smartd.service b/meta-oe/recipes-extended/smartmontools/files/smartd.service
+diff --git a/recipes-browser/chromium/chromium/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch b/recipes-browser/chromium/chromium/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch
 new file mode 100644
-index 0000000..f3db946
+index 0000000..3e9d269
 --- /dev/null
-+++ b/meta-oe/recipes-extended/smartmontools/files/smartd.service
-@@ -0,0 +1,12 @@
-+[Unit]
-+Description=Self Monitoring and Reporting Technology (SMART) Daemon
-+After=syslog.target
++++ b/recipes-browser/chromium/chromium/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch
+@@ -0,0 +1,73 @@
++From 96a5a12ecd5b144bfeaa1d2116c2d1996bbb8f6c Mon Sep 17 00:00:00 2001
++From: Carlos Rafael Giani <dv@pseudoterminal.org>
++Date: Mon, 22 Sep 2014 23:15:42 +0200
++Subject: [PATCH] Disable rasterization whitelist, unlocking impl side painting
 +
-+[Service]
-+EnvironmentFile=-@SYSCONFDIR@/smartmontools
-+ExecStart=@SBINDIR@/smartd -n $smart_opts
-+ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
-+StandardOutput=syslog
++Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
++---
++ gpu/config/software_rendering_list_json.cc | 49 ------------------------------
++ 1 file changed, 49 deletions(-)
 +
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb b/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb
-index b64b961..fd7b1b8 100644
---- a/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb
-+++ b/meta-oe/recipes-extended/smartmontools/smartmontools_6.2.bb
-@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "${SOURCEFORGE_MIRROR}/smartmontools/smartmontools-${PV}.tar.gz \
-            file://initd.smartd \
-            file://smartmontools.default \
-+           file://smartd.service \
-           "
- 
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'libcap-ng', 'libcap-ng', '', d)} \
-@@ -26,7 +27,10 @@ PACKAGECONFIG[selinux] = "--with-selinux=yes,--with-selinux=no,libselinux"
- SRC_URI[md5sum] = "d44f84081a12cef79cd17f78044351fc"
- SRC_URI[sha256sum] = "486f660579bb0fb4f6b927ded7531cb1f99685c666397377761c5b04dd96065b"
- 
--inherit autotools update-rc.d
-+inherit autotools update-rc.d systemd
++diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
++index 52614eb..bd0bf01 100644
++--- a/gpu/config/software_rendering_list_json.cc
+++++ b/gpu/config/software_rendering_list_json.cc
++@@ -1144,55 +1144,6 @@ LONG_STRING_CONST(
++       "features": [
++         "all"
++       ]
++-    },
++-    {
++-      "id": 96,
++-      "description": "GPU rasterization is whitelisted on N4, N5, N7 and Moto X",
++-      "cr_bugs": [362779],
++-      "exceptions": [
++-        {
++-          "os": {
++-            "type": "android"
++-          },
++-          "machine_model_name": ["Nexus 4", "Nexus 5", "Nexus 7",
++-                                 "XT1049", "XT1050", "XT1052", "XT1053",
++-                                 "XT1055", "XT1056", "XT1058", "XT1060"]
++-        },
++-        {
++-          "os": {
++-            "type": "android",
++-            "version": {
++-              "op": ">=",
++-              "value": "4.4.99"
++-            }
++-          }
++-        }
++-      ],
++-      "features": [
++-        "gpu_rasterization"
++-      ]
++-    },
++-    {
++-      "id": 97,
++-      "description": "Additional GPU rasterization whitelist for field trial",
++-      "cr_bugs": [380694],
++-      "exceptions": [
++-        {
++-          "os": {
++-            "type": "android"
++-          },
++-          "machine_model_name": ["HTC One",
++-                                 "C5303", "C6603", "C6903",
++-                                 "GT-I8262", "GT-I8552", "GT-I9195", "GT-I9300",
++-                                 "GT-I9500", "GT-I9505", "GT-N7100",
++-                                 "SAMSUNG-SCH-I337", "SCH-I545", "SGH-M919",
++-                                 "SM-N900", "SM-N9005", "SPH-L720",
++-                                 "XT907", "XT1032", "XT1033", "XT1080"]
++-        }
++-      ],
++-      "features": [
++-        "gpu_rasterization_field_trial"
++-      ]
++     }
++   ]
++ }
++-- 
++1.9.1
 +
-+SYSTEMD_SERVICE_${PN} = "smartd.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
- 
- do_install_append () {
- 	#install the init.d/smartd
-@@ -34,6 +38,14 @@ do_install_append () {
- 	install -p -m 0755 ${WORKDIR}/initd.smartd ${D}${sysconfdir}/init.d/smartd
- 	install -d ${D}${sysconfdir}/default
- 	install -p -m 0644 ${WORKDIR}/smartmontools.default ${D}${sysconfdir}/default/smartmontools
-+
-+	#install systemd service file
-+	install -d ${D}${systemd_unitdir}/system
-+	install -m 0644 ${WORKDIR}/smartd.service ${D}${systemd_unitdir}/system
-+	sed -i -e 's,@BASE_BINDIR@,${base_bindir},g' \
-+		-e 's,@SYSCONFDIR@,${sysconfdir},g' \
-+		-e 's,@SBINDIR@,${sbindir},g' \
-+		${D}${systemd_unitdir}/system/smartd.service
- }
- 
- INITSCRIPT_NAME = "smartd"
+diff --git a/recipes-browser/chromium/chromium_37.0.2062.94.bb b/recipes-browser/chromium/chromium_37.0.2062.94.bb
+index 510b644..3d4524b 100644
+--- a/recipes-browser/chromium/chromium_37.0.2062.94.bb
++++ b/recipes-browser/chromium/chromium_37.0.2062.94.bb
+@@ -8,7 +8,7 @@ SRC_URI = "\
+         file://oe-defaults.gypi \
+         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://remove-linux-accel-canvas-from-blacklist.patch', '', d)} \
+-        ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://disable-rasterization-whitelist-unlocking-impl-side-painting.patch', '', d)} \
++        ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://0002-Disable-API-keys-info-bar.patch', '', d)} \
+         file://unistd-2.patch \
+         file://google-chrome \
 -- 
-1.7.9.5
+1.9.1
 
 
