@@ -1,40 +1,25 @@
-Return-Path: <amey.patil@sjsu.edu>
-Received: from mail-la0-f43.google.com (mail-la0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 714AC715D7
+Return-Path: <todd.e.brandt@linux.intel.com>
+X-Greylist: delayed 765 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 25 Sep 2014 01:04:25 UTC
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 44C9960144
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 16:45:07 +0000 (UTC)
-Received: by mail-la0-f43.google.com with SMTP id gb8so1481689lab.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 09:45:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sjsu.edu; s=google;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=QQTkZuYuemegE5WHT8x+xUxOfeCWI5CoPOIYF/FygMs=;
-	b=fotqLGFJx6VjMomVEmI+mBQ2V6W5/wYY76BqwQVIKH4WhtDrDAMI7o759cUGhs5rBl
-	zf2RXE4efeeavChzlFJwhr4Xj2E3zATX3gOADSeCqEPSq0MbgAB5my+xh3cWSSgqdrQV
-	h2LZKEN41hfzb3gKB4fbuCjvWZcNr7EGMf6z4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=QQTkZuYuemegE5WHT8x+xUxOfeCWI5CoPOIYF/FygMs=;
-	b=Zm+3yszX/c22TDYPcuwDHjxKaZHP1T16KRfKiEWvI7GMXlrJZNy2ua0yTFwGdPZD5W
-	GUCEr5DAtp2OzjMSPc/o6zebREjq9MmY7We2unTcSQ4ABTc9j7gMwpd9mF0zc2HgAU1z
-	YgUKadYHvkR+R1o8pXnpQoJFxvZ8D3eyya0awK2DJqKRUKr12mTSrP8SnStmmUyFVXVK
-	VRUyYiNnmJChvOhpcojdYC0zEPWK0OM4ySE7rSGTlfGGtnQeGjTRr7YyREx2T8oiVxXA
-	cJSZO9xa5T+87jryjsJi9adbvE8OlczIKVdIIaEF/K6/HW/YnuT/VNzrBrL70kxgC6c2
-	l++Q==
-X-Gm-Message-State: ALoCoQkW3NJsBoY28ZJUCuVkcLiVO/2sgCOgGe9vxMFh06pNsj7xC0mkC2ZtOO+cR4hO/G/i0SXV
-MIME-Version: 1.0
-X-Received: by 10.152.22.200 with SMTP id g8mr7659121laf.1.1411577108130; Wed,
-	24 Sep 2014 09:45:08 -0700 (PDT)
-Received: by 10.25.20.84 with HTTP; Wed, 24 Sep 2014 09:45:08 -0700 (PDT)
-Date: Wed, 24 Sep 2014 09:45:08 -0700
-Message-ID: <CADJ8CoP_ODn_sjTOS6PhTMU5527GymiDXJ+0bAw3SSYQCMui4w@mail.gmail.com>
-From: Amey Patil <amey.patil@sjsu.edu>
+	Thu, 25 Sep 2014 01:04:25 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga103.jf.intel.com with ESMTP; 24 Sep 2014 17:49:26 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.04,592,1406617200"; d="scan'208";a="578561823"
+Received: from mmckenna-mobl2.ger.corp.intel.com (HELO linux.intel.com)
+	([10.255.13.33])
+	by orsmga001.jf.intel.com with ESMTP; 24 Sep 2014 17:51:05 -0700
+Date: Wed, 24 Sep 2014 17:51:09 -0700
+From: Todd E Brandt <todd.e.brandt@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: How to configure Qt5 for Beaglebone Black
+Message-ID: <20140925005109.GA30862@linux.intel.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: koen@dominion.thruhere.net
+Subject: [PATCH v3] Phoronix Test Suite package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,17 +33,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Sep 2014 16:45:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 25 Sep 2014 01:04:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi all,
+This is the package recipe for the phoronix test suite v5.2.1. The
+tool is for benchmarking and testing of the system.
 
-Searched a lot online.
-Didn't find any working source for configuring Qt5 for Beaglebone Black.
-Can you help me with same.
+Signed-off-by: Todd Brandt <todd.e.brandt@linux.intel.com>
+----
+ meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-Thanks in advance.
+v2: changes based on Ross Burton's comments. However, I kept this line:
+S = "${WORKDIR}/phoronix-test-suite", since the tarball folder doesn't
+include the version number.
+v3: changed the license file locatoin and moved the RDEPENDS field down
 
-Sincere Regards,
-Amey Uday Patil
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
+new file mode 100644
+index 0000000..ef9f735
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_5.2.1.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Phoronix Test Suite"
++DESCRIPTION = "The Phoronix Test Suite is designed to carry out both qualitative \
++and quantitative benchmarks in a clean, reproducible, and easy-to-use manner."
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++SECTION = "console/tests"
++
++SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
++SRC_URI[md5sum] = "51e52d883710dc516c5494bd1c377219"
++SRC_URI[sha256sum] = "1186f460691e2fe7a07df5edb8d8ed1ac0c65327512e646da2b2e3a60dda6cd9"
++S = "${WORKDIR}/phoronix-test-suite"
++
++do_install() {
++	DESTDIR=${D} ./install-sh ${exec_prefix}
++}
++
++RDEPENDS_${PN} = "php-cli"
++FILES_${PN} += " \
++	${datadir}/phoronix-test-suite \
++	${datadir}/appdata/phoronix-test-suite.appdata.xml \
++	${datadir}/icons/hicolor/48x48/apps/phoronix-test-suite.png \
++	${datadir}/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png \
++	${datadir}/mime/packages/openbenchmarking-mime.xml \
++"
 
