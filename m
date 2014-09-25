@@ -1,36 +1,24 @@
-Return-Path: <richardcochran@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CBDE60144
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 94E3A60144
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Sep 2014 06:04:58 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id x13so4127511wgg.19
+	Thu, 25 Sep 2014 07:49:32 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8P7nXaX000727
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Sep 2014 23:04:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=3qZCsc2KMaCPL9KpXOXHy3gv0Wx4CPnEXzUZizw4S88=;
-	b=oRQwFYrAGdeA5vErE0qXEe2SQKsX/TZN2TptZwP1aHxXrfAsXjpEKSGFslK+HzHqTp
-	8b9lXYf1LN2j4h/3ayZDcKJtV/Efz+orwy79uo93iYGMWJx/hQnbFk70/jBN71mW33qD
-	RZxEv9iCvEVkM68p+PPgWu42P1Tox6rdArAUKk99rWD/Qcmar4ybuaA/Qn6x+pQteTzY
-	kbnw8qmff957v8VtttNIYP7AbAr57n8af0ztJTaW/KzHiwjPpwTOEo9gUo63GUjE2WB9
-	RL2FhQea/RYb4//ZVEnBkuGQqAka2KpPCDbDLOuGUqgtvWd1gLd3pbB3q9s1l4aizhze
-	Z44w==
-X-Received: by 10.194.47.134 with SMTP id d6mr5190322wjn.76.1411625098680;
-	Wed, 24 Sep 2014 23:04:58 -0700 (PDT)
-Received: from netboy (193-81-107-163.adsl.highway.telekom.at.
-	[193.81.107.163])
-	by mx.google.com with ESMTPSA id td9sm1942234wic.15.2014.09.24.23.04.56
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 24 Sep 2014 23:04:57 -0700 (PDT)
-Date: Thu, 25 Sep 2014 08:04:53 +0200
-From: Richard Cochran <richardcochran@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20140925060453.GB7314@netboy>
+	Thu, 25 Sep 2014 00:49:33 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 25 Sep 2014 00:49:32 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Sep 2014 15:49:33 +0800
+Message-ID: <1411631373-32677-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [meta-qt5][daisy] meta-toolchain-qt5 build failure
+Subject: [PATCH][meta-networking][V2] iscsi-initiator-utils: add recipe file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,439 +32,609 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2014 06:05:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 25 Sep 2014 07:49:34 -0000
+Content-Type: text/plain
 
-Dear list,
+From: Roy Li <rongqing.li@windriver.com>
 
-With current daisy, the target
+The package provides the server daemon for the iSCSI protocol, as
+well as the utility programs used to manage it. iSCSI is a protocol
+for distributed disk access using SCSI commands sent over Internet
+Protocol networks
 
-  bitbake meta-toolchain-qt5
-
-fails mysteriously. Anyone know how to fix this?
-
-Log file appended.
-
-Thanks,
-Richard
-
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
-DEBUG: Executing python function do_populate_sdk
-NOTE: Installing TARGET packages
-NOTE: Executing '/home/rcochran/git/poky/build/tmp/sysroots/x86_64-linux/usr/bin/opkg-make-index -r /home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/Packages -p /home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/Packages -m /home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon' ...
-NOTE: Executing '/home/rcochran/git/poky/build/tmp/sysroots/x86_64-linux/usr/bin/opkg-make-index -r /home/rcochran/git/poky/build/tmp/deploy/ipk/beaglebone/Packages -p /home/rcochran/git/poky/build/tmp/deploy/ipk/beaglebone/Packages -m /home/rcochran/git/poky/build/tmp/deploy/ipk/beaglebone' ...
-NOTE: Executing '/home/rcochran/git/poky/build/tmp/sysroots/x86_64-linux/usr/bin/opkg-make-index -r /home/rcochran/git/poky/build/tmp/deploy/ipk/all/Packages -p /home/rcochran/git/poky/build/tmp/deploy/ipk/all/Packages -m /home/rcochran/git/poky/build/tmp/deploy/ipk/all' ...
-NOTE: Executing '/home/rcochran/git/poky/build/tmp/sysroots/x86_64-linux/usr/bin/opkg-make-index -r /home/rcochran/git/poky/build/tmp/deploy/ipk/x86_64-nativesdk/Packages -p /home/rcochran/git/poky/build/tmp/deploy/ipk/x86_64-nativesdk/Packages -m /home/rcochran/git/poky/build/tmp/deploy/ipk/x86_64-nativesdk' ...
-NOTE: Installing the following packages: packagegroup-core-standalone-sdk-target-dbg packagegroup-core-standalone-sdk-target packagegroup-qt5-toolchain-target
-NOTE: /home/rcochran/git/poky/build/tmp/sysroots/x86_64-linux/usr/bin/opkg-cl -f /home/rcochran/git/poky/build/tmp/work/cortexa8hf-vfp-neon-poky-linux-gnueabi/meta-toolchain-qt5/1.0-r0/opkg.conf -o /home/rcochran/git/poky/build/tmp/work/cortexa8hf-vfp-neon-poky-linux-gnueabi/meta-toolchain-qt5/1.0-r0/sdk/image/opt/poky/1.6.1/sysroots/cortexa8hf-vfp-neon-poky-linux-gnueabi --force_postinstall --prefer-arch-to-version   install packagegroup-core-standalone-sdk-target-dbg packagegroup-core-standalone-sdk-target packagegroup-qt5-toolchain-target
-ERROR: Unable to install packages. Command '/home/rcochran/git/poky/build/tmp/sysroots/x86_64-linux/usr/bin/opkg-cl -f /home/rcochran/git/poky/build/tmp/work/cortexa8hf-vfp-neon-poky-linux-gnueabi/meta-toolchain-qt5/1.0-r0/opkg.conf -o /home/rcochran/git/poky/build/tmp/work/cortexa8hf-vfp-neon-poky-linux-gnueabi/meta-toolchain-qt5/1.0-r0/sdk/image/opt/poky/1.6.1/sysroots/cortexa8hf-vfp-neon-poky-linux-gnueabi --force_postinstall --prefer-arch-to-version   install packagegroup-core-standalone-sdk-target-dbg packagegroup-core-standalone-sdk-target packagegroup-qt5-toolchain-target' returned 255:
-Installing packagegroup-core-standalone-sdk-target-dbg (1.0-r8) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/all/packagegroup-core-standalone-sdk-target-dbg_1.0-r8_all.ipk.
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for libsegfault-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for libstdc++-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for eglibc-utils-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for eglibc-thread-db-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for eglibc-gconv-ibm850-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for eglibc-gconv-iso8859-15-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for eglibc-gconv-cp1252-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for eglibc-localedata-i18n-dbg
-packagegroup-core-standalone-sdk-target-dbg: unsatisfied recommendation for eglibc-gconv-iso8859-1-dbg
-Installing qemuwrapper-cross-dbg (1.0-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/qemuwrapper-cross-dbg_1.0-r0_cortexa8hf-vfp-neon.ipk.
-Installing libgcc-s-dbg (4.8.2-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libgcc-s-dbg_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libc6-dbg (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libc6-dbg_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing packagegroup-core-standalone-sdk-target (1.0-r8) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/all/packagegroup-core-standalone-sdk-target_1.0-r8_all.ipk.
-libc6-dev: unsatisfied recommendation for eglibc-extra-nss-dev
-libc6-dev: unsatisfied recommendation for libsegfault-dev
-libc6-dev: unsatisfied recommendation for eglibc-thread-db-dev
-libc6-dev: unsatisfied recommendation for libcidn-dev
-Installing libgcc1 (4.8.2-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libgcc1_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libc6 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libc6_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libgcc-s-dev (4.8.2-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libgcc-s-dev_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libc6-dev (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libc6-dev_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libthread-db1 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libthread-db1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-extra-nss (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-extra-nss_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libcidn1 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libcidn1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing linux-libc-headers-dev (3.14-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/linux-libc-headers-dev_3.14-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-cp1252 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-cp1252_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-utils (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-utils_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-ibm850 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-ibm850_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libstdc++-dev (4.8.2-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libstdc++-dev_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing libstdc++6 (4.8.2-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libstdc++6_4.8.2-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-i18n (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-i18n_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-neutral (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-neutral_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-circle (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-circle_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-cjk-compat (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-cjk-compat_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-small (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-small_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-compat (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-compat_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-narrow (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-narrow_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-wide (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-wide_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-font (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-font_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-translit-fraction (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-translit-fraction_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-iso14651-t1 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-iso14651-t1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-localedata-iso14651-t1-common (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-localedata-iso14651-t1-common_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing libsegfault (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/libsegfault_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-iso8859-1 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-iso8859-1_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing eglibc-gconv-iso8859-15 (2.19-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/eglibc-gconv-iso8859-15_2.19-r0_cortexa8hf-vfp-neon.ipk.
-Installing qemuwrapper-cross (1.0-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/cortexa8hf-vfp-neon/qemuwrapper-cross_1.0-r0_cortexa8hf-vfp-neon.ipk.
-Installing packagegroup-qt5-toolchain-target (1.0-r0) to root...
-Downloading file:/home/rcochran/git/poky/build/tmp/deploy/ipk/all/packagegroup-qt5-toolchain-target_1.0-r0_all.ipk.
-libxcb-dev: unsatisfied recommendation for libxcb-shape-dev
-libxcb-dev: unsatisfied recommendation for libxcb-dpms-dev
-libxcb-dev: unsatisfied recommendation for libxcb-render-dev
-libxcb-dev: unsatisfied recommendation for libxcb-shm-dev
-libxcb-dev: unsatisfied recommendation for libxcb-dri3-dev
-libxcb-dev: unsatisfied recommendation for libxcb-damage-dev
-libxcb-dev: unsatisfied recommendation for libxcb-glx-dev
-libxcb-dev: unsatisfied recommendation for libxcb-composite-dev
-libxcb-dev: unsatisfied recommendation for libxcb-res-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xvmc-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xkb-dev
-libxcb-dev: unsatisfied recommendation for libxcb-sync-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xevie-dev
-libxcb-dev: unsatisfied recommendation for libxcb-dri2-dev
-libxcb-dev: unsatisfied recommendation for libxcb-randr-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xprint-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xv-dev
-libxcb-dev: unsatisfied recommendation for libxcb-record-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xtest-dev
-libxcb-dev: unsatisfied recommendation for libxcb-screensaver-dev
-libxcb-dev: unsatisfied recommendation for libxcb-present-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xf86dri-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xinerama-dev
-libxcb-dev: unsatisfied recommendation for libxcb-xfixes-dev
-libx11-dev: unsatisfied recommendation for libx11-xcb-dev
-openssl-dev: unsatisfied recommendation for libcrypto-dev
-openssl-dev: unsatisfied recommendation for libssl-dev
-shadow-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-dbus-dev: unsatisfied recommendation for shadow-sysroot-dev
-dbus-dev: unsatisfied recommendation for dbus-lib-dev
-dbus-dev: unsatisfied recommendation for initscripts-functions-dev
-package libtinfo5 suggests installing ncurses-terminfo
-util-linux-dev: unsatisfied recommendation for util-linux-swaponoff-dev
-util-linux-dev: unsatisfied recommendation for util-linux-umount-dev
-util-linux-dev: unsatisfied recommendation for ncurses-libncursesw-dev
-util-linux-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libmenu-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libpanel-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libform-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libncursesw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libtic-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libncurses-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libmenuw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-terminfo-base-dev
-ncurses-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libpanelw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libformw-dev
-ncurses-dev: unsatisfied recommendation for ncurses-libticw-dev
-util-linux-dev: unsatisfied recommendation for util-linux-losetup-dev
-util-linux-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-e2fsprogs-dev: unsatisfied recommendation for e2fsprogs-badblocks-dev
-e2fsprogs-dev: unsatisfied recommendation for libss-dev
-e2fsprogs-dev: unsatisfied recommendation for libext2fs-dev
-e2fsprogs-dev: unsatisfied recommendation for libcomerr-dev
-e2fsprogs-dev: unsatisfied recommendation for libe2p-dev
-initscripts-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-initscripts-dev: unsatisfied recommendation for initscripts-functions-dev
-udev-dev: unsatisfied recommendation for libusb-dev
-udev-dev: unsatisfied recommendation for module-init-tools-dev
-python-pygobject-dev: unsatisfied recommendation for libpython2-dev
-python-pygobject-dev: unsatisfied recommendation for python-textutils-dev
-python-pygobject-dev: unsatisfied recommendation for python-pygobject-lib-dev
-python-dev: unsatisfied recommendation for python-audio-dev
-python-dev: unsatisfied recommendation for python-mime-dev
-python-dev: unsatisfied recommendation for python-io-dev
-python-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-python-dev: unsatisfied recommendation for python-resource-dev
-python-dev: unsatisfied recommendation for python-zlib-dev
-python-dev: unsatisfied recommendation for python-lang-dev
-python-dev: unsatisfied recommendation for python-multiprocessing-dev
-python-dev: unsatisfied recommendation for python-pkgutil-dev
-python-dev: unsatisfied recommendation for python-subprocess-dev
-python-dev: unsatisfied recommendation for python-json-dev
-python-dev: unsatisfied recommendation for python-doctest-dev
-python-dev: unsatisfied recommendation for python-2to3-dev
-python-dev: unsatisfied recommendation for python-gdbm-dev
-bzip2-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-python-dev: unsatisfied recommendation for python-misc-dev
-python-dev: unsatisfied recommendation for python-logging-dev
-python-dev: unsatisfied recommendation for python-threading-dev
-python-dev: unsatisfied recommendation for python-codecs-dev
-libgdbm-dev: unsatisfied recommendation for gdbm-compat-dev
-python-dev: unsatisfied recommendation for python-pydoc-dev
-python-dev: unsatisfied recommendation for python-pprint-dev
-python-dev: unsatisfied recommendation for python-curses-dev
-libreadline-dev: unsatisfied recommendation for ncurses-libtinfo-dev
-python-dev: unsatisfied recommendation for python-fcntl-dev
-python-dev: unsatisfied recommendation for python-compile-dev
-python-dev: unsatisfied recommendation for python-debugger-dev
-python-dev: unsatisfied recommendation for python-xmlrpc-dev
-python-dev: unsatisfied recommendation for sqlite3-dev
-python-dev: unsatisfied recommendation for python-distutils-dev
-python-dev: unsatisfied recommendation for ncurses-libncursesw-dev
-python-dev: unsatisfied recommendation for python-difflib-dev
-python-dev: unsatisfied recommendation for python-crypt-dev
-python-dev: unsatisfied recommendation for python-numbers-dev
-python-dev: unsatisfied recommendation for python-idle-dev
-python-dev: unsatisfied recommendation for python-db-dev
-python-dev: unsatisfied recommendation for python-compiler-dev
-python-dev: unsatisfied recommendation for python-unixadmin-dev
-python-dev: unsatisfied recommendation for libssl-dev
-python-dev: unsatisfied recommendation for ncurses-libpanelw-dev
-python-dev: unsatisfied recommendation for python-tests-dev
-python-dev: unsatisfied recommendation for python-pickle-dev
-python-dev: unsatisfied recommendation for libcrypto-dev
-python-dev: unsatisfied recommendation for python-datetime-dev
-python-dev: unsatisfied recommendation for python-unittest-dev
-python-dev: unsatisfied recommendation for python-profile-dev
-python-dev: unsatisfied recommendation for python-netclient-dev
-python-dev: unsatisfied recommendation for python-xml-dev
-python-dev: unsatisfied recommendation for python-textutils-dev
-python-dev: unsatisfied recommendation for python-image-dev
-python-dev: unsatisfied recommendation for python-smtpd-dev
-python-dev: unsatisfied recommendation for python-hotshot-dev
-python-dev: unsatisfied recommendation for python-html-dev
-python-dev: unsatisfied recommendation for python-tkinter-dev
-python-dev: unsatisfied recommendation for python-mmap-dev
-python-dev: unsatisfied recommendation for python-bsddb-dev
-python-dev: unsatisfied recommendation for python-compression-dev
-python-dev: unsatisfied recommendation for python-readline-dev
-python-dev: unsatisfied recommendation for python-elementtree-dev
-python-dev: unsatisfied recommendation for python-email-dev
-python-dev: unsatisfied recommendation for python-shell-dev
-python-dev: unsatisfied recommendation for python-ctypes-dev
-python-dev: unsatisfied recommendation for libpython2-dev
-python-dev: unsatisfied recommendation for python-sqlite3-tests-dev
-python-dev: unsatisfied recommendation for python-mailbox-dev
-python-dev: unsatisfied recommendation for python-sqlite3-dev
-python-dev: unsatisfied recommendation for python-math-dev
-python-dev: unsatisfied recommendation for python-robotparser-dev
-python-dev: unsatisfied recommendation for python-syslog-dev
-python-dev: unsatisfied recommendation for python-stringold-dev
-python-dev: unsatisfied recommendation for python-re-dev
-python-dev: unsatisfied recommendation for python-netserver-dev
-python-dev: unsatisfied recommendation for python-modules-dev
-python-dev: unsatisfied recommendation for python-terminal-dev
-python-dev: unsatisfied recommendation for python-core-dev
-python-pygobject-dev: unsatisfied recommendation for python-core-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-localedata-translit-cjk-variants-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-gconv-utf-32-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-gconv-utf-7-dev
-libglib-2.0-dev: unsatisfied recommendation for tzdata-posix-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-gconv-iso8859-1-dev
-libglib-2.0-dev: unsatisfied recommendation for tzdata-americas-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-gconv-utf-16-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-gconv-euc-jp-dev
-libglib-2.0-dev: unsatisfied recommendation for tzdata-asia-dev
-libdbus-glib-1-dev: unsatisfied recommendation for dbus-lib-dev
-libdbus-glib-1-dev: unsatisfied recommendation for dbus-x11-dev
-python-dbus-dev: unsatisfied recommendation for python-io-dev
-python-dbus-dev: unsatisfied recommendation for dbus-lib-dev
-python-dbus-dev: unsatisfied recommendation for python-logging-dev
-python-dbus-dev: unsatisfied recommendation for python-xml-dev
-python-dbus-dev: unsatisfied recommendation for python-stringold-dev
-python-dbus-dev: unsatisfied recommendation for python-threading-dev
-libglib-2.0-dev: unsatisfied recommendation for tzdata-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-gconv-cp1255-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-charmap-invariant-dev
-libglib-2.0-dev: unsatisfied recommendation for tzdata-europe-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-gconv-iso8859-15-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-charmap-cp1255-dev
-libglib-2.0-dev: unsatisfied recommendation for dbus-lib-dev
-libglib-2.0-dev: unsatisfied recommendation for eglibc-charmap-utf-8-dev
-libxml2-dev: unsatisfied recommendation for eglibc-gconv-ebcdic-us-dev
-libxml2-dev: unsatisfied recommendation for eglibc-gconv-ibm1141-dev
-pciutils-dev: unsatisfied recommendation for pciutils-ids-dev
-kmod-dev: unsatisfied recommendation for libkmod-dev
-kmod-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-pciutils-dev: unsatisfied recommendation for libkmod-dev
-usbutils-dev: unsatisfied recommendation for usbutils-ids-dev
-usbutils-dev: unsatisfied recommendation for libusb-dev
-udev-dev: unsatisfied recommendation for libgudev-dev
-udev-dev: unsatisfied recommendation for libkmod-dev
-udev-dev: unsatisfied recommendation for libudev-dev
-qtbase-dev: unsatisfied recommendation for libssl-dev
-qtbase-dev: unsatisfied recommendation for libcrypto-dev
-libxrender-dev: unsatisfied recommendation for xdmcp-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-card-restore-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-intended-roles-dev
-alsa-lib-dev: unsatisfied recommendation for libasound-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-alsa-util-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-cli-protocol-unix-dev
-pulseaudio-dev: unsatisfied recommendation for libpulsecore-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-protocol-simple-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-detect-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-alsa-sink-dev
-pulseaudio-dev: unsatisfied recommendation for libpulse-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-filter-apply-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-filter-heuristics-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-cli-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-stream-restore-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-null-sink-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-protocol-cli-dev
-pulseaudio-dev: unsatisfied recommendation for libudev-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-rtp-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-default-device-restore-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-always-sink-dev
-pulseaudio-dev: unsatisfied recommendation for libpulsecommon-dev
-gconf-dev: unsatisfied recommendation for dbus-lib-dev
-gconf-dev: unsatisfied recommendation for gobject-introspection-stub-dev
-gconf-dev: unsatisfied recommendation for dbus-x11-dev
-pulseaudio-dev: unsatisfied recommendation for libx11-xcb-dev
-pulseaudio-dev: unsatisfied recommendation for libasound-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-device-restore-dev
-pulseaudio-dev: unsatisfied recommendation for libpulse-simple-dev
-libsndfile-dev: unsatisfied recommendation for sqlite3-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-alsa-card-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-protocol-native-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-alsa-source-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-protocol-esound-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-augment-properties-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-switch-on-port-available-dev
-pulseaudio-dev: unsatisfied recommendation for shadow-sysroot-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-protocol-http-dev
-pulseaudio-dev: unsatisfied recommendation for dbus-lib-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-console-kit-dev
-consolekit-dev: unsatisfied recommendation for dbus-lib-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-udev-detect-dev
-pulseaudio-dev: unsatisfied recommendation for libpulse-mainloop-glib-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-native-protocol-unix-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-role-cork-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-lib-oss-util-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-rescue-streams-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-position-event-sounds-dev
-pulseaudio-dev: unsatisfied recommendation for pulseaudio-module-suspend-on-idle-dev
-flac-dev: unsatisfied recommendation for libflac-dev
-flac-dev: unsatisfied recommendation for libflac++-dev
-libxkbcommon-dev: unsatisfied recommendation for libxcb-xkb-dev
-libxcb-render-util-dev: unsatisfied recommendation for libxcb-render-dev
-libxcb-image-dev: unsatisfied recommendation for libxcb-shm-dev
-libdrm-dev: unsatisfied recommendation for libdrm-kms-dev
-libdrm-dev: unsatisfied recommendation for libdrm-nouveau-dev
-libdrm-dev: unsatisfied recommendation for libdrm-omap-dev
-libdrm-dev: unsatisfied recommendation for libdrm-radeon-dev
-libgl-mesa-dev: unsatisfied recommendation for libxcb-dri2-dev
-libgl-mesa-dev: unsatisfied recommendation for libxcb-glx-dev
-libgl-mesa-dev: unsatisfied recommendation for libx11-xcb-dev
-libcairo-dev: unsatisfied recommendation for libxcb-render-dev
-libcairo-dev: unsatisfied recommendation for libxcb-shm-dev
-libcairo-dev: unsatisfied recommendation for cairo-perf-utils-dev
-libcairo-dev: unsatisfied recommendation for cairo-script-interpreter-dev
-libcairo-dev: unsatisfied recommendation for cairo-gobject-dev
-gtk+-dev: unsatisfied recommendation for libxcb-render-dev
-gtk+-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-gtk+-dev: unsatisfied recommendation for libxcb-shm-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-qtif-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-png-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-ras-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-tga-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-ani-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-jpeg-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-ico-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-bmp-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-pnm-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-pcx-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-wbmp-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-gif-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-xbm-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-icns-dev
-gdk-pixbuf-dev: unsatisfied recommendation for gdk-pixbuf-loader-xpm-dev
-pango-dev: unsatisfied recommendation for libxcb-render-dev
-pango-dev: unsatisfied recommendation for libxcb-shm-dev
-bluez4-dev: unsatisfied recommendation for libusb-dev
-bluez4-dev: unsatisfied recommendation for dbus-lib-dev
-gawk-dev: unsatisfied recommendation for update-alternatives-opkg-dev
-gawk-dev: unsatisfied recommendation for gawk-common-dev
-bluez4-dev: unsatisfied recommendation for libudev-dev
-qtsystems-dev: unsatisfied recommendation for libudev-dev
-libqt5serialport-dev: unsatisfied recommendation for libudev-dev
-icu-dev: unsatisfied recommendation for libicuuc-dev
-icu-dev: unsatisfied recommendation for libicudata-dev
-icu-dev: unsatisfied recommendation for libiculx-dev
-icu-dev: unsatisfied recommendation for libicule-dev
-icu-dev: unsatisfied recommendation for libicuio-dev
-icu-dev: unsatisfied recommendation for libicui18n-dev
-icu-dev: unsatisfied recommendation for libicutu-dev
-qtmultimedia-dev: unsatisfied recommendation for libpulse-dev
-qtwebkit-dev: unsatisfied recommendation for sqlite3-dev
-orc-dev: unsatisfied recommendation for liborc-test-0.4-dev
-orc-dev: unsatisfied recommendation for liborc-0.4-dev
-Configuring qemuwrapper-cross-dbg.
-Configuring libc6-dbg.
-Configuring libgcc-s-dbg.
-Configuring packagegroup-core-standalone-sdk-target-dbg.
-Configuring libc6.
-Configuring eglibc-localedata-translit-fraction.
-Configuring eglibc-extra-nss.
-Configuring eglibc-localedata-iso14651-t1-common.
-Configuring eglibc-localedata-iso14651-t1.
-Configuring libgcc1.
-Configuring libstdc++6.
-Configuring libthread-db1.
-Configuring libcidn1.
-Configuring linux-libc-headers-dev.
-Configuring libc6-dev.
-Configuring libgcc-s-dev.
-Configuring libstdc++-dev.
-Configuring eglibc-gconv.
-Configuring eglibc-gconv-iso8859-1.
-Configuring eglibc-utils.
-Configuring eglibc-localedata-translit-small.
-Configuring qemuwrapper-cross.
-Configuring eglibc-localedata-translit-circle.
-Configuring eglibc-localedata-translit-cjk-compat.
-Configuring eglibc-localedata-translit-compat.
-Configuring eglibc-localedata-translit-narrow.
-Configuring eglibc-localedata-translit-wide.
-Configuring eglibc-localedata-translit-font.
-Configuring eglibc-localedata-translit-neutral.
-Configuring eglibc-gconv-cp1252.
-Configuring eglibc-gconv-ibm850.
-Configuring eglibc-localedata-i18n.
-Configuring libsegfault.
-Configuring eglibc-gconv-iso8859-15.
-Configuring packagegroup-core-standalone-sdk-target.
-Collected errors:
- * satisfy_dependencies_for: Cannot satisfy the following dependencies for packagegroup-qt5-toolchain-target:
- * 	qtwebkit-mkspecs * 	qtwebkit (= 5.2.1-r0) * 	qtwebkit-qmlplugins * 	qttools-plugins * 
- * opkg_install_cmd: Cannot install package packagegroup-qt5-toolchain-target.
+ .../files/99_iscsi-initiator-utils                 |    2 +
+ .../iscsi-initiator-utils/files/initd.debian       |  119 ++++++++++
+ .../iscsi-initiator-utils/files/iscsi-initiator    |    4 +
+ .../files/iscsi-initiator-targets.service          |   15 ++
+ .../iscsi-initiator-utils-dont-use-static.patch    |   21 ++
+ .../iscsi-initiator-utils-use-var-for-config.patch |  240 ++++++++++++++++++++
+ .../files/iscsi-initiator.service                  |   12 +
+ .../iscsi-initiator-utils_2.0-873.bb               |  111 +++++++++
+ 8 files changed, 524 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-targets.service
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
 
-DEBUG: Python function do_populate_sdk finished
-ERROR: Function failed: do_populate_sdk
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils
+new file mode 100644
+index 0000000..42fdd60
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/99_iscsi-initiator-utils
+@@ -0,0 +1,2 @@
++# <type> <owner> <group> <mode> <path> <linksource>
++d root root 0755 /var/lock/iscsi none
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
+new file mode 100644
+index 0000000..99a7638
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
+@@ -0,0 +1,119 @@
++#! /bin/sh
++### BEGIN INIT INFO
++# Provides:
++# Required-Start:
++# Required-Stop:
++# Default-Start:
++# Default-Stop:
++# Short-Description: Starts and stops the iSCSI initiator services and logins to default targets
++### END INIT INFO
++#set -x
++PATH=/sbin:/bin:/usr/sbin:/usr/bin
++DAEMON=/usr/sbin/iscsid
++ADM=/usr/sbin/iscsiadm
++PIDFILE=/var/run/iscsid.pid
++
++[ -x "$DAEMON" ] || exit 0
++
++if [ ! -d /sys/class/ ]; then
++  echo "Failure:" "iSCSI requires a mounted sysfs, not started."
++  exit 1
++fi
++
++nodestartup_re='s/^node\.conn\[0]\.startup[ 	]*=[ 	]*//p'
++
++RETVAL=0
++
++start() {
++	echo "Starting iSCSI initiator service" "iscsid"
++	modprobe -q iscsi_tcp 2>/dev/null || :
++	modprobe -q ib_iser 2>/dev/null || :
++	if [ ! -f /etc/iscsi/initiatorname.iscsi ]; then
++		INITIATORNAME=$(iscsi-iname)
++		cat >/etc/iscsi/initiatorname.iscsi <<EOF
++## DO NOT EDIT OR REMOVE THIS FILE!
++## If you remove this file, the iSCSI daemon will not start.
++## If you change the InitiatorName, existing access control lists
++## may reject this initiator.  The InitiatorName must be unique
++## for each iSCSI initiator.  Do NOT duplicate iSCSI InitiatorNames.
++InitiatorName=$INITIATORNAME
++EOF
++	fi
++	start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON
++	RETVAL=$?
++	starttargets
++}
++
++starttargets() {
++	echo "Setting up iSCSI targets"
++	$ADM -m node --loginall=automatic
++}
++
++stoptargets() {
++	echo "Disconnecting iSCSI targets"
++	sync
++	$ADM -m node --logoutall=all
++	RETVAL=$?
++	#if RETVAL is 21, means no active sessions, consider ok
++	if [ "$RETVAL" = "21" ]; then
++		RETVAL=0
++	fi
++}
++
++stop() {
++	stoptargets
++	if [ $RETVAL -ne 0 ]; then
++		echo "Failure:" "Could not stop all targets, try again later"
++		return $RETVAL
++	fi
++
++	echo "Stopping iSCSI initiator service"
++	start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec $DAEMON
++	rm -f $PIDFILE
++	status=0
++	modprobe -r ib_iser 2>/dev/null
++	if [ "$?" -ne "0" -a "$?" -ne "1" ]; then
++		status=1
++	fi
++	modprobe -r iscsi_tcp 2>/dev/null
++	if [ "$?" -ne "0" -a "$?" -ne "1" ]; then
++		status=1
++	fi
++}
++
++restart() {
++	stop
++	if [ $RETVAL -ne 0 ]; then
++		echo "Failure:" "Stopping iSCSI initiator service failed, not starting"
++		return $RETVAL
++	fi
++	start
++}
++
++restarttargets() {
++	stoptargets
++	if [ $RETVAL -ne 0 ]; then
++		echo "Failure:" "Could not stop all targets, try again later"
++		return $RETVAL
++	fi
++	starttargets
++}
++
++status() {
++	#XXX FIXME: what to do here?
++	#status iscsid
++	# list active sessions
++	echo Current active iSCSI sessions:
++	$ADM -m session
++}
++
++case "$1" in
++	start|starttargets|stop|stoptargets|restart|restarttargets|status)
++		$1
++		;;
++	*)
++		echo "Usage: $0 {start|stop|restart|status}"
++		exit 1
++		;;
++esac
++exit $RETVAL
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator
+new file mode 100644
+index 0000000..7fa49a2
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator
+@@ -0,0 +1,4 @@
++# default command line settings for open-iscsi's iscsid
++
++OPTS_ISCSID=""
++OPTS_ISCSIADM=""
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-targets.service b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-targets.service
+new file mode 100644
+index 0000000..564b2d2
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-targets.service
+@@ -0,0 +1,15 @@
++[Unit]
++Description=Open-iSCSI initiator (i.e. client) target bindings
++After=iscsi-initiator.service
++Requires=iscsi-initiator.service
++
++[Service]
++Type=oneshot
++EnvironmentFile=/etc/default/iscsi-initiator
++ExecStart=/usr/sbin/iscsiadm -m node --loginall=automatic $OPTS_ISCSIADM
++ExecStop=/usr/sbin/iscsiadm -m node --logoutall=all $OPTS_ISCSIADM
++RemainAfterExit=yes
++
++[Install]
++WantedBy=multi-user.target
++
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
+new file mode 100644
+index 0000000..ce48e2b
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
+@@ -0,0 +1,21 @@
++iscsi-initiator-utils not to use static
++
++Upstream-status: Backport
++This patch is from fedora17.
++
++Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
++Signed-off-by: Vu Tran <vu.tran@windriver.com>
++
++diff --git a/usr/Makefile b/usr/Makefile
++index 673b7f1..fd14a10 100644
++--- a/usr/Makefile
+++++ b/usr/Makefile
++@@ -61,7 +61,7 @@ iscsiadm: $(ISCSI_LIB_SRCS) $(DISCOVERY_SRCS) iscsiadm.o session_mgmt.o
++ 
++ iscsistart: $(ISCSI_LIB_SRCS) $(INITIATOR_SRCS) $(FW_BOOT_SRCS) \
++ 		iscsistart.o statics.o
++-	$(CC) $(CFLAGS) -static $^ -o $@
+++	$(CC) $(CFLAGS) $^ -o $@
++ clean:
++ 	rm -f *.o $(PROGRAMS) .depend $(LIBSYS)
++ 
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
+new file mode 100644
+index 0000000..50227a7
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
+@@ -0,0 +1,240 @@
++iscsi-initiator-utils to use var for config
++
++Upstream-status: Backport
++This patch is from fedora.
++
++Use /var/lib/iscsi/ instead of /etc/iscsi/ for holding
++state files.
++
++Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
++Signed-off-by: Vu Tran <vu.tran@windriver.com>
++
++diff --git a/README b/README
++index 7364b2d..5e8bff8 100644
++--- a/README
+++++ b/README
++@@ -164,10 +164,10 @@ available on all Linux installations.
++ 
++ The database contains two tables:
++ 
++-- Discovery table (/etc/iscsi/send_targets);
++-- Node table (/etc/iscsi/nodes).
+++- Discovery table (/var/lib/iscsi/send_targets);
+++- Node table (/var/lib/iscsi/nodes).
++ 
++-The regular place for iSCSI database files: /etc/iscsi/nodes
+++The regular place for iSCSI database files: /var/lib/iscsi/nodes
++ 
++ The iscsiadm utility is a command-line tool to manage (update, delete,
++ insert, query) the persistent database.
++@@ -444,7 +444,7 @@ a scsi_host per HBA port).
++ To manage both types of initiator stacks, iscsiadm uses the interface (iface)
++ structure. For each HBA port or for software iscsi for each network
++ device (ethX) or NIC, that you wish to bind sessions to you must create
++-a iface config /etc/iscsi/ifaces.
+++a iface config /var/lib/iscsi/ifaces.
++ 
++ Prep:
++ 
++@@ -478,29 +478,29 @@ Running:
++ iface0 qla4xxx,00:c0:dd:08:63:e8,20.15.0.7,default,iqn.2005-06.com.redhat:madmax
++ iface1 qla4xxx,00:c0:dd:08:63:ea,20.15.0.9,default,iqn.2005-06.com.redhat:madmax
++ 
++-Will report iface configurations that are setup in /etc/iscsi/ifaces.
+++Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
++ The format is:
++ 
++ iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
++ 
++ For software iscsi, you can create the iface configs by hand, but it is
++ reccomended that you use iscsiadm's iface mode. There is a iface.example in
++-/etc/iscsi/ifaces which can be used as a template for the daring.
+++/var/lib/iscsi/ifaces which can be used as a template for the daring.
++ 
++ For each network object you wish to bind a session to you must create
++-a seperate iface config in /etc/iscsi/ifaces and each iface config file
+++a seperate iface config in /var/lib/iscsi/ifaces and each iface config file
++ must have a unique name which is less than or equal to 64 characters.
++ 
++ Example:
++ 
++ If you have NIC1 with MAC address 00:0F:1F:92:6B:BF and NIC2 with
++ MAC address 00:C0:DD:08:63:E7 and you wanted to do software iscsi over
++-TCP/IP. Then in /etc/iscsi/ifaces/iface0 you would enter:
+++TCP/IP. Then in /var/lib/iscsi/ifaces/iface0 you would enter:
++ 
++ iface.transport_name = tcp
++ iface.hwaddress = 00:0F:1F:92:6B:BF
++ 
++-and in /etc/iscsi/ifaces/iface1 you would enter:
+++and in /var/lib/iscsi/ifaces/iface1 you would enter:
++ 
++ iface.transport_name = tcp
++ iface.hwaddress = 00:C0:DD:08:63:E7
++@@ -550,7 +550,7 @@ cxgb3i.00:07:43:05:97:07 cxgb3i,00:07:43:05:97:07,<empty>,<empty>,<empty>
++ qla4xxx.00:0e:1e:04:8b:2e qla4xxx,00:0e:1e:04:8b:2e,<empty>,<empty>,<empty>
++ 
++ 
++-Will report iface configurations that are setup in /etc/iscsi/ifaces.
+++Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
++ The format is:
++ 
++ iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
++@@ -636,7 +636,7 @@ need a seperate network connection to the target for discovery purposes.
++ *This will be fixed in the next version of open-iscsi*
++ 
++ For compatibility reasons, when you run iscsiadm to do discovery, it
++-will check for interfaces in /etc/iscsi/iscsi/ifaces that are using
+++will check for interfaces in /var/lib/iscsi/iscsi/ifaces that are using
++ tcp for the iface.transport and it will bind the portals that are discovered
++ so that they will be logged in through those ifaces. This behavior can also
++ be overriden by passing in the interfaces you want to use. For the case
++@@ -654,7 +654,7 @@ we do not bind a session to a iface, then you can use the special iface
++ 
++ iscsiadm -m discoverydb -t st -p ip:port -I default --discover -P 1
++ 
++-And if you did not define any interfaces in /etc/iscsi/ifaces and do
+++And if you did not define any interfaces in /var/lib/iscsi/ifaces and do
++ not pass anything into iscsiadm, running iscsiadm will do the default
++ behavior, where we allow the network subsystem to decide which
++ device to use.
++@@ -696,7 +696,7 @@ To now log into targets it is the same as with sofware iscsi. See section
++ 
++ 	    ./iscsiadm -m discoverydb -t st -p 192.168.1.1:3260 --discover
++ 
++-	This will search /etc/iscsi/send_targets for a record with the
+++	This will search /var/lib/iscsi/send_targets for a record with the
++ 	ID [portal = 192.168.1.1:3260 and type = sendtargets. If found it
++ 	will perform discovery using the settings stored in the record.
++ 	If a record does not exist, it will be created using the iscsid.conf
++@@ -705,7 +705,7 @@ To now log into targets it is the same as with sofware iscsi. See section
++ 	The argument to -p may also be a hostname instead of an address.
++ 	    ./iscsiadm -m discoverydb -t st -p smoehost --discover
++ 
++-	For the ifaces, iscsiadm will first search /etc/iscsi/ifaces for
+++	For the ifaces, iscsiadm will first search /var/lib/iscsi/ifaces for
++ 	interfaces using software iscsi. If any are found then nodes found
++ 	during discovery will be setup so that they can logged in through
++ 	those interfaces. To specify a specific iface, pass the
++@@ -761,7 +761,7 @@ To now log into targets it is the same as with sofware iscsi. See section
++ 	This command will perform discovery, but not manipulate the node DB.
++ 
++   - SendTargets iSCSI Discovery with a specific interface. If you
++-	wish to only use a subset of the interfaces in /etc/iscsi/ifaces
+++	wish to only use a subset of the interfaces in /var/lib/iscsi/ifaces
++ 	then you can pass them in during discovery:
++ 
++ 	     ./iscsiadm -m discoverydb -t sendtargets -p 192.168.1.1:3260 \
++@@ -1072,8 +1072,8 @@ where targetname is the name of the target and ip_address:port is the address
++ and port of the portal. tpgt, is the portal group tag of
++ the portal, and is not used in iscsiadm commands except for static
++ record creation. And iface name is the name of the iscsi interface
++-defined in /etc/iscsi/ifaces. If no interface was defined in
++-/etc/iscsi/ifaces or passed in, the default behavior is used.
+++defined in /var/lib/iscsi/ifaces. If no interface was defined in
+++/var/lib/iscsi/ifaces or passed in, the default behavior is used.
++ Default here is iscsi_tcp/tcp to be used over which ever NIC the
++ network layer decides is best.
++ 
++@@ -1188,7 +1188,7 @@ If set, iscsid will perform discovery to the address every
++ discovery.isns.discoveryd_poll_inval or
++ discovery.sendtargets.discoveryd_poll_inval seconds,
++ and it will log into any portals found from the discovery source using
++-the ifaces in /etc/iscsi/ifaces.
+++the ifaces in /var/lib/iscsi/ifaces.
++ 
++ Note that for iSNS the poll_interval does not have to be set. If not set,
++ iscsid will only perform rediscovery when it gets a SCN from the server.
++diff --git a/doc/iscsiadm.8 b/doc/iscsiadm.8
++index 7c209f6..e94cca0 100644
++--- a/doc/iscsiadm.8
+++++ b/doc/iscsiadm.8
++@@ -89,7 +89,7 @@ This option is only valid for ping submode.
++ .TP
++ \fB\-I\fR, \fB\-\-interface=\fI[iface]\fR
++ The interface argument specifies the iSCSI interface to use for the operation.
++-iSCSI interfaces (iface) are defined in /etc/iscsi/ifaces. For hardware
+++iSCSI interfaces (iface) are defined in /var/lib/iscsi/ifaces. For hardware
++ iSCSI (qla4xxx) the iface config must have the hardware address
++ (iface.hwaddress = port's MAC address)
++ and the driver/transport_name (iface.transport_name). The iface's name is
++@@ -166,7 +166,7 @@ If no other options are specified: for \fIdiscoverydb\fR and \fInode\fR, all
++ of their respective records are displayed; for \fIsession\fR, all active
++ sessions and connections are displayed; for \fIfw\fR, all boot firmware
++ values are displayed; for \fIhost\fR, all iSCSI hosts are displayed; and
++-for \fIiface\fR, all ifaces setup in /etc/iscsi/ifaces are displayed.
+++for \fIiface\fR, all ifaces setup in /var/lib/iscsi/ifaces are displayed.
++ 
++ .TP
++ \fB\-n\fR, \fB\-\-name=\fIname\fR
++@@ -535,10 +535,10 @@ The configuration file read by \fBiscsid\fR and \fBiscsiadm\fR on startup.
++ The file containing the iSCSI InitiatorName and InitiatorAlias read by
++ \fBiscsid\fR and \fBiscsiadm\fR on startup.
++ .TP
++-/etc/iscsi/nodes/
+++/var/lib/iscsi/nodes/
++ This directory contains the nodes with their targets.
++ .TP
++-/etc/iscsi/send_targets
+++/var/lib/iscsi/send_targets
++ This directory contains the portals.
++ 
++ .SH "SEE ALSO"
++diff --git a/usr/idbm.c b/usr/idbm.c
++index 4d30aa9..316e54f 100644
++--- a/usr/idbm.c
+++++ b/usr/idbm.c
++@@ -2468,9 +2468,9 @@ free_info:
++ int idbm_init(idbm_get_config_file_fn *fn)
++ {
++ 	/* make sure root db dir is there */
++-	if (access(ISCSI_CONFIG_ROOT, F_OK) != 0) {
++-		if (mkdir(ISCSI_CONFIG_ROOT, 0660) != 0) {
++-			log_error("Could not make %s %d\n", ISCSI_CONFIG_ROOT,
+++	if (access(ISCSIVAR, F_OK) != 0) {
+++		if (mkdir(ISCSIVAR, 0660) != 0) {
+++			log_error("Could not make %s %d\n", ISCSIVAR,
++ 				   errno);
++ 			return errno;
++ 		}
++diff --git a/usr/idbm.h b/usr/idbm.h
++index 245f046..f45e86e 100644
++--- a/usr/idbm.h
+++++ b/usr/idbm.h
++@@ -28,12 +28,16 @@
++ #include "config.h"
++ #include "list.h"
++ 
++-#define NODE_CONFIG_DIR		ISCSI_CONFIG_ROOT"nodes"
++-#define SLP_CONFIG_DIR		ISCSI_CONFIG_ROOT"slp"
++-#define ISNS_CONFIG_DIR		ISCSI_CONFIG_ROOT"isns"
++-#define STATIC_CONFIG_DIR	ISCSI_CONFIG_ROOT"static"
++-#define FW_CONFIG_DIR		ISCSI_CONFIG_ROOT"fw"
++-#define ST_CONFIG_DIR		ISCSI_CONFIG_ROOT"send_targets"
+++#define ISCSIVAR			"/var/lib/iscsi/"
+++
+++#define NODE_CONFIG_DIR    ISCSIVAR"nodes"
+++#define SLP_CONFIG_DIR     ISCSIVAR"slp"
+++#define ISNS_CONFIG_DIR    ISCSIVAR"isns"
+++#define STATIC_CONFIG_DIR  ISCSIVAR"static"
+++#define FW_CONFIG_DIR      ISCSIVAR"fw"
+++#define ST_CONFIG_DIR      ISCSIVAR"send_targets"
+++
+++
++ #define ST_CONFIG_NAME		"st_config"
++ #define ISNS_CONFIG_NAME	"isns_config"
++ 
++diff --git a/usr/iface.h b/usr/iface.h
++index 01f7074..2c6ef72 100644
++--- a/usr/iface.h
+++++ b/usr/iface.h
++@@ -20,7 +20,8 @@
++ #ifndef ISCSI_IFACE_H
++ #define ISCSI_IFACE_H
++ 
++-#define IFACE_CONFIG_DIR	ISCSI_CONFIG_ROOT"ifaces"
+++#include "idbm.h"
+++#define IFACE_CONFIG_DIR	ISCSIVAR"ifaces"
++ 
++ struct iface_rec;
++ struct list_head;
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service
+new file mode 100644
+index 0000000..b139751
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Open-iSCSI initiator (i.e. client) service
++After=syslog.target
++
++[Service]
++EnvironmentFile=/etc/default/iscsi-initiator
++ExecStartPre=/sbin/modprobe iscsi_tcp
++ExecStart=/usr/sbin/iscsid -f $OPTS_ISCSID
++
++[Install]
++WantedBy=multi-user.target
++
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+new file mode 100644
+index 0000000..d48cf24
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+@@ -0,0 +1,111 @@
++SUMMARY = "iSCSI daemon and utility programs"
++DESCRIPTION = "Open-iSCSI project is a high performance, transport \
++independent, multi-platform implementation of RFC3720. The iscsi package \
++provides the server daemon for the iSCSI protocol, as well as the utility \
++programs used to manage it. iSCSI is a protocol for distributed \
++disk access using SCSI commands sent over Internet Protocol networks."
++HOMEPAGE = "http://www.open-iscsi.org/"
++LICENSE = "GPLv2 & LGPLv2.1"
++SECTION = "console/network"
++DEPENDS = "openssl flex-native bison-native"
++
++LIC_FILES_CHKSUM = \
++        "file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
++         file://utils/open-isns/COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
++
++SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
++           file://iscsi-initiator-utils-use-var-for-config.patch \
++           file://iscsi-initiator-utils-dont-use-static.patch \
++           file://initd.debian \
++           file://99_iscsi-initiator-utils \
++           file://iscsi-initiator \
++           file://iscsi-initiator.service \
++           file://iscsi-initiator-targets.service \
++"
++SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
++SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
++
++S = "${WORKDIR}/open-iscsi-${PV}"
++
++inherit update-rc.d systemd
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++do_configure () {
++    #need to support cross-compiling in open-isns only
++    (cd utils/open-isns; gnu-configize; \
++     ./configure --host=${TARGET_SYS} --build=${BUILD_SYS} --with-security=no )
++}
++
++do_compile () {
++    #make iscsistart one of PROGRAMS if install_user in do_install
++    #sed -i -e '/^PROGRAMS = /s;$; usr/iscsistart;' Makefile
++
++    #fix the ar used in open-isns
++    sed -i -e 's:ar cr :$(AR) cr :' ${S}/utils/open-isns/Makefile
++    oe_runmake user
++}
++
++do_install () {
++    #completely override the install_user as bugs in Makefile
++    #oe_runmake DESTDIR="${D}" install_user
++
++    #install necessary directories
++    install -d ${D}${sbindir} \
++        ${D}${sysconfdir}/init.d \
++        ${D}${sysconfdir}/iscsi \
++        ${D}${localstatedir}/lib/iscsi/nodes \
++        ${D}${localstatedir}/lib/iscsi/send_targets \
++        ${D}${localstatedir}/lib/iscsi/static \
++        ${D}${localstatedir}/lib/iscsi/isns \
++        ${D}${localstatedir}/lib/iscsi/slp \
++        ${D}${localstatedir}/lib/iscsi/ifaces \
++        ${D}/${mandir}/man8
++
++    install -p -m 755 ${S}/usr/iscsid ${S}/usr/iscsiadm \
++        ${S}/utils/iscsi-iname \
++        ${S}/usr/iscsistart ${D}/${sbindir}
++
++    install -p -m 644 ${S}/doc/iscsiadm.8 ${S}/doc/iscsid.8 ${D}/${mandir}/man8
++    install -p -m 644 ${S}/etc/iscsid.conf ${D}${sysconfdir}/iscsi
++    install -p -m 755 ${WORKDIR}/initd.debian ${D}${sysconfdir}/init.d/iscsid
++
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/tmpfiles.d
++        echo "d /run/${BPN}/lock - - - -" \
++                     > ${D}${sysconfdir}/tmpfiles.d/iscsi.conf
++        install -d ${D}/etc/default/
++        install -p -m 755 ${WORKDIR}/iscsi-initiator ${D}${sysconfdir}/default/
++
++        install -d ${D}${systemd_unitdir}/system/
++        install -m 0644 ${WORKDIR}/iscsi-initiator.service \
++                        ${WORKDIR}/iscsi-initiator-targets.service \
++                        ${D}${systemd_unitdir}/system/
++    else
++        install -d ${D}/etc/default/volatiles
++        install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
++    fi
++}
++
++pkg_postinst_${PN}() {
++    #default there is no initiatorname.iscsi installed
++    #but it is needed or iscsid will fail
++
++    #will run only when postinst on target
++    if [ "x$D" != "x" ]; then
++        exit 1
++    fi
++    if [ ! -f ${sysconfdir}/iscsi/initiatorname.iscsi ]; then
++        echo "InitiatorName=$(${sbindir}/iscsi-iname)" > \
++        ${sysconfdir}/iscsi/initiatorname.iscsi
++    fi
++
++    if [ -e /etc/init.d/populate-volatile.sh ]; then
++        /etc/init.d/populate-volatile.sh update
++    elif command -v systemd-tmpfiles >/dev/null; then
++        systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/iscsi.conf
++    fi
++}
++
++SYSTEMD_SERVICE = " iscsi-initiator.service iscsi-initiator-targets.service "
++INITSCRIPT_NAME = "iscsid"
++INITSCRIPT_PARAMS = "start 30 1 2 3 4 5 . stop 70 0 1 2 3 4 5 6 ."
+-- 
+1.7.10.4
+
 
