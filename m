@@ -1,35 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 03FF0609B2;
-	Thu, 25 Sep 2014 19:18:28 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id y10so8639873wgg.2
-	for <multiple recipients>; Thu, 25 Sep 2014 12:18:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=xnQUA7sYYysg2mb8ABlTyrUhnL09iLNyFiJqfsG8cyE=;
-	b=gDaCaY+YfYYEqCtDUXWnzRLfTiqbIhmqa2H2gILE66Xoso3wS68GJmFDxIg88kYp2v
-	rrbHG8PXbdBx8T1mV/I50ao3GVmeGp26Jt7JHp3RXrjPlLkbqGVjknLYPi6uJMEWDkyt
-	3bO0aR/jpdtLVmkkHy2Tz8tYTx/rZveQ7nS3ZgnlnhT5eUgcjkwotcgH0Etp9vltbZSc
-	Puh7DyE+7UMa0zy4hQBBxz65d1NOQlNIUc5UYRt3urjCJe11mkcY/HUSETeYz65UmVWp
-	47aF6m+61fw3+l3cFByDBywSIjcnyrWnQDRkxlzY66iA/Qb51EcMoY4IrLEXAhhwhEXz
-	y3cw==
-X-Received: by 10.194.78.4 with SMTP id x4mr18502715wjw.44.1411672709087;
-	Thu, 25 Sep 2014 12:18:29 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	iy10sm4149334wic.5.2014.09.25.12.18.28 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 25 Sep 2014 12:18:28 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 25 Sep 2014 21:19:16 +0200
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20140925191916.GO25706@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: State of bitbake world, Failed tasks 2014-09-25
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-lb0-f182.google.com (mail-lb0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DCE765E1A
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Sep 2014 09:43:36 +0000 (UTC)
+Received: by mail-lb0-f182.google.com with SMTP id z11so2420970lbi.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Sep 2014 02:43:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=7RRxmpgEg+ilCyNHbvVEc8tCXpxYdghbjEzuBDRCuzM=;
+	b=ACHjJMOUnyfeYy6Z7MyRIuqCzDot9eUQ23FVWOTZok7jv/o5ukpIjd6TJhU9aEqMP4
+	vAchKs2d2S2tjRVTM7dL+Ab9k2NWMUS8RfO2EsHcQw6a0hnToyvfCGMqKdXlCSNSEc9m
+	uEM/mJ/YnVyd29x1iYbcX15nwZYEx8cpsYsLF0lC3hegDt8BDFBwUAdZTie3Hg9GkoRl
+	WboJ785EqFzPiGSETNXAE4eM59JebEYC37wefkHW+XyV4+PcdZ6Tmrfd1qyNyeH1/lGf
+	UNOvTAbbEzUJJ5KYeVVSkYPKlwoUg0tw7IQYzXjYNKKmlpUreWabeaZRAIqdUIN6Ncmp
+	DgnA==
+X-Gm-Message-State: ALoCoQm828bkZvmywmjcoALgQ15m0t6AdO6Hg2L7e0sSftcJ1ZlElfBuNOUJMDoh6ZrMXXRHYAXY
+X-Received: by 10.152.28.74 with SMTP id z10mr19603758lag.10.1411724615907;
+	Fri, 26 Sep 2014 02:43:35 -0700 (PDT)
+Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
+	[91.152.78.194])
+	by mx.google.com with ESMTPSA id g18sm1709386lbo.41.2014.09.26.02.43.34
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 26 Sep 2014 02:43:35 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 26 Sep 2014 12:43:32 +0300
+Message-Id: <1411724612-16616-1-git-send-email-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.1.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] pm-qa: update to 0.4.14 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,92 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Sep 2014 19:18:39 -0000
-X-Groupsio-MsgNum: 52237
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NKtYx2Ppz7d1tORf"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 26 Sep 2014 09:43:47 -0000
 
---NKtYx2Ppz7d1tORf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
+ meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-BTW: I've forgot to update date in my previous test-dependencies status, it=
- should be 2014-09-01.
+diff --git a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
+index 61511a3..dc16aef 100644
+--- a/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
++++ b/meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb
+@@ -4,12 +4,12 @@ HOMEPAGE = "https://wiki.linaro.org/WorkingGroups/PowerManagement/Resources/Test
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+-PV = "0.4.12"
++PV = "0.4.14"
+ 
+ BRANCH ?= "master"
+ 
+-# Corresponds to tag pm-qa-v0.4.12
+-SRCREV = "16c5d643c2a2318f8dfe12079a160cf41c17ec06"
++# Corresponds to tag pm-qa-v0.4.14
++SRCREV = "9111d1930f02337394cf16e84ad2a27f33607cbb"
+ 
+ SRC_URI = "git://git.linaro.org/power/pm-qa.git;protocol=git;branch=${BRANCH}"
+ 
+-- 
+2.1.1
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Chromium and firefox seem to be fixed now, but there are couple new issues,=
- some of them
-only as pending patches on e-mail.
-
-=3D=3D Failed tasks 2014-09-25 =3D=3D
-
-=3D=3D=3D common (5) =3D=3D=3D
-    * meta-openembedded/meta-multimedia/recipes-multimedia/musicpd/libmpd_1=
-1.8.17.bb, do_compile
-    * meta-openembedded/meta-networking/recipes-connectivity/cyassl/cyassl_=
-3.2.0.bb, do_fetch
-    * meta-openembedded/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb, =
-do_install
-    * meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb, do_=
-compile
-    * meta-openembedded/meta-oe/recipes-navigation/navit/navit_svn.bb, do_c=
-ompile
-
-=3D=3D=3D common-x86 (2) =3D=3D=3D
-    * meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.bb=
-, do_compile
-    * meta-openembedded/meta-oe/recipes-support/vala-terminal/vala-terminal=
-_git.bb, do_configure
-
-=3D=3D=3D qemuarm (5) =3D=3D=3D
-    * meta-openembedded/meta-multimedia/recipes-mediacentre/xbmc/xbmc_13.2.=
-bb, do_compile
-    * meta-openembedded/meta-networking/recipes-support/pimd/pimd_2.1.8.bb,=
- do_fetch
-    * meta-openembedded/meta-oe/recipes-support/opencv/opencv_3.0.0.bb, do_=
-compile
-    * meta-qt5/recipes-qt/qt5/qtmultimedia_5.3.1.bb, do_fetch
-    * openembedded-core/meta/recipes-kernel/perf/perf.bb, do_compile
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
-de_2.11.16.bb, do_compile
-
-=3D=3D=3D qemux86_64 (1) =3D=3D=3D
-    * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb, do_compile
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||10    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
-og.world.20140923_174903.log/||http://errors.yoctoproject.org:80/Errors/Sea=
-rch/1/2624/
-|-
-||qemux86       ||10    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
-og.world.20140924_093628.log/||http://errors.yoctoproject.org:80/Errors/Sea=
-rch/1/2635/
-|-
-||qemux86_64    ||9     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
-og.world.20140925_022951.log/||http://errors.yoctoproject.org:80/Errors/Sea=
-rch/1/2644/
-|}
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---NKtYx2Ppz7d1tORf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlQkarQACgkQN1Ujt2V2gBzvTgCeMMqSpIXYgUf57OHZuOocCp1q
-FCUAn2VfhjmJD12KLLBEOnJniYCOM3Qp
-=zIZa
------END PGP SIGNATURE-----
-
---NKtYx2Ppz7d1tORf--
