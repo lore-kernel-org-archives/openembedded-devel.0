@@ -1,33 +1,37 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from mail-qc0-f181.google.com (mail-qc0-f181.google.com
-	[209.85.216.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 3375360167
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EB8465E2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Sep 2014 14:25:10 +0000 (UTC)
-Received: by mail-qc0-f181.google.com with SMTP id w7so3925380qcr.40
+	Sat, 27 Sep 2014 10:28:38 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id z2so784938wiv.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Sep 2014 07:25:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=YavIQ75meCPbQvKu+THtgYD/nW0Nw62J6ITyFAj+q18=;
-	b=vqfogiKBq6LxPG907qGa6mi90T2nF+Z2UbTDL1uD0LqSpZajHuo/zbkXJCOdsjiZoa
-	Y7dUDgNspr+oFDQ8ViqReCR6N5JcVD+Zn+8gbEwybSsZHq9zT5GwQy+rqdWJZjTQj8Xl
-	QWChxGd105ONaAkViRip6BZqaW+O4eiuHzV4OY2wRvSpgzaAUXj1TQZyLKEWfBIe/Ay+
-	MPrfoqraKA1P9xhfMsn8Jvltimh2Daxf3wMef0jE9qf+7Vm+WqG7CnG5bX9EB1B3VzsK
-	/UykcQihgTKLDvorQcVdbDI2araK6Gq9cZe5sqxiGTPcerua8wXPVwxbT3dIxDDg8bTP
-	7iOQ==
-MIME-Version: 1.0
-X-Received: by 10.140.23.177 with SMTP id 46mr33525688qgp.64.1411741511671;
-	Fri, 26 Sep 2014 07:25:11 -0700 (PDT)
-Sender: cliff.brake@gmail.com
-Received: by 10.140.93.201 with HTTP; Fri, 26 Sep 2014 07:25:11 -0700 (PDT)
-Date: Fri, 26 Sep 2014 10:25:11 -0400
-X-Google-Sender-Auth: xPApFaOWS_r1rmqfXdpuaBcYMzA
-Message-ID: <CAOd_LFwvwKvJWXpc4uhYqm4i61vs37isLNmzf5DqjmBvTeiR6w@mail.gmail.com>
-From: Cliff Brake <cbrake@bec-systems.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][daisy] pull request libmikmod: Adjust SRC_URI (2014-09-26 09:22:37 -0400)
+	Sat, 27 Sep 2014 03:28:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ixBJhKRw8oqSukeBE6UeJ9Z/fj5KlCHDd34AalIDYA4=;
+	b=cyU7RsQCmTGROopibbZpKQ9V+HusV7b0jQiQiAA/t5RvJsqKkHF7SGMUtR3RoC+y5i
+	3Y9GYqjg9QPM5FtdoedxzHbzbXis7kSFgmFU4NBS1GJ/Ms3vVjULzQWtbANNada6/3hQ
+	F9IjkPJ541jLMsggPDoDSAHf3H9SsVXdF03v+w9jv75WX+e3eL4BDnWHiLEU+ZCAA5Hd
+	PXiroqqv40ILFGAZDpasU896LIe2amRs8Hi0h7xWT46jyF/YDLJbKvzErERtphgoi+a7
+	oIc5aHqT/7hxzQsMShJZfPBPQgq/WsRlM/cGsGjPhyc3g2akkv40VcbK1tauXkhUGLAP
+	FbPw==
+X-Gm-Message-State: ALoCoQn4xbhVqCx2Fm0V/k4e7duc0n5FXUKTjOrBD85WTo4nGaoIAQD1zq/b0ZWikrlkgINf0Jkg
+X-Received: by 10.194.63.205 with SMTP id i13mr30575452wjs.74.1411813719102;
+	Sat, 27 Sep 2014 03:28:39 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+	by mx.google.com with ESMTPSA id ka3sm9057145wjc.3.2014.09.27.03.28.37
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sat, 27 Sep 2014 03:28:38 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 27 Sep 2014 12:28:33 +0200
+Message-Id: <1411813713-11909-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: danders.dev@gmail.com, Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] fb-test: update to 1.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,28 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Sep 2014 14:25:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Sep 2014 10:28:43 -0000
 
-The following changes since commit 662cf409c1175450699d498085f3c894e0fe81d0=
-:
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-support/fbtest/fb-test_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-  php: Fix native build due mistakenly linking against host's iconv
-(2014-09-01 11:45:23 +0200)
+diff --git a/meta-oe/recipes-support/fbtest/fb-test_git.bb b/meta-oe/recipes-support/fbtest/fb-test_git.bb
+index c8b4a1b..65f98c1 100644
+--- a/meta-oe/recipes-support/fbtest/fb-test_git.bb
++++ b/meta-oe/recipes-support/fbtest/fb-test_git.bb
+@@ -1,11 +1,11 @@
+ SUMMARY = "Test suite for Linux framebuffer"
+ 
+-PV = "0.0"
++PV = "1.1.0"
+ 
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
+ 
+-SRCREV = "85eab266b123a08098af86afdb1599947d276e32"
++SRCREV = "063ec650960c2d79ac51f5c5f026cb05343a33e2"
+ SRC_URI = "git://github.com/prpplague/fb-test-app.git"
+ 
+ S = "${WORKDIR}/git"
+-- 
+1.9.0
 
-are available in the git repository at:
-
-  https://github.com/cbrake/meta-openembedded.git 2014-09-26_merge-to-daisy
-
-for you to fetch changes up to 8e6f6e49c99a12a0382e48451f37adac0181362f:
-
-  libmikmod: Adjust SRC_URI (2014-09-26 09:22:37 -0400)
-
-----------------------------------------------------------------
-Oliver St=C3=A4bler (1):
-      libmikmod: Adjust SRC_URI
-
- meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
