@@ -1,37 +1,35 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EB8465E2B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 8821A65E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Sep 2014 10:28:38 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id z2so784938wiv.17
+	Sat, 27 Sep 2014 19:11:32 +0000 (UTC)
+Received: by mail-pa0-f45.google.com with SMTP id rd3so5529853pab.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Sep 2014 03:28:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ixBJhKRw8oqSukeBE6UeJ9Z/fj5KlCHDd34AalIDYA4=;
-	b=cyU7RsQCmTGROopibbZpKQ9V+HusV7b0jQiQiAA/t5RvJsqKkHF7SGMUtR3RoC+y5i
-	3Y9GYqjg9QPM5FtdoedxzHbzbXis7kSFgmFU4NBS1GJ/Ms3vVjULzQWtbANNada6/3hQ
-	F9IjkPJ541jLMsggPDoDSAHf3H9SsVXdF03v+w9jv75WX+e3eL4BDnWHiLEU+ZCAA5Hd
-	PXiroqqv40ILFGAZDpasU896LIe2amRs8Hi0h7xWT46jyF/YDLJbKvzErERtphgoi+a7
-	oIc5aHqT/7hxzQsMShJZfPBPQgq/WsRlM/cGsGjPhyc3g2akkv40VcbK1tauXkhUGLAP
-	FbPw==
-X-Gm-Message-State: ALoCoQn4xbhVqCx2Fm0V/k4e7duc0n5FXUKTjOrBD85WTo4nGaoIAQD1zq/b0ZWikrlkgINf0Jkg
-X-Received: by 10.194.63.205 with SMTP id i13mr30575452wjs.74.1411813719102;
-	Sat, 27 Sep 2014 03:28:39 -0700 (PDT)
-Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
-	by mx.google.com with ESMTPSA id ka3sm9057145wjc.3.2014.09.27.03.28.37
+	Sat, 27 Sep 2014 12:11:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=J3C7b1Uo+d/SYpmMarGyXx3BI7qCLwSilXja2lW4scg=;
+	b=MLh7SjkRPQ9W0IaVjrygTmhfc0sDSLXzOCPi/H4u4NlFWhQ3nQHaeuKr642kzR7AUi
+	hz/6Bkfx4ZkdKgJgkaVfp5Yu7hEbFS7RL458Xj1G8dZ5uzXtHEb3SJgHWtd48Ro1avEY
+	hOFnFE3Dnj0mp07y0kZa1SmA+eUmVVJwXaH61VhD2fiiw4oI74/qNsbv0sAB5N8b4IAq
+	oz3YcaW2rbToGknnlTSZznexNtuIZ1NjOGDCoboxnmBqlA6dTB6mDPaI5H/vlXvtzGAn
+	f7MHxRDiZOhhnW3toQbPezksJCcHrA9Bsi6UqLD7p917CeOg2pQHpBLaSel5z0BvcmuC
+	Gi8A==
+X-Received: by 10.66.193.4 with SMTP id hk4mr43483647pac.12.1411845094161;
+	Sat, 27 Sep 2014 12:11:34 -0700 (PDT)
+Received: from haswell.localdomain (c-76-103-58-225.hsd1.ca.comcast.net.
+	[76.103.58.225])
+	by mx.google.com with ESMTPSA id d5sm8158858pbu.45.2014.09.27.12.11.32
 	for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Sat, 27 Sep 2014 03:28:38 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 27 Sep 2014 12:11:33 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Sep 2014 12:28:33 +0200
-Message-Id: <1411813713-11909-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.9.0
-Cc: danders.dev@gmail.com, Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] fb-test: update to 1.1.0
+Date: Sat, 27 Sep 2014 12:15:25 -0700
+Message-Id: <1411845327-16713-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.1
+Subject: [meta-opie][PATCH] packagegroups: Move inheriting packagegroup after setting PACKAGE_ARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,32 +43,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Sep 2014 10:28:43 -0000
+X-List-Received-Date: Sat, 27 Sep 2014 19:11:34 -0000
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Fixes
+
+ERROR: Please ensure recipe
+/home/ubuntu/work/angstrom/sources/meta-opie/recipes-opie/packagegroups/packagegroup-opie-16mb.bb
+sets PACKAGE_ARCH before inherit packagegroup
+ERROR: Please ensure recipe
+/home/ubuntu/work/angstrom/sources/meta-opie/recipes-opie/packagegroups/packagegroup-opie.bb
+sets PACKAGE_ARCH before inherit packagegroup
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/fbtest/fb-test_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-opie/packagegroups/packagegroup-opie-16mb.bb | 4 ++--
+ recipes-opie/packagegroups/packagegroup-opie.bb      | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/fbtest/fb-test_git.bb b/meta-oe/recipes-support/fbtest/fb-test_git.bb
-index c8b4a1b..65f98c1 100644
---- a/meta-oe/recipes-support/fbtest/fb-test_git.bb
-+++ b/meta-oe/recipes-support/fbtest/fb-test_git.bb
-@@ -1,11 +1,11 @@
- SUMMARY = "Test suite for Linux framebuffer"
+diff --git a/recipes-opie/packagegroups/packagegroup-opie-16mb.bb b/recipes-opie/packagegroups/packagegroup-opie-16mb.bb
+index a6f2855..60ea111 100644
+--- a/recipes-opie/packagegroups/packagegroup-opie-16mb.bb
++++ b/recipes-opie/packagegroups/packagegroup-opie-16mb.bb
+@@ -3,10 +3,10 @@ SECTION = "opie/base"
+ LICENSE = "MIT"
+ PR = "r7"
  
--PV = "0.0"
-+PV = "1.1.0"
+-inherit packagegroup
+-
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
++inherit packagegroup
++
+ PACKAGES = "packagegroup-opie-16mb-base \
+             packagegroup-opie-16mb-applets \
+             packagegroup-opie-16mb-inputmethods \
+diff --git a/recipes-opie/packagegroups/packagegroup-opie.bb b/recipes-opie/packagegroups/packagegroup-opie.bb
+index 16dc212..42568aa 100644
+--- a/recipes-opie/packagegroups/packagegroup-opie.bb
++++ b/recipes-opie/packagegroups/packagegroup-opie.bb
+@@ -4,10 +4,10 @@ LICENSE = "MIT"
  
--SRCREV = "85eab266b123a08098af86afdb1599947d276e32"
-+SRCREV = "063ec650960c2d79ac51f5c5f026cb05343a33e2"
- SRC_URI = "git://github.com/prpplague/fb-test-app.git"
+ PR = "r18"
  
- S = "${WORKDIR}/git"
+-inherit packagegroup
+-
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
++inherit packagegroup
++
+ PROVIDES = "packagegroup-opie-everything"
+ 
+ PACKAGES = "packagegroup-opie-base \
 -- 
-1.9.0
+2.1.1
 
 
