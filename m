@@ -1,38 +1,24 @@
-Return-Path: <coldnew.tw@gmail.com>
-Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DCB16FD16
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1429D6FDA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Sep 2014 08:58:18 +0000 (UTC)
-Received: by mail-pd0-f172.google.com with SMTP id g10so3605052pdj.3
+	Sun, 28 Sep 2014 09:35:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8S9ZdIr022498
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Sep 2014 01:58:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=references:from:to:subject:date:in-reply-to:message-id:mime-version
-	:content-type; bh=Ml7a+rqpWMnJy/bRqD8rh0Se7RproNUaEUQMan/xFys=;
-	b=I7l8ilShw5a1PmMiFkXo5OmNlK03RTQshD4RQ59o7WsK5r1WivuvqPeQrwngIiTqwp
-	C7AblimcKX15UI/cnKxtL6uU6eNAgsbZ2x2UJmhNfPCjY9+8iO1MlgAVw+sf4PneXCqr
-	J4LFZHlGWKC8N1NadSqfonBIrdf3Ijo6HKyvPxTygbXhoLNGiGs/hwrboi2sBZZEhos4
-	rR0RCI9Md3SVMqvGzJdBpc/hYsr3HzYxXO1TKgwGKa6z1Hugx9o7PxR7oi7dhVaA5Qd8
-	nVKFlNAH4QJ+BIJbW0hivKT6e0UQSwJ6Y6YKghw5AJC/Aa/KnB1wR1UeX7EgA8n/hWKj
-	6XWw==
-X-Received: by 10.68.213.97 with SMTP id nr1mr49229847pbc.85.1411894699060;
-	Sun, 28 Sep 2014 01:58:19 -0700 (PDT)
-Received: from Rosia (61-62-204-38-adsl-tpe.dynamic.so-net.net.tw.
-	[61.62.204.38])
-	by mx.google.com with ESMTPSA id d4sm8828046pdk.41.2014.09.28.01.58.17
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 28 Sep 2014 01:58:18 -0700 (PDT)
-References: <1411881077-86222-1-git-send-email-coldnew.tw@gmail.com>
-	<20140928054750.GQ25706@jama>
-From: Yen-Chin Lee <coldnew.tw@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Sep 2014 16:55:22 +0800
-In-reply-to: <20140928054750.GQ25706@jama>
-Message-ID: <m2y4t4f7fl.fsf@gmail.com>
+	Sun, 28 Sep 2014 02:35:39 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 28 Sep 2014 02:35:38 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 28 Sep 2014 05:35:37 -0400
+Message-ID: <1411896937-16000-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-Subject: Re: [meta-qt5][PATCH v2] qt5: Add Qt 5.3.2 packages
+Subject: [meta-oe][PATCH] krb5: update to version 1.12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,399 +32,514 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Sep 2014 08:58:20 -0000
+X-List-Received-Date: Sun, 28 Sep 2014 09:35:43 -0000
 Content-Type: text/plain
 
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Martin Jansa writes:
+Changed:
+ * Add init scripts and default configs based on debian
+ * Add a patch for crosscompile nm
+ * Add a patch to suppress /usr/lib in krb5-config
+ * Add DESCRIPTION
+ * Remove blacklist and inherit autotools-brokensep
+ * Add PACKAGECONFIG for ldap and readline
 
-> On Sun, Sep 28, 2014 at 01:11:17PM +0800, Yen-Chin Lee wrote:
->> Qt 5.3.2 has been released in September 16th, 2014.
->>
->> We still keep QT_VERSION to 5.3.1, if users want to upgrade to QT 5.3.2
->> they should modified the QT_VERSION variable on their own.
->>
->
-> I would remove the 5.3.1 version (and _git recipes will later be used
-> for 5.4)
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../krb5/krb5/crosscompile_nm.patch                |  29 +++++
+ .../debian-suppress-usr-lib-in-krb5-config.patch   |  48 +++++++
+ .../krb5/krb5/etc/default/krb5-admin-server        |   6 +
+ .../krb5/krb5/etc/default/krb5-kdc                 |   5 +
+ .../krb5/krb5/etc/init.d/krb5-admin-server         | 140 +++++++++++++++++++++
+ .../krb5/krb5/etc/init.d/krb5-kdc                  | 133 ++++++++++++++++++++
+ .../krb5/{krb5_1.11.3.bb => krb5_1.12.2.bb}        |  38 ++++--
+ 7 files changed, 392 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-admin-server
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-kdc
+ create mode 100755 meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-admin-server
+ create mode 100755 meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-kdc
+ rename meta-oe/recipes-connectivity/krb5/{krb5_1.11.3.bb => krb5_1.12.2.bb} (49%)
 
-Wow! That's great news! Actually I also want to test the Qt 5.4 version,
-it's nice if we can has Qt 5.4 git support soon.
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+new file mode 100644
+index 0000000..d3e6937
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/crosscompile_nm.patch
+@@ -0,0 +1,29 @@
++Modifies export-check.pl to use look for $ENV{'NM'} before
++defaulting to using 'nm'
++
++Upstream-Status: Pending
++
++Signed-off-by: Amy Fong <amy.fong@windriver.com>
++---
++
++ export-check.pl |    7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
++
++Index: src/util/export-check.pl
++===================================================================
++--- src.orig/util/export-check.pl
+++++ src/util/export-check.pl
++@@ -38,7 +38,12 @@
++ my($exfile, $libfile) = @ARGV;
++ 
++ @missing = ();
++-open NM, "nm -Dg --defined-only $libfile |" || die "can't run nm on $libfile: $!";
+++if (defined($ENV{'NM'})) {
+++	$nm = $ENV{'NM'};
+++} else {
+++	$nm = "nm";
+++}
+++open NM, "$nm -Dg --defined-only $libfile |" || die "can't run nm on $libfile: $!";
++ open EXPORT, "< $exfile" || die "can't read $exfile: $!";
++ 
++ @export = <EXPORT>;
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch b/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
+new file mode 100644
+index 0000000..f0182ee
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/debian-suppress-usr-lib-in-krb5-config.patch
+@@ -0,0 +1,48 @@
++Subject: [PATCH] debian: suppress /usr/lib in krb5-config
++
++Upstream-Status: Pending
++
++Handel multi-arch suppressions
++
++The patch is from debian.
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ src/build-tools/krb5-config.in |   14 +++++++++-----
++ 1 files changed, 9 insertions(+), 5 deletions(-)
++
++diff --git a/src/build-tools/krb5-config.in b/src/build-tools/krb5-config.in
++index f6184da..637bad7 100755
++--- a/src/build-tools/krb5-config.in
+++++ b/src/build-tools/krb5-config.in
++@@ -138,6 +138,7 @@ if test -n "$do_help"; then
++     echo "        [--defktname]     Show built-in default keytab name"
++     echo "        [--defcktname]    Show built-in default client keytab name"
++     echo "        [--cflags]        Compile time CFLAGS"
+++    echo "        [--deps]          Include dependent libraries"
++     echo "        [--libs]          List libraries required to link [LIBRARIES]"
++     echo "Libraries:"
++     echo "        krb5              Kerberos 5 application"
++@@ -209,11 +210,14 @@ fi
++ 
++ if test -n "$do_libs"; then
++     # Assumes /usr/lib is the standard library directory everywhere...
++-    if test "$libdir" = /usr/lib; then
++-	libdirarg=
++-    else
++-	libdirarg="-L$libdir"
++-    fi
+++    case $libdir in
+++	/usr/lib*)
+++	    libdirarg=
+++	    ;;
+++	*)
+++	    libdirarg="-L$libdir"
+++	    ;;
+++    esac
++     # Ugly gross hack for our build tree
++     lib_flags=`echo $CC_LINK | sed -e 's/\$(CC)//' \
++ 	    -e 's/\$(PURE)//' \
++-- 
++1.7.1
++
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-admin-server b/meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-admin-server
+new file mode 100644
+index 0000000..2835929
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-admin-server
+@@ -0,0 +1,6 @@
++# Automatically generated.  If you change anything in this file other than the
++# values of RUN_KADMIND or DAEMON_ARGS, first run dpkg-reconfigure
++# krb5-admin-server and disable managing the kadmin configuration with
++# debconf.  Otherwise, changes will be overwritten.
++
++RUN_KADMIND=true
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-kdc b/meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-kdc
+new file mode 100644
+index 0000000..310bfcf
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/etc/default/krb5-kdc
+@@ -0,0 +1,5 @@
++# Automatically generated.  Only the value of DAEMON_ARGS will be preserved.
++# If you change anything in this file other than DAEMON_ARGS, first run
++# dpkg-reconfigure krb5-kdc and disable managing the KDC configuration with
++# debconf.  Otherwise, changes will be overwritten.
++
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-admin-server b/meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-admin-server
+new file mode 100755
+index 0000000..79238d4
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-admin-server
+@@ -0,0 +1,140 @@
++#! /bin/sh
++### BEGIN INIT INFO
++# Provides:             krb5-admin-server
++# Required-Start:       $local_fs $remote_fs $network $syslog
++# Required-Stop:        $local_fs $remote_fs $network $syslog
++# Should-Start:         krb5-kdc
++# Should-Stop:          krb5-kdc
++# Default-Start:        2 3 4 5
++# Default-Stop:         0 1 6
++# Short-Description:    MIT Kerberos KDC administrative daemon
++# Description:          Starts, stops, or restarts the MIT Kerberos KDC
++#                       administrative daemon (kadmind).  This daemon answers
++#                       requests from kadmin clients and allows administrators
++#                       to create, delete, and modify principals in the KDC
++#                       database.
++### END INIT INFO
++
++# Author: Sam Hartman <hartmans@mit.edu>
++# Author: Russ Allbery <rra@debian.org>
++#
++# Based on the /etc/init.d/skeleton template as found in initscripts version
++# 2.86.ds1-15.
++
++# June, 2012: Adopted for yocto <amy.fong@windriver.com>
++
++PATH=/usr/sbin:/usr/bin:/sbin:/bin
++DESC="Kerberos administrative servers"
++NAME=kadmind
++DAEMON=/usr/sbin/$NAME
++DAEMON_ARGS=""
++SCRIPTNAME=/etc/init.d/krb5-admin-server
++DEFAULT=/etc/default/krb5-admin-server
++
++# Exit if the package is not installed.
++[ -x "$DAEMON" ] || exit 0
++
++# Read configuration if it is present.
++[ -r "$DEFAULT" ] && . "$DEFAULT"
++
++# Get the setting of VERBOSE and other rcS variables.
++[ -f /etc/default/rcS ] && . /etc/default/rcS
++
++. /etc/init.d/functions
++
++ADMIN_SERVER_LOG=/var/log/kadmind.log
++[ -f $ADMIN_SERVER_LOG ] && (test ! -x /sbin/restorecon \
++    || /sbin/restorecon -F $ADMIN_SERVER_LOG)
++
++# Return
++#   0 if daemon has been started
++#   1 if daemon was already running
++#   2 if daemon could not be started
++do_start()
++{
++    start-stop-daemon --start --quiet --startas $DAEMON --name $NAME --test \
++        > /dev/null || return 1
++    start-stop-daemon --start --quiet --startas $DAEMON --name $NAME \
++        -- $DAEMON_ARGS || return 2
++}
++
++# Return
++#   0 if daemon has been stopped
++#   1 if daemon was already stopped
++#   2 if daemon could not be stopped
++#   other if a failure occurred
++do_stop()
++{
++    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --name $NAME
++    RETVAL="$?"
++    [ "$RETVAL" = 2 ] && return 2
++    return "$RETVAL"
++}
++
++
++case "$1" in
++  start)
++    if [ "$RUN_KADMIND" = false ] ; then
++        if [ "$VERBOSE" != no ] ; then
++            echo "Not starting $DESC per configuration"
++        fi
++        exit 0
++    fi
++    [ "$VERBOSE" != no ] && echo "Starting $DESC" "$NAME"
++    do_start
++    case "$?" in
++      0|1) [ "$VERBOSE" != no ] && echo 0 ;;
++      2)   [ "$VERBOSE" != no ] && echo 1 ;;
++    esac
++    ;;
++
++  stop)
++    [ "$VERBOSE" != no ] && echo "Stopping $DESC" "$NAME"
++    do_stop
++    case "$?" in
++      0|1) [ "$VERBOSE" != no ] && echo 0 ;;
++      2)   [ "$VERBOSE" != no ] && echo 1 ;;
++    esac
++    ;;
++
++  restart|force-reload)
++    if [ "$RUN_KADMIND" = false ] ; then
++        if [ "$VERBOSE" != no ] ; then
++            echo "Not restarting $DESC per configuration"
++        fi
++        exit 0
++    fi
++    echo "Restarting $DESC" "$NAME"
++    do_stop
++    case "$?" in
++      0|1)
++        do_start
++        case "$?" in
++          0) [ "$VERBOSE" != no ] && echo 0 ;;
++          *) [ "$VERBOSE" != no ] && echo 1 ;;
++        esac
++        ;;
++      *)
++        echo 1
++        ;;
++    esac
++    ;;
++
++  status)
++    pidofproc "$DAEMON" >/dev/null
++    status=$?
++    if [ $status -eq 0 ]; then
++        echo "$NAME is running."
++    else
++        echo "$NAME is not running."
++    fi
++    exit $status
++    ;;
++
++  *)
++    echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload|status}" >&2
++    exit 3
++    ;;
++esac
++
++:
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-kdc b/meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-kdc
+new file mode 100755
+index 0000000..865d1b9
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/etc/init.d/krb5-kdc
+@@ -0,0 +1,133 @@
++#! /bin/sh
++### BEGIN INIT INFO
++# Provides:             krb5-kdc
++# Required-Start:       $local_fs $remote_fs $network $syslog
++# Required-Stop:        $local_fs $remote_fs $network $syslog
++# X-Start-Before: $x-display-manager
++# Default-Start:        2 3 4 5
++# Default-Stop:         0 1 6
++# Short-Description:    MIT Kerberos KDC
++# Description:          Starts, stops, or restarts the MIT Kerberos KDC.  This
++#                       daemon responds to ticket requests from Kerberos
++#                       clients.
++### END INIT INFO
++
++# Author: Sam Hartman <hartmans@mit.edu>
++# Author: Russ Allbery <rra@debian.org>
++#
++# Based on the /etc/init.d/skeleton template as found in initscripts version
++# 2.86.ds1-15.
++
++# June, 2012: Adopted for yocto <amy.fong@windriver.com>
++
++PATH=/usr/sbin:/usr/bin:/sbin:/bin
++DESC="Kerberos KDC"
++NAME=krb5kdc
++DAEMON=/usr/sbin/$NAME
++DAEMON_ARGS=""
++SCRIPTNAME=/etc/init.d/krb5-kdc
++
++# Exit if the package is not installed.
++[ -x "$DAEMON" ] || exit 0
++
++# Read configuration if it is present.
++[ -r /etc/default/krb5-kdc ] && . /etc/default/krb5-kdc
++
++# Get the setting of VERBOSE and other rcS variables.
++[ -f /etc/default/rcS ] && . /etc/default/rcS
++
++. /etc/init.d/functions
++
++# Return
++#   0 if daemon has been started
++#   1 if daemon was already running
++#   2 if daemon could not be started
++do_start_kdc()
++{
++    start-stop-daemon --start --quiet --startas $DAEMON --name $NAME --test \
++        > /dev/null || return 1
++    start-stop-daemon --start --quiet --startas $DAEMON --name $NAME \
++        -- $DAEMON_ARGS || return 2
++}
++
++
++# Return
++#   0 if daemon has been stopped
++#   1 if daemon was already stopped
++#   2 if daemon could not be stopped
++#   other if a failure occurred
++do_stop_kdc()
++{
++    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --name $NAME
++    RETVAL="$?"
++    [ "$RETVAL" = 2 ] && return 2
++    return "$RETVAL"
++}
++
++
++case "$1" in
++  start)
++    [ "$VERBOSE" != no ] && echo "Starting $DESC" "$NAME"
++    do_start_kdc
++    case "$?" in
++      0|1)
++            [ "$VERBOSE" != no ] && echo 0
++        ;;
++      2)
++        [ "$VERBOSE" != no ] && echo 1
++        ;;
++    esac
++    ;;
++
++  stop)
++    [ "$VERBOSE" != no ] && echo "Stopping $DESC" "$NAME"
++    do_stop_kdc
++    case "$?" in
++      0|1)
++        [ "$VERBOSE" != no ] && echo "krb524d"
++        ;;
++      2)
++        [ "$VERBOSE" != no ] && echo 1
++        ;;
++    esac
++    ;;
++
++  restart|force-reload)
++    echo "Restarting $DESC" "$NAME"
++    do_stop_kdc
++    case "$?" in
++      0|1)
++        do_start_kdc
++        case "$?" in
++          0)
++	  echo 0
++	  ;;
++          1|2)
++            echo 1
++            ;;
++        esac
++        ;;
++      *)
++        echo 1
++        ;;
++    esac
++    ;;
++
++  status)
++    pidofproc "$DAEMON" >/dev/null
++    status=$?
++    if [ $status -eq 0 ]; then
++        echo "$NAME is running."
++    else
++        echo "$NAME is not running."
++    fi
++    exit $status
++    ;;
++
++  *)
++    echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload|status}" >&2
++    exit 3
++    ;;
++esac
++
++:
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
+similarity index 49%
+rename from meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
+rename to meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
+index 49b8917..0b14d3c 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.11.3.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
+@@ -1,20 +1,36 @@
+ SUMMARY = "A network authentication protocol"
++DESCRIPTION = "Kerberos is a system for authenticating users and services on a network. \
++ Kerberos is a trusted third-party service.  That means that there is a \
++ third party (the Kerberos server) that is trusted by all the entities on \
++ the network (users and services, usually called "principals"). \
++ . \
++ This is the MIT reference implementation of Kerberos V5. \
++ . \
++ This package contains the Kerberos key server (KDC).  The KDC manages all \
++ authentication credentials for a Kerberos realm, holds the master keys \
++ for the realm, and responds to authentication requests.  This package \
++ should be installed on both master and slave KDCs."
++
+ HOMEPAGE = "http://web.mit.edu/Kerberos/"
+ SECTION = "console/network"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=1d9c8180d79838c02eb5eb1a3b184eb9"
++LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=450c80c6258ce03387bd09df37638ebc"
+ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+ 
+-inherit autotools binconfig perlnative
+-
+-PNBLACKLIST[krb5] = "BROKEN: doesn't build with B!=S"
++inherit autotools-brokensep binconfig perlnative
+ 
+ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
+            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
++           file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
++           file://crosscompile_nm.patch \
++           file://etc/init.d/krb5-kdc \
++           file://etc/init.d/krb5-admin-server \
++           file://etc/default/krb5-kdc \
++           file://etc/default/krb5-admin-server \
+ "
+-SRC_URI[md5sum] = "56f0ae274b285320b8a597cb89442449"
+-SRC_URI[sha256sum] = "9abd94bb94a70996da0f8d90408957154bb543271b097e86c63eb33e5f5751b5"
++SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
++SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
+ 
+ S = "${WORKDIR}/${P}/src/"
+ 
+@@ -22,6 +38,8 @@ PACKAGECONFIG ??= "openssl"
+ PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
+ PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
+ PACKAGECONFIG[keyutils] = "--enable-keyutils,--disable-keyutils,keyutils"
++PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
++PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
+ 
+ EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
+ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
+@@ -31,8 +49,8 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
+ CFLAGS_append += "-DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
+ LDFLAGS_append += "-lpthread"
+ 
+-FILES_${PN}-doc += "${datadir}/examples"
+ FILES_${PN} += "${datadir}/gnats"
++FILES_${PN}-doc += "${datadir}/examples"
+ FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
+ 
+ krb5_do_unpack() {
+@@ -50,3 +68,9 @@ do_configure() {
+     autoreconf
+     oe_runconf
+ }
++
++do_install_append() {
++    mkdir -p ${D}/etc/init.d ${D}/etc/default
++    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/etc/init.d
++    install -m 0644 ${WORKDIR}/etc/default/* ${D}/etc/default
++}
+-- 
+2.0.0
 
->
->> Signed-off-by: Yen-Chin Lee <coldnew.tw@gmail.com>
->> ---
->>  conf/distro/include/qt5-versions.inc       |  2 +-
->>  recipes-qt/qt5/nativesdk-qtbase_5.3.2.bb   |  5 +++++
->>  recipes-qt/qt5/nativesdk-qttools_5.3.2.bb  |  5 +++++
->>  recipes-qt/qt5/qt5-5.3.2.inc               | 19 +++++++++++++++++++
->>  recipes-qt/qt5/qtbase-native_5.3.2.bb      | 11 +++++++++++
->>  recipes-qt/qt5/qtbase_5.3.2.bb             |  5 +++++
->>  recipes-qt/qt5/qtconnectivity_5.3.2.bb     |  5 +++++
->>  recipes-qt/qt5/qtdeclarative_5.3.2.bb      |  5 +++++
->>  recipes-qt/qt5/qtenginio_5.3.2.bb          |  5 +++++
->>  recipes-qt/qt5/qtgraphicaleffects_5.3.2.bb |  5 +++++
->>  recipes-qt/qt5/qtimageformats_5.3.2.bb     |  5 +++++
->>  recipes-qt/qt5/qtlocation_5.3.2.bb         |  5 +++++
->>  recipes-qt/qt5/qtmultimedia_5.3.2.bb       |  5 +++++
->>  recipes-qt/qt5/qtquick1_5.3.2.bb           |  5 +++++
->>  recipes-qt/qt5/qtquickcontrols_5.3.2.bb    |  5 +++++
->>  recipes-qt/qt5/qtscript_5.3.2.bb           |  5 +++++
->>  recipes-qt/qt5/qtsensors_5.3.2.bb          |  5 +++++
->>  recipes-qt/qt5/qtserialport_5.3.2.bb       |  5 +++++
->>  recipes-qt/qt5/qtsvg_5.3.2.bb              |  5 +++++
->>  recipes-qt/qt5/qttools-native_5.3.2.bb     |  5 +++++
->>  recipes-qt/qt5/qttools_5.3.2.bb            |  5 +++++
->>  recipes-qt/qt5/qtwebkit-examples_5.3.2.bb  |  5 +++++
->>  recipes-qt/qt5/qtwebkit_5.3.2.bb           |  5 +++++
->>  recipes-qt/qt5/qtwebsockets_5.3.2.bb       |  5 +++++
->>  recipes-qt/qt5/qtx11extras_5.3.2.bb        |  5 +++++
->>  recipes-qt/qt5/qtxmlpatterns_5.3.2.bb      |  5 +++++
->>  26 files changed, 146 insertions(+), 1 deletion(-)
->>  create mode 100644 recipes-qt/qt5/nativesdk-qtbase_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/nativesdk-qttools_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qt5-5.3.2.inc
->>  create mode 100644 recipes-qt/qt5/qtbase-native_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtbase_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtconnectivity_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtdeclarative_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtenginio_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtgraphicaleffects_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtimageformats_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtlocation_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtmultimedia_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtquick1_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtquickcontrols_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtscript_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtsensors_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtserialport_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtsvg_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qttools-native_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qttools_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtwebkit-examples_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtwebkit_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtwebsockets_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtx11extras_5.3.2.bb
->>  create mode 100644 recipes-qt/qt5/qtxmlpatterns_5.3.2.bb
->>
->> diff --git a/conf/distro/include/qt5-versions.inc b/conf/distro/include/qt5-versions.inc
->> index 0fc4e62..e862fa6 100644
->> --- a/conf/distro/include/qt5-versions.inc
->> +++ b/conf/distro/include/qt5-versions.inc
->> @@ -1,5 +1,5 @@
->>  # Select which version you prefer by defining QT5_VERSION and including this file
->> -# possible values now "5.3.1", "5.3.0+git%"
->> +# possible values now "5.3.1", "5.3.2", "5.3.0+git%"
->>
->>  QT5_VERSION ?= "5.3.1"
->>
->> diff --git a/recipes-qt/qt5/nativesdk-qtbase_5.3.2.bb b/recipes-qt/qt5/nativesdk-qtbase_5.3.2.bb
->> new file mode 100644
->> index 0000000..49b9072
->> --- /dev/null
->> +++ b/recipes-qt/qt5/nativesdk-qtbase_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "563e2b10274171f1184b3fd7260b4991"
->> +SRC_URI[sha256sum] = "9a16095ac46dae99d6ddab8bc07065fbe1c36501ed194a3191d07347d7826cb8"
->> diff --git a/recipes-qt/qt5/nativesdk-qttools_5.3.2.bb b/recipes-qt/qt5/nativesdk-qttools_5.3.2.bb
->> new file mode 100644
->> index 0000000..3efed85
->> --- /dev/null
->> +++ b/recipes-qt/qt5/nativesdk-qttools_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "9074cc89bc52aea7f76a4d231d2f0ef6"
->> +SRC_URI[sha256sum] = "5d39cdc63d43ae1f954517e517d9a5c24f2b2c91e22dab3ae6b5b81deb49983e"
->> diff --git a/recipes-qt/qt5/qt5-5.3.2.inc b/recipes-qt/qt5/qt5-5.3.2.inc
->> new file mode 100644
->> index 0000000..21c1a22
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qt5-5.3.2.inc
->> @@ -0,0 +1,19 @@
->> +# Copyright (C) 2012 O.S. Systems Software LTDA.
->> +# Copyright (C) 2013 Martin Jansa <martin.jansa@gmail.com>
->> +
->> +QT_VERSION ?= "${PV}"
->> +
->> +# it's different for RC versions
->> +QT_VERSION_DIR ?= "5.3"
->> +
->> +SRC_URI += " \
->> +    http://download.qt-project.org/official_releases/qt/${QT_VERSION_DIR}/${QT_VERSION}/submodules/${QT_MODULE}-opensource-src-${QT_VERSION}.tar.xz \
->> +"
->> +
->> +S = "${WORKDIR}/${QT_MODULE}-opensource-src-${QT_VERSION}"
->> +
->> +LICENSE = "GFDL-1.3 & LGPL-2.1 | GPL-3.0"
->> +LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=2abca611d56c23eb99943bde21c80a0d \
->> +                    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
->> +                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
->> +                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
->> diff --git a/recipes-qt/qt5/qtbase-native_5.3.2.bb b/recipes-qt/qt5/qtbase-native_5.3.2.bb
->> new file mode 100644
->> index 0000000..44dd984
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtbase-native_5.3.2.bb
->> @@ -0,0 +1,11 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +do_install_append() {
->> +    # for modules which are still using syncqt and call qtPrepareTool(QMAKE_SYNCQT, syncqt)
->> +    # e.g. qt3d, qtwayland
->> +    ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
->> +}
->> +
->> +SRC_URI[md5sum] = "563e2b10274171f1184b3fd7260b4991"
->> +SRC_URI[sha256sum] = "9a16095ac46dae99d6ddab8bc07065fbe1c36501ed194a3191d07347d7826cb8"
->> diff --git a/recipes-qt/qt5/qtbase_5.3.2.bb b/recipes-qt/qt5/qtbase_5.3.2.bb
->> new file mode 100644
->> index 0000000..49b9072
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtbase_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "563e2b10274171f1184b3fd7260b4991"
->> +SRC_URI[sha256sum] = "9a16095ac46dae99d6ddab8bc07065fbe1c36501ed194a3191d07347d7826cb8"
->> diff --git a/recipes-qt/qt5/qtconnectivity_5.3.2.bb b/recipes-qt/qt5/qtconnectivity_5.3.2.bb
->> new file mode 100644
->> index 0000000..ca0013b
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtconnectivity_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "e496963407bb0c7b2e6c07133715a9cf"
->> +SRC_URI[sha256sum] = "2eb972b85697e9752ed2f2f7e194393650743737a9fe5f48177734c4dbd9096f"
->> diff --git a/recipes-qt/qt5/qtdeclarative_5.3.2.bb b/recipes-qt/qt5/qtdeclarative_5.3.2.bb
->> new file mode 100644
->> index 0000000..655f316
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtdeclarative_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "72ae60527ebb15f4b85cfbadc4c174de"
->> +SRC_URI[sha256sum] = "04108193b9642c0394c157e98b5c1d81f555f9f495289e07ebfb6f03448b2382"
->> diff --git a/recipes-qt/qt5/qtenginio_5.3.2.bb b/recipes-qt/qt5/qtenginio_5.3.2.bb
->> new file mode 100644
->> index 0000000..f7a7b1e
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtenginio_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "53b67cf5470dfa9bcfc59aa5b8bfd66d"
->> +SRC_URI[sha256sum] = "d5b84656dc6a349db380e42690a18137e562dbaba1930216bb3e3815df6af708"
->> diff --git a/recipes-qt/qt5/qtgraphicaleffects_5.3.2.bb b/recipes-qt/qt5/qtgraphicaleffects_5.3.2.bb
->> new file mode 100644
->> index 0000000..1900f9d
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtgraphicaleffects_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "6dd8dd6906bbfb52a292cd25927bb9a8"
->> +SRC_URI[sha256sum] = "688f2658a13d2919487d3f5acacb037364ee5c8fe0319f524a7d0a4987ba7ffc"
->> diff --git a/recipes-qt/qt5/qtimageformats_5.3.2.bb b/recipes-qt/qt5/qtimageformats_5.3.2.bb
->> new file mode 100644
->> index 0000000..69dfaae
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtimageformats_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "255bb7f28c667ab91303e6af271753b5"
->> +SRC_URI[sha256sum] = "d303cbceb73774edc0cfdbde6b97b0e41077e242ff6520710890f81bea40e2d4"
->> diff --git a/recipes-qt/qt5/qtlocation_5.3.2.bb b/recipes-qt/qt5/qtlocation_5.3.2.bb
->> new file mode 100644
->> index 0000000..eaf16a7
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtlocation_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "1ad3ee98f6f5d71df8dda14edc06346c"
->> +SRC_URI[sha256sum] = "37b4072b531c35389b3acbbbd7259ab6ce4106177b96d67bfe5d3236139814d7"
->> diff --git a/recipes-qt/qt5/qtmultimedia_5.3.2.bb b/recipes-qt/qt5/qtmultimedia_5.3.2.bb
->> new file mode 100644
->> index 0000000..6c46934
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtmultimedia_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "5ef68e85b9d32865a4bf7f491ff31f96"
->> +SRC_URI[sha256sum] = "255fac66c93f33743c707da3d41d95c7c562924fe4eb829cbb7b21b2274a0e0b"
->> diff --git a/recipes-qt/qt5/qtquick1_5.3.2.bb b/recipes-qt/qt5/qtquick1_5.3.2.bb
->> new file mode 100644
->> index 0000000..20cbb3a
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtquick1_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "3a57c52d6d4d6632d67a4ebd35abe0c5"
->> +SRC_URI[sha256sum] = "9b7b2e895180e4e3e1ed4e7b5ad049b7d021a05c96be6edc5fc433c6de6273fb"
->> diff --git a/recipes-qt/qt5/qtquickcontrols_5.3.2.bb b/recipes-qt/qt5/qtquickcontrols_5.3.2.bb
->> new file mode 100644
->> index 0000000..6d9a9d6
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtquickcontrols_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "05f490fd6a7d3bca0c4d4a59989daef0"
->> +SRC_URI[sha256sum] = "5f890f014d087141b0aaa8954b21b1f85740233b60a556e0e9624227bff6d94e"
->> diff --git a/recipes-qt/qt5/qtscript_5.3.2.bb b/recipes-qt/qt5/qtscript_5.3.2.bb
->> new file mode 100644
->> index 0000000..8b21571
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtscript_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "d0e70adf7c993f33bad27290dae778d5"
->> +SRC_URI[sha256sum] = "6e18002c8c993402c7d28b3c0705092e41c18769b6d3ff741e9a3b3ce9d6d7be"
->> diff --git a/recipes-qt/qt5/qtsensors_5.3.2.bb b/recipes-qt/qt5/qtsensors_5.3.2.bb
->> new file mode 100644
->> index 0000000..3a4c287
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtsensors_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "d0a8dc3173bfc9dc9f2632d509a76e6f"
->> +SRC_URI[sha256sum] = "f9359dc42fbd7105eec7a1fb866e90aa772fd694075e5a5691d1a31d08953ae4"
->> diff --git a/recipes-qt/qt5/qtserialport_5.3.2.bb b/recipes-qt/qt5/qtserialport_5.3.2.bb
->> new file mode 100644
->> index 0000000..1f1126d
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtserialport_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "0a38cfe5c81364f2b93d0d38b94d375f"
->> +SRC_URI[sha256sum] = "a886e0cb08be60e57958676dc91c6f649468184a03c89c2aeabc904d36fd5a4b"
->> diff --git a/recipes-qt/qt5/qtsvg_5.3.2.bb b/recipes-qt/qt5/qtsvg_5.3.2.bb
->> new file mode 100644
->> index 0000000..9c71dac
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtsvg_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "f7972e80970ff26a908c43defb3d10e6"
->> +SRC_URI[sha256sum] = "1ec5c2f307ee55740cc8c82dc2ca4037dbc0ca398b4e32abbd967535e71ae30f"
->> diff --git a/recipes-qt/qt5/qttools-native_5.3.2.bb b/recipes-qt/qt5/qttools-native_5.3.2.bb
->> new file mode 100644
->> index 0000000..3efed85
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qttools-native_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "9074cc89bc52aea7f76a4d231d2f0ef6"
->> +SRC_URI[sha256sum] = "5d39cdc63d43ae1f954517e517d9a5c24f2b2c91e22dab3ae6b5b81deb49983e"
->> diff --git a/recipes-qt/qt5/qttools_5.3.2.bb b/recipes-qt/qt5/qttools_5.3.2.bb
->> new file mode 100644
->> index 0000000..3efed85
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qttools_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "9074cc89bc52aea7f76a4d231d2f0ef6"
->> +SRC_URI[sha256sum] = "5d39cdc63d43ae1f954517e517d9a5c24f2b2c91e22dab3ae6b5b81deb49983e"
->> diff --git a/recipes-qt/qt5/qtwebkit-examples_5.3.2.bb b/recipes-qt/qt5/qtwebkit-examples_5.3.2.bb
->> new file mode 100644
->> index 0000000..9c93c20
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtwebkit-examples_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "6f88c2a99002801a1943483331f8b4f0"
->> +SRC_URI[sha256sum] = "c8081a0863b7d8e2e39ec0e2fe288331ddab093a682959ba7378392512296482"
->> diff --git a/recipes-qt/qt5/qtwebkit_5.3.2.bb b/recipes-qt/qt5/qtwebkit_5.3.2.bb
->> new file mode 100644
->> index 0000000..aa49463
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtwebkit_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "0497b5b46540848e0db6a9e219d756fb"
->> +SRC_URI[sha256sum] = "e47122ed15e8e1cc32e11b3cd89bacc056437215134a204899f2fddb4fd92e5b"
->> diff --git a/recipes-qt/qt5/qtwebsockets_5.3.2.bb b/recipes-qt/qt5/qtwebsockets_5.3.2.bb
->> new file mode 100644
->> index 0000000..8ebc50e
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtwebsockets_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "093ddc113952e47bd0e251986e03f1e4"
->> +SRC_URI[sha256sum] = "60533d413b0fa27b1e08642ae77bcaa76a845fa39ddc3d49af573a77e73a38c2"
->> diff --git a/recipes-qt/qt5/qtx11extras_5.3.2.bb b/recipes-qt/qt5/qtx11extras_5.3.2.bb
->> new file mode 100644
->> index 0000000..9bfe71b
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtx11extras_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "59f6cbbdf2ad48c6b95b65f8b333df2d"
->> +SRC_URI[sha256sum] = "ca6a28c95be0bf18080b4a20ae9e2c24a77a45aaf557f06047e65b1280c17251"
->> diff --git a/recipes-qt/qt5/qtxmlpatterns_5.3.2.bb b/recipes-qt/qt5/qtxmlpatterns_5.3.2.bb
->> new file mode 100644
->> index 0000000..9cda6cc
->> --- /dev/null
->> +++ b/recipes-qt/qt5/qtxmlpatterns_5.3.2.bb
->> @@ -0,0 +1,5 @@
->> +require qt5-${PV}.inc
->> +require ${PN}.inc
->> +
->> +SRC_URI[md5sum] = "857e8040b2bf45c114a7d75ec6ef94ee"
->> +SRC_URI[sha256sum] = "acab0307039e117475caf2c95e425ead09ab5ee08ce15205fb3c0af7d7ec1abb"
->> --
->> 1.9.2
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---
-Sent with my mu4e
 
