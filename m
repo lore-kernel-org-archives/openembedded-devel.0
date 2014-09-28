@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F15C605B3
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B8486FE10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Sep 2014 06:19:43 +0000 (UTC)
+	Sun, 28 Sep 2014 07:53:18 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8S6JhW1021383
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sat, 27 Sep 2014 23:19:43 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8S7rHWT015819
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Sep 2014 00:53:18 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Sat, 27 Sep 2014 23:19:43 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<paul.eggleton@linux.intel.com>, <Liezhi.Yang@windriver.com>
-Date: Sun, 28 Sep 2014 02:19:41 -0400
-Message-ID: <1411885181-22407-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
+	14.3.174.1; Sun, 28 Sep 2014 00:53:16 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 28 Sep 2014 15:54:04 +0800
+Message-ID: <1411890845-30154-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] mariadb: drop the anonymous function and use proper install layout
+Subject: [meta-networking][PATCH 1/2] vsftpd: fix pkg_postinst
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,93 +32,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Sep 2014 06:19:45 -0000
+X-List-Received-Date: Sun, 28 Sep 2014 07:53:25 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Chen Qi <Qi.Chen@windriver.com>
 
-The anonymous function redefined bindir to bindir_noprefix (and
-others), which broke the sstate between build dirs.
+Fix pkg_postinst to not exit if "$D" is not empty.
+Otherwise, postinsts from update-rc.d.bbclass would not run and the
+symlinks under /etc/rc?.d/ would not be created.
 
-The redefined *_noprefix was to used to pass to the INSTALL_*
-variables to change the layout as we want, but in fact we can
-do this in other ways instead of the pain one:
-
-1) Change the default layout and a little adjustment.
-There are 4 install layout: STANDALONE(default), RPM, DEB and SVR4.
-And RPM is the one close to what we are using.
-
-2) Don't use prefix and pass full paths to INSTALL_*.
-The mariadb's cmake define some of the INSTALL_* relative to
-CMAKE_INSTALL_PREFIX, So we can use empty CMAKE_INSTALL_PREFIX,
-then we can pass our full paths to INSTALL_* directly.
-
-This patch set the default layout to RPM and pass paths only for:
-- INSTALL_DOCDIR: no prefix prepending, so ${datadir} works.
-- INSTALL_LIBDIR/INSTALL_PLUGINDIR: use ${baselib}.
-
-The mysql-test is moved from /usr to /usr/share which is more
-reasonable, fix the FILES inclusion accordingly.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-support/mysql/mariadb_5.5.39.inc | 27 +++++-------------------
- 1 file changed, 5 insertions(+), 22 deletions(-)
+ .../recipes-daemons/vsftpd/vsftpd_3.0.2.bb         |    9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-index 9cc2cc9..4460df9 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-@@ -35,19 +35,6 @@ SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
+diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
+index a1c4ff4..07c73c5 100644
+--- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
++++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb
+@@ -88,12 +88,11 @@ USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ftp --no-create-home -g ftp
+ GROUPADD_PARAM_${PN} = "-r ftp"
  
- EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
- 
--python __anonymous() {
--    # This is a pain but it's the only way to pass these in since
--    # MariaDB's cmake scripts insist on prepending the prefix to the
--    # specified values for INSTALL_*
--    localdata = d.createCopy()
--    localdata.setVar('prefix', '')
--    localdata.setVar('exec_prefix', '')
--    d.setVar('bindir_noprefix', localdata.getVar('bindir', True).lstrip('/'))
--    d.setVar('sbindir_noprefix', localdata.getVar('sbindir', True).lstrip('/'))
--    d.setVar('datadir_noprefix', localdata.getVar('datadir', True).lstrip('/'))
--    d.setVar('libdir_noprefix', localdata.getVar('libdir', True).lstrip('/'))
--}
--
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
- PACKAGECONFIG_class-native = ""
- PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
-@@ -64,15 +51,11 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
-                  -DNROFF=FALSE \
-                  -DENABLE_DTRACE=FALSE \
-                  -DWITH_PIC=ON \
--                 -DINSTALL_DOCDIR:PATH=${datadir_noprefix}/doc/${BPN} \
--                 -DINSTALL_BINDIR:PATH=${bindir_noprefix} \
--                 -DINSTALL_SBINDIR:PATH=${sbindir_noprefix} \
--                 -DINSTALL_SCRIPTDIR:PATH=${bindir_noprefix} \
--                 -DINSTALL_LIBDIR:PATH=${libdir_noprefix} \
--                 -DINSTALL_PLUGINDIR:PATH=${libdir_noprefix}/plugin \
-+                 -DINSTALL_LAYOUT=RPM \
-+                 -DINSTALL_DOCDIR:PATH=${datadir}/doc/${BPN} \
-+                 -DINSTALL_LIBDIR:PATH=${baselib} \
-+                 -DINSTALL_PLUGINDIR:PATH=${baselib}/plugin \
-                  -DINSTALL_SYSCONFDIR:PATH=${sysconfdir} \
--                 -DINSTALL_MYSQLSHAREDIR:PATH=${datadir_noprefix}/mysql \
--                 -DINSTALL_SUPPORTFILESDIR:PATH=${datadir_noprefix}/mysql-support-files \
-                  -DMYSQL_DATADIR:PATH=/var/mysql \
-                  -DCAT_EXECUTABLE=`which cat` \
-                  -DCMAKE_AR:FILEPATH=${AR}"
-@@ -177,7 +160,7 @@ FILES_libmysqlclient-dev = " \
- FILES_libmysqlclient-staticdev = "\
-     ${libdir}/*.a"
- FILES_libmysqlclient-dbg = "${libdir}/plugin/.debug/ \
--    /usr/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
-+    ${datadir}/mysql-test/lib/My/SafeProcess/.debug/my_safe_process"
- 
- # Avoid warnings about ha_xtradb.so.0.0.0 and ha_innodb_plugin.so.0.0.0
- # which are intentionally non-PIC on 32-bit x86 (see e.g.
+ pkg_postinst_${PN}() {
+-	if [ -n "$D" ]; then
+-		exit 0
+-	fi
++    if [ -z "$D" ]; then
+ 	if type systemd-tmpfiles >/dev/null; then
+-		systemd-tmpfiles --create
++	    systemd-tmpfiles --create
+ 	elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+-		${sysconfdir}/init.d/populate-volatile.sh update
++	    ${sysconfdir}/init.d/populate-volatile.sh update
+ 	fi
++    fi
+ }
 -- 
-2.0.0
+1.7.9.5
 
 
