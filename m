@@ -1,35 +1,36 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 70A6671651
+Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id B60F2605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 15:13:43 +0000 (UTC)
-Received: by mail-yh0-f53.google.com with SMTP id b6so322227yha.40
+	Mon, 29 Sep 2014 15:16:21 +0000 (UTC)
+Received: by mail-yh0-f46.google.com with SMTP id f73so1734887yha.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 08:13:44 -0700 (PDT)
+	Mon, 29 Sep 2014 08:16:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=KsJC3ZlWU18wIoPHRJzY+yn+9RWVSUSUVzmSMs+ifn4=;
-	b=iwFzK1CivgNuroqs063UHx3bSuhVibJTW9/MxRk2oNV9ezQDwu28U+uWvlsb1f/qAP
-	a5cWLcE9kpeg1PSQAsJUpmzbxeMeb0fqKbQe24CUNPasW7Mi0bhgxj94JMteXIXCfMD5
-	TiGFbzIv4/kLS0qxYLgr+umI0yyBe656SsZazKg9THYS7EqqjrUhuRfU0pkF0t+w+sgl
-	K2AbC6G9snm9cEbaFMzME7Z8KPqbN+IR+B3NZ6LayonXBif6nz+fLPm9nve3Q/2NY60Y
-	O9WvsMWMOpJqAFeTlwArAm0QrR4dC3iS8XUf6kNsPfcTQTiv9q/pFieMklD8ZRJFufds
-	cEIA==
+	:from:to:content-type;
+	bh=4J7TvLoQOXiwsJSRdSJMgfVjXqWgi7NWh1GM1aJ4d7Y=;
+	b=i+k8abDFeNaBybob/49GWtqGMevIP6nECLLNC8xczM6BYKW6w9Bf2AizYsMFWGCewY
+	PMk/6WWDd7GhhrASoy5sf87/jNy9cR0OKrZ2jBGs33LQp0/CU57UG/nwBKk3kyvgS21O
+	zFBRWnN5ffZFhowJRdKOtusoVG5BrN0NpQx1/3iVmgyqn8UEdiWBil5yyxh6qCSOa1Ff
+	uk4AoMvtM6aCHmffIUTLjU3XrWJ0/72AW2dW45EHHEpcq01VRFATTISXvDOy0WDy5Ew9
+	cACc3owItBZqqrE8dgrojsCj/qRfAp/I9gFC1lzS+WI+RvAUfu93WijPmIf85AoVio37
+	oEBQ==
 MIME-Version: 1.0
-X-Received: by 10.236.127.140 with SMTP id d12mr59485328yhi.37.1412003624485; 
-	Mon, 29 Sep 2014 08:13:44 -0700 (PDT)
+X-Received: by 10.236.127.140 with SMTP id d12mr59506226yhi.37.1412003782694; 
+	Mon, 29 Sep 2014 08:16:22 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.44.19 with HTTP; Mon, 29 Sep 2014 08:13:44 -0700 (PDT)
-In-Reply-To: <CAOd_LFwvwKvJWXpc4uhYqm4i61vs37isLNmzf5DqjmBvTeiR6w@mail.gmail.com>
-References: <CAOd_LFwvwKvJWXpc4uhYqm4i61vs37isLNmzf5DqjmBvTeiR6w@mail.gmail.com>
-Date: Mon, 29 Sep 2014 12:13:44 -0300
-X-Google-Sender-Auth: Oqe_0WlMP_45iGqLkR0dZeJ26jA
-Message-ID: <CAP9ODKrgGOgv-skJ5xJaX_opERn9o=bU3thVOsrR_ZA_AL3kRA@mail.gmail.com>
+Received: by 10.170.44.19 with HTTP; Mon, 29 Sep 2014 08:16:22 -0700 (PDT)
+In-Reply-To: <m2y4t4f7fl.fsf@gmail.com>
+References: <1411881077-86222-1-git-send-email-coldnew.tw@gmail.com>
+	<20140928054750.GQ25706@jama> <m2y4t4f7fl.fsf@gmail.com>
+Date: Mon, 29 Sep 2014 12:16:22 -0300
+X-Google-Sender-Auth: 1_zeUWtt990L5Yg2ZkNnbTlaXPk
+Message-ID: <CAP9ODKpSRCE5b_q0a_P2UNqp0AkiZYZezsJE7Z6C6G0g-2wisA@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][daisy] pull request libmikmod: Adjust SRC_URI (2014-09-26 09:22:37 -0400)
+Subject: Re: [meta-qt5][PATCH v2] qt5: Add Qt 5.3.2 packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Sep 2014 15:13:46 -0000
+X-List-Received-Date: Mon, 29 Sep 2014 15:16:25 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 26, 2014 at 11:25 AM, Cliff Brake <cbrake@bec-systems.com> wrot=
-e:
-> The following changes since commit 662cf409c1175450699d498085f3c894e0fe81=
-d0:
+On Sun, Sep 28, 2014 at 5:55 AM, Yen-Chin Lee <coldnew.tw@gmail.com> wrote:
 >
->   php: Fix native build due mistakenly linking against host's iconv
-> (2014-09-01 11:45:23 +0200)
+> Martin Jansa writes:
 >
-> are available in the git repository at:
+>> On Sun, Sep 28, 2014 at 01:11:17PM +0800, Yen-Chin Lee wrote:
+>>> Qt 5.3.2 has been released in September 16th, 2014.
+>>>
+>>> We still keep QT_VERSION to 5.3.1, if users want to upgrade to QT 5.3.2
+>>> they should modified the QT_VERSION variable on their own.
+>>>
+>>
+>> I would remove the 5.3.1 version (and _git recipes will later be used
+>> for 5.4)
 >
->   https://github.com/cbrake/meta-openembedded.git 2014-09-26_merge-to-dai=
-sy
->
-> for you to fetch changes up to 8e6f6e49c99a12a0382e48451f37adac0181362f:
->
->   libmikmod: Adjust SRC_URI (2014-09-26 09:22:37 -0400)
->
-> ----------------------------------------------------------------
-> Oliver St=C3=A4bler (1):
->       libmikmod: Adjust SRC_URI
+> Wow! That's great news! Actually I also want to test the Qt 5.4 version,
+> it's nice if we can has Qt 5.4 git support soon.
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+So could you rework the patches to upgrade the 5.3.1 recipes to 5.3.2 ones?
 
---=20
+-- 
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
