@@ -1,26 +1,41 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A220E605B3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 93845605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 01:20:54 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8T1KtJV002817
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 29 Sep 2014 02:56:31 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id q58so2694394wes.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Sep 2014 18:20:55 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 28 Sep 2014 18:20:54 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Sep 2014 09:19:53 +0800
-Message-ID: <1411953593-13713-2-git-send-email-Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1411953593-13713-1-git-send-email-Chong.Lu@windriver.com>
-References: <1411953593-13713-1-git-send-email-Chong.Lu@windriver.com>
+	Sun, 28 Sep 2014 19:56:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=AZKvdPC3t8zZobqpVTbMDbww9uS/SJD+4nzZPviVAik=;
+	b=Zis0PNekZEFmX5qPe6i9TpmffFc5khwmmjfo1NAaXNn/s4PrlMgMWG1rXhaoVVwHq9
+	ik3KnphkbPad+bmWr0h1XAgYKbn6gR4RXRWCS93AXud3yzocyXgdzs0CVlBM334XzNE1
+	cAi9xE2p+dsLqJo+JZ9D5g2o1yheEWJUoykhqTjpwDbz0TQZeU503LiGQnpRoUHPWrU8
+	Z4MsP50pJTAJhtg9sUzwcQ87mpLjGYBZ50Nygeap9SBX9ZAeeXUZKMbBjaVojef3Z6bh
+	D7R9jZZI/kBDNi8NdQiyVg9POLubHC1VS6vFOzc0rEqo4q5i5UjE7uUWWuxzzBe07GNm
+	x32g==
+X-Received: by 10.194.173.234 with SMTP id bn10mr41037085wjc.81.1411959392661; 
+	Sun, 28 Sep 2014 19:56:32 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	q5sm14186952wja.49.2014.09.28.19.56.31 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 28 Sep 2014 19:56:31 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 29 Sep 2014 04:57:23 +0200
+To: Fathi Boudra <fathi.boudra@linaro.org>
+Message-ID: <20140929025723.GR25706@jama>
+References: <1411724646-16968-1-git-send-email-fathi.boudra@linaro.org>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/2] quagga: add systemd service file
+In-Reply-To: <1411724646-16968-1-git-send-email-fathi.boudra@linaro.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] acpitests: update to 20140828 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,267 +49,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Sep 2014 01:20:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 29 Sep 2014 02:56:33 -0000
+X-Groupsio-MsgNum: 52260
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="lt3WynA+XK9Fj6D4"
+Content-Disposition: inline
 
-Add systemd service for quagga.
+--lt3WynA+XK9Fj6D4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
----
- .../recipes-protocols/quagga/files/babeld.service  | 14 +++++++
- .../recipes-protocols/quagga/files/bgpd.service    | 14 +++++++
- .../recipes-protocols/quagga/files/isisd.service   | 14 +++++++
- .../recipes-protocols/quagga/files/ospf6d.service  | 14 +++++++
- .../recipes-protocols/quagga/files/ospfd.service   | 14 +++++++
- .../recipes-protocols/quagga/files/ripd.service    | 14 +++++++
- .../recipes-protocols/quagga/files/ripngd.service  | 14 +++++++
- .../recipes-protocols/quagga/files/zebra.service   | 15 +++++++
- .../recipes-protocols/quagga/quagga.inc            | 49 +++++++++++++++++++++-
- 9 files changed, 161 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-protocols/quagga/files/babeld.service
- create mode 100644 meta-networking/recipes-protocols/quagga/files/bgpd.service
- create mode 100644 meta-networking/recipes-protocols/quagga/files/isisd.service
- create mode 100644 meta-networking/recipes-protocols/quagga/files/ospf6d.service
- create mode 100644 meta-networking/recipes-protocols/quagga/files/ospfd.service
- create mode 100644 meta-networking/recipes-protocols/quagga/files/ripd.service
- create mode 100644 meta-networking/recipes-protocols/quagga/files/ripngd.service
- create mode 100644 meta-networking/recipes-protocols/quagga/files/zebra.service
+On Fri, Sep 26, 2014 at 12:44:06PM +0300, Fathi Boudra wrote:
+> * update md5sums
+> * refresh patches
+> * update EXTRA_OEMAKE (sync with acpica recipe)
+>=20
+> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+> ---
+>  .../acpica/acpitests/aapits-linux.patch            |  4 +--
+>  .../acpica/acpitests/aapits-makefile.patch         | 36 +++++++++++++---=
+------
+>  ...acpitests_20140424.bb =3D> acpitests_20140828.bb} | 10 +++---
+>  3 files changed, 29 insertions(+), 21 deletions(-)
+>  rename meta-oe/recipes-extended/acpica/{acpitests_20140424.bb =3D> acpit=
+ests_20140828.bb} (69%)
+>=20
+> diff --git a/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch=
+ b/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
+> index 116761d..7c5d6b0 100644
+> --- a/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
+> +++ b/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
+> @@ -326,8 +326,8 @@ diff -urN acpica-unix2-20130626/tests/aapits/Makefile=
+ acpica-unix2-20130626-aapi
+>  --- acpica-unix2-20130626/tests/aapits/Makefile	2013-01-17 12:48:29.0000=
+00000 -0700
+>  +++ acpica-unix2-20130626-aapits/tests/aapits/Makefile	2013-07-25 15:17:=
+09.309236422 -0600
+>  @@ -194,7 +194,7 @@
+> - CFLAGS+=3D -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_EXEC_APP -D_MUL=
+TI_THREADED -Wstrict-prototypes -I../../source/include=20
+> -=20
+> + CFLAGS+=3D -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_APITS -DACPI_EX=
+EC_APP -D_MULTI_THREADED -Wstrict-prototypes -I../../source/include
+> +
+>  =20
+>  -acpiexec : $(patsubst %.c,%.o, $(SRCS))
+>  +$(PROG) : $(patsubst %.c,%.o, $(SRCS))
+> diff --git a/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.pa=
+tch b/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
+> index d38501b..4d9e997 100644
+> --- a/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
+> +++ b/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
+> @@ -8,19 +8,27 @@ Upstream-status: Unknown
+>  diff -urN acpica-unix2-20140325/tests/aapits/Makefile acpica-unix2-20140=
+325/tests/aapits/Makefile
+>  --- acpica-unix2-20140325/tests/aapits/Makefile	2014-04-05 14:23:14.6836=
+36794 -0600
+>  +++ acpica-unix2-20140325-aapits/tests/aapits/Makefile	2014-04-05 15:10:=
+57.879184598 -0600
+> -@@ -20,6 +20,7 @@
+> - 	../../source/components/hardware/hwxface.c \
+> +@@ -16,6 +16,7 @@
+> + 	atosxfwrap.c \
+> + 	osunixxf.c \
+> + 	../../source/common/ahids.c \
+> ++	../../source/common/ahuuids.c \
+>   	../../source/common/cmfsize.c \
+>   	../../source/common/getopt.c \
+> -+	../../source/common/ahids.c \
+> - 	../../source/components/debugger/dbcmds.c \
+> - 	../../source/components/debugger/dbconvert.c \
+> - 	../../source/components/debugger/dbdisply.c \
+> -@@ -154,6 +155,7 @@
+> - 	../../source/components/tables/tbfadt.c \
+> - 	../../source/components/tables/tbfind.c \
+> - 	../../source/components/tables/tbinstal.c \
+> -+	../../source/components/tables/tbdata.c \
+> - 	../../source/components/tables/tbprint.c \
+> - 	../../source/components/tables/tbutils.c \
+> - 	../../source/components/tables/tbxface.c \
+> + 	../../source/components/hardware/hwtimer.c \
+> +@@ -174,6 +175,7 @@
+> + 	../../source/components/utilities/utexcep.c \
+> + 	../../source/components/utilities/utfileio.c \
+> + 	../../source/components/utilities/utglobal.c \
+> ++	../../source/components/utilities/uthex.c \
+> + 	../../source/components/utilities/utids.c \
+> + 	../../source/components/utilities/utinit.c \
+> + 	../../source/components/utilities/utlock.c \
+> +@@ -189,6 +191,7 @@
+> + 	../../source/components/utilities/utstate.c \
+> + 	../../source/components/utilities/utstring.c \
+> + 	../../source/components/utilities/uttrack.c \
+> ++	../../source/components/utilities/utuuid.c \
+> + 	../../source/components/utilities/utxface.c \
+> + 	../../source/components/utilities/utxferror.c \
+> + 	../../source/components/utilities/utxfinit.c \
+> diff --git a/meta-oe/recipes-extended/acpica/acpitests_20140424.bb b/meta=
+-oe/recipes-extended/acpica/acpitests_20140828.bb
+> similarity index 69%
+> rename from meta-oe/recipes-extended/acpica/acpitests_20140424.bb
+> rename to meta-oe/recipes-extended/acpica/acpitests_20140828.bb
+> index 7e145bb..889c00b 100644
+> --- a/meta-oe/recipes-extended/acpica/acpitests_20140424.bb
+> +++ b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
+> @@ -11,14 +11,14 @@ SRC_URI =3D "https://acpica.org/sites/acpica/files/ac=
+pitests-unix-${PV}.tar.gz;nam
+>             file://aapits-linux.patch \
+>             file://aapits-makefile.patch \
+>      "
+> -SRC_URI[acpitests.md5sum] =3D "bfc399cecb21e9491d362d8e480b2689"
+> -SRC_URI[acpitests.sha256sum] =3D "e7d7ff638872543909b38c2498e88958251ee6=
+ce4d22bc13d4e3925771212c0e"
+> -SRC_URI[acpica.md5sum] =3D "733532f005fba5d1c5344440651b13d1"
+> -SRC_URI[acpica.sha256sum] =3D "72ece982bbbdfb1b17418f1feb3a9daaa01803d0d=
+41dcf00e19d702cdf751bbc"
+> +SRC_URI[acpitests.md5sum] =3D "db9d6fdaa8e3eb101d700ee5ba4938ed"
+> +SRC_URI[acpitests.sha256sum] =3D "e576c74bf1bf1c9f7348bf9419e05c8acfece7=
+105abcdc052e66670c7af2cf00"
+> +SRC_URI[acpica.md5sum] =3D "6f05f0d10166a1b1ff6107f3d1cdf1e5"
+> +SRC_URI[acpica.sha256sum] =3D "01d8867656c5ba41dec307c4383ce676196ad4281=
+ac2c9dec9f5be5fac6d888e"
+> =20
+>  S =3D "${WORKDIR}/acpitests-unix-${PV}"
+> =20
+> -EXTRA_OEMAKE =3D "CC=3D${TARGET_PREFIX}gcc 'OPT_CFLAGS=3D-Wall'"
+> +EXTRA_OEMAKE =3D "CC=3D'${CC}' 'OPT_CFLAGS=3D-Wall'"
 
-diff --git a/meta-networking/recipes-protocols/quagga/files/babeld.service b/meta-networking/recipes-protocols/quagga/files/babeld.service
-new file mode 100644
-index 0000000..dd344b0
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/babeld.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Babel routing daemon
-+BindTo=zebra.service
-+After=zebra.service
-+ConditionPathExists=@SYSCONFDIR@/quagga/babeld.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStart=@SBINDIR@/babeld -d $babeld_options -f /etc/quagga/babeld.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/files/bgpd.service b/meta-networking/recipes-protocols/quagga/files/bgpd.service
-new file mode 100644
-index 0000000..164c817
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/bgpd.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=BGP routing daemon
-+BindTo=zebra.service
-+After=zebra.service
-+ConditionPathExists=@SYSCONFDIR@/quagga/bgpd.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStart=@SBINDIR@/bgpd -d $bgpd_options -f /etc/quagga/bgpd.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/files/isisd.service b/meta-networking/recipes-protocols/quagga/files/isisd.service
-new file mode 100644
-index 0000000..9bfe7b6
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/isisd.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=IS-IS routing daemon
-+BindTo=zebra.service
-+After=zebra.service
-+ConditionPathExists=@SYSCONFDIR@/quagga/isisd.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStart=@SBINDIR@/isisd -d $isisd_options -f /etc/quagga/isisd.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/files/ospf6d.service b/meta-networking/recipes-protocols/quagga/files/ospf6d.service
-new file mode 100644
-index 0000000..4b8ebf8
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/ospf6d.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=OSPF routing daemon for IPv6
-+BindTo=zebra.service
-+After=zebra.service
-+ConditionPathExists=@SYSCONFDIR@/quagga/ospf6d.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStart=@SBINDIR@/ospf6d -d $ospf6d_options -f /etc/quagga/ospf6d.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/files/ospfd.service b/meta-networking/recipes-protocols/quagga/files/ospfd.service
-new file mode 100644
-index 0000000..f9f5031
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/ospfd.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=OSPF routing daemon
-+BindTo=zebra.service
-+After=zebra.service
-+ConditionPathExists=@SYSCONFDIR@/quagga/ospfd.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStart=@SBINDIR@/ospfd -d $ospfd_options -f /etc/quagga/ospfd.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/files/ripd.service b/meta-networking/recipes-protocols/quagga/files/ripd.service
-new file mode 100644
-index 0000000..5dfd28b
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/ripd.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=RIP routing daemon
-+BindTo=zebra.service
-+After=zebra.service
-+ConditionPathExists=@SYSCONFDIR@/quagga/ripd.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStart=@SBINDIR@/ripd -d $ripd_options -f /etc/quagga/ripd.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/files/ripngd.service b/meta-networking/recipes-protocols/quagga/files/ripngd.service
-new file mode 100644
-index 0000000..936b81f
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/ripngd.service
-@@ -0,0 +1,14 @@
-+i[Unit]
-+Description=RIP routing daemon for IPv6
-+BindTo=zebra.service
-+After=zebra.service
-+ConditionPathExists=@SYSCONFDIR@/quagga/ripngd.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStart=@SBINDIR@/ripngd -d $ripngd_options -f /etc/quagga/ripngd.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/files/zebra.service b/meta-networking/recipes-protocols/quagga/files/zebra.service
-new file mode 100644
-index 0000000..afdd9e5
---- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/files/zebra.service
-@@ -0,0 +1,15 @@
-+[Unit]
-+Description=GNU Zebra routing manager
-+Wants=network.target
-+Before=network.target
-+ConditionPathExists=@SYSCONFDIR@/quagga/zebra.conf
-+
-+[Service]
-+Type=forking
-+EnvironmentFile=-@SYSCONFDIR@/default/quagga
-+ExecStartPre=@BASE_SBINDIR@/ip route flush proto zebra
-+ExecStart=@SBINDIR@/zebra -d $zebra_options -f /etc/quagga/zebra.conf
-+Restart=on-abort
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 04ec051..9bdd4d5 100644
---- a/meta-networking/recipes-protocols/quagga/quagga.inc
-+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-@@ -31,13 +31,31 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
-            file://quagga.pam \
-            file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
-            file://quagga-Avoid-duplicate-connected-address.patch \
-+           file://babeld.service \
-+           file://bgpd.service \
-+           file://isisd.service \
-+           file://ospf6d.service \
-+           file://ospfd.service \
-+           file://ripd.service \
-+           file://ripngd.service \
-+           file://zebra.service \
- "
- 
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
- PACKAGECONFIG[cap] = "--enable-capabilities,--disable-capabilities,libcap"
- PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
- 
--inherit autotools update-rc.d useradd
-+inherit autotools update-rc.d useradd systemd
-+
-+SYSTEMD_PACKAGES = "${PN} ${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
-+SYSTEMD_SERVICE_${PN}-babeld = "babeld.service"
-+SYSTEMD_SERVICE_${PN}-bgpd = "bgpd.service"
-+SYSTEMD_SERVICE_${PN}-isisd = "isisd.service"
-+SYSTEMD_SERVICE_${PN}-ospf6d = "ospf6d.service"
-+SYSTEMD_SERVICE_${PN}-ospfd = "ospfd.service"
-+SYSTEMD_SERVICE_${PN}-ripd = "ripd.service"
-+SYSTEMD_SERVICE_${PN}-ripngd = "ripngd.service"
-+SYSTEMD_SERVICE_${PN} = "zebra.service"
- 
- EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
-                 --localstatedir=${localstatedir}/run/quagga \
-@@ -108,6 +126,35 @@ do_install () {
-         fi
-     done
- 
-+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/tmpfiles.d
-+        echo "d /var/run/quagga 0755 quagga quagga -" \
-+        > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-+    fi
-+
-+    # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
-+        rm -rf ${D}${sysconfdir}/init.d/
-+    fi
-+
-+    install -d ${D}${systemd_unitdir}/system
-+    for i in babeld bgpd isisd ospf6d ospfd ripd ripngd zebra; do
-+        install -m 0644 ${WORKDIR}/$i.service ${D}${systemd_unitdir}/system
-+    done
-+    sed -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
-+        -e 's,@SYSCONFDIR@,${sysconfdir},g' \
-+        -e 's,@SBINDIR@,${sbindir},g' \
-+        -i ${D}${systemd_unitdir}/system/*.service
-+}
-+
-+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
-+pkg_postinst_${PN} () {
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit', 'true', 'false', d)}; then
-+        if [ -n "$D" ]; then
-+            OPTS="--root=$D"
-+        fi
-+        systemctl $OPTS mask quagga.service
-+    fi
- }
- 
- # Split into a main package and separate per-protocol packages
--- 
-1.9.1
+Khem recently added HOST_CC_ARCH to CC, can you please check and rebase?
 
+>  # The Makefiles expect a specific layout
+>  do_compile() {
+> --=20
+> 2.1.1
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--lt3WynA+XK9Fj6D4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQoypMACgkQN1Ujt2V2gBzcKQCfaeGdQIuMe3362MpHIS7DWAJM
+yEoAn1vejs5+uPgiaN3By4oe+e9PaqX1
+=+CSV
+-----END PGP SIGNATURE-----
+
+--lt3WynA+XK9Fj6D4--
