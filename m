@@ -1,28 +1,24 @@
-Return-Path: <khimov@altell.ru>
-X-Greylist: delayed 353 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 29 Sep 2014 05:57:25 UTC
-Received: from mx.altell.ru (mx.altell.ru [178.16.156.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 03E10715EB
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C82C3605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 05:57:25 +0000 (UTC)
-Received: from sencha.localnet (sencha.office.altell.ru [10.180.21.135])
-	by mx.altell.ru (Postfix) with ESMTPS id 498CE16627
+	Mon, 29 Sep 2014 06:23:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8T6NRlT013570
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 09:51:11 +0400 (MSK)
-From: Roman Khimov <khimov@altell.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Sep 2014 09:51:08 +0400
-Message-ID: <1678777.vfoZ90ZxEi@sencha>
-Organization: ALTELL Ltd.
-User-Agent: KMail/4.11.5 (Linux/3.11.10-21-desktop; KDE/4.11.5; x86_64; ; )
-In-Reply-To: <1411953593-13713-1-git-send-email-Chong.Lu@windriver.com>
-References: <1411953593-13713-1-git-send-email-Chong.Lu@windriver.com>
+	Sun, 28 Sep 2014 23:23:27 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 28 Sep 2014 23:23:27 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 29 Sep 2014 14:24:17 +0800
+Message-ID: <1411971857-31420-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Altell-MailScanner-ID: 498CE16627.A9356
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-Spam-Status: No
-Subject: Re: [meta-networking][PATCH 1/2] quagga: add subpkgs to RDEPENDS
+Subject: [meta-networking][PATCH] ebtables: fix for sysvinit and systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,95 +32,446 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Sep 2014 05:57:31 -0000
-X-Groupsio-MsgNum: 52261
-Content-Type: multipart/signed; boundary="nextPart4853984.bX3AfMqFBe";
-	micalg="sha1"; protocol="application/pkcs7-signature"
+X-List-Received-Date: Mon, 29 Sep 2014 06:23:34 -0000
+Content-Type: text/plain
 
---nextPart4853984.bX3AfMqFBe
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"
+From: Chen Qi <Qi.Chen@windriver.com>
 
-0JIg0L/QuNGB0YzQvNC1INC+0YIgMjkg0YHQtdC90YLRj9Cx0YDRjyAyMDE0IDA5OjE5OjUyINC/
-0L7Qu9GM0LfQvtCy0LDRgtC10LvRjCBDaG9uZyBMdSDQvdCw0L/QuNGB0LDQuzoKPiArUkRFUEVO
-RFNfJHtQTn0gKz0gIiR7UE59LWJhYmVsZCAke1BOfS1iZ3BkICR7UE59LWlzaXNkICR7UE59LW9z
-cGY2ZAo+ICR7UE59LW9zcGZkICR7UE59LXJpcGQgJHtQTn0tcmlwbmdkIiArCgpJTU8gdGhlIHdo
-b2xlIHBvaW50IG9mIHNwbGl0IGRhZW1vbiBwYWNrYWdpbmcgd2FzIHRvIGJlIGFibGUgdG8gY2hv
-b3NlIHdoaWNoIApwcm90b2NvbHMgeW91IHdhbnQgYW5kIHdoaWNoIHlvdSBkb24ndC4gU28gZm9y
-Y2luZyBhbiBSREVQRU5EUyBpcyB3cm9uZyBpZiB5b3UgCndhbnQgdG8gc3RheSB3aXRoIHBlci1k
-YWVtb24gcGFja2FnZXMuIEkgdGhpbmsgUlJFQ09NTUVORFMgaXMgYmV0dGVyIGhlcmUu
+The solution mainly references Fedora20.
+Extract the common part of the code and install it into ${sbindir}.
+Add systemd service file.
 
---nextPart4853984.bX3AfMqFBe
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../ebtables/ebtables-2.0.10-4/ebtables.common     |  163 ++++++++++++++++++++
+ .../ebtables/ebtables-2.0.10-4/ebtables.init       |  162 +------------------
+ .../ebtables/ebtables-2.0.10-4/ebtables.service    |   11 ++
+ .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |   22 ++-
+ 4 files changed, 192 insertions(+), 166 deletions(-)
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.common
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.service
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIMPTCCBpAw
-ggR4oAMCAQICAQMwDQYJKoZIhvcNAQEFBQAwgZYxCzAJBgNVBAYTAlJVMQswCQYDVQQIEwJOVzEM
-MAoGA1UEBxMDU1BiMRQwEgYDVQQKEwtBbHRlbGwgTHRkLjEXMBUGA1UECxMOU2VjdXJpdHkgRGVw
-dC4xGjAYBgNVBAMTEUFsdGVsbCBNYXN0ZXIgQ0EyMSEwHwYJKoZIhvcNAQkBFhJzZWN1cml0eUBh
-bHRlbGwucnUwHhcNMTIwNjI5MTIyMTAwWhcNMjcwNjI5MTIwMDAwWjCBjzELMAkGA1UEBhMCUlUx
-CzAJBgNVBAgTAk5XMQwwCgYDVQQHEwNTUGIxFDASBgNVBAoTC0FsdGVsbCBMdGQuMRcwFQYDVQQL
-Ew5TZWN1cml0eSBEZXB0LjETMBEGA1UEAxMKQWx0ZWxsIENBMjEhMB8GCSqGSIb3DQEJARYSc2Vj
-dXJpdHlAYWx0ZWxsLnJ1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnilC4C9xC/OV
-RqePImRL7mAG0DnSRepBJBM1SJdeDelRMRMNVq6nlqk+/pmA8quUCkJIaUiy+bQMHnlEirPuVK/2
-GEMR7NtBop22YBWTd5n9Ktx+X/mQIViBC+x5AbwOqezgM2xhOIdpwxCB3N51xgIwFjRe6a7lqArg
-RPOW1IRYQ2SEh0QxnE4j+Rznho3tLlVlpok3HxQLXixImOPrNudAllUgdVlaMEtnmTz8lGubenxa
-l7b0sWqvIf8rnEDZWnOHwzmdm/+Rh9jL3ovtFa9bmz4R6I9bE4udnlSBb57IOQ8Y4SXzQlnOzhGf
-vO1EIU4mCXBC4kAxxWM+LlZD4QIDAQABo4IB7DCCAegwEgYDVR0TAQH/BAgwBgEB/wIBADAOBgNV
-HQ8BAf8EBAMCAQYwEQYJYIZIAYb4QgEBBAQDAgAHMBkGCWCGSAGG+EIBDQQMFgpBbHRlbGwgQ0Ey
-MB0GA1UdDgQWBBRy22VUSPsELcg8vpMkV7ZoiNgGkzCBwwYDVR0jBIG7MIG4gBQMEQDmy8Yf6XYP
-birE/JiMsgD2vaGBnKSBmTCBljELMAkGA1UEBhMCUlUxCzAJBgNVBAgTAk5XMQwwCgYDVQQHEwNT
-UGIxFDASBgNVBAoTC0FsdGVsbCBMdGQuMRcwFQYDVQQLEw5TZWN1cml0eSBEZXB0LjEaMBgGA1UE
-AxMRQWx0ZWxsIE1hc3RlciBDQTIxITAfBgkqhkiG9w0BCQEWEnNlY3VyaXR5QGFsdGVsbC5ydYIB
-ATA8BgNVHR8ENTAzMDGgL6AthitodHRwOi8vY3Jscy5hbHRlbGwucnUvQWx0ZWxsX01hc3Rlcl9D
-QTIuY3JsMHEGCCsGAQUFBwEBBGUwYzAoBggrBgEFBQcwAYYcaHR0cDovL29jc3Aub2ZmaWNlLmFs
-dGVsbC5ydTA3BggrBgEFBQcwAoYraHR0cDovL2NybHMuYWx0ZWxsLnJ1L0FsdGVsbF9NYXN0ZXJf
-Q0EyLmNydDANBgkqhkiG9w0BAQUFAAOCAgEAYp66/s1LChfJQFfE/ALDNDp3769XnARCuaHnIJ0J
-pMMlvTN4F2+QOhxaa8ApeDbEUrcZT0SXCNmcdjUMTWOFGMMYE/bRKrCLQQpyg2Qf4xx7AZD4Fw2q
-XXkQq8n2sEoZXyWnjBwYU+5mk3TzCH4quryJr0nURuessXDCSLfvWBYLbUT/prcBP4lMrexK6yWX
-9jMcNJfZ9V08n+hOYGVRkvOlvUce/QsTRY+l83LBfFHrfEFUevb2NxLcwiRkOum3LJY4yLmed+6O
-pvvPgeRnmGiS/Q4TQ6d8OIca6QusQR7dIhYSdBIqel2ccltyEaGeI+I+s8SHVphJmLM1hAZpVDhO
-hrWDyK2VPgH29/HzY6dJg86X8fXU/iHI9vZ8H7vtZYyIr4byrhPzsTyM6sxc6nKfsCCQT1OWg93/
-/xn76lACkibtnFmnul9EoPtdIwdXr8jsUkYw9Y8sdxCLpiV3Jhsxpd3NqrYJ6ewNyozJ8QVpz9ND
-vMIrjVNnHJH+Bc0PIsKGkzCueMQU3wRxxSyiW2E1CeYql+bViqmmKU7NFx54FFXCzshx4u8UhJxz
-IJdECzZw5XUumoPjOiayif3L44mxwrANBD3h+V92FwxWn3xYmOGDjhy4sMYYY5G/CII7nRaH0Tc9
-ZFqUcuMlZx7rhkmZhtPCBqx+Qu4l3/cHQiAwggWlMIIEjaADAgECAgE2MA0GCSqGSIb3DQEBBQUA
-MIGPMQswCQYDVQQGEwJSVTELMAkGA1UECBMCTlcxDDAKBgNVBAcTA1NQYjEUMBIGA1UEChMLQWx0
-ZWxsIEx0ZC4xFzAVBgNVBAsTDlNlY3VyaXR5IERlcHQuMRMwEQYDVQQDEwpBbHRlbGwgQ0EyMSEw
-HwYJKoZIhvcNAQkBFhJzZWN1cml0eUBhbHRlbGwucnUwHhcNMTIwNzMwMDg1NTAwWhcNMjIwNzMw
-MDg1NTAwWjCBkjELMAkGA1UEBhMCUlUxCzAJBgNVBAgTAk5XMQwwCgYDVQQHEwNTUGIxFDASBgNV
-BAoTC0FsdGVsbCBMdGQuMRowGAYDVQQLExFEZXZlbG9wbWVudCBEZXB0LjEVMBMGA1UEAxMMUm9t
-YW4gS2hpbW92MR8wHQYJKoZIhvcNAQkBFhBraGltb3ZAYWx0ZWxsLnJ1MIIBIjANBgkqhkiG9w0B
-AQEFAAOCAQ8AMIIBCgKCAQEA3XPlIFz/ziAuZdVAUP0esYrAlu5Sk7UJgQg6iO3/dwzEv6oZlZrT
-zyawj4kOAfeVflFAp/1q/BN6jcDZNenf8r4ky/h8kPPOVYYNo7NeAQF1yB5IR6YRRPxRfsuHpkej
-iJzI6zWoqFsfmeBE/NycmrUpJbWY0cBp6cCDDOfxoXlLGFBWlhVY1miCDeKU7vsxIKh8VVgRpQ8t
-qeEZItAwMx284jgiOVlPdsmiAYUxmt+3/dSVsaU++bYnNWLd190MxCrL6NQdN5Hkhfb6tH5fgji4
-BTt+Xt2vfMFyq6XXlUG5DlCbpLKi0BZum6F9157UIpHRbrRfKHb/aDC3rdV5dQIDAQABo4ICBTCC
-AgEwDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCBPAwKQYDVR0lBCIwIAYIKwYBBQUHAwIGCCsG
-AQUFBwMEBgorBgEEAYI3FAICMDUGA1UdHwQuMCwwKqAooCaGJGh0dHA6Ly9jcmxzLmFsdGVsbC5y
-dS9BbHRlbGxfQ0EyLmNybDBqBggrBgEFBQcBAQReMFwwKAYIKwYBBQUHMAGGHGh0dHA6Ly9vY3Nw
-Lm9mZmljZS5hbHRlbGwucnUwMAYIKwYBBQUHMAKGJGh0dHA6Ly9jcmxzLmFsdGVsbC5ydS9BbHRl
-bGxfQ0EyLmNydDARBglghkgBhvhCAQEEBAMCBaAwGwYJYIZIAYb4QgENBA4WDFJvbWFuIEtoaW1v
-djAdBgNVHQ4EFgQUMjX4TmZYAF3fqJ7TOmMLQVN7XvIwgcMGA1UdIwSBuzCBuIAUcttlVEj7BC3I
-PL6TJFe2aIjYBpOhgZykgZkwgZYxCzAJBgNVBAYTAlJVMQswCQYDVQQIEwJOVzEMMAoGA1UEBxMD
-U1BiMRQwEgYDVQQKEwtBbHRlbGwgTHRkLjEXMBUGA1UECxMOU2VjdXJpdHkgRGVwdC4xGjAYBgNV
-BAMTEUFsdGVsbCBNYXN0ZXIgQ0EyMSEwHwYJKoZIhvcNAQkBFhJzZWN1cml0eUBhbHRlbGwucnWC
-AQMwDQYJKoZIhvcNAQEFBQADggEBACu7ReCTW8egyQF5vVRiTB6s840pRvmAU0A6XHkc2ONWcqbo
-4bcmeaU20ShOVWrggKkbgzmcHsMw8R9D7qLp9g+zCvK6lc7Th2HZfgNvt37AJEfGqBULFzDaqkkf
-BfYBXo2FgbndI9zIt66UTbkdmvfhr5kW0Apg8y2AshBfj09S8s0G0GiBt3JotgEgtIwEyIgehT2a
-/JwImBXWAxyaxkBXBiP5yr955hZdItCEovOJIOJZwpK1UIcv8kh5po60LoPNwW7IuLzKpIWdCUsT
-Nb96Fg7N+PMLHMt12zZIcukqjbeQnLKto6jw7jUKeu+Wpbge1S6JBG7Zdzspqg4w1/4xggJHMIIC
-QwIBATCBlTCBjzELMAkGA1UEBhMCUlUxCzAJBgNVBAgTAk5XMQwwCgYDVQQHEwNTUGIxFDASBgNV
-BAoTC0FsdGVsbCBMdGQuMRcwFQYDVQQLEw5TZWN1cml0eSBEZXB0LjETMBEGA1UEAxMKQWx0ZWxs
-IENBMjEhMB8GCSqGSIb3DQEJARYSc2VjdXJpdHlAYWx0ZWxsLnJ1AgE2MAkGBSsOAwIaBQCggYcw
-GAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTQwOTI5MDU1MTA4WjAj
-BgkqhkiG9w0BCQQxFgQUlbsnzaCSHc1OcxzVjsj0115TWpgwKAYJKoZIhvcNAQkPMRswGTALBglg
-hkgBZQMEAQIwCgYIKoZIhvcNAwcwDQYJKoZIhvcNAQEBBQAEggEAsunqA1YPWSa58y/Hfb5AqdnL
-rGhqqoBUXb83A1lzeuyuMYjCBOHGtTYJNP8q9aQUF8il7HvmGCpWWliEDmZRV6Sq0X2NOmMOZ39e
-XO3P5y96FpUgwh+q11E/FOMyYz24mRqCn6KMHYMViwQkZLzA0wMVVUS/6U7pZF4HKXC8KMlkzGi5
-z9Hq5ETE5YMBbjqXL+WfATmkEmImJxZYQ5bNI+5fx/gFlNS5fT+oGIfzq4rBljojUTEGbk9k0oE+
-DEsednk19cMlIGY+XC/+9scP6SoTdQ8ZeT7QGWdqDmbfs7k6ZoCWHsXPzeJDW9cu3G5cQpn0ZUQo
-OH6B24UTliKX7AAAAAAAAA==
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.common b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.common
+new file mode 100644
+index 0000000..640025d
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.common
+@@ -0,0 +1,163 @@
++#!/bin/sh
++
++[ -x /sbin/ebtables ] || exit 1
++
++EBTABLES_DUMPFILE_STEM=/etc/ebtables/dump
++
++RETVAL=0
++prog="ebtables"
++desc="Ethernet bridge filtering"
++umask 0077
++
++#default configuration
++EBTABLES_MODULES_UNLOAD="yes"
++EBTABLES_LOAD_ON_START="no"
++EBTABLES_SAVE_ON_STOP="no"
++EBTABLES_SAVE_ON_RESTART="no"
++EBTABLES_SAVE_COUNTER="no"
++EBTABLES_BACKUP_SUFFIX="~"
++
++config=/etc/default/$prog
++[ -f "$config" ] && . "$config"
++
++function get_supported_tables() {
++	EBTABLES_SUPPORTED_TABLES=
++	/sbin/ebtables -t filter -L 2>&1 1>/dev/null | grep -q permission
++	if [ $? -eq 0 ]; then
++		echo "Error: insufficient privileges to access the ebtables rulesets."
++		exit 1
++	fi
++	for table in filter nat broute; do
++		/sbin/ebtables -t $table -L &> /dev/null
++		if [ $? -eq 0 ]; then
++			EBTABLES_SUPPORTED_TABLES="${EBTABLES_SUPPORTED_TABLES} $table"
++		fi
++	done
++}
++
++function load() {
++	RETVAL=0
++	get_supported_tables
++	echo -n "Restoring ebtables rulesets: "
++	for table in $EBTABLES_SUPPORTED_TABLES; do
++		echo -n "$table "
++		if [ -s ${EBTABLES_DUMPFILE_STEM}.$table ]; then
++			/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table --atomic-commit
++			RET=$?
++			if [ $RET -ne 0 ]; then
++				echo -n "(failed) "
++				RETVAL=$RET
++			fi
++		else
++			echo -n "(no saved state) "
++		fi
++	done
++	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
++		echo -n "no kernel support. "
++	else
++		echo -n "done. "
++	fi
++	if [ $RETVAL -eq 0 ]; then
++		echo "ok"
++	else
++		echo "fail"
++	fi
++}
++
++function clear() {
++	RETVAL=0
++	get_supported_tables
++	echo -n "Clearing ebtables rulesets: "
++	for table in $EBTABLES_SUPPORTED_TABLES; do
++		echo -n "$table "
++		/sbin/ebtables -t $table --init-table
++	done
++
++	if [ "$EBTABLES_MODULES_UNLOAD" = "yes" ]; then
++		for mod in $(grep -E '^(ebt|ebtable)_' /proc/modules | cut -d' ' -f1) ebtables; do
++			rmmod $mod 2> /dev/null
++		done
++	fi
++	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
++		echo -n "no kernel support. "
++	else
++		echo -n "done. "
++	fi
++	if [ $RETVAL -eq 0 ]; then
++		echo "ok"
++	else
++		echo "fail"
++	fi
++}
++
++function save() {
++	RETVAL=0
++	get_supported_tables
++	echo -n "Saving ebtables rulesets: "
++	for table in $EBTABLES_SUPPORTED_TABLES; do
++		echo -n "$table "
++		[ -n "$EBTABLES_BACKUP_SUFFIX" ] && [ -s ${EBTABLES_DUMPFILE_STEM}.$table ] && \
++		  mv ${EBTABLES_DUMPFILE_STEM}.$table ${EBTABLES_DUMPFILE_STEM}.$table$EBTABLES_BACKUP_SUFFIX
++		/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table --atomic-save
++		RET=$?
++		if [ $RET -ne 0 ]; then
++			echo -n "(failed) "
++			RETVAL=$RET
++		else
++			if [ "$EBTABLES_SAVE_COUNTER" = "no" ]; then
++				/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table -Z
++			fi
++		fi
++	done
++	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
++		echo -n "no kernel support. "
++	else
++		echo -n "done. "
++	fi
++	if [ $RETVAL -eq 0 ]; then
++		echo "ok"
++	else
++		echo "fail"
++	fi
++}
++
++case "$1" in
++  start)
++	[ "$EBTABLES_LOAD_ON_START" = "yes" ] && load
++	;;
++  stop)
++	[ "$EBTABLES_SAVE_ON_STOP" = "yes" ] && save
++	clear
++	;;
++  restart|reload|force-reload)
++	[ "$EBTABLES_SAVE_ON_RESTART" = "yes" ] && save
++	clear
++	[ "$EBTABLES_LOAD_ON_START" = "yes" ] && load
++	;;
++  load)
++	load
++	;;
++  save)
++	save
++	;;
++  status)
++	get_supported_tables
++	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
++		echo "No kernel support for ebtables."
++		RETVAL=1
++	else
++		echo -n "Ebtables support available, number of installed rules: "
++		for table in $EBTABLES_SUPPORTED_TABLES; do
++			COUNT=$(( $(/sbin/ebtables -t $table -L | sed -e "/^Bridge chain/! d" -e "s/^.*entries: //" -e "s/,.*$/ +/") 0 ))
++			echo -n "$table($COUNT) "
++		done
++		echo ok
++		RETVAL=0
++	fi
++	;;
++  *)
++	echo "Usage: $0 {start|stop|restart|reload|force-reload|load|save|status}" >&2
++	RETVAL=1
++esac
++
++exit $RETVAL
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init
+index 0044e98..c9a77a2 100755
+--- a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.init
+@@ -23,164 +23,4 @@
+ # Description:		Saves and restores the state of the ebtables rulesets.
+ ### END INIT INFO
+ 
+-[ -x /sbin/ebtables ] || exit 1
+-
+-EBTABLES_DUMPFILE_STEM=/etc/ebtables/dump
+-
+-RETVAL=0
+-prog="ebtables"
+-desc="Ethernet bridge filtering"
+-umask 0077
+-
+-#default configuration
+-EBTABLES_MODULES_UNLOAD="yes"
+-EBTABLES_LOAD_ON_START="no"
+-EBTABLES_SAVE_ON_STOP="no"
+-EBTABLES_SAVE_ON_RESTART="no"
+-EBTABLES_SAVE_COUNTER="no"
+-EBTABLES_BACKUP_SUFFIX="~"
+-
+-config=/etc/default/$prog
+-[ -f "$config" ] && . "$config"
+-
+-function get_supported_tables() {
+-	EBTABLES_SUPPORTED_TABLES=
+-	/sbin/ebtables -t filter -L 2>&1 1>/dev/null | grep -q permission
+-	if [ $? -eq 0 ]; then
+-		echo "Error: insufficient privileges to access the ebtables rulesets."
+-		exit 1
+-	fi
+-	for table in filter nat broute; do
+-		/sbin/ebtables -t $table -L &> /dev/null
+-		if [ $? -eq 0 ]; then
+-			EBTABLES_SUPPORTED_TABLES="${EBTABLES_SUPPORTED_TABLES} $table"
+-		fi
+-	done
+-}
+-
+-function load() {
+-	RETVAL=0
+-	get_supported_tables
+-	echo -n "Restoring ebtables rulesets: "
+-	for table in $EBTABLES_SUPPORTED_TABLES; do
+-		echo -n "$table "
+-		if [ -s ${EBTABLES_DUMPFILE_STEM}.$table ]; then
+-			/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table --atomic-commit
+-			RET=$?
+-			if [ $RET -ne 0 ]; then
+-				echo -n "(failed) "
+-				RETVAL=$RET
+-			fi
+-		else
+-			echo -n "(no saved state) "
+-		fi
+-	done
+-	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
+-		echo -n "no kernel support. "
+-	else
+-		echo -n "done. "
+-	fi
+-	if [ $RETVAL -eq 0 ]; then
+-		echo "ok"
+-	else
+-		echo "fail"
+-	fi
+-}
+-
+-function clear() {
+-	RETVAL=0
+-	get_supported_tables
+-	echo -n "Clearing ebtables rulesets: "
+-	for table in $EBTABLES_SUPPORTED_TABLES; do
+-		echo -n "$table "
+-		/sbin/ebtables -t $table --init-table
+-	done
+-
+-	if [ "$EBTABLES_MODULES_UNLOAD" = "yes" ]; then
+-		for mod in $(grep -E '^(ebt|ebtable)_' /proc/modules | cut -d' ' -f1) ebtables; do
+-			rmmod $mod 2> /dev/null
+-		done
+-	fi
+-	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
+-		echo -n "no kernel support. "
+-	else
+-		echo -n "done. "
+-	fi
+-	if [ $RETVAL -eq 0 ]; then
+-		echo "ok"
+-	else
+-		echo "fail"
+-	fi
+-}
+-
+-function save() {
+-	RETVAL=0
+-	get_supported_tables
+-	echo -n "Saving ebtables rulesets: "
+-	for table in $EBTABLES_SUPPORTED_TABLES; do
+-		echo -n "$table "
+-		[ -n "$EBTABLES_BACKUP_SUFFIX" ] && [ -s ${EBTABLES_DUMPFILE_STEM}.$table ] && \
+-		  mv ${EBTABLES_DUMPFILE_STEM}.$table ${EBTABLES_DUMPFILE_STEM}.$table$EBTABLES_BACKUP_SUFFIX
+-		/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table --atomic-save
+-		RET=$?
+-		if [ $RET -ne 0 ]; then
+-			echo -n "(failed) "
+-			RETVAL=$RET
+-		else
+-			if [ "$EBTABLES_SAVE_COUNTER" = "no" ]; then
+-				/sbin/ebtables -t $table --atomic-file ${EBTABLES_DUMPFILE_STEM}.$table -Z
+-			fi
+-		fi
+-	done
+-	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
+-		echo -n "no kernel support. "
+-	else
+-		echo -n "done. "
+-	fi
+-	if [ $RETVAL -eq 0 ]; then
+-		echo "ok"
+-	else
+-		echo "fail"
+-	fi
+-}
+-
+-case "$1" in
+-  start)
+-	[ "$EBTABLES_LOAD_ON_START" = "yes" ] && load
+-	;;
+-  stop)
+-	[ "$EBTABLES_SAVE_ON_STOP" = "yes" ] && save
+-	clear
+-	;;
+-  restart|reload|force-reload)
+-	[ "$EBTABLES_SAVE_ON_RESTART" = "yes" ] && save
+-	clear
+-	[ "$EBTABLES_LOAD_ON_START" = "yes" ] && load
+-	;;
+-  load)
+-	load
+-	;;
+-  save)
+-	save
+-	;;
+-  status)
+-	get_supported_tables
+-	if [ -z "$EBTABLES_SUPPORTED_TABLES" ]; then
+-		echo "No kernel support for ebtables."
+-		RETVAL=1
+-	else
+-		echo -n "Ebtables support available, number of installed rules: "
+-		for table in $EBTABLES_SUPPORTED_TABLES; do
+-			COUNT=$(( $(/sbin/ebtables -t $table -L | sed -e "/^Bridge chain/! d" -e "s/^.*entries: //" -e "s/,.*$/ +/") 0 ))
+-			echo -n "$table($COUNT) "
+-		done
+-		echo ok
+-		RETVAL=0
+-	fi
+-	;;
+-  *)
+-	echo "Usage: $0 {start|stop|restart|reload|force-reload|load|save|status}" >&2
+-	RETVAL=1
+-esac
+-
+-exit $RETVAL
++/usr/sbin/ebtables.common $1
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.service b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.service
+new file mode 100644
+index 0000000..3abd1fe
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Ethernet Bridge Filtering Tables
++
++[Service]
++Type=oneshot
++RemainAfterExit=yes
++ExecStart=@SBINDIR@/ebtables.common start
++ExecStop=@SBINDIR@/ebtables.common stop
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+index 9222b2d..32cfc75 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+@@ -15,6 +15,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+            file://installnonroot.patch \
+            file://01debian_defaultconfig.patch \
+            file://ebtables.init \
++           file://ebtables.common \
++           file://ebtables.service \
+            file://no-as-needed.patch \
+ "
+ 
+@@ -23,7 +25,7 @@ SRC_URI[sha256sum] = "dc6f7b484f207dc712bfca81645f45120cb6aee3380e77a1771e9c34a9
+ 
+ S = "${WORKDIR}/ebtables-v${PV}"
+ 
+-inherit update-rc.d
++inherit update-rc.d systemd
+ 
+ EXTRA_OEMAKE = " \
+         BINDIR=${base_sbindir} \
+@@ -39,21 +41,29 @@ EXTRA_OEMAKE = " \
+ "
+ 
+ do_install () {
++    install -d ${D}${sbindir}
++    install -m 0755 ${WORKDIR}/ebtables.common ${D}${sbindir}/ebtables.common
++    # Fix hardcoded paths in scripts
++    sed -i 's!/sbin/!${base_sbindir}/!g' ${D}${sbindir}/ebtables.common
++    sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sbindir}/ebtables.common
++
+     install -d ${D}${sysconfdir}/init.d
+     install -d ${D}${sysconfdir}/default
+     install -d ${D}${sysconfdir}/ebtables
+     oe_runmake DESTDIR='${D}' install
+     install -m 0755 ${WORKDIR}/ebtables.init ${D}/${sysconfdir}/init.d/ebtables
+     mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
+-
+-    # Fix hardcoded paths in scripts
+-    sed -i 's!/sbin/!${base_sbindir}/!g' ${D}/${sysconfdir}/init.d/ebtables
+-    sed -i 's!/etc/!${sysconfdir}/!g' ${D}/${sysconfdir}/init.d/ebtables
++    sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ebtables
+ 
+     # The script ebtables-save refernces perl in exec_prefix, so
+     # move it to sbindir to avoid QA issue
+     install -d ${D}/${sbindir}
+     mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
++
++    # Install systemd service files
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/ebtables.service ${D}${systemd_unitdir}/system
++    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/ebtables.service
+ }
+ 
+ CONFFILES_${PN} += "${sysconfdir}/default/ebtables"
+@@ -61,5 +71,7 @@ CONFFILES_${PN} += "${sysconfdir}/default/ebtables"
+ INITSCRIPT_NAME = "ebtables"
+ INITSCRIPT_PARAMS = "start 41 S . stop 41 6 ."
+ 
++SYSTEMD_SERVICE_${PN} = "ebtables.service"
++
+ FILES_${PN}-dbg += "${base_libdir}/ebtables/.debug"
+ FILES_${PN} += "${base_libdir}/ebtables/*.so"
+-- 
+1.7.9.5
 
---nextPart4853984.bX3AfMqFBe--
+
