@@ -1,35 +1,40 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id B60F2605B3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 912136FDEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 15:16:21 +0000 (UTC)
-Received: by mail-yh0-f46.google.com with SMTP id f73so1734887yha.19
+	Mon, 29 Sep 2014 16:23:41 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id z12so2986619wgg.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 08:16:22 -0700 (PDT)
+	Mon, 29 Sep 2014 09:23:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=4J7TvLoQOXiwsJSRdSJMgfVjXqWgi7NWh1GM1aJ4d7Y=;
-	b=i+k8abDFeNaBybob/49GWtqGMevIP6nECLLNC8xczM6BYKW6w9Bf2AizYsMFWGCewY
-	PMk/6WWDd7GhhrASoy5sf87/jNy9cR0OKrZ2jBGs33LQp0/CU57UG/nwBKk3kyvgS21O
-	zFBRWnN5ffZFhowJRdKOtusoVG5BrN0NpQx1/3iVmgyqn8UEdiWBil5yyxh6qCSOa1Ff
-	uk4AoMvtM6aCHmffIUTLjU3XrWJ0/72AW2dW45EHHEpcq01VRFATTISXvDOy0WDy5Ew9
-	cACc3owItBZqqrE8dgrojsCj/qRfAp/I9gFC1lzS+WI+RvAUfu93WijPmIf85AoVio37
-	oEBQ==
-MIME-Version: 1.0
-X-Received: by 10.236.127.140 with SMTP id d12mr59506226yhi.37.1412003782694; 
-	Mon, 29 Sep 2014 08:16:22 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.44.19 with HTTP; Mon, 29 Sep 2014 08:16:22 -0700 (PDT)
-In-Reply-To: <m2y4t4f7fl.fsf@gmail.com>
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=OZE/qH+uxLW2CSY47oPPJh5X1QqmJDCjAyFFIGjwz6o=;
+	b=CtZpOE7PGnL2suEn5jUxJDOSQLgVMsIm/0DLwl+M+3IFxPTv18kmOoYEj3wuay7gbd
+	WfRNLqIV8EUZZPqG0/5JXUxYJGvvgjg/nC+Tf4vd3PjEdEnhzSEHxgenwT99QSxIy5hG
+	EGw5RxCajkvQcPXJaqOx+eSL3p7Ttq9nykptXD1ExAaiCdi885W51HGm0v4YlJMmpoGE
+	5u5Bxh8Mp5qivBCE3g2AyV1vzSK6fh0YQPJTHv1hYI+p/Ut8uOjTRhj5F/FkLMPQahy6
+	YrLkJgd7e3YHg/y7S8N6vpxijSpv6B+Ou/o7UDSjXqwXUatTTHhJdkTT9kzvl8g4obf3
+	yuVA==
+X-Received: by 10.180.198.211 with SMTP id je19mr17199562wic.78.1412007822257; 
+	Mon, 29 Sep 2014 09:23:42 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	ua8sm16241832wjc.7.2014.09.29.09.23.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 29 Sep 2014 09:23:41 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 29 Sep 2014 18:24:33 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20140929162433.GS25706@jama>
 References: <1411881077-86222-1-git-send-email-coldnew.tw@gmail.com>
 	<20140928054750.GQ25706@jama> <m2y4t4f7fl.fsf@gmail.com>
-Date: Mon, 29 Sep 2014 12:16:22 -0300
-X-Google-Sender-Auth: 1_zeUWtt990L5Yg2ZkNnbTlaXPk
-Message-ID: <CAP9ODKpSRCE5b_q0a_P2UNqp0AkiZYZezsJE7Z6C6G0g-2wisA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+	<CAP9ODKpSRCE5b_q0a_P2UNqp0AkiZYZezsJE7Z6C6G0g-2wisA@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAP9ODKpSRCE5b_q0a_P2UNqp0AkiZYZezsJE7Z6C6G0g-2wisA@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Subject: Re: [meta-qt5][PATCH v2] qt5: Add Qt 5.3.2 packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,30 +49,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Sep 2014 15:16:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 29 Sep 2014 16:23:41 -0000
+X-Groupsio-MsgNum: 52277
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tgGnixv3tJWXBxdL"
+Content-Disposition: inline
 
-On Sun, Sep 28, 2014 at 5:55 AM, Yen-Chin Lee <coldnew.tw@gmail.com> wrote:
->
-> Martin Jansa writes:
->
->> On Sun, Sep 28, 2014 at 01:11:17PM +0800, Yen-Chin Lee wrote:
->>> Qt 5.3.2 has been released in September 16th, 2014.
->>>
->>> We still keep QT_VERSION to 5.3.1, if users want to upgrade to QT 5.3.2
->>> they should modified the QT_VERSION variable on their own.
->>>
->>
->> I would remove the 5.3.1 version (and _git recipes will later be used
->> for 5.4)
->
-> Wow! That's great news! Actually I also want to test the Qt 5.4 version,
-> it's nice if we can has Qt 5.4 git support soon.
+--tgGnixv3tJWXBxdL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-So could you rework the patches to upgrade the 5.3.1 recipes to 5.3.2 ones?
+On Mon, Sep 29, 2014 at 12:16:22PM -0300, Otavio Salvador wrote:
+> On Sun, Sep 28, 2014 at 5:55 AM, Yen-Chin Lee <coldnew.tw@gmail.com> wrot=
+e:
+> >
+> > Martin Jansa writes:
+> >
+> >> On Sun, Sep 28, 2014 at 01:11:17PM +0800, Yen-Chin Lee wrote:
+> >>> Qt 5.3.2 has been released in September 16th, 2014.
+> >>>
+> >>> We still keep QT_VERSION to 5.3.1, if users want to upgrade to QT 5.3=
+=2E2
+> >>> they should modified the QT_VERSION variable on their own.
+> >>>
+> >>
+> >> I would remove the 5.3.1 version (and _git recipes will later be used
+> >> for 5.4)
+> >
+> > Wow! That's great news! Actually I also want to test the Qt 5.4 version,
+> > it's nice if we can has Qt 5.4 git support soon.
+>=20
+> So could you rework the patches to upgrade the 5.3.1 recipes to 5.3.2 one=
+s?
+>=20
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+I've already updated them in jansa/master branch
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--tgGnixv3tJWXBxdL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQph8EACgkQN1Ujt2V2gBzzsACgrjBNcx7/8rLpgtgNLXJSCnOl
+6dwAnRR0T8IOmFBZULng65Sflj63p9hw
+=8/b9
+-----END PGP SIGNATURE-----
+
+--tgGnixv3tJWXBxdL--
