@@ -1,34 +1,38 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 0BDC960809
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
+	[209.85.217.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 8120865DEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 07:37:22 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1XYrzs-0005cm-I3 for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Sep 2014 09:37:20 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 09:37:20 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 30 Sep 2014 08:08:39 +0000 (UTC)
+Received: by mail-lb0-f171.google.com with SMTP id z12so949615lbi.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 09:37:20 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 30 Sep 2014 01:08:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=lps8hJeGa3BIQ5R0adep1JGvdzkt64nYqNVLd/1t+HI=;
+	b=gsXr4iLVUxxFL4eyC/gsTB+XVk71K7Qm9uuHFyUFLycblYHRGNz6UrYA85mbH0Y/fF
+	C3utisGUuxHCI4/CfNbxVV3vFZfMhiB16OclSUgtRmOKIF3Jdcc+eMlr0p0EvP1VRD43
+	kS6YuCDcwP0C0RCJJqq0L1yWnpPQ9ZiM3hIXDzZGZMeIuVMI+rsI7cJskW8ucYd4hqcl
+	T+snizYyPgmQBkPoZ1VjGCr2bGkZZfOlRdROMvPW3PN/4ttOi8x+S83g/6rDX75jVguu
+	JyC49ylGyyZKLb9df4bv1xlG9JQCL51Tz2B2qLIGrgkt/MoXCBGUhTD1mVEWKQk7uYN9
+	g/pg==
+X-Gm-Message-State: ALoCoQkXpPn9AenM/AIH8A941AffHcSsrkB3gqsDr+n9pcc++vtPmiHa7TOSn4MpUtyvfrL16Bq3
+X-Received: by 10.152.1.74 with SMTP id 10mr34778052lak.43.1412064518083;
+	Tue, 30 Sep 2014 01:08:38 -0700 (PDT)
+Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
+	[91.152.78.194])
+	by mx.google.com with ESMTPSA id nx9sm5762184lbb.23.2014.09.30.01.08.37
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 30 Sep 2014 01:08:37 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 30 Sep 2014 09:37:09 +0200
-Message-ID: <m0dmj5$k28$1@ger.gmane.org>
-References: <cover.1412056597.git.wenzong.fan@windriver.com>
-	<a28a68062d37967e63ba90bcf1c6245c561d0a5e.1412056597.git.wenzong.fan@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <a28a68062d37967e63ba90bcf1c6245c561d0a5e.1412056597.git.wenzong.fan@windriver.com>
-Subject: Re: [PATCH 1/1][meta-oe] rsnapshot: add new package
+Date: Tue, 30 Sep 2014 11:08:33 +0300
+Message-Id: <1412064513-15996-1-git-send-email-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.1.1
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH v2] acpitests: update to 20140828 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,64 +46,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 07:37:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Sep 2014 08:08:44 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+update md5sums and refresh patches
 
-wenzong.fan@windriver.com schreef op 30-09-14 08:02:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
-> 
-> rsnapshot is a filesystem snapshot utility based on rsync.
-> 
-> rsnapshot makes it easy to make periodic snapshots of local machines, and
-> remote machines over ssh. The code makes extensive use of hard links 
-> whenever possible, to greatly reduce the disk space required.
-> 
-> Homepage: http://www.rsnapshot.org/
-> 
-> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com> --- 
-> meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb |   34
-> ++++++++++++++++++++ 1 file changed, 34 insertions(+) create mode 100644
-> meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-> 
-> diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-> b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb new file mode
-> 100644 index 0000000..afd3678 --- /dev/null +++
-> b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb @@ -0,0 +1,34 @@ 
-> +SUMMARY = "A filesystem snapshot utility based on rsync" +HOMEPAGE =
-> "http://www.rsnapshot.org" +BUGTRACKER =
-> "https://sourceforge.net/projects/rsnapshot/" +SECTION =
-> "console/network" + +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a" + +RDEPENDS_${PN} =
-> "rsync \ +                  perl \ +
-> perl-module-dirhandle \ +                  perl-module-cwd \ +
-> perl-module-getopt-std \ +                  perl-module-file-path \ +
-> perl-module-file-stat \ +                  perl-module-posix \ +
-> perl-module-fcntl \ +                  perl-module-io-file \ +
-> perl-module-constant \ +                  perl-module-overloading \ +
-> " +
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
+ v2 changes: rebased on top of Khem changes (add0ba4)
 
-R* variables go below do_install
+ .../acpica/acpitests/aapits-linux.patch            |  4 +--
+ .../acpica/acpitests/aapits-makefile.patch         | 36 +++++++++++++---------
+ ...acpitests_20140424.bb => acpitests_20140828.bb} | 10 +++---
+ 3 files changed, 29 insertions(+), 21 deletions(-)
+ rename meta-oe/recipes-extended/acpica/{acpitests_20140424.bb => acpitests_20140828.bb} (74%)
 
-
-> +SRCREV = "1047cbb57937c29233388e2fcd847fecd3babe74" +PV =
-> "1.3.1+git${SRCPV}" + +SRC_URI =
-> "git://github.com/DrHyde/${BPN};branch=master;protocol=git \ +
-> " + +S = "${WORKDIR}/git" + +inherit autotools + +PACKAGECONFIG ??=
-> "logger" +PACKAGECONFIG[logger] =
-> "--with-logger=${bindir}/logger,--without-logger,,util-linux"
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFUKl2lMkyGM64RGpERAr0PAKCip4Nj9nx9qy/f4oVBQRktspaUSgCaAkDK
-f9YCGesJ+Wx2iacqpw82n3k=
-=Yzvp
------END PGP SIGNATURE-----
-
+diff --git a/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch b/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
+index 116761d..7c5d6b0 100644
+--- a/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
++++ b/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
+@@ -326,8 +326,8 @@ diff -urN acpica-unix2-20130626/tests/aapits/Makefile acpica-unix2-20130626-aapi
+ --- acpica-unix2-20130626/tests/aapits/Makefile	2013-01-17 12:48:29.000000000 -0700
+ +++ acpica-unix2-20130626-aapits/tests/aapits/Makefile	2013-07-25 15:17:09.309236422 -0600
+ @@ -194,7 +194,7 @@
+- CFLAGS+= -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_EXEC_APP -D_MULTI_THREADED -Wstrict-prototypes -I../../source/include 
+- 
++ CFLAGS+= -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_APITS -DACPI_EXEC_APP -D_MULTI_THREADED -Wstrict-prototypes -I../../source/include
++
+  
+ -acpiexec : $(patsubst %.c,%.o, $(SRCS))
+ +$(PROG) : $(patsubst %.c,%.o, $(SRCS))
+diff --git a/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch b/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
+index d38501b..4d9e997 100644
+--- a/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
++++ b/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
+@@ -8,19 +8,27 @@ Upstream-status: Unknown
+ diff -urN acpica-unix2-20140325/tests/aapits/Makefile acpica-unix2-20140325/tests/aapits/Makefile
+ --- acpica-unix2-20140325/tests/aapits/Makefile	2014-04-05 14:23:14.683636794 -0600
+ +++ acpica-unix2-20140325-aapits/tests/aapits/Makefile	2014-04-05 15:10:57.879184598 -0600
+-@@ -20,6 +20,7 @@
+- 	../../source/components/hardware/hwxface.c \
++@@ -16,6 +16,7 @@
++ 	atosxfwrap.c \
++ 	osunixxf.c \
++ 	../../source/common/ahids.c \
+++	../../source/common/ahuuids.c \
+  	../../source/common/cmfsize.c \
+  	../../source/common/getopt.c \
+-+	../../source/common/ahids.c \
+- 	../../source/components/debugger/dbcmds.c \
+- 	../../source/components/debugger/dbconvert.c \
+- 	../../source/components/debugger/dbdisply.c \
+-@@ -154,6 +155,7 @@
+- 	../../source/components/tables/tbfadt.c \
+- 	../../source/components/tables/tbfind.c \
+- 	../../source/components/tables/tbinstal.c \
+-+	../../source/components/tables/tbdata.c \
+- 	../../source/components/tables/tbprint.c \
+- 	../../source/components/tables/tbutils.c \
+- 	../../source/components/tables/tbxface.c \
++ 	../../source/components/hardware/hwtimer.c \
++@@ -174,6 +175,7 @@
++ 	../../source/components/utilities/utexcep.c \
++ 	../../source/components/utilities/utfileio.c \
++ 	../../source/components/utilities/utglobal.c \
+++	../../source/components/utilities/uthex.c \
++ 	../../source/components/utilities/utids.c \
++ 	../../source/components/utilities/utinit.c \
++ 	../../source/components/utilities/utlock.c \
++@@ -189,6 +191,7 @@
++ 	../../source/components/utilities/utstate.c \
++ 	../../source/components/utilities/utstring.c \
++ 	../../source/components/utilities/uttrack.c \
+++	../../source/components/utilities/utuuid.c \
++ 	../../source/components/utilities/utxface.c \
++ 	../../source/components/utilities/utxferror.c \
++ 	../../source/components/utilities/utxfinit.c \
+diff --git a/meta-oe/recipes-extended/acpica/acpitests_20140424.bb b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
+similarity index 69%
+rename from meta-oe/recipes-extended/acpica/acpitests_20140424.bb
+rename to meta-oe/recipes-extended/acpica/acpitests_20140828.bb
+index 7e145bb..889c00b 100644
+--- a/meta-oe/recipes-extended/acpica/acpitests_20140424.bb
++++ b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
+@@ -11,10 +11,10 @@ SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;nam
+            file://aapits-linux.patch \
+            file://aapits-makefile.patch \
+     "
+-SRC_URI[acpitests.md5sum] = "bfc399cecb21e9491d362d8e480b2689"
+-SRC_URI[acpitests.sha256sum] = "e7d7ff638872543909b38c2498e88958251ee6ce4d22bc13d4e3925771212c0e"
+-SRC_URI[acpica.md5sum] = "733532f005fba5d1c5344440651b13d1"
+-SRC_URI[acpica.sha256sum] = "72ece982bbbdfb1b17418f1feb3a9daaa01803d0d41dcf00e19d702cdf751bbc"
++SRC_URI[acpitests.md5sum] = "db9d6fdaa8e3eb101d700ee5ba4938ed"
++SRC_URI[acpitests.sha256sum] = "e576c74bf1bf1c9f7348bf9419e05c8acfece7105abcdc052e66670c7af2cf00"
++SRC_URI[acpica.md5sum] = "6f05f0d10166a1b1ff6107f3d1cdf1e5"
++SRC_URI[acpica.sha256sum] = "01d8867656c5ba41dec307c4383ce676196ad4281ac2c9dec9f5be5fac6d888e"
+ 
+ S = "${WORKDIR}/acpitests-unix-${PV}"
+ 
+-- 
+2.1.1
 
