@@ -1,35 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
-	[74.125.82.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 619096B8F6
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 437AA716CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 02:13:52 +0000 (UTC)
-Received: by mail-we0-f172.google.com with SMTP id q58so5244766wes.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 19:13:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=ED7lCoQPSNLOENHYuxDgu4NY44GQXS8XVlq+hS9zAv4=;
-	b=FG6Kg2sGS0qeO4vAqvOlreovckjFjzKw/LO7/Si87ENODWSIItaDcvKIkmZKrnHqai
-	v5jM5QsJ5osoUHVwxhO8OnS7DuEeQbhSdXRfD/9VuZQdMhcoIpWqe5VCqsO8JakVpHlx
-	QWHjNgLcK5a2gW51fSPn3/Cc0pwjfQLKF/eI8fECSpT0Dt2NJs3Wh1m+nG4720trh214
-	kMqzInOG+1bLR7ZbSAeW8dKeuZM6+1qIzkGabNW3FeQqTW7Eg2R314cOTdZ2Wv2OZbLZ
-	Z9MQy7yyntpWZPUNJVZQ4S/fivSP3y48xEPe9wv3yITnX7vB7OJ2noCCUNZOfgWOCj+q
-	fwPg==
-X-Received: by 10.194.142.209 with SMTP id ry17mr50215462wjb.57.1412043233292; 
-	Mon, 29 Sep 2014 19:13:53 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	ew1sm17524579wjb.31.2014.09.29.19.13.52 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Sep 2014 19:13:52 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Sep 2014 04:14:44 +0200
-Message-Id: <1412043284-19901-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.1.1
-Subject: [meta-multimedia][PATCH] libmpd: fix build with glibc-2.20
+	Tue, 30 Sep 2014 02:27:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8U2Rrfo028410
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 29 Sep 2014 19:27:53 -0700 (PDT)
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.18]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0174.001;
+	Mon, 29 Sep 2014 19:27:52 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
+Thread-Index: AQHP3EXRcugjvvwsSkmUAdPFz8Xc55wY7MwQgAB4W4D//45n4A==
+Date: Tue, 30 Sep 2014 02:27:52 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AABD50F470@ALA-MBB.corp.ad.wrs.com>
+References: <1411985350-20322-1-git-send-email-jackie.huang@windriver.com>
+	<20140930003037.GW25706@jama>
+	<1B858668EC6A94408DCA5225FDFA85AABD50F355@ALA-MBB.corp.ad.wrs.com>
+	<20140930021351.GX25706@jama>
+In-Reply-To: <20140930021351.GX25706@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.134]
+MIME-Version: 1.0
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] openldap: update version to 2.4.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,47 +43,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 02:14:02 -0000
+X-List-Received-Date: Tue, 30 Sep 2014 02:28:01 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-multimedia/musicpd/libmpd-11.8.17/glibc-2.20.patch | 10 ++++++++++
- meta-multimedia/recipes-multimedia/musicpd/libmpd_11.8.17.bb   |  4 +++-
- 2 files changed, 13 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/musicpd/libmpd-11.8.17/glibc-2.20.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpd-11.8.17/glibc-2.20.patch b/meta-multimedia/recipes-multimedia/musicpd/libmpd-11.8.17/glibc-2.20.patch
-new file mode 100644
-index 0000000..4a2b25c
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicpd/libmpd-11.8.17/glibc-2.20.patch
-@@ -0,0 +1,10 @@
-+--- libmpd-11.8.17/src/libmpd-internal.h.orig	2014-09-30 04:08:50.963292427 +0200
-++++ libmpd-11.8.17/src/libmpd-internal.h	2014-09-30 04:08:30.595292223 +0200
-+@@ -21,6 +21,7 @@
-+ #define __MPD_INTERNAL_LIB_
-+ 
-+ #include "libmpdclient.h"
-++#include "config.h"
-+ struct _MpdData_real;
-+ 
-+ typedef struct _MpdData_real {
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/libmpd_11.8.17.bb b/meta-multimedia/recipes-multimedia/musicpd/libmpd_11.8.17.bb
-index 8327b75..54d7910 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/libmpd_11.8.17.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/libmpd_11.8.17.bb
-@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- HOMEPAGE ="http://sourceforge.net/projects/musicpd"
- DEPENDS = "glib-2.0"
- 
--SRC_URI = "http://www.musicpd.org/download/${BPN}/${PV}/${BP}.tar.gz"
-+SRC_URI = "http://www.musicpd.org/download/${BPN}/${PV}/${BP}.tar.gz \
-+    file://glibc-2.20.patch \
-+"
- SRC_URI[md5sum] = "5ae3d87467d52aef3345407adb0a2488"
- SRC_URI[sha256sum] = "fe20326b0d10641f71c4673fae637bf9222a96e1712f71f170fca2fc34bf7a83"
- 
--- 
-2.1.1
 
+> -----Original Message-----
+> From: Martin Jansa [mailto:martin.jansa@gmail.com]
+> Sent: Tuesday, September 30, 2014 10:14 AM
+> To: Huang, Jie (Jackie)
+> Cc: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
+>=20
+> On Tue, Sep 30, 2014 at 02:07:06AM +0000, Huang, Jie (Jackie) wrote:
+> >
+> >
+> > > -----Original Message-----
+> > > From: openembedded-devel-bounces@lists.openembedded.org
+> > > [mailto:openembedded-devel- bounces@lists.openembedded.org] On
+> > > Behalf Of Martin Jansa
+> > > Sent: Tuesday, September 30, 2014 8:31 AM
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to
+> > > 2.4.39
+> > >
+> > > On Mon, Sep 29, 2014 at 06:09:10AM -0400, jackie.huang@windriver.com =
+wrote:
+> > > > From: Jackie Huang <jackie.huang@windriver.com>
+> > > >
+> > > > Changed:
+> > > >  * Move slapd from ${libexecdir} to ${sbin}:
+> > > >    Installing slapd under ${sbin} is more FHS and LSB compliance
+> > > >  * Manage init script by inheriting update-rc.d, than postinst
+> > > >  * Add status for initscript
+> > > >  * Rename the patch named with commit id to
+> > > >    gnutls-Avoid-use-of-deprecated-function.patch
+> > > >  * Add a patch for CVE-2013-4449
+> > > >  * Add a patch to use /dev/urandom for entropy
+> > > >  * Allow tls obtains random bits from /dev/urandom:
+> > > >    The URANDOM_DEVICE is undefined for cross-compiling, define it a=
+s
+> > > >    /dev/urandom to allow tls obtains random bits from /dev/urandom.
+> > > >  * Add PACKAGECONFIG for mdb, ndb, relay and sock
+> > > >  * Remove unsupported config for ldbm
+> > > >  * Add license file
+> > >
+> > > Can you please resolve:
+> > > WARNING: QA Issue: openldap: Files/directories were installed but not=
+ shipped
+> > >   /run [installed-vs-shipped]
+> >
+> > Could you show me how to reproduce this? I don't see this warning (I
+> > set installed-vs-shipped in ERROR_QA in fact, so it should be an
+> > error), and I checked that there is no /run directory generated for ope=
+nldap.
+>=20
+> You can try to configure your builds like world builds are:
+> http://www.openembedded.org/wiki/Bitbake_World_Status
+>=20
+> My guess would be systemd in DISTRO_FEATURES (if you don't have it alread=
+y).
+
+Yeah, it should be the case, I will check and fix it.
+
+Thanks,
+Jackie
+
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
