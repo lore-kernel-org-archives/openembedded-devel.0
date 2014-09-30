@@ -1,34 +1,31 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id ACAE16017E
+Return-Path: <californialsullivan@gmail.com>
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 386406017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 21:08:43 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id y10so3751855wgg.15
+	Tue, 30 Sep 2014 21:26:51 +0000 (UTC)
+Received: by mail-oi0-f42.google.com with SMTP id a141so1318329oig.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 14:08:44 -0700 (PDT)
+	Tue, 30 Sep 2014 14:26:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=SEvEDXO5pkqP8hdarP6kyLPnX6wW/IfuTt8Jn94FhRE=;
-	b=Wo+vkDEssgiJPgn8TnxyA6zvTYSPWxlnIMqEOszVlpXNv22+z9MEVXuGysWXwi/E79
-	l4e1oDcue4Eeu3ZS/sXO4VZRGIayRQMdLPNkPCRTh4BZ7R8tQzzpHizYvPaoQFkberCb
-	0YgcchxHLAMrGdVQTS7GrzBSy75yhH5Q2GwO8PKs3u2TE62DY0smlDj9N15STbN96Q8G
-	AWZVK2EcN3uuCvsSrUHphy08N+AafUk+eRFjYhjYkoJa024aMnL96I9WHJwgw8PUg4mH
-	tCk18PselrvjCELcBk9gFR4PIsEd0YF8jRxHLUBh8b5JmavEivnzCWEJCXAymxGIU3OZ
-	Ibzw==
-X-Received: by 10.194.220.7 with SMTP id ps7mr57275484wjc.28.1412111324477;
-	Tue, 30 Sep 2014 14:08:44 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host115-255-dynamic.2-87-r.retail.telecomitalia.it. [87.2.255.115])
-	by mx.google.com with ESMTPSA id
-	ga9sm20432337wjb.45.2014.09.30.14.08.43 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 30 Sep 2014 14:08:43 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=oc0yrdIDLk8BFH9/DZDf803Mcb9IOpQsYYRh1/94VnE=;
+	b=qnuVe0/daKEjIsACXX8GZaqwwcELsdjR0vmjA/1MT+ZQFmBbHvsQ8QM/bPVZdSWnVl
+	ovYaUfvLpyg/weHHcDjQIuKubu5W0qcXYw9XcYkewTVqxRDMieTvBTeChCfxIKGje75w
+	LfBWgfBEF7zmH0qzRDzFcCxLjgsVfk1kmRmeVNn7CRFHnh8yMtYMO6bAUMBqiOa1q/9+
+	wxf2pv5Bn8W3sRj4qbl6AE6U7gegIcE7oPI/m/np46P8bIkmw5LpdSv88wx5CAjNdUDJ
+	bvQM5sELwQtj5zbJuPyztcmakFqLvDFgeewZT2BNI3f7pp3id9NxDTkDENaW42H8BGZ6
+	MZZQ==
+MIME-Version: 1.0
+X-Received: by 10.182.79.37 with SMTP id g5mr51666541obx.41.1412112412824;
+	Tue, 30 Sep 2014 14:26:52 -0700 (PDT)
+Received: by 10.76.157.229 with HTTP; Tue, 30 Sep 2014 14:26:52 -0700 (PDT)
+Date: Tue, 30 Sep 2014 14:26:52 -0700
+Message-ID: <CAMP9K8-g9Cd6SiNOidENMtvZ8beeWWAvv0GHA=7j-N_LUk_XJg@mail.gmail.com>
+From: California Sullivan <californialsullivan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Sep 2014 23:08:38 +0200
-Message-Id: <1412111318-14034-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld] Pull request 20140930
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: meta-xfce: how to change the default background?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,104 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 21:08:54 -0000
+X-List-Received-Date: Tue, 30 Sep 2014 21:26:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The following changes since commit e51a0c84c65651a646ac701a411f724c0ed583a6:
+Hi all,
 
-  linux-yocto-tiny-kexecboot: change KERNEL_IMAGE_MAXSIZE from bytes to KB (2014-08-13 22:18:10 +0100)
+When building an image and using the xfce package, I would like to be able
+to set a custom default background (i.e., before the image is ever booted
+up).
 
-are available in the git repository at:
+I have been unable to find any documentation on how to do this, and I
+haven't found any clues by poking around in the layer.
 
-  https://github.com/andrea-adami/meta-handheld master
+Any pointers from somebody with experience in this area, or any links to
+documentation on how this could be done would be very much appreciated.
 
-for you to fetch changes up to 0838478a7059ecc9e4ed08ccd25c2415ded0e74c:
-
-  linux-yocto-tiny-kexecboot_3.17: zaurus: initial commit based on 3.17-rc6 (2014-09-30 22:42:02 +0200)
-
-----------------------------------------------------------------
-
-Andrea Adami (2):
-  linux-yocto_3.17: zaurus: initial commit based on 3.17-rc6
-  linux-yocto-tiny-kexecboot_3.17: zaurus: initial commit based on
-    3.17-rc6
-
- .../linux/linux-yocto-3.17/OE-qvga-logo.patch      | 232025 +++++
- .../linux/linux-yocto-3.17/OE-vga-logo.patch       | 923225 ++++++++++++++++++
- .../linux/linux-yocto-3.17/akita/defconfig         |    443 +
- .../linux/linux-yocto-3.17/c7x0/defconfig          |    374 +
- .../collie/arm-sa1100-add-cpu-clock.patch          |     95 +
- .../collie/arm-sa1100-dummy-clk_set_rate.patch     |     33 +
- .../collie/collie-use-gpio-charger.patch           |    113 +
- .../linux/linux-yocto-3.17/collie/defconfig        |    378 +
- .../fbdev-sa1100fb-make-use-of-device-clock.patch  |    112 +
- .../collie/locomo-fix-SCL-SDA.patch                |     28 +
- .../collie/locomo_kbd_tweak-r2.patch               |     84 +
- .../collie/locomolcd-suspend-resume.patch          |     92 +
- .../collie/pcmcia-sa1100-device-clock.patch        |     91 +
- .../revert-arm-sa1100-dummy-clk_get_rate.patch     |     32 +
- .../linux/linux-yocto-3.17/poodle/defconfig        |    376 +
- .../poodle/locomo-fix-SCL-SDA.patch                |     28 +
- .../poodle/locomo_kbd_tweak-r2.patch               |     84 +
- .../poodle/locomolcd-suspend-resume.patch          |     92 +
- .../revert-check-on-console-device.patch           |     41 +
- .../linux/linux-yocto-3.17/spitz/defconfig         |    442 +
- ...deo-move-backlight-to-the-end-of-Makefile.patch |     34 +
- ...02-tosa-bl-correct-backlight-calculations.patch |     39 +
- ...-tmio-call-tmiofb_set_par-in-tmiofb_probe.patch |     43 +
- .../0004-ARM-pxa-tosa-switch-to-gpio-charger.patch |     90 +
- ...5-ARM-pxa-tosa-fix-several-build-failures.patch |     32 +
- ...b-fail-ohci-suspend-if-full-state-restore.patch |     54 +
- ...97xx-adapt-parameters-to-tosa-touchscreen.patch |     31 +
- .../linux/linux-yocto-3.17/tosa/defconfig          |    446 +
- .../akita/defconfig                                |    135 +
- .../linux-yocto-tiny-kexecboot-3.17/c7x0/defconfig |    136 +
- .../collie/defconfig                               |    144 +
- .../poodle/defconfig                               |    140 +
- .../spitz/3200-mtd.patch                           |     13 +
- .../spitz/defconfig                                |    134 +
- .../linux-yocto-tiny-kexecboot-3.17/tosa/defconfig |    138 +
- .../linux/linux-yocto-tiny-kexecboot_3.17.bbappend |     86 +
- recipes-kernel/linux/linux-yocto_3.17.bbappend     |     80 +
- 37 files changed, 1159963 insertions(+)
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/OE-qvga-logo.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/OE-vga-logo.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/akita/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/c7x0/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/arm-sa1100-add-cpu-clock.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/arm-sa1100-dummy-clk_set_rate.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/collie-use-gpio-charger.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/fbdev-sa1100fb-make-use-of-device-clock.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/locomo-fix-SCL-SDA.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/locomo_kbd_tweak-r2.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/locomolcd-suspend-resume.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/pcmcia-sa1100-device-clock.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/collie/revert-arm-sa1100-dummy-clk_get_rate.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/poodle/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/poodle/locomo-fix-SCL-SDA.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/poodle/locomo_kbd_tweak-r2.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/poodle/locomolcd-suspend-resume.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/revert-check-on-console-device.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/spitz/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/0001-HACK-video-move-backlight-to-the-end-of-Makefile.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/0002-tosa-bl-correct-backlight-calculations.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/0003-tmio-call-tmiofb_set_par-in-tmiofb_probe.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/0004-ARM-pxa-tosa-switch-to-gpio-charger.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/0005-ARM-pxa-tosa-fix-several-build-failures.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/0006-mfd-tc6393xb-fail-ohci-suspend-if-full-state-restore.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/0007-wm97xx-adapt-parameters-to-tosa-touchscreen.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-3.17/tosa/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/akita/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/c7x0/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/collie/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/poodle/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/spitz/3200-mtd.patch
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/spitz/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/tosa/defconfig
- create mode 100644 recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bbappend
- create mode 100644 recipes-kernel/linux/linux-yocto_3.17.bbappend
-
--- 
-1.9.1
-
+Thank you,
+Cal Sullivan
 
