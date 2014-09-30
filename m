@@ -1,36 +1,34 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5394D6FC68
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 071E471697
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 02:58:15 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8U2wDpt006493
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 29 Sep 2014 19:58:13 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.18]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0174.001;
-	Mon, 29 Sep 2014 19:58:13 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
-Thread-Index: AQHP3EXRcugjvvwsSkmUAdPFz8Xc55wY7MwQgAB4W4D//45n4IAABr7w
-Date: Tue, 30 Sep 2014 02:58:12 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AABD50F5A6@ALA-MBB.corp.ad.wrs.com>
-References: <1411985350-20322-1-git-send-email-jackie.huang@windriver.com>
-	<20140930003037.GW25706@jama>
-	<1B858668EC6A94408DCA5225FDFA85AABD50F355@ALA-MBB.corp.ad.wrs.com>
-	<20140930021351.GX25706@jama>
-	<1B858668EC6A94408DCA5225FDFA85AABD50F470@ALA-MBB.corp.ad.wrs.com>
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AABD50F470@ALA-MBB.corp.ad.wrs.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.134]
-MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] openldap: update version to 2.4.39
+	Tue, 30 Sep 2014 03:49:16 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id fp1so4676087pdb.39
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Sep 2014 20:49:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=J9ElbVcYFj+5HXbnavAZVD9ivpJ48B3wZs7jYXW1yAU=;
+	b=CNM0/i7QK+FE4Rlqqfku2eEyHdjxEsvkvg4Pidf1qO2v0eQ6xETOmm2UQ19CGCKVFF
+	h/rLgN8M4vgQ/Jusnf2dI2HXi5BABkW4SwHNrUu/tFsGfIcgSU00sCFeo+KzTVbsnUK/
+	pR2OGP3CHmDSdHbyUHIdcUQ8PlMzCGGFAT/NDWXGnFgnDDbnz6fnwQD4MQ1y6Li7wgp0
+	RnUTJpKzLxG1bkJUpH6Hwba8lFxzS8iNz6Jn1D9kUwm7+poxTOW1kblMmH1ryYZkCToS
+	S8HzaqbTZooYdU17NUgadZTzO317Ts5L51+Q5bNgXMcJ9K5Q4aBSAhtT0rQec6eftUOD
+	+uog==
+X-Received: by 10.70.124.226 with SMTP id ml2mr916102pdb.69.1412048949972;
+	Mon, 29 Sep 2014 20:49:09 -0700 (PDT)
+Received: from haswell.localdomain (c-76-103-58-225.hsd1.ca.comcast.net.
+	[76.103.58.225]) by mx.google.com with ESMTPSA id
+	ad6sm13652887pac.30.2014.09.29.20.49.09 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 29 Sep 2014 20:49:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Sep 2014 20:52:58 -0700
+Message-Id: <1412049179-30493-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.1
+Subject: [meta-oe][PATCH 1/2] libdivecomputer: Update to 0.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,103 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 02:58:23 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Sep 2014 03:49:34 -0000
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-extended/libdivecomputer/libdivecomputer_git.bb | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
+diff --git a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
+index 1154dc0..6c4f4a0 100644
+--- a/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
++++ b/meta-oe/recipes-extended/libdivecomputer/libdivecomputer_git.bb
+@@ -2,18 +2,19 @@ DESCRIPTION = "Libdivecomputer is a cross-platform and open source library for c
+ HOMEPAGE = "http://www.divesoftware.org/libdc/"
+ 
+ LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
++LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad"
+ 
+ DEPENDS = "libusb1"
+ 
+ inherit autotools pkgconfig
+ 
+-PV = "0.0.0"
+-PR = "r1"
++PV = "0.4.2+gitr${SRCPV}"
++
++SRCREV = "5f765f91430f16932d96b3777404420aa2dd4c7c"
++SRC_URI = "git://git.libdivecomputer.org/libdivecomputer.git \
++           file://fix-ar.patch \
++          "
+ 
+-SRCREV = "b7a6be15ca58cc8f89fbc8fa1a4c840e13d51092"
+-SRC_URI = "git://libdivecomputer.git.sourceforge.net/gitroot/libdivecomputer/libdivecomputer \
+-file://fix-ar.patch"
+ S = "${WORKDIR}/git"
+ 
+ 
+-- 
+2.1.1
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Huang, Jie (Jackie)
-> Sent: Tuesday, September 30, 2014 10:28 AM
-> To: Martin Jansa
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
->=20
->=20
->=20
-> > -----Original Message-----
-> > From: Martin Jansa [mailto:martin.jansa@gmail.com]
-> > Sent: Tuesday, September 30, 2014 10:14 AM
-> > To: Huang, Jie (Jackie)
-> > Cc: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
-> >
-> > On Tue, Sep 30, 2014 at 02:07:06AM +0000, Huang, Jie (Jackie) wrote:
-> > >
-> > >
-> > > > -----Original Message-----
-> > > > From: openembedded-devel-bounces@lists.openembedded.org
-> > > > [mailto:openembedded-devel- bounces@lists.openembedded.org] On
-> > > > Behalf Of Martin Jansa
-> > > > Sent: Tuesday, September 30, 2014 8:31 AM
-> > > > To: openembedded-devel@lists.openembedded.org
-> > > > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to
-> > > > 2.4.39
-> > > >
-> > > > On Mon, Sep 29, 2014 at 06:09:10AM -0400, jackie.huang@windriver.co=
-m wrote:
-> > > > > From: Jackie Huang <jackie.huang@windriver.com>
-> > > > >
-> > > > > Changed:
-> > > > >  * Move slapd from ${libexecdir} to ${sbin}:
-> > > > >    Installing slapd under ${sbin} is more FHS and LSB compliance
-> > > > >  * Manage init script by inheriting update-rc.d, than postinst
-> > > > >  * Add status for initscript
-> > > > >  * Rename the patch named with commit id to
-> > > > >    gnutls-Avoid-use-of-deprecated-function.patch
-> > > > >  * Add a patch for CVE-2013-4449
-> > > > >  * Add a patch to use /dev/urandom for entropy
-> > > > >  * Allow tls obtains random bits from /dev/urandom:
-> > > > >    The URANDOM_DEVICE is undefined for cross-compiling, define it=
- as
-> > > > >    /dev/urandom to allow tls obtains random bits from /dev/urando=
-m.
-> > > > >  * Add PACKAGECONFIG for mdb, ndb, relay and sock
-> > > > >  * Remove unsupported config for ldbm
-> > > > >  * Add license file
-> > > >
-> > > > Can you please resolve:
-> > > > WARNING: QA Issue: openldap: Files/directories were installed but n=
-ot shipped
-> > > >   /run [installed-vs-shipped]
-> > >
-> > > Could you show me how to reproduce this? I don't see this warning (I
-> > > set installed-vs-shipped in ERROR_QA in fact, so it should be an
-> > > error), and I checked that there is no /run directory generated for o=
-penldap.
-> >
-> > You can try to configure your builds like world builds are:
-> > http://www.openembedded.org/wiki/Bitbake_World_Status
-
-Sorry I couldn't find configure infos in this page, could you show me a loc=
-al.conf or
-or something like that?
-
-> >
-> > My guess would be systemd in DISTRO_FEATURES (if you don't have it alre=
-ady).
->=20
-> Yeah, it should be the case, I will check and fix it.
-
-I added system in DISTRO_FEATURES but still can't reproduce it.
-
-Thanks,
-Jackie
-
->=20
-> Thanks,
-> Jackie
->=20
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
