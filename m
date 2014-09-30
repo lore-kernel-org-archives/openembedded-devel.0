@@ -1,30 +1,40 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B63F56B8F6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 86AEC6B8F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 02:07:09 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s8U277Oo005607
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 29 Sep 2014 19:07:07 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.18]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0174.001;
-	Mon, 29 Sep 2014 19:07:07 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
-Thread-Index: AQHP3EXRcugjvvwsSkmUAdPFz8Xc55wY7MwQ
-Date: Tue, 30 Sep 2014 02:07:06 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AABD50F355@ALA-MBB.corp.ad.wrs.com>
+	Tue, 30 Sep 2014 02:12:58 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id d1so2345637wiv.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Sep 2014 19:12:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=RV51nbjoAVpDowJZF6Y4iRkxcz/wPd58jUItUJCxAn4=;
+	b=Q6fgupmI3dgnWUYbFwNxEQ3eTCBED/JaTGyFRoW5AYLvqQXShxWQ0Ovpc5Q21zXDaL
+	w305nX6AaKhg/0M3yws7fLdRqkhTkzUs7hW3Cc3km0KW++jw47NloA/5bQjicO9nyj3c
+	DDhQkZvTfB2OgDJivtb1yKRvTNSsaSBvFNEZen667F5qX9fzTKtlgy8ErBpWdLeJSy1Q
+	d41TEZBf3/ruEiisp+6hlY9SCHrt4KkIox3NiqksPoJdFvk0gUsdyHRp5GEUAdEj17FS
+	QBXBBGMt2EjVBgVESMU0WJejj/0rJgCGfW2cp/GwPuWNfSAYsJkWvrRN7VR1ZeHLjrho
+	YCAA==
+X-Received: by 10.194.103.41 with SMTP id ft9mr49573218wjb.93.1412043179449;
+	Mon, 29 Sep 2014 19:12:59 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	q3sm13474282wia.14.2014.09.29.19.12.58 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 29 Sep 2014 19:12:58 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 30 Sep 2014 04:13:51 +0200
+To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+Message-ID: <20140930021351.GX25706@jama>
 References: <1411985350-20322-1-git-send-email-jackie.huang@windriver.com>
 	<20140930003037.GW25706@jama>
-In-Reply-To: <20140930003037.GW25706@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.134]
+	<1B858668EC6A94408DCA5225FDFA85AABD50F355@ALA-MBB.corp.ad.wrs.com>
 MIME-Version: 1.0
+In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AABD50F355@ALA-MBB.corp.ad.wrs.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] openldap: update version to 2.4.39
@@ -41,52 +51,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 02:07:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 30 Sep 2014 02:13:06 -0000
+X-Groupsio-MsgNum: 52286
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tpZe61tYkA9f+p/0"
+Content-Disposition: inline
+
+--tpZe61tYkA9f+p/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> Sent: Tuesday, September 30, 2014 8:31 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
+On Tue, Sep 30, 2014 at 02:07:06AM +0000, Huang, Jie (Jackie) wrote:
 >=20
-> On Mon, Sep 29, 2014 at 06:09:10AM -0400, jackie.huang@windriver.com wrot=
-e:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > Changed:
-> >  * Move slapd from ${libexecdir} to ${sbin}:
-> >    Installing slapd under ${sbin} is more FHS and LSB compliance
-> >  * Manage init script by inheriting update-rc.d, than postinst
-> >  * Add status for initscript
-> >  * Rename the patch named with commit id to
-> >    gnutls-Avoid-use-of-deprecated-function.patch
-> >  * Add a patch for CVE-2013-4449
-> >  * Add a patch to use /dev/urandom for entropy
-> >  * Allow tls obtains random bits from /dev/urandom:
-> >    The URANDOM_DEVICE is undefined for cross-compiling, define it as
-> >    /dev/urandom to allow tls obtains random bits from /dev/urandom.
-> >  * Add PACKAGECONFIG for mdb, ndb, relay and sock
-> >  * Remove unsupported config for ldbm
-> >  * Add license file
 >=20
-> Can you please resolve:
-> WARNING: QA Issue: openldap: Files/directories were installed but not shi=
-pped
->   /run [installed-vs-shipped]
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org [mailto:openemb=
+edded-devel-
+> > bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> > Sent: Tuesday, September 30, 2014 8:31 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
+> >=20
+> > On Mon, Sep 29, 2014 at 06:09:10AM -0400, jackie.huang@windriver.com wr=
+ote:
+> > > From: Jackie Huang <jackie.huang@windriver.com>
+> > >
+> > > Changed:
+> > >  * Move slapd from ${libexecdir} to ${sbin}:
+> > >    Installing slapd under ${sbin} is more FHS and LSB compliance
+> > >  * Manage init script by inheriting update-rc.d, than postinst
+> > >  * Add status for initscript
+> > >  * Rename the patch named with commit id to
+> > >    gnutls-Avoid-use-of-deprecated-function.patch
+> > >  * Add a patch for CVE-2013-4449
+> > >  * Add a patch to use /dev/urandom for entropy
+> > >  * Allow tls obtains random bits from /dev/urandom:
+> > >    The URANDOM_DEVICE is undefined for cross-compiling, define it as
+> > >    /dev/urandom to allow tls obtains random bits from /dev/urandom.
+> > >  * Add PACKAGECONFIG for mdb, ndb, relay and sock
+> > >  * Remove unsupported config for ldbm
+> > >  * Add license file
+> >=20
+> > Can you please resolve:
+> > WARNING: QA Issue: openldap: Files/directories were installed but not s=
+hipped
+> >   /run [installed-vs-shipped]
+>=20
+> Could you show me how to reproduce this? I don't see this warning (I set =
+installed-vs-shipped
+> in ERROR_QA in fact, so it should be an error), and I checked that there =
+is no /run directory
+> generated for openldap.
 
-Could you show me how to reproduce this? I don't see this warning (I set in=
-stalled-vs-shipped
-in ERROR_QA in fact, so it should be an error), and I checked that there is=
- no /run directory
-generated for openldap.
+You can try to configure your builds like world builds are:
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Thanks,
-Jackie
+My guess would be systemd in DISTRO_FEATURES (if you don't have it
+already).
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--tpZe61tYkA9f+p/0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQqEd8ACgkQN1Ujt2V2gBxICwCdE2nT/C0/6wWA4nboobWZtees
+nGkAoLki6iFZpZ5vtnlw7U3/IO5Zu0UK
+=0vpJ
+-----END PGP SIGNATURE-----
+
+--tpZe61tYkA9f+p/0--
