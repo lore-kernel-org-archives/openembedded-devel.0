@@ -1,38 +1,48 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
-	[209.85.217.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 8120865DEB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AB2560809
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 08:08:39 +0000 (UTC)
-Received: by mail-lb0-f171.google.com with SMTP id z12so949615lbi.16
+	Tue, 30 Sep 2014 15:32:47 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id ho1so4716205wib.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 01:08:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lps8hJeGa3BIQ5R0adep1JGvdzkt64nYqNVLd/1t+HI=;
-	b=gsXr4iLVUxxFL4eyC/gsTB+XVk71K7Qm9uuHFyUFLycblYHRGNz6UrYA85mbH0Y/fF
-	C3utisGUuxHCI4/CfNbxVV3vFZfMhiB16OclSUgtRmOKIF3Jdcc+eMlr0p0EvP1VRD43
-	kS6YuCDcwP0C0RCJJqq0L1yWnpPQ9ZiM3hIXDzZGZMeIuVMI+rsI7cJskW8ucYd4hqcl
-	T+snizYyPgmQBkPoZ1VjGCr2bGkZZfOlRdROMvPW3PN/4ttOi8x+S83g/6rDX75jVguu
-	JyC49ylGyyZKLb9df4bv1xlG9JQCL51Tz2B2qLIGrgkt/MoXCBGUhTD1mVEWKQk7uYN9
-	g/pg==
-X-Gm-Message-State: ALoCoQkXpPn9AenM/AIH8A941AffHcSsrkB3gqsDr+n9pcc++vtPmiHa7TOSn4MpUtyvfrL16Bq3
-X-Received: by 10.152.1.74 with SMTP id 10mr34778052lak.43.1412064518083;
-	Tue, 30 Sep 2014 01:08:38 -0700 (PDT)
-Received: from localhost.localdomain (a91-152-78-194.elisa-laajakaista.fi.
-	[91.152.78.194])
-	by mx.google.com with ESMTPSA id nx9sm5762184lbb.23.2014.09.30.01.08.37
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 30 Sep 2014 01:08:37 -0700 (PDT)
-From: Fathi Boudra <fathi.boudra@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Sep 2014 11:08:33 +0300
-Message-Id: <1412064513-15996-1-git-send-email-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 2.1.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH v2] acpitests: update to 20140828 release
+	Tue, 30 Sep 2014 08:32:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=uUlhU5OaF0ttx1iapR0yJoIA67JYIaNFWSdTokYZDbs=;
+	b=afb4FH9AzTZSLB1stQlE3OK34/fd7OG081s3XvMSBSXQ0kgcR+xoTyGMuhHNf1xwU8
+	7clNgCCFGoDqpu+shcqHH7R7LDrvHGuiZRIzc8mtcYj7EeixU96eziz6Zz0cw5HG0cCd
+	910aOCCXFvfy74N1MAdblQFgckmjcpIgTTnCkuPC0iDdDU6p6edgyEXuXcSU42hPy+RI
+	twEZJELtPf5wDGThzRYXFVulEkbWbqlECanIIcEkbi1HTbfcPMXdajuMX/tdf6qv58xZ
+	LKw3Mh6sO8rfExGZf7Ijp5HQTy4IlkOogolsctin55ux2MRg99dUkE1Vg3UMP5v2hyl3
+	TJ2A==
+X-Received: by 10.194.8.232 with SMTP id u8mr55586883wja.64.1412091168480;
+	Tue, 30 Sep 2014 08:32:48 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	ny6sm15502935wic.22.2014.09.30.08.32.47 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 30 Sep 2014 08:32:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 30 Sep 2014 17:33:41 +0200
+To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+Message-ID: <20140930153341.GA25706@jama>
+References: <1411985350-20322-1-git-send-email-jackie.huang@windriver.com>
+	<20140930003037.GW25706@jama>
+	<1B858668EC6A94408DCA5225FDFA85AABD50F355@ALA-MBB.corp.ad.wrs.com>
+	<20140930021351.GX25706@jama>
+	<1B858668EC6A94408DCA5225FDFA85AABD50F470@ALA-MBB.corp.ad.wrs.com>
+	<1B858668EC6A94408DCA5225FDFA85AABD50F5A6@ALA-MBB.corp.ad.wrs.com>
+	<20140930040605.GY25706@jama>
+	<1B858668EC6A94408DCA5225FDFA85AABD50F81F@ALA-MBB.corp.ad.wrs.com>
+MIME-Version: 1.0
+In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AABD50F81F@ALA-MBB.corp.ad.wrs.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] openldap: update version to 2.4.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,103 +56,199 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 08:08:44 -0000
+X-List-Received-Date: Tue, 30 Sep 2014 15:32:51 -0000
+X-Groupsio-MsgNum: 52298
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="bWJzwVwZrZVVyQvz"
+Content-Disposition: inline
 
-update md5sums and refresh patches
+--bWJzwVwZrZVVyQvz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
----
- v2 changes: rebased on top of Khem changes (add0ba4)
+On Tue, Sep 30, 2014 at 05:58:01AM +0000, Huang, Jie (Jackie) wrote:
+>=20
+>=20
+> > -----Original Message-----
+> > From: Martin Jansa [mailto:martin.jansa@gmail.com]
+> > Sent: Tuesday, September 30, 2014 12:06 PM
+> > To: Huang, Jie (Jackie)
+> > Cc: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to 2.4.39
+> >=20
+> > On Tue, Sep 30, 2014 at 02:58:12AM +0000, Huang, Jie (Jackie) wrote:
+> > >
+> > >
+> > > > -----Original Message-----
+> > > > From: openembedded-devel-bounces@lists.openembedded.org
+> > > > [mailto:openembedded-devel- bounces@lists.openembedded.org] On
+> > > > Behalf Of Huang, Jie (Jackie)
+> > > > Sent: Tuesday, September 30, 2014 10:28 AM
+> > > > To: Martin Jansa
+> > > > Cc: openembedded-devel@lists.openembedded.org
+> > > > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to
+> > > > 2.4.39
+> > > >
+> > > >
+> > > >
+> > > > > -----Original Message-----
+> > > > > From: Martin Jansa [mailto:martin.jansa@gmail.com]
+> > > > > Sent: Tuesday, September 30, 2014 10:14 AM
+> > > > > To: Huang, Jie (Jackie)
+> > > > > Cc: openembedded-devel@lists.openembedded.org
+> > > > > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to
+> > > > > 2.4.39
+> > > > >
+> > > > > On Tue, Sep 30, 2014 at 02:07:06AM +0000, Huang, Jie (Jackie) wro=
+te:
+> > > > > >
+> > > > > >
+> > > > > > > -----Original Message-----
+> > > > > > > From: openembedded-devel-bounces@lists.openembedded.org
+> > > > > > > [mailto:openembedded-devel- bounces@lists.openembedded.org] On
+> > > > > > > Behalf Of Martin Jansa
+> > > > > > > Sent: Tuesday, September 30, 2014 8:31 AM
+> > > > > > > To: openembedded-devel@lists.openembedded.org
+> > > > > > > Subject: Re: [oe] [meta-oe][PATCH] openldap: update version to
+> > > > > > > 2.4.39
+> > > > > > >
+> > > > > > > On Mon, Sep 29, 2014 at 06:09:10AM -0400, jackie.huang@windri=
+ver.com wrote:
+> > > > > > > > From: Jackie Huang <jackie.huang@windriver.com>
+> > > > > > > >
+> > > > > > > > Changed:
+> > > > > > > >  * Move slapd from ${libexecdir} to ${sbin}:
+> > > > > > > >    Installing slapd under ${sbin} is more FHS and LSB
+> > > > > > > > compliance
+> > > > > > > >  * Manage init script by inheriting update-rc.d, than
+> > > > > > > > postinst
+> > > > > > > >  * Add status for initscript
+> > > > > > > >  * Rename the patch named with commit id to
+> > > > > > > >    gnutls-Avoid-use-of-deprecated-function.patch
+> > > > > > > >  * Add a patch for CVE-2013-4449
+> > > > > > > >  * Add a patch to use /dev/urandom for entropy
+> > > > > > > >  * Allow tls obtains random bits from /dev/urandom:
+> > > > > > > >    The URANDOM_DEVICE is undefined for cross-compiling, def=
+ine it as
+> > > > > > > >    /dev/urandom to allow tls obtains random bits from /dev/=
+urandom.
+> > > > > > > >  * Add PACKAGECONFIG for mdb, ndb, relay and sock
+> > > > > > > >  * Remove unsupported config for ldbm
+> > > > > > > >  * Add license file
+> > > > > > >
+> > > > > > > Can you please resolve:
+> > > > > > > WARNING: QA Issue: openldap: Files/directories were installed=
+ but not shipped
+> > > > > > >   /run [installed-vs-shipped]
+> > > > > >
+> > > > > > Could you show me how to reproduce this? I don't see this
+> > > > > > warning (I set installed-vs-shipped in ERROR_QA in fact, so it
+> > > > > > should be an error), and I checked that there is no /run direct=
+ory generated for openldap.
+> > > > >
+> > > > > You can try to configure your builds like world builds are:
+> > > > > http://www.openembedded.org/wiki/Bitbake_World_Status
+> > >
+> > > Sorry I couldn't find configure infos in this page, could you show me
+> > > a local.conf or or something like that?
+> >=20
+> > http://logs.nslu2-linux.org/buildlogs/oe/world/log.world.20140929_05303=
+5.log/world_fixes.inc
+>=20
+> I added this into my local.conf but could still not reproduce it, are you=
+ sure you see this warning in the world
+> builds with my patch? I checked the log and didn't find the warning you m=
+entioned:
+>=20
+> $ wget http://logs.nslu2-linux.org/buildlogs/oe/world/log.world.20140929_=
+041409.log/bitbake.world.log
+> $ grep WARNING bitbake.world.log |grep openldap
+> $
 
- .../acpica/acpitests/aapits-linux.patch            |  4 +--
- .../acpica/acpitests/aapits-makefile.patch         | 36 +++++++++++++---------
- ...acpitests_20140424.bb => acpitests_20140828.bb} | 10 +++---
- 3 files changed, 29 insertions(+), 21 deletions(-)
- rename meta-oe/recipes-extended/acpica/{acpitests_20140424.bb => acpitests_20140828.bb} (74%)
+Yes, I was copy pasting it from next build (which haven't finished for
+all MACHINEs yet - so it wasn't published yet)
 
-diff --git a/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch b/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
-index 116761d..7c5d6b0 100644
---- a/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
-+++ b/meta-oe/recipes-extended/acpica/acpitests/aapits-linux.patch
-@@ -326,8 +326,8 @@ diff -urN acpica-unix2-20130626/tests/aapits/Makefile acpica-unix2-20130626-aapi
- --- acpica-unix2-20130626/tests/aapits/Makefile	2013-01-17 12:48:29.000000000 -0700
- +++ acpica-unix2-20130626-aapits/tests/aapits/Makefile	2013-07-25 15:17:09.309236422 -0600
- @@ -194,7 +194,7 @@
-- CFLAGS+= -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_EXEC_APP -D_MULTI_THREADED -Wstrict-prototypes -I../../source/include 
-- 
-+ CFLAGS+= -Wall -g -D_LINUX -DNDEBUG -D_CONSOLE -DACPI_APITS -DACPI_EXEC_APP -D_MULTI_THREADED -Wstrict-prototypes -I../../source/include
-+
-  
- -acpiexec : $(patsubst %.c,%.o, $(SRCS))
- +$(PROG) : $(patsubst %.c,%.o, $(SRCS))
-diff --git a/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch b/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
-index d38501b..4d9e997 100644
---- a/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
-+++ b/meta-oe/recipes-extended/acpica/acpitests/aapits-makefile.patch
-@@ -8,19 +8,27 @@ Upstream-status: Unknown
- diff -urN acpica-unix2-20140325/tests/aapits/Makefile acpica-unix2-20140325/tests/aapits/Makefile
- --- acpica-unix2-20140325/tests/aapits/Makefile	2014-04-05 14:23:14.683636794 -0600
- +++ acpica-unix2-20140325-aapits/tests/aapits/Makefile	2014-04-05 15:10:57.879184598 -0600
--@@ -20,6 +20,7 @@
-- 	../../source/components/hardware/hwxface.c \
-+@@ -16,6 +16,7 @@
-+ 	atosxfwrap.c \
-+ 	osunixxf.c \
-+ 	../../source/common/ahids.c \
-++	../../source/common/ahuuids.c \
-  	../../source/common/cmfsize.c \
-  	../../source/common/getopt.c \
--+	../../source/common/ahids.c \
-- 	../../source/components/debugger/dbcmds.c \
-- 	../../source/components/debugger/dbconvert.c \
-- 	../../source/components/debugger/dbdisply.c \
--@@ -154,6 +155,7 @@
-- 	../../source/components/tables/tbfadt.c \
-- 	../../source/components/tables/tbfind.c \
-- 	../../source/components/tables/tbinstal.c \
--+	../../source/components/tables/tbdata.c \
-- 	../../source/components/tables/tbprint.c \
-- 	../../source/components/tables/tbutils.c \
-- 	../../source/components/tables/tbxface.c \
-+ 	../../source/components/hardware/hwtimer.c \
-+@@ -174,6 +175,7 @@
-+ 	../../source/components/utilities/utexcep.c \
-+ 	../../source/components/utilities/utfileio.c \
-+ 	../../source/components/utilities/utglobal.c \
-++	../../source/components/utilities/uthex.c \
-+ 	../../source/components/utilities/utids.c \
-+ 	../../source/components/utilities/utinit.c \
-+ 	../../source/components/utilities/utlock.c \
-+@@ -189,6 +191,7 @@
-+ 	../../source/components/utilities/utstate.c \
-+ 	../../source/components/utilities/utstring.c \
-+ 	../../source/components/utilities/uttrack.c \
-++	../../source/components/utilities/utuuid.c \
-+ 	../../source/components/utilities/utxface.c \
-+ 	../../source/components/utilities/utxferror.c \
-+ 	../../source/components/utilities/utxfinit.c \
-diff --git a/meta-oe/recipes-extended/acpica/acpitests_20140424.bb b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
-similarity index 69%
-rename from meta-oe/recipes-extended/acpica/acpitests_20140424.bb
-rename to meta-oe/recipes-extended/acpica/acpitests_20140828.bb
-index 7e145bb..889c00b 100644
---- a/meta-oe/recipes-extended/acpica/acpitests_20140424.bb
-+++ b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
-@@ -11,10 +11,10 @@ SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;nam
-            file://aapits-linux.patch \
-            file://aapits-makefile.patch \
-     "
--SRC_URI[acpitests.md5sum] = "bfc399cecb21e9491d362d8e480b2689"
--SRC_URI[acpitests.sha256sum] = "e7d7ff638872543909b38c2498e88958251ee6ce4d22bc13d4e3925771212c0e"
--SRC_URI[acpica.md5sum] = "733532f005fba5d1c5344440651b13d1"
--SRC_URI[acpica.sha256sum] = "72ece982bbbdfb1b17418f1feb3a9daaa01803d0d41dcf00e19d702cdf751bbc"
-+SRC_URI[acpitests.md5sum] = "db9d6fdaa8e3eb101d700ee5ba4938ed"
-+SRC_URI[acpitests.sha256sum] = "e576c74bf1bf1c9f7348bf9419e05c8acfece7105abcdc052e66670c7af2cf00"
-+SRC_URI[acpica.md5sum] = "6f05f0d10166a1b1ff6107f3d1cdf1e5"
-+SRC_URI[acpica.sha256sum] = "01d8867656c5ba41dec307c4383ce676196ad4281ac2c9dec9f5be5fac6d888e"
- 
- S = "${WORKDIR}/acpitests-unix-${PV}"
- 
--- 
-2.1.1
+NOTE: recipe openldap-2.4.39-r0: task do_populate_sysroot: Started
+NOTE: recipe openldap-2.4.39-r0: task do_populate_sysroot: Succeeded
+NOTE: Running task 9290 of 29472 (ID: 27688, virtual:native:/home/jenkins/o=
+e/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/swig/swig_3.0.2=
+=2Ebb, do_populate_sysroot)
+NOTE: recipe swig-native-3.0.2-r0: task do_populate_sysroot: Started
+NOTE: recipe swig-native-3.0.2-r0: task do_populate_sysroot: Succeeded
+NOTE: Running task 9291 of 29472 (ID: 5067, /home/jenkins/oe/world/shr-core=
+/meta-openembedded/meta-oe/recipes-support/opencv/opencv_3.0.0.bb, do_confi=
+gure)
+NOTE: recipe opencv-3.0.0+gitAUTOINC+fb9a143429-r0: task do_configure: Star=
+ted
+WARNING: QA Issue: openldap: Files/directories were installed but not shipp=
+ed
+  /run [installed-vs-shipped]
+NOTE: recipe imagemagick-6.8.8-r0: task do_configure: Succeeded
+NOTE: Running noexec task 9292 of 29472 (ID: 27693, virtual:native:/home/je=
+nkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/swig/swi=
+g_3.0.2.bb, do_build)
+NOTE: Running task 9293 of 29472 (ID: 27694, virtual:native:/home/jenkins/o=
+e/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/swig/swig_3.0.2=
+=2Ebb, do_rm_work)
+NOTE: recipe swig-native-3.0.2-r0: task do_rm_work: Started
+NOTE: recipe swig-native-3.0.2-r0: task do_rm_work: Succeeded
+NOTE: Running task 9294 of 29472 (ID: 24418, /home/jenkins/oe/world/shr-cor=
+e/openembedded-core/meta/recipes-devtools/rpm/rpm_5.4.14.bb, do_populate_li=
+c)
+NOTE: recipe opencv-3.0.0+gitAUTOINC+fb9a143429-r0: task do_configure: Succ=
+eeded
+NOTE: Running task 9295 of 29472 (ID: 5068, /home/jenkins/oe/world/shr-core=
+/meta-openembedded/meta-oe/recipes-support/opencv/opencv_3.0.0.bb, do_compi=
+le)
+NOTE: recipe rpm-5.4.14-r0: task do_populate_lic: Started
+NOTE: recipe openldap-2.4.39-r0: task do_package: Succeeded
+NOTE: Running task 9296 of 29472 (ID: 11252, /home/jenkins/oe/world/shr-cor=
+e/meta-openembedded/meta-oe/recipes-support/openldap/openldap_2.4.39.bb, do=
+_packagedata)
+NOTE: recipe opencv-3.0.0+gitAUTOINC+fb9a143429-r0: task do_compile: Started
+NOTE: recipe openldap-2.4.39-r0: task do_packagedata: Started
 
+>=20
+> And I checked that the following in the recipe should be able to avoid su=
+ch QA issue:
+> +    rmdir "${D}${localstatedir}/run"
+> +    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+
+It's just /run without ${localstatedir} (and I don't think that localstated=
+ir is empty in my setup)
+
+> > > > > My guess would be systemd in DISTRO_FEATURES (if you don't have i=
+t already).
+> > > >
+> > > > Yeah, it should be the case, I will check and fix it.
+> > >
+> > > I added system in DISTRO_FEATURES but still can't reproduce it.
+> >=20
+> > Do you have some PACKAGECONFIG changes in your setup or just default?
+>=20
+> No, I just use the default.
+>=20
+> Thanks,
+> Jackie
+>=20
+> >=20
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--bWJzwVwZrZVVyQvz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQqzVUACgkQN1Ujt2V2gBys6QCfW5RjmfSH/zVQ0m14QjlptZD6
+1TcAoJc1zFgFDedCEvH6NURBza/xYO7q
+=J0sq
+-----END PGP SIGNATURE-----
+
+--bWJzwVwZrZVVyQvz--
