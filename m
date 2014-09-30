@@ -1,24 +1,34 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 794046FC68
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 0BDC960809
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 06:02:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s8U62npU020823
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 30 Sep 2014 07:37:22 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1XYrzs-0005cm-I3 for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Sep 2014 09:37:20 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Sep 2014 09:37:20 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Sep 2014 23:02:49 -0700 (PDT)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 29 Sep 2014 23:02:48 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Sep 2014 02:02:46 -0400
-Message-ID: <cover.1412056597.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [PATCH 0/1][meta-oe] rsnapshot: add new package
+	Tue, 30 Sep 2014 09:37:20 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 30 Sep 2014 09:37:09 +0200
+Message-ID: <m0dmj5$k28$1@ger.gmane.org>
+References: <cover.1412056597.git.wenzong.fan@windriver.com>
+	<a28a68062d37967e63ba90bcf1c6245c561d0a5e.1412056597.git.wenzong.fan@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+In-Reply-To: <a28a68062d37967e63ba90bcf1c6245c561d0a5e.1412056597.git.wenzong.fan@windriver.com>
+Subject: Re: [PATCH 1/1][meta-oe] rsnapshot: add new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +42,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Sep 2014 06:02:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 30 Sep 2014 07:37:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-rsnapshot is a filesystem snapshot utility based on rsync.
+wenzong.fan@windriver.com schreef op 30-09-14 08:02:
+> From: Wenzong Fan <wenzong.fan@windriver.com>
+> 
+> rsnapshot is a filesystem snapshot utility based on rsync.
+> 
+> rsnapshot makes it easy to make periodic snapshots of local machines, and
+> remote machines over ssh. The code makes extensive use of hard links 
+> whenever possible, to greatly reduce the disk space required.
+> 
+> Homepage: http://www.rsnapshot.org/
+> 
+> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com> --- 
+> meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb |   34
+> ++++++++++++++++++++ 1 file changed, 34 insertions(+) create mode 100644
+> meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+> 
+> diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
+> b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb new file mode
+> 100644 index 0000000..afd3678 --- /dev/null +++
+> b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb @@ -0,0 +1,34 @@ 
+> +SUMMARY = "A filesystem snapshot utility based on rsync" +HOMEPAGE =
+> "http://www.rsnapshot.org" +BUGTRACKER =
+> "https://sourceforge.net/projects/rsnapshot/" +SECTION =
+> "console/network" + +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a" + +RDEPENDS_${PN} =
+> "rsync \ +                  perl \ +
+> perl-module-dirhandle \ +                  perl-module-cwd \ +
+> perl-module-getopt-std \ +                  perl-module-file-path \ +
+> perl-module-file-stat \ +                  perl-module-posix \ +
+> perl-module-fcntl \ +                  perl-module-io-file \ +
+> perl-module-constant \ +                  perl-module-overloading \ +
+> " +
 
-rsnapshot makes it easy to make periodic snapshots of local machines,
-and remote machines over ssh. The code makes extensive use of hard links
-whenever possible, to greatly reduce the disk space required.
+R* variables go below do_install
 
-Homepage: http://www.rsnapshot.org/
 
-The following changes since commit 0d01e1b72333f49c29d1a27ad844c4cd9f90341c:
+> +SRCREV = "1047cbb57937c29233388e2fcd847fecd3babe74" +PV =
+> "1.3.1+git${SRCPV}" + +SRC_URI =
+> "git://github.com/DrHyde/${BPN};branch=master;protocol=git \ +
+> " + +S = "${WORKDIR}/git" + +inherit autotools + +PACKAGECONFIG ??=
+> "logger" +PACKAGECONFIG[logger] =
+> "--with-logger=${bindir}/logger,--without-logger,,util-linux"
+> 
 
-  smartmontools: add systemd service file (2014-09-26 05:42:54 +0200)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib wenzong/rsnapshot
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/rsnapshot
-
-Wenzong Fan (1):
-  rsnapshot: add new package
-
- meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb |   34 ++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-
--- 
-1.7.9.5
+iD8DBQFUKl2lMkyGM64RGpERAr0PAKCip4Nj9nx9qy/f4oVBQRktspaUSgCaAkDK
+f9YCGesJ+Wx2iacqpw82n3k=
+=Yzvp
+-----END PGP SIGNATURE-----
 
 
