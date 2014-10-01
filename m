@@ -1,40 +1,34 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id A90DD65F77
+Received: from mail-vc0-f181.google.com (mail-vc0-f181.google.com
+	[209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 1686C71658
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 08:19:37 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id bs8so1107836wib.0
+	Wed,  1 Oct 2014 08:35:20 +0000 (UTC)
+Received: by mail-vc0-f181.google.com with SMTP id le20so218122vcb.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2014 01:19:38 -0700 (PDT)
+	Wed, 01 Oct 2014 01:35:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=JHRqna6XY7pzRy+q+SJAiQjaOzosNMrmFRmGKfNx678=;
-	b=wMNNC6ghs/7Ck0Spg+nSbMf8NOj/WerXWhCmd06pR85M0V8ztw80krd7/HMTaunm3W
-	1wQ4bZBc5RxxGz4z9P8xGXMiuKdrarui2u7cWRK4dBW/GgS5pV9Jzc488zgNYgTJDNQN
-	yklUm4AcuVVuIf2DK2EPHixdFWoHRPeygFrRcP0BYZnqPzIIrgOUGU0Iu5lTqQFsYaRu
-	aDXYxkkllPbeeXja88B6cMt0zi1gKwdIOvM0TOcsY+gbCTU3rhBI13CE3MIPgZ4MBgpM
-	ghFbu29n5lsvya/mkFfGt62AA1fvO17X8oDJ4dSksgzyTK40eyJDWDQ9xrWAbcMXOsGF
-	jznA==
-X-Received: by 10.194.242.33 with SMTP id wn1mr19582516wjc.110.1412151578717; 
-	Wed, 01 Oct 2014 01:19:38 -0700 (PDT)
-Received: from localhost.localdomain
-	(ip-176-198-252-251.hsi05.unitymediagroup.de. [176.198.252.251])
-	by mx.google.com with ESMTPSA id kx2sm340789wjb.6.2014.10.01.01.19.37
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Oct 2014 01:19:38 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Oct 2014 10:19:15 +0200
-Message-Id: <1412151555-19865-16-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=SKbbcMDlrdSuNIXnUVQ908TaBJrLIoVVNo38/6F9AO8=;
+	b=W9PdrmrsavKvJNcRoYaxVgw5E1nrJQO0XeU9KnF7hzaJYVttz1rKC416zlcSXGyp1j
+	UHLfDJppkz2XbJyEhoHdJTrMNNR9c5VMkRj0sM9TOttIEzuMaCw+Mps9PS8Ih7cqbf1L
+	SF03P2O60y9N7n7T6ViBQPsQa1x44I/zY9v2mVzW29/S1MID4aeaWimy1DqAFw3A53Av
+	PL8MOUSp45fVrwFIzeWqPp5lv20TyCY9kJIHsG3OvSrfTpRd+PKZEugWl4fVYmdILH5+
+	JNXAV/5OG1aLEPhaaWtqBeV56BnKHPwf5Dh9rgi03CJC3M9VuM1SjWrmhpWxif8jMxXI
+	TnoQ==
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe 15/15] bash-completion: resolve sysroot conflicts for util-linux and networkmanager
+X-Received: by 10.52.109.167 with SMTP id ht7mr1671815vdb.33.1412152521999;
+	Wed, 01 Oct 2014 01:35:21 -0700 (PDT)
+Received: by 10.52.171.233 with HTTP; Wed, 1 Oct 2014 01:35:21 -0700 (PDT)
+In-Reply-To: <CAMP9K8-g9Cd6SiNOidENMtvZ8beeWWAvv0GHA=7j-N_LUk_XJg@mail.gmail.com>
+References: <CAMP9K8-g9Cd6SiNOidENMtvZ8beeWWAvv0GHA=7j-N_LUk_XJg@mail.gmail.com>
+Date: Wed, 1 Oct 2014 10:35:21 +0200
+Message-ID: <CALbNGRSo4uZStuLv3bX1LV958-R2i7Q_BHda44pRikxxF5Cc=w@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-xfce: how to change the default background?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,43 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 08:19:38 -0000
+X-List-Received-Date: Wed, 01 Oct 2014 08:35:30 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-* continue the priority for packages shipping bash-completion
-* oe-core's latest changes turn sysroot conflicts into critical error
+On Tue, Sep 30, 2014 at 11:26 PM, California Sullivan
+<californialsullivan@gmail.com> wrote:
+> Hi all,
+>
+> When building an image and using the xfce package, I would like to be able
+> to set a custom default background (i.e., before the image is ever booted
+> up).
+>
+> I have been unable to find any documentation on how to do this, and I
+> haven't found any clues by poking around in the layer.
+>
+> Any pointers from somebody with experience in this area, or any links to
+> documentation on how this could be done would be very much appreciated.
+>
+> Thank you,
+> Cal Sullivan
+Hi Cal,
 
-ERROR: The recipe bash-completion is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
-   /home/a.mueller/tmp/oe-core-glibc/sysroots/overo/usr/share/bash-completion/completions/nmcli
-   Matched in manifest-overo-networkmanager.populate_sysroot
-   /home/a.mueller/tmp/oe-core-glibc/sysroots/overo/usr/share/bash-completion/completions/su
-   Matched in manifest-overo-util-linux.populate_sysroot
+This setting is found in
+<userhome>/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+entry 'image-path'.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+If you want you can look into my meta-misc [1]:
 
-diff --git a/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb b/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
-index 9a0ff35..fbe4278 100644
---- a/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
-+++ b/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
-@@ -23,9 +23,12 @@ do_install_append() {
- 
- 	# Delete files already provided by util-linux
- 	local i
--	for i in cal dmesg eject hexdump hwclock ionice look renice rtcwake; do
-+	for i in cal dmesg eject hexdump hwclock ionice look renice rtcwake su; do
- 		rm ${D}${datadir}/${BPN}/completions/$i
- 	done
-+
-+	# Delete files for networkmanager
-+	rm ${D}${datadir}/${BPN}/completions/nmcli
- }
- 
- RDEPENDS_${PN} = "bash"
--- 
-1.8.3.1
+* a default config installing into /etc/skel
+* operator-user getting the settings from /etc/skel on creation
 
+note that this solution does not work for upgrades. For this you need
+some magic in pkg_postinst copying changes from /etc/skel to user's
+home.
+
+Hope it helps...
+
+Andreas
+
+[1] https://gitorious.org/schnitzeltony-oe-meta/meta-misc/source/024201b0b256338df4460c39447e9660e16872a0:recipes-setup
 
