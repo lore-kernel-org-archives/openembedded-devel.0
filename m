@@ -1,40 +1,40 @@
-Return-Path: <bevenson@melinkcorp.com>
-X-Greylist: delayed 4686 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 01 Oct 2014 14:27:01 UTC
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1on0115.outbound.protection.outlook.com [157.56.110.115])
-	by mail.openembedded.org (Postfix) with ESMTP id DD6B065F77
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 14:27:01 +0000 (UTC)
-Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
-	BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) with Microsoft
-	SMTP Server (TLS) id 15.0.1039.15; Wed, 1 Oct 2014 12:54:31 +0000
-Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.248]) by
-	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.248]) with mapi id
-	15.00.1039.011; Wed, 1 Oct 2014 12:54:31 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: "Openembedded-devel@lists.openembedded.org"
-	<Openembedded-devel@lists.openembedded.org>
-Thread-Topic: Status of bash patches for dora and dylan?
-Thread-Index: Ac/ddCO+l5fPNKfGTwWxrzxSXdYmFA==
-Date: Wed, 1 Oct 2014 12:54:31 +0000
-Message-ID: <92223d60b43647d8ba3265cdd621166e@BLUPR05MB037.namprd05.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-vipre-scanned: 0038ABD90083260038AD26
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [98.100.91.242]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB037;
-x-forefront-prvs: 0351D213B3
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(979002)(6009001)(199003)(189002)(164054003)(21056001)(10300001)(107046002)(2656002)(4396001)(31966008)(99396003)(97736003)(85852003)(86362001)(46102003)(50986999)(2351001)(107886001)(120916001)(110136001)(80022003)(229853001)(87936001)(54356999)(101416001)(76482002)(92566001)(106356001)(74316001)(33646002)(76576001)(95666004)(108616004)(20776003)(99286002)(105586002)(85306004)(64706001)(77096002)(66066001)(24736002)(969003)(989001)(999001)(1009001)(1019001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB037;
-	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:ovrnspm;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 40E106017E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2014 15:18:57 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id b13so731986wgh.22
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Oct 2014 08:18:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=71I61SJVqFBGF5dXZV0b/NkZUJ/XAi0x99yza2dZvJU=;
+	b=Px+K2kj7C208CXJx1mVCQKK5TUGysSzn35mmENqMkVErqxu7bl7itP6twvUA44B4qT
+	MT8VqGT2s+9CrrjdRYqUeTchR361oLKf3c3R62VZNtaKbWyEXoE/jznTxVbwpisYBQaO
+	LwA3LaQgXMzezaPZFn41EL8fNPGBlw4evFYUi6OADEzufkgbAdL9GDNpZg3ubT0BwYE+
+	ij4tZn9jyyuw+YlHmcwVknG6XpmpbVaDFXxmeUEx+cA4ZnltWk3S8XTkdYkrusPwPPfb
+	PJDn3UPJTYEZqtKY/Ci0Rk0fErR7K14rjQTAQKUbtlaqzmRCHwZkxm547sYDvPRdGliV
+	XB9w==
+X-Received: by 10.180.8.73 with SMTP id p9mr5608414wia.32.1412176738706;
+	Wed, 01 Oct 2014 08:18:58 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	wk5sm1516755wjb.12.2014.10.01.08.18.57 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Oct 2014 08:18:57 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 1 Oct 2014 17:19:52 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141001151952.GD25706@jama>
+References: <cover.1411996185.git.anders@chargestorm.se>
+	<c3982a9e7a7182cfb3f0147477202f0c7b15858a.1411996185.git.anders@chargestorm.se>
 MIME-Version: 1.0
-X-OriginatorOrg: melinkcorp.com
-Subject: Status of bash patches for dora and dylan?
+In-Reply-To: <c3982a9e7a7182cfb3f0147477202f0c7b15858a.1411996185.git.anders@chargestorm.se>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: Re: [meta-oe] [PATCH 1/1] breakpad: install static library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,19 +48,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 14:27:06 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 01 Oct 2014 15:19:06 -0000
+X-Groupsio-MsgNum: 52326
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="xOS8do0ZRfB5pORP"
+Content-Disposition: inline
 
-SSBzZWUgdGhhdCBwYXRjaGVzIGZvciBiYXNoIHRvIGZpeCBDVkUtMjAxNC03MTY5IGFuZCBDVkUt
-MjAxNC02MjcxIGhhdmUgYmVlbiBhcHBsaWVkIHRvIHRoZSBkYWlzeSBhbmQgbWFzdGVyIGJyYW5j
-aGVzIG9mIG9wZW5lbWJlZGRlZC1jb3JlIHR3byBkYXlzIGFnby4gIEkgc2F3IHNvbWUgdGFsayBv
-biB0aGlzIG1haWxpbmcgbGlzdCBhYm91dCBhcHBseWluZyB0aGUgcGF0Y2hlcyB0byB0aGUgZG9y
-YSBhbmQgZHlsYW4uICBBcmUgdGhlIHBhdGNoZXMgc3RpbGwgcGxhbm5lZCB0byBiZSBhcHBsaWVk
-IHRvIHRoZSBkb3JhIGFuZCBkeWxhbiBicmFuY2hlcz8gIElmIHNvLCBkb2VzIHNvbWVvbmUgaGF2
-ZSBhIHRpbWVmcmFtZSBpbiBtaW5kIGZvciBiYWNrcG9ydGluZyB0aGUgcGF0Y2hlcz8gIElmIG5v
-dCwgZG8geW91IG5lZWQgc29tZW9uZSB0byBjaGVycnktcGljayB0aGUgY29tbWl0cyBhbmQgdmVy
-aWZ5IHRoZXkgd29yayBhcyBleHBlY3RlZCBvbiB0aGUgZG9yYSBhbmQgZHlsYW4gYnJhbmNoZXM/
-DQoNClRoYW5rcywNCkJyeWFuDQoNCg0K
+--xOS8do0ZRfB5pORP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Sep 29, 2014 at 03:10:30PM +0200, Anders Darander wrote:
+> In order to build against breakpad when using an SDK, we need to also pac=
+kage
+> libbreakpad_client.a.
+>=20
+> The SDK will then need to add breakpad-staticdev to TOOLCHAIN_TARGET_TASK.
+
+Fails in world builds:
+|  ( cd '/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gn=
+ueabi/breakpad/svn-r0/image/usr/lib' && arm-oe-linux-gnueabi-ranlib libbrea=
+kpad.a )
+|  ( cd '/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gn=
+ueabi/breakpad/svn-r0/image/usr/lib' && arm-oe-linux-gnueabi-ranlib libbrea=
+kpad_client.a )
+| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/armv5te-oe-linux-gnueabi/breakpad/svn-r0/build'
+| install: cannot stat `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv=
+5te-oe-linux-gnueabi/breakpad/svn-r0/trunk/src/client/linux/libbreakpad_cli=
+ent.a': No such file or directory
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_install (log file is located at /home/jenkins/=
+oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/breakpad/svn-r0/t=
+emp/log.do_install.11600)
+NOTE: recipe breakpad-svn-r0: task do_install: Failed
+
+I guess it should be installed from ${B}
+
+Please re-test and re-send.
+
+>=20
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> ---
+>  meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb b/meta-oe/=
+recipes-devtools/breakpad/breakpad_svn.bb
+> index 2c5941d..571e1d3 100644
+> --- a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
+> @@ -56,6 +56,9 @@ do_install_append() {
+> =20
+>          install -d ${D}${includedir}/breakpad/third_party/lss
+>          install -m 0644 ${S}/src/third_party/lss/linux_syscall_support.h=
+ ${D}${includedir}/breakpad/third_party/lss/linux_syscall_support.h
+> +
+> +        install -d ${D}${libdir}
+> +        install -m 0644 ${S}/src/client/linux/libbreakpad_client.a ${D}$=
+{libdir}/libbreakpad_client.a
+>  }
+> =20
+>  PACKAGES =3D+ "${PN}-minidump-upload ${PN}-sym-upload"
+> --=20
+> 2.1.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--xOS8do0ZRfB5pORP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQsG5gACgkQN1Ujt2V2gBx/RACfakK/cDioJwa7b3iKJCx8Eu0x
+NmEAoI+xW4xDESvdx9pwjdvkIlJgWK/B
+=7Tbn
+-----END PGP SIGNATURE-----
+
+--xOS8do0ZRfB5pORP--
