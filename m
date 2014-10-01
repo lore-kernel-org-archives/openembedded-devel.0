@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 343AE65F77
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 3527165F77
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 08:19:33 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id bs8so1107657wib.0
+	Wed,  1 Oct 2014 08:19:34 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id b13so436198wgh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2014 01:19:34 -0700 (PDT)
+	Wed, 01 Oct 2014 01:19:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=VFnGBwxRtkkHkhMnLzJzqSdUbMMNYBhxw0NMWaJXBrc=;
-	b=dA3vy76v9TIL1bKX32/CoRwDIqtg50dPBfcuDvQtJWeYhKNeDdfVFMxQ2f+9OP88m4
-	z6phZArnlNyC1NddjS/CqL7B9Pw93DeWBAj1tYriztP844codthFAdax5qDbZnabIMJQ
-	A6bLHuafffXH61pMBO2ATW3gNMRet0Xxxr/78H5f8qlH24DyhMb/pXLTDcBORp4bJ2Vo
-	flAqBDiLvLwx1w/+bwLJCdoWy7xU1D/AiXIDJUcjC2Cv290f88a65ZERi4sVHWyPVQ1X
-	TFesW5XHCFmcZdV62U54wr+tG2ZnnhUhW6Nf38K0DROxje//Q5AEsI2vXq++VB8ORgRZ
-	Tmqw==
-X-Received: by 10.194.89.225 with SMTP id br1mr50941327wjb.51.1412151574631;
-	Wed, 01 Oct 2014 01:19:34 -0700 (PDT)
+	bh=FXgzXeyoBrq/iVgaXdhPaUDioNe/UPe/I8SrV5vRpcQ=;
+	b=hUJZXPt6A+TuAbx3XSPddppMXP1EcPqKrU9TOqQcITp19QyHKko8pZNBvIvsCwqAai
+	6p2K0WAN1fYslrT/SCsB2CixLLBoY7lOGB/tJIGDPSEapp9q9y18t85SCKVFalREoXWB
+	z9ivk/7GqytkEb+jWokPJwiQVMBZx8j+6dIn61xDk8qocsX59m+oTGdJXH5J4EdMUS3W
+	V5Ep25djhh7DhPiY7yWR74aBEx/hEc0X2XHH4s6Esy8rZEHT7JEPeLHCZeuME0mX5iU0
+	+xGxiab9FkATTZxIII92jZpGRIB5FfNBGwU11850FVSl5huD8Stk7J/BzfV+b6C1Opwc
+	oPdw==
+X-Received: by 10.180.19.230 with SMTP id i6mr12254122wie.48.1412151575624;
+	Wed, 01 Oct 2014 01:19:35 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-176-198-252-251.hsi05.unitymediagroup.de. [176.198.252.251])
-	by mx.google.com with ESMTPSA id kx2sm340789wjb.6.2014.10.01.01.19.33
+	by mx.google.com with ESMTPSA id kx2sm340789wjb.6.2014.10.01.01.19.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Oct 2014 01:19:34 -0700 (PDT)
+	Wed, 01 Oct 2014 01:19:35 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Oct 2014 10:19:11 +0200
-Message-Id: <1412151555-19865-12-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  1 Oct 2014 10:19:12 +0200
+Message-Id: <1412151555-19865-13-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe 11/15] polkit: update to 0.112
+Subject: [PATCH][meta-oe 12/15] poppler: update to 0.26.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,54 +47,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 08:19:34 -0000
+X-List-Received-Date: Wed, 01 Oct 2014 08:19:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-checked in logfile: setting up ownership/permission is performed by make install
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../polkit/{polkit_0.111.bb => polkit_0.112.bb}       | 19 ++-----------------
- 1 file changed, 2 insertions(+), 17 deletions(-)
- rename meta-oe/recipes-extended/polkit/{polkit_0.111.bb => polkit_0.112.bb} (76%)
+ .../poppler/{poppler_0.22.4.bb => poppler_0.26.5.bb}                | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler_0.22.4.bb => poppler_0.26.5.bb} (85%)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit_0.111.bb b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
-similarity index 76%
-rename from meta-oe/recipes-extended/polkit/polkit_0.111.bb
-rename to meta-oe/recipes-extended/polkit/polkit_0.112.bb
-index 4614387..72b182b 100644
---- a/meta-oe/recipes-extended/polkit/polkit_0.111.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
-@@ -23,26 +23,11 @@ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.
-            file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.22.4.bb b/meta-oe/recipes-support/poppler/poppler_0.26.5.bb
+similarity index 85%
+rename from meta-oe/recipes-support/poppler/poppler_0.22.4.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.26.5.bb
+index cfe9582..d119639 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.22.4.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.26.5.bb
+@@ -3,10 +3,10 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+ SRC_URI = " \
+-    http://poppler.freedesktop.org/${BP}.tar.gz \
++    http://poppler.freedesktop.org/${BP}.tar.xz \
  "
+-SRC_URI[md5sum] = "49d55921ce795778c7231fe9f2fe923b"
+-SRC_URI[sha256sum] = "4f438f34e63265e2da8427f3423f940ff41c26088922a9f5d976f795c1dce13b"
++SRC_URI[md5sum] = "786c943eee550e3a977c181e7778b1c8"
++SRC_URI[sha256sum] = "de7de5fa337431e5d1f372e8577b3707322f1dbc1dc28a70f2927476f134d1ee"
  
--SRC_URI[md5sum] = "81b116edf986d8e13502929a171f4e0d"
--SRC_URI[sha256sum] = "02ae544547211b687818c97bcbf19bf6b8b5be7fda93000525a8765c7bed1ea1"
-+SRC_URI[md5sum] = "b0f2fa00a55f47c6a5d88e9b73f80127"
-+SRC_URI[sha256sum] = "d695f43cba4748a822fbe864dd32c4887c5da1c71694a47693ace5e88fcf6af6"
+ DEPENDS = "fontconfig zlib cairo lcms"
  
- EXTRA_OECONF = "--with-os-type=moblin --disable-man-pages --disable-introspection"
- 
--do_install_append() {
--    # see configure.log for more details
--    chown root:root ${D}${libdir}/${BPN}-1/polkit-agent-helper-1
--    chmod 4755 ${D}${libdir}/${BPN}-1/polkit-agent-helper-1
--
--    chown root:root ${D}${bindir}/pkexec
--    chmod 4755 ${D}${bindir}/pkexec
--
--    chown polkitd:polkitd ${D}${sysconfdir}/${BPN}-1/rules.d
--    chmod 700 ${D}${sysconfdir}/${BPN}-1/rules.d
--
--    chown polkitd:polkitd ${D}${datadir}/${BPN}-1/rules.d
--    chmod 700 ${D}${datadir}/${BPN}-1/rules.d
--}
--
- PACKAGES =+ "${PN}-examples"
- 
- FILES_${PN} += " \
 -- 
 1.8.3.1
 
