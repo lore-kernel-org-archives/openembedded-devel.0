@@ -1,34 +1,39 @@
-Return-Path: <openembedded-devel@urbanec.net>
-X-Greylist: delayed 589 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 01 Oct 2014 04:00:02 UTC
-Received: from mail12.tpgi.com.au (smtp-out12.tpgi.com.au [220.244.226.122])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D7786FD16
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C67365F77
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 04:00:02 +0000 (UTC)
-X-TPG-Junk-Status: Message not scanned
-X-TPG-Antivirus: Passed
-X-TPG-Abuse: host=60-242-171-118.static.tpgi.com.au; ip=60.242.171.118;
-	date=Wed, 1 Oct 2014 13:37:30 +1000
-Received: from gw.urbanec.net (60-242-171-118.static.tpgi.com.au
-	[60.242.171.118])
-	by mail12.tpgi.com.au (envelope-from openembedded-devel@urbanec.net)
-	(8.14.3/8.14.3) with ESMTP id s913bR19006435
+	Wed,  1 Oct 2014 08:19:23 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id l18so469626wgh.34
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 1 Oct 2014 13:37:30 +1000
-Received: from beep.urbanec.net ([192.168.42.2])
-	by gw.urbanec.net with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80.1) (envelope-from <openembedded-devel@urbanec.net>)
-	id 1XZAjF-0008Up-Vk for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Oct 2014 13:37:26 +1000
-Message-ID: <542B76F5.80100@urbanec.net>
-Date: Wed, 01 Oct 2014 13:37:25 +1000
-From: Peter Urbanec <openembedded-devel@urbanec.net>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
-MIME-Version: 1.0
+	Wed, 01 Oct 2014 01:19:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=kqP5S6pGwayDERXwuWY40Xu/7SNtdNn++hzr+IdAjDM=;
+	b=hcj3MXFqQqrbSWRkoH0kay+c1ZayVTQpe7nACMHkqeyX57NcmttcQY3HwPwtbyBD38
+	OQfWc8ebzoYcVP5DG6sVQzfqTKoDRhgR/IhEV5dT3F4x0jHddnOpuU96dwki0hI3XFYp
+	4samO9GQGuZrACsmwGV/Rhq04Ti1JgdIoLpTENcBdPLl4QPAj2XKhilusFm6fMA9M3ye
+	EnlxuQoUmIomkXwfUmVw8eDEAzDa5mA+RGXr0usGoHXdUlVUITgn/JOY87yv1VOQchze
+	Ndq390jjt4xM66gyiPEEeBCMVf0XB1ms5NXPWuhazNMyPnDRo/H31/SLDy2K3D0kiu4x
+	6jxg==
+X-Received: by 10.180.19.230 with SMTP id i6mr12252984wie.48.1412151564328;
+	Wed, 01 Oct 2014 01:19:24 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-176-198-252-251.hsi05.unitymediagroup.de. [176.198.252.251])
+	by mx.google.com with ESMTPSA id kx2sm340789wjb.6.2014.10.01.01.19.23
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Oct 2014 01:19:23 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: mozjs fails with autoconf related QA errors
+Date: Wed,  1 Oct 2014 10:19:01 +0200
+Message-Id: <1412151555-19865-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
+MIME-Version: 1.0
+Subject: [PATCH][meta-oe 01/15] faenza-icon-theme: initial add 1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,58 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 04:00:07 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Oct 2014 08:19:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This one has me stumped, I wonder if anyone can figure it out and even 
-better, explain how to go about tracking down the source of the problem.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../faenza-icon-theme/faenza-icon-theme_1.3.bb     | 25 ++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
 
-I can see that it boils down to gcc being given |"-L/usr/lib|" , but I 
-can't figure out how it gets there.
-
-$ bitbake -b mozjs_17 -c configure
-
-results in:
-
-ERROR: This autoconf log indicates errors, it looked at host include 
-and/or library paths while determining system capabilities.
-Rerun configure task after fixing this. The path was 
-'/T3/builds/beyonwiz/inihdx/tmp-glibc/work/mips32el-oe-linux/mozjs/mozjs-17.0.0-r0/build'
-ERROR: Function failed: do_qa_configure
-ERROR: Logfile of failure stored in: 
-/T3/builds/beyonwiz/inihdx/tmp-glibc/work/mips32el-oe-linux/mozjs/mozjs-17.0.0-r0/temp/log.do_configure.9412
-ERROR: Task 3 
-(/T3/meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb, 
-do_configure) failed with exit code '1'
-
-
-I am using meta-oe master:e997f028f7076fbac9c741ec77bfda0b65257d10
-
-Digging through the logs, this seems like the most likely cause
-(found in 
-tmp-glibc/work/mips32el-oe-linux/mozjs/mozjs-17.0.0-r0/build/config.log)
-
-configure:5494: checking for IceConnectionNumber in -lICE
-configure:5513: mipsel-oe-linux-gcc -mel -mabi=32 -mhard-float 
--march=mips32 
---sysroot=/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/inihdx -o 
-conftest -Os -pipe -g -feliminate-unused-debug-types -Wl,-O1 
--Wl,--as-needed -L/usr/lib conftest.c -lICE 1>&5
-/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
-warning: library search path "/usr/lib" is unsafe for cross-compilation
-/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
-skipping incompatible /usr/lib/libICE.so when searching for -lICE
-/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
-skipping incompatible /usr/lib/libc.so when searching for -lc
-/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
-skipping incompatible /usr/lib/libc.a when searching for -lc
-
-
-Help with this would be very much appreciated.
-
-Best regards,
-
-     Peter Urbanec
+diff --git a/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
+new file mode 100644
+index 0000000..dbaae64
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/faenza-icon-theme/faenza-icon-theme_1.3.bb
+@@ -0,0 +1,25 @@
++DESCRIPTION = "An icon theme for Gnome"
++SECTION = "x11/wm"
++LICENSE = "GPLv3"
++HOMEPAGE = "http://code.google.com/p/faenza-icon-theme/"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++inherit allarch gtk-icon-cache
++
++S = "${WORKDIR}"
++
++SRC_URI = "http://faenza-icon-theme.googlecode.com/files/${PN}_${PV}.zip"
++SRC_URI[md5sum] = "e9bd6106d13017ce06d24b586259ae9c"
++SRC_URI[sha256sum] = "d4486fda0413f8a81a87e0dd2329f50f2a8a7cb4147b48cf147f0160add8174a"
++
++do_install() {
++    install -d ${D}${datadir}/icons
++    for theme in `find -name 'Faenza*.tar.gz'`; do
++        tar -xf ${theme} -C ${D}${datadir}/icons
++    done
++    tar -xf emesene-faenza-theme.tar.gz -C ${D}${datadir}
++    mv -f ${D}${datadir}/emesene/themes ${D}${datadir}/themes
++    rm -rf ${D}${datadir}/emesene
++}
++
++FILES_${PN} += "${datadir}/icons ${datadir}/themes"
+-- 
+1.8.3.1
 
 
