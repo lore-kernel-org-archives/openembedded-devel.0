@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 40E106017E
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id ECF3F65F77
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 15:18:57 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id b13so731986wgh.22
+	Wed,  1 Oct 2014 15:21:02 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id ho1so945983wib.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2014 08:18:58 -0700 (PDT)
+	Wed, 01 Oct 2014 08:21:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=71I61SJVqFBGF5dXZV0b/NkZUJ/XAi0x99yza2dZvJU=;
-	b=Px+K2kj7C208CXJx1mVCQKK5TUGysSzn35mmENqMkVErqxu7bl7itP6twvUA44B4qT
-	MT8VqGT2s+9CrrjdRYqUeTchR361oLKf3c3R62VZNtaKbWyEXoE/jznTxVbwpisYBQaO
-	LwA3LaQgXMzezaPZFn41EL8fNPGBlw4evFYUi6OADEzufkgbAdL9GDNpZg3ubT0BwYE+
-	ij4tZn9jyyuw+YlHmcwVknG6XpmpbVaDFXxmeUEx+cA4ZnltWk3S8XTkdYkrusPwPPfb
-	PJDn3UPJTYEZqtKY/Ci0Rk0fErR7K14rjQTAQKUbtlaqzmRCHwZkxm547sYDvPRdGliV
-	XB9w==
-X-Received: by 10.180.8.73 with SMTP id p9mr5608414wia.32.1412176738706;
-	Wed, 01 Oct 2014 08:18:58 -0700 (PDT)
+	bh=I1kND4iSJiEyVWkXQ0JA6Nb41poKqjuiQvl+8H6L27U=;
+	b=lbN605jmZijMgGpa5C2vY24F/STXE0qIOi6rqApFHsDkEDmz6Jfr/afirpB25CtTe7
+	QjzSZD9iJcB526Cy9i/ie+QIaoaWku0nD4O8QuWluDdNA5E6xvG1rnBKXBvlZdEdVzKt
+	OlD92TAyLvVi5gGaMvuSRtMWpgwwK/C8oNsAc953n2Q+H+eUNt2HNIZEMfpFAh8SXlK+
+	MTS2zNb9k/g8Tk/loDHIhmSRNKSjLRsm9SvRFWDWesjMTygGXYAFO9z4wWEjqJhd2knP
+	rvVbO0MBUJHjAJCcwzqp1iLThnaJ3qdzYtMVBd8aBuKdNhyoRuoEhLxjVLrW0EGeba4z
+	BGBg==
+X-Received: by 10.180.211.36 with SMTP id mz4mr15191331wic.39.1412176863568;
+	Wed, 01 Oct 2014 08:21:03 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	wk5sm1516755wjb.12.2014.10.01.08.18.57 for <multiple recipients>
+	t9sm1481179wjf.41.2014.10.01.08.21.02
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Oct 2014 08:18:57 -0700 (PDT)
+	Wed, 01 Oct 2014 08:21:02 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 1 Oct 2014 17:19:52 +0200
+Date: Wed, 1 Oct 2014 17:21:58 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141001151952.GD25706@jama>
-References: <cover.1411996185.git.anders@chargestorm.se>
-	<c3982a9e7a7182cfb3f0147477202f0c7b15858a.1411996185.git.anders@chargestorm.se>
+Message-ID: <20141001152158.GE25706@jama>
+References: <1411952961-5092-1-git-send-email-changhyeok.bae@lge.com>
 MIME-Version: 1.0
-In-Reply-To: <c3982a9e7a7182cfb3f0147477202f0c7b15858a.1411996185.git.anders@chargestorm.se>
+In-Reply-To: <1411952961-5092-1-git-send-email-changhyeok.bae@lge.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: Re: [meta-oe] [PATCH 1/1] breakpad: install static library
+Subject: Re: [meta-oe][PATCH] gdal: update to version 1.11.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,71 +48,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 15:19:06 -0000
-X-Groupsio-MsgNum: 52326
+X-List-Received-Date: Wed, 01 Oct 2014 15:21:12 -0000
+X-Groupsio-MsgNum: 52327
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xOS8do0ZRfB5pORP"
+	protocol="application/pgp-signature"; boundary="p1zxN+PsucbyOM2v"
 Content-Disposition: inline
 
---xOS8do0ZRfB5pORP
+--p1zxN+PsucbyOM2v
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 29, 2014 at 03:10:30PM +0200, Anders Darander wrote:
-> In order to build against breakpad when using an SDK, we need to also pac=
-kage
-> libbreakpad_client.a.
->=20
-> The SDK will then need to add breakpad-staticdev to TOOLCHAIN_TARGET_TASK.
-
-Fails in world builds:
-|  ( cd '/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gn=
-ueabi/breakpad/svn-r0/image/usr/lib' && arm-oe-linux-gnueabi-ranlib libbrea=
-kpad.a )
-|  ( cd '/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gn=
-ueabi/breakpad/svn-r0/image/usr/lib' && arm-oe-linux-gnueabi-ranlib libbrea=
-kpad_client.a )
-| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
-k/armv5te-oe-linux-gnueabi/breakpad/svn-r0/build'
-| install: cannot stat `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv=
-5te-oe-linux-gnueabi/breakpad/svn-r0/trunk/src/client/linux/libbreakpad_cli=
-ent.a': No such file or directory
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_install (log file is located at /home/jenkins/=
-oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/breakpad/svn-r0/t=
-emp/log.do_install.11600)
-NOTE: recipe breakpad-svn-r0: task do_install: Failed
-
-I guess it should be installed from ${B}
-
-Please re-test and re-send.
-
->=20
-> Signed-off-by: Anders Darander <anders@chargestorm.se>
+On Mon, Sep 29, 2014 at 10:09:21AM +0900, Changhyeok Bae wrote:
 > ---
->  meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 3 +++
->  1 file changed, 3 insertions(+)
+>  .../gdal/{gdal_1.10.1.bb =3D> gdal_1.11.0.bb}        |    6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-navigation/gdal/{gdal_1.10.1.bb =3D> gdal_1.11.0.=
+bb} (94%)
 >=20
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb b/meta-oe/=
-recipes-devtools/breakpad/breakpad_svn.bb
-> index 2c5941d..571e1d3 100644
-> --- a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-> @@ -56,6 +56,9 @@ do_install_append() {
+> diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb b/meta-oe/rec=
+ipes-navigation/gdal/gdal_1.11.0.bb
+> similarity index 94%
+> rename from meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+> rename to meta-oe/recipes-navigation/gdal/gdal_1.11.0.bb
+> index 14f1a57..8526cee 100644
+> --- a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+> +++ b/meta-oe/recipes-navigation/gdal/gdal_1.11.0.bb
+> @@ -1,14 +1,14 @@
+>  SUMMARY =3D "GDAL is a translator library for raster geospatial data for=
+mats"
+>  HOMEPAGE =3D "http://www.gdal.org/"
+>  LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3Db9bd75ae5af7ff87ab259be01=
+21c4106"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE.TXT;md5=3D0952e17969fab12227096b522=
+8f23149"
 > =20
->          install -d ${D}${includedir}/breakpad/third_party/lss
->          install -m 0644 ${S}/src/third_party/lss/linux_syscall_support.h=
- ${D}${includedir}/breakpad/third_party/lss/linux_syscall_support.h
-> +
-> +        install -d ${D}${libdir}
-> +        install -m 0644 ${S}/src/client/linux/libbreakpad_client.a ${D}$=
-{libdir}/libbreakpad_client.a
->  }
+>  DEPENDS =3D "proj sqlite3 tiff"
+
+Missing dependency on json-c and sqlite3 check doesn't seem to work correct=
+ly
+
+| checking for SQLite3 library >=3D 3.0.0... yes
+| cat: /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/i=
+nclude/sqlite3.h: No such file or directory
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/g=
+dal/1.11.0-r0/gdal-1.11.0/configure: line 25763: test: !=3D: unary operator=
+ expected
+| configure: WARNING: Can not find SQLITE_VERSION macro in sqlite3.h header=
+ to retrieve SQLite version!
+| checking for sqlite3_column_table_name in -lsqlite3... yes
+| disabled
+| checking Checking for DWGdirect... disabled
+| configure: "IBM Informix DataBlade support disabled."
+| configure: checking whether we should include ESRI SDE support...
+|         ESRI SDE support not requested.
+| checking for geos-config... /home/jenkins/oe/world/shr-core/tmp-glibc/sys=
+roots/qemuarm/usr/bin/crossscripts/geos-config
+| checking for GEOS version >=3D 3.1.0... yes
+| checking for GEOSversion in -lgeos_c... yes
+| configure: Using C API from GEOS 3.4.2
+| checking for OpenCL support... no
+| checking for FreeXL support... checking for json_object_set_serializer in=
+ -ljson-c... yes
+| using pre-installed libjson-c
+| configure: error: could not find json-c/json.h
+| Configure failed. The contents of all config.log files follows to aid deb=
+ugging
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/g=
+dal/1.11.0-r0/gdal-1.11.0/config.log
+| This file contains any messages produced by compilers while
+| running configure, to aid debugging if configure makes a mistake.
+|=20
+| It was created by configure, which was
+| generated by GNU Autoconf 2.69.  Invocation command line was
+
+
 > =20
->  PACKAGES =3D+ "${PN}-minidump-upload ${PN}-sym-upload"
+>  SRC_URI =3D "ftp://download.osgeo.org/gdal/${PV}/${BP}.tar.xz"
+> =20
+> -SRC_URI[md5sum] =3D "f354c614aea76e5630e4edbf06e5c292"
+> -SRC_URI[sha256sum] =3D "e6c9c6c4480228c943af29120d87435ddfe9ca460458bc60=
+b91639fb8d443791"
+> +SRC_URI[md5sum] =3D "31f2c4a7230b40e5fdc3cf12a100f96b"
+> +SRC_URI[sha256sum] =3D "b5186b5817e94743de1bceef66aeee1461687e14f73bf810=
+34fcf0377eacbcc3"
+> =20
+>  inherit autotools-brokensep lib_package binconfig
+> =20
 > --=20
-> 2.1.1
+> 1.7.9.5
 >=20
 > --=20
 > _______________________________________________
@@ -123,16 +148,16 @@ recipes-devtools/breakpad/breakpad_svn.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---xOS8do0ZRfB5pORP
+--p1zxN+PsucbyOM2v
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlQsG5gACgkQN1Ujt2V2gBx/RACfakK/cDioJwa7b3iKJCx8Eu0x
-NmEAoI+xW4xDESvdx9pwjdvkIlJgWK/B
-=7Tbn
+iEYEARECAAYFAlQsHBYACgkQN1Ujt2V2gBxCuACgslRs8yptHU1DlqAKB+XFLSOr
+R50An0GnV+M1RESW08Uc0IKGwznp8iEZ
+=6DF8
 -----END PGP SIGNATURE-----
 
---xOS8do0ZRfB5pORP--
+--p1zxN+PsucbyOM2v--
