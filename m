@@ -1,39 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id CF8B471720
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 2130765F77
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 08:19:30 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id l18so463739wgh.31
+	Wed,  1 Oct 2014 08:19:29 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id ho1so1096963wib.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2014 01:19:31 -0700 (PDT)
+	Wed, 01 Oct 2014 01:19:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=l8LvRwzEDM+FC5xhJJRqufbqu9Fha+QwqZkK60Mi7kE=;
-	b=b95hpx/oHnYh4h0cYvBYyoZMrLPtO/4lb63VjFIczJIJLP3MiyqK3HoltcTMycCg70
-	h8f2SbEaJlPHETOv6AJUWVwVbfa7hlaQOK+RHb+nUe2aS6ZVo09sMw8PxFXVjhMONH3C
-	LbxXMkHaEmmMLNCG7YtUmeG69iiPFfgyDyu9LYxE6Ys3VZPjwVVVwG3WhharsgG9qn8n
-	YhagxW1p+U9ZDdZTRYw6xhUtzOTwITMk+iQLQiHu2Z8ey76vQeiWMtzQGuHRE9Gf9uqN
-	F8vlrL8CN6KfTJNZrZ3y0RTNi9TaCD+CQU3pkMbSvhwWwzcu1daCrBAy/v4MGxrM/+2X
-	deBw==
-X-Received: by 10.180.231.9 with SMTP id tc9mr12312526wic.58.1412151571570;
-	Wed, 01 Oct 2014 01:19:31 -0700 (PDT)
+	bh=OHKOgERjfTNkEsyfzi3H9CZgpzDMPIWNKyB9lya8FKU=;
+	b=UMyQBag1jdJnt7AHxwJkqlUHUI4ftNf7fKXV9jTTpkOD1oBGdSWCkgvxKli7O7LWQD
+	4/deCFPGDUOb2pioJeCRmI6G5wp2jPglcqshsxzTRrraUR84zyEBl5W9MtDbmBXA51Fx
+	qZixX4n6guVaBkZnBcmd8TZMPWHwEyvCj3OOaXkauhoQaTKqxxo8qBFoJxuWdhA0lenh
+	tI1JvG1xghHA7at3tn2PqIxXy+iPwDwnhuZEdbhdfv0WF8pMZ5xOo+CTdKjh4zqwFWqU
+	lzZz/39e02MZ5InDzcdXbnwScYqvunG0THargxGjInRYfJ5u8Xg9uiu+WEJRXrIujY9t
+	3HRw==
+X-Received: by 10.180.75.49 with SMTP id z17mr11960153wiv.3.1412151570507;
+	Wed, 01 Oct 2014 01:19:30 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-176-198-252-251.hsi05.unitymediagroup.de. [176.198.252.251])
-	by mx.google.com with ESMTPSA id kx2sm340789wjb.6.2014.10.01.01.19.30
+	by mx.google.com with ESMTPSA id kx2sm340789wjb.6.2014.10.01.01.19.29
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Oct 2014 01:19:30 -0700 (PDT)
+	Wed, 01 Oct 2014 01:19:29 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Oct 2014 10:19:08 +0200
-Message-Id: <1412151555-19865-9-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed,  1 Oct 2014 10:19:07 +0200
+Message-Id: <1412151555-19865-8-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe 08/15] xfce4-power-manager: don't blacklist - networkmanager is up again
+Subject: [PATCH][meta-oe 07/15] ristretto: don't blacklist - tumbler is up again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,22 +54,21 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-xfce/recipes-apps/ristretto/ristretto_0.6.3.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
-index 2f9994f..6e92186 100644
---- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
-@@ -7,8 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.6.3.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.6.3.bb
+index 566d600..8e485f9 100644
+--- a/meta-xfce/recipes-apps/ristretto/ristretto_0.6.3.bb
++++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.6.3.bb
+@@ -7,7 +7,6 @@ DEPENDS = "exo libexif gtk+ dbus-glib libxfce4ui libxfce4util xfconf cairo"
  
- inherit xfce
+ inherit xfce-app
  
--PNBLACKLIST[xfce4-power-manager] = "BROKEN: rdepends on broken networkmanager"
--
- DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
-            libxrandr virtual/libx11 libxext xfce4-panel"
+-PNBLACKLIST[ristretto] = "BROKEN: rrecommends broken tumbler"
+ RRECOMMENDS_${PN} += "tumbler"
  
+ SRC_URI[md5sum] = "6b8c9a5d7ed319e4c84a9fefaa18792c"
 -- 
 1.8.3.1
 
