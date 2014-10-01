@@ -1,34 +1,40 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f181.google.com (mail-vc0-f181.google.com
-	[209.85.220.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 1686C71658
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 08:35:20 +0000 (UTC)
-Received: by mail-vc0-f181.google.com with SMTP id le20so218122vcb.40
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Oct 2014 01:35:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=SKbbcMDlrdSuNIXnUVQ908TaBJrLIoVVNo38/6F9AO8=;
-	b=W9PdrmrsavKvJNcRoYaxVgw5E1nrJQO0XeU9KnF7hzaJYVttz1rKC416zlcSXGyp1j
-	UHLfDJppkz2XbJyEhoHdJTrMNNR9c5VMkRj0sM9TOttIEzuMaCw+Mps9PS8Ih7cqbf1L
-	SF03P2O60y9N7n7T6ViBQPsQa1x44I/zY9v2mVzW29/S1MID4aeaWimy1DqAFw3A53Av
-	PL8MOUSp45fVrwFIzeWqPp5lv20TyCY9kJIHsG3OvSrfTpRd+PKZEugWl4fVYmdILH5+
-	JNXAV/5OG1aLEPhaaWtqBeV56BnKHPwf5Dh9rgi03CJC3M9VuM1SjWrmhpWxif8jMxXI
-	TnoQ==
+Return-Path: <bevenson@melinkcorp.com>
+X-Greylist: delayed 4686 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 01 Oct 2014 14:27:01 UTC
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1on0115.outbound.protection.outlook.com [157.56.110.115])
+	by mail.openembedded.org (Postfix) with ESMTP id DD6B065F77
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Oct 2014 14:27:01 +0000 (UTC)
+Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
+	BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) with Microsoft
+	SMTP Server (TLS) id 15.0.1039.15; Wed, 1 Oct 2014 12:54:31 +0000
+Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.248]) by
+	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.248]) with mapi id
+	15.00.1039.011; Wed, 1 Oct 2014 12:54:31 +0000
+From: Bryan Evenson <bevenson@melinkcorp.com>
+To: "Openembedded-devel@lists.openembedded.org"
+	<Openembedded-devel@lists.openembedded.org>
+Thread-Topic: Status of bash patches for dora and dylan?
+Thread-Index: Ac/ddCO+l5fPNKfGTwWxrzxSXdYmFA==
+Date: Wed, 1 Oct 2014 12:54:31 +0000
+Message-ID: <92223d60b43647d8ba3265cdd621166e@BLUPR05MB037.namprd05.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-vipre-scanned: 0038ABD90083260038AD26
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [98.100.91.242]
+x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB037;
+x-forefront-prvs: 0351D213B3
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(979002)(6009001)(199003)(189002)(164054003)(21056001)(10300001)(107046002)(2656002)(4396001)(31966008)(99396003)(97736003)(85852003)(86362001)(46102003)(50986999)(2351001)(107886001)(120916001)(110136001)(80022003)(229853001)(87936001)(54356999)(101416001)(76482002)(92566001)(106356001)(74316001)(33646002)(76576001)(95666004)(108616004)(20776003)(99286002)(105586002)(85306004)(64706001)(77096002)(66066001)(24736002)(969003)(989001)(999001)(1009001)(1019001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB037;
+	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:ovrnspm;
+	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
 MIME-Version: 1.0
-X-Received: by 10.52.109.167 with SMTP id ht7mr1671815vdb.33.1412152521999;
-	Wed, 01 Oct 2014 01:35:21 -0700 (PDT)
-Received: by 10.52.171.233 with HTTP; Wed, 1 Oct 2014 01:35:21 -0700 (PDT)
-In-Reply-To: <CAMP9K8-g9Cd6SiNOidENMtvZ8beeWWAvv0GHA=7j-N_LUk_XJg@mail.gmail.com>
-References: <CAMP9K8-g9Cd6SiNOidENMtvZ8beeWWAvv0GHA=7j-N_LUk_XJg@mail.gmail.com>
-Date: Wed, 1 Oct 2014 10:35:21 +0200
-Message-ID: <CALbNGRSo4uZStuLv3bX1LV958-R2i7Q_BHda44pRikxxF5Cc=w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-xfce: how to change the default background?
+X-OriginatorOrg: melinkcorp.com
+Subject: Status of bash patches for dora and dylan?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,43 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 08:35:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Oct 2014 14:27:06 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Tue, Sep 30, 2014 at 11:26 PM, California Sullivan
-<californialsullivan@gmail.com> wrote:
-> Hi all,
->
-> When building an image and using the xfce package, I would like to be able
-> to set a custom default background (i.e., before the image is ever booted
-> up).
->
-> I have been unable to find any documentation on how to do this, and I
-> haven't found any clues by poking around in the layer.
->
-> Any pointers from somebody with experience in this area, or any links to
-> documentation on how this could be done would be very much appreciated.
->
-> Thank you,
-> Cal Sullivan
-Hi Cal,
-
-This setting is found in
-<userhome>/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
-entry 'image-path'.
-
-If you want you can look into my meta-misc [1]:
-
-* a default config installing into /etc/skel
-* operator-user getting the settings from /etc/skel on creation
-
-note that this solution does not work for upgrades. For this you need
-some magic in pkg_postinst copying changes from /etc/skel to user's
-home.
-
-Hope it helps...
-
-Andreas
-
-[1] https://gitorious.org/schnitzeltony-oe-meta/meta-misc/source/024201b0b256338df4460c39447e9660e16872a0:recipes-setup
+SSBzZWUgdGhhdCBwYXRjaGVzIGZvciBiYXNoIHRvIGZpeCBDVkUtMjAxNC03MTY5IGFuZCBDVkUt
+MjAxNC02MjcxIGhhdmUgYmVlbiBhcHBsaWVkIHRvIHRoZSBkYWlzeSBhbmQgbWFzdGVyIGJyYW5j
+aGVzIG9mIG9wZW5lbWJlZGRlZC1jb3JlIHR3byBkYXlzIGFnby4gIEkgc2F3IHNvbWUgdGFsayBv
+biB0aGlzIG1haWxpbmcgbGlzdCBhYm91dCBhcHBseWluZyB0aGUgcGF0Y2hlcyB0byB0aGUgZG9y
+YSBhbmQgZHlsYW4uICBBcmUgdGhlIHBhdGNoZXMgc3RpbGwgcGxhbm5lZCB0byBiZSBhcHBsaWVk
+IHRvIHRoZSBkb3JhIGFuZCBkeWxhbiBicmFuY2hlcz8gIElmIHNvLCBkb2VzIHNvbWVvbmUgaGF2
+ZSBhIHRpbWVmcmFtZSBpbiBtaW5kIGZvciBiYWNrcG9ydGluZyB0aGUgcGF0Y2hlcz8gIElmIG5v
+dCwgZG8geW91IG5lZWQgc29tZW9uZSB0byBjaGVycnktcGljayB0aGUgY29tbWl0cyBhbmQgdmVy
+aWZ5IHRoZXkgd29yayBhcyBleHBlY3RlZCBvbiB0aGUgZG9yYSBhbmQgZHlsYW4gYnJhbmNoZXM/
+DQoNClRoYW5rcywNCkJyeWFuDQoNCg0K
 
