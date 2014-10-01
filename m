@@ -1,32 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
-	[209.85.213.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 82EE86A9D4
+Return-Path: <openembedded-devel@urbanec.net>
+X-Greylist: delayed 589 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 01 Oct 2014 04:00:02 UTC
+Received: from mail12.tpgi.com.au (smtp-out12.tpgi.com.au [220.244.226.122])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D7786FD16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Oct 2014 01:24:08 +0000 (UTC)
-Received: by mail-ig0-f178.google.com with SMTP id l13so96879iga.17
+	Wed,  1 Oct 2014 04:00:02 +0000 (UTC)
+X-TPG-Junk-Status: Message not scanned
+X-TPG-Antivirus: Passed
+X-TPG-Abuse: host=60-242-171-118.static.tpgi.com.au; ip=60.242.171.118;
+	date=Wed, 1 Oct 2014 13:37:30 +1000
+Received: from gw.urbanec.net (60-242-171-118.static.tpgi.com.au
+	[60.242.171.118])
+	by mail12.tpgi.com.au (envelope-from openembedded-devel@urbanec.net)
+	(8.14.3/8.14.3) with ESMTP id s913bR19006435
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Sep 2014 18:24:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=Cpe4rBvWEVZRcqDBAGEUQHwO52gnpDAhVJbdr8JwgMU=;
-	b=JmBWGOpbsEU2K87YV18HU7LcDF1ngh/QFugX3QDTP+3+iyi+om0O4Ve/eBc4YADhbo
-	/5+PBRlefmsFS8BZoOcq7L+2n3q3S+0rWXzbvr7p/tVxYMh1hgMOUcqZ1gho0Dkdk1GF
-	Qn/HHutwfTaMrmVZDqWcVV1ns/dm2J+Z6JtgBC78YG0/KZ0r9baebT8Hj1Xcdr0/5U8+
-	7fGHO+MNLLLWueDR2EZuZgn0X0XI2oiqvkZoxsw2jPe4Yetjmr32wlvIzpJVmYMjsV7U
-	/e18bD+9GnaCFDzQ8t267Uw+UPpVSQKAK9qG7vPaOOI1FoFbs+YABoBGrd/OP6H1bDam
-	xYWA==
-X-Received: by 10.50.138.233 with SMTP id qt9mr13884233igb.30.1412126649906;
-	Tue, 30 Sep 2014 18:24:09 -0700 (PDT)
+	Wed, 1 Oct 2014 13:37:30 +1000
+Received: from beep.urbanec.net ([192.168.42.2])
+	by gw.urbanec.net with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80.1) (envelope-from <openembedded-devel@urbanec.net>)
+	id 1XZAjF-0008Up-Vk for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Oct 2014 13:37:26 +1000
+Message-ID: <542B76F5.80100@urbanec.net>
+Date: Wed, 01 Oct 2014 13:37:25 +1000
+From: Peter Urbanec <openembedded-devel@urbanec.net>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
 MIME-Version: 1.0
-Received: by 10.50.179.5 with HTTP; Tue, 30 Sep 2014 18:23:39 -0700 (PDT)
-In-Reply-To: <542AE566.80708@balister.org>
-References: <542AE566.80708@balister.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 30 Sep 2014 18:23:39 -0700
-Message-ID: <CAMKF1soHgDHBUiStGqaW28L8jWu63HmoaHBdYavie0r=dFZ+7g@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Hostapd recipe is DEFAULT_PREFENCE = "-1"
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: mozjs fails with autoconf related QA errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,14 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Oct 2014 01:24:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Oct 2014 04:00:07 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Sep 30, 2014 at 10:16 AM, Philip Balister <philip@balister.org> wrote:
-> Does anyone know why the hostapd recipe is DEFAULT_PREFERENCE = "-1"
+This one has me stumped, I wonder if anyone can figure it out and even 
+better, explain how to go about tracking down the source of the problem.
 
-history !!. it was imported from oe-classic and there we had multiple
-recipes and default was 0.5.10
-but latest was 1.0 which was brought into new world and needless to
-say it was verbatim
+I can see that it boils down to gcc being given |"-L/usr/lib|" , but I 
+can't figure out how it gets there.
+
+$ bitbake -b mozjs_17 -c configure
+
+results in:
+
+ERROR: This autoconf log indicates errors, it looked at host include 
+and/or library paths while determining system capabilities.
+Rerun configure task after fixing this. The path was 
+'/T3/builds/beyonwiz/inihdx/tmp-glibc/work/mips32el-oe-linux/mozjs/mozjs-17.0.0-r0/build'
+ERROR: Function failed: do_qa_configure
+ERROR: Logfile of failure stored in: 
+/T3/builds/beyonwiz/inihdx/tmp-glibc/work/mips32el-oe-linux/mozjs/mozjs-17.0.0-r0/temp/log.do_configure.9412
+ERROR: Task 3 
+(/T3/meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb, 
+do_configure) failed with exit code '1'
+
+
+I am using meta-oe master:e997f028f7076fbac9c741ec77bfda0b65257d10
+
+Digging through the logs, this seems like the most likely cause
+(found in 
+tmp-glibc/work/mips32el-oe-linux/mozjs/mozjs-17.0.0-r0/build/config.log)
+
+configure:5494: checking for IceConnectionNumber in -lICE
+configure:5513: mipsel-oe-linux-gcc -mel -mabi=32 -mhard-float 
+-march=mips32 
+--sysroot=/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/inihdx -o 
+conftest -Os -pipe -g -feliminate-unused-debug-types -Wl,-O1 
+-Wl,--as-needed -L/usr/lib conftest.c -lICE 1>&5
+/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
+warning: library search path "/usr/lib" is unsafe for cross-compilation
+/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
+skipping incompatible /usr/lib/libICE.so when searching for -lICE
+/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
+skipping incompatible /usr/lib/libc.so when searching for -lc
+/T3/builds/beyonwiz/inihdx/tmp-glibc/sysroots/i686-linux/usr/libexec/mipsel-oe-linux/gcc/mipsel-oe-linux/4.9.1/ld: 
+skipping incompatible /usr/lib/libc.a when searching for -lc
+
+
+Help with this would be very much appreciated.
+
+Best regards,
+
+     Peter Urbanec
+
 
