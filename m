@@ -1,38 +1,40 @@
-Return-Path: <henning@itconsulting-heinold.de>
-X-Greylist: delayed 459 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 02 Oct 2014 06:08:16 UTC
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 4120C65DA3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id A69086AC6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2014 06:08:16 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B0A212232029
+	Thu,  2 Oct 2014 06:20:58 +0000 (UTC)
+Received: by mail-wg0-f48.google.com with SMTP id n12so2191505wgh.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2014 08:00:08 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 262972232026
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2014 07:58:54 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de (ip-109-45-1-1.web.vodafone.de
-	[109.45.1.1]) by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2014 07:58:53 +0200 (CEST)
-Date: Thu, 2 Oct 2014 07:57:51 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141002055749.GB3055@mail.itconsulting-heinold.de>
-References: <1411515467-16344-1-git-send-email-zibo.zhao@windriver.com>
-	<1411515467-16344-2-git-send-email-zibo.zhao@windriver.com>
+	Wed, 01 Oct 2014 23:20:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=zEBtxR0+xQp0x1Dh9AExMtzBE/Pf+gSz7gXibbSLU4c=;
+	b=wPuMliiOie8BWZuqO41KQ7CxDB5qv8t/Hm7U1U+gt+N3+IGSpmsxMeIfjSTQFWU3u9
+	Fc/mPI+JzIlW5TKIwy8d925/v6P9r4DwKSwgDTMGsOKN9BQJbt06awm4eaPZzcA0rjw+
+	6q8uX4Zj3ucPxEz8nPsJ/Mix6AvDePuTtsmtBVOnDZ/rOyxswksUVmOQVit20jF5Csho
+	q01oZkBBPM2jrip5msa0mz+rajLPIzAVRdddsedxCn7oroWwG7z0o0m/MtgbUd6ujPMA
+	e0vEr6B/1jsrcrTjbfAgSKAaKA64L1PRghk4k5SQvnMRrhvr+QMd8s8SE44+jXc2nEMj
+	TFxQ==
+X-Received: by 10.180.20.69 with SMTP id l5mr1247575wie.45.1412230859366;
+	Wed, 01 Oct 2014 23:20:59 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id f7sm58418wix.22.2014.10.01.23.20.58
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Oct 2014 23:20:58 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 2 Oct 2014 08:21:54 +0200
+To: openembedded-devel@lists.openembedded.org,
+	Brian Lloyd <blloyd@familyhonor.net>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20141002062154.GG25706@jama>
+References: <1402343170-17707-1-git-send-email-blloyd@familyhonor.net>
 MIME-Version: 1.0
-In-Reply-To: <1411515467-16344-2-git-send-email-zibo.zhao@windriver.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [meta-java][PATCH 2/2] icedtea: CVE-2013-4160: integrate Non happy path fixes
+In-Reply-To: <1402343170-17707-1-git-send-email-blloyd@familyhonor.net>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] Upgrade geode video driver to 2.11.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,134 +48,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2014 06:08:17 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 02 Oct 2014 06:21:06 -0000
+X-Groupsio-MsgNum: 52333
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="cMwMn/tF35tO7kHm"
 Content-Disposition: inline
 
-On Tue, Sep 23, 2014 at 07:37:47PM -0400, Zibo Zhao wrote:
-> From: Michel Thebeau <michel.thebeau@windriver.com>
-> 
-> Little CMS (lcms2) before 2.5, as used in OpenJDK 7 and possibly
-> other products, allows remote attackers to cause a denial of
-> service(NULL ptr deref).
-> 
-> Adding NULL pointer checks fix the issue.
-> 
-> Signed-off-by: Michel Thebeau <michel.thebeau@windriver.com>
-> Signed-off-by: Zibo Zhao <zibo.zhao@windriver.com>
+--cMwMn/tF35tO7kHm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jun 09, 2014 at 02:46:10PM -0500, Brian Lloyd wrote:
+> From: blloyd <blloyd@familyhonor.net>
+>=20
+> The latest driver corrected a number of issues and compiles without warni=
+ngs with just one patch.  The header included by the given patch is already=
+ included in the geode master line, so will not be be required after the ne=
+xt geode version release.
+
+xf86-video-geode is broken again, would you mind fixing it to build with
+glibc-2.20?
+
+|                  from /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586=
+-oe-linux/xf86-video-geode/2_2.11.16-r21.0/xf86-video-geode-2.11.16/src/lx_=
+memory.c:26:
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/xo=
+rg/os.h:579:1: error: expected identifier or '(' before '__extension__'
+|  strndup(const char *str, size_t n);
+|  ^
+
+
+>=20
+> Signed-off-by: Brian Lloyd <blloyd@familyhonor.net>
 > ---
->  ...cedtea-CVE-2013-4160-Non-happy-path-fixes.patch | 74 ++++++++++++++++++++++
->  recipes-core/openjdk/openjdk-7-release-03b21.inc   |  2 +
->  2 files changed, 76 insertions(+)
->  create mode 100644 recipes-core/openjdk/openjdk-7-03b21/icedtea-CVE-2013-4160-Non-happy-path-fixes.patch
-> 
-> diff --git a/recipes-core/openjdk/openjdk-7-03b21/icedtea-CVE-2013-4160-Non-happy-path-fixes.patch b/recipes-core/openjdk/openjdk-7-03b21/icedtea-CVE-2013-4160-Non-happy-path-fixes.patch
+>  .../xorg-driver/xf86-video-geode/xf86SetModeDefaultName.patch | 11 +++++=
+++++++
+>  ...f86-video-geode_2.11.14.bb =3D> xf86-video-geode_2.11.15.bb} |  6 +++=
++--
+>  2 files changed, 15 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-geode=
+/xf86SetModeDefaultName.patch
+>  rename meta-oe/recipes-graphics/xorg-driver/{nonworking/xf86-video-geode=
+_2.11.14.bb =3D> xf86-video-geode_2.11.15.bb} (60%)
+>=20
+> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86Se=
+tModeDefaultName.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-ge=
+ode/xf86SetModeDefaultName.patch
 > new file mode 100644
-> index 0000000..75e11c4
+> index 0000000..97d9d49
 > --- /dev/null
-> +++ b/recipes-core/openjdk/openjdk-7-03b21/icedtea-CVE-2013-4160-Non-happy-path-fixes.patch
-> @@ -0,0 +1,74 @@
-> +From 91c2db7f2559be504211b283bc3a2c631d6f06d9 Mon Sep 17 00:00:00 2001
-> +From: Marti Maria <info@littlecms.com>
-> +Date: Tue, 25 Jun 2013 16:09:16 +0200
-> +Subject: [PATCH] Non happy-path fixes
+> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/xf86SetModeDe=
+faultName.patch
+> @@ -0,0 +1,11 @@
+> +diff -up xf86-video-geode-2.11.14/src/geode_dcon.c.jx xf86-video-geode-2=
+=2E11.14/src/geode_dcon.c
+> +--- xf86-video-geode-2.11.14/src/geode_dcon.c.jx	2012-11-24 05:01:15.000=
+000000 -0500
+> ++++ xf86-video-geode-2.11.14/src/geode_dcon.c	2013-10-25 16:19:35.950234=
+174 -0400
+> +@@ -29,6 +29,7 @@
+> +=20
+> + /* Includes that are used by all drivers */
+> + #include <xf86.h>
+> ++#include <xf86Modes.h>
+> + #include <xf86_OSproc.h>
+> + #include <compiler.h>
+> +=20
+> diff --git a/meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-g=
+eode_2.11.14.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.1=
+1.15.bb
+> similarity index 60%
+> rename from meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-ge=
+ode_2.11.14.bb
+> rename to meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
+> index 2fdb210..07d2d9b 100644
+> --- a/meta-oe/recipes-graphics/xorg-driver/nonworking/xf86-video-geode_2.=
+11.14.bb
+> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.15.bb
+> @@ -4,8 +4,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De7f3e39474aee=
+a5af381a8e103dafc36"
+>  SUMMARY =3D "X.org server -- Geode GX2/LX display driver"
+>  PR =3D "${INC_PR}.0"
+> =20
+> -SRC_URI[md5sum] =3D "c9a4e1c5438240e5bdce332f92df9163"
+> -SRC_URI[sha256sum] =3D "4c750b46c932934faa008919922f5ac8a572afcfe265ac8d=
+7c203b8167a0cfcc"
+> +SRC_URI[md5sum] =3D "7dafd19e274c771539b6d4d459423ccf"
+> +SRC_URI[sha256sum] =3D "00db3bd697b32286eb0e42f5dbd7fcc8d7255dd11c299b1e=
+e16a06a244868ff0"
 > +
-> +commit 91c2db7f2559be504211b283bc3a2c631d6f06d9 from
-> +https://github.com/mm2/Little-CMS
-> +[modified for Little-CMS 2.0]
-> +
-> +Signed-off-by: Michel Thebeau <michel.thebeau@windriver.com>
-> +Signed-off-by: Zibo Zhao <Zibo.Zhao@windriver.com>
-> +---
-> + src/cmsnamed.c | 12 +++++++----
-> + src/cmsopt.c   | 10 ++++++++++
-> + 2 files changed, 18 insertions(+), 4 deletions(-)
-> +
-> +diff --git openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsnamed.c openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsnamed.c
-> +index a916e17..acfd1c8 100644
-> +--- openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsnamed.c
-> ++++ openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsnamed.c
-> +@@ -514,8 +514,8 @@ cmsNAMEDCOLORLIST* CMSEXPORT cmsAllocNamedColorList(cmsContext ContextID, cmsUIn
-> +     while (v -> Allocated < n)
-> +         GrowNamedColorList(v);
-> + 
-> +-    strncpy(v ->Prefix, Prefix, sizeof(v ->Prefix));
-> +-    strncpy(v ->Suffix, Suffix, sizeof(v ->Suffix));
-> ++    strncpy(v ->Prefix, Prefix, sizeof(v ->Prefix)-1);
-> ++    strncpy(v ->Suffix, Suffix, sizeof(v ->Suffix)-1);
-> +     v -> ColorantCount = ColorantCount;
-> + 
-> +     return v;
-> +@@ -571,6 +571,5 @@ cmsBool  CMSEXPORT cmsAppendNamedColor(cmsNAMEDCOLORLIST* NamedColorList,
-> + 
-> +     if (Name != NULL)
-> +-        strncpy(NamedColorList ->List[NamedColorList ->nColors].Name, Name,
-> +-                    sizeof(NamedColorList ->List[NamedColorList ->nColors].Name));
-> ++        strncpy(NamedColorList ->List[NamedColorList ->nColors].Name, Name, cmsMAX_PATH-1);
-> +    else
-> +        NamedColorList ->List[NamedColorList ->nColors].Name[0] = 0;
-> +@@ -735,6 +733,10 @@ cmsSEQ* CMSEXPORT cmsAllocProfileSequenceDescription(cmsContext ContextID, cmsUI
-> +     Seq -> seq      = (cmsPSEQDESC*) _cmsCalloc(ContextID, n, sizeof(cmsPSEQDESC));
-> +     Seq -> n        = n;
-> + 
-> ++    if (Seq -> seq == NULL) {
-> ++        _cmsFree(ContextID, Seq);
-> ++        return NULL;
-> ++    }
-> + 
-> +     for (i=0; i < n; i++) {
-> +         Seq -> seq[i].Manufacturer = NULL;
-> +diff --git openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsopt.c openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsopt.c
-> +index 7478e5e..4bdf0a7 100644
-> +--- openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsopt.c
-> ++++ openjdk/jdk/src/share/native/sun/java2d/cmm/lcms/cmsopt.c
-> +@@ -1179,6 +1179,16 @@ Curves16Data* CurvesAlloc(cmsContext ContextID, int nCurves, int nElements, cmsT
-> + 
-> +         c16->Curves[i] = _cmsCalloc(ContextID, nElements, sizeof(cmsUInt16Number));
-> + 
-> ++        if (c16->Curves[i] == NULL) {
-> ++
-> ++            for (j=0; j < i; j++) {
-> ++                _cmsFree(ContextID, c16->Curves[j]);
-> ++            }
-> ++            _cmsFree(ContextID, c16->Curves);
-> ++            _cmsFree(ContextID, c16);
-> ++            return NULL;
-> ++        }
-> ++
-> +         if (nElements == 256) {
-> + 
-> +             for (j=0; j < nElements; j++) {
-> +-- 
-> +1.9.1
-> +
-> diff --git a/recipes-core/openjdk/openjdk-7-release-03b21.inc b/recipes-core/openjdk/openjdk-7-release-03b21.inc
-> index 6f78d10..5b5caff 100644
-> --- a/recipes-core/openjdk/openjdk-7-release-03b21.inc
-> +++ b/recipes-core/openjdk/openjdk-7-release-03b21.inc
-> @@ -94,6 +94,7 @@ ICEDTEAPATCHES = "\
->  	file://icedtea-corba-parallel-make.patch;apply=no \
->          file://icedtea-zero-hotspotfix.patch;apply=no \
->          file://icedtea-CVE-2014-1876-unpack.patch;apply=no \
-> +        file://icedtea-CVE-2013-4160-Non-happy-path-fixes.patch;apply=no \
->  	"
->  ICEDTEAPATCHES_append_powerpc = " \
->  	file://icedtea-jdk-nio-use-host-cc.patch;apply=no \
-> @@ -127,6 +128,7 @@ DISTRIBUTION_PATCHES = "\
->  	patches/icedtea-corba-parallel-make.patch \
->          patches/icedtea-zero-hotspotfix.patch \
->          patches/icedtea-CVE-2014-1876-unpack.patch \
-> +        patches/icedtea-CVE-2013-4160-Non-happy-path-fixes.patch \
->  	"
->  
->  DISTRIBUTION_PATCHES_append_libc-uclibc = "\
-> -- 
-> 1.9.1
+> +SRC_URI +=3D "file://xf86SetModeDefaultName.patch"
+> =20
+>  COMPATIBLE_HOST =3D "i.86.*-linux"
+> =20
+> --=20
+> 1.9.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Thank you very much for the patches. Unfornatly I do not have much time at the moment
-for meta-java. So it will last a bit until I can integrate them. Maybe
-I will switch anyway to the 2.5 release of icedtea, which includes
-the patches already.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Bye Henning
+--cMwMn/tF35tO7kHm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQs7wIACgkQN1Ujt2V2gBw/yQCbBKXXZvujnmUblu84aNMbCMKo
+3WYAn12EcROsN0B7BvUZMtTPBwBcZyQO
+=hgkw
+-----END PGP SIGNATURE-----
+
+--cMwMn/tF35tO7kHm--
