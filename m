@@ -1,41 +1,39 @@
-Return-Path: <blloyd@familyhonor.net>
-X-Greylist: delayed 2304 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 03 Oct 2014 00:42:53 UTC
-Received: from mho-02-ewr.mailhop.org (mho-02-ewr.mailhop.org [204.13.248.72])
-	by mail.openembedded.org (Postfix) with ESMTP id E56DA601A8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 81D1F7029A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Oct 2014 00:42:53 +0000 (UTC)
-Received: from dynamic30-98-142-75.dobsonteleco.com ([98.142.75.30]
-	helo=lloydserv.home.familyhonor.net)
-	by mho-02-ewr.mailhop.org with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.72) (envelope-from <blloyd@familyhonor.net>)
-	id 1XZqMI-0003wD-SO; Fri, 03 Oct 2014 00:04:30 +0000
-Received: from mail.familyhonor.net (lloydserv.home.familyhonor.net
-	[127.0.0.1]) (authenticated bits=0)
-	by lloydserv.home.familyhonor.net (8.14.7/8.14.6) with ESMTP id
-	s9304S1W005723
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 2 Oct 2014 19:04:29 -0500
-X-Mail-Handler: Dyn Standard SMTP by Dyn
-X-Originating-IP: 98.142.75.30
-X-Report-Abuse-To: abuse@dyndns.com (see
-	http://www.dyndns.com/services/sendlabs/outbound_abuse.html for
-	abuse reporting information)
-X-MHO-User: U2FsdGVkX1/N5DvL701/BkAIBU3QuGCiHVTObE4HH+k=
+	Fri,  3 Oct 2014 02:20:35 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id z12so374418wgg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Oct 2014 19:20:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=y/B7d64vHcUzAu+xNUD0rF0t7tpUnIvn5NyhyINAvuw=;
+	b=wMy1LAAGDrlrW6+MoUpRHKe7W7A1kSiBb5FYLkSHvo2e94xG62GV/rALGFDdoeHo5l
+	XDcYAziz3WY6/jw87tFcxlh6VAWXIBmEz3XLENHR3wJzbmB+nUjpzlOTIy6Sn1ZisO6r
+	+xQxBhyH95cWyJu1/rYQqu0OEgbBNyzNpRvY+/SLjJDE+jUWI4pNSNUg27RPXK3SaLUg
+	6hiNHF91I220iiAhypGKFTgvWbKJSPPgV9N56vDet/EqOJhcn0QCaLpl86tnDo+WHwiZ
+	qRbmr7xhqwlerPo6tqz79nipTHTNXBU3+c5iMPz8DfauXkxqhQT5st8MZEzVcGVPbPI5
+	SHug==
+X-Received: by 10.194.120.37 with SMTP id kz5mr3105029wjb.107.1412302836447;
+	Thu, 02 Oct 2014 19:20:36 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id d6sm566664wiz.0.2014.10.02.19.20.35
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 02 Oct 2014 19:20:35 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 3 Oct 2014 04:21:32 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141003022132.GK25706@jama>
+References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
+	<1412151555-19865-16-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Date: Thu, 02 Oct 2014 19:04:28 -0500
-From: blloyd <blloyd@familyhonor.net>
-To: Otavio Salvador <otavio@ossystems.com.br>
-In-Reply-To: <CAP9ODKoNT2hwQ+a-ynCbCHXDLnE38XPvcY7=Q5AQtKMwpcEZwA@mail.gmail.com>
-References: <1402343170-17707-1-git-send-email-blloyd@familyhonor.net>
-	<20141002062154.GG25706@jama>
-	<CAP9ODKoNT2hwQ+a-ynCbCHXDLnE38XPvcY7=Q5AQtKMwpcEZwA@mail.gmail.com>
-Message-ID: <d1c3c423c04a32e16ceb3c0eba976204@mail.familyhonor.net>
-X-Sender: blloyd@familyhonor.net
-User-Agent: Roundcube Webmail/0.9.5
-Cc: otavio.salvador@gmail.com,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] Upgrade geode video driver to 2.11.15
+In-Reply-To: <1412151555-19865-16-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH][meta-oe 15/15] bash-completion: resolve sysroot conflicts for util-linux and networkmanager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,50 +47,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Oct 2014 00:42:59 -0000
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Oct 2014 02:20:36 -0000
+X-Groupsio-MsgNum: 52340
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="d7fO2LonciW1X6nX"
+Content-Disposition: inline
 
-On 2014-10-02 12:37, Otavio Salvador wrote:
-> On Thu, Oct 2, 2014 at 3:21 AM, Martin Jansa <martin.jansa@gmail.com> 
-> wrote:
->> On Mon, Jun 09, 2014 at 02:46:10PM -0500, Brian Lloyd wrote:
->>> From: blloyd <blloyd@familyhonor.net>
->>> 
->>> The latest driver corrected a number of issues and compiles without 
->>> warnings with just one patch.  The header included by the given patch 
->>> is already included in the geode master line, so will not be be 
->>> required after the next geode version release.
->> 
->> xf86-video-geode is broken again, would you mind fixing it to build 
->> with
->> glibc-2.20?
->> 
->> |                  from 
->> /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/xf86-video-geode/2_2.11.16-r21.0/xf86-video-geode-2.11.16/src/lx_memory.c:26:
->> | 
->> /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/xorg/os.h:579:1: 
->> error: expected identifier or '(' before '__extension__'
->> |  strndup(const char *str, size_t n);
->> |  ^
-> 
-> I am not using it anymore so it'd be great if Brian could handle it.
+--d7fO2LonciW1X6nX
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Was already working on it.  My patch has already been accepted upstream 
-for 2.11.17.
-I'll get a patch for yocto 2.11.16 to use until 2.11.17 is released, as 
-that is probably a very long way away.
+On Wed, Oct 01, 2014 at 10:19:15AM +0200, Andreas M=FCller wrote:
+> * continue the priority for packages shipping bash-completion
+> * oe-core's latest changes turn sysroot conflicts into critical error
+>=20
+> ERROR: The recipe bash-completion is trying to install files into a share=
+d area when those files already exist. Those files and their manifest locat=
+ion are:
+>    /home/a.mueller/tmp/oe-core-glibc/sysroots/overo/usr/share/bash-comple=
+tion/completions/nmcli
+>    Matched in manifest-overo-networkmanager.populate_sysroot
+>    /home/a.mueller/tmp/oe-core-glibc/sysroots/overo/usr/share/bash-comple=
+tion/completions/su
+>    Matched in manifest-overo-util-linux.populate_sysroot
 
-In the meantime, add
+Just FYI:
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif
+IMHO It's not worth adding the bash-completion as "fake" DEPENDS in
+util-linux and networkmanager, but if your build happens to build
+networkmanager (or util-linux) before bash-completion, then you'll still
+hit this error (like I just did in world build).
+=20
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-support/bash-completion/bash-completion_2.1.=
+bb b/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
+> index 9a0ff35..fbe4278 100644
+> --- a/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
+> +++ b/meta-oe/recipes-support/bash-completion/bash-completion_2.1.bb
+> @@ -23,9 +23,12 @@ do_install_append() {
+> =20
+>  	# Delete files already provided by util-linux
+>  	local i
+> -	for i in cal dmesg eject hexdump hwclock ionice look renice rtcwake; do
+> +	for i in cal dmesg eject hexdump hwclock ionice look renice rtcwake su;=
+ do
+>  		rm ${D}${datadir}/${BPN}/completions/$i
+>  	done
+> +
+> +	# Delete files for networkmanager
+> +	rm ${D}${datadir}/${BPN}/completions/nmcli
+>  }
+> =20
+>  RDEPENDS_${PN} =3D "bash"
+> --=20
+> 1.8.3.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-to the top of the file and it compiles if you need it.  I'm having 
-issues with my dev box and didn't get the yocto patch out.  I should be 
-able to get it out this weekend if I don't get it out before.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--d7fO2LonciW1X6nX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAlQuCCwACgkQN1Ujt2V2gBzEfQCfV0v0sqpDu8ImSIO+QBWDjjkV
+0gIAnRd1AikHo69cDMJ3rGQfp9nhK8Mu
+=CqBZ
+-----END PGP SIGNATURE-----
+
+--d7fO2LonciW1X6nX--
