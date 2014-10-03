@@ -1,24 +1,36 @@
-Return-Path: <changhyeok.bae@lge.com>
-Received: from lgeamrelo04.lge.com (lgeamrelo04.lge.com [156.147.1.127])
-	by mail.openembedded.org (Postfix) with ESMTP id CC8F2601A8
+Return-Path: <eduardo@monkey.io>
+Received: from mail-yh0-f47.google.com (mail-yh0-f47.google.com
+	[209.85.213.47])
+	by mail.openembedded.org (Postfix) with ESMTP id DAD98708B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Oct 2014 10:56:51 +0000 (UTC)
-Received: from unknown (HELO CHBae0915) (10.177.232.191)
-	by 156.147.1.127 with ESMTP; 3 Oct 2014 19:56:51 +0900
-X-Original-SENDERIP: 10.177.232.191
-X-Original-MAILFROM: changhyeok.bae@lge.com
-From: "Changhyeok Bae" <changhyeok.bae@lge.com>
-To: <martin.jansa@gmail.com>
-References: <1411952961-5092-1-git-send-email-changhyeok.bae@lge.com>
-	<20141001152158.GE25706@jama>
-In-Reply-To: <20141001152158.GE25706@jama>
-Date: Fri, 3 Oct 2014 19:57:11 +0900
-Message-ID: <00cd01cfdef8$c86aeca0$5940c5e0$@lge.com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AQIuLIPQUHzAPiMY3p0nzgT9U9INAgKXt/EBm0zaW/A=
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] gdal: update to version 1.11.0
+	Fri,  3 Oct 2014 13:52:18 +0000 (UTC)
+Received: by mail-yh0-f47.google.com with SMTP id c41so354631yho.34
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 Oct 2014 06:52:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=zQP9Ujz2MESan+XsLVo7R/bHWICJXN+3zPa9WyPiqsc=;
+	b=EseDJINiENOsSLOKvUdeeCk5d8Hs7P4lk1qLx8IMfl5P4DctHo1Kpi8qpnyvtvpkck
+	PY8rCwqhcjMRHKofBqeu4xpZJACOuJIzB5Y2f33ImyZ+WHLyyJP0CN1slJTFXY9DBOGR
+	XJwGvhxeGx0LlZRdpivldnv/JFQKu5x/j9EMiWEBd8hS/OD0No+aEw0TmOYQB4NegiH5
+	Z1Mkvdn1ydG0pftSE46+U/Aw4Z8FslNAJ0G5k3m7KfGVd4nySaj5w1hslEzBdddUJZgn
+	otoS3gLcMBfJ5WXKwbOcYRsnEawE7Aepj6ca5zGTvogmCRF45DX14p23GEkKrRhc7r6X
+	KlXQ==
+X-Gm-Message-State: ALoCoQm3wjgGqn40PL2d1qv3Syxb7Oll5orBUu/dqSGvvc8MhoNc49HpNJYuQ77GDHI4187/icMs
+X-Received: by 10.236.228.100 with SMTP id e94mr8355669yhq.8.1412344339910;
+	Fri, 03 Oct 2014 06:52:19 -0700 (PDT)
+Received: from monotop.amnet.co.cr ([186.4.49.50])
+	by mx.google.com with ESMTPSA id e18sm3102050yhb.43.2014.10.03.06.52.18
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 03 Oct 2014 06:52:19 -0700 (PDT)
+From: Eduardo Silva <eduardo@monkey.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  3 Oct 2014 07:51:57 -0600
+Message-Id: <1412344317-21571-1-git-send-email-eduardo@monkey.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] PolarSSL: new recipe for polarssl v1.3.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,113 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Oct 2014 10:56:54 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: ko
+X-List-Received-Date: Fri, 03 Oct 2014 13:52:24 -0000
 
-I successfully built in qemux86. But I didn't test by qemuarm.
+PolarSSL is a lightweight crypto and SSL/TLS library with a strong
+focus on embedded systems.
 
-I'll test it on qemuarm.
+Signed-off-by: Eduardo Silva <eduardo@monkey.io>
+---
+ .../polarssl/polarssl_1.3.8.bb                     | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
 
-Q: If I change the recipes, then which environment should I test (qemux86,
-qemuarm, both)?
-
-Thanks
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-Martin Jansa
-Sent: Thursday, October 02, 2014 12:22 AM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCH] gdal: update to version 1.11.0
-
-On Mon, Sep 29, 2014 at 10:09:21AM +0900, Changhyeok Bae wrote:
-> ---
->  .../gdal/{gdal_1.10.1.bb => gdal_1.11.0.bb}        |    6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)  rename 
-> meta-oe/recipes-navigation/gdal/{gdal_1.10.1.bb => gdal_1.11.0.bb} 
-> (94%)
-> 
-> diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb 
-> b/meta-oe/recipes-navigation/gdal/gdal_1.11.0.bb
-> similarity index 94%
-> rename from meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
-> rename to meta-oe/recipes-navigation/gdal/gdal_1.11.0.bb
-> index 14f1a57..8526cee 100644
-> --- a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
-> +++ b/meta-oe/recipes-navigation/gdal/gdal_1.11.0.bb
-> @@ -1,14 +1,14 @@
->  SUMMARY = "GDAL is a translator library for raster geospatial data
-formats"
->  HOMEPAGE = "http://www.gdal.org/"
->  LICENSE = "MIT"
-> -LIC_FILES_CHKSUM =
-"file://LICENSE.TXT;md5=b9bd75ae5af7ff87ab259be0121c4106"
-> +LIC_FILES_CHKSUM =
-"file://LICENSE.TXT;md5=0952e17969fab12227096b5228f23149"
->  
->  DEPENDS = "proj sqlite3 tiff"
-
-Missing dependency on json-c and sqlite3 check doesn't seem to work
-correctly
-
-| checking for SQLite3 library >= 3.0.0... yes
-| cat: 
-| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/inc
-| lude/sqlite3.h: No such file or directory
-| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueab
-| i/gdal/1.11.0-r0/gdal-1.11.0/configure: line 25763: test: !=: unary 
-| operator expected
-| configure: WARNING: Can not find SQLITE_VERSION macro in sqlite3.h header
-to retrieve SQLite version!
-| checking for sqlite3_column_table_name in -lsqlite3... yes disabled 
-| checking Checking for DWGdirect... disabled
-| configure: "IBM Informix DataBlade support disabled."
-| configure: checking whether we should include ESRI SDE support...
-|         ESRI SDE support not requested.
-| checking for geos-config... 
-| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/bin/cro
-| ssscripts/geos-config checking for GEOS version >= 3.1.0... yes 
-| checking for GEOSversion in -lgeos_c... yes
-| configure: Using C API from GEOS 3.4.2 checking for OpenCL support... 
-| no checking for FreeXL support... checking for 
-| json_object_set_serializer in -ljson-c... yes using pre-installed 
-| libjson-c
-| configure: error: could not find json-c/json.h Configure failed. The 
-| contents of all config.log files follows to aid debugging 
-| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueab
-| i/gdal/1.11.0-r0/gdal-1.11.0/config.log
-| This file contains any messages produced by compilers while running 
-| configure, to aid debugging if configure makes a mistake.
-| 
-| It was created by configure, which was generated by GNU Autoconf 2.69.  
-| Invocation command line was
-
-
->  
->  SRC_URI = "ftp://download.osgeo.org/gdal/${PV}/${BP}.tar.xz"
->  
-> -SRC_URI[md5sum] = "f354c614aea76e5630e4edbf06e5c292"
-> -SRC_URI[sha256sum] =
-"e6c9c6c4480228c943af29120d87435ddfe9ca460458bc60b91639fb8d443791"
-> +SRC_URI[md5sum] = "31f2c4a7230b40e5fdc3cf12a100f96b"
-> +SRC_URI[sha256sum] =
-"b5186b5817e94743de1bceef66aeee1461687e14f73bf81034fcf0377eacbcc3"
->  
->  inherit autotools-brokensep lib_package binconfig
->  
-> --
-> 1.7.9.5
-> 
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+diff --git a/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+new file mode 100644
+index 0000000..d05f416
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Lightweight crypto and SSL/TLS library"
++DESCRIPTION = "PolarSSL is a fork of the abandonned project XySSL. It \
++is a lean crypto library providing SSL and TLS support \
++in your programs."
++
++HOMEPAGE = "https://polarssl.org"
++BUGTRACKER = "https://github.com/polarssl/polarssl/issues"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
++
++SECTION = "net"
++
++SRC_URI = "https://polarssl.org/download/polarssl-${PV}-gpl.tgz"
++
++SRC_URI[md5sum] = "d1a2b4f21727e888f143414d2e3144e6"
++SRC_URI[sha256sum] = "318171db41335cacbb5b0047c94f1faf91442ab70a223b5223436703c9406ff1"
++
++RDEPENDS_${PN} += "libcrypto"
++EXTRA_OECMAKE = "-DUSE_SHARED_POLARSSL_LIBRARY=on"
++
++inherit cmake
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.9.1
 
 
