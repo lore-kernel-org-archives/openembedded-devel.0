@@ -1,32 +1,41 @@
-Return-Path: <adam.yh.lee@gmail.com>
-Received: from mail-vc0-f173.google.com (mail-vc0-f173.google.com
-	[209.85.220.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EFC1601A8
+Return-Path: <blloyd@familyhonor.net>
+X-Greylist: delayed 2304 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 03 Oct 2014 00:42:53 UTC
+Received: from mho-02-ewr.mailhop.org (mho-02-ewr.mailhop.org [204.13.248.72])
+	by mail.openembedded.org (Postfix) with ESMTP id E56DA601A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Oct 2014 18:59:18 +0000 (UTC)
-Received: by mail-vc0-f173.google.com with SMTP id ij19so1808519vcb.18
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Oct 2014 11:59:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=r5NxMhsRAqX4a5DGE9IyW9DhLP9aE88XeX0xEuHlrG0=;
-	b=d09b3KGk6NjzJGAsAchka171cG3BLC3BUH+a/zgggLqljYpMOZCSv/Y8Ky9m07pLoy
-	DG2NcVRcKFPPnyGJfo08J3aeuONr2EEl40Ol+KZoEMstG2n3i6h9+lfT1e4gJ+usUDJo
-	tvff7+I2lfPo43O/yT09/YPdop1hbQeDmsq+KGkiUDSAxvd8GVybsV+nTbBVpy2FBxrf
-	WjIzM5e9gev3hkyN4xA7WVVvAg3ysaU4eAKt6SWOtqFhUySSP1N9OyYQHJMlIKHBCs1a
-	JeIT/TB+D9bAvIxHcssCMf4BAU8cpSlWwLHzrh2jJyCSI2dLT7UN7P/YocI705ogOUsw
-	Ldrw==
+	Fri,  3 Oct 2014 00:42:53 +0000 (UTC)
+Received: from dynamic30-98-142-75.dobsonteleco.com ([98.142.75.30]
+	helo=lloydserv.home.familyhonor.net)
+	by mho-02-ewr.mailhop.org with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.72) (envelope-from <blloyd@familyhonor.net>)
+	id 1XZqMI-0003wD-SO; Fri, 03 Oct 2014 00:04:30 +0000
+Received: from mail.familyhonor.net (lloydserv.home.familyhonor.net
+	[127.0.0.1]) (authenticated bits=0)
+	by lloydserv.home.familyhonor.net (8.14.7/8.14.6) with ESMTP id
+	s9304S1W005723
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 2 Oct 2014 19:04:29 -0500
+X-Mail-Handler: Dyn Standard SMTP by Dyn
+X-Originating-IP: 98.142.75.30
+X-Report-Abuse-To: abuse@dyndns.com (see
+	http://www.dyndns.com/services/sendlabs/outbound_abuse.html for
+	abuse reporting information)
+X-MHO-User: U2FsdGVkX1/N5DvL701/BkAIBU3QuGCiHVTObE4HH+k=
 MIME-Version: 1.0
-X-Received: by 10.221.24.7 with SMTP id rc7mr481726vcb.54.1412276359480; Thu,
-	02 Oct 2014 11:59:19 -0700 (PDT)
-Received: by 10.52.112.65 with HTTP; Thu, 2 Oct 2014 11:59:19 -0700 (PDT)
-Date: Thu, 2 Oct 2014 11:59:19 -0700
-Message-ID: <CAFeBWL7RoTiY--zPVrB0CY4qaAUTXvzW5Y8F+MCvQjvAC-FVNw@mail.gmail.com>
-From: Adam Lee <adam.yh.lee@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Packages builds on one MACHINE but not on the other
+Date: Thu, 02 Oct 2014 19:04:28 -0500
+From: blloyd <blloyd@familyhonor.net>
+To: Otavio Salvador <otavio@ossystems.com.br>
+In-Reply-To: <CAP9ODKoNT2hwQ+a-ynCbCHXDLnE38XPvcY7=Q5AQtKMwpcEZwA@mail.gmail.com>
+References: <1402343170-17707-1-git-send-email-blloyd@familyhonor.net>
+	<20141002062154.GG25706@jama>
+	<CAP9ODKoNT2hwQ+a-ynCbCHXDLnE38XPvcY7=Q5AQtKMwpcEZwA@mail.gmail.com>
+Message-ID: <d1c3c423c04a32e16ceb3c0eba976204@mail.familyhonor.net>
+X-Sender: blloyd@familyhonor.net
+User-Agent: Roundcube Webmail/0.9.5
+Cc: otavio.salvador@gmail.com,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] Upgrade geode video driver to 2.11.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,54 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Oct 2014 18:59:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 03 Oct 2014 00:42:59 -0000
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello everyone, I have been trying to put a webserver (nginx) in
-conjunction with uwsgi on my OMAP4 board. The issue I am having is that
-uwsgi package (from meta-virtualization / meta-openstack) builds ok on
-qumu86, but neither on qumuarm nor on my OMAP4 based board. The exact
-problem is the binary contains an RPATH to the builder's local path. I
-guess I can disable 'insane' checking, but I am hoping someone can provide
-some insights as to where to look to solve the issue.
+On 2014-10-02 12:37, Otavio Salvador wrote:
+> On Thu, Oct 2, 2014 at 3:21 AM, Martin Jansa <martin.jansa@gmail.com> 
+> wrote:
+>> On Mon, Jun 09, 2014 at 02:46:10PM -0500, Brian Lloyd wrote:
+>>> From: blloyd <blloyd@familyhonor.net>
+>>> 
+>>> The latest driver corrected a number of issues and compiles without 
+>>> warnings with just one patch.  The header included by the given patch 
+>>> is already included in the geode master line, so will not be be 
+>>> required after the next geode version release.
+>> 
+>> xf86-video-geode is broken again, would you mind fixing it to build 
+>> with
+>> glibc-2.20?
+>> 
+>> |                  from 
+>> /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/xf86-video-geode/2_2.11.16-r21.0/xf86-video-geode-2.11.16/src/lx_memory.c:26:
+>> | 
+>> /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/xorg/os.h:579:1: 
+>> error: expected identifier or '(' before '__extension__'
+>> |  strndup(const char *str, size_t n);
+>> |  ^
+> 
+> I am not using it anymore so it'd be great if Brian could handle it.
 
-Adam
+Was already working on it.  My patch has already been accepted upstream 
+for 2.11.17.
+I'll get a patch for yocto 2.11.16 to use until 2.11.17 is released, as 
+that is probably a very long way away.
 
-DEBUG: Executing python function sstate_task_prefunc
-> DEBUG: Python function sstate_task_prefunc finished
-> DEBUG: Executing python function do_package
-> DEBUG: Executing python function package_get_auto_pr
-> DEBUG: Python function package_get_auto_pr finished
-> DEBUG: Executing python function perform_packagecopy
-> DEBUG: Python function perform_packagecopy finished
-> DEBUG: Executing python function split_and_strip_files
-> DEBUG: runstrip: 'arm-poky-linux-gnueabi-strip' --remove-section=.comment
-> --remove-section=.note
-> '/media/Build/master/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/uwsgi/2.0.4+gitAUTOINC+7604c67018-r0/package/usr/bin/uwsgi'
-> DEBUG: Python function split_and_strip_files finished
-> DEBUG: Executing python function fixup_perms
-> DEBUG: Python function fixup_perms finished
-> DEBUG: Executing python function package_do_split_locales
-> DEBUG: No locale files in this package
-> DEBUG: Python function package_do_split_locales finished
-> DEBUG: Executing python function populate_packages
-> DEBUG: Python function populate_packages finished
-> DEBUG: Executing python function do_package_qa
-> NOTE: DO PACKAGE QA
-> NOTE: Checking Package: uwsgi-staticdev
-> NOTE: Checking Package: uwsgi-dev
-> NOTE: Checking Package: uwsgi-dbg
-> NOTE: arm-poky-linux-gnueabi-objdump -p
-> /media/Build/master/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/uwsgi/2.0.4+gitAUTOINC+7604c67018-r0/packages-split/uwsgi-dbg/usr/bin/.debug/uwsgi
-> NOTE: Checking Package: uwsgi-doc
-> NOTE: Checking Package: uwsgi
-> NOTE: arm-poky-linux-gnueabi-objdump -p
-> /media/Build/master/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/uwsgi/2.0.4+gitAUTOINC+7604c67018-r0/packages-split/uwsgi/usr/bin/uwsgi
-> ERROR: QA Issue: package uwsgi contains bad RPATH
-> /media/Build/master/build/tmp/sysroots/duovero/usr/lib in file
-> /media/Build/master/build/tmp/work/armv7a-vfp-neon-poky-linux-gnueabi/uwsgi/2.0.4+gitAUTOINC+7604c67018-r0/packages-split/uwsgi/usr/bin/uwsgi
-> ERROR: QA run found fatal errors. Please consider fixing them.
-> DEBUG: Python function do_package_qa finished
-> DEBUG: Python function do_package finished
-> ERROR: Function failed: do_package_qa
+In the meantime, add
+
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+to the top of the file and it compiles if you need it.  I'm having 
+issues with my dev box and didn't get the yocto patch out.  I should be 
+able to get it out this weekend if I don't get it out before.
+
+
 
