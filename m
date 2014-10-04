@@ -1,36 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 7107F716CB
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id DDC0271400
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Oct 2014 02:25:05 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id m15so2818082wgh.14
+	Sat,  4 Oct 2014 02:25:07 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id fb4so389323wid.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Oct 2014 19:25:07 -0700 (PDT)
+	Fri, 03 Oct 2014 19:25:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=iNcqbUYidlLecSs4sho99UdUkl7xQE7ksoavgPrUMn8=;
-	b=zFzikYPqSGBURVKuQLVho3iuWPCMkf+7YKILiGDaD42GcA1NobyMa3/uMKe7Ks7i1t
-	HbFJqpwAXJknUzmrwa/ZwKnX/YvC6Vb/FgP9t4fhsYeU0IW2LzG8HyIXjhjmR3JMuxoU
-	9yJihnChkxqfCyhPOEbjZ2CZTquqWTwNxljpnep7UhGps/eBwnr4I1x2jLQBjOzs4Ft6
-	uw+nPFjPQKHJqVG7lve15F8on89ORC9OlRRsue72P0368hZH4FHnn3rUgDs6M2vcuFsC
-	9vG3Syr335++zzgM0r6Pv/LgOuHtHZpvpk9hyOrqopbv76m5cE2N0b1FhBj87uO1/0iq
-	hCyQ==
-X-Received: by 10.194.58.130 with SMTP id r2mr7216707wjq.29.1412389507144;
-	Fri, 03 Oct 2014 19:25:07 -0700 (PDT)
+	bh=CWnEIYZ6wpZ8V+cP2JdnQeTmDKtNOJFkmY7igqembWg=;
+	b=ihGV9w9Tub6zikkx+w2FN+9ceViKSQWU7X4JRqQG6HbEiW34JZSyxxJ1tKIJ5N9PCh
+	Xxxcmuu7DJfL7x+ALDpc4MoQVRp7IEplCiFB1gYlFlWcDXkLXkKYptkh0t1baDeqMuwO
+	K/5HCKm/vK9IrVsO0JpI8cCM/Pd5ZY8KcDwT0JXlKwro5T1TeN73NFGX+ut9x+sB9l8o
+	bMVaOBQuJpv99GFuzMBse1KCOfU7Q0lXbYFqAXW7olo4SRqyJ2+WYQB4Pwl0aQ9pT3RB
+	jjTIhHZoFaNd8dB4vFY+CVGDfEyOwRvRupL8gGgeYmSwB8Kzf7efU0V88MblhwOHmptu
+	IHgA==
+X-Received: by 10.194.80.71 with SMTP id p7mr11722150wjx.35.1412389508242;
+	Fri, 03 Oct 2014 19:25:08 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	am1sm9603569wjc.29.2014.10.03.19.25.06 for <multiple recipients>
+	xm4sm3715507wib.9.2014.10.03.19.25.07 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 03 Oct 2014 19:25:06 -0700 (PDT)
+	Fri, 03 Oct 2014 19:25:07 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Oct 2014 04:25:56 +0200
-Message-Id: <1412389558-13237-5-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat,  4 Oct 2014 04:25:57 +0200
+Message-Id: <1412389558-13237-6-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.1.1
 In-Reply-To: <1412389558-13237-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1412389558-13237-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-qt5][PATCH 5/7] qtbase: Drop dont-process configure option
+Subject: [meta-qt5][PATCH 6/7] qtwayland-native: remove qtwaylandscanner symlink
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,58 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Oct 2014 02:25:07 -0000
+X-List-Received-Date: Sat, 04 Oct 2014 02:25:08 -0000
 
-* it was removed completely in 5.4 with:
-commit b7d86139772c3ce662ea7f092658699d351bbb1d
-Author: Oswald Buddenhagen <oswald.buddenhagen@digia.com>
-Date:   Thu Jun 19 11:46:10 2014 +0200
-
-    nuke -process/-fully-process/-dont-process options
+* it doesn't seem to be required anymore
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase.inc | 1 -
- recipes-qt/qt5/qtbase-native.inc    | 1 -
- recipes-qt/qt5/qtbase.inc           | 1 -
- 3 files changed, 3 deletions(-)
+ recipes-qt/qt5/qtwayland-native_git.bb | 5 -----
+ 1 file changed, 5 deletions(-)
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
-index 6987c9f..faecc64 100644
---- a/recipes-qt/qt5/nativesdk-qtbase.inc
-+++ b/recipes-qt/qt5/nativesdk-qtbase.inc
-@@ -142,7 +142,6 @@ do_configure() {
-     fi
+diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
+index 82750e7..761cfb6 100644
+--- a/recipes-qt/qt5/qtwayland-native_git.bb
++++ b/recipes-qt/qt5/qtwayland-native_git.bb
+@@ -6,8 +6,3 @@ require ${PN}.inc
  
-     ${S}/configure -v \
--        -dont-process \
-         -opensource -confirm-license \
-         -sysroot ${STAGING_DIR_NATIVE} \
-         -no-gcc-sysroot \
-diff --git a/recipes-qt/qt5/qtbase-native.inc b/recipes-qt/qt5/qtbase-native.inc
-index f58fdb7..3ba7f8e 100644
---- a/recipes-qt/qt5/qtbase-native.inc
-+++ b/recipes-qt/qt5/qtbase-native.inc
-@@ -34,7 +34,6 @@ do_generate_qt_config_file() {
- }
- 
- EXTRA_OECONF = " \
--    -dont-process \
-     -prefix ${prefix} \
-     -sysroot ${STAGING_DIR_NATIVE} \
-     -no-gcc-sysroot \
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index bafb59e..176aec4 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -168,7 +168,6 @@ do_configure() {
-     fi
- 
-     ${S}/configure -v \
--        -dont-process \
-         -opensource -confirm-license \
-         -sysroot ${STAGING_DIR_TARGET} \
-         -no-gcc-sysroot \
+ SRCREV = "98dca3b54f52f08117c1e0d3a1b4826ed12ef23f"
+ QT_MODULE_BRANCH = "5.4"
+-
+-# wayland-scanner and qtwaylandscanner must be in same path to work properly
+-do_install_append() {
+-    ln -sf ${D}${OE_QMAKE_PATH_QT_BINS}/qtwaylandscanner ${D}${bindir}/qtwaylandscanner
+-}
 -- 
 2.1.1
 
