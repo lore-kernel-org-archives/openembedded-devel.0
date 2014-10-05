@@ -1,61 +1,36 @@
-Return-Path: <changhyeok.bae@lge.com>
-Received: from lgeamrelo01.lge.com (lgeamrelo01.lge.com [156.147.1.125])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CB9F6017E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Oct 2014 17:48:41 +0000 (UTC)
-Received: from unknown (HELO lgekrhqms23b.lge.com) (10.185.110.101)
-	by 156.147.1.125 with ESMTP; 5 Oct 2014 02:48:41 +0900
-X-Original-SENDERIP: 10.185.110.101
-X-Original-MAILFROM: changhyeok.bae@lge.com
-X-AuditID: 9c93017c-b7fe56d000000ef0-bd-542ec0d553c9
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id EEC36702D2;
+	Sun,  5 Oct 2014 05:35:49 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id fb4so1950020wid.4
+	for <multiple recipients>; Sat, 04 Oct 2014 22:35:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=mQk+lbi/m4EWEzGp7nj0KpZug4zd56v/1+t9GgL/W9w=;
-	b=0+rqKWzjHP+srOWHvAVXYtTCt0S6C70n605CeR3bpyud62WnDeP/TWf9ffcGHdIORP
-	kR2oQ8amMRBKQcTcVCXN6N9E7UokmyyCmqtKzVej9HxxUqVv76Fp4qtE//45gBTSh5Uh
-	/DgAsZGq+pBAsZjfs3sRkKHlY4cn5ReItp+PqIEfLsBHDfPc/XOgtVzd6DsEJjGVJUD3
-	RwMkAzcNevjOEEFqtWjzUJernKYRa4gf13xmMfbNW+GG8z4P9qk0ZBDMy7NLc+ekdV0a
-	8I1L5ZakRS7mUK+RCS+oQD0MgthN9cUX1pBEPTaNiuT0sX4Gu2O+0EG3NxaiqVCS2FyV
-	Cefw==
-X-Received: by 10.194.119.193 with SMTP id kw1mr8533862wjb.82.1412350165192;
-	Fri, 03 Oct 2014 08:29:25 -0700 (PDT)
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=8JtaECrGtdif/Odj3ZTRkf3Dd66RL4gkE5eF7LwupWM=;
+	b=a+KarozZKYTaIz2jiRgpmCwvUsTXiA3W0qZE0j2XPWPuWcQ1ggD5oKp3TMehX0rJd/
+	NWI8a3ysDWMHexBBKhtG3XIinkRdE92K5JIiwbG5ViJIGNYPN+WVRG10z3DuNeUolguy
+	Js6+N3qzHOBdoTi+LIvjc+QUOYlirE2BjYDdLW1mlEfxPlSUS5ksiQsZxncc3rUk/cu3
+	tijKKK6IdJa1k+9ISpNOoohWnO8zIaymC/GTpMci3JV/4zyfVzXxixHYPMbZz9ylaJ5I
+	K9vOv2RDVL6w7dw+M8lKL+CU2HK2CulfIyrAU5hzGCbKgtxhB2UTdcy1iPC9DzfZmraQ
+	zu7A==
+X-Received: by 10.194.89.225 with SMTP id br1mr19922417wjb.51.1412487349841;
+	Sat, 04 Oct 2014 22:35:49 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	li17sm6903942wic.13.2014.10.04.22.35.49 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 04 Oct 2014 22:35:49 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-References: <1411952961-5092-1-git-send-email-changhyeok.bae@lge.com>
-	<20141001152158.GE25706@jama>
-	<00cd01cfdef8$c86aeca0$5940c5e0$@lge.com>
-In-Reply-To: <00cd01cfdef8$c86aeca0$5940c5e0$@lge.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupnk+JIrShJLcpLzFFi42Lxqg3S1b1+QC/E4NVFC4uJu+ocGD263l5h
-	CmCM4rJJSc3JLEst0rdL4MqYev8Lc8FczYp528+yNjC+U+pi5OSQEDCRuHfnGTuELSZx4d56
-	ti5GLg4hge2MEo8ntLNCOBMYJWZu/MwM4rAIbGOVaJlxgw2ipVri/pbnYLaQgKrE9IXrmCA6
-	9jJJHDn7hgkkwSagLXHt9wqoBluJ9iN/wOIsAioSL+d3A9kcHCJANXOPx4OEmQV0Jd6/38gI
-	YgsLOEqsbLgLdh6vgKbEtP4mRoj5ExklvpyewAqREJQ4OfMJC8gcZoESiaXPPCFMaYnl/zhA
-	KjgFzCRu7d8EtlUUaOuVCW/ZJzCKzkLSPAuheRZC8yywe7Qkbvx7yYQhrC2xbOFrZgjbVmLd
-	uvcsELaaxKZnp1kWMHKsYhT2cXd19A1y9fE0MNTLSU/VS87P3cQIjLQ5kxlrdjD2nrY+xCjA
-	wajEw3txrl6IEGtiWXFl7iFGSQ4mJVFe7m1AIb6k/JTKjMTijPii0pzU4kOMKkAbHm1YfYFR
-	iiUvPy9VSYR3wUqgOt6UxMqq1KJ8mDJpDhYlcV6fTUIhQgLpiSWp2ampBalFMFkmDvZDjDIc
-	HEoSvDP3A3ULFqWmp1akZeaUIKvhPMQowcEDtGE/SA1vcUFibnFmOkT+FKMxx6vD73qZOJ59
-	AJJCYMdIifNuAykVACnNKM2DmwZLp5cYZaWEeRkZGBiEeIDOyc0sQZV/xSgODA1h3qMgU3gy
-	80rg9r0COoUJ6JR39rogp5QkIqSkGhgrrG5a33T4W/p17sUt6RsdGdSniB59f6RKN37Oc8PI
-	2ef+f4xYWSD0WVN3zsqWk81ODf07Xy7YVP269Mn0tz9EPv36f7MsRtxUcsaeeQvVu314kySy
-	5rxp511Txv9TYFFGcNqb24f650fbrlxwftr3GY85TSZrGzILBmRoajy6tTAwafUx7zlsSizF
-	GYmGWsxFxYkAG1dud6IDAAA=
-X-Priority: 3 (Normal)
-Auto-Submitted: auto-generated
-From: "=?EUC-KR?B?uejDosf1?=" <changhyeok.bae@lge.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <OF66E26881.4ADB6BB5-ON49257D67.0061D701-49257D67.0061D701@lge.com>
-Date: Sun, 5 Oct 2014 02:48:40 +0900
-X-MIMETrack: Itemize by Notes Server on LGEKRHQMS23B/LGE/LG Group(Release
-	8.5.3FP3HF583 | August 9, 2013) at 2014/10/05 02:48:35,
-	Serialize by Router on LGEKRHQMS23B/LGE/LG Group(Release 8.5.3FP3HF583
-	| August 9, 2013) at 2014/10/05 02:48:40,
-	Serialize complete at 2014/10/05 02:48:40
+Date: Sun, 5 Oct 2014 07:36:48 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20141005053648.GQ25706@jama>
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re : Re: [meta-oe][PATCH] gdal: update to version 1.11.0
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, Failed tasks 2014-10-05
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,7 +44,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Oct 2014 17:48:49 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Sun, 05 Oct 2014 05:35:52 -0000
+X-Groupsio-MsgNum: 52358
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="vjTL8WsyNLGAy3AI"
+Content-Disposition: inline
 
+--vjTL8WsyNLGAy3AI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+Fix for gypsy (navit) and network-something was sent to oe-core
+(reverting one change in systemd).
+
+Fix for qtwebengine on qemux86-64 is on oe-devel ML.
+
+I'll look into gdal and subsurface issue shortly. Interestingly gdal is sti=
+ll
+failing even after I've removed pending patch to upgrade it.
+
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+=3D=3D Failed tasks 2014-10-05 =3D=3D
+
+=3D=3D=3D common (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb, do_=
+compile
+
+=3D=3D=3D common-x86 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-extended/subsurface/subsurface_git.=
+bb, do_compile
+
+=3D=3D=3D qemuarm (0) =3D=3D=3D
+
+=3D=3D=3D qemux86 (2) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-connectivity/networkmanager/network=
+manager_0.9.8.10.bb, do_populate_sysroot
+    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
+de_2.11.16.bb, do_compile
+
+=3D=3D=3D qemux86_64 (0) =3D=3D=3D
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||1     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141003_222714.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/2865/
+|-
+||qemux86       ||4     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141004_044247.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/2871/
+|-
+||qemux86_64    ||2     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141005_000933.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/2873/
+|}
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--vjTL8WsyNLGAy3AI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQw2PAACgkQN1Ujt2V2gBxOSACfW8ntpbeA4tKYOcUYOTNlpQMp
+d+MAoJ29nJnJKl2m4v427H762hY/hLuo
+=Gdt7
+-----END PGP SIGNATURE-----
+
+--vjTL8WsyNLGAy3AI--
