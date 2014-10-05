@@ -1,36 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id EEC36702D2;
-	Sun,  5 Oct 2014 05:35:49 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id fb4so1950020wid.4
-	for <multiple recipients>; Sat, 04 Oct 2014 22:35:49 -0700 (PDT)
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 65D666AC6B
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  5 Oct 2014 07:00:23 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id l18so4297410wgh.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 Oct 2014 00:00:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=8JtaECrGtdif/Odj3ZTRkf3Dd66RL4gkE5eF7LwupWM=;
-	b=a+KarozZKYTaIz2jiRgpmCwvUsTXiA3W0qZE0j2XPWPuWcQ1ggD5oKp3TMehX0rJd/
-	NWI8a3ysDWMHexBBKhtG3XIinkRdE92K5JIiwbG5ViJIGNYPN+WVRG10z3DuNeUolguy
-	Js6+N3qzHOBdoTi+LIvjc+QUOYlirE2BjYDdLW1mlEfxPlSUS5ksiQsZxncc3rUk/cu3
-	tijKKK6IdJa1k+9ISpNOoohWnO8zIaymC/GTpMci3JV/4zyfVzXxixHYPMbZz9ylaJ5I
-	K9vOv2RDVL6w7dw+M8lKL+CU2HK2CulfIyrAU5hzGCbKgtxhB2UTdcy1iPC9DzfZmraQ
-	zu7A==
-X-Received: by 10.194.89.225 with SMTP id br1mr19922417wjb.51.1412487349841;
-	Sat, 04 Oct 2014 22:35:49 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=4bbuOFtB/MuTyy0cMUHNxmvZd0uL8x68jtmY2G7WsXY=;
+	b=YWi+sTa60H6ccI6Sr6nfaLVFM/n2uHTnE7w849SA/zaJStE0w3A+W6qnOIHyAa+5eg
+	QW+Ow8szFTsL97EsdnbzNLDO/MXlMSOlpbL6qyHseFr4cUmELtWS+queGIE6hZB2YGbr
+	kHOhIphquXaSiN6xTgv5iR6b9dmIviZ0Eim8p47Js81E/8bFf9+lLLTlvJZLWr8vy0Zc
+	p+hfR8kp0HKzpAgJynPBKF1vZqmu5MrkgjwDZVISTrs//pdMOmPldEX50Jm0ZupPm0c4
+	uzSybikj/b9EM5QiU4RZpWSFP+TXMWkQ1xvIuikwMH0ZmMOjaUFfF78BJyfqEsUcrl2b
+	ACqQ==
+X-Received: by 10.180.10.162 with SMTP id j2mr10696036wib.72.1412492423559;
+	Sun, 05 Oct 2014 00:00:23 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	li17sm6903942wic.13.2014.10.04.22.35.49 for <multiple recipients>
+	ul1sm13033110wjc.9.2014.10.05.00.00.22 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 04 Oct 2014 22:35:49 -0700 (PDT)
+	Sun, 05 Oct 2014 00:00:22 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 5 Oct 2014 07:36:48 +0200
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20141005053648.GQ25706@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: State of bitbake world, Failed tasks 2014-10-05
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  5 Oct 2014 09:01:20 +0200
+Message-Id: <1412492480-6862-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.1.1
+Subject: [meta-oe][PATCH] gdal: upgrade to 1.11.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,77 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Oct 2014 05:35:52 -0000
-X-Groupsio-MsgNum: 52358
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vjTL8WsyNLGAy3AI"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 05 Oct 2014 07:00:26 -0000
 
---vjTL8WsyNLGAy3AI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* add json-c dependency and fix with-* params
+* LICENSE.txt change only added SUN copyright for
+  gdal/alg/thinplatespline.cpp file
 
-Fix for gypsy (navit) and network-something was sent to oe-core
-(reverting one change in systemd).
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../gdal/{gdal_1.10.1.bb => gdal_1.11.1.bb}                | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-navigation/gdal/{gdal_1.10.1.bb => gdal_1.11.1.bb} (87%)
 
-Fix for qtwebengine on qemux86-64 is on oe-devel ML.
+diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb b/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
+similarity index 87%
+rename from meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+rename to meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
+index 14f1a57..b181b3e 100644
+--- a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
++++ b/meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb
+@@ -1,14 +1,14 @@
+ SUMMARY = "GDAL is a translator library for raster geospatial data formats"
+ HOMEPAGE = "http://www.gdal.org/"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=b9bd75ae5af7ff87ab259be0121c4106"
++LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=0952e17969fab12227096b5228f23149"
+ 
+-DEPENDS = "proj sqlite3 tiff"
++DEPENDS = "proj sqlite3 tiff json-c"
+ 
+ SRC_URI = "ftp://download.osgeo.org/gdal/${PV}/${BP}.tar.xz"
+ 
+-SRC_URI[md5sum] = "f354c614aea76e5630e4edbf06e5c292"
+-SRC_URI[sha256sum] = "e6c9c6c4480228c943af29120d87435ddfe9ca460458bc60b91639fb8d443791"
++SRC_URI[md5sum] = "2e126d7c6605691d38f3e71b945f5c73"
++SRC_URI[sha256sum] = "20e1042cff15a71038459a299732fb342428aea9912f32df30c85790fcab6302"
+ 
+ inherit autotools-brokensep lib_package binconfig
+ 
+@@ -79,8 +79,10 @@ EXTRA_OECONF = "--without-perl \
+                 --with-pcraster=internal \
+                 --with-geotiff=internal \
+                 \
+-                --with-sqlite3=${STAGING_LIBDIR} \
+-                --with-libtiff=${STAGING_LIBDIR} \
++                --with-sqlite3=${STAGING_EXECPREFIXDIR} \
++                --with-libtiff=${STAGING_EXECPREFIXDIR} \
++                --with-libjson-c=${STAGING_EXECPREFIXDIR} \
++                --with-expat=${STAGING_EXECPREFIXDIR} \
+ "
+ 
+ EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
+-- 
+2.1.1
 
-I'll look into gdal and subsurface issue shortly. Interestingly gdal is sti=
-ll
-failing even after I've removed pending patch to upgrade it.
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
-
-=3D=3D Failed tasks 2014-10-05 =3D=3D
-
-=3D=3D=3D common (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb, do_=
-compile
-
-=3D=3D=3D common-x86 (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-extended/subsurface/subsurface_git.=
-bb, do_compile
-
-=3D=3D=3D qemuarm (0) =3D=3D=3D
-
-=3D=3D=3D qemux86 (2) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-connectivity/networkmanager/network=
-manager_0.9.8.10.bb, do_populate_sysroot
-    * meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-geo=
-de_2.11.16.bb, do_compile
-
-=3D=3D=3D qemux86_64 (0) =3D=3D=3D
-
-=3D=3D=3D Number of failed tasks =3D=3D=3D
-{| class=3Dwikitable
-|-
-||qemuarm       ||1     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
-og.world.20141003_222714.log/||http://errors.yoctoproject.org:80/Errors/Sea=
-rch/1/2865/
-|-
-||qemux86       ||4     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
-og.world.20141004_044247.log/||http://errors.yoctoproject.org:80/Errors/Sea=
-rch/1/2871/
-|-
-||qemux86_64    ||2     ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
-og.world.20141005_000933.log/||http://errors.yoctoproject.org:80/Errors/Sea=
-rch/1/2873/
-|}
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---vjTL8WsyNLGAy3AI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlQw2PAACgkQN1Ujt2V2gBxOSACfW8ntpbeA4tKYOcUYOTNlpQMp
-d+MAoJ29nJnJKl2m4v427H762hY/hLuo
-=Gdt7
------END PGP SIGNATURE-----
-
---vjTL8WsyNLGAy3AI--
