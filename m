@@ -1,40 +1,39 @@
 Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id C5E0971547
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id A068A601A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Oct 2014 09:55:15 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id cc10so6240337wib.4
+	Mon,  6 Oct 2014 09:55:14 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id a1so6026161wgh.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Oct 2014 02:55:16 -0700 (PDT)
+	Mon, 06 Oct 2014 02:55:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=1tic3y3R3Y5OKJKK75oIGKUSME4/LJjh1V1KAAUMyHA=;
-	b=WlVvK1qhvhDGYCxc4mX/NhLUOayqo1RI3J9LLiq0q9WNYUJjC5rRMaI9Nr8+S4B/BO
-	xDSs7hb1bI7AYlFkBw8BlzLDKkqIeVGc0qTDRSO5CUMh9F8Bl2XRsCoQmmlCrjb64qbr
-	SY3obT7OjBpIVnD7BWv2JnU9lGP+IYJsRA6pnrfQlWJ+gQzQ49V2RFbwy6Ltb10dxCMA
-	ux7zcinu5tBSL4OO2AWago8/9sIHHbMVVf3CqOhmj+dQtt0Sw0dP6ujUinmueeDKbGnO
-	5UUn5g21qfPJRyCunGGannlZ+blLsEAaaG+GfxPrGhWquw0A7xdXgqb1QuR/a/lXDy80
-	Truw==
-X-Gm-Message-State: ALoCoQm4QY8ZIZZlReIvY7SN14Zriy3nZZ5h3Vup+j7cRSqH8Ty73Ifgw7MHw3TR70cz0h6GM9bJ
-X-Received: by 10.194.209.207 with SMTP id mo15mr28088187wjc.6.1412589316347; 
-	Mon, 06 Oct 2014 02:55:16 -0700 (PDT)
+	bh=QBlUwsf9tZTxPJbpJ4yalcYfC9yY6Ud7G+Biu5+O2Fk=;
+	b=bY+5NVwVVrJlEPh1zgwoL3Ngq2WHUmsCwLKkYESfmZ1oz1UiEyAFHT2LkFw7vHTHUT
+	5GgCGvJ9szy0DA7xYz1f6pDczOuZ0hYrojFLWTheY7f+5JZi7UnD46c84DN51150ZBPV
+	ECi9PjHKvlWU8RZaSWfxu1CjPK8UcAuXoZXEuRukCw86GV3XRnBVtkSiGL3LfY4DBA5d
+	GQ+Iex8UTacCQYE4d/xFQbhKlzSVDRS6KxuaA2NjiDyrMs4BBNCKqQJrvyjuQYY50c/H
+	GkGSLcuKv4TTODjnA843MtpBJWQH0hQx5hLbWDr7HmqS2WI8BtMjdE853zGfBIPvUsxw
+	4pow==
+X-Gm-Message-State: ALoCoQlCjBS31MWTpRv/HohpEs+kPkoE5XaQbXYhcO1PCH7KFh3oSrke+6Ed/CEdi9pzZAPP15+x
+X-Received: by 10.194.47.134 with SMTP id d6mr28357061wjn.76.1412589315394;
+	Mon, 06 Oct 2014 02:55:15 -0700 (PDT)
 Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
-	by mx.google.com with ESMTPSA id o1sm16753129wja.25.2014.10.06.02.55.15
+	by mx.google.com with ESMTPSA id ka3sm16775801wjc.3.2014.10.06.02.55.14
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Oct 2014 02:55:15 -0700 (PDT)
+	Mon, 06 Oct 2014 02:55:14 -0700 (PDT)
 From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Oct 2014 11:55:01 +0200
-Message-Id: <1412589301-6669-3-git-send-email-koen.kooi@linaro.org>
+Date: Mon,  6 Oct 2014 11:55:00 +0200
+Message-Id: <1412589301-6669-2-git-send-email-koen.kooi@linaro.org>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1412589301-6669-1-git-send-email-koen.kooi@linaro.org>
 References: <1412589301-6669-1-git-send-email-koen.kooi@linaro.org>
 Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH 3/3] php: update to 5.4.33
+Subject: [meta-oe][PATCH 2/3] php 5.4.14 : remove references to sysroot in target package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,368 +49,47 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 06 Oct 2014 09:55:17 -0000
 
-One patch was a backport and can be dropped, add Upstream-status to the others.
+This fixes:
+
+WARNING: QA Issue: php requires /build/linaro/build/build/tmp-glibc/work/armv7at2hf-vfp-oe-linux-gnueabi/php/5.4.14-r5.0/image/usr/bin/php, but no providers in its RDEPENDS [file-rdeps]
+
+The only sysroot references left are for the stored configure line:
+
+[koen@thinkpad image]$ grep linaro . -rn
+Binair bestand ./usr/sbin/php-fpm bevat de gezochte tekst.
+./usr/include/php/main/build-defs.h:21:#define CONFIGURE_COMMAND " '/build/linaro/build/build/tmp-glibc/work/aarch64-oe-linux/php/5.4.14-r6/php-5.4.14/configure'  '--build=x86_64-linux' '--host=aarch64-oe-linux' '--target=aarch64-oe-linux' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/lib/php' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8' '--enable-mbstring' '--enable-wddx' '--enable-fpm' '--with-imap=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8' '--with-gettext=/usr/lib/..' '--with-imap-ssl=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8' '--with-zlib=/usr/lib/..' '--with-iconv=/usr/lib/..' \
+'--enable-sockets' '--enable-pcntl' '--enable-shared' '--enable-nls' '--with-mysql=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8/usr' '--with-mysqli=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8/usr/bin/crossscripts/mysql_config' '--with-pdo-mysql=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8/usr/bin/crossscripts/mysql_config' '--with-sqlite3=/usr/lib/..' '--with-pdo-sqlite=/usr/lib/..'"
+Binair bestand ./usr/bin/phar.phar bevat de gezochte tekst.
+./usr/bin/php-config:20:configure_options=" '--build=x86_64-linux' '--host=aarch64-oe-linux' '--target=aarch64-oe-linux' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/lib/php' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8' '--enable-mbstring' '--enable-wddx' '--enable-fpm' '--with-imap=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8' '--with-gettext=/usr/lib/..' '--with-imap-ssl=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8' '--with-zlib=/usr/lib/..' '--with-iconv=/usr/lib/..' \
+'--enable-sockets' '--enable-pcntl' '--enable-shared' '--enable-nls' '--with-mysql=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8/usr' '--with-mysqli=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8/usr/bin/crossscripts/mysql_config' '--with-pdo-mysql=/build/linaro/build/build/tmp-glibc/sysroots/genericarmv8/usr/bin/crossscripts/mysql_config' '--with-sqlite3=/usr/lib/..' '--with-pdo-sqlite=/usr/lib/..'"
+Binair bestand ./usr/bin/php-cgi bevat de gezochte tekst.
+Binair bestand ./usr/bin/php bevat de gezochte tekst.
 
 Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- ...cinclude-use-pkgconfig-for-libxml2-config.patch |  8 ++--
- ...01-php-don-t-use-broken-wrapper-for-mkdir.patch | 12 +++---
- .../php/php/acinclude-xml2-config.patch            | 15 +++++--
- .../php/php/fix-fpm-cross-compile.patch            | 38 -----------------
- meta-oe/recipes-devtools/php/php/iconv.patch       |  9 ++++-
- .../php/php/imap-fix-autofoo.patch                 | 47 ++++++++++++----------
- .../recipes-devtools/php/php/pear-makefile.patch   |  7 +++-
- .../recipes-devtools/php/php/phar-makefile.patch   | 11 ++++-
- .../recipes-devtools/php/php/php_exec_native.patch | 19 +++++----
- .../php/{php_5.4.14.bb => php_5.4.33.bb}           |  9 ++---
- 10 files changed, 81 insertions(+), 94 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
- rename meta-oe/recipes-devtools/php/{php_5.4.14.bb => php_5.4.33.bb} (95%)
+ meta-oe/recipes-devtools/php/php_5.4.14.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
-index 823007e..51a5e43 100644
---- a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
-+++ b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
-@@ -1,7 +1,7 @@
--From 0ff5d4adc9f5950d66738272b3ba88ef74f69117 Mon Sep 17 00:00:00 2001
-+From 003c9feaae6ed5c173edcea51193e49bc94ac39a Mon Sep 17 00:00:00 2001
- From: Koen Kooi <koen.kooi@linaro.org>
- Date: Tue, 17 Jun 2014 09:53:00 +0200
--Subject: [PATCH] acinclude: use pkgconfig for libxml2 config
-+Subject: [PATCH 3/8] acinclude: use pkgconfig for libxml2 config
- 
- Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
- Upstream-Status: pending
-@@ -10,10 +10,10 @@ Upstream-Status: pending
-  1 file changed, 23 insertions(+), 40 deletions(-)
- 
- diff --git a/acinclude.m4 b/acinclude.m4
--index 9c7a305..211dbd3 100644
-+index 206fcbf..a6c0d84 100644
- --- a/acinclude.m4
- +++ b/acinclude.m4
--@@ -2529,48 +2529,31 @@ dnl
-+@@ -2530,48 +2530,31 @@ dnl
-  dnl Common setup macro for libxml
-  dnl
-  AC_DEFUN([PHP_SETUP_LIBXML], [
-diff --git a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch b/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch
-index 9b71e9d..2f7d581 100644
---- a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch
-+++ b/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch
-@@ -1,18 +1,18 @@
--From 411ec4b31fdcc524f13fe5be80fd6769b7d16a5d Mon Sep 17 00:00:00 2001
-+From ebc101e0728b9db6c687cff525e5dfc8eb0edbf3 Mon Sep 17 00:00:00 2001
- From: Koen Kooi <koen@dominion.thruhere.net>
- Date: Thu, 3 Nov 2011 14:27:15 +0100
--Subject: [PATCH] php: don't use broken wrapper for mkdir
-+Subject: [PATCH 2/8] php: don't use broken wrapper for mkdir
- 
- Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
- ---
- 
- Upstream-Status: Inappropriate
- 
-- Makefile.global |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
-+ Makefile.global | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/Makefile.global b/Makefile.global
--index 8dad0e4..abdb5d2 100644
-+index ff858c2..ae554b4 100644
- --- a/Makefile.global
- +++ b/Makefile.global
- @@ -1,4 +1,4 @@
-@@ -22,5 +22,5 @@ index 8dad0e4..abdb5d2 100644
-  INSTALL_DATA = $(INSTALL) -m 644
-  
- -- 
--1.7.2.5
-+1.9.3
- 
-diff --git a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
-index bf519d2..30811a7 100644
---- a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
-+++ b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
-@@ -1,6 +1,10 @@
----- /orig-acinclude.m4 2007-02-20 15:03:25.000000000 +0200
--+++ /acinclude.m4      2007-02-20 15:03:24.000000000 +0200
--@@ -2359,12 +2359,9 @@
-+Upstream-status: Unknown
-+
-+diff --git a/acinclude.m4 b/acinclude.m4
-+index 4fd452e..206fcbf 100644
-+--- a/acinclude.m4
-++++ b/acinclude.m4
-+@@ -2532,12 +2532,9 @@ dnl
-  AC_DEFUN([PHP_SETUP_LIBXML], [
-  AC_CACHE_CHECK([for xml2-config path], ac_cv_php_xml2_config_path,
-  [
-@@ -14,5 +18,8 @@
- +      ac_cv_php_xml2_config_path="$PHP_LIBXML_DIR/xml2-config"
- +
-  ])
--
-+ 
-    if test -x "$ac_cv_php_xml2_config_path"; then
-+-- 
-+1.9.3
-+
-diff --git a/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch b/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
-deleted file mode 100644
-index b009347..0000000
---- a/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 0b44f16ea2f18a08eb1249db6621840527eab5e0 Mon Sep 17 00:00:00 2001
--From: Jerome Loyet <fat@php.net>
--Date: Wed, 23 May 2012 11:40:22 +0200
--Subject: [PATCH] - Fixed bug #61839 (Unable to cross-compile PHP with
-- --enable-fpm)
--
-----
--Upstream-Status: Applied 
--http://git.php.net/?p=php-src.git;a=commit;h=0b44f16ea2f18a08eb1249db6621840527eab5e0
--
-- NEWS               | 1 +
-- sapi/fpm/config.m4 | 4 ++++
-- 2 files changed, 5 insertions(+)
--
--diff --git a/sapi/fpm/config.m4 b/sapi/fpm/config.m4
--index 8962810..6c860c9 100644
----- a/sapi/fpm/config.m4
--+++ b/sapi/fpm/config.m4
--@@ -192,6 +192,8 @@ AC_DEFUN([AC_FPM_TRACE],
--       have_ptrace=no
--       have_broken_ptrace=yes
--       AC_MSG_RESULT([no])
--+    ], [
--+      AC_MSG_RESULT([skipped (cross compiling)])
--     ])
--   fi
-- 
--@@ -264,6 +266,8 @@ AC_DEFUN([AC_FPM_TRACE],
--     ], [
--       proc_mem_file=""
--       AC_MSG_RESULT([no])
--+    ], [
--+      AC_MSG_RESULT([skipped (cross compiling)])
--     ])
--   fi
--   
---- 
--1.7.11.5
-diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/recipes-devtools/php/php/iconv.patch
-index f3d2a16..255fbb0 100644
---- a/meta-oe/recipes-devtools/php/php/iconv.patch
-+++ b/meta-oe/recipes-devtools/php/php/iconv.patch
-@@ -1,8 +1,10 @@
-+Upstream-status: Unknown
-+
- diff --git a/acinclude.m4 b/acinclude.m4
--index 4c28b80..d6491a1 100644
-+index a6c0d84..df11abd 100644
- --- a/acinclude.m4
- +++ b/acinclude.m4
--@@ -2439,7 +2439,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
-+@@ -2452,7 +2452,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
-    dnl Check libc first if no path is provided in --with-iconv
-    dnl
-  
-@@ -25,3 +27,6 @@ index d673b0a..1fbef13 100644
-          if test -f "$i/include/iconv.h" || test -f "$i/include/giconv.h"; then
-            PHP_ICONV_PREFIX="$i"
-            break
-+-- 
-+1.9.3
-+
-diff --git a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
-index 3695b7b..da04c2d 100644
---- a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
-+++ b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
-@@ -1,8 +1,23 @@
--Index: php-5.2.11/ext/imap/config.m4
--===================================================================
----- php-5.2.11.orig/ext/imap/config.m4	2009-12-10 12:27:52.800974533 -0700
--+++ php-5.2.11/ext/imap/config.m4	2009-12-10 12:28:33.720976583 -0700
--@@ -103,7 +103,7 @@
-+Upstream-status: Unknown
-+
-+diff --git a/acinclude.m4 b/acinclude.m4
-+index df11abd..06e7236 100644
-+--- a/acinclude.m4
-++++ b/acinclude.m4
-+@@ -2357,7 +2357,7 @@ AC_DEFUN([PHP_SETUP_OPENSSL],[
-+       PHP_OPENSSL_DIR="/usr/local/ssl /usr/local /usr /usr/local/openssl"
-+     fi
-+ 
-+-    for i in $PHP_OPENSSL_DIR; do
-++    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
-+       if test -r $i/include/openssl/evp.h; then
-+         OPENSSL_INCDIR=$i/include
-+       fi
-+diff --git a/ext/imap/config.m4 b/ext/imap/config.m4
-+index 3fcf674..f08caf7 100644
-+--- a/ext/imap/config.m4
-++++ b/ext/imap/config.m4
-+@@ -109,7 +109,7 @@ if test "$PHP_IMAP" != "no"; then
-      PHP_NEW_EXTENSION(imap, php_imap.c, $ext_shared)
-      AC_DEFINE(HAVE_IMAP,1,[ ])
-  
-@@ -11,13 +26,13 @@ Index: php-5.2.11/ext/imap/config.m4
-        IMAP_INC_CHK()
-        el[]IMAP_INC_CHK(/include/c-client)
-        el[]IMAP_INC_CHK(/include/imap)
--@@ -192,13 +192,7 @@
-+@@ -198,13 +198,7 @@ if test "$PHP_IMAP" != "no"; then
-        AC_MSG_ERROR(Cannot find rfc822.h. Please check your c-client installation.)
-      fi
-  
---    if test -r "$IMAP_DIR/c-client/c-client.a"; then
-+-    if test ! -r "$IMAP_DIR/c-client/libc-client.a" && test -r "$IMAP_DIR/c-client/c-client.a" ; then
- -      ln -s "$IMAP_DIR/c-client/c-client.a" "$IMAP_DIR/c-client/libc-client.a" >/dev/null 2>&1
---    elif test -r "$IMAP_DIR/$PHP_LIBDIR/c-client.a"; then
-+-    elif test ! -r "$IMAP_DIR/$PHP_LIBDIR/libc-client.a" && test -r "$IMAP_DIR/$PHP_LIBDIR/c-client.a"; then
- -      ln -s "$IMAP_DIR/$PHP_LIBDIR/c-client.a" "$IMAP_DIR/$PHP_LIBDIR/libc-client.a" >/dev/null 2>&1
- -    fi
- -
-@@ -26,16 +41,6 @@ Index: php-5.2.11/ext/imap/config.m4
-        IMAP_LIB=$lib
-        IMAP_LIB_CHK($PHP_LIBDIR)
-        IMAP_LIB_CHK(c-client)
--Index: php-5.2.11/acinclude.m4
--===================================================================
----- php-5.2.11.orig/acinclude.m4	2009-12-10 12:37:13.134722881 -0700
--+++ php-5.2.11/acinclude.m4	2009-12-10 12:37:39.342007053 -0700
--@@ -2338,7 +2338,7 @@
--       PHP_OPENSSL_DIR="/usr/local/ssl /usr/local /usr /usr/local/openssl"
--     fi
-- 
---    for i in $PHP_OPENSSL_DIR; do
--+    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
--       if test -r $i/include/openssl/evp.h; then
--         OPENSSL_INCDIR=$i/include
--       fi
-+-- 
-+1.9.3
-+
-diff --git a/meta-oe/recipes-devtools/php/php/pear-makefile.patch b/meta-oe/recipes-devtools/php/php/pear-makefile.patch
-index 1928b98..9927d2d 100644
---- a/meta-oe/recipes-devtools/php/php/pear-makefile.patch
-+++ b/meta-oe/recipes-devtools/php/php/pear-makefile.patch
-@@ -1,5 +1,7 @@
-+Upstream-status: Unknown
-+
- diff --git a/pear/Makefile.frag b/pear/Makefile.frag
--index 1f6f70e..b19a77c 100644
-+index 00bacae..739eeca 100644
- --- a/pear/Makefile.frag
- +++ b/pear/Makefile.frag
- @@ -11,7 +11,7 @@ PEAR_PREFIX = -dp a${program_prefix}
-@@ -11,3 +13,6 @@ index 1f6f70e..b19a77c 100644
-  
-  install-pear:
-  	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
-+-- 
-+1.9.3
-+
-diff --git a/meta-oe/recipes-devtools/php/php/phar-makefile.patch b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
-index 6fde251..8a1136d 100644
---- a/meta-oe/recipes-devtools/php/php/phar-makefile.patch
-+++ b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
-@@ -1,8 +1,12 @@
-+Upstream-status: Unknown
-+
- diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
--index fc93d1d..9a8cd65 100755
-+old mode 100644
-+new mode 100755
-+index ed6de9f..9d03198
- --- a/ext/phar/Makefile.frag
- +++ b/ext/phar/Makefile.frag
--@@ -6,19 +6,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
-+@@ -5,19 +5,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
-  
-  PHP_PHARCMD_SETTINGS = -d 'open_basedir=' -d 'output_buffering=0' -d 'memory_limit=-1' -d phar.readonly=0 -d 'safe_mode=0'
-  PHP_PHARCMD_EXECUTABLE = ` \
-@@ -24,3 +28,6 @@ index fc93d1d..9a8cd65 100755
-  PHP_PHARCMD_BANG = `$(top_srcdir)/build/shtool echo -n -- "$(INSTALL_ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
-  
-  $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
-+-- 
-+1.9.3
-+
-diff --git a/meta-oe/recipes-devtools/php/php/php_exec_native.patch b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
-index 31be1b7..0506bdd 100644
---- a/meta-oe/recipes-devtools/php/php/php_exec_native.patch
-+++ b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
-@@ -1,12 +1,10 @@
-----
-- sapi/cli/config.m4 |    2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
-+Upstream-status: Inappriate
- 
----- php-5.4.14.orig/sapi/cli/config.m4
--+++ php-5.4.14/sapi/cli/config.m4
--@@ -34,11 +34,11 @@ if test "$PHP_CLI" != "no"; then
--     BUILD_CLI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_BINARY_OBJS) \$(PHP_CLI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CLI_PATH)"
--     ;;
-+diff --git a/sapi/cli/config.m4 b/sapi/cli/config.m4
-+index cdfa1f7..0fe11e3 100644
-+--- a/sapi/cli/config.m4
-++++ b/sapi/cli/config.m4
-+@@ -36,7 +36,7 @@ if test "$PHP_CLI" != "no"; then
-    esac
-  
-    dnl Set executable for tests
-@@ -15,5 +13,6 @@
-    PHP_SUBST(PHP_EXECUTABLE)
-  
-    dnl Expose to Makefile
--   PHP_SUBST(SAPI_CLI_PATH)
--   PHP_SUBST(BUILD_CLI)
-+-- 
-+1.9.3
-+
-diff --git a/meta-oe/recipes-devtools/php/php_5.4.14.bb b/meta-oe/recipes-devtools/php/php_5.4.33.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/php/php_5.4.14.bb
-rename to meta-oe/recipes-devtools/php/php_5.4.33.bb
-index b738701..52e39a5 100644
+diff --git a/meta-oe/recipes-devtools/php/php_5.4.14.bb b/meta-oe/recipes-devtools/php/php_5.4.14.bb
+index 98a8cdc..b738701 100644
 --- a/meta-oe/recipes-devtools/php/php_5.4.14.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.4.33.bb
-@@ -10,13 +10,11 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
-            libc-client openssl"
- DEPENDS_virtclass-native = "zlib-native libxml2-native"
++++ b/meta-oe/recipes-devtools/php/php_5.4.14.bb
+@@ -114,6 +114,15 @@ do_install_append_class-target() {
+         rmdir ${TMP}
+         TMP=`dirname ${TMP}`;
+     done
++
++    # Remove references to sysroot
++    for script in peardev pear pecl php-config ; do
++        sed -i -e s:${STAGING_BINDIR_NATIVE}:${bindir}:g -e  s:${STAGING_LIBDIR}:${libdir}:g ${D}${bindir}/$script
++    done
++
++    for header in ${D}${includedir}/php/main/*.h ${D}${includedir}/php/ext/iconv/*.h ; do
++        sed -i -e s:${STAGING_LIBDIR}:${libdir}:g -e s:${STAGING_INCDIR}:${includedir}:g $header
++    done
+ }
  
--PR = "r6"
--
- # The new PHP downloads server groups PHP releases by major version so find
- # the major version of the PHP recipe.
- PHP_MAJVER = "${@d.getVar('PV',1).split('.')[0]}"
- 
--SRC_URI = "http://museum.php.net/php${PHP_MAJVER}/php-${PV}.tar.bz2 \
-+SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://acinclude-xml2-config.patch \
-            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
-            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
-@@ -28,13 +26,12 @@ SRC_URI_append_class-target += " \
-             file://pear-makefile.patch \
-             file://phar-makefile.patch \
-             file://php_exec_native.patch \
--            file://fix-fpm-cross-compile.patch \
-             file://php-fpm.conf \
-             file://php-fpm-apache.conf \
-           "
- 
--SRC_URI[md5sum] = "cfdc044be2c582991a1fe0967898fa38"
--SRC_URI[sha256sum] = "5450f3843bc651eb3fb00601f0cce1930aaaf65c7c966c02fe4a46f9c81be20a"
-+SRC_URI[md5sum] = "c6878bb1cdb46bfc1e1a5cd67a024737"
-+SRC_URI[sha256sum] = "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d19b74c2278e40bb5"
- 
- S = "${WORKDIR}/php-${PV}"
- 
+ PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
 -- 
 1.9.3
 
