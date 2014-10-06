@@ -1,44 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 010AD65E0C;
-	Mon,  6 Oct 2014 15:22:30 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id n3so4980164wiv.9
-	for <multiple recipients>; Mon, 06 Oct 2014 08:22:31 -0700 (PDT)
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AF8B65E0C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Oct 2014 15:30:52 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id n3so4971349wiv.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Oct 2014 08:30:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=TIZ2Pz9okGSl8PnSS5xMytA9OmALsseWA8DvRAyszME=;
-	b=XtsUu1tTPKwxGRYefCsqRARL/zSHT0AQEiEkvfwysbFQjvxc2Y/Hh74eGlIbZGyi7s
-	Xj1vYlRXWi42uZieAAtZghw6lp1RcQRN+YYxzzNylm3TnbfRP6snPMS1TzXFERdGdzj1
-	QXSVVut2t+p4AoYK+FcAsP1onzAWZ/+EzHy1DxkUTtVTjRtDO+/YST/h2/9RZ0bNgMx0
-	j+B/XS72NkGbrdSYLXHz4jg1W8b/K4NmVGKcog3A3pJePdLU8zsD117fPDdh63AKVSBw
-	lVz6SCrez//NxhIec8WPFquoBIsQjZKujr8jBxtTszKGqEgUJ6QTCmXm+Q+7PiCFSoQt
-	JV6Q==
-X-Received: by 10.180.38.15 with SMTP id c15mr2106867wik.65.1412608951147;
-	Mon, 06 Oct 2014 08:22:31 -0700 (PDT)
+	bh=Gmrkada1EfRM5yKvJdZyDdrAlvrlYiQ1dRXiqdmon+8=;
+	b=LUeTrtgszfAi3L/4hmojYN2tdsmxUbhORUEQx2FuKHUj84U+lmbcKFPVGIYK/CnOzf
+	1Wc+YYflEJzAOTDFEUH35vJ0d6QVzwl4ql4Wo14eUUm3aigDTut5FUAd4Ed4dgxqUlVr
+	7wPF/5CHqjGnn/yn6leuAkhCsMnD/wAZ1NrK/UksmeuxoVGOMcW2w/2K0RVaYAwk1am2
+	JMUY38TL/T9uJC2ObMVwB5HnMbFfn3X9irUGOw5778FijH+jttOx4oh/bQbPx7Z8+IfJ
+	5LkW+GrzFGmqkDc+8XOilb3HypRuBW2RPbIj8mRJE55u4IdPHsD24v57t4KjikVFLxAT
+	vkXg==
+X-Received: by 10.194.59.109 with SMTP id y13mr4288425wjq.124.1412609453228;
+	Mon, 06 Oct 2014 08:30:53 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ey6sm11636547wib.16.2014.10.06.08.22.30 for <multiple recipients>
+	ga7sm4177478wic.5.2014.10.06.08.30.52 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Oct 2014 08:22:30 -0700 (PDT)
+	Mon, 06 Oct 2014 08:30:52 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 6 Oct 2014 17:23:31 +0200
-To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Message-ID: <20141006152331.GV25706@jama>
-References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
-	<1412151555-19865-5-git-send-email-schnitzeltony@googlemail.com>
-	<20141003200426.GM25706@jama> <20141003201007.GN25706@jama>
-	<CALbNGRTP7S6MAxFU-yo2xXWTMbo3h-A8uS94ALLxgOOiONL6nQ@mail.gmail.com>
+Date: Mon, 6 Oct 2014 17:31:54 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141006153154.GW25706@jama>
+References: <1412589301-6669-1-git-send-email-koen.kooi@linaro.org>
+	<1412589301-6669-3-git-send-email-koen.kooi@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRTP7S6MAxFU-yo2xXWTMbo3h-A8uS94ALLxgOOiONL6nQ@mail.gmail.com>
+In-Reply-To: <1412589301-6669-3-git-send-email-koen.kooi@linaro.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH][meta-oe 04/15] network-manager-applet: update to 0.9.8.10
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: Re: [meta-oe][PATCH 3/3] php: update to 5.4.33
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,227 +49,451 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Oct 2014 15:22:34 -0000
-X-Groupsio-MsgNum: 52375
+X-List-Received-Date: Mon, 06 Oct 2014 15:30:57 -0000
+X-Groupsio-MsgNum: 52376
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/neOAU127r7zg3jS"
+	protocol="application/pgp-signature"; boundary="b6rSbt24+kIAbQdu"
 Content-Disposition: inline
 
---/neOAU127r7zg3jS
-Content-Type: text/plain; charset=iso-8859-1
+--b6rSbt24+kIAbQdu
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 06, 2014 at 10:32:49AM +0200, Andreas M=FCller wrote:
-> On Fri, Oct 3, 2014 at 10:10 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->=20
-> > On Fri, Oct 03, 2014 at 10:04:26PM +0200, Martin Jansa wrote:
-> > > On Wed, Oct 01, 2014 at 10:19:04AM +0200, Andreas M=FCller wrote:
-> > > > * add libsecret to DEPENDS
-> > > > * remove libglade from DEPENDS
-> > > > * wireless (nm-signal-*.png) icons were updated upstream
-> > > > * inherit gnomebase instead of gnome
-> > > > * make bluetooth PACKAGECONFIG - disabled by default
-> > >
-> > > For some reason it has now the same problem as navit (through gypsy.l=
-a)
-> > >
-> > > | x86_64-oe-linux-libtool: compile:  x86_64-oe-linux-gcc -m64
-> > -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse
-> > --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-=
-64
-> > -DHAVE_CONFIG_H -I.
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/netw=
-ork-manager-applet/0.9.8.10-r0/network-manager-applet-0.9.8.10/src/utils
-> > -I../.. -pthread
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/gtk-2.0
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib=
-/gtk-2.0/include
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/pango-1.0
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/atk-1.0
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/cairo
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/pixman-1
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/libpng16
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/gdk-pixbuf-2.0
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/libpng16
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/pango-1.0
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/harfbuzz
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/pango-1.0
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/glib-2.0
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib=
-/glib-2.0/include
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/home/je=
-nkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/include/freetype2
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/freetype2
-> > -pthread
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/libnm-glib
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inc=
-lude/NetworkManager
-> > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64
-> > > | ../../x86_64-oe-linux-libtool  --tag=3DCC   --mode=3Dlink
-> > x86_64-oe-linux-gcc  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=
-=3Dsse
-> > --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-=
-64
-> > -Wall -std=3Dgnu89  -O2 -pipe -g -feliminate-unused-debug-types -Wshadow
-> > -Wmissing-declarations -Wmissing-prototypes -Wdeclaration-after-stateme=
-nt
-> > -Wstrict-prototypes -Wfloat-equal -Wno-unused-parameter -Wno-sign-compa=
-re
-> > -fno-strict-aliasing -Wno-unused-but-set-variable   -Wl,-O1
-> > -Wl,--hash-style=3Dgnu -Wl,--as-needed -o libutils.la  libutils_la-util=
-s.lo
-> > -lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo
-> > -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0
-> > -lglib-2.0 -lfontconfig -lfreetype  -lgio-2.0 -lnm-glib -lnm-util
-> > -lnm-glib-vpn -ldbus-glib-1 -ldbus-1 -lgobject-2.0 -Wl,--export-dynamic
-> > -lgmodule-2.0 -pthread -lglib-2.0
-> > > | /bin/grep:
-> > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/
-> > libgudev-1.0.la: No such file or directory
-> > > | sed: can't read
-> > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/
-> > libgudev-1.0.la: No such file or directory
-> > > | x86_64-oe-linux-libtool: link:
-> > `/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/
-> > libgudev-1.0.la' is not a valid libtool archive
-> > > | make[5]: *** [libutils.la] Error 1
-> > > | make[5]: Leaving directory
-> > `/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/netwo=
-rk-manager-applet/0.9.8.10-r0/build/src/utils'
-> > > | make[4]: *** [all-recursive] Error 1
-> > > | make[4]: Leaving directory
-> > `/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/netwo=
-rk-manager-applet/0.9.8.10-r0/build/src/utils'
-> >
-> > the libgudev-1.0.la was moved from /usr/lib to /lib in systemd 215-216
-> > updated
-> >
-> > --- a/packages/arm920tt-oe-linux-gnueabi/systemd/systemd-dbg/latest
-> > +++ b/packages/arm920tt-oe-linux-gnueabi/systemd/systemd-dbg/latest
-> > @@ -1,11 +1,11 @@
-> >  PE =3D 1
-> > -PV =3D 215+gitAUTOINC+252ff40a38
-> > +PV =3D 216+gitAUTOINC+5d0ae62c66
-> >  PR =3D r0
-> > -PKGV =3D 215+git0+252ff40a38
-> > -PKGR =3D r0.1
-> > +PKGV =3D 216+git0+5d0ae62c66
-> > +PKGR =3D r0.0
-> >  RPROVIDES =3D
-> >  RDEPENDS =3D
-> > -RRECOMMENDS =3D eglibc-dbg glib-2.0-dbg libacl-dbg libcap-dbg libffi-d=
-bg
-> > libgcc-dbg libkmod-dbg liblzma-dbg libpam-dbg libudev-dbg
-> > util-linux-libblkid-dbg zlib-dbg
-> > -PKGSIZE =3D 49629406
-> > +RRECOMMENDS =3D glib-2.0-dbg glibc-dbg libacl-dbg libcap-dbg libffi-dbg
-> > libgcc-dbg libkmod-dbg liblzma-dbg libpam-dbg libudev-dbg
-> > util-linux-libblkid-dbg zlib-dbg
-> > +PKGSIZE =3D 50305088
-> >  FILES =3D /usr/bin/.debug /usr/sbin/.debug /usr/lib/systemd/.debug
-> > /usr/lib/.debug /bin/.debug /sbin/.debug /lib/.debug
-> > /usr/lib/systemd/.debug /usr/lib/matchbox-panel/.debug
-> > /usr/lib/systemd/systemd/.debug /usr/src/debug
-> > /usr/lib/systemd/ptest/.debug /lib/.debug /lib/systemd/.debug
-> > /lib/systemd/*/.debug /lib/security/.debug/
-> > -RDEPENDS =3D libgudev-1.0 libsystemd libudev systemd (=3D
-> > 1:215+git0+252ff40a38-r0.1)
-> > -RRECOMMENDS =3D acl-dev base-files-dev base-passwd-dev dbus-dev eglibc=
--dev
-> > glib-2.0-dev kmod-dev libacl-dev libcap-dev libcgroup-dev libffi-dev
-> > libgcc-dev libgcrypt-dev libgudev-1.0-dev libkmod-dev liblzma-dev
-> > libpam-dev libsystemd-dev libudev-dev readline-dev shadow-dev
-> > shadow-sysroot-dev systemd-binfmt-dev udev-dev update-alternatives-opkg=
--dev
-> > util-linux-dev util-linux-libblkid-dev util-linux-mount-dev
-> > volatile-binds-dev xz-dev zlib-dev
-> > -PKGSIZE =3D 78365
-> > +RDEPENDS =3D libgudev-1.0 libsystemd libudev systemd (=3D
-> > 1:216+git0+5d0ae62c66-r0.0)
-> > +RRECOMMENDS =3D acl-dev base-files-dev base-passwd-dev dbus-dev
-> > glib-2.0-dev glibc-dev kmod-dev libacl-dev libcap-dev libcgroup-dev
-> > libffi-dev libgcc-dev libgcrypt-dev libgudev-1.0-dev libkmod-dev
-> > liblzma-dev libpam-dev libsystemd-dev libudev-dev readline-dev shadow-d=
-ev
-> > shadow-sysroot-dev systemd-binfmt-dev udev-dev update-alternatives-opkg=
--dev
-> > util-linux-dev util-linux-libblkid-dev util-linux-mount-dev
-> > volatile-binds-dev xz-dev zlib-dev
-> > +PKGSIZE =3D 79477
-> >  FILES =3D /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la
-> > /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal
-> > /lib/*.o /usr/lib/systemd/*.la /lib/*.la /lib/security/*.la
-> > /usr/share/dbus-1/interfaces/ /etc/rpm/macros.systemd
-> > -FILELIST =3D /lib/security/pam_systemd.la
-> > /usr/include/gudev-1.0/gudev/gudev.h
-> > /usr/include/gudev-1.0/gudev/gudevclient.h
-> > /usr/include/gudev-1.0/gudev/gudevdevice.h
-> > /usr/include/gudev-1.0/gudev/gudevenumerator.h
-> > /usr/include/gudev-1.0/gudev/gudevenums.h
-> > /usr/include/gudev-1.0/gudev/gudevenumtypes.h
-> > /usr/include/gudev-1.0/gudev/gudevtypes.h /usr/include/libudev.h
-> > /usr/include/systemd/_sd-common.h /usr/include/systemd/sd-daemon.h
-> > /usr/include/systemd/sd-id128.h /usr/include/systemd/sd-journal.h
-> > /usr/include/systemd/sd-login.h /usr/include/systemd/sd-messages.h /usr=
-/lib/
-> > libgudev-1.0.la /usr/lib/libgudev-1.0.so /usr/lib/libnss_myhostname.la
-> > /usr/lib/libsystemd.la /usr/lib/libsystemd.so /usr/lib/libudev.la
-> > /usr/lib/libudev.so /usr/lib/pkgconfig/gudev-1.0.pc
-> > /usr/lib/pkgconfig/libsystemd.pc /usr/lib/pkgconfig/libudev.pc
-> > /usr/share/pkgconfig/systemd.pc /usr/share/pkgconfig/udev.pc
-> > +FILELIST =3D /lib/libgudev-1.0.la /lib/libgudev-1.0.so /lib/security/
-> > pam_systemd.la /usr/include/gudev-1.0/gudev/gudev.h
-> > /usr/include/gudev-1.0/gudev/gudevclient.h
-> > /usr/include/gudev-1.0/gudev/gudevdevice.h
-> > /usr/include/gudev-1.0/gudev/gudevenumerator.h
-> > /usr/include/gudev-1.0/gudev/gudevenums.h
-> > /usr/include/gudev-1.0/gudev/gudevenumtypes.h
-> > /usr/include/gudev-1.0/gudev/gudevtypes.h /usr/include/libudev.h
-> > /usr/include/systemd/_sd-common.h /usr/include/systemd/sd-daemon.h
-> > /usr/include/systemd/sd-id128.h /usr/include/systemd/sd-journal.h
-> > /usr/include/systemd/sd-login.h /usr/include/systemd/sd-messages.h /usr=
-/lib/
-> > libnss_myhostname.la /usr/lib/libnss_mymachines.la /usr/lib/libsystemd.=
-la
-> > /usr/lib/libsystemd.so /usr/lib/libudev.la /usr/lib/libudev.so
-> > /usr/lib/pkgconfig/gudev-1.0.pc /usr/lib/pkgconfig/libsystemd.pc
-> > /usr/lib/pkgconfig/libudev.pc /usr/share/pkgconfig/systemd.pc
-> > /usr/share/pkgconfig/udev.pc
-> >
-> > Hmm - I made my tests with systemd 216 and had no errors. Shouldn't
-> pkg-config find libgudev <http://libgudev-1.0.la>?
+On Mon, Oct 06, 2014 at 11:55:01AM +0200, Koen Kooi wrote:
+> One patch was a backport and can be dropped, add Upstream-status to the o=
+thers.
 
-See http://patchwork.openembedded.org/patch/81291/ for more details.
+Can we build modphp here and drop separate recipe:
+meta-webserver/recipes-php/modphp/modphp_5.5.15.bb
+
+Currently they overlap in staged files, so only one of them will get
+built anyway.
+
+> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+> ---
+>  ...cinclude-use-pkgconfig-for-libxml2-config.patch |  8 ++--
+>  ...01-php-don-t-use-broken-wrapper-for-mkdir.patch | 12 +++---
+>  .../php/php/acinclude-xml2-config.patch            | 15 +++++--
+>  .../php/php/fix-fpm-cross-compile.patch            | 38 -----------------
+>  meta-oe/recipes-devtools/php/php/iconv.patch       |  9 ++++-
+>  .../php/php/imap-fix-autofoo.patch                 | 47 ++++++++++++----=
+------
+>  .../recipes-devtools/php/php/pear-makefile.patch   |  7 +++-
+>  .../recipes-devtools/php/php/phar-makefile.patch   | 11 ++++-
+>  .../recipes-devtools/php/php/php_exec_native.patch | 19 +++++----
+>  .../php/{php_5.4.14.bb =3D> php_5.4.33.bb}           |  9 ++---
+>  10 files changed, 81 insertions(+), 94 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/php/php/fix-fpm-cross-compil=
+e.patch
+>  rename meta-oe/recipes-devtools/php/{php_5.4.14.bb =3D> php_5.4.33.bb} (=
+95%)
+>=20
+> diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfi=
+g-for-libxml2-config.patch b/meta-oe/recipes-devtools/php/php/0001-acinclud=
+e-use-pkgconfig-for-libxml2-config.patch
+> index 823007e..51a5e43 100644
+> --- a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-l=
+ibxml2-config.patch
+> +++ b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-l=
+ibxml2-config.patch
+> @@ -1,7 +1,7 @@
+> -From 0ff5d4adc9f5950d66738272b3ba88ef74f69117 Mon Sep 17 00:00:00 2001
+> +From 003c9feaae6ed5c173edcea51193e49bc94ac39a Mon Sep 17 00:00:00 2001
+>  From: Koen Kooi <koen.kooi@linaro.org>
+>  Date: Tue, 17 Jun 2014 09:53:00 +0200
+> -Subject: [PATCH] acinclude: use pkgconfig for libxml2 config
+> +Subject: [PATCH 3/8] acinclude: use pkgconfig for libxml2 config
+> =20
+>  Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+>  Upstream-Status: pending
+> @@ -10,10 +10,10 @@ Upstream-Status: pending
+>   1 file changed, 23 insertions(+), 40 deletions(-)
+> =20
+>  diff --git a/acinclude.m4 b/acinclude.m4
+> -index 9c7a305..211dbd3 100644
+> +index 206fcbf..a6c0d84 100644
+>  --- a/acinclude.m4
+>  +++ b/acinclude.m4
+> -@@ -2529,48 +2529,31 @@ dnl
+> +@@ -2530,48 +2530,31 @@ dnl
+>   dnl Common setup macro for libxml
+>   dnl
+>   AC_DEFUN([PHP_SETUP_LIBXML], [
+> diff --git a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-w=
+rapper-for-mkdir.patch b/meta-oe/recipes-devtools/php/php/0001-php-don-t-us=
+e-broken-wrapper-for-mkdir.patch
+> index 9b71e9d..2f7d581 100644
+> --- a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-=
+for-mkdir.patch
+> +++ b/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-=
+for-mkdir.patch
+> @@ -1,18 +1,18 @@
+> -From 411ec4b31fdcc524f13fe5be80fd6769b7d16a5d Mon Sep 17 00:00:00 2001
+> +From ebc101e0728b9db6c687cff525e5dfc8eb0edbf3 Mon Sep 17 00:00:00 2001
+>  From: Koen Kooi <koen@dominion.thruhere.net>
+>  Date: Thu, 3 Nov 2011 14:27:15 +0100
+> -Subject: [PATCH] php: don't use broken wrapper for mkdir
+> +Subject: [PATCH 2/8] php: don't use broken wrapper for mkdir
+> =20
+>  Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>  ---
+> =20
+>  Upstream-Status: Inappropriate
+> =20
+> - Makefile.global |    2 +-
+> - 1 files changed, 1 insertions(+), 1 deletions(-)
+> + Makefile.global | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> =20
+>  diff --git a/Makefile.global b/Makefile.global
+> -index 8dad0e4..abdb5d2 100644
+> +index ff858c2..ae554b4 100644
+>  --- a/Makefile.global
+>  +++ b/Makefile.global
+>  @@ -1,4 +1,4 @@
+> @@ -22,5 +22,5 @@ index 8dad0e4..abdb5d2 100644
+>   INSTALL_DATA =3D $(INSTALL) -m 644
+>  =20
+>  --=20
+> -1.7.2.5
+> +1.9.3
+> =20
+> diff --git a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch=
+ b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
+> index bf519d2..30811a7 100644
+> --- a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
+> +++ b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
+> @@ -1,6 +1,10 @@
+> ---- /orig-acinclude.m4 2007-02-20 15:03:25.000000000 +0200
+> -+++ /acinclude.m4      2007-02-20 15:03:24.000000000 +0200
+> -@@ -2359,12 +2359,9 @@
+> +Upstream-status: Unknown
+> +
+> +diff --git a/acinclude.m4 b/acinclude.m4
+> +index 4fd452e..206fcbf 100644
+> +--- a/acinclude.m4
+> ++++ b/acinclude.m4
+> +@@ -2532,12 +2532,9 @@ dnl
+>   AC_DEFUN([PHP_SETUP_LIBXML], [
+>   AC_CACHE_CHECK([for xml2-config path], ac_cv_php_xml2_config_path,
+>   [
+> @@ -14,5 +18,8 @@
+>  +      ac_cv_php_xml2_config_path=3D"$PHP_LIBXML_DIR/xml2-config"
+>  +
+>   ])
+> -
+> +=20
+>     if test -x "$ac_cv_php_xml2_config_path"; then
+> +--=20
+> +1.9.3
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch=
+ b/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
+> deleted file mode 100644
+> index b009347..0000000
+> --- a/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
+> +++ /dev/null
+> @@ -1,38 +0,0 @@
+> -From 0b44f16ea2f18a08eb1249db6621840527eab5e0 Mon Sep 17 00:00:00 2001
+> -From: Jerome Loyet <fat@php.net>
+> -Date: Wed, 23 May 2012 11:40:22 +0200
+> -Subject: [PATCH] - Fixed bug #61839 (Unable to cross-compile PHP with
+> - --enable-fpm)
+> -
+> ----
+> -Upstream-Status: Applied=20
+> -http://git.php.net/?p=3Dphp-src.git;a=3Dcommit;h=3D0b44f16ea2f18a08eb124=
+9db6621840527eab5e0
+> -
+> - NEWS               | 1 +
+> - sapi/fpm/config.m4 | 4 ++++
+> - 2 files changed, 5 insertions(+)
+> -
+> -diff --git a/sapi/fpm/config.m4 b/sapi/fpm/config.m4
+> -index 8962810..6c860c9 100644
+> ---- a/sapi/fpm/config.m4
+> -+++ b/sapi/fpm/config.m4
+> -@@ -192,6 +192,8 @@ AC_DEFUN([AC_FPM_TRACE],
+> -       have_ptrace=3Dno
+> -       have_broken_ptrace=3Dyes
+> -       AC_MSG_RESULT([no])
+> -+    ], [
+> -+      AC_MSG_RESULT([skipped (cross compiling)])
+> -     ])
+> -   fi
+> -=20
+> -@@ -264,6 +266,8 @@ AC_DEFUN([AC_FPM_TRACE],
+> -     ], [
+> -       proc_mem_file=3D""
+> -       AC_MSG_RESULT([no])
+> -+    ], [
+> -+      AC_MSG_RESULT([skipped (cross compiling)])
+> -     ])
+> -   fi
+> -  =20
+> ---=20
+> -1.7.11.5
+> diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/recip=
+es-devtools/php/php/iconv.patch
+> index f3d2a16..255fbb0 100644
+> --- a/meta-oe/recipes-devtools/php/php/iconv.patch
+> +++ b/meta-oe/recipes-devtools/php/php/iconv.patch
+> @@ -1,8 +1,10 @@
+> +Upstream-status: Unknown
+> +
+>  diff --git a/acinclude.m4 b/acinclude.m4
+> -index 4c28b80..d6491a1 100644
+> +index a6c0d84..df11abd 100644
+>  --- a/acinclude.m4
+>  +++ b/acinclude.m4
+> -@@ -2439,7 +2439,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+> +@@ -2452,7 +2452,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+>     dnl Check libc first if no path is provided in --with-iconv
+>     dnl
+>  =20
+> @@ -25,3 +27,6 @@ index d673b0a..1fbef13 100644
+>           if test -f "$i/include/iconv.h" || test -f "$i/include/giconv.h=
+"; then
+>             PHP_ICONV_PREFIX=3D"$i"
+>             break
+> +--=20
+> +1.9.3
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch b/me=
+ta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+> index 3695b7b..da04c2d 100644
+> --- a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+> +++ b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+> @@ -1,8 +1,23 @@
+> -Index: php-5.2.11/ext/imap/config.m4
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- php-5.2.11.orig/ext/imap/config.m4	2009-12-10 12:27:52.800974533 -07=
+00
+> -+++ php-5.2.11/ext/imap/config.m4	2009-12-10 12:28:33.720976583 -0700
+> -@@ -103,7 +103,7 @@
+> +Upstream-status: Unknown
+> +
+> +diff --git a/acinclude.m4 b/acinclude.m4
+> +index df11abd..06e7236 100644
+> +--- a/acinclude.m4
+> ++++ b/acinclude.m4
+> +@@ -2357,7 +2357,7 @@ AC_DEFUN([PHP_SETUP_OPENSSL],[
+> +       PHP_OPENSSL_DIR=3D"/usr/local/ssl /usr/local /usr /usr/local/open=
+ssl"
+> +     fi
+> +=20
+> +-    for i in $PHP_OPENSSL_DIR; do
+> ++    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
+> +       if test -r $i/include/openssl/evp.h; then
+> +         OPENSSL_INCDIR=3D$i/include
+> +       fi
+> +diff --git a/ext/imap/config.m4 b/ext/imap/config.m4
+> +index 3fcf674..f08caf7 100644
+> +--- a/ext/imap/config.m4
+> ++++ b/ext/imap/config.m4
+> +@@ -109,7 +109,7 @@ if test "$PHP_IMAP" !=3D "no"; then
+>       PHP_NEW_EXTENSION(imap, php_imap.c, $ext_shared)
+>       AC_DEFINE(HAVE_IMAP,1,[ ])
+>  =20
+> @@ -11,13 +26,13 @@ Index: php-5.2.11/ext/imap/config.m4
+>         IMAP_INC_CHK()
+>         el[]IMAP_INC_CHK(/include/c-client)
+>         el[]IMAP_INC_CHK(/include/imap)
+> -@@ -192,13 +192,7 @@
+> +@@ -198,13 +198,7 @@ if test "$PHP_IMAP" !=3D "no"; then
+>         AC_MSG_ERROR(Cannot find rfc822.h. Please check your c-client ins=
+tallation.)
+>       fi
+>  =20
+> --    if test -r "$IMAP_DIR/c-client/c-client.a"; then
+> +-    if test ! -r "$IMAP_DIR/c-client/libc-client.a" && test -r "$IMAP_D=
+IR/c-client/c-client.a" ; then
+>  -      ln -s "$IMAP_DIR/c-client/c-client.a" "$IMAP_DIR/c-client/libc-cl=
+ient.a" >/dev/null 2>&1
+> --    elif test -r "$IMAP_DIR/$PHP_LIBDIR/c-client.a"; then
+> +-    elif test ! -r "$IMAP_DIR/$PHP_LIBDIR/libc-client.a" && test -r "$I=
+MAP_DIR/$PHP_LIBDIR/c-client.a"; then
+>  -      ln -s "$IMAP_DIR/$PHP_LIBDIR/c-client.a" "$IMAP_DIR/$PHP_LIBDIR/l=
+ibc-client.a" >/dev/null 2>&1
+>  -    fi
+>  -
+> @@ -26,16 +41,6 @@ Index: php-5.2.11/ext/imap/config.m4
+>         IMAP_LIB=3D$lib
+>         IMAP_LIB_CHK($PHP_LIBDIR)
+>         IMAP_LIB_CHK(c-client)
+> -Index: php-5.2.11/acinclude.m4
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- php-5.2.11.orig/acinclude.m4	2009-12-10 12:37:13.134722881 -0700
+> -+++ php-5.2.11/acinclude.m4	2009-12-10 12:37:39.342007053 -0700
+> -@@ -2338,7 +2338,7 @@
+> -       PHP_OPENSSL_DIR=3D"/usr/local/ssl /usr/local /usr /usr/local/open=
+ssl"
+> -     fi
+> -=20
+> --    for i in $PHP_OPENSSL_DIR; do
+> -+    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
+> -       if test -r $i/include/openssl/evp.h; then
+> -         OPENSSL_INCDIR=3D$i/include
+> -       fi
+> +--=20
+> +1.9.3
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php/pear-makefile.patch b/meta-=
+oe/recipes-devtools/php/php/pear-makefile.patch
+> index 1928b98..9927d2d 100644
+> --- a/meta-oe/recipes-devtools/php/php/pear-makefile.patch
+> +++ b/meta-oe/recipes-devtools/php/php/pear-makefile.patch
+> @@ -1,5 +1,7 @@
+> +Upstream-status: Unknown
+> +
+>  diff --git a/pear/Makefile.frag b/pear/Makefile.frag
+> -index 1f6f70e..b19a77c 100644
+> +index 00bacae..739eeca 100644
+>  --- a/pear/Makefile.frag
+>  +++ b/pear/Makefile.frag
+>  @@ -11,7 +11,7 @@ PEAR_PREFIX =3D -dp a${program_prefix}
+> @@ -11,3 +13,6 @@ index 1f6f70e..b19a77c 100644
+>  =20
+>   install-pear:
+>   	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
+> +--=20
+> +1.9.3
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php/phar-makefile.patch b/meta-=
+oe/recipes-devtools/php/php/phar-makefile.patch
+> index 6fde251..8a1136d 100644
+> --- a/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+> +++ b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+> @@ -1,8 +1,12 @@
+> +Upstream-status: Unknown
+> +
+>  diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
+> -index fc93d1d..9a8cd65 100755
+> +old mode 100644
+> +new mode 100755
+> +index ed6de9f..9d03198
+>  --- a/ext/phar/Makefile.frag
+>  +++ b/ext/phar/Makefile.frag
+> -@@ -6,19 +6,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
+> +@@ -5,19 +5,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
+>  =20
+>   PHP_PHARCMD_SETTINGS =3D -d 'open_basedir=3D' -d 'output_buffering=3D0'=
+ -d 'memory_limit=3D-1' -d phar.readonly=3D0 -d 'safe_mode=3D0'
+>   PHP_PHARCMD_EXECUTABLE =3D ` \
+> @@ -24,3 +28,6 @@ index fc93d1d..9a8cd65 100755
+>   PHP_PHARCMD_BANG =3D `$(top_srcdir)/build/shtool echo -n -- "$(INSTALL_=
+ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
+>  =20
+>   $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
+> +--=20
+> +1.9.3
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php/php_exec_native.patch b/met=
+a-oe/recipes-devtools/php/php/php_exec_native.patch
+> index 31be1b7..0506bdd 100644
+> --- a/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+> +++ b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+> @@ -1,12 +1,10 @@
+> ----
+> - sapi/cli/config.m4 |    2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> +Upstream-status: Inappriate
+> =20
+> ---- php-5.4.14.orig/sapi/cli/config.m4
+> -+++ php-5.4.14/sapi/cli/config.m4
+> -@@ -34,11 +34,11 @@ if test "$PHP_CLI" !=3D "no"; then
+> -     BUILD_CLI=3D"\$(LIBTOOL) --mode=3Dlink \$(CC) -export-dynamic \$(CF=
+LAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(PHP_R=
+PATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_BINARY_OBJS) \$(PHP_CLI_OBJS) \$(EXTRA_LI=
+BS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CLI_PATH)"
+> -     ;;
+> +diff --git a/sapi/cli/config.m4 b/sapi/cli/config.m4
+> +index cdfa1f7..0fe11e3 100644
+> +--- a/sapi/cli/config.m4
+> ++++ b/sapi/cli/config.m4
+> +@@ -36,7 +36,7 @@ if test "$PHP_CLI" !=3D "no"; then
+>     esac
+>  =20
+>     dnl Set executable for tests
+> @@ -15,5 +13,6 @@
+>     PHP_SUBST(PHP_EXECUTABLE)
+>  =20
+>     dnl Expose to Makefile
+> -   PHP_SUBST(SAPI_CLI_PATH)
+> -   PHP_SUBST(BUILD_CLI)
+> +--=20
+> +1.9.3
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php_5.4.14.bb b/meta-oe/recipes=
+-devtools/php/php_5.4.33.bb
+> similarity index 95%
+> rename from meta-oe/recipes-devtools/php/php_5.4.14.bb
+> rename to meta-oe/recipes-devtools/php/php_5.4.33.bb
+> index b738701..52e39a5 100644
+> --- a/meta-oe/recipes-devtools/php/php_5.4.14.bb
+> +++ b/meta-oe/recipes-devtools/php/php_5.4.33.bb
+> @@ -10,13 +10,11 @@ DEPENDS =3D "zlib libxml2 virtual/libiconv php-native=
+ lemon-native \
+>             libc-client openssl"
+>  DEPENDS_virtclass-native =3D "zlib-native libxml2-native"
+> =20
+> -PR =3D "r6"
+> -
+>  # The new PHP downloads server groups PHP releases by major version so f=
+ind
+>  # the major version of the PHP recipe.
+>  PHP_MAJVER =3D "${@d.getVar('PV',1).split('.')[0]}"
+> =20
+> -SRC_URI =3D "http://museum.php.net/php${PHP_MAJVER}/php-${PV}.tar.bz2 \
+> +SRC_URI =3D "http://php.net/distributions/php-${PV}.tar.bz2 \
+>             file://acinclude-xml2-config.patch \
+>             file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+>             file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
+> @@ -28,13 +26,12 @@ SRC_URI_append_class-target +=3D " \
+>              file://pear-makefile.patch \
+>              file://phar-makefile.patch \
+>              file://php_exec_native.patch \
+> -            file://fix-fpm-cross-compile.patch \
+>              file://php-fpm.conf \
+>              file://php-fpm-apache.conf \
+>            "
+> =20
+> -SRC_URI[md5sum] =3D "cfdc044be2c582991a1fe0967898fa38"
+> -SRC_URI[sha256sum] =3D "5450f3843bc651eb3fb00601f0cce1930aaaf65c7c966c02=
+fe4a46f9c81be20a"
+> +SRC_URI[md5sum] =3D "c6878bb1cdb46bfc1e1a5cd67a024737"
+> +SRC_URI[sha256sum] =3D "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d=
+19b74c2278e40bb5"
+> =20
+>  S =3D "${WORKDIR}/php-${PV}"
+> =20
+> --=20
+> 1.9.3
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---/neOAU127r7zg3jS
+--b6rSbt24+kIAbQdu
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlQys/MACgkQN1Ujt2V2gBzSzwCeKpeUMXlEj7uOm5yYf5YWEFTr
-tVQAoIzY36i5PWxaVQO618pVvaQqQ34r
-=HGtL
+iEYEARECAAYFAlQyteoACgkQN1Ujt2V2gByyEgCdFpv8A6PWCkYGJg4PP9KJnqbE
+BekAn1yLUR8KympeQj6DBUhcjPvTmaG4
+=ot+6
 -----END PGP SIGNATURE-----
 
---/neOAU127r7zg3jS--
+--b6rSbt24+kIAbQdu--
