@@ -1,39 +1,40 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f176.google.com (mail-vc0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DA956FC68;
-	Mon,  6 Oct 2014 08:32:48 +0000 (UTC)
-Received: by mail-vc0-f176.google.com with SMTP id hq11so2739265vcb.7
-	for <multiple recipients>; Mon, 06 Oct 2014 01:32:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=Tmyg7dS2Ns0GgLyCahadz0BYElcn/ZyYSTfuwDAroY4=;
-	b=I1feADMdlDZGG7+xJzGE4NmsGW5rsPnrFH3eyY1mJBjhOEg0vRVcY8l/tcuFu29XP+
-	yePoVqcw/neETEWPikYwMRFSqTZQnWZ0f1C8eFAbbw+GNdvegm6PFmtTxf5cpB1OGHUM
-	4KKstK07N2Js7vRWH08K6wF60GKeG5RZC9ESHGNyHF5q/y1SzacguniYuu7sQHLbHOr5
-	LF3Sh79ISW9x7S1FrLNiHGTxdnICi8ytpw2N1pYndCNv/pdszlIcBrozQYTRKJgtR0xQ
-	V3+q4yNu3PAp2g46qSqkj6oNaa8FVJvddfRCA/MFP2eoZj+aRRvZ+2aEVhtsOpXuHQUX
-	rqAw==
-MIME-Version: 1.0
-X-Received: by 10.220.251.200 with SMTP id mt8mr17259042vcb.24.1412584369328; 
-	Mon, 06 Oct 2014 01:32:49 -0700 (PDT)
-Received: by 10.52.171.233 with HTTP; Mon, 6 Oct 2014 01:32:49 -0700 (PDT)
-In-Reply-To: <20141003201007.GN25706@jama>
-References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
-	<1412151555-19865-5-git-send-email-schnitzeltony@googlemail.com>
-	<20141003200426.GM25706@jama> <20141003201007.GN25706@jama>
-Date: Mon, 6 Oct 2014 10:32:49 +0200
-Message-ID: <CALbNGRTP7S6MAxFU-yo2xXWTMbo3h-A8uS94ALLxgOOiONL6nQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH][meta-oe 04/15] network-manager-applet: update to 0.9.8.10
+Return-Path: <koen.kooi@linaro.org>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id C5E0971547
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  6 Oct 2014 09:55:15 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id cc10so6240337wib.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Oct 2014 02:55:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=1tic3y3R3Y5OKJKK75oIGKUSME4/LJjh1V1KAAUMyHA=;
+	b=WlVvK1qhvhDGYCxc4mX/NhLUOayqo1RI3J9LLiq0q9WNYUJjC5rRMaI9Nr8+S4B/BO
+	xDSs7hb1bI7AYlFkBw8BlzLDKkqIeVGc0qTDRSO5CUMh9F8Bl2XRsCoQmmlCrjb64qbr
+	SY3obT7OjBpIVnD7BWv2JnU9lGP+IYJsRA6pnrfQlWJ+gQzQ49V2RFbwy6Ltb10dxCMA
+	ux7zcinu5tBSL4OO2AWago8/9sIHHbMVVf3CqOhmj+dQtt0Sw0dP6ujUinmueeDKbGnO
+	5UUn5g21qfPJRyCunGGannlZ+blLsEAaaG+GfxPrGhWquw0A7xdXgqb1QuR/a/lXDy80
+	Truw==
+X-Gm-Message-State: ALoCoQm4QY8ZIZZlReIvY7SN14Zriy3nZZ5h3Vup+j7cRSqH8Ty73Ifgw7MHw3TR70cz0h6GM9bJ
+X-Received: by 10.194.209.207 with SMTP id mo15mr28088187wjc.6.1412589316347; 
+	Mon, 06 Oct 2014 02:55:16 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
+	by mx.google.com with ESMTPSA id o1sm16753129wja.25.2014.10.06.02.55.15
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 06 Oct 2014 02:55:15 -0700 (PDT)
+From: Koen Kooi <koen.kooi@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  6 Oct 2014 11:55:01 +0200
+Message-Id: <1412589301-6669-3-git-send-email-koen.kooi@linaro.org>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1412589301-6669-1-git-send-email-koen.kooi@linaro.org>
+References: <1412589301-6669-1-git-send-email-koen.kooi@linaro.org>
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: [meta-oe][PATCH 3/3] php: update to 5.4.33
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,195 +48,371 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Oct 2014 08:32:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Oct 2014 09:55:17 -0000
 
-On Fri, Oct 3, 2014 at 10:10 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+One patch was a backport and can be dropped, add Upstream-status to the others.
 
-> On Fri, Oct 03, 2014 at 10:04:26PM +0200, Martin Jansa wrote:
-> > On Wed, Oct 01, 2014 at 10:19:04AM +0200, Andreas M=C3=BCller wrote:
-> > > * add libsecret to DEPENDS
-> > > * remove libglade from DEPENDS
-> > > * wireless (nm-signal-*.png) icons were updated upstream
-> > > * inherit gnomebase instead of gnome
-> > > * make bluetooth PACKAGECONFIG - disabled by default
-> >
-> > For some reason it has now the same problem as navit (through gypsy.la)
-> >
-> > | x86_64-oe-linux-libtool: compile:  x86_64-oe-linux-gcc -m64
-> -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse
-> --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64
-> -DHAVE_CONFIG_H -I.
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/networ=
-k-manager-applet/0.9.8.10-r0/network-manager-applet-0.9.8.10/src/utils
-> -I../.. -pthread
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/gtk-2.0
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/g=
-tk-2.0/include
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/pango-1.0
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/atk-1.0
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/cairo
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/pixman-1
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/libpng16
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/gdk-pixbuf-2.0
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/libpng16
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/pango-1.0
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/harfbuzz
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/pango-1.0
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/glib-2.0
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/g=
-lib-2.0/include
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/home/jenk=
-ins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/include/freetype2
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/freetype2
-> -pthread
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/libnm-glib
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
-de/NetworkManager
-> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64
-> > | ../../x86_64-oe-linux-libtool  --tag=3DCC   --mode=3Dlink
-> x86_64-oe-linux-gcc  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=
-=3Dsse
-> --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64
-> -Wall -std=3Dgnu89  -O2 -pipe -g -feliminate-unused-debug-types -Wshadow
-> -Wmissing-declarations -Wmissing-prototypes -Wdeclaration-after-statement
-> -Wstrict-prototypes -Wfloat-equal -Wno-unused-parameter -Wno-sign-compare
-> -fno-strict-aliasing -Wno-unused-but-set-variable   -Wl,-O1
-> -Wl,--hash-style=3Dgnu -Wl,--as-needed -o libutils.la  libutils_la-utils.=
-lo
-> -lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo
-> -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0
-> -lglib-2.0 -lfontconfig -lfreetype  -lgio-2.0 -lnm-glib -lnm-util
-> -lnm-glib-vpn -ldbus-glib-1 -ldbus-1 -lgobject-2.0 -Wl,--export-dynamic
-> -lgmodule-2.0 -pthread -lglib-2.0
-> > | /bin/grep:
-> /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/
-> libgudev-1.0.la: No such file or directory
-> > | sed: can't read
-> /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/
-> libgudev-1.0.la: No such file or directory
-> > | x86_64-oe-linux-libtool: link:
-> `/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/
-> libgudev-1.0.la' is not a valid libtool archive
-> > | make[5]: *** [libutils.la] Error 1
-> > | make[5]: Leaving directory
-> `/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/network=
--manager-applet/0.9.8.10-r0/build/src/utils'
-> > | make[4]: *** [all-recursive] Error 1
-> > | make[4]: Leaving directory
-> `/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/network=
--manager-applet/0.9.8.10-r0/build/src/utils'
->
-> the libgudev-1.0.la was moved from /usr/lib to /lib in systemd 215-216
-> updated
->
-> --- a/packages/arm920tt-oe-linux-gnueabi/systemd/systemd-dbg/latest
-> +++ b/packages/arm920tt-oe-linux-gnueabi/systemd/systemd-dbg/latest
-> @@ -1,11 +1,11 @@
->  PE =3D 1
-> -PV =3D 215+gitAUTOINC+252ff40a38
-> +PV =3D 216+gitAUTOINC+5d0ae62c66
->  PR =3D r0
-> -PKGV =3D 215+git0+252ff40a38
-> -PKGR =3D r0.1
-> +PKGV =3D 216+git0+5d0ae62c66
-> +PKGR =3D r0.0
->  RPROVIDES =3D
->  RDEPENDS =3D
-> -RRECOMMENDS =3D eglibc-dbg glib-2.0-dbg libacl-dbg libcap-dbg libffi-dbg
-> libgcc-dbg libkmod-dbg liblzma-dbg libpam-dbg libudev-dbg
-> util-linux-libblkid-dbg zlib-dbg
-> -PKGSIZE =3D 49629406
-> +RRECOMMENDS =3D glib-2.0-dbg glibc-dbg libacl-dbg libcap-dbg libffi-dbg
-> libgcc-dbg libkmod-dbg liblzma-dbg libpam-dbg libudev-dbg
-> util-linux-libblkid-dbg zlib-dbg
-> +PKGSIZE =3D 50305088
->  FILES =3D /usr/bin/.debug /usr/sbin/.debug /usr/lib/systemd/.debug
-> /usr/lib/.debug /bin/.debug /sbin/.debug /lib/.debug
-> /usr/lib/systemd/.debug /usr/lib/matchbox-panel/.debug
-> /usr/lib/systemd/systemd/.debug /usr/src/debug
-> /usr/lib/systemd/ptest/.debug /lib/.debug /lib/systemd/.debug
-> /lib/systemd/*/.debug /lib/security/.debug/
-> -RDEPENDS =3D libgudev-1.0 libsystemd libudev systemd (=3D
-> 1:215+git0+252ff40a38-r0.1)
-> -RRECOMMENDS =3D acl-dev base-files-dev base-passwd-dev dbus-dev eglibc-d=
-ev
-> glib-2.0-dev kmod-dev libacl-dev libcap-dev libcgroup-dev libffi-dev
-> libgcc-dev libgcrypt-dev libgudev-1.0-dev libkmod-dev liblzma-dev
-> libpam-dev libsystemd-dev libudev-dev readline-dev shadow-dev
-> shadow-sysroot-dev systemd-binfmt-dev udev-dev update-alternatives-opkg-d=
-ev
-> util-linux-dev util-linux-libblkid-dev util-linux-mount-dev
-> volatile-binds-dev xz-dev zlib-dev
-> -PKGSIZE =3D 78365
-> +RDEPENDS =3D libgudev-1.0 libsystemd libudev systemd (=3D
-> 1:216+git0+5d0ae62c66-r0.0)
-> +RRECOMMENDS =3D acl-dev base-files-dev base-passwd-dev dbus-dev
-> glib-2.0-dev glibc-dev kmod-dev libacl-dev libcap-dev libcgroup-dev
-> libffi-dev libgcc-dev libgcrypt-dev libgudev-1.0-dev libkmod-dev
-> liblzma-dev libpam-dev libsystemd-dev libudev-dev readline-dev shadow-dev
-> shadow-sysroot-dev systemd-binfmt-dev udev-dev update-alternatives-opkg-d=
-ev
-> util-linux-dev util-linux-libblkid-dev util-linux-mount-dev
-> volatile-binds-dev xz-dev zlib-dev
-> +PKGSIZE =3D 79477
->  FILES =3D /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la
-> /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal
-> /lib/*.o /usr/lib/systemd/*.la /lib/*.la /lib/security/*.la
-> /usr/share/dbus-1/interfaces/ /etc/rpm/macros.systemd
-> -FILELIST =3D /lib/security/pam_systemd.la
-> /usr/include/gudev-1.0/gudev/gudev.h
-> /usr/include/gudev-1.0/gudev/gudevclient.h
-> /usr/include/gudev-1.0/gudev/gudevdevice.h
-> /usr/include/gudev-1.0/gudev/gudevenumerator.h
-> /usr/include/gudev-1.0/gudev/gudevenums.h
-> /usr/include/gudev-1.0/gudev/gudevenumtypes.h
-> /usr/include/gudev-1.0/gudev/gudevtypes.h /usr/include/libudev.h
-> /usr/include/systemd/_sd-common.h /usr/include/systemd/sd-daemon.h
-> /usr/include/systemd/sd-id128.h /usr/include/systemd/sd-journal.h
-> /usr/include/systemd/sd-login.h /usr/include/systemd/sd-messages.h /usr/l=
-ib/
-> libgudev-1.0.la /usr/lib/libgudev-1.0.so /usr/lib/libnss_myhostname.la
-> /usr/lib/libsystemd.la /usr/lib/libsystemd.so /usr/lib/libudev.la
-> /usr/lib/libudev.so /usr/lib/pkgconfig/gudev-1.0.pc
-> /usr/lib/pkgconfig/libsystemd.pc /usr/lib/pkgconfig/libudev.pc
-> /usr/share/pkgconfig/systemd.pc /usr/share/pkgconfig/udev.pc
-> +FILELIST =3D /lib/libgudev-1.0.la /lib/libgudev-1.0.so /lib/security/
-> pam_systemd.la /usr/include/gudev-1.0/gudev/gudev.h
-> /usr/include/gudev-1.0/gudev/gudevclient.h
-> /usr/include/gudev-1.0/gudev/gudevdevice.h
-> /usr/include/gudev-1.0/gudev/gudevenumerator.h
-> /usr/include/gudev-1.0/gudev/gudevenums.h
-> /usr/include/gudev-1.0/gudev/gudevenumtypes.h
-> /usr/include/gudev-1.0/gudev/gudevtypes.h /usr/include/libudev.h
-> /usr/include/systemd/_sd-common.h /usr/include/systemd/sd-daemon.h
-> /usr/include/systemd/sd-id128.h /usr/include/systemd/sd-journal.h
-> /usr/include/systemd/sd-login.h /usr/include/systemd/sd-messages.h /usr/l=
-ib/
-> libnss_myhostname.la /usr/lib/libnss_mymachines.la /usr/lib/libsystemd.la
-> /usr/lib/libsystemd.so /usr/lib/libudev.la /usr/lib/libudev.so
-> /usr/lib/pkgconfig/gudev-1.0.pc /usr/lib/pkgconfig/libsystemd.pc
-> /usr/lib/pkgconfig/libudev.pc /usr/share/pkgconfig/systemd.pc
-> /usr/share/pkgconfig/udev.pc
->
-> Hmm - I made my tests with systemd 216 and had no errors. Shouldn't
-pkg-config find libgudev <http://libgudev-1.0.la>?
+Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+---
+ ...cinclude-use-pkgconfig-for-libxml2-config.patch |  8 ++--
+ ...01-php-don-t-use-broken-wrapper-for-mkdir.patch | 12 +++---
+ .../php/php/acinclude-xml2-config.patch            | 15 +++++--
+ .../php/php/fix-fpm-cross-compile.patch            | 38 -----------------
+ meta-oe/recipes-devtools/php/php/iconv.patch       |  9 ++++-
+ .../php/php/imap-fix-autofoo.patch                 | 47 ++++++++++++----------
+ .../recipes-devtools/php/php/pear-makefile.patch   |  7 +++-
+ .../recipes-devtools/php/php/phar-makefile.patch   | 11 ++++-
+ .../recipes-devtools/php/php/php_exec_native.patch | 19 +++++----
+ .../php/{php_5.4.14.bb => php_5.4.33.bb}           |  9 ++---
+ 10 files changed, 81 insertions(+), 94 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
+ rename meta-oe/recipes-devtools/php/{php_5.4.14.bb => php_5.4.33.bb} (95%)
 
-Andreas
+diff --git a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
+index 823007e..51a5e43 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-acinclude-use-pkgconfig-for-libxml2-config.patch
+@@ -1,7 +1,7 @@
+-From 0ff5d4adc9f5950d66738272b3ba88ef74f69117 Mon Sep 17 00:00:00 2001
++From 003c9feaae6ed5c173edcea51193e49bc94ac39a Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen.kooi@linaro.org>
+ Date: Tue, 17 Jun 2014 09:53:00 +0200
+-Subject: [PATCH] acinclude: use pkgconfig for libxml2 config
++Subject: [PATCH 3/8] acinclude: use pkgconfig for libxml2 config
+ 
+ Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+ Upstream-Status: pending
+@@ -10,10 +10,10 @@ Upstream-Status: pending
+  1 file changed, 23 insertions(+), 40 deletions(-)
+ 
+ diff --git a/acinclude.m4 b/acinclude.m4
+-index 9c7a305..211dbd3 100644
++index 206fcbf..a6c0d84 100644
+ --- a/acinclude.m4
+ +++ b/acinclude.m4
+-@@ -2529,48 +2529,31 @@ dnl
++@@ -2530,48 +2530,31 @@ dnl
+  dnl Common setup macro for libxml
+  dnl
+  AC_DEFUN([PHP_SETUP_LIBXML], [
+diff --git a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch b/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch
+index 9b71e9d..2f7d581 100644
+--- a/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch
++++ b/meta-oe/recipes-devtools/php/php/0001-php-don-t-use-broken-wrapper-for-mkdir.patch
+@@ -1,18 +1,18 @@
+-From 411ec4b31fdcc524f13fe5be80fd6769b7d16a5d Mon Sep 17 00:00:00 2001
++From ebc101e0728b9db6c687cff525e5dfc8eb0edbf3 Mon Sep 17 00:00:00 2001
+ From: Koen Kooi <koen@dominion.thruhere.net>
+ Date: Thu, 3 Nov 2011 14:27:15 +0100
+-Subject: [PATCH] php: don't use broken wrapper for mkdir
++Subject: [PATCH 2/8] php: don't use broken wrapper for mkdir
+ 
+ Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+ ---
+ 
+ Upstream-Status: Inappropriate
+ 
+- Makefile.global |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
++ Makefile.global | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/Makefile.global b/Makefile.global
+-index 8dad0e4..abdb5d2 100644
++index ff858c2..ae554b4 100644
+ --- a/Makefile.global
+ +++ b/Makefile.global
+ @@ -1,4 +1,4 @@
+@@ -22,5 +22,5 @@ index 8dad0e4..abdb5d2 100644
+  INSTALL_DATA = $(INSTALL) -m 644
+  
+ -- 
+-1.7.2.5
++1.9.3
+ 
+diff --git a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
+index bf519d2..30811a7 100644
+--- a/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
++++ b/meta-oe/recipes-devtools/php/php/acinclude-xml2-config.patch
+@@ -1,6 +1,10 @@
+---- /orig-acinclude.m4 2007-02-20 15:03:25.000000000 +0200
+-+++ /acinclude.m4      2007-02-20 15:03:24.000000000 +0200
+-@@ -2359,12 +2359,9 @@
++Upstream-status: Unknown
++
++diff --git a/acinclude.m4 b/acinclude.m4
++index 4fd452e..206fcbf 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -2532,12 +2532,9 @@ dnl
+  AC_DEFUN([PHP_SETUP_LIBXML], [
+  AC_CACHE_CHECK([for xml2-config path], ac_cv_php_xml2_config_path,
+  [
+@@ -14,5 +18,8 @@
+ +      ac_cv_php_xml2_config_path="$PHP_LIBXML_DIR/xml2-config"
+ +
+  ])
+-
++ 
+    if test -x "$ac_cv_php_xml2_config_path"; then
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch b/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
+deleted file mode 100644
+index b009347..0000000
+--- a/meta-oe/recipes-devtools/php/php/fix-fpm-cross-compile.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 0b44f16ea2f18a08eb1249db6621840527eab5e0 Mon Sep 17 00:00:00 2001
+-From: Jerome Loyet <fat@php.net>
+-Date: Wed, 23 May 2012 11:40:22 +0200
+-Subject: [PATCH] - Fixed bug #61839 (Unable to cross-compile PHP with
+- --enable-fpm)
+-
+----
+-Upstream-Status: Applied 
+-http://git.php.net/?p=php-src.git;a=commit;h=0b44f16ea2f18a08eb1249db6621840527eab5e0
+-
+- NEWS               | 1 +
+- sapi/fpm/config.m4 | 4 ++++
+- 2 files changed, 5 insertions(+)
+-
+-diff --git a/sapi/fpm/config.m4 b/sapi/fpm/config.m4
+-index 8962810..6c860c9 100644
+---- a/sapi/fpm/config.m4
+-+++ b/sapi/fpm/config.m4
+-@@ -192,6 +192,8 @@ AC_DEFUN([AC_FPM_TRACE],
+-       have_ptrace=no
+-       have_broken_ptrace=yes
+-       AC_MSG_RESULT([no])
+-+    ], [
+-+      AC_MSG_RESULT([skipped (cross compiling)])
+-     ])
+-   fi
+- 
+-@@ -264,6 +266,8 @@ AC_DEFUN([AC_FPM_TRACE],
+-     ], [
+-       proc_mem_file=""
+-       AC_MSG_RESULT([no])
+-+    ], [
+-+      AC_MSG_RESULT([skipped (cross compiling)])
+-     ])
+-   fi
+-   
+--- 
+-1.7.11.5
+diff --git a/meta-oe/recipes-devtools/php/php/iconv.patch b/meta-oe/recipes-devtools/php/php/iconv.patch
+index f3d2a16..255fbb0 100644
+--- a/meta-oe/recipes-devtools/php/php/iconv.patch
++++ b/meta-oe/recipes-devtools/php/php/iconv.patch
+@@ -1,8 +1,10 @@
++Upstream-status: Unknown
++
+ diff --git a/acinclude.m4 b/acinclude.m4
+-index 4c28b80..d6491a1 100644
++index a6c0d84..df11abd 100644
+ --- a/acinclude.m4
+ +++ b/acinclude.m4
+-@@ -2439,7 +2439,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
++@@ -2452,7 +2452,8 @@ AC_DEFUN([PHP_SETUP_ICONV], [
+    dnl Check libc first if no path is provided in --with-iconv
+    dnl
+  
+@@ -25,3 +27,6 @@ index d673b0a..1fbef13 100644
+          if test -f "$i/include/iconv.h" || test -f "$i/include/giconv.h"; then
+            PHP_ICONV_PREFIX="$i"
+            break
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+index 3695b7b..da04c2d 100644
+--- a/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
++++ b/meta-oe/recipes-devtools/php/php/imap-fix-autofoo.patch
+@@ -1,8 +1,23 @@
+-Index: php-5.2.11/ext/imap/config.m4
+-===================================================================
+---- php-5.2.11.orig/ext/imap/config.m4	2009-12-10 12:27:52.800974533 -0700
+-+++ php-5.2.11/ext/imap/config.m4	2009-12-10 12:28:33.720976583 -0700
+-@@ -103,7 +103,7 @@
++Upstream-status: Unknown
++
++diff --git a/acinclude.m4 b/acinclude.m4
++index df11abd..06e7236 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -2357,7 +2357,7 @@ AC_DEFUN([PHP_SETUP_OPENSSL],[
++       PHP_OPENSSL_DIR="/usr/local/ssl /usr/local /usr /usr/local/openssl"
++     fi
++ 
++-    for i in $PHP_OPENSSL_DIR; do
+++    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
++       if test -r $i/include/openssl/evp.h; then
++         OPENSSL_INCDIR=$i/include
++       fi
++diff --git a/ext/imap/config.m4 b/ext/imap/config.m4
++index 3fcf674..f08caf7 100644
++--- a/ext/imap/config.m4
+++++ b/ext/imap/config.m4
++@@ -109,7 +109,7 @@ if test "$PHP_IMAP" != "no"; then
+      PHP_NEW_EXTENSION(imap, php_imap.c, $ext_shared)
+      AC_DEFINE(HAVE_IMAP,1,[ ])
+  
+@@ -11,13 +26,13 @@ Index: php-5.2.11/ext/imap/config.m4
+        IMAP_INC_CHK()
+        el[]IMAP_INC_CHK(/include/c-client)
+        el[]IMAP_INC_CHK(/include/imap)
+-@@ -192,13 +192,7 @@
++@@ -198,13 +198,7 @@ if test "$PHP_IMAP" != "no"; then
+        AC_MSG_ERROR(Cannot find rfc822.h. Please check your c-client installation.)
+      fi
+  
+--    if test -r "$IMAP_DIR/c-client/c-client.a"; then
++-    if test ! -r "$IMAP_DIR/c-client/libc-client.a" && test -r "$IMAP_DIR/c-client/c-client.a" ; then
+ -      ln -s "$IMAP_DIR/c-client/c-client.a" "$IMAP_DIR/c-client/libc-client.a" >/dev/null 2>&1
+--    elif test -r "$IMAP_DIR/$PHP_LIBDIR/c-client.a"; then
++-    elif test ! -r "$IMAP_DIR/$PHP_LIBDIR/libc-client.a" && test -r "$IMAP_DIR/$PHP_LIBDIR/c-client.a"; then
+ -      ln -s "$IMAP_DIR/$PHP_LIBDIR/c-client.a" "$IMAP_DIR/$PHP_LIBDIR/libc-client.a" >/dev/null 2>&1
+ -    fi
+ -
+@@ -26,16 +41,6 @@ Index: php-5.2.11/ext/imap/config.m4
+        IMAP_LIB=$lib
+        IMAP_LIB_CHK($PHP_LIBDIR)
+        IMAP_LIB_CHK(c-client)
+-Index: php-5.2.11/acinclude.m4
+-===================================================================
+---- php-5.2.11.orig/acinclude.m4	2009-12-10 12:37:13.134722881 -0700
+-+++ php-5.2.11/acinclude.m4	2009-12-10 12:37:39.342007053 -0700
+-@@ -2338,7 +2338,7 @@
+-       PHP_OPENSSL_DIR="/usr/local/ssl /usr/local /usr /usr/local/openssl"
+-     fi
+- 
+--    for i in $PHP_OPENSSL_DIR; do
+-+    for i in $PHP_OPENSSL_DIR $PHP_OPENSSL_DIR/usr; do
+-       if test -r $i/include/openssl/evp.h; then
+-         OPENSSL_INCDIR=$i/include
+-       fi
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-devtools/php/php/pear-makefile.patch b/meta-oe/recipes-devtools/php/php/pear-makefile.patch
+index 1928b98..9927d2d 100644
+--- a/meta-oe/recipes-devtools/php/php/pear-makefile.patch
++++ b/meta-oe/recipes-devtools/php/php/pear-makefile.patch
+@@ -1,5 +1,7 @@
++Upstream-status: Unknown
++
+ diff --git a/pear/Makefile.frag b/pear/Makefile.frag
+-index 1f6f70e..b19a77c 100644
++index 00bacae..739eeca 100644
+ --- a/pear/Makefile.frag
+ +++ b/pear/Makefile.frag
+ @@ -11,7 +11,7 @@ PEAR_PREFIX = -dp a${program_prefix}
+@@ -11,3 +13,6 @@ index 1f6f70e..b19a77c 100644
+  
+  install-pear:
+  	@echo "Installing PEAR environment:      $(INSTALL_ROOT)$(peardir)/"
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-devtools/php/php/phar-makefile.patch b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+index 6fde251..8a1136d 100644
+--- a/meta-oe/recipes-devtools/php/php/phar-makefile.patch
++++ b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+@@ -1,8 +1,12 @@
++Upstream-status: Unknown
++
+ diff --git a/ext/phar/Makefile.frag b/ext/phar/Makefile.frag
+-index fc93d1d..9a8cd65 100755
++old mode 100644
++new mode 100755
++index ed6de9f..9d03198
+ --- a/ext/phar/Makefile.frag
+ +++ b/ext/phar/Makefile.frag
+-@@ -6,19 +6,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
++@@ -5,19 +5,8 @@ pharcmd: $(builddir)/phar.php $(builddir)/phar.phar
+  
+  PHP_PHARCMD_SETTINGS = -d 'open_basedir=' -d 'output_buffering=0' -d 'memory_limit=-1' -d phar.readonly=0 -d 'safe_mode=0'
+  PHP_PHARCMD_EXECUTABLE = ` \
+@@ -24,3 +28,6 @@ index fc93d1d..9a8cd65 100755
+  PHP_PHARCMD_BANG = `$(top_srcdir)/build/shtool echo -n -- "$(INSTALL_ROOT)$(bindir)/$(program_prefix)php$(program_suffix)$(EXEEXT)";`
+  
+  $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-devtools/php/php/php_exec_native.patch b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+index 31be1b7..0506bdd 100644
+--- a/meta-oe/recipes-devtools/php/php/php_exec_native.patch
++++ b/meta-oe/recipes-devtools/php/php/php_exec_native.patch
+@@ -1,12 +1,10 @@
+----
+- sapi/cli/config.m4 |    2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
++Upstream-status: Inappriate
+ 
+---- php-5.4.14.orig/sapi/cli/config.m4
+-+++ php-5.4.14/sapi/cli/config.m4
+-@@ -34,11 +34,11 @@ if test "$PHP_CLI" != "no"; then
+-     BUILD_CLI="\$(LIBTOOL) --mode=link \$(CC) -export-dynamic \$(CFLAGS_CLEAN) \$(EXTRA_CFLAGS) \$(EXTRA_LDFLAGS_PROGRAM) \$(LDFLAGS) \$(PHP_RPATHS) \$(PHP_GLOBAL_OBJS) \$(PHP_BINARY_OBJS) \$(PHP_CLI_OBJS) \$(EXTRA_LIBS) \$(ZEND_EXTRA_LIBS) -o \$(SAPI_CLI_PATH)"
+-     ;;
++diff --git a/sapi/cli/config.m4 b/sapi/cli/config.m4
++index cdfa1f7..0fe11e3 100644
++--- a/sapi/cli/config.m4
+++++ b/sapi/cli/config.m4
++@@ -36,7 +36,7 @@ if test "$PHP_CLI" != "no"; then
+    esac
+  
+    dnl Set executable for tests
+@@ -15,5 +13,6 @@
+    PHP_SUBST(PHP_EXECUTABLE)
+  
+    dnl Expose to Makefile
+-   PHP_SUBST(SAPI_CLI_PATH)
+-   PHP_SUBST(BUILD_CLI)
++-- 
++1.9.3
++
+diff --git a/meta-oe/recipes-devtools/php/php_5.4.14.bb b/meta-oe/recipes-devtools/php/php_5.4.33.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/php/php_5.4.14.bb
+rename to meta-oe/recipes-devtools/php/php_5.4.33.bb
+index b738701..52e39a5 100644
+--- a/meta-oe/recipes-devtools/php/php_5.4.14.bb
++++ b/meta-oe/recipes-devtools/php/php_5.4.33.bb
+@@ -10,13 +10,11 @@ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
+            libc-client openssl"
+ DEPENDS_virtclass-native = "zlib-native libxml2-native"
+ 
+-PR = "r6"
+-
+ # The new PHP downloads server groups PHP releases by major version so find
+ # the major version of the PHP recipe.
+ PHP_MAJVER = "${@d.getVar('PV',1).split('.')[0]}"
+ 
+-SRC_URI = "http://museum.php.net/php${PHP_MAJVER}/php-${PV}.tar.bz2 \
++SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+            file://acinclude-xml2-config.patch \
+            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
+            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
+@@ -28,13 +26,12 @@ SRC_URI_append_class-target += " \
+             file://pear-makefile.patch \
+             file://phar-makefile.patch \
+             file://php_exec_native.patch \
+-            file://fix-fpm-cross-compile.patch \
+             file://php-fpm.conf \
+             file://php-fpm-apache.conf \
+           "
+ 
+-SRC_URI[md5sum] = "cfdc044be2c582991a1fe0967898fa38"
+-SRC_URI[sha256sum] = "5450f3843bc651eb3fb00601f0cce1930aaaf65c7c966c02fe4a46f9c81be20a"
++SRC_URI[md5sum] = "c6878bb1cdb46bfc1e1a5cd67a024737"
++SRC_URI[sha256sum] = "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d19b74c2278e40bb5"
+ 
+ S = "${WORKDIR}/php-${PV}"
+ 
+-- 
+1.9.3
+
 
