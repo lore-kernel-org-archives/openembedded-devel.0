@@ -1,37 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 515A1702D2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 04:52:15 +0000 (UTC)
-Received: by mail-wi0-f181.google.com with SMTP id hi2so6661541wib.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Oct 2014 21:52:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=hcOGQnWGGoN/TXfLAhpaojPRRytWmsCv1kQgWBAUnMY=;
-	b=HASK3DjE3df2PJxFk/38E7EpuzzYctW8eRovYbABx/KsG1s74d2IDpUpcZjC/Q7Vld
-	AmPReZ55LokKNmPAkOSPpZP/C3x0v735D9zT/Mgn/PjnO4b4y4rgGf/lNLAhNEBrTOAG
-	8PIp3M6WPJYVG8nIvo8QXKqJds8QC17floo02zlhE9atqMDUUJhjw5tT7xnrDzSOCe84
-	TzcjsCeYHzuA5cmsQsS0M6uccjJnBNJMCS6KUtTRpMJgh00JDpQaXkJOjRskALLjSnBV
-	vttsNp7euq1Jx4hudTKLqf+noFT4/H+Sg+n8ioqSiLFR0TlvZikBGSg6M0uPLmHjjWZw
-	o1eg==
-X-Received: by 10.180.11.196 with SMTP id s4mr1507478wib.16.1412657536599;
-	Mon, 06 Oct 2014 21:52:16 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	l10sm13228189wif.20.2014.10.06.21.52.15 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Oct 2014 21:52:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Oct 2014 06:53:17 +0200
-Message-Id: <1412657597-13020-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.1.1
-In-Reply-To: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
-References: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
-Subject: [meta-oe][PATCHv2] modphp, xdebug: blacklist because of conflict with php
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f178.google.com (mail-vc0-f178.google.com
+	[209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id B793F65E0C;
+	Tue,  7 Oct 2014 06:41:48 +0000 (UTC)
+Received: by mail-vc0-f178.google.com with SMTP id hq12so4385513vcb.9
+	for <multiple recipients>; Mon, 06 Oct 2014 23:41:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=6OZXznXpHVZtvxrPep5OcKPdpdCvZcE+qkO9va/F/3Q=;
+	b=KnFMKcxtSix37Fx71+9Gk9C/u44s/zm468Md+5TNGiGcexjQM1ijaG1ApWbOQRX7D0
+	3YMs5TREKVnZLIBzpt8MDWzDcPzVp8uKMPycudizt/MtnMIROAzRs93tHJc5o7sEoaPa
+	2v9O8sHFkT0v7spS3i5Es1FZU5b1bGpb5gXUWtM+kLDyLbI+sR8sSBvLAWxEvZGE7T7z
+	62TrlUHL7evoRzb5E928t9pP8vMo2R95Zr+j3mSgaf7IlwXII/jopYYIbxTZAB06w/+Q
+	f/507TQ8cQm8wmjKfWV7RpUSozG5Gr61P6QyvjgPH07BBfX11+CCrbiZ2S1huEAXdufh
+	epLQ==
+MIME-Version: 1.0
+X-Received: by 10.220.92.198 with SMTP id s6mr1530419vcm.38.1412664109532;
+	Mon, 06 Oct 2014 23:41:49 -0700 (PDT)
+Received: by 10.52.171.233 with HTTP; Mon, 6 Oct 2014 23:41:49 -0700 (PDT)
+In-Reply-To: <20141006152331.GV25706@jama>
+References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
+	<1412151555-19865-5-git-send-email-schnitzeltony@googlemail.com>
+	<20141003200426.GM25706@jama> <20141003201007.GN25706@jama>
+	<CALbNGRTP7S6MAxFU-yo2xXWTMbo3h-A8uS94ALLxgOOiONL6nQ@mail.gmail.com>
+	<20141006152331.GV25706@jama>
+Date: Tue, 7 Oct 2014 08:41:49 +0200
+Message-ID: <CALbNGRQ44osDGnd2q+QWsqhXS+SbLMKuBFn8q8Rir9GPn+Akdw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH][meta-oe 04/15] network-manager-applet: update to 0.9.8.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,41 +49,244 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 04:52:19 -0000
+X-List-Received-Date: Tue, 07 Oct 2014 06:41:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-webserver/recipes-php/modphp/modphp5.inc     | 3 +++
- meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb | 1 +
- 2 files changed, 4 insertions(+)
+On Mon, Oct 6, 2014 at 5:23 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
 
-diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc b/meta-webserver/recipes-php/modphp/modphp5.inc
-index 6932429..8707950 100644
---- a/meta-webserver/recipes-php/modphp/modphp5.inc
-+++ b/meta-webserver/recipes-php/modphp/modphp5.inc
-@@ -14,6 +14,9 @@ S = "${WORKDIR}/php-${PV}"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
- 
-+PNBLACKLIST[modphp] = "CONFLICT: 466 header files conflict with php"
-+# e.g. sysroots/qemux86-64/usr/include/php/main/win95nt.h
-+
- inherit autotools
- 
- CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
-index ffff135..750b288 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
-@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16"
- 
- DEPENDS = "modphp"
- 
-+PNBLACKLIST[xdebug] = "CONFLICT: depends on blocked modphp"
- 
- SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
- 
--- 
-2.1.1
+> On Mon, Oct 06, 2014 at 10:32:49AM +0200, Andreas M=C3=BCller wrote:
+> > On Fri, Oct 3, 2014 at 10:10 PM, Martin Jansa <martin.jansa@gmail.com>
+> > wrote:
+> >
+> > > On Fri, Oct 03, 2014 at 10:04:26PM +0200, Martin Jansa wrote:
+> > > > On Wed, Oct 01, 2014 at 10:19:04AM +0200, Andreas M=C3=BCller wrote=
+:
+> > > > > * add libsecret to DEPENDS
+> > > > > * remove libglade from DEPENDS
+> > > > > * wireless (nm-signal-*.png) icons were updated upstream
+> > > > > * inherit gnomebase instead of gnome
+> > > > > * make bluetooth PACKAGECONFIG - disabled by default
+> > > >
+> > > > For some reason it has now the same problem as navit (through
+> gypsy.la)
+> > > >
+> > > > | x86_64-oe-linux-libtool: compile:  x86_64-oe-linux-gcc -m64
+> > > -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse
+> > > --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux8=
+6-64
+> > > -DHAVE_CONFIG_H -I.
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/networ=
+k-manager-applet/0.9.8.10-r0/network-manager-applet-0.9.8.10/src/utils
+> > > -I../.. -pthread
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/gtk-2.0
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/g=
+tk-2.0/include
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/pango-1.0
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/atk-1.0
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/cairo
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/pixman-1
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/libpng16
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/gdk-pixbuf-2.0
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/libpng16
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/pango-1.0
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/harfbuzz
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/pango-1.0
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/glib-2.0
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/g=
+lib-2.0/include
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/home/jenk=
+ins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/include/freetype2
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/freetype2
+> > > -pthread
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/libnm-glib
+> > >
+> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/inclu=
+de/NetworkManager
+> > > -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64
+> > > > | ../../x86_64-oe-linux-libtool  --tag=3DCC   --mode=3Dlink
+> > > x86_64-oe-linux-gcc  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3 -mfpma=
+th=3Dsse
+> > > --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux8=
+6-64
+> > > -Wall -std=3Dgnu89  -O2 -pipe -g -feliminate-unused-debug-types -Wsha=
+dow
+> > > -Wmissing-declarations -Wmissing-prototypes
+> -Wdeclaration-after-statement
+> > > -Wstrict-prototypes -Wfloat-equal -Wno-unused-parameter
+> -Wno-sign-compare
+> > > -fno-strict-aliasing -Wno-unused-but-set-variable   -Wl,-O1
+> > > -Wl,--hash-style=3Dgnu -Wl,--as-needed -o libutils.la
+> libutils_la-utils.lo
+> > > -lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 -lcairo
+> > > -lgdk_pixbuf-2.0 -lgio-2.0 -lpangoft2-1.0 -lpango-1.0 -lgobject-2.0
+> > > -lglib-2.0 -lfontconfig -lfreetype  -lgio-2.0 -lnm-glib -lnm-util
+> > > -lnm-glib-vpn -ldbus-glib-1 -ldbus-1 -lgobject-2.0 -Wl,--export-dynam=
+ic
+> > > -lgmodule-2.0 -pthread -lglib-2.0
+> > > > | /bin/grep:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib=
+/
+> > > libgudev-1.0.la: No such file or directory
+> > > > | sed: can't read
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib=
+/
+> > > libgudev-1.0.la: No such file or directory
+> > > > | x86_64-oe-linux-libtool: link:
+> > > `/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/li=
+b/
+> > > libgudev-1.0.la' is not a valid libtool archive
+> > > > | make[5]: *** [libutils.la] Error 1
+> > > > | make[5]: Leaving directory
+> > >
+> `/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/network=
+-manager-applet/0.9.8.10-r0/build/src/utils'
+> > > > | make[4]: *** [all-recursive] Error 1
+> > > > | make[4]: Leaving directory
+> > >
+> `/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/network=
+-manager-applet/0.9.8.10-r0/build/src/utils'
+> > >
+> > > the libgudev-1.0.la was moved from /usr/lib to /lib in systemd 215-21=
+6
+> > > updated
+> > >
+> > > --- a/packages/arm920tt-oe-linux-gnueabi/systemd/systemd-dbg/latest
+> > > +++ b/packages/arm920tt-oe-linux-gnueabi/systemd/systemd-dbg/latest
+> > > @@ -1,11 +1,11 @@
+> > >  PE =3D 1
+> > > -PV =3D 215+gitAUTOINC+252ff40a38
+> > > +PV =3D 216+gitAUTOINC+5d0ae62c66
+> > >  PR =3D r0
+> > > -PKGV =3D 215+git0+252ff40a38
+> > > -PKGR =3D r0.1
+> > > +PKGV =3D 216+git0+5d0ae62c66
+> > > +PKGR =3D r0.0
+> > >  RPROVIDES =3D
+> > >  RDEPENDS =3D
+> > > -RRECOMMENDS =3D eglibc-dbg glib-2.0-dbg libacl-dbg libcap-dbg libffi=
+-dbg
+> > > libgcc-dbg libkmod-dbg liblzma-dbg libpam-dbg libudev-dbg
+> > > util-linux-libblkid-dbg zlib-dbg
+> > > -PKGSIZE =3D 49629406
+> > > +RRECOMMENDS =3D glib-2.0-dbg glibc-dbg libacl-dbg libcap-dbg libffi-=
+dbg
+> > > libgcc-dbg libkmod-dbg liblzma-dbg libpam-dbg libudev-dbg
+> > > util-linux-libblkid-dbg zlib-dbg
+> > > +PKGSIZE =3D 50305088
+> > >  FILES =3D /usr/bin/.debug /usr/sbin/.debug /usr/lib/systemd/.debug
+> > > /usr/lib/.debug /bin/.debug /sbin/.debug /lib/.debug
+> > > /usr/lib/systemd/.debug /usr/lib/matchbox-panel/.debug
+> > > /usr/lib/systemd/systemd/.debug /usr/src/debug
+> > > /usr/lib/systemd/ptest/.debug /lib/.debug /lib/systemd/.debug
+> > > /lib/systemd/*/.debug /lib/security/.debug/
+> > > -RDEPENDS =3D libgudev-1.0 libsystemd libudev systemd (=3D
+> > > 1:215+git0+252ff40a38-r0.1)
+> > > -RRECOMMENDS =3D acl-dev base-files-dev base-passwd-dev dbus-dev
+> eglibc-dev
+> > > glib-2.0-dev kmod-dev libacl-dev libcap-dev libcgroup-dev libffi-dev
+> > > libgcc-dev libgcrypt-dev libgudev-1.0-dev libkmod-dev liblzma-dev
+> > > libpam-dev libsystemd-dev libudev-dev readline-dev shadow-dev
+> > > shadow-sysroot-dev systemd-binfmt-dev udev-dev
+> update-alternatives-opkg-dev
+> > > util-linux-dev util-linux-libblkid-dev util-linux-mount-dev
+> > > volatile-binds-dev xz-dev zlib-dev
+> > > -PKGSIZE =3D 78365
+> > > +RDEPENDS =3D libgudev-1.0 libsystemd libudev systemd (=3D
+> > > 1:216+git0+5d0ae62c66-r0.0)
+> > > +RRECOMMENDS =3D acl-dev base-files-dev base-passwd-dev dbus-dev
+> > > glib-2.0-dev glibc-dev kmod-dev libacl-dev libcap-dev libcgroup-dev
+> > > libffi-dev libgcc-dev libgcrypt-dev libgudev-1.0-dev libkmod-dev
+> > > liblzma-dev libpam-dev libsystemd-dev libudev-dev readline-dev
+> shadow-dev
+> > > shadow-sysroot-dev systemd-binfmt-dev udev-dev
+> update-alternatives-opkg-dev
+> > > util-linux-dev util-linux-libblkid-dev util-linux-mount-dev
+> > > volatile-binds-dev xz-dev zlib-dev
+> > > +PKGSIZE =3D 79477
+> > >  FILES =3D /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la
+> > > /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/acloc=
+al
+> > > /lib/*.o /usr/lib/systemd/*.la /lib/*.la /lib/security/*.la
+> > > /usr/share/dbus-1/interfaces/ /etc/rpm/macros.systemd
+> > > -FILELIST =3D /lib/security/pam_systemd.la
+> > > /usr/include/gudev-1.0/gudev/gudev.h
+> > > /usr/include/gudev-1.0/gudev/gudevclient.h
+> > > /usr/include/gudev-1.0/gudev/gudevdevice.h
+> > > /usr/include/gudev-1.0/gudev/gudevenumerator.h
+> > > /usr/include/gudev-1.0/gudev/gudevenums.h
+> > > /usr/include/gudev-1.0/gudev/gudevenumtypes.h
+> > > /usr/include/gudev-1.0/gudev/gudevtypes.h /usr/include/libudev.h
+> > > /usr/include/systemd/_sd-common.h /usr/include/systemd/sd-daemon.h
+> > > /usr/include/systemd/sd-id128.h /usr/include/systemd/sd-journal.h
+> > > /usr/include/systemd/sd-login.h /usr/include/systemd/sd-messages.h
+> /usr/lib/
+> > > libgudev-1.0.la /usr/lib/libgudev-1.0.so /usr/lib/libnss_myhostname.l=
+a
+> > > /usr/lib/libsystemd.la /usr/lib/libsystemd.so /usr/lib/libudev.la
+> > > /usr/lib/libudev.so /usr/lib/pkgconfig/gudev-1.0.pc
+> > > /usr/lib/pkgconfig/libsystemd.pc /usr/lib/pkgconfig/libudev.pc
+> > > /usr/share/pkgconfig/systemd.pc /usr/share/pkgconfig/udev.pc
+> > > +FILELIST =3D /lib/libgudev-1.0.la /lib/libgudev-1.0.so /lib/security=
+/
+> > > pam_systemd.la /usr/include/gudev-1.0/gudev/gudev.h
+> > > /usr/include/gudev-1.0/gudev/gudevclient.h
+> > > /usr/include/gudev-1.0/gudev/gudevdevice.h
+> > > /usr/include/gudev-1.0/gudev/gudevenumerator.h
+> > > /usr/include/gudev-1.0/gudev/gudevenums.h
+> > > /usr/include/gudev-1.0/gudev/gudevenumtypes.h
+> > > /usr/include/gudev-1.0/gudev/gudevtypes.h /usr/include/libudev.h
+> > > /usr/include/systemd/_sd-common.h /usr/include/systemd/sd-daemon.h
+> > > /usr/include/systemd/sd-id128.h /usr/include/systemd/sd-journal.h
+> > > /usr/include/systemd/sd-login.h /usr/include/systemd/sd-messages.h
+> /usr/lib/
+> > > libnss_myhostname.la /usr/lib/libnss_mymachines.la /usr/lib/
+> libsystemd.la
+> > > /usr/lib/libsystemd.so /usr/lib/libudev.la /usr/lib/libudev.so
+> > > /usr/lib/pkgconfig/gudev-1.0.pc /usr/lib/pkgconfig/libsystemd.pc
+> > > /usr/lib/pkgconfig/libudev.pc /usr/share/pkgconfig/systemd.pc
+> > > /usr/share/pkgconfig/udev.pc
+> > >
+> > > Hmm - I made my tests with systemd 216 and had no errors. Shouldn't
+> > pkg-config find libgudev <http://libgudev-1.0.la>?
+>
+> See http://patchwork.openembedded.org/patch/81291/ for more details.
+>
+> Yes I saw that - still wondering why it works fine here without this patc=
+h.
 
+Andreas
 
