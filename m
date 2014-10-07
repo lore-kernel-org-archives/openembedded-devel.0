@@ -1,34 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 195A8717F0
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 515A1702D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 04:28:58 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id k14so6881836wgh.31
+	Tue,  7 Oct 2014 04:52:15 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id hi2so6661541wib.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Oct 2014 21:28:59 -0700 (PDT)
+	Mon, 06 Oct 2014 21:52:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=ehEj36HKMUnI2jhfDahbsGBXcRfZEVHH2elQRXNjidE=;
-	b=F2je3x8LubGZNG9fn/mwU37rYecVZam2G83kB6QYi9bkfheHa8s+IjHH64qyt0Am19
-	5b1mWoKOxvxBIKnigDHx2T24HfLadgsJ+UVafI9MNI7YdVsFMuOMWFzBEoeAprZZy+ku
-	aYQlYZhW/Kestrm7W+ZDukp1vZuu3G0P1yzL6tbHdRS8YeNZRsleLl4CWIAprVXhbVOM
-	EQ+Ruf8WYSFtiLtS09wrtV+vDMCrTWBSnN8PkUuMRzAfJVoU9ZgypMmzcfKv3QCUTZXK
-	R6+/zkrnFSyPv7HXtVLqEwHzOAIZllE8dRDX8qiokdQzsLGP+tVeI2K3w7b52ql1o9cT
-	j2sA==
-MIME-Version: 1.0
-X-Received: by 10.194.120.37 with SMTP id kz5mr1471301wjb.107.1412656139244;
-	Mon, 06 Oct 2014 21:28:59 -0700 (PDT)
-Received: by 10.194.82.103 with HTTP; Mon, 6 Oct 2014 21:28:59 -0700 (PDT)
-In-Reply-To: <1412644341-15169-3-git-send-email-Martin.Jansa@gmail.com>
-References: <1412644341-15169-1-git-send-email-Martin.Jansa@gmail.com>
-	<1412644341-15169-3-git-send-email-Martin.Jansa@gmail.com>
-Date: Mon, 6 Oct 2014 21:28:59 -0700
-Message-ID: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=hcOGQnWGGoN/TXfLAhpaojPRRytWmsCv1kQgWBAUnMY=;
+	b=HASK3DjE3df2PJxFk/38E7EpuzzYctW8eRovYbABx/KsG1s74d2IDpUpcZjC/Q7Vld
+	AmPReZ55LokKNmPAkOSPpZP/C3x0v735D9zT/Mgn/PjnO4b4y4rgGf/lNLAhNEBrTOAG
+	8PIp3M6WPJYVG8nIvo8QXKqJds8QC17floo02zlhE9atqMDUUJhjw5tT7xnrDzSOCe84
+	TzcjsCeYHzuA5cmsQsS0M6uccjJnBNJMCS6KUtTRpMJgh00JDpQaXkJOjRskALLjSnBV
+	vttsNp7euq1Jx4hudTKLqf+noFT4/H+Sg+n8ioqSiLFR0TlvZikBGSg6M0uPLmHjjWZw
+	o1eg==
+X-Received: by 10.180.11.196 with SMTP id s4mr1507478wib.16.1412657536599;
+	Mon, 06 Oct 2014 21:52:16 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	l10sm13228189wif.20.2014.10.06.21.52.15 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 06 Oct 2014 21:52:16 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [oe-core][RFC][PATCH 3/3] modphp: blacklist because of conflict with php
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  7 Oct 2014 06:53:17 +0200
+Message-Id: <1412657597-13020-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.1.1
+In-Reply-To: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
+References: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
+Subject: [meta-oe][PATCHv2] modphp, xdebug: blacklist because of conflict with php
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 04:29:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Oct 2014 04:52:19 -0000
 
-This one should blacklist xdebug as well, because xdebug depends on modphp.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-webserver/recipes-php/modphp/modphp5.inc     | 3 +++
+ meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb | 1 +
+ 2 files changed, 4 insertions(+)
 
-On Mon, Oct 6, 2014 at 6:12 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc b/meta-webserver/recipes-php/modphp/modphp5.inc
+index 6932429..8707950 100644
+--- a/meta-webserver/recipes-php/modphp/modphp5.inc
++++ b/meta-webserver/recipes-php/modphp/modphp5.inc
+@@ -14,6 +14,9 @@ S = "${WORKDIR}/php-${PV}"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
+ 
++PNBLACKLIST[modphp] = "CONFLICT: 466 header files conflict with php"
++# e.g. sysroots/qemux86-64/usr/include/php/main/win95nt.h
++
+ inherit autotools
+ 
+ CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
+diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
+index ffff135..750b288 100644
+--- a/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
++++ b/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
+@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=34df3a274aa12b795417c65634c07f16"
+ 
+ DEPENDS = "modphp"
+ 
++PNBLACKLIST[xdebug] = "CONFLICT: depends on blocked modphp"
+ 
+ SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
+ 
+-- 
+2.1.1
 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-webserver/recipes-php/modphp/modphp5.inc | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc
-> b/meta-webserver/recipes-php/modphp/modphp5.inc
-> index 6932429..8707950 100644
-> --- a/meta-webserver/recipes-php/modphp/modphp5.inc
-> +++ b/meta-webserver/recipes-php/modphp/modphp5.inc
-> @@ -14,6 +14,9 @@ S = "${WORKDIR}/php-${PV}"
->
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
->
-> +PNBLACKLIST[modphp] = "CONFLICT: 466 header files conflict with php"
-> +# e.g. sysroots/qemux86-64/usr/include/php/main/win95nt.h
-> +
->  inherit autotools
->
->  CFLAGS += " -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED
-> -I${STAGING_INCDIR}/apache2"
-> --
-> 2.1.1
->
->
 
