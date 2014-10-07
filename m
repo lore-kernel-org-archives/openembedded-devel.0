@@ -1,35 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 07FF7717CA
+Return-Path: <denis@denix.org>
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 6FC21702D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 00:16:54 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id d1so6244209wiv.14
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Oct 2014 17:16:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=mqUVsA6dAx871FOeHkcaEcpepc5eVQqNTaJfi2MYVic=;
-	b=fhhbwPJC5O00zsrPA3fWqji0QQYWAA7/zfoepq34zdOIk7zxX5semd3fLc8cvrp4/t
-	a3uU78wLH/RPVlRIPYwsGzyqrC3eqTQPm8oLOnqhb6SG0/XJN6uG6bq7SvzFYuhHzDcU
-	imVhRFI915/hip8t8k6FW0AT+bbAnLiG6EDn+XcsHfCd36f/bk0Jw9gzefiSjnle8y5i
-	6tiypMK87nlKFdy/XlQq6yCSj2ZIXtLTDungXkArYyv67jX/7OlddhTE8aNei5nREAlf
-	s6PPuU+/KYuw2VA4oGFGexn0SaxuQtkWCY51gkC2SoS5+FVL6YKTPzo0THorBIOvbVXC
-	ro8w==
-X-Received: by 10.194.59.201 with SMTP id b9mr222458wjr.103.1412641014674;
-	Mon, 06 Oct 2014 17:16:54 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	lp8sm12802879wic.17.2014.10.06.17.16.53 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Oct 2014 17:16:54 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Tue,  7 Oct 2014 00:36:36 +0000 (UTC)
+Received: from gandalf.denix.org ([unknown] [108.18.33.160])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0ND100103TNW5Y80@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	06 Oct 2014 19:36:13 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B8FDC2018D; Mon,
+	06 Oct 2014 20:35:56 -0400 (EDT)
+Date: Mon, 06 Oct 2014 20:35:56 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Oct 2014 02:17:54 +0200
-Message-Id: <1412641074-12696-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.1.1
-Subject: [meta-oe][PATCH] lzma: drop the recipes
+Message-id: <20141007003556.GE25997@denix.org>
+References: <1411041927-9041-1-git-send-email-nickdademo@gmail.com>
+	<20140924151927.GI25706@jama>
+	<CANR6C54eaCZdb7ef58XfxdWu8odTUSJXr_X4P=J-_tuv5tkY_A@mail.gmail.com>
+	<20141007000758.GA12322@jama>
+MIME-version: 1.0
+In-reply-to: <20141007000758.GA12322@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe][PATCH] opencv: Add recipe for OpenCV v3.0.0-alpha.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,1312 +37,934 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 00:17:01 -0000
+X-List-Received-Date: Tue, 07 Oct 2014 00:36:41 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-* only dependency on this was from links's PACKAGECONFIG
-* xz from oe-core provides liblzma as well and they conflict
-  in sysroot
+On Tue, Oct 07, 2014 at 02:07:58AM +0200, Martin Jansa wrote:
+> On Tue, Oct 07, 2014 at 10:12:03AM +1100, Nick D'Ademo wrote:
+> > Hi Martin,
+> > 
+> > qemuarm build issue is fixed - what PV format do you suggest for alpha/beta
+> > releases?
+> 
+> "2.99+3.0.0-alpha+git${SRCPV}"
+> 
+> would be OK with me
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/links/links.inc            |    2 +-
- .../lzma/lzma-4.65/001-large_files.patch           |   13 -
- .../recipes-support/lzma/lzma-4.65/002-lzmp.patch  | 1059 --------------------
- .../lzma/lzma-4.65/003-compile_fixes.patch         |   26 -
- .../lzma/lzma-4.65/100-static_library.patch        |   70 --
- .../lzma/lzma-4.65/makefile-cleanup.patch          |   18 -
- meta-oe/recipes-support/lzma/lzma.inc              |   35 -
- meta-oe/recipes-support/lzma/lzma_4.65.bb          |    5 -
- 8 files changed, 1 insertion(+), 1227 deletions(-)
- delete mode 100644 meta-oe/recipes-support/lzma/lzma-4.65/001-large_files.patch
- delete mode 100644 meta-oe/recipes-support/lzma/lzma-4.65/002-lzmp.patch
- delete mode 100644 meta-oe/recipes-support/lzma/lzma-4.65/003-compile_fixes.patch
- delete mode 100644 meta-oe/recipes-support/lzma/lzma-4.65/100-static_library.patch
- delete mode 100644 meta-oe/recipes-support/lzma/lzma-4.65/makefile-cleanup.patch
- delete mode 100644 meta-oe/recipes-support/lzma/lzma.inc
- delete mode 100644 meta-oe/recipes-support/lzma/lzma_4.65.bb
+Well, this is all clearly defined in the OE wiki:
 
-diff --git a/meta-oe/recipes-support/links/links.inc b/meta-oe/recipes-support/links/links.inc
-index ef48d73..e072408 100644
---- a/meta-oe/recipes-support/links/links.inc
-+++ b/meta-oe/recipes-support/links/links.inc
-@@ -12,6 +12,6 @@ SRC_URI = "http://links.twibright.com/download/links-${PV}.tar.bz2 \
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[bzip2] = "--with-bzip2,--without-bzip2,bzip2"
--PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,lzma"
-+PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
- 
- inherit autotools pkgconfig
-diff --git a/meta-oe/recipes-support/lzma/lzma-4.65/001-large_files.patch b/meta-oe/recipes-support/lzma/lzma-4.65/001-large_files.patch
-deleted file mode 100644
-index b95fe9e..0000000
---- a/meta-oe/recipes-support/lzma/lzma-4.65/001-large_files.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Index: lzma-4.65/CPP/7zip/Compress/LZMA_Alone/makefile.gcc
--===================================================================
----- lzma-4.65.orig/CPP/7zip/Compress/LZMA_Alone/makefile.gcc	2009-05-15 23:33:51.000000000 +0200
--+++ lzma-4.65/CPP/7zip/Compress/LZMA_Alone/makefile.gcc	2009-06-01 22:00:54.000000000 +0200
--@@ -3,7 +3,7 @@
-- CXX_C = gcc -O2 -Wall
-- LIB = -lm
-- RM = rm -f
---CFLAGS = -c
--+CFLAGS = -c -D_FILE_OFFSET_BITS=64
-- 
-- ifdef SystemDrive
-- IS_MINGW = 1
-diff --git a/meta-oe/recipes-support/lzma/lzma-4.65/002-lzmp.patch b/meta-oe/recipes-support/lzma/lzma-4.65/002-lzmp.patch
-deleted file mode 100644
-index 72d881c..0000000
---- a/meta-oe/recipes-support/lzma/lzma-4.65/002-lzmp.patch
-+++ /dev/null
-@@ -1,1059 +0,0 @@
--Index: lzma-4.65/CPP/7zip/Compress/LZMA_Alone/lzmp.cpp
--===================================================================
----- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ lzma-4.65/CPP/7zip/Compress/LZMA_Alone/lzmp.cpp	2009-06-01 22:01:10.000000000 +0200
--@@ -0,0 +1,895 @@
--+/*
--+ * LZMA command line tool similar to gzip to encode and decode LZMA files.
--+ *
--+ * Copyright (C) 2005 Ville Koskinen
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License
--+ * as published by the Free Software Foundation; either version 2
--+ * of the License, or (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
--+ * USA.
--+ */
--+
--+#include "../../../Common/MyInitGuid.h"
--+
--+#include <iostream>
--+using std::cout;
--+using std::cerr;
--+using std::endl;
--+
--+#include <cstdio>
--+#include <cstdlib>
--+#include <cstring>
--+
--+#include <string>
--+using std::string;
--+#include <vector>
--+using std::vector;
--+typedef vector<string> stringVector;
--+
--+#include <unistd.h>
--+#include <getopt.h>
--+#include <signal.h>
--+
--+#include <sys/types.h>
--+#include <sys/stat.h>
--+#include <utime.h>
--+#include <sys/time.h> // futimes()
--+
--+// For Solaris
--+#ifndef HAVE_FUTIMES
--+//#define futimes(fd, tv) futimesat(fd, NULL, tv)
--+#endif
--+
--+#if defined(_WIN32) || defined(OS2) || defined(MSDOS)
--+#include <fcntl.h>
--+#include <io.h>
--+#define MY_SET_BINARY_MODE(file) setmode(fileno(file),O_BINARY)
--+#else
--+#define MY_SET_BINARY_MODE(file)
--+#endif
--+
--+#include "../../../7zip/Common/FileStreams.h"
--+
--+#include "../../../Common/Types.h"
--+
--+#include "../../../7zip/Compress/LzmaDecoder.h"
--+#include "../../../7zip/Compress/LzmaEncoder.h"
--+
--+#include "Exception.h"
--+
--+#include "lzma_version.h"
--+
--+namespace lzma {
--+
--+const char *PROGRAM_VERSION = PACKAGE_VERSION;
--+const char *PROGRAM_COPYRIGHT = "Copyright (C) 2006 Ville Koskinen";
--+
--+/* LZMA_Alone switches:
--+    -a{N}:  set compression mode - [0, 2], default: 2 (max)
--+    -d{N}:  set dictionary - [0,28], default: 23 (8MB)
--+    -fb{N}: set number of fast bytes - [5, 255], default: 128
--+    -lc{N}: set number of literal context bits - [0, 8], default: 3
--+    -lp{N}: set number of literal pos bits - [0, 4], default: 0
--+    -pb{N}: set number of pos bits - [0, 4], default: 2
--+    -mf{MF_ID}: set Match Finder: [bt2, bt3, bt4, bt4b, pat2r, pat2,
--+                pat2h, pat3h, pat4h, hc3, hc4], default: bt4
--+*/
--+
--+struct lzma_option {
--+	short compression_mode;			// -a
--+	short dictionary;			// -d
--+	short fast_bytes;			// -fb
--+	wchar_t *match_finder;			// -mf
--+	short literal_context_bits;		// -lc
--+	short literal_pos_bits;			// -lp
--+	short pos_bits;				// -pb
--+};
--+
--+/* The following is a mapping from gzip/bzip2 style -1 .. -9 compression modes
--+ * to the corresponding LZMA compression modes. Thanks, Larhzu, for coining
--+ * these. */
--+const lzma_option option_mapping[] = {
--+	{ 0,  0,  0,    NULL, 0, 0, 0},		// -0 (needed for indexing)
--+	{ 0, 16, 64,  L"hc4", 3, 0, 2},		// -1
--+	{ 0, 20, 64,  L"hc4", 3, 0, 2},		// -2
--+	{ 1, 19, 64,  L"bt4", 3, 0, 2},		// -3
--+	{ 2, 20, 64,  L"bt4", 3, 0, 2},		// -4
--+	{ 2, 21, 128, L"bt4", 3, 0, 2},		// -5
--+	{ 2, 22, 128, L"bt4", 3, 0, 2},		// -6
--+	{ 2, 23, 128, L"bt4", 3, 0, 2},		// -7
--+	{ 2, 24, 255, L"bt4", 3, 0, 2},		// -8
--+	{ 2, 25, 255, L"bt4", 3, 0, 2},		// -9
--+};
--+
--+struct extension_pair {
--+	char *from;
--+	char *to;
--+};
--+
--+const extension_pair known_extensions[] = {
--+	{ ".lzma", "" },
--+	{ ".tlz", ".tar" },
--+	{ NULL, NULL }
--+};
--+
--+/* Sorry, I just happen to like enumerations. */
--+enum PROGRAM_MODE {
--+	PM_COMPRESS = 0,
--+	PM_DECOMPRESS,
--+	PM_TEST,
--+	PM_HELP,
--+	PM_LICENSE,
--+	PM_VERSION
--+};
--+
--+enum {
--+	STATUS_OK = 0,
--+	STATUS_ERROR = 1,
--+	STATUS_WARNING = 2
--+};
--+
--+/* getopt options. */
--+/* struct option { name, has_arg, flag, val } */
--+const struct option long_options[] = {
--+	{ "stdout", 0, 0, 'c' },
--+	{ "decompress", 0, 0, 'd' },
--+	{ "compress", 0, 0, 'z' },
--+	{ "keep", 0, 0, 'k' },
--+	{ "force", 0, 0, 'f' },
--+	{ "test", 0, 0, 't' },
--+	{ "suffix", 1, 0, 'S' },
--+	{ "quiet", 0, 0, 'q' },
--+	{ "verbose", 0, 0, 'v' },
--+	{ "help", 0, 0, 'h' },
--+	{ "license", 0, 0, 'L' },
--+	{ "version", 0, 0, 'V' },
--+	{ "fast", 0, 0, '1' },
--+	{ "best", 0, 0, '9' },
--+	{ 0, 0, 0, 0 }
--+};
--+
--+/* getopt option string (for the above options). */
--+const char option_string[] = "cdzkftS:qvhLV123456789A:D:F:";
--+
--+/* Defaults. */
--+PROGRAM_MODE program_mode = PM_COMPRESS;
--+int	verbosity			= 0;
--+bool	stdinput			= false;
--+bool	stdoutput			= false;
--+bool	keep				= false;
--+bool	force				= false;
--+int	compression_mode		= 7;
--+//char	*suffix				= strdup(".lzma");
--+char	*suffix				= strdup(known_extensions[0].from);
--+lzma_option	advanced_options 	= { -1, -1, -1, NULL, -1, -1, -1 };
--+
--+void print_help(const char *const argv0)
--+{
--+	// Help goes to stdout while other messages go to stderr.
--+	cout << "\nlzma " << PROGRAM_VERSION
--+		<< " " << PROGRAM_COPYRIGHT << "\n"
--+		"Based on LZMA SDK " << LZMA_SDK_VERSION_STRING << " "
--+		<< LZMA_SDK_COPYRIGHT_STRING
--+		<< "\n\nUsage: " << argv0
--+		<< " [flags and input files in any order]\n"
--+"  -c --stdout       output to standard output\n"
--+"  -d --decompress   force decompression\n"
--+"  -z --compress     force compression\n"
--+"  -k --keep         keep (don't delete) input files\n"
--+"  -f --force        force overwrite of output file and compress links\n"
--+"  -t --test         test compressed file integrity\n"
--+"  -S .suf  --suffix .suf   use suffix .suf on compressed files\n"
--+"  -q --quiet        suppress error messages\n"
--+"  -v --verbose      be verbose\n"
--+"  -h --help         print this message\n"
--+"  -L --license      display the license information\n"
--+"  -V --version      display version numbers of LZMA SDK and lzma\n"
--+"  -1 .. -2          fast compression\n"
--+"  -3 .. -9          good to excellent compression. -7 is the default.\n"
--+"     --fast         alias for -1\n"
--+"     --best         alias for -9 (usually *not* what you want)\n\n"
--+"  Memory usage depends a lot on the chosen compression mode -1 .. -9.\n"
--+"  See the man page lzma(1) for details.\n\n";
--+}
--+
--+void print_license(void)
--+{
--+	cout << "\n  LZMA command line tool " << PROGRAM_VERSION << " - "
--+		<< PROGRAM_COPYRIGHT
--+		<< "\n  LZMA SDK " << LZMA_SDK_VERSION_STRING << " - "
--+		<< LZMA_SDK_COPYRIGHT_STRING
--+		<< "\n  This program is a part of the LZMA utils package.\n"
--+		"  http://tukaani.org/lzma/\n\n"
--+"  This program is free software; you can redistribute it and/or\n"
--+"  modify it under the terms of the GNU General Public License\n"
--+"  as published by the Free Software Foundation; either version 2\n"
--+"  of the License, or (at your option) any later version.\n"
--+"\n"
--+"  This program is distributed in the hope that it will be useful,\n"
--+"  but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
--+"  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
--+"  GNU General Public License for more details.\n"
--+"\n";
--+}
--+
--+void print_version(void)
--+{
--+	cout << "LZMA command line tool " << PROGRAM_VERSION << "\n"
--+		<< "LZMA SDK " << LZMA_SDK_VERSION_STRING << "\n";
--+}
--+
--+short str2int (const char *str, const int &min, const int &max)
--+{
--+	int value = -1;
--+	char *endptr = NULL;
--+	if (str == NULL || str[0] == '\0')
--+		throw ArgumentException("Invalid integer option");
--+	value = strtol (str, &endptr, 10);
--+	if (*endptr != '\0' || value < min || value > max)
--+		throw ArgumentException("Invalid integer option");
--+	return value;
--+}
--+
--+void parse_options(int argc, char **argv, stringVector &filenames)
--+{
--+	/* Snatched from getopt(3). */
--+	int c;
--+
--+	/* Check how we were called */
--+	{
--+		char *p = strrchr (argv[0], '/'); // Remove path prefix, if any
--+		if (p++ == NULL)
--+			p = argv[0];
--+		if (strstr (p, "un") != NULL) {
--+			program_mode = PM_DECOMPRESS;
--+		} else if (strstr (p, "cat") != NULL) {
--+			program_mode = PM_DECOMPRESS;
--+			stdoutput = true;
--+		}
--+	}
--+
--+	while (-1 != (c = getopt_long(argc, argv, option_string,
--+			long_options, NULL))) {
--+		switch (c) {
--+			// stdout
--+			case 'c':
--+				stdoutput = true;
--+				break;
--+
--+			// decompress
--+			case 'd':
--+				program_mode = PM_DECOMPRESS;
--+				break;
--+
--+			// compress
--+			case 'z':
--+				program_mode = PM_COMPRESS;
--+				break;
--+
--+			// keep
--+			case 'k':
--+				keep = true;
--+				break;
--+
--+			// force
--+			case 'f':
--+				force = true;
--+				break;
--+
--+			// test
--+			case 't':
--+				program_mode = PM_TEST;
--+				break;
--+
--+			// suffix
--+			case 'S':
--+				if (optarg) {
--+					free(suffix);
--+					suffix = strdup(optarg);
--+				}
--+				break;
--+
--+			// quiet
--+			case 'q':
--+				verbosity = 0;
--+				break;
--+
--+			// verbose
--+			case 'v':
--+				verbosity++;
--+				break;
--+
--+			// help
--+			case 'h':
--+				program_mode = PM_HELP;
--+				break;
--+
--+			// license
--+			case 'L':
--+				program_mode = PM_LICENSE;
--+				break;
--+
--+			// version
--+			case 'V':
--+				program_mode = PM_VERSION;
--+				break;
--+
--+			case '1': case '2': case '3': case '4': case '5':
--+			case '6': case '7': case '8': case '9':
--+				compression_mode = c - '0';
--+				break;
--+
--+			// Advanced options //
--+			// Compression mode
--+			case 'A':
--+				advanced_options.compression_mode =
--+						str2int (optarg, 0, 2);
--+				break;
--+
--+			// Dictionary size
--+			case 'D':
--+				advanced_options.dictionary =
--+						str2int (optarg, 0, 28);
--+				break;
--+
--+			// Fast bytes
--+			case 'F':
--+				advanced_options.fast_bytes =
--+						str2int (optarg, 0, 273);
--+				break;
--+
--+			default:
--+				throw ArgumentException("");
--+				break;
--+		} // switch(c)
--+	} // while(1)
--+
--+	for (int i = optind; i < argc; i++) {
--+		if (strcmp("-", argv[i]) == 0)
--+			continue;
--+		filenames.push_back(argv[i]);
--+	}
--+} // parse_options
--+
--+void set_encoder_properties(NCompress::NLzma::CEncoder *encoder,
--+		lzma_option &opt)
--+{
--+	/* Almost verbatim from LzmaAlone.cpp. */
--+	    PROPID propIDs[] =
--+	{
--+		NCoderPropID::kDictionarySize,
--+		NCoderPropID::kPosStateBits,
--+		NCoderPropID::kLitContextBits,
--+		NCoderPropID::kLitPosBits,
--+		NCoderPropID::kAlgorithm,
--+		NCoderPropID::kNumFastBytes,
--+		NCoderPropID::kMatchFinder,
--+		NCoderPropID::kEndMarker
--+	};
--+	const int kNumProps = sizeof(propIDs) / sizeof(propIDs[0]);
--+#define VALUE(x) (advanced_options.x >= 0 ? advanced_options.x : opt.x)
--+	PROPVARIANT properties[kNumProps];
--+	for (int p = 0; p < 6; p++)
--+		properties[p].vt = VT_UI4;
--+	properties[0].ulVal = UInt32(1 << VALUE (dictionary));
--+	properties[1].ulVal = UInt32(VALUE (pos_bits));
--+	properties[2].ulVal = UInt32(VALUE (literal_context_bits));
--+	properties[3].ulVal = UInt32(VALUE (literal_pos_bits));
--+	properties[4].ulVal = UInt32(VALUE (compression_mode));
--+	properties[5].ulVal = UInt32(VALUE (fast_bytes));
--+#undef VALUE
--+
--+	properties[6].vt = VT_BSTR;
--+	properties[6].bstrVal = (BSTR)opt.match_finder;
--+
--+	properties[7].vt = VT_BOOL;
--+	properties[7].boolVal = stdinput ? VARIANT_TRUE : VARIANT_FALSE;
--+
--+	if (encoder->SetCoderProperties(propIDs, properties, kNumProps) != S_OK)
--+		throw Exception("SetCoderProperties() error");
--+}
--+
--+void encode(NCompress::NLzma::CEncoder *encoderSpec,
--+		CMyComPtr<ISequentialInStream> inStream,
--+		CMyComPtr<ISequentialOutStream> outStream,
--+		lzma_option encoder_options,
--+		UInt64 fileSize)
--+{
--+	set_encoder_properties(encoderSpec, encoder_options);
--+
--+	encoderSpec->WriteCoderProperties(outStream);
--+
--+	for (int i = 0; i < 8; i++)
--+	{
--+		Byte b = Byte(fileSize >> (8 * i));
--+		if (outStream->Write(&b, sizeof(b), 0) != S_OK)
--+			throw Exception("Write error while encoding");
--+	}
--+
--+	HRESULT result = encoderSpec->Code(inStream, outStream, 0, 0, 0);
--+
--+	if (result == E_OUTOFMEMORY)
--+		throw Exception("Cannot allocate memory");
--+	else if (result != S_OK) {
--+		char buffer[33];
--+		snprintf(buffer, 33, "%d", (unsigned int)result);
--+		throw Exception(string("Encoder error: ") + buffer);
--+	}
--+}
--+
--+void decode(NCompress::NLzma::CDecoder *decoderSpec,
--+		CMyComPtr<ISequentialInStream> inStream,
--+		CMyComPtr<ISequentialOutStream> outStream)
--+{
--+	const UInt32 kPropertiesSize = 5;
--+	Byte properties[kPropertiesSize];
--+	UInt32 processedSize;
--+	UInt64 fileSize = 0;
--+
--+	if (inStream->Read(properties, kPropertiesSize, &processedSize) != S_OK)
--+		throw Exception("Read error");
--+	if (processedSize != kPropertiesSize)
--+		throw Exception("Read error");
--+	if (decoderSpec->SetDecoderProperties2(properties, kPropertiesSize) != S_OK)
--+		throw Exception("SetDecoderProperties() error");
--+
--+	for (int i = 0; i < 8; i++)
--+	{
--+		Byte b;
--+
--+		if (inStream->Read(&b, sizeof(b), &processedSize) != S_OK)
--+			throw Exception("Read error");
--+		if (processedSize != 1)
--+			throw Exception("Read error");
--+
--+		fileSize |= ((UInt64)b) << (8 * i);
--+	}
--+
--+	if (decoderSpec->Code(inStream, outStream, 0, &fileSize, 0) != S_OK)
--+		throw Exception("Decoder error");
--+}
--+
--+int open_instream(const string infile,
--+		CMyComPtr<ISequentialInStream> &inStream,
--+		UInt64 &fileSize)
--+{
--+	CInFileStream *inStreamSpec = new CInFileStream;
--+	inStream = inStreamSpec;
--+	if (!inStreamSpec->Open(infile.c_str()))
--+		throw Exception("Cannot open input file " + infile);
--+
--+	inStreamSpec->File.GetLength(fileSize);
--+
--+	return inStreamSpec->File.GetHandle();
--+}
--+
--+int open_outstream(const string outfile,
--+		CMyComPtr<ISequentialOutStream> &outStream)
--+{
--+	COutFileStream *outStreamSpec = new COutFileStream;
--+	outStream = outStreamSpec;
--+
--+	bool open_by_force = (program_mode == PM_TEST) | force;
--+
--+	if (!outStreamSpec->Create(outfile.c_str(), open_by_force))
--+		throw Exception("Cannot open output file " + outfile);
--+
--+	return outStreamSpec->File.GetHandle();
--+}
--+
--+double get_ratio(int inhandle, int outhandle)
--+{
--+	struct stat in_stats, out_stats;
--+	fstat(inhandle, &in_stats);
--+	fstat(outhandle, &out_stats);
--+
--+	return (double)out_stats.st_size / (double)in_stats.st_size;
--+}
--+
--+mode_t get_file_mode(string filename)
--+{
--+	struct stat in_stat;
--+	lstat(filename.c_str(), &in_stat);
--+
--+	return in_stat.st_mode;
--+}
--+
--+bool string_ends_with(string str, string ending)
--+{
--+	return equal(ending.rbegin(), ending.rend(), str.rbegin());
--+}
--+
--+bool extension_is_known(string filename)
--+{
--+	bool known_format = false;
--+	extension_pair extension; int i = 1;
--+
--+	extension = known_extensions[0];
--+	while (extension.from != NULL) {
--+		if (string_ends_with(filename, extension.from)) {
--+			known_format = true;
--+			break;
--+		}
--+		extension = known_extensions[i];
--+		i++;
--+	}
--+
--+	if (!known_format) {
--+		if (!string_ends_with(filename, suffix)) {
--+			return false;
--+		}
--+	}
--+
--+	return true;
--+}
--+
--+string replace_extension(string filename)
--+{
--+	int suffix_starts_at = filename.length() - strlen (suffix);
--+	string from_suffix = filename.substr(suffix_starts_at, strlen (suffix));
--+	string ret = filename.substr(0, suffix_starts_at);
--+	extension_pair extension; int i = 1;
--+
--+	bool found_replacement = false;
--+	extension = known_extensions[0];
--+	while (extension.from != NULL) {
--+		if (from_suffix.compare(extension.from) == 0) {
--+			ret += extension.to;
--+			found_replacement = true;
--+			break;
--+		}
--+
--+		extension = known_extensions[i];
--+		i++;
--+	}
--+
--+	return ret;
--+}
--+
--+string pretty_print_status(string filename, string output_filename,
--+		string ratio)
--+{
--+	string ret = "";
--+
--+	ret += filename;
--+	ret += ":\t ";
--+
--+	if (program_mode == PM_TEST) {
--+		ret += "decoded succesfully";
--+
--+		return ret;
--+	}
--+
--+	if (!stdinput && !stdoutput) {
--+		ret += ratio;
--+		ret += " -- ";
--+	}
--+
--+	if (program_mode == PM_COMPRESS) {
--+		if (keep) {
--+			ret += "encoded succesfully";
--+
--+			return ret;
--+		}
--+
--+		ret += "replaced with ";
--+		ret += output_filename;
--+
--+		return ret;
--+	}
--+
--+	if (program_mode == PM_DECOMPRESS) {
--+		if (keep) {
--+			ret += "decoded succesfully";
--+
--+			return ret;
--+		}
--+
--+		ret += "replaced with ";
--+		ret += output_filename;
--+
--+		return ret;
--+	}
--+
--+	return ret;
--+}
--+
--+static string archive_name; // I know, it is crude, but I haven't found any other
--+    // way then making a global variable to transfer filename to handler
--+
--+void signal_handler (int signum)
--+{
--+    unlink (archive_name.c_str()); // deleting
--+    signal (signum, SIG_DFL); // we return the default function to used signal
--+    kill (getpid(), signum); // and then send this signal to the process again
--+}
--+
--+} // namespace lzma
--+
--+
--+int main(int argc, char **argv)
--+{
--+	using namespace lzma;
--+	using std::cerr;
--+
--+	stringVector filenames;
--+
--+	signal (SIGTERM,signal_handler);
--+	signal (SIGHUP,signal_handler);
--+	signal (SIGINT,signal_handler);
--+
--+	try {
--+		parse_options(argc, argv, filenames);
--+	}
--+	catch (...) {
--+		return STATUS_ERROR;
--+	}
--+
--+	if (program_mode == PM_HELP) {
--+		print_help(argv[0]);
--+		return STATUS_OK;
--+	}
--+	else if (program_mode == PM_LICENSE) {
--+		print_license();
--+		return STATUS_OK;
--+	}
--+	else if (program_mode == PM_VERSION) {
--+		print_version();
--+		return STATUS_OK;
--+	}
--+
--+	if (filenames.empty()) {
--+		stdinput = true;
--+		stdoutput = true;
--+
--+		/* FIXME: get rid of this */
--+		filenames.push_back("-");
--+	}
--+
--+	/* Protection: always create new files with 0600 in order to prevent
--+	 * outsiders from reading incomplete data. */
--+	umask(0077);
--+
--+	bool warning = false;
--+
--+	for (int i = 0; i < filenames.size(); i++) {
--+		CMyComPtr<ISequentialInStream> inStream;
--+		CMyComPtr<ISequentialOutStream> outStream;
--+		UInt64 fileSize = 0;
--+		int inhandle = 0, outhandle = 0;
--+		string output_filename;
--+
--+		if (stdinput) {
--+			inStream = new CStdInFileStream;
--+			MY_SET_BINARY_MODE(stdin);
--+			fileSize = (UInt64)(Int64)-1;
--+
--+			inhandle = STDIN_FILENO;
--+
--+			outStream = new CStdOutFileStream;
--+			MY_SET_BINARY_MODE(stdout);
--+
--+			outhandle = STDOUT_FILENO;
--+		}
--+		else {
--+			mode_t infile_mode = get_file_mode(filenames[i]);
--+			if (!S_ISREG(infile_mode)) {
--+				if (S_ISDIR(infile_mode)) {
--+					warning = true;
--+					cerr << argv[0] << ": " << filenames[i] << ": "
--+						<< "cowardly refusing to work on directory"
--+						<< endl;
--+
--+					continue;
--+				}
--+				else if (S_ISLNK(infile_mode)) {
--+					if (!stdoutput && !force) {
--+						warning = true;
--+
--+					cerr << argv[0] << ": " << filenames[i] << ": "
--+							<< "cowardly refusing to work on symbolic link "
--+							<< "(use --force to force encoding or decoding)"
--+							<< endl;
--+
--+						continue;
--+					}
--+				}
--+				else {
--+					warning = true;
--+
--+					cerr << argv[0] << ": " << filenames[i] << ": "
--+						<< "doesn't exist or is not a regular file"
--+						<< endl;
--+
--+					continue;
--+				}
--+			}
--+
--+			// Test if the file already ends with *suffix.
--+			if (program_mode == PM_COMPRESS && !force
--+					&& string_ends_with(filenames[i],
--+						suffix)) {
--+				warning = true;
--+
--+				cerr << filenames[i] << " already has "
--+					<< suffix << " suffix -- unchanged\n";
--+
--+				continue;
--+			}
--+
--+			// Test if the file extension is known.
--+			if (program_mode == PM_DECOMPRESS
--+					&& !extension_is_known(filenames[i])) {
--+				warning = true;
--+
--+				cerr << filenames[i] << ": "
--+					<< " unknown suffix -- unchanged"
--+					<< endl;
--+
--+				continue;
--+			}
--+
--+			try {
--+				inhandle = open_instream(filenames[i], inStream, fileSize);
--+			}
--+			catch (Exception e) {
--+				cerr << argv[0] << ": " << e.what() << endl;
--+				return STATUS_ERROR;
--+			}
--+
--+			if (stdoutput) {
--+				outStream = new CStdOutFileStream;
--+				MY_SET_BINARY_MODE(stdout);
--+
--+				outhandle = STDOUT_FILENO;
--+			}
--+			else {
--+				/* Testing mode is nothing else but decoding
--+				 * and throwing away the result. */
--+				if (program_mode == PM_TEST)
--+					output_filename = "/dev/null";
--+				else if (program_mode == PM_DECOMPRESS)
--+					output_filename = replace_extension(filenames[i]);
--+				else
--+					output_filename = filenames[i]
--+							+ suffix;
--+				archive_name = output_filename;
--+
--+				try {
--+					outhandle = open_outstream(output_filename, outStream);
--+				}
--+				catch (Exception e) {
--+					cerr << argv[0] << ": " << e.what() << endl;
--+					return STATUS_ERROR;
--+				}
--+			}
--+
--+		}
--+
--+		// Unless --force is specified, do not read/write compressed
--+		// data from/to a terminal.
--+		if (!force) {
--+			if (program_mode == PM_COMPRESS && isatty(outhandle)) {
--+				cerr << argv[0] << ": compressed data not "
--+					"written to a terminal. Use "
--+					"-f to force compression.\n"
--+					<< argv[0] << ": For help, type: "
--+					<< argv[0] << " -h\n";
--+				return STATUS_ERROR;
--+			} else if (program_mode == PM_DECOMPRESS
--+					&& isatty(inhandle)) {
--+				cerr << argv[0] << ": compressed data not "
--+					"read from a terminal. Use "
--+					"-f to force decompression.\n"
--+					<< argv[0] << ": For help, type: "
--+					<< argv[0] << " -h\n";
--+				return STATUS_ERROR;
--+			}
--+		}
--+
--+		if (program_mode == PM_COMPRESS) {
--+			    NCompress::NLzma::CEncoder *encoderSpec =
--+				      new NCompress::NLzma::CEncoder;
--+
--+			lzma_option options = option_mapping[compression_mode];
--+
--+			try {
--+				encode(encoderSpec, inStream, outStream, options, fileSize);
--+			}
--+			catch (Exception e) {
--+				cerr << argv[0] << ": " << e.what() << endl;
--+				unlink(output_filename.c_str());
--+				delete(encoderSpec);
--+
--+				return STATUS_ERROR;
--+			}
--+
--+			delete(encoderSpec);
--+		}
--+		else {			// PM_DECOMPRESS | PM_TEST
--+		    NCompress::NLzma::CDecoder *decoderSpec =
--+		        new NCompress::NLzma::CDecoder;
--+
--+			try {
--+				decode(decoderSpec, inStream, outStream);
--+			}
--+			catch (Exception e) {
--+				cerr << argv[0] << ": " << e.what() << endl;
--+				unlink(output_filename.c_str());
--+				delete(decoderSpec);
--+
--+				return STATUS_ERROR;
--+			}
--+
--+			delete(decoderSpec);
--+		}
--+
--+		/* Set permissions and owners. */
--+		if ( (program_mode == PM_COMPRESS || program_mode == PM_DECOMPRESS )
--+				&& (!stdinput && !stdoutput) ) {
--+
--+			int ret = 0;
--+			struct stat file_stats;
--+			ret = fstat(inhandle, &file_stats);
--+
--+			ret = fchmod(outhandle, file_stats.st_mode);
--+			ret = fchown(outhandle, file_stats.st_uid, file_stats.st_gid);
--+			// We need to call fchmod() again, since otherwise the SUID bits
--+			// are lost.
--+			ret = fchmod(outhandle, file_stats.st_mode);
--+
--+			struct timeval file_times[2];
--+			// Access time
--+			file_times[0].tv_sec = file_stats.st_atime;
--+			file_times[0].tv_usec = 0;
--+			// Modification time
--+			file_times[1].tv_sec = file_stats.st_mtime;
--+			file_times[1].tv_usec = 0;
--+
--+			ret = futimes(outhandle, file_times);
--+
--+			if (!keep)
--+				unlink(filenames[i].c_str());
--+		}
--+
--+		if (verbosity > 0) {
--+			if (stdoutput) {
--+				cerr << filenames[i] << ":\t ";
--+				cerr << "decoded succesfully"
--+					<< endl;
--+			}
--+
--+			else {
--+				char buf[10] = { 0 };
--+
--+				if (program_mode == PM_DECOMPRESS)
--+					snprintf(buf, 10, "%.2f%%",
--+							(1 - get_ratio(outhandle, inhandle)) * 100);
--+				if (program_mode == PM_COMPRESS)
--+					snprintf(buf, 10, "%.2f%%",
--+							(1 - get_ratio(inhandle, outhandle)) * 100);
--+
--+				string ratio = buf;
--+				cerr << pretty_print_status(filenames[i], output_filename,
--+						ratio)
--+					<< endl;
--+			}
--+		}
--+	}
--+
--+	if (warning)
--+		return STATUS_WARNING;
--+
--+	return STATUS_OK;
--+}
--+
--Index: lzma-4.65/CPP/7zip/Compress/LZMA_Alone/Exception.h
--===================================================================
----- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ lzma-4.65/CPP/7zip/Compress/LZMA_Alone/Exception.h	2009-06-01 22:01:10.000000000 +0200
--@@ -0,0 +1,45 @@
--+/* A couple of exceptions for lzmp.
--+ *
--+ * Copyright (C) 2005 Ville Koskinen
--+ *
--+ * This program is free software; you can redistribute it and/or
--+ * modify it under the terms of the GNU General Public License
--+ * as published by the Free Software Foundation; either version 2
--+ * of the License, or (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ */
--+
--+#ifndef _EXCEPTION_H_
--+#define _EXCEPTION_H_
--+
--+#include <string>
--+using std::string;
--+
--+class Exception
--+{
--+private:
--+	string message;
--+public:
--+	Exception(char *what): message(what) { }
--+	Exception(string what): message(what) { }
--+
--+	~Exception() { }
--+
--+	string what(void) { return message; }
--+};
--+
--+class ArgumentException: public Exception
--+{
--+public:
--+	ArgumentException(char *what): Exception(what) { }
--+	ArgumentException(string what): Exception(what) { }
--+
--+	~ArgumentException() { }
--+};
--+
--+#endif
--+
--Index: lzma-4.65/CPP/7zip/Compress/LZMA_Alone/makefile.gcc
--===================================================================
----- lzma-4.65.orig/CPP/7zip/Compress/LZMA_Alone/makefile.gcc	2009-06-01 22:00:54.000000000 +0200
--+++ lzma-4.65/CPP/7zip/Compress/LZMA_Alone/makefile.gcc	2009-06-01 22:06:13.000000000 +0200
--@@ -1,9 +1,10 @@
---PROG = lzma
--+PROG = lzma_alone
--+PROG2 = lzma
-- CXX = g++ -O2 -Wall
-- CXX_C = gcc -O2 -Wall
-- LIB = -lm
-- RM = rm -f
---CFLAGS = -c -D_FILE_OFFSET_BITS=64
--+CFLAGS = -c -I ../../../ -D_FILE_OFFSET_BITS=64 -DPACKAGE_VERSION="\"4.32.0beta3\""
-- 
-- ifdef SystemDrive
-- IS_MINGW = 1
--@@ -45,12 +46,35 @@
--   Lzma86Dec.o \
--   Lzma86Enc.o \
-- 
--+OBJS2 = \
--+	C_FileIO.o \
--+	CRC.o \
--+	Alloc.o \
--+	FileStreams.o \
--+	StreamUtils.o \
--+	InBuffer.o \
--+	OutBuffer.o \
--+	LzmaDecoder.o \
--+	StringConvert.o \
--+	StringToInt.o \
--+	LzmaEncoder.o \
--+	LzmaDec.o \
--+	LzmaEnc.o \
--+	LzFind.o \
--+	7zCrc.o \
--+	lzmp.o
-- 
---all: $(PROG)
--+all: $(PROG) $(PROG2)
-- 
-- $(PROG): $(OBJS)
-- 	$(CXX) -o $(PROG) $(LDFLAGS) $(OBJS) $(LIB) $(LIB2)
-- 
--+$(PROG2): $(OBJS2)
--+	$(CXX) -o $(PROG2) $(LDFLAGS) $(OBJS2) $(LIB)
--+
--+lzmp.o: lzmp.cpp
--+	$(CXX) $(CFLAGS) lzmp.cpp
--+
-- LzmaAlone.o: LzmaAlone.cpp
-- 	$(CXX) $(CFLAGS) LzmaAlone.cpp
-- 
--@@ -131,5 +153,5 @@
-- 	$(CXX_C) $(CFLAGS) ../../../../C/LzmaUtil/Lzma86Enc.c
-- 
-- clean:
---	-$(RM) $(PROG) $(OBJS)
--+	-$(RM) $(PROG) $(PROG2) $(OBJS)
-- 
--Index: lzma-4.65/CPP/7zip/Compress/LZMA_Alone/lzma_version.h
--===================================================================
----- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ lzma-4.65/CPP/7zip/Compress/LZMA_Alone/lzma_version.h	2009-06-01 22:01:10.000000000 +0200
--@@ -0,0 +1,31 @@
--+#ifndef LZMA_VERSION_H
--+#define LZMA_VERSION_H
--+
--+/*
--+    Version and copyright information used by LZMA utils.
--+*/
--+
--+static const char *LZMA_SDK_VERSION_STRING = "4.43";
--+
--+static const char *LZMA_SDK_COPYRIGHT_STRING =
--+		"Copyright (C) 1999-2006 Igor Pavlov";
--+
--+static const char *LZMA_SDK_COPYRIGHT_INFO =
--+		"  See http://7-zip.org/sdk.html or the documentation of LZMA SDK for\n"
--+		"  the license. For reference, the version 4.43 is free software\n"
--+		"  licensed under the GNU LGPL.";
--+
--+
--+static const char *LZMA_UTILS_VERSION_STRING = PACKAGE_VERSION;
--+
--+static const char *LZMA_UTILS_COPYRIGHT_STRING =
--+		"Copyright (C) 2006 Lasse Collin";
--+
--+static const char *LZMA_UTILS_COPYRIGHT_INFO =
--+		"This program comes with ABSOLUTELY NO WARRANTY.\n"
--+		"You may redistribute copies of this program\n"
--+		"under the terms of the GNU General Public License.\n"
--+		"For more information about these matters, see the file "
--+		"named COPYING.\n";
--+
--+#endif /* ifndef LZMA_VERSION_H */
--Index: lzma-4.65/CPP/Common/C_FileIO.h
--===================================================================
----- lzma-4.65.orig/CPP/Common/C_FileIO.h	2009-05-15 23:33:51.000000000 +0200
--+++ lzma-4.65/CPP/Common/C_FileIO.h	2009-06-01 22:06:56.000000000 +0200
--@@ -24,6 +24,7 @@
--   bool Close();
--   bool GetLength(UInt64 &length) const;
--   off_t Seek(off_t distanceToMove, int moveMethod) const;
--+  int GetHandle() const { return _handle; }
-- };
-- 
-- class CInFile: public CFileBase
-diff --git a/meta-oe/recipes-support/lzma/lzma-4.65/003-compile_fixes.patch b/meta-oe/recipes-support/lzma/lzma-4.65/003-compile_fixes.patch
-deleted file mode 100644
-index 49ae66b..0000000
---- a/meta-oe/recipes-support/lzma/lzma-4.65/003-compile_fixes.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--diff -urN lzma-4.65/CPP/7zip/Common/FileStreams.h lzma-4.65.new/CPP/7zip/Common/FileStreams.h
----- lzma-4.65/CPP/7zip/Common/FileStreams.h	2009-05-15 23:33:51.000000000 +0200
--+++ lzma-4.65.new/CPP/7zip/Common/FileStreams.h	2009-06-01 22:30:01.000000000 +0200
--@@ -72,6 +72,7 @@
--   public IOutStream,
--   public CMyUnknownImp
-- {
--+public:
--   #ifdef USE_WIN_FILE
--   NWindows::NFile::NIO::COutFile File;
--   #else
--diff -urN lzma-4.65/CPP/Common/MyWindows.h lzma-4.65.new/CPP/Common/MyWindows.h
----- lzma-4.65/CPP/Common/MyWindows.h	2009-05-15 23:33:51.000000000 +0200
--+++ lzma-4.65.new/CPP/Common/MyWindows.h	2009-06-01 22:29:26.000000000 +0200
--@@ -101,8 +101,11 @@
-- 
-- #ifdef __cplusplus
-- 
--+#ifndef INITGUID
--+#define INITGUID
-- DEFINE_GUID(IID_IUnknown,
-- 0x00000000, 0x0000, 0x0000, 0xC0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
--+#endif
-- struct IUnknown
-- {
--   STDMETHOD(QueryInterface) (REFIID iid, void **outObject) PURE;
-diff --git a/meta-oe/recipes-support/lzma/lzma-4.65/100-static_library.patch b/meta-oe/recipes-support/lzma/lzma-4.65/100-static_library.patch
-deleted file mode 100644
-index 15ab4e0..0000000
---- a/meta-oe/recipes-support/lzma/lzma-4.65/100-static_library.patch
-+++ /dev/null
-@@ -1,70 +0,0 @@
----- a/C/LzmaUtil/makefile.gcc
--+++ b/C/LzmaUtil/makefile.gcc
--@@ -1,44 +1,53 @@
-- PROG = lzma
---CXX = g++
---LIB =
--+CC = gcc
--+LIB = liblzma.a
-- RM = rm -f
-- CFLAGS = -c -O2 -Wall
--+AR = ar
--+RANLIB = ranlib
-- 
-- OBJS = \
---  LzmaUtil.o \
--   Alloc.o \
--   LzFind.o \
--   LzmaDec.o \
--   LzmaEnc.o \
--+  LzmaLib.o \
--   7zFile.o \
--   7zStream.o \
-- 
---
-- all: $(PROG)
-- 
---$(PROG): $(OBJS)
---	$(CXX) -o $(PROG) $(LDFLAGS) $(OBJS) $(LIB) $(LIB2)
--+$(PROG): LzmaUtil.o $(LIB)
--+	$(CC) -o $(PROG) $(LDFLAGS) $< $(LIB)
-- 
-- LzmaUtil.o: LzmaUtil.c
---	$(CXX) $(CFLAGS) LzmaUtil.c
--+	$(CC) $(CFLAGS) LzmaUtil.c
--+
--+$(LIB): $(OBJS)
--+	rm -f $@
--+	$(AR) rcu $@ $(OBJS)
--+	$(RANLIB) $@
-- 
-- Alloc.o: ../Alloc.c
---	$(CXX) $(CFLAGS) ../Alloc.c
--+	$(CC) $(CFLAGS) ../Alloc.c
-- 
-- LzFind.o: ../LzFind.c
---	$(CXX) $(CFLAGS) ../LzFind.c
--+	$(CC) $(CFLAGS) ../LzFind.c
-- 
-- LzmaDec.o: ../LzmaDec.c
---	$(CXX) $(CFLAGS) ../LzmaDec.c
--+	$(CC) $(CFLAGS) ../LzmaDec.c
-- 
-- LzmaEnc.o: ../LzmaEnc.c
---	$(CXX) $(CFLAGS) ../LzmaEnc.c
--+	$(CC) $(CFLAGS) ../LzmaEnc.c
--+
--+LzmaLib.o: ../LzmaLib.c
--+	$(CC) $(CFLAGS) ../LzmaLib.c
-- 
-- 7zFile.o: ../7zFile.c
---	$(CXX) $(CFLAGS) ../7zFile.c
--+	$(CC) $(CFLAGS) ../7zFile.c
-- 
-- 7zStream.o: ../7zStream.c
---	$(CXX) $(CFLAGS) ../7zStream.c
--+	$(CC) $(CFLAGS) ../7zStream.c
-- 
-- clean:
---	-$(RM) $(PROG) $(OBJS)
--+	-$(RM) $(PROG) *.o *.a
-diff --git a/meta-oe/recipes-support/lzma/lzma-4.65/makefile-cleanup.patch b/meta-oe/recipes-support/lzma/lzma-4.65/makefile-cleanup.patch
-deleted file mode 100644
-index ccca4d9..0000000
---- a/meta-oe/recipes-support/lzma/lzma-4.65/makefile-cleanup.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--Index: lzma-4.65/C/LzmaUtil/makefile.gcc
--===================================================================
----- lzma-4.65.orig/C/LzmaUtil/makefile.gcc
--+++ lzma-4.65/C/LzmaUtil/makefile.gcc
--@@ -1,10 +1,10 @@
-- PROG = lzma
---CC = gcc
--+CC ?= gcc
-- LIB = liblzma.a
-- RM = rm -f
-- CFLAGS = -c -O2 -Wall
---AR = ar
---RANLIB = ranlib
--+AR ?= ar
--+RANLIB ?= ranlib
-- 
-- OBJS = \
--   Alloc.o \
-diff --git a/meta-oe/recipes-support/lzma/lzma.inc b/meta-oe/recipes-support/lzma/lzma.inc
-deleted file mode 100644
-index 912d281..0000000
---- a/meta-oe/recipes-support/lzma/lzma.inc
-+++ /dev/null
-@@ -1,35 +0,0 @@
--DESCRIPTION = "LZMA is a general compression method. LZMA provides high compression ratio and very fast decompression."
--HOMEPAGE = "http://www.7-zip.org/"
--LICENSE = "LGPL"
--LIC_FILES_CHKSUM = "file://lzma.txt;md5=20251cdc2e3793cceab11878d0aa11b1"
--INC_PR = "r7"
--
--SRC_URI = "http://downloads.sourceforge.net/sevenzip/lzma${@d.getVar('PV',1).replace('.','')}.tar.bz2;subdir=${BPN}-${PV} \
--           file://001-large_files.patch \
--           file://002-lzmp.patch \
--           file://003-compile_fixes.patch \
--           file://100-static_library.patch \
--           file://makefile-cleanup.patch"
--
--EXTRA_OEMAKE = "-f makefile.gcc"
--
--do_unpack_append() {
--    import subprocess
--    # Replace MS-DOS line-endings with Unix style line-endings
--    subprocess.call("find . -type f -print0 | xargs -0 sed 's/\r$//' -i",
--                     cwd=d.getVar("S", True), shell=True)
--}
--
--do_compile() {
--    oe_runmake CFLAGS='${CFLAGS} -c' -C C/LzmaUtil
--    oe_runmake CXX_C='${CC} ${CFLAGS}' CXX='${CXX} ${CXXFLAGS}' \
--    -C CPP/7zip/Compress/LZMA_Alone
--}
--
--do_install() {
--    install -d ${D}${bindir} ${D}${libdir}
--    install -m 0755 CPP/7zip/Compress/LZMA_Alone/lzma ${D}${bindir}
--    oe_libinstall -a -C C/LzmaUtil liblzma ${D}${libdir}
--}
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/lzma/lzma_4.65.bb b/meta-oe/recipes-support/lzma/lzma_4.65.bb
-deleted file mode 100644
-index 5295cd9..0000000
---- a/meta-oe/recipes-support/lzma/lzma_4.65.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require lzma.inc
--PR = "${INC_PR}.1"
--
--SRC_URI[md5sum] = "29d5ffd03a5a3e51aef6a74e9eafb759"
--SRC_URI[sha256sum] = "c935fd04dd8e0e8c688a3078f3675d699679a90be81c12686837e0880aa0fa1e"
+http://www.openembedded.org/wiki/Versioning_Policy
+
 -- 
-2.1.1
+Denys
+
+
+> > On Thu, Sep 25, 2014 at 1:19 AM, Martin Jansa <martin.jansa@gmail.com>
+> > wrote:
+> > 
+> > > On Thu, Sep 18, 2014 at 10:05:27PM +1000, Nick D'Ademo wrote:
+> > > > Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
+> > > > ---
+> > > >  meta-oe/recipes-support/opencv/opencv_3.0.0.bb | 95
+> > > ++++++++++++++++++++++++++
+> > > >  1 file changed, 95 insertions(+)
+> > > >  create mode 100644 meta-oe/recipes-support/opencv/opencv_3.0.0.bb
+> > > >
+> > > > diff --git a/meta-oe/recipes-support/opencv/opencv_3.0.0.bb
+> > > b/meta-oe/recipes-support/opencv/opencv_3.0.0.bb
+> > > > new file mode 100644
+> > > > index 0000000..3922964
+> > > > --- /dev/null
+> > > > +++ b/meta-oe/recipes-support/opencv/opencv_3.0.0.bb
+> > > > @@ -0,0 +1,95 @@
+> > > > +DESCRIPTION = "Opencv : The Open Computer Vision Library"
+> > > > +HOMEPAGE = "http://opencv.org/"
+> > > > +SECTION = "libs"
+> > > > +
+> > > > +LICENSE = "BSD"
+> > > > +LIC_FILES_CHKSUM =
+> > > "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14"
+> > > > +
+> > > > +ARM_INSTRUCTION_SET = "arm"
+> > > > +
+> > > > +DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib
+> > > glib-2.0 gstreamer gst-plugins-base"
+> > > > +
+> > > > +# Commit hash for 3.0.0-alpha tag
+> > > > +SRCREV = "fb9a143429f86603ff93e5bcb2d94b94780b7234"
+> > > > +SRC_URI = "git://github.com/Itseez/opencv.git;branch=master \
+> > > > +           file://opencv-fix-pkgconfig-generation.patch \
+> > > > +"
+> > > > +
+> > > > +PV = "3.0.0+git${SRCPV}"
+> > >
+> > > subject says alpha, so it should be lower PV than 3.0.0
+> > >
+> > > Fails to build for qemuarm:
+> > >
+> > > CMakeFiles/opencv_core.dir/src/tables.cpp.o
+> > > CMakeFiles/opencv_core.dir/src/types.cpp.o
+> > > CMakeFiles/opencv_core.dir/src/umatrix.cpp.o
+> > > CMakeFiles/opencv_core.dir/opencl_kernels_core.cpp.o -lz -ldl -lm -lpthread
+> > > -lrt
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(ippinit.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(ippmalloc.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16s_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiSum_8u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_Inf_8s_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMin_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_L1_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_32f_C4IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_8u32s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMinMaxIndx_8u_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiOr_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsFlip_16u_I_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L2_32f_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMul_8u_C1RSfs_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMinMaxIndx_8s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsFlip_8u_I_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16u_C4IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiSet_16s_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCompare_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsInvSqrt_32f_A21_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16s_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L1_16s_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_Inf_16u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L2_32f_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L2_16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L1_16u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_32s_C4IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_32f_C1IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsSortAscend_8u_I_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsMaxEvery_32f_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_16s_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsMaxEvery_8u_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiDFTInit_C_32fc_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_8u16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L2_16s_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_Inf_32f_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_8u_C4IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsFlip_32f_I_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCopy_8u_C3MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_Inf_8u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_L2_16u_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_16u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCompare_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiSum_32f_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCopy_16u_C3MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L1_8u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L1_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiXor_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_Inf_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_StdDev_8u_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCopy_32s_C4MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_32s_C1IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_StdDev_32f_C3CR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_8u_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiAbsDiff_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_32f_C4IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16u_C1IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsMaxEvery_16u_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L2_32f_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L2_8s_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMin_16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L1_16s_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiDotProd_16s64f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_Inf_16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_Inf_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_8s16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_16u_C4IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsDFTFwd_CToC_64fc_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiSet_32s_C4MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_32s_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_StdDev_32f_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_StdDev_16u_C3CMR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsPolarToCart_64f_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L2_16s_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsMaxEvery_64f_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_32f_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiDCTInvInitAlloc_32f_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L1_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsDFTGetSize_R_32f_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_32s32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_32s16s_C1RSfs_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_32s_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_16u32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiSub_8u_C1RSfs_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiSet_16u_C3MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_16u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L2_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMax_16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_8u_C1IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiDCTFwdGetBufSize_32f_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_Inf_32f_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L2_32f_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_8u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCopy_16u_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsSqrt_32f_A21_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L2_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_8u_C3IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_8s16u_C1Rs_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_16s_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsDFTInv_CToC_32fc_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_StdDev_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_Inf_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_8u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L2_8u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsDFTInit_C_64fc_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L2_8u_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_32f_C1IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiAnd_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_L2_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_L1_32f_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiAdd_16u_C1RSfs_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMin_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_8u_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsDFTInv_CToC_64fc_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippsDFTFwd_CToC_32fc_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_Inf_8u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_8u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiSet_32s_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_16s_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiDotProd_16u64f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiLUTPalette_8u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiAdd_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L1_32f_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_32s_C1IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMean_16u_C3CMR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiDFTGetSize_C_32fc_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiTranspose_32s_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiDFTFwd_RToPack_32f_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_8u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMax_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_L1_16u_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCopy_8u_C1MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiCopy_32s_C3MR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_32f8u_C1RSfs_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormDiff_L1_16u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiConvert_16u16s_C1RSfs_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_16u_C3IR_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiMirror_32f_C4R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_L1_16s_C1R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNorm_L2_8u_C3R_as.s.o):
+> > > incompatible target
+> > > |
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld:
+> > > error:
+> > > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opencv/3.0.0+gitAUTOINC+fb9a143429-r0/git/3rdparty/ippicv/unpack/ippicv_lnx/lib/ia32/libippicv.a(jmp_ippiNormRel_Inf_16u_C1MR_as.s.o):
+> > > incompatible target
+> > > ...
+> > >
+> > >
+> > > > +
+> > > > +S = "${WORKDIR}/git"
+> > > > +
+> > > > +# Do an out-of-tree build
+> > > > +OECMAKE_SOURCEPATH = "${S}"
+> > > > +OECMAKE_BUILDPATH = "${WORKDIR}/build-${TARGET_ARCH}"
+> > > > +
+> > > > +EXTRA_OECMAKE =
+> > > "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include
+> > > \
+> > > > +                 -DBUILD_PYTHON_SUPPORT=ON \
+> > > > +                 -DWITH_FFMPEG=ON \
+> > > > +                 -DCMAKE_SKIP_RPATH=ON \
+> > > > +                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3",
+> > > "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
+> > > > +                 ${@base_conditional("libdir", "/usr/lib64",
+> > > "-DLIB_SUFFIX=64", "", d)} \
+> > > > +                 ${@base_conditional("libdir", "/usr/lib32",
+> > > "-DLIB_SUFFIX=32", "", d)} \
+> > > > +"
+> > > > +
+> > > > +PACKAGECONFIG ??= "eigen gtk jpeg libav png tiff v4l jasper"
+> > > > +PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
+> > > > +PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+,"
+> > > > +PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
+> > > > +PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
+> > > > +PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
+> > > > +PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
+> > > > +PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
+> > > > +PACKAGECONFIG[jasper] = "-DBUILD_JASPER=ON,-DBUILD_JASPER=OFF,jasper"
+> > > > +PACKAGECONFIG[pvapi] = '-DWITH_PVAPI=ON
+> > > -DPVAPI_LIBRARY="${STAGING_LIBDIR}/libPvAPI.a",-DWITH_PVAPI=OFF,pvapi'
+> > > > +
+> > > > +inherit distutils-base pkgconfig cmake
+> > > > +
+> > > > +export BUILD_SYS
+> > > > +export HOST_SYS
+> > > > +export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
+> > > > +export PYTHON="${STAGING_BINDIR_NATIVE}/python"
+> > > > +
+> > > > +TARGET_CC_ARCH += "-I${S}/include "
+> > > > +
+> > > > +PACKAGES += "${PN}-apps python-opencv"
+> > > > +
+> > > > +python populate_packages_prepend () {
+> > > > +    cv_libdir = d.expand('${libdir}')
+> > > > +    do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev',
+> > > 'OpenCV %s development package', extra_depends='${PN}-dev',
+> > > allow_links=True)
+> > > > +    do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev',
+> > > 'OpenCV %s development package', extra_depends='${PN}-dev')
+> > > > +    do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev',
+> > > 'OpenCV %s development package', extra_depends='${PN}-dev')
+> > > > +    do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV
+> > > %s library', extra_depends='', allow_links=True)
+> > > > +
+> > > > +    pn = d.getVar('PN', 1)
+> > > > +    metapkg =  pn + '-dev'
+> > > > +    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+> > > > +    blacklist = [ metapkg ]
+> > > > +    metapkg_rdepends = [ ]
+> > > > +    packages = d.getVar('PACKAGES', 1).split()
+> > > > +    for pkg in packages[1:]:
+> > > > +        if not pkg in blacklist and not pkg in metapkg_rdepends and
+> > > pkg.endswith('-dev'):
+> > > > +            metapkg_rdepends.append(pkg)
+> > > > +    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
+> > > > +}
+> > > > +
+> > > > +PACKAGES_DYNAMIC += "^libopencv-.*"
+> > > > +
+> > > > +FILES_${PN} = ""
+> > > > +FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
+> > > > +FILES_${PN}-dbg += "${libdir}/.debug"
+> > > > +FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
+> > > > +FILES_${PN}-doc = "${datadir}/OpenCV/doc"
+> > > > +FILES_${PN}-staticdev += "${datadir}/OpenCV/3rdparty${base_libdir}"
+> > > > +
+> > > > +ALLOW_EMPTY_${PN} = "1"
+> > > > +
+> > > > +INSANE_SKIP_python-opencv = "True"
+> > > > +DESCRIPTION_python-opencv = "Python bindings to opencv"
+> > > > +FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
+> > > > +RDEPENDS_python-opencv = "python-core python-numpy"
+> > > > +
+> > > > +do_install_append() {
+> > > > +    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
+> > > > +    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
+> > > > +}
+> > > > --
+> > > > 1.9.1
+> > > >
+> > > > --
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > > --
+> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > >
+> 
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
+
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
