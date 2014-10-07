@@ -1,35 +1,35 @@
-Return-Path: <nickdademo@gmail.com>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id CFBB371811
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id C6253717F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 03:07:18 +0000 (UTC)
-Received: by mail-pa0-f52.google.com with SMTP id fb1so6421175pad.11
+	Tue,  7 Oct 2014 04:06:20 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id em10so6519253wid.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Oct 2014 20:07:19 -0700 (PDT)
+	Mon, 06 Oct 2014 21:06:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=oNr70WHdVftj4tZKf/dQliZ3DPBcaJfWs5bkWYhujjI=;
-	b=l3ZR+WP+uDxkCJfJCZBNAvXkLsk3N2XQO//MrtSl4t7VR5GbUF/D9W/F51J7yO2VZD
-	cqliEFrcoeFA4LrjZV8M+nXG2LZKEj8yoiLq9ekId7WIqRJzdK9GKB7LS2Jqq2gBc81D
-	WWIHXQ1Y5w/e0CnI2ThiKocV2nv9XaQOaUld8iSouCPknyLahS5CCGrPMNn1UJXhYANk
-	8zMhGGcG8BeGoOPKUb9iedy0ff8W+RWWzOymYnCzMB4zIkRQ2dbqELABy5OlyEL6bkeb
-	VXdGtEneaRm2wWbFOlBGE6m+SNwKAtOvsyLl4UsA3pcHA4v6K0jwt3cOd42QQbYDkobk
-	vakg==
-X-Received: by 10.70.21.98 with SMTP id u2mr1144715pde.119.1412651239315;
-	Mon, 06 Oct 2014 20:07:19 -0700 (PDT)
-Received: from localhost.localdomain
-	(d122-111-72-186.meb803.vic.optusnet.com.au. [122.111.72.186])
-	by mx.google.com with ESMTPSA id ll4sm2759232pab.25.2014.10.06.20.07.17
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 06 Oct 2014 20:07:18 -0700 (PDT)
-From: Nick D'Ademo <nickdademo@gmail.com>
+	bh=xgxNG+qkqG414qiKncO3cAA4PIpcHqu9f8xFT8B+6CQ=;
+	b=nBBOSeQaGLWnN3Op/renv3grC+JOtjW0y9czmnX5jTNuXWzF0+7YLb0Wxvh+cFeqFt
+	IazDvhhtXQsE/yvVQzuPkD48MQRBWwMC/mZmUKThi3Ovbq8RfmIldsB5XjRYPStu5hnO
+	zoCf1nVIpf1Twgv5NcpzT1vs7dS7Rvl94OafOhozeBG0uusYcfVztWdMYJKW+N1Hl+XR
+	NtTo3nyzqAjfcvV2+ZfyJpklKvPaO0LThS/3dS5bbDrJFW9JtRD1ufJg5qz1pATRIVhc
+	qxDC2upPfoTUeCZX2FMxvvHq4ouD+lrv//TXHgAJc9v75zpUhBuk6hS7L20dXKuvHXKR
+	pQsA==
+X-Received: by 10.180.10.162 with SMTP id j2mr24736017wib.72.1412654781566;
+	Mon, 06 Oct 2014 21:06:21 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	lp8sm13150324wic.17.2014.10.06.21.06.20 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 06 Oct 2014 21:06:20 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Oct 2014 14:06:49 +1100
-Message-Id: <1412651209-2483-1-git-send-email-nickdademo@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH v2] opencv: Add recipe for OpenCV v3.0.0-alpha.
+Date: Tue,  7 Oct 2014 06:07:21 +0200
+Message-Id: <1412654841-18553-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.1.1
+Subject: [meta-qt5][PATCH] qtbase: don't stage the fonts directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,119 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 03:07:27 -0000
+X-List-Received-Date: Tue, 07 Oct 2014 04:06:27 -0000
 
-Includes fix which disables IPP for ARM builds.
+* the staged files conflict with fonts staged by qt4-embedded and we don't need
+  them in sysroot at all
 
-Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_git.bb | 96 ++++++++++++++++++++++++++++
- 1 file changed, 96 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv_git.bb
+ recipes-qt/qt5/qtbase.inc | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_git.bb b/meta-oe/recipes-support/opencv/opencv_git.bb
-new file mode 100644
-index 0000000..bf6fd84
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv_git.bb
-@@ -0,0 +1,96 @@
-+DESCRIPTION = "Opencv : The Open Computer Vision Library"
-+HOMEPAGE = "http://opencv.org/"
-+SECTION = "libs"
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index 176aec4..389d356 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -249,3 +249,8 @@ FILES_${PN}-fonts-pfb            = "${OE_QMAKE_PATH_LIBS}/fonts/*.pfb"
+ FILES_${PN}-fonts-qpf            = "${OE_QMAKE_PATH_LIBS}/fonts/*.qpf*"
+ FILES_${PN}-fonts                = "${OE_QMAKE_PATH_LIBS}/fonts/README \
+                                     ${OE_QMAKE_PATH_LIBS}/fonts/fontdir"
 +
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://include/opencv2/opencv.hpp;endline=41;md5=6d690d8488a6fca7a2c192932466bb14"
-+
-+ARM_INSTRUCTION_SET = "arm"
-+
-+DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 gstreamer gst-plugins-base"
-+
-+# Commit hash for 3.0.0-alpha tag
-+SRCREV = "fb9a143429f86603ff93e5bcb2d94b94780b7234"
-+SRC_URI = "git://github.com/Itseez/opencv.git;branch=master \
-+           file://opencv-fix-pkgconfig-generation.patch \
-+"
-+
-+PV = "2.99+3.0.0-alpha+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+# Do an out-of-tree build
-+OECMAKE_SOURCEPATH = "${S}"
-+OECMAKE_BUILDPATH = "${WORKDIR}/build-${TARGET_ARCH}"
-+
-+EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
-+                 -DBUILD_PYTHON_SUPPORT=ON \
-+                 -DWITH_FFMPEG=ON \
-+                 -DCMAKE_SKIP_RPATH=ON \
-+                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
-+                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
-+                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
-+                 ${@bb.utils.contains("TUNE_FEATURES", "arm", "-DWITH_IPP=OFF", "", d)} \
-+"
-+
-+PACKAGECONFIG ??= "eigen gtk jpeg libav png tiff v4l jasper"
-+PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
-+PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+,"
-+PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
-+PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
-+PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
-+PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
-+PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-+PACKAGECONFIG[jasper] = "-DBUILD_JASPER=ON,-DBUILD_JASPER=OFF,jasper"
-+PACKAGECONFIG[pvapi] = '-DWITH_PVAPI=ON -DPVAPI_LIBRARY="${STAGING_LIBDIR}/libPvAPI.a",-DWITH_PVAPI=OFF,pvapi'
-+
-+inherit distutils-base pkgconfig cmake
-+
-+export BUILD_SYS
-+export HOST_SYS
-+export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
-+export PYTHON="${STAGING_BINDIR_NATIVE}/python"
-+
-+TARGET_CC_ARCH += "-I${S}/include "
-+
-+PACKAGES += "${PN}-apps python-opencv"
-+
-+python populate_packages_prepend () {
-+    cv_libdir = d.expand('${libdir}')
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev', allow_links=True)
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
-+    do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV %s library', extra_depends='', allow_links=True)
-+
-+    pn = d.getVar('PN', 1)
-+    metapkg =  pn + '-dev'
-+    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
-+    blacklist = [ metapkg ]
-+    metapkg_rdepends = [ ] 
-+    packages = d.getVar('PACKAGES', 1).split()
-+    for pkg in packages[1:]:
-+        if not pkg in blacklist and not pkg in metapkg_rdepends and pkg.endswith('-dev'):
-+            metapkg_rdepends.append(pkg)
-+    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
-+}
-+
-+PACKAGES_DYNAMIC += "^libopencv-.*"
-+
-+FILES_${PN} = ""
-+FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
-+FILES_${PN}-dbg += "${libdir}/.debug"
-+FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig"
-+FILES_${PN}-doc = "${datadir}/OpenCV/doc"
-+FILES_${PN}-staticdev += "${datadir}/OpenCV/3rdparty${base_libdir}"
-+
-+ALLOW_EMPTY_${PN} = "1"
-+
-+INSANE_SKIP_python-opencv = "True"
-+DESCRIPTION_python-opencv = "Python bindings to opencv"
-+FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
-+RDEPENDS_python-opencv = "python-core python-numpy"
-+
-+do_install_append() {
-+    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
-+    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
++sysroot_stage_dirs_append() {
++    # $to is 2nd parameter passed to sysroot_stage_dir, e.g. ${SYSROOT_DESTDIR} passed from sysroot_stage_all
++    rm -rf $to${OE_QMAKE_PATH_LIBS}/fonts
 +}
 -- 
-1.9.1
+2.1.1
 
 
