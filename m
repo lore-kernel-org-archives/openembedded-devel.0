@@ -1,37 +1,42 @@
-Return-Path: <morandg@gmail.com>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EC9B7139A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id A22C5717B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 14:07:56 +0000 (UTC)
-Received: by mail-wg0-f45.google.com with SMTP id m15so9294956wgh.28
+	Tue,  7 Oct 2014 15:24:07 +0000 (UTC)
+Received: by mail-wi0-f179.google.com with SMTP id d1so8322996wiv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Oct 2014 07:07:57 -0700 (PDT)
+	Tue, 07 Oct 2014 08:24:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=YOh8imSDn4hMiDWGpmzwgXcZLn0QTRQ1JT7wQ2PuHSU=;
-	b=dyILKhxyYlogrKxQyT2iHBVwm70k2lT0WwTRaDQeBcDeHDYixIe9kWv5WHhwTdFIbR
-	H5DWD/R89kw1lgsnbUCngaWYNYoqUAKuQeoXnB4g/VLUi8rWiH6/tHyyePDxniY9fp9x
-	4BkHRiHwo0atnWrk+he82I1wzBudFlaE0J94SSrwbxnEq87ViSLWSWRfi9p13/lbJ+2W
-	eeu3BGFeVusStFo9e5teYOjrS8bWmJHOYzY/E8xZNNSG/FZRafGwL0/LPkkmXqKI0XD3
-	LZ1HpGQtdncY8o/+eL/LA23V2FrbKie3C47M5GWitTPonF/wO2rOiRYaSfSCttx1Rm2H
-	vX/w==
-X-Received: by 10.194.95.234 with SMTP id dn10mr5215630wjb.73.1412690877032;
-	Tue, 07 Oct 2014 07:07:57 -0700 (PDT)
-Received: from treme.netmodule.intranet
-	(68.255.200.213.static.wline.lns.sme.cust.swisscom.ch.
-	[213.200.255.68])
-	by mx.google.com with ESMTPSA id d6sm14898946wiz.0.2014.10.07.07.07.55
-	for <multiple recipients>
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=gC9FAdy47o3xsAMtm4Odgt7WPdQ29gg1yImozvMEZOY=;
+	b=nfYhVj6u0ZUjg7nmqJN2qLKXmEaQOul7b4J8QSrsX/A5pXuogQUd+P6M1x8ENGIpmj
+	NQGG5Q5eiym/IEIxFiYqCBih6L8i0knk07HJknln90TFFdbYz5TicO0jSCBikT0WuO/9
+	y5jWRENUnZcH0qLMzLfGstpk3Z1BvX6h6zICNM2j9eU2MD5Gza8khFuHKYl0eHTWfmPk
+	sU/Hv52L3m/PjUGgstNYf5qTZIJAZpEm5qlYs2k40kUEmSBBOR97jypf+ne2FkuV6Cox
+	CmHXj4cqlTXmYvRTKO1Rg8nzWC0VvxxgTNezGZEh62EvzmkgRUtX6RgfdM3GMKd3YiJq
+	+fuA==
+X-Received: by 10.180.20.69 with SMTP id l5mr5388032wie.45.1412695447036;
+	Tue, 07 Oct 2014 08:24:07 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	l10sm15101707wif.20.2014.10.07.08.24.06 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 Oct 2014 07:07:56 -0700 (PDT)
-From: Guy Morand <morandg@gmail.com>
-X-Google-Original-From: Guy Morand <guy.morand@netmodule.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Oct 2014 16:08:24 +0200
-Message-Id: <1412690904-15774-1-git-send-email-guy.morand@netmodule.com>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Guy Morand <guy.morand@netmodule.com>
-Subject: [meta-oe][PATCH] iperf3: Adds git and 3.0.8 version
+	Tue, 07 Oct 2014 08:24:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 7 Oct 2014 17:25:08 +0200
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20141007152508.GD12322@jama>
+References: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
+	<1412657597-13020-1-git-send-email-Martin.Jansa@gmail.com>
+	<1801470.RIdAKMambK@peggleto-mobl5.ger.corp.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1801470.RIdAKMambK@peggleto-mobl5.ger.corp.intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCHv2] modphp, xdebug: blacklist because of conflict with php
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,76 +50,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 14:08:03 -0000
+X-List-Received-Date: Tue, 07 Oct 2014 15:24:09 -0000
+X-Groupsio-MsgNum: 52402
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="11Y7aswkeuHtSBEs"
+Content-Disposition: inline
 
-iperf3 is the new successor of iperf. The project is now mature enough as it
-started in 2009 and has stable releases. It supports reporting results in the
-portable JSON format, provides more information than iperf does and also adds
-some features from other tools such as nuttcp and netperf but were missing from
-the original iperf.
+--11Y7aswkeuHtSBEs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Guy Morand <guy.morand@netmodule.com>
----
- meta-oe/recipes-benchmark/iperf3/iperf3.inc      |   20 ++++++++++++++++++++
- meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb |    6 ++++++
- meta-oe/recipes-benchmark/iperf3/iperf3_git.bb   |    7 +++++++
- 3 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3.inc
- create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
- create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
+On Tue, Oct 07, 2014 at 09:39:34AM +0100, Paul Eggleton wrote:
+> On Tuesday 07 October 2014 06:53:17 Martin Jansa wrote:
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  meta-webserver/recipes-php/modphp/modphp5.inc     | 3 +++
+> >  meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb | 1 +
+> >  2 files changed, 4 insertions(+)
+> >=20
+> > diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc
+> > b/meta-webserver/recipes-php/modphp/modphp5.inc index 6932429..8707950
+> > 100644
+> > --- a/meta-webserver/recipes-php/modphp/modphp5.inc
+> > +++ b/meta-webserver/recipes-php/modphp/modphp5.inc
+> > @@ -14,6 +14,9 @@ S =3D "${WORKDIR}/php-${PV}"
+> >=20
+> >  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D52dd90569008fee5bcdbb22d945=
+b1108"
+> >=20
+> > +PNBLACKLIST[modphp] =3D "CONFLICT: 466 header files conflict with php"
+> > +# e.g. sysroots/qemux86-64/usr/include/php/main/win95nt.h
+> > +
+>=20
+> I'm sorry, but we are not going to blacklist this recipe for everyone. I=
+=20
+> appreciate that stricter tests mean these can't be built side-by-side, th=
+at's=20
+> just unfortunate and something we will have to live with for now.
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3.inc b/meta-oe/recipes-benchmark/iperf3/iperf3.inc
-new file mode 100644
-index 0000000..029a144
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3.inc
-@@ -0,0 +1,20 @@
-+SUMMARY = "Network benchmark tool"
-+DESCRIPTION = \
-+"iperf is a tool for active measurements of the maximum achievable bandwidth \
-+on IP networks. It supports tuning of various parameters related to timing, \
-+protocols, and buffers. For each test it reports the bandwidth, loss, and \
-+other parameters."
-+HOMEPAGE = "http://software.es.net/iperf/"
-+SECTION = "console/network"
-+BUGTRACKER = "https://github.com/esnet/iperf/issues"
-+AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
-+LICENSE = "BSD"
-+
-+BRANCH = "master"
-+SRC_URI = "\
-+           git://github.com/esnet/iperf.git;branch=${BRANCH} \
-+           "
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
-new file mode 100644
-index 0000000..a39deff
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
-@@ -0,0 +1,6 @@
-+require iperf3.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ab59a0c3a4bc3954d1ece68ea19d77a4"
-+
-+BRANCH = "3.0-STABLE"
-+SRCREV = "24d5cdec3731bc589f6cb7c359d8311dcaa41854"
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-new file mode 100644
-index 0000000..77ebe15
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-@@ -0,0 +1,7 @@
-+require iperf3.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=062ab1bc33fae1926387ac1274cb0873"
-+
-+PV = "3.0.8+git${SRCPV}"
-+SRCREV = "${AUTOREV}"
-+
--- 
-1.7.10.4
+It was motivated by discussion with RP and Ross on #yocto.
 
+23:52:26 < JaMa|Off> RP: would it make sense to change populate-sysroot con=
+flicts to use package_qa_handle_error function so it would be fatal QA erro=
+r (by default) with option to disable it?
+23:53:31 < JaMa|Off> RP: I think part of this problem was that normal bb.wa=
+rn messages are less visible than QA messages (which are also collected in =
+qa.log) so easy to check after the build
+23:55:49 < RP> JaMa|Off: To be honest, I don't want people to turn that on =
+off. The issues are too nasty
+23:56:42 < RP> s/on/one/
+23:56:46 < JaMa|Off> OK, fair enough, I agree it's nasty
+23:57:32 < JaMa|Off> it's last 6 failures in world builds (after including =
+all my pending fixes), I've sent the list earlier today
+23:57:45 < RP> JaMa|Off: if it stops there and then, the issue can usually =
+be recovered. If you continue past that you no longer know what in the sysr=
+oot is corrupted
+23:58:47 < JaMa|Off> the problem is that if I go with PNBLACKLIST (to black=
+list one from the conflicting duo) then I'm blacklisting something which al=
+one is fine (unless you're building the other=20
+                     recipe as well)
+23:59:41 < JaMa|Off> e.g. Paul won't be happy if I blacklist modphp, just b=
+ecause it conflicts with php and vice-versa
+00:20:27 < rburton> JaMa|Off: blacklisting both php and modphp is clearly t=
+he answer, and improves the world
+00:22:43 < JaMa|Off> should I send patch for oe-core to blacklist xz and lz=
+ma as well? :)
 
+You can still disable that PNBLACKLIST in your local.conf or distro.conf.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--11Y7aswkeuHtSBEs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQ0BdQACgkQN1Ujt2V2gBzQogCgqB8MZRa0M0aCsRKtXx408Swj
+U9cAoIijdnLt7ew3MyK8E0VpQlPuofYj
+=yYQ6
+-----END PGP SIGNATURE-----
+
+--11Y7aswkeuHtSBEs--
