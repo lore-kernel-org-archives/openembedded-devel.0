@@ -1,43 +1,37 @@
-Return-Path: <Javier.Viguera@digi.com>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 07 Oct 2014 10:30:40 UTC
-Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
-	[216.82.254.110])
-	by mail.openembedded.org (Postfix) with ESMTP id BAAA56FDEB
+Return-Path: <morandg@gmail.com>
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EC9B7139A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 10:30:40 +0000 (UTC)
-Received: from [216.82.254.195:12599] by server-14.bemta-7.messagelabs.com id
-	41/1C-14464-14FB3345; Tue, 07 Oct 2014 10:24:01 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-12.tower-200.messagelabs.com!1412677438!21002647!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.12.2; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 5394 invoked from network); 7 Oct 2014 10:23:59 -0000
-Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-12.tower-200.messagelabs.com with RC4-SHA encrypted SMTP;
-	7 Oct 2014 10:23:59 -0000
-Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Tue, 7 Oct 2014 05:23:49 -0500
-Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Tue, 7 Oct 2014 05:23:58 -0500
-Received: from log-cln-jviguera.digi.com (10.101.2.54) by
-	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
-	14.3.181.6; Tue, 7 Oct 2014 12:23:56 +0200
-From: Javier Viguera <javier.viguera@digi.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Oct 2014 12:23:54 +0200
-Message-ID: <1412677434-50139-1-git-send-email-javier.viguera@digi.com>
-X-Mailer: git-send-email 2.1.1
-MIME-Version: 1.0
-X-Originating-IP: [10.101.2.54]
-X-KSE-AntiSpam-Interceptor-Info: protection disabled
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-Subject: [meta-oe][daisy][PATCH] imagemagick: fix SRC_URI
+	Tue,  7 Oct 2014 14:07:56 +0000 (UTC)
+Received: by mail-wg0-f45.google.com with SMTP id m15so9294956wgh.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Oct 2014 07:07:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=YOh8imSDn4hMiDWGpmzwgXcZLn0QTRQ1JT7wQ2PuHSU=;
+	b=dyILKhxyYlogrKxQyT2iHBVwm70k2lT0WwTRaDQeBcDeHDYixIe9kWv5WHhwTdFIbR
+	H5DWD/R89kw1lgsnbUCngaWYNYoqUAKuQeoXnB4g/VLUi8rWiH6/tHyyePDxniY9fp9x
+	4BkHRiHwo0atnWrk+he82I1wzBudFlaE0J94SSrwbxnEq87ViSLWSWRfi9p13/lbJ+2W
+	eeu3BGFeVusStFo9e5teYOjrS8bWmJHOYzY/E8xZNNSG/FZRafGwL0/LPkkmXqKI0XD3
+	LZ1HpGQtdncY8o/+eL/LA23V2FrbKie3C47M5GWitTPonF/wO2rOiRYaSfSCttx1Rm2H
+	vX/w==
+X-Received: by 10.194.95.234 with SMTP id dn10mr5215630wjb.73.1412690877032;
+	Tue, 07 Oct 2014 07:07:57 -0700 (PDT)
+Received: from treme.netmodule.intranet
+	(68.255.200.213.static.wline.lns.sme.cust.swisscom.ch.
+	[213.200.255.68])
+	by mx.google.com with ESMTPSA id d6sm14898946wiz.0.2014.10.07.07.07.55
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 07 Oct 2014 07:07:56 -0700 (PDT)
+From: Guy Morand <morandg@gmail.com>
+X-Google-Original-From: Guy Morand <guy.morand@netmodule.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  7 Oct 2014 16:08:24 +0200
+Message-Id: <1412690904-15774-1-git-send-email-guy.morand@netmodule.com>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Guy Morand <guy.morand@netmodule.com>
+Subject: [meta-oe][PATCH] iperf3: Adds git and 3.0.8 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,27 +45,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 10:30:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Oct 2014 14:08:03 -0000
 
-The package download URL has changed.
+iperf3 is the new successor of iperf. The project is now mature enough as it
+started in 2009 and has stable releases. It supports reporting results in the
+portable JSON format, provides more information than iperf does and also adds
+some features from other tools such as nuttcp and netperf but were missing from
+the original iperf.
 
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+Signed-off-by: Guy Morand <guy.morand@netmodule.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-benchmark/iperf3/iperf3.inc      |   20 ++++++++++++++++++++
+ meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb |    6 ++++++
+ meta-oe/recipes-benchmark/iperf3/iperf3_git.bb   |    7 +++++++
+ 3 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3.inc
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
-index e261eb8b7020..27d02edbe3ec 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
- 
- PATCHSET = "10"
--SRC_URI = "http://www.imagemagick.org/download/legacy/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-+SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-            file://remove.dist-lzip.patch \
- "
- SRC_URI[md5sum] = "a3a0fa301965d6fde68fccd066f62b0b"
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3.inc b/meta-oe/recipes-benchmark/iperf3/iperf3.inc
+new file mode 100644
+index 0000000..029a144
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3.inc
+@@ -0,0 +1,20 @@
++SUMMARY = "Network benchmark tool"
++DESCRIPTION = \
++"iperf is a tool for active measurements of the maximum achievable bandwidth \
++on IP networks. It supports tuning of various parameters related to timing, \
++protocols, and buffers. For each test it reports the bandwidth, loss, and \
++other parameters."
++HOMEPAGE = "http://software.es.net/iperf/"
++SECTION = "console/network"
++BUGTRACKER = "https://github.com/esnet/iperf/issues"
++AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
++LICENSE = "BSD"
++
++BRANCH = "master"
++SRC_URI = "\
++           git://github.com/esnet/iperf.git;branch=${BRANCH} \
++           "
++
++S = "${WORKDIR}/git"
++
++inherit autotools
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
+new file mode 100644
+index 0000000..a39deff
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
+@@ -0,0 +1,6 @@
++require iperf3.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ab59a0c3a4bc3954d1ece68ea19d77a4"
++
++BRANCH = "3.0-STABLE"
++SRCREV = "24d5cdec3731bc589f6cb7c359d8311dcaa41854"
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
+new file mode 100644
+index 0000000..77ebe15
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
+@@ -0,0 +1,7 @@
++require iperf3.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=062ab1bc33fae1926387ac1274cb0873"
++
++PV = "3.0.8+git${SRCPV}"
++SRCREV = "${AUTOREV}"
++
+-- 
+1.7.10.4
+
 
