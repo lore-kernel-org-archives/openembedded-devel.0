@@ -1,36 +1,43 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C7AE6FDEB
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 07 Oct 2014 10:30:40 UTC
+Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
+	[216.82.254.110])
+	by mail.openembedded.org (Postfix) with ESMTP id BAAA56FDEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 10:25:52 +0000 (UTC)
-Received: by mail-qg0-f45.google.com with SMTP id q107so1466515qgd.32
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Oct 2014 03:25:53 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=fyHZuH3/jOfubXaW+Pc0wtdDEdtWbMv+kx6B0cNNX2A=;
-	b=Z2r24va/iOMZnyXixp5Idv5/fTJ1j+7w9ZQqbGX/4f7Yr/XI1A6OTArQbhNkT9T/R5
-	ht0AWRHgCU9szFFgostIfjh/9isY0bk55esvFG3RQJu2p5YYo1VOtqFUjYtrMprutX0Y
-	+11BNlWLrWsrlw4AjPEnylrYP+Bv33ymmcsB6aeaUM9dy2OxSwuHSh94Z5ryyjhZwhnB
-	Y+HRDBedL3TiPUuq60y2zLFjO+lNrb/aqyAZc0nuI3q1DBoIYI1PRaFVvlGrWULw7VJB
-	+xgU/B5wGMD4J3jIm0dvh7NbHNc5P5/iQbOdCXJYE2OiWrGR5QjiXFRuE+ETfXomwRQi
-	2Ceg==
-X-Gm-Message-State: ALoCoQnH+YyInasbTOzfa1g9NDF0wD0BZ2tinWLZnV99+4l1kRt7oBsorevCAtsfDknYGReZEH0R
-X-Received: by 10.224.121.80 with SMTP id g16mr2914974qar.64.1412677553549;
-	Tue, 07 Oct 2014 03:25:53 -0700 (PDT)
+	Tue,  7 Oct 2014 10:30:40 +0000 (UTC)
+Received: from [216.82.254.195:12599] by server-14.bemta-7.messagelabs.com id
+	41/1C-14464-14FB3345; Tue, 07 Oct 2014 10:24:01 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-12.tower-200.messagelabs.com!1412677438!21002647!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.12.2; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5394 invoked from network); 7 Oct 2014 10:23:59 -0000
+Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-12.tower-200.messagelabs.com with RC4-SHA encrypted SMTP;
+	7 Oct 2014 10:23:59 -0000
+Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 7 Oct 2014 05:23:49 -0500
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Tue, 7 Oct 2014 05:23:58 -0500
+Received: from log-cln-jviguera.digi.com (10.101.2.54) by
+	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
+	14.3.181.6; Tue, 7 Oct 2014 12:23:56 +0200
+From: Javier Viguera <javier.viguera@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Oct 2014 12:23:54 +0200
+Message-ID: <1412677434-50139-1-git-send-email-javier.viguera@digi.com>
+X-Mailer: git-send-email 2.1.1
 MIME-Version: 1.0
-Received: by 10.140.106.134 with HTTP; Tue, 7 Oct 2014 03:25:33 -0700 (PDT)
-In-Reply-To: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
-References: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 7 Oct 2014 11:25:33 +0100
-Message-ID: <CAJTo0LbmRCab4DjtOwZ92mg_ZUeE0Asic8+KVtQW3y-_j8JjcA@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OE-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: RFC: automatic -dbg splitting
+X-Originating-IP: [10.101.2.54]
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: [meta-oe][daisy][PATCH] imagemagick: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 10:25:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Oct 2014 10:30:49 -0000
+Content-Type: text/plain
 
-Hi all,
+The package download URL has changed.
 
-On 11 June 2014 20:10, Burton, Ross <ross.burton@intel.com> wrote:
-> I know there are recipes floating around that have multiple -dbg
-> packages, but I can't see a great rationale for that.  I also can't
-> see a reason why you'd want debug objects/sources outside of the -dbg
-> package, or something that wasn't a debug object or source inside the
-> -dbg package.
+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+---
+ meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-So last night I resurrected this patch and did an oe-core world build
-with a small change to clear FILES_${PN}-dbg before automatically
-populating it.  The results were interesting and invalidated my two
-assumptions:
-
-1) Adding files that are not debug symbols or sources to -dbg packages
-is done: both gcc and glib add Python code for gdb to execute and the
--dbg package is the obvious location for it.
-
-2) A recipe having multiple -dbg packages is sensible for eg Qt4,
-which if all the debug information is put into a single package
-results in a 367M package, expanding to 1.1G on disk.
-
-So I've a proposed change to the logic:
-* If there are multiple names in PACKAGES that match *-dbg, then don't
-do automatic debug packaging
-* The default value for FILES_PN-dbg in bitbake.conf should be empty,
-and recipes can extend it as required (e.g. gdb Python scripts) with
-the automatic debug packaging extending FILES_PN-dbg.
-
-Any thoughts?
-
-Ross
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
+index e261eb8b7020..27d02edbe3ec 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
+ 
+ PATCHSET = "10"
+-SRC_URI = "http://www.imagemagick.org/download/legacy/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
++SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
+            file://remove.dist-lzip.patch \
+ "
+ SRC_URI[md5sum] = "a3a0fa301965d6fde68fccd066f62b0b"
 
