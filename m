@@ -1,27 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 58646717F3
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
+	[209.85.192.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C7AE6FDEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 08:39:39 +0000 (UTC)
-Received: from azsmga001.ch.intel.com ([10.2.17.19])
-	by fmsmga103.fm.intel.com with ESMTP; 07 Oct 2014 01:29:56 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.04,668,1406617200"; d="scan'208";a="482469674"
-Received: from dngooner-mobl4.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.35])
-	by azsmga001.ch.intel.com with ESMTP; 07 Oct 2014 01:39:35 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 07 Oct 2014 09:39:34 +0100
-Message-ID: <1801470.RIdAKMambK@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.1 (Linux/3.16.3-200.fc20.x86_64; KDE/4.14.1; x86_64; ; )
-In-Reply-To: <1412657597-13020-1-git-send-email-Martin.Jansa@gmail.com>
-References: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
-	<1412657597-13020-1-git-send-email-Martin.Jansa@gmail.com>
+	Tue,  7 Oct 2014 10:25:52 +0000 (UTC)
+Received: by mail-qg0-f45.google.com with SMTP id q107so1466515qgd.32
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Oct 2014 03:25:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=fyHZuH3/jOfubXaW+Pc0wtdDEdtWbMv+kx6B0cNNX2A=;
+	b=Z2r24va/iOMZnyXixp5Idv5/fTJ1j+7w9ZQqbGX/4f7Yr/XI1A6OTArQbhNkT9T/R5
+	ht0AWRHgCU9szFFgostIfjh/9isY0bk55esvFG3RQJu2p5YYo1VOtqFUjYtrMprutX0Y
+	+11BNlWLrWsrlw4AjPEnylrYP+Bv33ymmcsB6aeaUM9dy2OxSwuHSh94Z5ryyjhZwhnB
+	Y+HRDBedL3TiPUuq60y2zLFjO+lNrb/aqyAZc0nuI3q1DBoIYI1PRaFVvlGrWULw7VJB
+	+xgU/B5wGMD4J3jIm0dvh7NbHNc5P5/iQbOdCXJYE2OiWrGR5QjiXFRuE+ETfXomwRQi
+	2Ceg==
+X-Gm-Message-State: ALoCoQnH+YyInasbTOzfa1g9NDF0wD0BZ2tinWLZnV99+4l1kRt7oBsorevCAtsfDknYGReZEH0R
+X-Received: by 10.224.121.80 with SMTP id g16mr2914974qar.64.1412677553549;
+	Tue, 07 Oct 2014 03:25:53 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCHv2] modphp, xdebug: blacklist because of conflict with php
+Received: by 10.140.106.134 with HTTP; Tue, 7 Oct 2014 03:25:33 -0700 (PDT)
+In-Reply-To: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
+References: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 7 Oct 2014 11:25:33 +0100
+Message-ID: <CAJTo0LbmRCab4DjtOwZ92mg_ZUeE0Asic8+KVtQW3y-_j8JjcA@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: RFC: automatic -dbg splitting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,39 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 08:39:44 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 07 Oct 2014 10:25:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tuesday 07 October 2014 06:53:17 Martin Jansa wrote:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-webserver/recipes-php/modphp/modphp5.inc     | 3 +++
->  meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb | 1 +
->  2 files changed, 4 insertions(+)
-> 
-> diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc
-> b/meta-webserver/recipes-php/modphp/modphp5.inc index 6932429..8707950
-> 100644
-> --- a/meta-webserver/recipes-php/modphp/modphp5.inc
-> +++ b/meta-webserver/recipes-php/modphp/modphp5.inc
-> @@ -14,6 +14,9 @@ S = "${WORKDIR}/php-${PV}"
-> 
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
-> 
-> +PNBLACKLIST[modphp] = "CONFLICT: 466 header files conflict with php"
-> +# e.g. sysroots/qemux86-64/usr/include/php/main/win95nt.h
-> +
+Hi all,
 
-I'm sorry, but we are not going to blacklist this recipe for everyone. I 
-appreciate that stricter tests mean these can't be built side-by-side, that's 
-just unfortunate and something we will have to live with for now.
+On 11 June 2014 20:10, Burton, Ross <ross.burton@intel.com> wrote:
+> I know there are recipes floating around that have multiple -dbg
+> packages, but I can't see a great rationale for that.  I also can't
+> see a reason why you'd want debug objects/sources outside of the -dbg
+> package, or something that wasn't a debug object or source inside the
+> -dbg package.
 
-Cheers,
-Paul
+So last night I resurrected this patch and did an oe-core world build
+with a small change to clear FILES_${PN}-dbg before automatically
+populating it.  The results were interesting and invalidated my two
+assumptions:
 
--- 
+1) Adding files that are not debug symbols or sources to -dbg packages
+is done: both gcc and glib add Python code for gdb to execute and the
+-dbg package is the obvious location for it.
 
-Paul Eggleton
-Intel Open Source Technology Centre
+2) A recipe having multiple -dbg packages is sensible for eg Qt4,
+which if all the debug information is put into a single package
+results in a 367M package, expanding to 1.1G on disk.
+
+So I've a proposed change to the logic:
+* If there are multiple names in PACKAGES that match *-dbg, then don't
+do automatic debug packaging
+* The default value for FILES_PN-dbg in bitbake.conf should be empty,
+and recipes can extend it as required (e.g. gdb Python scripts) with
+the automatic debug packaging extending FILES_PN-dbg.
+
+Any thoughts?
+
+Ross
 
