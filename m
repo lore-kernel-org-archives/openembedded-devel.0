@@ -1,26 +1,24 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 79A2760167
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2148660167
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed,  8 Oct 2014 08:01:19 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9881K9B028693
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9881KNk026066
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Oct 2014 01:01:21 -0700 (PDT)
+	Wed, 8 Oct 2014 01:01:20 -0700 (PDT)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 8 Oct 2014 01:01:20 -0700
+	Wed, 8 Oct 2014 01:01:19 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Oct 2014 01:01:19 -0700
-Message-ID: <1412755279-22850-2-git-send-email-liezhi.yang@windriver.com>
+Date: Wed, 8 Oct 2014 01:01:18 -0700
+Message-ID: <1412755279-22850-1-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1412755279-22850-1-git-send-email-liezhi.yang@windriver.com>
-References: <1412755279-22850-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH 2/2] openldap: use PN for PACKAGES_DYNAMIC
+Subject: [meta-oe] [PATCH 1/2] krb5: use BP for the tarball
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,44 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 08:01:26 -0000
+X-List-Received-Date: Wed, 08 Oct 2014 08:01:29 -0000
 Content-Type: text/plain
 
-Fixed do_packagedata error when multilib:
-ERROR: The recipe openldap is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
-   /path/to/sysroots/qemux86-64/pkgdata/runtime-rprovides/openldap-backends/openldap-backends
-   Matched in manifest-qemux86-64-lib32-openldap.packagedata
-   /path/to/tmp/sysroots/qemux86-64/pkgdata/runtime/openldap-backends.packaged
-   Matched in manifest-qemux86-64-lib32-openldap.packagedata
-   /path/to/tmp/sysroots/qemux86-64/pkgdata/runtime/openldap-backends
-   Matched in manifest-qemux86-64-lib32-openldap.packagedata
-Please verify which recipe should provide the above files.
+Otherwise do_unpack failed when multilib:
+
+tar (child): /path/to/lib32-krb5-1.12.2.tar.gz: Cannot open: No such file or directory
+
+And do_patch error:
+ERROR: Command Error: exit status: 1  Output:
+Applying patch 0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
+can't find file to patch at input line 15
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../recipes-support/openldap/openldap_2.4.23.bb    |    4 ++--
+ meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb |    4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-index b2693b5..198d2d7 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.23.bb
-@@ -194,13 +194,13 @@ pkg_prerm_${PN}-slapd () {
-     update-rc.d $D openldap remove
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
+index 0b14d3c..d3c643c 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
+@@ -32,7 +32,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
+ SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
+ SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
+ 
+-S = "${WORKDIR}/${P}/src/"
++S = "${WORKDIR}/${BP}/src/"
+ 
+ PACKAGECONFIG ??= "openssl"
+ PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
+@@ -55,7 +55,7 @@ FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
+ 
+ krb5_do_unpack() {
+     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
+-    tar xzf ${WORKDIR}/${P}.tar.gz -C ${WORKDIR}/
++    tar xzf ${WORKDIR}/${BP}.tar.gz -C ${WORKDIR}/
  }
  
--PACKAGES_DYNAMIC += "^openldap-backends.* ^openldap-backend-.*"
-+PACKAGES_DYNAMIC += "^${PN}-backends.* ^${PN}-backend-.*"
- 
- python populate_packages_prepend () {
-     backend_dir    = d.expand('${libexecdir}/openldap')
-     do_split_packages(d, backend_dir, 'back_([a-z]*)\-.*\.so\..*$', 'openldap-backend-%s', 'OpenLDAP %s backend', extra_depends='', allow_links=True)
- 
--    metapkg = "openldap-backends"
-+    metapkg = "${PN}-backends"
-     d.setVar('ALLOW_EMPTY_' + metapkg, "1")
-     d.setVar('FILES_' + metapkg, "")
-     metapkg_rdepends = []
+ python do_unpack() {
 -- 
 1.7.9.5
 
