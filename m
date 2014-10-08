@@ -1,24 +1,28 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2148660167
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id BBAD87029A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Oct 2014 08:01:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9881KNk026066
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Oct 2014 01:01:20 -0700 (PDT)
-Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 8 Oct 2014 01:01:19 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Oct 2014 01:01:18 -0700
-Message-ID: <1412755279-22850-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Wed,  8 Oct 2014 08:05:11 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga103.fm.intel.com with ESMTP; 08 Oct 2014 00:55:30 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="396969110"
+Received: from davidgil-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.121.79])
+	by FMSMGA003.fm.intel.com with ESMTP; 08 Oct 2014 00:58:21 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 08 Oct 2014 09:05:06 +0100
+Message-ID: <4128802.ejxINkx0CB@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.1 (Linux/3.16.3-200.fc20.x86_64; KDE/4.14.1; x86_64; ; )
+In-Reply-To: <20141007152508.GD12322@jama>
+References: <CA+chaQdOUkViSuuZF+Fn1hfz+1P7ijgFYGTjgaRGUWTdVLCVZA@mail.gmail.com>
+	<1801470.RIdAKMambK@peggleto-mobl5.ger.corp.intel.com>
+	<20141007152508.GD12322@jama>
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH 1/2] krb5: use BP for the tarball
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCHv2] modphp, xdebug: blacklist because of conflict with php
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,46 +36,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 08:01:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 08 Oct 2014 08:05:11 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Otherwise do_unpack failed when multilib:
+On Tuesday 07 October 2014 17:25:08 Martin Jansa wrote:
+> On Tue, Oct 07, 2014 at 09:39:34AM +0100, Paul Eggleton wrote:
+> > On Tuesday 07 October 2014 06:53:17 Martin Jansa wrote:
+> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > > ---
+> > > 
+> > >  meta-webserver/recipes-php/modphp/modphp5.inc     | 3 +++
+> > >  meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb | 1 +
+> > >  2 files changed, 4 insertions(+)
+> > > 
+> > > diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc
+> > > b/meta-webserver/recipes-php/modphp/modphp5.inc index 6932429..8707950
+> > > 100644
+> > > --- a/meta-webserver/recipes-php/modphp/modphp5.inc
+> > > +++ b/meta-webserver/recipes-php/modphp/modphp5.inc
+> > > @@ -14,6 +14,9 @@ S = "${WORKDIR}/php-${PV}"
+> > > 
+> > >  LIC_FILES_CHKSUM =
+> > >  "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
+> > > 
+> > > +PNBLACKLIST[modphp] = "CONFLICT: 466 header files conflict with php"
+> > > +# e.g. sysroots/qemux86-64/usr/include/php/main/win95nt.h
+> > > +
+> > 
+> > I'm sorry, but we are not going to blacklist this recipe for everyone. I
+> > appreciate that stricter tests mean these can't be built side-by-side,
+> > that's just unfortunate and something we will have to live with for now.
+> 
+> It was motivated by discussion with RP and Ross on #yocto.
+> 
+> 23:52:26 < JaMa|Off> RP: would it make sense to change populate-sysroot
+> conflicts to use package_qa_handle_error function so it would be fatal QA
+> error (by default) with option to disable it? 23:53:31 < JaMa|Off> RP: I
+> think part of this problem was that normal bb.warn messages are less
+> visible than QA messages (which are also collected in qa.log) so easy to
+> check after the build 23:55:49 < RP> JaMa|Off: To be honest, I don't want
+> people to turn that on off. The issues are too nasty 23:56:42 < RP>
+> s/on/one/
+> 23:56:46 < JaMa|Off> OK, fair enough, I agree it's nasty
+> 23:57:32 < JaMa|Off> it's last 6 failures in world builds (after including
+> all my pending fixes), I've sent the list earlier today 23:57:45 < RP>
+> JaMa|Off: if it stops there and then, the issue can usually be recovered.
+> If you continue past that you no longer know what in the sysroot is
+> corrupted 23:58:47 < JaMa|Off> the problem is that if I go with PNBLACKLIST
+> (to blacklist one from the conflicting duo) then I'm blacklisting something
+> which alone is fine (unless you're building the other recipe as well)
+> 23:59:41 < JaMa|Off> e.g. Paul won't be happy if I blacklist modphp, just
+> because it conflicts with php and vice-versa 00:20:27 < rburton> JaMa|Off:
+> blacklisting both php and modphp is clearly the answer, and improves the
+> world 00:22:43 < JaMa|Off> should I send patch for oe-core to blacklist xz
+> and lzma as well? :)
+> 
+> You can still disable that PNBLACKLIST in your local.conf or distro.conf.
 
-tar (child): /path/to/lib32-krb5-1.12.2.tar.gz: Cannot open: No such file or directory
+Yes, I am aware of that. I just don't accept that this is the right way to 
+handle this. Unlike other recipes we have blacklisted, there's nothing 
+inherently wrong with the modphp recipe on its own, particularly considering 
+that most users that wish to build it will have no interest in building it 
+side-by-side with the separate php recipe.
 
-And do_patch error:
-ERROR: Command Error: exit status: 1  Output:
-Applying patch 0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch
-can't find file to patch at input line 15
+The overlap will be fixed in due course. Until that time, can I ask that if you 
+wish to blacklist this one for the sake of avoiding world build failures that 
+you do it in your distro config?
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Cheers,
+Paul
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-index 0b14d3c..d3c643c 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-@@ -32,7 +32,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
- SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
- SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
- 
--S = "${WORKDIR}/${P}/src/"
-+S = "${WORKDIR}/${BP}/src/"
- 
- PACKAGECONFIG ??= "openssl"
- PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
-@@ -55,7 +55,7 @@ FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
- 
- krb5_do_unpack() {
-     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
--    tar xzf ${WORKDIR}/${P}.tar.gz -C ${WORKDIR}/
-+    tar xzf ${WORKDIR}/${BP}.tar.gz -C ${WORKDIR}/
- }
- 
- python do_unpack() {
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
