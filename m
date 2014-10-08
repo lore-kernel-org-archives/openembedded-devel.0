@@ -1,34 +1,32 @@
-Return-Path: <nizovn@gmail.com>
-Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
-	[209.85.217.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 58BE065E0C
+Return-Path: <nickdademo@gmail.com>
+Received: from mail-oi0-f54.google.com (mail-oi0-f54.google.com
+	[209.85.218.54])
+	by mail.openembedded.org (Postfix) with ESMTP id C50916FC68
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Oct 2014 18:44:29 +0000 (UTC)
-Received: by mail-lb0-f171.google.com with SMTP id z12so6748577lbi.30
+	Wed,  8 Oct 2014 02:41:54 +0000 (UTC)
+Received: by mail-oi0-f54.google.com with SMTP id v63so6162065oia.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Oct 2014 11:44:30 -0700 (PDT)
+	Tue, 07 Oct 2014 19:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=wUBVknlDLYRhxwT7K8pvWaCniTa6NT8NcYHJArlFJmo=;
-	b=DYDPz25E1moaNR7wht/8zdJX4+NPtl5DbImttbUQK0oyZsTYhtlq0HhWIslZyW/7hX
-	OF0bb5mfE/XIudrNdAHhFma5lmuxJ+R6FppwjYgntpZv9NT8ptbLX6xRltXVb+wPqM39
-	599BGIJguqohELjkzoD113W53WLzy851NsfQZ+4f3XqH61+xj4WfnTqUPHiBiVbj3Uvg
-	B2d2pVp0P+kXD2pZiQZ8dkuFQLjHgR4eYFazfuq9IJ06Cj9IP7BbCNBQRLVn4DZi/MdE
-	lLzrHpdZC+G+XwBF9DQjlopBtRduBF1FYdoFS6fnCH85vTaMhEYZ/+zfkO5HrvQl6lIp
-	GYcA==
-X-Received: by 10.152.6.202 with SMTP id d10mr6228848laa.69.1412707470711;
-	Tue, 07 Oct 2014 11:44:30 -0700 (PDT)
-Received: from localhost.localdomain ([93.183.76.214])
-	by mx.google.com with ESMTPSA id mn4sm6966691lbb.4.2014.10.07.11.44.29
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 Oct 2014 11:44:29 -0700 (PDT)
-From: Nikolay Nizov <nizovn@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Oct 2014 22:44:21 +0400
-Message-Id: <1412707461-6484-1-git-send-email-nizovn@gmail.com>
-X-Mailer: git-send-email 2.0.4
-Subject: [meta-qt5][PATCH] maliit-framework-qt5: Update SRCREV
+	h=mime-version:from:date:message-id:subject:to:cc:content-type;
+	bh=IXB5YL6AWVG5SnNWPllFH01N5XXUuSYRpLyQv/l3HKA=;
+	b=z9EriGcNJqrnVTcrwsV0i+XCkfZcaIDErMwYMwGqds8hvVfugrbiELg25OWe6iVYMl
+	1GTx0cu0bsiOGzaKcl8BQCdJnyghMSYVvqBrvoqIcj/s08WzZZ0M0rDg8d652GIj7H+r
+	mTrVzt3v44/UXs1fx/esKGYyJrqhz6GWNy63M60FcA+vhjqESZW4kH4hojKaxQuj5goV
+	RIbYLOnBKRhCR5wL6+K5X66TvrRvNC/L0blkQnqWZYZGtPTFBfgU6E8AHd4V0CWuPRaI
+	l4xWelX5rm4NyQxrVrYEOWYPKdkSj4WJDS69Ezl8GPP/M6tpwwEyAGXyqQCYeAZ4CjHp
+	dscA==
+X-Received: by 10.60.160.148 with SMTP id xk20mr8934013oeb.68.1412736115095;
+	Tue, 07 Oct 2014 19:41:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.76.167.163 with HTTP; Tue, 7 Oct 2014 19:41:35 -0700 (PDT)
+From: "Nick D'Ademo" <nickdademo@gmail.com>
+Date: Wed, 8 Oct 2014 13:41:35 +1100
+Message-ID: <CANR6C54p6yC1FPviBpmX-qHiF198s3vK7UWEmmDj3hYs7mAovQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: ootavio@ossystems.com.br
+Subject: [meta-qt5] What is needed to build a recipe with CMake?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,32 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Oct 2014 18:44:39 -0000
+X-List-Received-Date: Wed, 08 Oct 2014 02:41:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This update is needed to include fix for segfaults when change keyboard
-focus while having selection.
-See http://issues.webos-ports.org/issues/673 for example.
-This will update SRCREV for one(also the latest) commit from master branch.
+I'm receiving the same error as described in the following posts when
+attempting to build a CMake recipe (Qt5 code):
+http://lists.qt-project.org/pipermail/development/2014-May/017075.html
+https://lists.yoctoproject.org/pipermail/yocto/2014-May/019755.html
 
-Signed-off-by: Nikolay Nizov <nizovn@gmail.com>
----
- recipes-qt/maliit/maliit-framework-qt5_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+* The imported target "Qt5::Core" references the file
+*||*      "/qmake"
+*||*   but this file does not exist.  Possible reasons include:
+*||*   * The file was deleted, renamed, or moved to another location.
+*||*   * An install or uninstall procedure did not complete successfully.
+*||*   * The installation package was faulty and contained*
 
-diff --git a/recipes-qt/maliit/maliit-framework-qt5_git.bb b/recipes-qt/maliit/maliit-framework-qt5_git.bb
-index 633bf6e..82573c4 100644
---- a/recipes-qt/maliit/maliit-framework-qt5_git.bb
-+++ b/recipes-qt/maliit/maliit-framework-qt5_git.bb
-@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/maliit/framework.git;branch=master \
-     file://maliit-server.desktop \
- "
- 
--SRCREV = "dbc0403f329d7f6ce2f5a09e6ff5adbd2548a8c9"
-+SRCREV = "17fdf8699c53ddfb2c15df8e11d46804e782fec5"
- PV = "0.99.0+git${SRCPV}"
- 
- 
--- 
-2.0.4
+Looks like the *qmake* binary cannot be found.
 
+The relevant parts of the recipe are as follows:
+
+
+
+*DEPENDS = "qtbase"*
+
+
+
+
+
+
+
+*inherit cmakedo_install () {    install -d ${D}${bindir}    install -m
+0755 test ${D}${bindir}/test}FILES_${PN} += "${bindir}/test"*
+
+Does anyone have a solution to this issue?
+
+Thanks.
 
