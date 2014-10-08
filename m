@@ -1,37 +1,37 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id A5EA960167;
-	Wed,  8 Oct 2014 14:54:21 +0000 (UTC)
-Received: by mail-la0-f53.google.com with SMTP id gq15so8513794lab.26
-	for <multiple recipients>; Wed, 08 Oct 2014 07:54:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-type;
-	bh=NV3wKd+Yvl+IgKl0locIj5C36W+TrbyUQ/pOeZk4HHM=;
-	b=UJE8WNomF/BmN5kTxXdaho80I9pBF6+hDL/B3Q5Gofn+bK9wnE5Q8UzsGu2XdypAH5
-	jyqT03YKDPezb4wVqUEagw8dfswePuuhMLNH2eYRmv7hVWLL/sUah4i9rBZcdc20FIKG
-	doh13A3bZSFpGP2sK/MvT+pCQmYLkT1h+vtZMDhIiOGoyEbYcH76a9+qMElyjvfhpexj
-	XWvD0IN4w4p22PNAhMLzhCQVbntLs/gHpHnClIi/LJkIvQA46lDXyTgxTbduNDdutlMx
-	e+sz0isVQm9yT5bG7by1+2OE57MhNNSvRiDIZ28gPHGFEEJSrScGIQNUtxvmMNMH7AHa
-	ZApQ==
-X-Received: by 10.152.197.2 with SMTP id iq2mr11845959lac.87.1412780062717;
-	Wed, 08 Oct 2014 07:54:22 -0700 (PDT)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A74465D58
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Oct 2014 15:27:28 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id l18so11835355wgh.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Oct 2014 08:27:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=tETFWPa16lqnf1j0Xk12t7XgN+fyxMpomw7qc0pvtD4=;
+	b=urR/cVpuG/QCxTDZNu/2dzYirNUBLttCObnnBfOYqwsvzlPu8NdCPCXmB9h+WyHVkq
+	Ocen+46EOFRdiI2jNno4X17YVtYaGGcPVHlFMM0F14q8U+l9UhsDow7nthQCDHYqHSlQ
+	5ZAE792KfQoNPG2SwYtqt6t1+9RYBTDgkno9Zn8mRwv5gEN1scnYbN9/lPwN6Ud7e22p
+	qRhRbGIZJFre8ilbPkAYZO3TtuAh5lfpulzf9O23tr5rQS0kqTGmzN3Ofjlj1KLaZ2CD
+	B7lglLmtL0vRvvYkfWowQgMyvHd+rQMolIZgDJqAOtuIVQIlLxvrBx6uL3IKtMmDUtB8
+	I9OQ==
+X-Received: by 10.180.75.170 with SMTP id d10mr12054181wiw.31.1412782049904;
+	Wed, 08 Oct 2014 08:27:29 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-176-198-252-251.hsi05.unitymediagroup.de. [176.198.252.251])
+	by mx.google.com with ESMTPSA id cy10sm448983wjb.21.2014.10.08.08.27.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 08 Oct 2014 08:27:29 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Oct 2014 17:27:20 +0200
+Message-Id: <1412782041-10532-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.112.97.200 with HTTP; Wed, 8 Oct 2014 07:54:02 -0700 (PDT)
-In-Reply-To: <CAJTo0LbmRCab4DjtOwZ92mg_ZUeE0Asic8+KVtQW3y-_j8JjcA@mail.gmail.com>
-References: <CAJTo0LacXy5_wf39pX9z078RD0vU0BpvWsNTdZqcr6dMobpXWw@mail.gmail.com>
-	<CAJTo0LbmRCab4DjtOwZ92mg_ZUeE0Asic8+KVtQW3y-_j8JjcA@mail.gmail.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Wed, 8 Oct 2014 07:54:02 -0700
-X-Google-Sender-Auth: iY2yaKnhbu7r_3-ZYxmMoYyp-JE
-Message-ID: <CABcZANm1swqtnS4ncw75+sJH=Zkm7iuaNnKRjpk=eTCY8hUF_g@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] RFC: automatic -dbg splitting
+Subject: [PATCH 1/2] thunar: add udev to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,44 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 14:54:23 -0000
+X-List-Received-Date: Wed, 08 Oct 2014 15:27:31 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 7, 2014 at 3:25 AM, Burton, Ross <ross.burton@intel.com> wrote:
+WARNING: QA Issue: thunar requires libgudev-1.0.so.0, but no providers in its RDEPENDS [file-rdeps]
 
-> On 11 June 2014 20:10, Burton, Ross <ross.burton@intel.com> wrote:
-> > I know there are recipes floating around that have multiple -dbg
-> > packages, but I can't see a great rationale for that.  I also can't
-> > see a reason why you'd want debug objects/sources outside of the -dbg
-> > package, or something that wasn't a debug object or source inside the
-> > -dbg package.
->
-> So last night I resurrected this patch and did an oe-core world build
-> with a small change to clear FILES_${PN}-dbg before automatically
-> populating it.  The results were interesting and invalidated my two
-> assumptions:
->
-> 1) Adding files that are not debug symbols or sources to -dbg packages
-> is done: both gcc and glib add Python code for gdb to execute and the
-> -dbg package is the obvious location for it.
->
-> 2) A recipe having multiple -dbg packages is sensible for eg Qt4,
-> which if all the debug information is put into a single package
-> results in a 367M package, expanding to 1.1G on disk.
->
-> So I've a proposed change to the logic:
-> * If there are multiple names in PACKAGES that match *-dbg, then don't
-> do automatic debug packaging
-> * The default value for FILES_PN-dbg in bitbake.conf should be empty,
-> and recipes can extend it as required (e.g. gdb Python scripts) with
-> the automatic debug packaging extending FILES_PN-dbg.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
-For what it's worth, this behavior seems quite sane to me.
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
+index 3feb242..36c5ed0 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_1.6.3.bb
+@@ -2,7 +2,7 @@ SUMMARY = "File manager for the Xfce Desktop Environment"
+ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify xfce4-panel"
++DEPENDS = "exo glib-2.0 gtk+ gdk-pixbuf libxfce4util libxfce4ui libsm dbus-glib startup-notification libnotify xfce4-panel udev"
+ 
+ inherit xfce
+ 
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.8.3.1
+
 
