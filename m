@@ -1,38 +1,28 @@
-Return-Path: <eric.nelson@boundarydevices.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 6033D60167
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E527E708B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Oct 2014 18:46:48 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id eu11so9445123pac.7
+	Thu,  9 Oct 2014 07:04:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9974kHV024574
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Oct 2014 11:46:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=yjTgk5QdINAyLDBNXmN1Ok9zQ3RQ2sz2g9aJ4b7uGpo=;
-	b=PNzZkKsdvF6p64RRH06gq7Tf2Hx8twnkwYWGDoUnlpltlqNTkRUl7t7uYyHmfoyay2
-	IO1oYC9T82Cp5rWMGGLvRKr0Nroc/4HVWSziVvnc0UEg0hsgaf/u/IfJXwXfz9GMwF1b
-	nFemEMHZC8uugibgy3prdJXc+jELDRTFvTNxhLbkn+lrzapjpJpwUOrSvA1DutqTClKN
-	ab0FdIVDq+0+/1vtFlrO9n7j9YKFFOf3MSdLgGh+luscv0w5D4TX+16gdoTu/OBZWM7w
-	tTr2mWn77yg0E1q/V+79974weT4q36pbLTPvoJrYSGpyco4iKmt3tfsEw3lbZa4Up/vv
-	u1eg==
-X-Gm-Message-State: ALoCoQl1r1GrKp6wNdzLuCuEJTdBOrU0wWQ8yYwwQN5zzbiy5LOd/BU1ZZDY0XjvPXSTachyH62t
-X-Received: by 10.66.65.133 with SMTP id x5mr12876549pas.26.1412794009735;
-	Wed, 08 Oct 2014 11:46:49 -0700 (PDT)
-Received: from localhost.localdomain (174-19-208-215.phnx.qwest.net.
-	[174.19.208.215])
-	by mx.google.com with ESMTPSA id z7sm640390pdl.64.2014.10.08.11.46.47
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 08 Oct 2014 11:46:48 -0700 (PDT)
-From: Eric Nelson <eric.nelson@boundarydevices.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Oct 2014 11:46:32 -0700
-Message-Id: <1412793992-29793-1-git-send-email-eric.nelson@boundarydevices.com>
-X-Mailer: git-send-email 1.9.1
-Cc: otavio@ossystems.com.br
-Subject: [meta-browser][PATCH][resend] chromium: conditionally compile routines for use with GLIB
+	Thu, 9 Oct 2014 00:04:46 -0700 (PDT)
+Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Thu, 9 Oct 2014 00:04:45 -0700
+Message-ID: <5436338B.10408@windriver.com>
+Date: Thu, 9 Oct 2014 15:04:43 +0800
+From: Chong Lu <Chong.Lu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1411978974-17996-1-git-send-email-Chong.Lu@windriver.com>
+In-Reply-To: <1411978974-17996-1-git-send-email-Chong.Lu@windriver.com>
+X-Originating-IP: [128.224.162.204]
+Subject: Re: [meta-oe][PATCH] samba: add systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,82 +36,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Oct 2014 18:46:50 -0000
+X-List-Received-Date: Thu, 09 Oct 2014 07:04:49 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The routine QuoteArgForDesktopFileExec is only called when GLIB is
-used, and compilation will fail with the following error message
-if it is compiled without GLIB support (e.g. under Wayland):
-	"defined but not used [-Werror=unused-function]"
+ping
 
-Signed-off-by: Eric Nelson <eric.nelson@boundarydevices.com>
----
- First e-mail bounced because I wasn't subscribed to the list
+//Chong
 
- ...ration-conditionally-compile-routines-for.patch | 41 ++++++++++++++++++++++
- recipes-browser/chromium/chromium_37.0.2062.94.bb  |  1 +
- 2 files changed, 42 insertions(+)
- create mode 100644 recipes-browser/chromium/chromium/0001-shell-integration-conditionally-compile-routines-for.patch
-
-diff --git a/recipes-browser/chromium/chromium/0001-shell-integration-conditionally-compile-routines-for.patch b/recipes-browser/chromium/chromium/0001-shell-integration-conditionally-compile-routines-for.patch
-new file mode 100644
-index 0000000..bf0f274
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/0001-shell-integration-conditionally-compile-routines-for.patch
-@@ -0,0 +1,41 @@
-+From 40659667549d1eec5c9ed29c6120584f6628d761 Mon Sep 17 00:00:00 2001
-+From: Eric Nelson <eric.nelson@boundarydevices.com>
-+Date: Mon, 6 Oct 2014 18:11:29 -0700
-+Subject: [PATCH] shell integration: conditionally compile routines for use
-+ with GLIB
-+
-+The routine QuoteArgForDesktopFileExec is only called when GLIB is
-+used, and compilation will fail with the following error message
-+if it is compiled.
-+
-+	"defined but not used [-Werror=unused-function]"
-+
-+Signed-off-by: Eric Nelson <eric.nelson@boundarydevices.com>
-+---
-+ chrome/browser/shell_integration_linux.cc | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/chrome/browser/shell_integration_linux.cc b/chrome/browser/shell_integration_linux.cc
-+index 24a1c55..bd82db4 100644
-+--- a/chrome/browser/shell_integration_linux.cc
-++++ b/chrome/browser/shell_integration_linux.cc
-+@@ -260,6 +260,7 @@ void DeleteShortcutInApplicationsMenu(
-+   LaunchXdgUtility(argv, &exit_code);
-+ }
-+ 
-++#if defined(USE_GLIB)
-+ // Quote a string such that it appears as one verbatim argument for the Exec
-+ // key in a desktop file.
-+ std::string QuoteArgForDesktopFileExec(const std::string& arg) {
-+@@ -307,6 +308,8 @@ std::string QuoteCommandLineForDesktopFileExec(
-+   return quoted_path;
-+ }
-+ 
-++#endif
-++
-+ const char kDesktopEntry[] = "Desktop Entry";
-+ 
-+ const char kXdgOpenShebang[] = "#!/usr/bin/env xdg-open";
-+-- 
-+1.9.1
-+
-diff --git a/recipes-browser/chromium/chromium_37.0.2062.94.bb b/recipes-browser/chromium/chromium_37.0.2062.94.bb
-index 3d4524b..c2b2b8b 100644
---- a/recipes-browser/chromium/chromium_37.0.2062.94.bb
-+++ b/recipes-browser/chromium/chromium_37.0.2062.94.bb
-@@ -13,6 +13,7 @@ SRC_URI = "\
-         file://unistd-2.patch \
-         file://google-chrome \
-         file://google-chrome.desktop \
-+        file://0001-shell-integration-conditionally-compile-routines-for.patch \
- "
- SRC_URI[md5sum] = "49bcf221a2e2e5406ae2e69964d01093"
- SRC_URI[sha256sum] = "d27c19580b74cbe143131f0bc097557b3b2fb3d2be966e688d8af51a779ce533"
--- 
-1.9.1
+On 09/29/2014 04:22 PM, Chong Lu wrote:
+> Add systemd service for samba.
+>
+> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> ---
+>   meta-oe/recipes-connectivity/samba/samba.inc       | 32 +++++++++++++++++++++-
+>   .../recipes-connectivity/samba/samba/nmb.service   | 12 ++++++++
+>   .../recipes-connectivity/samba/samba/smb.service   | 13 +++++++++
+>   .../samba/samba/winbind.service                    | 12 ++++++++
+>   4 files changed, 68 insertions(+), 1 deletion(-)
+>   create mode 100644 meta-oe/recipes-connectivity/samba/samba/nmb.service
+>   create mode 100644 meta-oe/recipes-connectivity/samba/samba/smb.service
+>   create mode 100644 meta-oe/recipes-connectivity/samba/samba/winbind.service
+>
+> diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+> index 3da0562..4392821 100644
+> --- a/meta-oe/recipes-connectivity/samba/samba.inc
+> +++ b/meta-oe/recipes-connectivity/samba/samba.inc
+> @@ -8,11 +8,18 @@ SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
+>              file://init.samba \
+>              file://init.winbind \
+>              file://tdb.pc \
+> +           file://nmb.service \
+> +           file://smb.service \
+> +           file://winbind.service \
+>   "
+>   
+>   S = "${WORKDIR}/samba-${PV}/source"
+>   
+> -inherit autotools-brokensep update-rc.d
+> +inherit autotools-brokensep update-rc.d systemd
+> +
+> +SYSTEMD_PACKAGES = "${PN} winbind"
+> +SYSTEMD_SERVICE_${PN} = "nmb.service smb.service"
+> +SYSTEMD_SERVICE_winbind = "winbind.service"
+>   
+>   SAMBAMMAP = "no"
+>   SAMBAMMAP_libc-glibc = "yes"
+> @@ -103,6 +110,29 @@ do_install_append() {
+>   
+>       # usershare mount place
+>       mkdir -p ${D}${localstatedir}/lib/samba/usershares
+> +
+> +    # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
+> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
+> +        rm -rf ${D}${sysconfdir}/init.d/
+> +    fi
+> +
+> +    install -d ${D}${systemd_unitdir}/system
+> +    for i in nmb smb winbind; do
+> +        install -m 0644 ${WORKDIR}/$i.service ${D}${systemd_unitdir}/system
+> +    done
+> +    sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
+> +        -e 's,@SBINDIR@,${sbindir},g' \
+> +        -i ${D}${systemd_unitdir}/system/*.service
+> +}
+> +
+> +DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
+> +pkg_postinst_${PN} () {
+> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit', 'true', 'false', d)}; then
+> +        if [ -n "$D" ]; then
+> +            OPTS="--root=$D"
+> +        fi
+> +        systemctl $OPTS mask samba.service
+> +    fi
+>   }
+>   
+>   pkg_postinst_libnss-winbind () {
+> diff --git a/meta-oe/recipes-connectivity/samba/samba/nmb.service b/meta-oe/recipes-connectivity/samba/samba/nmb.service
+> new file mode 100644
+> index 0000000..91b9975
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/samba/samba/nmb.service
+> @@ -0,0 +1,12 @@
+> +[Unit]
+> +Description=Samba NMB Daemon
+> +After=syslog.target network.target
+> +
+> +[Service]
+> +Type=forking
+> +PIDFile=/var/run/nmbd.pid
+> +ExecStart=@SBINDIR@/nmbd
+> +ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+> +
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-oe/recipes-connectivity/samba/samba/smb.service b/meta-oe/recipes-connectivity/samba/samba/smb.service
+> new file mode 100644
+> index 0000000..bc0707a
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/samba/samba/smb.service
+> @@ -0,0 +1,13 @@
+> +[Unit]
+> +Description=Samba SMB Daemon
+> +After=syslog.target network.target nmb.service winbind.service
+> +
+> +[Service]
+> +Type=forking
+> +PIDFile=/var/run/smbd.pid
+> +LimitNOFILE=16384
+> +ExecStart=@SBINDIR@/smbd
+> +ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+> +
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-oe/recipes-connectivity/samba/samba/winbind.service b/meta-oe/recipes-connectivity/samba/samba/winbind.service
+> new file mode 100644
+> index 0000000..bff6fb8
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/samba/samba/winbind.service
+> @@ -0,0 +1,12 @@
+> +i[Unit]
+> +Description=Samba Winbind Daemon
+> +After=syslog.target network.target nmb.service
+> +
+> +[Service]
+> +Type=forking
+> +PIDFile=/var/run/winbindd.pid
+> +ExecStart=@SBINDIR@/winbindd
+> +ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
+> +
+> +[Install]
+> +WantedBy=multi-user.target
 
 
