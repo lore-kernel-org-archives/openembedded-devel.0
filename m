@@ -1,28 +1,36 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E527E708B3
+Return-Path: <prvs=13524be160=pfink@christ-elektronik.de>
+X-Greylist: delayed 344 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 09 Oct 2014 07:19:09 UTC
+Received: from richard.christ-ag.com (richard.christ-ag.com [145.253.160.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 364996A9D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Oct 2014 07:04:46 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9974kHV024574
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Oct 2014 00:04:46 -0700 (PDT)
-Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Thu, 9 Oct 2014 00:04:45 -0700
-Message-ID: <5436338B.10408@windriver.com>
-Date: Thu, 9 Oct 2014 15:04:43 +0800
-From: Chong Lu <Chong.Lu@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
+	Thu,  9 Oct 2014 07:19:09 +0000 (UTC)
+Received: from richard.christ-ag.com (localhost.localdomain [127.0.0.1])
+	by localhost (Email Security Appliance) with SMTP id
+	A83507A92F_4363594B for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Oct 2014 07:13:24 +0000 (GMT)
+Received: from BEXBE01.christ.local (bexbe01.christ.local [172.16.100.25])
+	(using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(Client CN "mail.christ-ag.com", Issuer "CHRIST-CA" (not verified))
+	by richard.christ-ag.com (Sophos Email Appliance) with ESMTPS id
+	6D28C79A93_4363594F for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Oct 2014 07:13:24 +0000 (GMT)
+Received: from BEXBE01.christ.local ([fe80::89a:7a19:86a4:56c5]) by
+	BEXBE01.christ.local ([fe80::89a:7a19:86a4:56c5%12]) with mapi id
+	14.02.0347.000; Thu, 9 Oct 2014 09:13:23 +0200
+From: "Fink, Peter" <pfink@christ-elektronik.de>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-qt5] How to build Qt5 with 'designer' module?
+Thread-Index: Ac/jkGHPiTetautNTZSwCdpm/OcB7A==
+Date: Thu, 9 Oct 2014 07:13:23 +0000
+Message-ID: <F50ED7964AF8784493DDA71A307917F96F0F63@BEXBE01.christ.local>
+Accept-Language: de-DE, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [192.168.25.54]
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1411978974-17996-1-git-send-email-Chong.Lu@windriver.com>
-In-Reply-To: <1411978974-17996-1-git-send-email-Chong.Lu@windriver.com>
-X-Originating-IP: [128.224.162.204]
-Subject: Re: [meta-oe][PATCH] samba: add systemd service file
+Subject: [meta-qt5] How to build Qt5 with 'designer' module?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,136 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Oct 2014 07:04:49 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Oct 2014 07:19:17 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-ping
-
-//Chong
-
-On 09/29/2014 04:22 PM, Chong Lu wrote:
-> Add systemd service for samba.
->
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
-> ---
->   meta-oe/recipes-connectivity/samba/samba.inc       | 32 +++++++++++++++++++++-
->   .../recipes-connectivity/samba/samba/nmb.service   | 12 ++++++++
->   .../recipes-connectivity/samba/samba/smb.service   | 13 +++++++++
->   .../samba/samba/winbind.service                    | 12 ++++++++
->   4 files changed, 68 insertions(+), 1 deletion(-)
->   create mode 100644 meta-oe/recipes-connectivity/samba/samba/nmb.service
->   create mode 100644 meta-oe/recipes-connectivity/samba/samba/smb.service
->   create mode 100644 meta-oe/recipes-connectivity/samba/samba/winbind.service
->
-> diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-> index 3da0562..4392821 100644
-> --- a/meta-oe/recipes-connectivity/samba/samba.inc
-> +++ b/meta-oe/recipes-connectivity/samba/samba.inc
-> @@ -8,11 +8,18 @@ SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
->              file://init.samba \
->              file://init.winbind \
->              file://tdb.pc \
-> +           file://nmb.service \
-> +           file://smb.service \
-> +           file://winbind.service \
->   "
->   
->   S = "${WORKDIR}/samba-${PV}/source"
->   
-> -inherit autotools-brokensep update-rc.d
-> +inherit autotools-brokensep update-rc.d systemd
-> +
-> +SYSTEMD_PACKAGES = "${PN} winbind"
-> +SYSTEMD_SERVICE_${PN} = "nmb.service smb.service"
-> +SYSTEMD_SERVICE_winbind = "winbind.service"
->   
->   SAMBAMMAP = "no"
->   SAMBAMMAP_libc-glibc = "yes"
-> @@ -103,6 +110,29 @@ do_install_append() {
->   
->       # usershare mount place
->       mkdir -p ${D}${localstatedir}/lib/samba/usershares
-> +
-> +    # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
-> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
-> +        rm -rf ${D}${sysconfdir}/init.d/
-> +    fi
-> +
-> +    install -d ${D}${systemd_unitdir}/system
-> +    for i in nmb smb winbind; do
-> +        install -m 0644 ${WORKDIR}/$i.service ${D}${systemd_unitdir}/system
-> +    done
-> +    sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
-> +        -e 's,@SBINDIR@,${sbindir},g' \
-> +        -i ${D}${systemd_unitdir}/system/*.service
-> +}
-> +
-> +DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
-> +pkg_postinst_${PN} () {
-> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit', 'true', 'false', d)}; then
-> +        if [ -n "$D" ]; then
-> +            OPTS="--root=$D"
-> +        fi
-> +        systemctl $OPTS mask samba.service
-> +    fi
->   }
->   
->   pkg_postinst_libnss-winbind () {
-> diff --git a/meta-oe/recipes-connectivity/samba/samba/nmb.service b/meta-oe/recipes-connectivity/samba/samba/nmb.service
-> new file mode 100644
-> index 0000000..91b9975
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/samba/samba/nmb.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=Samba NMB Daemon
-> +After=syslog.target network.target
-> +
-> +[Service]
-> +Type=forking
-> +PIDFile=/var/run/nmbd.pid
-> +ExecStart=@SBINDIR@/nmbd
-> +ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-> diff --git a/meta-oe/recipes-connectivity/samba/samba/smb.service b/meta-oe/recipes-connectivity/samba/samba/smb.service
-> new file mode 100644
-> index 0000000..bc0707a
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/samba/samba/smb.service
-> @@ -0,0 +1,13 @@
-> +[Unit]
-> +Description=Samba SMB Daemon
-> +After=syslog.target network.target nmb.service winbind.service
-> +
-> +[Service]
-> +Type=forking
-> +PIDFile=/var/run/smbd.pid
-> +LimitNOFILE=16384
-> +ExecStart=@SBINDIR@/smbd
-> +ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-> diff --git a/meta-oe/recipes-connectivity/samba/samba/winbind.service b/meta-oe/recipes-connectivity/samba/samba/winbind.service
-> new file mode 100644
-> index 0000000..bff6fb8
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/samba/samba/winbind.service
-> @@ -0,0 +1,12 @@
-> +i[Unit]
-> +Description=Samba Winbind Daemon
-> +After=syslog.target network.target nmb.service
-> +
-> +[Service]
-> +Type=forking
-> +PIDFile=/var/run/winbindd.pid
-> +ExecStart=@SBINDIR@/winbindd
-> +ExecReload=@BASE_BINDIR@/kill -HUP $MAINPID
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-
+SGksDQoNCknigJltIHRyeWluZyB0byBidWlsZCBhIFF0IGFwcGxpY2F0aW9uIHdpdGggdGhlIHRv
+b2xjaGFpbiBnZW5lcmF0ZWQgYnkgb3BlbmVtYmVkZGVkIChtZXRhLXRvb2xjaGFpbi1xdDUpLg0K
+DQpUaGUgYXBwbGljYXRpb24gbmVlZHMgdGhlIGRlc2lnbmVyLW1vZHVsZSwgd2hpY2ggSSB0aG91
+Z2h0IHdhcyBpbmNsdWRlZCBpbiB0aGUgcXR0b29scyBwYWNrYWdlLCBidXQgbm93IEkgZ2V0IHRo
+ZSBmb2xsb3dpbmcgZXJyb3I6DQoNCuKAnFByb2plY3QgRXJyb3I6IFVua25vd24gbW9kdWxlKHMp
+IGluIFFUOiBkZXNpZ25lci7igJ0NCg0KV2hhdCBkbyBJIGhhdmUgdG8gaW5jbHVkZSB0byBnZXQg
+dGhlIGRlc2lnbmVyIG1vZHVsZT8NCg0KQW5vdGhlciB0aGluZyBJIHJ1biBpbnRvIHdhcyB0aGUg
+bWlzc2luZyBzeW5jcXQucGwgc2NyaXB0IGluIHRoZSB0b29sY2hhaW4gYXMgSSBuZWVkIHFmdHAu
+IEEgbGluayBzeW5jcXQgLT4gc3luY3F0LnBsIHdhcyBwcmVzZW50Lg0KSXMgaXQgbWlzc2luZyBi
+eSBhY2NpZGVudCBvciBmb3IgYSByZWFzb24/DQoNCkkgd2FzIHVzaW5nIFF0LiA1LjMuMSAwMjg2
+MWU2NzdhYi4uLi4NCg0KVGhhbmtzIGluIGFkdmFuY2UgYW5kIGJlc3QgcmVnYXJkcywNClBldGVy
+IEZpbmsNCk90dG8gQ2hyaXN0IEFHDQpodHRwOi8vd3d3LmNocmlzdC1hZy5jb20NCg0KTWl0Z2xp
+ZWRlciBkZXMgVm9yc3RhbmRlczogT3R0byBDaHJpc3QgKFZvcnNpdHplbmRlcikgLSBBbGV4YW5k
+ZXIgQ2hyaXN0IC0gRW5nZWxiZXJ0IEhhZ2dlbm3DvGxsZXIgLSBNYXJrdXMgQ2hyaXN0DQpBdWZz
+aWNodHNyYXRzdm9yc2l0emVuZGVyOiBPdHRvIENocmlzdA0KSGF1cHRzaXR6OiBNZW1taW5nZXIg
+U3RyLiA1MSA4NzczNCBCZW5uaW5nZW4NCkFtdHNnZXJpY2h0IE1lbW1pbmdlbiBIUkIgOTEwMA0K
+DQpEaWVzZSBFLU1haWwgZW50aMOkbHQgdmVydHJhdWxpY2hlIHVuZC9vZGVyIHJlY2h0bGljaCBn
+ZXNjaMO8dHp0ZSBJbmZvcm1hdGlvbmVuLiBXZW5uIFNpZSBuaWNodCBkZXIgcmljaHRpZ2UgQWRy
+ZXNzYXQgc2luZCBvZGVyIGRpZXNlIEUtTWFpbCBpcnJ0w7xtbGljaCBlcmhhbHRlbiBoYWJlbiwg
+aW5mb3JtaWVyZW4gU2llIGJpdHRlIHNvZm9ydCBkZW4gQWJzZW5kZXIgdW5kIHZlcm5pY2h0ZW4g
+U2llIGRpZXNlIE1haWwuIERhcyB1bmVybGF1YnRlIEtvcGllcmVuIHNvd2llIGRpZSB1bmJlZnVn
+dGUgV2VpdGVyZ2FiZSBkaWVzZXIgTWFpbCBzaW5kIG5pY2h0IGdlc3RhdHRldC4NClRoaXMgZS1t
+YWlsIG1heSBjb250YWluIGNvbmZpZGVudGlhbCBhbmQvb3IgcHJpdmlsZWdlZCBpbmZvcm1hdGlv
+bi4gSWYgeW91IGFyZSBub3QgdGhlIGludGVuZGVkIHJlY2lwaWVudCAob3IgaGF2ZSByZWNlaXZl
+ZCB0aGlzIGUtbWFpbCBpbiBlcnJvcikgcGxlYXNlIG5vdGlmeSB0aGUgc2VuZGVyIGltbWVkaWF0
+ZWx5IGFuZCBkZXN0cm95IHRoaXMgZS1tYWlsLiBBbnkgdW5hdXRob3JpemVkIGNvcHlpbmcsIGRp
+c2Nsb3N1cmUgb3IgZGlzdHJpYnV0aW9uIG9mIHRoZSBtYXRlcmlhbCBpbiB0aGlzIGUtbWFpbCBp
+cyBzdHJpY3RseSBmb3JiaWRkZW4uDQo=
 
