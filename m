@@ -1,33 +1,38 @@
-Return-Path: <openembedded-devel@urbanec.net>
-X-Greylist: delayed 14857 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 09 Oct 2014 17:20:05 UTC
-Received: from mail13.tpgi.com.au (mail13.tpgi.com.au [203.12.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B20265D58
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f177.google.com (mail-yk0-f177.google.com
+	[209.85.160.177])
+	by mail.openembedded.org (Postfix) with ESMTP id BCA8271826
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Oct 2014 17:20:05 +0000 (UTC)
-X-TPG-Junk-Status: Message not scanned
-X-TPG-Antivirus: Passed
-X-TPG-Abuse: host=60-242-171-118.static.tpgi.com.au; ip=60.242.171.118;
-	date=Fri, 10 Oct 2014 04:20:04 +1100
-Received: from gw.urbanec.net (60-242-171-118.static.tpgi.com.au
-	[60.242.171.118])
-	by mail13.tpgi.com.au (envelope-from openembedded-devel@urbanec.net)
-	(8.14.3/8.14.3) with ESMTP id s99HK2LR024305
+	Thu,  9 Oct 2014 21:54:26 +0000 (UTC)
+Received: by mail-yk0-f177.google.com with SMTP id q200so1096993ykb.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 04:20:04 +1100
-Received: from beep.urbanec.net ([192.168.42.2])
-	by gw.urbanec.net with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80.1) (envelope-from <openembedded-devel@urbanec.net>)
-	id 1XcHNg-0007xg-BX for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Oct 2014 04:20:00 +1100
-Message-ID: <5436C3C0.4040904@urbanec.net>
-Date: Fri, 10 Oct 2014 04:20:00 +1100
-From: Peter Urbanec <openembedded-devel@urbanec.net>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] Better support for upgrading packages in opkg and update-rc.d.bbclass
+	Thu, 09 Oct 2014 14:54:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=T0QpOCBOLMzd676dpk3iKgzd/zgiEnG/l/b9gBKpHBQ=;
+	b=sDhc5+ITcAPo2usQuixshI4+SE5SlEKbnS67eVMs39qlz/r28lMNAhVy6tFm3tK4HY
+	xkRCFfuwpLnXK8dobns2YMYLQdelTKwDaYISpG8jJAZqiU9b6nbS0JXSBX7ZTl4iwdK3
+	lAE1f1OkE4r393JgKRiPH3c8IT5RGcZcXlhY5ihSkN8S0X8MrBVBqMC/7C7rzXTyUW0J
+	BWOqKsDhfCtp6i/jvLZsv1eYuNOQAqwEHb/KRBqtTm1DRjAMfV0nzh7PLj7ZQ56L33vX
+	LKcK1lngJnlCWv57WrpQtIyoJUk1nhYzy/Z3LyU1vYsNOkmue4qFF3m4T2ny/Dwr7Ugm
+	bEWg==
+X-Received: by 10.236.54.101 with SMTP id h65mr1195584yhc.47.1412891667614;
+	Thu, 09 Oct 2014 14:54:27 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.35.70.10])
+	by mx.google.com with ESMTPSA id o38sm2042306yhp.34.2014.10.09.14.54.26
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 Oct 2014 14:54:26 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu,  9 Oct 2014 18:54:13 -0300
+Message-Id: <1412891653-9678-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 1.7.10.4
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][PATCH] Fix SDK environment setting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,185 +46,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Oct 2014 17:20:06 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Oct 2014 21:54:27 -0000
 
-init-ifupdown inherits default implementations of prerm, postrm, preinst
-and postinst from update-rc.d.bbclass. Unfortunately these default
-implementations don't deal with package upgrades as well as they could.
+Since the change to use a meta-environment canadian package in the
+OE-Core, the SDK environment setting has been broken. This uses the
+new subscript environment to fix it and also move the environment
+generation to the nativesdk-qtbase recipe.
 
-What ends up happening is that opkg starts downloading and unpacking
-packages sequentially. As it downloads and unpacks each package, opkg
-calls prerm, preinst and postrm hook scripts. Once all packages are
-unpacked, the postinst script is finally called for all packages as part
-of the "configure" stage.
-
-The default prerm and preinst scripts stop networking. Networking is not
-brought back up again until postinst is called, but that only happens
-after all the packages have been downloaded, unpacked and installed. This
-leaves a window where any package that needs to be downloaded after
-init-ifupdown is encountered will fail.
-
-This fixes the problem by enhancing opkg to also provide the "upgrade"
-argument to prerm and postrm, to (partially) match what dpkg does. See
-https://wiki.debian.org/MaintainerScripts for dpkg diagrams that clarify
-the intended process. opkg lacks the full functionality of dpkg, but for
-the purpose of this exercise, they are similar enough.
-
-I have submitted a patch to the opkg-devel list to include the "upgrade"
-argument.
-
-The second part of the solution is an update to the default implementations
-of the pre- and post- scripts provided by update-rc.d.bbclass. The scripts
-are now careful to remove themselves using the old package context and to
-delay the restart of a service until the configure stage called from the
-postinst script.
-
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta/classes/update-rc.d.bbclass                   | 75 +++++++++++++---------
- .../opkg/upgrade-argument-for-pre_postrm.patch     | 30 +++++++++
- meta/recipes-devtools/opkg/opkg_0.2.2.bb           |  1 +
- 3 files changed, 77 insertions(+), 29 deletions(-)
- create mode 100644 meta/recipes-devtools/opkg/opkg/upgrade-argument-for-pre_postrm.patch
+ classes/populate_sdk_qt5.bbclass    |   21 +--------------------
+ recipes-qt/qt5/nativesdk-qtbase.inc |   30 ++++++++++++++++++++++++++++++
+ 2 files changed, 31 insertions(+), 20 deletions(-)
 
-diff --git a/meta/classes/update-rc.d.bbclass b/meta/classes/update-rc.d.bbclass
-index bc1aa7d..c29457f 100644
---- a/meta/classes/update-rc.d.bbclass
-+++ b/meta/classes/update-rc.d.bbclass
-@@ -14,45 +14,62 @@ INITSCRIPT_PARAMS ?= "defaults"
-  INIT_D_DIR = "${sysconfdir}/init.d"
- -updatercd_preinst() {
--if [ -z "$D" -a -f "${INIT_D_DIR}/${INITSCRIPT_NAME}" ]; then
--	${INIT_D_DIR}/${INITSCRIPT_NAME} stop
-+# During an upgrade, the pre/postrm scripts from old package are called
-+# and the pre/postinst scripts called are from the new package.
-+# See https://wiki.debian.org/MaintainerScripts for dpkg diagrams.
-+# opkg uses a subset, which lacks most of the error handling.
-+
-+# Old package context, step 1
-+updatercd_prerm() {
-+if [ "x$1" != "xupgrade" ] ; then
-+  ${INIT_D_DIR}/${INITSCRIPT_NAME} stop
- fi
--if type update-rc.d >/dev/null 2>/dev/null; then
--	if [ -n "$D" ]; then
--		OPT="-f -r $D"
--	else
--		OPT="-f"
--	fi
--	update-rc.d $OPT ${INITSCRIPT_NAME} remove
-+if [ -z "$D" ]; then
-+  OPT=""
-+else
-+  OPT="-r $D"
- fi
--}
+diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
+index 7b31bbb..79df489 100644
+--- a/classes/populate_sdk_qt5.bbclass
++++ b/classes/populate_sdk_qt5.bbclass
+@@ -6,26 +6,7 @@ TOOLCHAIN_TARGET_TASK += "packagegroup-qt5-toolchain-target"
+ # This allow reuse of Qt paths
+ inherit qmake5_paths
+ 
+-toolchain_create_sdk_env_script_append () {
+-    echo 'export PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}:$PATH' >> $script
+-    echo 'export OE_QMAKE_CFLAGS="$CFLAGS"' >> $script
+-    echo 'export OE_QMAKE_CXXFLAGS="$CXXFLAGS"' >> $script
+-    echo 'export OE_QMAKE_LDFLAGS="$LDFLAGS"' >> $script
+-    echo 'export OE_QMAKE_CC=$CC' >> $script
+-    echo 'export OE_QMAKE_CXX=$CXX' >> $script
+-    echo 'export OE_QMAKE_LINK=$CXX' >> $script
+-    echo 'export OE_QMAKE_AR=$AR' >> $script
+-    echo 'export OE_QMAKE_LIBDIR_QT=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}' >> $script
+-    echo 'export OE_QMAKE_INCDIR_QT=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_QT_HEADERS}' >> $script
+-    echo 'export OE_QMAKE_MOC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/moc' >> $script
+-    echo 'export OE_QMAKE_UIC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/uic' >> $script
+-    echo 'export OE_QMAKE_RCC=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/rcc' >> $script
+-    echo 'export OE_QMAKE_QDBUSCPP2XML=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qdbuscpp2xml' >> $script
+-    echo 'export OE_QMAKE_QDBUSXML2CPP=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qdbusxml2cpp' >> $script
+-    echo 'export OE_QMAKE_QT_CONFIG=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
+-    echo 'export QMAKESPEC=${SDKTARGETSYSROOT}${OE_QMAKE_PATH_LIBS}/${QT_DIR_NAME}/mkspecs/linux-oe-g++' >> $script
+-    echo 'export QT_CONF_PATH=${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt.conf' >> $script
 -
--updatercd_postinst() {
- if type update-rc.d >/dev/null 2>/dev/null; then
--	if [ -n "$D" ]; then
--		OPT="-r $D"
--	else
--		OPT="-s"
--	fi
--	update-rc.d $OPT ${INITSCRIPT_NAME} ${INITSCRIPT_PARAMS}
-+  update-rc.d $OPT ${INITSCRIPT_NAME} remove
- fi
++create_sdk_files_prepend () {
+     # make a symbolic link to mkspecs for compatibility with QTCreator
+     (cd ${SDK_OUTPUT}/${SDKPATHNATIVE}; \
+          ln -sf ${SDKTARGETSYSROOT}${libdir}/${QT_DIR_NAME}/mkspecs mkspecs;)
+diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
+index e3b2863..889c3a9 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase.inc
++++ b/recipes-qt/qt5/nativesdk-qtbase.inc
+@@ -43,6 +43,7 @@ FILES_${PN}-tools-dev = " \
+     ${includedir} \
+     ${FILES_SOLIBSDEV} ${libdir}/*.la \
+     ${OE_QMAKE_PATH_ARCHDATA}/mkspecs \
++    ${SDKPATHNATIVE}/environment-setup.d \
+ "
+ 
+ FILES_${PN}-tools-staticdev = " \
+@@ -219,3 +220,32 @@ do_install() {
+                                    -not -name 'libQt5Bootstrap.a' \
+                                    -exec rm '{}' ';'
  }
- -updatercd_prerm() {
--if [ -z "$D" ]; then
--	${INIT_D_DIR}/${INITSCRIPT_NAME} stop
--fi
-+# New package context, step 2
-+updatercd_preinst() {
-+case "$1" in
-+  upgrade)
-+    ;;
-+  *)
-+    ;;
-+esac
- }
- +# Old package context, step 3
- updatercd_postrm() {
-+case "$1" in
-+  upgrade)
-+    ;;
-+  *)
-+    ;;
-+esac
++
++do_generate_qt_environment_file() {
++    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
++    script=${D}${SDKPATHNATIVE}/environment-setup.d/qt5.sh
++
++    echo 'export PATH=${OE_QMAKE_PATH_HOST_BINS}:$PATH' > $script
++    echo 'export OE_QMAKE_CFLAGS="$CFLAGS"' >> $script
++    echo 'export OE_QMAKE_CXXFLAGS="$CXXFLAGS"' >> $script
++    echo 'export OE_QMAKE_LDFLAGS="$LDFLAGS"' >> $script
++    echo 'export OE_QMAKE_CC=$CC' >> $script
++    echo 'export OE_QMAKE_CXX=$CXX' >> $script
++    echo 'export OE_QMAKE_LINK=$CXX' >> $script
++    echo 'export OE_QMAKE_AR=$AR' >> $script
++    echo 'export QT_CONF_PATH=${OE_QMAKE_PATH_HOST_BINS}/qt.conf' >> $script
++    echo 'export OE_QMAKE_LIBDIR_QT=`qmake -query QT_INSTALL_LIBS`' >> $script
++    echo 'export OE_QMAKE_INCDIR_QT=`qmake -query QT_INSTALL_HEADERS`' >> $script
++    echo 'export OE_QMAKE_MOC=${OE_QMAKE_PATH_HOST_BINS}/moc' >> $script
++    echo 'export OE_QMAKE_UIC=${OE_QMAKE_PATH_HOST_BINS}/uic' >> $script
++    echo 'export OE_QMAKE_RCC=${OE_QMAKE_PATH_HOST_BINS}/rcc' >> $script
++    echo 'export OE_QMAKE_QDBUSCPP2XML=${OE_QMAKE_PATH_HOST_BINS}/qdbuscpp2xml' >> $script
++    echo 'export OE_QMAKE_QDBUSXML2CPP=${OE_QMAKE_PATH_HOST_BINS}/qdbusxml2cpp' >> $script
++    echo 'export OE_QMAKE_QT_CONFIG=${OE_QMAKE_PATH_TARGET_LIBS}/${QT_DIR_NAME}/mkspecs/qconfig.pri' >> $script
++    echo 'export QMAKESPEC=`qmake -query QT_INSTALL_LIBS`/mkspecs/linux-oe-g++' >> $script
++
++    # Use relocable sysroot
++    sed -i -e 's:${SDKPATHNATIVE}:$OECORE_NATIVE_SYSROOT:g' $script
 +}
 +
-+# N.B. Step 4 runs after all packages have been through steps 1-3 and therefore we
-+#      need to delay service restarts during upgrade until here. Otherwise we end
-+#      up with situations, like networking going down in the middle of "opkg upgrade",
-+#      thus resulting in failures to fetch further packages.
-+
-+# New package context, step 4
-+updatercd_postinst() {
- if type update-rc.d >/dev/null 2>/dev/null; then
--	if [ -n "$D" ]; then
--		OPT="-r $D"
--	else
--		OPT=""
--	fi
--	update-rc.d $OPT ${INITSCRIPT_NAME} remove
-+  if [ -n "$D" ]; then
-+    OPT="-r $D"
-+  else
-+    # This will catch the upgrade case and result in a restart.
-+    ${INIT_D_DIR}/${INITSCRIPT_NAME} stop
-+    OPT="-s"
-+  fi
-+  update-rc.d $OPT ${INITSCRIPT_NAME} ${INITSCRIPT_PARAMS}
- fi
- }
- diff --git a/meta/recipes-devtools/opkg/opkg/upgrade-argument-for-pre_postrm.patch b/meta/recipes-devtools/opkg/opkg/upgrade-argument-for-pre_postrm.patch
-new file mode 100644
-index 0000000..5bea82a
---- /dev/null
-+++ b/meta/recipes-devtools/opkg/opkg/upgrade-argument-for-pre_postrm.patch
-@@ -0,0 +1,30 @@
-+From: Peter Urbanec
-+Subject: [opkg] Use "upgrade" argument in prerm and postrm scripts
-+
-+Current implementation of opkg makes it difficult to distinguish between
-+package removal or upgrade in prerm and postrm scripts. The following patch
-+will make it easier and is close(r) to what dpkg does.
-+
-+diff --git a/libopkg/opkg_remove.c b/libopkg/opkg_remove.c
-+index 07401b2..52454f8 100644
-+--- a/libopkg/opkg_remove.c
-++++ b/libopkg/opkg_remove.c
-+@@ -292,7 +292,7 @@ opkg_remove_pkg(pkg_t *pkg, int from_upgrade)
-+      pkg->state_want = SW_DEINSTALL;
-+      opkg_state_changed++;
-+ +-     if (pkg_run_script(pkg, "prerm", "remove") != 0) {
-++     if (pkg_run_script(pkg, "prerm", from_upgrade ? "upgrade" : "remove") != 0) {
-+          if (!conf->force_remove) {
-+              opkg_msg(ERROR, "not removing package \"%s\", "
-+                              "prerm script failed\n", pkg->name);
-+@@ -310,7 +310,7 @@ opkg_remove_pkg(pkg_t *pkg, int from_upgrade)
-+        feel free to fix this. */
-+      remove_data_files_and_list(pkg);
-+
-+-     err = pkg_run_script(pkg, "postrm", "remove");
-++     err = pkg_run_script(pkg, "postrm", from_upgrade ? "upgrade" : "remove");
-+
-+      remove_maintainer_scripts(pkg);
-+      pkg->state_status = SS_NOT_INSTALLED;
-+ diff --git a/meta/recipes-devtools/opkg/opkg_0.2.2.bb b/meta/recipes-devtools/opkg/opkg_0.2.2.bb
-index 3dd7489..9c0045e 100644
---- a/meta/recipes-devtools/opkg/opkg_0.2.2.bb
-+++ b/meta/recipes-devtools/opkg/opkg_0.2.2.bb
-@@ -4,6 +4,7 @@ SRC_URI = "http://downloads.yoctoproject.org/releases/${BPN}/${BPN}-${PV}.tar.gz
-            file://no-install-recommends.patch \
-            file://add-exclude.patch \
-            file://opkg-configure.service \
-+           file://upgrade-argument-for-pre_postrm.patch \
- "
-  S = "${WORKDIR}/${BPN}-${PV}"
++addtask generate_qt_environment_file after do_install before do_package
 -- 
-2.1.2
+1.7.10.4
 
 
