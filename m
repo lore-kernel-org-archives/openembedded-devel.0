@@ -1,37 +1,41 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id A89076AC7B
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BA8F70703
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 19:14:16 +0000 (UTC)
-Received: by mail-yk0-f180.google.com with SMTP id 142so1908885ykq.25
+	Fri, 10 Oct 2014 19:45:47 +0000 (UTC)
+Received: by mail-pd0-f172.google.com with SMTP id ft15so2217850pdb.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 12:14:17 -0700 (PDT)
+	Fri, 10 Oct 2014 12:45:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=4FfxDXlX71kAyY7Vqq49MM/pFZpicPmUgp+nb5l3Pec=;
-	b=t9qqjtJq2wc2FBRIUY1p9NS18EbjDaxuMGVVXrYKcpCsxqIDBsn1NtBuVzCOao1OYb
-	aFC+mdPHiE70zpPuG3DNe0SsDjNIuQrzaLttCn2/gnaitQ+jBukNLH6mrJoIigqjCtWO
-	/LDmr/OGDOIOe5pYZ0GMRoXN3tJ2qC9uj0DRZrc5a+U85e6IXaS40of77qCT2rmP6lgP
-	4JgSXFFsseBLgGCUEJDG/Y0UqvNK/2P2q0PntZ69WZR20jtabPPu4slehnfcS++i52E9
-	PpUdImFfXMr97VUxDaAiFoOFMeB0EVt2Xc2bIM17DjwgtzX+utSfENZbh/JDMLMVZMhK
-	EF5w==
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=CK3v7rrWrvNdioxyQOSVfla3z4Z78Q9C5Gi93yXVM0w=;
+	b=kSFkPzKN9n/HhU433jR3TZ2UIjfCoOk3cme/gKrIwYDxeUdDBlmqvqVb5aFlACpgW5
+	JvOi3tRg5k9fBVduPWETyUhy+sCcl1IFDTKWyJqCuDQyHvaJgsxH4J2dL2WqTPemd4Cv
+	0BKJMVQ51qc7ImvbZS5SSFwMgEABOscRpk7eT/pxAV6lXf8M7MvxVms6NKu29EZosMEe
+	0huqPw4jKIDL+ueFgMw5+ml+PhjIH4sk+Ujf2PXu++vS003flxaOahWbsBUOCOu5KViw
+	x9Czux691r7zHz817elNgyoJ45cnln+9oixaPRIoEKwVBnSuMjTEzqcPDcdzvad5J/JV
+	dEtQ==
+X-Received: by 10.70.36.237 with SMTP id t13mr7560300pdj.134.1412970348233;
+	Fri, 10 Oct 2014 12:45:48 -0700 (PDT)
+Received: from ?IPv6:2601:c:9380:601:2c91:f63a:c862:e6fc?
+	([2601:c:9380:601:2c91:f63a:c862:e6fc])
+	by mx.google.com with ESMTPSA id hu4sm4209454pbb.68.2014.10.10.12.45.46
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 10 Oct 2014 12:45:47 -0700 (PDT)
+Message-ID: <54383768.3020705@gmail.com>
+Date: Fri, 10 Oct 2014 12:45:44 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.2
 MIME-Version: 1.0
-X-Received: by 10.236.207.69 with SMTP id m45mr10158051yho.6.1412968457547;
-	Fri, 10 Oct 2014 12:14:17 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.172.70 with HTTP; Fri, 10 Oct 2014 12:14:17 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org, 
+	Martin Jansa <martin.jansa@gmail.com>,
+	Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <543810C5.9030502@windriver.com> <54381ED3.60805@balister.org>
 In-Reply-To: <54381ED3.60805@balister.org>
-References: <543810C5.9030502@windriver.com>
-	<54381ED3.60805@balister.org>
-Date: Fri, 10 Oct 2014 16:14:17 -0300
-X-Google-Sender-Auth: 9qUofkCb1Ge4yvwP8ddBQmFWiX8
-Message-ID: <CAP9ODKoJjneY55ouSmHVmQgnqqcgCofPiKmXOQ12vuoV5jJz4g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Cliff Brake <cliff.brake@gmail.com>, Armin Kuster <akuster808@gmail.com>
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
 Subject: Re: When will the meta-openembedded have a dizzy branch, please ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -46,18 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 19:14:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 10 Oct 2014 19:45:54 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 10, 2014 at 3:00 PM, Philip Balister <philip@balister.org> wrote:
-> We'll need volunteers to maintain. Also a lot of people are headed to
+
+
+On 10/10/2014 11:00 AM, Philip Balister wrote:
+> We'll need volunteers to maintain.
+
+You can put me down as one if it helps.
+
+- Armin
+
+Also a lot of people are headed to
 > ELCE next week, so we might be slow getting this organized.
-
-I can volunteer to maintain the branch; maybe Cliff and Armin want to
-keep our maintenance team from Daisy? :)
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>
+> Philip
+>
+> On 10/10/2014 01:00 PM, Robert Yang wrote:
+>> Hello,
+>>
+>> When will the meta-openembedded have a dizzy branch, please ?
+>>
 
