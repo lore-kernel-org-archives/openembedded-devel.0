@@ -1,40 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 224107170B
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E9FEC71853
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 10:34:00 +0000 (UTC)
-Received: by mail-wg0-f42.google.com with SMTP id z12so3515632wgg.25
+	Fri, 10 Oct 2014 10:34:59 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id fb4so1586744wid.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 03:34:01 -0700 (PDT)
+	Fri, 10 Oct 2014 03:35:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=SWMwPadCy8N3GtcsFqcx8Brf+17qB8hez3UZoFzVSFo=;
-	b=tpvCOSXIznDY7ckbJp0wdv1ad6KPLvFZBjFpSI13J0MB/piG+sdQ+CvS7rxSdpv1fU
-	rMm09b9cICb170Hn+SVOKILF41XC0UGZ+wyidxxIFXkmMoXmT/t48qH+wptxEtYYWRdi
-	+fJBJd7Ln9Gr5PHxs6NM/zI9N0SNsiWSi6AGAVZJeo6tjcshTznniW17rYAPdO6q/u/1
-	qyAyJj3iE22KCcQ75a2n846TplydeSWtmBkWAs3uYKjb1mtb7qC8GJQT+xS3GpMRBhY2
-	2+7A0HPjE+eH3ICuCWmXyAf4SDD6/R2435NWc5lJ9bwavLCchNrWk28Ts3NSLq3bkTKT
-	opiw==
-X-Received: by 10.194.241.229 with SMTP id wl5mr3582421wjc.53.1412937241593;
-	Fri, 10 Oct 2014 03:34:01 -0700 (PDT)
+	bh=Bc9C1HFWHgVaFQ60Ky1L5WtmQQAqD+EnYcyTOtp21WQ=;
+	b=In+3rhRHL4ljOuOhLohcEwZP1330IhGS2v7ly8RQ+9/PLx/6Jxd/IYCBWJGxFicuZM
+	+sncXDNMaOxlmzmeSPSQCPFIbuWtIO1/A9VCKOAZuL5mdk2M2NMHmOE4xaDhIL+qurZv
+	Dy5tTTazAsqVc1wW4odrDtyIrQlbKBuCQGvfrBS3yb8Ilrw0hR1oaeU3PLqDIb6mCZHx
+	tt4DjscG6SDNlbytLZZzx0DxMdb8lH61i/hQ3uh4XWrRBx06OgWjapKULj/Us2m9n4nY
+	iz/9i+QjZtEDAz+M74FkaUyrtpq24K4y0H2baVLuMZx+0MPvs/Wki/sOFT723u2WmQOX
+	DDwA==
+X-Received: by 10.180.186.230 with SMTP id fn6mr3928864wic.44.1412937300232;
+	Fri, 10 Oct 2014 03:35:00 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	bo14sm2161778wib.13.2014.10.10.03.34.00
+	bc5sm4592703wjb.14.2014.10.10.03.34.59
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Oct 2014 03:34:00 -0700 (PDT)
+	Fri, 10 Oct 2014 03:34:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 10 Oct 2014 12:35:07 +0200
+Date: Fri, 10 Oct 2014 12:36:06 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141010103507.GJ12322@jama>
-References: <1412651209-2483-1-git-send-email-nickdademo@gmail.com>
-	<20141008024858.GG12322@jama>
+Message-ID: <20141010103606.GK12322@jama>
+References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
+	<1412151555-19865-7-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <20141008024858.GG12322@jama>
+In-Reply-To: <1412151555-19865-7-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2] opencv: Add recipe for OpenCV v3.0.0-alpha.
+Subject: Re: [PATCH][meta-oe 06/15] tumbler: fix build deps QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,232 +49,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 10:34:01 -0000
-X-Groupsio-MsgNum: 52424
+X-List-Received-Date: Fri, 10 Oct 2014 10:35:00 -0000
+X-Groupsio-MsgNum: 52425
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="utPK4TBebyzZxMrE"
+	protocol="application/pgp-signature"; boundary="enGqbSaueFq5omEL"
 Content-Disposition: inline
 
---utPK4TBebyzZxMrE
-Content-Type: text/plain; charset=us-ascii
+--enGqbSaueFq5omEL
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 08, 2014 at 04:48:58AM +0200, Martin Jansa wrote:
-> On Tue, Oct 07, 2014 at 02:06:49PM +1100, Nick D'Ademo wrote:
-> > Includes fix which disables IPP for ARM builds.
->=20
+On Wed, Oct 01, 2014 at 10:19:06AM +0200, Andreas M=FCller wrote:
+> WARNING: QA Issue: tumbler rdepends on libxml2, but it isn't a build depe=
+ndency? [build-deps]
+> WARNING: QA Issue: tumbler rdepends on libgsf, but it isn't a build depen=
+dency? [build-deps]
+> WARNING: QA Issue: tumbler rdepends on libbz2, but it isn't a build depen=
+dency? [build-deps]
 
-And also new QA issues:
-opencv-2.99+3.0.0-alpha+gitAUTOINC+fb9a143429: libopencv-highgui rdepends o=
-n gtk+3, but it isn't a build dependency? [build-deps]
-opencv-2.99+3.0.0-alpha+gitAUTOINC+fb9a143429: libopencv-videoio rdepends o=
-n gstreamer1.0, but it isn't a build dependency? [build-deps]
-opencv-2.99+3.0.0-alpha+gitAUTOINC+fb9a143429: libopencv-videoio rdepends o=
-n libgstapp-1.0, but it isn't a build dependency? [build-deps]
-opencv-2.99+3.0.0-alpha+gitAUTOINC+fb9a143429: libopencv-videoio rdepends o=
-n libgstpbutils-1.0, but it isn't a build dependency? [build-deps]
-opencv-2.99+3.0.0-alpha+gitAUTOINC+fb9a143429: libopencv-videoio rdepends o=
-n libgstriff-1.0, but it isn't a build dependency? [build-deps]
+Looks like 2 more were missed, can you please check & fix?
 
-> I'm sorry, but it's causing vlc build failure:
+tumbler-0.1.30: tumbler rdepends on gstreamer1.0, but it isn't a build depe=
+ndency? [build-deps]
+tumbler-0.1.30: tumbler rdepends on libgsttag-1.0, but it isn't a build dep=
+endency? [build-deps]
+
 >=20
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi=
-/vlc/2.1.4-r0/vlc-2.1.4/modules/video_filter/opencv_example.cpp:132:59: err=
-or: 'cvReleaseHaarClassifierCascade' was not declared in this scope
-> |          cvReleaseHaarClassifierCascade( &p_sys->p_cascade );
-> |                                                            ^
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi=
-/vlc/2.1.4-r0/vlc-2.1.4/modules/video_filter/opencv_example.cpp: In functio=
-n 'picture_t* Filter(filter_t*, picture_t*)':
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi=
-/vlc/2.1.4-r0/vlc-2.1.4/modules/video_filter/opencv_example.cpp:175:45: err=
-or: 'CV_HAAR_DO_CANNY_PRUNING' was not declared in this scope
-> |                                              CV_HAAR_DO_CANNY_PRUNING,
-> |                                              ^
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi=
-/vlc/2.1.4-r0/vlc-2.1.4/modules/video_filter/opencv_example.cpp:176:60: err=
-or: 'cvHaarDetectObjects' was not declared in this scope
-> |                                              cvSize(20, 20) );
-> |                                                             ^
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi=
-/vlc/2.1.4-r0/vlc-2.1.4/modules/video_filter/opencv_example.cpp:197:58: err=
-or: 'CV_RGB' was not declared in this scope
-> |              cvRectangle( p_img[0], pt1, pt2, CV_RGB(0,0,0), 3, 8, 0 );
-> |                                                           ^
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi=
-/vlc/2.1.4-r0/vlc-2.1.4/modules/video_filter/opencv_example.cpp:197:69: err=
-or: 'cvRectangle' was not declared in this scope
-> |              cvRectangle( p_img[0], pt1, pt2, CV_RGB(0,0,0), 3, 8, 0 );
-> |                                                                      ^
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi=
-/vlc/2.1.4-r0/vlc-2.1.4/modules/video_filter/opencv_example.cpp:201:57: war=
-ning: deprecated conversion from string constant to 'char*' [-Wwrite-string=
-s]
-> |              p_sys->event_info.p_region[i].p_description =3D "Face Dete=
-cted";
-> |                                                          ^
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> Can you look into it as well (at least to disable opencv example while bu=
-ilding vlc).
->=20
-> Thanks
->=20
-> > Signed-off-by: Nick D'Ademo <nickdademo@gmail.com>
-> > ---
-> >  meta-oe/recipes-support/opencv/opencv_git.bb | 96 ++++++++++++++++++++=
-++++++++
-> >  1 file changed, 96 insertions(+)
-> >  create mode 100644 meta-oe/recipes-support/opencv/opencv_git.bb
-> >=20
-> > diff --git a/meta-oe/recipes-support/opencv/opencv_git.bb b/meta-oe/rec=
-ipes-support/opencv/opencv_git.bb
-> > new file mode 100644
-> > index 0000000..bf6fd84
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/opencv/opencv_git.bb
-> > @@ -0,0 +1,96 @@
-> > +DESCRIPTION =3D "Opencv : The Open Computer Vision Library"
-> > +HOMEPAGE =3D "http://opencv.org/"
-> > +SECTION =3D "libs"
-> > +
-> > +LICENSE =3D "BSD"
-> > +LIC_FILES_CHKSUM =3D "file://include/opencv2/opencv.hpp;endline=3D41;m=
-d5=3D6d690d8488a6fca7a2c192932466bb14"
-> > +
-> > +ARM_INSTRUCTION_SET =3D "arm"
-> > +
-> > +DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib g=
-lib-2.0 gstreamer gst-plugins-base"
-> > +
-> > +# Commit hash for 3.0.0-alpha tag
-> > +SRCREV =3D "fb9a143429f86603ff93e5bcb2d94b94780b7234"
-> > +SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3Dmaster \
-> > +           file://opencv-fix-pkgconfig-generation.patch \
-> > +"
-> > +
-> > +PV =3D "2.99+3.0.0-alpha+git${SRCPV}"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +# Do an out-of-tree build
-> > +OECMAKE_SOURCEPATH =3D "${S}"
-> > +OECMAKE_BUILDPATH =3D "${WORKDIR}/build-${TARGET_ARCH}"
-> > +
-> > +EXTRA_OECMAKE =3D "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=3D${STAGING_LIBDIR}=
-/${PYTHON_DIR}/site-packages/numpy/core/include \
-> > +                 -DBUILD_PYTHON_SUPPORT=3DON \
-> > +                 -DWITH_FFMPEG=3DON \
-> > +                 -DCMAKE_SKIP_RPATH=3DON \
-> > +                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DE=
-NABLE_SSE=3D1 -DENABLE_SSE2=3D1 -DENABLE_SSE3=3D1 -DENABLE_SSSE3=3D1", "", =
-d)} \
-> > +                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SU=
-FFIX=3D64", "", d)} \
-> > +                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SU=
-FFIX=3D32", "", d)} \
-> > +                 ${@bb.utils.contains("TUNE_FEATURES", "arm", "-DWITH_=
-IPP=3DOFF", "", d)} \
-> > +"
-> > +
-> > +PACKAGECONFIG ??=3D "eigen gtk jpeg libav png tiff v4l jasper"
-> > +PACKAGECONFIG[eigen] =3D "-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeige=
-n,"
-> > +PACKAGECONFIG[gtk] =3D "-DWITH_GTK=3DON,-DWITH_GTK=3DOFF,gtk+,"
-> > +PACKAGECONFIG[jpeg] =3D "-DWITH_JPEG=3DON,-DWITH_JPEG=3DOFF,jpeg,"
-> > +PACKAGECONFIG[libav] =3D "-DWITH_FFMPEG=3DON,-DWITH_FFMPEG=3DOFF,libav=
-,"
-> > +PACKAGECONFIG[png] =3D "-DWITH_PNG=3DON,-DWITH_PNG=3DOFF,libpng,"
-> > +PACKAGECONFIG[tiff] =3D "-DWITH_TIFF=3DON,-DWITH_TIFF=3DOFF,tiff,"
-> > +PACKAGECONFIG[v4l] =3D "-DWITH_V4L=3DON,-DWITH_V4L=3DOFF,v4l-utils,"
-> > +PACKAGECONFIG[jasper] =3D "-DBUILD_JASPER=3DON,-DBUILD_JASPER=3DOFF,ja=
-sper"
-> > +PACKAGECONFIG[pvapi] =3D '-DWITH_PVAPI=3DON -DPVAPI_LIBRARY=3D"${STAGI=
-NG_LIBDIR}/libPvAPI.a",-DWITH_PVAPI=3DOFF,pvapi'
-> > +
-> > +inherit distutils-base pkgconfig cmake
-> > +
-> > +export BUILD_SYS
-> > +export HOST_SYS
-> > +export PYTHON_CSPEC=3D"-I${STAGING_INCDIR}/${PYTHON_DIR}"
-> > +export PYTHON=3D"${STAGING_BINDIR_NATIVE}/python"
-> > +
-> > +TARGET_CC_ARCH +=3D "-I${S}/include "
-> > +
-> > +PACKAGES +=3D "${PN}-apps python-opencv"
-> > +
-> > +python populate_packages_prepend () {
-> > +    cv_libdir =3D d.expand('${libdir}')
-> > +    do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'Ope=
-nCV %s development package', extra_depends=3D'${PN}-dev', allow_links=3DTru=
-e)
-> > +    do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'Ope=
-nCV %s development package', extra_depends=3D'${PN}-dev')
-> > +    do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'Open=
-CV %s development package', extra_depends=3D'${PN}-dev')
-> > +    do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenC=
-V %s library', extra_depends=3D'', allow_links=3DTrue)
-> > +
-> > +    pn =3D d.getVar('PN', 1)
-> > +    metapkg =3D  pn + '-dev'
-> > +    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
-> > +    blacklist =3D [ metapkg ]
-> > +    metapkg_rdepends =3D [ ]=20
-> > +    packages =3D d.getVar('PACKAGES', 1).split()
-> > +    for pkg in packages[1:]:
-> > +        if not pkg in blacklist and not pkg in metapkg_rdepends and pk=
-g.endswith('-dev'):
-> > +            metapkg_rdepends.append(pkg)
-> > +    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
-> > +}
-> > +
-> > +PACKAGES_DYNAMIC +=3D "^libopencv-.*"
-> > +
-> > +FILES_${PN} =3D ""
-> > +FILES_${PN}-apps =3D "${bindir}/* ${datadir}/OpenCV"
-> > +FILES_${PN}-dbg +=3D "${libdir}/.debug"
-> > +FILES_${PN}-dev =3D "${includedir} ${libdir}/pkgconfig"
-> > +FILES_${PN}-doc =3D "${datadir}/OpenCV/doc"
-> > +FILES_${PN}-staticdev +=3D "${datadir}/OpenCV/3rdparty${base_libdir}"
-> > +
-> > +ALLOW_EMPTY_${PN} =3D "1"
-> > +
-> > +INSANE_SKIP_python-opencv =3D "True"
-> > +DESCRIPTION_python-opencv =3D "Python bindings to opencv"
-> > +FILES_python-opencv =3D "${PYTHON_SITEPACKAGES_DIR}/*"
-> > +RDEPENDS_python-opencv =3D "python-core python-numpy"
-> > +
-> > +do_install_append() {
-> > +    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
-> > +    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
-> > +}
-> > --=20
-> > 1.9.1
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb b/meta-xfce=
+/recipes-xfce/tumbler/tumbler_0.1.30.bb
+> index 8651d00..9f361e9 100644
+> --- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
+> +++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION=3D"Thumbnail service implementing the thumbna=
+il management D-Bus speci
+>  SECTION =3D "x11/libs"
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
+> -DEPENDS =3D "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-=
+native"
+> +DEPENDS =3D "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-=
+native libxml2 libgsf"
+> =20
+>  inherit xfce gtk-doc
+> =20
+> --=20
+> 1.8.3.1
 >=20
 > --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---utPK4TBebyzZxMrE
+--enGqbSaueFq5omEL
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlQ3tlsACgkQN1Ujt2V2gBw1tACfXf1Pls+Msbt4YeLivAEGoBub
-VhUAmgPQ9s3MOs98YHvRsWgrfnAsPaY7
-=CTr6
+iEYEARECAAYFAlQ3tpYACgkQN1Ujt2V2gBwn2wCggsRYE+lnmsuj3SuHxK8djQSq
+LuMAoIT0g9VOTpTabO88lt4CHr/x7qFp
+=4qye
 -----END PGP SIGNATURE-----
 
---utPK4TBebyzZxMrE--
+--enGqbSaueFq5omEL--
