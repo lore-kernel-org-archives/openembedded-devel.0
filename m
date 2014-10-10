@@ -1,41 +1,26 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 263366AC7B;
-	Fri, 10 Oct 2014 12:46:04 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id b13so3777075wgh.22
-	for <multiple recipients>; Fri, 10 Oct 2014 05:46:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=3PK/FZ5blx2yl3WHzLe7TOG7SgmadRCIUHq6yDMRP2Y=;
-	b=iUu4SAaMKi9QjdV9QVfJOS88sK/ONvfe55dokGkaNtN17H4jINlpWJR6CBQolRPD8W
-	Kv3RBpZDetf3x6BLkbOlGQwd3R3oZCFRjpLK52cHyFFGdSA9Abp1HhxjuJAAGnngmB9A
-	4bcKrg682nMxDz6h38dxAq7FbXJo6n/f2H8IkpS91Tm3GCt5s5Ctz1oo8JYEjYvYDJMv
-	c0kV4+BCYhM5tlt28O1jMthY4ZQpcjDuGtJizrnmTbnRRSZoO6xy64N8pS3d6ppQawCH
-	XdP77KksBpJbmb4gK84hDDHtEahBEvPkSXZ+dN1aUSQjORA0xGd2kXsxD5bxMZJThyOv
-	KUJw==
-X-Received: by 10.180.19.1 with SMTP id a1mr4693440wie.5.1412945163956;
-	Fri, 10 Oct 2014 05:46:03 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	ll20sm2533054wic.14.2014.10.10.05.46.02 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Oct 2014 05:46:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 10 Oct 2014 14:47:09 +0200
-To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Message-ID: <20141010124709.GN12322@jama>
-References: <20141010103438.GI12322@jama>
-	<CALbNGRTymU+trfTQGPiOi27cauA6T1nrKT+Npbhn4HTyVZj2NQ@mail.gmail.com>
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A189470703
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Oct 2014 17:01:05 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9AH0tsL028723
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 10 Oct 2014 10:00:55 -0700 (PDT)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 10 Oct 2014 10:00:54 -0700
+Message-ID: <543810C5.9030502@windriver.com>
+Date: Sat, 11 Oct 2014 01:00:53 +0800
+From: Robert Yang <liezhi.yang@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.2
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRTymU+trfTQGPiOi27cauA6T1nrKT+Npbhn4HTyVZj2NQ@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-10-10, QA issues
+To: Martin Jansa <martin.jansa@gmail.com>, Paul Eggleton
+	<paul.eggleton@linux.intel.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: When will the meta-openembedded have a dizzy branch, please ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,59 +34,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 12:46:07 -0000
-X-Groupsio-MsgNum: 52438
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Rzq/nSLlHy1djmXS"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 10 Oct 2014 17:01:08 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
---Rzq/nSLlHy1djmXS
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-On Fri, Oct 10, 2014 at 01:06:32PM +0200, Andreas M=FCller wrote:
-> On Fri, Oct 10, 2014 at 12:34 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->=20
-> > lxdm-0.5.0+gitAUTOINC+07fb151a99: lxdm requires /bin/bash, but no
-> > providers in its RDEPENDS [file-rdeps]
-> >
->=20
-> This is a false positive: I added bash to RDEPENDS in the last patch. Nee=
-ds
-> further investigation...
+When will the meta-openembedded have a dizzy branch, please ?
 
-It's possible that your last patch wasn't yet included in this build.
+-- 
+Thanks
 
-The second question about QA warnings:
+Robert
 
-The world builds are using default set (distro-less config), you can
-add/remove them by setting ERROR_QA, WARN_QA variables.
-
-They are shown only when the recipe build isn't reused from sstate,
-that's why I've included qa.log files from last 2 builds (the previous
-one had some change which invalidated a lot of sstate).
-
-The build-deps QA are even harder to reproduce, because you need to
-build whatever was causing that floating dependency to be detected in
-the sysroot before the build of the recipe with issue (that's why
-test-dependencies builds first build "bitbake world" to populate
-sysroot with as much as possible).
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---Rzq/nSLlHy1djmXS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlQ31U0ACgkQN1Ujt2V2gByKrACeKHDXLyiv1BEhfVT8KDEApxqQ
-adEAoIZpL9bplyGN83N84RzkQdjrxU0+
-=MNGR
------END PGP SIGNATURE-----
-
---Rzq/nSLlHy1djmXS--
