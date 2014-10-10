@@ -1,41 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E9FEC71853
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A42FA6AC7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 10:34:59 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id fb4so1586744wid.10
+	Fri, 10 Oct 2014 10:38:51 +0000 (UTC)
+Received: by mail-wi0-f180.google.com with SMTP id em10so1602977wid.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 03:35:00 -0700 (PDT)
+	Fri, 10 Oct 2014 03:38:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Bc9C1HFWHgVaFQ60Ky1L5WtmQQAqD+EnYcyTOtp21WQ=;
-	b=In+3rhRHL4ljOuOhLohcEwZP1330IhGS2v7ly8RQ+9/PLx/6Jxd/IYCBWJGxFicuZM
-	+sncXDNMaOxlmzmeSPSQCPFIbuWtIO1/A9VCKOAZuL5mdk2M2NMHmOE4xaDhIL+qurZv
-	Dy5tTTazAsqVc1wW4odrDtyIrQlbKBuCQGvfrBS3yb8Ilrw0hR1oaeU3PLqDIb6mCZHx
-	tt4DjscG6SDNlbytLZZzx0DxMdb8lH61i/hQ3uh4XWrRBx06OgWjapKULj/Us2m9n4nY
-	iz/9i+QjZtEDAz+M74FkaUyrtpq24K4y0H2baVLuMZx+0MPvs/Wki/sOFT723u2WmQOX
-	DDwA==
-X-Received: by 10.180.186.230 with SMTP id fn6mr3928864wic.44.1412937300232;
-	Fri, 10 Oct 2014 03:35:00 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=GzRfBVJaRCFrNDeuduAJkZPSp7UFD0KdDrEKTs1ZOm8=;
+	b=LES4IqjGAxqF3tIoz6+14YZfgUTyE+2p9zrTW35YPTP6LLSdHxSjXr1D6iqsS77lx7
+	NfvVqIlQ//ubsDT/+R2gWKAUFwX1PpWysPMhJlx+/nUJjfWYwWI86tMsWMrMSQj4+sxr
+	W96iFOzc3KZg/ytRSAts13ohamqAgc1qkn3u+XbsJGjcudlsLuWedV6YmDsjY5RsN2cB
+	96nVrOtPsUDAI1UZzSN9GRrJjj4ZMQRXVDCfS9g/k22I2ATYiq2sjsR9iJulNJ9e8dBK
+	bZOagm0hZHturgX+NAWrOn9K7lgYq5BLza5oCv+GsmY3Do41/vq1dZ3rnzut5pxh2KBW
+	6HQA==
+X-Received: by 10.180.20.175 with SMTP id o15mr3745492wie.51.1412937532723;
+	Fri, 10 Oct 2014 03:38:52 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	bc5sm4592703wjb.14.2014.10.10.03.34.59
-	for <openembedded-devel@lists.openembedded.org>
+	b6sm2158669wiy.22.2014.10.10.03.38.52 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Oct 2014 03:34:59 -0700 (PDT)
+	Fri, 10 Oct 2014 03:38:52 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 10 Oct 2014 12:36:06 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141010103606.GK12322@jama>
-References: <1412151555-19865-1-git-send-email-schnitzeltony@googlemail.com>
-	<1412151555-19865-7-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-In-Reply-To: <1412151555-19865-7-git-send-email-schnitzeltony@googlemail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH][meta-oe 06/15] tumbler: fix build deps QA warnings
+Date: Fri, 10 Oct 2014 12:39:57 +0200
+Message-Id: <1412937597-7505-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.1.1
+Subject: [meta-gnome][PATCH] tracker: add dependency on networkmanager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,78 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 10:35:00 -0000
-X-Groupsio-MsgNum: 52425
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="enGqbSaueFq5omEL"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 10 Oct 2014 10:38:53 -0000
 
---enGqbSaueFq5omEL
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* fixes following QA warnings:
+  tracker-0.14.2: tracker rdepends on libnmglib, but it isn't a build dependency? [build-deps]
+  tracker-0.14.2: tracker rdepends on libnmutil, but it isn't a build dependency? [build-deps]
+  tracker-0.14.2: tracker rdepends on nss, but it isn't a build dependency? [build-deps]
 
-On Wed, Oct 01, 2014 at 10:19:06AM +0200, Andreas M=FCller wrote:
-> WARNING: QA Issue: tumbler rdepends on libxml2, but it isn't a build depe=
-ndency? [build-deps]
-> WARNING: QA Issue: tumbler rdepends on libgsf, but it isn't a build depen=
-dency? [build-deps]
-> WARNING: QA Issue: tumbler rdepends on libbz2, but it isn't a build depen=
-dency? [build-deps]
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-gnome/recipes-support/tracker/tracker_0.14.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Looks like 2 more were missed, can you please check & fix?
+diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+index d412183..104e490 100644
+--- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
++++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Tracker is a tool designed to extract information and metadata about your personal data so that it can be searched easily and quickly."
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ee31012bf90e7b8c108c69f197f3e3a4"
+-DEPENDS = "file gstreamer gamin dbus libexif gettext sqlite3 icu gst-plugins-base libgnome-keyring poppler tiff enca libgsf libunistring giflib taglib bzip2 upower gtk+3 libgee"
++DEPENDS = "file gstreamer gamin dbus libexif gettext sqlite3 icu gst-plugins-base libgnome-keyring poppler tiff enca libgsf libunistring giflib taglib bzip2 upower gtk+3 libgee networkmanager"
+ 
+ RDEPENDS_${PN} += " gvfs gsettings-desktop-schemas"
+ HOMEPAGE = "http://projects.gnome.org/tracker/"
+-- 
+2.1.1
 
-tumbler-0.1.30: tumbler rdepends on gstreamer1.0, but it isn't a build depe=
-ndency? [build-deps]
-tumbler-0.1.30: tumbler rdepends on libgsttag-1.0, but it isn't a build dep=
-endency? [build-deps]
 
->=20
-> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> ---
->  meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb b/meta-xfce=
-/recipes-xfce/tumbler/tumbler_0.1.30.bb
-> index 8651d00..9f361e9 100644
-> --- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
-> +++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION=3D"Thumbnail service implementing the thumbna=
-il management D-Bus speci
->  SECTION =3D "x11/libs"
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> -DEPENDS =3D "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-=
-native"
-> +DEPENDS =3D "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-=
-native libxml2 libgsf"
-> =20
->  inherit xfce gtk-doc
-> =20
-> --=20
-> 1.8.3.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---enGqbSaueFq5omEL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlQ3tpYACgkQN1Ujt2V2gBwn2wCggsRYE+lnmsuj3SuHxK8djQSq
-LuMAoIT0g9VOTpTabO88lt4CHr/x7qFp
-=4qye
------END PGP SIGNATURE-----
-
---enGqbSaueFq5omEL--
