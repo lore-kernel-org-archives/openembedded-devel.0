@@ -1,37 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f173.google.com (mail-vc0-f173.google.com
-	[209.85.220.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 304E871861;
-	Fri, 10 Oct 2014 11:06:32 +0000 (UTC)
-Received: by mail-vc0-f173.google.com with SMTP id ij19so2442609vcb.4
-	for <multiple recipients>; Fri, 10 Oct 2014 04:06:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=mFx6D4faqzbEhs36nBhroq5SdXye2l5Azbi6Sck4NSY=;
-	b=WBTDHczHr+wYlQi2C+UtxP8vSblpZoXQp0QGQzQlOqsezta4f/r0i5MmHtyCBX1DyP
-	RPCbufWA8YKRGuQbjRA77HFyZt55oPuxLPRrxJarrIO1fHKqFoDPGKjUfjUKeQRb0Par
-	1zHriyz4hnCVNph7kVUolpOEm4+8IXOskb4jnAe2ku2mrtWbssdz4ame132sYRHoANpm
-	7bmfcP6DsrImzAIvfylT1JYJQ+hhc0ZfRXcWp0+j1DsDFwtadamB/yzOT+r1DbmTflNt
-	s8pHJ5mP5pbB8odH4X8g1Bu2BveakX9sP9yPCitFrJGCp44lU0z84oZOe7BNTMYK1rc5
-	rHQQ==
+Return-Path: <pab@pabigot.com>
+Received: from p3plsmtpa08-08.prod.phx3.secureserver.net
+	(p3plsmtpa08-08.prod.phx3.secureserver.net [173.201.193.109])
+	by mail.openembedded.org (Postfix) with ESMTP id AF8206AC7B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Oct 2014 11:12:43 +0000 (UTC)
+Received: from [192.168.65.10] ([75.72.225.8])
+	by p3plsmtpa08-08.prod.phx3.secureserver.net with 
+	id 1PCj1p00Z0BVjqb01PCk5m; Fri, 10 Oct 2014 04:12:44 -0700
+Message-ID: <5437BF2B.9060909@pabigot.com>
+Date: Fri, 10 Oct 2014 06:12:43 -0500
+From: "Peter A. Bigot" <pab@pabigot.com>
+Organization: Peter Bigot Consulting, LLC
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.2
 MIME-Version: 1.0
-X-Received: by 10.221.21.134 with SMTP id qs6mr28446vcb.72.1412939193017; Fri,
-	10 Oct 2014 04:06:33 -0700 (PDT)
-Received: by 10.52.171.233 with HTTP; Fri, 10 Oct 2014 04:06:32 -0700 (PDT)
-In-Reply-To: <20141010103438.GI12322@jama>
-References: <20141010103438.GI12322@jama>
-Date: Fri, 10 Oct 2014 13:06:32 +0200
-Message-ID: <CALbNGRTymU+trfTQGPiOi27cauA6T1nrKT+Npbhn4HTyVZj2NQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-10-10, QA issues
+To: openembedded-devel@lists.openembedded.org, 
+	"Fan, Wenzong (Wind River)" <wenzong.fan@windriver.com>
+References: <cover.1412910727.git.wenzong.fan@windriver.com>
+In-Reply-To: <cover.1412910727.git.wenzong.fan@windriver.com>
+Subject: Re: [PATCH 0/1][meta-networking] ntp: fix path to driftfile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,18 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 11:06:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 10 Oct 2014 11:12:44 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 10, 2014 at 12:34 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+On 10/09/2014 10:22 PM, wenzong.fan@windriver.com wrote:
+> From: Wenzong Fan <wenzong.fan@windriver.com>
+>
+> Default path to driftfile is "/etc/ntp.drift", that doesn't work since
+> ntp daemon is always started with "ntp" user. It should be created at
+> the home directory of "ntp" which is "/var/lib/ntp/".
 
-> lxdm-0.5.0+gitAUTOINC+07fb151a99: lxdm requires /bin/bash, but no
-> providers in its RDEPENDS [file-rdeps]
+Could you provide a bit more detail on why this "doesn't work"? Does it 
+violate the FHS, or complicate securing an image, or...?
+
+I see that Debian apparently puts the file in /var/lib/ntp.
+
+I certainly don't object to the change, but "doesn't work" suggests this 
+patch fixes a functional bug, not an inconsistency with policy.  More 
+detail in the commit message will help us occasional contributors 
+understand how things are supposed to be done and why.
+
+Thanks.
+
+Peter
+
+>
+> The following changes since commit 17ff23b4a4a0e5ed7efde107fb00296f1ebd5fdd:
+>
+>    xf86-video-geode: fix build with new glibc-2.20 (2014-10-06 01:07:53 +0200)
+>
+> are available in the git repository at:
+>
+>    git://git.pokylinux.org/poky-contrib wenzong/ntp
+>    http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/ntp
+>
+> Wenzong Fan (1):
+>    ntp: fix path to driftfile
+>
+>   meta-networking/recipes-support/ntp/ntp.inc |   15 +++++++++++++++
+>   1 file changed, 15 insertions(+)
 >
 
-This is a false positive: I added bash to RDEPENDS in the last patch. Needs
-further investigation...
-
-Andreas
 
