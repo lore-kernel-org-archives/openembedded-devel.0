@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 09FBA6AC7B
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A10871853
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 10:42:17 +0000 (UTC)
-Received: by mail-wi0-f171.google.com with SMTP id em10so1613813wid.4
+	Fri, 10 Oct 2014 10:42:43 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id n3so1576544wiv.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Oct 2014 03:42:18 -0700 (PDT)
+	Fri, 10 Oct 2014 03:42:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=cYoI24nEA8ZAd7Zn7ZbQqXyD87gmQai1OPWc1Ps1Mw8=;
-	b=1I4RE6+17/jG3OdtsLUbE5ap4jhS/1HC0M01FGWcCIqcJ33yMyEs/yfgzdkay22m6p
-	lslplL8uCTmW4RoA6uG8xSh7Zdd/bi2T9bl7zLC098gmL2vcaTDzcDPgRybqjV+AyW3B
-	RXmS5ztPRpP8YB5PaB6ndhwglf9q3sKywFUsyj3q0Q7I9vEfmhRsN2cMN6MMjwooYhu8
-	tYZHaLZe9Iye9X4HuQ0DiMA/jk8ObTlN6WNioa0HrVzSYXMaBC7QhCi3+K9k9AMgyAjn
-	V4fuBg4Y6pBOgCY3zhRC7fp1c4u7tTwtE8TlG1cN2Md3MRKiP+qqF3mJUqZGYLe/79un
-	S6QA==
-X-Received: by 10.194.3.78 with SMTP id a14mr2192689wja.91.1412937737959;
-	Fri, 10 Oct 2014 03:42:17 -0700 (PDT)
+	bh=+dt55mbOKNsE9rsjadNYQzm4YA6bZ5zj5NB767HCsU0=;
+	b=0NWv4bPGAoWphldAVeVGQJ9Q7BNviLVmpIgI9+YrEaYzMfOmKeuYac/C8KW3fBEmDs
+	59KpB4gXKoCn24LVvgHG/KOTCzc/yYI6gUnNZI6XdZo/cHz8CAqrHUDX3n9x6oKtdkyr
+	o2Mtdd9+E5SKH6s+qr+56wkJV5qbP0LqyoYgkAkrHHqV1g+wlydt/UKXq0WyWm0Bk1tK
+	Wt3LzCJbBG0z2aMP05E3BbLEpdO1Yp5PXX0jMg4WvkgT0FVSHTy4zZQ34dAIpjX22YmL
+	/mx5f7lp9jMaLrZI5MfyE+lbPyeSlYDz3fNvb518HrKtxXDDEz8e4PNIWbJHai6dz8rQ
+	QLsw==
+X-Received: by 10.180.10.9 with SMTP id e9mr3867545wib.74.1412937764756;
+	Fri, 10 Oct 2014 03:42:44 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	wk5sm6581030wjb.12.2014.10.10.03.42.16
+	lk6sm6564643wjb.26.2014.10.10.03.42.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Oct 2014 03:42:16 -0700 (PDT)
+	Fri, 10 Oct 2014 03:42:43 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 10 Oct 2014 12:43:23 +0200
+Date: Fri, 10 Oct 2014 12:43:50 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141010104323.GL12322@jama>
-References: <543689B7.5050109@urbanec.net>
+Message-ID: <20141010104350.GM12322@jama>
+References: <5436C3C0.4040904@urbanec.net>
 MIME-Version: 1.0
-In-Reply-To: <543689B7.5050109@urbanec.net>
+In-Reply-To: <5436C3C0.4040904@urbanec.net>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] Fix for gcc bug 61144
+Subject: Re: [PATCH] Better support for upgrading packages in opkg and update-rc.d.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,114 +48,232 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Oct 2014 10:42:21 -0000
-X-Groupsio-MsgNum: 52427
+X-List-Received-Date: Fri, 10 Oct 2014 10:42:46 -0000
+X-Groupsio-MsgNum: 52428
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qo7zVO9a9OQ5oQtr"
+	protocol="application/pgp-signature"; boundary="5V5c01chtBAiSHoy"
 Content-Disposition: inline
 
---qo7zVO9a9OQ5oQtr
+--5V5c01chtBAiSHoy
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 10, 2014 at 12:12:23AM +1100, Peter Urbanec wrote:
-> See https://gcc.gnu.org/bugzilla/show_bug.cgi?id=3D61144 for details.
+On Fri, Oct 10, 2014 at 04:20:00AM +1100, Peter Urbanec wrote:
+> init-ifupdown inherits default implementations of prerm, postrm, preinst
+> and postinst from update-rc.d.bbclass. Unfortunately these default
+> implementations don't deal with package upgrades as well as they could.
 >=20
-> This patch is taken from the gcc repository and should be obsoleted by a=
-=20
-> gcc release after 4.9.1
+> What ends up happening is that opkg starts downloading and unpacking
+> packages sequentially. As it downloads and unpacks each package, opkg
+> calls prerm, preinst and postrm hook scripts. Once all packages are
+> unpacked, the postinst script is finally called for all packages as part
+> of the "configure" stage.
 >=20
-> The problem is severe enough (at least from my point of view) to need=20
-> this patch until the next gcc release is available.
+> The default prerm and preinst scripts stop networking. Networking is not
+> brought back up again until postinst is called, but that only happens
+> after all the packages have been downloaded, unpacked and installed. This
+> leaves a window where any package that needs to be downloaded after
+> init-ifupdown is encountered will fail.
+>=20
+> This fixes the problem by enhancing opkg to also provide the "upgrade"
+> argument to prerm and postrm, to (partially) match what dpkg does. See
+> https://wiki.debian.org/MaintainerScripts for dpkg diagrams that clarify
+> the intended process. opkg lacks the full functionality of dpkg, but for
+> the purpose of this exercise, they are similar enough.
+>=20
+> I have submitted a patch to the opkg-devel list to include the "upgrade"
+> argument.
+>=20
+> The second part of the solution is an update to the default implementatio=
+ns
+> of the pre- and post- scripts provided by update-rc.d.bbclass. The scripts
+> are now careful to remove themselves using the old package context and to
+> delay the restart of a service until the configure stage called from the
+> postinst script.
 
-Wrong MP, this belongs to oe-core ML.
+Wrong ML -> oe-core
 
-> commit 03ae7912aadbf3b55b966a1367f07c7dbbddda80
-> Author: Peter Urbanec
-> Date:   Fri Oct 10 00:03:28 2014 +1100
 >=20
->     gcc: Patch for gcc bug 61144.
->    =20
->     This fixes gcc bug 6144, which in my case exhibited itself as a kernel
->     module that failed to load. This was because static platform_data
->     structures were being corrupted with the optimiser being set to any
->     value other than -O0.
+> ---
+>  meta/classes/update-rc.d.bbclass                   | 75 +++++++++++++---=
+------
+>  .../opkg/upgrade-argument-for-pre_postrm.patch     | 30 +++++++++
+>  meta/recipes-devtools/opkg/opkg_0.2.2.bb           |  1 +
+>  3 files changed, 77 insertions(+), 29 deletions(-)
+>  create mode 100644 meta/recipes-devtools/opkg/opkg/upgrade-argument-for-=
+pre_postrm.patch
 >=20
-> diff --git a/meta/recipes-devtools/gcc/gcc-4.9.inc b/meta/recipes-devtool=
-s/gcc/gcc-4.9.inc
-> index 25778bd..9a66cd2 100644
-> --- a/meta/recipes-devtools/gcc/gcc-4.9.inc
-> +++ b/meta/recipes-devtools/gcc/gcc-4.9.inc
-> @@ -70,6 +70,7 @@ SRC_URI =3D "\
->      file://0053-gcc-fix-segfault-from-calling-free-on-non-malloc-d-a.pat=
-ch \
->      file://0054-gcc-Makefile.in-fix-parallel-building-failure.patch \
->      file://0055-PR-rtl-optimization-61801.patch \
-> +    file://0056-top-level-reorder_gcc-bug-61144.patch \
->  "
->  SRC_URI[md5sum] =3D "fddf71348546af523353bd43d34919c1"
->  SRC_URI[sha256sum] =3D "d334781a124ada6f38e63b545e2a3b8c2183049515a1abab=
-6d513f109f1d717e"
-> diff --git a/meta/recipes-devtools/gcc/gcc-4.9/0056-top-level-reorder_gcc=
--bug-61144.patch b/meta/recipes-devtools/gcc/gcc-4.9/0056-top-level-reorder=
-_gcc-bug-61144.patch
-> new file mode 100644
-> index 0000000..11fa969
-> --- /dev/null
-> +++ b/meta/recipes-devtools/gcc/gcc-4.9/0056-top-level-reorder_gcc-bug-61=
-144.patch
-> @@ -0,0 +1,25 @@
-> +--- /dev/null
-> ++++ b/meta/recipes-devtools/gcc/gcc-4.9/0056-top-level-reorder_gcc-bug-6=
-1144.patch
-> +@@ -0,0 +1,21 @@
-> ++--- a/gcc/varpool.c    2014/10/05 02:50:01     215895
-> +++++ b/gcc/varpool.c    2014/10/05 04:52:19     215896
-> ++@@ -329,8 +329,16 @@
-> ++
-> ++   /* Variables declared 'const' without an initializer
-> ++      have zero as the initializer if they may not be
-> ++-     overridden at link or run time.  */
-> ++-  if (!DECL_INITIAL (real_decl)
-> +++     overridden at link or run time.
-> +++
-> +++     It is actually requirement for C++ compiler to optimize const var=
-iables
-> +++     consistently. As a GNU extension, do not enfore this rule for use=
-r defined
-> +++     weak variables, so we support interposition on:
-> +++     static const int dummy =3D 0;
-> +++     extern const int foo __attribute__((__weak__, __alias__("dummy"))=
-);
-> +++   */
-> +++  if ((!DECL_INITIAL (real_decl)
-> +++       || (DECL_WEAK (decl) && !DECL_COMDAT (decl)))
-> ++       && (DECL_EXTERNAL (decl) || decl_replaceable_p (decl)))
-> ++     return error_mark_node;
-> ++=20
+> diff --git a/meta/classes/update-rc.d.bbclass b/meta/classes/update-rc.d.=
+bbclass
+> index bc1aa7d..c29457f 100644
+> --- a/meta/classes/update-rc.d.bbclass
+> +++ b/meta/classes/update-rc.d.bbclass
+> @@ -14,45 +14,62 @@ INITSCRIPT_PARAMS ?=3D "defaults"
+>   INIT_D_DIR =3D "${sysconfdir}/init.d"
+>  -updatercd_preinst() {
+> -if [ -z "$D" -a -f "${INIT_D_DIR}/${INITSCRIPT_NAME}" ]; then
+> -	${INIT_D_DIR}/${INITSCRIPT_NAME} stop
+> +# During an upgrade, the pre/postrm scripts from old package are called
+> +# and the pre/postinst scripts called are from the new package.
+> +# See https://wiki.debian.org/MaintainerScripts for dpkg diagrams.
+> +# opkg uses a subset, which lacks most of the error handling.
 > +
-
+> +# Old package context, step 1
+> +updatercd_prerm() {
+> +if [ "x$1" !=3D "xupgrade" ] ; then
+> +  ${INIT_D_DIR}/${INITSCRIPT_NAME} stop
+>  fi
+> -if type update-rc.d >/dev/null 2>/dev/null; then
+> -	if [ -n "$D" ]; then
+> -		OPT=3D"-f -r $D"
+> -	else
+> -		OPT=3D"-f"
+> -	fi
+> -	update-rc.d $OPT ${INITSCRIPT_NAME} remove
+> +if [ -z "$D" ]; then
+> +  OPT=3D""
+> +else
+> +  OPT=3D"-r $D"
+>  fi
+> -}
+> -
+> -updatercd_postinst() {
+>  if type update-rc.d >/dev/null 2>/dev/null; then
+> -	if [ -n "$D" ]; then
+> -		OPT=3D"-r $D"
+> -	else
+> -		OPT=3D"-s"
+> -	fi
+> -	update-rc.d $OPT ${INITSCRIPT_NAME} ${INITSCRIPT_PARAMS}
+> +  update-rc.d $OPT ${INITSCRIPT_NAME} remove
+>  fi
+>  }
+>  -updatercd_prerm() {
+> -if [ -z "$D" ]; then
+> -	${INIT_D_DIR}/${INITSCRIPT_NAME} stop
+> -fi
+> +# New package context, step 2
+> +updatercd_preinst() {
+> +case "$1" in
+> +  upgrade)
+> +    ;;
+> +  *)
+> +    ;;
+> +esac
+>  }
+>  +# Old package context, step 3
+>  updatercd_postrm() {
+> +case "$1" in
+> +  upgrade)
+> +    ;;
+> +  *)
+> +    ;;
+> +esac
+> +}
+> +
+> +# N.B. Step 4 runs after all packages have been through steps 1-3 and th=
+erefore we
+> +#      need to delay service restarts during upgrade until here. Otherwi=
+se we end
+> +#      up with situations, like networking going down in the middle of "=
+opkg upgrade",
+> +#      thus resulting in failures to fetch further packages.
+> +
+> +# New package context, step 4
+> +updatercd_postinst() {
+>  if type update-rc.d >/dev/null 2>/dev/null; then
+> -	if [ -n "$D" ]; then
+> -		OPT=3D"-r $D"
+> -	else
+> -		OPT=3D""
+> -	fi
+> -	update-rc.d $OPT ${INITSCRIPT_NAME} remove
+> +  if [ -n "$D" ]; then
+> +    OPT=3D"-r $D"
+> +  else
+> +    # This will catch the upgrade case and result in a restart.
+> +    ${INIT_D_DIR}/${INITSCRIPT_NAME} stop
+> +    OPT=3D"-s"
+> +  fi
+> +  update-rc.d $OPT ${INITSCRIPT_NAME} ${INITSCRIPT_PARAMS}
+>  fi
+>  }
+>  diff --git a/meta/recipes-devtools/opkg/opkg/upgrade-argument-for-pre_po=
+strm.patch b/meta/recipes-devtools/opkg/opkg/upgrade-argument-for-pre_postr=
+m.patch
+> new file mode 100644
+> index 0000000..5bea82a
+> --- /dev/null
+> +++ b/meta/recipes-devtools/opkg/opkg/upgrade-argument-for-pre_postrm.pat=
+ch
+> @@ -0,0 +1,30 @@
+> +From: Peter Urbanec
+> +Subject: [opkg] Use "upgrade" argument in prerm and postrm scripts
+> +
+> +Current implementation of opkg makes it difficult to distinguish between
+> +package removal or upgrade in prerm and postrm scripts. The following pa=
+tch
+> +will make it easier and is close(r) to what dpkg does.
+> +
+> +diff --git a/libopkg/opkg_remove.c b/libopkg/opkg_remove.c
+> +index 07401b2..52454f8 100644
+> +--- a/libopkg/opkg_remove.c
+> ++++ b/libopkg/opkg_remove.c
+> +@@ -292,7 +292,7 @@ opkg_remove_pkg(pkg_t *pkg, int from_upgrade)
+> +      pkg->state_want =3D SW_DEINSTALL;
+> +      opkg_state_changed++;
+> + +-     if (pkg_run_script(pkg, "prerm", "remove") !=3D 0) {
+> ++     if (pkg_run_script(pkg, "prerm", from_upgrade ? "upgrade" : "remov=
+e") !=3D 0) {
+> +          if (!conf->force_remove) {
+> +              opkg_msg(ERROR, "not removing package \"%s\", "
+> +                              "prerm script failed\n", pkg->name);
+> +@@ -310,7 +310,7 @@ opkg_remove_pkg(pkg_t *pkg, int from_upgrade)
+> +        feel free to fix this. */
+> +      remove_data_files_and_list(pkg);
+> +
+> +-     err =3D pkg_run_script(pkg, "postrm", "remove");
+> ++     err =3D pkg_run_script(pkg, "postrm", from_upgrade ? "upgrade" : "=
+remove");
+> +
+> +      remove_maintainer_scripts(pkg);
+> +      pkg->state_status =3D SS_NOT_INSTALLED;
+> + diff --git a/meta/recipes-devtools/opkg/opkg_0.2.2.bb b/meta/recipes-de=
+vtools/opkg/opkg_0.2.2.bb
+> index 3dd7489..9c0045e 100644
+> --- a/meta/recipes-devtools/opkg/opkg_0.2.2.bb
+> +++ b/meta/recipes-devtools/opkg/opkg_0.2.2.bb
+> @@ -4,6 +4,7 @@ SRC_URI =3D "http://downloads.yoctoproject.org/releases/$=
+{BPN}/${BPN}-${PV}.tar.gz
+>             file://no-install-recommends.patch \
+>             file://add-exclude.patch \
+>             file://opkg-configure.service \
+> +           file://upgrade-argument-for-pre_postrm.patch \
+>  "
+>   S =3D "${WORKDIR}/${BPN}-${PV}"
+> --=20
+> 2.1.2
+>=20
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---qo7zVO9a9OQ5oQtr
+--5V5c01chtBAiSHoy
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlQ3uEsACgkQN1Ujt2V2gBzo9ACaAhkKl2Y5hvhHD0lb04zMiR40
-1HMAnjNNSv1rRDPmgA79cBH0ecyojWAz
-=400p
+iEYEARECAAYFAlQ3uGYACgkQN1Ujt2V2gBxMgACbB0jOnmYwsEd8iJtoVf0WcdKZ
+/pkAn0ZY6BZYILFHvYlVahToAHCJB1yb
+=SKUt
 -----END PGP SIGNATURE-----
 
---qo7zVO9a9OQ5oQtr--
+--5V5c01chtBAiSHoy--
