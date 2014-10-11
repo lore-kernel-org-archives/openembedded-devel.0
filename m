@@ -1,24 +1,37 @@
-Return-Path: <pab@pabigot.com>
-Received: from p3plsmtpa09-04.prod.phx3.secureserver.net
-	(p3plsmtpa09-04.prod.phx3.secureserver.net [173.201.193.233])
-	by mail.openembedded.org (Postfix) with ESMTP id C65DF65DA3
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id BE04165DA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Oct 2014 13:53:32 +0000 (UTC)
-Received: from [192.168.65.10] ([75.72.225.8])
-	by p3plsmtpa09-04.prod.phx3.secureserver.net with 
-	id 1ptY1p00C0BVjqb01ptY4U; Sat, 11 Oct 2014 06:53:33 -0700
-Message-ID: <5439365C.2000303@pabigot.com>
-Date: Sat, 11 Oct 2014 08:53:32 -0500
-From: "Peter A. Bigot" <pab@pabigot.com>
-Organization: Peter Bigot Consulting, LLC
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.1.2
+	Sat, 11 Oct 2014 15:53:44 +0000 (UTC)
+Received: by mail-yh0-f43.google.com with SMTP id f73so2557322yha.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Oct 2014 08:53:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=/XOeyxOg1yLhBwgQ6EUiYDKUH+WvQctzJWDMcL9WSEM=;
+	b=mgcldBftVhY2IinJY6S0Hv63B6OWdeOYPAv/LzyB6eaGeDg1VT5cPrVVZ7Mzc08zlB
+	HKwDn4Ip+8qQA0Sv80vJv3fm9taUOtO3A5g7W8NksGNp/MwMNcCG5Pr6k55+3T9o+wVf
+	scfusxbY8ABox1WLPoDSDtJKruUIqaYburwhkTHqOD4ALj1GGt2S/kEUYoI4oDxKV4/h
+	CBT5Pare6B1K3T4rumoZaD24ChzZrBMNNxPt5HukYs964WNRAj0GwWr5XwSW9dgox68g
+	9QITnDQyJZuiSG4VVUwk5CWJDjqSAdRTfN5kkv/yBtLTAWq9CWGBGteJzykt+XeXNwGL
+	7eOg==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <cover.1413021995.git.wenzong.fan@windriver.com>	<f6c31764bfe49e6d2791b731c14dc92b94da88c9.1413021995.git.wenzong.fan@windriver.com>
-	<54391790.4090007@pabigot.com>
-In-Reply-To: <54391790.4090007@pabigot.com>
-Subject: Re: [PATCH 1/1 v2][meta-networking] ntp: fix path to drift file
+X-Received: by 10.236.200.165 with SMTP id z25mr18697229yhn.102.1413042825336; 
+	Sat, 11 Oct 2014 08:53:45 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.172.70 with HTTP; Sat, 11 Oct 2014 08:53:45 -0700 (PDT)
+In-Reply-To: <20141010214424.GA3000@jama>
+References: <543810C5.9030502@windriver.com>
+	<20141010214424.GA3000@jama>
+Date: Sat, 11 Oct 2014 12:53:45 -0300
+X-Google-Sender-Auth: i5lFIGCmM4Uxi6B74bsOGL7LMlk
+Message-ID: <CAP9ODKrGx=QsmXSJuTNBgzjN-PgDGs3=rtqpLu7inBdUEzfP3g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: When will the meta-openembedded have a dizzy branch, please ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,108 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Oct 2014 13:53:33 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 11 Oct 2014 15:53:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 10/11/2014 06:42 AM, Peter A. Bigot wrote:
-> Thanks for the clarifications.  A couple more comments now that I 
-> understand the goal:
+On Fri, Oct 10, 2014 at 6:44 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sat, Oct 11, 2014 at 01:00:53AM +0800, Robert Yang wrote:
+>> Hello,
+>>
+>> When will the meta-openembedded have a dizzy branch, please ?
 >
-> On 10/11/2014 05:12 AM, wenzong.fan@windriver.com wrote:
->> From: Wenzong Fan <wenzong.fan@windriver.com>
->>
->> * fix the path to drift file:
->>
->> The default path of ntp drift file is /etc/ntp.drift, ntp daemon
->> maybe fails to create this file since the user ntp is not always
->> permitted to write /etc.
->>
->> Refer to other distributions such as RedHat, Debian, just moving
->> the file to /var/lib/ntp which the home dir of user ntp.
->>
->> * add tmpfile support:
->>
->> Make sure the /var/lib/ntp is always created by sysvinit/systemd.
->>
->> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->> ---
->>   meta-networking/recipes-support/ntp/ntp.inc |   15 +++++++++++++++
->>   1 file changed, 15 insertions(+)
->>
->> diff --git a/meta-networking/recipes-support/ntp/ntp.inc 
->> b/meta-networking/recipes-support/ntp/ntp.inc
->> index f55a39a..f685274 100644
->> --- a/meta-networking/recipes-support/ntp/ntp.inc
->> +++ b/meta-networking/recipes-support/ntp/ntp.inc
->> @@ -53,6 +53,7 @@ PACKAGECONFIG[debug] = 
->> "--enable-debugging,--disable-debugging"
->>   do_install_append() {
->>       install -d ${D}${sysconfdir}/init.d
->>       install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
->> +    sed -i 's!/etc/ntp.drift!/var/lib/ntp/drift!g' 
->> ${D}${sysconfdir}/ntp.conf
->
-> Since ntp.conf is provided by OE in files/ntp.conf, this change should 
-> be made there.  Other users may provide their own ntp.conf through a 
-> bbappend and will not want it modified during installation.
->
->>       install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
->>       install -d ${D}${bindir}
->>       install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
->> @@ -72,6 +73,18 @@ do_install_append() {
->>       install -m 644 ${WORKDIR}/ntpdate.default 
->> ${D}${sysconfdir}/default/ntpdate
->>       install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
->>   +    # Create tmpfiles
->> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 
->> 'false', d)}; then
->> +        install -d ${D}/${sysconfdir}/default/volatiles
->> +        echo "d ntp ntp 0755 /var/lib/ntp none" \
->> +            > ${D}/${sysconfdir}/default/volatiles/99_ntpd
->> +    fi
->> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 
->> 'false', d)}; then
->> +        install -d ${D}${sysconfdir}/tmpfiles.d
->> +        echo "d /var/lib/ntp 0755 ntp ntp -" \
->> +            > ${D}${sysconfdir}/tmpfiles.d/99-ntpd.conf
->> +    fi
->> +
->
-> ntp.drift is not a tmpfile and should not be considered volatile (its 
-> absence will cause NTP to spend the first 15 minutes estimating local 
-> oscillator characteristics, which is generally not desirable in a time 
-> server).  /var/lib is intended for persistent state so putting the 
-> drift file there is perfectly fine, but adding /var/lib/ntp in 
-> tmpfiles/volatiles is incorrect.
->
-> Since /var/lib/ntp is the ntp user's home directory, surely it's 
-> created automatically anyway and nothing need be done.
+> It would be nice to get at least some of QA issues fixed before we
+> branch. Currently we have more than 438 issues.
 
-I see that in fact it is not created automatically, even though the user 
-is created.  Ignoring the more fundamental and non-ntp question "why 
-not?", adding:
+I agree we ought to fix the QA issues but this shouldn't delay the
+branching; we can backport those fixes once proved fine on master.
 
-    install -d ${D}/var/lib/ntp
+> But other than that, it's almost ready (thanks Otavio + Armin for
+> stepping up to maintain it), please send the READMEs update again when
+> you can, so that I can create the branch together with right READMEs.
 
-to do_install_append() should cover it.
+Armin, do you want to do the patch and add my name? or should I do and
+add yours? Two patches seems overkill :)
 
-Peter
-
->
-> Peter
->
->>       install -d ${D}/${sysconfdir}/network/if-up.d
->>       ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
->>   @@ -112,6 +125,8 @@ RSUGGESTS_${PN} = "iana-etc"
->>     FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf 
->> ${sysconfdir}/init.d/ntpd ${libdir} \
->>       ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
->> +    ${sysconfdir}/default/volatiles \
->> +    ${sysconfdir}/tmpfiles.d \
->>   "
->>   FILES_${PN}-tickadj = "${sbindir}/tickadj"
->>   FILES_${PN}-utils = "${sbindir}"
->
-
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
