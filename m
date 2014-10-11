@@ -1,26 +1,39 @@
-Return-Path: <pab@pabigot.com>
-X-Greylist: delayed 433 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 11 Oct 2014 17:47:51 UTC
-Received: from p3plsmtpa11-07.prod.phx3.secureserver.net
-	(p3plsmtpa11-07.prod.phx3.secureserver.net [68.178.252.108])
-	by mail.openembedded.org (Postfix) with ESMTP id BFB9B65DA3
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DBE76A9D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Oct 2014 17:47:51 +0000 (UTC)
-Received: from [192.168.65.10] ([75.72.225.8])
-	by p3plsmtpa11-07.prod.phx3.secureserver.net with 
-	id 1tge1p0030BVjqb01tgey1; Sat, 11 Oct 2014 10:40:38 -0700
-Message-ID: <54396B95.5030709@pabigot.com>
-Date: Sat, 11 Oct 2014 12:40:37 -0500
-From: "Peter A. Bigot" <pab@pabigot.com>
-Organization: Peter Bigot Consulting, LLC
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.1.2
+	Sat, 11 Oct 2014 18:00:47 +0000 (UTC)
+Received: by mail-ig0-f176.google.com with SMTP id hn15so6308192igb.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Oct 2014 11:00:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=+28P9lEC00IbxoAkO86OwU2E/OkJuYZV4vhEugI+FwM=;
+	b=cSckt2gkb+2nHS52MxjUIxpAQuarnKVP6mRNVFFswEH6kYRC5UaKZPlyiVdUGYGCmQ
+	TV2n8F51V3ziy4xaKTMWB+4bHFF7pHsb1wTF1H6bo4rLpv0uavQd047TLJ2r+rfMOeA6
+	6ozBeD08q2rTocfHH6D2w3Mie66XmS/mqO35ziIZE7VQvkl762RBkUfl1TeAlouv97wm
+	lRKtW/fKdUoPT6PGKVaAQ0nqO7FC+Pf2YPsHwMOnVmFxDea3z6FSeNRiYzPJo3sQPBZ/
+	5cbOwZ/PYm9rieSCv0PTveWfy/Hbfi5nJ9e73roHLB1gYf6jSNo96QfVGuMf+EIafQnZ
+	VJJw==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <cover.1413021995.git.wenzong.fan@windriver.com>	<f6c31764bfe49e6d2791b731c14dc92b94da88c9.1413021995.git.wenzong.fan@windriver.com>	<54391790.4090007@pabigot.com>
-	<5439365C.2000303@pabigot.com>
-In-Reply-To: <5439365C.2000303@pabigot.com>
-Subject: Re: [PATCH 1/1 v2][meta-networking] ntp: fix path to drift file
+X-Received: by 10.43.154.145 with SMTP id le17mr23999279icc.71.1413050448436; 
+	Sat, 11 Oct 2014 11:00:48 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.107.130.69 with HTTP; Sat, 11 Oct 2014 11:00:48 -0700 (PDT)
+In-Reply-To: <5439594A.1050800@gmail.com>
+References: <543810C5.9030502@windriver.com> <20141010214424.GA3000@jama>
+	<CAP9ODKrGx=QsmXSJuTNBgzjN-PgDGs3=rtqpLu7inBdUEzfP3g@mail.gmail.com>
+	<5439594A.1050800@gmail.com>
+Date: Sat, 11 Oct 2014 15:00:48 -0300
+X-Google-Sender-Auth: 9fO9QGLlKZa8XOux6PQucoHx4Hk
+Message-ID: <CAP9ODKp09D7GoH2GMXtX9ysE=Upep-mUtpmcd2jdsLP2W8ivfw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: akuster808 <akuster808@gmail.com>
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: When will the meta-openembedded have a dizzy branch, please ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,129 +47,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Oct 2014 17:47:55 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 11 Oct 2014 18:00:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 10/11/2014 08:53 AM, Peter A. Bigot wrote:
-> On 10/11/2014 06:42 AM, Peter A. Bigot wrote:
->> Thanks for the clarifications.  A couple more comments now that I 
->> understand the goal:
->>
->> On 10/11/2014 05:12 AM, wenzong.fan@windriver.com wrote:
->>> From: Wenzong Fan <wenzong.fan@windriver.com>
->>>
->>> * fix the path to drift file:
->>>
->>> The default path of ntp drift file is /etc/ntp.drift, ntp daemon
->>> maybe fails to create this file since the user ntp is not always
->>> permitted to write /etc.
->>>
->>> Refer to other distributions such as RedHat, Debian, just moving
->>> the file to /var/lib/ntp which the home dir of user ntp.
->>>
->>> * add tmpfile support:
->>>
->>> Make sure the /var/lib/ntp is always created by sysvinit/systemd.
->>>
->>> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->>> ---
->>>   meta-networking/recipes-support/ntp/ntp.inc |   15 +++++++++++++++
->>>   1 file changed, 15 insertions(+)
->>>
->>> diff --git a/meta-networking/recipes-support/ntp/ntp.inc 
->>> b/meta-networking/recipes-support/ntp/ntp.inc
->>> index f55a39a..f685274 100644
->>> --- a/meta-networking/recipes-support/ntp/ntp.inc
->>> +++ b/meta-networking/recipes-support/ntp/ntp.inc
->>> @@ -53,6 +53,7 @@ PACKAGECONFIG[debug] = 
->>> "--enable-debugging,--disable-debugging"
->>>   do_install_append() {
->>>       install -d ${D}${sysconfdir}/init.d
->>>       install -m 644 ${WORKDIR}/ntp.conf ${D}${sysconfdir}
->>> +    sed -i 's!/etc/ntp.drift!/var/lib/ntp/drift!g' 
->>> ${D}${sysconfdir}/ntp.conf
->>
->> Since ntp.conf is provided by OE in files/ntp.conf, this change 
->> should be made there.  Other users may provide their own ntp.conf 
->> through a bbappend and will not want it modified during installation.
->>
->>>       install -m 755 ${WORKDIR}/ntpd ${D}${sysconfdir}/init.d
->>>       install -d ${D}${bindir}
->>>       install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
->>> @@ -72,6 +73,18 @@ do_install_append() {
->>>       install -m 644 ${WORKDIR}/ntpdate.default 
->>> ${D}${sysconfdir}/default/ntpdate
->>>       install -m 0644 ${WORKDIR}/sntp ${D}${sysconfdir}/default/
->>>   +    # Create tmpfiles
->>> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 
->>> 'false', d)}; then
->>> +        install -d ${D}/${sysconfdir}/default/volatiles
->>> +        echo "d ntp ntp 0755 /var/lib/ntp none" \
->>> +            > ${D}/${sysconfdir}/default/volatiles/99_ntpd
->>> +    fi
->>> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 
->>> 'false', d)}; then
->>> +        install -d ${D}${sysconfdir}/tmpfiles.d
->>> +        echo "d /var/lib/ntp 0755 ntp ntp -" \
->>> +            > ${D}${sysconfdir}/tmpfiles.d/99-ntpd.conf
->>> +    fi
->>> +
->>
->> ntp.drift is not a tmpfile and should not be considered volatile (its 
->> absence will cause NTP to spend the first 15 minutes estimating local 
->> oscillator characteristics, which is generally not desirable in a 
->> time server).  /var/lib is intended for persistent state so putting 
->> the drift file there is perfectly fine, but adding /var/lib/ntp in 
->> tmpfiles/volatiles is incorrect.
->>
->> Since /var/lib/ntp is the ntp user's home directory, surely it's 
->> created automatically anyway and nothing need be done.
+On Sat, Oct 11, 2014 at 1:22 PM, akuster808 <akuster808@gmail.com> wrote:
 >
-> I see that in fact it is not created automatically, even though the 
-> user is created.  Ignoring the more fundamental and non-ntp question 
-> "why not?", 
-
-The "why not" is because that's the way useradd works.  Practically, 
-since ntp is not a login account I believe --no-create-home should be 
-added to USERADD_PARAM_${PN}.
-
-> adding:
 >
->    install -d ${D}/var/lib/ntp
->
-> to do_install_append() should cover it.
-
-And it does not.  Even when the missing chown ntp:ntp and packaging is 
-added, the directory created when an image with ntp is built has the 
-build host uid/gid.  Only when the ntp package is installed from within 
-the target environment is the ownership correct.
-
-As it stands using tmpfiles/volatiles might be the only working solution 
-to get the correct ownership of home directories on the target, but IMO 
-that should be fixed.  I've taken the issue to oe-core: 
-http://lists.openembedded.org/pipermail/openembedded-core/2014-October/097895.html
-
-Peter
-
->
-> Peter
->
+> On 10/11/2014 08:53 AM, Otavio Salvador wrote:
 >>
->> Peter
+>> On Fri, Oct 10, 2014 at 6:44 PM, Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>>>
+>>> On Sat, Oct 11, 2014 at 01:00:53AM +0800, Robert Yang wrote:
+>>>>
+>>>> Hello,
+>>>>
+>>>> When will the meta-openembedded have a dizzy branch, please ?
+>>>
+>>>
+>>> It would be nice to get at least some of QA issues fixed before we
+>>> branch. Currently we have more than 438 issues.
 >>
->>>       install -d ${D}/${sysconfdir}/network/if-up.d
->>>       ln -s ${bindir}/ntpdate-sync ${D}/${sysconfdir}/network/if-up.d
->>>   @@ -112,6 +125,8 @@ RSUGGESTS_${PN} = "iana-etc"
->>>     FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf 
->>> ${sysconfdir}/init.d/ntpd ${libdir} \
->>>       ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
->>> +    ${sysconfdir}/default/volatiles \
->>> +    ${sysconfdir}/tmpfiles.d \
->>>   "
->>>   FILES_${PN}-tickadj = "${sbindir}/tickadj"
->>>   FILES_${PN}-utils = "${sbindir}"
 >>
+>> I agree we ought to fix the QA issues but this shouldn't delay the
+>> branching; we can backport those fixes once proved fine on master.
+>>
+>>> But other than that, it's almost ready (thanks Otavio + Armin for
+>>> stepping up to maintain it), please send the READMEs update again when
+>>> you can, so that I can create the branch together with right READMEs.
+>>
+>>
+>> Armin, do you want to do the patch and add my name? or should I do and
+>> add yours? Two patches seems overkill :)
 >
+>
+> I can do it.
+>
+> What email do you want me to use?
 
+otavio@ossystems.com.br as usual :)
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
