@@ -1,35 +1,18 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 6555E71547
+Return-Path: <pab@pabigot.com>
+Received: from p3plsmtpa08-02.prod.phx3.secureserver.net
+	(p3plsmtpa08-02.prod.phx3.secureserver.net [173.201.193.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AF06718F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Oct 2014 20:06:03 +0000 (UTC)
-Received: by mail-yk0-f171.google.com with SMTP id 79so3009908ykr.30
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Oct 2014 13:06:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=BNvwWXRE0+1LvmuNTYvIvJRf6rgkrF8MBkp98CvHUAQ=;
-	b=frqrCnZk1VL3Om7BNxy3z4D/0bLkSaXzxYssAnRecaUWZl2owYzFgsAdFqjfkAmllq
-	/0qkgWz1yxLjloiXuCywG6K/SxvMkE0Qc9zafkSPSXKWu0cxMOix8cU72NUF0jSWIlaA
-	rmoFzIvrp//OkHgRDL6hT2Ot7Gm6mIdq6YcCiSY674rWwtKyW6IrhkDCZs62bml1tmB5
-	dN+LIuTvBwtHMNzW0luxWhfltioU1ZZ03x2Abb8WK6KlygwHpdXU5+Dn/XJg7TPh2cVD
-	kNONFguTEr6uYkyf9F2RGPbMvPzIHavkv1ph3nPyzXkhNxHMN6+w3r3Jxc1wB8DUL5jE
-	KAlg==
-MIME-Version: 1.0
-X-Received: by 10.236.81.201 with SMTP id m49mr30492589yhe.27.1413144362473;
-	Sun, 12 Oct 2014 13:06:02 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.172.70 with HTTP; Sun, 12 Oct 2014 13:06:02 -0700 (PDT)
-In-Reply-To: <1413130443-11407-1-git-send-email-akuster808@gmail.com>
-References: <1413130443-11407-1-git-send-email-akuster808@gmail.com>
-Date: Sun, 12 Oct 2014 17:06:02 -0300
-X-Google-Sender-Auth: Y75suvbSaVPtrbdXrtxuuj-W7xg
-Message-ID: <CAP9ODKqKG=1=3U3o_pR347QEPC4PoxJnEEA=PJb52qMLvDStbA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [dizzy][PATCH] update maintainer info in README's for dizzy
+	Sun, 12 Oct 2014 21:23:58 +0000 (UTC)
+Received: from llc.pab ([75.72.225.8])
+	by p3plsmtpa08-02.prod.phx3.secureserver.net with 
+	id 2MPx1p00J0BVjqb01MPyQx; Sun, 12 Oct 2014 14:23:58 -0700
+From: "Peter A. Bigot" <pab@pabigot.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 12 Oct 2014 16:23:49 -0500
+Message-Id: <1413149029-4901-1-git-send-email-pab@pabigot.com>
+X-Mailer: git-send-email 1.8.5.5
+Subject: [meta-networking][PATCH] ntp: create and package ntp home directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,16 +26,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Oct 2014 20:06:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 12 Oct 2014 21:24:00 -0000
 
-On Sun, Oct 12, 2014 at 1:14 PM, Armin Kuster <akuster808@gmail.com> wrote:
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+This allows the base recipe and bbappends to reference persistent
+mutable state such as a drift file.
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+---
+ meta-networking/recipes-support/ntp/ntp.inc | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
+diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+index f55a39a..fd29a78 100644
+--- a/meta-networking/recipes-support/ntp/ntp.inc
++++ b/meta-networking/recipes-support/ntp/ntp.inc
+@@ -36,7 +36,9 @@ EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readl
+ CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
+ 
+ USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ntp \
++NTP_USER_HOME ?= "/var/lib/ntp"
++USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
++                       --no-create-home \
+                        --shell /bin/false --user-group ntp"
+ 
+ # NB: debug is default-enabled by NTP; keep it default-enabled here.
+@@ -57,6 +59,9 @@ do_install_append() {
+     install -d ${D}${bindir}
+     install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
+ 
++    install -m 755 -d ${D}${NTP_USER_HOME}
++    chown ntp:ntp ${D}${NTP_USER_HOME}
++
+     # Fix hardcoded paths in scripts
+     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+     sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+@@ -111,6 +116,7 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
+ RSUGGESTS_${PN} = "iana-etc"
+ 
+ FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
++    ${NTP_USER_HOME} \
+     ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
+ "
+ FILES_${PN}-tickadj = "${sbindir}/tickadj"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.8.5.5
+
 
