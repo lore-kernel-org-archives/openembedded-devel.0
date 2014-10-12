@@ -1,18 +1,28 @@
-Return-Path: <pab@pabigot.com>
-Received: from p3plsmtpa08-02.prod.phx3.secureserver.net
-	(p3plsmtpa08-02.prod.phx3.secureserver.net [173.201.193.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 4AF06718F4
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 073B6718F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Oct 2014 21:23:58 +0000 (UTC)
-Received: from llc.pab ([75.72.225.8])
-	by p3plsmtpa08-02.prod.phx3.secureserver.net with 
-	id 2MPx1p00J0BVjqb01MPyQx; Sun, 12 Oct 2014 14:23:58 -0700
-From: "Peter A. Bigot" <pab@pabigot.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Oct 2014 16:23:49 -0500
-Message-Id: <1413149029-4901-1-git-send-email-pab@pabigot.com>
-X-Mailer: git-send-email 1.8.5.5
-Subject: [meta-networking][PATCH] ntp: create and package ntp home directory
+	Sun, 12 Oct 2014 21:38:04 +0000 (UTC)
+Received: (qmail 14872 invoked by uid 1003); 12 Oct 2014 21:38:05 -0000
+Received: from unknown (HELO ?10.43.1.67?) (philip@opensdr.com@195.158.157.135)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	12 Oct 2014 21:38:05 -0000
+Message-ID: <543AF4BB.2000108@balister.org>
+Date: Sun, 12 Oct 2014 23:38:03 +0200
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>
+References: <CA+YB3rZ4_QMScrXSisdB8epxieAs421vAJCzWpK3s+peUOLZXg@mail.gmail.com>
+In-Reply-To: <CA+YB3rZ4_QMScrXSisdB8epxieAs421vAJCzWpK3s+peUOLZXg@mail.gmail.com>
+X-Forwarded-Message-Id: <CA+YB3rZ4_QMScrXSisdB8epxieAs421vAJCzWpK3s+peUOLZXg@mail.gmail.com>
+Subject: 2014 OpenEmbedded General Aseembly Announcement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,50 +36,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Oct 2014 21:24:00 -0000
+X-List-Received-Date: Sun, 12 Oct 2014 21:38:06 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-This allows the base recipe and bbappends to reference persistent
-mutable state such as a drift file.
+The eV General Assembly is Tuesday. I'd also like to invite other people
+from the community to join us. This is an good time to join the OE eV. I
+promise to keep the business part of the meeting short so we can spend
+time talking about the future of the OpenEmbedded organization.
 
-Signed-off-by: Peter A. Bigot <pab@pabigot.com>
----
- meta-networking/recipes-support/ntp/ntp.inc | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+If you are interested in joining the eV, send me a bio with information
+about your OpenEmbedded involvement. I do have bios from several people
+already.
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index f55a39a..fd29a78 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -36,7 +36,9 @@ EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readl
- CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
- 
- USERADD_PACKAGES = "${PN}"
--USERADD_PARAM_${PN} = "--system --home-dir /var/lib/ntp \
-+NTP_USER_HOME ?= "/var/lib/ntp"
-+USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
-+                       --no-create-home \
-                        --shell /bin/false --user-group ntp"
- 
- # NB: debug is default-enabled by NTP; keep it default-enabled here.
-@@ -57,6 +59,9 @@ do_install_append() {
-     install -d ${D}${bindir}
-     install -m 755 ${WORKDIR}/ntpdate ${D}${bindir}/ntpdate-sync
- 
-+    install -m 755 -d ${D}${NTP_USER_HOME}
-+    chown ntp:ntp ${D}${NTP_USER_HOME}
-+
-     # Fix hardcoded paths in scripts
-     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-     sed -i 's!/usr/bin/!${bindir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-@@ -111,6 +116,7 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
- RSUGGESTS_${PN} = "iana-etc"
- 
- FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
-+    ${NTP_USER_HOME} \
-     ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
- "
- FILES_${PN}-tickadj = "${sbindir}/tickadj"
+Philip
+
+
+-------- Forwarded Message --------
+Subject: 2014 OpenEmbedded General Aseembly Announcement
+Date: Wed, 27 Aug 2014 09:02:33 -0700
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Reply-To: openembedded-members@lists.openembedded.org
+To: openembedded-members@lists.openembedded.org
+<openembedded-members@lists.openembedded.org>
+
+The board would like to invite all members to attend the eV General
+Assembly. The Assembly will be held during the Embedded Linux
+Conference in Düsseldorf, Germany
+(http://events.linuxfoundation.org/events/embedded-linux-conference-europe)
+at the Congress Centre Düsseldorf in room 4B, on Tuesday, October 14,
+2014, beginning at 1300.
+
+The agenda will contain the financial report. Additional agenda items
+may be submitted per the statutes. Please post agenda items here,
+along with your name if you intend to attend:
+
+http://openembedded.org/wiki/Dusseldorf,_2014
+
+That page also has a link to the proxy form. If you are not able to
+attend, please make sure someone who is attending has your signed
+form. More information on proxies will be sent next week.
+
+Some scheduling notes:
+
+ * The General Assembly is during ELCE this year, not afterward.
+ * There will be a Yocto Project Developer Day on October 16
+(https://www.yoctoproject.org/tools-resources/events/yocto-project-developer-day-elce-2014).
+
+thanks
 -- 
-1.8.5.5
+Jeff Osier-Mixon @Intel
+Yocto Project Community Manager http://yoctoproject.org
+-- 
+_______________________________________________
+Openembedded-members mailing list
+Openembedded-members@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-members
+
 
 
