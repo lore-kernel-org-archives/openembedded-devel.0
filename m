@@ -1,35 +1,32 @@
-Return-Path: <nickdademo@gmail.com>
-Received: from mail-oi0-f46.google.com (mail-oi0-f46.google.com
-	[209.85.218.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 1125760167
+Return-Path: <anders@chargestorm.se>
+Received: from stoexhubfe01.domain01.net (STOEXHUBFE01.domain01.net
+	[83.145.59.140])
+	by mail.openembedded.org (Postfix) with ESMTP id B7D0460167
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Oct 2014 21:41:29 +0000 (UTC)
-Received: by mail-oi0-f46.google.com with SMTP id h136so14578771oig.19
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Oct 2014 14:41:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=cIwzWUNkt+DaDF26brP9ODCTV1SztpPA5WuBXWYBJb8=;
-	b=oxZU2yfininNbNxF/ChaGjLjhsvAVuUAAUfqk2kyaDsxT+ROFTc2sFy/wEALj0MVOU
-	i7yj7Ro8igOR1MGq0vGmiST6gkhH/Ebfxh3DnV1mqt6yGwXl/ZIzr54Xk/2e/sxByOak
-	zMa0I4riI56nHwmCsn6aQ/AGq+hf9E34cdj+P1L8MYfR6hMjY7hpazmeNcjBGwyEYyqu
-	ImW2DjTiDh5ZFNON4aziuFB8FZwkfMppvJC1Q1yX5XcQpk88DwCoTppxFSoMIHyDraOT
-	+UQoEmjRGhuFUFYfbRtADxn6iCnWqZiOuUFJDatHwVzL2P7hjHBehNABuweohSWidKZz
-	RWGw==
-X-Received: by 10.202.180.6 with SMTP id d6mr836458oif.33.1413236490232; Mon,
-	13 Oct 2014 14:41:30 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.167.163 with HTTP; Mon, 13 Oct 2014 14:41:10 -0700 (PDT)
-In-Reply-To: <20141013081638.GF3000@jama>
+	Mon, 13 Oct 2014 21:44:15 +0000 (UTC)
+Received: from ad.chargestorm.se (195.158.157.135) by
+	stoexhubfe01.domain01.net (10.12.10.6) with Microsoft SMTP Server (TLS)
+	id 8.3.279.1; Mon, 13 Oct 2014 23:44:14 +0200
+Date: Mon, 13 Oct 2014 23:43:42 +0200
+From: Anders Darander <anders@chargestorm.se>
+To: Nick D'Ademo <nickdademo@gmail.com>
+Message-ID: <20141013214342.GA4461@ad.chargestorm.se>
+Mail-Followup-To: Nick D'Ademo <nickdademo@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
 References: <CANR6C54p6yC1FPviBpmX-qHiF198s3vK7UWEmmDj3hYs7mAovQ@mail.gmail.com>
 	<CANR6C57416FmV0MHSKmKLvD=Xdf=Lds5OnrHu_6nCW8z3qB_jg@mail.gmail.com>
-	<20141013071037.GA5099@ad.chargestorm.se> <20141013081638.GF3000@jama>
-From: "Nick D'Ademo" <nickdademo@gmail.com>
-Date: Tue, 14 Oct 2014 08:41:10 +1100
-Message-ID: <CANR6C57Ojtx=ptYQiMP4oRrSzzc24JiCfdXitRXvvVScjcEqXg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<20141013071037.GA5099@ad.chargestorm.se>
+	<CANR6C54sFocGNOmgQ65vJy_ZEmadg_LBReDQf8w=TKxYKXhxhg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CANR6C54sFocGNOmgQ65vJy_ZEmadg_LBReDQf8w=TKxYKXhxhg@mail.gmail.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-GFI-SMTP-Submission: 1
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5] What is needed to build a recipe with CMake?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,78 +41,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Oct 2014 21:41:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 13 Oct 2014 21:44:24 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Martin,
+* Nick D'Ademo <nickdademo@gmail.com> [141013 23:10]:
+>    Are you using Qmake or Cmake to build? (I suspect Qmake).
+>    My source code actually has no .PRO file.
 
-Thanks - what are some example recipes in that layer? (I had a look but
-couldn't find any cmake + qt5 recipes)
+Hm, when you state it like that ;)=20
+I might very well have changed it to not use cmake... KDSoap is shipping
+multiple build systems etc, and as long as I can get it to build...
 
-Nick
+However, Martin gave you a hint to look at meta-webos-port for more
+recipes using cmake.
 
-On Mon, Oct 13, 2014 at 7:16 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+Have you inherited cmake_qt5? That class ought to set everything up for
+you.
 
-> On Mon, Oct 13, 2014 at 09:10:37AM +0200, Anders Darander wrote:
-> > Hi,
-> >
-> > * Nick D'Ademo <nickdademo@gmail.com> [141013 01:50]:
-> > > Has anyone had any success at all building a Qt5-based recipe with
-> CMake?
-> >
-> > Yes, I've at least got a local recipe here building KDSoap, which uses
-> > cmake.
->
-> See meta-webos-ports layer for more recipes using cmake + qt5.
->
-> >
-> >
-> >
-> > > On Wed, Oct 8, 2014 at 1:41 PM, Nick D'Ademo <nickdademo@gmail.com>
-> wrote:
-> >
-> > > > Looks like the *qmake* binary cannot be found.
-> >
-> > > > The relevant parts of the recipe are as follows:
-> >
-> >
-> > > > *DEPENDS =3D "qtbase"*
-> >
-> > Just as you, I've got hte DEPENDS li=C5=84e above in my recipe. However=
-, I've
-> > also the following line (situated after the DEPENDS +=3D...)
-> >
-> > inherit qmake5
-> >
-> > That line should set up all the necessary path's in order to find qmake=
-.
-> >
-> > Let us know if this helps you.
-> >
-> > Cheers,
-> > Anders
-> >
-> > --
-> > Abstainer, n.:
-> >       A weak person who yields to the temptation of denying himself a
-> >       pleasure.
-> >               -- Ambrose Bierce, "The Devil's Dictionary"
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+Cheers,
+Anders
+
+>    On Mon, Oct 13, 2014 at 6:10 PM, Anders Darander
+>    <[1]anders@chargestorm.se> wrote:
+
+>      Hi,
+>      * Nick D'Ademo <[2]nickdademo@gmail.com> [141013 01:50]:
+>      > Has anyone had any success at all building a Qt5-based recipe with
+>      CMake?
+>      Yes, I've at least got a local recipe here building KDSoap, which
+>      uses
+>      cmake.
+>      > On Wed, Oct 8, 2014 at 1:41 PM, Nick D'Ademo
+>      <[3]nickdademo@gmail.com> wrote:
+>      > > Looks like the *qmake* binary cannot be found.
+>      > > The relevant parts of the recipe are as follows:
+>      > > *DEPENDS =3D "qtbase"*
+>      Just as you, I've got hte DEPENDS li=C5=84e above in my recipe. Howe=
+ver,
+>      I've
+>      also the following line (situated after the DEPENDS +=3D...)
+>      inherit qmake5
+>      That line should set up all the necessary path's in order to find
+>      qmake.
+>      Let us know if this helps you.
+>      Cheers,
+>      Anders
+>      --
+>      Abstainer, n.:
+>              A weak person who yields to the temptation of denying
+>      himself a
+>              pleasure.
+>                      -- Ambrose Bierce, "The Devil's Dictionary"
+>      --
+>      _______________________________________________
+>      Openembedded-devel mailing list
+>      [4]Openembedded-devel@lists.openembedded.org
+>      [5]http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+> References
+
+>    1. mailto:anders@chargestorm.se
+>    2. mailto:nickdademo@gmail.com
+>    3. mailto:nickdademo@gmail.com
+>    4. mailto:Openembedded-devel@lists.openembedded.org
+>    5. http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Anders Darander
+ChargeStorm AB		Tel: +46 702 44 84 36
+Hospitalsgatan 8	Email: anders@chargestorm.se
+602 27 Norrk=C3=B6ping	Web: www.chargestorm.se
 
