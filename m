@@ -1,36 +1,38 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E244F6A362
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EDD46A362
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Oct 2014 05:02:26 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id v10so5036419pde.36
+	Mon, 13 Oct 2014 05:02:28 +0000 (UTC)
+Received: by mail-pd0-f171.google.com with SMTP id ft15so5059588pdb.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Oct 2014 22:02:27 -0700 (PDT)
+	Sun, 12 Oct 2014 22:02:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=0hgyniUT9Qniah73NXFGxaQZqYS+3/mhkIZd5huG2dw=;
-	b=as6n9GBG5sKkaBe5lBRCL+yWIjOYa+Wa+Et+5pa3G5V8o4ci2HuFEvkG77d3m8Qa4O
-	L7q4FDntvb1j4atHTzF5/rvsXiDN+YN1P6vRdoZjlWSlNad3Rc2hcWocT4mie7A0cj0Y
-	rRa+qnvxgI9FdnfHcxCekrWxyoMeXuHIRWrmDQ847u/SKqCqcPNcZwl6UjJ6AHgCclOX
-	QU0isXNJZvaqjNHNVvkBUnnmfQUgQAKGRvpDe99gErzRnQrzzR7K8Mou2esaz4lwsMlH
-	tsBA43ivnbgkF+uWq8qZ9Y9zkyabFcMUi+4YOuAun/1UAoTqZ16V5JGNHux4tR3Pg48f
-	Ad3g==
-X-Received: by 10.66.179.140 with SMTP id dg12mr21172382pac.76.1413176547640; 
-	Sun, 12 Oct 2014 22:02:27 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=azTZO5J1U+MS2tpsARQj8K0rgkfMOj5nIDiIOwn0ulE=;
+	b=Ry9Hs2vAFpNS11hyfuVnBvDWrF8dyhNznl9u8sXdsvCmluIRDU73xXy4EwtNXaWxxq
+	FISaGOvzVRK9iif5qgpU56/7a5nstHUXZAco+SmVmcqwfsiOR9SPd43iz2JWvhvy7ql8
+	Bj6HuheHjpuoivCGp8gEn/zrAdxHDo4RoSzyZlh11KR9WjwFSasaUZR7UUTBOOhbIDNI
+	Kvxz2wYspvM8sCyFZX0c5IgQd1dK12pPrP0J/LEQo7Q0Ku4ysL5F1Bw0M4BRNgjgWRwO
+	Oe6FjCds5FoOLaV/uSD571NXzGqayJMCcR1yxvv19puzUQerRQV5v7jzf1+HUjk3PH8B
+	kT0g==
+X-Received: by 10.66.158.165 with SMTP id wv5mr21511877pab.36.1413176550482;
+	Sun, 12 Oct 2014 22:02:30 -0700 (PDT)
 Received: from localhost.localdomain (75-128-22-150.dhcp.snlo.ca.charter.com.
 	[75.128.22.150])
-	by mx.google.com with ESMTPSA id ic3sm8985045pbc.26.2014.10.12.22.02.25
+	by mx.google.com with ESMTPSA id ic3sm8985045pbc.26.2014.10.12.22.02.28
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 12 Oct 2014 22:02:26 -0700 (PDT)
+	Sun, 12 Oct 2014 22:02:29 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Oct 2014 22:02:21 -0700
-Message-Id: <1413176542-20885-1-git-send-email-TicoTimo@gmail.com>
+Date: Sun, 12 Oct 2014 22:02:22 -0700
+Message-Id: <1413176542-20885-2-git-send-email-TicoTimo@gmail.com>
 X-Mailer: git-send-email 1.9.3
-Subject: [meta-python][PATCH 1/2] python-pytz: add 2014.7
+In-Reply-To: <1413176542-20885-1-git-send-email-TicoTimo@gmail.com>
+References: <1413176542-20885-1-git-send-email-TicoTimo@gmail.com>
+Subject: [meta-python][PATCH 2/2] python-matplotlib: add dateutil & pytz to DEPENDS/RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +48,64 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 13 Oct 2014 05:02:29 -0000
 
-python-matplotlib is providing its own pytz and dateutil.
-Provide our own pytz (and then fix matplotlib).
+python-matplotlib is currently providing its own dateutil and pytz
+Add dateutil and pytz as DEPENDS/RDEPENDS.
+Patch setupext.py to no longer provide its own dateutil and pytz.
+Remove python-matplotlib from blacklist.
 
 Signed-off-by: Tim Orling <TicoTimo@gmail.com>
 ---
- .../recipes-devtools/python/python-pytz_2014.7.bb     | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pytz_2014.7.bb
+ .../python/python-matplotlib/fix_setupext.patch       | 19 +++++++++++++++----
+ .../python/python-matplotlib_1.1.0.bb                 |  7 ++-----
+ 2 files changed, 17 insertions(+), 9 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pytz_2014.7.bb b/meta-python/recipes-devtools/python/python-pytz_2014.7.bb
-new file mode 100644
-index 0000000..92d0796
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pytz_2014.7.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "World timezone definitions, modern and historical"
-+HOMEPAGE = " http://pythonhosted.org/pytz"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22b38951eb857cf285a4560a914b7cd6"
-+SRCNAME = "pytz"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
-+
-+RDEPENDS_${PN} = "\
-+    python-core \
-+    python-datetime \
-+"
-+
-+SRC_URI[md5sum] = "8940ddae309e44b593c75a9e05dd2a0b"
-+SRC_URI[sha256sum] = "bfc2bd00147e5ecf75399f4a94cb84cc00ce9b511a15f9958bb6c85a455f76eb"
+diff --git a/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch b/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
+index e071595..9a13a18 100644
+--- a/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
++++ b/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
+@@ -1,9 +1,20 @@
+ This fixes the numpy import problem in setupext.py using a hard-coded path.
+ 
+-diff --git a/setupext.py b/setupext.py
+-index 962cedc..82297c4 100644
+---- a/setupext.py
+-+++ b/setupext.py
++Index: matplotlib-1.1.0/setupext.py
++===================================================================
++--- matplotlib-1.1.0.orig/setupext.py
+++++ matplotlib-1.1.0/setupext.py
++@@ -122,8 +122,8 @@ numpy_inc_dirs = []
++ # matplotlib build options, which can be altered using setup.cfg
++ options = {'display_status': True,
++            'verbose': False,
++-           'provide_pytz': 'auto',
++-           'provide_dateutil': 'auto',
+++           'provide_pytz': False,
+++           'provide_dateutil': False,
++            'build_agg': True,
++            'build_gtk': 'auto',
++            'build_gtkagg': 'auto',
+ @@ -176,10 +176,7 @@ if os.path.exists(setup_cfg):
+      except: pass
+  
+diff --git a/meta-python/recipes-devtools/python/python-matplotlib_1.1.0.bb b/meta-python/recipes-devtools/python/python-matplotlib_1.1.0.bb
+index 6c8a202..69f71c7 100644
+--- a/meta-python/recipes-devtools/python/python-matplotlib_1.1.0.bb
++++ b/meta-python/recipes-devtools/python/python-matplotlib_1.1.0.bb
+@@ -4,11 +4,8 @@ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://README.txt;md5=83c5bf8b16a5f99507f2f47a21ae3b81"
+ PR = "r1"
+ 
+-DEPENDS += "python-numpy freetype libpng"
+-RDEPENDS_${PN} = "python-core python-distutils python-numpy freetype libpng"
+-
+-PNBLACKLIST[python-matplotlib] = "CONFLICT: 34 files with python-dateutil"
+-# e.g. sysroots/qemux86-64/usr/lib/python2.7/site-packages/dateutil/tzwin.pyc
++DEPENDS += "python-numpy freetype libpng python-dateutil python-pytz"
++RDEPENDS_${PN} = "python-core python-distutils python-numpy freetype libpng python-dateutil python-pytz"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/matplotlib/matplotlib-${PV}.tar.gz \
+            file://fix_setup.patch \
 -- 
 1.9.3
 
