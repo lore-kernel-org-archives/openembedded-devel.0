@@ -1,34 +1,35 @@
-Return-Path: <nickdademo@gmail.com>
-Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
-	[209.85.218.51])
-	by mail.openembedded.org (Postfix) with ESMTP id EF75171902
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id D67CF6A9D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Oct 2014 23:49:02 +0000 (UTC)
-Received: by mail-oi0-f51.google.com with SMTP id h136so11682317oig.10
+	Mon, 13 Oct 2014 00:42:08 +0000 (UTC)
+Received: by mail-pa0-f42.google.com with SMTP id bj1so4957076pad.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Oct 2014 16:49:03 -0700 (PDT)
+	Sun, 12 Oct 2014 17:42:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=I0eWYgoHExyKgh7/iGsVdz+V/24Zzvf41UNlIPAHVy8=;
-	b=BdPOTO2H5VVdWb6j45o8jx5KOMu4k0pAXu3RHfAUCGXJ5pxhLspu8bWJLBCs70v0MQ
-	+hVJox/UCRk1XD/JlsAWT++02ZyC3kjhctdxtOw0S2lady/B4kqIYd+rSPAB7Y+ch+T2
-	YsgCtJOpbLvH4pxJKvyFWl1kp9mqYBCyx/dKvK9HY7QyqiuADuDB6Q406Zl/0VeWgUe1
-	lvM2DaHzbg0foF4yT+SeZLb8IwbplFGi98/pUQCR+QkC8mcZoxN5kk0IqdYMfeYme05L
-	uiGWNrYuBxFtpeC4oPYDdB51fuu6inmFCoDNtxZ2nCW3joJPV8bQFlpzpy9+R5Q066nZ
-	z4rQ==
-X-Received: by 10.202.77.77 with SMTP id a74mr17452911oib.0.1413157742466;
-	Sun, 12 Oct 2014 16:49:02 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.76.167.163 with HTTP; Sun, 12 Oct 2014 16:48:42 -0700 (PDT)
-In-Reply-To: <CANR6C54p6yC1FPviBpmX-qHiF198s3vK7UWEmmDj3hYs7mAovQ@mail.gmail.com>
-References: <CANR6C54p6yC1FPviBpmX-qHiF198s3vK7UWEmmDj3hYs7mAovQ@mail.gmail.com>
-From: "Nick D'Ademo" <nickdademo@gmail.com>
-Date: Mon, 13 Oct 2014 10:48:42 +1100
-Message-ID: <CANR6C57416FmV0MHSKmKLvD=Xdf=Lds5OnrHu_6nCW8z3qB_jg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5] What is needed to build a recipe with CMake?
+	h=from:to:cc:subject:date:message-id;
+	bh=cKAOD2uKK9unMQ0gqAENDmv0jwPUfjkSnMvIXahZPJ8=;
+	b=Eno7bH3+Zy+0C8QOUqSdSXj+GeU41EyFRDy7fOS9vprywJg9KPvYVf8LmLIm1F72Bz
+	XmuzOqKwT9MhLVJAJq1t4CJEUJp85hYXtm4AFFxdfBgHKCCLBVPCm7y3zUjTuD0suoNJ
+	mcuXcLTx3NyAyDq7tQH7Qu18f/gWR7tB8KETSBpQnpUJ+HVzU+qmjsmc/8UsQwWwuIyo
+	GWKtJ8R3Ha9v8EpJjZWmG4yMZnnm2VXl5GQOjkNqMvoeCAf09+ynXAhvctqOGTWdBddN
+	LRZwAoS3NjCfHin1k1PAnZYkWgAjr9K/S9LS9E6GzW0LQSHpoJwH8BijXePjqYDnUgyV
+	r04A==
+X-Received: by 10.70.38.228 with SMTP id j4mr21057025pdk.16.1413160929951;
+	Sun, 12 Oct 2014 17:42:09 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id y1sm9414227pbw.89.2014.10.12.17.42.08
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 12 Oct 2014 17:42:09 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Oct 2014 11:55:09 +1100
+Message-Id: <1413161709-18325-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.1.2
+Subject: [meta-qt5][PATCH] packagegroup-qt5-toolchain-target: always include qttools packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,45 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Oct 2014 23:49:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 13 Oct 2014 00:42:15 -0000
 
-Has anyone had any success at all building a Qt5-based recipe with CMake?
+The qttools packages were included only if the ruby layer was enabled
+as it required qtwebkit. However, qttools now has a PACKAGECONFIG
+option for qtwebkit and does not enable it by default so we can include
+the qttools packages even if the ruby layer is not enabled.
+---
+ recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
+diff --git a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+index 18ecb4d..25a5003 100644
+--- a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
++++ b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+@@ -13,11 +13,6 @@ USE_RUBY = " \
+     qtquick1-mkspecs \
+     qtquick1-plugins \
+     qtquick1-qmlplugins \
+-    qttools-dev \
+-    qttools-mkspecs \
+-    qttools-plugins \
+-    qttools-staticdev \
+-    qttools-tools \
+     qtwebkit-dev \
+     qtwebkit-mkspecs \
+     qtwebkit-qmlplugins \
+@@ -84,6 +79,11 @@ RDEPENDS_${PN} += " \
+     qtsystems-dev \
+     qtsystems-mkspecs \
+     qtsystems-qmlplugins \
++    qttools-dev \
++    qttools-mkspecs \
++    qttools-plugins \
++    qttools-staticdev \
++    qttools-tools \
+     ${@base_contains('DISTRO_FEATURES', 'wayland', '${USE_WAYLAND}', '', d)} \
+     ${@base_contains('BBFILE_COLLECTIONS', 'ruby-layer', '${USE_RUBY}', '', d)} \
+     ${@base_contains('DISTRO_FEATURES', 'x11', '${USE_X11}', '', d)} \
+-- 
+2.1.2
 
-On Wed, Oct 8, 2014 at 1:41 PM, Nick D'Ademo <nickdademo@gmail.com> wrote:
-
-> I'm receiving the same error as described in the following posts when
-> attempting to build a CMake recipe (Qt5 code):
-> http://lists.qt-project.org/pipermail/development/2014-May/017075.html
-> https://lists.yoctoproject.org/pipermail/yocto/2014-May/019755.html
->
-> * The imported target "Qt5::Core" references the file
-> *||*      "/qmake"
-> *||*   but this file does not exist.  Possible reasons include:
-> *||*   * The file was deleted, renamed, or moved to another location.
-> *||*   * An install or uninstall procedure did not complete successfully.
-> *||*   * The installation package was faulty and contained*
->
-> Looks like the *qmake* binary cannot be found.
->
-> The relevant parts of the recipe are as follows:
->
->
->
-> *DEPENDS = "qtbase"*
->
->
->
->
->
->
->
-> *inherit cmakedo_install () {    install -d ${D}${bindir}    install -m
-> 0755 test ${D}${bindir}/test}FILES_${PN} += "${bindir}/test"*
->
-> Does anyone have a solution to this issue?
->
-> Thanks.
->
 
