@@ -1,35 +1,23 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A6E471834
+Return-Path: <lchristina26@hotmail.com>
+Received: from BLU004-OMC4S23.hotmail.com (blu004-omc4s23.hotmail.com
+	[65.55.111.162])
+	by mail.openembedded.org (Postfix) with ESMTP id 87A906ACB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Oct 2014 15:22:03 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id eu11so6031888pac.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Oct 2014 08:22:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=3ato8fFhhrKrRxfbQI2ziObrpNbTQe6FvYnDng0RG2A=;
-	b=FC/LKjErrlcC/l4zt9cENsrgnZSDEM5sQHlOX0H71CQX5qYc53bQsShpiZPFgejRQ7
-	RVyM+qS5rZOSefJd0etcdeeD6ksOKJoc2x9JTgTOnuz83TkC0qo9m451Axfmoanp4PkH
-	Le0SSvJfuJsqQ7IGgWTZyac/zsenkh1lHDymC+FRRPIZOc/abfhboq1f4HczKllUHZvX
-	WekJZJs0aG2gpZNnZ8dqBQIgi9vGaBSqJJ+zo7Jal3BqLW7ew592qiMRgquE1NUCgXfe
-	xMZUye4jhOBM1uTfLDYD7SJYkmB2wsno/zGTWJhe01rfmg8uRj3OY6CaSxS2cF9yeslg
-	uQiQ==
-X-Received: by 10.68.186.33 with SMTP id fh1mr24346945pbc.105.1413213724579;
-	Mon, 13 Oct 2014 08:22:04 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by mx.google.com with ESMTPSA id
-	jq5sm11517165pbc.32.2014.10.13.08.22.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 13 Oct 2014 08:22:03 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+	Mon, 13 Oct 2014 17:52:10 +0000 (UTC)
+Received: from BLU436-SMTP51 ([65.55.111.136]) by BLU004-OMC4S23.hotmail.com
+	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751);
+	Mon, 13 Oct 2014 10:52:11 -0700
+X-TMN: [i2f2GcFKCqjh6aHAJyJt0oqU2yj4ARNT]
+X-Originating-Email: [lchristina26@hotmail.com]
+Message-ID: <BLU436-SMTP515C53ADE83EDFDE88FD20D6AC0@phx.gbl>
+From: lchristina26 <lchristina26@hotmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Oct 2014 08:21:51 -0700
-Message-Id: <1413213711-30114-1-git-send-email-akuster808@gmail.com>
+Date: Mon, 13 Oct 2014 11:51:59 -0600
 X-Mailer: git-send-email 1.9.1
-Subject: [[dizzy][PATCH] update maintainer info in python README for dizzy
+X-OriginalArrivalTime: 13 Oct 2014 17:52:09.0213 (UTC)
+	FILETIME=[68E06AD0:01CFE70E]
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH v2] cyassl: add version 3.2.0 with updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,58 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Oct 2014 15:22:07 -0000
+X-List-Received-Date: Mon, 13 Oct 2014 17:52:20 -0000
+Content-Type: text/plain
 
-This is the first time meta-python is being taged with a release
+Update 3.2.0 to include the correct md5sum and sha256sum values.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Leah Thompson <lchristina26@hotmail.com>
 ---
- meta-python/README | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+ meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/README b/meta-python/README
-index f62ab8f..becf371 100644
---- a/meta-python/README
-+++ b/meta-python/README
-@@ -17,12 +17,12 @@ The meta-python layer depends on:
+diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+index 0c0cac2..508bab4 100644
+--- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
++++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+@@ -1,4 +1,4 @@
+-SUMMARY = "CyaSSL Embedded SSL Library"
++SUMMARY = "CyaSSL Lightweight, Embedded SSL Library"
+ DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
+                optimized for embedded and RTOS environments. It can be \
+                Up to 20 times smaller than OpenSSL while still supporting \
+@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- 	URI: git://git.openembedded.org/openembedded-core
- 	layers: meta
--	branch: master
-+	branch: dizzy
- 	revision: HEAD
+ SRC_URI = "http://www.yassl.com/${BP}.zip"
  
- 	URI: git://git.openembedded.org/meta-openembedded
- 	layers: meta-oe
--	branch: master
-+	branch: dizzy
- 	revision: HEAD
+-SRC_URI[md5sum] = "72477eb50697e759d309c49cb1aef18a"
+-SRC_URI[sha256sum] = "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2adc16d2507b5d0b03e"
++SRC_URI[md5sum] = "9f076e82d32bea986651ada34c49f6c0"
++SRC_URI[sha256sum] = "c9e97cd3fa4697e55328c2016965ac4b304fcef45a10559caf540c42f1d5e93a"
  
- Please follow the recommended setup procedures of your OE distribution.
-@@ -39,10 +39,10 @@ comments and patch review. It is subscriber only, so please register
- before posting.
+ inherit autotools
  
- Send pull requests to openembedded-devel@lists.openembedded.org with
--'[meta-python]' in the subject.
-+'[meta-python][dizzy]' in the subject.
- 
- When sending single patches, please use something like: 
--'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][PATCH'
-+'git send-email -M -1 --to=openembedded-devel@lists.openembedded.org --subject-prefix=meta-python][dizzy][PATCH'
- 
- Maintenance
- -------------------------
-@@ -51,3 +51,10 @@ Maintainers:
-         Tim "moto-timo" Orling <TicoTimo@gmail.com>
-         Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
- 
-+Dizzy branch maintainers:
-+    Otavio Salvador <otavio@ossystems.com.br>
-+    Armin Kuster <akuster808@gmail.com>
-+
-+Prefix email subject with: [dizzy]
-+
-+
 -- 
 1.9.1
 
