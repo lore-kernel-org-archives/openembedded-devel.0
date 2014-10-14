@@ -1,41 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 806B671915
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A80C71922
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 22:14:53 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id h11so7236635wiw.2
+	Tue, 14 Oct 2014 22:14:54 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id l18so25800wgh.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 15:14:54 -0700 (PDT)
+	Tue, 14 Oct 2014 15:14:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=8SHZ7iTcsu9wECtdAW3DTxpwFg8S2SoyMDBIDMhdnY4=;
-	b=ckZyrUCj1m3OAx0m7sV32edw9fIHG0BqcEuh8JGhHBGOfIYoCr9Ol9SqB17wonr1fP
-	IqUyXvCjRYBMGJE3iTxTdwZ8oxyZLthfnQ+mjqzNjO/z7W984uu3965s8PksSePMKYqR
-	myZq7rWLl2xFSw4cdkbO7qucXvRFeGX4o2NA2s3gDi8brxSq4uF0PsoomBaIhwPZj0Ml
-	wDLHWdwtF4W02iwFd4j4S7NsY56acXI5jUNTzigZpqBdrfFYI25Fi+6JtTZp4wyoq68O
-	qU0lcOSzmdXevhS28KkCeq66p7uVeYeIPa6Uyn3Urv+gVMueggcU//StLDvGUt0WQz+d
-	xDdw==
-X-Received: by 10.180.12.50 with SMTP id v18mr8241530wib.60.1413324894257;
-	Tue, 14 Oct 2014 15:14:54 -0700 (PDT)
+	bh=KC842b1GqDBVrmHheYTw4KtFE6nFrdsJAch+o+1H0xU=;
+	b=jULQvklWnjMZq/JeS6g7qiWDUNzgHeXhYAyPuopkcqrWoHZpraEjDeoSYqyj4a8ugN
+	jyBmAhEhFJOFzwlyqfpW7CD7ILRIy0eFDkHBKUPEnjHjY2+W7WZNOcmRXacKbqimBK0q
+	X4avyStuQteeVjgdwGQSo76mfQXAL6WTvbj2HnYrqatPVEdey3GZAczOUy4tnLR4tS3X
+	yvOtCdDx/j1S0Up8ErjfsEHfqCCpl43qvLmj94YeoBCx7q4LT8h3XPKYuUaPE6RJRADw
+	hfOs5Atg752jYkK7U6v+9zAyKXR2gofwmyQA8oOVZYqF/pMGsuE0MLuksHRpmSdsntzn
+	CclQ==
+X-Received: by 10.180.96.226 with SMTP id dv2mr7941264wib.49.1413324895320;
+	Tue, 14 Oct 2014 15:14:55 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-176-198-252-150.hsi05.unitymediagroup.de. [176.198.252.150])
 	by mx.google.com with ESMTPSA id
-	eg8sm17132892wib.15.2014.10.14.15.14.53
+	eg8sm17132892wib.15.2014.10.14.15.14.54
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 Oct 2014 15:14:53 -0700 (PDT)
+	Tue, 14 Oct 2014 15:14:54 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Oct 2014 00:14:27 +0200
-Message-Id: <1413324868-11856-15-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 15 Oct 2014 00:14:28 +0200
+Message-Id: <1413324868-11856-16-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1413324868-11856-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1413324868-11856-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 14/15] geany update to 1.24.1
+Subject: [PATCH 15/15] libgphoto2: add bash to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,33 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Oct 2014 22:14:54 -0000
+X-List-Received-Date: Tue, 14 Oct 2014 22:14:55 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+fix
+
+libgphoto2-2.4.11: libgphoto2 requires /bin/bash, but no providers in its RDEPENDS [file-rdeps]
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-devtools/geany/{geany_1.23.bb => geany_1.24.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/geany/{geany_1.23.bb => geany_1.24.1.bb} (73%)
+ meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/geany/geany_1.23.bb b/meta-oe/recipes-devtools/geany/geany_1.24.1.bb
-similarity index 73%
-rename from meta-oe/recipes-devtools/geany/geany_1.23.bb
-rename to meta-oe/recipes-devtools/geany/geany_1.24.1.bb
-index 593ba66..f765e2c 100644
---- a/meta-oe/recipes-devtools/geany/geany_1.23.bb
-+++ b/meta-oe/recipes-devtools/geany/geany_1.24.1.bb
-@@ -10,7 +10,7 @@ SRC_URI = " \
-     http://download.geany.org/${BP}.tar.bz2 \
-     file://0001-configure.ac-remove-additional-c-test.patch \
- "
--SRC_URI[md5sum] = "4290e8c32305e916f57bb0f0233bbec2"
--SRC_URI[sha256sum] = "cdd4a772694803c837ae59e56f7bdc2faba174509317211f522e7d25dfcbe8b0"
-+SRC_URI[md5sum] = "d225104cef3973164d70116d46239606"
-+SRC_URI[sha256sum] = "7fb505d9b01fe6874890525f837644a6a38c23a372bb068c65ef3673108a8c33"
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+index ec96920..523efa7 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.4.11.bb
+@@ -48,6 +48,7 @@ do_install_append() {
+ PACKAGES =+ "libgphotoport libgphoto2-camlibs"
+ FILES_libgphoto2-camlibs = "${libdir}/libgphoto2*/*/*.so*"
+ RRECOMMENDS_${PN} = "libgphoto2-camlibs"
++RDEPENDS_${PN} = "bash"
  
- FILES_${PN} += "${datadir}/icons"
+ FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
+ 
 -- 
 1.8.3.1
 
