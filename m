@@ -1,43 +1,39 @@
-Return-Path: <ting.liu@freescale.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1bn0103.outbound.protection.outlook.com [157.56.110.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B4AA6ACB8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E110C6ACB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 08:09:23 +0000 (UTC)
-Received: from BN1PR03MB156.namprd03.prod.outlook.com (10.255.201.28) by
-	BN1PR03MB154.namprd03.prod.outlook.com (10.255.201.18) with Microsoft
-	SMTP Server (TLS) id 15.0.1049.19; Tue, 14 Oct 2014 07:37:47 +0000
-Received: from BN1PR03MB156.namprd03.prod.outlook.com ([169.254.14.49]) by
-	BN1PR03MB156.namprd03.prod.outlook.com ([169.254.14.49]) with mapi id
-	15.00.1049.012; Tue, 14 Oct 2014 07:37:47 +0000
-From: "ting.liu@freescale.com" <ting.liu@freescale.com>
-To: Robert Yang <liezhi.yang@windriver.com>
-Thread-Topic: [oe] [meta-oe][PATCH] libunwind: Fix test case link failure on
-	PowerPC systems with Altivec
-Thread-Index: AQHP5H+lvi+0CMmpcUGW6HJWL7sz4pwvOiYQ
-Date: Tue, 14 Oct 2014 07:37:46 +0000
-Message-ID: <e96e07922dc7420781f535727beb36d5@BN1PR03MB156.namprd03.prod.outlook.com>
-References: <1411455848-21704-1-git-send-email-ting.liu@freescale.com>
-	<5437C6BD.7080308@windriver.com>
-In-Reply-To: <5437C6BD.7080308@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [123.151.195.49]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BN1PR03MB154;
-x-exchange-antispam-report-test: UriScan:;
-x-forefront-prvs: 03648EFF89
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(199003)(479174003)(189002)(377454003)(13464003)(24454002)(51704005)(19580395003)(19580405001)(99286002)(92566001)(122556002)(108616004)(106116001)(50986999)(86362001)(575784001)(105586002)(46102003)(76576001)(110136001)(76176999)(107046002)(33646002)(77096002)(101416001)(106356001)(4396001)(95666004)(80022003)(54356999)(66066001)(99396003)(2656002)(21056001)(97736003)(85852003)(87936001)(31966008)(120916001)(64706001)(20776003)(76482002)(85306004)(74316001)(40100003)(211663006)(24736002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BN1PR03MB154;
-	H:BN1PR03MB156.namprd03.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+	Tue, 14 Oct 2014 09:31:43 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id l18so10498931wgh.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Oct 2014 02:31:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=gE+GRnXzQF3mb50ZELaAcx/EcN+vpExDOm8RsBR5Ok4=;
+	b=DDBF/FDoNkHpckDA6eed0jUJ3jcHdTtNkEXDblssiP5BG1xY4qq/CrXLWeJLx3fnrN
+	C7j+vwUJ04E5ItUMwMdM36LxzLH+vF5rm6W8cLWy0y6JGR+3qq7zVcy0oIoXn1AwPmar
+	E3k0bPg2lxih1rNeVb5tnKMsGd8E607lL2BrJ5Nopv9dr29b251itD+i2SG3vfQ9emKd
+	eqUkYxMtisQDSiB5HWu7bamF333QVcFVtb8KjtgaGAYVRg9fKGpmrIksPX4hMiG6bpeL
+	8oKN5Bh3jEHV1B8X8OHiEbBCVE1eVxRQ+ArXP394NKThrP7HkOAerFwXaMl+GccOgtz3
+	B6Sw==
+X-Received: by 10.194.90.144 with SMTP id bw16mr847451wjb.133.1413279104247;
+	Tue, 14 Oct 2014 02:31:44 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	pn4sm4593150wjc.38.2014.10.14.02.31.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 Oct 2014 02:31:43 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 14 Oct 2014 11:33:32 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141014093332.GI3000@jama>
+References: <BLU436-SMTP515C53ADE83EDFDE88FD20D6AC0@phx.gbl>
 MIME-Version: 1.0
-X-OriginatorOrg: freescale.com
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libunwind: Fix test case link failure on PowerPC systems with Altivec
+In-Reply-To: <BLU436-SMTP515C53ADE83EDFDE88FD20D6AC0@phx.gbl>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH v2] cyassl: add version 3.2.0 with updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,193 +47,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Oct 2014 08:09:27 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 14 Oct 2014 09:31:50 -0000
+X-Groupsio-MsgNum: 52489
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="eMP3JyRexyk9c0Bv"
+Content-Disposition: inline
+
+--eMP3JyRexyk9c0Bv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: Robert Yang [mailto:liezhi.yang@windriver.com]
-> Sent: Friday, October 10, 2014 7:45 PM
-> To: openembedded-devel@lists.openembedded.org; Liu Ting-B28495
-> Subject: Re: [oe] [meta-oe][PATCH] libunwind: Fix test case link failure =
-on
-> PowerPC systems with Altivec
->=20
->=20
-> Hi Ting,
->=20
-> Would you please send it to oe-core, or I can help ? It had conficts, I
-> updated it:
+On Mon, Oct 13, 2014 at 11:51:59AM -0600, lchristina26 wrote:
+> Update 3.2.0 to include the correct md5sum and sha256sum values.
 
-Please do it. Thanks.
+Send the commit which will squash both changes (upgrade together with
+checksums update)
 
->=20
->  From 719aa29b604df59538eea6e9b9a8595389dc79f3 Mon Sep 17 00:00:00 2001
-> From: Ting Liu <ting.liu@freescale.com>
-> Date: Tue, 23 Sep 2014 15:04:08 +0800
-> Subject: [PATCH] libunwind: Fix test case link failure on PowerPC systems
->   with Altivec
->=20
-> Fixed:
-> ppc64-test-altivec.o: In function `vec_stack':
-> tests/ppc64-test-altivec.c:54: undefined reference to `_Uppc64_init_local=
-'
-> tests/ppc64-test-altivec.c:67: undefined reference to `_Uppc64_get_reg'
-> tests/ppc64-test-altivec.c:72: undefined reference to `_Uppc64_get_fpreg'
-> tests/ppc64-test-altivec.c:82: undefined reference to `_Uppc64_regname'
-> tests/ppc64-test-altivec.c:94: undefined reference to `_Uppc64_get_proc_n=
-ame'
-> tests/ppc64-test-altivec.c:109: undefined reference to `_Uppc64_step'
-> tests/ppc64-test-altivec.c:62: undefined reference to `_Uppc64_get_reg'
-> tests/ppc64-test-altivec.c:112: undefined reference to `_Uppc64_get_reg'
->=20
-> Signed-off-by: Ting Liu <ting.liu@freescale.com>
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> Signed-off-by: Leah Thompson <lchristina26@hotmail.com>
 > ---
->   ...k-failure-on-PowerPC-systems-with-Altivec.patch |   31
-> ++++++++++++++++++++
->   meta/recipes-support/libunwind/libunwind_1.1.bb    |    1 +
->   2 files changed, 32 insertions(+)
->   create mode 100644
-> meta/recipes-support/libunwind/libunwind/Fix-test-case-link-failure-on-
-> PowerPC-systems-with-Altivec.patch
+>  meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >=20
-> diff --git
-> a/meta/recipes-support/libunwind/libunwind/Fix-test-case-link-failure-on-
-> PowerPC-systems-with-Altivec.patch
-> b/meta/recipes-support/libunwind/libunwind/Fix-test-case-link-failure-on-
-> PowerPC-systems-with-Altivec.patch
-> new file mode 100644
-> index 0000000..e8f4382
-> --- /dev/null
-> +++
-> b/meta/recipes-support/libunwind/libunwind/Fix-test-case-link-failure-on-
-> PowerPC-systems-with-Altivec.patch
-> @@ -0,0 +1,31 @@
-> +From 4c62c4a9556f92495d93eddc7641497e1ce1e35c Mon Sep 17 00:00:00 2001
-> +From: Ulrich Weigand <uweigand@de.ibm.com>
-> +Date: Tue, 17 Dec 2013 15:00:54 +0100
-> +Subject: [PATCH] Fix test case link failure on PowerPC systems with
-> +Altivec
-> +
-> +Upstream-Status:backport
-> +
-> +On systems where the system compiler supports Altivec by default, the
-> +libunwind Makefile will attempt to build an extra test case
-> +ppc64-test-altivec.  Unfortunately, the link step will fail since the
-> +Makefile does not actually link against the libunwind library.
-> +
-> +Fixed by adding the appropriate LDADD macro.
-> +
-> +Signed-off-by: Ulrich Weigand <uweigand@de.ibm.com>
-> +---
-> + tests/Makefile.am |    1 +
-> + 1 files changed, 1 insertions(+), 0 deletions(-)
-> +
-> +diff --git a/tests/Makefile.am b/tests/Makefile.am index
-> +0e30536..9c76628 100644
-> +--- a/tests/Makefile.am
-> ++++ b/tests/Makefile.am
-> +@@ -201,3 +201,4 @@ Lia64_test_rbs_LDADD =3D $(LIBUNWIND_local)
-> +Lia64_test_readonly_LDADD =3D $(LIBUNWIND_local)  ia64_test_dyn1_LDADD =
-=3D
-> +$(LIBUNWIND)  ia64_test_sig_LDADD =3D $(LIBUNWIND)
-> ++ppc64_test_altivec_LDADD =3D $(LIBUNWIND)
-> +--
-> +1.7.2.5
-> +
-> diff --git a/meta/recipes-support/libunwind/libunwind_1.1.bb
-> b/meta/recipes-support/libunwind/libunwind_1.1.bb
-> index 2e52430..5b54dcb 100644
-> --- a/meta/recipes-support/libunwind/libunwind_1.1.bb
-> +++ b/meta/recipes-support/libunwind/libunwind_1.1.bb
-> @@ -3,6 +3,7 @@ require libunwind.inc
->   SRC_URI +=3D "\
->       file://Support-building-with-older-compilers.patch \
->       file://AArch64-port.patch \
-> +
-> + file://Fix-test-case-link-failure-on-PowerPC-systems-with-Altivec.patc
-> + h \
->   "
+> diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb =
+b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+> index 0c0cac2..508bab4 100644
+> --- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+> +++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
+> @@ -1,4 +1,4 @@
+> -SUMMARY =3D "CyaSSL Embedded SSL Library"
+> +SUMMARY =3D "CyaSSL Lightweight, Embedded SSL Library"
+>  DESCRIPTION =3D "CyaSSL is a lightweight SSL library written in C and \
+>                 optimized for embedded and RTOS environments. It can be \
+>                 Up to 20 times smaller than OpenSSL while still supportin=
+g \
+> @@ -11,8 +11,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5=
+fce4486a80fdaf4a4263"
+> =20
+>  SRC_URI =3D "http://www.yassl.com/${BP}.zip"
+> =20
+> -SRC_URI[md5sum] =3D "72477eb50697e759d309c49cb1aef18a"
+> -SRC_URI[sha256sum] =3D "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2ad=
+c16d2507b5d0b03e"
+> +SRC_URI[md5sum] =3D "9f076e82d32bea986651ada34c49f6c0"
+> +SRC_URI[sha256sum] =3D "c9e97cd3fa4697e55328c2016965ac4b304fcef45a10559c=
+af540c42f1d5e93a"
+> =20
+>  inherit autotools
+> =20
+> --=20
+> 1.9.1
 >=20
->   SRC_URI[md5sum] =3D "fb4ea2f6fbbe45bf032cd36e586883ce"
-> --
-> 1.7.9.5
->=20
->=20
-> // Robert
->=20
-> On 09/23/2014 03:04 PM, ting.liu@freescale.com wrote:
-> > From: Ting Liu <ting.liu@freescale.com>
-> >
-> > Signed-off-by: Ting Liu <ting.liu@freescale.com>
-> > ---
-> >   ...k-failure-on-PowerPC-systems-with-Altivec.patch | 31
-> ++++++++++++++++++++++
-> >   meta-oe/recipes-support/libunwind/libunwind_1.1.bb |  1 +
-> >   2 files changed, 32 insertions(+)
-> >   create mode 100644 meta-oe/recipes-support/libunwind/libunwind/Fix-te=
-st-
-> case-link-failure-on-PowerPC-systems-with-Altivec.patch
-> >
-> > diff --git a/meta-oe/recipes-support/libunwind/libunwind/Fix-test-case-=
-link-
-> failure-on-PowerPC-systems-with-Altivec.patch b/meta-oe/recipes-
-> support/libunwind/libunwind/Fix-test-case-link-failure-on-PowerPC-systems=
--
-> with-Altivec.patch
-> > new file mode 100644
-> > index 0000000..e8f4382
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/libunwind/libunwind/Fix-test-case-link-
-> failure-on-PowerPC-systems-with-Altivec.patch
-> > @@ -0,0 +1,31 @@
-> > +From 4c62c4a9556f92495d93eddc7641497e1ce1e35c Mon Sep 17 00:00:00 2001
-> > +From: Ulrich Weigand <uweigand@de.ibm.com>
-> > +Date: Tue, 17 Dec 2013 15:00:54 +0100
-> > +Subject: [PATCH] Fix test case link failure on PowerPC systems with Al=
-tivec
-> > +
-> > +Upstream-Status:backport
-> > +
-> > +On systems where the system compiler supports Altivec by default,
-> > +the libunwind Makefile will attempt to build an extra test case
-> > +ppc64-test-altivec.  Unfortunately, the link step will fail since
-> > +the Makefile does not actually link against the libunwind library.
-> > +
-> > +Fixed by adding the appropriate LDADD macro.
-> > +
-> > +Signed-off-by: Ulrich Weigand <uweigand@de.ibm.com>
-> > +---
-> > + tests/Makefile.am |    1 +
-> > + 1 files changed, 1 insertions(+), 0 deletions(-)
-> > +
-> > +diff --git a/tests/Makefile.am b/tests/Makefile.am
-> > +index 0e30536..9c76628 100644
-> > +--- a/tests/Makefile.am
-> > ++++ b/tests/Makefile.am
-> > +@@ -201,3 +201,4 @@ Lia64_test_rbs_LDADD =3D $(LIBUNWIND_local)
-> > + Lia64_test_readonly_LDADD =3D $(LIBUNWIND_local)
-> > + ia64_test_dyn1_LDADD =3D $(LIBUNWIND)
-> > + ia64_test_sig_LDADD =3D $(LIBUNWIND)
-> > ++ppc64_test_altivec_LDADD =3D $(LIBUNWIND)
-> > +--
-> > +1.7.2.5
-> > +
-> > diff --git a/meta-oe/recipes-support/libunwind/libunwind_1.1.bb b/meta-
-> oe/recipes-support/libunwind/libunwind_1.1.bb
-> > index bc38e36..18bca0e 100644
-> > --- a/meta-oe/recipes-support/libunwind/libunwind_1.1.bb
-> > +++ b/meta-oe/recipes-support/libunwind/libunwind_1.1.bb
-> > @@ -1,4 +1,5 @@
-> >   require libunwind.inc
-> >
-> > +SRC_URI +=3D "file://Fix-test-case-link-failure-on-PowerPC-systems-wit=
-h-
-> Altivec.patch"
-> >   SRC_URI[md5sum] =3D "fb4ea2f6fbbe45bf032cd36e586883ce"
-> >   SRC_URI[sha256sum] =3D
-> "9dfe0fcae2a866de9d3942c66995e4b460230446887dbdab302d41a8aee8d09a"
-> >
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--eMP3JyRexyk9c0Bv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlQ87ewACgkQN1Ujt2V2gBwYkACgkNdLhg3yj3YuzNx4ab7/G1p0
+aIYAn3SwptQ6NVMX6TQDnIizyRqtw3+u
+=2fj3
+-----END PGP SIGNATURE-----
+
+--eMP3JyRexyk9c0Bv--
