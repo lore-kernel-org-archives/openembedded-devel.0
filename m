@@ -1,40 +1,41 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B0B171919
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 806B671915
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 22:14:50 +0000 (UTC)
-Received: by mail-wg0-f42.google.com with SMTP id z12so27500wgg.13
+	Tue, 14 Oct 2014 22:14:53 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id h11so7236635wiw.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 15:14:52 -0700 (PDT)
+	Tue, 14 Oct 2014 15:14:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=rVfwM+PGSWbYEHL8+tN24J4n87OBCwe+e9i9MVc8oOQ=;
-	b=GV6Jlx4JfI4uElKsuvYvJbOw8QNIalzzZMesPgWmGIYk8VkHl7puJlOuR7f3VmFBO8
-	v1a1FwZQwKlm9JvrcD3yjbPeXoPGwZNq+69UhXfNwruztcpC4ecOk/Rxha79wsewXSu3
-	lPNRxuV1xlFKVYtdrMQyrR1lJCBFP0UroznpOKJi2QK0utAZUjyR7wO9dlnhl0/Dmsif
-	Ss6n5Kalxm/MmkQAhABPE2pAk352XXpz9BgSR/wo7L2Cq+bjQ1yNMfsi+b6yQLYI/rvT
-	Bsh5Oin7TDS5yFZUC0WZLIGJUjt/8Bxr+nlzrhPHtruc4aWEy8u90cfXH0pPwxVLGXuB
-	YWDg==
-X-Received: by 10.194.2.168 with SMTP id 8mr8365258wjv.78.1413324891984;
-	Tue, 14 Oct 2014 15:14:51 -0700 (PDT)
+	bh=8SHZ7iTcsu9wECtdAW3DTxpwFg8S2SoyMDBIDMhdnY4=;
+	b=ckZyrUCj1m3OAx0m7sV32edw9fIHG0BqcEuh8JGhHBGOfIYoCr9Ol9SqB17wonr1fP
+	IqUyXvCjRYBMGJE3iTxTdwZ8oxyZLthfnQ+mjqzNjO/z7W984uu3965s8PksSePMKYqR
+	myZq7rWLl2xFSw4cdkbO7qucXvRFeGX4o2NA2s3gDi8brxSq4uF0PsoomBaIhwPZj0Ml
+	wDLHWdwtF4W02iwFd4j4S7NsY56acXI5jUNTzigZpqBdrfFYI25Fi+6JtTZp4wyoq68O
+	qU0lcOSzmdXevhS28KkCeq66p7uVeYeIPa6Uyn3Urv+gVMueggcU//StLDvGUt0WQz+d
+	xDdw==
+X-Received: by 10.180.12.50 with SMTP id v18mr8241530wib.60.1413324894257;
+	Tue, 14 Oct 2014 15:14:54 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-176-198-252-150.hsi05.unitymediagroup.de. [176.198.252.150])
 	by mx.google.com with ESMTPSA id
-	eg8sm17132892wib.15.2014.10.14.15.14.51
+	eg8sm17132892wib.15.2014.10.14.15.14.53
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 Oct 2014 15:14:51 -0700 (PDT)
+	Tue, 14 Oct 2014 15:14:53 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Oct 2014 00:14:25 +0200
-Message-Id: <1413324868-11856-13-git-send-email-schnitzeltony@googlemail.com>
+Date: Wed, 15 Oct 2014 00:14:27 +0200
+Message-Id: <1413324868-11856-15-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1413324868-11856-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1413324868-11856-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 12/15] tumbler: make build deterministic by adding PACKAGECONFIG for gstreamer-thumbnailer
+Subject: [PATCH 14/15] geany update to 1.24.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,30 +53,29 @@ X-List-Received-Date: Tue, 14 Oct 2014 22:14:54 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* disabled by default
-* fixes:
-  | tumbler-0.1.30: tumbler rdepends on gstreamer1.0, but it isn't a build dependency? [build-deps]
-  | tumbler-0.1.30: tumbler rdepends on libgsttag-1.0, but it isn't a build dependency? [build-deps]
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-devtools/geany/{geany_1.23.bb => geany_1.24.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/geany/{geany_1.23.bb => geany_1.24.1.bb} (73%)
 
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
-index 9f361e9..5359545 100644
---- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
-@@ -17,6 +17,9 @@ do_install_append() {
-     ln -sf ${libdir}/tumbler-1/plugins/cache/tumbler-xdg-cache.so ${D}${libdir}/tumbler-1/plugins/cache/tumbler-cache-plugin.so
- }
+diff --git a/meta-oe/recipes-devtools/geany/geany_1.23.bb b/meta-oe/recipes-devtools/geany/geany_1.24.1.bb
+similarity index 73%
+rename from meta-oe/recipes-devtools/geany/geany_1.23.bb
+rename to meta-oe/recipes-devtools/geany/geany_1.24.1.bb
+index 593ba66..f765e2c 100644
+--- a/meta-oe/recipes-devtools/geany/geany_1.23.bb
++++ b/meta-oe/recipes-devtools/geany/geany_1.24.1.bb
+@@ -10,7 +10,7 @@ SRC_URI = " \
+     http://download.geany.org/${BP}.tar.bz2 \
+     file://0001-configure.ac-remove-additional-c-test.patch \
+ "
+-SRC_URI[md5sum] = "4290e8c32305e916f57bb0f0233bbec2"
+-SRC_URI[sha256sum] = "cdd4a772694803c837ae59e56f7bdc2faba174509317211f522e7d25dfcbe8b0"
++SRC_URI[md5sum] = "d225104cef3973164d70116d46239606"
++SRC_URI[sha256sum] = "7fb505d9b01fe6874890525f837644a6a38c23a372bb068c65ef3673108a8c33"
  
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[gstreamer-thumbnailer] = "--enable-gstreamer-thumbnailer,--disable-gstreamer-thumbnailer,gstreamer1.0 gstreamer1.0-plugins-base"
-+
- FILES_${PN} += "${datadir}/dbus-1/services \
-                 ${libdir}/tumbler-1/tumblerd \
-                 ${libdir}/tumbler-1/plugins/*.so \
+ FILES_${PN} += "${datadir}/icons"
 -- 
 1.8.3.1
 
