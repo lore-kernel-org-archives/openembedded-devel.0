@@ -1,39 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id E110C6ACB8
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CA8B6ACB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 09:31:43 +0000 (UTC)
-Received: by mail-wg0-f46.google.com with SMTP id l18so10498931wgh.5
+	Tue, 14 Oct 2014 09:38:03 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id h11so6169881wiw.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 02:31:44 -0700 (PDT)
+	Tue, 14 Oct 2014 02:38:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=gE+GRnXzQF3mb50ZELaAcx/EcN+vpExDOm8RsBR5Ok4=;
-	b=DDBF/FDoNkHpckDA6eed0jUJ3jcHdTtNkEXDblssiP5BG1xY4qq/CrXLWeJLx3fnrN
-	C7j+vwUJ04E5ItUMwMdM36LxzLH+vF5rm6W8cLWy0y6JGR+3qq7zVcy0oIoXn1AwPmar
-	E3k0bPg2lxih1rNeVb5tnKMsGd8E607lL2BrJ5Nopv9dr29b251itD+i2SG3vfQ9emKd
-	eqUkYxMtisQDSiB5HWu7bamF333QVcFVtb8KjtgaGAYVRg9fKGpmrIksPX4hMiG6bpeL
-	8oKN5Bh3jEHV1B8X8OHiEbBCVE1eVxRQ+ArXP394NKThrP7HkOAerFwXaMl+GccOgtz3
-	B6Sw==
-X-Received: by 10.194.90.144 with SMTP id bw16mr847451wjb.133.1413279104247;
-	Tue, 14 Oct 2014 02:31:44 -0700 (PDT)
+	bh=49CcXwO7iRYS4EBed5vwEI+xGUWtRZ1yVhKP8DOK000=;
+	b=UIrET8f15mRiLdTY4em5YMQT29tOMb0soyqmrGSwha+MQw2MH+ZSavZTmWaM75scG3
+	4dzP6fVCgBRFpFrJRqh36cM/HxYL8FTChZrM4uouBQ77tHCne+jLvxMfHrhJ2cWZ9Om6
+	ZZkmUl/p11Hjnv4SxV6ktuVDz+ktuzGwKRmBjX3UnWLJsMN2fb2GhU+DmQGFOqX9KeLb
+	yVOZKO6jbwU+miNpQC0TxTiqMpGHrYAXdSXj46IbxKl5uXCPgC+hdCGdge97Mer6hgDt
+	fALFVAxmiOwB0CAr+UzZ+lzn5/7J1YmYldZ5g3RkOJ7npILF4j9QD7q9BH2kRKdb/tH/
+	AwvA==
+X-Received: by 10.194.3.2 with SMTP id 2mr2474583wjy.89.1413279483582;
+	Tue, 14 Oct 2014 02:38:03 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	pn4sm4593150wjc.38.2014.10.14.02.31.43
+	pm6sm19518501wjb.36.2014.10.14.02.38.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 Oct 2014 02:31:43 -0700 (PDT)
+	Tue, 14 Oct 2014 02:38:02 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 14 Oct 2014 11:33:32 +0200
+Date: Tue, 14 Oct 2014 11:39:51 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141014093332.GI3000@jama>
-References: <BLU436-SMTP515C53ADE83EDFDE88FD20D6AC0@phx.gbl>
+Message-ID: <20141014093951.GJ3000@jama>
+References: <1411978974-17996-1-git-send-email-Chong.Lu@windriver.com>
+	<5436338B.10408@windriver.com> <543CD8B2.2010805@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <BLU436-SMTP515C53ADE83EDFDE88FD20D6AC0@phx.gbl>
+In-Reply-To: <543CD8B2.2010805@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH v2] cyassl: add version 3.2.0 with updates
+Subject: Re: [meta-oe][PATCH] samba: add systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,56 +49,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Oct 2014 09:31:50 -0000
-X-Groupsio-MsgNum: 52489
+X-List-Received-Date: Tue, 14 Oct 2014 09:38:08 -0000
+X-Groupsio-MsgNum: 52490
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eMP3JyRexyk9c0Bv"
+	protocol="application/pgp-signature"; boundary="t5NgoZwlhlUmGr82"
 Content-Disposition: inline
 
---eMP3JyRexyk9c0Bv
+--t5NgoZwlhlUmGr82
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 13, 2014 at 11:51:59AM -0600, lchristina26 wrote:
-> Update 3.2.0 to include the correct md5sum and sha256sum values.
+On Tue, Oct 14, 2014 at 04:02:58PM +0800, Chong Lu wrote:
+> ping
 
-Send the commit which will squash both changes (upgrade together with
-checksums update)
+added in master-next, thanks for ping
 
-> Signed-off-by: Leah Thompson <lchristina26@hotmail.com>
-> ---
->  meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
 >=20
-> diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb =
-b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
-> index 0c0cac2..508bab4 100644
-> --- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
-> +++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.2.0.bb
-> @@ -1,4 +1,4 @@
-> -SUMMARY =3D "CyaSSL Embedded SSL Library"
-> +SUMMARY =3D "CyaSSL Lightweight, Embedded SSL Library"
->  DESCRIPTION =3D "CyaSSL is a lightweight SSL library written in C and \
->                 optimized for embedded and RTOS environments. It can be \
->                 Up to 20 times smaller than OpenSSL while still supportin=
-g \
-> @@ -11,8 +11,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5=
-fce4486a80fdaf4a4263"
-> =20
->  SRC_URI =3D "http://www.yassl.com/${BP}.zip"
-> =20
-> -SRC_URI[md5sum] =3D "72477eb50697e759d309c49cb1aef18a"
-> -SRC_URI[sha256sum] =3D "85a79009d2a7468910dfb1e4b975e0b00a42c695f4f1a2ad=
-c16d2507b5d0b03e"
-> +SRC_URI[md5sum] =3D "9f076e82d32bea986651ada34c49f6c0"
-> +SRC_URI[sha256sum] =3D "c9e97cd3fa4697e55328c2016965ac4b304fcef45a10559c=
-af540c42f1d5e93a"
-> =20
->  inherit autotools
-> =20
-> --=20
-> 1.9.1
+> Best Regards
+> Chong
+>=20
+> On 10/09/2014 03:04 PM, Chong Lu wrote:
+> > ping
+> >
+> > //Chong
+> >
+> > On 09/29/2014 04:22 PM, Chong Lu wrote:
+> >> Add systemd service for samba.
+> >>
+> >> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> >> ---
+> >>   meta-oe/recipes-connectivity/samba/samba.inc       | 32=20
+> >> +++++++++++++++++++++-
+> >>   .../recipes-connectivity/samba/samba/nmb.service   | 12 ++++++++
+> >>   .../recipes-connectivity/samba/samba/smb.service   | 13 +++++++++
+> >>   .../samba/samba/winbind.service                    | 12 ++++++++
+> >>   4 files changed, 68 insertions(+), 1 deletion(-)
+> >>   create mode 100644=20
+> >> meta-oe/recipes-connectivity/samba/samba/nmb.service
+> >>   create mode 100644=20
+> >> meta-oe/recipes-connectivity/samba/samba/smb.service
+> >>   create mode 100644=20
+> >> meta-oe/recipes-connectivity/samba/samba/winbind.service
+> >>
+> >> diff --git a/meta-oe/recipes-connectivity/samba/samba.inc=20
+> >> b/meta-oe/recipes-connectivity/samba/samba.inc
+> >> index 3da0562..4392821 100644
+> >> --- a/meta-oe/recipes-connectivity/samba/samba.inc
+> >> +++ b/meta-oe/recipes-connectivity/samba/samba.inc
+> >> @@ -8,11 +8,18 @@ SRC_URI =3D=20
+> >> "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
+> >>              file://init.samba \
+> >>              file://init.winbind \
+> >>              file://tdb.pc \
+> >> +           file://nmb.service \
+> >> +           file://smb.service \
+> >> +           file://winbind.service \
+> >>   "
+> >>     S =3D "${WORKDIR}/samba-${PV}/source"
+> >>   -inherit autotools-brokensep update-rc.d
+> >> +inherit autotools-brokensep update-rc.d systemd
+> >> +
+> >> +SYSTEMD_PACKAGES =3D "${PN} winbind"
+> >> +SYSTEMD_SERVICE_${PN} =3D "nmb.service smb.service"
+> >> +SYSTEMD_SERVICE_winbind =3D "winbind.service"
+> >>     SAMBAMMAP =3D "no"
+> >>   SAMBAMMAP_libc-glibc =3D "yes"
+> >> @@ -103,6 +110,29 @@ do_install_append() {
+> >>         # usershare mount place
+> >>       mkdir -p ${D}${localstatedir}/lib/samba/usershares
+> >> +
+> >> +    # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
+> >> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false',=
+=20
+> >> 'true', d)}; then
+> >> +        rm -rf ${D}${sysconfdir}/init.d/
+> >> +    fi
+> >> +
+> >> +    install -d ${D}${systemd_unitdir}/system
+> >> +    for i in nmb smb winbind; do
+> >> +        install -m 0644 ${WORKDIR}/$i.service=20
+> >> ${D}${systemd_unitdir}/system
+> >> +    done
+> >> +    sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
+> >> +        -e 's,@SBINDIR@,${sbindir},g' \
+> >> +        -i ${D}${systemd_unitdir}/system/*.service
+> >> +}
+> >> +
+> >> +DEPENDS_append =3D " ${@bb.utils.contains('DISTRO_FEATURES',=20
+> >> 'systemd', 'systemd-systemctl-native', '', d)}"
+> >> +pkg_postinst_${PN} () {
+> >> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd sysvinit',=20
+> >> 'true', 'false', d)}; then
+> >> +        if [ -n "$D" ]; then
+> >> +            OPTS=3D"--root=3D$D"
+> >> +        fi
+> >> +        systemctl $OPTS mask samba.service
+> >> +    fi
+> >>   }
+> >>     pkg_postinst_libnss-winbind () {
+> >> diff --git a/meta-oe/recipes-connectivity/samba/samba/nmb.service=20
+> >> b/meta-oe/recipes-connectivity/samba/samba/nmb.service
+> >> new file mode 100644
+> >> index 0000000..91b9975
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-connectivity/samba/samba/nmb.service
+> >> @@ -0,0 +1,12 @@
+> >> +[Unit]
+> >> +Description=3DSamba NMB Daemon
+> >> +After=3Dsyslog.target network.target
+> >> +
+> >> +[Service]
+> >> +Type=3Dforking
+> >> +PIDFile=3D/var/run/nmbd.pid
+> >> +ExecStart=3D@SBINDIR@/nmbd
+> >> +ExecReload=3D@BASE_BINDIR@/kill -HUP $MAINPID
+> >> +
+> >> +[Install]
+> >> +WantedBy=3Dmulti-user.target
+> >> diff --git a/meta-oe/recipes-connectivity/samba/samba/smb.service=20
+> >> b/meta-oe/recipes-connectivity/samba/samba/smb.service
+> >> new file mode 100644
+> >> index 0000000..bc0707a
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-connectivity/samba/samba/smb.service
+> >> @@ -0,0 +1,13 @@
+> >> +[Unit]
+> >> +Description=3DSamba SMB Daemon
+> >> +After=3Dsyslog.target network.target nmb.service winbind.service
+> >> +
+> >> +[Service]
+> >> +Type=3Dforking
+> >> +PIDFile=3D/var/run/smbd.pid
+> >> +LimitNOFILE=3D16384
+> >> +ExecStart=3D@SBINDIR@/smbd
+> >> +ExecReload=3D@BASE_BINDIR@/kill -HUP $MAINPID
+> >> +
+> >> +[Install]
+> >> +WantedBy=3Dmulti-user.target
+> >> diff --git a/meta-oe/recipes-connectivity/samba/samba/winbind.service=
+=20
+> >> b/meta-oe/recipes-connectivity/samba/samba/winbind.service
+> >> new file mode 100644
+> >> index 0000000..bff6fb8
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-connectivity/samba/samba/winbind.service
+> >> @@ -0,0 +1,12 @@
+> >> +i[Unit]
+> >> +Description=3DSamba Winbind Daemon
+> >> +After=3Dsyslog.target network.target nmb.service
+> >> +
+> >> +[Service]
+> >> +Type=3Dforking
+> >> +PIDFile=3D/var/run/winbindd.pid
+> >> +ExecStart=3D@SBINDIR@/winbindd
+> >> +ExecReload=3D@BASE_BINDIR@/kill -HUP $MAINPID
+> >> +
+> >> +[Install]
+> >> +WantedBy=3Dmulti-user.target
+> >
 >=20
 > --=20
 > _______________________________________________
@@ -107,16 +218,16 @@ af540c42f1d5e93a"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---eMP3JyRexyk9c0Bv
+--t5NgoZwlhlUmGr82
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlQ87ewACgkQN1Ujt2V2gBwYkACgkNdLhg3yj3YuzNx4ab7/G1p0
-aIYAn3SwptQ6NVMX6TQDnIizyRqtw3+u
-=2fj3
+iEYEARECAAYFAlQ872cACgkQN1Ujt2V2gByeEgCgg+v75wEFhV9GyZqYYJVhLIdC
+k2cAn2IKpSD6VXJSr9QQo6n7aqirEw5Z
+=E7BA
 -----END PGP SIGNATURE-----
 
---eMP3JyRexyk9c0Bv--
+--t5NgoZwlhlUmGr82--
