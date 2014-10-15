@@ -1,43 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 7000F65D56
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f181.google.com (mail-vc0-f181.google.com
+	[209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0591865D56
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Oct 2014 04:28:46 +0000 (UTC)
-Received: by mail-pd0-f179.google.com with SMTP id r10so534327pdi.10
+	Wed, 15 Oct 2014 07:10:03 +0000 (UTC)
+Received: by mail-vc0-f181.google.com with SMTP id le20so465783vcb.40
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Oct 2014 21:28:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=4MJBRR1GTHrwQGnGt6kpIxQlqVGOLxW3fzDNZcIov9o=;
-	b=LW3OXLNGfQ/9GOYwZE2FjWQqd8MmmPxUB30tbBvK9hChPz+ESg5EVjhXqILNVLzTMY
-	GHvFb0vjKIbLLXvvDZ3QjX4NXcMRiaDSY8pliOJWLj9mEZPgYgfMnITTIXBmbUYzO1YJ
-	QnTmNxxxJwViRGaEs5CxJaTiDEbC48sNPA0+Up5ggOkNbn/dcBEqjIVnBEic55dSDl7q
-	7Ub3nNLa0xmLPRTIbeytmys+JBU5EHXleDPhl6iibqq/k6KsciD7WsRuStzEcy1kmPzJ
-	G1W0fPY00Ro8fYJs2yADrDLmHfeU7QhMTj+kKlofeTnAXIYF+3so1kPzHLOMtwQVJaPW
-	NfbQ==
-X-Received: by 10.70.38.165 with SMTP id h5mr9510434pdk.121.1413347327425;
-	Tue, 14 Oct 2014 21:28:47 -0700 (PDT)
-Received: from ?IPv6:2601:c:9380:601:129:897e:8c20:5edf?
-	([2601:c:9380:601:129:897e:8c20:5edf])
-	by mx.google.com with ESMTPSA id
-	oh5sm11373115pbc.76.2014.10.14.21.28.45 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 Oct 2014 21:28:46 -0700 (PDT)
-Message-ID: <543DF7FC.9040505@gmail.com>
-Date: Tue, 14 Oct 2014 21:28:44 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.1.2
+	Wed, 15 Oct 2014 00:10:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=Lb4DhG6BHbaehrGNikJ+qykMRz0dqqsdPloisA3lBcI=;
+	b=iRqOijeoSTJsxuDx0P8e1kEy5FLFeoLajB++nghY9r5xV3Kzy8j9cC+OcPQh55kZ55
+	sw1c+VWYaZaMVH0Yc1SwWBtgwox2Kh7RCeUBeqNm+COfFNgQUFO5KtphBN+ErPWXoTA9
+	XuXYvWKcqPxFEn39UXmCmuMCemLP8T91dsixBjjTFh7EmJ6p0vicgQP35cEL+0bdPT4P
+	UmXG/kkXpBLxuNlxWKZyiuz0QKnXBnwYOHsFCUYEKRYC65gKEgC5LSpsaOa4JkrVoAM3
+	Zdd+9Lo6sVbrFhrRv1aK5MhcsYYZ4k0yfPnT2DMZodGtc6jS/XhM/dfFHj1A2LpOXlSe
+	Bg1Q==
 MIME-Version: 1.0
-To: Otavio Salvador <otavio@ossystems.com.br>, 
-	Cliff Brake <cbrake@bec-systems.com>
-References: <CAOd_LFzDxbcVWX10B=KS5F-LGYVv-XRza-HmqXtGt8QraNMojA@mail.gmail.com>
-	<CAP9ODKq7ZbvWsFehHutdvT=ehbTbCtCHvN4g397-3HmcGPxdjQ@mail.gmail.com>
-In-Reply-To: <CAP9ODKq7ZbvWsFehHutdvT=ehbTbCtCHvN4g397-3HmcGPxdjQ@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][daisy] pull request imagemagick: fix SRC_URI
+X-Received: by 10.52.0.98 with SMTP id 2mr8520777vdd.28.1413357004391; Wed, 15
+	Oct 2014 00:10:04 -0700 (PDT)
+Received: by 10.52.102.204 with HTTP; Wed, 15 Oct 2014 00:10:04 -0700 (PDT)
+In-Reply-To: <20141014222048.GN3000@jama>
+References: <1413324868-11856-1-git-send-email-schnitzeltony@googlemail.com>
+	<20141014222048.GN3000@jama>
+Date: Wed, 15 Oct 2014 09:10:04 +0200
+Message-ID: <CALbNGRSXnLHqxig26y_bpCe2TQgHcVgL4rh3ObN3Dfw8GoHZnw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 00/15] updates and qa fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,35 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Oct 2014 04:28:53 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Oct 2014 07:10:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Armin Kuster <akuster808@gmail.com>
+On Wed, Oct 15, 2014 at 12:20 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-On 10/14/2014 10:57 AM, Otavio Salvador wrote:
-> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+> On Wed, Oct 15, 2014 at 12:14:13AM +0200, Andreas M=C3=BCller wrote:
+> > The following changes since commit
+> d1951db22a9971a1bb7cf25810ec3bdc9669a6f1:
+> >
+> >   modphp: using PKGCONFIG and PACKAGECONFIG for libxml and soap
+> (2014-10-14 11:48:58 +0200)
 >
-> On Tue, Oct 14, 2014 at 11:52 AM, Cliff Brake <cbrake@bec-systems.com> wrote:
->> The following changes since commit 8e6f6e49c99a12a0382e48451f37adac0181362f:
->>
->>    libmikmod: Adjust SRC_URI (2014-09-26 09:22:37 -0400)
->>
->> are available in the git repository at:
->>
->>    https://github.com/cbrake/meta-openembedded.git daisy
->>
->> for you to fetch changes up to 518cd119a8724dbd485a5d5c5047de59e8fbd652:
->>
->>    imagemagick: fix SRC_URI (2014-10-14 10:49:48 -0400)
->>
->> ----------------------------------------------------------------
->> Javier Viguera (1):
->>        imagemagick: fix SRC_URI
->>
->>   meta-oe/recipes-support/imagemagick/imagemagick_6.8.8.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
+> You want this in dizzy right? I'm happy to see QA fixes, thanks a lot!
 >
->
->
+> Would be fine if these survive autobuilder and find the way into dizzy
+
+Andreas
 
