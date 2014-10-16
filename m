@@ -1,25 +1,21 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D5C0718FF
+Return-Path: <anders@chargestorm.se>
+Received: from stoexhub03.domain01.net (STOEXHUB03.domain01.net
+	[83.145.59.144])
+	by mail.openembedded.org (Postfix) with ESMTP id 30DEC60DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 09:05:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9G959MN016213
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 02:05:09 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Thu, 16 Oct 2014 02:05:09 -0700
-From: Kai Kang <kai.kang@windriver.com>
+	Thu, 16 Oct 2014 09:07:59 +0000 (UTC)
+Received: from localhost (217.6.91.17) by stoexhub03.domain01.net (10.12.10.3)
+	with Microsoft SMTP Server id 8.3.279.1;
+	Thu, 16 Oct 2014 11:07:56 +0200
+From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Oct 2014 17:02:41 +0800
-Message-ID: <1413450161-14160-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Thu, 16 Oct 2014 11:07:20 +0200
+Message-ID: <cover.1413449871.git.anders@chargestorm.se>
+X-Mailer: git-send-email 2.1.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.153.152]
-Subject: [meta-networking][PATCH] postfix: remove overriding config config_directory
+X-GFI-SMTP-Submission: 1
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-qt5][PATCH 0/1] Enable nativesdk-qtbase to keep additional libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +29,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2014 09:05:09 -0000
+X-List-Received-Date: Thu, 16 Oct 2014 09:08:03 -0000
 Content-Type: text/plain
 
-postfix 2.11.1 adds overriding config check. In postinstall script, it
-calls command newaliases to read configure file main.cf_2.0.
-config_directory is set in config main.cf_2.0, but it is an overriding
-config and warning shows when build an image:
+We have a usecase where we need to run a tool to transform a protocol spec. to cpp (kdwsdl2cpp). That tool is built using Qt5, and requires a couple of extra Qt-libraries, among the libQt5Xml.so.*. Today the nativesdk-qtbase recipe just unconditionally removes every library, except for a couple hardcoded ones.
 
-WARNING: log_check: There is a warn message in the logfile
-WARNING: log_check: Matched keyword: [warn]
-WARNING: log_check: newaliases: warning:
-/buildarea3/kkang/poky/qemuarm-build/tmp/work/qemuarm-poky-linux-gnueabi/core-
-image-minimal/1.0-r0/rootfs/etc/postfix/main.cf, line 27: overriding
-earlier entry: config_directory=/buildarea3/kkang/
-poky/qemuarm-build/tmp/work/qemuarm-poky-linux-gnueabi/core-image-minimal/1.0-r0/rootfs/etc/postfix
+This patch add an extra variable, in which you can specify additional libraries to keep.
 
-Remove config_directory setting in main.cf_2.0 to avoid this warning.
+The following changes since commit 478fe949a957471a4d20450f6e9375fe1d628591:
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-networking/recipes-daemons/postfix/files/main.cf_2.0 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  qtbase: don't stage the fonts directory (2014-10-08 17:52:08 +0200)
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0 b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-index a128faa..bb31451 100644
---- a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-+++ b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-@@ -24,7 +24,7 @@ virtual_gid_maps = static:`grep vmail /etc/passwd | cut -d ":" -f 4`
- 
- 
- # General stuff here again
--config_directory = /etc/postfix
-+#config_directory = /etc/postfix
- sample_directory = /etc/postfix
- queue_directory = /var/spool/postfix
- mail_spool_directory = /var/spool/mail
+are available in the git repository at:
+
+  git://github.com/darander/meta-qt5 nativesdk-qtbase
+  https://github.com/darander/meta-qt5/tree/nativesdk-qtbase
+
+Anders Darander (1):
+  nativesdk-qtbase: make it possible to keep additional libraries
+
+ recipes-qt/qt5/nativesdk-qtbase.inc | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
 -- 
-1.9.1
+1.8.4.5
 
 
