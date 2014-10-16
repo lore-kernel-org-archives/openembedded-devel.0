@@ -1,24 +1,24 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C7DA60DD7
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1224960DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 06:31:14 +0000 (UTC)
+	Thu, 16 Oct 2014 09:02:49 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9G6VFIe010197
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9G92m6l015813
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Oct 2014 23:31:15 -0700 (PDT)
-Received: from PKE-CLU1-D1.corp.ad.wrs.com (128.224.162.204) by
+	Thu, 16 Oct 2014 02:02:50 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 15 Oct 2014 23:31:15 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
+	14.3.174.1; Thu, 16 Oct 2014 02:02:48 -0700
+From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Oct 2014 14:31:13 +0800
-Message-ID: <1413441073-2727-1-git-send-email-Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Thu, 16 Oct 2014 17:04:05 +0800
+Message-ID: <1413450245-32047-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] quagga: remove watchquagga when start with systemd
+Subject: [meta-oe][PATCH] vim: add ncurses-terminfo-base as a runtime dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,48 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2014 06:31:20 -0000
+X-List-Received-Date: Thu, 16 Oct 2014 09:02:50 -0000
 Content-Type: text/plain
 
-When we start with sysvinit, watchquagga uses quagga init script to
-monitor zebra daemon. But we need not do this in systemd environment.
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+Without this patch, we may have problem using vim.
+Steps to reproduce the problem is as follows:
+1. Set NO_RECOMMENDATIONS to "1".
+2. bitbake core-image-minimal
+3. runqemu qemux86
+4. On target, execute `vi 1.txt'.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-protocols/quagga/quagga.inc            |    5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/vim/vim_7.4.373.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 9bdd4d5..2c0817b 100644
---- a/meta-networking/recipes-protocols/quagga/quagga.inc
-+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-@@ -62,7 +62,7 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
-                 --enable-exampledir=${docdir}/quagga/examples/ \
-                 --enable-vtysh \
-                 --enable-isisd \
--                --enable-watchquagga \
-+                ${@base_contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
-                 --enable-ospf-te \
-                 --enable-opaque-lsa \
-                 --enable-ipv6 \
-@@ -135,6 +135,7 @@ do_install () {
-     # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
-         rm -rf ${D}${sysconfdir}/init.d/
-+        rm -f ${D}${sysconfdir}/default/watchquagga
-     fi
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.373.bb b/meta-oe/recipes-support/vim/vim_7.4.373.bb
+index 81c0ddf..14fee3e 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.373.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.373.bb
+@@ -93,6 +93,7 @@ FILES_${PN}-common = " \
+     ${datadir}/${BPN}/${VIMDIR}/tools \
+ "
  
-     install -d ${D}${systemd_unitdir}/system
-@@ -160,7 +161,7 @@ pkg_postinst_${PN} () {
- # Split into a main package and separate per-protocol packages
- PACKAGE_BEFORE_PN = "${PN}-ospfd ${PN}-ospf6d ${PN}-babeld ${PN}-bgpd \
-                      ${PN}-ripd ${PN}-ripngd ${PN}-isisd \
--                     ${PN}-ospfclient ${PN}-watchquagga"
-+                     ${PN}-ospfclient ${@base_contains('DISTRO_FEATURES', 'sysvinit', '${PN}-watchquagga', '', d)}"
- 
- RDEPENDS_${PN} += "${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
++RDEPENDS_${PN} = "ncurses-terminfo-base"
+ # Recommend that runtime data is installed along with vim
+ RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
  
 -- 
-1.7.9.5
+1.9.1
 
 
