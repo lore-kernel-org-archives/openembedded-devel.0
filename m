@@ -1,44 +1,37 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 540DE71968
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f173.google.com (mail-yk0-f173.google.com
+	[209.85.160.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 6FCAB60DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 12:05:21 +0000 (UTC)
-Received: by mail-pd0-f175.google.com with SMTP id v10so3137991pde.20
+	Thu, 16 Oct 2014 18:29:04 +0000 (UTC)
+Received: by mail-yk0-f173.google.com with SMTP id 200so1379856ykr.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 05:05:23 -0700 (PDT)
+	Thu, 16 Oct 2014 11:29:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=4FIaJUbBGqaEp8WKMg77YinriXUS7LQ1ANWVvgVqAlQ=;
-	b=we8Lt0Aycs+eCkbfq/+Ue0OZeht0ShhqYGr9d1DPWSuuBVQJm4rYnqhXZX2USvq32l
-	3QRATXBtFUfxxGtYqgXsw3JJDcKH4/JfMAw0oE0wt3oboAe7uFwTljBc6xsP5X6EBeb3
-	3XHbHfRAXlEAXy07wiCF8qrwUjnAMueayX9x2Q2XdSUMzh3TQhKjJkSyoyE9KvUdwGAT
-	gjAMTANGlbD3pt+oQ8f1w9Ug9fQUDUkVmbqmOxbMwROM64+/wJHt1+ohgO22W4+eEevf
-	YSX2UBlClgaDvOEjxivXz/vErBcxKnRKFwYBb+l+Y/PzEwxLLmhLMl7UfTA2TnaWS+cu
-	u7qw==
-X-Received: by 10.70.37.79 with SMTP id w15mr1137895pdj.8.1413461123347;
-	Thu, 16 Oct 2014 05:05:23 -0700 (PDT)
-Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
-	[60.242.179.244]) by mx.google.com with ESMTPSA id
-	ni1sm12140450pdb.69.2014.10.16.05.05.21 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 16 Oct 2014 05:05:22 -0700 (PDT)
-Message-ID: <543FB47C.8070405@gmail.com>
-Date: Thu, 16 Oct 2014 23:05:16 +1100
-From: Jonathan Liu <net147@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=ABX+p9lubCiCQUD27Ojmh2uS4WWH9jEHluCpllgKCBU=;
+	b=NlBEjr7RJjrQs/rKraAmL7OAzvJfF5XDJRNLAj8OUf1kK+STCikX5W8yVAojjY1Gaj
+	eARIWVBXsNRxx1zjStHLc00VBLMfk3jpK19jwwT2/Lk/r3MVEZrIDF7fjDPkr9D/piTb
+	K3hEnIzAZ/nktw3Nv2FtzZzPkDkty3NXHpWdVUBuWLtkOxWQeKBTguVf++vB8dnKoC8h
+	6Z6YKtOBH6oTqPFx0uZuGLmFwgGhsIWXDxQ9aehxogBdNXvqohdrvJBHJsUsNiFKQc8+
+	KBdmol2Bw6PHzfy7E0aphwbvvkz6hRUsaGmRAkTcy+6hd0+W22IV+ylX0LPtNDFhE24H
+	xE7A==
 MIME-Version: 1.0
-To: Peter <ppf83764@freenet.de>
-References: <F50ED7964AF8784493DDA71A307917F96F0F63@BEXBE01.christ.local>
-	<CANwerB0v4XbEzvD+9j-iGy-nrN1AF3_qFYii8b75U-qBwa6aLg@mail.gmail.com>
-	<F50ED7964AF8784493DDA71A307917F90E435CF2@BEXBE01.christ.local>
-	<543E6CDB.6070802@freenet.de> <543F91D1.9070707@gmail.com>
-	<543FB225.8020304@freenet.de>
-In-Reply-To: <543FB225.8020304@freenet.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5] How to build Qt5 with 'designer' module?
+X-Received: by 10.236.66.40 with SMTP id g28mr4098484yhd.6.1413484144973; Thu,
+	16 Oct 2014 11:29:04 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.172.8 with HTTP; Thu, 16 Oct 2014 11:29:04 -0700 (PDT)
+In-Reply-To: <a3d23e946f0b810a0157935930d68f2d3112c3eb.1413449871.git.anders@chargestorm.se>
+References: <cover.1413449871.git.anders@chargestorm.se>
+	<a3d23e946f0b810a0157935930d68f2d3112c3eb.1413449871.git.anders@chargestorm.se>
+Date: Thu, 16 Oct 2014 15:29:04 -0300
+X-Google-Sender-Auth: oEB-FoSXK86G2QkHvCeG1PjUeYo
+Message-ID: <CAP9ODKreuLcJGRRVxrBy-Yg0ca=TBZN350Qjha4qVx-LaMDojA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: Re: [meta-qt5][PATCH 1/1] nativesdk-qtbase: make it possible to keep additional libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,113 +45,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2014 12:05:22 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 16 Oct 2014 18:29:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Peter,
-
-On 16/10/2014 10:55 PM, Peter wrote:
-> Hi Jonathan,
+On Thu, Oct 16, 2014 at 6:07 AM, Anders Darander <anders@chargestorm.se> wrote:
+> In some usecases for the nativesdk, you might need some build tools that are built upon Qt5. This means
+> that we're having a need to keep more of the libraries build by nativsdk-qtbase. This patch adds the
+> infrastructure to support that
 >
-> On 10/16/2014 11:37 AM, Jonathan Liu wrote:
->> Hi Peter,
->>
->> On 15/10/2014 11:47 PM, Peter wrote:
->>> Hi Jonathan,
->>>
->>> thanks for the reply.
->>>
->>> On 13 Oktober 2014 04:30, Jonathan Liu <net147@gmail.com> wrote:
->>>
->>>> Hi Peter,
->>>>
->>>> On 9 October 2014 18:13, Fink, Peter <pfink@christ-elektronik.de> 
->>>> wrote:
->>>>> I’m trying to build a Qt application with the toolchain generated by
->>>>> openembedded (meta-toolchain-qt5).
->>>>>
->>>>> The application needs the designer-module, which I thought was
->>>>> included in the qttools package, but now I get the following error:
->>>>>
->>>>> “Project Error: Unknown module(s) in QT: designer.”
->>>>>
->>>>> What do I have to include to get the designer module?
->>>>>
->>>>> Another thing I run into was the missing syncqt.pl script in the
->>>>> toolchain as I need qftp. A link syncqt -> syncqt.pl was present.
->>>>> Is it missing by accident or for a reason?
->>>>>
->>>>> I was using Qt. 5.3.1 02861e677ab....
->>>> You can try backporting the following patches:
->>>> http://patchwork.openembedded.org/patch/81599/
->>>> http://patchwork.openembedded.org/patch/81603/
->>>
->>> I tried your patches. syncqt.pl is included now, but my application
->>> still did not compile.
->>> I had to remove qttools-plugins, because it gave me a "cannot install
->>> qttools-plugins" error while generating the toolchain - maybe this was
->>> the reason why the libs were not included?
->>> Now I tested hacking it into qtbase.inc and it seems to include the
->>> qtdesigner libs:
->>>
->>> @@ -131,6 +132,7 @@ QT_CONFIG_FLAGS += " \
->>>      -no-pch \
->>>      -no-rpath \
->>>      -pkg-config \
->>> +    -make tools \
->>>      ${EXTRA_OECONF} \
->>>  "
->>>
->>> Regards,
->>> Peter
->>>
->> Make sure you have "tools" in PACKAGECONFIG for qtbase if you are
->> overriding PACKAGECONFIG as this will add "-make tools" to 
->> QT_CONFIG_FLAGS.
->> What do you have PACKAGECONFIG set to for the qtbase recipe?
->>
->> Regards,
->> Jonathan
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> ---
+>  recipes-qt/qt5/nativesdk-qtbase.inc | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
 >
-> I thought these lines include the 'tools' PACKAGECONFIG:
-> qtbase.inc:
-> ...
-> PACKAGECONFIG[tools] = "-make tools,-nomake tools"
-> ...
-> PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs"
+> diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
+> index faecc64..ed98c80 100644
+> --- a/recipes-qt/qt5/nativesdk-qtbase.inc
+> +++ b/recipes-qt/qt5/nativesdk-qtbase.inc
+> @@ -193,6 +193,16 @@ do_configure() {
+>      bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configuring qt with qmake failed. EXTRA_OECONF was ${EXTRA_OECONF}"
+>  }
 >
-> PACKAGECONFIG ?= " \
->     ${PACKAGECONFIG_RELEASE} \
->     ${PACKAGECONFIG_DEFAULT} \
->     ${PACKAGECONFIG_OPENSSL} \
->     ${PACKAGECONFIG_GL} \
->     ${PACKAGECONFIG_FB} \
->     ${PACKAGECONFIG_X11} \
->     ${PACKAGECONFIG_FONTS} \
->     ${PACKAGECONFIG_SYSTEM} \
->     ${PACKAGECONFIG_MULTIMEDIA} \
->     ${PACKAGECONFIG_DISTRO} \
-> "
-> But maybe the PACKAGECONFIG is overridden somewhere and I missed it or 
-> I got the whole PACKAGECONFIG thing wrong. Is there a possibility to 
-> check the actually used PACKAGECONFIG or the qt5 configure command 
-> altogether?
+> +# Set the EXTRA_QTLIB variable to e.g. Xml, in order to net remove libQt5Xml.so.*
+
+... onder to *not* remove ...
+
+> +EXTRA_QTLIB ?= ""
+> +
+> +python __anonymous () {
+> +    templibs = ""
+> +    for e in d.getVar("EXTRA_QTLIB", True).split():
+> +        templibs = "%s -not -name 'libQt5%s.so*' -and" % (templibs, e)
+> +    d.setVar("QTLIBSPRESERVE", templibs)
+> +}
+> +
+>  do_install() {
+>      # Fix install paths for all
+>      find -name "Makefile*" | xargs sed -i "s,(INSTALL_ROOT)${STAGING_DIR_NATIVE}${STAGING_DIR_NATIVE},(INSTALL_ROOT)${STAGING_DIR_NATIVE},g"
+> @@ -215,6 +225,7 @@ do_install() {
+>             ${D}${libdir}/pkgconfig
+>      find ${D}${libdir} -maxdepth 1 -name 'lib*' -and \
+>                                     -not -name 'libQt5Core.so*' -and \
+> +                                   ${QTLIBSPRESERVE} \
+>                                     -not -name 'libQt5Bootstrap.a' \
+>                                     -exec rm '{}' ';'
+>  }
+> --
+> 1.8.4.5
 >
-> Regards,
-> Peter
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Check value of PACKAGECONFIG:
-bitbake -e qtbase | grep '^PACKAGECONFIG='
 
-Check value of EXTRA_OECONF:
-bitbake -e qtbase | grep '^EXTRA_OECONF='
 
-You can redirect output of bitbake -e qtbase to a file and examine it to 
-see how the variables have been set:
-bitbake -e qtbase > qtbase_vars.txt
-xdg-open qtbase_vars.txt
-
-Regards,
-Jonathan
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
