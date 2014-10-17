@@ -1,26 +1,24 @@
-Return-Path: <Wenzong.Fan@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B25A714AD
+	by mail.openembedded.org (Postfix) with ESMTP id 1FD1C60DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2014 06:49:32 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9H6nXIQ019348
+	Fri, 17 Oct 2014 07:04:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9H74a5q023219
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 23:49:33 -0700 (PDT)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 16 Oct 2014 23:49:32 -0700
-From: <wenzong.fan@windriver.com>
+	Fri, 17 Oct 2014 00:04:37 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Fri, 17 Oct 2014 00:04:36 -0700
+From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Oct 2014 02:49:30 -0400
-Message-ID: <7c90bebf7ec0eb82906acd5610bfed9713199065.1413528325.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1413528325.git.wenzong.fan@windriver.com>
-References: <cover.1413528325.git.wenzong.fan@windriver.com>
+Date: Fri, 17 Oct 2014 15:05:55 +0800
+Message-ID: <1413529555-4290-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH 1/1][meta-oe] rsnapshot: fix rsnapshot.conf.default
+Subject: [meta-networking][PATCH] radvd: fix daemon start-up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,105 +32,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2014 06:49:37 -0000
+X-List-Received-Date: Fri, 17 Oct 2014 07:04:41 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Chen Qi <Qi.Chen@windriver.com>
 
-This change is used for fixing cmd path in rsnapshot.conf.default.
+1. Fix radvd.service to start daemon correctly.
+2. Make the daemon run under 'radvd' user by default.
 
-The options --without-* disable checking command * on host and get
-the default path used, otherwise the host path will be injected into
-target configs.
-
-The runtime dependencies to ssh, logger, cp, du are optional and
-could be customized in rsnapshot.conf, so it's not needed that
-using PACKAGECONFIG to define the runtime dependencies.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../rsnapshot/configure-fix-cmd_rsync.patch        |   44 ++++++++++++++++++++
- meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb |   12 +++++-
- 2 files changed, 54 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/rsnapshot/rsnapshot/configure-fix-cmd_rsync.patch
+ meta-networking/recipes-daemons/radvd/files/radvd.default | 1 +
+ meta-networking/recipes-daemons/radvd/files/radvd.service | 5 +----
+ meta-networking/recipes-daemons/radvd/radvd.inc           | 6 +++++-
+ 3 files changed, 7 insertions(+), 5 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/radvd/files/radvd.default
 
-diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot/configure-fix-cmd_rsync.patch b/meta-oe/recipes-support/rsnapshot/rsnapshot/configure-fix-cmd_rsync.patch
+diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.default b/meta-networking/recipes-daemons/radvd/files/radvd.default
 new file mode 100644
-index 0000000..7b2361b
+index 0000000..7cb73c7
 --- /dev/null
-+++ b/meta-oe/recipes-support/rsnapshot/rsnapshot/configure-fix-cmd_rsync.patch
-@@ -0,0 +1,44 @@
-+From 26ad431e19788898fb4ed19ff91392e8b20f1bab Mon Sep 17 00:00:00 2001
-+From: Wenzong Fan <wenzong.fan@windriver.com>
-+Date: Thu, 16 Oct 2014 04:06:55 -0400
-+Subject: [PATCH] fix cmd_rsync
-+
-+Don't break configure if rsync is not installed on host.
-+
-+rsync is a runtime dependency and this change is only used for
-+generating rsnapshot.conf.default. It allows cmd_rsync to use
-+default path if options --without-rsync is specfied.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-+---
-+ configure.ac |    5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index bc9df9e..2a33d29 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -55,7 +55,7 @@ AC_ARG_WITH(rsync,
-+ 				AC_MSG_ERROR(rsync not found)
-+ 			fi
-+ 		else
-+-			AC_MSG_ERROR(rsync is required)
-++			RSYNC=no
-+ 		fi
-+ 	]
-+ )
-+@@ -67,7 +67,8 @@ if test "$RSYNC" = ""; then
-+ fi
-+ dnl bail out if we can't find it
-+ if test "$RSYNC" = "no"; then
-+-	AC_MSG_ERROR(rsync is required)
-++	RSYNC=/usr/bin/rsync
-++	AC_SUBST(CMD_RSYNC, "cmd_rsync  $RSYNC")
-+ fi
-+ 
-+ 
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-index afd3678..3f919b5 100644
---- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-+++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-@@ -24,11 +24,19 @@ SRCREV = "1047cbb57937c29233388e2fcd847fecd3babe74"
- PV = "1.3.1+git${SRCPV}"
++++ b/meta-networking/recipes-daemons/radvd/files/radvd.default
+@@ -0,0 +1 @@
++OPTIONS="-u radvd"
+diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.service b/meta-networking/recipes-daemons/radvd/files/radvd.service
+index 3aac7b2..e60798a 100644
+--- a/meta-networking/recipes-daemons/radvd/files/radvd.service
++++ b/meta-networking/recipes-daemons/radvd/files/radvd.service
+@@ -4,11 +4,8 @@ After=network.target
+ ConditionPathExists=@SYSCONFDIR@/radvd.conf
  
- SRC_URI = "git://github.com/DrHyde/${BPN};branch=master;protocol=git \
-+           file://configure-fix-cmd_rsync.patch \
-           "
+ [Service]
+-Type=forking
+-PIDFile=/var/run/radvd/radvd.pid
+ EnvironmentFile=-@SYSCONFDIR@/default/radvd
+-ExecStartPre=@BASE_BINDIR@/mkdir -p /var/run/radvd
+-ExecStart=@SBINDIR@/radvd $OPTIONS
++ExecStart=@SBINDIR@/radvd -n $OPTIONS
  
- S = "${WORKDIR}/git"
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
+index 85d1a85..6b595b0 100644
+--- a/meta-networking/recipes-daemons/radvd/radvd.inc
++++ b/meta-networking/recipes-daemons/radvd/radvd.inc
+@@ -17,7 +17,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
+ SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
+            file://radvd.init \
+            file://radvd.service \
+-           file://volatiles.03_radvd"
++           file://volatiles.03_radvd \
++           file://radvd.default"
  
- inherit autotools
+ inherit autotools update-rc.d useradd pkgconfig systemd
  
--PACKAGECONFIG ??= "logger"
--PACKAGECONFIG[logger] = "--with-logger=${bindir}/logger,--without-logger,,util-linux"
-+# Fix rsnapshot.conf.default:
-+# don't inject the host path into target configs.
-+EXTRA_OECONF += "--without-cp \
-+                 --without-rm \
-+                 --without-du \
-+                 --without-ssh \
-+                 --without-logger \
-+                 --without-rsync \
-+                "
+@@ -44,6 +45,9 @@ do_install_append () {
+            -e 's#@SBINDIR@#${sbindir}#g' \
+            -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
+ 
++    # Install default environment file
++    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
++
+     # Documentation
+     for i in radvd.conf.example README; do \
+         install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
 -- 
-1.7.9.5
+1.9.1
 
 
