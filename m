@@ -1,36 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B6FB9716A3
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D1E0C708B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2014 03:06:53 +0000 (UTC)
+	Fri, 17 Oct 2014 05:24:24 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9H36rAM021639
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 16 Oct 2014 20:06:53 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.18]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0174.001;
-	Thu, 16 Oct 2014 20:06:53 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Paul Barker <paul@paulbarker.me.uk>
-Thread-Topic: [oe] [meta-oe][PATCH] vim: add recipe for vim-tiny
-Thread-Index: AQHP6KAO0qgMZs0/JU6tmAoLIPTZaZwyBaNAgAEM2wCAAIYg8A==
-Date: Fri, 17 Oct 2014 03:06:52 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AABD52484D@ALA-MBB.corp.ad.wrs.com>
-References: <1413366811-1259-1-git-send-email-jackie.huang@windriver.com>
-	<20141015103818.GP3000@jama>
-	<CANyK_8e+OeoHRKN+nriKpQNRuekQBxH_7We9rtMrBQG=wqZ2=A@mail.gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AABD522EEC@ALA-MBB.corp.ad.wrs.com>
-	<CANyK_8fqqURrOJ9F3dB-VyfENrnEFgE3kx5TRiApjE=CfFxLOw@mail.gmail.com>
-In-Reply-To: <CANyK_8fqqURrOJ9F3dB-VyfENrnEFgE3kx5TRiApjE=CfFxLOw@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.131]
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9H5OPBN028346
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Oct 2014 22:24:26 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 16 Oct 2014 22:24:25 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 17 Oct 2014 13:24:23 +0800
+Message-ID: <1413523465-30242-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] vim: add recipe for vim-tiny
+Subject: [PATCH 1/2][meta-networking] Revert "tftp-hpa: bug fix on empty file put error"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,85 +32,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2014 03:06:58 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 17 Oct 2014 05:24:30 -0000
+Content-Type: text/plain
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogcGF1bC5iZXRhZml2ZUBn
-bWFpbC5jb20gW21haWx0bzpwYXVsLmJldGFmaXZlQGdtYWlsLmNvbV0gT24gQmVoYWxmIE9mIFBh
-dWwgQmFya2VyDQo+IFNlbnQ6IFRodXJzZGF5LCBPY3RvYmVyIDE2LCAyMDE0IDc6NDkgUE0NCj4g
-VG86IEh1YW5nLCBKaWUgKEphY2tpZSkNCj4gQ2M6IE1hcnRpbiBKYW5zYSAobWFydGluLmphbnNh
-QGdtYWlsLmNvbSk7IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSF0gdmltOiBhZGQgcmVjaXBlIGZvciB2
-aW0tdGlueQ0KPiANCj4gT24gMTYgT2N0b2JlciAyMDE0IDA0OjI3LCBIdWFuZywgSmllIChKYWNr
-aWUpIDxKYWNraWUuSHVhbmdAd2luZHJpdmVyLmNvbT4gd3JvdGU6DQo+ID4NCj4gPg0KPiA+PiAt
-LS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+PiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4+IFttYWlsdG86b3BlbmVtYmVkZGVk
-LWRldmVsLSBib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZg0KPiA+PiBP
-ZiBQYXVsIEJhcmtlcg0KPiA+PiBTZW50OiBUaHVyc2RheSwgT2N0b2JlciAxNiwgMjAxNCAxOjQ1
-IEFNDQo+ID4+IFRvOiBPRSBEZXZlbA0KPiA+PiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1b
-UEFUQ0hdIHZpbTogYWRkIHJlY2lwZSBmb3IgdmltLXRpbnkNCj4gPj4NCj4gPj4gT24gMTUgT2N0
-b2JlciAyMDE0IDExOjM4LCBNYXJ0aW4gSmFuc2EgPG1hcnRpbi5qYW5zYUBnbWFpbC5jb20+IHdy
-b3RlOg0KPiA+PiA+IE9uIFdlZCwgT2N0IDE1LCAyMDE0IGF0IDA1OjUzOjMxQU0gLTA0MDAsIGph
-Y2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tIHdyb3RlOg0KPiA+PiA+PiBGcm9tOiBKYWNraWUgSHVh
-bmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPg0KPiA+PiA+Pg0KPiA+PiA+PiBDaGFuZ2Vz
-Og0KPiA+PiA+PiAtIHNwbGl0IHRoZSB2aW0gcmVjaXBlIHRvIHR3byBmaWxlcw0KPiA+PiA+PiAt
-IGFkZCBiYiBmb3IgdmltLXRpbnkgYmFzZWQgb24gUEFDS0FHRUNPTkZJRyBkZWZpbmVkIGluIC5p
-bmMgZmlsZQ0KPiA+PiA+PiAtIHVzZSB0cmltX3ZlcnNpb24gdG8gZ2V0IFZJTURJUg0KPiA+PiA+
-DQo+ID4+ID4gSWYgeW91IHJlYWxseSB3YW50IHRvIHJldmVydCBmb2xsb3dpbmcgMiBwYXRjaGVz
-LCB0aGVuIHlvdSBuZWVkIHRvDQo+ID4NCj4gPiBTb3JyeSB0aGF0IEkgZGlkbid0IG5vdGljZSB0
-aGUgMiBwYXRjaGVzIGluIHRoZSBjb21taXQgaGlzdG9yeS4NCj4gPg0KPiA+PiA+IHByb3ZpZGUg
-bW9yZSBqdXN0aWZpY2F0aW9ucyBmb3IgeW91ciBwYXRjaCBhbmQgYWxzbyBjb25maXJtIHRoYXQN
-Cj4gPj4gPiB0aGUgcmVjaXBlcyBkb24ndCBzdGFnZSBjb25mbGljdGluZyBmaWxlcyBpbiBzeXNy
-b290IGFueW1vcmUgKEkNCj4gPj4gPiBkb24ndCBzZWUgYW55IGNoYW5nZSBpbiByZWNpcGUgcHJl
-dmVudGluZyB0aGF0KS4NCj4gPg0KPiA+IEluIHZpbS10aW55LCB0aGVyZSBhcmUgb25seSB0d28g
-ZmlsZXMgaW5zdGFsbGVkOiB0aGUgYmluYXJ5IGFuZCB0aGUgcmMNCj4gPiBmaWxlLCBhbmQgdGhl
-eSBhcmUgcmVuYW1lZCB0byBhdm9pZCB0aGUgY29uZmxpY3Rpb246DQo+ID4gJCBmaW5kIC4gLXR5
-cGUgZg0KPiA+IC4vYmluL3ZpbS10aW55IChpdCdzIHZpbSBpbiB2aW0gcGFja2FnZSkgLi91c3Iv
-c2hhcmUvdmltL3ZpcmMgKGl0J3MNCj4gPiB2aW1yYyBpbiB2aW0gcGFja2FnZSkNCj4gPg0KPiAN
-Cj4gV2l0aCBqdXN0IHZpbS10aW55IGluc3RhbGxlZCwgdGhlIHVzZXIgc2hvdWxkIHN0aWxsIGJl
-IGFibGUgdG8gcnVuICd2aW0nIHRvIHN0YXJ0IHRoZSBwcm9ncmFtLiBXZSBjb3VsZA0KPiBtYWtl
-IHRoYXQgYW4gdXBkYXRlLWFsdGVybmF0aXZlcyBsaW5rLCBidXQgdGhlbiB3ZSdkIGhhdmUgdG8g
-cmVuYW1lIHRoZSBleGVjdXRhYmxlIGZvciB2aW0gcHJvcGVyDQo+IGFuZCB1c2UgdXBkYXRlLWFs
-dGVybmF0aXZlcyB0aGVyZSBhcyB3ZWxsLg0KPiANCj4gSSdkIHJhdGhlciBzZWUgYm90aCBwYWNr
-YWdlcyB1c2UgdGhlICd2aW0nIGV4ZWN1dGFibGUgbmFtZSBhbmQgc2V0IENPTkZMSUNUUy9SQ09O
-RkxJQ1RTDQoNClllYWgsIGl0IHdvdWxkIGJlIGJldHRlciB0byBkbyBsaWtlIHRoaXMsIEkgd2ls
-bCBjaGFuZ2UgaXQuDQoNCj4gYXBwcm9wcmlhdGVseSwgdW5sZXNzIHRoZXJlIGlzIGEgZ29vZCBy
-ZWFzb24gYSB1c2VyIHdvdWxkIHdhbnQgYm90aCAndmltJyBhbmQgJ3ZpbS10aW55JyBpbnN0YWxs
-ZWQNCj4gdG9nZXRoZXIuDQo+IA0KPiA+PiA+DQo+ID4+DQo+ID4+IEFncmVlZC4gVGhlcmUgbWF5
-IGJlIGEgdXNlIGZvciBoYXZpbmcgYm90aCB2aW0gYW5kIHZpbS10aW55IGluIGENCj4gPj4gcGFj
-a2FnZSBmZWVkLCBidXQgSSB0aGluayB3ZSBuZWVkIGENCj4gPg0KPiA+IFdlIGhhdmUgYmVlbiB1
-c2luZyBsaWtlIHRoaXMgZm9yIGEgbG9uZyB0aW1lIGFuZCBpdCB3b3JrcyBmaW5lIHdoZW4gYm90
-aCB2aW0gYW5kIHZpbS10aW55IGFyZQ0KPiBpbnN0YWxsZWQuDQo+ID4NCj4gPj4gYmV0dGVyIHdh
-eSBvZiBoYW5kbGluZyBpdCB0aGFuIHRoaXMuDQo+ID4NCj4gPiBJIGRvbid0IGluc2lzdCBvbiB0
-aGlzIHdheSBhbmQgd2lsbCBiZSBoYXBweSBpZiB0aGVyZSBpcyBhIGJldHRlciB3YXkNCj4gPiB0
-byBoYW5kbGUgdGhpcy4gV2UgdXN1YWxseSBkZWZpbmUgd2hhdCBuZWVkIHRvIGJlIGluc3RhbGxl
-ZCBpbg0KPiA+IGRpZmZlcmVudCBwYWNrYWdlZ3JvdXBzIGFuZCBpbWFnZXMsIGZvciBzbWFsbGVy
-IGltYWdlLCB3ZSBuZWVkDQo+ID4gdmltLXRpbnksIHNvbWUgb3RoZXJzIG5lZWQgdmltLCBJIGtu
-b3cgd2UgY2FuIGNoYW5nZSBQQUNLQUdFQ09ORklHIHRvDQo+ID4gZ2V0IGRpZmZlcmVudCB2aW1z
-LCBidXQgaXQgZG9lc24ndCB3b3JrIGluIHBhY2thZ2Vncm91cCBvciBpbWFnZS4gQW5kDQo+ID4g
-aXQgc2VlbXMgbW9yZSBjbGVhciB0byB1c2VyL2N1c3RvbWVyIGlmIHdlIHVzZSBuYW1lIGxpa2Ug
-dmltLXRpbnksIGd2aW0vdmltLWd1aSwgb3IgdXNlciBtYXkNCj4gY29tcGxhaW4gdGhhdCB2aW0g
-aXMgbm90IGZ1bGx5IGZlYXR1cmVkIHdoZW4gdGhleSBzZWUgdmltIGlzIGluc3RhbGxlZCBidXQg
-YWN0dWFsbHkgaXQgaXMgdGhlIG9uZSB3aXRoIHRpbnkNCj4gZmVhdHVyZS4NCj4gDQo+IEkgdGhp
-bmsgdGhpcyBpcyBhIHdpZGVyIGlzc3VlIHRoYXQgbWF5IGFmZmVjdCBwYWNrYWdlcyBvdGhlciB0
-aGFuIHZpbS4NCj4gSSBzZWVtIHRvIHJlY2FsbCB0aGUgcXVlc3Rpb24gb2Ygd2hldGhlciBQQUNL
-QUdFQ09ORklHIHZhbHVlcyBjYW4gYmUgc2V0IHBlciBpbWFnZSByZWNpcGUgYmVpbmcNCj4gYXNr
-ZWQgcHJldmlvdXNseS4NCj4gDQo+IElzIGl0IHBvc3NpYmxlIHRvIHdyaXRlIGEgdmltLXRpbnkg
-cmVjaXBlIHdpdGhvdXQgc3BsaXR0aW5nIHZpbS5pbmMgZnJvbSB2aW1fKi5iYj8gQ2FuIHZpbS10
-aW55IGp1c3QNCj4gJ3JlcXVpcmUgdmltXzcuNC4zNzMuYmInIGFuZCBjaGFuZ2UgUEFDS0FHRUNP
-TkZJRyBhbmQgdGhlIGRvX2luc3RhbGwgZnVuY3Rpb24/DQoNCkkgaGFkIHRob3VnaHQgYWJvdXQg
-dGhpcywgYnV0IG5ldmVyIHRyeS4gSSBqdXN0IGNoZWNrZWQgdGhhdCB0aGVyZSBhcmUgc29tZSBl
-dmlkZW5jZSB0aGF0ICJyZXF1aXJlIGJiIg0Kc2hvdWxkIHdvcmssIHNvIGl0J3MgcG9zc2libGUg
-YW5kIEkgdGhpbmsgaXQgd291bGQgYmUgYSBiZXR0ZXIgd2F5IHRvIGhhbmRsZSB0aGlzLiBJIHdp
-bGwgcmUtd29yayBvbiBpdCBhbmQNCnNlbmQgdjIsIHRoYW5rcyENCg0KVGhhbmtzLA0KSmFja2ll
-DQoNCj4gDQo+ID4NCj4gPj4NCj4gPj4gVGhpcyBwYXRjaCBpcyBkaWZmaWN1bHQgdG8gZnVsbHkg
-cmV2aWV3IGFzIGl0IG1peGVzIGNvbmNlcHR1YWxseQ0KPiA+PiBkaWZmZXJlbnQgY2hhbmdlcyB0
-b2dldGhlci4gSWYgdGhpcyBvciBzb21ldGhpbmcgc2ltaWxhciBkb2VzIGdvIGluIGFmdGVyIGZ1
-cnRoZXIgZGlzY3Vzc2lvbiwgaXQgbmVlZHMNCj4gdG8gYmUgc3BsaXQgdXAuDQo+ID4NCj4gPiBZ
-ZWFoLCBzb3JyeSBmb3IgdGhhdCwgSSB3aWxsIHNwbGl0IGl0IHVwIGlmIG5lZWRlZCBhZnRlciBm
-dXJ0aGVyIGRpc2N1c3Npb24gaGVyZS4NCj4gPg0KPiA+IFRoYW5rcywNCj4gPiBKYWNraWUNCj4g
-Pg0KPiANCj4gQ2hlZXJzLA0KPiANCj4gLS0NCj4gUGF1bCBCYXJrZXINCj4gDQo+IEVtYWlsOiBw
-YXVsQHBhdWxiYXJrZXIubWUudWsNCj4gaHR0cDovL3d3dy5wYXVsYmFya2VyLm1lLnVrDQo=
+From: "Roy.Li" <rongqing.li@windriver.com>
+
+This reverts commit b2eb21a5fbcb065e84ed582e87de21bdc3082f00.
+
+It make 3d8520a0b411[tftp-hpa: add error check for disk filled up]
+unable to work
+---
+ .../tftp-hpa-bug-fix-on-empty-file-put-error.patch |   33 --------------------
+ .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |    1 -
+ 2 files changed, 34 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
+
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch b/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
+deleted file mode 100644
+index aa29d9c..0000000
+--- a/meta-networking/recipes-daemons/tftp-hpa/files/tftp-hpa-bug-fix-on-empty-file-put-error.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-tftp-hpa: bug fix on empty file put error
+-
+-With the feature that checking the disk filled up, the return value of
+-function write_behind was checked and used to detect the disk status.
+-While for empty file, without data being written, this function will
+-return -1 thus the disk filled up error was miss-raised. Fix it.
+-
+-Upstream-Status: pending
+-
+-Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+----
+- tftpd/tftpd.c | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+---- a/tftpd/tftpd.c
+-+++ b/tftpd/tftpd.c
+-@@ -1692,7 +1692,7 @@ static void tftp_recvfile(const struct f
+-             syslog(LOG_WARNING, "tftpd: write(ack): %m");
+-             goto abort;
+-         }
+--        if(write_behind(file, pf->f_convert) < 0) {
+-+        if(write_behind(file, pf->f_convert) < -1) {
+-             nak(ENOSPACE, NULL);
+-             (void)fclose(file);
+-             goto abort;
+-@@ -1727,7 +1727,7 @@ static void tftp_recvfile(const struct f
+-             goto abort;
+-         }
+-     } while (size == segsize);
+--    if(write_behind(file, pf->f_convert) < 0) {
+-+    if(write_behind(file, pf->f_convert) < -1) {
+-         nak(ENOSPACE, NULL);
+-         (void)fclose(file);
+-         goto abort;
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+index e58a4b1..1951747 100644
+--- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
++++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+@@ -25,7 +25,6 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
+            file://init \
+            file://add-error-check-for-disk-filled-up.patch \
+            file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
+-           file://tftp-hpa-bug-fix-on-empty-file-put-error.patch \
+ "
+ 
+ SRC_URI[md5sum] = "46c9bd20bbffa62f79c958c7b99aac21"
+-- 
+1.7.10.4
+
 
