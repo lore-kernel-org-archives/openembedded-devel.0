@@ -1,36 +1,36 @@
 Return-Path: <eduardo@monkey.io>
-Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
-	[209.85.160.178])
-	by mail.openembedded.org (Postfix) with ESMTP id CD1C7716A3
+Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
+	[209.85.213.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E40E7025A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2014 02:58:24 +0000 (UTC)
-Received: by mail-yk0-f178.google.com with SMTP id q9so1706597ykb.23
+	Fri, 17 Oct 2014 03:01:47 +0000 (UTC)
+Received: by mail-yh0-f53.google.com with SMTP id b6so2560656yha.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 19:58:25 -0700 (PDT)
+	Thu, 16 Oct 2014 20:01:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=wlh+C3lTUmTg7c6d902JEgGqjbufwqJRRP/++n1fZdM=;
-	b=CNQg80TnDCm+ABxgKbqjJegHFUpgmJqn4vwdqGkFw+6T/0WmkWgXOZtHDnPjcc19Gb
-	SGHNTZV730m0jBmetw+jS0ffIBU4QQ9l8+USRoFWpvB4yU2bKnekA8d80cTMiLZtQi/c
-	YLz6jfth8UjO8lo66TCrndctnmSYnMZCeTnwp5tdThtnhkrzX868o/3BT/f4R525MTHG
-	+SvV7p7GULmCltOQTUTSqM7cvUbOive3DCr84CkAOvDdT+D9o+Yn/LydD9UTNEG+5En+
-	XWcQL3ZEck0Wstyf1+xzof/pWPlQtZKFF3aEmNkP90J+WcPQ5LKt8iV8fuU13PYyyEuh
-	I4IA==
-X-Gm-Message-State: ALoCoQnN4ixuevW7CsKCk66v9uGpFIrM2rJnKf38YmIcqVSA5rQW/C7OVrn2csJccvNhQU1ul/X+
-X-Received: by 10.236.19.69 with SMTP id m45mr7079350yhm.111.1413514705323;
-	Thu, 16 Oct 2014 19:58:25 -0700 (PDT)
+	bh=L69dcvF8jn8JKs9LiFZL3S9DPLWuRf8+8Sw9AUCg1kw=;
+	b=gBLWEI9X6OKXw/V1tix23vdr08ZRs1mVBkZgr1qi5fh0aO72ebkjT8iC/oABosF6vA
+	Bp2dCHmewXQ4XdudnGuHGsUx5bsOKznZXQFA9k7iWs+rqcBYj+oGA/dQ55L9EAEoXbit
+	B15L00SzTAFbpL2g/1LAD0em3a5MUslEioNvDCua2H28KuAzWpcC10T5xYxRshW6HaV3
+	ERwDmxY/Uk9J5Fxr8pxuo66tONMYwcW+WaNhtcgQ3tqW12Ay30cK5UXJD4nyobZ8zTj5
+	kMgIbMBEvg/cXgIPwSps1Yvg9RO+TPljK/3mbyQA8oBMojWOufNt+NzocikCQilGNHpH
+	yEEw==
+X-Gm-Message-State: ALoCoQlx/olznS9eJgV/W5AgYRXFj7CMZNIcbE9qKr18t7FBx07dn7PCG/twjn18b+u12gXGXvio
+X-Received: by 10.236.61.115 with SMTP id v79mr7242337yhc.73.1413514909017;
+	Thu, 16 Oct 2014 20:01:49 -0700 (PDT)
 Received: from monotop.amnet.co.cr ([186.4.56.221])
-	by mx.google.com with ESMTPSA id v31sm151665yha.16.2014.10.16.19.58.23
+	by mx.google.com with ESMTPSA id q4sm170602yhb.15.2014.10.16.20.01.48
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Oct 2014 19:58:24 -0700 (PDT)
+	Thu, 16 Oct 2014 20:01:48 -0700 (PDT)
 From: Eduardo Silva <eduardo@monkey.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Oct 2014 20:58:01 -0600
-Message-Id: <1413514681-22187-1-git-send-email-eduardo@monkey.io>
+Date: Thu, 16 Oct 2014 21:01:35 -0600
+Message-Id: <1413514895-22623-1-git-send-email-eduardo@monkey.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] PolarSSL: update package description
+Subject: [meta-webserver][PATCH] Monkey: new v1.5.4 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2014 02:58:27 -0000
+X-List-Received-Date: Fri, 17 Oct 2014 03:01:52 -0000
+
+This patch add the new Monkey HTTP Server v1.5.4.
+
+For more details about software changes please visit:
+
+    http://monkey-project.com/Announcements/v1.5.4
+
+=== Build Tests ==
+
+This version have been tested on Yocto/Daisy based on RPM.
+
+monkey-yocto/a617991e40bd5c3779ad7b3689f78857d3e45248
 
 Signed-off-by: Eduardo Silva <eduardo@monkey.io>
 ---
- .../recipes-connectivity/polarssl/polarssl_1.3.8.bb    | 18 +++++++++++++++---
- 1 file changed, 15 insertions(+), 3 deletions(-)
+ .../recipes-httpd/monkey/{monkey_1.5.3.bb => monkey_1.5.4.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/monkey/{monkey_1.5.3.bb => monkey_1.5.4.bb} (94%)
 
-diff --git a/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
-index d05f416..8ca1b1c 100644
---- a/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
-+++ b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
-@@ -1,7 +1,19 @@
- SUMMARY = "Lightweight crypto and SSL/TLS library"
--DESCRIPTION = "PolarSSL is a fork of the abandonned project XySSL. It \
--is a lean crypto library providing SSL and TLS support \
--in your programs."
-+DESCRIPTION = "PolarSSL is a lean open source crypto library         \
-+for providing SSL and TLS support in your programs. It offers        \
-+an intuitive API and documented header files, so you can actually    \
-+understand what the code does. It features:                          \
-+                                                                     \
-+ - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
-+   Camellia and XTEA                                                 \
-+ - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
-+ - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
-+ - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
-+   ECDSA and ECDH                                                    \
-+ - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
-+ - Abstraction layers for ciphers, hashes, public key operations,    \
-+   platform abstraction and threading                                \
-+"
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
+similarity index 94%
+rename from meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb
+rename to meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
+index 06095ba..a4963af 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
+@@ -11,8 +11,8 @@ SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
+            file://monkey.service \
+            file://monkey.init"
  
- HOMEPAGE = "https://polarssl.org"
- BUGTRACKER = "https://github.com/polarssl/polarssl/issues"
+-SRC_URI[md5sum] = "1fa9ddbb4c0100b22f2fc4b8da56dbe9"
+-SRC_URI[sha256sum] = "0ac300e04f052818bc26b7da0183c3c5cd13be8090aaabd3505838587be8c0ec"
++SRC_URI[md5sum] = "b794724ac38cfedee2a5d27c175bc87e"
++SRC_URI[sha256sum] = "662bbafc614d32f645059e6e00258fed640665594f5b7f11cf4c4763cf09ddcf"
+ 
+ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
+                 --logdir=${localstatedir}/log/monkey/ \
 -- 
 1.9.1
 
