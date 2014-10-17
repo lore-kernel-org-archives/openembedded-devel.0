@@ -1,26 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BB05D65E94
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 83F9560DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2014 05:24:25 +0000 (UTC)
+	Fri, 17 Oct 2014 06:37:33 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9H5OR4u006666
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9H6bTPj029443
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 22:24:27 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	Thu, 16 Oct 2014 23:37:34 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 16 Oct 2014 22:24:26 -0700
-From: <rongqing.li@windriver.com>
+	14.3.174.1; Thu, 16 Oct 2014 23:37:26 -0700
+From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Oct 2014 13:24:24 +0800
-Message-ID: <1413523465-30242-2-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1413523465-30242-1-git-send-email-rongqing.li@windriver.com>
-References: <1413523465-30242-1-git-send-email-rongqing.li@windriver.com>
+Date: Fri, 17 Oct 2014 14:38:44 +0800
+Message-ID: <1413527924-4092-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH 2/2][meta-networking] tftp-hpa: fix the empty file writing error
+Subject: [PATCH] radvd: fix daemon start-up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,82 +32,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2014 05:24:30 -0000
+X-List-Received-Date: Fri, 17 Oct 2014 06:37:35 -0000
 Content-Type: text/plain
 
-From: "Roy.Li" <rongqing.li@windriver.com>
+From: Chen Qi <Qi.Chen@windriver.com>
 
-make write_behind to return 0 if a empty file is written, to
-distinguish a true writing failure[on which the write_behind
-will return -1], then the annoying wrong log will disappear.
-    ____
-    |Error code 3: Disk full or allocation exceeded
-    -----
-Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+1. Fix radvd.service to start daemon correctly.
+2. Make the daemon run under 'radvd' user by default.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../tftp-hpa/files/fix-writing-emtpy-file.patch    |   39 ++++++++++++++++++++
- .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |    1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/fix-writing-emtpy-file.patch
+ meta-networking/recipes-daemons/radvd/files/radvd.default | 1 +
+ meta-networking/recipes-daemons/radvd/files/radvd.service | 5 +----
+ meta-networking/recipes-daemons/radvd/radvd.inc           | 6 +++++-
+ 3 files changed, 7 insertions(+), 5 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/radvd/files/radvd.default
 
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/fix-writing-emtpy-file.patch b/meta-networking/recipes-daemons/tftp-hpa/files/fix-writing-emtpy-file.patch
+diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.default b/meta-networking/recipes-daemons/radvd/files/radvd.default
 new file mode 100644
-index 0000000..452aa05
+index 0000000..7cb73c7
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/tftp-hpa/files/fix-writing-emtpy-file.patch
-@@ -0,0 +1,39 @@
-+[PATCH] fix the empty file writting
-+
-+Upstream-Status: pending
-+
-+With the feature that checking the disk filled up, the return
-+value of function write_behind was checked and used to detect
-+the disk status. While for empty file, without data being
-+written, this function will return -1 thus the disk filled up
-+error was miss-raised.
-+
-+make write_behind to return 0 if written file is empty, to fix
-+the this bug.
-+
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-+---
-+ common/tftpsubs.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/common/tftpsubs.c b/common/tftpsubs.c
-+index b4ea3f2..9f6cafc 100644
-+--- a/common/tftpsubs.c
-++++ b/common/tftpsubs.c
-+@@ -198,9 +198,12 @@ int write_behind(FILE * file, int convert)
-+     nextone = !nextone;         /* incr for next time */
-+     buf = dp->th_data;
-+ 
-+-    if (count <= 0)
-++    if (count < 0)
-+         return -1;              /* nak logic? */
-+ 
-++    if (count == 0)
-++        return 0;
-++
-+     if (convert == 0)
-+         return write(fileno(file), buf, count);
-+ 
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-index 1951747..3f17fd6 100644
---- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-+++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-@@ -25,6 +25,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
-            file://init \
-            file://add-error-check-for-disk-filled-up.patch \
-            file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
-+           file://fix-writing-emtpy-file.patch \
- "
++++ b/meta-networking/recipes-daemons/radvd/files/radvd.default
+@@ -0,0 +1 @@
++OPTIONS="-u radvd"
+diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.service b/meta-networking/recipes-daemons/radvd/files/radvd.service
+index 3aac7b2..e60798a 100644
+--- a/meta-networking/recipes-daemons/radvd/files/radvd.service
++++ b/meta-networking/recipes-daemons/radvd/files/radvd.service
+@@ -4,11 +4,8 @@ After=network.target
+ ConditionPathExists=@SYSCONFDIR@/radvd.conf
  
- SRC_URI[md5sum] = "46c9bd20bbffa62f79c958c7b99aac21"
+ [Service]
+-Type=forking
+-PIDFile=/var/run/radvd/radvd.pid
+ EnvironmentFile=-@SYSCONFDIR@/default/radvd
+-ExecStartPre=@BASE_BINDIR@/mkdir -p /var/run/radvd
+-ExecStart=@SBINDIR@/radvd $OPTIONS
++ExecStart=@SBINDIR@/radvd -n $OPTIONS
+ 
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
+index 85d1a85..6b595b0 100644
+--- a/meta-networking/recipes-daemons/radvd/radvd.inc
++++ b/meta-networking/recipes-daemons/radvd/radvd.inc
+@@ -17,7 +17,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
+ SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
+            file://radvd.init \
+            file://radvd.service \
+-           file://volatiles.03_radvd"
++           file://volatiles.03_radvd \
++           file://radvd.default"
+ 
+ inherit autotools update-rc.d useradd pkgconfig systemd
+ 
+@@ -44,6 +45,9 @@ do_install_append () {
+            -e 's#@SBINDIR@#${sbindir}#g' \
+            -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
+ 
++    # Install default environment file
++    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
++
+     # Documentation
+     for i in radvd.conf.example README; do \
+         install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
 -- 
-1.7.10.4
+1.9.1
 
 
