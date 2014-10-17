@@ -1,34 +1,36 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id C765365D56
+Return-Path: <eduardo@monkey.io>
+Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
+	[209.85.160.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CD1C7716A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 21:41:19 +0000 (UTC)
-Received: by mail-wg0-f42.google.com with SMTP id z12so4628535wgg.13
+	Fri, 17 Oct 2014 02:58:24 +0000 (UTC)
+Received: by mail-yk0-f178.google.com with SMTP id q9so1706597ykb.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 14:41:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Do7ej6Mf/5NZzHmJsxKLppicFm/vsSgNGyXVw0+I7A4=;
-	b=fRy4hUn3QBeyHcnD+SBkRKbTWBXFKZFqUmO6FPtkGz6VE5sU1bjEBur5tRmxngSbym
-	39PqMQYQ98vq+J6tDeAIfSv5svUF6Qb492Ojfp0U7UZLsgzBSVxei+VoBXUyB4D7fi3U
-	eDOz+9ksnsUbPZZKeTILvW4V/W3Tc8gnufGKMnxlV/pkUy6p5a3oQyx83Zds6HKwWX2D
-	ZO81g8irtQkAUBUqAnNze799WspfE2QCQU0d30jOSbYH2VSHVEP2wHZA2wz5MlKoM8Nr
-	Ql2iNrj/r5li98nVdQ7rKM31LcyFDgPL2NxGDYy5fl8Jq0NKTCm1F4NJGKTrv503JoKu
-	R0TQ==
-X-Received: by 10.180.74.47 with SMTP id q15mr23106107wiv.75.1413495680000;
-	Thu, 16 Oct 2014 14:41:20 -0700 (PDT)
-Received: from mizar.208.67.220.220
-	(host35-222-dynamic.20-79-r.retail.telecomitalia.it. [79.20.222.35])
-	by mx.google.com with ESMTPSA id
-	fa7sm28826590wjd.27.2014.10.16.14.41.18 for <multiple recipients>
+	Thu, 16 Oct 2014 19:58:25 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=wlh+C3lTUmTg7c6d902JEgGqjbufwqJRRP/++n1fZdM=;
+	b=CNQg80TnDCm+ABxgKbqjJegHFUpgmJqn4vwdqGkFw+6T/0WmkWgXOZtHDnPjcc19Gb
+	SGHNTZV730m0jBmetw+jS0ffIBU4QQ9l8+USRoFWpvB4yU2bKnekA8d80cTMiLZtQi/c
+	YLz6jfth8UjO8lo66TCrndctnmSYnMZCeTnwp5tdThtnhkrzX868o/3BT/f4R525MTHG
+	+SvV7p7GULmCltOQTUTSqM7cvUbOive3DCr84CkAOvDdT+D9o+Yn/LydD9UTNEG+5En+
+	XWcQL3ZEck0Wstyf1+xzof/pWPlQtZKFF3aEmNkP90J+WcPQ5LKt8iV8fuU13PYyyEuh
+	I4IA==
+X-Gm-Message-State: ALoCoQnN4ixuevW7CsKCk66v9uGpFIrM2rJnKf38YmIcqVSA5rQW/C7OVrn2csJccvNhQU1ul/X+
+X-Received: by 10.236.19.69 with SMTP id m45mr7079350yhm.111.1413514705323;
+	Thu, 16 Oct 2014 19:58:25 -0700 (PDT)
+Received: from monotop.amnet.co.cr ([186.4.56.221])
+	by mx.google.com with ESMTPSA id v31sm151665yha.16.2014.10.16.19.58.23
+	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Oct 2014 14:41:19 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 16 Oct 2014 19:58:24 -0700 (PDT)
+From: Eduardo Silva <eduardo@monkey.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Oct 2014 23:41:09 +0200
-Message-Id: <1413495669-13020-1-git-send-email-andrea.adami@gmail.com>
+Date: Thu, 16 Oct 2014 20:58:01 -0600
+Message-Id: <1413514681-22187-1-git-send-email-eduardo@monkey.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld][PATCH] linux-yocto-tiny-kexecboot_3.17: add rdinit=/usr/bin/kexecboot to the cmdline
+Subject: [meta-networking][PATCH] PolarSSL: update package description
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,99 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Oct 2014 21:41:28 -0000
+X-List-Received-Date: Fri, 17 Oct 2014 02:58:27 -0000
 
-The kernel behavior has changed and apparently the init symlink
-in the initramfs is ignored (no init seems executed).
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Eduardo Silva <eduardo@monkey.io>
 ---
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/akita/defconfig  | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/c7x0/defconfig   | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/collie/defconfig | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/poodle/defconfig | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/spitz/defconfig  | 2 +-
- recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/tosa/defconfig   | 2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+ .../recipes-connectivity/polarssl/polarssl_1.3.8.bb    | 18 +++++++++++++++---
+ 1 file changed, 15 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/akita/defconfig b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/akita/defconfig
-index c1f8315..e9b9313 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/akita/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/akita/defconfig
-@@ -35,7 +35,7 @@ CONFIG_AEABI=y
- # CONFIG_COMPACTION is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 rdinit=/usr/bin/kexecboot fbcon=rotate:1 loglevel=3"
- CONFIG_CMDLINE_FORCE=y
- CONFIG_KEXEC=y
- # CONFIG_BINFMT_SCRIPT is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/c7x0/defconfig b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/c7x0/defconfig
-index 89928cd..f6fe618 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/c7x0/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/c7x0/defconfig
-@@ -36,7 +36,7 @@ CONFIG_AEABI=y
- # CONFIG_COMPACTION is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 rdinit=/usr/bin/kexecboot loglevel=3"
- CONFIG_CMDLINE_FORCE=y
- CONFIG_KEXEC=y
- # CONFIG_BINFMT_SCRIPT is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/collie/defconfig b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/collie/defconfig
-index dfabe70..3209bd3 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/collie/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/collie/defconfig
-@@ -33,7 +33,7 @@ CONFIG_AEABI=y
- # CONFIG_COMPACTION is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttySA0,115200n8 fbcon=rotate:1 mem=64M loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttySA0,115200n8 rdinit=/usr/bin/kexecboot fbcon=rotate:1 mem=64M loglevel=3"
- CONFIG_CMDLINE_FORCE=y
- CONFIG_KEXEC=y
- # CONFIG_BINFMT_SCRIPT is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/poodle/defconfig b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/poodle/defconfig
-index b9e052b..2f30d0c 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/poodle/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/poodle/defconfig
-@@ -34,7 +34,7 @@ CONFIG_AEABI=y
- # CONFIG_COMPACTION is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 rdinit=/usr/bin/kexecboot fbcon=rotate:1 loglevel=3"
- CONFIG_CMDLINE_FORCE=y
- CONFIG_KEXEC=y
- # CONFIG_BINFMT_SCRIPT is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/spitz/defconfig b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/spitz/defconfig
-index 25df112..908aeb2 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/spitz/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/spitz/defconfig
-@@ -35,7 +35,7 @@ CONFIG_AEABI=y
- # CONFIG_COMPACTION is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 fbcon=rotate:1 loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 rdinit=/usr/bin/kexecboot fbcon=rotate:1 loglevel=3"
- CONFIG_CMDLINE_FORCE=y
- CONFIG_KEXEC=y
- # CONFIG_BINFMT_SCRIPT is not set
-diff --git a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/tosa/defconfig b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/tosa/defconfig
-index b98928e..dc298bf 100644
---- a/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/tosa/defconfig
-+++ b/recipes-kernel/linux/linux-yocto-tiny-kexecboot-3.17/tosa/defconfig
-@@ -34,7 +34,7 @@ CONFIG_AEABI=y
- # CONFIG_COMPACTION is not set
- CONFIG_ZBOOT_ROM_TEXT=0x0
- CONFIG_ZBOOT_ROM_BSS=0x0
--CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 loglevel=3"
-+CONFIG_CMDLINE="console=tty1 console=ttyS0,115200n8 rdinit=/usr/bin/kexecboot loglevel=3"
- CONFIG_CMDLINE_FORCE=y
- CONFIG_KEXEC=y
- # CONFIG_BINFMT_SCRIPT is not set
+diff --git a/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+index d05f416..8ca1b1c 100644
+--- a/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
++++ b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+@@ -1,7 +1,19 @@
+ SUMMARY = "Lightweight crypto and SSL/TLS library"
+-DESCRIPTION = "PolarSSL is a fork of the abandonned project XySSL. It \
+-is a lean crypto library providing SSL and TLS support \
+-in your programs."
++DESCRIPTION = "PolarSSL is a lean open source crypto library         \
++for providing SSL and TLS support in your programs. It offers        \
++an intuitive API and documented header files, so you can actually    \
++understand what the code does. It features:                          \
++                                                                     \
++ - Symmetric algorithms, like AES, Blowfish, Triple-DES, DES, ARC4,  \
++   Camellia and XTEA                                                 \
++ - Hash algorithms, like SHA-1, SHA-2, RIPEMD-160 and MD5            \
++ - Entropy pool and random generators, like CTR-DRBG and HMAC-DRBG   \
++ - Public key algorithms, like RSA, Elliptic Curves, Diffie-Hellman, \
++   ECDSA and ECDH                                                    \
++ - SSL v3 and TLS 1.0, 1.1 and 1.2                                   \
++ - Abstraction layers for ciphers, hashes, public key operations,    \
++   platform abstraction and threading                                \
++"
+ 
+ HOMEPAGE = "https://polarssl.org"
+ BUGTRACKER = "https://github.com/polarssl/polarssl/issues"
 -- 
 1.9.1
 
