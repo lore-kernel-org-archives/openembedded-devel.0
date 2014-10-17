@@ -1,36 +1,36 @@
-Return-Path: <eduardo@monkey.io>
-Received: from mail-yh0-f53.google.com (mail-yh0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E40E7025A
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B6FB9716A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2014 03:01:47 +0000 (UTC)
-Received: by mail-yh0-f53.google.com with SMTP id b6so2560656yha.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Oct 2014 20:01:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=L69dcvF8jn8JKs9LiFZL3S9DPLWuRf8+8Sw9AUCg1kw=;
-	b=gBLWEI9X6OKXw/V1tix23vdr08ZRs1mVBkZgr1qi5fh0aO72ebkjT8iC/oABosF6vA
-	Bp2dCHmewXQ4XdudnGuHGsUx5bsOKznZXQFA9k7iWs+rqcBYj+oGA/dQ55L9EAEoXbit
-	B15L00SzTAFbpL2g/1LAD0em3a5MUslEioNvDCua2H28KuAzWpcC10T5xYxRshW6HaV3
-	ERwDmxY/Uk9J5Fxr8pxuo66tONMYwcW+WaNhtcgQ3tqW12Ay30cK5UXJD4nyobZ8zTj5
-	kMgIbMBEvg/cXgIPwSps1Yvg9RO+TPljK/3mbyQA8oBMojWOufNt+NzocikCQilGNHpH
-	yEEw==
-X-Gm-Message-State: ALoCoQlx/olznS9eJgV/W5AgYRXFj7CMZNIcbE9qKr18t7FBx07dn7PCG/twjn18b+u12gXGXvio
-X-Received: by 10.236.61.115 with SMTP id v79mr7242337yhc.73.1413514909017;
-	Thu, 16 Oct 2014 20:01:49 -0700 (PDT)
-Received: from monotop.amnet.co.cr ([186.4.56.221])
-	by mx.google.com with ESMTPSA id q4sm170602yhb.15.2014.10.16.20.01.48
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Oct 2014 20:01:48 -0700 (PDT)
-From: Eduardo Silva <eduardo@monkey.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Oct 2014 21:01:35 -0600
-Message-Id: <1413514895-22623-1-git-send-email-eduardo@monkey.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-webserver][PATCH] Monkey: new v1.5.4 release.
+	Fri, 17 Oct 2014 03:06:53 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9H36rAM021639
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 16 Oct 2014 20:06:53 -0700 (PDT)
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.18]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0174.001;
+	Thu, 16 Oct 2014 20:06:53 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: Paul Barker <paul@paulbarker.me.uk>
+Thread-Topic: [oe] [meta-oe][PATCH] vim: add recipe for vim-tiny
+Thread-Index: AQHP6KAO0qgMZs0/JU6tmAoLIPTZaZwyBaNAgAEM2wCAAIYg8A==
+Date: Fri, 17 Oct 2014 03:06:52 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AABD52484D@ALA-MBB.corp.ad.wrs.com>
+References: <1413366811-1259-1-git-send-email-jackie.huang@windriver.com>
+	<20141015103818.GP3000@jama>
+	<CANyK_8e+OeoHRKN+nriKpQNRuekQBxH_7We9rtMrBQG=wqZ2=A@mail.gmail.com>
+	<1B858668EC6A94408DCA5225FDFA85AABD522EEC@ALA-MBB.corp.ad.wrs.com>
+	<CANyK_8fqqURrOJ9F3dB-VyfENrnEFgE3kx5TRiApjE=CfFxLOw@mail.gmail.com>
+In-Reply-To: <CANyK_8fqqURrOJ9F3dB-VyfENrnEFgE3kx5TRiApjE=CfFxLOw@mail.gmail.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.131]
+MIME-Version: 1.0
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] vim: add recipe for vim-tiny
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,45 +44,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2014 03:01:52 -0000
+X-List-Received-Date: Fri, 17 Oct 2014 03:06:58 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This patch add the new Monkey HTTP Server v1.5.4.
-
-For more details about software changes please visit:
-
-    http://monkey-project.com/Announcements/v1.5.4
-
-=== Build Tests ==
-
-This version have been tested on Yocto/Daisy based on RPM.
-
-monkey-yocto/a617991e40bd5c3779ad7b3689f78857d3e45248
-
-Signed-off-by: Eduardo Silva <eduardo@monkey.io>
----
- .../recipes-httpd/monkey/{monkey_1.5.3.bb => monkey_1.5.4.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-httpd/monkey/{monkey_1.5.3.bb => monkey_1.5.4.bb} (94%)
-
-diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
-similarity index 94%
-rename from meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb
-rename to meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
-index 06095ba..a4963af 100644
---- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.3.bb
-+++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
-@@ -11,8 +11,8 @@ SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
-            file://monkey.service \
-            file://monkey.init"
- 
--SRC_URI[md5sum] = "1fa9ddbb4c0100b22f2fc4b8da56dbe9"
--SRC_URI[sha256sum] = "0ac300e04f052818bc26b7da0183c3c5cd13be8090aaabd3505838587be8c0ec"
-+SRC_URI[md5sum] = "b794724ac38cfedee2a5d27c175bc87e"
-+SRC_URI[sha256sum] = "662bbafc614d32f645059e6e00258fed640665594f5b7f11cf4c4763cf09ddcf"
- 
- EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
-                 --logdir=${localstatedir}/log/monkey/ \
--- 
-1.9.1
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogcGF1bC5iZXRhZml2ZUBn
+bWFpbC5jb20gW21haWx0bzpwYXVsLmJldGFmaXZlQGdtYWlsLmNvbV0gT24gQmVoYWxmIE9mIFBh
+dWwgQmFya2VyDQo+IFNlbnQ6IFRodXJzZGF5LCBPY3RvYmVyIDE2LCAyMDE0IDc6NDkgUE0NCj4g
+VG86IEh1YW5nLCBKaWUgKEphY2tpZSkNCj4gQ2M6IE1hcnRpbiBKYW5zYSAobWFydGluLmphbnNh
+QGdtYWlsLmNvbSk7IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSF0gdmltOiBhZGQgcmVjaXBlIGZvciB2
+aW0tdGlueQ0KPiANCj4gT24gMTYgT2N0b2JlciAyMDE0IDA0OjI3LCBIdWFuZywgSmllIChKYWNr
+aWUpIDxKYWNraWUuSHVhbmdAd2luZHJpdmVyLmNvbT4gd3JvdGU6DQo+ID4NCj4gPg0KPiA+PiAt
+LS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+PiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4+IFttYWlsdG86b3BlbmVtYmVkZGVk
+LWRldmVsLSBib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZg0KPiA+PiBP
+ZiBQYXVsIEJhcmtlcg0KPiA+PiBTZW50OiBUaHVyc2RheSwgT2N0b2JlciAxNiwgMjAxNCAxOjQ1
+IEFNDQo+ID4+IFRvOiBPRSBEZXZlbA0KPiA+PiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1b
+UEFUQ0hdIHZpbTogYWRkIHJlY2lwZSBmb3IgdmltLXRpbnkNCj4gPj4NCj4gPj4gT24gMTUgT2N0
+b2JlciAyMDE0IDExOjM4LCBNYXJ0aW4gSmFuc2EgPG1hcnRpbi5qYW5zYUBnbWFpbC5jb20+IHdy
+b3RlOg0KPiA+PiA+IE9uIFdlZCwgT2N0IDE1LCAyMDE0IGF0IDA1OjUzOjMxQU0gLTA0MDAsIGph
+Y2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tIHdyb3RlOg0KPiA+PiA+PiBGcm9tOiBKYWNraWUgSHVh
+bmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPg0KPiA+PiA+Pg0KPiA+PiA+PiBDaGFuZ2Vz
+Og0KPiA+PiA+PiAtIHNwbGl0IHRoZSB2aW0gcmVjaXBlIHRvIHR3byBmaWxlcw0KPiA+PiA+PiAt
+IGFkZCBiYiBmb3IgdmltLXRpbnkgYmFzZWQgb24gUEFDS0FHRUNPTkZJRyBkZWZpbmVkIGluIC5p
+bmMgZmlsZQ0KPiA+PiA+PiAtIHVzZSB0cmltX3ZlcnNpb24gdG8gZ2V0IFZJTURJUg0KPiA+PiA+
+DQo+ID4+ID4gSWYgeW91IHJlYWxseSB3YW50IHRvIHJldmVydCBmb2xsb3dpbmcgMiBwYXRjaGVz
+LCB0aGVuIHlvdSBuZWVkIHRvDQo+ID4NCj4gPiBTb3JyeSB0aGF0IEkgZGlkbid0IG5vdGljZSB0
+aGUgMiBwYXRjaGVzIGluIHRoZSBjb21taXQgaGlzdG9yeS4NCj4gPg0KPiA+PiA+IHByb3ZpZGUg
+bW9yZSBqdXN0aWZpY2F0aW9ucyBmb3IgeW91ciBwYXRjaCBhbmQgYWxzbyBjb25maXJtIHRoYXQN
+Cj4gPj4gPiB0aGUgcmVjaXBlcyBkb24ndCBzdGFnZSBjb25mbGljdGluZyBmaWxlcyBpbiBzeXNy
+b290IGFueW1vcmUgKEkNCj4gPj4gPiBkb24ndCBzZWUgYW55IGNoYW5nZSBpbiByZWNpcGUgcHJl
+dmVudGluZyB0aGF0KS4NCj4gPg0KPiA+IEluIHZpbS10aW55LCB0aGVyZSBhcmUgb25seSB0d28g
+ZmlsZXMgaW5zdGFsbGVkOiB0aGUgYmluYXJ5IGFuZCB0aGUgcmMNCj4gPiBmaWxlLCBhbmQgdGhl
+eSBhcmUgcmVuYW1lZCB0byBhdm9pZCB0aGUgY29uZmxpY3Rpb246DQo+ID4gJCBmaW5kIC4gLXR5
+cGUgZg0KPiA+IC4vYmluL3ZpbS10aW55IChpdCdzIHZpbSBpbiB2aW0gcGFja2FnZSkgLi91c3Iv
+c2hhcmUvdmltL3ZpcmMgKGl0J3MNCj4gPiB2aW1yYyBpbiB2aW0gcGFja2FnZSkNCj4gPg0KPiAN
+Cj4gV2l0aCBqdXN0IHZpbS10aW55IGluc3RhbGxlZCwgdGhlIHVzZXIgc2hvdWxkIHN0aWxsIGJl
+IGFibGUgdG8gcnVuICd2aW0nIHRvIHN0YXJ0IHRoZSBwcm9ncmFtLiBXZSBjb3VsZA0KPiBtYWtl
+IHRoYXQgYW4gdXBkYXRlLWFsdGVybmF0aXZlcyBsaW5rLCBidXQgdGhlbiB3ZSdkIGhhdmUgdG8g
+cmVuYW1lIHRoZSBleGVjdXRhYmxlIGZvciB2aW0gcHJvcGVyDQo+IGFuZCB1c2UgdXBkYXRlLWFs
+dGVybmF0aXZlcyB0aGVyZSBhcyB3ZWxsLg0KPiANCj4gSSdkIHJhdGhlciBzZWUgYm90aCBwYWNr
+YWdlcyB1c2UgdGhlICd2aW0nIGV4ZWN1dGFibGUgbmFtZSBhbmQgc2V0IENPTkZMSUNUUy9SQ09O
+RkxJQ1RTDQoNClllYWgsIGl0IHdvdWxkIGJlIGJldHRlciB0byBkbyBsaWtlIHRoaXMsIEkgd2ls
+bCBjaGFuZ2UgaXQuDQoNCj4gYXBwcm9wcmlhdGVseSwgdW5sZXNzIHRoZXJlIGlzIGEgZ29vZCBy
+ZWFzb24gYSB1c2VyIHdvdWxkIHdhbnQgYm90aCAndmltJyBhbmQgJ3ZpbS10aW55JyBpbnN0YWxs
+ZWQNCj4gdG9nZXRoZXIuDQo+IA0KPiA+PiA+DQo+ID4+DQo+ID4+IEFncmVlZC4gVGhlcmUgbWF5
+IGJlIGEgdXNlIGZvciBoYXZpbmcgYm90aCB2aW0gYW5kIHZpbS10aW55IGluIGENCj4gPj4gcGFj
+a2FnZSBmZWVkLCBidXQgSSB0aGluayB3ZSBuZWVkIGENCj4gPg0KPiA+IFdlIGhhdmUgYmVlbiB1
+c2luZyBsaWtlIHRoaXMgZm9yIGEgbG9uZyB0aW1lIGFuZCBpdCB3b3JrcyBmaW5lIHdoZW4gYm90
+aCB2aW0gYW5kIHZpbS10aW55IGFyZQ0KPiBpbnN0YWxsZWQuDQo+ID4NCj4gPj4gYmV0dGVyIHdh
+eSBvZiBoYW5kbGluZyBpdCB0aGFuIHRoaXMuDQo+ID4NCj4gPiBJIGRvbid0IGluc2lzdCBvbiB0
+aGlzIHdheSBhbmQgd2lsbCBiZSBoYXBweSBpZiB0aGVyZSBpcyBhIGJldHRlciB3YXkNCj4gPiB0
+byBoYW5kbGUgdGhpcy4gV2UgdXN1YWxseSBkZWZpbmUgd2hhdCBuZWVkIHRvIGJlIGluc3RhbGxl
+ZCBpbg0KPiA+IGRpZmZlcmVudCBwYWNrYWdlZ3JvdXBzIGFuZCBpbWFnZXMsIGZvciBzbWFsbGVy
+IGltYWdlLCB3ZSBuZWVkDQo+ID4gdmltLXRpbnksIHNvbWUgb3RoZXJzIG5lZWQgdmltLCBJIGtu
+b3cgd2UgY2FuIGNoYW5nZSBQQUNLQUdFQ09ORklHIHRvDQo+ID4gZ2V0IGRpZmZlcmVudCB2aW1z
+LCBidXQgaXQgZG9lc24ndCB3b3JrIGluIHBhY2thZ2Vncm91cCBvciBpbWFnZS4gQW5kDQo+ID4g
+aXQgc2VlbXMgbW9yZSBjbGVhciB0byB1c2VyL2N1c3RvbWVyIGlmIHdlIHVzZSBuYW1lIGxpa2Ug
+dmltLXRpbnksIGd2aW0vdmltLWd1aSwgb3IgdXNlciBtYXkNCj4gY29tcGxhaW4gdGhhdCB2aW0g
+aXMgbm90IGZ1bGx5IGZlYXR1cmVkIHdoZW4gdGhleSBzZWUgdmltIGlzIGluc3RhbGxlZCBidXQg
+YWN0dWFsbHkgaXQgaXMgdGhlIG9uZSB3aXRoIHRpbnkNCj4gZmVhdHVyZS4NCj4gDQo+IEkgdGhp
+bmsgdGhpcyBpcyBhIHdpZGVyIGlzc3VlIHRoYXQgbWF5IGFmZmVjdCBwYWNrYWdlcyBvdGhlciB0
+aGFuIHZpbS4NCj4gSSBzZWVtIHRvIHJlY2FsbCB0aGUgcXVlc3Rpb24gb2Ygd2hldGhlciBQQUNL
+QUdFQ09ORklHIHZhbHVlcyBjYW4gYmUgc2V0IHBlciBpbWFnZSByZWNpcGUgYmVpbmcNCj4gYXNr
+ZWQgcHJldmlvdXNseS4NCj4gDQo+IElzIGl0IHBvc3NpYmxlIHRvIHdyaXRlIGEgdmltLXRpbnkg
+cmVjaXBlIHdpdGhvdXQgc3BsaXR0aW5nIHZpbS5pbmMgZnJvbSB2aW1fKi5iYj8gQ2FuIHZpbS10
+aW55IGp1c3QNCj4gJ3JlcXVpcmUgdmltXzcuNC4zNzMuYmInIGFuZCBjaGFuZ2UgUEFDS0FHRUNP
+TkZJRyBhbmQgdGhlIGRvX2luc3RhbGwgZnVuY3Rpb24/DQoNCkkgaGFkIHRob3VnaHQgYWJvdXQg
+dGhpcywgYnV0IG5ldmVyIHRyeS4gSSBqdXN0IGNoZWNrZWQgdGhhdCB0aGVyZSBhcmUgc29tZSBl
+dmlkZW5jZSB0aGF0ICJyZXF1aXJlIGJiIg0Kc2hvdWxkIHdvcmssIHNvIGl0J3MgcG9zc2libGUg
+YW5kIEkgdGhpbmsgaXQgd291bGQgYmUgYSBiZXR0ZXIgd2F5IHRvIGhhbmRsZSB0aGlzLiBJIHdp
+bGwgcmUtd29yayBvbiBpdCBhbmQNCnNlbmQgdjIsIHRoYW5rcyENCg0KVGhhbmtzLA0KSmFja2ll
+DQoNCj4gDQo+ID4NCj4gPj4NCj4gPj4gVGhpcyBwYXRjaCBpcyBkaWZmaWN1bHQgdG8gZnVsbHkg
+cmV2aWV3IGFzIGl0IG1peGVzIGNvbmNlcHR1YWxseQ0KPiA+PiBkaWZmZXJlbnQgY2hhbmdlcyB0
+b2dldGhlci4gSWYgdGhpcyBvciBzb21ldGhpbmcgc2ltaWxhciBkb2VzIGdvIGluIGFmdGVyIGZ1
+cnRoZXIgZGlzY3Vzc2lvbiwgaXQgbmVlZHMNCj4gdG8gYmUgc3BsaXQgdXAuDQo+ID4NCj4gPiBZ
+ZWFoLCBzb3JyeSBmb3IgdGhhdCwgSSB3aWxsIHNwbGl0IGl0IHVwIGlmIG5lZWRlZCBhZnRlciBm
+dXJ0aGVyIGRpc2N1c3Npb24gaGVyZS4NCj4gPg0KPiA+IFRoYW5rcywNCj4gPiBKYWNraWUNCj4g
+Pg0KPiANCj4gQ2hlZXJzLA0KPiANCj4gLS0NCj4gUGF1bCBCYXJrZXINCj4gDQo+IEVtYWlsOiBw
+YXVsQHBhdWxiYXJrZXIubWUudWsNCj4gaHR0cDovL3d3dy5wYXVsYmFya2VyLm1lLnVrDQo=
 
