@@ -1,24 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FD1C60DD7
+	by mail.openembedded.org (Postfix) with ESMTP id 46C6560DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2014 07:04:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9H74a5q023219
+	Fri, 17 Oct 2014 15:27:26 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9HFRQES025336
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Oct 2014 00:04:37 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Fri, 17 Oct 2014 00:04:36 -0700
-From: <Qi.Chen@windriver.com>
+	Fri, 17 Oct 2014 08:27:27 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Fri, 17 Oct 2014 08:27:26 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Oct 2014 15:05:55 +0800
-Message-ID: <1413529555-4290-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 17 Oct 2014 11:27:25 -0400
+Message-ID: <1413559645-28916-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] radvd: fix daemon start-up
+Subject: [meta-networking][PATCH] wireshark: add PACKAGECONFIG for krb5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,71 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Oct 2014 07:04:41 -0000
+X-List-Received-Date: Fri, 17 Oct 2014 15:27:31 -0000
 Content-Type: text/plain
 
-From: Chen Qi <Qi.Chen@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-1. Fix radvd.service to start daemon correctly.
-2. Make the daemon run under 'radvd' user by default.
+* fixes floating dependency:
+WARNING: QA Issue: wireshark rdepends on krb5, but it isn't a build dependency? [build-deps]
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/recipes-daemons/radvd/files/radvd.default | 1 +
- meta-networking/recipes-daemons/radvd/files/radvd.service | 5 +----
- meta-networking/recipes-daemons/radvd/radvd.inc           | 6 +++++-
- 3 files changed, 7 insertions(+), 5 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/radvd/files/radvd.default
+ meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.default b/meta-networking/recipes-daemons/radvd/files/radvd.default
-new file mode 100644
-index 0000000..7cb73c7
---- /dev/null
-+++ b/meta-networking/recipes-daemons/radvd/files/radvd.default
-@@ -0,0 +1 @@
-+OPTIONS="-u radvd"
-diff --git a/meta-networking/recipes-daemons/radvd/files/radvd.service b/meta-networking/recipes-daemons/radvd/files/radvd.service
-index 3aac7b2..e60798a 100644
---- a/meta-networking/recipes-daemons/radvd/files/radvd.service
-+++ b/meta-networking/recipes-daemons/radvd/files/radvd.service
-@@ -4,11 +4,8 @@ After=network.target
- ConditionPathExists=@SYSCONFDIR@/radvd.conf
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
+index 147c513..e198863 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
+@@ -35,6 +35,7 @@ PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
+ PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
+ PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
+ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
++PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
  
- [Service]
--Type=forking
--PIDFile=/var/run/radvd/radvd.pid
- EnvironmentFile=-@SYSCONFDIR@/default/radvd
--ExecStartPre=@BASE_BINDIR@/mkdir -p /var/run/radvd
--ExecStart=@SBINDIR@/radvd $OPTIONS
-+ExecStart=@SBINDIR@/radvd -n $OPTIONS
+ EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
  
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-networking/recipes-daemons/radvd/radvd.inc
-index 85d1a85..6b595b0 100644
---- a/meta-networking/recipes-daemons/radvd/radvd.inc
-+++ b/meta-networking/recipes-daemons/radvd/radvd.inc
-@@ -17,7 +17,8 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=73ebbf7182ae996e65e8fadc9a8c45db"
- SRC_URI = "http://v6web.litech.org/radvd/dist/radvd-${PV}.tar.gz \
-            file://radvd.init \
-            file://radvd.service \
--           file://volatiles.03_radvd"
-+           file://volatiles.03_radvd \
-+           file://radvd.default"
- 
- inherit autotools update-rc.d useradd pkgconfig systemd
- 
-@@ -44,6 +45,9 @@ do_install_append () {
-            -e 's#@SBINDIR@#${sbindir}#g' \
-            -e 's#@BASE_BINDIR@#${base_bindir}#g' ${D}${systemd_unitdir}/system/radvd.service
- 
-+    # Install default environment file
-+    install -m 0644 ${WORKDIR}/radvd.default ${D}${sysconfdir}/default/radvd
-+
-     # Documentation
-     for i in radvd.conf.example README; do \
-         install -m 0644 ${S}/$i ${D}${docdir}/radvd; \
 -- 
-1.9.1
+2.0.0
 
 
