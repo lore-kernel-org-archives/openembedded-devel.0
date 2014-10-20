@@ -1,24 +1,40 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E5BEE6AC20
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 4888F65CDB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2014 06:43:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9K6hHaX017230
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 20 Oct 2014 13:27:56 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id b13so5443691wgh.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Oct 2014 23:43:18 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 19 Oct 2014 23:43:16 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Oct 2014 02:43:15 -0400
-Message-ID: <1413787395-12866-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
+	Mon, 20 Oct 2014 06:27:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=0L4Odk1ZOPhwt9ie9Igr9fV+tSDDSfm7+uLcM1A9Ujg=;
+	b=sn5rQvDkrN5IkGhLxqvxytCCa72M95rRI6SHcXVK3lNFi5r+79eyx9qBaP3uPQ8c+J
+	awdD52C+tkO59ezPVhB6Uv8C8rYTLaUBZoN1J8CMyjHHRNJrayevC2WDqZ16ZieRU2iW
+	1wKIi2nHZdKKhQ8xOiyOwuYsbN0+Mcj1h/j002BatPUiBGXwLcCQP2jVhVBndFul8Xrv
+	sIGptua1v++3EzxYRimeuwsXC+vRtiGgi+XxQjAIGle4zzZ+5bYHZ1h5aTwq+j/UzIwP
+	wKCYWPSVwYxiw+RsJ85beG9vr8iS6+yuKmDAdLpJUlo6nHBebFKXdoxeQy9hSapKxlbQ
+	re3w==
+X-Received: by 10.194.90.144 with SMTP id bw16mr3287707wjb.133.1413811677057; 
+	Mon, 20 Oct 2014 06:27:57 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-176-198-252-150.hsi05.unitymediagroup.de. [176.198.252.150])
+	by mx.google.com with ESMTPSA id
+	fm10sm9621757wib.21.2014.10.20.06.27.56
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 20 Oct 2014 06:27:56 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 20 Oct 2014 15:27:45 +0200
+Message-Id: <1413811666-20325-3-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1413811666-20325-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1413811666-20325-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] net-snmp: add ac_cv_header_valgrind_* to CACHED_CONFIGUREVARS
+Subject: [PATCH 3/4] networkmanager: make shared connections work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,37 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Oct 2014 06:43:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 20 Oct 2014 13:28:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+* set correct path for dnsmasq
+* add dnsmasq to RRECOMMENDS
 
-There have been occasions that net-snmp sees valgrind and then later it's
-not available, adding this setting ensures determinism by disabling it by
-default
+this popped up when testing access point enabled for network-manager-applet
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-index eb97748..9012615 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-@@ -35,6 +35,11 @@ EXTRA_OECONF = "--disable-embedded-perl \
-                 --with-defaults \
-                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
+index 0792e8e..8d37c98 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
+@@ -30,6 +30,7 @@ EXTRA_OECONF = " \
+     --with-dhclient=${base_sbindir}/dhclient \
+     --with-iptables=${sbindir}/iptables \
+     --with-tests \
++    --with-dnsmasq=${bindir}/dnsmasq \
+ "
  
-+CACHED_CONFIGUREVARS = " \
-+    ac_cv_header_valgrind_valgrind_h=no \
-+    ac_cv_header_valgrind_memcheck_h=no \
-+"
-+
- do_configure_prepend() {
-     export PERLPROG="${bindir}/env perl"
- }
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
+@@ -80,7 +81,7 @@ FILES_${PN} += " \
+     ${systemd_unitdir}/system/NetworkManager-wait-online.service \
+ "
+ 
+-RRECOMMENDS_${PN} += "iptables"
++RRECOMMENDS_${PN} += "iptables dnsmasq"
+ RCONFLICTS_${PN} = "connman"
+ RDEPENDS_${PN} = " \
+     wpa-supplicant \
 -- 
-2.0.0
+1.8.3.1
 
 
