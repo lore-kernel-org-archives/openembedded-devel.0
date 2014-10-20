@@ -1,38 +1,41 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 98B7A6AC08
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 19BD26AC1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2014 13:27:55 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id a1so5319994wgh.21
+	Mon, 20 Oct 2014 13:27:58 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id n3so7120249wiv.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2014 06:27:55 -0700 (PDT)
+	Mon, 20 Oct 2014 06:27:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=ZxhGArVXYmFenl+yqXYCTh6YTlx0IpT389zhaS0v+fc=;
-	b=tpWUX+HHQnNBW1PXkFTsL5ahog+y9O1WLeZ7/TCSeJTUm+bGtDrZZ3oX1d5oYh69ex
-	d6t31r/GWnoSzV3VQx7ov68WsPIxEztmaxQPbtM3UQZa4m2+zB9Z9P0qTiZ1VNEZ0mTf
-	d8qJTskhofZd2jGLhjy/W5pEY2ThT7dG6TlLv4lvveiinulIKNZB6uWp+jmp78BFbY7m
-	Ybz05p4ca8+BOZqaaGuEehkLeh/E4Q9td96Bajbm0mjX//CzCL1JClNrkoVOkChFSLev
-	GsHq1yutIfCp4rElHFe/JNQz+ei1BC3ypeWOxiqf35++HQzKaVLfphojvXp3X1d+uCW8
-	ZjcA==
-X-Received: by 10.180.9.51 with SMTP id w19mr20242513wia.13.1413811674729;
-	Mon, 20 Oct 2014 06:27:54 -0700 (PDT)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=RJAAoOrSHtkVagfu8fardC8KOZjT9Eb/R5YfEnVjx+U=;
+	b=RRUaBPfnGaPiyk5gfXg8CGMt+7hOzV0HUI42+JBcIgwdnDvnNFITsa0Ln9vkODmSPp
+	dTB5lyEvJXG7QfrLDTK6rDA5NwnC5LTIZdWQZ6uX2Jta0lxpdfB0nXpvAFbBV7zHbPEP
+	P+8meCO4QlpC9YPZePXSVxwN5qDw8dNnwdnFEA7RY7zVmEdlIX0HPdQDv141vJ0Dxc2+
+	LjWOn/x8L+p7IMMe4cJnMOPZBIDpBkgtmASJWPcnhJIPPK0Ko+4EOtaJstQVkCeQmg2S
+	9zF09vltbtzlqsynVF0Uct0jwWr6tr6/DRnbIxzWsZlp4IY65MrwEi9FmgGxLkFytGkt
+	GENQ==
+X-Received: by 10.194.57.210 with SMTP id k18mr4641586wjq.110.1413811678222;
+	Mon, 20 Oct 2014 06:27:58 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-176-198-252-150.hsi05.unitymediagroup.de. [176.198.252.150])
 	by mx.google.com with ESMTPSA id
-	fm10sm9621757wib.21.2014.10.20.06.27.53
+	fm10sm9621757wib.21.2014.10.20.06.27.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Oct 2014 06:27:54 -0700 (PDT)
+	Mon, 20 Oct 2014 06:27:57 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Oct 2014 15:27:43 +0200
-Message-Id: <1413811666-20325-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 20 Oct 2014 15:27:46 +0200
+Message-Id: <1413811666-20325-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1413811666-20325-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1413811666-20325-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/4] xfce4-power-manager: update to 1.4.1 to fix power button
+Subject: [PATCH 4/4] network-manager-applet: add basic AP support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,749 +53,224 @@ X-List-Received-Date: Mon, 20 Oct 2014 13:28:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-with 1.2.0 pressing power button shuts down independent of the setting in
-xfce4-power-manager
+Tested with gumstix overo as access point and connected windows pc and android
+smartphone.
+
+Note that there are are some settings available for AP which do not make sense - see
+[1] for further details.
+
+[1] https://bugzilla.gnome.org/show_bug.cgi?id=734589#c6
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...shutdown-reboot-functionality-for-systemd.patch | 677 ---------------------
- ...nager_1.2.0.bb => xfce4-power-manager_1.4.1.bb} |  29 +-
- 2 files changed, 19 insertions(+), 687 deletions(-)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch
- rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.2.0.bb => xfce4-power-manager_1.4.1.bb} (53%)
+ ...port-for-AP-mode-setting-for-wifi-sharing.patch | 128 +++++++++++++++++++++
+ ...for-network-sharing-if-device-supports-it.patch |  48 ++++++++
+ .../network-manager-applet_0.9.8.10.bb             |   2 +
+ 3 files changed, 178 insertions(+)
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch
+ create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch b/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch
-deleted file mode 100644
-index d5c5487..0000000
---- a/meta-xfce/recipes-xfce/xfce4-power-manager/files/0001-Add-shutdown-reboot-functionality-for-systemd.patch
-+++ /dev/null
-@@ -1,677 +0,0 @@
--From 023333688f73ed26097c693d43f76e4b7d5698e2 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
--Date: Fri, 7 Jun 2013 18:38:42 +0200
--Subject: [PATCH] Add shutdown/reboot functionality for systemd
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Upstream-Status: Submitted [2]
--
--[1] http://git.xfce.org/xfce/xfce4-session/commit/?id=ae28aef315a7a6b90f1649ce6d1f30b842791cbf
--[2] https://bugzilla.xfce.org/show_bug.cgi?id=10167
--
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-----
-- configure.ac       |    2 +
-- src/Makefile.am    |   14 +++-
-- src/xfpm-manager.c |   29 ++++++-
-- src/xfpm-power.c   |   66 ++++++++++++++-
-- src/xfpm-systemd.c |  245 ++++++++++++++++++++++++++++++++++++++++++++++++++++
-- src/xfpm-systemd.h |   60 +++++++++++++
-- 6 files changed, 411 insertions(+), 5 deletions(-)
-- create mode 100644 src/xfpm-systemd.c
-- create mode 100644 src/xfpm-systemd.h
--
--diff --git a/configure.ac b/configure.ac
--index 633b340..1db2036 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -95,6 +95,8 @@ if test "x$ac_cv_enable_polkit" = "xno"; then
--     polkit="no"
-- else
--     AC_MSG_RESULT([yes])
--+    m4_define([polkit_minimum_version], [0.100])
--+    XDT_CHECK_PACKAGE([SYSTEMD], [polkit-gobject-1], [polkit_minimum_version])
--     AC_DEFINE(ENABLE_POLKIT, 1 , [PolicyKit support])
--     polkit="yes"
-- fi
--diff --git a/src/Makefile.am b/src/Makefile.am
--index 0435bed..9b7fdd0 100644
----- a/src/Makefile.am
--+++ b/src/Makefile.am
--@@ -18,8 +18,6 @@ xfce4_power_manager_SOURCES =                   \
-- 	xfpm-xfconf.h				\
-- 	xfpm-disks.c				\
-- 	xfpm-disks.h				\
---	xfpm-console-kit.c			\
---	xfpm-console-kit.h			\
-- 	egg-idletime.c				\
-- 	egg-idletime.h				\
-- 	xfpm-backlight.c			\
--@@ -39,6 +37,16 @@ xfce4_power_manager_SOURCES =                   \
-- 	xfpm-errors.c				\
-- 	xfpm-errors.h
-- 
--+if ENABLE_POLKIT
--+xfce4_power_manager_SOURCES +=			\
--+	xfpm-systemd.c				\
--+	xfpm-systemd.h
--+else
--+xfce4_power_manager_SOURCES +=                  \
--+	xfpm-console-kit.c			\
--+	xfpm-console-kit.h
--+endif
--+
-- xfce4_power_manager_CFLAGS =                    \
-- 	-I$(top_srcdir)                         \
-- 	-I$(top_srcdir)/common                  \
--@@ -52,6 +60,7 @@ xfce4_power_manager_CFLAGS =                    \
-- 	$(LIBXFCE4UI_CFLAGS)                    \
-- 	$(XFCONF_CFLAGS)                        \
-- 	$(LIBNOTIFY_CFLAGS)                     \
--+	$(SYSTEMD_CFLAGS)                       \
-- 	$(XRANDR_CFLAGS)			\
-- 	$(DPMS_CFLAGS)           		\
-- 	$(PLATFORM_CPPFLAGS)			\
--@@ -70,6 +79,7 @@ xfce4_power_manager_LDADD =                     \
-- 	$(LIBXFCE4UI_LIBS)                      \
-- 	$(XFCONF_LIBS)                          \
-- 	$(LIBNOTIFY_LIBS)                       \
--+	$(SYSTEMD_LIBS)                         \
-- 	$(XRANDR_LIBS)				\
-- 	$(DPMS_LIBS)
-- 
--diff --git a/src/xfpm-manager.c b/src/xfpm-manager.c
--index 472ee3e..9bfb53c 100644
----- a/src/xfpm-manager.c
--+++ b/src/xfpm-manager.c
--@@ -43,7 +43,6 @@
-- #include "xfpm-disks.h"
-- #include "xfpm-dpms.h"
-- #include "xfpm-manager.h"
---#include "xfpm-console-kit.h"
-- #include "xfpm-button.h"
-- #include "xfpm-backlight.h"
-- #include "xfpm-inhibit.h"
--@@ -58,6 +57,12 @@
-- #include "xfpm-enum-types.h"
-- #include "xfpm-dbus-monitor.h"
-- 
--+#ifdef ENABLE_POLKIT
--+#include "xfpm-systemd.h"
--+#else
--+#include "xfpm-console-kit.h"
--+#endif
--+
-- static void xfpm_manager_finalize   (GObject *object);
-- 
-- static void xfpm_manager_dbus_class_init (XfpmManagerClass *klass);
--@@ -80,7 +85,11 @@ struct XfpmManagerPrivate
--     XfpmButton      *button;
--     XfpmXfconf      *conf;
--     XfpmBacklight   *backlight;
--+#ifdef ENABLE_POLKIT
--+    XfpmSystemd     *systemd;
--+#else
--     XfpmConsoleKit  *console;
--+#endif
--     XfpmDBusMonitor *monitor;
--     XfpmDisks       *disks;
--     XfpmInhibit     *inhibit;
--@@ -131,7 +140,11 @@ xfpm_manager_finalize (GObject *object)
--     g_object_unref (manager->priv->button);
--     g_object_unref (manager->priv->conf);
--     g_object_unref (manager->priv->client);
--+#ifdef ENABLE_POLKIT
--+    g_object_unref (manager->priv->systemd);
--+#else
--     g_object_unref (manager->priv->console);
--+#endif
--     g_object_unref (manager->priv->monitor);
--     g_object_unref (manager->priv->disks);
--     g_object_unref (manager->priv->inhibit);
--@@ -201,7 +214,11 @@ static void
-- xfpm_manager_shutdown (XfpmManager *manager)
-- {
--     GError *error = NULL;
--+#ifdef ENABLE_POLKIT
--+    xfpm_systemd_shutdown (manager->priv->systemd, &error );
--+#else
--     xfpm_console_kit_shutdown (manager->priv->console, &error );
--+#endif
--     
--     if ( error )
--     {
--@@ -521,7 +538,11 @@ void xfpm_manager_start (XfpmManager *manager)
--     manager->priv->power = xfpm_power_get ();
--     manager->priv->button = xfpm_button_new ();
--     manager->priv->conf = xfpm_xfconf_new ();
--+#ifdef ENABLE_POLKIT
--+    manager->priv->systemd = xfpm_systemd_new ();
--+#else
--     manager->priv->console = xfpm_console_kit_new ();
--+#endif
--     manager->priv->monitor = xfpm_dbus_monitor_new ();
--     manager->priv->disks = xfpm_disks_new ();
--     manager->priv->inhibit = xfpm_inhibit_new ();
--@@ -603,9 +624,15 @@ GHashTable *xfpm_manager_get_config (XfpmManager *manager)
--     
--     hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
--     
--+#ifdef ENABLE_POLKIT
--+    g_object_get (G_OBJECT (manager->priv->systemd),
--+		  "can-shutdown", &can_shutdown,
--+		  NULL);
--+#else
--     g_object_get (G_OBJECT (manager->priv->console),
-- 		  "can-shutdown", &can_shutdown,
-- 		  NULL);
--+#endif
-- 
--     g_object_get (G_OBJECT (manager->priv->power),
--                   "auth-suspend", &auth_suspend,
--diff --git a/src/xfpm-power.c b/src/xfpm-power.c
--index 796bef8..391c7fc 100644
----- a/src/xfpm-power.c
--+++ b/src/xfpm-power.c
--@@ -39,7 +39,6 @@
-- #include "xfpm-xfconf.h"
-- #include "xfpm-notify.h"
-- #include "xfpm-errors.h"
---#include "xfpm-console-kit.h"
-- #include "xfpm-inhibit.h"
-- #include "xfpm-polkit.h"
-- #include "xfpm-network-manager.h"
--@@ -51,6 +50,12 @@
-- #include "xfpm-enum-types.h"
-- #include "egg-idletime.h"
-- 
--+#ifdef ENABLE_POLKIT
--+#include "xfpm-systemd.h"
--+#else
--+#include "xfpm-console-kit.h"
--+#endif
--+
-- static void xfpm_power_finalize     (GObject *object);
-- 
-- static void xfpm_power_get_property (GObject *object,
--@@ -75,7 +80,11 @@ struct XfpmPowerPrivate
--     
--     GHashTable      *hash;
--     
--+#ifdef ENABLE_POLKIT
--+    XfpmSystemd     *systemd;
--+#else
--     XfpmConsoleKit  *console;
--+#endif
--     XfpmInhibit	    *inhibit;
--     XfpmXfconf      *conf;
--     GtkStatusIcon   *adapter_icon;
--@@ -680,9 +689,15 @@ xfpm_power_add_actions_to_notification (XfpmPower *power, NotifyNotification *n)
-- {
--     gboolean can_shutdown;
--     
--+#ifdef ENABLE_POLKIT
--+    g_object_get (G_OBJECT (power->priv->systemd),
--+		  "can-shutdown", &can_shutdown,
--+		  NULL);
--+#else
--     g_object_get (G_OBJECT (power->priv->console),
-- 		  "can-shutdown", &can_shutdown,
-- 		  NULL);
--+#endif
-- 		  
--     if (  power->priv->can_hibernate && power->priv->auth_hibernate )
--     {
--@@ -756,9 +771,15 @@ xfpm_power_show_critical_action_gtk (XfpmPower *power)
--     const gchar *message;
--     gboolean can_shutdown;
--     
--+#ifdef ENABLE_POLKIT
--+    g_object_get (G_OBJECT (power->priv->systemd),
--+		  "can-shutdown", &can_shutdown,
--+		  NULL);
--+#else
--     g_object_get (G_OBJECT (power->priv->console),
-- 		  "can-shutdown", &can_shutdown,
-- 		  NULL);
--+#endif
--     
--     message = _("System is running on low power. "\
--                "Save your work to avoid losing data");
--@@ -1327,7 +1348,11 @@ xfpm_power_init (XfpmPower *power)
--     power->priv->inhibit = xfpm_inhibit_new ();
--     power->priv->notify  = xfpm_notify_new ();
--     power->priv->conf    = xfpm_xfconf_new ();
--+#ifdef ENABLE_POLKIT
--+    power->priv->systemd = xfpm_systemd_new ();
--+#else
--     power->priv->console = xfpm_console_kit_new ();
--+#endif
--     
--     g_signal_connect_swapped (power->priv->conf, "notify::" SHOW_TRAY_ICON_CFG,
-- 			      G_CALLBACK (xfpm_power_refresh_adaptor_visible), power);
--@@ -1445,7 +1470,11 @@ xfpm_power_finalize (GObject *object)
--     g_object_unref (power->priv->inhibit);
--     g_object_unref (power->priv->notify);
--     g_object_unref (power->priv->conf);
--+#ifdef ENABLE_POLKIT
--+    g_object_unref (power->priv->systemd);
--+#else
--     g_object_unref (power->priv->console);
--+#endif
--     
--     xfpm_power_hide_adapter_icon (power);
--     
--@@ -1607,9 +1636,15 @@ static gboolean xfpm_power_dbus_shutdown (XfpmPower *power,
-- {
--     gboolean can_reboot;
--     
--+#ifdef ENABLE_POLKIT
--+    g_object_get (G_OBJECT (power->priv->systemd),
--+		  "can-shutdown", &can_reboot,
--+		  NULL);
--+#else
--     g_object_get (G_OBJECT (power->priv->console),
-- 		  "can-shutdown", &can_reboot,
-- 		  NULL);
--+#endif
--     
--     if ( !can_reboot)
--     {
--@@ -1618,7 +1653,11 @@ static gboolean xfpm_power_dbus_shutdown (XfpmPower *power,
--         return FALSE;
--     }
--     
--+#ifdef ENABLE_POLKIT
--+    xfpm_systemd_shutdown (power->priv->systemd, error);
--+#else
--     xfpm_console_kit_shutdown (power->priv->console, error);
--+#endif
--     
--     return TRUE;
-- }
--@@ -1628,9 +1667,15 @@ static gboolean xfpm_power_dbus_reboot   (XfpmPower *power,
-- {
--     gboolean can_reboot;
--     
--+#ifdef ENABLE_POLKIT
--+    g_object_get (G_OBJECT (power->priv->systemd),
--+		  "can-restart", &can_reboot,
--+		  NULL);
--+#else
--     g_object_get (G_OBJECT (power->priv->console),
-- 		  "can-restart", &can_reboot,
-- 		  NULL);
--+#endif
--     
--     if ( !can_reboot)
--     {
--@@ -1639,7 +1684,11 @@ static gboolean xfpm_power_dbus_reboot   (XfpmPower *power,
--         return FALSE;
--     }
--     
--+#ifdef ENABLE_POLKIT
--+    xfpm_systemd_reboot (power->priv->systemd, error);
--+#else
--     xfpm_console_kit_reboot (power->priv->console, error);
--+#endif
--     
--     return TRUE;
-- }
--@@ -1694,10 +1743,16 @@ static gboolean xfpm_power_dbus_can_reboot (XfpmPower * power,
-- 					  gboolean * OUT_can_reboot, 
-- 					  GError ** error)
-- {
--+#ifdef ENABLE_POLKIT
--+    g_object_get (G_OBJECT (power->priv->systemd),
--+		  "can-reboot", OUT_can_reboot,
--+		  NULL);
--+#else
--     g_object_get (G_OBJECT (power->priv->console),
-- 		  "can-reboot", OUT_can_reboot,
-- 		  NULL);
---		  
--+#endif
--+
--     return TRUE;
-- }
-- 
--@@ -1705,9 +1760,16 @@ static gboolean xfpm_power_dbus_can_shutdown (XfpmPower * power,
-- 					    gboolean * OUT_can_shutdown, 
-- 					    GError ** error)
-- {
--+#ifdef ENABLE_POLKIT
--+    g_object_get (G_OBJECT (power->priv->systemd),
--+		  "can-shutdown", OUT_can_shutdown,
--+		  NULL);
--+#else
--     g_object_get (G_OBJECT (power->priv->console),
-- 		  "can-shutdown", OUT_can_shutdown,
-- 		  NULL);
--+#endif
--+
--     return TRUE;
-- }
-- 
--diff --git a/src/xfpm-systemd.c b/src/xfpm-systemd.c
--new file mode 100644
--index 0000000..cc1cba1
----- /dev/null
--+++ b/src/xfpm-systemd.c
--@@ -0,0 +1,245 @@
--+/*
--+ * * Copyright (C) 2009-2011 Ali <aliov@xfce.org>
--+ * * Copyright (C) 2013 Andreas Müller <schnitzeltony@googlemail.com>
--+ *
--+ * Licensed under the GNU General Public License Version 2
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
--+ */
--+
--+#ifdef HAVE_CONFIG_H
--+#include <config.h>
--+#endif
--+
--+#include <stdio.h>
--+#include <stdlib.h>
--+#include <string.h>
--+
--+#include <dbus/dbus-glib.h>
--+#include <polkit/polkit.h>
--+
--+#include "xfpm-systemd.h"
--+
--+
--+static void xfpm_systemd_finalize   (GObject *object);
--+
--+static void xfpm_systemd_get_property (GObject *object,
--+                                       guint prop_id,
--+                                       GValue *value,
--+                                       GParamSpec *pspec);
--+
--+#define XFPM_SYSTEMD_GET_PRIVATE(o) \
--+(G_TYPE_INSTANCE_GET_PRIVATE ((o), XFPM_TYPE_SYSTEMD, XfpmSystemdPrivate))
--+
--+struct XfpmSystemdPrivate
--+{
--+    gboolean	     can_shutdown;
--+    gboolean	     can_restart;
--+
--+    PolkitAuthority *authority;
--+    PolkitSubject   *subject;
--+};
--+
--+enum
--+{
--+    PROP_0,
--+    PROP_CAN_RESTART,
--+    PROP_CAN_SHUTDOWN
--+};
--+
--+G_DEFINE_TYPE (XfpmSystemd, xfpm_systemd, G_TYPE_OBJECT)
--+
--+#define SYSTEMD_DBUS_NAME               "org.freedesktop.login1"
--+#define SYSTEMD_DBUS_PATH               "/org/freedesktop/login1"
--+#define SYSTEMD_DBUS_INTERFACE          "org.freedesktop.login1.Manager"
--+#define SYSTEMD_REBOOT_ACTION           "Reboot"
--+#define SYSTEMD_POWEROFF_ACTION         "PowerOff"
--+#define SYSTEMD_REBOOT_TEST             "org.freedesktop.login1.reboot"
--+#define SYSTEMD_POWEROFF_TEST           "org.freedesktop.login1.power-off"
--+
--+static void
--+xfpm_systemd_class_init (XfpmSystemdClass *klass)
--+{
--+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
--+
--+    object_class->finalize = xfpm_systemd_finalize;
--+
--+    object_class->get_property = xfpm_systemd_get_property;
--+
--+    g_object_class_install_property (object_class,
--+                                     PROP_CAN_RESTART,
--+                                     g_param_spec_boolean ("can-restart",
--+                                                           NULL, NULL,
--+                                                           FALSE,
--+                                                           G_PARAM_READABLE));
--+
--+    g_object_class_install_property (object_class,
--+                                     PROP_CAN_SHUTDOWN,
--+                                     g_param_spec_boolean ("can-shutdown",
--+                                                           NULL, NULL,
--+                                                           FALSE,
--+                                                           G_PARAM_READABLE));
--+
--+    g_type_class_add_private (klass, sizeof (XfpmSystemdPrivate));
--+}
--+
--+static gboolean
--+xfpm_systemd_can_method (XfpmSystemd  *systemd,
--+                         gboolean     *can_method,
--+                         const gchar  *method)
--+{
--+    PolkitAuthorizationResult *res;
--+    GError                    *local_error = NULL;
--+
--+    *can_method = FALSE;
--+    res = polkit_authority_check_authorization_sync (systemd->priv->authority,
--+                                                     systemd->priv->subject,
--+                                                     method,
--+                                                     NULL,
--+                                                     POLKIT_CHECK_AUTHORIZATION_FLAGS_NONE,
--+                                                     NULL,
--+                                                     &local_error);
--+    if ( local_error )
--+    {
--+	g_critical ("Unable to get %s : %s", method, local_error->message);
--+	g_error_free (local_error);
--+    }
--+
--+    if(res)
--+    {
--+        *can_method = polkit_authorization_result_get_is_authorized (res) ||
--+                      polkit_authorization_result_get_is_challenge (res);
--+        g_object_unref (G_OBJECT (res));
--+    }
--+}
--+
--+static void
--+xfpm_systemd_init (XfpmSystemd *systemd)
--+{
--+    PolkitAuthorizationResult *res;
--+
--+    systemd->priv = XFPM_SYSTEMD_GET_PRIVATE (systemd);
--+    systemd->priv->authority = polkit_authority_get_sync (NULL, NULL);
--+    systemd->priv->subject = polkit_unix_process_new (getpid());
--+    systemd->priv->can_shutdown = FALSE;
--+    systemd->priv->can_restart  = FALSE;
--+
--+    if(systemd->priv->authority && systemd->priv->subject)
--+    {
--+        xfpm_systemd_can_method (systemd,
--+                                 &systemd->priv->can_shutdown,
--+                                 SYSTEMD_POWEROFF_TEST);
--+        xfpm_systemd_can_method (systemd,
--+                                 &systemd->priv->can_restart,
--+                                 SYSTEMD_REBOOT_TEST);
--+    }
--+}
--+
--+static void xfpm_systemd_get_property (GObject *object,
--+					   guint prop_id,
--+					   GValue *value,
--+					   GParamSpec *pspec)
--+{
--+    XfpmSystemd *systemd;
--+    systemd = XFPM_SYSTEMD (object);
--+
--+    switch (prop_id)
--+    {
--+	case PROP_CAN_SHUTDOWN:
--+	    g_value_set_boolean (value, systemd->priv->can_shutdown);
--+	    break;
--+	case PROP_CAN_RESTART:
--+	    g_value_set_boolean (value, systemd->priv->can_restart);
--+	    break;
--+        default:
--+            G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
--+            break;
--+    }
--+}
--+
--+static void
--+xfpm_systemd_finalize (GObject *object)
--+{
--+    XfpmSystemd *systemd;
--+
--+    systemd = XFPM_SYSTEMD (object);
--+
--+    if(systemd->priv->authority)
--+        g_object_unref (G_OBJECT (systemd->priv->authority));
--+    if(systemd->priv->subject)
--+        g_object_unref (G_OBJECT (systemd->priv->subject));
--+
--+    G_OBJECT_CLASS (xfpm_systemd_parent_class)->finalize (object);
--+}
--+
--+XfpmSystemd *
--+xfpm_systemd_new (void)
--+{
--+    static gpointer systemd_obj = NULL;
--+
--+    if ( G_LIKELY (systemd_obj != NULL ) )
--+    {
--+	g_object_ref (systemd_obj);
--+    }
--+    else
--+    {
--+	systemd_obj = g_object_new (XFPM_TYPE_SYSTEMD, NULL);
--+	g_object_add_weak_pointer (systemd_obj, &systemd_obj);
--+    }
--+
--+    return XFPM_SYSTEMD (systemd_obj);
--+}
--+
--+static void
--+xfpm_systemd_try_method (XfpmSystemd  *systemd,
--+                         const gchar  *method,
--+                         GError      **error)
--+{
--+    GDBusConnection *bus;
--+    GError          *local_error = NULL;
--+
--+    bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, error);
--+    if (G_LIKELY (bus != NULL))
--+    {
--+        g_dbus_connection_call_sync (bus,
--+                                     SYSTEMD_DBUS_NAME,
--+                                     SYSTEMD_DBUS_PATH,
--+                                     SYSTEMD_DBUS_INTERFACE,
--+                                     method,
--+                                     g_variant_new ("(b)", TRUE),
--+                                     NULL, 0, G_MAXINT, NULL,
--+                                     &local_error);
--+        g_object_unref (G_OBJECT (bus));
--+
--+        if (local_error != NULL)
--+        {
--+            g_propagate_error (error, local_error);
--+        }
--+    }
--+}
--+
--+void xfpm_systemd_shutdown (XfpmSystemd *systemd, GError **error)
--+{
--+    xfpm_systemd_try_method (systemd,
--+                             SYSTEMD_POWEROFF_ACTION,
--+                             error);
--+}
--+
--+void xfpm_systemd_reboot (XfpmSystemd *systemd, GError **error)
--+{
--+    xfpm_systemd_try_method (systemd,
--+                             SYSTEMD_REBOOT_ACTION,
--+                             error);
--+}
--diff --git a/src/xfpm-systemd.h b/src/xfpm-systemd.h
--new file mode 100644
--index 0000000..2890e08
----- /dev/null
--+++ b/src/xfpm-systemd.h
--@@ -0,0 +1,60 @@
--+/*
--+ * * Copyright (C) 2009-2011 Ali <aliov@xfce.org>
--+ * * Copyright (C) 2013 Andreas Müller <schnitzeltony@googlemail.com>
--+ *
--+ * Licensed under the GNU General Public License Version 2
--+ *
--+ * This program is free software; you can redistribute it and/or modify
--+ * it under the terms of the GNU General Public License as published by
--+ * the Free Software Foundation; either version 2 of the License, or
--+ * (at your option) any later version.
--+ *
--+ * This program is distributed in the hope that it will be useful,
--+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
--+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
--+ * GNU General Public License for more details.
--+ *
--+ * You should have received a copy of the GNU General Public License
--+ * along with this program; if not, write to the Free Software
--+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
--+ */
--+
--+#ifndef __XFPM_SYSTEMD_H
--+#define __XFPM_SYSTEMD_H
--+
--+#include <glib-object.h>
--+
--+G_BEGIN_DECLS
--+
--+#define XFPM_TYPE_SYSTEMD            (xfpm_systemd_get_type () )
--+#define XFPM_SYSTEMD(o)              (G_TYPE_CHECK_INSTANCE_CAST ((o), XFPM_TYPE_SYSTEMD, XfpmSystemd))
--+#define XFPM_IS_SYSTEMD(o)           (G_TYPE_CHECK_INSTANCE_TYPE ((o), XFPM_TYPE_SYSTEMD))
--+
--+typedef struct XfpmSystemdPrivate XfpmSystemdPrivate;
--+
--+typedef struct
--+{
--+    GObject         		parent;
--+    XfpmSystemdPrivate		*priv;
--+
--+} XfpmSystemd;
--+
--+typedef struct
--+{
--+    GObjectClass 		parent_class;
--+
--+} XfpmSystemdClass;
--+
--+GType        			XFPM_SYSTEMD_get_type	(void) G_GNUC_CONST;
--+
--+XfpmSystemd       	       *XFPM_SYSTEMD_new	(void);
--+
--+void				XFPM_SYSTEMD_shutdown	(XfpmSystemd *systemd,
--+							 GError **error);
--+
--+void				XFPM_SYSTEMD_reboot	(XfpmSystemd *systemd,
--+							 GError **error);
--+
--+G_END_DECLS
--+
--+#endif /* __XFPM_SYSTEMD_H */
---- 
--1.7.6.5
--
-diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.1.bb
-similarity index 53%
-rename from meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
-rename to meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.1.bb
-index 6e92186..a4aaf66 100644
---- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.2.0.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.1.bb
-@@ -10,9 +10,8 @@ inherit xfce
- DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
-            libxrandr virtual/libx11 libxext xfce4-panel"
- 
--SRC_URI += "file://0001-Add-shutdown-reboot-functionality-for-systemd.patch"
--
--RDEPENDS_${PN} = "networkmanager udisks upower ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
-+SRC_URI[md5sum] = "808a2630487d75e6eae915e464b7fda3"
-+SRC_URI[sha256sum] = "16a9e9bf3e0f8480d05b248817fbdc59e701e9161d3d0c7e53f3de28ed491f58"
- 
- EXTRA_OECONF = " \
-     --enable-network-manager \
-@@ -22,12 +21,22 @@ EXTRA_OECONF = " \
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
- PACKAGECONFIG[systemd] = "--enable-polkit, --disable-polkit, polkit"
- 
--PACKAGES += "xfce4-brightness-plugin"
--FILES_${PN} += "${datadir}/polkit-1"
--FILES_xfce4-brightness-plugin = " \
--    ${libdir}/xfce4/panel-plugins/xfce4-brightness-plugin \
--    ${datadir}/xfce4/panel-plugins/xfce4-brightness-plugin.desktop \
-+PACKAGES += "xfce4-powermanager-plugin"
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch b/meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch
+new file mode 100644
+index 0000000..d0506b2
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch
+@@ -0,0 +1,128 @@
++From d789ef88a8806887bf1160bfa5d3d9eb47b6216c Mon Sep 17 00:00:00 2001
++From: "Marius B. Kotsbak" <marius@kotsbak.com>
++Date: Mon, 11 Aug 2014 22:11:52 +0200
++Subject: [PATCH] Add support for AP mode setting for wifi sharing.
 +
-+FILES_${PN} += " \
-+    ${datadir}/polkit-1 \
-+    ${datadir}/appdata \
++Upstream-Status: Pending [1]
++
++[1] https://bugzilla.gnome.org/show_bug.cgi?id=734589
++---
++ src/connection-editor/ce-page-wifi.ui |  3 +++
++ src/connection-editor/page-wifi.c     | 46 ++++++++++++++++++++---------------
++ 2 files changed, 30 insertions(+), 19 deletions(-)
++
++diff --git a/src/connection-editor/ce-page-wifi.ui b/src/connection-editor/ce-page-wifi.ui
++index e2e544b..b8b27c1 100644
++--- a/src/connection-editor/ce-page-wifi.ui
+++++ b/src/connection-editor/ce-page-wifi.ui
++@@ -50,6 +50,9 @@
++       <row>
++         <col id="0" translatable="yes">Ad-hoc</col>
++       </row>
+++      <row>
+++        <col id="0" translatable="yes">Shared AP</col>
+++      </row>
++     </data>
++   </object>
++   <object class="GtkTable" id="WifiPage">
++diff --git a/src/connection-editor/page-wifi.c b/src/connection-editor/page-wifi.c
++index d0a5617..17db2fa 100644
++--- a/src/connection-editor/page-wifi.c
+++++ b/src/connection-editor/page-wifi.c
++@@ -59,6 +59,12 @@ typedef struct {
++ 	gboolean disposed;
++ } CEPageWifiPrivate;
++ 
+++enum {
+++	WIFI_MODE_INFRASTRUCTURE,
+++	WIFI_MODE_ADHOC,
+++	WIFI_MODE_AP
+++};
+++
++ static void
++ wifi_private_init (CEPageWifi *self)
++ {
++@@ -244,22 +250,16 @@ mode_combo_changed_cb (GtkComboBox *combo,
++ 	CEPageWifiPrivate *priv = CE_PAGE_WIFI_GET_PRIVATE (self);
++ 	CEPage *parent = CE_PAGE (self);
++ 	GtkWidget *widget_band_label, *widget_chan_label, *widget_bssid_label;
++-	gboolean adhoc;
+++	gint wifi_mode;
+++	gboolean shared_wifi;
++ 
++- 	switch (gtk_combo_box_get_active (GTK_COMBO_BOX (combo))) {
++- 	case 1: /* adhoc */
++-		adhoc = TRUE;
++- 		break;
++- 	default: /* infrastructure */
++-		adhoc = FALSE;
++- 		break;
++- 	}
+++	wifi_mode = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
++ 
++ 	widget_band_label = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wifi_band_label"));
++ 	widget_chan_label = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wifi_channel_label"));
++ 	widget_bssid_label = GTK_WIDGET (gtk_builder_get_object (parent->builder, "wifi_bssid_label"));
++ 
++-	if (adhoc) {
+++	if (WIFI_MODE_ADHOC == wifi_mode || WIFI_MODE_AP == wifi_mode) {
++ 		/* For Ad-Hoc show Band and Channel */
++ 		gtk_widget_show (widget_band_label);
++ 		gtk_widget_show (GTK_WIDGET (priv->band));
++@@ -283,12 +283,13 @@ mode_combo_changed_cb (GtkComboBox *combo,
++ 		gtk_widget_show (GTK_WIDGET (priv->bssid));
++ 	}
++ 
++-	gtk_widget_set_sensitive (widget_band_label, adhoc);
++-	gtk_widget_set_sensitive (GTK_WIDGET (priv->band), adhoc);
++-	gtk_widget_set_sensitive (widget_chan_label, adhoc);
++-	gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), adhoc);
++-	gtk_widget_set_sensitive (widget_bssid_label, !adhoc);
++-	gtk_widget_set_sensitive (GTK_WIDGET (priv->bssid), !adhoc);
+++	shared_wifi = wifi_mode != WIFI_MODE_INFRASTRUCTURE;
+++	gtk_widget_set_sensitive (widget_band_label, shared_wifi);
+++	gtk_widget_set_sensitive (GTK_WIDGET (priv->band), shared_wifi);
+++	gtk_widget_set_sensitive (widget_chan_label, shared_wifi);
+++	gtk_widget_set_sensitive (GTK_WIDGET (priv->channel), shared_wifi);
+++	gtk_widget_set_sensitive (widget_bssid_label, !shared_wifi);
+++	gtk_widget_set_sensitive (GTK_WIDGET (priv->bssid), !shared_wifi);
++ 
++ 	ce_page_changed (CE_PAGE (self));
++ }
++@@ -348,9 +349,12 @@ populate_ui (CEPageWifi *self)
++ 		g_byte_array_free (ssid, TRUE);
++ 
++ 	/* Default to Infrastructure */
++-	gtk_combo_box_set_active (priv->mode, 0);
+++	gtk_combo_box_set_active (priv->mode, WIFI_MODE_INFRASTRUCTURE);
++ 	if (mode && !strcmp (mode, "adhoc"))
++-		gtk_combo_box_set_active (priv->mode, 1);
+++		gtk_combo_box_set_active (priv->mode, WIFI_MODE_ADHOC);
+++	else if (mode && !strcmp (mode, "ap"))
+++		gtk_combo_box_set_active (priv->mode, WIFI_MODE_AP);
+++
++ 	mode_combo_changed_cb (priv->mode, self);
++ 	g_signal_connect (priv->mode, "changed", G_CALLBACK (mode_combo_changed_cb), self);
++ 	g_free (mode);
++@@ -510,14 +514,18 @@ ui_to_setting (CEPageWifi *self)
++ 	GByteArray *bssid = NULL;
++ 	GByteArray *device_mac = NULL;
++ 	GByteArray *cloned_mac = NULL;
+++	gint wifi_mode;
++ 	const char *mode;
++ 	const char *band;
++ 	GtkWidget *entry;
++ 
++ 	ssid = ce_page_wifi_get_ssid (self);
++ 
++-	if (gtk_combo_box_get_active (priv->mode) == 1)
+++	wifi_mode = gtk_combo_box_get_active (priv->mode);
+++	if (WIFI_MODE_ADHOC == wifi_mode)
++ 		mode = "adhoc";
+++	else if (WIFI_MODE_AP == wifi_mode)
+++		mode = "ap";
++ 	else
++ 		mode = "infrastructure";
++ 
++-- 
++1.9.1
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch b/meta-gnome/recipes-connectivity/network-manager-applet/files/0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
+new file mode 100644
+index 0000000..e215646
+--- /dev/null
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/files/0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
+@@ -0,0 +1,48 @@
++From 7343b16113e378d04e40012abfe5bd96ca776968 Mon Sep 17 00:00:00 2001
++From: "Marius B. Kotsbak" <marius@kotsbak.com>
++Date: Tue, 12 Aug 2014 11:15:20 +0200
++Subject: [PATCH 2/2] Use AP mode for network sharing if device supports it.
++
++Logic taken from similar functionality in gnome-control-center.
++
++Upstream-Status: Backport [1]
++
++[1] https://bug734589.bugzilla-attachments.gnome.org/attachment.cgi?id=283165
++---
++ src/libnm-gtk/nm-wifi-dialog.c | 18 +++++++++++++++++-
++ 1 file changed, 17 insertions(+), 1 deletion(-)
++
++diff --git a/src/libnm-gtk/nm-wifi-dialog.c b/src/libnm-gtk/nm-wifi-dialog.c
++index 3532caa..ca72c96 100644
++--- a/src/libnm-gtk/nm-wifi-dialog.c
+++++ b/src/libnm-gtk/nm-wifi-dialog.c
++@@ -1226,10 +1226,26 @@ nma_wifi_dialog_get_connection (NMAWifiDialog *self,
++ 		s_wireless = (NMSettingWireless *) nm_setting_wireless_new ();
++ 		g_object_set (s_wireless, NM_SETTING_WIRELESS_SSID, validate_dialog_ssid (self), NULL);
++ 
+++		/* Fill device */
+++		if (device) {
+++			combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_combo"));
+++			gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter);
+++			gtk_tree_model_get (priv->device_model, &iter, D_DEV_COLUMN, device, -1);
+++			g_object_unref (*device);
+++		}
+++
++ 		if (priv->adhoc_create) {
++ 			NMSettingIP4Config *s_ip4;
++ 
++-			g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, "adhoc", NULL);
+++			const char *mode;
+++
+++			/* Use real AP mode if the device supports it */
+++			if (device && nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (*device)) & NM_WIFI_DEVICE_CAP_AP)
+++				mode = NM_SETTING_WIRELESS_MODE_AP;
+++			else
+++				mode = NM_SETTING_WIRELESS_MODE_ADHOC;
+++
+++			g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, mode, NULL);
++ 
++ 			s_ip4 = (NMSettingIP4Config *) nm_setting_ip4_config_new ();
++ 			g_object_set (s_ip4, NM_SETTING_IP4_CONFIG_METHOD, NM_SETTING_IP4_CONFIG_METHOD_SHARED, NULL);
++-- 
++1.8.3.1
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
+index ca05866..663c38c 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
+@@ -10,6 +10,8 @@ GNOME_COMPRESS_TYPE = "xz"
+ 
+ SRC_URI += " \
+     file://0001-remove-classes-and-properties-which-are-not-supporte.patch \
++    file://0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch \
++    file://0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch \
  "
- 
--SRC_URI[md5sum] = "935599b7114b0a4b0e2c9a5d6c72524c"
--SRC_URI[sha256sum] = "d7fb98a540284b62f4201527de17d4b24123f9d26c9f49131dd497c8387184e9"
-+FILES_xfce4-powermanager-plugin = " \
-+    ${libdir}/xfce4 \
-+    ${datadir}/xfce4 \
-+"
-+
-+RDEPENDS_xfce4-powermanager-plugin = "${PN}"
-+RDEPENDS_${PN} = "networkmanager udisks upower ${@base_contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
-+
-+# xfce4-brightness-plugin was replaced by xfce4-powermanager-plugin
-+RPROVIDES_xfce4-powermanager-plugin += "xfce4-brightness-plugin"
-+RREPLACES_xfce4-powermanager-plugin += "xfce4-brightness-plugin"
-+RCONFLICTS_xfce4-powermanager-plugin += "xfce4-brightness-plugin"
+ SRC_URI[archive.md5sum] = "5148348c139229c6a753f815f3f11e1c"
+ SRC_URI[archive.sha256sum] = "46fee9a1e667d1826e6a94bb6bd2e6bdbde535fc995e534542f5f7e8b8dae0cb"
 -- 
 1.8.3.1
 
