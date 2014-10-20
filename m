@@ -1,24 +1,21 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 975BC6AC31
+Return-Path: <anders@chargestorm.se>
+Received: from STOEXHUB02.domain01.net (STOEXHUB02.domain01.net
+	[83.145.59.143])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D7716AC20
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2014 06:30:19 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9K6UKFL010956
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Oct 2014 23:30:20 -0700 (PDT)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 19 Oct 2014 23:30:19 -0700
-From: <wenzong.fan@windriver.com>
+	Mon, 20 Oct 2014 06:32:38 +0000 (UTC)
+Received: from localhost (81.232.163.241) by stoexhub02.domain01.net
+	(10.12.10.2) with Microsoft SMTP Server id 8.3.279.1; Mon, 20 Oct 2014
+	08:32:35 +0200
+From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Oct 2014 02:30:17 -0400
-Message-ID: <cover.1413786344.git.wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Mon, 20 Oct 2014 08:32:02 +0200
+Message-ID: <cover.1413786629.git.anders@chargestorm.se>
+X-Mailer: git-send-email 2.1.1
 MIME-Version: 1.0
-Subject: [PATCH 0/1][meta-networking] ntp: add status for initscript
+X-GFI-SMTP-Submission: 1
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-qt5][PATCH v2 0/1] Enable nativesdk-qtbase to keep additional libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,29 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Oct 2014 06:30:25 -0000
+X-List-Received-Date: Mon, 20 Oct 2014 06:32:45 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+We have a usecase where we need to run a tool to transform a protocol spec. to cpp (kdwsdl2cpp). That tool is built using Qt5, and requires a couple of extra Qt-libraries, among the libQt5Xml.so.*. Today the nativesdk-qtbase recipe just unconditionally removes every library, except for a couple hardcoded ones.
 
-Get /etc/init.d/ntpd support options 'status'.
+This patch add an extra variable, in which you can specify additional libraries to keep.
 
-The following changes since commit 71d2fe7c9e2681fede255d7f5b430d63a122ab18:
+Changes:
+	v2: 
+	 	* Fix spelling mistake in a comment (net -> not)
 
-  vim: add ncurses-terminfo-base as a runtime dependency (2014-10-18 10:47:43 +0200)
+The following changes since commit 2f1b8fe630ac76c8ff5d184f109449b10fde5a92:
+
+  Fix SDK environment setting (2014-10-16 17:35:21 -0300)
 
 are available in the git repository at:
 
-  git://git.pokylinux.org/poky-contrib wenzong/ntpd-status
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/ntpd-status
+  git://github.com/darander/meta-qt5 a29d8e60f63d6545ed84d6b72caf46bc0d1e7b78
+  https://github.com/darander/meta-qt5/tree/nativesdk-qtbase
 
-Wenzong Fan (1):
-  ntp: add status for initscript
+Anders Darander (1):
+  nativesdk-qtbase: make it possible to keep additional libraries
 
- meta-networking/recipes-support/ntp/files/ntpd |    9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ recipes-qt/qt5/nativesdk-qtbase.inc | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 -- 
-1.7.9.5
+2.1.1
 
 
