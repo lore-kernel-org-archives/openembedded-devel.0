@@ -1,26 +1,24 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D55B96AC1F
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 975BC6AC31
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2014 06:30:20 +0000 (UTC)
+	Mon, 20 Oct 2014 06:30:19 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9K6ULtb015852
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9K6UKFL010956
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Oct 2014 23:30:21 -0700 (PDT)
+	Sun, 19 Oct 2014 23:30:20 -0700 (PDT)
 Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 19 Oct 2014 23:30:20 -0700
+	14.3.174.1; Sun, 19 Oct 2014 23:30:19 -0700
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Oct 2014 02:30:18 -0400
-Message-ID: <0d63058f4731f492c214966bf6eaae920e9766fa.1413786344.git.wenzong.fan@windriver.com>
+Date: Mon, 20 Oct 2014 02:30:17 -0400
+Message-ID: <cover.1413786344.git.wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1413786344.git.wenzong.fan@windriver.com>
-References: <cover.1413786344.git.wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/1][meta-networking] ntp: add status for initscript
+Subject: [PATCH 0/1][meta-networking] ntp: add status for initscript
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,39 +37,23 @@ Content-Type: text/plain
 
 From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
+Get /etc/init.d/ntpd support options 'status'.
+
+The following changes since commit 71d2fe7c9e2681fede255d7f5b430d63a122ab18:
+
+  vim: add ncurses-terminfo-base as a runtime dependency (2014-10-18 10:47:43 +0200)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib wenzong/ntpd-status
+  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=wenzong/ntpd-status
+
+Wenzong Fan (1):
+  ntp: add status for initscript
+
  meta-networking/recipes-support/ntp/files/ntpd |    9 ++++++++-
  1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/ntp/files/ntpd b/meta-networking/recipes-support/ntp/files/ntpd
-index 3cd1c6c..d1b9c49 100755
---- a/meta-networking/recipes-support/ntp/files/ntpd
-+++ b/meta-networking/recipes-support/ntp/files/ntpd
-@@ -20,6 +20,9 @@ test -x $DAEMON -a -r /etc/ntp.conf || exit 0
- # rcS contains TICKADJ
- test -r /etc/default/rcS && . /etc/default/rcS
- 
-+# Source function library.
-+. /etc/init.d/functions
-+
- # Functions to do individual actions
- settick(){
-   	# If TICKADJ is set we *must* adjust it before we start, because the
-@@ -68,8 +71,12 @@ case "$1" in
- 	stopdaemon
- 	startdaemon
- 	;;
-+  status)
-+	status /usr/sbin/ntpd;
-+	exit $?
-+	;;
-   *)
--	echo "Usage: ntpd { start | stop | restart | reload }" >&2
-+	echo "Usage: ntpd { start | stop | status | restart | reload }" >&2
- 	exit 1
- 	;;
- esac
 -- 
 1.7.9.5
 
