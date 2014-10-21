@@ -1,23 +1,22 @@
-Return-Path: <fenixk19@mail.ru>
-Received: from smtp45.i.mail.ru (smtp45.i.mail.ru [94.100.177.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 784A160557
+Return-Path: <milo-software@users.sourceforge.net>
+Received: from smtp02.online.nl (smtp02.online.nl [194.134.41.32])
+	by mail.openembedded.org (Postfix) with ESMTP id 313BA60557
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Oct 2014 16:39:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
-	s=mail2; h=Message-Id:Date:Subject:Cc:To:From;
-	bh=Z0MAHRImvJgmhIwYisKOya1YahASO8LL6cMDDCemS28=; 
-	b=tkiFJkiGpXJjACmjrKW6mqW/bAunNjghA3xkycB3cVIJPBvHsHElKOuj16HPEVspH5pXMDSuI3PvAlxSFKG7de1fRop/YVkJSkbWASrOO2vS6Eamy2BkKTW+Y/wXGiHbay4vWHhHM22LIcpyyZbJfnhleA6NR4ChZ3KJ4rP/fbk=;
-Received: from [46.28.89.34] (port=51448 helo=senya-S20-4M.shtrih.local)
-	by smtp45.i.mail.ru with esmtpa (envelope-from <fenixk19@mail.ru>)
-	id 1XgcTH-0007Ta-1N; Tue, 21 Oct 2014 20:39:43 +0400
-From: "A. Varnin" <fenixk19@mail.ru>
+	Tue, 21 Oct 2014 18:12:18 +0000 (UTC)
+Received: from smtp02.online.nl (localhost [127.0.0.1])
+	by smtp02.online.nl (Postfix) with ESMTP id 8A93CA0A0;
+	Tue, 21 Oct 2014 20:12:17 +0200 (CEST)
+Received: from phenom.local (s55969068.adsl.online.nl [85.150.144.104])
+	by smtp02.online.nl (Postfix) with ESMTP;
+	Tue, 21 Oct 2014 20:12:17 +0200 (CEST)
+From: Mike Looijmans <milo-software@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Oct 2014 20:39:27 +0400
-Message-Id: <1413909567-13567-1-git-send-email-fenixk19@mail.ru>
-X-Mailer: git-send-email 1.9.1
-X-Spam: Not detected
-X-Mras: Ok
-Subject: [meta-oe][PATCH] libtinyxml2: new package
+Date: Tue, 21 Oct 2014 20:12:15 +0200
+Message-Id: <1413915135-20979-1-git-send-email-milo-software@users.sourceforge.net>
+X-Mailer: git-send-email 1.7.9.5
+X-Online-Scanned: by Cloudmark authority (on smtp02.online.nl)
+Cc: Mike Looijmans <milo-software@users.sourceforge.net>
+Subject: [PATCH] libdvdcss: Upgrade to 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,61 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Oct 2014 16:39:45 -0000
+X-List-Received-Date: Tue, 21 Oct 2014 18:12:23 -0000
 
-TinyXML-2 is a rewrite of TinyXML-1. It provides some advantages over the original. They are covered on the homepage. (http://www.grinninglizard.com/tinyxml2/)
-
-Signed-off-by: A. Varnin <fenixk19@mail.ru>
+License is still GPLv2. Has been in use for a while, and no problems detected.
 ---
- .../recipes-support/libtinyxml2/libtinyxml2_git.bb | 38 ++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
+ .../recipes-multimedia/vlc/libdvdcss_1.2.13.bb     |   12 ------------
+ .../recipes-multimedia/vlc/libdvdcss_1.3.0.bb      |   12 ++++++++++++
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
 
-diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
+diff --git a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb
+deleted file mode 100644
+index 1a316d3..0000000
+--- a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-DESCRIPTION = "libdvdcss is a simple library designed for accessing DVDs like a block device without having to bother about the decryption."
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-
+-SRC_URI = "http://download.videolan.org/pub/libdvdcss/${PV}/libdvdcss-${PV}.tar.bz2"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = " --disable-doc "
+-
+-SRC_URI[md5sum] = "53cfc52a60a156763c425572e5179273"
+-SRC_URI[sha256sum] = "84f1bba6cfef1df87f774fceaefc8e73c4cda32e8f6700b224ad0acb5511ba2c"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
 new file mode 100644
-index 0000000..1d3cffd
+index 0000000..79e64ae
 --- /dev/null
-+++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "TinyXML-2 is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs."
-+HOMEPAGE = "http://www.grinninglizard.com/tinyxml2/"
-+LICENSE = "Zlib"
-+LIC_FILES_CHKSUM = "file://readme.md;md5=0033b2f8a25283414b21354670bb1334"
-+SECTION = "libs"
++++ b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "libdvdcss is a simple library designed for accessing DVDs like a block device without having to bother about the decryption."
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 +
-+SRCREV = "d211bb13512cf4edb408e2c4badbcf4100ce0fd0"
++SRC_URI = "http://download.videolan.org/pub/libdvdcss/${PV}/libdvdcss-${PV}.tar.bz2"
 +
-+PV = "2.2.0+git${SRCPV}"
++inherit autotools
 +
-+SRC_URI = "git://github.com/leethomason/tinyxml2.git"
++EXTRA_OECONF = " --disable-doc "
 +
-+S = "${WORKDIR}/git"
-+
-+EXTRA_CXXFLAGS = "-I. -fPIC"
-+
-+do_compile() {
-+    ${CXX} ${CXXFLAGS} ${EXTRA_CXXFLAGS} -c -o tinyxml2.o tinyxml2.cpp
-+    ${CXX} ${CXXFLAGS} \
-+            -shared \
-+            -Wl,-soname,libtinyxml2.so.${PV} \
-+            -o libtinyxml2.so.${PV} \
-+            ${LDFLAGS} \
-+            tinyxml2.o \
-+
-+}
-+
-+do_install() {
-+    install -d ${D}${libdir}
-+    install -m 0755 ${S}/libtinyxml2.so.${PV} ${D}${libdir}
-+    ln -sf libtinyxml2.so.${PV} ${D}${libdir}/libtinyxml2.so
-+
-+    install -d ${D}${includedir}
-+    install -m 0644 ${S}/tinyxml2.h ${D}${includedir}
-+}
-+
-+BBCLASSEXTEND += "native"
-+
++SRC_URI[md5sum] = "7f0fdb3ff91d638f5e45ed7536f7eb67"
++SRC_URI[sha256sum] = "7c414acd520c4e4dd7267952f72d738ff50321a7869af4d75c65aefad44f1395"
 -- 
-1.9.1
+1.7.9.5
 
 
