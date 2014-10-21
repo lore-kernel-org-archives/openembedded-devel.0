@@ -1,35 +1,24 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
-	[209.85.192.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D30D60672
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F2B760672
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Oct 2014 04:24:00 +0000 (UTC)
-Received: by mail-qg0-f49.google.com with SMTP id e89so289060qgf.22
+	Tue, 21 Oct 2014 06:01:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9L61R2t004579
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Oct 2014 21:24:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=xnj00fTVWlwIN6QL4+2/9Tti6n4OriJ0ToJq91WZdgc=;
-	b=fKp0NeTOkk0MDOgpF1adb8u5KN8qKB/g6aakDQ+MkpIou9J2dWMALIPhZb+2dZe2D1
-	p0VdIdGHT0+g1dboGD7WdHR/LMx2797qoQbLv9sAWILAzgmPf4iDcE9EQQ0rFabkWJ4s
-	9PkAELEpoCDK4fp8ReGh4Dkz9YoG+yUCjshw+Sgc8c7qNO/o2NBWuAx7Duia7M2ltvPa
-	TdGvHkW5M1ecRA2klfQdPVDCl/PQH5SvNvh94Cc0DnvpETMvA8Zc9gqYw7wXyOhlQ1ok
-	6lCYlN++mKzzOHLJnrPr4m/pXFWfWB5o84stWQEdxhhbR5MXcRirURjtP8ViZpWE3XO4
-	MrOQ==
+	Mon, 20 Oct 2014 23:01:27 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 20 Oct 2014 23:01:26 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 21 Oct 2014 02:01:25 -0400
+Message-ID: <1413871285-30819-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-X-Received: by 10.224.75.7 with SMTP id w7mr42843686qaj.26.1413865440271; Mon,
-	20 Oct 2014 21:24:00 -0700 (PDT)
-Received: by 10.96.4.133 with HTTP; Mon, 20 Oct 2014 21:24:00 -0700 (PDT)
-In-Reply-To: <1413826432-483-5-git-send-email-Martin.Jansa@gmail.com>
-References: <1413826432-483-1-git-send-email-Martin.Jansa@gmail.com>
-	<1413826432-483-5-git-send-email-Martin.Jansa@gmail.com>
-Date: Tue, 21 Oct 2014 15:24:00 +1100
-Message-ID: <CANwerB06tRTvSn_+_DiL7Q+ZSixRmpYvQGVgTQ=Ac+jSdg7UCQ@mail.gmail.com>
-From: Jonathan Liu <net147@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][WIP][PATCH 5/5] qtwebengine: backport patches to fix ARM build failures
+Subject: [meta-ruby][PATCH] ruby: make build deterministic by adding PACKAGECONFIG for valgrind
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,57 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Oct 2014 04:24:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Oct 2014 06:01:29 -0000
+Content-Type: text/plain
 
-Hi Martin,
+From: Jackie Huang <jackie.huang@windriver.com>
 
-On 21 October 2014 04:33, Martin Jansa <martin.jansa@gmail.com> wrote:
-> diff --git a/recipes-qt/qt5/qtwebengine/0004-Set-arm_tune-to-empty-string-if-mtune-flag-is-not-se.patch b/recipes-qt/qt5/qtwebengine/0004-Set-arm_tune-to-empty-string-if-mtune-flag-is-not-se.patch
-> new file mode 100644
-> index 0000000..a3842ec
-> --- /dev/null
-> +++ b/recipes-qt/qt5/qtwebengine/0004-Set-arm_tune-to-empty-string-if-mtune-flag-is-not-se.patch
-> @@ -0,0 +1,34 @@
-> +From c99aed6ef28c4ac9c00024a40222331c0e682d28 Mon Sep 17 00:00:00 2001
-> +From: Andras Becsi <andras.becsi@digia.com>
-> +Date: Thu, 18 Sep 2014 18:22:37 +0200
-> +Subject: [PATCH 4/6] Set arm_tune to empty string if mtune flag is not set by
-> + toolchain
-> +
-> +Since the default arm_tune option applied by chromium is not
-> +recognized by our gcc toolchain set arm_tune to empty string
-> +to prevent chromium from setting a default. Our toolchains
-> +set the arm version which already implies the corresponding
-> +mtune option anyway.
-Missing Upstream-Status: Backport.
+* disabled by default
+* fixes:
+ruby/1.9.3-p547-r1.0/ruby-1.9.3-p547/gc.c:43:32:fatal error: valgrind/memcheck.h: No such file or directory
 
-> +
-> +Change-Id: I0291bd4f0e5706597d37f914e4eeefbd75397bbf
-> +Reviewed-by: Jocelyn Turcotte <jocelyn.turcotte@digia.com>
-Missing Signed-off-by.
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p547.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-> +---
-> + src/core/gyp_run.pro | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/src/core/gyp_run.pro b/src/core/gyp_run.pro
-> +index ed592e1..4845af2 100644
-> +--- a/src/core/gyp_run.pro
-> ++++ b/src/core/gyp_run.pro
-> +@@ -47,7 +47,7 @@ cross_compile {
-> +         !isEmpty(MARCH): GYP_ARGS += "-D arm_arch=\"$$MARCH\""
-> +
-> +         MTUNE = $$extractCFlag("-mtune=.*")
-> +-        !isEmpty(MTUNE): GYP_ARGS += "-D arm_tune=\"$$MTUNE\""
-> ++        GYP_ARGS += "-D arm_tune=\"$$MTUNE\""
-> +
-> +         MFLOAT = $$extractCFlag("-mfloat-abi=.*")
-> +         !isEmpty(MFLOAT): GYP_ARGS += "-D arm_float_abi=\"$$MFLOAT\""
-> +--
-> +2.1.1
-> +
+diff --git a/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p547.bb b/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p547.bb
+index 2d5938f..834cb71 100644
+--- a/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p547.bb
++++ b/meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p547.bb
+@@ -21,6 +21,9 @@ SRC_URI[sha256sum] = "9ba118e4aba04c430bc4d5efb09b31a0277e101c9fd2ef3b80b9c684d7
+ # 0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
+ UNKNOWN_CONFIGURE_WHITELIST += "--enable-wide-getaddrinfo"
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[valgrind] = "--with-valgrind=yes, --with-valgrind=no, valgrind"
++
+ EXTRA_OECONF = "\
+     --enable-wide-getaddrinfo \
+     --disable-versioned-paths \
+-- 
+2.0.0
 
-Regards,
-Jonathan
 
