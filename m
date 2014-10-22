@@ -1,34 +1,37 @@
-Return-Path: <cnelson711@gmail.com>
-Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id B8CF965C66
+Return-Path: <mike.holmes@linaro.org>
+Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
+	[209.85.192.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 3591160233
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 14:02:06 +0000 (UTC)
-Received: by mail-ie0-f170.google.com with SMTP id tp5so557666ieb.15
+	Wed, 22 Oct 2014 15:49:55 +0000 (UTC)
+Received: by mail-qg0-f46.google.com with SMTP id z60so2723395qgd.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 07:02:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=VlHF151IHJsSVQg6rfKWNE/rzSuI5jDLABOxOVSkq3o=;
-	b=y5rvJjdDj2vVkUCxmkYg/qQ0iR+QKVv6YSclw9IdL/Rd4HwXl0tAdvD2nQuBamJ3O1
-	U02AazFsJBHE1GDyHrhbmmlGCcgGUmBm4uLOhD3cHkbdPIbYDYS9wsqSuL+jjqjJRbg1
-	AEySvk6qiuCQ3ElaDy1U/tJnxu+vxf5dG8pNJ6fml6sTA86JaZPr8ulqe+JoeWSji5JH
-	675GLmvQ9X+NltE4h5UvXQBMubhPxqnYOtIkIy3HBb+WQLqBEj5388odJ3zmwR4RclYN
-	qTC+CrT8z7dhwYChlIPIMBM+xXTHfu9hTI04B0781JQteGUyVmhrS20X9bPjbQHxOHCF
-	riEw==
-X-Received: by 10.42.168.73 with SMTP id v9mr4697442icy.21.1413986526153; Wed,
-	22 Oct 2014 07:02:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.134.92 with HTTP; Wed, 22 Oct 2014 07:01:17 -0700 (PDT)
-In-Reply-To: <CAMKF1so35KLMvZ77w14kF6a19D4xrwNHiR43=Fi5_HwA+5Bx5A@mail.gmail.com>
-References: <1413947089-3995-1-git-send-email-cnelson711@gmail.com>
-	<CAMKF1so35KLMvZ77w14kF6a19D4xrwNHiR43=Fi5_HwA+5Bx5A@mail.gmail.com>
-From: Chad Nelson <cnelson711@gmail.com>
-Date: Wed, 22 Oct 2014 09:01:17 -0500
-Message-ID: <CAKs3hO0kACPcqaJinUEdOm+QP2btbQ09dRpLYtYaH6Wg9MQSoA@mail.gmail.com>
+	Wed, 22 Oct 2014 08:49:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=cZzLfQ3sJX4HAKmlEUW6jsGKIQANjUBTwr13AJLumsc=;
+	b=loq19NMPVHozmkFjwXhn6DoGafz6bCoQjoeL0Lz5AJC+mWZvV/LcSH6BTib1aJ3TE2
+	J0MqUwScaC9SpPKI5NcGJjujQKv2YTh0JxbIQ0ybtPJ9HekPZ5ROP6KSWYaI4Z5sI2ph
+	XD3c0Vmoop0uhGRaPUfJ1mMh0GGX+OUSd+iS5bxDwwAKzNTdUc+DdJL8RY0k2D8fQlFT
+	2VsdSWZlWOW7/rC9yrNRPGxqt3eF7CQPwkGK/1AMJqMueS+TsFrKDg9RgSk0pi/YaBH2
+	alSsQkflJpWnJVyXxhHPnx+ceVK2bMG3xkTVrX3xVIERcncXy7hl989fXC/e8gnw1czL
+	wafA==
+X-Gm-Message-State: ALoCoQnselbVekclFR9veI2nfdu43a232tlek1dUcUKsm1yTa9DXt4H1JsfYUzJnw9+LonGyQObj
+X-Received: by 10.224.161.139 with SMTP id r11mr56066782qax.34.1413992992210; 
+	Wed, 22 Oct 2014 08:49:52 -0700 (PDT)
+Received: from fedora1.holmesfamily.ws ([98.221.136.245])
+	by mx.google.com with ESMTPSA id
+	t107sm13168747qgd.35.2014.10.22.08.49.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 22 Oct 2014 08:49:51 -0700 (PDT)
+From: Mike Holmes <mike.holmes@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-ruby][PATCH] ruby-lang.org changed the subdomain/hostname of their download server.
+Date: Wed, 22 Oct 2014 11:49:05 -0400
+Message-Id: <1413992945-33655-1-git-send-email-mike.holmes@linaro.org>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] add CUnit test suite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,66 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 14:02:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Oct 2014 15:49:57 -0000
 
-Agreed.  We can throw away the patch.
+Signed-off-by: Mike Holmes <mike.holmes@linaro.org>
+---
+ meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
 
---
-Chad M. Nelson
-Software Engineer
-Ag Leader Technology
-cnelson711@gmail.com
-Cell #: 1+319-389-0689
-Skype, Gmail, Fbook: cnelson711
+diff --git a/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb b/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
+new file mode 100644
+index 0000000..e869852
+--- /dev/null
++++ b/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "CUnit is a C framework for unit testing. Test output supports comandline and GUI reults reporting"
++HOMEPAGE = "http://cunit.sourceforge.net"
++LICENSE = "LGPL-2.0"
++SECTION = "libs"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7734aa853b85d6f935466f081490ddbb"
++
++S = "${WORKDIR}/CUnit-${PV}"
++
++SRC_URI = "http://downloads.sourceforge.net/project/cunit/CUnit/${PV}/CUnit-${PV}.tar.bz2"
++SRC_URI[md5sum] = "b5f1a9f6093869c070c6e4a9450cc10c"
++SRC_URI[sha256sum] = "f5b29137f845bb08b77ec60584fdb728b4e58f1023e6f249a464efa49a40f214"
++
++inherit autotools-brokensep
++
++EXTRA_OECONF = "--enable-debug --enable-memtrace --enable-automated --enable-basic --enable-console"
++
++FILES_${PN}-doc += "${prefix}/doc"
++FILES_${PN}-dev += "${datadir}"
+-- 
+1.9.1
 
-
-On Tue, Oct 21, 2014 at 11:50 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Tue, Oct 21, 2014 at 8:04 PM, Chad Nelson <cnelson711@gmail.com> wrote:
-> > From: Chad Nelson <cnelson@agleader.com>
-> >
-> > Signed-off-by: Chad Nelson <cnelson@agleader.com>
-> > ---
-> >  meta-ruby/recipes-devtools/ruby/ruby.inc | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-ruby/recipes-devtools/ruby/ruby.inc
-> b/meta-ruby/recipes-devtools/ruby/ruby.inc
-> > index 409a320..7702869 100644
-> > --- a/meta-ruby/recipes-devtools/ruby/ruby.inc
-> > +++ b/meta-ruby/recipes-devtools/ruby/ruby.inc
-> > @@ -20,7 +20,7 @@ DEPENDS_class-native = "libyaml-native"
-> >  INC_PR = "r1"
-> >
-> >  SHRT_VER =
-> "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
-> > -SRC_URI = "
-> http://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
-> > +SRC_URI = "
-> http://cache.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
-> >             file://extmk.patch \
-> >  "
->
-> It seems to be a temp failure now I can download successfully from
-> original ftp location
->
-> curl -O ftp://ftp.ruby-lang.org/pub/ruby/ruby-1.9.1-p429.tar.gz
->
->   % Total    % Received % Xferd  Average Speed   Time    Time     Time
-> Current
->
->                                  Dload  Upload   Total   Spent    Left
-> Speed
->
-> 100 8865k  100 8865k    0     0  1403k      0  0:00:06  0:00:06 --:--:--
-> 1865k
->
-> this patch may not be needed
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
