@@ -1,24 +1,35 @@
-Return-Path: <Hongjun.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 506FF60097
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 07:42:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9M7gh8m004313
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 00:42:43 -0700 (PDT)
-Received: from pek-lpgtest9.wrs.com (128.224.153.89) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 22 Oct 2014 00:42:43 -0700
-From: Hongjun Yang <Hongjun.Yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Oct 2014 15:42:42 +0800
-Message-ID: <1413963762-13795-1-git-send-email-Hongjun.Yang@windriver.com>
-X-Mailer: git-send-email 1.7.1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 30700601F5;
+	Wed, 22 Oct 2014 09:36:42 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id x13so3277955wgg.18
+	for <multiple recipients>; Wed, 22 Oct 2014 02:36:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=sbJJ5BfpliuF2sb+dhroxSaFREPw9HNXSA+TQfRcdfc=;
+	b=ztH07NX/d0EmtoLQWkEYhlplCpPRTEbOHDgqVAx1osZj7mGqKbnk0w2kkwB3YJ1AVT
+	cPPqKdwfS3xPASrTwQQkyoghA5Fb1CN3nLFd3hIB+w8DbXf9EaB0b1rgkfb7CaMBSWM7
+	sGfWfo0aeQ/z6GgFYCPkfavxEDYzECleCgY9L84H418+S8JINQ4H5GC6z+k6et/HvxDP
+	SaqEpVMWWoSsdvUCrhX2Yx1DRdI6yR2oRQrFuNMSrIPv2LRazzaIHPeP+wLNJFxIaOb8
+	thAdkubcTnXw7gxXaYpb7mxmf3IdjMMayDU0ZpA2STRf5yKcVpM5AXZJtEVaSiSp2O2y
+	wGMQ==
+X-Received: by 10.194.8.103 with SMTP id q7mr50115449wja.82.1413970602329;
+	Wed, 22 Oct 2014 02:36:42 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	fm10sm1256637wib.21.2014.10.22.02.36.41 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 22 Oct 2014 02:36:41 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 22 Oct 2014 11:36:43 +0200
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20141022093643.GH2455@jama>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH V2] tcpdump: Add ptest
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, files not tracked by sstate
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,107 +43,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 07:42:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 22 Oct 2014 09:36:47 -0000
+X-Groupsio-MsgNum: 52590
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="6K2R/cS9K4qvcBNq"
+Content-Disposition: inline
 
-From: "Hongjun.Yang" <hongjun.yang@windriver.com>
+--6K2R/cS9K4qvcBNq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Add ptest supports for tcpdump
+These are the files which are installed into sysroot without sstate
+knowledge, so if you reuse the components which created them from sstate
+these files will be missing.
 
-Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
+cat << EOF > sstate-sysroot-cruft-whitelist.txt
+[^/]*/home/builder
+[^/]*/usr/src/kernel/patches
+[^/]*/usr/src/kernel/scripts/.*
+[^/]*/usr/lib/gdk-pixbuf-2.0/.*/loaders.cache
+[^/]*/etc/sgml/sgml-docbook.cat
+[^/]*/usr/src/kernel/patches
+[^/]*/etc/sgml/sgml-docbook.cat
+[^/]*/usr/lib/python3.3/__pycache__
+[^/]*/usr/lib/python3.3/[^/]*/__pycache__
+[^/]*/usr/lib/python3.3/[^/]*/[^/]*/__pycache__
+[^/]*/usr/share/dbus
+[^/]*/usr/share/dbus/dbus-bus-introspect.xml
+[^/]*/usr/share/dbus/session.conf
+[^/]*/usr/bin/crossscripts/guile-config
+[^/]*/usr/lib/python2.7/config/libpython2.7.so
+[^/]*/var
+[^/]*/usr/bin/i586-oe-linux-g77
+[^/]*/usr/bin/arm-oe-linux-gnueabi-g77
+[^/]*/usr/lib/php/\.channels.*
+[^/]*/usr/lib/php/\.registry.*
+[^/]*/usr/lib/php/\.depdb.*
+[^/]*/usr/lib/php/\.filemap
+[^/]*/usr/lib/php/\.lock
+[^/]*/usr/lib/gdk-pixbuf-2.0/.*/loaders.cache
+[^/]*/usr/include/ruby-1.9.1/i386-linux
+[^/]*/usr/include/ruby-1.9.1/i386-linux/ruby
+[^/]*/usr/include/ruby-1.9.1/i386-linux/ruby/config.h
+[^/]*/usr/include/ruby-1.9.1/ruby/win32.h
+[^/]*/usr/lib/ruby/i386-linux
+[^/]*/usr/lib/ruby/i386-linux/fake.rb
+[^/]*/usr/lib/ruby/i386-linux/libruby.so.1.9.1
+[^/]*/usr/lib/ruby/i386-linux/libruby-static.a
+[^/]*/usr/lib/ruby/i386-linux/rbconfig.rb
+[^/]*/usr/lib/qt4/plugins/webkit
+[^/]*/usr/lib/qt5/plugins/webkit
+EOF
 
----
- .../tcpdump/tcpdump-4.6.1/add-ptest.patch          | 38 ++++++++++++++++++++++
- .../tcpdump/tcpdump-4.6.1/run-ptest                |  5 +++
- .../recipes-support/tcpdump/tcpdump_4.6.1.bb       |  8 ++++-
- 3 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
- create mode 100755 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
+You can easily verify it in your build (after build without
+sstate-cache) with:
+openembedded-core/scripts/sstate-sysroot-cruft.sh --tmpdir=3Dtmp-glibc
+--whitelist=3Dsstate-sysroot-cruft-whitelist.txt 2>&1
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
-new file mode 100644
-index 0000000..ab0312e
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
-@@ -0,0 +1,38 @@
-+From 7b259580800e259d232229dc89f97058b56e2fe8 Mon Sep 17 00:00:00 2001
-+From: "Hongjun.Yang" <hongjun.yang@windriver.com>
-+Date: Wed, 22 Oct 2014 10:02:48 +0800
-+Subject: [PATCH] Add ptest for tcpdump
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
-+---
-+ Makefile.in | 10 +++++++++-
-+ 1 file changed, 9 insertions(+), 1 deletion(-)
-+
-+diff --git a/Makefile.in b/Makefile.in
-+index 8c35a45..4fb8ae6 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -428,9 +428,17 @@ distclean:
-+ 	    tests/failure-outputs.txt
-+ 	rm -rf autom4te.cache tests/DIFF tests/NEW
-+ 
-+-check: tcpdump
-++buildtest-TESTS: tcpdump
-++
-++runtest-PTEST:
-+ 	(cd tests && ./TESTrun.sh)
-+ 
-++install-ptest:
-++	cp -r tests			$(DESTDIR) 
-++	cp -r config.h			$(DESTDIR)
-++	install -m 0755 Makefile 	$(DESTDIR)
-++	ln -sf /usr/sbin/tcpdump	$(DESTDIR)/tcpdump
-++
-+ tags: $(TAGFILES)
-+ 	ctags -wtd $(TAGFILES)
-+ 
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
-new file mode 100755
-index 0000000..c03a8b8
---- /dev/null
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
-@@ -0,0 +1,5 @@
-+#!/bin/sh
-+make -k runtest-PTEST | sed -e '/: passed/ s/^/PASS: /g' \
-+			-e '/: failed/ s/^/FAIL: /g' \
-+			-e 's/: passed//g' \
-+			-e 's/: failed//g'
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
-index 58bcb98..1fdaf30 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
-@@ -11,12 +11,14 @@ SRC_URI = " \
-     file://unnecessary-to-check-libpcap.patch \
-     file://tcpdump-configure-dlpi.patch \
-     file://tcpdump-cross-getaddrinfo.patch \
-+    file://add-ptest.patch \
-+    file://run-ptest \
- "
- SRC_URI[md5sum] = "dab267ec30216a069747d10314079ec7"
- SRC_URI[sha256sum] = "4c88c2a9aeb4047074f344fc9b2b6577b219972d359e192f6d12ccf983a13fd7"
- export LIBS=" -lpcap"
- 
--inherit autotools-brokensep
-+inherit autotools-brokensep ptest
- CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
- 
- PACKAGECONFIG ??= "openssl ipv6"
-@@ -43,3 +45,7 @@ do_install_append() {
-     # tcpdump 4.0.0 installs a copy to /usr/sbin/tcpdump.4.0.0
-     rm -f ${D}${sbindir}/tcpdump.${PV}
- }
-+
-+do_compile_ptest() {
-+	oe_runmake buildtest-TESTS
-+}
--- 
-1.9.1
+RFC for g77 fix was sent couple months ago (no reply):
+http://lists.openembedded.org/pipermail/openembedded-core/2014-April/091480=
+=2Ehtml
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--6K2R/cS9K4qvcBNq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlRHeqsACgkQN1Ujt2V2gByxxwCgh8sin35TS2pplpTRa2czidp1
+ZZsAn1gt9knRg1mFp7QMlLZ+zA3QCriL
+=3o5L
+-----END PGP SIGNATURE-----
+
+--6K2R/cS9K4qvcBNq--
