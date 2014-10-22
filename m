@@ -1,33 +1,35 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id C235760097
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id D7F8D60097
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 10:24:07 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Xgt5L-00086O-PX for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Oct 2014 12:24:07 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 12:24:07 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 22 Oct 2014 10:56:38 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id r20so990526wiv.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 12:24:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 22 Oct 2014 03:56:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=3rn+vTw3OM4KGGlkoPW7GMdZ2kyCAH1rOSSN8msV1EA=;
+	b=x2TsPqqk1OrMNYFhuy8aCDedpzlEbMXqnCt0Y3UDwtpc//6I8xTYN8xnbGzZi5R2Oh
+	dv+kQE38CagSHHh6S3sjUVhOZ+Fv4QRdjV6jruLNwzzCfnhvI7TTy8DdB066U56SfA0k
+	sZjA9WL9Ga6OGPfVxA5SouAKqCY/h6LmTvDX63Gl8BknclZ9KIfw+LtIeSNWDi50TAoF
+	1kygkGNBL4CT6FmnQnkQgEe6DswKj66ZNo5Xnj1mfTI1AlHwRCIxCt3+0DyhNXN3IKvQ
+	E1ZLxW+uNXJATRpCbhfvGXEtmcB0f4DrXH2f+KL58AG2D+A4cyWXzzdynIokfcr1lvoP
+	ATfA==
+X-Received: by 10.181.27.229 with SMTP id jj5mr4823246wid.64.1413975398405;
+	Wed, 22 Oct 2014 03:56:38 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	ko10sm18439622wjb.48.2014.10.22.03.56.37 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 22 Oct 2014 03:56:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 22 Oct 2014 12:23:58 +0200
-Message-ID: <m280ju$50a$1@ger.gmane.org>
-References: <1413971847-8154-1-git-send-email-Hongjun.Yang@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <1413971847-8154-1-git-send-email-Hongjun.Yang@windriver.com>
-Subject: Re: [meta-oe][PATCH] tree: Add a new package
+Date: Wed, 22 Oct 2014 12:56:37 +0200
+Message-Id: <1413975398-1610-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.1.1
+Subject: [meta-efl][PATCH 1/2] terminology: upgrade from 0.5.1 to 0.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,75 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 10:24:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Oct 2014 10:56:39 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* announcements:
+  https://phab.enlightenment.org/phame/live/3/post/terminology_0_6_codename_space_shuttle_just_took_off/
+  https://phab.enlightenment.org/phame/live/3/post/terminology_0_6_1/
+  https://phab.enlightenment.org/phame/live/3/post/terminology_0_7/
 
-Hongjun Yang schreef op 22-10-14 11:57:
-> From: "Hongjun.Yang" <hongjun.yang@windriver.com>
-> 
-> Add tree command, some test scripts need it.
-> 
-> Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
-> 
-> --- .../tree/tree-1.7.0/fix-cross-env.patch            | 32
-> ++++++++++++++++++++++ meta-oe/recipes-support/tree/tree_1.7.0.bb
-> | 16 +++++++++++ 2 files changed, 48 insertions(+) create mode 100644
-> meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch create mode
-> 100644 meta-oe/recipes-support/tree/tree_1.7.0.bb
-> 
-> diff --git a/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch
-> b/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch new file
-> mode 100644 index 0000000..ccdf635 --- /dev/null +++
-> b/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch @@ -0,0
-> +1,32 @@ +From 7ad835ae0c2b2b311002fda0be2dbf8f17c5a3d5 Mon Sep 17
-> 00:00:00 2001 +From: "Hongjun.Yang" <hongjun.yang@windriver.com> +Date:
-> Wed, 22 Oct 2014 11:05:35 +0800 +Subject: [PATCH] fix the install path
-> change the install path for cross + compile environment. + 
-> +Upstream-Status: Pending + +Signed-off-by: Hongjun.Yang
-> <hongjun.yang@windriver.com> +--- + Makefile | 4 ++-- + 1 file changed, 2
-> insertions(+), 2 deletions(-) + +diff --git a/Makefile b/Makefile +index
-> e91f1f6..776f1f3 100644 +--- a/Makefile ++++ b/Makefile +@@ -22,9 +22,9
-> @@ CC=gcc + + VERSION=1.7.0 + TREE_DEST=tree +-BINDIR=${prefix}/bin 
-> ++BINDIR=${DESTDIR}/${prefix}/bin + MAN=tree.1 
-> +-MANDIR=${prefix}/man/man1 ++MANDIR=${DESTDIR}/${prefix}/man/man1 +
-> OBJS=tree.o unix.o html.o xml.o json.o hash.o color.o + + # Uncomment
-> options below for your particular OS: +-- +1.9.1 + diff --git
-> a/meta-oe/recipes-support/tree/tree_1.7.0.bb
-> b/meta-oe/recipes-support/tree/tree_1.7.0.bb new file mode 100644 index
-> 0000000..b7fc43b --- /dev/null +++
-> b/meta-oe/recipes-support/tree/tree_1.7.0.bb @@ -0,0 +1,16 @@ 
-> +DESCRIPTION = "This is a handy little utility to display a tree view of
-> directories."
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/e17/terminology_0.5.1.bb | 8 --------
+ meta-efl/recipes-efl/e17/terminology_0.7.0.bb | 8 ++++++++
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-efl/recipes-efl/e17/terminology_0.5.1.bb
+ create mode 100644 meta-efl/recipes-efl/e17/terminology_0.7.0.bb
 
-This looks more like SUMMARY
-
-> +HOMEPAGE = "http://mama.indstate.edu/users/ice/tree/" +LICENSE="GPLv2" 
-> +SECTION = "console/utils" +LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
-
-Please keep LICENSE and LIC_FILES_CHKSUM together.
-
-> + +inherit autotools-brokensep + +FILES_${PN}-doc += "${prefix}/man"
-
-FILES* and R* go below do_install
-
-> + +SRC_URI = "http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz
-> \ +	   file://fix-cross-env.patch \ +	  " + +SRC_URI[md5sum] =
-> "abe3e03e469c542d8e157cdd93f4d8a6" +SRC_URI[sha256sum] =
-> "6957c20e82561ac4231638996e74f4cfa4e6faabc5a2f511f0b4e3940e8f7b12"
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFUR4W+MkyGM64RGpERAnKsAJ0UVS3WtlDbYJuvWRIeGGQ6kpP4tgCgu1sz
-EpivpXj9lw0NN63JNPzvtB4=
-=luch
------END PGP SIGNATURE-----
+diff --git a/meta-efl/recipes-efl/e17/terminology_0.5.1.bb b/meta-efl/recipes-efl/e17/terminology_0.5.1.bb
+deleted file mode 100644
+index 642b658..0000000
+--- a/meta-efl/recipes-efl/e17/terminology_0.5.1.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_RELEASES}/apps/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "d46cda519cf198cb19970146d31a9e8b"
+-SRC_URI[sha256sum] = "ceef9e5a73f1dfdb412d074df1ead684fd31f630414c65eac8cd89fea13315ad"
+diff --git a/meta-efl/recipes-efl/e17/terminology_0.7.0.bb b/meta-efl/recipes-efl/e17/terminology_0.7.0.bb
+new file mode 100644
+index 0000000..0744b09
+--- /dev/null
++++ b/meta-efl/recipes-efl/e17/terminology_0.7.0.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_RELEASES}/apps/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "e68d889f343886e11a8e4f4337486452"
++SRC_URI[sha256sum] = "453f49911b090fffc1e5fe695022bd1c51325dde83b8cd3cca22899c604344f4"
+-- 
+2.1.1
 
 
