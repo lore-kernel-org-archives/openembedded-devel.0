@@ -1,37 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EED060097
+Return-Path: <cnelson711@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id B8CF965C66
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 10:56:39 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id em10so988708wid.1
+	Wed, 22 Oct 2014 14:02:06 +0000 (UTC)
+Received: by mail-ie0-f170.google.com with SMTP id tp5so557666ieb.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 03:56:39 -0700 (PDT)
+	Wed, 22 Oct 2014 07:02:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=NevC7XomR9ts12qgPFSSkBvZPcUTmhYVjT20TQBWmkI=;
-	b=g8T9bgoidMWEi1lT6dN9ciYewA9VSkuAB5fiiV7Ta4OULACyNJEsmJ5t3uVHaeZl4Y
-	Y0CJP9bDk5o7Df7oVGsX0Lb4lEEP+wRroxzeF71Fut6OzfFvCOWhw5JkpugzJuh2B/w7
-	tL9l14MnF2/3wycLAfyQGj6va/9voe86k5L+Rue31xbnO16/gcT5dgAUJT07mxwfBySl
-	vhKRgwh9IfY1e7GNcr2yylZKYTP9enNnCvbfYslpmISgOdml54hPIAWQBxIfzqlUX03j
-	lb0fuikb794cf14p8bwnkYJUrGnZjJoYj6RFx8jnQnrHz8rjRxmyj71I3eKYhAmGv4sj
-	wIAg==
-X-Received: by 10.180.75.7 with SMTP id y7mr11249407wiv.72.1413975399799;
-	Wed, 22 Oct 2014 03:56:39 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id u4sm1507928wiy.9.2014.10.22.03.56.38
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Oct 2014 03:56:39 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=VlHF151IHJsSVQg6rfKWNE/rzSuI5jDLABOxOVSkq3o=;
+	b=y5rvJjdDj2vVkUCxmkYg/qQ0iR+QKVv6YSclw9IdL/Rd4HwXl0tAdvD2nQuBamJ3O1
+	U02AazFsJBHE1GDyHrhbmmlGCcgGUmBm4uLOhD3cHkbdPIbYDYS9wsqSuL+jjqjJRbg1
+	AEySvk6qiuCQ3ElaDy1U/tJnxu+vxf5dG8pNJ6fml6sTA86JaZPr8ulqe+JoeWSji5JH
+	675GLmvQ9X+NltE4h5UvXQBMubhPxqnYOtIkIy3HBb+WQLqBEj5388odJ3zmwR4RclYN
+	qTC+CrT8z7dhwYChlIPIMBM+xXTHfu9hTI04B0781JQteGUyVmhrS20X9bPjbQHxOHCF
+	riEw==
+X-Received: by 10.42.168.73 with SMTP id v9mr4697442icy.21.1413986526153; Wed,
+	22 Oct 2014 07:02:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.134.92 with HTTP; Wed, 22 Oct 2014 07:01:17 -0700 (PDT)
+In-Reply-To: <CAMKF1so35KLMvZ77w14kF6a19D4xrwNHiR43=Fi5_HwA+5Bx5A@mail.gmail.com>
+References: <1413947089-3995-1-git-send-email-cnelson711@gmail.com>
+	<CAMKF1so35KLMvZ77w14kF6a19D4xrwNHiR43=Fi5_HwA+5Bx5A@mail.gmail.com>
+From: Chad Nelson <cnelson711@gmail.com>
+Date: Wed, 22 Oct 2014 09:01:17 -0500
+Message-ID: <CAKs3hO0kACPcqaJinUEdOm+QP2btbQ09dRpLYtYaH6Wg9MQSoA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Oct 2014 12:56:38 +0200
-Message-Id: <1413975398-1610-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.1.1
-In-Reply-To: <1413975398-1610-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1413975398-1610-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-efl][PATCH 2/2] efl, elementary, e-wm: upgrade to 1.11.4 and 0.19.1
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-ruby][PATCH] ruby-lang.org changed the subdomain/hostname of their download server.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,74 +42,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 10:56:40 -0000
+X-List-Received-Date: Wed, 22 Oct 2014 14:02:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* announcements:
-  https://phab.enlightenment.org/phame/live/3/post/efl_elementary_1_11_3_and_enlightenment_0_19_1_releases/
-  https://phab.enlightenment.org/phame/live/3/post/efl_and_elementary_1_11_4_releases/
+Agreed.  We can throw away the patch.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/e17/{e-wm_0.19.0.bb => e-wm_0.19.1.bb}           | 4 ++--
- meta-efl/recipes-efl/efl/{efl_1.11.2.bb => efl_1.11.4.bb}             | 4 ++--
- .../recipes-efl/efl/{elementary_1.11.2.bb => elementary_1.11.4.bb}    | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
- rename meta-efl/recipes-efl/e17/{e-wm_0.19.0.bb => e-wm_0.19.1.bb} (81%)
- rename meta-efl/recipes-efl/efl/{efl_1.11.2.bb => efl_1.11.4.bb} (92%)
- rename meta-efl/recipes-efl/efl/{elementary_1.11.2.bb => elementary_1.11.4.bb} (79%)
+--
+Chad M. Nelson
+Software Engineer
+Ag Leader Technology
+cnelson711@gmail.com
+Cell #: 1+319-389-0689
+Skype, Gmail, Fbook: cnelson711
 
-diff --git a/meta-efl/recipes-efl/e17/e-wm_0.19.0.bb b/meta-efl/recipes-efl/e17/e-wm_0.19.1.bb
-similarity index 81%
-rename from meta-efl/recipes-efl/e17/e-wm_0.19.0.bb
-rename to meta-efl/recipes-efl/e17/e-wm_0.19.1.bb
-index c1e8deb..4c9830f 100644
---- a/meta-efl/recipes-efl/e17/e-wm_0.19.0.bb
-+++ b/meta-efl/recipes-efl/e17/e-wm_0.19.1.bb
-@@ -16,5 +16,5 @@ SRC_URI = "\
-     file://applications.menu \
- "
- 
--SRC_URI[md5sum] = "9571d7e77fdd1ddb877adb063aaf9896"
--SRC_URI[sha256sum] = "30a5633be43a9bb33ce397afe0870511e7b148ea9c1f1a8536818354c20f2e31"
-+SRC_URI[md5sum] = "2c5a110496a867253f31cf7ed1a2143a"
-+SRC_URI[sha256sum] = "3430d94c3def706de3b421ee48d92f2a475224f2f86111442a5d2d90c2363116"
-diff --git a/meta-efl/recipes-efl/efl/efl_1.11.2.bb b/meta-efl/recipes-efl/efl/efl_1.11.4.bb
-similarity index 92%
-rename from meta-efl/recipes-efl/efl/efl_1.11.2.bb
-rename to meta-efl/recipes-efl/efl/efl_1.11.4.bb
-index 6e9a227..9686705 100644
---- a/meta-efl/recipes-efl/efl/efl_1.11.2.bb
-+++ b/meta-efl/recipes-efl/efl/efl_1.11.4.bb
-@@ -4,8 +4,8 @@ SRC_URI = "\
-     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
- "
- 
--SRC_URI[md5sum] = "f1b23b9a4e2ae04a4c0f6d2f924093e9"
--SRC_URI[sha256sum] = "f3cc1cd2a77df114a7b76a7e77bc77e88c367ec49462047fca209ee622cb7288"
-+SRC_URI[md5sum] = "eb2bd4a2f6684211dbd5382db024137d"
-+SRC_URI[sha256sum] = "3e5aba667b6cdfb2fb89aa637fa8ee92abc2d9950420cf2b4c540809f238fc78"
- 
- # Temporary disable until error like the one following are fixed
- # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
-diff --git a/meta-efl/recipes-efl/efl/elementary_1.11.2.bb b/meta-efl/recipes-efl/efl/elementary_1.11.4.bb
-similarity index 79%
-rename from meta-efl/recipes-efl/efl/elementary_1.11.2.bb
-rename to meta-efl/recipes-efl/efl/elementary_1.11.4.bb
-index 60e5468..94ffd84 100644
---- a/meta-efl/recipes-efl/efl/elementary_1.11.2.bb
-+++ b/meta-efl/recipes-efl/efl/elementary_1.11.4.bb
-@@ -8,8 +8,8 @@ SRC_URI = "\
- # these paths aren't passed in -native build
- SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
- 
--SRC_URI[md5sum] = "f6939a24ffc50c2e4eac7ed38663f0f3"
--SRC_URI[sha256sum] = "18f7e8fb63fcfd0d5abd213943c0c356b1270a94e20d44b8e6047b1cd0e53010"
-+SRC_URI[md5sum] = "531f5e2a0ccd95235a5d30221ffa7003"
-+SRC_URI[sha256sum] = "f3ff9d14ccb8621b93f1fe08522bdf31d54382d7e2ab1bf72359b4e65c9d39e4"
- 
- # autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
- # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
--- 
-2.1.1
 
+On Tue, Oct 21, 2014 at 11:50 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Tue, Oct 21, 2014 at 8:04 PM, Chad Nelson <cnelson711@gmail.com> wrote:
+> > From: Chad Nelson <cnelson@agleader.com>
+> >
+> > Signed-off-by: Chad Nelson <cnelson@agleader.com>
+> > ---
+> >  meta-ruby/recipes-devtools/ruby/ruby.inc | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-ruby/recipes-devtools/ruby/ruby.inc
+> b/meta-ruby/recipes-devtools/ruby/ruby.inc
+> > index 409a320..7702869 100644
+> > --- a/meta-ruby/recipes-devtools/ruby/ruby.inc
+> > +++ b/meta-ruby/recipes-devtools/ruby/ruby.inc
+> > @@ -20,7 +20,7 @@ DEPENDS_class-native = "libyaml-native"
+> >  INC_PR = "r1"
+> >
+> >  SHRT_VER =
+> "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+> > -SRC_URI = "
+> http://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
+> > +SRC_URI = "
+> http://cache.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
+> >             file://extmk.patch \
+> >  "
+>
+> It seems to be a temp failure now I can download successfully from
+> original ftp location
+>
+> curl -O ftp://ftp.ruby-lang.org/pub/ruby/ruby-1.9.1-p429.tar.gz
+>
+>   % Total    % Received % Xferd  Average Speed   Time    Time     Time
+> Current
+>
+>                                  Dload  Upload   Total   Spent    Left
+> Speed
+>
+> 100 8865k  100 8865k    0     0  1403k      0  0:00:06  0:00:06 --:--:--
+> 1865k
+>
+> this patch may not be needed
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
