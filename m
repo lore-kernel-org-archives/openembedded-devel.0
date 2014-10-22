@@ -1,33 +1,33 @@
 Return-Path: <mike.holmes@linaro.org>
-Received: from mail-oi0-f48.google.com (mail-oi0-f48.google.com
-	[209.85.218.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 1851D60232
+Received: from mail-ob0-f175.google.com (mail-ob0-f175.google.com
+	[209.85.214.175])
+	by mail.openembedded.org (Postfix) with ESMTP id BBB7460232
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 16:34:43 +0000 (UTC)
-Received: by mail-oi0-f48.google.com with SMTP id g201so3000336oib.7
+	Wed, 22 Oct 2014 20:19:17 +0000 (UTC)
+Received: by mail-ob0-f175.google.com with SMTP id wn1so3551316obc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 09:34:42 -0700 (PDT)
+	Wed, 22 Oct 2014 13:19:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:date
 	:message-id:subject:from:to:content-type;
-	bh=I8NBUr5VLI7WIgHDdmlv5KfawihyPI0MVbLCrAqNI8Y=;
-	b=YJgGXN3xtzenOrJi0dyFOVO3umyr+/jeTrwonkVTirdeoVdqxju921ZSXRxqC7K/FQ
-	Dw8IB55sbub2f5r99c2Q9tbSEq00e9tLk107WGrOYBkwhrhH1dOC4aPwBM/64KYeHiTA
-	9YZHqn+UnJkZlmUc2pt4scDtLsFE5pPOxFxq1ABm4CRyIkQtyBCulXGnY4lGUuH1Gnu8
-	7aCLsjmeF2Eu3pU3dnmSLnQj1RuNwd/pU/PK0WGy3R3s3HzC4oy3u1VptgyVfdia33KO
-	fytMENKfIhUqGIBoOSEPNThDrsf3MtTmWKExl+6T/5sPbdfjnyVWhvAkb+0T1zQ0kbzs
-	R1rw==
-X-Gm-Message-State: ALoCoQnJllQZw4MwG5cAk7slcBqVKgPsoAHGgfFpN4Rj1D3QHLzM4Yx6FjCsaTR2f+wXd3bH0UfD
+	bh=I3VkCLaSOkyRy1gXp7Mv6I4McbdJgxCC2HNVsDgd/RM=;
+	b=fCRSrmIpdhTK/Z/chqnDSK/8DI8jxSD36SMjISG2StCwUrOX6FgrjJrRwUzLTSdHdt
+	EDr94+SMzVYonC4oerS3N+Pm1ueVXKYRbk5BIco9djVLaN9nAdjKtUFPZdy5OaK4UsAp
+	949RQUKA6B8BX0pV3P2kIHPmNc92G26CNHTAZaUcMClffE9Vvd/bNrTv/RpAXFu2ESA3
+	oEFYOGc5PyTWUZNvVfq1ZUeQqVVXBXj9FrVlAdkQZjH5b44Mdhss8ELFdqWBfIopw3sj
+	t7seGPMSdz7SHG1E5pkXXRMp528mdktRzQMImatSgPkU2as8vn2ocIV+rRFwvnw5HFoB
+	j31g==
+X-Gm-Message-State: ALoCoQn7MoW9bG/nGHedJ5omKTgfvgyPdayQ98hvNvTngyU3/zuEclqykTA5dp/GCco20ZmXEAa8
 MIME-Version: 1.0
-X-Received: by 10.60.45.4 with SMTP id i4mr1491470oem.78.1413995681928; Wed,
-	22 Oct 2014 09:34:41 -0700 (PDT)
-Received: by 10.76.68.201 with HTTP; Wed, 22 Oct 2014 09:34:41 -0700 (PDT)
+X-Received: by 10.182.38.135 with SMTP id g7mr263464obk.19.1414009157409; Wed,
+	22 Oct 2014 13:19:17 -0700 (PDT)
+Received: by 10.76.68.201 with HTTP; Wed, 22 Oct 2014 13:19:17 -0700 (PDT)
 In-Reply-To: <20141022162140.GJ2455@jama>
 References: <1413992945-33655-1-git-send-email-mike.holmes@linaro.org>
 	<20141022162140.GJ2455@jama>
-Date: Wed, 22 Oct 2014 12:34:41 -0400
-Message-ID: <CADz3at0DbHiEXs0bbnBaW9kFoG3Pu27eBL4VcXwd=MtW5g0n2w@mail.gmail.com>
+Date: Wed, 22 Oct 2014 16:19:17 -0400
+Message-ID: <CADz3at2pcrG1NgAJJNV2Tfk2JxhDYnNYwPxmf-Or45ZSB3qT3Q@mail.gmail.com>
 From: Mike Holmes <mike.holmes@linaro.org>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
@@ -45,7 +45,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 16:34:46 -0000
+X-List-Received-Date: Wed, 22 Oct 2014 20:19:25 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On 22 October 2014 12:21, Martin Jansa <martin.jansa@gmail.com> wrote:
@@ -90,7 +90,8 @@ On 22 October 2014 12:21, Martin Jansa <martin.jansa@gmail.com> wrote:
 > Why doesn't it use ${datadir}/doc == ${docdir} as everything else?
 >
 
-My inexperience with OE most likely, I will try that, thank you.
+I think the reason is because CUnit places its docs in /usr/doc/CUnit which
+is not the same as docdir (usr/share/doc)
 
 
 >
