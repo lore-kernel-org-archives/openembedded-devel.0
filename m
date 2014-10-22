@@ -1,32 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DD1E60557
+Return-Path: <Hongjun.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 331B360557
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 04:51:25 +0000 (UTC)
-Received: by mail-ig0-f180.google.com with SMTP id uq10so257440igb.1
+	Wed, 22 Oct 2014 06:56:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9M6u8Ci027104
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Oct 2014 21:51:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=kOh4hHrLfufM3pSIJ9um753oJUuTH4lD6iB17H6Pmqg=;
-	b=A6oN/95Xv3nQ+v/oK/QQx2hk4lm7eQM6/GLw1EB1hdzj7TRbLnijbozwdVsBpbvE2S
-	GqsaSrFwcCK70dxvfPJwuijW5/mGNTqgkRIDXZ/n5Z+XHNu9NDiT/zWwzXlZQY0/GXCk
-	LgvUnHNxvkysZjBSWVWnkdrIKoVUMSXAeZK5lE9//fLAUB8PUIbG+UHpod+7oLb+fwJ8
-	5YX0H5dbsEpZJFC9VY1m26L/AwISA9uGoHRgo85L54Z1tE0qLGppcV9M34Myzwov9mxd
-	vlJsU04KVGJEJq0RGbXGzbAGkH0xbHDdkOGbwutOnjU1rDmNZdmfbSJ1ozGEMGMruVJi
-	+g7A==
-X-Received: by 10.107.3.133 with SMTP id e5mr23457119ioi.45.1413953485598;
-	Tue, 21 Oct 2014 21:51:25 -0700 (PDT)
+	Tue, 21 Oct 2014 23:56:09 -0700 (PDT)
+Received: from pek-lpgtest9.wrs.com (128.224.153.89) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 21 Oct 2014 23:56:08 -0700
+From: Hongjun Yang <Hongjun.Yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 22 Oct 2014 14:56:07 +0800
+Message-ID: <1413960967-6653-1-git-send-email-Hongjun.Yang@windriver.com>
+X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-Received: by 10.50.169.2 with HTTP; Tue, 21 Oct 2014 21:50:55 -0700 (PDT)
-In-Reply-To: <1413947089-3995-1-git-send-email-cnelson711@gmail.com>
-References: <1413947089-3995-1-git-send-email-cnelson711@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Oct 2014 21:50:55 -0700
-Message-ID: <CAMKF1so35KLMvZ77w14kF6a19D4xrwNHiR43=Fi5_HwA+5Bx5A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-ruby][PATCH] ruby-lang.org changed the subdomain/hostname of their download server.
+Subject: [meta-networking][PATCH] tcpdump: Add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,40 +32,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 04:51:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Oct 2014 06:56:12 -0000
+Content-Type: text/plain
 
-On Tue, Oct 21, 2014 at 8:04 PM, Chad Nelson <cnelson711@gmail.com> wrote:
-> From: Chad Nelson <cnelson@agleader.com>
->
-> Signed-off-by: Chad Nelson <cnelson@agleader.com>
-> ---
->  meta-ruby/recipes-devtools/ruby/ruby.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-ruby/recipes-devtools/ruby/ruby.inc b/meta-ruby/recipes-devtools/ruby/ruby.inc
-> index 409a320..7702869 100644
-> --- a/meta-ruby/recipes-devtools/ruby/ruby.inc
-> +++ b/meta-ruby/recipes-devtools/ruby/ruby.inc
-> @@ -20,7 +20,7 @@ DEPENDS_class-native = "libyaml-native"
->  INC_PR = "r1"
->
->  SHRT_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
-> -SRC_URI = "http://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
-> +SRC_URI = "http://cache.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
->             file://extmk.patch \
->  "
+From: "Hongjun.Yang" <hongjun.yang@windriver.com>
 
-It seems to be a temp failure now I can download successfully from
-original ftp location
+Add ptest supports for tcpdump
 
-curl -O ftp://ftp.ruby-lang.org/pub/ruby/ruby-1.9.1-p429.tar.gz
+Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
 
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+---
+ .../tcpdump/tcpdump-4.6.1/add-ptest.patch          | 38 ++++++++++++++++++++++
+ .../tcpdump/tcpdump-4.6.1/run-ptest                |  5 +++
+ .../recipes-support/tcpdump/tcpdump_4.6.1.bb       |  4 ++-
+ 3 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
+ create mode 100755 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
 
-                                 Dload  Upload   Total   Spent    Left  Speed
+diff --git a/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch b/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
+new file mode 100644
+index 0000000..ab0312e
+--- /dev/null
++++ b/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
+@@ -0,0 +1,38 @@
++From 7b259580800e259d232229dc89f97058b56e2fe8 Mon Sep 17 00:00:00 2001
++From: "Hongjun.Yang" <hongjun.yang@windriver.com>
++Date: Wed, 22 Oct 2014 10:02:48 +0800
++Subject: [PATCH] Add ptest for tcpdump
++
++Upstream-Status: pending
++
++Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
++---
++ Makefile.in | 10 +++++++++-
++ 1 file changed, 9 insertions(+), 1 deletion(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 8c35a45..4fb8ae6 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -428,9 +428,17 @@ distclean:
++ 	    tests/failure-outputs.txt
++ 	rm -rf autom4te.cache tests/DIFF tests/NEW
++ 
++-check: tcpdump
+++buildtest-TESTS: tcpdump
+++
+++runtest-PTEST:
++ 	(cd tests && ./TESTrun.sh)
++ 
+++install-ptest:
+++	cp -r tests			$(DESTDIR) 
+++	cp -r config.h			$(DESTDIR)
+++	install -m 0755 Makefile 	$(DESTDIR)
+++	ln -sf /usr/sbin/tcpdump	$(DESTDIR)/tcpdump
+++
++ tags: $(TAGFILES)
++ 	ctags -wtd $(TAGFILES)
++ 
++-- 
++1.9.1
++
+diff --git a/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest b/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
+new file mode 100755
+index 0000000..c03a8b8
+--- /dev/null
++++ b/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
+@@ -0,0 +1,5 @@
++#!/bin/sh
++make -k runtest-PTEST | sed -e '/: passed/ s/^/PASS: /g' \
++			-e '/: failed/ s/^/FAIL: /g' \
++			-e 's/: passed//g' \
++			-e 's/: failed//g'
+diff --git a/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb b/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
+index 58bcb98..ddf0052 100644
+--- a/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
++++ b/meta-networking/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
+@@ -11,12 +11,14 @@ SRC_URI = " \
+     file://unnecessary-to-check-libpcap.patch \
+     file://tcpdump-configure-dlpi.patch \
+     file://tcpdump-cross-getaddrinfo.patch \
++    file://add-ptest.patch \
++    file://run-ptest \
+ "
+ SRC_URI[md5sum] = "dab267ec30216a069747d10314079ec7"
+ SRC_URI[sha256sum] = "4c88c2a9aeb4047074f344fc9b2b6577b219972d359e192f6d12ccf983a13fd7"
+ export LIBS=" -lpcap"
+ 
+-inherit autotools-brokensep
++inherit autotools-brokensep ptest
+ CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
+ 
+ PACKAGECONFIG ??= "openssl ipv6"
+-- 
+1.9.1
 
-100 8865k  100 8865k    0     0  1403k      0  0:00:06  0:00:06 --:--:-- 1865k
-
-this patch may not be needed
 
