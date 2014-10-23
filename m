@@ -1,24 +1,26 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 830A065CAF
+	by mail.openembedded.org (Postfix) with ESMTP id 83E5365D27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Oct 2014 08:29:11 +0000 (UTC)
+	Thu, 23 Oct 2014 08:29:13 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9N8TBGY029764
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9N8TEAu029772
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Oct 2014 01:29:11 -0700 (PDT)
+	Thu, 23 Oct 2014 01:29:14 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 23 Oct 2014 01:29:11 -0700
+	14.3.174.1; Thu, 23 Oct 2014 01:29:13 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 23 Oct 2014 16:29:13 +0800
-Message-ID: <1414052955-30856-1-git-send-email-rongqing.li@windriver.com>
+Date: Thu, 23 Oct 2014 16:29:15 +0800
+Message-ID: <1414052955-30856-3-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1414052955-30856-1-git-send-email-rongqing.li@windriver.com>
+References: <1414052955-30856-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-websever][PATCH 1/3] modphp: Security Advisory - php - CVE-2014-5120
+Subject: [meta-webserver][PATCH 3/3] modphp: Security Advisory - php - CVE-2014-3597
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,71 +39,319 @@ Content-Type: text/plain
 
 From: Yue Tao <Yue.Tao@windriver.com>
 
-gd_ctx.c in the GD component in PHP 5.4.x before 5.4.32 and 5.5.x before
-5.5.16 does not ensure that pathnames lack %00 sequences, which might
-allow remote attackers to overwrite arbitrary files via crafted input to
-an application that calls the (1) imagegd, (2) imagegd2, (3) imagegif,
-(4) imagejpeg, (5) imagepng, (6) imagewbmp, or (7) imagewebp function.
+Multiple buffer overflows in the php_parserr function in
+ext/standard/dns.c in PHP before 5.4.32 and 5.5.x before 5.5.16 allow
+remote DNS servers to cause a denial of service (application crash) or
+possibly execute arbitrary code via a crafted DNS record, related to the
+dns_get_record function and the dn_expand function. NOTE: this issue
+exists because of an incomplete fix for CVE-2014-4049.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-5120
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3597
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 ---
- .../modphp/files/php-CVE-2014-5120.patch           |   35 ++++++++++++++++++++
+ .../modphp/files/php-CVE-2014-3597.patch           |  282 ++++++++++++++++++++
  meta-webserver/recipes-php/modphp/modphp5.inc      |    1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-5120.patch
+ 2 files changed, 283 insertions(+)
+ create mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-3597.patch
 
-diff --git a/meta-webserver/recipes-php/modphp/files/php-CVE-2014-5120.patch b/meta-webserver/recipes-php/modphp/files/php-CVE-2014-5120.patch
+diff --git a/meta-webserver/recipes-php/modphp/files/php-CVE-2014-3597.patch b/meta-webserver/recipes-php/modphp/files/php-CVE-2014-3597.patch
 new file mode 100644
-index 0000000..f2e23b3
+index 0000000..73f4e32
 --- /dev/null
-+++ b/meta-webserver/recipes-php/modphp/files/php-CVE-2014-5120.patch
-@@ -0,0 +1,35 @@
-+modphp: Security Advisory - php - CVE-2014-5120
++++ b/meta-webserver/recipes-php/modphp/files/php-CVE-2014-3597.patch
+@@ -0,0 +1,282 @@
++modphp: Security Advisory - php - CVE-2014-3597
 +
 +Upstream-Status: Backport
 +
-+Signed-off-by Yue Tao <yue.tao@windriver.com>
++Signed-off-by: Yue Tao <yue.tao@windriver.com>
 +
-+From 706aefb78112a44d4932d4c9430c6a898696f51f Mon Sep 17 00:00:00 2001
-+From: Stanislav Malyshev <stas@php.net>
-+Date: Mon, 18 Aug 2014 22:49:10 -0700
-+Subject: [PATCH] Fix bug #67730 - Null byte injection possible with imagexxx
-+ functions
++From 2fefae47716d501aec41c1102f3fd4531f070b05 Mon Sep 17 00:00:00 2001
++From: Remi Collet <remi@php.net>
++Date: Tue, 19 Aug 2014 08:33:49 +0200
++Subject: [PATCH] Fixed Sec Bug #67717 segfault in dns_get_record
++ CVE-2014-3597
 +
++Incomplete fix for CVE-2014-4049
++
++Check possible buffer overflow
++- pass real buffer end to dn_expand calls
++- check buffer len before each read
 +---
-+ ext/gd/gd_ctx.c |    5 +++++
-+ 2 files changed, 7 insertions(+)
++ ext/standard/dns.c |   84 +++++++++++++++++++++++++++++++++++++---------------
++ 1 file changed, 60 insertions(+), 24 deletions(-)
 +
-+diff --git a/ext/gd/gd_ctx.c b/ext/gd/gd_ctx.c
-+index bff691f..eafbab5 100644
-+--- a/ext/gd/gd_ctx.c
-++++ b/ext/gd/gd_ctx.c
-+@@ -124,6 +124,11 @@ static void _php_image_output_ctx(INTERNAL_FUNCTION_PARAMETERS, int image_type,
-+ 				RETURN_FALSE;
-+ 			}
-+ 		} else if (Z_TYPE_P(to_zval) == IS_STRING) {
-++			if (CHECK_ZVAL_NULL_PATH(to_zval)) {
-++				php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid 2nd parameter, filename must not contain null bytes");
-++				RETURN_FALSE;
-++			}
++diff --git a/ext/standard/dns.c b/ext/standard/dns.c
++index 214a7dc..0b5e69c 100644
++--- a/ext/standard/dns.c
+++++ b/ext/standard/dns.c
++@@ -412,8 +412,14 @@ PHP_FUNCTION(dns_check_record)
++ 
++ #if HAVE_FULL_DNS_FUNCS
++ 
+++#define CHECKCP(n) do { \
+++	if (cp + n > end) { \
+++		return NULL; \
+++	} \
+++} while (0)
 ++
-+ 			stream = php_stream_open_wrapper(Z_STRVAL_P(to_zval), "wb", REPORT_ERRORS|IGNORE_PATH|IGNORE_URL_WIN, NULL);
-+ 			if (stream == NULL) {
-+ 				RETURN_FALSE;
++ /* {{{ php_parserr */
++-static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int store, int raw, zval **subarray)
+++static u_char *php_parserr(u_char *cp, u_char *end, querybuf *answer, int type_to_fetch, int store, int raw, zval **subarray)
++ {
++ 	u_short type, class, dlen;
++ 	u_long ttl;
++@@ -425,16 +431,18 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 
++ 	*subarray = NULL;
++ 
++-	n = dn_expand(answer->qb2, answer->qb2+65536, cp, name, sizeof(name) - 2);
+++	n = dn_expand(answer->qb2, end, cp, name, sizeof(name) - 2);
++ 	if (n < 0) {
++ 		return NULL;
++ 	}
++ 	cp += n;
++ 
+++	CHECKCP(10);
++ 	GETSHORT(type, cp);
++ 	GETSHORT(class, cp);
++ 	GETLONG(ttl, cp);
++ 	GETSHORT(dlen, cp);
+++	CHECKCP(dlen);
++ 	if (type_to_fetch != T_ANY && type != type_to_fetch) {
++ 		cp += dlen;
++ 		return cp;
++@@ -461,12 +469,14 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 
++ 	switch (type) {
++ 		case DNS_T_A:
+++			CHECKCP(4);
++ 			add_assoc_string(*subarray, "type", "A", 1);
++ 			snprintf(name, sizeof(name), "%d.%d.%d.%d", cp[0], cp[1], cp[2], cp[3]);
++ 			add_assoc_string(*subarray, "ip", name, 1);
++ 			cp += dlen;
++ 			break;
++ 		case DNS_T_MX:
+++			CHECKCP(2);
++ 			add_assoc_string(*subarray, "type", "MX", 1);
++ 			GETSHORT(n, cp);
++ 			add_assoc_long(*subarray, "pri", n);
++@@ -485,7 +495,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 			if (type == DNS_T_PTR) {
++ 				add_assoc_string(*subarray, "type", "PTR", 1);
++ 			}
++-			n = dn_expand(answer->qb2, answer->qb2+65536, cp, name, (sizeof name) - 2);
+++			n = dn_expand(answer->qb2, end, cp, name, (sizeof name) - 2);
++ 			if (n < 0) {
++ 				return NULL;
++ 			}
++@@ -495,18 +505,22 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 		case DNS_T_HINFO:
++ 			/* See RFC 1010 for values */
++ 			add_assoc_string(*subarray, "type", "HINFO", 1);
+++			CHECKCP(1);
++ 			n = *cp & 0xFF;
++ 			cp++;
+++			CHECKCP(n);
++ 			add_assoc_stringl(*subarray, "cpu", (char*)cp, n, 1);
++ 			cp += n;
+++			CHECKCP(1);
++ 			n = *cp & 0xFF;
++ 			cp++;
+++			CHECKCP(n);
++ 			add_assoc_stringl(*subarray, "os", (char*)cp, n, 1);
++ 			cp += n;
++ 			break;
++ 		case DNS_T_TXT:
++ 			{
++-				int ll = 0;
+++				int l1 = 0, l2 = 0;
++ 				zval *entries = NULL;
++ 
++ 				add_assoc_string(*subarray, "type", "TXT", 1);
++@@ -515,37 +529,41 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 				MAKE_STD_ZVAL(entries);
++ 				array_init(entries);
++ 				
++-				while (ll < dlen) {
++-					n = cp[ll];
++-					if ((ll + n) >= dlen) {
+++				while (l1 < dlen) {
+++					n = cp[l1];
+++					if ((l1 + n) >= dlen) {
++ 						// Invalid chunk length, truncate
++-						n = dlen - (ll + 1);
+++						n = dlen - (l1 + 1);
+++					}
+++					if (n) {
+++						memcpy(tp + l2 , cp + l1 + 1, n);
+++						add_next_index_stringl(entries, cp + l1 + 1, n, 1);
++ 					}
++-					memcpy(tp + ll , cp + ll + 1, n);
++-					add_next_index_stringl(entries, cp + ll + 1, n, 1);
++-					ll = ll + n + 1;
+++					l1 = l1 + n + 1;
+++					l2 = l2 + n;
++ 				}
++-				tp[dlen] = '\0';
+++				tp[l2] = '\0';
++ 				cp += dlen;
++ 
++-				add_assoc_stringl(*subarray, "txt", tp, (dlen>0)?dlen - 1:0, 0);
+++				add_assoc_stringl(*subarray, "txt", tp, l2, 0);
++ 				add_assoc_zval(*subarray, "entries", entries);
++ 			}
++ 			break;
++ 		case DNS_T_SOA:
++ 			add_assoc_string(*subarray, "type", "SOA", 1);
++-			n = dn_expand(answer->qb2, answer->qb2+65536, cp, name, (sizeof name) -2);
+++			n = dn_expand(answer->qb2, end, cp, name, (sizeof name) -2);
++ 			if (n < 0) {
++ 				return NULL;
++ 			}
++ 			cp += n;
++ 			add_assoc_string(*subarray, "mname", name, 1);
++-			n = dn_expand(answer->qb2, answer->qb2+65536, cp, name, (sizeof name) -2);
+++			n = dn_expand(answer->qb2, end, cp, name, (sizeof name) -2);
++ 			if (n < 0) {
++ 				return NULL;
++ 			}
++ 			cp += n;
++ 			add_assoc_string(*subarray, "rname", name, 1);
+++			CHECKCP(5*4);
++ 			GETLONG(n, cp);
++ 			add_assoc_long(*subarray, "serial", n);
++ 			GETLONG(n, cp);
++@@ -559,6 +577,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 			break;
++ 		case DNS_T_AAAA:
++ 			tp = (u_char*)name;
+++			CHECKCP(8*2);
++ 			for(i=0; i < 8; i++) {
++ 				GETSHORT(s, cp);
++ 				if (s != 0) {
++@@ -593,6 +612,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 		case DNS_T_A6:
++ 			p = cp;
++ 			add_assoc_string(*subarray, "type", "A6", 1);
+++			CHECKCP(1);
++ 			n = ((int)cp[0]) & 0xFF;
++ 			cp++;
++ 			add_assoc_long(*subarray, "masklen", n);
++@@ -628,6 +648,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 				cp++;
++ 			}
++ 			for (i = (n + 8) / 16; i < 8; i++) {
+++				CHECKCP(2);
++ 				GETSHORT(s, cp);
++ 				if (s != 0) {
++ 					if (tp > (u_char *)name) {
++@@ -657,7 +678,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 			tp[0] = '\0';
++ 			add_assoc_string(*subarray, "ipv6", name, 1);
++ 			if (cp < p + dlen) {
++-				n = dn_expand(answer->qb2, answer->qb2+65536, cp, name, (sizeof name) - 2);
+++				n = dn_expand(answer->qb2, end, cp, name, (sizeof name) - 2);
++ 				if (n < 0) {
++ 					return NULL;
++ 				}
++@@ -666,6 +687,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 			}
++ 			break;
++ 		case DNS_T_SRV:
+++			CHECKCP(3*2);
++ 			add_assoc_string(*subarray, "type", "SRV", 1);
++ 			GETSHORT(n, cp);
++ 			add_assoc_long(*subarray, "pri", n);
++@@ -673,7 +695,7 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 			add_assoc_long(*subarray, "weight", n);
++ 			GETSHORT(n, cp);
++ 			add_assoc_long(*subarray, "port", n);
++-			n = dn_expand(answer->qb2, answer->qb2+65536, cp, name, (sizeof name) - 2);
+++			n = dn_expand(answer->qb2, end, cp, name, (sizeof name) - 2);
++ 			if (n < 0) {
++ 				return NULL;
++ 			}
++@@ -681,21 +703,35 @@ static u_char *php_parserr(u_char *cp, querybuf *answer, int type_to_fetch, int
++ 			add_assoc_string(*subarray, "target", name, 1);
++ 			break;
++ 		case DNS_T_NAPTR:
+++			CHECKCP(2*2);
++ 			add_assoc_string(*subarray, "type", "NAPTR", 1);
++ 			GETSHORT(n, cp);
++ 			add_assoc_long(*subarray, "order", n);
++ 			GETSHORT(n, cp);
++ 			add_assoc_long(*subarray, "pref", n);
+++
+++			CHECKCP(1);
++ 			n = (cp[0] & 0xFF);
++-			add_assoc_stringl(*subarray, "flags", (char*)++cp, n, 1);
+++			cp++;
+++			CHECKCP(n);
+++			add_assoc_stringl(*subarray, "flags", (char*)cp, n, 1);
++ 			cp += n;
+++
+++			CHECKCP(1);
++ 			n = (cp[0] & 0xFF);
++-			add_assoc_stringl(*subarray, "services", (char*)++cp, n, 1);
+++			cp++;
+++			CHECKCP(n);
+++			add_assoc_stringl(*subarray, "services", (char*)cp, n, 1);
++ 			cp += n;
+++
+++			CHECKCP(1);
++ 			n = (cp[0] & 0xFF);
++-			add_assoc_stringl(*subarray, "regex", (char*)++cp, n, 1);
+++			cp++;
+++			CHECKCP(n);
+++			add_assoc_stringl(*subarray, "regex", (char*)cp, n, 1);
++ 			cp += n;
++-			n = dn_expand(answer->qb2, answer->qb2+65536, cp, name, (sizeof name) - 2);
+++
+++			n = dn_expand(answer->qb2, end, cp, name, (sizeof name) - 2);
++ 			if (n < 0) {
++ 				return NULL;
++ 			}
++@@ -888,7 +924,7 @@ PHP_FUNCTION(dns_get_record)
++ 			while (an-- && cp && cp < end) {
++ 				zval *retval;
++ 
++-				cp = php_parserr(cp, &answer, type_to_fetch, store_results, raw, &retval);
+++				cp = php_parserr(cp, end, &answer, type_to_fetch, store_results, raw, &retval);
++ 				if (retval != NULL && store_results) {
++ 					add_next_index_zval(return_value, retval);
++ 				}
++@@ -901,7 +937,7 @@ PHP_FUNCTION(dns_get_record)
++ 				while (ns-- > 0 && cp && cp < end) {
++ 					zval *retval = NULL;
++ 
++-					cp = php_parserr(cp, &answer, DNS_T_ANY, authns != NULL, raw, &retval);
+++					cp = php_parserr(cp, end, &answer, DNS_T_ANY, authns != NULL, raw, &retval);
++ 					if (retval != NULL) {
++ 						add_next_index_zval(authns, retval);
++ 					}
++@@ -913,7 +949,7 @@ PHP_FUNCTION(dns_get_record)
++ 				while (ar-- > 0 && cp && cp < end) {
++ 					zval *retval = NULL;
++ 
++-					cp = php_parserr(cp, &answer, DNS_T_ANY, 1, raw, &retval);
+++					cp = php_parserr(cp, end, &answer, DNS_T_ANY, 1, raw, &retval);
++ 					if (retval != NULL) {
++ 						add_next_index_zval(addtl, retval);
++ 					}
 +-- 
 +1.7.9.5
 +
 diff --git a/meta-webserver/recipes-php/modphp/modphp5.inc b/meta-webserver/recipes-php/modphp/modphp5.inc
-index c1cdf72..4f14607 100644
+index 3716f74..1ae78de 100644
 --- a/meta-webserver/recipes-php/modphp/modphp5.inc
 +++ b/meta-webserver/recipes-php/modphp/modphp5.inc
-@@ -9,6 +9,7 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
-            file://pthread-check-threads-m4.patch \
-            file://70_mod_php5.conf \
+@@ -11,6 +11,7 @@ SRC_URI = "http://www.php.net/distributions/php-${PV}.tar.bz2 \
             file://0001-using-pkgconfig-to-check-libxml.patch \
-+           file://php-CVE-2014-5120.patch \
+            file://php-CVE-2014-5120.patch \
+            file://php-CVE-2014-3587.patch \
++           file://php-CVE-2014-3597.patch \
  "
  
  S = "${WORKDIR}/php-${PV}"
