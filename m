@@ -1,38 +1,31 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id B02CC65C91
+Return-Path: <ka6sox@gmail.com>
+Received: from mail-lb0-f179.google.com (mail-lb0-f179.google.com
+	[209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id E247165C75
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 20:29:01 +0000 (UTC)
-Received: by mail-qg0-f42.google.com with SMTP id z60so3273282qgd.29
+	Thu, 23 Oct 2014 06:33:00 +0000 (UTC)
+Received: by mail-lb0-f179.google.com with SMTP id l4so289597lbv.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Oct 2014 13:29:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=wGnoJXngCkgI/lobWrQdsDruRy+flQFaO+ET82p98iw=;
-	b=nH4mnvraAdbTNE9sMYbHVB9egV0IZODSYAFXDvmdRQTZuCz965LAFpg4osa82qHQOJ
-	2jFiath1KmMRuhgKNBp264bA59Aefl9lviKimDoUjmDe0i3YWxmbB5TeyqS/gQrwHZJ9
-	53qKiHllcUWiJjXY8S/BZ3J8CnZanozDgaHwsxd3gt5gzfIE9K/IV6mhE23sNmiVVTf0
-	87TQfkpiSWCqkj4P6ZPibXx9XUXkOLjrcWjy1VgYRqUmDMQg3JP2ZfjL0OgzgBFzEhTQ
-	j6OpZzb3E6LXhe1dP6mPf0nfGIVcWqqDpcIHmRNBKBl5bgTzxp3wg+K99btKWB2KSz+W
-	L7Vw==
-X-Gm-Message-State: ALoCoQlrUuz159d78oUIrQarQRoAHcHhBenGRNS4t3HKCiIKJ/Xvd5LxnSR+QTMOIqwMJduBbBWH
-X-Received: by 10.224.79.79 with SMTP id o15mr541300qak.93.1414009742339; Wed,
-	22 Oct 2014 13:29:02 -0700 (PDT)
+	Wed, 22 Oct 2014 23:33:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=GHTIWuEh8n7OzxbFvsW3LWGILJd5n+NG7Nlq/Fs59bU=;
+	b=P/bwPMz+MHuQw+0kwT90WSUjpHbwb9QDsUFkC4iZKkNZPToT8lA5y2WQLtLh29WvyU
+	QFBfGz05Eeb9S81Ry+dPGb0dKEdAMOVWNKPUS9ni9Yknfj0ZF+yVjfkimN9JZguWt5Zp
+	HGBkX2B3nH/W4rRRAVZrm1ErjVLzwKuDyXzN3BwqJrNNTMq8+UZRIXHI82s5LfhogHXH
+	iDLCW1u++Y6ZEOtbJkeWgKD1D2BauvlJUsBzI+RWUJH+qAZkTsezZw7+H+oMuHTM6M8Z
+	DV4t3M5VItJltThWmBlFnsZigXkYIt3+u4IKxbGjgeTCuQlsh7rCiHSNlwLDWkcOicMp
+	kB0Q==
 MIME-Version: 1.0
-Received: by 10.140.93.65 with HTTP; Wed, 22 Oct 2014 13:28:42 -0700 (PDT)
-In-Reply-To: <CADz3at2pcrG1NgAJJNV2Tfk2JxhDYnNYwPxmf-Or45ZSB3qT3Q@mail.gmail.com>
-References: <1413992945-33655-1-git-send-email-mike.holmes@linaro.org>
-	<20141022162140.GJ2455@jama>
-	<CADz3at2pcrG1NgAJJNV2Tfk2JxhDYnNYwPxmf-Or45ZSB3qT3Q@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 22 Oct 2014 21:28:42 +0100
-Message-ID: <CAJTo0LbZ9eo-Die1W5yU6M4YJWTjuXsg8ukKr-yR8s+adS_bVw@mail.gmail.com>
-To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Received: by 10.152.116.68 with SMTP id ju4mr2753446lab.13.1414045980148;
+	Wed, 22 Oct 2014 23:33:00 -0700 (PDT)
+Received: by 10.25.88.6 with HTTP; Wed, 22 Oct 2014 23:33:00 -0700 (PDT)
+Date: Wed, 22 Oct 2014 23:33:00 -0700
+Message-ID: <CAHQecY71sCZ27fUsnpK-21wvAcfs3ertGy0LCh5axWSLX8Trew@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] add CUnit test suite
+Subject: it is possible that OE servers might be unavailable from 0700UTC till 1300UTC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,16 +39,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Oct 2014 20:29:07 -0000
+X-List-Received-Date: Thu, 23 Oct 2014 06:33:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 22 October 2014 21:19, Mike Holmes <mike.holmes@linaro.org> wrote:
+Due to emergency Network maintenance (bad fibre)
 
-> I think the reason is because CUnit places its docs in /usr/doc/CUnit which
-> is not the same as docdir (usr/share/doc)
->
+Our Hosting provider has warned us that we may experience an outage due to
+replacement of damaged fibre.
 
-In that case the recipe should fix the location.
+FYI
 
-Ross
+Tom
 
