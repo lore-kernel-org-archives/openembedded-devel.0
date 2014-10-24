@@ -1,38 +1,24 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id F32EA65E94
+Return-Path: <Hongjun.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D323665D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Oct 2014 07:15:23 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 24 Oct 2014 00:15:15 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.04,778,1406617200"; d="scan'208";a="610465099"
-Received: from irsmsx102.ger.corp.intel.com ([163.33.3.155])
-	by fmsmga001.fm.intel.com with ESMTP; 24 Oct 2014 00:14:45 -0700
-Received: from irsmsx106.ger.corp.intel.com (163.33.3.31) by
-	IRSMSX102.ger.corp.intel.com (163.33.3.155) with Microsoft SMTP Server
-	(TLS) id 14.3.195.1; Fri, 24 Oct 2014 08:14:45 +0100
-Received: from irsmsx105.ger.corp.intel.com ([169.254.7.56]) by
-	IRSMSX106.ger.corp.intel.com ([169.254.8.179]) with mapi id
-	14.03.0195.001; Fri, 24 Oct 2014 08:14:44 +0100
-From: "Iorga, Cristian" <cristian.iorga@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] mpd: upgrade to 0.19.1
-Thread-Index: AQHP7uAnD9MPQzS4P0amhl3zZ+u5W5w99GOAgADhZrA=
-Date: Fri, 24 Oct 2014 07:14:44 +0000
-Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F379BA8@IRSMSX105.ger.corp.intel.com>
-References: <1414082432-14111-1-git-send-email-cristian.iorga@intel.com>
-	<1414082432-14111-3-git-send-email-cristian.iorga@intel.com>
-	<20141023184501.GA2430@jama>
-In-Reply-To: <20141023184501.GA2430@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.181]
+	Fri, 24 Oct 2014 10:05:08 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9OA58CG002292
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Oct 2014 03:05:08 -0700 (PDT)
+Received: from pek-lpgtest9.wrs.com (128.224.153.89) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Fri, 24 Oct 2014 03:05:07 -0700
+From: Hongjun Yang <Hongjun.Yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 24 Oct 2014 18:05:04 +0800
+Message-ID: <1414145104-32486-1-git-send-email-Hongjun.Yang@windriver.com>
+X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-Cc: Cristian Iorga <ubik3000@gmail.com>
-Subject: Re: [PATCH] mpd: upgrade to 0.19.1
+Subject: [meta-oe][PATCH] sharutils: Add new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,115 +32,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Oct 2014 07:15:31 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Oct 2014 10:05:09 -0000
+Content-Type: text/plain
 
-Yeah, it's the same. Somehow I cannot properly control the git/signatures/i=
-dentities environment, because some of the work that was submitted it was d=
-one in my spare time, not under Intel's time.
-But I certify that I tested properly. Please ignore this patch, is included=
- in the other patchset.
+From: "Hongjun.Yang" <hongjun.yang@windriver.com>
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-Sent: Thursday, October 23, 2014 9:45 PM
-To: openembedded-devel@lists.openembedded.org
-Cc: Cristian Iorga
-Subject: Re: [oe] [PATCH] mpd: upgrade to 0.19.1
+Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
+---
+ .../sharutils-4.14/fix-for-cross-compiling.patch   | 29 ++++++++++++++++++++++
+ .../recipes-support/sharutils/sharutils_4.14.bb    | 18 ++++++++++++++
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
+ create mode 100644 meta-oe/recipes-support/sharutils/sharutils_4.14.bb
 
-On Thu, Oct 23, 2014 at 07:40:30PM +0300, Cristian Iorga wrote:
-> From: Cristian Iorga <ubik3000@gmail.com>
->=20
-> - Added icu and boost as dependencies;
+diff --git a/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch b/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
+new file mode 100644
+index 0000000..86a7da6
+--- /dev/null
++++ b/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
+@@ -0,0 +1,29 @@
++From 990234af84a5399017d1c4fe03c5c756a8e51e23 Mon Sep 17 00:00:00 2001
++From: Hongjun Yang <Hongjun.Yang@windriver.com>
++Date: Tue, 20 Aug 2013 09:41:43 +0800
++Subject: [PATCH] fix cross compiling issue
++
++Upstream-Status: Pending
++
++Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
++
++---
++ configure | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure b/configure
++index 6ee98e0..8067f54 100755
++--- a/configure
+++++ b/configure
++@@ -26965,7 +26965,7 @@ fi
++ if test "$cross_compiling" = yes; then :
++   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++-as_fn_error $? "cannot run test program while cross compiling
+++$as_echo "cannot run test program while cross compiling
++ See \`config.log' for more details" "$LINENO" 5; }
++ else
++   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++-- 
++1.8.1.4
++
+diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.14.bb b/meta-oe/recipes-support/sharutils/sharutils_4.14.bb
+new file mode 100644
+index 0000000..49981e7
+--- /dev/null
++++ b/meta-oe/recipes-support/sharutils/sharutils_4.14.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "This is the set of GNU shar utilities."
++HOMEPAGE = "http://www.gnu.org/software/sharutils/"
++SECTION = "console/utils"
++LICENSE="GPLv3+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++inherit gettext autotools-brokensep
++
++SRC_URI = "ftp://ftp.gnu.org/gnu/sharutils/sharutils-4.14.tar.gz \
++	   file://fix-for-cross-compiling.patch \
++	  "
++
++SRC_URI[md5sum] = "5686c11131b4c4c0841f8f3ef34d136a"
++SRC_URI[sha256sum] = "90f5107c167cfd1b299bb211828d2586471087863dbed698f53109cd5f717208"
++
++do_configure () {
++	oe_runconf
++}
+-- 
+1.9.1
 
-This one is replaced by the 3 patches, right?
-
-Please mark it as such in patchwork.
-
-> Signed-off-by: Cristian Iorga <ubik3000@gmail.com>
-> Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
-> ---
->  .../mpg123/{mpg123_1.19.0.bb =3D> mpg123_1.21.0.bb}                | 4 +=
-+--
->  .../recipes-multimedia/musicpd/{mpd_0.18.9.bb =3D> mpd_0.19.1.bb}  | 9=20
-> ++++-----
->  2 files changed, 6 insertions(+), 7 deletions(-)  rename=20
-> meta-multimedia/recipes-multimedia/mpg123/{mpg123_1.19.0.bb =3D>=20
-> mpg123_1.21.0.bb} (94%)  rename=20
-> meta-multimedia/recipes-multimedia/musicpd/{mpd_0.18.9.bb =3D>=20
-> mpd_0.19.1.bb} (89%)
->=20
-> diff --git=20
-> a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb=20
-> b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.21.0.bb
-> similarity index 94%
-> rename from meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
-> rename to meta-multimedia/recipes-multimedia/mpg123/mpg123_1.21.0.bb
-> index e669446..4efdeab 100644
-> --- a/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.19.0.bb
-> +++ b/meta-multimedia/recipes-multimedia/mpg123/mpg123_1.21.0.bb
-> @@ -36,8 +36,8 @@ LICENSE_FLAGS =3D "commercial"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1e86753638d3cf2512528b99079bc=
-4f3"
-> =20
->  SRC_URI =3D "${SOURCEFORGE_MIRROR}/mpg123/mpg123/${PV}/${BP}.tar.bz2"
-> -SRC_URI[md5sum] =3D "87731f1437cfd8c50537a606d81130e4"
-> -SRC_URI[sha256sum] =3D "869024e01d7cb4dae1aea2f2a10420d4be7e1ac02a9c434d=
-06d727599169b01b"
-> +SRC_URI[md5sum] =3D "13a9df5d4e7aa110e4ae27cf30128ce9"
-> +SRC_URI[sha256sum] =3D "3ad197f77c9ffdf3601e1c3183ae0709ccb3c3de68309527=
-ce9375fcfb15dcba"
-> =20
->  inherit autotools pkgconfig
-> =20
-> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb=20
-> b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
-> similarity index 89%
-> rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-> rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
-> index 997a421..d05deaa 100644
-> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.18.9.bb
-> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
-> @@ -3,15 +3,14 @@ LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
->  HOMEPAGE =3D"http://www.musicpd.org"
-> =20
-> -DEPENDS =3D "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 =
-ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad=
-2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug"
-> +DEPENDS =3D "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 =
-ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad=
-2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug bo=
-ost icu"
-> =20
->  SRC_URI =3D " \
-> -    http://www.musicpd.org/download/${BPN}/0.18/${BP}.tar.xz \
-> +    http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
->      file://mpd.conf.in \
->  "
-> -
-> -SRC_URI[md5sum] =3D "0e5156a831d4302d2032998bcfd5c36f"
-> -SRC_URI[sha256sum] =3D "0d4d3e6977cb607419abbb14c63d1e2b982acb84cd2be534=
-6f19de5f699a68de"
-> +SRC_URI[md5sum] =3D "d235f6e53e5442b6926c49946a303f8d"
-> +SRC_URI[sha256sum] =3D "8b3afcd440181c9bd18b229b5974e529d59648344dd37137=
-0d6f7d62ec2847c5"
-> =20
->  inherit autotools useradd systemd
-> =20
-> --
-> 1.9.1
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
