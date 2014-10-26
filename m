@@ -1,43 +1,37 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 4118F65CF5
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id A23B160097
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Oct 2014 03:50:13 +0000 (UTC)
-Received: by mail-pa0-f46.google.com with SMTP id lf10so584842pab.33
+	Sun, 26 Oct 2014 15:16:01 +0000 (UTC)
+Received: by mail-wi0-f176.google.com with SMTP id n3so4459290wiv.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Oct 2014 20:50:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type;
-	bh=SrGyFk3Vk+rrpdEY03QaeUs4dE2IfwPoVeclLMUOnok=;
-	b=ksIrg6WyliWgrogfvwDLbwDJDMcs1xeZ4MPT5PG26FgEsmJTs6XM5RQVLfFgl1+DsO
-	lVnwcaIvIpMpM85R46BrzWhxjDOrRQrEUBLuiMKD9XJU5dEUt6uFeahIfYW7QnjO4MIe
-	4683aqTPcHMGMNMyk2+nNcb4WyG0tRrKqJm6JnNK0TU9Q/9jAE4iAoMZn7T6nK+DoC0L
-	6C/zVF2mDYTXmhJIgRAmRqjWZRqUbBfBXGGeXzntTcCuwNsbpy2tSWBeQhbNaLkpxklY
-	RyLEremxakUDIn22aT6CfEmCMoULwh+r8bIt78Pyd0iQ7qftLx1X8KZxD2VEbbKk0QlG
-	USuQ==
-X-Received: by 10.68.65.7 with SMTP id t7mr8905234pbs.1.1414209014359;
-	Fri, 24 Oct 2014 20:50:14 -0700 (PDT)
-Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
-	[60.242.179.244])
-	by mx.google.com with ESMTPSA id dk5sm5046607pbc.61.2014.10.24.20.50.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 24 Oct 2014 20:50:13 -0700 (PDT)
-Message-ID: <544B1DEC.80103@gmail.com>
-Date: Sat, 25 Oct 2014 14:50:04 +1100
-From: Jonathan Liu <net147@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
-MIME-Version: 1.0
+	Sun, 26 Oct 2014 08:16:01 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=oHQ8zRLKgeVShY59qoCMi1lSZ38fb5F9LK9tZw9Lt7U=;
+	b=VP3ttYDXSokG2iQiYJiPixdcDJLP7vASAb+hopODhHlYMNjbe+N5Xb9FAij2jHFEcj
+	BkiX5WhvBABK1RSUGrynoQ0CrIoh5i3njKXzyOk1JYYJI4fQ3eMT6jdjuFf81/lTOT4R
+	IX3e8xU61CW1W1Qf0cmi246oV9iHLThJL2t8YEHNXc1TkQ2s1ge0zNOfITgB/PvU1ePt
+	WCFF2hfLCHG1zJAG6KxgpVx71kEzJ4/v+vQfM2TAjkZ/lMmfQ6iokAoe0mHk5chuWYa9
+	kEWafCuIkg3WcCDIX+yZluo8quXIyspcSbdae8Hmewa8wRW8zFr4JGUg8YFwaF/7Te/w
+	gMMg==
+X-Gm-Message-State: ALoCoQn0TJ390SgUXdJy/KjfaHNtJQfXb19EJQLjA9Cgrrl0Crl+15SEzhJtdZa/7Wi6ikG99iL7
+X-Received: by 10.180.104.99 with SMTP id gd3mr15587367wib.10.1414336560857;
+	Sun, 26 Oct 2014 08:16:00 -0700 (PDT)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+	by mx.google.com with ESMTPSA id
+	da3sm12323048wjb.12.2014.10.26.08.15.59 for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Sun, 26 Oct 2014 08:15:59 -0700 (PDT)
+From: Koen Kooi <koen@dominion.thruhere.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1413434645-13943-1-git-send-email-net147@gmail.com>	<20141018090624.GC2437@jama>
-	<20141018111721.GH2437@jama>	<CANwerB3D1ehK9e_FxYjnNmJZR47_Ae5fpNgjqx3Fcub4_8BC=g@mail.gmail.com>
-	<20141021093428.GD2455@jama>
-In-Reply-To: <20141021093428.GD2455@jama>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH] qtwebengine: backport patches to fix ARM build failures
+Date: Sun, 26 Oct 2014 16:15:52 +0100
+Message-Id: <1414336552-15191-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH] ddrescue: update to 1.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,68 +45,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Oct 2014 03:50:16 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 26 Oct 2014 15:16:03 -0000
 
-On 21/10/2014 8:34 PM, Martin Jansa wrote:
-> On Mon, Oct 20, 2014 at 12:37:21PM +1100, Jonathan Liu wrote:
->> On 18 October 2014 22:17, Martin Jansa <martin.jansa@gmail.com> wrote:
->>> On Sat, Oct 18, 2014 at 11:06:24AM +0200, Martin Jansa wrote:
->>>> On Thu, Oct 16, 2014 at 03:44:05PM +1100, Jonathan Liu wrote:
->>>>> Signed-off-by: Jonathan Liu <net147@gmail.com>
->>>>> ---
->>>>>   ...ix-ARM-NEON-detection-for-mfpu-neon-vfpv4.patch | 30 +++++++++++++++++++
->>>>>   ...QMAKE_CC-when-extracting-C-compiler-flags.patch | 34 ++++++++++++++++++++++
->>>>>   recipes-qt/qt5/qtwebengine_5.3.2+git.bb            |  2 ++
->>>>>   recipes-qt/qt5/qtwebengine_git.bb                  |  2 ++
->>>>>   4 files changed, 68 insertions(+)
->>>>>   create mode 100644 recipes-qt/qt5/qtwebengine/0001-Fix-ARM-NEON-detection-for-mfpu-neon-vfpv4.patch
->>>>>   create mode 100644 recipes-qt/qt5/qtwebengine/0002-Include-QMAKE_CC-when-extracting-C-compiler-flags.patch
->>>> This seems to break qemuarm build:
->>>>
->>>> | No external chromium sources were found, falling back to /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtwebengine/5.3.2-r0/git/sr
->>>> c/3rdparty/chromium
->>>> | Using extra options found in /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtwebengine/5.3.2-r0/git/src/core/qmake_extras.gypi
->>>> | Using extra options found in /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtwebengine/5.3.2-r0/git/src/core/qtwebengine_extras.gy
->>>> pi
->>>> | Updating projects from gyp files...
->>>> | gyp: name 'arm_tune' is not defined while evaluating condition 'arm_tune!=""' in /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtw
->>>> ebengine/5.3.2-r0/git/src/core/core.gyp
->>>> | Project ERROR: -- running gyp_qtwebengine failed --
->>>> | WARNING: exit code 3 from a shell command.
->>>> | ERROR: Function failed: do_configure (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtwebengine/5.3.2-r0/te
->>>> mp/log.do_configure.30039)
->>>> NOTE: recipe qtwebengine-5.3.2-r0: task do_configure: Failed
->>> Probably fixed in
->>>
->>> commit 1cbb91b4a06d6e6626c5345d5a9d7d0fbe9e1bbb
->>> Author: Andras Becsi <andras.becsi@digia.com>
->>> Date:   Thu Sep 18 18:22:37 2014 +0200
->>>
->>>      Set arm_tune to empty string if mtune flag is not set by toolchain
->>>
->>> which needs to be backported to qtwebengine_5.3.2+git.bb
->>>
->>> Please re-test and re-send, I'm upgrading _git recipes to 5.4-beta in
->>> the mean time so the backport won't be needed in qtwebengine_git.bb.
->> Backport of the arm_tune patch looks good to me.
->>
->> Signed-off-by: Jonathan Liu <net147@gmail.com>
->>
->> Does it resolve the qemuarm build failure for you?
-> Unfortunately not completely, now it's arm_fpu:
->
-> | Updating projects from gyp files...
-> | gyp: name 'arm_fpu' is not defined while evaluating condition 'arm_fpu!=""' in /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtwebengine/5.3.2-r0/git/src/core/core.gyp
-> | Project ERROR: -- running gyp_qtwebengine failed --
-> | WARNING: exit code 3 from a shell command.
->
->
->
-ARMv5 (qemuarm) doesn't seem to be supported by chromium. I have sent a 
-patch whitelisting supported architectures.
+* License changed to GPLv2+
+* Although 'configure is present, it isn't autotools.
 
-Regards,
-Jonathan
+Nota bene: this requires bitbake and oe-core support for tar.lz
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+---
+ meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb | 18 ----------
+ meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb | 42 ++++++++++++++++++++++
+ 2 files changed, 42 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
+ create mode 100644 meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
+
+diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
+deleted file mode 100644
+index a36c250..0000000
+--- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "Data recovery tool"
+-DESCRIPTION = "GNU ddrescue is a data recovery tool. It copies data \
+-    from one file or block device (hard disc, cdrom, etc) to another, \
+-    trying hard to rescue data in case of read errors."
+-HOMEPAGE = "http://www.gnu.org/software/ddrescue/ddrescue.html"
+-SECTION = "console"
+-LICENSE = "GPLv3+"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949 \
+-                    file://main_common.cc;beginline=5;endline=16;md5=b5a59150a33658cc1ffc31b1a4ffb9f2"
+-
+-SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "57b67407e882c6418531d48a2f20d16b"
+-SRC_URI[sha256sum] = "76b3f2e5fb0306d24f2632c3e168cccb73dc0a348e3a7089cd9230748ff23de6"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "'CXX=${CXX}' 'CPPFLAGS=${CPPFLAGS}' 'CXXFLAGS=${CXXFLAGS}' 'LDFLAGS=${LDFLAGS}'"
+diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
+new file mode 100644
+index 0000000..a605249
+--- /dev/null
++++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
+@@ -0,0 +1,42 @@
++SUMMARY = "Data recovery tool"
++DESCRIPTION = "GNU ddrescue is a data recovery tool. It copies data \
++    from one file or block device (hard disc, cdrom, etc) to another, \
++    trying hard to rescue data in case of read errors."
++HOMEPAGE = "http://www.gnu.org/software/ddrescue/ddrescue.html"
++SECTION = "console"
++LICENSE = "GPLv2+"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
++                    file://main_common.cc;beginline=5;endline=16;md5=3ec288b2676528cd2b069364e313016f"
++
++SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
++SRC_URI[md5sum] = "ed6b5b82d74cbd925db2b829350e74b1"
++SRC_URI[sha256sum] = "ed8d0c9d9aac80a9110e9cb0d0a91a7390d3bf9f816b67a62ca4eb140f4747b8"
++
++CONFIGUREOPTS = "\
++    '--srcdir=${S}' \
++    '--prefix=${prefix}' \
++    '--exec-prefix=${exec_prefix}' \
++    '--bindir=${bindir}' \
++    '--datadir=${datadir}' \
++    '--infodir=${infodir}' \
++    '--sysconfdir=${sysconfdir}' \
++    'CXX=${CXX}' \
++    'CPPFLAGS=${CPPFLAGS}' \
++    'CXXFLAGS=${CXXFLAGS}' \
++    'LDFLAGS=${LDFLAGS}' \
++"
++EXTRA_OEMAKE = ""
++
++do_configure () {
++    ${S}/configure ${CONFIGUREOPTS}
++}
++
++do_install () {
++    oe_runmake 'DESTDIR=${D}' install
++    # Info dir listing isn't interesting at this point so remove it if it exists.
++    if [ -e "${D}${infodir}/dir" ]; then
++        rm -f ${D}${infodir}/dir
++    fi
++}
++
+-- 
+1.9.0
+
 
