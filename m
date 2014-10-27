@@ -1,28 +1,28 @@
 Return-Path: <Kai.Kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 22AD5718D6
+	by mail.openembedded.org (Postfix) with ESMTP id 238CD71967
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 15:31:52 +0000 (UTC)
+	Mon, 27 Oct 2014 15:31:55 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9RFVrox002041
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9RFVukn002052
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 08:31:53 -0700 (PDT)
+	Mon, 27 Oct 2014 08:31:56 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Mon, 27 Oct 2014 08:31:52 -0700
+	(TLS) id 14.3.174.1; Mon, 27 Oct 2014 08:31:55 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Oct 2014 23:28:34 +0800
-Message-ID: <1414423721-6353-2-git-send-email-kai.kang@windriver.com>
+Date: Mon, 27 Oct 2014 23:28:36 +0800
+Message-ID: <1414423721-6353-4-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1414423721-6353-1-git-send-email-kai.kang@windriver.com>
 References: <1414423721-6353-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: Yue.Tao@windriver.com
-Subject: [PATCH 1/8] Security Advisory - postgresql - CVE-2014-0064
+Subject: [PATCH 3/8] Security Advisory - postgresql - CVE-2014-0061
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,652 +39,307 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Mon, 27 Oct 2014 15:31:58 -0000
 Content-Type: text/plain
 
-Multiple integer overflows in the path_in and other unspecified
-functions in PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before
-9.1.12, 9.2.x before 9.2.7, and 9.3.x before 9.3.3 allow remote
-authenticated users to have unspecified impact and attack vectors, which
-trigger a buffer overflow. NOTE: this identifier has been SPLIT due to
-different affected versions; use CVE-2014-2669 for the hstore vector.
+The validator functions for the procedural languages (PLs) in PostgreSQL
+before 8.4.20, 9.0.x before 9.0.16, 9.1.x before 9.1.12, 9.2.x before
+9.2.7, and 9.3.x before 9.3.3 allow remote authenticated users to gain
+privileges via a function that is (1) defined in another language or (2)
+not allowed to be directly called by the user due to permissions.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0064
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0061
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ...integer-overflow-to-avoid-buffer-overruns.patch | 605 +++++++++++++++++++++
- meta-oe/recipes-support/postgresql/postgresql.inc  |   5 +-
- 2 files changed, 608 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+ ...vilege-escalation-in-explicit-calls-to-PL.patch | 267 +++++++++++++++++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
+ 2 files changed, 268 insertions(+)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch
 
-diff --git a/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+diff --git a/meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch b/meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch
 new file mode 100644
-index 0000000..c8b4c80
+index 0000000..cc2183a
 --- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
-@@ -0,0 +1,605 @@
-+From 12bbce15d93d7692ddff1405aa04b67f8a327f57 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch
+@@ -0,0 +1,267 @@
++From 1d701d28a796ea2d1a4d2be9e9ee06209eaea040 Mon Sep 17 00:00:00 2001
 +From: Noah Misch <noah@leadboat.com>
 +Date: Mon, 17 Feb 2014 09:33:31 -0500
-+Subject: [PATCH] Predict integer overflow to avoid buffer overruns.
++Subject: [PATCH] Prevent privilege escalation in explicit calls to PL
++ validators.
 +
-+commit 12bbce15d93d7692ddff1405aa04b67f8a327f57 REL9_2_STABLE
++commit 1d701d28a796ea2d1a4d2be9e9ee06209eaea040 REL9_2_STABLE
 +
-+Several functions, mostly type input functions, calculated an allocation
-+size such that the calculation wrapped to a small positive value when
-+arguments implied a sufficiently-large requirement.  Writes past the end
-+of the inadvertent small allocation followed shortly thereafter.
-+Coverity identified the path_in() vulnerability; code inspection led to
-+the rest.  In passing, add check_stack_depth() to prevent stack overflow
-+in related functions.
++The primary role of PL validators is to be called implicitly during
++CREATE FUNCTION, but they are also normal functions that a user can call
++explicitly.  Add a permissions check to each validator to ensure that a
++user cannot use explicit validator calls to achieve things he could not
++otherwise achieve.  Back-patch to 8.4 (all supported versions).
++Non-core procedural language extensions ought to make the same two-line
++change to their own validators.
 +
-+Back-patch to 8.4 (all supported versions).  The non-comment hstore
-+changes touch code that did not exist in 8.4, so that part stops at 9.0.
++Andres Freund, reviewed by Tom Lane and Noah Misch.
 +
-+Noah Misch and Heikki Linnakangas, reviewed by Tom Lane.
-+
-+Security: CVE-2014-0064
++Security: CVE-2014-0061
 +
 +Upstream-Status: Backport
-+
 +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ contrib/hstore/hstore.h              |   15 ++++++++++++---
-+ contrib/hstore/hstore_io.c           |   21 +++++++++++++++++++++
-+ contrib/hstore/hstore_op.c           |   15 +++++++++++++++
-+ contrib/intarray/_int.h              |    2 ++
-+ contrib/intarray/_int_bool.c         |    9 +++++++++
-+ contrib/ltree/ltree.h                |    3 +++
-+ contrib/ltree/ltree_io.c             |   11 +++++++++++
-+ contrib/ltree/ltxtquery_io.c         |   13 ++++++++++++-
-+ src/backend/utils/adt/geo_ops.c      |   30 ++++++++++++++++++++++++++++--
-+ src/backend/utils/adt/tsquery.c      |    7 ++++++-
-+ src/backend/utils/adt/tsquery_util.c |    5 +++++
-+ src/backend/utils/adt/txid.c         |   15 +++++----------
-+ src/backend/utils/adt/varbit.c       |   32 ++++++++++++++++++++++++++++++--
-+ src/include/tsearch/ts_type.h        |    3 +++
-+ src/include/utils/varbit.h           |    7 +++++++
-+ 15 files changed, 169 insertions(+), 19 deletions(-)
++ doc/src/sgml/plhandler.sgml         |    5 ++-
++ src/backend/catalog/pg_proc.c       |    9 ++++
++ src/backend/commands/functioncmds.c |    1 -
++ src/backend/utils/fmgr/fmgr.c       |   84 +++++++++++++++++++++++++++++++++++
++ src/include/fmgr.h                  |    1 +
++ src/pl/plperl/plperl.c              |    4 ++
++ src/pl/plpgsql/src/pl_handler.c     |    3 +
++ src/pl/plpython/plpy_main.c         |    4 ++
++ 8 files changed, 109 insertions(+), 2 deletions(-)
 +
-+diff --git a/contrib/hstore/hstore.h b/contrib/hstore/hstore.h
-+index 8906397..4e55f6e 100644
-+--- a/contrib/hstore/hstore.h
-++++ b/contrib/hstore/hstore.h
-+@@ -49,9 +49,12 @@ typedef struct
-+ } HStore;
++diff --git a/doc/src/sgml/plhandler.sgml b/doc/src/sgml/plhandler.sgml
++index 024ef9d..aa4bba3 100644
++--- a/doc/src/sgml/plhandler.sgml
+++++ b/doc/src/sgml/plhandler.sgml
++@@ -178,7 +178,10 @@ CREATE LANGUAGE plsample
++     or updated a function written in the procedural language.
++     The passed-in OID is the OID of the function's <classname>pg_proc</>
++     row.  The validator must fetch this row in the usual way, and do
++-    whatever checking is appropriate.  Typical checks include verifying
+++    whatever checking is appropriate.
+++    First, call <function>CheckFunctionValidatorAccess()</> to diagnose
+++    explicit calls to the validator that the user could not achieve through
+++    <command>CREATE FUNCTION</>.  Typical checks then include verifying
++     that the function's argument and result types are supported by the
++     language, and that the function's body is syntactically correct
++     in the language.  If the validator finds the function to be okay,
++diff --git a/src/backend/catalog/pg_proc.c b/src/backend/catalog/pg_proc.c
++index 3812408..3124868 100644
++--- a/src/backend/catalog/pg_proc.c
+++++ b/src/backend/catalog/pg_proc.c
++@@ -718,6 +718,9 @@ fmgr_internal_validator(PG_FUNCTION_ARGS)
++ 	Datum		tmp;
++ 	char	   *prosrc;
 + 
-+ /*
-+- * it's not possible to get more than 2^28 items into an hstore,
-+- * so we reserve the top few bits of the size field. See hstore_compat.c
-+- * for one reason why.	Some bits are left for future use here.
-++ * It's not possible to get more than 2^28 items into an hstore, so we reserve
-++ * the top few bits of the size field.  See hstore_compat.c for one reason
-++ * why.  Some bits are left for future use here.  MaxAllocSize makes the
-++ * practical count limit slightly more than 2^28 / 3, or INT_MAX / 24, the
-++ * limit for an hstore full of 4-byte keys and null values.  Therefore, we
-++ * don't explicitly check the format-imposed limit.
-+  */
-+ #define HS_FLAG_NEWVERSION 0x80000000
-+ 
-+@@ -59,6 +62,12 @@ typedef struct
-+ #define HS_SETCOUNT(hsp_,c_) ((hsp_)->size_ = (c_) | HS_FLAG_NEWVERSION)
-+ 
-+ 
-++/*
-++ * "x" comes from an existing HS_COUNT() (as discussed, <= INT_MAX/24) or a
-++ * Pairs array length (due to MaxAllocSize, <= INT_MAX/40).  "lenstr" is no
-++ * more than INT_MAX, that extreme case arising in hstore_from_arrays().
-++ * Therefore, this calculation is limited to about INT_MAX / 5 + INT_MAX.
-++ */
-+ #define HSHRDSIZE	(sizeof(HStore))
-+ #define CALCDATASIZE(x, lenstr) ( (x) * 2 * sizeof(HEntry) + HSHRDSIZE + (lenstr) )
-+ 
-+diff --git a/contrib/hstore/hstore_io.c b/contrib/hstore/hstore_io.c
-+index dde6c4b..5bcdc95 100644
-+--- a/contrib/hstore/hstore_io.c
-++++ b/contrib/hstore/hstore_io.c
-+@@ -9,6 +9,7 @@
-+ #include "funcapi.h"
-+ #include "libpq/pqformat.h"
-+ #include "utils/lsyscache.h"
-++#include "utils/memutils.h"
-+ #include "utils/typcache.h"
-+ 
-+ #include "hstore.h"
-+@@ -437,6 +438,11 @@ hstore_recv(PG_FUNCTION_ARGS)
-+ 		PG_RETURN_POINTER(out);
-+ 	}
-+ 
-++	if (pcount < 0 || pcount > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 pcount, (int) (MaxAllocSize / sizeof(Pairs)))));
-+ 	pairs = palloc(pcount * sizeof(Pairs));
-+ 
-+ 	for (i = 0; i < pcount; ++i)
-+@@ -552,6 +558,13 @@ hstore_from_arrays(PG_FUNCTION_ARGS)
-+ 					  TEXTOID, -1, false, 'i',
-+ 					  &key_datums, &key_nulls, &key_count);
-+ 
-++	/* see discussion in hstoreArrayToPairs() */
-++	if (key_count > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
+++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
+++		PG_RETURN_VOID();
 ++
-+ 	/* value_array might be NULL */
++ 	/*
++ 	 * We do not honor check_function_bodies since it's unlikely the function
++ 	 * name will be found later if it isn't there now.
++@@ -763,6 +766,9 @@ fmgr_c_validator(PG_FUNCTION_ARGS)
++ 	char	   *prosrc;
++ 	char	   *probin;
 + 
-+ 	if (PG_ARGISNULL(1))
-+@@ -674,6 +687,13 @@ hstore_from_array(PG_FUNCTION_ARGS)
-+ 
-+ 	count = in_count / 2;
-+ 
-++	/* see discussion in hstoreArrayToPairs() */
-++	if (count > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 count, (int) (MaxAllocSize / sizeof(Pairs)))));
+++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
+++		PG_RETURN_VOID();
 ++
-+ 	pairs = palloc(count * sizeof(Pairs));
-+ 
-+ 	for (i = 0; i < count; ++i)
-+@@ -805,6 +825,7 @@ hstore_from_record(PG_FUNCTION_ARGS)
-+ 		my_extra->ncolumns = ncolumns;
-+ 	}
-+ 
-++	Assert(ncolumns <= MaxTupleAttributeNumber);		/* thus, no overflow */
-+ 	pairs = palloc(ncolumns * sizeof(Pairs));
-+ 
-+ 	if (rec)
-+diff --git a/contrib/hstore/hstore_op.c b/contrib/hstore/hstore_op.c
-+index fee2c3c..8de175a 100644
-+--- a/contrib/hstore/hstore_op.c
-++++ b/contrib/hstore/hstore_op.c
-+@@ -7,6 +7,7 @@
-+ #include "catalog/pg_type.h"
-+ #include "funcapi.h"
-+ #include "utils/builtins.h"
-++#include "utils/memutils.h"
-+ 
-+ #include "hstore.h"
-+ 
-+@@ -89,6 +90,19 @@ hstoreArrayToPairs(ArrayType *a, int *npairs)
-+ 		return NULL;
-+ 	}
-+ 
-++	/*
-++	 * A text array uses at least eight bytes per element, so any overflow in
-++	 * "key_count * sizeof(Pairs)" is small enough for palloc() to catch.
-++	 * However, credible improvements to the array format could invalidate
-++	 * that assumption.  Therefore, use an explicit check rather than relying
-++	 * on palloc() to complain.
-++	 */
-++	if (key_count > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
-++
-+ 	key_pairs = palloc(sizeof(Pairs) * key_count);
-+ 
-+ 	for (i = 0, j = 0; i < key_count; i++)
-+@@ -647,6 +661,7 @@ hstore_slice_to_hstore(PG_FUNCTION_ARGS)
-+ 		PG_RETURN_POINTER(out);
-+ 	}
-+ 
-++	/* hstoreArrayToPairs() checked overflow */
-+ 	out_pairs = palloc(sizeof(Pairs) * nkeys);
-+ 	bufsiz = 0;
-+ 
-+diff --git a/contrib/intarray/_int.h b/contrib/intarray/_int.h
-+index 11c0698..755cd9e 100644
-+--- a/contrib/intarray/_int.h
-++++ b/contrib/intarray/_int.h
-+@@ -5,6 +5,7 @@
-+ #define ___INT_H__
-+ 
-+ #include "utils/array.h"
-++#include "utils/memutils.h"
-+ 
-+ /* number ranges for compression */
-+ #define MAXNUMRANGE 100
-+@@ -137,6 +138,7 @@ typedef struct QUERYTYPE
-+ 
-+ #define HDRSIZEQT	offsetof(QUERYTYPE, items)
-+ #define COMPUTESIZE(size)	( HDRSIZEQT + (size) * sizeof(ITEM) )
-++#define QUERYTYPEMAXITEMS	((MaxAllocSize - HDRSIZEQT) / sizeof(ITEM))
-+ #define GETQUERY(x)  ( (x)->items )
-+ 
-+ /* "type" codes for ITEM */
-+diff --git a/contrib/intarray/_int_bool.c b/contrib/intarray/_int_bool.c
-+index 4e63f6d..62294d1 100644
-+--- a/contrib/intarray/_int_bool.c
-++++ b/contrib/intarray/_int_bool.c
-+@@ -451,6 +451,9 @@ boolop(PG_FUNCTION_ARGS)
-+ static void
-+ findoprnd(ITEM *ptr, int4 *pos)
-+ {
-++	/* since this function recurses, it could be driven to stack overflow. */
-++	check_stack_depth();
-++
-+ #ifdef BS_DEBUG
-+ 	elog(DEBUG3, (ptr[*pos].type == OPR) ?
-+ 		 "%d  %c" : "%d  %d", *pos, ptr[*pos].val);
-+@@ -511,7 +514,13 @@ bqarr_in(PG_FUNCTION_ARGS)
-+ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-+ 				 errmsg("empty query")));
-+ 
-++	if (state.num > QUERYTYPEMAXITEMS)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++		errmsg("number of query items (%d) exceeds the maximum allowed (%d)",
-++			   state.num, (int) QUERYTYPEMAXITEMS)));
-+ 	commonlen = COMPUTESIZE(state.num);
-++
-+ 	query = (QUERYTYPE *) palloc(commonlen);
-+ 	SET_VARSIZE(query, commonlen);
-+ 	query->size = state.num;
-+diff --git a/contrib/ltree/ltree.h b/contrib/ltree/ltree.h
-+index aec4458..49e9907 100644
-+--- a/contrib/ltree/ltree.h
-++++ b/contrib/ltree/ltree.h
-+@@ -5,6 +5,7 @@
-+ 
-+ #include "fmgr.h"
-+ #include "tsearch/ts_locale.h"
-++#include "utils/memutils.h"
-+ 
-+ typedef struct
-+ {
-+@@ -111,6 +112,8 @@ typedef struct
-+ 
-+ #define HDRSIZEQT		MAXALIGN(VARHDRSZ + sizeof(int4))
-+ #define COMPUTESIZE(size,lenofoperand)	( HDRSIZEQT + (size) * sizeof(ITEM) + (lenofoperand) )
-++#define LTXTQUERY_TOO_BIG(size,lenofoperand) \
-++	((size) > (MaxAllocSize - HDRSIZEQT - (lenofoperand)) / sizeof(ITEM))
-+ #define GETQUERY(x)  (ITEM*)( (char*)(x)+HDRSIZEQT )
-+ #define GETOPERAND(x)	( (char*)GETQUERY(x) + ((ltxtquery*)x)->size * sizeof(ITEM) )
-+ 
-+diff --git a/contrib/ltree/ltree_io.c b/contrib/ltree/ltree_io.c
-+index 3e88b81..d64debb 100644
-+--- a/contrib/ltree/ltree_io.c
-++++ b/contrib/ltree/ltree_io.c
-+@@ -8,6 +8,7 @@
-+ #include <ctype.h>
-+ 
-+ #include "ltree.h"
-++#include "utils/memutils.h"
-+ #include "crc32.h"
-+ 
-+ PG_FUNCTION_INFO_V1(ltree_in);
-+@@ -64,6 +65,11 @@ ltree_in(PG_FUNCTION_ARGS)
-+ 		ptr += charlen;
-+ 	}
-+ 
-++	if (num + 1 > MaxAllocSize / sizeof(nodeitem))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
-++					num + 1, (int) (MaxAllocSize / sizeof(nodeitem)))));
-+ 	list = lptr = (nodeitem *) palloc(sizeof(nodeitem) * (num + 1));
-+ 	ptr = buf;
-+ 	while (*ptr)
-+@@ -228,6 +234,11 @@ lquery_in(PG_FUNCTION_ARGS)
-+ 	}
-+ 
-+ 	num++;
-++	if (num > MaxAllocSize / ITEMSIZE)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
-++					num, (int) (MaxAllocSize / ITEMSIZE))));
-+ 	curqlevel = tmpql = (lquery_level *) palloc0(ITEMSIZE * num);
-+ 	ptr = buf;
-+ 	while (*ptr)
-+diff --git a/contrib/ltree/ltxtquery_io.c b/contrib/ltree/ltxtquery_io.c
-+index 826f4e1..13ea58d 100644
-+--- a/contrib/ltree/ltxtquery_io.c
-++++ b/contrib/ltree/ltxtquery_io.c
-+@@ -9,6 +9,7 @@
-+ 
-+ #include "crc32.h"
-+ #include "ltree.h"
-++#include "miscadmin.h"
-+ 
-+ PG_FUNCTION_INFO_V1(ltxtq_in);
-+ Datum		ltxtq_in(PG_FUNCTION_ARGS);
-+@@ -213,6 +214,9 @@ makepol(QPRS_STATE *state)
-+ 	int4		lenstack = 0;
-+ 	uint16		flag = 0;
-+ 
-++	/* since this function recurses, it could be driven to stack overflow */
-++	check_stack_depth();
-++
-+ 	while ((type = gettoken_query(state, &val, &lenval, &strval, &flag)) != END)
-+ 	{
-+ 		switch (type)
-+@@ -277,6 +281,9 @@ makepol(QPRS_STATE *state)
-+ static void
-+ findoprnd(ITEM *ptr, int4 *pos)
-+ {
-++	/* since this function recurses, it could be driven to stack overflow. */
-++	check_stack_depth();
-++
-+ 	if (ptr[*pos].type == VAL || ptr[*pos].type == VALTRUE)
-+ 	{
-+ 		ptr[*pos].left = 0;
-+@@ -341,8 +348,12 @@ queryin(char *buf)
-+ 				 errmsg("syntax error"),
-+ 				 errdetail("Empty query.")));
-+ 
-+-	/* make finish struct */
-++	if (LTXTQUERY_TOO_BIG(state.num, state.sumlen))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("ltxtquery is too large")));
-+ 	commonlen = COMPUTESIZE(state.num, state.sumlen);
-++
-+ 	query = (ltxtquery *) palloc(commonlen);
-+ 	SET_VARSIZE(query, commonlen);
-+ 	query->size = state.num;
-+diff --git a/src/backend/utils/adt/geo_ops.c b/src/backend/utils/adt/geo_ops.c
-+index ac7b4b8..7ebcaaa 100644
-+--- a/src/backend/utils/adt/geo_ops.c
-++++ b/src/backend/utils/adt/geo_ops.c
-+@@ -1403,6 +1403,7 @@ path_in(PG_FUNCTION_ARGS)
-+ 	char	   *s;
-+ 	int			npts;
-+ 	int			size;
-++	int			base_size;
-+ 	int			depth = 0;
-+ 
-+ 	if ((npts = pair_count(str, ',')) <= 0)
-+@@ -1421,7 +1422,15 @@ path_in(PG_FUNCTION_ARGS)
-+ 		depth++;
-+ 	}
-+ 
-+-	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * npts;
-++	base_size = sizeof(path->p[0]) * npts;
-++	size = offsetof(PATH, p[0]) + base_size;
-++
-++	/* Check for integer overflow */
-++	if (base_size / npts != sizeof(path->p[0]) || size <= base_size)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("too many points requested")));
-++
-+ 	path = (PATH *) palloc(size);
-+ 
-+ 	SET_VARSIZE(path, size);
-+@@ -3465,6 +3474,7 @@ poly_in(PG_FUNCTION_ARGS)
-+ 	POLYGON    *poly;
-+ 	int			npts;
-+ 	int			size;
-++	int			base_size;
-+ 	int			isopen;
-+ 	char	   *s;
-+ 
-+@@ -3473,7 +3483,15 @@ poly_in(PG_FUNCTION_ARGS)
-+ 				(errcode(ERRCODE_INVALID_TEXT_REPRESENTATION),
-+ 			  errmsg("invalid input syntax for type polygon: \"%s\"", str)));
-+ 
-+-	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * npts;
-++	base_size = sizeof(poly->p[0]) * npts;
-++	size = offsetof(POLYGON, p[0]) + base_size;
-++
-++	/* Check for integer overflow */
-++	if (base_size / npts != sizeof(poly->p[0]) || size <= base_size)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("too many points requested")));
-++
-+ 	poly = (POLYGON *) palloc0(size);	/* zero any holes */
-+ 
-+ 	SET_VARSIZE(poly, size);
-+@@ -4379,6 +4397,10 @@ path_poly(PG_FUNCTION_ARGS)
-+ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-+ 				 errmsg("open path cannot be converted to polygon")));
-+ 
-++	/*
-++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
-++	 * just a small constant larger.
-++	 */
-+ 	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * path->npts;
-+ 	poly = (POLYGON *) palloc(size);
-+ 
-+@@ -4484,6 +4506,10 @@ poly_path(PG_FUNCTION_ARGS)
-+ 	int			size;
++ 	/*
++ 	 * It'd be most consistent to skip the check if !check_function_bodies,
++ 	 * but the purpose of that switch is to be helpful for pg_dump loading,
++@@ -814,6 +820,9 @@ fmgr_sql_validator(PG_FUNCTION_ARGS)
++ 	bool		haspolyarg;
 + 	int			i;
 + 
-++	/*
-++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
-++	 * smaller by a small constant.
-++	 */
-+ 	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * poly->npts;
-+ 	path = (PATH *) palloc(size);
-+ 
-+diff --git a/src/backend/utils/adt/tsquery.c b/src/backend/utils/adt/tsquery.c
-+index 6e1f8cf..1322b5e 100644
-+--- a/src/backend/utils/adt/tsquery.c
-++++ b/src/backend/utils/adt/tsquery.c
-+@@ -515,8 +515,13 @@ parse_tsquery(char *buf,
-+ 		return query;
-+ 	}
-+ 
-+-	/* Pack the QueryItems in the final TSQuery struct to return to caller */
-++	if (TSQUERY_TOO_BIG(list_length(state.polstr), state.sumlen))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("tsquery is too large")));
-+ 	commonlen = COMPUTESIZE(list_length(state.polstr), state.sumlen);
+++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
+++		PG_RETURN_VOID();
 ++
-++	/* Pack the QueryItems in the final TSQuery struct to return to caller */
-+ 	query = (TSQuery) palloc0(commonlen);
-+ 	SET_VARSIZE(query, commonlen);
-+ 	query->size = list_length(state.polstr);
-+diff --git a/src/backend/utils/adt/tsquery_util.c b/src/backend/utils/adt/tsquery_util.c
-+index 0724d33..9003702 100644
-+--- a/src/backend/utils/adt/tsquery_util.c
-++++ b/src/backend/utils/adt/tsquery_util.c
-+@@ -333,6 +333,11 @@ QTN2QT(QTNode *in)
-+ 	QTN2QTState state;
++ 	tuple = SearchSysCache1(PROCOID, ObjectIdGetDatum(funcoid));
++ 	if (!HeapTupleIsValid(tuple))
++ 		elog(ERROR, "cache lookup failed for function %u", funcoid);
++diff --git a/src/backend/commands/functioncmds.c b/src/backend/commands/functioncmds.c
++index 9ba6dd8..ea74b5e 100644
++--- a/src/backend/commands/functioncmds.c
+++++ b/src/backend/commands/functioncmds.c
++@@ -997,7 +997,6 @@ CreateFunction(CreateFunctionStmt *stmt, const char *queryString)
++ 					prorows);
++ }
 + 
-+ 	cntsize(in, &sumlen, &nnode);
-++
-++	if (TSQUERY_TOO_BIG(nnode, sumlen))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("tsquery is too large")));
-+ 	len = COMPUTESIZE(nnode, sumlen);
-+ 
-+ 	out = (TSQuery) palloc0(len);
-+diff --git a/src/backend/utils/adt/txid.c b/src/backend/utils/adt/txid.c
-+index 08a8c89..c71daaf 100644
-+--- a/src/backend/utils/adt/txid.c
-++++ b/src/backend/utils/adt/txid.c
-+@@ -27,6 +27,7 @@
++-
++ /*
++  * Guts of function deletion.
++  *
++diff --git a/src/backend/utils/fmgr/fmgr.c b/src/backend/utils/fmgr/fmgr.c
++index 2ec63fa..8d6f183 100644
++--- a/src/backend/utils/fmgr/fmgr.c
+++++ b/src/backend/utils/fmgr/fmgr.c
++@@ -24,6 +24,7 @@
 + #include "miscadmin.h"
-+ #include "libpq/pqformat.h"
++ #include "nodes/nodeFuncs.h"
++ #include "pgstat.h"
+++#include "utils/acl.h"
 + #include "utils/builtins.h"
-++#include "utils/memutils.h"
-+ #include "utils/snapmgr.h"
++ #include "utils/fmgrtab.h"
++ #include "utils/guc.h"
++@@ -2445,3 +2446,86 @@ get_call_expr_arg_stable(Node *expr, int argnum)
 + 
-+ 
-+@@ -66,6 +67,8 @@ typedef struct
-+ 
-+ #define TXID_SNAPSHOT_SIZE(nxip) \
-+ 	(offsetof(TxidSnapshot, xip) + sizeof(txid) * (nxip))
-++#define TXID_SNAPSHOT_MAX_NXIP \
-++	((MaxAllocSize - offsetof(TxidSnapshot, xip)) / sizeof(txid))
-+ 
-+ /*
-+  * Epoch values from xact.c
-+@@ -445,20 +448,12 @@ txid_snapshot_recv(PG_FUNCTION_ARGS)
-+ 	txid		last = 0;
-+ 	int			nxip;
-+ 	int			i;
-+-	int			avail;
-+-	int			expect;
-+ 	txid		xmin,
-+ 				xmax;
-+ 
-+-	/*
-+-	 * load nxip and check for nonsense.
-+-	 *
-+-	 * (nxip > avail) check is against int overflows in 'expect'.
-+-	 */
-++	/* load and validate nxip */
-+ 	nxip = pq_getmsgint(buf, 4);
-+-	avail = buf->len - buf->cursor;
-+-	expect = 8 + 8 + nxip * 8;
-+-	if (nxip < 0 || nxip > avail || expect > avail)
-++	if (nxip < 0 || nxip > TXID_SNAPSHOT_MAX_NXIP)
-+ 		goto bad_format;
-+ 
-+ 	xmin = pq_getmsgint64(buf);
-+diff --git a/src/backend/utils/adt/varbit.c b/src/backend/utils/adt/varbit.c
-+index 2bcf5b8..0deefda 100644
-+--- a/src/backend/utils/adt/varbit.c
-++++ b/src/backend/utils/adt/varbit.c
-+@@ -148,12 +148,22 @@ bit_in(PG_FUNCTION_ARGS)
-+ 		sp = input_string;
-+ 	}
-+ 
-++	/*
-++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
-++	 * input is small enough, but we must check hex input.
-++	 */
-+ 	slen = strlen(sp);
-+-	/* Determine bitlength from input string */
-+ 	if (bit_not_hex)
-+ 		bitlen = slen;
-+ 	else
-++	{
-++		if (slen > VARBITMAXLEN / 4)
-++			ereport(ERROR,
-++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("bit string length exceeds the maximum allowed (%d)",
-++						VARBITMAXLEN)));
-+ 		bitlen = slen * 4;
-++	}
-+ 
-+ 	/*
-+ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
-+@@ -450,12 +460,22 @@ varbit_in(PG_FUNCTION_ARGS)
-+ 		sp = input_string;
-+ 	}
-+ 
-++	/*
-++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
-++	 * input is small enough, but we must check hex input.
-++	 */
-+ 	slen = strlen(sp);
-+-	/* Determine bitlength from input string */
-+ 	if (bit_not_hex)
-+ 		bitlen = slen;
-+ 	else
-++	{
-++		if (slen > VARBITMAXLEN / 4)
-++			ereport(ERROR,
-++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("bit string length exceeds the maximum allowed (%d)",
-++						VARBITMAXLEN)));
-+ 		bitlen = slen * 4;
-++	}
-+ 
-+ 	/*
-+ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
-+@@ -535,6 +555,9 @@ varbit_in(PG_FUNCTION_ARGS)
-+ /*
-+  * varbit_out -
-+  *	  Prints the string as bits to preserve length accurately
-++ *
-++ * XXX varbit_recv() and hex input to varbit_in() can load a value that this
-++ * cannot emit.  Consider using hex output for such values.
-+  */
-+ Datum
-+ varbit_out(PG_FUNCTION_ARGS)
-+@@ -944,6 +967,11 @@ bit_catenate(VarBit *arg1, VarBit *arg2)
-+ 	bitlen1 = VARBITLEN(arg1);
-+ 	bitlen2 = VARBITLEN(arg2);
-+ 
-++	if (bitlen1 > VARBITMAXLEN - bitlen2)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("bit string length exceeds the maximum allowed (%d)",
-++						VARBITMAXLEN)));
-+ 	bytelen = VARBITTOTALLEN(bitlen1 + bitlen2);
-+ 
-+ 	result = (VarBit *) palloc(bytelen);
-+diff --git a/src/include/tsearch/ts_type.h b/src/include/tsearch/ts_type.h
-+index 3adc336..9ee5610 100644
-+--- a/src/include/tsearch/ts_type.h
-++++ b/src/include/tsearch/ts_type.h
-+@@ -13,6 +13,7 @@
-+ #define _PG_TSTYPE_H_
-+ 
-+ #include "fmgr.h"
-++#include "utils/memutils.h"
-+ #include "utils/pg_crc.h"
-+ 
-+ 
-+@@ -244,6 +245,8 @@ typedef TSQueryData *TSQuery;
-+  * QueryItems, and lenofoperand is the total length of all operands
-+  */
-+ #define COMPUTESIZE(size, lenofoperand) ( HDRSIZETQ + (size) * sizeof(QueryItem) + (lenofoperand) )
-++#define TSQUERY_TOO_BIG(size, lenofoperand) \
-++	((size) > (MaxAllocSize - HDRSIZETQ - (lenofoperand)) / sizeof(QueryItem))
-+ 
-+ /* Returns a pointer to the first QueryItem in a TSQuery */
-+ #define GETQUERY(x)  ((QueryItem*)( (char*)(x)+HDRSIZETQ ))
-+diff --git a/src/include/utils/varbit.h b/src/include/utils/varbit.h
-+index 52dca8b..61531a8 100644
-+--- a/src/include/utils/varbit.h
-++++ b/src/include/utils/varbit.h
-+@@ -15,6 +15,8 @@
-+ #ifndef VARBIT_H
-+ #define VARBIT_H
-+ 
-++#include <limits.h>
++ 	return false;
++ }
 ++
-+ #include "fmgr.h"
+++/*-------------------------------------------------------------------------
+++ *		Support routines for procedural language implementations
+++ *-------------------------------------------------------------------------
+++ */
+++
+++/*
+++ * Verify that a validator is actually associated with the language of a
+++ * particular function and that the user has access to both the language and
+++ * the function.  All validators should call this before doing anything
+++ * substantial.  Doing so ensures a user cannot achieve anything with explicit
+++ * calls to validators that he could not achieve with CREATE FUNCTION or by
+++ * simply calling an existing function.
+++ *
+++ * When this function returns false, callers should skip all validation work
+++ * and call PG_RETURN_VOID().  This never happens at present; it is reserved
+++ * for future expansion.
+++ *
+++ * In particular, checking that the validator corresponds to the function's
+++ * language allows untrusted language validators to assume they process only
+++ * superuser-chosen source code.  (Untrusted language call handlers, by
+++ * definition, do assume that.)  A user lacking the USAGE language privilege
+++ * would be unable to reach the validator through CREATE FUNCTION, so we check
+++ * that to block explicit calls as well.  Checking the EXECUTE privilege on
+++ * the function is often superfluous, because most users can clone the
+++ * function to get an executable copy.  It is meaningful against users with no
+++ * database TEMP right and no permanent schema CREATE right, thereby unable to
+++ * create any function.  Also, if the function tracks persistent state by
+++ * function OID or name, validating the original function might permit more
+++ * mischief than creating and validating a clone thereof.
+++ */
+++bool
+++CheckFunctionValidatorAccess(Oid validatorOid, Oid functionOid)
+++{
+++	HeapTuple	procTup;
+++	HeapTuple	langTup;
+++	Form_pg_proc procStruct;
+++	Form_pg_language langStruct;
+++	AclResult	aclresult;
+++
+++	/* Get the function's pg_proc entry */
+++	procTup = SearchSysCache1(PROCOID, ObjectIdGetDatum(functionOid));
+++	if (!HeapTupleIsValid(procTup))
+++		elog(ERROR, "cache lookup failed for function %u", functionOid);
+++	procStruct = (Form_pg_proc) GETSTRUCT(procTup);
+++
+++	/*
+++	 * Fetch pg_language entry to know if this is the correct validation
+++	 * function for that pg_proc entry.
+++	 */
+++	langTup = SearchSysCache1(LANGOID, ObjectIdGetDatum(procStruct->prolang));
+++	if (!HeapTupleIsValid(langTup))
+++		elog(ERROR, "cache lookup failed for language %u", procStruct->prolang);
+++	langStruct = (Form_pg_language) GETSTRUCT(langTup);
+++
+++	if (langStruct->lanvalidator != validatorOid)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
+++				 errmsg("language validation function %u called for language %u instead of %u",
+++						validatorOid, procStruct->prolang,
+++						langStruct->lanvalidator)));
+++
+++	/* first validate that we have permissions to use the language */
+++	aclresult = pg_language_aclcheck(procStruct->prolang, GetUserId(),
+++									 ACL_USAGE);
+++	if (aclresult != ACLCHECK_OK)
+++		aclcheck_error(aclresult, ACL_KIND_LANGUAGE,
+++					   NameStr(langStruct->lanname));
+++
+++	/*
+++	 * Check whether we are allowed to execute the function itself. If we can
+++	 * execute it, there should be no possible side-effect of
+++	 * compiling/validation that execution can't have.
+++	 */
+++	aclresult = pg_proc_aclcheck(functionOid, GetUserId(), ACL_EXECUTE);
+++	if (aclresult != ACLCHECK_OK)
+++		aclcheck_error(aclresult, ACL_KIND_PROC, NameStr(procStruct->proname));
+++
+++	ReleaseSysCache(procTup);
+++	ReleaseSysCache(langTup);
+++
+++	return true;
+++}
++diff --git a/src/include/fmgr.h b/src/include/fmgr.h
++index 0a25776..f944cc6 100644
++--- a/src/include/fmgr.h
+++++ b/src/include/fmgr.h
++@@ -624,6 +624,7 @@ extern Oid	get_fn_expr_argtype(FmgrInfo *flinfo, int argnum);
++ extern Oid	get_call_expr_argtype(fmNodePtr expr, int argnum);
++ extern bool get_fn_expr_arg_stable(FmgrInfo *flinfo, int argnum);
++ extern bool get_call_expr_arg_stable(fmNodePtr expr, int argnum);
+++extern bool CheckFunctionValidatorAccess(Oid validatorOid, Oid functionOid);
 + 
 + /*
-+@@ -53,6 +55,11 @@ typedef struct
-+ /* Number of bytes needed to store a bit string of a given length */
-+ #define VARBITTOTALLEN(BITLEN)	(((BITLEN) + BITS_PER_BYTE-1)/BITS_PER_BYTE + \
-+ 								 VARHDRSZ + VARBITHDRSZ)
-++/*
-++ * Maximum number of bits.  Several code sites assume no overflow from
-++ * computing bitlen + X; VARBITTOTALLEN() has the largest such X.
-++ */
-++#define VARBITMAXLEN		(INT_MAX - BITS_PER_BYTE + 1)
-+ /* pointer beyond the end of the bit string (like end() in STL containers) */
-+ #define VARBITEND(PTR)		(((bits8 *) (PTR)) + VARSIZE(PTR))
-+ /* Mask that will cover exactly one byte, i.e. BITS_PER_BYTE bits */
++  * Routines in dfmgr.c
++diff --git a/src/pl/plperl/plperl.c b/src/pl/plperl/plperl.c
++index 7c2aee9..49d50c4 100644
++--- a/src/pl/plperl/plperl.c
+++++ b/src/pl/plperl/plperl.c
++@@ -1847,6 +1847,9 @@ plperl_validator(PG_FUNCTION_ARGS)
++ 	bool		istrigger = false;
++ 	int			i;
++ 
+++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
+++		PG_RETURN_VOID();
+++
++ 	/* Get the new function's pg_proc entry */
++ 	tuple = SearchSysCache1(PROCOID, ObjectIdGetDatum(funcoid));
++ 	if (!HeapTupleIsValid(tuple))
++@@ -1926,6 +1929,7 @@ PG_FUNCTION_INFO_V1(plperlu_validator);
++ Datum
++ plperlu_validator(PG_FUNCTION_ARGS)
++ {
+++	/* call plperl validator with our fcinfo so it gets our oid */
++ 	return plperl_validator(fcinfo);
++ }
++ 
++diff --git a/src/pl/plpgsql/src/pl_handler.c b/src/pl/plpgsql/src/pl_handler.c
++index 022ec3f..00b1a6f 100644
++--- a/src/pl/plpgsql/src/pl_handler.c
+++++ b/src/pl/plpgsql/src/pl_handler.c
++@@ -227,6 +227,9 @@ plpgsql_validator(PG_FUNCTION_ARGS)
++ 	bool		istrigger = false;
++ 	int			i;
++ 
+++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
+++		PG_RETURN_VOID();
+++
++ 	/* Get the new function's pg_proc entry */
++ 	tuple = SearchSysCache1(PROCOID, ObjectIdGetDatum(funcoid));
++ 	if (!HeapTupleIsValid(tuple))
++diff --git a/src/pl/plpython/plpy_main.c b/src/pl/plpython/plpy_main.c
++index c4de762..3847847 100644
++--- a/src/pl/plpython/plpy_main.c
+++++ b/src/pl/plpython/plpy_main.c
++@@ -159,6 +159,9 @@ plpython_validator(PG_FUNCTION_ARGS)
++ 	Form_pg_proc procStruct;
++ 	bool		is_trigger;
++ 
+++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
+++		PG_RETURN_VOID();
+++
++ 	if (!check_function_bodies)
++ 	{
++ 		PG_RETURN_VOID();
++@@ -184,6 +187,7 @@ plpython_validator(PG_FUNCTION_ARGS)
++ Datum
++ plpython2_validator(PG_FUNCTION_ARGS)
++ {
+++	/* call plpython validator with our fcinfo so it gets our oid */
++ 	return plpython_validator(fcinfo);
++ }
++ #endif   /* PY_MAJOR_VERSION < 3 */
 +-- 
 +1.7.5.4
 +
 diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index d45f4b5..9b242e0 100644
+index d6a4cd7..e2e5947 100644
 --- a/meta-oe/recipes-support/postgresql/postgresql.inc
 +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -28,10 +28,11 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
-            file://postgresql.init \
-            file://postgresql-bashprofile \
-            file://postgresql.pam \
--           file://0001-Use-pkg-config-for-libxml2-detection.patch \
-            file://postgresql-setup \
-            file://postgresql.service \
--"
-+           file://0001-Use-pkg-config-for-libxml2-detection.patch \
-+           file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
-+          "
+@@ -33,6 +33,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+            file://0001-Use-pkg-config-for-libxml2-detection.patch \
+            file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
+            file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
++           file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
+           "
  
  LEAD_SONAME = "libpq.so"
- 
 -- 
 1.9.1
 
