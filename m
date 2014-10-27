@@ -1,28 +1,24 @@
 Return-Path: <Chong.Lu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FE2260232
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C17FC70A84
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 07:20:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9R7KNJq020672
+	Mon, 27 Oct 2014 08:30:52 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9R8Uphm010544
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 00:20:23 -0700 (PDT)
-Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Mon, 27 Oct 2014 00:20:22 -0700
-Message-ID: <544DF233.3000503@windriver.com>
-Date: Mon, 27 Oct 2014 15:20:19 +0800
+	Mon, 27 Oct 2014 01:30:52 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 27 Oct 2014 01:30:51 -0700
 From: Chong Lu <Chong.Lu@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.0
-MIME-Version: 1.0
 To: <openembedded-devel@lists.openembedded.org>
-References: <1413972433-31546-1-git-send-email-Chong.Lu@windriver.com>
-In-Reply-To: <1413972433-31546-1-git-send-email-Chong.Lu@windriver.com>
-X-Originating-IP: [128.224.162.204]
-Subject: Re: [meta-networking][PATCH] squid: Add a PACKAGECONFIG for libnetfilter-conntrack
+Date: Mon, 27 Oct 2014 16:27:50 +0800
+Message-ID: <1414398470-3365-1-git-send-email-Chong.Lu@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] libhugetlbfs: add bash and perl to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,37 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2014 07:20:22 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 27 Oct 2014 08:30:52 -0000
+Content-Type: text/plain
 
-ping
+This solves the following warning:
 
--Chong
+libhugetlbfs-2.18: libhugetlbfs-tests requires /bin/bash, but no providers in
+its RDEPENDS [file-rdeps]
+libhugetlbfs-2.18: libhugetlbfs requires /bin/bash, /usr/bin/perl, but no
+providers in its RDEPENDS [file-rdeps]
 
-On 10/22/2014 06:07 PM, Chong Lu wrote:
-> This solves the following warning:
->
-> WARNING: QA Issue: squid rdepends on libnetfilter-conntrack, but it isn't a
-> build dependency? [build-deps]
->
-> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
-> ---
->   recipes-daemons/squid/squid_3.4.7.bb | 2 ++
->   1 file changed, 2 insertions(+)
->
-> diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
-> index 37e4bba..cd10bd0 100644
-> --- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
-> +++ b/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
-> @@ -35,6 +35,8 @@ inherit autotools useradd ptest
->   USERADD_PACKAGES = "${PN}"
->   USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
->   
-> +PACKAGECONFIG ??= ""
-> +PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
->   EXTRA_OECONF += "--with-default-user=squid"
->   
->   TESTDIR = "test-suite"
+Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+---
+ recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index 851b050..c2262ea 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -3,7 +3,8 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
+ 
+ DEPENDS = "sysfsutils perl"
+-RDEPENDS_${PN} += "python python-io python-lang python-subprocess python-resource"
++RDEPENDS_${PN} += "bash perl python python-io python-lang python-subprocess python-resource"
++RDEPENDS_${PN}-tests += "bash"
+ 
+ PV = "2.18"
+ PE = "1"
+-- 
+1.9.1
 
 
