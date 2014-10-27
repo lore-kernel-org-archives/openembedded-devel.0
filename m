@@ -1,24 +1,23 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9ED9C65D59
+Return-Path: <anders@chargestorm.se>
+Received: from stoexhub03.domain01.net (STOEXHUB03.domain01.net
+	[83.145.59.144])
+	by mail.openembedded.org (Postfix) with ESMTP id ED7D870F06
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 08:55:34 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9R8tZ5S010854
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 01:55:35 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 27 Oct 2014 01:55:34 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
+	Mon, 27 Oct 2014 11:32:14 +0000 (UTC)
+Received: from localhost (83.252.255.124) by stoexhub03.domain01.net
+	(10.12.10.3) with Microsoft SMTP Server id 8.3.279.1; Mon, 27 Oct 2014
+	12:32:13 +0100
+From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Oct 2014 16:52:33 +0800
-Message-ID: <1414399953-21567-1-git-send-email-Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Mon, 27 Oct 2014 12:31:42 +0100
+Message-ID: <9a0b3d2f7e1ac7e854430fe1e93271c71f574083.1414409458.git.anders@chargestorm.se>
+X-Mailer: git-send-email 2.1.1
+In-Reply-To: <cover.1414409458.git.anders@chargestorm.se>
+References: <cover.1414409458.git.anders@chargestorm.se>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] syslog-ng: add gawk to RDEPENDS
+X-GFI-SMTP-Submission: 1
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-qt5][PATCH 1/1] qmake5: set OE_QMAKE_INCDIR_QT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2014 08:55:35 -0000
+X-List-Received-Date: Mon, 27 Oct 2014 11:32:19 -0000
 Content-Type: text/plain
 
-This solves the following warning:
+This is set when generation an SDK, and thus would be usefull to have also
+when bitbaking. That allows us to use this in *.prf files which is used
+both when bitbaking as well as when using the SDK.
 
-syslog-ng-3.5.4.1: syslog-ng requires /usr/bin/awk, but no providers in its
-RDEPENDS [file-rdeps]
-
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+Signed-off-by: Anders Darander <anders@chargestorm.se>
+(cherry picked from commit 96e8d29fdbdf6fa656c854d9b55c5b0c213166a7)
 ---
- recipes-support/syslog-ng/syslog-ng.inc | 1 +
+ classes/qmake5_base.bbclass | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 2276777..984af43 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -71,6 +71,7 @@ do_install_append() {
- }
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index 3861cd0..f1a0945 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -32,6 +32,7 @@ EXTRA_OEMAKE = " \
+     OE_QMAKE_AR='${OE_QMAKE_AR}' \
+     OE_QMAKE_STRIP='${OE_QMAKE_STRIP}' \
+     OE_QMAKE_WAYLAND_SCANNER='${OE_QMAKE_WAYLAND_SCANNER}' \
++    OE_QMAKE_INCDIR_QT='${STAGING_DIR_TARGET}/${OE_QMAKE_PATH_HEADERS}' \
+ "
  
- FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
-+RDEPENDS_${PN} += "gawk"
- 
- # This overcomes the syslog-ng rdepends on syslog-ng-dev QA Error
- PACKAGES =+ "${PN}-libs ${PN}-libs-dev ${PN}-libs-dbg"
+ OE_QMAKESPEC = "${QMAKE_MKSPEC_PATH_NATIVE}/mkspecs/${OE_QMAKE_PLATFORM_NATIVE}"
 -- 
-1.9.1
+2.1.1
 
 
