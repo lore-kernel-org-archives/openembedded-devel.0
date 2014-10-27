@@ -1,28 +1,26 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A7BE71EDF
+Return-Path: <milo-software@users.sourceforge.net>
+X-Greylist: delayed 457 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 27 Oct 2014 17:43:45 UTC
+Received: from smtp08.online.nl (smtp08.online.nl [194.134.42.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A5DC65D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 15:32:03 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9RFW4Ud018439
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 08:32:04 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Mon, 27 Oct 2014 08:32:04 -0700
-From: Kai Kang <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Oct 2014 23:28:41 +0800
-Message-ID: <1414423721-6353-9-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1414423721-6353-1-git-send-email-kai.kang@windriver.com>
-References: <1414423721-6353-1-git-send-email-kai.kang@windriver.com>
-MIME-Version: 1.0
-X-Originating-IP: [128.224.153.152]
-Cc: Yue.Tao@windriver.com
-Subject: [PATCH 8/8] Security Advisory - libyaml - CVE-2014-2525
+	Mon, 27 Oct 2014 17:43:45 +0000 (UTC)
+Received: from smtp08.online.nl (localhost [127.0.0.1])
+	by smtp08.online.nl (Postfix) with ESMTP id 6539566445;
+	Mon, 27 Oct 2014 18:36:07 +0100 (CET)
+Received: from phenom.local (s55969068.adsl.online.nl [85.150.144.104])
+	by smtp08.online.nl (Postfix) with ESMTP;
+	Mon, 27 Oct 2014 18:36:07 +0100 (CET)
+From: Mike Looijmans <milo-software@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Oct 2014 18:35:55 +0100
+Message-Id: <1414431355-8764-1-git-send-email-milo-software@users.sourceforge.net>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1413915135-20979-1-git-send-email-milo-software@users.sourceforge.net>
+References: <1413915135-20979-1-git-send-email-milo-software@users.sourceforge.net>
+X-Online-Scanned: by Cloudmark authority (on smtp08.online.nl)
+Cc: Mike Looijmans <milo-software@users.sourceforge.net>
+Subject: [meta-oe][PATCH v2] vlc/libdvdcss: Upgrade to 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,88 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2014 15:32:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 27 Oct 2014 17:43:51 -0000
 
-Heap-based buffer overflow in the yaml_parser_scan_uri_escapes function
-in LibYAML before 0.1.6 allows context-dependent attackers to execute
-arbitrary code via a long sequence of percent-encoded characters in a
-URI in a YAML file.
+Tested and in use for a while in OpenPLi.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-2525
-
-Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Mike Looijmans <milo-software@users.sourceforge.net>
 ---
- .../libyaml/files/libyaml-CVE-2014-2525.patch      | 42 ++++++++++++++++++++++
- meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb   |  4 ++-
- 2 files changed, 45 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch
+ .../{libdvdcss_1.2.13.bb => libdvdcss_1.3.0.bb}    |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/vlc/{libdvdcss_1.2.13.bb => libdvdcss_1.3.0.bb} (72%)
 
-diff --git a/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch b/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch
-new file mode 100644
-index 0000000..2fdcba3
---- /dev/null
-+++ b/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch
-@@ -0,0 +1,42 @@
-+Heap-based buffer overflow in the yaml_parser_scan_uri_escapes function
-+in LibYAML before 0.1.6 allows context-dependent attackers to execute
-+arbitrary code via a long sequence of percent-encoded characters in a
-+URI in a YAML file.
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+diff --git a/src/scanner.c.old b/src/scanner.c
-+index a2e8619..c6cde3b 100644
-+--- a/src/scanner.c.old
-++++ b/src/scanner.c
-+@@ -2619,6 +2619,9 @@ yaml_parser_scan_tag_uri(yaml_parser_t *parser, int directive,
-+         /* Check if it is a URI-escape sequence. */
-+ 
-+         if (CHECK(parser->buffer, '%')) {
-++            if (!STRING_EXTEND(parser, string))
-++                goto error;
-++
-+             if (!yaml_parser_scan_uri_escapes(parser,
-+                         directive, start_mark, &string)) goto error;
-+         }
-+diff --git a/src/yaml_private.h.old b/src/yaml_private.h
-+index ed5ea66..d72acb4 100644
-+--- a/src/yaml_private.h.old
-++++ b/src/yaml_private.h
-+@@ -132,9 +132,12 @@ yaml_string_join(
-+      (string).start = (string).pointer = (string).end = 0)
-+ 
-+ #define STRING_EXTEND(context,string)                                           \
-+-    (((string).pointer+5 < (string).end)                                        \
-++    ((((string).pointer+5 < (string).end)                                       \
-+         || yaml_string_extend(&(string).start,                                  \
-+-            &(string).pointer, &(string).end))
-++            &(string).pointer, &(string).end)) ?                                \
-++         1 :                                                                    \
-++        ((context)->error = YAML_MEMORY_ERROR,                                  \
-++         0))
-+ 
-+ #define CLEAR(context,string)                                                   \
-+     ((string).pointer = (string).start,                                         \
-diff --git a/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb b/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
-index c44eda4..1279541 100644
---- a/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
-+++ b/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
-@@ -7,7 +7,9 @@ SECTION = "libs/devel"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
+similarity index 72%
+rename from meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb
+rename to meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
+index 1a316d3..79e64ae 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
+@@ -8,5 +8,5 @@ inherit autotools
  
--SRC_URI = "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz"
-+SRC_URI = "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz \
-+           file://libyaml-CVE-2014-2525.patch \
-+          "
+ EXTRA_OECONF = " --disable-doc "
  
- SRC_URI[md5sum] = "24f6093c1e840ca5df2eb09291a1dbf1"
- SRC_URI[sha256sum] = "fa87ee8fb7b936ec04457bc044cd561155e1000a4d25029867752e543c2d3bef"
+-SRC_URI[md5sum] = "53cfc52a60a156763c425572e5179273"
+-SRC_URI[sha256sum] = "84f1bba6cfef1df87f774fceaefc8e73c4cda32e8f6700b224ad0acb5511ba2c"
++SRC_URI[md5sum] = "7f0fdb3ff91d638f5e45ed7536f7eb67"
++SRC_URI[sha256sum] = "7c414acd520c4e4dd7267952f72d738ff50321a7869af4d75c65aefad44f1395"
 -- 
-1.9.1
+1.7.9.5
 
 
