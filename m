@@ -1,28 +1,28 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DC3B71E71
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B11C4718D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 15:31:53 +0000 (UTC)
+	Mon, 27 Oct 2014 15:31:59 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9RFVsYM018428
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9RFW0mk002061
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 08:31:54 -0700 (PDT)
+	Mon, 27 Oct 2014 08:32:00 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Mon, 27 Oct 2014 08:31:54 -0700
+	(TLS) id 14.3.174.1; Mon, 27 Oct 2014 08:31:59 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Oct 2014 23:28:35 +0800
-Message-ID: <1414423721-6353-3-git-send-email-kai.kang@windriver.com>
+Date: Mon, 27 Oct 2014 23:28:38 +0800
+Message-ID: <1414423721-6353-6-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1414423721-6353-1-git-send-email-kai.kang@windriver.com>
 References: <1414423721-6353-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: Yue.Tao@windriver.com
-Subject: [PATCH 2/8] Security Advisory - postgresql - CVE-2014-0060
+Subject: [PATCH 5/8] Security Advisory - postgresql - CVE-2014-0063
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,312 +37,507 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 27 Oct 2014 15:32:00 -0000
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before 9.1.12,
-9.2.x before 9.2.7, and 9.3.x before 9.3.3 does not properly enforce the
-ADMIN OPTION restriction, which allows remote authenticated members of a
-role to add or remove arbitrary users to that role by calling the SET
-ROLE command before the associated GRANT command.
+Multiple stack-based buffer overflows in PostgreSQL before 8.4.20, 9.0.x
+before 9.0.16, 9.1.x before 9.1.12, 9.2.x before 9.2.7, and 9.3.x before
+9.3.3 allow remote authenticated users to cause a denial of service
+(crash) or possibly execute arbitrary code via vectors related to an
+incorrect MAXDATELEN constant and datetime values involving (1)
+intervals, (2) timestamps, or (3) timezones, a different vulnerability
+than CVE-2014-0065.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0060
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0063
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../0003-Shore-up-ADMIN-OPTION-restrictions.patch  | 273 +++++++++++++++++++++
+ ...ix-handling-of-wide-datetime-input-output.patch | 465 +++++++++++++++++++++
  meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
- 2 files changed, 274 insertions(+)
- create mode 100644 meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch
+ 2 files changed, 466 insertions(+)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
 
-diff --git a/meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch b/meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch
+diff --git a/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch b/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
 new file mode 100644
-index 0000000..abbe142
+index 0000000..fac0a73
 --- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch
-@@ -0,0 +1,273 @@
-+From 15a8f97b9d16aaf659f58c981242b9da591cf24c Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
+@@ -0,0 +1,465 @@
++From f416622be81d1320417bbc7892fd562cae0dba72 Mon Sep 17 00:00:00 2001
 +From: Noah Misch <noah@leadboat.com>
 +Date: Mon, 17 Feb 2014 09:33:31 -0500
-+Subject: [PATCH] Shore up ADMIN OPTION restrictions.
++Subject: [PATCH] Fix handling of wide datetime input/output.
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+commit 15a8f97b9d16aaf659f58c981242b9da591cf24c REL9_2_STABLE
++commit f416622be81d1320417bbc7892fd562cae0dba72 REL9_2_STABLE
 +
-+Granting a role without ADMIN OPTION is supposed to prevent the grantee
-+from adding or removing members from the granted role.  Issuing SET ROLE
-+before the GRANT bypassed that, because the role itself had an implicit
-+right to add or remove members.  Plug that hole by recognizing that
-+implicit right only when the session user matches the current role.
-+Additionally, do not recognize it during a security-restricted operation
-+or during execution of a SECURITY DEFINER function.  The restriction on
-+SECURITY DEFINER is not security-critical.  However, it seems best for a
-+user testing his own SECURITY DEFINER function to see the same behavior
-+others will see.  Back-patch to 8.4 (all supported versions).
++Many server functions use the MAXDATELEN constant to size a buffer for
++parsing or displaying a datetime value.  It was much too small for the
++longest possible interval output and slightly too small for certain
++valid timestamp input, particularly input with a long timezone name.
++The long input was rejected needlessly; the long output caused
++interval_out() to overrun its buffer.  ECPG's pgtypes library has a copy
++of the vulnerable functions, which bore the same vulnerabilities along
++with some of its own.  In contrast to the server, certain long inputs
++caused stack overflow rather than failing cleanly.  Back-patch to 8.4
++(all supported versions).
 +
-+The SQL standards do not conflate roles and users as PostgreSQL does;
-+only SQL roles have members, and only SQL users initiate sessions.  An
-+application using PostgreSQL users and roles as SQL users and roles will
-+never attempt to grant membership in the role that is the session user,
-+so the implicit right to add or remove members will never arise.
++Reported by Daniel Schüssler, reviewed by Tom Lane.
 +
-+The security impact was mostly that a role member could revoke access
-+from others, contrary to the wishes of his own grantor.  Unapproved role
-+member additions are less notable, because the member can still largely
-+achieve that by creating a view or a SECURITY DEFINER function.
-+
-+Reviewed by Andres Freund and Tom Lane.  Reported, independently, by
-+Jonas Sundman and Noah Misch.
-+
-+Security: CVE-2014-0060
++Security: CVE-2014-0063
 +
 +
 +Upstream-Status: Backport
 +
 +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ doc/src/sgml/ref/grant.sgml              |   12 ++++---
-+ src/backend/commands/user.c              |   11 ++++++-
-+ src/backend/utils/adt/acl.c              |   50 ++++++++++++++++++++++++------
-+ src/test/regress/expected/privileges.out |   36 +++++++++++++++++++++-
-+ src/test/regress/sql/privileges.sql      |   29 ++++++++++++++++-
-+ 5 files changed, 120 insertions(+), 18 deletions(-)
++ src/include/utils/datetime.h                       |   17 +++++---
++ src/interfaces/ecpg/pgtypeslib/datetime.c          |    4 +-
++ src/interfaces/ecpg/pgtypeslib/dt.h                |   17 +++++---
++ src/interfaces/ecpg/pgtypeslib/dt_common.c         |   44 ++++++++++++++------
++ src/interfaces/ecpg/pgtypeslib/interval.c          |    2 +-
++ src/interfaces/ecpg/pgtypeslib/timestamp.c         |    2 +-
++ .../ecpg/test/expected/pgtypeslib-dt_test2.c       |   22 +++++++---
++ .../ecpg/test/expected/pgtypeslib-dt_test2.stdout  |   19 ++++++++
++ src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc   |   10 ++++
++ src/test/regress/expected/interval.out             |    7 +++
++ src/test/regress/sql/interval.sql                  |    2 +
++ 11 files changed, 111 insertions(+), 35 deletions(-)
 +
-+diff --git a/doc/src/sgml/ref/grant.sgml b/doc/src/sgml/ref/grant.sgml
-+index fb81af4..2b5a843 100644
-+--- a/doc/src/sgml/ref/grant.sgml
-++++ b/doc/src/sgml/ref/grant.sgml
-+@@ -396,11 +396,13 @@ GRANT <replaceable class="PARAMETER">role_name</replaceable> [, ...] TO <replace
-+   <para>
-+    If <literal>WITH ADMIN OPTION</literal> is specified, the member can
-+    in turn grant membership in the role to others, and revoke membership
-+-   in the role as well.  Without the admin option, ordinary users cannot do
-+-   that.  However,
-+-   database superusers can grant or revoke membership in any role to anyone.
-+-   Roles having <literal>CREATEROLE</> privilege can grant or revoke
-+-   membership in any role that is not a superuser.
-++   in the role as well.  Without the admin option, ordinary users cannot
-++   do that.  A role is not considered to hold <literal>WITH ADMIN
-++   OPTION</literal> on itself, but it may grant or revoke membership in
-++   itself from a database session where the session user matches the
-++   role.  Database superusers can grant or revoke membership in any role
-++   to anyone.  Roles having <literal>CREATEROLE</> privilege can grant
-++   or revoke membership in any role that is not a superuser.
-+   </para>
++diff --git a/src/include/utils/datetime.h b/src/include/utils/datetime.h
++index d73cc8d..4b805b6 100644
++--- a/src/include/utils/datetime.h
+++++ b/src/include/utils/datetime.h
++@@ -188,12 +188,17 @@ struct tzEntry;
++ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
++ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_ALL_SECS_M)
 + 
-+   <para>
-+diff --git a/src/backend/commands/user.c b/src/backend/commands/user.c
-+index a22092c..39bf172 100644
-+--- a/src/backend/commands/user.c
-++++ b/src/backend/commands/user.c
-+@@ -1334,7 +1334,16 @@ AddRoleMems(const char *rolename, Oid roleid,
-+ 							rolename)));
-+ 	}
++-#define MAXDATELEN		63		/* maximum possible length of an input date
++-								 * string (not counting tr. null) */
++-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
++-								 * string */
++-#define TOKMAXLEN		10		/* only this many chars are stored in
++-								 * datetktbl */
+++/*
+++ * Working buffer size for input and output of interval, timestamp, etc.
+++ * Inputs that need more working space will be rejected early.  Longer outputs
+++ * will overrun buffers, so this must suffice for all possible output.  As of
+++ * this writing, interval_out() needs the most space at ~90 bytes.
+++ */
+++#define MAXDATELEN		128
+++/* maximum possible number of fields in a date string */
+++#define MAXDATEFIELDS	25
+++/* only this many chars are stored in datetktbl */
+++#define TOKMAXLEN		10
 + 
-+-	/* XXX not sure about this check */
-++	/*
-++	 * The role membership grantor of record has little significance at
-++	 * present.  Nonetheless, inasmuch as users might look to it for a crude
-++	 * audit trail, let only superusers impute the grant to a third party.
-++	 *
-++	 * Before lifting this restriction, give the member == role case of
-++	 * is_admin_of_role() a fresh look.  Ensure that the current role cannot
-++	 * use an explicit grantor specification to take advantage of the session
-++	 * user's self-admin right.
-++	 */
-+ 	if (grantorId != GetUserId() && !superuser())
-+ 		ereport(ERROR,
-+ 				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
-+diff --git a/src/backend/utils/adt/acl.c b/src/backend/utils/adt/acl.c
-+index 1d6ae8b..9a52edb 100644
-+--- a/src/backend/utils/adt/acl.c
-++++ b/src/backend/utils/adt/acl.c
-+@@ -4580,6 +4580,11 @@ pg_role_aclcheck(Oid role_oid, Oid roleid, AclMode mode)
-+ {
-+ 	if (mode & ACL_GRANT_OPTION_FOR(ACL_CREATE))
++ /* keep this struct small; it gets used a lot */
++ typedef struct
++diff --git a/src/interfaces/ecpg/pgtypeslib/datetime.c b/src/interfaces/ecpg/pgtypeslib/datetime.c
++index 823626f..4adcd1e 100644
++--- a/src/interfaces/ecpg/pgtypeslib/datetime.c
+++++ b/src/interfaces/ecpg/pgtypeslib/datetime.c
++@@ -61,14 +61,14 @@ PGTYPESdate_from_asc(char *str, char **endptr)
++ 	int			nf;
++ 	char	   *field[MAXDATEFIELDS];
++ 	int			ftype[MAXDATEFIELDS];
++-	char		lowstr[MAXDATELEN + 1];
+++	char		lowstr[MAXDATELEN + MAXDATEFIELDS];
++ 	char	   *realptr;
++ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
++ 
++ 	bool		EuroDates = FALSE;
++ 
++ 	errno = 0;
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
 + 	{
-++		/*
-++		 * XXX For roleid == role_oid, is_admin_of_role() also examines the
-++		 * session and call stack.  That suits two-argument pg_has_role(), but
-++		 * it gives the three-argument version a lamentable whimsy.
-++		 */
-+ 		if (is_admin_of_role(roleid, role_oid))
-+ 			return ACLCHECK_OK;
-+ 	}
-+@@ -4897,11 +4902,9 @@ is_member_of_role_nosuper(Oid member, Oid role)
++ 		errno = PGTYPES_DATE_BAD_DATE;
++ 		return INT_MIN;
++diff --git a/src/interfaces/ecpg/pgtypeslib/dt.h b/src/interfaces/ecpg/pgtypeslib/dt.h
++index dfe6f9e..2780593 100644
++--- a/src/interfaces/ecpg/pgtypeslib/dt.h
+++++ b/src/interfaces/ecpg/pgtypeslib/dt.h
++@@ -192,12 +192,17 @@ typedef double fsec_t;
++ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
++ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_M(SECOND))
 + 
++-#define MAXDATELEN		63		/* maximum possible length of an input date
++-								 * string (not counting tr. null) */
++-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
++-								 * string */
++-#define TOKMAXLEN		10		/* only this many chars are stored in
++-								 * datetktbl */
+++/*
+++ * Working buffer size for input and output of interval, timestamp, etc.
+++ * Inputs that need more working space will be rejected early.  Longer outputs
+++ * will overrun buffers, so this must suffice for all possible output.  As of
+++ * this writing, PGTYPESinterval_to_asc() needs the most space at ~90 bytes.
+++ */
+++#define MAXDATELEN		128
+++/* maximum possible number of fields in a date string */
+++#define MAXDATEFIELDS	25
+++/* only this many chars are stored in datetktbl */
+++#define TOKMAXLEN		10
 + 
-+ /*
-+- * Is member an admin of role (directly or indirectly)?  That is, is it
-+- * a member WITH ADMIN OPTION?
-+- *
-+- * We could cache the result as for is_member_of_role, but currently this
-+- * is not used in any performance-critical paths, so we don't.
-++ * Is member an admin of role?  That is, is member the role itself (subject to
-++ * restrictions below), a member (directly or indirectly) WITH ADMIN OPTION,
-++ * or a superuser?
-+  */
-+ bool
-+ is_admin_of_role(Oid member, Oid role)
-+@@ -4910,14 +4913,41 @@ is_admin_of_role(Oid member, Oid role)
-+ 	List	   *roles_list;
-+ 	ListCell   *l;
-+ 
-+-	/* Fast path for simple case */
-+-	if (member == role)
-+-		return true;
-+-
-+-	/* Superusers have every privilege, so are part of every role */
-+ 	if (superuser_arg(member))
-+ 		return true;
-+ 
-++	if (member == role)
-++		/*
-++		 * A role can admin itself when it matches the session user and we're
-++		 * outside any security-restricted operation, SECURITY DEFINER or
-++		 * similar context.  SQL-standard roles cannot self-admin.  However,
-++		 * SQL-standard users are distinct from roles, and they are not
-++		 * grantable like roles: PostgreSQL's role-user duality extends the
-++		 * standard.  Checking for a session user match has the effect of
-++		 * letting a role self-admin only when it's conspicuously behaving
-++		 * like a user.  Note that allowing self-admin under a mere SET ROLE
-++		 * would make WITH ADMIN OPTION largely irrelevant; any member could
-++		 * SET ROLE to issue the otherwise-forbidden command.
-++		 *
-++		 * Withholding self-admin in a security-restricted operation prevents
-++		 * object owners from harnessing the session user identity during
-++		 * administrative maintenance.  Suppose Alice owns a database, has
-++		 * issued "GRANT alice TO bob", and runs a daily ANALYZE.  Bob creates
-++		 * an alice-owned SECURITY DEFINER function that issues "REVOKE alice
-++		 * FROM carol".  If he creates an expression index calling that
-++		 * function, Alice will attempt the REVOKE during each ANALYZE.
-++		 * Checking InSecurityRestrictedOperation() thwarts that attack.
-++		 *
-++		 * Withholding self-admin in SECURITY DEFINER functions makes their
-++		 * behavior independent of the calling user.  There's no security or
-++		 * SQL-standard-conformance need for that restriction, though.
-++		 *
-++		 * A role cannot have actual WITH ADMIN OPTION on itself, because that
-++		 * would imply a membership loop.  Therefore, we're done either way.
-++		 */
-++		return member == GetSessionUserId() &&
-++			!InLocalUserIdChange() && !InSecurityRestrictedOperation();
++ /* keep this struct small; it gets used a lot */
++ typedef struct
++diff --git a/src/interfaces/ecpg/pgtypeslib/dt_common.c b/src/interfaces/ecpg/pgtypeslib/dt_common.c
++index 6b89e4a..18178dd 100644
++--- a/src/interfaces/ecpg/pgtypeslib/dt_common.c
+++++ b/src/interfaces/ecpg/pgtypeslib/dt_common.c
++@@ -1171,15 +1171,22 @@ DecodeNumberField(int len, char *str, int fmask,
++ 	if ((cp = strchr(str, '.')) != NULL)
++ 	{
++ #ifdef HAVE_INT64_TIMESTAMP
++-		char		fstr[MAXDATELEN + 1];
+++		char		fstr[7];
+++		int			i;
 ++
-+ 	/*
-+ 	 * Find all the roles that member is a member of, including multi-level
-+ 	 * recursion.  We build a list in the same way that is_member_of_role does
-+diff --git a/src/test/regress/expected/privileges.out b/src/test/regress/expected/privileges.out
-+index e8930cb..bc6d731 100644
-+--- a/src/test/regress/expected/privileges.out
-++++ b/src/test/regress/expected/privileges.out
-+@@ -32,7 +32,7 @@ ALTER GROUP regressgroup1 ADD USER regressuser4;
-+ ALTER GROUP regressgroup2 ADD USER regressuser2;	-- duplicate
-+ NOTICE:  role "regressuser2" is already a member of role "regressgroup2"
-+ ALTER GROUP regressgroup2 DROP USER regressuser2;
-+-ALTER GROUP regressgroup2 ADD USER regressuser4;
-++GRANT regressgroup2 TO regressuser4 WITH ADMIN OPTION;
-+ -- test owner privileges
-+ SET SESSION AUTHORIZATION regressuser1;
-+ SELECT session_user, current_user;
-+@@ -929,6 +929,40 @@ SELECT has_table_privilege('regressuser1', 'atest4', 'SELECT WITH GRANT OPTION')
-+  t
+++		cp++;
++ 
++ 		/*
++ 		 * OK, we have at most six digits to care about. Let's construct a
++-		 * string and then do the conversion to an integer.
+++		 * string with those digits, zero-padded on the right, and then do
+++		 * the conversion to an integer.
+++		 *
+++		 * XXX This truncates the seventh digit, unlike rounding it as do
+++		 * the backend and the !HAVE_INT64_TIMESTAMP case.
++ 		 */
++-		strcpy(fstr, (cp + 1));
++-		strcpy(fstr + strlen(fstr), "000000");
++-		*(fstr + 6) = '\0';
+++		for (i = 0; i < 6; i++)
+++			fstr[i] = *cp != '\0' ? *cp++ : '0';
+++		fstr[i] = '\0';
++ 		*fsec = strtol(fstr, NULL, 10);
++ #else
++ 		*fsec = strtod(cp, NULL);
++@@ -1531,15 +1538,22 @@ DecodeTime(char *str, int *tmask, struct tm * tm, fsec_t *fsec)
++ 		else if (*cp == '.')
++ 		{
++ #ifdef HAVE_INT64_TIMESTAMP
++-			char		fstr[MAXDATELEN + 1];
+++			char		fstr[7];
+++			int			i;
+++
+++			cp++;
++ 
++ 			/*
++-			 * OK, we have at most six digits to work with. Let's construct a
++-			 * string and then do the conversion to an integer.
+++			 * OK, we have at most six digits to care about. Let's construct a
+++			 * string with those digits, zero-padded on the right, and then do
+++			 * the conversion to an integer.
+++			 *
+++			 * XXX This truncates the seventh digit, unlike rounding it as do
+++			 * the backend and the !HAVE_INT64_TIMESTAMP case.
++ 			 */
++-			strncpy(fstr, (cp + 1), 7);
++-			strcpy(fstr + strlen(fstr), "000000");
++-			*(fstr + 6) = '\0';
+++			for (i = 0; i < 6; i++)
+++				fstr[i] = *cp != '\0' ? *cp++ : '0';
+++			fstr[i] = '\0';
++ 			*fsec = strtol(fstr, &cp, 10);
++ #else
++ 			str = cp;
++@@ -1665,6 +1679,9 @@ DecodePosixTimezone(char *str, int *tzp)
++  *	DTK_NUMBER can hold date fields (yy.ddd)
++  *	DTK_STRING can hold months (January) and time zones (PST)
++  *	DTK_DATE can hold Posix time zones (GMT-8)
+++ *
+++ * The "lowstr" work buffer must have at least strlen(timestr) + MAXDATEFIELDS
+++ * bytes of space.  On output, field[] entries will point into it.
++  */
++ int
++ ParseDateTime(char *timestr, char *lowstr,
++@@ -1677,7 +1694,10 @@ ParseDateTime(char *timestr, char *lowstr,
++ 	/* outer loop through fields */
++ 	while (*(*endstr) != '\0')
++ 	{
+++		/* Record start of current field */
++ 		field[nf] = lp;
+++		if (nf >= MAXDATEFIELDS)
+++			return -1;
++ 
++ 		/* leading digit? then date or time */
++ 		if (isdigit((unsigned char) *(*endstr)))
++@@ -1818,8 +1838,6 @@ ParseDateTime(char *timestr, char *lowstr,
++ 		/* force in a delimiter after each field */
++ 		*lp++ = '\0';
++ 		nf++;
++-		if (nf > MAXDATEFIELDS)
++-			return -1;
++ 	}
++ 
++ 	*numfields = nf;
++diff --git a/src/interfaces/ecpg/pgtypeslib/interval.c b/src/interfaces/ecpg/pgtypeslib/interval.c
++index bcc10ee..fdd8f49 100644
++--- a/src/interfaces/ecpg/pgtypeslib/interval.c
+++++ b/src/interfaces/ecpg/pgtypeslib/interval.c
++@@ -1092,7 +1092,7 @@ PGTYPESinterval_from_asc(char *str, char **endptr)
++ 	tm->tm_sec = 0;
++ 	fsec = 0;
++ 
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
++ 	{
++ 		errno = PGTYPES_INTVL_BAD_INTERVAL;
++ 		return NULL;
++diff --git a/src/interfaces/ecpg/pgtypeslib/timestamp.c b/src/interfaces/ecpg/pgtypeslib/timestamp.c
++index 7d3f7c8..4f91e63 100644
++--- a/src/interfaces/ecpg/pgtypeslib/timestamp.c
+++++ b/src/interfaces/ecpg/pgtypeslib/timestamp.c
++@@ -297,7 +297,7 @@ PGTYPEStimestamp_from_asc(char *str, char **endptr)
++ 	char	   *realptr;
++ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
++ 
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
++ 	{
++ 		errno = PGTYPES_TS_BAD_TIMESTAMP;
++ 		return (noresult);
++diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
++index d3ebb0e..0ba1936 100644
++--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
+++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
++@@ -45,6 +45,15 @@ char *dates[] = { "19990108foobar",
++ 				  "1999.008",
++ 				  "J2451187",
++ 				  "January 8, 99 BC",
+++				  /*
+++				   * Maximize space usage in ParseDateTime() with 25
+++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
+++				   */
+++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+++				  /* 26 fields */
+++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++ 				  NULL };
++ 
++ /* do not conflict with libc "times" symbol */
++@@ -52,6 +61,7 @@ static char *times[] = { "0:04",
++ 				  "1:59 PDT",
++ 				  "13:24:40 -8:00",
++ 				  "13:24:40.495+3",
+++				  "13:24:40.123456789+3",
++ 				  NULL };
++ 
++ char *intervals[] = { "1 minute",
++@@ -73,22 +83,22 @@ main(void)
++ 		 
++ 		 
++ 	
++-#line 52 "dt_test2.pgc"
+++#line 62 "dt_test2.pgc"
++  date date1 ;
++  
++-#line 53 "dt_test2.pgc"
+++#line 63 "dt_test2.pgc"
++  timestamp ts1 , ts2 ;
++  
++-#line 54 "dt_test2.pgc"
+++#line 64 "dt_test2.pgc"
++  char * text ;
++  
++-#line 55 "dt_test2.pgc"
+++#line 65 "dt_test2.pgc"
++  interval * i1 ;
++  
++-#line 56 "dt_test2.pgc"
+++#line 66 "dt_test2.pgc"
++  date * dc ;
++ /* exec sql end declare section */
++-#line 57 "dt_test2.pgc"
+++#line 67 "dt_test2.pgc"
++ 
++ 
++ 	int i, j;
++diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
++index 24e9d26..9a4587b 100644
++--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
+++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
++@@ -8,85 +8,104 @@ TS[3,0]: 1999-01-08 00:04:00
++ TS[3,1]: 1999-01-08 01:59:00
++ TS[3,2]: 1999-01-08 13:24:40
++ TS[3,3]: 1999-01-08 13:24:40.495
+++TS[3,4]: 1999-01-08 13:24:40.123456
++ Date[4]: 1999-01-08 (N - F)
++ TS[4,0]: 1999-01-08 00:04:00
++ TS[4,1]: 1999-01-08 01:59:00
++ TS[4,2]: 1999-01-08 13:24:40
++ TS[4,3]: 1999-01-08 13:24:40.495
+++TS[4,4]: 1999-01-08 13:24:40.123456
++ Date[5]: 1999-01-08 (N - F)
++ TS[5,0]: 1999-01-08 00:04:00
++ TS[5,1]: 1999-01-08 01:59:00
++ TS[5,2]: 1999-01-08 13:24:40
++ TS[5,3]: 1999-01-08 13:24:40.495
+++TS[5,4]: 1999-01-08 13:24:40.123456
++ Date[6]: 1999-01-18 (N - F)
++ TS[6,0]: 1999-01-18 00:04:00
++ TS[6,1]: 1999-01-18 01:59:00
++ TS[6,2]: 1999-01-18 13:24:40
++ TS[6,3]: 1999-01-18 13:24:40.495
+++TS[6,4]: 1999-01-18 13:24:40.123456
++ Date[7]: 2003-01-02 (N - F)
++ TS[7,0]: 2003-01-02 00:04:00
++ TS[7,1]: 2003-01-02 01:59:00
++ TS[7,2]: 2003-01-02 13:24:40
++ TS[7,3]: 2003-01-02 13:24:40.495
+++TS[7,4]: 2003-01-02 13:24:40.123456
++ Date[8]: 1999-01-08 (N - F)
++ TS[8,0]: 1999-01-08 00:04:00
++ TS[8,1]: 1999-01-08 01:59:00
++ TS[8,2]: 1999-01-08 13:24:40
++ TS[8,3]: 1999-01-08 13:24:40.495
+++TS[8,4]: 1999-01-08 13:24:40.123456
++ Date[9]: 1999-01-08 (N - F)
++ TS[9,0]: 1999-01-08 00:04:00
++ TS[9,1]: 1999-01-08 01:59:00
++ TS[9,2]: 1999-01-08 13:24:40
++ TS[9,3]: 1999-01-08 13:24:40.495
+++TS[9,4]: 1999-01-08 13:24:40.123456
++ Date[10]: 1999-01-08 (N - F)
++ TS[10,0]: 1999-01-08 00:04:00
++ TS[10,1]: 1999-01-08 01:59:00
++ TS[10,2]: 1999-01-08 13:24:40
++ TS[10,3]: 1999-01-08 13:24:40.495
+++TS[10,4]: 1999-01-08 13:24:40.123456
++ Date[11]: 1999-01-08 (N - F)
++ TS[11,0]: 1999-01-08 00:04:00
++ TS[11,1]: 1999-01-08 01:59:00
++ TS[11,2]: 1999-01-08 13:24:40
++ TS[11,3]: 1999-01-08 13:24:40.495
+++TS[11,4]: 1999-01-08 13:24:40.123456
++ Date[12]: 1999-01-08 (N - F)
++ TS[12,0]: 1999-01-08 00:04:00
++ TS[12,1]: 1999-01-08 01:59:00
++ TS[12,2]: 1999-01-08 13:24:40
++ TS[12,3]: 1999-01-08 13:24:40.495
+++TS[12,4]: 1999-01-08 13:24:40.123456
++ Date[13]: 2006-01-08 (N - F)
++ TS[13,0]: 2006-01-08 00:04:00
++ TS[13,1]: 2006-01-08 01:59:00
++ TS[13,2]: 2006-01-08 13:24:40
++ TS[13,3]: 2006-01-08 13:24:40.495
+++TS[13,4]: 2006-01-08 13:24:40.123456
++ Date[14]: 1999-01-08 (N - F)
++ TS[14,0]: 1999-01-08 00:04:00
++ TS[14,1]: 1999-01-08 01:59:00
++ TS[14,2]: 1999-01-08 13:24:40
++ TS[14,3]: 1999-01-08 13:24:40.495
+++TS[14,4]: 1999-01-08 13:24:40.123456
++ Date[15]: 1999-01-08 (N - F)
++ TS[15,0]: 1999-01-08 00:04:00
++ TS[15,1]: 1999-01-08 01:59:00
++ TS[15,2]: 1999-01-08 13:24:40
++ TS[15,3]: 1999-01-08 13:24:40.495
+++TS[15,4]: 1999-01-08 13:24:40.123456
++ Date[16]: 1999-01-08 (N - F)
++ TS[16,0]: 1999-01-08 00:04:00
++ TS[16,1]: 1999-01-08 01:59:00
++ TS[16,2]: 1999-01-08 13:24:40
++ TS[16,3]: 1999-01-08 13:24:40.495
+++TS[16,4]: 1999-01-08 13:24:40.123456
++ Date[17]: 1999-01-08 (N - F)
++ TS[17,0]: 1999-01-08 00:04:00
++ TS[17,1]: 1999-01-08 01:59:00
++ TS[17,2]: 1999-01-08 13:24:40
++ TS[17,3]: 1999-01-08 13:24:40.495
+++TS[17,4]: 1999-01-08 13:24:40.123456
++ Date[18]: 1999-01-08 (N - F)
++ TS[18,0]: 1999-01-08 00:04:00
++ TS[18,1]: 1999-01-08 01:59:00
++ TS[18,2]: 1999-01-08 13:24:40
++ TS[18,3]: 1999-01-08 13:24:40.495
+++TS[18,4]: 1999-01-08 13:24:40.123456
++ Date[19]: 0099-01-08 BC (N - F)
++ TS[19,0]: 0099-01-08 00:04:00 BC
++ TS[19,1]: 0099-01-08 01:59:00 BC
++ TS[19,2]: 0099-01-08 13:24:40 BC
+++TS[19,4]: 0099-01-08 13:24:40.123456 BC
+++Date[20]: - (N - T)
+++Date[21]: - (N - T)
++ interval[0]: @ 1 min
++ interval_copy[0]: @ 1 min
++ interval[1]: @ 1 day 12 hours 59 mins 10 secs
++diff --git a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
++index 0edf012..a127dd9 100644
++--- a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
+++++ b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
++@@ -27,6 +27,15 @@ char *dates[] = { "19990108foobar",
++ 				  "1999.008",
++ 				  "J2451187",
++ 				  "January 8, 99 BC",
+++				  /*
+++				   * Maximize space usage in ParseDateTime() with 25
+++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
+++				   */
+++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+++				  /* 26 fields */
+++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++ 				  NULL };
++ 
++ /* do not conflict with libc "times" symbol */
++@@ -34,6 +43,7 @@ static char *times[] = { "0:04",
++ 				  "1:59 PDT",
++ 				  "13:24:40 -8:00",
++ 				  "13:24:40.495+3",
+++				  "13:24:40.123456789+3",
++ 				  NULL };
++ 
++ char *intervals[] = { "1 minute",
++diff --git a/src/test/regress/expected/interval.out b/src/test/regress/expected/interval.out
++index 3bf2211..99fd0ca 100644
++--- a/src/test/regress/expected/interval.out
+++++ b/src/test/regress/expected/interval.out
++@@ -306,6 +306,13 @@ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31
++  @ 4541 years 4 mons 4 days 17 mins 31 secs
 + (1 row)
 + 
-++-- Admin options
-++SET SESSION AUTHORIZATION regressuser4;
-++CREATE FUNCTION dogrant_ok() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++GRANT regressgroup2 TO regressuser5; -- ok: had ADMIN OPTION
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE suspended privilege
-++ERROR:  must have admin option on role "regressgroup2"
-++SET SESSION AUTHORIZATION regressuser1;
-++GRANT regressgroup2 TO regressuser5; -- fails: no ADMIN OPTION
-++ERROR:  must have admin option on role "regressgroup2"
-++SELECT dogrant_ok();			-- ok: SECURITY DEFINER conveys ADMIN
-++NOTICE:  role "regressuser5" is already a member of role "regressgroup2"
-++CONTEXT:  SQL function "dogrant_ok" statement 1
-++ dogrant_ok 
-++------------
-++ 
+++-- test long interval output
+++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
+++                                         interval                                          
+++-------------------------------------------------------------------------------------------
+++ @ 100000000 years 10 mons -1000000000 days -1000000000 hours -10 mins -10.000001 secs ago
 ++(1 row)
 ++
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE did not help
-++ERROR:  must have admin option on role "regressgroup2"
-++SET SESSION AUTHORIZATION regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- ok: a role can self-admin
-++NOTICE:  role "regressuser5" is already a member of role "regressgroup2"
-++CREATE FUNCTION dogrant_fails() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++SELECT dogrant_fails();			-- fails: no self-admin in SECURITY DEFINER
-++ERROR:  must have admin option on role "regressgroup2"
-++CONTEXT:  SQL function "dogrant_fails" statement 1
-++DROP FUNCTION dogrant_fails();
-++SET SESSION AUTHORIZATION regressuser4;
-++DROP FUNCTION dogrant_ok();
-++REVOKE regressgroup2 FROM regressuser5;
-+ -- has_sequence_privilege tests
-+ \c -
-+ CREATE SEQUENCE x_seq;
-+diff --git a/src/test/regress/sql/privileges.sql b/src/test/regress/sql/privileges.sql
-+index d4d328e..5f1018a 100644
-+--- a/src/test/regress/sql/privileges.sql
-++++ b/src/test/regress/sql/privileges.sql
-+@@ -37,7 +37,7 @@ ALTER GROUP regressgroup1 ADD USER regressuser4;
++ -- test justify_hours() and justify_days()
++ SELECT justify_hours(interval '6 months 3 days 52 hours 3 minutes 2 seconds') as "6 mons 5 days 4 hours 3 mins 2 seconds";
++  6 mons 5 days 4 hours 3 mins 2 seconds 
++diff --git a/src/test/regress/sql/interval.sql b/src/test/regress/sql/interval.sql
++index f1da4c2..7cee286 100644
++--- a/src/test/regress/sql/interval.sql
+++++ b/src/test/regress/sql/interval.sql
++@@ -108,6 +108,8 @@ select avg(f1) from interval_tbl;
++ -- test long interval input
++ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31 seconds'::interval;
 + 
-+ ALTER GROUP regressgroup2 ADD USER regressuser2;	-- duplicate
-+ ALTER GROUP regressgroup2 DROP USER regressuser2;
-+-ALTER GROUP regressgroup2 ADD USER regressuser4;
-++GRANT regressgroup2 TO regressuser4 WITH ADMIN OPTION;
+++-- test long interval output
+++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
 + 
-+ -- test owner privileges
-+ 
-+@@ -581,6 +581,33 @@ SELECT has_table_privilege('regressuser3', 'atest4', 'SELECT'); -- false
-+ SELECT has_table_privilege('regressuser1', 'atest4', 'SELECT WITH GRANT OPTION'); -- true
-+ 
-+ 
-++-- Admin options
-++
-++SET SESSION AUTHORIZATION regressuser4;
-++CREATE FUNCTION dogrant_ok() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++GRANT regressgroup2 TO regressuser5; -- ok: had ADMIN OPTION
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE suspended privilege
-++
-++SET SESSION AUTHORIZATION regressuser1;
-++GRANT regressgroup2 TO regressuser5; -- fails: no ADMIN OPTION
-++SELECT dogrant_ok();			-- ok: SECURITY DEFINER conveys ADMIN
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE did not help
-++
-++SET SESSION AUTHORIZATION regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- ok: a role can self-admin
-++CREATE FUNCTION dogrant_fails() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++SELECT dogrant_fails();			-- fails: no self-admin in SECURITY DEFINER
-++DROP FUNCTION dogrant_fails();
-++
-++SET SESSION AUTHORIZATION regressuser4;
-++DROP FUNCTION dogrant_ok();
-++REVOKE regressgroup2 FROM regressuser5;
-++
-++
-+ -- has_sequence_privilege tests
-+ \c -
++ -- test justify_hours() and justify_days()
 + 
 +-- 
 +1.7.5.4
 +
 diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index 9b242e0..d6a4cd7 100644
+index 9cfb2b6..4a62eb6 100644
 --- a/meta-oe/recipes-support/postgresql/postgresql.inc
 +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
-            file://postgresql.service \
-            file://0001-Use-pkg-config-for-libxml2-detection.patch \
-            file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
-+           file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
+@@ -35,6 +35,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+            file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
+            file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
+            file://0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch \
++           file://0006-Fix-handling-of-wide-datetime-input-output.patch \
            "
  
  LEAD_SONAME = "libpq.so"
