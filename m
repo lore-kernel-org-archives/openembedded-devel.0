@@ -1,26 +1,24 @@
-Return-Path: <milo-software@users.sourceforge.net>
-X-Greylist: delayed 457 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 27 Oct 2014 17:43:45 UTC
-Received: from smtp08.online.nl (smtp08.online.nl [194.134.42.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A5DC65D3C
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5249F65CED
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Oct 2014 17:43:45 +0000 (UTC)
-Received: from smtp08.online.nl (localhost [127.0.0.1])
-	by smtp08.online.nl (Postfix) with ESMTP id 6539566445;
-	Mon, 27 Oct 2014 18:36:07 +0100 (CET)
-Received: from phenom.local (s55969068.adsl.online.nl [85.150.144.104])
-	by smtp08.online.nl (Postfix) with ESMTP;
-	Mon, 27 Oct 2014 18:36:07 +0100 (CET)
-From: Mike Looijmans <milo-software@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Oct 2014 18:35:55 +0100
-Message-Id: <1414431355-8764-1-git-send-email-milo-software@users.sourceforge.net>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1413915135-20979-1-git-send-email-milo-software@users.sourceforge.net>
-References: <1413915135-20979-1-git-send-email-milo-software@users.sourceforge.net>
-X-Online-Scanned: by Cloudmark authority (on smtp08.online.nl)
-Cc: Mike Looijmans <milo-software@users.sourceforge.net>
-Subject: [meta-oe][PATCH v2] vlc/libdvdcss: Upgrade to 1.3.0
+	Tue, 28 Oct 2014 03:26:00 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9S3Pxi6003113
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Oct 2014 20:26:00 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 27 Oct 2014 20:25:59 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Oct 2014 11:27:34 +0800
+Message-ID: <1414466854-22119-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] ntp: make daemon run under ntp:ntp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Oct 2014 17:43:51 -0000
+X-List-Received-Date: Tue, 28 Oct 2014 03:26:05 -0000
+Content-Type: text/plain
 
-Tested and in use for a while in OpenPLi.
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Signed-off-by: Mike Looijmans <milo-software@users.sourceforge.net>
+Fix the service so that the ntpd daemon is run under ntp:ntp.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../{libdvdcss_1.2.13.bb => libdvdcss_1.3.0.bb}    |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/vlc/{libdvdcss_1.2.13.bb => libdvdcss_1.3.0.bb} (72%)
+ meta-networking/recipes-support/ntp/ntp/ntpd.service | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
-similarity index 72%
-rename from meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb
-rename to meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
-index 1a316d3..79e64ae 100644
---- a/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.2.13.bb
-+++ b/meta-multimedia/recipes-multimedia/vlc/libdvdcss_1.3.0.bb
-@@ -8,5 +8,5 @@ inherit autotools
+diff --git a/meta-networking/recipes-support/ntp/ntp/ntpd.service b/meta-networking/recipes-support/ntp/ntp/ntpd.service
+index b7c4268..0e3d7cd 100644
+--- a/meta-networking/recipes-support/ntp/ntp/ntpd.service
++++ b/meta-networking/recipes-support/ntp/ntp/ntpd.service
+@@ -5,7 +5,7 @@ After=network.target
+ [Service]
+ Type=forking
+ PIDFile=/run/ntpd.pid
+-ExecStart=/usr/sbin/ntpd -p /run/ntpd.pid -g
++ExecStart=/usr/sbin/ntpd -u ntp:ntp -p /run/ntpd.pid -g
  
- EXTRA_OECONF = " --disable-doc "
- 
--SRC_URI[md5sum] = "53cfc52a60a156763c425572e5179273"
--SRC_URI[sha256sum] = "84f1bba6cfef1df87f774fceaefc8e73c4cda32e8f6700b224ad0acb5511ba2c"
-+SRC_URI[md5sum] = "7f0fdb3ff91d638f5e45ed7536f7eb67"
-+SRC_URI[sha256sum] = "7c414acd520c4e4dd7267952f72d738ff50321a7869af4d75c65aefad44f1395"
+ [Install]
+ WantedBy=multi-user.target
 -- 
-1.7.9.5
+1.9.1
 
 
