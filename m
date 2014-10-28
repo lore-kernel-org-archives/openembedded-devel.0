@@ -1,24 +1,34 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CC1F601F6
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-oi0-f50.google.com (mail-oi0-f50.google.com
+	[209.85.218.50])
+	by mail.openembedded.org (Postfix) with ESMTP id ACED1601F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Oct 2014 07:17:55 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9S7HsmC029455
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 28 Oct 2014 10:46:08 +0000 (UTC)
+Received: by mail-oi0-f50.google.com with SMTP id i138so258968oig.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Oct 2014 00:17:55 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 28 Oct 2014 00:17:54 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Oct 2014 15:19:29 +0800
-Message-ID: <1414480769-23034-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 28 Oct 2014 03:46:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=bSfYxP8ahNAwgX3fGNkXqJy3NX2wd7pVYaDw+o9rJuE=;
+	b=B328N6TneSEtBjslrBU6z5H6Wt8ydjQT8chzTgTjHh/dbNQpJwoQKV9Bv/0S2MjU+c
+	zU8wCEFIGhIZXD+gBU2+Yygu//+sFw5XwASvGYw0wXVh3Z5BZy7f1CtFPP14mRN0OnKB
+	8s3xKlrlzPfmo+j4eIRako9rQSZKdzoiL+VAvDs2z1LGCXiF66K6bmlA//JG/FTIb7q9
+	yL6rTmX34DSXMlB582J22EzfHlYk8Jtx0cA6ck3Yex+2LXlkR7+KmQZBue90taJb80Nu
+	4uKQ1pk0WBYamSru+kZFcOkW0zvNj33hRfn8N4AHJGoF9QOQQ1ghwY9+8okh+lEDd4qf
+	FAow==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] krb5: add initscripts-functions to RDEPENDS
+X-Received: by 10.182.245.225 with SMTP id xr1mr2215986obc.13.1414493169399;
+	Tue, 28 Oct 2014 03:46:09 -0700 (PDT)
+Received: by 10.202.67.84 with HTTP; Tue, 28 Oct 2014 03:46:09 -0700 (PDT)
+In-Reply-To: <1414466854-22119-1-git-send-email-Qi.Chen@windriver.com>
+References: <1414466854-22119-1-git-send-email-Qi.Chen@windriver.com>
+Date: Tue, 28 Oct 2014 11:46:09 +0100
+Message-ID: <CALbNGRTzapqQw+spUpN-iJB1Y8K9c2D7A4jo2RH=eNGsoOcQ6g@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] ntp: make daemon run under ntp:ntp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +42,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Oct 2014 07:17:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 28 Oct 2014 10:46:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Chen Qi <Qi.Chen@windriver.com>
+On Tue, Oct 28, 2014 at 4:27 AM,  <Qi.Chen@windriver.com> wrote:
+> From: Chen Qi <Qi.Chen@windriver.com>
+>
+> Fix the service so that the ntpd daemon is run under ntp:ntp.
+What does this fix?
 
-As this recipe doesn't inherit update-rc.d, we need to add to its
-runtime dependency initscripts-functions ourselves. Otherwise, we
-would spot errors in systemd systems when we execute commands like
-`systemctl start krb5-kdc'.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-index d3c643c..f3f16b9 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-@@ -53,6 +53,9 @@ FILES_${PN} += "${datadir}/gnats"
- FILES_${PN}-doc += "${datadir}/examples"
- FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
- 
-+# As this recipe doesn't inherit update-rc.d, we need to add this dependency here
-+RDEPENDS_${PN} += "initscripts-functions"
-+
- krb5_do_unpack() {
-     # ${P}-signed.tar contains ${P}.tar.gz.asc and ${P}.tar.gz
-     tar xzf ${WORKDIR}/${BP}.tar.gz -C ${WORKDIR}/
--- 
-1.9.1
-
+Andreas
 
