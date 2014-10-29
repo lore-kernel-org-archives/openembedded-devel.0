@@ -1,24 +1,21 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AD9136E633
+Return-Path: <anders@chargestorm.se>
+Received: from stoexhubfe01.domain01.net (STOEXHUBFE01.domain01.net
+	[83.145.59.140])
+	by mail.openembedded.org (Postfix) with ESMTP id 624BE60557
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 08:19:30 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T8JUJY010025
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 01:19:31 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 29 Oct 2014 01:19:30 -0700
-From: <jackie.huang@windriver.com>
+	Wed, 29 Oct 2014 13:35:09 +0000 (UTC)
+Received: from localhost (81.232.163.241) by stoexhubfe01.domain01.net
+	(10.12.10.6) with Microsoft SMTP Server id 8.3.279.1; Wed, 29 Oct 2014
+	14:35:06 +0100
+From: Anders Darander <anders@chargestorm.se>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Oct 2014 04:19:28 -0400
-Message-ID: <1414570768-19068-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
+Date: Wed, 29 Oct 2014 14:34:28 +0100
+Message-ID: <cover.1414589640.git.anders@chargestorm.se>
+X-Mailer: git-send-email 2.1.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] fftw: s/PN/BPN/
+X-GFI-SMTP-Submission: 1
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: [meta-oe][PATCH 0/1] Correct file extension of breakpad generated symbol file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,40 +29,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2014 08:19:31 -0000
+X-List-Received-Date: Wed, 29 Oct 2014 13:35:17 -0000
 Content-Type: text/plain
 
-From: Yue Tao <Yue.Tao@windriver.com>
+It was reported that the generated symbol file had a wrong file extension.
 
-Replace the PN with BPN to fix the multilib build.
+The following changes since commit 374029acf30a3d81540482d348941e96cbd7999c:
 
-The error is:
-/ala-lpggp21/bpiolin/intel-x86-64-gplv2-4/bitbake_build/tmp/pkgdata/*/runtime-reverse/lib32-libfftw:
-No such file or directory
+  efl, elementary, e-wm: upgrade to 1.11.4 and 0.19.1 (2014-10-27 12:50:01 +0100)
 
-Because the PN causes the package is named as lib32-liblib32-fftw.
+are available in the git repository at:
 
-Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-oe/recipes-support/fftw/fftw.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+  git://github.com/darander/meta-openembedded b04cda902acec696949a585033404d1c6ef1ed50
+  https://github.com/darander/meta-openembedded/tree/breakpad-sym
 
-diff --git a/meta-oe/recipes-support/fftw/fftw.inc b/meta-oe/recipes-support/fftw/fftw.inc
-index 9007e1d..1522ea0 100644
---- a/meta-oe/recipes-support/fftw/fftw.inc
-+++ b/meta-oe/recipes-support/fftw/fftw.inc
-@@ -19,7 +19,7 @@ do_configure_prepend() {
-     echo 'AM_PROG_AS' >> ${S}/configure.ac 
- }
- 
--PACKAGES =+ "lib${PN}"
--FILES_lib${PN} = "${libdir}/lib*.so.*"
-+PACKAGES =+ "lib${BPN}"
-+FILES_lib${BPN} = "${libdir}/lib*.so.*"
- 
- # rename binary in /bin and use u-a tpo choose between different precision implementations?
+Anders Darander (1):
+  breakpad: correct the file suffix of the symbol file
+
+ meta-oe/classes/breakpad.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 -- 
-2.0.0
+2.1.1
 
 
