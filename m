@@ -1,27 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A7C9601A0
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E4E2260169
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 00:34:19 +0000 (UTC)
+	Wed, 29 Oct 2014 00:34:17 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9T0YKgb017297
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T0YITU009673
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 28 Oct 2014 17:34:20 -0700 (PDT)
+	Tue, 28 Oct 2014 17:34:18 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Tue, 28 Oct 2014 17:34:19 -0700
+	(TLS) id 14.3.174.1; Tue, 28 Oct 2014 17:34:17 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <otavio@ossystems.com.br>
-Date: Wed, 29 Oct 2014 08:30:53 +0800
-Message-ID: <1414542659-15721-3-git-send-email-kai.kang@windriver.com>
+Date: Wed, 29 Oct 2014 08:30:52 +0800
+Message-ID: <1414542659-15721-2-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1414542659-15721-1-git-send-email-kai.kang@windriver.com>
 References: <1414542659-15721-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: Yue.Tao@windriver.com, openembedded-devel@lists.openembedded.org
-Subject: [PATCH 2/8] postgresql: add fix for CVE-2014-0060 Security Advisory
+Subject: [PATCH 1/8] postgresql: add fix for CVE-2014-0064 Security Advisory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,313 +38,652 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 29 Oct 2014 00:34:22 -0000
 Content-Type: text/plain
 
-PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before 9.1.12,
-9.2.x before 9.2.7, and 9.3.x before 9.3.3 does not properly enforce the
-ADMIN OPTION restriction, which allows remote authenticated members of a
-role to add or remove arbitrary users to that role by calling the SET
-ROLE command before the associated GRANT command.
+Multiple integer overflows in the path_in and other unspecified
+functions in PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before
+9.1.12, 9.2.x before 9.2.7, and 9.3.x before 9.3.3 allow remote
+authenticated users to have unspecified impact and attack vectors, which
+trigger a buffer overflow. NOTE: this identifier has been SPLIT due to
+different affected versions; use CVE-2014-2669 for the hstore vector.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0060
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0064
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../0003-Shore-up-ADMIN-OPTION-restrictions.patch  | 273 +++++++++++++++++++++
- meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
- 2 files changed, 274 insertions(+)
- create mode 100644 meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch
+ ...integer-overflow-to-avoid-buffer-overruns.patch | 605 +++++++++++++++++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |   5 +-
+ 2 files changed, 608 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
 
-diff --git a/meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch b/meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch
+diff --git a/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
 new file mode 100644
-index 0000000..abbe142
+index 0000000..c8b4c80
 --- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch
-@@ -0,0 +1,273 @@
-+From 15a8f97b9d16aaf659f58c981242b9da591cf24c Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+@@ -0,0 +1,605 @@
++From 12bbce15d93d7692ddff1405aa04b67f8a327f57 Mon Sep 17 00:00:00 2001
 +From: Noah Misch <noah@leadboat.com>
 +Date: Mon, 17 Feb 2014 09:33:31 -0500
-+Subject: [PATCH] Shore up ADMIN OPTION restrictions.
++Subject: [PATCH] Predict integer overflow to avoid buffer overruns.
 +
-+commit 15a8f97b9d16aaf659f58c981242b9da591cf24c REL9_2_STABLE
++commit 12bbce15d93d7692ddff1405aa04b67f8a327f57 REL9_2_STABLE
 +
-+Granting a role without ADMIN OPTION is supposed to prevent the grantee
-+from adding or removing members from the granted role.  Issuing SET ROLE
-+before the GRANT bypassed that, because the role itself had an implicit
-+right to add or remove members.  Plug that hole by recognizing that
-+implicit right only when the session user matches the current role.
-+Additionally, do not recognize it during a security-restricted operation
-+or during execution of a SECURITY DEFINER function.  The restriction on
-+SECURITY DEFINER is not security-critical.  However, it seems best for a
-+user testing his own SECURITY DEFINER function to see the same behavior
-+others will see.  Back-patch to 8.4 (all supported versions).
++Several functions, mostly type input functions, calculated an allocation
++size such that the calculation wrapped to a small positive value when
++arguments implied a sufficiently-large requirement.  Writes past the end
++of the inadvertent small allocation followed shortly thereafter.
++Coverity identified the path_in() vulnerability; code inspection led to
++the rest.  In passing, add check_stack_depth() to prevent stack overflow
++in related functions.
 +
-+The SQL standards do not conflate roles and users as PostgreSQL does;
-+only SQL roles have members, and only SQL users initiate sessions.  An
-+application using PostgreSQL users and roles as SQL users and roles will
-+never attempt to grant membership in the role that is the session user,
-+so the implicit right to add or remove members will never arise.
++Back-patch to 8.4 (all supported versions).  The non-comment hstore
++changes touch code that did not exist in 8.4, so that part stops at 9.0.
 +
-+The security impact was mostly that a role member could revoke access
-+from others, contrary to the wishes of his own grantor.  Unapproved role
-+member additions are less notable, because the member can still largely
-+achieve that by creating a view or a SECURITY DEFINER function.
++Noah Misch and Heikki Linnakangas, reviewed by Tom Lane.
 +
-+Reviewed by Andres Freund and Tom Lane.  Reported, independently, by
-+Jonas Sundman and Noah Misch.
-+
-+Security: CVE-2014-0060
-+
++Security: CVE-2014-0064
 +
 +Upstream-Status: Backport
 +
 +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ doc/src/sgml/ref/grant.sgml              |   12 ++++---
-+ src/backend/commands/user.c              |   11 ++++++-
-+ src/backend/utils/adt/acl.c              |   50 ++++++++++++++++++++++++------
-+ src/test/regress/expected/privileges.out |   36 +++++++++++++++++++++-
-+ src/test/regress/sql/privileges.sql      |   29 ++++++++++++++++-
-+ 5 files changed, 120 insertions(+), 18 deletions(-)
++ contrib/hstore/hstore.h              |   15 ++++++++++++---
++ contrib/hstore/hstore_io.c           |   21 +++++++++++++++++++++
++ contrib/hstore/hstore_op.c           |   15 +++++++++++++++
++ contrib/intarray/_int.h              |    2 ++
++ contrib/intarray/_int_bool.c         |    9 +++++++++
++ contrib/ltree/ltree.h                |    3 +++
++ contrib/ltree/ltree_io.c             |   11 +++++++++++
++ contrib/ltree/ltxtquery_io.c         |   13 ++++++++++++-
++ src/backend/utils/adt/geo_ops.c      |   30 ++++++++++++++++++++++++++++--
++ src/backend/utils/adt/tsquery.c      |    7 ++++++-
++ src/backend/utils/adt/tsquery_util.c |    5 +++++
++ src/backend/utils/adt/txid.c         |   15 +++++----------
++ src/backend/utils/adt/varbit.c       |   32 ++++++++++++++++++++++++++++++--
++ src/include/tsearch/ts_type.h        |    3 +++
++ src/include/utils/varbit.h           |    7 +++++++
++ 15 files changed, 169 insertions(+), 19 deletions(-)
 +
-+diff --git a/doc/src/sgml/ref/grant.sgml b/doc/src/sgml/ref/grant.sgml
-+index fb81af4..2b5a843 100644
-+--- a/doc/src/sgml/ref/grant.sgml
-++++ b/doc/src/sgml/ref/grant.sgml
-+@@ -396,11 +396,13 @@ GRANT <replaceable class="PARAMETER">role_name</replaceable> [, ...] TO <replace
-+   <para>
-+    If <literal>WITH ADMIN OPTION</literal> is specified, the member can
-+    in turn grant membership in the role to others, and revoke membership
-+-   in the role as well.  Without the admin option, ordinary users cannot do
-+-   that.  However,
-+-   database superusers can grant or revoke membership in any role to anyone.
-+-   Roles having <literal>CREATEROLE</> privilege can grant or revoke
-+-   membership in any role that is not a superuser.
-++   in the role as well.  Without the admin option, ordinary users cannot
-++   do that.  A role is not considered to hold <literal>WITH ADMIN
-++   OPTION</literal> on itself, but it may grant or revoke membership in
-++   itself from a database session where the session user matches the
-++   role.  Database superusers can grant or revoke membership in any role
-++   to anyone.  Roles having <literal>CREATEROLE</> privilege can grant
-++   or revoke membership in any role that is not a superuser.
-+   </para>
-+ 
-+   <para>
-+diff --git a/src/backend/commands/user.c b/src/backend/commands/user.c
-+index a22092c..39bf172 100644
-+--- a/src/backend/commands/user.c
-++++ b/src/backend/commands/user.c
-+@@ -1334,7 +1334,16 @@ AddRoleMems(const char *rolename, Oid roleid,
-+ 							rolename)));
-+ 	}
-+ 
-+-	/* XXX not sure about this check */
-++	/*
-++	 * The role membership grantor of record has little significance at
-++	 * present.  Nonetheless, inasmuch as users might look to it for a crude
-++	 * audit trail, let only superusers impute the grant to a third party.
-++	 *
-++	 * Before lifting this restriction, give the member == role case of
-++	 * is_admin_of_role() a fresh look.  Ensure that the current role cannot
-++	 * use an explicit grantor specification to take advantage of the session
-++	 * user's self-admin right.
-++	 */
-+ 	if (grantorId != GetUserId() && !superuser())
-+ 		ereport(ERROR,
-+ 				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
-+diff --git a/src/backend/utils/adt/acl.c b/src/backend/utils/adt/acl.c
-+index 1d6ae8b..9a52edb 100644
-+--- a/src/backend/utils/adt/acl.c
-++++ b/src/backend/utils/adt/acl.c
-+@@ -4580,6 +4580,11 @@ pg_role_aclcheck(Oid role_oid, Oid roleid, AclMode mode)
-+ {
-+ 	if (mode & ACL_GRANT_OPTION_FOR(ACL_CREATE))
-+ 	{
-++		/*
-++		 * XXX For roleid == role_oid, is_admin_of_role() also examines the
-++		 * session and call stack.  That suits two-argument pg_has_role(), but
-++		 * it gives the three-argument version a lamentable whimsy.
-++		 */
-+ 		if (is_admin_of_role(roleid, role_oid))
-+ 			return ACLCHECK_OK;
-+ 	}
-+@@ -4897,11 +4902,9 @@ is_member_of_role_nosuper(Oid member, Oid role)
-+ 
++diff --git a/contrib/hstore/hstore.h b/contrib/hstore/hstore.h
++index 8906397..4e55f6e 100644
++--- a/contrib/hstore/hstore.h
+++++ b/contrib/hstore/hstore.h
++@@ -49,9 +49,12 @@ typedef struct
++ } HStore;
 + 
 + /*
-+- * Is member an admin of role (directly or indirectly)?  That is, is it
-+- * a member WITH ADMIN OPTION?
-+- *
-+- * We could cache the result as for is_member_of_role, but currently this
-+- * is not used in any performance-critical paths, so we don't.
-++ * Is member an admin of role?  That is, is member the role itself (subject to
-++ * restrictions below), a member (directly or indirectly) WITH ADMIN OPTION,
-++ * or a superuser?
++- * it's not possible to get more than 2^28 items into an hstore,
++- * so we reserve the top few bits of the size field. See hstore_compat.c
++- * for one reason why.	Some bits are left for future use here.
+++ * It's not possible to get more than 2^28 items into an hstore, so we reserve
+++ * the top few bits of the size field.  See hstore_compat.c for one reason
+++ * why.  Some bits are left for future use here.  MaxAllocSize makes the
+++ * practical count limit slightly more than 2^28 / 3, or INT_MAX / 24, the
+++ * limit for an hstore full of 4-byte keys and null values.  Therefore, we
+++ * don't explicitly check the format-imposed limit.
 +  */
-+ bool
-+ is_admin_of_role(Oid member, Oid role)
-+@@ -4910,14 +4913,41 @@ is_admin_of_role(Oid member, Oid role)
-+ 	List	   *roles_list;
-+ 	ListCell   *l;
++ #define HS_FLAG_NEWVERSION 0x80000000
 + 
-+-	/* Fast path for simple case */
-+-	if (member == role)
-+-		return true;
-+-
-+-	/* Superusers have every privilege, so are part of every role */
-+ 	if (superuser_arg(member))
-+ 		return true;
++@@ -59,6 +62,12 @@ typedef struct
++ #define HS_SETCOUNT(hsp_,c_) ((hsp_)->size_ = (c_) | HS_FLAG_NEWVERSION)
 + 
-++	if (member == role)
-++		/*
-++		 * A role can admin itself when it matches the session user and we're
-++		 * outside any security-restricted operation, SECURITY DEFINER or
-++		 * similar context.  SQL-standard roles cannot self-admin.  However,
-++		 * SQL-standard users are distinct from roles, and they are not
-++		 * grantable like roles: PostgreSQL's role-user duality extends the
-++		 * standard.  Checking for a session user match has the effect of
-++		 * letting a role self-admin only when it's conspicuously behaving
-++		 * like a user.  Note that allowing self-admin under a mere SET ROLE
-++		 * would make WITH ADMIN OPTION largely irrelevant; any member could
-++		 * SET ROLE to issue the otherwise-forbidden command.
-++		 *
-++		 * Withholding self-admin in a security-restricted operation prevents
-++		 * object owners from harnessing the session user identity during
-++		 * administrative maintenance.  Suppose Alice owns a database, has
-++		 * issued "GRANT alice TO bob", and runs a daily ANALYZE.  Bob creates
-++		 * an alice-owned SECURITY DEFINER function that issues "REVOKE alice
-++		 * FROM carol".  If he creates an expression index calling that
-++		 * function, Alice will attempt the REVOKE during each ANALYZE.
-++		 * Checking InSecurityRestrictedOperation() thwarts that attack.
-++		 *
-++		 * Withholding self-admin in SECURITY DEFINER functions makes their
-++		 * behavior independent of the calling user.  There's no security or
-++		 * SQL-standard-conformance need for that restriction, though.
-++		 *
-++		 * A role cannot have actual WITH ADMIN OPTION on itself, because that
-++		 * would imply a membership loop.  Therefore, we're done either way.
-++		 */
-++		return member == GetSessionUserId() &&
-++			!InLocalUserIdChange() && !InSecurityRestrictedOperation();
++ 
+++/*
+++ * "x" comes from an existing HS_COUNT() (as discussed, <= INT_MAX/24) or a
+++ * Pairs array length (due to MaxAllocSize, <= INT_MAX/40).  "lenstr" is no
+++ * more than INT_MAX, that extreme case arising in hstore_from_arrays().
+++ * Therefore, this calculation is limited to about INT_MAX / 5 + INT_MAX.
+++ */
++ #define HSHRDSIZE	(sizeof(HStore))
++ #define CALCDATASIZE(x, lenstr) ( (x) * 2 * sizeof(HEntry) + HSHRDSIZE + (lenstr) )
++ 
++diff --git a/contrib/hstore/hstore_io.c b/contrib/hstore/hstore_io.c
++index dde6c4b..5bcdc95 100644
++--- a/contrib/hstore/hstore_io.c
+++++ b/contrib/hstore/hstore_io.c
++@@ -9,6 +9,7 @@
++ #include "funcapi.h"
++ #include "libpq/pqformat.h"
++ #include "utils/lsyscache.h"
+++#include "utils/memutils.h"
++ #include "utils/typcache.h"
++ 
++ #include "hstore.h"
++@@ -437,6 +438,11 @@ hstore_recv(PG_FUNCTION_ARGS)
++ 		PG_RETURN_POINTER(out);
++ 	}
++ 
+++	if (pcount < 0 || pcount > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 pcount, (int) (MaxAllocSize / sizeof(Pairs)))));
++ 	pairs = palloc(pcount * sizeof(Pairs));
++ 
++ 	for (i = 0; i < pcount; ++i)
++@@ -552,6 +558,13 @@ hstore_from_arrays(PG_FUNCTION_ARGS)
++ 					  TEXTOID, -1, false, 'i',
++ 					  &key_datums, &key_nulls, &key_count);
++ 
+++	/* see discussion in hstoreArrayToPairs() */
+++	if (key_count > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
 ++
++ 	/* value_array might be NULL */
++ 
++ 	if (PG_ARGISNULL(1))
++@@ -674,6 +687,13 @@ hstore_from_array(PG_FUNCTION_ARGS)
++ 
++ 	count = in_count / 2;
++ 
+++	/* see discussion in hstoreArrayToPairs() */
+++	if (count > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 count, (int) (MaxAllocSize / sizeof(Pairs)))));
+++
++ 	pairs = palloc(count * sizeof(Pairs));
++ 
++ 	for (i = 0; i < count; ++i)
++@@ -805,6 +825,7 @@ hstore_from_record(PG_FUNCTION_ARGS)
++ 		my_extra->ncolumns = ncolumns;
++ 	}
++ 
+++	Assert(ncolumns <= MaxTupleAttributeNumber);		/* thus, no overflow */
++ 	pairs = palloc(ncolumns * sizeof(Pairs));
++ 
++ 	if (rec)
++diff --git a/contrib/hstore/hstore_op.c b/contrib/hstore/hstore_op.c
++index fee2c3c..8de175a 100644
++--- a/contrib/hstore/hstore_op.c
+++++ b/contrib/hstore/hstore_op.c
++@@ -7,6 +7,7 @@
++ #include "catalog/pg_type.h"
++ #include "funcapi.h"
++ #include "utils/builtins.h"
+++#include "utils/memutils.h"
++ 
++ #include "hstore.h"
++ 
++@@ -89,6 +90,19 @@ hstoreArrayToPairs(ArrayType *a, int *npairs)
++ 		return NULL;
++ 	}
++ 
+++	/*
+++	 * A text array uses at least eight bytes per element, so any overflow in
+++	 * "key_count * sizeof(Pairs)" is small enough for palloc() to catch.
+++	 * However, credible improvements to the array format could invalidate
+++	 * that assumption.  Therefore, use an explicit check rather than relying
+++	 * on palloc() to complain.
+++	 */
+++	if (key_count > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
+++
++ 	key_pairs = palloc(sizeof(Pairs) * key_count);
++ 
++ 	for (i = 0, j = 0; i < key_count; i++)
++@@ -647,6 +661,7 @@ hstore_slice_to_hstore(PG_FUNCTION_ARGS)
++ 		PG_RETURN_POINTER(out);
++ 	}
++ 
+++	/* hstoreArrayToPairs() checked overflow */
++ 	out_pairs = palloc(sizeof(Pairs) * nkeys);
++ 	bufsiz = 0;
++ 
++diff --git a/contrib/intarray/_int.h b/contrib/intarray/_int.h
++index 11c0698..755cd9e 100644
++--- a/contrib/intarray/_int.h
+++++ b/contrib/intarray/_int.h
++@@ -5,6 +5,7 @@
++ #define ___INT_H__
++ 
++ #include "utils/array.h"
+++#include "utils/memutils.h"
++ 
++ /* number ranges for compression */
++ #define MAXNUMRANGE 100
++@@ -137,6 +138,7 @@ typedef struct QUERYTYPE
++ 
++ #define HDRSIZEQT	offsetof(QUERYTYPE, items)
++ #define COMPUTESIZE(size)	( HDRSIZEQT + (size) * sizeof(ITEM) )
+++#define QUERYTYPEMAXITEMS	((MaxAllocSize - HDRSIZEQT) / sizeof(ITEM))
++ #define GETQUERY(x)  ( (x)->items )
++ 
++ /* "type" codes for ITEM */
++diff --git a/contrib/intarray/_int_bool.c b/contrib/intarray/_int_bool.c
++index 4e63f6d..62294d1 100644
++--- a/contrib/intarray/_int_bool.c
+++++ b/contrib/intarray/_int_bool.c
++@@ -451,6 +451,9 @@ boolop(PG_FUNCTION_ARGS)
++ static void
++ findoprnd(ITEM *ptr, int4 *pos)
++ {
+++	/* since this function recurses, it could be driven to stack overflow. */
+++	check_stack_depth();
+++
++ #ifdef BS_DEBUG
++ 	elog(DEBUG3, (ptr[*pos].type == OPR) ?
++ 		 "%d  %c" : "%d  %d", *pos, ptr[*pos].val);
++@@ -511,7 +514,13 @@ bqarr_in(PG_FUNCTION_ARGS)
++ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
++ 				 errmsg("empty query")));
++ 
+++	if (state.num > QUERYTYPEMAXITEMS)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++		errmsg("number of query items (%d) exceeds the maximum allowed (%d)",
+++			   state.num, (int) QUERYTYPEMAXITEMS)));
++ 	commonlen = COMPUTESIZE(state.num);
+++
++ 	query = (QUERYTYPE *) palloc(commonlen);
++ 	SET_VARSIZE(query, commonlen);
++ 	query->size = state.num;
++diff --git a/contrib/ltree/ltree.h b/contrib/ltree/ltree.h
++index aec4458..49e9907 100644
++--- a/contrib/ltree/ltree.h
+++++ b/contrib/ltree/ltree.h
++@@ -5,6 +5,7 @@
++ 
++ #include "fmgr.h"
++ #include "tsearch/ts_locale.h"
+++#include "utils/memutils.h"
++ 
++ typedef struct
++ {
++@@ -111,6 +112,8 @@ typedef struct
++ 
++ #define HDRSIZEQT		MAXALIGN(VARHDRSZ + sizeof(int4))
++ #define COMPUTESIZE(size,lenofoperand)	( HDRSIZEQT + (size) * sizeof(ITEM) + (lenofoperand) )
+++#define LTXTQUERY_TOO_BIG(size,lenofoperand) \
+++	((size) > (MaxAllocSize - HDRSIZEQT - (lenofoperand)) / sizeof(ITEM))
++ #define GETQUERY(x)  (ITEM*)( (char*)(x)+HDRSIZEQT )
++ #define GETOPERAND(x)	( (char*)GETQUERY(x) + ((ltxtquery*)x)->size * sizeof(ITEM) )
++ 
++diff --git a/contrib/ltree/ltree_io.c b/contrib/ltree/ltree_io.c
++index 3e88b81..d64debb 100644
++--- a/contrib/ltree/ltree_io.c
+++++ b/contrib/ltree/ltree_io.c
++@@ -8,6 +8,7 @@
++ #include <ctype.h>
++ 
++ #include "ltree.h"
+++#include "utils/memutils.h"
++ #include "crc32.h"
++ 
++ PG_FUNCTION_INFO_V1(ltree_in);
++@@ -64,6 +65,11 @@ ltree_in(PG_FUNCTION_ARGS)
++ 		ptr += charlen;
++ 	}
++ 
+++	if (num + 1 > MaxAllocSize / sizeof(nodeitem))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
+++					num + 1, (int) (MaxAllocSize / sizeof(nodeitem)))));
++ 	list = lptr = (nodeitem *) palloc(sizeof(nodeitem) * (num + 1));
++ 	ptr = buf;
++ 	while (*ptr)
++@@ -228,6 +234,11 @@ lquery_in(PG_FUNCTION_ARGS)
++ 	}
++ 
++ 	num++;
+++	if (num > MaxAllocSize / ITEMSIZE)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
+++					num, (int) (MaxAllocSize / ITEMSIZE))));
++ 	curqlevel = tmpql = (lquery_level *) palloc0(ITEMSIZE * num);
++ 	ptr = buf;
++ 	while (*ptr)
++diff --git a/contrib/ltree/ltxtquery_io.c b/contrib/ltree/ltxtquery_io.c
++index 826f4e1..13ea58d 100644
++--- a/contrib/ltree/ltxtquery_io.c
+++++ b/contrib/ltree/ltxtquery_io.c
++@@ -9,6 +9,7 @@
++ 
++ #include "crc32.h"
++ #include "ltree.h"
+++#include "miscadmin.h"
++ 
++ PG_FUNCTION_INFO_V1(ltxtq_in);
++ Datum		ltxtq_in(PG_FUNCTION_ARGS);
++@@ -213,6 +214,9 @@ makepol(QPRS_STATE *state)
++ 	int4		lenstack = 0;
++ 	uint16		flag = 0;
++ 
+++	/* since this function recurses, it could be driven to stack overflow */
+++	check_stack_depth();
+++
++ 	while ((type = gettoken_query(state, &val, &lenval, &strval, &flag)) != END)
++ 	{
++ 		switch (type)
++@@ -277,6 +281,9 @@ makepol(QPRS_STATE *state)
++ static void
++ findoprnd(ITEM *ptr, int4 *pos)
++ {
+++	/* since this function recurses, it could be driven to stack overflow. */
+++	check_stack_depth();
+++
++ 	if (ptr[*pos].type == VAL || ptr[*pos].type == VALTRUE)
++ 	{
++ 		ptr[*pos].left = 0;
++@@ -341,8 +348,12 @@ queryin(char *buf)
++ 				 errmsg("syntax error"),
++ 				 errdetail("Empty query.")));
++ 
++-	/* make finish struct */
+++	if (LTXTQUERY_TOO_BIG(state.num, state.sumlen))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("ltxtquery is too large")));
++ 	commonlen = COMPUTESIZE(state.num, state.sumlen);
+++
++ 	query = (ltxtquery *) palloc(commonlen);
++ 	SET_VARSIZE(query, commonlen);
++ 	query->size = state.num;
++diff --git a/src/backend/utils/adt/geo_ops.c b/src/backend/utils/adt/geo_ops.c
++index ac7b4b8..7ebcaaa 100644
++--- a/src/backend/utils/adt/geo_ops.c
+++++ b/src/backend/utils/adt/geo_ops.c
++@@ -1403,6 +1403,7 @@ path_in(PG_FUNCTION_ARGS)
++ 	char	   *s;
++ 	int			npts;
++ 	int			size;
+++	int			base_size;
++ 	int			depth = 0;
++ 
++ 	if ((npts = pair_count(str, ',')) <= 0)
++@@ -1421,7 +1422,15 @@ path_in(PG_FUNCTION_ARGS)
++ 		depth++;
++ 	}
++ 
++-	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * npts;
+++	base_size = sizeof(path->p[0]) * npts;
+++	size = offsetof(PATH, p[0]) + base_size;
+++
+++	/* Check for integer overflow */
+++	if (base_size / npts != sizeof(path->p[0]) || size <= base_size)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("too many points requested")));
+++
++ 	path = (PATH *) palloc(size);
++ 
++ 	SET_VARSIZE(path, size);
++@@ -3465,6 +3474,7 @@ poly_in(PG_FUNCTION_ARGS)
++ 	POLYGON    *poly;
++ 	int			npts;
++ 	int			size;
+++	int			base_size;
++ 	int			isopen;
++ 	char	   *s;
++ 
++@@ -3473,7 +3483,15 @@ poly_in(PG_FUNCTION_ARGS)
++ 				(errcode(ERRCODE_INVALID_TEXT_REPRESENTATION),
++ 			  errmsg("invalid input syntax for type polygon: \"%s\"", str)));
++ 
++-	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * npts;
+++	base_size = sizeof(poly->p[0]) * npts;
+++	size = offsetof(POLYGON, p[0]) + base_size;
+++
+++	/* Check for integer overflow */
+++	if (base_size / npts != sizeof(poly->p[0]) || size <= base_size)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("too many points requested")));
+++
++ 	poly = (POLYGON *) palloc0(size);	/* zero any holes */
++ 
++ 	SET_VARSIZE(poly, size);
++@@ -4379,6 +4397,10 @@ path_poly(PG_FUNCTION_ARGS)
++ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
++ 				 errmsg("open path cannot be converted to polygon")));
++ 
+++	/*
+++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
+++	 * just a small constant larger.
+++	 */
++ 	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * path->npts;
++ 	poly = (POLYGON *) palloc(size);
++ 
++@@ -4484,6 +4506,10 @@ poly_path(PG_FUNCTION_ARGS)
++ 	int			size;
++ 	int			i;
++ 
+++	/*
+++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
+++	 * smaller by a small constant.
+++	 */
++ 	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * poly->npts;
++ 	path = (PATH *) palloc(size);
++ 
++diff --git a/src/backend/utils/adt/tsquery.c b/src/backend/utils/adt/tsquery.c
++index 6e1f8cf..1322b5e 100644
++--- a/src/backend/utils/adt/tsquery.c
+++++ b/src/backend/utils/adt/tsquery.c
++@@ -515,8 +515,13 @@ parse_tsquery(char *buf,
++ 		return query;
++ 	}
++ 
++-	/* Pack the QueryItems in the final TSQuery struct to return to caller */
+++	if (TSQUERY_TOO_BIG(list_length(state.polstr), state.sumlen))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("tsquery is too large")));
++ 	commonlen = COMPUTESIZE(list_length(state.polstr), state.sumlen);
+++
+++	/* Pack the QueryItems in the final TSQuery struct to return to caller */
++ 	query = (TSQuery) palloc0(commonlen);
++ 	SET_VARSIZE(query, commonlen);
++ 	query->size = list_length(state.polstr);
++diff --git a/src/backend/utils/adt/tsquery_util.c b/src/backend/utils/adt/tsquery_util.c
++index 0724d33..9003702 100644
++--- a/src/backend/utils/adt/tsquery_util.c
+++++ b/src/backend/utils/adt/tsquery_util.c
++@@ -333,6 +333,11 @@ QTN2QT(QTNode *in)
++ 	QTN2QTState state;
++ 
++ 	cntsize(in, &sumlen, &nnode);
+++
+++	if (TSQUERY_TOO_BIG(nnode, sumlen))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("tsquery is too large")));
++ 	len = COMPUTESIZE(nnode, sumlen);
++ 
++ 	out = (TSQuery) palloc0(len);
++diff --git a/src/backend/utils/adt/txid.c b/src/backend/utils/adt/txid.c
++index 08a8c89..c71daaf 100644
++--- a/src/backend/utils/adt/txid.c
+++++ b/src/backend/utils/adt/txid.c
++@@ -27,6 +27,7 @@
++ #include "miscadmin.h"
++ #include "libpq/pqformat.h"
++ #include "utils/builtins.h"
+++#include "utils/memutils.h"
++ #include "utils/snapmgr.h"
++ 
++ 
++@@ -66,6 +67,8 @@ typedef struct
++ 
++ #define TXID_SNAPSHOT_SIZE(nxip) \
++ 	(offsetof(TxidSnapshot, xip) + sizeof(txid) * (nxip))
+++#define TXID_SNAPSHOT_MAX_NXIP \
+++	((MaxAllocSize - offsetof(TxidSnapshot, xip)) / sizeof(txid))
++ 
++ /*
++  * Epoch values from xact.c
++@@ -445,20 +448,12 @@ txid_snapshot_recv(PG_FUNCTION_ARGS)
++ 	txid		last = 0;
++ 	int			nxip;
++ 	int			i;
++-	int			avail;
++-	int			expect;
++ 	txid		xmin,
++ 				xmax;
++ 
++-	/*
++-	 * load nxip and check for nonsense.
++-	 *
++-	 * (nxip > avail) check is against int overflows in 'expect'.
++-	 */
+++	/* load and validate nxip */
++ 	nxip = pq_getmsgint(buf, 4);
++-	avail = buf->len - buf->cursor;
++-	expect = 8 + 8 + nxip * 8;
++-	if (nxip < 0 || nxip > avail || expect > avail)
+++	if (nxip < 0 || nxip > TXID_SNAPSHOT_MAX_NXIP)
++ 		goto bad_format;
++ 
++ 	xmin = pq_getmsgint64(buf);
++diff --git a/src/backend/utils/adt/varbit.c b/src/backend/utils/adt/varbit.c
++index 2bcf5b8..0deefda 100644
++--- a/src/backend/utils/adt/varbit.c
+++++ b/src/backend/utils/adt/varbit.c
++@@ -148,12 +148,22 @@ bit_in(PG_FUNCTION_ARGS)
++ 		sp = input_string;
++ 	}
++ 
+++	/*
+++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
+++	 * input is small enough, but we must check hex input.
+++	 */
++ 	slen = strlen(sp);
++-	/* Determine bitlength from input string */
++ 	if (bit_not_hex)
++ 		bitlen = slen;
++ 	else
+++	{
+++		if (slen > VARBITMAXLEN / 4)
+++			ereport(ERROR,
+++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("bit string length exceeds the maximum allowed (%d)",
+++						VARBITMAXLEN)));
++ 		bitlen = slen * 4;
+++	}
++ 
 + 	/*
-+ 	 * Find all the roles that member is a member of, including multi-level
-+ 	 * recursion.  We build a list in the same way that is_member_of_role does
-+diff --git a/src/test/regress/expected/privileges.out b/src/test/regress/expected/privileges.out
-+index e8930cb..bc6d731 100644
-+--- a/src/test/regress/expected/privileges.out
-++++ b/src/test/regress/expected/privileges.out
-+@@ -32,7 +32,7 @@ ALTER GROUP regressgroup1 ADD USER regressuser4;
-+ ALTER GROUP regressgroup2 ADD USER regressuser2;	-- duplicate
-+ NOTICE:  role "regressuser2" is already a member of role "regressgroup2"
-+ ALTER GROUP regressgroup2 DROP USER regressuser2;
-+-ALTER GROUP regressgroup2 ADD USER regressuser4;
-++GRANT regressgroup2 TO regressuser4 WITH ADMIN OPTION;
-+ -- test owner privileges
-+ SET SESSION AUTHORIZATION regressuser1;
-+ SELECT session_user, current_user;
-+@@ -929,6 +929,40 @@ SELECT has_table_privilege('regressuser1', 'atest4', 'SELECT WITH GRANT OPTION')
-+  t
-+ (1 row)
++ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
++@@ -450,12 +460,22 @@ varbit_in(PG_FUNCTION_ARGS)
++ 		sp = input_string;
++ 	}
 + 
-++-- Admin options
-++SET SESSION AUTHORIZATION regressuser4;
-++CREATE FUNCTION dogrant_ok() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++GRANT regressgroup2 TO regressuser5; -- ok: had ADMIN OPTION
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE suspended privilege
-++ERROR:  must have admin option on role "regressgroup2"
-++SET SESSION AUTHORIZATION regressuser1;
-++GRANT regressgroup2 TO regressuser5; -- fails: no ADMIN OPTION
-++ERROR:  must have admin option on role "regressgroup2"
-++SELECT dogrant_ok();			-- ok: SECURITY DEFINER conveys ADMIN
-++NOTICE:  role "regressuser5" is already a member of role "regressgroup2"
-++CONTEXT:  SQL function "dogrant_ok" statement 1
-++ dogrant_ok 
-++------------
-++ 
-++(1 row)
-++
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE did not help
-++ERROR:  must have admin option on role "regressgroup2"
-++SET SESSION AUTHORIZATION regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- ok: a role can self-admin
-++NOTICE:  role "regressuser5" is already a member of role "regressgroup2"
-++CREATE FUNCTION dogrant_fails() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++SELECT dogrant_fails();			-- fails: no self-admin in SECURITY DEFINER
-++ERROR:  must have admin option on role "regressgroup2"
-++CONTEXT:  SQL function "dogrant_fails" statement 1
-++DROP FUNCTION dogrant_fails();
-++SET SESSION AUTHORIZATION regressuser4;
-++DROP FUNCTION dogrant_ok();
-++REVOKE regressgroup2 FROM regressuser5;
-+ -- has_sequence_privilege tests
-+ \c -
-+ CREATE SEQUENCE x_seq;
-+diff --git a/src/test/regress/sql/privileges.sql b/src/test/regress/sql/privileges.sql
-+index d4d328e..5f1018a 100644
-+--- a/src/test/regress/sql/privileges.sql
-++++ b/src/test/regress/sql/privileges.sql
-+@@ -37,7 +37,7 @@ ALTER GROUP regressgroup1 ADD USER regressuser4;
+++	/*
+++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
+++	 * input is small enough, but we must check hex input.
+++	 */
++ 	slen = strlen(sp);
++-	/* Determine bitlength from input string */
++ 	if (bit_not_hex)
++ 		bitlen = slen;
++ 	else
+++	{
+++		if (slen > VARBITMAXLEN / 4)
+++			ereport(ERROR,
+++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("bit string length exceeds the maximum allowed (%d)",
+++						VARBITMAXLEN)));
++ 		bitlen = slen * 4;
+++	}
 + 
-+ ALTER GROUP regressgroup2 ADD USER regressuser2;	-- duplicate
-+ ALTER GROUP regressgroup2 DROP USER regressuser2;
-+-ALTER GROUP regressgroup2 ADD USER regressuser4;
-++GRANT regressgroup2 TO regressuser4 WITH ADMIN OPTION;
++ 	/*
++ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
++@@ -535,6 +555,9 @@ varbit_in(PG_FUNCTION_ARGS)
++ /*
++  * varbit_out -
++  *	  Prints the string as bits to preserve length accurately
+++ *
+++ * XXX varbit_recv() and hex input to varbit_in() can load a value that this
+++ * cannot emit.  Consider using hex output for such values.
++  */
++ Datum
++ varbit_out(PG_FUNCTION_ARGS)
++@@ -944,6 +967,11 @@ bit_catenate(VarBit *arg1, VarBit *arg2)
++ 	bitlen1 = VARBITLEN(arg1);
++ 	bitlen2 = VARBITLEN(arg2);
 + 
-+ -- test owner privileges
+++	if (bitlen1 > VARBITMAXLEN - bitlen2)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("bit string length exceeds the maximum allowed (%d)",
+++						VARBITMAXLEN)));
++ 	bytelen = VARBITTOTALLEN(bitlen1 + bitlen2);
 + 
-+@@ -581,6 +581,33 @@ SELECT has_table_privilege('regressuser3', 'atest4', 'SELECT'); -- false
-+ SELECT has_table_privilege('regressuser1', 'atest4', 'SELECT WITH GRANT OPTION'); -- true
++ 	result = (VarBit *) palloc(bytelen);
++diff --git a/src/include/tsearch/ts_type.h b/src/include/tsearch/ts_type.h
++index 3adc336..9ee5610 100644
++--- a/src/include/tsearch/ts_type.h
+++++ b/src/include/tsearch/ts_type.h
++@@ -13,6 +13,7 @@
++ #define _PG_TSTYPE_H_
++ 
++ #include "fmgr.h"
+++#include "utils/memutils.h"
++ #include "utils/pg_crc.h"
 + 
 + 
-++-- Admin options
-++
-++SET SESSION AUTHORIZATION regressuser4;
-++CREATE FUNCTION dogrant_ok() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++GRANT regressgroup2 TO regressuser5; -- ok: had ADMIN OPTION
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE suspended privilege
-++
-++SET SESSION AUTHORIZATION regressuser1;
-++GRANT regressgroup2 TO regressuser5; -- fails: no ADMIN OPTION
-++SELECT dogrant_ok();			-- ok: SECURITY DEFINER conveys ADMIN
-++SET ROLE regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- fails: SET ROLE did not help
-++
-++SET SESSION AUTHORIZATION regressgroup2;
-++GRANT regressgroup2 TO regressuser5; -- ok: a role can self-admin
-++CREATE FUNCTION dogrant_fails() RETURNS void LANGUAGE sql SECURITY DEFINER AS
-++	'GRANT regressgroup2 TO regressuser5';
-++SELECT dogrant_fails();			-- fails: no self-admin in SECURITY DEFINER
-++DROP FUNCTION dogrant_fails();
-++
-++SET SESSION AUTHORIZATION regressuser4;
-++DROP FUNCTION dogrant_ok();
-++REVOKE regressgroup2 FROM regressuser5;
-++
-++
-+ -- has_sequence_privilege tests
-+ \c -
++@@ -244,6 +245,8 @@ typedef TSQueryData *TSQuery;
++  * QueryItems, and lenofoperand is the total length of all operands
++  */
++ #define COMPUTESIZE(size, lenofoperand) ( HDRSIZETQ + (size) * sizeof(QueryItem) + (lenofoperand) )
+++#define TSQUERY_TOO_BIG(size, lenofoperand) \
+++	((size) > (MaxAllocSize - HDRSIZETQ - (lenofoperand)) / sizeof(QueryItem))
 + 
++ /* Returns a pointer to the first QueryItem in a TSQuery */
++ #define GETQUERY(x)  ((QueryItem*)( (char*)(x)+HDRSIZETQ ))
++diff --git a/src/include/utils/varbit.h b/src/include/utils/varbit.h
++index 52dca8b..61531a8 100644
++--- a/src/include/utils/varbit.h
+++++ b/src/include/utils/varbit.h
++@@ -15,6 +15,8 @@
++ #ifndef VARBIT_H
++ #define VARBIT_H
++ 
+++#include <limits.h>
+++
++ #include "fmgr.h"
++ 
++ /*
++@@ -53,6 +55,11 @@ typedef struct
++ /* Number of bytes needed to store a bit string of a given length */
++ #define VARBITTOTALLEN(BITLEN)	(((BITLEN) + BITS_PER_BYTE-1)/BITS_PER_BYTE + \
++ 								 VARHDRSZ + VARBITHDRSZ)
+++/*
+++ * Maximum number of bits.  Several code sites assume no overflow from
+++ * computing bitlen + X; VARBITTOTALLEN() has the largest such X.
+++ */
+++#define VARBITMAXLEN		(INT_MAX - BITS_PER_BYTE + 1)
++ /* pointer beyond the end of the bit string (like end() in STL containers) */
++ #define VARBITEND(PTR)		(((bits8 *) (PTR)) + VARSIZE(PTR))
++ /* Mask that will cover exactly one byte, i.e. BITS_PER_BYTE bits */
 +-- 
 +1.7.5.4
 +
 diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index 9b242e0..d6a4cd7 100644
+index d45f4b5..9b242e0 100644
 --- a/meta-oe/recipes-support/postgresql/postgresql.inc
 +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+@@ -28,10 +28,11 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+            file://postgresql.init \
+            file://postgresql-bashprofile \
+            file://postgresql.pam \
+-           file://0001-Use-pkg-config-for-libxml2-detection.patch \
+            file://postgresql-setup \
             file://postgresql.service \
-            file://0001-Use-pkg-config-for-libxml2-detection.patch \
-            file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
-+           file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
-           "
+-"
++           file://0001-Use-pkg-config-for-libxml2-detection.patch \
++           file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
++          "
  
  LEAD_SONAME = "libpq.so"
+ 
 -- 
 1.9.1
 
