@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C6A11601A0
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DF48565D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 05:23:28 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9T5NRLM021076
+	Wed, 29 Oct 2014 06:13:32 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T6DWv2019946
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Oct 2014 22:23:28 -0700 (PDT)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 28 Oct 2014 22:23:27 -0700
-From: <jackie.huang@windriver.com>
+	Tue, 28 Oct 2014 23:13:33 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 28 Oct 2014 23:13:32 -0700
+From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Oct 2014 01:23:26 -0400
-Message-ID: <1414560206-29833-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
+Date: Wed, 29 Oct 2014 14:15:09 +0800
+Message-ID: <1414563309-26793-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] vpnc: use nativeperl to run perl scripts
+Subject: [meta-oe][PATCH] mariadb: change socket location in my.cnf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,45 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2014 05:23:37 -0000
+X-List-Received-Date: Wed, 29 Oct 2014 06:13:37 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Chen Qi <Qi.Chen@windriver.com>
 
-inhert perlnative and make sure we use nativeperl
-to run perl scripts when compile.
+Change socket location to /var/lib/mysql/mysql.sock. Otherwise, we
+could spot errors in systemd systems like below.
 
-fixed:
-| ./makeman.pl
-| Can't locate Fatal.pm in @INC
+mysqladmin: connect to server at 'localhost' failed
+error: 'Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)'
+Check that mysqld is running and that the socket: '/tmp/mysql.sock' exists!
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+This is because mysqld.service is using PrivateTmp=true.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
+ meta-oe/recipes-support/mysql/mariadb/my.cnf |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-index 986416a..4efc412 100644
---- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-+++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
-@@ -7,9 +7,16 @@ LICENSE = "GPL-2.0+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=173b74cb8ac640a9992c03f3bce22a33"
- DEPENDS = "libgcrypt"
+diff --git a/meta-oe/recipes-support/mysql/mariadb/my.cnf b/meta-oe/recipes-support/mysql/mariadb/my.cnf
+index f2c9b90..c9b785b 100644
+--- a/meta-oe/recipes-support/mysql/mariadb/my.cnf
++++ b/meta-oe/recipes-support/mysql/mariadb/my.cnf
+@@ -1,7 +1,7 @@
+ [client]
+ #password					= password
+ port						= 3306
+-socket						= /tmp/mysql.sock
++socket						= /var/lib/mysql/mysql.sock
  
-+inherit perlnative
-+
- CFLAGS_append = ' -DVERSION=\\"${PV}\\"'
- LDFLAGS_append = " -lgcrypt -lgpg-error"
- 
-+do_configure_append () {
-+    # Make sure we use our nativeperl wrapper
-+    sed -i "1s:#!.*:#!/usr/bin/env nativeperl:" ${S}/*.pl
-+}
-+
- do_install () {
-     sed -i s:m600:m\ 600:g Makefile    
-     oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr' install
+ [mysqld_safe]
+ err-log						= /var/log/mysql.err
+@@ -9,7 +9,7 @@ err-log						= /var/log/mysql.err
+ [mysqld]
+ user 						= mysql
+ port 						= 3306
+-socket 						= /tmp/mysql.sock
++socket 						= /var/lib/mysql/mysql.sock
+ pid-file 					= /var/lib/mysql/mysqld.pid
+ log-error 					= /var/log/mysqld.err
+ basedir 					= /usr
 -- 
-2.0.0
+1.7.9.5
 
 
