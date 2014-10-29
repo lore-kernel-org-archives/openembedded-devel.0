@@ -1,27 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E4E2260169
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D15DC60169
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 00:34:17 +0000 (UTC)
+	Wed, 29 Oct 2014 00:34:22 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T0YITU009673
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9T0YNEG017302
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 28 Oct 2014 17:34:18 -0700 (PDT)
+	Tue, 28 Oct 2014 17:34:23 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Tue, 28 Oct 2014 17:34:17 -0700
+	(TLS) id 14.3.174.1; Tue, 28 Oct 2014 17:34:22 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <otavio@ossystems.com.br>
-Date: Wed, 29 Oct 2014 08:30:52 +0800
-Message-ID: <1414542659-15721-2-git-send-email-kai.kang@windriver.com>
+Date: Wed, 29 Oct 2014 08:30:55 +0800
+Message-ID: <1414542659-15721-5-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1414542659-15721-1-git-send-email-kai.kang@windriver.com>
 References: <1414542659-15721-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: Yue.Tao@windriver.com, openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/8] postgresql: add fix for CVE-2014-0064 Security Advisory
+Subject: [PATCH 4/8] postgresql: add fix for CVE-2014-0062 Security Advisory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,655 +35,1126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2014 00:34:22 -0000
+X-List-Received-Date: Wed, 29 Oct 2014 00:34:24 -0000
 Content-Type: text/plain
 
-Multiple integer overflows in the path_in and other unspecified
-functions in PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before
-9.1.12, 9.2.x before 9.2.7, and 9.3.x before 9.3.3 allow remote
-authenticated users to have unspecified impact and attack vectors, which
-trigger a buffer overflow. NOTE: this identifier has been SPLIT due to
-different affected versions; use CVE-2014-2669 for the hstore vector.
+Race condition in the (1) CREATE INDEX and (2) unspecified ALTER TABLE
+commands in PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before
+9.1.12, 9.2.x before 9.2.7, and 9.3.x before 9.3.3 allows remote
+authenticated users to create an unauthorized index or read portions of
+unauthorized tables by creating or deleting a table with the same name
+during the timing window.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0064
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0062
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ...integer-overflow-to-avoid-buffer-overruns.patch | 605 +++++++++++++++++++++
- meta-oe/recipes-support/postgresql/postgresql.inc  |   5 +-
- 2 files changed, 608 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+ ...ted-name-lookups-during-table-and-index-D.patch | 1082 ++++++++++++++++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |    1 +
+ 2 files changed, 1083 insertions(+)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch
 
-diff --git a/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+diff --git a/meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch b/meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch
 new file mode 100644
-index 0000000..c8b4c80
+index 0000000..f1aa212
 --- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
-@@ -0,0 +1,605 @@
-+From 12bbce15d93d7692ddff1405aa04b67f8a327f57 Mon Sep 17 00:00:00 2001
-+From: Noah Misch <noah@leadboat.com>
++++ b/meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch
+@@ -0,0 +1,1082 @@
++From 820ab11fbfd508fc75a39c43ad2c1b3e79c4982b Mon Sep 17 00:00:00 2001
++From: Robert Haas <rhaas@postgresql.org>
 +Date: Mon, 17 Feb 2014 09:33:31 -0500
-+Subject: [PATCH] Predict integer overflow to avoid buffer overruns.
++Subject: [PATCH] Avoid repeated name lookups during table and index DDL.
 +
-+commit 12bbce15d93d7692ddff1405aa04b67f8a327f57 REL9_2_STABLE
++commit 820ab11fbfd508fc75a39c43ad2c1b3e79c4982b REL9_2_STABLE
 +
-+Several functions, mostly type input functions, calculated an allocation
-+size such that the calculation wrapped to a small positive value when
-+arguments implied a sufficiently-large requirement.  Writes past the end
-+of the inadvertent small allocation followed shortly thereafter.
-+Coverity identified the path_in() vulnerability; code inspection led to
-+the rest.  In passing, add check_stack_depth() to prevent stack overflow
-+in related functions.
++If the name lookups come to different conclusions due to concurrent
++activity, we might perform some parts of the DDL on a different table
++than other parts.  At least in the case of CREATE INDEX, this can be
++used to cause the permissions checks to be performed against a
++different table than the index creation, allowing for a privilege
++escalation attack.
 +
-+Back-patch to 8.4 (all supported versions).  The non-comment hstore
-+changes touch code that did not exist in 8.4, so that part stops at 9.0.
++This changes the calling convention for DefineIndex, CreateTrigger,
++transformIndexStmt, transformAlterTableStmt, CheckIndexCompatible
++(in 9.2 and newer), and AlterTable (in 9.1 and older).  In addition,
++CheckRelationOwnership is removed in 9.2 and newer and the calling
++convention is changed in older branches.  A field has also been added
++to the Constraint node (FkConstraint in 8.4).  Third-party code calling
++these functions or using the Constraint node will require updating.
 +
-+Noah Misch and Heikki Linnakangas, reviewed by Tom Lane.
++Report by Andres Freund.  Patch by Robert Haas and Andres Freund,
++reviewed by Tom Lane.
 +
-+Security: CVE-2014-0064
++Security: CVE-2014-0062
 +
 +Upstream-Status: Backport
 +
 +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ contrib/hstore/hstore.h              |   15 ++++++++++++---
-+ contrib/hstore/hstore_io.c           |   21 +++++++++++++++++++++
-+ contrib/hstore/hstore_op.c           |   15 +++++++++++++++
-+ contrib/intarray/_int.h              |    2 ++
-+ contrib/intarray/_int_bool.c         |    9 +++++++++
-+ contrib/ltree/ltree.h                |    3 +++
-+ contrib/ltree/ltree_io.c             |   11 +++++++++++
-+ contrib/ltree/ltxtquery_io.c         |   13 ++++++++++++-
-+ src/backend/utils/adt/geo_ops.c      |   30 ++++++++++++++++++++++++++++--
-+ src/backend/utils/adt/tsquery.c      |    7 ++++++-
-+ src/backend/utils/adt/tsquery_util.c |    5 +++++
-+ src/backend/utils/adt/txid.c         |   15 +++++----------
-+ src/backend/utils/adt/varbit.c       |   32 ++++++++++++++++++++++++++++++--
-+ src/include/tsearch/ts_type.h        |    3 +++
-+ src/include/utils/varbit.h           |    7 +++++++
-+ 15 files changed, 169 insertions(+), 19 deletions(-)
++ src/backend/bootstrap/bootparse.y   |   17 ++++-
++ src/backend/catalog/index.c         |   10 +--
++ src/backend/catalog/pg_constraint.c |   19 +++++
++ src/backend/commands/indexcmds.c    |   22 ++++--
++ src/backend/commands/tablecmds.c    |  137 +++++++++++++++++++++++++----------
++ src/backend/commands/trigger.c      |   28 ++++++--
++ src/backend/nodes/copyfuncs.c       |    1 +
++ src/backend/nodes/equalfuncs.c      |    1 +
++ src/backend/nodes/outfuncs.c        |    1 +
++ src/backend/parser/parse_utilcmd.c  |   64 ++++++-----------
++ src/backend/tcop/utility.c          |   73 +++++++------------
++ src/include/catalog/pg_constraint.h |    1 +
++ src/include/commands/defrem.h       |    4 +-
++ src/include/commands/tablecmds.h    |    2 +
++ src/include/commands/trigger.h      |    2 +-
++ src/include/nodes/parsenodes.h      |    2 +
++ src/include/parser/parse_utilcmd.h  |    5 +-
++ src/include/tcop/utility.h          |    2 -
++ 18 files changed, 234 insertions(+), 157 deletions(-)
 +
-+diff --git a/contrib/hstore/hstore.h b/contrib/hstore/hstore.h
-+index 8906397..4e55f6e 100644
-+--- a/contrib/hstore/hstore.h
-++++ b/contrib/hstore/hstore.h
-+@@ -49,9 +49,12 @@ typedef struct
-+ } HStore;
-+ 
-+ /*
-+- * it's not possible to get more than 2^28 items into an hstore,
-+- * so we reserve the top few bits of the size field. See hstore_compat.c
-+- * for one reason why.	Some bits are left for future use here.
-++ * It's not possible to get more than 2^28 items into an hstore, so we reserve
-++ * the top few bits of the size field.  See hstore_compat.c for one reason
-++ * why.  Some bits are left for future use here.  MaxAllocSize makes the
-++ * practical count limit slightly more than 2^28 / 3, or INT_MAX / 24, the
-++ * limit for an hstore full of 4-byte keys and null values.  Therefore, we
-++ * don't explicitly check the format-imposed limit.
-+  */
-+ #define HS_FLAG_NEWVERSION 0x80000000
-+ 
-+@@ -59,6 +62,12 @@ typedef struct
-+ #define HS_SETCOUNT(hsp_,c_) ((hsp_)->size_ = (c_) | HS_FLAG_NEWVERSION)
-+ 
-+ 
-++/*
-++ * "x" comes from an existing HS_COUNT() (as discussed, <= INT_MAX/24) or a
-++ * Pairs array length (due to MaxAllocSize, <= INT_MAX/40).  "lenstr" is no
-++ * more than INT_MAX, that extreme case arising in hstore_from_arrays().
-++ * Therefore, this calculation is limited to about INT_MAX / 5 + INT_MAX.
-++ */
-+ #define HSHRDSIZE	(sizeof(HStore))
-+ #define CALCDATASIZE(x, lenstr) ( (x) * 2 * sizeof(HEntry) + HSHRDSIZE + (lenstr) )
-+ 
-+diff --git a/contrib/hstore/hstore_io.c b/contrib/hstore/hstore_io.c
-+index dde6c4b..5bcdc95 100644
-+--- a/contrib/hstore/hstore_io.c
-++++ b/contrib/hstore/hstore_io.c
-+@@ -9,6 +9,7 @@
-+ #include "funcapi.h"
-+ #include "libpq/pqformat.h"
-+ #include "utils/lsyscache.h"
-++#include "utils/memutils.h"
-+ #include "utils/typcache.h"
-+ 
-+ #include "hstore.h"
-+@@ -437,6 +438,11 @@ hstore_recv(PG_FUNCTION_ARGS)
-+ 		PG_RETURN_POINTER(out);
-+ 	}
-+ 
-++	if (pcount < 0 || pcount > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 pcount, (int) (MaxAllocSize / sizeof(Pairs)))));
-+ 	pairs = palloc(pcount * sizeof(Pairs));
-+ 
-+ 	for (i = 0; i < pcount; ++i)
-+@@ -552,6 +558,13 @@ hstore_from_arrays(PG_FUNCTION_ARGS)
-+ 					  TEXTOID, -1, false, 'i',
-+ 					  &key_datums, &key_nulls, &key_count);
-+ 
-++	/* see discussion in hstoreArrayToPairs() */
-++	if (key_count > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
-++
-+ 	/* value_array might be NULL */
-+ 
-+ 	if (PG_ARGISNULL(1))
-+@@ -674,6 +687,13 @@ hstore_from_array(PG_FUNCTION_ARGS)
-+ 
-+ 	count = in_count / 2;
-+ 
-++	/* see discussion in hstoreArrayToPairs() */
-++	if (count > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 count, (int) (MaxAllocSize / sizeof(Pairs)))));
-++
-+ 	pairs = palloc(count * sizeof(Pairs));
-+ 
-+ 	for (i = 0; i < count; ++i)
-+@@ -805,6 +825,7 @@ hstore_from_record(PG_FUNCTION_ARGS)
-+ 		my_extra->ncolumns = ncolumns;
-+ 	}
-+ 
-++	Assert(ncolumns <= MaxTupleAttributeNumber);		/* thus, no overflow */
-+ 	pairs = palloc(ncolumns * sizeof(Pairs));
-+ 
-+ 	if (rec)
-+diff --git a/contrib/hstore/hstore_op.c b/contrib/hstore/hstore_op.c
-+index fee2c3c..8de175a 100644
-+--- a/contrib/hstore/hstore_op.c
-++++ b/contrib/hstore/hstore_op.c
-+@@ -7,6 +7,7 @@
-+ #include "catalog/pg_type.h"
-+ #include "funcapi.h"
-+ #include "utils/builtins.h"
-++#include "utils/memutils.h"
-+ 
-+ #include "hstore.h"
-+ 
-+@@ -89,6 +90,19 @@ hstoreArrayToPairs(ArrayType *a, int *npairs)
-+ 		return NULL;
-+ 	}
-+ 
-++	/*
-++	 * A text array uses at least eight bytes per element, so any overflow in
-++	 * "key_count * sizeof(Pairs)" is small enough for palloc() to catch.
-++	 * However, credible improvements to the array format could invalidate
-++	 * that assumption.  Therefore, use an explicit check rather than relying
-++	 * on palloc() to complain.
-++	 */
-++	if (key_count > MaxAllocSize / sizeof(Pairs))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
-++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
-++
-+ 	key_pairs = palloc(sizeof(Pairs) * key_count);
-+ 
-+ 	for (i = 0, j = 0; i < key_count; i++)
-+@@ -647,6 +661,7 @@ hstore_slice_to_hstore(PG_FUNCTION_ARGS)
-+ 		PG_RETURN_POINTER(out);
-+ 	}
-+ 
-++	/* hstoreArrayToPairs() checked overflow */
-+ 	out_pairs = palloc(sizeof(Pairs) * nkeys);
-+ 	bufsiz = 0;
-+ 
-+diff --git a/contrib/intarray/_int.h b/contrib/intarray/_int.h
-+index 11c0698..755cd9e 100644
-+--- a/contrib/intarray/_int.h
-++++ b/contrib/intarray/_int.h
-+@@ -5,6 +5,7 @@
-+ #define ___INT_H__
-+ 
-+ #include "utils/array.h"
-++#include "utils/memutils.h"
-+ 
-+ /* number ranges for compression */
-+ #define MAXNUMRANGE 100
-+@@ -137,6 +138,7 @@ typedef struct QUERYTYPE
-+ 
-+ #define HDRSIZEQT	offsetof(QUERYTYPE, items)
-+ #define COMPUTESIZE(size)	( HDRSIZEQT + (size) * sizeof(ITEM) )
-++#define QUERYTYPEMAXITEMS	((MaxAllocSize - HDRSIZEQT) / sizeof(ITEM))
-+ #define GETQUERY(x)  ( (x)->items )
-+ 
-+ /* "type" codes for ITEM */
-+diff --git a/contrib/intarray/_int_bool.c b/contrib/intarray/_int_bool.c
-+index 4e63f6d..62294d1 100644
-+--- a/contrib/intarray/_int_bool.c
-++++ b/contrib/intarray/_int_bool.c
-+@@ -451,6 +451,9 @@ boolop(PG_FUNCTION_ARGS)
-+ static void
-+ findoprnd(ITEM *ptr, int4 *pos)
-+ {
-++	/* since this function recurses, it could be driven to stack overflow. */
-++	check_stack_depth();
-++
-+ #ifdef BS_DEBUG
-+ 	elog(DEBUG3, (ptr[*pos].type == OPR) ?
-+ 		 "%d  %c" : "%d  %d", *pos, ptr[*pos].val);
-+@@ -511,7 +514,13 @@ bqarr_in(PG_FUNCTION_ARGS)
-+ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-+ 				 errmsg("empty query")));
-+ 
-++	if (state.num > QUERYTYPEMAXITEMS)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++		errmsg("number of query items (%d) exceeds the maximum allowed (%d)",
-++			   state.num, (int) QUERYTYPEMAXITEMS)));
-+ 	commonlen = COMPUTESIZE(state.num);
-++
-+ 	query = (QUERYTYPE *) palloc(commonlen);
-+ 	SET_VARSIZE(query, commonlen);
-+ 	query->size = state.num;
-+diff --git a/contrib/ltree/ltree.h b/contrib/ltree/ltree.h
-+index aec4458..49e9907 100644
-+--- a/contrib/ltree/ltree.h
-++++ b/contrib/ltree/ltree.h
-+@@ -5,6 +5,7 @@
-+ 
-+ #include "fmgr.h"
-+ #include "tsearch/ts_locale.h"
-++#include "utils/memutils.h"
-+ 
-+ typedef struct
-+ {
-+@@ -111,6 +112,8 @@ typedef struct
-+ 
-+ #define HDRSIZEQT		MAXALIGN(VARHDRSZ + sizeof(int4))
-+ #define COMPUTESIZE(size,lenofoperand)	( HDRSIZEQT + (size) * sizeof(ITEM) + (lenofoperand) )
-++#define LTXTQUERY_TOO_BIG(size,lenofoperand) \
-++	((size) > (MaxAllocSize - HDRSIZEQT - (lenofoperand)) / sizeof(ITEM))
-+ #define GETQUERY(x)  (ITEM*)( (char*)(x)+HDRSIZEQT )
-+ #define GETOPERAND(x)	( (char*)GETQUERY(x) + ((ltxtquery*)x)->size * sizeof(ITEM) )
-+ 
-+diff --git a/contrib/ltree/ltree_io.c b/contrib/ltree/ltree_io.c
-+index 3e88b81..d64debb 100644
-+--- a/contrib/ltree/ltree_io.c
-++++ b/contrib/ltree/ltree_io.c
-+@@ -8,6 +8,7 @@
-+ #include <ctype.h>
-+ 
-+ #include "ltree.h"
-++#include "utils/memutils.h"
-+ #include "crc32.h"
-+ 
-+ PG_FUNCTION_INFO_V1(ltree_in);
-+@@ -64,6 +65,11 @@ ltree_in(PG_FUNCTION_ARGS)
-+ 		ptr += charlen;
-+ 	}
-+ 
-++	if (num + 1 > MaxAllocSize / sizeof(nodeitem))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
-++					num + 1, (int) (MaxAllocSize / sizeof(nodeitem)))));
-+ 	list = lptr = (nodeitem *) palloc(sizeof(nodeitem) * (num + 1));
-+ 	ptr = buf;
-+ 	while (*ptr)
-+@@ -228,6 +234,11 @@ lquery_in(PG_FUNCTION_ARGS)
-+ 	}
-+ 
-+ 	num++;
-++	if (num > MaxAllocSize / ITEMSIZE)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
-++					num, (int) (MaxAllocSize / ITEMSIZE))));
-+ 	curqlevel = tmpql = (lquery_level *) palloc0(ITEMSIZE * num);
-+ 	ptr = buf;
-+ 	while (*ptr)
-+diff --git a/contrib/ltree/ltxtquery_io.c b/contrib/ltree/ltxtquery_io.c
-+index 826f4e1..13ea58d 100644
-+--- a/contrib/ltree/ltxtquery_io.c
-++++ b/contrib/ltree/ltxtquery_io.c
-+@@ -9,6 +9,7 @@
-+ 
-+ #include "crc32.h"
-+ #include "ltree.h"
-++#include "miscadmin.h"
-+ 
-+ PG_FUNCTION_INFO_V1(ltxtq_in);
-+ Datum		ltxtq_in(PG_FUNCTION_ARGS);
-+@@ -213,6 +214,9 @@ makepol(QPRS_STATE *state)
-+ 	int4		lenstack = 0;
-+ 	uint16		flag = 0;
-+ 
-++	/* since this function recurses, it could be driven to stack overflow */
-++	check_stack_depth();
-++
-+ 	while ((type = gettoken_query(state, &val, &lenval, &strval, &flag)) != END)
-+ 	{
-+ 		switch (type)
-+@@ -277,6 +281,9 @@ makepol(QPRS_STATE *state)
-+ static void
-+ findoprnd(ITEM *ptr, int4 *pos)
-+ {
-++	/* since this function recurses, it could be driven to stack overflow. */
-++	check_stack_depth();
-++
-+ 	if (ptr[*pos].type == VAL || ptr[*pos].type == VALTRUE)
-+ 	{
-+ 		ptr[*pos].left = 0;
-+@@ -341,8 +348,12 @@ queryin(char *buf)
-+ 				 errmsg("syntax error"),
-+ 				 errdetail("Empty query.")));
-+ 
-+-	/* make finish struct */
-++	if (LTXTQUERY_TOO_BIG(state.num, state.sumlen))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("ltxtquery is too large")));
-+ 	commonlen = COMPUTESIZE(state.num, state.sumlen);
-++
-+ 	query = (ltxtquery *) palloc(commonlen);
-+ 	SET_VARSIZE(query, commonlen);
-+ 	query->size = state.num;
-+diff --git a/src/backend/utils/adt/geo_ops.c b/src/backend/utils/adt/geo_ops.c
-+index ac7b4b8..7ebcaaa 100644
-+--- a/src/backend/utils/adt/geo_ops.c
-++++ b/src/backend/utils/adt/geo_ops.c
-+@@ -1403,6 +1403,7 @@ path_in(PG_FUNCTION_ARGS)
-+ 	char	   *s;
-+ 	int			npts;
-+ 	int			size;
-++	int			base_size;
-+ 	int			depth = 0;
-+ 
-+ 	if ((npts = pair_count(str, ',')) <= 0)
-+@@ -1421,7 +1422,15 @@ path_in(PG_FUNCTION_ARGS)
-+ 		depth++;
-+ 	}
-+ 
-+-	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * npts;
-++	base_size = sizeof(path->p[0]) * npts;
-++	size = offsetof(PATH, p[0]) + base_size;
-++
-++	/* Check for integer overflow */
-++	if (base_size / npts != sizeof(path->p[0]) || size <= base_size)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("too many points requested")));
-++
-+ 	path = (PATH *) palloc(size);
-+ 
-+ 	SET_VARSIZE(path, size);
-+@@ -3465,6 +3474,7 @@ poly_in(PG_FUNCTION_ARGS)
-+ 	POLYGON    *poly;
-+ 	int			npts;
-+ 	int			size;
-++	int			base_size;
-+ 	int			isopen;
-+ 	char	   *s;
-+ 
-+@@ -3473,7 +3483,15 @@ poly_in(PG_FUNCTION_ARGS)
-+ 				(errcode(ERRCODE_INVALID_TEXT_REPRESENTATION),
-+ 			  errmsg("invalid input syntax for type polygon: \"%s\"", str)));
-+ 
-+-	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * npts;
-++	base_size = sizeof(poly->p[0]) * npts;
-++	size = offsetof(POLYGON, p[0]) + base_size;
-++
-++	/* Check for integer overflow */
-++	if (base_size / npts != sizeof(poly->p[0]) || size <= base_size)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("too many points requested")));
-++
-+ 	poly = (POLYGON *) palloc0(size);	/* zero any holes */
-+ 
-+ 	SET_VARSIZE(poly, size);
-+@@ -4379,6 +4397,10 @@ path_poly(PG_FUNCTION_ARGS)
-+ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-+ 				 errmsg("open path cannot be converted to polygon")));
-+ 
-++	/*
-++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
-++	 * just a small constant larger.
-++	 */
-+ 	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * path->npts;
-+ 	poly = (POLYGON *) palloc(size);
-+ 
-+@@ -4484,6 +4506,10 @@ poly_path(PG_FUNCTION_ARGS)
-+ 	int			size;
-+ 	int			i;
-+ 
-++	/*
-++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
-++	 * smaller by a small constant.
-++	 */
-+ 	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * poly->npts;
-+ 	path = (PATH *) palloc(size);
-+ 
-+diff --git a/src/backend/utils/adt/tsquery.c b/src/backend/utils/adt/tsquery.c
-+index 6e1f8cf..1322b5e 100644
-+--- a/src/backend/utils/adt/tsquery.c
-++++ b/src/backend/utils/adt/tsquery.c
-+@@ -515,8 +515,13 @@ parse_tsquery(char *buf,
-+ 		return query;
-+ 	}
-+ 
-+-	/* Pack the QueryItems in the final TSQuery struct to return to caller */
-++	if (TSQUERY_TOO_BIG(list_length(state.polstr), state.sumlen))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("tsquery is too large")));
-+ 	commonlen = COMPUTESIZE(list_length(state.polstr), state.sumlen);
-++
-++	/* Pack the QueryItems in the final TSQuery struct to return to caller */
-+ 	query = (TSQuery) palloc0(commonlen);
-+ 	SET_VARSIZE(query, commonlen);
-+ 	query->size = list_length(state.polstr);
-+diff --git a/src/backend/utils/adt/tsquery_util.c b/src/backend/utils/adt/tsquery_util.c
-+index 0724d33..9003702 100644
-+--- a/src/backend/utils/adt/tsquery_util.c
-++++ b/src/backend/utils/adt/tsquery_util.c
-+@@ -333,6 +333,11 @@ QTN2QT(QTNode *in)
-+ 	QTN2QTState state;
-+ 
-+ 	cntsize(in, &sumlen, &nnode);
-++
-++	if (TSQUERY_TOO_BIG(nnode, sumlen))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("tsquery is too large")));
-+ 	len = COMPUTESIZE(nnode, sumlen);
-+ 
-+ 	out = (TSQuery) palloc0(len);
-+diff --git a/src/backend/utils/adt/txid.c b/src/backend/utils/adt/txid.c
-+index 08a8c89..c71daaf 100644
-+--- a/src/backend/utils/adt/txid.c
-++++ b/src/backend/utils/adt/txid.c
++diff --git a/src/backend/bootstrap/bootparse.y b/src/backend/bootstrap/bootparse.y
++index f4a1b8f..eeffb0f 100644
++--- a/src/backend/bootstrap/bootparse.y
+++++ b/src/backend/bootstrap/bootparse.y
 +@@ -27,6 +27,7 @@
-+ #include "miscadmin.h"
-+ #include "libpq/pqformat.h"
-+ #include "utils/builtins.h"
-++#include "utils/memutils.h"
-+ #include "utils/snapmgr.h"
++ #include "bootstrap/bootstrap.h"
++ #include "catalog/catalog.h"
++ #include "catalog/heap.h"
+++#include "catalog/namespace.h"
++ #include "catalog/pg_am.h"
++ #include "catalog/pg_attribute.h"
++ #include "catalog/pg_authid.h"
++@@ -281,6 +282,7 @@ Boot_DeclareIndexStmt:
++ 		  XDECLARE INDEX boot_ident oidspec ON boot_ident USING boot_ident LPAREN boot_index_params RPAREN
++ 				{
++ 					IndexStmt *stmt = makeNode(IndexStmt);
+++					Oid		relationId;
 + 
++ 					do_start();
 + 
-+@@ -66,6 +67,8 @@ typedef struct
++@@ -302,7 +304,12 @@ Boot_DeclareIndexStmt:
++ 					stmt->initdeferred = false;
++ 					stmt->concurrent = false;
 + 
-+ #define TXID_SNAPSHOT_SIZE(nxip) \
-+ 	(offsetof(TxidSnapshot, xip) + sizeof(txid) * (nxip))
-++#define TXID_SNAPSHOT_MAX_NXIP \
-++	((MaxAllocSize - offsetof(TxidSnapshot, xip)) / sizeof(txid))
++-					DefineIndex(stmt,
+++					/* locks and races need not concern us in bootstrap mode */
+++					relationId = RangeVarGetRelid(stmt->relation, NoLock,
+++												  false);
+++
+++					DefineIndex(relationId,
+++								stmt,
++ 								$4,
++ 								false,
++ 								false,
++@@ -316,6 +323,7 @@ Boot_DeclareUniqueIndexStmt:
++ 		  XDECLARE UNIQUE INDEX boot_ident oidspec ON boot_ident USING boot_ident LPAREN boot_index_params RPAREN
++ 				{
++ 					IndexStmt *stmt = makeNode(IndexStmt);
+++					Oid		relationId;
++ 
++ 					do_start();
++ 
++@@ -337,7 +345,12 @@ Boot_DeclareUniqueIndexStmt:
++ 					stmt->initdeferred = false;
++ 					stmt->concurrent = false;
++ 
++-					DefineIndex(stmt,
+++					/* locks and races need not concern us in bootstrap mode */
+++					relationId = RangeVarGetRelid(stmt->relation, NoLock,
+++												  false);
+++
+++					DefineIndex(relationId,
+++								stmt,
++ 								$5,
++ 								false,
++ 								false,
++diff --git a/src/backend/catalog/index.c b/src/backend/catalog/index.c
++index 7d6346a..ca8acf3 100644
++--- a/src/backend/catalog/index.c
+++++ b/src/backend/catalog/index.c
++@@ -1202,18 +1202,13 @@ index_constraint_create(Relation heapRelation,
++ 	 */
++ 	if (deferrable)
++ 	{
++-		RangeVar   *heapRel;
++ 		CreateTrigStmt *trigger;
++ 
++-		heapRel = makeRangeVar(get_namespace_name(namespaceId),
++-							   pstrdup(RelationGetRelationName(heapRelation)),
++-							   -1);
++-
++ 		trigger = makeNode(CreateTrigStmt);
++ 		trigger->trigname = (constraintType == CONSTRAINT_PRIMARY) ?
++ 			"PK_ConstraintTrigger" :
++ 			"Unique_ConstraintTrigger";
++-		trigger->relation = heapRel;
+++		trigger->relation = NULL;
++ 		trigger->funcname = SystemFuncName("unique_key_recheck");
++ 		trigger->args = NIL;
++ 		trigger->row = true;
++@@ -1226,7 +1221,8 @@ index_constraint_create(Relation heapRelation,
++ 		trigger->initdeferred = initdeferred;
++ 		trigger->constrrel = NULL;
++ 
++-		(void) CreateTrigger(trigger, NULL, conOid, indexRelationId, true);
+++		(void) CreateTrigger(trigger, NULL, RelationGetRelid(heapRelation),
+++							 InvalidOid, conOid, indexRelationId, true);
++ 	}
++ 
++ 	/*
++diff --git a/src/backend/catalog/pg_constraint.c b/src/backend/catalog/pg_constraint.c
++index 107a780..08a94cf 100644
++--- a/src/backend/catalog/pg_constraint.c
+++++ b/src/backend/catalog/pg_constraint.c
++@@ -746,6 +746,25 @@ AlterConstraintNamespaces(Oid ownerId, Oid oldNspId,
++ }
 + 
 + /*
-+  * Epoch values from xact.c
-+@@ -445,20 +448,12 @@ txid_snapshot_recv(PG_FUNCTION_ARGS)
-+ 	txid		last = 0;
-+ 	int			nxip;
+++ * get_constraint_relation_oids
+++ *		Find the IDs of the relations to which a constraint refers.
+++ */
+++void
+++get_constraint_relation_oids(Oid constraint_oid, Oid *conrelid, Oid *confrelid)
+++{
+++	HeapTuple	tup;
+++	Form_pg_constraint	con;
+++
+++	tup = SearchSysCache1(CONSTROID, ObjectIdGetDatum(constraint_oid));
+++	if (!HeapTupleIsValid(tup)) /* should not happen */
+++		elog(ERROR, "cache lookup failed for constraint %u", constraint_oid);
+++	con = (Form_pg_constraint) GETSTRUCT(tup);
+++	*conrelid = con->conrelid;
+++	*confrelid = con->confrelid;
+++	ReleaseSysCache(tup);
+++}
+++
+++/*
++  * get_relation_constraint_oid
++  *		Find a constraint on the specified relation with the specified name.
++  *		Returns constraint's OID.
++diff --git a/src/backend/commands/indexcmds.c b/src/backend/commands/indexcmds.c
++index f3ee278..ec5fb0d 100644
++--- a/src/backend/commands/indexcmds.c
+++++ b/src/backend/commands/indexcmds.c
++@@ -111,7 +111,6 @@ static void RangeVarCallbackForReindexIndex(const RangeVar *relation,
++  */
++ bool
++ CheckIndexCompatible(Oid oldId,
++-					 RangeVar *heapRelation,
++ 					 char *accessMethodName,
++ 					 List *attributeList,
++ 					 List *exclusionOpNames)
++@@ -139,7 +138,7 @@ CheckIndexCompatible(Oid oldId,
++ 	Datum		d;
++ 
++ 	/* Caller should already have the relation locked in some way. */
++-	relationId = RangeVarGetRelid(heapRelation, NoLock, false);
+++	relationId = IndexGetRelation(oldId, false);
++ 
++ 	/*
++ 	 * We can pretend isconstraint = false unconditionally.  It only serves to
++@@ -279,6 +278,8 @@ CheckIndexCompatible(Oid oldId,
++  * DefineIndex
++  *		Creates a new index.
++  *
+++ * 'relationId': the OID of the heap relation on which the index is to be
+++ *		created
++  * 'stmt': IndexStmt describing the properties of the new index.
++  * 'indexRelationId': normally InvalidOid, but during bootstrap can be
++  *		nonzero to specify a preselected OID for the index.
++@@ -292,7 +293,8 @@ CheckIndexCompatible(Oid oldId,
++  * Returns the OID of the created index.
++  */
++ Oid
++-DefineIndex(IndexStmt *stmt,
+++DefineIndex(Oid relationId,
+++			IndexStmt *stmt,
++ 			Oid indexRelationId,
++ 			bool is_alter_table,
++ 			bool check_rights,
++@@ -305,7 +307,6 @@ DefineIndex(IndexStmt *stmt,
++ 	Oid		   *collationObjectId;
++ 	Oid		   *classObjectId;
++ 	Oid			accessMethodId;
++-	Oid			relationId;
++ 	Oid			namespaceId;
++ 	Oid			tablespaceId;
++ 	List	   *indexColNames;
++@@ -325,6 +326,7 @@ DefineIndex(IndexStmt *stmt,
++ 	int			n_old_snapshots;
++ 	LockRelId	heaprelid;
++ 	LOCKTAG		heaplocktag;
+++	LOCKMODE	lockmode;
++ 	Snapshot	snapshot;
 + 	int			i;
-+-	int			avail;
-+-	int			expect;
-+ 	txid		xmin,
-+ 				xmax;
++ 
++@@ -343,14 +345,18 @@ DefineIndex(IndexStmt *stmt,
++ 						INDEX_MAX_KEYS)));
++ 
++ 	/*
++-	 * Open heap relation, acquire a suitable lock on it, remember its OID
++-	 *
++ 	 * Only SELECT ... FOR UPDATE/SHARE are allowed while doing a standard
++ 	 * index build; but for concurrent builds we allow INSERT/UPDATE/DELETE
++ 	 * (but not VACUUM).
+++	 *
+++	 * NB: Caller is responsible for making sure that relationId refers
+++	 * to the relation on which the index should be built; except in bootstrap
+++	 * mode, this will typically require the caller to have already locked
+++	 * the relation.  To avoid lock upgrade hazards, that lock should be at
+++	 * least as strong as the one we take here.
++ 	 */
++-	rel = heap_openrv(stmt->relation,
++-					  (stmt->concurrent ? ShareUpdateExclusiveLock : ShareLock));
+++	lockmode = stmt->concurrent ? ShareUpdateExclusiveLock : ShareLock;
+++	rel = heap_open(relationId, lockmode);
++ 
++ 	relationId = RelationGetRelid(rel);
++ 	namespaceId = RelationGetNamespace(rel);
++diff --git a/src/backend/commands/tablecmds.c b/src/backend/commands/tablecmds.c
++index 7c1f779..bcb81ea 100644
++--- a/src/backend/commands/tablecmds.c
+++++ b/src/backend/commands/tablecmds.c
++@@ -283,7 +283,8 @@ static void validateCheckConstraint(Relation rel, HeapTuple constrtup);
++ static void validateForeignKeyConstraint(char *conname,
++ 							 Relation rel, Relation pkrel,
++ 							 Oid pkindOid, Oid constraintOid);
++-static void createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
+++static void createForeignKeyTriggers(Relation rel, Oid refRelOid,
+++						 Constraint *fkconstraint,
++ 						 Oid constraintOid, Oid indexOid);
++ static void ATController(Relation rel, List *cmds, bool recurse, LOCKMODE lockmode);
++ static void ATPrepCmd(List **wqueue, Relation rel, AlterTableCmd *cmd,
++@@ -360,8 +361,9 @@ static void ATExecAlterColumnType(AlteredTableInfo *tab, Relation rel,
++ static void ATExecAlterColumnGenericOptions(Relation rel, const char *colName,
++ 								List *options, LOCKMODE lockmode);
++ static void ATPostAlterTypeCleanup(List **wqueue, AlteredTableInfo *tab, LOCKMODE lockmode);
++-static void ATPostAlterTypeParse(Oid oldId, char *cmd,
++-					 List **wqueue, LOCKMODE lockmode, bool rewrite);
+++static void ATPostAlterTypeParse(Oid oldId, Oid oldRelId, Oid refRelId,
+++					 char *cmd, List **wqueue, LOCKMODE lockmode,
+++					 bool rewrite);
++ static void TryReuseIndex(Oid oldId, IndexStmt *stmt);
++ static void TryReuseForeignKey(Oid oldId, Constraint *con);
++ static void change_owner_fix_column_acls(Oid relationOid,
++@@ -5406,7 +5408,8 @@ ATExecAddIndex(AlteredTableInfo *tab, Relation rel,
++ 
++ 	/* The IndexStmt has already been through transformIndexStmt */
++ 
++-	new_index = DefineIndex(stmt,
+++	new_index = DefineIndex(RelationGetRelid(rel),
+++							stmt,
++ 							InvalidOid, /* no predefined OID */
++ 							true,		/* is_alter_table */
++ 							check_rights,
++@@ -5728,7 +5731,10 @@ ATAddForeignKeyConstraint(AlteredTableInfo *tab, Relation rel,
++ 	 * table; trying to start with a lesser lock will just create a risk of
++ 	 * deadlock.)
++ 	 */
++-	pkrel = heap_openrv(fkconstraint->pktable, AccessExclusiveLock);
+++	if (OidIsValid(fkconstraint->old_pktable_oid))
+++		pkrel = heap_open(fkconstraint->old_pktable_oid, AccessExclusiveLock);
+++	else
+++		pkrel = heap_openrv(fkconstraint->pktable, AccessExclusiveLock);
++ 
++ 	/*
++ 	 * Validity checks (permission checks wait till we have the column
++@@ -6066,7 +6072,8 @@ ATAddForeignKeyConstraint(AlteredTableInfo *tab, Relation rel,
++ 	/*
++ 	 * Create the triggers that will enforce the constraint.
++ 	 */
++-	createForeignKeyTriggers(rel, fkconstraint, constrOid, indexOid);
+++	createForeignKeyTriggers(rel, RelationGetRelid(pkrel), fkconstraint,
+++							 constrOid, indexOid);
++ 
++ 	/*
++ 	 * Tell Phase 3 to check that the constraint is satisfied by existing
++@@ -6736,7 +6743,7 @@ validateForeignKeyConstraint(char *conname,
++ }
++ 
++ static void
++-CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
+++CreateFKCheckTrigger(Oid myRelOid, Oid refRelOid, Constraint *fkconstraint,
++ 					 Oid constraintOid, Oid indexOid, bool on_insert)
++ {
++ 	CreateTrigStmt *fk_trigger;
++@@ -6752,7 +6759,7 @@ CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
++ 	 */
++ 	fk_trigger = makeNode(CreateTrigStmt);
++ 	fk_trigger->trigname = "RI_ConstraintTrigger_c";
++-	fk_trigger->relation = myRel;
+++	fk_trigger->relation = NULL;
++ 	fk_trigger->row = true;
++ 	fk_trigger->timing = TRIGGER_TYPE_AFTER;
++ 
++@@ -6773,10 +6780,11 @@ CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
++ 	fk_trigger->isconstraint = true;
++ 	fk_trigger->deferrable = fkconstraint->deferrable;
++ 	fk_trigger->initdeferred = fkconstraint->initdeferred;
++-	fk_trigger->constrrel = fkconstraint->pktable;
+++	fk_trigger->constrrel = NULL;
++ 	fk_trigger->args = NIL;
++ 
++-	(void) CreateTrigger(fk_trigger, NULL, constraintOid, indexOid, true);
+++	(void) CreateTrigger(fk_trigger, NULL, myRelOid, refRelOid, constraintOid,
+++						 indexOid, true);
++ 
++ 	/* Make changes-so-far visible */
++ 	CommandCounterIncrement();
++@@ -6786,18 +6794,13 @@ CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
++  * Create the triggers that implement an FK constraint.
++  */
++ static void
++-createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
+++createForeignKeyTriggers(Relation rel, Oid refRelOid, Constraint *fkconstraint,
++ 						 Oid constraintOid, Oid indexOid)
++ {
++-	RangeVar   *myRel;
+++	Oid			myRelOid;
++ 	CreateTrigStmt *fk_trigger;
 + 
 +-	/*
-+-	 * load nxip and check for nonsense.
-+-	 *
-+-	 * (nxip > avail) check is against int overflows in 'expect'.
++-	 * Reconstruct a RangeVar for my relation (not passed in, unfortunately).
 +-	 */
-++	/* load and validate nxip */
-+ 	nxip = pq_getmsgint(buf, 4);
-+-	avail = buf->len - buf->cursor;
-+-	expect = 8 + 8 + nxip * 8;
-+-	if (nxip < 0 || nxip > avail || expect > avail)
-++	if (nxip < 0 || nxip > TXID_SNAPSHOT_MAX_NXIP)
-+ 		goto bad_format;
++-	myRel = makeRangeVar(get_namespace_name(RelationGetNamespace(rel)),
++-						 pstrdup(RelationGetRelationName(rel)),
++-						 -1);
+++	myRelOid = RelationGetRelid(rel);
 + 
-+ 	xmin = pq_getmsgint64(buf);
-+diff --git a/src/backend/utils/adt/varbit.c b/src/backend/utils/adt/varbit.c
-+index 2bcf5b8..0deefda 100644
-+--- a/src/backend/utils/adt/varbit.c
-++++ b/src/backend/utils/adt/varbit.c
-+@@ -148,12 +148,22 @@ bit_in(PG_FUNCTION_ARGS)
-+ 		sp = input_string;
++ 	/* Make changes-so-far visible */
++ 	CommandCounterIncrement();
++@@ -6808,14 +6811,14 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
++ 	 */
++ 	fk_trigger = makeNode(CreateTrigStmt);
++ 	fk_trigger->trigname = "RI_ConstraintTrigger_a";
++-	fk_trigger->relation = fkconstraint->pktable;
+++	fk_trigger->relation = NULL;
++ 	fk_trigger->row = true;
++ 	fk_trigger->timing = TRIGGER_TYPE_AFTER;
++ 	fk_trigger->events = TRIGGER_TYPE_DELETE;
++ 	fk_trigger->columns = NIL;
++ 	fk_trigger->whenClause = NULL;
++ 	fk_trigger->isconstraint = true;
++-	fk_trigger->constrrel = myRel;
+++	fk_trigger->constrrel = NULL;
++ 	switch (fkconstraint->fk_del_action)
++ 	{
++ 		case FKCONSTR_ACTION_NOACTION:
++@@ -6850,7 +6853,8 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
 + 	}
++ 	fk_trigger->args = NIL;
 + 
-++	/*
-++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
-++	 * input is small enough, but we must check hex input.
-++	 */
-+ 	slen = strlen(sp);
-+-	/* Determine bitlength from input string */
-+ 	if (bit_not_hex)
-+ 		bitlen = slen;
-+ 	else
-++	{
-++		if (slen > VARBITMAXLEN / 4)
-++			ereport(ERROR,
-++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("bit string length exceeds the maximum allowed (%d)",
-++						VARBITMAXLEN)));
-+ 		bitlen = slen * 4;
-++	}
++-	(void) CreateTrigger(fk_trigger, NULL, constraintOid, indexOid, true);
+++	(void) CreateTrigger(fk_trigger, NULL, refRelOid, myRelOid, constraintOid,
+++						 indexOid, true);
 + 
-+ 	/*
-+ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
-+@@ -450,12 +460,22 @@ varbit_in(PG_FUNCTION_ARGS)
-+ 		sp = input_string;
++ 	/* Make changes-so-far visible */
++ 	CommandCounterIncrement();
++@@ -6861,14 +6865,14 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
++ 	 */
++ 	fk_trigger = makeNode(CreateTrigStmt);
++ 	fk_trigger->trigname = "RI_ConstraintTrigger_a";
++-	fk_trigger->relation = fkconstraint->pktable;
+++	fk_trigger->relation = NULL;
++ 	fk_trigger->row = true;
++ 	fk_trigger->timing = TRIGGER_TYPE_AFTER;
++ 	fk_trigger->events = TRIGGER_TYPE_UPDATE;
++ 	fk_trigger->columns = NIL;
++ 	fk_trigger->whenClause = NULL;
++ 	fk_trigger->isconstraint = true;
++-	fk_trigger->constrrel = myRel;
+++	fk_trigger->constrrel = NULL;
++ 	switch (fkconstraint->fk_upd_action)
++ 	{
++ 		case FKCONSTR_ACTION_NOACTION:
++@@ -6903,7 +6907,8 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
 + 	}
++ 	fk_trigger->args = NIL;
 + 
-++	/*
-++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
-++	 * input is small enough, but we must check hex input.
-++	 */
-+ 	slen = strlen(sp);
-+-	/* Determine bitlength from input string */
-+ 	if (bit_not_hex)
-+ 		bitlen = slen;
-+ 	else
-++	{
-++		if (slen > VARBITMAXLEN / 4)
-++			ereport(ERROR,
-++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("bit string length exceeds the maximum allowed (%d)",
-++						VARBITMAXLEN)));
-+ 		bitlen = slen * 4;
-++	}
++-	(void) CreateTrigger(fk_trigger, NULL, constraintOid, indexOid, true);
+++	(void) CreateTrigger(fk_trigger, NULL, refRelOid, myRelOid, constraintOid,
+++						 indexOid, true);
 + 
-+ 	/*
-+ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
-+@@ -535,6 +555,9 @@ varbit_in(PG_FUNCTION_ARGS)
++ 	/* Make changes-so-far visible */
++ 	CommandCounterIncrement();
++@@ -6912,8 +6917,10 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
++ 	 * Build and execute CREATE CONSTRAINT TRIGGER statements for the CHECK
++ 	 * action for both INSERTs and UPDATEs on the referencing table.
++ 	 */
++-	CreateFKCheckTrigger(myRel, fkconstraint, constraintOid, indexOid, true);
++-	CreateFKCheckTrigger(myRel, fkconstraint, constraintOid, indexOid, false);
+++	CreateFKCheckTrigger(myRelOid, refRelOid, fkconstraint, constraintOid,
+++						 indexOid, true);
+++	CreateFKCheckTrigger(myRelOid, refRelOid, fkconstraint, constraintOid,
+++						 indexOid, false);
++ }
++ 
 + /*
-+  * varbit_out -
-+  *	  Prints the string as bits to preserve length accurately
-++ *
-++ * XXX varbit_recv() and hex input to varbit_in() can load a value that this
-++ * cannot emit.  Consider using hex output for such values.
-+  */
-+ Datum
-+ varbit_out(PG_FUNCTION_ARGS)
-+@@ -944,6 +967,11 @@ bit_catenate(VarBit *arg1, VarBit *arg2)
-+ 	bitlen1 = VARBITLEN(arg1);
-+ 	bitlen2 = VARBITLEN(arg2);
-+ 
-++	if (bitlen1 > VARBITMAXLEN - bitlen2)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++				 errmsg("bit string length exceeds the maximum allowed (%d)",
-++						VARBITMAXLEN)));
-+ 	bytelen = VARBITTOTALLEN(bitlen1 + bitlen2);
-+ 
-+ 	result = (VarBit *) palloc(bytelen);
-+diff --git a/src/include/tsearch/ts_type.h b/src/include/tsearch/ts_type.h
-+index 3adc336..9ee5610 100644
-+--- a/src/include/tsearch/ts_type.h
-++++ b/src/include/tsearch/ts_type.h
-+@@ -13,6 +13,7 @@
-+ #define _PG_TSTYPE_H_
-+ 
-+ #include "fmgr.h"
-++#include "utils/memutils.h"
-+ #include "utils/pg_crc.h"
-+ 
-+ 
-+@@ -244,6 +245,8 @@ typedef TSQueryData *TSQuery;
-+  * QueryItems, and lenofoperand is the total length of all operands
-+  */
-+ #define COMPUTESIZE(size, lenofoperand) ( HDRSIZETQ + (size) * sizeof(QueryItem) + (lenofoperand) )
-++#define TSQUERY_TOO_BIG(size, lenofoperand) \
-++	((size) > (MaxAllocSize - HDRSIZETQ - (lenofoperand)) / sizeof(QueryItem))
-+ 
-+ /* Returns a pointer to the first QueryItem in a TSQuery */
-+ #define GETQUERY(x)  ((QueryItem*)( (char*)(x)+HDRSIZETQ ))
-+diff --git a/src/include/utils/varbit.h b/src/include/utils/varbit.h
-+index 52dca8b..61531a8 100644
-+--- a/src/include/utils/varbit.h
-++++ b/src/include/utils/varbit.h
-+@@ -15,6 +15,8 @@
-+ #ifndef VARBIT_H
-+ #define VARBIT_H
-+ 
-++#include <limits.h>
++@@ -7832,15 +7839,36 @@ ATPostAlterTypeCleanup(List **wqueue, AlteredTableInfo *tab, LOCKMODE lockmode)
++ 	 * lock on the table the constraint is attached to, and we need to get
++ 	 * that before dropping.  It's safe because the parser won't actually look
++ 	 * at the catalogs to detect the existing entry.
+++	 *
+++	 * We can't rely on the output of deparsing to tell us which relation
+++	 * to operate on, because concurrent activity might have made the name
+++	 * resolve differently.  Instead, we've got to use the OID of the
+++	 * constraint or index we're processing to figure out which relation
+++	 * to operate on.
++ 	 */
++ 	forboth(oid_item, tab->changedConstraintOids,
++ 			def_item, tab->changedConstraintDefs)
++-		ATPostAlterTypeParse(lfirst_oid(oid_item), (char *) lfirst(def_item),
+++	{
+++		Oid		oldId = lfirst_oid(oid_item);
+++		Oid		relid;
+++		Oid		confrelid;
 ++
-+ #include "fmgr.h"
+++		get_constraint_relation_oids(oldId, &relid, &confrelid);
+++		ATPostAlterTypeParse(oldId, relid, confrelid,
+++							 (char *) lfirst(def_item),
++ 							 wqueue, lockmode, tab->rewrite);
+++	}
++ 	forboth(oid_item, tab->changedIndexOids,
++ 			def_item, tab->changedIndexDefs)
++-		ATPostAlterTypeParse(lfirst_oid(oid_item), (char *) lfirst(def_item),
+++	{
+++		Oid		oldId = lfirst_oid(oid_item);
+++		Oid		relid;
+++
+++		relid = IndexGetRelation(oldId, false);
+++		ATPostAlterTypeParse(oldId, relid, InvalidOid,
+++							 (char *) lfirst(def_item),
++ 							 wqueue, lockmode, tab->rewrite);
+++	}
++ 
++ 	/*
++ 	 * Now we can drop the existing constraints and indexes --- constraints
++@@ -7873,12 +7901,13 @@ ATPostAlterTypeCleanup(List **wqueue, AlteredTableInfo *tab, LOCKMODE lockmode)
++ }
++ 
++ static void
++-ATPostAlterTypeParse(Oid oldId, char *cmd,
+++ATPostAlterTypeParse(Oid oldId, Oid oldRelId, Oid refRelId, char *cmd,
++ 					 List **wqueue, LOCKMODE lockmode, bool rewrite)
++ {
++ 	List	   *raw_parsetree_list;
++ 	List	   *querytree_list;
++ 	ListCell   *list_item;
+++	Relation	rel;
++ 
++ 	/*
++ 	 * We expect that we will get only ALTER TABLE and CREATE INDEX
++@@ -7894,16 +7923,21 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
++ 
++ 		if (IsA(stmt, IndexStmt))
++ 			querytree_list = lappend(querytree_list,
++-									 transformIndexStmt((IndexStmt *) stmt,
+++									 transformIndexStmt(oldRelId,
+++														(IndexStmt *) stmt,
++ 														cmd));
++ 		else if (IsA(stmt, AlterTableStmt))
++ 			querytree_list = list_concat(querytree_list,
++-							 transformAlterTableStmt((AlterTableStmt *) stmt,
+++							 transformAlterTableStmt(oldRelId,
+++													 (AlterTableStmt *) stmt,
++ 													 cmd));
++ 		else
++ 			querytree_list = lappend(querytree_list, stmt);
++ 	}
++ 
+++	/* Caller should already have acquired whatever lock we need. */
+++	rel = relation_open(oldRelId, NoLock);
+++
++ 	/*
++ 	 * Attach each generated command to the proper place in the work queue.
++ 	 * Note this could result in creation of entirely new work-queue entries.
++@@ -7915,7 +7949,6 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
++ 	foreach(list_item, querytree_list)
++ 	{
++ 		Node	   *stm = (Node *) lfirst(list_item);
++-		Relation	rel;
++ 		AlteredTableInfo *tab;
++ 
++ 		switch (nodeTag(stm))
++@@ -7928,14 +7961,12 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
++ 					if (!rewrite)
++ 						TryReuseIndex(oldId, stmt);
++ 
++-					rel = relation_openrv(stmt->relation, lockmode);
++ 					tab = ATGetQueueEntry(wqueue, rel);
++ 					newcmd = makeNode(AlterTableCmd);
++ 					newcmd->subtype = AT_ReAddIndex;
++ 					newcmd->def = (Node *) stmt;
++ 					tab->subcmds[AT_PASS_OLD_INDEX] =
++ 						lappend(tab->subcmds[AT_PASS_OLD_INDEX], newcmd);
++-					relation_close(rel, NoLock);
++ 					break;
++ 				}
++ 			case T_AlterTableStmt:
++@@ -7943,7 +7974,6 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
++ 					AlterTableStmt *stmt = (AlterTableStmt *) stm;
++ 					ListCell   *lcmd;
++ 
++-					rel = relation_openrv(stmt->relation, lockmode);
++ 					tab = ATGetQueueEntry(wqueue, rel);
++ 					foreach(lcmd, stmt->cmds)
++ 					{
++@@ -7964,6 +7994,7 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
++ 							case AT_AddConstraint:
++ 								Assert(IsA(cmd->def, Constraint));
++ 								con = (Constraint *) cmd->def;
+++								con->old_pktable_oid = refRelId;
++ 								/* rewriting neither side of a FK */
++ 								if (con->contype == CONSTR_FOREIGN &&
++ 									!rewrite && !tab->rewrite)
++@@ -7977,7 +8008,6 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
++ 									 (int) cmd->subtype);
++ 						}
++ 					}
++-					relation_close(rel, NoLock);
++ 					break;
++ 				}
++ 			default:
++@@ -7985,6 +8015,8 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
++ 					 (int) nodeTag(stm));
++ 		}
++ 	}
+++
+++	relation_close(rel, NoLock);
++ }
 + 
 + /*
-+@@ -53,6 +55,11 @@ typedef struct
-+ /* Number of bytes needed to store a bit string of a given length */
-+ #define VARBITTOTALLEN(BITLEN)	(((BITLEN) + BITS_PER_BYTE-1)/BITS_PER_BYTE + \
-+ 								 VARHDRSZ + VARBITHDRSZ)
-++/*
-++ * Maximum number of bits.  Several code sites assume no overflow from
-++ * computing bitlen + X; VARBITTOTALLEN() has the largest such X.
++@@ -7995,7 +8027,6 @@ static void
++ TryReuseIndex(Oid oldId, IndexStmt *stmt)
++ {
++ 	if (CheckIndexCompatible(oldId,
++-							 stmt->relation,
++ 							 stmt->accessMethod,
++ 							 stmt->indexParams,
++ 							 stmt->excludeOpNames))
++@@ -10291,6 +10322,38 @@ RangeVarCallbackOwnsTable(const RangeVar *relation,
++ }
++ 
++ /*
+++ * Callback to RangeVarGetRelidExtended(), similar to
+++ * RangeVarCallbackOwnsTable() but without checks on the type of the relation.
 ++ */
-++#define VARBITMAXLEN		(INT_MAX - BITS_PER_BYTE + 1)
-+ /* pointer beyond the end of the bit string (like end() in STL containers) */
-+ #define VARBITEND(PTR)		(((bits8 *) (PTR)) + VARSIZE(PTR))
-+ /* Mask that will cover exactly one byte, i.e. BITS_PER_BYTE bits */
+++void
+++RangeVarCallbackOwnsRelation(const RangeVar *relation,
+++							 Oid relId, Oid oldRelId, void *arg)
+++{
+++	HeapTuple	tuple;
+++
+++	/* Nothing to do if the relation was not found. */
+++	if (!OidIsValid(relId))
+++		return;
+++
+++	tuple = SearchSysCache1(RELOID, ObjectIdGetDatum(relId));
+++	if (!HeapTupleIsValid(tuple))		/* should not happen */
+++		elog(ERROR, "cache lookup failed for relation %u", relId);
+++
+++	if (!pg_class_ownercheck(relId, GetUserId()))
+++		aclcheck_error(ACLCHECK_NOT_OWNER, ACL_KIND_CLASS,
+++					   relation->relname);
+++
+++	if (!allowSystemTableMods &&
+++		IsSystemClass((Form_pg_class) GETSTRUCT(tuple)))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
+++				 errmsg("permission denied: \"%s\" is a system catalog",
+++						relation->relname)));
+++
+++	ReleaseSysCache(tuple);
+++}
+++
+++/*
++  * Common RangeVarGetRelid callback for rename, set schema, and alter table
++  * processing.
++  */
++diff --git a/src/backend/commands/trigger.c b/src/backend/commands/trigger.c
++index f546d94..9e6c954 100644
++--- a/src/backend/commands/trigger.c
+++++ b/src/backend/commands/trigger.c
++@@ -42,6 +42,7 @@
++ #include "pgstat.h"
++ #include "rewrite/rewriteManip.h"
++ #include "storage/bufmgr.h"
+++#include "storage/lmgr.h"
++ #include "tcop/utility.h"
++ #include "utils/acl.h"
++ #include "utils/builtins.h"
++@@ -94,6 +95,13 @@ static void AfterTriggerSaveEvent(EState *estate, ResultRelInfo *relinfo,
++  * queryString is the source text of the CREATE TRIGGER command.
++  * This must be supplied if a whenClause is specified, else it can be NULL.
++  *
+++ * relOid, if nonzero, is the relation on which the trigger should be
+++ * created.  If zero, the name provided in the statement will be looked up.
+++ *
+++ * refRelOid, if nonzero, is the relation to which the constraint trigger
+++ * refers.  If zero, the constraint relation name provided in the statement
+++ * will be looked up as needed.
+++ *
++  * constraintOid, if nonzero, says that this trigger is being created
++  * internally to implement that constraint.  A suitable pg_depend entry will
++  * be made to link the trigger to that constraint.	constraintOid is zero when
++@@ -116,7 +124,7 @@ static void AfterTriggerSaveEvent(EState *estate, ResultRelInfo *relinfo,
++  */
++ Oid
++ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
++-			  Oid constraintOid, Oid indexOid,
+++			  Oid relOid, Oid refRelOid, Oid constraintOid, Oid indexOid,
++ 			  bool isInternal)
++ {
++ 	int16		tgtype;
++@@ -145,7 +153,10 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
++ 	ObjectAddress myself,
++ 				referenced;
++ 
++-	rel = heap_openrv(stmt->relation, AccessExclusiveLock);
+++	if (OidIsValid(relOid))
+++		rel = heap_open(relOid, AccessExclusiveLock);
+++	else
+++		rel = heap_openrv(stmt->relation, AccessExclusiveLock);
++ 
++ 	/*
++ 	 * Triggers must be on tables or views, and there are additional
++@@ -194,7 +205,7 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
++ 				 errmsg("permission denied: \"%s\" is a system catalog",
++ 						RelationGetRelationName(rel))));
++ 
++-	if (stmt->isconstraint && stmt->constrrel != NULL)
+++	if (stmt->isconstraint)
++ 	{
++ 		/*
++ 		 * We must take a lock on the target relation to protect against
++@@ -203,7 +214,14 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
++ 		 * might end up creating a pg_constraint entry referencing a
++ 		 * nonexistent table.
++ 		 */
++-		constrrelid = RangeVarGetRelid(stmt->constrrel, AccessShareLock, false);
+++		if (OidIsValid(refRelOid))
+++		{
+++			LockRelationOid(refRelOid, AccessShareLock);
+++			constrrelid = refRelOid;
+++		}
+++		else if (stmt->constrrel != NULL)
+++			constrrelid = RangeVarGetRelid(stmt->constrrel, AccessShareLock,
+++										   false);
++ 	}
++ 
++ 	/* permission checks */
++@@ -513,7 +531,7 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
++ 				ereport(ERROR,
++ 						(errcode(ERRCODE_DUPLICATE_OBJECT),
++ 				  errmsg("trigger \"%s\" for relation \"%s\" already exists",
++-						 trigname, stmt->relation->relname)));
+++						 trigname, RelationGetRelationName(rel))));
++ 		}
++ 		systable_endscan(tgscan);
++ 	}
++diff --git a/src/backend/nodes/copyfuncs.c b/src/backend/nodes/copyfuncs.c
++index 9bac994..dbe0f6a 100644
++--- a/src/backend/nodes/copyfuncs.c
+++++ b/src/backend/nodes/copyfuncs.c
++@@ -2357,6 +2357,7 @@ _copyConstraint(const Constraint *from)
++ 	COPY_SCALAR_FIELD(fk_upd_action);
++ 	COPY_SCALAR_FIELD(fk_del_action);
++ 	COPY_NODE_FIELD(old_conpfeqop);
+++	COPY_SCALAR_FIELD(old_pktable_oid);
++ 	COPY_SCALAR_FIELD(skip_validation);
++ 	COPY_SCALAR_FIELD(initially_valid);
++ 
++diff --git a/src/backend/nodes/equalfuncs.c b/src/backend/nodes/equalfuncs.c
++index d185654..f8770b0 100644
++--- a/src/backend/nodes/equalfuncs.c
+++++ b/src/backend/nodes/equalfuncs.c
++@@ -2143,6 +2143,7 @@ _equalConstraint(const Constraint *a, const Constraint *b)
++ 	COMPARE_SCALAR_FIELD(fk_upd_action);
++ 	COMPARE_SCALAR_FIELD(fk_del_action);
++ 	COMPARE_NODE_FIELD(old_conpfeqop);
+++	COMPARE_SCALAR_FIELD(old_pktable_oid);
++ 	COMPARE_SCALAR_FIELD(skip_validation);
++ 	COMPARE_SCALAR_FIELD(initially_valid);
++ 
++diff --git a/src/backend/nodes/outfuncs.c b/src/backend/nodes/outfuncs.c
++index 1df71f6..888ffd2 100644
++--- a/src/backend/nodes/outfuncs.c
+++++ b/src/backend/nodes/outfuncs.c
++@@ -2653,6 +2653,7 @@ _outConstraint(StringInfo str, const Constraint *node)
++ 			WRITE_CHAR_FIELD(fk_upd_action);
++ 			WRITE_CHAR_FIELD(fk_del_action);
++ 			WRITE_NODE_FIELD(old_conpfeqop);
+++			WRITE_OID_FIELD(old_pktable_oid);
++ 			WRITE_BOOL_FIELD(skip_validation);
++ 			WRITE_BOOL_FIELD(initially_valid);
++ 			break;
++diff --git a/src/backend/parser/parse_utilcmd.c b/src/backend/parser/parse_utilcmd.c
++index e3f9c62..5df939a 100644
++--- a/src/backend/parser/parse_utilcmd.c
+++++ b/src/backend/parser/parse_utilcmd.c
++@@ -1867,14 +1867,18 @@ transformFKConstraints(CreateStmtContext *cxt,
++  * a predicate expression.	There are several code paths that create indexes
++  * without bothering to call this, because they know they don't have any
++  * such expressions to deal with.
+++ *
+++ * To avoid race conditions, it's important that this function rely only on
+++ * the passed-in relid (and not on stmt->relation) to determine the target
+++ * relation.
++  */
++ IndexStmt *
++-transformIndexStmt(IndexStmt *stmt, const char *queryString)
+++transformIndexStmt(Oid relid, IndexStmt *stmt, const char *queryString)
++ {
++-	Relation	rel;
++ 	ParseState *pstate;
++ 	RangeTblEntry *rte;
++ 	ListCell   *l;
+++	Relation	rel;
++ 
++ 	/*
++ 	 * We must not scribble on the passed-in IndexStmt, so copy it.  (This is
++@@ -1882,26 +1886,17 @@ transformIndexStmt(IndexStmt *stmt, const char *queryString)
++ 	 */
++ 	stmt = (IndexStmt *) copyObject(stmt);
++ 
++-	/*
++-	 * Open the parent table with appropriate locking.	We must do this
++-	 * because addRangeTableEntry() would acquire only AccessShareLock,
++-	 * leaving DefineIndex() needing to do a lock upgrade with consequent risk
++-	 * of deadlock.  Make sure this stays in sync with the type of lock
++-	 * DefineIndex() wants. If we are being called by ALTER TABLE, we will
++-	 * already hold a higher lock.
++-	 */
++-	rel = heap_openrv(stmt->relation,
++-				  (stmt->concurrent ? ShareUpdateExclusiveLock : ShareLock));
++-
++ 	/* Set up pstate */
++ 	pstate = make_parsestate(NULL);
++ 	pstate->p_sourcetext = queryString;
++ 
++ 	/*
++ 	 * Put the parent table into the rtable so that the expressions can refer
++-	 * to its fields without qualification.
+++	 * to its fields without qualification.  Caller is responsible for locking
+++	 * relation, but we still need to open it.
++ 	 */
++-	rte = addRangeTableEntry(pstate, stmt->relation, NULL, false, true);
+++	rel = relation_open(relid, NoLock);
+++	rte = addRangeTableEntryForRelation(pstate, rel, NULL, false, true);
++ 
++ 	/* no to join list, yes to namespaces */
++ 	addRTEtoQuery(pstate, rte, false, true, true);
++@@ -1955,7 +1950,7 @@ transformIndexStmt(IndexStmt *stmt, const char *queryString)
++ 
++ 	free_parsestate(pstate);
++ 
++-	/* Close relation, but keep the lock */
+++	/* Close relation */
++ 	heap_close(rel, NoLock);
++ 
++ 	return stmt;
++@@ -2277,9 +2272,14 @@ transformRuleStmt(RuleStmt *stmt, const char *queryString,
++  * Returns a List of utility commands to be done in sequence.  One of these
++  * will be the transformed AlterTableStmt, but there may be additional actions
++  * to be done before and after the actual AlterTable() call.
+++ *
+++ * To avoid race conditions, it's important that this function rely only on
+++ * the passed-in relid (and not on stmt->relation) to determine the target
+++ * relation.
++  */
++ List *
++-transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
+++transformAlterTableStmt(Oid relid, AlterTableStmt *stmt,
+++						const char *queryString)
++ {
++ 	Relation	rel;
++ 	ParseState *pstate;
++@@ -2291,7 +2291,6 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
++ 	List	   *newcmds = NIL;
++ 	bool		skipValidation = true;
++ 	AlterTableCmd *newcmd;
++-	LOCKMODE	lockmode;
++ 
++ 	/*
++ 	 * We must not scribble on the passed-in AlterTableStmt, so copy it. (This
++@@ -2299,29 +2298,8 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
++ 	 */
++ 	stmt = (AlterTableStmt *) copyObject(stmt);
++ 
++-	/*
++-	 * Determine the appropriate lock level for this list of subcommands.
++-	 */
++-	lockmode = AlterTableGetLockLevel(stmt->cmds);
++-
++-	/*
++-	 * Acquire appropriate lock on the target relation, which will be held
++-	 * until end of transaction.  This ensures any decisions we make here
++-	 * based on the state of the relation will still be good at execution. We
++-	 * must get lock now because execution will later require it; taking a
++-	 * lower grade lock now and trying to upgrade later risks deadlock.  Any
++-	 * new commands we add after this must not upgrade the lock level
++-	 * requested here.
++-	 */
++-	rel = relation_openrv_extended(stmt->relation, lockmode, stmt->missing_ok);
++-	if (rel == NULL)
++-	{
++-		/* this message is consistent with relation_openrv */
++-		ereport(NOTICE,
++-				(errmsg("relation \"%s\" does not exist, skipping",
++-						stmt->relation->relname)));
++-		return NIL;
++-	}
+++	/* Caller is responsible for locking the relation */
+++	rel = relation_open(relid, NoLock);
++ 
++ 	/* Set up pstate and CreateStmtContext */
++ 	pstate = make_parsestate(NULL);
++@@ -2434,7 +2412,7 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
++ 		IndexStmt  *idxstmt = (IndexStmt *) lfirst(l);
++ 
++ 		Assert(IsA(idxstmt, IndexStmt));
++-		idxstmt = transformIndexStmt(idxstmt, queryString);
+++		idxstmt = transformIndexStmt(relid, idxstmt, queryString);
++ 		newcmd = makeNode(AlterTableCmd);
++ 		newcmd->subtype = OidIsValid(idxstmt->indexOid) ? AT_AddIndexConstraint : AT_AddIndex;
++ 		newcmd->def = (Node *) idxstmt;
++@@ -2458,7 +2436,7 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
++ 		newcmds = lappend(newcmds, newcmd);
++ 	}
++ 
++-	/* Close rel but keep lock */
+++	/* Close rel */
++ 	relation_close(rel, NoLock);
++ 
++ 	/*
++diff --git a/src/backend/tcop/utility.c b/src/backend/tcop/utility.c
++index 509bf4d..7903e03 100644
++--- a/src/backend/tcop/utility.c
+++++ b/src/backend/tcop/utility.c
++@@ -67,49 +67,6 @@ ProcessUtility_hook_type ProcessUtility_hook = NULL;
++ 
++ 
++ /*
++- * Verify user has ownership of specified relation, else ereport.
++- *
++- * If noCatalogs is true then we also deny access to system catalogs,
++- * except when allowSystemTableMods is true.
++- */
++-void
++-CheckRelationOwnership(RangeVar *rel, bool noCatalogs)
++-{
++-	Oid			relOid;
++-	HeapTuple	tuple;
++-
++-	/*
++-	 * XXX: This is unsafe in the presence of concurrent DDL, since it is
++-	 * called before acquiring any lock on the target relation.  However,
++-	 * locking the target relation (especially using something like
++-	 * AccessExclusiveLock) before verifying that the user has permissions is
++-	 * not appealing either.
++-	 */
++-	relOid = RangeVarGetRelid(rel, NoLock, false);
++-
++-	tuple = SearchSysCache1(RELOID, ObjectIdGetDatum(relOid));
++-	if (!HeapTupleIsValid(tuple))		/* should not happen */
++-		elog(ERROR, "cache lookup failed for relation %u", relOid);
++-
++-	if (!pg_class_ownercheck(relOid, GetUserId()))
++-		aclcheck_error(ACLCHECK_NOT_OWNER, ACL_KIND_CLASS,
++-					   rel->relname);
++-
++-	if (noCatalogs)
++-	{
++-		if (!allowSystemTableMods &&
++-			IsSystemClass((Form_pg_class) GETSTRUCT(tuple)))
++-			ereport(ERROR,
++-					(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
++-					 errmsg("permission denied: \"%s\" is a system catalog",
++-							rel->relname)));
++-	}
++-
++-	ReleaseSysCache(tuple);
++-}
++-
++-
++-/*
++  * CommandIsReadOnly: is an executable query read-only?
++  *
++  * This is a much stricter test than we apply for XactReadOnly mode;
++@@ -723,7 +680,8 @@ standard_ProcessUtility(Node *parsetree,
++ 				if (OidIsValid(relid))
++ 				{
++ 					/* Run parse analysis ... */
++-					stmts = transformAlterTableStmt(atstmt, queryString);
+++					stmts = transformAlterTableStmt(relid, atstmt,
+++													queryString);
++ 
++ 					/* ... and do it */
++ 					foreach(l, stmts)
++@@ -910,18 +868,36 @@ standard_ProcessUtility(Node *parsetree,
++ 		case T_IndexStmt:		/* CREATE INDEX */
++ 			{
++ 				IndexStmt  *stmt = (IndexStmt *) parsetree;
+++				Oid			relid;
+++				LOCKMODE	lockmode;
++ 
++ 				if (stmt->concurrent)
++ 					PreventTransactionChain(isTopLevel,
++ 											"CREATE INDEX CONCURRENTLY");
++ 
++-				CheckRelationOwnership(stmt->relation, true);
+++				/*
+++				 * Look up the relation OID just once, right here at the
+++				 * beginning, so that we don't end up repeating the name
+++				 * lookup later and latching onto a different relation
+++				 * partway through.  To avoid lock upgrade hazards, it's
+++				 * important that we take the strongest lock that will
+++				 * eventually be needed here, so the lockmode calculation
+++				 * needs to match what DefineIndex() does.
+++				 */
+++				lockmode = stmt->concurrent ? ShareUpdateExclusiveLock
+++					: ShareLock;
+++				relid =
+++					RangeVarGetRelidExtended(stmt->relation, lockmode,
+++											 false, false,
+++											 RangeVarCallbackOwnsRelation,
+++											 NULL);
++ 
++ 				/* Run parse analysis ... */
++-				stmt = transformIndexStmt(stmt, queryString);
+++				stmt = transformIndexStmt(relid, stmt, queryString);
++ 
++ 				/* ... and do it */
++-				DefineIndex(stmt,
+++				DefineIndex(relid,	/* OID of heap relation */
+++							stmt,
++ 							InvalidOid, /* no predefined OID */
++ 							false,		/* is_alter_table */
++ 							true,		/* check_rights */
++@@ -1057,7 +1033,8 @@ standard_ProcessUtility(Node *parsetree,
++ 
++ 		case T_CreateTrigStmt:
++ 			(void) CreateTrigger((CreateTrigStmt *) parsetree, queryString,
++-								 InvalidOid, InvalidOid, false);
+++								 InvalidOid, InvalidOid, InvalidOid,
+++								 InvalidOid, false);
++ 			break;
++ 
++ 		case T_CreatePLangStmt:
++diff --git a/src/include/catalog/pg_constraint.h b/src/include/catalog/pg_constraint.h
++index d9d40b2..d8f8da4 100644
++--- a/src/include/catalog/pg_constraint.h
+++++ b/src/include/catalog/pg_constraint.h
++@@ -246,6 +246,7 @@ extern char *ChooseConstraintName(const char *name1, const char *name2,
++ 
++ extern void AlterConstraintNamespaces(Oid ownerId, Oid oldNspId,
++ 						  Oid newNspId, bool isType, ObjectAddresses *objsMoved);
+++extern void get_constraint_relation_oids(Oid constraint_oid, Oid *conrelid, Oid *confrelid);
++ extern Oid	get_relation_constraint_oid(Oid relid, const char *conname, bool missing_ok);
++ extern Oid	get_domain_constraint_oid(Oid typid, const char *conname, bool missing_ok);
++ 
++diff --git a/src/include/commands/defrem.h b/src/include/commands/defrem.h
++index 9b6d57a..a00fd37 100644
++--- a/src/include/commands/defrem.h
+++++ b/src/include/commands/defrem.h
++@@ -20,7 +20,8 @@
++ extern void RemoveObjects(DropStmt *stmt);
++ 
++ /* commands/indexcmds.c */
++-extern Oid DefineIndex(IndexStmt *stmt,
+++extern Oid DefineIndex(Oid relationId,
+++			IndexStmt *stmt,
++ 			Oid indexRelationId,
++ 			bool is_alter_table,
++ 			bool check_rights,
++@@ -35,7 +36,6 @@ extern char *makeObjectName(const char *name1, const char *name2,
++ extern char *ChooseRelationName(const char *name1, const char *name2,
++ 				   const char *label, Oid namespaceid);
++ extern bool CheckIndexCompatible(Oid oldId,
++-					 RangeVar *heapRelation,
++ 					 char *accessMethodName,
++ 					 List *attributeList,
++ 					 List *exclusionOpNames);
++diff --git a/src/include/commands/tablecmds.h b/src/include/commands/tablecmds.h
++index 4f32062..d41f8a1 100644
++--- a/src/include/commands/tablecmds.h
+++++ b/src/include/commands/tablecmds.h
++@@ -78,4 +78,6 @@ extern void AtEOSubXact_on_commit_actions(bool isCommit,
++ extern void RangeVarCallbackOwnsTable(const RangeVar *relation,
++ 						  Oid relId, Oid oldRelId, void *arg);
++ 
+++extern void RangeVarCallbackOwnsRelation(const RangeVar *relation,
+++						  Oid relId, Oid oldRelId, void *noCatalogs);
++ #endif   /* TABLECMDS_H */
++diff --git a/src/include/commands/trigger.h b/src/include/commands/trigger.h
++index 9303341..0869c0b 100644
++--- a/src/include/commands/trigger.h
+++++ b/src/include/commands/trigger.h
++@@ -109,7 +109,7 @@ extern PGDLLIMPORT int SessionReplicationRole;
++ #define TRIGGER_DISABLED					'D'
++ 
++ extern Oid CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
++-			  Oid constraintOid, Oid indexOid,
+++			  Oid relOid, Oid refRelOid, Oid constraintOid, Oid indexOid,
++ 			  bool isInternal);
++ 
++ extern void RemoveTriggerById(Oid trigOid);
++diff --git a/src/include/nodes/parsenodes.h b/src/include/nodes/parsenodes.h
++index 327f7cf..31f5479 100644
++--- a/src/include/nodes/parsenodes.h
+++++ b/src/include/nodes/parsenodes.h
++@@ -1566,6 +1566,8 @@ typedef struct Constraint
++ 	/* Fields used for constraints that allow a NOT VALID specification */
++ 	bool		skip_validation;	/* skip validation of existing rows? */
++ 	bool		initially_valid;	/* mark the new constraint as valid? */
+++
+++	Oid			old_pktable_oid; /* pg_constraint.confrelid of my former self */
++ } Constraint;
++ 
++ /* ----------------------
++diff --git a/src/include/parser/parse_utilcmd.h b/src/include/parser/parse_utilcmd.h
++index 4ad793a..d8b340e 100644
++--- a/src/include/parser/parse_utilcmd.h
+++++ b/src/include/parser/parse_utilcmd.h
++@@ -18,9 +18,10 @@
++ 
++ 
++ extern List *transformCreateStmt(CreateStmt *stmt, const char *queryString);
++-extern List *transformAlterTableStmt(AlterTableStmt *stmt,
+++extern List *transformAlterTableStmt(Oid relid, AlterTableStmt *stmt,
++ 						const char *queryString);
++-extern IndexStmt *transformIndexStmt(IndexStmt *stmt, const char *queryString);
+++extern IndexStmt *transformIndexStmt(Oid relid, IndexStmt *stmt,
+++				   const char *queryString);
++ extern void transformRuleStmt(RuleStmt *stmt, const char *queryString,
++ 				  List **actions, Node **whereClause);
++ extern List *transformCreateSchemaStmt(CreateSchemaStmt *stmt);
++diff --git a/src/include/tcop/utility.h b/src/include/tcop/utility.h
++index 54190b2..ae871ca 100644
++--- a/src/include/tcop/utility.h
+++++ b/src/include/tcop/utility.h
++@@ -42,6 +42,4 @@ extern LogStmtLevel GetCommandLogLevel(Node *parsetree);
++ 
++ extern bool CommandIsReadOnly(Node *parsetree);
++ 
++-extern void CheckRelationOwnership(RangeVar *rel, bool noCatalogs);
++-
++ #endif   /* UTILITY_H */
 +-- 
 +1.7.5.4
 +
 diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index d45f4b5..9b242e0 100644
+index e2e5947..9cfb2b6 100644
 --- a/meta-oe/recipes-support/postgresql/postgresql.inc
 +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -28,10 +28,11 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
-            file://postgresql.init \
-            file://postgresql-bashprofile \
-            file://postgresql.pam \
--           file://0001-Use-pkg-config-for-libxml2-detection.patch \
-            file://postgresql-setup \
-            file://postgresql.service \
--"
-+           file://0001-Use-pkg-config-for-libxml2-detection.patch \
-+           file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
-+          "
+@@ -34,6 +34,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+            file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
+            file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
+            file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
++           file://0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch \
+           "
  
  LEAD_SONAME = "libpq.so"
- 
 -- 
 1.9.1
 
