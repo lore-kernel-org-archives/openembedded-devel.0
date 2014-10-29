@@ -1,27 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1440970E0B
+	by mail.openembedded.org (Postfix) with ESMTP id 9892C70350
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 00:34:21 +0000 (UTC)
+	Wed, 29 Oct 2014 00:34:24 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T0YLsk009681
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T0YPZ8009695
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 28 Oct 2014 17:34:21 -0700 (PDT)
+	Tue, 28 Oct 2014 17:34:25 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Tue, 28 Oct 2014 17:34:21 -0700
+	(TLS) id 14.3.174.1; Tue, 28 Oct 2014 17:34:24 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <otavio@ossystems.com.br>
-Date: Wed, 29 Oct 2014 08:30:54 +0800
-Message-ID: <1414542659-15721-4-git-send-email-kai.kang@windriver.com>
+Date: Wed, 29 Oct 2014 08:30:56 +0800
+Message-ID: <1414542659-15721-6-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1414542659-15721-1-git-send-email-kai.kang@windriver.com>
 References: <1414542659-15721-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
 Cc: Yue.Tao@windriver.com, openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/8] postgresql: add fix for CVE-2014-0061 Security Advisory
+Subject: [PATCH 5/8] postgresql: add fix for CVE-2014-0063 Security Advisory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,306 +36,507 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 29 Oct 2014 00:34:24 -0000
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-The validator functions for the procedural languages (PLs) in PostgreSQL
-before 8.4.20, 9.0.x before 9.0.16, 9.1.x before 9.1.12, 9.2.x before
-9.2.7, and 9.3.x before 9.3.3 allow remote authenticated users to gain
-privileges via a function that is (1) defined in another language or (2)
-not allowed to be directly called by the user due to permissions.
+Multiple stack-based buffer overflows in PostgreSQL before 8.4.20, 9.0.x
+before 9.0.16, 9.1.x before 9.1.12, 9.2.x before 9.2.7, and 9.3.x before
+9.3.3 allow remote authenticated users to cause a denial of service
+(crash) or possibly execute arbitrary code via vectors related to an
+incorrect MAXDATELEN constant and datetime values involving (1)
+intervals, (2) timestamps, or (3) timezones, a different vulnerability
+than CVE-2014-0065.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0061
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0063
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ...vilege-escalation-in-explicit-calls-to-PL.patch | 267 +++++++++++++++++++++
+ ...ix-handling-of-wide-datetime-input-output.patch | 465 +++++++++++++++++++++
  meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
- 2 files changed, 268 insertions(+)
- create mode 100644 meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch
+ 2 files changed, 466 insertions(+)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
 
-diff --git a/meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch b/meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch
+diff --git a/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch b/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
 new file mode 100644
-index 0000000..cc2183a
+index 0000000..fac0a73
 --- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch
-@@ -0,0 +1,267 @@
-+From 1d701d28a796ea2d1a4d2be9e9ee06209eaea040 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
+@@ -0,0 +1,465 @@
++From f416622be81d1320417bbc7892fd562cae0dba72 Mon Sep 17 00:00:00 2001
 +From: Noah Misch <noah@leadboat.com>
 +Date: Mon, 17 Feb 2014 09:33:31 -0500
-+Subject: [PATCH] Prevent privilege escalation in explicit calls to PL
-+ validators.
++Subject: [PATCH] Fix handling of wide datetime input/output.
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+commit 1d701d28a796ea2d1a4d2be9e9ee06209eaea040 REL9_2_STABLE
++commit f416622be81d1320417bbc7892fd562cae0dba72 REL9_2_STABLE
 +
-+The primary role of PL validators is to be called implicitly during
-+CREATE FUNCTION, but they are also normal functions that a user can call
-+explicitly.  Add a permissions check to each validator to ensure that a
-+user cannot use explicit validator calls to achieve things he could not
-+otherwise achieve.  Back-patch to 8.4 (all supported versions).
-+Non-core procedural language extensions ought to make the same two-line
-+change to their own validators.
++Many server functions use the MAXDATELEN constant to size a buffer for
++parsing or displaying a datetime value.  It was much too small for the
++longest possible interval output and slightly too small for certain
++valid timestamp input, particularly input with a long timezone name.
++The long input was rejected needlessly; the long output caused
++interval_out() to overrun its buffer.  ECPG's pgtypes library has a copy
++of the vulnerable functions, which bore the same vulnerabilities along
++with some of its own.  In contrast to the server, certain long inputs
++caused stack overflow rather than failing cleanly.  Back-patch to 8.4
++(all supported versions).
 +
-+Andres Freund, reviewed by Tom Lane and Noah Misch.
++Reported by Daniel Schüssler, reviewed by Tom Lane.
 +
-+Security: CVE-2014-0061
++Security: CVE-2014-0063
++
 +
 +Upstream-Status: Backport
++
 +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ doc/src/sgml/plhandler.sgml         |    5 ++-
-+ src/backend/catalog/pg_proc.c       |    9 ++++
-+ src/backend/commands/functioncmds.c |    1 -
-+ src/backend/utils/fmgr/fmgr.c       |   84 +++++++++++++++++++++++++++++++++++
-+ src/include/fmgr.h                  |    1 +
-+ src/pl/plperl/plperl.c              |    4 ++
-+ src/pl/plpgsql/src/pl_handler.c     |    3 +
-+ src/pl/plpython/plpy_main.c         |    4 ++
-+ 8 files changed, 109 insertions(+), 2 deletions(-)
++ src/include/utils/datetime.h                       |   17 +++++---
++ src/interfaces/ecpg/pgtypeslib/datetime.c          |    4 +-
++ src/interfaces/ecpg/pgtypeslib/dt.h                |   17 +++++---
++ src/interfaces/ecpg/pgtypeslib/dt_common.c         |   44 ++++++++++++++------
++ src/interfaces/ecpg/pgtypeslib/interval.c          |    2 +-
++ src/interfaces/ecpg/pgtypeslib/timestamp.c         |    2 +-
++ .../ecpg/test/expected/pgtypeslib-dt_test2.c       |   22 +++++++---
++ .../ecpg/test/expected/pgtypeslib-dt_test2.stdout  |   19 ++++++++
++ src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc   |   10 ++++
++ src/test/regress/expected/interval.out             |    7 +++
++ src/test/regress/sql/interval.sql                  |    2 +
++ 11 files changed, 111 insertions(+), 35 deletions(-)
 +
-+diff --git a/doc/src/sgml/plhandler.sgml b/doc/src/sgml/plhandler.sgml
-+index 024ef9d..aa4bba3 100644
-+--- a/doc/src/sgml/plhandler.sgml
-++++ b/doc/src/sgml/plhandler.sgml
-+@@ -178,7 +178,10 @@ CREATE LANGUAGE plsample
-+     or updated a function written in the procedural language.
-+     The passed-in OID is the OID of the function's <classname>pg_proc</>
-+     row.  The validator must fetch this row in the usual way, and do
-+-    whatever checking is appropriate.  Typical checks include verifying
-++    whatever checking is appropriate.
-++    First, call <function>CheckFunctionValidatorAccess()</> to diagnose
-++    explicit calls to the validator that the user could not achieve through
-++    <command>CREATE FUNCTION</>.  Typical checks then include verifying
-+     that the function's argument and result types are supported by the
-+     language, and that the function's body is syntactically correct
-+     in the language.  If the validator finds the function to be okay,
-+diff --git a/src/backend/catalog/pg_proc.c b/src/backend/catalog/pg_proc.c
-+index 3812408..3124868 100644
-+--- a/src/backend/catalog/pg_proc.c
-++++ b/src/backend/catalog/pg_proc.c
-+@@ -718,6 +718,9 @@ fmgr_internal_validator(PG_FUNCTION_ARGS)
-+ 	Datum		tmp;
-+ 	char	   *prosrc;
++diff --git a/src/include/utils/datetime.h b/src/include/utils/datetime.h
++index d73cc8d..4b805b6 100644
++--- a/src/include/utils/datetime.h
+++++ b/src/include/utils/datetime.h
++@@ -188,12 +188,17 @@ struct tzEntry;
++ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
++ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_ALL_SECS_M)
 + 
-++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
-++		PG_RETURN_VOID();
-++
-+ 	/*
-+ 	 * We do not honor check_function_bodies since it's unlikely the function
-+ 	 * name will be found later if it isn't there now.
-+@@ -763,6 +766,9 @@ fmgr_c_validator(PG_FUNCTION_ARGS)
-+ 	char	   *prosrc;
-+ 	char	   *probin;
-+ 
-++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
-++		PG_RETURN_VOID();
-++
-+ 	/*
-+ 	 * It'd be most consistent to skip the check if !check_function_bodies,
-+ 	 * but the purpose of that switch is to be helpful for pg_dump loading,
-+@@ -814,6 +820,9 @@ fmgr_sql_validator(PG_FUNCTION_ARGS)
-+ 	bool		haspolyarg;
-+ 	int			i;
-+ 
-++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
-++		PG_RETURN_VOID();
-++
-+ 	tuple = SearchSysCache1(PROCOID, ObjectIdGetDatum(funcoid));
-+ 	if (!HeapTupleIsValid(tuple))
-+ 		elog(ERROR, "cache lookup failed for function %u", funcoid);
-+diff --git a/src/backend/commands/functioncmds.c b/src/backend/commands/functioncmds.c
-+index 9ba6dd8..ea74b5e 100644
-+--- a/src/backend/commands/functioncmds.c
-++++ b/src/backend/commands/functioncmds.c
-+@@ -997,7 +997,6 @@ CreateFunction(CreateFunctionStmt *stmt, const char *queryString)
-+ 					prorows);
-+ }
-+ 
-+-
-+ /*
-+  * Guts of function deletion.
-+  *
-+diff --git a/src/backend/utils/fmgr/fmgr.c b/src/backend/utils/fmgr/fmgr.c
-+index 2ec63fa..8d6f183 100644
-+--- a/src/backend/utils/fmgr/fmgr.c
-++++ b/src/backend/utils/fmgr/fmgr.c
-+@@ -24,6 +24,7 @@
-+ #include "miscadmin.h"
-+ #include "nodes/nodeFuncs.h"
-+ #include "pgstat.h"
-++#include "utils/acl.h"
-+ #include "utils/builtins.h"
-+ #include "utils/fmgrtab.h"
-+ #include "utils/guc.h"
-+@@ -2445,3 +2446,86 @@ get_call_expr_arg_stable(Node *expr, int argnum)
-+ 
-+ 	return false;
-+ }
-++
-++/*-------------------------------------------------------------------------
-++ *		Support routines for procedural language implementations
-++ *-------------------------------------------------------------------------
-++ */
-++
++-#define MAXDATELEN		63		/* maximum possible length of an input date
++-								 * string (not counting tr. null) */
++-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
++-								 * string */
++-#define TOKMAXLEN		10		/* only this many chars are stored in
++-								 * datetktbl */
 ++/*
-++ * Verify that a validator is actually associated with the language of a
-++ * particular function and that the user has access to both the language and
-++ * the function.  All validators should call this before doing anything
-++ * substantial.  Doing so ensures a user cannot achieve anything with explicit
-++ * calls to validators that he could not achieve with CREATE FUNCTION or by
-++ * simply calling an existing function.
-++ *
-++ * When this function returns false, callers should skip all validation work
-++ * and call PG_RETURN_VOID().  This never happens at present; it is reserved
-++ * for future expansion.
-++ *
-++ * In particular, checking that the validator corresponds to the function's
-++ * language allows untrusted language validators to assume they process only
-++ * superuser-chosen source code.  (Untrusted language call handlers, by
-++ * definition, do assume that.)  A user lacking the USAGE language privilege
-++ * would be unable to reach the validator through CREATE FUNCTION, so we check
-++ * that to block explicit calls as well.  Checking the EXECUTE privilege on
-++ * the function is often superfluous, because most users can clone the
-++ * function to get an executable copy.  It is meaningful against users with no
-++ * database TEMP right and no permanent schema CREATE right, thereby unable to
-++ * create any function.  Also, if the function tracks persistent state by
-++ * function OID or name, validating the original function might permit more
-++ * mischief than creating and validating a clone thereof.
+++ * Working buffer size for input and output of interval, timestamp, etc.
+++ * Inputs that need more working space will be rejected early.  Longer outputs
+++ * will overrun buffers, so this must suffice for all possible output.  As of
+++ * this writing, interval_out() needs the most space at ~90 bytes.
 ++ */
-++bool
-++CheckFunctionValidatorAccess(Oid validatorOid, Oid functionOid)
-++{
-++	HeapTuple	procTup;
-++	HeapTuple	langTup;
-++	Form_pg_proc procStruct;
-++	Form_pg_language langStruct;
-++	AclResult	aclresult;
-++
-++	/* Get the function's pg_proc entry */
-++	procTup = SearchSysCache1(PROCOID, ObjectIdGetDatum(functionOid));
-++	if (!HeapTupleIsValid(procTup))
-++		elog(ERROR, "cache lookup failed for function %u", functionOid);
-++	procStruct = (Form_pg_proc) GETSTRUCT(procTup);
-++
-++	/*
-++	 * Fetch pg_language entry to know if this is the correct validation
-++	 * function for that pg_proc entry.
-++	 */
-++	langTup = SearchSysCache1(LANGOID, ObjectIdGetDatum(procStruct->prolang));
-++	if (!HeapTupleIsValid(langTup))
-++		elog(ERROR, "cache lookup failed for language %u", procStruct->prolang);
-++	langStruct = (Form_pg_language) GETSTRUCT(langTup);
-++
-++	if (langStruct->lanvalidator != validatorOid)
-++		ereport(ERROR,
-++				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
-++				 errmsg("language validation function %u called for language %u instead of %u",
-++						validatorOid, procStruct->prolang,
-++						langStruct->lanvalidator)));
-++
-++	/* first validate that we have permissions to use the language */
-++	aclresult = pg_language_aclcheck(procStruct->prolang, GetUserId(),
-++									 ACL_USAGE);
-++	if (aclresult != ACLCHECK_OK)
-++		aclcheck_error(aclresult, ACL_KIND_LANGUAGE,
-++					   NameStr(langStruct->lanname));
-++
-++	/*
-++	 * Check whether we are allowed to execute the function itself. If we can
-++	 * execute it, there should be no possible side-effect of
-++	 * compiling/validation that execution can't have.
-++	 */
-++	aclresult = pg_proc_aclcheck(functionOid, GetUserId(), ACL_EXECUTE);
-++	if (aclresult != ACLCHECK_OK)
-++		aclcheck_error(aclresult, ACL_KIND_PROC, NameStr(procStruct->proname));
-++
-++	ReleaseSysCache(procTup);
-++	ReleaseSysCache(langTup);
-++
-++	return true;
-++}
-+diff --git a/src/include/fmgr.h b/src/include/fmgr.h
-+index 0a25776..f944cc6 100644
-+--- a/src/include/fmgr.h
-++++ b/src/include/fmgr.h
-+@@ -624,6 +624,7 @@ extern Oid	get_fn_expr_argtype(FmgrInfo *flinfo, int argnum);
-+ extern Oid	get_call_expr_argtype(fmNodePtr expr, int argnum);
-+ extern bool get_fn_expr_arg_stable(FmgrInfo *flinfo, int argnum);
-+ extern bool get_call_expr_arg_stable(fmNodePtr expr, int argnum);
-++extern bool CheckFunctionValidatorAccess(Oid validatorOid, Oid functionOid);
+++#define MAXDATELEN		128
+++/* maximum possible number of fields in a date string */
+++#define MAXDATEFIELDS	25
+++/* only this many chars are stored in datetktbl */
+++#define TOKMAXLEN		10
 + 
-+ /*
-+  * Routines in dfmgr.c
-+diff --git a/src/pl/plperl/plperl.c b/src/pl/plperl/plperl.c
-+index 7c2aee9..49d50c4 100644
-+--- a/src/pl/plperl/plperl.c
-++++ b/src/pl/plperl/plperl.c
-+@@ -1847,6 +1847,9 @@ plperl_validator(PG_FUNCTION_ARGS)
-+ 	bool		istrigger = false;
-+ 	int			i;
++ /* keep this struct small; it gets used a lot */
++ typedef struct
++diff --git a/src/interfaces/ecpg/pgtypeslib/datetime.c b/src/interfaces/ecpg/pgtypeslib/datetime.c
++index 823626f..4adcd1e 100644
++--- a/src/interfaces/ecpg/pgtypeslib/datetime.c
+++++ b/src/interfaces/ecpg/pgtypeslib/datetime.c
++@@ -61,14 +61,14 @@ PGTYPESdate_from_asc(char *str, char **endptr)
++ 	int			nf;
++ 	char	   *field[MAXDATEFIELDS];
++ 	int			ftype[MAXDATEFIELDS];
++-	char		lowstr[MAXDATELEN + 1];
+++	char		lowstr[MAXDATELEN + MAXDATEFIELDS];
++ 	char	   *realptr;
++ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
 + 
-++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
-++		PG_RETURN_VOID();
-++
-+ 	/* Get the new function's pg_proc entry */
-+ 	tuple = SearchSysCache1(PROCOID, ObjectIdGetDatum(funcoid));
-+ 	if (!HeapTupleIsValid(tuple))
-+@@ -1926,6 +1929,7 @@ PG_FUNCTION_INFO_V1(plperlu_validator);
-+ Datum
-+ plperlu_validator(PG_FUNCTION_ARGS)
-+ {
-++	/* call plperl validator with our fcinfo so it gets our oid */
-+ 	return plperl_validator(fcinfo);
-+ }
++ 	bool		EuroDates = FALSE;
 + 
-+diff --git a/src/pl/plpgsql/src/pl_handler.c b/src/pl/plpgsql/src/pl_handler.c
-+index 022ec3f..00b1a6f 100644
-+--- a/src/pl/plpgsql/src/pl_handler.c
-++++ b/src/pl/plpgsql/src/pl_handler.c
-+@@ -227,6 +227,9 @@ plpgsql_validator(PG_FUNCTION_ARGS)
-+ 	bool		istrigger = false;
-+ 	int			i;
-+ 
-++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
-++		PG_RETURN_VOID();
-++
-+ 	/* Get the new function's pg_proc entry */
-+ 	tuple = SearchSysCache1(PROCOID, ObjectIdGetDatum(funcoid));
-+ 	if (!HeapTupleIsValid(tuple))
-+diff --git a/src/pl/plpython/plpy_main.c b/src/pl/plpython/plpy_main.c
-+index c4de762..3847847 100644
-+--- a/src/pl/plpython/plpy_main.c
-++++ b/src/pl/plpython/plpy_main.c
-+@@ -159,6 +159,9 @@ plpython_validator(PG_FUNCTION_ARGS)
-+ 	Form_pg_proc procStruct;
-+ 	bool		is_trigger;
-+ 
-++	if (!CheckFunctionValidatorAccess(fcinfo->flinfo->fn_oid, funcoid))
-++		PG_RETURN_VOID();
-++
-+ 	if (!check_function_bodies)
++ 	errno = 0;
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
 + 	{
-+ 		PG_RETURN_VOID();
-+@@ -184,6 +187,7 @@ plpython_validator(PG_FUNCTION_ARGS)
-+ Datum
-+ plpython2_validator(PG_FUNCTION_ARGS)
-+ {
-++	/* call plpython validator with our fcinfo so it gets our oid */
-+ 	return plpython_validator(fcinfo);
-+ }
-+ #endif   /* PY_MAJOR_VERSION < 3 */
++ 		errno = PGTYPES_DATE_BAD_DATE;
++ 		return INT_MIN;
++diff --git a/src/interfaces/ecpg/pgtypeslib/dt.h b/src/interfaces/ecpg/pgtypeslib/dt.h
++index dfe6f9e..2780593 100644
++--- a/src/interfaces/ecpg/pgtypeslib/dt.h
+++++ b/src/interfaces/ecpg/pgtypeslib/dt.h
++@@ -192,12 +192,17 @@ typedef double fsec_t;
++ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
++ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_M(SECOND))
++ 
++-#define MAXDATELEN		63		/* maximum possible length of an input date
++-								 * string (not counting tr. null) */
++-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
++-								 * string */
++-#define TOKMAXLEN		10		/* only this many chars are stored in
++-								 * datetktbl */
+++/*
+++ * Working buffer size for input and output of interval, timestamp, etc.
+++ * Inputs that need more working space will be rejected early.  Longer outputs
+++ * will overrun buffers, so this must suffice for all possible output.  As of
+++ * this writing, PGTYPESinterval_to_asc() needs the most space at ~90 bytes.
+++ */
+++#define MAXDATELEN		128
+++/* maximum possible number of fields in a date string */
+++#define MAXDATEFIELDS	25
+++/* only this many chars are stored in datetktbl */
+++#define TOKMAXLEN		10
++ 
++ /* keep this struct small; it gets used a lot */
++ typedef struct
++diff --git a/src/interfaces/ecpg/pgtypeslib/dt_common.c b/src/interfaces/ecpg/pgtypeslib/dt_common.c
++index 6b89e4a..18178dd 100644
++--- a/src/interfaces/ecpg/pgtypeslib/dt_common.c
+++++ b/src/interfaces/ecpg/pgtypeslib/dt_common.c
++@@ -1171,15 +1171,22 @@ DecodeNumberField(int len, char *str, int fmask,
++ 	if ((cp = strchr(str, '.')) != NULL)
++ 	{
++ #ifdef HAVE_INT64_TIMESTAMP
++-		char		fstr[MAXDATELEN + 1];
+++		char		fstr[7];
+++		int			i;
+++
+++		cp++;
++ 
++ 		/*
++ 		 * OK, we have at most six digits to care about. Let's construct a
++-		 * string and then do the conversion to an integer.
+++		 * string with those digits, zero-padded on the right, and then do
+++		 * the conversion to an integer.
+++		 *
+++		 * XXX This truncates the seventh digit, unlike rounding it as do
+++		 * the backend and the !HAVE_INT64_TIMESTAMP case.
++ 		 */
++-		strcpy(fstr, (cp + 1));
++-		strcpy(fstr + strlen(fstr), "000000");
++-		*(fstr + 6) = '\0';
+++		for (i = 0; i < 6; i++)
+++			fstr[i] = *cp != '\0' ? *cp++ : '0';
+++		fstr[i] = '\0';
++ 		*fsec = strtol(fstr, NULL, 10);
++ #else
++ 		*fsec = strtod(cp, NULL);
++@@ -1531,15 +1538,22 @@ DecodeTime(char *str, int *tmask, struct tm * tm, fsec_t *fsec)
++ 		else if (*cp == '.')
++ 		{
++ #ifdef HAVE_INT64_TIMESTAMP
++-			char		fstr[MAXDATELEN + 1];
+++			char		fstr[7];
+++			int			i;
+++
+++			cp++;
++ 
++ 			/*
++-			 * OK, we have at most six digits to work with. Let's construct a
++-			 * string and then do the conversion to an integer.
+++			 * OK, we have at most six digits to care about. Let's construct a
+++			 * string with those digits, zero-padded on the right, and then do
+++			 * the conversion to an integer.
+++			 *
+++			 * XXX This truncates the seventh digit, unlike rounding it as do
+++			 * the backend and the !HAVE_INT64_TIMESTAMP case.
++ 			 */
++-			strncpy(fstr, (cp + 1), 7);
++-			strcpy(fstr + strlen(fstr), "000000");
++-			*(fstr + 6) = '\0';
+++			for (i = 0; i < 6; i++)
+++				fstr[i] = *cp != '\0' ? *cp++ : '0';
+++			fstr[i] = '\0';
++ 			*fsec = strtol(fstr, &cp, 10);
++ #else
++ 			str = cp;
++@@ -1665,6 +1679,9 @@ DecodePosixTimezone(char *str, int *tzp)
++  *	DTK_NUMBER can hold date fields (yy.ddd)
++  *	DTK_STRING can hold months (January) and time zones (PST)
++  *	DTK_DATE can hold Posix time zones (GMT-8)
+++ *
+++ * The "lowstr" work buffer must have at least strlen(timestr) + MAXDATEFIELDS
+++ * bytes of space.  On output, field[] entries will point into it.
++  */
++ int
++ ParseDateTime(char *timestr, char *lowstr,
++@@ -1677,7 +1694,10 @@ ParseDateTime(char *timestr, char *lowstr,
++ 	/* outer loop through fields */
++ 	while (*(*endstr) != '\0')
++ 	{
+++		/* Record start of current field */
++ 		field[nf] = lp;
+++		if (nf >= MAXDATEFIELDS)
+++			return -1;
++ 
++ 		/* leading digit? then date or time */
++ 		if (isdigit((unsigned char) *(*endstr)))
++@@ -1818,8 +1838,6 @@ ParseDateTime(char *timestr, char *lowstr,
++ 		/* force in a delimiter after each field */
++ 		*lp++ = '\0';
++ 		nf++;
++-		if (nf > MAXDATEFIELDS)
++-			return -1;
++ 	}
++ 
++ 	*numfields = nf;
++diff --git a/src/interfaces/ecpg/pgtypeslib/interval.c b/src/interfaces/ecpg/pgtypeslib/interval.c
++index bcc10ee..fdd8f49 100644
++--- a/src/interfaces/ecpg/pgtypeslib/interval.c
+++++ b/src/interfaces/ecpg/pgtypeslib/interval.c
++@@ -1092,7 +1092,7 @@ PGTYPESinterval_from_asc(char *str, char **endptr)
++ 	tm->tm_sec = 0;
++ 	fsec = 0;
++ 
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
++ 	{
++ 		errno = PGTYPES_INTVL_BAD_INTERVAL;
++ 		return NULL;
++diff --git a/src/interfaces/ecpg/pgtypeslib/timestamp.c b/src/interfaces/ecpg/pgtypeslib/timestamp.c
++index 7d3f7c8..4f91e63 100644
++--- a/src/interfaces/ecpg/pgtypeslib/timestamp.c
+++++ b/src/interfaces/ecpg/pgtypeslib/timestamp.c
++@@ -297,7 +297,7 @@ PGTYPEStimestamp_from_asc(char *str, char **endptr)
++ 	char	   *realptr;
++ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
++ 
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
++ 	{
++ 		errno = PGTYPES_TS_BAD_TIMESTAMP;
++ 		return (noresult);
++diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
++index d3ebb0e..0ba1936 100644
++--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
+++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
++@@ -45,6 +45,15 @@ char *dates[] = { "19990108foobar",
++ 				  "1999.008",
++ 				  "J2451187",
++ 				  "January 8, 99 BC",
+++				  /*
+++				   * Maximize space usage in ParseDateTime() with 25
+++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
+++				   */
+++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+++				  /* 26 fields */
+++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++ 				  NULL };
++ 
++ /* do not conflict with libc "times" symbol */
++@@ -52,6 +61,7 @@ static char *times[] = { "0:04",
++ 				  "1:59 PDT",
++ 				  "13:24:40 -8:00",
++ 				  "13:24:40.495+3",
+++				  "13:24:40.123456789+3",
++ 				  NULL };
++ 
++ char *intervals[] = { "1 minute",
++@@ -73,22 +83,22 @@ main(void)
++ 		 
++ 		 
++ 	
++-#line 52 "dt_test2.pgc"
+++#line 62 "dt_test2.pgc"
++  date date1 ;
++  
++-#line 53 "dt_test2.pgc"
+++#line 63 "dt_test2.pgc"
++  timestamp ts1 , ts2 ;
++  
++-#line 54 "dt_test2.pgc"
+++#line 64 "dt_test2.pgc"
++  char * text ;
++  
++-#line 55 "dt_test2.pgc"
+++#line 65 "dt_test2.pgc"
++  interval * i1 ;
++  
++-#line 56 "dt_test2.pgc"
+++#line 66 "dt_test2.pgc"
++  date * dc ;
++ /* exec sql end declare section */
++-#line 57 "dt_test2.pgc"
+++#line 67 "dt_test2.pgc"
++ 
++ 
++ 	int i, j;
++diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
++index 24e9d26..9a4587b 100644
++--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
+++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
++@@ -8,85 +8,104 @@ TS[3,0]: 1999-01-08 00:04:00
++ TS[3,1]: 1999-01-08 01:59:00
++ TS[3,2]: 1999-01-08 13:24:40
++ TS[3,3]: 1999-01-08 13:24:40.495
+++TS[3,4]: 1999-01-08 13:24:40.123456
++ Date[4]: 1999-01-08 (N - F)
++ TS[4,0]: 1999-01-08 00:04:00
++ TS[4,1]: 1999-01-08 01:59:00
++ TS[4,2]: 1999-01-08 13:24:40
++ TS[4,3]: 1999-01-08 13:24:40.495
+++TS[4,4]: 1999-01-08 13:24:40.123456
++ Date[5]: 1999-01-08 (N - F)
++ TS[5,0]: 1999-01-08 00:04:00
++ TS[5,1]: 1999-01-08 01:59:00
++ TS[5,2]: 1999-01-08 13:24:40
++ TS[5,3]: 1999-01-08 13:24:40.495
+++TS[5,4]: 1999-01-08 13:24:40.123456
++ Date[6]: 1999-01-18 (N - F)
++ TS[6,0]: 1999-01-18 00:04:00
++ TS[6,1]: 1999-01-18 01:59:00
++ TS[6,2]: 1999-01-18 13:24:40
++ TS[6,3]: 1999-01-18 13:24:40.495
+++TS[6,4]: 1999-01-18 13:24:40.123456
++ Date[7]: 2003-01-02 (N - F)
++ TS[7,0]: 2003-01-02 00:04:00
++ TS[7,1]: 2003-01-02 01:59:00
++ TS[7,2]: 2003-01-02 13:24:40
++ TS[7,3]: 2003-01-02 13:24:40.495
+++TS[7,4]: 2003-01-02 13:24:40.123456
++ Date[8]: 1999-01-08 (N - F)
++ TS[8,0]: 1999-01-08 00:04:00
++ TS[8,1]: 1999-01-08 01:59:00
++ TS[8,2]: 1999-01-08 13:24:40
++ TS[8,3]: 1999-01-08 13:24:40.495
+++TS[8,4]: 1999-01-08 13:24:40.123456
++ Date[9]: 1999-01-08 (N - F)
++ TS[9,0]: 1999-01-08 00:04:00
++ TS[9,1]: 1999-01-08 01:59:00
++ TS[9,2]: 1999-01-08 13:24:40
++ TS[9,3]: 1999-01-08 13:24:40.495
+++TS[9,4]: 1999-01-08 13:24:40.123456
++ Date[10]: 1999-01-08 (N - F)
++ TS[10,0]: 1999-01-08 00:04:00
++ TS[10,1]: 1999-01-08 01:59:00
++ TS[10,2]: 1999-01-08 13:24:40
++ TS[10,3]: 1999-01-08 13:24:40.495
+++TS[10,4]: 1999-01-08 13:24:40.123456
++ Date[11]: 1999-01-08 (N - F)
++ TS[11,0]: 1999-01-08 00:04:00
++ TS[11,1]: 1999-01-08 01:59:00
++ TS[11,2]: 1999-01-08 13:24:40
++ TS[11,3]: 1999-01-08 13:24:40.495
+++TS[11,4]: 1999-01-08 13:24:40.123456
++ Date[12]: 1999-01-08 (N - F)
++ TS[12,0]: 1999-01-08 00:04:00
++ TS[12,1]: 1999-01-08 01:59:00
++ TS[12,2]: 1999-01-08 13:24:40
++ TS[12,3]: 1999-01-08 13:24:40.495
+++TS[12,4]: 1999-01-08 13:24:40.123456
++ Date[13]: 2006-01-08 (N - F)
++ TS[13,0]: 2006-01-08 00:04:00
++ TS[13,1]: 2006-01-08 01:59:00
++ TS[13,2]: 2006-01-08 13:24:40
++ TS[13,3]: 2006-01-08 13:24:40.495
+++TS[13,4]: 2006-01-08 13:24:40.123456
++ Date[14]: 1999-01-08 (N - F)
++ TS[14,0]: 1999-01-08 00:04:00
++ TS[14,1]: 1999-01-08 01:59:00
++ TS[14,2]: 1999-01-08 13:24:40
++ TS[14,3]: 1999-01-08 13:24:40.495
+++TS[14,4]: 1999-01-08 13:24:40.123456
++ Date[15]: 1999-01-08 (N - F)
++ TS[15,0]: 1999-01-08 00:04:00
++ TS[15,1]: 1999-01-08 01:59:00
++ TS[15,2]: 1999-01-08 13:24:40
++ TS[15,3]: 1999-01-08 13:24:40.495
+++TS[15,4]: 1999-01-08 13:24:40.123456
++ Date[16]: 1999-01-08 (N - F)
++ TS[16,0]: 1999-01-08 00:04:00
++ TS[16,1]: 1999-01-08 01:59:00
++ TS[16,2]: 1999-01-08 13:24:40
++ TS[16,3]: 1999-01-08 13:24:40.495
+++TS[16,4]: 1999-01-08 13:24:40.123456
++ Date[17]: 1999-01-08 (N - F)
++ TS[17,0]: 1999-01-08 00:04:00
++ TS[17,1]: 1999-01-08 01:59:00
++ TS[17,2]: 1999-01-08 13:24:40
++ TS[17,3]: 1999-01-08 13:24:40.495
+++TS[17,4]: 1999-01-08 13:24:40.123456
++ Date[18]: 1999-01-08 (N - F)
++ TS[18,0]: 1999-01-08 00:04:00
++ TS[18,1]: 1999-01-08 01:59:00
++ TS[18,2]: 1999-01-08 13:24:40
++ TS[18,3]: 1999-01-08 13:24:40.495
+++TS[18,4]: 1999-01-08 13:24:40.123456
++ Date[19]: 0099-01-08 BC (N - F)
++ TS[19,0]: 0099-01-08 00:04:00 BC
++ TS[19,1]: 0099-01-08 01:59:00 BC
++ TS[19,2]: 0099-01-08 13:24:40 BC
+++TS[19,4]: 0099-01-08 13:24:40.123456 BC
+++Date[20]: - (N - T)
+++Date[21]: - (N - T)
++ interval[0]: @ 1 min
++ interval_copy[0]: @ 1 min
++ interval[1]: @ 1 day 12 hours 59 mins 10 secs
++diff --git a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
++index 0edf012..a127dd9 100644
++--- a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
+++++ b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
++@@ -27,6 +27,15 @@ char *dates[] = { "19990108foobar",
++ 				  "1999.008",
++ 				  "J2451187",
++ 				  "January 8, 99 BC",
+++				  /*
+++				   * Maximize space usage in ParseDateTime() with 25
+++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
+++				   */
+++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+++				  /* 26 fields */
+++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++ 				  NULL };
++ 
++ /* do not conflict with libc "times" symbol */
++@@ -34,6 +43,7 @@ static char *times[] = { "0:04",
++ 				  "1:59 PDT",
++ 				  "13:24:40 -8:00",
++ 				  "13:24:40.495+3",
+++				  "13:24:40.123456789+3",
++ 				  NULL };
++ 
++ char *intervals[] = { "1 minute",
++diff --git a/src/test/regress/expected/interval.out b/src/test/regress/expected/interval.out
++index 3bf2211..99fd0ca 100644
++--- a/src/test/regress/expected/interval.out
+++++ b/src/test/regress/expected/interval.out
++@@ -306,6 +306,13 @@ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31
++  @ 4541 years 4 mons 4 days 17 mins 31 secs
++ (1 row)
++ 
+++-- test long interval output
+++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
+++                                         interval                                          
+++-------------------------------------------------------------------------------------------
+++ @ 100000000 years 10 mons -1000000000 days -1000000000 hours -10 mins -10.000001 secs ago
+++(1 row)
+++
++ -- test justify_hours() and justify_days()
++ SELECT justify_hours(interval '6 months 3 days 52 hours 3 minutes 2 seconds') as "6 mons 5 days 4 hours 3 mins 2 seconds";
++  6 mons 5 days 4 hours 3 mins 2 seconds 
++diff --git a/src/test/regress/sql/interval.sql b/src/test/regress/sql/interval.sql
++index f1da4c2..7cee286 100644
++--- a/src/test/regress/sql/interval.sql
+++++ b/src/test/regress/sql/interval.sql
++@@ -108,6 +108,8 @@ select avg(f1) from interval_tbl;
++ -- test long interval input
++ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31 seconds'::interval;
++ 
+++-- test long interval output
+++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
++ 
++ -- test justify_hours() and justify_days()
++ 
 +-- 
 +1.7.5.4
 +
 diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index d6a4cd7..e2e5947 100644
+index 9cfb2b6..4a62eb6 100644
 --- a/meta-oe/recipes-support/postgresql/postgresql.inc
 +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -33,6 +33,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
-            file://0001-Use-pkg-config-for-libxml2-detection.patch \
-            file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
+@@ -35,6 +35,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
             file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
-+           file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
+            file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
+            file://0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch \
++           file://0006-Fix-handling-of-wide-datetime-input-output.patch \
            "
  
  LEAD_SONAME = "libpq.so"
