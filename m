@@ -1,24 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DF48565D3C
+	by mail.openembedded.org (Postfix) with ESMTP id AD9136E633
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 06:13:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T6DWv2019946
+	Wed, 29 Oct 2014 08:19:30 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9T8JUJY010025
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Oct 2014 23:13:33 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 28 Oct 2014 23:13:32 -0700
-From: <Qi.Chen@windriver.com>
+	Wed, 29 Oct 2014 01:19:31 -0700 (PDT)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Wed, 29 Oct 2014 01:19:30 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Oct 2014 14:15:09 +0800
-Message-ID: <1414563309-26793-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 29 Oct 2014 04:19:28 -0400
+Message-ID: <1414570768-19068-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: change socket location in my.cnf
+Subject: [meta-oe][PATCH] fftw: s/PN/BPN/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,48 +32,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Oct 2014 06:13:37 -0000
+X-List-Received-Date: Wed, 29 Oct 2014 08:19:31 -0000
 Content-Type: text/plain
 
-From: Chen Qi <Qi.Chen@windriver.com>
+From: Yue Tao <Yue.Tao@windriver.com>
 
-Change socket location to /var/lib/mysql/mysql.sock. Otherwise, we
-could spot errors in systemd systems like below.
+Replace the PN with BPN to fix the multilib build.
 
-mysqladmin: connect to server at 'localhost' failed
-error: 'Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)'
-Check that mysqld is running and that the socket: '/tmp/mysql.sock' exists!
+The error is:
+/ala-lpggp21/bpiolin/intel-x86-64-gplv2-4/bitbake_build/tmp/pkgdata/*/runtime-reverse/lib32-libfftw:
+No such file or directory
 
-This is because mysqld.service is using PrivateTmp=true.
+Because the PN causes the package is named as lib32-liblib32-fftw.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-support/mysql/mariadb/my.cnf |    4 ++--
+ meta-oe/recipes-support/fftw/fftw.inc | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb/my.cnf b/meta-oe/recipes-support/mysql/mariadb/my.cnf
-index f2c9b90..c9b785b 100644
---- a/meta-oe/recipes-support/mysql/mariadb/my.cnf
-+++ b/meta-oe/recipes-support/mysql/mariadb/my.cnf
-@@ -1,7 +1,7 @@
- [client]
- #password					= password
- port						= 3306
--socket						= /tmp/mysql.sock
-+socket						= /var/lib/mysql/mysql.sock
+diff --git a/meta-oe/recipes-support/fftw/fftw.inc b/meta-oe/recipes-support/fftw/fftw.inc
+index 9007e1d..1522ea0 100644
+--- a/meta-oe/recipes-support/fftw/fftw.inc
++++ b/meta-oe/recipes-support/fftw/fftw.inc
+@@ -19,7 +19,7 @@ do_configure_prepend() {
+     echo 'AM_PROG_AS' >> ${S}/configure.ac 
+ }
  
- [mysqld_safe]
- err-log						= /var/log/mysql.err
-@@ -9,7 +9,7 @@ err-log						= /var/log/mysql.err
- [mysqld]
- user 						= mysql
- port 						= 3306
--socket 						= /tmp/mysql.sock
-+socket 						= /var/lib/mysql/mysql.sock
- pid-file 					= /var/lib/mysql/mysqld.pid
- log-error 					= /var/log/mysqld.err
- basedir 					= /usr
+-PACKAGES =+ "lib${PN}"
+-FILES_lib${PN} = "${libdir}/lib*.so.*"
++PACKAGES =+ "lib${BPN}"
++FILES_lib${BPN} = "${libdir}/lib*.so.*"
+ 
+ # rename binary in /bin and use u-a tpo choose between different precision implementations?
 -- 
-1.7.9.5
+2.0.0
 
 
