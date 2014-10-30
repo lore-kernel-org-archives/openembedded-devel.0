@@ -1,26 +1,26 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7483F6E67C
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CE67D65D4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 05:37:26 +0000 (UTC)
+	Thu, 30 Oct 2014 05:37:25 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9U5bQ5h011528
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9U5bPEE018751
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 22:37:26 -0700 (PDT)
+	Wed, 29 Oct 2014 22:37:25 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 29 Oct 2014 22:37:26 -0700
+	14.3.174.1; Wed, 29 Oct 2014 22:37:24 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Oct 2014 13:37:27 +0800
-Message-ID: <1414647447-26316-3-git-send-email-rongqing.li@windriver.com>
+Date: Thu, 30 Oct 2014 13:37:26 +0800
+Message-ID: <1414647447-26316-2-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.7.10.4
 In-Reply-To: <1414647447-26316-1-git-send-email-rongqing.li@windriver.com>
 References: <1414647447-26316-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/3][meta-webserver][v2] phpmyadmin: fix for Security Advisory CVE-2014-7217
+Subject: [PATCH 2/3][meta-webserver][v2] phpmyadmin: fix for Security Advisory CVE-2014-5274
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,66 +39,78 @@ Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
 
-Multiple cross-site scripting (XSS) vulnerabilities in phpMyAdmin 4.0.x before
-4.0.10.4, 4.1.x before 4.1.14.5, and 4.2.x before 4.2.9.1 allow remote
-authenticated users to inject arbitrary web script or HTML via a crafted ENUM
-value that is improperly handled during rendering of the (1) table search or (2)
-table structure page, related to
-libraries/TableSearch.class.php and libraries/Util.class.php.
+Cross-site scripting (XSS) vulnerability in the view operations page in
+phpMyAdmin 4.1.x before 4.1.14.3 and 4.2.x before 4.2.7.1 allows remote
+authenticated users to inject arbitrary web script or HTML via a crafted
+view name, related to js/functions.js.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-7217
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-5274
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../0001-Bug-4544-additional-fix-for-4.2.x.patch   |   29 ++++++++++++++++++++
+ ...4505-security-XSS-in-view-operations-page.patch |   43 ++++++++++++++++++++
  .../recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb     |    1 +
- 2 files changed, 30 insertions(+)
- create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
 new file mode 100644
-index 0000000..e23f94b
+index 0000000..164a072
 --- /dev/null
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
-@@ -0,0 +1,29 @@
-+From 304fb2b645b36a39e03b954fdbd567173ebe6448 Mon Sep 17 00:00:00 2001
-+From: Marc Delisle <marc@infomarc.info>
-+Date: Wed, 1 Oct 2014 08:09:12 -0400
-+Subject: [PATCH] Bug 4544: additional fix for 4.2.x
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
+@@ -0,0 +1,43 @@
++From 0cd293f5e13aa245e4a57b8d373597cc0e421b6f Mon Sep 17 00:00:00 2001
++From: Madhura Jayaratne <madhura.cj@gmail.com>
++Date: Sun, 17 Aug 2014 08:41:57 -0400
++Subject: [PATCH] bug #4505 [security] XSS in view operations page
 +
 +Upstream-Status: Backport
 +
 +Signed-off-by: Marc Delisle <marc@infomarc.info>
 +---
-+ libraries/TableSearch.class.php |    3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
++ ChangeLog       |    3 +++
++ js/functions.js |    2 +-
++ 2 files changed, 4 insertions(+), 1 deletion(-)
 +
-+diff --git a/libraries/TableSearch.class.php b/libraries/TableSearch.class.php
-+index a0b3fa4..b7eb42f 100644
-+--- a/libraries/TableSearch.class.php
-++++ b/libraries/TableSearch.class.php
-+@@ -992,7 +992,8 @@ EOT;
-+             $html_output .= '<td>' . $properties['collation'] . '</td>';
-+             $html_output .= '<td>' . $properties['func'] . '</td>';
-+             // here, the data-type attribute is needed for a date/time picker
-+-            $html_output .= '<td data-type="' . $properties['type'] . '"'
-++            $html_output .= '<td data-type="'
-++                . htmlspecialchars($properties['type']) . '"'
-+                 . '>' . $properties['value'] . '</td>';
-+             $html_output .= '</tr>';
-+             //Displays hidden fields
++diff --git a/ChangeLog b/ChangeLog
++index 7afac1a..cec9d77 100644
++--- a/ChangeLog
+++++ b/ChangeLog
++@@ -1,6 +1,9 @@
++ phpMyAdmin - ChangeLog
++ ======================
++ 
+++4.2.7.1 (2014-08-17)
+++- bug #4505 [security] XSS in view operations page
+++
++ 4.2.7.0 (2014-07-31)
++ - bug       Broken links on home page
++ - bug #4494 Overlap in navigation panel
++diff --git a/js/functions.js b/js/functions.js
++index 09bfeda..a970a81 100644
++--- a/js/functions.js
+++++ b/js/functions.js
++@@ -3585,7 +3585,7 @@ AJAX.registerOnload('functions.js', function () {
++         var question = PMA_messages.strDropTableStrongWarning + ' ';
++         question += $.sprintf(
++             PMA_messages.strDoYouReally,
++-            'DROP VIEW ' + PMA_commonParams.get('table')
+++            'DROP VIEW ' + escapeHtml(PMA_commonParams.get('table'))
++         );
++ 
++         $(this).PMA_confirm(question, $(this).attr('href'), function (url) {
 +-- 
 +1.7.10.4
 +
 diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
-index 447b778..49ca7da 100644
+index c267d89..447b778 100644
 --- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
 +++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
+ 
  SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
             file://0001-bug-4504-security-Self-XSS-in-query-charts.patch \
-            file://0001-bug-4505-security-XSS-in-view-operations-page.patch \
-+           file://0001-Bug-4544-additional-fix-for-4.2.x.patch \
++           file://0001-bug-4505-security-XSS-in-view-operations-page.patch \
             file://apache.conf"
  
  SRC_URI[md5sum] = "0dcd755450dac819f33502590c88ad29"
