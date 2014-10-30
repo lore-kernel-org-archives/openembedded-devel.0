@@ -1,24 +1,38 @@
-Return-Path: <Chong.Lu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BDAD76AC4A
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id DA89165DEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 08:37:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9U8bh0q014098
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 30 Oct 2014 10:04:32 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id ex7so4010877wid.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 01:37:43 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 30 Oct 2014 01:37:42 -0700
-From: Chong Lu <Chong.Lu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Oct 2014 16:34:25 +0800
-Message-ID: <1414658065-32307-1-git-send-email-Chong.Lu@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 30 Oct 2014 03:04:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=+Lx6w4fbaBx2AxSriG1cWrkL1UmLdOPX2i0EsdSckcU=;
+	b=WS77dZw25wvKznYx/BGatNq27fvKw8RW/iyvuzQUJ4/dhP/uSYjWbEN1k/1VkfJNqm
+	uqBI7IuQqOV6OUPXyk4+fiG8mz60bXhQapvZ40sUriWmRSSE/UMz//F1yz6rTZT2ACFN
+	D5hk58ffvacxOaqyw6WD/MRkIOIRB4vW5z5hC8lTUUbMy9nAy9OMevgnz6KzPrudx5oc
+	ImBjKaOaop6qG/OULpkjRpFITJ3gxVR1xEgFEHnJ272lG6tHhoOMm27cIOsABugWi2ur
+	880FzLUUHKghq5KqXVzSBbAfj41fUGN0CvX/QPnMpoJ0fJGaGGq3i4xjLofErshToLUz
+	Xm4g==
+X-Received: by 10.180.100.106 with SMTP id ex10mr43262880wib.63.1414663472368; 
+	Thu, 30 Oct 2014 03:04:32 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-176-198-252-150.hsi05.unitymediagroup.de. [176.198.252.150])
+	by mx.google.com with ESMTPSA id l4sm4721448wjx.14.2014.10.30.03.04.31
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 30 Oct 2014 03:04:31 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 30 Oct 2014 11:04:21 +0100
+Message-Id: <1414663463-31222-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ntp: add sntp.service for sntp package
+Subject: [master][dizzy][PATCH 0/2] minor fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2014 08:37:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 30 Oct 2014 10:04:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This solves the following warning:
+A bit too late to get into dizzy directly...
 
-lib32-ntp-4.2.6p5: lib32-ntp: Files/directories were installed but not shipped
-  /lib/systemd/system/sntp.service [installed-vs-shipped]
+Andreas Müller (2):
+  xfce4-weather-plugin: make work properly after met.no API change
+  gvfs: replace deprecated g_memmove by memmove
 
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
----
- recipes-support/ntp/ntp.inc | 1 +
- 1 file changed, 1 insertion(+)
+ ...daemonfile.c-replace-g_memmove-by-memmove.patch |  36 +++++
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc             |   1 +
+ ...-ready-for-met.no-locationforecast-1.2-AP.patch | 162 +++++++++++++++++++++
+ ...et.no-locationforecastLTS-1.2-API-bug-109.patch |  27 ++++
+ .../weather/xfce4-weather-plugin_0.8.3.bb          |   4 +
+ 5 files changed, 230 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/weather/files/0001-Make-plugin-ready-for-met.no-locationforecast-1.2-AP.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/weather/files/0002-Switch-to-met.no-locationforecastLTS-1.2-API-bug-109.patch
 
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index fd45219..6897587 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -128,6 +128,7 @@ FILES_ntpdate = "${sbindir}/ntpdate \
- "
- FILES_sntp = "${sbindir}/sntp \
-               ${sysconfdir}/default/sntp \
-+              ${systemd_unitdir}/system/sntp.service \
-              "
- 
- CONFFILES_${PN} = "${sysconfdir}/ntp.conf"
 -- 
-1.9.1
+1.8.3.1
 
 
