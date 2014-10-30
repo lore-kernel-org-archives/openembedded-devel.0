@@ -1,39 +1,24 @@
-Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qc0-f173.google.com (mail-qc0-f173.google.com
-	[209.85.216.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 400F871ED6
+Return-Path: <Hongjun.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id BDE7065C87
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 13:11:05 +0000 (UTC)
-Received: by mail-qc0-f173.google.com with SMTP id x3so4032217qcv.4
+	Thu, 30 Oct 2014 13:24:24 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9UDOO9R019910
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 06:11:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=cLXjTj99gRTRFAjUGIU5MEpdcJJxl5EerH20FLKAphM=;
-	b=Mi9hSPmqdHeMfxF7QM1DNKDBQ/GIanxOkg5al/mbJhMdxJMNXFzYZm0P72j3RDeEiC
-	KtKw4Z483tkpShKS0YOgeBerdvyQcAt2uWFnTCobuV5c3aq/YC4OJg/cugofLec/ANrY
-	osuXa72iZ4gx15LIFh6eeJbWT08h/W49JVnpTXWqOLyTKMAkB91rHEF1KSCw0Y56rf24
-	XU0D2y9GSnOzCMKaRj3e6u+GsKY0F66W1QjDxBVvELuX+15sIKkE7jd4HRx/yn1y4tfc
-	nkq5kRS8wKga9xr81z7pvb2712PgX9mwvz6uYbLfwn9+BmihyENK1OCZP8BGPX0dda63
-	Sy8Q==
-X-Received: by 10.140.29.226 with SMTP id b89mr24992735qgb.94.1414674666207;
-	Thu, 30 Oct 2014 06:11:06 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.194.195.2])
-	by mx.google.com with ESMTPSA id a9sm6691265qgf.7.2014.10.30.06.11.04
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 Oct 2014 06:11:05 -0700 (PDT)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Oct 2014 11:10:46 -0200
-Message-Id: <1414674647-18708-2-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1414674647-18708-1-git-send-email-mario@ossystems.com.br>
-References: <1414674647-18708-1-git-send-email-mario@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-oe][PATCH 2/2] gmock: add recipe
+	Thu, 30 Oct 2014 06:24:24 -0700 (PDT)
+Received: from pek-lpgtest9.wrs.com (128.224.153.89) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 30 Oct 2014 06:24:23 -0700
+From: Hongjun Yang <Hongjun.Yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 30 Oct 2014 21:24:22 +0800
+Message-ID: <1414675462-19999-1-git-send-email-Hongjun.Yang@windriver.com>
+X-Mailer: git-send-email 1.7.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH V3] tree: Add a new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,158 +32,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2014 13:11:09 -0000
+X-List-Received-Date: Thu, 30 Oct 2014 13:24:29 -0000
+Content-Type: text/plain
 
-gmock is a library for writing and using C++ mock classes, by Google.
+From: "Hongjun.Yang" <hongjun.yang@windriver.com>
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+Add tree command, some ptest cases need it.
+
+Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
+
 ---
- ...install-command-for-libraries-and-headers.patch |   40 ++++++++++++++
- .../cmake-gmock.pc.in-Add-pkg-config-support.patch |   56 ++++++++++++++++++++
- meta-oe/recipes-test/gmock/gmock_1.7.0.bb          |   23 ++++++++
- 3 files changed, 119 insertions(+)
- create mode 100644 meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch
- create mode 100644 meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch
- create mode 100644 meta-oe/recipes-test/gmock/gmock_1.7.0.bb
+ .../tree/tree-1.7.0/fix-cross-env.patch            | 36 ++++++++++++++++++++++
+ meta-oe/recipes-support/tree/tree_1.7.0.bb         | 16 ++++++++++
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch
+ create mode 100644 meta-oe/recipes-support/tree/tree_1.7.0.bb
 
-diff --git a/meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch b/meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch
+diff --git a/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch b/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch
 new file mode 100644
-index 0000000..92a6393
+index 0000000..d0118f6
 --- /dev/null
-+++ b/meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch
-@@ -0,0 +1,40 @@
-+From ba0a7d65c918cb7e3f2073553c4cc7af5858ed03 Mon Sep 17 00:00:00 2001
-+From: Otavio Salvador <otavio@ossystems.com.br>
-+Date: Thu, 31 Jul 2014 16:54:00 -0300
-+Subject: [PATCH] cmake: Add install command for libraries and headers
-+Organization: O.S. Systems Software LTDA.
++++ b/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch
+@@ -0,0 +1,36 @@
++From 945a5861bb19a34d31119bc38f813513296ce2ad Mon Sep 17 00:00:00 2001
++From: "Hongjun.Yang" <hongjun.yang@windriver.com>
++Date: Thu, 30 Oct 2014 20:38:06 +0800
++Subject: [PATCH] Fix the cross-compiling issue
 +
-+Upstream-Status: Inappropriate [embedded specific]
++Upstream-Status: Pending
 +
-+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
 +---
-+ CMakeLists.txt | 6 ++++++
-+ 1 file changed, 6 insertions(+)
++ Makefile | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 572d044..90e797a 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -63,6 +63,8 @@ include_directories("${gmock_SOURCE_DIR}/include"
-+                     # Test sources.
-+                     "${gtest_SOURCE_DIR}")
++diff --git a/Makefile b/Makefile
++index e91f1f6..e496a52 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -18,13 +18,13 @@
 + 
-++install(DIRECTORY ${gmock_SOURCE_DIR}/include/gmock DESTINATION include)
-++
-+ ########################################################################
-+ #
-+ # Defines the gmock & gmock_main libraries.  User tests should link
-+@@ -82,6 +84,10 @@ cxx_library(gmock_main
-+             src/gmock-all.cc
-+             src/gmock_main.cc)
++ prefix = /usr
 + 
-++
-++install(TARGETS gmock DESTINATION lib)
-++install(TARGETS gmock_main DESTINATION lib)
-++
-+ ########################################################################
-+ #
-+ # Google Mock's own tests.
++-CC=gcc
+++#CC=gcc
++ 
++ VERSION=1.7.0
++ TREE_DEST=tree
++-BINDIR=${prefix}/bin
+++BINDIR=${DESTDIR}/${prefix}/bin
++ MAN=tree.1
++-MANDIR=${prefix}/man/man1
+++MANDIR=${DESTDIR}/${prefix}/man/man1
++ OBJS=tree.o unix.o html.o xml.o json.o hash.o color.o
++ 
++ # Uncomment options below for your particular OS:
 +-- 
 +1.9.1
 +
-diff --git a/meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch b/meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch
+diff --git a/meta-oe/recipes-support/tree/tree_1.7.0.bb b/meta-oe/recipes-support/tree/tree_1.7.0.bb
 new file mode 100644
-index 0000000..aa38fe4
+index 0000000..c1c3a8b
 --- /dev/null
-+++ b/meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch
-@@ -0,0 +1,56 @@
-+From 45661183a7c78d8c4f75adcf53c6ddd663dc8b2d Mon Sep 17 00:00:00 2001
-+From: Mario Domenech Goulart <mario@ossystems.com.br>
-+Date: Mon, 20 Oct 2014 17:12:58 -0200
-+Subject: [PATCH] CMakeLists, gmock.pc.in: Add pkg-config support
-+Organization: O.S. Systems Software LTDA.
++++ b/meta-oe/recipes-support/tree/tree_1.7.0.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "This is a handy little utility to display a tree view of directories."
++HOMEPAGE = "http://mama.indstate.edu/users/ice/tree/"
++SECTION = "console/utils"
++LICENSE="GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
 +
-+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
-+---
-+ CMakeLists.txt | 7 ++++++-
-+ gmock.pc.in    | 9 +++++++++
-+ 2 files changed, 15 insertions(+), 1 deletion(-)
-+ create mode 100644 gmock.pc.in
++inherit autotools-brokensep
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 90e797a..98fd824 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -27,6 +27,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
-+   pre_project_set_up_hermetic_build()
-+ endif()
-+ 
-++# pkg-config support
-++configure_file("gmock.pc.in" "gmock.pc" @ONLY)
-++
-+ ########################################################################
-+ #
-+ # Project-wide settings
-+@@ -87,7 +90,9 @@ cxx_library(gmock_main
-+ 
-+ install(TARGETS gmock DESTINATION lib)
-+ install(TARGETS gmock_main DESTINATION lib)
-+-
-++install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gmock.pc"
-++    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/"
-++)  
-+ ########################################################################
-+ #
-+ # Google Mock's own tests.
-+diff --git a/gmock.pc.in b/gmock.pc.in
-+new file mode 100644
-+index 0000000..08ad8d2
-+--- /dev/null
-++++ b/gmock.pc.in
-+@@ -0,0 +1,9 @@
-++Name: libgmock
-++Version: 1.7.0
-++Description: Google's framework for writing C++ tests on a variety of platforms
-++ 
-++prefix=@CMAKE_INSTALL_PREFIX@
-++includedir=${prefix}/include
-++libdir=${prefix}/lib
-++Cflags:-I${includedir}/gmock
-++Libs: -L${libdir} -lgmock -lgmock_main
-+-- 
-+1.9.1
++SRC_URI = "http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz \
++	   file://fix-cross-env.patch \
++	  "
 +
-diff --git a/meta-oe/recipes-test/gmock/gmock_1.7.0.bb b/meta-oe/recipes-test/gmock/gmock_1.7.0.bb
-new file mode 100644
-index 0000000..bd5cf4e
---- /dev/null
-+++ b/meta-oe/recipes-test/gmock/gmock_1.7.0.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Google C++ Mocking Framework"
-+SECTION = "libs"
-+HOMEPAGE = "http://code.google.com/p/googlemock/"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
++SRC_URI[md5sum] = "abe3e03e469c542d8e157cdd93f4d8a6"
++SRC_URI[sha256sum] = "6957c20e82561ac4231638996e74f4cfa4e6faabc5a2f511f0b4e3940e8f7b12"
 +
-+SRC_URI = "\
-+    http://googlemock.googlecode.com/files/${BPN}-${PV}.zip \
-+    file://cmake-Add-install-command-for-libraries-and-headers.patch \
-+    file://cmake-gmock.pc.in-Add-pkg-config-support.patch \
-+"
-+
-+SRC_URI[md5sum] = "073b984d8798ea1594f5e44d85b20d66"
-+SRC_URI[sha256sum] = "26fcbb5925b74ad5fc8c26b0495dfc96353f4d553492eb97e85a8a6d2f43095b"
-+
-+inherit lib_package cmake
-+
-+ALLOW_EMPTY_${PN} = "1"
-+ALLOW_EMPTY_${PN}-dbg = "1"
-+
-+RDEPENDS_${PN}-dev += "${PN}-staticdev"
-+
-+BBCLASSEXTEND = "nativesdk"
++FILES_${PN}-doc += "${prefix}/man"
 -- 
-1.7.10.4
+1.9.1
 
 
