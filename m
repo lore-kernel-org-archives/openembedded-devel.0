@@ -1,24 +1,41 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 158DA6E67C
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ACB36AC01
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 06:37:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id s9U6bYJW012509
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 30 Oct 2014 07:21:40 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id b13so2944827wgh.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Oct 2014 23:37:34 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.187) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 29 Oct 2014 23:37:33 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Oct 2014 14:39:12 +0800
-Message-ID: <1414651152-31286-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: use ${PN} for SYSTEMD_ATUO_ENABLE
+	Thu, 30 Oct 2014 00:21:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:content-type:mime-version:subject:from
+	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
+	:to; bh=hNWkHDNqqXpum4K6Tm/+0zIhzetTiKAZZ9ZZVRLKY9o=;
+	b=QhOnKpclFSqS3KG9CDJKpfJvT+5oNJT6AfRQzvD+jDhyTbCCsPmwWsYtQyaLW5mATN
+	PUKKpIy+zX7B5wsAn2GH0e0E3090BZTxhfSy414rSc5Etsnkk44gBmNvjBNog3I1iEbl
+	UzyJSq2NRzur7Jk1/QqJWsgKQEK+dnWm7Ya3bbYbaFUsKI1pVkZLQs4vr0HXu0Ma3Asc
+	5EeClwFsO6Ndm/aWCwtzJn1lc7bzGs9bC4oMzOeR7Hi/qFOBiar0phwCrK7Ge0D+R6SS
+	j4PrydIm1+Ee3Pq0oE6M262hPzuFK39FMiL3tBp/Ri3n1Q5p84McFmvG9a0XeCa55EW9
+	tgcg==
+X-Gm-Message-State: ALoCoQmBq7MWsUc5qOmZiHiTR3rXYCGTUi2de9UG+/p40dZifVw8WdoZAbDRzVIfOiahh3WOuNDG
+X-Received: by 10.194.79.201 with SMTP id l9mr18159513wjx.59.1414653701000;
+	Thu, 30 Oct 2014 00:21:41 -0700 (PDT)
+Received: from [172.20.0.187] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id wl1sm7686611wjb.4.2014.10.30.00.21.39
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 30 Oct 2014 00:21:40 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.0 \(1990.1\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20141029154937.GB15148@jama>
+Date: Thu, 30 Oct 2014 08:21:38 +0100
+Message-Id: <FAE85A2F-D3BD-4DB4-8678-3D9138D48473@dominion.thruhere.net>
+References: <1414336552-15191-1-git-send-email-koen@dominion.thruhere.net>
+	<20141029154937.GB15148@jama>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.1990.1)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ddrescue: update to 1.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +49,198 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2014 06:37:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 30 Oct 2014 07:21:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-From: Chen Qi <Qi.Chen@windriver.com>
 
-Use ${PN} instead of hardcoding 'mariadb' so that everything works
-fine in case of multilib.
+> Op 29 okt. 2014, om 16:49 heeft Martin Jansa <martin.jansa@gmail.com> =
+het volgende geschreven:
+>=20
+> On Sun, Oct 26, 2014 at 04:15:52PM +0100, Koen Kooi wrote:
+>> * License changed to GPLv2+
+>> * Although 'configure is present, it isn't autotools.
+>>=20
+>> Nota bene: this requires bitbake and oe-core support for tar.lz
+>=20
+> Not sure if it's caused by incomplete bitbake and oe-core support for
+> tar.lz when I triggered that build, but it's strange how "silently" it
+> fails, but thinking a bit more about it, it's expected to happend with
+> the tar.lz just fetched into ${WORKDIR} without auto-unpack to create
+> expected ${S} :/.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-oe/recipes-support/mysql/mariadb_5.5.39.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It took me 3 builds to realize that and start patching bitbake and =
+OE-core :/
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-index ae2e92b..459c7ec 100644
---- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-@@ -31,7 +31,7 @@ GROUPADD_PARAM_${PN}-server = "--system mysql"
- 
- SYSTEMD_PACKAGES = "${PN}-server"
- SYSTEMD_SERVICE_${PN}-server = "mysqld.service"
--SYSTEMD_AUTO_ENABLE_mariadb-server = "disable"
-+SYSTEMD_AUTO_ENABLE_${PN}-server = "disable"
- 
- EXTRA_OEMAKE = "'GEN_LEX_HASH=${STAGING_BINDIR_NATIVE}/gen_lex_hash'"
- 
--- 
-1.9.1
+regards,
+
+Koen
+
+>=20
+> NOTE: recipe ddrescue-1.19-r0: task do_populate_lic: Started
+> WARNING: Could not copy license file COPYING: [Errno 2] No such file =
+or
+> directory:
+> =
+'/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue=
+/1.19-r0/ddrescue-1.19/COPYING'
+> WARNING: Could not copy license file main_common.cc: [Errno 2] No such
+> file or directory:
+> =
+'/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue=
+/1.19-r0/ddrescue-1.19/main_common.cc'
+> NOTE: recipe ddrescue-1.19-r0: task do_populate_lic: Succeeded
+>=20
+> NOTE: Running task 20950 of 30030 (ID: 24086,
+> =
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended=
+/ddrescue/ddrescue_1.19.bb,
+> do_configure)
+> NOTE: recipe ddrescue-1.19-r0: task do_configure: Started
+> ERROR: Function failed: do_configure (log file is located at
+> =
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue/=
+1.19-r0/temp/log.do_configure.10001)
+> ERROR: Logfile of failure stored in:
+> =
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue/=
+1.19-r0/temp/log.do_configure.10001
+> Log data follows:
+> | DEBUG: Executing python function sysroot_cleansstate
+> | DEBUG: Python function sysroot_cleansstate finished
+> | DEBUG: Executing shell function do_configure
+> |
+> =
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue/=
+1.19-r0/temp/run.do_configure.10001:
+> 98:
+> =
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue/=
+1.19-r0/temp/run.do_configure.10001:
+> =
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue/=
+1.19-r0/ddrescue-1.19/configure:
+> not found
+> | WARNING: exit code 127 from a shell command.
+> | ERROR: Function failed: do_configure (log file is located at
+> =
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/ddrescue/=
+1.19-r0/temp/log.do_configure.10001)
+> NOTE: recipe ddrescue-1.19-r0: task do_configure: Failed
+> ERROR: Task 24086
+> =
+(/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extende=
+d/ddrescue/ddrescue_1.19.bb,
+> do_configure) failed with exit code '1'
+>=20
+>>=20
+>> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+>> ---
+>> meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb | 18 ----------
+>> meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb | 42 =
+++++++++++++++++++++++
+>> 2 files changed, 42 insertions(+), 18 deletions(-)
+>> delete mode 100644 meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
+>> create mode 100644 meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
+>>=20
+>> diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb =
+b/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
+>> deleted file mode 100644
+>> index a36c250..0000000
+>> --- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.16.bb
+>> +++ /dev/null
+>> @@ -1,18 +0,0 @@
+>> -SUMMARY =3D "Data recovery tool"
+>> -DESCRIPTION =3D "GNU ddrescue is a data recovery tool. It copies =
+data \
+>> -    from one file or block device (hard disc, cdrom, etc) to =
+another, \
+>> -    trying hard to rescue data in case of read errors."
+>> -HOMEPAGE =3D "http://www.gnu.org/software/ddrescue/ddrescue.html"
+>> -SECTION =3D "console"
+>> -LICENSE =3D "GPLv3+"
+>> -
+>> -LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3Df27defe1e96c2e1ecd4e0c9be8967949 \
+>> -                    =
+file://main_common.cc;beginline=3D5;endline=3D16;md5=3Db5a59150a33658cc1ff=
+c31b1a4ffb9f2"
+>> -
+>> -SRC_URI =3D "${GNU_MIRROR}/${BPN}/${BP}.tar.gz"
+>> -SRC_URI[md5sum] =3D "57b67407e882c6418531d48a2f20d16b"
+>> -SRC_URI[sha256sum] =3D =
+"76b3f2e5fb0306d24f2632c3e168cccb73dc0a348e3a7089cd9230748ff23de6"
+>> -
+>> -inherit autotools
+>> -
+>> -EXTRA_OECONF =3D "'CXX=3D${CXX}' 'CPPFLAGS=3D${CPPFLAGS}' =
+'CXXFLAGS=3D${CXXFLAGS}' 'LDFLAGS=3D${LDFLAGS}'"
+>> diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb =
+b/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
+>> new file mode 100644
+>> index 0000000..a605249
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
+>> @@ -0,0 +1,42 @@
+>> +SUMMARY =3D "Data recovery tool"
+>> +DESCRIPTION =3D "GNU ddrescue is a data recovery tool. It copies =
+data \
+>> +    from one file or block device (hard disc, cdrom, etc) to =
+another, \
+>> +    trying hard to rescue data in case of read errors."
+>> +HOMEPAGE =3D "http://www.gnu.org/software/ddrescue/ddrescue.html"
+>> +SECTION =3D "console"
+>> +LICENSE =3D "GPLv2+"
+>> +
+>> +LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3D76d6e300ffd8fb9d18bd9b136a9bba13 \
+>> +                    =
+file://main_common.cc;beginline=3D5;endline=3D16;md5=3D3ec288b2676528cd2b0=
+69364e313016f"
+>> +
+>> +SRC_URI =3D "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
+>> +SRC_URI[md5sum] =3D "ed6b5b82d74cbd925db2b829350e74b1"
+>> +SRC_URI[sha256sum] =3D =
+"ed8d0c9d9aac80a9110e9cb0d0a91a7390d3bf9f816b67a62ca4eb140f4747b8"
+>> +
+>> +CONFIGUREOPTS =3D "\
+>> +    '--srcdir=3D${S}' \
+>> +    '--prefix=3D${prefix}' \
+>> +    '--exec-prefix=3D${exec_prefix}' \
+>> +    '--bindir=3D${bindir}' \
+>> +    '--datadir=3D${datadir}' \
+>> +    '--infodir=3D${infodir}' \
+>> +    '--sysconfdir=3D${sysconfdir}' \
+>> +    'CXX=3D${CXX}' \
+>> +    'CPPFLAGS=3D${CPPFLAGS}' \
+>> +    'CXXFLAGS=3D${CXXFLAGS}' \
+>> +    'LDFLAGS=3D${LDFLAGS}' \
+>> +"
+>> +EXTRA_OEMAKE =3D ""
+>> +
+>> +do_configure () {
+>> +    ${S}/configure ${CONFIGUREOPTS}
+>> +}
+>> +
+>> +do_install () {
+>> +    oe_runmake 'DESTDIR=3D${D}' install
+>> +    # Info dir listing isn't interesting at this point so remove it =
+if it exists.
+>> +    if [ -e "${D}${infodir}/dir" ]; then
+>> +        rm -f ${D}${infodir}/dir
+>> +    fi
+>> +}
+>> +
+>> --=20
+>> 1.9.0
+>>=20
+>> --=20
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
