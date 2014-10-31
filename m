@@ -1,41 +1,35 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BEC360169
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 85BF871F2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2014 15:51:48 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id f15so7076642lbj.9
+	Fri, 31 Oct 2014 20:33:28 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 142so3663228ykq.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2014 08:51:48 -0700 (PDT)
+	Fri, 31 Oct 2014 13:33:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=+XuU4cQTtl2MVF9TV2uFwdAnyBMfWeWQnDnI1C3qbYo=;
-	b=F88BOIrpzfngRm0eduvHivydQrZ/qg2xoTkC2u70TnZG6HiOplcRr9x0xZxF2zD4GA
-	HlhLpwAqMJ+7mNKG9llC1YxsBrcelPdlW9qAxJKveY9Ci9MsW0tiRD7zQNWXRehRm42X
-	V2nhKpnMvIpIcWQl773XLCSqIWYesoSgvwv01QS9HNtAfPpmQVt3bEecO7NYVYMkLVpF
-	aWUXf8vdmHe1tYKOn1TfAZt+Hkc4omapaMrgR1wyBmsXtXtQz/N5Ca+/eBSMh5F++cD+
-	41c3Tg/0eqREcjicwCGK0VIJVb7P8cl7F/TW4ZTSOnJYeC3Bz4CyfMgztLalcZI/jSeZ
-	Z91w==
-X-Received: by 10.112.219.3 with SMTP id pk3mr27255405lbc.18.1414770707927;
-	Fri, 31 Oct 2014 08:51:47 -0700 (PDT)
-Received: from [192.168.50.237] (ip-84-119-116-50.unity-media.net.
-	[84.119.116.50])
-	by mx.google.com with ESMTPSA id e3sm4574914lam.26.2014.10.31.08.51.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 31 Oct 2014 08:51:47 -0700 (PDT)
-Message-ID: <5453B011.4020004@gmail.com>
-Date: Fri, 31 Oct 2014 16:51:45 +0100
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=xTDRyFO/ZFfaPXjKPUlh3BbcM/GCqTlvesgFTe7V5JE=;
+	b=db3e1uOKbkW/ZZ5J67Bbc0O+mfRHWxklG6ULNISa3QYayTQujBDykf0zxFmV/SE8ox
+	hD/zFEzxDy/kgVFRs6nYCzPn4FRZFjmDfybjXbiiq/Xp2Ne7gUXi6LpgPFoJOgjcSfsK
+	R0B6ILDbnJRFyYVqg4RLAAjJW63e9U+ugLkyDw9qN983sYVS9KwsZyxtOFNswtkMyE2O
+	xBroU09/Xe/ogwOkx+xvj5fA6HaPPGsegnoVnqduy2YUzvJyOj+QLsXgxa56vh2KDr7S
+	aYjjrUJ0lh+hR32bO/n8X7iYw5G8IjKwXtoVw2D+H5ldZBgyUpnEvyuHYbYBNFCHU7L1
+	niGA==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <CAD0=qkKGx8o9xAf14G1NOXxD5QzKXKJBqfCXDBgc8saTfrW_zQ@mail.gmail.com>
-	<969F26A8BAB325438E7EB80D3C3134FB2F384F4B@IRSMSX105.ger.corp.intel.com>
-In-Reply-To: <969F26A8BAB325438E7EB80D3C3134FB2F384F4B@IRSMSX105.ger.corp.intel.com>
-Subject: Re: Yocto 1.7 building alsa-lib do_package fails
+X-Received: by 10.236.222.10 with SMTP id s10mr16058346yhp.102.1414787607483; 
+	Fri, 31 Oct 2014 13:33:27 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.172.8 with HTTP; Fri, 31 Oct 2014 13:33:27 -0700 (PDT)
+In-Reply-To: <5452F2DB.5030603@tames.com>
+References: <5452F2DB.5030603@tames.com>
+Date: Fri, 31 Oct 2014 18:33:27 -0200
+X-Google-Sender-Auth: i-QPKJrP8lprogZmVfiwADISDzw
+Message-ID: <CAP9ODKpaTKCod4zLRNwjc8MT5YDfUxUSKwMS41tau9FHXUt9gA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: gcc-cross-canadian not choosing correct float type in meta-toolchain-qt5 (dizzy)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,77 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Oct 2014 15:51:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 31 Oct 2014 20:33:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Am 31.10.2014 16:06, schrieb Iorga, Cristian:
-> Hi,
-> 
-> There might be something wrong with the target machine/processor architecture in your setup..
-> 
-> tmp-angstrom_v2014_12-glibc/work/-angstrom-linux-gnueabi/alsa-lib/1.0.28-r0/ looks strange;
-> A common root cause will trigger the ipk/opkg error.
-> 
+On Fri, Oct 31, 2014 at 12:24 AM, Alfonso Tam=C3=A9s <alfonso@tames.com> wr=
+ote:
+> Did your patches to meta-qt5 that recognize hard float and configure
+> meta-toolchain-qt5's gcc-cross-canadian accordingly ended in dizzy or are
+> they still in the master branch? I just fresh repo synced and bitbaked a
+> dizzy image with a meta-toolchain-qt5 and gcc-cross-canadian is not
+> configured///--with-float=3Dhard/ by default.
+>
+> I would be happy to help but I am still figuring out how Yocto works. In =
+the
+> meanwhile I just forced an ugly /--with-float=3Dhard/ in
+> /poky/meta/recipes-devtools/gcc/gcc-cross-canadian.inc inside the multili=
+b
+> environmental variable that does the trick.
 
-You're right I didn't see that. This looks very strange.
+I think we have all fixes merged in dizzy and master now.
 
-> Please provide the necessary steps to reproduce the issue.
-
-I wrote my own machine-configuration based on the wandboard-solo
-configuration. I will try to find a way to reproduce this issue using a
-standard machine configuration. This might even exclude errors in my own
-configuration.
-
-> 
-> Regards,
-> Cristian Iorga
-> Yocto Project
-> Intel Corporation
-> 
-> 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Sven Ebenfeld
-> Sent: Friday, October 31, 2014 12:14 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] Yocto 1.7 building alsa-lib do_package fails
-> 
-> Hi,
-> 
-> When I try to build alsa-lib on master branch of oe-core I get the following error:
-> 
-> ERROR: Function failed: opkg-build execution failed
-> ERROR: Logfile of failure stored in:
-> /media/bitbakeTmp/angstrom-dizzy/build/tmp-angstrom_v2014_12-glibc/work/-angstrom-linux-gnueabi/alsa-lib/1.0.28-r0/temp/log.do_package_write_ipk.29979
-> Log data follows:
-> | DEBUG: Executing python function sstate_task_prefunc
-> | DEBUG: Python function sstate_task_prefunc finished
-> | DEBUG: Executing python function do_package_write_ipk
-> | DEBUG: Executing python function read_subpackage_metadata
-> | DEBUG: Python function read_subpackage_metadata finished
-> | DEBUG: Executing python function do_package_ipk
-> | *** Error: CONTROL/control is missing field Architecture
-> |
-> | opkg-build: Please fix the above errors and try again.
-> | DEBUG: Python function do_package_ipk finished
-> | DEBUG: Python function do_package_write_ipk finished
-> | ERROR: Function failed: opkg-build execution failed
-> ERROR: Task 1625
-> (/media/bitbakeTmp/angstrom-dizzy/sources/openembedded-core/meta/recipes-multimedia/alsa/alsa-lib_1.0.28.bb,
-> do_package_write_ipk) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 2214 tasks of which 15 didn't need to be rerun and 1 failed.
-> 
-> 
-> I'm using Angstrom setup-scripts on branch angstrom-v2014.12-yocto1.7
-> 
-> Can anybody give me an advice where to look for the source of the problem?
-> 
-> Regards,
-> Sven
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
