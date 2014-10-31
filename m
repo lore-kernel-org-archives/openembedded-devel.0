@@ -1,33 +1,24 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C8A965D3C
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BAC365DEB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 13:57:07 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1XjqDo-0003hu-3w for openembedded-devel@lists.openembedded.org;
-	Thu, 30 Oct 2014 14:57:04 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 14:57:04 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 31 Oct 2014 01:31:52 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9V1VpVw009906
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 14:57:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 30 Oct 2014 14:56:48 +0100
-Message-ID: <m2tg30$5ot$1@ger.gmane.org>
-References: <1414675462-19999-1-git-send-email-Hongjun.Yang@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <1414675462-19999-1-git-send-email-Hongjun.Yang@windriver.com>
-Subject: Re: [meta-oe][PATCH V3] tree: Add a new package
+	Thu, 30 Oct 2014 18:31:52 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 30 Oct 2014 18:31:51 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 31 Oct 2014 09:31:50 +0800
+Message-ID: <1414719110-4635-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [PATCH] syslog-ng: Fix memory leak when udp connection is used [ LIN7-1379 ]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,83 +32,251 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Oct 2014 13:57:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 31 Oct 2014 01:31:54 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+From: Xufeng Zhang <xufeng.zhang@windriver.com>
 
-Hongjun Yang schreef op 30-10-14 14:24:
-> From: "Hongjun.Yang" <hongjun.yang@windriver.com>
-> 
-> Add tree command, some ptest cases need it.
-> 
-> Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
-> 
-> --- .../tree/tree-1.7.0/fix-cross-env.patch            | 36
-> ++++++++++++++++++++++ meta-oe/recipes-support/tree/tree_1.7.0.bb
-> | 16 ++++++++++ 2 files changed, 52 insertions(+) create mode 100644
-> meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch create mode
-> 100644 meta-oe/recipes-support/tree/tree_1.7.0.bb
-> 
-> diff --git a/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch
-> b/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch new file
-> mode 100644 index 0000000..d0118f6 --- /dev/null +++
-> b/meta-oe/recipes-support/tree/tree-1.7.0/fix-cross-env.patch @@ -0,0
-> +1,36 @@ +From 945a5861bb19a34d31119bc38f813513296ce2ad Mon Sep 17
-> 00:00:00 2001 +From: "Hongjun.Yang" <hongjun.yang@windriver.com> +Date:
-> Thu, 30 Oct 2014 20:38:06 +0800 +Subject: [PATCH] Fix the cross-compiling
-> issue + +Upstream-Status: Pending + +Signed-off-by: Hongjun.Yang
-> <hongjun.yang@windriver.com> +--- + Makefile | 6 +++--- + 1 file changed,
-> 3 insertions(+), 3 deletions(-) + +diff --git a/Makefile b/Makefile 
-> +index e91f1f6..e496a52 100644 +--- a/Makefile ++++ b/Makefile +@@ -18,13
-> +18,13 @@ + + prefix = /usr + +-CC=gcc ++#CC=gcc + + VERSION=1.7.0 +
-> TREE_DEST=tree +-BINDIR=${prefix}/bin ++BINDIR=${DESTDIR}/${prefix}/bin +
-> MAN=tree.1 +-MANDIR=${prefix}/man/man1 
-> ++MANDIR=${DESTDIR}/${prefix}/man/man1 + OBJS=tree.o unix.o html.o xml.o
-> json.o hash.o color.o + + # Uncomment options below for your particular
-> OS: +-- +1.9.1 + diff --git a/meta-oe/recipes-support/tree/tree_1.7.0.bb
-> b/meta-oe/recipes-support/tree/tree_1.7.0.bb new file mode 100644 index
-> 0000000..c1c3a8b
+When udp connection is used, there are several memory leaks happen
+after run a long time.
 
-This whole patch can be replaced with:
+Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../logwriter-dont-allocate-a-new-buffer.patch     |   26 ++++++
+ .../logwriter-still-free-the-unconsumed-item.patch |   47 ----------
+ .../rewrite-expr-grammar.ym-Free-up-token.patch    |   17 ++++
+ .../files/still-free-the-unconsumed-item.patch     |   90 ++++++++++++++++++++
+ .../recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb |    4 +-
+ 5 files changed, 136 insertions(+), 48 deletions(-)
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
 
-EXTRA_OEMAKE="CC='${CC}' CFLAGS='${CFLAGS} -DLINUX -D_LARGEFILE64_SOURCE
-- -D_FILE_OFFSET_BITS=64' LDFLAGS='${LDFLAGS}'
-
-[..]
-
-do_install() {
-	oe_runmake install BINDIR=${D}${bindir} MANDIR=${D}${mandir}/man1
-}
-
-
-
-> --- /dev/null +++ b/meta-oe/recipes-support/tree/tree_1.7.0.bb @@ -0,0
-> +1,16 @@ +SUMMARY = "This is a handy little utility to display a tree
-> view of directories." +HOMEPAGE =
-> "http://mama.indstate.edu/users/ice/tree/" +SECTION = "console/utils" 
-> +LICENSE="GPLv2" +LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833" + +inherit
-> autotools-brokensep + +SRC_URI =
-> "http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz \
-
-change that to tree-${PV}.tgz
-
-> +	   file://fix-cross-env.patch \ +	  " + +SRC_URI[md5sum] =
-> "abe3e03e469c542d8e157cdd93f4d8a6" +SRC_URI[sha256sum] =
-> "6957c20e82561ac4231638996e74f4cfa4e6faabc5a2f511f0b4e3940e8f7b12" + 
-> +FILES_${PN}-doc += "${prefix}/man"
-> 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFUUkOgMkyGM64RGpERAl1xAJ9PiXKuZSheKeib1V/8N3UHKk1AtACgmVlS
-au0DIDX3zHLlieCyAW550nE=
-=Gh6Q
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch b/meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
+new file mode 100644
+index 0000000..9e3d64b
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
+@@ -0,0 +1,26 @@
++logwriter: Don't allocate a new buffer if fails to consume current item
++
++Upstream-Status: Pending
++
++Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
++---
++--- a/lib/logwriter.c
+++++ b/lib/logwriter.c
++@@ -1010,7 +1010,7 @@
++         {
++           status = log_proto_client_post(proto, (guchar *) self->line_buffer->str, self->line_buffer->len, &consumed);
++ 
++-          if (consumed)
+++          if (consumed && status != LPS_ERROR)
++             log_writer_realloc_line_buffer(self);
++ 
++           if (status == LPS_ERROR)
++@@ -1028,7 +1028,7 @@
++                     NULL);
++           consumed = TRUE;
++         }
++-      if (consumed)
+++      if (consumed && status != LPS_ERROR)
++         {
++           if (lm->flags & LF_LOCAL)
++             step_sequence_number(&self->seq_num);
+diff --git a/meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch b/meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch
+deleted file mode 100644
+index 3111093..0000000
+--- a/meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+-logwritter: still free the unconsumed item during reloading configuration
+-
+-Otherwise we have no chance to free this stuff.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
+----
+---- a/lib/logwriter.c
+-+++ b/lib/logwriter.c
+-@@ -39,6 +39,7 @@
+- #include <iv.h>
+- #include <iv_event.h>
+- #include <iv_work.h>
+-+#include "logproto/logproto-text-client.h"
+- 
+- typedef enum
+- {
+-@@ -978,6 +979,7 @@
+-   gint count = 0;
+-   gboolean ignore_throttle = (flush_mode >= LW_FLUSH_QUEUE);
+-   LogProtoStatus status = LPS_SUCCESS;
+-+  LogProtoTextClient *self_text;
+-   
+-   if (!proto)
+-     return FALSE;
+-@@ -1035,7 +1037,18 @@
+-         }
+-       else
+-         {
+--          /* push back to the queue */
+--          log_queue_push_head(self->queue, lm, &path_options);
+-+          self_text = (LogProtoTextClient *) proto;
+-+          /* free the unconsumed message during reloading configuration */ 
+-+          if ((LW_FLUSH_QUEUE == flush_mode) && self_text->partial_free && self_text->partial)
+-+            {
+-+              self_text->partial_free(self_text->partial);
+-+              self_text->partial = NULL;
+-+              log_msg_unref(lm);
+-+            }
+-+          else
+-+            {
+-+              /* push back to the queue */
+-+              log_queue_push_head(self->queue, lm, &path_options);
+-+            }
+-           msg_set_context(NULL);
+-           log_msg_refcache_stop();
+diff --git a/meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch b/meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
+new file mode 100644
+index 0000000..1951af9
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
+@@ -0,0 +1,17 @@
++rewrite-expr-grammar.ym: Free up token.
++
++Upsteam-Status: Backport
++
++Reported-by: Xufeng Zhang <xufeng.zhang@windriver.com>
++Signed-off-by: Viktor Tusa <tusavik@gmail.com>
++---
++--- a/lib/rewrite/rewrite-expr-grammar.ym
+++++ b/lib/rewrite/rewrite-expr-grammar.ym
++@@ -78,6 +78,7 @@
++ 
++ 	    $$ = log_template_new(configuration, $1);
++ 	    CHECK_ERROR(log_template_compile($$, $1, &error), @1, "Error compiling template (%s)", error->message);
+++            free($1);
++ 	  }
++ 	;
++ 
+diff --git a/meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch b/meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
+new file mode 100644
+index 0000000..ea18682
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
+@@ -0,0 +1,90 @@
++From 365020c5c0823c91a8011e34597f970a7cfb4fb3 Mon Sep 17 00:00:00 2001
++From: Tusa Viktor <tusavik@gmail.com>
++Date: Wed, 23 Apr 2014 17:10:58 +0000
++Subject: [PATCH] logwriter: still free the unconsumed item during reloading
++ configuration
++
++Upstream-Status: Backport
++
++Otherwise we have no chance to free this stuff.
++
++Reported-by: Xufeng Zhang <xufeng.zhang@windriver.com>
++Signed-off-by: Tusa Viktor <tusavik@gmail.com>
++Signed-off-by: Gergely Nagy <algernon@madhouse-project.org>
++---
++ lib/logproto/logproto-client.h      |    2 +-
++ lib/logproto/logproto-text-client.c |   11 +++++++++++
++ lib/logwriter.c                     |    9 +++++++--
++ 3 files changed, 19 insertions(+), 3 deletions(-)
++
++diff --git a/lib/logproto/logproto-client.h b/lib/logproto/logproto-client.h
++index 254ecf9..5adc917 100644
++--- a/lib/logproto/logproto-client.h
+++++ b/lib/logproto/logproto-client.h
++@@ -47,7 +47,6 @@ void log_proto_client_options_defaults(LogProtoClientOptions *options);
++ void log_proto_client_options_init(LogProtoClientOptions *options, GlobalConfig *cfg);
++ void log_proto_client_options_destroy(LogProtoClientOptions *options);
++ 
++-
++ struct _LogProtoClient
++ {
++   LogProtoStatus status;
++@@ -107,6 +106,7 @@ log_proto_client_reset_error(LogProtoClient *s)
++ gboolean log_proto_client_validate_options(LogProtoClient *self);
++ void log_proto_client_init(LogProtoClient *s, LogTransport *transport, const LogProtoClientOptions *options);
++ void log_proto_client_free(LogProtoClient *s);
+++void log_proto_client_free_method(LogProtoClient *s);
++ 
++ #define DEFINE_LOG_PROTO_CLIENT(prefix) \
++   static gpointer                                                       \
++diff --git a/lib/logproto/logproto-text-client.c b/lib/logproto/logproto-text-client.c
++index 3248759..a5100f3 100644
++--- a/lib/logproto/logproto-text-client.c
+++++ b/lib/logproto/logproto-text-client.c
++@@ -146,12 +146,23 @@ log_proto_text_client_post(LogProtoClient *s, guchar *msg, gsize msg_len, gboole
++ }
++ 
++ void
+++log_proto_text_client_free(LogProtoClient *s)
+++{
+++  LogProtoTextClient *self = (LogProtoTextClient *)s;
+++  if (self->partial_free)
+++    self->partial_free(self->partial);
+++  self->partial = NULL;
+++  log_proto_client_free_method(s);
+++};
+++
+++void
++ log_proto_text_client_init(LogProtoTextClient *self, LogTransport *transport, const LogProtoClientOptions *options)
++ {
++   log_proto_client_init(&self->super, transport, options);
++   self->super.prepare = log_proto_text_client_prepare;
++   self->super.flush = log_proto_text_client_flush;
++   self->super.post = log_proto_text_client_post;
+++  self->super.free_fn = log_proto_text_client_free;
++   self->super.transport = transport;
++   self->next_state = -1;
++ }
++diff --git a/lib/logwriter.c b/lib/logwriter.c
++index 3292e31..470bcdb 100644
++--- a/lib/logwriter.c
+++++ b/lib/logwriter.c
++@@ -1063,8 +1063,13 @@ log_writer_flush(LogWriter *self, LogWriterFlushMode flush_mode)
++         }
++       else
++         {
++-          /* push back to the queue */
++-          log_queue_push_head(self->queue, lm, &path_options);
+++          if (flush_mode == LW_FLUSH_QUEUE)
+++            log_msg_unref(lm);
+++          else
+++            {
+++              /* push back to the queue */
+++              log_queue_push_head(self->queue, lm, &path_options);
+++            }
++           msg_set_context(NULL);
++           log_msg_refcache_stop();
++           break;
++-- 
++1.7.10.4
++
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
+index d5939e4..b548420 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
+@@ -9,10 +9,12 @@ SRC_URI += " \
+     file://Fix-the-memory-leak-problem-for-mutex.patch \
+     file://Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch \
+     file://free-global-LogTemplateOptions.patch \
+-    file://logwriter-still-free-the-unconsumed-item.patch \
++    file://still-free-the-unconsumed-item.patch \
+     file://syslog-ng-verify-the-list-before-del.patch \
+     file://configure.patch \
+     file://dbifix.patch \
++    file://rewrite-expr-grammar.ym-Free-up-token.patch \
++    file://logwriter-dont-allocate-a-new-buffer.patch \
+ "
+ 
+ SRC_URI[md5sum] = "ff3bf223ebafbaa92b69a2d5b729f368"
+-- 
+1.7.10.4
 
 
