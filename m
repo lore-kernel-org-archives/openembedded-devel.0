@@ -1,35 +1,35 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id A67836AC4A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id BDB0E60557
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2014 15:07:33 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga102.jf.intel.com with ESMTP; 31 Oct 2014 08:06:06 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,295,1413270000"; d="scan'208";a="599801954"
-Received: from irsmsx101.ger.corp.intel.com ([163.33.3.153])
-	by orsmga001.jf.intel.com with ESMTP; 31 Oct 2014 08:07:32 -0700
-Received: from irsmsx153.ger.corp.intel.com (163.33.192.75) by
-	IRSMSX101.ger.corp.intel.com (163.33.3.153) with Microsoft SMTP Server
-	(TLS) id 14.3.195.1; Fri, 31 Oct 2014 15:06:56 +0000
-Received: from irsmsx105.ger.corp.intel.com ([169.254.7.56]) by
-	IRSMSX153.ger.corp.intel.com ([169.254.9.23]) with mapi id
-	14.03.0195.001; Fri, 31 Oct 2014 15:06:56 +0000
-From: "Iorga, Cristian" <cristian.iorga@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Yocto 1.7 building alsa-lib do_package fails
-Thread-Index: AQHP9PNtTx0qhJq58EeLYkdHkPkpzZxKTCWg
-Date: Fri, 31 Oct 2014 15:06:56 +0000
-Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F384F4B@IRSMSX105.ger.corp.intel.com>
-References: <CAD0=qkKGx8o9xAf14G1NOXxD5QzKXKJBqfCXDBgc8saTfrW_zQ@mail.gmail.com>
-In-Reply-To: <CAD0=qkKGx8o9xAf14G1NOXxD5QzKXKJBqfCXDBgc8saTfrW_zQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.182]
+	Fri, 31 Oct 2014 15:16:52 +0000 (UTC)
+Received: by mail-ig0-f181.google.com with SMTP id l13so1218014iga.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 31 Oct 2014 08:16:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=JipIVoJWDWLYl9WgORcGiZWbwuqNji1+rZ1ZcTySQWQ=;
+	b=OvCJBX96jHReK22C905MtvC1Fa6RIC3e4+Whg1QXWO47qAGr4qCKI9ReEuJB7P/EHR
+	9gms0qUCLRtDkm8KXIVDXdkIK7/i7m5QzTQf/COjDH/V01E0/NVX6Qet6sLOJvCpLmtB
+	5R17bdDDLybr0GLCwgENNbOcAnucrxexzb023xtRs+AxA6NVyqnwxYLTsUr/pCY+XF5+
+	8YL5mmfhEm51Hw04IJnXoI1cI6MGstDy/AExrl3dX2blt0A2zj4s+qghATs+wVTQSZ6n
+	AQEjmM8ThogIuJdEYqbThziu9nL+jxcKhJ3OIm2cd+Uqz0ns7PHntDhCyglQQe3ZE0J9
+	fbDw==
+X-Received: by 10.50.73.131 with SMTP id l3mr4947175igv.10.1414768612272; Fri,
+	31 Oct 2014 08:16:52 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: Yocto 1.7 building alsa-lib do_package fails
+Received: by 10.50.169.2 with HTTP; Fri, 31 Oct 2014 08:16:22 -0700 (PDT)
+In-Reply-To: <CAOd_LFxfPjWtLYc58XCZAYq9eUd_1fCQMc0ehbd-WtHgccdsqg@mail.gmail.com>
+References: <CAOd_LFxfPjWtLYc58XCZAYq9eUd_1fCQMc0ehbd-WtHgccdsqg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 31 Oct 2014 08:16:22 -0700
+Message-ID: <CAMKF1so+zRawQV7Q9zQqiN71AWiR25f7fKbzN0ejnFR06S_qkg@mail.gmail.com>
+To: Cliff Brake <cbrake@bec-systems.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][meta-ruby][daisy] pull request: ruby fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,74 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Oct 2014 15:07:41 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 31 Oct 2014 15:16:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
-There might be something wrong with the target machine/processor architectu=
-re in your setup..
-
-tmp-angstrom_v2014_12-glibc/work/-angstrom-linux-gnueabi/alsa-lib/1.0.28-r0=
-/ looks strange;
-A common root cause will trigger the ipk/opkg error.
-
-Please provide the necessary steps to reproduce the issue.
-
-Regards,
-Cristian Iorga
-Yocto Project
-Intel Corporation
-
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Sven Ebenfeld
-Sent: Friday, October 31, 2014 12:14 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe] Yocto 1.7 building alsa-lib do_package fails
-
-Hi,
-
-When I try to build alsa-lib on master branch of oe-core I get the followin=
-g error:
-
-ERROR: Function failed: opkg-build execution failed
-ERROR: Logfile of failure stored in:
-/media/bitbakeTmp/angstrom-dizzy/build/tmp-angstrom_v2014_12-glibc/work/-an=
-gstrom-linux-gnueabi/alsa-lib/1.0.28-r0/temp/log.do_package_write_ipk.29979
-Log data follows:
-| DEBUG: Executing python function sstate_task_prefunc
-| DEBUG: Python function sstate_task_prefunc finished
-| DEBUG: Executing python function do_package_write_ipk
-| DEBUG: Executing python function read_subpackage_metadata
-| DEBUG: Python function read_subpackage_metadata finished
-| DEBUG: Executing python function do_package_ipk
-| *** Error: CONTROL/control is missing field Architecture
-|
-| opkg-build: Please fix the above errors and try again.
-| DEBUG: Python function do_package_ipk finished
-| DEBUG: Python function do_package_write_ipk finished
-| ERROR: Function failed: opkg-build execution failed
-ERROR: Task 1625
-(/media/bitbakeTmp/angstrom-dizzy/sources/openembedded-core/meta/recipes-mu=
-ltimedia/alsa/alsa-lib_1.0.28.bb,
-do_package_write_ipk) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 2214 tasks of which 15 didn't need to be rer=
-un and 1 failed.
-
-
-I'm using Angstrom setup-scripts on branch angstrom-v2014.12-yocto1.7
-
-Can anybody give me an advice where to look for the source of the problem?
-
-Regards,
-Sven
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On Wed, Oct 29, 2014 at 11:08 AM, Cliff Brake <cbrake@bec-systems.com> wrote:
+> The following changes since commit 518cd119a8724dbd485a5d5c5047de59e8fbd652:
+>
+>   imagemagick: fix SRC_URI (2014-10-14 10:49:48 -0400)
+>
+> are available in the git repository at:
+>
+>   https://github.com/cbrake/meta-openembedded.git daisy
+>
+> for you to fetch changes up to 8065dd8456913457a0114ddb2b4bd4842847b2a3:
+>
+>   ruby: fix race conditions at install-ext (2014-10-29 14:03:22 -0400)
+>
+> ----------------------------------------------------------------
+> Jackie Huang (1):
+>       ruby: fix race conditions at install-ext
+>
+> Roy Li (1):
+>       ruby: fix a parallel building issue
+>
+>  meta-ruby/recipes-devtools/ruby/ruby/remove-the-dependency-on-dir.patch
+>                    | 37 +++++++++++++++++++++++++++++++++++++
+>  meta-ruby/recipes-devtools/ruby/ruby/ruby-mkmf.rb-fix-race-conditions-at-install-ext.patch
+> | 31 +++++++++++++++++++++++++++++++
+>  meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb
+>                      |  2 ++
+>  3 files changed, 70 insertions(+)
+>  create mode 100644
+> meta-ruby/recipes-devtools/ruby/ruby/remove-the-dependency-on-dir.patch
+>  create mode 100644
+> meta-ruby/recipes-devtools/ruby/ruby/ruby-mkmf.rb-fix-race-conditions-at-install-ext.patch
 
