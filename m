@@ -1,30 +1,36 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 7388260557
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f175.google.com (mail-yk0-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id B9F5C65E94
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2014 10:14:01 +0000 (UTC)
-Received: by mail-ie0-f182.google.com with SMTP id rd18so913635iec.41
+	Fri, 31 Oct 2014 12:21:31 +0000 (UTC)
+Received: by mail-yk0-f175.google.com with SMTP id q9so3220951ykb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2014 03:14:02 -0700 (PDT)
+	Fri, 31 Oct 2014 05:21:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=MTZV8Lo4oqc+HCfH3K+Lp74kUNBie2dZizCuLvNlXgY=;
-	b=VwjaZCQZ8O8vPanM1pEYKnW1PcjZXRzLCf28FpdHRoDpmNztvqMjWbnrFCR/Iu+UFL
-	aiv3/F9F20unVEFA4h3gCt7s8kTmAOj80meKtR0ZCL78tz3MonsuGE/J32JhuJHR4qcz
-	IxvDBFVNxdLoTPWy6DYK9re+G9paZtKrWnBM3QKVYy+ylgvaxW5py8hwJxYM/i9NF6Mz
-	x/mFfu/z59X67xBNkJy1NRFB4Ng+eyLkryZv7gSMSe1T/Erm2J6hBjFwfgJHbGll2csq
-	mLfz4yZXmZev5nFINWvB03cXgQ3qXjZamxWmWnu8/UQhp9Tb9xJPw18ExWZdEF/G3u/j
-	kCDQ==
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=BUf27vTxEynHBGtKse9DHkauEOjgGV48W+iCkcmY/vU=;
+	b=JhAcOaPlcO6sUnbCfwQTiStFMwa/B+XQEkQNSZtJw0ZezhmvsxeIR9M4EcFml8jMrh
+	eH6Qo1aB17hRfaPj+q+Yi7UBkST9FVKK2u/55fjoyw5gYHSi8ycSRlmmk8rr6kXInzQa
+	8AyqWMNTcCp8jE0rVf/mlyT6LsHm2kqi2jgO6bWuaoOor+Btf9TDeS7k6z+vD28hpis1
+	QNNoD8iGqCxDUl2pCMqKmYdA7Sxs0+SJq52JM1FYsFyrYFCnf2eaeQAt0wtg4NtFmC7p
+	sdr8UagNniKZBZ2slaPy4TV80c9dWuZdlcJPJWK8twMJQRHJK2p/cNPc0Ki3jgcF0uI6
+	KXzw==
 MIME-Version: 1.0
-X-Received: by 10.107.6.7 with SMTP id 7mr27178560iog.38.1414750442082; Fri,
-	31 Oct 2014 03:14:02 -0700 (PDT)
-Received: by 10.107.148.76 with HTTP; Fri, 31 Oct 2014 03:14:02 -0700 (PDT)
-Date: Fri, 31 Oct 2014 11:14:02 +0100
-Message-ID: <CAD0=qkKGx8o9xAf14G1NOXxD5QzKXKJBqfCXDBgc8saTfrW_zQ@mail.gmail.com>
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Yocto 1.7 building alsa-lib do_package fails
+X-Received: by 10.170.195.88 with SMTP id m85mr13824919yke.30.1414758092389;
+	Fri, 31 Oct 2014 05:21:32 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.172.8 with HTTP; Fri, 31 Oct 2014 05:21:32 -0700 (PDT)
+In-Reply-To: <CAOd_LFxfPjWtLYc58XCZAYq9eUd_1fCQMc0ehbd-WtHgccdsqg@mail.gmail.com>
+References: <CAOd_LFxfPjWtLYc58XCZAYq9eUd_1fCQMc0ehbd-WtHgccdsqg@mail.gmail.com>
+Date: Fri, 31 Oct 2014 10:21:32 -0200
+X-Google-Sender-Auth: 2ot9mwkKex-KvJKcBKtqwYoh0Bs
+Message-ID: <CAP9ODKo77f7vZDzHL+-qfbcPZfEFcdKurFPA7kZZca-NW1Qhow@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Cliff Brake <cbrake@bec-systems.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][meta-ruby][daisy] pull request: ruby fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,41 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Oct 2014 10:14:02 -0000
+X-List-Received-Date: Fri, 31 Oct 2014 12:21:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi,
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-When I try to build alsa-lib on master branch of oe-core I get the
-following error:
+On Wed, Oct 29, 2014 at 4:08 PM, Cliff Brake <cbrake@bec-systems.com> wrote:
+> The following changes since commit 518cd119a8724dbd485a5d5c5047de59e8fbd652:
+>
+>   imagemagick: fix SRC_URI (2014-10-14 10:49:48 -0400)
+>
+> are available in the git repository at:
+>
+>   https://github.com/cbrake/meta-openembedded.git daisy
+>
+> for you to fetch changes up to 8065dd8456913457a0114ddb2b4bd4842847b2a3:
+>
+>   ruby: fix race conditions at install-ext (2014-10-29 14:03:22 -0400)
+>
+> ----------------------------------------------------------------
+> Jackie Huang (1):
+>       ruby: fix race conditions at install-ext
+>
+> Roy Li (1):
+>       ruby: fix a parallel building issue
+>
+>  meta-ruby/recipes-devtools/ruby/ruby/remove-the-dependency-on-dir.patch
+>                    | 37 +++++++++++++++++++++++++++++++++++++
+>  meta-ruby/recipes-devtools/ruby/ruby/ruby-mkmf.rb-fix-race-conditions-at-install-ext.patch
+> | 31 +++++++++++++++++++++++++++++++
+>  meta-ruby/recipes-devtools/ruby/ruby_1.9.3-p429.bb
+>                      |  2 ++
+>  3 files changed, 70 insertions(+)
+>  create mode 100644
+> meta-ruby/recipes-devtools/ruby/ruby/remove-the-dependency-on-dir.patch
+>  create mode 100644
+> meta-ruby/recipes-devtools/ruby/ruby/ruby-mkmf.rb-fix-race-conditions-at-install-ext.patch
 
-ERROR: Function failed: opkg-build execution failed
-ERROR: Logfile of failure stored in:
-/media/bitbakeTmp/angstrom-dizzy/build/tmp-angstrom_v2014_12-glibc/work/-angstrom-linux-gnueabi/alsa-lib/1.0.28-r0/temp/log.do_package_write_ipk.29979
-Log data follows:
-| DEBUG: Executing python function sstate_task_prefunc
-| DEBUG: Python function sstate_task_prefunc finished
-| DEBUG: Executing python function do_package_write_ipk
-| DEBUG: Executing python function read_subpackage_metadata
-| DEBUG: Python function read_subpackage_metadata finished
-| DEBUG: Executing python function do_package_ipk
-| *** Error: CONTROL/control is missing field Architecture
-|
-| opkg-build: Please fix the above errors and try again.
-| DEBUG: Python function do_package_ipk finished
-| DEBUG: Python function do_package_write_ipk finished
-| ERROR: Function failed: opkg-build execution failed
-ERROR: Task 1625
-(/media/bitbakeTmp/angstrom-dizzy/sources/openembedded-core/meta/recipes-multimedia/alsa/alsa-lib_1.0.28.bb,
-do_package_write_ipk) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 2214 tasks of which 15 didn't need to
-be rerun and 1 failed.
 
 
-I'm using Angstrom setup-scripts on branch angstrom-v2014.12-yocto1.7
-
-Can anybody give me an advice where to look for the source of the problem?
-
-Regards,
-Sven
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
