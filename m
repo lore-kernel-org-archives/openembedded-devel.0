@@ -1,24 +1,28 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BAC365DEB
+Return-Path: <alfonso@tames.com>
+X-Greylist: delayed 416 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 31 Oct 2014 02:31:30 UTC
+Received: from mail.tames.com (tames.com [72.2.119.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EE5D65CED
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Oct 2014 01:31:52 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id s9V1VpVw009906
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 31 Oct 2014 02:31:30 +0000 (UTC)
+Received: from [10.178.247.148] (unknown [187.189.166.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: alfonso@tames.com)
+	by mail.tames.com (Postfix) with ESMTPSA id 7FB4629A10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Oct 2014 18:31:52 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 30 Oct 2014 18:31:51 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 31 Oct 2014 09:31:50 +0800
-Message-ID: <1414719110-4635-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.7.10.4
+	Fri, 31 Oct 2014 02:23:47 +0000 (UTC)
+Message-ID: <5452F2DB.5030603@tames.com>
+Date: Thu, 30 Oct 2014 20:24:27 -0600
+From: =?UTF-8?B?QWxmb25zbyBUYW3DqXM=?= <alfonso@tames.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
 MIME-Version: 1.0
-Subject: [PATCH] syslog-ng: Fix memory leak when udp connection is used [ LIN7-1379 ]
+To: openembedded-devel@lists.openembedded.org
+X-Virus-Scanned: clamav-milter 0.98.1 at 56cb6755-5e21-c698-f8be-a3023abd5444
+X-Virus-Status: Clean
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: gcc-cross-canadian not choosing correct float type in meta-toolchain-qt5 (dizzy)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,251 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Oct 2014 01:31:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 31 Oct 2014 02:31:32 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Xufeng Zhang <xufeng.zhang@windriver.com>
 
-When udp connection is used, there are several memory leaks happen
-after run a long time.
+Hi Otavio,
 
-Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../logwriter-dont-allocate-a-new-buffer.patch     |   26 ++++++
- .../logwriter-still-free-the-unconsumed-item.patch |   47 ----------
- .../rewrite-expr-grammar.ym-Free-up-token.patch    |   17 ++++
- .../files/still-free-the-unconsumed-item.patch     |   90 ++++++++++++++++++++
- .../recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb |    4 +-
- 5 files changed, 136 insertions(+), 48 deletions(-)
- create mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch
- create mode 100644 meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
- create mode 100644 meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
+Did your patches to meta-qt5 that recognize hard float and configure 
+meta-toolchain-qt5's gcc-cross-canadian accordingly ended in dizzy or 
+are they still in the master branch? I just fresh repo synced and 
+bitbaked a dizzy image with a meta-toolchain-qt5 and gcc-cross-canadian 
+is not configured///--with-float=hard/ by default.
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch b/meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
-new file mode 100644
-index 0000000..9e3d64b
---- /dev/null
-+++ b/meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
-@@ -0,0 +1,26 @@
-+logwriter: Don't allocate a new buffer if fails to consume current item
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
-+---
-+--- a/lib/logwriter.c
-++++ b/lib/logwriter.c
-+@@ -1010,7 +1010,7 @@
-+         {
-+           status = log_proto_client_post(proto, (guchar *) self->line_buffer->str, self->line_buffer->len, &consumed);
-+ 
-+-          if (consumed)
-++          if (consumed && status != LPS_ERROR)
-+             log_writer_realloc_line_buffer(self);
-+ 
-+           if (status == LPS_ERROR)
-+@@ -1028,7 +1028,7 @@
-+                     NULL);
-+           consumed = TRUE;
-+         }
-+-      if (consumed)
-++      if (consumed && status != LPS_ERROR)
-+         {
-+           if (lm->flags & LF_LOCAL)
-+             step_sequence_number(&self->seq_num);
-diff --git a/meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch b/meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch
-deleted file mode 100644
-index 3111093..0000000
---- a/meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch
-+++ /dev/null
-@@ -1,47 +0,0 @@
--logwritter: still free the unconsumed item during reloading configuration
--
--Otherwise we have no chance to free this stuff.
--
--Upstream-Status: Pending
--
--Signed-off-by: Xufeng Zhang <xufeng.zhang@windriver.com>
-----
----- a/lib/logwriter.c
--+++ b/lib/logwriter.c
--@@ -39,6 +39,7 @@
-- #include <iv.h>
-- #include <iv_event.h>
-- #include <iv_work.h>
--+#include "logproto/logproto-text-client.h"
-- 
-- typedef enum
-- {
--@@ -978,6 +979,7 @@
--   gint count = 0;
--   gboolean ignore_throttle = (flush_mode >= LW_FLUSH_QUEUE);
--   LogProtoStatus status = LPS_SUCCESS;
--+  LogProtoTextClient *self_text;
--   
--   if (!proto)
--     return FALSE;
--@@ -1035,7 +1037,18 @@
--         }
--       else
--         {
---          /* push back to the queue */
---          log_queue_push_head(self->queue, lm, &path_options);
--+          self_text = (LogProtoTextClient *) proto;
--+          /* free the unconsumed message during reloading configuration */ 
--+          if ((LW_FLUSH_QUEUE == flush_mode) && self_text->partial_free && self_text->partial)
--+            {
--+              self_text->partial_free(self_text->partial);
--+              self_text->partial = NULL;
--+              log_msg_unref(lm);
--+            }
--+          else
--+            {
--+              /* push back to the queue */
--+              log_queue_push_head(self->queue, lm, &path_options);
--+            }
--           msg_set_context(NULL);
--           log_msg_refcache_stop();
-diff --git a/meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch b/meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
-new file mode 100644
-index 0000000..1951af9
---- /dev/null
-+++ b/meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
-@@ -0,0 +1,17 @@
-+rewrite-expr-grammar.ym: Free up token.
-+
-+Upsteam-Status: Backport
-+
-+Reported-by: Xufeng Zhang <xufeng.zhang@windriver.com>
-+Signed-off-by: Viktor Tusa <tusavik@gmail.com>
-+---
-+--- a/lib/rewrite/rewrite-expr-grammar.ym
-++++ b/lib/rewrite/rewrite-expr-grammar.ym
-+@@ -78,6 +78,7 @@
-+ 
-+ 	    $$ = log_template_new(configuration, $1);
-+ 	    CHECK_ERROR(log_template_compile($$, $1, &error), @1, "Error compiling template (%s)", error->message);
-++            free($1);
-+ 	  }
-+ 	;
-+ 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch b/meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
-new file mode 100644
-index 0000000..ea18682
---- /dev/null
-+++ b/meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
-@@ -0,0 +1,90 @@
-+From 365020c5c0823c91a8011e34597f970a7cfb4fb3 Mon Sep 17 00:00:00 2001
-+From: Tusa Viktor <tusavik@gmail.com>
-+Date: Wed, 23 Apr 2014 17:10:58 +0000
-+Subject: [PATCH] logwriter: still free the unconsumed item during reloading
-+ configuration
-+
-+Upstream-Status: Backport
-+
-+Otherwise we have no chance to free this stuff.
-+
-+Reported-by: Xufeng Zhang <xufeng.zhang@windriver.com>
-+Signed-off-by: Tusa Viktor <tusavik@gmail.com>
-+Signed-off-by: Gergely Nagy <algernon@madhouse-project.org>
-+---
-+ lib/logproto/logproto-client.h      |    2 +-
-+ lib/logproto/logproto-text-client.c |   11 +++++++++++
-+ lib/logwriter.c                     |    9 +++++++--
-+ 3 files changed, 19 insertions(+), 3 deletions(-)
-+
-+diff --git a/lib/logproto/logproto-client.h b/lib/logproto/logproto-client.h
-+index 254ecf9..5adc917 100644
-+--- a/lib/logproto/logproto-client.h
-++++ b/lib/logproto/logproto-client.h
-+@@ -47,7 +47,6 @@ void log_proto_client_options_defaults(LogProtoClientOptions *options);
-+ void log_proto_client_options_init(LogProtoClientOptions *options, GlobalConfig *cfg);
-+ void log_proto_client_options_destroy(LogProtoClientOptions *options);
-+ 
-+-
-+ struct _LogProtoClient
-+ {
-+   LogProtoStatus status;
-+@@ -107,6 +106,7 @@ log_proto_client_reset_error(LogProtoClient *s)
-+ gboolean log_proto_client_validate_options(LogProtoClient *self);
-+ void log_proto_client_init(LogProtoClient *s, LogTransport *transport, const LogProtoClientOptions *options);
-+ void log_proto_client_free(LogProtoClient *s);
-++void log_proto_client_free_method(LogProtoClient *s);
-+ 
-+ #define DEFINE_LOG_PROTO_CLIENT(prefix) \
-+   static gpointer                                                       \
-+diff --git a/lib/logproto/logproto-text-client.c b/lib/logproto/logproto-text-client.c
-+index 3248759..a5100f3 100644
-+--- a/lib/logproto/logproto-text-client.c
-++++ b/lib/logproto/logproto-text-client.c
-+@@ -146,12 +146,23 @@ log_proto_text_client_post(LogProtoClient *s, guchar *msg, gsize msg_len, gboole
-+ }
-+ 
-+ void
-++log_proto_text_client_free(LogProtoClient *s)
-++{
-++  LogProtoTextClient *self = (LogProtoTextClient *)s;
-++  if (self->partial_free)
-++    self->partial_free(self->partial);
-++  self->partial = NULL;
-++  log_proto_client_free_method(s);
-++};
-++
-++void
-+ log_proto_text_client_init(LogProtoTextClient *self, LogTransport *transport, const LogProtoClientOptions *options)
-+ {
-+   log_proto_client_init(&self->super, transport, options);
-+   self->super.prepare = log_proto_text_client_prepare;
-+   self->super.flush = log_proto_text_client_flush;
-+   self->super.post = log_proto_text_client_post;
-++  self->super.free_fn = log_proto_text_client_free;
-+   self->super.transport = transport;
-+   self->next_state = -1;
-+ }
-+diff --git a/lib/logwriter.c b/lib/logwriter.c
-+index 3292e31..470bcdb 100644
-+--- a/lib/logwriter.c
-++++ b/lib/logwriter.c
-+@@ -1063,8 +1063,13 @@ log_writer_flush(LogWriter *self, LogWriterFlushMode flush_mode)
-+         }
-+       else
-+         {
-+-          /* push back to the queue */
-+-          log_queue_push_head(self->queue, lm, &path_options);
-++          if (flush_mode == LW_FLUSH_QUEUE)
-++            log_msg_unref(lm);
-++          else
-++            {
-++              /* push back to the queue */
-++              log_queue_push_head(self->queue, lm, &path_options);
-++            }
-+           msg_set_context(NULL);
-+           log_msg_refcache_stop();
-+           break;
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
-index d5939e4..b548420 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb
-@@ -9,10 +9,12 @@ SRC_URI += " \
-     file://Fix-the-memory-leak-problem-for-mutex.patch \
-     file://Fix-the-memory-leak-problem-when-HAVE_ENVIRON-defined.patch \
-     file://free-global-LogTemplateOptions.patch \
--    file://logwriter-still-free-the-unconsumed-item.patch \
-+    file://still-free-the-unconsumed-item.patch \
-     file://syslog-ng-verify-the-list-before-del.patch \
-     file://configure.patch \
-     file://dbifix.patch \
-+    file://rewrite-expr-grammar.ym-Free-up-token.patch \
-+    file://logwriter-dont-allocate-a-new-buffer.patch \
- "
- 
- SRC_URI[md5sum] = "ff3bf223ebafbaa92b69a2d5b729f368"
--- 
-1.7.10.4
+I would be happy to help but I am still figuring out how Yocto works. In 
+the meanwhile I just forced an ugly /--with-float=hard/ in 
+/poky/meta/recipes-devtools/gcc/gcc-cross-canadian.inc inside the 
+multilib environmental variable that does the trick.
 
+Thanks !
+
+Alfonso
 
