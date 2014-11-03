@@ -1,43 +1,53 @@
-Return-Path: <bevenson@melinkcorp.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1on0114.outbound.protection.outlook.com [157.56.110.114])
-	by mail.openembedded.org (Postfix) with ESMTP id AAC5F60E49
+Return-Path: <zboszor@pr.hu>
+X-Greylist: delayed 1021 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 03 Nov 2014 18:20:32 UTC
+Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id DA50665D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2014 16:08:39 +0000 (UTC)
-Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
-	BLUPR05MB040.namprd05.prod.outlook.com (10.255.210.156) with Microsoft
-	SMTP Server (TLS) id 15.1.6.9; Mon, 3 Nov 2014 16:08:37 +0000
-Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) by
-	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) with mapi id
-	15.01.0011.000; Mon, 3 Nov 2014 16:08:37 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Thread-Topic: [oe] php: museum.php.net is broken - change recipe SRC_URI?
-Thread-Index: Ac/3Z5ppbk7ICAEwTw+FbzLtrZYhaAAFbV0AAAA0flA=
-Date: Mon, 3 Nov 2014 16:08:37 +0000
-Message-ID: <39739be97a8540f388f124d4b3167ec2@BLUPR05MB037.namprd05.prod.outlook.com>
-References: <ab38d1872c37433981e9fd312b842a54@BLUPR05MB037.namprd05.prod.outlook.com>
-	<4253192.vXvCSCqcaf@peggleto-mobl5.ger.corp.intel.com>
-In-Reply-To: <4253192.vXvCSCqcaf@peggleto-mobl5.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-vipre-scanned: 00B5DA990086AA00B5DBE6
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [98.100.91.242]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB040;
-x-exchange-antispam-report-test: UriScan:;
-x-forefront-prvs: 0384275935
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(189002)(377454003)(199003)(24454002)(13464003)(51704005)(15202345003)(87936001)(16799955002)(2656002)(4396001)(101416001)(74316001)(76176999)(77156002)(77096003)(50986999)(54356999)(21056001)(108616004)(76576001)(15975445006)(110136001)(106356001)(575784001)(86362001)(20776003)(64706001)(31966008)(122556002)(33646002)(92566001)(46102003)(99396003)(120916001)(105586002)(19580405001)(16601075003)(19580395003)(66066001)(107046002)(40100003)(95666004)(97736003)(62966003)(99286002)(24736002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB040;
-	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
+	Mon,  3 Nov 2014 18:20:32 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>)
+	id 1XlLyS-0002jh-D1; Mon, 03 Nov 2014 19:03:28 +0100
+Received: from host-87-242-31-61.prtelecom.hu ([87.242.31.61]
+	helo=localhost.localdomain)
+	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>)
+	id 1XlLyK-0001uP-QC; Mon, 03 Nov 2014 19:03:26 +0100
+Message-ID: <5457C365.7020406@pr.hu>
+Date: Mon, 03 Nov 2014 19:03:17 +0100
+From: Boszormenyi Zoltan <zboszor@pr.hu>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
 MIME-Version: 1.0
-X-OriginatorOrg: melinkcorp.com
-Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+To: openembedded-devel@lists.openembedded.org, 
+	Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <ab38d1872c37433981e9fd312b842a54@BLUPR05MB037.namprd05.prod.outlook.com>	<4253192.vXvCSCqcaf@peggleto-mobl5.ger.corp.intel.com>
+	<39739be97a8540f388f124d4b3167ec2@BLUPR05MB037.namprd05.prod.outlook.com>
+In-Reply-To: <39739be97a8540f388f124d4b3167ec2@BLUPR05MB037.namprd05.prod.outlook.com>
+X-Spam-Score: 2.2 (++)
+X-Spam-Report: Spam detection software, running on the system "prspamd3.pr.hu",
+ has NOT identified this incoming email as spam.  The original
+ message has been attached to this so you can view it or label
+ similar future email.  If you have any questions, see
+ the administrator of that system for details.
+ 
+ Content preview:  2014-11-03 17:08 keltezéssel, Bryan Evenson írta: > Paul,
+   > >> 
+ 
+ Content analysis details:   (2.2 points, 5.0 required)
+ 
+  pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -0.2 ALL_TRUSTED            Passed through trusted hosts only via SMTP
+  3.5 BAYES_99               BODY: Bayes spam probability is 99 to 100%
+                             [score: 1.0000]
+  0.2 BAYES_999              BODY: Bayes spam probability is 99.9 to 100%
+                             [score: 1.0000]
+ -1.3 AWL                    AWL: From: address is in the auto white-list
+X-Scan-Signature: 9427e6a40340fb9271adf0ec4aff0cba
+X-Spam-Tracer: backend.mail.pr.hu 2.2 20141103180326Z
+Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>
 Subject: Re: php: museum.php.net is broken - change recipe SRC_URI?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -52,73 +62,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Nov 2014 16:08:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 03 Nov 2014 18:20:40 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
-UGF1bCwNCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBQYXVsIEVnZ2xl
-dG9uIFttYWlsdG86cGF1bC5lZ2dsZXRvbkBsaW51eC5pbnRlbC5jb21dDQo+IFNlbnQ6IE1vbmRh
-eSwgTm92ZW1iZXIgMDMsIDIwMTQgMTA6NDYgQU0NCj4gVG86IEJyeWFuIEV2ZW5zb24NCj4gQ2M6
-IE1hcnRpbiBKYW5zYTsga29lbkBkb21pbmlvbi50aHJ1aGVyZS5uZXQ7IG9wZW5lbWJlZGRlZC0N
-Cj4gZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBwaHA6
-IG11c2V1bS5waHAubmV0IGlzIGJyb2tlbiAtIGNoYW5nZSByZWNpcGUgU1JDX1VSST8NCj4gDQo+
-IEhpIEJyeWFuLA0KPiANCj4gT24gTW9uZGF5IDAzIE5vdmVtYmVyIDIwMTQgMTQ6MDM6NDIgQnJ5
-YW4gRXZlbnNvbiB3cm90ZToNCj4gPiBUaGUgb2ZmaWNpYWwgUEhQIGFyY2hpdmFsIHZlcnNpb24g
-ZG93bmxvYWQgc2l0ZSwNCj4gPiBodHRwOi8vbXVzZXVtLnBocC5uZXQsIGhhcyBiZWVuIGRvd24g
-YXQgbGVhc3Qgc2luY2UgdGhlIGJlZ2lubmluZyBvZg0KPiA+IE9jdG9iZXIuICBUaGlzIGlzIGEg
-cHJvYmxlbSBmb3IgZGFpc3kgYW5kIG9sZGVyIGJyYW5jaGVzIGlmIGEgYnVpbGQNCj4gPiBhdHRl
-bXB0cyB0byBmZXRjaCBQSFAuICBJIGV4cGVjdCB0aGlzIHNpdGUgd2lsbCBiZSBiYWNrIHVwIGFn
-YWluDQo+ID4gc29tZXRpbWUsIGJ1dCBmcm9tIHJlYWRpbmcgdGhlIGNvbnZlcnNhdGlvbiBvbiB0
-aGUgcmVsYXRlZCBQSFAgYnVnDQo+ID4gcmVwb3J0IChodHRwczovL2J1Z3MucGhwLm5ldC9idWcu
-cGhwP2lkPTY4MTMwKSBJIGRvIG5vdCBiZWxpZXZlDQo+ID4gaHR0cDovL211c2V1bS5waHAubmV0
-IGNhbiBiZSB2aWV3ZWQgdG8gYmUgYSByZWxpYWJsZSBhcmNoaXZlIGluIHRoZQ0KPiA+IGZ1dHVy
-ZS4gIEkgc2VlIHRoYXQgZGl6enkgY2hhbmdlZCB0aGUgU1JDX1VSSSB0byB1c2UNCj4gPiBodHRw
-Oi8vd3d3LnBocC5uZXQvZGlzdHJpYnV0aW9ucyBmb3IgdGhlIG1haW4gZG93bmxvYWQuICBJIGRp
-ZCBzb21lDQo+ID4gdGVzdGluZyBhbmQgaXQgYXBwZWFycyB0aGF0IFBIUCB2ZXJzaW9ucyB0aGF0
-IGFyZSBhYm91dCBhIHllYXIgb2xkIG9yDQo+ID4gbGVzcyBhcmUgYXZhaWxhYmxlIGZyb20gaHR0
-cDovL3d3dy5waHAubmV0L2Rpc3RyaWJ1dGlvbnMuICBTbyB3ZSBjYW4NCj4gPiBhc3N1bWUgdGhh
-dCBhIHllYXIgZnJvbSBub3cgdGhlIGRpenp5IGJyYW5jaCBTUkNfVVJJIHdpbGwgbmVlZCB0byBj
-aGFuZ2UNCj4gdG8gc29tZXRoaW5nIGVsc2UuDQo+ID4NCj4gPiBJJ2QgcHJvcG9zZSBjaGFuZ2lu
-ZyB0aGUgU1JDX1VSSSB0byBzb21ldGhpbmcgdGhhdCB3aWxsIG5vdCBjaGFuZ2UNCj4gPiBvdmVy
-IHRpbWUuICBNeSBzdWdnZXN0aW9uIHdvdWxkIGJlIHRoZSBQSFAgZGlzdHJpYnV0aW9ucyBHaXQN
-Cj4gPiByZXBvc2l0b3J5IGxvY2F0ZWQNCj4gPiBoZXJlOiBodHRwOi8vZ2l0LnBocC5uZXQvP3A9
-d2ViL3BocC1kaXN0cmlidXRpb25zLmdpdDthPXN1bW1hcnkuICBUaGlzDQo+ID4gaXMgdGhlIHBh
-dGggc3VnZ2VzdGVkIGluIHRoZSByZWxhdGVkIFBIUCBidWcgbWVudGlvbmVkIGVhcmxpZXIuICBU
-aGUNCj4gPiBkaXNhZHZhbnRhZ2UgaXMgdGhhdCB0aGUgU1JDX1VSSSB3b3VsZCByZWZlciB0byBh
-IGZpbGUgb24gYSBzcGVjaWZpYw0KPiA+IHRhZywgc28gdGhlIFNSQ19VUkkgd291bGQgYmUgc3Bl
-Y2lmaWMgZm9yIGVhY2ggUEhQIHZlcnNpb24uDQo+ID4NCj4gPiBBbnkgZnVydGhlciBzdWdnZXN0
-aW9ucyBvbiBob3cgdG8gaGFuZGxlIHRoaXM/ICBJZiB0aGUgU1JDX1VSSSBkb2VzDQo+ID4gZ2V0
-IHVwZGF0ZWQsIGhvdyBtYW55IGJyYW5jaGVzIGJhY2sgc2hvdWxkIHRoZSBjaGFuZ2UgYmUgbWFk
-ZT8NCj4gDQo+IFNvIHdlIGRvIGhhdmUgbWlycm9ycyB0aGF0IGNhbiBoZWxwIHdpdGggdGhpcywg
-dW5mb3J0dW5hdGVseSB3aXRoIHRoZSBPRQ0KPiBtaXJyb3IgKGFzIG9wcG9zZWQgdG8gdGhlIFlv
-Y3RvIFByb2plY3Qgb25lKSwgaXRzIHBvcHVsYXRpb24gaXMgbm90IGF1dG9tYXRpYywNCj4gc28g
-eW91IGhhdmUgdG8gcmVxdWVzdCB0aGF0IG5ldyBhcmNoaXZlcyBnZXQgYWRkZWQuIEknbSBub3Qg
-c3VyZSBpdCB3b3VsZCBiZQ0KPiBwcmFjdGljYWwgdG8gY2hhbmdlIHRoaXMgZWl0aGVyLg0KPiAN
-Cj4gV2h5IHBocCB0aGlua3MgaXQncyBhIGdvb2QgaWRlYSB0byBkaXN0cmlidXRlIHRoZXNlIHRh
-cmJhbGxzIGluIGEgc2luZ2xlIHBsYWNlIGluDQo+IGEgZ2l0IHJlcG9zaXRvcnkgYnV0IG5vdCBp
-biBhIHNpbXBsZSBmbGF0IEhUVFAgbG9jYXRpb24gaXMgYSBiaXQgYmV5b25kIG1lLg0KPiBGZXRj
-aGluZyBkaXJlY3RseSBmcm9tIGdpdCBpbiB0aGlzIHNpdHVhdGlvbiB3b3VsZG4ndCBiZSBpZGVh
-bCBhcyBpdCdsbCBlbmQgdXANCj4gZWZmZWN0aXZlbHkgZmV0Y2hpbmcgYWxsIG9mIHRoZSBiaW5h
-cmllcyBkb3duIHdoZW4gY2xvbmluZyB0aGUgcmVwbzsgaG93ZXZlcg0KPiBJIGd1ZXNzIHlvdSBj
-b3VsZCBkb3dubG9hZCBhIHNpbmdsZSBmaWxlIHdpdGg6DQo+IA0KPiBTUkNfVVJJID0gImh0dHA6
-Ly9naXQucGhwLm5ldC8/cD13ZWIvcGhwLWRpc3RyaWJ1dGlvbnMuZ2l0O2E9YmxvYjtmPXBocC0N
-Cj4gJHtQVn0udGFyLnh6Ig0KDQpOb3QgZXhhY3RseS4gIEl0IGxvb2tzIGxpa2UgdGhlIG9sZCB2
-ZXJzaW9ucyB0aGF0IGFyZSBubyBsb25nZXIgc3VwcG9ydGVkIGdldCBkZWxldGVkIGZyb20gcGhw
-LWRpc3RyaWJ1dGlvbnMuZ2l0LCBzbyBIRUFEIGRvZXNuJ3QgaGF2ZSBrbm93bGVkZ2Ugb2YgYWxs
-IFBIUCB2ZXJzaW9ucy4gIEZvciBleGFtcGxlLCB0aGlzIGxpbms6IGh0dHA6Ly9naXQucGhwLm5l
-dC8/cD13ZWIvcGhwLWRpc3RyaWJ1dGlvbnMuZ2l0O2E9YmxvYjtmPXBocC01LjQuMjIudGFyLmJ6
-MiBhcyBvZiB0b2RheSB3aWxsIGRvd25sb2FkIHBocC01LjQuMjIuICBCdXQgdGhpcyBsaW5rOiBo
-dHRwOi8vZ2l0LnBocC5uZXQvP3A9d2ViL3BocC1kaXN0cmlidXRpb25zLmdpdDthPWJsb2I7Zj1w
-aHAtNS40LjIxLnRhci5iejIganVzdCByZXBvcnRzIHRoYXQgaXQgY2Fubm90IGZpbmQgdGhlIGZp
-bGUuDQoNCkFzIGZhciBhcyBmZXRjaGluZyBwaHAtNS40LjE0ICh2ZXJzaW9uIHVzZWQgZm9yIGRh
-aXN5IGFuZCBvbGRlcikgSSB0aGluayB0aGlzIFVSTCB3aWxsIHdvcms6IGh0dHA6Ly9naXQucGhw
-Lm5ldC8/cD13ZWIvcGhwLWRpc3RyaWJ1dGlvbnMuZ2l0O2E9YmxvYjtmPXBocC01LjQuMTQudGFy
-LmJ6MjtoPTBkOTUwZjE3OWQ1ODZiYjFkMGU4NzllMGQ0YWEzYTUxNDBlOGQ1ZjU7aGI9M2RkMmYx
-MjYwOWZjOGE3MzBkN2NmMzQxYTkzMmY2YzdiMjQxZjAzYy4gIFVnbHksIGJ1dCBpdCB3b3Jrcy4N
-Cg0KV291bGQgaXQgbWFrZSBtb3JlIHNlbnNlIHRvIHN0YXJ0IGNsb25pbmcgdGhlIHNvdXJjZSBH
-aXQgcmVwb3NpdG9yeSBhdCBodHRwczovL2dpdC5waHAubmV0L3JlcG9zaXRvcnkvcGhwLXNyYy5n
-aXQgaW5zdGVhZCBvZiB0aGUgdGFyYmFsbD8gIEl0IHdvdWxkIGRvd25sb2FkIGEgbG90IG1vcmUg
-ZGF0YSwgYnV0IGF0IGxlYXN0IHdlIHNob3VsZCBiZSBhYmxlIHRvIHVzZSBhIHNpbmdsZSBTUkNf
-VVJJIGZvciBlYWNoIG1pbm9yIFBIUCB2ZXJzaW9uLg0KDQpSZWdhcmRzLA0KQnJ5YW4NCg0K
+2014-11-03 17:08 keltezéssel, Bryan Evenson írta:
+> Paul,
+>
+>> -----Original Message-----
+>> From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]
+>> Sent: Monday, November 03, 2014 10:46 AM
+>> To: Bryan Evenson
+>> Cc: Martin Jansa; koen@dominion.thruhere.net; openembedded-
+>> devel@lists.openembedded.org
+>> Subject: Re: [oe] php: museum.php.net is broken - change recipe SRC_URI?
+>>
+>> Hi Bryan,
+>>
+>> On Monday 03 November 2014 14:03:42 Bryan Evenson wrote:
+>>> The official PHP archival version download site,
+>>> http://museum.php.net, has been down at least since the beginning of
+>>> October.  This is a problem for daisy and older branches if a build
+>>> attempts to fetch PHP.  I expect this site will be back up again
+>>> sometime, but from reading the conversation on the related PHP bug
+>>> report (https://bugs.php.net/bug.php?id=68130) I do not believe
+>>> http://museum.php.net can be viewed to be a reliable archive in the
+>>> future.  I see that dizzy changed the SRC_URI to use
+>>> http://www.php.net/distributions for the main download.  I did some
+>>> testing and it appears that PHP versions that are about a year old or
+>>> less are available from http://www.php.net/distributions.  So we can
+>>> assume that a year from now the dizzy branch SRC_URI will need to change
+>> to something else.
+>>> I'd propose changing the SRC_URI to something that will not change
+>>> over time.  My suggestion would be the PHP distributions Git
+>>> repository located
+>>> here: http://git.php.net/?p=web/php-distributions.git;a=summary.  This
+>>> is the path suggested in the related PHP bug mentioned earlier.  The
+>>> disadvantage is that the SRC_URI would refer to a file on a specific
+>>> tag, so the SRC_URI would be specific for each PHP version.
+>>>
+>>> Any further suggestions on how to handle this?  If the SRC_URI does
+>>> get updated, how many branches back should the change be made?
+>> So we do have mirrors that can help with this, unfortunately with the OE
+>> mirror (as opposed to the Yocto Project one), its population is not automatic,
+>> so you have to request that new archives get added. I'm not sure it would be
+>> practical to change this either.
+>>
+>> Why php thinks it's a good idea to distribute these tarballs in a single place in
+>> a git repository but not in a simple flat HTTP location is a bit beyond me.
+>> Fetching directly from git in this situation wouldn't be ideal as it'll end up
+>> effectively fetching all of the binaries down when cloning the repo; however
+>> I guess you could download a single file with:
+>>
+>> SRC_URI = "http://git.php.net/?p=web/php-distributions.git;a=blob;f=php-
+>> ${PV}.tar.xz"
+> Not exactly.  It looks like the old versions that are no longer supported get deleted from php-distributions.git, so HEAD doesn't have knowledge of all PHP versions.  For example, this link: http://git.php.net/?p=web/php-distributions.git;a=blob;f=php-5.4.22.tar.bz2 as of today will download php-5.4.22.  But this link: http://git.php.net/?p=web/php-distributions.git;a=blob;f=php-5.4.21.tar.bz2 just reports that it cannot find the file.
+>
+> As far as fetching php-5.4.14 (version used for daisy and older) I think this URL will work: http://git.php.net/?p=web/php-distributions.git;a=blob;f=php-5.4.14.tar.bz2;h=0d950f179d586bb1d0e879e0d4aa3a5140e8d5f5;hb=3dd2f12609fc8a730d7cf341a932f6c7b241f03c.  Ugly, but it works.
+
+What's wrong with this?
+
+SRC_URI =
+"http://php.net/get/php-${PV}.tar.bz2/from/this/mirror;downloadfilename=php-${PV}.tar.bz2"
+
+>
+> Would it make more sense to start cloning the source Git repository at https://git.php.net/repository/php-src.git instead of the tarball?  It would download a lot more data, but at least we should be able to use a single SRC_URI for each minor PHP version.
+>
+> Regards,
+> Bryan
+>
+
 
