@@ -1,34 +1,43 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
-	[209.85.213.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 177EC65D59
+Return-Path: <bevenson@melinkcorp.com>
+X-Greylist: delayed 5561 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 03 Nov 2014 15:36:26 UTC
+Received: from na01-bl2-obe.outbound.protection.outlook.com
+	(mail-bl2on0122.outbound.protection.outlook.com [65.55.169.122])
+	by mail.openembedded.org (Postfix) with ESMTP id 37EB065D59
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2014 10:29:36 +0000 (UTC)
-Received: by mail-ig0-f178.google.com with SMTP id a13so4324242igq.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Nov 2014 02:29:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=a981+XmCnTAD2hDebzyCWYYXIKRXxlrOae7k2vufIRw=;
-	b=VkP2/3GPOT0ag/zjH/RZs8GqLcZfKLUXFhA5wZ7G5VbDLzCE0+WB/3u6uoEbR+K2Wb
-	g2yvX9D4e2Fzuw+I4wJ2lrXo/XvEh/DCCH+1VClOuyFcj8kr8LPVW5vFPeM9fjQGwtkt
-	AB+7NaD+UVXgpL7AbNOw7Po8y/jB8ddqNAzfH52g5i53XBspSkCYGFDjat4UaOvvYgkA
-	uUmfNTtZONpgh2c8CQI/cQIHbh6Ohpjc3VxMp2xkgaWAPvBxE7ixpaQJTpohl8wpTu1S
-	im5N3ljMmijXwqIa2pOWY3FEgc0u7SL5WFQ0OnON51vwq+806jxUBInNDIUquK6Yey+j
-	xOFA==
+	Mon,  3 Nov 2014 15:36:26 +0000 (UTC)
+Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
+	BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) with Microsoft
+	SMTP Server (TLS) id 15.1.11.14; Mon, 3 Nov 2014 14:03:43 +0000
+Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) by
+	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) with mapi id
+	15.01.0011.000; Mon, 3 Nov 2014 14:03:42 +0000
+From: Bryan Evenson <bevenson@melinkcorp.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Martin Jansa
+	<martin.jansa@gmail.com>, "koen@dominion.thruhere.net"
+	<koen@dominion.thruhere.net>
+Thread-Topic: php: museum.php.net is broken - change recipe SRC_URI?
+Thread-Index: Ac/3Z5ppbk7ICAEwTw+FbzLtrZYhaA==
+Date: Mon, 3 Nov 2014 14:03:42 +0000
+Message-ID: <ab38d1872c37433981e9fd312b842a54@BLUPR05MB037.namprd05.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-vipre-scanned: 00437E920086A800437FDF
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [98.100.91.242]
+x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB037;
+x-exchange-antispam-report-test: UriScan:;
+x-forefront-prvs: 0384275935
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(6009001)(199003)(189002)(20776003)(66066001)(120916001)(16799955002)(16601075003)(31966008)(74316001)(15202345003)(64706001)(99396003)(54356999)(101416001)(50986999)(19580395003)(92566001)(86362001)(15975445006)(46102003)(87936001)(2656002)(122556002)(40100003)(21056001)(95666004)(99286002)(76576001)(106356001)(229853001)(107886001)(105586002)(108616004)(77096003)(62966003)(33646002)(77156002)(107046002)(24736002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB037;
+	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:sfv;
+	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
 MIME-Version: 1.0
-X-Received: by 10.42.197.136 with SMTP id ek8mr39442298icb.41.1415010576928;
-	Mon, 03 Nov 2014 02:29:36 -0800 (PST)
-Received: by 10.107.148.76 with HTTP; Mon, 3 Nov 2014 02:29:36 -0800 (PST)
-In-Reply-To: <5453B011.4020004@gmail.com>
-References: <CAD0=qkKGx8o9xAf14G1NOXxD5QzKXKJBqfCXDBgc8saTfrW_zQ@mail.gmail.com>
-	<969F26A8BAB325438E7EB80D3C3134FB2F384F4B@IRSMSX105.ger.corp.intel.com>
-	<5453B011.4020004@gmail.com>
-Date: Mon, 3 Nov 2014 11:29:36 +0100
-Message-ID: <CAD0=qkJBXrEWtqkpujQ4+2YrCCcaRnA8-c8x3Smor=5HmRUz7A@mail.gmail.com>
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: Yocto 1.7 building alsa-lib do_package fails
+X-OriginatorOrg: melinkcorp.com
+Subject: php: museum.php.net is broken - change recipe SRC_URI?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,81 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Nov 2014 10:29:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 03 Nov 2014 15:36:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Just for information: I found my mistake. After switching from dora to
-dizzy I didn't see the disappearance of mx6s SOC_TYPE.
-After changing it to mx6dl everything works fine.
-
-2014-10-31 16:51 GMT+01:00 Sven Ebenfeld <sven.ebenfeld@gmail.com>:
-> Am 31.10.2014 16:06, schrieb Iorga, Cristian:
->> Hi,
->>
->> There might be something wrong with the target machine/processor architecture in your setup..
->>
->> tmp-angstrom_v2014_12-glibc/work/-angstrom-linux-gnueabi/alsa-lib/1.0.28-r0/ looks strange;
->> A common root cause will trigger the ipk/opkg error.
->>
->
-> You're right I didn't see that. This looks very strange.
->
->> Please provide the necessary steps to reproduce the issue.
->
-> I wrote my own machine-configuration based on the wandboard-solo
-> configuration. I will try to find a way to reproduce this issue using a
-> standard machine configuration. This might even exclude errors in my own
-> configuration.
->
->>
->> Regards,
->> Cristian Iorga
->> Yocto Project
->> Intel Corporation
->>
->>
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Sven Ebenfeld
->> Sent: Friday, October 31, 2014 12:14 PM
->> To: openembedded-devel@lists.openembedded.org
->> Subject: [oe] Yocto 1.7 building alsa-lib do_package fails
->>
->> Hi,
->>
->> When I try to build alsa-lib on master branch of oe-core I get the following error:
->>
->> ERROR: Function failed: opkg-build execution failed
->> ERROR: Logfile of failure stored in:
->> /media/bitbakeTmp/angstrom-dizzy/build/tmp-angstrom_v2014_12-glibc/work/-angstrom-linux-gnueabi/alsa-lib/1.0.28-r0/temp/log.do_package_write_ipk.29979
->> Log data follows:
->> | DEBUG: Executing python function sstate_task_prefunc
->> | DEBUG: Python function sstate_task_prefunc finished
->> | DEBUG: Executing python function do_package_write_ipk
->> | DEBUG: Executing python function read_subpackage_metadata
->> | DEBUG: Python function read_subpackage_metadata finished
->> | DEBUG: Executing python function do_package_ipk
->> | *** Error: CONTROL/control is missing field Architecture
->> |
->> | opkg-build: Please fix the above errors and try again.
->> | DEBUG: Python function do_package_ipk finished
->> | DEBUG: Python function do_package_write_ipk finished
->> | ERROR: Function failed: opkg-build execution failed
->> ERROR: Task 1625
->> (/media/bitbakeTmp/angstrom-dizzy/sources/openembedded-core/meta/recipes-multimedia/alsa/alsa-lib_1.0.28.bb,
->> do_package_write_ipk) failed with exit code '1'
->> NOTE: Tasks Summary: Attempted 2214 tasks of which 15 didn't need to be rerun and 1 failed.
->>
->>
->> I'm using Angstrom setup-scripts on branch angstrom-v2014.12-yocto1.7
->>
->> Can anybody give me an advice where to look for the source of the problem?
->>
->> Regards,
->> Sven
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
+VGhlIG9mZmljaWFsIFBIUCBhcmNoaXZhbCB2ZXJzaW9uIGRvd25sb2FkIHNpdGUsIGh0dHA6Ly9t
+dXNldW0ucGhwLm5ldCwgaGFzIGJlZW4gZG93biBhdCBsZWFzdCBzaW5jZSB0aGUgYmVnaW5uaW5n
+IG9mIE9jdG9iZXIuICBUaGlzIGlzIGEgcHJvYmxlbSBmb3IgZGFpc3kgYW5kIG9sZGVyIGJyYW5j
+aGVzIGlmIGEgYnVpbGQgYXR0ZW1wdHMgdG8gZmV0Y2ggUEhQLiAgSSBleHBlY3QgdGhpcyBzaXRl
+IHdpbGwgYmUgYmFjayB1cCBhZ2FpbiBzb21ldGltZSwgYnV0IGZyb20gcmVhZGluZyB0aGUgY29u
+dmVyc2F0aW9uIG9uIHRoZSByZWxhdGVkIFBIUCBidWcgcmVwb3J0IChodHRwczovL2J1Z3MucGhw
+Lm5ldC9idWcucGhwP2lkPTY4MTMwKSBJIGRvIG5vdCBiZWxpZXZlIGh0dHA6Ly9tdXNldW0ucGhw
+Lm5ldCBjYW4gYmUgdmlld2VkIHRvIGJlIGEgcmVsaWFibGUgYXJjaGl2ZSBpbiB0aGUgZnV0dXJl
+LiAgSSBzZWUgdGhhdCBkaXp6eSBjaGFuZ2VkIHRoZSBTUkNfVVJJIHRvIHVzZSBodHRwOi8vd3d3
+LnBocC5uZXQvZGlzdHJpYnV0aW9ucyBmb3IgdGhlIG1haW4gZG93bmxvYWQuICBJIGRpZCBzb21l
+IHRlc3RpbmcgYW5kIGl0IGFwcGVhcnMgdGhhdCBQSFAgdmVyc2lvbnMgdGhhdCBhcmUgYWJvdXQg
+YSB5ZWFyIG9sZCBvciBsZXNzIGFyZSBhdmFpbGFibGUgZnJvbSBodHRwOi8vd3d3LnBocC5uZXQv
+ZGlzdHJpYnV0aW9ucy4gIFNvIHdlIGNhbiBhc3N1bWUgdGhhdCBhIHllYXIgZnJvbSBub3cgdGhl
+IGRpenp5IGJyYW5jaCBTUkNfVVJJIHdpbGwgbmVlZCB0byBjaGFuZ2UgdG8gc29tZXRoaW5nIGVs
+c2UuDQoNCkknZCBwcm9wb3NlIGNoYW5naW5nIHRoZSBTUkNfVVJJIHRvIHNvbWV0aGluZyB0aGF0
+IHdpbGwgbm90IGNoYW5nZSBvdmVyIHRpbWUuICBNeSBzdWdnZXN0aW9uIHdvdWxkIGJlIHRoZSBQ
+SFAgZGlzdHJpYnV0aW9ucyBHaXQgcmVwb3NpdG9yeSBsb2NhdGVkIGhlcmU6IGh0dHA6Ly9naXQu
+cGhwLm5ldC8/cD13ZWIvcGhwLWRpc3RyaWJ1dGlvbnMuZ2l0O2E9c3VtbWFyeS4gIFRoaXMgaXMg
+dGhlIHBhdGggc3VnZ2VzdGVkIGluIHRoZSByZWxhdGVkIFBIUCBidWcgbWVudGlvbmVkIGVhcmxp
+ZXIuICBUaGUgZGlzYWR2YW50YWdlIGlzIHRoYXQgdGhlIFNSQ19VUkkgd291bGQgcmVmZXIgdG8g
+YSBmaWxlIG9uIGEgc3BlY2lmaWMgdGFnLCBzbyB0aGUgU1JDX1VSSSB3b3VsZCBiZSBzcGVjaWZp
+YyBmb3IgZWFjaCBQSFAgdmVyc2lvbi4NCg0KQW55IGZ1cnRoZXIgc3VnZ2VzdGlvbnMgb24gaG93
+IHRvIGhhbmRsZSB0aGlzPyAgSWYgdGhlIFNSQ19VUkkgZG9lcyBnZXQgdXBkYXRlZCwgaG93IG1h
+bnkgYnJhbmNoZXMgYmFjayBzaG91bGQgdGhlIGNoYW5nZSBiZSBtYWRlPw0KDQpSZWdhcmRzLA0K
+QnJ5YW4NCg==
 
