@@ -1,46 +1,24 @@
-Return-Path: <bevenson@melinkcorp.com>
-Received: from na01-bl2-obe.outbound.protection.outlook.com
-	(mail-bl2on0108.outbound.protection.outlook.com [65.55.169.108])
-	by mail.openembedded.org (Postfix) with ESMTP id F2B7265C87
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E98865C91
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Nov 2014 18:40:42 +0000 (UTC)
-Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
-	BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) with Microsoft
-	SMTP Server (TLS) id 15.1.11.14; Mon, 3 Nov 2014 18:40:40 +0000
-Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) by
-	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) with mapi id
-	15.01.0011.000; Mon, 3 Nov 2014 18:40:40 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Paul Eggleton
-	<paul.eggleton@linux.intel.com>
-Thread-Topic: [oe] php: museum.php.net is broken - change recipe SRC_URI?
-Thread-Index: Ac/3Z5ppbk7ICAEwTw+FbzLtrZYhaAAFbV0AAAA0flAABJPwgAAA44oA
-Date: Mon, 3 Nov 2014 18:40:40 +0000
-Message-ID: <10fd3d410b8a453f9df7b32114add897@BLUPR05MB037.namprd05.prod.outlook.com>
-References: <ab38d1872c37433981e9fd312b842a54@BLUPR05MB037.namprd05.prod.outlook.com>
-	<4253192.vXvCSCqcaf@peggleto-mobl5.ger.corp.intel.com>
-	<39739be97a8540f388f124d4b3167ec2@BLUPR05MB037.namprd05.prod.outlook.com>
-	<5457C365.7020406@pr.hu>
-In-Reply-To: <5457C365.7020406@pr.hu>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-vipre-scanned: 01410F420086AE0141108F
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [98.100.91.242]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB037;
-x-exchange-antispam-report-test: UriScan:;
-x-forefront-prvs: 0384275935
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(24454002)(199003)(13464003)(51704005)(377454003)(377424004)(189002)(97736003)(93886004)(87936001)(2656002)(46102003)(40100003)(122556002)(108616004)(77096003)(62966003)(105586002)(33646002)(4396001)(107046002)(77156002)(76576001)(95666004)(21056001)(99286002)(106356001)(15395725005)(64706001)(99396003)(120916001)(16799955002)(20776003)(66066001)(15202345003)(16601075003)(31966008)(74316001)(92566001)(575784001)(86362001)(19580395003)(19580405001)(15975445006)(76176999)(54356999)(50986999)(101416001)(24736002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB037;
-	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+	Tue,  4 Nov 2014 06:09:26 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sA469Qw4001125
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 3 Nov 2014 22:09:26 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.141) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 3 Nov 2014 22:09:25 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 4 Nov 2014 14:09:29 +0800
+Message-ID: <1415081369-31169-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.7.10.4
 MIME-Version: 1.0
-X-OriginatorOrg: melinkcorp.com
-Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>
-Subject: Re: php: museum.php.net is broken - change recipe SRC_URI?
+Subject: [PATCH][meta-networking] net-snmp: fix for Security Advisory - CVE-2014-3565
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,92 +32,500 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Nov 2014 18:40:50 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 04 Nov 2014 06:09:30 -0000
+Content-Type: text/plain
 
-Wm9sdGFuLA0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IG9wZW5lbWJl
-ZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gW21haWx0bzpvcGVu
-ZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbg0KPiBCZWhh
-bGYgT2YgQm9zem9ybWVueWkgWm9sdGFuDQo+IFNlbnQ6IE1vbmRheSwgTm92ZW1iZXIgMDMsIDIw
-MTQgMTowMyBQTQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmc7IFBhdWwgRWdnbGV0b24NCj4gQ2M6IGtvZW5AZG9taW5pb24udGhydWhlcmUubmV0DQo+IFN1
-YmplY3Q6IFJlOiBbb2VdIHBocDogbXVzZXVtLnBocC5uZXQgaXMgYnJva2VuIC0gY2hhbmdlIHJl
-Y2lwZSBTUkNfVVJJPw0KPiANCj4gMjAxNC0xMS0wMyAxNzowOCBrZWx0ZXrDqXNzZWwsIEJyeWFu
-IEV2ZW5zb24gw61ydGE6DQo+ID4gUGF1bCwNCj4gPg0KPiA+PiAtLS0tLU9yaWdpbmFsIE1lc3Nh
-Z2UtLS0tLQ0KPiA+PiBGcm9tOiBQYXVsIEVnZ2xldG9uIFttYWlsdG86cGF1bC5lZ2dsZXRvbkBs
-aW51eC5pbnRlbC5jb21dDQo+ID4+IFNlbnQ6IE1vbmRheSwgTm92ZW1iZXIgMDMsIDIwMTQgMTA6
-NDYgQU0NCj4gPj4gVG86IEJyeWFuIEV2ZW5zb24NCj4gPj4gQ2M6IE1hcnRpbiBKYW5zYTsga29l
-bkBkb21pbmlvbi50aHJ1aGVyZS5uZXQ7IG9wZW5lbWJlZGRlZC0NCj4gPj4gZGV2ZWxAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZw0KPiA+PiBTdWJqZWN0OiBSZTogW29lXSBwaHA6IG11c2V1bS5waHAu
-bmV0IGlzIGJyb2tlbiAtIGNoYW5nZSByZWNpcGUNCj4gU1JDX1VSST8NCj4gPj4NCj4gPj4gSGkg
-QnJ5YW4sDQo+ID4+DQo+ID4+IE9uIE1vbmRheSAwMyBOb3ZlbWJlciAyMDE0IDE0OjAzOjQyIEJy
-eWFuIEV2ZW5zb24gd3JvdGU6DQo+ID4+PiBUaGUgb2ZmaWNpYWwgUEhQIGFyY2hpdmFsIHZlcnNp
-b24gZG93bmxvYWQgc2l0ZSwNCj4gPj4+IGh0dHA6Ly9tdXNldW0ucGhwLm5ldCwgaGFzIGJlZW4g
-ZG93biBhdCBsZWFzdCBzaW5jZSB0aGUgYmVnaW5uaW5nIG9mDQo+ID4+PiBPY3RvYmVyLiAgVGhp
-cyBpcyBhIHByb2JsZW0gZm9yIGRhaXN5IGFuZCBvbGRlciBicmFuY2hlcyBpZiBhIGJ1aWxkDQo+
-ID4+PiBhdHRlbXB0cyB0byBmZXRjaCBQSFAuICBJIGV4cGVjdCB0aGlzIHNpdGUgd2lsbCBiZSBi
-YWNrIHVwIGFnYWluDQo+ID4+PiBzb21ldGltZSwgYnV0IGZyb20gcmVhZGluZyB0aGUgY29udmVy
-c2F0aW9uIG9uIHRoZSByZWxhdGVkIFBIUCBidWcNCj4gPj4+IHJlcG9ydCAoaHR0cHM6Ly9idWdz
-LnBocC5uZXQvYnVnLnBocD9pZD02ODEzMCkgSSBkbyBub3QgYmVsaWV2ZQ0KPiA+Pj4gaHR0cDov
-L211c2V1bS5waHAubmV0IGNhbiBiZSB2aWV3ZWQgdG8gYmUgYSByZWxpYWJsZSBhcmNoaXZlIGlu
-IHRoZQ0KPiA+Pj4gZnV0dXJlLiAgSSBzZWUgdGhhdCBkaXp6eSBjaGFuZ2VkIHRoZSBTUkNfVVJJ
-IHRvIHVzZQ0KPiA+Pj4gaHR0cDovL3d3dy5waHAubmV0L2Rpc3RyaWJ1dGlvbnMgZm9yIHRoZSBt
-YWluIGRvd25sb2FkLiAgSSBkaWQgc29tZQ0KPiA+Pj4gdGVzdGluZyBhbmQgaXQgYXBwZWFycyB0
-aGF0IFBIUCB2ZXJzaW9ucyB0aGF0IGFyZSBhYm91dCBhIHllYXIgb2xkDQo+ID4+PiBvciBsZXNz
-IGFyZSBhdmFpbGFibGUgZnJvbSBodHRwOi8vd3d3LnBocC5uZXQvZGlzdHJpYnV0aW9ucy4gIFNv
-IHdlDQo+ID4+PiBjYW4gYXNzdW1lIHRoYXQgYSB5ZWFyIGZyb20gbm93IHRoZSBkaXp6eSBicmFu
-Y2ggU1JDX1VSSSB3aWxsIG5lZWQNCj4gPj4+IHRvIGNoYW5nZQ0KPiA+PiB0byBzb21ldGhpbmcg
-ZWxzZS4NCj4gPj4+IEknZCBwcm9wb3NlIGNoYW5naW5nIHRoZSBTUkNfVVJJIHRvIHNvbWV0aGlu
-ZyB0aGF0IHdpbGwgbm90IGNoYW5nZQ0KPiA+Pj4gb3ZlciB0aW1lLiAgTXkgc3VnZ2VzdGlvbiB3
-b3VsZCBiZSB0aGUgUEhQIGRpc3RyaWJ1dGlvbnMgR2l0DQo+ID4+PiByZXBvc2l0b3J5IGxvY2F0
-ZWQNCj4gPj4+IGhlcmU6IGh0dHA6Ly9naXQucGhwLm5ldC8/cD13ZWIvcGhwLWRpc3RyaWJ1dGlv
-bnMuZ2l0O2E9c3VtbWFyeS4NCj4gPj4+IFRoaXMgaXMgdGhlIHBhdGggc3VnZ2VzdGVkIGluIHRo
-ZSByZWxhdGVkIFBIUCBidWcgbWVudGlvbmVkIGVhcmxpZXIuDQo+ID4+PiBUaGUgZGlzYWR2YW50
-YWdlIGlzIHRoYXQgdGhlIFNSQ19VUkkgd291bGQgcmVmZXIgdG8gYSBmaWxlIG9uIGENCj4gPj4+
-IHNwZWNpZmljIHRhZywgc28gdGhlIFNSQ19VUkkgd291bGQgYmUgc3BlY2lmaWMgZm9yIGVhY2gg
-UEhQIHZlcnNpb24uDQo+ID4+Pg0KPiA+Pj4gQW55IGZ1cnRoZXIgc3VnZ2VzdGlvbnMgb24gaG93
-IHRvIGhhbmRsZSB0aGlzPyAgSWYgdGhlIFNSQ19VUkkgZG9lcw0KPiA+Pj4gZ2V0IHVwZGF0ZWQs
-IGhvdyBtYW55IGJyYW5jaGVzIGJhY2sgc2hvdWxkIHRoZSBjaGFuZ2UgYmUgbWFkZT8NCj4gPj4g
-U28gd2UgZG8gaGF2ZSBtaXJyb3JzIHRoYXQgY2FuIGhlbHAgd2l0aCB0aGlzLCB1bmZvcnR1bmF0
-ZWx5IHdpdGggdGhlDQo+ID4+IE9FIG1pcnJvciAoYXMgb3Bwb3NlZCB0byB0aGUgWW9jdG8gUHJv
-amVjdCBvbmUpLCBpdHMgcG9wdWxhdGlvbiBpcw0KPiA+PiBub3QgYXV0b21hdGljLCBzbyB5b3Ug
-aGF2ZSB0byByZXF1ZXN0IHRoYXQgbmV3IGFyY2hpdmVzIGdldCBhZGRlZC4NCj4gPj4gSSdtIG5v
-dCBzdXJlIGl0IHdvdWxkIGJlIHByYWN0aWNhbCB0byBjaGFuZ2UgdGhpcyBlaXRoZXIuDQo+ID4+
-DQo+ID4+IFdoeSBwaHAgdGhpbmtzIGl0J3MgYSBnb29kIGlkZWEgdG8gZGlzdHJpYnV0ZSB0aGVz
-ZSB0YXJiYWxscyBpbiBhDQo+ID4+IHNpbmdsZSBwbGFjZSBpbiBhIGdpdCByZXBvc2l0b3J5IGJ1
-dCBub3QgaW4gYSBzaW1wbGUgZmxhdCBIVFRQIGxvY2F0aW9uIGlzIGEgYml0DQo+IGJleW9uZCBt
-ZS4NCj4gPj4gRmV0Y2hpbmcgZGlyZWN0bHkgZnJvbSBnaXQgaW4gdGhpcyBzaXR1YXRpb24gd291
-bGRuJ3QgYmUgaWRlYWwgYXMNCj4gPj4gaXQnbGwgZW5kIHVwIGVmZmVjdGl2ZWx5IGZldGNoaW5n
-IGFsbCBvZiB0aGUgYmluYXJpZXMgZG93biB3aGVuDQo+ID4+IGNsb25pbmcgdGhlIHJlcG87IGhv
-d2V2ZXIgSSBndWVzcyB5b3UgY291bGQgZG93bmxvYWQgYSBzaW5nbGUgZmlsZSB3aXRoOg0KPiA+
-Pg0KPiA+PiBTUkNfVVJJID0NCj4gPj4gImh0dHA6Ly9naXQucGhwLm5ldC8/cD13ZWIvcGhwLWRp
-c3RyaWJ1dGlvbnMuZ2l0O2E9YmxvYjtmPXBocC0NCj4gPj4gJHtQVn0udGFyLnh6Ig0KPiA+IE5v
-dCBleGFjdGx5LiAgSXQgbG9va3MgbGlrZSB0aGUgb2xkIHZlcnNpb25zIHRoYXQgYXJlIG5vIGxv
-bmdlciBzdXBwb3J0ZWQgZ2V0DQo+IGRlbGV0ZWQgZnJvbSBwaHAtZGlzdHJpYnV0aW9ucy5naXQs
-IHNvIEhFQUQgZG9lc24ndCBoYXZlIGtub3dsZWRnZSBvZiBhbGwNCj4gUEhQIHZlcnNpb25zLiAg
-Rm9yIGV4YW1wbGUsIHRoaXMgbGluazogaHR0cDovL2dpdC5waHAubmV0Lz9wPXdlYi9waHAtDQo+
-IGRpc3RyaWJ1dGlvbnMuZ2l0O2E9YmxvYjtmPXBocC01LjQuMjIudGFyLmJ6MiBhcyBvZiB0b2Rh
-eSB3aWxsIGRvd25sb2FkIHBocC0NCj4gNS40LjIyLiAgQnV0IHRoaXMgbGluazogaHR0cDovL2dp
-dC5waHAubmV0Lz9wPXdlYi9waHAtDQo+IGRpc3RyaWJ1dGlvbnMuZ2l0O2E9YmxvYjtmPXBocC01
-LjQuMjEudGFyLmJ6MiBqdXN0IHJlcG9ydHMgdGhhdCBpdCBjYW5ub3QgZmluZA0KPiB0aGUgZmls
-ZS4NCj4gPg0KPiA+IEFzIGZhciBhcyBmZXRjaGluZyBwaHAtNS40LjE0ICh2ZXJzaW9uIHVzZWQg
-Zm9yIGRhaXN5IGFuZCBvbGRlcikgSSB0aGluayB0aGlzDQo+IFVSTCB3aWxsIHdvcms6IGh0dHA6
-Ly9naXQucGhwLm5ldC8/cD13ZWIvcGhwLQ0KPiBkaXN0cmlidXRpb25zLmdpdDthPWJsb2I7Zj1w
-aHAtDQo+IDUuNC4xNC50YXIuYnoyO2g9MGQ5NTBmMTc5ZDU4NmJiMWQwZTg3OWUwZDRhYTNhNTE0
-MGU4ZDVmNTtoYj0zZGQyZjEyDQo+IDYwOWZjOGE3MzBkN2NmMzQxYTkzMmY2YzdiMjQxZjAzYy4g
-IFVnbHksIGJ1dCBpdCB3b3Jrcy4NCj4gDQo+IFdoYXQncyB3cm9uZyB3aXRoIHRoaXM/DQo+IA0K
-PiBTUkNfVVJJID0NCj4gImh0dHA6Ly9waHAubmV0L2dldC9waHAtDQo+ICR7UFZ9LnRhci5iejIv
-ZnJvbS90aGlzL21pcnJvcjtkb3dubG9hZGZpbGVuYW1lPXBocC0ke1BWfS50YXIuYnoyIg0KDQpG
-aXJzdCwgSSBjYW4ndCBnZXQgdGhpcyBTUkNfVVJJIHRvIHdvcmsgd2l0aCB0aGUgImRvd25sb2Fk
-ZmlsZW5hbWUiIGFkZGl0aW9uIHRvIHRoZSBTUkNfVVJJLiAgSSBjYW4gZ2V0IHBocC01LjQuMzMg
-ZnJvbSBodHRwOi8vcGhwLm5ldC9nZXQvcGhwLTUuNC4zMy50YXIuYnoyL2Zyb20vdGhpcy9taXJy
-b3IuICBIb3dldmVyLCB0aGlzIGxvY2F0aW9uIGhhcyB0aGUgc2FtZSBwcm9ibGVtIGFzIHRoZSBT
-UkNfVVJJIG9uIHRoZSBkaXp6eSBicmFuY2g7IFBIUCB2ZXJzaW9ucyB0aGF0IGFyZSBvbGRlciB0
-aGFuIGEgeWVhciBhcmUgbm8gbG9uZ2VyIGF2YWlsYWJsZSBvbiB0aGUgcGhwLm5ldCBtaXJyb3Jz
-LiAgTm90IGEgcHJvYmxlbSAoeWV0KSBmb3IgZGl6enkgb3IgbWFzdGVyIGJyYW5jaGVzIGFzIHRo
-ZXNlIGJyYW5jaGVzIGFyZSB1c2luZyBhIG1vcmUgcmVjZW50IHZlcnNpb24gb2YgUEhQLiAgRm9y
-IGRhaXN5IGFuZCBvbGRlciBicmFuY2hlcyB0aGF0IGFyZSB1c2luZyA1LjQuMTQsIHRoaXMgU1JD
-X1VSSSBkb2VzIG5vdCB3b3JrLg0KDQpSZWdhcmRzLA0KQnJ5YW4gDQo=
+From: Roy Li <rongqing.li@windriver.com>
+
+snmplib/mib.c in net-snmp 5.7.0 and earlier, when the -OQ option is used,
+allows remote attackers to cause a denial of service (snmptrapd crash) via
+a crafted SNMP trap message, which triggers a conversion to the variable
+type designated in the MIB file, as demonstrated by a NULL type in an ifMtu
+trap message.
+
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3565
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ ...s-for-printing-variables-with-wrong-types.patch |  455 ++++++++++++++++++++
+ .../recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb |    1 +
+ 2 files changed, 456 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch
+
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch
+new file mode 100644
+index 0000000..30374cf
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch
+@@ -0,0 +1,455 @@
++From 7f4a7b891332899cea26e95be0337aae01648742 Mon Sep 17 00:00:00 2001
++From: Jan Safranek <jsafranek@users.sourceforge.net>
++Date: Thu, 31 Jul 2014 13:46:49 +0200
++Subject: [PATCH] Added checks for printing variables with wrong types.
++
++Upstream-Status: Backport
++
++When -OQ command line argument is used, variable formatter preffers the type
++of the varible parsed from a MIB file instead of checking type of the variable
++as parsed from SNMP message.
++
++This can lead to crashes when incoming packets contains a variable with
++NULL type, while the MIB says the variable should be non-NULL, like Integer.
++The formatter then tries to interpret the NULL (from packet) as Integer (from
++MIB file).
++
++Signed-off-by: Jan Safranek <jsafranek@users.sourceforge.net>
++---
++ snmplib/mib.c |  270 ++++++++++++++++++++++++++++-----------------------------
++ 1 file changed, 135 insertions(+), 135 deletions(-)
++
++diff --git a/snmplib/mib.c b/snmplib/mib.c
++index 9d3ca41..c6e0010 100644
++--- a/snmplib/mib.c
+++++ b/snmplib/mib.c
++@@ -439,17 +439,16 @@ sprint_realloc_octet_string(u_char ** buf, size_t * buf_len,
++     u_char         *cp;
++     int             output_format, cnt;
++ 
++-    if ((var->type != ASN_OCTET_STR) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        const char      str[] = "Wrong Type (should be OCTET STRING): ";
++-        if (snmp_cstrcat
++-            (buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_OCTET_STR) {
+++        if (!netsnmp_ds_get_boolean(
+++                    NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            const char      str[] = "Wrong Type (should be OCTET STRING): ";
+++            if (!snmp_cstrcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++ 
++@@ -702,16 +701,16 @@ sprint_realloc_float(u_char ** buf, size_t * buf_len,
++                      const struct enum_list *enums,
++                      const char *hint, const char *units)
++ {
++-    if ((var->type != ASN_OPAQUE_FLOAT) &&
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        if (snmp_cstrcat(buf, buf_len, out_len, allow_realloc, 
++-                         "Wrong Type (should be Float): ")) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_OPAQUE_FLOAT) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be Float): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -772,17 +771,16 @@ sprint_realloc_double(u_char ** buf, size_t * buf_len,
++                       const struct enum_list *enums,
++                       const char *hint, const char *units)
++ {
++-    if ((var->type != ASN_OPAQUE_DOUBLE) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        if (snmp_cstrcat
++-            (buf, buf_len, out_len, allow_realloc, 
++-             "Wrong Type (should be Double): ")) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_OPAQUE_DOUBLE) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be Double): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -847,20 +845,21 @@ sprint_realloc_counter64(u_char ** buf, size_t * buf_len, size_t * out_len,
++ {
++     char            a64buf[I64CHARSZ + 1];
++ 
++-    if ((var->type != ASN_COUNTER64
+++    if (var->type != ASN_COUNTER64
++ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
++         && var->type != ASN_OPAQUE_COUNTER64
++         && var->type != ASN_OPAQUE_I64 && var->type != ASN_OPAQUE_U64
++ #endif
++-        ) && (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        if (snmp_cstrcat(buf, buf_len, out_len, allow_realloc, 
++-                        "Wrong Type (should be Counter64): ")) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++        ) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be Counter64): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -948,23 +947,25 @@ sprint_realloc_opaque(u_char ** buf, size_t * buf_len,
++                       const struct enum_list *enums,
++                       const char *hint, const char *units)
++ {
++-    if ((var->type != ASN_OPAQUE
+++    if (var->type != ASN_OPAQUE
++ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
++         && var->type != ASN_OPAQUE_COUNTER64
++         && var->type != ASN_OPAQUE_U64
++         && var->type != ASN_OPAQUE_I64
++         && var->type != ASN_OPAQUE_FLOAT && var->type != ASN_OPAQUE_DOUBLE
++ #endif                          /* NETSNMP_WITH_OPAQUE_SPECIAL_TYPES */
++-        ) && (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        if (snmp_cstrcat(buf, buf_len, out_len, allow_realloc, 
++-                         "Wrong Type (should be Opaque): ")) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++        ) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be Opaque): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
+++
++ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
++     switch (var->type) {
++     case ASN_OPAQUE_COUNTER64:
++@@ -1040,17 +1041,16 @@ sprint_realloc_object_identifier(u_char ** buf, size_t * buf_len,
++ {
++     int             buf_overflow = 0;
++ 
++-    if ((var->type != ASN_OBJECT_ID) &&
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] =
++-            "Wrong Type (should be OBJECT IDENTIFIER): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_OBJECT_ID) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be OBJECT IDENTIFIER): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -1110,16 +1110,16 @@ sprint_realloc_timeticks(u_char ** buf, size_t * buf_len, size_t * out_len,
++ {
++     char            timebuf[40];
++ 
++-    if ((var->type != ASN_TIMETICKS) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be Timeticks): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_TIMETICKS) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be Timeticks): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_NUMERIC_TIMETICKS)) {
++@@ -1277,17 +1277,18 @@ sprint_realloc_integer(u_char ** buf, size_t * buf_len, size_t * out_len,
++ {
++     char           *enum_string = NULL;
++ 
++-    if ((var->type != ASN_INTEGER) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be INTEGER): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_INTEGER) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be INTEGER): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
+++
++     for (; enums; enums = enums->next) {
++         if (enums->value == *var->val.integer) {
++             enum_string = enums->label;
++@@ -1380,16 +1381,16 @@ sprint_realloc_uinteger(u_char ** buf, size_t * buf_len, size_t * out_len,
++ {
++     char           *enum_string = NULL;
++ 
++-    if ((var->type != ASN_UINTEGER) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be UInteger32): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_UINTEGER) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be UInteger32): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     for (; enums; enums = enums->next) {
++@@ -1477,17 +1478,16 @@ sprint_realloc_gauge(u_char ** buf, size_t * buf_len, size_t * out_len,
++ {
++     char            tmp[32];
++ 
++-    if ((var->type != ASN_GAUGE) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] =
++-            "Wrong Type (should be Gauge32 or Unsigned32): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_GAUGE) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be Gauge32 or Unsigned32): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -1550,16 +1550,16 @@ sprint_realloc_counter(u_char ** buf, size_t * buf_len, size_t * out_len,
++ {
++     char            tmp[32];
++ 
++-    if ((var->type != ASN_COUNTER) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be Counter32): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_COUNTER) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be Counter32): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -1613,16 +1613,16 @@ sprint_realloc_networkaddress(u_char ** buf, size_t * buf_len,
++ {
++     size_t          i;
++ 
++-    if ((var->type != ASN_IPADDRESS) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be NetworkAddress): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_IPADDRESS) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be NetworkAddress): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -1679,16 +1679,16 @@ sprint_realloc_ipaddress(u_char ** buf, size_t * buf_len, size_t * out_len,
++ {
++     u_char         *ip = var->val.string;
++ 
++-    if ((var->type != ASN_IPADDRESS) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be IpAddress): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_IPADDRESS) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be IpAddress): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -1737,20 +1737,20 @@ sprint_realloc_null(u_char ** buf, size_t * buf_len, size_t * out_len,
++                     const struct enum_list *enums,
++                     const char *hint, const char *units)
++ {
++-    if ((var->type != ASN_NULL) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be NULL): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_NULL) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be NULL): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++-    } else {
++-        u_char          str[] = "NULL";
++-        return snmp_strcat(buf, buf_len, out_len, allow_realloc, str);
++     }
+++
+++    u_char          str[] = "NULL";
+++    return snmp_strcat(buf, buf_len, out_len, allow_realloc, str);
++ }
++ 
++ 
++@@ -1785,16 +1785,16 @@ sprint_realloc_bitstring(u_char ** buf, size_t * buf_len, size_t * out_len,
++     u_char         *cp;
++     char           *enum_string;
++ 
++-    if ((var->type != ASN_BIT_STR && var->type != ASN_OCTET_STR) &&
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be BITS): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_BIT_STR && var->type != ASN_OCTET_STR) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be BITS): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++@@ -1869,16 +1869,16 @@ sprint_realloc_nsapaddress(u_char ** buf, size_t * buf_len,
++                            const struct enum_list *enums, const char *hint,
++                            const char *units)
++ {
++-    if ((var->type != ASN_NSAP) && 
++-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
++-        u_char          str[] = "Wrong Type (should be NsapAddress): ";
++-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
++-            return sprint_realloc_by_type(buf, buf_len, out_len,
+++    if (var->type != ASN_NSAP) {
+++        if (!netsnmp_ds_get_boolean(
+++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
+++            u_char          str[] = "Wrong Type (should be NsapAddress): ";
+++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
+++                return 0;
+++        }
+++        return sprint_realloc_by_type(buf, buf_len, out_len,
++                                           allow_realloc, var, NULL, NULL,
++                                           NULL);
++-        } else {
++-            return 0;
++-        }
++     }
++ 
++     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
++-- 
++1.7.10.4
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
+index 9012615..82ce4db 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5
+ DEPENDS = "openssl libnl pciutils"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
++        file://0001-Added-checks-for-printing-variables-with-wrong-types.patch \
+         file://init \
+         file://snmpd.conf \
+         file://snmptrapd.conf \
+-- 
+1.7.10.4
+
 
