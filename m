@@ -1,21 +1,21 @@
 Return-Path: <ignas.anikevicius@realvnc.com>
 Received: from SP39.realvnc.ltd (mx.realvnc.com [212.69.41.4])
-	by mail.openembedded.org (Postfix) with ESMTP id B244965D3C
+	by mail.openembedded.org (Postfix) with ESMTP id 471E265C87
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Nov 2014 14:51:03 +0000 (UTC)
+	Tue,  4 Nov 2014 14:55:05 +0000 (UTC)
 Received: from santadi.realvnc.ltd (10.10.30.155) by SP39.realvnc.ltd
 	(10.10.99.12) with Microsoft SMTP Server (TLS) id 15.0.775.38;
-	Tue, 4 Nov 2014 14:51:02 +0000
+	Tue, 4 Nov 2014 14:39:27 +0000
 From: Ignas Anikevicius <ignas.anikevicius@realvnc.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 4 Nov 2014 14:50:56 +0000
-Message-ID: <1415112656-6120-1-git-send-email-ignas.anikevicius@realvnc.com>
+Date: Tue, 4 Nov 2014 14:39:20 +0000
+Message-ID: <1415111960-5672-1-git-send-email-ignas.anikevicius@realvnc.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.10.30.155]
 X-ClientProxiedBy: SP39.realvnc.ltd (10.10.99.12) To SP39.realvnc.ltd
 	(10.10.99.12)
-Subject: [meta-oe][daisy][PATCH v2] Add a bitbake recipe for Python psutil v2.1.3
+Subject: [meta-oe][daisy][PATCH] Add a bitbake recipe for Python psutil v2.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,13 +29,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Nov 2014 14:51:04 -0000
+X-List-Received-Date: Tue, 04 Nov 2014 14:55:08 -0000
 Content-Type: text/plain
 
-This bitbake recipe is based on the existing 'python-psutil_0.6.1.bb'
-bitbake recipe in the same folder.
+This bitbake recipe is based on the existing
+'python-psutil_v0.6.9' bitbake recipe in the same folder.
 
-I have tested the recipe locally and it worked without any issues.
+I have tested the recipe locally and it work without any issues.
 
 Signed-off-by: Ignas Anikevicius <ignas.anikevicius@realvnc.com>
 ---
