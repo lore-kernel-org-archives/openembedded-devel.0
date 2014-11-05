@@ -1,46 +1,28 @@
-Return-Path: <bevenson@melinkcorp.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1bn0104.outbound.protection.outlook.com [157.56.110.104])
-	by mail.openembedded.org (Postfix) with ESMTP id 39EE865C91
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 2558B6017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Nov 2014 13:21:02 +0000 (UTC)
-Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
-	BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) with Microsoft
-	SMTP Server (TLS) id 15.1.11.14; Wed, 5 Nov 2014 13:20:48 +0000
-Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) by
-	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) with mapi id
-	15.01.0011.000; Wed, 5 Nov 2014 13:20:48 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Paul Eggleton
-	<paul.eggleton@linux.intel.com>
-Thread-Topic: [oe] php: museum.php.net is broken - change recipe SRC_URI?
-Thread-Index: Ac/3Z5ppbk7ICAEwTw+FbzLtrZYhaAAFbV0AAAA0flAABJPwgAAA44oAAFmPIoA=
-Date: Wed, 5 Nov 2014 13:20:48 +0000
-Message-ID: <12704febfbdc48c5bc9470e90312770b@BLUPR05MB037.namprd05.prod.outlook.com>
+	Wed,  5 Nov 2014 13:32:09 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 05 Nov 2014 05:32:10 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.07,319,1413270000"; d="scan'208";a="626972258"
+Received: from sergeypo-mobl1.ccr.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.106])
+	by fmsmga002.fm.intel.com with ESMTP; 05 Nov 2014 05:32:09 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Bryan Evenson <bevenson@melinkcorp.com>
+Date: Wed, 05 Nov 2014 13:32:08 +0000
+Message-ID: <7571365.1nZ3Uh4ESC@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.2 (Linux/3.16.7-200.fc20.x86_64; KDE/4.14.2; x86_64; ; )
+In-Reply-To: <12704febfbdc48c5bc9470e90312770b@BLUPR05MB037.namprd05.prod.outlook.com>
 References: <ab38d1872c37433981e9fd312b842a54@BLUPR05MB037.namprd05.prod.outlook.com>
-	<4253192.vXvCSCqcaf@peggleto-mobl5.ger.corp.intel.com>
-	<39739be97a8540f388f124d4b3167ec2@BLUPR05MB037.namprd05.prod.outlook.com>
-	<5457C365.7020406@pr.hu>
 	<10fd3d410b8a453f9df7b32114add897@BLUPR05MB037.namprd05.prod.outlook.com>
-In-Reply-To: <10fd3d410b8a453f9df7b32114add897@BLUPR05MB037.namprd05.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-vipre-scanned: 001ED3460086E0001ED493
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [98.100.91.242]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB037;
-x-exchange-antispam-report-test: UriScan:;
-x-forefront-prvs: 0386B406AA
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(24454002)(199003)(13464003)(51704005)(377454003)(377424004)(189002)(97736003)(76576001)(122556002)(40100003)(87936001)(93886004)(77156002)(4396001)(62966003)(21056001)(95666004)(99286002)(106356001)(107046002)(33646002)(105586002)(108616004)(77096003)(15395725005)(99396003)(64706001)(120916001)(16799955002)(20776003)(66066001)(15202345003)(31966008)(16601075003)(74316001)(92566001)(54356999)(86362001)(50986999)(2656002)(101416001)(575784001)(19580395003)(19580405001)(76176999)(46102003)(15975445006)(24736002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB037;
-	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
+	<12704febfbdc48c5bc9470e90312770b@BLUPR05MB037.namprd05.prod.outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: melinkcorp.com
-Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>
+Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>,
+	openembedded-devel@lists.openembedded.org
 Subject: Re: php: museum.php.net is broken - change recipe SRC_URI?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -55,118 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Nov 2014 13:21:06 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 05 Nov 2014 13:32:12 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-QWxsLA0KDQpUaGVyZSBoYXNuJ3QgYmVlbiBhbnkgZm9sbG93LXVwIG9uIHRoaXMgdGhyZWFkIGZv
-ciBhIGNvdXBsZSBkYXlzLiAgSSdkIGxpa2UgdG8ga25vdyBpZiB0aGVyZSB3b3VsZCBiZSBhbiBh
-Y2NlcHRhYmxlIHNvbHV0aW9uIGZvciB0aGlzIGlzc3VlLiAgSSdkIHByb3Bvc2UgY2hhbmdpbmcg
-dGhlIFNSQ19VUkkgZm9yIHBocC01LjQuMTQgdG8gaHR0cDovL2dpdC5waHAubmV0Lz9wPXdlYi9w
-aHAtZGlzdHJpYnV0aW9ucy5naXQ7YT1ibG9iO2Y9cGhwLTUuNC4xNC50YXIuYnoyO2g9MGQ5NTBm
-MTc5ZDU4NmJiMWQwZTg3OWUwZDRhYTNhNTE0MGU4ZDVmNTtoYj0zZGQyZjEyNjA5ZmM4YTczMGQ3
-Y2YzNDFhOTMyZjZjN2IyNDFmMDNjLCB3aGljaCB3aWxsIGRpcmVjdGx5IHB1bGwgb25seSB0aGUg
-dGFyYmFsbCB3ZSBuZWVkIGRpcmVjdGx5IGZyb20gdGhlIFBIUCBHaXQgcmVwb3NpdG9yeS4gIEkg
-YmVsaWV2ZSBpdCdzIHRoZSBvbmx5IHBhdGggdGhhdCB3b3VsZCBiZSBndWFyYW50ZWVkIHRvIHdv
-cmsgbG9uZyB0ZXJtLg0KDQpJZiB0aGlzIGNoYW5nZSB3b3VsZCBiZSBhY2NlcHRhYmxlLCBJIGNh
-biBzdWJtaXQgYSBwYXRjaCB0aGF0IHdvdWxkIGJlIGZvciBkYWlzeSwgZG9yYSBhbmQgZHlsYW4u
-DQoNClJlZ2FyZHMsDQpCcnlhbiANCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBG
-cm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-IFttYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9y
-Z10gT24NCj4gQmVoYWxmIE9mIEJyeWFuIEV2ZW5zb24NCj4gU2VudDogTW9uZGF5LCBOb3ZlbWJl
-ciAwMywgMjAxNCAxOjQxIFBNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZzsgUGF1bCBFZ2dsZXRvbg0KPiBDYzoga29lbkBkb21pbmlvbi50aHJ1aGVyZS5u
-ZXQNCj4gU3ViamVjdDogUmU6IFtvZV0gcGhwOiBtdXNldW0ucGhwLm5ldCBpcyBicm9rZW4gLSBj
-aGFuZ2UgcmVjaXBlIFNSQ19VUkk/DQo+IA0KPiBab2x0YW4sDQo+IA0KPiA+IC0tLS0tT3JpZ2lu
-YWwgTWVzc2FnZS0tLS0tDQo+ID4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlz
-dHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsLWJvdW5j
-ZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24NCj4gQmVoYWxmDQo+ID4gT2YgQm9zem9ybWVu
-eWkgWm9sdGFuDQo+ID4gU2VudDogTW9uZGF5LCBOb3ZlbWJlciAwMywgMjAxNCAxOjAzIFBNDQo+
-ID4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnOyBQYXVsIEVn
-Z2xldG9uDQo+ID4gQ2M6IGtvZW5AZG9taW5pb24udGhydWhlcmUubmV0DQo+ID4gU3ViamVjdDog
-UmU6IFtvZV0gcGhwOiBtdXNldW0ucGhwLm5ldCBpcyBicm9rZW4gLSBjaGFuZ2UgcmVjaXBlDQo+
-IFNSQ19VUkk/DQo+ID4NCj4gPiAyMDE0LTExLTAzIDE3OjA4IGtlbHRlesOpc3NlbCwgQnJ5YW4g
-RXZlbnNvbiDDrXJ0YToNCj4gPiA+IFBhdWwsDQo+ID4gPg0KPiA+ID4+IC0tLS0tT3JpZ2luYWwg
-TWVzc2FnZS0tLS0tDQo+ID4gPj4gRnJvbTogUGF1bCBFZ2dsZXRvbiBbbWFpbHRvOnBhdWwuZWdn
-bGV0b25AbGludXguaW50ZWwuY29tXQ0KPiA+ID4+IFNlbnQ6IE1vbmRheSwgTm92ZW1iZXIgMDMs
-IDIwMTQgMTA6NDYgQU0NCj4gPiA+PiBUbzogQnJ5YW4gRXZlbnNvbg0KPiA+ID4+IENjOiBNYXJ0
-aW4gSmFuc2E7IGtvZW5AZG9taW5pb24udGhydWhlcmUubmV0OyBvcGVuZW1iZWRkZWQtDQo+ID4g
-Pj4gZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+ID4+IFN1YmplY3Q6IFJlOiBbb2Vd
-IHBocDogbXVzZXVtLnBocC5uZXQgaXMgYnJva2VuIC0gY2hhbmdlIHJlY2lwZQ0KPiA+IFNSQ19V
-Ukk/DQo+ID4gPj4NCj4gPiA+PiBIaSBCcnlhbiwNCj4gPiA+Pg0KPiA+ID4+IE9uIE1vbmRheSAw
-MyBOb3ZlbWJlciAyMDE0IDE0OjAzOjQyIEJyeWFuIEV2ZW5zb24gd3JvdGU6DQo+ID4gPj4+IFRo
-ZSBvZmZpY2lhbCBQSFAgYXJjaGl2YWwgdmVyc2lvbiBkb3dubG9hZCBzaXRlLA0KPiA+ID4+PiBo
-dHRwOi8vbXVzZXVtLnBocC5uZXQsIGhhcyBiZWVuIGRvd24gYXQgbGVhc3Qgc2luY2UgdGhlIGJl
-Z2lubmluZw0KPiA+ID4+PiBvZiBPY3RvYmVyLiAgVGhpcyBpcyBhIHByb2JsZW0gZm9yIGRhaXN5
-IGFuZCBvbGRlciBicmFuY2hlcyBpZiBhDQo+ID4gPj4+IGJ1aWxkIGF0dGVtcHRzIHRvIGZldGNo
-IFBIUC4gIEkgZXhwZWN0IHRoaXMgc2l0ZSB3aWxsIGJlIGJhY2sgdXANCj4gPiA+Pj4gYWdhaW4g
-c29tZXRpbWUsIGJ1dCBmcm9tIHJlYWRpbmcgdGhlIGNvbnZlcnNhdGlvbiBvbiB0aGUgcmVsYXRl
-ZA0KPiA+ID4+PiBQSFAgYnVnIHJlcG9ydCAoaHR0cHM6Ly9idWdzLnBocC5uZXQvYnVnLnBocD9p
-ZD02ODEzMCkgSSBkbyBub3QNCj4gPiA+Pj4gYmVsaWV2ZSBodHRwOi8vbXVzZXVtLnBocC5uZXQg
-Y2FuIGJlIHZpZXdlZCB0byBiZSBhIHJlbGlhYmxlDQo+ID4gPj4+IGFyY2hpdmUgaW4gdGhlIGZ1
-dHVyZS4gIEkgc2VlIHRoYXQgZGl6enkgY2hhbmdlZCB0aGUgU1JDX1VSSSB0bw0KPiA+ID4+PiB1
-c2UgaHR0cDovL3d3dy5waHAubmV0L2Rpc3RyaWJ1dGlvbnMgZm9yIHRoZSBtYWluIGRvd25sb2Fk
-LiAgSSBkaWQNCj4gPiA+Pj4gc29tZSB0ZXN0aW5nIGFuZCBpdCBhcHBlYXJzIHRoYXQgUEhQIHZl
-cnNpb25zIHRoYXQgYXJlIGFib3V0IGENCj4gPiA+Pj4geWVhciBvbGQgb3IgbGVzcyBhcmUgYXZh
-aWxhYmxlIGZyb20NCj4gPiA+Pj4gaHR0cDovL3d3dy5waHAubmV0L2Rpc3RyaWJ1dGlvbnMuICBT
-byB3ZSBjYW4gYXNzdW1lIHRoYXQgYSB5ZWFyDQo+ID4gPj4+IGZyb20gbm93IHRoZSBkaXp6eSBi
-cmFuY2ggU1JDX1VSSSB3aWxsIG5lZWQgdG8gY2hhbmdlDQo+ID4gPj4gdG8gc29tZXRoaW5nIGVs
-c2UuDQo+ID4gPj4+IEknZCBwcm9wb3NlIGNoYW5naW5nIHRoZSBTUkNfVVJJIHRvIHNvbWV0aGlu
-ZyB0aGF0IHdpbGwgbm90IGNoYW5nZQ0KPiA+ID4+PiBvdmVyIHRpbWUuICBNeSBzdWdnZXN0aW9u
-IHdvdWxkIGJlIHRoZSBQSFAgZGlzdHJpYnV0aW9ucyBHaXQNCj4gPiA+Pj4gcmVwb3NpdG9yeSBs
-b2NhdGVkDQo+ID4gPj4+IGhlcmU6IGh0dHA6Ly9naXQucGhwLm5ldC8/cD13ZWIvcGhwLWRpc3Ry
-aWJ1dGlvbnMuZ2l0O2E9c3VtbWFyeS4NCj4gPiA+Pj4gVGhpcyBpcyB0aGUgcGF0aCBzdWdnZXN0
-ZWQgaW4gdGhlIHJlbGF0ZWQgUEhQIGJ1ZyBtZW50aW9uZWQgZWFybGllci4NCj4gPiA+Pj4gVGhl
-IGRpc2FkdmFudGFnZSBpcyB0aGF0IHRoZSBTUkNfVVJJIHdvdWxkIHJlZmVyIHRvIGEgZmlsZSBv
-biBhDQo+ID4gPj4+IHNwZWNpZmljIHRhZywgc28gdGhlIFNSQ19VUkkgd291bGQgYmUgc3BlY2lm
-aWMgZm9yIGVhY2ggUEhQIHZlcnNpb24uDQo+ID4gPj4+DQo+ID4gPj4+IEFueSBmdXJ0aGVyIHN1
-Z2dlc3Rpb25zIG9uIGhvdyB0byBoYW5kbGUgdGhpcz8gIElmIHRoZSBTUkNfVVJJDQo+ID4gPj4+
-IGRvZXMgZ2V0IHVwZGF0ZWQsIGhvdyBtYW55IGJyYW5jaGVzIGJhY2sgc2hvdWxkIHRoZSBjaGFu
-Z2UgYmUNCj4gbWFkZT8NCj4gPiA+PiBTbyB3ZSBkbyBoYXZlIG1pcnJvcnMgdGhhdCBjYW4gaGVs
-cCB3aXRoIHRoaXMsIHVuZm9ydHVuYXRlbHkgd2l0aA0KPiA+ID4+IHRoZSBPRSBtaXJyb3IgKGFz
-IG9wcG9zZWQgdG8gdGhlIFlvY3RvIFByb2plY3Qgb25lKSwgaXRzIHBvcHVsYXRpb24NCj4gPiA+
-PiBpcyBub3QgYXV0b21hdGljLCBzbyB5b3UgaGF2ZSB0byByZXF1ZXN0IHRoYXQgbmV3IGFyY2hp
-dmVzIGdldCBhZGRlZC4NCj4gPiA+PiBJJ20gbm90IHN1cmUgaXQgd291bGQgYmUgcHJhY3RpY2Fs
-IHRvIGNoYW5nZSB0aGlzIGVpdGhlci4NCj4gPiA+Pg0KPiA+ID4+IFdoeSBwaHAgdGhpbmtzIGl0
-J3MgYSBnb29kIGlkZWEgdG8gZGlzdHJpYnV0ZSB0aGVzZSB0YXJiYWxscyBpbiBhDQo+ID4gPj4g
-c2luZ2xlIHBsYWNlIGluIGEgZ2l0IHJlcG9zaXRvcnkgYnV0IG5vdCBpbiBhIHNpbXBsZSBmbGF0
-IEhUVFANCj4gPiA+PiBsb2NhdGlvbiBpcyBhIGJpdA0KPiA+IGJleW9uZCBtZS4NCj4gPiA+PiBG
-ZXRjaGluZyBkaXJlY3RseSBmcm9tIGdpdCBpbiB0aGlzIHNpdHVhdGlvbiB3b3VsZG4ndCBiZSBp
-ZGVhbCBhcw0KPiA+ID4+IGl0J2xsIGVuZCB1cCBlZmZlY3RpdmVseSBmZXRjaGluZyBhbGwgb2Yg
-dGhlIGJpbmFyaWVzIGRvd24gd2hlbg0KPiA+ID4+IGNsb25pbmcgdGhlIHJlcG87IGhvd2V2ZXIg
-SSBndWVzcyB5b3UgY291bGQgZG93bmxvYWQgYSBzaW5nbGUgZmlsZSB3aXRoOg0KPiA+ID4+DQo+
-ID4gPj4gU1JDX1VSSSA9DQo+ID4gPj4gImh0dHA6Ly9naXQucGhwLm5ldC8/cD13ZWIvcGhwLWRp
-c3RyaWJ1dGlvbnMuZ2l0O2E9YmxvYjtmPXBocC0NCj4gPiA+PiAke1BWfS50YXIueHoiDQo+ID4g
-PiBOb3QgZXhhY3RseS4gIEl0IGxvb2tzIGxpa2UgdGhlIG9sZCB2ZXJzaW9ucyB0aGF0IGFyZSBu
-byBsb25nZXINCj4gPiA+IHN1cHBvcnRlZCBnZXQNCj4gPiBkZWxldGVkIGZyb20gcGhwLWRpc3Ry
-aWJ1dGlvbnMuZ2l0LCBzbyBIRUFEIGRvZXNuJ3QgaGF2ZSBrbm93bGVkZ2Ugb2YNCj4gPiBhbGwg
-UEhQIHZlcnNpb25zLiAgRm9yIGV4YW1wbGUsIHRoaXMgbGluazoNCj4gPiBodHRwOi8vZ2l0LnBo
-cC5uZXQvP3A9d2ViL3BocC0NCj4gPiBkaXN0cmlidXRpb25zLmdpdDthPWJsb2I7Zj1waHAtNS40
-LjIyLnRhci5iejIgYXMgb2YgdG9kYXkgd2lsbA0KPiA+IGRvd25sb2FkIHBocC0gNS40LjIyLiAg
-QnV0IHRoaXMgbGluazogaHR0cDovL2dpdC5waHAubmV0Lz9wPXdlYi9waHAtDQo+ID4gZGlzdHJp
-YnV0aW9ucy5naXQ7YT1ibG9iO2Y9cGhwLTUuNC4yMS50YXIuYnoyIGp1c3QgcmVwb3J0cyB0aGF0
-IGl0DQo+ID4gY2Fubm90IGZpbmQgdGhlIGZpbGUuDQo+ID4gPg0KPiA+ID4gQXMgZmFyIGFzIGZl
-dGNoaW5nIHBocC01LjQuMTQgKHZlcnNpb24gdXNlZCBmb3IgZGFpc3kgYW5kIG9sZGVyKSBJDQo+
-ID4gPiB0aGluayB0aGlzDQo+ID4gVVJMIHdpbGwgd29yazogaHR0cDovL2dpdC5waHAubmV0Lz9w
-PXdlYi9waHAtDQo+ID4gZGlzdHJpYnV0aW9ucy5naXQ7YT1ibG9iO2Y9cGhwLQ0KPiA+DQo+IDUu
-NC4xNC50YXIuYnoyO2g9MGQ5NTBmMTc5ZDU4NmJiMWQwZTg3OWUwZDRhYTNhNTE0MGU4ZDVmNTto
-Yj0zZGQyZjEyDQo+ID4gNjA5ZmM4YTczMGQ3Y2YzNDFhOTMyZjZjN2IyNDFmMDNjLiAgVWdseSwg
-YnV0IGl0IHdvcmtzLg0KPiA+DQo+ID4gV2hhdCdzIHdyb25nIHdpdGggdGhpcz8NCj4gPg0KPiA+
-IFNSQ19VUkkgPQ0KPiA+ICJodHRwOi8vcGhwLm5ldC9nZXQvcGhwLQ0KPiA+ICR7UFZ9LnRhci5i
-ejIvZnJvbS90aGlzL21pcnJvcjtkb3dubG9hZGZpbGVuYW1lPXBocC0ke1BWfS50YXIuYnoyIg0K
-PiANCj4gRmlyc3QsIEkgY2FuJ3QgZ2V0IHRoaXMgU1JDX1VSSSB0byB3b3JrIHdpdGggdGhlICJk
-b3dubG9hZGZpbGVuYW1lIiBhZGRpdGlvbg0KPiB0byB0aGUgU1JDX1VSSS4gIEkgY2FuIGdldCBw
-aHAtNS40LjMzIGZyb20gaHR0cDovL3BocC5uZXQvZ2V0L3BocC0NCj4gNS40LjMzLnRhci5iejIv
-ZnJvbS90aGlzL21pcnJvci4gIEhvd2V2ZXIsIHRoaXMgbG9jYXRpb24gaGFzIHRoZSBzYW1lDQo+
-IHByb2JsZW0gYXMgdGhlIFNSQ19VUkkgb24gdGhlIGRpenp5IGJyYW5jaDsgUEhQIHZlcnNpb25z
-IHRoYXQgYXJlIG9sZGVyDQo+IHRoYW4gYSB5ZWFyIGFyZSBubyBsb25nZXIgYXZhaWxhYmxlIG9u
-IHRoZSBwaHAubmV0IG1pcnJvcnMuICBOb3QgYSBwcm9ibGVtDQo+ICh5ZXQpIGZvciBkaXp6eSBv
-ciBtYXN0ZXIgYnJhbmNoZXMgYXMgdGhlc2UgYnJhbmNoZXMgYXJlIHVzaW5nIGEgbW9yZSByZWNl
-bnQNCj4gdmVyc2lvbiBvZiBQSFAuICBGb3IgZGFpc3kgYW5kIG9sZGVyIGJyYW5jaGVzIHRoYXQg
-YXJlIHVzaW5nIDUuNC4xNCwgdGhpcw0KPiBTUkNfVVJJIGRvZXMgbm90IHdvcmsuDQo+IA0KPiBS
-ZWdhcmRzLA0KPiBCcnlhbg0KPiAtLQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9w
-ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5v
-cGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
+On Wednesday 05 November 2014 13:20:48 Bryan Evenson wrote:
+> There hasn't been any follow-up on this thread for a couple days.  I'd like
+> to know if there would be an acceptable solution for this issue.  I'd
+> propose changing the SRC_URI for php-5.4.14 to
+> http://git.php.net/?p=web/php-distributions.git;a=blob;f=php-5.4.14.tar.bz2
+> ;h=0d950f179d586bb1d0e879e0d4aa3a5140e8d5f5;hb=3dd2f12609fc8a730d7cf341a932f
+> 6c7b241f03c, which will directly pull only the tarball we need directly from
+> the PHP Git repository.  I believe it's the only path that would be
+> guaranteed to work long term.
+
+Presumably if we did that we will need to keep updating the hash as well 
+though?
+
+Looking at the bug there are at least two mirrors mentioned, although those 
+may not be reliable on a permanent basis there should be others (e.g. distros 
+often provide copies of the upstream sources they use). We could leave the 
+museum.php.net URL in place since it does appear it will eventually return, 
+and add MIRRORS values to cover the situation while it's unavailable.
+
+Does this sound like a workable plan?
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
