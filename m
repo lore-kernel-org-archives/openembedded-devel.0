@@ -1,35 +1,40 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qa0-f45.google.com (mail-qa0-f45.google.com
-	[209.85.216.45])
-	by mail.openembedded.org (Postfix) with ESMTP id C58D37202E
+Return-Path: <gary.robertson@linaro.org>
+Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
+	[209.85.214.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F4AA7067B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Nov 2014 17:42:53 +0000 (UTC)
-Received: by mail-qa0-f45.google.com with SMTP id dc16so1106255qab.18
+	Thu,  6 Nov 2014 19:23:37 +0000 (UTC)
+Received: by mail-ob0-f169.google.com with SMTP id va2so1419445obc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Nov 2014 09:42:53 -0800 (PST)
+	Thu, 06 Nov 2014 11:23:38 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=QJdpen0MURZ5udUZTbz+ur6oJz4SN16Yqxm73FwoJMs=;
-	b=h3Na04qIOI4CjjHlEcyuAoER8+YdS3Eapkp4m0fo6bT34y7g4RP7RHcz3qcBCdFalz
-	lzIgw7I7R9kSKo6qJ0Zcfp5Qp9FrWE2YOiorjdGFu9F/uIZo9mIfnRY8PLbFZGiOaUME
-	K0PmI+wkKpHVNXTOsUfCHWIFtb+Fto4awWJE096gp8QyszGejfpiuSU2IVR9rqm1BMZa
-	8OcgreKyqZgUmojvUOxYdLDHu4kfxrJH/CvGfQHcQTjw14Omci95IKAfIxi0caEbtYim
-	6V+LG6qeO2dak40IA3LydwovkGjPO4aS31P+7Byz9tSArVgHt3qIZGqr+UDi9+ooXMdE
-	6l2Q==
-X-Gm-Message-State: ALoCoQnPx5b0natT2iWmfQ7eTXr+uB1/UaKvYYPPXEP8nkom4dsJQkH2tAViKSmVGLmpDj+A/wFY
-X-Received: by 10.229.176.70 with SMTP id bd6mr9265249qcb.12.1415295773628;
-	Thu, 06 Nov 2014 09:42:53 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.98.213 with HTTP; Thu, 6 Nov 2014 09:42:33 -0800 (PST)
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 6 Nov 2014 17:42:33 +0000
-Message-ID: <CAJTo0LavfAPo3P4Mv9U-24KK7HhkBOgysg5ZAUZe1YOAL10pvw@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OE-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Moving llvm to oe-core?
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=ctpakGBH28mLVGGXI238n/4tWrwNuxm4gn1kCVHiD9c=;
+	b=BCKLq6GVdQ7ix1QbciZJn0WpMqgkeQuUTJ/T3uA65+FhfE+ry+tHK2iGutGJ8RV3QO
+	4BMYKBur06vmCUIxNjq00+hVJ9a0jpgqP/1letscfpLzMXqga51rm5detxH3zK+KJKtG
+	zJGvGxJghPmJQrMPHK6mpdtyyK+Kj8Gi2l/9CwxR0QK/NWOJK3yvOO78RtEzLvo8s46y
+	k9AnnWw+GI7jWQjsXCJhYEJfUNY0jVyhkib1QKekX+KzppdTeqKQjWYIlHVZYYFan+8C
+	7b5x7N1ZonswWgDF/nVLLeCzxUO6CRnUtxLOIYUNGnetGLEfEVZ7q3K7auEF8TStUlHJ
+	bDIQ==
+X-Gm-Message-State: ALoCoQlo5dgMLBL9kRt0ONjQaN/CfP11jPYjtuRHa1okKeoT9tFcnlT8yhRSOy12s7daYBoYc019
+X-Received: by 10.202.187.66 with SMTP id l63mr4974030oif.13.1415301818200;
+	Thu, 06 Nov 2014 11:23:38 -0800 (PST)
+Received: from honkintosh.cybertech.lan (65-120-133-114.dia.static.qwest.net.
+	[65.120.133.114])
+	by mx.google.com with ESMTPSA id 2sm3016019obq.29.2014.11.06.11.23.36
+	for <multiple recipients>
+	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 06 Nov 2014 11:23:37 -0800 (PST)
+From: "Gary S. Robertson" <gary.robertson@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  6 Nov 2014 13:23:01 -0600
+Message-Id: <1415301783-5342-2-git-send-email-gary.robertson@linaro.org>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1415301783-5342-1-git-send-email-gary.robertson@linaro.org>
+References: <1415301783-5342-1-git-send-email-gary.robertson@linaro.org>
+Subject: [PATCH 1/3] libhugetlbfs: Add i*86 to list of compatible host architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,19 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Nov 2014 17:42:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 06 Nov 2014 19:23:44 -0000
 
-Hi,
+From: "Gary S. Robertson" <gary.robertson@linaro.org>
 
-So I think it's fair to say that neither GCC nor LLVM are going away
-anytime soon, both having their respective niches.  Because of this I'm
-wondering if we should be adding LLVM to oe-core (taking the meta-oe
-recipes).  GCC will still be the cross-compiler used but LLVM will be
-available out of the box, for example the Gallium LLVM-based Mesa drivers
-can be enabled without requiring meta-oe.
+Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+---
+ .../libhugetlbfs/libhugetlbfs_git.bb               |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Anyone have thoughts/comments/objections?
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index c2262ea..737acb9 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -23,7 +23,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
+ 
+ S = "${WORKDIR}/git"
+ 
+-COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
++COMPATIBLE_HOST = "(i386|i486|i586|i686|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+ 
+ LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
+ LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
+-- 
+1.7.9.5
 
-Ross
 
