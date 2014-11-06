@@ -1,24 +1,39 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B20117207F
+Return-Path: <bevenson@melinkcorp.com>
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1on0135.outbound.protection.outlook.com [157.56.110.135])
+	by mail.openembedded.org (Postfix) with ESMTP id BD21160E49
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Nov 2014 08:22:30 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sA68MTh1005192
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 6 Nov 2014 00:22:30 -0800 (PST)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 6 Nov 2014 00:22:29 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Martin.Jansa@gmail.com>,
-	<paul@paulbarker.me.uk>, <raj.khem@gmail.com>
-Date: Thu, 6 Nov 2014 03:22:27 -0500
-Message-ID: <1415262147-15816-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
+	Thu,  6 Nov 2014 14:21:49 +0000 (UTC)
+Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
+	BLUPR05MB038.namprd05.prod.outlook.com (10.255.210.147) with Microsoft
+	SMTP Server (TLS) id 15.1.11.14; Thu, 6 Nov 2014 14:06:51 +0000
+Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) by
+	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) with mapi id
+	15.01.0011.000; Thu, 6 Nov 2014 14:06:51 +0000
+From: Bryan Evenson <bevenson@melinkcorp.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Upgrading files identified as CONFFILES?
+Thread-Index: Ac/5yU7QRBMArZ3lTly8PxdgPYe0Zg==
+Date: Thu, 6 Nov 2014 14:06:51 +0000
+Message-ID: <e27387e29a0b4a7ea1620837f6507de1@BLUPR05MB037.namprd05.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-vipre-scanned: 0042C8000087000042C94D
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [98.100.91.242]
+x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB038;
+x-exchange-antispam-report-test: UriScan:;
+x-forefront-prvs: 0387D64A71
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(6009001)(164054003)(189002)(199003)(4396001)(77096003)(66066001)(101416001)(46102003)(120916001)(99396003)(64706001)(450100001)(229853001)(2351001)(107886001)(107046002)(95666004)(77156002)(105586002)(99286002)(106356001)(76576001)(122556002)(62966003)(108616004)(31966008)(50986999)(54356999)(86362001)(110136001)(33646002)(20776003)(40100003)(92566001)(21056001)(2656002)(19580395003)(87936001)(97736003)(74316001)(15975445006)(15202345003)(24736002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB038;
+	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:sfv;
+	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] vim: add recipe for vim-tiny
+X-OriginatorOrg: melinkcorp.com
+Subject: Upgrading files identified as CONFFILES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,95 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Nov 2014 08:22:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 06 Nov 2014 14:21:51 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Jackie Huang <jackie.huang@windriver.com>
-
-Changes:
-- Add bb for vim-tiny based on vim.bb
-- Change PACKAGECONFIG and do_install for vim-tiny
-- Change BPN to vim in vim.bb so it works fine when required by vim-tiny
-- Add proper alternative links for vim and vim-tiny to avoid conflicts
-- Don't use do_install_append in vim.bb so it works fine when required by vim-tiny
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb | 13 +++++++++++++
- meta-oe/recipes-support/vim/vim_7.4.481.bb      | 20 +++++++++++++-------
- 2 files changed, 26 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb
-
-diff --git a/meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb b/meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb
-new file mode 100644
-index 0000000..bb8f2b7
---- /dev/null
-+++ b/meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb
-@@ -0,0 +1,13 @@
-+require vim_${PV}.bb
-+
-+SUMMARY += " (with tiny features)"
-+
-+PACKAGECONFIG += "tiny"
-+
-+do_install() {
-+    install -d ${D}/${bindir}
-+    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
-+}
-+
-+ALTERNATIVE_PRIORITY = "90"
-+ALTERNATIVE_TARGET = "${bindir}/vim.tiny"
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-index b85ff63..7490229 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-@@ -12,9 +12,9 @@ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
- "
- SRCREV = "v7-4-481"
- 
--S = "${WORKDIR}/${BPN}/src"
-+S = "${WORKDIR}/vim/src"
- 
--VIMDIR = "${BPN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
-+VIMDIR = "vim${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).split('.')[1]}"
- 
- inherit autotools update-alternatives
- inherit autotools-brokensep
-@@ -59,7 +59,9 @@ EXTRA_OECONF = " \
-     STRIP=/bin/true \
- "
- 
--do_install_append() {
-+do_install() {
-+    autotools_do_install
-+
-     # Work around rpm picking up csh or awk or perl as a dep
-     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
-     chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
-@@ -67,6 +69,9 @@ do_install_append() {
- 
-     # Install example vimrc from runtime files
-     install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/vimrc
-+
-+    # we use --with-features=big as default
-+    mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
- }
- 
- PARALLEL_MAKEINST = ""
-@@ -97,7 +102,8 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
- # Recommend that runtime data is installed along with vim
- RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
- 
--ALTERNATIVE_${PN} = "vi"
--ALTERNATIVE_TARGET[vi] = "${bindir}/${BPN}"
--ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
--ALTERNATIVE_PRIORITY[vi] = "100"
-+ALTERNATIVE_${PN} = "vi vim"
-+ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
-+ALTERNATIVE_LINK_NAME[vi] = "${bindir}/vi"
-+ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
-+ALTERNATIVE_PRIORITY = "100"
--- 
-2.0.0
-
+QWxsLA0KDQpGaXJzdCwgcGxlYXNlIGxldCBtZSBrbm93IGlmIEkgc2hvdWxkIGJlIGRpcmVjdGlu
+ZyB0aGlzIHRvIGEgZGlmZmVyZW50IE9FL3lvY3RvIG1haWxpbmcgbGlzdDsgSSBoYXZlIGEgaGFy
+ZCB0aW1lIGZpZ3VyaW5nIG91dCB3aGljaCBsaXN0IGlzIGFwcHJvcHJpYXRlIGF0IHRpbWVzLg0K
+DQpJIGFtIG9uIHBva3kvZHlsYW4gYW5kIGFtIHVzaW5nIE5UUCBvbiBteSB0YXJnZXQgc3lzdGVt
+LiAgSSB3b3VsZCBsaWtlIHRvIGNoYW5nZSB0aGUgY29uZmlndXJhdGlvbiBmb3IgTlRQIGFuZCBw
+dXNoIG91dCB0aGUgY2hhbmdlcyB0byBkZXZpY2VzIHRoYXQgYXJlIGZpcm13YXJlIHVwZ3JhZGFi
+bGUuICBJIG1hZGUgdGhlIGNoYW5nZSBhbmQgcHVzaGVkIG91dCB0aGUgdXBncmFkZSwgYnV0IEkg
+c2VlIHRoYXQgbnRwLmNvbmYgZGlkIG5vdCBnZXQgY2hhbmdlZCBvbiBhdCBsZWFzdCBvbmUgb2Yg
+dGhlIHN5c3RlbXMgKHRoZSBmaXJzdCBvbmUgSSBjaGVja2VkKS4gIE5vdyBJIHNlZSB0aGF0IG50
+cC5jb25mIGlzIGxpc3RlZCB1bmRlciBDT05GRklMRVMgaW4gdGhlIG1haW4gbnRwIHJlY2lwZSAo
+aHR0cDovL3d3dy55b2N0b3Byb2plY3Qub3JnL2RvY3MvMS43L21lZ2EtbWFudWFsL21lZ2EtbWFu
+dWFsLmh0bWwjdmFyLUNPTkZGSUxFUyksIHdoaWNoIGV4cGxhaW5zIHdoeSBpdCB3YXMgbm90IHVw
+Z3JhZGVkLg0KDQpGaXJzdCwgSSB3YW50IHRvIGNvbmZpcm0gaG93IHRoZSBDT05GRklMRVMgcGFy
+YW1ldGVyIHdvcmtzLiAgSWYgYSBmaWxlIGlzIGxpc3RlZCB1bmRlciBDT05GRklMRVMsIGlzIHRo
+YXQgZmlsZSBuZXZlciBtb2RpZmllZCBkdXJpbmcgYW4gdXBncmFkZSBvciBpcyBpdCBvbmx5IHVw
+Z3JhZGVkIGlmIGl0IGhhcyBub3QgYmVlbiBtb2RpZmllZCAobWF0Y2hlcyB0aGUgZGVmYXVsdCBm
+aWxlIGZyb20gdGhlIHByZXZpb3VzIHBhY2thZ2UgdmVyc2lvbik/ICBJIGFtIHVzaW5nIG9wa2cg
+Zm9yIHBhY2thZ2UgbWFuYWdlbWVudCBpZiB0aGF0IG1ha2VzIGEgZGlmZmVyZW5jZS4NCg0KU2Vj
+b25kLCBob3cgZG8gSSBmb3JjZSB0aGUgTlRQIGNvbmZpZ3VyYXRpb24gdG8gYmUgdXBncmFkZWQ/
+ICBGb3IgbXkgc3lzdGVtLCB0aGUgdXNlciBoYXMgbm8gaW50ZXJmYWNlIHRvIG1vZGlmeSB0aGUg
+TlRQIGNvbmZpZ3VyYXRpb24uICBTbyBldmVuIHRob3VnaCBpdCBpcyBhIGNvbmZpZ3VyYXRpb24g
+ZmlsZSwgaW4gbXkgY2FzZSBJIHdhbnQgbnRwLmNvbmYgdG8gYWx3YXlzIG1hdGNoIHRoZSB2ZXJz
+aW9uIHByb3ZpZGVkIGJ5IHRoZSB1cGdyYWRlZCBwYWNrYWdlLg0KDQpUaGFua3MsDQpCcnlhbg0K
+DQoNCg0K
 
