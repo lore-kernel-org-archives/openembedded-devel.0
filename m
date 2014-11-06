@@ -1,39 +1,35 @@
-Return-Path: <bevenson@melinkcorp.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1on0135.outbound.protection.outlook.com [157.56.110.135])
-	by mail.openembedded.org (Postfix) with ESMTP id BD21160E49
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-qc0-f176.google.com (mail-qc0-f176.google.com
+	[209.85.216.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 083877114B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Nov 2014 14:21:49 +0000 (UTC)
-Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
-	BLUPR05MB038.namprd05.prod.outlook.com (10.255.210.147) with Microsoft
-	SMTP Server (TLS) id 15.1.11.14; Thu, 6 Nov 2014 14:06:51 +0000
-Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) by
-	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.45]) with mapi id
-	15.01.0011.000; Thu, 6 Nov 2014 14:06:51 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Upgrading files identified as CONFFILES?
-Thread-Index: Ac/5yU7QRBMArZ3lTly8PxdgPYe0Zg==
-Date: Thu, 6 Nov 2014 14:06:51 +0000
-Message-ID: <e27387e29a0b4a7ea1620837f6507de1@BLUPR05MB037.namprd05.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-vipre-scanned: 0042C8000087000042C94D
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [98.100.91.242]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB038;
-x-exchange-antispam-report-test: UriScan:;
-x-forefront-prvs: 0387D64A71
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(164054003)(189002)(199003)(4396001)(77096003)(66066001)(101416001)(46102003)(120916001)(99396003)(64706001)(450100001)(229853001)(2351001)(107886001)(107046002)(95666004)(77156002)(105586002)(99286002)(106356001)(76576001)(122556002)(62966003)(108616004)(31966008)(50986999)(54356999)(86362001)(110136001)(33646002)(20776003)(40100003)(92566001)(21056001)(2656002)(19580395003)(87936001)(97736003)(74316001)(15975445006)(15202345003)(24736002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB038;
-	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
+	Thu,  6 Nov 2014 14:36:12 +0000 (UTC)
+Received: by mail-qc0-f176.google.com with SMTP id x3so838236qcv.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Nov 2014 06:36:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type:content-transfer-encoding;
+	bh=nb84z1s3mG3RUfCk3d4p8YBSD6SZsElyt4Gh1tSpoE4=;
+	b=pSV4LzR1Mp/M3iKWpk0lcMk3XwLz6W/Th/cq2qSHk/KJP7M7FxkKFf/6ZIxGcJdLYf
+	RPGN02ggFD/QFz0sbryFBIa5UJ/pUw59ASspcKRy3FyfrqTczdoRuxHm2JndkYWWKTmv
+	uWs1NBnCc2cUU+CRtEKFPRGHhMaKpcDhPx9/Jtec/mrUEceL7omhvSDz6ucKjw1KQba5
+	NXWyr612RqKOtv/1HIytUOUShMTtLUX78GN8MBGFsmNnS0Acl9i+X+HmiuxARXpUl7ki
+	RvM3aArdTGVE4lMyo5Eg4shJtbhvkPU+hskiSzAuYgOLtXnpsC3VKFrzKNxj4CE+iSSs
+	EaWQ==
+X-Received: by 10.140.30.2 with SMTP id c2mr7115149qgc.32.1415284572472; Thu,
+	06 Nov 2014 06:36:12 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: melinkcorp.com
-Subject: Upgrading files identified as CONFFILES?
+Sender: paul.betafive@gmail.com
+Received: by 10.140.143.146 with HTTP; Thu, 6 Nov 2014 06:35:32 -0800 (PST)
+In-Reply-To: <e27387e29a0b4a7ea1620837f6507de1@BLUPR05MB037.namprd05.prod.outlook.com>
+References: <e27387e29a0b4a7ea1620837f6507de1@BLUPR05MB037.namprd05.prod.outlook.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Thu, 6 Nov 2014 14:35:32 +0000
+X-Google-Sender-Auth: 6M-ZNI5Z8feBDVNvyPfD6evxP4Y
+Message-ID: <CANyK_8eahU+SLTCO_B8GhW3uZVsf-UtGsWSW628uCCPAwpb_og@mail.gmail.com>
+To: OE Devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Upgrading files identified as CONFFILES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,33 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Nov 2014 14:21:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 06 Nov 2014 14:36:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-QWxsLA0KDQpGaXJzdCwgcGxlYXNlIGxldCBtZSBrbm93IGlmIEkgc2hvdWxkIGJlIGRpcmVjdGlu
-ZyB0aGlzIHRvIGEgZGlmZmVyZW50IE9FL3lvY3RvIG1haWxpbmcgbGlzdDsgSSBoYXZlIGEgaGFy
-ZCB0aW1lIGZpZ3VyaW5nIG91dCB3aGljaCBsaXN0IGlzIGFwcHJvcHJpYXRlIGF0IHRpbWVzLg0K
-DQpJIGFtIG9uIHBva3kvZHlsYW4gYW5kIGFtIHVzaW5nIE5UUCBvbiBteSB0YXJnZXQgc3lzdGVt
-LiAgSSB3b3VsZCBsaWtlIHRvIGNoYW5nZSB0aGUgY29uZmlndXJhdGlvbiBmb3IgTlRQIGFuZCBw
-dXNoIG91dCB0aGUgY2hhbmdlcyB0byBkZXZpY2VzIHRoYXQgYXJlIGZpcm13YXJlIHVwZ3JhZGFi
-bGUuICBJIG1hZGUgdGhlIGNoYW5nZSBhbmQgcHVzaGVkIG91dCB0aGUgdXBncmFkZSwgYnV0IEkg
-c2VlIHRoYXQgbnRwLmNvbmYgZGlkIG5vdCBnZXQgY2hhbmdlZCBvbiBhdCBsZWFzdCBvbmUgb2Yg
-dGhlIHN5c3RlbXMgKHRoZSBmaXJzdCBvbmUgSSBjaGVja2VkKS4gIE5vdyBJIHNlZSB0aGF0IG50
-cC5jb25mIGlzIGxpc3RlZCB1bmRlciBDT05GRklMRVMgaW4gdGhlIG1haW4gbnRwIHJlY2lwZSAo
-aHR0cDovL3d3dy55b2N0b3Byb2plY3Qub3JnL2RvY3MvMS43L21lZ2EtbWFudWFsL21lZ2EtbWFu
-dWFsLmh0bWwjdmFyLUNPTkZGSUxFUyksIHdoaWNoIGV4cGxhaW5zIHdoeSBpdCB3YXMgbm90IHVw
-Z3JhZGVkLg0KDQpGaXJzdCwgSSB3YW50IHRvIGNvbmZpcm0gaG93IHRoZSBDT05GRklMRVMgcGFy
-YW1ldGVyIHdvcmtzLiAgSWYgYSBmaWxlIGlzIGxpc3RlZCB1bmRlciBDT05GRklMRVMsIGlzIHRo
-YXQgZmlsZSBuZXZlciBtb2RpZmllZCBkdXJpbmcgYW4gdXBncmFkZSBvciBpcyBpdCBvbmx5IHVw
-Z3JhZGVkIGlmIGl0IGhhcyBub3QgYmVlbiBtb2RpZmllZCAobWF0Y2hlcyB0aGUgZGVmYXVsdCBm
-aWxlIGZyb20gdGhlIHByZXZpb3VzIHBhY2thZ2UgdmVyc2lvbik/ICBJIGFtIHVzaW5nIG9wa2cg
-Zm9yIHBhY2thZ2UgbWFuYWdlbWVudCBpZiB0aGF0IG1ha2VzIGEgZGlmZmVyZW5jZS4NCg0KU2Vj
-b25kLCBob3cgZG8gSSBmb3JjZSB0aGUgTlRQIGNvbmZpZ3VyYXRpb24gdG8gYmUgdXBncmFkZWQ/
-ICBGb3IgbXkgc3lzdGVtLCB0aGUgdXNlciBoYXMgbm8gaW50ZXJmYWNlIHRvIG1vZGlmeSB0aGUg
-TlRQIGNvbmZpZ3VyYXRpb24uICBTbyBldmVuIHRob3VnaCBpdCBpcyBhIGNvbmZpZ3VyYXRpb24g
-ZmlsZSwgaW4gbXkgY2FzZSBJIHdhbnQgbnRwLmNvbmYgdG8gYWx3YXlzIG1hdGNoIHRoZSB2ZXJz
-aW9uIHByb3ZpZGVkIGJ5IHRoZSB1cGdyYWRlZCBwYWNrYWdlLg0KDQpUaGFua3MsDQpCcnlhbg0K
-DQoNCg0K
+On 6 November 2014 14:06, Bryan Evenson <bevenson@melinkcorp.com> wrote:
+> All,
+>
+> First, please let me know if I should be directing this to a different OE=
+/yocto mailing list; I have a hard time figuring out which list is appropri=
+ate at times.
+>
+> I am on poky/dylan and am using NTP on my target system.  I would like to=
+ change the configuration for NTP and push out the changes to devices that =
+are firmware upgradable.  I made the change and pushed out the upgrade, but=
+ I see that ntp.conf did not get changed on at least one of the systems (th=
+e first one I checked).  Now I see that ntp.conf is listed under CONFFILES =
+in the main ntp recipe (http://www.yoctoproject.org/docs/1.7/mega-manual/me=
+ga-manual.html#var-CONFFILES), which explains why it was not upgraded.
+>
+> First, I want to confirm how the CONFFILES parameter works.  If a file is=
+ listed under CONFFILES, is that file never modified during an upgrade or i=
+s it only upgraded if it has not been modified (matches the default file fr=
+om the previous package version)?  I am using opkg for package management i=
+f that makes a difference.
+>
+> Second, how do I force the NTP configuration to be upgraded?  For my syst=
+em, the user has no interface to modify the NTP configuration.  So even tho=
+ugh it is a configuration file, in my case I want ntp.conf to always match =
+the version provided by the upgraded package.
+>
+> Thanks,
+> Bryan
+>
+
+This largely depends on the package manager. I can tell you how opkg
+works... If a file is listed in CONFFILES it is backed up before an
+update is applied. By default, if a conffile has changed, the new
+changes go into a file named "%s-opkg" where %s is the original file
+name. If "--force-maintainer" is passed as an argument or the option
+"force_maintainer" is set, the new changes overwrite the version in
+the file system. In opkg v0.3.0 there will be a new
+"--ignore-maintainer" argument and "ignore_maintainer" option to keep
+the conffile unmodified but not store the changes in "%s-opkg".
+
+Hope that helps,
+
+--=20
+Paul Barker
+
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
