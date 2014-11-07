@@ -1,29 +1,27 @@
 Return-Path: <qianl.fnst@cn.fujitsu.com>
-X-Greylist: delayed 601 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 07 Nov 2014 10:01:40 UTC
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7073065CA0
+	by mail.openembedded.org (Postfix) with ESMTP id 00C2B65CA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Nov 2014 10:01:39 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43017839"
+	Fri,  7 Nov 2014 10:01:43 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43017845"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2014 17:48:43 +0800
+	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2014 17:48:56 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sA79pgCw005242
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sA79ptfL005249
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 7 Nov 2014 17:51:43 +0800
+	Fri, 7 Nov 2014 17:51:55 +0800
 Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 7 Nov 2014 17:51:59 +0800
+	Server (TLS) id 14.3.181.6; Fri, 7 Nov 2014 17:52:12 +0800
 From: Qian Lei <qianl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 7 Nov 2014 17:51:46 +0800
-Message-ID: <1415353906-20924-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+Date: Fri, 7 Nov 2014 17:52:01 +0800
+Message-ID: <1415353921-20973-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.40]
-Subject: [PATCH] umip: Add new recipes
+Subject: [PATCH] xgamma: Add new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2014 10:01:43 -0000
+X-List-Received-Date: Fri, 07 Nov 2014 10:01:44 -0000
 Content-Type: text/plain
 
-UMIP is an open source implementation of Mobile IPv6 and NEMO Basic
-Support for Linux. It is released under the GPLv2 license. It supports
-the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776
-and RFC4877 (IPsec and IKEv2).
+xgamma allows X users to query and alter the gamma correction of a
+monitor via the X video mode extension (XFree86-VidModeExtension).
 
 Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-connectivity/umip/umip_1.0.bb | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/umip/umip_1.0.bb
+ meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
 
-diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+diff --git a/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
 new file mode 100644
-index 0000000..a7163b0
+index 0000000..48240c0
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Mobile IPv6 and NEMO for Linux"
-+DESCRIPTION = "UMIP is an open source implementation of Mobile IPv6 and NEMO \
-+Basic Support for Linux. It is released under the GPLv2 license. It supports \
-+the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776 and \
-+RFC4877 (IPsec and IKEv2)."
++++ b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
+@@ -0,0 +1,17 @@
++require xorg-app-common.inc
 +
-+HOMEPAGE = "http://umip.org/"
-+SECTION = "System Environment/Base"
++SUMMARY = "X.Org X11 X client utilities"
 +
-+SRC_URI = "git://git.umip.org/umip.git;tag=v${PV}"
++DESCRIPTION = "xgamma allows X users to query and alter the gamma \
++correction of a monitor via the X video mode extension."
 +
-+DEPENDS = "rpm"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ac9801b8423fd7a7699ccbd45cf134d8"
 +
-+S = "${WORKDIR}/git"
++PR = "${INC_PR}.0"
 +
-+inherit autotools-brokensep
++DEPENDS += "libxxf86vm"
 +
-+EXTRA_OE_CONF = "--enable-vt"
++BBCLASSEXTEND = "native"
++
++SRC_URI[md5sum] = "e8a88bf1a18f35b724619849dca97f4f"
++SRC_URI[sha256sum] = "e5eb2588fbbdc5c2db5571b304204487a9c22eed15ac6cb816f605ec403e6e1a"
 -- 
 1.8.4.2
 
