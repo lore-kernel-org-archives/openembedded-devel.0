@@ -1,42 +1,40 @@
-Return-Path: <bevenson@melinkcorp.com>
-Received: from na01-bl2-obe.outbound.protection.outlook.com
-	(mail-bl2on0120.outbound.protection.outlook.com [65.55.169.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 89A3760557
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id EC54271F4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Nov 2014 13:31:07 +0000 (UTC)
-Received: from BY2PR05MB045.namprd05.prod.outlook.com (10.242.34.143) by
-	BY2PR05MB029.namprd05.prod.outlook.com (10.242.34.139) with Microsoft
-	SMTP Server (TLS) id 15.1.11.14; Fri, 7 Nov 2014 13:31:05 +0000
-Received: from BY2PR05MB048.namprd05.prod.outlook.com (10.242.34.156) by
-	BY2PR05MB045.namprd05.prod.outlook.com (10.242.34.143) with Microsoft
-	SMTP Server (TLS) id 15.1.16.15; Fri, 7 Nov 2014 13:31:03 +0000
-Received: from BY2PR05MB048.namprd05.prod.outlook.com ([169.254.9.151]) by
-	BY2PR05MB048.namprd05.prod.outlook.com ([169.254.9.151]) with mapi id
-	15.01.0016.006; Fri, 7 Nov 2014 13:31:03 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: PRINC migration questions
-Thread-Index: Ac/6ioposBgxHVLQTxCI6lQhvHJI4g==
-Date: Fri, 7 Nov 2014 13:31:02 +0000
-Message-ID: <e111da9e0a424a2eac00f684ba4da94f@BY2PR05MB048.namprd05.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-vipre-scanned: 003161AF00871A003162FC
-x-originating-ip: [98.100.91.242]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BY2PR05MB045;UriScan:;
-x-exchange-antispam-report-test: UriScan:;
-x-forefront-prvs: 03883BD916
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(164054003)(189002)(199003)(20776003)(77156002)(87936001)(99396003)(77096003)(105586002)(64706001)(66066001)(21056001)(450100001)(62966003)(229853001)(2351001)(107886001)(107046002)(31966008)(46102003)(95666004)(110136001)(120916001)(106356001)(99286002)(54356999)(50986999)(101416001)(108616004)(40100003)(122556002)(74316001)(33646002)(92566001)(554214002)(97736003)(76576001)(4396001)(2656002)(86362001)(24736002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BY2PR05MB045;
-	H:BY2PR05MB048.namprd05.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
+	Fri,  7 Nov 2014 14:18:01 +0000 (UTC)
+Received: by mail-wg0-f54.google.com with SMTP id n12so3832055wgh.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Nov 2014 06:18:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=tM6HjDAFynFaHpvwk6icZ9Wpe8X0kbBHMIaiFlY+zuI=;
+	b=W/wXjEDEongPcCz25ABTGuzmwhbGLNyxfL1W+stNLe9ZyUmSOqPDx8hiDk3ahJCB3k
+	xlp4xJUG0SLGiQd6Peqi50f/mvJpKTx5VMBnIPA0a/ETDfLkP8/wo0y4yy+/EZAqwpos
+	92O6eSyN4I4vu1spxD2/W7CQOiGP/ZgkZouIQRHh2kqFP0hPx2Zkcvy1s525U87eFuo4
+	K3bjhcIcWjrr/B5tXkfM9JMu4Oq4U9NlKsc8myAkimkeFIlpfvbvehhsN0THvv14VjZ2
+	OgKEjgg6Eisgv+y+6nW0790efQ156+388wjgdRHxUIcRiDCINNQDTDTGiumDd1CyC4i/
+	1+3A==
+X-Received: by 10.180.109.17 with SMTP id ho17mr5507415wib.4.1415369881485;
+	Fri, 07 Nov 2014 06:18:01 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	hk9sm11933347wjb.46.2014.11.07.06.18.00 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 07 Nov 2014 06:18:00 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 7 Nov 2014 15:18:06 +0100
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <20141107141806.GA2444@jama>
+References: <cover.1415347548.git.hongxu.jia@windriver.com>
+	<47eeb76160e122e9545f8ce4831d91653a6f238e.1415347548.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;SRVR:BY2PR05MB029;
-X-OriginatorOrg: melinkcorp.com
-Subject: PRINC migration questions
+In-Reply-To: <47eeb76160e122e9545f8ce4831d91653a6f238e.1415347548.git.hongxu.jia@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/3] curlpp: use libcurlpp as curlpp's provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,33 +48,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2014 13:31:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 07 Nov 2014 14:18:04 -0000
+X-Groupsio-MsgNum: 52768
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="NzB8fVQJ5HfG6fxh"
+Content-Disposition: inline
 
-QWxsLA0KDQpJIGFtIG9uIHBva3kvZHlsYW4gYW5kIGhhdmUgbm90IHlldCBzdGFydGVkIHVzaW5n
-IHRoZSBQUiBzZXJ2ZXIuICBJIHJlYWxseSBkbyB3YW50IHRvIHN0YXJ0IHVzaW5nIHRoZSBQUiBz
-ZXJ2ZXIgYW5kIHN0b3AgdXNpbmcgUFJJTkMuICBIb3dldmVyLCBldmVuIG1vcmUgc28gSSByZWFs
-bHkgZG9uJ3Qgd2FudCB0byBicmVhayBteSBwYWNrYWdlIGZlZWRzLiAgSSB3YW50IHRvIG1ha2Ug
-c3VyZSBJIGRvIG15IG1pZ3JhdGlvbiBjb3JyZWN0bHkgYW5kIEkgZG9uJ3QgZG8gc29tZXRoaW5n
-IHRoYXQgbG9va3MgbGlrZSBpdCB3b3JrcyBva2F5IG9ubHkgdG8gZmluZCBvdXQgaXQgY2F1c2Vz
-IHByb2JsZW1zIGxhdGVyLiAgV2l0aCB0aGF0IGluIG1pbmQsIEkgYW0gbG9va2luZyBmb3IgYWR2
-aWNlIG9uIHRoZSBwcm9wZXIgd2F5IHRvIG1pZ3JhdGUgYXdheSBmcm9tIHVzaW5nIFBSSU5DLg0K
-DQpMZXQncyBzYXkgSSBoYXZlIGEgLmJiYXBwZW5kIGluIG15IHByaXZhdGUgbGF5ZXIgd2l0aCB0
-aGUgbGluZToNCg0KUFJJTkMgOj0gIiR7QGludChQUklOQykgKyA0fSINCg0KVGhlIG1haW5saW5l
-IGxheWVyJ3MgLmJiIGhhcyB0aGUgbGluZToNCg0KUFIgPSAiJHtJTkNfUFJ9LjAiDQoNCkFuZCB0
-aGUgbWFpbmxpbmUgbGF5ZXIncyAuaW5jIGhhcyB0aGUgbGluZToNCg0KSU5DX1BSID0gInI4Ig0K
-DQpJbiB0aGlzIHNjZW5hcmlvLCB0aGUgcmVzdWx0aW5nIFBSIHdpbGwgYmUgInIxMi4wIi4gIE5v
-dyBsZXQncyBzYXkgSSB3YW50IHRvIHN0YXJ0IHVzaW5nIHRoZSBQUiBzZXJ2ZXIgYW5kIGdldCBy
-aWQgb2YgUFJJTkMgaW4gdGhpcyByZWNpcGUuICBUaGUgcmVzdWx0aW5nIHBhY2thZ2UgY29udGVu
-dHMgYXJlIHRvIGJlIHRoZSBzYW1lLCBzbyBJIHdhbnQgdGhlIHJlc3VsdGluZyBQUiB0byBiZSAi
-cjEyLjAiLiAgRnJvbSBzb21lIGxpbWl0ZWQgdGVzdGluZywgaWYgSSBzdGFydCB0aGUgUFIgc2Vy
-dmVyIGFuZCByZW1vdmUgdGhlIFBSSU5DIGxpbmUgZnJvbSBteSAuYmJhcHBlbmQgdGhlIHJlc3Vs
-dGluZyBQUiBpcyAicjguMCIuICBTbyBpbiBteSAuYmJhcHBlbmQgc2hvdWxkIEkgY2hhbmdlIHRo
-ZSBQUklOQyBsaW5lIHRvOg0KDQpJTkNfUFIgPSAicjEyIg0KDQpPciBzaG91bGQgSSBjaGFuZ2Ug
-aXQgdG8gc29tZXRoaW5nIGVsc2U/ICBJZiBJIGNoYW5nZSBpdCB0byBhIGhhcmRjb2RlZCB2YWx1
-ZSwgdGhlbiBJJ2xsIGhhdmUgdG8gYmUgY2FyZWZ1bCBhYm91dCB3aGF0IHRvIGRvIGlmIHRoZSBt
-YWlubGluZSByZWNpcGUgY2hhbmdlcyBJTkNfUFIuICBIb3cgaGF2ZSBvdGhlciBwZW9wbGUgaGFu
-ZGxlZCB0aGlzIHNpdHVhdGlvbj8NCg0KVGhhbmtzLA0KQnJ5YW4NCg==
+--NzB8fVQJ5HfG6fxh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Nov 07, 2014 at 04:08:06PM +0800, Hongxu Jia wrote:
+> The package curlpp does not exist, so we use libcurlpp as the provider.
+> It avoids the do_rootfs failure while IMAGE_INSTALL +=3D "curlpp"
+
+Why don't you fix your IMAGE_INSTALL instead?
+
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/met=
+a-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+> index 48f5178..3134335 100644
+> --- a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+> +++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+> @@ -74,6 +74,7 @@ pkg_postinst_${PN}() {
+>  }
+> =20
+>  PACKAGES =3D+ "libcurlpp libcurlpp-dev libcurlpp-staticdev"
+> +RPROVIDES_lib${BPN} =3D "${PN}"
+> =20
+>  FILES_lib${BPN} =3D "${libdir}/lib*.so.* \
+>  		"
+> --=20
+> 1.9.1
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--NzB8fVQJ5HfG6fxh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlRc1J4ACgkQN1Ujt2V2gBzCJQCeI90ZGVh4fIg5tFxy/uLIx39l
+18IAn3H5JSXVIer8GOioR4wkzmR/hJFr
+=KviX
+-----END PGP SIGNATURE-----
+
+--NzB8fVQJ5HfG6fxh--
