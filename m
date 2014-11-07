@@ -1,23 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CB89D65C87
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D893865C87
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Nov 2014 08:08:13 +0000 (UTC)
+	Fri,  7 Nov 2014 08:08:15 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sA788C8h007358
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sA788EDC023594
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 7 Nov 2014 00:08:12 -0800 (PST)
+	Fri, 7 Nov 2014 00:08:14 -0800 (PST)
 Received: from pek-hjia-d1.corp.ad.wrs.com (128.224.162.194) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Fri, 7 Nov 2014 00:08:12 -0800
+	14.3.174.1; Fri, 7 Nov 2014 00:08:14 -0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 7 Nov 2014 16:08:05 +0800
-Message-ID: <cover.1415347548.git.hongxu.jia@windriver.com>
+Date: Fri, 7 Nov 2014 16:08:06 +0800
+Message-ID: <47eeb76160e122e9545f8ce4831d91653a6f238e.1415347548.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <cover.1415347548.git.hongxu.jia@windriver.com>
+References: <cover.1415347548.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/3][meta-networking]fix install package "curlpp pimd ssmping" to image failed
+Subject: [PATCH 1/3] curlpp: use libcurlpp as curlpp's provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2014 08:08:15 -0000
+X-List-Received-Date: Fri, 07 Nov 2014 08:08:16 -0000
 Content-Type: text/plain
 
-vim local.conf
-...
-IMAGE_INSTALL_append = " curlpp pimd ssmping"
-...
+The package curlpp does not exist, so we use libcurlpp as the provider.
+It avoids the do_rootfs failure while IMAGE_INSTALL += "curlpp"
 
-bitbake core-image-minimal
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-//Hongxu
-
-The following changes since commit 34ca3aeef1a8ff74de548c427fff8dc94f4b720a:
-
-  vpnc: use nativeperl to run perl scripts (2014-11-04 16:02:44 -0500)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib hongxu/fix-mete-networking
-  http://git.pokylinux.org/cgit.cgi/poky-contrib/log/?h=hongxu/fix-mete-networking
-
-Hongxu Jia (3):
-  curlpp: use libcurlpp as curlpp's provider
-  pimd: add do_install to pimd
-  ssmping: add do_install to ssmping
-
- .../recipes-support/curlpp/curlpp_0.7.3.bb         |  1 +
- meta-networking/recipes-support/pimd/pimd_2.1.8.bb |  7 +++++
- .../files/0001-Makefile-tweak-install-dir.patch    | 35 ++++++++++++++++++++++
- .../recipes-support/ssmping/ssmping_0.9.1.bb       |  8 ++++-
- 4 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/ssmping/files/0001-Makefile-tweak-install-dir.patch
-
+diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+index 48f5178..3134335 100644
+--- a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
++++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+@@ -74,6 +74,7 @@ pkg_postinst_${PN}() {
+ }
+ 
+ PACKAGES =+ "libcurlpp libcurlpp-dev libcurlpp-staticdev"
++RPROVIDES_lib${BPN} = "${PN}"
+ 
+ FILES_lib${BPN} = "${libdir}/lib*.so.* \
+ 		"
 -- 
 1.9.1
 
