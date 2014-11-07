@@ -1,27 +1,27 @@
 Return-Path: <qianl.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 00C2B65CA0
+	by mail.openembedded.org (Postfix) with ESMTP id 6246365CA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Nov 2014 10:01:43 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43017845"
+	Fri,  7 Nov 2014 10:02:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43017827"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2014 17:48:56 +0800
+	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2014 17:48:28 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sA79ptfL005249
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sA79pRtt005226
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 7 Nov 2014 17:51:55 +0800
+	Fri, 7 Nov 2014 17:51:27 +0800
 Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 7 Nov 2014 17:52:12 +0800
+	Server (TLS) id 14.3.181.6; Fri, 7 Nov 2014 17:51:44 +0800
 From: Qian Lei <qianl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 7 Nov 2014 17:52:01 +0800
-Message-ID: <1415353921-20973-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+Date: Fri, 7 Nov 2014 17:51:22 +0800
+Message-ID: <1415353882-20874-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.40]
-Subject: [PATCH] xgamma: Add new recipes
+Subject: [PATCH] tomoyo-tools: Add new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +35,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2014 10:01:44 -0000
+X-List-Received-Date: Fri, 07 Nov 2014 10:02:11 -0000
 Content-Type: text/plain
 
-xgamma allows X users to query and alter the gamma correction of a
-monitor via the X video mode extension (XFree86-VidModeExtension).
+TOMOYO Linux is a Mandatory Access Control (MAC) implementation for
+Linux that can be used to increase the security of a system, while also
+being useful purely as a system analysis tool.
 
 Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
+ .../tomoyo-tools/tomoyo-tools_2.5.0.bb             | 29 ++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
+diff --git a/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
 new file mode 100644
-index 0000000..48240c0
+index 0000000..bb2676b
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
-@@ -0,0 +1,17 @@
-+require xorg-app-common.inc
++++ b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "TOMOYO Linux tools"
++DESCRIPTION = "TOMOYO Linux is a Mandatory Access Control (MAC) implementation \
++for Linux that can be used to increase the security of a system, while also \
++being useful purely as a system analysis tool."
++HOMEPAGE = "http://tomoyo.sourceforge.jp/"
++SECTION = "System Environment/Kernel"
 +
-+SUMMARY = "X.Org X11 X client utilities"
++SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/53357/${PN}-${PV}-20140601.tar.gz"
++SRC_URI[md5sum] = "888869b793127f00d6439a3246598b83"
++SRC_URI[sha256sum] = "118ef6ba1fbf7c0b83018c3a0d4d5485dfb9b5b7f647f37ce9f63841a3133c2a"
 +
-+DESCRIPTION = "xgamma allows X users to query and alter the gamma \
-+correction of a monitor via the X video mode extension."
++S = "${WORKDIR}/${PN}"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ac9801b8423fd7a7699ccbd45cf134d8"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING.tomoyo;md5=751419260aa954499f7abaabaa882bbe"
 +
-+PR = "${INC_PR}.0"
++FILES_${PN}     += "${libdir}/tomoyo"
++FILES_${PN}-dbg += "${libdir}/tomoyo/.debug"
 +
-+DEPENDS += "libxxf86vm"
++DEPENDS = "linux-libc-headers ncurses"
++CFLAGS_append += "-D_GNU_SOURCE"
 +
-+BBCLASSEXTEND = "native"
++do_compile () {
++	oe_runmake 'CC=${CC}'
++}
 +
-+SRC_URI[md5sum] = "e8a88bf1a18f35b724619849dca97f4f"
-+SRC_URI[sha256sum] = "e5eb2588fbbdc5c2db5571b304204487a9c22eed15ac6cb816f605ec403e6e1a"
++do_install() {
++	oe_runmake install INSTALLDIR=${D}
++}
 -- 
 1.8.4.2
 
