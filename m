@@ -1,27 +1,39 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6246365CA0
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
+	[209.85.192.44])
+	by mail.openembedded.org (Postfix) with ESMTP id D14E565C7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Nov 2014 10:02:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43017827"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2014 17:48:28 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sA79pRtt005226
+	Fri,  7 Nov 2014 10:59:49 +0000 (UTC)
+Received: by mail-qg0-f44.google.com with SMTP id q107so2214357qgd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 7 Nov 2014 17:51:27 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 7 Nov 2014 17:51:44 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 7 Nov 2014 17:51:22 +0800
-Message-ID: <1415353882-20874-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Fri, 07 Nov 2014 02:59:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc:content-type;
+	bh=20YCvkgx2QBxlouvGGVeWMR+uI8apBzqwZwEFJtBZBU=;
+	b=OK1M4uTJcNJebgun57H7dN8pOfzaoI+y0nVKOsnI2mc+o1TM8/zcXVJWG7skYM0fh9
+	azf/nPg5ImoH+K3kfE4s+zajp3JP7S5FpPLDBomxBIMYyMNfHLuLXXt0jBuOEUWkyoAI
+	B4h8U4fR0Ql6Vpxh+caIb/ueRQ27HnwHZag73FeTaCe4KjqxcPBajb9nVZCoTmjIGVVo
+	M1LXJ7cD0yid0gVRNvNbMe/LRJ+Yf46kthc94tITaa7MZcwAut/mUPqY+eoPewg1hmtS
+	JZ19KScsSYGYgYcpY0c8ipbx6AumYh4ztwO8V5XiqR9ANhfH+UVv3GmYDVOjr/8jvo8W
+	Ejhg==
+X-Received: by 10.224.130.71 with SMTP id r7mr16138290qas.69.1415357990309;
+	Fri, 07 Nov 2014 02:59:50 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [PATCH] tomoyo-tools: Add new recipes
+Sender: paul.betafive@gmail.com
+Received: by 10.140.143.146 with HTTP; Fri, 7 Nov 2014 02:59:10 -0800 (PST)
+In-Reply-To: <2cc110b58da14640a9cb17d57ef353d4@BLUPR05MB037.namprd05.prod.outlook.com>
+References: <e27387e29a0b4a7ea1620837f6507de1@BLUPR05MB037.namprd05.prod.outlook.com>
+	<CANyK_8eahU+SLTCO_B8GhW3uZVsf-UtGsWSW628uCCPAwpb_og@mail.gmail.com>
+	<2cc110b58da14640a9cb17d57ef353d4@BLUPR05MB037.namprd05.prod.outlook.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+Date: Fri, 7 Nov 2014 10:59:10 +0000
+X-Google-Sender-Auth: GVFMNzDhLWcD4I-W7Zs4hiT3ekg
+Message-ID: <CANyK_8fXn20uhRoO7+iamLhf3+TibzQEL6kgqZ_-aK+y9fV5XA@mail.gmail.com>
+To: Bryan Evenson <bevenson@melinkcorp.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Upgrading files identified as CONFFILES?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,55 +47,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2014 10:02:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 07 Nov 2014 10:59:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-TOMOYO Linux is a Mandatory Access Control (MAC) implementation for
-Linux that can be used to increase the security of a system, while also
-being useful purely as a system analysis tool.
+On 6 November 2014 15:28, Bryan Evenson <bevenson@melinkcorp.com> wrote:
+> Paul,
+>
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org
+>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+>> Behalf Of Paul Barker
+>> Sent: Thursday, November 06, 2014 9:36 AM
+>> To: OE Devel
+>> Subject: Re: [oe] Upgrading files identified as CONFFILES?
+>>
+>> On 6 November 2014 14:06, Bryan Evenson <bevenson@melinkcorp.com>
+>> wrote:
+>> > All,
+>> >
+>> > First, please let me know if I should be directing this to a different OE/yocto
+>> mailing list; I have a hard time figuring out which list is appropriate at times.
+>> >
+>> > I am on poky/dylan and am using NTP on my target system.  I would like to
+>> change the configuration for NTP and push out the changes to devices that
+>> are firmware upgradable.  I made the change and pushed out the upgrade,
+>> but I see that ntp.conf did not get changed on at least one of the systems
+>> (the first one I checked).  Now I see that ntp.conf is listed under CONFFILES
+>> in the main ntp recipe (http://www.yoctoproject.org/docs/1.7/mega-
+>> manual/mega-manual.html#var-CONFFILES), which explains why it was not
+>> upgraded.
+>> >
+>> > First, I want to confirm how the CONFFILES parameter works.  If a file is
+>> listed under CONFFILES, is that file never modified during an upgrade or is it
+>> only upgraded if it has not been modified (matches the default file from the
+>> previous package version)?  I am using opkg for package management if that
+>> makes a difference.
+>> >
+>> > Second, how do I force the NTP configuration to be upgraded?  For my
+>> system, the user has no interface to modify the NTP configuration.  So even
+>> though it is a configuration file, in my case I want ntp.conf to always match
+>> the version provided by the upgraded package.
+>> >
+>> > Thanks,
+>> > Bryan
+>> >
+>>
+>> This largely depends on the package manager. I can tell you how opkg
+>> works... If a file is listed in CONFFILES it is backed up before an update is
+>> applied. By default, if a conffile has changed, the new changes go into a file
+>> named "%s-opkg" where %s is the original file name. If "--force-maintainer"
+>> is passed as an argument or the option "force_maintainer" is set, the new
+>> changes overwrite the version in the file system. In opkg v0.3.0 there will be
+>> a new "--ignore-maintainer" argument and "ignore_maintainer" option to
+>> keep the conffile unmodified but not store the changes in "%s-opkg".
+>>
+>> Hope that helps,
+>>
+>
+> Thanks for the detailed explanation.  And just to explore my options, if I were to add the following in my ntp bbappend:
+>
+> CONFFILES_${PN} = ""
+>
+> would that remove ntp.conf from the CONFFILES list and force the configuration to be updated each time it changes?
+>
+> Thanks,
+> Bryan
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
----
- .../tomoyo-tools/tomoyo-tools_2.5.0.bb             | 29 ++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
+It looks like the list of CONFFILES is taken from the version of the
+package being installed. So if a file is listed in CONFFILES for the
+old version but not the new version, it won't be treated as a conf
+file and should just be overwritten.
 
-diff --git a/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
-new file mode 100644
-index 0000000..bb2676b
---- /dev/null
-+++ b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "TOMOYO Linux tools"
-+DESCRIPTION = "TOMOYO Linux is a Mandatory Access Control (MAC) implementation \
-+for Linux that can be used to increase the security of a system, while also \
-+being useful purely as a system analysis tool."
-+HOMEPAGE = "http://tomoyo.sourceforge.jp/"
-+SECTION = "System Environment/Kernel"
-+
-+SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/53357/${PN}-${PV}-20140601.tar.gz"
-+SRC_URI[md5sum] = "888869b793127f00d6439a3246598b83"
-+SRC_URI[sha256sum] = "118ef6ba1fbf7c0b83018c3a0d4d5485dfb9b5b7f647f37ce9f63841a3133c2a"
-+
-+S = "${WORKDIR}/${PN}"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING.tomoyo;md5=751419260aa954499f7abaabaa882bbe"
-+
-+FILES_${PN}     += "${libdir}/tomoyo"
-+FILES_${PN}-dbg += "${libdir}/tomoyo/.debug"
-+
-+DEPENDS = "linux-libc-headers ncurses"
-+CFLAGS_append += "-D_GNU_SOURCE"
-+
-+do_compile () {
-+	oe_runmake 'CC=${CC}'
-+}
-+
-+do_install() {
-+	oe_runmake install INSTALLDIR=${D}
-+}
+This isn't a behaviour I've looked at in detail so please let me know
+if it works.
+
+Thanks,
+
 -- 
-1.8.4.2
+Paul Barker
 
+Email: paul@paulbarker.me.uk
+http://www.paulbarker.me.uk
 
