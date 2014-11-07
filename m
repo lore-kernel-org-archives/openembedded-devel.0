@@ -1,42 +1,29 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 20E2C65CA0
+Return-Path: <qianl.fnst@cn.fujitsu.com>
+X-Greylist: delayed 601 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 07 Nov 2014 10:01:40 UTC
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7073065CA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Nov 2014 09:57:36 +0000 (UTC)
-Received: by mail-wg0-f45.google.com with SMTP id x12so3274068wgg.4
+	Fri,  7 Nov 2014 10:01:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43017839"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2014 17:48:43 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sA79pgCw005242
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Nov 2014 01:57:36 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
-	:to; bh=Ena95B0ngrk4VDoCq+MgHO2uKjMY76ADglQO1XitErc=;
-	b=YidLZysZ3J+8JXqRGD7peMU+zic91x03U+2EUPA5RacMUmfIJPXlw/9kBrJq3/TD50
-	xARiJZGQ5DXi+atKtc9JOCuFyXs7haYpiGg4l4aodEyPl4URhrHI4X+hU6XXiiMZqH06
-	cONGOd+Ca21ySdMFdDk+Qyf2zLpY+mCD296JET0d3IKpmcsB2laRWfN/9syJ62z1own6
-	DdTPXizOHgseSGPNAuRWn6ehBQpgm5IuHJrtPKIOxl2Dy1pvF1zQxRmM+ZPBBvMcyHwd
-	UnfSZAyhYftNCB2p4EobJc8sdCY6BOHpFQn/jBWWDzE6UWecGRR/tkS/yClcEh6+3PKj
-	uKdQ==
-X-Gm-Message-State: ALoCoQmgiBTDbmCt10sJ/W+xM+rEW0JShEyD3kU/x3UXKyZSRZSzrPmHnYrqVWHqMUeL/89m/Opt
-X-Received: by 10.194.103.230 with SMTP id fz6mr14340048wjb.53.1415354256471; 
-	Fri, 07 Nov 2014 01:57:36 -0800 (PST)
-Received: from ?IPv6:2001:610:612::7934:af7c:ae9a:7a11?
-	([2001:610:612:0:7934:af7c:ae9a:7a11])
-	by mx.google.com with ESMTPSA id f7sm1379043wiz.13.2014.11.07.01.57.34
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 07 Nov 2014 01:57:35 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.0 \(1990.1\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <CAJTo0LavfAPo3P4Mv9U-24KK7HhkBOgysg5ZAUZe1YOAL10pvw@mail.gmail.com>
-Date: Fri, 7 Nov 2014 10:57:33 +0100
-Message-Id: <5475F887-48B8-42E6-85D3-7200814EC360@dominion.thruhere.net>
-References: <CAJTo0LavfAPo3P4Mv9U-24KK7HhkBOgysg5ZAUZe1YOAL10pvw@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-X-Mailer: Apple Mail (2.1990.1)
-Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Moving llvm to oe-core?
+	Fri, 7 Nov 2014 17:51:43 +0800
+Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 7 Nov 2014 17:51:59 +0800
+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 7 Nov 2014 17:51:46 +0800
+Message-ID: <1415353906-20924-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.40]
+Subject: [PATCH] umip: Add new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,30 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Nov 2014 09:57:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Nov 2014 10:01:43 -0000
+Content-Type: text/plain
 
+UMIP is an open source implementation of Mobile IPv6 and NEMO Basic
+Support for Linux. It is released under the GPLv2 license. It supports
+the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776
+and RFC4877 (IPsec and IKEv2).
 
-> Op 6 nov. 2014, om 18:42 heeft Burton, Ross <ross.burton@intel.com> =
-het volgende geschreven:
->=20
-> Hi,
->=20
-> So I think it's fair to say that neither GCC nor LLVM are going away =
-anytime soon, both having their respective niches.  Because of this I'm =
-wondering if we should be adding LLVM to oe-core (taking the meta-oe =
-recipes).  GCC will still be the cross-compiler used but LLVM will be =
-available out of the box, for example the Gallium LLVM-based Mesa =
-drivers can be enabled without requiring meta-oe.
->=20
-> Anyone have thoughts/comments/objections?
+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-connectivity/umip/umip_1.0.bb | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/umip/umip_1.0.bb
 
-Having llvm enabled by default in mesa would save me a few distro =
-overrides. Just try to enable r600 support and you'll see how painful =
-the current situation is.
+diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+new file mode 100644
+index 0000000..a7163b0
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Mobile IPv6 and NEMO for Linux"
++DESCRIPTION = "UMIP is an open source implementation of Mobile IPv6 and NEMO \
++Basic Support for Linux. It is released under the GPLv2 license. It supports \
++the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776 and \
++RFC4877 (IPsec and IKEv2)."
++
++HOMEPAGE = "http://umip.org/"
++SECTION = "System Environment/Base"
++
++SRC_URI = "git://git.umip.org/umip.git;tag=v${PV}"
++
++DEPENDS = "rpm"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
++
++S = "${WORKDIR}/git"
++
++inherit autotools-brokensep
++
++EXTRA_OE_CONF = "--enable-vt"
+-- 
+1.8.4.2
 
-regards,
-
-Koen=
 
