@@ -1,31 +1,39 @@
-Return-Path: <californialsullivan@gmail.com>
-Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com
-	[209.85.218.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F33265D3A
+Return-Path: <derek@minotaurinc.com>
+X-Greylist: delayed 568 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 10 Nov 2014 23:29:03 UTC
+Received: from relay.mailchannels.net (tkt-001-i373.relay.mailchannels.net
+	[174.136.5.175])
+	by mail.openembedded.org (Postfix) with ESMTP id E6F2C65D3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2014 23:19:56 +0000 (UTC)
-Received: by mail-oi0-f51.google.com with SMTP id g201so6192336oib.24
+	Mon, 10 Nov 2014 23:29:02 +0000 (UTC)
+X-Sender-Id: arvixe|x-authuser|derek@minotaurinc.com
+Received: from octopus.arvixe.com (ip-10-33-12-218.us-west-2.compute.internal
+	[10.33.12.218])
+	by relay.mailchannels.net (Postfix) with ESMTPA id E599E60AF8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2014 15:19:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=/ohNeecJqiaQwiJPzeskNE9oWO+f/yWtX5UPG8VDIL0=;
-	b=A4orK8hnAMSjqDllXpPHvZfE8xutkw8S5hYKwa56FjZFff78+9jBKOudqYaPOktTG2
-	hlCCdZ0RgRXMEzq2Tet/4wq9NyfJCtDqgGR0LheNZ1fapsEOFz4whGICyPxp1J9o67tE
-	9VokcHRqc0fwM00Z9HAMvkSDAJItJ5WMA/++jZO0xbMgmble7bOkm9HYOROLmzdAo1a1
-	qKBBXaUWS9nZXL3Ch2LdT/Wpkqe2eVXZfsLdCWFgoOs0lpsgJBE4JptLe9uZGkaY4IZk
-	wO2wkbPgzMH/Ga2rxSz9a7XAGN0+dYTNX5GzyCTogOe50eWrpGDZWAMTVrHNSf9JPJUN
-	+/Xg==
-MIME-Version: 1.0
-X-Received: by 10.202.91.138 with SMTP id p132mr8653094oib.40.1415661596575;
-	Mon, 10 Nov 2014 15:19:56 -0800 (PST)
-Received: by 10.76.172.197 with HTTP; Mon, 10 Nov 2014 15:19:56 -0800 (PST)
-Date: Mon, 10 Nov 2014 18:19:56 -0500
-Message-ID: <CAMP9K88K4LhgYLoL9mM9iv_GdNHq_17GuzLfxAzQeGZNzLNWRQ@mail.gmail.com>
-From: California Sullivan <californialsullivan@gmail.com>
+	Mon, 10 Nov 2014 23:19:33 +0000 (UTC)
+X-Sender-Id: arvixe|x-authuser|derek@minotaurinc.com
+Received: from octopus.arvixe.com (octopus.arvixe.com [10.245.44.250])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA)
+	by 0.0.0.0:2500 (trex/5.3.3); Mon, 10 Nov 2014 23:19:34 GMT
+X-MC-Relay: Neutral
+X-MailChannels-SenderId: arvixe|x-authuser|derek@minotaurinc.com
+X-MailChannels-Auth-Id: arvixe
+X-MC-Loop-Signature: 1415661574178:2630051026
+X-MC-Ingress-Time: 1415661574178
+Received: from c-69-143-221-149.hsd1.md.comcast.net ([69.143.221.149]:54838
+	helo=lnx-dereks-home.vaddio.com)
+	by octopus.arvixe.com with esmtpsa (UNKNOWN:DHE-RSA-AES256-SHA:256)
+	(Exim 4.82) (envelope-from <derek@minotaurinc.com>)
+	id 1XnyFA-0004fb-Gd; Mon, 10 Nov 2014 15:19:32 -0800
+From: Derek Straka <derek@minotaurinc.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Problem with php package
+Date: Mon, 10 Nov 2014 18:19:08 -0500
+Message-Id: <1415661548-16364-1-git-send-email-derek@minotaurinc.com>
+X-Mailer: git-send-email 1.7.9.5
+X-AuthUser: derek@minotaurinc.com
+Cc: Derek Straka <derek@minotaurinc.com>
+Subject: [meta-python][PATCH] python-flufl-enum: add recipe for 4.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,67 +47,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2014 23:20:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 10 Nov 2014 23:29:05 -0000
 
-Hi all,
+Signed-off-by: Derek Straka <derek@minotaurinc.com>
+---
+ .../python/python-flufl-enum_4.0.1.bb              |   33 ++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
 
-I am having an issue with the php package in the dizzy branch of
-meta-openembedded(/meta-oe/recipes-devtools).
+diff --git a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
+new file mode 100644
+index 0000000..a7376db
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
+@@ -0,0 +1,33 @@
++SUMMARY  = "A Python enumeration package."
++DESCRIPTION = "The flufl.enum library is a Python enumeration package. Its goal is to provide simple, \
++specific, concise semantics in an easy to read and write syntax. flufl.enum has just enough of the \
++features needed to make enumerations useful, but without a lot of extra baggage to weigh them down. "
++HOMEPAGE = "https://pypi.python.org/pypi/flufl.enum"
++SECTION = "devel/python"
++
++LICENSE = "LGPLv3"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
++
++SRCNAME = "flufl.enum"
++
++SRC_URI = " \
++    http://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
++"
++
++SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
++SRC_URI[sha256sum] = "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
++
++inherit setuptools
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++PACKAGES =+ "\  
++    ${PN}-test \
++"
++
++FILES_${PN}-doc += "\
++    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/*.rst \
++    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/docs \
++"
++
++FILES_${PN}-test += "${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/tests"
+-- 
+1.7.9.5
 
-Php's build succeeds:
-
-NOTE: recipe php-5.4.33-r0: task do_fetch: Started
-NOTE: recipe php-5.4.33-r0: task do_fetch: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_unpack: Started
-NOTE: recipe php-5.4.33-r0: task do_unpack: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_patch: Started
-NOTE: recipe php-5.4.33-r0: task do_patch: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_configure: Started
-NOTE: recipe php-5.4.33-r0: task do_populate_lic: Started
-NOTE: recipe php-5.4.33-r0: task do_populate_lic: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_configure: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_compile: Started
-NOTE: recipe php-5.4.33-r0: task do_compile: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_install: Started
-NOTE: recipe php-5.4.33-r0: task do_install: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_package: Started
-NOTE: recipe php-5.4.33-r0: task do_populate_sysroot: Started
-NOTE: recipe php-5.4.33-r0: task do_populate_sysroot: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_package: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_packagedata: Started
-NOTE: recipe php-5.4.33-r0: task do_packagedata: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_package_qa: Started
-NOTE: recipe php-5.4.33-r0: task do_package_write_rpm: Started
-NOTE: recipe php-5.4.33-r0: task do_package_qa: Succeeded
-NOTE: recipe php-5.4.33-r0: task do_package_write_rpm: Succeeded
-
-But when it comes to to do the rootfs process the following error occurs:
-
-ERROR: Unable to install packages. Command
-'/home/clsulliv/yocto/poky/build/tmp/sysroots/x86_64-linux/usr/bin/smart
---quiet
---data-dir=/home/clsulliv/yocto/poky/build/tmp/work/genericx86_64-poky-linux/core-image-sato/1.0-r0/rootfs/var/lib/smart
-install -y packagegroup-core-ssh-dropbear@all
-packagegroup-core-x11-sato-games@genericx86_64
-packagegroup-base-extended@genericx86_64 packagegroup-core-x11-base@all
-smartpm@core2_64 psplash@core2_64 packagegroup-core-boot@genericx86_64
-php@core2_64 rpm@core2_64 packagegroup-core-x11-sato@genericx86_64
-locale-base-en-us@core2_64 locale-base-en-gb@core2_64' returned 1:
-error: Can't install php-5.4.33-r0@core2_64: no package provides
-/home/clsulliv/yocto/poky/build/tmp/work/core2-64-poky-linux/php/5.4.33-r0/image/usr/bin/php
-
-
-The file /home/clsulliv/yocto/poky/build/tmp/work/core2-64-poky-linux/php/5.4.33-r0/image/usr/bin/php
-does exist, and the php bitbake recipe has PACKAGES = " ... ${PN}" as well,
-so the php package should be provided.
-
-For reference, I am hitting this while building core-image-sato with php
-added in, with both the poky repo and meta-openembedded repo on the latest
-dizzy branch head.
-
-Any help figuring out this issue would be appreciated.
-
-Thank you,
-Cal Sullivan
 
