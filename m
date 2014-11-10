@@ -1,30 +1,29 @@
 Return-Path: <qianl.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E9FA670621
+	by mail.openembedded.org (Postfix) with ESMTP id B2DB665D3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2014 09:49:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43130741"
+	Mon, 10 Nov 2014 09:53:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43130989"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 10 Nov 2014 17:45:54 +0800
+	by heian.cn.fujitsu.com with ESMTP; 10 Nov 2014 17:50:35 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAA9mrgx019518;
-	Mon, 10 Nov 2014 17:48:53 +0800
-Received: from Fedora (10.167.226.40) by G08CNEXCHPEKD03.g08.fujitsu.local
-	(10.167.33.89) with Microsoft SMTP Server id 14.3.181.6;
-	Mon, 10 Nov 2014 17:49:05 +0800
-Date: Mon, 10 Nov 2014 17:49:02 +0800
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAA9rYJ8019826;
+	Mon, 10 Nov 2014 17:53:34 +0800
+Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 10 Nov 2014 17:53:47 +0800
 From: Qian Lei <qianl.fnst@cn.fujitsu.com>
 To: <martin.jansa@gmail.com>
-Message-ID: <20141110174902.1c4f3a12@Fedora>
-In-Reply-To: <20141110064955.GC2440@jama>
+Date: Mon, 10 Nov 2014 17:53:29 +0800
+Message-ID: <1415613209-6320-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1415353921-20973-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 References: <1415353921-20973-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<20141110064955.GC2440@jama>
-Organization: FNST
-X-Mailer: Claws Mail 3.9.3 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
+X-Originating-IP: [10.167.226.40]
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] xgamma: Add new recipes
+Subject: [PATCH v2] xgamma: Add new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,23 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2014 09:49:17 -0000
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 10 Nov 2014 09:53:55 -0000
+Content-Type: text/plain
 
-On Mon, 10 Nov 2014 07:49:55 +0100
-Martin Jansa <martin.jansa@gmail.com> wrote:
+xgamma allows X users to query and alter the gamma correction of a
+monitor via the X video mode extension (XFree86-VidModeExtension).
 
-> How was this recipe tested?
-> 
-> ERROR: ParseError at
-> /home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb:1:
-> Could not include required file xorg-app-common.inc
+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
 
-Oh Jansa, I'm really sorry for my mistake. :( I had a wrong workflow while doing
-my work. I'll send a new patch later. I tested my other two patch(tomoyo-tools
-and umip) and they're OK.
+diff --git a/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
+new file mode 100644
+index 0000000..2f3195a
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.3.bb
+@@ -0,0 +1,15 @@
++require recipes-graphics/xorg-app/xorg-app-common.inc
++
++SUMMARY = "X.Org X11 X client utilities"
++
++DESCRIPTION = "xgamma allows X users to query and alter the gamma \
++correction of a monitor via the X video mode extension."
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=ac9801b8423fd7a7699ccbd45cf134d8"
++
++DEPENDS += "libxxf86vm"
++
++BBCLASSEXTEND = "native"
++
++SRC_URI[md5sum] = "e8a88bf1a18f35b724619849dca97f4f"
++SRC_URI[sha256sum] = "e5eb2588fbbdc5c2db5571b304204487a9c22eed15ac6cb816f605ec403e6e1a"
+-- 
+1.8.4.2
 
-
-Qian Lei
 
