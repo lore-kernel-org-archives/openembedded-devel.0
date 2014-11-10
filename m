@@ -1,22 +1,22 @@
 Return-Path: <pab@pabigot.com>
 Received: from p3plsmtpa07-03.prod.phx3.secureserver.net
 	(p3plsmtpa07-03.prod.phx3.secureserver.net [173.201.192.232])
-	by mail.openembedded.org (Postfix) with ESMTP id 9921B7205C
+	by mail.openembedded.org (Postfix) with ESMTP id 9913B7204C
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 10 Nov 2014 21:16:35 +0000 (UTC)
 Received: from llc.pab ([75.72.225.8])
 	by p3plsmtpa07-03.prod.phx3.secureserver.net with 
-	id DxGa1p00B0BVjqb01xGbfJ; Mon, 10 Nov 2014 14:16:36 -0700
+	id DxGa1p00B0BVjqb01xGcfd; Mon, 10 Nov 2014 14:16:36 -0700
 From: "Peter A. Bigot" <pab@pabigot.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Nov 2014 15:16:20 -0600
-Message-Id: <145df44783ecab755c77aa79c985b4a3d8e624f6.1415650249.git.pab@pabigot.com>
+Date: Mon, 10 Nov 2014 15:16:21 -0600
+Message-Id: <829e5a844691ae8298840ac8b288baa89afc3250.1415650249.git.pab@pabigot.com>
 X-Mailer: git-send-email 1.8.5.5
 In-Reply-To: <cover.1415650249.git.pab@pabigot.com>
 References: <cover.1415650249.git.pab@pabigot.com>
 In-Reply-To: <cover.1415650249.git.pab@pabigot.com>
 References: <cover.1415650249.git.pab@pabigot.com>
-Subject: [RFC 01/10] gypsy: switch to virtual/bluez
+Subject: [RFC 02/10] gpsd: switch to virtual/bluez
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,22 +34,22 @@ X-List-Received-Date: Mon, 10 Nov 2014 21:16:36 -0000
 
 Signed-off-by: Peter A. Bigot <pab@pabigot.com>
 ---
- meta-oe/recipes-navigation/gypsy/gypsy.inc | 2 +-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-index 7c93d0a..15d80fe 100644
---- a/meta-oe/recipes-navigation/gypsy/gypsy.inc
-+++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
-@@ -6,7 +6,7 @@ client applications, passing the data as simple values for the clients \
- to use."
- LICENSE = "GPLv2.0 & LGPLv2.1"
- SECTION = "console/network"
--DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native libxslt"
-+DEPENDS = "glib-2.0 dbus virtual/bluez dbus-glib libxslt-native libxslt"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+index 6d3adc1..d081f89 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+@@ -31,7 +31,7 @@ export STAGING_INCDIR
+ export STAGING_LIBDIR
  
- inherit autotools pkgconfig gtk-doc
- PACKAGES += "libgypsy"
+ PACKAGECONFIG ??= "bluez"
+-PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez4"
++PACKAGECONFIG[bluez] = "bluez='true',bluez='false',virtual/bluez"
+ 
+ EXTRA_OESCONS = " \
+     sysroot=${STAGING_DIR_TARGET} \
 -- 
 1.8.5.5
 
