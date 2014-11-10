@@ -1,44 +1,37 @@
-Return-Path: <bevenson@melinkcorp.com>
-Received: from na01-bl2-obe.outbound.protection.outlook.com
-	(mail-bl2on0140.outbound.protection.outlook.com [65.55.169.140])
-	by mail.openembedded.org (Postfix) with ESMTP id B906C65D4F
+Return-Path: <chmorgan@gmail.com>
+Received: from mail-qa0-f43.google.com (mail-qa0-f43.google.com
+	[209.85.216.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A46AA65CED
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2014 14:39:38 +0000 (UTC)
-Received: from BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) by
-	BLUPR05MB037.namprd05.prod.outlook.com (10.255.210.145) with Microsoft
-	SMTP Server (TLS) id 15.1.16.15; Mon, 10 Nov 2014 14:39:37 +0000
-Received: from BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.98]) by
-	BLUPR05MB037.namprd05.prod.outlook.com ([169.254.7.98]) with mapi id
-	15.01.0016.006; Mon, 10 Nov 2014 14:39:37 +0000
-From: Bryan Evenson <bevenson@melinkcorp.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] PRINC migration questions
-Thread-Index: Ac/6ioposBgxHVLQTxCI6lQhvHJI4gADaaEAAABOhpAAEgKTAACBUbww
-Date: Mon, 10 Nov 2014 14:39:37 +0000
-Message-ID: <429704b078c54708b839a75abf17deed@BLUPR05MB037.namprd05.prod.outlook.com>
-References: <e111da9e0a424a2eac00f684ba4da94f@BY2PR05MB048.namprd05.prod.outlook.com>
-	<20141107143618.GE2444@jama>
-	<63ce226621b249b89737c73d94150d68@BY2PR05MB048.namprd05.prod.outlook.com>
-	<20141107232046.GI2444@jama>
-In-Reply-To: <20141107232046.GI2444@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-vipre-scanned: 00606D2500877400606E72
-x-originating-ip: [98.100.91.242]
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB037;
-x-exchange-antispam-report-cfa: BCL:0;PCL:0;RULEID:;SRVR:BLUPR05MB037;
-x-forefront-prvs: 039178EF4A
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(199003)(51704005)(51914003)(189002)(377454003)(24454002)(2656002)(92566001)(87936001)(554214002)(54356999)(50986999)(46102003)(76176999)(20776003)(31966008)(64706001)(4396001)(21056001)(101416001)(19580405001)(19580395003)(66066001)(33646002)(86362001)(110136001)(95666004)(62966003)(77156002)(76576001)(77096003)(105586002)(106356001)(120916001)(93886004)(122556002)(74316001)(107046002)(99286002)(108616004)(40100003)(24736002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR05MB037;
-	H:BLUPR05MB037.namprd05.prod.outlook.com; FPR:; MLV:sfv;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
-MIME-Version: 1.0
-X-OriginatorOrg: melinkcorp.com
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: PRINC migration questions
+	Mon, 10 Nov 2014 18:46:43 +0000 (UTC)
+Received: by mail-qa0-f43.google.com with SMTP id j7so5854749qaq.30
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Nov 2014 10:46:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=w22icaka0KjVaYxuIIEYLSHVvLi4i30OPMEQ8g7hV00=;
+	b=jlDIoUprfsfhm5kLJHQG9WTFVE3ULmDqx7C1WzhHKJoWcxIwij5lDbRNK4vhbRSuG3
+	cLlhJkxdC+0euZ91SFhbrBDwk9EA9PwulVOTxkgLGopQ/n87IPMU60m4LB1qkgKaWGyI
+	T87NmZiTeKlfCfVNoNCKnQ2AJJs3xYx/mlvorTfSDcdIQ8hmAo4TbngGQ9bNJib8n8lD
+	/wjAslBM/3n7ObCHYdRyciXMkmn3RIBFm7k/oxbzX1qLzFW988N8dHrTVXzcpjbdrMON
+	3XUoS7xXRi4g2v8YWdHx5j64yQzSmvr6t2fj4tySbFdug1lgYOFX0EV56MHfs/WaXEAB
+	/7ZA==
+X-Received: by 10.229.104.3 with SMTP id m3mr46231071qco.0.1415645202463;
+	Mon, 10 Nov 2014 10:46:42 -0800 (PST)
+Received: from localhost.localdomain
+	(static-96-237-165-28.bstnma.fios.verizon.net. [96.237.165.28])
+	by mx.google.com with ESMTPSA id
+	u14sm16201910qag.32.2014.11.10.10.46.41 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 10 Nov 2014 10:46:41 -0800 (PST)
+From: Chris Morgan <chmorgan@gmail.com>
+X-Google-Original-From: Chris Morgan <cmorgan@cybexintl.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Nov 2014 13:46:33 -0500
+Message-Id: <1415645193-14565-1-git-send-email-cmorgan@cybexintl.com>
+X-Mailer: git-send-email 1.9.3
+Cc: Chris Morgan <cmorgan@cybexintl.com>
+Subject: [meta-oe][PATCH] dfu-util: Point to gitorious.org repository as gnumonks.org is down
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,131 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2014 14:39:41 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 10 Nov 2014 18:46:49 -0000
 
-TWFydGluLA0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IE1hcnRpbiBK
-YW5zYSBbbWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb21dDQo+IFNlbnQ6IEZyaWRheSwgTm92
-ZW1iZXIgMDcsIDIwMTQgNjoyMSBQTQ0KPiBUbzogQnJ5YW4gRXZlbnNvbg0KPiBDYzogb3BlbmVt
-YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0g
-UFJJTkMgbWlncmF0aW9uIHF1ZXN0aW9ucw0KPiANCj4gT24gRnJpLCBOb3YgMDcsIDIwMTQgYXQg
-MDM6MzY6MTRQTSArMDAwMCwgQnJ5YW4gRXZlbnNvbiB3cm90ZToNCj4gPiBNYXJ0aW4sDQo+ID4N
-Cj4gPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gPiBGcm9tOiBvcGVuZW1iZWRk
-ZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gPiBbbWFpbHRvOm9w
-ZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uDQo+IEJl
-aGFsZg0KPiA+ID4gT2YgTWFydGluIEphbnNhDQo+ID4gPiBTZW50OiBGcmlkYXksIE5vdmVtYmVy
-IDA3LCAyMDE0IDk6MzYgQU0NCj4gPiA+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZw0KPiA+ID4gU3ViamVjdDogUmU6IFtvZV0gUFJJTkMgbWlncmF0aW9uIHF1
-ZXN0aW9ucw0KPiA+ID4NCj4gPiA+IE9uIEZyaSwgTm92IDA3LCAyMDE0IGF0IDAxOjMxOjAyUE0g
-KzAwMDAsIEJyeWFuIEV2ZW5zb24gd3JvdGU6DQo+ID4gPiA+IEFsbCwNCj4gPiA+ID4NCj4gPiA+
-ID4gSSBhbSBvbiBwb2t5L2R5bGFuIGFuZCBoYXZlIG5vdCB5ZXQgc3RhcnRlZCB1c2luZyB0aGUg
-UFIgc2VydmVyLg0KPiA+ID4gPiBJIHJlYWxseSBkbw0KPiA+ID4gd2FudCB0byBzdGFydCB1c2lu
-ZyB0aGUgUFIgc2VydmVyIGFuZCBzdG9wIHVzaW5nIFBSSU5DLiAgSG93ZXZlciwNCj4gPiA+IGV2
-ZW4gbW9yZSBzbyBJIHJlYWxseSBkb24ndCB3YW50IHRvIGJyZWFrIG15IHBhY2thZ2UgZmVlZHMu
-ICBJIHdhbnQNCj4gPiA+IHRvIG1ha2Ugc3VyZSBJIGRvIG15IG1pZ3JhdGlvbiBjb3JyZWN0bHkg
-YW5kIEkgZG9uJ3QgZG8gc29tZXRoaW5nDQo+ID4gPiB0aGF0IGxvb2tzIGxpa2UgaXQgd29ya3Mg
-b2theSBvbmx5IHRvIGZpbmQgb3V0IGl0IGNhdXNlcyBwcm9ibGVtcw0KPiA+ID4gbGF0ZXIuICBX
-aXRoIHRoYXQgaW4gbWluZCwgSSBhbSBsb29raW5nIGZvciBhZHZpY2Ugb24gdGhlIHByb3BlciB3
-YXkgdG8NCj4gbWlncmF0ZSBhd2F5IGZyb20gdXNpbmcgUFJJTkMuDQo+ID4gPiA+DQo+ID4gPiA+
-IExldCdzIHNheSBJIGhhdmUgYSAuYmJhcHBlbmQgaW4gbXkgcHJpdmF0ZSBsYXllciB3aXRoIHRo
-ZSBsaW5lOg0KPiA+ID4gPg0KPiA+ID4gPiBQUklOQyA6PSAiJHtAaW50KFBSSU5DKSArIDR9Ig0K
-PiA+ID4gPg0KPiA+ID4gPiBUaGUgbWFpbmxpbmUgbGF5ZXIncyAuYmIgaGFzIHRoZSBsaW5lOg0K
-PiA+ID4gPg0KPiA+ID4gPiBQUiA9ICIke0lOQ19QUn0uMCINCj4gPiA+ID4NCj4gPiA+ID4gQW5k
-IHRoZSBtYWlubGluZSBsYXllcidzIC5pbmMgaGFzIHRoZSBsaW5lOg0KPiA+ID4gPg0KPiA+ID4g
-PiBJTkNfUFIgPSAicjgiDQo+ID4gPiA+DQo+ID4gPiA+IEluIHRoaXMgc2NlbmFyaW8sIHRoZSBy
-ZXN1bHRpbmcgUFIgd2lsbCBiZSAicjEyLjAiLiAgTm93IGxldCdzIHNheQ0KPiA+ID4gPiBJIHdh
-bnQgdG8gc3RhcnQNCj4gPiA+IHVzaW5nIHRoZSBQUiBzZXJ2ZXIgYW5kIGdldCByaWQgb2YgUFJJ
-TkMgaW4gdGhpcyByZWNpcGUuICBUaGUNCj4gPiA+IHJlc3VsdGluZyBwYWNrYWdlIGNvbnRlbnRz
-IGFyZSB0byBiZSB0aGUgc2FtZSwgc28gSSB3YW50IHRoZQ0KPiA+ID4gcmVzdWx0aW5nIFBSIHRv
-IGJlICJyMTIuMCIuICBGcm9tIHNvbWUgbGltaXRlZCB0ZXN0aW5nLCBpZiBJIHN0YXJ0DQo+ID4g
-PiB0aGUgUFIgc2VydmVyIGFuZCByZW1vdmUgdGhlIFBSSU5DIGxpbmUgZnJvbSBteSAuYmJhcHBl
-bmQgdGhlDQo+ID4gPiByZXN1bHRpbmcgUFIgaXMgInI4LjAiLiAgU28gaW4gbXkgLmJiYXBwZW5k
-IHNob3VsZCBJIGNoYW5nZSB0aGUgUFJJTkMgbGluZQ0KPiB0bzoNCj4gPiA+ID4NCj4gPiA+ID4g
-SU5DX1BSID0gInIxMiINCj4gPiA+ID4NCj4gPiA+ID4gT3Igc2hvdWxkIEkgY2hhbmdlIGl0IHRv
-IHNvbWV0aGluZyBlbHNlPyAgSWYgSSBjaGFuZ2UgaXQgdG8gYQ0KPiA+ID4gPiBoYXJkY29kZWQg
-dmFsdWUsDQo+ID4gPiB0aGVuIEknbGwgaGF2ZSB0byBiZSBjYXJlZnVsIGFib3V0IHdoYXQgdG8g
-ZG8gaWYgdGhlIG1haW5saW5lIHJlY2lwZQ0KPiA+ID4gY2hhbmdlcyBJTkNfUFIuICBIb3cgaGF2
-ZSBvdGhlciBwZW9wbGUgaGFuZGxlZCB0aGlzIHNpdHVhdGlvbj8NCj4gPiA+DQo+ID4gPiBQUiBz
-ZXJ2aWNlIHdvbid0IHlvdSBoZWxwIGF0IGFsbCB3aXRoIHRoaXMgKGl0IGFkZHMgYW5vdGhlciAu
-TiB0byBQUg0KPiA+ID4gdmFsdWUsIHNvIGl0IGNhbm5vdCBmaXggd2hlbiB0aGUgbGV2ZWwgb2Yg
-Lk4gZ29lcyBiYWNrd2FyZHMpLg0KPiA+ID4NCj4gPiA+IFRoZSBvbmx5IHJlYWxseSB3b3JraW5n
-IHNvbHV0aW9uIGlzIHRvIGluY3JlbWVudCBJTkNfUFIvUFIgdmFsdWVzIGluDQo+ID4gPiB1cHN0
-cmVhbSByZWNpcGVzIGF0b21pY2FsbHkgd2l0aCBQUklOQyBkcm9wIGluIHlvdXIgbGF5ZXJzLg0K
-PiA+ID4NCj4gPg0KPiA+IFRoYW5rcyBmb3IgdGhlIGluZm9ybWF0aW9uLiAgSnVzdCBhIGZldyBt
-b3JlIHF1ZXN0aW9ucyB0byBtYWtlIHN1cmUgSSBnZXQNCj4gdGhpcyByaWdodC4gIFdlIGhhdmUg
-YSBsb2NhbCBHaXQgc2VydmVyIHdoaWNoIGhhcyBjbG9uZXMgb2YgYWxsIHRoZSBZb2N0by9vZQ0K
-PiBsYXllcnMgdGhhdCB3ZSBhcmUgdXNpbmcuICBTbyB5b3VyIHN1Z2dlc3Rpb24gZm9yIHRoZSBl
-eGFtcGxlIHNjZW5hcmlvIHdvdWxkDQo+IGJlIHRvOg0KPiA+IDEuIFJlbW92ZSBQUklOQyByZWZl
-cmVuY2UgZnJvbSBvdXIgLmJiYXBwZW5kIDIuIENoYW5nZSAuaW5jIGluDQo+ID4gbWFpbmxpbmUg
-cmVjaXBlIHRvIElOQ19QUiA9ICJyMTIiDQo+ID4gMy4gUHVzaCBjaGFuZ2VzIHRvIG91ciBsb2Nh
-bCBHaXQgcmVwb3NpdG9yaWVzLg0KPiA+DQo+ID4gVGhlbiBpZiBsYXRlciBJIHdlcmUgdG8gbWVy
-Z2UgaW4gdXBkYXRlcyBmcm9tIHRoZSBvZmZpY2lhbCBsYXllcnMsIHRoZXJlDQo+IHdvdWxkIGJl
-IGEgbWVyZ2UgY29uZmxpY3QgYW5kIEkgd291bGQga25vdyBhdCBtZXJnZSB0aW1lIHRoYXQgSSBu
-ZWVkIHRvDQo+IGluc3BlY3QgSU5DX1BSIGZvciBiZWluZyB0aGUgY29ycmVjdCB2YWx1ZS4gIERv
-ZXMgdGhhdCBzb3VuZCByaWdodD8NCj4gDQo+IFllcyB0aGF0J3MgcG9zc2libGUsIGEgYml0IG9m
-IHBhaW4gdG8gbWFpbnRhaW4gaXQsIGJ1dCBhcyB5b3Ugc2F5LCBhdCBsZWFzdCB5b3UgZ2V0DQo+
-IHRoZSB3YXJuaW5nIGluIGZvcm0gb2YgbWVyZ2UgY29uZmxpY3QuIEp1c3Qga2VlcCBpbiBtaW5k
-IHRoYXQgeW91IGNhbiBkcm9wDQo+IHRoZXNlIFBSLCBJTkNfUFIgYnVtcHMgd2hlbiB0aGUgdXBz
-dHJlYW0gcmVjaXBlIGluY3JlbWVudHMgUEUgb3IgUFYgc28NCj4geW91IGNhbiBhdCBsZWFzdCBk
-cm9wIHNvbWUgb2YgdGhlbSBpbiB0aW1lLg0KPiANCj4gPiA+IEZvciBQUiBzZXJ2aWNlIG1pZ3Jh
-dGlvbiB0aGUgbW9yZSBpbXBvcnRhbnQgcGFydCBpcyB0byBjb3JyZWN0bHkNCj4gPiA+IG1pZ3Jh
-dGUgTE9DQUxDT1VOVCBudW1iZXJzICh1c2VkIGluIFNSQ1BWcyksIGVzcGVjaWFsbHkgaWYgeW91
-J3JlDQo+ID4gPiBhbHNvIGNoYW5naW5nIHBhY2thZ2UgYXJjaGl0ZWN0dXJlIChlLmcuIHQyIHN1
-ZmZpeCBhZGRlZCBpbiBkYWlzeSBvcg0KPiA+ID4gc2VsZWN0aW5nIGRpZmZlcmVudCBERUZBVUxU
-VFVORSBhbmQgYWxsIHlvdXIgTE9DQUxDT1VOVHMgaW4gUFINCj4gPiA+IHNlcnZlciBEQiB3aWxs
-IHJlc2V0IHRvIDAsIGJlY2F1c2Ugb2YgZGlmZmVyZW50IGRiIGtleSB0byBmaW5kIHRoZW0uDQo+
-ID4gPiBMdWNraWx5IHlvdSBjYW4gcHJlLXBvcHVsYXRlIHRoZW0gd2l0aCBzaW5nbGUgU1FMIGNv
-bW1hbmQgaWYgeW91IHJlYWxpemUNCj4gdGhpcyBzaXR1YXRpb24gYmVmb3JlIGZpcnN0IGJ1aWxk
-Lg0KPiA+ID4NCj4gPg0KPiA+IE9LLCBub3cgSSdtIGNvbmZ1c2VkLiAgSSBzZWUgbm8gcmVmZXJl
-bmNlIHRvIExPQ0FMQ09VTlQgYW55d2hlcmUgaW4NCj4gdGhlIFlvY3RvIFByb2plY3QgTWVnYSBN
-YW51YWwuICBUaGUgb25seSByZWZlcmVuY2UgSSBzZWUgdG8gTE9DQUxDT1VOVCBpcw0KPiBvbiB0
-aGUgUFIgU2VydmljZSB3aWtpIHdoaWNoIHN0YXRlcyB0aGF0IHlvdSBjYW4gY2FsbCAiYml0YmFr
-ZS1wcnNlcnYtdG9vbA0KPiBtaWdyYXRlX2xvY2FsY291bnQiIHRvIG1pZ3JhdGUgTE9DQUxDT1VO
-VHMgdG8gQVVUT0lOQ3MgKGFuZCBBVVRPSU5DIGlzDQo+IGFub3RoZXIgdmFyaWFibGUgSSBjYW5u
-b3QgZmluZCBtZW50aW9uZWQgYW55d2hlcmUgZWxzZSkuICBTbyBJIGRvbid0IGZ1bGx5DQo+IHVu
-ZGVyc3RhbmQgaG93IHRvIHJlY29nbml6ZSBpZiBJIG5lZWQgdG8gbWlncmF0ZSBMT0NBTENPVU5U
-IG51bWJlcnMgb3INCj4gd2hhdCB0aGUgU1FMIGNvbW1hbmQgd291bGQgYmUgdG8gcGVyZm9ybSB0
-aGUgbWlncmF0aW9uLiAgQnV0IGl0IHNvdW5kcw0KPiBsaWtlIHRoaXMgaXMgYSBwcmV0dHkgaW1w
-b3J0YW50IHBpZWNlIHRvIGdldCByaWdodCBkdXJpbmcgbWlncmF0aW9uLiAgQ291bGQgeW91DQo+
-IGV4cGxhaW4gdGhpcyBwaWVjZSBmb3IgUFIgc2VydmljZSBtaWdyYXRpb24gaW4gbW9yZSBkZXRh
-aWwsIG9yIHBvaW50IG1lIHRvIHRoZQ0KPiBwcm9wZXIgcGxhY2UgaW4gdGhlIGRvY3VtZW50YXRp
-b24gdGhhdCBkZXNjcmliZXMgdGhpcyBwYXJ0IG9mIG1pZ3JhdGlvbj8NCj4gDQo+IFRoZSBpbXBv
-cnRhbnQgcXVlc3Rpb24gaXMgaWYgeW91J3JlIHVzaW5nIFNSQ1BWIGluIHNvbWUgcmVjaXBlcyB5
-b3UgY2FyZQ0KPiBhYm91dCB1cGdyYWRlLXBhdGggKGUuZy4gbGludXgteW9jdG8gaXMgdXNpbmcg
-aXQpLg0KPiANCj4gTE9DQUxDT1VOVCB3YXMgbmFtZSBvZiB2YXJpYWJsZSB3aGljaCBoYWQgdGhl
-IE4gbnVtYmVyIGluIFNSQ1BWIChlLmcuDQo+ICJnaXRyTis8aGFzaD4iKSwgb3JpZ2luYWxseSBp
-dCB3YXMgc3RvcmVkIGluIHNlcGFyYXRlIHNxbGl0ZSBkYXRhYmFzZQ0KPiBjYWNoZS9iYl9wZXJz
-aXN0X2RhdGEuc3FsaXRlMyBhbmQgbWFpbnRlbmFuY2Ugb2YgdGhpcyBudW1iZXIgd2FzIG1vdmVk
-DQo+IGFsc28gdG8gUFIgc2VydmljZSwgdGhhdCdzIHdoeSBpdCdzIG5vdCByZWZlcmVuY2VkIGlu
-IGN1cnJlbnQgZG9jdW1lbnRhdGlvbg0KPiBhbnltb3JlLg0KPiANCj4gQVVUT0lOQyBoYXMgdGhl
-IHNhbWUgbWVhbmluZywgYmFzaWNhbGx5IHRoZSBmZXRjaGVyIHdpbGwgYXNrIFBSIHNlcnZpY2U6
-DQo+ICJkbyB5b3UgaGF2ZSBBVVRPSU5DIG51bWJlciBmb3IgcmV2aXNpb24gImRlYWRjYWZlMTIz
-NCIsIHJlY2lwZSAiYWJjIiwNCj4gYXJjaGl0ZWN0dXJlICJjb3J0ZXhhOXQyLW5lb24iIGFuZCBQ
-UiBzZXJ2aWNlIHdpbGwgcmVwbHkgZWl0aGVyIHdpdGggYWxyZWFkeQ0KPiBzdG9yZWQgbnVtYmVy
-IG9yIG1heCsxIGZvciBnaXZlbiByZWNpcGUrYXJjaGl0ZWN0dXJlIHR1cGxlIGFuZCBzdG9yZSB0
-aGUNCj4gcmV0dXJuZWQgbnVtYmVyLg0KPiANCj4gSXQncyBpbXBvcnRhbnQgZm9yIHRoZSBtaWdy
-YXRpb24sIGJlY2F1c2UgaWYgeW91IGRlcGVuZCBvbiBOIG51bWJlcnMgaW4NCj4gZ2l0ck4gdG8g
-YmUgZnJvbSBhbHdheXMgaW5jcmVhc2luZyBzZXF1ZW5jZSB5b3UnbGwgZ2V0IHplcm8gZm9yIGFs
-bCByZWNpcGVzIGlmDQo+IHlvdSBkb24ndCBtaWdyYXRlIHlvdXIgb2xkIGNhY2hlL2JiX3BlcnNp
-c3RfZGF0YS5zcWxpdGUzIHRvIFBSIHNlcnZpY2Uncw0KPiBzcWxpdGUgZGIuDQo+IA0KPiBIb25l
-c3RseSBJIGRpZCB0aGF0IGFsbCBhbmQgaXQgd2FzIHNvcnQgb2Ygd29ya2luZyBhZnRlciBmZXcg
-bWFudWFsIGZpeGVzLCBidXQNCj4gSSd2ZSBhbHJlYWR5IGdhdmUgdXAgb24gdHJ1c3RpbmcgYW5k
-IHRlc3RpbmcgdXBncmFkZSBwYXRocyA6Ly4NCj4gDQo+IEl0J3MgcG9zc2libGUgdG8gdXNlIHB1
-YmxpYyBQUiBzZXJ2aWNlIHdpdGggbXVsdGlwbGUgYnVpbGRlcnMsIGJ1dCB0aGVyZSBhcmUNCj4g
-c29tZSBjYXNlcyB3aGVyZSB0aGUgY3VycmVudCBkZXNpZ24gd29udCB3b3JrIGFuZCBvdGhlciBj
-YXNlcyB3aGVyZSBpdA0KPiBqdXN0IGlzbid0IHJlbGlhYmxlIGVub3VnaCB0byB0cnVzdCBpdCAt
-IGlmIHlvdSB3YW50IHJlbGlhYmxlIGltYWdlcyBvbiB0YXJnZXQgeW91DQo+IGhhdmUgdG8gcmVm
-bGFzaCB0aGVtIGZyb20gdGltZSB0byB0aW1lIChvciByZWFsbHkga25vdyB3aGF0IHlvdSdyZSBk
-b2luZw0KPiBhbmQgd2hhdCB5b3UncmUgZXhwZWN0aW5nIHRvIGdldCBldmVyeSB0aW1lIHlvdSB0
-eXBlICJvcGtnIHVwZGF0ZSAmJiBvcGtnDQo+IHVwZ3JhZGUiIGFuZCBtb3N0IGVuZC11c2VycyBk
-b24ndCBrbm93KS4NCj4gDQoNClRoYW5rcyBmb3IgdGhlIGRldGFpbGVkIGV4cGxhbmF0aW9uLiAg
-SW4gb3RoZXIgd29yZHMsIGJlZm9yZSByZWxlYXNlIHRha2UgYSBjbG9zZSBsb29rIGF0IHdoYXQg
-cmVjaXBlcyBjaGFuZ2VkIGFuZCB3aGF0IFBScyB1cGRhdGVkIGluIHRoZSByZXN1bHRpbmcgcGFj
-a2FnZXMuICBJIHRoaW5rIGFsbCB0aGlzIGluZm9ybWF0aW9uIHdvdWxkIGJlIGhlbHBmdWwgaW4g
-YSAiUFJJTkMgTWlncmF0aW9uIiBzZWN0aW9uIGluIHRoZSBtYW51YWwuICBHaXZlbiBwZXJzb25h
-bCBleHBlcmllbmNlLCBJIHRoaW5rIGEgbG90IG9mIHBlb3BsZSBoYXZlIG5vdCBtaWdyYXRlZCBh
-d2F5IGZyb20gdXNpbmcgUFJJTkMgYmVjYXVzZSB0aGV5IG1heSBub3Qga25vdyBob3cgdG8gd2l0
-aG91dCBicmVha2luZyBwYWNrYWdlIGZlZWRzLg0KDQpSZWdhcmRzLA0KQnJ5YW4NCg==
+---
+ meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+index aa2b84d..c706fd1 100644
+--- a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
++++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+@@ -4,7 +4,10 @@ AUTHOR = "Harald Welte <laforge@openmoko.org>"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-SRC_URI = "http://${BPN}.gnumonks.org/releases/${BP}.tar.gz \
++S = "${WORKDIR}/${BPN}-${BPN}"
++
++REV="a0a3668e0571a9b007f7d62b01e7dcfd7754ce50"
++SRC_URI = "https://gitorious.org/${BPN}/${BPN}/archive/${REV}.tar.gz \
+     file://0001-configure.ac-Don-t-check-for-usbpath.patch \
+ "
+ 
+@@ -12,5 +15,5 @@ inherit autotools pkgconfig
+ 
+ DEPENDS = "libusb1"
+ 
+-SRC_URI[md5sum] = "56844020177d4db4c1ea2e926fe9d588"
+-SRC_URI[sha256sum] = "f52a2a5489fbf9f3204a6ada05e0b47ee322e19d81c712e0c58a332d80ec3eab"
++SRC_URI[md5sum] = "1de724551604bce1962960b7a301cc08"
++SRC_URI[sha256sum] = "5d253f924fd29bc13054b664bba9aa86b865299971195969478253c1775b7e56"
+-- 
+1.9.3
+
 
