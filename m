@@ -1,24 +1,29 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 09C3565C91
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+X-Greylist: delayed 364 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 10 Nov 2014 01:37:00 UTC
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B7B7565CC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2014 01:03:20 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAA13K6s018518
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 10 Nov 2014 01:37:00 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43106261"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 10 Nov 2014 09:30:36 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAA1XZgU020262
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 9 Nov 2014 17:03:20 -0800 (PST)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.163.178) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 9 Nov 2014 17:03:19 -0800
-From: <rongqing.li@windriver.com>
+	Mon, 10 Nov 2014 09:33:35 +0800
+Received: from localhost.localdomain (10.167.226.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 10 Nov 2014 09:33:51 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 10 Nov 2014 09:03:18 +0800
-Message-ID: <1415581398-8497-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
+Date: Mon, 10 Nov 2014 09:33:12 +0800
+Message-ID: <1415583192-2041-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] postfix: create or update aliases.db when using systemd
+X-Originating-IP: [10.167.226.35]
+Subject: [PATCH] takao-fonts : new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,88 +37,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2014 01:03:24 -0000
+X-List-Received-Date: Mon, 10 Nov 2014 01:37:07 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+Takao Fonts are a community developed derivatives of IPA Fonts.
+IPA Fonts are high quality Japanese outline fonts developed by
+Information-technology Promotion Agency,Japan(called IPA for short).
+Homepage:https://launchpad.net/takao-fonts
 
-aliases.db should be created by postinstall script, but failed since
-queue_directory is not includes root dir ${D}:
-    ------
-    |newaliases: fatal: chdir /var/spool/postfix: No such file or directory
-    ------
-initscript will recall newaliases before start postfix daemon, the similar
-method, which run aliasesdb to create aliases.db when using systemd, is
-introduced to fix this issue.
-
-Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- .../recipes-daemons/postfix/files/aliasesdb          | 20 ++++++++++++++++++++
- .../recipes-daemons/postfix/files/postfix.service    |  1 +
- meta-networking/recipes-daemons/postfix/postfix.inc  |  3 +++
- 3 files changed, 24 insertions(+)
- create mode 100755 meta-networking/recipes-daemons/postfix/files/aliasesdb
+ .../takao-fonts/takao-fonts_003.02.01.bb           | 23 ++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-support/takao-fonts/takao-fonts_003.02.01.bb
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/aliasesdb b/meta-networking/recipes-daemons/postfix/files/aliasesdb
-new file mode 100755
-index 0000000..421b47e
+diff --git a/meta-oe/recipes-support/takao-fonts/takao-fonts_003.02.01.bb b/meta-oe/recipes-support/takao-fonts/takao-fonts_003.02.01.bb
+new file mode 100644
+index 0000000..afa1a4e
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/postfix/files/aliasesdb
-@@ -0,0 +1,20 @@
-+#!/bin/sh
++++ b/meta-oe/recipes-support/takao-fonts/takao-fonts_003.02.01.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Takao Fonts are a community developed derivatives of IPA Fonts."
 +
-+ALIASESDB_STAMP=/var/lib/misc/postfix.aliasesdb-stamp
++HOMEPAGE = "https://launchpad.net/takao-fonts"
++SECTION = "User Interface/X"
 +
-+make_aliasesdb() {
-+        if [ "$(/usr/sbin/postconf -h alias_database)" == "hash:/etc/aliases" ]
-+        then
-+                # /etc/aliases.db may be used by other MTA, make sure nothing
-+                # has touched it since our last newaliases call
-+                [ /etc/aliases -nt /etc/aliases.db ] ||
-+                        [ "$ALIASESDB_STAMP" -nt /etc/aliases.db ] ||
-+                        [ "$ALIASESDB_STAMP" -ot /etc/aliases.db ] || return 0
-+                /usr/bin/newaliases
-+                touch -r /etc/aliases.db "$ALIASESDB_STAMP"
-+        else
-+                /usr/bin/newaliases
-+        fi
++LICENSE = "IPA"
++LIC_FILES_CHKSUM = "file://IPA_Font_License_Agreement_v1.0.txt;md5=6cd3351ba979cf9db1fad644e8221276"
++
++SRC_URI = "http://launchpad.net/takao-fonts/003.02/003.02.01/+download/takao-fonts-ttf-003.02.01.zip"
++SRC_URI[md5sum] = "ca480e5edb9f26d871bf6df6cb910306"
++SRC_URI[sha256sum] = "2f526a16c7931958f560697d494d8304949b3ce0aef246fb0c727fbbcc39089e"
++
++RPROVIDES_${PN} = "virtual-japanese-font"
++
++S = "${WORKDIR}/${PN}-ttf-${PV}"
++
++do_install() {
++	install -m 0755 -d ${D}/${datadir}/fonts
++	install -m 0644 -p ${S}/*.ttf ${D}/${datadir}/fonts/
 +}
 +
-+make_aliasesdb
-diff --git a/meta-networking/recipes-daemons/postfix/files/postfix.service b/meta-networking/recipes-daemons/postfix/files/postfix.service
-index 6ea9214..c781038 100644
---- a/meta-networking/recipes-daemons/postfix/files/postfix.service
-+++ b/meta-networking/recipes-daemons/postfix/files/postfix.service
-@@ -6,6 +6,7 @@ Conflicts=sendmail.service exim.service
- [Service]
- Type=forking
- PIDFile=/var/spool/postfix/pid/master.pid
-+ExecStartPre=-/usr/libexec/postfix/aliasesdb
- ExecStart=/usr/sbin/postfix start
- ExecReload=/usr/sbin/postfix reload
- ExecStop=/usr/sbin/postfix stop
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index c58787e..d2f3356 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -22,6 +22,7 @@ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV
- 	   file://postfix \
- 	   file://internal_recipient \
- 	   file://postfix.service \
-+	   file://aliasesdb \
- 	   "
- 
- S = "${WORKDIR}/postfix-${PV}"
-@@ -149,6 +150,8 @@ do_install () {
- 	install -m 0644 ${WORKDIR}/postfix.service ${D}${systemd_unitdir}/system
- 	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${systemd_unitdir}/system/postfix.service
- 
-+	install -m 0755 ${WORKDIR}/aliasesdb ${D}${exec_prefix}/libexec/postfix/
++FILES_${PN} += "${datadir}/fonts/*.ttf"
 +
- 	install -m 770 -d ${D}${localstatedir}/spool/postfix
- 	chown postfix:postfix ${D}${localstatedir}/spool/postfix
- 	chown postfix:postfix ${D}${localstatedir}/lib/postfix
 -- 
-2.1.0
+1.8.4.2
 
 
