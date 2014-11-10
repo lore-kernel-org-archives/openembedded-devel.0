@@ -1,24 +1,24 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id A558D60809;
-	Sun,  9 Nov 2014 21:08:24 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 09 Nov 2014 13:08:24 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,347,1413270000"; 
-	d="ics'?scan'208";a="629224644"
-Received: from csbandar-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.118])
-	by fmsmga002.fm.intel.com with ESMTP; 09 Nov 2014 13:08:23 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Date: Sun, 09 Nov 2014 21:08:22 +0000
-Message-ID: <3882275.CLexp6ugAm@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.2 (Linux/3.16.7-200.fc20.x86_64; KDE/4.14.2; x86_64; ; )
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 09C3565C91
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Nov 2014 01:03:20 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAA13K6s018518
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 9 Nov 2014 17:03:20 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.163.178) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 9 Nov 2014 17:03:19 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 10 Nov 2014 09:03:18 +0800
+Message-ID: <1415581398-8497-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-Subject: Public OE TSC meeting
+Subject: [PATCH][meta-networking] postfix: create or update aliases.db when using systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,75 +32,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Nov 2014 21:08:29 -0000
-X-Groupsio-MsgNum: 52779
-Content-Type: multipart/mixed; boundary="nextPart3108323.0CmVkexnoD"
-Content-Transfer-Encoding: 7Bit
+X-List-Received-Date: Mon, 10 Nov 2014 01:03:24 -0000
+Content-Type: text/plain
 
---nextPart3108323.0CmVkexnoD
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+From: Roy Li <rongqing.li@windriver.com>
 
-Hi all,
+aliases.db should be created by postinstall script, but failed since
+queue_directory is not includes root dir ${D}:
+    ------
+    |newaliases: fatal: chdir /var/spool/postfix: No such file or directory
+    ------
+initscript will recall newaliases before start postfix daemon, the similar
+method, which run aliasesdb to create aliases.db when using systemd, is
+introduced to fix this issue.
 
-There will be a public OpenEmbedded TSC/workgroup IRC meeting this coming 
-Tuesday (11th November). If you're interested in discussing long-term 
-technical efforts around the OpenEmbedded project please join us on 
-irc.freenode.net in channel #oe at 17:00 GMT (9am PST, 11am CST, 12 EST, 18:00 
-CET).
+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+---
+ .../recipes-daemons/postfix/files/aliasesdb          | 20 ++++++++++++++++++++
+ .../recipes-daemons/postfix/files/postfix.service    |  1 +
+ meta-networking/recipes-daemons/postfix/postfix.inc  |  3 +++
+ 3 files changed, 24 insertions(+)
+ create mode 100755 meta-networking/recipes-daemons/postfix/files/aliasesdb
 
-Possible topics for discussion (based on the last meeting and recent mailing 
-list topics):
-- Upcoming development cycle
-- Website and other infrastructure issues
-
-New topics for discussion are welcome.
-
-Cheers,
-Paul
-
-
+diff --git a/meta-networking/recipes-daemons/postfix/files/aliasesdb b/meta-networking/recipes-daemons/postfix/files/aliasesdb
+new file mode 100755
+index 0000000..421b47e
+--- /dev/null
++++ b/meta-networking/recipes-daemons/postfix/files/aliasesdb
+@@ -0,0 +1,20 @@
++#!/bin/sh
++
++ALIASESDB_STAMP=/var/lib/misc/postfix.aliasesdb-stamp
++
++make_aliasesdb() {
++        if [ "$(/usr/sbin/postconf -h alias_database)" == "hash:/etc/aliases" ]
++        then
++                # /etc/aliases.db may be used by other MTA, make sure nothing
++                # has touched it since our last newaliases call
++                [ /etc/aliases -nt /etc/aliases.db ] ||
++                        [ "$ALIASESDB_STAMP" -nt /etc/aliases.db ] ||
++                        [ "$ALIASESDB_STAMP" -ot /etc/aliases.db ] || return 0
++                /usr/bin/newaliases
++                touch -r /etc/aliases.db "$ALIASESDB_STAMP"
++        else
++                /usr/bin/newaliases
++        fi
++}
++
++make_aliasesdb
+diff --git a/meta-networking/recipes-daemons/postfix/files/postfix.service b/meta-networking/recipes-daemons/postfix/files/postfix.service
+index 6ea9214..c781038 100644
+--- a/meta-networking/recipes-daemons/postfix/files/postfix.service
++++ b/meta-networking/recipes-daemons/postfix/files/postfix.service
+@@ -6,6 +6,7 @@ Conflicts=sendmail.service exim.service
+ [Service]
+ Type=forking
+ PIDFile=/var/spool/postfix/pid/master.pid
++ExecStartPre=-/usr/libexec/postfix/aliasesdb
+ ExecStart=/usr/sbin/postfix start
+ ExecReload=/usr/sbin/postfix reload
+ ExecStop=/usr/sbin/postfix stop
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index c58787e..d2f3356 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -22,6 +22,7 @@ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV
+ 	   file://postfix \
+ 	   file://internal_recipient \
+ 	   file://postfix.service \
++	   file://aliasesdb \
+ 	   "
+ 
+ S = "${WORKDIR}/postfix-${PV}"
+@@ -149,6 +150,8 @@ do_install () {
+ 	install -m 0644 ${WORKDIR}/postfix.service ${D}${systemd_unitdir}/system
+ 	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${systemd_unitdir}/system/postfix.service
+ 
++	install -m 0755 ${WORKDIR}/aliasesdb ${D}${exec_prefix}/libexec/postfix/
++
+ 	install -m 770 -d ${D}${localstatedir}/spool/postfix
+ 	chown postfix:postfix ${D}${localstatedir}/spool/postfix
+ 	chown postfix:postfix ${D}${localstatedir}/lib/postfix
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
-
---nextPart3108323.0CmVkexnoD
-Content-Disposition: attachment; filename="event.ics"
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/calendar; charset="utf-8"; name="event.ics"
-
-BEGIN:VCALENDAR
-
-VERSION:2.0
-
-METHOD:PUBLISH
-
-BEGIN:VEVENT
-
-DTSTART:20141111T170000Z
-
-DTEND:20141111T180000Z
-
-TRANSP:TRANSPARENT
-
-SUMMARY:Public OE TSC meeting
-
-LOCATION:#oe on Freenode IRC
-
-URL;VALUE=URI:http://www.timeanddate.com/worldclock/meetingdetails.html?is
-
- o=20141111T1700&p1=136&p2=64&p3=137&p4=195&p5=179
-
-UID:http://www.timeanddate.com/worldclock/meetingdetails.html?iso=20141111
-
- T1700&p1=136&p2=64&p3=137&p4=195&p5=179
-
-DTSTAMP:20141111T170000Z
-
-END:VEVENT
-
-END:VCALENDAR
+2.1.0
 
 
---nextPart3108323.0CmVkexnoD--
