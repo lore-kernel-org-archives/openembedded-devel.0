@@ -1,27 +1,24 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 61A6865CC9
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AB3C65CC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2014 08:21:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43189145"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Nov 2014 16:18:25 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAB8LOv8012734
+	Tue, 11 Nov 2014 09:50:08 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAB9o8dp017100
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2014 16:21:24 +0800
-Received: from localhost.localdomain (10.167.226.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 11 Nov 2014 16:21:44 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
+	Tue, 11 Nov 2014 01:50:08 -0800 (PST)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 11 Nov 2014 01:50:07 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 11 Nov 2014 16:20:21 +0800
-Message-ID: <1415694021-1932-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Tue, 11 Nov 2014 04:50:05 -0500
+Message-ID: <1415699406-29540-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.35]
-Subject: [PATCH] smem: add new recipe
+Subject: [meta-oe][PATCH v2 1/2] rrdtool: inherit cpan-base to help build perl modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,53 +32,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2014 08:21:41 -0000
+X-List-Received-Date: Tue, 11 Nov 2014 09:50:14 -0000
 Content-Type: text/plain
 
-smem is a tool that can give numerous reports on memory usage on Linux systems.
-Unlike existing tools, smem can report proportional set size (PSS),
-which is a more meaningful representation of the amount of memory used
-by libraries and applications in a virtual memory system.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+It's incorrect to use -I for nativeperl to specify @INC/#include
+directory to target build perl, which cause error like:
+| temp/do_configure/run.do_configure.20749: line 112: 20256 Illegal instruction (core dumped)
+| perl -I/path/to/tmp/sysroots/intel-haswell-64/usr/lib64/perl/$perl_version Makefile.PL
+
+Inherit cpan-base and set related env vars to fix this and
+avoid using sed to hack Makefile when build perl modules.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-support/smem/smem_1.4.bb | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-support/smem/smem_1.4.bb
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/meta-oe/recipes-support/smem/smem_1.4.bb b/meta-oe/recipes-support/smem/smem_1.4.bb
-new file mode 100644
-index 0000000..8d195d4
---- /dev/null
-+++ b/meta-oe/recipes-support/smem/smem_1.4.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Report application memory usage in a meaningful way"
-+DESCRIPTION = "smem is a tool that can give numerous reports on memory usage on Linux \
-+systems. Unlike existing tools, smem can report proportional set size (PSS), \
-+which is a more meaningful representation of the amount of memory used by \
-+libraries and applications in a virtual memory system."
-+HOMEPAGE = "http://www.selenic.com/smem/"
-+SECTION = "Applications/System"
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb
+index 449a923..b901f2e 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb
+@@ -17,7 +17,7 @@ SRC_URI = "\
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools-brokensep gettext pythonnative perlnative python-dir
++inherit autotools-brokensep gettext pythonnative perlnative python-dir cpan-base
+ 
+ EXTRA_AUTORECONF = "-I m4"
+ 
+@@ -56,6 +56,12 @@ export HOST_SYS
+ export STAGING_LIBDIR
+ export STAGING_INCDIR
+ 
++# Env var which tells perl if it should use host (no) or target (yes) settings
++export PERLCONFIGTARGET = "${@is_target(d)}"
++export PERL_INC = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}/CORE"
++export PERL_LIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
++export PERL_ARCHLIB = "${STAGING_LIBDIR}${PERL_OWN_DIR}/perl/${@get_perl_version(d)}"
 +
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "http://www.selenic.com/smem/download/${PN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "fe79435c3930389bfdb560255c802162"
-+SRC_URI[sha256sum] = "2ea9f878f4cf3c276774c3f7e2a41977a1f2d64f98d2dcb6a15f1f3d84df61ec"
-+
-+do_compile() {
-+        ${CC} ${CFLAGS} ${LDFLAGS} smemcap.c -o smemcap
-+}
-+
-+do_install() {
-+        install -d ${D}/${bindir}/
-+        install -d ${D}/${mandir}/man8
-+        install -m 0755 ${S}/smem ${D}${bindir}/
-+        install -m 0755 ${S}/smemcap ${D}${bindir}/
-+        install -m 0644 ${S}/smem.8 ${D}/${mandir}/man8/
-+}
+ do_configure() {
+ 	#fix the pkglib problem with newer automake
+ 	#perl
+@@ -71,9 +77,6 @@ do_configure() {
+ 
+ 	autotools_do_configure
+ 
+-	perl_version=`perl -v 2>/dev/null | \
+-	    sed -n 's/This is perl.*v[a-z ]*\([0-9]\.[0-9][0-9.]*\).*$/\1/p'`
+-
+ 	#modify python sitepkg
+ 	#remove the dependency of perl-shared:Makefile
+ 	#or perl-shared/Makefile will be regenerated
+@@ -86,13 +89,10 @@ do_configure() {
+ 	#redo the perl bindings
+ 	(
+ 	cd ${S}/bindings/perl-shared;
+-	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor"
+-	    INSTALLPRIVLIB="abc";
+-	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
++	perl Makefile.PL INSTALLDIRS="vendor" INSTALLPRIVLIB="abc";
+ 
+ 	cd ../../bindings/perl-piped;
+-	perl -I${STAGING_LIBDIR}/perl/$perl_version Makefile.PL INSTALLDIRS="vendor";
+-	sed -i -e "s| ${libdir}/perl/| ${STAGING_LIBDIR}/perl/|g" Makefile;
++	perl Makefile.PL INSTALLDIRS="vendor";
+ 	)
+ 
+ 	#change the interpreter in file
 -- 
-1.8.4.2
+2.0.0
 
 
