@@ -1,36 +1,25 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id C85C065CED
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 8480165DA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2014 15:06:30 +0000 (UTC)
-Received: by mail-la0-f53.google.com with SMTP id mc6so9823487lab.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2014 07:06:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=XMfwsq6qK8Mtk9UIO+XPEmpBjDxp6ZE6hvfSnKMB8lw=;
-	b=k7EfNjpREgOqAelsupbTKwvqKfjelWz0PioGvVrHWLyt5ar5SfelknM3QyYiw2SBnp
-	M/colnAHpVeVupqJxCfQQWJU3I2p8PCrUMa2gl9Wi2fXPW0o8kqBByC7elfjW4tPnhAq
-	hP+PcCgnTAa7kkIrW1tFi289ChfZ2OXq0lWkO8RNwMm/TywyE2wZoxNkyohy94uFkgf7
-	iOKQDSJLK2bCoo9dgDLby/bYpRPT7tUkVKRQ1MOLCTrJfOh2H+yNmSoGQzW7mqcPkKf9
-	sJRZ9q8GKl2jcb/wufvm6reet21nUNVe+1uwWOp9JuickNBkecg6/4LlVkupn6KSJCJQ
-	Brjg==
+	Tue, 11 Nov 2014 15:19:04 +0000 (UTC)
+Received: (qmail 15267 invoked by uid 1003); 11 Nov 2014 15:19:04 -0000
+Received: from unknown (HELO ?192.168.1.109?) (philip@opensdr.com@71.171.45.99)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	11 Nov 2014 15:19:04 -0000
+Message-ID: <546228E7.30904@balister.org>
+Date: Tue, 11 Nov 2014 10:19:03 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.1.1
 MIME-Version: 1.0
-X-Received: by 10.152.204.230 with SMTP id lb6mr24049003lac.35.1415718390239; 
-	Tue, 11 Nov 2014 07:06:30 -0800 (PST)
-Received: by 10.25.79.208 with HTTP; Tue, 11 Nov 2014 07:06:30 -0800 (PST)
-In-Reply-To: <1415661548-16364-1-git-send-email-derek@minotaurinc.com>
-References: <1415661548-16364-1-git-send-email-derek@minotaurinc.com>
-Date: Tue, 11 Nov 2014 07:06:30 -0800
-Message-ID: <CANx9H-AJfk=0WyR4hzHdAJQ+2u55h3WkBHSX5auPs7hD-M2msw@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
+To: openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Derek Straka <derek@minotaurinc.com>
-Subject: Re: [meta-python][PATCH] python-flufl-enum: add recipe for 4.0.1
+References: <3882275.CLexp6ugAm@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <3882275.CLexp6ugAm@peggleto-mobl5.ger.corp.intel.com>
+X-Forwarded-Message-Id: <3882275.CLexp6ugAm@peggleto-mobl5.ger.corp.intel.com>
+Subject: Public OE TSC meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,76 +33,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2014 15:06:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Nov 2014 15:19:08 -0000
+X-Groupsio-MsgNum: 52820
+Content-Type: multipart/mixed; boundary="------------000703040905080601040305"
 
-Acked-by: Tim Orling <TicoTimo@gmail.com>
+--------------000703040905080601040305
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 10, 2014 at 3:19 PM, Derek Straka <derek@minotaurinc.com> wrote:
+Just a reminder the TSC meeting is in jsut under two hours.
 
-> Signed-off-by: Derek Straka <derek@minotaurinc.com>
-> ---
->  .../python/python-flufl-enum_4.0.1.bb              |   33
-> ++++++++++++++++++++
->  1 file changed, 33 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python-flufl-enum_4.0.1.bb
->
-> diff --git a/meta-python/recipes-devtools/python/
-> python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/
-> python-flufl-enum_4.0.1.bb
-> new file mode 100644
-> index 0000000..a7376db
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-> @@ -0,0 +1,33 @@
-> +SUMMARY  = "A Python enumeration package."
-> +DESCRIPTION = "The flufl.enum library is a Python enumeration package.
-> Its goal is to provide simple, \
-> +specific, concise semantics in an easy to read and write syntax.
-> flufl.enum has just enough of the \
-> +features needed to make enumerations useful, but without a lot of extra
-> baggage to weigh them down. "
-> +HOMEPAGE = "https://pypi.python.org/pypi/flufl.enum"
-> +SECTION = "devel/python"
-> +
-> +LICENSE = "LGPLv3"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
-> +
-> +SRCNAME = "flufl.enum"
-> +
-> +SRC_URI = " \
-> +
-> http://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
-> \
-> +"
-> +
-> +SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
-> +SRC_URI[sha256sum] =
-> "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
-> +
-> +inherit setuptools
-> +
-> +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> +PACKAGES =+ "\
-> +    ${PN}-test \
-> +"
-> +
-> +FILES_${PN}-doc += "\
-> +    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/*.rst \
-> +    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/docs \
-> +"
-> +
-> +FILES_${PN}-test +=
-> "${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/tests"
-> --
-> 1.7.9.5
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Philip
 
+
+-------- Forwarded Message --------
+Subject: [oe] Public OE TSC meeting
+Date: Sun, 09 Nov 2014 21:08:22 +0000
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+Reply-To: openembedded-devel@lists.openembedded.org
+Organization: Intel Corporation
+To: openembedded-core@lists.openembedded.org,
+openembedded-devel@lists.openembedded.org
+
+Hi all,
+
+There will be a public OpenEmbedded TSC/workgroup IRC meeting this coming
+Tuesday (11th November). If you're interested in discussing long-term
+technical efforts around the OpenEmbedded project please join us on
+irc.freenode.net in channel #oe at 17:00 GMT (9am PST, 11am CST, 12 EST,
+18:00
+CET).
+
+Possible topics for discussion (based on the last meeting and recent
+mailing
+list topics):
+- Upcoming development cycle
+- Website and other infrastructure issues
+
+New topics for discussion are welcome.
+
+Cheers,
+Paul
+
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
+
+
+
+--------------000703040905080601040305
+Content-Type: text/calendar;
+ name="event.ics"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="event.ics"
+
+BEGIN:VCALENDAR
+
+VERSION:2.0
+
+METHOD:PUBLISH
+
+BEGIN:VEVENT
+
+DTSTART:20141111T170000Z
+
+DTEND:20141111T180000Z
+
+TRANSP:TRANSPARENT
+
+SUMMARY:Public OE TSC meeting
+
+LOCATION:#oe on Freenode IRC
+
+URL;VALUE=URI:http://www.timeanddate.com/worldclock/meetingdetails.html?is
+
+ o=20141111T1700&p1=136&p2=64&p3=137&p4=195&p5=179
+
+UID:http://www.timeanddate.com/worldclock/meetingdetails.html?iso=20141111
+
+ T1700&p1=136&p2=64&p3=137&p4=195&p5=179
+
+DTSTAMP:20141111T170000Z
+
+END:VEVENT
+
+END:VCALENDAR
+
+
+
+--------------000703040905080601040305
+Content-Type: text/plain; charset=UTF-8;
+ name="Attached Message Part"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="Attached Message Part"
+
+-- 
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--------------000703040905080601040305--
