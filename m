@@ -1,39 +1,28 @@
-Return-Path: <derek@minotaurinc.com>
-X-Greylist: delayed 568 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 10 Nov 2014 23:29:03 UTC
-Received: from relay.mailchannels.net (tkt-001-i373.relay.mailchannels.net
-	[174.136.5.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E6F2C65D3A
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 460F571144
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2014 23:29:02 +0000 (UTC)
-X-Sender-Id: arvixe|x-authuser|derek@minotaurinc.com
-Received: from octopus.arvixe.com (ip-10-33-12-218.us-west-2.compute.internal
-	[10.33.12.218])
-	by relay.mailchannels.net (Postfix) with ESMTPA id E599E60AF8
+	Tue, 11 Nov 2014 02:19:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAB2JBbs022818
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Nov 2014 23:19:33 +0000 (UTC)
-X-Sender-Id: arvixe|x-authuser|derek@minotaurinc.com
-Received: from octopus.arvixe.com (octopus.arvixe.com [10.245.44.250])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA)
-	by 0.0.0.0:2500 (trex/5.3.3); Mon, 10 Nov 2014 23:19:34 GMT
-X-MC-Relay: Neutral
-X-MailChannels-SenderId: arvixe|x-authuser|derek@minotaurinc.com
-X-MailChannels-Auth-Id: arvixe
-X-MC-Loop-Signature: 1415661574178:2630051026
-X-MC-Ingress-Time: 1415661574178
-Received: from c-69-143-221-149.hsd1.md.comcast.net ([69.143.221.149]:54838
-	helo=lnx-dereks-home.vaddio.com)
-	by octopus.arvixe.com with esmtpsa (UNKNOWN:DHE-RSA-AES256-SHA:256)
-	(Exim 4.82) (envelope-from <derek@minotaurinc.com>)
-	id 1XnyFA-0004fb-Gd; Mon, 10 Nov 2014 15:19:32 -0800
-From: Derek Straka <derek@minotaurinc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Nov 2014 18:19:08 -0500
-Message-Id: <1415661548-16364-1-git-send-email-derek@minotaurinc.com>
-X-Mailer: git-send-email 1.7.9.5
-X-AuthUser: derek@minotaurinc.com
-Cc: Derek Straka <derek@minotaurinc.com>
-Subject: [meta-python][PATCH] python-flufl-enum: add recipe for 4.0.1
+	Mon, 10 Nov 2014 18:19:11 -0800 (PST)
+Received: from [128.224.162.204] (128.224.162.204) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
+	Mon, 10 Nov 2014 18:19:11 -0800
+Message-ID: <5461721A.6050307@windriver.com>
+Date: Tue, 11 Nov 2014 10:19:06 +0800
+From: Chong Lu <Chong.Lu@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:24.0) Gecko/20100101 Thunderbird/24.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1414664583-26791-1-git-send-email-Chong.Lu@windriver.com>
+In-Reply-To: <1414664583-26791-1-git-send-email-Chong.Lu@windriver.com>
+X-Originating-IP: [128.224.162.204]
+Subject: Re: [meta-oe][PATCH 1/2] samba: add winbind.service to winbind package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,54 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Nov 2014 23:29:05 -0000
+X-List-Received-Date: Tue, 11 Nov 2014 02:19:11 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@minotaurinc.com>
----
- .../python/python-flufl-enum_4.0.1.bb              |   33 ++++++++++++++++++++
- 1 file changed, 33 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
+ping
 
-diff --git a/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-new file mode 100644
-index 0000000..a7376db
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
-@@ -0,0 +1,33 @@
-+SUMMARY  = "A Python enumeration package."
-+DESCRIPTION = "The flufl.enum library is a Python enumeration package. Its goal is to provide simple, \
-+specific, concise semantics in an easy to read and write syntax. flufl.enum has just enough of the \
-+features needed to make enumerations useful, but without a lot of extra baggage to weigh them down. "
-+HOMEPAGE = "https://pypi.python.org/pypi/flufl.enum"
-+SECTION = "devel/python"
-+
-+LICENSE = "LGPLv3"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
-+
-+SRCNAME = "flufl.enum"
-+
-+SRC_URI = " \
-+    http://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
-+SRC_URI[sha256sum] = "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
-+
-+inherit setuptools
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+PACKAGES =+ "\  
-+    ${PN}-test \
-+"
-+
-+FILES_${PN}-doc += "\
-+    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/*.rst \
-+    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/docs \
-+"
-+
-+FILES_${PN}-test += "${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/tests"
--- 
-1.7.9.5
+//Chong
+
+On 10/30/2014 06:23 PM, Chong Lu wrote:
+> This solves the following warning:
+>
+> lib32-samba-3.6.24: lib32-samba: Files/directories were installed but not shipped
+>    /lib/systemd/system/winbind.service [installed-vs-shipped]
+>
+> Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> ---
+>   recipes-connectivity/samba/samba-basic.inc | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-connectivity/samba/samba-basic.inc b/meta-oe/recipes-connectivity/samba/samba-basic.inc
+> index d0fa8e6..e9f891f 100644
+> --- a/meta-oe/recipes-connectivity/samba/samba-basic.inc
+> +++ b/meta-oe/recipes-connectivity/samba/samba-basic.inc
+> @@ -40,6 +40,7 @@ FILES_winbind = "${sbindir}/winbindd \
+>                    ${bindir}/wbinfo \
+>                    ${bindir}/ntlm_auth \
+>                    ${sysconfdir}/init.d/winbind \
+> +                 ${systemd_unitdir}/system/winbind.service \
+>   "
+>   FILES_libwinbind = "${libdir}/idmap/*.so \
+>                       ${libdir}/pdb \
 
 
