@@ -1,27 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 962D465CED
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id C85C065CED
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2014 13:15:58 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga103.fm.intel.com with ESMTP; 11 Nov 2014 05:09:28 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,361,1413270000"; d="scan'208";a="620547025"
-Received: from tmediriw-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.110])
-	by fmsmga001.fm.intel.com with ESMTP; 11 Nov 2014 05:15:29 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Date: Tue, 11 Nov 2014 13:15:28 +0000
-Message-ID: <6978098.8Et6JqyzPH@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.2 (Linux/3.16.7-200.fc20.x86_64; KDE/4.14.2; x86_64; ; )
-In-Reply-To: <68ac9dc860f1f0a75c5c1dfcd8d199403c845b2f.1415708064.git.hongxu.jia@windriver.com>
-References: <cover.1415708064.git.hongxu.jia@windriver.com>
-	<68ac9dc860f1f0a75c5c1dfcd8d199403c845b2f.1415708064.git.hongxu.jia@windriver.com>
+	Tue, 11 Nov 2014 15:06:30 +0000 (UTC)
+Received: by mail-la0-f53.google.com with SMTP id mc6so9823487lab.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Nov 2014 07:06:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=XMfwsq6qK8Mtk9UIO+XPEmpBjDxp6ZE6hvfSnKMB8lw=;
+	b=k7EfNjpREgOqAelsupbTKwvqKfjelWz0PioGvVrHWLyt5ar5SfelknM3QyYiw2SBnp
+	M/colnAHpVeVupqJxCfQQWJU3I2p8PCrUMa2gl9Wi2fXPW0o8kqBByC7elfjW4tPnhAq
+	hP+PcCgnTAa7kkIrW1tFi289ChfZ2OXq0lWkO8RNwMm/TywyE2wZoxNkyohy94uFkgf7
+	iOKQDSJLK2bCoo9dgDLby/bYpRPT7tUkVKRQ1MOLCTrJfOh2H+yNmSoGQzW7mqcPkKf9
+	sJRZ9q8GKl2jcb/wufvm6reet21nUNVe+1uwWOp9JuickNBkecg6/4LlVkupn6KSJCJQ
+	Brjg==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/1] libbonobo.inc: add libbonobo-bin package
+X-Received: by 10.152.204.230 with SMTP id lb6mr24049003lac.35.1415718390239; 
+	Tue, 11 Nov 2014 07:06:30 -0800 (PST)
+Received: by 10.25.79.208 with HTTP; Tue, 11 Nov 2014 07:06:30 -0800 (PST)
+In-Reply-To: <1415661548-16364-1-git-send-email-derek@minotaurinc.com>
+References: <1415661548-16364-1-git-send-email-derek@minotaurinc.com>
+Date: Tue, 11 Nov 2014 07:06:30 -0800
+Message-ID: <CANx9H-AJfk=0WyR4hzHdAJQ+2u55h3WkBHSX5auPs7hD-M2msw@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Derek Straka <derek@minotaurinc.com>
+Subject: Re: [meta-python][PATCH] python-flufl-enum: add recipe for 4.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,46 +44,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2014 13:16:04 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 11 Nov 2014 15:06:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Hongxu,
+Acked-by: Tim Orling <TicoTimo@gmail.com>
 
-On Tuesday 11 November 2014 20:16:10 Hongxu Jia wrote:
-> The previous libbonobo package contains perl scripts, while installing
-> libbonobo, package management detected perl required, but it actually
-> not needed as lib. So add libbonobo-bin package to contain these scripts.
-> It refers debian:
-> https://packages.debian.org/sid/libbonobo2-bin
-> 
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+On Mon, Nov 10, 2014 at 3:19 PM, Derek Straka <derek@minotaurinc.com> wrote:
+
+> Signed-off-by: Derek Straka <derek@minotaurinc.com>
 > ---
->  meta-gnome/recipes-gnome/bonobo/libbonobo.inc | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc index 8b6007e..57e6986
-> 100644
-> --- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-> +++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-> @@ -9,6 +9,9 @@ inherit gnomebase gtk-doc
-> 
->  ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
-> 
-> +PACKAGES =+ "${PN}-bin"
-> +RDEPENDS_${PN}-bin = "${PN} perl"
-> +FILES_${PN}-bin = "${bindir}/* ${sbindir}/*"
-
-We do have a lib-package class to handle this, although it doesn't do much we 
-should probably use it here for consistency - then you can drop the PACKAGES 
-and FILES lines above.
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+>  .../python/python-flufl-enum_4.0.1.bb              |   33
+> ++++++++++++++++++++
+>  1 file changed, 33 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-flufl-enum_4.0.1.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python-flufl-enum_4.0.1.bb b/meta-python/recipes-devtools/python/
+> python-flufl-enum_4.0.1.bb
+> new file mode 100644
+> index 0000000..a7376db
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-flufl-enum_4.0.1.bb
+> @@ -0,0 +1,33 @@
+> +SUMMARY  = "A Python enumeration package."
+> +DESCRIPTION = "The flufl.enum library is a Python enumeration package.
+> Its goal is to provide simple, \
+> +specific, concise semantics in an easy to read and write syntax.
+> flufl.enum has just enough of the \
+> +features needed to make enumerations useful, but without a lot of extra
+> baggage to weigh them down. "
+> +HOMEPAGE = "https://pypi.python.org/pypi/flufl.enum"
+> +SECTION = "devel/python"
+> +
+> +LICENSE = "LGPLv3"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1fa25baed15d3be23c902636379438e8"
+> +
+> +SRCNAME = "flufl.enum"
+> +
+> +SRC_URI = " \
+> +
+> http://pypi.python.org/packages/source/f/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
+> \
+> +"
+> +
+> +SRC_URI[md5sum] = "b3ad23761a78232bc78499ced7cb85d9"
+> +SRC_URI[sha256sum] =
+> "4af7e7cf2dcc7517251570c7ef9ad194e30ee4b6f860eba500c03954ae95f9d8"
+> +
+> +inherit setuptools
+> +
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +PACKAGES =+ "\
+> +    ${PN}-test \
+> +"
+> +
+> +FILES_${PN}-doc += "\
+> +    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/*.rst \
+> +    ${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/docs \
+> +"
+> +
+> +FILES_${PN}-test +=
+> "${libdir}/${PYTHON_DIR}/site-packages/flufl/enum/tests"
+> --
+> 1.7.9.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
