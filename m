@@ -1,35 +1,27 @@
-Return-Path: <ubik3000@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 7579F65CED
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EAAC65C7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2014 20:31:00 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id bs8so2848012wib.5
+	Wed, 12 Nov 2014 01:57:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAC1vf5D011402
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Nov 2014 12:31:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=NNfJQqo3t1yq5uECYkHHF8rE9yVPZleFePXZAHFjjVg=;
-	b=g0cnA5WT9fzDtZvvFfsvltEDlLJRT8j/WZXxxMt/fU1MQi9coyxrKvynEORHiAwQqe
-	rMTS+kU9O2gRCzbTl7fslnqyjLCIRxmarLwVWRswWIX3B1Lzd+SRkfyMNfVdQDxvIkzk
-	Pcw0rXj1to5BIUvxvNjg11hiMYhG8a0chsLU6LS6chX5n7Iy7hDodlAOCVfLwANaufCQ
-	nyHTVOGtP2KVEKlzms7EIwawDpJqtJMTWypUqaD2rLQ9XJFo22aeTQOUyh6nYhE8xEBQ
-	Dx02e1lyB/Ufge95TSlTxZ87glHGca7Et+oR8A0qBeS4f42CUS5oWLkRCvxDO5jZVoZ6
-	Fe2Q==
-X-Received: by 10.180.96.106 with SMTP id dr10mr44152624wib.58.1415737861145; 
-	Tue, 11 Nov 2014 12:31:01 -0800 (PST)
-Received: from localhost.localdomain ([188.241.77.101])
-	by mx.google.com with ESMTPSA id wm6sm28711524wjb.5.2014.11.11.12.30.59
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 11 Nov 2014 12:31:00 -0800 (PST)
-From: Cristian Iorga <ubik3000@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Nov 2014 22:30:32 +0200
-Message-Id: <1415737832-12176-1-git-send-email-ubik3000@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Cc: Cristian Iorga <ubik3000@gmail.com>
-Subject: [PATCH] mpd: upgrade to 0.19.3
+	Tue, 11 Nov 2014 17:57:41 -0800 (PST)
+Received: from [128.224.163.178] (128.224.163.178) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 11 Nov 2014 17:57:41 -0800
+Message-ID: <5462BE93.1010001@windriver.com>
+Date: Wed, 12 Nov 2014 09:57:39 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1415351679-6838-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1415351679-6838-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH] ebtables: make it be able to work on 64bit kernel with 32 bit userspace
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Nov 2014 20:31:07 -0000
+X-List-Received-Date: Wed, 12 Nov 2014 01:57:42 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Bug fixes.
+Please drop this, I have a refine patch for this issue.
 
-Signed-off-by: Cristian Iorga <ubik3000@gmail.com>
----
- .../recipes-multimedia/musicpd/{mpd_0.19.1.bb => mpd_0.19.3.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.19.1.bb => mpd_0.19.3.bb} (94%)
+-Roy
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
-similarity index 94%
-rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
-index 04eed0a..23e81a6 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
-@@ -9,8 +9,8 @@ SRC_URI = " \
-     http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
-     file://mpd.conf.in \
- "
--SRC_URI[md5sum] = "d235f6e53e5442b6926c49946a303f8d"
--SRC_URI[sha256sum] = "8b3afcd440181c9bd18b229b5974e529d59648344dd371370d6f7d62ec2847c5"
-+SRC_URI[md5sum] = "f539bc9e60367d5084ed14b078140ef7"
-+SRC_URI[sha256sum] = "fee3f3c59b5806767f23f7962621be7a62d4fcb852fff6b9ed6bbb5598a556d3"
- 
- inherit autotools useradd systemd
- 
+On 2014年11月07日 17:14, rongqing.li@windriver.com wrote:
+> From: "Roy.Li" <rongqing.li@windriver.com>
+>
+>
+> KERNEL_64_USERSPACE_32 should be enabled for 64bit kernel with 32 bit userspace,
+> otherwise, the date struct(struct ebt_replace, struct ebt_entry_match) have
+> different alignment size, will make it unable to work.
+>
+> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> ---
+>   meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb | 10 ++++++++++
+>   1 file changed, 10 insertions(+)
+>
+> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> index 32cfc75..9b04d1b 100644
+> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> @@ -27,6 +27,16 @@ S = "${WORKDIR}/ebtables-v${PV}"
+>
+>   inherit update-rc.d systemd
+>
+> +python __anonymous () {
+> +    import re
+> +
+> +    multilib=d.getVar('MLPREFIX', True) or ""
+> +    searchstr = "lib.?32"
+> +    reg = re.compile(searchstr)
+> +    if reg.search(multilib):
+> +        d.appendVar('CFLAGS' ,' -DKERNEL_64_USERSPACE_32 -DEBT_MIN_ALIGN=8')
+> +}
+> +
+>   EXTRA_OEMAKE = " \
+>           BINDIR=${base_sbindir} \
+>           MANDIR=${mandir} \
+>
+
 -- 
-2.1.0
-
+Best Reagrds,
+Roy | RongQing Li
 
