@@ -1,39 +1,39 @@
-Return-Path: <alejandro.delcastillo@ni.com>
-X-Greylist: delayed 2248 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 12 Nov 2014 18:53:14 UTC
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mail.openembedded.org (Postfix) with ESMTP id D8E4F713A5
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 18F2D62252
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Nov 2014 18:53:14 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod3.natinst.com (8.14.5/8.14.5) with ESMTP id
-	sACIFks0027732 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Nov 2014 12:15:46 -0600
-Received: from us-aus-mail3.amer.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
-	with ESMTP id 2014111212154611-992790 ;
-	Wed, 12 Nov 2014 12:15:46 -0600 
-To: openembedded-devel@lists.openembedded.org
+	Wed, 12 Nov 2014 22:04:34 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id ft15so12949470pdb.25
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Nov 2014 14:04:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=mYkN3bJ4FP6DhEEOSmj2EqZGkpkgEN3PB89bP1S+XBE=;
+	b=0bLLNKXm5l+6ZrV0iiGlKXBVUAvl962j1eIjTOfnAPvlDZe9ls5+8FfEPeobesrvh9
+	5e0V3uyLXpaO5C5Qga99lFyIfIXiiz6E+Apd201uJzfmlqyGpK0xMsBHcYPE/muNDc0j
+	ZSLOLXnNwoXErbkkQOX8lyOMtSNjhF9Zl9Vj4XUP4n56FVRYhYXYxUE/qK4lLY/Itidp
+	EkFhwkhph4OHFRMp4uwJB93+pxv3cdWtBXBM2sFlZ2h5RZ9iybErXq23RDU3/5FX4/j/
+	Zhszi1PoFwIzknvoGinef9i25sO7zi9TGWZQBB2vQ6gDGDhwjD3P1Ky5ZW0IG5fynbR5
+	suNw==
+X-Received: by 10.66.241.239 with SMTP id wl15mr8563116pac.15.1415829875026;
+	Wed, 12 Nov 2014 14:04:35 -0800 (PST)
+Received: from ?IPv6:2601:c:9380:601:5d34:bd2e:5ccb:3cce?
+	([2601:c:9380:601:5d34:bd2e:5ccb:3cce])
+	by mx.google.com with ESMTPSA id
+	ub7sm23035190pbc.30.2014.11.12.14.04.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 12 Nov 2014 14:04:33 -0800 (PST)
+Message-ID: <5463D96F.1000908@gmail.com>
+Date: Wed, 12 Nov 2014 14:04:31 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
 MIME-Version: 1.0
-X-KeepSent: 81A9A14C:EC58A864-86257D8E:00636115;
-	type=4; flags=0; name=$KeepSent
-X-Mailer: Lotus Notes Release 8.5.3FP3 Septem 15, 2011
-From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-Message-ID: <OF81A9A14C.EC58A864-ON86257D8E.00636115-86257D8E.0064525F@ni.com>
-Date: Wed, 12 Nov 2014 12:15:46 -0600
-X-MIMETrack: Serialize by Router on US-AUS-MAIL3/AUS/M/NIC(Release
-	8.5.3FP6|November 21, 2013) at 11/12/2014 12:15:46 PM,
-	Serialize complete at 11/12/2014 12:15:46 PM,
-	Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 11/12/2014 12:15:46 PM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 11/12/2014 12:15:46 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.13.68, 1.0.28,
-	0.0.0000
-	definitions=2014-11-12_08:2014-11-11, 2014-11-12,
-	1970-01-01 signatures=0
-Subject: Opkg files at /var/lib/opkg/lists
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: wireshark
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,27 +47,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Nov 2014 18:53:17 -0000
-Content-Type: text/plain; charset="US-ASCII"
+X-List-Received-Date: Wed, 12 Nov 2014 22:04:42 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 Hello,
 
-I noticed that the OE build process is leaving files at 
-/var/lib/opkg/lists (~1.5 MB on my system), which I believe are the feed 
-content used to build the image. The target opkg.conf file configure 
-lists_dir to be at /var/lib/opkg (instead of the default 
-/var/lib/opkg/lists), so the feed content under /var/lib/opkg/lists is not 
-used at all. 
+I am working in wireshark to 1.12.2 update ( trying to avoid dup work). 
+I contains several security fixes.
 
-Does anyone know if there Is a reason why the files are left over or is 
-this a bug? Shouldn't the image creation process remove the whole 
-directory if it's not going to be used? 
+Hope to have it posted today.
 
-BTW, Dylan doesn't have this problem, but Daisy and Dizzy do (not sure 
-about Dora).
-
-cheers,
-
--Alejandro
-
+- Armin
 
