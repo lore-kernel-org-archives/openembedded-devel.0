@@ -1,36 +1,34 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D7DD60167
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C2D760167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 09:11:02 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 13 Nov 2014 01:11:02 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,375,1413270000"; d="scan'208";a="621693010"
-Received: from irsmsx101.ger.corp.intel.com ([163.33.3.153])
-	by fmsmga001.fm.intel.com with ESMTP; 13 Nov 2014 01:10:26 -0800
-Received: from irsmsx108.ger.corp.intel.com (163.33.3.3) by
-	IRSMSX101.ger.corp.intel.com (163.33.3.153) with Microsoft SMTP Server
-	(TLS) id 14.3.195.1; Thu, 13 Nov 2014 09:09:00 +0000
-Received: from irsmsx105.ger.corp.intel.com ([169.254.7.101]) by
-	IRSMSX108.ger.corp.intel.com ([169.254.11.82]) with mapi id
-	14.03.0195.001; Thu, 13 Nov 2014 09:09:00 +0000
-From: "Iorga, Cristian" <cristian.iorga@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH 0/2] meta-java fixes
-Thread-Index: AQHP5IHuLvpwKaHv4kyIYoSZtKwyJ5wv64KAgC6N40A=
-Date: Thu, 13 Nov 2014 09:08:59 +0000
-Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F3980E9@IRSMSX105.ger.corp.intel.com>
-References: <1412942429-14728-1-git-send-email-cristian.iorga@intel.com>
-	<20141014191111.GC12024@mail.itconsulting-heinold.de>
-In-Reply-To: <20141014191111.GC12024@mail.itconsulting-heinold.de>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.182]
-MIME-Version: 1.0
-Subject: Re: [PATCH 0/2] meta-java fixes
+	Thu, 13 Nov 2014 11:02:53 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1XosAu-00062b-90 for openembedded-devel@lists.openembedded.org;
+	Thu, 13 Nov 2014 12:02:52 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2014 12:02:52 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2014 12:02:52 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 13 Nov 2014 12:02:35 +0100
+Message-ID: <m4234b$gsg$1@ger.gmane.org>
+References: <cover.1415758217.git.hongxu.jia@windriver.com>
+	<d1a6e0fd2dabf3e291fe2b1c5e94f429fe390184.1415758217.git.hongxu.jia@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+In-Reply-To: <d1a6e0fd2dabf3e291fe2b1c5e94f429fe390184.1415758217.git.hongxu.jia@windriver.com>
+Subject: Re: [PATCH 1/1] libbonobo.inc: add libbonobo-bin package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,57 +42,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 09:11:14 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Nov 2014 11:02:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Henning,
-Will these patches get integrated in master?
-Also, I am not familiar with the release cycle of meta-java, is there some =
-place where I can get this info from?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Regards,
-Cristian Iorga
-Yocto Project
-Intel Corporation
+Hongxu Jia schreef op 12-11-14 03:13:
+> The previous libbonobo package contains perl scripts, while installing 
+> libbonobo, package management detected perl required, but it actually not
+> needed as lib. So add libbonobo-bin package to contain these scripts. It
+> refers debian: https://packages.debian.org/sid/libbonobo2-bin
+> 
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com> --- 
+> meta-gnome/recipes-gnome/bonobo/libbonobo.inc | 3 ++- 1 file changed, 2
+> insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc index 8b6007e..e0f6168
+> 100644 --- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc +++
+> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc @@ -5,10 +5,11 @@
+> LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f
+> \ SECTION = "x11/gnome/libs" DEPENDS = "glib-2.0 orbit2 intltool-native
+> libxml2 dbus dbus-glib"
+> 
+> -inherit gnomebase gtk-doc +inherit gnomebase gtk-doc lib_package
+> 
+> ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
+> 
+> +RDEPENDS_${PN}-bin = "${PN} perl" FILES_${PN} +=
+> "${libdir}/orbit-2.0/*.so ${libdir}/bonobo/monikers/*.so" FILES_${PN}-dbg
+> += "${libdir}/bonobo/monikers/.debug \ 
+> ${libdir}/bonobo-2.0/samples/.debug ${libdir}/orbit-2.0/.debug"
+> 
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Henning Heinold
-Sent: Tuesday, October 14, 2014 10:11 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [PATCH 0/2] meta-java fixes
+This breaks the upgrade path
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-On Fri, Oct 10, 2014 at 03:00:27PM +0300, Cristian Iorga wrote:
-> meta-java build time fixes with the pre 1.7 Yocto Project release.
->=20
-> Cristian Iorga (2):
->   openjdk: add pkgconfig support
->   ecj: fix unpackpost task
->=20
->  recipes-core/ecj/libecj-bootstrap.inc   | 2 +-
->  recipes-core/openjdk/openjdk-common.inc | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+iD8DBQFUZI/LMkyGM64RGpERAtVEAJ0XmKfZNy6DSxfpmN1DLPGrSf381ACgmPOz
+D6JMY11ejawTrkxO3ZcoBOw=
+=xLd+
+-----END PGP SIGNATURE-----
 
-Hi,
-
-thanks for the patches I have applied them for the dora branch, master is s=
-till building.
-
-Bye Henning
---=20
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
