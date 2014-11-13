@@ -1,35 +1,40 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
-	[209.85.220.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 4ECD260167
+Return-Path: <eric@eukrea.com>
+X-Greylist: delayed 12603 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 13 Nov 2014 04:18:14 UTC
+Received: from mo69.mail-out.ovh.net (mo69.mail-out.ovh.net [178.32.228.69])
+	by mail.openembedded.org (Postfix) with ESMTP id AAED265C91
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 02:42:46 +0000 (UTC)
-Received: by mail-pa0-f41.google.com with SMTP id et14so3124936pad.14
+	Thu, 13 Nov 2014 04:18:14 +0000 (UTC)
+Received: from mail409.ha.ovh.net (b9.ovh.net [213.186.33.59])
+	by mo69.mail-out.ovh.net (Postfix) with SMTP id 4A0DAFFC272
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Nov 2014 18:42:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=jiBke6HFD4d5WCRZpQYEJzLV/1kBVektTj3ZdN76QYY=;
-	b=IQWOMOThmCwG+AaQgEBqPCx53Dp3bymwRV6+46PbRnnUfdY70SAIBcVv7Qg9APRArH
-	u5k0lMnsunYsXiAQcfEi+I5VUCpx8m1CcB2Wl/kAvl35yBWtH4wi/mthBD6aNCO9uIv/
-	wESB0AdF7sGqFQ+r+6OSt4lvysmFndbNfxEN77OR9HAAD0/AB+7pUzgCydbdC+krgD5s
-	Zhhh8WNaN3OWzyq3hqRyMNNpdsVYdP4AJt3Qn/JchrCb9KG4E2DMmBOO4TA2eZOgQiP3
-	6QmZ6oqXnsXVXRwY2X0avB1bJ9sJkFzIYShikYc68ezSRAKNpTi+X5Nfk5heRjfG69z8
-	qZAw==
-X-Received: by 10.67.15.174 with SMTP id fp14mr52622301pad.66.1415846567161;
-	Wed, 12 Nov 2014 18:42:47 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id u8sm8533806pdr.10.2014.11.12.18.42.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 12 Nov 2014 18:42:45 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Nov 2014 18:42:42 -0800
-Message-Id: <1415846562-9776-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][master][dizzy][PATCH] wireshark: update to 1.12.2
+	Thu, 13 Nov 2014 01:39:39 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Nov 2014 02:39:38 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO e6520eb.localdomain)
+	(eric%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 13 Nov 2014 02:39:36 +0200
+Date: Thu, 13 Nov 2014 01:39:33 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+Message-ID: <20141113013933.6820d2d9@e6520eb.localdomain>
+In-Reply-To: <OF81A9A14C.EC58A864-ON86257D8E.00636115-86257D8E.0064525F@ni.com>
+References: <OF81A9A14C.EC58A864-ON86257D8E.00636115-86257D8E.0064525F@ni.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.24; x86_64-redhat-linux-gnu)
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 18286866288414993875
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: -100
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeejhedrieelucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeejhedrieelucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: Opkg files at /var/lib/opkg/lists
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,50 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 02:42:47 -0000
+X-List-Received-Date: Thu, 13 Nov 2014 04:18:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The following vulnerabilities have been fixed.
-* wnpa-sec-2014-20
-  SigComp UDVM buffer overflow. (Bug 10662)
-  CVE-2014-8710
-* wnpa-sec-2014-21
-  AMQP crash. (Bug 10582)
-  CVE-2014-8711
-* wnpa-sec-2014-22
-  NCP crashes. (Bug 10552, Bug 10628)
-  CVE-2014-8712, CVE-2014-8713
-* wnpa-sec-2014-23
-  TN5250 infinite loops. (Bug 10596)
-  CVE-2014-8714
+Hi Aljandro,
 
-Reference:
-https://www.wireshark.org/docs/relnotes/wireshark-1.12.2.html
+copying oe-core's ML as the problem seems related to oe-core and
+not to meta-oe.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../wireshark/{wireshark_1.12.1.bb => wireshark_1.12.2.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_1.12.1.bb => wireshark_1.12.2.bb} (92%)
+Le Wed, 12 Nov 2014 12:15:46 -0600,
+Alejandro del Castillo <alejandro.delcastillo@ni.com> a =C3=A9crit :
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
-similarity index 92%
-rename from meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
-index e198863..5740730 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
-@@ -13,8 +13,8 @@ SRC_URI = " \
- 
- PE = "1"
- 
--SRC_URI[md5sum] = "14b3e3d8979d1eb27ff085bb5f400e67"
--SRC_URI[sha256sum]= "82b26bd416ec15903b27785e35a622687008a743342054e96eaaeaa249be584b"
-+SRC_URI[md5sum] = "2f2a16be8b087227cb17733c72288ae4"
-+SRC_URI[sha256sum] = "30ae16b408a592642ce3a84dd9877d24df7a6dae8da4847486965190039df292"
- 
- inherit autotools pkgconfig
- 
--- 
-1.9.1
+> Hello,
+>=20
+> I noticed that the OE build process is leaving files at=20
+> /var/lib/opkg/lists (~1.5 MB on my system), which I believe are the feed=
+=20
+> content used to build the image. The target opkg.conf file configure=20
+> lists_dir to be at /var/lib/opkg (instead of the default=20
+> /var/lib/opkg/lists), so the feed content under /var/lib/opkg/lists is no=
+t=20
+> used at all.=20
+>=20
+> Does anyone know if there Is a reason why the files are left over or is=20
+> this a bug? Shouldn't the image creation process remove the whole=20
+> directory if it's not going to be used?=20
+>=20
+> BTW, Dylan doesn't have this problem, but Daisy and Dizzy do (not sure=20
+> about Dora).
+>=20
+I was on a similar subject today and this seems broken since :
+d950ef40a3eae4b54cc62828e66d84a62d78c447
 
+BTW it seems that FEED_DEPLOYDIR_BASE_URI was replaced by
+PACKAGE_FEED_URIS in 9b8811045546ad67b4695d980f09636d5506e50c but the
+document is still pointing to the previous one :
+http://www.yoctoproject.org/docs/current/mega-manual/mega-manual.html#runti=
+me-package-management-target-ipk
+If the replacement was not intended then there is a problem as
+FEED_DEPLOYDIR_BASE_URI doesn't seems to work anymore (tested with
+dizzy and package_ipk).
+
+Best regards
+Eric
 
