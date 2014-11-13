@@ -1,28 +1,29 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 94E2B60167
+Return-Path: <cavallini.koan@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 9063A65DA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 11:42:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sADBg6ox027443
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 13 Nov 2014 11:45:12 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id z12so16679381wgg.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 03:42:06 -0800 (PST)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 13 Nov 2014 03:42:05 -0800
-Message-ID: <5464990A.5030400@windriver.com>
-Date: Thu, 13 Nov 2014 19:42:02 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
+	Thu, 13 Nov 2014 03:45:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=j8B3yNn4HBTMC+do9NOUTQ60wv8Xt7FIpeq0gJ7YPxA=;
+	b=I/Meq3GQhvxotRm1BoQpXfnaqNz/tfCQMDxsNDK8/IZwfHM+Pxliz+XVxm+NDAih+j
+	yLxrvF3u8RUpbfd16fJtoZx+MK0k+Pu/Q6LSMu0nUaPq3Egr62NZ3Fir0VTxdBb/jK/D
+	ogiVz7X1nxmOceB38dJxAB8/WyFts5bGJa+kC9cf53Icdhum8w6vMh+oPvHmoMFpYbjt
+	yUDUSxj6NrKZCngJbaS7C+Igvef3DcBGBdVj5Glnc2nXKAJLSEbAkF9JCr8S1wGlYfVy
+	aX5T10FBjsHZR4ADq2uTUTMv6wo6XJbCkTklRojTShbTXGLKvUeGdEy7crqKp9N9tsx+
+	/jTQ==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1415758217.git.hongxu.jia@windriver.com>	<d1a6e0fd2dabf3e291fe2b1c5e94f429fe390184.1415758217.git.hongxu.jia@windriver.com>
-	<m4234b$gsg$1@ger.gmane.org>
-In-Reply-To: <m4234b$gsg$1@ger.gmane.org>
-Subject: Re: [PATCH 1/1] libbonobo.inc: add libbonobo-bin package
+X-Received: by 10.194.77.142 with SMTP id s14mr3285932wjw.94.1415879113102;
+	Thu, 13 Nov 2014 03:45:13 -0800 (PST)
+Received: by 10.194.184.72 with HTTP; Thu, 13 Nov 2014 03:45:13 -0800 (PST)
+Date: Thu, 13 Nov 2014 12:45:13 +0100
+Message-ID: <CAFQ+Digyv4Ks8iQOdcPGOKJsRYW1woW0RsC0YXwzNi6YL+=fVg@mail.gmail.com>
+From: Marco Cavallini <cavallini.koan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-qt5][daisy][BUG]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,58 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 11:42:08 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Nov 2014 11:45:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 11/13/2014 07:02 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hongxu Jia schreef op 12-11-14 03:13:
->> The previous libbonobo package contains perl scripts, while installing
->> libbonobo, package management detected perl required, but it actually not
->> needed as lib. So add libbonobo-bin package to contain these scripts. It
->> refers debian: https://packages.debian.org/sid/libbonobo2-bin
->>
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com> ---
->> meta-gnome/recipes-gnome/bonobo/libbonobo.inc | 3 ++- 1 file changed, 2
->> insertions(+), 1 deletion(-)
->>
->> diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
->> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc index 8b6007e..e0f6168
->> 100644 --- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc +++
->> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc @@ -5,10 +5,11 @@
->> LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f
->> \ SECTION = "x11/gnome/libs" DEPENDS = "glib-2.0 orbit2 intltool-native
->> libxml2 dbus dbus-glib"
->>
->> -inherit gnomebase gtk-doc +inherit gnomebase gtk-doc lib_package
->>
->> ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
->>
->> +RDEPENDS_${PN}-bin = "${PN} perl" FILES_${PN} +=
->> "${libdir}/orbit-2.0/*.so ${libdir}/bonobo/monikers/*.so" FILES_${PN}-dbg
->> += "${libdir}/bonobo/monikers/.debug \
->> ${libdir}/bonobo-2.0/samples/.debug ${libdir}/orbit-2.0/.debug"
->>
-> This breaks the upgrade path
+Hello,
+I am using meta-qt5 dora.
+Everything looks ok except the multimedia extensions.
+I found a note about a bug in Qt5.2.1
 
-I am sorry I do not understand what you mean,
-do you mean running 'smart upgrade' failed?
+Bug info:
+console logs for any application trying to use audio features in qt5-multimedia:
+defaultServiceProvider::requestService(): no service found for -
+"org.qt-project.qt.mediaplayer"
+Player error: The QMediaPlayer object does not have a valid service
 
-The reason why split ${PN}-bin is it contain perl script.
+Link:
+https://bugs.archlinux.org/task/40068
 
-//Hongxu
+Description:
+It appears that libgstmediaplayer.so was accidently left out of the
+release for 5.2.1-3.
+his breaks any QT5 application that uses audio files.
+See https://bbs.archlinux.org/viewtopic.php?pid=1408020#p1408020
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->
-> iD8DBQFUZI/LMkyGM64RGpERAtVEAJ0XmKfZNy6DSxfpmN1DLPGrSf381ACgmPOz
-> D6JMY11ejawTrkxO3ZcoBOw=
-> =xLd+
-> -----END PGP SIGNATURE-----
->
+Anybody knows what is the required patch?
 
+TIA
+--
+Marco Cavallini
 
