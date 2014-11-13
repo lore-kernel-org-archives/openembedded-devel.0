@@ -1,37 +1,42 @@
-Return-Path: <stunpix@gmail.com>
-Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D69B60167
+Return-Path: <eric@eukrea.com>
+X-Greylist: delayed 8790 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 13 Nov 2014 22:45:37 UTC
+Received: from mo4.mail-out.ovh.net (7.mo4.mail-out.ovh.net [178.33.253.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D2F860167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 22:27:05 +0000 (UTC)
-Received: by mail-la0-f53.google.com with SMTP id mc6so14251702lab.12
+	Thu, 13 Nov 2014 22:45:37 +0000 (UTC)
+Received: from mail615.ha.ovh.net (b6.ovh.net [213.186.33.56])
+	by mo4.mail-out.ovh.net (Postfix) with SMTP id 361EB1000C66
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 14:27:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:content-type:content-transfer-encoding:subject
-	:message-id:date:to:mime-version;
-	bh=9u6V+881eM4sOMixPsPV/wN52jBeDFhQFh/sGY6um9U=;
-	b=uRnCq241k5y4nNwMyb1CXAgQCQ9CZS4TBga0CXIX07VN8vHdCaipT0rHkR3kehV9ql
-	3FJiQo4+CGSUbrHBPX3CMbvsYURi8I8vhrGDkTe9n01LnzJo0CMbDOEpvVSRXK9TC1CD
-	bkodJCkdYE25M5CpKmGCb+hUsqwgadQ12oxUvs6zQjGqahEJovmGNkGueWshD84GTlkK
-	urCpaellmDNm80SCFils3GAMw6c7JE65aJwRD+oJchEMD3URsmiMslslOu7ossE0HJ3C
-	3wgDG0i8wqMSz10Gioo+2qrlVR8p1vYwubMA4HKccPks0C14dCsT5suzVK3G46Tq52kt
-	bcYQ==
-X-Received: by 10.152.121.1 with SMTP id lg1mr4237787lab.28.1415917625487;
-	Thu, 13 Nov 2014 14:27:05 -0800 (PST)
-Received: from [192.168.88.252] ([5.248.146.219])
-	by mx.google.com with ESMTPSA id t6sm7790775lbb.23.2014.11.13.14.27.04
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 13 Nov 2014 14:27:04 -0800 (PST)
-Sender: Alexander Shashkevych <stunpix@gmail.com>
-From: Alexander Shashkevych <alex@stunpix.com>
-Message-Id: <3B9CABF3-66A1-4B2A-A01B-87ABFDCB797F@stunpix.com>
-Date: Fri, 14 Nov 2014 00:27:03 +0200
-To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Mac OS X Mail 8.0 \(1990.1\))
-X-Mailer: Apple Mail (2.1990.1)
-Subject: How to organize OE environment for intermediate builds
+	Thu, 13 Nov 2014 21:18:56 +0100 (CET)
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Nov 2014 22:18:56 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO e6520eb.localdomain)
+	(eric%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 13 Nov 2014 22:18:54 +0200
+Date: Thu, 13 Nov 2014 21:18:53 +0100
+From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
+To: Alejandro del Castillo <alejandro.delcastillo@ni.com>
+Message-ID: <20141113211853.6c8a6f6f@e6520eb.localdomain>
+In-Reply-To: <OF69DC7AA2.57980DB5-ON86257D8F.006E27D9-86257D8F.006ECC75@ni.com>
+References: <OF81A9A14C.EC58A864-ON86257D8E.00636115-86257D8E.0064525F@ni.com>
+	<20141113013933.6820d2d9@e6520eb.localdomain>
+	<OF69DC7AA2.57980DB5-ON86257D8F.006E27D9-86257D8F.006ECC75@ni.com>
+Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.24; x86_64-redhat-linux-gnu)
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 1309984542690291155
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-OVH-SPAMSTATE: OK
+X-OVH-SPAMSCORE: -100
+X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeejhedrjedvucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeejhedrjedvucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: Opkg files at /var/lib/opkg/lists
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,34 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 22:27:10 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 13 Nov 2014 22:45:45 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Hi Alejandro,
 
-I would like to ask you how do you organize your development =
-environments for OE?
+Le Thu, 13 Nov 2014 14:10:12 -0600,
+Alejandro del Castillo <alejandro.delcastillo@ni.com> a =C3=A9crit :
 
-Let me explain. =46rom my point of view OE build system is well suited =
-for builds of released code, but not for code that is still under =
-development with many intermediate builds. My case: I started a project =
-for Freescale platform and due to bsp headers/libs/cross-compiling it =
-can be built only within OE environment. I have already committed =
-initial code to my project's repo and have already written =
-layers&recipes to build project from git. That was not a problem and it =
-works. Then I added new changes to my project and stuck. Before I'll =
-commit them into git I need to build&test to be sure that everything is =
-OK, but to build changes with bitbake they should be committed first. =
-Mutual exclusive situation: can't commit without build and can't build =
-without commit.
+> I think you got it, the commit d950ef40a3eae4b54cc62828e66d84a62d78c447=20
+> removed:
+>=20
+>         rm -f ${IMAGE_ROOTFS}${OPKGLIBDIR}/opkg/lists/*
+>=20
+> step that I didn't see implemented on rootfs.py. I'll file a bug report=20
+> (not too familiar with rootfs.py to try to fix it myself).
+>=20
+please add me in cc. I expect to investigate more on
+FEED_DEPLOYDIR_BASE_URI problems I met next week and will try to also
+look at this
 
-How do you escape this? How to best organize OE environment for =
-intermediate builds without commits?
-
-PS: I hope you understand that endless commit'n'push of each little =
-change for just-to-test is extremely superfluous.
-
-Regards,
-Alexander=
+Thanks,
+Eric
 
