@@ -1,28 +1,35 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id ED26360167
+Return-Path: <cavallini.koan@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 7966560167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 15:22:06 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sADFM6eh000542
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 13 Nov 2014 16:06:32 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id r20so8797553wiv.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 07:22:07 -0800 (PST)
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Thu, 13 Nov 2014 07:22:06 -0800
-Message-ID: <5464CC9B.6090800@windriver.com>
-Date: Thu, 13 Nov 2014 23:22:03 +0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
+	Thu, 13 Nov 2014 08:06:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=5DFpmdmu0McRERZ/y6/FDjLLeE/fBwEJAfeyhGx+DZM=;
+	b=hQ6qu5NQ7Gm2LdvTYJuY2kSKsr2mfwFVajNmEMdHFqppowsWgNdJI2VyO59CVdAwUN
+	H8tQ+1fta+X5iNWN/yerd59B6wDTEYCwSX7KxlO+WRSalZJcjrbKq3lIYvo6r5Nvs7qp
+	gt937E5KG3Dm5yBEMIzK7TVrAKQ4UxCBVyuK6MfzuKmtSSHv9vKaG1HzJ/uZeSI/Q+s6
+	KicvOf50gspOdSeI3OavUrGj2rlNbX0wG7oNQ0LsIJcRWwEDk4x/y6rs1v4IBTVXrAsB
+	EVC7DvapV8+EhPvz6jwOWqzvaC+7EXiXzXTfFJEKB++FtfxHDA9Vx6PBHSXZfNV2UGZk
+	r1eg==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <cover.1415758217.git.hongxu.jia@windriver.com>	<d1a6e0fd2dabf3e291fe2b1c5e94f429fe390184.1415758217.git.hongxu.jia@windriver.com>
-	<m4234b$gsg$1@ger.gmane.org>
-In-Reply-To: <m4234b$gsg$1@ger.gmane.org>
-Subject: Re: [PATCH 1/1] libbonobo.inc: add libbonobo-bin package
+X-Received: by 10.180.93.37 with SMTP id cr5mr5191847wib.76.1415894792132;
+	Thu, 13 Nov 2014 08:06:32 -0800 (PST)
+Received: by 10.194.184.72 with HTTP; Thu, 13 Nov 2014 08:06:32 -0800 (PST)
+In-Reply-To: <CAF6djU_J9zY_7dPTSnyV4Sq+0+fxy8fhB6XJ3GCg1X79mQWMyQ@mail.gmail.com>
+References: <CAFQ+Digyv4Ks8iQOdcPGOKJsRYW1woW0RsC0YXwzNi6YL+=fVg@mail.gmail.com>
+	<CAFQ+DigkXjS0GLxi6Mk+C9VYUYsjx44QaiP4zrUR8xQ1oUM5CQ@mail.gmail.com>
+	<CAF6djU_J9zY_7dPTSnyV4Sq+0+fxy8fhB6XJ3GCg1X79mQWMyQ@mail.gmail.com>
+Date: Thu, 13 Nov 2014 17:06:32 +0100
+Message-ID: <CAFQ+DijQSvJm_V=EvDVhMF0yqQCPO2BZ-CRUCz--91wB=-LhNg@mail.gmail.com>
+From: Marco Cavallini <cavallini.koan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][daisy][BUG]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,18 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 15:22:10 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 Nov 2014 16:06:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 11/13/2014 07:02 PM, Koen Kooi wrote:
-> This breaks the upgrade path
+Hi =E5=BD=A5=E7=91=BE
+I needed to add the following line in
+meta-fsl-arm/qt5-layer/recipes-qt/qtmultimedia_%.bbappend
+ PACKAGECONFIG_append_mx6 =3D " gstreamer010"
 
-Would you please paste the failed log, and the test steps,
-with details that I could try to fix that.
+Thank you very much
 
-//Hongxu
-
-> -----BEGIN PGP SIGNATURE-----
-
+2014-11-13 14:41 GMT+01:00 =E5=BD=A5=E7=91=BE <coldnew.tw@gmail.com>:
+> As I remember, meta-qt5's QtMultimedia add a patch to make work on
+> gstreamer1.0 by default.
+>
+> You can disable it by setting the PACKAGECONFIG in your bbappend. (please
+> look through qtmultimedia_xxx.bb)
+>
+> If you use default setup, you need to install gstreamer1.0.
+>
+> 2014-11-13 19:47 GMT+08:00 Marco Cavallini <cavallini.koan@gmail.com>:
+>
+>> Sorry there's a typo
+>> I mean 'DAISY'
+>>
+>> 2014-11-13 12:45 GMT+01:00 Marco Cavallini <cavallini.koan@gmail.com>:
+>> > Hello,
+>> > I am using meta-qt5 dora.
+>> > Everything looks ok except the multimedia extensions.
+>> > I found a note about a bug in Qt5.2.1
+>> >
+>> > Bug info:
+>> > console logs for any application trying to use audio features in
+>> qt5-multimedia:
+>> > defaultServiceProvider::requestService(): no service found for -
+>> > "org.qt-project.qt.mediaplayer"
+>> > Player error: The QMediaPlayer object does not have a valid service
+>> >
+>> > Link:
+>> > https://bugs.archlinux.org/task/40068
+>> >
+>> > Description:
+>> > It appears that libgstmediaplayer.so was accidently left out of the
+>> > release for 5.2.1-3.
+>> > his breaks any QT5 application that uses audio files.
+>> > See https://bbs.archlinux.org/viewtopic.php?pid=3D1408020#p1408020
+>> >
+>> > Anybody knows what is the required patch?
+>> >
+>> > TIA
+>> > --
+>> > Marco Cavallini
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
