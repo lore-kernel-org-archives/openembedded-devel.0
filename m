@@ -1,42 +1,37 @@
-Return-Path: <alejandro.delcastillo@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C22C60167
+Return-Path: <stunpix@gmail.com>
+Received: from mail-la0-f53.google.com (mail-la0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D69B60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 20:10:22 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod2.natinst.com (8.14.5/8.14.5) with ESMTP id
-	sADK9lfY025068; Thu, 13 Nov 2014 14:10:15 -0600
-Received: from us-aus-mail3.amer.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
-	with ESMTP id 2014111314101240-1052764 ;
-	Thu, 13 Nov 2014 14:10:12 -0600 
-In-Reply-To: <20141113013933.6820d2d9@e6520eb.localdomain>
-References: <OF81A9A14C.EC58A864-ON86257D8E.00636115-86257D8E.0064525F@ni.com>
-	<20141113013933.6820d2d9@e6520eb.localdomain>
-To: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-MIME-Version: 1.0
-X-KeepSent: 69DC7AA2:57980DB5-86257D8F:006E27D9;
-	type=4; flags=0; name=$KeepSent
-X-Mailer: Lotus Notes Release 8.5.3FP3 Septem 15, 2011
-From: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-Message-ID: <OF69DC7AA2.57980DB5-ON86257D8F.006E27D9-86257D8F.006ECC75@ni.com>
-Date: Thu, 13 Nov 2014 14:10:12 -0600
-X-MIMETrack: Serialize by Router on US-AUS-MAIL3/AUS/M/NIC(Release
-	8.5.3FP6|November 21, 2013) at 11/13/2014 02:10:12 PM,
-	Serialize complete at 11/13/2014 02:10:12 PM,
-	Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 11/13/2014 02:10:12 PM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 11/13/2014 02:10:17 PM,
-	Serialize complete at 11/13/2014 02:10:17 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.13.68, 1.0.28,
-	0.0.0000
-	definitions=2014-11-13_08:2014-11-13, 2014-11-13,
-	1970-01-01 signatures=0
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: Opkg files at /var/lib/opkg/lists
+	Thu, 13 Nov 2014 22:27:05 +0000 (UTC)
+Received: by mail-la0-f53.google.com with SMTP id mc6so14251702lab.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Nov 2014 14:27:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:content-type:content-transfer-encoding:subject
+	:message-id:date:to:mime-version;
+	bh=9u6V+881eM4sOMixPsPV/wN52jBeDFhQFh/sGY6um9U=;
+	b=uRnCq241k5y4nNwMyb1CXAgQCQ9CZS4TBga0CXIX07VN8vHdCaipT0rHkR3kehV9ql
+	3FJiQo4+CGSUbrHBPX3CMbvsYURi8I8vhrGDkTe9n01LnzJo0CMbDOEpvVSRXK9TC1CD
+	bkodJCkdYE25M5CpKmGCb+hUsqwgadQ12oxUvs6zQjGqahEJovmGNkGueWshD84GTlkK
+	urCpaellmDNm80SCFils3GAMw6c7JE65aJwRD+oJchEMD3URsmiMslslOu7ossE0HJ3C
+	3wgDG0i8wqMSz10Gioo+2qrlVR8p1vYwubMA4HKccPks0C14dCsT5suzVK3G46Tq52kt
+	bcYQ==
+X-Received: by 10.152.121.1 with SMTP id lg1mr4237787lab.28.1415917625487;
+	Thu, 13 Nov 2014 14:27:05 -0800 (PST)
+Received: from [192.168.88.252] ([5.248.146.219])
+	by mx.google.com with ESMTPSA id t6sm7790775lbb.23.2014.11.13.14.27.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 13 Nov 2014 14:27:04 -0800 (PST)
+Sender: Alexander Shashkevych <stunpix@gmail.com>
+From: Alexander Shashkevych <alex@stunpix.com>
+Message-Id: <3B9CABF3-66A1-4B2A-A01B-87ABFDCB797F@stunpix.com>
+Date: Fri, 14 Nov 2014 00:27:03 +0200
+To: openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0 (Mac OS X Mail 8.0 \(1990.1\))
+X-Mailer: Apple Mail (2.1990.1)
+Subject: How to organize OE environment for intermediate builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,76 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 20:10:35 -0000
+X-List-Received-Date: Thu, 13 Nov 2014 22:27:10 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="ISO-8859-1"
 
-I think you got it, the commit d950ef40a3eae4b54cc62828e66d84a62d78c447=20
-removed:
+Hello,
 
-        rm -f ${IMAGE=5FROOTFS}${OPKGLIBDIR}/opkg/lists/*
+I would like to ask you how do you organize your development =
+environments for OE?
 
-step that I didn't see implemented on rootfs.py. I'll file a bug report=20
-(not too familiar with rootfs.py to try to fix it myself).
+Let me explain. =46rom my point of view OE build system is well suited =
+for builds of released code, but not for code that is still under =
+development with many intermediate builds. My case: I started a project =
+for Freescale platform and due to bsp headers/libs/cross-compiling it =
+can be built only within OE environment. I have already committed =
+initial code to my project's repo and have already written =
+layers&recipes to build project from git. That was not a problem and it =
+works. Then I added new changes to my project and stuck. Before I'll =
+commit them into git I need to build&test to be sure that everything is =
+OK, but to build changes with bitbake they should be committed first. =
+Mutual exclusive situation: can't commit without build and can't build =
+without commit.
 
-cheers,
+How do you escape this? How to best organize OE environment for =
+intermediate builds without commits?
 
--Alejandro
+PS: I hope you understand that endless commit'n'push of each little =
+change for just-to-test is extremely superfluous.
 
-
-
-
-From:   Eric B=E9nard <eric@eukrea.com>
-To:     Alejandro del Castillo <alejandro.delcastillo@ni.com>,=20
-Cc:     openembedded-devel@lists.openembedded.org,=20
-openembedded-core@lists.openembedded.org
-Date:   11/12/2014 06:39 PM
-Subject:        Re: [oe] Opkg files at /var/lib/opkg/lists
-
-
-
-Hi Aljandro,
-
-copying oe-core's ML as the problem seems related to oe-core and
-not to meta-oe.
-
-Le Wed, 12 Nov 2014 12:15:46 -0600,
-Alejandro del Castillo <alejandro.delcastillo@ni.com> a =E9crit :
-
-> Hello,
->=20
-> I noticed that the OE build process is leaving files at=20
-> /var/lib/opkg/lists (~1.5 MB on my system), which I believe are the feed 
-
-
-> content used to build the image. The target opkg.conf file configure=20
-> lists=5Fdir to be at /var/lib/opkg (instead of the default=20
-> /var/lib/opkg/lists), so the feed content under /var/lib/opkg/lists is=20
-not=20
-> used at all.=20
->=20
-> Does anyone know if there Is a reason why the files are left over or is=20
-> this a bug? Shouldn't the image creation process remove the whole=20
-> directory if it's not going to be used?=20
->=20
-> BTW, Dylan doesn't have this problem, but Daisy and Dizzy do (not sure=20
-> about Dora).
->=20
-I was on a similar subject today and this seems broken since :
-d950ef40a3eae4b54cc62828e66d84a62d78c447
-
-BTW it seems that FEED=5FDEPLOYDIR=5FBASE=5FURI was replaced by
-PACKAGE=5FFEED=5FURIS in 9b8811045546ad67b4695d980f09636d5506e50c but the
-document is still pointing to the previous one :
-http://www.yoctoproject.org/docs/current/mega-manual/mega-manual.html#runti=
-me-package-management-target-ipk
-
-If the replacement was not intended then there is a problem as
-FEED=5FDEPLOYDIR=5FBASE=5FURI doesn't seems to work anymore (tested with
-dizzy and package=5Fipk).
-
-Best regards
-Eric
-
-
+Regards,
+Alexander=
 
