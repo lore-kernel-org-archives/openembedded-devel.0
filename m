@@ -1,35 +1,35 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 81B6960167
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 4ECD260167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 00:24:36 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id l15so2725906wiw.4
+	Thu, 13 Nov 2014 02:42:46 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id et14so3124936pad.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Nov 2014 16:24:37 -0800 (PST)
+	Wed, 12 Nov 2014 18:42:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=SFXUCHrEW/SKivrIaR62K3uMZVteMOoGHOYnOrXYdp0=;
-	b=L5OWYznP8B+YsZmNevUEVTu6Vnsy+40cJ4DXQpoBgryLheB7jpJAXOms7QTaJn8vg9
-	8upnAnYJwmsRFDevi4BJ0LrbMPgwrQfCwaFhOKkYLQW6ImWMbnX4on4iSPNDD2jSMfyl
-	ews5nZvUgl8fUnd/aOwZ46l2aFwEa5uOaAGNWkx9lEa1dafyBECkKxRHqZdeJynr9BgL
-	E/yyufpveXaq9f+HYeazIBDUG/JCE9X7vgcuvXO+3G43YbRVD0bZa7/o3zARlVMF8N3a
-	+Uiiw11lHFJaMbj9d5Xy+afaqDcpjxWBXBcVgL+MSc1GazFfbWBfRpN90CBJ2Dt1SL+V
-	A+HQ==
-X-Received: by 10.180.23.98 with SMTP id l2mr54028069wif.51.1415838277379;
-	Wed, 12 Nov 2014 16:24:37 -0800 (PST)
-Received: from mizar.208.67.220.220
-	(host66-196-dynamic.45-79-r.retail.telecomitalia.it. [79.45.196.66])
-	by mx.google.com with ESMTPSA id f6sm23569337wix.5.2014.11.12.16.24.36
-	for <multiple recipients>
+	h=from:to:subject:date:message-id;
+	bh=jiBke6HFD4d5WCRZpQYEJzLV/1kBVektTj3ZdN76QYY=;
+	b=IQWOMOThmCwG+AaQgEBqPCx53Dp3bymwRV6+46PbRnnUfdY70SAIBcVv7Qg9APRArH
+	u5k0lMnsunYsXiAQcfEi+I5VUCpx8m1CcB2Wl/kAvl35yBWtH4wi/mthBD6aNCO9uIv/
+	wESB0AdF7sGqFQ+r+6OSt4lvysmFndbNfxEN77OR9HAAD0/AB+7pUzgCydbdC+krgD5s
+	Zhhh8WNaN3OWzyq3hqRyMNNpdsVYdP4AJt3Qn/JchrCb9KG4E2DMmBOO4TA2eZOgQiP3
+	6QmZ6oqXnsXVXRwY2X0avB1bJ9sJkFzIYShikYc68ezSRAKNpTi+X5Nfk5heRjfG69z8
+	qZAw==
+X-Received: by 10.67.15.174 with SMTP id fp14mr52622301pad.66.1415846567161;
+	Wed, 12 Nov 2014 18:42:47 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id u8sm8533806pdr.10.2014.11.12.18.42.45
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 12 Nov 2014 16:24:36 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 12 Nov 2014 18:42:45 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Nov 2014 01:24:31 +0100
-Message-Id: <1415838271-26822-1-git-send-email-andrea.adami@gmail.com>
+Date: Wed, 12 Nov 2014 18:42:42 -0800
+Message-Id: <1415846562-9776-1-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-initramfs][PATCH] klibc: define KLIBCLIBGCC
+Subject: [meta-networking][master][dizzy][PATCH] wireshark: update to 1.12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,37 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 00:24:39 -0000
+X-List-Received-Date: Thu, 13 Nov 2014 02:42:47 -0000
 
-Fix build of klibc extending the EXTRA_OEMAKE.
+The following vulnerabilities have been fixed.
+* wnpa-sec-2014-20
+  SigComp UDVM buffer overflow. (Bug 10662)
+  CVE-2014-8710
+* wnpa-sec-2014-21
+  AMQP crash. (Bug 10582)
+  CVE-2014-8711
+* wnpa-sec-2014-22
+  NCP crashes. (Bug 10552, Bug 10628)
+  CVE-2014-8712, CVE-2014-8713
+* wnpa-sec-2014-23
+  TN5250 infinite loops. (Bug 10596)
+  CVE-2014-8714
 
-|   LIST    usr/klibc/klib.list
-|   KLIBCAR usr/klibc/libc.a
-|   KLIBCLD usr/klibc/libc.so
-| arm-oe-linux-gnueabi-ld: cannot find libgcc.a: No such file or directory
-| make[2]: *** [usr/klibc/libc.so] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| make[1]: *** [all] Error 2
-| make: *** [klibc] Error 2
-| ERROR: oe_runmake failed
+Reference:
+https://www.wireshark.org/docs/relnotes/wireshark-1.12.2.html
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
- 1 file changed, 1 insertion(+)
+ .../wireshark/{wireshark_1.12.1.bb => wireshark_1.12.2.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_1.12.1.bb => wireshark_1.12.2.bb} (92%)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index f3e9972..9f445e1 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -24,6 +24,7 @@ S = "${WORKDIR}/git"
- EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
-                 'CROSS_COMPILE=${TARGET_PREFIX}' \
-                 'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
-+                'KLIBCLIBGCC=${STAGING_DIR_TARGET}${libdir}/${TARGET_SYS}/*/libgcc.a' \
-                 'prefix=${exec_prefix}' \
-                 'INSTALLROOT=${D}' \
-                 'SHLIBDIR=${libdir}' \
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
+similarity index 92%
+rename from meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
+index e198863..5740730 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.1.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
+@@ -13,8 +13,8 @@ SRC_URI = " \
+ 
+ PE = "1"
+ 
+-SRC_URI[md5sum] = "14b3e3d8979d1eb27ff085bb5f400e67"
+-SRC_URI[sha256sum]= "82b26bd416ec15903b27785e35a622687008a743342054e96eaaeaa249be584b"
++SRC_URI[md5sum] = "2f2a16be8b087227cb17733c72288ae4"
++SRC_URI[sha256sum] = "30ae16b408a592642ce3a84dd9877d24df7a6dae8da4847486965190039df292"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
 1.9.1
 
