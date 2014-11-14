@@ -1,42 +1,31 @@
-Return-Path: <eric@eukrea.com>
-X-Greylist: delayed 8790 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 13 Nov 2014 22:45:37 UTC
-Received: from mo4.mail-out.ovh.net (7.mo4.mail-out.ovh.net [178.33.253.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D2F860167
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 617 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 14 Nov 2014 00:09:13 UTC
+Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
+	[206.46.173.25])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EFEB6FC68
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 22:45:37 +0000 (UTC)
-Received: from mail615.ha.ovh.net (b6.ovh.net [213.186.33.56])
-	by mo4.mail-out.ovh.net (Postfix) with SMTP id 361EB1000C66
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Nov 2014 21:18:56 +0100 (CET)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Nov 2014 22:18:56 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO e6520eb.localdomain)
-	(eric%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 13 Nov 2014 22:18:54 +0200
-Date: Thu, 13 Nov 2014 21:18:53 +0100
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: Alejandro del Castillo <alejandro.delcastillo@ni.com>
-Message-ID: <20141113211853.6c8a6f6f@e6520eb.localdomain>
-In-Reply-To: <OF69DC7AA2.57980DB5-ON86257D8F.006E27D9-86257D8F.006ECC75@ni.com>
-References: <OF81A9A14C.EC58A864-ON86257D8E.00636115-86257D8E.0064525F@ni.com>
-	<20141113013933.6820d2d9@e6520eb.localdomain>
-	<OF69DC7AA2.57980DB5-ON86257D8F.006E27D9-86257D8F.006ECC75@ni.com>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.24; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 1309984542690291155
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: -100
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeejhedrjedvucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeejhedrjedvucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: Opkg files at /var/lib/opkg/lists
+	Fri, 14 Nov 2014 00:09:13 +0000 (UTC)
+Received: from gandalf.denix.org ([108.18.33.160]) by vms173025.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NF00050U5RC0150@vms173025.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	13 Nov 2014 18:09:12 -0600 (CST)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=LdSLMYbn c=1 sm=1 tr=0	a=A8KAnipHuDHkz1LiHkTZyg==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=sozttTNsAAAA:8
+	a=nlfdPq-F-3h-uJ_ZzXIA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 05D9F2008C;	Thu,
+	13 Nov 2014 19:09:12 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 13 Nov 2014 19:09:10 -0500
+Message-id: <1415923750-17942-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.1.2
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-qt5][PATCH 2/2] nativesdk-qtbase_git: re-add OEQt5Toolchain to SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,27 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Nov 2014 22:45:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 Nov 2014 00:09:19 -0000
 
-Hi Alejandro,
+From: Denys Dmytriyenko <denys@ti.com>
 
-Le Thu, 13 Nov 2014 14:10:12 -0600,
-Alejandro del Castillo <alejandro.delcastillo@ni.com> a =C3=A9crit :
+The file is expected by do_install(), but _git version resets SRC_URI.
 
-> I think you got it, the commit d950ef40a3eae4b54cc62828e66d84a62d78c447=20
-> removed:
->=20
->         rm -f ${IMAGE_ROOTFS}${OPKGLIBDIR}/opkg/lists/*
->=20
-> step that I didn't see implemented on rootfs.py. I'll file a bug report=20
-> (not too familiar with rootfs.py to try to fix it myself).
->=20
-please add me in cc. I expect to investigate more on
-FEED_DEPLOYDIR_BASE_URI problems I met next week and will try to also
-look at this
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ recipes-qt/qt5/nativesdk-qtbase_git.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-Thanks,
-Eric
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+index 96d86db..095bee7 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+@@ -25,13 +25,18 @@ SRC_URI += "\
+ # common for qtbase-native and nativesdk-qtbase
+ SRC_URI += " \
+     file://0011-Always-build-uic.patch \
+-"    
++"
+ 
+ # specific for nativesdk-qtbase
+ SRC_URI += " \
+     file://0012-configure-preserve-built-qmake-and-swap-with-native-.patch \
+ "
+ 
++# CMake's toolchain configuration of nativesdk-qtbase
++SRC_URI += " \
++    file://OEQt5Toolchain.cmake \
++"
++
+ SRCREV = "06e706bdbb826b521389409b53079483fda5584a"
+ 
+ LICENSE = "GFDL-1.3 & LGPL-2.1 | LGPL-3.0"
+-- 
+2.1.2
+
 
