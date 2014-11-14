@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A5C3713A5
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id EA12E6A9D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 11:57:52 +0000 (UTC)
-Received: by mail-wg0-f54.google.com with SMTP id n12so19553107wgh.41
+	Fri, 14 Nov 2014 11:59:01 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id n3so2470394wiv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 03:57:52 -0800 (PST)
+	Fri, 14 Nov 2014 03:59:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=nvtm4K4jSmx9pa7LdUB34/JOOKSoGQNluf1aBeQLH10=;
-	b=J1okPIapFItMCRjRrWWrVNyzwi4y4jkGX4nNzNkfBYHZ8++4XnyNVXz/ZRAES9It/r
-	HVL4chr/MNLdokY8Lcg3Nc6JIKYyw3P9+7o2n929yCdUum3OqxILi+Uc2vFEtgvuVwFA
-	GrxTVUERPets58rvh7L33Rni7Y31x/lwUOeMnpEcbO3wlAd14R+QiF1isJ1KAYviCAdV
-	q/2d6ypNQ4c9WtO/ODd2jsC1FUIvV7ucgtNv+vopZy1N9pk6+Ww2T4vB5SaG4L7Yx/NS
-	tMEkHbu9ZctXA/fFj+OfhxDZSL4/ZFwuHA8W1DiD5tXwQsoztoxVgATzcZ8XXuL+3Zan
-	5BIw==
-X-Received: by 10.180.83.37 with SMTP id n5mr5694601wiy.83.1415966272651;
-	Fri, 14 Nov 2014 03:57:52 -0800 (PST)
+	bh=yj+HdgGmtdZkDs/haECCnQE05s9ul/tfZIjxcN4NdbY=;
+	b=SrBibl1EUDQ5NKo82ijgTVn7bsdxElKQx2lENYfIrHclXx6+7NP2lLtrgkxOuwMMrU
+	8vhiQQpg9+mdJuHsgPEscDB7hrYVO3hdpcklzKU9FYH7BNoqLXrJ+LylCsII0TZWVYlb
+	dj8n31donbLoqKoSIurvOKwENSSkMW1KDscC3bPCj1C9NOe5Pm70kYmULfetZgv0MCzl
+	0jXat7dXV8DV1a2deEmzURhAC0Xe3HRBjMLgYAdT9pDx9rXT6muR2Ekg9pfOKlZIYDzu
+	xErbCI1ChdN18USRXKASzgH2NihdbFAU983xlido1uB8EeUKuu1cO2lfSaUtz11xougb
+	UnPQ==
+X-Received: by 10.181.29.74 with SMTP id ju10mr6988723wid.10.1415966341564;
+	Fri, 14 Nov 2014 03:59:01 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id q9sm3171535wix.6.2014.11.14.03.57.51
-	for <multiple recipients>
+	by mx.google.com with ESMTPSA id
+	bq6sm3187796wib.1.2014.11.14.03.59.00
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 14 Nov 2014 03:57:51 -0800 (PST)
+	Fri, 14 Nov 2014 03:59:00 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 14 Nov 2014 12:57:58 +0100
-To: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <20141114115758.GB2458@jama>
-References: <1414978701-12934-1-git-send-email-kai.kang@windriver.com>
-	<5465645B.4090104@windriver.com>
+Date: Fri, 14 Nov 2014 12:59:06 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141114115906.GC2458@jama>
+References: <1415953529-10127-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <5465645B.4090104@windriver.com>
+In-Reply-To: <1415953529-10127-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] mariadb: update to 5.5.40
+Subject: Re: [PATCH] xrdb: Update to 1.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,146 +48,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Nov 2014 11:57:56 -0000
-X-Groupsio-MsgNum: 52878
+X-List-Received-Date: Fri, 14 Nov 2014 11:59:02 -0000
+X-Groupsio-MsgNum: 52879
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vGgW1X5XWziG23Ko"
+	protocol="application/pgp-signature"; boundary="HG+GLK89HZ1zG0kk"
 Content-Disposition: inline
 
---vGgW1X5XWziG23Ko
-Content-Type: text/plain; charset=utf-8
+--HG+GLK89HZ1zG0kk
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 14, 2014 at 10:09:31AM +0800, Kang Kai wrote:
-> On 2014=E5=B9=B411=E6=9C=8803=E6=97=A5 09:38, Kai Kang wrote:
-> > Update mariadb from version 5.5.39 to 5.5.40
-> >
-> > * rename mariadb_5.5.39.inc -> mariadb.inc
-> > * add dependency bision-native for mariadb-native
+On Fri, Nov 14, 2014 at 04:25:29PM +0800, Qian Lei wrote:
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-graphics/xorg-app/xrdb_1.0.9.bb | 10 ----------
+>  meta-oe/recipes-graphics/xorg-app/xrdb_1.1.0.bb | 10 ++++++++++
+>  2 files changed, 10 insertions(+), 10 deletions(-)
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-app/xrdb_1.0.9.bb
+>  create mode 100644 meta-oe/recipes-graphics/xorg-app/xrdb_1.1.0.bb
 >=20
-> Hi Martin,
->=20
-> I notice you have stage this commit to master-next for a well, but there=
-=20
-> some updates:
->=20
-> 1 upstream commit revno: 4300 fails to build modphp, need revert it.
-> 2 libedit should be a package config
-> |-- I think it is better to squash them in this commit.
->=20
-> 3 some configure files should split into sub-packages, rather than=20
-> mariadb-leftover
->=20
->=20
-> So would you like to drop this commit in master-next? Thanks. I'll send=
-=20
-> V2 soon.
+> diff --git a/meta-oe/recipes-graphics/xorg-app/xrdb_1.0.9.bb b/meta-oe/re=
+cipes-graphics/xorg-app/xrdb_1.0.9.bb
+> deleted file mode 100644
+> index f258bb2..0000000
+> --- a/meta-oe/recipes-graphics/xorg-app/xrdb_1.0.9.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -require recipes-graphics/xorg-app/xorg-app-common.inc
+> -SUMMARY =3D "X server resource database utility"
+> -LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd1167c4f586bd41f0c62166db4384=
+a69"
+> -
+> -DEPENDS +=3D "libxmu"
+> -PR =3D "r6"
+> -
+> -SRC_URI[md5sum] =3D "ed2e48cf33584455d74615ad4bbe4246"
+> -SRC_URI[sha256sum] =3D "642401e12996efe3e5e5307a245e24c282b94a44c1f147e1=
+77c8484b862aeab7"
+> diff --git a/meta-oe/recipes-graphics/xorg-app/xrdb_1.1.0.bb b/meta-oe/re=
+cipes-graphics/xorg-app/xrdb_1.1.0.bb
+> new file mode 100644
+> index 0000000..7d60783
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xorg-app/xrdb_1.1.0.bb
+> @@ -0,0 +1,10 @@
+> +require recipes-graphics/xorg-app/xorg-app-common.inc
+> +SUMMARY =3D "X server resource database utility"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd1167c4f586bd41f0c62166db4384=
+a69"
+> +
+> +DEPENDS +=3D "libxmu"
+> +PR =3D "r6"
 
-OK, will drop it. thanks
+Will drop PR when cherry-picking.
 
->=20
-> --Kai
->=20
->=20
->=20
-> >
-> > Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> > ---
-> >   .../mysql/{mariadb-native_5.5.39.bb =3D> mariadb-native_5.5.40.bb}   =
-   | 4 ++--
-> >   meta-oe/recipes-support/mysql/{mariadb_5.5.39.inc =3D> mariadb.inc}  =
-   | 4 ++--
-> >   .../recipes-support/mysql/{mariadb_5.5.39.bb =3D> mariadb_5.5.40.bb} =
-   | 3 +--
-> >   3 files changed, 5 insertions(+), 6 deletions(-)
-> >   rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.39.bb =3D> m=
-ariadb-native_5.5.40.bb} (82%)
-> >   rename meta-oe/recipes-support/mysql/{mariadb_5.5.39.inc =3D> mariadb=
-=2Einc} (98%)
-> >   rename meta-oe/recipes-support/mysql/{mariadb_5.5.39.bb =3D> mariadb_=
-5.5.40.bb} (96%)
-> >
-> > diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.39.bb b/m=
-eta-oe/recipes-support/mysql/mariadb-native_5.5.40.bb
-> > similarity index 82%
-> > rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.39.bb
-> > rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.40.bb
-> > index 9148dee..4ce960d 100644
-> > --- a/meta-oe/recipes-support/mysql/mariadb-native_5.5.39.bb
-> > +++ b/meta-oe/recipes-support/mysql/mariadb-native_5.5.40.bb
-> > @@ -1,8 +1,8 @@
-> > -require mariadb_${PV}.inc
-> > +require mariadb.inc
-> >   inherit native
-> >  =20
-> >   PROVIDES +=3D "mysql5-native"
-> > -DEPENDS =3D "ncurses-native zlib-native"
-> > +DEPENDS =3D "ncurses-native zlib-native bison-native"
-> >  =20
-> >   RDEPENDS_${PN} =3D ""
-> >   PACKAGES =3D ""
-> > diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc b/meta-oe=
-/recipes-support/mysql/mariadb.inc
-> > similarity index 98%
-> > rename from meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-> > rename to meta-oe/recipes-support/mysql/mariadb.inc
-> > index ae2e92b..20f5de2 100644
-> > --- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
-> > +++ b/meta-oe/recipes-support/mysql/mariadb.inc
-> > @@ -12,8 +12,8 @@ SRC_URI =3D "http://mirror.stshosting.co.uk/mariadb/m=
-ariadb-${PV}/source/mariadb-$
-> >              file://mysqld.service \
-> >             "
-> >  =20
-> > -SRC_URI[md5sum] =3D "917a807d8cf2c8ef9deedd2a89b6decd"
-> > -SRC_URI[sha256sum] =3D "cb850865ab55ce5f01c99a612cc75b76ead5d75adfa75a=
-606f453d32f9089d14"
-> > +SRC_URI[md5sum] =3D "561bede89a8bd19c374dad2d8f24fdfe"
-> > +SRC_URI[sha256sum] =3D "cbde17f4a31483143490def6fcce33310ebae49eafe92d=
-c4ada0e7227202415a"
-> >  =20
-> >   S =3D "${WORKDIR}/mariadb-${PV}"
-> >  =20
-> > diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.bb b/meta-oe/=
-recipes-support/mysql/mariadb_5.5.40.bb
-> > similarity index 96%
-> > rename from meta-oe/recipes-support/mysql/mariadb_5.5.39.bb
-> > rename to meta-oe/recipes-support/mysql/mariadb_5.5.40.bb
-> > index fee5b62..f24cb43 100644
-> > --- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.bb
-> > +++ b/meta-oe/recipes-support/mysql/mariadb_5.5.40.bb
-> > @@ -1,4 +1,4 @@
-> > -require ${PN}_${PV}.inc
-> > +require mariadb.inc
-> >  =20
-> >   EXTRA_OECMAKE +=3D "-DSTACK_DIRECTION=3D-1"
-> >  =20
-> > @@ -25,4 +25,3 @@ RCONFLICTS_${PN}-client +=3D "mysql5-client"
-> >   RPROVIDES_${PN}-server +=3D "mysql5-server"
-> >   RREPLACES_${PN}-server +=3D "mysql5-server"
-> >   RCONFLICTS_${PN}-server +=3D "mysql5-server"
-> > -
->=20
+Please drop PR when you're upgrading version (PV or PE)
+
+> +
+> +SRC_URI[md5sum] =3D "b54c7e3e53b4f332d41ed435433fbda0"
+> +SRC_URI[sha256sum] =3D "73827b6bbfc9d27ca287d95a1224c306d7053cd7b8156641=
+698d7dc541ca565b"
+> --=20
+> 1.8.3.1
 >=20
 > --=20
-> Regards,
-> Neil | Kai Kang
->=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---vGgW1X5XWziG23Ko
+--HG+GLK89HZ1zG0kk
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRl7kYACgkQN1Ujt2V2gByifQCdF43xFBJSZ/MEeGC3ZShz8Ryy
-/f8Anj1nmSWE2bWS79aK5uRpw/oHnf2u
-=rOtp
+iEYEARECAAYFAlRl7ooACgkQN1Ujt2V2gBwhFgCgk2FdY2jcAXiJ88dcHMfffv0B
+D74AoIrbZ9hsVDZd7kHFf4v62f+rjh/q
+=zVsE
 -----END PGP SIGNATURE-----
 
---vGgW1X5XWziG23Ko--
+--HG+GLK89HZ1zG0kk--
