@@ -1,39 +1,41 @@
 Return-Path: <derek@minotaurinc.com>
-Received: from relay.mailchannels.net (tkt-001-i374.relay.mailchannels.net
-	[174.136.5.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 2868C6A9D4
+X-Greylist: delayed 520 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 14 Nov 2014 16:14:10 UTC
+Received: from relay.mailchannels.net (ar-005-i190.relay.mailchannels.net
+	[162.253.144.72])
+	by mail.openembedded.org (Postfix) with ESMTP id 7AEE965D4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 16:05:13 +0000 (UTC)
+	Fri, 14 Nov 2014 16:14:10 +0000 (UTC)
 X-Sender-Id: arvixe|x-authuser|derek@minotaurinc.com
-Received: from octopus.arvixe.com (ip-10-237-13-110.us-west-2.compute.internal
-	[10.237.13.110])
-	by relay.mailchannels.net (Postfix) with ESMTPA id 0887C1014CD
+Received: from octopus.arvixe.com (ip-10-204-4-183.us-west-2.compute.internal
+	[10.204.4.183])
+	by relay.mailchannels.net (Postfix) with ESMTPA id 4C9BE6004B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 16:05:07 +0000 (UTC)
+	Fri, 14 Nov 2014 16:05:08 +0000 (UTC)
 X-Sender-Id: arvixe|x-authuser|derek@minotaurinc.com
-Received: from octopus.arvixe.com (octopus.arvixe.com [10.224.1.53])
+Received: from octopus.arvixe.com (octopus.arvixe.com [10.245.44.250])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA)
-	by 0.0.0.0:2500 (trex/5.3.4); Fri, 14 Nov 2014 16:05:11 GMT
+	by 0.0.0.0:2500 (trex/5.3.4); Fri, 14 Nov 2014 16:05:13 GMT
 X-MC-Relay: Neutral
 X-MailChannels-SenderId: arvixe|x-authuser|derek@minotaurinc.com
 X-MailChannels-Auth-Id: arvixe
-X-MC-Loop-Signature: 1415981110852:3149819639
-X-MC-Ingress-Time: 1415981109600
+X-MC-Loop-Signature: 1415981112342:3458901047
+X-MC-Ingress-Time: 1415981110650
 Received: from c-69-143-221-149.hsd1.md.comcast.net ([69.143.221.149]:41330
 	helo=lnx-dereks-home.vaddio.com)
 	by octopus.arvixe.com with esmtpsa (UNKNOWN:DHE-RSA-AES256-SHA:256)
 	(Exim 4.82) (envelope-from <derek@minotaurinc.com>)
-	id 1XpJMw-0004iT-4U; Fri, 14 Nov 2014 08:05:06 -0800
+	id 1XpJMx-0004iT-7L; Fri, 14 Nov 2014 08:05:07 -0800
 From: Derek Straka <derek@minotaurinc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Nov 2014 11:04:44 -0500
-Message-Id: <1415981085-13253-2-git-send-email-derek@minotaurinc.com>
+Date: Fri, 14 Nov 2014 11:04:45 -0500
+Message-Id: <1415981085-13253-3-git-send-email-derek@minotaurinc.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1415981085-13253-1-git-send-email-derek@minotaurinc.com>
 References: <1415981085-13253-1-git-send-email-derek@minotaurinc.com>
 X-AuthUser: derek@minotaurinc.com
 Cc: Derek Straka <derek@minotaurinc.com>
-Subject: [meta-python][PATCH 2/3] python-certifi: add recipe for 14.05.14
+Subject: [meta-python][PATCH 3/3] python-tornado: add recipe for 4.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,40 +49,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Nov 2014 16:05:24 -0000
+X-List-Received-Date: Fri, 14 Nov 2014 16:14:15 -0000
 
 Signed-off-by: Derek Straka <derek@minotaurinc.com>
 ---
- .../python/python-certifi_14.05.14.bb              |   20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-certifi_14.05.14.bb
+ .../recipes-devtools/python/python-tornado.inc     |   31 ++++++++++++++++++++
+ .../python/python-tornado_4.0.2.bb                 |    6 ++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-tornado.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-tornado_4.0.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-certifi_14.05.14.bb b/meta-python/recipes-devtools/python/python-certifi_14.05.14.bb
+diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
 new file mode 100644
-index 0000000..5e0404e
+index 0000000..ee2b308
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-certifi_14.05.14.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Python package for providing Mozilla's CA Bundle."
-+DESCRIPTION = "This installable Python package contains a CA Bundle that you can reference in your \
-+Python code. This is useful for verifying HTTP requests, for example.  This is the same CA Bundle \
-+which ships with the Requests codebase, and is derived from Mozilla Firefox's canonical set."
-+HOMEPAGE = "https://pypi.python.org/pypi/certifi"
-+SECTION = "devel/python"
++++ b/meta-python/recipes-devtools/python/python-tornado.inc
+@@ -0,0 +1,31 @@
++SUMMARY  = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
++DESCRIPTION = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. \
++By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long \
++polling, WebSockets, and other applications that require a long-lived connection to each user."
++HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
 +
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
++LICENSE = "Apache-2.0"
 +
-+SRCNAME = "certifi"
++SRCNAME = "tornado"
 +
-+SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++SRC_URI = " \
++    https://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
++"
 +
-+SRC_URI[md5sum] = "315ea4e50673a16ab047099f816fd32a"
-+SRC_URI[sha256sum] = "1e1bcbacd6357c151ae37cf0290dcc809721d32ce21fd6b7339568f3ddef1b69"
++inherit setuptools
++
++RDEPENDS_${PN} += "python-compression python-numbers python-email python-subprocess \
++                    python-pkgutil python-html python-json python-backports-ssl python-certifi"
++
++RDEPENDS_${PN}-test += "${PN} python-unittest"
 +
 +S = "${WORKDIR}/${SRCNAME}-${PV}"
 +
-+inherit setuptools
++PACKAGES =+ "\
++    ${PN}-test \
++"
++
++FILES_${PN}-test = " \
++    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/test \
++    ${libdir}/${PYTHON_DIR}/site-packages/${SRCNAME}/testing.py* \
++"
+diff --git a/meta-python/recipes-devtools/python/python-tornado_4.0.2.bb b/meta-python/recipes-devtools/python/python-tornado_4.0.2.bb
+new file mode 100644
+index 0000000..184fcd7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-tornado_4.0.2.bb
+@@ -0,0 +1,6 @@
++require python-tornado.inc
++
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5208df23820f490f691712a654be256d"
++
++SRC_URI[md5sum] = "985c0e704b765c33a6193d49d1935588"
++SRC_URI[sha256sum] = "900c5124ebdb6598ca8e8a0c5888f41a5f14117952d5515258e3d20222b21bfa"
 -- 
 1.7.9.5
 
