@@ -1,27 +1,24 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A9D466A9D4
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 16C57720D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 09:32:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43394087"
-Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Nov 2014 17:19:19 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAE9MIdX027177
+	Fri, 14 Nov 2014 09:52:02 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAE9q29q013888
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 17:22:18 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 14 Nov 2014 17:22:31 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
+	Fri, 14 Nov 2014 01:52:02 -0800 (PST)
+Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Fri, 14 Nov 2014 01:52:02 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Nov 2014 17:20:01 +0800
-Message-ID: <1415956804-56497-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 14 Nov 2014 04:52:00 -0500
+Message-ID: <1415958720-887-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.0.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [PATCH 0/3] Porting some recipes from openembedded
+Subject: [meta-oe][PATCH] hostapd: several fixes for init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,41 +32,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Nov 2014 09:32:25 -0000
+X-List-Received-Date: Fri, 14 Nov 2014 09:52:06 -0000
 Content-Type: text/plain
 
-Porting some recipes from openembedded.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Bian Naimeng (3):
-  Porting dash from openembedded and upgrade to 0.5.8
-  Porting anthy from openembedded and upgrade to 9100h
-  Porting eggdbus from openembedded.
+* restart: The stop may delay a few seconds according to different wireless
+  devices, on debian/ubuntu, the init script directly sleep 8 seconds
+  to wait the stop complete, here we add a delay function (sleep in a loop)
+  to ensure the stop is completed before start.
+* add status command.
+* add --oknodo for stop so it will not break restart if there is no
+  running process.
 
- meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch |   34 +
- meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch |   28 +
- meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb        |   41 +
- meta-oe/recipes-extended/dash/dash_0.5.8.bb        |   27 +
- .../recipes-support/anthy/anthy-native_9100h.bb    |    7 +
- meta-oe/recipes-support/anthy/anthy.inc            |   26 +
- meta-oe/recipes-support/anthy/anthy/2ch_t.patch    | 5062 ++++++++++++++++++++
- .../anthy/anthy/native-helpers.patch               |   50 +
- .../anthy/anthy/not_build_elc.patch                |   16 +
- .../anthy/anthy/target-helpers.patch               |  111 +
- meta-oe/recipes-support/anthy/anthy_9100h.bb       |   23 +
- 11 files changed, 5425 insertions(+)
- create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
- create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
- create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
- create mode 100644 meta-oe/recipes-extended/dash/dash_0.5.8.bb
- create mode 100644 meta-oe/recipes-support/anthy/anthy-native_9100h.bb
- create mode 100644 meta-oe/recipes-support/anthy/anthy.inc
- create mode 100644 meta-oe/recipes-support/anthy/anthy/2ch_t.patch
- create mode 100644 meta-oe/recipes-support/anthy/anthy/native-helpers.patch
- create mode 100644 meta-oe/recipes-support/anthy/anthy/not_build_elc.patch
- create mode 100644 meta-oe/recipes-support/anthy/anthy/target-helpers.patch
- create mode 100644 meta-oe/recipes-support/anthy/anthy_9100h.bb
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../recipes-connectivity/hostapd/hostapd-2.2/init  | 27 +++++++++++++++++++---
+ 1 file changed, 24 insertions(+), 3 deletions(-)
 
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
+index 79f74b6..8ba4e07 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
+@@ -8,6 +8,23 @@ test -f $DAEMON || exit 0
+ 
+ set -e
+ 
++# source function library
++. /etc/init.d/functions
++
++delay_stop() {
++	count=0
++	while [ $count -lt 9 ] ; do
++	        if pidof $DAEMON >/dev/null; then
++	                sleep 1
++	        else
++	                return 0
++	        fi
++		count=`expr $count + 1`
++	done
++	echo "Failed to stop $DESC."
++	return 1
++}
++
+ case "$1" in
+     start)
+ 	echo -n "Starting $DESC: "
+@@ -16,20 +33,24 @@ case "$1" in
+ 	;;
+     stop)
+ 	echo -n "Stopping $DESC: "
+-	start-stop-daemon -K -x $DAEMON
++	start-stop-daemon -K --oknodo -x $DAEMON
+ 	echo "$NAME."
+ 	;;
+     restart)
+ 	$0 stop
+-	$0 start
++	delay_stop && $0 start
+ 	;;
+     reload)
+ 	echo -n "Reloading $DESC: "
+ 	killall -HUP $(basename ${DAEMON})
+ 	echo "$NAME."
+ 	;;
++    status)
++	status $DAEMON
++	exit $?
++	;;
+     *)
+-	echo "Usage: $0 {start|stop|restart|reload}"
++	echo "Usage: $0 {start|stop|restart|reload|status}"
+ 	exit 1
+ 	;;
+ esac
 -- 
-1.9.1
+2.0.0
 
 
