@@ -1,24 +1,37 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 16C57720D6
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f178.google.com (mail-qc0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EA5265C7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 09:52:02 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAE9q29q013888
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 14 Nov 2014 11:12:51 +0000 (UTC)
+Received: by mail-qc0-f178.google.com with SMTP id b13so13982574qcw.37
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 01:52:02 -0800 (PST)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Fri, 14 Nov 2014 01:52:02 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Nov 2014 04:52:00 -0500
-Message-ID: <1415958720-887-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
+	Fri, 14 Nov 2014 03:12:52 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=BXMoK3j/WPHZLYGlaaOitkH908xat4JSz+uuloQQNKg=;
+	b=D4eKMOLJEy6gJ3tKLY8CKJsuWFcJxrQj/xPnth9hryDPqpqgKMbuRF0Plf0/s/nktP
+	6ZBNXnxCSZm/s0lCEiX0QbypiuFiVnEbthPJjL3roCpZ52Fu7Bp5mp0uB0WBv419vQpz
+	oHIE85HYsg2HeJDFFEvhcxaijc4ixqGPqsNJuU0ngbOCetebU/WOCu8IYAk8rXTYLRjq
+	oIkHF24ioz764bwDC6pFWomVudLwIELmelmlxihk+LAxzXsHw5KPInK/zpviUtpiTvKX
+	y+kxrq/WNHuGIoPGNh/P3O/Q0Oz/ndKJR72BqlR2VDdGR7VhzHnPmXGNJ9H0VSRMpFbz
+	184g==
+X-Gm-Message-State: ALoCoQlLE2hXP/Zh40NvYfR2Eba53O4aV9FM0Id6bQ5w/MPjxCwM0JWDLeVgaWIJSgtUsNxr4sBo
+X-Received: by 10.140.17.67 with SMTP id 61mr10310444qgc.59.1415963572435;
+	Fri, 14 Nov 2014 03:12:52 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] hostapd: several fixes for init script
+Received: by 10.140.98.213 with HTTP; Fri, 14 Nov 2014 03:12:32 -0800 (PST)
+In-Reply-To: <1415956804-56497-4-git-send-email-biannm@cn.fujitsu.com>
+References: <1415956804-56497-1-git-send-email-biannm@cn.fujitsu.com>
+	<1415956804-56497-4-git-send-email-biannm@cn.fujitsu.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 14 Nov 2014 11:12:32 +0000
+Message-ID: <CAJTo0LaPCD66Du37n2jma+qcg-mFyQYQE7vvwxi=DrpkK59zEg@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 3/3] Porting eggdbus from openembedded.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,81 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Nov 2014 09:52:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 14 Nov 2014 11:13:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Jackie Huang <jackie.huang@windriver.com>
+On 14 November 2014 09:20, Bian Naimeng <biannm@cn.fujitsu.com> wrote:
 
-* restart: The stop may delay a few seconds according to different wireless
-  devices, on debian/ubuntu, the init script directly sleep 8 seconds
-  to wait the stop complete, here we add a delay function (sleep in a loop)
-  to ensure the stop is completed before start.
-* add status command.
-* add --oknodo for stop so it will not break restart if there is no
-  running process.
+>  meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb        | 41
+> ++++++++++++++++++++++
+>
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../recipes-connectivity/hostapd/hostapd-2.2/init  | 27 +++++++++++++++++++---
- 1 file changed, 24 insertions(+), 3 deletions(-)
+eggdbus hasn't been touched since 2009... what's the rationale for adding
+something that's been unmaintained for five years and has had a replacement
+in the form of GDBus for four years to meta-oe, instead of your own layer
+(or porting to GDBus).
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
-index 79f74b6..8ba4e07 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
-@@ -8,6 +8,23 @@ test -f $DAEMON || exit 0
- 
- set -e
- 
-+# source function library
-+. /etc/init.d/functions
-+
-+delay_stop() {
-+	count=0
-+	while [ $count -lt 9 ] ; do
-+	        if pidof $DAEMON >/dev/null; then
-+	                sleep 1
-+	        else
-+	                return 0
-+	        fi
-+		count=`expr $count + 1`
-+	done
-+	echo "Failed to stop $DESC."
-+	return 1
-+}
-+
- case "$1" in
-     start)
- 	echo -n "Starting $DESC: "
-@@ -16,20 +33,24 @@ case "$1" in
- 	;;
-     stop)
- 	echo -n "Stopping $DESC: "
--	start-stop-daemon -K -x $DAEMON
-+	start-stop-daemon -K --oknodo -x $DAEMON
- 	echo "$NAME."
- 	;;
-     restart)
- 	$0 stop
--	$0 start
-+	delay_stop && $0 start
- 	;;
-     reload)
- 	echo -n "Reloading $DESC: "
- 	killall -HUP $(basename ${DAEMON})
- 	echo "$NAME."
- 	;;
-+    status)
-+	status $DAEMON
-+	exit $?
-+	;;
-     *)
--	echo "Usage: $0 {start|stop|restart|reload}"
-+	echo "Usage: $0 {start|stop|restart|reload|status}"
- 	exit 1
- 	;;
- esac
--- 
-2.0.0
-
+Ross
 
