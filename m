@@ -1,41 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id DDBB86A9D4
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id A776A71FC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 12:00:07 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id h11so2404112wiw.15
+	Fri, 14 Nov 2014 12:01:32 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id r20so2462511wiv.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Nov 2014 04:00:08 -0800 (PST)
+	Fri, 14 Nov 2014 04:01:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=A0HI9d50TN+vx0LH+D9cDNiVhEAObjg6i68ZPAQGzp0=;
-	b=v+N/luLw7VJCw9ApQ3XL9CXnkcoyqrZK62wajsxEPP0B2d97HX/rZRmOUz55ce8EiL
-	x3um6XaeoSoc2eYiaYLPkDQbrIJjsEBIO5tYU50cZ4RywR/95nWFzAoGW46OAv6v1h4C
-	zEG/+3fO0/8vbkrsVM1oqp7btf/LmDaoqaFtowLSSmvjvaTXFCjchkQ3L+l8IEuvs1+U
-	/wLTZhIbxCp4Xctr7JTGseQYRJ6yCKv/1uyvLM00mvtRPUNnrqzhqW4ktl8/4sPfAPP+
-	P5UWSmkZkZyHtWxwaruFJKPjMDnAw6j+SzE+FwiOpjXHK5CfKGrCw/csrWt14VdMvtCu
-	pZUw==
-X-Received: by 10.180.91.137 with SMTP id ce9mr7047049wib.60.1415966407876;
-	Fri, 14 Nov 2014 04:00:07 -0800 (PST)
+	bh=Kk3jIDWRj4zLBMUDFbhjtBp4GHdbOPiXlAh/f+qQono=;
+	b=wJ4PtSg64Py7FpBZy/X+F3Dv+OtwXPE8iET/8uLm4M0NqRKqxQSlJqGtW1IgojisBz
+	Y3vVyvD3IofLgniANnHknku1y/HvxLFfkx8zw8zqf4jd5kEEwM/CbYuk5twxzXNE55k1
+	QYwrENGvW93QXnlJ8jJNTmKChMmZXOoooXRGpJOp2yi1crIBCwKxakqnyyqVbfYo5kBv
+	wD/jNWS/36Eq0o7nVw8B6NlSHJP0/GlxjB1Y24iz+R00aFqw4+v+sa3jWmLWtGNKx4MG
+	kvklvo9ZCtpQ7zY2IrFcJpraF4P9ReJO2vJuzlPpMTEZ+WFc6EFR90ZTE+k3dsSmq/FE
+	lDiA==
+X-Received: by 10.180.150.138 with SMTP id ui10mr7082647wib.32.1415966493388; 
+	Fri, 14 Nov 2014 04:01:33 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fa7sm39377522wjd.27.2014.11.14.04.00.06
+	hk9sm39367045wjb.46.2014.11.14.04.01.32
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 14 Nov 2014 04:00:07 -0800 (PST)
+	Fri, 14 Nov 2014 04:01:32 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 14 Nov 2014 13:00:13 +0100
+Date: Fri, 14 Nov 2014 13:01:38 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141114120013.GD2458@jama>
+Message-ID: <20141114120138.GE2458@jama>
 References: <1415956804-56497-1-git-send-email-biannm@cn.fujitsu.com>
-	<1415956804-56497-2-git-send-email-biannm@cn.fujitsu.com>
+	<1415956804-56497-4-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1415956804-56497-2-git-send-email-biannm@cn.fujitsu.com>
+In-Reply-To: <1415956804-56497-4-git-send-email-biannm@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 1/3] Porting dash from openembedded and upgrade to 0.5.8
+Subject: Re: [PATCH 3/3] Porting eggdbus from openembedded.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,68 +49,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Nov 2014 12:00:11 -0000
-X-Groupsio-MsgNum: 52880
+X-List-Received-Date: Fri, 14 Nov 2014 12:01:34 -0000
+X-Groupsio-MsgNum: 52881
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GpGaEY17fSl8rd50"
+	protocol="application/pgp-signature"; boundary="VUDLurXRWRKrGuMn"
 Content-Disposition: inline
 
---GpGaEY17fSl8rd50
+--VUDLurXRWRKrGuMn
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 14, 2014 at 05:20:02PM +0800, Bian Naimeng wrote:
+On Fri, Nov 14, 2014 at 05:20:04PM +0800, Bian Naimeng wrote:
 > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 > ---
->  meta-oe/recipes-extended/dash/dash_0.5.8.bb | 27 +++++++++++++++++++++++=
-++++
->  1 file changed, 27 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/dash/dash_0.5.8.bb
+>  meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch | 34 ++++++++++++++++=
+++
+>  meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch | 28 +++++++++++++++
+>  meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb        | 41 ++++++++++++++++=
+++++++
+>  3 files changed, 103 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
+>  create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
+>  create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/dash/dash_0.5.8.bb b/meta-oe/recipe=
-s-extended/dash/dash_0.5.8.bb
+> diff --git a/meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch b/meta-oe=
+/recipes-core/eggdbus/eggdbus/gtk-doc.patch
 > new file mode 100644
-> index 0000000..3b9ea16
+> index 0000000..abd7ff4
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-> @@ -0,0 +1,27 @@
-> +DESCRIPTION =3D "Small and fast POSIX-compliant shell"
+> +++ b/meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
+> @@ -0,0 +1,34 @@
+> +Upstream-Status: Inappropriate [configuration]=20
+> +
+> +Index: eggdbus-0.6/docs/eggdbus/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- eggdbus-0.6.orig/docs/eggdbus/Makefile.am
+> ++++ eggdbus-0.6/docs/eggdbus/Makefile.am
+> +@@ -87,11 +87,7 @@ HTML_IMAGES =3D 				\
+> + # Extra options to supply to gtkdoc-fixref
+> + FIXXREF_OPTIONS=3D
+> +=20
+> +-if ENABLE_GTK_DOC
+> +-include $(top_srcdir)/gtk-doc.make
+> +-else
+> + CLEANFILES =3D
+> +-endif
+> +=20
+> + CLEANFILES +=3D   *~				\
+> + 		eggdbus-scan.*			\
+> +Index: eggdbus-0.6/docs/tests/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- eggdbus-0.6.orig/docs/tests/Makefile.am
+> ++++ eggdbus-0.6/docs/tests/Makefile.am
+> +@@ -65,11 +65,7 @@ HTML_IMAGES =3D 				\
+> + # Extra options to supply to gtkdoc-fixref
+> + FIXXREF_OPTIONS=3D
+> +=20
+> +-if ENABLE_GTK_DOC
+> +-include $(top_srcdir)/gtk-doc.make
+> +-else
+> + CLEANFILES =3D
+> +-endif
+> +=20
+> + CLEANFILES +=3D   *~				\
+> + 		tests-scan.*			\
+> diff --git a/meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch b/meta-oe=
+/recipes-core/eggdbus/eggdbus/marshal.patch
+> new file mode 100644
+> index 0000000..a605a34
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
+> @@ -0,0 +1,28 @@
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +Index: eggdbus-0.6/src/eggdbus/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- eggdbus-0.6.orig/src/eggdbus/Makefile.am
+> ++++ eggdbus-0.6/src/eggdbus/Makefile.am
+> +@@ -130,7 +130,7 @@ BUILT_SOURCES =3D								\
+> + 	$(NULL)
+> +=20
+> + eggdbus-built-sources.stamp : eggdbus-binding-tool Makefile.am org.free=
+desktop.DBus.xml org.freedesktop.DBus.Peer.xml org.freedesktop.DBus.Propert=
+ies.xml org.freedesktop.DBus.Introspectable.xml eggdbus-glib-genmarshal
+> +-	EGG_DBUS_GENMARSHAL=3D$(top_builddir)/src/eggdbus/eggdbus-glib-genmars=
+hal $(top_builddir)/src/eggdbus/eggdbus-binding-tool							\
+> ++	EGG_DBUS_GENMARSHAL=3Deggdbus-glib-genmarshal eggdbus-binding-tool				=
+			\
+> + 		--namespace EggDBus									\
+> + 		--dbus-namespace org.freedesktop.DBus							\
+> + 		--interfaces-only									\
+> +Index: eggdbus-0.6/src/tests/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- eggdbus-0.6.orig/src/tests/Makefile.am
+> ++++ eggdbus-0.6/src/tests/Makefile.am
+> +@@ -25,7 +25,7 @@ BUILT_SOURCES =3D 							\
+> + 	$(NULL)
+> +=20
+> + test-built-sources.stamp : Makefile.am $(top_builddir)/src/eggdbus/eggd=
+bus-binding-tool com.example.Frob.xml com.example.Tweak.xml com.example.Twi=
+ddle.xml
+> +-	EGG_DBUS_GENMARSHAL=3D$(top_builddir)/src/eggdbus/eggdbus-glib-genmars=
+hal $(top_builddir)/src/eggdbus/eggdbus-binding-tool									\
+> ++	EGG_DBUS_GENMARSHAL=3Deggdbus-glib-genmarshal eggdbus-binding-tool				=
+					\
+> + 	  --namespace       "Test"										\
+> + 	  --dbus-namespace  "com.example"									\
+> + 	  --include-header  testtypes.h										\
+> diff --git a/meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb b/meta-oe/recipe=
+s-core/eggdbus/eggdbus_0.6.bb
+> new file mode 100644
+> index 0000000..cfc9f8a
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
+> @@ -0,0 +1,41 @@
+> +SUMMARY =3D "An alternative to dbug-glib."
+> +DESCRIPTION =3D "An alternative to dbus-glib. It is designed specificall=
+y to \
+> +make it comfortable to work with very large and potentially \
+> +complex D-Bus services like e.g. DeviceKit-disks"
+> +
+> +HOMEPAGE =3D "http://cgit.freedesktop.org/~david/eggdbus"
+> +LICENSE =3D "LGPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D155db86cdbafa7532b41f39040928=
+3eb \
+> +                    file://src/eggdbus/eggdbus.h;md5=3D6b312aef57ed8d738=
+b3f131ad037d6c2"
+> +PR =3D "r0"
 
-This should be SUMMARY
-This time I'll change it when cherry-picking.
+Will drop PR and change indentation to use 4 spaces.
 
-> +HOMEPAGE =3D "http://gondor.apana.org.au/~herbert/dash/"
-> +SECTION =3D "System Environment/Shells"
-> +LICENSE =3D "BSD GPLv2+"
 > +
-> +inherit autotools update-alternatives
+> +DEPENDS =3D "dbus glib-2.0 dbus-glib eggdbus-native"
+> +DEPENDS_virtclass-native =3D "dbus-native glib-2.0-native dbus-glib-nati=
+ve"
 > +
-> +SRC_URI =3D "http://gondor.apana.org.au/~herbert/dash/files/${PN}-${PV}.=
-tar.gz"
+> +BASE_SRC_URI =3D "http://cgit.freedesktop.org/~david/${BPN}/snapshot/${B=
+PN}-${PV}.tar.bz2 \
+> +		file://gtk-doc.patch \
+> +		"
 > +
-> +SRC_URI[md5sum] =3D "5c152209680dab3c319e8923f6c51378"
-> +SRC_URI[sha256sum] =3D "c6db3a237747b02d20382a761397563d813b306c020ae28c=
-e25a1c3915fac60f"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db5262b4a1a1bff72b48e935531976=
-d2e"
+> +SRC_URI =3D "${BASE_SRC_URI} \
+> +	   file://marshal.patch;apply=3Dyes \
+> +	  "
 > +
-> +EXTRA_OECONF +=3D "--bindir=3D${base_bindir}"
+> +SRC_URI_virtclass-native =3D "${BASE_SRC_URI}"
 > +
-> +ALTERNATIVE_${PN} =3D "sh"
-> +ALTERNATIVE_LINK_NAME[sh] =3D "${base_bindir}/sh"
-> +ALTERNATIVE_TARGET[sh] =3D "${base_bindir}/dash"
-> +ALTERNATIVE_PRIORITY =3D "10"
+> +SRC_URI[md5sum] =3D "0a111faa54dfba2cf432c2c8e8a76e06"
+> +SRC_URI[sha256sum] =3D "3ad26e271c1a879bafcd181e065fe0ed53b542299a773c31=
+88c9edb25b895ed1"
 > +
-> +pkg_postinst_${PN} () {
-> +	grep -q "^${base_bindir}/dash$" $D${sysconfdir}/shells || echo ${base_b=
-indir}/dash >> $D${sysconfdir}/shells
+> +inherit autotools gtk-doc
+> +
+> +EXTRA_OECONF =3D " --disable-man-pages "
+> +
+> +BBCLASSEXTEND =3D "native"
+> +
+> +PARALLEL_MAKE =3D ""
+> +
+> +do_configure_prepend() {
+> +	# Create ChangeLog to walk around automake error.
+> +        # " Makefile.am: error: required file './ChangeLog' not found "
+> +	touch ${S}/ChangeLog
 > +}
 > +
-> +pkg_postrm_${PN} () {
-> +	printf "$(grep -v "^${base_bindir}/dash$" $D${sysconfdir}/shells)\n" > =
-$D${sysconfdir}/shells
-> +}
 > --=20
 > 1.9.1
 >=20
@@ -123,16 +234,16 @@ $D${sysconfdir}/shells
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---GpGaEY17fSl8rd50
+--VUDLurXRWRKrGuMn
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRl7s0ACgkQN1Ujt2V2gBxgxQCeKh8Y0jFnKv83x301gCgJV+zE
-IFUAn04ulJo+fRtE9R7bL1qvLpuPEujf
-=M2MX
+iEYEARECAAYFAlRl7yIACgkQN1Ujt2V2gBwhkQCgoBXZaa8Uks8LMGZWWTHI/I1T
+iDYAoJiRSChH9dz3Ng1+svUt5EvoVQjL
+=lRJi
 -----END PGP SIGNATURE-----
 
---GpGaEY17fSl8rd50--
+--VUDLurXRWRKrGuMn--
