@@ -1,29 +1,25 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B91C27211F
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4217771FC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 05:54:42 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43547531"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Nov 2014 13:50:29 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAI5rSi3001750
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 13:53:28 +0800
-Received: from localhost.localdomain (10.167.226.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 18 Nov 2014 13:53:47 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Nov 2014 13:52:49 +0800
-Message-ID: <1416289969-11515-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <A8FC939F80655644A89BB21CCD3741E87C5B6F@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <A8FC939F80655644A89BB21CCD3741E87C5B6F@G08CNEXMBPEKD02.g08.fujitsu.local>
+	Tue, 18 Nov 2014 09:54:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAI9sphJ013651
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL);
+	Tue, 18 Nov 2014 01:54:52 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.174.1; Tue, 18 Nov 2014 01:54:51 -0800
+From: Kai Kang <kai.kang@windriver.com>
+To: <martin.jansa@gmail.com>
+Date: Tue, 18 Nov 2014 17:54:35 +0800
+Message-ID: <1416304478-31307-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.35]
-Subject: [PATCH v2] nicstat : add new recipe
+X-Originating-IP: [128.224.153.152]
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 0/3] V2: Upgrade mariadb from 5.5.39 to 5.5.40
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Nov 2014 05:54:48 -0000
+X-List-Received-Date: Tue, 18 Nov 2014 09:54:54 -0000
 Content-Type: text/plain
 
-nicstat is a tool that prints out network statistics for all network
-interface cards (NICs), including packets, kilobytes per second,
-average packet sizes and more.
+V2 update:
+* add PACKAGECONFIG libedit
+* revert an commit for mariadb test suite which causes modphp and mysql-python fails
+* Split config files into sub-packages rather than all together in mariadb-leftover
+* add libevent as a dependency
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-extended/nicstat/nicstat_1.95.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
+Add this bundle of patches are rebased on orig/master + 
 
-diff --git a/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb b/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
-new file mode 100644
-index 0000000..142c164
---- /dev/null
-+++ b/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "nicstat is a Solaris and Linux command-line that prints out network \
-+statistics for all network interface cards (NICs), including packets, kilobytes \
-+per second, average packet sizes and more."
-+HOMEPAGE = "http://nicstat.sourceforge.net"
-+LICENSE = "Artistic-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b4a94da2a1f918b217ef5156634fc9e0"
-+SRC_URI = "http://softlayer-sng.dl.sourceforge.net/project/nicstat/${PN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "9a0b87bbc670c1e738e5b40c7afd184d"
-+SRC_URI[sha256sum] = "c4cc33f8838f4523f27c3d7584eedbe59f4c587f0821612f5ac2201adc18b367"
-+
-+do_compile() {
-+	${CC} ${CFLAGS} ${LDFLAGS} -o nicstat nicstat.c
-+}
-+do_install() {
-+     	install -d ${D}/${bindir}/
-+	install -d ${D}/${mandir}/
-+     	install -m 0755 ${S}/nicstat ${D}${bindir}/
-+	install -m 0644 ${S}/nicstat.1 ${D}/${mandir}/
-+}
+[oe] [meta-oe][PATCH] mariadb: Check valgrind headers only if WITH_VALGRIND is set
+
+
+Kai Kang (3):
+  Update mariadb from version 5.5.39 to 5.5.40
+  mariadb: re-package configure files
+  mariadb: add dependency libevent
+
+ ...b-native_5.5.39.bb => mariadb-native_5.5.40.bb} |  4 +-
+ .../mysql/{mariadb_5.5.39.inc => mariadb.inc}      | 17 +++++---
+ meta-oe/recipes-support/mysql/mariadb/my.cnf       |  4 ++
+ .../mysql/mariadb/revert-fix-for-MDEV-5120.patch   | 46 ++++++++++++++++++++++
+ .../mysql/{mariadb_5.5.39.bb => mariadb_5.5.40.bb} |  5 +--
+ 5 files changed, 66 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.39.bb => mariadb-native_5.5.40.bb} (82%)
+ rename meta-oe/recipes-support/mysql/{mariadb_5.5.39.inc => mariadb.inc} (93%)
+ create mode 100644 meta-oe/recipes-support/mysql/mariadb/revert-fix-for-MDEV-5120.patch
+ rename meta-oe/recipes-support/mysql/{mariadb_5.5.39.bb => mariadb_5.5.40.bb} (88%)
+
 -- 
-1.8.4.2
+1.9.1
 
 
