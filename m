@@ -1,26 +1,33 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3695C72153
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E9897215E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 23:12:52 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAINCp1G010259
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 18 Nov 2014 23:13:04 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id n3so3547447wiv.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 15:12:52 -0800 (PST)
-Received: from msp-dhcp23.wrs.com (172.25.34.23) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 18 Nov 2014 15:12:50 -0800
-From: Mark Hatle <mark.hatle@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Nov 2014 17:12:49 -0600
-Message-ID: <1416352369-166176-2-git-send-email-mark.hatle@windriver.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <1416352369-166176-1-git-send-email-mark.hatle@windriver.com>
-References: <1416352369-166176-1-git-send-email-mark.hatle@windriver.com>
+	Tue, 18 Nov 2014 15:13:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=8B9QrBo/dMh4g89zLKDFJVFsegwdypysJh8JvZKMdz4=;
+	b=owvRDYSnEL0O1UsdHxIJV3FkcWbNDNZCWOPYbtwyXcL1MDfQbtYN8Laay+b4KRIySg
+	G0uYJm5YGcA1Y7DnXOAuXJrsHWBp1nIUwyULVauEoWSkkNry8rgQK2KR5pquhk/axws2
+	yLn18F4O4LFKk58JqK9lGRRB7bFjn0lvFfewg3fKdETg0CMLs7XXyPWr+5+0PenWoHKP
+	q4kXj4BhI/pOMgJIoP3kddieyql6TH7Gx0fN1TdFplKhxHD3Gh4xwDEGKKR1KCpsM7OV
+	gCOP3ZzpSaCe4A8fN7gYQrGaCuHrnBaRVScXLI2wben84qJbm6rS9TmZaur4yf07VWe/
+	P/yw==
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] polarssl: add dependency openssl
+X-Received: by 10.194.238.3 with SMTP id vg3mr50791388wjc.69.1416352385076;
+	Tue, 18 Nov 2014 15:13:05 -0800 (PST)
+Received: by 10.194.82.103 with HTTP; Tue, 18 Nov 2014 15:13:05 -0800 (PST)
+In-Reply-To: <20141118225901.GA12111@linux.intel.com>
+References: <20141118225901.GA12111@linux.intel.com>
+Date: Wed, 19 Nov 2014 00:13:05 +0100
+Message-ID: <CA+chaQdR_YsDATsLvfgW-WEANTDcr=bVjScphaT9DExk3nsoBA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH/RESEND v3] Phoronix Test Suite package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,37 +41,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Nov 2014 23:12:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 18 Nov 2014 23:13:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Kai Kang <kai.kang@windriver.com>
+> v3resend: has this been accepted?
 
-polarssl compiles with openssl to build unit test cases. If openssl
-doesn't exist, native libssl.so will be used. Then causes error:
+Yes almost 2 months ago.
 
-| .../bitbake_build/tmp/sysroots/x86_64-linux/usr/lib/libssl.so: error adding symbols: File in wrong format
+Is it so hard to find:
 
-Add dependency openssl for polarssl to fix it.
+http://git.openembedded.org/meta-openembedded/commit/?id=c22f2d1be5b9762d6972ffe2fe258b8241571f59
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
-Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
----
- recipes-connectivity/polarssl/polarssl_1.3.8.bb | 1 +
- 1 file changed, 1 insertion(+)
+?
 
-diff --git a/recipes-connectivity/polarssl/polarssl_1.3.8.bb b/recipes-connectivity/polarssl/polarssl_1.3.8.bb
-index 8ca1b1c..7a496b7 100644
---- a/recipes-connectivity/polarssl/polarssl_1.3.8.bb
-+++ b/recipes-connectivity/polarssl/polarssl_1.3.8.bb
-@@ -28,6 +28,7 @@ SRC_URI = "https://polarssl.org/download/polarssl-${PV}-gpl.tgz"
- SRC_URI[md5sum] = "d1a2b4f21727e888f143414d2e3144e6"
- SRC_URI[sha256sum] = "318171db41335cacbb5b0047c94f1faf91442ab70a223b5223436703c9406ff1"
- 
-+DEPENDS = "openssl"
- RDEPENDS_${PN} += "libcrypto"
- EXTRA_OECMAKE = "-DUSE_SHARED_POLARSSL_LIBRARY=on"
- 
--- 
-1.9.3
 
+On Tue, Nov 18, 2014 at 11:59 PM, Todd E Brandt <
+todd.e.brandt@linux.intel.com> wrote:
+
+> This is the package recipe for the phoronix test suite v5.2.1. The
+> tool is for benchmarking and testing of the system.
+>
+> Signed-off-by: Todd Brandt <todd.e.brandt@linux.intel.com>
+> ----
+>  meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_5.2.1.bb | 24 ++++++++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>
+> v2: changes based on Ross Burton's comments. However, I kept this line:
+> S = "${WORKDIR}/phoronix-test-suite", since the tarball folder doesn't
+> include the version number.
+> v3: changed the license file locatoin and moved the RDEPENDS field down
+> v3resend: has this been accepted?
+>
+> diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_5.2.1.bb
+> b/meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_5.2.1.bb
+> new file mode 100644
+> index 0000000..ef9f735
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/phoronix-test-suite/
+> phoronix-test-suite_5.2.1.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY = "Phoronix Test Suite"
+> +DESCRIPTION = "The Phoronix Test Suite is designed to carry out both
+> qualitative \
+> +and quantitative benchmarks in a clean, reproducible, and easy-to-use
+> manner."
+> +LICENSE = "GPLv3"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> +SECTION = "console/tests"
+> +
+> +SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
+> +SRC_URI[md5sum] = "51e52d883710dc516c5494bd1c377219"
+> +SRC_URI[sha256sum] =
+> "1186f460691e2fe7a07df5edb8d8ed1ac0c65327512e646da2b2e3a60dda6cd9"
+> +S = "${WORKDIR}/phoronix-test-suite"
+> +
+> +do_install() {
+> +       DESTDIR=${D} ./install-sh ${exec_prefix}
+> +}
+> +
+> +RDEPENDS_${PN} = "php-cli"
+> +FILES_${PN} += " \
+> +       ${datadir}/phoronix-test-suite \
+> +       ${datadir}/appdata/phoronix-test-suite.appdata.xml \
+> +       ${datadir}/icons/hicolor/48x48/apps/phoronix-test-suite.png \
+> +
+>  ${datadir}/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
+> \
+> +       ${datadir}/mime/packages/openbenchmarking-mime.xml \
+> +"
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
