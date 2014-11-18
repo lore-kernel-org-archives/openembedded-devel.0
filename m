@@ -1,42 +1,37 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EFE47214E
+Return-Path: <kergoth@gmail.com>
+Received: from mail-ob0-f179.google.com (mail-ob0-f179.google.com
+	[209.85.214.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 13CE67214E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 18:32:22 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id k14so10438168wgh.9
+	Tue, 18 Nov 2014 20:14:26 +0000 (UTC)
+Received: by mail-ob0-f179.google.com with SMTP id va2so3011914obc.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 10:32:22 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
-	:to; bh=IobtqJasM6LlBQm6LG5Ll3Z1PHPW3SLvjMFbunX59RY=;
-	b=fJJ3SYEqAMkgWsBhvj98dEP5fNmVOmO+Y4dxHHcEnZ4qDe+Sy2X30DtjMiPaLZbI98
-	IMlNrKIkjeN/mI0LDhhFhunmwqHyNZo0OcIAfE+MCnMJglQvoOsxz6cdcsHRfiGeoKzW
-	4QOrcVV8Pn6qeOucz/9LqqdEs6FRBwAIvfAqUk/M3t89CUqwblRPRY37eb0QW85EJpki
-	92S3TCaD7c6qvgPsiH/6IYCxXwIy7BEU8nGtKJaNMuxjv6Xjx2lQKsTUrOw5X7iMWf5B
-	gkfiYgeWp208a6qdwKkM2pqPSyXDEoAOXCWKL7yIfqYbxT0swHICQ1enlw3FZY/M74Vl
-	4c7A==
-X-Gm-Message-State: ALoCoQnVgakpaBlQxO2VxXKG3lf0S/ZBiL88AJpmi2cl2+Kyf+wHGDg71Zdrv7janPGlFmjNTpkf
-X-Received: by 10.194.93.168 with SMTP id cv8mr22745721wjb.114.1416335542255; 
-	Tue, 18 Nov 2014 10:32:22 -0800 (PST)
-Received: from [172.20.0.187] (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPSA id t9sm56840945wjf.41.2014.11.18.10.32.20
-	for <multiple recipients>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 18 Nov 2014 10:32:21 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.0 \(1990.1\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <6715207.EkvTqHTqRG@peggleto-mobl5.ger.corp.intel.com>
-Date: Tue, 18 Nov 2014 19:32:19 +0100
-Message-Id: <FB5465D5-3846-479F-A194-52F1FB16192E@dominion.thruhere.net>
-References: <cover.1415758217.git.hongxu.jia@windriver.com>
-	<5464990A.5030400@windriver.com> <m4ff6f$nlo$1@ger.gmane.org>
-	<6715207.EkvTqHTqRG@peggleto-mobl5.ger.corp.intel.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.1990.1)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/1] libbonobo.inc: add libbonobo-bin package
+	Tue, 18 Nov 2014 12:14:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=OTO1vS3CEThmnsgNuYlI9zIVZmA4lBXGyeD6KVQ5mek=;
+	b=iE7CMzv8oDfpSH0zEkgO4+6D1MNC1NUowf69fljwNa4bMzENJH4NHWAty4R+A2MLz9
+	HhnKNeLfxvW/93hZDC8u5Ncl878sffhBttVIHjInyT+OCFwj8fowHbOmsG+4FgBSq3VQ
+	xMRuihbICtV/I6RF0BFZc+8o7g5OSi8QvXx1n2ID/mOvi9kCqd5H9SHDsZnNz9uxmEja
+	u0WGxgeBIlt46BtaSULT9ffT6xI5dOf14zs7SFEUn3otE3g1igM+m9UMfRaJcS3yWqMl
+	eCAJjLSq7jGhPtQhqOS6Rp1qlj4lyAKp4tPe5QZ1XIvuZLDPygI/QGISsqxoMQCFmqqW
+	/bQg==
+X-Received: by 10.202.196.206 with SMTP id u197mr20093825oif.21.1416341666273; 
+	Tue, 18 Nov 2014 12:14:26 -0800 (PST)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.76.82.35 with HTTP; Tue, 18 Nov 2014 12:14:05 -0800 (PST)
+In-Reply-To: <1416304558-12255-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+References: <546AA9C5.7080303@windriver.com>
+	<1416304558-12255-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Tue, 18 Nov 2014 13:14:05 -0700
+X-Google-Sender-Auth: ElEFX6UeAG_amqzdcPOgl4xypbA
+Message-ID: <CABcZANkrGdCy7Qf0fxA_C6aAoS5OLb7=ohh2wpiRv-szoxgFgg@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH v2] rarpd : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,78 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Nov 2014 18:32:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 18 Nov 2014 20:14:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On Tue, Nov 18, 2014 at 2:55 AM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
 
-> Op 18 nov. 2014, om 16:27 heeft Paul Eggleton =
-<paul.eggleton@linux.intel.com> het volgende geschreven:
->=20
-> Hi Koen,
->=20
-> On Tuesday 18 November 2014 13:48:15 Koen Kooi wrote:
->> Hongxu Jia schreef op 13-11-14 12:42:
->>> On 11/13/2014 07:02 PM, Koen Kooi wrote: Hongxu Jia schreef op =
-12-11-14
->>>=20
->>> 03:13:
->>>>>> The previous libbonobo package contains perl scripts, while
->>>>>> installing libbonobo, package management detected perl required,
->>>>>> but it actually not needed as lib. So add libbonobo-bin package =
-to
->>>>>> contain these scripts. It refers debian:
->>>>>> https://packages.debian.org/sid/libbonobo2-bin
->>>>>>=20
->>>>>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com> ---
->>>>>> meta-gnome/recipes-gnome/bonobo/libbonobo.inc | 3 ++- 1 file
->>>>>> changed, 2 insertions(+), 1 deletion(-)
->>>>>>=20
->>>>>> diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
->>>>>> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc index
->>>>>> 8b6007e..e0f6168 100644 ---
->>>>>> a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc +++
->>>>>> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc @@ -5,10 +5,11 @@
->>>>>> LIC_FILES_CHKSUM =3D
->>>>>> "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae19f \ SECTION =
-=3D
->>>>>> "x11/gnome/libs" DEPENDS =3D "glib-2.0 orbit2 intltool-native =
-libxml2
->>>>>> dbus dbus-glib"
->>>>>>=20
->>>>>> -inherit gnomebase gtk-doc +inherit gnomebase gtk-doc lib_package
->>>>>>=20
->>>>>> ORBIT_IDL_SRC =3D "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
->>>>>>=20
->>>>>> +RDEPENDS_${PN}-bin =3D "${PN} perl" FILES_${PN} +=3D
->>>>>> "${libdir}/orbit-2.0/*.so ${libdir}/bonobo/monikers/*.so"
->>>>>> FILES_${PN}-dbg +=3D "${libdir}/bonobo/monikers/.debug \
->>>>>> ${libdir}/bonobo-2.0/samples/.debug ${libdir}/orbit-2.0/.debug"
->>>=20
->>> This breaks the upgrade path
->>>=20
->>>> I am sorry I do not understand what you mean, do you mean running
->>>> 'smart upgrade' failed?
->>=20
->> You are moving files between packages, which makes 'opkg update ; =
-opkg
->> upgrade' fail with conflicts unless you carefully craft =
-RREPLACES/RCONFLICTS
->> or enforce ordering in upgrade order (which isn't currently =
-possible).
->=20
-> So what would you suggest - never make any packaging changes?
+> RARP (Reverse Address Resolution Protocol) is a protocol which allows
+> individual devices on an IP network to get their own IP addresses from
+> the RARP server. Some machines (e.g. SPARC boxes) use this protocol
+> instead of e.g. DHCP to query their IP addresses during network bootup.
+>
+> Linux kernels up to 2.2 used to provide a kernel daemon for this
+> service,but since 2.3 kernels it is served by this userland daemon.
+> You should install rarpd if you want to set up a RARP server on your
+> network.
+>
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+>
 
-No. I suggest thinking about what you're doing and minimizing the =
-damage. So far the patches I've seen are misguided (recipe=3D=3Dpackage =
-assumption) or plain weird. And in all cases break upgrade paths. Since =
-arguing the use case seems to fall on deaf ears I can only argue the =
-technical problems with them.
-
-> It's not as if=20
-> this is the first time we've done this kind of thing...
-
-And people still sound surprised when I say upgrade paths are broken =
-between releases. You yourself told me I should speak up when seeing =
-such patches and so I did.=
+Should this go in meta-networking?
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
