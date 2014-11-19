@@ -1,28 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id D0C026AC82
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 11:17:59 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 19 Nov 2014 03:17:42 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,416,1413270000"; d="scan'208";a="634442539"
-Received: from gcwannia-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.122.103])
-	by fmsmga002.fm.intel.com with ESMTP; 19 Nov 2014 03:17:40 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 19 Nov 2014 11:17:39 +0000
-Message-ID: <2258239.3cidt6ik12@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.2-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <2A9C95B6-1A62-40EC-B9F0-A9F72F6043E4@dominion.thruhere.net>
-References: <cover.1415758217.git.hongxu.jia@windriver.com>
-	<6684481.TtqaFjxDdy@peggleto-mobl5.ger.corp.intel.com>
-	<2A9C95B6-1A62-40EC-B9F0-A9F72F6043E4@dominion.thruhere.net>
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id EC0E66AC82;
+	Wed, 19 Nov 2014 14:01:43 +0000 (UTC)
+Received: by mail-wi0-f170.google.com with SMTP id bs8so9554309wib.3
+	for <multiple recipients>; Wed, 19 Nov 2014 06:01:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=kucYBtM0Mr1YyywhvMpUZS9LO3yMA1vMyZ4Mj2F5Dfw=;
+	b=vLtGhtDRGxN330w1OtsivqxjBhuXsN0kfCzEW51Nhzr4gxnfdnN6yrfxjiQoaDOfuP
+	RHPprbyiybpYQGM9r1zI1Zf8dnTZK3HmMJJ2/Q/mIoVwhTMNnuzp6BR36EmZzsGHFPcE
+	xgDgjGJbLxu0UhDpRxPdW06H7N0Cr7iagpY90daPq/VBnBLe89K6lHucKwUfPC77bg9u
+	mcoGKa+ztprgUhjzFgiUPqOJG4ps0X74dnf8E5oI90QLyiVamgzbHk5iykA+NFJlAUpw
+	V2ZgMc8ciPxfqQxSWKGyeeHAGMX9NXrVd1N0m+Jkd4rX3cgWTErdj5RjGx1pwW0wR4HZ
+	R7hQ==
+X-Received: by 10.194.57.81 with SMTP id g17mr59823708wjq.12.1416405703118;
+	Wed, 19 Nov 2014 06:01:43 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id y5sm2349995wix.9.2014.11.19.06.01.42
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 19 Nov 2014 06:01:42 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 19 Nov 2014 15:01:43 +0100
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20141119140143.GB3315@jama>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/1] libbonobo.inc: add libbonobo-bin package
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, Failed tasks 2014-11-19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,123 +44,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2014 11:18:05 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 19 Nov 2014 14:01:49 -0000
+X-Groupsio-MsgNum: 52926
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="3lcZGd9BuhuYXNfi"
+Content-Disposition: inline
 
-On Wednesday 19 November 2014 08:53:11 Koen Kooi wrote:
-> > Op 19 nov. 2014, om 01:36 heeft Paul Eggleton
-> > <paul.eggleton@linux.intel.com> het volgende geschreven:> 
-> > On Tuesday 18 November 2014 19:32:19 Koen Kooi wrote:
-> >>> Op 18 nov. 2014, om 16:27 heeft Paul Eggleton
-> >>> <paul.eggleton@linux.intel.com> het volgende geschreven:
-> >>> 
-> >>> Hi Koen,
-> >>> 
-> >>> On Tuesday 18 November 2014 13:48:15 Koen Kooi wrote:
-> >>>> Hongxu Jia schreef op 13-11-14 12:42:
-> >>>>> On 11/13/2014 07:02 PM, Koen Kooi wrote: Hongxu Jia schreef op
-> >>>>> 12-11-14
-> >>>>> 
-> >>>>> 03:13:
-> >>>>>>>> The previous libbonobo package contains perl scripts, while
-> >>>>>>>> installing libbonobo, package management detected perl required,
-> >>>>>>>> but it actually not needed as lib. So add libbonobo-bin package to
-> >>>>>>>> contain these scripts. It refers debian:
-> >>>>>>>> https://packages.debian.org/sid/libbonobo2-bin
-> >>>>>>>> 
-> >>>>>>>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com> ---
-> >>>>>>>> meta-gnome/recipes-gnome/bonobo/libbonobo.inc | 3 ++- 1 file
-> >>>>>>>> changed, 2 insertions(+), 1 deletion(-)
-> >>>>>>>> 
-> >>>>>>>> diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-> >>>>>>>> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc index
-> >>>>>>>> 8b6007e..e0f6168 100644 ---
-> >>>>>>>> a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc +++
-> >>>>>>>> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc @@ -5,10 +5,11 @@
-> >>>>>>>> LIC_FILES_CHKSUM =
-> >>>>>>>> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \ SECTION =
-> >>>>>>>> "x11/gnome/libs" DEPENDS = "glib-2.0 orbit2 intltool-native libxml2
-> >>>>>>>> dbus dbus-glib"
-> >>>>>>>> 
-> >>>>>>>> -inherit gnomebase gtk-doc +inherit gnomebase gtk-doc lib_package
-> >>>>>>>> 
-> >>>>>>>> ORBIT_IDL_SRC = "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
-> >>>>>>>> 
-> >>>>>>>> +RDEPENDS_${PN}-bin = "${PN} perl" FILES_${PN} +=
-> >>>>>>>> "${libdir}/orbit-2.0/*.so ${libdir}/bonobo/monikers/*.so"
-> >>>>>>>> FILES_${PN}-dbg += "${libdir}/bonobo/monikers/.debug \
-> >>>>>>>> ${libdir}/bonobo-2.0/samples/.debug ${libdir}/orbit-2.0/.debug"
-> >>>>> 
-> >>>>> This breaks the upgrade path
-> >>>>> 
-> >>>>>> I am sorry I do not understand what you mean, do you mean running
-> >>>>>> 'smart upgrade' failed?
-> >>>> 
-> >>>> You are moving files between packages, which makes 'opkg update ; opkg
-> >>>> upgrade' fail with conflicts unless you carefully craft
-> >>>> RREPLACES/RCONFLICTS or enforce ordering in upgrade order (which isn't
-> >>>> currently possible).>
-> >>> 
-> >>> So what would you suggest - never make any packaging changes?
-> >> 
-> >> No. I suggest thinking about what you're doing and minimizing the damage.
-> >> So far the patches I've seen are misguided (recipe==package assumption)
-> >> or plain weird. And in all cases break upgrade paths. Since arguing the
-> >> use case seems to fall on deaf ears I can only argue the technical
-> >> problems with them.
-> > 
-> > What do you mean by "arguing the use case" ?
-> 
-> Making recipe name and package name match, see the avahi patch for OE-core
+--3lcZGd9BuhuYXNfi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ah, except not only did those patches not get merged, the submitter even asked 
-for the patches to be dropped after the discussion. That hardly counts as 
-"falling on deaf ears".
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-> >>> It's not as if this is the first time we've done this kind of thing...
-> >> 
-> >> And people still sound surprised when I say upgrade paths are broken
-> >> between releases. You yourself told me I should speak up when seeing
-> >> such patches and so I did.
-> > 
-> > I did yes, and I hadn't forgotten. However we do need to make packaging
-> > changes from time to time, so we need to work out how to do them properly
-> > -
-> > and I'll bang the same drum as I always do - if we want to ensure these
-> > changes are properly considered and done in the correct manner, we need to
-> > have those things documented. If we do not, you shouldn't be surprised
-> > when people miss things. This is clearly an area you are interested in so
-> > it's an area you could help document.
-> > 
-> > Getting back to this specific problem, when splitting out a set of files
-> > into a different package as is being done by this patch, as far as I am
-> > aware there is no means to ensure that the new package gets installed on
-> > upgrade without introducing a hard dependency which would defeat the
-> > purpose of making the change. So that means you either make the change or
-> > you don't.
-> 
-> Not quite, but let's assume so for this case.
+=3D=3D Failed tasks 2014-11-19 =3D=3D
 
-Well if that's not accurate then let's be clear - why not ... ?
+=3D=3D=3D common (12) =3D=3D=3D
+    * meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc-static-=
+utils_2.0.4.bb, do_compile
+    * meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.b=
+b, do_compile
+    * meta-openembedded/meta-oe/recipes-connectivity/umip/umip_1.0.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-devtools/php/php_5.4.33.bb, do_comp=
+ile
+    * meta-openembedded/meta-oe/recipes-extended/acpica/acpitests_20140828.=
+bb, do_compile
+    * meta-openembedded/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb,=
+ do_unpack
+    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do_=
+compile
+    * meta-openembedded/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb=
+, do_compile
+    * meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.b=
+b, do_configure
+    * meta-smartphone/meta-shr/recipes-shr/3rdparty/iliwi_git.bb, do_compile
+    * meta-smartphone/meta-shr/recipes-shr/3rdparty/sensmon_git.bb, do_comp=
+ile
+    * meta-smartphone/meta-shr/recipes-shr/3rdparty/valacompass_git.bb, do_=
+compile
 
-> > Are any of
-> > these files that are being split out actually of interest on a typical
-> > system that OE would build for? If not, do we care that those files will
-> > disappear?
->
-> If the package were the file gets moved to is not installed by default this
-> change will cause no problems, but for all others (e.g. people with -dev
-> and/or -dbg installed) it will.
+=3D=3D=3D common-x86 (0) =3D=3D=3D
 
-I'm not following. Won't the corresponding -dev/-dbg packages be updated at 
-the same time?
+=3D=3D=3D qemuarm (2) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs=
+_git.bb, do_fetch
+    * meta-smartphone/meta-android/recipes-multimedia/android-audiosystem/a=
+ndroid-audiosystem_bzr.bb, do_compile
 
-Cheers,
-Paul
+=3D=3D=3D qemux86 (0) =3D=3D=3D
 
--- 
+=3D=3D=3D qemux86_64 (0) =3D=3D=3D
 
-Paul Eggleton
-Intel Open Source Technology Centre
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141110_065307.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/3219/
+|-
+||qemux86       ||12    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141110_221551.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/3220/
+|-
+||qemux86_64    ||13    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141111_143018.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/3241/
+|}
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--3lcZGd9BuhuYXNfi
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlRsoscACgkQN1Ujt2V2gByvdgCfbEppz9hi1F0hWsRBrOm3kuxX
+2oEAoLpMJxlGVzO0e24MoiXR+wp69CNk
+=istu
+-----END PGP SIGNATURE-----
+
+--3lcZGd9BuhuYXNfi--
