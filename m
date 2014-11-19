@@ -1,33 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E9897215E
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D50E4714D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 23:13:04 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id n3so3547447wiv.17
+	Wed, 19 Nov 2014 00:32:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAJ0WkZ2022006
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 15:13:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=8B9QrBo/dMh4g89zLKDFJVFsegwdypysJh8JvZKMdz4=;
-	b=owvRDYSnEL0O1UsdHxIJV3FkcWbNDNZCWOPYbtwyXcL1MDfQbtYN8Laay+b4KRIySg
-	G0uYJm5YGcA1Y7DnXOAuXJrsHWBp1nIUwyULVauEoWSkkNry8rgQK2KR5pquhk/axws2
-	yLn18F4O4LFKk58JqK9lGRRB7bFjn0lvFfewg3fKdETg0CMLs7XXyPWr+5+0PenWoHKP
-	q4kXj4BhI/pOMgJIoP3kddieyql6TH7Gx0fN1TdFplKhxHD3Gh4xwDEGKKR1KCpsM7OV
-	gCOP3ZzpSaCe4A8fN7gYQrGaCuHrnBaRVScXLI2wben84qJbm6rS9TmZaur4yf07VWe/
-	P/yw==
+	Tue, 18 Nov 2014 16:32:47 -0800 (PST)
+Received: from [128.224.162.136] (128.224.162.136) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Tue, 18 Nov 2014 16:32:46 -0800
+Message-ID: <546BE52D.50003@windriver.com>
+Date: Wed, 19 Nov 2014 08:32:45 +0800
+From: Rongqing Li <rongqing.li@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
 MIME-Version: 1.0
-X-Received: by 10.194.238.3 with SMTP id vg3mr50791388wjc.69.1416352385076;
-	Tue, 18 Nov 2014 15:13:05 -0800 (PST)
-Received: by 10.194.82.103 with HTTP; Tue, 18 Nov 2014 15:13:05 -0800 (PST)
-In-Reply-To: <20141118225901.GA12111@linux.intel.com>
-References: <20141118225901.GA12111@linux.intel.com>
-Date: Wed, 19 Nov 2014 00:13:05 +0100
-Message-ID: <CA+chaQdR_YsDATsLvfgW-WEANTDcr=bVjScphaT9DExk3nsoBA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH/RESEND v3] Phoronix Test Suite package
+To: <openembedded-devel@lists.openembedded.org>
+References: <1416352369-166176-1-git-send-email-mark.hatle@windriver.com>
+In-Reply-To: <1416352369-166176-1-git-send-email-mark.hatle@windriver.com>
+Subject: Re: [meta-networking][PATCH] ebtables: make it be able to work on 64bit kernel with 32 bit userspace
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,81 +35,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Nov 2014 23:13:06 -0000
-Content-Type: text/plain; charset=UTF-8
-
-> v3resend: has this been accepted?
-
-Yes almost 2 months ago.
-
-Is it so hard to find:
-
-http://git.openembedded.org/meta-openembedded/commit/?id=c22f2d1be5b9762d6972ffe2fe258b8241571f59
-
-?
+X-List-Received-Date: Wed, 19 Nov 2014 00:32:49 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
-On Tue, Nov 18, 2014 at 11:59 PM, Todd E Brandt <
-todd.e.brandt@linux.intel.com> wrote:
 
-> This is the package recipe for the phoronix test suite v5.2.1. The
-> tool is for benchmarking and testing of the system.
+On 2014年11月19日 07:12, Mark Hatle wrote:
+> From: "Roy.Li" <rongqing.li@windriver.com>
 >
-> Signed-off-by: Todd Brandt <todd.e.brandt@linux.intel.com>
-> ----
->  meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_5.2.1.bb | 24 ++++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
 >
-> v2: changes based on Ross Burton's comments. However, I kept this line:
-> S = "${WORKDIR}/phoronix-test-suite", since the tarball folder doesn't
-> include the version number.
-> v3: changed the license file locatoin and moved the RDEPENDS field down
-> v3resend: has this been accepted?
+> [ This patch is being sent up for Yocto Project compliance.  I'm not sure it's generally applicable. ]
 >
-> diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_5.2.1.bb
-> b/meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_5.2.1.bb
-> new file mode 100644
-> index 0000000..ef9f735
-> --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/phoronix-test-suite/
-> phoronix-test-suite_5.2.1.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "Phoronix Test Suite"
-> +DESCRIPTION = "The Phoronix Test Suite is designed to carry out both
-> qualitative \
-> +and quantitative benchmarks in a clean, reproducible, and easy-to-use
-> manner."
-> +LICENSE = "GPLv3"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-> +SECTION = "console/tests"
+
+This patch has been merged into meta-oe, but it lead to x86-64 with 32bit
+user space unable to work, I am see the root cause.
+
+
+-Roy
+
+>
+> Some structs, which is used to communicate between user space and kernel,
+> have the alignment issue on 64bit kernel with 32 bit userspace. To fix
+> this issue, ebtables redefines these struct, not use the kernel(sysroot)
+> include/uapi/linux/netfilter_bridge/ebtables.h, like ebt_entry_target:
+>
+> The kernel's:
+> struct ebt_entry_target {
+>          union {
+>                  char name[EBT_FUNCTION_MAXNAMELEN];
+>                  struct xt_target *target;
+>          } u;
+>          /* size of data */
+>          unsigned int target_size;
+>          unsigned char data[0] __attribute__ ((aligned (__alignof__(struct ebt_replace))));
+> };
+>
+> The ebtables:
+> struct ebt_entry_target
+> {
+>          union {
+>                  char name[EBT_FUNCTION_MAXNAMELEN];
+>                  struct ebt_target *target;
+>          } u;
+>          /* size of data */
+>          unsigned int target_size;
+> |#ifdef KERNEL_64_USERSPACE_32
+>          unsigned int pad;
+> |#endif
+>          unsigned char data[0] __attribute__ ((aligned (__alignof__(struct ebt_replace))));
+> };
+>
+> To make it work on 64bit kernel and 32bit userspace, KERNEL_64_USERSPACE_32
+> is needed to be enabled.
+>
+> If the MLPREFIX of package matchs "lib.?32", the 32bit multilib  package on
+> 64bit kernel is being built.
+>
+> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
+> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+> ---
+>   recipes-filter/ebtables/ebtables_2.0.10-4.bb | 11 +++++++++++
+>   1 file changed, 11 insertions(+)
+>
+> diff --git a/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> index 32cfc75..ca084e3 100644
+> --- a/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> +++ b/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+> @@ -27,6 +27,17 @@ S = "${WORKDIR}/ebtables-v${PV}"
+>
+>   inherit update-rc.d systemd
+>
+> +python __anonymous () {
+> +    import re
 > +
-> +SRC_URI = "http://www.phoronix-test-suite.com/releases/${BP}.tar.gz"
-> +SRC_URI[md5sum] = "51e52d883710dc516c5494bd1c377219"
-> +SRC_URI[sha256sum] =
-> "1186f460691e2fe7a07df5edb8d8ed1ac0c65327512e646da2b2e3a60dda6cd9"
-> +S = "${WORKDIR}/phoronix-test-suite"
-> +
-> +do_install() {
-> +       DESTDIR=${D} ./install-sh ${exec_prefix}
+> +    multilib = d.getVar('MLPREFIX', True)
+> +    if multilib:
+> +        searchstr = "lib.?32"
+> +        reg = re.compile(searchstr)
+> +        if reg.search(multilib):
+> +            d.appendVar('CFLAGS' ,' -DKERNEL_64_USERSPACE_32 -DEBT_MIN_ALIGN=8')
 > +}
 > +
-> +RDEPENDS_${PN} = "php-cli"
-> +FILES_${PN} += " \
-> +       ${datadir}/phoronix-test-suite \
-> +       ${datadir}/appdata/phoronix-test-suite.appdata.xml \
-> +       ${datadir}/icons/hicolor/48x48/apps/phoronix-test-suite.png \
-> +
->  ${datadir}/icons/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
-> \
-> +       ${datadir}/mime/packages/openbenchmarking-mime.xml \
-> +"
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>   EXTRA_OEMAKE = " \
+>           BINDIR=${base_sbindir} \
+>           MANDIR=${mandir} \
 >
+
+-- 
+Best Reagrds,
+Roy | RongQing Li
 
