@@ -1,41 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 17C696AC82
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id D71D66AC82
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 14:55:44 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id l18so1067583wgh.30
+	Wed, 19 Nov 2014 15:05:51 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id r20so2164292wiv.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 06:55:45 -0800 (PST)
+	Wed, 19 Nov 2014 07:05:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=pRg+yxMDvVi3FeeohvFm3QUPaadpeW6SEB97Pw+QBRE=;
-	b=XWX7PFwWNkHg/V+vwJmLr7Bxf0jKslwrSDxVhNyC/3sUH6ZWdwKmyUkNsy6XTZJyFj
-	YeQjwXuU1tNDZT0QGKkGm/FvFdmq/VnNoakv0BjflWKQu71bGSShgmURfFCAkcSHBAR2
-	GDUhmGOAWt2HN8dN7J54FhKE1KqHZsCl8kfba6QESHtW8RNlJ8gVwQbuQWD/w8mmvh9O
-	7BlAYraeetmUCrk94WVW6oD5AESwjeXLL0Cs8dauqClTEumrb0zfy3NkTz30VwAqhbTG
-	f46VOWyD8hai3hinBvnFZMJZHviIJcoDkQ4tdQTvQUemUF8thTmHzNDWO/lXdf+0CHOl
-	0rnw==
-X-Received: by 10.194.77.233 with SMTP id v9mr57726218wjw.24.1416408945091;
-	Wed, 19 Nov 2014 06:55:45 -0800 (PST)
+	bh=92sBMwQEeUP0E3msJvsUvXxt3LrD8uB3uV4QozafNVc=;
+	b=H0NnHlVnm8VBLC4XaIqDhnJDu0Jwm8MeUTTiJW8zA731hQ4qcFOeO/CCM5mbCWsD0S
+	NMyJIkkHRTa99m9UDrH0mEH88xtxoE1mRZ6vkilbJXmHG+EmfN2oIhsupLeFtnDSdmWB
+	0DOsVG3FO0VREWoS953o7td1wmS4odhOtood8coXASfCOH2O1HCfXH6bcidxcec4sRGm
+	UQaYVfyqeD6WD2Ku6UrKvr5i4honpX/eI4tv66coCEkWIBZquLlBYaoo2GvFPooyfRgm
+	G7JzmM3Wf/rySygoXcijKnjYpLRnTNE3BzQApmacBySbRpZIr3lTQ+3JDzXfaoUGmROR
+	zP9g==
+X-Received: by 10.180.103.33 with SMTP id ft1mr14056642wib.71.1416409552463;
+	Wed, 19 Nov 2014 07:05:52 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fk16sm2534386wic.16.2014.11.19.06.55.39
-	for <openembedded-devel@lists.openembedded.org>
+	n3sm2646851wjz.21.2014.11.19.07.05.51 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 19 Nov 2014 06:55:39 -0800 (PST)
+	Wed, 19 Nov 2014 07:05:51 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 19 Nov 2014 15:55:40 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141119145540.GK3315@jama>
-References: <1415956804-56497-1-git-send-email-biannm@cn.fujitsu.com>
-	<1415956804-56497-4-git-send-email-biannm@cn.fujitsu.com>
-	<20141114120138.GE2458@jama>
+Date: Wed, 19 Nov 2014 16:05:52 +0100
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <20141119150552.GL3315@jama>
+References: <cover.1415177915.git.hongxu.jia@windriver.com>
+	<9a453b465a06c1fccad20ed161e8ca1eee2e37e0.1415177915.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20141114120138.GE2458@jama>
+In-Reply-To: <9a453b465a06c1fccad20ed161e8ca1eee2e37e0.1415177915.git.hongxu.jia@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 3/3] Porting eggdbus from openembedded.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/1] mariadb:fix do_compile failed: No rule to make target /path/to/sysroots/x86-kvm-guest/usr/include/krb5.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,219 +49,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2014 14:55:52 -0000
-X-Groupsio-MsgNum: 52937
+X-List-Received-Date: Wed, 19 Nov 2014 15:05:55 -0000
+X-Groupsio-MsgNum: 52938
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="45wMVEkw4XUbiYON"
+	protocol="application/pgp-signature"; boundary="E6lVPAHcXg6biC3t"
 Content-Disposition: inline
 
---45wMVEkw4XUbiYON
+--E6lVPAHcXg6biC3t
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 14, 2014 at 01:01:38PM +0100, Martin Jansa wrote:
-> On Fri, Nov 14, 2014 at 05:20:04PM +0800, Bian Naimeng wrote:
-> > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> > ---
-> >  meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch | 34 ++++++++++++++=
-++++
-> >  meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch | 28 +++++++++++++++
-> >  meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb        | 41 ++++++++++++++=
-++++++++
-> >  3 files changed, 103 insertions(+)
-> >  create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
-> >  create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
-> >  create mode 100644 meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
-> >=20
-> > diff --git a/meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch b/meta-=
-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
-> > new file mode 100644
-> > index 0000000..abd7ff4
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-core/eggdbus/eggdbus/gtk-doc.patch
-> > @@ -0,0 +1,34 @@
-> > +Upstream-Status: Inappropriate [configuration]=20
-> > +
-> > +Index: eggdbus-0.6/docs/eggdbus/Makefile.am
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +--- eggdbus-0.6.orig/docs/eggdbus/Makefile.am
-> > ++++ eggdbus-0.6/docs/eggdbus/Makefile.am
-> > +@@ -87,11 +87,7 @@ HTML_IMAGES =3D 				\
-> > + # Extra options to supply to gtkdoc-fixref
-> > + FIXXREF_OPTIONS=3D
-> > +=20
-> > +-if ENABLE_GTK_DOC
-> > +-include $(top_srcdir)/gtk-doc.make
-> > +-else
-> > + CLEANFILES =3D
-> > +-endif
-> > +=20
-> > + CLEANFILES +=3D   *~				\
-> > + 		eggdbus-scan.*			\
-> > +Index: eggdbus-0.6/docs/tests/Makefile.am
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +--- eggdbus-0.6.orig/docs/tests/Makefile.am
-> > ++++ eggdbus-0.6/docs/tests/Makefile.am
-> > +@@ -65,11 +65,7 @@ HTML_IMAGES =3D 				\
-> > + # Extra options to supply to gtkdoc-fixref
-> > + FIXXREF_OPTIONS=3D
-> > +=20
-> > +-if ENABLE_GTK_DOC
-> > +-include $(top_srcdir)/gtk-doc.make
-> > +-else
-> > + CLEANFILES =3D
-> > +-endif
-> > +=20
-> > + CLEANFILES +=3D   *~				\
-> > + 		tests-scan.*			\
-> > diff --git a/meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch b/meta-=
-oe/recipes-core/eggdbus/eggdbus/marshal.patch
-> > new file mode 100644
-> > index 0000000..a605a34
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-core/eggdbus/eggdbus/marshal.patch
-> > @@ -0,0 +1,28 @@
-> > +Upstream-Status: Inappropriate [configuration]
-> > +
-> > +Index: eggdbus-0.6/src/eggdbus/Makefile.am
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +--- eggdbus-0.6.orig/src/eggdbus/Makefile.am
-> > ++++ eggdbus-0.6/src/eggdbus/Makefile.am
-> > +@@ -130,7 +130,7 @@ BUILT_SOURCES =3D								\
-> > + 	$(NULL)
-> > +=20
-> > + eggdbus-built-sources.stamp : eggdbus-binding-tool Makefile.am org.fr=
-eedesktop.DBus.xml org.freedesktop.DBus.Peer.xml org.freedesktop.DBus.Prope=
-rties.xml org.freedesktop.DBus.Introspectable.xml eggdbus-glib-genmarshal
-> > +-	EGG_DBUS_GENMARSHAL=3D$(top_builddir)/src/eggdbus/eggdbus-glib-genma=
-rshal $(top_builddir)/src/eggdbus/eggdbus-binding-tool							\
-> > ++	EGG_DBUS_GENMARSHAL=3Deggdbus-glib-genmarshal eggdbus-binding-tool		=
-					\
-> > + 		--namespace EggDBus									\
-> > + 		--dbus-namespace org.freedesktop.DBus							\
-> > + 		--interfaces-only									\
-> > +Index: eggdbus-0.6/src/tests/Makefile.am
-> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > +--- eggdbus-0.6.orig/src/tests/Makefile.am
-> > ++++ eggdbus-0.6/src/tests/Makefile.am
-> > +@@ -25,7 +25,7 @@ BUILT_SOURCES =3D 							\
-> > + 	$(NULL)
-> > +=20
-> > + test-built-sources.stamp : Makefile.am $(top_builddir)/src/eggdbus/eg=
-gdbus-binding-tool com.example.Frob.xml com.example.Tweak.xml com.example.T=
-widdle.xml
-> > +-	EGG_DBUS_GENMARSHAL=3D$(top_builddir)/src/eggdbus/eggdbus-glib-genma=
-rshal $(top_builddir)/src/eggdbus/eggdbus-binding-tool									\
-> > ++	EGG_DBUS_GENMARSHAL=3Deggdbus-glib-genmarshal eggdbus-binding-tool		=
-							\
-> > + 	  --namespace       "Test"										\
-> > + 	  --dbus-namespace  "com.example"									\
-> > + 	  --include-header  testtypes.h										\
-> > diff --git a/meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb b/meta-oe/reci=
-pes-core/eggdbus/eggdbus_0.6.bb
-> > new file mode 100644
-> > index 0000000..cfc9f8a
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-core/eggdbus/eggdbus_0.6.bb
-> > @@ -0,0 +1,41 @@
-> > +SUMMARY =3D "An alternative to dbug-glib."
-> > +DESCRIPTION =3D "An alternative to dbus-glib. It is designed specifica=
-lly to \
-> > +make it comfortable to work with very large and potentially \
-> > +complex D-Bus services like e.g. DeviceKit-disks"
-> > +
-> > +HOMEPAGE =3D "http://cgit.freedesktop.org/~david/eggdbus"
-> > +LICENSE =3D "LGPLv2+"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D155db86cdbafa7532b41f390409=
-283eb \
-> > +                    file://src/eggdbus/eggdbus.h;md5=3D6b312aef57ed8d7=
-38b3f131ad037d6c2"
-> > +PR =3D "r0"
+On Wed, Nov 05, 2014 at 05:00:46PM +0800, Hongxu Jia wrote:
+> There is occasionally compile failure while krb5.h removed
+> from sysroot during maradb compiling.
+> ...
+> [2014-10-27 17:18:06.998709364-07:00] | make -f storage/maria/CMakeFiles/
+>  aria_embedded.dir/build.make storage/maria/CMakeFiles/aria_embedded.dir/
+> depend
+> [2014-10-27 17:18:07.458369132-07:00] | make -f storage/maria/CMakeFiles/
+> aria_embedded.dir/build.make storage/maria/CMakeFiles/aria_embedded.dir/
+> build
+> [2014-10-27 17:18:12.547556095-07:00] | make[2]: *** No rule to make targ=
+et
+> `tmp/sysroots/x86-kvm-guest/usr/include/krb5.h', needed by `storage/maria/
+> CMakeFiles/aria_embedded.dir/ha_maria.cc.o'.  Stop.
+> ...
 >=20
-> Will drop PR and change indentation to use 4 spaces.
+> The ha_maria.cc requires <openssl/ssl.h>, <openssl/ssl.h> requires <opens=
+sl/
+> kssl.h>, and <openssl/kssl.h> conditionally requires <krb5.h>, but CMake
+> ignore the condition, force to add krb5.h to mariadb's dependencies, it is
+> the issue of CMake dependency scanner:
+> http://www.cmake.org/Wiki/CMake_FAQ#CMake_dependency_scanner
+> http://www.cmake.org/pipermail/cmake/2010-July/038465.html
 >=20
-> > +
-> > +DEPENDS =3D "dbus glib-2.0 dbus-glib eggdbus-native"
-> > +DEPENDS_virtclass-native =3D "dbus-native glib-2.0-native dbus-glib-na=
-tive"
-> > +
-> > +BASE_SRC_URI =3D "http://cgit.freedesktop.org/~david/${BPN}/snapshot/$=
-{BPN}-${PV}.tar.bz2 \
-> > +		file://gtk-doc.patch \
-> > +		"
-> > +
-> > +SRC_URI =3D "${BASE_SRC_URI} \
-> > +	   file://marshal.patch;apply=3Dyes \
-> > +	  "
-> > +
-> > +SRC_URI_virtclass-native =3D "${BASE_SRC_URI}"
-
-SRC_URI =3D "http://cgit.freedesktop.org/~david/${BPN}/snapshot/${BPN}-${PV=
-}.tar.bz2 \
-    file://gtk-doc.patch \
-"
-SRC_URI_append_class-target =3D "file://marshal.patch"
-
-would do the same (changed in master-next)
-
-> > +
-> > +SRC_URI[md5sum] =3D "0a111faa54dfba2cf432c2c8e8a76e06"
-> > +SRC_URI[sha256sum] =3D "3ad26e271c1a879bafcd181e065fe0ed53b542299a773c=
-3188c9edb25b895ed1"
-> > +
-> > +inherit autotools gtk-doc
-> > +
-> > +EXTRA_OECONF =3D " --disable-man-pages "
-> > +
-> > +BBCLASSEXTEND =3D "native"
-> > +
-> > +PARALLEL_MAKE =3D ""
-> > +
-> > +do_configure_prepend() {
-> > +	# Create ChangeLog to walk around automake error.
-> > +        # " Makefile.am: error: required file './ChangeLog' not found "
-> > +	touch ${S}/ChangeLog
-> > +}
-
-You should patch configure to pass foreign to automake instead.
-
-> > +
-> > --=20
-> > 1.9.1
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> As the above failure log shows, the dependency scanner was done at 17:18:=
+06,
+> and the compiling start at 17:18:07, but compiling ha_maria.cc.o failed at
+> 17:18:12, removing krb5.h within that 5 seconds caused the above failure.
 >=20
+> So we tweak the compile order, let ha_maria.cc as the first compile objec=
+t,
+> it will reduce the risk time of removing krb5.h.
+
+rebase and resend if still needed with 5.5.40
+
+>=20
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  ...ia-CMakeLists.txt-tweak-source-file-compi.patch | 62 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-support/mysql/mariadb_5.5.39.inc   |  1 +
+>  2 files changed, 63 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/mysql/mariadb/storage-maria-C=
+MakeLists.txt-tweak-source-file-compi.patch
+>=20
+> diff --git a/meta-oe/recipes-support/mysql/mariadb/storage-maria-CMakeLis=
+ts.txt-tweak-source-file-compi.patch b/meta-oe/recipes-support/mysql/mariad=
+b/storage-maria-CMakeLists.txt-tweak-source-file-compi.patch
+> new file mode 100644
+> index 0000000..b498423
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/mysql/mariadb/storage-maria-CMakeLists.txt-=
+tweak-source-file-compi.patch
+> @@ -0,0 +1,62 @@
+> +From 4e99ef5cdffc92da783b04fa4fd07da47485f394 Mon Sep 17 00:00:00 2001
+> +From: Hongxu Jia <hongxu.jia@windriver.com>
+> +Date: Wed, 5 Nov 2014 16:25:52 +0800
+> +Subject: [PATCH] storage/maria/CMakeLists.txt: tweak source file compile=
+ order
+> +
+> +There is occasionally compile failure while krb5.h removed
+> +from sysroot during maradb compiling.
+> +...
+> +[2014-10-27 17:18:06.998709364-07:00] | make -f storage/maria/CMakeFiles/
+> + aria_embedded.dir/build.make storage/maria/CMakeFiles/aria_embedded.dir/
+> +depend
+> +[2014-10-27 17:18:07.458369132-07:00] | make -f storage/maria/CMakeFiles/
+> +aria_embedded.dir/build.make storage/maria/CMakeFiles/aria_embedded.dir/
+> +build
+> +[2014-10-27 17:18:12.547556095-07:00] | make[2]: *** No rule to make tar=
+get
+> +`tmp/sysroots/x86-kvm-guest/usr/include/krb5.h', needed by `storage/mari=
+a/
+> +CMakeFiles/aria_embedded.dir/ha_maria.cc.o'.  Stop.
+> +...
+> +
+> +The ha_maria.cc requires <openssl/ssl.h>, <openssl/ssl.h> requires <open=
+ssl/
+> +kssl.h>, and <openssl/kssl.h> conditionally requires <krb5.h>, but CMake
+> +ignore the condition, force to add krb5.h to mariadb's dependencies, it =
+is
+> +the issue of CMake dependency scanner:
+> +http://www.cmake.org/Wiki/CMake_FAQ#CMake_dependency_scanner
+> +
+> +As the above failure log shows, the dependency scanner was done at 17:18=
+:06,
+> +and the compiling start at 17:18:07, but compiling ha_maria.cc.o failed =
+at
+> +17:18:12, removing krb5.h within that 5 seconds caused the above failure.
+> +
+> +So we tweak the compile order, let ha_maria.cc as the first compile obje=
+ct,
+> +it will reduce the risk time of removing krb5.h.
+> +
+> +Upstream-Status: Pending
+> +---
+> + storage/maria/CMakeLists.txt | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/storage/maria/CMakeLists.txt b/storage/maria/CMakeLists.txt
+> +index 0f30f8f..6fcaccf 100644
+> +--- a/storage/maria/CMakeLists.txt
+> ++++ b/storage/maria/CMakeLists.txt
+> +@@ -15,7 +15,7 @@
+> +=20
+> + INCLUDE(CMakeDependentOption)
+> +=20
+> +-SET(ARIA_SOURCES ma_init.c ma_open.c ma_extra.c ma_info.c ma_rkey.c=20
+> ++SET(ARIA_SOURCES ha_maria.cc ma_init.c ma_open.c ma_extra.c ma_info.c m=
+a_rkey.c
+> +             ma_rnext.c ma_rnext_same.c=20
+> +             ma_search.c ma_page.c ma_key_recover.c ma_key.c=20
+> +             ma_locking.c ma_state.c
+> +@@ -32,7 +32,7 @@ SET(ARIA_SOURCES ma_init.c ma_open.c ma_extra.c ma_inf=
+o.c ma_rkey.c
+> +             ma_keycache.c ma_preload.c ma_ft_parser.c=20
+> +             ma_ft_update.c ma_ft_boolean_search.c=20
+> +             ma_ft_nlq_search.c ft_maria.c ma_sort.c=20
+> +-            ha_maria.cc trnman.c lockman.c
+> ++            trnman.c lockman.c
+> +             ma_rt_index.c ma_rt_key.c ma_rt_mbr.c ma_rt_split.c=20
+> +             ma_sp_key.c ma_control_file.c ma_loghandler.c=20
+> +             ma_pagecache.c ma_pagecaches.c
+> +--=20
+> +1.9.1
+> +
+> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc b/meta-oe/r=
+ecipes-support/mysql/mariadb_5.5.39.inc
+> index ae2e92b..42c8f3e 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
+> +++ b/meta-oe/recipes-support/mysql/mariadb_5.5.39.inc
+> @@ -8,6 +8,7 @@ SRC_URI =3D "http://mirror.stshosting.co.uk/mariadb/maria=
+db-${PV}/source/mariadb-$
+>             file://fix-cmake-module-path.patch \
+>             file://remove-bad-path.patch \
+>             file://fix-mysqlclient-r-version.patch \
+> +           file://storage-maria-CMakeLists.txt-tweak-source-file-compi.p=
+atch \
+>             file://my.cnf \
+>             file://mysqld.service \
+>            "
 > --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+> 1.9.1
+>=20
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---45wMVEkw4XUbiYON
+--E6lVPAHcXg6biC3t
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRsr2wACgkQN1Ujt2V2gBx+NwCZATz56ro64N6S7Jq1JCUdw46I
-LIwAnjKmDC45T9r/VciIhrmfldwrsYKn
-=j8ve
+iEYEARECAAYFAlRssdAACgkQN1Ujt2V2gBzftQCePLqT4aKIZNV88JDNWBKGoG/I
+s1gAnjNo8cH+pOaqSiYAsKMFMPs5znXu
+=7euq
 -----END PGP SIGNATURE-----
 
---45wMVEkw4XUbiYON--
+--E6lVPAHcXg6biC3t--
