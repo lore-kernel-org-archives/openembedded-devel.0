@@ -1,42 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 888897214B
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id C126072041
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 15:37:15 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id l15so5793092wiw.2
+	Wed, 19 Nov 2014 15:49:11 +0000 (UTC)
+Received: by mail-wi0-f182.google.com with SMTP id h11so2347896wiw.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 07:37:15 -0800 (PST)
+	Wed, 19 Nov 2014 07:49:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=4s4J3XfVNdp6jNu3bwFjAXp2sm5QfdGkXL9LSXZ08mc=;
-	b=u/GHDdBlmQlC+p7wHl9ohnyMXvRdjhUjEYudYICfHJpiupt3WwusKQxD11AiPP600i
-	7NatFAhTbt2GyDvYdC+nwYZEJIbv/T+eflAHZDLJm8SRgxAoDkOfKS7DBBQ/ZmawYqHa
-	3udwvQR6Yk92yg0Vg/ngIcB/TAlnSCZ25xxxxVKjrELVU3DvSuxvCyt+oTaZvGfJJ/ih
-	PWQ/Oc4Df2m7WcN/Tj+/Yj3RliPs5wlArNRBY7bcRXHD+tjBs3L7s4y/JR2xIvGzvyWC
-	mVsk/aEXhiH7yzq+BKQ8YSQQWBfoP76tvSuGeDCwDA2VsDG6Yg3QahAigMQt+FWp8nQB
-	qrVQ==
-X-Received: by 10.180.98.170 with SMTP id ej10mr14513693wib.74.1416411435560; 
-	Wed, 19 Nov 2014 07:37:15 -0800 (PST)
+	bh=ykwp5C+3y80/lnGd5KT1NNRF3w7c/ydOI4VRUFWCG2Y=;
+	b=WuB0cJQsrr8WzRaJUSRGcsk60rUQkgAXpxBtea5sbvZoKuo43t/NwPEkJFQLW3YX1t
+	GOz2DCj6ijF0VqBQOzscy3pQBtlkzjZj681tqEihcyKsbsFwiaacJ4FnWW6FsKCt+AZD
+	JexA1JFK8jXJWeqZi6m0q3Nsay+mc8uUyViyLmT1uZ0RukiNKbFf24u4l5N8BZJriZ8W
+	Qr2Mt1/HpM6Gp430n7+fn+dmyxN8HJ5sp26PXQHqseyZZ8pI+lnuKsXuzQblmHSTMAq2
+	cnjcbQhz2/5ZcaJPDcvHE6LGCJutrBvOKX7ILeGee+JBpB4XnuhoM0UAATnmxNYQb3hy
+	LmCw==
+X-Received: by 10.180.107.193 with SMTP id he1mr14386587wib.27.1416412151662; 
+	Wed, 19 Nov 2014 07:49:11 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	vm8sm2771824wjc.6.2014.11.19.07.37.14
+	t9sm2775724wjf.41.2014.11.19.07.49.10
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 19 Nov 2014 07:37:14 -0800 (PST)
+	Wed, 19 Nov 2014 07:49:10 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 19 Nov 2014 16:37:14 +0100
+Date: Wed, 19 Nov 2014 16:49:12 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141119153714.GO3315@jama>
-References: <1415645193-14565-1-git-send-email-cmorgan@cybexintl.com>
-	<20141119144901.GJ3315@jama>
-	<CAAPegz3PPzLqUOgcQqc20zxjDnzP8T5_Xhcf6i=zZcjtsqoNMg@mail.gmail.com>
+Message-ID: <20141119154912.GP3315@jama>
+References: <1415353906-20924-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <CAAPegz3PPzLqUOgcQqc20zxjDnzP8T5_Xhcf6i=zZcjtsqoNMg@mail.gmail.com>
+In-Reply-To: <1415353906-20924-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] dfu-util: Point to gitorious.org repository as gnumonks.org is down
+Subject: Re: [PATCH] umip: Add new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,109 +48,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2014 15:37:22 -0000
-X-Groupsio-MsgNum: 52941
+X-List-Received-Date: Wed, 19 Nov 2014 15:49:22 -0000
+X-Groupsio-MsgNum: 52942
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="z4D23EFnZpzTzcHd"
+	protocol="application/pgp-signature"; boundary="yEbVe0JFHWhrOjGA"
 Content-Disposition: inline
 
---z4D23EFnZpzTzcHd
+--yEbVe0JFHWhrOjGA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 19, 2014 at 09:53:49AM -0500, Chris Morgan wrote:
-> On Wed, Nov 19, 2014 at 9:49 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > On Mon, Nov 10, 2014 at 01:46:33PM -0500, Chris Morgan wrote:
-> >> ---
-> >>  meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb | 9 ++++++---
-> >>  1 file changed, 6 insertions(+), 3 deletions(-)
-> >>
-> >> diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb b/meta-o=
-e/recipes-support/dfu-util/dfu-util_0.7.bb
-> >> index aa2b84d..c706fd1 100644
-> >> --- a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-> >> +++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-> >> @@ -4,7 +4,10 @@ AUTHOR =3D "Harald Welte <laforge@openmoko.org>"
-> >>  LICENSE =3D "GPLv2"
-> >>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079=
-bae19f"
-> >>
-> >> -SRC_URI =3D "http://${BPN}.gnumonks.org/releases/${BP}.tar.gz \
-> >> +S =3D "${WORKDIR}/${BPN}-${BPN}"
-> >> +
-> >> +REV=3D"a0a3668e0571a9b007f7d62b01e7dcfd7754ce50"
-> >> +SRC_URI =3D "https://gitorious.org/${BPN}/${BPN}/archive/${REV}.tar.g=
-z \
-> >
-> > Aren't archives on gitorious generated ad-hoc like on github (changing
-> > SRC_URI checksums from time to time)?
-> >
-> > Why not use git repo on gitorious?
-> >
-> >>      file://0001-configure.ac-Don-t-check-for-usbpath.patch \
-> >>  "
-> >>
-> >> @@ -12,5 +15,5 @@ inherit autotools pkgconfig
-> >>
-> >>  DEPENDS =3D "libusb1"
-> >>
-> >> -SRC_URI[md5sum] =3D "56844020177d4db4c1ea2e926fe9d588"
-> >> -SRC_URI[sha256sum] =3D "f52a2a5489fbf9f3204a6ada05e0b47ee322e19d81c71=
-2e0c58a332d80ec3eab"
-> >> +SRC_URI[md5sum] =3D "1de724551604bce1962960b7a301cc08"
-> >> +SRC_URI[sha256sum] =3D "5d253f924fd29bc13054b664bba9aa86b865299971195=
-969478253c1775b7e56"
-> >> --
-> >> 1.9.3
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+On Fri, Nov 07, 2014 at 05:51:46PM +0800, Qian Lei wrote:
+> UMIP is an open source implementation of Mobile IPv6 and NEMO Basic
+> Support for Linux. It is released under the GPLv2 license. It supports
+> the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776
+> and RFC4877 (IPsec and IKEv2).
 >=20
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-connectivity/umip/umip_1.0.bb | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/umip/umip_1.0.bb
 >=20
-> I thought this option would make caching easier and avoid having to
-> get the whole history of git each time during the build. I can switch
-> to using the repository directly though, thats no problem. You want me
-> to do that?
+> diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/reci=
+pes-connectivity/umip/umip_1.0.bb
+> new file mode 100644
+> index 0000000..a7163b0
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY =3D "Mobile IPv6 and NEMO for Linux"
+> +DESCRIPTION =3D "UMIP is an open source implementation of Mobile IPv6 an=
+d NEMO \
+> +Basic Support for Linux. It is released under the GPLv2 license. It supp=
+orts \
+> +the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776 a=
+nd \
+> +RFC4877 (IPsec and IKEv2)."
+> +
+> +HOMEPAGE =3D "http://umip.org/"
+> +SECTION =3D "System Environment/Base"
+> +
+> +SRC_URI =3D "git://git.umip.org/umip.git;tag=3Dv${PV}"
 
-OE will cache the git clone, so it's not an issue.
+Use SRCREV otherwise bitbake fetcher will always run git ls-remote to
+map the tag to SRCREV.
 
-Yes please do, I've cherry-picked this to master-next (to see if I
-already get different checksums) but I would gladly replace it with v2.
+> +DEPENDS =3D "rpm"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D073dc31ccb2ebed70db54f1e8aeb4=
+c33"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit autotools-brokensep
+> +
+> +EXTRA_OE_CONF =3D "--enable-vt"
 
-> Any ideas where gnumonks.org went? I'm not sure this gitorious is an
-> official repository. There isn't really any information about that on
-> the web that I've been able to find.
+Missing some deps:
 
-No idea about this.
+| In file included from conf_reload.c:36:0:
+| conf.h:9:18: fatal error: pmgr.h: No such file or directory
+|  #include "pmgr.h"
+|                   ^
+
+
+> --=20
+> 1.8.4.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---z4D23EFnZpzTzcHd
+--yEbVe0JFHWhrOjGA
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRsuSoACgkQN1Ujt2V2gBzG+QCgiNaYVNq5caIYPb2/V1pxZhGS
-V/oAoJYpA4RKndsU7OTGUp9Ytjb4aTiy
-=752T
+iEYEARECAAYFAlRsu/gACgkQN1Ujt2V2gBwaNQCgq7200b2M7bnWUtxbRZAB/8DP
+M50AnRoI2p1rNP+5LYw1uRWpwZmWzHoc
+=5cn3
 -----END PGP SIGNATURE-----
 
---z4D23EFnZpzTzcHd--
+--yEbVe0JFHWhrOjGA--
