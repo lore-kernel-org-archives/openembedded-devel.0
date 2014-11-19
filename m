@@ -1,27 +1,45 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 51D3F712A7
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 1CD0F72150
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 07:35:22 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43623231"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Nov 2014 15:32:05 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAJ7Z3oT018787
+	Wed, 19 Nov 2014 07:53:14 +0000 (UTC)
+Received: by mail-wi0-f176.google.com with SMTP id ex7so4406479wid.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 15:35:03 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 19 Nov 2014 15:35:21 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 19 Nov 2014 15:34:51 +0800
-Message-ID: <1416382491-11239-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-selinux][PATCH] ustr: Change the SRC_URI to upstream and add a new patch
+	Tue, 18 Nov 2014 23:53:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:content-type:mime-version:subject:from
+	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
+	:to; bh=IJAtILQlmtIgRuiee3rIFaYbub+Ccw8S9A55JZ6yzMQ=;
+	b=Wt51kjzlfsL0oGFTlaiBjYgHQXrNbuPR7svBh9lsRRYQ5+NwDoIJc2hxgQ5/ASM89F
+	d5xqgWiIpLMux2Ynpl+/9qCSKkQmkAJ0YPh9l32azGqMt30cfmf9BhfHYd6ZY3yvhFY/
+	iiPwRvpjP/BgXV+Zjukz/UQH/4cNPnAeXU7tAldjnlwBvUcRLnSdFRa+UJFAz9q5n3c1
+	jFYHZhJbUM7lDKCgbNJyO/dT3JPa8cR6DCAZJWx/8rrOrFkHCzUOcaLYwQbmPaxsA30k
+	2Je5Vj1f6gKUUMcvJA8GzJvxoRiWml4q16u6yOZniKm5Z6lp49VqptHYMWIhJMR1zLMq
+	wZdg==
+X-Gm-Message-State: ALoCoQkwF5Q+VW1ILkYpdMFhAlp30u1jQ7K2ppHNdrETHePg2eKHI1EoeStFIvfVlWwvuhouSlqn
+X-Received: by 10.194.62.163 with SMTP id z3mr9412793wjr.74.1416383594966;
+	Tue, 18 Nov 2014 23:53:14 -0800 (PST)
+Received: from ?IPv6:2001:610:612::c083:4a54:da64:257e?
+	([2001:610:612:0:c083:4a54:da64:257e])
+	by mx.google.com with ESMTPSA id j8sm1079266wib.10.2014.11.18.23.53.12
+	for <multiple recipients>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 18 Nov 2014 23:53:13 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.0 \(1990.1\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <6684481.TtqaFjxDdy@peggleto-mobl5.ger.corp.intel.com>
+Date: Wed, 19 Nov 2014 08:53:11 +0100
+Message-Id: <2A9C95B6-1A62-40EC-B9F0-A9F72F6043E4@dominion.thruhere.net>
+References: <cover.1415758217.git.hongxu.jia@windriver.com>
+	<6715207.EkvTqHTqRG@peggleto-mobl5.ger.corp.intel.com>
+	<FB5465D5-3846-479F-A194-52F1FB16192E@dominion.thruhere.net>
+	<6684481.TtqaFjxDdy@peggleto-mobl5.ger.corp.intel.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+X-Mailer: Apple Mail (2.1990.1)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/1] libbonobo.inc: add libbonobo-bin package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,91 +53,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2014 07:35:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 19 Nov 2014 07:53:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Official upstream is still Ok, using it first.
-Add a new patch which is applied in Fedora20
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
----
- recipes-extended/ustr/ustr/ustr-c99-inline.patch | 44 ++++++++++++++++++++++++
- recipes-extended/ustr/ustr_1.0.4.bb              |  8 ++---
- 2 files changed, 47 insertions(+), 5 deletions(-)
- create mode 100644 recipes-extended/ustr/ustr/ustr-c99-inline.patch
+> Op 19 nov. 2014, om 01:36 heeft Paul Eggleton =
+<paul.eggleton@linux.intel.com> het volgende geschreven:
+>=20
+> On Tuesday 18 November 2014 19:32:19 Koen Kooi wrote:
+>>> Op 18 nov. 2014, om 16:27 heeft Paul Eggleton
+>>> <paul.eggleton@linux.intel.com> het volgende geschreven:
+>>>=20
+>>> Hi Koen,
+>>>=20
+>>> On Tuesday 18 November 2014 13:48:15 Koen Kooi wrote:
+>>>> Hongxu Jia schreef op 13-11-14 12:42:
+>>>>> On 11/13/2014 07:02 PM, Koen Kooi wrote: Hongxu Jia schreef op =
+12-11-14
+>>>>>=20
+>>>>> 03:13:
+>>>>>>>> The previous libbonobo package contains perl scripts, while
+>>>>>>>> installing libbonobo, package management detected perl =
+required,
+>>>>>>>> but it actually not needed as lib. So add libbonobo-bin package =
+to
+>>>>>>>> contain these scripts. It refers debian:
+>>>>>>>> https://packages.debian.org/sid/libbonobo2-bin
+>>>>>>>>=20
+>>>>>>>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com> ---
+>>>>>>>> meta-gnome/recipes-gnome/bonobo/libbonobo.inc | 3 ++- 1 file
+>>>>>>>> changed, 2 insertions(+), 1 deletion(-)
+>>>>>>>>=20
+>>>>>>>> diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+>>>>>>>> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc index
+>>>>>>>> 8b6007e..e0f6168 100644 ---
+>>>>>>>> a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc +++
+>>>>>>>> b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc @@ -5,10 +5,11 =
+@@
+>>>>>>>> LIC_FILES_CHKSUM =3D
+>>>>>>>> "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae19f \ =
+SECTION =3D
+>>>>>>>> "x11/gnome/libs" DEPENDS =3D "glib-2.0 orbit2 intltool-native =
+libxml2
+>>>>>>>> dbus dbus-glib"
+>>>>>>>>=20
+>>>>>>>> -inherit gnomebase gtk-doc +inherit gnomebase gtk-doc =
+lib_package
+>>>>>>>>=20
+>>>>>>>> ORBIT_IDL_SRC =3D "${STAGING_BINDIR_NATIVE}/orbit-idl-2"
+>>>>>>>>=20
+>>>>>>>> +RDEPENDS_${PN}-bin =3D "${PN} perl" FILES_${PN} +=3D
+>>>>>>>> "${libdir}/orbit-2.0/*.so ${libdir}/bonobo/monikers/*.so"
+>>>>>>>> FILES_${PN}-dbg +=3D "${libdir}/bonobo/monikers/.debug \
+>>>>>>>> ${libdir}/bonobo-2.0/samples/.debug ${libdir}/orbit-2.0/.debug"
+>>>>>=20
+>>>>> This breaks the upgrade path
+>>>>>=20
+>>>>>> I am sorry I do not understand what you mean, do you mean running
+>>>>>> 'smart upgrade' failed?
+>>>>=20
+>>>> You are moving files between packages, which makes 'opkg update ; =
+opkg
+>>>> upgrade' fail with conflicts unless you carefully craft
+>>>> RREPLACES/RCONFLICTS or enforce ordering in upgrade order (which =
+isn't
+>>>> currently possible).>=20
+>>> So what would you suggest - never make any packaging changes?
+>>=20
+>> No. I suggest thinking about what you're doing and minimizing the =
+damage. So
+>> far the patches I've seen are misguided (recipe=3D=3Dpackage =
+assumption) or
+>> plain weird. And in all cases break upgrade paths. Since arguing the =
+use
+>> case seems to fall on deaf ears I can only argue the technical =
+problems
+>> with them.
+>=20
+> What do you mean by "arguing the use case" ?
 
-diff --git a/recipes-extended/ustr/ustr/ustr-c99-inline.patch b/recipes-extended/ustr/ustr/ustr-c99-inline.patch
-new file mode 100644
-index 0000000..5f2d5da
---- /dev/null
-+++ b/recipes-extended/ustr/ustr/ustr-c99-inline.patch
-@@ -0,0 +1,44 @@
-+From 1b1c36ec67b7976d0bca0b6c7b766540cb541c1e Mon Sep 17 00:00:00 2001
-+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-+Date: Wed, 19 Nov 2014 14:48:18 +0800
-+Subject: [PATCH] c99-inline
-+
-+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-+---
-+ ustr-compiler.h | 12 +++++++++---
-+ 1 file changed, 9 insertions(+), 3 deletions(-)
-+
-+diff --git a/ustr-compiler.h b/ustr-compiler.h
-+index 642e6e8..63735e0 100644
-+--- a/ustr-compiler.h
-++++ b/ustr-compiler.h
-+@@ -113,17 +113,23 @@
-+ #endif
-+ 
-+ #ifndef USTR_CONF_EI_PROTO /* external inline */
-+-# if USTR_CONF_INCLUDE_CODEONLY_HEADERS
-++# if USTR_CONF_INCLUDE_CODEONLY_HEADERS || ! defined(__GNUC__) || \
-++     ! USTR_CONF_COMPILE_USE_INLINE
-+ #  define USTR_CONF_EI_PROTO static USTR__INLINE
-+ # else
-+ #  define USTR_CONF_EI_PROTO extern
-+ # endif
-+ #endif
-+ #ifndef USTR_CONF_II_PROTO /* implementation of inline */
-+-# if USTR_CONF_INCLUDE_CODEONLY_HEADERS
-++# if USTR_CONF_INCLUDE_CODEONLY_HEADERS || ! defined(__GNUC__) || \
-++     ! USTR_CONF_COMPILE_USE_INLINE
-+ #  define USTR_CONF_II_PROTO static USTR__INLINE
-+ # else
-+-#  define USTR_CONF_II_PROTO extern inline
-++#  if defined(__GNUC_STDC_INLINE__) || defined(__GNUC_GNU_INLINE__)
-++#   define USTR_CONF_II_PROTO extern inline __attribute__ ((__gnu_inline__))
-++#  else
-++#   define USTR_CONF_II_PROTO extern inline
-++#  endif
-+ # endif
-+ #endif
-+ 
-+-- 
-+1.8.3.1
-+
-diff --git a/recipes-extended/ustr/ustr_1.0.4.bb b/recipes-extended/ustr/ustr_1.0.4.bb
-index 6651a73..485e80d 100644
---- a/recipes-extended/ustr/ustr_1.0.4.bb
-+++ b/recipes-extended/ustr/ustr_1.0.4.bb
-@@ -11,13 +11,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c79c6e2ae13418d16d7dc82df960a1e7 \
- 		    file://LICENSE_LGPL;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
- 		    file://LICENSE_MIT;md5=c61e779b782608472bd87593c3c3916f"
- 
--# Official upstream seems to be offline.. replace w/ a Fedora Project mirror.
--# http://www.and.org/ustr/1.0.4/ustr-1.0.4.tar.bz2 
--
- SRC_URI = "\
--    http://pkgs.fedoraproject.org/repo/pkgs/ustr/ustr-1.0.4.tar.bz2/93147d9f0c9765d4cd0f04f7e44bdfce/ustr-1.0.4.tar.bz2 \
-+    http://www.and.org/ustr/${PV}/${PN}-${PV}.tar.bz2 \
-     file://ustr-makefile-fix.patch;patch=1 \
--    file://ustr-fix__va_copy-not-defined.patch;patch=2"
-+    file://ustr-fix__va_copy-not-defined.patch;patch=2 \
-+    file://ustr-c99-inline.patch;patch=3"
- SRC_URI[md5sum] = "93147d9f0c9765d4cd0f04f7e44bdfce"
- SRC_URI[sha256sum] = "3daf6eae9f78de1e872c0b2b83cce35515b94d4bb8a074e48f331fd99e1fc2c4"
- 
--- 
-1.8.3.1
+Making recipe name and package name match, see the avahi patch for =
+OE-core
+
+>=20
+>>> It's not as if this is the first time we've done this kind of =
+thing...
+>>=20
+>> And people still sound surprised when I say upgrade paths are broken =
+between
+>> releases. You yourself told me I should speak up when seeing such =
+patches
+>> and so I did.
+>=20
+> I did yes, and I hadn't forgotten. However we do need to make =
+packaging=20
+> changes from time to time, so we need to work out how to do them =
+properly -=20
+> and I'll bang the same drum as I always do - if we want to ensure =
+these=20
+> changes are properly considered and done in the correct manner, we =
+need to=20
+> have those things documented. If we do not, you shouldn't be surprised =
+when=20
+> people miss things. This is clearly an area you are interested in so =
+it's an=20
+> area you could help document.
+>=20
+> Getting back to this specific problem, when splitting out a set of =
+files into a=20
+> different package as is being done by this patch, as far as I am aware =
+there is=20
+> no means to ensure that the new package gets installed on upgrade =
+without=20
+> introducing a hard dependency which would defeat the purpose of making =
+the=20
+> change. So that means you either make the change or you don't.
+
+Not quite, but let's assume so for this case.
+
+> Are any of=20
+> these files that are being split out actually of interest on a typical =
+system=20
+> that OE would build for? If not, do we care that those files will =
+disappear?
+
+If the package were the file gets moved to is not installed by default =
+this change will cause no problems, but for all others (e.g. people with =
+-dev and/or -dbg installed) it will.
 
 
