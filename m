@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EA54714D7
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 19565714D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 15:08:13 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id n3so2185464wiv.7
+	Wed, 19 Nov 2014 15:11:27 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id r20so2188336wiv.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 07:08:13 -0800 (PST)
+	Wed, 19 Nov 2014 07:11:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=rCve8+oTf3P+P2iIpUUdoTIat8240ZC1TO9/AAJpQOA=;
-	b=DVoHW9W5vo+0tTytw+S5paqtmdNb9A1I6YEFcEt/oi5R2cT3hUI+lhgBFT3jPuuD7m
-	i5gltwJFn7eht9i5MvKpoH/9Q4JBUigajYEdoLk1ntd8FRjX4cyii+3pAYBsKqN/TZXJ
-	J0nz05IGyGjLGe7CXbeEUYpESvBwMMckMuV7OAzVHLDqfjtcz7Zoboyv1Qk4jc9+7kWc
-	YG7IIuA8e41wv8WIVticbCrMBxb5+rE3xRkYYaarfMljb4kexsIEJqlQq8n/sdk6C1qI
-	hgO7W7q+CCSfamzK54YrH4XcW9hBbFpPSskEKjd8zpgDSYTpGVr7CGPsRgMQf+t9uVQs
-	bpiw==
-X-Received: by 10.181.13.106 with SMTP id ex10mr14225293wid.36.1416409693645; 
-	Wed, 19 Nov 2014 07:08:13 -0800 (PST)
+	bh=BKAMUzWVPNAzRovF5owoA/GDVN1JXcGULlM90818/tc=;
+	b=B3s+LwESSyiSNdjORkCXmrCEwkshj/UQl7Pj8qExTy4JCLStlRL4OeX6Qub2QJfyXl
+	GR+P34R3huDI7IKfX2p5UUn7LM/rQUmspMAn5p3LI22YpEJuyCBGkUsmnL20hP5Jwz9A
+	AqYdoZwoVVu3SLFaqtTC8a2aeYcZjiCgJvDAt2YOCBbxcMAD+0ZJvw/BBTGtycVgTYU9
+	CGqc2Oe4AUa1dUu+hWeTYYA6WeWklgQMAIKGBa3X4wbpcLFFRKQ1D5B+eIeFilB/rIND
+	053LGV/8dlLn9OqN0O440NN2hLzYLTUpV6VUoGnTsJmeChYJEp+xWOK1d55AA+hETEci
+	+lpQ==
+X-Received: by 10.194.110.161 with SMTP id ib1mr60971389wjb.78.1416409887852; 
+	Wed, 19 Nov 2014 07:11:27 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	cu9sm2678094wjb.0.2014.11.19.07.08.12
+	by mx.google.com with ESMTPSA id dg7sm15847wib.24.2014.11.19.07.11.26
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 19 Nov 2014 07:08:12 -0800 (PST)
+	Wed, 19 Nov 2014 07:11:27 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 19 Nov 2014 16:08:14 +0100
+Date: Wed, 19 Nov 2014 16:11:28 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141119150814.GM3315@jama>
-References: <1416279281-22578-1-git-send-email-jian.liu@windriver.com>
+Message-ID: <20141119151128.GN3315@jama>
+References: <1416352369-166176-1-git-send-email-mark.hatle@windriver.com>
+	<1416352369-166176-2-git-send-email-mark.hatle@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1416279281-22578-1-git-send-email-jian.liu@windriver.com>
+In-Reply-To: <1416352369-166176-2-git-send-email-mark.hatle@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe] lvm2: files will be over written when updating using rpm
+Subject: Re: [meta-networking][PATCH] polarssl: add dependency openssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,43 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2014 15:08:17 -0000
-X-Groupsio-MsgNum: 52939
+X-List-Received-Date: Wed, 19 Nov 2014 15:11:30 -0000
+X-Groupsio-MsgNum: 52940
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Tnj+unmjHTqEM5y0"
+	protocol="application/pgp-signature"; boundary="rFUhhEVnhEf/dYhU"
 Content-Disposition: inline
 
---Tnj+unmjHTqEM5y0
+--rFUhhEVnhEf/dYhU
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 18, 2014 at 10:54:41AM +0800, Jian Liu wrote:
-> If there is no %config micro before the file in the spec file,
-> this file will be over-written after updating this package
-> using rpm.
-> This will make our settings lost.
-
-This isn't for meta-oe (missing meta-oe/ directory prefix)
-
-> Signed-off-by: Jian Liu <jian.liu@windriver.com>
-> ---
->  recipes-support/lvm2/lvm2.inc | 2 ++
->  1 file changed, 2 insertions(+)
+On Tue, Nov 18, 2014 at 05:12:49PM -0600, Mark Hatle wrote:
+> From: Kai Kang <kai.kang@windriver.com>
 >=20
-> diff --git a/recipes-support/lvm2/lvm2.inc b/recipes-support/lvm2/lvm2.inc
-> index 1bbb158..42f6e3a 100644
-> --- a/recipes-support/lvm2/lvm2.inc
-> +++ b/recipes-support/lvm2/lvm2.inc
-> @@ -48,3 +48,5 @@ FILES_${PN} +=3D "${libdir}/device-mapper/*.so ${base_l=
-ibdir}/udev"
->  FILES_${PN}-dbg +=3D "${libdir}/device-mapper/.debug"
+> polarssl compiles with openssl to build unit test cases. If openssl
+> doesn't exist, native libssl.so will be used. Then causes error:
+>=20
+> | .../bitbake_build/tmp/sysroots/x86_64-linux/usr/lib/libssl.so: error ad=
+ding symbols: File in wrong format
+>=20
+> Add dependency openssl for polarssl to fix it.
+>=20
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+> ---
+>  recipes-connectivity/polarssl/polarssl_1.3.8.bb | 1 +
+>  1 file changed, 1 insertion(+)
+
+Doesn't apply because it doesn't have meta-networking/ directory prefix
+
+>=20
+> diff --git a/recipes-connectivity/polarssl/polarssl_1.3.8.bb b/recipes-co=
+nnectivity/polarssl/polarssl_1.3.8.bb
+> index 8ca1b1c..7a496b7 100644
+> --- a/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+> +++ b/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+> @@ -28,6 +28,7 @@ SRC_URI =3D "https://polarssl.org/download/polarssl-${P=
+V}-gpl.tgz"
+>  SRC_URI[md5sum] =3D "d1a2b4f21727e888f143414d2e3144e6"
+>  SRC_URI[sha256sum] =3D "318171db41335cacbb5b0047c94f1faf91442ab70a223b52=
+23436703c9406ff1"
 > =20
->  RDEPENDS_${PN} =3D "bash"
-> +
-> +CONFFILES_${PN} +=3D "${sysconfdir}/lvm/lvm.conf"
+> +DEPENDS =3D "openssl"
+>  RDEPENDS_${PN} +=3D "libcrypto"
+>  EXTRA_OECMAKE =3D "-DUSE_SHARED_POLARSSL_LIBRARY=3Don"
+> =20
 > --=20
-> 1.8.5.2.233.g932f7e4
+> 1.9.3
 >=20
 > --=20
 > _______________________________________________
@@ -95,16 +106,16 @@ ibdir}/udev"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Tnj+unmjHTqEM5y0
+--rFUhhEVnhEf/dYhU
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRssl4ACgkQN1Ujt2V2gBwHqgCcC/mMunxslG2t26GXZ7RDRozp
-ziEAnRR2jqEYYNcgecuQnM9cK5KbCgVX
-=URe5
+iEYEARECAAYFAlRssyAACgkQN1Ujt2V2gBz0iACglbpERrCf5jHoo+G9vzOLTk7v
+njcAn1HPCJY9V/bdc8c6mATNkmjcOK+Z
+=4aSQ
 -----END PGP SIGNATURE-----
 
---Tnj+unmjHTqEM5y0--
+--rFUhhEVnhEf/dYhU--
