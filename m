@@ -1,27 +1,27 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BD3AF7190D
+Return-Path: <qianl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id F3B3272041
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Nov 2014 02:10:14 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAJ2ADKB027619
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Wed, 19 Nov 2014 03:44:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43610038"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 19 Nov 2014 11:41:08 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAJ3i67d001119
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Nov 2014 18:10:14 -0800 (PST)
-Received: from [128.224.162.136] (128.224.162.136) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 18 Nov 2014 18:10:13 -0800
-Message-ID: <546BFC03.5010805@windriver.com>
-Date: Wed, 19 Nov 2014 10:10:11 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
-MIME-Version: 1.0
+	Wed, 19 Nov 2014 11:44:06 +0800
+Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 19 Nov 2014 11:44:24 +0800
+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1415757715-26213-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1415757715-26213-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH][meta-networking][V2] ebtables: make it be able to work on 64bit kernel with 32 bit userspace
+Date: Wed, 19 Nov 2014 11:44:05 +0800
+Message-ID: <1416368645-23882-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.40]
+Subject: [meta-oe][PATCH] tiptop: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,84 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Nov 2014 02:10:17 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 19 Nov 2014 03:44:28 -0000
+Content-Type: text/plain
 
-Please drop it, it make x86 unable to work
+Tiptop is a performance monitoring tool for Linux. It provides a
+dynamic real-time view of the tasks running in the system. Tiptop
+is very similar to the top utility, but most of the information
+displayed comes from hardware counters.
 
--Roy
+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-extended/tiptop/tiptop_2.2.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
 
-On 2014年11月12日 10:01, rongqing.li@windriver.com wrote:
-> From: "Roy.Li" <rongqing.li@windriver.com>
->
-> Some structs, which is used to communicate between user space and kernel,
-> have the alignment issue on 64bit kernel with 32 bit userspace. To fix
-> this issue, ebtables redefines these struct, not use the kernel(sysroot)
-> include/uapi/linux/netfilter_bridge/ebtables.h, like ebt_entry_target:
->
-> The kernel's:
-> struct ebt_entry_target {
->          union {
->                  char name[EBT_FUNCTION_MAXNAMELEN];
->                  struct xt_target *target;
->          } u;
->          /* size of data */
->          unsigned int target_size;
->          unsigned char data[0] __attribute__ ((aligned (__alignof__(struct ebt_replace))));
-> };
->
-> The ebtables:
-> struct ebt_entry_target
-> {
->          union {
->                  char name[EBT_FUNCTION_MAXNAMELEN];
->                  struct ebt_target *target;
->          } u;
->          /* size of data */
->          unsigned int target_size;
-> |#ifdef KERNEL_64_USERSPACE_32
->          unsigned int pad;
-> |#endif
->          unsigned char data[0] __attribute__ ((aligned (__alignof__(struct ebt_replace))));
-> };
->
-> To make it work on 64bit kernel and 32bit userspace, KERNEL_64_USERSPACE_32
-> is needed to be enabled.
->
-> If the MLPREFIX of package matchs "lib.?32", the 32bit multilib  package on
-> 64bit kernel is being built.
->
-> Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-> ---
->   meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb | 11 +++++++++++
->   1 file changed, 11 insertions(+)
->
-> diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> index 32cfc75..ca084e3 100644
-> --- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> +++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-> @@ -27,6 +27,17 @@ S = "${WORKDIR}/ebtables-v${PV}"
->
->   inherit update-rc.d systemd
->
-> +python __anonymous () {
-> +    import re
-> +
-> +    multilib = d.getVar('MLPREFIX', True)
-> +    if multilib:
-> +        searchstr = "lib.?32"
-> +        reg = re.compile(searchstr)
-> +        if reg.search(multilib):
-> +            d.appendVar('CFLAGS' ,' -DKERNEL_64_USERSPACE_32 -DEBT_MIN_ALIGN=8')
-> +}
-> +
->   EXTRA_OEMAKE = " \
->           BINDIR=${base_sbindir} \
->           MANDIR=${mandir} \
->
-
+diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+new file mode 100644
+index 0000000..7f29ef3
+--- /dev/null
++++ b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Hardware performance monitoring counters" 
++HOMEPAGE = "http://tiptop.gforge.inria.fr/" 
++LICENSE = "GPLv2" 
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" 
++DEPENDS = "ncurses libxml2" 
++
++SRC_URI = "http://tiptop.gforge.inria.fr/releases/tiptop-${PV}.tar.gz" 
++SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7" 
++SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d" 
++
++CFLAGS += "-I${STAGING_INCDIR}/libxml2"
++
++inherit autotools-brokensep
 -- 
-Best Reagrds,
-Roy | RongQing Li
+1.8.3.1
+
 
