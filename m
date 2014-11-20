@@ -1,33 +1,34 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
+Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B8F5265E1A
+	by mail.openembedded.org (Postfix) with ESMTP id 19CFE65D4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Nov 2014 03:26:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43702391"
+	Thu, 20 Nov 2014 05:41:25 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43706989"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2014 11:23:27 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2014 13:38:08 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAK3QP5e007805
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAK5f6Di013599
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Nov 2014 11:26:25 +0800
+	Thu, 20 Nov 2014 13:41:07 +0800
 Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Thu, 20 Nov 2014 11:26:45 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Thu, 20 Nov 2014 13:41:21 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Thread-Topic: lvm2 compile error
-Thread-Index: AdAEbN96Q+W9lsi2S96Zrwlpiu5PbQAAx3AwAABU/oA=
-Date: Thu, 20 Nov 2014 03:26:45 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E87C674D@G08CNEXMBPEKD02.g08.fujitsu.local>
+Thread-Index: AdAEbN96Q+W9lsi2S96Zrwlpiu5PbQAAx3AwAABU/oAABHs38A==
+Date: Thu, 20 Nov 2014 05:41:27 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CCCB4C3F@G08CNEXMBPEKD02.g08.fujitsu.local>
 References: <A8FC939F80655644A89BB21CCD3741E87C670D@G08CNEXMBPEKD02.g08.fujitsu.local>
 	<30DC4EDFD798C94083F3E083754532CCCB4BC1@G08CNEXMBPEKD02.g08.fujitsu.local>
-In-Reply-To: <30DC4EDFD798C94083F3E083754532CCCB4BC1@G08CNEXMBPEKD02.g08.fujitsu.local>
-Accept-Language: zh-CN, en-US
+	<A8FC939F80655644A89BB21CCD3741E87C674D@G08CNEXMBPEKD02.g08.fujitsu.local>
+In-Reply-To: <A8FC939F80655644A89BB21CCD3741E87C674D@G08CNEXMBPEKD02.g08.fujitsu.local>
+Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.35]
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
 Subject: Re: lvm2 compile error
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,100 +44,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Nov 2014 03:27:05 -0000
+X-List-Received-Date: Thu, 20 Nov 2014 05:41:35 -0000
 Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-Hi, Bian
-
-Thank you very much.
-It is work after I get rid of "-pie -fpie".
-
-Best regards,
-Li xin
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Bian, Naimeng
-> Sent: Thursday, November 20, 2014 11:17 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] lvm2 compile error
->=20
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
-> > Of Li, Xin
-> > Sent: Thursday, November 20, 2014 11:02 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] lvm2 compile error
-> >
-> > Hi,
-> >
-> > I bitbake lvm2 from meta-oe, but it has the following errors.
-> > How can I fix it?
-> >
-> > Thanks in advance.
-> >
-> > Best regards,
-> > Li xin
-> >
-> > ------------------------------------------
-> > Build Configuration:
-> > BB_VERSION        =3D "1.24.0"
-> > BUILD_SYS         =3D "x86_64-linux"
-> > NATIVELSBSTRING   =3D "CentOS-6.5"
-> > TARGET_SYS        =3D "x86_64-fct-linux"
-> > =1B$B!D!D=1B(B
-> > | x86_64-fct-linux-gcc  -m64 -march=3Dcore2 -mtune=3Dcore2 -msse3
-> > -mfpmath=3Dsse -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed
-> > -Wl,-z,relro,-z,now
-> > --sysroot=3D/yocto/work001/fnst/lixin/work/yocto-ubinux/build_x86-64/tm=
-p
-> > /sysroots/ubinux-qemux86-64 -shared -Wl,-soname,libdevmapper.so.1.02 \
-> > |                -O2 -pipe -g -feliminate-unused-debug-types
-> > -fstack-protector-all -pie -fpie -D_FORTIFY_SOURCE=3D2 -O2 -pipe -g
-> > -feliminate-unused-debug-types -fstack-protector-all -pie -fpie
-> > -D_FORTIFY_SOURCE=3D2 -fPIC  -O2 -O2 -pipe -g
-> > -feliminate-unused-debug-types -fstack-protector-all -pie -fpie
-> > -D_FORTIFY_SOURCE=3D2 -fPIC  -O2 -Wl,--version-script,.export.sym
-> > -L../libdm -L../lib -L../daemons/dmeventd datastruct/bitset.o
-> > datastruct/hash.o datastruct/list.o libdm-common.o libdm-file.o
-> > libdm-deptree.o libdm-string.o libdm-report.o libdm-config.o
-> > mm/dbg_malloc.o mm/pool.o regex/matcher.o regex/parse_rx.o regex/ttree.=
-o
-> > ioctl/libdm-iface.o -lrt   -ludev  -o ioctl/libdevmapper.so.1.02
->=20
-> I think it's wrong to build shared library with "-shared" and "-pie -fpie=
-" together.
-> I guess it will work after get rid of "-pie -fpie".
->=20
-> Regards
->  Bian
->=20
-> > |
-> > /yocto/work001/fnst/lixin/work/yocto-ubinux/build_x86-64/tmp/sysroots/
-> > ubinux-qemux86-64/usr/lib/../lib/Scrt1.o: In function `_start':
-> > |
-> > /yocto/work001/fnst/lixin/work/yocto-ubinux/build_x86-64/tmp/work/core
-> > 2-64-fct-linux/glibc/2.20-r0/git/csu/../sysdeps/x86_64/start.S:108:
-> > undefined reference to `main'
-> > | collect2: error: ld returned 1 exit status
-> > | make[1]: *** [ioctl/libdevmapper.so.1.02] Error 1
-> > ----------------------------------------
-> >
-> >
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IExpLCBY
+aW4NCj4gU2VudDogVGh1cnNkYXksIE5vdmVtYmVyIDIwLCAyMDE0IDExOjI3IEFNDQo+IFRvOiBv
+cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTog
+W29lXSBsdm0yIGNvbXBpbGUgZXJyb3INCj4gDQo+IEhpLCBCaWFuDQo+IA0KPiBUaGFuayB5b3Ug
+dmVyeSBtdWNoLg0KPiBJdCBpcyB3b3JrIGFmdGVyIEkgZ2V0IHJpZCBvZiAiLXBpZSAtZnBpZSIu
+DQo+IA0KDQpUaGFua3MgZm9yIHlvdXIgY29uZmlybWF0aW9uLg0KDQpQbGVhc2UgYWRkICJTRUNV
+UklUWV9DRkxBR1NfcG4tbHZtMiA9ICIke1NFQ1VSSVRZX05PX1BJRV9DRkxBR1N9IiIgaW50byBz
+ZWN1cml0eV9mbGFncy5pbmMgb2YgeW91ciBkaXN0cm8uDQoNClRoYW5rcywNCiBCaWFuDQoNCj4g
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+IEZyb206IG9wZW5lbWJlZGRlZC1kZXZl
+bC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBbbWFpbHRvOm9wZW5lbWJlZGRl
+ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZg0KPiA+IE9m
+IEJpYW4sIE5haW1lbmcNCj4gPiBTZW50OiBUaHVyc2RheSwgTm92ZW1iZXIgMjAsIDIwMTQgMTE6
+MTcgQU0NCj4gPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcN
+Cj4gPiBTdWJqZWN0OiBSZTogW29lXSBsdm0yIGNvbXBpbGUgZXJyb3INCj4gPg0KPiA+ID4gLS0t
+LS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gPiA+IEZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1i
+b3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiA+IFttYWlsdG86b3BlbmVtYmVkZGVk
+LWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmDQo+ID4gPiBP
+ZiBMaSwgWGluDQo+ID4gPiBTZW50OiBUaHVyc2RheSwgTm92ZW1iZXIgMjAsIDIwMTQgMTE6MDIg
+QU0NCj4gPiA+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0K
+PiA+ID4gU3ViamVjdDogW29lXSBsdm0yIGNvbXBpbGUgZXJyb3INCj4gPiA+DQo+ID4gPiBIaSwN
+Cj4gPiA+DQo+ID4gPiBJIGJpdGJha2UgbHZtMiBmcm9tIG1ldGEtb2UsIGJ1dCBpdCBoYXMgdGhl
+IGZvbGxvd2luZyBlcnJvcnMuDQo+ID4gPiBIb3cgY2FuIEkgZml4IGl0Pw0KPiA+ID4NCj4gPiA+
+IFRoYW5rcyBpbiBhZHZhbmNlLg0KPiA+ID4NCj4gPiA+IEJlc3QgcmVnYXJkcywNCj4gPiA+IExp
+IHhpbg0KPiA+ID4NCj4gPiA+IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQ0KPiA+ID4gQnVpbGQgQ29uZmlndXJhdGlvbjoNCj4gPiA+IEJCX1ZFUlNJT04gICAgICAg
+ID0gIjEuMjQuMCINCj4gPiA+IEJVSUxEX1NZUyAgICAgICAgID0gIng4Nl82NC1saW51eCINCj4g
+PiA+IE5BVElWRUxTQlNUUklORyAgID0gIkNlbnRPUy02LjUiDQo+ID4gPiBUQVJHRVRfU1lTICAg
+ICAgICA9ICJ4ODZfNjQtZmN0LWxpbnV4Ig0KPiA+ID4ggWOBYw0KPiA+ID4gfCB4ODZfNjQtZmN0
+LWxpbnV4LWdjYyAgLW02NCAtbWFyY2g9Y29yZTIgLW10dW5lPWNvcmUyIC1tc3NlMw0KPiA+ID4g
+LW1mcG1hdGg9c3NlIC1XbCwtTzEgLVdsLC0taGFzaC1zdHlsZT1nbnUgLVdsLC0tYXMtbmVlZGVk
+DQo+ID4gPiAtV2wsLXoscmVscm8sLXosbm93DQo+ID4gPg0KPiAtLXN5c3Jvb3Q9L3lvY3RvL3dv
+cmswMDEvZm5zdC9saXhpbi93b3JrL3lvY3RvLXViaW51eC9idWlsZF94ODYtNjQvdA0KPiA+ID4g
+bXANCj4gPiA+IC9zeXNyb290cy91YmludXgtcWVtdXg4Ni02NCAtc2hhcmVkIC1XbCwtc29uYW1l
+LGxpYmRldm1hcHBlci5zby4xLjAyDQo+ID4gPiBcDQo+ID4gPiB8ICAgICAgICAgICAgICAgIC1P
+MiAtcGlwZSAtZyAtZmVsaW1pbmF0ZS11bnVzZWQtZGVidWctdHlwZXMNCj4gPiA+IC1mc3RhY2st
+cHJvdGVjdG9yLWFsbCAtcGllIC1mcGllIC1EX0ZPUlRJRllfU09VUkNFPTIgLU8yIC1waXBlIC1n
+DQo+ID4gPiAtZmVsaW1pbmF0ZS11bnVzZWQtZGVidWctdHlwZXMgLWZzdGFjay1wcm90ZWN0b3It
+YWxsIC1waWUgLWZwaWUNCj4gPiA+IC1EX0ZPUlRJRllfU09VUkNFPTIgLWZQSUMgIC1PMiAtTzIg
+LXBpcGUgLWcNCj4gPiA+IC1mZWxpbWluYXRlLXVudXNlZC1kZWJ1Zy10eXBlcyAtZnN0YWNrLXBy
+b3RlY3Rvci1hbGwgLXBpZSAtZnBpZQ0KPiA+ID4gLURfRk9SVElGWV9TT1VSQ0U9MiAtZlBJQyAg
+LU8yIC1XbCwtLXZlcnNpb24tc2NyaXB0LC5leHBvcnQuc3ltDQo+ID4gPiAtTC4uL2xpYmRtIC1M
+Li4vbGliIC1MLi4vZGFlbW9ucy9kbWV2ZW50ZCBkYXRhc3RydWN0L2JpdHNldC5vDQo+ID4gPiBk
+YXRhc3RydWN0L2hhc2gubyBkYXRhc3RydWN0L2xpc3QubyBsaWJkbS1jb21tb24ubyBsaWJkbS1m
+aWxlLm8NCj4gPiA+IGxpYmRtLWRlcHRyZWUubyBsaWJkbS1zdHJpbmcubyBsaWJkbS1yZXBvcnQu
+byBsaWJkbS1jb25maWcubw0KPiA+ID4gbW0vZGJnX21hbGxvYy5vIG1tL3Bvb2wubyByZWdleC9t
+YXRjaGVyLm8gcmVnZXgvcGFyc2Vfcngubw0KPiByZWdleC90dHJlZS5vDQo+ID4gPiBpb2N0bC9s
+aWJkbS1pZmFjZS5vIC1scnQgICAtbHVkZXYgIC1vIGlvY3RsL2xpYmRldm1hcHBlci5zby4xLjAy
+DQo+ID4NCj4gPiBJIHRoaW5rIGl0J3Mgd3JvbmcgdG8gYnVpbGQgc2hhcmVkIGxpYnJhcnkgd2l0
+aCAiLXNoYXJlZCIgYW5kICItcGllIC1mcGllIg0KPiB0b2dldGhlci4NCj4gPiBJIGd1ZXNzIGl0
+IHdpbGwgd29yayBhZnRlciBnZXQgcmlkIG9mICItcGllIC1mcGllIi4NCj4gPg0KPiA+IFJlZ2Fy
+ZHMNCj4gPiAgQmlhbg0KPiA+DQo+ID4gPiB8DQo+ID4gPg0KPiAveW9jdG8vd29yazAwMS9mbnN0
+L2xpeGluL3dvcmsveW9jdG8tdWJpbnV4L2J1aWxkX3g4Ni02NC90bXAvc3lzcm9vdA0KPiA+ID4g
+cy8NCj4gPiA+IHViaW51eC1xZW11eDg2LTY0L3Vzci9saWIvLi4vbGliL1NjcnQxLm86IEluIGZ1
+bmN0aW9uIGBfc3RhcnQnOg0KPiA+ID4gfA0KPiA+ID4NCj4gL3lvY3RvL3dvcmswMDEvZm5zdC9s
+aXhpbi93b3JrL3lvY3RvLXViaW51eC9idWlsZF94ODYtNjQvdG1wL3dvcmsvY28NCj4gPiA+IHJl
+DQo+ID4gPiAyLTY0LWZjdC1saW51eC9nbGliYy8yLjIwLXIwL2dpdC9jc3UvLi4vc3lzZGVwcy94
+ODZfNjQvc3RhcnQuUzoxMDg6DQo+ID4gPiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvIGBtYWluJw0K
+PiA+ID4gfCBjb2xsZWN0MjogZXJyb3I6IGxkIHJldHVybmVkIDEgZXhpdCBzdGF0dXMNCj4gPiA+
+IHwgbWFrZVsxXTogKioqIFtpb2N0bC9saWJkZXZtYXBwZXIuc28uMS4wMl0gRXJyb3IgMQ0KPiA+
+ID4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+ID4NCj4gPiA+
+DQo+ID4gPg0KPiA+ID4NCj4gPiA+IC0tDQo+ID4gPiBfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXw0KPiA+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcg
+bGlzdA0KPiA+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4g
+PiA+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVt
+YmVkZGVkLWRldmVsDQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXw0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4g
+PiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9s
+aXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVs
+DQo+IC0tDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+DQo+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gT3BlbmVtYmVkZGVkLWRldmVs
+QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
+bWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg==
 
