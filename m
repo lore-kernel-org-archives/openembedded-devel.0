@@ -1,40 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 3418D6AC82
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 2969C721AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 14:10:22 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id ex7so12157337wid.15
+	Fri, 21 Nov 2014 14:19:04 +0000 (UTC)
+Received: by mail-wi0-f182.google.com with SMTP id h11so8981639wiw.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 06:10:23 -0800 (PST)
+	Fri, 21 Nov 2014 06:19:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=2arzrJrVYJsKcBYVTOWouDQiG/9yfzy15jAwPdzB/vw=;
-	b=tOM6hBgNHtmtY3zd4hkpwKzgTIvAtKlIYmz+t56WmMWAzTvRQcD7+ao+wyVcsbOkJ/
-	8iEvBdRIdcrmlw3wi5CxVpKrR9AJNRMjNIi/6rp7figuFGbzvvR8kV05Qk9vsmmxOEhh
-	FOHqx362c6PudAMlXkqRz74qb/bzHtVGR7EdBogWgXgxGNRWrdYEl72Uusgb4eaemKT8
-	dKXVz4/oZMWKXsGK+oJRyqHHWZPjmCJTuOswnvJnwiD8LOjIA4ZC+WimV+dTbOaX1m9z
-	p6zEIrnn9ObGWDSs3q1A461aSz1wBYytXnxJpRpmeTG1aRKBWqL8jz9EVOkiNMJTj7R3
-	cbaQ==
-X-Received: by 10.194.249.70 with SMTP id ys6mr7671954wjc.61.1416579021652;
-	Fri, 21 Nov 2014 06:10:21 -0800 (PST)
-Received: from localhost ([89.176.104.3])
-	by mx.google.com with ESMTPSA id fp9sm8923841wic.12.2014.11.21.06.10.19
-	for <multiple recipients>
+	bh=Wf1tqI+Ea6qma7qRnznrAFYRaMAb81WElTmSUI0xVh4=;
+	b=BwOHODIgTYU380cuhmwgds0xzC3d631mNmqWPYWBd49gqSyiU2hBoyricvx3UyZctj
+	Td1DdIWtVKkohL/vZNg0d5XbR/3nMWEnUYJpXunNRoiWcXRpr4fZaVIfpJOnAZmfmZpc
+	GdPHaa6coCP7UXQ6z5c3j3jp+shIdlBAp/jtwunrGslgkhVnGdj/FGgXwi2qnJybsbE9
+	93/mlJW0Gil2KA+g5MVBgOYRJT1J8sVh8Ms5bxnJ6wfclUKcp+VHhE7+SjdEGILEMwxS
+	s5hIIO7HJeKqn9zQyFrypNW7tZ+QBUF0eabRLyWDk5TE9ECFg1pFojHoD/Cr7wbOIoFU
+	Yf+A==
+X-Received: by 10.194.83.8 with SMTP id m8mr8288946wjy.58.1416579544366;
+	Fri, 21 Nov 2014 06:19:04 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	h14sm7508550wic.8.2014.11.21.06.19.02 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Nov 2014 06:10:20 -0800 (PST)
+	Fri, 21 Nov 2014 06:19:02 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 21 Nov 2014 15:10:17 +0100
+Date: Fri, 21 Nov 2014 15:19:04 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141121141017.GJ2163@jama>
-References: <1416420840-2194-1-git-send-email-cmorgan@cybexintl.com>
+Message-ID: <20141121141904.GK2163@jama>
+References: <20141119154912.GP3315@jama>
+	<1416556558-15428-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+	<1416556558-15428-2-git-send-email-qianl.fnst@cn.fujitsu.com>
+	<20141121140616.GB20204@mentor.com>
 MIME-Version: 1.0
-In-Reply-To: <1416420840-2194-1-git-send-email-cmorgan@cybexintl.com>
+In-Reply-To: <20141121140616.GB20204@mentor.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Chris Morgan <cmorgan@cybexintl.com>
-Subject: Re: [meta-oe]]PATCH] dfu-util: Switch from using a gitorious generated download to using the git repository to avoid potential checksum mismatches if the generated download changes
+Subject: Re: [PATCH v2 1/2] UMIP: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,69 +50,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 14:10:26 -0000
-X-Groupsio-MsgNum: 52974
+X-List-Received-Date: Fri, 21 Nov 2014 14:19:06 -0000
+X-Groupsio-MsgNum: 52975
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="apbmkPN6Hu/1dI3g"
+	protocol="application/pgp-signature"; boundary="KjSGHOmKKB2VUiQn"
 Content-Disposition: inline
 
---apbmkPN6Hu/1dI3g
+--KjSGHOmKKB2VUiQn
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 19, 2014 at 01:14:00PM -0500, Chris Morgan wrote:
-> ---
-
-Next time please include your SOB line.
-
->  meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+On Fri, Nov 21, 2014 at 09:06:18AM -0500, Joe MacDonald wrote:
+> [[oe] [PATCH v2 1/2] UMIP: add new recipe] On 14.11.21 (Fri 15:55) Qian L=
+ei wrote:
 >=20
-> diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb b/meta-oe/r=
-ecipes-support/dfu-util/dfu-util_0.7.bb
-> index c706fd1..7f06f8f 100644
-> --- a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-> +++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-> @@ -4,12 +4,12 @@ AUTHOR =3D "Harald Welte <laforge@openmoko.org>"
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> =20
-> -S =3D "${WORKDIR}/${BPN}-${BPN}"
-> +S =3D "${WORKDIR}/git"
-> =20
-> -REV=3D"a0a3668e0571a9b007f7d62b01e7dcfd7754ce50"
-> -SRC_URI =3D "https://gitorious.org/${BPN}/${BPN}/archive/${REV}.tar.gz \
-> +SRC_URI =3D "git://gitorious.org/dfu-util/dfu-util.git \
->      file://0001-configure.ac-Don-t-check-for-usbpath.patch \
->  "
-> +SRCREV=3D"a0a3668e0571a9b007f7d62b01e7dcfd7754ce50"
-> =20
->  inherit autotools pkgconfig
-> =20
+> > UMIP is an open source implementation of Mobile IPv6 and NEMO Basic
+> > Support for Linux. It is released under the GPLv2 license. It supports
+> > the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776
+> > and RFC4877 (IPsec and IKEv2).
+>=20
+> I think this recipe also probably belongs in meta-networking.  I'm
+> catching up on the merges today, so if there's no objection, I'll put it
+> there in the same place in the hierarchy.
+
+It's failing to build in my world builds, so please wait a bit more.
+
+Also a lot of patches from last week were modified when I was
+cherry-picking them to master-next, please make sure you're using right
+version.
+
+> > Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> > ---
+> >  meta-oe/recipes-connectivity/umip/umip_1.0.bb | 18 ++++++++++++++++++
+> >  1 file changed, 18 insertions(+)
+> >  create mode 100644 meta-oe/recipes-connectivity/umip/umip_1.0.bb
+> >=20
+> > diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/re=
+cipes-connectivity/umip/umip_1.0.bb
+> > new file mode 100644
+> > index 0000000..76901ab
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+> > @@ -0,0 +1,18 @@
+> > +SUMMARY =3D "Mobile IPv6 and NEMO for Linux"
+> > +DESCRIPTION =3D "UMIP is an open source implementation of Mobile IPv6 =
+and NEMO \
+> > +Basic Support for Linux. It is released under the GPLv2 license. It su=
+pports \
+> > +the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776=
+ and \
+> > +RFC4877 (IPsec and IKEv2)."
+> > +HOMEPAGE =3D "http://umip.org/"
+> > +SECTION =3D "System Environment/Base"
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D073dc31ccb2ebed70db54f1e8ae=
+b4c33"
+> > +DEPENDS =3D "rpm indent-native"
+> > +
+> > +SRC_URI =3D "git://git.umip.org/umip.git"
+> > +SRCREV =3D "428974c2d0d8e75a2750a3ab0488708c5dfdd8e3"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +EXTRA_OE_CONF =3D "--enable-vt"
+> > +
+> > +inherit autotools-brokensep
+> > --=20
+> > 1.8.3.1
+> >=20
 > --=20
-> 1.9.3
->=20
+> -Joe MacDonald.
+> :wq
+
+
+
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---apbmkPN6Hu/1dI3g
+--KjSGHOmKKB2VUiQn
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRvR8kACgkQN1Ujt2V2gBwedQCgi/71ln96NOoRnl9vuxuFQgX1
-rNUAn0J/iiIqq74F0OZps7SjGm0Li0ed
-=o06+
+iEYEARECAAYFAlRvSdgACgkQN1Ujt2V2gBymggCgoIxFhagVIe61z1tU+o78aQpo
+FpkAoIHHeh9s5f9iQ8AtR6puN5Fe3Vd8
+=yk2/
 -----END PGP SIGNATURE-----
 
---apbmkPN6Hu/1dI3g--
+--KjSGHOmKKB2VUiQn--
