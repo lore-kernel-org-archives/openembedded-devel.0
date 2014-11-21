@@ -1,34 +1,33 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id CA0537220D
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 14:46:03 +0000 (UTC)
-Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
-	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1XrpTI-0005io-Hn from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 Nov 2014 06:46:04 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.3.181.6;
-	Fri, 21 Nov 2014 06:46:03 -0800
-Received: by burninator (Postfix, from userid 1000)	id 491E458044A; Fri, 21
-	Nov 2014 09:46:03 -0500 (EST)
-Date: Fri, 21 Nov 2014 09:46:03 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20141121144602.GC20204@mentor.com>
-References: <20141119154912.GP3315@jama>
-	<1416556558-15428-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<1416556558-15428-2-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<20141121140616.GB20204@mentor.com> <20141121141904.GK2163@jama>
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-la0-f47.google.com (mail-la0-f47.google.com
+	[209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id E09C765C91;
+	Fri, 21 Nov 2014 17:24:27 +0000 (UTC)
+Received: by mail-la0-f47.google.com with SMTP id hz20so4667459lab.34
+	for <multiple recipients>; Fri, 21 Nov 2014 09:24:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=1gQxeMfCcNXFQ763VGDyRxj4vanxEOtaziB06ShMWZE=;
+	b=SaXZYyK6TS0jDcjevQgUbhcAR3o5NmVvvIKsEmDnmggsLXwxRwUQFCWi9JD8n0jq8u
+	KFjf5ISERUq4/s9u8QY+5c77e+vORQtW+tDc8PEq/UA0JItZP9kkkG1nbVqrBvN0jIek
+	oBs/5C5YMKbEE5psyGn89eUR6/nDBbdI1lQFoW3TYD6spckg/s/iHT1UwphCrkxUktSe
+	kUjsCKuJdOq2/s0hl3lBK66S/7LaOeKZJPvN/ZXUYZP+oIzekSp3HvlihYAkGeUGRnz4
+	SBD8D+3APQIwIQ8gtU0M1MolMhJhxWHl4NiYd3AWGPpSuPtBumre9CBHsxohe26IACM/
+	MnCg==
 MIME-Version: 1.0
-In-Reply-To: <20141121141904.GK2163@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [PATCH v2 1/2] UMIP: add new recipe
+X-Received: by 10.112.132.2 with SMTP id oq2mr6504582lbb.11.1416590666923;
+	Fri, 21 Nov 2014 09:24:26 -0800 (PST)
+Received: by 10.112.189.38 with HTTP; Fri, 21 Nov 2014 09:24:26 -0800 (PST)
+In-Reply-To: <20141119140143.GB3315@jama>
+References: <20141119140143.GB3315@jama>
+Date: Fri, 21 Nov 2014 18:24:26 +0100
+Message-ID: <CAAQYJAtMvgZXe4SAuvet3-rtt5oXoXWMt3CnuzJ2dQy+HTLQHQ@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2014-11-19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,122 +41,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 14:46:06 -0000
-X-Groupsio-MsgNum: 52976
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="E/DnYTRukya0zdZ1"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 21 Nov 2014 17:24:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
---E/DnYTRukya0zdZ1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Nov 19, 2014 at 3:01 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> http://www.openembedded.org/wiki/Bitbake_World_Status
+>
+> == Failed tasks 2014-11-19 ==
+>
+> === common (12) ===
+>     * meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc-static-utils_2.0.4.bb, do_compile
+>     * meta-openembedded/meta-initramfs/recipes-devtools/klibc/klibc_2.0.4.bb, do_compile
 
-[Re: [oe] [PATCH v2 1/2] UMIP: add new recipe] On 14.11.21 (Fri 15:19) Mart=
-in Jansa wrote:
+Hi Martin,
 
-> On Fri, Nov 21, 2014 at 09:06:18AM -0500, Joe MacDonald wrote:
-> > [[oe] [PATCH v2 1/2] UMIP: add new recipe] On 14.11.21 (Fri 15:55) Qian=
- Lei wrote:
-> >=20
-> > > UMIP is an open source implementation of Mobile IPv6 and NEMO Basic
-> > > Support for Linux. It is released under the GPLv2 license. It supports
-> > > the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776
-> > > and RFC4877 (IPsec and IKEv2).
-> >=20
-> > I think this recipe also probably belongs in meta-networking.  I'm
-> > catching up on the merges today, so if there's no objection, I'll put it
-> > there in the same place in the hierarchy.
->=20
-> It's failing to build in my world builds, so please wait a bit more.
+thanks for the huge build-tests!
 
-Yeah, I saw that.  It also wouldn't be able to get pushed for master
-without the dependent package anyway, and I wouldn't be merging that.
+About klibc, I'm under the impression your git pull was done just
+before the klibc fix went in meta-initramfs.
+This is supposedly fixed now.
 
-> Also a lot of patches from last week were modified when I was
-> cherry-picking them to master-next, please make sure you're using right
-> version.
+Yes, klibc is especially fragile with regard to the toolchain changes
+in oe-core ;)
 
-Of course, I always prefer to cherry pick from master-next rather than
-merging from email.
+Cheers
+Andrea
 
--J.
 
->=20
-> > > Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-> > > ---
-> > >  meta-oe/recipes-connectivity/umip/umip_1.0.bb | 18 ++++++++++++++++++
-> > >  1 file changed, 18 insertions(+)
-> > >  create mode 100644 meta-oe/recipes-connectivity/umip/umip_1.0.bb
-> > >=20
-> > > diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/=
-recipes-connectivity/umip/umip_1.0.bb
-> > > new file mode 100644
-> > > index 0000000..76901ab
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-> > > @@ -0,0 +1,18 @@
-> > > +SUMMARY =3D "Mobile IPv6 and NEMO for Linux"
-> > > +DESCRIPTION =3D "UMIP is an open source implementation of Mobile IPv=
-6 and NEMO \
-> > > +Basic Support for Linux. It is released under the GPLv2 license. It =
-supports \
-> > > +the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC37=
-76 and \
-> > > +RFC4877 (IPsec and IKEv2)."
-> > > +HOMEPAGE =3D "http://umip.org/"
-> > > +SECTION =3D "System Environment/Base"
-> > > +LICENSE =3D "GPLv2"
-> > > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D073dc31ccb2ebed70db54f1e8=
-aeb4c33"
-> > > +DEPENDS =3D "rpm indent-native"
-> > > +
-> > > +SRC_URI =3D "git://git.umip.org/umip.git"
-> > > +SRCREV =3D "428974c2d0d8e75a2750a3ab0488708c5dfdd8e3"
-> > > +
-> > > +S =3D "${WORKDIR}/git"
-> > > +EXTRA_OE_CONF =3D "--enable-vt"
-> > > +
-> > > +inherit autotools-brokensep
-> > > --=20
-> > > 1.8.3.1
-> > >=20
-> > --=20
-> > -Joe MacDonald.
-> > :wq
->=20
->=20
->=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
->=20
-> --=20
+>     * meta-openembedded/meta-oe/recipes-connectivity/umip/umip_1.0.bb, do_compile
+>     * meta-openembedded/meta-oe/recipes-devtools/php/php_5.4.33.bb, do_compile
+>     * meta-openembedded/meta-oe/recipes-extended/acpica/acpitests_20140828.bb, do_compile
+>     * meta-openembedded/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb, do_unpack
+>     * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do_compile
+>     * meta-openembedded/meta-oe/recipes-support/mysql/mysql-python_1.2.4.bb, do_compile
+>     * meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb, do_configure
+>     * meta-smartphone/meta-shr/recipes-shr/3rdparty/iliwi_git.bb, do_compile
+>     * meta-smartphone/meta-shr/recipes-shr/3rdparty/sensmon_git.bb, do_compile
+>     * meta-smartphone/meta-shr/recipes-shr/3rdparty/valacompass_git.bb, do_compile
+>
+> === common-x86 (0) ===
+>
+> === qemuarm (2) ===
+>     * meta-openembedded/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb, do_fetch
+>     * meta-smartphone/meta-android/recipes-multimedia/android-audiosystem/android-audiosystem_bzr.bb, do_compile
+>
+> === qemux86 (0) ===
+>
+> === qemux86_64 (0) ===
+>
+> === Number of failed tasks ===
+> {| class=wikitable
+> |-
+> ||qemuarm       ||14    ||http://logs.nslu2-linux.org/buildlogs/oe/world//log.world.20141110_065307.log/||http://errors.yoctoproject.org:80/Errors/Search/1/3219/
+> |-
+> ||qemux86       ||12    ||http://logs.nslu2-linux.org/buildlogs/oe/world//log.world.20141110_221551.log/||http://errors.yoctoproject.org:80/Errors/Search/1/3220/
+> |-
+> ||qemux86_64    ||13    ||http://logs.nslu2-linux.org/buildlogs/oe/world//log.world.20141111_143018.log/||http://errors.yoctoproject.org:80/Errors/Search/1/3241/
+> |}
+>
+> --
 > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>
 
-
-
---=20
--Joe MacDonald.
-:wq
-
---E/DnYTRukya0zdZ1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUb1AqAAoJEEn8ffcsOfaWcpYH/R5TbFzXK6b/j9GH8ap2paqJ
-zcn1C79RTkfS9ScKSP5vuC+1Z9cx+iUDCCfRKs9x4f2aBn6Ci2e8yVvJB4J+XUTo
-MkVffSCaAqNz8JLlGocLte5hWi5IO+Mx51g1wzqZ7TBZXQaGCwF5RHnU6aP3o0FM
-/uB+piMjfbX4an5THgP0D7PkgqQq5gkvsjlX0Q0Ic2ed3kzKQQI6XiCAv849gIRp
-Wb00oioU71UJPHdsM8j6L9gPO02Y5yVdWZemVp1K37a0fNKTMIE/ytgghsSLcOvo
-yUoODFUVYutbP9Ti2j9icsv1ZFsPsOUeyfSF8WVkj9bOL/KnyU3OGg/eUyYpFJ8=
-=PFqP
------END PGP SIGNATURE-----
-
---E/DnYTRukya0zdZ1--
