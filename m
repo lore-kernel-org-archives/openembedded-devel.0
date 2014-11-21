@@ -1,30 +1,30 @@
 Return-Path: <qianl.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E22766A9D4
+	by mail.openembedded.org (Postfix) with ESMTP id DDCD0718EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 07:56:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43776410"
+	Fri, 21 Nov 2014 07:56:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43776411"
 Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2014 15:52:54 +0800
+	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2014 15:52:55 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAL7tqPu021774
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAL7tr1m021777
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 15:55:52 +0800
+	Fri, 21 Nov 2014 15:55:53 +0800
 Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 21 Nov 2014 15:56:08 +0800
+	Server (TLS) id 14.3.181.6; Fri, 21 Nov 2014 15:56:09 +0800
 From: Qian Lei <qianl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Nov 2014 15:55:57 +0800
-Message-ID: <1416556558-15428-2-git-send-email-qianl.fnst@cn.fujitsu.com>
+Date: Fri, 21 Nov 2014 15:55:58 +0800
+Message-ID: <1416556558-15428-3-git-send-email-qianl.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1416556558-15428-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 References: <20141119154912.GP3315@jama>
 	<1416556558-15428-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.40]
-Subject: [PATCH v2 1/2] UMIP: add new recipe
+Subject: [PATCH v2 2/2] Indent: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,41 +41,45 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Fri, 21 Nov 2014 07:56:11 -0000
 Content-Type: text/plain
 
-UMIP is an open source implementation of Mobile IPv6 and NEMO Basic
-Support for Linux. It is released under the GPLv2 license. It supports
-the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776
-and RFC4877 (IPsec and IKEv2).
+Indent is a GNU program for beautifying C code, so that it is easier
+to read. Indent can also convert from one C writing style to a different
+one. Indent understands correct C syntax and tries to handle incorrect C
+syntax.
 
 Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-connectivity/umip/umip_1.0.bb | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/umip/umip_1.0.bb
+ meta-oe/recipes-extended/indent/indent_2.2.10.bb | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/indent/indent_2.2.10.bb
 
-diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+diff --git a/meta-oe/recipes-extended/indent/indent_2.2.10.bb b/meta-oe/recipes-extended/indent/indent_2.2.10.bb
 new file mode 100644
-index 0000000..76901ab
+index 0000000..df40cc0
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Mobile IPv6 and NEMO for Linux"
-+DESCRIPTION = "UMIP is an open source implementation of Mobile IPv6 and NEMO \
-+Basic Support for Linux. It is released under the GPLv2 license. It supports \
-+the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776 and \
-+RFC4877 (IPsec and IKEv2)."
-+HOMEPAGE = "http://umip.org/"
-+SECTION = "System Environment/Base"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
-+DEPENDS = "rpm indent-native"
++++ b/meta-oe/recipes-extended/indent/indent_2.2.10.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "A GNU program for formatting C code"
++HOMEPAGE = "http://www.gnu.org/software/indent/"
++SECTION = "Applications/Text"
++DESCRIPTION = "Indent is a GNU program for beautifying C code, so that \
++it is easier to read. Indent can also convert from one C writing style \
++to a different one. Indent understands correct C syntax and tries to handle \
++incorrect C syntax. \
++Install the indent package if you are developing applications in C and \
++you want a program to format your code."
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++DEPENDS = "virtual/gettext"
 +
-+SRC_URI = "git://git.umip.org/umip.git"
-+SRCREV = "428974c2d0d8e75a2750a3ab0488708c5dfdd8e3"
++SRC_URI = "${GNU_MIRROR}/indent/${BP}.tar.gz"
++SRC_URI[md5sum] = "be35ea62705733859fbf8caf816d8959"
++SRC_URI[sha256sum] = "8a9b41be5bfcab5d8c1be74204b10ae78789fc3deabea0775fdced8677292639"
 +
-+S = "${WORKDIR}/git"
-+EXTRA_OE_CONF = "--enable-vt"
++inherit autotools gettext
 +
-+inherit autotools-brokensep
++FILES_${PN} += "/usr/doc/indent/indent.html"
++
++BBCLASSEXTEND = "native"
 -- 
 1.8.3.1
 
