@@ -1,41 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 3614572165
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id CD93A65C91
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 09:52:34 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id l15so11434153wiw.2
+	Fri, 21 Nov 2014 13:52:51 +0000 (UTC)
+Received: by mail-wg0-f48.google.com with SMTP id y19so6603661wgg.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 01:52:30 -0800 (PST)
+	Fri, 21 Nov 2014 05:52:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=b6ShBgbYGUDBRzdSI4bcvUO/osJNOWxcUj6CMXFvijk=;
-	b=S8b/Jatg+0Oq2+KUY7wUz6ELUhp9+DJAlvjeY9HgWhsR8gJfE7wdZsoAdoP9QIEm8A
-	9NYvbbGXijcp+BiNGY4Y9/UKY42vGA/sw8p9JlMTtJMDLTO9NF02LqP3B4/Z8bBH77c4
-	JybLAMIKYPALVvnAIASB4+262CJuQjGxIWDskEQUuQznm+NXME+wyk4ZbmPagaV7uB3F
-	HknAenB+i98v6bFVPar25SSU2VoViXBHTGEeE3Ko92AcEON0+aBOD/X8VEPr3+4mG9Uo
-	790MEKIajkZrjPEDHRnlksvTal4wT/5FvcCup/jjpk1MdPkG+a/4FhcVzT4nveitkezm
-	rxOw==
-X-Received: by 10.180.24.193 with SMTP id w1mr3482477wif.34.1416563550066;
-	Fri, 21 Nov 2014 01:52:30 -0800 (PST)
+	bh=io5T79W6K2ifmAL9Cgfp6vCHX/lGrHqXYavwbgIHZ+o=;
+	b=BNlzhO5/mpmYPsgufXAp7yrfU4OO/6o08wOycvAFHbaniA7oBFMm0b5r2fcihvA1an
+	UaDSTltnU4vIim/lQ1y9/Jh+mrqsk4jEUwJXdosjUCfQo+bh+NrhiQ/qJmMQmgXTkwpz
+	pDnjshtPit8YXe3MIf0vXG89SKyRmD2+uELuzeqNBliGFrn4pjFnY5Z0W/FH0+W3EghT
+	V4Fuhn64BFXOInQPZxIoyjTM3Y2Dl+W2bvIPkZ2hy0kNJBHtaGmDTNSD31XKztCWoSe3
+	Cl9o6CqJCTPNZyuuuzPyzkv5GLDSfPSFXMMxlXbgw1LrPgPdOpHi01FCdPeAxz+jeYG0
+	VAbg==
+X-Received: by 10.180.20.163 with SMTP id o3mr8492266wie.12.1416577966044;
+	Fri, 21 Nov 2014 05:52:46 -0800 (PST)
 Received: from localhost ([89.176.104.3])
-	by mx.google.com with ESMTPSA id w10sm7343673wje.10.2014.11.21.01.52.29
+	by mx.google.com with ESMTPSA id jp3sm6637261wid.9.2014.11.21.05.52.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Nov 2014 01:52:29 -0800 (PST)
+	Fri, 21 Nov 2014 05:52:45 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 21 Nov 2014 10:52:30 +0100
+Date: Fri, 21 Nov 2014 14:52:46 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141121095230.GA2163@jama>
-References: <20141119154912.GP3315@jama>
-	<1416556558-15428-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<1416556558-15428-3-git-send-email-qianl.fnst@cn.fujitsu.com>
+Message-ID: <20141121135246.GB2163@jama>
+References: <1415583192-2041-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1416556558-15428-3-git-send-email-qianl.fnst@cn.fujitsu.com>
+In-Reply-To: <1415583192-2041-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH v2 2/2] Indent: Add new recipe
+Subject: Re: [PATCH] takao-fonts : new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,75 +46,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 09:52:36 -0000
-X-Groupsio-MsgNum: 52965
+X-List-Received-Date: Fri, 21 Nov 2014 13:52:53 -0000
+X-Groupsio-MsgNum: 52966
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0OAP2g/MAC+5xKAE"
+	protocol="application/pgp-signature"; boundary="JP+T4n/bALQSJXh8"
 Content-Disposition: inline
 
---0OAP2g/MAC+5xKAE
+--JP+T4n/bALQSJXh8
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 21, 2014 at 03:55:58PM +0800, Qian Lei wrote:
-> Indent is a GNU program for beautifying C code, so that it is easier
-> to read. Indent can also convert from one C writing style to a different
-> one. Indent understands correct C syntax and tries to handle incorrect C
-> syntax.
+On Mon, Nov 10, 2014 at 09:33:12AM +0800, Li xin wrote:
+> Takao Fonts are a community developed derivatives of IPA Fonts.
+> IPA Fonts are high quality Japanese outline fonts developed by
+> Information-technology Promotion Agency,Japan(called IPA for short).
+> Homepage:https://launchpad.net/takao-fonts
 >=20
-> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 > ---
->  meta-oe/recipes-extended/indent/indent_2.2.10.bb | 22 ++++++++++++++++++=
-++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/indent/indent_2.2.10.bb
+>  .../takao-fonts/takao-fonts_003.02.01.bb           | 23 ++++++++++++++++=
+++++++
+>  1 file changed, 23 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/takao-fonts/takao-fonts_003.0=
+2.01.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/indent/indent_2.2.10.bb b/meta-oe/r=
-ecipes-extended/indent/indent_2.2.10.bb
+> diff --git a/meta-oe/recipes-support/takao-fonts/takao-fonts_003.02.01.bb=
+ b/meta-oe/recipes-support/takao-fonts/takao-fonts_003.02.01.bb
 > new file mode 100644
-> index 0000000..df40cc0
+> index 0000000..afa1a4e
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/indent/indent_2.2.10.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "A GNU program for formatting C code"
-> +HOMEPAGE =3D "http://www.gnu.org/software/indent/"
-> +SECTION =3D "Applications/Text"
-> +DESCRIPTION =3D "Indent is a GNU program for beautifying C code, so that=
- \
-> +it is easier to read. Indent can also convert from one C writing style \
-> +to a different one. Indent understands correct C syntax and tries to han=
-dle \
-> +incorrect C syntax. \
-> +Install the indent package if you are developing applications in C and \
-> +you want a program to format your code."
-> +LICENSE =3D "GPL-2.0"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-> +DEPENDS =3D "virtual/gettext"
+> +++ b/meta-oe/recipes-support/takao-fonts/takao-fonts_003.02.01.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY =3D "Takao Fonts are a community developed derivatives of IPA Fo=
+nts."
 > +
-> +SRC_URI =3D "${GNU_MIRROR}/indent/${BP}.tar.gz"
-
-indent -> BPN
-
-> +SRC_URI[md5sum] =3D "be35ea62705733859fbf8caf816d8959"
-> +SRC_URI[sha256sum] =3D "8a9b41be5bfcab5d8c1be74204b10ae78789fc3deabea077=
-5fdced8677292639"
+> +HOMEPAGE =3D "https://launchpad.net/takao-fonts"
+> +SECTION =3D "User Interface/X"
 > +
-> +inherit autotools gettext
+> +LICENSE =3D "IPA"
+> +LIC_FILES_CHKSUM =3D "file://IPA_Font_License_Agreement_v1.0.txt;md5=3D6=
+cd3351ba979cf9db1fad644e8221276"
 > +
-> +FILES_${PN} +=3D "/usr/doc/indent/indent.html"
+> +SRC_URI =3D "http://launchpad.net/takao-fonts/003.02/003.02.01/+download=
+/takao-fonts-ttf-003.02.01.zip"
+> +SRC_URI[md5sum] =3D "ca480e5edb9f26d871bf6df6cb910306"
+> +SRC_URI[sha256sum] =3D "2f526a16c7931958f560697d494d8304949b3ce0aef246fb=
+0c727fbbcc39089e"
+> +
+> +RPROVIDES_${PN} =3D "virtual-japanese-font"
 
-shouldn't this be installed in /usr/share/doc ($docdir)?
+This causes new NOTE, do we need this RPROVIDES?
 
-and should it be included in $PN or $PN-doc?
-
-Also move this change before umip which is using it.
+NOTE: multiple providers are available for runtime virtual-japanese-font (t=
+tf-sazanami, takao-fonts)
+NOTE: consider defining a PREFERRED_PROVIDER entry to match virtual-japanes=
+e-font
 
 > +
-> +BBCLASSEXTEND =3D "native"
+> +S =3D "${WORKDIR}/${PN}-ttf-${PV}"
+> +
+> +do_install() {
+> +	install -m 0755 -d ${D}/${datadir}/fonts
+> +	install -m 0644 -p ${S}/*.ttf ${D}/${datadir}/fonts/
+> +}
+> +
+> +FILES_${PN} +=3D "${datadir}/fonts/*.ttf"
+> +
 > --=20
-> 1.8.3.1
+> 1.8.4.2
 >=20
 > --=20
 > _______________________________________________
@@ -128,16 +125,16 @@ Also move this change before umip which is using it.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---0OAP2g/MAC+5xKAE
+--JP+T4n/bALQSJXh8
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRvC14ACgkQN1Ujt2V2gBwIqACfc9VQaeRzuP8lnrjNiarTS54w
-WJwAnAhVUGV8U0NVOUFKBNdglu3NyGht
-=6nDx
+iEYEARECAAYFAlRvQ64ACgkQN1Ujt2V2gBz7LgCfUIvzqtxEAJoN0gBYkkEnHcyt
+eBYAnRtAGTMONsoLDJc+EPktvWtROmN+
+=Tqxn
 -----END PGP SIGNATURE-----
 
---0OAP2g/MAC+5xKAE--
+--JP+T4n/bALQSJXh8--
