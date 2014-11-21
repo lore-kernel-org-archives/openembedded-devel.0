@@ -1,32 +1,41 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id E9F806A9D4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A2BC7721D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 14:06:18 +0000 (UTC)
-Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
-	by relay1.mentorg.com with esmtp 
-	id 1Xroqp-0001rX-TZ from Joe_MacDonald@mentor.com ;
-	Fri, 21 Nov 2014 06:06:19 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.3.181.6;
-	Fri, 21 Nov 2014 06:06:19 -0800
-Received: by burninator (Postfix, from userid 1000)	id DC23158044A; Fri, 21
-	Nov 2014 09:06:18 -0500 (EST)
-Date: Fri, 21 Nov 2014 09:06:18 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Qian Lei <qianl.fnst@cn.fujitsu.com>
-Message-ID: <20141121140616.GB20204@mentor.com>
-References: <20141119154912.GP3315@jama>
-	<1416556558-15428-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<1416556558-15428-2-git-send-email-qianl.fnst@cn.fujitsu.com>
+	Fri, 21 Nov 2014 14:06:44 +0000 (UTC)
+Received: by mail-wi0-f178.google.com with SMTP id hi2so8924841wib.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Nov 2014 06:06:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=nbKTNjP7T+aYD9qi/9YaZ7b1Lyo8yOgqfBlnOTVm3HU=;
+	b=KM6ExPPTXFFyHbRGZVSkQJem7yE6kSXUecKY862n/HY3FJRLUHPbYaXhm5h1WJmjma
+	PXRYUFVym4HQBx6+epg13wUPhns6oPMKaI74KgGsaXdlUtY5E1OO9Zziwiew0Unm8uxj
+	xXI20mkU1wIxT0KVMRJ7a9FFhJlxvGQMkakTkleOWavtUXq5zZSN6OHyNsSR859MRSun
+	KByvt7sg6T+EprtNv4gNQJ0KUEp6aYwLJVc436DuDdx102PxmRwd0gawq75bODAiXm1Z
+	bD7bP0k+rz5lGPF2GbI6/P9MeU3B/3M/1nSXZcPv7GsQ9hsezYFSv/fYv2LE/QIM9V2u
+	aaHA==
+X-Received: by 10.180.103.33 with SMTP id ft1mr8049392wib.71.1416578798316;
+	Fri, 21 Nov 2014 06:06:38 -0800 (PST)
+Received: from localhost ([89.176.104.3])
+	by mx.google.com with ESMTPSA id gy8sm7061129wib.3.2014.11.21.06.06.37
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 21 Nov 2014 06:06:37 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 21 Nov 2014 15:06:38 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141121140638.GI2163@jama>
+References: <1416222008-9218-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<1416222008-9218-4-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<20141117122224.D41DB3814FF@gemini.denx.de>
 MIME-Version: 1.0
-In-Reply-To: <1416556558-15428-2-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2 1/2] UMIP: add new recipe
+In-Reply-To: <20141117122224.D41DB3814FF@gemini.denx.de>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH 3/5] sblim-sfcb : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,88 +49,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 14:06:20 -0000
-X-Groupsio-MsgNum: 52971
+X-List-Received-Date: Fri, 21 Nov 2014 14:06:46 -0000
+X-Groupsio-MsgNum: 52972
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="s/l3CgOIzMHHjg/5"
+	protocol="application/pgp-signature"; boundary="Az4VpBrmI9+OyhK/"
 Content-Disposition: inline
 
---s/l3CgOIzMHHjg/5
+--Az4VpBrmI9+OyhK/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[[oe] [PATCH v2 1/2] UMIP: add new recipe] On 14.11.21 (Fri 15:55) Qian Lei=
- wrote:
+On Mon, Nov 17, 2014 at 01:22:24PM +0100, Wolfgang Denk wrote:
+> Dear Li xin,
+>=20
+> In message <1416222008-9218-4-git-send-email-lixin.fnst@cn.fujitsu.com> y=
+ou wrote:
+> > Sfcb(Small Footprint CIM Broker)is a CIM server conforming to the
+> > CIM Operations over HTTP protocol.
+> > It is robust, with low resource consumption and therefore specifically
+> > suited for embedded and resource constrained environments.
+> > sfcb supports providers written against the Common Manageability
+> > Programming Interface (CMPI).
+> >=20
+> > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> > ---
+> >  .../recipes-extended/sblim-sfcb/files/sfcb.service |  11 +++
+> >  ...000sblim-sfcb-disable_auto_service_start1.patch |  19 +++++
+> >  .../sblim-sfcb-1.3.4/cimv217Final-MOFs.zip.org     | Bin 0 -> 1259176 =
+bytes
+>=20
+> Are you sure you want to include this huge binary blob?
 
-> UMIP is an open source implementation of Mobile IPv6 and NEMO Basic
-> Support for Linux. It is released under the GPLv2 license. It supports
-> the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776
-> and RFC4877 (IPsec and IKEv2).
+I agree it should be moved somewhere else and downloaded from SRC_URI.
 
-I think this recipe also probably belongs in meta-networking.  I'm
-catching up on the merges today, so if there's no objection, I'll put it
-there in the same place in the hierarchy.
+Also fails to build for qemuarm:
 
--J.
+| arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-gcc -march=3Darm=
+v5te -marm -mthumb-interwork --sysroot=3D/home/jenkins/oe/world/shr-core/tm=
+p-glibc/sysroots/qemuarm -Wall -fno-strict-aliasing -fsigned-char -O2 -pipe=
+ -g -feliminate-unused-debug-types -D_GNU_SOURCE -Wl,-O1 -Wl,--hash-style=
+=3Dgnu -Wl,--as-needed -o .libs/sfcbd sfcBroker.o  -L=3D/usr/lib/..//lib -L=
+=3D/usr/lib /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux=
+-gnueabi/sblim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so /home/jenkins=
+/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.3.4=
+-r0/build/.libs/libsfcCimXmlCodec.so /home/jenkins/oe/world/shr-core/tmp-gl=
+ibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.3.4-r0/build/.libs/libsfcBro=
+kerCore.so /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-=
+gnueabi/sblim-sfcb/1.3.4-r0/build/.libs/libsfcUtil.so -lssl /home/jenkins/o=
+e/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/libcurl.so /home/jenkin=
+s/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/libgnutls.so -lnettl=
+e -lhogweed /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/=
+lib/libgmp.so -lz -ldl -lpthread -Wl,-rpath -Wl,/usr/lib/sfcb
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'X509_STORE_CTX_get_current_cert'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'BIO_new_socket'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'BIO_new'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'BIO_ctrl'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'BIO_f_buffer'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'BIO_push'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'BIO_int_ctrl'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'ERR_print_errors_fp'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'RAND_load_file'
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+blim-sfcb/1.3.4-r0/build/.libs/libsfcHttpAdapter.so: error: undefined refer=
+ence to 'BIO_write'
+| collect2: error: ld returned 1 exit status
+| make[2]: *** [sfcbd] Error 1
+| make[2]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/armv5te-oe-linux-gnueabi/sblim-sfcb/1.3.4-r0/build'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/armv5te-oe-linux-gnueabi/sblim-sfcb/1.3.4-r0/build'
+| make: *** [all] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
+oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.3.4-=
+r0/temp/log.do_compile.21116)
+NOTE: recipe sblim-sfcb-1.3.4-r0: task do_compile: Failed
+ERROR: Task 7279 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe=
+/recipes-extended/sblim-sfcb/sblim-sfcb_1.3.4.bb, do_compile) failed with e=
+xit code '1'
+
 
 >=20
-> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-connectivity/umip/umip_1.0.bb | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/umip/umip_1.0.bb
+> Best regards,
 >=20
-> diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/reci=
-pes-connectivity/umip/umip_1.0.bb
-> new file mode 100644
-> index 0000000..76901ab
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY =3D "Mobile IPv6 and NEMO for Linux"
-> +DESCRIPTION =3D "UMIP is an open source implementation of Mobile IPv6 an=
-d NEMO \
-> +Basic Support for Linux. It is released under the GPLv2 license. It supp=
-orts \
-> +the following IETF RFC: RFC6275 (Mobile IPv6), RFC3963 (NEMO), RFC3776 a=
-nd \
-> +RFC4877 (IPsec and IKEv2)."
-> +HOMEPAGE =3D "http://umip.org/"
-> +SECTION =3D "System Environment/Base"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D073dc31ccb2ebed70db54f1e8aeb4=
-c33"
-> +DEPENDS =3D "rpm indent-native"
-> +
-> +SRC_URI =3D "git://git.umip.org/umip.git"
-> +SRCREV =3D "428974c2d0d8e75a2750a3ab0488708c5dfdd8e3"
-> +
-> +S =3D "${WORKDIR}/git"
-> +EXTRA_OE_CONF =3D "--enable-vt"
-> +
-> +inherit autotools-brokensep
+> Wolfgang Denk
+>=20
 > --=20
-> 1.8.3.1
->=20
---=20
--Joe MacDonald.
-:wq
+> DENX Software Engineering GmbH,     MD: Wolfgang Denk & Detlev Zundel
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
+> Just because your doctor has a name for your condition  doesn't  mean
+> he knows what it is.
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---s/l3CgOIzMHHjg/5
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Az4VpBrmI9+OyhK/
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Version: GnuPG v2
 
-iQEcBAEBAgAGBQJUb0bYAAoJEEn8ffcsOfaWs6EIAJ0az2bSKIv46S0B2YvNp32X
-c8M+SH5wEXTRG42LGQYID4PJNtcnXS92CXPFcdBwCtQ5OprfhrXUsQW4hP/kiIyv
-OQM4fDrLlNrFCDikCv5yjke15X3xOajYppR0SgMXdeTYxN705bv2SubOgFf/7PRc
-YAddcjQrKP7S6/CHkmez6sv1Xq3dw9KiIZRvfdBI3n2MP0VZdQCWdE3UY4ex050F
-Km6ddzZU5TbJMbsRsJ51nQM0q+XgvRNfk9RIZcXfOAuGFhTpY9wTwDdFY3A9sZoa
-x5+PNEQhAES0fOQStgdChgjzpPfOmepiY/FdsYWNp6mhzY4vXLBpdABWuVfzBEM=
-=NUQo
+iEYEARECAAYFAlRvRu4ACgkQN1Ujt2V2gByLHQCfYt3cDKvcCmVsFnSliKeFbude
+qhMAoI6TwSxXmFBTvihBOZxVt8LI2BeP
+=FC5v
 -----END PGP SIGNATURE-----
 
---s/l3CgOIzMHHjg/5--
+--Az4VpBrmI9+OyhK/--
