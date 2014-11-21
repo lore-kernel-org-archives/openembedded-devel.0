@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id D9D1E6A9D4
+Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 19ABD6A9D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 14:04:36 +0000 (UTC)
-Received: by mail-wg0-f54.google.com with SMTP id y10so6648032wgg.13
+	Fri, 21 Nov 2014 14:05:46 +0000 (UTC)
+Received: by mail-wg0-f53.google.com with SMTP id l18so6679135wgh.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 06:04:36 -0800 (PST)
+	Fri, 21 Nov 2014 06:05:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=36hQjX1r/dj01mOUEinnSrOcF5APbG9zQ1VrH5KXbNs=;
-	b=Let50aI/emdFj5MHc+3Nv4MGjwO5GVcEFBKG8yz1czkBKG00GMGoOnpIp4WyxeFW4z
-	YOrmT/pmVO178Z8Uopu2giw7RQo7ki70yK/kI8LRnMPD+JZmOprNd+G+LfWjADfN1iAI
-	Bh0Ufzd+k6rPtKa55pSrY8JrmT9zbBAxfuj2Xmt57bjlo5uaLrrXyW9oLS4ViT2ARlxl
-	LOL+KdBSmXnxflRNSmJMJCgSZ5pUqPdcV6X7dPn/kJuCFSrskQgSKCfl30NiROPmOsu1
-	aN7xrsCMl8gsbvpOqH+ngGz+VBYLGCaMj7Y5wpYRiQ16p/OZvOztKga1c+kunZeqMLQn
-	dqDg==
-X-Received: by 10.194.239.164 with SMTP id vt4mr7825355wjc.131.1416578674295; 
-	Fri, 21 Nov 2014 06:04:34 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	jp3sm6676453wid.9.2014.11.21.06.04.33 for <multiple recipients>
+	bh=b+oVyRMoaWGRwAsph8Ng3DXmORauEKjP5jJeM7VXXM8=;
+	b=wAENDm7koQo0IJ74T/uKuJeH8Y7kZ0nl1DnHFTDp5y6tzji2iAB3hEvmLjRfnn7TFO
+	FNDDbJStMZIK1SjpBqi+uTq9raycOCJqbsx69knzpwR4FAa67JbymGBtprAG2RFWp0iG
+	qzjRnGWUl0AmfGmzztL5ME94FtSxsYbVvQ9ib3MC34W2yOrCt6UZKZ1rZP2Ul/plDUgI
+	BcKtu9D8eLkqaaRUCR4YR2wWYa/5+kPHai8FwfgH2wiuEKcXOGKEJNgsvRBFoU76Itlu
+	x2F49I6VmUsVONOfa7+Obeyouo4wpc/l/vufKb+7ZGQX7rsglEBcMKQntdiK1zUfW62B
+	y9Tw==
+X-Received: by 10.180.82.170 with SMTP id j10mr8340108wiy.35.1416578746288;
+	Fri, 21 Nov 2014 06:05:46 -0800 (PST)
+Received: from localhost ([89.176.104.3]) by mx.google.com with ESMTPSA id
+	fk16sm8900628wic.16.2014.11.21.06.05.45
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Nov 2014 06:04:33 -0800 (PST)
+	Fri, 21 Nov 2014 06:05:45 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 21 Nov 2014 15:04:34 +0100
+Date: Fri, 21 Nov 2014 15:05:44 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141121140434.GG2163@jama>
-References: <1416420840-2194-1-git-send-email-cmorgan@cybexintl.com>
+Message-ID: <20141121140544.GH2163@jama>
+References: <1416368645-23882-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+	<1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1416420840-2194-1-git-send-email-cmorgan@cybexintl.com>
+In-Reply-To: <1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Chris Morgan <cmorgan@cybexintl.com>
-Subject: Re: [meta-oe]]PATCH] dfu-util: Switch from using a gitorious generated download to using the git repository to avoid potential checksum mismatches if the generated download changes
+Subject: Re: [PATCH v2] tiptop: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,68 +47,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 14:04:37 -0000
-X-Groupsio-MsgNum: 52969
+X-List-Received-Date: Fri, 21 Nov 2014 14:05:50 -0000
+X-Groupsio-MsgNum: 52970
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TdkiTnkLhLQllcMS"
+	protocol="application/pgp-signature"; boundary="VbfcI4OLZ4XW0yH2"
 Content-Disposition: inline
 
---TdkiTnkLhLQllcMS
+--VbfcI4OLZ4XW0yH2
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 19, 2014 at 01:14:00PM -0500, Chris Morgan wrote:
-> ---
->  meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-
-Thanks for PATCHv2, the old version was failing as forseen:
-
-ERROR: Fetcher failure for URL: 'https://gitorious.org/dfu-util/dfu-util/ar=
-chive/a0a3668e0571a9b007f7d62b01e7dcfd7754ce50.tar.gz'. Checksum mismatch!
-File: '/home/jenkins/oe/world/shr-core/downloads/a0a3668e0571a9b007f7d62b01=
-e7dcfd7754ce50.tar.gz' has md5 checksum ccb84df0c2c4c27dc9b975af81a50bdb wh=
-en 1de724551604bce1962960b7a301cc08 was expected
-File: '/home/jenkins/oe/world/shr-core/downloads/a0a3668e0571a9b007f7d62b01=
-e7dcfd7754ce50.tar.gz' has sha256 checksum 5d051e1570c3adf1d6c473936a4881fa=
-e12cc5a6fd9b5cf013afc1d67a604dbd when 5d253f924fd29bc13054b664bba9aa86b8652=
-99971195969478253c1775b7e56 was expected
-If this change is expected (e.g. you have upgraded to a new version without=
- updating the checksums) then you can use these lines within the recipe:
-SRC_URI[md5sum] =3D "ccb84df0c2c4c27dc9b975af81a50bdb"
-SRC_URI[sha256sum] =3D "5d051e1570c3adf1d6c473936a4881fae12cc5a6fd9b5cf013a=
-fc1d67a604dbd"
-Otherwise you should retry the download and/or check with upstream to deter=
-mine if the file has become corrupted or otherwise unexpectedly modified.
-
-I'll squash both changes to one so that the master stays bisect-able
-
+On Thu, Nov 20, 2014 at 04:59:01PM +0800, Qian Lei wrote:
+> Tiptop is a performance monitoring tool for Linux. It provides a
+> dynamic real-time view of the tasks running in the system. Tiptop
+> is very similar to the top utility, but most of the information
+> displayed comes from hardware counters.
 >=20
-> diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb b/meta-oe/r=
-ecipes-support/dfu-util/dfu-util_0.7.bb
-> index c706fd1..7f06f8f 100644
-> --- a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-> +++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-> @@ -4,12 +4,12 @@ AUTHOR =3D "Harald Welte <laforge@openmoko.org>"
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> =20
-> -S =3D "${WORKDIR}/${BPN}-${BPN}"
-> +S =3D "${WORKDIR}/git"
-> =20
-> -REV=3D"a0a3668e0571a9b007f7d62b01e7dcfd7754ce50"
-> -SRC_URI =3D "https://gitorious.org/${BPN}/${BPN}/archive/${REV}.tar.gz \
-> +SRC_URI =3D "git://gitorious.org/dfu-util/dfu-util.git \
->      file://0001-configure.ac-Don-t-check-for-usbpath.patch \
->  "
-> +SRCREV=3D"a0a3668e0571a9b007f7d62b01e7dcfd7754ce50"
-> =20
->  inherit autotools pkgconfig
-> =20
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> ---
+>  .../files/tiptop-remove-path-of-libxml2.patch      | 28 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-extended/tiptop/tiptop_2.2.bb      | 15 ++++++++++++
+>  2 files changed, 43 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/tiptop/files/tiptop-remove-p=
+ath-of-libxml2.patch
+>  create mode 100644 meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+>=20
+> diff --git a/meta-oe/recipes-extended/tiptop/files/tiptop-remove-path-of-=
+libxml2.patch b/meta-oe/recipes-extended/tiptop/files/tiptop-remove-path-of=
+-libxml2.patch
+> new file mode 100644
+> index 0000000..7499828
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/tiptop/files/tiptop-remove-path-of-libxml2=
+=2Epatch
+> @@ -0,0 +1,28 @@
+> +From 2f9cb586d6675371f9db8d4b62a4b339625d73a6 Mon Sep 17 00:00:00 2001
+> +From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> +Date: Thu, 20 Nov 2014 16:34:47 +0800
+> +Subject: [PATCH] tiptop: Remove the include path
+> +
+> +Remove the path and specify it in .bb file
+> +
+> +Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> +---
+> + configure.ac | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 6a71782..7408f82 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -31,7 +31,7 @@ AC_CHECK_LIB([xml2], [xmlParseFile],
+> +                   [have_xml2=3Dyes;
+> +                   AC_DEFINE([HAVE_LIBXML2], [1], [Define to 1 if you ha=
+ve the `libxml2' library (-lxml2).])
+> +                   LIBS=3D"-lxml2 $LIBS"
+> +-                  CFLAGS=3D"$CFLAGS -I/usr/include/libxml2"],
+> ++                  CFLAGS=3D"$CFLAGS"],
+> +              [have_xml2=3Dno])
+> + fi
+> +=20
+> +--=20
+> +1.8.3.1
+> +
+> diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb b/meta-oe/reci=
+pes-extended/tiptop/tiptop_2.2.bb
+> new file mode 100644
+> index 0000000..d8a0de4
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY =3D "Hardware performance monitoring counters"
+> +HOMEPAGE =3D "http://tiptop.gforge.inria.fr/"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
+> +DEPENDS =3D "ncurses libxml2"
+> +
+> +SRC_URI =3D "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz;name=3D=
+tarball \
+> +           file://tiptop-remove-path-of-libxml2.patch \
+> +"
+> +SRC_URI[tarball.md5sum] =3D "74255a29acf44569db021b080ad3e3f7"
+> +SRC_URI[tarball.sha256sum] =3D "965cb99b16cb59df78363d83b62877ce8501b0aa=
+c1116a86bed8a16aa96b171d"
+
+Drop name=3Dtarball and tarball. prefix.
+
+Fails to build for qemuarm:
+
+| In file included from target.c:17:0:
+| target-x86.c: In function 'disp_family_model':
+| target-x86.c:54:3: error: unknown register name '%edx' in 'asm'
+|    asm("mov $1, %%eax; " /* a into eax */
+|    ^
+| target-x86.c:54:3: error: unknown register name '%ecx' in 'asm'
+| target-x86.c:54:3: error: unknown register name '%ebx' in 'asm'
+| target-x86.c:54:3: error: unknown register name '%eax' in 'asm'
+| make[1]: *** [target.o] Error 1
+| make[1]: *** Waiting for unfinished jobs....
+| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/armv5te-oe-linux-gnueabi/tiptop/2.2-r0/tiptop-2.2/src'
+| make: *** [all] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
+oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/tiptop/2.2-r0/tem=
+p/log.do_compile.7484)
+NOTE: recipe tiptop-2.2-r0: task do_compile: Failed
+
+
+> +
+> +EXTRA_OECONF =3D "CFLAGS=3D"$CFLAGS -I${STAGING_INCDIR}/libxml2""
+> +
+> +inherit autotools-brokensep
 > --=20
-> 1.9.3
+> 1.8.3.1
 >=20
 > --=20
 > _______________________________________________
@@ -119,16 +175,16 @@ ecipes-support/dfu-util/dfu-util_0.7.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---TdkiTnkLhLQllcMS
+--VbfcI4OLZ4XW0yH2
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRvRnIACgkQN1Ujt2V2gBzOawCgsZFeUX+gBHwRvtcwNiHaJCUM
-FH0AniJuaAU7OwlttakQYgdyhWxrQosy
-=O+Ex
+iEYEARECAAYFAlRvRrgACgkQN1Ujt2V2gBy79gCfdDPM28l1UW1HAlTjKrNwER8h
+Ta0AoLWcbWb3cNFBKDsDyjcktUrzzec7
+=cGyt
 -----END PGP SIGNATURE-----
 
---TdkiTnkLhLQllcMS--
+--VbfcI4OLZ4XW0yH2--
