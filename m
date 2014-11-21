@@ -1,37 +1,27 @@
 Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 42D0C721C2
+	by mail.openembedded.org (Postfix) with ESMTP id D9CA17214D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 07:15:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43774603"
+	Fri, 21 Nov 2014 07:44:45 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43775977"
 Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2014 15:12:04 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2014 15:41:32 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAL7F2UW019177
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAL7iUYd021108
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 15:15:02 +0800
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Fri, 21 Nov 2014 15:15:18 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: lvm2 compile error
-Thread-Index: AdAEbN96Q+W9lsi2S96Zrwlpiu5PbQAAx3AwAABU/oAABHs38AA110jA
-Date: Fri, 21 Nov 2014 07:15:22 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E8738CE14B@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <A8FC939F80655644A89BB21CCD3741E87C670D@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<30DC4EDFD798C94083F3E083754532CCCB4BC1@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<A8FC939F80655644A89BB21CCD3741E87C674D@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<30DC4EDFD798C94083F3E083754532CCCB4C3F@G08CNEXMBPEKD02.g08.fujitsu.local>
-In-Reply-To: <30DC4EDFD798C94083F3E083754532CCCB4C3F@G08CNEXMBPEKD02.g08.fujitsu.local>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.35]
+	Fri, 21 Nov 2014 15:44:30 +0800
+Received: from localhost.localdomain (10.167.226.35) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 21 Nov 2014 15:44:51 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 21 Nov 2014 15:44:03 +0800
+Message-ID: <1416555843-1935-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: Re: lvm2 compile error
+X-Originating-IP: [10.167.226.35]
+Subject: [meta-oe][PATCH] open-iscsi : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +35,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 07:15:23 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 Nov 2014 07:44:49 -0000
+Content-Type: text/plain
 
+Open-iSCSI project is a high performance, transport independent,
+multi-platform implementation of RFC3720.
 
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ .../files/iscsi_sysfs.c-add-include-files.patch    | 26 ++++++++++++++++
+ .../open-iscsi/files/open-iscsi.service            | 18 +++++++++++
+ .../open-iscsi/open-iscsi_2.0-871.bb               | 35 ++++++++++++++++++++++
+ 3 files changed, 79 insertions(+)
+ create mode 100644 meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch
+ create mode 100644 meta-oe/recipes-support/open-iscsi/files/open-iscsi.service
+ create mode 100644 meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Bian, Naimeng
-> Sent: Thursday, November 20, 2014 1:41 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] lvm2 compile error
->=20
-> Please add "SECURITY_CFLAGS_pn-lvm2 =3D "${SECURITY_NO_PIE_CFLAGS}"" into
-> security_flags.inc of your distro.
-
-It is work.
-Thank you very much for your reply.
-
-Best regards,
-Li xin
-
+diff --git a/meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch b/meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch
+new file mode 100644
+index 0000000..43c1c36
+--- /dev/null
++++ b/meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch
+@@ -0,0 +1,26 @@
++From e8ecb307b6402b39d033e20f4df4f3374e7c0685 Mon Sep 17 00:00:00 2001
++From: Li xin <lixin.fnst@cn.fujitsu.com>
++Date: Fri, 21 Nov 2014 12:02:51 +0900
++Subject: [PATCH] usr/iscsi_sysfs.c : add include files
++
++Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++---
++ usr/iscsi_sysfs.c | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/usr/iscsi_sysfs.c b/usr/iscsi_sysfs.c
++index cb9a5a1..f6bd78a 100644
++--- a/usr/iscsi_sysfs.c
+++++ b/usr/iscsi_sysfs.c
++@@ -14,6 +14,8 @@
++  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++  * General Public License for more details.
++  */
+++#include <sys/types.h> 
+++#include <sys/stat.h> 
++ #include <fcntl.h>
++ #include <unistd.h>
++ #include <stdlib.h>
++-- 
++1.8.4.2
++
+diff --git a/meta-oe/recipes-support/open-iscsi/files/open-iscsi.service b/meta-oe/recipes-support/open-iscsi/files/open-iscsi.service
+new file mode 100644
+index 0000000..debb2d6
+--- /dev/null
++++ b/meta-oe/recipes-support/open-iscsi/files/open-iscsi.service
+@@ -0,0 +1,18 @@
++[Unit]
++Description=Open-iSCSI
++Documentation=man:iscsid(8) man:iscsiadm(8)
++After=network.target
++
++[Service]
++Type=forking
++PIDFile=/var/run/iscsid.pid
++ExecStartPre=-/sbin/modprobe -q iscsi_tcp
++ExecStartPre=-/sbin/modprobe -q ib_iser
++ExecStart=/usr/sbin/iscsid -p /var/run/iscsid.pid
++ExecStartPost=-/usr/sbin/iscsiadm -m node --loginall=automatic
++ExecStopPost=/bin/sync
++ExecStopPost=-/sbin/modprobe -r ib_iser
++ExecStopPost=-/sbin/modprobe -r iscsi_tcp
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb b/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb
+new file mode 100644
+index 0000000..c8a87d3
+--- /dev/null
++++ b/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb
+@@ -0,0 +1,35 @@
++DESCRIPTION = "Open-iSCSI project is a high performance, transport \
++independent, multi-platform implementation of RFC3720."
++HOMEPAGE = "http://www.open-iscsi.org/"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
++
++SRC_URI = "http://www.open-iscsi.org/bits/${BP}.tar.gz"
++SRC_URI[md5sum] = "0c403e8c9ad41607571ba0e6e8ff196e"
++SRC_URI[sha256sum] = "bcea8746ae82f2ada7bc05d2aa59bcda1ca0d5197f05f2e16744aae59f0a7dcb"
++SRC_URI += "file://iscsi_sysfs.c-add-include-files.patch \
++    file://open-iscsi.service"
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++do_compile () {
++    oe_runmake user
++}
++
++do_install_append () {
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/open-iscsi.service ${D}${systemd_unitdir}/system/
++    fi
++}
++
++do_install () {
++    oe_runmake DESTDIR="${D}" install_user
++}
++
++inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','',d)}
++
++SYSTEMD_PACKAGES = "${PN}"
++SYSTEMD_SERVICE_${PN} = "open-iscsi.service"
++SYSTEMD_AUTO_ENABLE = "enable"
++
+-- 
+1.8.4.2
 
 
