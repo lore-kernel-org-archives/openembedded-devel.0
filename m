@@ -1,41 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 20F3660030
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A9B66FC68
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 13:57:50 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id r20so12091222wiv.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Nov 2014 05:57:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=4KxpG1E/OFEvY7YFcgC0wYKB+Oyrma0p551tRL08AWQ=;
-	b=MpVqlyQvHdiqOUoLvnjHagNYV6Gloo+cY3nR4cpp7s4ash5BXjmjbLMBVaUFBotXp5
-	yxD6rdEOFGt7Wz4GvAe9as8NTBTIZiv6mKVyLg3RHaOVmAjwCoOYQsR0Q57h0efFwR1h
-	PwFVy1oiJeHwdAtZmfrBU9gOCxNvqKxcLvoovPnt2cuMaTHB1Ty/9aZiYGajbOzqghBs
-	7/HOWQM07MUpFBfTT0MNM/rvA7YXC0YO25cYPjUUseZ4EKtmauWIAyvk7IMgxgdUJOQ8
-	NVJ91O3y2sbPAVWTQ07oKHPiWJbickmYA/64VszgcLu5oVq+lpxaKMzyrqDndQ0sBt7h
-	Bvyg==
-X-Received: by 10.194.189.81 with SMTP id gg17mr7794397wjc.115.1416578267282; 
-	Fri, 21 Nov 2014 05:57:47 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	n3sm11432246wiw.5.2014.11.21.05.57.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Nov 2014 05:57:46 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 21 Nov 2014 14:57:48 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141121135748.GD2163@jama>
-References: <1415728430-30366-1-git-send-email-ross.burton@intel.com>
-	<1415728430-30366-4-git-send-email-ross.burton@intel.com>
+	Fri, 21 Nov 2014 14:03:34 +0000 (UTC)
+Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
+	by relay1.mentorg.com with esmtp 
+	id 1XrooA-0000t0-Gs from Joe_MacDonald@mentor.com ;
+	Fri, 21 Nov 2014 06:03:34 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.3.181.6;
+	Fri, 21 Nov 2014 06:03:33 -0800
+Received: by burninator (Postfix, from userid 1000)	id 48CAA58044A; Fri, 21
+	Nov 2014 09:03:32 -0500 (EST)
+Date: Fri, 21 Nov 2014 09:03:32 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Li xin <lixin.fnst@cn.fujitsu.com>
+Message-ID: <20141121140331.GA20204@mentor.com>
+References: <1416555843-1935-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1415728430-30366-4-git-send-email-ross.burton@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 4/5] gupnp-dlna: upgrade to 0.9.5
+In-Reply-To: <1416555843-1935-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] open-iscsi : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,84 +38,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Nov 2014 13:57:51 -0000
-X-Groupsio-MsgNum: 52967
+X-List-Received-Date: Fri, 21 Nov 2014 14:03:38 -0000
+X-Groupsio-MsgNum: 52968
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hxkXGo8AKqTJ+9QI"
+	protocol="application/pgp-signature"; boundary="2fHTh5uZTiUOsy+g"
 Content-Disposition: inline
 
---hxkXGo8AKqTJ+9QI
+--2fHTh5uZTiUOsy+g
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 11, 2014 at 05:53:49PM +0000, Ross Burton wrote:
-> Also use GNOME_MIRROR in SRC_URI.
+[[oe] [meta-oe][PATCH] open-iscsi : add new recipe] On 14.11.21 (Fri 15:44)=
+ Li xin wrote:
 
-Seems to break media-service-upnp
+> Open-iSCSI project is a high performance, transport independent,
+> multi-platform implementation of RFC3720.
 
-| /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/m=
-edia-service-upnp/0.4.0-r0/git/src/device.c:2739:12: error: too few argumen=
-ts to function 'gupnp_dlna_profile_guesser_guess_profile_sync'
-|   profile =3D gupnp_dlna_profile_guesser_guess_profile_sync(guesser,
-|             ^
+As iscsi-initiator-utils is in meta-networking, I think this probably
+belongs there as well.
+
+-J.
 
 >=20
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 > ---
->  .../gupnp/{gupnp-dlna_0.9.2.bb =3D> gupnp-dlna_0.9.5.bb}           |    =
-6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-multimedia/recipes-connectivity/gupnp/{gupnp-dlna_0.9.2.bb =
-=3D> gupnp-dlna_0.9.5.bb} (72%)
+>  .../files/iscsi_sysfs.c-add-include-files.patch    | 26 ++++++++++++++++
+>  .../open-iscsi/files/open-iscsi.service            | 18 +++++++++++
+>  .../open-iscsi/open-iscsi_2.0-871.bb               | 35 ++++++++++++++++=
+++++++
+>  3 files changed, 79 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.=
+c-add-include-files.patch
+>  create mode 100644 meta-oe/recipes-support/open-iscsi/files/open-iscsi.s=
+ervice
+>  create mode 100644 meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871=
+=2Ebb
 >=20
-> diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.2.=
-bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.5.bb
-> similarity index 72%
-> rename from meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.2.bb
-> rename to meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.5.bb
-> index b7e71cf..c936750 100644
-> --- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.2.bb
-> +++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-dlna_0.9.5.bb
-> @@ -5,9 +5,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd25=
-5951079008b364516c \
-> =20
->  DEPENDS =3D "libxml2 glib-2.0"
-> =20
-> -SRC_URI =3D "http://download.gnome.org/sources/${BPN}/0.9/${BPN}-${PV}.t=
-ar.xz"
-> -SRC_URI[md5sum] =3D "d972f9b03f0f3793cb895eb034ea314f"
-> -SRC_URI[sha256sum] =3D "c28d5650604c7da4f193e6b85049a4885f3a01f1996df768=
-d55b5cb898a9fc53"
-> +SRC_URI =3D "${GNOME_MIRROR}/${BPN}/0.9/${BPN}-${PV}.tar.xz"
-> +SRC_URI[md5sum] =3D "b0c9e5e6edc5ca6fe854bc53560431bf"
-> +SRC_URI[sha256sum] =3D "44a226300287ffbee1899c35775b4b9153930f29433a75d8=
-c1577d8547c29e83"
-> =20
->  inherit autotools pkgconfig
-> =20
+> diff --git a/meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.c-add-i=
+nclude-files.patch b/meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.c=
+-add-include-files.patch
+> new file mode 100644
+> index 0000000..43c1c36
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/open-iscsi/files/iscsi_sysfs.c-add-include-=
+files.patch
+> @@ -0,0 +1,26 @@
+> +From e8ecb307b6402b39d033e20f4df4f3374e7c0685 Mon Sep 17 00:00:00 2001
+> +From: Li xin <lixin.fnst@cn.fujitsu.com>
+> +Date: Fri, 21 Nov 2014 12:02:51 +0900
+> +Subject: [PATCH] usr/iscsi_sysfs.c : add include files
+> +
+> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> +---
+> + usr/iscsi_sysfs.c | 2 ++
+> + 1 file changed, 2 insertions(+)
+> +
+> +diff --git a/usr/iscsi_sysfs.c b/usr/iscsi_sysfs.c
+> +index cb9a5a1..f6bd78a 100644
+> +--- a/usr/iscsi_sysfs.c
+> ++++ b/usr/iscsi_sysfs.c
+> +@@ -14,6 +14,8 @@
+> +  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+> +  * General Public License for more details.
+> +  */
+> ++#include <sys/types.h>=20
+> ++#include <sys/stat.h>=20
+> + #include <fcntl.h>
+> + #include <unistd.h>
+> + #include <stdlib.h>
+> +--=20
+> +1.8.4.2
+> +
+> diff --git a/meta-oe/recipes-support/open-iscsi/files/open-iscsi.service =
+b/meta-oe/recipes-support/open-iscsi/files/open-iscsi.service
+> new file mode 100644
+> index 0000000..debb2d6
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/open-iscsi/files/open-iscsi.service
+> @@ -0,0 +1,18 @@
+> +[Unit]
+> +Description=3DOpen-iSCSI
+> +Documentation=3Dman:iscsid(8) man:iscsiadm(8)
+> +After=3Dnetwork.target
+> +
+> +[Service]
+> +Type=3Dforking
+> +PIDFile=3D/var/run/iscsid.pid
+> +ExecStartPre=3D-/sbin/modprobe -q iscsi_tcp
+> +ExecStartPre=3D-/sbin/modprobe -q ib_iser
+> +ExecStart=3D/usr/sbin/iscsid -p /var/run/iscsid.pid
+> +ExecStartPost=3D-/usr/sbin/iscsiadm -m node --loginall=3Dautomatic
+> +ExecStopPost=3D/bin/sync
+> +ExecStopPost=3D-/sbin/modprobe -r ib_iser
+> +ExecStopPost=3D-/sbin/modprobe -r iscsi_tcp
+> +
+> +[Install]
+> +WantedBy=3Dmulti-user.target
+> diff --git a/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb b/m=
+eta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb
+> new file mode 100644
+> index 0000000..c8a87d3
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb
+> @@ -0,0 +1,35 @@
+> +DESCRIPTION =3D "Open-iSCSI project is a high performance, transport \
+> +independent, multi-platform implementation of RFC3720."
+> +HOMEPAGE =3D "http://www.open-iscsi.org/"
+> +LICENSE =3D "GPL-2.0"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D393a5ca445f6965873eca0259a17f=
+833"
+> +
+> +SRC_URI =3D "http://www.open-iscsi.org/bits/${BP}.tar.gz"
+> +SRC_URI[md5sum] =3D "0c403e8c9ad41607571ba0e6e8ff196e"
+> +SRC_URI[sha256sum] =3D "bcea8746ae82f2ada7bc05d2aa59bcda1ca0d5197f05f2e1=
+6744aae59f0a7dcb"
+> +SRC_URI +=3D "file://iscsi_sysfs.c-add-include-files.patch \
+> +    file://open-iscsi.service"
+> +
+> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+> +
+> +do_compile () {
+> +    oe_runmake user
+> +}
+> +
+> +do_install_append () {
+> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
+then
+> +        install -d ${D}${systemd_unitdir}/system
+> +        install -m 0644 ${WORKDIR}/open-iscsi.service ${D}${systemd_unit=
+dir}/system/
+> +    fi
+> +}
+> +
+> +do_install () {
+> +    oe_runmake DESTDIR=3D"${D}" install_user
+> +}
+> +
+> +inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','syste=
+md','',d)}
+> +
+> +SYSTEMD_PACKAGES =3D "${PN}"
+> +SYSTEMD_SERVICE_${PN} =3D "open-iscsi.service"
+> +SYSTEMD_AUTO_ENABLE =3D "enable"
+> +
 > --=20
-> 1.7.10.4
+> 1.8.4.2
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-Joe MacDonald.
+:wq
 
---hxkXGo8AKqTJ+9QI
+--2fHTh5uZTiUOsy+g
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlRvRNwACgkQN1Ujt2V2gBxFJQCgu9ZpkezPEJDeNC8cA5+Dnn6r
-CvoAnjz5HzaSZ+aGFpEAmYnAPybsO+1a
-=DQv4
+iQEcBAEBAgAGBQJUb0YzAAoJEEn8ffcsOfaWwVQIAIALBgj+1T/h1eud6kk/PzSB
+5YjPW/R9Kn+buXh4vrZygbMhEy90Sv6xaeqKGB8SCHe9q+zB8oxddQRZXqZYjaNS
+GDGfqwsHH0aZO15Ym0A6QgO1LjEXCr8je57W9BdHBhGYDOsQg7lFdEdpwkUFdV/v
+vZu7gCzL1Ws82kfOUAZxKDV1O38HF/g4u1S9FHUetNV9PrH0nGfctzB5dDeeWTl4
+uVK93eXcuSHu89yPr9A3JX7j4H0OxKVEIO11nN/PtF1SbUGScR489eZ/EJVZzqyq
+yg3iMZv1aa6KRI2l3pWO5T3XkF6AMIDp7QrU7/Q+2e8TsHE5HatUZM9S6mSgOwo=
+=B2ba
 -----END PGP SIGNATURE-----
 
---hxkXGo8AKqTJ+9QI--
+--2fHTh5uZTiUOsy+g--
