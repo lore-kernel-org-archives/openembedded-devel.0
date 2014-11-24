@@ -1,40 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id C839D72283
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Nov 2014 11:08:50 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id r20so5227805wiv.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Nov 2014 03:08:50 -0800 (PST)
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 97C56722BD;
+	Mon, 24 Nov 2014 11:31:31 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id l15so5326498wiw.2
+	for <multiple recipients>; Mon, 24 Nov 2014 03:31:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Y55jISDDAdLq+UddIgljEJns12u221/kaoX48DW6r7w=;
-	b=QvNOgXZy0o5iMnytDDxvL4mSs8KO++RDcfOJDXBS1iNitVAP9DcZQqML6LBFC5QQVE
-	b4oYkRnI54yBvpvB7yvfYJkIZsttB/20U28mZptMv+e8+xol7QJtVDa38wSKaxsKgmb7
-	lBDOfrefIzoAVX/LvqoBJwm5HYeyez1Wn8soCTD0VeHa3r1IJhRz9zlplY5PGcSwIevT
-	EB9BtAKZ73FhwH75XoxZTlVqv/aYp9FzNcsNfHZz18pYTBnFkobTWrLU0vENaD9joTmm
-	GIjNmlXxAC3JctvaumLum9yrvroPv2bEJev/x968cwcgFnaUYy8qdIoC2z8xLs5Iglwa
-	MVQg==
-X-Received: by 10.180.83.37 with SMTP id n5mr20512451wiy.83.1416827330363;
-	Mon, 24 Nov 2014 03:08:50 -0800 (PST)
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=uCf6oBC1F0QaBiSRpXXVAcLR2lc52mbRVKP8TVq4J84=;
+	b=fMD/yCHUMtEhbXQ8UOu1Yv9TUAyQXx8AVplVvu5zHrDEhS8v/Hn1OE2RCOVzh6rvb1
+	uJGLq5iLwvjm9lQX0Fa09JdRc7XbRW8Hl0uwpvpJeCKLt0BLzZWndDJZEphwDapxLWgG
+	UgSHTRAerGNx3/QjvYNvfWMpeV0o4477stQB4k83HBLg5KoZyBSRuVRV1Tc6AF08/80o
+	t0VubzUmE6LKc15VHxmPaAsvv8DQWJ2ipu7OVdcQI7teaEXE7To2qiXks92pFufi7wQu
+	dmTh0qaWJp4ZSt4vCiLcMSy7R4LOWr4h233IYxGF6mSwMzZ90s2l6WRKyFLxnu1yVVlm
+	X3GA==
+X-Received: by 10.180.10.231 with SMTP id l7mr18725983wib.1.1416828691776;
+	Mon, 24 Nov 2014 03:31:31 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	l3sm12717179wje.12.2014.11.24.03.08.49 for <multiple recipients>
+	s9sm6958181wiz.12.2014.11.24.03.31.30 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Nov 2014 03:08:49 -0800 (PST)
+	Mon, 24 Nov 2014 03:31:30 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 24 Nov 2014 12:08:58 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141124110858.GB2456@jama>
-References: <1415737832-12176-1-git-send-email-ubik3000@gmail.com>
+Date: Mon, 24 Nov 2014 12:31:39 +0100
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20141124113139.GC2456@jama>
 MIME-Version: 1.0
-In-Reply-To: <1415737832-12176-1-git-send-email-ubik3000@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Cristian Iorga <ubik3000@gmail.com>
-Subject: Re: [PATCH] mpd: upgrade to 0.19.3
+Subject: State of bitbake world, Failed tasks 2014-11-19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,79 +44,414 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2014 11:08:52 -0000
-X-Groupsio-MsgNum: 53006
+X-List-Received-Date: Mon, 24 Nov 2014 11:31:38 -0000
+X-Groupsio-MsgNum: 53007
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eJnRUKwClWJh1Khz"
+	protocol="application/pgp-signature"; boundary="2JFBq9zoW8cOFH7v"
 Content-Disposition: inline
 
---eJnRUKwClWJh1Khz
+--2JFBq9zoW8cOFH7v
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 11, 2014 at 10:30:32PM +0200, Cristian Iorga wrote:
-> Bug fixes.
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Please fix QA issues first:
+=3D=3D Failed tasks 2014-11-24 =3D=3D
 
-mpd-0.19.3: mpd: Files/directories were installed but not shipped
-  /lib/systemd/system/mpd.socket [installed-vs-shipped]
+=3D=3D=3D common (12) =3D=3D=3D
+    * meta-openembedded/meta-multimedia/recipes-multimedia/dleyna/media-ser=
+vice-upnp_0.4.0.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-extended/acpica/acpitests_20140828.=
+bb, do_compile
+    * meta-openembedded/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb,=
+ do_unpack
+    * meta-openembedded/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.3.=
+4.bb, do_compile
+    * meta-openembedded/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb, d=
+o_patch
+    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do_=
+compile
+    * meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.b=
+b, do_configure
+    * meta-smartphone/meta-fso/recipes-freesmartphone/cornucopia/fsogsmd_gi=
+t.bb, do_compile
+    * meta-smartphone/meta-shr/recipes-shr/3rdparty/ffalarms_git.bb, do_com=
+pile
+    * meta-smartphone/meta-shr/recipes-shr/3rdparty/iliwi_git.bb, do_compile
+    * meta-smartphone/meta-shr/recipes-shr/3rdparty/sensmon_git.bb, do_comp=
+ile
+    * meta-smartphone/meta-shr/recipes-shr/3rdparty/valacompass_git.bb, do_=
+compile
+
+=3D=3D=3D common-x86 (0) =3D=3D=3D
+
+=3D=3D=3D qemuarm (5) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-connectivity/umip/umip_1.0.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb, d=
+o_fetch
+    * meta-openembedded/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb, do_c=
+ompile
+    * meta-openembedded/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb, d=
+o_fetch
+    * meta-smartphone/meta-android/recipes-multimedia/android-audiosystem/a=
+ndroid-audiosystem_bzr.bb, do_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-openembedded/meta-networking/recipes-daemons/netkit-telnet/netki=
+t-telnet_0.17.bb, do_install
+
+=3D=3D=3D Number of failed tasks =3D=3D=3D
+{| class=3Dwikitable
+|-
+||qemuarm       ||17    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141120_141531.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/3320/
+|-
+||qemux86       ||15    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141121_044516.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/3326/
+|-
+||qemux86_64    ||13    ||http://logs.nslu2-linux.org/buildlogs/oe/world//l=
+og.world.20141121_205954.log/||http://errors.yoctoproject.org:80/Errors/Sea=
+rch/1/3327/
+|}
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+meta-openembedded:
+meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb:PNBLACKLIST[ifuse=
+] =3D "depends on blacklisted libimobiledevice"
+meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb:PNBLACKLIST[gn=
+ome-mplayer] =3D "rdepends on blacklisted mplayer"
+meta-gnome/recipes-gnome/gcr/gcr_3.8.2.bb:PNBLACKLIST[gcr] =3D "CONFLICT: 4=
+ files conflict with gnome-keyring"
+meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb:PNBLACKLIST[gno=
+me-menus3] =3D "CONFLICT: 24 files are conflicting with gnome-menus"
+meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb:PNBLACKLIST[gnom=
+e-panel3] =3D "CONFLICT: depends on libgweather3 which conflicts with libgw=
+eather"
+meta-gnome/recipes-gnome/gweather/libgweather3_3.0.2.bb:PNBLACKLIST[libgwea=
+ther3] =3D "CONFLICT: 876 files are conflicting with libgweather"
+meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb:PNBLACKLIST[zenity] =3D "B=
+ROKEN: doesn't build with B!=3DS"
+meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb:PNBLACKLIST[xbmc] =3D =
+"/usr/include/c++/ctime:70:11: error: '::gmtime' has not been declared"
+meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb:PNBLACKLIST=
+[coriander] =3D "BROKEN: fails to use SDL probably because libsdl-config wa=
+s removed, error: unknown type name 'SDL_Overlay'"
+meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb:PN=
+BLACKLIST[renderer-service-upnp] =3D "BROKEN: doesn't build with B!=3DS (tr=
+ying to install rendererconsole.py from ${B} instead of ${S})"
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb:PNBLACK=
+LIST[lksctp-tools] =3D "BROKEN: fails to link against sctp_connectx symbol"
+meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb:PNB=
+LACKLIST[libimobiledevice] =3D "cannot run test program while cross compili=
+ng"
+meta-oe/recipes-connectivity/soft66/soft66_git.bb:PNBLACKLIST[soft66] =3D "=
+BROKEN: depends on broken libftdi"
+meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb:PNBLACKLIST[zeroc=
+-ice] =3D "BROKEN: not compatible with default db version"
+meta-oe/recipes-extended/subsurface/subsurface_git.bb:PNBLACKLIST[subsurfac=
+e] =3D "Needs to be upgraded for compatibility with new libdivecomputer"
+meta-oe/recipes-extended/zsh/zsh.inc:PNBLACKLIST[zsh] =3D "BROKEN: doesn't =
+build with B!=3DS (gnu-configize executed in ${B})"
+meta-oe/recipes-graphics/clutter/clutter-box2d_git.bb:PNBLACKLIST[clutter-b=
+ox2d] =3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb:PNBLACKLIST[fim] =3D "BROKEN: d=
+oesn't build with B!=3DS (flex: can't open lex.lex)"
+meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb:PNBLACKLIST[xf8=
+6-input-mtev] =3D "BROKEN: doesn't build with B!=3DS (Makefile without ${S}=
+ in sed call)"
+meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb:PNBLACKLIST[mplayer2] =
+=3D "Requires newer libav which has negative D_P"
+meta-oe/recipes-navigation/omgps/omgps_svn.bb:PNBLACKLIST[omgps] =3D "BROKE=
+N: sound.c:61:35: error: 'saveptr' may be used uninitialized in this functi=
+on [-Werror=3Dmaybe-uninitialized]"
+meta-oe/recipes-qt/qconnman/qconnman-e_git.bb:PNBLACKLIST[qconnman-e] =3D "=
+BROKEN: doesn't work with B!=3DS, ls: cannot access *.pro: No such file or =
+directory"
+meta-oe/recipes-qt/qconnman/qconnman_git.bb:PNBLACKLIST[qconnman] =3D "BROK=
+EN: doesn't work with B!=3DS, ls: cannot access *.pro: No such file or dire=
+ctory"
+meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb:PNBLACKLIST[sylpheed] =3D=
+ "BROKEN: Doesn't work with B!=3DS"
+meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb:PNBLACKLIST[apcupsd] =3D=
+ "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/emacs/emacs_23.4.bb:PNBLACKLIST[emacs] =3D "qemu: u=
+ncaught target signal 11 (Segmentation fault) - core dumped"
+meta-oe/recipes-support/libftdi/libftdi_0.19.bb:PNBLACKLIST[libftdi] =3D "B=
+ROKEN: needs to be updated to detect libusb with pkg-config instead of libu=
+sb-config"
+meta-oe/recipes-support/maliit/maliit-framework_git.bb:PNBLACKLIST[maliit-f=
+ramework] =3D "BROKEN: Wasn't updated to work with B!=3DS, maybe incorrectl=
+y inherits autotools"
+meta-oe/recipes-support/maliit/maliit-plugins_git.bb:PNBLACKLIST[maliit-plu=
+gins] =3D "BROKEN: depends on broken maliit-framework"
+meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb:PNBLACKLIST[openmotif]=
+ =3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb:PNBLACKLIST[vala=
+-terminal] =3D "BROKEN: Doesn't work with B!=3DS, touch: cannot touch `src/=
+=2Estamp': No such file or directory"
+meta-webserver/recipes-php/modphp/modphp5.inc:PNBLACKLIST[modphp] =3D "CONF=
+LICT: 466 header files conflict with php"
+meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb:PNBLACKLIST[xdebug] =3D "=
+CONFLICT: depends on blocked modphp"
+meta-qt5:
+meta-smartphone:
+meta-shr/recipes-shr/3rdparty/intone_git.bb:PNBLACKLIST[intone] =3D "rdepen=
+ds on blacklisted mplayer2"
+conf/world_fixes.inc:PNBLACKLIST[mplayer2] =3D ""
+conf/world_fixes.inc:PNBLACKLIST[android-system] =3D "depends on lxc from m=
+eta-virtualiazation which isn't included in my world builds"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't r=
+eally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't r=
+eally need to be tested so much"
+conf/world_mask.inc:PNBLACKLIST[evince] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[epiphany] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[gnome-power-manager] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[gnome-bluetooth] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[media-ctl] =3D "fails to build"
+
+QA issues counts:
+3   already-stripped:
+1   libdir:
+17   textrel:
+13   build-deps:
+53   file-rdeps:
+0   version-going-backwards:
+
+
+QA issues by type:
+3   already-stripped:
+qwt-6.0.1: File '/usr/lib/libqwt.so.6.0.1' from qwt was already stripped, t=
+his will prevent future debugging! [already-stripped]
+qwt-6.0.1: File '/usr/lib/libqwtmathml.so.6.0.1' from qwt was already strip=
+ped, this will prevent future debugging! [already-stripped]
+qwt-6.0.1: File '/usr/lib/qt4/plugins/designer/libqwt_designer_plugin.so' f=
+rom qwt was already stripped, this will prevent future debugging! [already-=
+stripped]
+
+
+1   libdir:
+chromium-dbg: found library in wrong location: /usr/bin/chrome/.debug/libff=
+mpegsumo.so [libdir]
+
+
+17   textrel:
+chromium-38.0.2125.101: ELF binary '/tmp/work/i586-oe-linux/chromium/38.0.2=
+125.101-r0/packages-split/chromium/usr/bin/chrome/libffmpegsumo.so' has rel=
+ocations in .text [textrel]
+gstreamer1.0-libav-1.4.1: ELF binary '/tmp/work/armv5te-oe-linux-gnueabi/gs=
+treamer1.0-libav/1.4.1-r0/packages-split/gstreamer1.0-libav/usr/lib/gstream=
+er-1.0/libgstlibav.so' has relocations in .text [textrel]
+gstreamer1.0-libav-1.4.1: ELF binary '/tmp/work/i586-oe-linux/gstreamer1.0-=
+libav/1.4.1-r0/packages-split/gstreamer1.0-libav/usr/lib/gstreamer-1.0/libg=
+stlibav.so' has relocations in .text [textrel]
+libav-9.16: ELF binary '/tmp/work/armv5te-oe-linux-gnueabi/libav/9.16-r0/pa=
+ckages-split/libavcodec/usr/lib/libavcodec.so.54.35.0' has relocations in .=
+text [textrel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavcodec/usr/lib/libavcodec.so.54.35.0' has relocations in .text [textr=
+el]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavdevice/usr/lib/libavdevice.so.53.2.0' has relocations in .text [text=
+rel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavfilter/usr/lib/libavfilter.so.3.3.0' has relocations in .text [textr=
+el]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavformat/usr/lib/libavformat.so.54.20.4' has relocations in .text [tex=
+trel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavresample/usr/lib/libavresample.so.1.0.1' has relocations in .text [t=
+extrel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavutil/usr/lib/libavutil.so.52.3.0' has relocations in .text [textrel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libswscale/usr/lib/libswscale.so.2.1.1' has relocations in .text [textrel]
+libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary '/tmp/work/armv5te-oe-=
+linux-gnueabi/libpostproc/52.3.0+gitAUTOINC+811db3b957-r0/packages-split/li=
+bpostproc/usr/lib/libpostproc.so.52.3.0' has relocations in .text [textrel]
+libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary '/tmp/work/i586-oe-lin=
+ux/libpostproc/52.3.0+gitAUTOINC+811db3b957-r0/packages-split/libpostproc/u=
+sr/lib/libpostproc.so.52.3.0' has relocations in .text [textrel]
+mpg123-1.21.0: ELF binary '/tmp/work/i586-oe-linux/mpg123/1.21.0-r0/package=
+s-split/mpg123/usr/lib/libmpg123.so.0.40.3' has relocations in .text [textr=
+el]
+qtwebkit-5.3.2: ELF binary '/tmp/work/i586-oe-linux/qtwebkit/5.3.2-r0/packa=
+ges-split/qtwebkit/usr/lib/libQt5WebKit.so.5.3.2' has relocations in .text =
+[textrel]
+webkit-efl-1.11.0: ELF binary '/tmp/work/i586-oe-linux/webkit-efl/1_1.11.0-=
+r0/packages-split/webkit-efl/usr/lib/libjavascriptcore_efl.so.1.11.0' has r=
+elocations in .text [textrel]
+webkit-gtk-1.8.3: ELF binary '/tmp/work/i586-oe-linux/webkit-gtk/1.8.3-r1/p=
+ackages-split/libjavascriptcore/usr/lib/libjavascriptcoregtk-1.0.so.0.13.4'=
+ has relocations in .text [textrel]
+
+
+13   build-deps:
+collectd-5.4.1: collectd rdepends on libesmtp, but it isn't a build depende=
+ncy? [build-deps]
+exquisite-0.0.1+svnr82070: exquisite rdepends on initscripts-functions, but=
+ it isn't a build dependency? [build-deps]
+glade3-3.8.5: glade3 rdepends on libpython2, but it isn't a build dependenc=
+y? [build-deps]
+gpm-1.99.7: gpm rdepends on initscripts-functions, but it isn't a build dep=
+endency? [build-deps]
+irda-utils-0.9.18: irda-utils rdepends on initscripts-functions, but it isn=
+'t a build dependency? [build-deps]
+libssh-0.6.3: libssh rdepends on krb5, but it isn't a build dependency? [bu=
+ild-deps]
+libwebp-0.4.0: libwebp-bin rdepends on libgl-mesa, but it isn't a build dep=
+endency? [build-deps]
+libwebp-0.4.0: libwebp-bin rdepends on mesa-glut, but it isn't a build depe=
+ndency? [build-deps]
+log4c-1.2.4: log4c rdepends on expat, but it isn't a build dependency? [bui=
+ld-deps]
 mpd-0.19.3: mpd rdepends on libsmbclient, but it isn't a build dependency? =
 [build-deps]
+proftpd-1.3.4b: proftpd rdepends on initscripts-functions, but it isn't a b=
+uild dependency? [build-deps]
+squid-3.4.7: squid rdepends on libpam, but it isn't a build dependency? [bu=
+ild-deps]
+sysklogd-1.5: sysklogd rdepends on initscripts-functions, but it isn't a bu=
+ild dependency? [build-deps]
 
->=20
-> Signed-off-by: Cristian Iorga <ubik3000@gmail.com>
-> ---
->  .../recipes-multimedia/musicpd/{mpd_0.19.1.bb =3D> mpd_0.19.3.bb}       =
-| 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.19.1.bb =3D> mp=
-d_0.19.3.bb} (94%)
->=20
-> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb b/m=
-eta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
-> similarity index 94%
-> rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
-> rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
-> index 04eed0a..23e81a6 100644
-> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
-> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
-> @@ -9,8 +9,8 @@ SRC_URI =3D " \
->      http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
->      file://mpd.conf.in \
->  "
-> -SRC_URI[md5sum] =3D "d235f6e53e5442b6926c49946a303f8d"
-> -SRC_URI[sha256sum] =3D "8b3afcd440181c9bd18b229b5974e529d59648344dd37137=
-0d6f7d62ec2847c5"
-> +SRC_URI[md5sum] =3D "f539bc9e60367d5084ed14b078140ef7"
-> +SRC_URI[sha256sum] =3D "fee3f3c59b5806767f23f7962621be7a62d4fcb852fff6b9=
-ed6bbb5598a556d3"
-> =20
->  inherit autotools useradd systemd
-> =20
-> --=20
-> 2.1.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+53   file-rdeps:
+chkconfig-1.3.58: chkconfig requires libnewt.so()(64bit), but no providers =
+in its RDEPENDS [file-rdeps]
+chkconfig-1.3.58: chkconfig requires libnewt.so, but no providers in its RD=
+EPENDS [file-rdeps]
+cloud9-0.6: cloud9 requires /bin/bash, but no providers in its RDEPENDS [fi=
+le-rdeps]
+dpkg-1.17.4: dpkg requires /usr/bin/perl, but no providers in its RDEPENDS =
+[file-rdeps]
+dvb-apps-1.1.1: dvb-apps requires libucsi.so()(64bit), libdvbapi.so()(64bit=
+), libdvbcfg.so()(64bit), libdvben50221.so()(64bit), libdvbsec.so()(64bit),=
+ but no providers in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvb-apps requires libucsi.so, libdvben50221.so, libdvbsec.s=
+o, libdvbcfg.so, libdvbapi.so, but no providers in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvb-femon requires libdvbapi.so()(64bit), but no providers =
+in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvb-femon requires libdvbapi.so, but no providers in its RD=
+EPENDS [file-rdeps]
+dvb-apps-1.1.1: dvb-scan requires libdvbsec.so()(64bit), libdvbapi.so()(64b=
+it), libdvbcfg.so()(64bit), but no providers in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvb-scan requires libdvbsec.so, libdvbcfg.so, libdvbapi.so,=
+ but no providers in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvbdate requires libucsi.so()(64bit), libdvbapi.so()(64bit)=
+, but no providers in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvbdate requires libucsi.so, libdvbapi.so, but no providers=
+ in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvbnet requires libdvbapi.so()(64bit), but no providers in =
+its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvbnet requires libdvbapi.so, but no providers in its RDEPE=
+NDS [file-rdeps]
+dvb-apps-1.1.1: dvbtraffic requires libdvbapi.so()(64bit), but no providers=
+ in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvbtraffic requires libdvbapi.so, but no providers in its R=
+DEPENDS [file-rdeps]
+fakeroot-1.18.4: fakeroot requires /bin/bash, but no providers in its RDEPE=
+NDS [file-rdeps]
+fbida-2.09+gitAUTOINC+6aa5563cb3: fbida requires /bin/bash, but no provider=
+s in its RDEPENDS [file-rdeps]
+foxtrotgps-1.1.1: foxtrotgps requires /usr/bin/python, /usr/bin/perl, but n=
+o providers in its RDEPENDS [file-rdeps]
+gammu-1.32.0: gammu requires /bin/bash, but no providers in its RDEPENDS [f=
+ile-rdeps]
+gammu-1.32.0: gammu-dev requires /bin/bash, but no providers in its RDEPEND=
+S [file-rdeps]
+gateone-1.2: gateone requires /bin/bash, but no providers in its RDEPENDS [=
+file-rdeps]
+giflib-4.1.6: giflib-utils requires /usr/bin/perl, but no providers in its =
+RDEPENDS [file-rdeps]
+gnome-desktop-2.32.1: gnome-desktop requires /usr/bin/python, but no provid=
+ers in its RDEPENDS [file-rdeps]
+gnome-panel-2.32.1: gnome-panel requires /usr/bin/python, but no providers =
+in its RDEPENDS [file-rdeps]
+groff-1.22.2: groff requires /bin/sed, but no providers in its RDEPENDS [fi=
+le-rdeps]
+gupnp-0.20.12: gupnp-dev requires /usr/bin/python, but no providers in its =
+RDEPENDS [file-rdeps]
+hplip-3.12.6: hplip-filter requires /usr/bin/perl, but no providers in its =
+RDEPENDS [file-rdeps]
+libbonobo-2.32.1: libbonobo requires /usr/bin/perl, but no providers in its=
+ RDEPENDS [file-rdeps]
+libnewt-0.52.17: whiptail requires libnewt.so()(64bit), but no providers in=
+ its RDEPENDS [file-rdeps]
+libnewt-0.52.17: whiptail requires libnewt.so, but no providers in its RDEP=
+ENDS [file-rdeps]
+libnewt-python-0.52.17: libnewt-python requires libnewt.so()(64bit), but no=
+ providers in its RDEPENDS [file-rdeps]
+libnewt-python-0.52.17: libnewt-python requires libnewt.so, but no provider=
+s in its RDEPENDS [file-rdeps]
+lio-utils-4.1+gitAUTOINC+28bd928655: lio-utils requires /bin/bash, but no p=
+roviders in its RDEPENDS [file-rdeps]
+lmsensors-config-1.0: lmsensors-config-cgi requires /usr/bin/rrdcgi, but no=
+ providers in its RDEPENDS [file-rdeps]
+nodejs-0.8.18: nodejs requires /bin/bash, but no providers in its RDEPENDS =
+[file-rdeps]
+numptyphysics-0.2+svnr109: numptyphysics requires /bin/bash, /usr/bin/perl,=
+ but no providers in its RDEPENDS [file-rdeps]
+open-iscsi-2.0-871: open-iscsi requires /bin/bash, but no providers in its =
+RDEPENDS [file-rdeps]
+packagekit-0.5.6: packagekit requires /bin/bash, but no providers in its RD=
+EPENDS [file-rdeps]
+pcsc-lite-1.8.6: pcsc-lite requires /usr/bin/python, but no providers in it=
+s RDEPENDS [file-rdeps]
+php-5.4.33: php requires /tmp/work/armv5te-oe-linux-gnueabi/php/5.4.33-r0/i=
+mage/usr/bin/php, but no providers in its RDEPENDS [file-rdeps]
+php-5.4.33: php requires /tmp/work/core2-64-oe-linux/php/5.4.33-r0/image/us=
+r/bin/php, but no providers in its RDEPENDS [file-rdeps]
+php-5.4.33: php requires /tmp/work/i586-oe-linux/php/5.4.33-r0/image/usr/bi=
+n/php, but no providers in its RDEPENDS [file-rdeps]
+pm-qa-0.4.14: pm-qa requires /bin/bash, but no providers in its RDEPENDS [f=
+ile-rdeps]
+qt-creator-2.8.1: qt-creator requires /usr/bin/perl, but no providers in it=
+s RDEPENDS [file-rdeps]
+systemd-216+gitAUTOINC+5d0ae62c66: systemd-kernel-install requires /bin/bas=
+h, but no providers in its RDEPENDS [file-rdeps]
+tracker-0.14.2: tracker-nautilus-extension requires libnautilus-extension.s=
+o.1()(64bit), but no providers in its RDEPENDS [file-rdeps]
+tracker-0.14.2: tracker-nautilus-extension requires libnautilus-extension.s=
+o.1, but no providers in its RDEPENDS [file-rdeps]
+ubx-utils-0.0.0+gitrAUTOINC+b63c0932dd: ubx-utils requires /bin/bash, but n=
+o providers in its RDEPENDS [file-rdeps]
+unionfs-fuse-0.26: unionfs-fuse requires /bin/bash, but no providers in its=
+ RDEPENDS [file-rdeps]
+usbpath-0.0+svnr3172: usbpath requires /usr/bin/perl, but no providers in i=
+ts RDEPENDS [file-rdeps]
+wvstreams-4.6.1: wvstreams requires /usr/bin/perl, but no providers in its =
+RDEPENDS [file-rdeps]
+xmlto-0.0.25: xmlto requires /bin/bash, but no providers in its RDEPENDS [f=
+ile-rdeps]
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---eJnRUKwClWJh1Khz
+--2JFBq9zoW8cOFH7v
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRzEcoACgkQN1Ujt2V2gBzuogCfYa2f+HUg6pzkBlia+LtknFrd
-wi0An1UWCiT9QkQydiXjsF4Y3l55Tvj9
-=+rcn
+iEYEARECAAYFAlRzFxsACgkQN1Ujt2V2gBxj9QCeNN5rTALi0eRDRnD49Eytu6lW
+/qYAn2YR585oc85Rmy1ibq6uMwf+vHBR
+=HD25
 -----END PGP SIGNATURE-----
 
---eJnRUKwClWJh1Khz--
+--2JFBq9zoW8cOFH7v--
