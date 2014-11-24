@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id E006B7226F
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C839D72283
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Nov 2014 11:07:36 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id r20so8292302wiv.4
+	Mon, 24 Nov 2014 11:08:50 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id r20so5227805wiv.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Nov 2014 03:07:36 -0800 (PST)
+	Mon, 24 Nov 2014 03:08:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=WPDL6E25zFiZlbJDyTvdEeyMz+fUtoS1oL6VZ1vUnPI=;
-	b=UbBdNUd5pbwpieILysmOln4mnt9eOEQQxpYdg8dFHHk7TYMxXyqmJ85eFZ4QFlVf4A
-	39v8hpHtGdvzxmQjBcsgXEo8fH0BJivhqXWSjQjOXdGRbO3ap/ztzRqQuI09z5jOxl41
-	p16KSeuvbEScHew0BmO+dZmeX2/r0BRvX5K51DZXncGsjvxw/zJriOds5AINfgwnTn5E
-	4eu1VXMYI8lbaHo/4ExtjFZYUgLHgyCPBRWODr8i+D/nsbPhknUPwuNC1TB/jnVl9DtU
-	fv1tHM0gVPDH+hWkCwm8atyXgqcsPS5TN7SfGqrdnoMcWmrRzNxm4fFZh2xD5ZPS4uyG
-	uR7A==
-X-Received: by 10.180.91.36 with SMTP id cb4mr11628828wib.30.1416827256293;
-	Mon, 24 Nov 2014 03:07:36 -0800 (PST)
+	bh=Y55jISDDAdLq+UddIgljEJns12u221/kaoX48DW6r7w=;
+	b=QvNOgXZy0o5iMnytDDxvL4mSs8KO++RDcfOJDXBS1iNitVAP9DcZQqML6LBFC5QQVE
+	b4oYkRnI54yBvpvB7yvfYJkIZsttB/20U28mZptMv+e8+xol7QJtVDa38wSKaxsKgmb7
+	lBDOfrefIzoAVX/LvqoBJwm5HYeyez1Wn8soCTD0VeHa3r1IJhRz9zlplY5PGcSwIevT
+	EB9BtAKZ73FhwH75XoxZTlVqv/aYp9FzNcsNfHZz18pYTBnFkobTWrLU0vENaD9joTmm
+	GIjNmlXxAC3JctvaumLum9yrvroPv2bEJev/x968cwcgFnaUYy8qdIoC2z8xLs5Iglwa
+	MVQg==
+X-Received: by 10.180.83.37 with SMTP id n5mr20512451wiy.83.1416827330363;
+	Mon, 24 Nov 2014 03:08:50 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	mu4sm11565237wib.2.2014.11.24.03.07.35
-	for <openembedded-devel@lists.openembedded.org>
+	l3sm12717179wje.12.2014.11.24.03.08.49 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Nov 2014 03:07:35 -0800 (PST)
+	Mon, 24 Nov 2014 03:08:49 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 24 Nov 2014 12:07:44 +0100
+Date: Mon, 24 Nov 2014 12:08:58 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141124110744.GA2456@jama>
-References: <1416439433-4328-1-git-send-email-alejandro.hernandez@linux.intel.com>
+Message-ID: <20141124110858.GB2456@jama>
+References: <1415737832-12176-1-git-send-email-ubik3000@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1416439433-4328-1-git-send-email-alejandro.hernandez@linux.intel.com>
+In-Reply-To: <1415737832-12176-1-git-send-email-ubik3000@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-gnome][PATCH] gsettings-desktop-schemas: Moved from OE-Core
+Cc: Cristian Iorga <ubik3000@gmail.com>
+Subject: Re: [PATCH] mpd: upgrade to 0.19.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,58 +48,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2014 11:07:39 -0000
-X-Groupsio-MsgNum: 53005
+X-List-Received-Date: Mon, 24 Nov 2014 11:08:52 -0000
+X-Groupsio-MsgNum: 53006
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="opJtzjQTFsWo+cga"
+	protocol="application/pgp-signature"; boundary="eJnRUKwClWJh1Khz"
 Content-Disposition: inline
 
---opJtzjQTFsWo+cga
+--eJnRUKwClWJh1Khz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 19, 2014 at 05:23:53PM -0600, Alejandro Hernandez wrote:
-> Signed-off-by: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
-> ---
->  .../gsettings-desktop-schemas_3.14.1.bb                  | 16 ++++++++++=
-++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/gsettings-desktop-schemas/gs=
-ettings-desktop-schemas_3.14.1.bb
+On Tue, Nov 11, 2014 at 10:30:32PM +0200, Cristian Iorga wrote:
+> Bug fixes.
+
+Please fix QA issues first:
+
+mpd-0.19.3: mpd: Files/directories were installed but not shipped
+  /lib/systemd/system/mpd.socket [installed-vs-shipped]
+mpd-0.19.3: mpd rdepends on libsmbclient, but it isn't a build dependency? =
+[build-deps]
+
 >=20
-> diff --git a/meta-gnome/recipes-gnome/gsettings-desktop-schemas/gsettings=
--desktop-schemas_3.14.1.bb b/meta-gnome/recipes-gnome/gsettings-desktop-sch=
-emas/gsettings-desktop-schemas_3.14.1.bb
-> new file mode 100644
-> index 0000000..844d0cd
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gsettings-desktop-schemas/gsettings-deskto=
-p-schemas_3.14.1.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY =3D "GNOME desktop-wide GSettings schemas"
-> +HOMEPAGE =3D "http://live.gnome.org/gsettings-desktop-schemas"
-> +BUGTRACKER =3D "https://bugzilla.gnome.org/"
-> +
-> +LICENSE =3D "LGPLv2.1"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c"
-> +PR =3D "r1"
-
-Drop PR
-
-> +
-> +DEPENDS =3D "glib-2.0 intltool-native gobject-introspection-stub-native"
-> +
-> +inherit gnomebase gsettings gettext
-> +
-> +GNOME_COMPRESS_TYPE =3D "xz"
-> +
-> +SRC_URI[archive.md5sum] =3D "92d41934212fc7da48648afa3927f4b0"
-> +SRC_URI[archive.sha256sum] =3D "217eba09f0fb263dcb8ce6efa21c9afaf0504ac1=
-d937732d1af1c6724c05f065"
+> Signed-off-by: Cristian Iorga <ubik3000@gmail.com>
+> ---
+>  .../recipes-multimedia/musicpd/{mpd_0.19.1.bb =3D> mpd_0.19.3.bb}       =
+| 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.19.1.bb =3D> mp=
+d_0.19.3.bb} (94%)
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb b/m=
+eta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
+> similarity index 94%
+> rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+> rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
+> index 04eed0a..23e81a6 100644
+> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.3.bb
+> @@ -9,8 +9,8 @@ SRC_URI =3D " \
+>      http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
+>      file://mpd.conf.in \
+>  "
+> -SRC_URI[md5sum] =3D "d235f6e53e5442b6926c49946a303f8d"
+> -SRC_URI[sha256sum] =3D "8b3afcd440181c9bd18b229b5974e529d59648344dd37137=
+0d6f7d62ec2847c5"
+> +SRC_URI[md5sum] =3D "f539bc9e60367d5084ed14b078140ef7"
+> +SRC_URI[sha256sum] =3D "fee3f3c59b5806767f23f7962621be7a62d4fcb852fff6b9=
+ed6bbb5598a556d3"
+> =20
+>  inherit autotools useradd systemd
+> =20
 > --=20
-> 1.9.1
+> 2.1.0
 >=20
 > --=20
 > _______________________________________________
@@ -110,16 +111,16 @@ d937732d1af1c6724c05f065"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---opJtzjQTFsWo+cga
+--eJnRUKwClWJh1Khz
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlRzEYAACgkQN1Ujt2V2gBzZlgCdGRxvBpg/oA4golSXaZ88T/C5
-ZlQAoJJQgolitMjEhRp0eZDqztlN59rg
-=yEjT
+iEYEARECAAYFAlRzEcoACgkQN1Ujt2V2gBzuogCfYa2f+HUg6pzkBlia+LtknFrd
+wi0An1UWCiT9QkQydiXjsF4Y3l55Tvj9
+=+rcn
 -----END PGP SIGNATURE-----
 
---opJtzjQTFsWo+cga--
+--eJnRUKwClWJh1Khz--
