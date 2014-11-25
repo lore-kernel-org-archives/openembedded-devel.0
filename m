@@ -1,38 +1,43 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qc0-f170.google.com (mail-qc0-f170.google.com
-	[209.85.216.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 890F970A7C
-	for <openembedded-devel@openembedded.org>;
-	Tue, 25 Nov 2014 16:09:41 +0000 (UTC)
-Received: by mail-qc0-f170.google.com with SMTP id x3so652359qcv.15
-	for <openembedded-devel@openembedded.org>;
-	Tue, 25 Nov 2014 08:09:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=cDd1rUHIYYjY/exGe3ZS4QFSsS18o44jzaGRUxuCGzw=;
-	b=BusnCxGKbGzT95OdW+MNJXAvQ6Rt+e5xpSkyRKkXU/KZML2hh8yCCIK8/5P3qeBzAL
-	qeTFSSZsfIO5nC5K1zJEO/XoyeQy2eBm5uB6VPT5Q/JLcACYUFYiL5VjKfwNIFojttIt
-	nM7u/GadnbhMCIit+u3kpSfAPtsqZ3X1hbmponFqfmfnyneNZh9htqv5tCBMRHdYH5YW
-	7N4p9in2/gZ0Af4VHwUZBy9qdX2MP0SxTcHeKxuVQq4i5wcOY13AdEKSqL8Sdi3joZ+W
-	EgCSO5sKn0Z8Y5Ql/v5RmYL2sDBKe99jjPxZq0nZ/j6izFvXzxzdVOrHoQ7sWOO3Z0fX
-	vBUQ==
-X-Received: by 10.224.14.133 with SMTP id g5mr14003330qaa.81.1416931782334;
-	Tue, 25 Nov 2014 08:09:42 -0800 (PST)
-Received: from localhost.localdomain
-	(pool-71-171-45-99.ronkva.east.verizon.net. [71.171.45.99])
-	by mx.google.com with ESMTPSA id i1sm1421828qaz.28.2014.11.25.08.09.41
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 25 Nov 2014 08:09:41 -0800 (PST)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@openembedded.org
-Date: Tue, 25 Nov 2014 11:09:36 -0500
-Message-Id: <1416931776-13600-3-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1416931776-13600-1-git-send-email-philip@balister.org>
-References: <1416931776-13600-1-git-send-email-philip@balister.org>
-Subject: [meta-oe][PATCH 3/3] anki : python-sip package replaces with just sip.
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 397 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 25 Nov 2014 18:24:01 UTC
+Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
+	[216.82.243.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A626972272
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Nov 2014 18:24:01 +0000 (UTC)
+Received: from [216.82.241.196] by server-3.bemta-8.messagelabs.com id
+	0C/81-10983-4B7C4745; Tue, 25 Nov 2014 18:17:24 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-4.tower-46.messagelabs.com!1416939439!37926331!1
+X-Originating-IP: [66.77.174.13]
+X-StarScan-Received: 
+X-StarScan-Version: 6.12.4; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 13173 invoked from network); 25 Nov 2014 18:17:20 -0000
+Received: from mail.mx1.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
+	by server-4.tower-46.messagelabs.com with RC4-SHA encrypted SMTP;
+	25 Nov 2014 18:17:20 -0000
+Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx1.digi.com
+	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.377.0;
+	Tue, 25 Nov 2014 12:17:10 -0600
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.210.2;
+	Tue, 25 Nov 2014 12:17:18 -0600
+Received: from log-cln-jviguera.digi.com (10.101.2.54) by
+	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
+	14.3.210.2; Tue, 25 Nov 2014 19:17:17 +0100
+From: Javier Viguera <javier.viguera@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Nov 2014 19:17:15 +0100
+Message-ID: <1416939435-30118-1-git-send-email-javier.viguera@digi.com>
+X-Mailer: git-send-email 2.1.3
+MIME-Version: 1.0
+X-Originating-IP: [10.101.2.54]
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: [meta-oe][master][dizzy]PATCH] xserver-common: disable TCP connections
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 16:09:47 -0000
+X-List-Received-Date: Tue, 25 Nov 2014 18:24:04 -0000
+Content-Type: text/plain
 
-The sip package provides python support for the target.
+For security reasons disable TCP connections to the xserver.
 
-Signed-off-by: Philip Balister <philip@balister.org>
+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
 ---
- meta-oe/recipes-extended/anki/anki_0.4.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...15-xserver-common-disable-TCP-connections.patch | 22 ++++++++++++++++++++++
+ .../xserver-common/xserver-common_1.34.bb          |  1 +
+ 2 files changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
 
-diff --git a/meta-oe/recipes-extended/anki/anki_0.4.3.bb b/meta-oe/recipes-extended/anki/anki_0.4.3.bb
-index 7943ce8..d441a70 100644
---- a/meta-oe/recipes-extended/anki/anki_0.4.3.bb
-+++ b/meta-oe/recipes-extended/anki/anki_0.4.3.bb
-@@ -1,4 +1,4 @@
- require ${PN}-${PV}.inc
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+new file mode 100644
+index 000000000000..0af8030160e2
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+@@ -0,0 +1,22 @@
++From: Javier Viguera <javier.viguera@digi.com>
++Date: Tue, 25 Nov 2014 18:47:12 +0100
++Subject: [PATCH] xserver-common: disable TCP connections
++
++Signed-off-by: Javier Viguera <javier.viguera@digi.com>
++---
++ X11/xserver-common | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/X11/xserver-common b/X11/xserver-common
++index 017e5aee1ab0..4dc48c412741 100644
++--- a/X11/xserver-common
+++++ b/X11/xserver-common
++@@ -44,7 +44,7 @@ SCREEN_SIZE=`fallback_screen_arg`
++ export USER=root
++ export XSERVER_DEFAULT_ORIENTATION=normal
++ 
++-ARGS="-br -pn $INPUT_EXTRA_ARGS"
+++ARGS="-br -pn -nolisten tcp $INPUT_EXTRA_ARGS"
++ DPI="100"
++ MOUSE=""
++ KDRIVEARGS=""
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+index 12fff9ae9a0d..f5b1984cdde3 100644
+--- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+@@ -24,6 +24,7 @@ SRC_URI_append = " \
+     file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
+     file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
+     file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
++    file://0015-xserver-common-disable-TCP-connections.patch \
+ "
  
--RDEPENDS_${PN} = "python-pyqt python-sip libanki"
-+RDEPENDS_${PN} = "python-pyqt sip libanki"
- RRECOMMENDS_${PN} = "virtual-japanese-font"
--- 
-1.8.3.1
-
+ do_install_append() {
 
