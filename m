@@ -1,36 +1,24 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C2A0C721BB
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 055F772276
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 02:17:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43922938"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2014 10:14:09 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAP2H7KL005369
+	Tue, 25 Nov 2014 07:11:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAP7B9pH023783
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 10:17:07 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Tue, 25 Nov 2014 10:17:28 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH 5/5] sgpio : add new recipe
-Thread-Index: AQHQAlXgPVyUTqKw9ESUlv80qPM1pZxngMsAgAMcJACABgjGUA==
-Date: Tue, 25 Nov 2014 02:17:27 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E8738E3E9A@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1416222008-9218-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<1416222008-9218-6-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<20141119143330.GF3315@jama> <20141121140300.GF2163@jama>
-In-Reply-To: <20141121140300.GF2163@jama>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.35]
+	Mon, 24 Nov 2014 23:11:09 -0800 (PST)
+Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 24 Nov 2014 23:11:09 -0800
+From: <wenzong.fan@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Nov 2014 02:11:07 -0500
+Message-ID: <1416899468-28398-1-git-send-email-wenzong.fan@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: Re: [PATCH 5/5] sgpio : add new recipe
+Subject: [PATCH][meta-networking] sethdlc: fix host contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,50 +32,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 02:17:30 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 Nov 2014 07:11:13 -0000
+Content-Type: text/plain
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Martin Jansa
-> Sent: Friday, November 21, 2014 10:03 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH 5/5] sgpio : add new recipe
->=20
-> On Wed, Nov 19, 2014 at 03:33:30PM +0100, Martin Jansa wrote:
->=20
-> But there is another issue:
->=20
-> ERROR: Command Error: exit status: 1  Output:
-> Applying patch 0001-Makefile-modify-some-parameters.patch
-> patching file Makefile
-> Hunk #1 FAILED at 23.
-> 1 out of 1 hunk FAILED -- rejects in file Makefile Patch
-> 0001-Makefile-modify-some-parameters.patch does not apply (enforce with -=
-f)
-> ERROR: Function failed: patch_do_patch
-> ERROR: Logfile of failure stored in:
-> /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
-gpio/
-> 1.2.0.10-r0/temp/log.do_patch.5210
-> NOTE: recipe sgpio-1.2.0.10-r0: task do_patch: Failed
-> NOTE: recipe vlan-1.9-r0: task do_unpack: Succeeded
-> ERROR: Task 15324
-> (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extend=
-e
-> d/sgpio/sgpio_1.2.0.10.bb, do_patch) failed with exit code '1'
->=20
-Thank you very much.
-This is probably the problem of file format.
-I will fix it and resent later.
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Best regards,
-Li xin
->=20
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+* Clean INCLUDES to fix the host contamination errors:
+
+  In file included from /usr/src/linux/include/linux/posix_types.h:47:0,
+  from /usr/src/linux/include/linux/types.h:17,
+  from /usr/src/linux/include/linux/if.h:22,
+  from sethdlc.c:23:
+  /usr/src/linux/include/asm-generic/posix_types.h:91:3: \
+    error: conflicting types for '__kernel_fsid_t'
+  } __kernel_fsid_t;
+  ^
+  .../tmp/sysroots/qemumips/usr/include/asm/posix_types.h:26:3: \
+    note: previous declaration of '__kernel_fsid_t' was here
+  } __kernel_fsid_t;
+  ^
+
+* Correct LIC_FILES_CHKSUM to checkout license infos from sethdl.c
+  instead of Makefile.
+
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ .../files/sethdlc-fix-host-contamination.patch     |   42 ++++++++++++++++++++
+ .../recipes-connectivity/sethdlc/sethdlc.bb        |    3 +-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
+
+diff --git a/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch b/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
+new file mode 100644
+index 0000000..f25a02c
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
+@@ -0,0 +1,42 @@
++From 9a9137c3df5309ac359737d6ebd67fb4ff5f3cf2 Mon Sep 17 00:00:00 2001
++From: Wenzong Fan <wenzong.fan@windriver.com>
++Date: Mon, 24 Nov 2014 22:05:18 -0500
++Subject: [PATCH] sethdlc: fix host contamination
++
++Clean INCLUDES to fix the host contamination errors:
++
++  In file included from /usr/src/linux/include/linux/posix_types.h:47:0,
++  from /usr/src/linux/include/linux/types.h:17,
++  from /usr/src/linux/include/linux/if.h:22,
++  from sethdlc.c:23:
++  /usr/src/linux/include/asm-generic/posix_types.h:91:3: \
++    error: conflicting types for '__kernel_fsid_t'
++  } __kernel_fsid_t;
++  ^
++  .../tmp/sysroots/qemumips/usr/include/asm/posix_types.h:26:3: \
++    note: previous declaration of '__kernel_fsid_t' was here
++  } __kernel_fsid_t;
++  ^
++
++Upstream-Status: Pending
++
++Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
++---
++ Makefile |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 0492f2b..97dec22 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -1,6 +1,6 @@
++ CC = gcc
++ CFLAGS = -O2 -Wall -W -Wno-long-long -pipe
++-INCLUDES = -I/usr/src/linux/include -I/usr/src/linux-2.6/include
+++INCLUDES =
++ 
++ all:		sethdlc
++ 
++-- 
++1.7.9.5
++
+diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+index cf74827..5e8d9d9 100644
+--- a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
++++ b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
+@@ -1,10 +1,11 @@
+ DESCRIPTION = "set Linux HDLC packet radio modem driver port information"
+ HOMEPAGE = "https://www.kernel.org/pub/linux/utils/net/hdlc"
+ LICENSE = "GPLv2 & GPLv2+ "
+-LIC_FILES_CHKSUM = "file://Makefile;md5=19aada31930b2be84bf7138420d77263"
++LIC_FILES_CHKSUM = "file://sethdlc.c;endline=10;md5=90f936879e9f8b755a138aeb348782eb"
+ 
+ 
+ SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.tar.gz \
++           file://sethdlc-fix-host-contamination.patch \
+ "
+ SRC_URI[md5sum] = "9016878156a5eadb06c0bae71cc5c9ab"
+ SRC_URI[sha256sum] = "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd5b3d4f6ab6b04e"
+-- 
+1.7.9.5
+
 
