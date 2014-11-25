@@ -1,37 +1,37 @@
-Return-Path: <gary.robertson@linaro.org>
-Received: from mail-ob0-f181.google.com (mail-ob0-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 5081B72207
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 219A8721A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Nov 2014 22:59:50 +0000 (UTC)
-Received: by mail-ob0-f181.google.com with SMTP id gq1so7912705obb.40
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Nov 2014 14:59:51 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=y+NuOrcuL/jqLMCmNT1A5Rhil6GFH40Nbp121XOLxc0=;
-	b=iohvV2sW6Bo4eNscKSfKmfNaZ7yl7JHGNCkURwxIutrq9vZC/MKA+6fIPZVMnxPNaV
-	QaJFxxQXBdyrXZjeTMHGeK0+P1EaRMhqWin2Vyoor1ZPnrtA2MDcA3/k0jHv6wW7wsrI
-	L1+K8S7FkbslDrXO33Z84dRMThVPpvLmpGD1QXq/aEfxo9qtnICgGvLU+HEWxami7Tdq
-	XGAOxHSIY3nbqia+feLRG0PUUD8CquqmimCOYgfsh7fPC3vQ/JvFOv7YzROXnSGXU4Ir
-	Ruxo29+QuC3dIMtjf1nKXl7t5C3CM4+VxGaVD0Lam4yPoxhUTWLghFevMT5dymPF3ERm
-	KS1w==
-X-Gm-Message-State: ALoCoQnUDwl08Akq1jyHQ5MTxye0Ggqj+TS2YGAn8ZG1OGH4FudNQUQQph6RsGOBz4dwJuNdxcHm
-X-Received: by 10.182.79.104 with SMTP id i8mr13438963obx.58.1416869991538;
-	Mon, 24 Nov 2014 14:59:51 -0800 (PST)
-Received: from honkintosh.cybertech.lan (65-120-133-114.dia.static.qwest.net.
-	[65.120.133.114])
-	by mx.google.com with ESMTPSA id n7sm6298616obh.25.2014.11.24.14.59.50
-	for <multiple recipients>
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 24 Nov 2014 14:59:50 -0800 (PST)
-From: "Gary S. Robertson" <gary.robertson@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Nov 2014 16:59:12 -0600
-Message-Id: <1416869955-13519-1-git-send-email-gary.robertson@linaro.org>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-oe][PATCH 0/3] libhugetlbfs: fix build problems with ix86 and armv7ab
+	Tue, 25 Nov 2014 00:29:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43918077"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2014 08:26:09 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAP0T6OJ031219;
+	Tue, 25 Nov 2014 08:29:06 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Tue, 25 Nov 2014 08:29:24 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Thread-Topic: [oe] [PATCH 6/6] [meta-oe] Port corosync from openembedded and
+	upgrade to 1.4.7
+Thread-Index: AQHQB7KjE7l3H6bdL0K6yn0T3SpdMJxvp0cAgADT1PA=
+Date: Tue, 25 Nov 2014 00:29:26 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DDB62E@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1416811526-54855-1-git-send-email-biannm@cn.fujitsu.com>
+	<1416811526-54855-7-git-send-email-biannm@cn.fujitsu.com>
+	<20141124193941.GD6210@mentor.com>
+In-Reply-To: <20141124193941.GD6210@mentor.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
+MIME-Version: 1.0
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 6/6] [meta-oe] Port corosync from openembedded and upgrade to 1.4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +45,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Nov 2014 22:59:58 -0000
+X-List-Received-Date: Tue, 25 Nov 2014 00:29:33 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-OE builds of libhugetlbfs were failing for armv7ab and i586 (qemux86)
-architectures.  In addition, once patched so builds completed, execution of
-some tests was failing for armv7ab.
-
-Patched OE recipe and Makefile to add support for 32-bit ix86 architectures...
-(patches 1 and 2).
-Then patched linker control script to include armv7ab in the set of
-architectures whose text section offset and page size were corrected by
-the script...(patch 3).
-
-Patches 2 and 3 have been submitted upstream to the libhugetlbfs maintainers
-and acceptance has been indicated for both...
-however patch 2 has yet to appear in the upstream repository,
-while patch 3 has been verified as merged.
-
-OE builds of libhugetlbfs with these patches added have been successfully
-completed here for qemux86, qemux86_64, armv7a, armv7ab, armv8, and armv8b
-platforms, and tests run successfully on all except armv8b - which failed
-with unrelated boot time issues.
-
+SGkgSm9lDQoNClRoYW5rcyBmb3IgeW91ciBhZHZpY2VzLg0KSSB3aWxsIGxvb2sgYXQgbWV0YS1j
+Z2wuDQoNClJlZ2FyZHMNCiBCaWFuDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4g
+RnJvbTogSm9lIE1hY0RvbmFsZCBbbWFpbHRvOkpvZV9NYWNEb25hbGRAbWVudG9yLmNvbV0NCj4g
+U2VudDogVHVlc2RheSwgTm92ZW1iZXIgMjUsIDIwMTQgMzo0MCBBTQ0KPiBDYzogb3BlbmVtYmVk
+ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0gW1BB
+VENIIDYvNl0gW21ldGEtb2VdIFBvcnQgY29yb3N5bmMgZnJvbSBvcGVuZW1iZWRkZWQNCj4gYW5k
+IHVwZ3JhZGUgdG8gMS40LjcNCj4gDQo+IEhpIEJpYW4sDQo+IA0KPiBbW29lXSBbUEFUQ0ggNi82
+XSBbbWV0YS1vZV0gUG9ydCBjb3Jvc3luYyBmcm9tIG9wZW5lbWJlZGRlZCBhbmQgdXBncmFkZQ0K
+PiB0byAxLjQuN10gT24gMTQuMTEuMjQgKE1vbiAxNDo0NSkgQmlhbiBOYWltZW5nIHdyb3RlOg0K
+PiANCj4gPiBTaWduZWQtb2ZmLWJ5OiBCaWFuIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNv
+bT4NCj4gPiAtLS0NCj4gPiAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvY29yb3N5bmMvY29yb3N5
+bmNfMS40LjcuYmIgfCAzMQ0KPiArKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIC4uLi9jb3Jv
+c3luYy9maWxlcy9jb25maWctc2l0ZS5jb3Jvc3luYyAgICAgICAgICAgIHwgIDQgKysrDQo+ID4g
+IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2Nvcm9zeW5jL2ZpbGVzL2dyb2ZmLnBhdGNoIHwgMTIg
+KysrKysrKysrDQo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgNDcgaW5zZXJ0aW9ucygrKQ0KPiA+ICBj
+cmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvY29yb3N5bmMvY29yb3N5
+bmNfMS40LjcuYmINCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVz
+LXN1cHBvcnQvY29yb3N5bmMvZmlsZXMvY29uZmlnLXNpdGUuY29yb3N5bmMNCj4gPiAgY3JlYXRl
+IG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2Nvcm9zeW5jL2ZpbGVzL2dyb2Zm
+LnBhdGNoDQo+IA0KPiBUaGlzIHByb2JhYmx5IGJlbG9uZ3MgaW4gbWV0YS1uZXR3b3JraW5nICh1
+bmxlc3MgdGhlcmUncyBzdHJvbmcgb3Bpbmlvbg0KPiBpdCBiZWxvbmdzIHNvbWV3aGVyZSBlbHNl
+KS4gIERpZCB5b3UgaGF2ZSBhIGxvb2sgYXQgd2hhdCBoYXMgYmVlbiBkb25lIGluDQo+IG1ldGEt
+Y2dsIChnaXQ6Ly9naXQuZW5lYS5jb20vbGludXgvbWV0YS1jZ2wpIHdpdGggdGhlIHJlY2lwZSB0
+byBzZWUgaWYNCj4gdGhlcmUgd2FzIGFueXRoaW5nIHVzZWZ1bCB0aGVyZT8gIEkga25vdyBtZXRh
+LWNnbCBpc24ndCB2ZXJ5IHdlbGwgcHVibGljaXplZA0KPiB5ZXQsIGJ1dCBpdCBpcyBpbiB0aGUg
+bGF5ZXIgaW5kZXguICBJZiB5b3UgaGF2ZW4ndCBsb29rZWQgYXQgd2hhdCdzIHRoZXJlDQo+IHll
+dCwgaXQgbWF5IGJlIHdvcnRoIGhhdmluZyBhIGxvb2sgdG8gc2VlIGlmIGFueSBvZiBpdCBjYW4g
+c2F2ZSB5b3Ugc29tZQ0KPiB0aW1lLg0KPiANCj4gRm9yIHdoYXQgaXQncyB3b3J0aCwgdGhlcmUg
+ZG9lcyBzZWVtIHRvIGJlIHJhdGhlciBhIGxvdCBtb3JlIGluIG1ldGEtY2dsDQo+IGFuZCBJIHRo
+aW5rIGF0IGxlYXN0IHNvbWUgb2YgaXQgc3RpbGwgYXBwbGllcyAoZWcuIHRoZSB2b2xhdGlsZXMg
+ZmlsZSkuDQo+IA0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9jb3Jv
+c3luYy9jb3Jvc3luY18xLjQuNy5iYg0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvY29y
+b3N5bmMvY29yb3N5bmNfMS40LjcuYmINCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGlu
+ZGV4IDAwMDAwMDAuLmEzYjg4NjQNCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1v
+ZS9yZWNpcGVzLXN1cHBvcnQvY29yb3N5bmMvY29yb3N5bmNfMS40LjcuYmINCj4gPiBAQCAtMCww
+ICsxLDMxIEBADQo+ID4gK1NVTU1BUlkgPSAiVGhlIENvcm9zeW5jIENsdXN0ZXIgRW5naW5lIGFu
+ZCBBcHBsaWNhdGlvbiBQcm9ncmFtbWluZw0KPiBJbnRlcmZhY2VzIg0KPiA+ICtERVNDUklQVElP
+TiA9ICJUaGlzIHBhY2thZ2UgY29udGFpbnMgdGhlIENvcm9zeW5jIENsdXN0ZXIgRW5naW5lDQo+
+ID4gK0V4ZWN1dGl2ZSwgc2V2ZXJhbCBkZWZhdWx0IFwgQVBJcyBhbmQgbGlicmFyaWVzLCBkZWZh
+dWx0IGNvbmZpZ3VyYXRpb24NCj4gZmlsZXMsIGFuZCBhbiBpbml0IHNjcmlwdC4iDQo+ID4gK0hP
+TUVQQUdFID0gImh0dHA6Ly9jb3Jvc3luYy5naXRodWIuaW8vY29yb3N5bmMvIg0KPiA+ICsNCj4g
+PiAraW5oZXJpdCBhdXRvdG9vbHMgcGtnY29uZmlnDQo+ID4gKw0KPiA+ICtTUkNfVVJJID0NCj4g
+Imh0dHA6Ly9idWlsZC5jbHVzdGVybGFicy5vcmcvY29yb3N5bmMvcmVsZWFzZXMvJHtCUE59LSR7
+UFZ9LnRhci5neiBcDQo+ID4gKyAgICAgICAgICAgZmlsZTovL2NvbmZpZy1zaXRlLmNvcm9zeW5j
+IFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vZ3JvZmYucGF0Y2ggXA0KPiA+ICsJICAgIg0KPiAN
+Cj4gUGxlYXNlIHJlbW92ZSB0aGUgdGFiIGJlZm9yZSBzcGFjZSBhYm92ZS4NCj4gDQo+ID4gKw0K
+PiA+ICtTUkNfVVJJW21kNXN1bV0gPSAiZGE5YjJjZjBiNTVmMDhhYzRjZjdjZDgyYWMyZjk3N2Ei
+DQo+ID4gK1NSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICJjMWQwMDViMjA5M2U5YTcyNWFiZDFkZmIy
+YmU5MzYxMTRiNTYxYzBiMzE0NWFjYTExZjU4YzFhNzMzYTA1YWY4Ig0KPiA+ICsNCj4gPiArTElD
+RU5TRSA9ICJCU0QiDQo+IA0KPiBJIHRoaW5rIHRoaXMgaXMgYWN0dWFsbHkgYSBCU0QtMy1DbGF1
+c2UgbGljZW5zZSwgaXNuJ3QgaXQ/DQo+IA0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZp
+bGU6Ly9MSUNFTlNFO21kNT0yNTY1NjE3MWQxZTQwNTRjNjM2YTk4OTMwNjdmOGMzMCINCj4gPiAr
+DQo+ID4gK0NPTkZJR19TSVRFID0gIiR7V09SS0RJUn0vY29uZmlnLXNpdGUuY29yb3N5bmMiDQo+
+ID4gKw0KPiA+ICtERVBFTkRTID0gImdyb2ZmLW5hdGl2ZSBuc3MiDQo+ID4gKw0KPiA+ICtFWFRS
+QV9PRUNPTkYgKz0gIiAtLWVuYWJsZS1uc3MgIg0KPiA+ICtDRkxBR1NfYXBwZW5kICs9ICIgLWZQ
+SUMgIg0KPiA+ICsNCj4gPiArZG9fY29tcGlsZSgpIHsNCj4gPiArICAgIERFU0NQQVRIPSIke1NU
+QUdJTkdfREFUQURJUl9OQVRJVkV9L2dyb2ZmL2Bncm9mZiAtdiB8IGF3aw0KPiAne2lmKE5SPT0x
+KXByaW50ICQ0fSdgL2ZvbnQiDQo+ID4gKyAgICBvZV9ydW5tYWtlIERFU0NQQVRIPSR7REVTQ1BB
+VEh9DQo+ID4gK30NCj4gPiArDQo+ID4gK0ZJTEVTXyR7UE59LWRiZyArPSAiJHtsaWJleGVjZGly
+fS9sY3Jzby8uZGVidWciDQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1vZS9yZWNpcGVzLXN1
+cHBvcnQvY29yb3N5bmMvZmlsZXMvY29uZmlnLXNpdGUuY29yb3N5bmMNCj4gPiBiL21ldGEtb2Uv
+cmVjaXBlcy1zdXBwb3J0L2Nvcm9zeW5jL2ZpbGVzL2NvbmZpZy1zaXRlLmNvcm9zeW5jDQo+ID4g
+bmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi4zNDcyZGVjDQo+ID4gLS0t
+IC9kZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2Nvcm9zeW5jL2Zp
+bGVzL2NvbmZpZy1zaXRlLmNvcm9zeW5jDQo+ID4gQEAgLTAsMCArMSw0IEBADQo+ID4gK2FjX2N2
+X2Z1bmNfZm5tYXRjaF93b3Jrcz15ZXMNCj4gPiArYWNfY3ZfZnVuY19tYWxsb2NfMF9ub25udWxs
+PXllcw0KPiA+ICthY19jdl9mdW5jX3JlYWxsb2NfMF9ub25udWxsPXllcw0KPiA+ICsNCj4gPiBk
+aWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvY29yb3N5bmMvZmlsZXMvZ3JvZmYu
+cGF0Y2gNCj4gPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2Nvcm9zeW5jL2ZpbGVzL2dyb2Zm
+LnBhdGNoDQo+IA0KPiBDYW4geW91IGFkZCBhIGhlYWRlciB0byB0aGlzIHBhdGNoIHBsZWFzZT8N
+Cj4gDQo+IFRoYW5rcy4NCj4gDQo+IC1KLg0KPiANCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0K
+PiA+IGluZGV4IDAwMDAwMDAuLmRhMTM3OGENCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIv
+bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvY29yb3N5bmMvZmlsZXMvZ3JvZmYucGF0Y2gNCj4gPiBA
+QCAtMCwwICsxLDEyIEBADQo+ID4gK2RpZmYgLU51cnAgY29yb3N5bmMtMS4zLjEub3JnL21hbi9N
+YWtlZmlsZS5hbQ0KPiBjb3Jvc3luYy0xLjMuMS9tYW4vTWFrZWZpbGUuYW0NCj4gPiArLS0tIGNv
+cm9zeW5jLTEuMy4xLm9yZy9tYW4vTWFrZWZpbGUuYW0JMjAxMS0wNC0yNQ0KPiAxMDozNzo1MC4w
+MDAwMDAwMDAgKzA4MDANCj4gPiArKysrIGNvcm9zeW5jLTEuMy4xL21hbi9NYWtlZmlsZS5hbQky
+MDE0LTExLTI0IDEwOjMzOjM2LjU4MzQyNjcwNw0KPiArMDgwMA0KPiA+ICtAQCAtMTI2LDcgKzEy
+Niw3IEBAIEhUTUxfRE9DUyA9ICQoZGlzdF9tYW5fTUFOUzolPSUuaHRtbCkgIElOREVYX0hUTUwN
+Cj4gPiArPSBpbmRleC5odG1sDQo+ID4gKw0KPiA+ICsgJS5odG1sOiAlDQo+ID4gKy0JJChHUk9G
+RikgLW1hbmRvYyAtVGh0bWwgJF4gPiAkQA0KPiA+ICsrCSQoR1JPRkYpIC1GICQoREVTQ1BBVEgp
+IC1tYW5kb2MgLVRodG1sICReID4gJEANCj4gPiArDQo+ID4gKyBpbnN0YWxsLWRhdGEtbG9jYWw6
+DQo+ID4gKyAJJChJTlNUQUxMKSAtZCAkKERFU1RESVIpLyR7ZG9jZGlyfS9odG1sDQo+ID4gLS0N
+Cj4gPiAxLjkuMQ0KPiA+DQo+IC0tDQo+IC1Kb2UgTWFjRG9uYWxkLg0KPiA6d3ENCg==
 
