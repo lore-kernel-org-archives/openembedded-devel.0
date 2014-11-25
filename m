@@ -1,37 +1,36 @@
-Return-Path: <biannm@cn.fujitsu.com>
+Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CA3E970660
+	by mail.openembedded.org (Postfix) with ESMTP id C2A0C721BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 01:14:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43920016"
+	Tue, 25 Nov 2014 02:17:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43922938"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2014 09:11:10 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2014 10:14:09 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAP1E7Ml001178
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAP2H7KL005369
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 09:14:07 +0800
+	Tue, 25 Nov 2014 10:17:07 +0800
 Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Tue, 25 Nov 2014 09:14:26 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0181.006; Tue, 25 Nov 2014 10:17:28 +0800
+From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH 4/6] [meta-oe] printproto: Port printproto from
-	openembedded
-Thread-Index: AQHQB9HM7aPcMFuGmUa0IW+aYsNqOpxwfhug
-Date: Tue, 25 Nov 2014 01:14:26 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DDB681@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1416811526-54855-1-git-send-email-biannm@cn.fujitsu.com>
-	<1416811526-54855-5-git-send-email-biannm@cn.fujitsu.com>
-	<CAJTo0LZeC5tu7fQcKFEhuHVvPjx77V8NwOwTtP9GqFVKDvtG-A@mail.gmail.com>
-In-Reply-To: <CAJTo0LZeC5tu7fQcKFEhuHVvPjx77V8NwOwTtP9GqFVKDvtG-A@mail.gmail.com>
-Accept-Language: en-US
+Thread-Topic: [oe] [PATCH 5/5] sgpio : add new recipe
+Thread-Index: AQHQAlXgPVyUTqKw9ESUlv80qPM1pZxngMsAgAMcJACABgjGUA==
+Date: Tue, 25 Nov 2014 02:17:27 +0000
+Message-ID: <A8FC939F80655644A89BB21CCD3741E8738E3E9A@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1416222008-9218-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<1416222008-9218-6-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<20141119143330.GF3315@jama> <20141121140300.GF2163@jama>
+In-Reply-To: <20141121140300.GF2163@jama>
+Accept-Language: zh-CN, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+x-originating-ip: [10.167.226.35]
 MIME-Version: 1.0
-Subject: Re: [PATCH 4/6] [meta-oe] printproto: Port printproto from	openembedded
+Subject: Re: [PATCH 5/5] sgpio : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,35 +44,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 01:14:27 -0000
+X-List-Received-Date: Tue, 25 Nov 2014 02:17:30 -0000
 Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IEJ1cnRv
-biwgUm9zcw0KPiBTZW50OiBNb25kYXksIE5vdmVtYmVyIDI0LCAyMDE0IDY6MzEgUE0NCj4gVG86
-IE9FLWRldmVsDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFtQQVRDSCA0LzZdIFttZXRhLW9lXSBwcmlu
-dHByb3RvOiBQb3J0IHByaW50cHJvdG8gZnJvbQ0KPiBvcGVuZW1iZWRkZWQNCj4gDQo+IE9uIDI0
-IE5vdmVtYmVyIDIwMTQgYXQgMDY6NDUsIEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3Uu
-Y29tPiB3cm90ZToNCj4gDQo+ID4gIG1ldGEtb2UvcmVjaXBlcy1ncmFwaGljcy94b3JnLXByb3Rv
-L3ByaW50cHJvdG9fMS4wLjUuYmIgfCAxNg0KPiA+ICsrKysrKysrKysrKysrKysNCj4gPg0KPiAN
-Cj4gUmVhbGx5PyAgQXJlIHlvdSBqdXN0IHRyeWluZyB0byBhZGQgZXZlcnkgcmVjaXBlIGZyb20g
-b2UtY2xhc3NpYyB0byBtZXRhLW9lLA0KPiBvciBpbiB0aGlzIGNhc2UgYXJlIHlvdSBhY3R1YWxs
-eSB1c2luZyBYUHJpbnQ/ICBYUHJpbnQgd2FzIHJlbW92ZWQgZnJvbQ0KPiB4c2VydmVyIGluIDIw
-MDggYmVjYXVzZSBpdCBkaWRuJ3QgYWN0dWFsbHkgd29ya1sxXSAtIHRoYXQncyAqc2l4KiB5ZWFy
-cw0KPiBhZ28uICBtZXRhLW9lIGRvZXNuJ3QgbmVlZCBwb2ludGxlc3MgcmVjaXBlcyB0aGF0IGFy
-ZSB1bm1haW50YWluZWQsIGFuZA0KPiBpZiB5b3UncmUgdXNpbmcgYW4gYW5jaWVudCBYIHNlcnZl
-ciBhbmQgZW5hYmxlIFhQcmludCwgdGhlbiB5b3UgY2FuIGFsc28NCj4gY2FycnkgdGhlIFhQcmlu
-dCBwcm90by9saWJzLg0KPiANCg0KTm8sIEkgZG9uJ3QgaGF2ZSBhIHBsYW4gdG8gYWRkIGV2ZXJ5
-IHJlY2lwZSBmcm9tIG9lLWNsYXNzaWMuIF5fXg0KVGhlc2UgcmVjaXBlcyBqdXN0IHVzZWQgYnkg
-b3VyIGRpc3Ryby4gDQpJdCBsb29rcyBsaWtlIHdlIHNob3VsZCBjaGFuZ2Ugb3VyIHNwZWNpZmlj
-YXRpb24uDQoNClJlZ2FyZHMNCiBCaWFuDQoNCj4gUm9zcw0KPiANCj4gWzFdDQo+IGh0dHA6Ly9j
-Z2l0LmZyZWVkZXNrdG9wLm9yZy94b3JnL3hzZXJ2ZXIvY29tbWl0Lz9pZD0xYzhiZDMxOGZiYWY2
-NTg5MGUNCj4gZjE2ZmUyNmM3NmRkNWU2ZjE0ZGZkZQ0KPiAtLQ0KPiBfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFp
-bGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+
-IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVk
-ZGVkLWRldmVsDQo=
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Friday, November 21, 2014 10:03 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH 5/5] sgpio : add new recipe
+>=20
+> On Wed, Nov 19, 2014 at 03:33:30PM +0100, Martin Jansa wrote:
+>=20
+> But there is another issue:
+>=20
+> ERROR: Command Error: exit status: 1  Output:
+> Applying patch 0001-Makefile-modify-some-parameters.patch
+> patching file Makefile
+> Hunk #1 FAILED at 23.
+> 1 out of 1 hunk FAILED -- rejects in file Makefile Patch
+> 0001-Makefile-modify-some-parameters.patch does not apply (enforce with -=
+f)
+> ERROR: Function failed: patch_do_patch
+> ERROR: Logfile of failure stored in:
+> /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
+gpio/
+> 1.2.0.10-r0/temp/log.do_patch.5210
+> NOTE: recipe sgpio-1.2.0.10-r0: task do_patch: Failed
+> NOTE: recipe vlan-1.9-r0: task do_unpack: Succeeded
+> ERROR: Task 15324
+> (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extend=
+e
+> d/sgpio/sgpio_1.2.0.10.bb, do_patch) failed with exit code '1'
+>=20
+Thank you very much.
+This is probably the problem of file format.
+I will fix it and resent later.
+
+Best regards,
+Li xin
+>=20
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
