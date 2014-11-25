@@ -1,34 +1,39 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EA0C77221D
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f53.google.com (mail-qa0-f53.google.com
+	[209.85.216.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FF2565E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 09:05:38 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAP95b43009919
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 25 Nov 2014 09:13:56 +0000 (UTC)
+Received: by mail-qa0-f53.google.com with SMTP id bm13so88359qab.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 01:05:38 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.253]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0174.001;
-	Tue, 25 Nov 2014 01:05:37 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] There is no LAYERVERSION and LAYERDEPENDS for most
-	meta-FOO layers
-Thread-Index: AdAHxAmURBPbgu/aTsSQM0urNu2MkQATk92AABKbdAAADG9W0A==
-Date: Tue, 25 Nov 2014 09:05:37 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AABD59E3A6@ALA-MBA.corp.ad.wrs.com>
-References: <1B858668EC6A94408DCA5225FDFA85AABD59CFA9@ALA-MBA.corp.ad.wrs.com>
-	<547304C9.1060509@topic.nl> <20141124190615.GB6210@mentor.com>
-In-Reply-To: <20141124190615.GB6210@mentor.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.135]
+	Tue, 25 Nov 2014 01:13:56 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=enSEc5sUV8YMFQ64iXINpLAa4kTfVCzi+qKkyqjjG9I=;
+	b=LpI8XXt6hiFa+jPBYHNAq+hrse4YbfsM2esV6/H7ofLWyTT8a9r8LjmwR6GgAPtt9w
+	dtUY6Lod0m0RvV/DkIKrmbx91cGumYsfkYExq8JtejNSohyt/kNH94QKvUwNNflQ3nRQ
+	sWumwmQxr/1KGXQvUMY/3O30nE+XjpUCQqEKJs6vaJDpRp9GybwfclA4M4hlOJ+59i/v
+	5QlXAmsyaKA5JhR2lGcMOorIjmv1DziqyXeD/OOZ+L7kMvajjssGj2KAXIbU96JtvOIZ
+	HG4lxatjN6UIVrN+LL3zM7awVfGbNVbu4uOb99K6z2yxddYwe+R0CKn4oiBbKu76G4Oz
+	JUTQ==
+X-Gm-Message-State: ALoCoQmVRayXshzox1ISNhhQ7U7XIPJ8b0of4x9OuQ0/KKtzxGSmDDzJg2/y4sJJaQkbFzoJuYFz
+X-Received: by 10.224.138.2 with SMTP id y2mr35898270qat.52.1416906836885;
+	Tue, 25 Nov 2014 01:13:56 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: There is no LAYERVERSION and LAYERDEPENDS for most meta-FOO layers
+Received: by 10.140.48.231 with HTTP; Tue, 25 Nov 2014 01:13:36 -0800 (PST)
+In-Reply-To: <30DC4EDFD798C94083F3E083754532CC73DDB681@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1416811526-54855-1-git-send-email-biannm@cn.fujitsu.com>
+	<1416811526-54855-5-git-send-email-biannm@cn.fujitsu.com>
+	<CAJTo0LZeC5tu7fQcKFEhuHVvPjx77V8NwOwTtP9GqFVKDvtG-A@mail.gmail.com>
+	<30DC4EDFD798C94083F3E083754532CC73DDB681@G08CNEXMBPEKD02.g08.fujitsu.local>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 25 Nov 2014 09:13:36 +0000
+Message-ID: <CAJTo0LZ86QxZgsugoDPuJ-Rjim3V03eFGE0=7VSoJkj6eKi_9g@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 4/6] [meta-oe] printproto: Port printproto from openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,109 +47,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 09:05:43 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 Nov 2014 09:14:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On 25 November 2014 at 01:14, Bian, Naimeng <biannm@cn.fujitsu.com> wrote:
 
+> No, I don't have a plan to add every recipe from oe-classic. ^_^
+> These recipes just used by our distro.
+> It looks like we should change our specification.
+>
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Joe MacDonald
-> Sent: Tuesday, November 25, 2014 3:06 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] There is no LAYERVERSION and LAYERDEPENDS for most meta=
--FOO layers
->=20
-> [Re: [oe] There is no LAYERVERSION and LAYERDEPENDS for most meta-FOO lay=
-ers] On 14.11.24 (Mon
-> 11:13) Mike Looijmans wrote:
->=20
-> > On 11/24/2014 09:53 AM, Huang, Jie (Jackie) wrote:
-> > >Hi,
-> > >
-> > >I know LAYERVERSION is optional but I think LAYERDEPENDS is required
-> > >and at least we should specify the main oe-core, but I found only meta=
--networking and meta-
-> webser have this:
-> > >
-> > >$ grep -r LAYERDEPENDS *
-> > >meta-networking/conf/layer.conf:LAYERDEPENDS_networking-layer =3D "cor=
-e"
-> > >meta-networking/conf/layer.conf:LAYERDEPENDS_networking-layer =3D "ope=
-nembedded-layer"
-> > >meta-networking/conf/layer.conf:LAYERDEPENDS_networking-layer =3D "met=
-a-python"
-> > >meta-webserver/conf/layer.conf:LAYERDEPENDS_webserver =3D "core"
-> > >$ grep -r LAYERVERSION *
-> > >meta-networking/conf/layer.conf:LAYERVERSION_networking-layer =3D "1"
-> > >meta-webserver/conf/layer.conf:LAYERVERSION_webserver =3D "1"
-> > >
-> > >I found dependencies section in README for most of the meta-FOO layers=
-, but no definition of
-> LAYERDEPENDS in the layer.conf.
-> > >
-> > >Thanks,
-> > >Jackie
-> > >
-> >
-> > And reading this:
-> >
-> > LAYERDEPENDS_networking-layer =3D "core"
-> > LAYERDEPENDS_networking-layer =3D "openembedded-layer"
-> > LAYERDEPENDS_networking-layer =3D "meta-python"
-> >
-> > makes me wonder whether:
-> > - The author forgot to use "+=3D" instead of "=3D"; or
-> > - The syntax of LAYERDEPENDS is different from what the rest of the
-> > variables use (in that case, an RFC may be in order here); or
-> > - These lines are parsed by something else than bitbake's regular parse=
-r.
->=20
-> I wondered that too.
->=20
-> % bitbake -e | grep LAYERDEPENDS_networking # $LAYERDEPENDS_networking-la=
-yer [3 operations]
-> LAYERDEPENDS_networking-layer=3D"meta-python"
->=20
-> That answers that, then.  Guess I'll go fix that up.  :-)
+Sending in recipes that you've ported is much appreciated, but in this case
+as all of these X recipes are not used by any X servers available in OE you
+keep them locally.  In all honesty unless you're using an old X server
+they're not needed anyway.
 
-Thanks, Joe.
-
-But for other layers, I think we should add for them, right?=20
-
-Thanks,
-Jackie
-
->=20
-> -J.
->=20
-> >
-> >
-> >
-> >
-> > Met vriendelijke groet / kind regards,
-> >
-> > Mike Looijmans
-> > System Expert
-> >
-> >
-> > TOPIC Embedded Systems
-> > Eindhovenseweg 32-C, NL-5683 KH Best
-> > Postbus 440, NL-5680 AK Best
-> > Telefoon: (+31) (0) 499 33 69 79
-> > Telefax:  (+31) (0) 499 33 69 70
-> > E-mail: mike.looijmans@topic.nl
-> > Website: www.topic.nl
-> >
-> > Please consider the environment before printing this e-mail
-> >
-> > Topic zoekt gedreven (embedded) software specialisten!
-> > http://topic.nl/vacatures/topic-zoekt-software-engineers/
-> >
-> --
-> -Joe MacDonald.
-> :wq
+Ross
 
