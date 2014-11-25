@@ -1,43 +1,43 @@
-Return-Path: <Javier.Viguera@digi.com>
-X-Greylist: delayed 397 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 25 Nov 2014 18:24:01 UTC
-Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
-	[216.82.243.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A626972272
+Return-Path: <akuster@mvista.com>
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 9961570A7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 18:24:01 +0000 (UTC)
-Received: from [216.82.241.196] by server-3.bemta-8.messagelabs.com id
-	0C/81-10983-4B7C4745; Tue, 25 Nov 2014 18:17:24 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-4.tower-46.messagelabs.com!1416939439!37926331!1
-X-Originating-IP: [66.77.174.13]
-X-StarScan-Received: 
-X-StarScan-Version: 6.12.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 13173 invoked from network); 25 Nov 2014 18:17:20 -0000
-Received: from mail.mx1.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
-	by server-4.tower-46.messagelabs.com with RC4-SHA encrypted SMTP;
-	25 Nov 2014 18:17:20 -0000
-Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx1.digi.com
-	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.377.0;
-	Tue, 25 Nov 2014 12:17:10 -0600
-Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.210.2;
-	Tue, 25 Nov 2014 12:17:18 -0600
-Received: from log-cln-jviguera.digi.com (10.101.2.54) by
-	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
-	14.3.210.2; Tue, 25 Nov 2014 19:17:17 +0100
-From: Javier Viguera <javier.viguera@digi.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Nov 2014 19:17:15 +0100
-Message-ID: <1416939435-30118-1-git-send-email-javier.viguera@digi.com>
-X-Mailer: git-send-email 2.1.3
+	Tue, 25 Nov 2014 21:14:08 +0000 (UTC)
+Received: by mail-pd0-f178.google.com with SMTP id g10so1312073pdj.37
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Nov 2014 13:14:08 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=n50rKsB17FnQbct3TUTMzDAgZPoNly+i292erVvqRQk=;
+	b=b56noIHKADX898m9ELP40o1gXTMJ+3kD+f1ZUC+pIo1dSVK9i2XmPWeQejltGoS5gF
+	ykN8WhNz7sHucuYPZ4XGJbyQ4yXdIwLn63BDqbMgmqH/NMG8whbkin8lfm6laC4Sw2cs
+	G6qVbypwNOxLnAiHOSwWc4haD/SLEf4qwtWIhnmmjuV2doqgIh2asw7wtAZINjMH4pk1
+	n4hGtCfJI6hJ8oYn6aqxZ6IIy2bMcSBgvlPjDrwjv8pTnJSGKCRmPDAxwEWgbqPpRKjK
+	6zak2a+H1l5wWFrp2nXbS6o5rM9qQI0FFY3rbQ7Fon9/8/7lzrPAoV8bFnf7ATcaPW2d
+	KdDw==
+X-Gm-Message-State: ALoCoQm/amyU0+evqjwAISaEVss4pHxN2rek6BNCYbEvpZnJ+/nTFwVUHhNHICdh1kLOICi2sn0J
+X-Received: by 10.70.63.73 with SMTP id e9mr47019075pds.50.1416950048719;
+	Tue, 25 Nov 2014 13:14:08 -0800 (PST)
+Received: from [10.43.100.29] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
+	by mx.google.com with ESMTPSA id bn13sm2371550pdb.4.2014.11.25.13.14.03
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 25 Nov 2014 13:14:08 -0800 (PST)
+Message-ID: <5474F112.2080505@mvista.com>
+Date: Tue, 25 Nov 2014 13:13:54 -0800
+From: akuster <akuster@mvista.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
 MIME-Version: 1.0
-X-Originating-IP: [10.101.2.54]
-X-KSE-AntiSpam-Interceptor-Info: protection disabled
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-Subject: [meta-oe][master][dizzy]PATCH] xserver-common: disable TCP connections
+To: "javier.viguera@digi.com >> Javier Viguera" <javier.viguera@digi.com>
+References: <1416939435-30118-1-git-send-email-javier.viguera@digi.com>
+In-Reply-To: <1416939435-30118-1-git-send-email-javier.viguera@digi.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][master][dizzy]PATCH] xserver-common: disable TCP connections
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,56 +51,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 18:24:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Nov 2014 21:14:09 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-For security reasons disable TCP connections to the xserver.
+Javier,
 
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
----
- ...15-xserver-common-disable-TCP-connections.patch | 22 ++++++++++++++++++++++
- .../xserver-common/xserver-common_1.34.bb          |  1 +
- 2 files changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+What is the disposition of the patch?
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
-new file mode 100644
-index 000000000000..0af8030160e2
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
-@@ -0,0 +1,22 @@
-+From: Javier Viguera <javier.viguera@digi.com>
-+Date: Tue, 25 Nov 2014 18:47:12 +0100
-+Subject: [PATCH] xserver-common: disable TCP connections
-+
-+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
-+---
-+ X11/xserver-common | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/X11/xserver-common b/X11/xserver-common
-+index 017e5aee1ab0..4dc48c412741 100644
-+--- a/X11/xserver-common
-++++ b/X11/xserver-common
-+@@ -44,7 +44,7 @@ SCREEN_SIZE=`fallback_screen_arg`
-+ export USER=root
-+ export XSERVER_DEFAULT_ORIENTATION=normal
-+ 
-+-ARGS="-br -pn $INPUT_EXTRA_ARGS"
-++ARGS="-br -pn -nolisten tcp $INPUT_EXTRA_ARGS"
-+ DPI="100"
-+ MOUSE=""
-+ KDRIVEARGS=""
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index 12fff9ae9a0d..f5b1984cdde3 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -24,6 +24,7 @@ SRC_URI_append = " \
-     file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
-     file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
-     file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
-+    file://0015-xserver-common-disable-TCP-connections.patch \
- "
- 
- do_install_append() {
+There is a recommend format, see:
+http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines#Patch_Header_Recommendations
+
+please resubmit once correct.
+
+regards,
+- Armin
+
+On 11/25/2014 10:17 AM, Javier Viguera wrote:
+> For security reasons disable TCP connections to the xserver.
+>
+> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+> ---
+>   ...15-xserver-common-disable-TCP-connections.patch | 22 ++++++++++++++++++++++
+>   .../xserver-common/xserver-common_1.34.bb          |  1 +
+>   2 files changed, 23 insertions(+)
+>   create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+>
+> diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+> new file mode 100644
+> index 000000000000..0af8030160e2
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+> @@ -0,0 +1,22 @@
+> +From: Javier Viguera <javier.viguera@digi.com>
+> +Date: Tue, 25 Nov 2014 18:47:12 +0100
+> +Subject: [PATCH] xserver-common: disable TCP connections
+> +
+> +Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+> +---
+> + X11/xserver-common | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/X11/xserver-common b/X11/xserver-common
+> +index 017e5aee1ab0..4dc48c412741 100644
+> +--- a/X11/xserver-common
+> ++++ b/X11/xserver-common
+> +@@ -44,7 +44,7 @@ SCREEN_SIZE=`fallback_screen_arg`
+> + export USER=root
+> + export XSERVER_DEFAULT_ORIENTATION=normal
+> +
+> +-ARGS="-br -pn $INPUT_EXTRA_ARGS"
+> ++ARGS="-br -pn -nolisten tcp $INPUT_EXTRA_ARGS"
+> + DPI="100"
+> + MOUSE=""
+> + KDRIVEARGS=""
+> diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> index 12fff9ae9a0d..f5b1984cdde3 100644
+> --- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> +++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> @@ -24,6 +24,7 @@ SRC_URI_append = " \
+>       file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
+>       file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
+>       file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
+> +    file://0015-xserver-common-disable-TCP-connections.patch \
+>   "
+>
+>   do_install_append() {
+>
 
