@@ -1,32 +1,39 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
+Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BD24F72273
+	by mail.openembedded.org (Postfix) with ESMTP id 885F972275
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 09:23:43 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43943083"
+	Tue, 25 Nov 2014 09:31:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="43943434"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2014 17:20:17 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2014 17:28:19 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAP9NE0t032223;
-	Tue, 25 Nov 2014 17:23:14 +0800
-Received: from Fedora (10.167.226.40) by G08CNEXCHPEKD01.g08.fujitsu.local
-	(10.167.33.89) with Microsoft SMTP Server id 14.3.181.6;
-	Tue, 25 Nov 2014 17:23:36 +0800
-Date: Tue, 25 Nov 2014 17:23:29 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20141125172329.21e1caea@Fedora>
-In-Reply-To: <20141121141904.GK2163@jama>
-References: <20141119154912.GP3315@jama>
-	<1416556558-15428-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<1416556558-15428-2-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<20141121140616.GB20204@mentor.com> <20141121141904.GK2163@jama>
-Organization: FNST
-X-Mailer: Claws Mail 3.9.3 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAP9VH82000319
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Nov 2014 17:31:17 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Tue, 25 Nov 2014 17:31:36 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH 4/6] [meta-oe] printproto: Port printproto from
+	openembedded
+Thread-Index: AQHQB9HM7aPcMFuGmUa0IW+aYsNqOpxwfhuggAAMVACAAIg3wA==
+Date: Tue, 25 Nov 2014 09:31:38 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DDB832@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1416811526-54855-1-git-send-email-biannm@cn.fujitsu.com>
+	<1416811526-54855-5-git-send-email-biannm@cn.fujitsu.com>
+	<CAJTo0LZeC5tu7fQcKFEhuHVvPjx77V8NwOwTtP9GqFVKDvtG-A@mail.gmail.com>
+	<30DC4EDFD798C94083F3E083754532CC73DDB681@G08CNEXMBPEKD02.g08.fujitsu.local>
+	<CAJTo0LZ86QxZgsugoDPuJ-Rjim3V03eFGE0=7VSoJkj6eKi_9g@mail.gmail.com>
+In-Reply-To: <CAJTo0LZ86QxZgsugoDPuJ-Rjim3V03eFGE0=7VSoJkj6eKi_9g@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2 1/2] UMIP: add new recipe
+Subject: Re: [PATCH 4/6] [meta-oe] printproto: Port printproto from	openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,41 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 09:23:45 -0000
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Nov 2014 09:31:36 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-On Fri, 21 Nov 2014 15:19:04 +0100
-Martin Jansa <martin.jansa@gmail.com> wrote:
-
- 
-> It's failing to build in my world builds, so please wait a bit more.
-> 
-> Also a lot of patches from last week were modified when I was
-> cherry-picking them to master-next, please make sure you're using right
-> version.
-
-Hi Jansa:
-  Could you show me the error message when you compile the umip? It is OK
-in my system and I can not reproduce the bug. I use poky 1.7 and following
-is my step:
-    1) copy umip and indent to poky/meta/recipes-myrecipe/
-    2) source oe-init-build-env build-arm
-    3) modify the MACHINE in build-arm/conf/local.conf to "qemuarm"
-    4) bitbake umip
-Is there something wrong?
-
-  In addition, what's the correct workflow for developers/maintainers? I
-meaning if I want to send patches to community, what extra tests should I
-do to make them more reliable and containing less error, such as compiling
-error, dependence error or something else, although the patches are OK in
-our build environment.
-  And as you, the maintainer, how to test a new patch and what's the standard
-for patches which could be merge into some branch? I need more detail info to
-improve my patches' quality.
-
-Thanks.
-
--- 
-Qian Lei
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IEJ1cnRv
+biwgUm9zcw0KPiBTZW50OiBUdWVzZGF5LCBOb3ZlbWJlciAyNSwgMjAxNCA1OjE0IFBNDQo+IFRv
+OiBPRS1kZXZlbA0KPiBTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0ggNC82XSBbbWV0YS1vZV0gcHJp
+bnRwcm90bzogUG9ydCBwcmludHByb3RvIGZyb20NCj4gb3BlbmVtYmVkZGVkDQo+IA0KPiBPbiAy
+NSBOb3ZlbWJlciAyMDE0IGF0IDAxOjE0LCBCaWFuLCBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRz
+dS5jb20+IHdyb3RlOg0KPiANCj4gPiBObywgSSBkb24ndCBoYXZlIGEgcGxhbiB0byBhZGQgZXZl
+cnkgcmVjaXBlIGZyb20gb2UtY2xhc3NpYy4gXl9eIFRoZXNlDQo+ID4gcmVjaXBlcyBqdXN0IHVz
+ZWQgYnkgb3VyIGRpc3Ryby4NCj4gPiBJdCBsb29rcyBsaWtlIHdlIHNob3VsZCBjaGFuZ2Ugb3Vy
+IHNwZWNpZmljYXRpb24uDQo+ID4NCj4gDQo+IFNlbmRpbmcgaW4gcmVjaXBlcyB0aGF0IHlvdSd2
+ZSBwb3J0ZWQgaXMgbXVjaCBhcHByZWNpYXRlZCwgYnV0IGluIHRoaXMgY2FzZQ0KPiBhcyBhbGwg
+b2YgdGhlc2UgWCByZWNpcGVzIGFyZSBub3QgdXNlZCBieSBhbnkgWCBzZXJ2ZXJzIGF2YWlsYWJs
+ZSBpbiBPRSB5b3UNCj4ga2VlcCB0aGVtIGxvY2FsbHkuICBJbiBhbGwgaG9uZXN0eSB1bmxlc3Mg
+eW91J3JlIHVzaW5nIGFuIG9sZCBYIHNlcnZlciB0aGV5J3JlDQo+IG5vdCBuZWVkZWQgYW55d2F5
+Lg0KPiANCg0KVGhhbmtzIGZvciB5b3VyIGV4cGxhbmF0aW9uLiBJdCdzIGhlbHBmdWwgdG8gbWUg
+DQpJIHdpbGwgY29uc2lkZXIgd2hldGhlciBpdCdzIG5lY2Vzc2FyeSB0byB1cGdyYWQgb3VyIFgg
+aW1wbGVtZW50YXRpb24uDQoNClJlZ2FyZHMNCiBCaWFuDQoNCj4gUm9zcw0KPiAtLQ0KPiBfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRk
+ZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
+ZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGlu
+Zm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
 
