@@ -1,24 +1,34 @@
-Return-Path: <Wenzong.Fan@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 055F772276
+	by mail.openembedded.org (Postfix) with ESMTP id EA0C77221D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 07:11:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAP7B9pH023783
+	Tue, 25 Nov 2014 09:05:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sAP95b43009919
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Nov 2014 23:11:09 -0800 (PST)
-Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 24 Nov 2014 23:11:09 -0800
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Nov 2014 02:11:07 -0500
-Message-ID: <1416899468-28398-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+	Tue, 25 Nov 2014 01:05:38 -0800 (PST)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.2.253]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0174.001;
+	Tue, 25 Nov 2014 01:05:37 -0800
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] There is no LAYERVERSION and LAYERDEPENDS for most
+	meta-FOO layers
+Thread-Index: AdAHxAmURBPbgu/aTsSQM0urNu2MkQATk92AABKbdAAADG9W0A==
+Date: Tue, 25 Nov 2014 09:05:37 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AABD59E3A6@ALA-MBA.corp.ad.wrs.com>
+References: <1B858668EC6A94408DCA5225FDFA85AABD59CFA9@ALA-MBA.corp.ad.wrs.com>
+	<547304C9.1060509@topic.nl> <20141124190615.GB6210@mentor.com>
+In-Reply-To: <20141124190615.GB6210@mentor.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.135]
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] sethdlc: fix host contamination
+Subject: Re: There is no LAYERVERSION and LAYERDEPENDS for most meta-FOO layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,102 +42,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Nov 2014 07:11:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Nov 2014 09:05:43 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
 
-* Clean INCLUDES to fix the host contamination errors:
 
-  In file included from /usr/src/linux/include/linux/posix_types.h:47:0,
-  from /usr/src/linux/include/linux/types.h:17,
-  from /usr/src/linux/include/linux/if.h:22,
-  from sethdlc.c:23:
-  /usr/src/linux/include/asm-generic/posix_types.h:91:3: \
-    error: conflicting types for '__kernel_fsid_t'
-  } __kernel_fsid_t;
-  ^
-  .../tmp/sysroots/qemumips/usr/include/asm/posix_types.h:26:3: \
-    note: previous declaration of '__kernel_fsid_t' was here
-  } __kernel_fsid_t;
-  ^
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Joe MacDonald
+> Sent: Tuesday, November 25, 2014 3:06 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] There is no LAYERVERSION and LAYERDEPENDS for most meta=
+-FOO layers
+>=20
+> [Re: [oe] There is no LAYERVERSION and LAYERDEPENDS for most meta-FOO lay=
+ers] On 14.11.24 (Mon
+> 11:13) Mike Looijmans wrote:
+>=20
+> > On 11/24/2014 09:53 AM, Huang, Jie (Jackie) wrote:
+> > >Hi,
+> > >
+> > >I know LAYERVERSION is optional but I think LAYERDEPENDS is required
+> > >and at least we should specify the main oe-core, but I found only meta=
+-networking and meta-
+> webser have this:
+> > >
+> > >$ grep -r LAYERDEPENDS *
+> > >meta-networking/conf/layer.conf:LAYERDEPENDS_networking-layer =3D "cor=
+e"
+> > >meta-networking/conf/layer.conf:LAYERDEPENDS_networking-layer =3D "ope=
+nembedded-layer"
+> > >meta-networking/conf/layer.conf:LAYERDEPENDS_networking-layer =3D "met=
+a-python"
+> > >meta-webserver/conf/layer.conf:LAYERDEPENDS_webserver =3D "core"
+> > >$ grep -r LAYERVERSION *
+> > >meta-networking/conf/layer.conf:LAYERVERSION_networking-layer =3D "1"
+> > >meta-webserver/conf/layer.conf:LAYERVERSION_webserver =3D "1"
+> > >
+> > >I found dependencies section in README for most of the meta-FOO layers=
+, but no definition of
+> LAYERDEPENDS in the layer.conf.
+> > >
+> > >Thanks,
+> > >Jackie
+> > >
+> >
+> > And reading this:
+> >
+> > LAYERDEPENDS_networking-layer =3D "core"
+> > LAYERDEPENDS_networking-layer =3D "openembedded-layer"
+> > LAYERDEPENDS_networking-layer =3D "meta-python"
+> >
+> > makes me wonder whether:
+> > - The author forgot to use "+=3D" instead of "=3D"; or
+> > - The syntax of LAYERDEPENDS is different from what the rest of the
+> > variables use (in that case, an RFC may be in order here); or
+> > - These lines are parsed by something else than bitbake's regular parse=
+r.
+>=20
+> I wondered that too.
+>=20
+> % bitbake -e | grep LAYERDEPENDS_networking # $LAYERDEPENDS_networking-la=
+yer [3 operations]
+> LAYERDEPENDS_networking-layer=3D"meta-python"
+>=20
+> That answers that, then.  Guess I'll go fix that up.  :-)
 
-* Correct LIC_FILES_CHKSUM to checkout license infos from sethdl.c
-  instead of Makefile.
+Thanks, Joe.
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../files/sethdlc-fix-host-contamination.patch     |   42 ++++++++++++++++++++
- .../recipes-connectivity/sethdlc/sethdlc.bb        |    3 +-
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
+But for other layers, I think we should add for them, right?=20
 
-diff --git a/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch b/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
-new file mode 100644
-index 0000000..f25a02c
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
-@@ -0,0 +1,42 @@
-+From 9a9137c3df5309ac359737d6ebd67fb4ff5f3cf2 Mon Sep 17 00:00:00 2001
-+From: Wenzong Fan <wenzong.fan@windriver.com>
-+Date: Mon, 24 Nov 2014 22:05:18 -0500
-+Subject: [PATCH] sethdlc: fix host contamination
-+
-+Clean INCLUDES to fix the host contamination errors:
-+
-+  In file included from /usr/src/linux/include/linux/posix_types.h:47:0,
-+  from /usr/src/linux/include/linux/types.h:17,
-+  from /usr/src/linux/include/linux/if.h:22,
-+  from sethdlc.c:23:
-+  /usr/src/linux/include/asm-generic/posix_types.h:91:3: \
-+    error: conflicting types for '__kernel_fsid_t'
-+  } __kernel_fsid_t;
-+  ^
-+  .../tmp/sysroots/qemumips/usr/include/asm/posix_types.h:26:3: \
-+    note: previous declaration of '__kernel_fsid_t' was here
-+  } __kernel_fsid_t;
-+  ^
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-+---
-+ Makefile |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 0492f2b..97dec22 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -1,6 +1,6 @@
-+ CC = gcc
-+ CFLAGS = -O2 -Wall -W -Wno-long-long -pipe
-+-INCLUDES = -I/usr/src/linux/include -I/usr/src/linux-2.6/include
-++INCLUDES =
-+ 
-+ all:		sethdlc
-+ 
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-index cf74827..5e8d9d9 100644
---- a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-+++ b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-@@ -1,10 +1,11 @@
- DESCRIPTION = "set Linux HDLC packet radio modem driver port information"
- HOMEPAGE = "https://www.kernel.org/pub/linux/utils/net/hdlc"
- LICENSE = "GPLv2 & GPLv2+ "
--LIC_FILES_CHKSUM = "file://Makefile;md5=19aada31930b2be84bf7138420d77263"
-+LIC_FILES_CHKSUM = "file://sethdlc.c;endline=10;md5=90f936879e9f8b755a138aeb348782eb"
- 
- 
- SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.tar.gz \
-+           file://sethdlc-fix-host-contamination.patch \
- "
- SRC_URI[md5sum] = "9016878156a5eadb06c0bae71cc5c9ab"
- SRC_URI[sha256sum] = "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd5b3d4f6ab6b04e"
--- 
-1.7.9.5
+Thanks,
+Jackie
 
+>=20
+> -J.
+>=20
+> >
+> >
+> >
+> >
+> > Met vriendelijke groet / kind regards,
+> >
+> > Mike Looijmans
+> > System Expert
+> >
+> >
+> > TOPIC Embedded Systems
+> > Eindhovenseweg 32-C, NL-5683 KH Best
+> > Postbus 440, NL-5680 AK Best
+> > Telefoon: (+31) (0) 499 33 69 79
+> > Telefax:  (+31) (0) 499 33 69 70
+> > E-mail: mike.looijmans@topic.nl
+> > Website: www.topic.nl
+> >
+> > Please consider the environment before printing this e-mail
+> >
+> > Topic zoekt gedreven (embedded) software specialisten!
+> > http://topic.nl/vacatures/topic-zoekt-software-engineers/
+> >
+> --
+> -Joe MacDonald.
+> :wq
 
