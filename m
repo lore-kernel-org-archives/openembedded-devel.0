@@ -1,18 +1,22 @@
 Return-Path: <pab@pabigot.com>
-Received: from p3plsmtpa07-01.prod.phx3.secureserver.net
-	(p3plsmtpa07-01.prod.phx3.secureserver.net [173.201.192.230])
-	by mail.openembedded.org (Postfix) with ESMTP id 78BD77233E
+Received: from p3plsmtpa07-03.prod.phx3.secureserver.net
+	(p3plsmtpa07-03.prod.phx3.secureserver.net [173.201.192.232])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EA3872371
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2014 20:06:39 +0000 (UTC)
+	Wed, 26 Nov 2014 20:08:00 +0000 (UTC)
 Received: from llc.pab ([75.72.225.8])
-	by p3plsmtpa07-01.prod.phx3.secureserver.net with 
-	id LL6e1p0070BVjqb01L6eXy; Wed, 26 Nov 2014 13:06:39 -0700
+	by p3plsmtpa07-03.prod.phx3.secureserver.net with 
+	id LL7z1p00Y0BVjqb01L81rF; Wed, 26 Nov 2014 13:08:01 -0700
 From: "Peter A. Bigot" <pab@pabigot.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Nov 2014 14:06:28 -0600
-Message-Id: <cover.1417031737.git.pab@pabigot.com>
+Date: Wed, 26 Nov 2014 14:07:52 -0600
+Message-Id: <e40100d74fe21e694d1a9f334b0fddf02d6dea3e.1417031714.git.pab@pabigot.com>
 X-Mailer: git-send-email 1.8.5.5
-Subject: [PATCH 0/2] add conflicts for recipes incompatible with bluez5
+In-Reply-To: <cover.1417031714.git.pab@pabigot.com>
+References: <cover.1417031714.git.pab@pabigot.com>
+In-Reply-To: <cover.1417031714.git.pab@pabigot.com>
+References: <cover.1417031714.git.pab@pabigot.com>
+Subject: [meta-oe][RFC v2 1/3] gnokii: refine selector for bluez4 package config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,25 +30,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2014 20:06:50 -0000
+X-List-Received-Date: Wed, 26 Nov 2014 20:08:04 -0000
 
-The following changes since commit 34be57e7454ffe5f591cc0d7638bf41bb4377a61:
+Use bluez4 or bluez5 to avoid ambiguity.
 
-  meta-networking: update LAYERDEPENDS (2014-11-24 14:12:02 -0500)
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+---
+ meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib pabigot/bluez5
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=pabigot/bluez5
-
-Peter A. Bigot (2):
-  obexd: conflict with bluez5
-  obex-data-server: conflict with bluez5
-
- meta-gnome/recipes-connectivity/obex/obexd_0.48.bb          | 2 ++
- meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb | 1 +
- 2 files changed, 3 insertions(+)
-
+diff --git a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
+index 4826452..acae868 100644
+--- a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
++++ b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
+@@ -9,7 +9,7 @@ DEPENDS = "glib-2.0"
+ X11DEPENDS = " libxpm gtk+"
+ 
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+-PACKAGECONFIG[bluez] = "--enable-bluetooth,--disable-bluetooth,bluez4"
++PACKAGECONFIG[bluez4] = "--enable-bluetooth,--disable-bluetooth,bluez4"
+ PACKAGECONFIG[libical] = "--enable-libical,--disable-libical,libical"
+ PACKAGECONFIG[pcsc-lite] = "--enable-libpcsclite,--disable-libpcsclite,pcsc-lite"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
 -- 
 1.8.5.5
 
