@@ -1,31 +1,22 @@
-Return-Path: <zboszor@pr.hu>
-Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 40F9172324
+Return-Path: <pab@pabigot.com>
+Received: from p3plsmtpa07-01.prod.phx3.secureserver.net
+	(p3plsmtpa07-01.prod.phx3.secureserver.net [173.201.192.230])
+	by mail.openembedded.org (Postfix) with ESMTP id 77CF572336
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2014 18:17:25 +0000 (UTC)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1Xti5b-0003Or-L4
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2014 20:17:23 +0100
-Received: from host-87-242-31-61.prtelecom.hu ([87.242.31.61]
-	helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1Xth9T-0005Lt-GI
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Nov 2014 19:17:21 +0100
-Message-ID: <5476192C.2030204@pr.hu>
-Date: Wed, 26 Nov 2014 19:17:16 +0100
-From: Boszormenyi Zoltan <zboszor@pr.hu>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Spam-Score: 0.7 (/)
-X-Scan-Signature: 02d3abc61471e6dd9f9388029c518d83
-X-Spam-Tracer: backend.mail.pr.hu 0.7 20141126181721Z
-Subject: Escaping in PACKAGECONFIG
+	Wed, 26 Nov 2014 20:06:39 +0000 (UTC)
+Received: from llc.pab ([75.72.225.8])
+	by p3plsmtpa07-01.prod.phx3.secureserver.net with 
+	id LL6e1p0070BVjqb01L6fYK; Wed, 26 Nov 2014 13:06:39 -0700
+From: "Peter A. Bigot" <pab@pabigot.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Nov 2014 14:06:29 -0600
+Message-Id: <14c1c51abdfe686041233a0e74d4fd50194623ad.1417031737.git.pab@pabigot.com>
+X-Mailer: git-send-email 1.8.5.5
+In-Reply-To: <cover.1417031737.git.pab@pabigot.com>
+References: <cover.1417031737.git.pab@pabigot.com>
+In-Reply-To: <cover.1417031737.git.pab@pabigot.com>
+References: <cover.1417031737.git.pab@pabigot.com>
+Subject: [meta-gnome][PATCH 1/2] obexd: conflict with bluez5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,51 +30,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2014 18:17:27 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 26 Nov 2014 20:06:50 -0000
 
-Hi,
+obexd was integrated into bluez5 and is no longer a separate package.
 
-what is the proper way of escaping a comma in the string specified for PACKAGECONFIG?
-I would like to use something like the below in my custom PHP recipe:
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+---
+ meta-gnome/recipes-connectivity/obex/obexd_0.48.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-PACKAGECONFIG[mysql] = ' \
-                        --enable-mysqlnd="shared" \
-                        --with-mysql="shared,mysqlnd" \
-                        --with-mysqli="shared,mysqlnd" \
-                        --with-mysql-sock=${localstatedir}/lib/mysql/mysql.sock \
-                        --with-pdo-mysql="shared,mysqlnd" \
-                        , \
-                        ,mysql5'
-
-With ...="shared,mysqlnd", ...="shared\,mysqlnd" or ...="shared\\,mysqlnd" I get:
-
-ERROR: Only enable,disable,depend,rdepend can be specified!
-
-and
-
-ERROR: Nothing PROVIDES 'mysqlnd"' (but .../php/php_5.6.3.bb DEPENDS on or otherwise
-requires it). Close matches:
-  mysql5
-ERROR: Required build target 'php' has no buildable providers.
-Missing or unbuildable dependency chain was: ['php', 'mysqlnd"']
-
-But, this works:
-
-MYSQLND="shared,mysqlnd"
-PACKAGECONFIG[mysql] = ' \
-                        --enable-mysqlnd="shared" \
-                        --with-mysql=${MYSQLND} \        
-                        --with-mysqli=${MYSQLND} \                 
-                        --with-mysql-sock=${localstatedir}/lib/mysql/mysql.sock \
-                        --with-pdo-mysql=${MYSQLND} \                 
-                        , \
-                        ,mysql5'
-
-Why?
-
-Thanks in advance,
-Zoltán Böszörményi
+diff --git a/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb b/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
+index 26869fe..f28f77b 100644
+--- a/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
++++ b/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
+@@ -1,5 +1,7 @@
+ SUMMARY = "OBEX Server and Client"
++# obexd was integrated into bluez5
+ DEPENDS = "glib-2.0 dbus bluez4 libical"
++RCONFLICTS_${PN} = "bluez5"
+ 
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+-- 
+1.8.5.5
 
 
