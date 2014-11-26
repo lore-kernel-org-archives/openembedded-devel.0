@@ -1,22 +1,18 @@
 Return-Path: <pab@pabigot.com>
 Received: from p3plsmtpa07-03.prod.phx3.secureserver.net
 	(p3plsmtpa07-03.prod.phx3.secureserver.net [173.201.192.232])
-	by mail.openembedded.org (Postfix) with ESMTP id 1191872376
+	by mail.openembedded.org (Postfix) with ESMTP id 10B7E72374
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2014 20:08:01 +0000 (UTC)
+	Wed, 26 Nov 2014 20:08:00 +0000 (UTC)
 Received: from llc.pab ([75.72.225.8])
 	by p3plsmtpa07-03.prod.phx3.secureserver.net with 
-	id LL7z1p00Y0BVjqb01L82ra; Wed, 26 Nov 2014 13:08:02 -0700
+	id LL7z1p00Y0BVjqb01L80r1; Wed, 26 Nov 2014 13:08:01 -0700
 From: "Peter A. Bigot" <pab@pabigot.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Nov 2014 14:07:54 -0600
-Message-Id: <3f59d584f327d831f17d48e70799da72d160ed5f.1417031714.git.pab@pabigot.com>
+Date: Wed, 26 Nov 2014 14:07:51 -0600
+Message-Id: <cover.1417031714.git.pab@pabigot.com>
 X-Mailer: git-send-email 1.8.5.5
-In-Reply-To: <cover.1417031714.git.pab@pabigot.com>
-References: <cover.1417031714.git.pab@pabigot.com>
-In-Reply-To: <cover.1417031714.git.pab@pabigot.com>
-References: <cover.1417031714.git.pab@pabigot.com>
-Subject: [meta-oe][RFC v2 3/3] packagegroup-basic: select distro preference for bluez provider
+Subject: [RFC v2 0/3] update meta-oe to support proposed bluez5 approach
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +28,30 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 26 Nov 2014 20:08:04 -0000
 
-Signed-off-by: Peter A. Bigot <pab@pabigot.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-basic.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+These are the meta-oe patches corresponding to the RFC solution to
+selecting bluez5 as bluetooth provider submitted at:
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-index 20b1652..4f2992c 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
-@@ -9,6 +9,7 @@ PR = "r13"
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- inherit packagegroup
-+inherit bluetooth
- 
- # Poke extra recomendations into the list using your machine.conf
- #
-@@ -45,7 +46,7 @@ RRECOMMENDS_${PN} = "\
-     ${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
-     ${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
-     \
--    ${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \
-+    ${@base_contains("DISTRO_FEATURES", "bluetooth", "${BLUEZ}", "", d)} \
-     ${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
-     \
-     tzdata \
+http://lists.openembedded.org/pipermail/openembedded-core/2014-November/099312.html
+
+The following changes since commit 34be57e7454ffe5f591cc0d7638bf41bb4377a61:
+
+  meta-networking: update LAYERDEPENDS (2014-11-24 14:12:02 -0500)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib pabigot/rfc-v2/bluez5
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=pabigot/rfc-v2/bluez5
+
+Peter A. Bigot (3):
+  gnokii: refine selector for bluez4 package config
+  gpsd: select distro preference for bluez provider
+  packagegroup-basic: select distro preference for bluez provider
+
+ meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb     | 2 +-
+ meta-oe/recipes-core/packagegroups/packagegroup-basic.bb | 3 ++-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb             | 6 +++---
+ 3 files changed, 6 insertions(+), 5 deletions(-)
+
 -- 
 1.8.5.5
 
