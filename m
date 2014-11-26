@@ -1,27 +1,29 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
+Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 33204722DE
+	by mail.openembedded.org (Postfix) with ESMTP id 5991F722DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2014 06:42:16 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44002409"
+	Wed, 26 Nov 2014 06:42:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44002440"
 Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Nov 2014 14:39:01 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 26 Nov 2014 14:39:41 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAQ6fwmx025255
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAQ6gdgF025302
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2014 14:41:59 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 26 Nov 2014 14:42:22 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+	Wed, 26 Nov 2014 14:42:39 +0800
+Received: from localhost.localdomain (10.167.226.35) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 26 Nov 2014 14:43:01 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Nov 2014 14:41:53 +0800
-Message-ID: <1416984113-28775-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Date: Wed, 26 Nov 2014 14:42:12 +0800
+Message-ID: <1416984132-2035-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <A8FC939F80655644A89BB21CCD3741E8738E3E9A@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <A8FC939F80655644A89BB21CCD3741E8738E3E9A@G08CNEXMBPEKD02.g08.fujitsu.local>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [PATCH] xkbutils: Add new recipe
+X-Originating-IP: [10.167.226.35]
+Subject: [meta-oe][PATCH v2] sgpio : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,44 +37,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2014 06:42:26 -0000
+X-List-Received-Date: Wed, 26 Nov 2014 06:42:58 -0000
 Content-Type: text/plain
 
-xkbutils is a collection of small utilities utilizing the XKeyboard (XKB)
-extension to the X11 protocol.
+Intel SGPIO enclosure management utility
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
+ .../Makefile-modify-some-parameters.patch          | 125 +++++++++++++++++++++
+ meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb   |  26 +++++
+ 2 files changed, 151 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sgpio/sgpio-1.2.0.10/Makefile-modify-some-parameters.patch
+ create mode 100644 meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
+diff --git a/meta-oe/recipes-extended/sgpio/sgpio-1.2.0.10/Makefile-modify-some-parameters.patch b/meta-oe/recipes-extended/sgpio/sgpio-1.2.0.10/Makefile-modify-some-parameters.patch
 new file mode 100644
-index 0000000..6a05e98
+index 0000000..36f5731
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
-@@ -0,0 +1,19 @@
-+require recipes-graphics/xorg-app/xorg-app-common.inc
++++ b/meta-oe/recipes-extended/sgpio/sgpio-1.2.0.10/Makefile-modify-some-parameters.patch
+@@ -0,0 +1,125 @@
++From d2cfe1346ec1f46c7bbb3df0f41d32c4c5d82819 Mon Sep 17 00:00:00 2001
++From: Li xin <lixin.fnst@cn.fujitsu.com>
++Date: Tue, 25 Nov 2014 01:25:45 +0900
++Subject: [PATCH] Makefile: modify some parameters
 +
-+SUMMARY = "XKeyboard (XKB) extension to the X11 protocol"
-+DESCRIPTION = " \
-+xkbutils is a collection of small utilities utilizing the XKeyboard (XKB) \
-+extension to the X11 protocol. \
-+It includes: \
-+    xkbbell  - generate XKB bell events \
-+    xkbvleds - display the state of LEDs on an XKB keyboard in a window \
-+    xkbwatch - reports changes in the XKB keyboard state \
-+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=64322fab5239f5c8d97cf6e0e14f1c62"
++Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++---
++ Makefile | 107 ++++++++++++++++++++++++++++++++-------------------------------
++ 1 file changed, 55 insertions(+), 52 deletions(-)
 +
-+DEPENDS += "libxaw libxkbfile"
++diff --git a/Makefile b/Makefile
++index 278d966..c2b0bc7 100755
++--- a/Makefile
+++++ b/Makefile
++@@ -1,52 +1,55 @@
++-########################################################################
++-# Copyright (C) 2007-2008, Intel Corp. All rights reserved.
++-#
++-#
++-# This program is free software; you can redistribute it and/or modify it under
++-# the terms of the GNU General Public License as published by the Free Software
++-# Foundation; either version 2 of the License, or (at your option) any later version.
++-#
++-# This program is distributed in the hope that it will be useful, but
++-# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++-# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
++-# for more details.
++-#
++-# You should have received a copy of the GNU General Public License along
++-# with this program; if not, write to the Free Software Foundation, Inc.,
++-# 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
++-########################################################################
++-
++-
++-# Intel SGPIO enclosure management utility
++-#
++-# Author: Eric R Hall <Eric.R.Hall@intel.com>
++-
++-
++-MANDIR ?= /usr/local/man
++-ALL = sgpio
++-
++-all: $(ALL)
++-
++-sgpio.o: sgpio.c
++-	gcc -g -Wall -c sgpio.c
++-
++-sgpio: sgpio.o
++-	gcc -g sgpio.o -o sgpio
++-
++-clean:
++-	rm -f sgpio.o sgpio
++-
++-install: $(ALL)
++-	for i in $(ALL); do \
++-		install $$i /sbin/$$i; \
++-	done
++-	install -d $(MANDIR)/man1
++-	install -m 0644 *.1 $(MANDIR)/man1
++-
++-uninstall:
++-	for i in $(ALL); do \
++-		rm -f /sbin/$$i; \
++-	done
++-	for i in $(ALL:=.1); do \
++-		rm -f $(MANDIR)/man1/$$i; \
++-	done
+++########################################################################
+++# Copyright (C) 2007-2008, Intel Corp. All rights reserved.
+++#
+++#
+++# This program is free software; you can redistribute it and/or modify it under
+++# the terms of the GNU General Public License as published by the Free Software
+++# Foundation; either version 2 of the License, or (at your option) any later version.
+++#
+++# This program is distributed in the hope that it will be useful, but
+++# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
+++# for more details.
+++#
+++# You should have received a copy of the GNU General Public License along
+++# with this program; if not, write to the Free Software Foundation, Inc.,
+++# 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+++########################################################################
+++
+++
+++# Intel SGPIO enclosure management utility
+++#
+++# Author: Eric R Hall <Eric.R.Hall@intel.com>
+++
+++
+++MANDIR ?= /usr/local/man
+++SBIN_DIR = /sbin
+++INSTALL =/usr/bin/install -c
+++ALL = sgpio
+++CFLAGS = -g -Wall
+++
+++all: $(ALL)
+++
+++sgpio.o: sgpio.c
+++	${CC} $(CFLAGS) -c sgpio.c
+++
+++sgpio: sgpio.o
+++	${CC} -g sgpio.o -o sgpio
+++
+++clean:
+++	rm -f sgpio.o sgpio
+++
+++install: $(ALL)
+++	for i in $(ALL); do \
+++		$(INSTALL) -D $$i $(SBIN_DIR)/$$i; \
+++	done
+++	$(INSTALL) -d $(MANDIR)/man1
+++	$(INSTALL) -m 0644 *.1 $(MANDIR)/man1
+++
+++uninstall:
+++	for i in $(ALL); do \
+++		rm -f /sbin/$$i; \
+++	done
+++	for i in $(ALL:=.1); do \
+++		rm -f $(MANDIR)/man1/$$i; \
+++	done
++-- 
++1.8.4.2
 +
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
+new file mode 100644
+index 0000000..2a2172a
+--- /dev/null
++++ b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "SGPIO captive backplane tool"
++DESCRIPTION = "Intel SGPIO enclosure management utility"
++HOMEPAGE = "http://sources.redhat.com/lvm2/wiki/DMRAID_Eventing"
++SECTION = "System Environment/Base"
 +
-+SRC_URI[md5sum] = "502b14843f610af977dffc6cbf2102d5"
-+SRC_URI[sha256sum] = "d2a18ab90275e8bca028773c44264d2266dab70853db4321bdbc18da75148130"
++SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/${PN}/${PN}-1.2-0.10-src.tar.gz/a417bf68da4e9bd79a4664c11d7debd1/${PN}-1.2-0.10-src.tar.gz"
++
++SRC_URI += "file://Makefile-modify-some-parameters.patch"
++SRC_URI[md5sum] = "a417bf68da4e9bd79a4664c11d7debd1"
++SRC_URI[sha256sum] = "9bf8c42acaa247efd9321bdb1fc2390022f0c554d77fbbd4a7363d990fc0270b"
++
++S = "${WORKDIR}/${PN}"
++
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://LICENSE_GPL;md5=393a5ca445f6965873eca0259a17f833"
++
++do_compile_prepend() {
++    oe_runmake clean
++}
++do_install() {
++    oe_runmake install \
++        INSTALL="/usr/bin/install -p" \
++        DESTDIR=${D} \
++        SBIN_DIR=${D}/${sbindir} \
++        MANDIR=${D}/${mandir}
++}
 -- 
-1.8.3.1
+1.8.4.2
 
 
