@@ -1,26 +1,27 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E755672304
+Return-Path: <qianl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 33204722DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Nov 2014 05:42:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sAQ5gM0n000591
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Wed, 26 Nov 2014 06:42:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44002409"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Nov 2014 14:39:01 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAQ6fwmx025255
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Nov 2014 21:42:22 -0800 (PST)
-Received: from pek-hostel-vm11.wrs.com (128.224.153.181) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 25 Nov 2014 21:42:22 -0800
-From: <jackie.huang@windriver.com>
+	Wed, 26 Nov 2014 14:41:59 +0800
+Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 26 Nov 2014 14:42:22 +0800
+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Nov 2014 00:42:09 -0500
-Message-ID: <0f3e06dad64e4472f373069ecfc0afe003713eed.1416979928.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.0.0
-In-Reply-To: <cover.1416979928.git.jackie.huang@windriver.com>
-References: <cover.1416979928.git.jackie.huang@windriver.com>
+Date: Wed, 26 Nov 2014 14:41:53 +0800
+Message-ID: <1416984113-28775-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: [PATCH 09/13] meta-gpe: Add LAYERVERSION and LAYERDEPENDS
+X-Originating-IP: [10.167.226.40]
+Subject: [PATCH] xkbutils: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,33 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Nov 2014 05:42:22 -0000
+X-List-Received-Date: Wed, 26 Nov 2014 06:42:26 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+xkbutils is a collection of small utilities utilizing the XKeyboard (XKB)
+extension to the X11 protocol.
 
-According to README, it depends on oe-core and openembedded-layer
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
 ---
- meta-gpe/conf/layer.conf |    6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
 
-diff --git a/meta-gpe/conf/layer.conf b/meta-gpe/conf/layer.conf
-index 6c018b1..00f3929 100644
---- a/meta-gpe/conf/layer.conf
-+++ b/meta-gpe/conf/layer.conf
-@@ -7,3 +7,9 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
- BBFILE_COLLECTIONS += "gpe-layer"
- BBFILE_PATTERN_gpe-layer := "^${LAYERDIR}/"
- BBFILE_PRIORITY_gpe-layer = "7"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
+new file mode 100644
+index 0000000..6a05e98
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
+@@ -0,0 +1,19 @@
++require recipes-graphics/xorg-app/xorg-app-common.inc
 +
-+# This should only be incremented on significant changes that will
-+# cause compatibility issues with other layers
-+LAYERVERSION_gpe-layer = "1"
++SUMMARY = "XKeyboard (XKB) extension to the X11 protocol"
++DESCRIPTION = " \
++xkbutils is a collection of small utilities utilizing the XKeyboard (XKB) \
++extension to the X11 protocol. \
++It includes: \
++    xkbbell  - generate XKB bell events \
++    xkbvleds - display the state of LEDs on an XKB keyboard in a window \
++    xkbwatch - reports changes in the XKB keyboard state \
++"
++LIC_FILES_CHKSUM = "file://COPYING;md5=64322fab5239f5c8d97cf6e0e14f1c62"
 +
-+LAYERDEPENDS_gpe-layer = "core openembedded-layer"
++DEPENDS += "libxaw libxkbfile"
++
++BBCLASSEXTEND = "native"
++
++SRC_URI[md5sum] = "502b14843f610af977dffc6cbf2102d5"
++SRC_URI[sha256sum] = "d2a18ab90275e8bca028773c44264d2266dab70853db4321bdbc18da75148130"
 -- 
-1.7.9.5
+1.8.3.1
 
 
