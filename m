@@ -1,29 +1,30 @@
 Return-Path: <qianl.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 426FB72366
+	by mail.openembedded.org (Postfix) with ESMTP id 5DD03721BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 09:19:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44073990"
+	Thu, 27 Nov 2014 09:21:19 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44074155"
 Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Nov 2014 17:16:21 +0800
+	by heian.cn.fujitsu.com with ESMTP; 27 Nov 2014 17:18:04 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAR9JJdZ007253
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 17:19:19 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 27 Nov 2014 17:19:45 +0800
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAR9L2wm007424;
+	Thu, 27 Nov 2014 17:21:02 +0800
+Received: from Fedora (10.167.226.40) by G08CNEXCHPEKD01.g08.fujitsu.local
+	(10.167.33.89) with Microsoft SMTP Server id 14.3.181.6;
+	Thu, 27 Nov 2014 17:21:28 +0800
+Date: Thu, 27 Nov 2014 17:21:15 +0800
 From: Qian Lei <qianl.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Nov 2014 17:19:22 +0800
-Message-ID: <1417079962-3455-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-References: <1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+Message-ID: <20141127172115.637e9f8d@Fedora>
+In-Reply-To: <20141121140544.GH2163@jama>
+References: <1416368645-23882-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+	<1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+	<20141121140544.GH2163@jama>
+Organization: FNST
+X-Mailer: Claws Mail 3.9.3 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-oe][PATCH v3] tiptop: Add new recipe
+Subject: Re: [PATCH v2] tiptop: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,53 +38,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Nov 2014 09:19:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Nov 2014 09:21:21 -0000
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
 
-Tiptop is a performance monitoring tool for Linux. It provides a
-dynamic real-time view of the tasks running in the system. Tiptop
-is very similar to the top utility, but most of the information
-displayed comes from hardware counters.
+On Fri, 21 Nov 2014 15:05:44 +0100
+Martin Jansa <martin.jansa@gmail.com> wrote:
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-extended/tiptop/tiptop_2.2.bb | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+> > +SRC_URI[tarball.md5sum] = "74255a29acf44569db021b080ad3e3f7"
+> > +SRC_URI[tarball.sha256sum] =
+> > "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d"
+> 
+> Drop name=tarball and tarball. prefix.
 
-diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-new file mode 100644
-index 0000000..126976c
---- /dev/null
-+++ b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Hardware performance monitoring counters"
-+HOMEPAGE = "http://tiptop.gforge.inria.fr/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+DEPENDS = "ncurses libxml2"
-+
-+SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
-+SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7"
-+SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d"
-+
-+inherit autotools-brokensep
-+EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
-+COMPATIBLE_HOST = "(i.86|x86_64|arm|powerpc).*-linux"
-+
-+do_configure_prepend () {
-+    # Two bugs in configure.ac when cross-compiling.
-+    # 1. The path of libxml2. Specify it in EXTRA_OECONF.
-+    # 2. hw's value on other platforms. Replace it if the target is 
-+    #    not i*86/x86_64.
-+    if ( echo "${TARGET_ARCH}" | grep -q -e 'i.86' -e 'x86_64' ); then
-+        sed -i 's= -I/usr/include/libxml2=='    ${S}/configure.ac
-+    else
-+        sed -i 's/hw=`uname -m`/hw="unknown"/'  ${S}/configure.ac
-+        sed -i 's= -I/usr/include/libxml2=='    ${S}/configure.ac
-+    fi
-+}
+Modified in v3.
+
+> Fails to build for qemuarm:
+> 
+> | In file included from target.c:17:0:
+> | target-x86.c: In function 'disp_family_model':
+> | target-x86.c:54:3: error: unknown register name '%edx' in 'asm'
+> |    asm("mov $1, %%eax; " /* a into eax */
+> |    ^
+> | target-x86.c:54:3: error: unknown register name '%ecx' in 'asm'
+> | target-x86.c:54:3: error: unknown register name '%ebx' in 'asm'
+> | target-x86.c:54:3: error: unknown register name '%eax' in 'asm'
+> | make[1]: *** [target.o] Error 1
+> | make[1]: *** Waiting for unfinished jobs....
+> | make[1]: Leaving directory
+> `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/tiptop/2.2-r0/tiptop-2.2/src'
+> | make: *** [all] Error 2 | ERROR: oe_runmake failed
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_compile (log file is located
+> at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/tiptop/2.2-r0/temp/log.do_compile.7484)
+> NOTE: recipe tiptop-2.2-r0: task do_compile: Failed
+
+Fixed this issue in v3. Now it can be built successfully in my
+environment(qemuarm & qemuppc). I also removed the
+tiptop-remove-path-of-libxml2.patch in v2 because now it is implemented
+in do_configure_prepend.
+
 -- 
-1.8.3.1
-
+Qian Lei
 
