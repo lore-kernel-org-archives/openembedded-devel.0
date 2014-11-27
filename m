@@ -1,43 +1,27 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 41A6D72366
+Return-Path: <qianl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FB4872278
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 09:42:17 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id n3so15149112wiv.5
+	Thu, 27 Nov 2014 10:02:22 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44077089"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 27 Nov 2014 17:59:07 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sARA24Gd010901
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 01:42:17 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=XX/wHl36FHOA9q6pSz5RFoZI+IVF67ibsheJZY0pQLo=;
-	b=hU0bluOFKBmLSrshbVHJHkk7Jx3EMoexAo030va3QYuJyBR7mO4RBxzu0cqNevUzZA
-	n72UGksc78YRNWvnmO5lXCl82LndMSQ04pfJ9mjvuxe30/xISd1MUyHwHPqMZlNo+ohn
-	bIIlEikjVe12U88w33gI/tYyeL7NFZxIS+N12fdpEBP5uDf41t+Ebpi4Dm1wHjdDS+HG
-	Y+zGjQ1UVNuoPx3d2ZDdCpuRg0qUG9Jl2nqtmeHEVef8BfwvYWpMGOh+tnBGtN8m68AS
-	d68av2C3JZxZckeNBfrJD8yyunSNnq7VyeX5oGzQVxblNHZUxj9ljaK1rMBiTYe1geSs
-	mbvg==
-X-Gm-Message-State: ALoCoQlWi9cuZC7tl0EAFoAi4qyTo69iW+abC4wKDDb7f9kYxfEy1X/vZ1DhXtT9Y6SspiVEMthr
-X-Received: by 10.180.107.193 with SMTP id he1mr48312657wib.27.1417081337485; 
-	Thu, 27 Nov 2014 01:42:17 -0800 (PST)
-Received: from iMac.local (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
-	by mx.google.com with ESMTPSA id d2sm9907600wjs.32.2014.11.27.01.42.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 27 Nov 2014 01:42:16 -0800 (PST)
-Message-ID: <5476F1AB.3000507@dominion.thruhere.net>
-Date: Thu, 27 Nov 2014 10:40:59 +0100
-From: Koen Kooi <koen@dominion.thruhere.net>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+	Thu, 27 Nov 2014 18:02:04 +0800
+Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 27 Nov 2014 18:02:31 +0800
+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 27 Nov 2014 18:02:11 +0800
+Message-ID: <1417082531-12508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<1417079962-3455-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-In-Reply-To: <1417079962-3455-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-Subject: Re: [meta-oe][PATCH v3] tiptop: Add new recipe
+X-Originating-IP: [10.167.226.40]
+Subject: [PATCH] twm: Upgrade to 1.0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,58 +35,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Nov 2014 09:42:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Nov 2014 10:02:27 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb | 16 ----------------
+ meta-oe/recipes-graphics/xorg-app/twm_1.0.8.bb | 16 ++++++++++++++++
+ 2 files changed, 16 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/twm_1.0.8.bb
 
-Qian Lei schreef op 27-11-14 10:19:
-> Tiptop is a performance monitoring tool for Linux. It provides a dynamic
-> real-time view of the tasks running in the system. Tiptop is very similar
-> to the top utility, but most of the information displayed comes from
-> hardware counters.
-> 
-> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com> --- 
-> meta-oe/recipes-extended/tiptop/tiptop_2.2.bb | 26
-> ++++++++++++++++++++++++++ 1 file changed, 26 insertions(+) create mode
-> 100644 meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-> 
-> diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
-> b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb new file mode 100644 
-> index 0000000..126976c --- /dev/null +++
-> b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb @@ -0,0 +1,26 @@ +SUMMARY
-> = "Hardware performance monitoring counters" +HOMEPAGE =
-> "http://tiptop.gforge.inria.fr/" +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" +DEPENDS = "ncurses
-> libxml2" + +SRC_URI =
-> "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz" +SRC_URI[md5sum] =
-> "74255a29acf44569db021b080ad3e3f7" +SRC_URI[sha256sum] =
-> "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d" + 
-> +inherit autotools-brokensep +EXTRA_OECONF = "CFLAGS="$CFLAGS
-> -I${STAGING_INCDIR}/libxml2"" +COMPATIBLE_HOST =
-> "(i.86|x86_64|arm|powerpc).*-linux"
+diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
+deleted file mode 100644
+index d569fd0..0000000
+--- a/meta-oe/recipes-graphics/xorg-app/twm_1.0.6.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-require recipes-graphics/xorg-app/xorg-app-common.inc
+-SUMMARY = "tiny window manager"
+-DEPENDS += " libxext libxt libxmu bison-native"
+-
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
+-
+-
+-SRC_URI[md5sum] = "952d06a0c2ec34687b536c7b619fc671"
+-SRC_URI[sha256sum] = "e7dccad7879a7570442f0cd9df0b9064e926466b5a52b710fca8cfb167f294e9"
+-
+-FILES_${PN} += "${datadir}/X11/twm/system.twmrc"
+-ALTERNATIVE_NAME = "x-window-manager"
+-ALTERNATIVE_PATH = "${bindir}/twm"
+-ALTERNATIVE_LINK = "${bindir}/x-window-manager"
+-ALTERNATIVE_PRIORITY = "1"
+diff --git a/meta-oe/recipes-graphics/xorg-app/twm_1.0.8.bb b/meta-oe/recipes-graphics/xorg-app/twm_1.0.8.bb
+new file mode 100644
+index 0000000..3574ba9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/xorg-app/twm_1.0.8.bb
+@@ -0,0 +1,16 @@
++require recipes-graphics/xorg-app/xorg-app-common.inc
++SUMMARY = "tiny window manager"
++DEPENDS += " libxext libxt libxmu bison-native"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4c6d42ef60e8166aa26606524c0b9586"
++
++
++SRC_URI[md5sum] = "4b28317d4a9f7ca61bef8462e132bd4c"
++SRC_URI[sha256sum] = "7660352353d632127ff50390991706aa660b28a4ada816c2582ac02720722e44"
++
++FILES_${PN} += "${datadir}/X11/twm/system.twmrc"
++ALTERNATIVE_NAME = "x-window-manager"
++ALTERNATIVE_PATH = "${bindir}/twm"
++ALTERNATIVE_LINK = "${bindir}/x-window-manager"
++ALTERNATIVE_PRIORITY = "1"
+-- 
+1.8.3.1
 
-What's broken on mips, armv8 and avr32?
-
-> + +do_configure_prepend () { +    # Two bugs in configure.ac when
-> cross-compiling. +    # 1. The path of libxml2. Specify it in
-> EXTRA_OECONF. +    # 2. hw's value on other platforms. Replace it if the
-> target is +    #    not i*86/x86_64. +    if ( echo "${TARGET_ARCH}" |
-> grep -q -e 'i.86' -e 'x86_64' ); then +        sed -i 's=
-> -I/usr/include/libxml2=='    ${S}/configure.ac +    else +        sed -i
-> 's/hw=`uname -m`/hw="unknown"/'  ${S}/configure.ac +        sed -i 's=
-> -I/usr/include/libxml2=='    ${S}/configure.ac +    fi +}
-
-Drop the conditional, it should *never* use uname.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFUdvGrMkyGM64RGpERAia5AJwKkcp5N1xKAWHA1kCbReH+iwZsWwCfaWvi
-5gv7MvkZZz3lICXG/L4O3Xo=
-=oxk6
------END PGP SIGNATURE-----
 
