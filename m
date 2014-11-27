@@ -1,33 +1,29 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 662C372366
+Return-Path: <qianl.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 426FB72366
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 09:15:02 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1XtvAD-0007Fw-2B for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Nov 2014 10:15:01 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 10:15:01 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 27 Nov 2014 09:19:37 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44073990"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 27 Nov 2014 17:16:21 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAR9JJdZ007253
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 10:15:01 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 27 Nov 2014 10:14:51 +0100
-Message-ID: <m56q2b$8q2$1@ger.gmane.org>
-References: <1416555843-1935-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
-In-Reply-To: <1416555843-1935-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-Subject: Re: [meta-oe][PATCH] open-iscsi : add new recipe
+	Thu, 27 Nov 2014 17:19:19 +0800
+Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 27 Nov 2014 17:19:45 +0800
+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 27 Nov 2014 17:19:22 +0800
+Message-ID: <1417079962-3455-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+References: <1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.40]
+Subject: [meta-oe][PATCH v3] tiptop: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,74 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Nov 2014 09:15:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 Nov 2014 09:19:42 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Tiptop is a performance monitoring tool for Linux. It provides a
+dynamic real-time view of the tasks running in the system. Tiptop
+is very similar to the top utility, but most of the information
+displayed comes from hardware counters.
 
-Li xin schreef op 21-11-14 08:44:
-> Open-iSCSI project is a high performance, transport independent, 
-> multi-platform implementation of RFC3720.
-> 
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-extended/tiptop/tiptop_2.2.bb | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
 
-> +++ b/meta-oe/recipes-support/open-iscsi/files/open-iscsi.service @@ -0,0
-> +1,18 @@ +[Unit] +Description=Open-iSCSI +Documentation=man:iscsid(8)
-> man:iscsiadm(8) +After=network.target + +[Service] +Type=forking 
-> +PIDFile=/var/run/iscsid.pid +ExecStartPre=-/sbin/modprobe -q iscsi_tcp 
-> +ExecStartPre=-/sbin/modprobe -q ib_iser +ExecStart=/usr/sbin/iscsid -p
-> /var/run/iscsid.pid +ExecStartPost=-/usr/sbin/iscsiadm -m node
-> --loginall=automatic +ExecStopPost=/bin/sync 
-> +ExecStopPost=-/sbin/modprobe -r ib_iser +ExecStopPost=-/sbin/modprobe -r
-> iscsi_tcp
-
-Tons of hardcoded paths here
-
-
-> + +[Install] +WantedBy=multi-user.target diff --git
-> a/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb
-> b/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb new file mode
-> 100644 index 0000000..c8a87d3 --- /dev/null +++
-> b/meta-oe/recipes-support/open-iscsi/open-iscsi_2.0-871.bb @@ -0,0 +1,35
-> @@
-
-
-> +SRC_URI = "http://www.open-iscsi.org/bits/${BP}.tar.gz"
-
-[..]
-
-> +SRC_URI += "file://iscsi_sysfs.c-add-include-files.patch \ +
-> file://open-iscsi.service"
-
-Please collapse these into a single SRC_URI
-
-
-> +do_install_append () { +    if
-> ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then +
-> install -d ${D}${systemd_unitdir}/system +        install -m 0644
-> ${WORKDIR}/open-iscsi.service ${D}${systemd_unitdir}/system/ +    fi +} 
-> + +do_install () { +    oe_runmake DESTDIR="${D}" install_user +}
-
-Please collapse these into a single method
-
-> +inherit
-> ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','',d)}
-
-'inherit
-> 
-systemd' should be safe enough with this check. And if you *really*
-want to check, check for DISTRO_FEATURES.
-
-Also, you're missing RRECOMMENDS for the kernel modules you try to modprobe
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFUduuKMkyGM64RGpERAg9KAJ9lOrnIsfdO55QXXtOapwNqlA003wCgumTL
-Cc+RUQRUvvzJKfupM/kauqc=
-=MBC4
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+new file mode 100644
+index 0000000..126976c
+--- /dev/null
++++ b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Hardware performance monitoring counters"
++HOMEPAGE = "http://tiptop.gforge.inria.fr/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++DEPENDS = "ncurses libxml2"
++
++SRC_URI = "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz"
++SRC_URI[md5sum] = "74255a29acf44569db021b080ad3e3f7"
++SRC_URI[sha256sum] = "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d"
++
++inherit autotools-brokensep
++EXTRA_OECONF = "CFLAGS="$CFLAGS -I${STAGING_INCDIR}/libxml2""
++COMPATIBLE_HOST = "(i.86|x86_64|arm|powerpc).*-linux"
++
++do_configure_prepend () {
++    # Two bugs in configure.ac when cross-compiling.
++    # 1. The path of libxml2. Specify it in EXTRA_OECONF.
++    # 2. hw's value on other platforms. Replace it if the target is 
++    #    not i*86/x86_64.
++    if ( echo "${TARGET_ARCH}" | grep -q -e 'i.86' -e 'x86_64' ); then
++        sed -i 's= -I/usr/include/libxml2=='    ${S}/configure.ac
++    else
++        sed -i 's/hw=`uname -m`/hw="unknown"/'  ${S}/configure.ac
++        sed -i 's= -I/usr/include/libxml2=='    ${S}/configure.ac
++    fi
++}
+-- 
+1.8.3.1
 
 
