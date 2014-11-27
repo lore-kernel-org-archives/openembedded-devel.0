@@ -1,30 +1,43 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DD03721BB
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 41A6D72366
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 09:21:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44074155"
-Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Nov 2014 17:18:04 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAR9L2wm007424;
-	Thu, 27 Nov 2014 17:21:02 +0800
-Received: from Fedora (10.167.226.40) by G08CNEXCHPEKD01.g08.fujitsu.local
-	(10.167.33.89) with Microsoft SMTP Server id 14.3.181.6;
-	Thu, 27 Nov 2014 17:21:28 +0800
-Date: Thu, 27 Nov 2014 17:21:15 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20141127172115.637e9f8d@Fedora>
-In-Reply-To: <20141121140544.GH2163@jama>
-References: <1416368645-23882-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<20141121140544.GH2163@jama>
-Organization: FNST
-X-Mailer: Claws Mail 3.9.3 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
+	Thu, 27 Nov 2014 09:42:17 +0000 (UTC)
+Received: by mail-wi0-f172.google.com with SMTP id n3so15149112wiv.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Nov 2014 01:42:17 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=XX/wHl36FHOA9q6pSz5RFoZI+IVF67ibsheJZY0pQLo=;
+	b=hU0bluOFKBmLSrshbVHJHkk7Jx3EMoexAo030va3QYuJyBR7mO4RBxzu0cqNevUzZA
+	n72UGksc78YRNWvnmO5lXCl82LndMSQ04pfJ9mjvuxe30/xISd1MUyHwHPqMZlNo+ohn
+	bIIlEikjVe12U88w33gI/tYyeL7NFZxIS+N12fdpEBP5uDf41t+Ebpi4Dm1wHjdDS+HG
+	Y+zGjQ1UVNuoPx3d2ZDdCpuRg0qUG9Jl2nqtmeHEVef8BfwvYWpMGOh+tnBGtN8m68AS
+	d68av2C3JZxZckeNBfrJD8yyunSNnq7VyeX5oGzQVxblNHZUxj9ljaK1rMBiTYe1geSs
+	mbvg==
+X-Gm-Message-State: ALoCoQlWi9cuZC7tl0EAFoAi4qyTo69iW+abC4wKDDb7f9kYxfEy1X/vZ1DhXtT9Y6SspiVEMthr
+X-Received: by 10.180.107.193 with SMTP id he1mr48312657wib.27.1417081337485; 
+	Thu, 27 Nov 2014 01:42:17 -0800 (PST)
+Received: from iMac.local (ip4da2a5ae.direct-adsl.nl. [77.162.165.174])
+	by mx.google.com with ESMTPSA id d2sm9907600wjs.32.2014.11.27.01.42.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 27 Nov 2014 01:42:16 -0800 (PST)
+Message-ID: <5476F1AB.3000507@dominion.thruhere.net>
+Date: Thu, 27 Nov 2014 10:40:59 +0100
+From: Koen Kooi <koen@dominion.thruhere.net>
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] tiptop: Add new recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1416473941-23508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+	<1417079962-3455-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+In-Reply-To: <1417079962-3455-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+Subject: Re: [meta-oe][PATCH v3] tiptop: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,46 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Nov 2014 09:21:21 -0000
-Content-Type: text/plain; charset="US-ASCII"
+X-List-Received-Date: Thu, 27 Nov 2014 09:42:19 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 21 Nov 2014 15:05:44 +0100
-Martin Jansa <martin.jansa@gmail.com> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > +SRC_URI[tarball.md5sum] = "74255a29acf44569db021b080ad3e3f7"
-> > +SRC_URI[tarball.sha256sum] =
-> > "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d"
+Qian Lei schreef op 27-11-14 10:19:
+> Tiptop is a performance monitoring tool for Linux. It provides a dynamic
+> real-time view of the tasks running in the system. Tiptop is very similar
+> to the top utility, but most of the information displayed comes from
+> hardware counters.
 > 
-> Drop name=tarball and tarball. prefix.
-
-Modified in v3.
-
-> Fails to build for qemuarm:
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com> --- 
+> meta-oe/recipes-extended/tiptop/tiptop_2.2.bb | 26
+> ++++++++++++++++++++++++++ 1 file changed, 26 insertions(+) create mode
+> 100644 meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
 > 
-> | In file included from target.c:17:0:
-> | target-x86.c: In function 'disp_family_model':
-> | target-x86.c:54:3: error: unknown register name '%edx' in 'asm'
-> |    asm("mov $1, %%eax; " /* a into eax */
-> |    ^
-> | target-x86.c:54:3: error: unknown register name '%ecx' in 'asm'
-> | target-x86.c:54:3: error: unknown register name '%ebx' in 'asm'
-> | target-x86.c:54:3: error: unknown register name '%eax' in 'asm'
-> | make[1]: *** [target.o] Error 1
-> | make[1]: *** Waiting for unfinished jobs....
-> | make[1]: Leaving directory
-> `/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/tiptop/2.2-r0/tiptop-2.2/src'
-> | make: *** [all] Error 2 | ERROR: oe_runmake failed
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_compile (log file is located
-> at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/tiptop/2.2-r0/temp/log.do_compile.7484)
-> NOTE: recipe tiptop-2.2-r0: task do_compile: Failed
+> diff --git a/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb
+> b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb new file mode 100644 
+> index 0000000..126976c --- /dev/null +++
+> b/meta-oe/recipes-extended/tiptop/tiptop_2.2.bb @@ -0,0 +1,26 @@ +SUMMARY
+> = "Hardware performance monitoring counters" +HOMEPAGE =
+> "http://tiptop.gforge.inria.fr/" +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" +DEPENDS = "ncurses
+> libxml2" + +SRC_URI =
+> "http://tiptop.gforge.inria.fr/releases/${BP}.tar.gz" +SRC_URI[md5sum] =
+> "74255a29acf44569db021b080ad3e3f7" +SRC_URI[sha256sum] =
+> "965cb99b16cb59df78363d83b62877ce8501b0aac1116a86bed8a16aa96b171d" + 
+> +inherit autotools-brokensep +EXTRA_OECONF = "CFLAGS="$CFLAGS
+> -I${STAGING_INCDIR}/libxml2"" +COMPATIBLE_HOST =
+> "(i.86|x86_64|arm|powerpc).*-linux"
 
-Fixed this issue in v3. Now it can be built successfully in my
-environment(qemuarm & qemuppc). I also removed the
-tiptop-remove-path-of-libxml2.patch in v2 because now it is implemented
-in do_configure_prepend.
+What's broken on mips, armv8 and avr32?
 
--- 
-Qian Lei
+> + +do_configure_prepend () { +    # Two bugs in configure.ac when
+> cross-compiling. +    # 1. The path of libxml2. Specify it in
+> EXTRA_OECONF. +    # 2. hw's value on other platforms. Replace it if the
+> target is +    #    not i*86/x86_64. +    if ( echo "${TARGET_ARCH}" |
+> grep -q -e 'i.86' -e 'x86_64' ); then +        sed -i 's=
+> -I/usr/include/libxml2=='    ${S}/configure.ac +    else +        sed -i
+> 's/hw=`uname -m`/hw="unknown"/'  ${S}/configure.ac +        sed -i 's=
+> -I/usr/include/libxml2=='    ${S}/configure.ac +    fi +}
+
+Drop the conditional, it should *never* use uname.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFUdvGrMkyGM64RGpERAia5AJwKkcp5N1xKAWHA1kCbReH+iwZsWwCfaWvi
+5gv7MvkZZz3lICXG/L4O3Xo=
+=oxk6
+-----END PGP SIGNATURE-----
 
