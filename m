@@ -1,29 +1,35 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C44C601A0
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 19E577239E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Nov 2014 01:39:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44120062"
-Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 28 Nov 2014 09:36:21 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sAS1dIDu012980;
-	Fri, 28 Nov 2014 09:39:18 +0800
-Received: from Fedora (10.167.226.40) by G08CNEXCHPEKD01.g08.fujitsu.local
-	(10.167.33.89) with Microsoft SMTP Server id 14.3.181.6;
-	Fri, 28 Nov 2014 09:39:35 +0800
-Date: Fri, 28 Nov 2014 09:39:32 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20141128093932.1b12eceb@Fedora>
-In-Reply-To: <54772E14.10302@linaro.org>
-References: <1417082531-12508-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-	<54772E14.10302@linaro.org>
-Organization: FNST
-X-Mailer: Claws Mail 3.9.3 (GTK+ 2.24.22; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-Subject: Re: [PATCH] twm: Upgrade to 1.0.8
+	Fri, 28 Nov 2014 05:34:17 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id rd3so6151979pab.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Nov 2014 21:34:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=REscM2s4ZmQ65090KgF4xqWW9SHfY2a/EeFVD7REr/c=;
+	b=GPNTObFr21VsWj75AVnD7X9kG0RW7+jvnsITpgwk4aScryabOOJzhwXQii+emlAZov
+	olsrThd26p5Bxyy4AS1shBN40zVcnvVwJ4bfU2ZAXuMhNvXQBFuhCOQcvJKEc7TX169D
+	phniDkeAjSlVQWrBFPTmT6tY3Xiy/GBNbY4XczglushAU7umpf702RlXkX/E1+j6eZP4
+	9Ksz7kW1ZT7T2AeVUMH1l4VqhlH+Qd/7QOJm7dvNJxYs+ef0rcbkRGvaklDd5OzmPvVj
+	L3ZgMX5cwXZcGeobs+I59RT/wfDK9DD+DuoMEkq2M/VsfM6QhAi1qfjbBy2n3XqXuw0M
+	83iQ==
+X-Received: by 10.68.217.197 with SMTP id pa5mr68991756pbc.32.1417152858608;
+	Thu, 27 Nov 2014 21:34:18 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id x10sm8696360pdr.11.2014.11.27.21.34.16
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 27 Nov 2014 21:34:17 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Nov 2014 21:34:02 -0800
+Message-Id: <1417152844-23643-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH 0/2] two more Netkit packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,18 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Nov 2014 01:39:40 -0000
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 28 Nov 2014 05:34:20 -0000
 
-On Thu, 27 Nov 2014 08:58:44 -0500
-Trevor Woerner <trevor.woerner@linaro.org> wrote:
+Please consider these two packages for inclusion to meta-networking.
+I have placed them in their own recipes location for others from the family to be added later.
 
-> Perhaps the -M option should have been used here?
+Armin Kuster (2):
+  New package: netkit-rsh
+  New package: Netkit-ftp
 
-Thanks for your advice. I'll use this option next time I rename
-some files.
+ .../netkit-ftp/files/Add_ARG_MAX_define.patch      | 28 ++++++++++
+ .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   | 46 ++++++++++++++++
+ .../files/rsh-redone_link_order_file.patch         | 64 ++++++++++++++++++++++
+ .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   | 61 +++++++++++++++++++++
+ 4 files changed, 199 insertions(+)
+ create mode 100644 meta-networking/recipes-netkit/netkit-ftp/files/Add_ARG_MAX_define.patch
+ create mode 100644 meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/files/rsh-redone_link_order_file.patch
+ create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
 
 -- 
-Qian Lei
+1.9.1
+
 
