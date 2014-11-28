@@ -1,37 +1,48 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id AC808722FB
+Return-Path: <fan.xin@jp.fujitsu.com>
+X-Greylist: delayed 346 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 28 Nov 2014 06:12:02 UTC
+Received: from fgwmail7.fujitsu.co.jp (fgwmail7.fujitsu.co.jp [192.51.44.37])
+	by mail.openembedded.org (Postfix) with ESMTP id 1611F722FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Nov 2014 05:34:22 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id kq14so6147268pab.40
+	Fri, 28 Nov 2014 06:12:02 +0000 (UTC)
+Received: from fgwmail5.fujitsu.co.jp (fgwmail5.fujitsu.co.jp [192.51.44.35])
+	by fgwmail7.fujitsu.co.jp (Postfix) with ESMTP id 8705A179351B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Nov 2014 21:34:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IpBPiN0+uPmwYZn0HAEUUUt+QiiJObon9qu9skzzZdU=;
-	b=n0D+uI/BzoLJEXKK0yDR0mVq9x17ad9vtWgfCXMeC4+wdapWXlpKF7fEvQFnCwUQXj
-	ujTcKZZlvWoADpLp06mqDlDd97oZG7+EmI5XL97z8Fj/vn6pvKdnmqRYCiE/t4irn42d
-	eK4Oj3h/UHPgbi3iFh8WlCPode1bblKqqdbb5w+ZK1zVKDZJBBeUjsPMirOi2yYMwAaX
-	/QECXqHXyJ5HAhxChkt2/v9XTIDQ+1WuG9fl7H/UXQLrIoWUacJHyO3MNZoPCfcXZqQ6
-	0bT/fvs1g+6F0letYMoMmA5YA7zWsB3Ql1or4kt+MXHRZM6L6df82+QKTBmD/REB/M2D
-	utZA==
-X-Received: by 10.68.69.81 with SMTP id c17mr63799019pbu.107.1417152862864;
-	Thu, 27 Nov 2014 21:34:22 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id x10sm8696360pdr.11.2014.11.27.21.34.20
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 27 Nov 2014 21:34:21 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Nov 2014 21:34:04 -0800
-Message-Id: <1417152844-23643-3-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1417152844-23643-1-git-send-email-akuster808@gmail.com>
-References: <1417152844-23643-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-networking][PATCH 2/2] New package: Netkit-ftp
+	Fri, 28 Nov 2014 15:06:28 +0900 (JST)
+Received: from kw-mxq.gw.nic.fujitsu.com (unknown [10.0.237.131])
+	by fgwmail5.fujitsu.co.jp (Postfix) with ESMTP id A37643EE0AE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Nov 2014 15:06:16 +0900 (JST)
+Received: from s1.gw.fujitsu.co.jp (s1.gw.fujitsu.co.jp [10.0.50.91])
+	by kw-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id BC15CAC0892
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Nov 2014 15:06:15 +0900 (JST)
+Received: from g01jpfmpwyt02.exch.g01.fujitsu.local
+	(g01jpfmpwyt02.exch.g01.fujitsu.local [10.128.193.56])
+	by s1.gw.fujitsu.co.jp (Postfix) with ESMTP id 235EBE38006
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Nov 2014 15:06:15 +0900 (JST)
+Received: from g01jpexchyt38.g01.fujitsu.local (unknown [10.128.193.4])
+	by g01jpfmpwyt02.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	B1B05584270 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Nov 2014 15:05:37 +0900 (JST)
+Received: from G01JPEXMBYT21.g01.fujitsu.local ([10.128.193.129]) by
+	g01jpexchyt38 ([10.128.193.68]) with mapi id 14.03.0181.007;
+	Fri, 28 Nov 2014 15:05:38 +0900
+From: "Fan, Xin" <fan.xin@jp.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe]Question about ntp build option
+Thread-Index: AdAK0VtINHgNZV7eTj233byq3SscbA==
+Date: Fri, 28 Nov 2014 06:05:36 +0000
+Message-ID: <72334B6CF8FF6542A565D43122925D601999FF@G01JPEXMBYT21>
+Accept-Language: ja-JP, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.24.19.50]
+MIME-Version: 1.0
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+Subject: Question about ntp build option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,103 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Nov 2014 05:34:22 -0000
+X-List-Received-Date: Fri, 28 Nov 2014 06:12:05 -0000
+Content-Language: ja-JP
+Content-Type: text/plain; charset="iso-2022-jp"
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../netkit-ftp/files/Add_ARG_MAX_define.patch      | 28 +++++++++++++
- .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   | 46 ++++++++++++++++++++++
- 2 files changed, 74 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-ftp/files/Add_ARG_MAX_define.patch
- create mode 100644 meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+Hello,
 
-diff --git a/meta-networking/recipes-netkit/netkit-ftp/files/Add_ARG_MAX_define.patch b/meta-networking/recipes-netkit/netkit-ftp/files/Add_ARG_MAX_define.patch
-new file mode 100644
-index 0000000..5a47fd9
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-ftp/files/Add_ARG_MAX_define.patch
-@@ -0,0 +1,28 @@
-+This adds ARG_MAX define to be _SC_ARG_MAX
-+
-+Upstream-Status: Inappropriate.
-+Most distros have their own verion for this fix.
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+Index: netkit-ftp-0.17/ftp/glob.c
-+===================================================================
-+--- netkit-ftp-0.17.orig/ftp/glob.c
-++++ netkit-ftp-0.17/ftp/glob.c
-+@@ -50,6 +50,7 @@ char glob_rcsid[] =
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-++#include <unistd.h>
-+ 
-+ #include "ftp_var.h"  /* for protos only */
-+ #include "glob.h"
-+@@ -57,6 +58,9 @@ char glob_rcsid[] =
-+ #define	QUOTE 0200
-+ #define	TRIM 0177
-+ #define	eq(a,b)		(strcmp(a, b)==0)
-++#ifndef ARG_MAX
-++#define ARG_MAX (sysconf(_SC_ARG_MAX))
-++#endif
-+ #define	GAVSIZ		(ARG_MAX/6)
-+ #define	isdir(d)	((d.st_mode & S_IFMT) == S_IFDIR)
-diff --git a/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
-new file mode 100644
-index 0000000..8bac049
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
-@@ -0,0 +1,46 @@
-+DESCRIPTION = "netkit-ft includes the ftp client."
-+SECTION = "networking"
-+HOMEPAGE="ftp://ftp.uk.linux.org/pub/linux/Networking/netkit"
-+LICENSE = "BSD"
-+
-+LIC_FILES_CHKSUM = "file://ftp/ftp.c;beginline=2;endline=3;md5=2d40a75a50d83b8f6317b3f53db72bfa"
-+
-+SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-ftp/netkit-ftp_${PV}.orig.tar.gz;name=archive \
-+            ${DEBIAN_MIRROR}/main/n/netkit-ftp/netkit-ftp_${PV}-31.debian.tar.xz;name=patch31 \
-+            file://Add_ARG_MAX_define.patch \
-+"
-+
-+SRC_URI[archive.md5sum] = "94441610c9b86ef45c4c6ec609444060"
-+SRC_URI[archive.sha256sum] = "61c913299b81a4671ff089aac821329f7db9bc111aa812993dd585798b700349"
-+SRC_URI[patch31.md5sum] = "93d71e28ce70df69e080c7f90da63cac"
-+SRC_URI[patch31.sha256sum] = "4edd46a32d70daa7ba00f0ebf0118dc5d17dff23d6e46aa21a2722be2e22d1c1"
-+
-+inherit autotools-brokensep
-+
-+do_configure () {
-+    ./configure --prefix=${prefix}
-+    echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
-+}
-+
-+BINMODE = "0755"
-+MANMODE = "0644"
-+
-+do_install () {
-+    install -d ${D}${bindir}
-+    install -d ${D}${mandir}/man1
-+    install -d ${D}${mandir}/man5
-+
-+    install -m${BINMODE} ${S}/ftp/ftp ${D}${bindir}
-+    ln -sf ${D}${bindir}/ftp ${D}${bindir}/pftp
-+    install -m${MANMODE} ${S}/ftp/ftp.1 ${D}${mandir}/man1
-+    ln -sf ftp.1 ${D}${mandir}/man1/pftp.1
-+    install -m${MANMODE} ${S}/ftp/netrc.5 ${D}${mandir}/man5
-+}
-+
-+PACKAGES = "${PN} ${PN}-doc ${BPN}-dbg"
-+FILES_${PN} = "${bindir}/*"
-+FILES_${PN}-doc = "${mandir}"
-+FILES_${PN}-dbg = "${prefix}/src/debug \
-+            ${bindir}/.debug"
-+
-+RDEPENDS_${PN} = "readline"
--- 
-1.9.1
+I wonder that why the ntp uses the without-openssl build option and disables the 
+openssl by default.
 
+In my opinion, the ntp needs openssl to support public key cryptography and it
+should be enabled by default.
+
+Does anyone know the reason?
+
+Best regards
+Fan
+
+=====================================================
+Fujitsu Computer Technology
+Fan Xin
+fan.xin@jp.fujitsu.com
 
