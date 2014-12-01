@@ -1,32 +1,41 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F75A7147B
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id AC36772262
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Nov 2014 20:55:02 +0000 (UTC)
-Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
-	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1XvBWJ-0004Lq-EF from Joe_MacDonald@mentor.com ;
-	Sun, 30 Nov 2014 12:55:03 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.3.181.6;
-	Sun, 30 Nov 2014 12:55:02 -0800
-Received: by burninator (Postfix, from userid 1000)	id 5165058044A; Sun, 30
-	Nov 2014 15:55:02 -0500 (EST)
-Date: Sun, 30 Nov 2014 15:55:02 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Li xin <lixin.fnst@cn.fujitsu.com>
-Message-ID: <20141130205502.GS3886@mentor.com>
-References: <20141121140331.GA20204@mentor.com>
-	<1417075397-2168-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-MIME-Version: 1.0
-In-Reply-To: <1417075397-2168-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v2] open-iscsi : add recipe
+	Mon,  1 Dec 2014 01:04:26 +0000 (UTC)
+Received: by mail-pa0-f47.google.com with SMTP id kq14so9946648pab.34
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Nov 2014 17:04:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:in-reply-to:references;
+	bh=4VXGgCRG2xEE2xMBcWbmQZSWqVrNQT22LJTwjLmiwxM=;
+	b=0cESgzgBKSp8gjJGO7ijQL7bWSqqh7fWXyAz8VhHAR2HIBifAp6OcXmToVVCDbpF6k
+	bmbKbOLq7luVY9nMBYKvh4Yzutys1Fa155Vlf2ieL/uCjvvMjG75fqDnhTMHwo7v3446
+	ceekzuLbteKaZ480Bq1LD166rv47rGf1c8ZLDMhEmMghRMi5nM6Pn13+5frZ2+CJxEM2
+	rant8ZKK7ERZRdkmtznJKSFy6j5cOGCYfLueRT560UI5ZhIqZJww2K7GEdtgSFgY6Lh4
+	sWiYQIm3zFFbjVqLXbPBbU8qntLNMP87AFGV+OMlrzN1rMnooz2MYWc5ZGPZTeJ0j5z5
+	xWIA==
+X-Received: by 10.66.180.228 with SMTP id dr4mr95589985pac.34.1417395867888;
+	Sun, 30 Nov 2014 17:04:27 -0800 (PST)
+Received: from bigisland.hsd1.ca.comcast.net
+	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
+	by mx.google.com with ESMTPSA id v7sm11872248pdl.5.2014.11.30.17.04.25
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 30 Nov 2014 17:04:26 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 30 Nov 2014 17:04:05 -0800
+Message-Id: <a2804641a7669577a052f65eb9018d6be14f8361.1417194166.git.akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
+References: <cover.1417194166.git.akuster808@gmail.com>
+In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
+References: <cover.1417194166.git.akuster808@gmail.com>
+Cc: otavio@ossystems.com.br
+Subject: [PATCH 03/15] postgresql: add fix for CVE-2014-0064 Security Advisory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,170 +49,659 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Nov 2014 20:55:03 -0000
-X-Groupsio-MsgNum: 53094
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BVQ1RKc6+nLPB5pT"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Dec 2014 01:04:30 -0000
 
---BVQ1RKc6+nLPB5pT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Kang Kai <kai.kang@windriver.com>
 
-Merged, thanks.  I made one minor tweak to the "add includes" patch to
-remove trailing whitespace.
+Multiple integer overflows in the path_in and other unspecified
+functions in PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before
+9.1.12, 9.2.x before 9.2.7, and 9.3.x before 9.3.3 allow remote
+authenticated users to have unspecified impact and attack vectors, which
+trigger a buffer overflow. NOTE: this identifier has been SPLIT due to
+different affected versions; use CVE-2014-2669 for the hstore vector.
 
--J.
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0064
 
-[[oe] [meta-networking][PATCH v2] open-iscsi : add recipe] On 14.11.27 (Thu=
- 16:03) Li xin wrote:
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ ...integer-overflow-to-avoid-buffer-overruns.patch | 605 +++++++++++++++++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |   5 +-
+ 2 files changed, 608 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
 
-> Open-iSCSI project is a high performance, transport
-> independent, multi-platform implementation of RFC3720.
->=20
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> ---
->  .../files/iscsi_sysfs.c-add-include-files.patch    | 26 +++++++++++++++++
->  .../open-iscsi/files/open-iscsi.service            | 18 ++++++++++++
->  .../open-iscsi/open-iscsi_2.0-871.bb               | 34 ++++++++++++++++=
-++++++
->  3 files changed, 78 insertions(+)
->  create mode 100644 meta-networking/recipes-daemons/open-iscsi/files/iscs=
-i_sysfs.c-add-include-files.patch
->  create mode 100644 meta-networking/recipes-daemons/open-iscsi/files/open=
--iscsi.service
->  create mode 100644 meta-networking/recipes-daemons/open-iscsi/open-iscsi=
-_2.0-871.bb
->=20
-> diff --git a/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs=
-=2Ec-add-include-files.patch b/meta-networking/recipes-daemons/open-iscsi/f=
-iles/iscsi_sysfs.c-add-include-files.patch
-> new file mode 100644
-> index 0000000..43c1c36
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-=
-include-files.patch
-> @@ -0,0 +1,26 @@
-> +From e8ecb307b6402b39d033e20f4df4f3374e7c0685 Mon Sep 17 00:00:00 2001
-> +From: Li xin <lixin.fnst@cn.fujitsu.com>
-> +Date: Fri, 21 Nov 2014 12:02:51 +0900
-> +Subject: [PATCH] usr/iscsi_sysfs.c : add include files
-> +
-> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +---
-> + usr/iscsi_sysfs.c | 2 ++
-> + 1 file changed, 2 insertions(+)
-> +
-> +diff --git a/usr/iscsi_sysfs.c b/usr/iscsi_sysfs.c
-> +index cb9a5a1..f6bd78a 100644
-> +--- a/usr/iscsi_sysfs.c
-> ++++ b/usr/iscsi_sysfs.c
-> +@@ -14,6 +14,8 @@
-> +  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-> +  * General Public License for more details.
-> +  */
-> ++#include <sys/types.h>=20
-> ++#include <sys/stat.h>=20
-> + #include <fcntl.h>
-> + #include <unistd.h>
-> + #include <stdlib.h>
-> +--=20
-> +1.8.4.2
-> +
-> diff --git a/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.=
-service b/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.servi=
-ce
-> new file mode 100644
-> index 0000000..debb2d6
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service
-> @@ -0,0 +1,18 @@
-> +[Unit]
-> +Description=3DOpen-iSCSI
-> +Documentation=3Dman:iscsid(8) man:iscsiadm(8)
-> +After=3Dnetwork.target
-> +
-> +[Service]
-> +Type=3Dforking
-> +PIDFile=3D/var/run/iscsid.pid
-> +ExecStartPre=3D-/sbin/modprobe -q iscsi_tcp
-> +ExecStartPre=3D-/sbin/modprobe -q ib_iser
-> +ExecStart=3D/usr/sbin/iscsid -p /var/run/iscsid.pid
-> +ExecStartPost=3D-/usr/sbin/iscsiadm -m node --loginall=3Dautomatic
-> +ExecStopPost=3D/bin/sync
-> +ExecStopPost=3D-/sbin/modprobe -r ib_iser
-> +ExecStopPost=3D-/sbin/modprobe -r iscsi_tcp
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-87=
-1.bb b/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb
-> new file mode 100644
-> index 0000000..99f8657
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb
-> @@ -0,0 +1,34 @@
-> +DESCRIPTION =3D "Open-iSCSI project is a high performance, transport \
-> +independent, multi-platform implementation of RFC3720."
-> +HOMEPAGE =3D "http://www.open-iscsi.org/"
-> +LICENSE =3D "GPL-2.0"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D393a5ca445f6965873eca0259a17f=
-833"
-> +
-> +SRC_URI =3D "http://www.open-iscsi.org/bits/${BP}.tar.gz"
-> +SRC_URI[md5sum] =3D "0c403e8c9ad41607571ba0e6e8ff196e"
-> +SRC_URI[sha256sum] =3D "bcea8746ae82f2ada7bc05d2aa59bcda1ca0d5197f05f2e1=
-6744aae59f0a7dcb"
-> +SRC_URI +=3D "file://iscsi_sysfs.c-add-include-files.patch \
-> +    file://open-iscsi.service"
-> +
-> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
-> +
-> +do_compile () {
-> +    oe_runmake user
-> +}
-> +
-> +do_install_append () {
-> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
-then
-> +        install -d ${D}${systemd_unitdir}/system
-> +        install -m 0644 ${WORKDIR}/open-iscsi.service ${D}${systemd_unit=
-dir}/system/
-> +    fi
-> +}
-> +
-> +do_install () {
-> +    oe_runmake DESTDIR=3D"${D}" install_user
-> +}
-> +
-> +inherit ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','syste=
-md','',d)}
-> +
-> +SYSTEMD_PACKAGES =3D "${PN}"
-> +SYSTEMD_SERVICE_${PN} =3D "open-iscsi.service"
-> +SYSTEMD_AUTO_ENABLE =3D "enable"
-> --=20
-> 1.8.4.2
->=20
---=20
--Joe MacDonald.
-:wq
+diff --git a/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+new file mode 100644
+index 0000000..c8b4c80
+--- /dev/null
++++ b/meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+@@ -0,0 +1,605 @@
++From 12bbce15d93d7692ddff1405aa04b67f8a327f57 Mon Sep 17 00:00:00 2001
++From: Noah Misch <noah@leadboat.com>
++Date: Mon, 17 Feb 2014 09:33:31 -0500
++Subject: [PATCH] Predict integer overflow to avoid buffer overruns.
++
++commit 12bbce15d93d7692ddff1405aa04b67f8a327f57 REL9_2_STABLE
++
++Several functions, mostly type input functions, calculated an allocation
++size such that the calculation wrapped to a small positive value when
++arguments implied a sufficiently-large requirement.  Writes past the end
++of the inadvertent small allocation followed shortly thereafter.
++Coverity identified the path_in() vulnerability; code inspection led to
++the rest.  In passing, add check_stack_depth() to prevent stack overflow
++in related functions.
++
++Back-patch to 8.4 (all supported versions).  The non-comment hstore
++changes touch code that did not exist in 8.4, so that part stops at 9.0.
++
++Noah Misch and Heikki Linnakangas, reviewed by Tom Lane.
++
++Security: CVE-2014-0064
++
++Upstream-Status: Backport
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ contrib/hstore/hstore.h              |   15 ++++++++++++---
++ contrib/hstore/hstore_io.c           |   21 +++++++++++++++++++++
++ contrib/hstore/hstore_op.c           |   15 +++++++++++++++
++ contrib/intarray/_int.h              |    2 ++
++ contrib/intarray/_int_bool.c         |    9 +++++++++
++ contrib/ltree/ltree.h                |    3 +++
++ contrib/ltree/ltree_io.c             |   11 +++++++++++
++ contrib/ltree/ltxtquery_io.c         |   13 ++++++++++++-
++ src/backend/utils/adt/geo_ops.c      |   30 ++++++++++++++++++++++++++++--
++ src/backend/utils/adt/tsquery.c      |    7 ++++++-
++ src/backend/utils/adt/tsquery_util.c |    5 +++++
++ src/backend/utils/adt/txid.c         |   15 +++++----------
++ src/backend/utils/adt/varbit.c       |   32 ++++++++++++++++++++++++++++++--
++ src/include/tsearch/ts_type.h        |    3 +++
++ src/include/utils/varbit.h           |    7 +++++++
++ 15 files changed, 169 insertions(+), 19 deletions(-)
++
++diff --git a/contrib/hstore/hstore.h b/contrib/hstore/hstore.h
++index 8906397..4e55f6e 100644
++--- a/contrib/hstore/hstore.h
+++++ b/contrib/hstore/hstore.h
++@@ -49,9 +49,12 @@ typedef struct
++ } HStore;
++ 
++ /*
++- * it's not possible to get more than 2^28 items into an hstore,
++- * so we reserve the top few bits of the size field. See hstore_compat.c
++- * for one reason why.	Some bits are left for future use here.
+++ * It's not possible to get more than 2^28 items into an hstore, so we reserve
+++ * the top few bits of the size field.  See hstore_compat.c for one reason
+++ * why.  Some bits are left for future use here.  MaxAllocSize makes the
+++ * practical count limit slightly more than 2^28 / 3, or INT_MAX / 24, the
+++ * limit for an hstore full of 4-byte keys and null values.  Therefore, we
+++ * don't explicitly check the format-imposed limit.
++  */
++ #define HS_FLAG_NEWVERSION 0x80000000
++ 
++@@ -59,6 +62,12 @@ typedef struct
++ #define HS_SETCOUNT(hsp_,c_) ((hsp_)->size_ = (c_) | HS_FLAG_NEWVERSION)
++ 
++ 
+++/*
+++ * "x" comes from an existing HS_COUNT() (as discussed, <= INT_MAX/24) or a
+++ * Pairs array length (due to MaxAllocSize, <= INT_MAX/40).  "lenstr" is no
+++ * more than INT_MAX, that extreme case arising in hstore_from_arrays().
+++ * Therefore, this calculation is limited to about INT_MAX / 5 + INT_MAX.
+++ */
++ #define HSHRDSIZE	(sizeof(HStore))
++ #define CALCDATASIZE(x, lenstr) ( (x) * 2 * sizeof(HEntry) + HSHRDSIZE + (lenstr) )
++ 
++diff --git a/contrib/hstore/hstore_io.c b/contrib/hstore/hstore_io.c
++index dde6c4b..5bcdc95 100644
++--- a/contrib/hstore/hstore_io.c
+++++ b/contrib/hstore/hstore_io.c
++@@ -9,6 +9,7 @@
++ #include "funcapi.h"
++ #include "libpq/pqformat.h"
++ #include "utils/lsyscache.h"
+++#include "utils/memutils.h"
++ #include "utils/typcache.h"
++ 
++ #include "hstore.h"
++@@ -437,6 +438,11 @@ hstore_recv(PG_FUNCTION_ARGS)
++ 		PG_RETURN_POINTER(out);
++ 	}
++ 
+++	if (pcount < 0 || pcount > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 pcount, (int) (MaxAllocSize / sizeof(Pairs)))));
++ 	pairs = palloc(pcount * sizeof(Pairs));
++ 
++ 	for (i = 0; i < pcount; ++i)
++@@ -552,6 +558,13 @@ hstore_from_arrays(PG_FUNCTION_ARGS)
++ 					  TEXTOID, -1, false, 'i',
++ 					  &key_datums, &key_nulls, &key_count);
++ 
+++	/* see discussion in hstoreArrayToPairs() */
+++	if (key_count > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
+++
++ 	/* value_array might be NULL */
++ 
++ 	if (PG_ARGISNULL(1))
++@@ -674,6 +687,13 @@ hstore_from_array(PG_FUNCTION_ARGS)
++ 
++ 	count = in_count / 2;
++ 
+++	/* see discussion in hstoreArrayToPairs() */
+++	if (count > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 count, (int) (MaxAllocSize / sizeof(Pairs)))));
+++
++ 	pairs = palloc(count * sizeof(Pairs));
++ 
++ 	for (i = 0; i < count; ++i)
++@@ -805,6 +825,7 @@ hstore_from_record(PG_FUNCTION_ARGS)
++ 		my_extra->ncolumns = ncolumns;
++ 	}
++ 
+++	Assert(ncolumns <= MaxTupleAttributeNumber);		/* thus, no overflow */
++ 	pairs = palloc(ncolumns * sizeof(Pairs));
++ 
++ 	if (rec)
++diff --git a/contrib/hstore/hstore_op.c b/contrib/hstore/hstore_op.c
++index fee2c3c..8de175a 100644
++--- a/contrib/hstore/hstore_op.c
+++++ b/contrib/hstore/hstore_op.c
++@@ -7,6 +7,7 @@
++ #include "catalog/pg_type.h"
++ #include "funcapi.h"
++ #include "utils/builtins.h"
+++#include "utils/memutils.h"
++ 
++ #include "hstore.h"
++ 
++@@ -89,6 +90,19 @@ hstoreArrayToPairs(ArrayType *a, int *npairs)
++ 		return NULL;
++ 	}
++ 
+++	/*
+++	 * A text array uses at least eight bytes per element, so any overflow in
+++	 * "key_count * sizeof(Pairs)" is small enough for palloc() to catch.
+++	 * However, credible improvements to the array format could invalidate
+++	 * that assumption.  Therefore, use an explicit check rather than relying
+++	 * on palloc() to complain.
+++	 */
+++	if (key_count > MaxAllocSize / sizeof(Pairs))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			  errmsg("number of pairs (%d) exceeds the maximum allowed (%d)",
+++					 key_count, (int) (MaxAllocSize / sizeof(Pairs)))));
+++
++ 	key_pairs = palloc(sizeof(Pairs) * key_count);
++ 
++ 	for (i = 0, j = 0; i < key_count; i++)
++@@ -647,6 +661,7 @@ hstore_slice_to_hstore(PG_FUNCTION_ARGS)
++ 		PG_RETURN_POINTER(out);
++ 	}
++ 
+++	/* hstoreArrayToPairs() checked overflow */
++ 	out_pairs = palloc(sizeof(Pairs) * nkeys);
++ 	bufsiz = 0;
++ 
++diff --git a/contrib/intarray/_int.h b/contrib/intarray/_int.h
++index 11c0698..755cd9e 100644
++--- a/contrib/intarray/_int.h
+++++ b/contrib/intarray/_int.h
++@@ -5,6 +5,7 @@
++ #define ___INT_H__
++ 
++ #include "utils/array.h"
+++#include "utils/memutils.h"
++ 
++ /* number ranges for compression */
++ #define MAXNUMRANGE 100
++@@ -137,6 +138,7 @@ typedef struct QUERYTYPE
++ 
++ #define HDRSIZEQT	offsetof(QUERYTYPE, items)
++ #define COMPUTESIZE(size)	( HDRSIZEQT + (size) * sizeof(ITEM) )
+++#define QUERYTYPEMAXITEMS	((MaxAllocSize - HDRSIZEQT) / sizeof(ITEM))
++ #define GETQUERY(x)  ( (x)->items )
++ 
++ /* "type" codes for ITEM */
++diff --git a/contrib/intarray/_int_bool.c b/contrib/intarray/_int_bool.c
++index 4e63f6d..62294d1 100644
++--- a/contrib/intarray/_int_bool.c
+++++ b/contrib/intarray/_int_bool.c
++@@ -451,6 +451,9 @@ boolop(PG_FUNCTION_ARGS)
++ static void
++ findoprnd(ITEM *ptr, int4 *pos)
++ {
+++	/* since this function recurses, it could be driven to stack overflow. */
+++	check_stack_depth();
+++
++ #ifdef BS_DEBUG
++ 	elog(DEBUG3, (ptr[*pos].type == OPR) ?
++ 		 "%d  %c" : "%d  %d", *pos, ptr[*pos].val);
++@@ -511,7 +514,13 @@ bqarr_in(PG_FUNCTION_ARGS)
++ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
++ 				 errmsg("empty query")));
++ 
+++	if (state.num > QUERYTYPEMAXITEMS)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++		errmsg("number of query items (%d) exceeds the maximum allowed (%d)",
+++			   state.num, (int) QUERYTYPEMAXITEMS)));
++ 	commonlen = COMPUTESIZE(state.num);
+++
++ 	query = (QUERYTYPE *) palloc(commonlen);
++ 	SET_VARSIZE(query, commonlen);
++ 	query->size = state.num;
++diff --git a/contrib/ltree/ltree.h b/contrib/ltree/ltree.h
++index aec4458..49e9907 100644
++--- a/contrib/ltree/ltree.h
+++++ b/contrib/ltree/ltree.h
++@@ -5,6 +5,7 @@
++ 
++ #include "fmgr.h"
++ #include "tsearch/ts_locale.h"
+++#include "utils/memutils.h"
++ 
++ typedef struct
++ {
++@@ -111,6 +112,8 @@ typedef struct
++ 
++ #define HDRSIZEQT		MAXALIGN(VARHDRSZ + sizeof(int4))
++ #define COMPUTESIZE(size,lenofoperand)	( HDRSIZEQT + (size) * sizeof(ITEM) + (lenofoperand) )
+++#define LTXTQUERY_TOO_BIG(size,lenofoperand) \
+++	((size) > (MaxAllocSize - HDRSIZEQT - (lenofoperand)) / sizeof(ITEM))
++ #define GETQUERY(x)  (ITEM*)( (char*)(x)+HDRSIZEQT )
++ #define GETOPERAND(x)	( (char*)GETQUERY(x) + ((ltxtquery*)x)->size * sizeof(ITEM) )
++ 
++diff --git a/contrib/ltree/ltree_io.c b/contrib/ltree/ltree_io.c
++index 3e88b81..d64debb 100644
++--- a/contrib/ltree/ltree_io.c
+++++ b/contrib/ltree/ltree_io.c
++@@ -8,6 +8,7 @@
++ #include <ctype.h>
++ 
++ #include "ltree.h"
+++#include "utils/memutils.h"
++ #include "crc32.h"
++ 
++ PG_FUNCTION_INFO_V1(ltree_in);
++@@ -64,6 +65,11 @@ ltree_in(PG_FUNCTION_ARGS)
++ 		ptr += charlen;
++ 	}
++ 
+++	if (num + 1 > MaxAllocSize / sizeof(nodeitem))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
+++					num + 1, (int) (MaxAllocSize / sizeof(nodeitem)))));
++ 	list = lptr = (nodeitem *) palloc(sizeof(nodeitem) * (num + 1));
++ 	ptr = buf;
++ 	while (*ptr)
++@@ -228,6 +234,11 @@ lquery_in(PG_FUNCTION_ARGS)
++ 	}
++ 
++ 	num++;
+++	if (num > MaxAllocSize / ITEMSIZE)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++			 errmsg("number of levels (%d) exceeds the maximum allowed (%d)",
+++					num, (int) (MaxAllocSize / ITEMSIZE))));
++ 	curqlevel = tmpql = (lquery_level *) palloc0(ITEMSIZE * num);
++ 	ptr = buf;
++ 	while (*ptr)
++diff --git a/contrib/ltree/ltxtquery_io.c b/contrib/ltree/ltxtquery_io.c
++index 826f4e1..13ea58d 100644
++--- a/contrib/ltree/ltxtquery_io.c
+++++ b/contrib/ltree/ltxtquery_io.c
++@@ -9,6 +9,7 @@
++ 
++ #include "crc32.h"
++ #include "ltree.h"
+++#include "miscadmin.h"
++ 
++ PG_FUNCTION_INFO_V1(ltxtq_in);
++ Datum		ltxtq_in(PG_FUNCTION_ARGS);
++@@ -213,6 +214,9 @@ makepol(QPRS_STATE *state)
++ 	int4		lenstack = 0;
++ 	uint16		flag = 0;
++ 
+++	/* since this function recurses, it could be driven to stack overflow */
+++	check_stack_depth();
+++
++ 	while ((type = gettoken_query(state, &val, &lenval, &strval, &flag)) != END)
++ 	{
++ 		switch (type)
++@@ -277,6 +281,9 @@ makepol(QPRS_STATE *state)
++ static void
++ findoprnd(ITEM *ptr, int4 *pos)
++ {
+++	/* since this function recurses, it could be driven to stack overflow. */
+++	check_stack_depth();
+++
++ 	if (ptr[*pos].type == VAL || ptr[*pos].type == VALTRUE)
++ 	{
++ 		ptr[*pos].left = 0;
++@@ -341,8 +348,12 @@ queryin(char *buf)
++ 				 errmsg("syntax error"),
++ 				 errdetail("Empty query.")));
++ 
++-	/* make finish struct */
+++	if (LTXTQUERY_TOO_BIG(state.num, state.sumlen))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("ltxtquery is too large")));
++ 	commonlen = COMPUTESIZE(state.num, state.sumlen);
+++
++ 	query = (ltxtquery *) palloc(commonlen);
++ 	SET_VARSIZE(query, commonlen);
++ 	query->size = state.num;
++diff --git a/src/backend/utils/adt/geo_ops.c b/src/backend/utils/adt/geo_ops.c
++index ac7b4b8..7ebcaaa 100644
++--- a/src/backend/utils/adt/geo_ops.c
+++++ b/src/backend/utils/adt/geo_ops.c
++@@ -1403,6 +1403,7 @@ path_in(PG_FUNCTION_ARGS)
++ 	char	   *s;
++ 	int			npts;
++ 	int			size;
+++	int			base_size;
++ 	int			depth = 0;
++ 
++ 	if ((npts = pair_count(str, ',')) <= 0)
++@@ -1421,7 +1422,15 @@ path_in(PG_FUNCTION_ARGS)
++ 		depth++;
++ 	}
++ 
++-	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * npts;
+++	base_size = sizeof(path->p[0]) * npts;
+++	size = offsetof(PATH, p[0]) + base_size;
+++
+++	/* Check for integer overflow */
+++	if (base_size / npts != sizeof(path->p[0]) || size <= base_size)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("too many points requested")));
+++
++ 	path = (PATH *) palloc(size);
++ 
++ 	SET_VARSIZE(path, size);
++@@ -3465,6 +3474,7 @@ poly_in(PG_FUNCTION_ARGS)
++ 	POLYGON    *poly;
++ 	int			npts;
++ 	int			size;
+++	int			base_size;
++ 	int			isopen;
++ 	char	   *s;
++ 
++@@ -3473,7 +3483,15 @@ poly_in(PG_FUNCTION_ARGS)
++ 				(errcode(ERRCODE_INVALID_TEXT_REPRESENTATION),
++ 			  errmsg("invalid input syntax for type polygon: \"%s\"", str)));
++ 
++-	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * npts;
+++	base_size = sizeof(poly->p[0]) * npts;
+++	size = offsetof(POLYGON, p[0]) + base_size;
+++
+++	/* Check for integer overflow */
+++	if (base_size / npts != sizeof(poly->p[0]) || size <= base_size)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("too many points requested")));
+++
++ 	poly = (POLYGON *) palloc0(size);	/* zero any holes */
++ 
++ 	SET_VARSIZE(poly, size);
++@@ -4379,6 +4397,10 @@ path_poly(PG_FUNCTION_ARGS)
++ 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
++ 				 errmsg("open path cannot be converted to polygon")));
++ 
+++	/*
+++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
+++	 * just a small constant larger.
+++	 */
++ 	size = offsetof(POLYGON, p[0]) +sizeof(poly->p[0]) * path->npts;
++ 	poly = (POLYGON *) palloc(size);
++ 
++@@ -4484,6 +4506,10 @@ poly_path(PG_FUNCTION_ARGS)
++ 	int			size;
++ 	int			i;
++ 
+++	/*
+++	 * Never overflows: the old size fit in MaxAllocSize, and the new size is
+++	 * smaller by a small constant.
+++	 */
++ 	size = offsetof(PATH, p[0]) +sizeof(path->p[0]) * poly->npts;
++ 	path = (PATH *) palloc(size);
++ 
++diff --git a/src/backend/utils/adt/tsquery.c b/src/backend/utils/adt/tsquery.c
++index 6e1f8cf..1322b5e 100644
++--- a/src/backend/utils/adt/tsquery.c
+++++ b/src/backend/utils/adt/tsquery.c
++@@ -515,8 +515,13 @@ parse_tsquery(char *buf,
++ 		return query;
++ 	}
++ 
++-	/* Pack the QueryItems in the final TSQuery struct to return to caller */
+++	if (TSQUERY_TOO_BIG(list_length(state.polstr), state.sumlen))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("tsquery is too large")));
++ 	commonlen = COMPUTESIZE(list_length(state.polstr), state.sumlen);
+++
+++	/* Pack the QueryItems in the final TSQuery struct to return to caller */
++ 	query = (TSQuery) palloc0(commonlen);
++ 	SET_VARSIZE(query, commonlen);
++ 	query->size = list_length(state.polstr);
++diff --git a/src/backend/utils/adt/tsquery_util.c b/src/backend/utils/adt/tsquery_util.c
++index 0724d33..9003702 100644
++--- a/src/backend/utils/adt/tsquery_util.c
+++++ b/src/backend/utils/adt/tsquery_util.c
++@@ -333,6 +333,11 @@ QTN2QT(QTNode *in)
++ 	QTN2QTState state;
++ 
++ 	cntsize(in, &sumlen, &nnode);
+++
+++	if (TSQUERY_TOO_BIG(nnode, sumlen))
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("tsquery is too large")));
++ 	len = COMPUTESIZE(nnode, sumlen);
++ 
++ 	out = (TSQuery) palloc0(len);
++diff --git a/src/backend/utils/adt/txid.c b/src/backend/utils/adt/txid.c
++index 08a8c89..c71daaf 100644
++--- a/src/backend/utils/adt/txid.c
+++++ b/src/backend/utils/adt/txid.c
++@@ -27,6 +27,7 @@
++ #include "miscadmin.h"
++ #include "libpq/pqformat.h"
++ #include "utils/builtins.h"
+++#include "utils/memutils.h"
++ #include "utils/snapmgr.h"
++ 
++ 
++@@ -66,6 +67,8 @@ typedef struct
++ 
++ #define TXID_SNAPSHOT_SIZE(nxip) \
++ 	(offsetof(TxidSnapshot, xip) + sizeof(txid) * (nxip))
+++#define TXID_SNAPSHOT_MAX_NXIP \
+++	((MaxAllocSize - offsetof(TxidSnapshot, xip)) / sizeof(txid))
++ 
++ /*
++  * Epoch values from xact.c
++@@ -445,20 +448,12 @@ txid_snapshot_recv(PG_FUNCTION_ARGS)
++ 	txid		last = 0;
++ 	int			nxip;
++ 	int			i;
++-	int			avail;
++-	int			expect;
++ 	txid		xmin,
++ 				xmax;
++ 
++-	/*
++-	 * load nxip and check for nonsense.
++-	 *
++-	 * (nxip > avail) check is against int overflows in 'expect'.
++-	 */
+++	/* load and validate nxip */
++ 	nxip = pq_getmsgint(buf, 4);
++-	avail = buf->len - buf->cursor;
++-	expect = 8 + 8 + nxip * 8;
++-	if (nxip < 0 || nxip > avail || expect > avail)
+++	if (nxip < 0 || nxip > TXID_SNAPSHOT_MAX_NXIP)
++ 		goto bad_format;
++ 
++ 	xmin = pq_getmsgint64(buf);
++diff --git a/src/backend/utils/adt/varbit.c b/src/backend/utils/adt/varbit.c
++index 2bcf5b8..0deefda 100644
++--- a/src/backend/utils/adt/varbit.c
+++++ b/src/backend/utils/adt/varbit.c
++@@ -148,12 +148,22 @@ bit_in(PG_FUNCTION_ARGS)
++ 		sp = input_string;
++ 	}
++ 
+++	/*
+++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
+++	 * input is small enough, but we must check hex input.
+++	 */
++ 	slen = strlen(sp);
++-	/* Determine bitlength from input string */
++ 	if (bit_not_hex)
++ 		bitlen = slen;
++ 	else
+++	{
+++		if (slen > VARBITMAXLEN / 4)
+++			ereport(ERROR,
+++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("bit string length exceeds the maximum allowed (%d)",
+++						VARBITMAXLEN)));
++ 		bitlen = slen * 4;
+++	}
++ 
++ 	/*
++ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
++@@ -450,12 +460,22 @@ varbit_in(PG_FUNCTION_ARGS)
++ 		sp = input_string;
++ 	}
++ 
+++	/*
+++	 * Determine bitlength from input string.  MaxAllocSize ensures a regular
+++	 * input is small enough, but we must check hex input.
+++	 */
++ 	slen = strlen(sp);
++-	/* Determine bitlength from input string */
++ 	if (bit_not_hex)
++ 		bitlen = slen;
++ 	else
+++	{
+++		if (slen > VARBITMAXLEN / 4)
+++			ereport(ERROR,
+++					(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("bit string length exceeds the maximum allowed (%d)",
+++						VARBITMAXLEN)));
++ 		bitlen = slen * 4;
+++	}
++ 
++ 	/*
++ 	 * Sometimes atttypmod is not supplied. If it is supplied we need to make
++@@ -535,6 +555,9 @@ varbit_in(PG_FUNCTION_ARGS)
++ /*
++  * varbit_out -
++  *	  Prints the string as bits to preserve length accurately
+++ *
+++ * XXX varbit_recv() and hex input to varbit_in() can load a value that this
+++ * cannot emit.  Consider using hex output for such values.
++  */
++ Datum
++ varbit_out(PG_FUNCTION_ARGS)
++@@ -944,6 +967,11 @@ bit_catenate(VarBit *arg1, VarBit *arg2)
++ 	bitlen1 = VARBITLEN(arg1);
++ 	bitlen2 = VARBITLEN(arg2);
++ 
+++	if (bitlen1 > VARBITMAXLEN - bitlen2)
+++		ereport(ERROR,
+++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+++				 errmsg("bit string length exceeds the maximum allowed (%d)",
+++						VARBITMAXLEN)));
++ 	bytelen = VARBITTOTALLEN(bitlen1 + bitlen2);
++ 
++ 	result = (VarBit *) palloc(bytelen);
++diff --git a/src/include/tsearch/ts_type.h b/src/include/tsearch/ts_type.h
++index 3adc336..9ee5610 100644
++--- a/src/include/tsearch/ts_type.h
+++++ b/src/include/tsearch/ts_type.h
++@@ -13,6 +13,7 @@
++ #define _PG_TSTYPE_H_
++ 
++ #include "fmgr.h"
+++#include "utils/memutils.h"
++ #include "utils/pg_crc.h"
++ 
++ 
++@@ -244,6 +245,8 @@ typedef TSQueryData *TSQuery;
++  * QueryItems, and lenofoperand is the total length of all operands
++  */
++ #define COMPUTESIZE(size, lenofoperand) ( HDRSIZETQ + (size) * sizeof(QueryItem) + (lenofoperand) )
+++#define TSQUERY_TOO_BIG(size, lenofoperand) \
+++	((size) > (MaxAllocSize - HDRSIZETQ - (lenofoperand)) / sizeof(QueryItem))
++ 
++ /* Returns a pointer to the first QueryItem in a TSQuery */
++ #define GETQUERY(x)  ((QueryItem*)( (char*)(x)+HDRSIZETQ ))
++diff --git a/src/include/utils/varbit.h b/src/include/utils/varbit.h
++index 52dca8b..61531a8 100644
++--- a/src/include/utils/varbit.h
+++++ b/src/include/utils/varbit.h
++@@ -15,6 +15,8 @@
++ #ifndef VARBIT_H
++ #define VARBIT_H
++ 
+++#include <limits.h>
+++
++ #include "fmgr.h"
++ 
++ /*
++@@ -53,6 +55,11 @@ typedef struct
++ /* Number of bytes needed to store a bit string of a given length */
++ #define VARBITTOTALLEN(BITLEN)	(((BITLEN) + BITS_PER_BYTE-1)/BITS_PER_BYTE + \
++ 								 VARHDRSZ + VARBITHDRSZ)
+++/*
+++ * Maximum number of bits.  Several code sites assume no overflow from
+++ * computing bitlen + X; VARBITTOTALLEN() has the largest such X.
+++ */
+++#define VARBITMAXLEN		(INT_MAX - BITS_PER_BYTE + 1)
++ /* pointer beyond the end of the bit string (like end() in STL containers) */
++ #define VARBITEND(PTR)		(((bits8 *) (PTR)) + VARSIZE(PTR))
++ /* Mask that will cover exactly one byte, i.e. BITS_PER_BYTE bits */
++-- 
++1.7.5.4
++
+diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+index d45f4b5..9b242e0 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql.inc
++++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+@@ -28,10 +28,11 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
+            file://postgresql.init \
+            file://postgresql-bashprofile \
+            file://postgresql.pam \
+-           file://0001-Use-pkg-config-for-libxml2-detection.patch \
+            file://postgresql-setup \
+            file://postgresql.service \
+-"
++           file://0001-Use-pkg-config-for-libxml2-detection.patch \
++           file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
++          "
+ 
+ LEAD_SONAME = "libpq.so"
+ 
+-- 
+1.9.1
 
---BVQ1RKc6+nLPB5pT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUe4QmAAoJEEn8ffcsOfaWJlEH/0WOFuTjnh/tg83LAW4i2tqe
-UDpq+6Y4E/Q8I9LGApV0zrDQ1hITr6bIDgXHFiLoNoPUaZaJOd55yvV+mxi25Hqd
-IKrXeKZEzX2gqo7G6UlUdlcGrheDrnns09NBUuA2lWG42R/RIZBKbYbgjIWABaCZ
-r4HQ+bHJofw4kwyhCq2p8Mgekgc2K5O0KncQDPFslEp95BGWLLAZ2q+7vZ6+ags+
-Hwcj03cI/GtcFtw7q019pRMRJf243GXy6PfwmG2nfV+jV6R65g3AxEsIm7iq6m4i
-dCmJhlmaNaQV5cOFPq4wfShIhw/NAIvh6Qc+CfSc+AcUFAWHcjFzSXVOV9V69RI=
-=R1pm
------END PGP SIGNATURE-----
-
---BVQ1RKc6+nLPB5pT--
