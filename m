@@ -1,41 +1,38 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
-	[209.85.220.44])
-	by mail.openembedded.org (Postfix) with ESMTP id DFF537226F
+Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
+	[209.85.220.53])
+	by mail.openembedded.org (Postfix) with ESMTP id F1BF672270
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 01:04:25 +0000 (UTC)
-Received: by mail-pa0-f44.google.com with SMTP id et14so10046852pad.3
+	Mon,  1 Dec 2014 01:04:20 +0000 (UTC)
+Received: by mail-pa0-f53.google.com with SMTP id kq14so9957177pab.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Nov 2014 17:04:25 -0800 (PST)
+	Sun, 30 Nov 2014 17:04:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=ilTpJxAu4X13Ag0ByxU11stYTmYLgFkv9VVvqjg4cUI=;
-	b=RQBZoK2MHG2uDgfltx3WOXlKkOzyXRmYhu6zLZ5TQXsqk6M9M9UayWicpySVXPC5Zi
-	3qGLwrI+M2zqKkM7ZO8JSXj3misEq4nXQh+Gy7+dZK0U5G8hqA5bndkg/GMB8RfMKQqk
-	95AYbneS9mnAOn7ENPVSWhI2Dfw0XwZdQH/2sXnDJbMdxdRxxyxauFjoLL35eUhKPaCm
-	juLh5mtGkEXaHX6XihoA9rOKkiEF8FgPz9kW7SGCK65WQAtdkDJGmyQMsxsv5cLEYvKS
-	GFXHk6sowHolQkCLF2gIBItUEgG3JuDXZzKTFpxYaMHkBKwoWmKynt6wI6P6r+tGhpij
-	LW8w==
-X-Received: by 10.70.133.72 with SMTP id pa8mr93698455pdb.59.1417395865698;
-	Sun, 30 Nov 2014 17:04:25 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=F0kiwinUcdfxHmUB9dtaDeKx/y84a3UiD0ndefTZlVg=;
+	b=OzN81GKkCYLRMVgJ1eFiPbQE7E4se6bAu5YMR+Q3WHed9ObX4NX4Yz56GyqUYkQZ92
+	McRgYaz9S7E9nKG4QwWKGt4RMuh11jQ18OSyT+Lrx57tB2IAryH8Ez4VaAKsGAfVBIzc
+	OoGioDfIc6DsZOewDB0chKTZy8JxF0ETJH58zuIIAmkEyyLTXBxcHoDOIf5vKhn5BZAD
+	l3uII4fX2WMPVopCgGVaNb918DE9+HqI3NPwtOfyLr1WJgyMt5pjJiJ+fS9z3I2cNC6Q
+	NFhlTpw4vzm+pCuW210pfu4j2vqGPRf9ga/JbkVfpOsl2aGfIkVhrV8Bcf5nZhLGV9Pr
+	m5ig==
+X-Received: by 10.70.2.65 with SMTP id 1mr95938128pds.13.1417395861173;
+	Sun, 30 Nov 2014 17:04:21 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by mx.google.com with ESMTPSA id v7sm11872248pdl.5.2014.11.30.17.04.23
+	by mx.google.com with ESMTPSA id v7sm11872248pdl.5.2014.11.30.17.04.18
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 30 Nov 2014 17:04:24 -0800 (PST)
+	Sun, 30 Nov 2014 17:04:19 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Nov 2014 17:04:04 -0800
-Message-Id: <24d23299b09b35be723e7b01867ed51876450b29.1417194166.git.akuster808@gmail.com>
+Date: Sun, 30 Nov 2014 17:04:02 -0800
+Message-Id: <cover.1417194166.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
-References: <cover.1417194166.git.akuster808@gmail.com>
-In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
-References: <cover.1417194166.git.akuster808@gmail.com>
+MIME-Version: 1.0
 Cc: otavio@ossystems.com.br
-Subject: [PATCH 02/15] net-snmp: fix for Security Advisory - CVE-2014-3565
+Subject: [PATCH 00/15] for Dizzy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,499 +47,96 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 01 Dec 2014 01:04:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Roy Li <rongqing.li@windriver.com>
+Please consider these change for meta-openembedded Dizzy branch
 
-snmplib/mib.c in net-snmp 5.7.0 and earlier, when the -OQ option is used,
-allows remote attackers to cause a denial of service (snmptrapd crash) via
-a crafted SNMP trap message, which triggers a conversion to the variable
-type designated in the MIB file, as demonstrated by a NULL type in an ifMtu
-trap message.
+The following changes since commit 6dd8dedb5993c210394419934a2b080d17728f0e:
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-3565
+  phpmyadmin: fix for Security Advisory CVE-2014-5273 (2014-11-26 13:29:15 -0800)
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- ...s-for-printing-variables-with-wrong-types.patch | 455 +++++++++++++++++++++
- .../recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb |   1 +
- 2 files changed, 456 insertions(+)
+are available in the git repository at:
+
+  https://github.com/akuster/meta-openembedded.git akuster/dizzy-next
+  https://github.com//tree/akuster/dizzy-next
+
+Andreas Müller (2):
+  xfce4-weather-plugin: make work properly after met.no API change
+  gvfs: replace deprecated g_memmove by memmove
+
+Armin Kuster (1):
+  wireshark: update to 1.12.2
+
+Kang Kai (8):
+  postgresql: add fix for CVE-2014-0064 Security Advisory
+  postgresql: add fix for CVE-2014-0060 Security Advisory
+  postgresql: add fix for CVE-2014-0061 Security Advisory
+  postgresql: add fix for CVE-2014-0062 Security Advisory
+  postgresql: add fix for CVE-2014-0063 Security Advisory
+  postgresql: add fix for CVE-2014-0067 Security Advisory
+  postgresql: add fix for CVE-2014-0065 and CVE-2014-0066 Security
+    Advisory
+  libyaml: add fix for CVE-2014-2525 Security Advisory
+
+Roy Li (2):
+  phpmyadmin: fix for Security Advisory CVE-2014-5274
+  net-snmp: fix for Security Advisory - CVE-2014-3565
+
+Wenzong Fan (1):
+  krb5: fix CVE-2014-5351
+
+Xufeng Zhang (1):
+  syslog-ng: Fix memory leak when udp connection is used [ LIN7-1379 ]
+
+ ...daemonfile.c-replace-g_memmove-by-memmove.patch |   36 +
+ meta-gnome/recipes-gnome/gvfs/gvfs.inc             |    1 +
+ ...s-for-printing-variables-with-wrong-types.patch |  455 ++++++++
+ .../recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb |    1 +
+ .../{wireshark_1.12.1.bb => wireshark_1.12.2.bb}   |    4 +-
+ ...rn-only-new-keys-in-randkey-CVE-2014-5351.patch |   92 ++
+ meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb   |    1 +
+ .../libyaml/files/libyaml-CVE-2014-2525.patch      |   42 +
+ meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb   |    4 +-
+ ...integer-overflow-to-avoid-buffer-overruns.patch |  605 +++++++++++
+ .../0003-Shore-up-ADMIN-OPTION-restrictions.patch  |  273 +++++
+ ...vilege-escalation-in-explicit-calls-to-PL.patch |  267 +++++
+ ...ted-name-lookups-during-table-and-index-D.patch | 1082 ++++++++++++++++++++
+ ...ix-handling-of-wide-datetime-input-output.patch |  465 +++++++++
+ ...al-available-to-pg_regress-of-ECPG-and-is.patch |   75 ++
+ ...-potential-overruns-of-fixed-size-buffers.patch |  393 +++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |   11 +-
+ .../logwriter-dont-allocate-a-new-buffer.patch     |   26 +
+ .../logwriter-still-free-the-unconsumed-item.patch |   47 -
+ .../rewrite-expr-grammar.ym-Free-up-token.patch    |   17 +
+ .../files/still-free-the-unconsumed-item.patch     |   90 ++
+ .../recipes-support/syslog-ng/syslog-ng_3.5.4.1.bb |    4 +-
+ ...4505-security-XSS-in-view-operations-page.patch |   43 +
+ .../recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb     |    1 +
+ ...-ready-for-met.no-locationforecast-1.2-AP.patch |  162 +++
+ ...et.no-locationforecastLTS-1.2-API-bug-109.patch |   27 +
+ .../weather/xfce4-weather-plugin_0.8.3.bb          |    4 +
+ 27 files changed, 4175 insertions(+), 53 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gvfs/files/0005-client-gdaemonfile.c-replace-g_memmove-by-memmove.patch
  create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch
+ rename meta-networking/recipes-support/wireshark/{wireshark_1.12.1.bb => wireshark_1.12.2.bb} (92%)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
+ create mode 100644 meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0003-Shore-up-ADMIN-OPTION-restrictions.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0007-Make-pqsignal-available-to-pg_regress-of-ECPG-and-is.patch
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0008-Prevent-potential-overruns-of-fixed-size-buffers.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-still-free-the-unconsumed-item.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
+ create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/weather/files/0001-Make-plugin-ready-for-met.no-locationforecast-1.2-AP.patch
+ create mode 100644 meta-xfce/recipes-panel-plugins/weather/files/0002-Switch-to-met.no-locationforecastLTS-1.2-API-bug-109.patch
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch
-new file mode 100644
-index 0000000..30374cf
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Added-checks-for-printing-variables-with-wrong-types.patch
-@@ -0,0 +1,455 @@
-+From 7f4a7b891332899cea26e95be0337aae01648742 Mon Sep 17 00:00:00 2001
-+From: Jan Safranek <jsafranek@users.sourceforge.net>
-+Date: Thu, 31 Jul 2014 13:46:49 +0200
-+Subject: [PATCH] Added checks for printing variables with wrong types.
-+
-+Upstream-Status: Backport
-+
-+When -OQ command line argument is used, variable formatter preffers the type
-+of the varible parsed from a MIB file instead of checking type of the variable
-+as parsed from SNMP message.
-+
-+This can lead to crashes when incoming packets contains a variable with
-+NULL type, while the MIB says the variable should be non-NULL, like Integer.
-+The formatter then tries to interpret the NULL (from packet) as Integer (from
-+MIB file).
-+
-+Signed-off-by: Jan Safranek <jsafranek@users.sourceforge.net>
-+---
-+ snmplib/mib.c |  270 ++++++++++++++++++++++++++++-----------------------------
-+ 1 file changed, 135 insertions(+), 135 deletions(-)
-+
-+diff --git a/snmplib/mib.c b/snmplib/mib.c
-+index 9d3ca41..c6e0010 100644
-+--- a/snmplib/mib.c
-++++ b/snmplib/mib.c
-+@@ -439,17 +439,16 @@ sprint_realloc_octet_string(u_char ** buf, size_t * buf_len,
-+     u_char         *cp;
-+     int             output_format, cnt;
-+ 
-+-    if ((var->type != ASN_OCTET_STR) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        const char      str[] = "Wrong Type (should be OCTET STRING): ";
-+-        if (snmp_cstrcat
-+-            (buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_OCTET_STR) {
-++        if (!netsnmp_ds_get_boolean(
-++                    NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            const char      str[] = "Wrong Type (should be OCTET STRING): ";
-++            if (!snmp_cstrcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+ 
-+@@ -702,16 +701,16 @@ sprint_realloc_float(u_char ** buf, size_t * buf_len,
-+                      const struct enum_list *enums,
-+                      const char *hint, const char *units)
-+ {
-+-    if ((var->type != ASN_OPAQUE_FLOAT) &&
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        if (snmp_cstrcat(buf, buf_len, out_len, allow_realloc, 
-+-                         "Wrong Type (should be Float): ")) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_OPAQUE_FLOAT) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be Float): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -772,17 +771,16 @@ sprint_realloc_double(u_char ** buf, size_t * buf_len,
-+                       const struct enum_list *enums,
-+                       const char *hint, const char *units)
-+ {
-+-    if ((var->type != ASN_OPAQUE_DOUBLE) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        if (snmp_cstrcat
-+-            (buf, buf_len, out_len, allow_realloc, 
-+-             "Wrong Type (should be Double): ")) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_OPAQUE_DOUBLE) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be Double): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -847,20 +845,21 @@ sprint_realloc_counter64(u_char ** buf, size_t * buf_len, size_t * out_len,
-+ {
-+     char            a64buf[I64CHARSZ + 1];
-+ 
-+-    if ((var->type != ASN_COUNTER64
-++    if (var->type != ASN_COUNTER64
-+ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
-+         && var->type != ASN_OPAQUE_COUNTER64
-+         && var->type != ASN_OPAQUE_I64 && var->type != ASN_OPAQUE_U64
-+ #endif
-+-        ) && (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        if (snmp_cstrcat(buf, buf_len, out_len, allow_realloc, 
-+-                        "Wrong Type (should be Counter64): ")) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++        ) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be Counter64): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -948,23 +947,25 @@ sprint_realloc_opaque(u_char ** buf, size_t * buf_len,
-+                       const struct enum_list *enums,
-+                       const char *hint, const char *units)
-+ {
-+-    if ((var->type != ASN_OPAQUE
-++    if (var->type != ASN_OPAQUE
-+ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
-+         && var->type != ASN_OPAQUE_COUNTER64
-+         && var->type != ASN_OPAQUE_U64
-+         && var->type != ASN_OPAQUE_I64
-+         && var->type != ASN_OPAQUE_FLOAT && var->type != ASN_OPAQUE_DOUBLE
-+ #endif                          /* NETSNMP_WITH_OPAQUE_SPECIAL_TYPES */
-+-        ) && (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        if (snmp_cstrcat(buf, buf_len, out_len, allow_realloc, 
-+-                         "Wrong Type (should be Opaque): ")) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++        ) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be Opaque): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-++
-+ #ifdef NETSNMP_WITH_OPAQUE_SPECIAL_TYPES
-+     switch (var->type) {
-+     case ASN_OPAQUE_COUNTER64:
-+@@ -1040,17 +1041,16 @@ sprint_realloc_object_identifier(u_char ** buf, size_t * buf_len,
-+ {
-+     int             buf_overflow = 0;
-+ 
-+-    if ((var->type != ASN_OBJECT_ID) &&
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] =
-+-            "Wrong Type (should be OBJECT IDENTIFIER): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_OBJECT_ID) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be OBJECT IDENTIFIER): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -1110,16 +1110,16 @@ sprint_realloc_timeticks(u_char ** buf, size_t * buf_len, size_t * out_len,
-+ {
-+     char            timebuf[40];
-+ 
-+-    if ((var->type != ASN_TIMETICKS) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be Timeticks): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_TIMETICKS) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be Timeticks): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_NUMERIC_TIMETICKS)) {
-+@@ -1277,17 +1277,18 @@ sprint_realloc_integer(u_char ** buf, size_t * buf_len, size_t * out_len,
-+ {
-+     char           *enum_string = NULL;
-+ 
-+-    if ((var->type != ASN_INTEGER) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be INTEGER): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_INTEGER) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be INTEGER): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-++
-+     for (; enums; enums = enums->next) {
-+         if (enums->value == *var->val.integer) {
-+             enum_string = enums->label;
-+@@ -1380,16 +1381,16 @@ sprint_realloc_uinteger(u_char ** buf, size_t * buf_len, size_t * out_len,
-+ {
-+     char           *enum_string = NULL;
-+ 
-+-    if ((var->type != ASN_UINTEGER) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be UInteger32): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_UINTEGER) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be UInteger32): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     for (; enums; enums = enums->next) {
-+@@ -1477,17 +1478,16 @@ sprint_realloc_gauge(u_char ** buf, size_t * buf_len, size_t * out_len,
-+ {
-+     char            tmp[32];
-+ 
-+-    if ((var->type != ASN_GAUGE) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] =
-+-            "Wrong Type (should be Gauge32 or Unsigned32): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_GAUGE) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be Gauge32 or Unsigned32): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -1550,16 +1550,16 @@ sprint_realloc_counter(u_char ** buf, size_t * buf_len, size_t * out_len,
-+ {
-+     char            tmp[32];
-+ 
-+-    if ((var->type != ASN_COUNTER) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be Counter32): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_COUNTER) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be Counter32): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -1613,16 +1613,16 @@ sprint_realloc_networkaddress(u_char ** buf, size_t * buf_len,
-+ {
-+     size_t          i;
-+ 
-+-    if ((var->type != ASN_IPADDRESS) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be NetworkAddress): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_IPADDRESS) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be NetworkAddress): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -1679,16 +1679,16 @@ sprint_realloc_ipaddress(u_char ** buf, size_t * buf_len, size_t * out_len,
-+ {
-+     u_char         *ip = var->val.string;
-+ 
-+-    if ((var->type != ASN_IPADDRESS) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be IpAddress): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_IPADDRESS) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be IpAddress): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -1737,20 +1737,20 @@ sprint_realloc_null(u_char ** buf, size_t * buf_len, size_t * out_len,
-+                     const struct enum_list *enums,
-+                     const char *hint, const char *units)
-+ {
-+-    if ((var->type != ASN_NULL) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be NULL): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_NULL) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be NULL): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+-    } else {
-+-        u_char          str[] = "NULL";
-+-        return snmp_strcat(buf, buf_len, out_len, allow_realloc, str);
-+     }
-++
-++    u_char          str[] = "NULL";
-++    return snmp_strcat(buf, buf_len, out_len, allow_realloc, str);
-+ }
-+ 
-+ 
-+@@ -1785,16 +1785,16 @@ sprint_realloc_bitstring(u_char ** buf, size_t * buf_len, size_t * out_len,
-+     u_char         *cp;
-+     char           *enum_string;
-+ 
-+-    if ((var->type != ASN_BIT_STR && var->type != ASN_OCTET_STR) &&
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be BITS): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_BIT_STR && var->type != ASN_OCTET_STR) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be BITS): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+@@ -1869,16 +1869,16 @@ sprint_realloc_nsapaddress(u_char ** buf, size_t * buf_len,
-+                            const struct enum_list *enums, const char *hint,
-+                            const char *units)
-+ {
-+-    if ((var->type != ASN_NSAP) && 
-+-        (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT))) {
-+-        u_char          str[] = "Wrong Type (should be NsapAddress): ";
-+-        if (snmp_strcat(buf, buf_len, out_len, allow_realloc, str)) {
-+-            return sprint_realloc_by_type(buf, buf_len, out_len,
-++    if (var->type != ASN_NSAP) {
-++        if (!netsnmp_ds_get_boolean(
-++                NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICKE_PRINT)) {
-++            u_char          str[] = "Wrong Type (should be NsapAddress): ";
-++            if (!snmp_strcat(buf, buf_len, out_len, allow_realloc, str))
-++                return 0;
-++        }
-++        return sprint_realloc_by_type(buf, buf_len, out_len,
-+                                           allow_realloc, var, NULL, NULL,
-+                                           NULL);
-+-        } else {
-+-            return 0;
-+-        }
-+     }
-+ 
-+     if (!netsnmp_ds_get_boolean(NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_QUICK_PRINT)) {
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-index 9012615..a76de0d 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=3;endline=8;md5=7f7f00ba639ac8e8deb5
- DEPENDS = "openssl libnl pciutils"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-+        file://0001-Added-checks-for-printing-variables-with-wrong-types.patch \
-         file://init \
-         file://snmpd.conf \
-         file://snmptrapd.conf \
 -- 
 1.9.1
 
