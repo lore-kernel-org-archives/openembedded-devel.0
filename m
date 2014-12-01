@@ -1,28 +1,37 @@
-Return-Path: <frieder.schrempf@online.de>
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.187])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B63F7242F
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f179.google.com (mail-yk0-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E37972435
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 15:26:44 +0000 (UTC)
-Received: from localhost.localdomain (host-89-242-129-94.as13285.net
-	[89.242.129.94])
-	by mrelayeu.kundenserver.de (node=mreue002) with ESMTP (Nemesis)
-	id 0MU9sv-1XVRh72ndx-00Qg8K; Mon, 01 Dec 2014 16:26:45 +0100
-From: Frieder Schrempf <frieder.schrempf@online.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Dec 2014 15:26:35 +0000
-Message-Id: <1417447595-2912-1-git-send-email-frieder.schrempf@online.de>
-X-Mailer: git-send-email 1.7.9.5
-X-Provags-ID: V02:K0:lWWI7TS2TZynU5rnDW9OKkoD2RqCa46EyQtzMFr51oU
-	bIBsIeiGS12tILbCZY2o7VftA9YNyNlcx1VsfqCI9hBKWE5qAn
-	d4oId9PXlYDjWykQqTrKavYps53mzqjNd7UnQEcCHK6GYtyaUf
-	maLOpUjv0qSn6CFfPAYVwgaHrfYbgSzUk9HeyFvgOuK3PSBb1v
-	jwgE1NKHkmpaXBe7j5Z9zOQMfCg5XVSJjJAmfwu1bcd/CVLcPK
-	ASqfInKqUaeagYobqGj9yKTFWEuAr+fPoNQJv646e/gXkYokDq
-	MLqIOsmmzN5UgQAEoRgvxex/4QhWWsHfOiWYyPOo322AQsaM0S
-	gHrGoAdUMWxyMRAfIO7YmOjR6yib+TE0+QP3I5DiShPmEM6buj
-	+WhR8bHFjblsWBEM4l+Psil2sk0KA3Em/BTEvQrVWIQVv36Tqo xG3hE
-X-UI-Out-Filterresults: notjunk:1;
-Subject: [meta-qt5][PATCH] add patch to allow qtwebengine build for linux-oe-g++ platform
+	Mon,  1 Dec 2014 15:27:13 +0000 (UTC)
+Received: by mail-yk0-f179.google.com with SMTP id 19so4805607ykq.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Dec 2014 07:27:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=+sqX6WW05Qv7XHoSdOvOtEO9dGG7PT7+4SW/jHDdeVI=;
+	b=YN7hmASGGTR5WJKR4BhAbVeApiT2zQI6PquiIDl+WMWt4EJSjESan5eQTxWgVL8ysj
+	jLGmRVimfQi26Yc6vT2zVVJMKrEFSQTYea9dY7Wovxg6QI6LPAcDoCucAn45sWDz4Sx0
+	/o61y8tKWlksyiQFBxHMbEXwIlHbEIPTZZh2tjy5i48VRjXgLphwjxdNjYN92Q2ivjtd
+	b7Xhm/2t72IQaz8TC8ixP6FeViAD9MH+X9qmqEkzrdmwPws0y/SxhbpJXA4POEejVxUy
+	FvgtHovFi9p9EYWHjESCK6x1r6ljFdLJYB9XSSYJ9eDk1mKsCc5Uj+PZAZSisNshUoOY
+	bBwQ==
+MIME-Version: 1.0
+X-Received: by 10.170.47.210 with SMTP id 201mr68712595ykp.30.1417447633642;
+	Mon, 01 Dec 2014 07:27:13 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.142.132 with HTTP; Mon, 1 Dec 2014 07:27:13 -0800 (PST)
+In-Reply-To: <9a0b3d2f7e1ac7e854430fe1e93271c71f574083.1414409458.git.anders@chargestorm.se>
+References: <cover.1414409458.git.anders@chargestorm.se>
+	<9a0b3d2f7e1ac7e854430fe1e93271c71f574083.1414409458.git.anders@chargestorm.se>
+Date: Mon, 1 Dec 2014 13:27:13 -0200
+X-Google-Sender-Auth: CQqkKiaZzDYxMHe65wFwi6aPgdQ
+Message-ID: <CAP9ODKq6Un6sHUQH0iPagHx-PUrY8d7FwsOh7D3uCkX2fWkSKA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Anders Darander <anders@chargestorm.se>
+Subject: Re: [meta-qt5][PATCH 1/1] qmake5: set OE_QMAKE_INCDIR_QT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,58 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 15:26:45 -0000
+X-List-Received-Date: Mon, 01 Dec 2014 15:27:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
----
- .../0001-allow-build-for-linux-oe-g-platform.patch |   25 ++++++++++++++++++++
- recipes-qt/qt5/qtwebengine_git.bb                  |    1 +
- 2 files changed, 26 insertions(+)
- create mode 100644 recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch
+On Mon, Oct 27, 2014 at 9:31 AM, Anders Darander <anders@chargestorm.se> wrote:
+> This is set when generation an SDK, and thus would be usefull to have also
+> when bitbaking. That allows us to use this in *.prf files which is used
+> both when bitbaking as well as when using the SDK.
+>
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> (cherry picked from commit 96e8d29fdbdf6fa656c854d9b55c5b0c213166a7)
 
-diff --git a/recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch b/recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch
-new file mode 100644
-index 0000000..05177b1
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch
-@@ -0,0 +1,25 @@
-+From a84b72bc45024a57ad75df8c10abfa0a9eb7f726 Mon Sep 17 00:00:00 2001
-+From: Frieder Schrempf <frieder.schrempf@online.de>
-+Date: Mon, 1 Dec 2014 14:34:40 +0000
-+Subject: [PATCH 1/1] allow build for linux-oe-g++ platform
-+
-+---
-+ tools/qmake/mkspecs/features/functions.prf |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
-+index 491a640..0bb2145 100644
-+--- a/tools/qmake/mkspecs/features/functions.prf
-++++ b/tools/qmake/mkspecs/features/functions.prf
-+@@ -7,7 +7,7 @@ defineTest(isPlatformSupported) {
-+ 
-+   linux-g++*:!isGCCVersionSupported():return(false)
-+   !isPythonVersionSupported(): return(false)
-+-  linux-g++*|win32-msvc2013|macx-clang: return(true)
-++  linux-g++*|linux-oe-g++*|win32-msvc2013|macx-clang: return(true)
-+   boot2qt: return(true)
-+ 
-+   warning("Qt WebEngine can currently only be built for Linux (GCC), Windows (MSVC 2013), OS X (XCode 5.1+) or Qt for Device Creation".)
-+-- 
-+1.7.9.5
-+
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 84012f8..8225456 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -8,6 +8,7 @@ SRC_URI += " \
-     git://gitorious.org/qt/qtwebengine-chromium.git;name=chromium;branch=${QT_MODULE_BRANCH_CHROMIUM};destsuffix=git/src/3rdparty \
-     file://0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch \
-     file://0002-functions.prf-Try-to-add-_moc-suffix.patch \
-+    file://0001-allow-build-for-linux-oe-g-platform.patch \
- "
- SRCREV_qtwebengine = "03a52863226aeb774721db610ba831808b30836a"
- SRCREV_chromium = "66388297cf2ca42049fb099237134ec33465e2f5"
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
 -- 
-1.7.9.5
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
