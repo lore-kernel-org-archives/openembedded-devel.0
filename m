@@ -1,37 +1,35 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f179.google.com (mail-yk0-f179.google.com
-	[209.85.160.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E37972435
+Received: from mail-yh0-f42.google.com (mail-yh0-f42.google.com
+	[209.85.213.42])
+	by mail.openembedded.org (Postfix) with ESMTP id D015360E24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 15:27:13 +0000 (UTC)
-Received: by mail-yk0-f179.google.com with SMTP id 19so4805607ykq.24
+	Mon,  1 Dec 2014 15:29:33 +0000 (UTC)
+Received: by mail-yh0-f42.google.com with SMTP id v1so4990647yhn.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Dec 2014 07:27:13 -0800 (PST)
+	Mon, 01 Dec 2014 07:29:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=+sqX6WW05Qv7XHoSdOvOtEO9dGG7PT7+4SW/jHDdeVI=;
-	b=YN7hmASGGTR5WJKR4BhAbVeApiT2zQI6PquiIDl+WMWt4EJSjESan5eQTxWgVL8ysj
-	jLGmRVimfQi26Yc6vT2zVVJMKrEFSQTYea9dY7Wovxg6QI6LPAcDoCucAn45sWDz4Sx0
-	/o61y8tKWlksyiQFBxHMbEXwIlHbEIPTZZh2tjy5i48VRjXgLphwjxdNjYN92Q2ivjtd
-	b7Xhm/2t72IQaz8TC8ixP6FeViAD9MH+X9qmqEkzrdmwPws0y/SxhbpJXA4POEejVxUy
-	FvgtHovFi9p9EYWHjESCK6x1r6ljFdLJYB9XSSYJ9eDk1mKsCc5Uj+PZAZSisNshUoOY
-	bBwQ==
+	:from:to:content-type;
+	bh=YncOpI5Y4BUf0NIAAs4/idx1elaVCN8a5VLVS2Ndhfk=;
+	b=wDJvZYh4su18uI6kNUJOnBv8o2Wgip0EGIFhHRdjC4QfHBeGx1djd8PYT0yAs4WqHJ
+	iWkrxGpNkdUyqmue2zbZzemiVpa4917XNbq61SqAzQHLKQD3J/AzQxWPUOOxTP1ZvM+5
+	e608TBehwBGznhj5b8kvKcbX2j38z4gCDapl3vBN88UNttWjFnp61QdNHG4lQEqJnvUD
+	xPhBsdTkAekfE3k3uCiH/nF3x04SJdgYf5kfedAXQ8IkPVBPDTANw90l4Wk/cqsnXBEh
+	LmK4W++ASqSAAX2E8OktEeXTWrqodUJLuX4GOTRkvN00gmljkhueP4Ajm3OTRv6yXh7x
+	PTRQ==
 MIME-Version: 1.0
-X-Received: by 10.170.47.210 with SMTP id 201mr68712595ykp.30.1417447633642;
-	Mon, 01 Dec 2014 07:27:13 -0800 (PST)
+X-Received: by 10.170.129.147 with SMTP id v141mr68945439ykb.110.1417447773910;
+	Mon, 01 Dec 2014 07:29:33 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.142.132 with HTTP; Mon, 1 Dec 2014 07:27:13 -0800 (PST)
-In-Reply-To: <9a0b3d2f7e1ac7e854430fe1e93271c71f574083.1414409458.git.anders@chargestorm.se>
-References: <cover.1414409458.git.anders@chargestorm.se>
-	<9a0b3d2f7e1ac7e854430fe1e93271c71f574083.1414409458.git.anders@chargestorm.se>
-Date: Mon, 1 Dec 2014 13:27:13 -0200
-X-Google-Sender-Auth: CQqkKiaZzDYxMHe65wFwi6aPgdQ
-Message-ID: <CAP9ODKq6Un6sHUQH0iPagHx-PUrY8d7FwsOh7D3uCkX2fWkSKA@mail.gmail.com>
+Received: by 10.170.142.132 with HTTP; Mon, 1 Dec 2014 07:29:33 -0800 (PST)
+In-Reply-To: <1417425246-30891-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+References: <1417425246-30891-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+Date: Mon, 1 Dec 2014 13:29:33 -0200
+X-Google-Sender-Auth: xmu9frhnMTIXPRV2dsj8uTyypBA
+Message-ID: <CAP9ODKpj=+MZGBRbKw5ruo+5wUJE+oSKkkyHsNVBdiviyFby8w@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: Re: [meta-qt5][PATCH 1/1] qmake5: set OE_QMAKE_INCDIR_QT
+Subject: Re: [meta-oe][PATCH] logwatch: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,18 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 15:27:13 -0000
+X-List-Received-Date: Mon, 01 Dec 2014 15:29:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Oct 27, 2014 at 9:31 AM, Anders Darander <anders@chargestorm.se> wrote:
-> This is set when generation an SDK, and thus would be usefull to have also
-> when bitbaking. That allows us to use this in *.prf files which is used
-> both when bitbaking as well as when using the SDK.
+On Mon, Dec 1, 2014 at 7:14 AM, Qian Lei <qianl.fnst@cn.fujitsu.com> wrote:
+> Logwatch is a customizable, pluggable log-monitoring system. It will go
+> through your logs for a given period of time and make a report in the areas
+> that you wish with the detail that you wish. Easy to use - works right out of
+> the package on many systems.
 >
-> Signed-off-by: Anders Darander <anders@chargestorm.se>
-> (cherry picked from commit 96e8d29fdbdf6fa656c854d9b55c5b0c213166a7)
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+Doesn't it have a  'make install' ?
+
 
 -- 
 Otavio Salvador                             O.S. Systems
