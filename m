@@ -1,24 +1,23 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A4CF6721D3
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A4737230E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 09:44:28 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sB19iSQB015538
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL);
-	Mon, 1 Dec 2014 01:44:28 -0800 (PST)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Mon, 1 Dec 2014 01:44:27 -0800
-From: Kai Kang <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 1 Dec 2014 17:43:18 +0800
-Message-ID: <1417426998-26729-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Mon,  1 Dec 2014 10:16:25 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP; 01 Dec 2014 02:13:48 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.07,493,1413270000"; d="scan'208";a="616546664"
+Received: from fodonogx-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.21.108])
+	by orsmga001.jf.intel.com with ESMTP; 01 Dec 2014 02:16:25 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org, yocto@yoctoproject.org
+Date: Mon, 01 Dec 2014 10:16:24 +0000
+Message-ID: <1859515.Hd60QW1tn7@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.3 (Linux/3.17.3-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
 MIME-Version: 1.0
-X-Originating-IP: [128.224.153.152]
-Subject: [PATCH] meta-gnome: fix typo of directory name
+Subject: meta-java layer maintainership - help wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,23 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 09:44:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 Dec 2014 10:16:27 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Fix typo of directory name 'recipe-devtools' in meta-gnome. It should
-recipes-devtools.
+Hi there,
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-gnome/{recipe-devtools => recipes-devtools}/glade/glade3_%.bbappend | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-gnome/{recipe-devtools => recipes-devtools}/glade/glade3_%.bbappend (100%)
+Henning would like some folks to help him maintain the meta-java layer, which 
+contains OpenJDK and other open source Java-related components.
 
-diff --git a/meta-gnome/recipe-devtools/glade/glade3_%.bbappend b/meta-gnome/recipes-devtools/glade/glade3_%.bbappend
-similarity index 100%
-rename from meta-gnome/recipe-devtools/glade/glade3_%.bbappend
-rename to meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+An ideal candidate maintainer would:
+ * Have an interest in maintaining the Java-related recipes in the layer
+ * Be willing to review and merge patches from the community
+
+If you'd like to help out here (and responsibility can be shared by more than 
+one person, it doesn't just have to be one) then please reply here or in 
+private and I'll arrange for you to get access to the repository.
+
+Thanks,
+Paul
+
 -- 
-1.9.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
