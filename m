@@ -1,25 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id B48A965D34
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 538257214C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 11:57:11 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 01 Dec 2014 03:57:12 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,493,1413270000"; d="scan'208";a="640650019"
-Received: from fodonogx-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.21.108])
-	by fmsmga002.fm.intel.com with ESMTP; 01 Dec 2014 03:57:10 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
-Date: Mon, 01 Dec 2014 11:57:10 +0000
-Message-ID: <6010322.On4bLv5MV8@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.3-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <1859515.Hd60QW1tn7@peggleto-mobl5.ger.corp.intel.com>
-References: <1859515.Hd60QW1tn7@peggleto-mobl5.ger.corp.intel.com>
-MIME-Version: 1.0
-Subject: Re: [yocto] meta-java layer maintainership - help wanted
+	Mon,  1 Dec 2014 12:22:59 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id r20so24398335wiv.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Dec 2014 04:23:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=lhw1Y9fJCksGiny7QY772OSnEBgpNn0oR80t3vKR/Ts=;
+	b=XSCTvyZsbvXe2IyWn64Wh5zQHf5iOBBg9HOuGPmm95nnSbVspK3nymx5HhC+3aZPMD
+	S3SMKwYQrYf7kVvy96s2axa9WIDJnK6QeS+1ss1CyN+CSRhUrfzx5z+PQHEimCWvwKeX
+	PR7EUolgtkrMDq/YrPa2BtS6izSxxmlz5LJzejXjmPZfmRQcjo4wCApXT/sSXLSi25QF
+	5rF2Rld0GfXUhe9ML4pQMSpA/O11P85rk2oIo8IGFHTDUkM+CnV+O+3BpNcdpNTo1OBM
+	yTfeYEv84L9nFVoXQb3ymVn0u22uuOtJCt2T5NLEBz6Pp1EaOgCyaE7uNlh7i0Xt4JzI
+	qhDA==
+X-Received: by 10.194.193.2 with SMTP id hk2mr89703507wjc.40.1417436580161;
+	Mon, 01 Dec 2014 04:23:00 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	td9sm28219525wic.15.2014.12.01.04.22.59 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 01 Dec 2014 04:22:59 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 Dec 2014 13:22:59 +0100
+Message-Id: <1417436579-26311-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.1.3
+Subject: [meta-oe][daisy][PATCH] gdal: fix sqlite, expat and libtiff detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,29 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 11:57:14 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 01 Dec 2014 12:23:02 -0000
 
-On Monday 01 December 2014 10:16:24 Paul Eggleton wrote:
-> Henning would like some folks to help him maintain the meta-java layer,
-> which contains OpenJDK and other open source Java-related components.
-> 
-> An ideal candidate maintainer would:
->  * Have an interest in maintaining the Java-related recipes in the layer
->  * Be willing to review and merge patches from the community
-> 
-> If you'd like to help out here (and responsibility can be shared by more
-> than one person, it doesn't just have to be one) then please reply here or
-> in private and I'll arrange for you to get access to the repository.
+* fixes following configure errors like:
+  checking for SQLite3 library >= 3.0.0... yes
+  cat: /OE/sysroots/qemux86/usr/lib/include/sqlite3.h: No such file or directory
+  /OE/work/i586-starfish-linux/gdal/1.10.1-r0/gdal-1.10.1/configure:
+  line 25411: test: !=: unary operator expected
+  configure: WARNING: Can not find SQLITE_VERSION macro in sqlite3.h
+  header to retrieve SQLite version!
+* and autodetected expat support which sometimes tries to use host
+  version from /usr/include
 
-Looks like we now have enough people to take care of this, thanks everyone!
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb b/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+index 4fa6de1..e22108e 100644
+--- a/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
++++ b/meta-oe/recipes-navigation/gdal/gdal_1.10.1.bb
+@@ -79,8 +79,9 @@ EXTRA_OECONF = "--without-perl \
+                 --with-pcraster=internal \
+                 --with-geotiff=internal \
+                 \
+-                --with-sqlite3=${STAGING_LIBDIR} \
+-                --with-libtiff=${STAGING_LIBDIR} \
++                --with-sqlite3=${STAGING_EXECPREFIXDIR} \
++                --with-libtiff=${STAGING_EXECPREFIXDIR} \
++                --with-expat=${STAGING_EXECPREFIXDIR} \
+ "
+ 
+ EXTRA_OEMAKE += "INST_DATA="${datadir}/gdal""
 -- 
+2.1.3
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
