@@ -1,41 +1,30 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A8A4722EB
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id ABC7065CA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 01:04:52 +0000 (UTC)
-Received: by mail-pd0-f182.google.com with SMTP id r10so9802755pdi.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Nov 2014 17:04:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=0a0xaP3y2w95XxtT0V2nW4MCj08KCEzqSUZhBYBsqwA=;
-	b=k0D83mGsgjo9FNe5xzltwIH3Ol1EDd70EtkqZEJr3XAuFyNTfNaz3y+vL8QPIL0Hk+
-	mBmIcQ57VyZoy7WI5NvugIfXOY+uM40gYYbI4tIdFgfnpmui4j0++1Eg4j8UB0V8w/Hv
-	pwYLiWZ/80jG7CqCGg1mRnreNL1QW+6p5iHVTnZRZeSrhWFZNjBlWoiRZ8nCncay/3ZJ
-	pZKZO2cd8Gf/euMGy8wsbGAHX1v/Ra3IXi9y/XvlsZGW5lTXey/F66aA2YJusEd7wkwW
-	k591Tpxt4SoYiGO463qyHzrLFqbMAnLLT++aWZMWArPI6iV8Mm/Oo+6yRlq79znlYUXv
-	tLrQ==
-X-Received: by 10.66.221.71 with SMTP id qc7mr71502663pac.43.1417395892769;
-	Sun, 30 Nov 2014 17:04:52 -0800 (PST)
-Received: from bigisland.hsd1.ca.comcast.net
-	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by mx.google.com with ESMTPSA id v7sm11872248pdl.5.2014.11.30.17.04.50
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 30 Nov 2014 17:04:51 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Nov 2014 17:04:17 -0800
-Message-Id: <bd50a254b9f4727665c757b8228514ed63211715.1417194166.git.akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
-References: <cover.1417194166.git.akuster808@gmail.com>
-In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
-References: <cover.1417194166.git.akuster808@gmail.com>
-Cc: otavio@ossystems.com.br
-Subject: [PATCH 15/15] krb5: fix CVE-2014-5351
+	Mon,  1 Dec 2014 03:48:19 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1XvHyF-0002sW-9A from Joe_MacDonald@mentor.com ;
+	Sun, 30 Nov 2014 19:48:19 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.181.6;
+	Sun, 30 Nov 2014 19:48:18 -0800
+Received: by burninator (Postfix, from userid 1000)	id 44D2D58044A; Sun, 30
+	Nov 2014 22:48:18 -0500 (EST)
+Date: Sun, 30 Nov 2014 22:48:18 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Armin Kuster <akuster808@gmail.com>
+Message-ID: <20141201034817.GU3886@mentor.com>
+References: <1417152844-23643-1-git-send-email-akuster808@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1417152844-23643-1-git-send-email-akuster808@gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 0/2] two more Netkit packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,137 +38,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 01:04:52 -0000
+X-List-Received-Date: Mon, 01 Dec 2014 03:48:23 -0000
+X-Groupsio-MsgNum: 53111
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dIV3CY5swYZsO92m"
+Content-Disposition: inline
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+--dIV3CY5swYZsO92m
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The kadm5_randkey_principal_3 function in lib/kadm5/srv/svr_principal.c
-in kadmind in MIT Kerberos 5 (aka krb5) before 1.13 sends old keys in a
-response to a -randkey -keepold request, which allows remote authentic-
-ated users to forge tickets by leveraging administrative access.
+Hey Armin,
 
-This back-ported patch fixes CVE-2014-5351.
+I merged netkit-ftp.  Could you put together a pam-optional version of
+netkit-rsh?  Or is that going to be a huge pain for you?  I'd really
+like to provide a version that uses PAM if available rather than
+requires it.
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- ...rn-only-new-keys-in-randkey-CVE-2014-5351.patch | 92 ++++++++++++++++++++++
- meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb   |  1 +
- 2 files changed, 93 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
+-J.
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
-new file mode 100644
-index 0000000..0852661
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
-@@ -0,0 +1,92 @@
-+From af0ed4df4dfae762ab5fb605f5a0c8f59cb4f6ca Mon Sep 17 00:00:00 2001
-+From: Greg Hudson <ghudson@mit.edu>
-+Date: Thu, 21 Aug 2014 13:52:07 -0400
-+Subject: [PATCH] Return only new keys in randkey [CVE-2014-5351]
-+
-+In kadmind's randkey operation, if a client specifies the keepold
-+flag, do not include the preserved old keys in the response.
-+
-+CVE-2014-5351:
-+
-+An authenticated remote attacker can retrieve the current keys for a
-+service principal when generating a new set of keys for that
-+principal.  The attacker needs to be authenticated as a user who has
-+the elevated privilege for randomizing the keys of other principals.
-+
-+Normally, when a Kerberos administrator randomizes the keys of a
-+service principal, kadmind returns only the new keys.  This prevents
-+an administrator who lacks legitimate privileged access to a service
-+from forging tickets to authenticate to that service.  If the
-+"keepold" flag to the kadmin randkey RPC operation is true, kadmind
-+retains the old keys in the KDC database as intended, but also
-+unexpectedly returns the old keys to the client, which exposes the
-+service to ticket forgery attacks from the administrator.
-+
-+A mitigating factor is that legitimate clients of the affected service
-+will start failing to authenticate to the service once they begin to
-+receive service tickets encrypted in the new keys.  The affected
-+service will be unable to decrypt the newly issued tickets, possibly
-+alerting the legitimate administrator of the affected service.
-+
-+CVSSv2: AV:N/AC:H/Au:S/C:P/I:N/A:N/E:POC/RL:OF/RC:C
-+
-+[tlyu@mit.edu: CVE description and CVSS score]
-+
-+ticket: 8018 (new)
-+target_version: 1.13
-+tags: pullup
-+
-+Upstream-Status: Backport
-+---
-+ src/lib/kadm5/srv/svr_principal.c |   21 ++++++++++++++++++---
-+ 1 files changed, 18 insertions(+), 3 deletions(-)
-+
-+diff --git a/lib/kadm5/srv/svr_principal.c b/lib/kadm5/srv/svr_principal.c
-+index 5d358bd..d4e74cc 100644
-+--- a/lib/kadm5/srv/svr_principal.c
-++++ b/lib/kadm5/srv/svr_principal.c
-+@@ -344,6 +344,20 @@ check_1_6_dummy(kadm5_principal_ent_t entry, long mask,
-+     *passptr = NULL;
-+ }
-+ 
-++/* Return the number of keys with the newest kvno.  Assumes that all key data
-++ * with the newest kvno are at the front of the key data array. */
-++static int
-++count_new_keys(int n_key_data, krb5_key_data *key_data)
-++{
-++    int n;
-++
-++    for (n = 1; n < n_key_data; n++) {
-++        if (key_data[n - 1].key_data_kvno != key_data[n].key_data_kvno)
-++            return n;
-++    }
-++    return n_key_data;
-++}
-++
-+ kadm5_ret_t
-+ kadm5_create_principal(void *server_handle,
-+                        kadm5_principal_ent_t entry, long mask,
-+@@ -1593,7 +1607,7 @@ kadm5_randkey_principal_3(void *server_handle,
-+     osa_princ_ent_rec           adb;
-+     krb5_int32                  now;
-+     kadm5_policy_ent_rec        pol;
-+-    int                         ret, last_pwd;
-++    int                         ret, last_pwd, n_new_keys;
-+     krb5_boolean                have_pol = FALSE;
-+     kadm5_server_handle_t       handle = server_handle;
-+     krb5_keyblock               *act_mkey;
-+@@ -1686,8 +1700,9 @@ kadm5_randkey_principal_3(void *server_handle,
-+     kdb->fail_auth_count = 0;
-+ 
-+     if (keyblocks) {
-+-        ret = decrypt_key_data(handle->context,
-+-                               kdb->n_key_data, kdb->key_data,
-++        /* Return only the new keys added by krb5_dbe_crk. */
-++        n_new_keys = count_new_keys(kdb->n_key_data, kdb->key_data);
-++        ret = decrypt_key_data(handle->context, n_new_keys, kdb->key_data,
-+                                keyblocks, n_keys);
-+         if (ret)
-+             goto done;
-+-- 
-+1.7.4.1
-+
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-index d3c643c..72de38b 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-@@ -22,6 +22,7 @@ inherit autotools-brokensep binconfig perlnative
- SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
- SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
-            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
-+           file://0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch \
-            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
-            file://crosscompile_nm.patch \
-            file://etc/init.d/krb5-kdc \
--- 
-1.9.1
+[[meta-networking][PATCH 0/2] two more Netkit packages] On 14.11.27 (Thu 21=
+:34) Armin Kuster wrote:
 
+> Please consider these two packages for inclusion to meta-networking.
+> I have placed them in their own recipes location for others from the fami=
+ly to be added later.
+>=20
+> Armin Kuster (2):
+>   New package: netkit-rsh
+>   New package: Netkit-ftp
+>=20
+>  .../netkit-ftp/files/Add_ARG_MAX_define.patch      | 28 ++++++++++
+>  .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   | 46 ++++++++++++++++
+>  .../files/rsh-redone_link_order_file.patch         | 64 ++++++++++++++++=
+++++++
+>  .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   | 61 ++++++++++++++++=
++++++
+>  4 files changed, 199 insertions(+)
+>  create mode 100644 meta-networking/recipes-netkit/netkit-ftp/files/Add_A=
+RG_MAX_define.patch
+>  create mode 100644 meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_=
+0.17.bb
+>  create mode 100644 meta-networking/recipes-netkit/netkit-rsh/files/rsh-r=
+edone_link_order_file.patch
+>  create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_=
+0.17.bb
+>=20
+--=20
+-Joe MacDonald.
+:wq
 
+--dIV3CY5swYZsO92m
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iQEcBAEBAgAGBQJUe+UBAAoJEEn8ffcsOfaW3+oH/AwAjkPhlJiHTtl71kbCtP8h
+it58lPdNenjy+juDO5xah8rOxhHc5sIj+0w6u6bt/+r9JFLATexiLTGe3MS3coSi
+pzoqh3nSdbUqlI9Dqx3D9zoCys9weAAuWUnQvsvUSS4+4z6xzbWqmA3XdVBvFRvX
+dn/EPJ5+sFAuvnAjgNte1ZMGSS0t6TxtBsVGS2hab3SsqfZE4ehuV/nJHMtIbVZk
+AArTTs5EQ1EIUEySi3G74OODgxvjngsojVHm8HL1kSpkH/l5H4b71V/QADAOqJPu
+q1pss7kJi7OEA/9pt2fAttz2lVBb8azxYzsc6f4PmCTcUStmpLMP3HUbq5ltalA=
+=KS+X
+-----END PGP SIGNATURE-----
+
+--dIV3CY5swYZsO92m--
