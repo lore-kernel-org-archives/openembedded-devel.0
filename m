@@ -1,41 +1,43 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C32A72262
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 215EF72262
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 01:04:33 +0000 (UTC)
-Received: by mail-pa0-f51.google.com with SMTP id ey11so9880425pad.24
+	Mon,  1 Dec 2014 01:04:35 +0000 (UTC)
+Received: by mail-pa0-f49.google.com with SMTP id eu11so9911592pac.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Nov 2014 17:04:34 -0800 (PST)
+	Sun, 30 Nov 2014 17:04:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=hjzjbDAddFBvKYlbTStwBNj4LxkaZhnJmHw6ZClDV0g=;
-	b=yFPw9tJ58F0xPuH1oohuIrUbD4QANrJi/HwjbNWhvfBhtYDffelUk481m8WPdN4pP/
-	lHe2Y97lC+5CAFj9tvJn973W9+2rrNlGDtOkgrWz/McDaKCtGdlLw8z/SDbaNDt8UDk0
-	HjAFMwmvGhlbVOimNlcLBeqo0hekk9lJZWLn+yBfxHSJQTLHggFcfHZUSAeq0+JI9Vuh
-	YBnOhLVStic3FJ3xWCb/bUY423FIIqVoCXvkReWIru0J0heB3Q+ViDusERHYPQn9zpdJ
-	JsssdDyfwQVdKerc7WW+YpV80OAazM3IShs0llBKkXpF2+eZp4HwiaTGLVdAmSMSlspy
-	tWWg==
-X-Received: by 10.70.136.202 with SMTP id qc10mr94654394pdb.152.1417395874473; 
-	Sun, 30 Nov 2014 17:04:34 -0800 (PST)
+	:in-reply-to:references:mime-version:content-type
+	:content-transfer-encoding;
+	bh=yQqmulO6A9f9yaTNFdN0axzAAdKssUASaAlJdQV3dLc=;
+	b=tzNzyWouwV81IaNmxx4RJ9pFGLKnQ6YrrYOkGOqFtU3jWVu6f1wJf8KSG9EWmZIUZc
+	/4FQUplOTe4FjOT445DnetIBVpvd1rEsAfUA4ehtctgfpyztU4LrMVf1gAE0o62w1SNs
+	xBUmRPmkqbAxMec3uceA7u86vcj9hVZQbCNKgPq7ZfD1o5V3B/PLFe3lyhkemZLMvwmi
+	H2LrSlsHKkSaLoX88C+U1nfKAWX8/AawnPgzgqYLnwAvYWC9ck6lPeeGKcZZxw+85elZ
+	OYFl2k3ZJh1h7Xy5vH9eHr0AQccwPSfRft09Ayahweb2Vc2OAWRK9V2JFRTSGojbk3tx
+	P3Og==
+X-Received: by 10.70.48.199 with SMTP id o7mr95435960pdn.97.1417395876339;
+	Sun, 30 Nov 2014 17:04:36 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by mx.google.com with ESMTPSA id v7sm11872248pdl.5.2014.11.30.17.04.32
+	by mx.google.com with ESMTPSA id v7sm11872248pdl.5.2014.11.30.17.04.34
 	for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 30 Nov 2014 17:04:33 -0800 (PST)
+	Sun, 30 Nov 2014 17:04:35 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Nov 2014 17:04:08 -0800
-Message-Id: <5aae81fa2e5ba9c479cae80eec8def5e4e6e8ded.1417194166.git.akuster808@gmail.com>
+Date: Sun, 30 Nov 2014 17:04:09 -0800
+Message-Id: <7380f589cef3c9cfb6f3cdbf8929b15bbefd3025.1417194166.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
 References: <cover.1417194166.git.akuster808@gmail.com>
 In-Reply-To: <cover.1417194166.git.akuster808@gmail.com>
 References: <cover.1417194166.git.akuster808@gmail.com>
+MIME-Version: 1.0
 Cc: otavio@ossystems.com.br
-Subject: [PATCH 06/15] postgresql: add fix for CVE-2014-0062 Security Advisory
+Subject: [PATCH 07/15] postgresql: add fix for CVE-2014-0063 Security Advisory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,1126 +51,512 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 01:04:34 -0000
+X-List-Received-Date: Mon, 01 Dec 2014 01:04:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 From: Kang Kai <kai.kang@windriver.com>
 
-Race condition in the (1) CREATE INDEX and (2) unspecified ALTER TABLE
-commands in PostgreSQL before 8.4.20, 9.0.x before 9.0.16, 9.1.x before
-9.1.12, 9.2.x before 9.2.7, and 9.3.x before 9.3.3 allows remote
-authenticated users to create an unauthorized index or read portions of
-unauthorized tables by creating or deleting a table with the same name
-during the timing window.
+Multiple stack-based buffer overflows in PostgreSQL before 8.4.20, 9.0.x
+before 9.0.16, 9.1.x before 9.1.12, 9.2.x before 9.2.7, and 9.3.x before
+9.3.3 allow remote authenticated users to cause a denial of service
+(crash) or possibly execute arbitrary code via vectors related to an
+incorrect MAXDATELEN constant and datetime values involving (1)
+intervals, (2) timestamps, or (3) timezones, a different vulnerability
+than CVE-2014-0065.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0062
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0063
 
 Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ted-name-lookups-during-table-and-index-D.patch | 1082 ++++++++++++++++++++
- meta-oe/recipes-support/postgresql/postgresql.inc  |    1 +
- 2 files changed, 1083 insertions(+)
- create mode 100644 meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch
+ ...ix-handling-of-wide-datetime-input-output.patch | 465 +++++++++++++++++++++
+ meta-oe/recipes-support/postgresql/postgresql.inc  |   1 +
+ 2 files changed, 466 insertions(+)
+ create mode 100644 meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
 
-diff --git a/meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch b/meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch
+diff --git a/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch b/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
 new file mode 100644
-index 0000000..f1aa212
+index 0000000..fac0a73
 --- /dev/null
-+++ b/meta-oe/recipes-support/postgresql/files/0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch
-@@ -0,0 +1,1082 @@
-+From 820ab11fbfd508fc75a39c43ad2c1b3e79c4982b Mon Sep 17 00:00:00 2001
-+From: Robert Haas <rhaas@postgresql.org>
++++ b/meta-oe/recipes-support/postgresql/files/0006-Fix-handling-of-wide-datetime-input-output.patch
+@@ -0,0 +1,465 @@
++From f416622be81d1320417bbc7892fd562cae0dba72 Mon Sep 17 00:00:00 2001
++From: Noah Misch <noah@leadboat.com>
 +Date: Mon, 17 Feb 2014 09:33:31 -0500
-+Subject: [PATCH] Avoid repeated name lookups during table and index DDL.
++Subject: [PATCH] Fix handling of wide datetime input/output.
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+commit 820ab11fbfd508fc75a39c43ad2c1b3e79c4982b REL9_2_STABLE
++commit f416622be81d1320417bbc7892fd562cae0dba72 REL9_2_STABLE
 +
-+If the name lookups come to different conclusions due to concurrent
-+activity, we might perform some parts of the DDL on a different table
-+than other parts.  At least in the case of CREATE INDEX, this can be
-+used to cause the permissions checks to be performed against a
-+different table than the index creation, allowing for a privilege
-+escalation attack.
++Many server functions use the MAXDATELEN constant to size a buffer for
++parsing or displaying a datetime value.  It was much too small for the
++longest possible interval output and slightly too small for certain
++valid timestamp input, particularly input with a long timezone name.
++The long input was rejected needlessly; the long output caused
++interval_out() to overrun its buffer.  ECPG's pgtypes library has a copy
++of the vulnerable functions, which bore the same vulnerabilities along
++with some of its own.  In contrast to the server, certain long inputs
++caused stack overflow rather than failing cleanly.  Back-patch to 8.4
++(all supported versions).
 +
-+This changes the calling convention for DefineIndex, CreateTrigger,
-+transformIndexStmt, transformAlterTableStmt, CheckIndexCompatible
-+(in 9.2 and newer), and AlterTable (in 9.1 and older).  In addition,
-+CheckRelationOwnership is removed in 9.2 and newer and the calling
-+convention is changed in older branches.  A field has also been added
-+to the Constraint node (FkConstraint in 8.4).  Third-party code calling
-+these functions or using the Constraint node will require updating.
++Reported by Daniel Schüssler, reviewed by Tom Lane.
 +
-+Report by Andres Freund.  Patch by Robert Haas and Andres Freund,
-+reviewed by Tom Lane.
++Security: CVE-2014-0063
 +
-+Security: CVE-2014-0062
 +
 +Upstream-Status: Backport
 +
 +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 +---
-+ src/backend/bootstrap/bootparse.y   |   17 ++++-
-+ src/backend/catalog/index.c         |   10 +--
-+ src/backend/catalog/pg_constraint.c |   19 +++++
-+ src/backend/commands/indexcmds.c    |   22 ++++--
-+ src/backend/commands/tablecmds.c    |  137 +++++++++++++++++++++++++----------
-+ src/backend/commands/trigger.c      |   28 ++++++--
-+ src/backend/nodes/copyfuncs.c       |    1 +
-+ src/backend/nodes/equalfuncs.c      |    1 +
-+ src/backend/nodes/outfuncs.c        |    1 +
-+ src/backend/parser/parse_utilcmd.c  |   64 ++++++-----------
-+ src/backend/tcop/utility.c          |   73 +++++++------------
-+ src/include/catalog/pg_constraint.h |    1 +
-+ src/include/commands/defrem.h       |    4 +-
-+ src/include/commands/tablecmds.h    |    2 +
-+ src/include/commands/trigger.h      |    2 +-
-+ src/include/nodes/parsenodes.h      |    2 +
-+ src/include/parser/parse_utilcmd.h  |    5 +-
-+ src/include/tcop/utility.h          |    2 -
-+ 18 files changed, 234 insertions(+), 157 deletions(-)
++ src/include/utils/datetime.h                       |   17 +++++---
++ src/interfaces/ecpg/pgtypeslib/datetime.c          |    4 +-
++ src/interfaces/ecpg/pgtypeslib/dt.h                |   17 +++++---
++ src/interfaces/ecpg/pgtypeslib/dt_common.c         |   44 ++++++++++++++------
++ src/interfaces/ecpg/pgtypeslib/interval.c          |    2 +-
++ src/interfaces/ecpg/pgtypeslib/timestamp.c         |    2 +-
++ .../ecpg/test/expected/pgtypeslib-dt_test2.c       |   22 +++++++---
++ .../ecpg/test/expected/pgtypeslib-dt_test2.stdout  |   19 ++++++++
++ src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc   |   10 ++++
++ src/test/regress/expected/interval.out             |    7 +++
++ src/test/regress/sql/interval.sql                  |    2 +
++ 11 files changed, 111 insertions(+), 35 deletions(-)
 +
-+diff --git a/src/backend/bootstrap/bootparse.y b/src/backend/bootstrap/bootparse.y
-+index f4a1b8f..eeffb0f 100644
-+--- a/src/backend/bootstrap/bootparse.y
-++++ b/src/backend/bootstrap/bootparse.y
-+@@ -27,6 +27,7 @@
-+ #include "bootstrap/bootstrap.h"
-+ #include "catalog/catalog.h"
-+ #include "catalog/heap.h"
-++#include "catalog/namespace.h"
-+ #include "catalog/pg_am.h"
-+ #include "catalog/pg_attribute.h"
-+ #include "catalog/pg_authid.h"
-+@@ -281,6 +282,7 @@ Boot_DeclareIndexStmt:
-+ 		  XDECLARE INDEX boot_ident oidspec ON boot_ident USING boot_ident LPAREN boot_index_params RPAREN
-+ 				{
-+ 					IndexStmt *stmt = makeNode(IndexStmt);
-++					Oid		relationId;
++diff --git a/src/include/utils/datetime.h b/src/include/utils/datetime.h
++index d73cc8d..4b805b6 100644
++--- a/src/include/utils/datetime.h
+++++ b/src/include/utils/datetime.h
++@@ -188,12 +188,17 @@ struct tzEntry;
++ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
++ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_ALL_SECS_M)
 + 
-+ 					do_start();
-+ 
-+@@ -302,7 +304,12 @@ Boot_DeclareIndexStmt:
-+ 					stmt->initdeferred = false;
-+ 					stmt->concurrent = false;
-+ 
-+-					DefineIndex(stmt,
-++					/* locks and races need not concern us in bootstrap mode */
-++					relationId = RangeVarGetRelid(stmt->relation, NoLock,
-++												  false);
-++
-++					DefineIndex(relationId,
-++								stmt,
-+ 								$4,
-+ 								false,
-+ 								false,
-+@@ -316,6 +323,7 @@ Boot_DeclareUniqueIndexStmt:
-+ 		  XDECLARE UNIQUE INDEX boot_ident oidspec ON boot_ident USING boot_ident LPAREN boot_index_params RPAREN
-+ 				{
-+ 					IndexStmt *stmt = makeNode(IndexStmt);
-++					Oid		relationId;
-+ 
-+ 					do_start();
-+ 
-+@@ -337,7 +345,12 @@ Boot_DeclareUniqueIndexStmt:
-+ 					stmt->initdeferred = false;
-+ 					stmt->concurrent = false;
-+ 
-+-					DefineIndex(stmt,
-++					/* locks and races need not concern us in bootstrap mode */
-++					relationId = RangeVarGetRelid(stmt->relation, NoLock,
-++												  false);
-++
-++					DefineIndex(relationId,
-++								stmt,
-+ 								$5,
-+ 								false,
-+ 								false,
-+diff --git a/src/backend/catalog/index.c b/src/backend/catalog/index.c
-+index 7d6346a..ca8acf3 100644
-+--- a/src/backend/catalog/index.c
-++++ b/src/backend/catalog/index.c
-+@@ -1202,18 +1202,13 @@ index_constraint_create(Relation heapRelation,
-+ 	 */
-+ 	if (deferrable)
-+ 	{
-+-		RangeVar   *heapRel;
-+ 		CreateTrigStmt *trigger;
-+ 
-+-		heapRel = makeRangeVar(get_namespace_name(namespaceId),
-+-							   pstrdup(RelationGetRelationName(heapRelation)),
-+-							   -1);
-+-
-+ 		trigger = makeNode(CreateTrigStmt);
-+ 		trigger->trigname = (constraintType == CONSTRAINT_PRIMARY) ?
-+ 			"PK_ConstraintTrigger" :
-+ 			"Unique_ConstraintTrigger";
-+-		trigger->relation = heapRel;
-++		trigger->relation = NULL;
-+ 		trigger->funcname = SystemFuncName("unique_key_recheck");
-+ 		trigger->args = NIL;
-+ 		trigger->row = true;
-+@@ -1226,7 +1221,8 @@ index_constraint_create(Relation heapRelation,
-+ 		trigger->initdeferred = initdeferred;
-+ 		trigger->constrrel = NULL;
-+ 
-+-		(void) CreateTrigger(trigger, NULL, conOid, indexRelationId, true);
-++		(void) CreateTrigger(trigger, NULL, RelationGetRelid(heapRelation),
-++							 InvalidOid, conOid, indexRelationId, true);
-+ 	}
-+ 
-+ 	/*
-+diff --git a/src/backend/catalog/pg_constraint.c b/src/backend/catalog/pg_constraint.c
-+index 107a780..08a94cf 100644
-+--- a/src/backend/catalog/pg_constraint.c
-++++ b/src/backend/catalog/pg_constraint.c
-+@@ -746,6 +746,25 @@ AlterConstraintNamespaces(Oid ownerId, Oid oldNspId,
-+ }
-+ 
-+ /*
-++ * get_constraint_relation_oids
-++ *		Find the IDs of the relations to which a constraint refers.
-++ */
-++void
-++get_constraint_relation_oids(Oid constraint_oid, Oid *conrelid, Oid *confrelid)
-++{
-++	HeapTuple	tup;
-++	Form_pg_constraint	con;
-++
-++	tup = SearchSysCache1(CONSTROID, ObjectIdGetDatum(constraint_oid));
-++	if (!HeapTupleIsValid(tup)) /* should not happen */
-++		elog(ERROR, "cache lookup failed for constraint %u", constraint_oid);
-++	con = (Form_pg_constraint) GETSTRUCT(tup);
-++	*conrelid = con->conrelid;
-++	*confrelid = con->confrelid;
-++	ReleaseSysCache(tup);
-++}
-++
++-#define MAXDATELEN		63		/* maximum possible length of an input date
++-								 * string (not counting tr. null) */
++-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
++-								 * string */
++-#define TOKMAXLEN		10		/* only this many chars are stored in
++-								 * datetktbl */
 ++/*
-+  * get_relation_constraint_oid
-+  *		Find a constraint on the specified relation with the specified name.
-+  *		Returns constraint's OID.
-+diff --git a/src/backend/commands/indexcmds.c b/src/backend/commands/indexcmds.c
-+index f3ee278..ec5fb0d 100644
-+--- a/src/backend/commands/indexcmds.c
-++++ b/src/backend/commands/indexcmds.c
-+@@ -111,7 +111,6 @@ static void RangeVarCallbackForReindexIndex(const RangeVar *relation,
-+  */
-+ bool
-+ CheckIndexCompatible(Oid oldId,
-+-					 RangeVar *heapRelation,
-+ 					 char *accessMethodName,
-+ 					 List *attributeList,
-+ 					 List *exclusionOpNames)
-+@@ -139,7 +138,7 @@ CheckIndexCompatible(Oid oldId,
-+ 	Datum		d;
-+ 
-+ 	/* Caller should already have the relation locked in some way. */
-+-	relationId = RangeVarGetRelid(heapRelation, NoLock, false);
-++	relationId = IndexGetRelation(oldId, false);
-+ 
-+ 	/*
-+ 	 * We can pretend isconstraint = false unconditionally.  It only serves to
-+@@ -279,6 +278,8 @@ CheckIndexCompatible(Oid oldId,
-+  * DefineIndex
-+  *		Creates a new index.
-+  *
-++ * 'relationId': the OID of the heap relation on which the index is to be
-++ *		created
-+  * 'stmt': IndexStmt describing the properties of the new index.
-+  * 'indexRelationId': normally InvalidOid, but during bootstrap can be
-+  *		nonzero to specify a preselected OID for the index.
-+@@ -292,7 +293,8 @@ CheckIndexCompatible(Oid oldId,
-+  * Returns the OID of the created index.
-+  */
-+ Oid
-+-DefineIndex(IndexStmt *stmt,
-++DefineIndex(Oid relationId,
-++			IndexStmt *stmt,
-+ 			Oid indexRelationId,
-+ 			bool is_alter_table,
-+ 			bool check_rights,
-+@@ -305,7 +307,6 @@ DefineIndex(IndexStmt *stmt,
-+ 	Oid		   *collationObjectId;
-+ 	Oid		   *classObjectId;
-+ 	Oid			accessMethodId;
-+-	Oid			relationId;
-+ 	Oid			namespaceId;
-+ 	Oid			tablespaceId;
-+ 	List	   *indexColNames;
-+@@ -325,6 +326,7 @@ DefineIndex(IndexStmt *stmt,
-+ 	int			n_old_snapshots;
-+ 	LockRelId	heaprelid;
-+ 	LOCKTAG		heaplocktag;
-++	LOCKMODE	lockmode;
-+ 	Snapshot	snapshot;
-+ 	int			i;
-+ 
-+@@ -343,14 +345,18 @@ DefineIndex(IndexStmt *stmt,
-+ 						INDEX_MAX_KEYS)));
-+ 
-+ 	/*
-+-	 * Open heap relation, acquire a suitable lock on it, remember its OID
-+-	 *
-+ 	 * Only SELECT ... FOR UPDATE/SHARE are allowed while doing a standard
-+ 	 * index build; but for concurrent builds we allow INSERT/UPDATE/DELETE
-+ 	 * (but not VACUUM).
-++	 *
-++	 * NB: Caller is responsible for making sure that relationId refers
-++	 * to the relation on which the index should be built; except in bootstrap
-++	 * mode, this will typically require the caller to have already locked
-++	 * the relation.  To avoid lock upgrade hazards, that lock should be at
-++	 * least as strong as the one we take here.
-+ 	 */
-+-	rel = heap_openrv(stmt->relation,
-+-					  (stmt->concurrent ? ShareUpdateExclusiveLock : ShareLock));
-++	lockmode = stmt->concurrent ? ShareUpdateExclusiveLock : ShareLock;
-++	rel = heap_open(relationId, lockmode);
-+ 
-+ 	relationId = RelationGetRelid(rel);
-+ 	namespaceId = RelationGetNamespace(rel);
-+diff --git a/src/backend/commands/tablecmds.c b/src/backend/commands/tablecmds.c
-+index 7c1f779..bcb81ea 100644
-+--- a/src/backend/commands/tablecmds.c
-++++ b/src/backend/commands/tablecmds.c
-+@@ -283,7 +283,8 @@ static void validateCheckConstraint(Relation rel, HeapTuple constrtup);
-+ static void validateForeignKeyConstraint(char *conname,
-+ 							 Relation rel, Relation pkrel,
-+ 							 Oid pkindOid, Oid constraintOid);
-+-static void createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
-++static void createForeignKeyTriggers(Relation rel, Oid refRelOid,
-++						 Constraint *fkconstraint,
-+ 						 Oid constraintOid, Oid indexOid);
-+ static void ATController(Relation rel, List *cmds, bool recurse, LOCKMODE lockmode);
-+ static void ATPrepCmd(List **wqueue, Relation rel, AlterTableCmd *cmd,
-+@@ -360,8 +361,9 @@ static void ATExecAlterColumnType(AlteredTableInfo *tab, Relation rel,
-+ static void ATExecAlterColumnGenericOptions(Relation rel, const char *colName,
-+ 								List *options, LOCKMODE lockmode);
-+ static void ATPostAlterTypeCleanup(List **wqueue, AlteredTableInfo *tab, LOCKMODE lockmode);
-+-static void ATPostAlterTypeParse(Oid oldId, char *cmd,
-+-					 List **wqueue, LOCKMODE lockmode, bool rewrite);
-++static void ATPostAlterTypeParse(Oid oldId, Oid oldRelId, Oid refRelId,
-++					 char *cmd, List **wqueue, LOCKMODE lockmode,
-++					 bool rewrite);
-+ static void TryReuseIndex(Oid oldId, IndexStmt *stmt);
-+ static void TryReuseForeignKey(Oid oldId, Constraint *con);
-+ static void change_owner_fix_column_acls(Oid relationOid,
-+@@ -5406,7 +5408,8 @@ ATExecAddIndex(AlteredTableInfo *tab, Relation rel,
-+ 
-+ 	/* The IndexStmt has already been through transformIndexStmt */
-+ 
-+-	new_index = DefineIndex(stmt,
-++	new_index = DefineIndex(RelationGetRelid(rel),
-++							stmt,
-+ 							InvalidOid, /* no predefined OID */
-+ 							true,		/* is_alter_table */
-+ 							check_rights,
-+@@ -5728,7 +5731,10 @@ ATAddForeignKeyConstraint(AlteredTableInfo *tab, Relation rel,
-+ 	 * table; trying to start with a lesser lock will just create a risk of
-+ 	 * deadlock.)
-+ 	 */
-+-	pkrel = heap_openrv(fkconstraint->pktable, AccessExclusiveLock);
-++	if (OidIsValid(fkconstraint->old_pktable_oid))
-++		pkrel = heap_open(fkconstraint->old_pktable_oid, AccessExclusiveLock);
-++	else
-++		pkrel = heap_openrv(fkconstraint->pktable, AccessExclusiveLock);
-+ 
-+ 	/*
-+ 	 * Validity checks (permission checks wait till we have the column
-+@@ -6066,7 +6072,8 @@ ATAddForeignKeyConstraint(AlteredTableInfo *tab, Relation rel,
-+ 	/*
-+ 	 * Create the triggers that will enforce the constraint.
-+ 	 */
-+-	createForeignKeyTriggers(rel, fkconstraint, constrOid, indexOid);
-++	createForeignKeyTriggers(rel, RelationGetRelid(pkrel), fkconstraint,
-++							 constrOid, indexOid);
-+ 
-+ 	/*
-+ 	 * Tell Phase 3 to check that the constraint is satisfied by existing
-+@@ -6736,7 +6743,7 @@ validateForeignKeyConstraint(char *conname,
-+ }
-+ 
-+ static void
-+-CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
-++CreateFKCheckTrigger(Oid myRelOid, Oid refRelOid, Constraint *fkconstraint,
-+ 					 Oid constraintOid, Oid indexOid, bool on_insert)
-+ {
-+ 	CreateTrigStmt *fk_trigger;
-+@@ -6752,7 +6759,7 @@ CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
-+ 	 */
-+ 	fk_trigger = makeNode(CreateTrigStmt);
-+ 	fk_trigger->trigname = "RI_ConstraintTrigger_c";
-+-	fk_trigger->relation = myRel;
-++	fk_trigger->relation = NULL;
-+ 	fk_trigger->row = true;
-+ 	fk_trigger->timing = TRIGGER_TYPE_AFTER;
-+ 
-+@@ -6773,10 +6780,11 @@ CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
-+ 	fk_trigger->isconstraint = true;
-+ 	fk_trigger->deferrable = fkconstraint->deferrable;
-+ 	fk_trigger->initdeferred = fkconstraint->initdeferred;
-+-	fk_trigger->constrrel = fkconstraint->pktable;
-++	fk_trigger->constrrel = NULL;
-+ 	fk_trigger->args = NIL;
-+ 
-+-	(void) CreateTrigger(fk_trigger, NULL, constraintOid, indexOid, true);
-++	(void) CreateTrigger(fk_trigger, NULL, myRelOid, refRelOid, constraintOid,
-++						 indexOid, true);
-+ 
-+ 	/* Make changes-so-far visible */
-+ 	CommandCounterIncrement();
-+@@ -6786,18 +6794,13 @@ CreateFKCheckTrigger(RangeVar *myRel, Constraint *fkconstraint,
-+  * Create the triggers that implement an FK constraint.
-+  */
-+ static void
-+-createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
-++createForeignKeyTriggers(Relation rel, Oid refRelOid, Constraint *fkconstraint,
-+ 						 Oid constraintOid, Oid indexOid)
-+ {
-+-	RangeVar   *myRel;
-++	Oid			myRelOid;
-+ 	CreateTrigStmt *fk_trigger;
-+ 
-+-	/*
-+-	 * Reconstruct a RangeVar for my relation (not passed in, unfortunately).
-+-	 */
-+-	myRel = makeRangeVar(get_namespace_name(RelationGetNamespace(rel)),
-+-						 pstrdup(RelationGetRelationName(rel)),
-+-						 -1);
-++	myRelOid = RelationGetRelid(rel);
-+ 
-+ 	/* Make changes-so-far visible */
-+ 	CommandCounterIncrement();
-+@@ -6808,14 +6811,14 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
-+ 	 */
-+ 	fk_trigger = makeNode(CreateTrigStmt);
-+ 	fk_trigger->trigname = "RI_ConstraintTrigger_a";
-+-	fk_trigger->relation = fkconstraint->pktable;
-++	fk_trigger->relation = NULL;
-+ 	fk_trigger->row = true;
-+ 	fk_trigger->timing = TRIGGER_TYPE_AFTER;
-+ 	fk_trigger->events = TRIGGER_TYPE_DELETE;
-+ 	fk_trigger->columns = NIL;
-+ 	fk_trigger->whenClause = NULL;
-+ 	fk_trigger->isconstraint = true;
-+-	fk_trigger->constrrel = myRel;
-++	fk_trigger->constrrel = NULL;
-+ 	switch (fkconstraint->fk_del_action)
-+ 	{
-+ 		case FKCONSTR_ACTION_NOACTION:
-+@@ -6850,7 +6853,8 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
-+ 	}
-+ 	fk_trigger->args = NIL;
-+ 
-+-	(void) CreateTrigger(fk_trigger, NULL, constraintOid, indexOid, true);
-++	(void) CreateTrigger(fk_trigger, NULL, refRelOid, myRelOid, constraintOid,
-++						 indexOid, true);
-+ 
-+ 	/* Make changes-so-far visible */
-+ 	CommandCounterIncrement();
-+@@ -6861,14 +6865,14 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
-+ 	 */
-+ 	fk_trigger = makeNode(CreateTrigStmt);
-+ 	fk_trigger->trigname = "RI_ConstraintTrigger_a";
-+-	fk_trigger->relation = fkconstraint->pktable;
-++	fk_trigger->relation = NULL;
-+ 	fk_trigger->row = true;
-+ 	fk_trigger->timing = TRIGGER_TYPE_AFTER;
-+ 	fk_trigger->events = TRIGGER_TYPE_UPDATE;
-+ 	fk_trigger->columns = NIL;
-+ 	fk_trigger->whenClause = NULL;
-+ 	fk_trigger->isconstraint = true;
-+-	fk_trigger->constrrel = myRel;
-++	fk_trigger->constrrel = NULL;
-+ 	switch (fkconstraint->fk_upd_action)
-+ 	{
-+ 		case FKCONSTR_ACTION_NOACTION:
-+@@ -6903,7 +6907,8 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
-+ 	}
-+ 	fk_trigger->args = NIL;
-+ 
-+-	(void) CreateTrigger(fk_trigger, NULL, constraintOid, indexOid, true);
-++	(void) CreateTrigger(fk_trigger, NULL, refRelOid, myRelOid, constraintOid,
-++						 indexOid, true);
-+ 
-+ 	/* Make changes-so-far visible */
-+ 	CommandCounterIncrement();
-+@@ -6912,8 +6917,10 @@ createForeignKeyTriggers(Relation rel, Constraint *fkconstraint,
-+ 	 * Build and execute CREATE CONSTRAINT TRIGGER statements for the CHECK
-+ 	 * action for both INSERTs and UPDATEs on the referencing table.
-+ 	 */
-+-	CreateFKCheckTrigger(myRel, fkconstraint, constraintOid, indexOid, true);
-+-	CreateFKCheckTrigger(myRel, fkconstraint, constraintOid, indexOid, false);
-++	CreateFKCheckTrigger(myRelOid, refRelOid, fkconstraint, constraintOid,
-++						 indexOid, true);
-++	CreateFKCheckTrigger(myRelOid, refRelOid, fkconstraint, constraintOid,
-++						 indexOid, false);
-+ }
-+ 
-+ /*
-+@@ -7832,15 +7839,36 @@ ATPostAlterTypeCleanup(List **wqueue, AlteredTableInfo *tab, LOCKMODE lockmode)
-+ 	 * lock on the table the constraint is attached to, and we need to get
-+ 	 * that before dropping.  It's safe because the parser won't actually look
-+ 	 * at the catalogs to detect the existing entry.
-++	 *
-++	 * We can't rely on the output of deparsing to tell us which relation
-++	 * to operate on, because concurrent activity might have made the name
-++	 * resolve differently.  Instead, we've got to use the OID of the
-++	 * constraint or index we're processing to figure out which relation
-++	 * to operate on.
-+ 	 */
-+ 	forboth(oid_item, tab->changedConstraintOids,
-+ 			def_item, tab->changedConstraintDefs)
-+-		ATPostAlterTypeParse(lfirst_oid(oid_item), (char *) lfirst(def_item),
-++	{
-++		Oid		oldId = lfirst_oid(oid_item);
-++		Oid		relid;
-++		Oid		confrelid;
-++
-++		get_constraint_relation_oids(oldId, &relid, &confrelid);
-++		ATPostAlterTypeParse(oldId, relid, confrelid,
-++							 (char *) lfirst(def_item),
-+ 							 wqueue, lockmode, tab->rewrite);
-++	}
-+ 	forboth(oid_item, tab->changedIndexOids,
-+ 			def_item, tab->changedIndexDefs)
-+-		ATPostAlterTypeParse(lfirst_oid(oid_item), (char *) lfirst(def_item),
-++	{
-++		Oid		oldId = lfirst_oid(oid_item);
-++		Oid		relid;
-++
-++		relid = IndexGetRelation(oldId, false);
-++		ATPostAlterTypeParse(oldId, relid, InvalidOid,
-++							 (char *) lfirst(def_item),
-+ 							 wqueue, lockmode, tab->rewrite);
-++	}
-+ 
-+ 	/*
-+ 	 * Now we can drop the existing constraints and indexes --- constraints
-+@@ -7873,12 +7901,13 @@ ATPostAlterTypeCleanup(List **wqueue, AlteredTableInfo *tab, LOCKMODE lockmode)
-+ }
-+ 
-+ static void
-+-ATPostAlterTypeParse(Oid oldId, char *cmd,
-++ATPostAlterTypeParse(Oid oldId, Oid oldRelId, Oid refRelId, char *cmd,
-+ 					 List **wqueue, LOCKMODE lockmode, bool rewrite)
-+ {
-+ 	List	   *raw_parsetree_list;
-+ 	List	   *querytree_list;
-+ 	ListCell   *list_item;
-++	Relation	rel;
-+ 
-+ 	/*
-+ 	 * We expect that we will get only ALTER TABLE and CREATE INDEX
-+@@ -7894,16 +7923,21 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
-+ 
-+ 		if (IsA(stmt, IndexStmt))
-+ 			querytree_list = lappend(querytree_list,
-+-									 transformIndexStmt((IndexStmt *) stmt,
-++									 transformIndexStmt(oldRelId,
-++														(IndexStmt *) stmt,
-+ 														cmd));
-+ 		else if (IsA(stmt, AlterTableStmt))
-+ 			querytree_list = list_concat(querytree_list,
-+-							 transformAlterTableStmt((AlterTableStmt *) stmt,
-++							 transformAlterTableStmt(oldRelId,
-++													 (AlterTableStmt *) stmt,
-+ 													 cmd));
-+ 		else
-+ 			querytree_list = lappend(querytree_list, stmt);
-+ 	}
-+ 
-++	/* Caller should already have acquired whatever lock we need. */
-++	rel = relation_open(oldRelId, NoLock);
-++
-+ 	/*
-+ 	 * Attach each generated command to the proper place in the work queue.
-+ 	 * Note this could result in creation of entirely new work-queue entries.
-+@@ -7915,7 +7949,6 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
-+ 	foreach(list_item, querytree_list)
-+ 	{
-+ 		Node	   *stm = (Node *) lfirst(list_item);
-+-		Relation	rel;
-+ 		AlteredTableInfo *tab;
-+ 
-+ 		switch (nodeTag(stm))
-+@@ -7928,14 +7961,12 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
-+ 					if (!rewrite)
-+ 						TryReuseIndex(oldId, stmt);
-+ 
-+-					rel = relation_openrv(stmt->relation, lockmode);
-+ 					tab = ATGetQueueEntry(wqueue, rel);
-+ 					newcmd = makeNode(AlterTableCmd);
-+ 					newcmd->subtype = AT_ReAddIndex;
-+ 					newcmd->def = (Node *) stmt;
-+ 					tab->subcmds[AT_PASS_OLD_INDEX] =
-+ 						lappend(tab->subcmds[AT_PASS_OLD_INDEX], newcmd);
-+-					relation_close(rel, NoLock);
-+ 					break;
-+ 				}
-+ 			case T_AlterTableStmt:
-+@@ -7943,7 +7974,6 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
-+ 					AlterTableStmt *stmt = (AlterTableStmt *) stm;
-+ 					ListCell   *lcmd;
-+ 
-+-					rel = relation_openrv(stmt->relation, lockmode);
-+ 					tab = ATGetQueueEntry(wqueue, rel);
-+ 					foreach(lcmd, stmt->cmds)
-+ 					{
-+@@ -7964,6 +7994,7 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
-+ 							case AT_AddConstraint:
-+ 								Assert(IsA(cmd->def, Constraint));
-+ 								con = (Constraint *) cmd->def;
-++								con->old_pktable_oid = refRelId;
-+ 								/* rewriting neither side of a FK */
-+ 								if (con->contype == CONSTR_FOREIGN &&
-+ 									!rewrite && !tab->rewrite)
-+@@ -7977,7 +8008,6 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
-+ 									 (int) cmd->subtype);
-+ 						}
-+ 					}
-+-					relation_close(rel, NoLock);
-+ 					break;
-+ 				}
-+ 			default:
-+@@ -7985,6 +8015,8 @@ ATPostAlterTypeParse(Oid oldId, char *cmd,
-+ 					 (int) nodeTag(stm));
-+ 		}
-+ 	}
-++
-++	relation_close(rel, NoLock);
-+ }
-+ 
-+ /*
-+@@ -7995,7 +8027,6 @@ static void
-+ TryReuseIndex(Oid oldId, IndexStmt *stmt)
-+ {
-+ 	if (CheckIndexCompatible(oldId,
-+-							 stmt->relation,
-+ 							 stmt->accessMethod,
-+ 							 stmt->indexParams,
-+ 							 stmt->excludeOpNames))
-+@@ -10291,6 +10322,38 @@ RangeVarCallbackOwnsTable(const RangeVar *relation,
-+ }
-+ 
-+ /*
-++ * Callback to RangeVarGetRelidExtended(), similar to
-++ * RangeVarCallbackOwnsTable() but without checks on the type of the relation.
+++ * Working buffer size for input and output of interval, timestamp, etc.
+++ * Inputs that need more working space will be rejected early.  Longer outputs
+++ * will overrun buffers, so this must suffice for all possible output.  As of
+++ * this writing, interval_out() needs the most space at ~90 bytes.
 ++ */
-++void
-++RangeVarCallbackOwnsRelation(const RangeVar *relation,
-++							 Oid relId, Oid oldRelId, void *arg)
-++{
-++	HeapTuple	tuple;
-++
-++	/* Nothing to do if the relation was not found. */
-++	if (!OidIsValid(relId))
-++		return;
-++
-++	tuple = SearchSysCache1(RELOID, ObjectIdGetDatum(relId));
-++	if (!HeapTupleIsValid(tuple))		/* should not happen */
-++		elog(ERROR, "cache lookup failed for relation %u", relId);
-++
-++	if (!pg_class_ownercheck(relId, GetUserId()))
-++		aclcheck_error(ACLCHECK_NOT_OWNER, ACL_KIND_CLASS,
-++					   relation->relname);
-++
-++	if (!allowSystemTableMods &&
-++		IsSystemClass((Form_pg_class) GETSTRUCT(tuple)))
-++		ereport(ERROR,
-++				(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
-++				 errmsg("permission denied: \"%s\" is a system catalog",
-++						relation->relname)));
-++
-++	ReleaseSysCache(tuple);
-++}
-++
-++/*
-+  * Common RangeVarGetRelid callback for rename, set schema, and alter table
-+  * processing.
-+  */
-+diff --git a/src/backend/commands/trigger.c b/src/backend/commands/trigger.c
-+index f546d94..9e6c954 100644
-+--- a/src/backend/commands/trigger.c
-++++ b/src/backend/commands/trigger.c
-+@@ -42,6 +42,7 @@
-+ #include "pgstat.h"
-+ #include "rewrite/rewriteManip.h"
-+ #include "storage/bufmgr.h"
-++#include "storage/lmgr.h"
-+ #include "tcop/utility.h"
-+ #include "utils/acl.h"
-+ #include "utils/builtins.h"
-+@@ -94,6 +95,13 @@ static void AfterTriggerSaveEvent(EState *estate, ResultRelInfo *relinfo,
-+  * queryString is the source text of the CREATE TRIGGER command.
-+  * This must be supplied if a whenClause is specified, else it can be NULL.
-+  *
-++ * relOid, if nonzero, is the relation on which the trigger should be
-++ * created.  If zero, the name provided in the statement will be looked up.
-++ *
-++ * refRelOid, if nonzero, is the relation to which the constraint trigger
-++ * refers.  If zero, the constraint relation name provided in the statement
-++ * will be looked up as needed.
-++ *
-+  * constraintOid, if nonzero, says that this trigger is being created
-+  * internally to implement that constraint.  A suitable pg_depend entry will
-+  * be made to link the trigger to that constraint.	constraintOid is zero when
-+@@ -116,7 +124,7 @@ static void AfterTriggerSaveEvent(EState *estate, ResultRelInfo *relinfo,
-+  */
-+ Oid
-+ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
-+-			  Oid constraintOid, Oid indexOid,
-++			  Oid relOid, Oid refRelOid, Oid constraintOid, Oid indexOid,
-+ 			  bool isInternal)
-+ {
-+ 	int16		tgtype;
-+@@ -145,7 +153,10 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
-+ 	ObjectAddress myself,
-+ 				referenced;
+++#define MAXDATELEN		128
+++/* maximum possible number of fields in a date string */
+++#define MAXDATEFIELDS	25
+++/* only this many chars are stored in datetktbl */
+++#define TOKMAXLEN		10
 + 
-+-	rel = heap_openrv(stmt->relation, AccessExclusiveLock);
-++	if (OidIsValid(relOid))
-++		rel = heap_open(relOid, AccessExclusiveLock);
-++	else
-++		rel = heap_openrv(stmt->relation, AccessExclusiveLock);
++ /* keep this struct small; it gets used a lot */
++ typedef struct
++diff --git a/src/interfaces/ecpg/pgtypeslib/datetime.c b/src/interfaces/ecpg/pgtypeslib/datetime.c
++index 823626f..4adcd1e 100644
++--- a/src/interfaces/ecpg/pgtypeslib/datetime.c
+++++ b/src/interfaces/ecpg/pgtypeslib/datetime.c
++@@ -61,14 +61,14 @@ PGTYPESdate_from_asc(char *str, char **endptr)
++ 	int			nf;
++ 	char	   *field[MAXDATEFIELDS];
++ 	int			ftype[MAXDATEFIELDS];
++-	char		lowstr[MAXDATELEN + 1];
+++	char		lowstr[MAXDATELEN + MAXDATEFIELDS];
++ 	char	   *realptr;
++ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
 + 
-+ 	/*
-+ 	 * Triggers must be on tables or views, and there are additional
-+@@ -194,7 +205,7 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
-+ 				 errmsg("permission denied: \"%s\" is a system catalog",
-+ 						RelationGetRelationName(rel))));
++ 	bool		EuroDates = FALSE;
 + 
-+-	if (stmt->isconstraint && stmt->constrrel != NULL)
-++	if (stmt->isconstraint)
++ 	errno = 0;
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
 + 	{
++ 		errno = PGTYPES_DATE_BAD_DATE;
++ 		return INT_MIN;
++diff --git a/src/interfaces/ecpg/pgtypeslib/dt.h b/src/interfaces/ecpg/pgtypeslib/dt.h
++index dfe6f9e..2780593 100644
++--- a/src/interfaces/ecpg/pgtypeslib/dt.h
+++++ b/src/interfaces/ecpg/pgtypeslib/dt.h
++@@ -192,12 +192,17 @@ typedef double fsec_t;
++ #define DTK_DATE_M		(DTK_M(YEAR) | DTK_M(MONTH) | DTK_M(DAY))
++ #define DTK_TIME_M		(DTK_M(HOUR) | DTK_M(MINUTE) | DTK_M(SECOND))
++ 
++-#define MAXDATELEN		63		/* maximum possible length of an input date
++-								 * string (not counting tr. null) */
++-#define MAXDATEFIELDS	25		/* maximum possible number of fields in a date
++-								 * string */
++-#define TOKMAXLEN		10		/* only this many chars are stored in
++-								 * datetktbl */
+++/*
+++ * Working buffer size for input and output of interval, timestamp, etc.
+++ * Inputs that need more working space will be rejected early.  Longer outputs
+++ * will overrun buffers, so this must suffice for all possible output.  As of
+++ * this writing, PGTYPESinterval_to_asc() needs the most space at ~90 bytes.
+++ */
+++#define MAXDATELEN		128
+++/* maximum possible number of fields in a date string */
+++#define MAXDATEFIELDS	25
+++/* only this many chars are stored in datetktbl */
+++#define TOKMAXLEN		10
++ 
++ /* keep this struct small; it gets used a lot */
++ typedef struct
++diff --git a/src/interfaces/ecpg/pgtypeslib/dt_common.c b/src/interfaces/ecpg/pgtypeslib/dt_common.c
++index 6b89e4a..18178dd 100644
++--- a/src/interfaces/ecpg/pgtypeslib/dt_common.c
+++++ b/src/interfaces/ecpg/pgtypeslib/dt_common.c
++@@ -1171,15 +1171,22 @@ DecodeNumberField(int len, char *str, int fmask,
++ 	if ((cp = strchr(str, '.')) != NULL)
++ 	{
++ #ifdef HAVE_INT64_TIMESTAMP
++-		char		fstr[MAXDATELEN + 1];
+++		char		fstr[7];
+++		int			i;
+++
+++		cp++;
++ 
 + 		/*
-+ 		 * We must take a lock on the target relation to protect against
-+@@ -203,7 +214,14 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
-+ 		 * might end up creating a pg_constraint entry referencing a
-+ 		 * nonexistent table.
++ 		 * OK, we have at most six digits to care about. Let's construct a
++-		 * string and then do the conversion to an integer.
+++		 * string with those digits, zero-padded on the right, and then do
+++		 * the conversion to an integer.
+++		 *
+++		 * XXX This truncates the seventh digit, unlike rounding it as do
+++		 * the backend and the !HAVE_INT64_TIMESTAMP case.
 + 		 */
-+-		constrrelid = RangeVarGetRelid(stmt->constrrel, AccessShareLock, false);
-++		if (OidIsValid(refRelOid))
-++		{
-++			LockRelationOid(refRelOid, AccessShareLock);
-++			constrrelid = refRelOid;
-++		}
-++		else if (stmt->constrrel != NULL)
-++			constrrelid = RangeVarGetRelid(stmt->constrrel, AccessShareLock,
-++										   false);
-+ 	}
-+ 
-+ 	/* permission checks */
-+@@ -513,7 +531,7 @@ CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
-+ 				ereport(ERROR,
-+ 						(errcode(ERRCODE_DUPLICATE_OBJECT),
-+ 				  errmsg("trigger \"%s\" for relation \"%s\" already exists",
-+-						 trigname, stmt->relation->relname)));
-++						 trigname, RelationGetRelationName(rel))));
-+ 		}
-+ 		systable_endscan(tgscan);
-+ 	}
-+diff --git a/src/backend/nodes/copyfuncs.c b/src/backend/nodes/copyfuncs.c
-+index 9bac994..dbe0f6a 100644
-+--- a/src/backend/nodes/copyfuncs.c
-++++ b/src/backend/nodes/copyfuncs.c
-+@@ -2357,6 +2357,7 @@ _copyConstraint(const Constraint *from)
-+ 	COPY_SCALAR_FIELD(fk_upd_action);
-+ 	COPY_SCALAR_FIELD(fk_del_action);
-+ 	COPY_NODE_FIELD(old_conpfeqop);
-++	COPY_SCALAR_FIELD(old_pktable_oid);
-+ 	COPY_SCALAR_FIELD(skip_validation);
-+ 	COPY_SCALAR_FIELD(initially_valid);
-+ 
-+diff --git a/src/backend/nodes/equalfuncs.c b/src/backend/nodes/equalfuncs.c
-+index d185654..f8770b0 100644
-+--- a/src/backend/nodes/equalfuncs.c
-++++ b/src/backend/nodes/equalfuncs.c
-+@@ -2143,6 +2143,7 @@ _equalConstraint(const Constraint *a, const Constraint *b)
-+ 	COMPARE_SCALAR_FIELD(fk_upd_action);
-+ 	COMPARE_SCALAR_FIELD(fk_del_action);
-+ 	COMPARE_NODE_FIELD(old_conpfeqop);
-++	COMPARE_SCALAR_FIELD(old_pktable_oid);
-+ 	COMPARE_SCALAR_FIELD(skip_validation);
-+ 	COMPARE_SCALAR_FIELD(initially_valid);
-+ 
-+diff --git a/src/backend/nodes/outfuncs.c b/src/backend/nodes/outfuncs.c
-+index 1df71f6..888ffd2 100644
-+--- a/src/backend/nodes/outfuncs.c
-++++ b/src/backend/nodes/outfuncs.c
-+@@ -2653,6 +2653,7 @@ _outConstraint(StringInfo str, const Constraint *node)
-+ 			WRITE_CHAR_FIELD(fk_upd_action);
-+ 			WRITE_CHAR_FIELD(fk_del_action);
-+ 			WRITE_NODE_FIELD(old_conpfeqop);
-++			WRITE_OID_FIELD(old_pktable_oid);
-+ 			WRITE_BOOL_FIELD(skip_validation);
-+ 			WRITE_BOOL_FIELD(initially_valid);
-+ 			break;
-+diff --git a/src/backend/parser/parse_utilcmd.c b/src/backend/parser/parse_utilcmd.c
-+index e3f9c62..5df939a 100644
-+--- a/src/backend/parser/parse_utilcmd.c
-++++ b/src/backend/parser/parse_utilcmd.c
-+@@ -1867,14 +1867,18 @@ transformFKConstraints(CreateStmtContext *cxt,
-+  * a predicate expression.	There are several code paths that create indexes
-+  * without bothering to call this, because they know they don't have any
-+  * such expressions to deal with.
-++ *
-++ * To avoid race conditions, it's important that this function rely only on
-++ * the passed-in relid (and not on stmt->relation) to determine the target
-++ * relation.
-+  */
-+ IndexStmt *
-+-transformIndexStmt(IndexStmt *stmt, const char *queryString)
-++transformIndexStmt(Oid relid, IndexStmt *stmt, const char *queryString)
-+ {
-+-	Relation	rel;
-+ 	ParseState *pstate;
-+ 	RangeTblEntry *rte;
-+ 	ListCell   *l;
-++	Relation	rel;
-+ 
-+ 	/*
-+ 	 * We must not scribble on the passed-in IndexStmt, so copy it.  (This is
-+@@ -1882,26 +1886,17 @@ transformIndexStmt(IndexStmt *stmt, const char *queryString)
-+ 	 */
-+ 	stmt = (IndexStmt *) copyObject(stmt);
-+ 
-+-	/*
-+-	 * Open the parent table with appropriate locking.	We must do this
-+-	 * because addRangeTableEntry() would acquire only AccessShareLock,
-+-	 * leaving DefineIndex() needing to do a lock upgrade with consequent risk
-+-	 * of deadlock.  Make sure this stays in sync with the type of lock
-+-	 * DefineIndex() wants. If we are being called by ALTER TABLE, we will
-+-	 * already hold a higher lock.
-+-	 */
-+-	rel = heap_openrv(stmt->relation,
-+-				  (stmt->concurrent ? ShareUpdateExclusiveLock : ShareLock));
-+-
-+ 	/* Set up pstate */
-+ 	pstate = make_parsestate(NULL);
-+ 	pstate->p_sourcetext = queryString;
-+ 
-+ 	/*
-+ 	 * Put the parent table into the rtable so that the expressions can refer
-+-	 * to its fields without qualification.
-++	 * to its fields without qualification.  Caller is responsible for locking
-++	 * relation, but we still need to open it.
-+ 	 */
-+-	rte = addRangeTableEntry(pstate, stmt->relation, NULL, false, true);
-++	rel = relation_open(relid, NoLock);
-++	rte = addRangeTableEntryForRelation(pstate, rel, NULL, false, true);
-+ 
-+ 	/* no to join list, yes to namespaces */
-+ 	addRTEtoQuery(pstate, rte, false, true, true);
-+@@ -1955,7 +1950,7 @@ transformIndexStmt(IndexStmt *stmt, const char *queryString)
-+ 
-+ 	free_parsestate(pstate);
-+ 
-+-	/* Close relation, but keep the lock */
-++	/* Close relation */
-+ 	heap_close(rel, NoLock);
-+ 
-+ 	return stmt;
-+@@ -2277,9 +2272,14 @@ transformRuleStmt(RuleStmt *stmt, const char *queryString,
-+  * Returns a List of utility commands to be done in sequence.  One of these
-+  * will be the transformed AlterTableStmt, but there may be additional actions
-+  * to be done before and after the actual AlterTable() call.
-++ *
-++ * To avoid race conditions, it's important that this function rely only on
-++ * the passed-in relid (and not on stmt->relation) to determine the target
-++ * relation.
-+  */
-+ List *
-+-transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
-++transformAlterTableStmt(Oid relid, AlterTableStmt *stmt,
-++						const char *queryString)
-+ {
-+ 	Relation	rel;
-+ 	ParseState *pstate;
-+@@ -2291,7 +2291,6 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
-+ 	List	   *newcmds = NIL;
-+ 	bool		skipValidation = true;
-+ 	AlterTableCmd *newcmd;
-+-	LOCKMODE	lockmode;
-+ 
-+ 	/*
-+ 	 * We must not scribble on the passed-in AlterTableStmt, so copy it. (This
-+@@ -2299,29 +2298,8 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
-+ 	 */
-+ 	stmt = (AlterTableStmt *) copyObject(stmt);
-+ 
-+-	/*
-+-	 * Determine the appropriate lock level for this list of subcommands.
-+-	 */
-+-	lockmode = AlterTableGetLockLevel(stmt->cmds);
-+-
-+-	/*
-+-	 * Acquire appropriate lock on the target relation, which will be held
-+-	 * until end of transaction.  This ensures any decisions we make here
-+-	 * based on the state of the relation will still be good at execution. We
-+-	 * must get lock now because execution will later require it; taking a
-+-	 * lower grade lock now and trying to upgrade later risks deadlock.  Any
-+-	 * new commands we add after this must not upgrade the lock level
-+-	 * requested here.
-+-	 */
-+-	rel = relation_openrv_extended(stmt->relation, lockmode, stmt->missing_ok);
-+-	if (rel == NULL)
-+-	{
-+-		/* this message is consistent with relation_openrv */
-+-		ereport(NOTICE,
-+-				(errmsg("relation \"%s\" does not exist, skipping",
-+-						stmt->relation->relname)));
-+-		return NIL;
-+-	}
-++	/* Caller is responsible for locking the relation */
-++	rel = relation_open(relid, NoLock);
-+ 
-+ 	/* Set up pstate and CreateStmtContext */
-+ 	pstate = make_parsestate(NULL);
-+@@ -2434,7 +2412,7 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
-+ 		IndexStmt  *idxstmt = (IndexStmt *) lfirst(l);
-+ 
-+ 		Assert(IsA(idxstmt, IndexStmt));
-+-		idxstmt = transformIndexStmt(idxstmt, queryString);
-++		idxstmt = transformIndexStmt(relid, idxstmt, queryString);
-+ 		newcmd = makeNode(AlterTableCmd);
-+ 		newcmd->subtype = OidIsValid(idxstmt->indexOid) ? AT_AddIndexConstraint : AT_AddIndex;
-+ 		newcmd->def = (Node *) idxstmt;
-+@@ -2458,7 +2436,7 @@ transformAlterTableStmt(AlterTableStmt *stmt, const char *queryString)
-+ 		newcmds = lappend(newcmds, newcmd);
-+ 	}
-+ 
-+-	/* Close rel but keep lock */
-++	/* Close rel */
-+ 	relation_close(rel, NoLock);
-+ 
-+ 	/*
-+diff --git a/src/backend/tcop/utility.c b/src/backend/tcop/utility.c
-+index 509bf4d..7903e03 100644
-+--- a/src/backend/tcop/utility.c
-++++ b/src/backend/tcop/utility.c
-+@@ -67,49 +67,6 @@ ProcessUtility_hook_type ProcessUtility_hook = NULL;
-+ 
-+ 
-+ /*
-+- * Verify user has ownership of specified relation, else ereport.
-+- *
-+- * If noCatalogs is true then we also deny access to system catalogs,
-+- * except when allowSystemTableMods is true.
-+- */
-+-void
-+-CheckRelationOwnership(RangeVar *rel, bool noCatalogs)
-+-{
-+-	Oid			relOid;
-+-	HeapTuple	tuple;
-+-
-+-	/*
-+-	 * XXX: This is unsafe in the presence of concurrent DDL, since it is
-+-	 * called before acquiring any lock on the target relation.  However,
-+-	 * locking the target relation (especially using something like
-+-	 * AccessExclusiveLock) before verifying that the user has permissions is
-+-	 * not appealing either.
-+-	 */
-+-	relOid = RangeVarGetRelid(rel, NoLock, false);
-+-
-+-	tuple = SearchSysCache1(RELOID, ObjectIdGetDatum(relOid));
-+-	if (!HeapTupleIsValid(tuple))		/* should not happen */
-+-		elog(ERROR, "cache lookup failed for relation %u", relOid);
-+-
-+-	if (!pg_class_ownercheck(relOid, GetUserId()))
-+-		aclcheck_error(ACLCHECK_NOT_OWNER, ACL_KIND_CLASS,
-+-					   rel->relname);
-+-
-+-	if (noCatalogs)
-+-	{
-+-		if (!allowSystemTableMods &&
-+-			IsSystemClass((Form_pg_class) GETSTRUCT(tuple)))
-+-			ereport(ERROR,
-+-					(errcode(ERRCODE_INSUFFICIENT_PRIVILEGE),
-+-					 errmsg("permission denied: \"%s\" is a system catalog",
-+-							rel->relname)));
-+-	}
-+-
-+-	ReleaseSysCache(tuple);
-+-}
-+-
-+-
-+-/*
-+  * CommandIsReadOnly: is an executable query read-only?
-+  *
-+  * This is a much stricter test than we apply for XactReadOnly mode;
-+@@ -723,7 +680,8 @@ standard_ProcessUtility(Node *parsetree,
-+ 				if (OidIsValid(relid))
-+ 				{
-+ 					/* Run parse analysis ... */
-+-					stmts = transformAlterTableStmt(atstmt, queryString);
-++					stmts = transformAlterTableStmt(relid, atstmt,
-++													queryString);
-+ 
-+ 					/* ... and do it */
-+ 					foreach(l, stmts)
-+@@ -910,18 +868,36 @@ standard_ProcessUtility(Node *parsetree,
-+ 		case T_IndexStmt:		/* CREATE INDEX */
-+ 			{
-+ 				IndexStmt  *stmt = (IndexStmt *) parsetree;
-++				Oid			relid;
-++				LOCKMODE	lockmode;
-+ 
-+ 				if (stmt->concurrent)
-+ 					PreventTransactionChain(isTopLevel,
-+ 											"CREATE INDEX CONCURRENTLY");
-+ 
-+-				CheckRelationOwnership(stmt->relation, true);
-++				/*
-++				 * Look up the relation OID just once, right here at the
-++				 * beginning, so that we don't end up repeating the name
-++				 * lookup later and latching onto a different relation
-++				 * partway through.  To avoid lock upgrade hazards, it's
-++				 * important that we take the strongest lock that will
-++				 * eventually be needed here, so the lockmode calculation
-++				 * needs to match what DefineIndex() does.
-++				 */
-++				lockmode = stmt->concurrent ? ShareUpdateExclusiveLock
-++					: ShareLock;
-++				relid =
-++					RangeVarGetRelidExtended(stmt->relation, lockmode,
-++											 false, false,
-++											 RangeVarCallbackOwnsRelation,
-++											 NULL);
-+ 
-+ 				/* Run parse analysis ... */
-+-				stmt = transformIndexStmt(stmt, queryString);
-++				stmt = transformIndexStmt(relid, stmt, queryString);
-+ 
-+ 				/* ... and do it */
-+-				DefineIndex(stmt,
-++				DefineIndex(relid,	/* OID of heap relation */
-++							stmt,
-+ 							InvalidOid, /* no predefined OID */
-+ 							false,		/* is_alter_table */
-+ 							true,		/* check_rights */
-+@@ -1057,7 +1033,8 @@ standard_ProcessUtility(Node *parsetree,
-+ 
-+ 		case T_CreateTrigStmt:
-+ 			(void) CreateTrigger((CreateTrigStmt *) parsetree, queryString,
-+-								 InvalidOid, InvalidOid, false);
-++								 InvalidOid, InvalidOid, InvalidOid,
-++								 InvalidOid, false);
-+ 			break;
-+ 
-+ 		case T_CreatePLangStmt:
-+diff --git a/src/include/catalog/pg_constraint.h b/src/include/catalog/pg_constraint.h
-+index d9d40b2..d8f8da4 100644
-+--- a/src/include/catalog/pg_constraint.h
-++++ b/src/include/catalog/pg_constraint.h
-+@@ -246,6 +246,7 @@ extern char *ChooseConstraintName(const char *name1, const char *name2,
-+ 
-+ extern void AlterConstraintNamespaces(Oid ownerId, Oid oldNspId,
-+ 						  Oid newNspId, bool isType, ObjectAddresses *objsMoved);
-++extern void get_constraint_relation_oids(Oid constraint_oid, Oid *conrelid, Oid *confrelid);
-+ extern Oid	get_relation_constraint_oid(Oid relid, const char *conname, bool missing_ok);
-+ extern Oid	get_domain_constraint_oid(Oid typid, const char *conname, bool missing_ok);
-+ 
-+diff --git a/src/include/commands/defrem.h b/src/include/commands/defrem.h
-+index 9b6d57a..a00fd37 100644
-+--- a/src/include/commands/defrem.h
-++++ b/src/include/commands/defrem.h
-+@@ -20,7 +20,8 @@
-+ extern void RemoveObjects(DropStmt *stmt);
-+ 
-+ /* commands/indexcmds.c */
-+-extern Oid DefineIndex(IndexStmt *stmt,
-++extern Oid DefineIndex(Oid relationId,
-++			IndexStmt *stmt,
-+ 			Oid indexRelationId,
-+ 			bool is_alter_table,
-+ 			bool check_rights,
-+@@ -35,7 +36,6 @@ extern char *makeObjectName(const char *name1, const char *name2,
-+ extern char *ChooseRelationName(const char *name1, const char *name2,
-+ 				   const char *label, Oid namespaceid);
-+ extern bool CheckIndexCompatible(Oid oldId,
-+-					 RangeVar *heapRelation,
-+ 					 char *accessMethodName,
-+ 					 List *attributeList,
-+ 					 List *exclusionOpNames);
-+diff --git a/src/include/commands/tablecmds.h b/src/include/commands/tablecmds.h
-+index 4f32062..d41f8a1 100644
-+--- a/src/include/commands/tablecmds.h
-++++ b/src/include/commands/tablecmds.h
-+@@ -78,4 +78,6 @@ extern void AtEOSubXact_on_commit_actions(bool isCommit,
-+ extern void RangeVarCallbackOwnsTable(const RangeVar *relation,
-+ 						  Oid relId, Oid oldRelId, void *arg);
-+ 
-++extern void RangeVarCallbackOwnsRelation(const RangeVar *relation,
-++						  Oid relId, Oid oldRelId, void *noCatalogs);
-+ #endif   /* TABLECMDS_H */
-+diff --git a/src/include/commands/trigger.h b/src/include/commands/trigger.h
-+index 9303341..0869c0b 100644
-+--- a/src/include/commands/trigger.h
-++++ b/src/include/commands/trigger.h
-+@@ -109,7 +109,7 @@ extern PGDLLIMPORT int SessionReplicationRole;
-+ #define TRIGGER_DISABLED					'D'
-+ 
-+ extern Oid CreateTrigger(CreateTrigStmt *stmt, const char *queryString,
-+-			  Oid constraintOid, Oid indexOid,
-++			  Oid relOid, Oid refRelOid, Oid constraintOid, Oid indexOid,
-+ 			  bool isInternal);
-+ 
-+ extern void RemoveTriggerById(Oid trigOid);
-+diff --git a/src/include/nodes/parsenodes.h b/src/include/nodes/parsenodes.h
-+index 327f7cf..31f5479 100644
-+--- a/src/include/nodes/parsenodes.h
-++++ b/src/include/nodes/parsenodes.h
-+@@ -1566,6 +1566,8 @@ typedef struct Constraint
-+ 	/* Fields used for constraints that allow a NOT VALID specification */
-+ 	bool		skip_validation;	/* skip validation of existing rows? */
-+ 	bool		initially_valid;	/* mark the new constraint as valid? */
++-		strcpy(fstr, (cp + 1));
++-		strcpy(fstr + strlen(fstr), "000000");
++-		*(fstr + 6) = '\0';
+++		for (i = 0; i < 6; i++)
+++			fstr[i] = *cp != '\0' ? *cp++ : '0';
+++		fstr[i] = '\0';
++ 		*fsec = strtol(fstr, NULL, 10);
++ #else
++ 		*fsec = strtod(cp, NULL);
++@@ -1531,15 +1538,22 @@ DecodeTime(char *str, int *tmask, struct tm * tm, fsec_t *fsec)
++ 		else if (*cp == '.')
++ 		{
++ #ifdef HAVE_INT64_TIMESTAMP
++-			char		fstr[MAXDATELEN + 1];
+++			char		fstr[7];
+++			int			i;
 ++
-++	Oid			old_pktable_oid; /* pg_constraint.confrelid of my former self */
-+ } Constraint;
+++			cp++;
 + 
-+ /* ----------------------
-+diff --git a/src/include/parser/parse_utilcmd.h b/src/include/parser/parse_utilcmd.h
-+index 4ad793a..d8b340e 100644
-+--- a/src/include/parser/parse_utilcmd.h
-++++ b/src/include/parser/parse_utilcmd.h
-+@@ -18,9 +18,10 @@
++ 			/*
++-			 * OK, we have at most six digits to work with. Let's construct a
++-			 * string and then do the conversion to an integer.
+++			 * OK, we have at most six digits to care about. Let's construct a
+++			 * string with those digits, zero-padded on the right, and then do
+++			 * the conversion to an integer.
+++			 *
+++			 * XXX This truncates the seventh digit, unlike rounding it as do
+++			 * the backend and the !HAVE_INT64_TIMESTAMP case.
++ 			 */
++-			strncpy(fstr, (cp + 1), 7);
++-			strcpy(fstr + strlen(fstr), "000000");
++-			*(fstr + 6) = '\0';
+++			for (i = 0; i < 6; i++)
+++				fstr[i] = *cp != '\0' ? *cp++ : '0';
+++			fstr[i] = '\0';
++ 			*fsec = strtol(fstr, &cp, 10);
++ #else
++ 			str = cp;
++@@ -1665,6 +1679,9 @@ DecodePosixTimezone(char *str, int *tzp)
++  *	DTK_NUMBER can hold date fields (yy.ddd)
++  *	DTK_STRING can hold months (January) and time zones (PST)
++  *	DTK_DATE can hold Posix time zones (GMT-8)
+++ *
+++ * The "lowstr" work buffer must have at least strlen(timestr) + MAXDATEFIELDS
+++ * bytes of space.  On output, field[] entries will point into it.
++  */
++ int
++ ParseDateTime(char *timestr, char *lowstr,
++@@ -1677,7 +1694,10 @@ ParseDateTime(char *timestr, char *lowstr,
++ 	/* outer loop through fields */
++ 	while (*(*endstr) != '\0')
++ 	{
+++		/* Record start of current field */
++ 		field[nf] = lp;
+++		if (nf >= MAXDATEFIELDS)
+++			return -1;
++ 
++ 		/* leading digit? then date or time */
++ 		if (isdigit((unsigned char) *(*endstr)))
++@@ -1818,8 +1838,6 @@ ParseDateTime(char *timestr, char *lowstr,
++ 		/* force in a delimiter after each field */
++ 		*lp++ = '\0';
++ 		nf++;
++-		if (nf > MAXDATEFIELDS)
++-			return -1;
++ 	}
++ 
++ 	*numfields = nf;
++diff --git a/src/interfaces/ecpg/pgtypeslib/interval.c b/src/interfaces/ecpg/pgtypeslib/interval.c
++index bcc10ee..fdd8f49 100644
++--- a/src/interfaces/ecpg/pgtypeslib/interval.c
+++++ b/src/interfaces/ecpg/pgtypeslib/interval.c
++@@ -1092,7 +1092,7 @@ PGTYPESinterval_from_asc(char *str, char **endptr)
++ 	tm->tm_sec = 0;
++ 	fsec = 0;
++ 
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
++ 	{
++ 		errno = PGTYPES_INTVL_BAD_INTERVAL;
++ 		return NULL;
++diff --git a/src/interfaces/ecpg/pgtypeslib/timestamp.c b/src/interfaces/ecpg/pgtypeslib/timestamp.c
++index 7d3f7c8..4f91e63 100644
++--- a/src/interfaces/ecpg/pgtypeslib/timestamp.c
+++++ b/src/interfaces/ecpg/pgtypeslib/timestamp.c
++@@ -297,7 +297,7 @@ PGTYPEStimestamp_from_asc(char *str, char **endptr)
++ 	char	   *realptr;
++ 	char	  **ptr = (endptr != NULL) ? endptr : &realptr;
++ 
++-	if (strlen(str) >= sizeof(lowstr))
+++	if (strlen(str) > MAXDATELEN)
++ 	{
++ 		errno = PGTYPES_TS_BAD_TIMESTAMP;
++ 		return (noresult);
++diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
++index d3ebb0e..0ba1936 100644
++--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
+++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.c
++@@ -45,6 +45,15 @@ char *dates[] = { "19990108foobar",
++ 				  "1999.008",
++ 				  "J2451187",
++ 				  "January 8, 99 BC",
+++				  /*
+++				   * Maximize space usage in ParseDateTime() with 25
+++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
+++				   */
+++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+++				  /* 26 fields */
+++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++ 				  NULL };
++ 
++ /* do not conflict with libc "times" symbol */
++@@ -52,6 +61,7 @@ static char *times[] = { "0:04",
++ 				  "1:59 PDT",
++ 				  "13:24:40 -8:00",
++ 				  "13:24:40.495+3",
+++				  "13:24:40.123456789+3",
++ 				  NULL };
++ 
++ char *intervals[] = { "1 minute",
++@@ -73,22 +83,22 @@ main(void)
++ 		 
++ 		 
++ 	
++-#line 52 "dt_test2.pgc"
+++#line 62 "dt_test2.pgc"
++  date date1 ;
++  
++-#line 53 "dt_test2.pgc"
+++#line 63 "dt_test2.pgc"
++  timestamp ts1 , ts2 ;
++  
++-#line 54 "dt_test2.pgc"
+++#line 64 "dt_test2.pgc"
++  char * text ;
++  
++-#line 55 "dt_test2.pgc"
+++#line 65 "dt_test2.pgc"
++  interval * i1 ;
++  
++-#line 56 "dt_test2.pgc"
+++#line 66 "dt_test2.pgc"
++  date * dc ;
++ /* exec sql end declare section */
++-#line 57 "dt_test2.pgc"
+++#line 67 "dt_test2.pgc"
 + 
 + 
-+ extern List *transformCreateStmt(CreateStmt *stmt, const char *queryString);
-+-extern List *transformAlterTableStmt(AlterTableStmt *stmt,
-++extern List *transformAlterTableStmt(Oid relid, AlterTableStmt *stmt,
-+ 						const char *queryString);
-+-extern IndexStmt *transformIndexStmt(IndexStmt *stmt, const char *queryString);
-++extern IndexStmt *transformIndexStmt(Oid relid, IndexStmt *stmt,
-++				   const char *queryString);
-+ extern void transformRuleStmt(RuleStmt *stmt, const char *queryString,
-+ 				  List **actions, Node **whereClause);
-+ extern List *transformCreateSchemaStmt(CreateSchemaStmt *stmt);
-+diff --git a/src/include/tcop/utility.h b/src/include/tcop/utility.h
-+index 54190b2..ae871ca 100644
-+--- a/src/include/tcop/utility.h
-++++ b/src/include/tcop/utility.h
-+@@ -42,6 +42,4 @@ extern LogStmtLevel GetCommandLogLevel(Node *parsetree);
++ 	int i, j;
++diff --git a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
++index 24e9d26..9a4587b 100644
++--- a/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
+++++ b/src/interfaces/ecpg/test/expected/pgtypeslib-dt_test2.stdout
++@@ -8,85 +8,104 @@ TS[3,0]: 1999-01-08 00:04:00
++ TS[3,1]: 1999-01-08 01:59:00
++ TS[3,2]: 1999-01-08 13:24:40
++ TS[3,3]: 1999-01-08 13:24:40.495
+++TS[3,4]: 1999-01-08 13:24:40.123456
++ Date[4]: 1999-01-08 (N - F)
++ TS[4,0]: 1999-01-08 00:04:00
++ TS[4,1]: 1999-01-08 01:59:00
++ TS[4,2]: 1999-01-08 13:24:40
++ TS[4,3]: 1999-01-08 13:24:40.495
+++TS[4,4]: 1999-01-08 13:24:40.123456
++ Date[5]: 1999-01-08 (N - F)
++ TS[5,0]: 1999-01-08 00:04:00
++ TS[5,1]: 1999-01-08 01:59:00
++ TS[5,2]: 1999-01-08 13:24:40
++ TS[5,3]: 1999-01-08 13:24:40.495
+++TS[5,4]: 1999-01-08 13:24:40.123456
++ Date[6]: 1999-01-18 (N - F)
++ TS[6,0]: 1999-01-18 00:04:00
++ TS[6,1]: 1999-01-18 01:59:00
++ TS[6,2]: 1999-01-18 13:24:40
++ TS[6,3]: 1999-01-18 13:24:40.495
+++TS[6,4]: 1999-01-18 13:24:40.123456
++ Date[7]: 2003-01-02 (N - F)
++ TS[7,0]: 2003-01-02 00:04:00
++ TS[7,1]: 2003-01-02 01:59:00
++ TS[7,2]: 2003-01-02 13:24:40
++ TS[7,3]: 2003-01-02 13:24:40.495
+++TS[7,4]: 2003-01-02 13:24:40.123456
++ Date[8]: 1999-01-08 (N - F)
++ TS[8,0]: 1999-01-08 00:04:00
++ TS[8,1]: 1999-01-08 01:59:00
++ TS[8,2]: 1999-01-08 13:24:40
++ TS[8,3]: 1999-01-08 13:24:40.495
+++TS[8,4]: 1999-01-08 13:24:40.123456
++ Date[9]: 1999-01-08 (N - F)
++ TS[9,0]: 1999-01-08 00:04:00
++ TS[9,1]: 1999-01-08 01:59:00
++ TS[9,2]: 1999-01-08 13:24:40
++ TS[9,3]: 1999-01-08 13:24:40.495
+++TS[9,4]: 1999-01-08 13:24:40.123456
++ Date[10]: 1999-01-08 (N - F)
++ TS[10,0]: 1999-01-08 00:04:00
++ TS[10,1]: 1999-01-08 01:59:00
++ TS[10,2]: 1999-01-08 13:24:40
++ TS[10,3]: 1999-01-08 13:24:40.495
+++TS[10,4]: 1999-01-08 13:24:40.123456
++ Date[11]: 1999-01-08 (N - F)
++ TS[11,0]: 1999-01-08 00:04:00
++ TS[11,1]: 1999-01-08 01:59:00
++ TS[11,2]: 1999-01-08 13:24:40
++ TS[11,3]: 1999-01-08 13:24:40.495
+++TS[11,4]: 1999-01-08 13:24:40.123456
++ Date[12]: 1999-01-08 (N - F)
++ TS[12,0]: 1999-01-08 00:04:00
++ TS[12,1]: 1999-01-08 01:59:00
++ TS[12,2]: 1999-01-08 13:24:40
++ TS[12,3]: 1999-01-08 13:24:40.495
+++TS[12,4]: 1999-01-08 13:24:40.123456
++ Date[13]: 2006-01-08 (N - F)
++ TS[13,0]: 2006-01-08 00:04:00
++ TS[13,1]: 2006-01-08 01:59:00
++ TS[13,2]: 2006-01-08 13:24:40
++ TS[13,3]: 2006-01-08 13:24:40.495
+++TS[13,4]: 2006-01-08 13:24:40.123456
++ Date[14]: 1999-01-08 (N - F)
++ TS[14,0]: 1999-01-08 00:04:00
++ TS[14,1]: 1999-01-08 01:59:00
++ TS[14,2]: 1999-01-08 13:24:40
++ TS[14,3]: 1999-01-08 13:24:40.495
+++TS[14,4]: 1999-01-08 13:24:40.123456
++ Date[15]: 1999-01-08 (N - F)
++ TS[15,0]: 1999-01-08 00:04:00
++ TS[15,1]: 1999-01-08 01:59:00
++ TS[15,2]: 1999-01-08 13:24:40
++ TS[15,3]: 1999-01-08 13:24:40.495
+++TS[15,4]: 1999-01-08 13:24:40.123456
++ Date[16]: 1999-01-08 (N - F)
++ TS[16,0]: 1999-01-08 00:04:00
++ TS[16,1]: 1999-01-08 01:59:00
++ TS[16,2]: 1999-01-08 13:24:40
++ TS[16,3]: 1999-01-08 13:24:40.495
+++TS[16,4]: 1999-01-08 13:24:40.123456
++ Date[17]: 1999-01-08 (N - F)
++ TS[17,0]: 1999-01-08 00:04:00
++ TS[17,1]: 1999-01-08 01:59:00
++ TS[17,2]: 1999-01-08 13:24:40
++ TS[17,3]: 1999-01-08 13:24:40.495
+++TS[17,4]: 1999-01-08 13:24:40.123456
++ Date[18]: 1999-01-08 (N - F)
++ TS[18,0]: 1999-01-08 00:04:00
++ TS[18,1]: 1999-01-08 01:59:00
++ TS[18,2]: 1999-01-08 13:24:40
++ TS[18,3]: 1999-01-08 13:24:40.495
+++TS[18,4]: 1999-01-08 13:24:40.123456
++ Date[19]: 0099-01-08 BC (N - F)
++ TS[19,0]: 0099-01-08 00:04:00 BC
++ TS[19,1]: 0099-01-08 01:59:00 BC
++ TS[19,2]: 0099-01-08 13:24:40 BC
+++TS[19,4]: 0099-01-08 13:24:40.123456 BC
+++Date[20]: - (N - T)
+++Date[21]: - (N - T)
++ interval[0]: @ 1 min
++ interval_copy[0]: @ 1 min
++ interval[1]: @ 1 day 12 hours 59 mins 10 secs
++diff --git a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
++index 0edf012..a127dd9 100644
++--- a/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
+++++ b/src/interfaces/ecpg/test/pgtypeslib/dt_test2.pgc
++@@ -27,6 +27,15 @@ char *dates[] = { "19990108foobar",
++ 				  "1999.008",
++ 				  "J2451187",
++ 				  "January 8, 99 BC",
+++				  /*
+++				   * Maximize space usage in ParseDateTime() with 25
+++				   * (MAXDATEFIELDS) fields and 128 (MAXDATELEN) total length.
+++				   */
+++				  "........................Xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+++				  /* 26 fields */
+++				  ".........................aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+++				  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
++ 				  NULL };
 + 
-+ extern bool CommandIsReadOnly(Node *parsetree);
++ /* do not conflict with libc "times" symbol */
++@@ -34,6 +43,7 @@ static char *times[] = { "0:04",
++ 				  "1:59 PDT",
++ 				  "13:24:40 -8:00",
++ 				  "13:24:40.495+3",
+++				  "13:24:40.123456789+3",
++ 				  NULL };
 + 
-+-extern void CheckRelationOwnership(RangeVar *rel, bool noCatalogs);
-+-
-+ #endif   /* UTILITY_H */
++ char *intervals[] = { "1 minute",
++diff --git a/src/test/regress/expected/interval.out b/src/test/regress/expected/interval.out
++index 3bf2211..99fd0ca 100644
++--- a/src/test/regress/expected/interval.out
+++++ b/src/test/regress/expected/interval.out
++@@ -306,6 +306,13 @@ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31
++  @ 4541 years 4 mons 4 days 17 mins 31 secs
++ (1 row)
++ 
+++-- test long interval output
+++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
+++                                         interval                                          
+++-------------------------------------------------------------------------------------------
+++ @ 100000000 years 10 mons -1000000000 days -1000000000 hours -10 mins -10.000001 secs ago
+++(1 row)
+++
++ -- test justify_hours() and justify_days()
++ SELECT justify_hours(interval '6 months 3 days 52 hours 3 minutes 2 seconds') as "6 mons 5 days 4 hours 3 mins 2 seconds";
++  6 mons 5 days 4 hours 3 mins 2 seconds 
++diff --git a/src/test/regress/sql/interval.sql b/src/test/regress/sql/interval.sql
++index f1da4c2..7cee286 100644
++--- a/src/test/regress/sql/interval.sql
+++++ b/src/test/regress/sql/interval.sql
++@@ -108,6 +108,8 @@ select avg(f1) from interval_tbl;
++ -- test long interval input
++ select '4 millenniums 5 centuries 4 decades 1 year 4 months 4 days 17 minutes 31 seconds'::interval;
++ 
+++-- test long interval output
+++select '100000000y 10mon -1000000000d -1000000000h -10min -10.000001s ago'::interval;
++ 
++ -- test justify_hours() and justify_days()
++ 
 +-- 
 +1.7.5.4
 +
 diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index e2e5947..9cfb2b6 100644
+index 9cfb2b6..4a62eb6 100644
 --- a/meta-oe/recipes-support/postgresql/postgresql.inc
 +++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -34,6 +34,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
-            file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
+@@ -35,6 +35,7 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
             file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
             file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
-+           file://0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch \
+            file://0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch \
++           file://0006-Fix-handling-of-wide-datetime-input-output.patch \
            "
  
  LEAD_SONAME = "libpq.so"
