@@ -1,35 +1,28 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f174.google.com (mail-yk0-f174.google.com
-	[209.85.160.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 49EB572051
+Return-Path: <frieder.schrempf@online.de>
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.187])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B63F7242F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 15:25:48 +0000 (UTC)
-Received: by mail-yk0-f174.google.com with SMTP id 10so4809616ykt.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Dec 2014 07:25:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=DO2XlVMLN/nz5M5zkwf32QPjwUUwDLg3sYukqzCvSEU=;
-	b=Ez1wLm/HL04pNy9fA5XNZBCyes/6B7Or4AJIYbEqi1vY3PbtAYsEN9BGPZylZXZbuU
-	NNzPwRSuAR2+tTlM9nFNSQmlaXb5UkYtOSEhI/WjDYS3774atZQbnSqMTkccgspzIDlx
-	nh9Kf/hY/Ffr1ZIsojfRyIle2js4PcjpMG3VyiZvQteCrR1t87Bdyfiiiq3QBK2XEBTe
-	zp4sJ0n4O6YGzhJgYPJBTWa1DvDN1qT8E1iworYeNk+bYESMUFyeYUy3yOuj99OMatWX
-	bt8r34qIMtZVIQ/jPYGkYS/PGg1vZ/InWYIfyKbcy93b4+EgRHqRx2jjKsZRL7pX/upl
-	0LOg==
-MIME-Version: 1.0
-X-Received: by 10.170.83.198 with SMTP id z189mr67673338ykz.70.1417447549499; 
-	Mon, 01 Dec 2014 07:25:49 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.142.132 with HTTP; Mon, 1 Dec 2014 07:25:49 -0800 (PST)
-In-Reply-To: <1417436579-26311-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1417436579-26311-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Mon, 1 Dec 2014 13:25:49 -0200
-X-Google-Sender-Auth: 0Vt4iy2tUm_8GdJYrSPyYn9GEHk
-Message-ID: <CAP9ODKrLBUYE3YJM9d4aBa2Jx_WiWvGu5hoDYKNcQttUxQ=UFA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][daisy][PATCH] gdal: fix sqlite, expat and libtiff detection
+	Mon,  1 Dec 2014 15:26:44 +0000 (UTC)
+Received: from localhost.localdomain (host-89-242-129-94.as13285.net
+	[89.242.129.94])
+	by mrelayeu.kundenserver.de (node=mreue002) with ESMTP (Nemesis)
+	id 0MU9sv-1XVRh72ndx-00Qg8K; Mon, 01 Dec 2014 16:26:45 +0100
+From: Frieder Schrempf <frieder.schrempf@online.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 Dec 2014 15:26:35 +0000
+Message-Id: <1417447595-2912-1-git-send-email-frieder.schrempf@online.de>
+X-Mailer: git-send-email 1.7.9.5
+X-Provags-ID: V02:K0:lWWI7TS2TZynU5rnDW9OKkoD2RqCa46EyQtzMFr51oU
+	bIBsIeiGS12tILbCZY2o7VftA9YNyNlcx1VsfqCI9hBKWE5qAn
+	d4oId9PXlYDjWykQqTrKavYps53mzqjNd7UnQEcCHK6GYtyaUf
+	maLOpUjv0qSn6CFfPAYVwgaHrfYbgSzUk9HeyFvgOuK3PSBb1v
+	jwgE1NKHkmpaXBe7j5Z9zOQMfCg5XVSJjJAmfwu1bcd/CVLcPK
+	ASqfInKqUaeagYobqGj9yKTFWEuAr+fPoNQJv646e/gXkYokDq
+	MLqIOsmmzN5UgQAEoRgvxex/4QhWWsHfOiWYyPOo322AQsaM0S
+	gHrGoAdUMWxyMRAfIO7YmOjR6yib+TE0+QP3I5DiShPmEM6buj
+	+WhR8bHFjblsWBEM4l+Psil2sk0KA3Em/BTEvQrVWIQVv36Tqo xG3hE
+X-UI-Out-Filterresults: notjunk:1;
+Subject: [meta-qt5][PATCH] add patch to allow qtwebengine build for linux-oe-g++ platform
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,26 +36,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 15:25:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 01 Dec 2014 15:26:45 -0000
 
-On Mon, Dec 1, 2014 at 10:22 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> * fixes following configure errors like:
->   checking for SQLite3 library >= 3.0.0... yes
->   cat: /OE/sysroots/qemux86/usr/lib/include/sqlite3.h: No such file or directory
->   /OE/work/i586-starfish-linux/gdal/1.10.1-r0/gdal-1.10.1/configure:
->   line 25411: test: !=: unary operator expected
->   configure: WARNING: Can not find SQLITE_VERSION macro in sqlite3.h
->   header to retrieve SQLite version!
-> * and autodetected expat support which sometimes tries to use host
->   version from /usr/include
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../0001-allow-build-for-linux-oe-g-platform.patch |   25 ++++++++++++++++++++
+ recipes-qt/qt5/qtwebengine_git.bb                  |    1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
+diff --git a/recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch b/recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch
+new file mode 100644
+index 0000000..05177b1
+--- /dev/null
++++ b/recipes-qt/qt5/qtwebengine/0001-allow-build-for-linux-oe-g-platform.patch
+@@ -0,0 +1,25 @@
++From a84b72bc45024a57ad75df8c10abfa0a9eb7f726 Mon Sep 17 00:00:00 2001
++From: Frieder Schrempf <frieder.schrempf@online.de>
++Date: Mon, 1 Dec 2014 14:34:40 +0000
++Subject: [PATCH 1/1] allow build for linux-oe-g++ platform
++
++---
++ tools/qmake/mkspecs/features/functions.prf |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
++index 491a640..0bb2145 100644
++--- a/tools/qmake/mkspecs/features/functions.prf
+++++ b/tools/qmake/mkspecs/features/functions.prf
++@@ -7,7 +7,7 @@ defineTest(isPlatformSupported) {
++ 
++   linux-g++*:!isGCCVersionSupported():return(false)
++   !isPythonVersionSupported(): return(false)
++-  linux-g++*|win32-msvc2013|macx-clang: return(true)
+++  linux-g++*|linux-oe-g++*|win32-msvc2013|macx-clang: return(true)
++   boot2qt: return(true)
++ 
++   warning("Qt WebEngine can currently only be built for Linux (GCC), Windows (MSVC 2013), OS X (XCode 5.1+) or Qt for Device Creation".)
++-- 
++1.7.9.5
++
+diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+index 84012f8..8225456 100644
+--- a/recipes-qt/qt5/qtwebengine_git.bb
++++ b/recipes-qt/qt5/qtwebengine_git.bb
+@@ -8,6 +8,7 @@ SRC_URI += " \
+     git://gitorious.org/qt/qtwebengine-chromium.git;name=chromium;branch=${QT_MODULE_BRANCH_CHROMIUM};destsuffix=git/src/3rdparty \
+     file://0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch \
+     file://0002-functions.prf-Try-to-add-_moc-suffix.patch \
++    file://0001-allow-build-for-linux-oe-g-platform.patch \
+ "
+ SRCREV_qtwebengine = "03a52863226aeb774721db610ba831808b30836a"
+ SRCREV_chromium = "66388297cf2ca42049fb099237134ec33465e2f5"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.7.9.5
+
 
