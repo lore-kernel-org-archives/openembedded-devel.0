@@ -1,38 +1,35 @@
-Return-Path: <petr.nechaev@cogentembedded.com>
-Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 346EE7211E
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f174.google.com (mail-yk0-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 49EB572051
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 13:40:58 +0000 (UTC)
-Received: by mail-la0-f51.google.com with SMTP id ms9so8611971lab.24
+	Mon,  1 Dec 2014 15:25:48 +0000 (UTC)
+Received: by mail-yk0-f174.google.com with SMTP id 10so4809616ykt.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Dec 2014 05:40:58 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=fRjIk2lyU11GwUEMZjikP6DFP4O97zpV573mvMv9SPA=;
-	b=hF6bSGhPW1VItns+Qq1Wcs7tKwHPK5n0GJiMnpPxj7c+SqyU2gVu5HknaIDVOoF6tm
-	IbHqmOpyN3hyKiru6Xz1QRRrJCc/+sO0NRSONzNplkuOLeoiutaMaf06XVVjMA2zor0G
-	JlRuj0l+7npeClTY84EfpLOfYKMjenw5y9s5i5AS3UJO4i+RYUGK/CePBMl4uPHQyHJ5
-	1a0x1IAk1RU7s0QnRGj2qTVwjB4aBbtWM6HWaR6udMw9rWRBMw+FXV4tm11To80YA3DA
-	qeV9lufk6vR3o/aHFbuASlTqDUueX07gUimZlvuqEkpV+rvv7wkc8gwHi+4Rie66x+9f
-	05qg==
-X-Gm-Message-State: ALoCoQnJoojWN7XNPcp0WLzv2o81c5/Xje8Z6PvbpQO9Tt8N2RQ936VL2BdiRZV/JqNedm9CGHHT
+	Mon, 01 Dec 2014 07:25:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=DO2XlVMLN/nz5M5zkwf32QPjwUUwDLg3sYukqzCvSEU=;
+	b=Ez1wLm/HL04pNy9fA5XNZBCyes/6B7Or4AJIYbEqi1vY3PbtAYsEN9BGPZylZXZbuU
+	NNzPwRSuAR2+tTlM9nFNSQmlaXb5UkYtOSEhI/WjDYS3774atZQbnSqMTkccgspzIDlx
+	nh9Kf/hY/Ffr1ZIsojfRyIle2js4PcjpMG3VyiZvQteCrR1t87Bdyfiiiq3QBK2XEBTe
+	zp4sJ0n4O6YGzhJgYPJBTWa1DvDN1qT8E1iworYeNk+bYESMUFyeYUy3yOuj99OMatWX
+	bt8r34qIMtZVIQ/jPYGkYS/PGg1vZ/InWYIfyKbcy93b4+EgRHqRx2jjKsZRL7pX/upl
+	0LOg==
 MIME-Version: 1.0
-X-Received: by 10.152.164.232 with SMTP id yt8mr57004178lab.7.1417441258355;
-	Mon, 01 Dec 2014 05:40:58 -0800 (PST)
-Received: by 10.25.23.86 with HTTP; Mon, 1 Dec 2014 05:40:58 -0800 (PST)
-In-Reply-To: <20141201133324.GB2466@jama>
-References: <mailman.1269.1417437531.1406.openembedded-devel@lists.openembedded.org>
-	<CAHPquwN5-Zy9=9rjZ-ktxibXX8VepN19qqu2JFRbkKMMsP_1fw@mail.gmail.com>
-	<20141201133324.GB2466@jama>
-Date: Mon, 1 Dec 2014 17:40:58 +0400
-Message-ID: <CAHPquwPjK47RrNw+dnUu7pN8u_fUsDo_Yf8usb9ySZU7UMU3GQ@mail.gmail.com>
-From: Petr Nechaev <petr.nechaev@cogentembedded.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH] Updated comments in qt5-versions.inc
+X-Received: by 10.170.83.198 with SMTP id z189mr67673338ykz.70.1417447549499; 
+	Mon, 01 Dec 2014 07:25:49 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.142.132 with HTTP; Mon, 1 Dec 2014 07:25:49 -0800 (PST)
+In-Reply-To: <1417436579-26311-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1417436579-26311-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 1 Dec 2014 13:25:49 -0200
+X-Google-Sender-Auth: 0Vt4iy2tUm_8GdJYrSPyYn9GEHk
+Message-ID: <CAP9ODKrLBUYE3YJM9d4aBa2Jx_WiWvGu5hoDYKNcQttUxQ=UFA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][daisy][PATCH] gdal: fix sqlite, expat and libtiff detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,86 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 13:41:02 -0000
+X-List-Received-Date: Mon, 01 Dec 2014 15:25:56 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Yes, that's for master-next.
+On Mon, Dec 1, 2014 at 10:22 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * fixes following configure errors like:
+>   checking for SQLite3 library >= 3.0.0... yes
+>   cat: /OE/sysroots/qemux86/usr/lib/include/sqlite3.h: No such file or directory
+>   /OE/work/i586-starfish-linux/gdal/1.10.1-r0/gdal-1.10.1/configure:
+>   line 25411: test: !=: unary operator expected
+>   configure: WARNING: Can not find SQLITE_VERSION macro in sqlite3.h
+>   header to retrieve SQLite version!
+> * and autodetected expat support which sometimes tries to use host
+>   version from /usr/include
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
----
-Petr
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-On Mon, Dec 1, 2014 at 4:33 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-
-> On Mon, Dec 01, 2014 at 05:27:15PM +0400, Petr Nechaev wrote:
-> > Updated comments to avoid confusion
->
-> This was meant only for master-next, right?
->
-> I've squashed it there to the update. Thanks
->
-> > ---------- Forwarded message ----------
-> > From: <openembedded-devel-owner@lists.openembedded.org>
-> > Date: Mon, Dec 1, 2014 at 3:38 PM
-> > Subject: [meta-qt5][PATCH] Updated comments in qt5-versions.inc
-> > To: petr.nechaev@cogentembedded.com
-> >
-> >
-> > Only members may post to the list. Please subscribe and post again.
-> >
-> >
-> >
-> > ---------- Forwarded message ----------
-> > From: Petr Nechaev <petr.nechaev@cogentembedded.com>
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Petr Nechaev <petr.nechaev@cogentembedded.com>
-> > Date: Mon, 1 Dec 2014 16:38:48 +0400
-> > Subject: [meta-qt5][PATCH] Updated comments in qt5-versions.inc
-> > Updated comments to avoid confusion
-> >
-> > ---
-> > Petr
->
-> > From 215b81d31a9f78a6da3ee2ae070d3b82bdb5ea44 Mon Sep 17 00:00:00 2001
-> > From: Petr Nechaev <petr.nechaev@cogentembedded.com>
-> > Date: Mon, 1 Dec 2014 15:28:34 +0300
-> > Subject: [meta-qt5][PATCH] Updated comments in qt5-versions.inc
-> >
-> > ---
-> >  conf/distro/include/qt5-versions.inc | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/conf/distro/include/qt5-versions.inc
-> b/conf/distro/include/qt5-versions.inc
-> > index 7530a24..71ece94 100644
-> > --- a/conf/distro/include/qt5-versions.inc
-> > +++ b/conf/distro/include/qt5-versions.inc
-> > @@ -1,5 +1,5 @@
-> >  # Select which version you prefer by defining QT5_VERSION and including
-> this file
-> > -# possible values now "5.3.2", "5.3.0+5.4.0-alpha1+git"
-> > +# possible values now "5.3.2", "5.3.0+5.4.0-rc1+git"
-> >
-> >  QT5_VERSION ?= "5.3.2"
-> >
-> > --
-> > 1.9.3
-> >
->
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
