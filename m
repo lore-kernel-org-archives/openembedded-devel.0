@@ -1,45 +1,25 @@
-Return-Path: <akuster@mvista.com>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id E5652722AB
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 75F0065D53
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 05:07:17 +0000 (UTC)
-Received: by mail-pa0-f42.google.com with SMTP id et14so10357935pad.1
+	Mon,  1 Dec 2014 07:34:00 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sB17Xxm0029751
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Nov 2014 21:07:18 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=KI7/4nBKJnJBCYT91IWmkQhL3SFB85l9rzV3u6SPkH0=;
-	b=RbWsi4gC1trE897LW5OnIJl06Zn9JUldAZ434+RXF7BnvfUux3VJjStV2vpKezZkr5
-	Ny7dYXviCRHMeH4gErpwrWiZn+5PImFs8EwVTU9hHQnYRTVsRMfbwh29GzTiXnHp9wPr
-	4SwdY42KyYlxo5NuUq3zR6rwdSKXYxbty1OuqUlKlIEkOy2QpAkA1nAdV8BUsW9u7E0D
-	yyMToxDCqlbL9V0bu/LDfdMvFNe/UJS9XPD2SOb2JQVk39BaiTz0wn0jkbPqVA7ATcoi
-	/ImAnB4/FfMl9x0NHo+bpPnoN8QUDi9lX1+skBrT47JwCFX68TTEyUhJmINY8IhfLmuU
-	EGdQ==
-X-Gm-Message-State: ALoCoQlQVQsmSKIHxzcQFUaA15YgZ57Im1Da6VNndUoBpKGpZmXigEPa9IYJaGSEMiOccpuJT0oC
-X-Received: by 10.68.97.131 with SMTP id ea3mr7980107pbb.144.1417410437933;
-	Sun, 30 Nov 2014 21:07:17 -0800 (PST)
-Received: from ?IPv6:2601:c:9380:601:6175:482f:87f2:5c37?
-	([2601:c:9380:601:6175:482f:87f2:5c37])
-	by mx.google.com with ESMTPSA id
-	lm3sm16357274pab.34.2014.11.30.21.07.16 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 30 Nov 2014 21:07:17 -0800 (PST)
-Message-ID: <547BF782.4020806@mvista.com>
-Date: Sun, 30 Nov 2014 21:07:14 -0800
-From: akuster <akuster@mvista.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
+	Sun, 30 Nov 2014 23:34:00 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.174.1; Sun, 30 Nov 2014 23:33:59 -0800
+From: Kai Kang <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 1 Dec 2014 15:32:44 +0800
+Message-ID: <1417419164-5354-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Joe MacDonald <joe_macdonald@mentor.com>
-References: <1417152844-23643-1-git-send-email-akuster808@gmail.com>
-	<20141201034817.GU3886@mentor.com>
-In-Reply-To: <20141201034817.GU3886@mentor.com>
-Subject: Re: [meta-networking][PATCH 0/2] two more Netkit packages
+X-Originating-IP: [128.224.153.152]
+Subject: [meta-perl][PATCH] libnet-ssleay-perl: avoid host contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,49 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 05:07:20 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Dec 2014 07:34:03 -0000
+Content-Type: text/plain
 
+Check the configure log, libnet-ssleay-perl uses host's openssl:
 
+*** Found OpenSSL-1.0.1 installed in /usr
 
-On 11/30/2014 07:48 PM, Joe MacDonald wrote:
-> Hey Armin,
->
-> I merged netkit-ftp.  Could you put together a pam-optional version of
-> netkit-rsh?  Or is that going to be a huge pain for you?
+Export OPENSSL_PREFIX to find the native openssl to use.
 
-no pain.
+Replace library pathes '/lib', '/usr/lib' and header path with correct
+staging pathes at same time.
 
-  I'd really
-> like to provide a version that uses PAM if available rather than
-> requires it.
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-many thanks,
-Armin
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+index 63594b9..f6c4b8b 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+@@ -28,12 +28,16 @@ S = "${WORKDIR}/Net-SSLeay-${PV}"
+ 
+ inherit cpan ptest
+ 
+-EXTRA_CPANFLAGS = "LIBS='-L=${libdir} -L=${base_libdir}' \
+-                   INC=-I=${includedir} \
++EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
++                   INC=-I=${STAGING_INCDIR} \
+                    'EXTRALIBS=-lssl -lcrypto -lz' \
+                    'LDLOADLIBS=-lssl -lcrypto -lz' \
+                   "
+ 
++do_configure_prepend() {
++    export OPENSSL_PREFIX=${STAGING_DIR_NATIVE}${prefix_native}
++}
++
+ do_install_ptest() {
+     cp -r ${B}/t ${D}${PTEST_PATH}
+ }
+-- 
+1.9.1
 
->
-> -J.
->
-> [[meta-networking][PATCH 0/2] two more Netkit packages] On 14.11.27 (Thu 21:34) Armin Kuster wrote:
->
->> Please consider these two packages for inclusion to meta-networking.
->> I have placed them in their own recipes location for others from the family to be added later.
->>
->> Armin Kuster (2):
->>    New package: netkit-rsh
->>    New package: Netkit-ftp
->>
->>   .../netkit-ftp/files/Add_ARG_MAX_define.patch      | 28 ++++++++++
->>   .../recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb   | 46 ++++++++++++++++
->>   .../files/rsh-redone_link_order_file.patch         | 64 ++++++++++++++++++++++
->>   .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   | 61 +++++++++++++++++++++
->>   4 files changed, 199 insertions(+)
->>   create mode 100644 meta-networking/recipes-netkit/netkit-ftp/files/Add_ARG_MAX_define.patch
->>   create mode 100644 meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
->>   create mode 100644 meta-networking/recipes-netkit/netkit-rsh/files/rsh-redone_link_order_file.patch
->>   create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
->>
->>
->>
 
