@@ -1,27 +1,31 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4977D65D40
+Return-Path: <anders@chargestorm.se>
+Received: from stoexhub03.domain01.net (STOEXHUB03.domain01.net
+	[83.145.59.144])
+	by mail.openembedded.org (Postfix) with ESMTP id 37054721D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 09:14:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44253768"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Dec 2014 17:11:10 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sB19E60J016415
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Dec 2014 17:14:07 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 1 Dec 2014 17:14:30 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 1 Dec 2014 17:14:06 +0800
-Message-ID: <1417425246-30891-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon,  1 Dec 2014 09:41:49 +0000 (UTC)
+Received: from ad.chargestorm.se (81.232.163.241) by stoexhub03.domain01.net
+	(10.12.10.3) with Microsoft SMTP Server (TLS) id 8.3.279.1;
+	Mon, 1 Dec 2014 10:41:47 +0100
+Date: Mon, 1 Dec 2014 10:41:07 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20141201094107.GA15993@ad.chargestorm.se>
+Mail-Followup-To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <cover.1414409458.git.anders@chargestorm.se>
+	<9a0b3d2f7e1ac7e854430fe1e93271c71f574083.1414409458.git.anders@chargestorm.se>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-oe][PATCH] logwatch: Add new recipe
+In-Reply-To: <9a0b3d2f7e1ac7e854430fe1e93271c71f574083.1414409458.git.anders@chargestorm.se>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-GFI-SMTP-Submission: 1
+Subject: Re: [meta-qt5][PATCH 1/1] qmake5: set OE_QMAKE_INCDIR_QT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,84 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 09:14:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 Dec 2014 09:41:51 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Logwatch is a customizable, pluggable log-monitoring system. It will go
-through your logs for a given period of time and make a report in the areas
-that you wish with the detail that you wish. Easy to use - works right out of
-the package on many systems.
+ping
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
----
- .../recipes-extended/logwatch/logwatch_7.4.1.bb    | 57 ++++++++++++++++++++++
- 1 file changed, 57 insertions(+)
- create mode 100644 meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
 
-diff --git a/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb b/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
-new file mode 100644
-index 0000000..ee35efe
---- /dev/null
-+++ b/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
-@@ -0,0 +1,57 @@
-+SUMMARY = "A log file analysis program"
-+DESCRIPTION = "\
-+Logwatch is a customizable, pluggable log-monitoring system. It will go \
-+through your logs for a given period of time and make a report in the areas \
-+that you wish with the detail that you wish. Easy to use - works right out of \
-+the package on many systems.\
-+"
-+SECTION = "devel"
-+HOMEPAGE = "http://www.logwatch.org/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=f2566bb12b16d2d80d90ebc533261aa7"
-+
-+SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
-+SRC_URI[md5sum] = "a0c3d8721f877bdcd4a9089eb1b4691b"
-+SRC_URI[sha256sum] = "35ec31f9fe981aaa727b144ab3ff2eb655997d8ccabaf66586458f5dfc3a56eb"
-+
-+do_install() {
-+    install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
-+    install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/logfiles
-+    install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/services
-+    install -m 0755 -d ${D}${localstatedir}/cache/logwatch
-+    mv conf/ ${D}${datadir}/logwatch/default.conf
-+    mv scripts/ ${D}${datadir}/logwatch/scripts
-+    mv lib ${D}${datadir}/logwatch/lib
-+
-+    install -m 0755 -d ${D}${mandir}/man1
-+    install -m 0755 -d ${D}${mandir}/man5
-+    install -m 0755 -d ${D}${mandir}/man8
-+    install -m 0644 amavis-logwatch.1 ${D}${mandir}/man1
-+    install -m 0644 postfix-logwatch.1 ${D}${mandir}/man1
-+    install -m 0644 ignore.conf.5 ${D}${mandir}/man5
-+    install -m 0644 override.conf.5 ${D}${mandir}/man5
-+    install -m 0644 logwatch.conf.5 ${D}${mandir}/man5
-+    install -m 0644 logwatch.8 ${D}${mandir}/man8
-+
-+    install -m 0755 -d ${D}${sysconfdir}/cron.daily
-+    install -m 0755 -d ${D}${sbindir}
-+    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sysconfdir}/cron.daily/0logwatch
-+    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
-+    cat > ${D}${sysconfdir}/cron.daily/0logwatch <<EOF
-+    DailyReport=\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=[[:space:]]*" /usr/share/logwatch/default.conf/logwatch.conf | head -n1 | sed -e "s|^\s*DailyReport\s*=\s*||"\`
-+    if [ "\$DailyReport" != "No" ] && [ "\$DailyReport" != "no" ]
-+    then
-+            logwatch
-+    fi
-+EOF
-+    chmod 755 ${D}${sysconfdir}/cron.daily/0logwatch
-+
-+    install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/logfiles
-+    install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/services
-+    touch ${D}${sysconfdir}/logwatch/conf/logwatch.conf
-+    touch ${D}${sysconfdir}/logwatch/conf/ignore.conf
-+    touch ${D}${sysconfdir}/logwatch/conf/override.conf
-+    echo "# Local configuration options go here (defaults are in /usr/share/logwatch/default.conf/logwatch.conf)" > ${D}${sysconfdir}/logwatch/conf/logwatch.conf
-+    echo "###### REGULAR EXPRESSIONS IN THIS FILE WILL BE TRIMMED FROM REPORT OUTPUT #####" > ${D}${sysconfdir}/logwatch/conf/ignore.conf
-+    echo "# Configuration overrides for specific logfiles/services may be placed here." > ${D}${sysconfdir}/logwatch/conf/override.conf
-+}
+* Anders Darander <anders@chargestorm.se> [141027 12:32]:
+
+> This is set when generation an SDK, and thus would be usefull to have also
+> when bitbaking. That allows us to use this in *.prf files which is used
+> both when bitbaking as well as when using the SDK.
+
+> Signed-off-by: Anders Darander <anders@chargestorm.se>
+> (cherry picked from commit 96e8d29fdbdf6fa656c854d9b55c5b0c213166a7)
+> ---
+>  classes/qmake5_base.bbclass | 1 +
+>  1 file changed, 1 insertion(+)
+
+> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+> index 3861cd0..f1a0945 100644
+> --- a/classes/qmake5_base.bbclass
+> +++ b/classes/qmake5_base.bbclass
+> @@ -32,6 +32,7 @@ EXTRA_OEMAKE = " \
+>      OE_QMAKE_AR='${OE_QMAKE_AR}' \
+>      OE_QMAKE_STRIP='${OE_QMAKE_STRIP}' \
+>      OE_QMAKE_WAYLAND_SCANNER='${OE_QMAKE_WAYLAND_SCANNER}' \
+> +    OE_QMAKE_INCDIR_QT='${STAGING_DIR_TARGET}/${OE_QMAKE_PATH_HEADERS}' \
+>  "
+
+>  OE_QMAKESPEC = "${QMAKE_MKSPEC_PATH_NATIVE}/mkspecs/${OE_QMAKE_PLATFORM_NATIVE}"
 -- 
-1.8.3.1
-
+Anders Darander
+ChargeStorm AB / eStorm AB
 
