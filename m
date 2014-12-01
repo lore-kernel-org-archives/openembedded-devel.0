@@ -1,37 +1,25 @@
-Return-Path: <henning@itconsulting-heinold.de>
-X-Greylist: delayed 440 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 01 Dec 2014 10:59:40 UTC
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id EA06172200
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id B48A965D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Dec 2014 10:59:40 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id BD3A3D40810;
-	Mon,  1 Dec 2014 11:52:18 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 28D65D4080A;
-	Mon,  1 Dec 2014 11:52:18 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Mon,  1 Dec 2014 11:52:17 +0100 (CET)
-Date: Mon, 1 Dec 2014 11:52:06 +0100
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141201105205.GB29633@mail.itconsulting-heinold.de>
+	Mon,  1 Dec 2014 11:57:11 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 01 Dec 2014 03:57:12 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.07,493,1413270000"; d="scan'208";a="640650019"
+Received: from fodonogx-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.21.108])
+	by fmsmga002.fm.intel.com with ESMTP; 01 Dec 2014 03:57:10 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
+Date: Mon, 01 Dec 2014 11:57:10 +0000
+Message-ID: <6010322.On4bLv5MV8@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.3 (Linux/3.17.3-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
+In-Reply-To: <1859515.Hd60QW1tn7@peggleto-mobl5.ger.corp.intel.com>
 References: <1859515.Hd60QW1tn7@peggleto-mobl5.ger.corp.intel.com>
-	<CAP9ODKq=OThfe-EO3Xfh0HXSmFyF9M-7OSyqVx6mMGUNZy76+g@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKq=OThfe-EO3Xfh0HXSmFyF9M-7OSyqVx6mMGUNZy76+g@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: yocto <yocto@yoctoproject.org>
-Subject: Re: meta-java layer maintainership - help wanted
+Subject: Re: [yocto] meta-java layer maintainership - help wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,28 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Dec 2014 10:59:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 Dec 2014 11:57:14 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Mon, Dec 01, 2014 at 08:43:45AM -0200, Otavio Salvador wrote:
-> On Mon, Dec 1, 2014 at 8:16 AM, Paul Eggleton
-> <paul.eggleton@linux.intel.com> wrote:
-> > Henning would like some folks to help him maintain the meta-java layer, which
-> > contains OpenJDK and other open source Java-related components.
-> >
-> > An ideal candidate maintainer would:
-> >  * Have an interest in maintaining the Java-related recipes in the layer
-> >  * Be willing to review and merge patches from the community
-> >
-> > If you'd like to help out here (and responsibility can be shared by more than
-> > one person, it doesn't just have to be one) then please reply here or in
-> > private and I'll arrange for you to get access to the repository.
+On Monday 01 December 2014 10:16:24 Paul Eggleton wrote:
+> Henning would like some folks to help him maintain the meta-java layer,
+> which contains OpenJDK and other open source Java-related components.
 > 
-> We offered help at O.S. Systems already (even to host a build job for
-> test purposes), so I am offering help again :)
+> An ideal candidate maintainer would:
+>  * Have an interest in maintaining the Java-related recipes in the layer
+>  * Be willing to review and merge patches from the community
+> 
+> If you'd like to help out here (and responsibility can be shared by more
+> than one person, it doesn't just have to be one) then please reply here or
+> in private and I'll arrange for you to get access to the repository.
 
-Thanks again Otavio. But I wanted a newer place too, which makes co-maintaing easier as with my personal github repository.
+Looks like we now have enough people to take care of this, thanks everyone!
 
-Bye Henning
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
