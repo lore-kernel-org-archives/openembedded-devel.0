@@ -1,33 +1,37 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C07C60030
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Dec 2014 17:41:02 +0000 (UTC)
-Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
-	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1XvrRe-00037W-8p from Joe_MacDonald@mentor.com ;
-	Tue, 02 Dec 2014 09:41:02 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.3.181.6;
-	Tue, 2 Dec 2014 09:41:01 -0800
-Received: by burninator (Postfix, from userid 1000)	id 51EB95814AD; Tue,  2
-	Dec 2014 12:41:01 -0500 (EST)
-Date: Tue, 2 Dec 2014 12:41:01 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Message-ID: <20141202174101.GB12784@mentor.com>
-References: <20141121140331.GA20204@mentor.com>
-	<1417075397-2168-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<20141130205502.GS3886@mentor.com> <m5koqm$ahc$1@ger.gmane.org>
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id D25AD60030;
+	Tue,  2 Dec 2014 20:30:50 +0000 (UTC)
+Received: by mail-ie0-f173.google.com with SMTP id y20so12446239ier.32
+	for <multiple recipients>; Tue, 02 Dec 2014 12:30:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:mime-version:message-id:from:to:subject:content-type
+	:content-transfer-encoding;
+	bh=YmdH/5JGfr9bJStSwfDvfn4Dfq9xQtD6YitZjyGzqug=;
+	b=D3msI8VEdf2avPQSWGGWtptSQP9JhESq5ybnaGI8Q6y61PY9mp3ELg8q006d53Eauz
+	f1fEdw4vAaXIeRQwbVBDGoirTO2rpjKDv8GXQxDOL2/NrwU9wzwUcEFI3kg/oAgk6VXy
+	2DgKvlSF3g2EjT8duLLOYBZ02uanTN+m3FScGnXRmSbooZhlwhU0YOiNzwUh4hYCb1z9
+	bhV4TLhSjdxXMP1zfBTlZz5kDwDEO19i5OFtZGu769b6n4v2ZvaPRniNnClPkUNT0Z1d
+	ebnkVA3wMYW3kXhM6ebv20aa6y8N1KhtxkXGIvySfnbdP/rgPoCRFChJAa7JAKQi8stG
+	f1vQ==
+X-Received: by 10.42.255.72 with SMTP id nh8mr4210504icb.1.1417552250716;
+	Tue, 02 Dec 2014 12:30:50 -0800 (PST)
+Received: from [127.0.0.1] (cable2-pool191-cs-105.doycomm.com.
+	[66.219.191.105]) by mx.google.com with ESMTPSA id
+	i184sm11605299ioi.33.2014.12.02.12.30.49 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 02 Dec 2014 12:30:49 -0800 (PST)
+Date: Tue, 02 Dec 2014 12:30:49 -0800 (PST)
+X-Google-Original-Date: Tue, 02 Dec 2014 20:30:48 GMT
 MIME-Version: 1.0
-In-Reply-To: <m5koqm$ahc$1@ger.gmane.org>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v2] open-iscsi : add recipe
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Message-Id: <1417552248899.fbadde46@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Subject: OE Changelog since 2014-11-23 until 2014-11-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,164 +45,427 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Dec 2014 17:41:05 -0000
-X-Groupsio-MsgNum: 53155
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dkEUBIird37B8yKS"
-Content-Disposition: inline
-
---dkEUBIird37B8yKS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 02 Dec 2014 20:30:57 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking][PATCH v2] open-iscsi : add recipe] On 14.12.02 =
-(Tue 17:19) Koen Kooi wrote:
+Changelog since 2014-11-23 until 2014-11-30.  Projects included in this =
+report:
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Joe MacDonald schreef op 30-11-14 21:55:
-> > Merged, thanks.  I made one minor tweak to the "add includes" patch to=
-=20
-> > remove trailing whitespace.
->=20
-> None of the review comments were addressed, the hardcoded paths one is a
-> serious bug :/
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-atmel: https://github.com/linux4sam/meta-atmel.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
-None?  Since v2 was in master-next I had thought the issue had been
-discussed off-line or on IRC, as happens with merges to master from
-time-to-time, AFAICT.  Looking now, obviously the do_install* should
-have been a red flag anyway, so I'm dumping the recipe.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
--J.
+Alexandru DAMIAN (8):
+=20=20toaster: use http proxies to fetch data
+=20=20toastergui: update layer search criteria
+=20=20toastergui: do not show project info in interactive mode
+=20=20toaster: display Toaster exceptions and other fixes
+=20=20toasterui: fix layer identification for managed builds
+=20=20toaster: fix loadconf path calculation
+=20=20toastergui: new project page
+=20=20toasterui: Compatibility patch for daisy and dizzy
 
-> > [[oe] [meta-networking][PATCH v2] open-iscsi : add recipe] On 14.11.27
-> > (Thu 16:03) Li xin wrote:
-> >=20
-> >> Open-iSCSI project is a high performance, transport independent,
-> >> multi-platform implementation of RFC3720.
-> >>=20
-> >> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com> ---=20
-> >> .../files/iscsi_sysfs.c-add-include-files.patch    | 26
-> >> +++++++++++++++++ .../open-iscsi/files/open-iscsi.service            |
-> >> 18 ++++++++++++ .../open-iscsi/open-iscsi_2.0-871.bb               | 34
-> >> ++++++++++++++++++++++ 3 files changed, 78 insertions(+) create mode
-> >> 100644
-> >> meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-inc=
-lude-files.patch
-> >>
-> >>=20
-> create mode 100644
-> meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service
-> >> create mode 100644
-> >> meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb
-> >>=20
-> >> diff --git
-> >> a/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-i=
-nclude-files.patch
-> >> b/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-i=
-nclude-files.patch
-> >>
-> >>=20
-> new file mode 100644
-> >> index 0000000..43c1c36 --- /dev/null +++
-> >> b/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-i=
-nclude-files.patch
-> >>
-> >>=20
-> @@ -0,0 +1,26 @@
-> >> +From e8ecb307b6402b39d033e20f4df4f3374e7c0685 Mon Sep 17 00:00:00
-> >> 2001 +From: Li xin <lixin.fnst@cn.fujitsu.com> +Date: Fri, 21 Nov 2014
-> >> 12:02:51 +0900 +Subject: [PATCH] usr/iscsi_sysfs.c : add include files=
-=20
-> >> + +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com> +--- +
-> >> usr/iscsi_sysfs.c | 2 ++ + 1 file changed, 2 insertions(+) + +diff
-> >> --git a/usr/iscsi_sysfs.c b/usr/iscsi_sysfs.c +index cb9a5a1..f6bd78a
-> >> 100644 +--- a/usr/iscsi_sysfs.c ++++ b/usr/iscsi_sysfs.c +@@ -14,6
-> >> +14,8 @@ +  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
-> >> the GNU +  * General Public License for more details. +  */ ++#include
-> >> <sys/types.h> ++#include <sys/stat.h> + #include <fcntl.h> + #include
-> >> <unistd.h> + #include <stdlib.h> +-- +1.8.4.2 + diff --git
-> >> a/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service
-> >> b/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service=
-=20
-> >> new file mode 100644 index 0000000..debb2d6 --- /dev/null +++
-> >> b/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service=
-=20
-> >> @@ -0,0 +1,18 @@ +[Unit] +Description=3DOpen-iSCSI=20
-> >> +Documentation=3Dman:iscsid(8) man:iscsiadm(8) +After=3Dnetwork.target=
- +=20
-> >> +[Service] +Type=3Dforking +PIDFile=3D/var/run/iscsid.pid=20
-> >> +ExecStartPre=3D-/sbin/modprobe -q iscsi_tcp=20
-> >> +ExecStartPre=3D-/sbin/modprobe -q ib_iser +ExecStart=3D/usr/sbin/iscs=
-id -p
-> >> /var/run/iscsid.pid +ExecStartPost=3D-/usr/sbin/iscsiadm -m node
-> >> --loginall=3Dautomatic +ExecStopPost=3D/bin/sync=20
-> >> +ExecStopPost=3D-/sbin/modprobe -r ib_iser +ExecStopPost=3D-/sbin/modp=
-robe
-> >> -r iscsi_tcp + +[Install] +WantedBy=3Dmulti-user.target diff --git
-> >> a/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb
-> >> b/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb new
-> >> file mode 100644 index 0000000..99f8657 --- /dev/null +++
-> >> b/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb @@
-> >> -0,0 +1,34 @@ +DESCRIPTION =3D "Open-iSCSI project is a high performan=
-ce,
-> >> transport \ +independent, multi-platform implementation of RFC3720."=
-=20
-> >> +HOMEPAGE =3D "http://www.open-iscsi.org/" +LICENSE =3D "GPL-2.0"=20
-> >> +LIC_FILES_CHKSUM =3D
-> >> "file://COPYING;md5=3D393a5ca445f6965873eca0259a17f833" + +SRC_URI =3D
-> >> "http://www.open-iscsi.org/bits/${BP}.tar.gz" +SRC_URI[md5sum] =3D
-> >> "0c403e8c9ad41607571ba0e6e8ff196e" +SRC_URI[sha256sum] =3D
-> >> "bcea8746ae82f2ada7bc05d2aa59bcda1ca0d5197f05f2e16744aae59f0a7dcb"=20
-> >> +SRC_URI +=3D "file://iscsi_sysfs.c-add-include-files.patch \ +
-> >> file://open-iscsi.service" + +TARGET_CC_ARCH +=3D "${LDFLAGS}" +=20
-> >> +do_compile () { +    oe_runmake user +} + +do_install_append () { +
-> >> if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
-> >> then +        install -d ${D}${systemd_unitdir}/system +        install
-> >> -m 0644 ${WORKDIR}/open-iscsi.service ${D}${systemd_unitdir}/system/ +
-> >> fi +} + +do_install () { +    oe_runmake DESTDIR=3D"${D}" install_user=
-=20
-> >> +} + +inherit
-> >> ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd',''=
-,d)}
-> >>
-> >>=20
-> +
-> >> +SYSTEMD_PACKAGES =3D "${PN}" +SYSTEMD_SERVICE_${PN} =3D
-> >> "open-iscsi.service" +SYSTEMD_AUTO_ENABLE =3D "enable" -- 1.8.4.2
-> >>=20
-> >>=20
-> >>=20
->=20
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iD8DBQFUfeaWMkyGM64RGpERAjs1AJ9GBotz/SKNVovuZeTajFipaC/gbwCeLOTG
-> 0IdRSUGTf1eYpvVHW9lmvPI=3D
-> =3DT/wZ
-> -----END PGP SIGNATURE-----
->=20
---=20
--Joe MacDonald.
-:wq
+An=C3=ADbal Lim=C3=B3n (10):
+=20=20fetch/wget: latest_versionstring create _init_regex method for have =
+one plac
+=20=20fetch/wget: _init_regexes rename variables to be more consistent and =
+move di
+=20=20fetch/wget: Improve REGEX_URI handling
+=20=20fetch/wget: latest_versionstring add package_custom_regex_comp
+=20=20fetch/wget: latest_versionstring improvments in searching
+=20=20fetch/wget: latest_versionstring remove unnecessary usage for name in =
+versio
+=20=20fetch/wget: latest_versionstring add support for search in RAW html =
+lines
+=20=20fetch/wget: latest_versionstring remove newuri set because is =
+previous set
+=20=20tests/fetch: Update wget latest_versionstring cups case
+=20=20fetch/wget: latest_versionstring clean improvments minor
 
---dkEUBIird37B8yKS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Belen Barros Pena (5):
+=20=20toaster: fix errors and warnings display
+=20=20toaster: make 'latest builds' section consistent across pages
+=20=20toaster: fix padding of build notifications
+=20=20toaster: release name consistency
+=20=20toaster: remove the word 'project' from layers and machine
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Michael Wood (1):
+=20=20toaster: base Only show New Build button when there are > 0 projects
 
-iQEcBAEBAgAGBQJUffmtAAoJEEn8ffcsOfaWVwAIAKGivRTcTVcPIbcyjyHzYszD
-gcUuBErE9SH4wydY3UtEel9cerRhWfmTdJjbcy2cDDqpVhXr2g9qiqpp7SqdhWjw
-AJAskXqMOW2M+AgfEjuTLBOnZ9zgHU9nglrf6OgoDQJbFbMjgb48/WgDxo+iXT0H
-ttZoRGY35oG+OR+WfVkYv22G8A/E9sn3KFI1P2FEY3PezlajcLGZwdY48RXro7sG
-V7Un5Hm04cOzvrUGUOTBr9IouDMbkMSVWXsRlnH2RPQXFz821Tr3w4+xwW0r9Tho
-bmp3QBs1LxQnNQAuOlg3qJPY/QwkLDgKPTcQjK5cEVcoKMRnwL+uJDe3cbQqs8c=
-=Dnt9
------END PGP SIGNATURE-----
+Richard Purdie (1):
+=20=20cooker: Allow featureset in error state
 
---dkEUBIird37B8yKS--
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
+
+Alejandro Hernandez (5):
+=20=20nfs-utils: Upgrade to 1.3.1
+=20=20cronie: Upgrade to 1.4.12
+=20=20gnome-common: Upgrade to 3.14.0
+=20=20gnome-desktop: removed gnome-desktop recipe
+=20=20cronie: Added default crontab
+
+Alexandru DAMIAN (1):
+=20=20toaster.bbclass: use the openembedded-core name
+
+An=C3=ADbal Lim=C3=B3n (1):
+=20=20distrodata_class: checkpkg make usage of latest_versionstring methods =
+in bit
+
+Belen Barros Pena (1):
+=20=20toaster: naming and description changes
+
+Chen Qi (1):
+=20=20procps: install symlink under /etc/sysctl.d in case of systemd
+
+Cristian Iorga (3):
+=20=20netbase: upgrade to 5.3
+=20=20libpcap: upgrade to 1.6.2
+=20=20iproute2: upgrade to 3.17.0
+
+Hongxu Jia (1):
+=20=20elfutils: upgrade to 0.160
+
+Jackie Huang (1):
+=20=20python3: several fixes for cross compiling
+
+Lucian Musat (1):
+=20=20oeqa/runtime: Added some new filters for the log parser Including =
+custom fil
+
+Paul Barker (3):
+=20=20opkg: Upgrade to v0.2.4
+=20=20opkg: Update patch status
+=20=20opkg-utils: Update SRCREV
+
+Peter A. Bigot (7):
+=20=20pseudo: support --without-passwd-fallback configuration option
+=20=20pseudo: support multiple search directories in PSEUDO_PASSWD
+=20=20image.bbclass: search both rootfs and native staging for passwd files
+=20=20pseudo: default --without-passwd-fallback
+=20=20pseudo: provide fallback passwd and group files
+=20=20bitbake.conf: pseudo fall back to last-resort passwd files
+=20=20useradd.bbclass: set PSEUDO_PASSWD consistent with root directory
+
+Richard Purdie (2):
+=20=20qemu: Add missing wacom HID descriptor
+=20=20gcc-4.8: Drop unused patch
+
+Ross Burton (1):
+=20=20gdk-pixbuf: use ptest-gnome
+
+Roy Li (1):
+=20=20gst-ffmpeg: fixes for CVE-2014-8548 and CVE-2014-8541
+
+Shiqun Lin (3):
+=20=20bash: clean host path in bashbug
+=20=20e2fsprogs: clean host path in compile_et, mk_cmds
+=20=20bind: clean host path in isc-config.sh
+
+Wenzong Fan (1):
+=20=20serf: 1.3.6 -> 1.3.8
+
+Wolfgang Denk (1):
+=20=20perl: fix PERL5LIB settings
+
+Yue Tao (1):
+=20=20libpam: Stop a QA WARNING when building multlib version
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Andreas M=C3=BCller (2):
+=20=20gparted: initial add 0.20.0
+=20=20glibmm: add perl to RDEPENDS_{PN}-dev
+
+Bian Naimeng (1):
+=20=20dash: Port from openembedded and upgrade to 0.5.8
+
+Chong.Lu@windriver.com (2):
+=20=20samba: add winbind.service to winbind package
+=20=20samba: fix error messages when startup samba service
+
+Chris Morgan (1):
+=20=20dfu-util: Point to gitorious.org repository as gnumonks.org is down
+
+Derek Straka (5):
+=20=20python-flufl-enum: add recipe for 4.0.1
+=20=20python-backports-ssl: add recipe for 3.4.0.2
+=20=20python-certifi: add recipe for 14.05.14
+=20=20python-tornado: add recipe for 4.0.2
+=20=20python-ujson: add recipe for 1.33
+
+Fathi Boudra (1):
+=20=20fwts: update to 14.09.00 release
+
+Jackie Huang (13):
+=20=20rrdtool: inherit cpan-base to help build perl modules
+=20=20rrdtool: add missing dependency on groff-native
+=20=20hostapd: several fixes for init script
+=20=20mariadb: Check valgrind headers only if WITH_VALGRIND is set
+=20=20meta-oe: Add LAYERVERSION and LAYERDEPENDS
+=20=20meta-perl: Add LAYERVERSION and LAYERDEPENDS
+=20=20meta-python: Add LAYERVERSION and LAYERDEPENDS
+=20=20meta-ruby: Add LAYERVERSION and LAYERDEPENDS
+=20=20toolchain-layer: Add LAYERVERSION and LAYERDEPENDS
+=20=20meta-efl: Add LAYERVERSION and LAYERDEPENDS
+=20=20meta-filesystems: Add LAYERVERSION and LAYERDEPENDS
+=20=20meta-gnome: Add LAYERVERSION and LAYERDEPENDS
+=20=20meta-gpe: Add LAYERVERSION and LAYERDEPENDS
+
+Joe MacDonald (1):
+=20=20meta-networking: update LAYERDEPENDS
+
+Kang Kai (3):
+=20=20mariadb: Update from version 5.5.39 to 5.5.40
+=20=20mariadb: re-package configure files
+=20=20mariadb: add dependency libevent
+
+Li xin (6):
+=20=20pam_passwdqc: new recipe
+=20=20smem: add new recipe
+=20=20setxkbmap: upgrade to 1.3.0
+=20=20iceauth: upgrade to 1.0.6
+=20=20nicstat: add new recipe
+=20=20rarpd: add new recipe
+
+Liu Jian (1):
+=20=20lvm2: add lvm.con to CONFFILES
+
+Martin Jansa (3):
+=20=20cronie: rename .bbappend to match all versions
+=20=20acpitests: Blacklist failing recipe
+=20=20iotop: Drop python-distutils from RDEPENDS
+
+Qian Lei (14):
+=20=20tomoyo-tools: Add new recipes
+=20=20xlsatoms: Add new recipe
+=20=20xlsclients: Add new recipe
+=20=20xrefresh: Add new recipe
+=20=20xsetmode: Add new recipe
+=20=20xsetroot: Add new recipe
+=20=20xstdcmap: Add new recipe
+=20=20xwud: Add new recipe
+=20=20xrdb: Update to 1.1.0
+=20=20xgamma: Add new recipes
+=20=20xkbevd: Add new recipe
+=20=20xkbprint: Add new recipe
+=20=20indent: Add new recipe
+=20=20umip: add new recipe
+
+Ross Burton (3):
+=20=20gssdp: use GNOME_MIRROR in SRC_URI
+=20=20gupnp: use GNOME_MIRROR in SRC_URI
+=20=20gupnp-av: use GNOME_MIRROR in SRC_URI
+
+Wenzong Fan (1):
+=20=20krb5: fix CVE-2014-5351
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-atmel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+Otavio Salvador (9):
+=20=20core-image-chicken: Stop including core-image-base.bb
+=20=20scripts/gen-egg-list: Avoid duplicates when listing the eggs
+=20=20chicken_install.bbclass: Use BPN to identify the egg name
+=20=20chicken-egg-dbus: Fix SRC_URI to point to the right path
+=20=20conf/layer.conf: Change layer collection for 'chicken'
+=20=20chicken: Stop using autotools class
+=20=20chicken_install.bbclass: Stop running do_configure and do_compile
+=20=20chicken-egg-sxpath: Add version 0.2
+=20=20scripts/gen-egg-recipes: Add sxpath egg
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Lauren Post (1):
+=20=20chromium-imx: Update chromium-imx to support SOC without VPU
+
+Neena Busireddy (1):
+=20=20gstreamer1.0-plugins-bad: Correct CFLAGS for wayland backend
+
+Otavio Salvador (4):
+=20=20weston: Remove "Desktop-shell-Don-t-assume-there-is-a-pointer.patch"
+=20=20gstreamer1.0-plugins-bad: Remove useless overrides
+=20=20imx-base: Include gstreamer1.0-plugins-imx for i.MX6Q and i.MX6DL
+=20=20piglit: Add a dependency over virtual/egl
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+Alex de Cabo (2):
+=20=20u-boot-congatec: Upgrade to cgt_imx_v2013.04_3.10.17_1.0.2
+=20=20linux-congatec: Upgrade to cgt_imx_3.10.17_1.0.2
+
+Daiane Angolini (1):
+=20=20linux-*: Rework LOCALVERSION depending on SRCBRANCH
+
+Eric Nelson (4):
+=20=20u-boot-boundary/u-boot-script-boundary: update to 86bfe2c (v2014.07)
+=20=20linux-boundary: Add support for kernel 3.10.31_1.1.0_beta
+=20=20nitrogen6x*, imx6qsabrelite: default to kernel 3.10.31
+=20=20linux-boundary: deprecate 3.0.35, 3.10.17 kernels for Yocto 1.8
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+Chang Rebecca Swee Fun (1):
+=20=20valleyisland: update README with latest information
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+Martin Jansa (1):
+=20=20ffalarms, iliwi, sensmon, valacompass: Blacklist apps broken by vala =
+upgrade
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Alexandru DAMIAN (1):
+=20=20toasterconf: fix localpath values
+
+An=C3=ADbal Lim=C3=B3n (1):
+=20=20package_regex.inc: Update REGEX'es in order to find upstream versions =
+correc
+
+Robert Yang (1):
+=20=20maintainers.inc: update maintainers
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
+
+
+
