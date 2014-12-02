@@ -1,35 +1,27 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id C033B72278
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 731C972201
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Dec 2014 01:50:00 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id kq14so12363768pab.40
+	Tue,  2 Dec 2014 02:11:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44314461"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Dec 2014 10:08:33 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sB22BUXu019101
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Dec 2014 17:50:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=hoDCATNHkKFPnG2a91gwf/zeOp7j6v6zJmE3W6nfhoM=;
-	b=VjE+Y2s9J54RnToFVAXfwsn0WUPShNpBIKFvNndAkL59QxtHkvrU6Febby166etb++
-	3CmiJJH1KuCAH5JtVtFRzo8WbrzPiFIBH2PVYsGNu3QbuaRKj03jR4eTuKlIGJGKlVDE
-	hUZ+PEPV6HuebJPTX23nkLeR338SzxEbCSdPwAM51hKbAqEi7B9dSDem4rmxKeRhPq9n
-	76u2OShMHTMqbwY69lTKcHogdBRlIAxhSjElW52H5X/4zhANeJJLO+HuCeghVjuR9D89
-	vCj6TwIGuDCaeC7h0v2vgWYfmYVsKP0IFIETSfaGZNiEAYYhfQOO0yfZff6P+5JD1+p3
-	2tQg==
-X-Received: by 10.70.54.37 with SMTP id g5mr32782976pdp.71.1417485000917;
-	Mon, 01 Dec 2014 17:50:00 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id y3sm18606781pbt.44.2014.12.01.17.49.58
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 01 Dec 2014 17:49:59 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Dec 2014 17:49:56 -0800
-Message-Id: <1417484996-17551-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] New package: netkit-rpc
+	Tue, 2 Dec 2014 10:11:30 +0800
+Received: from localhost.localdomain (10.167.226.35) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 2 Dec 2014 10:11:54 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 2 Dec 2014 10:11:04 +0800
+Message-ID: <1417486264-1878-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.35]
+Subject: [meta-oe][PATCH] pkcs11-helper : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,111 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Dec 2014 01:50:02 -0000
+X-List-Received-Date: Tue, 02 Dec 2014 02:12:00 -0000
+Content-Type: text/plain
 
-this adds rpcinfo and rpcgen
+PKCS#11 is a published standard. PKCS#11 is the de-facto standard
+to access cryptographic devices.
+pkcs11-helper is a library that simplifies the interaction with
+PKCS#11 providers for end-user applications using a simple API
+and optional OpenSSL engine.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- .../recipes-netkit/netkit-rpc/files/gcc4.patch     | 39 ++++++++++++++++++++
- .../recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb   | 41 ++++++++++++++++++++++
- 2 files changed, 80 insertions(+)
- create mode 100644 meta-networking/recipes-netkit/netkit-rpc/files/gcc4.patch
- create mode 100644 meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
+ .../pkcs11-helper/pkcs11-helper_1.11.bb            | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
 
-diff --git a/meta-networking/recipes-netkit/netkit-rpc/files/gcc4.patch b/meta-networking/recipes-netkit/netkit-rpc/files/gcc4.patch
+diff --git a/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
 new file mode 100644
-index 0000000..d54cea9
+index 0000000..9d08d25
 --- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-rpc/files/gcc4.patch
-@@ -0,0 +1,39 @@
-+This fixes an issue when building with gcc 4.x
++++ b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "A library for using PKCS"
++DESCRIPTION = "pkcs11-helper is a library that simplifies the interaction with PKCS \
++providers for end-user applications using a simple API and optional OpenSSL \
++engine. The library allows using multiple PKCS enumerating available token \
++certificates, or selecting a certificate directly by serialized id, handling \
++card removal and card insert events, handling card ie-insert to a different \
++slot, supporting session expiration and much more all using a simple API."
 +
-+https://github.com/openembedded/openembedded/tree/master/recipes/netkit-rpc/netkit-rpc
++HOMEPAGE = "git://github.com/OpenSC/pkcs11-helper.git"
++SECTION = "Development/Libraries"
 +
-+Upstream-status: Backported
++LICENSE = "GPLv2 BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4948810631bcac142af53d32df5b6ee1 \
++    file://COPYING.GPL;md5=8a71d0475d08eee76d8b6d0c6dbec543 \
++    file://COPYING.BSD;md5=f79f90ea7a106796af80b5d05f1f8da1"
 +
-+Signed-off-By: Armin Kuster <akuster808@gmail.com>
++SRC_URI = "git://github.com/OpenSC/pkcs11-helper.git"
++SRC_URI[md5sum] = "9f62af9f475901b89355266141306673"
++SRC_URI[sha256sum] = "494ec59c93e7c56c528f335d9353849e2e7c94a6b1b41c89604694e738113386"
 +
-+--- netkit-rpc-0.17/rpcgen/rpc_cout.c~gcc4
-++++ netkit-rpc-0.17/rpcgen/rpc_cout.c
-+@@ -101,8 +101,6 @@
-+ 	case DEF_TYPEDEF:
-+ 		emit_typedef(def);
-+ 		break;
-+-	default:
-+-	  /* can't happen */
-+ 	}
-+ 	print_trailer();
-+ }
-+@@ -664,9 +662,6 @@
-+ 	   decl->name,decl->array_max);
-+   emit_single_in_line(decl,flag,REL_VECTOR);
-+     f_print(fout,"\t\t   }\n\t\t };\n");
-+-
-+-  default:
-+-    /* ?... do nothing I guess */
-+   }
-+ }
-+ 
-+--- netkit-rpc-0.17/rpcgen/rpc_hout.c~gcc4
-++++ netkit-rpc-0.17/rpcgen/rpc_hout.c
-+@@ -106,8 +106,6 @@
-+ 		f_print(fout, "\n");
-+ 		pprogramdef(def);
-+ 		break;
-+-	  default:
-+-	    /* ?... shouldn't happen I guess */
-+ 	}
-+ }
-diff --git a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
-new file mode 100644
-index 0000000..fcc87b8
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
-@@ -0,0 +1,41 @@
-+DESCRIPTION = "netkit-rpc includes rpcinfo and rpcgen."
-+SECTION = "networking"
-+HOMEPAGE="http://ftp.linux.org.uk/pub/linux/Networking/netkit"
-+LICENSE = "SPL-1.0"
++S = "${WORKDIR}/git"
++SRCREV = "e7adf8f35be232a4f04c53b4ac409be52792093e"
 +
-+LIC_FILES_CHKSUM = "file://rpcinfo/rpcinfo.c;beginline=2;endline=3;md5=3e6339e3ce266e1122c5ba293e04bc89"
++DEPENDS = "zlib nettle gnutls gmp openssl"
 +
-+SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BPN}-${PV}.tar.gz \
-+        file://gcc4.patch "
++inherit autotools pkgconfig
 +
-+SRC_URI[md5sum] = "67212720482ea1aea9182a98653a9642"
-+SRC_URI[sha256sum] = "421d63b414162237a72867061f1bd3e3752a0d962cd5d30b5e933ddad8a14d3b"
-+
-+do_configure () {
-+    ./configure --prefix=${prefix}
-+    echo "LDFLAGS=${LDFLAGS}" > MCONFIG
-+    echo "CC=${CC}" >> MCONFIG
-+    echo "LD=${LD}" >> MCONFIG
-+    echo "CFLAGS=${CFLAGS}" >> MCONFIG
-+    echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
-+}
-+
-+do_compile () {
-+    oe_runmake 'CC=${CC}' 'LD=${LD}' 'LDFLAGS=${LDFLAGS}' 
-+}
-+
-+do_install () {
-+    install -d ${D}${bindir}
-+    install -d ${D}${mandir}/man1
-+    install -d ${D}${mandir}/man8
-+
-+    # remove strip flag
-+    sed -i 's/install -s/install/' rpcinfo/Makefile
-+    sed -i 's/install -s/install/' rpcgen/Makefile
-+    
-+    oe_runmake 'INSTALLROOT=${D}' 'BINMODE=0755' \
-+    'DAEMONMODE=0755' 'MANMODE=0644' \
-+    'BINDIR=${bindir}' 'SBINDIR=${sbindir}' \
-+    'MANDIR=${mandir}' install
-+
-+}
++EXTRA_OECONF = " --disable-static --enable-doc "
 -- 
-1.9.1
+1.8.4.2
 
 
