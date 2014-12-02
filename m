@@ -1,27 +1,24 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C129F72221
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F52B60030
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Dec 2014 08:00:21 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44335339"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Dec 2014 15:57:04 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sB2798Ga011775
+	Tue,  2 Dec 2014 08:14:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sB28ETG5016121
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Dec 2014 15:09:09 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 2 Dec 2014 15:09:33 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+	Tue, 2 Dec 2014 00:14:29 -0800 (PST)
+Received: from pek-hostel-vm12.wrs.com (128.224.153.182) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 2 Dec 2014 00:14:28 -0800
+From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 2 Dec 2014 15:09:15 +0800
-Message-ID: <1417504155-8453-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Date: Tue, 2 Dec 2014 03:14:27 -0500
+Message-ID: <1417508067-8686-1-git-send-email-wenzong.fan@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-oe][PATCH] lockfile-progs: Add new recipe
+Subject: [PATCH][meta-oe] ltrace: add PACKAGECONFIG for selinux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,49 +32,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Dec 2014 08:00:31 -0000
+X-List-Received-Date: Tue, 02 Dec 2014 08:14:30 -0000
 Content-Type: text/plain
 
-lockfile-progs provide a method to lock and unlock mailboxes and files
-safely (via liblockfile).
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+Add PACKAGECONFIG for 'selinux', otherwise there would be warnings like
+below:
+
+WARN: ltrace: ltrace rdepends on libselinux, but it isn't a build dependency?
+
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- .../lockfile-progs/lockfile-progs_0.1.17.bb        | 24 ++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb
+ ...onfigure-allow-to-disable-selinux-support.patch |   36 ++++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |    3 ++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/configure-allow-to-disable-selinux-support.patch
 
-diff --git a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/configure-allow-to-disable-selinux-support.patch b/meta-oe/recipes-devtools/ltrace/ltrace/configure-allow-to-disable-selinux-support.patch
 new file mode 100644
-index 0000000..4354fff
+index 0000000..4f89d8f
 --- /dev/null
-+++ b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "Command-line programs to safely lock and unlock files and mailboxes"
-+DESCRIPTION = "\
-+lockfile-progs provide a method to lock and unlock mailboxes and files \
-+safely (via liblockfile)."
-+HOMEPAGE = "http://packages.qa.debian.org/l/lockfile-progs.html"
-+SECTION = "Applications/System"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+DEPENDS = "liblockfile"
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/configure-allow-to-disable-selinux-support.patch
+@@ -0,0 +1,36 @@
++From 887a403e38f590ebf1d04ce600d94cb7a351744c Mon Sep 17 00:00:00 2001
++From: Wenzong Fan <wenzong.fan@windriver.com>
++Date: Mon, 1 Dec 2014 00:57:42 -0500
++Subject: [PATCH] ltrace: allow to enable/disable selinux support
 +
-+SRC_URI = "http://ftp.de.debian.org/debian/pool/main/l/${BPN}/${BPN}_${PV}.tar.gz"
-+SRC_URI[md5sum] = "64424a766fbc8cf6d613fcc14a096e14"
-+SRC_URI[sha256sum] = "03fb05d25499532f497775b1747b61fa6beebf12d3bcc951e125349ae166c511"
++Upstream-Status: Pending
 +
-+do_compile() {
-+    oe_runmake CFLAGS=' -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -fasynchronous-unwind-tables'
-+}
++Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
++---
++ configure.ac |   10 ++++++++--
++ 1 file changed, 8 insertions(+), 2 deletions(-)
 +
-+do_install() {
-+    install -m 755 -d ${D}${bindir}
-+    install bin/* ${D}${bindir}
-+    install -m 755 -d ${D}${mandir}/man1
-+    install man/* ${D}${mandir}/man1
-+}
++diff --git a/configure.ac b/configure.ac
++index 6fe5e3b..189885a 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -125,8 +125,14 @@ AC_SUBST(libstdcxx_LIBS)
++ 
++ 
++ dnl Check security_get_boolean_active availability.
++-AC_CHECK_HEADERS(selinux/selinux.h)
++-AC_CHECK_LIB(selinux, security_get_boolean_active)
+++AC_ARG_ENABLE([selinux],
+++    AS_HELP_STRING([--enable-selinux],[enable SELinux support [default=auto]]),
+++    [], [enable_selinux=auto])
+++
+++if test x$enable_selinux != xno; then
+++    AC_CHECK_HEADERS(selinux/selinux.h)
+++    AC_CHECK_LIB(selinux, security_get_boolean_active)
+++fi
++ 
++ dnl Whether (and which) elfutils libdw.so to use for unwinding.
++ AC_ARG_WITH(elfutils,
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index 507747a..6984848 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -17,12 +17,15 @@ DEPENDS = "elfutils"
+ RDEPENDS_${PN} = "elfutils"
+ SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
+            file://ltrace-0.7.2-unused-typedef.patch \
++           file://configure-allow-to-disable-selinux-support.patch \
+           "
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
++PACKAGECONFIG ?= "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)}"
+ PACKAGECONFIG[unwind] = "--with-libunwind,--without-libunwind,libunwind"
++PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,libselinux"
+ 
+ do_configure_prepend () {
+ 	( cd ${S}; ./autogen.sh )
 -- 
-1.8.3.1
+1.7.9.5
 
 
