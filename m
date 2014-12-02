@@ -1,36 +1,27 @@
-Return-Path: <biannm@cn.fujitsu.com>
+Return-Path: <qianl.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D7A4572270
+	by mail.openembedded.org (Postfix) with ESMTP id C129F72221
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Dec 2014 05:06:07 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44325041"
+	Tue,  2 Dec 2014 08:00:21 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44335339"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Dec 2014 13:02:51 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 02 Dec 2014 15:57:04 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sB255mJ7002061
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sB2798Ga011775
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Dec 2014 13:05:48 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0181.006; Tue, 2 Dec 2014 13:06:12 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH 2/3] [meta-oe] dmraid: add recipe
-Thread-Index: AQHQCui4klE3puRXvkiZDBgXi2gHdZx3JLcAgASggVA=
-Date: Tue, 2 Dec 2014 05:06:10 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE0337@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1417164585-46087-1-git-send-email-biannm@cn.fujitsu.com>
-	<1417164585-46087-3-git-send-email-biannm@cn.fujitsu.com>
-	<m5cl0o$tor$1@ger.gmane.org>
-In-Reply-To: <m5cl0o$tor$1@ger.gmane.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+	Tue, 2 Dec 2014 15:09:09 +0800
+Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 2 Dec 2014 15:09:33 +0800
+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 2 Dec 2014 15:09:15 +0800
+Message-ID: <1417504155-8453-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/3] [meta-oe] dmraid: add recipe
+X-Originating-IP: [10.167.226.40]
+Subject: [meta-oe][PATCH] lockfile-progs: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,147 +35,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Dec 2014 05:06:11 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 02 Dec 2014 08:00:31 -0000
+Content-Type: text/plain
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRl
-ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBLb2Vu
-DQo+IEtvb2kNCj4gU2VudDogU2F0dXJkYXksIE5vdmVtYmVyIDI5LCAyMDE0IDEwOjI1IFBNDQo+
-IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0
-OiBSZTogW29lXSBbUEFUQ0ggMi8zXSBbbWV0YS1vZV0gZG1yYWlkOiBhZGQgcmVjaXBlDQo+IA0K
-PiAtLS0tLUJFR0lOIFBHUCBTSUdORUQgTUVTU0FHRS0tLS0tDQo+IEhhc2g6IFNIQTENCj4gDQo+
-IEJpYW4gTmFpbWVuZyBzY2hyZWVmIG9wIDI4LTExLTE0IDA5OjQ5Og0KPiA+IFRoZXJlIGlzIG5v
-IHVwZGF0ZSBhbnltb3JlIHNpbmNlIDIwMTAsIGJ1dCBpcyBzdGlsbCBzdXBwb3J0ZWQgYnkgc29t
-ZQ0KPiA+IGRpc3RybyBzdWNoIGFzIFVidW50dSh0cnVzdHkgMTQuMDRMVFMpLg0KPiA+DQo+ID4g
-U2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+IC0tLQ0K
-PiA+IC4uLi9yZWNpcGVzLWV4dGVuZGVkL2RtcmFpZC9kbXJhaWRfMS4wLjAucmMxNi5iYiAgIHwg
-IDcxICsrKysrDQo+ID4gLi4uL2RtcmFpZC9maWxlcy8wMV9maXhfYnJva2VuX2xpbmtpbmcucGF0
-Y2ggICAgICAgfCAxMjEgKysrKysrKysrDQo+ID4gLi4uL2RtcmFpZC9maWxlcy8wMl9kaXNhYmxl
-X2RtcmVnLnBhdGNoICAgICAgICAgICAgfCAxMzQgKysrKysrKysrKw0KPiA+IC4uLi9maWxlcy8w
-M19maXhfaHlwaGVuLXVzZWQtYXMtbWludXMtc2lnbi5wYXRjaCAgIHwgMjkxDQo+ID4gKysrKysr
-KysrKysrKysrKysrKysrIC4uLi9kbXJhaWQvZmlsZXMvMDRfcHJvbWlzZS1hZGQtb2Zmc2V0cy5w
-YXRjaA0KPiA+IHwgIDEzICsgLi4uL2RtcmFpZC9maWxlcy8wNV9leGl0X2NvZGUucGF0Y2ggICAg
-ICAgICAgICAgICAgfCAgMjIgKysNCj4gPiAuLi4vZG1yYWlkL2ZpbGVzLzA2X3N1cHBvcnRfdmly
-dGlvX2RldmljZXMucGF0Y2ggICB8ICAxMyArDQo+ID4gLi4uL2RtcmFpZC9maWxlcy8wN19pc3ct
-cHJvYmUtaHBhLnBhdGNoICAgICAgICAgICAgfCAxNDQgKysrKysrKysrKw0KPiA+IC4uLi9maWxl
-cy8wOF9hY3RpdmF0ZV9tdWx0aXBsZV9yYWlkX3NldHMucGF0Y2ggICAgIHwgIDEyICsNCj4gPiAu
-Li4vZG1yYWlkL2ZpbGVzLzA5X3BkY19yYWlkMTBfZmFpbHVyZS4ucGF0Y2ggICAgICB8ICAxNCAr
-DQo+ID4gLi4uL2RtcmFpZC9maWxlcy8xMF9kZGYxX2xzaV9wZXJzaXN0ZW50X25hbWUucGF0Y2gg
-fCAgMjAgKysNCj4gPiAuLi4vZmlsZXMvMTFfZml4X2lzd19zZWN0b3JzX2NhbGN1bGF0aW9uLnBh
-dGNoICAgICB8ICAxNCArDQo+ID4gLi4uL2RtcmFpZC9maWxlcy8xMl9qbWljcm9uX25hbWVmaXgu
-cGF0Y2ggICAgICAgICAgfCAgMjAgKysNCj4gPiAuLi4vZG1yYWlkL2ZpbGVzLzEzX2ZpeF90ZXN0
-aW5nLnBhdGNoICAgICAgICAgICAgICB8ICAyNCArKw0KPiA+IC4uLi9maWxlcy8xNF9wZGNfZHVt
-cF9leHRlbmRlZF9tZXRhZGF0YS5wYXRjaCAgICAgIHwgMTQ3ICsrKysrKysrKysrDQo+ID4gLi4u
-LzE1X2Ryb3BfcF9mb3JfcGFydGl0aW9uX2NvbmRpdGlvbmFsLnBhdGNoICAgICAgfCAgMzEgKysr
-DQo+ID4gLi4uL2RtcmFpZC9maWxlcy8xNl9jaGFuZ2UtdXVpZC5wYXRjaCAgICAgICAgICAgICAg
-fCAgNzcgKysrKysrDQo+ID4gLi4uL2ZpbGVzLzE3X2NvbnZlcnQtZG1yYWlkNDUtdG8tZG1yYWlk
-LnBhdGNoICAgICAgfCAyNzMNCj4gPiArKysrKysrKysrKysrKysrKysrIC4uLi9kbXJhaWQvZmls
-ZXMvMThfaWdub3JlLXRvby1zbWFsbC1kZXZpY2VzLnBhdGNoDQo+ID4gKysrKysrKysrKysrKysr
-KysrKyB8DQo+ID4gMzkgKysrIC4uLi9maWxlcy8xOV9jb21waWxlLWRtcmFpZC1pbi1zdWJkaXIt
-dG9vbHMucGF0Y2ggIHwgIDIwICsrDQo+ID4gLi4uLzIwX3NwZWNpZmllcy1pbnN0YWxsLWRpci1i
-eS1ERVNURElSLnBhdGNoICAgICAgfCAxMjMgKysrKysrKysrIDIxDQo+ID4gZmlsZXMgY2hhbmdl
-ZCwgMTYyMyBpbnNlcnRpb25zKCspIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVj
-aXBlcy1leHRlbmRlZC9kbXJhaWQvZG1yYWlkXzEuMC4wLnJjMTYuYmIgY3JlYXRlIG1vZGUNCj4g
-PiAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2ZpbGVzLzAxX2Zp
-eF9icm9rZW5fbGlua2luZy5wYXRjaA0KPiA+IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEt
-b2UvcmVjaXBlcy1leHRlbmRlZC9kbXJhaWQvZmlsZXMvMDJfZGlzYWJsZV9kbXJlZy5wYXRjaA0K
-PiA+IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kbXJh
-aWQvZmlsZXMvMDNfZml4X2h5cGhlbi11c2VkLWFzLW1pbnVzLXNpZ24NCj4gPiAucGF0Y2gNCj4g
-Pg0KPiA+DQo+IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
-ZG1yYWlkL2ZpbGVzLzA0X3Byb21pc2UtYWRkLW9mZnNldHMucGF0Y2gNCj4gPiBjcmVhdGUgbW9k
-ZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2ZpbGVzLzA1X2V4
-aXRfY29kZS5wYXRjaCBjcmVhdGUgbW9kZQ0KPiA+IDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBl
-cy1leHRlbmRlZC9kbXJhaWQvZmlsZXMvMDZfc3VwcG9ydF92aXJ0aW9fZGV2aWNlcy5wYXRjaA0K
-PiA+IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kbXJh
-aWQvZmlsZXMvMDdfaXN3LXByb2JlLWhwYS5wYXRjaCBjcmVhdGUNCj4gPiBtb2RlDQo+ID4gMTAw
-NjQ0DQo+ID4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2RtcmFpZC9maWxlcy8wOF9hY3RpdmF0
-ZV9tdWx0aXBsZV9yYWlkX3NldHMucA0KPiA+IGF0Y2gNCj4gPg0KPiA+DQo+IGNyZWF0ZSBtb2Rl
-IDEwMDY0NA0KPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2ZpbGVzLzA5X3BkY19y
-YWlkMTBfZmFpbHVyZS4ucGF0Y2gNCj4gPiBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9l
-L3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2ZpbGVzLzEwX2RkZjFfbHNpX3BlcnNpc3RlbnRfbmFt
-ZS5wYXRjDQo+ID4gaA0KPiA+IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBl
-cy1leHRlbmRlZC9kbXJhaWQvZmlsZXMvMTFfZml4X2lzd19zZWN0b3JzX2NhbGN1bGF0aW9uLnAN
-Cj4gPiBhdGNoDQo+ID4NCj4gPg0KPiBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gbWV0YS1vZS9yZWNp
-cGVzLWV4dGVuZGVkL2RtcmFpZC9maWxlcy8xMl9qbWljcm9uX25hbWVmaXgucGF0Y2gNCj4gPiBj
-cmVhdGUgbW9kZSAxMDA2NDQNCj4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2Zp
-bGVzLzEzX2ZpeF90ZXN0aW5nLnBhdGNoIGNyZWF0ZSBtb2RlDQo+ID4gMTAwNjQ0DQo+ID4gbWV0
-YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2RtcmFpZC9maWxlcy8xNF9wZGNfZHVtcF9leHRlbmRlZF9t
-ZXRhZGF0YS5wYQ0KPiA+IHRjaA0KPiA+DQo+ID4NCj4gY3JlYXRlIG1vZGUgMTAwNjQ0DQo+IG1l
-dGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kbXJhaWQvZmlsZXMvMTVfZHJvcF9wX2Zvcl9wYXJ0aXRp
-b25fY29uZGl0aW9uYWwuDQo+IHBhdGNoDQo+ID4gY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0
-YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2RtcmFpZC9maWxlcy8xNl9jaGFuZ2UtdXVpZC5wYXRjaCBj
-cmVhdGUgbW9kZQ0KPiA+IDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kbXJh
-aWQvZmlsZXMvMTdfY29udmVydC1kbXJhaWQ0NS10by1kbXJhaWQucGENCj4gPiB0Y2gNCj4gPg0K
-PiA+DQo+IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1y
-YWlkL2ZpbGVzLzE4X2lnbm9yZS10b28tc21hbGwtZGV2aWNlcy5wYXRjaA0KPiA+IGNyZWF0ZSBt
-b2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kbXJhaWQvZmlsZXMvMTlf
-Y29tcGlsZS1kbXJhaWQtaW4tc3ViZGlyLXRvb2wNCj4gPiBzLnBhdGNoDQo+ID4NCj4gPg0KPiBj
-cmVhdGUgbW9kZSAxMDA2NDQNCj4gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2RtcmFpZC9maWxl
-cy8yMF9zcGVjaWZpZXMtaW5zdGFsbC1kaXItYnktREVTVERJUi4NCj4gcGF0Y2gNCj4gPg0KPiA+
-IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2RtcmFpZF8xLjAu
-MC5yYzE2LmJiDQo+ID4gYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2RtcmFpZF8x
-LjAuMC5yYzE2LmJiIG5ldyBmaWxlIG1vZGUNCj4gPiAxMDA2NDQgaW5kZXggMDAwMDAwMC4uMjgx
-NTg3ZCAtLS0gL2Rldi9udWxsICsrKw0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2Rt
-cmFpZC9kbXJhaWRfMS4wLjAucmMxNi5iYiBAQCAtMCwwICsxLDcxDQo+ID4gQEANCj4gPiArU1VN
-TUFSWSA9ICJkbXJhaWQgKERldmljZS1tYXBwZXIgUkFJRCB0b29sIGFuZCBsaWJyYXJ5KSIgK0RF
-U0NSSVBUSU9ODQo+ID4gKz0NCj4gPiAiRE1SQUlEIHN1cHBvcnRzIFJBSUQgZGV2aWNlIGRpc2Nv
-dmVyeSwgUkFJRCBzZXQgYWN0aXZhdGlvbiwgXA0KPiA+ICtjcmVhdGlvbiwgcmVtb3ZhbCwgcmVi
-dWlsZCBhbmQgZGlzcGxheSBvZiBwcm9wZXJ0aWVzIGZvciBBVEFSQUlEL0RERjENCj4gPiBcICtt
-ZXRhZGF0YSBvbiBMaW51eCA+PSAyLjQgdXNpbmcgZGV2aWNlLW1hcHBlci4iICtIT01FUEFHRSA9
-DQo+ID4gImh0dHA6Ly9wZW9wbGUucmVkaGF0LmNvbS9oZWluem0vc3cvZG1yYWlkIiArU0VDVElP
-TiA9ICJTeXN0ZW0NCj4gPiBFbnZpcm9ubWVudC9CYXNlIiArICtTUkNfVVJJID0NCj4gPiAiaHR0
-cDovL3Blb3BsZS5yZWRoYXQuY29tL2hlaW56bS9zdy9kbXJhaWQvc3JjL29sZC8ke0JQTn0tJHtQ
-Vn0udGFyLmJ6Mg0KPiA+IFwgKyAgICAgICAgICAgZmlsZTovLzAxX2ZpeF9icm9rZW5fbGlua2lu
-Zy5wYXRjaCBcICsNCj4gPiBmaWxlOi8vMDJfZGlzYWJsZV9kbXJlZy5wYXRjaCBcICsNCj4gPiBm
-aWxlOi8vMDNfZml4X2h5cGhlbi11c2VkLWFzLW1pbnVzLXNpZ24ucGF0Y2ggXCArDQo+ID4gZmls
-ZTovLzA0X3Byb21pc2UtYWRkLW9mZnNldHMucGF0Y2ggXCArIGZpbGU6Ly8wNV9leGl0X2NvZGUu
-cGF0Y2ggXCArDQo+ID4gZmlsZTovLzA2X3N1cHBvcnRfdmlydGlvX2RldmljZXMucGF0Y2ggXCAr
-DQo+ID4gZmlsZTovLzA3X2lzdy1wcm9iZS1ocGEucGF0Y2ggXCArDQo+ID4gZmlsZTovLzA4X2Fj
-dGl2YXRlX211bHRpcGxlX3JhaWRfc2V0cy5wYXRjaCBcICsNCj4gPiBmaWxlOi8vMDlfcGRjX3Jh
-aWQxMF9mYWlsdXJlLi5wYXRjaCBcICsNCj4gPiBmaWxlOi8vMTBfZGRmMV9sc2lfcGVyc2lzdGVu
-dF9uYW1lLnBhdGNoIFwgKw0KPiA+IGZpbGU6Ly8xMV9maXhfaXN3X3NlY3RvcnNfY2FsY3VsYXRp
-b24ucGF0Y2ggXCArDQo+ID4gZmlsZTovLzEyX2ptaWNyb25fbmFtZWZpeC5wYXRjaCBcICsgICAg
-ICAgICAgIGZpbGU6Ly8xM19maXhfdGVzdGluZy5wYXRjaA0KPiA+IFwgKyAgICAgICAgICAgZmls
-ZTovLzE0X3BkY19kdW1wX2V4dGVuZGVkX21ldGFkYXRhLnBhdGNoIFwgKw0KPiA+IGZpbGU6Ly8x
-NV9kcm9wX3BfZm9yX3BhcnRpdGlvbl9jb25kaXRpb25hbC5wYXRjaCBcICsNCj4gPiBmaWxlOi8v
-MTZfY2hhbmdlLXV1aWQucGF0Y2ggXCArDQo+ID4gZmlsZTovLzE3X2NvbnZlcnQtZG1yYWlkNDUt
-dG8tZG1yYWlkLnBhdGNoIFwgKw0KPiA+IGZpbGU6Ly8xOF9pZ25vcmUtdG9vLXNtYWxsLWRldmlj
-ZXMucGF0Y2ggXCArDQo+ID4gZmlsZTovLzE5X2NvbXBpbGUtZG1yYWlkLWluLXN1YmRpci10b29s
-cy5wYXRjaCBcICsNCj4gPiBmaWxlOi8vMjBfc3BlY2lmaWVzLWluc3RhbGwtZGlyLWJ5LURFU1RE
-SVIucGF0Y2ggXCArICAgICAgICAgICIgKw0KPiA+ICtTUkNfVVJJW21kNXN1bV0gPSAiMzI4MzJj
-MWRmZDdlNzJjZDQzNTU0OTAzMjJmY2E2OGEiDQo+ID4gKytTUkNfVVJJW3NoYTI1NnN1bV0NCj4g
-PiA9ICJmODQ5YzQ0ZDA0MWY4ODkxYzYxNDE5ZGRmOTA2ZTZlMzRiNDQ5NDg5MzlhZTllNTUwYmU2
-NjJmZmMyNDkyMjU1IiArDQo+ID4gK0xJQ0VOU0UgPSAiR1BMdjIrIiArTElDX0ZJTEVTX0NIS1NV
-TSA9DQo+ID4gImZpbGU6Ly9MSUNFTlNFO21kNT0xNWIzMDEyNTc1ZWVmZmFjYzNjZWMyN2E2ZDNj
-YjMxZiIgKyArREVQRU5EUyA9DQo+ID4gImx2bTIiICsgK1MgPSAiJHtXT1JLRElSfS8ke0JQTn0v
-JHtQVn0iICsgK0NPTkZJR1VSRU9QVFMgPSAiDQo+ID4gLS1idWlsZD0ke0JVSUxEX1NZU30gXCAr
-ICAgICAgICAgICAgICAgICAgLS1ob3N0PSR7SE9TVF9TWVN9IFwgKw0KPiA+IC0tdGFyZ2V0PSR7
-VEFSR0VUX1NZU30gXCArICAgICAgICAgICAgICAgICAgLS1wcmVmaXg9JHtwcmVmaXh9IFwgKw0K
-PiA+IC0tZXhlY19wcmVmaXg9JHtleGVjX3ByZWZpeH0gXCArICAgICAgICAgICAgICAgICAgLS1i
-aW5kaXI9JHtiaW5kaXJ9IFwgKw0KPiA+IC0tc2JpbmRpcj0ke3NiaW5kaXJ9IFwgKyAgICAgICAg
-ICAgICAgICAgIC0tbGliZXhlY2Rpcj0ke2xpYmV4ZWNkaXJ9IFwgKw0KPiA+IC0tZGF0YWRpcj0k
-e2RhdGFkaXJ9IFwgKyAgICAgICAgICAgICAgICAgIC0tc3lzY29uZmRpcj0ke3N5c2NvbmZkaXJ9
-IFwgKw0KPiA+IC0tc2hhcmVkc3RhdGVkaXI9JHtzaGFyZWRzdGF0ZWRpcn0gXCArDQo+ID4gLS1s
-b2NhbHN0YXRlZGlyPSR7bG9jYWxzdGF0ZWRpcn0gXCArICAgICAgICAgICAgICAgICAgLS1saWJk
-aXI9JHtsaWJkaXJ9DQo+ID4gXCArICAgICAgICAgICAgICAgICAgLS1pbmNsdWRlZGlyPSR7aW5j
-bHVkZWRpcn0gXCArDQo+ID4gLS1vbGRpbmNsdWRlZGlyPSR7b2xkaW5jbHVkZWRpcn0gXCArDQo+
-ID4gLS1pbmZvZGlyPSR7aW5mb2Rpcn0gXCArICAgICAgICAgICAgICAgICAgLS1tYW5kaXI9JHtt
-YW5kaXJ9IFwgKw0KPiA+ICIgK0VYVFJBX09FQ09ORiArPSAiIC0tZGlzYWJsZS1zdGF0aWNfbGlu
-ayAtLWVuYWJsZS1sZWQNCj4gPiAtLWVuYWJsZS1pbnRlbF9sZWQgLS1lbmFibGUtZGVidWcgICIN
-Cj4gDQo+IFRoZXJlJ3Mgbm8gcHJldmlvdXMgRVhUUkFfT0VDT05GLCBzbyBkcm9wIHRoZSAnKycs
-IGJ1dCAuLi4NCj4gDQo+ID4gKyArZG9fY29uZmlndXJlKCkgeyArICAgIC4vY29uZmlndXJlICR7
-Q09ORklHVVJFT1BUU30gJHtFWFRSQV9PRUNPTkZ9DQo+IA0KPiAuLi4gd2hhdCdzIHRoZSBwb2lu
-dCBvZiAyIHZhcnMgaW5zdGVhZCBvZiBvbmU/DQoNClRoYW5rcyBmb3IgeW91ciByZXZpZXcuDQpG
-aXhlZCBpdCBpbiBteSBWMiBwYXRjaC4NCg0KVGhhbmtzDQogQmlhbg0KDQoNCj4gLS0tLS1CRUdJ
-TiBQR1AgU0lHTkFUVVJFLS0tLS0NCj4gVmVyc2lvbjogR251UEcgdjEuNC41IChEYXJ3aW4pDQo+
-IENvbW1lbnQ6IEdQR1Rvb2xzIC0gaHR0cDovL2dwZ3Rvb2xzLm9yZw0KPiANCj4gaUQ4REJRRlVl
-ZGRZTWt5R002NFJHcEVSQWp1VkFKOU15MkpoZWUwV1ZqZDlOcmlEa0g0cVJ4UmFEd0NnaVZMUQ0K
-PiBXdWdYb0R3RnR3eWhjSzJMd0JEaHY1Zz0NCj4gPVZYMkgNCj4gLS0tLS1FTkQgUEdQIFNJR05B
-VFVSRS0tLS0tDQo+IA0KPiAtLQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5l
-bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVu
-ZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
+lockfile-progs provide a method to lock and unlock mailboxes and files
+safely (via liblockfile).
+
+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+---
+ .../lockfile-progs/lockfile-progs_0.1.17.bb        | 24 ++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb
+
+diff --git a/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb
+new file mode 100644
+index 0000000..4354fff
+--- /dev/null
++++ b/meta-oe/recipes-extended/lockfile-progs/lockfile-progs_0.1.17.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Command-line programs to safely lock and unlock files and mailboxes"
++DESCRIPTION = "\
++lockfile-progs provide a method to lock and unlock mailboxes and files \
++safely (via liblockfile)."
++HOMEPAGE = "http://packages.qa.debian.org/l/lockfile-progs.html"
++SECTION = "Applications/System"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++DEPENDS = "liblockfile"
++
++SRC_URI = "http://ftp.de.debian.org/debian/pool/main/l/${BPN}/${BPN}_${PV}.tar.gz"
++SRC_URI[md5sum] = "64424a766fbc8cf6d613fcc14a096e14"
++SRC_URI[sha256sum] = "03fb05d25499532f497775b1747b61fa6beebf12d3bcc951e125349ae166c511"
++
++do_compile() {
++    oe_runmake CFLAGS=' -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -fasynchronous-unwind-tables'
++}
++
++do_install() {
++    install -m 755 -d ${D}${bindir}
++    install bin/* ${D}${bindir}
++    install -m 755 -d ${D}${mandir}/man1
++    install man/* ${D}${mandir}/man1
++}
+-- 
+1.8.3.1
+
 
