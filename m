@@ -1,27 +1,40 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 823B860232
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 08CC472221
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Dec 2014 03:20:12 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44318854"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Dec 2014 11:16:56 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sB23JqWP025733
+	Tue,  2 Dec 2014 03:44:45 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id ft15so12061740pdb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 2 Dec 2014 11:19:52 +0800
-Received: from localhost.localdomain (10.167.226.35) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 2 Dec 2014 11:20:16 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 2 Dec 2014 11:19:33 +0800
-Message-ID: <1417490373-1909-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+	Mon, 01 Dec 2014 19:44:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=pvYd2+nUv86VQsDD+7h6D1xKvJHsRSqJcmHv7u1cBpw=;
+	b=eAiHmHn+h4t0XPR1IzxfU4O19fVzRH7G2yvZ52x0mH5brQr+ti1KBMlM033zLoyqPm
+	CtwJSIefgBeSsK9Kxn5ZXTuQEA1djpHRhuEywAr20e6f0tO+1ZG3ssXJQ/RSqiy80fVM
+	l5URNR1TJ54i+gikNqmjhuz3KGlMYCswF2OTSaHFmbJXkqgZc4eEybrcpZPheV1b69qa
+	mfZblEfQ/saNgFy2jAW+fC9yvezJ2IfMgAFf8QT8rvNFnyRGswT2bd8wkxmCpsVARdLv
+	7DY97hbpjf9qe+mst2V3KaD0LrvoENHhMHNqXchepNCJ2V48tiXNIidMkQ1dCVWkmtBa
+	MM2w==
+X-Received: by 10.68.227.104 with SMTP id rz8mr2160213pbc.4.1417491885795;
+	Mon, 01 Dec 2014 19:44:45 -0800 (PST)
+Received: from ?IPv6:2601:c:9380:601:30ed:d4f1:6765:3ec7?
+	([2601:c:9380:601:30ed:d4f1:6765:3ec7])
+	by mx.google.com with ESMTPSA id fb3sm441065pbc.82.2014.12.01.19.44.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 01 Dec 2014 19:44:44 -0800 (PST)
+Message-ID: <547D35A8.4000700@gmail.com>
+Date: Mon, 01 Dec 2014 19:44:40 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.35]
-Subject: [meta-networking][PATCH] radiusclient-ng : add new recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1416990854-11188-1-git-send-email-javier.viguera@digi.com>
+In-Reply-To: <1416990854-11188-1-git-send-email-javier.viguera@digi.com>
+Subject: Re: [meta-oe][master][dizzy]PATCH v2] xserver-common: disable TCP connections
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,159 +48,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Dec 2014 03:20:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 02 Dec 2014 03:44:49 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-RADIUS protocol client library.
-It is Portable, easy-to-use and standard compliant library suitable
-for developing free and commercial software that need support for a RADIUS
-protocol (RFCs 2128 and 2139).
+thanks.
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../files/Fix-configure-and-compile-errors.patch   | 79 ++++++++++++++++++++++
- .../files/config-site.radiusclient-ng-0.5.6        |  1 +
- .../radiusclient-ng/radiusclient-ng_0.5.6.bb       | 36 ++++++++++
- 3 files changed, 116 insertions(+)
- create mode 100644 meta-networking/recipes-support/radiusclient-ng/files/Fix-configure-and-compile-errors.patch
- create mode 100644 meta-networking/recipes-support/radiusclient-ng/files/config-site.radiusclient-ng-0.5.6
- create mode 100644 meta-networking/recipes-support/radiusclient-ng/radiusclient-ng_0.5.6.bb
+pulling in change for next round of merges.
 
-diff --git a/meta-networking/recipes-support/radiusclient-ng/files/Fix-configure-and-compile-errors.patch b/meta-networking/recipes-support/radiusclient-ng/files/Fix-configure-and-compile-errors.patch
-new file mode 100644
-index 0000000..5220923
---- /dev/null
-+++ b/meta-networking/recipes-support/radiusclient-ng/files/Fix-configure-and-compile-errors.patch
-@@ -0,0 +1,79 @@
-+From 72154b3179d9352d3747d7b47d6029a9f1a304b2 Mon Sep 17 00:00:00 2001
-+From: Li xin <lixin.fnst@cn.fujitsu.com>
-+Date: Tue, 2 Dec 2014 02:33:53 +0900
-+Subject: [PATCH] Fix configure and compile errors
-+
-+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-+---
-+ configure.in             | 6 +++++-
-+ etc/Makefile.am          | 9 ++++++---
-+ etc/radiusclient.conf.in | 2 +-
-+ 3 files changed, 12 insertions(+), 5 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index 812f640..3a8af99 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -29,6 +29,9 @@ AC_SUBST(LIBVERSION)
-+ pkgsysconfdir=${sysconfdir}/$PACKAGE
-+ AC_SUBST(pkgsysconfdir)
-+ 
-++pkgdatadir=${datadir}/$PACKAGE
-++AC_SUBST(pkgdatadir)
-++
-+ AC_PROG_LIBTOOL
-+ 
-+ AC_PROG_CC
-+@@ -118,7 +121,8 @@ then
-+ 	],
-+ 	AC_MSG_RESULT(yes)
-+ 	AC_DEFINE(HAVE_STRUCT_UTSNAME_DOMAINNAME),
-+-	AC_MSG_RESULT(no)
-++	AC_MSG_RESULT(no),
-++	AC_MSG_RESULT(assume no),
-+ 	)
-+ fi
-+ 
-+diff --git a/etc/Makefile.am b/etc/Makefile.am
-+index 39b6975..a3c403f 100644
-+--- a/etc/Makefile.am
-++++ b/etc/Makefile.am
-+@@ -14,9 +14,11 @@ CLEANFILES = *~ radiusclient.conf
-+ 
-+ sbindir = @sbindir@
-+ pkgsysconfdir = @pkgsysconfdir@
-+-pkgsysconf_DATA = issue port-id-map radiusclient.conf \
-+-	dictionary dictionary.ascend dictionary.compat dictionary.merit \
-+-	dictionary.sip
-++pkgsysconf_DATA = issue port-id-map radiusclient.conf
-++
-++pkgdatadir = @pkgdatadir@
-++pkgdata_DATA = dictionary dictionary.ascend dictionary.compat \
-++	dictionary.merit dictionary.sip
-+ 
-+ EXTRA_DIST = issue port-id-map dictionary dictionary.ascend \
-+ 	dictionary.compat dictionary.merit servers radiusclient.conf.in \
-+@@ -25,6 +27,7 @@ EXTRA_DIST = issue port-id-map dictionary dictionary.ascend \
-+ radiusclient.conf: radiusclient.conf.in
-+ 	sed -e 's|@sbin''dir@|$(sbindir)|g' \
-+ 	    -e 's|@pkgsysconf''dir@|$(pkgsysconfdir)|g' \
-++	    -e 's|@pkgdata''dir@|$(pkgdatadir)|g' \
-+ 	    <$(srcdir)/radiusclient.conf.in >radiusclient.conf
-+ 
-+ install-data-local: servers
-+diff --git a/etc/radiusclient.conf.in b/etc/radiusclient.conf.in
-+index 948bc2f..aac9973 100644
-+--- a/etc/radiusclient.conf.in
-++++ b/etc/radiusclient.conf.in
-+@@ -47,7 +47,7 @@ servers		@pkgsysconfdir@/servers
-+ 
-+ # dictionary of allowed attributes and values
-+ # just like in the normal RADIUS distributions
-+-dictionary 	@pkgsysconfdir@/dictionary
-++dictionary 	@pkgdatadir@/dictionary
-+ 
-+ # program to call for a RADIUS authenticated login
-+ login_radius	@sbindir@/login.radius
-+-- 
-+1.8.4.2
-+
-diff --git a/meta-networking/recipes-support/radiusclient-ng/files/config-site.radiusclient-ng-0.5.6 b/meta-networking/recipes-support/radiusclient-ng/files/config-site.radiusclient-ng-0.5.6
-new file mode 100644
-index 0000000..a30c144
---- /dev/null
-+++ b/meta-networking/recipes-support/radiusclient-ng/files/config-site.radiusclient-ng-0.5.6
-@@ -0,0 +1 @@
-+ac_cv_func_uname=no
-diff --git a/meta-networking/recipes-support/radiusclient-ng/radiusclient-ng_0.5.6.bb b/meta-networking/recipes-support/radiusclient-ng/radiusclient-ng_0.5.6.bb
-new file mode 100644
-index 0000000..bc9d08e
---- /dev/null
-+++ b/meta-networking/recipes-support/radiusclient-ng/radiusclient-ng_0.5.6.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "RADIUS protocol client library"
-+DESCRIPTION = "Portable, easy-to-use and standard compliant library suitable \
-+for developing free and commercial software that need support for a RADIUS \
-+protocol (RFCs 2128 and 2139)."
-+HOMEPAGE = "http://developer.berlios.de/projects/radiusclient-ng/"
-+SECTION = "Applications/Internet"
-+
-+SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/${PN}/${BP}.tar.gz/6fb7d4d0aefafaee7385831ac46a8e9c/${BP}.tar.gz \
-+    file://Fix-configure-and-compile-errors.patch \
-+    file://config-site.radiusclient-ng-${PV}"
-+
-+SRC_URI[md5sum] = "6fb7d4d0aefafaee7385831ac46a8e9c"
-+SRC_URI[sha256sum] = "282a9f1355f190efbb06c0d7c4e062eaa652caf342ed3ad361ac595f72f09f14"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3e47566c9271b786693d8a08792dbf41"
-+
-+inherit autotools-brokensep
-+
-+EXTRA_OECONF += "--disable-static"
-+
-+do_configure_prepend () {
-+    export CONFIG_SITE=./config-site.${P}
-+}
-+
-+do_compile_prepend() {
-+    for m in `find . -name "Makefile"` ; do
-+        sed -i -e 's:^program_transform_name =.*:program_transform_name =:g' ${m}
-+    done
-+}
-+
-+do_install() {
-+    oe_runmake DESTDIR=${D} install
-+    rm -f ${D}${libdir}/*.la
-+    rm -f ${D}${sbindir}/radexample
-+}
--- 
-1.8.4.2
+- Armin
 
+On 11/26/2014 12:34 AM, Javier Viguera wrote:
+> For security reasons disable TCP connections to the xserver.
+>
+> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+> ---
+>
+> Notes:
+>      v2:
+>        * Add upstream-status
+>
+>   ...15-xserver-common-disable-TCP-connections.patch | 24 ++++++++++++++++++++++
+>   .../xserver-common/xserver-common_1.34.bb          |  1 +
+>   2 files changed, 25 insertions(+)
+>   create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+>
+> diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+> new file mode 100644
+> index 000000000000..06df2618bd76
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+> @@ -0,0 +1,24 @@
+> +From: Javier Viguera <javier.viguera@digi.com>
+> +Date: Wed, 26 Nov 2014 09:24:44 +0100
+> +Subject: [PATCH] xserver-common: disable TCP connections
+> +
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+> +---
+> + X11/xserver-common | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/X11/xserver-common b/X11/xserver-common
+> +index 017e5aee1ab0..4dc48c412741 100644
+> +--- a/X11/xserver-common
+> ++++ b/X11/xserver-common
+> +@@ -44,7 +44,7 @@ SCREEN_SIZE=`fallback_screen_arg`
+> + export USER=root
+> + export XSERVER_DEFAULT_ORIENTATION=normal
+> +
+> +-ARGS="-br -pn $INPUT_EXTRA_ARGS"
+> ++ARGS="-br -pn -nolisten tcp $INPUT_EXTRA_ARGS"
+> + DPI="100"
+> + MOUSE=""
+> + KDRIVEARGS=""
+> diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> index 12fff9ae9a0d..f5b1984cdde3 100644
+> --- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> +++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+> @@ -24,6 +24,7 @@ SRC_URI_append = " \
+>       file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
+>       file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
+>       file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
+> +    file://0015-xserver-common-disable-TCP-connections.patch \
+>   "
+>
+>   do_install_append() {
+>
 
