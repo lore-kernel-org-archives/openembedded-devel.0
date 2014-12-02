@@ -1,25 +1,34 @@
-Return-Path: <ignas.anikevicius@realvnc.com>
-Received: from SP38.realvnc.ltd (mx.realvnc.com [212.69.41.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 62DCC60232
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 1274660030
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Dec 2014 14:12:42 +0000 (UTC)
-Received: from [10.10.30.155] (10.10.30.155) by SP38.realvnc.ltd (10.10.99.11)
-	with Microsoft SMTP Server (TLS) id 15.0.775.38;
-	Tue, 2 Dec 2014 14:12:29 +0000
-Message-ID: <547DC8CB.7090602@realvnc.com>
-Date: Tue, 2 Dec 2014 14:12:27 +0000
-From: Ignas Anikevicius <ignas.anikevicius@realvnc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1415111960-5672-1-git-send-email-ignas.anikevicius@realvnc.com>
-	<547D369C.7080700@gmail.com>
-In-Reply-To: <547D369C.7080700@gmail.com>
-X-Originating-IP: [10.10.30.155]
-X-ClientProxiedBy: SP38.realvnc.ltd (10.10.99.11) To SP38.realvnc.ltd
-	(10.10.99.11)
-Subject: Re: [meta-oe][daisy][PATCH] Add a bitbake recipe for Python psutil v2.1.3
+	Tue,  2 Dec 2014 16:19:47 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1XvqAx-00070G-0v for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Dec 2014 17:19:43 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Dec 2014 17:19:43 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Dec 2014 17:19:43 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 02 Dec 2014 17:19:34 +0100
+Message-ID: <m5koqm$ahc$1@ger.gmane.org>
+References: <20141121140331.GA20204@mentor.com>	<1417075397-2168-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<20141130205502.GS3886@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:24.0) Gecko/20100101 Thunderbird/24.6.0
+In-Reply-To: <20141130205502.GS3886@mentor.com>
+Subject: Re: [meta-networking][PATCH v2] open-iscsi : add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,64 +42,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Dec 2014 14:12:44 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
+X-List-Received-Date: Tue, 02 Dec 2014 16:19:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Since this was my first patch submission for meta-oe, I did not know 
-about the development cycle for this. If this can not be applied to 
-daisy, is it possible to get it into dizzy?
+Joe MacDonald schreef op 30-11-14 21:55:
+> Merged, thanks.  I made one minor tweak to the "add includes" patch to 
+> remove trailing whitespace.
 
-Thanks very much,
+None of the review comments were addressed, the hardcoded paths one is a
+serious bug :/
 
-Ignas A.
+> 
+> -J.
+> 
+> [[oe] [meta-networking][PATCH v2] open-iscsi : add recipe] On 14.11.27
+> (Thu 16:03) Li xin wrote:
+> 
+>> Open-iSCSI project is a high performance, transport independent,
+>> multi-platform implementation of RFC3720.
+>> 
+>> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com> --- 
+>> .../files/iscsi_sysfs.c-add-include-files.patch    | 26
+>> +++++++++++++++++ .../open-iscsi/files/open-iscsi.service            |
+>> 18 ++++++++++++ .../open-iscsi/open-iscsi_2.0-871.bb               | 34
+>> ++++++++++++++++++++++ 3 files changed, 78 insertions(+) create mode
+>> 100644
+>> meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch
+>>
+>> 
+create mode 100644
+meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service
+>> create mode 100644
+>> meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb
+>> 
+>> diff --git
+>> a/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch
+>> b/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch
+>>
+>> 
+new file mode 100644
+>> index 0000000..43c1c36 --- /dev/null +++
+>> b/meta-networking/recipes-daemons/open-iscsi/files/iscsi_sysfs.c-add-include-files.patch
+>>
+>> 
+@@ -0,0 +1,26 @@
+>> +From e8ecb307b6402b39d033e20f4df4f3374e7c0685 Mon Sep 17 00:00:00
+>> 2001 +From: Li xin <lixin.fnst@cn.fujitsu.com> +Date: Fri, 21 Nov 2014
+>> 12:02:51 +0900 +Subject: [PATCH] usr/iscsi_sysfs.c : add include files 
+>> + +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com> +--- +
+>> usr/iscsi_sysfs.c | 2 ++ + 1 file changed, 2 insertions(+) + +diff
+>> --git a/usr/iscsi_sysfs.c b/usr/iscsi_sysfs.c +index cb9a5a1..f6bd78a
+>> 100644 +--- a/usr/iscsi_sysfs.c ++++ b/usr/iscsi_sysfs.c +@@ -14,6
+>> +14,8 @@ +  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+>> the GNU +  * General Public License for more details. +  */ ++#include
+>> <sys/types.h> ++#include <sys/stat.h> + #include <fcntl.h> + #include
+>> <unistd.h> + #include <stdlib.h> +-- +1.8.4.2 + diff --git
+>> a/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service
+>> b/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service 
+>> new file mode 100644 index 0000000..debb2d6 --- /dev/null +++
+>> b/meta-networking/recipes-daemons/open-iscsi/files/open-iscsi.service 
+>> @@ -0,0 +1,18 @@ +[Unit] +Description=Open-iSCSI 
+>> +Documentation=man:iscsid(8) man:iscsiadm(8) +After=network.target + 
+>> +[Service] +Type=forking +PIDFile=/var/run/iscsid.pid 
+>> +ExecStartPre=-/sbin/modprobe -q iscsi_tcp 
+>> +ExecStartPre=-/sbin/modprobe -q ib_iser +ExecStart=/usr/sbin/iscsid -p
+>> /var/run/iscsid.pid +ExecStartPost=-/usr/sbin/iscsiadm -m node
+>> --loginall=automatic +ExecStopPost=/bin/sync 
+>> +ExecStopPost=-/sbin/modprobe -r ib_iser +ExecStopPost=-/sbin/modprobe
+>> -r iscsi_tcp + +[Install] +WantedBy=multi-user.target diff --git
+>> a/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb
+>> b/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb new
+>> file mode 100644 index 0000000..99f8657 --- /dev/null +++
+>> b/meta-networking/recipes-daemons/open-iscsi/open-iscsi_2.0-871.bb @@
+>> -0,0 +1,34 @@ +DESCRIPTION = "Open-iSCSI project is a high performance,
+>> transport \ +independent, multi-platform implementation of RFC3720." 
+>> +HOMEPAGE = "http://www.open-iscsi.org/" +LICENSE = "GPL-2.0" 
+>> +LIC_FILES_CHKSUM =
+>> "file://COPYING;md5=393a5ca445f6965873eca0259a17f833" + +SRC_URI =
+>> "http://www.open-iscsi.org/bits/${BP}.tar.gz" +SRC_URI[md5sum] =
+>> "0c403e8c9ad41607571ba0e6e8ff196e" +SRC_URI[sha256sum] =
+>> "bcea8746ae82f2ada7bc05d2aa59bcda1ca0d5197f05f2e16744aae59f0a7dcb" 
+>> +SRC_URI += "file://iscsi_sysfs.c-add-include-files.patch \ +
+>> file://open-iscsi.service" + +TARGET_CC_ARCH += "${LDFLAGS}" + 
+>> +do_compile () { +    oe_runmake user +} + +do_install_append () { +
+>> if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
+>> then +        install -d ${D}${systemd_unitdir}/system +        install
+>> -m 0644 ${WORKDIR}/open-iscsi.service ${D}${systemd_unitdir}/system/ +
+>> fi +} + +do_install () { +    oe_runmake DESTDIR="${D}" install_user 
+>> +} + +inherit
+>> ${@base_contains('VIRTUAL-RUNTIME_init_manager','systemd','systemd','',d)}
+>>
+>> 
++
+>> +SYSTEMD_PACKAGES = "${PN}" +SYSTEMD_SERVICE_${PN} =
+>> "open-iscsi.service" +SYSTEMD_AUTO_ENABLE = "enable" -- 1.8.4.2
+>> 
+>> 
+>> 
 
-On 02/12/14 03:48, akuster808 wrote:
->
-> I don't think Daisy is taking new packages. I will defer to Martin.
->
-> - Armin
->
-> On 11/04/2014 06:39 AM, Ignas Anikevicius wrote:
->> This bitbake recipe is based on the existing
->> 'python-psutil_v0.6.9' bitbake recipe in the same folder.
->>
->> I have tested the recipe locally and it work without any issues.
->>
->> Signed-off-by: Ignas Anikevicius <ignas.anikevicius@realvnc.com>
->> ---
->>   meta-oe/recipes-devtools/python/python-psutil_2.1.3.bb | 13 
->> +++++++++++++
->>   1 file changed, 13 insertions(+)
->>   create mode 100644 
->> meta-oe/recipes-devtools/python/python-psutil_2.1.3.bb
->>
->> diff --git a/meta-oe/recipes-devtools/python/python-psutil_2.1.3.bb 
->> b/meta-oe/recipes-devtools/python/python-psutil_2.1.3.bb
->> new file mode 100644
->> index 0000000..76380ba
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/python/python-psutil_2.1.3.bb
->> @@ -0,0 +1,13 @@
->> +SUMMARY = "A cross-platform process and system utilities module for 
->> Python"
->> +SECTION = "devel/python"
->> +HOMEPAGE = "https://github.com/giampaolo/psutil"
->> +LICENSE = "BSD"
->> +LIC_FILES_CHKSUM = 
->> "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
->> +
->> +SRC_URI = 
->> "https://pypi.python.org/packages/source/p/psutil/psutil-${PV}.tar.gz"
->> +SRC_URI[md5sum] = "015a013c46bb9bc30b5c344f26dea0d3"
->> +SRC_URI[sha256sum] = 
->> "b434c75f01715777391f10f456002e33d0ca14633f96fdbd9ff9139b42d9452c"
->> +
->> +S = "${WORKDIR}/psutil-${PV}"
->> +
->> +inherit setuptools
->>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFUfeaWMkyGM64RGpERAjs1AJ9GBotz/SKNVovuZeTajFipaC/gbwCeLOTG
+0IdRSUGTf1eYpvVHW9lmvPI=
+=T/wZ
+-----END PGP SIGNATURE-----
 
 
