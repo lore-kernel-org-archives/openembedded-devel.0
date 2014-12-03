@@ -1,36 +1,40 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 94538714D7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Dec 2014 12:41:29 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id b13so19893506wgh.31
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Dec 2014 04:41:29 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0WlvUsakCtt7QiZ6g0kelnRaE4PVsmxsMyNHcp9/9wM=;
-	b=Gk0lscvbvZORvmNGeVn4UWkgZSZBjMMdkOxIdTo3bwXi3iSxdkT3800GmFD22Tj4yz
-	/OkjJ8KQzi4mdSRsZlxBzNnlpy5JmR64G2S4+I9H/+mG2cTa6WPpBfgKZ/W2BLUr7uI+
-	QhOMFgZQGEbf8/5SH84vFlhnyBfIS4C3fa4h0RR+6wnKZmsFxVdu7ocjveARCF5jrdKh
-	6H4FA0WU20Hn+PX+7SNB5sW3XKdylL7XMPRx02PnI2ObEg7nTlkSzPnAsUfpkodTMbcv
-	AfEaU0QlyVtk3A1UZDrT+FUP6tFlQFQO4bCrqlEJWPxW6ZdWFWz390k2qdUAp0OQQJ8I
-	e9BQ==
-X-Gm-Message-State: ALoCoQlR6dUdhGzIbGDPIVKw+Leoah6tEEr+0pciNtS03di92tJCn9UWu3HctP1Qa7vyufnO0WqZ
-X-Received: by 10.180.104.197 with SMTP id gg5mr63594063wib.7.1417610489657;
-	Wed, 03 Dec 2014 04:41:29 -0800 (PST)
-Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 7574C65CA7
+	for <openembedded-devel@openembedded.org>;
+	Wed,  3 Dec 2014 15:09:06 +0000 (UTC)
+Received: by mail-wg0-f43.google.com with SMTP id l18so19985868wgh.30
+	for <openembedded-devel@openembedded.org>;
+	Wed, 03 Dec 2014 07:09:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=5Fhg6xT8z05m6qat6X3VDyCydBKkYtSxkOVN6Ctj+DM=;
+	b=TxW527kCN8y9A5ktSAJHkqVtVyFCFA01mDzn+ZkIc8q2Pm0sBZq6JDwPConq8Gkfyy
+	XNWYWN+dSU1RDOA7934MVIxIyU4llB+FYkK4Wo7Gg2YhBQwQwLRl6LhH8l3+bjpqkdiL
+	5HVjzJtitcI2hTkeodLbQKAmie1gaNM4nwhfDdGPRRFDOAew9/aZ/Qo72Jt4H+vGj8U6
+	7JKltQTI90DEyVvN87gDd0H3vqUIE/mozcCB6jBZ5T68p2LdZRiqLNMZ0getMdQqc8oy
+	ppwjP4QYi6s0X1v4j3sr0NVmibCjkEXdZaHAlOKYHoc+YA6bT1+BUGF4cmYPEYOwzVRB
+	7bog==
+X-Received: by 10.194.238.40 with SMTP id vh8mr8153776wjc.57.1417619346730;
+	Wed, 03 Dec 2014 07:09:06 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ry19sm36131260wjb.3.2014.12.03.04.41.28 for <multiple recipients>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Wed, 03 Dec 2014 04:41:28 -0800 (PST)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	t6sm25488514wjf.49.2014.12.03.07.09.05 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 03 Dec 2014 07:09:05 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 3 Dec 2014 16:09:07 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Dec 2014 13:41:22 +0100
-Message-Id: <1417610482-5790-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.9.0
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-multimedia][PATCH] tvheadend: update to 3.9
+Message-ID: <20141203150907.GA2455@jama>
+References: <1416931776-13600-1-git-send-email-philip@balister.org>
+	<1416931776-13600-2-git-send-email-philip@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <1416931776-13600-2-git-send-email-philip@balister.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@openembedded.org
+Subject: Re: [meta-oe][PATCH 2/3] python-pyqt : Update to 4.11.3.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,233 +48,286 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Dec 2014 12:41:32 -0000
+X-List-Received-Date: Wed, 03 Dec 2014 15:09:09 -0000
+X-Groupsio-MsgNum: 53167
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jRHKVT23PllUwdXP"
+Content-Disposition: inline
 
-Fetch dvbcan tables using bitbake and reenable the config option.
+--jRHKVT23PllUwdXP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The license file was renamed and now lists the CLA requirement as well.
+On Tue, Nov 25, 2014 at 11:09:35AM -0500, Philip Balister wrote:
+> The configure.py script now has support for cross compiling. This
+> simplified the recipe substantially.
+>=20
+> The recipe was tested with gnuradio-companion on the zedboard and
+> ettus-e300. This is the first time we have been able to use grc with
+> pyqt built with OpenEmbedded.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
----
- ...end-specific-LD-CFLAGS-into-a-helper-vari.patch | 115 ++++++++++++++-------
- .../recipes-dvb/tvheadend/tvheadend_git.bb         |  18 ++--
- 2 files changed, 92 insertions(+), 41 deletions(-)
+Fails to build for qemux86 in world builds:
 
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch
-index 9dfcce0..cac2b90 100644
---- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch
-+++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch
-@@ -1,4 +1,4 @@
--From 2ee64b359464b48f751683faa5ded3ee8200fe90 Mon Sep 17 00:00:00 2001
-+From e56e244f901ae04e8c681c848d06c1b96b67ca58 Mon Sep 17 00:00:00 2001
- From: Koen Kooi <koen@dominion.thruhere.net>
- Date: Fri, 21 Dec 2012 10:15:42 +0100
- Subject: [PATCH] Move tvheadend specific LD/CFLAGS into a helper variable to
-@@ -8,64 +8,109 @@ Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
- 
- Upstream-Status: Inappropriate [OE specific]
- ---
-- Makefile              |   20 ++++++++++----------
-- support/configure.inc |    8 ++++----
-- 2 files changed, 14 insertions(+), 14 deletions(-)
-+ Makefile              | 44 ++++++++++++++++++++++----------------------
-+ support/configure.inc |  8 ++++----
-+ 2 files changed, 26 insertions(+), 26 deletions(-)
- 
- diff --git a/Makefile b/Makefile
--index 8c6b293..daf5f14 100644
-+index 9931635..5e4aebf 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -27,12 +27,12 @@ PROG = ${BUILDDIR}/tvheadend
-+@@ -27,45 +27,45 @@ PROG    := $(BUILDDIR)/tvheadend
-  # Common compiler flags
-  #
-  
-+-CFLAGS  += -g -O2 -Wunused-result
- -CFLAGS  += -Wall -Werror -Wwrite-strings -Wno-deprecated-declarations
---CFLAGS  += -Wmissing-prototypes -fms-extensions
---CFLAGS  += -g -funsigned-char -O2 
-+-CFLAGS  += -Wmissing-prototypes
-+-CFLAGS  += -fms-extensions -funsigned-char -fno-strict-aliasing
- -CFLAGS  += -D_FILE_OFFSET_BITS=64
---CFLAGS  += -I${BUILDDIR} -I${CURDIR}/src -I${CURDIR}
---LDFLAGS += -lrt -ldl -lpthread -lm
-+-CFLAGS  += -I${BUILDDIR} -I${ROOTDIR}/src -I${ROOTDIR}
-++TVH_CFLAGS  += -g -O2 -Wunused-result
- +TVH_CFLAGS  += -Wall -Werror -Wwrite-strings -Wno-deprecated-declarations
--+TVH_CFLAGS  += -Wmissing-prototypes -fms-extensions
--+TVH_CFLAGS  += -g -funsigned-char -O2 
-++TVH_CFLAGS  += -Wmissing-prototypes
-++TVH_CFLAGS  += -fms-extensions -funsigned-char -fno-strict-aliasing
- +TVH_CFLAGS  += -D_FILE_OFFSET_BITS=64
--+TVH_CFLAGS  += -I${BUILDDIR} -I${CURDIR}/src -I${CURDIR}
--+TVH_LDFLAGS += -lrt -ldl -lpthread -lm
-++TVH_CFLAGS  += -I${BUILDDIR} -I${ROOTDIR}/src -I${ROOTDIR}
-+ ifeq ($(CONFIG_ANDROID),yes)
-+-LDFLAGS += -ldl -lm
-++TVH_LDFLAGS += -ldl -lm
-+ else
-+-LDFLAGS += -ldl -lpthread -lm
-++TVH_LDFLAGS += -ldl -lpthread -lm
-+ endif
-+ ifeq ($(CONFIG_LIBICONV),yes)
-+-LDFLAGS += -liconv
-++TVH_LDFLAGS += -liconv
-+ endif
-+ ifeq ($(PLATFORM), darwin)
-+-LDFLAGS += -framework CoreServices
-++TVH_LDFLAGS += -framework CoreServices
-+ else
-+ ifeq ($(CONFIG_ANDROID),no)
-+-LDFLAGS += -lrt
-++TVH_LDFLAGS += -lrt
-+ endif
-+ endif
-  
-- #
-- # Other config
--@@ -179,8 +179,8 @@ SRCS-${CONFIG_CWC}  += src/ffdecsa/ffdecsa_interface.c \
-- 	src/ffdecsa/ffdecsa_int.c
-- SRCS-${CONFIG_MMX}  += src/ffdecsa/ffdecsa_mmx.c
-- SRCS-${CONFIG_SSE2} += src/ffdecsa/ffdecsa_sse2.c
---${BUILDDIR}/src/ffdecsa/ffdecsa_mmx.o  : CFLAGS += -mmmx
---${BUILDDIR}/src/ffdecsa/ffdecsa_sse2.o : CFLAGS += -msse2
--+${BUILDDIR}/src/ffdecsa/ffdecsa_mmx.o  : TVH_CFLAGS += -mmmx
--+${BUILDDIR}/src/ffdecsa/ffdecsa_sse2.o : TVH_CFLAGS += -msse2
-+ ifeq ($(COMPILER), clang)
-+-CFLAGS  += -Wno-microsoft -Qunused-arguments -Wno-unused-function
-+-CFLAGS  += -Wno-unused-value -Wno-tautological-constant-out-of-range-compare
-+-CFLAGS  += -Wno-parentheses-equality -Wno-incompatible-pointer-types
-++TVH_CFLAGS  += -Wno-microsoft -Qunused-arguments -Wno-unused-function
-++TVH_CFLAGS  += -Wno-unused-value -Wno-tautological-constant-out-of-range-compare
-++TVH_CFLAGS  += -Wno-parentheses-equality -Wno-incompatible-pointer-types
-+ endif
-+ 
-+ ifeq ($(CONFIG_LIBFFMPEG_STATIC),yes)
-+-CFLAGS  += -I${ROOTDIR}/libav_static/build/ffmpeg/include
-+-LDFLAGS += -L${ROOTDIR}/libav_static/build/ffmpeg/lib -Wl,-Bstatic \
-++TVH_CFLAGS  += -I${ROOTDIR}/libav_static/build/ffmpeg/include
-++TVH_LDFLAGS += -L${ROOTDIR}/libav_static/build/ffmpeg/lib -Wl,-Bstatic \
-+            -lavresample -lswresample -lswscale \
-+            -lavutil -lavformat -lavcodec -lavutil \
-+            -lvorbisenc -lvorbis -logg -lx264 -lvpx \
-+            -Wl,-Bdynamic
-+ endif
-+ ifeq ($(CONFIG_HDHOMERUN_STATIC),yes)
-+-CFLAGS  += -I${ROOTDIR}/libhdhomerun_static
-+-LDFLAGS += -L${ROOTDIR}/libhdhomerun_static/libhdhomerun \
-++TVH_CFLAGS  += -I${ROOTDIR}/libhdhomerun_static
-++TVH_LDFLAGS += -L${ROOTDIR}/libhdhomerun_static/libhdhomerun \
-+            -Wl,-Bstatic -lhdhomerun -Wl,-Bdynamic
-+ endif
-+ 
-+@@ -340,8 +340,8 @@ SRCS-yes += src/descrambler/ffdecsa/ffdecsa_interface.c \
-+ 	    src/descrambler/ffdecsa/ffdecsa_int.c
-+ SRCS-${CONFIG_MMX}  += src/descrambler/ffdecsa/ffdecsa_mmx.c
-+ SRCS-${CONFIG_SSE2} += src/descrambler/ffdecsa/ffdecsa_sse2.c
-+-${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_mmx.o  : CFLAGS += -mmmx
-+-${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_sse2.o : CFLAGS += -msse2
-++${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_mmx.o  : TVH_TVH_CFLAGS += -mmmx
-++${BUILDDIR}/src/descrambler/ffdecsa/ffdecsa_sse2.o : TVH_TVH_CFLAGS += -msse2
-  endif
-  
-- # File bundles
--@@ -217,12 +217,12 @@ all: ${PROG}
-+ # libaesdec
-+@@ -402,12 +402,12 @@ reconfigure:
-  
-  # Binary
-- ${PROG}: $(OBJS) $(ALLDEPS)
-+ ${PROG}: check_config $(OBJS) $(ALLDEPS)
- -	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LDFLAGS)
--+	$(CC) -o $@ $(OBJS) $(TVH_CFLAGS) $(TVH_LDFLAGS) $(CFLAGS) $(LDFLAGS)
-++	$(CC) -o $@ $(OBJS) $(TVH_CFLAGS) $(TVH_LDFLAGS) $(TVH_CFLAGS) $(TVH_LDFLAGS) $(TVH_CFLAGS) $(TVH_LDFLAGS) $(TVH_CFLAGS) $(TVH_LDFLAGS) $(CFLAGS) $(LDFLAGS)
-  
-  # Object
-  ${BUILDDIR}/%.o: %.c
-  	@mkdir -p $(dir $@)
---	$(CC) -MD -MP $(CFLAGS) -c -o $@ $(CURDIR)/$<
--+	$(CC) -MD -MP $(TVH_CFLAGS) $(CFLAGS) -c -o $@ $(CURDIR)/$<
-+-	$(CC) -MD -MP $(CFLAGS) -c -o $@ $<
-++	$(CC) -MD -MP $(TVH_CFLAGS) $(TVH_CFLAGS) $(TVH_CFLAGS) $(TVH_CFLAGS) $(CFLAGS) -c -o $@ $<
-  
-  # Add-on
-  ${BUILDDIR}/%.so: ${SRCS_EXTRA}
- diff --git a/support/configure.inc b/support/configure.inc
--index 0130880..332511e 100644
-+index f7cfcd3..e3a2dd7 100755
- --- a/support/configure.inc
- +++ b/support/configure.inc
--@@ -464,8 +464,8 @@ ifeq (\$(origin CC),default)
-+@@ -455,8 +455,8 @@ ifeq (\$(origin CC),default)
-  CC        = ${CC}
-  endif
-  PYTHON   ?= ${PYTHON}
-@@ -76,10 +121,10 @@ index 0130880..332511e 100644
-  prefix    = ${prefix}
-  bindir    = ${bindir}
-  mandir    = ${mandir}
--@@ -482,8 +482,8 @@ EOF
-+@@ -478,8 +478,8 @@ EOF
-    # Add package config
-    for pkg in ${PACKAGES[*]}; do
--     cat >>${CONFIG_MK} <<EOF
-+     cat >>"${CONFIG_MK}" <<EOF
- -LDFLAGS += $(pkg-config --libs $pkg)
- -CFLAGS  += $(pkg-config --cflags $pkg)
- +TVH_LDFLAGS += $(pkg-config --libs $pkg)
-@@ -88,5 +133,5 @@ index 0130880..332511e 100644
-    done
-  
- -- 
--1.7.7.6
-+1.9.0
- 
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-index 65d43c6..8539927 100644
---- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-+++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-@@ -1,26 +1,32 @@
- SUMMARY = "Tvheadend TV streaming server"
- HOMEPAGE = "https://www.lonelycoder.com/redmine/projects/tvheadend"
- 
--DEPENDS = "avahi zlib openssl python-native"
-+DEPENDS = "avahi zlib openssl python-native libav"
- 
- LICENSE = "GPLv3+"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=9eef91148a9b14ec7f9df333daebc746"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
- 
--SRC_URI = "git://github.com/tvheadend/tvheadend.git \
-+SRC_URI = "git://github.com/tvheadend/tvheadend.git;name=tvh \
-+           git://linuxtv.org/dtv-scan-tables.git;name=dvb;destsuffix=git/data/dvb-scan \
-            file://0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch \
- "
--SRCREV = "a420c83a0e0d2c31c2c15d0fec6fedc3f5a36dfe"
--PV = "3.3"
-+SRCREV_tvh = "a95ef0b237a01e6fe6a29c0cd76f98a3a216c1ce"
-+SRCREV_dvb = "82115b4a1f1039d5a2f93f2b7ddc4b2d2713b7ae"
-+SRCREV_FORMAT = "tvh"
-+
-+PV = "3.9+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
- do_configure() {
-+    # The fetcher ensures the mux list is up to date
-+    sed -i -e 's:exit 1:exit 0:g' ${S}/support/getmuxlist
-+
-     ./configure --prefix=${prefix} \
-                 --libdir=${libdir} \
-                 --bindir=${bindir} \
-                 --datadir=${datadir} \
-                 --arch=${TARGET_ARCH} \
--                --disable-dvbscan \
-                 --disable-bundle
- }
- 
--- 
-1.9.0
+| i586-oe-linux-g++  -m32 -march=3Di586 --sysroot=3D/home/jenkins/oe/world/=
+shr-core/tmp-glibc/sysroots/qemux86 -c -pipe  -O2 -pipe -g -feliminate-unus=
+ed-debug-types -fvisibility-inlines-hidden -fno-exceptions -O2 -Wall -W -D_=
+REENTRANT -fPIC -DSIP_PROTECTED_IS_PUBLIC -Dprotected=3Dpublic -DQT_NO_DEBU=
+G -DQT_PLUGIN -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED -I/home/jenkins/oe/wor=
+ld/shr-core/tmp-glibc/sysroots/qemux86/usr/share/qt4/mkspecs/linux-g++ -I. =
+-I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/qt=
+4/QtCore -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/i=
+nclude/qt4/QtGui -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux=
+86/usr/include/qt4 -I. -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots=
+/qemux86/usr/include/python2.7 -I../qpy/QtGui -I. -o sipQtGuiQGraphicsLayou=
+t.o sipQtGuiQGraphicsLayout.cpp
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/python-pyqt/=
+4.11.3-r0/PyQt-x11-gpl-4.11.3/QtGui/sipQtGuiQGraphicsLayout.cpp: In member =
+function 'virtual void sipQGraphicsLayout::getContentsMargins(qreal*, qreal=
+*, qreal*, qreal*) const':
+| /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/python-pyqt/=
+4.11.3-r0/PyQt-x11-gpl-4.11.3/QtGui/sipQtGuiQGraphicsLayout.cpp:246:71: err=
+or: cannot convert 'qreal* {aka double*}' to 'float*' for argument '5' to '=
+void sipVH_QtGui_197(sip_gilstate_t, sipVirtErrorHandlerFunc, sipSimpleWrap=
+per*, PyObject*, float*, float*, float*, float*)'
+|      sipVH_QtGui_197(sipGILState, 0, sipPySelf, sipMeth, a0, a1, a2, a3);
+|                                                                        ^
+| make[1]: *** [sipQtGuiQGraphicsLayout.o] Error 1
+| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/i586-oe-linux/python-pyqt/4.11.3-r0/PyQt-x11-gpl-4.11.3/QtGui'
+| make: *** [sub-QtGui-make_default-ordered] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
+oe/world/shr-core/tmp-glibc/work/i586-oe-linux/python-pyqt/4.11.3-r0/temp/l=
+og.do_compile.19265)
+NOTE: recipe python-pyqt-4.11.3-r0: task do_compile: Failed
+ERROR: Task 20439 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
+e/recipes-devtools/python/python-pyqt_4.11.3.bb, do_compile) failed with ex=
+it code '1'
 
 
+>=20
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>  .../recipes-devtools/python/python-pyqt_4.11.3.bb  |  50 ++++++++++
+>  .../recipes-devtools/python/python-pyqt_4.9.6.bb   | 103 ---------------=
+------
+>  2 files changed, 50 insertions(+), 103 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-pyqt_4.9.6.bb
+>=20
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb b/meta=
+-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+> new file mode 100644
+> index 0000000..5ced2ad
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+> @@ -0,0 +1,50 @@
+> +SUMMARY =3D "Python Qt4 Bindings"
+> +AUTHOR =3D "Phil Thomson @ riverbank.co.uk"
+> +HOMEPAGE =3D "http://riverbankcomputing.co.uk"
+> +SECTION =3D "devel/python"
+> +LICENSE =3D "GPLv2 & GPLv3 & GPL_EXCEPTION"
+> +LIC_FILES_CHKSUM =3D "\
+> +    file://GPL_EXCEPTION.TXT;md5=3Db73b0be471db679533dc94781c14af58 \
+> +    file://GPL_EXCEPTION_ADDENDUM.TXT;md5=3Dc1e04ec2aa0911061005a801abf8=
+1e40 \
+> +    file://OPENSOURCE-NOTICE.TXT;md5=3D6ad9123620cc04a22c394753ad4767d7 \
+> +    file://LICENSE.GPL2;md5=3D577ff65f6653562af318bfc3944b1f20 \
+> +    file://LICENSE.GPL3;md5=3Dfeee51612c3c1191a1d5f41156fa2c75 \
+> +"
+> +DEPENDS =3D "sip sip-native qt4-x11-free"
+> +
+> +SRC_URI =3D "\
+> +    ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
+> +"
+> +SRC_URI[md5sum] =3D "997c3e443165a89a559e0d96b061bf70"
+> +SRC_URI[sha256sum] =3D "853780dcdbe2e6ba785d703d059b096e1fc49369d3e8d41a=
+060be874b8745686"
+> +
+> +S =3D "${WORKDIR}/PyQt-x11-gpl-${PV}"
+> +
+> +PARALLEL_MAKE =3D ""
+> +
+> +inherit qmake2 pythonnative python-dir
+> +
+> +do_configure() {
+> +    echo "py_platform =3D linux" > pyqt.cfg
+> +    echo "py_inc_dir =3D %(sysroot)/$includedir/python%(py_major).%(py_m=
+inor)" >> pyqt.cfg
+> +    echo "py_pylib_dir =3D %(sysroot)/${libdir}/python%(py_major).%(py_m=
+inor)" >> pyqt.cfg
+> +    echo "py_pylib_lib =3D python%(py_major).%(py_minor)mu" >> pyqt.cfg
+> +    echo "pyqt_module_dir =3D ${D}/${libdir}/python%(py_major).%(py_mino=
+r)/site-packages" >> pyqt.cfg
+> +    echo "pyqt_bin_dir =3D ${D}/${bindir}" >> pyqt.cfg
+> +    echo "pyqt_sip_dir =3D ${D}/${datadir}/sip/PyQt4" >> pyqt.cfg
+> +    echo "pyuic_interpreter =3D ${D}/${bindir}/python%(py_major).%(py_mi=
+nor)" >> pyqt.cfg
+> +    echo "pyqt_disabled_features =3D PyQt_Desktop_OpenGL PyQt_qreal_doub=
+le PyQt_Accessibility PyQt_SessionManager" >> pyqt.cfg
+> +    echo "qt_shared =3D True" >> pyqt.cfg
+> +    echo "[Qt 4.8]" >> pyqt.cfg
+> +    echo "pyqt_modules =3D QtCore QtGui QtDeclarative QtNetwork QtSvg Qt=
+WebKit" >> pyqt.cfg
+> +    echo yes | python configure-ng.py --verbose --qmake  ${STAGING_BINDI=
+R_NATIVE}/qmake2 --configuration pyqt.cfg --sysroot ${STAGING_DIR_HOST}
+> +}
+> +do_install() {
+> +     oe_runmake install
+> +}
+> +
+> +RDEPENDS_${PN} =3D "python-core"
+> +
+> +FILES_${PN} +=3D "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/P=
+yQt4/"
+> +FILES_${PN}-dbg +=3D "${libdir}/${PYTHON_DIR}/site-packages/*/.debug/"
+> +
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt_4.9.6.bb b/meta-=
+oe/recipes-devtools/python/python-pyqt_4.9.6.bb
+> deleted file mode 100644
+> index 2f0e189..0000000
+> --- a/meta-oe/recipes-devtools/python/python-pyqt_4.9.6.bb
+> +++ /dev/null
+> @@ -1,103 +0,0 @@
+> -SUMMARY =3D "Python Qt4 Bindings"
+> -HOMEPAGE =3D "http://riverbankcomputing.co.uk"
+> -AUTHOR =3D "Phil Thomson @ riverbank.co.uk"
+> -SECTION =3D "devel/python"
+> -LICENSE =3D "GPLv2 & GPLv3 & GPL_EXCEPTION"
+> -LIC_FILES_CHKSUM =3D "\
+> -    file://GPL_EXCEPTION.TXT;md5=3Db73b0be471db679533dc94781c14af58 \
+> -    file://GPL_EXCEPTION_ADDENDUM.TXT;md5=3Dc1e04ec2aa0911061005a801abf8=
+1e40 \
+> -    file://OPENSOURCE-NOTICE.TXT;md5=3D6ad9123620cc04a22c394753ad4767d7 \
+> -    file://LICENSE.GPL2;md5=3D276c6b9cad5f85a3af3534299825feff \
+> -    file://LICENSE.GPL3;md5=3Deda942b9c6ba7eb0f40fee79e94950d5 \
+> -"
+> -
+> -DEPENDS =3D "sip-native python-sip"
+> -RDEPENDS_${PN} =3D "python-core"
+> -
+> -PYQT_OE_VERSION =3D "Qt_4_8_3"
+> -PR =3D "r1"
+> -
+> -SRC_URI =3D "\
+> -    ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
+> -    file://pyqt-generated.patch;apply=3Dno \
+> -"
+> -SRC_URI[md5sum] =3D "514e1f9597771dc732ba75ba9fa5c6b6"
+> -SRC_URI[sha256sum] =3D "a350f9e5c6d8062671c0f29bf1a70824719b18175ce8372c=
+29bf7c1eda44b18d"
+> -S =3D "${WORKDIR}/PyQt-x11-gpl-${PV}"
+> -
+> -# arm and mips machines need some extra patches
+> -SRC_URI_append_arm =3D "\
+> -    file://qreal_float_support.diff \
+> -"
+> -
+> -SRC_URI_append_mipsel =3D "\
+> -    file://qreal_float_support.diff \
+> -"
+> -
+> -inherit qt4x11 sip distutils-base
+> -
+> -PARALLEL_MAKE =3D ""
+> -
+> -QMAKE_PROFILES =3D "pyqt.pro"
+> -# NOTE: has to match with MIN(qt version we have in OE, last known Qt ve=
+rsion by SIP/PyQt)
+> -EXTRA_SIPTAGS =3D "-tWS_X11 -t${PYQT_OE_VERSION} -xVendorID -xPyQt_Sessi=
+onManager -xPyQt_Accessibility"
+> -EXTRA_OEMAKE =3D " MAKEFLAGS=3D "
+> -
+> -# arm and mips need extra params for the qreal issue
+> -EXTRA_SIPTAGS_append_arm =3D " -x PyQt_qreal_double"
+> -EXTRA_SIPTAGS_append_mipsel =3D " -x PyQt_qreal_double"=20
+> -
+> -SIP_MODULES =3D "QtCore QtDeclarative QtGui QtNetwork QtSql QtSvg QtXml =
+QtWebKit"
+> -MAKE_MODULES =3D "qpy ${SIP_MODULES}"
+> -
+> -EXTRA_QMAKEVARS_POST +=3D "\
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/Qt \
+> -    INCLUDEPATH+=3D${STAGING_INCDIR}/${PYTHON_DIR} \
+> -    INCLUDEPATH+=3D../qpy/QtCore \
+> -    INCLUDEPATH+=3D../qpy/QtGui \
+> -    INCLUDEPATH+=3D../qpy/QtDeclarative \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtCore \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtGui \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtDeclarative \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtWebKit \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtNetwork \
+> -"
+> -FIX_QREAL =3D "\
+> -"
+> -
+> -do_generate_prepend() {
+> -    for i in ${FIX_QREAL}; do
+> -        sed -i -e s,qreal,float,g sip/$i
+> -    done
+> -}
+> -
+> -do_configure_prepend() {
+> -    printf "TEMPLATE=3Dsubdirs\nSUBDIRS=3D${MAKE_MODULES}\n" >pyqt.pro
+> -    printf "TEMPLATE=3Dsubdirs\nSUBDIRS=3DQtCore QtDeclarative QtGui\n" =
+>qpy/qpy.pro
+> -    ln -sf ./qpycore.pro qpy/QtCore/QtCore.pro
+> -    ln -sf ./qpydeclarative.pro qpy/QtDeclarative/QtDeclarative.pro
+> -    ln -sf ./qpygui.pro qpy/QtGui/QtGui.pro
+> -    echo "INCLUDEPATH+=3D${S}/QtCore" >>qpy/QtCore/QtCore.pro
+> -    echo "INCLUDEPATH+=3D${S}/QtGui" >>qpy/QtGui/QtGui.pro
+> -    echo "INCLUDEPATH+=3D${S}/QtDeclarative" >>qpy/QtDeclarative/QtDecla=
+rative.pro
+> -    echo "LIBS+=3D-L../qpy/QtGui/ -lqpygui" >>QtGui/QtGui.pro
+> -    echo "LIBS+=3D-L../qpy/QtCore/ -lqpycore" >>QtCore/QtCore.pro
+> -    echo "LIBS+=3D-L../qpy/QtDeclarative/ -lqpydeclarative" >>QtDeclarat=
+ive/QtDeclarative.pro
+> -    # hack for broken generated code (duplicated sipCpp declaration).
+> -    patch -p1 < ${WORKDIR}/pyqt-generated.patch || echo "pyqt-generated.=
+patch failed to apply, probably reexecuting do_configure, ignoring that"
+> -}
+> -
+> -do_install() {
+> -    install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4
+> -    install -d ${D}${datadir}/sip/qt/
+> -    for module in ${SIP_MODULES}
+> -    do
+> -        install -m 0644 ${S}/sip/${module}/*.sip ${D}${datadir}/sip/qt/
+> -        echo "from PyQt4.${module} import *\n" >> ${D}${libdir}/${PYTHON=
+_DIR}/site-packages/PyQt4/Qt.py
+> -        install -m 0755 ${module}/lib${module}.so ${D}${libdir}/${PYTHON=
+_DIR}/site-packages/PyQt4/${module}.so
+> -    done
+> -    cp -pPR elementtree ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
+> -    cp __init__.py ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
+> -}
+> -
+> -FILES_${PN} =3D "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/qt=
+/"
+> --=20
+> 1.8.3.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--jRHKVT23PllUwdXP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlR/J5MACgkQN1Ujt2V2gBzZjwCcCv2ySGarQVlJNS9Bc7KbIFs7
+Ok0An2njH/wXvy+I00DL3ZiENC20GrT9
+=ESbA
+-----END PGP SIGNATURE-----
+
+--jRHKVT23PllUwdXP--
