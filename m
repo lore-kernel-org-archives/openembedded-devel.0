@@ -1,41 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 3304060601
+Return-Path: <rapphil@gmail.com>
+Received: from mail-qc0-f177.google.com (mail-qc0-f177.google.com
+	[209.85.216.177])
+	by mail.openembedded.org (Postfix) with ESMTP id B5C4B60601
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Dec 2014 12:15:38 +0000 (UTC)
-Received: by mail-wg0-f47.google.com with SMTP id n12so22627253wgh.34
+	Thu,  4 Dec 2014 12:43:38 +0000 (UTC)
+Received: by mail-qc0-f177.google.com with SMTP id x3so12459671qcv.22
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Dec 2014 04:15:38 -0800 (PST)
+	Thu, 04 Dec 2014 04:43:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=hWUqezBc1c7KtKjWpzWHwB25kJ4spRRTN1VVOo+dxCg=;
-	b=CY+T7oxjkRhOOPC9G1qiKdepuEMkbUTUlGG5TF9guNn1F4HLgNtI8K978v+RZNQmgZ
-	t/NYGktR48Sst3OdE4KocixOOr7PeMHa8v9v867phGL9pSLMLaoMedNsgMkXdlmZJbzj
-	lKkQ1Zm8XcgLRJbXvI+NLBHXwnrYg/FvET875PhhsQLylGgHJF9U9Uc2gbjmXluh7hWC
-	QIjPhcain+SD3MrbLJ1saiIvw9snGIAahN+Nrwo5bcsq+A7JQ/MQ7B/rg3XVumGRkZgd
-	cM1HUABBQDrfsp0h7mSQXgBxjop8sr6yB14uwyiCO9G4UiGeJ/Mi59OXHNgCLpnPUQg1
-	ypGw==
-X-Received: by 10.180.74.146 with SMTP id t18mr91791199wiv.62.1417695337241;
-	Thu, 04 Dec 2014 04:15:37 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	h=from:to:cc:subject:date:message-id;
+	bh=wGn1dXR0yiMW2omdY+XHYaX4Oa7//JbTFjATlNGmzPU=;
+	b=WH9CIgUbrdEXJCN6XL6lQFVdZf7VvvS04LUrdX3jUwBcaDb2Br99lSSOiHvYHBdosM
+	h7mqUDPzO4Jf5F1Oigb0vAR93Vd3gsggMCE/rFyJXkv5BC/6cynBa10zKVJt4M1Kgnej
+	YL+VDxey+df+fBxP18OCJd1gXvZRq7Shg6OsVkt2g2ol5HCE7WFD2egdzNTQHm7CZxoA
+	dLsQs2hLCcs5EMOvFq85GawmEUidPF81gKmvSMXVJOIkovGOY6OMOImiKvtNB6BrvM1H
+	vKD04OcyVYeC6Nvt6Z7y3n2/FadkQUCXN+yKatvoJy0XD0lwPeeiQZJGXSW5BXAtW67G
+	qTNg==
+X-Received: by 10.224.67.7 with SMTP id p7mr16577354qai.97.1417697017805;
+	Thu, 04 Dec 2014 04:43:37 -0800 (PST)
+Received: from localhost.localdomain (host29.reason.com.br. [187.49.239.29])
 	by mx.google.com with ESMTPSA id
-	fo12sm54732868wic.19.2014.12.04.04.15.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 Dec 2014 04:15:36 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 4 Dec 2014 13:15:38 +0100
+	u64sm25860850qgd.46.2014.12.04.04.43.36 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 04 Dec 2014 04:43:37 -0800 (PST)
+From: Raphael Silva <rapphil@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141204121538.GA2453@jama>
-References: <1417496458-47021-1-git-send-email-biannm@cn.fujitsu.com>
-	<20141203175838.GE2455@jama>
-	<30DC4EDFD798C94083F3E083754532CC73DE0C7E@G08CNEXMBPEKD02.g08.fujitsu.local>
-MIME-Version: 1.0
-In-Reply-To: <30DC4EDFD798C94083F3E083754532CC73DE0C7E@G08CNEXMBPEKD02.g08.fujitsu.local>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] [Patch V2][meta-oe]dmraid: add recipe
+Date: Thu,  4 Dec 2014 10:43:29 -0200
+Message-Id: <1417697009-9094-1-git-send-email-rapphil@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] acpitest: fixing failing recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,120 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2014 12:15:40 -0000
-X-Groupsio-MsgNum: 53187
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gKMricLos+KVdGMg"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 04 Dec 2014 12:43:45 -0000
 
---gKMricLos+KVdGMg
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Removed from blacklist and fixed do_compile error due to sysroot poisoning.
+Fixed removing the redefinition of CC.
 
-On Thu, Dec 04, 2014 at 06:09:58AM +0000, Bian, Naimeng wrote:
-> I'm very sorry. I have not addressed what's wrong with my e-mail client.
-> Let me send the patch as attachment instead.
-> And --keep-cr is necessary for git-am when applying this patch.
+Signed-off-by: Raphael Silva <rapphil@gmail.com>
+---
+ meta-oe/recipes-extended/acpica/acpitests_20140828.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-You can also push it to some public repo and I'll fetch it from there,
-that's the safest option for weird line endings or binary blobs.
-
-Thanks
-
->=20
-> Thanks=20
->  Bian
->=20
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Martin Jansa
-> > Sent: Thursday, December 04, 2014 1:59 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [PATCH] [Patch V2][meta-oe]dmraid: add recipe
-> >=20
-> > On Tue, Dec 02, 2014 at 01:00:58PM +0800, Bian Naimeng wrote:
-> > > There is no update anymore since 2010, but is still supported by some
-> > > distro such as Ubuntu(trusty 14.04LTS).
-> >=20
-> > Still doesn't apply, probably mangled by your e-mail client
-> >=20
-> > OE @ =E2=80=BE/meta-openembedded $ pwam 84213
-> > 2014-12-03 18:54:27 URL:http://patchwork.openembedded.org/patch/84213/m=
-box/
-> > [67143] -> "pw-am-84213.patch" [1]
-> > Applying: dmraid: add recipe
-> > /OE/meta-openembedded/.git/rebase-apply/patch:65: trailing whitespace.
-> >=20
-> > /OE/meta-openembedded/.git/rebase-apply/patch:73: trailing whitespace.
-> >=20
-> > /OE/meta-openembedded/.git/rebase-apply/patch:74: trailing whitespace.
-> >=20
-> > /OE/meta-openembedded/.git/rebase-apply/patch:79: trailing whitespace.
-> >=20
-> > /OE/meta-openembedded/.git/rebase-apply/patch:85: trailing whitespace.
-> >=20
-> > fatal: corrupt patch at line 319
-> > Patch failed at 0001 dmraid: add recipe
-> > The copy of the patch that failed is found in:
-> >    /OE/meta-openembedded/.git/rebase-apply/patch
-> > When you have resolved this problem, run "git am --continue".
-> > If you prefer to skip this patch, run "git am --skip" instead.
-> > To restore the original branch and stop patching, run "git am --abort".
-> >=20
-> >=20
-> > OE @ =E2=80=BE/meta-openembedded $ patch -p1 < pw-am-84213.patch patchi=
-ng file
-> > meta-oe/recipes-extended/dmraid/dmraid/01_fix_broken_linking.patch
-> > patching file meta-oe/recipes-extended/dmraid/dmraid/02_disable_dmreg.p=
-atch
-> > patch: **** malformed patch at line 265:
-> >=20
-> > > +--- 1.0.0.rc16.orig/lib/.export.sym
-> > > ++++ 1.0.0.rc16/lib/.export.sym
-> > > +@@ -52,8 +52,6 @@ Base {
-> > >
-> > > + 		dso_end_rebuild;
-> > >
-> > > + 		hot_spare_add;
-> > >
-> > > + 		dso_get_members;
-> > >
-> > > +-		dm_register_device;
-> > >
-> > > +-		dm_unregister_device;
-> > > + 		dm_all_monitored;
-> > > + 	local:
-> > >
-> > > + 		*;
-> >=20
-> > This is the broken part, and indeed there are strange blank lines in it=
-, maybe
-> > mixing dos and linux line ends in different files?
->=20
+diff --git a/meta-oe/recipes-extended/acpica/acpitests_20140828.bb b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
+index 75e10f6..93c20af 100644
+--- a/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
++++ b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://tests/aapits/atexec.c;beginline=1;endline=115;md5=e92
+ 
+ DEPENDS = "bison flex"
+ 
+-PNBLACKLIST[acpitests] = "fails to find string.h since sysroot poisoning was added in internal toolchain"
+ 
+ SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;name=acpitests \
+            https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz;name=acpica \
+@@ -20,7 +19,7 @@ SRC_URI[acpica.sha256sum] = "01d8867656c5ba41dec307c4383ce676196ad4281ac2c9dec9f
+ 
+ S = "${WORKDIR}/acpitests-unix-${PV}"
+ 
+-EXTRA_OEMAKE = "'CC=${TARGET_PREFIX}gcc ${HOST_CC_ARCH}' 'OPT_CFLAGS=-Wall'"
++EXTRA_OEMAKE = "'${HOST_CC_ARCH}' 'OPT_CFLAGS=-Wall'"
+ 
+ # The Makefiles expect a specific layout
+ do_compile() {
+-- 
+1.9.1
 
 
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---gKMricLos+KVdGMg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlSAUGoACgkQN1Ujt2V2gBxUIgCff7Qrw0n+LqSgrtBoqxJKn09K
-NhMAmgIgsdMiLYbd+1/eF1zpEmLybA4W
-=7pF/
------END PGP SIGNATURE-----
-
---gKMricLos+KVdGMg--
