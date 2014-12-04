@@ -1,32 +1,34 @@
-Return-Path: <rapphil@gmail.com>
-Received: from mail-qa0-f52.google.com (mail-qa0-f52.google.com
-	[209.85.216.52])
-	by mail.openembedded.org (Postfix) with ESMTP id E9F3860601
+Return-Path: <petr.nechaev@cogentembedded.com>
+Received: from mail-lb0-f171.google.com (mail-lb0-f171.google.com
+	[209.85.217.171])
+	by mail.openembedded.org (Postfix) with ESMTP id E5A6265E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Dec 2014 15:09:18 +0000 (UTC)
-Received: by mail-qa0-f52.google.com with SMTP id dc16so12166457qab.11
+	Thu,  4 Dec 2014 15:29:58 +0000 (UTC)
+Received: by mail-lb0-f171.google.com with SMTP id n15so14163160lbi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Dec 2014 07:09:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=3f+/euuowRaGAfcpb0lVF4V1qNhjC0xCVLRlL1ckjKY=;
-	b=OK5GC5Jqmx9rVMDCiH3ASyd0Dh+RSsky8sXfPsqmERsFX88Qn3UKOotvmbD+P9l7wO
-	nwZysdaSbGBsl+J0Df8PAeW2X3+D6YdFRquUtelkO+eTfjZJgEr5/YciATWlbJJWj3DU
-	wQoLMCHZ4hTJuhB9wyKIkz7TP/F8gvWd4I8ca4o9CkmQ5AWyNpSooAc+TAmCEUPcpjx5
-	WP0VCX+VvR+2ix+BwVP6GKZukcDX4tslw/QcH/pefDX4IU36XguAIoTMux+RZWlJZU0s
-	0hMTmcvy8OrcmSG+xCya7bQBZBBKyJC73Q4RBGNtubZz3Th2gnJXU4KoI7Z26zeiWXXv
-	d+Rw==
+	Thu, 04 Dec 2014 07:29:58 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=NXx7So/u5T7qMkF7HD7oyP/fGweWd55D6ujanpA4Ij0=;
+	b=CPqiWwCT4hizmNCDIZH2gkBSn5awGpLrFYx/FG5aWodaKdplfjFO1+Pjt2dVSN86wu
+	POig+Z4bLSoJuy5Y/EB8ij5NiiGYhZUA1pLvBDAQUlRmaOpfj7yt55xCP0lKh1TxxDMx
+	reiytKRjVBD7rIOljlEt5dgExjLMzAYVchwcpdlr1x3yEF3oeIyULfMeeQIyS6KhvNcL
+	+uq18WFCVukZVt3CFJrVot4cz7BxLm1cd1NJWP4M7nJNQvupaXLCCQnIgpS8xUnHWk5/
+	UiBkSdorkni3Oe1YoZorx9wwRKlcRO7Rgptwimmn+ySEQ8Lxoo0xH5mQT+/McJ6GkD2R
+	pL9Q==
+X-Gm-Message-State: ALoCoQmiqKqj8AlQJN84+g1F6Bx2Pmjq81TDUmzTFxs/fYJ1VybbboPV+ZjOQakVsjvwlRJ0gsd5
 MIME-Version: 1.0
-X-Received: by 10.140.88.100 with SMTP id s91mr17080138qgd.65.1417705758757;
-	Thu, 04 Dec 2014 07:09:18 -0800 (PST)
-Received: by 10.140.142.134 with HTTP; Thu, 4 Dec 2014 07:09:18 -0800 (PST)
-In-Reply-To: <1417697009-9094-1-git-send-email-rapphil@gmail.com>
-References: <1417697009-9094-1-git-send-email-rapphil@gmail.com>
-Date: Thu, 4 Dec 2014 13:09:18 -0200
-Message-ID: <CAENGNheKVaQD13gwSFU-cjm7K_aUAHujZLQMMs=nq=fR6nWxWg@mail.gmail.com>
-From: Raphael Philipe <rapphil@gmail.com>
+X-Received: by 10.152.121.1 with SMTP id lg1mr9970344lab.28.1417706997937;
+	Thu, 04 Dec 2014 07:29:57 -0800 (PST)
+Received: by 10.25.23.86 with HTTP; Thu, 4 Dec 2014 07:29:57 -0800 (PST)
+Date: Thu, 4 Dec 2014 18:29:57 +0300
+Message-ID: <CAHPquwM2m25serTe-FRvcsVi_BQUCgVXASUwQC99ExZ9UpZNZw@mail.gmail.com>
+From: Petr Nechaev <petr.nechaev@cogentembedded.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] acpitest: fixing failing recipe
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Rootfs over 4GB
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,47 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2014 15:09:26 -0000
+X-List-Received-Date: Thu, 04 Dec 2014 15:30:07 -0000
 Content-Type: text/plain; charset=UTF-8
 
-I noticed two typos in my patch. First i didn't use the prefix
-[meta-oe], and second, in the subject, it is acpitestS the name of the
-module.
+Hi All,
 
-It will not happen again :)
-regards,
+ I'm using oe-core for building images and have a problem. rootfs.img is
+over 5GB and cannot be copied to FAT32 partition because of file size
+limit. This happens during do_bootimg task for core-image-sato-sdk. No
+warning is given by bitbake.
+ The problem occurs in build_fat_img() function in bootimg.bbclass.
 
-On Thu, Dec 4, 2014 at 10:43 AM, Raphael Silva <rapphil@gmail.com> wrote:
-> Removed from blacklist and fixed do_compile error due to sysroot poisoning.
-> Fixed removing the redefinition of CC.
->
-> Signed-off-by: Raphael Silva <rapphil@gmail.com>
-> ---
->  meta-oe/recipes-extended/acpica/acpitests_20140828.bb | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/acpica/acpitests_20140828.bb b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
-> index 75e10f6..93c20af 100644
-> --- a/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
-> +++ b/meta-oe/recipes-extended/acpica/acpitests_20140828.bb
-> @@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://tests/aapits/atexec.c;beginline=1;endline=115;md5=e92
->
->  DEPENDS = "bison flex"
->
-> -PNBLACKLIST[acpitests] = "fails to find string.h since sysroot poisoning was added in internal toolchain"
->
->  SRC_URI = "https://acpica.org/sites/acpica/files/acpitests-unix-${PV}.tar.gz;name=acpitests \
->             https://acpica.org/sites/acpica/files/acpica-unix2-${PV}.tar.gz;name=acpica \
-> @@ -20,7 +19,7 @@ SRC_URI[acpica.sha256sum] = "01d8867656c5ba41dec307c4383ce676196ad4281ac2c9dec9f
->
->  S = "${WORKDIR}/acpitests-unix-${PV}"
->
-> -EXTRA_OEMAKE = "'CC=${TARGET_PREFIX}gcc ${HOST_CC_ARCH}' 'OPT_CFLAGS=-Wall'"
-> +EXTRA_OEMAKE = "'${HOST_CC_ARCH}' 'OPT_CFLAGS=-Wall'"
->
->  # The Makefiles expect a specific layout
->  do_compile() {
-> --
-> 1.9.1
->
+ What is the technical reason behind putting rootfs.img to FAT partition?
+ What is the right way of building core-image-sato-sdk with large rootfs?
+
+---
+Petr
 
