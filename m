@@ -1,38 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 9ABF760670;
-	Thu,  4 Dec 2014 14:31:28 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id n12so14597550wgh.36
-	for <multiple recipients>; Thu, 04 Dec 2014 06:31:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jybbi6TiA5nX22TxdjlZt6nos9URakLTnoUxMJkENS8=;
-	b=bbuHZpPJw6pF/r+qCrt9U8b2ScodkhtpIrMMeIxwDF6ms4VFo2lHBTDPK5B7g4Dvmp
-	WLj9lZzo7UdWl4drBZq1rtsMsio08RKEoKHC8m9EtlGHxzLbZriwCzvXV5wEpYuzcys2
-	ZGqB7w0jgxQ8aJw6CfbdrYx3/H9NK7Jv1SeXEt8hI5R7Y8K3Mz1KZlJsFFxuYXWOvF48
-	EuNlEMeNUav3R6aH4qy5h5fpmNCIAwJuSBRrTc891jQ3WmuFnehI3dlYr8RMvzw9ukyR
-	PTRzONlrXJjGiZF2f7JNw58qzVaFsQbKj5nqzd2JLpM5syh1cYk7j92wmqZCTtRjW0iS
-	LJOQ==
-X-Received: by 10.180.74.68 with SMTP id r4mr21391038wiv.33.1417703488738;
-	Thu, 04 Dec 2014 06:31:28 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fq1sm55203337wib.12.2014.12.04.06.31.27 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 Dec 2014 06:31:27 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 4 Dec 2014 15:31:30 +0100
-To: openembedded-devel@lists.openembedded.org,
-	Armin Kuster <akuster808@gmail.com>,
-	Joe MacDonald <joe_macdonald@mentor.com>
-Message-ID: <20141204143130.GB2453@jama>
-References: <20141203213917.576C6503EA@opal.openembedded.org>
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D1F760601;
+	Thu,  4 Dec 2014 14:48:03 +0000 (UTC)
+Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
+	by relay1.mentorg.com with esmtp 
+	id 1XwXhL-0003Mg-3p from Joe_MacDonald@mentor.com ;
+	Thu, 04 Dec 2014 06:48:03 -0800
+Received: from NA-MBX-02.mgc.mentorg.com ([169.254.2.41]) by
+	SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) with mapi id
+	14.03.0181.006; Thu, 4 Dec 2014 06:48:03 -0800
+From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Thread-Topic: [oe-commits] Armin Kuster : netkit-rpc: New package
+Thread-Index: AdAP0U2YP1Y6zc0G0Eir/JlH+OjgHQ==
+Date: Thu, 4 Dec 2014 14:48:01 +0000
+Message-ID: <EC21369A6993DD47985E1CBF1038266E21FEE9AF@NA-MBX-02.mgc.mentorg.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
 MIME-Version: 1.0
-In-Reply-To: <20141203213917.576C6503EA@opal.openembedded.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-commits@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
 Subject: Re: [oe-commits] Armin Kuster : netkit-rpc: New package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -47,82 +38,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Dec 2014 14:31:35 -0000
-X-Groupsio-MsgNum: 53189
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1LKvkjL3sHcu1TtY"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 04 Dec 2014 14:48:05 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---1LKvkjL3sHcu1TtY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+DQpPbiA0IERlYyAyMDE0IDA5OjMxLCBNYXJ0aW4gSmFuc2EgPG1hcnRpbi5qYW5zYUBnbWFpbC5j
+b20+IHdyb3RlOg0KPg0KPiBPbiBXZWQsIERlYyAwMywgMjAxNCBhdCAwOTozOToxN1BNICswMDAw
+LCBnaXRAZ2l0Lm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6DQo+ID4gTW9kdWxlOiBtZXRhLW9wZW5l
+bWJlZGRlZC5naXQNCj4gPiBCcmFuY2g6IG1hc3Rlcg0KPiA+IENvbW1pdDogOWJhY2FlMmZmODNj
+N2Y4OWJlMTg0YzQ4ZWI5ODE4NjFiMWU3YzY4Yg0KPiA+IFVSTDogICAgaHR0cDovL2dpdC5vcGVu
+ZW1iZWRkZWQub3JnLz9wPW1ldGEtb3BlbmVtYmVkZGVkLmdpdCZhPWNvbW1pdDtoPTliYWNhZTJm
+ZjgzYzdmODliZTE4NGM0OGViOTgxODYxYjFlN2M2OGINCj4gPg0KPiA+IEF1dGhvcjogQXJtaW4g
+S3VzdGVyIDxha3VzdGVyODA4QGdtYWlsLmNvbT4NCj4gPiBEYXRlOiAgIE1vbiBEZWMgIDEgMTc6
+NDk6NTYgMjAxNCAtMDgwMA0KPiA+DQo+ID4gbmV0a2l0LXJwYzogTmV3IHBhY2thZ2UNCj4gPg0K
+PiA+IHRoaXMgYWRkcyBycGNpbmZvIGFuZCBycGNnZW4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6
+IEFybWluIEt1c3RlciA8YWt1c3RlcjgwOEBnbWFpbC5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTog
+Sm9lIE1hY0RvbmFsZCA8am9lX21hY2RvbmFsZEBtZW50b3IuY29tPg0KPiA+DQo+ID4gLS0tDQo+
+ID4NCj4gPiAgLi4uL25ldGtpdC1ycGMvbmV0a2l0LXJwYy9nY2M0LnBhdGNoICAgICAgICAgICAg
+ICAgfCAzOSArKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIC4uLi9yZWNpcGVzLW5ldGtpdC9u
+ZXRraXQtcnBjL25ldGtpdC1ycGNfMC4xNy5iYiAgIHwgMzggKysrKysrKysrKysrKysrKysrKysr
+DQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwgNzcgaW5zZXJ0aW9ucygrKQ0KPiA+DQo+ID4gZGlmZiAt
+LWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLW5ldGtpdC9uZXRraXQtcnBjL25ldGtpdC1y
+cGNfMC4xNy5iYiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLW5ldGtpdC9uZXRraXQtcnBjL25l
+dGtpdC1ycGNfMC4xNy5iYg0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAw
+MDAwMC4uNGQ4ZDk1YQ0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdvcmtp
+bmcvcmVjaXBlcy1uZXRraXQvbmV0a2l0LXJwYy9uZXRraXQtcnBjXzAuMTcuYmINCj4gPiBAQCAt
+MCwwICsxLDM4IEBADQo+ID4gK0RFU0NSSVBUSU9OID0gIm5ldGtpdC1ycGMgaW5jbHVkZXMgcnBj
+aW5mbyBhbmQgcnBjZ2VuLiINCj4gPiArSE9NRVBBR0UgPSAiaHR0cDovL2Z0cC5saW51eC5vcmcu
+dWsvcHViL2xpbnV4L05ldHdvcmtpbmcvbmV0a2l0Ig0KPiA+ICtTRUNUSU9OID0gIm5ldHdvcmtp
+bmciDQo+ID4gK0xJQ0VOU0UgPSAiU1BMLTEuMCINCj4gPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJm
+aWxlOi8vcnBjaW5mby9ycGNpbmZvLmM7YmVnaW5saW5lPTI7ZW5kbGluZT0zO21kNT0zZTYzMzll
+M2NlMjY2ZTExMjJjNWJhMjkzZTA0YmM4OSINCj4gPiArDQo+ID4gK1NSQ19VUkkgPSAiaHR0cDov
+L3NvdXJjZXMub3BlbmVtYmVkZGVkLm9yZy8ke0JQTn0tJHtQVn0udGFyLmd6IFwNCj4NCj4gSXMg
+c291cmNlcy5vcGVuZW1iZWRkZWQub3JnIHJlYWxseSB0aGUgcHJpbWFyeSBzb3VyY2U/DQo+DQo+
+IEl0J3MgaW4gZGVmYXVsdCBtaXJyb3JzLCBmb3IgcHJpbWFyeSBzb3VyY2Ugd2Ugc2hvdWxkIHVz
+ZSBzb21ldGhpbmcNCj4gZWxzZSBhbmQga2VlcCBzb3VyY2VzLm9lLm9yZyBvbmx5IGFzIGZhbGxi
+YWNrLg0KDQpJdCBhcHBlYXJzIHRvIGJlLCB1bmZvcnR1bmF0ZWx5LiAgVGhlIG90aGVyIG5ldGtp
+dCBwYWNrYWdlcyBwb2ludCBhdCBEZWJpYW4gc2VydmVycyBidXQgdGhleSBwdXJnZWQgdGhpcyBw
+YWNrYWdlIHllYXJzIGFnbyBpbiBmYXZvciBvZiB0aGUgcnBjIG9wdGlvbnMgYnVuZGxlZCB3aXRo
+IGxpYmMuIFRoZSB1cHN0cmVhbSBzb3VyY2UgdGhhdCB3YXMgaW4gQXJtaW4ncyBvcmlnaW5hbCBj
+b21taXQgaGFzIGJlZW4gZGVhZCBmb3IgcXVpdGUgYSB3aGlsZSB0b28sIGJhc2VkIG9uIHdoYXQg
+SSBjb3VsZCBmaW5kIGZyb20gdGhlIHdheWJhY2sgbWFjaGluZSBhbmQgc28gaWYgbGVmdCBhcyBp
+dCB3YXMgd291bGQgcHJvZHVjZSBhIG5ldyB3YXJuaW5nIDEwMCUgb2YgdGhlIHRpbWUgd2hlbiBi
+dWlsZGluZyB0aGUgcGFja2FnZS4gSXQgc2VlbWVkIGFwcHJvcHJpYXRlIHRoZW4gdG8gZm9sbG93
+IHRoZSBmZXcgb3RoZXIgZXhhbXBsZXMgb2YgdGhpcyBpbiB0aGUgbWV0YS1vcGVuZW1iZWRkZWQg
+dHJlZSwgbXkgcXVpY2sgc2VhcmNoIHR1cm5lZCB1cCB0d28gc3VjaC4NCg0KLUouDQoNCj4NCj4g
+PiArICAgICAgICAgICBmaWxlOi8vZ2NjNC5wYXRjaCINCj4gPiArU1JDX1VSSVttZDVzdW1dID0g
+IjY3MjEyNzIwNDgyZWExYWVhOTE4MmE5ODY1M2E5NjQyIg0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1
+bV0gPSAiNDIxZDYzYjQxNDE2MjIzN2E3Mjg2NzA2MWYxYmQzZTM3NTJhMGQ5NjJjZDVkMzBiNWU5
+MzNkZGFkOGExNGQzYiINCj4gPiArDQo+DQo+IC0tDQo+IE1hcnRpbiAnSmFNYScgSmFuc2EgICAg
+IGphYmJlcjogTWFydGluLkphbnNhQGdtYWlsLmNvbQ0K
 
-On Wed, Dec 03, 2014 at 09:39:17PM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: 9bacae2ff83c7f89be184c48eb981861b1e7c68b
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3D9bacae2ff83c7f89be184c48eb981861b1e7c68b
->=20
-> Author: Armin Kuster <akuster808@gmail.com>
-> Date:   Mon Dec  1 17:49:56 2014 -0800
->=20
-> netkit-rpc: New package
->=20
-> this adds rpcinfo and rpcgen
->=20
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
->=20
-> ---
->=20
->  .../netkit-rpc/netkit-rpc/gcc4.patch               | 39 ++++++++++++++++=
-++++++
->  .../recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb   | 38 ++++++++++++++++=
-+++++
->  2 files changed, 77 insertions(+)
->=20
-> diff --git a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb=
- b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
-> new file mode 100644
-> index 0000000..4d8d95a
-> --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
-> @@ -0,0 +1,38 @@
-> +DESCRIPTION =3D "netkit-rpc includes rpcinfo and rpcgen."
-> +HOMEPAGE =3D "http://ftp.linux.org.uk/pub/linux/Networking/netkit"
-> +SECTION =3D "networking"
-> +LICENSE =3D "SPL-1.0"
-> +LIC_FILES_CHKSUM =3D "file://rpcinfo/rpcinfo.c;beginline=3D2;endline=3D3=
-;md5=3D3e6339e3ce266e1122c5ba293e04bc89"
-> +
-> +SRC_URI =3D "http://sources.openembedded.org/${BPN}-${PV}.tar.gz \
-
-Is sources.openembedded.org really the primary source?
-
-It's in default mirrors, for primary source we should use something
-else and keep sources.oe.org only as fallback.
-
-> +           file://gcc4.patch"
-> +SRC_URI[md5sum] =3D "67212720482ea1aea9182a98653a9642"
-> +SRC_URI[sha256sum] =3D "421d63b414162237a72867061f1bd3e3752a0d962cd5d30b=
-5e933ddad8a14d3b"
-> +
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---1LKvkjL3sHcu1TtY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlSAcEIACgkQN1Ujt2V2gBz2FQCggg+Znm33GOvI+GiaUlr6sCZU
-m+IAn2eJYavlNAKB2SEi3gWnGylAjYq6
-=WCkH
------END PGP SIGNATURE-----
-
---1LKvkjL3sHcu1TtY--
