@@ -1,34 +1,34 @@
-Return-Path: <rapphil@gmail.com>
-Received: from mail-qa0-f49.google.com (mail-qa0-f49.google.com
-	[209.85.216.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 351FF7238F
+Return-Path: <Awais_Belal@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 64DD071F47
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Dec 2014 17:50:45 +0000 (UTC)
-Received: by mail-qa0-f49.google.com with SMTP id s7so752545qap.22
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Dec 2014 09:50:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=031Ars/cRtpCbQdkHyF7zYvr45UHOywyRaqv/E5Sunw=;
-	b=K6O7D6xnivdPA6x/pCm1cMJnCRjsIiZbDYWSVbESnwDEXkm21ody2vrvqS0M+Kxl+k
-	O/3f2Sp0DgXoxrW7Q0kgapYNf+pCls4eOxQ4gdjD85sFa7/NhmOHQhZCu1kukrCvrIbC
-	cm8Hvc7WWitsmddUB6dMPwCmaCCn5DS7Hm/TGsc8qbDoJmpgnM87J3jZFqbbxyfzgY+2
-	QLySLLQXiApx0CXyMcYyYtcLPXBlpjNM7esMfaxM2Zwipx23ORSc4Jf4Shnn0XU1F5o/
-	VURFnlaKq0L63xKJdC2wwxzMdGe2+C+jYzHTPsfVvKl4LA0n3OA+K3k//pAaJD4qaKsh
-	Z3BA==
-X-Received: by 10.140.104.236 with SMTP id a99mr27155681qgf.56.1417801846223; 
-	Fri, 05 Dec 2014 09:50:46 -0800 (PST)
-Received: from localhost.localdomain (host29.reason.com.br. [187.49.239.29])
-	by mx.google.com with ESMTPSA id
-	w44sm11884699qgw.40.2014.12.05.09.50.41 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 05 Dec 2014 09:50:45 -0800 (PST)
-From: Raphael Silva <rapphil@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Dec 2014 15:50:29 -0200
-Message-Id: <1417801829-2363-1-git-send-email-rapphil@gmail.com>
-X-Mailer: git-send-email 2.2.0
-Subject: [meta-oe][PATCH] libftdi: update to 1.1
+	Fri,  5 Dec 2014 21:46:41 +0000 (UTC)
+Received: from nat-ies.mentorg.com ([192.94.31.2]
+	helo=SVR-IES-FEM-01.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1Xx0i1-0007DR-Sk from Awais_Belal@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Dec 2014 13:46:42 -0800
+Received: from EU-MBX-03.mgc.mentorg.com ([169.254.2.55]) by
+	SVR-IES-FEM-01.mgc.mentorg.com ([137.202.0.104]) with mapi id
+	14.03.0181.006; Fri, 5 Dec 2014 21:45:36 +0000
+From: "Belal, Awais" <Awais_Belal@mentor.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 2/2] mplayer2: cleanup empty directories
+Thread-Index: AQHQEIBfNJe81q9s3EWCm49vBtBFP5yA8nEAgACU8BI=
+Date: Fri, 5 Dec 2014 21:45:35 +0000
+Message-ID: <2021B186DC632746BD5A3CE32F12BD28E9FDF8FD@EU-MBX-03.mgc.mentorg.com>
+References: <1417779660-18387-1-git-send-email-awais_belal@mentor.com>
+	<1417779660-18387-2-git-send-email-awais_belal@mentor.com>,
+	<20141205124810.GA2446@jama>
+In-Reply-To: <20141205124810.GA2446@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [137.202.0.69]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH 2/2] mplayer2: cleanup empty directories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,94 +42,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Dec 2014 17:50:52 -0000
+X-List-Received-Date: Fri, 05 Dec 2014 21:46:49 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Previous version was 0.19, but it had a failing recipe due to 
-the fact that libusb was not detect during do_configure.
-This problem does not happen in version 1.1.
-
-Signed-off-by: Mario Goulart <mario.goulart@gmail.com>
-Signed-off-by: Raphael Silva <rapphil@gmail.com>
----
- meta-oe/recipes-support/libftdi/libftdi_0.19.bb | 31 -------------------------
- meta-oe/recipes-support/libftdi/libftdi_1.1.bb  | 29 +++++++++++++++++++++++
- 2 files changed, 29 insertions(+), 31 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libftdi/libftdi_0.19.bb
- create mode 100644 meta-oe/recipes-support/libftdi/libftdi_1.1.bb
-
-diff --git a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb b/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
-deleted file mode 100644
-index 773b791..0000000
---- a/meta-oe/recipes-support/libftdi/libftdi_0.19.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--DESCRIPTION = "libftdi is a library to talk to FTDI chips.\
--FT232BM/245BM, FT2232C/D and FT232/245R using libusb,\
--including the popular bitbang mode."
--HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
--SECTION = "libs"
--
--PR = "r1"
--
--LICENSE = "LGPLv2.1 GPLv2"
--LIC_FILES_CHKSUM= "file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
--                   file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
--"
--
--PNBLACKLIST[libftdi] = "BROKEN: needs to be updated to detect libusb with pkg-config instead of libusb-config"
--
--DEPENDS = "virtual/libusb0"
--DEPENDS_virtclass-native = "virtual/libusb0-native"
--
--SRC_URI = "http://www.intra2net.com/en/developer/libftdi/download/libftdi-${PV}.tar.gz \
--           file://libtool-m4.patch \
--"
--SRC_URI[md5sum] = "e6e25f33b4327b1b7aa1156947da45f3"
--SRC_URI[sha256sum] = "567c9d2c42d92fc401c5aba2deed45ffb2433990984e816bcdf31e441aef06be"
--
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[cpp-wrapper] = "--enable-libftdipp,--disable-libftdipp,boost"
--
--inherit autotools binconfig pkgconfig
--
--BBCLASSEXTEND = "native"
--
-diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.1.bb b/meta-oe/recipes-support/libftdi/libftdi_1.1.bb
-new file mode 100644
-index 0000000..641e5a7
---- /dev/null
-+++ b/meta-oe/recipes-support/libftdi/libftdi_1.1.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "libftdi is a library to talk to FTDI chips.\
-+FT232BM/245BM, FT2232C/D and FT232/245R using libusb,\
-+including the popular bitbang mode."
-+HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi/"
-+SECTION = "libs"
-+
-+LICENSE = "LGPLv2.1 GPLv2"
-+LIC_FILES_CHKSUM= "\
-+    file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
-+    file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
-+"
-+
-+DEPENDS = "libusb1"
-+
-+SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
-+
-+SRC_URI[md5sum] = "b79a6356978aa8e69f8eecc3a720ff79"
-+SRC_URI[sha256sum] = "c0b1af1a13e2c6682a1d8041e5b164a1e0d90267cd378bb51e059bd62f821e21"
-+
-+S = "${WORKDIR}/${BPN}1-${PV}"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[cpp-wrapper] = "-DFTDI_BUILD_CPP=on,-DFTDI_BUILD_CPP=off,boost"
-+
-+inherit cmake binconfig pkgconfig
-+
-+FILES_${PN}-dev += "${libdir}/cmake"
-+
-+BBCLASSEXTEND = "native"
--- 
-2.2.0
-
+Hi Martin,=0A=
+=0A=
+I am using an x86_64 machine, the latest world build qa.log from http://log=
+s.nslu2-linux.org/buildlogs/oe/world//log.world.20141203_140839.log// does =
+not seem to be building mplayer2.=0A=
+=0A=
+I have libav PREFFERED_VERSION set and PNBLACKLIST[mplayer2] set empty as y=
+ou've indicated.=0A=
+=0A=
+BR,=0A=
+Awais=0A=
+=0A=
+________________________________________=0A=
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Martin Jansa [martin.jansa@gm=
+ail.com]=0A=
+Sent: Friday, December 05, 2014 5:48 PM=0A=
+To: openembedded-devel@lists.openembedded.org=0A=
+Subject: Re: [oe] [meta-oe][PATCH 2/2] mplayer2: cleanup empty directories=
+=0A=
+=0A=
+On Fri, Dec 05, 2014 at 04:41:00PM +0500, Awais Belal wrote:=0A=
+> The mplayer "make install" phase leaves an empty=0A=
+> /usr/lib directory seemingly regardless of the setting=0A=
+> of libdir.  Remove it to avoid a packaging warning.=0A=
+=0A=
+Any idea why I'm not using both these issues in world builds?=0A=
+=0A=
+Are you using the recipe exactly as is with PNBLACKLIST removed in your=0A=
+distro and PREFERRED_VERSION for newer libav?=0A=
+=0A=
+> Signed-off-by: Drew Moseley <drew_moseley@mentor.com>=0A=
+> Signed-off-by: Awais Belal <awais_belal@mentor.com>=0A=
+> ---=0A=
+>  meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |    1 +=0A=
+>  1 file changed, 1 insertion(+)=0A=
+>=0A=
+> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe=
+/recipes-multimedia/mplayer/mplayer2_git.bb=0A=
+> index 4656057..7e6ff0d 100644=0A=
+> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb=0A=
+> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb=0A=
+> @@ -142,4 +142,5 @@ do_install() {=0A=
+>      install ${S}/etc/input.conf ${D}/usr/etc/mplayer/=0A=
+>      install ${S}/etc/example.conf ${D}/usr/etc/mplayer/=0A=
+>      install ${S}/etc/codecs.conf ${D}/usr/etc/mplayer/=0A=
+> +    [ -e ${D}/usr/lib ] && rmdir ${D}/usr/lib=0A=
+>  }=0A=
+> --=0A=
+> 1.7.9.5=0A=
+>=0A=
+> --=0A=
+> _______________________________________________=0A=
+> Openembedded-devel mailing list=0A=
+> Openembedded-devel@lists.openembedded.org=0A=
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel=0A=
+=0A=
+--=0A=
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com=0A=
 
