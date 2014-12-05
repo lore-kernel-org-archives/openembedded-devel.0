@@ -1,37 +1,36 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 91BBB65E1A
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id E9C5472304
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Dec 2014 02:33:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44535644"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Dec 2014 10:30:02 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sB52WwtF031542
+	Fri,  5 Dec 2014 07:53:05 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A18AED40811
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 5 Dec 2014 10:32:58 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0181.006; Fri, 5 Dec 2014 10:33:19 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] [Patch V2][meta-oe]dmraid: add recipe
-Thread-Index: AQHQDe2FeLODSVzsX06gScfBPb0GWpx9o5AAgAFPlpD//+LpAIABdCUw
-Date: Fri, 5 Dec 2014 02:33:18 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE105D@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1417496458-47021-1-git-send-email-biannm@cn.fujitsu.com>
-	<20141203175838.GE2455@jama>
-	<30DC4EDFD798C94083F3E083754532CC73DE0C7E@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<20141204121538.GA2453@jama>
-In-Reply-To: <20141204121538.GA2453@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+	Fri,  5 Dec 2014 08:52:59 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 36BDFD4080A
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Dec 2014 08:52:57 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from mail.itconsulting-heinold.de
+	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Dec 2014 08:52:56 +0100 (CET)
+Date: Fri, 5 Dec 2014 08:52:51 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141205075250.GA26505@mail.itconsulting-heinold.de>
+References: <1417729043-11288-1-git-send-email-philip@balister.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] [Patch V2][meta-oe]dmraid: add recipe
+In-Reply-To: <1417729043-11288-1-git-send-email-philip@balister.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: [meta-oe][PATCHv2] python-pyqt : Update to 4.11.3.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,78 +44,361 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Dec 2014 02:33:22 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 05 Dec 2014 07:53:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IE1hcnRp
-biBKYW5zYQ0KPiBTZW50OiBUaHVyc2RheSwgRGVjZW1iZXIgMDQsIDIwMTQgODoxNiBQTQ0KPiBU
-bzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDog
-UmU6IFtvZV0gW1BBVENIXSBbUGF0Y2ggVjJdW21ldGEtb2VdZG1yYWlkOiBhZGQgcmVjaXBlDQo+
-IA0KPiBPbiBUaHUsIERlYyAwNCwgMjAxNCBhdCAwNjowOTo1OEFNICswMDAwLCBCaWFuLCBOYWlt
-ZW5nIHdyb3RlOg0KPiA+IEknbSB2ZXJ5IHNvcnJ5LiBJIGhhdmUgbm90IGFkZHJlc3NlZCB3aGF0
-J3Mgd3Jvbmcgd2l0aCBteSBlLW1haWwgY2xpZW50Lg0KPiA+IExldCBtZSBzZW5kIHRoZSBwYXRj
-aCBhcyBhdHRhY2htZW50IGluc3RlYWQuDQo+ID4gQW5kIC0ta2VlcC1jciBpcyBuZWNlc3Nhcnkg
-Zm9yIGdpdC1hbSB3aGVuIGFwcGx5aW5nIHRoaXMgcGF0Y2guDQo+IA0KPiBZb3UgY2FuIGFsc28g
-cHVzaCBpdCB0byBzb21lIHB1YmxpYyByZXBvIGFuZCBJJ2xsIGZldGNoIGl0IGZyb20gdGhlcmUs
-IHRoYXQncw0KPiB0aGUgc2FmZXN0IG9wdGlvbiBmb3Igd2VpcmQgbGluZSBlbmRpbmdzIG9yIGJp
-bmFyeSBibG9icy4NCj4gDQoNCk9oLCBpdCdzIHByZXR0eSBnb29kIGFkdmljZSwgdGhhbmtzLiBe
-X14NClBsZWFzZSBmZXRjaCB0aGlzIHBhdGNoIGZyb20gdGhlIGZvbGxvd2luZyByZXBvLg0KIC0g
-VVJMOiBodHRwczovL2dpdGh1Yi5jb20vYmVuZGFhcm9uL21ldGEtb2UtZGV2LmdpdA0KIC0gQnJh
-bmNoOiBkZXZlbG9wDQogLSBDb21taXQ6IDlmMzA1OWFjOTg0NzZmMzQxMjk4Yzg2Mzk3ODEwY2Fj
-YzZmMzE3N2UNCg0KVGhhbmtzDQogQmlhbg0KDQo+IFRoYW5rcw0KPiANCj4gPg0KPiA+IFRoYW5r
-cw0KPiA+ICBCaWFuDQo+ID4NCj4gPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4g
-PiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-DQo+ID4gPiBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmddIE9uIEJlaGFsZg0KPiA+ID4gT2YgTWFydGluIEphbnNhDQo+ID4gPiBTZW50OiBU
-aHVyc2RheSwgRGVjZW1iZXIgMDQsIDIwMTQgMTo1OSBBTQ0KPiA+ID4gVG86IG9wZW5lbWJlZGRl
-ZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gPiBTdWJqZWN0OiBSZTogW29lXSBb
-UEFUQ0hdIFtQYXRjaCBWMl1bbWV0YS1vZV1kbXJhaWQ6IGFkZCByZWNpcGUNCj4gPiA+DQo+ID4g
-PiBPbiBUdWUsIERlYyAwMiwgMjAxNCBhdCAwMTowMDo1OFBNICswODAwLCBCaWFuIE5haW1lbmcg
-d3JvdGU6DQo+ID4gPiA+IFRoZXJlIGlzIG5vIHVwZGF0ZSBhbnltb3JlIHNpbmNlIDIwMTAsIGJ1
-dCBpcyBzdGlsbCBzdXBwb3J0ZWQgYnkNCj4gPiA+ID4gc29tZSBkaXN0cm8gc3VjaCBhcyBVYnVu
-dHUodHJ1c3R5IDE0LjA0TFRTKS4NCj4gPiA+DQo+ID4gPiBTdGlsbCBkb2Vzbid0IGFwcGx5LCBw
-cm9iYWJseSBtYW5nbGVkIGJ5IHlvdXIgZS1tYWlsIGNsaWVudA0KPiA+ID4NCj4gPiA+IE9FIEAg
-4oC+L21ldGEtb3BlbmVtYmVkZGVkICQgcHdhbSA4NDIxMw0KPiA+ID4gMjAxNC0xMi0wMyAxODo1
-NDoyNw0KPiA+ID4gVVJMOmh0dHA6Ly9wYXRjaHdvcmsub3BlbmVtYmVkZGVkLm9yZy9wYXRjaC84
-NDIxMy9tYm94Lw0KPiA+ID4gWzY3MTQzXSAtPiAicHctYW0tODQyMTMucGF0Y2giIFsxXQ0KPiA+
-ID4gQXBwbHlpbmc6IGRtcmFpZDogYWRkIHJlY2lwZQ0KPiA+ID4gL09FL21ldGEtb3BlbmVtYmVk
-ZGVkLy5naXQvcmViYXNlLWFwcGx5L3BhdGNoOjY1OiB0cmFpbGluZyB3aGl0ZXNwYWNlLg0KPiA+
-ID4NCj4gPiA+IC9PRS9tZXRhLW9wZW5lbWJlZGRlZC8uZ2l0L3JlYmFzZS1hcHBseS9wYXRjaDo3
-MzogdHJhaWxpbmcgd2hpdGVzcGFjZS4NCj4gPiA+DQo+ID4gPiAvT0UvbWV0YS1vcGVuZW1iZWRk
-ZWQvLmdpdC9yZWJhc2UtYXBwbHkvcGF0Y2g6NzQ6IHRyYWlsaW5nIHdoaXRlc3BhY2UuDQo+ID4g
-Pg0KPiA+ID4gL09FL21ldGEtb3BlbmVtYmVkZGVkLy5naXQvcmViYXNlLWFwcGx5L3BhdGNoOjc5
-OiB0cmFpbGluZyB3aGl0ZXNwYWNlLg0KPiA+ID4NCj4gPiA+IC9PRS9tZXRhLW9wZW5lbWJlZGRl
-ZC8uZ2l0L3JlYmFzZS1hcHBseS9wYXRjaDo4NTogdHJhaWxpbmcgd2hpdGVzcGFjZS4NCj4gPiA+
-DQo+ID4gPiBmYXRhbDogY29ycnVwdCBwYXRjaCBhdCBsaW5lIDMxOQ0KPiA+ID4gUGF0Y2ggZmFp
-bGVkIGF0IDAwMDEgZG1yYWlkOiBhZGQgcmVjaXBlIFRoZSBjb3B5IG9mIHRoZSBwYXRjaCB0aGF0
-DQo+ID4gPiBmYWlsZWQgaXMgZm91bmQgaW46DQo+ID4gPiAgICAvT0UvbWV0YS1vcGVuZW1iZWRk
-ZWQvLmdpdC9yZWJhc2UtYXBwbHkvcGF0Y2gNCj4gPiA+IFdoZW4geW91IGhhdmUgcmVzb2x2ZWQg
-dGhpcyBwcm9ibGVtLCBydW4gImdpdCBhbSAtLWNvbnRpbnVlIi4NCj4gPiA+IElmIHlvdSBwcmVm
-ZXIgdG8gc2tpcCB0aGlzIHBhdGNoLCBydW4gImdpdCBhbSAtLXNraXAiIGluc3RlYWQuDQo+ID4g
-PiBUbyByZXN0b3JlIHRoZSBvcmlnaW5hbCBicmFuY2ggYW5kIHN0b3AgcGF0Y2hpbmcsIHJ1biAi
-Z2l0IGFtIC0tYWJvcnQiLg0KPiA+ID4NCj4gPiA+DQo+ID4gPiBPRSBAIOKAvi9tZXRhLW9wZW5l
-bWJlZGRlZCAkIHBhdGNoIC1wMSA8IHB3LWFtLTg0MjEzLnBhdGNoIHBhdGNoaW5nDQo+ID4gPiBm
-aWxlDQo+ID4gPiBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZG1yYWlkL2RtcmFpZC8wMV9maXhf
-YnJva2VuX2xpbmtpbmcucGF0Y2gNCj4gPiA+IHBhdGNoaW5nIGZpbGUNCj4gPiA+IG1ldGEtb2Uv
-cmVjaXBlcy1leHRlbmRlZC9kbXJhaWQvZG1yYWlkLzAyX2Rpc2FibGVfZG1yZWcucGF0Y2gNCj4g
-PiA+IHBhdGNoOiAqKioqIG1hbGZvcm1lZCBwYXRjaCBhdCBsaW5lIDI2NToNCj4gPiA+DQo+ID4g
-PiA+ICstLS0gMS4wLjAucmMxNi5vcmlnL2xpYi8uZXhwb3J0LnN5bQ0KPiA+ID4gPiArKysrIDEu
-MC4wLnJjMTYvbGliLy5leHBvcnQuc3ltDQo+ID4gPiA+ICtAQCAtNTIsOCArNTIsNiBAQCBCYXNl
-IHsNCj4gPiA+ID4NCj4gPiA+ID4gKyAJCWRzb19lbmRfcmVidWlsZDsNCj4gPiA+ID4NCj4gPiA+
-ID4gKyAJCWhvdF9zcGFyZV9hZGQ7DQo+ID4gPiA+DQo+ID4gPiA+ICsgCQlkc29fZ2V0X21lbWJl
-cnM7DQo+ID4gPiA+DQo+ID4gPiA+ICstCQlkbV9yZWdpc3Rlcl9kZXZpY2U7DQo+ID4gPiA+DQo+
-ID4gPiA+ICstCQlkbV91bnJlZ2lzdGVyX2RldmljZTsNCj4gPiA+ID4gKyAJCWRtX2FsbF9tb25p
-dG9yZWQ7DQo+ID4gPiA+ICsgCWxvY2FsOg0KPiA+ID4gPg0KPiA+ID4gPiArIAkJKjsNCj4gPiA+
-DQo+ID4gPiBUaGlzIGlzIHRoZSBicm9rZW4gcGFydCwgYW5kIGluZGVlZCB0aGVyZSBhcmUgc3Ry
-YW5nZSBibGFuayBsaW5lcyBpbg0KPiA+ID4gaXQsIG1heWJlIG1peGluZyBkb3MgYW5kIGxpbnV4
-IGxpbmUgZW5kcyBpbiBkaWZmZXJlbnQgZmlsZXM/DQo+ID4NCj4gDQo+IA0KPiA+IC0tDQo+ID4g
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVu
-ZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gDQo+IC0tDQo+IE1hcnRpbiAn
-SmFNYScgSmFuc2EgICAgIGphYmJlcjogTWFydGluLkphbnNhQGdtYWlsLmNvbQ0K
+On Thu, Dec 04, 2014 at 04:37:23PM -0500, Philip Balister wrote:
+> The configure.py script now has support for cross compiling. This
+> simplified the recipe substantially.
+> 
+> The recipe was tested with gnuradio-companion on the zedboard and
+> ettus-e300. This is the first time we have been able to use grc with
+> pyqt built with OpenEmbedded.
+> 
+> Build tested on armv7, x86, x86_64 and mips.
+> 
+> Dropped patches from previous versions.
+> 
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>  .../python/python-pyqt-4.9.6/pyqt-generated.patch  |  12 -
+>  .../python-pyqt-4.9.6/qreal_float_support.diff     | 248 ---------------------
+>  .../recipes-devtools/python/python-pyqt_4.11.3.bb  |  54 +++++
+>  .../recipes-devtools/python/python-pyqt_4.9.6.bb   | 103 ---------
+>  4 files changed, 54 insertions(+), 363 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyqt-generated.patch
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qreal_float_support.diff
+>  create mode 100644 meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-pyqt_4.9.6.bb
+> 
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyqt-generated.patch b/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyqt-generated.patch
+> deleted file mode 100644
+> index 6579aa4..0000000
+> --- a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyqt-generated.patch
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -diff -uNr PyQt-x11-gpl-4.9.5.orig/QtGui/sipQtGuiQSystemTrayIcon.cpp PyQt-x11-gpl-4.9.5/QtGui/sipQtGuiQSystemTrayIcon.cpp
+> ---- PyQt-x11-gpl-4.9.5.orig/QtGui/sipQtGuiQSystemTrayIcon.cpp	2012-10-01 16:48:16.496700577 +0200
+> -+++ PyQt-x11-gpl-4.9.5/QtGui/sipQtGuiQSystemTrayIcon.cpp	2012-10-01 21:40:43.063130099 +0200
+> -@@ -993,8 +993,6 @@
+> -         qtgui_untrack(sipCpp);
+> - #line 995 "QtGui/sipQtGuiQSystemTrayIcon.cpp"
+> - 
+> --    QSystemTrayIcon *sipCpp = reinterpret_cast<QSystemTrayIcon *>(sipCppV);
+> --
+> -     if (QThread::currentThread() == sipCpp->thread())
+> -         delete sipCpp;
+> -     else
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qreal_float_support.diff b/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qreal_float_support.diff
+> deleted file mode 100644
+> index abdf70f..0000000
+> --- a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qreal_float_support.diff
+> +++ /dev/null
+> @@ -1,248 +0,0 @@
+> -## 03_qreal_float_support.dpatch by Michael Casadevall <sonicmctails@gmail.com>
+> -Index: python-qt4-4.8.3/configure.py
+> -===================================================================
+> ---- python-qt4-4.8.3.orig/configure.py	2011-02-24 10:33:30.000000000 +0200
+> -+++ python-qt4-4.8.3/configure.py	2011-02-24 10:33:18.000000000 +0200
+> -@@ -2004,8 +2004,9 @@
+> -     out << "PyQt_NoOpenGLES\\n";
+> - #endif
+> - 
+> --    if (sizeof (qreal) != sizeof (double))
+> -+#if defined(QT_NO_FPU) || defined(QT_ARCH_ARM) || defined(QT_ARCH_WINDOWSCE)
+> -         out << "PyQt_qreal_double\\n";
+> -+#endif
+> - 
+> -     return 0;
+> - }
+> -Index: python-qt4-4.8.3/sip/QtCore/qlist.sip
+> -===================================================================
+> ---- python-qt4-4.8.3.orig/sip/QtCore/qlist.sip	2011-02-24 10:33:27.000000000 +0200
+> -+++ python-qt4-4.8.3/sip/QtCore/qlist.sip	2011-02-24 10:33:18.000000000 +0200
+> -@@ -811,3 +811,227 @@
+> -     return sipGetState(sipTransferObj);
+> - %End
+> - };
+> -+
+> -+// If we're on an architecture where qreal != double, then we need to also
+> -+// explicately handle doubles. On architectures where qreal == double, they
+> -+// will automaticially be cast upwards
+> -+
+> -+%If (!PyQt_qreal_double)
+> -+
+> -+%If (Qt_4_3_0 -)
+> -+// QList<QPair<double, double> > is implemented as a Python list of 2-element tuples.
+> -+%MappedType QList<QPair<double, double> >
+> -+{
+> -+%TypeHeaderCode
+> -+#include <qlist.h>
+> -+#include <qpair.h>
+> -+%End
+> -+
+> -+%ConvertFromTypeCode
+> -+    // Create the list.
+> -+    PyObject *l;
+> -+
+> -+    if ((l = PyList_New(sipCpp->size())) == NULL)
+> -+        return NULL;
+> -+
+> -+    // Set the list elements.
+> -+    for (int i = 0; i < sipCpp->size(); ++i)
+> -+    {
+> -+        const QPair<double, double> &p = sipCpp->at(i);
+> -+        PyObject *pobj;
+> -+
+> -+        if ((pobj = Py_BuildValue((char *)"dd", p.first, p.second)) == NULL)
+> -+        {
+> -+            Py_DECREF(l);
+> -+
+> -+            return NULL;
+> -+        }
+> -+
+> -+        PyList_SET_ITEM(l, i, pobj);
+> -+    }
+> -+
+> -+    return l;
+> -+%End
+> -+
+> -+%ConvertToTypeCode
+> -+    SIP_SSIZE_T len;
+> -+
+> -+    // Check the type if that is all that is required.
+> -+    if (sipIsErr == NULL)
+> -+    {
+> -+        if (!PySequence_Check(sipPy) || (len = PySequence_Size(sipPy)) < 0)
+> -+            return 0;
+> -+
+> -+        for (SIP_SSIZE_T i = 0; i < len; ++i)
+> -+        {
+> -+            PyObject *tup = PySequence_ITEM(sipPy, i);
+> -+
+> -+            if (!PySequence_Check(tup) || PySequence_Size(tup) != 2)
+> -+                return 0;
+> -+        }
+> -+
+> -+        return 1;
+> -+    }
+> -+
+> -+    QList<QPair<double, double> > *ql = new QList<QPair<double, double> >;
+> -+    len = PySequence_Size(sipPy);
+> -+ 
+> -+    for (SIP_SSIZE_T i = 0; i < len; ++i)
+> -+    {
+> -+        PyObject *tup = PySequence_ITEM(sipPy, i);
+> -+
+> -+        double first = PyFloat_AsDouble(PySequence_ITEM(tup, 0));
+> -+        double second = PyFloat_AsDouble(PySequence_ITEM(tup, 1));
+> -+ 
+> -+        ql->append(QPair<double, double>(first, second));
+> -+    }
+> -+ 
+> -+    *sipCppPtr = ql;
+> -+ 
+> -+    return sipGetState(sipTransferObj);
+> -+%End
+> -+};
+> -+%End
+> -+%If (Qt_4_3_0 -)
+> -+// QList<QPair<double, TYPE> > is implemented as a Python list of 2-element tuples.
+> -+template<double, TYPE>
+> -+%MappedType QList<QPair<double, TYPE> >
+> -+{
+> -+%TypeHeaderCode
+> -+#include <qlist.h>
+> -+#include <qpair.h>
+> -+%End
+> -+
+> -+%ConvertFromTypeCode
+> -+    // Create the list.
+> -+    PyObject *l;
+> -+
+> -+    if ((l = PyList_New(sipCpp->size())) == NULL)
+> -+        return NULL;
+> -+
+> -+    // Set the list elements.
+> -+    for (int i = 0; i < sipCpp->size(); ++i)
+> -+    {
+> -+        const QPair<double, TYPE> &p = sipCpp->at(i);
+> -+        TYPE *t = new TYPE(p.second);
+> -+        PyObject *pobj;
+> -+
+> -+        if ((pobj = sipBuildResult(NULL, "(dB)", p.first, t, sipClass_TYPE, sipTransferObj)) == NULL)
+> -+        {
+> -+            Py_DECREF(l);
+> -+            delete t;
+> -+
+> -+            return NULL;
+> -+        }
+> -+
+> -+        PyList_SET_ITEM(l, i, pobj);
+> -+    }
+> -+
+> -+    return l;
+> -+%End
+> -+
+> -+%ConvertToTypeCode
+> -+    SIP_SSIZE_T len;
+> -+
+> -+    // Check the type if that is all that is required.
+> -+    if (sipIsErr == NULL)
+> -+    {
+> -+        if (!PySequence_Check(sipPy) || (len = PySequence_Size(sipPy)) < 0)
+> -+            return 0;
+> -+
+> -+        for (SIP_SSIZE_T i = 0; i < len; ++i)
+> -+        {
+> -+            PyObject *tup = PySequence_ITEM(sipPy, i);
+> -+
+> -+            if (!PySequence_Check(tup) || PySequence_Size(tup) != 2)
+> -+                return 0;
+> -+
+> -+            if (!sipCanConvertToInstance(PySequence_ITEM(tup, 1), sipClass_TYPE, SIP_NOT_NONE))
+> -+                return 0;
+> -+        }
+> -+
+> -+        return 1;
+> -+    }
+> -+
+> -+    QList<QPair<double, TYPE> > *ql = new QList<QPair<double, TYPE> >;
+> -+    len = PySequence_Size(sipPy);
+> -+ 
+> -+    for (SIP_SSIZE_T i = 0; i < len; ++i)
+> -+    {
+> -+        PyObject *tup = PySequence_ITEM(sipPy, i);
+> -+        double d;
+> -+        int state;
+> -+
+> -+        d = PyFloat_AsDouble(PySequence_ITEM(tup, 0));
+> -+        TYPE *t = reinterpret_cast<TYPE *>(sipConvertToInstance(PySequence_ITEM(tup, 1), sipClass_TYPE, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
+> -+ 
+> -+        if (*sipIsErr)
+> -+        {
+> -+            sipReleaseInstance(t, sipClass_TYPE, state);
+> -+
+> -+            delete ql;
+> -+            return 0;
+> -+        }
+> -+
+> -+        ql->append(QPair<double, TYPE>(d, *t));
+> -+
+> -+        sipReleaseInstance(t, sipClass_TYPE, state);
+> -+    }
+> -+ 
+> -+    *sipCppPtr = ql;
+> -+ 
+> -+    return sipGetState(sipTransferObj);
+> -+%End
+> -+};
+> -+%End
+> -+
+> -+// QList<double> is implemented as a Python list of doubles.
+> -+%MappedType QList<double>
+> -+{
+> -+%TypeHeaderCode
+> -+#include <qlist.h>
+> -+%End
+> -+
+> -+%ConvertFromTypeCode
+> -+    // Create the list.
+> -+    PyObject *l;
+> -+
+> -+    if ((l = PyList_New(sipCpp->size())) == NULL)
+> -+        return NULL;
+> -+
+> -+    // Set the list elements.
+> -+    for (int i = 0; i < sipCpp->size(); ++i)
+> -+    {
+> -+        PyObject *pobj;
+> -+
+> -+        if ((pobj = PyFloat_FromDouble(sipCpp->value(i))) == NULL)
+> -+        {
+> -+            Py_DECREF(l);
+> -+
+> -+            return NULL;
+> -+        }
+> -+
+> -+        PyList_SET_ITEM(l, i, pobj);
+> -+    }
+> -+
+> -+    return l;
+> -+%End
+> -+
+> -+%ConvertToTypeCode
+> -+    // Check the type if that is all that is required.
+> -+    if (sipIsErr == NULL)
+> -+        return (PySequence_Check(sipPy) && PySequence_Size(sipPy) >= 0);
+> -+
+> -+    QList<double> *ql = new QList<double>;
+> -+    SIP_SSIZE_T len = PySequence_Size(sipPy);
+> -+ 
+> -+    for (SIP_SSIZE_T i = 0; i < len; ++i)
+> -+        ql->append(PyFloat_AsDouble(PySequence_ITEM(sipPy, i)));
+> -+ 
+> -+    *sipCppPtr = ql;
+> -+ 
+> -+    return sipGetState(sipTransferObj);
+> -+%End
+> -+};
+> -+
+> -+%End
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb b/meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+> new file mode 100644
+> index 0000000..8d47068
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+> @@ -0,0 +1,54 @@
+> +SUMMARY = "Python Qt4 Bindings"
+> +AUTHOR = "Phil Thomson @ riverbank.co.uk"
+> +HOMEPAGE = "http://riverbankcomputing.co.uk"
+> +SECTION = "devel/python"
+> +LICENSE = "GPLv2 & GPLv3 & GPL_EXCEPTION"
+> +LIC_FILES_CHKSUM = "\
+> +    file://GPL_EXCEPTION.TXT;md5=b73b0be471db679533dc94781c14af58 \
+> +    file://GPL_EXCEPTION_ADDENDUM.TXT;md5=c1e04ec2aa0911061005a801abf81e40 \
+> +    file://OPENSOURCE-NOTICE.TXT;md5=6ad9123620cc04a22c394753ad4767d7 \
+> +    file://LICENSE.GPL2;md5=577ff65f6653562af318bfc3944b1f20 \
+> +    file://LICENSE.GPL3;md5=feee51612c3c1191a1d5f41156fa2c75 \
+> +"
+> +DEPENDS = "sip sip-native qt4-x11-free"
+> +
+> +SRC_URI = "\
+> +    ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
+> +"
+> +SRC_URI[md5sum] = "997c3e443165a89a559e0d96b061bf70"
+> +SRC_URI[sha256sum] = "853780dcdbe2e6ba785d703d059b096e1fc49369d3e8d41a060be874b8745686"
+> +
+> +S = "${WORKDIR}/PyQt-x11-gpl-${PV}"
+> +
+> +PARALLEL_MAKE = ""
+> +
+> +inherit qmake2 pythonnative python-dir
+> +
+> +DISABLED_FEATURES = "PyQt_Desktop_OpenGL PyQt_Accessibility PyQt_SessionManager"
+> +
+> +DISABLED_FEATURES_append_arm = " PyQt_qreal_double"
+> +
+> +do_configure() {
+> +    echo "py_platform = linux" > pyqt.cfg
+> +    echo "py_inc_dir = %(sysroot)/$includedir/python%(py_major).%(py_minor)" >> pyqt.cfg
+> +    echo "py_pylib_dir = %(sysroot)/${libdir}/python%(py_major).%(py_minor)" >> pyqt.cfg
+> +    echo "py_pylib_lib = python%(py_major).%(py_minor)mu" >> pyqt.cfg
+> +    echo "pyqt_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> pyqt.cfg
+> +    echo "pyqt_bin_dir = ${D}/${bindir}" >> pyqt.cfg
+> +    echo "pyqt_sip_dir = ${D}/${datadir}/sip/PyQt4" >> pyqt.cfg
+> +    echo "pyuic_interpreter = ${D}/${bindir}/python%(py_major).%(py_minor)" >> pyqt.cfg
+> +    echo "pyqt_disabled_features = ${DISABLED_FEATURES}" >> pyqt.cfg
+> +    echo "qt_shared = True" >> pyqt.cfg
+> +    echo "[Qt 4.8]" >> pyqt.cfg
+> +    echo "pyqt_modules = QtCore QtGui QtDeclarative QtNetwork QtSvg QtWebKit" >> pyqt.cfg
+> +    echo yes | python configure-ng.py --verbose --qmake  ${STAGING_BINDIR_NATIVE}/qmake2 --configuration pyqt.cfg --sysroot ${STAGING_DIR_HOST}
+> +}
+
+Hi Phillip,
+
+it is shell so is a here-script not the better approach instead of the many echos?
+
+Bye Henning
 
