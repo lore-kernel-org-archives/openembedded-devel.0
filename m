@@ -1,37 +1,40 @@
 Return-Path: <iwamatsu@nigauri.org>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CABB72381
+Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 31EC372381
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Dec 2014 01:19:37 +0000 (UTC)
-Received: by mail-pa0-f46.google.com with SMTP id lj1so4171117pab.33
+	Mon,  8 Dec 2014 01:19:41 +0000 (UTC)
+Received: by mail-pd0-f169.google.com with SMTP id z10so4129032pdj.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Dec 2014 17:19:38 -0800 (PST)
+	Sun, 07 Dec 2014 17:19:42 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=qYAu9c5j/Mnvq483lx8xlSqPxuQCYdtSbgTf34u9KN0=;
-	b=EpjB7FFraaq3RfCItf3OL7723x3sZHGWWkeg8w8Bq4/Tb6fosjG6Q84xn8sheZEL9u
-	eSr6UtyucPX7Uvght20KSSSt3M5sF0MN1lOvGRr14/5Rn7MZ/XhuXRrz/hE/53GAPd+o
-	g3c9xKDSB9Nd7v9Dgj/DrXOuyjeG/QbjfSGa90wp2DKRBnKg52szL3TgUFws2gn/ECpB
-	ZfVE+ozPJdGvlz3M9zxw08pym3XiH2fxtEHJ+27td7yOHZJuM2Zn+upKHTMKx8YBrP3P
-	d5LoA5g0Lnyr24Hb8ICJB/ST+ye9fNSBSUCdPfGW+euHAUybphOAgiltDYDdGC3LNLTN
-	Bsgw==
-X-Gm-Message-State: ALoCoQmFaxRwUEoTNTCUy1Xz7hi2rEpFw2+vpYGB/WNnhIMVIxIlM72PfJnS8QPsvNgTuyavM55w
-X-Received: by 10.70.102.193 with SMTP id fq1mr16357049pdb.19.1418001577937;
-	Sun, 07 Dec 2014 17:19:37 -0800 (PST)
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:in-reply-to:references;
+	bh=8jIM8bJa5OBUxGq2qjbBrWKU2xoUedhdr9D8nqhwZOc=;
+	b=PYe4Uc/OcsSzWvhYBMzDmoI1AcEm90r6I24dYQEsJ/dyLtuzz0Z2fhgurYIbeQ17y4
+	gPiXKt3NEb+cE1TnjqFHG06o8VcHkr5JkTmmch9dXuRTX3VtpNB4iCtJHigqDLMH/3hB
+	i01TlJPUqzNclaLXgjqkOOgYBM48387+NnoVfCAJy+D+sY5Pr3babPvRaqQzD1x8aCh6
+	qXZ5XUIHqH6mWJ/cP4jwaDVEdiV5U/evjqHAgyk+gCeATrIIr/3LrtFVHm3W8DBNS8Ma
+	pOYTZZEETLwgRUxfCxHm5sYndH5aSrjZLQ1wYfZzW57vYwUhsP7U4zTTLqpKpCisW6jl
+	AqGA==
+X-Gm-Message-State: ALoCoQlfd0KxKpgDDz0R7a1Oa4+bEuSyi1wwE3AT9iAIhbEW+L7GVQ1t4ww2sDR5HjaZSXBGO+AH
+X-Received: by 10.68.203.226 with SMTP id kt2mr55042277pbc.141.1418001582404; 
+	Sun, 07 Dec 2014 17:19:42 -0800 (PST)
 Received: from xps-iwamatsu.renesas.com (49.14.32.202.bf.2iij.net.
 	[202.32.14.49]) by mx.google.com with ESMTPSA id
-	i11sm34630954pbq.23.2014.12.07.17.19.35 for <multiple recipients>
+	i11sm34630954pbq.23.2014.12.07.17.19.39 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 07 Dec 2014 17:19:36 -0800 (PST)
+	Sun, 07 Dec 2014 17:19:40 -0800 (PST)
 Sender: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 From: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Dec 2014 10:19:08 +0900
-Message-Id: <1418001549-7216-1-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
+Date: Mon,  8 Dec 2014 10:19:09 +0900
+Message-Id: <1418001549-7216-2-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
 X-Mailer: git-send-email 2.1.3
-Subject: [meta-oe][PATCH 1/2] v4l-utils: Update to 1.6.2
+In-Reply-To: <1418001549-7216-1-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
+References: <1418001549-7216-1-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
+Subject: [meta-oe][PATCH 2/2] media-ctl: Remove recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,43 +48,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Dec 2014 01:19:41 -0000
+X-List-Received-Date: Mon, 08 Dec 2014 01:19:42 -0000
 
-* Bump PV and hash of md5 and sha256
-* Add ${libdir}/libdvbv5*${SOLIBS} to FILES_libv4l
+media-ctl was merged into v4l-utils.
 
 Signed-off-by: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
 ---
- .../{v4l-utils_1.0.1.bb => v4l-utils_1.6.2.bb}     |    5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.0.1.bb => v4l-utils_1.6.2.bb} (85%)
+ .../recipes-multimedia/v4l2apps/media-ctl_git.bb   |   21 --------------------
+ 1 file changed, 21 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-similarity index 85%
-rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb
-rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-index c3a1370..219ed15 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.0.1.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-@@ -12,8 +12,8 @@ inherit autotools gettext pkgconfig
- PROVIDES = "libv4l"
- 
- SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2"
--SRC_URI[md5sum] = "b06ea8b15e27cff352b4536e835448bc"
--SRC_URI[sha256sum] = "fc0132e82a18dfad9619be3abf50c206e2f449b1c14440cde36f25874fdce7df"
-+SRC_URI[md5sum] = "9cb3c178f937954e65bf30920af433ef"
-+SRC_URI[sha256sum] = "d3d6eb1f0204fb11f3d318bfca35d5f73cc077f88fac7665a47856a16496be7d"
- 
- EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
- 
-@@ -22,6 +22,7 @@ PACKAGES =+ "rc-keymaps libv4l libv4l-dbg libv4l-dev"
- FILES_rc-keymaps = "${sysconfdir}/rc* ${base_libdir}/udev/rc*"
- FILES_${PN} = "${bindir} ${sbindir} ${base_libdir}/udev/rules.d/70-infrared.rules"
- FILES_libv4l += "${libdir}/libv4l*${SOLIBS} ${libdir}/libv4l/*.so ${libdir}/libv4l/plugins/*.so \
-+                 ${libdir}/libdvbv5*${SOLIBS} \
-                  ${libdir}/libv4l/*-decomp"
- FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
- FILES_libv4l-dev += "${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb b/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
+deleted file mode 100644
+index 86e5364..0000000
+--- a/meta-oe/recipes-multimedia/v4l2apps/media-ctl_git.bb
++++ /dev/null
+@@ -1,21 +0,0 @@
+-SUMMARY = "Media controller control application"
+-LICENSE = "LGPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=d749e86a105281d7a44c2328acebc4b0"
+-
+-DEPENDS = "linux-libc-headers"
+-
+-SRC_URI = "git://git.ideasonboard.org/media-ctl.git"
+-SRCREV = "a6ec4a37028952ffd6e62eb52648cf66248eb519"
+-
+-PV = "0.0.1"
+-PR = "r4"
+-S = "${WORKDIR}/git"
+-
+-inherit autotools pkgconfig
+-
+-EXTRA_OECONF = "--with-kernel-headers=${STAGING_EXECPREFIXDIR}"
+-
+-PACKAGES =+ "libmediactl libv4l2subdev"
+-FILES_libmediactl = "${libdir}/libmediactl${SOLIBS}"
+-FILES_libv4l2subdev = "${libdir}/libv4l2subdev${SOLIBS}"
+-
 -- 
 1.7.9.5
 
