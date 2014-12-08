@@ -1,35 +1,35 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f54.google.com (mail-yh0-f54.google.com
-	[209.85.213.54])
-	by mail.openembedded.org (Postfix) with ESMTP id CF042724A5;
-	Mon,  8 Dec 2014 12:04:40 +0000 (UTC)
-Received: by mail-yh0-f54.google.com with SMTP id 29so2396174yhl.41
-	for <multiple recipients>; Mon, 08 Dec 2014 04:04:40 -0800 (PST)
+Received: from mail-yh0-f52.google.com (mail-yh0-f52.google.com
+	[209.85.213.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A27565E1A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Dec 2014 13:07:54 +0000 (UTC)
+Received: by mail-yh0-f52.google.com with SMTP id z6so2286232yhz.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Dec 2014 05:07:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=6i8zUpRJJVgOFq7CSTY6UuT5EmjCkTeeSPt2to7IO5Q=;
-	b=cflIjHiLbmTKOGdvH2RFtWZubUftookf8Kp1rbhvWR02D5DSmUnSRME5SY6kVttMVc
-	pPJF+wsClOJ3LNq7PS+05RjaWD94xih5b3fwfLlSnli4yoHyopn5MExZ0sGutKCrKDLI
-	5at6M1Lh/l6SI4IyqBZt0RVCxJ0UVZ+HXNsrleEURpljvoXKFcXJKw/IN3jXCuNi4a19
-	OQp7SOL/TDLhrtTH7ljlkp+OPRuQ7Ho2ODQSocX9YnmP8Sd9y7HWzRQDBA0PCXMr+nBG
-	Qlvli3Uqi3PEkDwHP2iuHiRT7z8GRjRVmkPbOYKtBcsDs9arteY8WRbivko9jZyJMDPE
-	Gw+Q==
+	:from:to:content-type;
+	bh=GPXZlRnTQkXD4WcySvV9vcDun7+l0VEjAVonITaw1eU=;
+	b=EkAUOIFcL2zMXUKlSmbABSE6ZekHl6jIGQoGls2JBIUESagG51EamGSjLPNEi+FugP
+	cberf0WHLOW/jMw2rGPwesfG6Worvnn2D5PgAzPR2lhhif56RF/RzFGXtcl2e7Cl7wPh
+	fPCQDicplVYuRKEsEM6MpEWvysWyBJPLY7m0ACOenl/nTvEwSQPP5UAr1ly3lJVTQIf5
+	JK9SkKaleY573oQNRS9aQTR6LwRCj5+SIZbKcgBbfWVc/COSoFzB7VoWVBMu2V0Ezd77
+	gFEbOeJmQ6PMdxliCtewvPoQyL3yGKOEOCpMofAuZXZQ95LYpQYkP/VKwifZPYn5nY/7
+	IWfg==
 MIME-Version: 1.0
-X-Received: by 10.236.66.72 with SMTP id g48mr720675yhd.37.1418040280712; Mon,
-	08 Dec 2014 04:04:40 -0800 (PST)
+X-Received: by 10.236.39.139 with SMTP id d11mr30872068yhb.90.1418044075169;
+	Mon, 08 Dec 2014 05:07:55 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.171.132 with HTTP; Mon, 8 Dec 2014 04:04:40 -0800 (PST)
-In-Reply-To: <548558E5.7030706@gmail.com>
-References: <548558E5.7030706@gmail.com>
-Date: Mon, 8 Dec 2014 10:04:40 -0200
-X-Google-Sender-Auth: W7bCHUsygrQruXjUX54smE_TThM
-Message-ID: <CAP9ODKqLhH4BsfztgiTMMehpXb6yJ+ZyNKydN1dYj+6mwGDJ6A@mail.gmail.com>
+Received: by 10.170.171.132 with HTTP; Mon, 8 Dec 2014 05:07:55 -0800 (PST)
+In-Reply-To: <1418001796-7522-1-git-send-email-rapphil@gmail.com>
+References: <1418001796-7522-1-git-send-email-rapphil@gmail.com>
+Date: Mon, 8 Dec 2014 11:07:55 -0200
+X-Google-Sender-Auth: eirO9buU-hIH0IbtRByUX1C1CeA
+Message-ID: <CAP9ODKqgGXJ29xbgurb4Bf9NeY6ozMEC2owXVs=quq3H=O-+SQ@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] meta globus (grid toolkit)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] libftdi: update to 1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,16 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Dec 2014 12:04:43 -0000
+X-List-Received-Date: Mon, 08 Dec 2014 13:07:55 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Dec 8, 2014 at 5:53 AM, akuster808 <akuster808@gmail.com> wrote:
-> Is anyone working on adding Globus toolkit as a meta layer? I started on one
-> and have several packages building. It is a bit rough.
+On Sun, Dec 7, 2014 at 11:23 PM, Raphael Silva <rapphil@gmail.com> wrote:
+> Previous version was 0.19 but it had a failing recipe due to
+> the fact that libusb was not detect during do_configure.
+> This problem does not happen in version 1.1.
 >
-> It is located at https://github.com/akuster/meta-globus
+> Signed-off-by: Mario Goulart <mario.goulart@gmail.com>
+> Signed-off-by: Raphael Silva <rapphil@gmail.com>
 
-Nice!
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
 
 -- 
 Otavio Salvador                             O.S. Systems
