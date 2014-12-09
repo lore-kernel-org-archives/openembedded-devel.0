@@ -1,34 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id F3F1671F23
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D87C724E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Dec 2014 10:25:27 +0000 (UTC)
-Received: by mail-wg0-f46.google.com with SMTP id x13so403400wgg.5
+	Tue,  9 Dec 2014 10:25:47 +0000 (UTC)
+Received: by mail-wi0-f174.google.com with SMTP id h11so7336527wiw.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Dec 2014 02:25:28 -0800 (PST)
+	Tue, 09 Dec 2014 02:25:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=F6MLYGEchjFLgTZMHA5kuiad3C4MhOF0POV+ifgm2Q0=;
-	b=xeUMUFZ5UbG1HEppFdg6EkLb/3PH4woqQnKbu64cOlm8R46cfdEnaRqEInfNdo+aVP
-	ZsRjc028g8W6tLoWgyfsyqb+ww/6W2I+Zpq1CK4qaVSjNWB1eouCQK7LqnimxtR00P70
-	v9gB9SKEGH0oTeBfWYP9M3R5c7VhBH0WeGLnyDzG/q59Q1VjxDQYGHqGNh/dvFxC8AuJ
-	v14B140SiJYayuD9Fs/8bi/P87pqp7SQ8G3KFRKtnBKHhJNY5S0i85lG2jceRdh4CMw5
-	Qd1V1d2TMVR7LuVtpMfN6isE1hTziStH41Gebig37ww4wGhr52gtI9bhvRt7tUaHRUiT
-	rXRQ==
-X-Received: by 10.194.85.197 with SMTP id j5mr3568682wjz.106.1418120727999;
-	Tue, 09 Dec 2014 02:25:27 -0800 (PST)
+	bh=JlAl+YIubGtjt7yYge3ouuCsH8y4ZhVnaypJOjvWW0E=;
+	b=yKc7YBFChnAWpgESHhSo+lcUdAS048XHmDfbPA0qaj6ms2lwrb2mJtliMmiFiekWHr
+	H3AGxUlHyh5YHQcMcKKrWrlQ4EkmpsusWQI7E4UxGu0PQo9W9/ivNMVXBvD/2olGLEr/
+	+iXgf16vjoIe2Oz7l1T57Aa23/4O+rh1SqatJq9UQXdily59CJc4L2v5Z/8722IT5ACF
+	JPwdMRS1b3GR+k4CYVyicgyBBT3Q0tROsmmudjCx2gd55HltJZIuKWRnL6Mg+v3sf/Ah
+	3o/I5HeusWF25rWdoud+ha1dVHCwr0RZYiUUENepPfrQhZueydc6yOhK0lXyk5bPrwew
+	bkCA==
+X-Received: by 10.180.83.228 with SMTP id t4mr31774915wiy.28.1418120747872;
+	Tue, 09 Dec 2014 02:25:47 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	jp3sm13222198wid.9.2014.12.09.02.25.24
+	ep6sm1640010wib.0.2014.12.09.02.25.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Dec 2014 02:25:24 -0800 (PST)
+	Tue, 09 Dec 2014 02:25:47 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 9 Dec 2014 11:25:25 +0100
+Date: Tue, 9 Dec 2014 11:25:48 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141209102525.GF2470@jama>
+Message-ID: <20141209102548.GG2470@jama>
 References: <1417596619-28605-1-git-send-email-sven.ebenfeld@gmail.com>
 MIME-Version: 1.0
 In-Reply-To: <1417596619-28605-1-git-send-email-sven.ebenfeld@gmail.com>
@@ -47,13 +48,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2014 10:25:37 -0000
-X-Groupsio-MsgNum: 53233
+X-List-Received-Date: Tue, 09 Dec 2014 10:25:48 -0000
+X-Groupsio-MsgNum: 53234
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WlEyl6ow+jlIgNUh"
+	protocol="application/pgp-signature"; boundary="2NLGdgz3UMHa/lqP"
 Content-Disposition: inline
 
---WlEyl6ow+jlIgNUh
+--2NLGdgz3UMHa/lqP
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -71,12 +72,9 @@ bb
 >  create mode 100644 meta-networking/recipes-support/stunnel/stunnel_5.07.=
 bb
 
-Causes new QA warnings:
-
-stunnel-5.07: stunnel rdepends on liblzma, but it isn't a build
-dependency? [build-deps]
-stunnel-5.07: stunnel rdepends on libsystemd, but it isn't a build
-dependency? [build-deps]
+and=20
+stunnel-5.07: stunnel requires /usr/bin/perl, but no providers in its
+RDEPENDS [file-rdeps]
 
 >=20
 > diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/me=
@@ -144,16 +142,16 @@ e20"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---WlEyl6ow+jlIgNUh
+--2NLGdgz3UMHa/lqP
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlSGzhUACgkQN1Ujt2V2gBwGgwCaAoFOohwx4m2YxZslPuwkKNW7
-SjoAoKeLLlsmiNlgvlg7cfqqNVhSUzH1
-=U4xf
+iEYEARECAAYFAlSGziwACgkQN1Ujt2V2gBxUEQCcCPgyXa/xGeQSuZbWWR071pKQ
+2n4AoLqrocvwWM9NkUG6WfzU/nK8E3vo
+=T12Z
 -----END PGP SIGNATURE-----
 
---WlEyl6ow+jlIgNUh--
+--2NLGdgz3UMHa/lqP--
