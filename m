@@ -1,40 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 000FC724DF
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 28EBC724E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Dec 2014 10:23:44 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id bs8so9623904wib.3
+	Tue,  9 Dec 2014 10:24:33 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id z12so400339wgg.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Dec 2014 02:23:44 -0800 (PST)
+	Tue, 09 Dec 2014 02:24:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=n6zYBVizBkEnRwWsT3B+kxgzHNpzqx6b9CJT3MYEfpE=;
-	b=zmY/1NhA6bCcPnbf4kfK/Iy+he/ZhnPfsckAEOxvjUNZofNtftD5bV4GwrQHYGRVIC
-	B0yrgU2WmgFmj8ZSmYW9Qgh7IRdoLr1C0npF0VGR3ad4UZbukU65VaMEnE85Ubk/oR57
-	uOgThjQhn742pEIupLe3eAVFZysRJZbLo5jBqt9AwLvDCtED9O/py/sA0gqPgEbvgSJJ
-	DhKeW55MFQ+cB0/OJsjdpxF1+F3M6JmAtsYUimyS+UWuGawsY29r7pLM9pGeZH6NU1N6
-	IAowF8m9naGxLHmi1yy153toPd5hRgOZPrNaphf1MeEygPtD6UbhzANAvSgN4lrpQ/S0
-	M65A==
-X-Received: by 10.180.93.102 with SMTP id ct6mr30419295wib.75.1418120624322;
-	Tue, 09 Dec 2014 02:23:44 -0800 (PST)
+	bh=GDT3UO7NNjBFXOyzFCGTWRhMzQO8lME+u8spsg1EZf0=;
+	b=iBMpm4nAy+oqZYrqWOSDslfQSWXUV7pe9pPwJcl6Ook+dYcAtJgxEaaz3IedK9jrlC
+	4iGTHq7JfIVWPBxK7NytXBo64JUoB4lRyKkbdX64SWpzBRH6X7+1AvX0qgHPjNkMVcGi
+	BejptVZ33+QoUzuQuBAis7mpUvFS+BiZwUh0PYXkj6I0nPVz9DxPlNko5p3ZY18i9Fiy
+	my5shmDUsCbFx1ahi8w9gOt1zlXJfgEzBWLAeHALNctCRrVLcUlV3FVSgnnCdaGZIeva
+	+5pfPFBslqfvwV69S6xEVAMBsBdgpYZohd1aHBjDpWEbdhrJjlTJ0Helv5dZW6TjtCpe
+	g6OQ==
+X-Received: by 10.194.156.138 with SMTP id we10mr3773283wjb.72.1418120673873; 
+	Tue, 09 Dec 2014 02:24:33 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	a14sm13192356wib.22.2014.12.09.02.23.43
+	ef1sm13235079wic.0.2014.12.09.02.24.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Dec 2014 02:23:43 -0800 (PST)
+	Tue, 09 Dec 2014 02:24:33 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 9 Dec 2014 11:23:44 +0100
+Date: Tue, 9 Dec 2014 11:24:34 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141209102344.GD2470@jama>
-References: <1417489126-18914-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+Message-ID: <20141209102434.GE2470@jama>
+References: <1417486264-1878-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1417489126-18914-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+In-Reply-To: <1417486264-1878-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] logcheck: Add new recipe
+Subject: Re: [meta-oe][PATCH] pkcs11-helper : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,85 +47,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2014 10:23:56 -0000
-X-Groupsio-MsgNum: 53231
+X-List-Received-Date: Tue, 09 Dec 2014 10:24:34 -0000
+X-Groupsio-MsgNum: 53232
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jCrbxBqMcLqd4mOl"
+	protocol="application/pgp-signature"; boundary="ytoMbUMiTKPMT3hY"
 Content-Disposition: inline
 
---jCrbxBqMcLqd4mOl
+--ytoMbUMiTKPMT3hY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 02, 2014 at 10:58:46AM +0800, Qian Lei wrote:
-> Logcheck is a simple utility which is designed to allow a system administ=
-rator
-> to view the log-files which are produced upon hosts under their control.
+On Tue, Dec 02, 2014 at 10:11:04AM +0800, Li xin wrote:
+> PKCS#11 is a published standard. PKCS#11 is the de-facto standard
+> to access cryptographic devices.
+> pkcs11-helper is a library that simplifies the interaction with
+> PKCS#11 providers for end-user applications using a simple API
+> and optional OpenSSL engine.
 
-Causes new QA warning:
-logcheck-1.3.17: logcheck requires /usr/bin/perl, but no providers in
-its RDEPENDS [file-rdeps]
+Fails to configure, check the logs from last world build.
 
->=20
-> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 > ---
->  .../recipes-extended/logcheck/logcheck_1.3.17.bb   | 38 ++++++++++++++++=
+>  .../pkcs11-helper/pkcs11-helper_1.11.bb            | 28 ++++++++++++++++=
 ++++++
->  1 file changed, 38 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
+>  1 file changed, 28 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1=
+=2E11.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb b/meta-=
-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
+> diff --git a/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb =
+b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
 > new file mode 100644
-> index 0000000..c1cb069
+> index 0000000..9d08d25
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
-> @@ -0,0 +1,38 @@
-> +SUMMARY =3D "Analyzes log files and sends noticeable events as email"
-> +DESCRIPTION =3D "\
-> +Logcheck is a simple utility which is designed to allow a system adminis=
-trator \
-> +to view the log-files which are produced upon hosts under their control.=
- \
-> +It does this by mailing summaries of the log-files to them, after first \
-> +filtering out "normal" entries. \
-> +Normal entries are entries which match one of the many included regular \
-> +expression files contain in the database."
-> +SECTION =3D "Applications/System"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc93c0550bd3173f4504b2cbd8991e=
-50b"
+> +++ b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
+> @@ -0,0 +1,28 @@
+> +SUMMARY =3D "A library for using PKCS"
+> +DESCRIPTION =3D "pkcs11-helper is a library that simplifies the interact=
+ion with PKCS \
+> +providers for end-user applications using a simple API and optional Open=
+SSL \
+> +engine. The library allows using multiple PKCS enumerating available tok=
+en \
+> +certificates, or selecting a certificate directly by serialized id, hand=
+ling \
+> +card removal and card insert events, handling card ie-insert to a differ=
+ent \
+> +slot, supporting session expiration and much more all using a simple API=
+=2E"
 > +
-> +SRC_URI =3D "git://git.debian.org/git/logcheck/logcheck.git"
-> +SRCREV =3D "2429e67ad875fee8a0234c64d504277b038c89cd"
+> +HOMEPAGE =3D "git://github.com/OpenSC/pkcs11-helper.git"
+> +SECTION =3D "Development/Libraries"
+> +
+> +LICENSE =3D "GPLv2 BSD"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4948810631bcac142af53d32df5b6=
+ee1 \
+> +    file://COPYING.GPL;md5=3D8a71d0475d08eee76d8b6d0c6dbec543 \
+> +    file://COPYING.BSD;md5=3Df79f90ea7a106796af80b5d05f1f8da1"
+> +
+> +SRC_URI =3D "git://github.com/OpenSC/pkcs11-helper.git"
+> +SRC_URI[md5sum] =3D "9f62af9f475901b89355266141306673"
+> +SRC_URI[sha256sum] =3D "494ec59c93e7c56c528f335d9353849e2e7c94a6b1b41c89=
+604694e738113386"
 > +
 > +S =3D "${WORKDIR}/git"
+> +SRCREV =3D "e7adf8f35be232a4f04c53b4ac409be52792093e"
 > +
-> +FILES_${PN} +=3D "${datadir}/logtail"
+> +DEPENDS =3D "zlib nettle gnutls gmp openssl"
 > +
-> +do_install() {
-> +    # Fix QA Issue
-> +    sed -i '/install -d $(DESTDIR)\/var\/lock\/logcheck/s/^/#/' Makefile
+> +inherit autotools pkgconfig
 > +
-> +    # "make install" do not install the manpage. Install them manually.
-> +    install -m 755 -d ${D}${mandir}/man1
-> +    install -m 755 -d ${D}${mandir}/man8
-> +    install -m 644 docs/logcheck-test.1 ${D}${mandir}/man1/
-> +    install -m 644 docs/logtail.8 ${D}${mandir}/man8/
-> +    install -m 644 docs/logtail2.8 ${D}${mandir}/man8/
-> +
-> +    sed -i "s/syslog/messages/" etc/logcheck.logfiles
-> +    sed -i "s/auth\.log/secure/" etc/logcheck.logfiles
-> +    install -m 755 -d ${D}${sysconfdir}/cron.d
-> +    install -m 644 debian/logcheck.cron.d ${D}${sysconfdir}/cron.d/logch=
-eck
-> +    install -m 755 -d ${D}/var/lib/logcheck
-> +
-> +    oe_runmake install DESTDIR=3D${D}
-> +}
+> +EXTRA_OECONF =3D " --disable-static --enable-doc "
 > --=20
-> 1.8.3.1
+> 1.8.4.2
 >=20
 > --=20
 > _______________________________________________
@@ -137,16 +130,16 @@ eck
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---jCrbxBqMcLqd4mOl
+--ytoMbUMiTKPMT3hY
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlSGzbAACgkQN1Ujt2V2gBxMewCfcOFdxK9VgDTmGrMLpTBiWoQZ
-zKAAoJoI+G9bX9g8CFUnaCSLHliuOisZ
-=ZaYp
+iEYEARECAAYFAlSGzeIACgkQN1Ujt2V2gBxRbwCePLKXwdnsTxVih1I8HjbDcjMz
+a5YAn1T4B7C82YkQtL5kQ1oWPFOGnVvv
+=0uzI
 -----END PGP SIGNATURE-----
 
---jCrbxBqMcLqd4mOl--
+--ytoMbUMiTKPMT3hY--
