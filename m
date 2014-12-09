@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FF4E7254B
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3014E72499
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Dec 2014 17:52:28 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id l18so1548058wgh.2
+	Tue,  9 Dec 2014 17:53:30 +0000 (UTC)
+Received: by mail-wi0-f170.google.com with SMTP id bs8so10947296wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Dec 2014 09:52:28 -0800 (PST)
+	Tue, 09 Dec 2014 09:53:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=aGNLIYEjALAiclcN5attGzFnuYtELF0w0kDiAklOXWA=;
-	b=rpFXB86SHHPrKDbCEQYr6iGI+eNB6ClUGNCXX+LqHk7CQ9CAUS82AAqRCORPDtbhqy
-	+z3eD38BeRJZniUBv+U8H3K7oi3i8rM2TjgCvNLotl+joWvRGymiZ3qVqQhQUsS/Loss
-	zsFSO2nqWosnjbIk5FbTTabyMGp5hwMHucleWhjdUkDonvrolQSby36qX8hOsl9EsSDp
-	xdAIvo/a8m+ghEfj5vPo+DNQe9079kqS7TX07ZqMVtnkmVxbHnA3BYv8a+RsBPZoUkZ+
-	4B1th+jeGiRtiJlQyCih6HHnRvNHwMZzP75YVWlxOfvimkC0U8x+8+zoX1tfLWhyOyQn
-	vtvQ==
-X-Received: by 10.180.73.7 with SMTP id h7mr34334178wiv.83.1418147547841;
-	Tue, 09 Dec 2014 09:52:27 -0800 (PST)
+	bh=KVfO9o4qgeKAQqLfpBeg+3i9xRN036Ri9Y3yr8MQa1U=;
+	b=IUAu2uuEu2JPQkDLRx6S5B1BaZ0SXFGcLmQeaDmwez/I/IMrfvR8Xj9BiKU1fUuGXM
+	TD8AhO76PL7PlS1PgSWoO7Dg0hr/djqbI1Soz43IajvMwDkvGyrS61UMzJH8H60O5jjA
+	MiBh1GRCVWQT3ZDgFZyisl7kiB/6JQlZY0FYCpGSv5EMbY6/L01xEJ1Zi0/d686ZK6o9
+	D0NLD/VRTrOk3jtfAaGlYm7IYyt3HF+1h47gNz3iQdY5UoAUZ2KORKh9BdSakBP6ndtA
+	TzEBQ4AmCNVYBy1963PSmfJZR8qQmlNUjlTyAiD9cF8vOrWjDGReFm8k5jipRa8/eqeE
+	xRhQ==
+X-Received: by 10.180.95.97 with SMTP id dj1mr6160908wib.43.1418147610355;
+	Tue, 09 Dec 2014 09:53:30 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	p14sm3152953wie.1.2014.12.09.09.52.26
+	jp3sm14741938wid.9.2014.12.09.09.53.29
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Dec 2014 09:52:26 -0800 (PST)
+	Tue, 09 Dec 2014 09:53:29 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 9 Dec 2014 18:52:28 +0100
+Date: Tue, 9 Dec 2014 18:53:30 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141209175228.GQ2470@jama>
-References: <1417675022-7660-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<20141209104705.GL2470@jama>
+Message-ID: <20141209175330.GR2470@jama>
+References: <1417729043-11288-1-git-send-email-philip@balister.org>
 MIME-Version: 1.0
-In-Reply-To: <20141209104705.GL2470@jama>
+In-Reply-To: <1417729043-11288-1-git-send-email-philip@balister.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] nana: add new recipe
+Subject: Re: [meta-oe][PATCHv2] python-pyqt : Update to 4.11.3.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,333 +48,604 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2014 17:52:29 -0000
-X-Groupsio-MsgNum: 53248
+X-List-Received-Date: Tue, 09 Dec 2014 17:53:35 -0000
+X-Groupsio-MsgNum: 53249
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BouVgDkIlpb7X6Bk"
+	protocol="application/pgp-signature"; boundary="gV1yUYniiDLxW66s"
 Content-Disposition: inline
 
---BouVgDkIlpb7X6Bk
-Content-Type: text/plain; charset=iso-8859-1
+--gV1yUYniiDLxW66s
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 09, 2014 at 11:47:05AM +0100, Martin Jansa wrote:
-> On Thu, Dec 04, 2014 at 02:37:02PM +0800, Li xin wrote:
-> > GNU Nana is a free library providing improved support for assertion
-> > checking (as in assert.h) and logging (printf style debugging) in
-> > GNU C and C++.
-> >=20
-> > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> > ---
-> >  .../nana/nana/change-mandir-to-DESTDIR.patch       |  40 ++++++
-> >  .../modify-acinclude.m4-and-configure.in.patch     | 147 +++++++++++++=
-++++++++
-> >  meta-oe/recipes-extended/nana/nana_2.5.bb          |  29 ++++
-> >  3 files changed, 216 insertions(+)
-> >  create mode 100644 meta-oe/recipes-extended/nana/nana/change-mandir-to=
--DESTDIR.patch
-> >  create mode 100644 meta-oe/recipes-extended/nana/nana/modify-acinclude=
-=2Em4-and-configure.in.patch
-> >  create mode 100644 meta-oe/recipes-extended/nana/nana_2.5.bb
-> >=20
-> > diff --git a/meta-oe/recipes-extended/nana/nana/change-mandir-to-DESTDI=
-R.patch b/meta-oe/recipes-extended/nana/nana/change-mandir-to-DESTDIR.patch
-> > new file mode 100644
-> > index 0000000..653a7e4
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/nana/nana/change-mandir-to-DESTDIR.patch
-> > @@ -0,0 +1,40 @@
-> > +From 7b04c4873c0a4510bdaf9145bf01ca34b3549fdb Mon Sep 17 00:00:00 2001
-> > +From: Li xin <lixin.fnst@cn.fujitsu.com>
-> > +Date: Thu, 4 Dec 2014 03:50:19 +0900
-> > +Subject: [PATCH 1/2] change mandir to DESTDIR
-> > +
-> > +Upstream-Status: pending
-> > +
-> > +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> > +---
-> > + man/Makefile.am | 2 +-
-> > + man/Makefile.in | 2 +-
-> > + 2 files changed, 2 insertions(+), 2 deletions(-)
-> > +
-> > +diff --git a/man/Makefile.am b/man/Makefile.am
-> > +index 80d24d8..944bc57 100644
-> > +--- a/man/Makefile.am
-> > ++++ b/man/Makefile.am
-> > +@@ -16,5 +16,5 @@ install-data-local:
-> > + 	@sect=3D1;				\
-> > + 	inst=3D`echo "nana" | sed '$(transform)'`.1; \
-> > + 	echo installing nana.1 as $(mandir)/man$$sect/$$inst; \
-> > +-	$(INSTALL_DATA) $(srcdir)/nana.1 $(mandir)/man$$sect/$$inst
-> > ++	$(INSTALL_DATA) $(srcdir)/nana.1 $(DESTDIR)$(mandir)/man$$sect/$$inst
-> > +=20
-> > +diff --git a/man/Makefile.in b/man/Makefile.in
-> > +index 6008b20..64bb84c 100644
-> > +--- a/man/Makefile.in
-> > ++++ b/man/Makefile.in
-> > +@@ -274,7 +274,7 @@ install-data-local:
-> > + 	@sect=3D1;				\
-> > + 	inst=3D`echo "nana" | sed '$(transform)'`.1; \
-> > + 	echo installing nana.1 as $(mandir)/man$$sect/$$inst; \
-> > +-	$(INSTALL_DATA) $(srcdir)/nana.1 $(mandir)/man$$sect/$$inst
-> > ++	$(INSTALL_DATA) $(srcdir)/nana.1 $(DESTDIR)$(mandir)/man$$sect/$$inst
-> > +=20
-> > + # Tell versions [3.59,3.63) of GNU make to not export all variables.
-> > + # Otherwise a system limit (for SysV at least) may be exceeded.
-> > +--=20
-> > +1.8.4.2
-> > +
-> > diff --git a/meta-oe/recipes-extended/nana/nana/modify-acinclude.m4-and=
--configure.in.patch b/meta-oe/recipes-extended/nana/nana/modify-acinclude.m=
-4-and-configure.in.patch
-> > new file mode 100644
-> > index 0000000..b893622
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/nana/nana/modify-acinclude.m4-and-config=
-ure.in.patch
-> > @@ -0,0 +1,147 @@
-> > +From c55540b83a3833ad3b1500810056f628e5a190a5 Mon Sep 17 00:00:00 2001
-> > +From: Li xin <lixin.fnst@cn.fujitsu.com>
-> > +Date: Thu, 4 Dec 2014 03:55:07 +0900
-> > +Subject: [PATCH 2/2] modify acinclude.m4 and configure.in
-> > +
-> > +this patch is from Debian to fix build errors.
-> > +"acinclude.m4:34: error: automatic de-ANSI-fication
-> > +support has been removed"
-> > +
-> > +Upstream-Status: pending
-> > +
-> > +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> > +---
-> > + acinclude.m4 | 89 ---------------------------------------------------=
----------
-> > + configure.in | 12 ++++++++
-> > + 2 files changed, 12 insertions(+), 89 deletions(-)
-> > +
-> > +diff --git a/acinclude.m4 b/acinclude.m4
-> > +index e9e5500..c7c1ccb 100644
-> > +--- a/acinclude.m4
-> > ++++ b/acinclude.m4
-> > +@@ -20,92 +20,3 @@ else
-> > + fi
-> > + AC_SUBST($1)
-> > + ])
-> > +-#####
-> > +-# And the old macros from the automake distribution
-> > +-#
-> > +-#
-> > +-# Copyright (C) 1992, 1994, 1995 Free Software Foundation, Inc.
-> > +-# Fran=E7ois Pinard <pinard@iro.umontreal.ca>, 1992.
-> > +-
-> > +-## ------------------------------- ##
-> > +-## Check for function prototypes.  ##
-> > +-## ------------------------------- ##
-> > +-
-> > +-AC_DEFUN(fp_C_PROTOTYPES,
-> > +-[AC_REQUIRE([AM_PROG_CC_STDC])
-> > +-AC_MSG_CHECKING([for function prototypes])
-> > +-if test "$ac_cv_prog_cc_stdc" !=3D no; then
-> > +-  AC_MSG_RESULT(yes)
-> > +-  AC_DEFINE(PROTOTYPES)
-> > +-  U=3D ANSI2KNR=3D
-> > +-else
-> > +-  AC_MSG_RESULT(no)
-> > +-  U=3D_ ANSI2KNR=3D./ansi2knr
-> > +-fi
-> > +-AC_SUBST(U)dnl
-> > +-AC_SUBST(ANSI2KNR)dnl
-> > +-])
-> > +-
-> > +-## ----------------------------------------- ##
-> > +-## ANSIfy the C compiler whenever possible.  ##
-> > +-## ----------------------------------------- ##
-> > +-
-> > +-# @defmac AC_PROG_CC_STDC
-> > +-# @maindex PROG_CC_STDC
-> > +-# @ovindex CC
-> > +-# If the C compiler in not in ANSI C mode by default, try to add an o=
-ption
-> > +-# to output variable @code{CC} to make it so.  This macro tries vario=
-us
-> > +-# options that select ANSI C on some system or another.  It considers=
- the
-> > +-# compiler to be in ANSI C mode if it defines @code{__STDC__} to 1 and
-> > +-# handles function prototypes correctly.
-> > +-#
-> > +-# If you use this macro, you should check after calling it whether th=
-e C
-> > +-# compiler has been set to accept ANSI C; if not, the shell variable
-> > +-# @code{ac_cv_prog_cc_stdc} is set to @samp{no}.  If you wrote your s=
-ource
-> > +-# code in ANSI C, you can make an un-ANSIfied copy of it by using the
-> > +-# program @code{ansi2knr}, which comes with Ghostscript.
-> > +-# @end defmac
-> > +-
-> > +-AC_DEFUN(fp_PROG_CC_STDC,
-> > +-[AC_MSG_CHECKING(for ${CC-cc} option to accept ANSI C)
-> > +-AC_CACHE_VAL(ac_cv_prog_cc_stdc,
-> > +-[ac_cv_prog_cc_stdc=3Dno
-> > +-ac_save_CFLAGS=3D"$CFLAGS"
-> > +-# Don't try gcc -ansi; that turns off useful extensions and
-> > +-# breaks some systems' header files.
-> > +-# AIX			-qlanglvl=3Dansi
-> > +-# Ultrix and OSF/1	-std1
-> > +-# HP-UX			-Aa -D_HPUX_SOURCE
-> > +-# SVR4			-Xc
-> > +-for ac_arg in "" -qlanglvl=3Dansi -std1 "-Aa -D_HPUX_SOURCE" -Xc
-> > +-do
-> > +-  CFLAGS=3D"$ac_save_CFLAGS $ac_arg"
-> > +-  AC_TRY_COMPILE(
-> > +-[#if !defined(__STDC__) || __STDC__ !=3D 1
-> > +-choke me
-> > +-#endif
-> > +-], [int test (int i, double x);
-> > +-struct s1 {int (*f) (int a);};
-> > +-struct s2 {int (*f) (double a);};],
-> > +-[ac_cv_prog_cc_stdc=3D"$ac_arg"; break])
-> > +-done
-> > +-CFLAGS=3D"$ac_save_CFLAGS"
-> > +-])
-> > +-AC_MSG_RESULT($ac_cv_prog_cc_stdc)
-> > +-case "x$ac_cv_prog_cc_stdc" in
-> > +-  x|xno) ;;
-> > +-  *) CC=3D"$CC $ac_cv_prog_cc_stdc" ;;
-> > +-esac
-> > +-])
-> > +-
-> > +-## --------------------------------------------------------- ##
-> > +-## Use AC_PROG_INSTALL, supplementing it with INSTALL_SCRIPT ##
-> > +-## substitution.                                             ##
-> > +-## --------------------------------------------------------- ##
-> > +-
-> > +-AC_DEFUN(fp_PROG_INSTALL,
-> > +-[AC_PROG_INSTALL
-> > +-test -z "$INSTALL_SCRIPT" && INSTALL_SCRIPT=3D'${INSTALL} -m 755'
-> > +-AC_SUBST(INSTALL_SCRIPT)dnl
-> > +-])
-> > +-
-> > +diff --git a/configure.in b/configure.in
-> > +index 6b25ed5..a6a7f5b 100644
-> > +--- a/configure.in
-> > ++++ b/configure.in
-> > +@@ -103,6 +103,12 @@ nana_DEFINE(DI_MAKE_VALID_BREAKPOINT,(exprn),
-> > +   sparc-*-*|i?86-*-*)
-> > +     DI_MAKE_VALID_BREAKPOINT=3D'asm("nop")'
-> > +     ;;
-> > ++  arm*-*-*|frv-*-*|mips*-*-*)
-> > ++    DI_MAKE_VALID_BREAKPOINT=3D'asm("nop")'
-> > ++    ;;
-> > ++  sh*-*-*)
-> > ++    DI_MAKE_VALID_BREAKPOINT=3D'asm("nop\n\tnop\n\t")'
-> > ++    ;;
-> > +   esac
-> > + ])
-> > +=20
-> > +@@ -113,6 +119,12 @@ nana_DEFINE(DL_MAKE_VALID_BREAKPOINT,(),
-> > +   sparc-*-*|i?86-*-*)
-> > +     DL_MAKE_VALID_BREAKPOINT=3D'asm("nop")'
-> > +     ;;
-> > ++  arm*-*-*|frv-*-*|mips*-*-*)
-> > ++    DL_MAKE_VALID_BREAKPOINT=3D'asm("nop")'
-> > ++    ;;
-> > ++  sh*-*-*)
-> > ++    DL_MAKE_VALID_BREAKPOINT=3D'asm("nop\n\tnop\n\t")'
-> > ++    ;;
-> > +   esac
-> > + ])
-> > +=20
-> > +--=20
-> > +1.8.4.2
-> > +
-> > diff --git a/meta-oe/recipes-extended/nana/nana_2.5.bb b/meta-oe/recipe=
-s-extended/nana/nana_2.5.bb
-> > new file mode 100644
-> > index 0000000..1715820
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/nana/nana_2.5.bb
-> > @@ -0,0 +1,29 @@
-> > +SUMMARY =3D "Support for assertion checking and logging in GNU C/C++"
-> > +DESCRIPTION =3D "GNU Nana is a free library providing improved support=
- for assertion\
-> > +checking (as in assert.h) and logging (printf style debugging) in \
-> > +GNU C and C++."
-> > +SECTION =3D "Development/Languages/C and C++"
-> > +
-> > +SRC_URI =3D "http://download.savannah.gnu.org/releases/${PN}/${BP}.tar=
-=2Egz \
-> > +    file://change-mandir-to-DESTDIR.patch \
-> > +    file://modify-acinclude.m4-and-configure.in.patch"
-> > +SRC_URI[md5sum] =3D "66c88aa0ad095b2e67673773135475f1"
-> > +SRC_URI[sha256sum] =3D "fd1819ffea94b209513959447e4802afe2719600e7d161=
-cd78b265a42812affa"
-> > +
-> > +LICENSE =3D "BSD-2-Clause"
-> > +
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D16aa57f3b7fdda870cee597275b=
-d5d11"
-> > +
-> > +inherit autotools-brokensep pkgconfig
-> > +
-> > +EXTRA_OEMAKE =3D "DESTDIR=3D${D}"
-> > +
-> > +FILES_${PN} +=3D "/usr/share"
+On Thu, Dec 04, 2014 at 04:37:23PM -0500, Philip Balister wrote:
+> The configure.py script now has support for cross compiling. This
+> simplified the recipe substantially.
 >=20
-> This is datadir, what's installed there that normal rules aren't enough?
+> The recipe was tested with gnuradio-companion on the zedboard and
+> ettus-e300. This is the first time we have been able to use grc with
+> pyqt built with OpenEmbedded.
+>=20
+> Build tested on armv7, x86, x86_64 and mips.
+>=20
+> Dropped patches from previous versions.
 
-also fails to patch:
+Now it failed in qemuarm build already:
+| cd QtCore/ && make -f Makefile
+| make[1]: Entering directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wo=
+rk/armv5te-oe-linux-gnueabi/python-pyqt/4.11.3-r0/PyQt-x11-gpl-4.11.3/QtCor=
+e'
+| arm-oe-linux-gnueabi-g++  -march=3Darmv5te -marm -mthumb-interwork --sysr=
+oot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -c -pipe  =
+-O2 -pipe -g -feliminate-unused-debug-types -fvisibility-inlines-hidden -fn=
+o-exceptions -O2 -Wall -W -D_REENTRANT -fPIC -DSIP_PROTECTED_IS_PUBLIC -Dpr=
+otected=3Dpublic -DQT_NO_DEBUG -DQT_PLUGIN -DQT_CORE_LIB -DQT_SHARED -I/hom=
+e/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/share/qt4/mkspec=
+s/linux-g++ -I. -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuar=
+m/usr/include/qt4/QtCore -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroo=
+ts/qemuarm/usr/include/qt4 -I. -I/home/jenkins/oe/world/shr-core/tmp-glibc/=
+sysroots/qemuarm/usr/include/python2.7 -I../qpy/QtCore -I. -o qpycore_post_=
+init.o qpycore_post_init.cpp
+| In file included from ../qpy/QtCore/qpycore_sip.h:32:0,
+|                  from ../qpy/QtCore/qpycore_chimera.h:38,
+|                  from ../qpy/QtCore/qpycore_pyqtsignal.h:32,
+|                  from ../qpy/QtCore/qpycore_pyqtboundsignal.h:32,
+|                  from qpycore_post_init.cpp:31:
+| ./sipAPIQtCore.h:33:17: fatal error: sip.h: No such file or directory
+|  #include <sip.h>
+|                  ^
+| compilation terminated.
+| make[1]: *** [qpycore_post_init.o] Error 1
+| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/armv5te-oe-linux-gnueabi/python-pyqt/4.11.3-r0/PyQt-x11-gpl-4.11.3/QtCore'
+| make: *** [sub-QtCore-make_default-ordered] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
+oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/python-pyqt/4.11.=
+3-r0/temp/log.do_compile.23996)
+NOTE: recipe python-pyqt-4.11.3-r0: task do_compile: Failed
+ERROR: Task 20206 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
+e/recipes-devtools/python/python-pyqt_4.11.3.bb, do_compile) failed with ex=
+it code '1'
 
-ERROR: Command Error: exit status: 1  Output:
-Applying patch modify-acinclude.m4-and-configure.in.patch
-patching file acinclude.m4
-Hunk #1 FAILED at 20.
-1 out of 1 hunk FAILED -- rejects in file acinclude.m4
-patching file configure.in
-Patch modify-acinclude.m4-and-configure.in.patch does not apply (enforce wi=
-th -f)
-ERROR: Function failed: patch_do_patch
-ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
-ibc/work/armv5te-oe-linux-gnueabi/nana/2.5-r0/temp/log.do_patch.4212
-NOTE: recipe nana-2.5-r0: task do_patch: Failed
-ERROR: Task 14186 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
-e/recipes-extended/nana/nana_2.5.bb, do_patch) failed with exit code '1'
 
 >=20
-> > +
-> > +do_configure_prepend_virtclass-nativesdk() {
-> > +    sed -i -e 's:@CPP@:\$\{CXX\} \$\{CXXFLAGS\} \-E:g' ${S}/src/nana.in
-> > +    sed -i -e 's:@CC@:\$\{CC\} \$\{CFLAGS\} \-E:g' ${S}/src/nana-clg.in
-> > +    sed -i -e 's:@CXX@::g' ${S}/src/nana-c++lg.in
-> > +    sed -i -e 's:@GDB@:\$\{GDB\}:g' ${S}/src/nana-run.in
-> > +}
-> > +BBCLASSEXTEND =3D "native nativesdk"
-> > --=20
-> > 1.8.4.2
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>  .../python/python-pyqt-4.9.6/pyqt-generated.patch  |  12 -
+>  .../python-pyqt-4.9.6/qreal_float_support.diff     | 248 ---------------=
+------
+>  .../recipes-devtools/python/python-pyqt_4.11.3.bb  |  54 +++++
+>  .../recipes-devtools/python/python-pyqt_4.9.6.bb   | 103 ---------
+>  4 files changed, 54 insertions(+), 363 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyq=
+t-generated.patch
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qre=
+al_float_support.diff
+>  create mode 100644 meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+>  delete mode 100644 meta-oe/recipes-devtools/python/python-pyqt_4.9.6.bb
+>=20
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyqt-gener=
+ated.patch b/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyqt-generat=
+ed.patch
+> deleted file mode 100644
+> index 6579aa4..0000000
+> --- a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/pyqt-generated.pa=
+tch
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -diff -uNr PyQt-x11-gpl-4.9.5.orig/QtGui/sipQtGuiQSystemTrayIcon.cpp PyQt=
+-x11-gpl-4.9.5/QtGui/sipQtGuiQSystemTrayIcon.cpp
+> ---- PyQt-x11-gpl-4.9.5.orig/QtGui/sipQtGuiQSystemTrayIcon.cpp	2012-10-01=
+ 16:48:16.496700577 +0200
+> -+++ PyQt-x11-gpl-4.9.5/QtGui/sipQtGuiQSystemTrayIcon.cpp	2012-10-01 21:4=
+0:43.063130099 +0200
+> -@@ -993,8 +993,6 @@
+> -         qtgui_untrack(sipCpp);
+> - #line 995 "QtGui/sipQtGuiQSystemTrayIcon.cpp"
+> -=20
+> --    QSystemTrayIcon *sipCpp =3D reinterpret_cast<QSystemTrayIcon *>(sip=
+CppV);
+> --
+> -     if (QThread::currentThread() =3D=3D sipCpp->thread())
+> -         delete sipCpp;
+> -     else
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qreal_floa=
+t_support.diff b/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qreal_fl=
+oat_support.diff
+> deleted file mode 100644
+> index abdf70f..0000000
+> --- a/meta-oe/recipes-devtools/python/python-pyqt-4.9.6/qreal_float_suppo=
+rt.diff
+> +++ /dev/null
+> @@ -1,248 +0,0 @@
+> -## 03_qreal_float_support.dpatch by Michael Casadevall <sonicmctails@gma=
+il.com>
+> -Index: python-qt4-4.8.3/configure.py
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- python-qt4-4.8.3.orig/configure.py	2011-02-24 10:33:30.000000000 +02=
+00
+> -+++ python-qt4-4.8.3/configure.py	2011-02-24 10:33:18.000000000 +0200
+> -@@ -2004,8 +2004,9 @@
+> -     out << "PyQt_NoOpenGLES\\n";
+> - #endif
+> -=20
+> --    if (sizeof (qreal) !=3D sizeof (double))
+> -+#if defined(QT_NO_FPU) || defined(QT_ARCH_ARM) || defined(QT_ARCH_WINDO=
+WSCE)
+> -         out << "PyQt_qreal_double\\n";
+> -+#endif
+> -=20
+> -     return 0;
+> - }
+> -Index: python-qt4-4.8.3/sip/QtCore/qlist.sip
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- python-qt4-4.8.3.orig/sip/QtCore/qlist.sip	2011-02-24 10:33:27.00000=
+0000 +0200
+> -+++ python-qt4-4.8.3/sip/QtCore/qlist.sip	2011-02-24 10:33:18.000000000 =
++0200
+> -@@ -811,3 +811,227 @@
+> -     return sipGetState(sipTransferObj);
+> - %End
+> - };
+> -+
+> -+// If we're on an architecture where qreal !=3D double, then we need to=
+ also
+> -+// explicately handle doubles. On architectures where qreal =3D=3D doub=
+le, they
+> -+// will automaticially be cast upwards
+> -+
+> -+%If (!PyQt_qreal_double)
+> -+
+> -+%If (Qt_4_3_0 -)
+> -+// QList<QPair<double, double> > is implemented as a Python list of 2-e=
+lement tuples.
+> -+%MappedType QList<QPair<double, double> >
+> -+{
+> -+%TypeHeaderCode
+> -+#include <qlist.h>
+> -+#include <qpair.h>
+> -+%End
+> -+
+> -+%ConvertFromTypeCode
+> -+    // Create the list.
+> -+    PyObject *l;
+> -+
+> -+    if ((l =3D PyList_New(sipCpp->size())) =3D=3D NULL)
+> -+        return NULL;
+> -+
+> -+    // Set the list elements.
+> -+    for (int i =3D 0; i < sipCpp->size(); ++i)
+> -+    {
+> -+        const QPair<double, double> &p =3D sipCpp->at(i);
+> -+        PyObject *pobj;
+> -+
+> -+        if ((pobj =3D Py_BuildValue((char *)"dd", p.first, p.second)) =
+=3D=3D NULL)
+> -+        {
+> -+            Py_DECREF(l);
+> -+
+> -+            return NULL;
+> -+        }
+> -+
+> -+        PyList_SET_ITEM(l, i, pobj);
+> -+    }
+> -+
+> -+    return l;
+> -+%End
+> -+
+> -+%ConvertToTypeCode
+> -+    SIP_SSIZE_T len;
+> -+
+> -+    // Check the type if that is all that is required.
+> -+    if (sipIsErr =3D=3D NULL)
+> -+    {
+> -+        if (!PySequence_Check(sipPy) || (len =3D PySequence_Size(sipPy)=
+) < 0)
+> -+            return 0;
+> -+
+> -+        for (SIP_SSIZE_T i =3D 0; i < len; ++i)
+> -+        {
+> -+            PyObject *tup =3D PySequence_ITEM(sipPy, i);
+> -+
+> -+            if (!PySequence_Check(tup) || PySequence_Size(tup) !=3D 2)
+> -+                return 0;
+> -+        }
+> -+
+> -+        return 1;
+> -+    }
+> -+
+> -+    QList<QPair<double, double> > *ql =3D new QList<QPair<double, doubl=
+e> >;
+> -+    len =3D PySequence_Size(sipPy);
+> -+=20
+> -+    for (SIP_SSIZE_T i =3D 0; i < len; ++i)
+> -+    {
+> -+        PyObject *tup =3D PySequence_ITEM(sipPy, i);
+> -+
+> -+        double first =3D PyFloat_AsDouble(PySequence_ITEM(tup, 0));
+> -+        double second =3D PyFloat_AsDouble(PySequence_ITEM(tup, 1));
+> -+=20
+> -+        ql->append(QPair<double, double>(first, second));
+> -+    }
+> -+=20
+> -+    *sipCppPtr =3D ql;
+> -+=20
+> -+    return sipGetState(sipTransferObj);
+> -+%End
+> -+};
+> -+%End
+> -+%If (Qt_4_3_0 -)
+> -+// QList<QPair<double, TYPE> > is implemented as a Python list of 2-ele=
+ment tuples.
+> -+template<double, TYPE>
+> -+%MappedType QList<QPair<double, TYPE> >
+> -+{
+> -+%TypeHeaderCode
+> -+#include <qlist.h>
+> -+#include <qpair.h>
+> -+%End
+> -+
+> -+%ConvertFromTypeCode
+> -+    // Create the list.
+> -+    PyObject *l;
+> -+
+> -+    if ((l =3D PyList_New(sipCpp->size())) =3D=3D NULL)
+> -+        return NULL;
+> -+
+> -+    // Set the list elements.
+> -+    for (int i =3D 0; i < sipCpp->size(); ++i)
+> -+    {
+> -+        const QPair<double, TYPE> &p =3D sipCpp->at(i);
+> -+        TYPE *t =3D new TYPE(p.second);
+> -+        PyObject *pobj;
+> -+
+> -+        if ((pobj =3D sipBuildResult(NULL, "(dB)", p.first, t, sipClass=
+_TYPE, sipTransferObj)) =3D=3D NULL)
+> -+        {
+> -+            Py_DECREF(l);
+> -+            delete t;
+> -+
+> -+            return NULL;
+> -+        }
+> -+
+> -+        PyList_SET_ITEM(l, i, pobj);
+> -+    }
+> -+
+> -+    return l;
+> -+%End
+> -+
+> -+%ConvertToTypeCode
+> -+    SIP_SSIZE_T len;
+> -+
+> -+    // Check the type if that is all that is required.
+> -+    if (sipIsErr =3D=3D NULL)
+> -+    {
+> -+        if (!PySequence_Check(sipPy) || (len =3D PySequence_Size(sipPy)=
+) < 0)
+> -+            return 0;
+> -+
+> -+        for (SIP_SSIZE_T i =3D 0; i < len; ++i)
+> -+        {
+> -+            PyObject *tup =3D PySequence_ITEM(sipPy, i);
+> -+
+> -+            if (!PySequence_Check(tup) || PySequence_Size(tup) !=3D 2)
+> -+                return 0;
+> -+
+> -+            if (!sipCanConvertToInstance(PySequence_ITEM(tup, 1), sipCl=
+ass_TYPE, SIP_NOT_NONE))
+> -+                return 0;
+> -+        }
+> -+
+> -+        return 1;
+> -+    }
+> -+
+> -+    QList<QPair<double, TYPE> > *ql =3D new QList<QPair<double, TYPE> >;
+> -+    len =3D PySequence_Size(sipPy);
+> -+=20
+> -+    for (SIP_SSIZE_T i =3D 0; i < len; ++i)
+> -+    {
+> -+        PyObject *tup =3D PySequence_ITEM(sipPy, i);
+> -+        double d;
+> -+        int state;
+> -+
+> -+        d =3D PyFloat_AsDouble(PySequence_ITEM(tup, 0));
+> -+        TYPE *t =3D reinterpret_cast<TYPE *>(sipConvertToInstance(PySeq=
+uence_ITEM(tup, 1), sipClass_TYPE, sipTransferObj, SIP_NOT_NONE, &state, si=
+pIsErr));
+> -+=20
+> -+        if (*sipIsErr)
+> -+        {
+> -+            sipReleaseInstance(t, sipClass_TYPE, state);
+> -+
+> -+            delete ql;
+> -+            return 0;
+> -+        }
+> -+
+> -+        ql->append(QPair<double, TYPE>(d, *t));
+> -+
+> -+        sipReleaseInstance(t, sipClass_TYPE, state);
+> -+    }
+> -+=20
+> -+    *sipCppPtr =3D ql;
+> -+=20
+> -+    return sipGetState(sipTransferObj);
+> -+%End
+> -+};
+> -+%End
+> -+
+> -+// QList<double> is implemented as a Python list of doubles.
+> -+%MappedType QList<double>
+> -+{
+> -+%TypeHeaderCode
+> -+#include <qlist.h>
+> -+%End
+> -+
+> -+%ConvertFromTypeCode
+> -+    // Create the list.
+> -+    PyObject *l;
+> -+
+> -+    if ((l =3D PyList_New(sipCpp->size())) =3D=3D NULL)
+> -+        return NULL;
+> -+
+> -+    // Set the list elements.
+> -+    for (int i =3D 0; i < sipCpp->size(); ++i)
+> -+    {
+> -+        PyObject *pobj;
+> -+
+> -+        if ((pobj =3D PyFloat_FromDouble(sipCpp->value(i))) =3D=3D NULL)
+> -+        {
+> -+            Py_DECREF(l);
+> -+
+> -+            return NULL;
+> -+        }
+> -+
+> -+        PyList_SET_ITEM(l, i, pobj);
+> -+    }
+> -+
+> -+    return l;
+> -+%End
+> -+
+> -+%ConvertToTypeCode
+> -+    // Check the type if that is all that is required.
+> -+    if (sipIsErr =3D=3D NULL)
+> -+        return (PySequence_Check(sipPy) && PySequence_Size(sipPy) >=3D =
+0);
+> -+
+> -+    QList<double> *ql =3D new QList<double>;
+> -+    SIP_SSIZE_T len =3D PySequence_Size(sipPy);
+> -+=20
+> -+    for (SIP_SSIZE_T i =3D 0; i < len; ++i)
+> -+        ql->append(PyFloat_AsDouble(PySequence_ITEM(sipPy, i)));
+> -+=20
+> -+    *sipCppPtr =3D ql;
+> -+=20
+> -+    return sipGetState(sipTransferObj);
+> -+%End
+> -+};
+> -+
+> -+%End
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb b/meta=
+-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+> new file mode 100644
+> index 0000000..8d47068
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-pyqt_4.11.3.bb
+> @@ -0,0 +1,54 @@
+> +SUMMARY =3D "Python Qt4 Bindings"
+> +AUTHOR =3D "Phil Thomson @ riverbank.co.uk"
+> +HOMEPAGE =3D "http://riverbankcomputing.co.uk"
+> +SECTION =3D "devel/python"
+> +LICENSE =3D "GPLv2 & GPLv3 & GPL_EXCEPTION"
+> +LIC_FILES_CHKSUM =3D "\
+> +    file://GPL_EXCEPTION.TXT;md5=3Db73b0be471db679533dc94781c14af58 \
+> +    file://GPL_EXCEPTION_ADDENDUM.TXT;md5=3Dc1e04ec2aa0911061005a801abf8=
+1e40 \
+> +    file://OPENSOURCE-NOTICE.TXT;md5=3D6ad9123620cc04a22c394753ad4767d7 \
+> +    file://LICENSE.GPL2;md5=3D577ff65f6653562af318bfc3944b1f20 \
+> +    file://LICENSE.GPL3;md5=3Dfeee51612c3c1191a1d5f41156fa2c75 \
+> +"
+> +DEPENDS =3D "sip sip-native qt4-x11-free"
+> +
+> +SRC_URI =3D "\
+> +    ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
+> +"
+> +SRC_URI[md5sum] =3D "997c3e443165a89a559e0d96b061bf70"
+> +SRC_URI[sha256sum] =3D "853780dcdbe2e6ba785d703d059b096e1fc49369d3e8d41a=
+060be874b8745686"
+> +
+> +S =3D "${WORKDIR}/PyQt-x11-gpl-${PV}"
+> +
+> +PARALLEL_MAKE =3D ""
+> +
+> +inherit qmake2 pythonnative python-dir
+> +
+> +DISABLED_FEATURES =3D "PyQt_Desktop_OpenGL PyQt_Accessibility PyQt_Sessi=
+onManager"
+> +
+> +DISABLED_FEATURES_append_arm =3D " PyQt_qreal_double"
+> +
+> +do_configure() {
+> +    echo "py_platform =3D linux" > pyqt.cfg
+> +    echo "py_inc_dir =3D %(sysroot)/$includedir/python%(py_major).%(py_m=
+inor)" >> pyqt.cfg
+> +    echo "py_pylib_dir =3D %(sysroot)/${libdir}/python%(py_major).%(py_m=
+inor)" >> pyqt.cfg
+> +    echo "py_pylib_lib =3D python%(py_major).%(py_minor)mu" >> pyqt.cfg
+> +    echo "pyqt_module_dir =3D ${D}/${libdir}/python%(py_major).%(py_mino=
+r)/site-packages" >> pyqt.cfg
+> +    echo "pyqt_bin_dir =3D ${D}/${bindir}" >> pyqt.cfg
+> +    echo "pyqt_sip_dir =3D ${D}/${datadir}/sip/PyQt4" >> pyqt.cfg
+> +    echo "pyuic_interpreter =3D ${D}/${bindir}/python%(py_major).%(py_mi=
+nor)" >> pyqt.cfg
+> +    echo "pyqt_disabled_features =3D ${DISABLED_FEATURES}" >> pyqt.cfg
+> +    echo "qt_shared =3D True" >> pyqt.cfg
+> +    echo "[Qt 4.8]" >> pyqt.cfg
+> +    echo "pyqt_modules =3D QtCore QtGui QtDeclarative QtNetwork QtSvg Qt=
+WebKit" >> pyqt.cfg
+> +    echo yes | python configure-ng.py --verbose --qmake  ${STAGING_BINDI=
+R_NATIVE}/qmake2 --configuration pyqt.cfg --sysroot ${STAGING_DIR_HOST}
+> +}
+> +do_install() {
+> +     oe_runmake install
+> +}
+> +
+> +RDEPENDS_${PN} =3D "python-core"
+> +
+> +FILES_${PN} +=3D "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/P=
+yQt4/"
+> +FILES_${PN}-dbg +=3D "${libdir}/${PYTHON_DIR}/site-packages/*/.debug/"
+> +
+> diff --git a/meta-oe/recipes-devtools/python/python-pyqt_4.9.6.bb b/meta-=
+oe/recipes-devtools/python/python-pyqt_4.9.6.bb
+> deleted file mode 100644
+> index 2f0e189..0000000
+> --- a/meta-oe/recipes-devtools/python/python-pyqt_4.9.6.bb
+> +++ /dev/null
+> @@ -1,103 +0,0 @@
+> -SUMMARY =3D "Python Qt4 Bindings"
+> -HOMEPAGE =3D "http://riverbankcomputing.co.uk"
+> -AUTHOR =3D "Phil Thomson @ riverbank.co.uk"
+> -SECTION =3D "devel/python"
+> -LICENSE =3D "GPLv2 & GPLv3 & GPL_EXCEPTION"
+> -LIC_FILES_CHKSUM =3D "\
+> -    file://GPL_EXCEPTION.TXT;md5=3Db73b0be471db679533dc94781c14af58 \
+> -    file://GPL_EXCEPTION_ADDENDUM.TXT;md5=3Dc1e04ec2aa0911061005a801abf8=
+1e40 \
+> -    file://OPENSOURCE-NOTICE.TXT;md5=3D6ad9123620cc04a22c394753ad4767d7 \
+> -    file://LICENSE.GPL2;md5=3D276c6b9cad5f85a3af3534299825feff \
+> -    file://LICENSE.GPL3;md5=3Deda942b9c6ba7eb0f40fee79e94950d5 \
+> -"
+> -
+> -DEPENDS =3D "sip-native python-sip"
+> -RDEPENDS_${PN} =3D "python-core"
+> -
+> -PYQT_OE_VERSION =3D "Qt_4_8_3"
+> -PR =3D "r1"
+> -
+> -SRC_URI =3D "\
+> -    ${SOURCEFORGE_MIRROR}/pyqt/PyQt-x11-gpl-${PV}.tar.gz \
+> -    file://pyqt-generated.patch;apply=3Dno \
+> -"
+> -SRC_URI[md5sum] =3D "514e1f9597771dc732ba75ba9fa5c6b6"
+> -SRC_URI[sha256sum] =3D "a350f9e5c6d8062671c0f29bf1a70824719b18175ce8372c=
+29bf7c1eda44b18d"
+> -S =3D "${WORKDIR}/PyQt-x11-gpl-${PV}"
+> -
+> -# arm and mips machines need some extra patches
+> -SRC_URI_append_arm =3D "\
+> -    file://qreal_float_support.diff \
+> -"
+> -
+> -SRC_URI_append_mipsel =3D "\
+> -    file://qreal_float_support.diff \
+> -"
+> -
+> -inherit qt4x11 sip distutils-base
+> -
+> -PARALLEL_MAKE =3D ""
+> -
+> -QMAKE_PROFILES =3D "pyqt.pro"
+> -# NOTE: has to match with MIN(qt version we have in OE, last known Qt ve=
+rsion by SIP/PyQt)
+> -EXTRA_SIPTAGS =3D "-tWS_X11 -t${PYQT_OE_VERSION} -xVendorID -xPyQt_Sessi=
+onManager -xPyQt_Accessibility"
+> -EXTRA_OEMAKE =3D " MAKEFLAGS=3D "
+> -
+> -# arm and mips need extra params for the qreal issue
+> -EXTRA_SIPTAGS_append_arm =3D " -x PyQt_qreal_double"
+> -EXTRA_SIPTAGS_append_mipsel =3D " -x PyQt_qreal_double"=20
+> -
+> -SIP_MODULES =3D "QtCore QtDeclarative QtGui QtNetwork QtSql QtSvg QtXml =
+QtWebKit"
+> -MAKE_MODULES =3D "qpy ${SIP_MODULES}"
+> -
+> -EXTRA_QMAKEVARS_POST +=3D "\
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/Qt \
+> -    INCLUDEPATH+=3D${STAGING_INCDIR}/${PYTHON_DIR} \
+> -    INCLUDEPATH+=3D../qpy/QtCore \
+> -    INCLUDEPATH+=3D../qpy/QtGui \
+> -    INCLUDEPATH+=3D../qpy/QtDeclarative \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtCore \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtGui \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtDeclarative \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtWebKit \
+> -    INCLUDEPATH+=3D${OE_QMAKE_INCDIR_QT}/QtNetwork \
+> -"
+> -FIX_QREAL =3D "\
+> -"
+> -
+> -do_generate_prepend() {
+> -    for i in ${FIX_QREAL}; do
+> -        sed -i -e s,qreal,float,g sip/$i
+> -    done
+> -}
+> -
+> -do_configure_prepend() {
+> -    printf "TEMPLATE=3Dsubdirs\nSUBDIRS=3D${MAKE_MODULES}\n" >pyqt.pro
+> -    printf "TEMPLATE=3Dsubdirs\nSUBDIRS=3DQtCore QtDeclarative QtGui\n" =
+>qpy/qpy.pro
+> -    ln -sf ./qpycore.pro qpy/QtCore/QtCore.pro
+> -    ln -sf ./qpydeclarative.pro qpy/QtDeclarative/QtDeclarative.pro
+> -    ln -sf ./qpygui.pro qpy/QtGui/QtGui.pro
+> -    echo "INCLUDEPATH+=3D${S}/QtCore" >>qpy/QtCore/QtCore.pro
+> -    echo "INCLUDEPATH+=3D${S}/QtGui" >>qpy/QtGui/QtGui.pro
+> -    echo "INCLUDEPATH+=3D${S}/QtDeclarative" >>qpy/QtDeclarative/QtDecla=
+rative.pro
+> -    echo "LIBS+=3D-L../qpy/QtGui/ -lqpygui" >>QtGui/QtGui.pro
+> -    echo "LIBS+=3D-L../qpy/QtCore/ -lqpycore" >>QtCore/QtCore.pro
+> -    echo "LIBS+=3D-L../qpy/QtDeclarative/ -lqpydeclarative" >>QtDeclarat=
+ive/QtDeclarative.pro
+> -    # hack for broken generated code (duplicated sipCpp declaration).
+> -    patch -p1 < ${WORKDIR}/pyqt-generated.patch || echo "pyqt-generated.=
+patch failed to apply, probably reexecuting do_configure, ignoring that"
+> -}
+> -
+> -do_install() {
+> -    install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4
+> -    install -d ${D}${datadir}/sip/qt/
+> -    for module in ${SIP_MODULES}
+> -    do
+> -        install -m 0644 ${S}/sip/${module}/*.sip ${D}${datadir}/sip/qt/
+> -        echo "from PyQt4.${module} import *\n" >> ${D}${libdir}/${PYTHON=
+_DIR}/site-packages/PyQt4/Qt.py
+> -        install -m 0755 ${module}/lib${module}.so ${D}${libdir}/${PYTHON=
+_DIR}/site-packages/PyQt4/${module}.so
+> -    done
+> -    cp -pPR elementtree ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
+> -    cp __init__.py ${D}${libdir}/${PYTHON_DIR}/site-packages/PyQt4/
+> -}
+> -
+> -FILES_${PN} =3D "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/qt=
+/"
+> --=20
+> 1.8.3.1
 >=20
 > --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---BouVgDkIlpb7X6Bk
+--gV1yUYniiDLxW66s
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlSHNtwACgkQN1Ujt2V2gBzpRACgkR1V+pRxK5LrTEM0itefrlM0
-AqcAn1AbbVuaHwf1NSQ6LEfIDXUuCgB5
-=nHdN
+iEYEARECAAYFAlSHNxoACgkQN1Ujt2V2gBzZ6gCgi0lHk5zjcKnz6Bxsrk77xRUX
+BrkAoKIziYx724sJoyw/nR1LnYf2LesS
+=4ewN
 -----END PGP SIGNATURE-----
 
---BouVgDkIlpb7X6Bk--
+--gV1yUYniiDLxW66s--
