@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 28EBC724E2
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id F3F1671F23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Dec 2014 10:24:33 +0000 (UTC)
-Received: by mail-wg0-f42.google.com with SMTP id z12so400339wgg.15
+	Tue,  9 Dec 2014 10:25:27 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id x13so403400wgg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Dec 2014 02:24:34 -0800 (PST)
+	Tue, 09 Dec 2014 02:25:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=GDT3UO7NNjBFXOyzFCGTWRhMzQO8lME+u8spsg1EZf0=;
-	b=iBMpm4nAy+oqZYrqWOSDslfQSWXUV7pe9pPwJcl6Ook+dYcAtJgxEaaz3IedK9jrlC
-	4iGTHq7JfIVWPBxK7NytXBo64JUoB4lRyKkbdX64SWpzBRH6X7+1AvX0qgHPjNkMVcGi
-	BejptVZ33+QoUzuQuBAis7mpUvFS+BiZwUh0PYXkj6I0nPVz9DxPlNko5p3ZY18i9Fiy
-	my5shmDUsCbFx1ahi8w9gOt1zlXJfgEzBWLAeHALNctCRrVLcUlV3FVSgnnCdaGZIeva
-	+5pfPFBslqfvwV69S6xEVAMBsBdgpYZohd1aHBjDpWEbdhrJjlTJ0Helv5dZW6TjtCpe
-	g6OQ==
-X-Received: by 10.194.156.138 with SMTP id we10mr3773283wjb.72.1418120673873; 
-	Tue, 09 Dec 2014 02:24:33 -0800 (PST)
+	bh=F6MLYGEchjFLgTZMHA5kuiad3C4MhOF0POV+ifgm2Q0=;
+	b=xeUMUFZ5UbG1HEppFdg6EkLb/3PH4woqQnKbu64cOlm8R46cfdEnaRqEInfNdo+aVP
+	ZsRjc028g8W6tLoWgyfsyqb+ww/6W2I+Zpq1CK4qaVSjNWB1eouCQK7LqnimxtR00P70
+	v9gB9SKEGH0oTeBfWYP9M3R5c7VhBH0WeGLnyDzG/q59Q1VjxDQYGHqGNh/dvFxC8AuJ
+	v14B140SiJYayuD9Fs/8bi/P87pqp7SQ8G3KFRKtnBKHhJNY5S0i85lG2jceRdh4CMw5
+	Qd1V1d2TMVR7LuVtpMfN6isE1hTziStH41Gebig37ww4wGhr52gtI9bhvRt7tUaHRUiT
+	rXRQ==
+X-Received: by 10.194.85.197 with SMTP id j5mr3568682wjz.106.1418120727999;
+	Tue, 09 Dec 2014 02:25:27 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ef1sm13235079wic.0.2014.12.09.02.24.33
+	jp3sm13222198wid.9.2014.12.09.02.25.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Dec 2014 02:24:33 -0800 (PST)
+	Tue, 09 Dec 2014 02:25:24 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 9 Dec 2014 11:24:34 +0100
+Date: Tue, 9 Dec 2014 11:25:25 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141209102434.GE2470@jama>
-References: <1417486264-1878-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Message-ID: <20141209102525.GF2470@jama>
+References: <1417596619-28605-1-git-send-email-sven.ebenfeld@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1417486264-1878-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <1417596619-28605-1-git-send-email-sven.ebenfeld@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] pkcs11-helper : add new recipe
+Subject: Re: [meta-networking][PATCH] stunnel: Update to Version 5.07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,79 +47,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2014 10:24:34 -0000
-X-Groupsio-MsgNum: 53232
+X-List-Received-Date: Tue, 09 Dec 2014 10:25:37 -0000
+X-Groupsio-MsgNum: 53233
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ytoMbUMiTKPMT3hY"
+	protocol="application/pgp-signature"; boundary="WlEyl6ow+jlIgNUh"
 Content-Disposition: inline
 
---ytoMbUMiTKPMT3hY
+--WlEyl6ow+jlIgNUh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 02, 2014 at 10:11:04AM +0800, Li xin wrote:
-> PKCS#11 is a published standard. PKCS#11 is the de-facto standard
-> to access cryptographic devices.
-> pkcs11-helper is a library that simplifies the interaction with
-> PKCS#11 providers for end-user applications using a simple API
-> and optional OpenSSL engine.
-
-Fails to configure, check the logs from last world build.
-
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+On Wed, Dec 03, 2014 at 09:50:19AM +0100, Sven Ebenfeld wrote:
+> Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 > ---
->  .../pkcs11-helper/pkcs11-helper_1.11.bb            | 28 ++++++++++++++++=
-++++++
->  1 file changed, 28 insertions(+)
->  create mode 100644 meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1=
-=2E11.bb
+>  meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 17 -----------=
+------
+>  meta-networking/recipes-support/stunnel/stunnel_5.07.bb | 15 +++++++++++=
+++++
+>  2 files changed, 15 insertions(+), 17 deletions(-)
+>  delete mode 100644 meta-networking/recipes-support/stunnel/stunnel_4.56.=
+bb
+>  create mode 100644 meta-networking/recipes-support/stunnel/stunnel_5.07.=
+bb
+
+Causes new QA warnings:
+
+stunnel-5.07: stunnel rdepends on liblzma, but it isn't a build
+dependency? [build-deps]
+stunnel-5.07: stunnel rdepends on libsystemd, but it isn't a build
+dependency? [build-deps]
+
 >=20
-> diff --git a/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb =
-b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
+> diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/me=
+ta-networking/recipes-support/stunnel/stunnel_4.56.bb
+> deleted file mode 100644
+> index 74f2234..0000000
+> --- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
+> +++ /dev/null
+> @@ -1,17 +0,0 @@
+> -SUMMARY =3D "Program for providing universal TLS/SSL tunneling service"
+> -DESCRIPTION =3D "SSL encryption wrapper between remote client and local =
+(inetd-startable) or remote server."
+> -SECTION =3D "net"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df41ebed8571077706fee0b860c4d6=
+666"
+> -DEPENDS =3D "openssl zlib tcp-wrappers"
+> -
+> -RDEPENDS_${PN} +=3D "perl"
+> -
+> -SRC_URI =3D "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz"
+> -
+> -SRC_URI[md5sum] =3D "ac4c4a30bd7a55b6687cbd62d864054c"
+> -SRC_URI[sha256sum] =3D "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec=
+8d2778a01c871293"
+> -
+> -inherit autotools
+> -
+> -EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_EXECPREFIXDIR}' --disable-fip=
+s"
+> diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.07.bb b/me=
+ta-networking/recipes-support/stunnel/stunnel_5.07.bb
 > new file mode 100644
-> index 0000000..9d08d25
+> index 0000000..bf47aef
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY =3D "A library for using PKCS"
-> +DESCRIPTION =3D "pkcs11-helper is a library that simplifies the interact=
-ion with PKCS \
-> +providers for end-user applications using a simple API and optional Open=
-SSL \
-> +engine. The library allows using multiple PKCS enumerating available tok=
-en \
-> +certificates, or selecting a certificate directly by serialized id, hand=
-ling \
-> +card removal and card insert events, handling card ie-insert to a differ=
-ent \
-> +slot, supporting session expiration and much more all using a simple API=
-=2E"
+> +++ b/meta-networking/recipes-support/stunnel/stunnel_5.07.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY =3D "SSL encryption wrapper between remote client and local (ine=
+td-startable) or remote server."
+> +SECTION =3D "net"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D45e8e7befe9a0f7e0543b78dfeebd=
+e20"
 > +
-> +HOMEPAGE =3D "git://github.com/OpenSC/pkcs11-helper.git"
-> +SECTION =3D "Development/Libraries"
+> +DEPENDS =3D "openssl"
+> +SRC_URI =3D "https://www.stunnel.org/downloads/${BP}.tar.gz"
 > +
-> +LICENSE =3D "GPLv2 BSD"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4948810631bcac142af53d32df5b6=
-ee1 \
-> +    file://COPYING.GPL;md5=3D8a71d0475d08eee76d8b6d0c6dbec543 \
-> +    file://COPYING.BSD;md5=3Df79f90ea7a106796af80b5d05f1f8da1"
+> +SRC_URI[md5sum] =3D "c10edd84ecbc676a5a48c7e34ab3d1c5"
+> +SRC_URI[sha256sum] =3D "505c6c63c4a20fc0cce8c35ef1ab7626c7b01071e3fca4ac=
+6ea417afe8065309"
 > +
-> +SRC_URI =3D "git://github.com/OpenSC/pkcs11-helper.git"
-> +SRC_URI[md5sum] =3D "9f62af9f475901b89355266141306673"
-> +SRC_URI[sha256sum] =3D "494ec59c93e7c56c528f335d9353849e2e7c94a6b1b41c89=
-604694e738113386"
 > +
-> +S =3D "${WORKDIR}/git"
-> +SRCREV =3D "e7adf8f35be232a4f04c53b4ac409be52792093e"
+> +inherit autotools
 > +
-> +DEPENDS =3D "zlib nettle gnutls gmp openssl"
-> +
-> +inherit autotools pkgconfig
-> +
-> +EXTRA_OECONF =3D " --disable-static --enable-doc "
+> +EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_INCDIR}' --disable-fips"
 > --=20
-> 1.8.4.2
+> 1.8.1.rc3
 >=20
 > --=20
 > _______________________________________________
@@ -130,16 +144,16 @@ ee1 \
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ytoMbUMiTKPMT3hY
+--WlEyl6ow+jlIgNUh
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlSGzeIACgkQN1Ujt2V2gBxRbwCePLKXwdnsTxVih1I8HjbDcjMz
-a5YAn1T4B7C82YkQtL5kQ1oWPFOGnVvv
-=0uzI
+iEYEARECAAYFAlSGzhUACgkQN1Ujt2V2gBwGgwCaAoFOohwx4m2YxZslPuwkKNW7
+SjoAoKeLLlsmiNlgvlg7cfqqNVhSUzH1
+=U4xf
 -----END PGP SIGNATURE-----
 
---ytoMbUMiTKPMT3hY--
+--WlEyl6ow+jlIgNUh--
