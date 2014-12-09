@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 206A86017E
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 53A2A71016
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Dec 2014 10:17:08 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id a1so362827wgh.37
+	Tue,  9 Dec 2014 10:18:37 +0000 (UTC)
+Received: by mail-wi0-f180.google.com with SMTP id n3so1146409wiv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Dec 2014 02:17:08 -0800 (PST)
+	Tue, 09 Dec 2014 02:18:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=s4sKwMrZ0mnDHsLmACyeehiu9t/BOtvvlChYXPa0Pko=;
-	b=Yosk5P7KVEQljgckXf5LCYDgWuIFTmNxLaOXBCzghxWJp6hXxVG8lt9JX0CqH0GPft
-	bmvp2Y4GvJzVG3zRTz26pacFkX3B/Qmc2hxs4uMFPazLO4eZpb0/kwm2ibsT5n7Xfyp4
-	YP+pcobymR6LQnn5ObYVAdtonBs3MSbCLpWfzZSfCnRqPfqzI0k5P954px0NZ5pOyPa8
-	sitDICq9UStYyFcsjYtNfRcIr5yGFaZN3s5DdIuRrCdWvteodCV7pYayV8zgSSvs71Ch
-	JPTi7mqrAA8llipeR1DJJOR0a/TcAI9F2tZvOwBVXy7A8MOhRImuQ90c6bkYh3Zl6ZSM
-	nOvA==
-X-Received: by 10.180.76.231 with SMTP id n7mr2979666wiw.80.1418120228646;
-	Tue, 09 Dec 2014 02:17:08 -0800 (PST)
+	bh=IxAouKJWOOfrd/pHlIM9x5USC/HZkzv6l2fLNfMTBGI=;
+	b=w3lxCrBxSzNIuRVkHUU4kMMj/2pl5wkyRf6LiIM3Z8VHWmO2ftwWp8ez5dxHdsD/9f
+	aIyGUHc61YnCdRY1w6KVJWMTxtFf3WWEJp3VCCygaR0hXJy9+glNCa471rS9mEtOrvq8
+	Qhzeb/N9Gu/pdLgpbos0NrBJ3F5IHcum9sQDHmqyGsBv/rn3hNkl0WdX8HjjeOj5GM/X
+	/HZ+HQDEM2TAHcjFBPtCxoIKZhjg8VS2tbgmlnRAxfDqOj/rP6l1uZ9dRXNLxH/feSc8
+	jfXdPImI8c/auZ3cU5l1K8jagOPkqtfERVEhiJ2zn6ZahwH/aR2YSfG/avKkdt8zFcaS
+	w+rQ==
+X-Received: by 10.180.90.206 with SMTP id by14mr3002122wib.67.1418120317684;
+	Tue, 09 Dec 2014 02:18:37 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	gi5sm1102356wjd.26.2014.12.09.02.17.07
+	gl11sm1090411wjc.40.2014.12.09.02.18.36
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 Dec 2014 02:17:07 -0800 (PST)
+	Tue, 09 Dec 2014 02:18:36 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 9 Dec 2014 11:17:08 +0100
+Date: Tue, 9 Dec 2014 11:18:37 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141209101708.GB2470@jama>
-References: <1417164585-46087-1-git-send-email-biannm@cn.fujitsu.com>
-	<1417164585-46087-4-git-send-email-biannm@cn.fujitsu.com>
+Message-ID: <20141209101837.GC2470@jama>
+References: <1417425246-30891-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1417164585-46087-4-git-send-email-biannm@cn.fujitsu.com>
+In-Reply-To: <1417425246-30891-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 3/3] [meta-oe] drbd: add recipe
+Subject: Re: [meta-oe][PATCH] logwatch: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,130 +48,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Dec 2014 10:17:10 -0000
-X-Groupsio-MsgNum: 53229
+X-List-Received-Date: Tue, 09 Dec 2014 10:18:40 -0000
+X-Groupsio-MsgNum: 53230
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MfFXiAuoTsnnDAfZ"
+	protocol="application/pgp-signature"; boundary="kfjH4zxOES6UT95V"
 Content-Disposition: inline
 
---MfFXiAuoTsnnDAfZ
+--kfjH4zxOES6UT95V
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 28, 2014 at 04:49:45PM +0800, Bian Naimeng wrote:
-> DRBD is a block device which is designed to build high availability clust=
-ers.
+On Mon, Dec 01, 2014 at 05:14:06PM +0800, Qian Lei wrote:
+> Logwatch is a customizable, pluggable log-monitoring system. It will go
+> through your logs for a given period of time and make a report in the are=
+as
+> that you wish with the detail that you wish. Easy to use - works right ou=
+t of
+> the package on many systems.
+
+Causes new QA warning:
+
+logwatch-7.4.1: logwatch requires /usr/bin/perl, but no providers in its
+RDEPENDS [file-rdeps]
+
 >=20
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
 > ---
->  meta-oe/recipes-extended/drbd/drbd_8.4.4.bb      | 57 ++++++++++++++++++=
+>  .../recipes-extended/logwatch/logwatch_7.4.1.bb    | 57 ++++++++++++++++=
 ++++++
->  meta-oe/recipes-extended/drbd/files/drbd.service | 12 +++++
->  2 files changed, 69 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/drbd/drbd_8.4.4.bb
->  create mode 100644 meta-oe/recipes-extended/drbd/files/drbd.service
-
-Causes 2 new QA warnings:
-
-drbd-8.4.4: drbd requires /bin/bash, /usr/bin/perl, but no providers in
-its RDEPENDS [file-rdeps]
-drbd-8.4.4: drbd requires /usr/bin/perl, /bin/bash, but no providers in
-its RDEPENDS [file-rdeps]
-
+>  1 file changed, 57 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/drbd/drbd_8.4.4.bb b/meta-oe/recipe=
-s-extended/drbd/drbd_8.4.4.bb
+> diff --git a/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb b/meta-o=
+e/recipes-extended/logwatch/logwatch_7.4.1.bb
 > new file mode 100644
-> index 0000000..5439bac
+> index 0000000..ee35efe
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/drbd/drbd_8.4.4.bb
+> +++ b/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
 > @@ -0,0 +1,57 @@
-> +SUMMARY =3D "BD driver for Linux"
-> +DESCRIPTION =3D "DRBD mirrors a block device over the network to another=
- machine.\
-> +DRBD mirrors a block device over the network to another machine.\
-> +Think of it as networked raid 1. It is a building block for\
-> +setting up high availability (HA) clusters."
+> +SUMMARY =3D "A log file analysis program"
+> +DESCRIPTION =3D "\
+> +Logwatch is a customizable, pluggable log-monitoring system. It will go \
+> +through your logs for a given period of time and make a report in the ar=
+eas \
+> +that you wish with the detail that you wish. Easy to use - works right o=
+ut of \
+> +the package on many systems.\
+> +"
+> +SECTION =3D "devel"
+> +HOMEPAGE =3D "http://www.logwatch.org/"
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df2566bb12b16d2d80d90ebc533261=
+aa7"
 > +
-> +HOMEPAGE =3D "http://www.drbd.org/"
+> +SRC_URI =3D "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.=
+tar.gz"
+> +SRC_URI[md5sum] =3D "a0c3d8721f877bdcd4a9089eb1b4691b"
+> +SRC_URI[sha256sum] =3D "35ec31f9fe981aaa727b144ab3ff2eb655997d8ccabaf665=
+86458f5dfc3a56eb"
 > +
-> +SECTION =3D "kernel/userland"
+> +do_install() {
+> +    install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
+> +    install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/logfiles
+> +    install -m 0755 -d ${D}${datadir}/logwatch/dist.conf/services
+> +    install -m 0755 -d ${D}${localstatedir}/cache/logwatch
+> +    mv conf/ ${D}${datadir}/logwatch/default.conf
+> +    mv scripts/ ${D}${datadir}/logwatch/scripts
+> +    mv lib ${D}${datadir}/logwatch/lib
 > +
-> +LICENSE =3D "GPLv2+"
+> +    install -m 0755 -d ${D}${mandir}/man1
+> +    install -m 0755 -d ${D}${mandir}/man5
+> +    install -m 0755 -d ${D}${mandir}/man8
+> +    install -m 0644 amavis-logwatch.1 ${D}${mandir}/man1
+> +    install -m 0644 postfix-logwatch.1 ${D}${mandir}/man1
+> +    install -m 0644 ignore.conf.5 ${D}${mandir}/man5
+> +    install -m 0644 override.conf.5 ${D}${mandir}/man5
+> +    install -m 0644 logwatch.conf.5 ${D}${mandir}/man5
+> +    install -m 0644 logwatch.8 ${D}${mandir}/man8
 > +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5574c6965ae5f583e55880e397fbb=
-018"
-> +
-> +PR =3D "r0"
-> +#PR =3D "r1001"
-> +
-> +SRC_URI =3D "http://oss.linbit.com/${BPN}/8.4/${BPN}-${PV}.tar.gz \
-> +           file://drbd.service \
-> +          "
-> +
-> +#SRC_URI[md5sum] =3D "ef4e6db51cda1898c597a3d61fcb9e1e"
-> +#SRC_URI[sha256sum] =3D "7c1558459614fbdc1b3209f1b9e5767a443d9bdfe681a49=
-c652b5f392799d58d"
-> +
-> +SRC_URI[md5sum] =3D "b51815343c1a9151e2936b3b97520388"
-> +SRC_URI[sha256sum] =3D "a056219c5c23b079c3354179f7a1b9f55d47e573a4cd3178=
-f2ef4c15604288f0"
-> +
-> +inherit autotools-brokensep systemd
-> +
-> +EXTRA_OECONF =3D "--with-utils                  \
-> +                --without-km                  \
-> +                --with-initdir=3D/etc/init.d    \
-> +                --without-pacemaker           \
-> +                --without-rgmanager           \
-> +                --without-bashcompletion      \
-> +                --with-distro debian          \
-> +               "
-> +
-> +do_configure (){
-> +    oe_runconf
-> +}
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "drbd.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
-> +
-> +do_install_append() {
-> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
-then
-> +        install -d ${D}/${systemd_unitdir}/system
-> +        install -m 644 ${WORKDIR}/drbd.service ${D}/${systemd_unitdir}/s=
-ystem
-> +        install -d ${D}/${libexecdir}
-> +        install -m 755 ${D}/etc/init.d/drbd ${D}/${libexecdir}/drbd-help=
-er
+> +    install -m 0755 -d ${D}${sysconfdir}/cron.daily
+> +    install -m 0755 -d ${D}${sbindir}
+> +    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sysconfdir=
+}/cron.daily/0logwatch
+> +    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/l=
+ogwatch
+> +    cat > ${D}${sysconfdir}/cron.daily/0logwatch <<EOF
+> +    DailyReport=3D\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=3D[[:s=
+pace:]]*" /usr/share/logwatch/default.conf/logwatch.conf | head -n1 | sed -=
+e "s|^\s*DailyReport\s*=3D\s*||"\`
+> +    if [ "\$DailyReport" !=3D "No" ] && [ "\$DailyReport" !=3D "no" ]
+> +    then
+> +            logwatch
 > +    fi
+> +EOF
+> +    chmod 755 ${D}${sysconfdir}/cron.daily/0logwatch
+> +
+> +    install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/logfiles
+> +    install -m 0755 -d ${D}${sysconfdir}/logwatch/conf/services
+> +    touch ${D}${sysconfdir}/logwatch/conf/logwatch.conf
+> +    touch ${D}${sysconfdir}/logwatch/conf/ignore.conf
+> +    touch ${D}${sysconfdir}/logwatch/conf/override.conf
+> +    echo "# Local configuration options go here (defaults are in /usr/sh=
+are/logwatch/default.conf/logwatch.conf)" > ${D}${sysconfdir}/logwatch/conf=
+/logwatch.conf
+> +    echo "###### REGULAR EXPRESSIONS IN THIS FILE WILL BE TRIMMED FROM R=
+EPORT OUTPUT #####" > ${D}${sysconfdir}/logwatch/conf/ignore.conf
+> +    echo "# Configuration overrides for specific logfiles/services may b=
+e placed here." > ${D}${sysconfdir}/logwatch/conf/override.conf
 > +}
-> +
-> +FILES_${PN} +=3D "run"
-> +FILES_${PN} +=3D "${base_libdir}/drbd"
-> +FILES_${PN}-dbg +=3D "${base_libdir}/drbd/.debug"
-> diff --git a/meta-oe/recipes-extended/drbd/files/drbd.service b/meta-oe/r=
-ecipes-extended/drbd/files/drbd.service
-> new file mode 100644
-> index 0000000..22f853f
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/drbd/files/drbd.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=3DDRBD Service
-> +After=3Dnetwork.target
-> +
-> +[Service]
-> +Type=3Doneshot
-> +RemainAfterExit=3Dyes
-> +ExecStart=3D/usr/lib/drbd/drbd-helper start
-> +ExecStop=3D/usr/lib/drbd/drbd-helper stop
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
 > --=20
-> 1.9.1
+> 1.8.3.1
 >=20
 > --=20
 > _______________________________________________
@@ -182,16 +169,16 @@ ecipes-extended/drbd/files/drbd.service
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---MfFXiAuoTsnnDAfZ
+--kfjH4zxOES6UT95V
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlSGzCQACgkQN1Ujt2V2gBzxQwCfRGdvEBO/L6j12rXvQt30ORxf
-MkcAnix6emLoHaiRUCuFbQw6GOnI9/Eo
-=iWmh
+iEYEARECAAYFAlSGzH0ACgkQN1Ujt2V2gBwq7QCfcJ/Lo3mru/wq/ikczd7GgF+x
+LOMAniwiaY/VfKr+eVuzmS76zJpq+vg6
+=qJtI
 -----END PGP SIGNATURE-----
 
---MfFXiAuoTsnnDAfZ--
+--kfjH4zxOES6UT95V--
