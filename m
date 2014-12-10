@@ -1,34 +1,36 @@
 Return-Path: <folkus@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id BAF0D72573
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 3224E72579
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 11:48:15 +0000 (UTC)
-Received: by mail-wi0-f172.google.com with SMTP id n3so10926600wiv.11
+	Wed, 10 Dec 2014 11:48:26 +0000 (UTC)
+Received: by mail-wg0-f50.google.com with SMTP id a1so3351880wgh.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 03:48:16 -0800 (PST)
+	Wed, 10 Dec 2014 03:48:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=oPrDyFy/OQe0PXTznLMDPHGothUErG/oemgRBasvdJc=;
-	b=Ey9YfM5bBLg1AcQAz5XmAZjxdI7KBKdb9ynxII16ARIsbqi2J65vC0WQI8AGOhmSJq
-	d+14Iy1Mu8yt3nGpDKUVxbheYog4TPDNNbA8RylYc6EerLPXZpfmYuIB4+FSuct2XmRY
-	E/C/L62htK6H2AxdO69LlZjg40UZ9WOa/InttjJNRJYVTW1MByy+8+htWbYMHBiq/akB
-	q92lKS1yBTtd08U5jQB5lBwMyxfCudJQGGWFOIolROtS8yyyZ/7+W3faIPKF/weTpI4o
-	QWr3ewq8ZXvMpea0/tnU4dqowMcHKEcBNsaU9l+qbbrMB7b0kP0DTL3PJU3zdygTA7aK
-	rV0w==
-X-Received: by 10.180.90.206 with SMTP id by14mr12599679wib.67.1418212096374; 
-	Wed, 10 Dec 2014 03:48:16 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Aw9Pi+msDQJxuZ29emIrgm0tC6j8QBsnxNoQWBW/2Yc=;
+	b=xTZDgcYkKLwnmmUmPSlfp3ibYGjMJkWjInh++En8zWzGtg0sNjL0nHeM/3dmMV5wGv
+	1nuCmL+njwRPX5MUfHKYmXFDbArhvLaYBqZi4xVpRZwiOVvPP6pYViTCm4PtQemeGNOS
+	I7f+xZbciHzt8xlkrGerbM2x9NzNcsuAkQc3awrUxpQ6aUrM+F3bwZB526msXg2xqqiX
+	dS2LvoLTo0DRM2jFmrWWUHi/OjlrTzB6HBISzn3/bDMh7TK9nlf1Kmj/tnXY0xOnDnjf
+	slETZDgY+iaRtZkDf7e7atiajbH0c6WZehKEqPaInd3Eu4B83cG98/LVtIw73Dm2GRtb
+	kYhg==
+X-Received: by 10.180.96.10 with SMTP id do10mr5836440wib.16.1418212106932;
+	Wed, 10 Dec 2014 03:48:26 -0800 (PST)
 Received: from localhost.localdomain ([87.105.187.254])
-	by mx.google.com with ESMTPSA id pl1sm6008200wic.16.2014.12.10.03.48.15
+	by mx.google.com with ESMTPSA id pl1sm6008200wic.16.2014.12.10.03.48.25
 	for <multiple recipients>
 	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 10 Dec 2014 03:48:15 -0800 (PST)
+	Wed, 10 Dec 2014 03:48:26 -0800 (PST)
 From: =?UTF-8?q?S=C5=82awomir=20Paszko?= <folkus@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Dec 2014 12:48:00 +0100
-Message-Id: <1418212081-32563-1-git-send-email-folkus@gmail.com>
+Date: Wed, 10 Dec 2014 12:48:01 +0100
+Message-Id: <1418212081-32563-2-git-send-email-folkus@gmail.com>
 X-Mailer: git-send-email 2.2.0
-Subject: [PATCH] SRCREV was change to newest (03.12.2014) since the previous revision was outdated. LIC_FILE_CHKSUM was changed. Added qtmultimedia to DEPENDS.
+In-Reply-To: <1418212081-32563-1-git-send-email-folkus@gmail.com>
+References: <1418212081-32563-1-git-send-email-folkus@gmail.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][dizzy][PATCH] qtsystems: Change branch from stable to 5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Dec 2014 11:48:18 -0000
+X-List-Received-Date: Wed, 10 Dec 2014 11:48:27 -0000
 
-From: folkien <folkus@gmail.com>
+From: Diego Sueiro <diego.sueiro@gmail.com>
 
+Stable branch was removed on mainline and now 5.3
+is used.
+
+Signed-off-by: Diego Sueiro <diego.sueiro@gmail.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes-qt/examples/qt5everywheredemo_1.0.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ recipes-qt/qt5/qtsystems_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-index 4f7022c..7d1b42b 100644
---- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
-+++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
-@@ -2,11 +2,10 @@ SUMMARY = "Qt5 everywhere demo"
- DESCRIPTION = "Quick tour of Qt 5.0, primarily focusing on its graphical capabilities."
- HOMEPAGE = "https://qt.gitorious.org/qt-labs"
- LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://main.cpp;md5=1187cb795a0f96bce64e63dd1a67dc2b"
-+LIC_FILES_CHKSUM = "file://main.cpp;md5=a3ecdc1d777da347f1bf35dd9966606f"
-+DEPENDS = "qtdeclarative qtgraphicaleffects qtmultimedia"
+diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
+index 45f6b0e..ac2fc86 100644
+--- a/recipes-qt/qt5/qtsystems_git.bb
++++ b/recipes-qt/qt5/qtsystems_git.bb
+@@ -1,7 +1,7 @@
+ require qt5-git.inc
+ require ${PN}.inc
  
--DEPENDS = "qtdeclarative qtgraphicaleffects"
--
--SRCREV = "9a868f96ee63c21ceda890d8dfc9d33f093d1b6d"
-+SRCREV = "6178748a6ea34df40a8e3c9ce67137e33383bb0e"
- SRC_URI = "git://gitorious.org/qt-labs/qt5-everywhere-demo.git"
+-QT_MODULE_BRANCH = "stable"
++QT_MODULE_BRANCH = "5.3"
  
- S = "${WORKDIR}/git/QtDemo"
+ # qtsystems wasn't released yet, last tag before this SRCREV is 5.0.0-beta1
+ # qt5-git PV is only to indicate that this recipe is compatible with qt5 5.2.1
 -- 
 2.2.0
 
