@@ -1,29 +1,36 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
+Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E6A817231B
+	by mail.openembedded.org (Postfix) with ESMTP id 899E37235C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 07:50:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44794451"
+	Wed, 10 Dec 2014 08:36:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44796926"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 10 Dec 2014 15:47:28 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 10 Dec 2014 16:33:22 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBA7oOG6015246
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBA8aHX4018394
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 15:50:24 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 10 Dec 2014 15:50:53 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 10 Dec 2014 15:50:37 +0800
-Message-ID: <1418197837-22977-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <20141209175107.GP2470@jama>
-References: <20141209175107.GP2470@jama>
+	Wed, 10 Dec 2014 16:36:18 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Wed, 10 Dec 2014 16:36:45 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH 3/3] [meta-oe] drbd: add recipe
+Thread-Index: AQHQCui41drUxFpxTUmYWD1c6nd5f5yGlqUAgAH69DA=
+Date: Wed, 10 Dec 2014 08:36:45 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE1F9B@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1417164585-46087-1-git-send-email-biannm@cn.fujitsu.com>
+	<1417164585-46087-4-git-send-email-biannm@cn.fujitsu.com>
+	<20141209101708.GB2470@jama>
+In-Reply-To: <20141209101708.GB2470@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-oe][PATCH v2] libjs-sizzle: Add new recipe
+Subject: Re: [PATCH 3/3] [meta-oe] drbd: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,44 +44,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Dec 2014 07:50:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Dec 2014 08:36:49 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-libjs-sizzle is a pure-javascript CSS selector engine
-
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/libjs/libjs-sizzle_1.9.3.bb | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-oe/recipes-support/libjs/libjs-sizzle_1.9.3.bb
-
-diff --git a/meta-oe/recipes-support/libjs/libjs-sizzle_1.9.3.bb b/meta-oe/recipes-support/libjs/libjs-sizzle_1.9.3.bb
-new file mode 100644
-index 0000000..ad0f9c6
---- /dev/null
-+++ b/meta-oe/recipes-support/libjs/libjs-sizzle_1.9.3.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Pure-JavaScript CSS selector engine"
-+LICENSE = "GPLv2+ & MIT & BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://usr/share/doc/libjs-sizzle/copyright;md5=9b35efb1635ff8f06d1984376b06ee5a"
-+
-+SRC_URI = "http://kr.archive.ubuntu.com/ubuntu/pool/universe/s/sizzle/${BPN}_${PV}-1_all.deb;subdir=${BP}"
-+SRC_URI[md5sum] = "748b8805e21caed658f6765f7c491d46"
-+SRC_URI[sha256sum] = "2a6468763c40a30f6f7d0df8906cd17aaebd6edaa5478aeaffd7b6b5fb8abd35"
-+
-+SIZZLEDIR = "${datadir}/javascript/sizzle"
-+SIZZLEDOCDIR = "${docdir}/libjs-sizzle"
-+
-+do_install() {
-+    install -d -m 0755 ${D}${SIZZLEDIR}
-+    install -m 0644 ${S}${SIZZLEDIR}/sizzle.js ${D}${SIZZLEDIR}/
-+    install -m 0644 ${S}${SIZZLEDIR}/sizzle.min.js ${D}${SIZZLEDIR}/
-+    install -d -m 0755 ${D}${SIZZLEDOCDIR}
-+    install -m 0644 ${S}${SIZZLEDOCDIR}/* ${D}${SIZZLEDOCDIR}/
-+}
-+
-+FILES_${PN} = "/usr/share/javascript/sizzle/"
--- 
-1.8.3.1
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IE1hcnRp
+biBKYW5zYQ0KPiBTZW50OiBUdWVzZGF5LCBEZWNlbWJlciAwOSwgMjAxNCA2OjE3IFBNDQo+IFRv
+OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBS
+ZTogW29lXSBbUEFUQ0ggMy8zXSBbbWV0YS1vZV0gZHJiZDogYWRkIHJlY2lwZQ0KPiANCj4gT24g
+RnJpLCBOb3YgMjgsIDIwMTQgYXQgMDQ6NDk6NDVQTSArMDgwMCwgQmlhbiBOYWltZW5nIHdyb3Rl
+Og0KPiA+IERSQkQgaXMgYSBibG9jayBkZXZpY2Ugd2hpY2ggaXMgZGVzaWduZWQgdG8gYnVpbGQg
+aGlnaCBhdmFpbGFiaWxpdHkgY2x1c3RlcnMuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBCaWFu
+IE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4NCj4gPiAtLS0NCj4gPiAgbWV0YS1vZS9y
+ZWNpcGVzLWV4dGVuZGVkL2RyYmQvZHJiZF84LjQuNC5iYiAgICAgIHwgNTcNCj4gKysrKysrKysr
+KysrKysrKysrKysrKysrDQo+ID4gIG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kcmJkL2ZpbGVz
+L2RyYmQuc2VydmljZSB8IDEyICsrKysrDQo+ID4gIDIgZmlsZXMgY2hhbmdlZCwgNjkgaW5zZXJ0
+aW9ucygrKQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
+L2RyYmQvZHJiZF84LjQuNC5iYg0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNp
+cGVzLWV4dGVuZGVkL2RyYmQvZmlsZXMvZHJiZC5zZXJ2aWNlDQo+IA0KPiBDYXVzZXMgMiBuZXcg
+UUEgd2FybmluZ3M6DQo+IA0KPiBkcmJkLTguNC40OiBkcmJkIHJlcXVpcmVzIC9iaW4vYmFzaCwg
+L3Vzci9iaW4vcGVybCwgYnV0IG5vIHByb3ZpZGVycyBpbiBpdHMNCj4gUkRFUEVORFMgW2ZpbGUt
+cmRlcHNdDQo+IGRyYmQtOC40LjQ6IGRyYmQgcmVxdWlyZXMgL3Vzci9iaW4vcGVybCwgL2Jpbi9i
+YXNoLCBidXQgbm8gcHJvdmlkZXJzIGluIGl0cw0KPiBSREVQRU5EUyBbZmlsZS1yZGVwc10NCj4g
+DQoNCkhpIE1hcnRpbiwgSm9lDQoNCldpbGwgZml4IGl0IGluIHRoZSBuZXh0IHZlcnNpb24uDQoN
+CkFzIGRpc2N1c3NlZCBhdCB5b2N0b0B5b2N0b3Byb2plY3Qub3JnLiANCmh0dHBzOi8vbGlzdHMu
+eW9jdG9wcm9qZWN0Lm9yZy9waXBlcm1haWwveW9jdG8vMjAxNC1EZWNlbWJlci8wMjI1NDIuaHRt
+bA0KSSB3aWxsIG1vdmUgZHJiZCBmcm9tIG1ldGEtb2UgdG8gbWV0YS1uZXR3b3JraW5nLg0KDQpU
+aGFua3MgDQogQmlhbg0KDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWV4
+dGVuZGVkL2RyYmQvZHJiZF84LjQuNC5iYg0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
+L2RyYmQvZHJiZF84LjQuNC5iYg0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXgg
+MDAwMDAwMC4uNTQzOWJhYw0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3Jl
+Y2lwZXMtZXh0ZW5kZWQvZHJiZC9kcmJkXzguNC40LmJiDQo+ID4gQEAgLTAsMCArMSw1NyBAQA0K
+PiA+ICtTVU1NQVJZID0gIkJEIGRyaXZlciBmb3IgTGludXgiDQo+ID4gK0RFU0NSSVBUSU9OID0g
+IkRSQkQgbWlycm9ycyBhIGJsb2NrIGRldmljZSBvdmVyIHRoZSBuZXR3b3JrIHRvDQo+ID4gK2Fu
+b3RoZXIgbWFjaGluZS5cIERSQkQgbWlycm9ycyBhIGJsb2NrIGRldmljZSBvdmVyIHRoZSBuZXR3
+b3JrIHRvDQo+ID4gK2Fub3RoZXIgbWFjaGluZS5cIFRoaW5rIG9mIGl0IGFzIG5ldHdvcmtlZCBy
+YWlkIDEuIEl0IGlzIGEgYnVpbGRpbmcNCj4gPiArYmxvY2sgZm9yXCBzZXR0aW5nIHVwIGhpZ2gg
+YXZhaWxhYmlsaXR5IChIQSkgY2x1c3RlcnMuIg0KPiA+ICsNCj4gPiArSE9NRVBBR0UgPSAiaHR0
+cDovL3d3dy5kcmJkLm9yZy8iDQo+ID4gKw0KPiA+ICtTRUNUSU9OID0gImtlcm5lbC91c2VybGFu
+ZCINCj4gPiArDQo+ID4gK0xJQ0VOU0UgPSAiR1BMdjIrIg0KPiA+ICsNCj4gPiArTElDX0ZJTEVT
+X0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9NTU3NGM2OTY1YWU1ZjU4M2U1NTg4MGUzOTdm
+YmIwMTgiDQo+ID4gKw0KPiA+ICtQUiA9ICJyMCINCj4gPiArI1BSID0gInIxMDAxIg0KPiA+ICsN
+Cj4gPiArU1JDX1VSSSA9ICJodHRwOi8vb3NzLmxpbmJpdC5jb20vJHtCUE59LzguNC8ke0JQTn0t
+JHtQVn0udGFyLmd6IFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vZHJiZC5zZXJ2aWNlIFwNCj4g
+PiArICAgICAgICAgICINCj4gPiArDQo+ID4gKyNTUkNfVVJJW21kNXN1bV0gPSAiZWY0ZTZkYjUx
+Y2RhMTg5OGM1OTdhM2Q2MWZjYjllMWUiDQo+ID4gKyNTUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAi
+N2MxNTU4NDU5NjE0ZmJkYzFiMzIwOWYxYjllNTc2N2E0NDNkOWJkZmU2ODFhNDljNjUyYjVmMzky
+Nzk5ZDU4ZCINCj4gPiArDQo+ID4gK1NSQ19VUklbbWQ1c3VtXSA9ICJiNTE4MTUzNDNjMWE5MTUx
+ZTI5MzZiM2I5NzUyMDM4OCINCj4gPiArU1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gImEwNTYyMTlj
+NWMyM2IwNzljMzM1NDE3OWY3YTFiOWY1NWQ0N2U1NzNhNGNkMzE3OGYyZWY0YzE1NjA0Mjg4ZjAi
+DQo+ID4gKw0KPiA+ICtpbmhlcml0IGF1dG90b29scy1icm9rZW5zZXAgc3lzdGVtZA0KPiA+ICsN
+Cj4gPiArRVhUUkFfT0VDT05GID0gIi0td2l0aC11dGlscyAgICAgICAgICAgICAgICAgIFwNCj4g
+PiArICAgICAgICAgICAgICAgIC0td2l0aG91dC1rbSAgICAgICAgICAgICAgICAgIFwNCj4gPiAr
+ICAgICAgICAgICAgICAgIC0td2l0aC1pbml0ZGlyPS9ldGMvaW5pdC5kICAgIFwNCj4gPiArICAg
+ICAgICAgICAgICAgIC0td2l0aG91dC1wYWNlbWFrZXIgICAgICAgICAgIFwNCj4gPiArICAgICAg
+ICAgICAgICAgIC0td2l0aG91dC1yZ21hbmFnZXIgICAgICAgICAgIFwNCj4gPiArICAgICAgICAg
+ICAgICAgIC0td2l0aG91dC1iYXNoY29tcGxldGlvbiAgICAgIFwNCj4gPiArICAgICAgICAgICAg
+ICAgIC0td2l0aC1kaXN0cm8gZGViaWFuICAgICAgICAgIFwNCj4gPiArICAgICAgICAgICAgICAg
+Ig0KPiA+ICsNCj4gPiArZG9fY29uZmlndXJlICgpew0KPiA+ICsgICAgb2VfcnVuY29uZg0KPiA+
+ICt9DQo+ID4gKw0KPiA+ICtTWVNURU1EX1NFUlZJQ0VfJHtQTn0gPSAiZHJiZC5zZXJ2aWNlIg0K
+PiA+ICtTWVNURU1EX0FVVE9fRU5BQkxFID0gImRpc2FibGUiDQo+ID4gKw0KPiA+ICtkb19pbnN0
+YWxsX2FwcGVuZCgpIHsNCj4gPiArICAgIGlmICR7QGJhc2VfY29udGFpbnMoJ0RJU1RST19GRUFU
+VVJFUycsJ3N5c3RlbWQnLCd0cnVlJywnZmFsc2UnLGQpfTsNCj4gdGhlbg0KPiA+ICsgICAgICAg
+IGluc3RhbGwgLWQgJHtEfS8ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtDQo+ID4gKyAgICAgICAg
+aW5zdGFsbCAtbSA2NDQgJHtXT1JLRElSfS9kcmJkLnNlcnZpY2UNCj4gJHtEfS8ke3N5c3RlbWRf
+dW5pdGRpcn0vc3lzdGVtDQo+ID4gKyAgICAgICAgaW5zdGFsbCAtZCAke0R9LyR7bGliZXhlY2Rp
+cn0NCj4gPiArICAgICAgICBpbnN0YWxsIC1tIDc1NSAke0R9L2V0Yy9pbml0LmQvZHJiZCAke0R9
+LyR7bGliZXhlY2Rpcn0vZHJiZC1oZWxwZXINCj4gPiArICAgIGZpDQo+ID4gK30NCj4gPiArDQo+
+ID4gK0ZJTEVTXyR7UE59ICs9ICJydW4iDQo+ID4gK0ZJTEVTXyR7UE59ICs9ICIke2Jhc2VfbGli
+ZGlyfS9kcmJkIg0KPiA+ICtGSUxFU18ke1BOfS1kYmcgKz0gIiR7YmFzZV9saWJkaXJ9L2RyYmQv
+LmRlYnVnIg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvZHJiZC9m
+aWxlcy9kcmJkLnNlcnZpY2UNCj4gPiBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9kcmJkL2Zp
+bGVzL2RyYmQuc2VydmljZQ0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAw
+MDAwMC4uMjJmODUzZg0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lw
+ZXMtZXh0ZW5kZWQvZHJiZC9maWxlcy9kcmJkLnNlcnZpY2UNCj4gPiBAQCAtMCwwICsxLDEyIEBA
+DQo+ID4gK1tVbml0XQ0KPiA+ICtEZXNjcmlwdGlvbj1EUkJEIFNlcnZpY2UNCj4gPiArQWZ0ZXI9
+bmV0d29yay50YXJnZXQNCj4gPiArDQo+ID4gK1tTZXJ2aWNlXQ0KPiA+ICtUeXBlPW9uZXNob3QN
+Cj4gPiArUmVtYWluQWZ0ZXJFeGl0PXllcw0KPiA+ICtFeGVjU3RhcnQ9L3Vzci9saWIvZHJiZC9k
+cmJkLWhlbHBlciBzdGFydA0KPiA+ICtFeGVjU3RvcD0vdXNyL2xpYi9kcmJkL2RyYmQtaGVscGVy
+IHN0b3ANCj4gPiArDQo+ID4gK1tJbnN0YWxsXQ0KPiA+ICtXYW50ZWRCeT1tdWx0aS11c2VyLnRh
+cmdldA0KPiA+IC0tDQo+ID4gMS45LjENCj4gPg0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwg
+bWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29w
+ZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gTWFydGluICdKYU1hJyBKYW5zYSAgICAgamFi
+YmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwuY29tDQo=
 
