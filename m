@@ -1,39 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 45923725E7
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f42.google.com (mail-qa0-f42.google.com
+	[209.85.216.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 709E172588
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 12:44:40 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id r20so11059654wiv.12
+	Wed, 10 Dec 2014 12:54:09 +0000 (UTC)
+Received: by mail-qa0-f42.google.com with SMTP id j7so1911904qaq.15
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 04:44:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=RbQ/ip5VcZ7T3jJOOXGiR3b8GhCBAGONvKnlh88wVFU=;
-	b=PrcRIgey/GGJFREAlSVCue4OuD94+vNpcTPktgTEI6re04OotVzvCfc3D9lpopoT5K
-	HEK/89Uj6NuTkVMtc0wDs/owW5YQRwdfdITRWBESWYrNUvfojGfnCmNe7M0pSuTAOz5D
-	iF0HufEbMJ5oZ7NoGK8Stf7JfXKIdWVT7TvZiArg2AaqbAO/a42CqTZRhLzwMwywhhId
-	DYp9W0hoJkFTrKoGpy9vP+v/hBkkkGVsp2dfru3kbUJdp1cKHBz0maUUN+wLiHucW1yV
-	S5VVroxeV5WxKWNrl72Ub4r+6rhCLgo7masIHfUpub2fJPNEfmmMJ1gdcN3drJO/OI3j
-	O40w==
-X-Received: by 10.180.104.197 with SMTP id gg5mr6135987wib.7.1418215481102;
-	Wed, 10 Dec 2014 04:44:41 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	l9sm17783462wic.21.2014.12.10.04.44.40
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 10 Dec 2014 04:44:40 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 10 Dec 2014 13:44:43 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141210124443.GD2473@jama>
-References: <1417457354-6636-1-git-send-email-alejandro.hernandez@linux.intel.com>
+	Wed, 10 Dec 2014 04:54:10 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=kUM2WgbWRuJe2/b8rkW22yYoWlcxTmJUESnRuLJEwxM=;
+	b=gQCvM8q9iGzwZScUFPRR+2r9+MkrCO1qLFGE0r3D+3KbMxV+IUbZ5D3koysjddZsdJ
+	nypk9gVEuCwO33vanTy+rcguSUarqA8oXLJj4pTrVgpFP1cr+lZ1/hbA5RlUfAxGVMDo
+	ChmzSpzvp2+GUYz1LqRS0W3MXCqGcBq1Ppu0FGcqoEP5v6+mL2QL793uP8Q+WlQqAjoH
+	NaaPzwgEq7hr8dh9SsAPxza+4BA9XB11PT1BAasIB3GEuGqlCd2DbvLFKhIDchiKYySa
+	VGORxM1ZzWAfTE66yiqulb9hjKb6Q5pL9R4PoGitKiUWM8smVegOvtgDQIe4T9nP7/ex
+	AZhg==
+X-Gm-Message-State: ALoCoQkV1haeYXlfqFbzpU11fFGhuUzOmuP9Ch86HBRw4nZjbWc4yOLDI+K+XvdX9uq/b8Bb1tev
+X-Received: by 10.140.96.101 with SMTP id j92mr7504656qge.87.1418216041977;
+	Wed, 10 Dec 2014 04:54:01 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1417457354-6636-1-git-send-email-alejandro.hernandez@linux.intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+Received: by 10.140.48.231 with HTTP; Wed, 10 Dec 2014 04:53:41 -0800 (PST)
+In-Reply-To: <20141210124443.GD2473@jama>
+References: <1417457354-6636-1-git-send-email-alejandro.hernandez@linux.intel.com>
+	<20141210124443.GD2473@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 10 Dec 2014 12:53:41 +0000
+Message-ID: <CAJTo0LaBHmNquUtsnXFv+71G00mGO58i1XVhnFeFJG29=oahZQ@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-gnome][PATCH] gsettings-desktop-schemas: Moved from OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -48,77 +45,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Dec 2014 12:44:43 -0000
-X-Groupsio-MsgNum: 53265
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="P+33d92oIH25kiaB"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Dec 2014 12:54:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
---P+33d92oIH25kiaB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10 December 2014 at 12:44, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-On Mon, Dec 01, 2014 at 12:09:14PM -0600, Alejandro Hernandez wrote:
-> Signed-off-by: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
+> Is there patch to remove it from oe-core?
+>
 
-Is there patch to remove it from oe-core?
+Thanks for the reminder, I've just removed it in my staging branch.
 
-> ---
->  .../gsettings-desktop-schemas_3.14.1.bb                   | 15 +++++++++=
-++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 meta-gnome/recipes-gnome/gsettings-desktop-schemas/gs=
-ettings-desktop-schemas_3.14.1.bb
->=20
-> diff --git a/meta-gnome/recipes-gnome/gsettings-desktop-schemas/gsettings=
--desktop-schemas_3.14.1.bb b/meta-gnome/recipes-gnome/gsettings-desktop-sch=
-emas/gsettings-desktop-schemas_3.14.1.bb
-> new file mode 100644
-> index 0000000..e6d1d1a
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gsettings-desktop-schemas/gsettings-deskto=
-p-schemas_3.14.1.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY =3D "GNOME desktop-wide GSettings schemas"
-> +HOMEPAGE =3D "http://live.gnome.org/gsettings-desktop-schemas"
-> +BUGTRACKER =3D "https://bugzilla.gnome.org/"
-> +
-> +LICENSE =3D "LGPLv2.1"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
-16c"
-> +
-> +DEPENDS =3D "glib-2.0 intltool-native gobject-introspection-stub-native"
-> +
-> +inherit gnomebase gsettings gettext
-> +
-> +GNOME_COMPRESS_TYPE =3D "xz"
-> +
-> +SRC_URI[archive.md5sum] =3D "92d41934212fc7da48648afa3927f4b0"
-> +SRC_URI[archive.sha256sum] =3D "217eba09f0fb263dcb8ce6efa21c9afaf0504ac1=
-d937732d1af1c6724c05f065"
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Ross
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---P+33d92oIH25kiaB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEUEARECAAYFAlSIQDsACgkQN1Ujt2V2gBw5DwCgmusJxlMfmRQd0CQ6tcHnmiBf
-+vcAmLYkvuhGb+X0OjebZS06AfHwZaw=
-=LUYF
------END PGP SIGNATURE-----
-
---P+33d92oIH25kiaB--
