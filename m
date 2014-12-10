@@ -1,26 +1,24 @@
-Return-Path: <alejandro.hernandez@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A02E7101A
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5586060670
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 20:48:02 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 10 Dec 2014 12:47:30 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,553,1413270000"; d="scan'208";a="645660592"
-Received: from aehernan-devstation.zpn.intel.com (HELO [10.219.4.147])
-	([10.219.4.147])
-	by fmsmga002.fm.intel.com with ESMTP; 10 Dec 2014 12:47:30 -0800
-Message-ID: <5488B170.6070501@linux.intel.com>
-Date: Wed, 10 Dec 2014 14:47:44 -0600
-From: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Wed, 10 Dec 2014 22:37:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sBAMb8Wj005003
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Dec 2014 14:37:09 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Wed, 10 Dec 2014 14:37:08 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 10 Dec 2014 14:37:08 -0800
+Message-ID: <1418251028-27954-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1417457354-6636-1-git-send-email-alejandro.hernandez@linux.intel.com>	<20141210124443.GD2473@jama>
-	<CAJTo0LaBHmNquUtsnXFv+71G00mGO58i1XVhnFeFJG29=oahZQ@mail.gmail.com>
-In-Reply-To: <CAJTo0LaBHmNquUtsnXFv+71G00mGO58i1XVhnFeFJG29=oahZQ@mail.gmail.com>
-Subject: Re: [meta-gnome][PATCH] gsettings-desktop-schemas: Moved from OE-Core
+Subject: [meta-networking][PATCH 1/1] tcpreplay: improve search for libpcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,20 +32,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Dec 2014 20:48:07 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Dec 2014 22:37:13 -0000
+Content-Type: text/plain
 
+Add a test to find libpcap if testdir/.. is a sysroot.
 
-On 10/12/14 06:53, Burton, Ross wrote:
-> On 10 December 2014 at 12:44, Martin Jansa <martin.jansa@gmail.com> wrote:
->
->> Is there patch to remove it from oe-core?
->>
-> Thanks for the reminder, I've just removed it in my staging branch.
->
-> Ross
+Upstream-Status: Pending
 
-I was waiting for it to get accepted first, thanks Ross.
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ ...cpreplay-3.4.4-improve-search-for-libpcap.patch |   33 ++++++++++++++++++++
+ .../recipes-support/tcpreplay/tcpreplay_3.4.4.bb   |    1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
+
+diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
+new file mode 100644
+index 0000000..50f024c
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
+@@ -0,0 +1,33 @@
++tcpreplay: improve search for libpcap
++
++Add a test which will find libpcap if $testdir/.. is a sysroot.
++
++Upstream-Status: Pending
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++
++--- a/configure.ac
+++++ b/configure.ac
++@@ -350,14 +350,20 @@ for testdir in $trypcapdir /usr/local /o
++     if test -f "${testdir}/include/pcap.h" -a $foundpcap = no ; then
++         LPCAPINC="${testdir}/include/pcap.h"
++         LPCAPINCDIR="${testdir}/include"
+++        # If testdir/.. is a sysroot, then sDir should point to where the libraries are.
+++        sDir=$(readlink -m ${testdir}/../${libdir})
++         if test $dynamic_link = yes; then
++-            if test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
+++            if test -f "${sDir}/libpcap${shrext_cmds}" ; then
+++                LPCAPLIB="-L${sDir} -lpcap"
+++            elif test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
++                 LPCAPLIB="-L${testdir}/lib64 -lpcap"
++             elif test -f "${testdir}/lib/libpcap${shrext_cmds}" ; then
++                 LPCAPLIB="-L${testdir}/lib -lpcap"
++             else
++                 AC_ERROR([Unable to find libpcap in ${testdir}])
++             fi
+++        elif test -f "${sDir}/libpcap.${libext}" ; then
+++            LPCAPLIB="${sDir}/libpcap.${libext}"
++         elif test -f "${testdir}/lib64/libpcap.${libext}" ; then
++             LPCAPLIB="${testdir}/lib64/libpcap.${libext}"
++         elif test -f "${testdir}/lib/libpcap.${libext}" ; then
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
+index 4bce270..9ecb695 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
+@@ -10,6 +10,7 @@ SRC_URI = "http://prdownloads.sourceforge.net/tcpreplay/${PV}/tcpreplay-${PV}.ta
+            file://tcpreplay-3.4.4-cross-compile.patch \
+            file://tcpreplay-3.4.4-no-bfp-support.patch \
+            file://tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch \
++           file://tcpreplay-3.4.4-improve-search-for-libpcap.patch \
+            "
+ SRC_URI[md5sum] = "22725feb9b2590809f9350308ec65180"
+ SRC_URI[sha256sum] = "7a809c58ddec86407fd6e5597ac883d7874a19bea81d716bb2b1c6e3b0e7b58f"
+-- 
+1.7.9.5
 
 
