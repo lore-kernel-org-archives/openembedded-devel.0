@@ -1,36 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id DAAD860673
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 89C5B65CA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 14:53:05 +0000 (UTC)
-Received: by mail-wg0-f51.google.com with SMTP id x12so6564743wgg.38
+	Thu, 11 Dec 2014 17:12:01 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id y19so7047199wgg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 06:53:05 -0800 (PST)
+	Thu, 11 Dec 2014 09:12:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=N68xIXMC0GgzoGGGpo2KBu1GJNJKRJybUS6FolcF9Is=;
-	b=NJYmOcnNe61NVS1ngJpWom+nBY6bCJDKIlEAzX4AFeUhLiTJIP9UjJzCeoKdAOrrD1
-	CzM8rtmX/tvnEbDaZLk7FDIaXfKVhx5A95S3gMb/2QrVqs4oq7W1UKpLRYv8KG6DWE2f
-	JyXxqZQWrLuZji8pdq5MC+c0b+Zn3mbWeokPMrWg6FCsCnvVi54fG81IFSsaGM/6Gkzl
-	fqg9D3vD76Ks3LI6Wua7K0p/gJaDZ668fn9fbTeChmscYhOTlw7hpDNHXzU/aIp/B6Im
-	qfFf+pkUb0hAUT8bc0ZtAWlbgNSFCEup1ew1Xb//0hNFevA1ODp3r4B5N/OsWIZW//6+
-	evAw==
-X-Received: by 10.180.11.97 with SMTP id p1mr23951617wib.22.1418309585505;
-	Thu, 11 Dec 2014 06:53:05 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=RsYHDNt0ZS0ysYain1f1M/P9rKBGRGas6EqjVkI/nGA=;
+	b=bv8DAG5bED0wi5xQy5GAOLlRkERSA3fNIDu/F15Q4f/2sax5m8QlOlGVqusd4Mo+u6
+	2oRaWuunELE3cQCOj6KLwM+zJm18zrApBiWxG3kfN/yHqhH4WkZPeDOtuW4oKjTvPXnL
+	lrgzXDOSoOAj+IdlO4aDScHU6so2RSPlqEW/Od4s9QvuvsDOncTJQAWJLw+2LqDQyov1
+	dW1n1FWBcVTnCkp7qN+peOCR6CzEKk4Agu+XgpjyZOMt1wfUNqMSNtrNjukztCCL1Gy4
+	jFVn/bN+h5SK3Fv7yrVQFj8ZTNgaO0O9hyX1J3cO9x09L7Ergm5WdPY+TF56MQS4XOPz
+	gSng==
+X-Received: by 10.180.97.195 with SMTP id ec3mr18175281wib.79.1418317921712;
+	Thu, 11 Dec 2014 09:12:01 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	pl1sm2607181wic.16.2014.12.11.06.53.04 for <multiple recipients>
+	u9sm2398515wjy.37.2014.12.11.09.12.00 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 11 Dec 2014 06:53:04 -0800 (PST)
+	Thu, 11 Dec 2014 09:12:01 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Dec 2014 15:53:07 +0100
-Message-Id: <1418309587-15823-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 11 Dec 2014 18:12:02 +0100
+Message-Id: <1418317924-22256-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.1.3
-In-Reply-To: <1418308793-4879-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1418308793-4879-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-qt5][PATCHv2] qtbase: add PACKAGECONFIG for cups
+Subject: [meta-oe][PATCH 1/3] mongodb: blacklist because do_configure fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,25 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2014 14:53:15 -0000
+X-List-Received-Date: Thu, 11 Dec 2014 17:12:07 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtbase.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/mongodb/mongodb_git.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index 4c7e86c..c37134f 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -80,6 +80,7 @@ PACKAGECONFIG[pcre] = "-system-pcre,-qt-pcre,pcre"
- PACKAGECONFIG[gl] = "-opengl desktop -no-eglfs,,virtual/libgl"
- PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
- PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
-+PACKAGECONFIG[cups] = "-cups,-no-cups,cups"
- PACKAGECONFIG[dbus] = "-dbus,-no-dbus,dbus"
- PACKAGECONFIG[xcb] = "-xcb -xcb-xlib -system-xcb,-no-xcb,libxcb xcb-util-wm xcb-util-image xcb-util-keysyms xcb-util-renderutil"
- PACKAGECONFIG[sql-ibase] = "-sql-ibase,-no-sql-ibase"
+diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+index 2701c4c..879fc7c 100644
+--- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+@@ -9,6 +9,13 @@ DEPENDS_append_x86-64 = " gperftools"
+ 
+ inherit scons
+ 
++# Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
++# | Target 'build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod' depends on the availability of a system provided library for 'boost_program_options', but no suitable library was found during configuration.
++# | scons: *** [build/linux2/disable-scripting/ld_arm-oe-linux-gnueabi-g++/ssl/use-system-boost/use-system-pcre/use-system-tcmalloc/mongo/mongod] Error 1
++# | scons: building terminated because of errors.
++# | ERROR: scons build execution failed.
++PNBLACKLIST[mongodb] ?= "Fails to build with system boost"
++
+ PV = "2.6.0+git${SRCPV}"
+ SRCREV = "be1905c24c7e5ea258e537fbf0d2c502c4fc6de2"
+ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v2.6 \
 -- 
 2.1.3
 
