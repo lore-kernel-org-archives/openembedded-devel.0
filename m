@@ -1,24 +1,27 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5586060670
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DB3A60809
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 22:37:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sBAMb8Wj005003
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Thu, 11 Dec 2014 03:23:48 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44846080"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2014 11:20:29 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBB3NO3o029704
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 14:37:09 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 10 Dec 2014 14:37:08 -0800
-From: Joe Slater <jslater@windriver.com>
+	Thu, 11 Dec 2014 11:23:24 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 11 Dec 2014 11:23:50 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 10 Dec 2014 14:37:08 -0800
-Message-ID: <1418251028-27954-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+Date: Thu, 11 Dec 2014 11:20:31 +0800
+Message-ID: <1418268031-26550-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] tcpreplay: improve search for libpcap
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-networking][PATCH] drbd: Add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,72 +35,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Dec 2014 22:37:13 -0000
+X-List-Received-Date: Thu, 11 Dec 2014 03:23:57 -0000
 Content-Type: text/plain
 
-Add a test to find libpcap if testdir/.. is a sysroot.
+DRBD is a block device which is designed to build high availability clusters.
 
-Upstream-Status: Pending
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- ...cpreplay-3.4.4-improve-search-for-libpcap.patch |   33 ++++++++++++++++++++
- .../recipes-support/tcpreplay/tcpreplay_3.4.4.bb   |    1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
+ .../recipes-support/drbd/drbd/drbd.service         | 12 +++++
+ meta-networking/recipes-support/drbd/drbd_8.4.4.bb | 55 ++++++++++++++++++++++
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-networking/recipes-support/drbd/drbd/drbd.service
+ create mode 100644 meta-networking/recipes-support/drbd/drbd_8.4.4.bb
 
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
+diff --git a/meta-networking/recipes-support/drbd/drbd/drbd.service b/meta-networking/recipes-support/drbd/drbd/drbd.service
 new file mode 100644
-index 0000000..50f024c
+index 0000000..6b6ab30
 --- /dev/null
-+++ b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
-@@ -0,0 +1,33 @@
-+tcpreplay: improve search for libpcap
++++ b/meta-networking/recipes-support/drbd/drbd/drbd.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=DRBD Service
++After=network.target
 +
-+Add a test which will find libpcap if $testdir/.. is a sysroot.
++[Service]
++Type=oneshot
++RemainAfterExit=yes
++ExecStart=@LIBEXECDIR@/drbd-helper startxxx
++ExecStop=@LIBEXECDIR@/drbd-helper stop
 +
-+Upstream-Status: Pending
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-support/drbd/drbd_8.4.4.bb b/meta-networking/recipes-support/drbd/drbd_8.4.4.bb
+new file mode 100644
+index 0000000..c7a6973
+--- /dev/null
++++ b/meta-networking/recipes-support/drbd/drbd_8.4.4.bb
+@@ -0,0 +1,55 @@
++SUMMARY = "BD driver for Linux"
++DESCRIPTION = "DRBD mirrors a block device over the network to another machine.\
++DRBD mirrors a block device over the network to another machine.\
++Think of it as networked raid 1. It is a building block for\
++setting up high availability (HA) clusters."
 +
-+Signed-off-by: Joe Slater <joe.slater@windriver.com>
++HOMEPAGE = "http://www.drbd.org/"
++SECTION = "kernel/userland"
 +
++RDEPENDS_${PN} += "bash perl"
 +
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -350,14 +350,20 @@ for testdir in $trypcapdir /usr/local /o
-+     if test -f "${testdir}/include/pcap.h" -a $foundpcap = no ; then
-+         LPCAPINC="${testdir}/include/pcap.h"
-+         LPCAPINCDIR="${testdir}/include"
-++        # If testdir/.. is a sysroot, then sDir should point to where the libraries are.
-++        sDir=$(readlink -m ${testdir}/../${libdir})
-+         if test $dynamic_link = yes; then
-+-            if test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
-++            if test -f "${sDir}/libpcap${shrext_cmds}" ; then
-++                LPCAPLIB="-L${sDir} -lpcap"
-++            elif test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
-+                 LPCAPLIB="-L${testdir}/lib64 -lpcap"
-+             elif test -f "${testdir}/lib/libpcap${shrext_cmds}" ; then
-+                 LPCAPLIB="-L${testdir}/lib -lpcap"
-+             else
-+                 AC_ERROR([Unable to find libpcap in ${testdir}])
-+             fi
-++        elif test -f "${sDir}/libpcap.${libext}" ; then
-++            LPCAPLIB="${sDir}/libpcap.${libext}"
-+         elif test -f "${testdir}/lib64/libpcap.${libext}" ; then
-+             LPCAPLIB="${testdir}/lib64/libpcap.${libext}"
-+         elif test -f "${testdir}/lib/libpcap.${libext}" ; then
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-index 4bce270..9ecb695 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-@@ -10,6 +10,7 @@ SRC_URI = "http://prdownloads.sourceforge.net/tcpreplay/${PV}/tcpreplay-${PV}.ta
-            file://tcpreplay-3.4.4-cross-compile.patch \
-            file://tcpreplay-3.4.4-no-bfp-support.patch \
-            file://tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch \
-+           file://tcpreplay-3.4.4-improve-search-for-libpcap.patch \
-            "
- SRC_URI[md5sum] = "22725feb9b2590809f9350308ec65180"
- SRC_URI[sha256sum] = "7a809c58ddec86407fd6e5597ac883d7874a19bea81d716bb2b1c6e3b0e7b58f"
++LICENSE = "GPLv2+"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
++
++SRC_URI = "http://oss.linbit.com/${BPN}/8.4/${BPN}-${PV}.tar.gz \
++           file://drbd.service \
++          "
++
++SRC_URI[md5sum] = "b51815343c1a9151e2936b3b97520388"
++SRC_URI[sha256sum] = "a056219c5c23b079c3354179f7a1b9f55d47e573a4cd3178f2ef4c15604288f0"
++
++inherit autotools-brokensep systemd
++
++EXTRA_OECONF = "--with-utils                  \
++                --without-km                  \
++                --with-initdir=/etc/init.d    \
++                --without-pacemaker           \
++                --without-rgmanager           \
++                --without-bashcompletion      \
++                --with-distro debian          \
++               "
++
++do_configure (){
++    oe_runconf
++}
++
++SYSTEMD_SERVICE_${PN} = "drbd.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++do_install_append() {
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}/${systemd_unitdir}/system
++        install -m 644 ${WORKDIR}/drbd.service ${D}/${systemd_unitdir}/system
++        install -d ${D}/${libexecdir}
++        install -m 755 ${D}/${sysconfdir}/init.d/drbd ${D}/${libexecdir}/drbd-helper
++
++        sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
++            ${D}${systemd_unitdir}/system/drbd.service
++    fi
++}
++
++FILES_${PN} += "run"
++FILES_${PN} += "${base_libdir}/drbd"
++FILES_${PN}-dbg += "${base_libdir}/drbd/.debug"
 -- 
-1.7.9.5
+1.9.1
 
 
