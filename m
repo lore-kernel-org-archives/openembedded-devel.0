@@ -1,37 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 91F0A60673
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f173.google.com (mail-qc0-f173.google.com
+	[209.85.216.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 499916017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 12:23:35 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id l15so14393155wiw.14
+	Thu, 11 Dec 2014 12:32:05 +0000 (UTC)
+Received: by mail-qc0-f173.google.com with SMTP id i17so3695326qcy.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 04:23:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=sBzv4NWwhZRiU90M4MNuBgaqfO0hVRzUptHe0oGlWYQ=;
-	b=ekqMDmLrHv399pNdpd92DovXR0cRSdfNesDgYAJ7q/2OsM4BM++e/jtGcwP0rpzY+L
-	QTWB4ka193PdETRNDTSqiV7a8AoA3kjMx0TX3R1v7+Mmuq47LFwGeOfr1gdjq6Y74T3m
-	umBnR/7mmrfavK/GZQgB1vEFDCrb6TuG3N2dEapQf8tdr9JrJEUrm07rde0Ysfauciu7
-	RXgXmJew2NXiQZWc5tAgU/4tz/Z5jbNBkK9Dcxh948YuiP6FRhHQa4M02wf+oeJvy15Z
-	9rRIBId6Wu0xOaEpmBo5lMA7ArnvQOoyu47A5b0lbwcYcfZToagfSVZI92BpojTxUT5p
-	kD6g==
-X-Received: by 10.194.249.232 with SMTP id yx8mr16706400wjc.1.1418300615319;
-	Thu, 11 Dec 2014 04:23:35 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	p14sm2146988wie.1.2014.12.11.04.23.34 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 11 Dec 2014 04:23:34 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Dec 2014 13:23:32 +0100
-Message-Id: <1418300612-1383-3-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.1.3
-In-Reply-To: <1418300612-1383-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1418300612-1383-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-qt5][PATCH 3/3] qtwebengine: Include resources in main package and add rdep on qmlplugins
+	Thu, 11 Dec 2014 04:32:06 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=XuiZm7/GJPITSOcaLexLjPXEGzZoaj6bpjeTXIZMOu4=;
+	b=Re85SyE4pVkEOGyCkpR8+KWXiSPZOO3J9X/GNRZBJ8Fv+oqh81qhVwytby5iSD0nHr
+	wosvp3A985G/onK9XWj1NziBzYxITqJyLqTUyxWYrt8yglbGJaqo4TScboTK3xjdDylY
+	wRz0YSmlUZNXAxF2r0kgZ9/4TP3st26neSw6IV4VsS6HI7W++xCMxnaHM1fNBzNOcvrf
+	aMKIxMELAv+XXR1GgQuHzXZs+Qgv9YQ4uOfbzGXCmOFX8s47I56UQawSE9VFI8GpdJ5w
+	YTQPj8HfnYi3n9dwfH4LFBPZiJA7FZfWEgTIuPGV83CqI6HYBg5YZw/zXJJx/Rw7Bws9
+	p3mw==
+X-Gm-Message-State: ALoCoQlZw4PsEWbSz/MegfvKjAfQc0NGlYCztmA/Zc+2dV1FakqKA3ORySB+pgReEaoMxhO0UIad
+X-Received: by 10.224.3.137 with SMTP id 9mr19715141qan.64.1418301126274; Thu,
+	11 Dec 2014 04:32:06 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.48.231 with HTTP; Thu, 11 Dec 2014 04:31:45 -0800 (PST)
+In-Reply-To: <20141211121417.GB2467@jama>
+References: <20141211092332.GA2467@jama>
+	<CAJTo0LYwYW40XvxNN=rY4z6fK+4NJ2ZFxa2xsUvuspERa_MT+A@mail.gmail.com>
+	<20141211121417.GB2467@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 11 Dec 2014 12:31:45 +0000
+Message-ID: <CAJTo0LYEvdspWOu=_LQTtD6xZTFZvHTyZpwQOEXbtpbSnPE-5Q@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, test-dependencies 2014-12-11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2014 12:23:39 -0000
+X-List-Received-Date: Thu, 11 Dec 2014 12:32:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtwebengine.inc | 4 ++++
- 1 file changed, 4 insertions(+)
+On 11 December 2014 at 12:14, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-diff --git a/recipes-qt/qt5/qtwebengine.inc b/recipes-qt/qt5/qtwebengine.inc
-index 525e657..51beac3 100644
---- a/recipes-qt/qt5/qtwebengine.inc
-+++ b/recipes-qt/qt5/qtwebengine.inc
-@@ -55,3 +55,7 @@ do_install_append() {
-     rmdir ${D}${OE_QMAKE_PATH_PLUGINS}/${BPN} ${D}${OE_QMAKE_PATH_PLUGINS} || true
- }
- PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
-+
-+# for /usr/share/qt5/qtwebengine_resources.pak
-+FILES_${PN} += "${OE_QMAKE_PATH_QT_TRANSLATIONS} ${OE_QMAKE_PATH_QT_DATA}"
-+RDEPENDS_${PN}-examples += "${PN}-qmlplugins"
--- 
-2.1.3
+> > > WARN: gst-plugins-bad: gst-plugins-bad-meta rdepends on
+> > > gst-plugins-bad-rtmp, but it isn't a build dependency?
+> > > ERROR: gst-plugins-bad: gst-plugins-bad-rtmp package isn't created when
+> > > building with minimal dependencies?
+> > > ERROR: gst-plugins-bad: gst-plugins-bad-rtmp-dev package isn't created
+> > > when building with minimal dependencies?
+> > >
+> >
+> > Coincidently last night my world run gave me warnings that
+> > gst-plugins-bad-rtmp was depending on rtmpdump without a build depends,
+> so
+> > I've copied the PACKAGECONFIG[rtmp] from gstreamer1.0-plugins-bad to
+> > gst-plugins-bad.  Presumably this will fix these errors, although that
+> > warning seems odd.
+>
+> Why odd? It just means that gst-plugins-bad-rtmp* packages aren't
+> created at all when rtmp isn't autodetected.
 
+
+But gst-plugins-bad-meta won't depend on -rtmp when rtmp isn't detected as
+the splitting is dynamically done.
+
+Ross
 
