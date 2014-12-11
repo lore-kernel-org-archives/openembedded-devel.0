@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B91C7231B
+	by mail.openembedded.org (Postfix) with ESMTP id 2A60470A8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 17:12:02 +0000 (UTC)
-Received: by mail-wg0-f43.google.com with SMTP id l18so7065351wgh.2
+	Thu, 11 Dec 2014 17:12:03 +0000 (UTC)
+Received: by mail-wg0-f43.google.com with SMTP id l18so7065461wgh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 09:12:03 -0800 (PST)
+	Thu, 11 Dec 2014 09:12:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=1GJN1v1n5Gxtj5LaV/x6+JmYVYwLB1iu7aw0I+SJYbk=;
-	b=akfXTEDdhPlLazrf/3fG7D5ps5qIQ+qiEHClzp068Szz1Zc7zY/zIfpaqtXp7v+Leu
-	oB8UAKSvmbou9t3xG+vitqugYCZsGaGVJHJ+To4z3AC/XAGxKHeA6XH+Cie2HwHji0mM
-	wrjtaeBpOHHA/JD1mKor3EXYC7O7g0xRbIUSR+gqf/AjHlapkTzVydX2dellfAT6z90K
-	RKI2Yl4AlRXkOzSY04Za5x6FAfTFD/KQA44SAvUGnL9mp2tyDHzn5OFNPgtczqmEoR9A
-	3Q/3K2JaVRRCiQohYUJzYelBmyJIQkDu3Vxmd+InoXboRfiRAd6PZLHObC0uJB47orsl
-	tg7A==
-X-Received: by 10.180.96.161 with SMTP id dt1mr18303292wib.38.1418317923019;
-	Thu, 11 Dec 2014 09:12:03 -0800 (PST)
+	bh=MSvECX+LmeQW4H9uEgT2hxIQoS/NZ2MP+N8SY1GnS8k=;
+	b=ZZk2+HF3J2JvKZAOly0dvxMlWWnBRn6IGR7+wkW5R7DGhf6BhaFTYl29EMS9JAMG82
+	E89n/aLXvkmCgpPxPpIB1g/A/hL2qTMbk1MRs/KFZikBpTZ7lRw0Y5ClFSO/Xt1QUYnI
+	a7PhzPyeh2kptoe0KuFlrZpSZGUThMPN60JHCc2dwxDj/Uj3a30apYWCF6+j+lX4DsSP
+	PZlRQ+vRd3cFHUJfGTZo19yc3OgjruUT/xBFL0mrfcYdO8CpxUwy7p6virCMl6mibU6v
+	/104XKQBYMmPnXtwCfiEPVZwVOWCuvFf0S6vB+MT4xAr0/Ih8zijaqvALAmuuTcT+NMg
+	w6Tg==
+X-Received: by 10.194.172.72 with SMTP id ba8mr19103859wjc.13.1418317924287;
+	Thu, 11 Dec 2014 09:12:04 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	h14sm3069505wic.8.2014.12.11.09.12.02 for <multiple recipients>
+	qg11sm3677816wic.17.2014.12.11.09.12.03 for <multiple recipients>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 11 Dec 2014 09:12:02 -0800 (PST)
+	Thu, 11 Dec 2014 09:12:03 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Dec 2014 18:12:03 +0100
-Message-Id: <1418317924-22256-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 11 Dec 2014 18:12:04 +0100
+Message-Id: <1418317924-22256-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.1.3
 In-Reply-To: <1418317924-22256-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1418317924-22256-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 2/3] polkit-gnome, network-manager-applet: blacklist because polkit-gnome.do_configure fails
+Subject: [meta-oe][PATCH 3/3] gnome-bluetooth: blacklist, because dbus-binding-tool call is failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,36 +48,22 @@ X-List-Received-Date: Thu, 11 Dec 2014 17:12:07 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../network-manager-applet/network-manager-applet_0.9.8.10.bb           | 2 ++
- meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb                   | 2 ++
- 2 files changed, 4 insertions(+)
+ meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
-index 663c38c..8c271ed 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
-@@ -8,6 +8,8 @@ inherit gnomebase gtk-icon-cache
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
+index 4fd38a0..b9b7355 100644
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
  
- GNOME_COMPRESS_TYPE = "xz"
+ PR = "r1"
  
-+PNBLACKLIST[network-manager-applet] ?= "Depends on broken polkit-gnome"
++PNBLACKLIST[gnome-bluetooth] ?= "dbus-binding-tool fails with: Unable to load gnome-bluetooth-2.32.0/lib/bluetooth-client.xml": "manager" is not a valid D-Bus interface name"
 +
- SRC_URI += " \
-     file://0001-remove-classes-and-properties-which-are-not-supporte.patch \
-     file://0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch \
-diff --git a/meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb b/meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb
-index b262b5e..f5480e7 100644
---- a/meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb
-@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=74579fab173e4c5e12aac0cd83ee98ec \
- SRC_URI = "http://hal.freedesktop.org/releases/polkit-gnome-${PV}.tar.bz2 \
- "
+ SECTION = "x11/gnome"
+ DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib libunique libnotify bluez4 gnome-keyring virtual/libx11 libxi intltool-native"
  
-+PNBLACKLIST[polkit-gnome] ?= "Fails to build, m4:configure.ac:125: recursion limit of 1024 exceeded, use -L<N> to change it"
-+
- PR = "r2"
- 
- EXTRA_OECONF = "\
 -- 
 2.1.3
 
