@@ -1,42 +1,34 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qa0-f52.google.com (mail-qa0-f52.google.com
-	[209.85.216.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 580B265E1A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id EDD4860673
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 13:54:38 +0000 (UTC)
-Received: by mail-qa0-f52.google.com with SMTP id dc16so3523471qab.39
+	Thu, 11 Dec 2014 14:39:51 +0000 (UTC)
+Received: by mail-wg0-f46.google.com with SMTP id x13so6597448wgg.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 05:54:39 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=DhNciTVTfVS5KueJPzMMr/4IHcxtEvAUjgNXRkcLGP0=;
-	b=f7NLHSEk5LpR2x+ZfDo/DVCbUafrPYyk2SZZ9FJC3NAUOp7FiN0R8R5fm+MTYVRY7n
-	3dELrK92NHnwtiW65kgxh6Hz25QqHudogtk0Eg7z98E7RlBsIQYf/Y84RCEBvjoHbGEJ
-	feR77cuFvhCMaPiCZsGIF2S+9b3UksTLJTKvqVDbsnJd5uc+RJDqlNYH0BTS4FxQXirR
-	clFH5kCW8dAPWFGR9o5ayExfjx8Q+gG20Ka1GrMpQAU+u+T4gs4bhHzjAjXmlkc2X3V5
-	AjS6nJmeULAYOBRbRY6xn5w0FvE9OM+AjupQwbEL9dYyXLl7z0WYMQopw6FAjJ5XtW1+
-	Tceg==
-X-Gm-Message-State: ALoCoQnUa8GipHCJ2/j/iA0Y6ZK/mNzbc57VTHV02UrjPhyrdMLORyj6o1FMapxu42fk9xUOxZz2
-X-Received: by 10.229.176.198 with SMTP id bf6mr20178279qcb.12.1418306078997; 
-	Thu, 11 Dec 2014 05:54:38 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.48.231 with HTTP; Thu, 11 Dec 2014 05:54:18 -0800 (PST)
-In-Reply-To: <20141211124459.GC2467@jama>
-References: <20141211092332.GA2467@jama>
-	<CAJTo0LYwYW40XvxNN=rY4z6fK+4NJ2ZFxa2xsUvuspERa_MT+A@mail.gmail.com>
-	<20141211121417.GB2467@jama>
-	<CAJTo0LYEvdspWOu=_LQTtD6xZTFZvHTyZpwQOEXbtpbSnPE-5Q@mail.gmail.com>
-	<20141211124459.GC2467@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 11 Dec 2014 13:54:18 +0000
-Message-ID: <CAJTo0LZEOOKCP3wV9V8bnNLDs8dhi+rfO+7Lphwak74RpqiXMQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OE-devel <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, test-dependencies 2014-12-11
+	Thu, 11 Dec 2014 06:39:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=iJql8ZUY8vDsc3Gq6hStHZ5ZueoORfEYHvJXxZHJrNA=;
+	b=Jfv6uik1oZuycs4oN6GrWi0xhUsbDWpPUH2Fy9jHUhtcpaW5SHbYG1hqTtQz3ITZCz
+	wt57EIIKMzZq/vmoH7+Po02iKQFdYVrsyDb40KMG00d9Ok7gn/cXBGsOUBKDRSCHr3pS
+	BYG/PVGIvMjCfqQrY0w36NndBjZpKh2lWOCoQIkJWiCgZ01vRi98HkBFikyOIp1sh06g
+	jasIcyCrao8CiO5bsJpoAIaLgpm/4fpbmyRAdB7TNPjxZLj3L9axWJVGwmNjtSp1VLAP
+	qdxelEXQ9ifOfQE6xS2lh/4VWhDAOWF2FISsu1DFDEl55Lx73gECSZ4cI44ikdySz7Ng
+	K85w==
+X-Received: by 10.180.93.167 with SMTP id cv7mr24046989wib.12.1418308791674;
+	Thu, 11 Dec 2014 06:39:51 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	pl1sm2564385wic.16.2014.12.11.06.39.50 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 11 Dec 2014 06:39:50 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 11 Dec 2014 15:39:53 +0100
+Message-Id: <1418308793-4879-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.1.3
+Subject: [meta-qt5][PATCH] qtbase: add PACKAGECONFIG for cups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,22 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2014 13:54:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Dec 2014 14:39:54 -0000
 
-On 11 December 2014 at 12:44, Martin Jansa <martin.jansa@gmail.com> wrote:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtbase.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-> gst-plugins-bad-meta depends on gst-plugins-bad-rtmp when built after
-> world (rtmp is detected) and doesn't depend on gst-plugins-bad-rtmp when
-> built in minimal TMPDIR.
->
-> test-dependencies.sh is showing this warning when the dependencies
-> between "maximal" and "minimal" builds aren't equal.
->
-> I still don't get what's wrong with that warning.
->
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index 4c7e86c..d6053be 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -80,6 +80,7 @@ PACKAGECONFIG[pcre] = "-system-pcre,-qt-pcre,pcre"
+ PACKAGECONFIG[gl] = "-opengl desktop -no-eglfs,,virtual/libgl"
+ PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
+ PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
++PACKAGECONFIG[dbus] = "-cups,-no-cups,cups"
+ PACKAGECONFIG[dbus] = "-dbus,-no-dbus,dbus"
+ PACKAGECONFIG[xcb] = "-xcb -xcb-xlib -system-xcb,-no-xcb,libxcb xcb-util-wm xcb-util-image xcb-util-keysyms xcb-util-renderutil"
+ PACKAGECONFIG[sql-ibase] = "-sql-ibase,-no-sql-ibase"
+-- 
+2.1.3
 
-Gotcha, yes, understood.
-
-Ross
 
