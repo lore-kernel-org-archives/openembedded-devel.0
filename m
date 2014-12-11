@@ -1,27 +1,37 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id EFC6460232
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f180.google.com (mail-qc0-f180.google.com
+	[209.85.216.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 06AC972127
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 09:36:30 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44867149"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2014 17:33:12 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBB9a7w5024817
+	Thu, 11 Dec 2014 11:14:12 +0000 (UTC)
+Received: by mail-qc0-f180.google.com with SMTP id i8so3602579qcq.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 17:36:07 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 11 Dec 2014 17:36:39 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Dec 2014 17:36:20 +0800
-Message-ID: <1418290580-389-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Thu, 11 Dec 2014 03:14:13 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=vDkMWWuEiOYyLbcSfXR01qbzpY4kHk0GZafOCj7uyH0=;
+	b=mW3omHrYUbfltycA04o0vk32LqH1xIuebAM/QMAKI/16q6y0rhFPBiN3lnYhCNvLB/
+	gT5MSzMNxKtJjwUVhYtUgm7E3jJil3Izrf6qabEviJdrYCHwzGtWptVXdxWi7kbEMEH9
+	MK8YaFVWkIAZJbnXv1atkON6moULo2ZgYHzjYdixOKW3qmoGyMUxH1v7BVAsIHaBud8d
+	Lm7q7I7NNwnquX7Mxfx6IZ5NVraPzALvbcot1JuHX+tS86qKOHQ3afKhi65fg+v97YGS
+	CHqG/fYEh4RXWY2BUvVjuHtGPeR8zFBPmXjh1XYnWqTYM1HVuJUMmXZjJXtma1N6sOSy
+	HVbQ==
+X-Gm-Message-State: ALoCoQmfbZAwWDeOPhdR7BPRcat8xxqTylLONHYIrjBBZjWEBLMW0mpxTL7IqJFzwH5jjkTGILgR
+X-Received: by 10.224.92.205 with SMTP id s13mr18848946qam.52.1418296453018;
+	Thu, 11 Dec 2014 03:14:13 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-networking][PATCH] lldpad: Add new recipe
+Received: by 10.140.48.231 with HTTP; Thu, 11 Dec 2014 03:13:51 -0800 (PST)
+In-Reply-To: <20141211092332.GA2467@jama>
+References: <20141211092332.GA2467@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 11 Dec 2014 11:13:51 +0000
+Message-ID: <CAJTo0LYwYW40XvxNN=rY4z6fK+4NJ2ZFxa2xsUvuspERa_MT+A@mail.gmail.com>
+To: OE-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: State of bitbake world, test-dependencies 2014-12-11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,48 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2014 09:36:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 11 Dec 2014 11:14:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-LLDPAD contains the Linux user space daemon and configuration tool for
-Intel LLDP Agent with Enhanced Ethernet support for the Data Center.
+On 11 December 2014 at 09:23, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
----
- .../recipes-daemons/lldpad/lldpad_0.9.46.bb        | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
+> WARN: gst-plugins-bad: gst-plugins-bad-meta rdepends on
+> gst-plugins-bad-rtmp, but it isn't a build dependency?
+> ERROR: gst-plugins-bad: gst-plugins-bad-rtmp package isn't created when
+> building with minimal dependencies?
+> ERROR: gst-plugins-bad: gst-plugins-bad-rtmp-dev package isn't created
+> when building with minimal dependencies?
+>
 
-diff --git a/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-new file mode 100644
-index 0000000..4dad80d
---- /dev/null
-+++ b/meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Intel LLDP Agent"
-+DESCRIPTION = "\
-+This package contains the Linux user space daemon and configuration tool for \
-+Intel LLDP Agent with Enhanced Ethernet support for the Data Center."
-+SECTION = "System Environment/Daemons"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
-+DEPENDS = "libconfig libnl"
-+SRCREV = "48a5f38778b18d6659a672ccb4640f25c6720827"
-+
-+SRC_URI = "git://github.com/jrfastab/lldpad.git;protocol=http"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools-brokensep pkgconfig systemd
-+
-+do_install_append () {
-+    install -m 0755 -d ${D}${systemd_unitdir}
-+    mv ${D}${prefix}${systemd_unitdir}/* ${D}${systemd_unitdir}/
-+    rmdir ${D}${prefix}${systemd_unitdir}
-+}
-+
-+FILES_${PN} += "${systemd_unitdir}"
--- 
-1.8.3.1
+Coincidently last night my world run gave me warnings that
+gst-plugins-bad-rtmp was depending on rtmpdump without a build depends, so
+I've copied the PACKAGECONFIG[rtmp] from gstreamer1.0-plugins-bad to
+gst-plugins-bad.  Presumably this will fix these errors, although that
+warning seems odd.
 
+Ross
 
