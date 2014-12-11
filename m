@@ -1,38 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id DC05872571
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C31070A8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 03:28:07 +0000 (UTC)
-Received: by mail-pa0-f45.google.com with SMTP id lf10so3549390pab.32
+	Thu, 11 Dec 2014 07:44:01 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44859859"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2014 15:40:39 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBB7hYl4016011
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Dec 2014 19:28:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=ME+H+YvJ3Og03d+a6fziaNoVT/QuSD4TCq7AieWNhBM=;
-	b=mT0Xips0uO9bb8WTp0VhclrwuGQnQnQOQ5y49aXj4MexK3sFpejCv9RPAp0JKhBCLe
-	c0YKhlBJuMP+X+PPLLA2fl/6sMzLoOaWHsZbKeeDsplyw5uuyw+mkPh8pa4pgVJI5jXR
-	8tTMIK1Xs+ngVyt049vmLu/M0WxvqjiSe2c9f3clM1AcCtifnKpjcbf/crQVGdcT1ZJo
-	TZgvdPaAdMvqZDU7UTONkf17GuPsN2E3tbp6lqFuoMBKKWt1sPGaafDyWCZQp0INMxN1
-	KYw2BtFzsaFwBXpH6gia5A1N6ARxtAf2dACgBogxYqFirtctW/zBU4vu2ybvE/loiu8R
-	9Tvg==
-X-Received: by 10.66.231.141 with SMTP id tg13mr13234590pac.122.1418268488530; 
-	Wed, 10 Dec 2014 19:28:08 -0800 (PST)
-Received: from [192.168.0.27] (c-76-103-142-85.hsd1.ca.comcast.net.
-	[76.103.142.85])
-	by mx.google.com with ESMTPSA id fr1sm5462733pbb.32.2014.12.10.19.28.07
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Wed, 10 Dec 2014 19:28:07 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.1 \(1993\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1418268031-26550-1-git-send-email-biannm@cn.fujitsu.com>
-Date: Wed, 10 Dec 2014 19:28:06 -0800
-Message-Id: <074B11CB-6F17-4FDA-82C6-D373E8CF7F87@gmail.com>
+	Thu, 11 Dec 2014 15:43:35 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Thu, 11 Dec 2014 15:44:01 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH] drbd: Add recipes
+Thread-Index: AQHQFPHi4NjGLC5TnEuD8ZOPQ5FeL5yJNPQAgADJP6A=
+Date: Thu, 11 Dec 2014 07:43:56 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE24A0@G08CNEXMBPEKD02.g08.fujitsu.local>
 References: <1418268031-26550-1-git-send-email-biannm@cn.fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1993)
+	<074B11CB-6F17-4FDA-82C6-D373E8CF7F87@gmail.com>
+In-Reply-To: <074B11CB-6F17-4FDA-82C6-D373E8CF7F87@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
+MIME-Version: 1.0
 Subject: Re: [meta-networking][PATCH] drbd: Add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -47,130 +43,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2014 03:28:10 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Dec 2014 07:44:03 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
-> On Dec 10, 2014, at 7:20 PM, Bian Naimeng <biannm@cn.fujitsu.com> =
-wrote:
->=20
-> DRBD is a block device which is designed to build high availability =
-clusters.
->=20
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> ---
-> .../recipes-support/drbd/drbd/drbd.service         | 12 +++++
-> meta-networking/recipes-support/drbd/drbd_8.4.4.bb | 55 =
-++++++++++++++++++++++
-> 2 files changed, 67 insertions(+)
-> create mode 100644 =
-meta-networking/recipes-support/drbd/drbd/drbd.service
-> create mode 100644 meta-networking/recipes-support/drbd/drbd_8.4.4.bb
->=20
-> diff --git a/meta-networking/recipes-support/drbd/drbd/drbd.service =
-b/meta-networking/recipes-support/drbd/drbd/drbd.service
-> new file mode 100644
-> index 0000000..6b6ab30
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/drbd/drbd/drbd.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=3DDRBD Service
-> +After=3Dnetwork.target
-> +
-> +[Service]
-> +Type=3Doneshot
-> +RemainAfterExit=3Dyes
-> +ExecStart=3D@LIBEXECDIR@/drbd-helper startxxx
-
-is that a typo ? or did you mean startxxx
-
-> +ExecStop=3D@LIBEXECDIR@/drbd-helper stop
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-networking/recipes-support/drbd/drbd_8.4.4.bb =
-b/meta-networking/recipes-support/drbd/drbd_8.4.4.bb
-> new file mode 100644
-> index 0000000..c7a6973
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/drbd/drbd_8.4.4.bb
-> @@ -0,0 +1,55 @@
-> +SUMMARY =3D "BD driver for Linux"
-> +DESCRIPTION =3D "DRBD mirrors a block device over the network to =
-another machine.\
-> +DRBD mirrors a block device over the network to another machine.\
-> +Think of it as networked raid 1. It is a building block for\
-> +setting up high availability (HA) clusters."
-> +
-> +HOMEPAGE =3D "http://www.drbd.org/"
-> +SECTION =3D "kernel/userland"
-> +
-> +RDEPENDS_${PN} +=3D "bash perl"
-> +
-> +LICENSE =3D "GPLv2+"
-> +
-> +LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3D5574c6965ae5f583e55880e397fbb018"
-> +
-> +SRC_URI =3D "http://oss.linbit.com/${BPN}/8.4/${BPN}-${PV}.tar.gz \
-> +           file://drbd.service \
-> +          "
-> +
-> +SRC_URI[md5sum] =3D "b51815343c1a9151e2936b3b97520388"
-> +SRC_URI[sha256sum] =3D =
-"a056219c5c23b079c3354179f7a1b9f55d47e573a4cd3178f2ef4c15604288f0"
-> +
-> +inherit autotools-brokensep systemd
-
-why brokensep ?
-
-> +
-> +EXTRA_OECONF =3D "--with-utils                  \
-> +                --without-km                  \
-> +                --with-initdir=3D/etc/init.d    \
-> +                --without-pacemaker           \
-> +                --without-rgmanager           \
-> +                --without-bashcompletion      \
-> +                --with-distro debian          \
-> +               "
-> +
-> +do_configure (){
-> +    oe_runconf
-> +}
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "drbd.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
-> +
-> +do_install_append() {
-> +    if =
-${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-> +        install -d ${D}/${systemd_unitdir}/system
-> +        install -m 644 ${WORKDIR}/drbd.service =
-${D}/${systemd_unitdir}/system
-> +        install -d ${D}/${libexecdir}
-> +        install -m 755 ${D}/${sysconfdir}/init.d/drbd =
-${D}/${libexecdir}/drbd-helper
-> +
-> +        sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
-> +            ${D}${systemd_unitdir}/system/drbd.service
-> +    fi
-> +}
-> +
-> +FILES_${PN} +=3D =E2=80=9Crun"
-
-should this be relative to prefix or something ?
-
-> +FILES_${PN} +=3D "${base_libdir}/drbd"
-> +FILES_${PN}-dbg +=3D "${base_libdir}/drbd/.debug"
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mIEtoZW0NCj4g
+UmFqDQo+IFNlbnQ6IFRodXJzZGF5LCBEZWNlbWJlciAxMSwgMjAxNCAxMToyOCBBTQ0KPiBUbzog
+b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6
+IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0hdIGRyYmQ6IEFkZCByZWNpcGVzDQo+IA0KPiAN
+Cj4gPiBPbiBEZWMgMTAsIDIwMTQsIGF0IDc6MjAgUE0sIEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNu
+LmZ1aml0c3UuY29tPiB3cm90ZToNCj4gPg0KPiA+IERSQkQgaXMgYSBibG9jayBkZXZpY2Ugd2hp
+Y2ggaXMgZGVzaWduZWQgdG8gYnVpbGQgaGlnaCBhdmFpbGFiaWxpdHkgY2x1c3RlcnMuDQo+ID4N
+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBCaWFuIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4N
+Cj4gPiAtLS0NCj4gPiAuLi4vcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJiZC9kcmJkLnNlcnZpY2Ug
+ICAgICAgICB8IDEyICsrKysrDQo+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9k
+cmJkL2RyYmRfOC40LjQuYmIgfCA1NQ0KPiA+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiAy
+IGZpbGVzIGNoYW5nZWQsIDY3IGluc2VydGlvbnMoKykNCj4gPiBjcmVhdGUgbW9kZSAxMDA2NDQN
+Cj4gPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJiZC9kcmJkLnNlcnZp
+Y2UNCj4gPiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9y
+dC9kcmJkL2RyYmRfOC40LjQuYmINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtp
+bmcvcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJiZC9kcmJkLnNlcnZpY2UNCj4gPiBiL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9kcmJkL2RyYmQuc2VydmljZQ0KPiA+IG5ldyBm
+aWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMC4uNmI2YWIzMA0KPiA+IC0tLSAvZGV2
+L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJi
+ZC9kcmJkLnNlcnZpY2UNCj4gPiBAQCAtMCwwICsxLDEyIEBADQo+ID4gK1tVbml0XQ0KPiA+ICtE
+ZXNjcmlwdGlvbj1EUkJEIFNlcnZpY2UNCj4gPiArQWZ0ZXI9bmV0d29yay50YXJnZXQNCj4gPiAr
+DQo+ID4gK1tTZXJ2aWNlXQ0KPiA+ICtUeXBlPW9uZXNob3QNCj4gPiArUmVtYWluQWZ0ZXJFeGl0
+PXllcw0KPiA+ICtFeGVjU3RhcnQ9QExJQkVYRUNESVJAL2RyYmQtaGVscGVyIHN0YXJ0eHh4DQo+
+IA0KPiBpcyB0aGF0IGEgdHlwbyA/IG9yIGRpZCB5b3UgbWVhbiBzdGFydHh4eA0KDQpTb3JyeSwg
+YW5kIHRoYW5rcyBmb3IgeW91ciByZXZpZXcuDQpJIHdpbGwgZml4IGl0IGluIHRoZSBuZXh0IHZl
+cnNpb24uDQoNCj4gDQo+ID4gK0V4ZWNTdG9wPUBMSUJFWEVDRElSQC9kcmJkLWhlbHBlciBzdG9w
+DQo+ID4gKw0KPiA+ICtbSW5zdGFsbF0NCj4gPiArV2FudGVkQnk9bXVsdGktdXNlci50YXJnZXQN
+Cj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJkL2Ry
+YmRfOC40LjQuYmINCj4gPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9k
+cmJkXzguNC40LmJiDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAw
+Li5jN2E2OTczDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9y
+ZWNpcGVzLXN1cHBvcnQvZHJiZC9kcmJkXzguNC40LmJiDQo+ID4gQEAgLTAsMCArMSw1NSBAQA0K
+PiA+ICtTVU1NQVJZID0gIkJEIGRyaXZlciBmb3IgTGludXgiDQo+ID4gK0RFU0NSSVBUSU9OID0g
+IkRSQkQgbWlycm9ycyBhIGJsb2NrIGRldmljZSBvdmVyIHRoZSBuZXR3b3JrIHRvDQo+ID4gK2Fu
+b3RoZXIgbWFjaGluZS5cIERSQkQgbWlycm9ycyBhIGJsb2NrIGRldmljZSBvdmVyIHRoZSBuZXR3
+b3JrIHRvDQo+ID4gK2Fub3RoZXIgbWFjaGluZS5cIFRoaW5rIG9mIGl0IGFzIG5ldHdvcmtlZCBy
+YWlkIDEuIEl0IGlzIGEgYnVpbGRpbmcNCj4gPiArYmxvY2sgZm9yXCBzZXR0aW5nIHVwIGhpZ2gg
+YXZhaWxhYmlsaXR5IChIQSkgY2x1c3RlcnMuIg0KPiA+ICsNCj4gPiArSE9NRVBBR0UgPSAiaHR0
+cDovL3d3dy5kcmJkLm9yZy8iDQo+ID4gK1NFQ1RJT04gPSAia2VybmVsL3VzZXJsYW5kIg0KPiA+
+ICsNCj4gPiArUkRFUEVORFNfJHtQTn0gKz0gImJhc2ggcGVybCINCj4gPiArDQo+ID4gK0xJQ0VO
+U0UgPSAiR1BMdjIrIg0KPiA+ICsNCj4gPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09Q
+WUlORzttZDU9NTU3NGM2OTY1YWU1ZjU4M2U1NTg4MGUzOTdmYmIwMTgiDQo+ID4gKw0KPiA+ICtT
+UkNfVVJJID0gImh0dHA6Ly9vc3MubGluYml0LmNvbS8ke0JQTn0vOC40LyR7QlBOfS0ke1BWfS50
+YXIuZ3ogXA0KPiA+ICsgICAgICAgICAgIGZpbGU6Ly9kcmJkLnNlcnZpY2UgXA0KPiA+ICsgICAg
+ICAgICAgIg0KPiA+ICsNCj4gPiArU1JDX1VSSVttZDVzdW1dID0gImI1MTgxNTM0M2MxYTkxNTFl
+MjkzNmIzYjk3NTIwMzg4Ig0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiYTA1NjIxOWM1
+YzIzYjA3OWMzMzU0MTc5ZjdhMWI5ZjU1ZDQ3ZTU3M2E0Y2QzMTc4ZjJlZjRjMTU2MDQyODhmMCIN
+Cj4gPiArDQo+ID4gK2luaGVyaXQgYXV0b3Rvb2xzLWJyb2tlbnNlcCBzeXN0ZW1kDQo+IA0KPiB3
+aHkgYnJva2Vuc2VwID8NCg0KVGhlIG1ha2VmaWxlLmluIG9mIGRyYmQgdXNlcyB0aGUgcmVsYXRp
+dmUgcGF0aCB0byBwb2ludCBzb3VyY2UgZmlsZXMuDQpDb21waWxlIGVycm9ycyB3aWxsIGJlIGNh
+dWdodCBpZiB3ZSBidWlsZCBpdCBvbiAke0J9IHN1Y2ggYXMgZm9sbG93aW5nLg0KLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tDQp8IE5PVEU6IG1ha2UgLWogNA0KfCAvYmluL3NlZDogY2FuJ3QgcmVhZCBkcmJkL2xpbnV4
+L2RyYmRfY29uZmlnLmg6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3RvcnkNCnwgbWFrZSAtQyBkcmJk
+IGRyYmRfYnVpbGR0YWcuYw0KfCBtYWtlOiAqKiogZHJiZDogTm8gc3VjaCBmaWxlIG9yIGRpcmVj
+dG9yeS4gIFN0b3AuDQp8IG1ha2U6ICoqKiBbZHJiZC9kcmJkX2J1aWxkdGFnLmNdIEVycm9yIDIN
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0NCg0KPiANCj4gPiArDQo+ID4gK0VYVFJBX09FQ09ORiA9ICItLXdpdGgt
+dXRpbHMgICAgICAgICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQt
+a20gICAgICAgICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGgtaW5pdGRp
+cj0vZXRjL2luaXQuZCAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQtcGFjZW1h
+a2VyICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQtcmdtYW5hZ2Vy
+ICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQtYmFzaGNvbXBsZXRp
+b24gICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGgtZGlzdHJvIGRlYmlhbiAgICAg
+ICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICINCj4gPiArDQo+ID4gK2RvX2NvbmZpZ3VyZSAo
+KXsNCj4gPiArICAgIG9lX3J1bmNvbmYNCj4gPiArfQ0KPiA+ICsNCj4gPiArU1lTVEVNRF9TRVJW
+SUNFXyR7UE59ID0gImRyYmQuc2VydmljZSINCj4gPiArU1lTVEVNRF9BVVRPX0VOQUJMRSA9ICJk
+aXNhYmxlIg0KPiA+ICsNCj4gPiArZG9faW5zdGFsbF9hcHBlbmQoKSB7DQo+ID4gKyAgICBpZiAk
+e0BiYXNlX2NvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCdzeXN0ZW1kJywndHJ1ZScsJ2ZhbHNl
+JyxkKX07DQo+IHRoZW4NCj4gPiArICAgICAgICBpbnN0YWxsIC1kICR7RH0vJHtzeXN0ZW1kX3Vu
+aXRkaXJ9L3N5c3RlbQ0KPiA+ICsgICAgICAgIGluc3RhbGwgLW0gNjQ0ICR7V09SS0RJUn0vZHJi
+ZC5zZXJ2aWNlDQo+ICR7RH0vJHtzeXN0ZW1kX3VuaXRkaXJ9L3N5c3RlbQ0KPiA+ICsgICAgICAg
+IGluc3RhbGwgLWQgJHtEfS8ke2xpYmV4ZWNkaXJ9DQo+ID4gKyAgICAgICAgaW5zdGFsbCAtbSA3
+NTUgJHtEfS8ke3N5c2NvbmZkaXJ9L2luaXQuZC9kcmJkDQo+ID4gKyR7RH0vJHtsaWJleGVjZGly
+fS9kcmJkLWhlbHBlcg0KPiA+ICsNCj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MsQExJQkVYRUNE
+SVJALCR7bGliZXhlY2Rpcn0sZycgXA0KPiA+ICsgICAgICAgICAgICAke0R9JHtzeXN0ZW1kX3Vu
+aXRkaXJ9L3N5c3RlbS9kcmJkLnNlcnZpY2UNCj4gPiArICAgIGZpDQo+ID4gK30NCj4gPiArDQo+
+ID4gK0ZJTEVTXyR7UE59ICs9IOKAnHJ1biINCj4gDQo+IHNob3VsZCB0aGlzIGJlIHJlbGF0aXZl
+IHRvIHByZWZpeCBvciBzb21ldGhpbmcgPw0KDQpTb3JyeSwgaXQgc2hvdWxkIGJlICIvcnVuIi4N
+Ckkgd2lsbCBmaXggaXQgaW4gdGhlIG5leHQgdmVyc2lvbi4NCg0KVGhhbmtzLA0KIEJpYW4NCg0K
+PiANCj4gPiArRklMRVNfJHtQTn0gKz0gIiR7YmFzZV9saWJkaXJ9L2RyYmQiDQo+ID4gK0ZJTEVT
+XyR7UE59LWRiZyArPSAiJHtiYXNlX2xpYmRpcn0vZHJiZC8uZGVidWciDQo+ID4gLS0NCj4gPiAx
+LjkuMQ0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXw0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPiBP
+cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9saXN0
+cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo+
+IA0KPiAtLQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Xw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
+L21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
 
