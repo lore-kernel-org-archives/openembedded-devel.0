@@ -1,35 +1,35 @@
-Return-Path: <biannm@cn.fujitsu.com>
+Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C31070A8B
+	by mail.openembedded.org (Postfix) with ESMTP id 809FE601F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 07:44:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44859859"
+	Thu, 11 Dec 2014 08:55:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44864398"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2014 15:40:39 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2014 16:52:33 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBB7hYl4016011
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBB8tTji021431
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Dec 2014 15:43:35 +0800
+	Thu, 11 Dec 2014 16:55:29 +0800
 Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Thu, 11 Dec 2014 15:44:01 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0181.006; Thu, 11 Dec 2014 16:56:01 +0800
+From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] drbd: Add recipes
-Thread-Index: AQHQFPHi4NjGLC5TnEuD8ZOPQ5FeL5yJNPQAgADJP6A=
-Date: Thu, 11 Dec 2014 07:43:56 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE24A0@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1418268031-26550-1-git-send-email-biannm@cn.fujitsu.com>
-	<074B11CB-6F17-4FDA-82C6-D373E8CF7F87@gmail.com>
-In-Reply-To: <074B11CB-6F17-4FDA-82C6-D373E8CF7F87@gmail.com>
-Accept-Language: en-US
+Thread-Topic: [oe] [meta-oe][PATCH] openct: add new recipe
+Thread-Index: AQHQE1C+sShDOLX570yKE1rx0Au0SZyIPt2AgAHSB9A=
+Date: Thu, 11 Dec 2014 08:55:51 +0000
+Message-ID: <A8FC939F80655644A89BB21CCD3741E8738E94D6@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1418088972-3518-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<20141210123539.GC2473@jama>
+In-Reply-To: <20141210123539.GC2473@jama>
+Accept-Language: zh-CN, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+x-originating-ip: [10.167.226.35]
 MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] drbd: Add recipes
+Subject: Re: [meta-oe][PATCH] openct: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,101 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Dec 2014 07:44:03 -0000
+X-List-Received-Date: Thu, 11 Dec 2014 08:56:01 -0000
 Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mIEtoZW0NCj4g
-UmFqDQo+IFNlbnQ6IFRodXJzZGF5LCBEZWNlbWJlciAxMSwgMjAxNCAxMToyOCBBTQ0KPiBUbzog
-b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6
-IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0hdIGRyYmQ6IEFkZCByZWNpcGVzDQo+IA0KPiAN
-Cj4gPiBPbiBEZWMgMTAsIDIwMTQsIGF0IDc6MjAgUE0sIEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNu
-LmZ1aml0c3UuY29tPiB3cm90ZToNCj4gPg0KPiA+IERSQkQgaXMgYSBibG9jayBkZXZpY2Ugd2hp
-Y2ggaXMgZGVzaWduZWQgdG8gYnVpbGQgaGlnaCBhdmFpbGFiaWxpdHkgY2x1c3RlcnMuDQo+ID4N
-Cj4gPiBTaWduZWQtb2ZmLWJ5OiBCaWFuIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4N
-Cj4gPiAtLS0NCj4gPiAuLi4vcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJiZC9kcmJkLnNlcnZpY2Ug
-ICAgICAgICB8IDEyICsrKysrDQo+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9k
-cmJkL2RyYmRfOC40LjQuYmIgfCA1NQ0KPiA+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiAy
-IGZpbGVzIGNoYW5nZWQsIDY3IGluc2VydGlvbnMoKykNCj4gPiBjcmVhdGUgbW9kZSAxMDA2NDQN
-Cj4gPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJiZC9kcmJkLnNlcnZp
-Y2UNCj4gPiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9y
-dC9kcmJkL2RyYmRfOC40LjQuYmINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtp
-bmcvcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJiZC9kcmJkLnNlcnZpY2UNCj4gPiBiL21ldGEtbmV0
-d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9kcmJkL2RyYmQuc2VydmljZQ0KPiA+IG5ldyBm
-aWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMC4uNmI2YWIzMA0KPiA+IC0tLSAvZGV2
-L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2RyYmQvZHJi
-ZC9kcmJkLnNlcnZpY2UNCj4gPiBAQCAtMCwwICsxLDEyIEBADQo+ID4gK1tVbml0XQ0KPiA+ICtE
-ZXNjcmlwdGlvbj1EUkJEIFNlcnZpY2UNCj4gPiArQWZ0ZXI9bmV0d29yay50YXJnZXQNCj4gPiAr
-DQo+ID4gK1tTZXJ2aWNlXQ0KPiA+ICtUeXBlPW9uZXNob3QNCj4gPiArUmVtYWluQWZ0ZXJFeGl0
-PXllcw0KPiA+ICtFeGVjU3RhcnQ9QExJQkVYRUNESVJAL2RyYmQtaGVscGVyIHN0YXJ0eHh4DQo+
-IA0KPiBpcyB0aGF0IGEgdHlwbyA/IG9yIGRpZCB5b3UgbWVhbiBzdGFydHh4eA0KDQpTb3JyeSwg
-YW5kIHRoYW5rcyBmb3IgeW91ciByZXZpZXcuDQpJIHdpbGwgZml4IGl0IGluIHRoZSBuZXh0IHZl
-cnNpb24uDQoNCj4gDQo+ID4gK0V4ZWNTdG9wPUBMSUJFWEVDRElSQC9kcmJkLWhlbHBlciBzdG9w
-DQo+ID4gKw0KPiA+ICtbSW5zdGFsbF0NCj4gPiArV2FudGVkQnk9bXVsdGktdXNlci50YXJnZXQN
-Cj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9kcmJkL2Ry
-YmRfOC40LjQuYmINCj4gPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvZHJiZC9k
-cmJkXzguNC40LmJiDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAw
-Li5jN2E2OTczDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9y
-ZWNpcGVzLXN1cHBvcnQvZHJiZC9kcmJkXzguNC40LmJiDQo+ID4gQEAgLTAsMCArMSw1NSBAQA0K
-PiA+ICtTVU1NQVJZID0gIkJEIGRyaXZlciBmb3IgTGludXgiDQo+ID4gK0RFU0NSSVBUSU9OID0g
-IkRSQkQgbWlycm9ycyBhIGJsb2NrIGRldmljZSBvdmVyIHRoZSBuZXR3b3JrIHRvDQo+ID4gK2Fu
-b3RoZXIgbWFjaGluZS5cIERSQkQgbWlycm9ycyBhIGJsb2NrIGRldmljZSBvdmVyIHRoZSBuZXR3
-b3JrIHRvDQo+ID4gK2Fub3RoZXIgbWFjaGluZS5cIFRoaW5rIG9mIGl0IGFzIG5ldHdvcmtlZCBy
-YWlkIDEuIEl0IGlzIGEgYnVpbGRpbmcNCj4gPiArYmxvY2sgZm9yXCBzZXR0aW5nIHVwIGhpZ2gg
-YXZhaWxhYmlsaXR5IChIQSkgY2x1c3RlcnMuIg0KPiA+ICsNCj4gPiArSE9NRVBBR0UgPSAiaHR0
-cDovL3d3dy5kcmJkLm9yZy8iDQo+ID4gK1NFQ1RJT04gPSAia2VybmVsL3VzZXJsYW5kIg0KPiA+
-ICsNCj4gPiArUkRFUEVORFNfJHtQTn0gKz0gImJhc2ggcGVybCINCj4gPiArDQo+ID4gK0xJQ0VO
-U0UgPSAiR1BMdjIrIg0KPiA+ICsNCj4gPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09Q
-WUlORzttZDU9NTU3NGM2OTY1YWU1ZjU4M2U1NTg4MGUzOTdmYmIwMTgiDQo+ID4gKw0KPiA+ICtT
-UkNfVVJJID0gImh0dHA6Ly9vc3MubGluYml0LmNvbS8ke0JQTn0vOC40LyR7QlBOfS0ke1BWfS50
-YXIuZ3ogXA0KPiA+ICsgICAgICAgICAgIGZpbGU6Ly9kcmJkLnNlcnZpY2UgXA0KPiA+ICsgICAg
-ICAgICAgIg0KPiA+ICsNCj4gPiArU1JDX1VSSVttZDVzdW1dID0gImI1MTgxNTM0M2MxYTkxNTFl
-MjkzNmIzYjk3NTIwMzg4Ig0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiYTA1NjIxOWM1
-YzIzYjA3OWMzMzU0MTc5ZjdhMWI5ZjU1ZDQ3ZTU3M2E0Y2QzMTc4ZjJlZjRjMTU2MDQyODhmMCIN
-Cj4gPiArDQo+ID4gK2luaGVyaXQgYXV0b3Rvb2xzLWJyb2tlbnNlcCBzeXN0ZW1kDQo+IA0KPiB3
-aHkgYnJva2Vuc2VwID8NCg0KVGhlIG1ha2VmaWxlLmluIG9mIGRyYmQgdXNlcyB0aGUgcmVsYXRp
-dmUgcGF0aCB0byBwb2ludCBzb3VyY2UgZmlsZXMuDQpDb21waWxlIGVycm9ycyB3aWxsIGJlIGNh
-dWdodCBpZiB3ZSBidWlsZCBpdCBvbiAke0J9IHN1Y2ggYXMgZm9sbG93aW5nLg0KLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tDQp8IE5PVEU6IG1ha2UgLWogNA0KfCAvYmluL3NlZDogY2FuJ3QgcmVhZCBkcmJkL2xpbnV4
-L2RyYmRfY29uZmlnLmg6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3RvcnkNCnwgbWFrZSAtQyBkcmJk
-IGRyYmRfYnVpbGR0YWcuYw0KfCBtYWtlOiAqKiogZHJiZDogTm8gc3VjaCBmaWxlIG9yIGRpcmVj
-dG9yeS4gIFN0b3AuDQp8IG1ha2U6ICoqKiBbZHJiZC9kcmJkX2J1aWxkdGFnLmNdIEVycm9yIDIN
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0NCg0KPiANCj4gPiArDQo+ID4gK0VYVFJBX09FQ09ORiA9ICItLXdpdGgt
-dXRpbHMgICAgICAgICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQt
-a20gICAgICAgICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGgtaW5pdGRp
-cj0vZXRjL2luaXQuZCAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQtcGFjZW1h
-a2VyICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQtcmdtYW5hZ2Vy
-ICAgICAgICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGhvdXQtYmFzaGNvbXBsZXRp
-b24gICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICAtLXdpdGgtZGlzdHJvIGRlYmlhbiAgICAg
-ICAgICBcDQo+ID4gKyAgICAgICAgICAgICAgICINCj4gPiArDQo+ID4gK2RvX2NvbmZpZ3VyZSAo
-KXsNCj4gPiArICAgIG9lX3J1bmNvbmYNCj4gPiArfQ0KPiA+ICsNCj4gPiArU1lTVEVNRF9TRVJW
-SUNFXyR7UE59ID0gImRyYmQuc2VydmljZSINCj4gPiArU1lTVEVNRF9BVVRPX0VOQUJMRSA9ICJk
-aXNhYmxlIg0KPiA+ICsNCj4gPiArZG9faW5zdGFsbF9hcHBlbmQoKSB7DQo+ID4gKyAgICBpZiAk
-e0BiYXNlX2NvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCdzeXN0ZW1kJywndHJ1ZScsJ2ZhbHNl
-JyxkKX07DQo+IHRoZW4NCj4gPiArICAgICAgICBpbnN0YWxsIC1kICR7RH0vJHtzeXN0ZW1kX3Vu
-aXRkaXJ9L3N5c3RlbQ0KPiA+ICsgICAgICAgIGluc3RhbGwgLW0gNjQ0ICR7V09SS0RJUn0vZHJi
-ZC5zZXJ2aWNlDQo+ICR7RH0vJHtzeXN0ZW1kX3VuaXRkaXJ9L3N5c3RlbQ0KPiA+ICsgICAgICAg
-IGluc3RhbGwgLWQgJHtEfS8ke2xpYmV4ZWNkaXJ9DQo+ID4gKyAgICAgICAgaW5zdGFsbCAtbSA3
-NTUgJHtEfS8ke3N5c2NvbmZkaXJ9L2luaXQuZC9kcmJkDQo+ID4gKyR7RH0vJHtsaWJleGVjZGly
-fS9kcmJkLWhlbHBlcg0KPiA+ICsNCj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MsQExJQkVYRUNE
-SVJALCR7bGliZXhlY2Rpcn0sZycgXA0KPiA+ICsgICAgICAgICAgICAke0R9JHtzeXN0ZW1kX3Vu
-aXRkaXJ9L3N5c3RlbS9kcmJkLnNlcnZpY2UNCj4gPiArICAgIGZpDQo+ID4gK30NCj4gPiArDQo+
-ID4gK0ZJTEVTXyR7UE59ICs9IOKAnHJ1biINCj4gDQo+IHNob3VsZCB0aGlzIGJlIHJlbGF0aXZl
-IHRvIHByZWZpeCBvciBzb21ldGhpbmcgPw0KDQpTb3JyeSwgaXQgc2hvdWxkIGJlICIvcnVuIi4N
-Ckkgd2lsbCBmaXggaXQgaW4gdGhlIG5leHQgdmVyc2lvbi4NCg0KVGhhbmtzLA0KIEJpYW4NCg0K
-PiANCj4gPiArRklMRVNfJHtQTn0gKz0gIiR7YmFzZV9saWJkaXJ9L2RyYmQiDQo+ID4gK0ZJTEVT
-XyR7UE59LWRiZyArPSAiJHtiYXNlX2xpYmRpcn0vZHJiZC8uZGVidWciDQo+ID4gLS0NCj4gPiAx
-LjkuMQ0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXw0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPiBP
-cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9saXN0
-cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo+
-IA0KPiAtLQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Xw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
-L21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
+Hi, Jansa:
+
+Thank you very much for your reply.
+Those days you send some build errors about the recipe=20
+Which I had committed.
+But indeed the errors did not occur in my compile environment.
+So I will do some extra test until I find the bug and sent new versions. :)
+
+Best Regards,
+Li=20
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Wednesday, December 10, 2014 8:36 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH] openct: add new recipe
+machines via TCP/IP.
+>=20
+> Fails to build because of bashisms in do_install:
+> http://errors.yoctoproject.org/Errors/Search/Details/6223/1/10/3559
+>=20
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
