@@ -1,36 +1,27 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f180.google.com (mail-vc0-f180.google.com
-	[209.85.220.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 88D7460232
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F0A465CAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Dec 2014 09:05:52 +0000 (UTC)
-Received: by mail-vc0-f180.google.com with SMTP id im6so3434061vcb.39
+	Fri, 12 Dec 2014 09:32:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="44948455"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Dec 2014 17:29:05 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBC9W0Jp012328
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Dec 2014 01:05:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=1d14WGf7eGhjfXzJbb0cysPtDLwY7EZs95KLszYOlLY=;
-	b=avaQARalRDIg7bceI2RIITzGTz8fBvEfMpwkAx7K4ZxyOgL29e0jIAKgvyAJVvgubP
-	2LkbzxGGdxOOdPcOiWI0R2hby6PPvmaDKbmhYIcdZ0ApQP/CnvDcXTwQrj8JikREi59W
-	d/W7HaI1z2WSvsuWLcfxAhrd+UTN/lTmrkbpYJi3K0ythxFsX0PP+HXLaJYJNjW2pHy+
-	Y34Q6looZn2PkkS3DXwrDQRc15z0AYueNnTg5js1zDnDZ+I7ujbasIAk1d8e54NxsuVG
-	PX0Y8KvDADorq+lT7QBe6COo6a784YS0WrjqNfJcHONIW7NEBHL/sJDK033h/AxiL7HQ
-	8FoA==
+	Fri, 12 Dec 2014 17:32:00 +0800
+Received: from localhost.localdomain (10.167.226.35) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 12 Dec 2014 17:32:23 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 12 Dec 2014 17:31:35 +0800
+Message-ID: <1418376695-7152-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Received: by 10.52.244.78 with SMTP id xe14mr8619969vdc.6.1418375152738;
-	Fri, 12 Dec 2014 01:05:52 -0800 (PST)
-Received: by 10.52.237.165 with HTTP; Fri, 12 Dec 2014 01:05:52 -0800 (PST)
-In-Reply-To: <1418373159-29364-1-git-send-email-koen@dominion.thruhere.net>
-References: <1418373159-29364-1-git-send-email-koen@dominion.thruhere.net>
-Date: Fri, 12 Dec 2014 10:05:52 +0100
-Message-ID: <CALbNGRSWebvs_559EMwOPpAFv2UiCxe0VVqfZL-XxaZW=uBbBw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gumstix-community] u-boot-overo 2013.07: add missing LICENSE info
+X-Originating-IP: [10.167.226.35]
+Subject: [meta-oe][PATCH] system-setup-keyboard: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,38 +35,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Dec 2014 09:06:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 12 Dec 2014 09:32:34 -0000
+Content-Type: text/plain
 
-On Fri, Dec 12, 2014 at 9:32 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
-> OE-core moved the LICENSE info from the .inc to the .bb, update
-> u-boot-overo to match.
->
-> This fixes an error in bitbake-prserv-tool export.
->
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> ---
->  recipes-bsp/u-boot/u-boot-overo_2013.07.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/recipes-bsp/u-boot/u-boot-overo_2013.07.bb b/recipes-bsp/u-boot/u-boot-overo_2013.07.bb
-> index df43372..348c933 100644
-> --- a/recipes-bsp/u-boot/u-boot-overo_2013.07.bb
-> +++ b/recipes-bsp/u-boot/u-boot-overo_2013.07.bb
-> @@ -1,5 +1,9 @@
->  require recipes-bsp/u-boot/u-boot.inc
->
-> +LICENSE = "GPLv2+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb \
-> +                    file://README;beginline=1;endline=22;md5=78b195c11cb6ef63e6985140db7d7bab"
-> +
->  # SPL build
->  UBOOT_BINARY = "u-boot.img"
->  UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
-> --
-> 1.9.0
->
-applied - thanks
+system-setup-keyboard is a daemon to monitor the keyboard layout
+configured in /etc/sysconfig/keyboard and transfer this into
+the matching xorg.conf.d snippet.
 
-Andreas
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ ...modify-path-of-python-and-add-v-parameter.patch | 30 ++++++++++++++++++++++
+ .../system-setup-keyboard_0.8.8.bb                 | 26 +++++++++++++++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-support/system-setup-keyboard/files/0001-modify-path-of-python-and-add-v-parameter.patch
+ create mode 100644 meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb
+
+diff --git a/meta-oe/recipes-support/system-setup-keyboard/files/0001-modify-path-of-python-and-add-v-parameter.patch b/meta-oe/recipes-support/system-setup-keyboard/files/0001-modify-path-of-python-and-add-v-parameter.patch
+new file mode 100644
+index 0000000..4b56935
+--- /dev/null
++++ b/meta-oe/recipes-support/system-setup-keyboard/files/0001-modify-path-of-python-and-add-v-parameter.patch
+@@ -0,0 +1,30 @@
++From 3d2bbd78e5583ef4290b3a64e4ecc19bebd4a698 Mon Sep 17 00:00:00 2001
++From: Li xin <lixin.fnst@cn.fujitsu.com>
++Date: Tue, 11 Nov 2014 14:20:29 +0900
++Subject: [PATCH] modify path of python and add -v parameter
++
++fix error: ImportError: No module named system_config_keyboard.keyboard_models
++
++Upstream-Status: pending
++
++Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++---
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 55c5b60..c528f36 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -5,7 +5,7 @@ MAN_SECTION=1
++ all: system-setup-keyboard
++ 
++ keyboards.h:
++-	python get_layouts.py > keyboards.h
+++	/usr/bin/python -v get_layouts.py > keyboards.h
++ 
++ system-setup-keyboard: keyboards.h system-setup-keyboard.c
++ 	$(CC) system-setup-keyboard.c `pkg-config --cflags --libs glib-2.0` $(CFLAGS) -o system-setup-keyboard
++-- 
++1.8.4.2
++
+diff --git a/meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb b/meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb
+new file mode 100644
+index 0000000..3b34167
+--- /dev/null
++++ b/meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "xorg.conf keyboard layout callout"
++DESCRIPTION = "system-setup-keyboard is a daemon to monitor the keyboard layout configured in\
++/etc/sysconfig/keyboard and transfer this into the matching xorg.conf.d snippet."
++
++HOMEPAGE = "https://git.fedorahosted.org/git/system-setup-keyboard.git"
++SECTION = "Applications/System"
++
++SRC_URI = " \
++    https://git.fedorahosted.org/cgit/${PN}.git/snapshot/${BP}.tar.gz \
++    file://0001-modify-path-of-python-and-add-v-parameter.patch \
++"
++SRC_URI[md5sum] = "399003968ccc739cddd9cc370af377a0"
++SRC_URI[sha256sum] = "1ef6ef79c3588e85d7f42e99eb80a2e459f966284cf029c2d6fc1b645abcb860"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=bf57969a59612c5aca007b340c49d3a2"
++
++DEPENDS = "glib-2.0"
++
++do_install() {
++    oe_runmake install DESTDIR=${D}
++    install -d ${D}/etc/X11/xorg.conf.d
++    touch ${D}/etc/X11/xorg.conf.d/00-system-setup-keyboard.conf
++}
++
++FILES_${PN} += "${systemd_unitdir}/system/${PN}.service"
+-- 
+1.8.4.2
+
 
