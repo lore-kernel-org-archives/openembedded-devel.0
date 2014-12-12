@@ -1,24 +1,37 @@
-Return-Path: <Awais_Belal@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 8444A601F5
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D26865FEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Dec 2014 07:22:10 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-01.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1XzKYE-0002ZR-1z from Awais_Belal@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Dec 2014 23:22:10 -0800
-Received: from awais-Precision-M4700.mgc.mentorg.com (137.202.0.76) by
-	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server id 14.3.181.6; Fri, 12 Dec 2014 07:22:08 +0000
-From: Awais Belal <awais_belal@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Dec 2014 12:21:51 +0500
-Message-ID: <1418368911-23987-1-git-send-email-awais_belal@mentor.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] iperf: fix out of tree configuration
+	Fri, 12 Dec 2014 08:32:49 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id r20so1777548wiv.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Dec 2014 00:32:49 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Xf76eWFKvOClCoMqe8YJBmNp9rkvB2FF+P9/hNp6KH8=;
+	b=TIlYrAs325HJXNxXVra+AtM0Qpm2HicM9rvc1rrhgfsrNXDM/FnJijfhO12YOh00kB
+	G8t5q4FwcnssG0G1Q7RJUAAfa/G6pWbErZXtMF4z+XrMkoZMnwkjskyvXSeC74yxKX7d
+	s8595N2BJAkzuGWNdOyl1fP2Y5QcOPjSUWVVi56V1AD+zFLL5MWJFkNMccWPjFBDd+Cz
+	4gyy95J1wDyXcHphWOoon4lk2JYwl+SVVO11UWq4E0E2AOYDb7Ya3xskZr9rsGXcKBx6
+	VsEqgr1+lr1hHmJMZmSLv5wY2Xk3c1b56HJF9E++CeDV1RrMNXHM/1+kKmKFs34FRfK/
+	m19g==
+X-Gm-Message-State: ALoCoQmyN0uD0s1OWYlSU0mnNZYyoEjYvW6CoWC5Cj/Lv4icUlE4fLc/Tvvbrj45q9PzcMb+pVh/
+X-Received: by 10.180.103.40 with SMTP id ft8mr5329799wib.68.1418373169197;
+	Fri, 12 Dec 2014 00:32:49 -0800 (PST)
+Received: from localhost ([2001:610:612:0:beee:7bff:fe9e:ae56])
+	by mx.google.com with ESMTPSA id kn5sm847348wjb.48.2014.12.12.00.32.47
+	for <multiple recipients>
+	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
+	Fri, 12 Dec 2014 00:32:47 -0800 (PST)
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 12 Dec 2014 09:32:39 +0100
+Message-Id: <1418373159-29364-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.9.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-gumstix-community] u-boot-overo 2013.07: add missing LICENSE info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,95 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Dec 2014 07:22:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 12 Dec 2014 08:33:00 -0000
 
-The configure step uses a package header to check for support
-of types/declares, this package header encapsulates all the
-required system headers for providing the needed resources.
-When configured from an out of tree directory the package
-header is not found due to the hard path.
-We now make the path for package header relative to 'srcdir' so
-it is found appropriately.
+OE-core moved the LICENSE info from the .inc to the .bb, update
+u-boot-overo to match.
 
-Signed-off-by: Awais Belal <awais_belal@mentor.com>
+This fixes an error in bitbake-prserv-tool export.
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ---
- .../iperf-2.0.5/0001-fix-out-of-tree-config.patch  |   52 ++++++++++++++++++++
- meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |    1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
+ recipes-bsp/u-boot/u-boot-overo_2013.07.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
-new file mode 100644
-index 0000000..e8a0297
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
-@@ -0,0 +1,52 @@
-+iperf: fix out of tree configuration
-+
-+The configure step uses a package header to check for support of types/declares,
-+this package header encapsulates all the required system header for providing
-+the needed resources. When configured from an out of tree directory the package
-+header is not found due to the hard path.
-+We now make the path for package header relative to our 'srcdir' so it is
-+found appropriately.
-+
-+Signed-off-by: Awais Belal <awais_belal@mentor.com>
-+---
-+diff --git a/configure.ac b/configure.ac
-+index 2b3fd20..d420f9e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -176,8 +176,8 @@ dnl Check for system services
-+ 
-+ dnl check for multicast
-+ if test "$ac_cv_multicast" != no; then
-+-  AC_CHECK_TYPES(struct ip_mreq,,,[#include "compat/headers_slim.h"])
-+-  AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"])
-++  AC_CHECK_TYPES(struct ip_mreq,,,[#include "${srcdir}/compat/headers_slim.h"])
-++  AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include "${srcdir}/compat/headers_slim.h"])
-+   AC_MSG_CHECKING(for multicast support)
-+   ac_cv_multicast=no
-+   if test "$ac_cv_have_decl_IP_ADD_MEMBERSHIP" = yes; then
-+@@ -193,9 +193,9 @@ fi
-+ 
-+ dnl check for IPv6
-+ if test "$ac_cv_have_ipv6" != no; then
-+-  AC_CHECK_TYPES(struct sockaddr_storage,,,[#include "compat/headers_slim.h"])
-+-  AC_CHECK_TYPES(struct sockaddr_in6,,,[#include "compat/headers_slim.h"])
-+-  AC_CHECK_DECLS(AF_INET6,,,[#include "compat/headers_slim.h"])
-++  AC_CHECK_TYPES(struct sockaddr_storage,,,[#include "${srcdir}/compat/headers_slim.h"])
-++  AC_CHECK_TYPES(struct sockaddr_in6,,,[#include "${srcdir}/compat/headers_slim.h"])
-++  AC_CHECK_DECLS(AF_INET6,,,[#include "${srcdir}/compat/headers_slim.h"])
-+   AC_MSG_CHECKING(for IPv6 headers and structures)
-+   ac_cv_have_ipv6=no
-+   if test "$ac_cv_type_struct_sockaddr_storage" = yes; then
-+@@ -211,9 +211,9 @@ fi
-+ 
-+ if test "$ac_cv_have_ipv6" = yes; then
-+   if test "$ac_cv_multicast" = yes; then
-+-    AC_CHECK_TYPES(struct ipv6_mreq,,,[#include "compat/headers_slim.h"])
-+-    AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"])
-+-    AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include "compat/headers_slim.h"])
-++    AC_CHECK_TYPES(struct ipv6_mreq,,,[#include "${srcdir}/compat/headers_slim.h"])
-++    AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include "${srcdir}/compat/headers_slim.h"])
-++    AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include "${srcdir}/compat/headers_slim.h"])
-+     AC_MSG_CHECKING(for IPv6 multicast support)
-+     ac_cv_have_ipv6_multicast=no
-+     if test "$ac_cv_type_struct_ipv6_mreq" = yes; then
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
-index 1bd554b..20adc0d 100644
---- a/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
-+++ b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
+diff --git a/recipes-bsp/u-boot/u-boot-overo_2013.07.bb b/recipes-bsp/u-boot/u-boot-overo_2013.07.bb
+index df43372..348c933 100644
+--- a/recipes-bsp/u-boot/u-boot-overo_2013.07.bb
++++ b/recipes-bsp/u-boot/u-boot-overo_2013.07.bb
+@@ -1,5 +1,9 @@
+ require recipes-bsp/u-boot/u-boot.inc
  
- SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
-             file://iperf-2.0.5_ManPage.patch \
-+            file://0001-fix-out-of-tree-config.patch \
-           "
- 
- SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1707d6db1d42237583f50183a5651ecb \
++                    file://README;beginline=1;endline=22;md5=78b195c11cb6ef63e6985140db7d7bab"
++
+ # SPL build
+ UBOOT_BINARY = "u-boot.img"
+ UBOOT_IMAGE = "u-boot-${MACHINE}-${PV}-${PR}.img"
 -- 
-1.7.9.5
+1.9.0
 
 
