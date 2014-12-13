@@ -1,34 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 31C3272417
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id E782965D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Dec 2014 17:07:27 +0000 (UTC)
-Received: by mail-wg0-f42.google.com with SMTP id z12so9652761wgg.1
+	Sat, 13 Dec 2014 01:13:51 +0000 (UTC)
+Received: by mail-pd0-f178.google.com with SMTP id r10so8201540pdi.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Dec 2014 09:07:27 -0800 (PST)
+	Fri, 12 Dec 2014 17:13:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=5hMWAwDYNMlnPjXd5iyKZK+cTx4cGuYseOOtyGRr8Xw=;
-	b=fm7E/oxLNyxw1R2FQkdMTjv0krRBgFxANOvdCdvSAy+2pdDlUF/AQcqmTR6Fw0xyX8
-	5t4xSSbtPch6BTCHZ8udDlbHmevZndg2v7lQkrxVlteLFG9urnIj6Zy1Y/GDV0r7H/df
-	k5SVpxFubyjl7+AOl81IuKSGybgPxnlpqEJ6T56YB+cK+c5qhi0O+BaaZVkuX9XHk25h
-	8r+Ytlt8PQctF/ywhUxMr8GyyOg4uHHFI2CuyxpQGPn/3fE4rQ5x2t/O6iKBwRCtOQeP
-	tFVhE3bJiLu6cbqkFutg+s6WdRmnE/PTdn3i4OnhY7zTfWk3qRkrRi9Qoy9VahzWNQh4
-	ur6A==
-X-Received: by 10.180.160.144 with SMTP id xk16mr9791848wib.12.1418404047422; 
-	Fri, 12 Dec 2014 09:07:27 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	cz3sm2528564wjb.23.2014.12.12.09.07.26 for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 12 Dec 2014 09:07:26 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	bh=miAzYrxuh7A+MrHxlhDFAF/kLXjlbkAuOp9KSbmb22I=;
+	b=iWMovNfQDmqAPcGQ8hvnxfcpMWIGqv8Woa0PJIVCsLs9cvMT1ZnhPJXnTNfi4+hbjT
+	kr+oWJ1k7i+5fUuAHSpxFJ5naDpCFcO0l1l8fB1Nk5EU/VSbo8oTDuuJFMEH2LiAL/Ia
+	mRKxiFWA8fAqweuwESO3bi7h7R/SPRFuynRz6jBBdJZPOQY9t+JF1UTX0Xtv/ZJ1cYsN
+	QHgtCqFNx/lbxKlOVOwyFB9SGCa44KqUgZgBaTY+eIpSjHmDYIt+vw4IMshHgYF2rfdB
+	DxF/YpHdBuqtzB4c+Dl4h8bgk9Zwut8hKjqcSTGD8F0lVCsyff+JlFu5zRUqF9DNRiHX
+	GMGA==
+X-Received: by 10.68.69.48 with SMTP id b16mr30864569pbu.59.1418433232015;
+	Fri, 12 Dec 2014 17:13:52 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by mx.google.com with ESMTPSA id
+	og12sm2603499pdb.43.2014.12.12.17.13.49 for <multiple recipients>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 12 Dec 2014 17:13:50 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Dec 2014 18:07:29 +0100
-Message-Id: <1418404050-2772-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.1.3
-Subject: [meta-qt5][PATCH 1/2] qt5-plugin-generic-vboxtouch: Import from meta-webos-ports
+Date: Fri, 12 Dec 2014 17:13:47 -0800
+Message-Id: <1418433227-14617-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] netkit-tftp: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,44 +42,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Dec 2014 17:07:30 -0000
+X-List-Received-Date: Sat, 13 Dec 2014 01:13:54 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
+ .../recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb | 70 ++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
+ create mode 100644 meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
 
-diff --git a/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb b/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
+diff --git a/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
 new file mode 100644
-index 0000000..7308064
+index 0000000..bd5c113
 --- /dev/null
-+++ b/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "This driver extends Qt's platform support (QPA) for Virtualbox guests. \
-+It uses the integrated pointer feature to create a smooth conversion from \
-+the host pointer to touchscreen events in the guest, without grabbing the \
-+host pointer."
-+SUMMARY = "Touchscreen driver for integrated mouse pointer in VirtualBox"
-+LICENSE = "LGPL-2.1 & GPL-3.0"
-+LIC_FILES_CHKSUM = " \
-+    file://vboxtouch.cpp;beginline=1;endline=22;md5=ca51db8f7c0606c77f702dcee4cf31d9 \
-+    file://evdevmousehandler.cpp;beginline=1;endline=40;md5=9081062f6e7f74b6e62ad7ecee4a71be \
++++ b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
+@@ -0,0 +1,70 @@
++DESCRIPTION = " tftp - Trivial file transfer protocol client \
++    tftpd- Trivial file transfer protocol server "
++SECTION = "networking"
++LICENSE = "BSD"
++DEPENDS = " tcp-wrappers"
++
++LIC_FILES_CHKSUM = "file://tftp/tftp.c;beginline=2;endline=3;md5=84d2cfe1e60863a7d82648734ba4d30c"
++
++SRC_URI = "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
++        ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-18.diff.gz;name=patch18 \
 +"
 +
-+PV = "1.0+gitr${SRCPV}"
++SRC_URI[archive.md5sum] = "b7262c798e2ff50e29c2ff50dfd8d6a8"
++SRC_URI[archive.sha256sum] = "3a43c0010d4e61f412563fd83769d4667d8b8e82903526d21cb9205fe55ad14d"
++SRC_URI[patch18.md5sum] = "cb29e7a33dd85105ba6e6ec4f971e42c"
++SRC_URI[patch18.sha256sum] = "092437d27b4fa88c044ef6290372fee5ce06d223607f0e22a6e527065c8930e7"
 +
-+DEPENDS = "qtbase"
++inherit autotools-brokensep 
 +
-+SRC_URI = "git://github.com/nemomobile/qt5-plugin-generic-vboxtouch.git"
-+SRCREV = "7d7a6dfd501c43687e7bb110610cac5f7c9abd4b"
-+S = "${WORKDIR}/git/vboxtouch"
++do_configure () {
++    ./configure --prefix=${prefix}
++    echo "CFLAGS=${CFLAGS}" > MCONFIG
++}
 +
-+inherit qmake5
++do_compile () {
++    oe_runmake 'CC=${CC}' 'LD=${LD}' 'LDFLAGS=${LDFLAGS}' 'CFLAGS=${CFLAGS}' 
++}
 +
-+FILES_${PN} += "${libdir}/qt5/plugins/generic/libvboxtouchplugin.so"
-+FILES_${PN}-dbg += "${libdir}/qt5/plugins/generic/.debug/"
++do_install () {
++    install -d ${D}${bindir}
++    install -d ${D}${sbindir}
++    install -d ${D}${mandir}/man1
++    install -d ${D}${mandir}/man8
++    install -d ${D}${sysconfdir}/xinetd.d
++
++    sed -i 's/install -s/install/' tftp/Makefile
++    sed -i 's/install -s/install/' tftpd/Makefile
++
++    oe_runmake 'INSTALLROOT=${D}' 'BINMODE=0755' \
++    'DAEMONMODE=0755' 'MANMODE=0644' \
++    'BINDIR=${bindir}' 'SBINDIR=${sbindir}' \
++    'MANDIR=${mandir}' install
++
++    # create the xinetd config file  
++    cat >tftp.conf <<EOF
++ service tftp 
++ {
++    disable        = no 
++    socket_type    = dgram
++    port           = 69
++    protocol       = udp 
++    wait           = yes
++    user           = nobody 
++    server         = ${sbindir}/in.tftpd
++    server_args    = /tftpboot
++ }
++EOF
++    install tftp.conf ${D}/${sysconfdir}/xinetd.d/tftp
++}
++
++INSANE_SKIP_${PN} = "already-stripped"
++
++PACKAGES = "${PN}-client ${PN}-server ${PN}-doc ${BPN}-dbg"
++FILES_${PN}-client = "${bindir}/*"
++FILES_${PN}-server = "${sbindir}/* ${sysconfdir}/xinetd.d/*"
++FILES_${PN}-doc = "${mandir}"
++FILES_${PN}-dbg = "${prefix}/src/debug \
++            ${bindir}/.debug ${sbindir}/.debug"
++
++RDEPENDS_${PN}-server = "tcp-wrappers xinetd"
 -- 
-2.1.3
+1.9.1
 
 
