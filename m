@@ -1,27 +1,33 @@
-Return-Path: <alfonso@tames.com>
-X-Greylist: delayed 315 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 14 Dec 2014 07:51:40 UTC
-Received: from mail.tames.com (tames.com [72.2.119.182])
-	by mail.openembedded.org (Postfix) with ESMTP id EC35A7113B
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-la0-f42.google.com (mail-la0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id D635372013
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Dec 2014 07:51:40 +0000 (UTC)
-Received: from [10.178.247.148] (unknown [187.189.165.189])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	(Authenticated sender: alfonso@tames.com)
-	by mail.tames.com (Postfix) with ESMTPSA id 47D9B29969
+	Sun, 14 Dec 2014 13:30:52 +0000 (UTC)
+Received: by mail-la0-f42.google.com with SMTP id gd6so8333345lab.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Dec 2014 07:46:17 +0000 (UTC)
-Message-ID: <548D4051.5080504@tames.com>
-Date: Sun, 14 Dec 2014 01:46:25 -0600
-From: =?UTF-8?B?QWxmb25zbyBUYW3DqXM=?= <alfonso@tames.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.2.0
+	Sun, 14 Dec 2014 05:30:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=bq/SIEFJFWbsvXmu0KXVcH039jcufWtRY1jkVNeWg6Q=;
+	b=slwYmSywJmZ/OpHmYnjhygtljd+JN2Gbnng0t9LRUErcPCh/g10NOz/7pnuQw/HwbT
+	QTCeFM+5ve5TUestTO8keZKsH+zRbcmT7a9J8NdfJPjz1t9ZwcGk0YXZDznF24M4ae0Q
+	Uck5Ytd3XFYsYf7/xkbyoQcaohD7cY1/rZz7O0cn3ZgviLRkhquAu2DOU4gevJLEPtZS
+	G5t0jGtrbuuYIEochGqyG7zacGccfa1YsMprql9n8DpUDHclsEkBOqUj2YVoxD9eESob
+	ONsEtOtwiFSXSKvmTvQgcP68v54shjXKHUDcmwbzQV5y74lRPi5TVeBJjC6rOEJRwJeG
+	faRw==
 MIME-Version: 1.0
+X-Received: by 10.152.42.169 with SMTP id p9mr25310887lal.94.1418563851464;
+	Sun, 14 Dec 2014 05:30:51 -0800 (PST)
+Received: by 10.25.155.18 with HTTP; Sun, 14 Dec 2014 05:30:51 -0800 (PST)
+In-Reply-To: <548D4051.5080504@tames.com>
+References: <548D4051.5080504@tames.com>
+Date: Sun, 14 Dec 2014 14:30:51 +0100
+Message-ID: <CAPbeDCkN02Rsk8a92t_vApn5i6FCG2VRK+x0fUwWjx0ZOYsKXA@mail.gmail.com>
+From: Jacob Kroon <jacob.kroon@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Virus-Scanned: clamav-milter 0.98.1 at 56cb6755-5e21-c698-f8be-a3023abd5444
-X-Virus-Status: Clean
-Subject: Cross canadian gcc configuration
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Cross canadian gcc configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,42 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Dec 2014 07:51:45 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 14 Dec 2014 13:30:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hi Alfonso,
 
-I just bitbaked an arm based (freescale) Yocto Master image and 
-populated an sdk with -c populate_sdk.
+On Sun, Dec 14, 2014 at 8:46 AM, Alfonso Tam=C3=A9s <alfonso@tames.com> wro=
+te:
+>
+> When I try to compile a hello world program with the
+> arm-poky-linux-gnueabi-gcc compiler, first I get an error not finding
+> <stdio.h>, and when I pass the directory through the -I flag, I get the
+> classic"stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or
+> directory" error which I supposed is being thrown since gcc cross canadia=
+n
+> is not being configured by default (as my image) hard float.
+>
+> I noticed in the gcc-cross-canadian.inc that the --with-gxx-include-dir
+> and --with-sysroot in EXTRA_OECONF_PATHS have a "/not/exist" string:
+>
+> EXTRA_OECONF_PATHS =3D "\
+> --with-gxx-include-dir=3D/not/exist${target_includedir}/c++/${BINV} \
+> --with-build-time-tools=3D${STAGING_DIR_NATIVE}${prefix_native}/${TARGET_=
+SYS}/bin
+> \
+> --with-sysroot=3D/not/exist \
+> --with-build-sysroot=3D${STAGING_DIR_TARGET} \
+> "
+>
+>
 
-When I try to compile a hello world program with the 
-arm-poky-linux-gnueabi-gcc compiler, first I get an error not finding 
-<stdio.h>, and when I pass the directory through the -I flag, I get the 
-classic"stubs.h:7:29: fatal error: gnu/stubs-soft.h: No such file or 
-directory" error which I supposed is being thrown since gcc cross 
-canadian is not being configured by default (as my image) hard float.
+The sysroot is poisoned by intention. Try sourcing the environment script
+from the SDK, and use $CC instead of invoking the compiler binary directly.
 
-I noticed in the gcc-cross-canadian.inc that the --with-gxx-include-dir 
-and --with-sysroot in EXTRA_OECONF_PATHS have a "/not/exist" string:
+See git commit 04b725511a505c582a3abdf63d096967f0320779 in
+openembedded-core.
 
-EXTRA_OECONF_PATHS = "\
---with-gxx-include-dir=/not/exist${target_includedir}/c++/${BINV} \
---with-build-time-tools=${STAGING_DIR_NATIVE}${prefix_native}/${TARGET_SYS}/bin 
-\
---with-sysroot=/not/exist \
---with-build-sysroot=${STAGING_DIR_TARGET} \
-"
-
-Shoudn't it be ${SDKPATH} instead of "/not/exist" ?
-
-I think that would resolve not finding the include dirs. Now, for the 
-environment not picking a hard float image and producing a 
-gcc-cross-canadian accordingly, where should I be looking?
-
-Thanks,
-
-Alfonso
-
-
+Jacob
 
