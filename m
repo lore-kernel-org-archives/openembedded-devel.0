@@ -1,37 +1,45 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 376E571790
+Return-Path: <Javier.Viguera@digi.com>
+Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
+	[216.82.254.101])
+	by mail.openembedded.org (Postfix) with ESMTP id CE9397113B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Dec 2014 16:56:02 +0000 (UTC)
-Received: by mail-pa0-f47.google.com with SMTP id kq14so12109676pab.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Dec 2014 08:56:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=H85P+fiK2O5cHybHQ5L3Ebk7BuCKXQgWzM7Om7e8FXo=;
-	b=lLVMsDgZtM0WTj2LXSFLKu+SDVOAv/HWsH6vzmylTFY4PlOl5sfr2Xe7ZDmxt0oWaG
-	H+E1qY82t3WdzykV1+7aQvkrCdWeCsm2lPGYMuCXi1Ms+VHTpC8UyawtQ/ChtOa9HL/E
-	PxcU/x4fcm+HF50FbteweActfaILzA0Td9lxwChpa68gNZ3fuhptgzxN/39we7qAK2vj
-	8Hm2Cv9OKhAtKGtQWnhoHeMc4hjP0/vBdmFWO/sO2MWlhGZaJ+MZzj3LHsfRjdHrbQCu
-	i9d0kvKWAOcu9ehTxSIfIhoIe/Sf1gBxU/Ukoa7f6zbceDhvL8upWzQQSX1lW7m0xoNh
-	lVNA==
-X-Received: by 10.70.50.162 with SMTP id d2mr52671016pdo.85.1418662563555;
-	Mon, 15 Dec 2014 08:56:03 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id w4sm9789572pdq.28.2014.12.15.08.56.01
-	for <multiple recipients>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 15 Dec 2014 08:56:02 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Dec 2014 08:55:50 -0800
-Message-Id: <1418662550-13436-4-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1418662550-13436-1-git-send-email-akuster808@gmail.com>
-References: <1418662550-13436-1-git-send-email-akuster808@gmail.com>
-Subject: [meta-perl][PATCH 4/4] libnet-dns-perl: move package to mete-perl.
+	Mon, 15 Dec 2014 17:05:25 +0000 (UTC)
+Received: from [216.82.254.195] by server-5.bemta-7.messagelabs.com id
+	23/4D-03132-5D41F845; Mon, 15 Dec 2014 17:05:25 +0000
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-16.tower-200.messagelabs.com!1418663119!22292732!1
+X-Originating-IP: [66.77.174.13]
+X-StarScan-Received: 
+X-StarScan-Version: 6.12.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 29806 invoked from network); 15 Dec 2014 17:05:20 -0000
+Received: from mail.mx3.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
+	by server-16.tower-200.messagelabs.com with RC4-SHA encrypted SMTP;
+	15 Dec 2014 17:05:20 -0000
+Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx1.digi.com
+	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.377.0;
+	Mon, 15 Dec 2014 11:05:27 -0600
+Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.210.2;
+	Mon, 15 Dec 2014 11:05:18 -0600
+Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
+	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0210.002;
+	Mon, 15 Dec 2014 18:05:17 +0100
+From: "Viguera, Javier" <Javier.Viguera@digi.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Dizzy backports
+Thread-Index: AdAYiUncxqUKFMf9Tr+wt3ODZ7DW5g==
+Date: Mon, 15 Dec 2014 17:05:15 +0000
+Message-ID: <DA8287CC96892A4EB4FCF4FB3FBDA1AB091792@dor-sms-xch01.digi.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.101.2.188]
+x-kse-antivirus-interceptor-info: scan successful
+x-kse-antivirus-info: Clean
+MIME-Version: 1.0
+Subject: Dizzy backports
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,50 +53,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Dec 2014 16:56:03 -0000
+X-List-Received-Date: Mon, 15 Dec 2014 17:05:26 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-please consider this package for meta-perl.
+Hi all,
 
-No real need for this to be in meta-security
+Could the following commits be considered for Dizzy backporting? The first =
+one is absolutely needed as the SRC_URI for imagemagick is currently wrong =
+in Dizzy. The second one would be nice to have as it removes a possible sec=
+urity hole.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../recipes-perl/libnet/libnet-dns-perl_0.81.bb    | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
+Both of them are just a cherry-pick away so I don't include here the patche=
+s.
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
-new file mode 100644
-index 0000000..9dc4268
---- /dev/null
-+++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_0.81.bb
-@@ -0,0 +1,25 @@
-+DESCRIPTION = "This package contains the DNS.pm module with friends."
-+
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+
-+LIC_FILES_CHKSUM = "file://README;md5=524da96a3365f2caff73fea0ae67c3a0"
-+
-+DEPENDS += "perl"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/N/NL/NLNETLABS/Net-DNS-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "26375d4310beb108b0e2b3bf30403ee5"
-+SRC_URI[sha256sum] = "b36c8ead6edf68da5d9de2b0a22a47d7216e2d7eb52c8cde96724988f68a6d46"
-+
-+S = "${WORKDIR}/Net-DNS-${PV}"
-+
-+EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR} EXPATINCPATH=${STAGING_INCDIR}"
-+
-+inherit cpan
-+
-+do_compile() {
-+	export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name 'libc-*.so')"
-+	cpan_do_compile
-+}
-+BBCLASSEXTEND = "native"
--- 
-1.9.1
+commit 7e034ebd5424a19a1a3a6d7a0d00f3c0b138359a
+Author: Peter Bigot <pab@pabigot.com>
+Date:   Sat Nov 1 16:27:23 2014 -0500
 
+    imagemagick: update URI to allow fetching current and previous releases
+   =20
+    The only version available at the original URI is patch 9.  All release=
+s
+    are available at the /releases sub-path.
+   =20
+    Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+
+commit 56dd9cb399f55223899dbee60a384f752cbc5db7
+Author: Javier Viguera <javier.viguera@digi.com>
+Date:   Wed Nov 26 09:34:14 2014 +0100
+
+    xserver-common: disable TCP connections
+   =20
+    For security reasons disable TCP connections to the xserver.
+   =20
+    Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+
+-- jviguera
 
