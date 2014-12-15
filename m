@@ -1,27 +1,50 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 146B770A8B
+Return-Path: <anders@chargestorm.se>
+Received: from mail-la0-f42.google.com (mail-la0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 10FD4710B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Dec 2014 08:42:50 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="45166682"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Dec 2014 16:39:28 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBF8gNIr019872
+	Mon, 15 Dec 2014 08:53:29 +0000 (UTC)
+Received: by mail-la0-f42.google.com with SMTP id gd6so9158357lab.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Dec 2014 16:42:23 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 15 Dec 2014 16:42:53 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Dec 2014 16:42:37 +0800
-Message-ID: <1418632957-21443-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 15 Dec 2014 00:53:29 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:organization:user-agent;
+	bh=9631rrwEC3VsSEYk27Lrwa+QrFslPoX5AxXq5u8Fzw8=;
+	b=Uc/Chu8mPt1SIsFMwEtCyumzeWVonM/wHWta26UMh1gZlVNMYjVIKFLB2FAdJxKJVz
+	R+/480ZhklAutM4m97A43xbAMdpUgRXUbk2I+hza/kSo3JQ3cJsT1Ch0yQdq29P9q4JH
+	V/1MAkgzZHxHRPK4fNhPhkX2mIYoGEBy92M9dPUZwP6zP/10tTpg+4ynO5BVEMP/Wogo
+	Cn5xmhCCmSVrIL3yFYbkEGDnSCdZcB5bv/4m8cJSG7hZ4936reYuE9pT7AscmQSs7FCC
+	cSBhn2BFIXg9Swzk6R263WvlCk0J9c37PbKxCgtacunAkRSAyYEvDL3Bi2RSTGYlgBq0
+	zS1Q==
+X-Gm-Message-State: ALoCoQnMVdrRMv3FxEwZywxVtGGmaxD1rReaSBLeCo8aluib2qrOek0yfhjMrkTFdPh6WKdi04yr
+X-Received: by 10.152.88.4 with SMTP id bc4mr4271293lab.5.1418633609464;
+	Mon, 15 Dec 2014 00:53:29 -0800 (PST)
+Received: from ad.chargestorm.se (81-232-163-241-no29.business.telia.com.
+	[81.232.163.241])
+	by mx.google.com with ESMTPSA id g2sm2515061lbd.35.2014.12.15.00.53.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 15 Dec 2014 00:53:28 -0800 (PST)
+Date: Mon, 15 Dec 2014 09:52:41 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141215085241.GA17265@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <548D4051.5080504@tames.com>
+	<CAPbeDCkN02Rsk8a92t_vApn5i6FCG2VRK+x0fUwWjx0ZOYsKXA@mail.gmail.com>
+	<EB25247B-D2D2-4EB0-853E-F6B752960F5D@tames.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-oe][PATCH] dfu-util: Change the SRCURI to gitorious
+In-Reply-To: <EB25247B-D2D2-4EB0-853E-F6B752960F5D@tames.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: Cross canadian gcc configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,45 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Dec 2014 08:43:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Dec 2014 08:53:36 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Official website is not available, using git instead.
+* Alfonso Tam=E9s <alfonso@tames.com> [141214 18:22]:
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb | 16 +++++++---------
- 1 file changed, 7 insertions(+), 9 deletions(-)
+> Thanks Jakob, I am indeed sourcing the environment script. I suppose it i=
+s lacking something.
 
-diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-index aa2b84d..65ad10b 100644
---- a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-+++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
-@@ -1,16 +1,14 @@
- DESCRIPTION = "USB Device Firmware Upgrade utility"
--SECTION = "devel"
- AUTHOR = "Harald Welte <laforge@openmoko.org>"
-+SECTION = "devel"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+DEPENDS = "libusb1"
- 
--SRC_URI = "http://${BPN}.gnumonks.org/releases/${BP}.tar.gz \
--    file://0001-configure.ac-Don-t-check-for-usbpath.patch \
--"
-+SRC_URI = "git://gitorious.org/dfu-util/dfu-util.git \
-+           file://0001-configure.ac-Don-t-check-for-usbpath.patch"
-+SRCREV = "4e312c5567a84f76654295c267ec35f71727fe5a"
- 
--inherit autotools pkgconfig
-+S = "${WORKDIR}/git"
- 
--DEPENDS = "libusb1"
--
--SRC_URI[md5sum] = "56844020177d4db4c1ea2e926fe9d588"
--SRC_URI[sha256sum] = "f52a2a5489fbf9f3204a6ada05e0b47ee322e19d81c712e0c58a332d80ec3eab"
-+inherit autotools pkgconfig
--- 
-1.8.3.1
+But are you calling the compiler using $CC?
 
+Cheers,
+Anders
+
+
+> > On Dec 14, 2014, at 7:30 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
+
+> > The sysroot is poisoned by intention. Try sourcing the environment scri=
+pt
+> > from the SDK, and use $CC instead of invoking the compiler binary direc=
+tly.
+
+> > See git commit 04b725511a505c582a3abdf63d096967f0320779 in
+> > openembedded-core.
+
+> > Jacob
+--=20
+Anders Darander
+ChargeStorm AB / eStorm AB
 
