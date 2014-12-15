@@ -1,44 +1,27 @@
-Return-Path: <akuster@mvista.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D80372407
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 36F3565D34
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Dec 2014 17:39:36 +0000 (UTC)
-Received: by mail-pd0-f175.google.com with SMTP id g10so8226945pdj.20
+	Mon, 15 Dec 2014 06:32:28 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="45158901"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 15 Dec 2014 14:29:04 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBF6Vxc9010389
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Dec 2014 09:39:37 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=qFQt6qyLGbaI1BI/RA8fcZEYJN1RHfSA4/df+UTbaLg=;
-	b=J+GBw7813YSDLe6bOEY+cZ5Srtvgs+3vvp+IBjSMk04YKaIvJ7Phks4QIFKsT1B3RJ
-	kT3FQDk3PjGnRCG7yBFeiTurNyI6cJrNwyPWPH0VsoGKr2TAdniiu/b3l5EaPt5GTxs/
-	P0M+mqBchGadv8BgI0XahaEmfost/ei/HXIR8FHSQDZg7E8+ges+9cCwiKeXLY61JxNf
-	kodTQhUdNAnfEj9INrxglJZhDZxJCfCk8ojvxZJ4HsvZWYyYhCzX4ZHybqhadJ/cHELI
-	HRk3nEiPKxKdzphLkTW47neC+7ZrtBxnYRsq2aI48QoEXx+BngAmv94EctX3FqF10flo
-	O1/A==
-X-Gm-Message-State: ALoCoQkCARe0/yq2p8Ih0mFvgGmLt/8MpTcvM3WIGmvsaSs+To98hibbf716XUkVUEofg6EUtnVY
-X-Received: by 10.67.24.99 with SMTP id ih3mr44231201pad.101.1418578777472;
-	Sun, 14 Dec 2014 09:39:37 -0800 (PST)
-Received: from ?IPv6:2601:c:9380:601:514e:15d4:f5e2:d462?
-	([2601:c:9380:601:514e:15d4:f5e2:d462])
-	by mx.google.com with ESMTPSA id
-	xq16sm7027119pac.31.2014.12.14.09.39.35
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 14 Dec 2014 09:39:36 -0800 (PST)
-Message-ID: <548DCB4D.90004@mvista.com>
-Date: Sun, 14 Dec 2014 09:39:25 -0800
-From: akuster <akuster@mvista.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Mon, 15 Dec 2014 14:32:00 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 15 Dec 2014 14:32:24 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 15 Dec 2014 14:29:00 +0800
+Message-ID: <1418624940-54397-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1418576074-5207-1-git-send-email-akuster808@gmail.com>
-In-Reply-To: <1418576074-5207-1-git-send-email-akuster808@gmail.com>
-Subject: Re: [meta-networking][PATCH] netkit-rsh: add new package
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-networking][PATCH] openvpn: upgrade to 2.3.6.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,270 +35,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Dec 2014 17:39:40 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Dec 2014 06:32:32 -0000
+Content-Type: text/plain
 
-ignore this one. miss fire on send.
+The purpose of this patch as below.
 
-On 12/14/2014 08:54 AM, Armin Kuster wrote:
-> V2: added PAM config option
->      fixed link bug
->      moved files to PN location
->      fixed BSD license
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->   .../netkit-rsh/netkit-rsh/no_pam_build_fix.patch   | 32 ++++++++++++++++++
->   .../netkit-rsh/netkit-rsh/rexec.xinetd.netkit      | 20 ++++++++++++
->   .../netkit-rsh/netkit-rsh/rlogin.xinetd.netkit     | 23 +++++++++++++
->   .../rsh-redone_link_order_file.patch               | 15 ++++++++-
->   .../netkit-rsh/netkit-rsh/rsh.xinetd.netkit        | 21 ++++++++++++
->   .../recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb   | 38 +++++++++++++---------
->   6 files changed, 132 insertions(+), 17 deletions(-)
->   create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/no_pam_build_fix.patch
->   create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rexec.xinetd.netkit
->   create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rlogin.xinetd.netkit
->   rename meta-networking/recipes-netkit/netkit-rsh/{files => netkit-rsh}/rsh-redone_link_order_file.patch (81%)
->   create mode 100644 meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh.xinetd.netkit
->
-> diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/no_pam_build_fix.patch b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/no_pam_build_fix.patch
-> new file mode 100644
-> index 0000000..3200a2d
-> --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/no_pam_build_fix.patch
-> @@ -0,0 +1,32 @@
-> +Index: netkit-rsh-0.17/rshd/rshd.c
-> +===================================================================
-> +--- netkit-rsh-0.17.orig/rshd/rshd.c
-> ++++ netkit-rsh-0.17/rshd/rshd.c
-> +@@ -110,9 +110,11 @@ extern	char	**environ;
-> + static void error(const char *fmt, ...);
-> + static void doit(struct sockaddr *fromp, socklen_t fromlen);
-> + static char *getstr(char *, size_t, const char *);
-> ++#ifdef USE_PAM
-> + static int err_conv(
-> + 	int, const struct pam_message **, struct pam_response **, void *
-> + );
-> ++#endif /* USE_PAM */
-> +
-> + extern int _check_rhosts_file;
-> +
-> +@@ -256,6 +258,7 @@ static void stderr_parent(int sock, int
-> + }
-> +
-> +
-> ++#ifdef USE_PAM
-> + static int err_conv(
-> + 	int num_msg, const struct pam_message **msg,
-> + 	struct pam_response **resp, void *appdata_ptr
-> +@@ -266,6 +269,7 @@ static int err_conv(
-> + 	(void) appdata_ptr;
-> + 	return PAM_CONV_ERR;
-> + }
-> ++#endif
-> +
-> + static struct passwd *doauth(const char *remuser,
-> + 			     const char *hostname,
-> diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rexec.xinetd.netkit b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rexec.xinetd.netkit
-> new file mode 100644
-> index 0000000..80aed36
-> --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rexec.xinetd.netkit
-> @@ -0,0 +1,20 @@
-> +# default: off
-> +# description:
-> +# Rexecd is the server for the rexec program. The server provides remote
-> +# execution facilities with authentication based on user names and
-> +# passwords.
-> +#
-> +service exec
-> +{
-> +	socket_type	= stream
-> +	protocol	= tcp
-> +	flags		= NAMEINARGS
-> +	wait		= no
-> +	user		= root
-> +	group		= root
-> +	log_on_success	+= USERID
-> +	log_on_failure	+= USERID
-> +	server		= /usr/bin/tcpd
-> +	server_args	= /usr/sbin/in.rexecd
-> +	disable		= yes
-> +}
-> diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rlogin.xinetd.netkit b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rlogin.xinetd.netkit
-> new file mode 100644
-> index 0000000..00dbf93
-> --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rlogin.xinetd.netkit
-> @@ -0,0 +1,23 @@
-> +# default: off
-> +# description:
-> +# Rlogind is a server for the rlogin program. The server provides remote
-> +# execution with authentication based on privileged port numbers from trusted
-> +# host
-> +#
-> +service login
-> +{
-> +	socket_type	= stream
-> +	protocol	= tcp
-> +	flags		= NAMEINARGS
-> +	wait		= no
-> +	user		= root
-> +	group		= root
-> +	log_on_success	+= USERID
-> +	log_on_failure	+= USERID
-> +	server		= /usr/bin/tcpd
-> +	server_args	= /usr/sbin/in.rlogind -a
-> +	disable		= yes
-> +}
-> +							
-> +							
-> +							
-> diff --git a/meta-networking/recipes-netkit/netkit-rsh/files/rsh-redone_link_order_file.patch b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh-redone_link_order_file.patch
-> similarity index 81%
-> rename from meta-networking/recipes-netkit/netkit-rsh/files/rsh-redone_link_order_file.patch
-> rename to meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh-redone_link_order_file.patch
-> index bded510..c12ee9b 100644
-> --- a/meta-networking/recipes-netkit/netkit-rsh/files/rsh-redone_link_order_file.patch
-> +++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh-redone_link_order_file.patch
-> @@ -45,7 +45,7 @@ Index: netkit-rsh-0.17/rlogin/Makefile
->
->    $(PROG): $(OBJS)
->   -	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
-> -+	$(CC) $^ -o $@ $(LDFLAGS) $(LIBS)
-> ++	$(CC) $^ -o $@ $(LDFLAGS) $(LIBS)
->
->    install: $(PROG)
->    	install -o root -m$(SUIDMODE) $(PROG) $(INSTALLROOT)$(BINDIR)
-> @@ -62,3 +62,16 @@ Index: netkit-rsh-0.17/rlogind/Makefile
->
->    rlogind.o: pathnames.h logwtmp.h rlogind.h ../version.h
->    logwtmp.o: logwtmp.h
-> +Index: netkit-rsh-0.17/rexecd/Makefile
-> +===================================================================
-> +--- netkit-rsh-0.17.orig/rexecd/Makefile
-> ++++ netkit-rsh-0.17/rexecd/Makefile
-> +@@ -24,7 +24,7 @@ endif
-> + CFLAGS += -DRESTRICT_FTP=1
-> +
-> + rexecd: rexecd.o
-> +-	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
-> ++	$(CC) $^ -o $@ $(LDFLAGS) $(LIBS)
-> +
-> + install: rexecd
-> + 	install -m$(DAEMONMODE) rexecd $(INSTALLROOT)$(SBINDIR)/in.rexecd
-> diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh.xinetd.netkit b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh.xinetd.netkit
-> new file mode 100644
-> index 0000000..ad59b62
-> --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh/rsh.xinetd.netkit
-> @@ -0,0 +1,21 @@
-> +# default: off
-> +# description:
-> +# The rshd server is a server for the rcmd(3) routine and,
-> +# consequently, for the rsh(1) program. The server provides
-> +# remote execution facilities with authentication based on
-> +# privileged port numbers from trusted hosts.
-> +#
-> +service shell
-> +{
-> +	socket_type	= stream
-> +	protocol	= tcp
-> +	flags		= NAMEINARGS
-> +	wait		= no
-> +	user		= root
-> +	group		= root
-> +	log_on_success	+= USERID
-> +	log_on_failure	+= USERID
-> +	server		= /usr/bin/tcpd
-> +	server_args	= /usr/sbin/in.rshd -aL
-> +	disable		= yes
-> +}
-> diff --git a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-> index 9866b3f..8b42fa7 100644
-> --- a/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-> +++ b/meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb
-> @@ -1,14 +1,15 @@
->   DESCRIPTION = "netkit-rsh includes the rsh daemon and client."
->   SECTION = "networking"
->   HOMEPAGE="ftp://ftp.uk.linux.org/pub/linux/Networking/netkit"
-> -LICENSE = "BSD"
-> -DEPENDS = "xinetd libpam libgcrypt"
-> +LICENSE = "BSD-4-Clause"
-> +DEPENDS = "xinetd libgcrypt"
->
->   LIC_FILES_CHKSUM = "file://rsh/rsh.c;beginline=2;endline=3;md5=25737e9d21d9df251dd26b7dcbd8ee29"
->
->   SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}.orig.tar.gz;name=archive \
->               ${DEBIAN_MIRROR}/main/n/netkit-rsh/netkit-rsh_${PV}-15.diff.gz;name=patch15 \
->               file://rsh-redone_link_order_file.patch \
-> +            file://no_pam_build_fix.patch \
->               file://rexec.xinetd.netkit \
->               file://rlogin.xinetd.netkit \
->               file://rsh.xinetd.netkit \
-> @@ -19,16 +20,22 @@ SRC_URI[archive.sha256sum] = "edcac7fa18015f0bc04e573f3f54ae3b638d71335df1ad7dae
->   SRC_URI[patch15.md5sum] = "655efc0d541b03ca5de0ae506c805ea3"
->   SRC_URI[patch15.sha256sum] = "2bc071c438e8b0ed42a0bd2db2d8b681b27a1e9b1798694d9874733293bc2aa9"
->
-> -inherit distro_features_check
-> +inherit pkgconfig
->
->   CFLAGS += " -D_GNU_SOURCE -Wno-deprecated-declarations"
-> -LDFLAGS += " -lutil"
-> +LDFLAGS += " -L${STAGING_LIBDIR} -lutil -lcrypt"
-> +
-> +PACKAGECONFIG ??= ""
-> +PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "pam", "pam", "", d)}"
-> +PACKAGECONFIG[pam] = " , --without-pam, libpam, libpam"
->
->   do_configure () {
->       ./configure --prefix=${prefix}
-> -    echo "USE_PAM=1" > MCONFIG
-> -    echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
-> -    echo "INSTALLROOT=${D}" >> MCONFIG
-> +    echo "INSTALLROOT=${D}" > MCONFIG
-> +
-> +    if [ "${@base_contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
-> +        echo "USE_PAM=1" >> MCONFIG
-> +    fi
->
->       # didn't want to patch these next changes
->       sed -i 's/netkit-//' ${S}/rsh/pathnames.h
-> @@ -40,7 +47,6 @@ do_install () {
->       install -d ${D}${sbindir}
->       install -d ${D}${mandir}/man1
->       install -d ${D}${mandir}/man8
-> -    install -d ${D}${sysconfdir}/pam.d
->       install -d ${D}${sysconfdir}/xinetd.d
->
->       oe_runmake 'INSTALLROOT=${D}' 'BINMODE=0755' \
-> @@ -49,11 +55,13 @@ do_install () {
->       'BINDIR=${bindir}' 'SBINDIR=${sbindir}' \
->       'MANDIR=${mandir}' install
->
-> -    install -m 0644 debian/hosts.equiv ${D}/${sysconfdir}
-> -    install -m 0644 debian/pam.d/rexec ${D}/${sysconfdir}/pam.d
-> -    install -m 0644 debian/pam.d/rlogin ${D}/${sysconfdir}/pam.d
-> -    install -m 0644 debian/pam.d/rsh ${D}/${sysconfdir}/pam.d
-> -
-> +    if [ "${@base_contains('PACKAGECONFIG', 'pam', 'pam', '', d)}" != "" ]; then
-> +        install -d ${D}${sysconfdir}/pam.d
-> +        install -m 0644 debian/hosts.equiv ${D}/${sysconfdir}
-> +        install -m 0644 debian/pam.d/rexec ${D}/${sysconfdir}/pam.d
-> +        install -m 0644 debian/pam.d/rlogin ${D}/${sysconfdir}/pam.d
-> +        install -m 0644 debian/pam.d/rsh ${D}/${sysconfdir}/pam.d
-> +    fi
->       cp ${WORKDIR}/rexec.xinetd.netkit  ${D}/${sysconfdir}/xinetd.d/rexec
->       cp ${WORKDIR}/rlogin.xinetd.netkit  ${D}/${sysconfdir}/xinetd.d/rlogin
->       cp ${WORKDIR}/rsh.xinetd.netkit  ${D}/${sysconfdir}/xinetd.d/rsh
-> @@ -80,6 +88,4 @@ ALTERNATIVE_TARGET[rlogind] = "${sbindir}/in.rlogind"
->   RCONFLICTS_${PN}-client += "inetutils-rshd"
->   RPROVIDES_${PN}-rshd = "rshd"
->
-> -RDEPENDS_${PN} = "libpam xinetd"
-> -
-> -REQUIRED_DISTRO_FEATURES ?= "pam"
-> +RDEPENDS_${PN} = "xinetd"
->
+ 1. upgrade openvpn to 2.3.6 in order to fix CVE-2014-8104
+
+ 2. enable systemd
+
+ 3. provide new packages named ${PN}-sample to help user create config file
+    easily and check whether is openvpn work.
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ .../openvpn/openvpn/openvpn@.service               | 12 +++++
+ .../recipes-support/openvpn/openvpn_2.3.4.bb       | 33 ------------
+ .../recipes-support/openvpn/openvpn_2.3.6.bb       | 63 ++++++++++++++++++++++
+ 3 files changed, 75 insertions(+), 33 deletions(-)
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn/openvpn@.service
+ delete mode 100644 meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
+
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/openvpn@.service b/meta-networking/recipes-support/openvpn/openvpn/openvpn@.service
+new file mode 100644
+index 0000000..358dcb7
+--- /dev/null
++++ b/meta-networking/recipes-support/openvpn/openvpn/openvpn@.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=OpenVPN Robust And Highly Flexible Tunneling Application On %I
++After=syslog.target network.target
++
++[Service]
++PrivateTmp=true
++Type=forking
++PIDFile=/var/run/openvpn/%i.pid
++ExecStart=/usr/sbin/openvpn --daemon --writepid /var/run/openvpn/%i.pid --cd /etc/openvpn/ --config %i.conf
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
+deleted file mode 100644
+index 1fb722a..0000000
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.3.4.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-SUMMARY = "A full-featured SSL VPN solution via tun device."
+-HOMEPAGE = "http://openvpn.sourceforge.net"
+-SECTION = "console/network"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
+-DEPENDS = "lzo openssl iproute2 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+-
+-inherit autotools
+-
+-SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
+-           file://openvpn"
+-
+-SRC_URI[md5sum] = "04d47237907faabe9d046970ffe44b2e"
+-SRC_URI[sha256sum] = "af506d5f48568fa8d2f2435cb3fad35f9a9a8f263999ea6df3ba296960cec85a"
+-
+-CFLAGS += "-fno-inline"
+-
+-# I want openvpn to be able to read password from file (hrw)
+-EXTRA_OECONF += "--enable-password-save --enable-iproute2"
+-EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
+-
+-# Explicitly specify IPROUTE to bypass the configure-time check for /sbin/ip on the host.
+-EXTRA_OECONF += "IPROUTE=/sbin/ip"
+-
+-do_install_append() {
+-    install -d ${D}/${sysconfdir}/init.d
+-    install -d ${D}/${sysconfdir}/openvpn
+-    install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
+-}
+-
+-RRECOMMENDS_${PN} = "kernel-module-tun"
+-
+-FILES_${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
+new file mode 100644
+index 0000000..58ddcc8
+--- /dev/null
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
+@@ -0,0 +1,63 @@
++SUMMARY = "A full-featured SSL VPN solution via tun device."
++HOMEPAGE = "http://openvpn.sourceforge.net"
++SECTION = "console/network"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
++DEPENDS = "lzo openssl iproute2 ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
++
++inherit autotools systemd
++
++SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
++           file://openvpn \
++           file://openvpn@.service "
++
++SRC_URI[md5sum] = "6ca03fe0fd093e0d01601abee808835c"
++SRC_URI[sha256sum] = "7baed2ff39c12e1a1a289ec0b46fcc49ff094ca58b8d8d5f29b36ac649ee5b26"
++
++SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++CFLAGS += "-fno-inline"
++
++# I want openvpn to be able to read password from file (hrw)
++EXTRA_OECONF += "--enable-password-save --enable-iproute2"
++EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
++
++# Explicitly specify IPROUTE to bypass the configure-time check for /sbin/ip on the host.
++EXTRA_OECONF += "IPROUTE=/sbin/ip"
++
++do_install_append() {
++    install -d ${D}/${sysconfdir}/init.d
++    install -m 755 ${WORKDIR}/openvpn ${D}/${sysconfdir}/init.d
++
++    install -d ${D}/${sysconfdir}/openvpn
++    install -d ${D}/${sysconfdir}/openvpn/sample
++    install -m 755 ${S}/sample/sample-config-files/loopback-server  ${D}${sysconfdir}/openvpn/sample/loopback-server.conf
++    install -m 755 ${S}/sample/sample-config-files/loopback-client  ${D}${sysconfdir}/openvpn/sample/loopback-client.conf
++    install -dm 755 ${D}${sysconfdir}/openvpn/sample/sample-keys
++    install -m 644 ${S}/sample/sample-keys/* ${D}${sysconfdir}/openvpn/sample/sample-keys
++
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}/${systemd_unitdir}/system
++        install -m 644 ${WORKDIR}/openvpn@.service ${D}/${systemd_unitdir}/system
++        install -m 644 ${WORKDIR}/openvpn@.service ${D}/${systemd_unitdir}/system/openvpn@loopback-server.service
++        install -m 644 ${WORKDIR}/openvpn@.service ${D}/${systemd_unitdir}/system/openvpn@loopback-client.service
++
++        install -d ${D}/${localstatedir}
++        install -d ${D}/${localstatedir}/lib
++        install -d -m 710 ${D}/${localstatedir}/lib/openvpn
++        install -d -m 755 ${D}/${localstatedir}/run/
++        install -d -m 755 ${D}/${localstatedir}/run/openvpn
++    fi
++}
++
++PACKAGES =+ " ${PN}-sample "
++
++RRECOMMENDS_${PN} = "kernel-module-tun"
++
++FILES_${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
++FILES_${PN} += "${systemd_unitdir}/system/openvpn@.service \
++                /run"
++FILES_${PN}-sample += "${systemd_unitdir}/system/openvpn@loopback-server.service \
++                       ${systemd_unitdir}/system/openvpn@loopback-client.service \
++                       ${sysconfdir}/openvpn/sample/"
+-- 
+1.9.1
+
 
