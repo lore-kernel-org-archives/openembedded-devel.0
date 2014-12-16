@@ -1,33 +1,33 @@
 Return-Path: <rapphil@gmail.com>
-Received: from mail-qc0-f170.google.com (mail-qc0-f170.google.com
-	[209.85.216.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D4ED7258D
+Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
+	[209.85.192.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 826E97259B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Dec 2014 18:15:34 +0000 (UTC)
-Received: by mail-qc0-f170.google.com with SMTP id x3so10770669qcv.15
+	Tue, 16 Dec 2014 18:16:05 +0000 (UTC)
+Received: by mail-qg0-f46.google.com with SMTP id q107so8428134qgd.19
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Dec 2014 10:15:35 -0800 (PST)
+	Tue, 16 Dec 2014 10:16:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=cJWNVREgaMNViMhNjV/RorlI3pnOGCABksrFT+9U658=;
-	b=WeGbZAf3FyvUO1YUQ5TmSmrdbCH76Z+cj56kBaLnik7JgnRJIapYuILCNBeC6NX0bU
-	bj1yTRlYp9vFjqf5DFNH70GeQWlaBRIOtFzopN7iGSKtfYi2cBVBB7Wz7rj7j35Ff22R
-	sK27YcNSE/hnhc8Pnq/htJNklGoc1b1y5abLhr3oUp2HHsWBLZgEqDK+g0rffEMyoTcP
-	QU8Nbgd72lUR5+j4FyNRCu2kM9Y5mgPbzF3ktV+qzStbkfD1CkicWEldfle57T3oKe5s
-	2f6YS7BLNs1bvU+B0DT07yG9a5oDG09mMYYXAmVfBsei8ils6D3bhmPXY1PGb04cSP5C
-	g4hg==
-X-Received: by 10.224.4.196 with SMTP id 4mr6416111qas.35.1418753735374;
-	Tue, 16 Dec 2014 10:15:35 -0800 (PST)
+	bh=4aGQGFwzRZwFXC1/WUuYgR6cU5I8LTMZUCRWBZOsd78=;
+	b=x69FdDxUKYy3fixoM/q7W7QxxlGcO1LD/Xz/j/1wTkxzH9BF4wizxKRsNfTM8C7erD
+	OOPps043trXh4524VTCRVAVEtBRuHffMjsK93P7Un4hucgOlQH89Sp1ScWWxsIOP85jC
+	i7Ft/VNQeVlsYszYfDkmLVHzU+bVb5nYYYGr7SVW+x9afDEjZulflKhb3oGwyzWEeJGu
+	cTxncF/+4sAtRGzJhRzLPGxBANZNEcwM+gk+MAjGyZHJe9176jE/kYVMpQuNsuSZ3sgG
+	warzF2Ok0GARJlBlgyWNKygVbC7PHCYelhu6WQwqDKoTE5u9sEA5Q6BNasQdVYphssbR
+	Rmpw==
+X-Received: by 10.229.126.5 with SMTP id a5mr68499065qcs.14.1418753765732;
+	Tue, 16 Dec 2014 10:16:05 -0800 (PST)
 Received: from localhost.localdomain (host29.reason.com.br. [187.49.239.29])
-	by mx.google.com with ESMTPSA id h36sm1488696qge.25.2014.12.16.10.15.33
+	by mx.google.com with ESMTPSA id w75sm1500138qgd.14.2014.12.16.10.16.04
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 16 Dec 2014 10:15:34 -0800 (PST)
+	Tue, 16 Dec 2014 10:16:05 -0800 (PST)
 From: Raphael Silva <rapphil@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Dec 2014 16:15:21 -0200
-Message-Id: <1418753722-2555-1-git-send-email-rapphil@gmail.com>
+Date: Tue, 16 Dec 2014 16:15:58 -0200
+Message-Id: <1418753758-2609-1-git-send-email-rapphil@gmail.com>
 X-Mailer: git-send-email 2.2.0
-Subject: [meta-oe][PATCH 1/2] omgps: fix do_compile error due to uninitialized variable
+Subject: [meta-oe][PATCH] zsh: fixing B!=S build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,68 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Dec 2014 18:15:42 -0000
+X-List-Received-Date: Tue, 16 Dec 2014 18:16:05 -0000
 
-The problem happended since there was an uninitialized variable
-with gcc 4.9 and the parameter -Werror=maybe-uninitialized.
-Initialized the variable and checked for side effects.
-Removed from blacklist.
+Provided correct path for gnu-configize, since It
+is beeing executed in ${B} so It is not able to find
+configure.ac
 
 Signed-off-by: Raphael Silva <rapphil@gmail.com>
 ---
- .../omgps/omgps/fix.build.with.gcc.4.9.patch       | 22 ++++++++++++++++++++++
- meta-oe/recipes-navigation/omgps/omgps_svn.bb      |  2 +-
- 2 files changed, 23 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-navigation/omgps/omgps/fix.build.with.gcc.4.9.patch
+ meta-oe/recipes-extended/zsh/zsh.inc | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.gcc.4.9.patch b/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.gcc.4.9.patch
-new file mode 100644
-index 0000000..26eb926
---- /dev/null
-+++ b/meta-oe/recipes-navigation/omgps/omgps/fix.build.with.gcc.4.9.patch
-@@ -0,0 +1,22 @@
-+omgps: omgps fails compilation due to uninitialized variables
-+
-+omgps does not compile with gcc 4.9 due to uninitialized variables 
-+with the option -Werror=maybe-uninitialized
-+To solve the problem, just initiated the variable and checked for side
-+effects.
-+Upstream-Status: Submitted
-++https://code.google.com/p/omgps/issues/detail?id=16
-+
-+Signed-off-by: Raphael Silva <rapphil@gmail.com>
-+diff -urpN omgps.orig/src/sound.c omgps/src/sound.c
-+--- omgps.orig/src/sound.c	2014-12-14 15:13:29.609243994 -0200
-++++ omgps/src/sound.c	2014-12-14 15:14:13.831116745 -0200
-+@@ -44,7 +44,7 @@ static gboolean play_sound_files(char *f
-+ 		return FALSE;
-+ 
-+ 	char *bak = strdup(files);
-+-	char *saveptr;
-++	char *saveptr = NULL;
-+ 	char *p = strtok_r(bak, ";", &saveptr);
-+ 
-+ 	#define MAX_SOUND_FILES 14
-diff --git a/meta-oe/recipes-navigation/omgps/omgps_svn.bb b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-index 2304b36..14c5801 100644
---- a/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-+++ b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
-@@ -9,7 +9,6 @@ PV = "0.1+svnr${SRCPV}"
- PR = "r2"
- S = "${WORKDIR}/${PN}"
+diff --git a/meta-oe/recipes-extended/zsh/zsh.inc b/meta-oe/recipes-extended/zsh/zsh.inc
+index 86a546e..e18c25f 100644
+--- a/meta-oe/recipes-extended/zsh/zsh.inc
++++ b/meta-oe/recipes-extended/zsh/zsh.inc
+@@ -8,7 +8,6 @@ SECTION = "base/shell"
+ LICENSE = "zsh"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
  
--PNBLACKLIST[omgps] = "BROKEN: sound.c:61:35: error: 'saveptr' may be used uninitialized in this function [-Werror=maybe-uninitialized]"
+-PNBLACKLIST[zsh] = "BROKEN: doesn't build with B!=S (gnu-configize executed in ${B})"
  
- do_configure_prepend() {
-     sed -i "s#PY_VERSION = 2.6#PY_VERSION = ${PYTHON_BASEVERSION}#g" ${S}/Makefile.am
-@@ -24,6 +23,7 @@ SRC_URI = "svn://omgps.googlecode.com/svn/trunk;module=omgps;protocol=http \
-            file://fix.build.with.glib.2.34.patch \
-            file://gdk-pixbuf-2.26.5.patch \
-            file://0001-g_type_init-is-deprecated-for-glib-2.35.0.patch \
-+           file://fix.build.with.gcc.4.9.patch \
- "
+ DEPENDS = "ncurses bison-native"
  
- inherit autotools pkgconfig
+@@ -38,7 +37,7 @@ ALTERNATIVE_PRIORITY = "100"
+ export AUTOHEADER = "true"
+ 
+ do_configure () {
+-    gnu-configize --force
++    gnu-configize --force ${S}
+     oe_runconf
+ }
+ 
 -- 
 2.2.0
 
