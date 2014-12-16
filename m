@@ -1,30 +1,40 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 59FD072614
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id B7FC272607
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Dec 2014 21:51:20 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
-	by relay1.mentorg.com with esmtp 
-	id 1Y101Y-0001en-8D from Joe_MacDonald@mentor.com ;
-	Tue, 16 Dec 2014 13:51:20 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.3.181.6;
-	Tue, 16 Dec 2014 13:51:11 -0800
-Received: by burninator (Postfix, from userid 1000)	id 102FC581DE4; Tue, 16
-	Dec 2014 16:51:19 -0500 (EST)
-Date: Tue, 16 Dec 2014 16:51:19 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Bian Naimeng <biannm@cn.fujitsu.com>
-Message-ID: <20141216215118.GP6113@mentor.com>
-References: <1418288042-39086-1-git-send-email-biannm@cn.fujitsu.com>
+	Tue, 16 Dec 2014 21:53:26 +0000 (UTC)
+Received: by mail-pa0-f54.google.com with SMTP id fb1so14883084pad.41
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Dec 2014 13:53:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=b7xwaBp6k081DQy2oAf2Z5QLeoiwBU9eCUNCXw59TFA=;
+	b=agsxhwOvAtoGd6EsJyzhWZlrjsuuL7JaETl1+72I39ejsLF55NnclXu8Mj+g2XN20M
+	MMOMw4ejzHkHN3rzOXPWiezY6aoPLCXN6iMe5y1/UfntXGkxd224oPE8/MYGS8Sz5Aux
+	PIn7SyyX8XeZySYSUyAlXFhDX8xuWrAyJBw5oTsJFuOHrgRpbMIi8Ta9fH2LGZx1FY8p
+	dDjXf0k8Au8y2c8PvZReRJpzV4vC0FwpkxvyBB2aUt9TMxsLpknW5ZQYiOUhBfOyMNBF
+	ayuUD/0Of+r3G9k66sTdM9SWUlpeEjq3REB8SI04lVQZ4KCQ4YgoL6ucYYgpd0Y9c4Dd
+	geIg==
+X-Received: by 10.68.235.5 with SMTP id ui5mr64044416pbc.152.1418766807374;
+	Tue, 16 Dec 2014 13:53:27 -0800 (PST)
+Received: from [10.43.100.29] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
+	by mx.google.com with ESMTPSA id kl7sm1945625pdb.10.2014.12.16.13.53.25
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 16 Dec 2014 13:53:26 -0800 (PST)
+Message-ID: <5490A9D4.8040806@gmail.com>
+Date: Tue, 16 Dec 2014 13:53:24 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-In-Reply-To: <1418288042-39086-1-git-send-email-biannm@cn.fujitsu.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v2] drbd: Add recipes
+To: Hongxu Jia <hongxu.jia@windriver.com>, 
+	openembedded-devel@lists.openembedded.org
+References: <1418662550-13436-1-git-send-email-akuster808@gmail.com>
+	<548F8C66.5080005@windriver.com>
+In-Reply-To: <548F8C66.5080005@windriver.com>
+Subject: Re: [meta-perl][PATCH 1/4] lib-perl: move package from meta-security to meta-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,143 +48,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Dec 2014 21:51:25 -0000
-X-Groupsio-MsgNum: 53347
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BnCwdHgQ2ZomtW9r"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Dec 2014 21:53:30 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---BnCwdHgQ2ZomtW9r
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Merged, thanks.
--J.
 
-[[oe] [meta-networking][PATCH v2] drbd: Add recipes] On 14.12.11 (Thu 16:54=
-) Bian Naimeng wrote:
+On 12/15/2014 05:35 PM, Hongxu Jia wrote:
+> On 12/16/2014 12:55 AM, Armin Kuster wrote:
+>> please consider this common package for meta-perl.
+>>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>   meta-perl/recipes-perl/libperl/lib-perl_0.63.bb | 28
+>> +++++++++++++++++++++++++
+>>   1 file changed, 28 insertions(+)
+>>   create mode 100644 meta-perl/recipes-perl/libperl/lib-perl_0.63.bb
+>
+> We have a another lib-perl in oe-core
+> (meta/recipes-devtools/perl/perl_5.20.0.bb),
+> Are they the same?
+I am not sure.
 
-> DRBD is a block device which is designed to build high availability clust=
-ers.
->=20
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> ---
->  .../recipes-support/drbd/drbd/drbd.service         | 12 +++++
->  meta-networking/recipes-support/drbd/drbd_8.4.4.bb | 55 ++++++++++++++++=
-++++++
->  2 files changed, 67 insertions(+)
->  create mode 100644 meta-networking/recipes-support/drbd/drbd/drbd.service
->  create mode 100644 meta-networking/recipes-support/drbd/drbd_8.4.4.bb
->=20
-> diff --git a/meta-networking/recipes-support/drbd/drbd/drbd.service b/met=
-a-networking/recipes-support/drbd/drbd/drbd.service
-> new file mode 100644
-> index 0000000..3543999
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/drbd/drbd/drbd.service
-> @@ -0,0 +1,12 @@
-> +[Unit]
-> +Description=3DDRBD Service
-> +After=3Dnetwork.target
-> +
-> +[Service]
-> +Type=3Doneshot
-> +RemainAfterExit=3Dyes
-> +ExecStart=3D@LIBEXECDIR@/drbd-helper start
-> +ExecStop=3D@LIBEXECDIR@/drbd-helper stop
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-networking/recipes-support/drbd/drbd_8.4.4.bb b/meta-ne=
-tworking/recipes-support/drbd/drbd_8.4.4.bb
-> new file mode 100644
-> index 0000000..e2df3f9
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/drbd/drbd_8.4.4.bb
-> @@ -0,0 +1,55 @@
-> +SUMMARY =3D "BD driver for Linux"
-> +DESCRIPTION =3D "DRBD mirrors a block device over the network to another=
- machine.\
-> +DRBD mirrors a block device over the network to another machine.\
-> +Think of it as networked raid 1. It is a building block for\
-> +setting up high availability (HA) clusters."
-> +
-> +HOMEPAGE =3D "http://www.drbd.org/"
-> +SECTION =3D "kernel/userland"
-> +
-> +LICENSE =3D "GPLv2+"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D5574c6965ae5f583e55880e397fbb=
-018"
-> +
-> +SRC_URI =3D "http://oss.linbit.com/${BPN}/8.4/${BPN}-${PV}.tar.gz \
-> +           file://drbd.service \
-> +          "
-> +
-> +SRC_URI[md5sum] =3D "b51815343c1a9151e2936b3b97520388"
-> +SRC_URI[sha256sum] =3D "a056219c5c23b079c3354179f7a1b9f55d47e573a4cd3178=
-f2ef4c15604288f0"
-> +
-> +inherit autotools-brokensep systemd
-> +
-> +EXTRA_OECONF =3D "--with-utils                  \
-> +                --without-km                  \
-> +                --with-initdir=3D/etc/init.d    \
-> +                --without-pacemaker           \
-> +                --without-rgmanager           \
-> +                --without-bashcompletion      \
-> +                --with-distro debian          \
-> +               "
-> +
-> +do_configure (){
-> +    oe_runconf
-> +}
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "drbd.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
-> +
-> +do_install_append() {
-> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
-then
-> +        install -d ${D}/${systemd_unitdir}/system
-> +        install -m 644 ${WORKDIR}/drbd.service ${D}/${systemd_unitdir}/s=
-ystem
-> +        install -d ${D}/${libexecdir}
-> +        install -m 755 ${D}/${sysconfdir}/init.d/drbd ${D}/${libexecdir}=
-/drbd-helper
-> +
-> +        sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
-> +            ${D}${systemd_unitdir}/system/drbd.service
-> +    fi
-> +}
-> +
-> +RDEPENDS_${PN} +=3D "bash perl"
-> +
-> +FILES_${PN} +=3D "/run"
-> +FILES_${PN} +=3D "${base_libdir}/drbd"
-> +FILES_${PN}-dbg +=3D "${base_libdir}/drbd/.debug"
-> --=20
-> 1.9.1
->=20
---=20
--Joe MacDonald.
-:wq
+lib-perl is a small simple module which simplifies the manipulation of 
+@INC at compile time.
 
---BnCwdHgQ2ZomtW9r
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+I don't know if perl_5.20 includes this.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+If not, how about rename the recipe?
 
-iQEcBAEBAgAGBQJUkKlWAAoJEEn8ffcsOfaW0q4IAKSShPsAWSxnN9WQhX5Ww+F6
-obI7Amf6yDC/wUXe93fJcs4tR64ZiE66NS7THLHvaWR+vQoQpEoG46PHVyL544o4
-ge32oC5GohZVKwlJaQDF+F+ApsQoPTjSj5GxZWtZEubzbbxmK3abgs11PuLOMHmj
-jchVJ2W4RLwvCGiDJqzjvtCzI1m5iAuVx8Hw4SDAeMoTqyc28EtDKcEKfg0ODBi8
-tEVdL43a6PQAdoL6xlWQVG67WHiW752y/e3AlLJNP60vIKiLUKmSQXaTcCCplGAQ
-CS9mboqHUL1qcSsARUPLgYmPW9gE/duqTJqrwElIsqDNIboVhRiHfjh84/AiI08=
-=f2EU
------END PGP SIGNATURE-----
+It looks like on cpan.org it is refereed to a just 'lib'.
 
---BnCwdHgQ2ZomtW9r--
+I can rename it to that.
+
+
+> Others is fine to me.
+
+great.
+
+Kind regards,
+Armin
+>
+> //Hongxu
+>
+>>
+>> diff --git a/meta-perl/recipes-perl/libperl/lib-perl_0.63.bb
+>> b/meta-perl/recipes-perl/libperl/lib-perl_0.63.bb
+>> new file mode 100644
+>> index 0000000..7895864
+>> --- /dev/null
+>> +++ b/meta-perl/recipes-perl/libperl/lib-perl_0.63.bb
+>> @@ -0,0 +1,28 @@
+>> +DESCRIPTION = "This is a small simple module which simplifies the \
+>> +manipulation of @INC at compile time. It is typically used to add
+>> extra \
+>> +directories to Perl's search path so that later 'use' or 'require'
+>> statements \
+>> +will find modules which are not located in the default search path."
+>> +
+>> +SECTION = "libs"
+>> +LICENSE = "Artistic-1.0 | GPL-1.0+"
+>> +PR = "r0"
+>> +
+>> +LIC_FILES_CHKSUM =
+>> "file://README;beginline=26;endline=30;md5=94b119f1a7b8d611efc89b5d562a1a50"
+>>
+>> +
+>> +DEPENDS += "perl"
+>> +
+>> +SRC_URI =
+>> "http://www.cpan.org/authors/id/S/SM/SMUELLER/lib-${PV}.tar.gz"
+>> +
+>> +SRC_URI[md5sum] = "8607ac4e0d9d43585ec28312f52df67c"
+>> +SRC_URI[sha256sum] =
+>> "72f63db9220098e834d7a38231626bd0c9b802c1ec54a628e2df35f3818e5a00"
+>> +
+>> +S = "${WORKDIR}/lib-${PV}"
+>> +
+>> +EXTRA_CPANFLAGS = "EXPATLIBPATH=${STAGING_LIBDIR}
+>> EXPATINCPATH=${STAGING_INCDIR}"
+>> +
+>> +inherit cpan
+>> +
+>> +do_compile() {
+>> +    export LIBC="$(find ${STAGING_DIR_TARGET}/${base_libdir}/ -name
+>> 'libc-*.so')"
+>> +    cpan_do_compile
+>> +}
+>
+
