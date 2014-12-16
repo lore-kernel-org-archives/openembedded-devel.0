@@ -1,24 +1,40 @@
-Return-Path: <urs@bytesatwork.ch>
-X-Greylist: delayed 606 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 16 Dec 2014 09:52:07 UTC
-Received: from bytesatwork.ch (bytesatwork.ch [91.135.72.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 45FB972598
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CEEB7259C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Dec 2014 09:52:07 +0000 (UTC)
-Received: from [192.168.2.20] (201-97.77-83.cust.bluewin.ch [83.77.97.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested) (Authenticated sender: urs)
-	by bytesatwork.ch (Postfix) with ESMTPSA id 5F4FE18004BC;
-	Tue, 16 Dec 2014 10:38:59 +0100 (CET)
-Message-ID: <548FFE67.6030104@bytesatwork.ch>
-Date: Tue, 16 Dec 2014 10:41:59 +0100
-From: =?UTF-8?B?VXJzIEbDpHNzbGVy?= <urs@bytesatwork.ch>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.3.0
-MIME-Version: 1.0
+	Tue, 16 Dec 2014 10:47:00 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id l15so11814645wiw.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Dec 2014 02:47:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=I2WZiNeI8iBVG3E230kfxZS2+0nGi2hMOxyRKpuFc3U=;
+	b=BfTa4GnyeQwwJNW2qEHs4VCkT8nrneE7NxrYIQBSMoZ5NubjzG5S4SZAZy4laUDXq8
+	jErUJWs4hsFppl+5qMC29FX119ORUn8z9CeQOHfVmgXpwbmMPAl07W9JD9/jGoRPZD9j
+	4PoWdD71RuDxuTQ61nHEQEgDYJ0cOhAy000hx5OKiTPqH7KjVm3r3tORV9aq6T6gZbxT
+	6Dj8DXo3f5ufmEwyorDKb+RTa28UcqyJ/pqw/iQ6YV0pMgOLRSWaQbdLFZQaAjSire3n
+	IrDgqxCltM3ZcWQRPmyGJrjT737c5z3AyXDmtNvNX/oDusJGcNKZo7XEOdo3zPE1Tx/q
+	bAZA==
+X-Received: by 10.180.109.45 with SMTP id hp13mr3636394wib.4.1418726819845;
+	Tue, 16 Dec 2014 02:46:59 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	dg7sm1638097wib.24.2014.12.16.02.46.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 16 Dec 2014 02:46:59 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 16 Dec 2014 11:46:59 +0100
 To: openembedded-devel@lists.openembedded.org
-Cc: urs.fassler@bytesatwork.ch
-Subject: [meta-qt5][daisy][PATCH] enclose exported variables for SDK in quotation marks to be compatible with sh
+Message-ID: <20141216104659.GA2466@jama>
+References: <1418695179-32300-1-git-send-email-wenzong.fan@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1418695179-32300-1-git-send-email-wenzong.fan@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH][meta-oe] collectd: add PACKAGECONFIG for libvirt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,92 +48,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Dec 2014 09:52:11 -0000
-X-Groupsio-MsgNum: 53338
+X-List-Received-Date: Tue, 16 Dec 2014 10:47:02 -0000
+X-Groupsio-MsgNum: 53339
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="h6SficUDIAnkQR5Tbe5lSIWSR6ITkpbwM"
+	protocol="application/pgp-signature"; boundary="DocE+STaALJfprDB"
+Content-Disposition: inline
 
---h6SficUDIAnkQR5Tbe5lSIWSR6ITkpbwM
-Content-Type: multipart/mixed;
- boundary="------------030702050206000205030504"
-
---------------030702050206000205030504
-Content-Type: text/plain; charset=utf-8
+--DocE+STaALJfprDB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Otherwise, sourcing with sh does not work which is a problem when
-source'd from a script.
+On Tue, Dec 16, 2014 at 09:59:39AM +0800, wenzong.fan@windriver.com wrote:
+> From: Wenzong Fan <wenzong.fan@windriver.com>
+>=20
+> Add PACKAGECONFIG for 'libvirt', otherwise there would be warnings
+> like below:
+>=20
+> WARN: collectd: collectd rdepends on libvirt, but it isn't a build
+> dependency?
 
---------------030702050206000205030504
-Content-Type: text/x-patch;
- name="0001-enclose-exported-variables-for-SDK-in-quotation-mark.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
- filename*0="0001-enclose-exported-variables-for-SDK-in-quotation-mark.pa";
- filename*1="tch"
+What about other floating dependencies reported in test-dependencies
+e-mail?
 
-From df950dda18f4d006bdadeba9cb35118eacd87cd0 Mon Sep 17 00:00:00 2001
-From: =3D?UTF-8?q?Urs=3D20F=3DC3=3DA4ssler?=3D <urs.fassler@bytesatwork.ch>
-Date: Tue, 16 Dec 2014 10:03:45 +0100
-Subject: [meta-qt5][daisy][PATCH] enclose exported variables for SDK in
- quotation marks to be compatible with sh
-To: openembedded-devel@lists.openembedded.org
+WARN: collectd: collectd rdepends on libcrypto, but it isn't a build
+dependency?                                                                =
+             =20
+WARN: collectd: collectd rdepends on libesmtp, but it isn't a build
+dependency?                                                                =
+              =20
+WARN: collectd: collectd rdepends on libssl, but it isn't a build
+dependency?                                                                =
+                =20
 
----
- classes/populate_sdk_qt5.bbclass | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+>=20
+> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> ---
+>  meta-oe/recipes-extended/collectd/collectd_5.4.1.bb |    3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb b/meta-o=
+e/recipes-extended/collectd/collectd_5.4.1.bb
+> index 46752c8..6e82bbc 100644
+> --- a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
+> +++ b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
+> @@ -35,8 +35,9 @@ PACKAGECONFIG[sensors] =3D "--enable-sensors --with-lib=
+sensors=3Dyes, \
+>          --disable-sensors --with-libsensors=3Dno,lmsensors"
+>  PACKAGECONFIG[amqp] =3D "--enable-amqp --with-librabbitmq=3Dyes, \
+>          --disable-amqp --with-librabbitmq=3Dno,rabbitmq-c"
+> -# protobuf-c that is currently only available in meta-virtualization lay=
+er
+> +# protobuf-c, libvirt that are currently only available in meta-virtuali=
+zation layer
+>  PACKAGECONFIG[pinba] =3D "--enable-pinba,--disable-pinba,protobuf-c-nati=
+ve protobuf-c"
+> +PACKAGECONFIG[libvirt] =3D "--enable-libvirt,--disable-libvirt,libvirt"
+> =20
+>  EXTRA_OECONF =3D " \
+>                  ${FPLAYOUT} \
+> --=20
+> 1.7.10.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bb=
-class
-index 7b31bbb..a22bdb1 100644
---- a/classes/populate_sdk_qt5.bbclass
-+++ b/classes/populate_sdk_qt5.bbclass
-@@ -11,10 +11,10 @@ toolchain_create_sdk_env_script_append () {
-     echo 'export OE_QMAKE_CFLAGS=3D"$CFLAGS"' >> $script
-     echo 'export OE_QMAKE_CXXFLAGS=3D"$CXXFLAGS"' >> $script
-     echo 'export OE_QMAKE_LDFLAGS=3D"$LDFLAGS"' >> $script
--    echo 'export OE_QMAKE_CC=3D$CC' >> $script
--    echo 'export OE_QMAKE_CXX=3D$CXX' >> $script
--    echo 'export OE_QMAKE_LINK=3D$CXX' >> $script
--    echo 'export OE_QMAKE_AR=3D$AR' >> $script
-+    echo 'export OE_QMAKE_CC=3D"$CC"' >> $script
-+    echo 'export OE_QMAKE_CXX=3D"$CXX"' >> $script
-+    echo 'export OE_QMAKE_LINK=3D"$CXX"' >> $script
-+    echo 'export OE_QMAKE_AR=3D"$AR"' >> $script
-     echo 'export OE_QMAKE_LIBDIR_QT=3D${SDKTARGETSYSROOT}${OE_QMAKE_PATH_L=
-IBS}' >> $script
-     echo 'export OE_QMAKE_INCDIR_QT=3D${SDKTARGETSYSROOT}${OE_QMAKE_PATH_Q=
-T_HEADERS}' >> $script
-     echo 'export OE_QMAKE_MOC=3D${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}=
-/moc' >> $script
 --=20
-2.1.3
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-
---------------030702050206000205030504--
-
---h6SficUDIAnkQR5Tbe5lSIWSR6ITkpbwM
+--DocE+STaALJfprDB
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
+Version: GnuPG v2
 
-iQIcBAEBAgAGBQJUj/5nAAoJEKKADLnESIBjMfoQAITyNxkyQmJz9ymFybUijz8+
-IKu2Qz4GlQFQNHUZVambv5Xwp5x/yVyjcC7736NisnckdN3Wz1VoyS+QoZUreSCf
-hFwBVe4B74V+jiBfN7YdMZHZ/QjfUewhInzW6FIWlFfBslPBPn4SUpJ9m5G1ePoL
-d9b+b0IcmlaThfhEhD2SgcCbd5rZLEPfG19BKEwWfkDueIUvrgvbxjR2tJeQyezl
-LizFF2Q85uAjn2AmbrPKPwn1m/N23FVrtOyRK+HuviOFWYGoKeFzN/ZwXoiGHoF0
-Ix4M/lwGRuwN7lm4aedKUSZOpnKEBOzRZSJBOpEZ6uu3fRqZL+lLj2VWXoBh76Tq
-5NZy5WVqd7efWRKGLY9/hfomcY9WNCi2wSw3x4Q2sYZx61xS3HBF9Qv9q0Sd52Yh
-uJlMO9htefL1O6RRjPWPTXfzAFB+c0zj1fOTOYrjDTsxv7UoGzVMfEUeiR6ZEpIv
-ifxGqICt8ZnoCNA7BQTB1tM0XfjnhjAS5Ywdau19KIasWM3ANkiAl/sRJUee0ePj
-maoVKYVOHWaaAfx/8egHQUyMuYkuSEyxjuFIn5VENq0eDuVe8X6zlb4QvPpWTSpS
-7psSUbyehGyB/pYyJnhZcN/t0ey9cNu1OAPqM3e39MxjsRQcIfTwCkI6tykPwRtp
-HODVc1wGNs1pZJsJdNFP
-=YdvS
+iEYEARECAAYFAlSQDaMACgkQN1Ujt2V2gBx+xACfa5FPRWZR4DNEOOAxwEyWYvMK
+pgAAoJsXx5xQ9gEVZcNW6inbjlF4KJjJ
+=XUyF
 -----END PGP SIGNATURE-----
 
---h6SficUDIAnkQR5Tbe5lSIWSR6ITkpbwM--
+--DocE+STaALJfprDB--
