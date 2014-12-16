@@ -1,40 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CEEB7259C
+Return-Path: <rapphil@gmail.com>
+Received: from mail-qa0-f45.google.com (mail-qa0-f45.google.com
+	[209.85.216.45])
+	by mail.openembedded.org (Postfix) with ESMTP id A698A725FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Dec 2014 10:47:00 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id l15so11814645wiw.8
+	Tue, 16 Dec 2014 18:15:38 +0000 (UTC)
+Received: by mail-qa0-f45.google.com with SMTP id i13so2299059qae.32
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Dec 2014 02:47:00 -0800 (PST)
+	Tue, 16 Dec 2014 10:15:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=I2WZiNeI8iBVG3E230kfxZS2+0nGi2hMOxyRKpuFc3U=;
-	b=BfTa4GnyeQwwJNW2qEHs4VCkT8nrneE7NxrYIQBSMoZ5NubjzG5S4SZAZy4laUDXq8
-	jErUJWs4hsFppl+5qMC29FX119ORUn8z9CeQOHfVmgXpwbmMPAl07W9JD9/jGoRPZD9j
-	4PoWdD71RuDxuTQ61nHEQEgDYJ0cOhAy000hx5OKiTPqH7KjVm3r3tORV9aq6T6gZbxT
-	6Dj8DXo3f5ufmEwyorDKb+RTa28UcqyJ/pqw/iQ6YV0pMgOLRSWaQbdLFZQaAjSire3n
-	IrDgqxCltM3ZcWQRPmyGJrjT737c5z3AyXDmtNvNX/oDusJGcNKZo7XEOdo3zPE1Tx/q
-	bAZA==
-X-Received: by 10.180.109.45 with SMTP id hp13mr3636394wib.4.1418726819845;
-	Tue, 16 Dec 2014 02:46:59 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	dg7sm1638097wib.24.2014.12.16.02.46.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 16 Dec 2014 02:46:59 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 16 Dec 2014 11:46:59 +0100
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=w60KXdHUqUhDoqXKd+z4HySSdjUJFP8onZH3NtKguBs=;
+	b=gqByBsj+ByDNuuJTt38el5GaCBAdRBgBp6sh0ydLuzvWt1vHBOupxnI3O8GnzoyGek
+	eHReY14W5TFAKoRj8rzMX2cCD3KFXA563T2kQjL3JLa63BskEmyEiP9FVtmxEUCutUSC
+	Z/HWAhA2juGUsi7GOs2hj9+1IOYj1u2tWSr9yWRo6x6MzYnEzyoSgSiSAQBuJGByv68r
+	1RYyZyhlFMdXyDhS+vvKY3RR3lAtCtNal48pmVmwAN19l3J9OPypLBOV4bh3LvJsjoE9
+	loyBBIAgLS2KyoaBLfZNGmYO6HNaBO1cnENkmhzyOOyrkmpt6BQoNl4dt7ptbvEQbP6G
+	6BlQ==
+X-Received: by 10.140.36.239 with SMTP id p102mr35703597qgp.8.1418753739394;
+	Tue, 16 Dec 2014 10:15:39 -0800 (PST)
+Received: from localhost.localdomain (host29.reason.com.br. [187.49.239.29])
+	by mx.google.com with ESMTPSA id h36sm1488696qge.25.2014.12.16.10.15.37
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 16 Dec 2014 10:15:38 -0800 (PST)
+From: Raphael Silva <rapphil@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141216104659.GA2466@jama>
-References: <1418695179-32300-1-git-send-email-wenzong.fan@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1418695179-32300-1-git-send-email-wenzong.fan@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH][meta-oe] collectd: add PACKAGECONFIG for libvirt
+Date: Tue, 16 Dec 2014 16:15:22 -0200
+Message-Id: <1418753722-2555-2-git-send-email-rapphil@gmail.com>
+X-Mailer: git-send-email 2.2.0
+In-Reply-To: <1418753722-2555-1-git-send-email-rapphil@gmail.com>
+References: <1418753722-2555-1-git-send-email-rapphil@gmail.com>
+Subject: [meta-oe][PATCH 2/2] omgps: fixing B!=S build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,87 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Dec 2014 10:47:02 -0000
-X-Groupsio-MsgNum: 53339
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DocE+STaALJfprDB"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Dec 2014 18:15:42 -0000
 
---DocE+STaALJfprDB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixed relative path affected by B != S, otherwise
+It has a do_compile error:
+ No rule to make target `data/etc/*.*'
 
-On Tue, Dec 16, 2014 at 09:59:39AM +0800, wenzong.fan@windriver.com wrote:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
->=20
-> Add PACKAGECONFIG for 'libvirt', otherwise there would be warnings
-> like below:
->=20
-> WARN: collectd: collectd rdepends on libvirt, but it isn't a build
-> dependency?
+Signed-off-by: Raphael Silva <rapphil@gmail.com>
+---
+ meta-oe/recipes-navigation/omgps/omgps_svn.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-What about other floating dependencies reported in test-dependencies
-e-mail?
+diff --git a/meta-oe/recipes-navigation/omgps/omgps_svn.bb b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
+index 14c5801..f2cdb88 100644
+--- a/meta-oe/recipes-navigation/omgps/omgps_svn.bb
++++ b/meta-oe/recipes-navigation/omgps/omgps_svn.bb
+@@ -13,6 +13,7 @@ S = "${WORKDIR}/${PN}"
+ do_configure_prepend() {
+     sed -i "s#PY_VERSION = 2.6#PY_VERSION = ${PYTHON_BASEVERSION}#g" ${S}/Makefile.am
+     sed -i "s#PY_INC_DIR = \$(OPIEDIR)#PY_INC_DIR = ${STAGING_DIR_HOST}#g" ${S}/Makefile.am
++    sed -i "s#dist_conf_DATA = data/etc/\*\.\*#dist_conf_DATA = ${S}/data/etc/\*\.\*#g" ${S}/Makefile.am
+ }
+ 
+ SRC_URI = "svn://omgps.googlecode.com/svn/trunk;module=omgps;protocol=http \
+-- 
+2.2.0
 
-WARN: collectd: collectd rdepends on libcrypto, but it isn't a build
-dependency?                                                                =
-             =20
-WARN: collectd: collectd rdepends on libesmtp, but it isn't a build
-dependency?                                                                =
-              =20
-WARN: collectd: collectd rdepends on libssl, but it isn't a build
-dependency?                                                                =
-                =20
 
->=20
-> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> ---
->  meta-oe/recipes-extended/collectd/collectd_5.4.1.bb |    3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb b/meta-o=
-e/recipes-extended/collectd/collectd_5.4.1.bb
-> index 46752c8..6e82bbc 100644
-> --- a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-> +++ b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-> @@ -35,8 +35,9 @@ PACKAGECONFIG[sensors] =3D "--enable-sensors --with-lib=
-sensors=3Dyes, \
->          --disable-sensors --with-libsensors=3Dno,lmsensors"
->  PACKAGECONFIG[amqp] =3D "--enable-amqp --with-librabbitmq=3Dyes, \
->          --disable-amqp --with-librabbitmq=3Dno,rabbitmq-c"
-> -# protobuf-c that is currently only available in meta-virtualization lay=
-er
-> +# protobuf-c, libvirt that are currently only available in meta-virtuali=
-zation layer
->  PACKAGECONFIG[pinba] =3D "--enable-pinba,--disable-pinba,protobuf-c-nati=
-ve protobuf-c"
-> +PACKAGECONFIG[libvirt] =3D "--enable-libvirt,--disable-libvirt,libvirt"
-> =20
->  EXTRA_OECONF =3D " \
->                  ${FPLAYOUT} \
-> --=20
-> 1.7.10.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---DocE+STaALJfprDB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlSQDaMACgkQN1Ujt2V2gBx+xACfa5FPRWZR4DNEOOAxwEyWYvMK
-pgAAoJsXx5xQ9gEVZcNW6inbjlF4KJjJ
-=XUyF
------END PGP SIGNATURE-----
-
---DocE+STaALJfprDB--
