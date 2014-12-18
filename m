@@ -1,32 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 72BAC72827
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 88FF472799
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Dec 2014 12:40:18 +0000 (UTC)
-Received: by mail-yh0-f43.google.com with SMTP id z6so487339yhz.30
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Dec 2014 04:40:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=Qf51Xn6JgadQ7MkSWLjs+/8llTfV2uaEJm4bDAfqrWM=;
-	b=wtQ6G37FjmZnLAIlw7jG3XdFoKxkdfLZmj2v4QZvUFABLvchVXcnETzjMG+z9Yp9zE
-	boOxuoTGfgcDDDM7EkG1tmBeJrPNIUpgX1tf5AZyzq1oSbJgnSaJIsy1g4IX8ShVTTcD
-	6vbFi68M72rtMHXWydMWYblqIO45wjnN3TAPeVBWkm55FM/Wkji6VfqWur0+UOxHh0Xr
-	0xi/jhMVOsfj8B4Ir7AvGvdjL550OPaRC0s/kMzTQMfIGwwPCmNzzMSrqOHuLTI78EfZ
-	HS2vM/d+RZ6U1x07djqLgcfx9ajTcm3WGKVYgJ5SWiw4amw91LmONm7x/YWY0UAGFksj
-	cwLw==
+	Thu, 18 Dec 2014 13:06:49 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga102.fm.intel.com with ESMTP; 18 Dec 2014 05:06:39 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.07,600,1413270000"; d="scan'208";a="639685507"
+Received: from obeyaert-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.31.63])
+	by fmsmga001.fm.intel.com with ESMTP; 18 Dec 2014 05:06:37 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Chen Qi <Qi.Chen@windriver.com>
+Date: Thu, 18 Dec 2014 13:06:36 +0000
+Message-ID: <2646521.ARjvrQxUQ9@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.3 (Linux/3.17.6-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
+In-Reply-To: <20141218122445.GC2462@jama>
+References: <1418894414-27376-1-git-send-email-Qi.Chen@windriver.com>
+	<20141218122445.GC2462@jama>
 MIME-Version: 1.0
-X-Received: by 10.170.60.87 with SMTP id c84mr1556683ykc.99.1418906418859;
-	Thu, 18 Dec 2014 04:40:18 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.171.132 with HTTP; Thu, 18 Dec 2014 04:40:18 -0800 (PST)
-Date: Thu, 18 Dec 2014 10:40:18 -0200
-X-Google-Sender-Auth: SQwOrVn6JnjmgQNaAMFrzt_qvu8
-Message-ID: <CAP9ODKqdkzDM1v=1dUAxYrEOeTYg2R6EYxGAD426i8tS_HQNNg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: [RFH] meta-java recent updates
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] xserver-nodm-init: remove recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,64 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2014 12:40:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Dec 2014 13:06:56 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hello,
+On Thursday 18 December 2014 13:24:45 Martin Jansa wrote:
+> On Thu, Dec 18, 2014 at 05:20:14PM +0800, Qi.Chen@windriver.com wrote:
+> > From: Chen Qi <Qi.Chen@windriver.com>
+> > 
+> > Remove recipe as this recipe is in OE-core.
+> 
+> No, there is important diff which isn't in oe-core.
 
-Since meta-java has been included, few days ago, I started to collect
-some fixes to test and merge. There were some pull requests awaiting
-to be reviewed and merged on github's tree and this was my initial
-focus. I have merged following changes:
+It's something that has been sitting on my todo list for some time 
+unfortunately:
 
-Cristian Iorga (2):
-      openjdk: add pkgconfig support
-      ecj: fix unpackpost task
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=5546
 
-Henning Heinold (11):
-      openjdk6: update icedtea 1.12 to version 1.12.8
-      openjdk-common.inc: fix qemu usage
-      cacao: fix target compilation and packaging
-      README: update for icedtea version 1.12.8
-      jamvm: add inherit pkgconfig
-      jamvm: update git version to ebd11bde0a97b57f0d18938c6b65468d3c932719
-      java-test-image: add jamvm, cacao and classpath
-      jamvm: update git url to sourceforge while berlios is gone
-      openjdk6: add version 1.13.4
-      README: update openjdk6 to the latest icedtea version
-      README: minor fixes
-
-Khem Raj (2):
-      openjdk-7-25b30: Forward port ppc patches
-      libmatthew: Remove the dummy jar symlink
-
-Koen Kooi (2):
-      openjdk-7-release-25b30.inc: move nio patch to main section.
-      openjdk-7-release-25b30.inc: add patch to fix hotstop build
-
-Merten Sach (1):
-      jamvm: port to new update-alternatives
-
-Otavio Salvador (3):
-      icedtea6-native: Depends on linux-libc-headers-native
-      linux-libc-headers: Add support to build the 'native' package
-      README: Update to Daisy
-
-Ronaldo Nunez (1):
-      openjdk-postinst.inc: Corrects empty jvm.cfg after postinst task.
-
-Sven Ebenfeld (1):
-      openjdk-7: inherit pkgconfig
-
-The layer itself has a huge room for improvement. It needs to be
-updated for Dizzy and than master.
-
-I'd like to ask anyone who carry patches on top of meta-java to rebase
-those and send for review. Anyone willing to help is welcome :)
-
+Cheers,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
