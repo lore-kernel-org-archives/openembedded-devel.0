@@ -1,27 +1,26 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D2A2672482
+Return-Path: <zarelaky@hotmail.com>
+X-Greylist: delayed 303 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 18 Dec 2014 07:36:58 UTC
+Received: from BLU004-OMC1S8.hotmail.com (blu004-omc1s8.hotmail.com
+	[65.55.116.19])
+	by mail.openembedded.org (Postfix) with ESMTP id E9697726FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Dec 2014 06:01:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="45403397"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Dec 2014 13:58:24 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBI61Jko012889
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Dec 2014 14:01:19 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 18 Dec 2014 14:01:56 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 Dec 2014 14:01:33 +0800
-Message-ID: <1418882493-2437-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Thu, 18 Dec 2014 07:36:58 +0000 (UTC)
+Received: from BLU436-SMTP41 ([65.55.116.9]) by BLU004-OMC1S8.hotmail.com over
+	TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751); 
+	Wed, 17 Dec 2014 23:31:15 -0800
+X-TMN: [U4VBQ94tpg4JkIM5zGZrbbPAC0JNa+op]
+X-Originating-Email: [zarelaky@hotmail.com]
+Message-ID: <BLU436-SMTP4129F4BFDE9BD77A38C70EDC6A0@phx.gbl>
+From: MingTao Qu <zarelaky@hotmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Dec 2014 15:31:08 +0800
+X-Mailer: git-send-email 2.2.0
+X-OriginalArrivalTime: 18 Dec 2014 07:31:13.0794 (UTC)
+	FILETIME=[9A2E1E20:01D01A94]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-oe][PATCH] gradm: Add new recipe
+Cc: otavio@ossystems.com.br
+Subject: [meta-qt5][PATCH] qtmultimedia: Fix crash when use Gstreamer 0.10 plugin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,147 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2014 06:01:52 -0000
+X-List-Received-Date: Thu, 18 Dec 2014 07:37:01 -0000
 Content-Type: text/plain
 
-gradm is the userspace RBAC parsing and authentication program for
-grsecurity. grsecurity aims to be a complete security system. gradm
-performs several tasks for the RBAC system including authenticated
-via a password to the kernel and parsing rules to be passed to the
-kernel.
+In QVideoSurfaceGstSink::get_caps(), when use 0.10 version Gstreamer,
+It create GstCap with a wrong type (G_TYPE_STRING) of parameter 'format',
+a g_strcpy exception will be found.
+This patch fixes the parameter type to use GST_TYPE_FOURCC as expacted.
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+Signed-off-by: Mingtao Qu <zarelaky@hotmail.com>
 ---
- .../gradm/gradm/0001-Makefile-remove-strip.patch   | 61 ++++++++++++++++++++++
- meta-oe/recipes-support/gradm/gradm_3.0.bb         | 50 ++++++++++++++++++
- 2 files changed, 111 insertions(+)
- create mode 100644 meta-oe/recipes-support/gradm/gradm/0001-Makefile-remove-strip.patch
- create mode 100644 meta-oe/recipes-support/gradm/gradm_3.0.bb
+ .../qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/gradm/gradm/0001-Makefile-remove-strip.patch b/meta-oe/recipes-support/gradm/gradm/0001-Makefile-remove-strip.patch
-new file mode 100644
-index 0000000..f0c697c
---- /dev/null
-+++ b/meta-oe/recipes-support/gradm/gradm/0001-Makefile-remove-strip.patch
-@@ -0,0 +1,61 @@
-+From fbf7b9e5a8e2978acd5b0a7a8311912a080ee9b9 Mon Sep 17 00:00:00 2001
-+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-+Date: Thu, 18 Dec 2014 11:09:01 +0800
-+Subject: [PATCH] Makefile: remove strip
-+
-+Avoid QA error by removing strip from Makefile
-+
-+[...]
-+ERROR: QA Issue: File '/sbin/gradm' from gradm was already stripped,
-+this will prevent future debugging! [already-stripped]
-+ERROR: QA Issue: File '/sbin/grlearn' from gradm was already stripped,
-+this will prevent future debugging! [already-stripped]
-+[...]
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-+
-+---
-+ Makefile | 7 ++-----
-+ 1 file changed, 2 insertions(+), 5 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 6c33fee..3570a4e 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -24,7 +24,6 @@ MKNOD=/bin/mknod
-+ #CC=/usr/bin/diet /usr/bin/gcc
-+ CC=/usr/bin/gcc
-+ FIND=/usr/bin/find
-+-STRIP=/usr/bin/strip
-+ LIBS := $(shell if [ "`uname -m`" != "sparc64" -a "`uname -m`" != "x86_64" ]; then echo "-lfl" ; else echo "" ; fi)
-+ OPT_FLAGS := -O2
-+ # for older versions of grsecurity, comment the above line and uncomment the below:
-+@@ -140,15 +139,12 @@ install: $(GRADM_BIN) gradm.8 policy grlearn
-+ 	@mkdir -p $(DESTDIR)/sbin
-+ 	@echo "Installing gradm..."
-+ 	@$(INSTALL) -m 0755 $(GRADM_BIN) $(DESTDIR)/sbin
-+-	@$(STRIP) $(DESTDIR)/sbin/$(GRADM_BIN)
-+ 	@if [ -f $(GRADM_PAM) ] ; then \
-+ 		echo "Installing gradm_pam..." ; \
-+		$(INSTALL) -m 4755 $(GRADM_PAM) $(DESTDIR)/sbin ; \
-+-		$(STRIP) $(DESTDIR)/sbin/$(GRADM_PAM) ; \
-+ 	fi
-+ 	@echo "Installing grlearn..."
-+ 	@$(INSTALL) -m 0700 grlearn $(DESTDIR)/sbin
-+-	@$(STRIP) $(DESTDIR)/sbin/grlearn
-+ 	@mkdir -p -m 700 $(DESTDIR)$(GRSEC_DIR)
-+ 	@if [ ! -f $(DESTDIR)$(GRSEC_DIR)/policy ] ; then \
-+ 		if [ -f $(DESTDIR)$(GRSEC_DIR)/acl ] ; then \
-+@@ -168,6 +164,7 @@ install: $(GRADM_BIN) gradm.8 policy grlearn
-+ 			$(MKNOD) -m 0622 $(DESTDIR)/dev/grsec c 1 13 ; \
-+ 		fi \
-+ 	fi
-++	@mkdir -p $(DESTDIR)/etc/udev/rules.d
-+ 	@if [ -d $(DESTDIR)/etc/udev/rules.d ] ; then \
-+ 		echo "ACTION!=\"add|change\", GOTO=\"permissions_end\"" > $(DESTDIR)/etc/udev/rules.d/80-grsec.rules ; \
-+ 		echo "KERNEL==\"grsec\",          MODE=\"0622\"" >> $(DESTDIR)/etc/udev/rules.d/80-grsec.rules ; \
-+-- 
-+1.8.3.1
-+
-diff --git a/meta-oe/recipes-support/gradm/gradm_3.0.bb b/meta-oe/recipes-support/gradm/gradm_3.0.bb
-new file mode 100644
-index 0000000..2f1d39d
---- /dev/null
-+++ b/meta-oe/recipes-support/gradm/gradm_3.0.bb
-@@ -0,0 +1,50 @@
-+SUMMARY = "Administration program for the grsecurity RBAC syste"
-+DESCRIPTION = "\
-+gradm is the userspace RBAC parsing and authentication program for \
-+grsecurity grsecurity aims to be a complete security system. gradm \
-+performs several tasks for the RBAC system including authenticated \
-+via a password to the kernel and parsing rules to be passed to the \
-+kernel"
-+HOMEPAGE = "http://grsecurity.net/index.php"
-+SECTION = "admin"
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4641e94ec96f98fabc56ff9cc48be14b"
-+DEPENDS = "flex-native bison-native ${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
-+
-+SRC_URI = "http://grsecurity.net/stable/${BP}-201408301734.tar.gz \
-+           file://0001-Makefile-remove-strip.patch"
-+SRC_URI[md5sum] = "79ec912e6544c5e58753f658623763f9"
-+SRC_URI[sha256sum] = "b190e5afecdf3ac5020a4e5e4b698645f1c01b20d036129dd8b609c4bd0c319c"
-+
-+S = "${WORKDIR}/gradm"
-+
-+inherit autotools-brokensep
-+
-+do_compile() {
-+    oe_runmake 'CC=${CC}'                               \
-+               'OPT_FLAGS=${CFLAGS}'                    \
-+               'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
-+               'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
-+               'BISON=${STAGING_BINDIR_NATIVE}/bison'   \
-+               ${@base_contains('DISTRO_FEATURES', 'pam', ' ', 'nopam', d)}
-+}
-+
-+do_install() {
-+    oe_runmake 'CC=${CC}'                               \
-+               'DESTDIR=${D}'                           \
-+               'LLEX=${STAGING_BINDIR_NATIVE}/lex'      \
-+               'FLEX=${STAGING_BINDIR_NATIVE}/flex'     \
-+               'BISON=${STAGING_BINDIR_NATIVE}/bison'   \
-+               install
-+
-+    # The device nodes are generated by postinstall or udev
-+    rm -rf ${D}/dev
-+}
-+
-+pkg_postinst_${PN}() {
-+    # make sure running on the target
-+    if [ x"$D" != "x" ]; then
-+        exit 1
-+    fi
-+    /bin/mknod -m 0622 /dev/grsec c 1 13
-+}
+diff --git a/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch b/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
+index c32ddaf..09c4444 100644
+--- a/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
++++ b/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
+@@ -1321,7 +1321,7 @@ index 81d5f60..51c4107 100644
+ +#if GST_CHECK_VERSION(1,0,0)
+ +                    "format"   , G_TYPE_STRING, gst_video_format_to_string(qt_yuvColorLookup[index].vfmt),
+ +#else
+-+                    "format"   , G_TYPE_STRING, qt_yuvColorLookup[index].fourcc,
+++                    "format"   , GST_TYPE_FOURCC, qt_yuvColorLookup[index].fourcc,
+ +#endif
+                      NULL));
+              continue;
 -- 
-1.8.3.1
+2.2.0
 
 
