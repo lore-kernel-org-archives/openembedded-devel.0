@@ -1,37 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CD04727E1
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 20FF6727D2
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 18 Dec 2014 12:19:54 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id n3so1579119wiv.13
+Received: by mail-wi0-f178.google.com with SMTP id em10so1585502wid.11
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 18 Dec 2014 04:19:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=QzpLdsPdRwMb/3nBETzr9E5YRRoISs0CPXeXmvge8hw=;
-	b=gO6datn6SxdYXRaEElTNLUKbM7uiE31qRnDYf2ixMwg60cbWDTnukV5MdTPvz/X4Pn
-	u4Z1qNYaAw6R8khgDiUOM8tzsvAkZkHBIQ7KyV4rtJVrvSxxlnGomwha2O80PsLf8Zm2
-	SvKvemvN5sbDp/8qwDssjtdcylb5Q+f2Krt7D1Xlfeo2DmBGvLxB4CrfJjlqGbThRAr2
-	LGa/Ipso9+zigrojESmoMuw66O31ilXAdPuHpVSmxoo1PMTNbYPRR181T8cmopQVpp8c
-	dOgsHy+//aMnyjqsf2VrgZyVW0jYcdA7jq43rMMFRmuR7Y7QiFjNI8B8YGU1kMNngWz7
-	E8Sg==
-X-Received: by 10.180.98.138 with SMTP id ei10mr24038049wib.32.1418905194557; 
-	Thu, 18 Dec 2014 04:19:54 -0800 (PST)
+	bh=RS8O2CfF1nWUuVKAeRUvHsTPWL7ikoujF4noh9C8Oq4=;
+	b=fsAnUU2WKY6nV1nRRx05MYVNhZO2R2Z4JkVz/9Zz5k5KeAAcuzFbpsvHihq19cWO33
+	BHMXdzZrb0VYsh61eCntHOUSJ0Z6MSk+MKT6zF7YtU5XNzXIWGkeNWGZF3lLg+N70wOf
+	3l8s7igIOhYIxdySByYaZCVqYQidECA9z1ayQIy2rOWspu7HFPLRYBggt5B0FH3yUAzV
+	nirD34x3BH5Duiw7px81AEh+Gn5pvnhs0U/b50nJPh65hk9U/V+MoalnVZ6My25iietu
+	hBG7ddO/V5EaPlwcOLYZ7FQugDqZAH25qZ75+Ddu6pi67/cHhO5WZ21axWeuvX+3hjZg
+	Zq/A==
+X-Received: by 10.180.73.206 with SMTP id n14mr4726866wiv.60.1418905193295;
+	Thu, 18 Dec 2014 04:19:53 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	mo12sm8734640wjc.35.2014.12.18.04.19.53
+	cp4sm8752109wjb.16.2014.12.18.04.19.52
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 Dec 2014 04:19:53 -0800 (PST)
+	Thu, 18 Dec 2014 04:19:52 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Dec 2014 13:19:45 +0100
-Message-Id: <1418905190-27541-3-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 18 Dec 2014 13:19:44 +0100
+Message-Id: <1418905190-27541-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.2.0
 In-Reply-To: <1418905190-27541-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1418905190-27541-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-python][PATCH 3/8] python-mock: import from meta-openstack
+Subject: [meta-python][PATCH 2/8] python-mccabe: import from meta-openstack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,34 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Dec 2014 12:19:55 -0000
+X-List-Received-Date: Thu, 18 Dec 2014 12:19:56 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-devtools/python/python-mock_1.0.1.bb   | 26 ++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-mock_1.0.1.bb
+ .../recipes-devtools/python/python-mccabe_0.2.1.bb | 23 ++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-mock_1.0.1.bb b/meta-python/recipes-devtools/python/python-mock_1.0.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb b/meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb
 new file mode 100644
-index 0000000..a23b552
+index 0000000..a056c09
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-mock_1.0.1.bb
-@@ -0,0 +1,26 @@
++++ b/meta-python/recipes-devtools/python/python-mccabe_0.2.1.bb
+@@ -0,0 +1,23 @@
 +# Imported from git://git.yoctoproject.org/meta-cloud-services
 +
-+SUMMARY = "A Python Mocking and Patching Library for Testing"
-+HOMEPAGE = "https://pypi.python.org/pypi/mock"
++SUMMARY = "McCabe checker, plugin for flake8"
++HOMEPAGE = "https://github.com/dreamhost/cliff"
 +SECTION = "devel/python"
 +LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=80e5ba73891255687dff3bee2b4cbb16"
++LIC_FILES_CHKSUM = "file://README.rst;md5=aa0383f6aee4f5c20084a97cd13164c4"
 +
-+SRCNAME = "mock"
++SRCNAME = "mccabe"
 +
 +SRC_URI = "https://pypi.python.org/packages/source/m/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
 +
-+SRC_URI[md5sum] = "c3971991738caa55ec7c356bbc154ee2"
-+SRC_URI[sha256sum] = "b839dd2d9c117c701430c149956918a423a9863b48b09c90e30a6013e7d2f44f"
++SRC_URI[md5sum] = "5a3f3fa6a4bad126c88aaaa7dab682f5"
++SRC_URI[sha256sum] = "5a2a170e47de5593a6abfae1e9542bd2c3924ac62bbe4e6ed96c953c0352243a"
 +
 +S = "${WORKDIR}/${SRCNAME}-${PV}"
 +
@@ -81,10 +81,7 @@ index 0000000..a23b552
 +RDEPENDS_${PN} += " \
 +    python-prettytable \
 +    python-cmd2 \
-+    python-pyparsing \
-+    python-mccabe \
-+    python-pep8 \
-+    python-pyflakes"
++    python-pyparsing"
 -- 
 2.2.0
 
