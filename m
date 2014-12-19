@@ -1,26 +1,21 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 11AF1728DF
+Return-Path: <gg@slimlogic.co.uk>
+X-Greylist: delayed 453 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 19 Dec 2014 10:16:56 UTC
+Received: from xora.vm.bytemark.co.uk (www.xora.org.uk [80.68.91.202])
+	by mail.openembedded.org (Postfix) with ESMTP id 63F88728E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Dec 2014 08:29:25 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sBJ8TQYB016142
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Dec 2014 00:29:26 -0800 (PST)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Fri, 19 Dec 2014 00:29:26 -0800
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Dec 2014 00:29:24 -0800
-Message-ID: <1418977765-46144-2-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1418977765-46144-1-git-send-email-liezhi.yang@windriver.com>
-References: <1418977765-46144-1-git-send-email-liezhi.yang@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-networking] [PATCH 2/3] esmtp: remove sendmail from sysroot
+	Fri, 19 Dec 2014 10:16:56 +0000 (UTC)
+Received: from xora-haswell.xora.org.uk
+	(cpc27-thor5-2-0-cust51.14-2.cable.virginm.net [86.14.172.52])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 3C85714010;
+	Fri, 19 Dec 2014 10:09:23 +0000 (GMT)
+From: Graeme Gregory <gg@slimlogic.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Dec 2014 10:09:28 +0000
+Message-Id: <1418983768-11857-1-git-send-email-gg@slimlogic.co.uk>
+X-Mailer: git-send-email 2.1.3
+Cc: Graeme Gregory <graeme.gregory@linaro.org>
+Subject: [meta-oe][PATCH] fwts: add the Firmware Test Suite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,37 +29,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Dec 2014 08:29:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 19 Dec 2014 10:17:05 -0000
 
-The sysroot/${libdir}/sendmail conflicts with lsb's, and it's a
-symlink to ${bindir}/esmtp which is meaningless for sysroot, so
-remove it.
+The Firmware Test Suite is a set of tests for checking ACPI and EFI
+implementations for common bugs and issues.
 
-(LOCAL REV: NOT UPSTREAM) -- Sent to meta-networking on 20141219
-
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+Signed-off-by: Graeme Gregory <graeme.gregory@linaro.org>
 ---
- meta-networking/recipes-support/esmtp/esmtp_1.2.bb |    8 ++++++++
- 1 file changed, 8 insertions(+)
+ meta-oe/recipes-test/fwts/fwts_git.bb | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-test/fwts/fwts_git.bb
 
-diff --git a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
-index 60d34e1..21cc1c3 100644
---- a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
-+++ b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
-@@ -30,3 +30,11 @@ SRC_URI[md5sum] = "79a9c1f9023d53f35bb82bf446150a72"
- SRC_URI[sha256sum] = "a0d26931bf731f97514da266d079d8bc7d73c65b3499ed080576ab606b21c0ce"
- 
- FILES_${PN} += "${libdir}/"
+diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
+new file mode 100644
+index 0000000..b943d6d
+--- /dev/null
++++ b/meta-oe/recipes-test/fwts/fwts_git.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Firmware testsuite"
++DESCRIPTION = "The tool fwts comprises of over fifty tests that are designed to exercise and test different aspects of a machine's firmware. Many of these tests need super user access to read BIOS data and ACPI tables, so the tool requires running with super user privileges (e.g. with sudo)."
++HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
 +
-+# The sysroot/${libdir}/sendmail conflicts with lsb's, and it's a
-+# symlink to ${bindir}/esmtp which is meaningless for sysroot, so
-+# remove it.
-+SYSROOT_PREPROCESS_FUNCS += "remove_sysroot_sendmail"
-+remove_sysroot_sendmail() {
-+    rm -r "${SYSROOT_DESTDIR}${libdir}/sendmail"
-+}
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
++
++PV = "14.12.00"
++
++SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
++SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "libpcre json-c glib-2.0"
++
++inherit autotools-brokensep
++
++CFLAGS += "-I${STAGING_INCDIR}/json-c"
++
++FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
++FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
++FILES_${PN}-staticdev += "${libdir}/fwts/lib*a"
++FILES_${PN}-dbg += "${libdir}/fwts/.debug"
 -- 
-1.7.9.5
+2.1.3
 
 
