@@ -1,27 +1,24 @@
-Return-Path: <qianl.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 39954728AC
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 358FD7289C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Dec 2014 03:35:15 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="45482699"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Dec 2014 11:31:55 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBJ3YnQV014265
+	Fri, 19 Dec 2014 06:14:47 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id sBJ6ElwF014846
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Dec 2014 11:34:49 +0800
-Received: from Fedora.g08.fujitsu.local (10.167.226.40) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 19 Dec 2014 11:35:15 +0800
-From: Qian Lei <qianl.fnst@cn.fujitsu.com>
+	Thu, 18 Dec 2014 22:14:48 -0800 (PST)
+Received: from pek-kkang-d2.wrs.com (128.224.163.146) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 18 Dec 2014 22:14:47 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Dec 2014 11:35:06 +0800
-Message-ID: <1418960106-9080-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Date: Fri, 19 Dec 2014 14:14:56 +0800
+Message-ID: <1418969696-27325-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.40]
-Subject: [meta-oe][PATCH] ctapi-common: Add new recipe
+Subject: [meta-perl][PATCH] adduser: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,49 +32,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Dec 2014 03:35:15 -0000
+X-List-Received-Date: Fri, 19 Dec 2014 06:14:50 -0000
 Content-Type: text/plain
 
-ctapi-common provides common files and packaging infrastructure
-for CT-API modules.
-Port from fedora 20.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+This is a utility from debain to add users/groups to the system,
+which is actually a perl wrapper of the useradd/groupadd command.
+
+We want this to replace the same commands provided by busybox.
+
+Homepage: https://alioth.debian.org/projects/adduser
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../ctapi-common/ctapi-common_1.1-11.bb            | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-11.bb
+ .../recipes-perl/adduser/adduser_3.113+nmu3.bb     | 53 ++++++++++++++++++++
+ ...-M-option-for-useradd-when-no-create-home.patch | 57 ++++++++++++++++++++++
+ 2 files changed, 110 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb
+ create mode 100644 meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-when-no-create-home.patch
 
-diff --git a/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-11.bb b/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-11.bb
+diff --git a/meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb b/meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb
 new file mode 100644
-index 0000000..a3b67f7
+index 0000000..2ba74b0
 --- /dev/null
-+++ b/meta-oe/recipes-support/ctapi-common/ctapi-common_1.1-11.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Common files and packaging infrastructure for CT-API modules"
-+HOMEPAGE = "http://fedoraproject.org/"
-+SECTION = "System Environment/Libraries"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://../ctapi-common.LICENSE;md5=8744cd52545ecb45befebd0da6f70f0a"
++++ b/meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb
+@@ -0,0 +1,53 @@
++SUMMARY = "a utility to add users/groups to the system"
++DESCRIPTION = "adduser, addgroup - add a user or group to the system"
++HOMEPAGE = "http://alioth.debian.org/projects/adduser/"
++SECTION = "base/utils"
 +
-+SRC_URI = "http://ftp.riken.jp/Linux/fedora/releases/20/Fedora/source/SRPMS/c/${BPN}-${PV}.fc20.src.rpm;extract=ctapi-common.LICENSE \
-+           http://ftp.riken.jp/Linux/fedora/releases/20/Fedora/source/SRPMS/c/${BPN}-${PV}.fc20.src.rpm;extract=ctapi-common.README"
-+SRC_URI[md5sum] = "f02e67487c48319376800563a2659502"
-+SRC_URI[sha256sum] = "32399819b0a1cac1abb2b8f0f180c572c93809faad36c46825dd536e4844c7cf"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://debian/copyright;md5=caed49ab166f22ef31bf1127f558d0ef"
 +
-+do_compile() {
-+    install -pm 644 ${WORKDIR}/ctapi-common.LICENSE LICENSE
-+    install -pm 644 ${WORKDIR}/ctapi-common.README README
-+    echo ${libdir}/ctapi > ctapi.conf
-+}
++SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.gz \
++           file://adduser-add-M-option-for-useradd-when-no-create-home.patch \
++"
++
++SRC_URI[md5sum] = "ccb5864bde56683182c89c44474e7182"
++SRC_URI[sha256sum] = "02682be3f51f3e732121f20a3e4922bb8bef15cfacb8767fc250a01d09502122"
++
++inherit cpan-base update-alternatives
 +
 +do_install() {
-+    install -Dpm 644 ctapi.conf ${D}${sysconfdir}/ld.so.conf.d/ctapi-${TARGET_ARCH}.conf
-+    install -dm 755 ${D}${libdir}/ctapi
++	install -d ${D}${sbindir}
++	install -m 0755 ${S}/adduser ${D}${sbindir}
++	install -m 0755 ${S}/deluser ${D}${sbindir}
++
++	install -d ${D}${libdir}/perl/${PERLVERSION}/Debian
++	install -m 0644 ${S}/AdduserCommon.pm ${D}${libdir}/perl/${PERLVERSION}/Debian
++	sed -i -e "s/VERSION/${PV}/" ${D}${sbindir}/*
++
++	install -d ${D}/${sysconfdir}
++	install -m 0644 ${S}/*.conf ${D}/${sysconfdir}
++
++	install -d ${D}${mandir}/man5
++	install -m 0644 ${S}/doc/*.conf.5 ${D}${mandir}/man5
++	install -d ${D}${mandir}/man8
++	install -m 0644 ${S}/doc/*.8 ${D}${mandir}/man8
++	install -d ${D}${docdir}/${BPN}
++	cp -rf ${S}/examples ${D}${docdir}/${BPN}
 +}
 +
-+FILES_${PN} += "${libdir}/ctapi"
++RDEPENDS_${PN} += "\
++	shadow \
++	perl-module-getopt-long \
++	perl-module-overloading \
++	perl-module-file-find \
++	perl-module-file-temp \
++"
++
++ALTERNATIVE_${PN} = "adduser deluser addgroup delgroup"
++ALTERNATIVE_PRIORITY = "60"
++ALTERNATIVE_LINK_NAME[adduser] = "${sbindir}/adduser"
++ALTERNATIVE_LINK_NAME[deluser] = "${sbindir}/deluser"
++ALTERNATIVE_LINK_NAME[addgroup] = "${sbindir}/addgroup"
++ALTERNATIVE_LINK_NAME[delgroup] = "${sbindir}/delgroup"
++ALTERNATIVE_TARGET[addgroup] = "${sbindir}/adduser.${BPN}"
++ALTERNATIVE_TARGET[delgroup] = "${sbindir}/deluser.${BPN}"
+diff --git a/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-when-no-create-home.patch b/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-when-no-create-home.patch
+new file mode 100644
+index 0000000..4b0a03f
+--- /dev/null
++++ b/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-when-no-create-home.patch
+@@ -0,0 +1,57 @@
++From 809f00a6ef0224b41b2e1207194c8da3cd3e3c7e Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Thu, 18 Dec 2014 17:23:37 +0800
++Subject: [PATCH] adduser: add -M option for useradd when --no-create-home is specified
++
++The useradd (from package passwd) in debian based system sets -M (--no-create-home) by default,
++but the one we are using (from package shadow) sets -m (--create-home) by default, so we
++need to explicitly add -M option for useradd call when --no-create-home is specified for adduser.
++
++Upstream-Status: Pending
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ adduser |   20 ++++++++++++++++----
++ 1 files changed, 16 insertions(+), 4 deletions(-)
++
++diff --git a/adduser b/adduser
++index c3bd8b0..9a07f9f 100755
++--- a/adduser
+++++ b/adduser
++@@ -434,8 +434,14 @@ if ($action eq "addsysuser") {
++     $shell = $special_shell || '/bin/false';
++     $undouser = $new_name;
++     my $useradd = &which('useradd');
++-    &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
++-		$shell, '-u', $new_uid, $new_name);
+++    if ($no_create_home) {
+++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
+++		    $shell, '-u', $new_uid, '-M', $new_name);
+++    }
+++    else {
+++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
+++                    $shell, '-u', $new_uid, $new_name);
+++    }
++     if(!$disabled_login) {
++         my $usermod = &which('usermod');
++         &systemcall($usermod, '-p', '*', $new_name);
++@@ -524,8 +530,14 @@ if ($action eq "adduser") {
++ 	$shell = $special_shell || $config{"dshell"};
++     $undouser = $new_name;
++     my $useradd = &which('useradd');
++-    &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
++-		$shell, '-u', $new_uid, $new_name);
+++    if ($no_create_home) {
+++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
+++	    	    $shell, '-u', $new_uid, '-M', $new_name);
+++    }
+++    else {
+++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
+++	    	    $shell, '-u', $new_uid, $new_name);
+++    }
++     &invalidate_nscd();
++ 
++     create_homedir (1); # copy skeleton data
++-- 
++1.7.1
++
 -- 
-1.8.3.1
+1.9.1
 
 
