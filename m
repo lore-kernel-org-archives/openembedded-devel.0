@@ -1,28 +1,27 @@
 Return-Path: <lchristina26@hotmail.com>
-X-Greylist: delayed 304 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 19 Dec 2014 20:44:41 UTC
-Received: from BAY004-OMC4S24.hotmail.com (bay004-omc4s24.hotmail.com
-	[65.54.190.226])
-	by mail.openembedded.org (Postfix) with ESMTP id D868172771
+Received: from BAY004-OMC4S7.hotmail.com (bay004-omc4s7.hotmail.com
+	[65.54.190.209])
+	by mail.openembedded.org (Postfix) with ESMTP id 52A5572AD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Dec 2014 20:44:41 +0000 (UTC)
-Received: from BAY168-W86 ([65.54.190.199]) by BAY004-OMC4S24.hotmail.com over
+	Fri, 19 Dec 2014 20:45:23 +0000 (UTC)
+Received: from BAY168-W55 ([65.54.190.201]) by BAY004-OMC4S7.hotmail.com over
 	TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751); 
-	Fri, 19 Dec 2014 12:39:37 -0800
-X-TMN: [0Rt8CdRFIUij6IwUktSRnO4q2xLch9jG]
+	Fri, 19 Dec 2014 12:43:22 -0800
+X-TMN: [bTpSa5xEKpuMzvrkG25HZ5SBbNTm/HE8]
 X-Originating-Email: [lchristina26@hotmail.com]
-Message-ID: <BAY168-W86B0FE2F269A2A25D84C5FD66B0@phx.gbl>
+Message-ID: <BAY168-W55F4DA0A3698FD6B08B449D66B0@phx.gbl>
 From: LC Mac <lchristina26@hotmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Dec 2014 13:39:36 -0700
+Date: Fri, 19 Dec 2014 13:43:21 -0700
 Importance: Normal
-In-Reply-To: <20141219191538.GB2461@jama>
+In-Reply-To: <BAY168-W86B0FE2F269A2A25D84C5FD66B0@phx.gbl>
 References: <BLU436-SMTP19311B478F533B1CE52EB1BD66A0@phx.gbl>,
-	<20141219191538.GB2461@jama>
+	<20141219191538.GB2461@jama>,
+	<BAY168-W86B0FE2F269A2A25D84C5FD66B0@phx.gbl>
 MIME-Version: 1.0
-X-OriginalArrivalTime: 19 Dec 2014 20:39:37.0192 (UTC)
-	FILETIME=[E79D9680:01D01BCB]
+X-OriginalArrivalTime: 19 Dec 2014 20:43:22.0625 (UTC)
+	FILETIME=[6DFBEF10:01D01BCC]
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-networking][PATCH] cyassl: updated to version 3.3.0, removed 3.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -38,10 +37,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Dec 2014 20:44:42 -0000
+X-List-Received-Date: Fri, 19 Dec 2014 20:45:30 -0000
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
+If you could explain exactly what I need to do to get just 3.3.0 added=2C n=
+ot the previous version (3.2.0) which was never officially added=2C that wo=
+uld be great.=20
+
+From: lchristina26@hotmail.com
+To: openembedded-devel@lists.openembedded.org
+Subject: RE: [oe] [meta-networking][PATCH] cyassl: updated to version 3.3.0=
+=2C removed 3.2.0
+Date: Fri=2C 19 Dec 2014 13:39:36 -0700
+
+=0A=
+=0A=
+=0A=
 I'm a bit confused=2C why can't the version I submitted be added? I version=
  3.2.0 which was never officially submitted to meta-networking but switched=
  it to 3.3.0 so that 3.3.0 is added instead. I no longer want version 3.2.0=
@@ -108,5 +120,5 @@ _______________________________________________=0A=
 Openembedded-devel mailing list=0A=
 Openembedded-devel@lists.openembedded.org=0A=
 http://lists.openembedded.org/mailman/listinfo/openembedded-devel 		 	   		=
-  =
+   		 	   		  =
 
