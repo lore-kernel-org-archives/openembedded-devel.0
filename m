@@ -1,30 +1,32 @@
-Return-Path: <zboszor@pr.hu>
-Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 00A6C72A9E
+Return-Path: <rich.tollerton@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id DC1A772AB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Dec 2014 19:48:41 +0000 (UTC)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1Y24TS-0007q2-Ok
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2014 21:48:34 +0100
-Received: from host-87-242-31-61.prtelecom.hu ([87.242.31.61]
-	helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1Y23XO-0002WN-4S
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Dec 2014 20:48:39 +0100
-Message-ID: <5494810F.2050400@pr.hu>
-Date: Fri, 19 Dec 2014 20:48:31 +0100
-From: Boszormenyi Zoltan <zboszor@pr.hu>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
-MIME-Version: 1.0
+	Fri, 19 Dec 2014 20:25:58 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.14.5/8.14.5) with ESMTP id
+	sBJKPwum015334 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Dec 2014 14:25:58 -0600
+Received: from weregild.amer.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
+	with ESMTP id 2014121914255853-1320579 ;
+	Fri, 19 Dec 2014 14:25:58 -0600 
+From: Richard Tollerton <rich.tollerton@ni.com>
 To: openembedded-devel@lists.openembedded.org
-X-Spam-Score: 0.8 (/)
-X-Scan-Signature: 325f7eb36b407d36a457b6b1c0640019
-X-Spam-Tracer: backend.mail.pr.hu 0.8 20141219194839Z
-Subject: do_install_append() in Mesa prevents GLAMOR to be enabled in xorg-
+Date: Fri, 19 Dec 2014 14:25:55 -0600
+Message-Id: <1419020755-7491-1-git-send-email-rich.tollerton@ni.com>
+X-Mailer: git-send-email 2.2.1
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 12/19/2014 02:25:58 PM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 12/19/2014 02:25:58 PM,
+	Serialize complete at 12/19/2014 02:25:58 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.13.68, 1.0.33,
+	0.0.0000
+	definitions=2014-12-19_05:2014-12-19, 2014-12-19,
+	1970-01-01 signatures=0
+Subject: [PATCH] terminal: use bash for do_terminal script execution
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,36 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Dec 2014 19:48:45 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Dec 2014 20:26:07 -0000
 
-Hi,
+Users may set certain environment variables such as SHELLOPTS and
+BASHOPTS that the shell will mark as read-only and exported on startup.
+Under `bitbake -c devshell`, these eventually make their way into
+do_terminal through BB_ORIGENV. POSIX-compliant shells (including bash
+when run as /bin/sh, at least as of bash 4.3) must exit immediately when
+trying to set these variables, which breaks devshell.
 
-there is this code in openembedded-core/meta/recipes-graphics/mesa/mesa_9.2.5.bb:
+To work around this, force execution of do_terminal with bash. The
+SHELL itself called by pseudo is unchanged.
 
-=============================================
-#because we cannot rely on the fact that all apps will use pkgconfig,
-#make eglplatform.h independent of MESA_EGL_NO_X11_HEADER
-do_install_append() {
-    if ${@base_contains('PACKAGECONFIG', 'egl', 'true', 'false', d)}; then
-        sed -i -e 's/^#ifdef MESA_EGL_NO_X11_HEADERS/#if
-${@base_contains('DISTRO_FEATURES', 'x11', '0', '1', d)}/' ${D}${includedir}/EGL/eglplatform.h
-    fi
-}
-=============================================
+The reproducing case for this was `env BASHOPTS=checkhash bitbake ...`.
+Setting BASHOPTS=checkhash protects against underspecified package
+DEPENDS against packages which may get temporarily purged from the
+sysroot; otherwise, if bash cached a command at a sysroot path that got
+deleted, calling the command again will fail.
 
-I have used this recipe as a template for Mesa 10.x but didn't pay attention to this part yet.
-I also use Xorg 1.16.2. Now, I had to enable GLAMOR in the X-server so support
-the radeonsi driver properly in xf86-video-ati but glamor_priv.h in the X-server code
-uses #define MESA_EGL_NO_X11_HEADERS to select the behaviour in eglplatform.h.
-It doesn't want Xlib.h included.
+Signed-off-by: Richard Tollerton <rich.tollerton@ni.com>
+---
+ meta/classes/terminal.bbclass | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-I think it's mistaken reasoning to select a fixed behaviour based upon the 'x11'
-distro feature, since there can be a valid excuse for apps that indeed use
-pkgconfig. xserver-xorg is a pretty fundamental piece to break.
-
-Best regards,
-Zoltán Böszörményi
+diff --git a/meta/classes/terminal.bbclass b/meta/classes/terminal.bbclass
+index e577c6d..86d4220 100644
+--- a/meta/classes/terminal.bbclass
++++ b/meta/classes/terminal.bbclass
+@@ -23,7 +23,11 @@ def emit_terminal_func(command, envdata, d):
+     bb.utils.mkdirhier(os.path.dirname(runfile))
+ 
+     with open(runfile, 'w') as script:
+-        script.write('#!/bin/sh -e\n')
++        # bash is strongly recommended, because the current implementation of
++        # oe_terminal() may attempt to set readonly variables. Under bash, this
++        # is a warning; under dash and other POSIX shells (including bash in
++        # POSIX mode, ie when run as /bin/sh), the shell is required to exit.
++        script.write('#!/usr/bin/env bash -e\n')
+         bb.data.emit_func(cmd_func, script, envdata)
+         script.write(cmd_func)
+         script.write("\n")
+-- 
+2.2.1
 
 
