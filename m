@@ -1,23 +1,35 @@
-Return-Path: <lchristina26@hotmail.com>
-Received: from BLU004-OMC4S32.hotmail.com (blu004-omc4s32.hotmail.com
-	[65.55.111.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 14A2B728D6
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 782B572974
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Dec 2014 16:56:07 +0000 (UTC)
-Received: from BLU436-SMTP242 ([65.55.111.137]) by BLU004-OMC4S32.hotmail.com
-	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751);
-	Sat, 20 Dec 2014 08:56:08 -0800
-X-TMN: [TSNX6Fp9bk6kLi/su7pgkzJz743mKrYC]
-X-Originating-Email: [lchristina26@hotmail.com]
-Message-ID: <BLU436-SMTP242B9187CC8DDA1D8442674D6680@phx.gbl>
-From: lchristina26 <lchristina26@hotmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Dec 2014 09:55:49 -0700
+	Sun, 21 Dec 2014 22:08:20 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id r20so6507057wiv.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Dec 2014 14:08:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=wLaouGWfdtJca1gQNvmnrnGmelRdxO9UUkDi04HfNiI=;
+	b=uLZV1HbisR0K9KgReHmDBC+h4x0VbVk4TZdSYlBFNdaXwV3axGhCtAnlQ1EBzXVpst
+	VmnQ5VTIzmp3WjPxaP6IHv3ceDxcn7u4APJ1OIY9YFoyeM8tmq0H301tr+BfsuT6dc5E
+	hI3lV7x4wxrMl8TlIjvLHnUeOCkO/Ylb5fq0dlbwDMnkDgu3ojNGouQDExe7trkXSfl/
+	lluOzIjEx4s/o/xHk5T3kPW894WE+z+5Htpk2kBGwYxDHYrq9cctHf8QA9xD/9FYPjuD
+	ojIoK4Z6FerWdxlg9waSFKGnBrO3ERhi1XOel1xoA2rTa4Oo4O/LFdweXPHuktvCTPKN
+	bkmA==
+X-Received: by 10.194.6.70 with SMTP id y6mr19856942wjy.97.1419199700314;
+	Sun, 21 Dec 2014 14:08:20 -0800 (PST)
+Received: from nuc.betafive.co.uk
+	(cpc19-shep11-2-0-cust55.8-3.cable.virginm.net. [81.111.243.56])
+	by mx.google.com with ESMTPSA id j1sm21359157wjw.25.2014.12.21.14.08.19
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 21 Dec 2014 14:08:19 -0800 (PST)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+To: OE Devel <openembedded-devel@lists.openembedded.org>
+Date: Sun, 21 Dec 2014 22:08:09 +0000
+Message-Id: <1419199689-27666-1-git-send-email-paul@paulbarker.me.uk>
 X-Mailer: git-send-email 1.9.1
-X-OriginalArrivalTime: 20 Dec 2014 16:56:06.0387 (UTC)
-	FILETIME=[D890E430:01D01C75]
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] cyassl: add new recipe
+Subject: [meta oe][PATCH] distro-feed-configs: Make list of archs configurable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,41 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Dec 2014 16:56:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 21 Dec 2014 22:08:28 -0000
 
-Add new version 3.3.0 recipe for CyaSSL
+The list of architectures for which to emit feed configurations is now taken
+from the DISTRO_FEED_ARCHS variable. The default value for this variable is the
+list of architectures which was previously used. Thus in the default case
+nothing is changed, but DISTRO_FEED_ARCHS can now be overridden in local.conf.
 
-Signed-off-by: Leah <lchristina26@hotmail.com>
+Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
 ---
- .../recipes-connectivity/cyassl/cyassl_3.3.0.bb        | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
+ meta-oe/recipes-core/meta/distro-feed-configs.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
-new file mode 100644
-index 0000000..715cf1f
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "CyaSSL Lightweight, Embedded SSL Library, version 3.3.0"
-+DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
-+               optimized for embedded and RTOS environments. It can be \
-+               Up to 20 times smaller than OpenSSL while still supporting \
-+               a full TLS 1.2 client and server."
-+HOMEPAGE = "http://www.yassl.com/yaSSL/Products-cyassl.html"
-+BUGTRACKER = "http://github.com/cyassl/cyassl/issues"
-+SECTION = "libs/network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "http://www.yassl.com/${BP}.zip"
-+
-+SRC_URI[md5sum] = "0303eb0f2f9065a1207d9104ab0eba7c"
-+SRC_URI[sha256sum] = "e51583ea1e4d64537553922d67a96360312811dffef58d4c05506aa98a296fe3"
-+
-+inherit autotools
-+
+diff --git a/meta-oe/recipes-core/meta/distro-feed-configs.bb b/meta-oe/recipes-core/meta/distro-feed-configs.bb
+index dde8656..ea5ca38 100644
+--- a/meta-oe/recipes-core/meta/distro-feed-configs.bb
++++ b/meta-oe/recipes-core/meta/distro-feed-configs.bb
+@@ -5,10 +5,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
+ 
+ DISTRO_FEED_PREFIX ?= "remote"
+ DISTRO_FEED_URI ?= "http://my-distribution.example/remote-feed/"
++DISTRO_FEED_ARCHS ?= "all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}"
+ 
+ do_compile() {
+     mkdir -p ${S}/${sysconfdir}/opkg
+-    for feed in all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}; do
++    for feed in ${DISTRO_FEED_ARCHS}; do
+         echo "src/gz ${DISTRO_FEED_PREFIX}-${feed} ${DISTRO_FEED_URI}/${feed}" > ${S}/${sysconfdir}/opkg/${feed}-feed.conf
+     done
+ }
 -- 
 1.9.1
 
