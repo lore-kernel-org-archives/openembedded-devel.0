@@ -1,35 +1,27 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 782B572974
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 55C5A72805
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Dec 2014 22:08:20 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id r20so6507057wiv.6
+	Mon, 22 Dec 2014 04:00:30 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="45592582"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 22 Dec 2014 11:57:06 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBM3Vvme012371
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Dec 2014 14:08:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=wLaouGWfdtJca1gQNvmnrnGmelRdxO9UUkDi04HfNiI=;
-	b=uLZV1HbisR0K9KgReHmDBC+h4x0VbVk4TZdSYlBFNdaXwV3axGhCtAnlQ1EBzXVpst
-	VmnQ5VTIzmp3WjPxaP6IHv3ceDxcn7u4APJ1OIY9YFoyeM8tmq0H301tr+BfsuT6dc5E
-	hI3lV7x4wxrMl8TlIjvLHnUeOCkO/Ylb5fq0dlbwDMnkDgu3ojNGouQDExe7trkXSfl/
-	lluOzIjEx4s/o/xHk5T3kPW894WE+z+5Htpk2kBGwYxDHYrq9cctHf8QA9xD/9FYPjuD
-	ojIoK4Z6FerWdxlg9waSFKGnBrO3ERhi1XOel1xoA2rTa4Oo4O/LFdweXPHuktvCTPKN
-	bkmA==
-X-Received: by 10.194.6.70 with SMTP id y6mr19856942wjy.97.1419199700314;
-	Sun, 21 Dec 2014 14:08:20 -0800 (PST)
-Received: from nuc.betafive.co.uk
-	(cpc19-shep11-2-0-cust55.8-3.cable.virginm.net. [81.111.243.56])
-	by mx.google.com with ESMTPSA id j1sm21359157wjw.25.2014.12.21.14.08.19
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 21 Dec 2014 14:08:19 -0800 (PST)
-Sender: Paul Barker <paul.betafive@gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-To: OE Devel <openembedded-devel@lists.openembedded.org>
-Date: Sun, 21 Dec 2014 22:08:09 +0000
-Message-Id: <1419199689-27666-1-git-send-email-paul@paulbarker.me.uk>
+	Mon, 22 Dec 2014 11:31:59 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 22 Dec 2014 11:32:25 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 22 Dec 2014 11:28:45 +0800
+Message-ID: <1419218925-35226-1-git-send-email-biannm@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta oe][PATCH] distro-feed-configs: Make list of archs configurable
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-networking][PATCH] linux-atm: add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +35,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Dec 2014 22:08:28 -0000
+X-List-Received-Date: Mon, 22 Dec 2014 04:00:34 -0000
+Content-Type: text/plain
 
-The list of architectures for which to emit feed configurations is now taken
-from the DISTRO_FEED_ARCHS variable. The default value for this variable is the
-list of architectures which was previously used. Thus in the default case
-nothing is changed, but DISTRO_FEED_ARCHS can now be overridden in local.conf.
+Drivers and tools to support ATM networking under Linux
 
-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- meta-oe/recipes-core/meta/distro-feed-configs.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../linux-atm/linux-atm/install-from-buildir.patch | 19 +++++++++++
+ .../linux-atm/linux-atm/link-with-ldflags.patch    | 38 ++++++++++++++++++++++
+ .../recipes-support/linux-atm/linux-atm_2.5.2.bb   | 22 +++++++++++++
+ 3 files changed, 79 insertions(+)
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
 
-diff --git a/meta-oe/recipes-core/meta/distro-feed-configs.bb b/meta-oe/recipes-core/meta/distro-feed-configs.bb
-index dde8656..ea5ca38 100644
---- a/meta-oe/recipes-core/meta/distro-feed-configs.bb
-+++ b/meta-oe/recipes-core/meta/distro-feed-configs.bb
-@@ -5,10 +5,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
- 
- DISTRO_FEED_PREFIX ?= "remote"
- DISTRO_FEED_URI ?= "http://my-distribution.example/remote-feed/"
-+DISTRO_FEED_ARCHS ?= "all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}"
- 
- do_compile() {
-     mkdir -p ${S}/${sysconfdir}/opkg
--    for feed in all ${PACKAGE_EXTRA_ARCHS} ${MACHINE_ARCH}; do
-+    for feed in ${DISTRO_FEED_ARCHS}; do
-         echo "src/gz ${DISTRO_FEED_PREFIX}-${feed} ${DISTRO_FEED_URI}/${feed}" > ${S}/${sysconfdir}/opkg/${feed}-feed.conf
-     done
- }
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch b/meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch
+new file mode 100644
+index 0000000..d1380eb
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch
+@@ -0,0 +1,19 @@
++install binaries from builddir not srcdir.
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++--- linux-atm-2.5.2.orig/src/extra/Makefile.am	2010-12-21 05:07:22.000000000 +0800
+++++ linux-atm-2.5.2/src/extra/Makefile.am	2014-12-22 10:56:04.458563269 +0800
++@@ -9,9 +9,9 @@ CLEANFILES = pca200e.bin pca200e_ecd.bin
++ 
++ install-exec-hook:
++ 	$(MKDIR_P) $(DESTDIR)/lib/firmware
++-	$(INSTALL_DATA) $(srcdir)/pca200e.bin $(DESTDIR)/lib/firmware
++-	$(INSTALL_DATA) $(srcdir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
++-	$(INSTALL_DATA) $(srcdir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
+++	$(INSTALL_DATA) $(builddir)/pca200e.bin $(DESTDIR)/lib/firmware
+++	$(INSTALL_DATA) $(builddir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
+++	$(INSTALL_DATA) $(builddir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
++ 
++ %.bin %.bin2: %.data
++ 	objcopy -Iihex $< -Obinary $@.gz
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch b/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch
+new file mode 100644
+index 0000000..62fad2a
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch
+@@ -0,0 +1,38 @@
++LDFLAGS_FOR_BUILD should be required when doing link for qgen.
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++diff -Nurp linux-atm-2.5.2.orig/configure.in linux-atm-2.5.2/configure.in
++--- linux-atm-2.5.2.orig/configure.in	2010-12-28 23:36:07.000000000 +0800
+++++ linux-atm-2.5.2/configure.in	2014-12-22 10:25:23.830510932 +0800
++@@ -66,6 +66,7 @@ else
++ fi
++ AC_SUBST(CC_FOR_BUILD)
++ AC_SUBST(CFLAGS_FOR_BUILD)
+++AC_SUBST(LDFLAGS_FOR_BUILD)
++ dnl Add -d flag to bison/yacc to create intermediate .h files
++ YACC="$YACC -d"
++ 
++diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.am linux-atm-2.5.2/src/qgen/Makefile.am
++--- linux-atm-2.5.2.orig/src/qgen/Makefile.am	2010-12-28 22:29:31.000000000 +0800
+++++ linux-atm-2.5.2/src/qgen/Makefile.am	2014-12-22 10:23:51.914508318 +0800
++@@ -5,7 +5,7 @@ qgen_SOURCES = common.c common.h file.c
++ qgen_LDADD = -lfl
++ 
++ COMPILE = @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@
++-LINK = @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ -o $@
+++LINK = @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ @LDFLAGS_FOR_BUILD@ -o $@
++ 
++ #TESTS = $(check_PROGRAMS)
++ 
++diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.in linux-atm-2.5.2/src/qgen/Makefile.in
++--- linux-atm-2.5.2.orig/src/qgen/Makefile.in	2010-12-29 00:06:11.000000000 +0800
+++++ linux-atm-2.5.2/src/qgen/Makefile.in	2014-12-22 10:23:51.914508318 +0800
++@@ -106,6 +106,7 @@ INSTALL_SCRIPT = @INSTALL_SCRIPT@
++ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
++ LD = @LD@
++ LDFLAGS = @LDFLAGS@
+++LDFLAGS_FOR_BUILD = @LDFLAGS_FOR_BUILD@
++ LEX = @LEX@
++ LEXLIB = @LEXLIB@
++ LEX_OUTPUT_ROOT = @LEX_OUTPUT_ROOT@
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+new file mode 100644
+index 0000000..a32d2a7
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Drivers and tools to support ATM networking under Linux"
++HOMEPAGE = "http://linux-atm.sourceforge.net/"
++SECTION = "libs"
++LICENSE = "GPL-2.0 LGPL-2.0"
++
++DEPENDS = "virtual/kernel flex flex-native"
++
++SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
++           file://link-with-ldflags.patch \
++           file://install-from-buildir.patch"
++
++SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
++SRC_URI[sha256sum] = "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37581018fbd16dd53a"
++
++LIC_FILES_CHKSUM = "\
++file://COPYING;md5=d928de9537d846935a98af3bbc6e6ee1 \
++file://COPYING.GPL;md5=ac2db169b9309e240555bc77be4f1a33 \
++file://COPYING.LGPL;md5=6e29c688d912da12b66b73e32b03d812"
++
++inherit autotools pkgconfig
++
++FILES_${PN} += "${base_libdir}/firmware"
 -- 
 1.9.1
 
