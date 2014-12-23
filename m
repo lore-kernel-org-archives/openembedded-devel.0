@@ -1,35 +1,36 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-yk0-f180.google.com (mail-yk0-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id BC9A972712
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E43D72732
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Dec 2014 20:47:03 +0000 (UTC)
-Received: by mail-yk0-f180.google.com with SMTP id 9so3380636ykp.25
+	Tue, 23 Dec 2014 21:00:21 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 79so3439655ykr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Dec 2014 12:47:04 -0800 (PST)
+	Tue, 23 Dec 2014 13:00:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=f70+vu+nF4xcmeb4+aMepd3M0so+/65gTaebecaTC4M=;
-	b=B/rNB+fpoj9llMHNyZ1Y88eEvg2mOu2RXwDNw1pG3R4mnEiG917KXNOFbhaE/JFBvo
-	FfRKpfKt1Bl2Zcljarzc+VIRGIENjvsHSZX1ACBTduXkQK5Ax6Ray0kYYyj8Yp0GrKvB
-	tktB1QzZ/WFMATncklTUaUNAPJkEqObQolzQX6gwSJKFprBYHehojlE2Nt4B5JxHsY9O
-	leomGnx0wQLrHNmOvYrPEkvsiIffoh1rCoe+FthdHzTtYdIAbZhngtydHaXWuz1Aa9lR
-	8dDwQikkYARQth3g2uygE1ulDWTSFF68S/yT33GW0LP32djZDgGuT5R/4WGmG1PtaWSD
-	qyzg==
-X-Received: by 10.236.109.166 with SMTP id s26mr23334753yhg.67.1419367624401; 
-	Tue, 23 Dec 2014 12:47:04 -0800 (PST)
-Received: from thuvia.localdomain (pool-71-171-45-99.ronkva.east.verizon.net.
-	[71.171.45.99]) by mx.google.com with ESMTPSA id
-	s29sm14635321yha.28.2014.12.23.12.47.02
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Dec 2014 12:47:03 -0800 (PST)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Dec 2014 15:46:59 -0500
-Message-Id: <1419367619-3158-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][PATCH] log4cpp : Add new recipe.
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=ifLEs9aC37cqfI70O4pWvfwOf+txPZ6mMypj6tIRY7s=;
+	b=y2JLJxxJtwTEZNHow+s7YZJQU42VKqlvIjL++gSVSc4xgblqNzTPfvRfhukUnIYezb
+	d2lITQu3//dNbsjleXokMhjhAk/sXe5Hi2Q9bjW8n8popVjNmIebA7mkx1gQp0AqAy0b
+	c10Nq0Y+ooiUe7nUNLxUPWiHsSsmQMFTOYEaxVXnhQKqJr2s1I1zjW95PwY/RnUYF88s
+	nCe9VuMZ/DwRi4zE5fwvWJa+U/jfbw/SzfPL4kxPGM7FrwWEz28MBmlfLoDksI9kJbc/
+	GX3pB8DQio8kvyNZwDgYINaQhp6m/8QGk6u4X/hB3p09TQPjZoYISPpI1ctsNGqzmccn
+	K5Jg==
+MIME-Version: 1.0
+X-Received: by 10.170.116.21 with SMTP id i21mr26840634ykb.105.1419368421805; 
+	Tue, 23 Dec 2014 13:00:21 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.171.132 with HTTP; Tue, 23 Dec 2014 13:00:21 -0800 (PST)
+In-Reply-To: <BLU436-SMTP2303FC3EF333D565F829F9FC2560@phx.gbl>
+References: <BLU436-SMTP2303FC3EF333D565F829F9FC2560@phx.gbl>
+Date: Tue, 23 Dec 2014 19:00:21 -0200
+X-Google-Sender-Auth: Psm4Febn_ThCFGTtpQ34KCvYAhI
+Message-ID: <CAP9ODKoevP3fpJ8RpMEo_KCA3X1RdEYuEz8w94=5Kbc1dfGK_g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: kkelly87 <kaneda18@hotmail.com>
+Subject: Re: [meta-qt5][dizzy][PATCH] adding qttranslations for 5.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,46 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Dec 2014 20:47:04 -0000
+X-List-Received-Date: Tue, 23 Dec 2014 21:00:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Built for armv7a basad machine.
+Hello,
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-support/log4cpp/log4cpp_1.1.1.bb | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-support/log4cpp/log4cpp_1.1.1.bb
+On Mon, Dec 22, 2014 at 7:08 PM, kkelly87 <kaneda18@hotmail.com> wrote:
 
-diff --git a/meta-oe/recipes-support/log4cpp/log4cpp_1.1.1.bb b/meta-oe/recipes-support/log4cpp/log4cpp_1.1.1.bb
-new file mode 100644
-index 0000000..1e0a44c
---- /dev/null
-+++ b/meta-oe/recipes-support/log4cpp/log4cpp_1.1.1.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "A library of C++ classes for flexible logging to files, syslog, IDSA and other destinations."
-+HOMEPAGE = "http://sourceforge.net/projects/log4cpp/"
-+PRIORITY = "optional"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
-+
-+SRC_URI[md5sum] = "1e173df8ee97205f412ff84aa93b8fbe"
-+SRC_URI[sha256sum] = "35abf332630a6809c969276b1d60b90c81a95daf24c86cfd7866ffef72f9bed0"
-+
-+SRC_URI = "http://downloads.sourceforge.net/log4cpp/log4cpp-${PV}.tar.gz \
-+          "
-+
-+S="${WORKDIR}/log4cpp"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = "\
-+    --enable-doxygen=no \
-+    --enable-dot=no \
-+    --enable-html-docs=no \
-+    --enable-latex-docs=no \
-+    LDFLAGS=-lpthread \
-+"
+There are some guidelines for use when doing commit messages and
+patches for inclusion in OpenEmbedded and/or Yocto Project. The
+following provides some useful information:
+
+http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines#Patch_Headers_and_Commit_Messages
+
+This commit is completely out of the guidelines. Please take a look on
+the link and if you have any doubts please let us know.
+
 -- 
-2.1.0
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
