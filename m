@@ -1,36 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
-	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 346BA726F2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 98F4F72644
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Dec 2014 17:54:28 +0000 (UTC)
-Received: by mail-ie0-f173.google.com with SMTP id y20so7834286ier.4
+	Thu, 25 Dec 2014 01:34:57 +0000 (UTC)
+Received: by mail-pd0-f170.google.com with SMTP id v10so10842951pde.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Dec 2014 09:54:29 -0800 (PST)
+	Wed, 24 Dec 2014 17:34:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=t7uUwJbYOKIIFiT6FShDo8O7p4b6S8x2HrtIvNTPRYk=;
-	b=JFb5mWFUYnnCWRqbyUmCoSWKNLgYdlvV3mfkPvG9JknZqfs6XZ6Bp2Yagoyq9thM4I
-	S6pHTOGjIw1gkV05HZrE9klQv4lUkjmR446FqXoxIsgobL3xaAdri00MOsf6tkgTkNXS
-	T+wOwFMmH9EfeCg5DODSI2jVUrebVKnj4m/rE8ws5LfSm3r41nlObvu+9VUsc0IoZhwA
-	A5+c8imuTSW1Tnta1N6lmV7M7/j4CiAEbub4gNmyUAcCOKP8JpaU9XZ6M9YIORwWGXQn
-	Q6kQ0FOdOO0zBuBNO0RTR1XKQgzWFXZVapAdEDUk/Nah1kVszHwNW1X2dC5SRqT4GT45
-	Fd4g==
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=zSnq63xEdVott+eo6Yr8LOuwCs7oDdILPAMEdeGSwZA=;
+	b=dzdK95gANLx/7vGB/W1j+Ww3JqmAKF9bv6drlLQrz6fg8pSCTJ6urwTKDzelSFhvvz
+	Xk6Rf5L3xdgGaxgXc4cneH46oyDBaMO3VfdNNpq04PobeENzVqCOTh2P8/lMf6pyKi/q
+	hwdSXYtGAq4WwZq12brz038clN6Ip8zk3uGTSh21w0o+pBtQSYp5bR3n9AZwAKHdPQMo
+	7Q/FbZIbQZIaMQJoq2OVErsso5npZ7MPC52XO4ophzeDY3w18mRxq5K+GYWy91nzUXt5
+	DDeWA80JvexVQKFmZ2odiQG8u0ZATdPZ4ypD4p9+Ig8ZUjYLrLiseK9q8l8Crq6wIU5Z
+	oEvQ==
+X-Received: by 10.70.128.80 with SMTP id nm16mr57765210pdb.1.1419471298000;
+	Wed, 24 Dec 2014 17:34:58 -0800 (PST)
+Received: from ?IPv6:2601:c:a700:272f:5d28:e12b:b1:5c36?
+	([2601:c:a700:272f:5d28:e12b:b1:5c36])
+	by mx.google.com with ESMTPSA id 9sm23989228pdg.38.2014.12.24.17.34.56
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 24 Dec 2014 17:34:56 -0800 (PST)
+Message-ID: <549B69BB.5000804@gmail.com>
+Date: Wed, 24 Dec 2014 17:34:51 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-X-Received: by 10.43.120.69 with SMTP id fx5mr27135212icc.45.1419443669116;
-	Wed, 24 Dec 2014 09:54:29 -0800 (PST)
-Received: by 10.50.252.9 with HTTP; Wed, 24 Dec 2014 09:54:28 -0800 (PST)
-Received: by 10.50.252.9 with HTTP; Wed, 24 Dec 2014 09:54:28 -0800 (PST)
-In-Reply-To: <1418983768-11857-1-git-send-email-gg@slimlogic.co.uk>
-References: <1418983768-11857-1-git-send-email-gg@slimlogic.co.uk>
-Date: Wed, 24 Dec 2014 10:54:28 -0700
-Message-ID: <CAMKF1srz5HSkwObr6TXaZwwGd8Fk5qZbz64H9YSFqOoJG_e6PA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Graeme Gregory <graeme.gregory@linaro.org>
-Subject: Re: [meta-oe][PATCH] fwts: add the Firmware Test Suite
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Joe MacDonald <joe@deserted.net>
+Subject: proftpd update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,70 +46,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Dec 2014 17:54:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 25 Dec 2014 01:35:06 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Dec 19, 2014 3:17 AM, "Graeme Gregory" <gg@slimlogic.co.uk> wrote:
->
-> The Firmware Test Suite is a set of tests for checking ACPI and EFI
-> implementations for common bugs and issues.
->
-> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-> Signed-off-by: Graeme Gregory <graeme.gregory@linaro.org>
-> ---
->  meta-oe/recipes-test/fwts/fwts_git.bb | 24 ++++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
->  create mode 100644 meta-oe/recipes-test/fwts/fwts_git.bb
->
-> diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb
-b/meta-oe/recipes-test/fwts/fwts_git.bb
-> new file mode 100644
-> index 0000000..b943d6d
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "Firmware testsuite"
-> +DESCRIPTION = "The tool fwts comprises of over fifty tests that are
-designed to exercise and test different aspects of a machine's firmware.
-Many of these tests need super user access to read BIOS data and ACPI
-tables, so the tool requires running with super user privileges (e.g. with
-sudo)."
-> +HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
-> +
-> +LICENSE = "GPLv2+"
-> +LIC_FILES_CHKSUM =
-"file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
-> +
-> +PV = "14.12.00"
-> +
-> +SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
-> +SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS = "libpcre json-c glib-2.0"
-> +
-> +inherit autotools-brokensep
-> +
+Hello,
 
-did you check why it can't  build out of tree
+Is anyone working on back porting CVE-2013-4359 to proftpd?  if not, I 
+intend on upgrading the recipe to 1.3.5. I will send patches for Dizzy 
+and Daisy. ETA, sometime before year's end.
 
-> +CFLAGS += "-I${STAGING_INCDIR}/json-c"
-> +
-
-May be just use -I= instead
-
-> +FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
-> +FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV}
-${libdir}/fwts/lib*.la"
-> +FILES_${PN}-staticdev += "${libdir}/fwts/lib*a"
-> +FILES_${PN}-dbg += "${libdir}/fwts/.debug"
-> --
-> 2.1.3
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+- Armin
 
