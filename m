@@ -1,40 +1,40 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f53.google.com (mail-qg0-f53.google.com
-	[209.85.192.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AFA3727C7
+Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
+	[209.85.192.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 05745727C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 19:21:43 +0000 (UTC)
-Received: by mail-qg0-f53.google.com with SMTP id l89so7374611qgf.26
+	Fri, 26 Dec 2014 19:21:46 +0000 (UTC)
+Received: by mail-qg0-f41.google.com with SMTP id e89so5685655qgf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 11:21:44 -0800 (PST)
+	Fri, 26 Dec 2014 11:21:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=F1nWFApa92MsmknBehAyhQDelt48gGoRgygv9Y7bDrg=;
-	b=o2z5eFVN0YPziLtDpAWqFzSFQPi/xbsK2tY0H4YxCe6RI+0L65HVXfHp5Urf2T3f6n
-	83P9535NM/tLivETniytP4a+ehKmt0yKxjViix86Z1VIhNw5lMJOqq4AkRRIQgaDnzyx
-	VeVorLH1nwvEQd8XgWO1sYC90G5B1SmgnMpZg09lnB1Jyk/wE/VCPU5vZAaRW4zOFYud
-	RCLaALG34CqzCBm3yv1FoYGrkJDBdz8DHK6NklgHApKZqpIP04VGAgAKfCxZ6EZsoKby
-	kgzM0Z/7t6xEnA5B/JnBp/HLreLLrJr6pi0ormPhfahD0idX9R+ZLJtbLBxi4+MvophZ
-	6VDw==
-X-Received: by 10.229.35.74 with SMTP id o10mr51834018qcd.26.1419621704026;
-	Fri, 26 Dec 2014 11:21:44 -0800 (PST)
+	:organization; bh=JQp9SRaxisXhEv5tjDr1nWm70St5nUSqOPXN4tG2rAM=;
+	b=K4w2VbbziLKtqfaxmobMkxUr1eTOFRlptwfjn9aqo3BBMDQqo4LiOk7m0mvoQxxmGy
+	GoHE1Wtjq6jHCEK7tiRHNpt1ujzcoIG1X8AzhUbwksL8vLh2bJXG6Izv7RBpbMeAIG8l
+	1Lzzg+tatTU9g5hlQgIxxX/PsLFSFZGhaC9ecWDQ/WxLBetVCGnyM/3Cx5sKyOnSoLWs
+	hWTYiBMF1uLlqOw4jEP7Kz96M9yCdgYox/RmEXQRlFzfKmtS2/HRQApitKIpJmIlL44q
+	EqwqkO3wa+YcJCeEyYsl2Mxm/U5FwsJyh0tHdp7dHeiOqpB9fWTl3vLGmMX2HoX5uauH
+	z3hw==
+X-Received: by 10.229.225.195 with SMTP id it3mr19880725qcb.24.1419621707329; 
+	Fri, 26 Dec 2014 11:21:47 -0800 (PST)
 Received: from centrium.lab.ossystems.com.br ([177.100.225.47])
 	by mx.google.com with ESMTPSA id
-	k11sm26659998qgf.18.2014.12.26.11.21.42
+	k11sm26659998qgf.18.2014.12.26.11.21.44
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Dec 2014 11:21:43 -0800 (PST)
+	Fri, 26 Dec 2014 11:21:45 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Dec 2014 17:21:36 -0200
-Message-Id: <1419621700-1102-8-git-send-email-otavio@ossystems.com.br>
+Date: Fri, 26 Dec 2014 17:21:37 -0200
+Message-Id: <1419621700-1102-9-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.1.3
 In-Reply-To: <1419621700-1102-1-git-send-email-otavio@ossystems.com.br>
 References: <1419621700-1102-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 08/12] procmail: Fix license format QA error
+Subject: [meta-oe][PATCH 09/12] libspatialite: Fix license format QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,33 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Dec 2014 19:21:43 -0000
+X-List-Received-Date: Fri, 26 Dec 2014 19:21:47 -0000
 
 Fix the following QA error:
 
 ,----
-| WARNING: Recipe procmail, LICENSE (GPL-2.0 Artistic-1.0) has invalid
-|     format, LICENSES must have operator "([&|() ])" between them.
+| WARNING: Recipe libspatialite, LICENSE (MPLv1.1 GPLv2+ LGPLv2.1+) has
+|     invalid format, LICENSES must have operator "([&|() ])" between
+|     them.
 `----
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-support/procmail/procmail_3.22.bb | 2 +-
+ meta-oe/recipes-navigation/libspatialite/libspatialite.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb b/meta-oe/recipes-support/procmail/procmail_3.22.bb
-index dacda28..6ab1e9b 100644
---- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
-+++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
-@@ -16,7 +16,7 @@ SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${PN}/${BP}.tar.gz \
- SRC_URI[md5sum] = "1678ea99b973eb77eda4ecf6acae53f1"
- SRC_URI[sha256sum] = "087c75b34dd33d8b9df5afe9e42801c9395f4bf373a784d9bc97153b0062e117"
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc b/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
+index c8d7ec1..b5c3879 100644
+--- a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
++++ b/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
+@@ -5,7 +5,7 @@ DEPENDS = "proj geos sqlite3"
  
--LICENSE = "GPL-2.0 Artistic-1.0"
-+LICENSE = "GPL-2.0 & Artistic-1.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a71e50e197a992c862379e576e669757 \
-     file://Artistic;md5=505e00d03c3428cde21b17b2a386590e"
+ INC_PR = "r0"
  
+-LICENSE = "MPLv1.1 GPLv2+ LGPLv2.1+"
++LICENSE = "MPLv1.1 & GPLv2+ & LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
+ 
+ SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz"
 -- 
 2.1.3
 
