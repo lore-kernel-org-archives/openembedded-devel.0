@@ -1,42 +1,43 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 7556C72715
+Return-Path: <Alex.Gonzalez@digi.com>
+X-Greylist: delayed 389 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 26 Dec 2014 17:43:10 UTC
+Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
+	[216.82.251.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 8921772644
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 17:22:17 +0000 (UTC)
-Received: by mail-pd0-f180.google.com with SMTP id w10so13200877pde.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 09:22:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=IeZu8o8k1mzQunb2j/pxfe/rQxCtmTH6dBoDSEJT0po=;
-	b=eLTDB8Q9bJYMC9VqFeolgyIIu2zce/ieDZlZFCV68vAcaY5D3goeMMx9WEBNKPCGVX
-	G90eiQ709a9sSfHeRH+v7zUfnG1RK4/i9oJlS8kpazcwv9jI0YKgNidwZMJxGw65Hf8J
-	diEe3L6oqkQsIs+VHN4oivQBG09Q+ECi7hiZGrcEd3jyEcLRPvdnWvWa+EuU+l+vT3K3
-	LCJZmOWuN6Mifc3g50J9AefWHaIgdht0gzcu6PLXEy97eh+1/HkkZknsGTmNZ9Ce3lHK
-	jn53VFkGPI5zO2qpJaLxbLdDpIrf+gqiKS9Uj9OBfFKsCZVxuz0EuZGmhWLT8Jo0enYY
-	I3cw==
-X-Received: by 10.70.22.208 with SMTP id g16mr68749318pdf.141.1419614537572;
-	Fri, 26 Dec 2014 09:22:17 -0800 (PST)
-Received: from ?IPv6:2601:c:a700:272f:45d3:7811:c39e:509c?
-	([2601:c:a700:272f:45d3:7811:c39e:509c])
-	by mx.google.com with ESMTPSA id i5sm28924918pat.6.2014.12.26.09.22.15
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 26 Dec 2014 09:22:16 -0800 (PST)
-Message-ID: <549D9945.7020000@gmail.com>
-Date: Fri, 26 Dec 2014 09:22:13 -0800
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Fri, 26 Dec 2014 17:43:10 +0000 (UTC)
+Received: from [216.82.249.147] by server-5.bemta-12.messagelabs.com id
+	18/9E-03158-9AC9D945; Fri, 26 Dec 2014 17:36:41 +0000
+X-Env-Sender: Alex.Gonzalez@digi.com
+X-Msg-Ref: server-10.tower-29.messagelabs.com!1419615401!34102716!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.12.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 5814 invoked from network); 26 Dec 2014 17:36:41 -0000
+Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-10.tower-29.messagelabs.com with RC4-SHA encrypted SMTP;
+	26 Dec 2014 17:36:41 -0000
+Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.389.2;
+	Fri, 26 Dec 2014 11:36:24 -0600
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH02.digi.com
+	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.210.2;
+	Fri, 26 Dec 2014 11:36:40 -0600
+Received: from log-linux-hp-agonzal.digi.com (10.101.2.169) by
+	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
+	14.3.210.2; Fri, 26 Dec 2014 18:36:38 +0100
+From: Alex Gonzalez <alex.gonzalez@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 26 Dec 2014 18:36:25 +0100
+Message-ID: <1419615386-27100-1-git-send-email-alex.gonzalez@digi.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	"paul.eggleton@linux.intel.com >> Paul Eggleton"
-	<paul.eggleton@linux.intel.com>
-References: <cover.1419546494.git.paul.eggleton@linux.intel.com>
-	<2a581eb64141e55750a0569e15d1203c597b7dea.1419546494.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <2a581eb64141e55750a0569e15d1203c597b7dea.1419546494.git.paul.eggleton@linux.intel.com>
-Subject: Re: [meta-networking][PATCH 1/1] ntp: upgrade to 4.2.8
+X-Originating-IP: [10.101.2.169]
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: [openembedded-devel][meta-java][PATCH] Fix openjdk-7 build for daisy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,14 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Dec 2014 17:22:20 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Dec 2014 17:43:13 -0000
+Content-Type: text/plain
 
-  Dizzy needs these too. Can we upgrade Dizzy too or do we want patches 
-only?
+Building openjdk-7 with daisy fails with the following error:
 
-- Armin
-On 12/25/2014 02:29 PM, Paul Eggleton wrote:
-> CVE-2014-9293, CVE-2014-9294, CVE-2014-9295, and CVE-2014-9296
+| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+| DEBUG: Executing shell function do_install
+| cp: cannot stat '/opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/
+build/openjdk.build/j2sdk-image': No such file or directory
+| WARNING: /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/temp/run
+.do_install.32726:1 exit 1 from
+|   cp -R /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/build/ope
+njdk.build/j2sdk-image /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r
+5.1/image/usr/lib/jvm/java-7-openjdk
+| ERROR: Function failed: do_install (log file is located at /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linu
+x-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/temp/log.do_install.32726)
+
+This commit from the https://github.com/woglinde/meta-java pull request list fixes it.
+
+Max Krummenacher (1):
+  openjdk: fix do_install for out of source builds
+
+ recipes-core/openjdk/openjdk-6-common.inc | 2 +-
+ recipes-core/openjdk/openjdk-7-common.inc | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
 
