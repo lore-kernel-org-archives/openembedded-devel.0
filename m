@@ -1,41 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B894727E8
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id D4695727EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 19:26:04 +0000 (UTC)
-Received: by mail-pa0-f52.google.com with SMTP id eu11so13517191pac.25
+	Fri, 26 Dec 2014 19:33:47 +0000 (UTC)
+Received: by mail-yh0-f50.google.com with SMTP id 29so5746917yhl.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 11:26:05 -0800 (PST)
+	Fri, 26 Dec 2014 11:33:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=zs5o62jSV8pUieEt8ha0xoSSXYVVggyOJ3bwxbuJJSE=;
-	b=eg7cl96L0iXkzyFGGlFD+RN6w9g4SG8O3OeqqBj1CvVjd7bLdlKAG/ZZxI9uNAskdg
-	oojAxiZrRbbw4Zw8PeUS9RUmhGzD9zinh5qQhXUSEEZThtYJR+eoZ95Dqxte1QPPDhJv
-	ml2laZMbaBrfGhSsBR1eSjTQs7/N6RjGyR8drFJmMZZvZIlyUvnbAOjtlx4nG7v3X0ED
-	SQMZ3AhstI7lIbO/XKqZjq+dSlth4BaxUU5Cy0M4MRwG7n4C5M5uotkROMhqnUz0MJ3V
-	9HVXvsc6bozaLnwD8kC3m3lUf/AFSb5gw8ItlPUYE8HHOMrpfdLMHre48wJqCt70X1op
-	q3eg==
-X-Received: by 10.66.141.138 with SMTP id ro10mr64275858pab.67.1419621965788; 
-	Fri, 26 Dec 2014 11:26:05 -0800 (PST)
-Received: from ?IPv6:2601:c:a700:272f:45d3:7811:c39e:509c?
-	([2601:c:a700:272f:45d3:7811:c39e:509c])
-	by mx.google.com with ESMTPSA id
-	nk6sm28864601pdb.89.2014.12.26.11.26.03
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 26 Dec 2014 11:26:04 -0800 (PST)
-Message-ID: <549DB64A.5060904@gmail.com>
-Date: Fri, 26 Dec 2014 11:26:02 -0800
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=S7wJVPM5Me5DIuCQ+MBENhtfKmLDPdqNBgOxPSRECiY=;
+	b=zzpxJq/NPswc9sa0qOnhSmWoKujsxOVhozoNOrDNGXnbjedCOHvc4i+49uyqk0iXhl
+	Y8+bROy6mjS/Qo+0nhVO56GbzFKzCO0qPBjiftQO12DcIZeV/D/5KLr5Ch4Ove22bzxE
+	2xyF4eJNv2EAQ2pVPouRFdrx1enHG8oX9KZSPBlenXabjSrJDnUBNLfbDQuJnwuWAaFy
+	e3zjF+2zD2hIRNRWbQ1dLcNZZG/VrT/18N4fXKBSeeRydwA4v1kWHC9uaxDnkQek2i44
+	vWY+jVzU+cZ9DqSOxMhK5avPxdS0A7nZXVkzK8rR/+aHaMl0E/EAisVOXACE6p1/z4Uc
+	Re+w==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1419621700-1102-1-git-send-email-otavio@ossystems.com.br>
-In-Reply-To: <1419621700-1102-1-git-send-email-otavio@ossystems.com.br>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH 01/12] nbench-byte: Fix license QA error
+X-Received: by 10.170.211.67 with SMTP id c64mr37036907ykf.110.1419622428191; 
+	Fri, 26 Dec 2014 11:33:48 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.171.132 with HTTP; Fri, 26 Dec 2014 11:33:48 -0800 (PST)
+In-Reply-To: <1419615386-27100-2-git-send-email-alex.gonzalez@digi.com>
+References: <1419615386-27100-1-git-send-email-alex.gonzalez@digi.com>
+	<1419615386-27100-2-git-send-email-alex.gonzalez@digi.com>
+Date: Fri, 26 Dec 2014 17:33:48 -0200
+X-Google-Sender-Auth: hEU-Y9P56ByZkvRmCdfQnVSLOMI
+Message-ID: <CAP9ODKpGkMw4oQgt3ur=qsNFWRwSLrGHo6BLTZqmS3rNwN=HGQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [openembedded-devel][meta-java][PATCH] openjdk: fix do_install for out of source builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,66 +44,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Dec 2014 19:26:12 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Dec 2014 19:33:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Otavio,
-Thanks.
+On Fri, Dec 26, 2014 at 3:36 PM, Alex Gonzalez <alex.gonzalez@digi.com> wrote:
+> From: Max Krummenacher <max.oss.09@gmail.com>
+>
+> use ${B} to specify the build directory, thus keep working for
+> daisy and older versions as well as for dizzy and newer.
 
-I just saw this this morning.
+Applied.
 
-- armin
-
-On 12/26/2014 11:21 AM, Otavio Salvador wrote:
-> The license is not a common only and seems to be a 'free distribution'
-> license but without explicit rules about modification or similar. Due
-> that, we copied the license text from the README file and added it
-> onto nbench-byte license file.
->
-> This fixes following QA error:
->
-> ,----
-> | WARNING: Recipe nbench-byte, LICENSE (freely distributable) has
-> |     invalid format, LICENSES must have operator "([&|() ])" between
-> | 	them.
-> `----
->
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->   meta-oe/licenses/nbench-byte                               | 10 ++++++++++
->   meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb |  2 +-
->   2 files changed, 11 insertions(+), 1 deletion(-)
->   create mode 100644 meta-oe/licenses/nbench-byte
->
-> diff --git a/meta-oe/licenses/nbench-byte b/meta-oe/licenses/nbench-byte
-> new file mode 100644
-> index 0000000..7e47ba6
-> --- /dev/null
-> +++ b/meta-oe/licenses/nbench-byte
-> @@ -0,0 +1,10 @@
-> +THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
-> +IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-> +OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-> +IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
-> +INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-> +NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-> +DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-> +THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-> +(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-> +THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-> index a98d507..2eedd7e 100644
-> --- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-> +++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION = "BYTE Magazine's native benchmarks (also called BYTEmark) \
->   designed to expose the capabilities of a system's CPU, FPU, \
->   and memory system."
->   HOMEPAGE = "http://www.tux.org/~mayer/linux/"
-> -LICENSE = "freely distributable"
-> +LICENSE = "nbench-byte"
->   LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
->   SECTION = "console/utils"
->
->
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
