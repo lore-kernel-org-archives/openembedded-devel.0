@@ -1,40 +1,40 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qa0-f46.google.com (mail-qa0-f46.google.com
-	[209.85.216.46])
-	by mail.openembedded.org (Postfix) with ESMTP id E49C7727E8
+Received: from mail-qa0-f43.google.com (mail-qa0-f43.google.com
+	[209.85.216.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 5921D72818
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 19:21:37 +0000 (UTC)
-Received: by mail-qa0-f46.google.com with SMTP id w8so7239462qac.19
+	Fri, 26 Dec 2014 19:21:33 +0000 (UTC)
+Received: by mail-qa0-f43.google.com with SMTP id n4so4149176qaq.30
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 11:21:38 -0800 (PST)
+	Fri, 26 Dec 2014 11:21:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=iUQj6FZaGARMVBlfCgBRwlQ8KrUqnI/hsosGwTQJ5MM=;
-	b=fHk5P2gm1spqWmiy9zejYEhURjcn53IXNzc+oiNwipQ4//GodyAxlEH6j8M+RnseOq
-	4V5yNh4pnGjA+b0zxQrrx+pZGBBCv2YTtsgQNtRViXmr5kwpKl7UOp+588BCmsvI3Cad
-	+wNSVl6IiFZ1gxxOqGvKTpy3lreTOndZMPkyzXnFLX7R+cl56khfGPWYHefU6CctDolp
-	px9hTFYNK1tPfijgHRd2SITP/t4amB7ZX45t54oWpwTbXZdDRZQXgov3hx9iSGzre53G
-	XtALd9bm1wwbT8ykgMyhUnPwcoNSaxfgHv6ix0g5vrLZKV5avZqxtREZjtx/tWKSB7Rp
-	N4XA==
-X-Received: by 10.140.108.201 with SMTP id j67mr68059617qgf.89.1419621698181; 
-	Fri, 26 Dec 2014 11:21:38 -0800 (PST)
+	:organization; bh=pYwInI1gPvqzCa8cojcTudtPiYB0xJvE/lpiKHXPEUU=;
+	b=AVNPC42FTYUoEeEPpIeBWhYw0/oIxonDtmB6jLU3G345RwUPkNuiCbJ8X60+tZ2vJr
+	5P4VHqrrsoXFfIy1aeLV2EBX719cN7ihwA+iusf4qTnEHmQDYeXCA6o35A+Zc/aaMlMk
+	QPfc/o/Mp3Fl1I+wIh+4BHv5bp35NLwZSIb/mnesweKnSMMzf2Mx2D5G9QN9DQcjgLdv
+	tn3U2vI38JXXrIi4qIcGhBOYUOQ3qtlX3lMa9FDjVErT853wGDWMev9MFsGxXOK11V2G
+	eQNJ3/Ja9MIcv1y8ZDl8UVsU/vrPoSmWeSV7GmIcKI4jo/qV4r2EJQeB8ngSyuooZszN
+	KX/g==
+X-Received: by 10.224.15.78 with SMTP id j14mr72554596qaa.0.1419621694188;
+	Fri, 26 Dec 2014 11:21:34 -0800 (PST)
 Received: from centrium.lab.ossystems.com.br ([177.100.225.47])
 	by mx.google.com with ESMTPSA id
-	k11sm26659998qgf.18.2014.12.26.11.21.36
+	k11sm26659998qgf.18.2014.12.26.11.21.32
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Dec 2014 11:21:37 -0800 (PST)
+	Fri, 26 Dec 2014 11:21:33 -0800 (PST)
 Sender: Otavio Salvador <otavio.salvador@gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Dec 2014 17:21:33 -0200
-Message-Id: <1419621700-1102-5-git-send-email-otavio@ossystems.com.br>
+Date: Fri, 26 Dec 2014 17:21:31 -0200
+Message-Id: <1419621700-1102-3-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.1.3
 In-Reply-To: <1419621700-1102-1-git-send-email-otavio@ossystems.com.br>
 References: <1419621700-1102-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH 05/12] log4cplus: Fix license format QA error
+Subject: [meta-oe][PATCH 03/12] sound-theme-freedesktop: Fix license format QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +53,28 @@ X-List-Received-Date: Fri, 26 Dec 2014 19:21:39 -0000
 Fix the following QA error:
 
 ,----
-| WARNING: Recipe log4cplus, LICENSE (Apache-2.0 BSD-2-Clause) has
-|     invalid format, LICENSES must have operator "([&|() ])" between
-|     them.
+| WARNING: Recipe sound-theme-freedesktop, LICENSE (GPLv2+ CC-BY-3.0
+|     CC-BY-SA-3.0) has invalid format, LICENSES must have operator "([&|()
+|     ])" between them.
 `----
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb | 2 +-
+ meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb b/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb
-index 6201774..c9c5c67 100644
---- a/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb
-+++ b/meta-oe/recipes-devtools/log4cplus/log4cplus_1.1.1.bb
-@@ -3,7 +3,7 @@ SECTION = "libs"
- HOMEPAGE = "http://sourceforge.net/projects/log4cplus/"
- BUGTRACKER = "http://sourceforge.net/p/log4cplus/bugs/"
+diff --git a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
+index ebcfd12..098b08d 100644
+--- a/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
++++ b/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Freedesktop sound theme"
+ HOMEPAGE = "http://freedesktop.org/wiki/Specifications/sound-theme-spec"
+-LICENSE = "GPLv2+ CC-BY-3.0 CC-BY-SA-3.0"
++LICENSE = "GPLv2+ & CC-BY-3.0 & CC-BY-SA-3.0"
+ LIC_FILES_CHKSUM = "file://CREDITS;md5=3213e601ce34bb42ddc3498903ac4e69"
  
--LICENSE = "Apache-2.0 BSD-2-Clause"
-+LICENSE = "Apache-2.0 & BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=65053a46f707ee2b93f09ad22f692170"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-stable/${PV}/${BP}.tar.gz"
+ # glib-2.0 for glib-gettext.m4 which provides AM_GLIB_GNU_GETTEXT
 -- 
 2.1.3
 
