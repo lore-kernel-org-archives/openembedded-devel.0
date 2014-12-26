@@ -1,43 +1,43 @@
 Return-Path: <Alex.Gonzalez@digi.com>
-X-Greylist: delayed 389 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 26 Dec 2014 17:43:10 UTC
 Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 8921772644
+	[216.82.251.4])
+	by mail.openembedded.org (Postfix) with ESMTP id BD80C727C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Dec 2014 17:43:10 +0000 (UTC)
-Received: from [216.82.249.147] by server-5.bemta-12.messagelabs.com id
-	18/9E-03158-9AC9D945; Fri, 26 Dec 2014 17:36:41 +0000
+	Fri, 26 Dec 2014 17:43:44 +0000 (UTC)
+Received: from [216.82.249.147] by server-4.bemta-12.messagelabs.com id
+	D3/C8-03139-CAC9D945; Fri, 26 Dec 2014 17:36:44 +0000
 X-Env-Sender: Alex.Gonzalez@digi.com
-X-Msg-Ref: server-10.tower-29.messagelabs.com!1419615401!34102716!1
+X-Msg-Ref: server-10.tower-29.messagelabs.com!1419615403!34102722!1
 X-Originating-IP: [66.77.174.14]
 X-StarScan-Received: 
 X-StarScan-Version: 6.12.5; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 5814 invoked from network); 26 Dec 2014 17:36:41 -0000
-Received: from mail.mx4.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+Received: (qmail 5976 invoked from network); 26 Dec 2014 17:36:43 -0000
+Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
 	by server-10.tower-29.messagelabs.com with RC4-SHA encrypted SMTP;
-	26 Dec 2014 17:36:41 -0000
-Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by mail.mx2.digi.com
+	26 Dec 2014 17:36:43 -0000
+Received: from MTK-SMS-XCH03.digi.com (10.10.8.197) by mail.mx2.digi.com
 	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.389.2;
-	Fri, 26 Dec 2014 11:36:24 -0600
-Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH02.digi.com
-	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.210.2;
-	Fri, 26 Dec 2014 11:36:40 -0600
+	Fri, 26 Dec 2014 11:36:26 -0600
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH03.digi.com
+	(10.10.8.197) with Microsoft SMTP Server (TLS) id 14.3.210.2;
+	Fri, 26 Dec 2014 11:36:42 -0600
 Received: from log-linux-hp-agonzal.digi.com (10.101.2.169) by
 	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
-	14.3.210.2; Fri, 26 Dec 2014 18:36:38 +0100
+	14.3.210.2; Fri, 26 Dec 2014 18:36:40 +0100
 From: Alex Gonzalez <alex.gonzalez@digi.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Dec 2014 18:36:25 +0100
-Message-ID: <1419615386-27100-1-git-send-email-alex.gonzalez@digi.com>
+Date: Fri, 26 Dec 2014 18:36:26 +0100
+Message-ID: <1419615386-27100-2-git-send-email-alex.gonzalez@digi.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1419615386-27100-1-git-send-email-alex.gonzalez@digi.com>
+References: <1419615386-27100-1-git-send-email-alex.gonzalez@digi.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.101.2.169]
 X-KSE-AntiSpam-Interceptor-Info: protection disabled
 X-KSE-Antivirus-Interceptor-Info: scan successful
 X-KSE-Antivirus-Info: Clean
-Subject: [openembedded-devel][meta-java][PATCH] Fix openjdk-7 build for daisy
+Subject: [openembedded-devel][meta-java][PATCH] openjdk: fix do_install for out of source builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,30 +51,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Dec 2014 17:43:13 -0000
+X-List-Received-Date: Fri, 26 Dec 2014 17:43:46 -0000
 Content-Type: text/plain
 
-Building openjdk-7 with daisy fails with the following error:
+From: Max Krummenacher <max.oss.09@gmail.com>
 
-| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
-| DEBUG: Executing shell function do_install
-| cp: cannot stat '/opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/
-build/openjdk.build/j2sdk-image': No such file or directory
-| WARNING: /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/temp/run
-.do_install.32726:1 exit 1 from
-|   cp -R /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/build/ope
-njdk.build/j2sdk-image /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-7-jre/25b30-2.3.12-r
-5.1/image/usr/lib/jvm/java-7-openjdk
-| ERROR: Function failed: do_install (log file is located at /opt/yocto/fsl-community-bsp/wandboard-quad-openjdk-daisy/tmp/work/cortexa9hf-vfp-neon-poky-linu
-x-gnueabi/openjdk-7-jre/25b30-2.3.12-r5.1/temp/log.do_install.32726)
-
-This commit from the https://github.com/woglinde/meta-java pull request list fixes it.
-
-Max Krummenacher (1):
-  openjdk: fix do_install for out of source builds
-
+use ${B} to specify the build directory, thus keep working for
+daisy and older versions as well as for dizzy and newer.
+---
  recipes-core/openjdk/openjdk-6-common.inc | 2 +-
  recipes-core/openjdk/openjdk-7-common.inc | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
+index 5aa435dc16a1..4254c9f3e13e 100644
+--- a/recipes-core/openjdk/openjdk-6-common.inc
++++ b/recipes-core/openjdk/openjdk-6-common.inc
+@@ -234,7 +234,7 @@ do_compile() {
+ 
+ do_install() {
+ 	install -d ${D}${libdir_jvm}
+-	cp -R ${WORKDIR}/build/${BUILD_DIR}/j2sdk-image ${D}${JDK_HOME}
++	cp -R ${B}/${BUILD_DIR}/j2sdk-image ${D}${JDK_HOME}
+ 
+ 	chmod u+rw -R ${D}${JDK_HOME}
+ 
+diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
+index 32fab1612465..e14603c2daba 100644
+--- a/recipes-core/openjdk/openjdk-7-common.inc
++++ b/recipes-core/openjdk/openjdk-7-common.inc
+@@ -172,7 +172,7 @@ do_compile() {
+ 
+ do_install() {
+ 	install -d ${D}${libdir_jvm}
+-	cp -R ${WORKDIR}/build/${BUILD_DIR}/j2sdk-image ${D}${JDK_HOME}
++	cp -R ${B}/${BUILD_DIR}/j2sdk-image ${D}${JDK_HOME}
+ 
+ 	chmod u+rw -R ${D}${JDK_HOME}
+ 
 
