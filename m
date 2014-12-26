@@ -1,25 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FD1172671
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DC1F72621
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Dec 2014 22:29:08 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by orsmga101.jf.intel.com with ESMTP; 25 Dec 2014 14:29:07 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.04,691,1406617200"; d="scan'208";a="504114334"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.255.13.219])
-	by orsmga003.jf.intel.com with ESMTP; 25 Dec 2014 14:24:16 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Fri, 26 Dec 2014 05:44:47 +0000 (UTC)
+Received: by mail-pd0-f170.google.com with SMTP id v10so12578559pde.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Dec 2014 21:44:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=1M+e+QeltNjBpefiU8m1bAR/PutdSG1n5hhLfy3/A5s=;
+	b=fXbAR59NFfw9e7EzHh1KpWgV5wrrdHxC8d3qxFoQy/EO3oTnjdhcUnwQhdyJdHX65M
+	1dkMCrTQ5uZMut8EHL8lFLgrN9+dThQ634z5/QVDy64L3rIJ5Akx6pMD/dndzt8lwWY0
+	LGCYMKgHsnAPNVuuRA3Mc8Ikkemro9T1B9pOLGCg/MOlIcT0lb7lE2ZdP3IeMGDpdVN4
+	HIkDsTuZEfXrKDWhF85Ct+RXJUlRKWdC32vqFZv8OfaPtpEndlLNnoebZKmb/es48gHx
+	q86mFqldqrsN+aILa8PIog+ypm+hDAlc+waTR02+zQFfxCFnJESQ1BpH83syPUMBIr09
+	NCbQ==
+X-Received: by 10.66.251.167 with SMTP id zl7mr66660190pac.140.1419572688158; 
+	Thu, 25 Dec 2014 21:44:48 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by mx.google.com with ESMTPSA id
+	th7sm27157997pac.47.2014.12.25.21.44.45
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 25 Dec 2014 21:44:46 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Dec 2014 22:29:03 +0000
-Message-Id: <2a581eb64141e55750a0569e15d1203c597b7dea.1419546494.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1419546494.git.paul.eggleton@linux.intel.com>
-References: <cover.1419546494.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1419546494.git.paul.eggleton@linux.intel.com>
-References: <cover.1419546494.git.paul.eggleton@linux.intel.com>
-Subject: [meta-networking][PATCH 1/1] ntp: upgrade to 4.2.8
+Date: Thu, 25 Dec 2014 21:44:35 -0800
+Message-Id: <1419572675-28661-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] proftpd: update to 1.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,578 +42,542 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Dec 2014 22:29:10 -0000
+X-List-Received-Date: Fri, 26 Dec 2014 05:44:49 -0000
 
-* Upgrade to 4.2.8 which fixes several security issues, including
-  CVE-2014-9293, CVE-2014-9294, CVE-2014-9295, and CVE-2014-9296. For
-  more details please see:
-  https://ics-cert.us-cert.gov/advisories/ICSA-14-353-01A
-* LIC_FILES_CHKSUM changed due to a number of copyright year and patch
-  list changes; nothing material about the license text changed.
-* This version moves a number of binaries from sbindir to bindir;
-  there's supposed to be a configure option --with-locfile=legacy to use
-  the old layout but it does not seem to work. I guess we'll just have
-  to live with the change.
-* Drop patches which are no longer applicable.
-* Merge inc file into recipe; there were too many changes required to
-  the inc file in this version and it's unlikely it was much use split
-  out in any case.
-* Move remaining files in files/ to ntp/
+dropped proftpd-sftp.patch as it is included in update.
+combined make.patch, move-pidfile-to-var-run.patch, move-runfile-to-var-run.patch into
+build_fixup
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+Added several packagesconfig options (too much eggnog)
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/ntp/files/CVE-2013-5211.patch  | 112 --------------
- .../recipes-support/ntp/files/openssl-check.patch  |  59 --------
- .../recipes-support/ntp/files/tickadj.c.patch      |  32 ----
- .../ntp/{files => ntp}/ntp-4.2.4_p6-nano.patch     |   0
- .../ntp/ntp/ntp-4.2.8-ntp-keygen-no-openssl.patch  | 168 +++++++++++++++++++++
- .../recipes-support/ntp/{files => ntp}/ntp.conf    |   0
- .../recipes-support/ntp/{files => ntp}/ntpd        |   0
- .../recipes-support/ntp/{files => ntp}/ntpdate     |   0
- .../ntp/{files => ntp}/ntpdate.default             |   0
- meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb |   6 -
- .../recipes-support/ntp/{ntp.inc => ntp_4.2.8.bb}  |  41 ++---
- 11 files changed, 191 insertions(+), 227 deletions(-)
- delete mode 100644 meta-networking/recipes-support/ntp/files/CVE-2013-5211.patch
- delete mode 100644 meta-networking/recipes-support/ntp/files/openssl-check.patch
- delete mode 100644 meta-networking/recipes-support/ntp/files/tickadj.c.patch
- rename meta-networking/recipes-support/ntp/{files => ntp}/ntp-4.2.4_p6-nano.patch (100%)
- create mode 100644 meta-networking/recipes-support/ntp/ntp/ntp-4.2.8-ntp-keygen-no-openssl.patch
- rename meta-networking/recipes-support/ntp/{files => ntp}/ntp.conf (100%)
- rename meta-networking/recipes-support/ntp/{files => ntp}/ntpd (100%)
- rename meta-networking/recipes-support/ntp/{files => ntp}/ntpdate (100%)
- rename meta-networking/recipes-support/ntp/{files => ntp}/ntpdate.default (100%)
- delete mode 100644 meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
- rename meta-networking/recipes-support/ntp/{ntp.inc => ntp_4.2.8.bb} (81%)
+ .../proftpd/files/build_fixup.patch                | 112 ++++++++++++++++
+ .../recipes-daemons/proftpd/files/make.patch       |  66 ----------
+ .../proftpd/files/move-pidfile-to-var-run.patch    |  39 ------
+ .../proftpd/files/move-runfile-to-var-run.patch    |  39 ------
+ .../proftpd/files/proftpd-sftp.patch               | 142 ---------------------
+ .../{proftpd_1.3.4b.bb => proftpd_1.3.5.bb}        |  59 ++++++---
+ 6 files changed, 156 insertions(+), 301 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
+ delete mode 100644 meta-networking/recipes-daemons/proftpd/files/make.patch
+ delete mode 100644 meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
+ delete mode 100644 meta-networking/recipes-daemons/proftpd/files/move-runfile-to-var-run.patch
+ delete mode 100644 meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.4b.bb => proftpd_1.3.5.bb} (51%)
 
-diff --git a/meta-networking/recipes-support/ntp/files/CVE-2013-5211.patch b/meta-networking/recipes-support/ntp/files/CVE-2013-5211.patch
+diff --git a/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch b/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
+new file mode 100644
+index 0000000..19617a6
+--- /dev/null
++++ b/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
+@@ -0,0 +1,112 @@
++Upstream-Status: Inappropriate [configuration]
++
++combined the following patches into one:
++make, move-pidfile-to-var-run, move-runfile-to-var-run
++
++move pidfile to /var/run
++redefine PR_RUN_DIR as ${localstatedir}/run
++
++Signed-off-By: Armin Kuster <akuster808@gmail.com>
++
++
++Index: proftpd-1.3.5/Make.rules.in
++===================================================================
++--- proftpd-1.3.5.orig/Make.rules.in
+++++ proftpd-1.3.5/Make.rules.in
++@@ -29,9 +29,9 @@ INSTALL=@INSTALL@
++ INSTALL_STRIP=@INSTALL_STRIP@
++ INSTALL_USER=@install_user@
++ INSTALL_GROUP=@install_group@
++-INSTALL_BIN=$(INSTALL) $(INSTALL_STRIP) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755
++-INSTALL_SBIN=$(INSTALL) $(INSTALL_STRIP) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755
++-INSTALL_MAN=$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0644
+++INSTALL_BIN=$(INSTALL) -m 0755
+++INSTALL_SBIN=$(INSTALL) -m 0755
+++INSTALL_MAN=$(INSTALL) -m 0644
++ 
++ RM=rm -f
++ SHELL=@CONFIG_SHELL@
++Index: proftpd-1.3.5/Makefile.in
++===================================================================
++--- proftpd-1.3.5.orig/Makefile.in
+++++ proftpd-1.3.5/Makefile.in
++@@ -105,7 +105,6 @@ check: proftpd$(EXEEXT)
++ $(DESTDIR)$(localedir) $(DESTDIR)$(includedir) $(DESTDIR)$(includedir)/proftpd $(DESTDIR)$(libdir) $(DESTDIR)$(pkgconfigdir) $(DESTDIR)$(libdir)/proftpd $(DESTDIR)$(libexecdir) $(DESTDIR)$(localstatedir) $(DESTDIR)$(sysconfdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(mandir) $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8:
++ 	@if [ ! -d $@ ]; then \
++ 		mkdir -p $@; \
++-		chown $(INSTALL_USER):$(INSTALL_GROUP) $@; \
++ 		chmod 0755 $@; \
++ 	fi
++ 
++@@ -115,7 +114,6 @@ install-proftpd: proftpd $(DESTDIR)$(inc
++ 		rm -f $(DESTDIR)$(sbindir)/in.proftpd ; \
++ 	fi
++ 	ln -s proftpd $(DESTDIR)$(sbindir)/in.proftpd
++-	-chown -h $(INSTALL_USER):$(INSTALL_GROUP) $(DESTDIR)$(sbindir)/in.proftpd
++ 
++ install-libs: $(DESTDIR)$(libdir)/proftpd
++ 	cd lib/ && $(MAKE) install
++@@ -152,11 +150,11 @@ install-utils: $(DESTDIR)$(sbindir) $(DE
++ 	$(INSTALL_SBIN) ftpshut  $(DESTDIR)$(sbindir)/ftpshut
++ 	$(INSTALL_BIN)  ftptop   $(DESTDIR)$(bindir)/ftptop
++ 	$(INSTALL_BIN)  ftpwho   $(DESTDIR)$(bindir)/ftpwho
++-	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 src/prxs $(DESTDIR)$(bindir)/prxs
+++	$(INSTALL) -m 0755 src/prxs $(DESTDIR)$(bindir)/prxs
++ 
++ install-conf: $(DESTDIR)$(sysconfdir)
++ 	if [ ! -f $(DESTDIR)$(sysconfdir)/proftpd.conf ] ; then \
++-		$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0644 \
+++		$(INSTALL) -m 0644 \
++ 		           $(top_srcdir)/sample-configurations/basic.conf \
++ 	       	           $(DESTDIR)$(sysconfdir)/proftpd.conf ; \
++ 	fi
++Index: proftpd-1.3.5/configure
++===================================================================
++--- proftpd-1.3.5.orig/configure
+++++ proftpd-1.3.5/configure
++@@ -38255,7 +38255,7 @@ _ACEOF
++ 
++ 
++ cat >>confdefs.h <<_ACEOF
++-#define PR_RUN_DIR "`eval echo "${localstatedir}"`"
+++#define PR_RUN_DIR "`eval echo "${localstatedir}"/run/`"
++ _ACEOF
++ 
++ cat >>confdefs.h <<_ACEOF
++@@ -38263,7 +38263,7 @@ cat >>confdefs.h <<_ACEOF
++ _ACEOF
++ 
++ cat >>confdefs.h <<_ACEOF
++-#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
+++#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/run/proftpd.pid"`"
++ _ACEOF
++ 
++ 
++Index: proftpd-1.3.5/configure.in
++===================================================================
++--- proftpd-1.3.5.orig/configure.in
+++++ proftpd-1.3.5/configure.in
++@@ -2971,8 +2971,8 @@ locale_dir="`eval echo ${locale_dir}`"
++ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
++ 
++ AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
++-AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
++-AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/proftpd.pid"`")
+++AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/run/proftpd.conf"`")
+++AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
++ 
++ prefix="$pr_saved_prefix"
++ exec_prefix="$pr_saved_exec_prefix"
++Index: proftpd-1.3.5/lib/libcap/Makefile
++===================================================================
++--- proftpd-1.3.5.orig/lib/libcap/Makefile
+++++ proftpd-1.3.5/lib/libcap/Makefile
++@@ -26,7 +26,7 @@ OBJS=$(addsuffix .o, $(FILES))
++ all: $(LIBNAME)
++ 
++ _makenames: _makenames.c cap_names.sed
++-	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@
+++	$(BUILD_CC) $(CFLAGS) $(LDFLAGS) $< -o $@
++ 
++ cap_names.h: _makenames
++ 	./_makenames > cap_names.h
+diff --git a/meta-networking/recipes-daemons/proftpd/files/make.patch b/meta-networking/recipes-daemons/proftpd/files/make.patch
 deleted file mode 100644
-index ddcb044..0000000
---- a/meta-networking/recipes-support/ntp/files/CVE-2013-5211.patch
+index c5ff013..0000000
+--- a/meta-networking/recipes-daemons/proftpd/files/make.patch
 +++ /dev/null
-@@ -1,112 +0,0 @@
--ntp: fix CVE-2013-5211
+@@ -1,66 +0,0 @@
+-Upstream-Status: Inappropriate [configuration]
 -
--Upstream-status: Backport
--
--The monlist feature in ntp_request.c in ntpd in NTP before
--4.2.7p26 allows remote attackers to cause a denial of service
--(traffic amplification) via forged (1) REQ_MON_GETLIST or
--(2) REQ_MON_GETLIST_1 requests, as exploited in the wild
--in December 2013.
--
--Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
--
----- a/ntpd/ntp_request.c
--+++ b/ntpd/ntp_request.c
--@@ -1912,44 +1912,11 @@ mon_getlist_0(
-- 	struct req_pkt *inpkt
-- 	)
-- {
---	register struct info_monitor *im;
---	register struct mon_data *md;
---	extern struct mon_data mon_mru_list;
---	extern int mon_enabled;
---
-- #ifdef DEBUG
-- 	if (debug > 2)
-- 	    printf("wants monitor 0 list\n");
-- #endif
---	if (!mon_enabled) {
---		req_ack(srcadr, inter, inpkt, INFO_ERR_NODATA);
---		return;
---	}
---	im = (struct info_monitor *)prepare_pkt(srcadr, inter, inpkt,
---	    v6sizeof(struct info_monitor));
---	for (md = mon_mru_list.mru_next; md != &mon_mru_list && im != 0;
---	     md = md->mru_next) {
---		im->lasttime = htonl((u_int32)((current_time -
---		    md->firsttime) / md->count));
---		im->firsttime = htonl((u_int32)(current_time - md->lasttime));
---		im->restr = htonl((u_int32)md->flags);
---		im->count = htonl((u_int32)(md->count));
---		if (IS_IPV6(&md->rmtadr)) {
---			if (!client_v6_capable)
---				continue;
---			im->addr6 = SOCK_ADDR6(&md->rmtadr);
---			im->v6_flag = 1;
---		} else {
---			im->addr = NSRCADR(&md->rmtadr);
---			if (client_v6_capable)
---				im->v6_flag = 0;
---		}
---		im->port = md->rmtport;
---		im->mode = md->mode;
---		im->version = md->version;
---		im = (struct info_monitor *)more_pkt();
---	}
---	flush_pkt();
--+	req_ack(srcadr, inter, inpkt, INFO_ERR_NODATA);
-- }
+-Index: proftpd-1.3.2/Makefile.in
+-===================================================================
+---- proftpd-1.3.2.orig/Makefile.in
+-+++ proftpd-1.3.2/Makefile.in
+-@@ -76,7 +76,6 @@ check: proftpd$(EXEEXT)
+- $(DESTDIR)$(localedir) $(DESTDIR)$(includedir) $(DESTDIR)$(includedir)/proftpd $(DESTDIR)$(libdir) $(DESTDIR)$(pkgconfigdir) $(DESTDIR)$(libdir)/proftpd $(DESTDIR)$(libexecdir) $(DESTDIR)$(localstatedir) $(DESTDIR)$(sysconfdir) $(DESTDIR)$(rundir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(mandir) $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8:
+- 	@if [ ! -d $@ ]; then \
+- 		mkdir -p $@; \
+--		chown $(INSTALL_USER):$(INSTALL_GROUP) $@; \
+- 		chmod 0755 $@; \
+- 	fi
 - 
-- /*
--@@ -1962,50 +1929,7 @@ mon_getlist_1(
-- 	struct req_pkt *inpkt
-- 	)
-- {
---	register struct info_monitor_1 *im;
---	register struct mon_data *md;
---	extern struct mon_data mon_mru_list;
---	extern int mon_enabled;
---
---	if (!mon_enabled) {
---		req_ack(srcadr, inter, inpkt, INFO_ERR_NODATA);
---		return;
---	}
---	im = (struct info_monitor_1 *)prepare_pkt(srcadr, inter, inpkt,
---	    v6sizeof(struct info_monitor_1));
---	for (md = mon_mru_list.mru_next; md != &mon_mru_list && im != 0;
---	     md = md->mru_next) {
---		im->lasttime = htonl((u_int32)((current_time -
---		    md->firsttime) / md->count));
---		im->firsttime = htonl((u_int32)(current_time - md->lasttime));
---		im->restr = htonl((u_int32)md->flags);
---		im->count = htonl((u_int32)md->count);
---		if (IS_IPV6(&md->rmtadr)) {
---			if (!client_v6_capable)
---				continue;
---			im->addr6 = SOCK_ADDR6(&md->rmtadr);
---			im->v6_flag = 1;
---			im->daddr6 = SOCK_ADDR6(&md->interface->sin);
---		} else {
---			im->addr = NSRCADR(&md->rmtadr);
---			if (client_v6_capable)
---				im->v6_flag = 0;
---			if (MDF_BCAST == md->cast_flags)
---				im->daddr = NSRCADR(&md->interface->bcast);
---			else if (md->cast_flags) {
---				im->daddr = NSRCADR(&md->interface->sin);
---				if (!im->daddr)
---					im->daddr = NSRCADR(&md->interface->bcast);
---			} else
---				im->daddr = 4;
---		}
---		im->flags = htonl(md->cast_flags);
---		im->port = md->rmtport;
---		im->mode = md->mode;
---		im->version = md->version;
---		im = (struct info_monitor_1 *)more_pkt();
---	}
---	flush_pkt();
--+	req_ack(srcadr, inter, inpkt, INFO_ERR_NODATA);
-- }
+-@@ -86,7 +85,6 @@ install-proftpd: proftpd $(DESTDIR)$(inc
+- 		rm -f $(DESTDIR)$(sbindir)/in.proftpd ; \
+- 	fi
+- 	ln -s proftpd $(DESTDIR)$(sbindir)/in.proftpd
+--	-chown -h $(INSTALL_USER):$(INSTALL_GROUP) $(DESTDIR)$(sbindir)/in.proftpd
 - 
-- /*
-diff --git a/meta-networking/recipes-support/ntp/files/openssl-check.patch b/meta-networking/recipes-support/ntp/files/openssl-check.patch
+- install-libs: $(DESTDIR)$(libdir)/proftpd
+- 	cd lib/ && $(MAKE) install
+-@@ -121,11 +119,11 @@ install-utils: $(DESTDIR)$(sbindir) $(DE
+- 	$(INSTALL_SBIN) ftpshut  $(DESTDIR)$(sbindir)/ftpshut
+- 	$(INSTALL_BIN)  ftptop   $(DESTDIR)$(bindir)/ftptop
+- 	$(INSTALL_BIN)  ftpwho   $(DESTDIR)$(bindir)/ftpwho
+--	$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755 src/prxs $(DESTDIR)$(bindir)/prxs
+-+	$(INSTALL) -m 0755 src/prxs $(DESTDIR)$(bindir)/prxs
+- 
+- install-conf: $(DESTDIR)$(sysconfdir)
+- 	if [ ! -f $(DESTDIR)$(sysconfdir)/proftpd.conf ] ; then \
+--		$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0644 \
+-+		$(INSTALL) -m 0644 \
+- 		           $(top_srcdir)/sample-configurations/basic.conf \
+- 	       	           $(DESTDIR)$(sysconfdir)/proftpd.conf ; \
+- 	fi
+-Index: proftpd-1.3.2/Make.rules.in
+-===================================================================
+---- proftpd-1.3.2.orig/Make.rules.in
+-+++ proftpd-1.3.2/Make.rules.in
+-@@ -29,9 +29,9 @@ UTILS_LIBS=@UTILS_LIBS@ @LIBS@
+- INSTALL=@INSTALL@
+- INSTALL_USER=@install_user@
+- INSTALL_GROUP=@install_group@
+--INSTALL_BIN=$(INSTALL) @INSTALL_STRIP@ -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755
+--INSTALL_SBIN=$(INSTALL) @INSTALL_STRIP@ -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0755
+--INSTALL_MAN=$(INSTALL) -o $(INSTALL_USER) -g $(INSTALL_GROUP) -m 0644
+-+INSTALL_BIN=$(INSTALL) -m 0755
+-+INSTALL_SBIN=$(INSTALL) -m 0755
+-+INSTALL_MAN=$(INSTALL) -m 0644
+- 
+- RM=rm -f
+- SHELL=/bin/sh
+-Index: proftpd-1.3.2/lib/libcap/Makefile
+-===================================================================
+---- proftpd-1.3.2.orig/lib/libcap/Makefile
+-+++ proftpd-1.3.2/lib/libcap/Makefile
+-@@ -26,7 +26,7 @@ OBJS=$(addsuffix .o, $(FILES))
+- all: $(LIBNAME)
+- 
+- _makenames: _makenames.c cap_names.sed
+--	$(CC) $(CFLAGS) $(LDFLAGS) $< -o $@
+-+	$(BUILD_CC) $(CFLAGS) $(LDFLAGS) $< -o $@
+- 
+- cap_names.h: _makenames
+- 	./_makenames > cap_names.h
+diff --git a/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch b/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
 deleted file mode 100644
-index 8b4a673..0000000
---- a/meta-networking/recipes-support/ntp/files/openssl-check.patch
+index 953bbdd..0000000
+--- a/meta-networking/recipes-daemons/proftpd/files/move-pidfile-to-var-run.patch
 +++ /dev/null
-@@ -1,59 +0,0 @@
--Hack OpenSSL check to work when libssl and libcrypto aren't in same dir
+@@ -1,39 +0,0 @@
+-move pidfile to /var/run
 -
--Upstream-Status: Inappropriate [config]
+-Upstream-Status: Inappropriate [configuration]
 -
--Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+-Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ----
-- configure         |    4 ++--
-- m4/ntp_openssl.m4 |    4 ++--
-- sntp/configure    |    4 ++--
-- 3 files changed, 6 insertions(+), 6 deletions(-)
+- configure    |    2 +-
+- configure.in |    2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
 -
 -diff --git a/configure b/configure
--index aae2c01..6a3c15e 100755
+-index e6268f5..ebed38e 100755
 ---- a/configure
 -+++ b/configure
--@@ -22868,8 +22868,8 @@ case "$ans" in
-- 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
-- 	    ;;
-- 	 *)
---	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
---	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
--+	    test -f $i/libssl.so && break
--+	    test -f $i/libssl.a && break
-- 	    ;;
-- 	esac
--     done
--diff --git a/m4/ntp_openssl.m4 b/m4/ntp_openssl.m4
--index 7d9f477..67bdd55 100644
----- a/m4/ntp_openssl.m4
--+++ b/m4/ntp_openssl.m4
--@@ -41,8 +41,8 @@ case "$ans" in
-- 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
-- 	    ;;
-- 	 *)
---	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
---	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
--+	    test -f $i/libssl.so && break
--+	    test -f $i/libssl.a && break
-- 	    ;;
-- 	esac
--     done
--diff --git a/sntp/configure b/sntp/configure
--index 7782c29..55e82d9 100755
----- a/sntp/configure
--+++ b/sntp/configure
--@@ -14810,8 +14810,8 @@ case "$ans" in
-- 	    test -f $i/libcrypto.dylib -a -f $i/libssl.dylib && break
-- 	    ;;
-- 	 *)
---	    test -f $i/libcrypto.so -a -f $i/libssl.so && break
---	    test -f $i/libcrypto.a -a -f $i/libssl.a && break
--+	    test -f $i/libssl.so && break
--+	    test -f $i/libssl.a && break
-- 	    ;;
-- 	esac
--     done
+-@@ -33587,7 +33587,7 @@ cat >>confdefs.h <<_ACEOF
+- _ACEOF
+- 
+- cat >>confdefs.h <<_ACEOF
+--#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
+-+#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/run/proftpd.pid"`"
+- _ACEOF
+- 
+- 
+-diff --git a/configure.in b/configure.in
+-index df9186a..e2ae868 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -2790,7 +2790,7 @@ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
+- 
+- AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
+- AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
+--AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/proftpd.pid"`")
+-+AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
+- 
+- prefix="$pr_saved_prefix"
+- exec_prefix="$pr_saved_exec_prefix"
 --- 
--1.7.1
+-1.7.10.4
 -
-diff --git a/meta-networking/recipes-support/ntp/files/tickadj.c.patch b/meta-networking/recipes-support/ntp/files/tickadj.c.patch
+diff --git a/meta-networking/recipes-daemons/proftpd/files/move-runfile-to-var-run.patch b/meta-networking/recipes-daemons/proftpd/files/move-runfile-to-var-run.patch
 deleted file mode 100644
-index 9ef9de9..0000000
---- a/meta-networking/recipes-support/ntp/files/tickadj.c.patch
+index 1561ed8..0000000
+--- a/meta-networking/recipes-daemons/proftpd/files/move-runfile-to-var-run.patch
 +++ /dev/null
-@@ -1,32 +0,0 @@
--Index: ntp-4.2.2p3-r0/ntp-4.2.2p3/util/tickadj.c
--===================================================================
----- ntp-4.2.2p3/util/tickadj.c	2004-02-25 06:58:33.000000000 +0100
--+++ ntp-4.2.2p3/util/tickadj.c	2007-07-07 01:00:54.000000000 +0200
--@@ -21,7 +21,8 @@
-- # include <unistd.h>
-- #endif /* HAVE_UNISTD_H */
+@@ -1,39 +0,0 @@
+-redefine PR_RUN_DIR as ${localstatedir}/run
+-
+-Upstream-Status: Inappropriate [configuration]
+-
+-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+----
+- configure    |    2 +-
+- configure.in |    2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/configure b/configure
+-index ebed38e..445d5bc 100755
+---- a/configure
+-+++ b/configure
+-@@ -33579,7 +33579,7 @@ _ACEOF
 - 
---#ifdef HAVE___ADJTIMEX		/* Linux */
--+/* proper handling here has been moved to upstream ntp bugzilla */
--+#ifdef linux
 - 
-- #include <sys/timex.h>
-- struct timex txc;
--@@ -91,7 +92,7 @@
-- 	}
+- cat >>confdefs.h <<_ACEOF
+--#define PR_RUN_DIR "`eval echo "${localstatedir}"`"
+-+#define PR_RUN_DIR "`eval echo "${localstatedir}"/run/`"
+- _ACEOF
 - 
-- 	if (!errflg) {
---		if (__adjtimex(&txc) < 0)
--+		if (adjtimex(&txc) < 0)
-- 			perror("adjtimex");
-- 		else if (!quiet)
-- 			printf("tick     = %ld\ntick_adj = %d\n",
--@@ -146,7 +147,7 @@
-- #endif
-- 	}
--     
---	if (__adjtimex(&txc) < 0)
--+	if (adjtimex(&txc) < 0)
-- 	{
-- 		perror("adjtimex");
-- 	}
-diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.4_p6-nano.patch b/meta-networking/recipes-support/ntp/ntp/ntp-4.2.4_p6-nano.patch
-similarity index 100%
-rename from meta-networking/recipes-support/ntp/files/ntp-4.2.4_p6-nano.patch
-rename to meta-networking/recipes-support/ntp/ntp/ntp-4.2.4_p6-nano.patch
-diff --git a/meta-networking/recipes-support/ntp/ntp/ntp-4.2.8-ntp-keygen-no-openssl.patch b/meta-networking/recipes-support/ntp/ntp/ntp-4.2.8-ntp-keygen-no-openssl.patch
-new file mode 100644
-index 0000000..9b9af63
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/ntp/ntp-4.2.8-ntp-keygen-no-openssl.patch
-@@ -0,0 +1,168 @@
-+Fix ntp-keygen build without OpenSSL
-+
-+Patch borrowed from Gentoo, originally from upstream
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Upstream-Status: Backport
-+
-+Upstream commit:
-+http://bk1.ntp.org/ntp-stable/?PAGE=patch&REV=5497b345z5MNTuNvJWuqPSje25NQTg
-+Gentoo bugzilla: https://bugs.gentoo.org/show_bug.cgi?id=533238
-+
-+Signed-off-by: Markos Chandras <hwoarang@gentoo.org>
-+Index: ntp-4.2.8/Makefile.am
-+===================================================================
-+--- ntp-4.2.8.orig/Makefile.am
-++++ ntp-4.2.8/Makefile.am
-+@@ -2,7 +2,10 @@ ACLOCAL_AMFLAGS = -I sntp/m4 -I sntp/lib
-+ 
-+ NULL =
-+ 
-++# moved sntp first to get libtool and libevent built.
-++
-+ SUBDIRS =		\
-++	sntp		\
-+ 	scripts		\
-+ 	include		\
-+ 	libntp		\
-+@@ -17,7 +20,6 @@ SUBDIRS =		\
-+ 	clockstuff	\
-+ 	kernel		\
-+ 	util		\
-+-	sntp		\
-+ 	tests		\
-+ 	$(NULL)
-+ 
-+@@ -64,7 +66,6 @@ BUILT_SOURCES =				\
-+ 	.gcc-warning			\
-+ 	'libtool				\
-+ 	html/.datecheck			\
-+-	sntp/built-sources-only		\
-+ 	$(srcdir)/COPYRIGHT		\
-+ 	$(srcdir)/.checkChangeLog	\
-+ 	$(NULL)
-+Index: ntp-4.2.8/configure.ac
-+===================================================================
-+--- ntp-4.2.8.orig/configure.ac
-++++ ntp-4.2.8/configure.ac
-+@@ -102,7 +102,7 @@ esac
-+ enable_nls=no
-+ LIBOPTS_CHECK_NOBUILD([sntp/libopts])
-+ 
-+-NTP_ENABLE_LOCAL_LIBEVENT
-++NTP_LIBEVENT_CHECK_NOBUILD([2], [sntp/libevent])
-+ 
-+ NTP_LIBNTP
-+ 
-+@@ -771,6 +771,10 @@ esac
-+ 
-+ #### 
-+ 
-++AC_CHECK_FUNCS([arc4random_buf])
-++
-++#### 
-++
-+ saved_LIBS="$LIBS"
-+ LIBS="$LIBS $LDADD_LIBNTP"
-+ AC_CHECK_FUNCS([daemon])
-+Index: ntp-4.2.8/libntp/ntp_crypto_rnd.c
-+===================================================================
-+--- ntp-4.2.8.orig/libntp/ntp_crypto_rnd.c
-++++ ntp-4.2.8/libntp/ntp_crypto_rnd.c
-+@@ -24,6 +24,21 @@
-+ int crypto_rand_init = 0;
-+ #endif
-+ 
-++#ifndef HAVE_ARC4RANDOM_BUF
-++static void
-++arc4random_buf(void *buf, size_t nbytes);
-++
-++void
-++evutil_secure_rng_get_bytes(void *buf, size_t nbytes);
-++
-++static void
-++arc4random_buf(void *buf, size_t nbytes)
-++{
-++	evutil_secure_rng_get_bytes(buf, nbytes);
-++	return;
-++}
-++#endif
-++
-+ /*
-+  * As of late 2014, here's how we plan to provide cryptographic-quality
-+  * random numbers:
-+Index: ntp-4.2.8/sntp/configure.ac
-+===================================================================
-+--- ntp-4.2.8.orig/sntp/configure.ac
-++++ ntp-4.2.8/sntp/configure.ac
-+@@ -97,11 +97,14 @@ esac
-+ enable_nls=no
-+ LIBOPTS_CHECK
-+ 
-+-AM_COND_IF(
-+-    [BUILD_SNTP],
-+-    [NTP_LIBEVENT_CHECK],
-+-    [NTP_LIBEVENT_CHECK_NOBUILD]
-+-)
-++# From when we only used libevent for sntp:
-++#AM_COND_IF(
-++#    [BUILD_SNTP],
-++#    [NTP_LIBEVENT_CHECK],
-++#    [NTP_LIBEVENT_CHECK_NOBUILD]
-++#)
-++
-++NTP_LIBEVENT_CHECK([2])
-+ 
-+ # Checks for libraries.
-+ 
-+Index: ntp-4.2.8/sntp/m4/ntp_libevent.m4
-+===================================================================
-+--- ntp-4.2.8.orig/sntp/m4/ntp_libevent.m4
-++++ ntp-4.2.8/sntp/m4/ntp_libevent.m4
-+@@ -1,4 +1,25 @@
-+-dnl NTP_ENABLE_LOCAL_LIBEVENT				     -*- Autoconf -*-
-++# SYNOPSIS						-*- Autoconf -*-
-++#
-++#  NTP_ENABLE_LOCAL_LIBEVENT
-++#  NTP_LIBEVENT_CHECK([MINVERSION [, DIR]])
-++#  NTP_LIBEVENT_CHECK_NOBUILD([MINVERSION [, DIR]])
-++#
-++# DESCRIPTION
-++#
-++# AUTHOR
-++#
-++#  Harlan Stenn
-++#
-++# LICENSE
-++#
-++#  This file is Copyright (c) 2014 Network Time Foundation
-++# 
-++#  Copying and distribution of this file, with or without modification, are
-++#  permitted in any medium without royalty provided the copyright notice,
-++#  author attribution and this notice are preserved.  This file is offered
-++#  as-is, without any warranty.
-++
-++dnl NTP_ENABLE_LOCAL_LIBEVENT
-+ dnl
-+ dnl Provide only the --enable-local-libevent command-line option.
-+ dnl
-+@@ -29,7 +50,7 @@ dnl If NOBUILD is provided as the 3rd ar
-+ dnl but DO NOT invoke DIR/configure if we are going to use our bundled
-+ dnl version.  This may be the case for nested packages.
-+ dnl
-+-dnl provide --enable-local-libevent .
-++dnl provides --enable-local-libevent .
-+ dnl
-+ dnl Examples:
-+ dnl
-+Index: ntp-4.2.8/util/Makefile.am
-+===================================================================
-+--- ntp-4.2.8.orig/util/Makefile.am
-++++ ntp-4.2.8/util/Makefile.am
-+@@ -19,6 +19,7 @@ AM_LDFLAGS = $(LDFLAGS_NTP)
-+ LDADD=		../libntp/libntp.a $(LDADD_LIBNTP) $(LIBM) $(PTHREAD_LIBS)
-+ tg2_LDADD=	../libntp/libntp.a $(LDADD_LIBNTP) $(LIBM)
-+ ntp_keygen_LDADD  = version.o $(LIBOPTS_LDADD) ../libntp/libntp.a
-++ntp_keygen_LDADD += $(LDADD_LIBEVENT)
-+ ntp_keygen_LDADD += $(LDADD_LIBNTP) $(PTHREAD_LIBS) $(LDADD_NTP) $(LIBM)
-+ ntp_keygen_SOURCES = ntp-keygen.c ntp-keygen-opts.c ntp-keygen-opts.h
-+ 
-diff --git a/meta-networking/recipes-support/ntp/files/ntp.conf b/meta-networking/recipes-support/ntp/ntp/ntp.conf
-similarity index 100%
-rename from meta-networking/recipes-support/ntp/files/ntp.conf
-rename to meta-networking/recipes-support/ntp/ntp/ntp.conf
-diff --git a/meta-networking/recipes-support/ntp/files/ntpd b/meta-networking/recipes-support/ntp/ntp/ntpd
-similarity index 100%
-rename from meta-networking/recipes-support/ntp/files/ntpd
-rename to meta-networking/recipes-support/ntp/ntp/ntpd
-diff --git a/meta-networking/recipes-support/ntp/files/ntpdate b/meta-networking/recipes-support/ntp/ntp/ntpdate
-similarity index 100%
-rename from meta-networking/recipes-support/ntp/files/ntpdate
-rename to meta-networking/recipes-support/ntp/ntp/ntpdate
-diff --git a/meta-networking/recipes-support/ntp/files/ntpdate.default b/meta-networking/recipes-support/ntp/ntp/ntpdate.default
-similarity index 100%
-rename from meta-networking/recipes-support/ntp/files/ntpdate.default
-rename to meta-networking/recipes-support/ntp/ntp/ntpdate.default
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb b/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
+- cat >>confdefs.h <<_ACEOF
+-diff --git a/configure.in b/configure.in
+-index c17929c..df9186a 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -2788,7 +2788,7 @@ locale_dir="`eval echo ${localedir}`"
+- locale_dir="`eval echo ${locale_dir}`"
+- AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
+- 
+--AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
+-+AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}/run"`")
+- AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
+- AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
+- 
+--- 
+-1.7.10.4
+-
+diff --git a/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch b/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
 deleted file mode 100644
-index 588a1b0..0000000
---- a/meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
+index 8c71263..0000000
+--- a/meta-networking/recipes-daemons/proftpd/files/proftpd-sftp.patch
 +++ /dev/null
-@@ -1,6 +0,0 @@
--require ntp.inc
+@@ -1,142 +0,0 @@
+-proftpd/mod_sftp: fix too much memory allocation bug of mod_sftp
 -
--PR = "${INC_PR}.0"
+-This patch fixes the too much memory allocation bug of the mod_sftp by
+-ensuring both that a) the received response count matches the number of
+-challenges sent, and b) that the received response count is not too high
+-(as an additional sanity check); the upper bound is still set to 500.
 -
--SRC_URI[md5sum] = "00df80a84ec9528fcfb09498075525bc"
--SRC_URI[sha256sum] = "d6ab8371f9d31e594eb6922823d5ccd03dcc4e9d84b0e23ea25ac1405432f91c"
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
-similarity index 81%
-rename from meta-networking/recipes-support/ntp/ntp.inc
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8.bb
-index 142f904..7e1b1c1 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
-@@ -6,16 +6,12 @@ or satellite receiver or modem."
- HOMEPAGE = "http://support.ntp.org"
- SECTION = "console/network"
- LICENSE = "NTP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fea4b50c33b18c2194b4b1c9ca512670"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=ebe123f74017224947c78d472407c10f"
- 
--DEPENDS = "pps-tools"
+-The patch is picked from: http://bugs.proftpd.org/show_bug.cgi?id=3973
 -
--INC_PR = "r6"
-+DEPENDS = "pps-tools libevent"
+-Upstream-Status: Backport CVE-2013-4359
+-
+-diff --git a/contrib/mod_sftp/kbdint.c b/contrib/mod_sftp/kbdint.c
+-index 0271fb2..de651fa 100644
+---- a/contrib/mod_sftp/kbdint.c
+-+++ b/contrib/mod_sftp/kbdint.c
+-@@ -1,6 +1,6 @@
+- /*
+-  * ProFTPD - mod_sftp keyboard-interactive driver mgmt
+-- * Copyright (c) 2008-2009 TJ Saunders
+-+ * Copyright (c) 2008-2013 TJ Saunders
+-  *
+-  * This program is free software; you can redistribute it and/or modify
+-  * it under the terms of the GNU General Public License as published by
+-@@ -31,6 +31,8 @@
+- #include "utf8.h"
+- #include "kbdint.h"
+- 
+-+#define SFTP_KBDINT_MAX_RESPONSES	500
+-+
+- struct kbdint_driver {
+-   struct kbdint_driver *next, *prev;
+- 
+-@@ -252,8 +254,8 @@ int sftp_kbdint_send_challenge(const char *user, const char *instruction,
+-   return res;
+- }
+- 
+--int sftp_kbdint_recv_response(pool *p, unsigned int *count,
+--    const char ***responses) {
+-+int sftp_kbdint_recv_response(pool *p, unsigned int expected_count,
+-+    unsigned int *rcvd_count, const char ***responses) {
+-   register unsigned int i;
+-   char *buf;
+-   cmd_rec *cmd;
+-@@ -264,7 +266,7 @@ int sftp_kbdint_recv_response(pool *p, unsigned int *count,
+-   int res;
+- 
+-   if (p == NULL ||
+--      count == NULL ||
+-+      rcvd_count == NULL ||
+-       responses == NULL) {
+-     errno = EINVAL;
+-     return -1;
+-@@ -299,6 +301,29 @@ int sftp_kbdint_recv_response(pool *p, unsigned int *count,
+- 
+-   resp_count = sftp_msg_read_int(pkt->pool, &buf, &buflen);
+- 
+-+  /* Ensure that the number of responses sent by the client is the same
+-+   * as the number of challenges sent, lest a malicious client attempt to
+-+   * trick us into allocating too much memory (Bug#3973).
+-+   */
+-+  if (resp_count != expected_count) {
+-+    (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
+-+      "sent %lu %s, but received %lu %s", (unsigned long) expected_count,
+-+      expected_count != 1 ? "challenges" : "challenge",
+-+      (unsigned long) resp_count, resp_count != 1 ? "responses" : "response");
+-+    destroy_pool(pkt->pool);
+-+    errno = EPERM;
+-+    return -1;
+-+  }
+-+
+-+  if (resp_count > SFTP_KBDINT_MAX_RESPONSES) {
+-+    (void) pr_log_writefile(sftp_logfd, MOD_SFTP_VERSION,
+-+      "received too many responses (%lu > max %lu), rejecting",
+-+      (unsigned long) resp_count, (unsigned long) SFTP_KBDINT_MAX_RESPONSES);
+-+    destroy_pool(pkt->pool);
+-+    errno = EPERM;
+-+    return -1;
+-+  }
+-+
+-   list = make_array(p, resp_count, sizeof(char *));
+-   for (i = 0; i < resp_count; i++) {
+-     char *resp;
+-@@ -307,7 +332,7 @@ int sftp_kbdint_recv_response(pool *p, unsigned int *count,
+-     *((char **) push_array(list)) = pstrdup(p, sftp_utf8_decode_str(p, resp));
+-   }
+- 
+--  *count = (unsigned int) resp_count;
+-+  *rcvd_count = (unsigned int) resp_count;
+-   *responses = ((const char **) list->elts);
+-   return 0;
+- }
+-diff --git a/contrib/mod_sftp/mod_sftp.h.in b/contrib/mod_sftp/mod_sftp.h.in
+-index 3e91390..c547be0 100644
+---- a/contrib/mod_sftp/mod_sftp.h.in
+-+++ b/contrib/mod_sftp/mod_sftp.h.in
+-@@ -1,6 +1,6 @@
+- /*
+-  * ProFTPD - mod_sftp
+-- * Copyright (c) 2008-2011 TJ Saunders
+-+ * Copyright (c) 2008-2013 TJ Saunders
+-  *
+-  * This program is free software; you can redistribute it and/or modify
+-  * it under the terms of the GNU General Public License as published by
+-@@ -174,7 +174,8 @@ int sftp_kbdint_register_driver(const char *name, sftp_kbdint_driver_t *driver);
+- int sftp_kbdint_unregister_driver(const char *name);
+- int sftp_kbdint_send_challenge(const char *, const char *, unsigned int,
+-   sftp_kbdint_challenge_t *);
+--int sftp_kbdint_recv_response(pool *, unsigned int *, const char ***);
+-+int sftp_kbdint_recv_response(pool *, unsigned int, unsigned int *,
+-+  const char ***);
+- 
+- /* API for modules that which to register keystores, for the
+-  * SFTPAuthorizedHostKeys and SFTPAuthorizedUserKeys directives.
+-diff --git a/contrib/mod_sftp_pam.c b/contrib/mod_sftp_pam.c
+-index 6c32df0..81aa113 100644
+---- a/contrib/mod_sftp_pam.c
+-+++ b/contrib/mod_sftp_pam.c
+-@@ -179,22 +179,13 @@ static int sftppam_converse(int nmsgs, PR_PAM_CONST struct pam_message **msgs,
+-     return PAM_CONV_ERR;
+-   }
+- 
+--  if (sftp_kbdint_recv_response(sftppam_driver.driver_pool, &recvd_count,
+--      &recvd_responses) < 0) {
+-+  if (sftp_kbdint_recv_response(sftppam_driver.driver_pool, list->nelts,
+-+      &recvd_count, &recvd_responses) < 0) {
+-     pr_trace_msg(trace_channel, 3,
+-       "error receiving keyboard-interactive responses: %s", strerror(errno));
+-     return PAM_CONV_ERR;
+-   }
+- 
+--  /* Make sure that the count of responses matches the challenge count. */
+--  if (recvd_count != list->nelts) {
+--    (void) pr_log_writefile(sftp_logfd, MOD_SFTP_PAM_VERSION,
+--      "sent %d %s, but received %u %s", nmsgs,
+--      list->nelts != 1 ? "challenges" : "challenge", recvd_count,
+--      recvd_count != 1 ? "responses" : "response");
+--    return PAM_CONV_ERR;
+--  }
+--
+-   res = calloc(nmsgs, sizeof(struct pam_response));
+-   if (res == NULL) {
+-     pr_log_pri(PR_LOG_CRIT, "Out of memory!");
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+similarity index 51%
+rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
+rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+index a5e766a..cba39e8 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.4b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+@@ -4,31 +4,60 @@ HOMEPAGE = "http://www.proftpd.org"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fb0d1484d11915fa88a6a7702f1dc184"
  
- SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
--           file://tickadj.c.patch \
-            file://ntp-4.2.4_p6-nano.patch \
--           file://openssl-check.patch \
-            file://ntpd \
-            file://ntp.conf \
-            file://ntpdate \
-@@ -25,14 +21,21 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://sntp.service \
-            file://sntp \
-            file://ntpd.list \
--           file://CVE-2013-5211.patch \
-+           file://ntp-4.2.8-ntp-keygen-no-openssl.patch \
- "
+-PR = "r4"
+-
+ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+-           file://make.patch \
+            file://basic.conf.patch \
+-           file://contrib.patch \
+            file://proftpd-basic.init \
+            file://default \
+-           file://move-pidfile-to-var-run.patch \
+            file://close-RequireValidShell-check.patch \
+-           file://move-runfile-to-var-run.patch \
+-           file://proftpd-sftp.patch \
+-"
++           file://contrib.patch  \
++           file://build_fixup.patch \
++           "
  
--inherit autotools update-rc.d useradd systemd
-+SRC_URI[md5sum] = "6972a626be6150db8cfbd0b63d8719e7"
-+SRC_URI[sha256sum] = "2e920df8b6a5a410567a73767fa458c00c7f0acec3213e69ed0134414a50d8ee"
+-SRC_URI[md5sum] = "0871e0b93c9c3c88ca950b6d9a04aed2"
+-SRC_URI[sha256sum] = "9f659585cea90fc6af34a0ffae4a90e4ed37abe92dbd9b6c311f95a436c961cb"
++SRC_URI[md5sum] = "aff1bff40e675244d72c4667f203e5bb"
++SRC_URI[sha256sum] = "c10316fb003bd25eccbc08c77dd9057e053693e6527ffa2ea2cc4e08ccb87715"
+ 
+ inherit autotools-brokensep useradd update-rc.d
+ 
+-PACKAGECONFIG ??= ""
+-PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses,--disable-curses --disable-ncurses,ncurses"
++PACKAGECONFIG ??= "sia shadow"
++PACKAGECONFIG += " ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
++PACKAGECONFIG += " ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
 +
-+inherit autotools update-rc.d useradd systemd pkgconfig
- 
- # The ac_cv_header_readline_history is to stop ntpdc depending on either
- # readline or curses
--EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no --with-binsubdir=sbin"
-+EXTRA_OECONF += "--with-net-snmp-config=no \
-+                 --without-ntpsnmpd \
-+                 ac_cv_header_readline_history_h=no \
-+                 --with-yielding_select=yes \
-+                 "
- CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
- 
- USERADD_PACKAGES = "${PN}"
-@@ -68,10 +71,10 @@ do_install_append() {
-     sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-     sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
-     sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
--    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntptrace
--    sed -i '/use/i use warnings;' ${D}${sbindir}/ntptrace
--    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntp-wait
--    sed -i '/use/i use warnings;' ${D}${sbindir}/ntp-wait
-+    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntptrace
-+    sed -i '/use/i use warnings;' ${D}${bindir}/ntptrace
-+    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntp-wait
-+    sed -i '/use/i use warnings;' ${D}${bindir}/ntp-wait
- 
-     install -d ${D}/${sysconfdir}/default
-     install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
-@@ -87,6 +90,8 @@ do_install_append() {
- 
-     install -d ${D}${systemd_unitdir}/ntp-units.d
-     install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
++PACKAGECONFIG[curses] = "--enable-curses --enable-ncurses, --disable-curses --disable-ncurses, ncurses"
++PACKAGECONFIG[openssl] = "--enable-openssl, --disable-openssl, openssl, openssl"
++PACKAGECONFIG[pam] = "--enable-auth-pam, --disable-auth-pam, libpam, libpam"
++PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6"
++PACKAGECONFIG[shadow] = "--enable-shadow, --disable-shadow"
++PACKAGECONFIG[pcre] = "--enable-pcre, --disable-pcre, libpcre "
 +
-+    rmdir ${D}${sbindir}
- }
++# enable POSIX.1e capabilities
++PACKAGECONFIG[cap] = "--enable-cap, --disable-cap, libcap, libcap"
++
++#enable support for POSIX ACLs
++PACKAGECONFIG[acl] = "--enable-facl, --disable-facl"
++
++#enable proftpd controls via ftpdct
++PACKAGECONFIG[ctrls] = "--enable-ctrls, --disable-crtls"
++
++#prevent proftpd from using its bundled getopt implementation.
++PACKAGECONFIG[getopt] = "--with-getopt, --without-getopt"
++
++#do not strip debugging symbols from installed code
++PACKAGECONFIG[strip] = "--enable-strip, --disable-strip"
++
++#enable SIA authentication support (Tru64)
++PACKAGECONFIG[sia] = "--enable-sia, --disable-sia"
++PACKAGECONFIG[sendfile] = "-enable-sendfile, --disable-sendfile"
++
++#enable Native Language Support (NLS)
++PACKAGECONFIG[nls] = "--enable-nls, --disable-nls"
++
++#add mod_dso to core modules
++PACKAGECONFIG[dso] = "--enable-dso, --disable-dso"
++PACKAGECONFIG[largefile] = "--enable-largefile, --disable-largefile"
++
++#omit mod_auth_file from core modules
++PACKAGECONFIG[auth] = "--enable-auth-file, --disable-auth-file"
  
- PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
-@@ -115,19 +120,19 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
+-EXTRA_OECONF = "--disable-cap \
+-                --disable-auth-pam \
+-"
  
- RSUGGESTS_${PN} = "iana-etc"
- 
--FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
-+FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
-     ${NTP_USER_HOME} \
-     ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
- "
--FILES_${PN}-tickadj = "${sbindir}/tickadj"
--FILES_${PN}-utils = "${sbindir}"
--FILES_ntpdate = "${sbindir}/ntpdate \
-+FILES_${PN}-tickadj = "${bindir}/tickadj"
-+FILES_${PN}-utils = "${bindir} ${datadir}/ntp/lib"
-+FILES_ntpdate = "${bindir}/ntpdate \
-     ${sysconfdir}/network/if-up.d/ntpdate-sync \
-     ${bindir}/ntpdate-sync \
-     ${sysconfdir}/default/ntpdate \
-     ${systemd_unitdir}/system/ntpdate.service \
- "
--FILES_sntp = "${sbindir}/sntp \
-+FILES_sntp = "${bindir}/sntp \
-               ${sysconfdir}/default/sntp \
-               ${systemd_unitdir}/system/sntp.service \
-              "
+ # proftpd uses libltdl which currently makes configuring using
+ # autotools.bbclass a pain...
 -- 
-1.9.3
+1.9.1
 
 
