@@ -1,39 +1,47 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 155B97282E
+Return-Path: <Alex.Gonzalez@digi.com>
+X-Greylist: delayed 412 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 27 Dec 2014 20:09:25 UTC
+Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
+	[216.82.254.113])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F0167228F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 19:59:36 +0000 (UTC)
-Received: by mail-yh0-f43.google.com with SMTP id z6so5753714yhz.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 11:59:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=jxAsTknUm+YhJauUFjHVWyeTJyppSDcGI6qnfCm7PpY=;
-	b=el6sTjNRK9zTxNqnw1LbPKO5awUNc4wvRL3MZTVlqTpKhhY2uzRHYSfe8WllnF4SAN
-	we/SuVmKEctrXzpLkXqA8L5rQBGmxETCuHoP8iNWu/5pmuztkKMVXQaYoMC0P3Zzwla1
-	vFZ3sp632cwJSlVjQoYFNYJH2aa5nyCLNJtEfcVPD4bu2lYK4+tBNU17r94suNUKi/OI
-	foMgDXSH9Y+Nz3tEW9Dvc2ZqzMrB2yh3fYTLMycEmaNQB6jtV6vSA52L4enOG0ZkmPQF
-	S51SlYaPGQfukWfIRT6k3q4ISw38K+WkiYxRgRf9j8c5kv/kFnKumQ4Iw+1VyLSdvWsr
-	bT2Q==
+	Sat, 27 Dec 2014 20:09:25 +0000 (UTC)
+Received: from [216.82.254.211] by server-17.bemta-7.messagelabs.com id
+	E1/B5-02679-9501F945; Sat, 27 Dec 2014 20:02:33 +0000
+X-Env-Sender: Alex.Gonzalez@digi.com
+X-Msg-Ref: server-13.tower-201.messagelabs.com!1419710553!17110081!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.12.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 6450 invoked from network); 27 Dec 2014 20:02:33 -0000
+Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-13.tower-201.messagelabs.com with RC4-SHA encrypted SMTP;
+	27 Dec 2014 20:02:33 -0000
+Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.389.2;
+	Sat, 27 Dec 2014 14:02:30 -0600
+Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.210.2;
+	Sat, 27 Dec 2014 14:02:31 -0600
+Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
+	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0210.002;
+	Sat, 27 Dec 2014 21:02:28 +0100
+From: "Gonzalez, Alex" <Alex.Gonzalez@digi.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-java] Exception running x11 application
+Thread-Index: AdAiEApG04AXX9OOQuGqDQn/rXPS9Q==
+Date: Sat, 27 Dec 2014 20:02:28 +0000
+Message-ID: <02BDCB585301A044B5DBBDB58DDFDA0113EDF7@dor-sms-xch01.digi.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [95.22.141.150]
+x-kse-antivirus-interceptor-info: scan successful
+x-kse-antivirus-info: Clean
 MIME-Version: 1.0
-X-Received: by 10.170.99.6 with SMTP id q6mr5084678yka.105.1419710376898; Sat,
-	27 Dec 2014 11:59:36 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.171.132 with HTTP; Sat, 27 Dec 2014 11:59:36 -0800 (PST)
-In-Reply-To: <549F0F3B.4010901@gmail.com>
-References: <cover.1419700394.git.akuster808@gmail.com>
-	<c46d487b35f71ff4a9ecbc02ab17fde4ddd0a506.1419700394.git.akuster808@gmail.com>
-	<CAP9ODKpBgYNd7+=D6+9LwP1ndYQ9w4cga2QVLxLfVJG74dSFEw@mail.gmail.com>
-	<549F0F3B.4010901@gmail.com>
-Date: Sat, 27 Dec 2014 17:59:36 -0200
-X-Google-Sender-Auth: jgdU0WFugYqif3r3CFMluyMLSB4
-Message-ID: <CAP9ODKo48UgE7HYKcX1Ay1=rGoj9Utm-=+yWvy90P-OD3BEv6Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 11/27] lvm2: add lvm.con to CONFFILES
+Subject: [meta-java] Exception running x11 application
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,65 +55,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 19:59:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 27 Dec 2014 20:09:26 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Ok, you got me. Go ahead and merge it as is.
-
-On Sat, Dec 27, 2014 at 5:57 PM, akuster808 <akuster808@gmail.com> wrote:
-> Hmm, I got it that way from Master.
->
-> do we really fix that ?
->
-> - armin
->
->
-> On 12/27/2014 11:27 AM, Otavio Salvador wrote:
->>
->> There is a typo in the short log. *conf*.
->>
->> On Sat, Dec 27, 2014 at 3:21 PM, Armin Kuster <akuster808@gmail.com>
->> wrote:
->>>
->>> From: Liu Jian <jian.liu@windriver.com>
->>>
->>> * Files will be over written when updating using rpm.
->>>
->>> * If there is no %config micro before the file in the spec file,
->>>    this file will be over-written after updating this package
->>>    using rpm. This will make our settings lost.
->>>
->>> Signed-off-by: Jian Liu <jian.liu@windriver.com>
->>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->>> ---
->>>   meta-oe/recipes-support/lvm2/lvm2.inc | 2 ++
->>>   1 file changed, 2 insertions(+)
->>>
->>> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc
->>> b/meta-oe/recipes-support/lvm2/lvm2.inc
->>> index 1bbb158..42f6e3a 100644
->>> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
->>> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
->>> @@ -48,3 +48,5 @@ FILES_${PN} += "${libdir}/device-mapper/*.so
->>> ${base_libdir}/udev"
->>>   FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
->>>
->>>   RDEPENDS_${PN} = "bash"
->>> +
->>> +CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
->>> --
->>> 1.9.1
->>>
->>
->>
->>
->
-
-
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Hi,=0A=
+=0A=
+When running an example graphical application on X11 I get the following ex=
+ception:=0A=
+=0A=
+Exception in thread "main" java.awt.AWTError: Toolkit not found: sun.awt.X1=
+1.XToolkit=0A=
+        at java.awt.Toolkit$2.run(Toolkit.java:875)=0A=
+        at java.security.AccessController.doPrivileged(Native Method)=0A=
+        at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:860)=0A=
+        at java.awt.Toolkit.getEventQueue(Toolkit.java:1730)=0A=
+        at java.awt.EventQueue.invokeLater(EventQueue.java:1217)=0A=
+        at javax.swing.SwingUtilities.invokeLater(SwingUtilities.java:1287)=
+=0A=
+        at HelloWorldSwing.main(HelloWorldSwing.java:17)=0A=
+=0A=
+This is similar to an issue reported for the dora branch on https://github.=
+com/woglinde/meta-java/issues/60, however the suggested revert leaves a non=
+ buildable system.=0A=
+=0A=
+Has anyone succeeded in running a graphical java application over X11?=0A=
+=0A=
+Thanks,=0A=
+Alex=0A=
+=0A=
+=0A=
+=0A=
 
