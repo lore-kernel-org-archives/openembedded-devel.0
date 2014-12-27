@@ -1,42 +1,40 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id F3A09713B9
+Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 96B6D713B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:29 +0000 (UTC)
-Received: by mail-pa0-f42.google.com with SMTP id et14so14836482pad.29
+	Sat, 27 Dec 2014 17:22:31 +0000 (UTC)
+Received: by mail-pd0-f175.google.com with SMTP id g10so14575531pdj.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:30 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references:mime-version:content-type:content-transfer-encoding;
-	bh=NFUkAVch6iNNCDrqw/ILsKA/iDfChdYSTO4C3Pbbh6I=;
-	b=qlyABqo5CbxeTe3b7uBIs0GK6a6VM3BJ6f/FsEpDdKcL2xpKhes9+o8QR8Iwm/bGfK
-	vxtSY52WqvkgyxHBFh9xN128KPL0yIIZ1vg0fF/cQiEQImuAPgQLBdnqzUfAxf7yZKWl
-	bOYmqQY5lGn3U5zBaZ6b8D3UiaRZKwheNHY3KAfb/LM9ajEMkf8Wizz0GhD1qDLJyVb5
-	fWlnJnlAjE5DcF1BYIwBjbwuVqJqCoMiio1akDYq1yJfmDtsLTLVfRJeAnUclkFhzndy
-	1oYUgqV4TJ0glIL1TvZWWb/nICdic8jyLuWNnCOo7FIABRoMcjc+xeQcXAUO+ylnp8M5
-	Tbag==
-X-Received: by 10.70.55.102 with SMTP id r6mr77622616pdp.55.1419700950421;
-	Sat, 27 Dec 2014 09:22:30 -0800 (PST)
+	:references; bh=dbACu7yJ1GaCVn2mhALhiLFQRHnd7E/ubSB7WE8EtII=;
+	b=Nl1PYR0O/9cmlfk7pNm8TZgQUJNIAWJpNBFeNNc76Mbm5PoPzvHVngfoKkcuJfBq3D
+	y335xRvy/em0x7cUKe/YNJ1uPHZOgT/6a2zTMH6LHkSJqazwH1q//tDrFekRfC8TbAwH
+	6HIB3yXYarNQOR+lEetV72eFE+Kh/JAMvRUS2jb5bXCtRiuN+vJ/gTyAiuNvNMTrS2dE
+	4xyfue726fAm+20dUWjJYqXXWLfREaXIZQazekcYhvxGETafwlyi3yFc58liu7IBfDjz
+	/5E2Dp85QCtdlKP5d4wWZw2Ycd6Whmrh7vSeqetMAIBukvFscQ2u4k7KSUBsfu9KpRtF
+	UGAA==
+X-Received: by 10.70.108.232 with SMTP id hn8mr55569515pdb.99.1419700952230;
+	Sat, 27 Dec 2014 09:22:32 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.28
+	fu1sm31202444pbb.91.2014.12.27.09.22.30
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:29 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:31 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:21:56 -0800
-Message-Id: <eaf285dc302e5fce489b63c918bc085cf370fb5a.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:21:57 -0800
+Message-Id: <ad4734201b02f7acec08ad4571571e125d05b975.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Subject: [PATCH 09/27] glibmm: add perl to RDEPENDS_{PN}-dev
+Subject: [PATCH 10/27] hostapd: several fixes for init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,31 +48,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 17:22:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 27 Dec 2014 17:22:31 -0000
 
-From: Andreas Müller <schnitzeltony@googlemail.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-QA Issue: glibmm-dev requires /usr/bin/perl, but no providers in its RDEPENDS [file-rdeps]
+* restart: The stop may delay a few seconds according to different wireless
+  devices, on debian/ubuntu, the init script directly sleep 8 seconds
+  to wait the stop complete, here we add a delay function (sleep in a loop)
+  to ensure the stop is completed before start.
+* add status command.
+* add --oknodo for stop so it will not break restart if there is no
+  running process.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-connectivity/hostapd/hostapd-2.2/init  | 27 +++++++++++++++++++---
+ 1 file changed, 24 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb b/meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb
-index e68eb50..71daf9d 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb
-@@ -27,3 +27,5 @@ do_install_append() {
+diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
+index 79f74b6..8ba4e07 100644
+--- a/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
++++ b/meta-oe/recipes-connectivity/hostapd/hostapd-2.2/init
+@@ -8,6 +8,23 @@ test -f $DAEMON || exit 0
  
- FILES_${PN} = "${libdir}/lib*.so.*"
- FILES_${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/ ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
+ set -e
+ 
++# source function library
++. /etc/init.d/functions
 +
-+RDEPENDS_${PN}-dev = "perl"
++delay_stop() {
++	count=0
++	while [ $count -lt 9 ] ; do
++	        if pidof $DAEMON >/dev/null; then
++	                sleep 1
++	        else
++	                return 0
++	        fi
++		count=`expr $count + 1`
++	done
++	echo "Failed to stop $DESC."
++	return 1
++}
++
+ case "$1" in
+     start)
+ 	echo -n "Starting $DESC: "
+@@ -16,20 +33,24 @@ case "$1" in
+ 	;;
+     stop)
+ 	echo -n "Stopping $DESC: "
+-	start-stop-daemon -K -x $DAEMON
++	start-stop-daemon -K --oknodo -x $DAEMON
+ 	echo "$NAME."
+ 	;;
+     restart)
+ 	$0 stop
+-	$0 start
++	delay_stop && $0 start
+ 	;;
+     reload)
+ 	echo -n "Reloading $DESC: "
+ 	killall -HUP $(basename ${DAEMON})
+ 	echo "$NAME."
+ 	;;
++    status)
++	status $DAEMON
++	exit $?
++	;;
+     *)
+-	echo "Usage: $0 {start|stop|restart|reload}"
++	echo "Usage: $0 {start|stop|restart|reload|status}"
+ 	exit 1
+ 	;;
+ esac
 -- 
 1.9.1
 
