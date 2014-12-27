@@ -1,40 +1,40 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id B7DA672623
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B1867258B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:13 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id ft15so14510014pdb.36
+	Sat, 27 Dec 2014 17:22:16 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id kx10so14794731pab.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:14 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=AGoU5ybJ0r5/G7Tk8Sm+vjdjioaiY15ZkO0Dr1SW9lA=;
-	b=KyqVahGjJ61+pcqgAVxl2Imo11Ynweqk8ljBVHbdDkqD8MuHd1hoUryIaGYNcGB0LL
-	ZiofebGMX4BmTJUTV9T5hlsp0ProwQJGe66Nga1tbvlUWxcUpnqzf3IhmmwrtN00wQOm
-	9mze/U70SgDhGE3pVzGHASFqz8Gx8+R1YQs6dNDn8pX7LPbdqdjqLHj1hSBHLun43kQa
-	OZVwQqijG4dYTMhRGpdKjInUNQvX9XBZ05443FGMR+IxAF08SytdMJTgpIwhp7B/z2lo
-	UnqvoBYlYx+srspBU7AKkLYk+CD7Nqlcn/thQGvzDbiVQIKoNp801/sYtffieiywXBVv
-	jB3A==
-X-Received: by 10.70.35.227 with SMTP id l3mr76588367pdj.33.1419700934735;
-	Sat, 27 Dec 2014 09:22:14 -0800 (PST)
+	:references; bh=qy4T3QF2bmFIvPpvJsaaghtkERMMGmc1i5yo/2AaiiI=;
+	b=kpHXsRruygjjvuftqRC/rUrZb11wDV/FkV0AItIebDbJQUdX5abBdTjgjxwoYVnMzf
+	8YnXMEsRODUlRRvU9WYlbfZ6MLR2Y1W3qaM5anM6PoKtyjHq8iDO5rTIWdw+RtRPYUWr
+	VPf32G9ALrICjNUEx4FdKHQS5cI+e0n5WlaJS4Jg5eZGciP6krRz0QfegAblD5AhNduw
+	EKMbPgJGXum36RoBlM0kgpPBUq4py5bRcQyoZeEpO0eYZd+KYEgDUn981IO8fdhyF6Bc
+	mdYsmcRLYojb+ojtFUW3IALYgiPGZpFKWhhNcO8ErgglYdQoL+GHH6RybEzJChsEVNqy
+	LDAQ==
+X-Received: by 10.70.41.134 with SMTP id f6mr76760578pdl.25.1419700936764;
+	Sat, 27 Dec 2014 09:22:16 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.12
+	fu1sm31202444pbb.91.2014.12.27.09.22.14
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:13 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:15 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:21:48 -0800
-Message-Id: <82ce460437189e773308d3d81667938df0207d5a.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:21:49 -0800
+Message-Id: <3d563139b0ff4c29ecfdd6bb026fc1e84167b03d.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-Subject: [PATCH 01/27] imagemagick: update URI to allow fetching current and previous releases
+Subject: [PATCH 02/27] polarssl: add dependency openssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,33 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 17:22:15 -0000
+X-List-Received-Date: Sat, 27 Dec 2014 17:22:18 -0000
 
-From: Peter Bigot <pab@pabigot.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-The only version available at the original URI is patch 9.  All releases
-are available at the /releases sub-path.
+polarssl compiles with openssl to build unit test cases. If openssl
+doesn't exist, native libssl.so will be used. Then causes error:
 
-Signed-off-by: Peter A. Bigot <pab@pabigot.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+| .../bitbake_build/tmp/sysroots/x86_64-linux/usr/lib/libssl.so: error adding symbols: File in wrong format
+
+Add dependency openssl for polarssl to fix it.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
-index 454db64..7cb8f01 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
+diff --git a/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+index 8ca1b1c..7a496b7 100644
+--- a/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
++++ b/meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb
+@@ -28,6 +28,7 @@ SRC_URI = "https://polarssl.org/download/polarssl-${PV}-gpl.tgz"
+ SRC_URI[md5sum] = "d1a2b4f21727e888f143414d2e3144e6"
+ SRC_URI[sha256sum] = "318171db41335cacbb5b0047c94f1faf91442ab70a223b5223436703c9406ff1"
  
- PATCHSET = "8"
--SRC_URI = "http://www.imagemagick.org/download/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
-+SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
- "
- SRC_URI[md5sum] = "7e96f55156d72ce59c76ec93362ec72a"
- SRC_URI[sha256sum] = "51e0eb0b56e2f16be11c29086a97d474ffd07fe4eb5a9858d8a9c8e9c054c99a"
++DEPENDS = "openssl"
+ RDEPENDS_${PN} += "libcrypto"
+ EXTRA_OECMAKE = "-DUSE_SHARED_POLARSSL_LIBRARY=on"
+ 
 -- 
 1.9.1
 
