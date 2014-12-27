@@ -1,47 +1,24 @@
-Return-Path: <Alex.Gonzalez@digi.com>
-X-Greylist: delayed 412 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 27 Dec 2014 20:09:25 UTC
-Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
-	[216.82.254.113])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F0167228F
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id C60D37259A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 20:09:25 +0000 (UTC)
-Received: from [216.82.254.211] by server-17.bemta-7.messagelabs.com id
-	E1/B5-02679-9501F945; Sat, 27 Dec 2014 20:02:33 +0000
-X-Env-Sender: Alex.Gonzalez@digi.com
-X-Msg-Ref: server-13.tower-201.messagelabs.com!1419710553!17110081!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.12.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 6450 invoked from network); 27 Dec 2014 20:02:33 -0000
-Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-13.tower-201.messagelabs.com with RC4-SHA encrypted SMTP;
-	27 Dec 2014 20:02:33 -0000
-Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.389.2;
-	Sat, 27 Dec 2014 14:02:30 -0600
-Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.210.2;
-	Sat, 27 Dec 2014 14:02:31 -0600
-Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
-	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0210.002;
-	Sat, 27 Dec 2014 21:02:28 +0100
-From: "Gonzalez, Alex" <Alex.Gonzalez@digi.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-java] Exception running x11 application
-Thread-Index: AdAiEApG04AXX9OOQuGqDQn/rXPS9Q==
-Date: Sat, 27 Dec 2014 20:02:28 +0000
-Message-ID: <02BDCB585301A044B5DBBDB58DDFDA0113EDF7@dor-sms-xch01.digi.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [95.22.141.150]
-x-kse-antivirus-interceptor-info: scan successful
-x-kse-antivirus-info: Clean
+	Sat, 27 Dec 2014 21:47:11 +0000 (UTC)
+Received: (qmail 14852 invoked by uid 1003); 27 Dec 2014 21:47:10 -0000
+Received: from unknown (HELO ?192.168.1.120?) (philip@opensdr.com@108.44.89.75)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	27 Dec 2014 21:47:10 -0000
+Message-ID: <549F28D1.30500@balister.org>
+Date: Sat, 27 Dec 2014 16:46:57 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-Subject: [meta-java] Exception running x11 application
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1419700394.git.akuster808@gmail.com>	<549F096F.8040704@balister.org>
+	<549F0CF9.8090200@gmail.com>
+In-Reply-To: <549F0CF9.8090200@gmail.com>
+Subject: Re: [PATCH 00/27] [Dizzy-next] pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,36 +32,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 20:09:26 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Dec 2014 21:47:13 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Hi,=0A=
-=0A=
-When running an example graphical application on X11 I get the following ex=
-ception:=0A=
-=0A=
-Exception in thread "main" java.awt.AWTError: Toolkit not found: sun.awt.X1=
-1.XToolkit=0A=
-        at java.awt.Toolkit$2.run(Toolkit.java:875)=0A=
-        at java.security.AccessController.doPrivileged(Native Method)=0A=
-        at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:860)=0A=
-        at java.awt.Toolkit.getEventQueue(Toolkit.java:1730)=0A=
-        at java.awt.EventQueue.invokeLater(EventQueue.java:1217)=0A=
-        at javax.swing.SwingUtilities.invokeLater(SwingUtilities.java:1287)=
-=0A=
-        at HelloWorldSwing.main(HelloWorldSwing.java:17)=0A=
-=0A=
-This is similar to an issue reported for the dora branch on https://github.=
-com/woglinde/meta-java/issues/60, however the suggested revert leaves a non=
- buildable system.=0A=
-=0A=
-Has anyone succeeded in running a graphical java application over X11?=0A=
-=0A=
-Thanks,=0A=
-Alex=0A=
-=0A=
-=0A=
-=0A=
+On 12/27/2014 02:48 PM, akuster808 wrote:
+> 
+> 
+> On 12/27/2014 11:33 AM, Philip Balister wrote:
+>> What about Saul's resolvconf fixes?
+> 
+> do you mean the one in openembedded-core?
+
+Right, my brain is not in gear yet.
+
+Thanks,
+
+Philip
+
+> 
+> - armin
+>>
+>> Philip
+>>
+>> On 12/27/2014 12:21 PM, Armin Kuster wrote:
+>>> Please consider these changes for Dizzy-next
+>>>
+>>> The following changes since commit
+>>> 510b7a9d8d5dda07120df5866507742a626478c1:
+>>>
+>>>    krb5: fix CVE-2014-5351 (2014-12-01 14:24:53 +0100)
+>>>
+>>> are available in the git repository at:
+>>>
+>>>    https://github.com/akuster/meta-openembedded.git akuster/dizzy-next
+>>>    https://github.com//tree/akuster/dizzy-next
+>>>
+>>> Andreas Müller (1):
+>>>    glibmm: add perl to RDEPENDS_{PN}-dev
+>>>
+>>> Awais Belal (1):
+>>>    enca: fix broken automake
+>>>
+>>> Belal, Awais (2):
+>>>    mplayer2: use autotools-brokensep (B = S)
+>>>    mplayer2: cleanup empty directories
+>>>
+>>> Chong.Lu@windriver.com (2):
+>>>    samba: add winbind.service to winbind package
+>>>    samba: fix error messages when startup samba service
+>>>
+>>> Chris Morgan (1):
+>>>    dfu-util: Point to gitorious.org repository as gnumonks.org is down
+>>>
+>>> Gary S. Robertson (2):
+>>>    libhugetlbfs: Make cross-devel recognize all ix86 arches
+>>>    libhugetlbfs: Fix page size & text offset for arm arches
+>>>
+>>> Jackie Huang (5):
+>>>    postfix.inc: Remove references to buildmachine paths in target
+>>>      makedefs.out
+>>>    rrdtool: inherit cpan-base to help build perl modules
+>>>    rrdtool: add missing dependency on groff-native
+>>>    hostapd: several fixes for init script
+>>>    rfkill: fix the SRC_URI
+>>>
+>>> Javier Viguera (1):
+>>>    xserver-common: disable TCP connections
+>>>
+>>> Kai Kang (1):
+>>>    polarssl: add dependency openssl
+>>>
+>>> Kang Kai (2):
+>>>    libnet-ssleay-perl: avoid host contamination
+>>>    meta-gnome: fix typo of directory name
+>>>
+>>> Liu Jian (1):
+>>>    lvm2: add lvm.con to CONFFILES
+>>>
+>>> Martin Jansa (3):
+>>>    iotop: Drop python-distutils from RDEPENDS
+>>>    PNBLACKLIST: use weak assignments
+>>>    xf86-video-glamo: fix build with xserver 1.16
+>>>
+>>> Peter Bigot (3):
+>>>    imagemagick: update URI to allow fetching current and previous
+>>>      releases
+>>>    obexd: conflict with bluez5
+>>>    obex-data-server: conflict with bluez5
+>>>
+>>> Robert Yang (1):
+>>>    libcanberra: fix installed-vs-shipped warning
+>>>
+>>> Wenzong Fan (1):
+>>>    sethdlc: fix host contamination
+>>>
+>>>   .../recipes-filesystems/ifuse/ifuse_1.1.2.bb       |  2 +-
+>>>   .../gnome-mplayer/gnome-mplayer_1.0.5.bb           |  2 +-
+>>>   meta-gnome/recipes-connectivity/obex/obexd_0.48.bb |  2 +
+>>>   .../glade/glade3_%.bbappend                        |  0
+>>>   meta-gnome/recipes-gnome/gcr/gcr_3.8.2.bb          |  2 +-
+>>>   .../gnome-menus/gnome-menus3_3.10.1.bb             |  2 +-
+>>>   .../gnome-panel/gnome-panel3_3.0.2.bb              |  2 +-
+>>>   .../recipes-gnome/gweather/libgweather3_3.0.2.bb   |  2 +-
+>>>   meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb   |  2 +-
+>>>   .../recipes-mediacentre/xbmc/xbmc_git.bb           |  2 +-
+>>>   .../coriander/coriander_2.0.2.bb                   |  2 +-
+>>>   .../dleyna/renderer-service-upnp_0.3.0.bb          |  2 +-
+>>>   .../polarssl/polarssl_1.3.8.bb                     |  1 +
+>>>   .../files/sethdlc-fix-host-contamination.patch     | 42
+>>> ++++++++++++++++
+>>>   .../recipes-connectivity/sethdlc/sethdlc.bb        |  3 +-
+>>>   .../recipes-daemons/postfix/postfix.inc            |  5 ++
+>>>   .../lksctp-tools/lksctp-tools_1.0.16.bb            |  2 +-
+>>>   .../0001-Makefile-Recognize-all-ix86-arches.patch  | 32 ++++++++++++
+>>>   ...rch64-fix-page-size-not-properly-computed.patch | 32 ------------
+>>>   ...s-arm-arches-fix-page-size-and-text-offse.patch | 57
+>>> ++++++++++++++++++++++
+>>>   .../libhugetlbfs/libhugetlbfs_git.bb               |  3 +-
+>>>   .../recipes-connectivity/hostapd/hostapd-2.2/init  | 27 ++++++++--
+>>>   .../libimobiledevice/libimobiledevice_1.1.4.bb     |  2 +-
+>>>   .../obex/obex-data-server_0.4.6.bb                 |  1 +
+>>>   meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb  |  2 +-
+>>>   meta-oe/recipes-connectivity/samba/samba-basic.inc |  1 +
+>>>   meta-oe/recipes-connectivity/samba/samba.inc       |  8 ++-
+>>>   meta-oe/recipes-connectivity/soft66/soft66_git.bb  |  2 +-
+>>>   .../zeroc-ice/zeroc-ice_3.5.1.bb                   |  2 +-
+>>>   meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb     |  2 +
+>>>   meta-oe/recipes-extended/iotop/iotop_0.4.4.bb      |  2 +-
+>>>   meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb  | 20 ++++----
+>>>   .../recipes-extended/subsurface/subsurface_git.bb  |  2 +-
+>>>   meta-oe/recipes-extended/zsh/zsh.inc               |  2 +-
+>>>   .../recipes-graphics/clutter/clutter-box2d_git.bb  |  2 +-
+>>>   meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb        |  2 +-
+>>>   .../xorg-driver/xf86-input-mtev_git.bb             |  2 +-
+>>>   ...-glamo.h-use-const-for-jbt6k74_state_path.patch | 29 +++++++++++
+>>>   .../xorg-driver/xf86-video-glamo_git.bb            |  1 +
+>>>   ...15-xserver-common-disable-TCP-connections.patch | 24 +++++++++
+>>>   .../xserver-common/xserver-common_1.34.bb          |  1 +
+>>>   meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |  5 +-
+>>>   meta-oe/recipes-navigation/omgps/omgps_svn.bb      |  2 +-
+>>>   meta-oe/recipes-qt/qconnman/qconnman-e_git.bb      |  2 +-
+>>>   meta-oe/recipes-qt/qconnman/qconnman_git.bb        |  2 +-
+>>>   meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb  |  2 +-
+>>>   meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb |  2 +-
+>>>   meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb   |  9 ++--
+>>>   meta-oe/recipes-support/emacs/emacs_23.4.bb        |  2 +-
+>>>   .../enca/enca/libenca-003-iconv.patch              | 28 +++++++++++
+>>>   meta-oe/recipes-support/enca/enca_1.9.bb           |  3 +-
+>>>   .../imagemagick/imagemagick_6.8.9.bb               |  2 +-
+>>>   .../libcanberra/libcanberra_0.29.bb                |  2 +-
+>>>   meta-oe/recipes-support/lvm2/lvm2.inc              |  2 +
+>>>   .../recipes-support/maliit/maliit-framework_git.bb |  2 +-
+>>>   .../recipes-support/maliit/maliit-plugins_git.bb   |  2 +-
+>>>   .../recipes-support/openmotif/openmotif_2.3.3.bb   |  2 +-
+>>>   .../vala-terminal/vala-terminal_git.bb             |  2 +-
+>>>   .../recipes-perl/libnet/libnet-ssleay-perl_1.65.bb |  8 ++-
+>>>   meta-webserver/recipes-php/modphp/modphp5.inc      |  2 +-
+>>>   meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb  |  2 +-
+>>>   61 files changed, 325 insertions(+), 91 deletions(-)
+>>>   rename meta-gnome/{recipe-devtools =>
+>>> recipes-devtools}/glade/glade3_%.bbappend (100%)
+>>>   create mode 100644
+>>> meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
+>>>
+>>>   create mode 100644
+>>> meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Makefile-Recognize-all-ix86-arches.patch
+>>>
+>>>   delete mode 100644
+>>> meta-oe/recipes-benchmark/libhugetlbfs/files/0001-aarch64-fix-page-size-not-properly-computed.patch
+>>>
+>>>   create mode 100644
+>>> meta-oe/recipes-benchmark/libhugetlbfs/files/0001-ld.hugetlbfs-arm-arches-fix-page-size-and-text-offse.patch
+>>>
+>>>   create mode 100644
+>>> meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0004-glamo.h-use-const-for-jbt6k74_state_path.patch
+>>>
+>>>   create mode 100644
+>>> meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+>>>
+>>>   create mode 100644
+>>> meta-oe/recipes-support/enca/enca/libenca-003-iconv.patch
+>>>
 
