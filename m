@@ -1,40 +1,40 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id DC7CE72643
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 672EC7264C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:20 +0000 (UTC)
-Received: by mail-pa0-f49.google.com with SMTP id eu11so14565559pac.8
+	Sat, 27 Dec 2014 17:22:21 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id ey11so14797185pad.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:20 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=TMjd77D+OYn4Boetgh1oupkqGvf1v8w3NedInkUnrV0=;
-	b=xx236PeBYG80XcYOcVPUCeBdNnPbatHi1zIu6yYSmE/i20VTnPDe8Q4pJ6MO0G6Jmg
-	a5KWcWF5lQdL9ck8U1BVz6m6gS62v42PrNyMBvLF5KkkUf3VK4sK/T0C5qmp619NzbB8
-	U33jHF/VlZCXwLhIvIdA0Ychux2Qa5yhILT2f8BRulqyQcW1sJ1cVCRPudnUHkS/SSeW
-	fNXqiPLz1Uc+18OTYRpFtddRe6FoDz6Smobe9WUDFvp/w2H5lmXLwYrkmIBBYFeMLhRF
-	lYNfYL0j3GMiI4eHvk7I+f0Lg9JK5ILAxNLMamLBzlZLuqC6cky/0VgjnDTqQwHmOtNr
-	mmwA==
-X-Received: by 10.70.129.106 with SMTP id nv10mr75657388pdb.7.1419700940823;
-	Sat, 27 Dec 2014 09:22:20 -0800 (PST)
+	:references; bh=d9hgd3WY+6AFN8LFZRUpmu9RqbOkIGwCZwkdPo3i2dY=;
+	b=vwkv7MndExrBnzbzsKY60Tv9fAr6rSRUVKMpBUiY7FWTd668EjycOcplkrr6lvXFEg
+	0luRwoGR6l4ob0MBGSQP7mV3DqaG/vjJlDwIbdHqvR+tN2ktluqHOhaLWnpiqwkElIsG
+	5ijZIxTyYlpSZ6TS/dRQVAvs3kA6mzIczSEuUBexCE8AnZ76Piavx0Q53ySL7s02AoNH
+	khHhkWbeZJB2921fYbrj9S0yezOVh9zJwkZiwpc96e1bQDbFgx2Ks0o24I0vhji1EygP
+	zxngg/SsXz4dII4ycXl+BrymoEiMsnuO6THRRWbRAn/SLiFxaqrs+vvkFf6Q69rsfmkY
+	sfRA==
+X-Received: by 10.70.31.197 with SMTP id c5mr50236426pdi.93.1419700942730;
+	Sat, 27 Dec 2014 09:22:22 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.18
+	fu1sm31202444pbb.91.2014.12.27.09.22.20
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:19 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:21 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:21:51 -0800
-Message-Id: <80f3a32d734bab595ee88ef5aed718b4dc0b0c3c.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:21:52 -0800
+Message-Id: <e324dd37cfc2f89eb9d392dac700416cd281db2c.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-Subject: [PATCH 04/27] samba: add winbind.service to winbind package
+Subject: [PATCH 05/27] samba: fix error messages when startup samba service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,34 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 17:22:21 -0000
+X-List-Received-Date: Sat, 27 Dec 2014 17:22:23 -0000
 
 From: "Chong.Lu@windriver.com" <Chong.Lu@windriver.com>
 
-This solves the following warning:
+This solves the following error messages when startup samba:
 
-lib32-samba-3.6.24: lib32-samba: Files/directories were installed but not shipped
-  /lib/systemd/system/winbind.service [installed-vs-shipped]
+  Unable to open new log file '/var/log/samba/log.smbd': No such file or directory
 
 Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-connectivity/samba/samba-basic.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-connectivity/samba/samba.inc | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba-basic.inc b/meta-oe/recipes-connectivity/samba/samba-basic.inc
-index d0fa8e6..e9f891f 100644
---- a/meta-oe/recipes-connectivity/samba/samba-basic.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba-basic.inc
-@@ -40,6 +40,7 @@ FILES_winbind = "${sbindir}/winbindd \
-                  ${bindir}/wbinfo \
-                  ${bindir}/ntlm_auth \
-                  ${sysconfdir}/init.d/winbind \
-+                 ${systemd_unitdir}/system/winbind.service \
- "
- FILES_libwinbind = "${libdir}/idmap/*.so \
-                     ${libdir}/pdb \
+diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+index 4392821..68e1b1f 100644
+--- a/meta-oe/recipes-connectivity/samba/samba.inc
++++ b/meta-oe/recipes-connectivity/samba/samba.inc
+@@ -35,7 +35,7 @@ EXTRA_OECONF='--disable-cups \
+               --with-privatedir=${sysconfdir}/samba/private \
+               --with-lockdir=${localstatedir}/lock \
+               --with-piddir=${localstatedir}/run \
+-              --with-logfilebase=${localstatedir}/log \
++              --with-logfilebase=${localstatedir}/log/samba \
+               --libdir=${libdir} \
+               --with-mandir=${mandir} \
+               --with-swatdir=${datadir}/swat \
+@@ -123,6 +123,12 @@ do_install_append() {
+     sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
+         -e 's,@SBINDIR@,${sbindir},g' \
+         -i ${D}${systemd_unitdir}/system/*.service
++
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++	install -d ${D}${sysconfdir}/tmpfiles.d
++	echo "d ${localstatedir}/log/samba 0755 root root -" \
++            > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
++    fi
+ }
+ 
+ DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
 -- 
 1.9.1
 
