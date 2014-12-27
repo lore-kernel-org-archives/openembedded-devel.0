@@ -1,40 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D71E72886
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f172.google.com (mail-yk0-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 4236A7282E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:45:06 +0000 (UTC)
-Received: by mail-wg0-f53.google.com with SMTP id l18so15930517wgh.26
+	Sat, 27 Dec 2014 19:26:59 +0000 (UTC)
+Received: by mail-yk0-f172.google.com with SMTP id 131so5617062ykp.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:45:07 -0800 (PST)
+	Sat, 27 Dec 2014 11:27:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Q+yDygYgtlPo7neHJOjdBmkfvQ2uoHulHqdBwtRc9zk=;
-	b=KwA/O0mUQDmll9VigVVwHzZ2SKxJ+mC8/77g1StOFjqsLMGcmsQfI19mnIThRbb+VS
-	ruTyOxlbMZ5mVWA9YHSLYWqWGc4GrJY/LuTrl9Ue2zMI3WAb+QVbm3nO0SzijMdCNABc
-	fYSySdjWs5+qGiDIM7XwGWw5UfJ/NxR3BBAImd/75yzS54CodIf/HWJYjDKPCT7ef2Rd
-	gy2RtpUzqzuBeGJBrDFIFNPpSFMILbiHKYaNfxmW6/G2KgmEaVLXP8VxM3arBtKsEWgs
-	PKyzyOuck/WzQBkaSKR7Ko/wQKKeX2h8lKDXiSyr6lfxHK2EREqwk4quKXvgD5I4vo+j
-	lrjA==
-X-Received: by 10.180.205.163 with SMTP id lh3mr80477743wic.63.1419702306794; 
-	Sat, 27 Dec 2014 09:45:06 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	u9sm42969749wjy.37.2014.12.27.09.45.05
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 27 Dec 2014 09:45:05 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 27 Dec 2014 18:45:13 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141227174513.GH2465@jama>
-References: <cover.1419700394.git.akuster808@gmail.com>
-	<8769665d9efb22405435d730c01c1a41d7251b29.1419700394.git.akuster808@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=uw1ETW3Gh0Ndw8VF/I5fLg3aaWmWq1tMC54yx5XYTdI=;
+	b=kZEaIpZKWb8NbrfNJMtILAjNmzm6VSbUbeG0PpQ8a8sGWWsSWntxYUZOtMlYgIpsJH
+	GOwSYS4LvWf78slkeLBGbDRdr3oBe5Ls1VFWqJzwF4U+KIwYNHCNEH5URbFXc7n10Iwp
+	ISt3U349mujIyN57LRnkDlSmr3ClJvi5renotWcDncKKlTJ2PothV5maIAvtu4kIUa8I
+	7rSbNRhcFVOhQFzXxbAflQUeUe0y8ZH/xsrVpFtxj9kTJPxh+ScOwGlDdUwmpviG8vz5
+	OUTIcv8HwZP8DFfOEsxwPoiM3FYsLjOKGHEhEqGxFrRMgHbDJBb07RLHyQr48wzlgunl
+	xCuA==
 MIME-Version: 1.0
-In-Reply-To: <8769665d9efb22405435d730c01c1a41d7251b29.1419700394.git.akuster808@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: otavio@ossystems.com.br
-Subject: Re: [PATCH 27/27] xf86-video-glamo: fix build with xserver 1.16
+X-Received: by 10.236.110.36 with SMTP id t24mr4556014yhg.102.1419708420258;
+	Sat, 27 Dec 2014 11:27:00 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.171.132 with HTTP; Sat, 27 Dec 2014 11:27:00 -0800 (PST)
+In-Reply-To: <c46d487b35f71ff4a9ecbc02ab17fde4ddd0a506.1419700394.git.akuster808@gmail.com>
+References: <cover.1419700394.git.akuster808@gmail.com>
+	<c46d487b35f71ff4a9ecbc02ab17fde4ddd0a506.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 17:27:00 -0200
+X-Google-Sender-Auth: c5lOyHpALIEw5YzXOPL9CWKHDZs
+Message-ID: <CAP9ODKpBgYNd7+=D6+9LwP1ndYQ9w4cga2QVLxLfVJG74dSFEw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Armin Kuster <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 11/27] lvm2: add lvm.con to CONFFILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,110 +45,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 17:45:09 -0000
-X-Groupsio-MsgNum: 53489
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="rCb8EA+9TsBVtA92"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Dec 2014 19:27:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
---rCb8EA+9TsBVtA92
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+There is a typo in the short log. *conf*.
 
-On Sat, Dec 27, 2014 at 09:22:14AM -0800, Armin Kuster wrote:
-> From: Martin Jansa <Martin.Jansa@gmail.com>
-
-This shoudn't be needed in dizzy which has old enough xserver.
-
+On Sat, Dec 27, 2014 at 3:21 PM, Armin Kuster <akuster808@gmail.com> wrote:
+> From: Liu Jian <jian.liu@windriver.com>
+>
+> * Files will be over written when updating using rpm.
+>
+> * If there is no %config micro before the file in the spec file,
+>   this file will be over-written after updating this package
+>   using rpm. This will make our settings lost.
+>
+> Signed-off-by: Jian Liu <jian.liu@windriver.com>
 > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > Signed-off-by: Armin Kuster <akuster808@gmail.com>
 > ---
->  ...-glamo.h-use-const-for-jbt6k74_state_path.patch | 29 ++++++++++++++++=
-++++++
->  .../xorg-driver/xf86-video-glamo_git.bb            |  1 +
->  2 files changed, 30 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo=
-/0004-glamo.h-use-const-for-jbt6k74_state_path.patch
->=20
-> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0004-g=
-lamo.h-use-const-for-jbt6k74_state_path.patch b/meta-oe/recipes-graphics/xo=
-rg-driver/xf86-video-glamo/0004-glamo.h-use-const-for-jbt6k74_state_path.pa=
-tch
-> new file mode 100644
-> index 0000000..a820371
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0004-glamo.h-=
-use-const-for-jbt6k74_state_path.patch
-> @@ -0,0 +1,29 @@
-> +From 180a00634f351a09ceabc5695d8e1acc3e585501 Mon Sep 17 00:00:00 2001
-> +From: Martin Jansa <Martin.Jansa@gmail.com>
-> +Date: Fri, 12 Dec 2014 12:00:10 +0100
-> +Subject: [PATCH] glamo.h: use const for jbt6k74_state_path
+>  meta-oe/recipes-support/lvm2/lvm2.inc | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+> index 1bbb158..42f6e3a 100644
+> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
+> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+> @@ -48,3 +48,5 @@ FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
+>  FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
+>
+>  RDEPENDS_${PN} = "bash"
 > +
-> +* fix build issue with xserver 1.16:
-> +  glamo-driver.c:501:32: error: assignment discards 'const' qualifier fr=
-om pointer target type [-Werror]
-> +
-> +Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> +---
-> + src/glamo.h | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/src/glamo.h b/src/glamo.h
-> +index 5fd5c04..5e072be 100644
-> +--- a/src/glamo.h
-> ++++ b/src/glamo.h
-> +@@ -148,7 +148,7 @@ typedef struct {
-> + #endif
-> +=20
-> + #ifdef JBT6K74_SET_STATE
-> +-    char *jbt6k74_state_path;
-> ++    const char *jbt6k74_state_path;
-> +     char saved_jbt6k74_state[14];
-> + #endif
-> +=20
-> +--=20
-> +2.1.3
-> +
-> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb=
- b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-> index 38c12f3..78c6564 100644
-> --- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-> @@ -14,6 +14,7 @@ SRC_URI =3D "git://git.openmoko.org/git/xf86-video-glam=
-o.git;branch=3Dmaster \
->             file://0001-fix-build-with-KMS-disabled.patch \
->             file://0003-glamo-driver-adapt-to-xserver-0.13-video-API.patc=
-h \
->             file://0001-glamo-driver-remove-references-to-mibstore.patch =
-\  =20
-> +           file://0004-glamo.h-use-const-for-jbt6k74_state_path.patch \
->  "
-> =20
->  S =3D "${WORKDIR}/git"
-> --=20
+> +CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
+> --
 > 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---rCb8EA+9TsBVtA92
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
-iEYEARECAAYFAlSe8CkACgkQN1Ujt2V2gBxE+QCdH+RtMHWthxTJsAWtgHZPE1Oy
-D8wAn1AeTxP5st5U8UZHL9h3Ix+riDv/
-=bxaL
------END PGP SIGNATURE-----
-
---rCb8EA+9TsBVtA92--
