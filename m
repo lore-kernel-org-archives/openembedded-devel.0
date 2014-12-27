@@ -1,40 +1,40 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 1619C72623
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id DC7CE72643
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:17 +0000 (UTC)
-Received: by mail-pd0-f175.google.com with SMTP id g10so14575373pdj.20
+	Sat, 27 Dec 2014 17:22:20 +0000 (UTC)
+Received: by mail-pa0-f49.google.com with SMTP id eu11so14565559pac.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:18 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=OTJ476LWVWIaprdfe981FwsrcwnVqOXMWnVnbqbJPk8=;
-	b=DbzgqUhOY42y5Vh5bv1JC5AgDA2QLxnR0I+hsRQgcwP7qSfWg6l1AjtnQPLHze6sVD
-	t7QkRhBnME8bTvrj58blNMWUEOuwhaK5f5qZHYjqUa8MJFnYPjrQmUf7DbYFxAKPeQep
-	vrdMJwE1aVdFRamQBzKSnzZ0BTlg5ty3vBUBIV6XSzpXVBdy2j4um3HlY1of8pY3Og1z
-	Rpb4faaihv89/Ge8ConMK/rgZSRURZHPPwMvEM2AsFdz5mzsXpwbqkjJgc9dWelzPcqS
-	YdM4AKj234niKmPk/4lRLumyHMzh6FflX6BBnRW9eNs7hKxqpP9wRiy2aXLV0UfYbdSU
-	jmRQ==
-X-Received: by 10.70.103.238 with SMTP id fz14mr60959118pdb.79.1419700938783; 
-	Sat, 27 Dec 2014 09:22:18 -0800 (PST)
+	:references; bh=TMjd77D+OYn4Boetgh1oupkqGvf1v8w3NedInkUnrV0=;
+	b=xx236PeBYG80XcYOcVPUCeBdNnPbatHi1zIu6yYSmE/i20VTnPDe8Q4pJ6MO0G6Jmg
+	a5KWcWF5lQdL9ck8U1BVz6m6gS62v42PrNyMBvLF5KkkUf3VK4sK/T0C5qmp619NzbB8
+	U33jHF/VlZCXwLhIvIdA0Ychux2Qa5yhILT2f8BRulqyQcW1sJ1cVCRPudnUHkS/SSeW
+	fNXqiPLz1Uc+18OTYRpFtddRe6FoDz6Smobe9WUDFvp/w2H5lmXLwYrkmIBBYFeMLhRF
+	lYNfYL0j3GMiI4eHvk7I+f0Lg9JK5ILAxNLMamLBzlZLuqC6cky/0VgjnDTqQwHmOtNr
+	mmwA==
+X-Received: by 10.70.129.106 with SMTP id nv10mr75657388pdb.7.1419700940823;
+	Sat, 27 Dec 2014 09:22:20 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.16
+	fu1sm31202444pbb.91.2014.12.27.09.22.18
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:17 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:19 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:21:50 -0800
-Message-Id: <bbb3ee05cb1aedd820f38424c339cda4e43e5977.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:21:51 -0800
+Message-Id: <80f3a32d734bab595ee88ef5aed718b4dc0b0c3c.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-Subject: [PATCH 03/27] postfix.inc: Remove references to buildmachine paths in target makedefs.out
+Subject: [PATCH 04/27] samba: add winbind.service to winbind package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,37 +50,32 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 27 Dec 2014 17:22:21 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: "Chong.Lu@windriver.com" <Chong.Lu@windriver.com>
 
-Fixed the buildpaths QA issue:
-ERROR: QA Issue: File
-/work/core2-64-wrs-linux/postfix/2.11.1-r0/packages-split/postfix/etc/postfix/makedefs.out
-in package contained reference to tmpdir [buildpaths]
+This solves the following warning:
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+lib32-samba-3.6.24: lib32-samba: Files/directories were installed but not shipped
+  /lib/systemd/system/winbind.service [installed-vs-shipped]
+
+Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-daemons/postfix/postfix.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-connectivity/samba/samba-basic.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index c58787e..63de2a0 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -201,6 +201,11 @@ do_install_append_class-native() {
- 	ln -sf ../sbin/sendmail.postfix ${D}${bindir}/mailq
- }
- 
-+do_install_append_class-target() {
-+	# Remove references to buildmachine paths in target makedefs.out
-+	sed -i -e 's:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
-+}
-+
- NATIVE_INSTALL_WORKS = "1"
- 
- ALTERNATIVE_${PN} = "sendmail"
+diff --git a/meta-oe/recipes-connectivity/samba/samba-basic.inc b/meta-oe/recipes-connectivity/samba/samba-basic.inc
+index d0fa8e6..e9f891f 100644
+--- a/meta-oe/recipes-connectivity/samba/samba-basic.inc
++++ b/meta-oe/recipes-connectivity/samba/samba-basic.inc
+@@ -40,6 +40,7 @@ FILES_winbind = "${sbindir}/winbindd \
+                  ${bindir}/wbinfo \
+                  ${bindir}/ntlm_auth \
+                  ${sysconfdir}/init.d/winbind \
++                 ${systemd_unitdir}/system/winbind.service \
+ "
+ FILES_libwinbind = "${libdir}/idmap/*.so \
+                     ${libdir}/pdb \
 -- 
 1.9.1
 
