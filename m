@@ -1,40 +1,40 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2236D713B9
+Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 281B07264D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:35 +0000 (UTC)
-Received: by mail-pd0-f181.google.com with SMTP id v10so14573255pde.40
+	Sat, 27 Dec 2014 17:22:33 +0000 (UTC)
+Received: by mail-pd0-f179.google.com with SMTP id fp1so14467081pdb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:36 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=v3jKJ1Df5BgLyRE/Roz9HskQ60LOuyeINhiSlW1KAf0=;
-	b=oOWaXUKMsxSTXB2IxbHZ8sxeH5Vb7hjrU+fZH/f42PX12OcODLo1TY+5h2L+aVJ84y
-	6GJwgbg27tJUGJysojao7ERh4JP1lxtsGc+FfTJ2XZIx2rY9Y9bjOYzPH1gj25AuWGA1
-	+Lt0tUQLbEQOQg7hMURlCieuvnpoJlOt76kY6/jxtyTbhdSBZnVO1tQygbOqfJOHjDZS
-	c0s1tfSETKWqi71EUQZj8Xh4ubkpFuWeRTPNYwyDaanQGY740f9cNE6CumuWYHi6JUBx
-	b3ZOLBZE9vsw/oxvWb2hE8tkI+93AhJJviAXxj5P1EFMGpVjXpqZio3SZmyI8O5rbx2Y
-	7RKw==
-X-Received: by 10.66.150.74 with SMTP id ug10mr77845668pab.68.1419700956342;
-	Sat, 27 Dec 2014 09:22:36 -0800 (PST)
+	:references; bh=zvdhHiqsLdLN0uvK1Dxu6MDcVGRZHq1JkNBwqBcYSg0=;
+	b=mzgtoh+SGsFqFlt53CsqmMsmEvtdNjNqCHpe5sy9Gjxk2RIFyNfJVdaTTvLukyQCwE
+	4ymr86Nr+RzYjhsFYQ1Cl7JszB9gFH7giq72PoLIjQnkEgOLsJxWa4KvJfsgO7HvquLb
+	lBF/JikOjUuZgFF9dfam8GaZv9rbjwSy2KGehwdCUX/Xz3/XFd3WPIjTt7NydkAiAh9W
+	a1Ra6W326E2v0frV0E50vTcx5gW+muNB2nODpX0rnDScTOGvqtR4i+YyqX0w6MWFFMI2
+	AhyyQ2E4q41WkSas7yFCHP8iQTFOBvnbNDD2Pof2E2eodfkaomlwQkovbHgGysveb+oO
+	fY5w==
+X-Received: by 10.66.184.175 with SMTP id ev15mr43981101pac.78.1419700954478; 
+	Sat, 27 Dec 2014 09:22:34 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.34
+	fu1sm31202444pbb.91.2014.12.27.09.22.32
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:35 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:33 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:21:59 -0800
-Message-Id: <6db21347aab2dccd6f205aa6f60b273f70c8e331.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:21:58 -0800
+Message-Id: <c46d487b35f71ff4a9ecbc02ab17fde4ddd0a506.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-Subject: [PATCH 12/27] iotop: Drop python-distutils from RDEPENDS
+Subject: [PATCH 11/27] lvm2: add lvm.con to CONFFILES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,28 +50,31 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 27 Dec 2014 17:22:36 -0000
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: Liu Jian <jian.liu@windriver.com>
 
-* nothing in iotop is using that for normal function
+* Files will be over written when updating using rpm.
 
+* If there is no %config micro before the file in the spec file,
+  this file will be over-written after updating this package
+  using rpm. This will make our settings lost.
+
+Signed-off-by: Jian Liu <jian.liu@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/iotop/iotop_0.4.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/lvm2/lvm2.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-index 111b072..d629245 100644
---- a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-+++ b/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-@@ -20,6 +20,6 @@ do_install_append() {
-     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
- }
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 1bbb158..42f6e3a 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -48,3 +48,5 @@ FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
+ FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
  
--RDEPENDS_${PN} = "python-distutils python-curses python-textutils \
-+RDEPENDS_${PN} = "python-curses python-textutils \
-                   python-codecs python-ctypes python-pprint \
-                   python-shell"
+ RDEPENDS_${PN} = "bash"
++
++CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
 -- 
 1.9.1
 
