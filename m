@@ -1,38 +1,40 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
 	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B42F713B9
+	by mail.openembedded.org (Postfix) with ESMTP id B7DA672623
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:12 +0000 (UTC)
-Received: by mail-pd0-f177.google.com with SMTP id ft15so14469275pdb.22
+	Sat, 27 Dec 2014 17:22:13 +0000 (UTC)
+Received: by mail-pd0-f177.google.com with SMTP id ft15so14510014pdb.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:12 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=ME3GHud5CkSssdAqeiofShzTQF1M90NiBYVyAX0jHlo=;
-	b=hOJnk+aueA8DVdRDl18eaVtWxFN5GqJ+0xBNxBuMFs0+oB7uOrY0bBTPdu4T2/numK
-	4n7w08+3fkutko20M3LdyFrX/2qPKjAqOfD85yCSXaca0IeHHDCeU4WJJxydIkqvC3h0
-	m6uweikE97VGKMEzIo/z/tx528+duV7Vz7hTVWq9Fd/3R0yiULROG7Rd7PPjJf3wgQnG
-	upCJEQ5zfHtw54evIiXUKXxMpM1VCEEtnbyx9RcCNL6nqKzEeeBqSBA26HQ2aJtvtMUB
-	+gNPu228EtDW3foCvxx173KbucjKBn5aaZcMa+h/T+dmKkO9BBqQUsMmBnScYqcTSN0R
-	dLsw==
-X-Received: by 10.70.103.74 with SMTP id fu10mr76261055pdb.53.1419700932559;
-	Sat, 27 Dec 2014 09:22:12 -0800 (PST)
+	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
+	:references; bh=AGoU5ybJ0r5/G7Tk8Sm+vjdjioaiY15ZkO0Dr1SW9lA=;
+	b=KyqVahGjJ61+pcqgAVxl2Imo11Ynweqk8ljBVHbdDkqD8MuHd1hoUryIaGYNcGB0LL
+	ZiofebGMX4BmTJUTV9T5hlsp0ProwQJGe66Nga1tbvlUWxcUpnqzf3IhmmwrtN00wQOm
+	9mze/U70SgDhGE3pVzGHASFqz8Gx8+R1YQs6dNDn8pX7LPbdqdjqLHj1hSBHLun43kQa
+	OZVwQqijG4dYTMhRGpdKjInUNQvX9XBZ05443FGMR+IxAF08SytdMJTgpIwhp7B/z2lo
+	UnqvoBYlYx+srspBU7AKkLYk+CD7Nqlcn/thQGvzDbiVQIKoNp801/sYtffieiywXBVv
+	jB3A==
+X-Received: by 10.70.35.227 with SMTP id l3mr76588367pdj.33.1419700934735;
+	Sat, 27 Dec 2014 09:22:14 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.10
+	fu1sm31202444pbb.91.2014.12.27.09.22.12
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:11 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:13 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:21:47 -0800
-Message-Id: <cover.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:21:48 -0800
+Message-Id: <82ce460437189e773308d3d81667938df0207d5a.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH 00/27] [Dizzy-next] pull request
+In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
+References: <cover.1419700394.git.akuster808@gmail.com>
+In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
+References: <cover.1419700394.git.akuster808@gmail.com>
+Subject: [PATCH 01/27] imagemagick: update URI to allow fetching current and previous releases
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,150 +49,32 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 27 Dec 2014 17:22:15 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Please consider these changes for Dizzy-next
+From: Peter Bigot <pab@pabigot.com>
 
-The following changes since commit 510b7a9d8d5dda07120df5866507742a626478c1:
+The only version available at the original URI is patch 9.  All releases
+are available at the /releases sub-path.
 
-  krb5: fix CVE-2014-5351 (2014-12-01 14:24:53 +0100)
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-are available in the git repository at:
-
-  https://github.com/akuster/meta-openembedded.git akuster/dizzy-next
-  https://github.com//tree/akuster/dizzy-next
-
-Andreas Müller (1):
-  glibmm: add perl to RDEPENDS_{PN}-dev
-
-Awais Belal (1):
-  enca: fix broken automake
-
-Belal, Awais (2):
-  mplayer2: use autotools-brokensep (B = S)
-  mplayer2: cleanup empty directories
-
-Chong.Lu@windriver.com (2):
-  samba: add winbind.service to winbind package
-  samba: fix error messages when startup samba service
-
-Chris Morgan (1):
-  dfu-util: Point to gitorious.org repository as gnumonks.org is down
-
-Gary S. Robertson (2):
-  libhugetlbfs: Make cross-devel recognize all ix86 arches
-  libhugetlbfs: Fix page size & text offset for arm arches
-
-Jackie Huang (5):
-  postfix.inc: Remove references to buildmachine paths in target
-    makedefs.out
-  rrdtool: inherit cpan-base to help build perl modules
-  rrdtool: add missing dependency on groff-native
-  hostapd: several fixes for init script
-  rfkill: fix the SRC_URI
-
-Javier Viguera (1):
-  xserver-common: disable TCP connections
-
-Kai Kang (1):
-  polarssl: add dependency openssl
-
-Kang Kai (2):
-  libnet-ssleay-perl: avoid host contamination
-  meta-gnome: fix typo of directory name
-
-Liu Jian (1):
-  lvm2: add lvm.con to CONFFILES
-
-Martin Jansa (3):
-  iotop: Drop python-distutils from RDEPENDS
-  PNBLACKLIST: use weak assignments
-  xf86-video-glamo: fix build with xserver 1.16
-
-Peter Bigot (3):
-  imagemagick: update URI to allow fetching current and previous
-    releases
-  obexd: conflict with bluez5
-  obex-data-server: conflict with bluez5
-
-Robert Yang (1):
-  libcanberra: fix installed-vs-shipped warning
-
-Wenzong Fan (1):
-  sethdlc: fix host contamination
-
- .../recipes-filesystems/ifuse/ifuse_1.1.2.bb       |  2 +-
- .../gnome-mplayer/gnome-mplayer_1.0.5.bb           |  2 +-
- meta-gnome/recipes-connectivity/obex/obexd_0.48.bb |  2 +
- .../glade/glade3_%.bbappend                        |  0
- meta-gnome/recipes-gnome/gcr/gcr_3.8.2.bb          |  2 +-
- .../gnome-menus/gnome-menus3_3.10.1.bb             |  2 +-
- .../gnome-panel/gnome-panel3_3.0.2.bb              |  2 +-
- .../recipes-gnome/gweather/libgweather3_3.0.2.bb   |  2 +-
- meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb   |  2 +-
- .../recipes-mediacentre/xbmc/xbmc_git.bb           |  2 +-
- .../coriander/coriander_2.0.2.bb                   |  2 +-
- .../dleyna/renderer-service-upnp_0.3.0.bb          |  2 +-
- .../polarssl/polarssl_1.3.8.bb                     |  1 +
- .../files/sethdlc-fix-host-contamination.patch     | 42 ++++++++++++++++
- .../recipes-connectivity/sethdlc/sethdlc.bb        |  3 +-
- .../recipes-daemons/postfix/postfix.inc            |  5 ++
- .../lksctp-tools/lksctp-tools_1.0.16.bb            |  2 +-
- .../0001-Makefile-Recognize-all-ix86-arches.patch  | 32 ++++++++++++
- ...rch64-fix-page-size-not-properly-computed.patch | 32 ------------
- ...s-arm-arches-fix-page-size-and-text-offse.patch | 57 ++++++++++++++++++++++
- .../libhugetlbfs/libhugetlbfs_git.bb               |  3 +-
- .../recipes-connectivity/hostapd/hostapd-2.2/init  | 27 ++++++++--
- .../libimobiledevice/libimobiledevice_1.1.4.bb     |  2 +-
- .../obex/obex-data-server_0.4.6.bb                 |  1 +
- meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb  |  2 +-
- meta-oe/recipes-connectivity/samba/samba-basic.inc |  1 +
- meta-oe/recipes-connectivity/samba/samba.inc       |  8 ++-
- meta-oe/recipes-connectivity/soft66/soft66_git.bb  |  2 +-
- .../zeroc-ice/zeroc-ice_3.5.1.bb                   |  2 +-
- meta-oe/recipes-core/glib-2.0/glibmm_2.36.2.bb     |  2 +
- meta-oe/recipes-extended/iotop/iotop_0.4.4.bb      |  2 +-
- meta-oe/recipes-extended/rrdtool/rrdtool_1.4.8.bb  | 20 ++++----
- .../recipes-extended/subsurface/subsurface_git.bb  |  2 +-
- meta-oe/recipes-extended/zsh/zsh.inc               |  2 +-
- .../recipes-graphics/clutter/clutter-box2d_git.bb  |  2 +-
- meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb        |  2 +-
- .../xorg-driver/xf86-input-mtev_git.bb             |  2 +-
- ...-glamo.h-use-const-for-jbt6k74_state_path.patch | 29 +++++++++++
- .../xorg-driver/xf86-video-glamo_git.bb            |  1 +
- ...15-xserver-common-disable-TCP-connections.patch | 24 +++++++++
- .../xserver-common/xserver-common_1.34.bb          |  1 +
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |  5 +-
- meta-oe/recipes-navigation/omgps/omgps_svn.bb      |  2 +-
- meta-oe/recipes-qt/qconnman/qconnman-e_git.bb      |  2 +-
- meta-oe/recipes-qt/qconnman/qconnman_git.bb        |  2 +-
- meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb  |  2 +-
- meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb |  2 +-
- meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb   |  9 ++--
- meta-oe/recipes-support/emacs/emacs_23.4.bb        |  2 +-
- .../enca/enca/libenca-003-iconv.patch              | 28 +++++++++++
- meta-oe/recipes-support/enca/enca_1.9.bb           |  3 +-
- .../imagemagick/imagemagick_6.8.9.bb               |  2 +-
- .../libcanberra/libcanberra_0.29.bb                |  2 +-
- meta-oe/recipes-support/lvm2/lvm2.inc              |  2 +
- .../recipes-support/maliit/maliit-framework_git.bb |  2 +-
- .../recipes-support/maliit/maliit-plugins_git.bb   |  2 +-
- .../recipes-support/openmotif/openmotif_2.3.3.bb   |  2 +-
- .../vala-terminal/vala-terminal_git.bb             |  2 +-
- .../recipes-perl/libnet/libnet-ssleay-perl_1.65.bb |  8 ++-
- meta-webserver/recipes-php/modphp/modphp5.inc      |  2 +-
- meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb  |  2 +-
- 61 files changed, 325 insertions(+), 91 deletions(-)
- rename meta-gnome/{recipe-devtools => recipes-devtools}/glade/glade3_%.bbappend (100%)
- create mode 100644 meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-Makefile-Recognize-all-ix86-arches.patch
- delete mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-aarch64-fix-page-size-not-properly-computed.patch
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-ld.hugetlbfs-arm-arches-fix-page-size-and-text-offse.patch
- create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo/0004-glamo.h-use-const-for-jbt6k74_state_path.patch
- create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
- create mode 100644 meta-oe/recipes-support/enca/enca/libenca-003-iconv.patch
-
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
+index 454db64..7cb8f01 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
+ 
+ PATCHSET = "8"
+-SRC_URI = "http://www.imagemagick.org/download/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
++SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
+ "
+ SRC_URI[md5sum] = "7e96f55156d72ce59c76ec93362ec72a"
+ SRC_URI[sha256sum] = "51e0eb0b56e2f16be11c29086a97d474ffd07fe4eb5a9858d8a9c8e9c054c99a"
 -- 
 1.9.1
 
