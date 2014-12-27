@@ -1,40 +1,40 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B7777264D
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id D9EB27264D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:37 +0000 (UTC)
-Received: by mail-pa0-f42.google.com with SMTP id et14so14737677pad.15
+	Sat, 27 Dec 2014 17:22:39 +0000 (UTC)
+Received: by mail-pa0-f48.google.com with SMTP id rd3so14735554pab.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:38 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=G9VGKXj5Sf09VT2zRiB9GJJ4swS6LOvG0yeU5aUhLWk=;
-	b=keo3fJ0hKBdhcNI2MSejbrv0Mi4I5YEVVYNT7N+5+BBNhz70y2JpjZPS/VZf93BOy/
-	OHIxhea103MqwsOz3NFYoL7OenXgxw02p5SxC4s39vqgzoULaocrfiIyuoqKeEHYKN9F
-	Tx0e81CFcigxc3hkSJ19Hob5fWMTvUmLxqq0ZLgalIQNgvTz4RkeaksJHS7eL3ie4B9k
-	vPDIP5SbIXgYwkOKUYOJL5wvlqfDOt9smUmnNaytB/JEDKEyuGD+gIDQZGTQy7l8NxC7
-	8Om9dC/+n00tK2VqQe8VjXsELdaLc1uKgAQNo6j7qILyOVZqhiLnqd50GuE+gBJ2gc3z
-	W4tQ==
-X-Received: by 10.66.118.168 with SMTP id kn8mr12500762pab.45.1419700958129;
-	Sat, 27 Dec 2014 09:22:38 -0800 (PST)
+	:references; bh=4vyoFXE6C26WvOXW9zSwdeslEY2qBkZNeaYIhn7Izww=;
+	b=Eja4Vt5GcZuo3ck6vjcdTMX8SIhDNTkkbpmmbcNn9ancn7Bwa2SP+vI3ZTYlC4ExjB
+	57Dm0WKV2f1tRsnw6eka6uoRggFVeUXGA4x7UIJuaEsMSQxZeAqjTFBkvuzvlv9ucN0n
+	dO89x9ysiMWL9OnqgR5rzBWp0wDdnqZudNywqBp/152sjA4Hh8JPdJhsjIGUHVX3NCMo
+	jVHhBsog22ME3iJFZepGR5Nx7r5qf3OaJFuvOf+HlQ0xRmyHUFqLGvvJk/wiVrn24/78
+	ORauVpxOTsLFi726OIusIZcma+xK9s7pCRb4gDQHvBpAYsDQAZ6S+UfE3JXIB1Jard1A
+	bS7Q==
+X-Received: by 10.66.156.38 with SMTP id wb6mr59506344pab.139.1419700959981;
+	Sat, 27 Dec 2014 09:22:39 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.36
+	fu1sm31202444pbb.91.2014.12.27.09.22.38
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:37 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:38 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:22:00 -0800
-Message-Id: <1721c79c955a70c51d71516a9fd379ac4ab01dee.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:22:01 -0800
+Message-Id: <988092c0c21b8a016932a6f787b1ac966645c344.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-Subject: [PATCH 13/27] sethdlc: fix host contamination
+Subject: [PATCH 14/27] xserver-common: disable TCP connections
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,103 +48,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 17:22:37 -0000
+X-List-Received-Date: Sat, 27 Dec 2014 17:22:40 -0000
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Javier Viguera <javier.viguera@digi.com>
 
-* Clean INCLUDES to fix the host contamination errors:
+For security reasons disable TCP connections to the xserver.
 
-  In file included from /usr/src/linux/include/linux/posix_types.h:47:0,
-  from /usr/src/linux/include/linux/types.h:17,
-  from /usr/src/linux/include/linux/if.h:22,
-  from sethdlc.c:23:
-  /usr/src/linux/include/asm-generic/posix_types.h:91:3: \
-    error: conflicting types for '__kernel_fsid_t'
-  } __kernel_fsid_t;
-  ^
-  .../tmp/sysroots/qemumips/usr/include/asm/posix_types.h:26:3: \
-    note: previous declaration of '__kernel_fsid_t' was here
-  } __kernel_fsid_t;
-  ^
-
-* Correct LIC_FILES_CHKSUM to checkout license infos from sethdl.c
-  instead of Makefile.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../files/sethdlc-fix-host-contamination.patch     | 42 ++++++++++++++++++++++
- .../recipes-connectivity/sethdlc/sethdlc.bb        |  3 +-
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
+ ...15-xserver-common-disable-TCP-connections.patch | 24 ++++++++++++++++++++++
+ .../xserver-common/xserver-common_1.34.bb          |  1 +
+ 2 files changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
 
-diff --git a/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch b/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
 new file mode 100644
-index 0000000..f25a02c
+index 0000000..06df261
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/sethdlc/files/sethdlc-fix-host-contamination.patch
-@@ -0,0 +1,42 @@
-+From 9a9137c3df5309ac359737d6ebd67fb4ff5f3cf2 Mon Sep 17 00:00:00 2001
-+From: Wenzong Fan <wenzong.fan@windriver.com>
-+Date: Mon, 24 Nov 2014 22:05:18 -0500
-+Subject: [PATCH] sethdlc: fix host contamination
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+@@ -0,0 +1,24 @@
++From: Javier Viguera <javier.viguera@digi.com>
++Date: Wed, 26 Nov 2014 09:24:44 +0100
++Subject: [PATCH] xserver-common: disable TCP connections
 +
-+Clean INCLUDES to fix the host contamination errors:
++Upstream-Status: Inappropriate [configuration]
 +
-+  In file included from /usr/src/linux/include/linux/posix_types.h:47:0,
-+  from /usr/src/linux/include/linux/types.h:17,
-+  from /usr/src/linux/include/linux/if.h:22,
-+  from sethdlc.c:23:
-+  /usr/src/linux/include/asm-generic/posix_types.h:91:3: \
-+    error: conflicting types for '__kernel_fsid_t'
-+  } __kernel_fsid_t;
-+  ^
-+  .../tmp/sysroots/qemumips/usr/include/asm/posix_types.h:26:3: \
-+    note: previous declaration of '__kernel_fsid_t' was here
-+  } __kernel_fsid_t;
-+  ^
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
++Signed-off-by: Javier Viguera <javier.viguera@digi.com>
 +---
-+ Makefile |    2 +-
++ X11/xserver-common | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/Makefile b/Makefile
-+index 0492f2b..97dec22 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -1,6 +1,6 @@
-+ CC = gcc
-+ CFLAGS = -O2 -Wall -W -Wno-long-long -pipe
-+-INCLUDES = -I/usr/src/linux/include -I/usr/src/linux-2.6/include
-++INCLUDES =
++diff --git a/X11/xserver-common b/X11/xserver-common
++index 017e5aee1ab0..4dc48c412741 100644
++--- a/X11/xserver-common
+++++ b/X11/xserver-common
++@@ -44,7 +44,7 @@ SCREEN_SIZE=`fallback_screen_arg`
++ export USER=root
++ export XSERVER_DEFAULT_ORIENTATION=normal
 + 
-+ all:		sethdlc
-+ 
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-index cf74827..5e8d9d9 100644
---- a/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-+++ b/meta-networking/recipes-connectivity/sethdlc/sethdlc.bb
-@@ -1,10 +1,11 @@
- DESCRIPTION = "set Linux HDLC packet radio modem driver port information"
- HOMEPAGE = "https://www.kernel.org/pub/linux/utils/net/hdlc"
- LICENSE = "GPLv2 & GPLv2+ "
--LIC_FILES_CHKSUM = "file://Makefile;md5=19aada31930b2be84bf7138420d77263"
-+LIC_FILES_CHKSUM = "file://sethdlc.c;endline=10;md5=90f936879e9f8b755a138aeb348782eb"
- 
- 
- SRC_URI = "https://www.kernel.org/pub/linux/utils/net/hdlc/${BPN}-1.18.tar.gz \
-+           file://sethdlc-fix-host-contamination.patch \
++-ARGS="-br -pn $INPUT_EXTRA_ARGS"
+++ARGS="-br -pn -nolisten tcp $INPUT_EXTRA_ARGS"
++ DPI="100"
++ MOUSE=""
++ KDRIVEARGS=""
+diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+index 12fff9a..f5b1984 100644
+--- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
++++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
+@@ -24,6 +24,7 @@ SRC_URI_append = " \
+     file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
+     file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
+     file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
++    file://0015-xserver-common-disable-TCP-connections.patch \
  "
- SRC_URI[md5sum] = "9016878156a5eadb06c0bae71cc5c9ab"
- SRC_URI[sha256sum] = "21b1e2e1cb0e288b0ec8fcfd9fed449914e0f8e6fc273706bd5b3d4f6ab6b04e"
+ 
+ do_install_append() {
 -- 
 1.9.1
 
