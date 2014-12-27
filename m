@@ -1,40 +1,40 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
 	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 672EC7264C
+	by mail.openembedded.org (Postfix) with ESMTP id 4384372641
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:21 +0000 (UTC)
-Received: by mail-pa0-f51.google.com with SMTP id ey11so14797185pad.38
+	Sat, 27 Dec 2014 17:22:23 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id ey11so14844052pad.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:22 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=d9hgd3WY+6AFN8LFZRUpmu9RqbOkIGwCZwkdPo3i2dY=;
-	b=vwkv7MndExrBnzbzsKY60Tv9fAr6rSRUVKMpBUiY7FWTd668EjycOcplkrr6lvXFEg
-	0luRwoGR6l4ob0MBGSQP7mV3DqaG/vjJlDwIbdHqvR+tN2ktluqHOhaLWnpiqwkElIsG
-	5ijZIxTyYlpSZ6TS/dRQVAvs3kA6mzIczSEuUBexCE8AnZ76Piavx0Q53ySL7s02AoNH
-	khHhkWbeZJB2921fYbrj9S0yezOVh9zJwkZiwpc96e1bQDbFgx2Ks0o24I0vhji1EygP
-	zxngg/SsXz4dII4ycXl+BrymoEiMsnuO6THRRWbRAn/SLiFxaqrs+vvkFf6Q69rsfmkY
-	sfRA==
-X-Received: by 10.70.31.197 with SMTP id c5mr50236426pdi.93.1419700942730;
-	Sat, 27 Dec 2014 09:22:22 -0800 (PST)
+	:references; bh=Y8S+19Dy1OdNEqxOIAc+9WgQywjjgnbqty456O7LppY=;
+	b=DqgZ6e+YFM2Otm69bCgeBwB7Mm/BLVn4m9BZRwbyYHzwj857AZ6jioc9+/nRX3jYiJ
+	yiddotYaj2mTMZsiI3tnHXXw4ckGQ1GAJfbHD1ZXV8EX9igGcwRNY1pFpjNJ0jlDINFB
+	fU0Envcicl0RJKhv4ScMXJI12sKa1+JF/42piS+npdIeOqFmuRicLUmPCBYwYtZjBVZf
+	0t2M45sv3L7ohiIHY0Bydas5e5f/FJb9or8J+mpNE327/EbHWUxnnKKrOP1f1GgZzhv6
+	ciRjpupdp1XT0ZZZ2S/RB5D2UGgTHZjaaE+T3fF6FNw/Yr29xNxLMhOEYeIT4XoXlSYI
+	Xqkg==
+X-Received: by 10.68.201.201 with SMTP id kc9mr77656531pbc.79.1419700944777;
+	Sat, 27 Dec 2014 09:22:24 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.20
+	fu1sm31202444pbb.91.2014.12.27.09.22.22
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:21 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:23 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:21:52 -0800
-Message-Id: <e324dd37cfc2f89eb9d392dac700416cd281db2c.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:21:53 -0800
+Message-Id: <4534f363651b332e611f1f3cd170e0e9379cfb52.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-Subject: [PATCH 05/27] samba: fix error messages when startup samba service
+Subject: [PATCH 06/27] dfu-util: Point to gitorious.org repository as gnumonks.org is down
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,47 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Dec 2014 17:22:23 -0000
+X-List-Received-Date: Sat, 27 Dec 2014 17:22:24 -0000
 
-From: "Chong.Lu@windriver.com" <Chong.Lu@windriver.com>
+From: Chris Morgan <chmorgan@gmail.com>
 
-This solves the following error messages when startup samba:
-
-  Unable to open new log file '/var/log/samba/log.smbd': No such file or directory
-
-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Chris Morgan <chmorgan@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-connectivity/samba/samba.inc | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index 4392821..68e1b1f 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -35,7 +35,7 @@ EXTRA_OECONF='--disable-cups \
-               --with-privatedir=${sysconfdir}/samba/private \
-               --with-lockdir=${localstatedir}/lock \
-               --with-piddir=${localstatedir}/run \
--              --with-logfilebase=${localstatedir}/log \
-+              --with-logfilebase=${localstatedir}/log/samba \
-               --libdir=${libdir} \
-               --with-mandir=${mandir} \
-               --with-swatdir=${datadir}/swat \
-@@ -123,6 +123,12 @@ do_install_append() {
-     sed -e 's,@BASE_BINDIR@,${base_bindir},g' \
-         -e 's,@SBINDIR@,${sbindir},g' \
-         -i ${D}${systemd_unitdir}/system/*.service
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+	install -d ${D}${sysconfdir}/tmpfiles.d
-+	echo "d ${localstatedir}/log/samba 0755 root root -" \
-+            > ${D}${sysconfdir}/tmpfiles.d/99-${BPN}.conf
-+    fi
- }
+diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+index aa2b84d..7f06f8f 100644
+--- a/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
++++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.7.bb
+@@ -4,13 +4,16 @@ AUTHOR = "Harald Welte <laforge@openmoko.org>"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd-systemctl-native', '', d)}"
+-SRC_URI = "http://${BPN}.gnumonks.org/releases/${BP}.tar.gz \
++S = "${WORKDIR}/git"
++
++SRC_URI = "git://gitorious.org/dfu-util/dfu-util.git \
+     file://0001-configure.ac-Don-t-check-for-usbpath.patch \
+ "
++SRCREV="a0a3668e0571a9b007f7d62b01e7dcfd7754ce50"
+ 
+ inherit autotools pkgconfig
+ 
+ DEPENDS = "libusb1"
+ 
+-SRC_URI[md5sum] = "56844020177d4db4c1ea2e926fe9d588"
+-SRC_URI[sha256sum] = "f52a2a5489fbf9f3204a6ada05e0b47ee322e19d81c712e0c58a332d80ec3eab"
++SRC_URI[md5sum] = "1de724551604bce1962960b7a301cc08"
++SRC_URI[sha256sum] = "5d253f924fd29bc13054b664bba9aa86b865299971195969478253c1775b7e56"
 -- 
 1.9.1
 
