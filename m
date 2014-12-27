@@ -1,40 +1,40 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id D9EB27264D
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id C1267713B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 17:22:39 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id rd3so14735554pab.35
+	Sat, 27 Dec 2014 17:22:40 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id w10so14560309pde.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Dec 2014 09:22:40 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=4vyoFXE6C26WvOXW9zSwdeslEY2qBkZNeaYIhn7Izww=;
-	b=Eja4Vt5GcZuo3ck6vjcdTMX8SIhDNTkkbpmmbcNn9ancn7Bwa2SP+vI3ZTYlC4ExjB
-	57Dm0WKV2f1tRsnw6eka6uoRggFVeUXGA4x7UIJuaEsMSQxZeAqjTFBkvuzvlv9ucN0n
-	dO89x9ysiMWL9OnqgR5rzBWp0wDdnqZudNywqBp/152sjA4Hh8JPdJhsjIGUHVX3NCMo
-	jVHhBsog22ME3iJFZepGR5Nx7r5qf3OaJFuvOf+HlQ0xRmyHUFqLGvvJk/wiVrn24/78
-	ORauVpxOTsLFi726OIusIZcma+xK9s7pCRb4gDQHvBpAYsDQAZ6S+UfE3JXIB1Jard1A
-	bS7Q==
-X-Received: by 10.66.156.38 with SMTP id wb6mr59506344pab.139.1419700959981;
-	Sat, 27 Dec 2014 09:22:39 -0800 (PST)
+	:references; bh=ffzVLzs7e09XMA+LHAQYinCNLZGt5ehLrJK0enPBmtA=;
+	b=BXLOAqgJ4JkYYJSd7QkirGGBFEnO0gLO5mq3e2i/NiqiGpadFG5xjlAoHfLi6YNb0i
+	WRUe7wOVMY/BXSle3lQcE5vsfLXKoxpdUYCIEsIB1EJEkn/PnccrV5UQZUNdjJUkxHKi
+	28RlVLzXVdGuv+Uq8z5w7ydWM5RHFrVZIMYTUDjG89LXmxN5BYoPSQs9xFmXEQsNIZpD
+	nnXeO3GN2gUjRRCTGg+p+Wqi2CPEMTz0rQX5DVdhhZahf6uwb+u52gUx29JWtwIA4+7H
+	aWG3GTaLk3yl4K/lEO8WONkl5WrGVSkkamwZ66EACIyA8YwWwRJgGQ/0l8uuxAjeqVTG
+	wXhA==
+X-Received: by 10.66.163.196 with SMTP id yk4mr75097916pab.57.1419700961782;
+	Sat, 27 Dec 2014 09:22:41 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
 	by mx.google.com with ESMTPSA id
-	fu1sm31202444pbb.91.2014.12.27.09.22.38
+	fu1sm31202444pbb.91.2014.12.27.09.22.40
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Dec 2014 09:22:38 -0800 (PST)
+	Sat, 27 Dec 2014 09:22:40 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Sat, 27 Dec 2014 09:22:01 -0800
-Message-Id: <988092c0c21b8a016932a6f787b1ac966645c344.1419700394.git.akuster808@gmail.com>
+Date: Sat, 27 Dec 2014 09:22:02 -0800
+Message-Id: <7c58d49071052b1acb6128024029d0279cade876.1419700394.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
 In-Reply-To: <cover.1419700394.git.akuster808@gmail.com>
 References: <cover.1419700394.git.akuster808@gmail.com>
-Subject: [PATCH 14/27] xserver-common: disable TCP connections
+Subject: [PATCH 15/27] libcanberra: fix installed-vs-shipped warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,61 +50,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 27 Dec 2014 17:22:40 -0000
 
-From: Javier Viguera <javier.viguera@digi.com>
+From: Robert Yang <liezhi.yang@windriver.com>
 
-For security reasons disable TCP connections to the xserver.
+When build libcanberra for powerpc64 bsp, it shows warning:
 
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+WARNING: QA Issue: libcanberra: Files/directories were installed but not shipped
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/canberra-system-shutdown.service
+  /lib/systemd/system/canberra-system-shutdown-reboot.service
+  /lib/systemd/system/canberra-system-bootup.service [installed-vs-shipped]
+
+Update FILES_${PN}-systemd to fix it.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...15-xserver-common-disable-TCP-connections.patch | 24 ++++++++++++++++++++++
- .../xserver-common/xserver-common_1.34.bb          |  1 +
- 2 files changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
+ meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
-new file mode 100644
-index 0000000..06df261
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0015-xserver-common-disable-TCP-connections.patch
-@@ -0,0 +1,24 @@
-+From: Javier Viguera <javier.viguera@digi.com>
-+Date: Wed, 26 Nov 2014 09:24:44 +0100
-+Subject: [PATCH] xserver-common: disable TCP connections
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
-+---
-+ X11/xserver-common | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/X11/xserver-common b/X11/xserver-common
-+index 017e5aee1ab0..4dc48c412741 100644
-+--- a/X11/xserver-common
-++++ b/X11/xserver-common
-+@@ -44,7 +44,7 @@ SCREEN_SIZE=`fallback_screen_arg`
-+ export USER=root
-+ export XSERVER_DEFAULT_ORIENTATION=normal
-+ 
-+-ARGS="-br -pn $INPUT_EXTRA_ARGS"
-++ARGS="-br -pn -nolisten tcp $INPUT_EXTRA_ARGS"
-+ DPI="100"
-+ MOUSE=""
-+ KDRIVEARGS=""
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index 12fff9a..f5b1984 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -24,6 +24,7 @@ SRC_URI_append = " \
-     file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
-     file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
-     file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
-+    file://0015-xserver-common-disable-TCP-connections.patch \
- "
+diff --git a/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb b/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
+index cb171ac..0f00b20 100644
+--- a/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
++++ b/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
+@@ -59,4 +59,4 @@ FILES_${PN}-gtk3 = "${libdir}/${BPN}-gtk3.so.* \
+ FILES_${PN}-gnome = "${libdir}/gnome-settings-daemon-3.0/ \
+                      ${datadir}/gdm/ ${datadir}/gnome/"
  
- do_install_append() {
+-FILES_${PN}-systemd = "${base_libdir}/systemd/system/*.service"
++FILES_${PN}-systemd = "${systemd_unitdir}/system/*.service"
 -- 
 1.9.1
 
