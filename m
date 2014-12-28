@@ -1,27 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id B905D72615
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BB7E7227D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Dec 2014 12:31:58 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga102.fm.intel.com with ESMTP; 28 Dec 2014 04:31:59 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,655,1413270000"; d="scan'208";a="661447977"
-Received: from apulli-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.138])
-	by orsmga002.jf.intel.com with ESMTP; 28 Dec 2014 04:31:58 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Sun, 28 Dec 2014 16:46:03 +0000 (UTC)
+Received: by mail-pd0-f171.google.com with SMTP id y13so15719710pdi.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Dec 2014 08:46:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=8PDgV7aQatJoPJpZsopJ4znNNzC4S8/0rGQgiKk84LI=;
+	b=Fs2JiETkMruKPAA/cUQZyJ5PtD0FRNdRpeXzHVn0uBc2F3vP0Vx0bnzB27h/Lwixe8
+	QUD+77vMnEYQOj56EWNNDZCubEg6BPX1RQUb0q7TS1kmrIDcMvSzkekwM/3XYe3seUTH
+	JC/IBTPxP5q5dy8GaKUKdpwQXCySYEsT84LJmLwS4dxkvYOVLmTAsg3EPbTE8Q5qYT2Y
+	TvmC6IZ/fYVqPaZEQZ/4wkVX6w0zVZG42hb//AZTZcyhy6SV0wOLfcnKr6H2jbw/H9t5
+	Hq6HdgXIYP8RzLEB8Aamcf4JIOHdXpRxsbcPQcwp/3pfZrp5y75hSneS0PS89rExi7iE
+	ZPDg==
+X-Received: by 10.70.31.197 with SMTP id c5mr56907000pdi.93.1419785163935;
+	Sun, 28 Dec 2014 08:46:03 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by mx.google.com with ESMTPSA id
+	uq15sm33624511pab.8.2014.12.28.08.46.01
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 28 Dec 2014 08:46:02 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Dec 2014 12:31:57 +0000
-Message-ID: <2843303.CPYcjsZDpv@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.7-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <6010322.On4bLv5MV8@peggleto-mobl5.ger.corp.intel.com>
-References: <1859515.Hd60QW1tn7@peggleto-mobl5.ger.corp.intel.com>
-	<6010322.On4bLv5MV8@peggleto-mobl5.ger.corp.intel.com>
-MIME-Version: 1.0
-Cc: yocto@yoctoproject.org
-Subject: Re: [yocto] meta-java layer maintainership
+Date: Sun, 28 Dec 2014 08:45:57 -0800
+Message-Id: <1419785157-24929-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Cc: otavio@ossystems.com.br
+Subject: [meta-networking][dizzy][PATCH] ntp: fix several security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,47 +43,525 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Dec 2014 12:32:07 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sun, 28 Dec 2014 16:46:11 -0000
 
-On Monday 01 December 2014 11:57:10 Paul Eggleton wrote:
-> On Monday 01 December 2014 10:16:24 Paul Eggleton wrote:
-> > Henning would like some folks to help him maintain the meta-java layer,
-> > which contains OpenJDK and other open source Java-related components.
-> > 
-> > An ideal candidate maintainer would:
-> >  * Have an interest in maintaining the Java-related recipes in the layer
-> >  * Be willing to review and merge patches from the community
-> > 
-> > If you'd like to help out here (and responsibility can be shared by more
-> > than one person, it doesn't just have to be one) then please reply here or
-> > in private and I'll arrange for you to get access to the repository.
-> 
-> Looks like we now have enough people to take care of this, thanks everyone!
+* CVE-2014-9293, CVE-2014-9294, CVE-2014-9295, and CVE-2014-9296.
+  For more details please see:
+  https://ics-cert.us-cert.gov/advisories/ICSA-14-353-01A
 
-I'm not sure if this ever got announced, but we now have the following 
-maintainers for meta-java:
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../ntp/files/ntp-4.2.6p5-cve-2014-9293.patch      |  43 +++++++
+ .../ntp/files/ntp-4.2.6p5-cve-2014-9294.patch      | 128 +++++++++++++++++++++
+ .../ntp/files/ntp-4.2.6p5-cve-2014-9295.patch      | 113 ++++++++++++++++++
+ .../ntp/files/ntp-4.2.6p5-cve-2014-9296.patch      |  21 ++++
+ .../ntp/files/ntp-keygen_no_openssl.patch          | 108 +++++++++++++++++
+ meta-networking/recipes-support/ntp/ntp.inc        |  16 ++-
+ 6 files changed, 426 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch
+ create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch
+ create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch
+ create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch
+ create mode 100644 meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch
 
-  Henning Heinold <henning@itconsulting-heinold.de>
-  Mario Domenech Goulart <mario@ossystems.com.br>
-  Maxin John <maxin.john@enea.com>
-  Otavio Salvador <otavio@ossystems.com.br>
-
-At the same time, the layer has also been moved to the following location:
-
-  http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/
-
-I've just updated the OE layer index accordingly. Please update your local 
-clones using something similar to the following command:
-
-  git remote set-url origin git://git.yoctoproject.org/meta-java
-
-Cheers,
-Paul
-
+diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch
+new file mode 100644
+index 0000000..667b705
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch
+@@ -0,0 +1,43 @@
++CVE-2014-9293 ntp: automatic generation of weak default key in config_auth()
++
++Upstream-Status: Backport [Debian]
++
++Signed-off-by: Armin Kuster <akuster808@gmail.com>
++
++Index: git/ntpd/ntp_config.c
++===================================================================
++--- git.orig/ntpd/ntp_config.c	2014-12-20 18:45:45.232872120 +0100
+++++ git/ntpd/ntp_config.c	2014-12-20 18:45:47.672921968 +0100
++@@ -1866,13 +1866,16 @@
++ 		req_hashlen = digest_len;
++ #endif
++ 	} else {
++-		int	rankey;
+++		unsigned char rankey[16];
+++
+++		if (ntp_crypto_random_buf(rankey, sizeof (rankey))) {
+++			msyslog(LOG_ERR, "ntp_crypto_random_buf() failed.");
+++			exit(1);
+++		}
++ 
++-		rankey = ntp_random();
++ 		req_keytype = NID_md5;
++ 		req_hashlen = 16;
++-		MD5auth_setkey(req_keyid, req_keytype,
++-		    (u_char *)&rankey, sizeof(rankey));
+++		MD5auth_setkey(req_keyid, req_keytype, rankey, sizeof(rankey));
++ 		authtrust(req_keyid, 1);
++ 	}
++ 
++Index: git/ntpd/ntpd.c
++===================================================================
++--- git.orig/ntpd/ntpd.c	2014-12-20 18:45:45.232872120 +0100
+++++ git/ntpd/ntpd.c	2014-12-20 18:45:47.672921968 +0100
++@@ -597,6 +597,7 @@
++ 	get_systime(&now);
++ 
++ 	ntp_srandom((int)(now.l_i * now.l_uf));
+++	ntp_crypto_srandom();
++ 
++ #if !defined(VMS)
++ # ifndef NODETACH
+diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch
+new file mode 100644
+index 0000000..67e532b
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch
+@@ -0,0 +1,128 @@
++CVE-2014-9294 ntp: ntp-keygen uses weak random number generator and seed when generating MD5 keys 
++
++Upstream-Status: Backport [Debian]
++
++Signed-off-by: Armin Kuster <akuster808@gmail.com>
++
++Index: ntp-4.2.6p5/include/ntp_random.h
++===================================================================
++--- ntp-4.2.6p5.orig/include/ntp_random.h
+++++ ntp-4.2.6p5/include/ntp_random.h
++@@ -1,6 +1,9 @@
++ 
++ #include <ntp_types.h>
++ 
+++void ntp_crypto_srandom(void);
+++int ntp_crypto_random_buf(void *buf, size_t nbytes);
+++
++ long ntp_random (void);
++ void ntp_srandom (unsigned long);
++ void ntp_srandomdev (void);
++Index: ntp-4.2.6p5/libntp/ntp_random.c
++===================================================================
++--- ntp-4.2.6p5.orig/libntp/ntp_random.c
+++++ ntp-4.2.6p5/libntp/ntp_random.c
++@@ -481,3 +481,74 @@ ntp_random( void )
++ 	}
++ 	return(i);
++ }
+++
+++/*
+++ * Crypto-quality random number functions
+++ *
+++ * Author: Harlan Stenn, 2014
+++ *
+++ * This file is Copyright (c) 2014 by Network Time Foundation.
+++ * BSD terms apply: see the file COPYRIGHT in the distribution root for details.
+++ */
+++
+++#ifdef OPENSSL
+++#include <openssl/err.h>
+++#include <openssl/rand.h>
+++
+++int crypto_rand_init = 0;
+++#endif
+++
+++/*
+++ * ntp_crypto_srandom:
+++ *
+++ * Initialize the random number generator, if needed by the underlying
+++ * crypto random number generation mechanism.
+++ */
+++
+++void
+++ntp_crypto_srandom(
+++	void
+++	)
+++{
+++#ifdef OPENSSL
+++	if (!crypto_rand_init) {
+++		RAND_poll();
+++		crypto_rand_init = 1;
+++	}
+++#else
+++   /* No initialization needed for arc4random() */
+++#endif
+++}
+++
+++/*
+++ * ntp_crypto_random_buf:
+++ *
+++ * Returns 0 on success, -1 on error.
+++ */
+++int
+++ntp_crypto_random_buf(
+++	void *buf,
+++	size_t nbytes
+++	)
+++{
+++#ifdef OPENSSL
+++	int rc;
+++
+++	rc = RAND_bytes(buf, nbytes);
+++	if (1 != rc) {
+++		unsigned long err;
+++		char *err_str;
+++
+++		err = ERR_get_error();
+++		err_str = ERR_error_string(err, NULL);
+++		/* XXX: Log the error */
+++
+++		return -1;
+++	}
+++	return 0;
+++#else
+++   arc4random_buf(buf, nbytes);
+++   return 0;
+++#endif
+++}
+++
++Index: ntp-4.2.6p5/util/ntp-keygen.c
++===================================================================
++--- ntp-4.2.6p5.orig/util/ntp-keygen.c
+++++ ntp-4.2.6p5/util/ntp-keygen.c
++@@ -261,6 +261,8 @@ main(
++ 	ssl_check_version();
++ #endif /* OPENSSL */
++ 
+++	ntp_crypto_srandom();
+++
++ 	/*
++ 	 * Process options, initialize host name and timestamp.
++ 	 */
++@@ -727,7 +729,14 @@ gen_md5(
++ 			int temp;
++ 
++ 			while (1) {
++-				temp = ntp_random() & 0xff;
+++				int rc;
+++
+++				rc = ntp_crypto_random_buf(&temp, 1);
+++				if (-1 == rc) {
+++					fprintf(stderr, "ntp_crypto_random_buf() failed.\n");
+++					exit (-1);
+++				}
+++				temp &= 0xff;
++ 				if (temp == '#')
++ 					continue;
++ 
+diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch
+new file mode 100644
+index 0000000..6143f26
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch
+@@ -0,0 +1,113 @@
++CVE-2014-9295 ntp: Multiple buffer overflows via specially-crafted packets 
++
++Upstream-Status: Backport [Debian]
++
++Signed-off-by: Armin Kuster <akuster808@gmail.com>
++
++2014-12-12 11:06:03+00:00, stenn@psp-fb1.ntp.org +12 -3
++  [Sec 2667] buffer overflow in crypto_recv()
++2014-12-12 11:13:40+00:00, stenn@psp-fb1.ntp.org +16 -1
++  [Sec 2668] buffer overflow in ctl_putdata()
++2014-12-12 11:19:37+00:00, stenn@psp-fb1.ntp.org +14 -0
++  [Sec 2669] buffer overflow in configure()
++
++Index: git/ntpd/ntp_crypto.c
++===================================================================
++--- git.orig/ntpd/ntp_crypto.c	2014-12-20 18:45:44.208851199 +0100
+++++ git/ntpd/ntp_crypto.c	2014-12-20 18:45:56.425100776 +0100
++@@ -789,15 +789,24 @@
++ 			 * errors.
++ 			 */
++ 			if (vallen == (u_int)EVP_PKEY_size(host_pkey)) {
+++				u_int32 *cookiebuf = malloc(
+++				    RSA_size(host_pkey->pkey.rsa));
+++				if (!cookiebuf) {
+++					rval = XEVNT_CKY;
+++					break;
+++				}
+++
++ 				if (RSA_private_decrypt(vallen,
++ 				    (u_char *)ep->pkt,
++-				    (u_char *)&temp32,
+++				    (u_char *)cookiebuf,
++ 				    host_pkey->pkey.rsa,
++-				    RSA_PKCS1_OAEP_PADDING) <= 0) {
+++				    RSA_PKCS1_OAEP_PADDING) != 4) {
++ 					rval = XEVNT_CKY;
+++					free(cookiebuf);
++ 					break;
++ 				} else {
++-					cookie = ntohl(temp32);
+++					cookie = ntohl(*cookiebuf);
+++					free(cookiebuf);
++ 				}
++ 			} else {
++ 				rval = XEVNT_CKY;
++Index: git/ntpd/ntp_control.c
++===================================================================
++--- git.orig/ntpd/ntp_control.c	2014-12-20 18:45:44.208851199 +0100
+++++ git/ntpd/ntp_control.c	2014-12-20 18:45:56.429100859 +0100
++@@ -486,6 +486,10 @@
++ static	char *reqpt;
++ static	char *reqend;
++ 
+++#ifndef MIN
+++#define MIN(a, b) (((a) <= (b)) ? (a) : (b))
+++#endif
+++
++ /*
++  * init_control - initialize request data
++  */
++@@ -995,6 +999,7 @@
++ 	)
++ {
++ 	int overhead;
+++	unsigned int currentlen;
++ 
++ 	overhead = 0;
++ 	if (!bin) {
++@@ -1018,12 +1023,22 @@
++ 	/*
++ 	 * Save room for trailing junk
++ 	 */
++-	if (dlen + overhead + datapt > dataend) {
+++	while (dlen + overhead + datapt > dataend) {
++ 		/*
++ 		 * Not enough room in this one, flush it out.
++ 		 */
+++		currentlen = MIN(dlen, dataend - datapt);
+++
+++		memcpy(datapt, dp, currentlen);
+++
+++		datapt += currentlen;
+++		dp += currentlen;
+++		dlen -= currentlen;
+++		datalinelen += currentlen;
+++
++ 		ctl_flushpkt(CTL_MORE);
++ 	}
+++
++ 	memmove((char *)datapt, dp, (unsigned)dlen);
++ 	datapt += dlen;
++ 	datalinelen += dlen;
++@@ -2492,6 +2507,20 @@
++ 
++ 	/* Initialize the remote config buffer */
++ 	data_count = reqend - reqpt;
+++
+++	if (data_count > sizeof(remote_config.buffer) - 2) {
+++		snprintf(remote_config.err_msg,
+++			 sizeof(remote_config.err_msg),
+++			 "runtime configuration failed: request too long");
+++		ctl_putdata(remote_config.err_msg,
+++			    strlen(remote_config.err_msg), 0);
+++		ctl_flushpkt(0);
+++		msyslog(LOG_NOTICE,
+++			"runtime config from %s rejected: request too long",
+++			stoa(&rbufp->recv_srcadr));
+++		return;
+++	}
+++
++ 	memcpy(remote_config.buffer, reqpt, data_count);
++ 	if (data_count > 0
++ 	    && '\n' != remote_config.buffer[data_count - 1])
+diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch
+new file mode 100644
+index 0000000..a85f65d
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch
+@@ -0,0 +1,21 @@
++CVE-2014-9296 ntp: receive() missing return on error
++
++Upstream-Status: Backport [Debian]
++
++Signed-off-by: Armin Kuster <akuster808@gmail.com>
++
++2014-12-12 11:24:22+00:00, stenn@psp-fb1.ntp.org +1 -0
++  [Sec 2670] Missing return; from error clause
++
++Index: git/ntpd/ntp_proto.c
++===================================================================
++--- git.orig/ntpd/ntp_proto.c	2014-12-20 18:45:42.760821618 +0100
+++++ git/ntpd/ntp_proto.c	2014-12-20 18:46:00.153176945 +0100
++@@ -947,6 +947,7 @@
++ 				fast_xmit(rbufp, MODE_ACTIVE, 0,
++ 				    restrict_mask);
++ 				sys_restricted++;
+++				return;
++ 			}
++ 		}
++ 
+diff --git a/meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch b/meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch
+new file mode 100644
+index 0000000..f576e2e
+--- /dev/null
++++ b/meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch
+@@ -0,0 +1,108 @@
++Fix ntp-keygen build without OpenSSL
++
++Patch borrowed from Gentoo, originally from upstream
++Added --enable-libenvent to config since this version
++does not have local libevent support but we need the 
++functions from the lib.
++
++Signed-off-by: Armin Kuster <akuster808@gmail.com>
++
++Upstream-Status: Backport
++
++Upstream commit:
++http://bk1.ntp.org/ntp-stable/?PAGE=patch&REV=5497b345z5MNTuNvJWuqPSje25NQTg
++Gentoo bugzilla: https://bugs.gentoo.org/show_bug.cgi?id=533238
++
++Signed-off-by: Markos Chandras <hwoarang@gentoo.org>
++
++Index: ntp-4.2.6p5/libntp/ntp_random.c
++===================================================================
++--- ntp-4.2.6p5.orig/libntp/ntp_random.c
+++++ ntp-4.2.6p5/libntp/ntp_random.c
++@@ -498,6 +498,21 @@ ntp_random( void )
++ int crypto_rand_init = 0;
++ #endif
++ 
+++#ifndef HAVE_ARC4RANDOM_BUF
+++static void
+++arc4random_buf(void *buf, size_t nbytes);
+++
+++void
+++evutil_secure_rng_get_bytes(void *buf, size_t nbytes);
+++
+++static void
+++arc4random_buf(void *buf, size_t nbytes)
+++{
+++  evutil_secure_rng_get_bytes(buf, nbytes);
+++  return;
+++}
+++#endif
+++
++ /*
++  * ntp_crypto_srandom:
++  *
++Index: ntp-4.2.6p5/util/Makefile.am
++===================================================================
++--- ntp-4.2.6p5.orig/util/Makefile.am
+++++ ntp-4.2.6p5/util/Makefile.am
++@@ -21,6 +21,7 @@ AM_CPPFLAGS= -I$(top_srcdir)/include -I$
++ LDADD=		../libntp/libntp.a
++ ntp_keygen_SOURCES = ntp-keygen.c ntp-keygen-opts.c ntp-keygen-opts.h
++ ntp_keygen_LDADD= version.o $(LIBOPTS_LDADD) ../libntp/libntp.a @LCRYPTO@
+++ntp_keygen_LDADD += $(LDADD_LIBEVENT)
++ 
++ ETAGS_ARGS=	Makefile.am
++ #EXTRA_DIST=	README TAGS
++Index: ntp-4.2.6p5/configure.ac
++===================================================================
++--- ntp-4.2.6p5.orig/configure.ac
+++++ ntp-4.2.6p5/configure.ac
++@@ -376,6 +376,8 @@ AC_CHECK_FUNC([openlog], ,
++ AC_SEARCH_LIBS([MD5Init], [md5 md])
++ AC_CHECK_FUNCS(MD5Init)
++ 
+++AC_CHECK_FUNC([arc4random_buf])
+++
++ NTP_LINEEDITLIBS
++ 
++ dnl Digital UNIX V4.0 and Solaris 7 have POSIX.1c functions in -lrt
++@@ -5205,6 +5207,39 @@ AC_MSG_RESULT([$ntp_use_dev_clockctl])
++ 
++ AC_CHECK_HEADERS([sys/capability.h sys/prctl.h])
++ 
+++AC_MSG_CHECKING([if we have libevent capabilities (libevent)])
+++
+++case "$ac_cv_header_event2_event-config_h" in
+++ yes)
+++    case "$host" in
+++     *) ntp_have_linuxcaps=yes
+++	;;
+++    esac
+++    ;;
+++ *)
+++    ntp_have_linuxcaps=no
+++    ;;
+++esac
+++
+++AC_ARG_ENABLE(
+++    [libevent],
+++    [AS_HELP_STRING(
+++	[--enable-libevent],
+++	[+ Use libevent capabilities for arc4random]
+++    )],
+++    [ntp_have_libevent=$enableval]
+++)
+++
+++AC_MSG_RESULT([$ntp_have_libevent])
+++
+++case "$ntp_have_libevent" in
+++ yes)
+++    AC_DEFINE([HAVE_LIBEVENT], [1],
+++	[Do we have libevent capabilities?])
+++    LIBS="$LIBS -levent"
+++esac
+++
+++
++ AC_MSG_CHECKING([if we have linux capabilities (libcap)])
++ 
++ case "$ac_cv_header_sys_capability_h$ac_cv_header_sys_prctl_h" in
+diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
+index fd29a78..ab7bd9c 100644
+--- a/meta-networking/recipes-support/ntp/ntp.inc
++++ b/meta-networking/recipes-support/ntp/ntp.inc
+@@ -26,13 +26,22 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://sntp \
+            file://ntpd.list \
+            file://CVE-2013-5211.patch \
++           file://ntp-4.2.6p5-cve-2014-9293.patch \
++           file://ntp-4.2.6p5-cve-2014-9294.patch \
++           file://ntp-4.2.6p5-cve-2014-9295.patch \
++           file://ntp-4.2.6p5-cve-2014-9296.patch  \
++           file://ntp-keygen_no_openssl.patch  \
+ "
+ 
+ inherit autotools update-rc.d useradd systemd
+ 
+ # The ac_cv_header_readline_history is to stop ntpdc depending on either
+ # readline or curses
+-EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no --with-binsubdir=sbin"
++EXTRA_OECONF += "--with-net-snmp-config=no \
++                --without-ntpsnmpd \
++                ac_cv_header_readline_history_h=no \
++                --with-binsubdir=sbin"
++
+ CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
+ 
+ USERADD_PACKAGES = "${PN}"
+@@ -42,7 +51,7 @@ USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
+                        --shell /bin/false --user-group ntp"
+ 
+ # NB: debug is default-enabled by NTP; keep it default-enabled here.
+-PACKAGECONFIG ??= "cap debug"
++PACKAGECONFIG ??= "event cap debug"
+ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
+                           --with-openssl-incdir=${STAGING_INCDIR} \
+                           --with-crypto, \
+@@ -51,6 +60,7 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
+ PACKAGECONFIG[cap] = "--enable-linuxcaps,--disable-linuxcaps,libcap"
+ PACKAGECONFIG[readline] = "--with-lineeditlibs,--without-lineeditlibs,readline"
+ PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
++PACKAGECONFIG[event] = "--enable-libevent,--disable-libevent, libevent"
+ 
+ do_install_append() {
+     install -d ${D}${sysconfdir}/init.d
+@@ -94,7 +104,7 @@ PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+ 
+ # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
+ # with wonky clocks (e.g. OpenSlug)
+-RDEPENDS_${PN} = "${PN}-tickadj"
++RDEPENDS_${PN} = "${PN}-tickadj libbsd"
+ # Handle move from bin to utils package
+ RPROVIDES_${PN}-utils = "${PN}-bin"
+ RREPLACES_${PN}-utils = "${PN}-bin"
 -- 
+1.9.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
