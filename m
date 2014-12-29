@@ -1,31 +1,30 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id C53FF72430
+	by mail.openembedded.org (Postfix) with ESMTP id ED77772521
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2014 20:07:03 +0000 (UTC)
+	Mon, 29 Dec 2014 20:07:37 +0000 (UTC)
 Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
 	by relay1.mentorg.com with esmtp 
-	id 1Y5gam-0003X6-62 from Joe_MacDonald@mentor.com 
+	id 1Y5gbK-0003wl-Hn from Joe_MacDonald@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Dec 2014 12:07:04 -0800
+	Mon, 29 Dec 2014 12:07:38 -0800
 Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
 	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 29 Dec 2014 12:07:03 -0800
-Received: by burninator (Postfix, from userid 1000)	id 6D0DF5810B3; Mon, 29
-	Dec 2014 15:06:57 -0500 (EST)
-Date: Mon, 29 Dec 2014 15:06:57 -0500
+	Mon, 29 Dec 2014 12:07:37 -0800
+Received: by burninator (Postfix, from userid 1000)	id C34AE5810B3; Mon, 29
+	Dec 2014 15:07:31 -0500 (EST)
+Date: Mon, 29 Dec 2014 15:07:31 -0500
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20141229200657.GD4672@mentor.com>
-References: <1418977765-46144-1-git-send-email-liezhi.yang@windriver.com>
-	<1418977765-46144-3-git-send-email-liezhi.yang@windriver.com>
+Message-ID: <20141229200731.GE4672@mentor.com>
+References: <cover.1419546494.git.paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1418977765-46144-3-git-send-email-liezhi.yang@windriver.com>
+In-Reply-To: <cover.1419546494.git.paul.eggleton@linux.intel.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking] [PATCH 3/3] netkit-rusers: fix parallel build issue
+Subject: Re: [meta-networking][PATCH 0/1] ntp upgrade (including security fixes)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,120 +38,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Dec 2014 20:07:03 -0000
-X-Groupsio-MsgNum: 53515
+X-List-Received-Date: Mon, 29 Dec 2014 20:07:40 -0000
+X-Groupsio-MsgNum: 53516
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="eheScQNz3K90DVRs"
+	protocol="application/pgp-signature"; boundary="tMbDGjvJuJijemkf"
 Content-Disposition: inline
 
---eheScQNz3K90DVRs
+--tMbDGjvJuJijemkf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Robert,
+Merged, thanks Paul.
+-J.
 
-I merged this patch after removing your "LOCAL REV:" comment from the
-commit log) but I haven't merged the esmtp ones yet, I wanted to confirm
-first that the runtime behaviour wasn't impacted.  Just FYI.
+[[oe] [meta-networking][PATCH 0/1] ntp upgrade (including security fixes)] =
+On 14.12.25 (Thu 22:29) Paul Eggleton wrote:
 
--J
-
-[[oe] [meta-networking] [PATCH 3/3] netkit-rusers: fix parallel build issue=
-] On 14.12.19 (Fri 00:29) Robert Yang wrote:
-
-> Fixed:
-> rusers.x: No such file or directory
-> Makefile:44: recipe for target 'rusers_xdr.c' failed
+> The following change since commit edcf03b5fb576dbeae3784471aec8c2b7a9a04a=
+8:
 >=20
-> (LOCAL REV: NOT UPSTREAM) -- Sent to meta-networking on 20141219
+>   eggdbus: port from openembedded. (2014-12-17 13:11:57 +0100)
 >=20
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> ---
->  ...rusersd-Makefile-fix-parallel-build-issue.patch |   30 ++++++++++++++=
+> is available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib paule/ntp-upgrade
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
+=3Dpaule/ntp-upgrade
+>=20
+> Paul Eggleton (1):
+>   ntp: upgrade to 4.2.8
+>=20
+>  .../recipes-support/ntp/files/CVE-2013-5211.patch  | 112 --------------
+>  .../recipes-support/ntp/files/openssl-check.patch  |  59 --------
+>  .../recipes-support/ntp/files/tickadj.c.patch      |  32 ----
+>  .../ntp/{files =3D> ntp}/ntp-4.2.4_p6-nano.patch     |   0
+>  .../ntp/ntp/ntp-4.2.8-ntp-keygen-no-openssl.patch  | 168 +++++++++++++++=
 ++++++
->  .../netkit-rusers/netkit-rusers_0.17.bb            |    1 +
->  2 files changed, 31 insertions(+)
->  create mode 100644 meta-networking/recipes-netkit/netkit-rusers/netkit-r=
-users/rpc.rusersd-Makefile-fix-parallel-build-issue.patch
+>  .../recipes-support/ntp/{files =3D> ntp}/ntp.conf    |   0
+>  .../recipes-support/ntp/{files =3D> ntp}/ntpd        |   0
+>  .../recipes-support/ntp/{files =3D> ntp}/ntpdate     |   0
+>  .../ntp/{files =3D> ntp}/ntpdate.default             |   0
+>  meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb |   6 -
+>  .../recipes-support/ntp/{ntp.inc =3D> ntp_4.2.8.bb}  |  41 ++---
+>  11 files changed, 191 insertions(+), 227 deletions(-)
+>  delete mode 100644 meta-networking/recipes-support/ntp/files/CVE-2013-52=
+11.patch
+>  delete mode 100644 meta-networking/recipes-support/ntp/files/openssl-che=
+ck.patch
+>  delete mode 100644 meta-networking/recipes-support/ntp/files/tickadj.c.p=
+atch
+>  rename meta-networking/recipes-support/ntp/{files =3D> ntp}/ntp-4.2.4_p6=
+-nano.patch (100%)
+>  create mode 100644 meta-networking/recipes-support/ntp/ntp/ntp-4.2.8-ntp=
+-keygen-no-openssl.patch
+>  rename meta-networking/recipes-support/ntp/{files =3D> ntp}/ntp.conf (10=
+0%)
+>  rename meta-networking/recipes-support/ntp/{files =3D> ntp}/ntpd (100%)
+>  rename meta-networking/recipes-support/ntp/{files =3D> ntp}/ntpdate (100=
+%)
+>  rename meta-networking/recipes-support/ntp/{files =3D> ntp}/ntpdate.defa=
+ult (100%)
+>  delete mode 100644 meta-networking/recipes-support/ntp/ntp_4.2.6p5.bb
+>  rename meta-networking/recipes-support/ntp/{ntp.inc =3D> ntp_4.2.8.bb} (=
+81%)
 >=20
-> diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers/r=
-pc.rusersd-Makefile-fix-parallel-build-issue.patch b/meta-networking/recipe=
-s-netkit/netkit-rusers/netkit-rusers/rpc.rusersd-Makefile-fix-parallel-buil=
-d-issue.patch
-> new file mode 100644
-> index 0000000..d85178d
-> --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers/rpc.ruse=
-rsd-Makefile-fix-parallel-build-issue.patch
-> @@ -0,0 +1,30 @@
-> +From c23cc112a480f90950de5cf1de09b1a7e732bf21 Mon Sep 17 00:00:00 2001
-> +From: Robert Yang <liezhi.yang@windriver.com>
-> +Date: Mon, 15 Dec 2014 18:31:13 -0800
-> +Subject: [PATCH] rpc.rusersd/Makefile: fix parallel build issue
-> +
-> +Fixed:
-> +rusers.x: No such file or directory
-> +Makefile:44: recipe for target 'rusers_xdr.c' failed
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> +---
-> + rpc.rusersd/Makefile |    2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/rpc.rusersd/Makefile b/rpc.rusersd/Makefile
-> +index 792f528..65a424a 100644
-> +--- a/rpc.rusersd/Makefile
-> ++++ b/rpc.rusersd/Makefile
-> +@@ -40,5 +40,5 @@ rusers.x:
-> + rusers.h: $(RUSERSX) rusers.x
-> + 	$(RPCGEN) -h -o rusers.h rusers.x
-> +=20
-> +-rusers_xdr.c: $(RUSERSX)
-> ++rusers_xdr.c: $(RUSERSX) rusers.x
-> + 	$(RPCGEN) -c -C -o rusers_xdr.c rusers.x
-> +--=20
-> +1.7.9.5
-> +
-> diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0=
-=2E17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.=
-bb
-> index e59f7a7..c930842 100644
-> --- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-> +++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-> @@ -8,6 +8,7 @@ DEPENDS =3D " tcp-wrappers libtirpc rpcbind"
-> =20
->  SRC_URI =3D "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;nam=
-e=3Darchive \
->             ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-8.diff.gz;name=3D=
-patch8 \
-> +           file://rpc.rusersd-Makefile-fix-parallel-build-issue.patch \
->  "
-> =20
->  SRC_URI[archive.md5sum] =3D "dc99a80b9fde2ab427c874f88f1c1602"
 > --=20
-> 1.7.9.5
+> 1.9.3
 >=20
 --=20
 -Joe MacDonald.
 :wq
 
---eheScQNz3K90DVRs
+--tMbDGjvJuJijemkf
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJUobRhAAoJEEn8ffcsOfaWThEH+wT3l+KcxOWj83QDHux6WN3Y
-/tz/leUBzS3ETZOCsjP8TU84HYUwtLi/kOd5U1CpoEzCPblWPe+Sra9S+1M0B9EU
-XGACkAMN/EsQErEL1Ic43UW9m7+oBkXZ7IAk2aUFc4OtgdQf/CTUzPBWohB8wZIt
-/CjgKKxZVLMn+1XCWYZqNQiDdmdbdue7vhy8cwc+OEcuOts+qgxpXR1LF3TpJDAu
-/op0vaaMdMi85gpFuFJz99v5Zopo/gXXrneQo3WP058x04bvfNGEtY4GjnXLDhuy
-dOIDAtvjt1bAkbZzn7T3Fs9y6aZr//YQHsH6x0wkrMDlwkm7GFCWBxPFrentIfs=
-=1N3+
+iQEcBAEBAgAGBQJUobSDAAoJEEn8ffcsOfaWETwH/3oG5REMK/KWxnPzsiI3jOLv
+jYiCR60jrgO0pY0XPwwfwMb7syA/UaKkn2uSvgqzMaMSXldpzEwWgcG9Be+G+29L
+MsKSZGb6blcxycPFBCYPF5TyRjDWRbTYYuskTL2EIVgmvjLPdNADtDaPMflJHXLv
+c14v9YvhXM/eJdrtUXZGxP2WI6kH5f2u6bECuEivpg9DR9v19JxnSTbIv3dpFfkJ
+rm0C2D1Ww00fG4mOXSZWB/PUeRlpZpFM4OVPakB/KOJKlHl2iPkVJaC0xjkhkF5J
+q0yYN7eaTp+ZvvkMdaqkK7duRbqFymbgyv4caTolT0wrwzfniEg2gVE26nXzCuM=
+=lE1G
 -----END PGP SIGNATURE-----
 
---eheScQNz3K90DVRs--
+--tMbDGjvJuJijemkf--
