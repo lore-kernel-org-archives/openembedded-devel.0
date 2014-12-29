@@ -1,37 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id A81FD724D8;
-	Mon, 29 Dec 2014 09:55:33 +0000 (UTC)
-Received: by mail-wg0-f50.google.com with SMTP id a1so18545444wgh.37;
-	Mon, 29 Dec 2014 01:55:33 -0800 (PST)
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 6727D7269B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Dec 2014 10:01:16 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id bs8so21512615wib.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Dec 2014 02:01:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=LI/6SmB9QBvgC8iy2hitQDuOqNRhcnLPndUBqBtDXVA=;
-	b=k/kgHJqJQ2pBxJvLV64bYKHVjGUk6v/ubylbDMxMN/i2BjNfuRMm5A75Drkf18TFkP
-	cd7plDVTNin81m3kSPdrIgizYZjjcl2Ckuet/nV30owp+dvtL2xmcleIxNraxLHOdtjp
-	D0dMYubZf5NQmkeVS7ZGhpXgYcxgQuvpiimtSiO9uVl1q7/HeaPlibQFdXvcwQdGYXn3
-	XUcxU2fhHTruuAXxif/KqY6GqMoql0FlYhQF4AAtUpGELxjb4YYixiNh+fa0XSkhKDyW
-	f6m8eJEyZmshw8YGj3UyjqS3ftGfRHqnmgB2darMg1tb1msr+GYOVtJsLBpi2YaEfAWN
-	EtCg==
-X-Received: by 10.194.78.229 with SMTP id e5mr62187050wjx.11.1419846933220;
-	Mon, 29 Dec 2014 01:55:33 -0800 (PST)
+	bh=YqJQloh34n5AXsKo5qAqDdOmsfQk1DTmu0fT5u3ciDY=;
+	b=yYb8PHBRSNXpl5r5OHJqBEzuRt813jL9B2welgh7cmGCHze2sY2BfP1GxBGlNU3mOP
+	NAvweALc5N9yjfwTnyQslMQhVOF4cdKgtIe4YqRqjqtE5BaztTh1ejFnHpaVkpfPYs7p
+	WVp/Jr4fYipWqpcwBKuYuovwQcf+3sXMEDQ81d3b5QVDp61rzq7L4CKPaqbaQFs0ZIj4
+	9OTmJDlWtlHupheNuqFXXbifE429yuSb8Z+ohGdSfC+7chaJtKODlfT1k9OMLwL90qiY
+	nY6GzCqeI+T5/StTU+GIKHndqDB4+AXcs5RDM/6xrb/HqcPbsP2kjnlqVRDAPFLIutKa
+	JtmA==
+X-Received: by 10.194.90.81 with SMTP id bu17mr17447343wjb.3.1419847276955;
+	Mon, 29 Dec 2014 02:01:16 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	cg8sm47210677wjc.1.2014.12.29.01.55.32
+	u13sm46488817wjr.26.2014.12.29.02.01.15
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Dec 2014 01:55:32 -0800 (PST)
+	Mon, 29 Dec 2014 02:01:16 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 29 Dec 2014 10:55:41 +0100
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20141229095541.GK2465@jama>
-References: <20141229092524.GJ2465@jama>
+Date: Mon, 29 Dec 2014 11:01:25 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20141229100125.GL2465@jama>
+References: <1419218925-35226-1-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <20141229092524.GJ2465@jama>
+In-Reply-To: <1419218925-35226-1-git-send-email-biannm@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: State of bitbake world, Failed tasks 2014-12-{11,22,29}
+Subject: Re: [meta-networking][PATCH] linux-atm: add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,96 +48,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Dec 2014 09:55:38 -0000
-X-Groupsio-MsgNum: 53502
+X-List-Received-Date: Mon, 29 Dec 2014 10:01:21 -0000
+X-Groupsio-MsgNum: 53503
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Qgof7w7UksPF5inF"
+	protocol="application/pgp-signature"; boundary="o+ZCuNqY+dEAKBWl"
 Content-Disposition: inline
 
---Qgof7w7UksPF5inF
+--o+ZCuNqY+dEAKBWl
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 29, 2014 at 10:25:24AM +0100, Martin Jansa wrote:
-> We had almost clean state around 2014-12-12 after blacklisting few more recipes.
-> Only xfce4-vala was failing. Then I've added 2 new layers meta-luneui and meta-luneos
-> which break bunch of recipes (by introducing newer nodejs, changing qtbase
-> PACKAGECONFIG, I'm still working on them to have fewer side-effects).
+On Mon, Dec 22, 2014 at 11:28:45AM +0800, Bian Naimeng wrote:
+> Drivers and tools to support ATM networking under Linux
+>=20
+> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> ---
+>  .../linux-atm/linux-atm/install-from-buildir.patch | 19 +++++++++++
+>  .../linux-atm/linux-atm/link-with-ldflags.patch    | 38 ++++++++++++++++=
+++++++
+>  .../recipes-support/linux-atm/linux-atm_2.5.2.bb   | 22 +++++++++++++
+>  3 files changed, 79 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/i=
+nstall-from-buildir.patch
+>  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/l=
+ink-with-ldflags.patch
+>  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm_2=
+=2E5.2.bb
+>=20
+> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/install-=
+=66rom-buildir.patch b/meta-networking/recipes-support/linux-atm/linux-atm/=
+install-from-buildir.patch
+> new file mode 100644
+> index 0000000..d1380eb
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/linux-atm/linux-atm/install-from-bu=
+ildir.patch
+> @@ -0,0 +1,19 @@
+> +install binaries from builddir not srcdir.
+> +
+> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> +
+> +--- linux-atm-2.5.2.orig/src/extra/Makefile.am	2010-12-21 05:07:22.00000=
+0000 +0800
+> ++++ linux-atm-2.5.2/src/extra/Makefile.am	2014-12-22 10:56:04.458563269 =
++0800
+> +@@ -9,9 +9,9 @@ CLEANFILES =3D pca200e.bin pca200e_ecd.bin
+> +=20
+> + install-exec-hook:
+> + 	$(MKDIR_P) $(DESTDIR)/lib/firmware
+> +-	$(INSTALL_DATA) $(srcdir)/pca200e.bin $(DESTDIR)/lib/firmware
+> +-	$(INSTALL_DATA) $(srcdir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
+> +-	$(INSTALL_DATA) $(srcdir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
+> ++	$(INSTALL_DATA) $(builddir)/pca200e.bin $(DESTDIR)/lib/firmware
+> ++	$(INSTALL_DATA) $(builddir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
+> ++	$(INSTALL_DATA) $(builddir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
+> +=20
+> + %.bin %.bin2: %.data
+> + 	objcopy -Iihex $< -Obinary $@.gz
+> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/link-wit=
+h-ldflags.patch b/meta-networking/recipes-support/linux-atm/linux-atm/link-=
+with-ldflags.patch
+> new file mode 100644
+> index 0000000..62fad2a
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldfla=
+gs.patch
+> @@ -0,0 +1,38 @@
+> +LDFLAGS_FOR_BUILD should be required when doing link for qgen.
+> +
+> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> +
+> +diff -Nurp linux-atm-2.5.2.orig/configure.in linux-atm-2.5.2/configure.in
+> +--- linux-atm-2.5.2.orig/configure.in	2010-12-28 23:36:07.000000000 +0800
+> ++++ linux-atm-2.5.2/configure.in	2014-12-22 10:25:23.830510932 +0800
+> +@@ -66,6 +66,7 @@ else
+> + fi
+> + AC_SUBST(CC_FOR_BUILD)
+> + AC_SUBST(CFLAGS_FOR_BUILD)
+> ++AC_SUBST(LDFLAGS_FOR_BUILD)
+> + dnl Add -d flag to bison/yacc to create intermediate .h files
+> + YACC=3D"$YACC -d"
+> +=20
+> +diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.am linux-atm-2.5.2/src=
+/qgen/Makefile.am
+> +--- linux-atm-2.5.2.orig/src/qgen/Makefile.am	2010-12-28 22:29:31.000000=
+000 +0800
+> ++++ linux-atm-2.5.2/src/qgen/Makefile.am	2014-12-22 10:23:51.914508318 +=
+0800
+> +@@ -5,7 +5,7 @@ qgen_SOURCES =3D common.c common.h file.c
+> + qgen_LDADD =3D -lfl
+> +=20
+> + COMPILE =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@
+> +-LINK =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ -o $@
+> ++LINK =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ @LDFLAGS_FOR_BUILD@ -o $@
+> +=20
+> + #TESTS =3D $(check_PROGRAMS)
+> +=20
+> +diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.in linux-atm-2.5.2/src=
+/qgen/Makefile.in
+> +--- linux-atm-2.5.2.orig/src/qgen/Makefile.in	2010-12-29 00:06:11.000000=
+000 +0800
+> ++++ linux-atm-2.5.2/src/qgen/Makefile.in	2014-12-22 10:23:51.914508318 +=
+0800
+> +@@ -106,6 +106,7 @@ INSTALL_SCRIPT =3D @INSTALL_SCRIPT@
+> + INSTALL_STRIP_PROGRAM =3D @INSTALL_STRIP_PROGRAM@
+> + LD =3D @LD@
+> + LDFLAGS =3D @LDFLAGS@
+> ++LDFLAGS_FOR_BUILD =3D @LDFLAGS_FOR_BUILD@
+> + LEX =3D @LEX@
+> + LEXLIB =3D @LEXLIB@
+> + LEX_OUTPUT_ROOT =3D @LEX_OUTPUT_ROOT@
+> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb=
+ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+> new file mode 100644
+> index 0000000..a32d2a7
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION =3D "Drivers and tools to support ATM networking under Linux"
+> +HOMEPAGE =3D "http://linux-atm.sourceforge.net/"
+> +SECTION =3D "libs"
+> +LICENSE =3D "GPL-2.0 LGPL-2.0"
 
-+ many warnings from stricter LICENSE check.
+WARNING: Recipe linux-atm, LICENSE (GPL-2.0 LGPL-2.0) has invalid
+format, LICENSES must have operator "([&|() ])" between them.
 
-BTW: is "([&|() ])" correct? from this it looks like space is valid operator/separator,
+> +DEPENDS =3D "virtual/kernel flex flex-native"
+> +
+> +SRC_URI =3D "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/=
+${BPN}-${PV}.tar.gz \
+> +           file://link-with-ldflags.patch \
+> +           file://install-from-buildir.patch"
+> +
+> +SRC_URI[md5sum] =3D "d49499368c3cf15f73a05d9bce8824a8"
+> +SRC_URI[sha256sum] =3D "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37=
+581018fbd16dd53a"
+> +
+> +LIC_FILES_CHKSUM =3D "\
+> +file://COPYING;md5=3Dd928de9537d846935a98af3bbc6e6ee1 \
+> +file://COPYING.GPL;md5=3Dac2db169b9309e240555bc77be4f1a33 \
+> +file://COPYING.LGPL;md5=3D6e29c688d912da12b66b73e32b03d812"
+> +
+> +inherit autotools pkgconfig
+> +
+> +FILES_${PN} +=3D "${base_libdir}/firmware"
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-WARNING: Recipe xfce4-wavelan-plugin, LICENSE (BenediktMeurer FlorianRivoal) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe libeweather, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe epeg, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe imlib2, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe expedite, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe expedite, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe evas-generic-loaders, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe epdf, LICENSE (GPLv2 LGPLv3) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe emotion-generic-players, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-theme-efenniht, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe engrave, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe efl, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe edbus, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe edb, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-illume-dict-pl, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-native, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe azy, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe edbus-native, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe efl-native, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe terminology, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe azy-native, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe illume-keyboards-shr, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe exquisite, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe exquisite-theme-illume, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe ephoto, LICENSE (MIT GPL-3.0) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-illume-efenniht, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-b-and-w, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe illume-theme-freesmartphone, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash-theme-simple, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash-theme-tux, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash-theme-openmoko, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash-theme-niebiee, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash-theme-logo, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash-theme-dontpanic, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash-theme-handy, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe gtk-theme-e17lookalike, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-theme-sowka, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-theme-sixteen, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-theme-niebiee, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-theme-o2, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-theme-neo, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-sowka, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-illume-shr, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-illume-sixteen, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe elementary-theme-gry, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-illume-niebiee, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-illume-neo, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-theme-illume-gry, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe shr-splash, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-menu-shr, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-sysactions-shr, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe e-wm-config-illume2-shr, LICENSE (MIT BSD) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe mailcap, LICENSE (PD MIT) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe traceroute, LICENSE (GPL-2.0 LGPL-2.1) has invalid format, LICENSES must have operator "([&|() ])" between them.
-WARNING: Recipe linux-atm, LICENSE (GPL-2.0 LGPL-2.0) has invalid format, LICENSES must have operator "([&|() ])" between them.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Qgof7w7UksPF5inF
+--o+ZCuNqY+dEAKBWl
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlShJR0ACgkQN1Ujt2V2gByCjgCfTWDYLGjMjH/mwVR/FwVM+Cq6
-aoMAoJuE8eiHI2agBOGzNDQ/QwgTI6C1
-=UEwt
+iEYEARECAAYFAlShJnUACgkQN1Ujt2V2gBy1EwCeJgEaJD85vIoU14OHK9HficDF
+VFYAnRy4YIcAuKmv/UyZE/8W9Qd4UiRq
+=gaGs
 -----END PGP SIGNATURE-----
 
---Qgof7w7UksPF5inF--
+--o+ZCuNqY+dEAKBWl--
