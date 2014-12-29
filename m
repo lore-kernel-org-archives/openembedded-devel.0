@@ -1,40 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 6727D7269B
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id DC59C7262E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2014 10:01:16 +0000 (UTC)
-Received: by mail-wi0-f171.google.com with SMTP id bs8so21512615wib.16
+	Mon, 29 Dec 2014 10:02:57 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id r20so21552415wiv.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2014 02:01:17 -0800 (PST)
+	Mon, 29 Dec 2014 02:02:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=YqJQloh34n5AXsKo5qAqDdOmsfQk1DTmu0fT5u3ciDY=;
-	b=yYb8PHBRSNXpl5r5OHJqBEzuRt813jL9B2welgh7cmGCHze2sY2BfP1GxBGlNU3mOP
-	NAvweALc5N9yjfwTnyQslMQhVOF4cdKgtIe4YqRqjqtE5BaztTh1ejFnHpaVkpfPYs7p
-	WVp/Jr4fYipWqpcwBKuYuovwQcf+3sXMEDQ81d3b5QVDp61rzq7L4CKPaqbaQFs0ZIj4
-	9OTmJDlWtlHupheNuqFXXbifE429yuSb8Z+ohGdSfC+7chaJtKODlfT1k9OMLwL90qiY
-	nY6GzCqeI+T5/StTU+GIKHndqDB4+AXcs5RDM/6xrb/HqcPbsP2kjnlqVRDAPFLIutKa
-	JtmA==
-X-Received: by 10.194.90.81 with SMTP id bu17mr17447343wjb.3.1419847276955;
-	Mon, 29 Dec 2014 02:01:16 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=3N/kSNL4FoqxQkBdRD+Qv65xiDRyiB6H4FxhLXiYya0=;
+	b=h23Hx2CMmVQGVa9tIRl5uJIMvoUNews4r680xGw0d5qzinsDeD9DIGnvXDhrdWZ1EK
+	EwtEjHU2Et0XKkHeyqDg2n38pLsLvUzHl2Huo9fg6A+CLb3bO/OK+489pe4wEbxe7n7P
+	fGcMVJ53Sqd20y9M5q8+hrG6vFYSNtEeeYKzo5JQoJNcE/0RABCMTCyRQyRvcnWp0SlT
+	kIPFCcW41D51GCq/FaOi9gKTiVqtVLxdPFrqbI9QmRQnsqda86jANNlLC8qJx6Hd13g9
+	ZFrQP5iD4Wv27HEUP5PdY7iN1KdOMZBQH7opVCkuDXiFZUjR4/xIhnw5/wUW1r31ffCG
+	VwUA==
+X-Received: by 10.180.19.193 with SMTP id h1mr94064418wie.10.1419847377258;
+	Mon, 29 Dec 2014 02:02:57 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	u13sm46488817wjr.26.2014.12.29.02.01.15
-	for <openembedded-devel@lists.openembedded.org>
+	r3sm38877319wic.10.2014.12.29.02.02.56
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Dec 2014 02:01:16 -0800 (PST)
+	Mon, 29 Dec 2014 02:02:56 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 29 Dec 2014 11:01:25 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20141229100125.GL2465@jama>
-References: <1419218925-35226-1-git-send-email-biannm@cn.fujitsu.com>
-MIME-Version: 1.0
-In-Reply-To: <1419218925-35226-1-git-send-email-biannm@cn.fujitsu.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] linux-atm: add recipe.
+Date: Mon, 29 Dec 2014 11:03:03 +0100
+Message-Id: <1419847383-10305-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.2.1
+Subject: [meta-efl][PATCH] meta-efl: use MIT & BSD license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,173 +43,245 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Dec 2014 10:01:21 -0000
-X-Groupsio-MsgNum: 53503
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="o+ZCuNqY+dEAKBWl"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 29 Dec 2014 10:03:02 -0000
 
---o+ZCuNqY+dEAKBWl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* add & operator
 
-On Mon, Dec 22, 2014 at 11:28:45AM +0800, Bian Naimeng wrote:
-> Drivers and tools to support ATM networking under Linux
->=20
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> ---
->  .../linux-atm/linux-atm/install-from-buildir.patch | 19 +++++++++++
->  .../linux-atm/linux-atm/link-with-ldflags.patch    | 38 ++++++++++++++++=
-++++++
->  .../recipes-support/linux-atm/linux-atm_2.5.2.bb   | 22 +++++++++++++
->  3 files changed, 79 insertions(+)
->  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/i=
-nstall-from-buildir.patch
->  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/l=
-ink-with-ldflags.patch
->  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm_2=
-=2E5.2.bb
->=20
-> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/install-=
-=66rom-buildir.patch b/meta-networking/recipes-support/linux-atm/linux-atm/=
-install-from-buildir.patch
-> new file mode 100644
-> index 0000000..d1380eb
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/linux-atm/linux-atm/install-from-bu=
-ildir.patch
-> @@ -0,0 +1,19 @@
-> +install binaries from builddir not srcdir.
-> +
-> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> +
-> +--- linux-atm-2.5.2.orig/src/extra/Makefile.am	2010-12-21 05:07:22.00000=
-0000 +0800
-> ++++ linux-atm-2.5.2/src/extra/Makefile.am	2014-12-22 10:56:04.458563269 =
-+0800
-> +@@ -9,9 +9,9 @@ CLEANFILES =3D pca200e.bin pca200e_ecd.bin
-> +=20
-> + install-exec-hook:
-> + 	$(MKDIR_P) $(DESTDIR)/lib/firmware
-> +-	$(INSTALL_DATA) $(srcdir)/pca200e.bin $(DESTDIR)/lib/firmware
-> +-	$(INSTALL_DATA) $(srcdir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> +-	$(INSTALL_DATA) $(srcdir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> ++	$(INSTALL_DATA) $(builddir)/pca200e.bin $(DESTDIR)/lib/firmware
-> ++	$(INSTALL_DATA) $(builddir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> ++	$(INSTALL_DATA) $(builddir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> +=20
-> + %.bin %.bin2: %.data
-> + 	objcopy -Iihex $< -Obinary $@.gz
-> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/link-wit=
-h-ldflags.patch b/meta-networking/recipes-support/linux-atm/linux-atm/link-=
-with-ldflags.patch
-> new file mode 100644
-> index 0000000..62fad2a
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldfla=
-gs.patch
-> @@ -0,0 +1,38 @@
-> +LDFLAGS_FOR_BUILD should be required when doing link for qgen.
-> +
-> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> +
-> +diff -Nurp linux-atm-2.5.2.orig/configure.in linux-atm-2.5.2/configure.in
-> +--- linux-atm-2.5.2.orig/configure.in	2010-12-28 23:36:07.000000000 +0800
-> ++++ linux-atm-2.5.2/configure.in	2014-12-22 10:25:23.830510932 +0800
-> +@@ -66,6 +66,7 @@ else
-> + fi
-> + AC_SUBST(CC_FOR_BUILD)
-> + AC_SUBST(CFLAGS_FOR_BUILD)
-> ++AC_SUBST(LDFLAGS_FOR_BUILD)
-> + dnl Add -d flag to bison/yacc to create intermediate .h files
-> + YACC=3D"$YACC -d"
-> +=20
-> +diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.am linux-atm-2.5.2/src=
-/qgen/Makefile.am
-> +--- linux-atm-2.5.2.orig/src/qgen/Makefile.am	2010-12-28 22:29:31.000000=
-000 +0800
-> ++++ linux-atm-2.5.2/src/qgen/Makefile.am	2014-12-22 10:23:51.914508318 +=
-0800
-> +@@ -5,7 +5,7 @@ qgen_SOURCES =3D common.c common.h file.c
-> + qgen_LDADD =3D -lfl
-> +=20
-> + COMPILE =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@
-> +-LINK =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ -o $@
-> ++LINK =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ @LDFLAGS_FOR_BUILD@ -o $@
-> +=20
-> + #TESTS =3D $(check_PROGRAMS)
-> +=20
-> +diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.in linux-atm-2.5.2/src=
-/qgen/Makefile.in
-> +--- linux-atm-2.5.2.orig/src/qgen/Makefile.in	2010-12-29 00:06:11.000000=
-000 +0800
-> ++++ linux-atm-2.5.2/src/qgen/Makefile.in	2014-12-22 10:23:51.914508318 +=
-0800
-> +@@ -106,6 +106,7 @@ INSTALL_SCRIPT =3D @INSTALL_SCRIPT@
-> + INSTALL_STRIP_PROGRAM =3D @INSTALL_STRIP_PROGRAM@
-> + LD =3D @LD@
-> + LDFLAGS =3D @LDFLAGS@
-> ++LDFLAGS_FOR_BUILD =3D @LDFLAGS_FOR_BUILD@
-> + LEX =3D @LEX@
-> + LEXLIB =3D @LEXLIB@
-> + LEX_OUTPUT_ROOT =3D @LEX_OUTPUT_ROOT@
-> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb=
- b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-> new file mode 100644
-> index 0000000..a32d2a7
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION =3D "Drivers and tools to support ATM networking under Linux"
-> +HOMEPAGE =3D "http://linux-atm.sourceforge.net/"
-> +SECTION =3D "libs"
-> +LICENSE =3D "GPL-2.0 LGPL-2.0"
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/classes/efl.bbclass                               | 2 +-
+ meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb         | 2 +-
+ meta-efl/recipes-efl/e17/e-wm-theme-illume-efenniht_svn.bb | 2 +-
+ meta-efl/recipes-efl/e17/e-wm.inc                          | 2 +-
+ meta-efl/recipes-efl/e17/ephoto_svn.bb                     | 2 +-
+ meta-efl/recipes-efl/e17/exquisite-theme-illume.bb         | 2 +-
+ meta-efl/recipes-efl/e17/exquisite_svn.bb                  | 2 +-
+ meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb       | 2 +-
+ meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb         | 2 +-
+ meta-efl/recipes-efl/e17/nonworking/rage_svn.bb            | 2 +-
+ meta-efl/recipes-efl/e17/terminology.inc                   | 2 +-
+ meta-efl/recipes-efl/efl/e-wm-illume-dict-pl_git.bb        | 2 +-
+ meta-efl/recipes-efl/efl/edb_svn.bb                        | 2 +-
+ meta-efl/recipes-efl/efl/edbus.inc                         | 2 +-
+ meta-efl/recipes-efl/efl/efl.inc                           | 2 +-
+ meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb  | 2 +-
+ meta-efl/recipes-efl/efl/expedite.inc                      | 2 +-
+ meta-efl/recipes-efl/efl/imlib2_git.bb                     | 2 +-
+ 18 files changed, 18 insertions(+), 18 deletions(-)
 
-WARNING: Recipe linux-atm, LICENSE (GPL-2.0 LGPL-2.0) has invalid
-format, LICENSES must have operator "([&|() ])" between them.
+diff --git a/meta-efl/classes/efl.bbclass b/meta-efl/classes/efl.bbclass
+index fb96ef0..eb40e4b 100644
+--- a/meta-efl/classes/efl.bbclass
++++ b/meta-efl/classes/efl.bbclass
+@@ -1,5 +1,5 @@
+ SECTION = "e/libs"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ DEPENDS += "pkgconfig-native"
+ 
+ # revision 0d93ec84b30bc1bee2caaee72d667f87bc468a70 made SRCDATE and hence PV go backwards, so we need to up PE to unbreak builds and feeds :(
+diff --git a/meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb b/meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb
+index af32a35..ae1b8a6 100644
+--- a/meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb
++++ b/meta-efl/recipes-efl/e17/e-wm-theme-b-and-w_svn.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "b-and-w theme was default E17 theme before alpha3 and some people
+ SECTION = "e/utils"
+ DEPENDS = "edje-native"
+ RDEPENDS_${PN} = "e-wm"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ # upstream was asked to include license infor in THEME dir
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+ 
+diff --git a/meta-efl/recipes-efl/e17/e-wm-theme-illume-efenniht_svn.bb b/meta-efl/recipes-efl/e17/e-wm-theme-illume-efenniht_svn.bb
+index 1bf5f1d..965e4e9 100644
+--- a/meta-efl/recipes-efl/e17/e-wm-theme-illume-efenniht_svn.bb
++++ b/meta-efl/recipes-efl/e17/e-wm-theme-illume-efenniht_svn.bb
+@@ -9,7 +9,7 @@ HOMEPAGE = "http://trac.enlightenment.org/e/wiki/Themes#Efenniht"
+ DEPENDS = "edje-native"
+ RDEPENDS_${PN} = "e-wm"
+ RSUGGESTS_${PN} = "elementary-theme-efenniht"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
+ 
+ SRCREV = "${EFL_SRCREV}"
+diff --git a/meta-efl/recipes-efl/e17/e-wm.inc b/meta-efl/recipes-efl/e17/e-wm.inc
+index 0ff26ef..5e3f293 100644
+--- a/meta-efl/recipes-efl/e17/e-wm.inc
++++ b/meta-efl/recipes-efl/e17/e-wm.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "The Enlightenment Window Manager Version 17"
+ DEPENDS = "eet evas eina ecore edje efreet edbus eeze eio elementary libxcb xcb-util-keysyms"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=76de290eb3fdda12121830191c152a7d"
+ SRCNAME = "e"
+ 
+diff --git a/meta-efl/recipes-efl/e17/ephoto_svn.bb b/meta-efl/recipes-efl/e17/ephoto_svn.bb
+index 3255ab8..5cecda5 100644
+--- a/meta-efl/recipes-efl/e17/ephoto_svn.bb
++++ b/meta-efl/recipes-efl/e17/ephoto_svn.bb
+@@ -1,4 +1,4 @@
+-LICENSE = "MIT GPL-3.0"
++LICENSE = "MIT & GPL-3.0"
+ PV = "0.1.0+svnr${SRCREV}"
+ PR = "${INC_PR}.0"
+ 
+diff --git a/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb b/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb
+index 5948e20..aad0646 100644
+--- a/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb
++++ b/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb
+@@ -1,5 +1,5 @@
+ DDESCRIPTION = "A theme for exquisite"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
+ SECTION = "x11"
+ DEPENDS = "edje-native"
+diff --git a/meta-efl/recipes-efl/e17/exquisite_svn.bb b/meta-efl/recipes-efl/e17/exquisite_svn.bb
+index dc46a94..8f2d25d 100644
+--- a/meta-efl/recipes-efl/e17/exquisite_svn.bb
++++ b/meta-efl/recipes-efl/e17/exquisite_svn.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "A psplash replacement for display"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=14defa372a91118e755133bc8e6aff83"
+ DEPENDS = "eet evas ecore embryo edje"
+ PV = "0.0.1+svnr${SRCPV}"
+diff --git a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb b/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
+index 55f3282..6f81b6b 100644
+--- a/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
++++ b/meta-efl/recipes-efl/e17/illume-keyboards-shr_git.bb
+@@ -9,7 +9,7 @@ SRCREV = "4064489f359a1addf572089b582f317dff5f50e1"
+ PV = "0.0+gitr${SRCPV}"
+ PE = "1"
+ PR = "r5"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
+ 
+ PACKAGES = "\
+diff --git a/meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb b/meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb
+index 777e302..6c2abdc 100644
+--- a/meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb
++++ b/meta-efl/recipes-efl/e17/nonworking/emprint_svn.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Emprint is a utility for taking screenshots of the entire screen, a specific window, or a specific region."
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ DEPENDS = "imlib2 virtual/libx11 ecore evas edje eina"
+ PV = "0.0.1+svnr${SRCPV}"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
+diff --git a/meta-efl/recipes-efl/e17/nonworking/rage_svn.bb b/meta-efl/recipes-efl/e17/nonworking/rage_svn.bb
+index 3cf576f..da51ae6 100644
+--- a/meta-efl/recipes-efl/e17/nonworking/rage_svn.bb
++++ b/meta-efl/recipes-efl/e17/nonworking/rage_svn.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Rage is a media center application based on EFL"
+ AUTHOR = "Carsten 'The Rasterman' Haitzler"
+ HOMEPAGE = "http://www.rasterman.com"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
+ DEPENDS = "emotion evas ecore edje"
+ SECTION = "x11/multimedia"
+diff --git a/meta-efl/recipes-efl/e17/terminology.inc b/meta-efl/recipes-efl/e17/terminology.inc
+index 9dd2264..bec2c0a 100644
+--- a/meta-efl/recipes-efl/e17/terminology.inc
++++ b/meta-efl/recipes-efl/e17/terminology.inc
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Enlightenment Terminal Emulator"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9a8682b561bdfa219d59483a679ed80a"
+ DEPENDS = "evas ecore edje elementary eina eet emotion"
+ 
+diff --git a/meta-efl/recipes-efl/efl/e-wm-illume-dict-pl_git.bb b/meta-efl/recipes-efl/efl/e-wm-illume-dict-pl_git.bb
+index 17f668b..657adcd 100644
+--- a/meta-efl/recipes-efl/efl/e-wm-illume-dict-pl_git.bb
++++ b/meta-efl/recipes-efl/efl/e-wm-illume-dict-pl_git.bb
+@@ -3,7 +3,7 @@ SECTION = "x11/data"
+ SRCREV = "38fdd9bb0d8296e984bb6443466801eea6f62f00"
+ PV = "1.0+gitr${SRCPV}"
+ PE = "1"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
+ 
+ SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
+diff --git a/meta-efl/recipes-efl/efl/edb_svn.bb b/meta-efl/recipes-efl/efl/edb_svn.bb
+index a895cb3..7c6abda 100644
+--- a/meta-efl/recipes-efl/efl/edb_svn.bb
++++ b/meta-efl/recipes-efl/efl/edb_svn.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Edb is the Enlightenment database library"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d8a7c08df3bc3280208b959be7215c25 \
+                     file://COPYING-PLAIN;md5=f59cacc08235a546b0c34a5422133035"
+ 
+diff --git a/meta-efl/recipes-efl/efl/edbus.inc b/meta-efl/recipes-efl/efl/edbus.inc
+index 7b11af5..03d0ee5 100644
+--- a/meta-efl/recipes-efl/efl/edbus.inc
++++ b/meta-efl/recipes-efl/efl/edbus.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "DBus and HAL convenience wrappers for EFL"
+ DEPENDS = "dbus ecore eina"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=550b8cea13dacc4bf00508a8cce1074c"
+ 
+ inherit efl
+diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
+index 05fe1bd..d870fdb 100644
+--- a/meta-efl/recipes-efl/efl/efl.inc
++++ b/meta-efl/recipes-efl/efl/efl.inc
+@@ -1,5 +1,5 @@
+ SUMMARY = "EFL"
+-LICENSE = "MIT BSD LGPL-2.1"
++LICENSE = "MIT & BSD & LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a1809a807e39dd48ddcf7be98477d130"
+ 
+ DEPENDS_class-native = "freetype-native libxext-native libpng-native jpeg-native tiff-native libfribidi-native glib-2.0-native dbus-native"
+diff --git a/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb b/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
+index fa635c0..494e743 100644
+--- a/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
++++ b/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
+@@ -8,7 +8,7 @@ SECTION = "e/utils"
+ HOMEPAGE = "http://trac.enlightenment.org/e/wiki/Themes#Efenniht"
+ DEPENDS = "edje-native"
+ RSUGGESTS_${PN} = "e-wm-theme-illume-efenniht"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=f523ab5986cc79b52a90d2ac3d5454a2"
+ 
+ SRCREV_THM_REV ?= "${EFL_SRCREV}"
+diff --git a/meta-efl/recipes-efl/efl/expedite.inc b/meta-efl/recipes-efl/efl/expedite.inc
+index 30ba063..60e8597 100644
+--- a/meta-efl/recipes-efl/efl/expedite.inc
++++ b/meta-efl/recipes-efl/efl/expedite.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Expedite is a comprehensive benchmarking suite for Evas"
+ DEPENDS = "eet evas libsdl"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d70bc65d46237e4ef386beebe7d0fe5b"
+ 
+ INC_PR = "r0"
+diff --git a/meta-efl/recipes-efl/efl/imlib2_git.bb b/meta-efl/recipes-efl/efl/imlib2_git.bb
+index 8c6ac66..355b334 100644
+--- a/meta-efl/recipes-efl/efl/imlib2_git.bb
++++ b/meta-efl/recipes-efl/efl/imlib2_git.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "A graphic library for file loading, saving, rendering, and manipulation"
+-LICENSE = "MIT BSD"
++LICENSE = "MIT & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35"
+ 
+ DEPENDS = "freetype libpng jpeg virtual/libx11 libxext"
+-- 
+2.2.1
 
-> +DEPENDS =3D "virtual/kernel flex flex-native"
-> +
-> +SRC_URI =3D "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/=
-${BPN}-${PV}.tar.gz \
-> +           file://link-with-ldflags.patch \
-> +           file://install-from-buildir.patch"
-> +
-> +SRC_URI[md5sum] =3D "d49499368c3cf15f73a05d9bce8824a8"
-> +SRC_URI[sha256sum] =3D "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37=
-581018fbd16dd53a"
-> +
-> +LIC_FILES_CHKSUM =3D "\
-> +file://COPYING;md5=3Dd928de9537d846935a98af3bbc6e6ee1 \
-> +file://COPYING.GPL;md5=3Dac2db169b9309e240555bc77be4f1a33 \
-> +file://COPYING.LGPL;md5=3D6e29c688d912da12b66b73e32b03d812"
-> +
-> +inherit autotools pkgconfig
-> +
-> +FILES_${PN} +=3D "${base_libdir}/firmware"
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---o+ZCuNqY+dEAKBWl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlShJnUACgkQN1Ujt2V2gBy1EwCeJgEaJD85vIoU14OHK9HficDF
-VFYAnRy4YIcAuKmv/UyZE/8W9Qd4UiRq
-=gaGs
------END PGP SIGNATURE-----
-
---o+ZCuNqY+dEAKBWl--
