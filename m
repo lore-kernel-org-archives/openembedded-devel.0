@@ -1,35 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BB7E7227D
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Dec 2014 16:46:03 +0000 (UTC)
-Received: by mail-pd0-f171.google.com with SMTP id y13so15719710pdi.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Dec 2014 08:46:04 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id D2F3D725E3;
+	Mon, 29 Dec 2014 09:25:15 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id bs8so21461527wib.10;
+	Mon, 29 Dec 2014 01:25:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=8PDgV7aQatJoPJpZsopJ4znNNzC4S8/0rGQgiKk84LI=;
-	b=Fs2JiETkMruKPAA/cUQZyJ5PtD0FRNdRpeXzHVn0uBc2F3vP0Vx0bnzB27h/Lwixe8
-	QUD+77vMnEYQOj56EWNNDZCubEg6BPX1RQUb0q7TS1kmrIDcMvSzkekwM/3XYe3seUTH
-	JC/IBTPxP5q5dy8GaKUKdpwQXCySYEsT84LJmLwS4dxkvYOVLmTAsg3EPbTE8Q5qYT2Y
-	TvmC6IZ/fYVqPaZEQZ/4wkVX6w0zVZG42hb//AZTZcyhy6SV0wOLfcnKr6H2jbw/H9t5
-	Hq6HdgXIYP8RzLEB8Aamcf4JIOHdXpRxsbcPQcwp/3pfZrp5y75hSneS0PS89rExi7iE
-	ZPDg==
-X-Received: by 10.70.31.197 with SMTP id c5mr56907000pdi.93.1419785163935;
-	Sun, 28 Dec 2014 08:46:03 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by mx.google.com with ESMTPSA id
-	uq15sm33624511pab.8.2014.12.28.08.46.01
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 28 Dec 2014 08:46:02 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Dec 2014 08:45:57 -0800
-Message-Id: <1419785157-24929-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Cc: otavio@ossystems.com.br
-Subject: [meta-networking][dizzy][PATCH] ntp: fix several security issues
+	h=from:date:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	bh=veSHrz1b4yTEaYY+IIy7dFINKcggTanr5H2aXMHr3NI=;
+	b=gUrstuBziJzAOk1plkvfy4g+WAPNlDgvx0LKhTfXJWM/V8hUT12Ty6ES/ZdZX8225J
+	x0igAty0vzDeQK1HH8uXXZw/uOFmTi09sNVUcMFfxNXt/Y1jj599x3iZCd/D6Rs25sYs
+	Yi+4NVr2wiFLjq0vNx+JwwEldfJ5P3XESyokZzH53veAHbdW23vY5bg6TpKIXGGwCy33
+	+f3cypdeH6AwkkOY5S83arcpNJWmr31AMzgQH4Jp5p9RuY8ADQ9DmQePi7NWuQ5uryjm
+	2BCj9+VsmRsD1NqsYgcrT/4F5XnJDwavkkZtpkRIk6RbVlxQp4g4+U5jOuhmHBlCyZBO
+	TSLw==
+X-Received: by 10.180.74.146 with SMTP id t18mr49166334wiv.62.1419845115778;
+	Mon, 29 Dec 2014 01:25:15 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	e7sm49202991wjx.31.2014.12.29.01.25.14
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 29 Dec 2014 01:25:14 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 29 Dec 2014 10:25:24 +0100
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20141229092524.GJ2465@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: State of bitbake world, Failed tasks 2014-12-{11,22,29}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,525 +44,603 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Dec 2014 16:46:11 -0000
+X-List-Received-Date: Mon, 29 Dec 2014 09:25:22 -0000
+X-Groupsio-MsgNum: 53501
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Bzq2cJcN05fcPrs+"
+Content-Disposition: inline
 
-* CVE-2014-9293, CVE-2014-9294, CVE-2014-9295, and CVE-2014-9296.
-  For more details please see:
-  https://ics-cert.us-cert.gov/advisories/ICSA-14-353-01A
+--Bzq2cJcN05fcPrs+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../ntp/files/ntp-4.2.6p5-cve-2014-9293.patch      |  43 +++++++
- .../ntp/files/ntp-4.2.6p5-cve-2014-9294.patch      | 128 +++++++++++++++++++++
- .../ntp/files/ntp-4.2.6p5-cve-2014-9295.patch      | 113 ++++++++++++++++++
- .../ntp/files/ntp-4.2.6p5-cve-2014-9296.patch      |  21 ++++
- .../ntp/files/ntp-keygen_no_openssl.patch          | 108 +++++++++++++++++
- meta-networking/recipes-support/ntp/ntp.inc        |  16 ++-
- 6 files changed, 426 insertions(+), 3 deletions(-)
- create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch
- create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch
- create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch
- create mode 100644 meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch
- create mode 100644 meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch
+We had almost clean state around 2014-12-12 after blacklisting few more rec=
+ipes.
+Only xfce4-vala was failing. Then I've added 2 new layers meta-luneui and m=
+eta-luneos
+which break bunch of recipes (by introducing newer nodejs, changing qtbase
+PACKAGECONFIG, I'm still working on them to have fewer side-effects).
 
-diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch
-new file mode 100644
-index 0000000..667b705
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9293.patch
-@@ -0,0 +1,43 @@
-+CVE-2014-9293 ntp: automatic generation of weak default key in config_auth()
-+
-+Upstream-Status: Backport [Debian]
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+Index: git/ntpd/ntp_config.c
-+===================================================================
-+--- git.orig/ntpd/ntp_config.c	2014-12-20 18:45:45.232872120 +0100
-++++ git/ntpd/ntp_config.c	2014-12-20 18:45:47.672921968 +0100
-+@@ -1866,13 +1866,16 @@
-+ 		req_hashlen = digest_len;
-+ #endif
-+ 	} else {
-+-		int	rankey;
-++		unsigned char rankey[16];
-++
-++		if (ntp_crypto_random_buf(rankey, sizeof (rankey))) {
-++			msyslog(LOG_ERR, "ntp_crypto_random_buf() failed.");
-++			exit(1);
-++		}
-+ 
-+-		rankey = ntp_random();
-+ 		req_keytype = NID_md5;
-+ 		req_hashlen = 16;
-+-		MD5auth_setkey(req_keyid, req_keytype,
-+-		    (u_char *)&rankey, sizeof(rankey));
-++		MD5auth_setkey(req_keyid, req_keytype, rankey, sizeof(rankey));
-+ 		authtrust(req_keyid, 1);
-+ 	}
-+ 
-+Index: git/ntpd/ntpd.c
-+===================================================================
-+--- git.orig/ntpd/ntpd.c	2014-12-20 18:45:45.232872120 +0100
-++++ git/ntpd/ntpd.c	2014-12-20 18:45:47.672921968 +0100
-+@@ -597,6 +597,7 @@
-+ 	get_systime(&now);
-+ 
-+ 	ntp_srandom((int)(now.l_i * now.l_uf));
-++	ntp_crypto_srandom();
-+ 
-+ #if !defined(VMS)
-+ # ifndef NODETACH
-diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch
-new file mode 100644
-index 0000000..67e532b
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9294.patch
-@@ -0,0 +1,128 @@
-+CVE-2014-9294 ntp: ntp-keygen uses weak random number generator and seed when generating MD5 keys 
-+
-+Upstream-Status: Backport [Debian]
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+Index: ntp-4.2.6p5/include/ntp_random.h
-+===================================================================
-+--- ntp-4.2.6p5.orig/include/ntp_random.h
-++++ ntp-4.2.6p5/include/ntp_random.h
-+@@ -1,6 +1,9 @@
-+ 
-+ #include <ntp_types.h>
-+ 
-++void ntp_crypto_srandom(void);
-++int ntp_crypto_random_buf(void *buf, size_t nbytes);
-++
-+ long ntp_random (void);
-+ void ntp_srandom (unsigned long);
-+ void ntp_srandomdev (void);
-+Index: ntp-4.2.6p5/libntp/ntp_random.c
-+===================================================================
-+--- ntp-4.2.6p5.orig/libntp/ntp_random.c
-++++ ntp-4.2.6p5/libntp/ntp_random.c
-+@@ -481,3 +481,74 @@ ntp_random( void )
-+ 	}
-+ 	return(i);
-+ }
-++
-++/*
-++ * Crypto-quality random number functions
-++ *
-++ * Author: Harlan Stenn, 2014
-++ *
-++ * This file is Copyright (c) 2014 by Network Time Foundation.
-++ * BSD terms apply: see the file COPYRIGHT in the distribution root for details.
-++ */
-++
-++#ifdef OPENSSL
-++#include <openssl/err.h>
-++#include <openssl/rand.h>
-++
-++int crypto_rand_init = 0;
-++#endif
-++
-++/*
-++ * ntp_crypto_srandom:
-++ *
-++ * Initialize the random number generator, if needed by the underlying
-++ * crypto random number generation mechanism.
-++ */
-++
-++void
-++ntp_crypto_srandom(
-++	void
-++	)
-++{
-++#ifdef OPENSSL
-++	if (!crypto_rand_init) {
-++		RAND_poll();
-++		crypto_rand_init = 1;
-++	}
-++#else
-++   /* No initialization needed for arc4random() */
-++#endif
-++}
-++
-++/*
-++ * ntp_crypto_random_buf:
-++ *
-++ * Returns 0 on success, -1 on error.
-++ */
-++int
-++ntp_crypto_random_buf(
-++	void *buf,
-++	size_t nbytes
-++	)
-++{
-++#ifdef OPENSSL
-++	int rc;
-++
-++	rc = RAND_bytes(buf, nbytes);
-++	if (1 != rc) {
-++		unsigned long err;
-++		char *err_str;
-++
-++		err = ERR_get_error();
-++		err_str = ERR_error_string(err, NULL);
-++		/* XXX: Log the error */
-++
-++		return -1;
-++	}
-++	return 0;
-++#else
-++   arc4random_buf(buf, nbytes);
-++   return 0;
-++#endif
-++}
-++
-+Index: ntp-4.2.6p5/util/ntp-keygen.c
-+===================================================================
-+--- ntp-4.2.6p5.orig/util/ntp-keygen.c
-++++ ntp-4.2.6p5/util/ntp-keygen.c
-+@@ -261,6 +261,8 @@ main(
-+ 	ssl_check_version();
-+ #endif /* OPENSSL */
-+ 
-++	ntp_crypto_srandom();
-++
-+ 	/*
-+ 	 * Process options, initialize host name and timestamp.
-+ 	 */
-+@@ -727,7 +729,14 @@ gen_md5(
-+ 			int temp;
-+ 
-+ 			while (1) {
-+-				temp = ntp_random() & 0xff;
-++				int rc;
-++
-++				rc = ntp_crypto_random_buf(&temp, 1);
-++				if (-1 == rc) {
-++					fprintf(stderr, "ntp_crypto_random_buf() failed.\n");
-++					exit (-1);
-++				}
-++				temp &= 0xff;
-+ 				if (temp == '#')
-+ 					continue;
-+ 
-diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch
-new file mode 100644
-index 0000000..6143f26
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9295.patch
-@@ -0,0 +1,113 @@
-+CVE-2014-9295 ntp: Multiple buffer overflows via specially-crafted packets 
-+
-+Upstream-Status: Backport [Debian]
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+2014-12-12 11:06:03+00:00, stenn@psp-fb1.ntp.org +12 -3
-+  [Sec 2667] buffer overflow in crypto_recv()
-+2014-12-12 11:13:40+00:00, stenn@psp-fb1.ntp.org +16 -1
-+  [Sec 2668] buffer overflow in ctl_putdata()
-+2014-12-12 11:19:37+00:00, stenn@psp-fb1.ntp.org +14 -0
-+  [Sec 2669] buffer overflow in configure()
-+
-+Index: git/ntpd/ntp_crypto.c
-+===================================================================
-+--- git.orig/ntpd/ntp_crypto.c	2014-12-20 18:45:44.208851199 +0100
-++++ git/ntpd/ntp_crypto.c	2014-12-20 18:45:56.425100776 +0100
-+@@ -789,15 +789,24 @@
-+ 			 * errors.
-+ 			 */
-+ 			if (vallen == (u_int)EVP_PKEY_size(host_pkey)) {
-++				u_int32 *cookiebuf = malloc(
-++				    RSA_size(host_pkey->pkey.rsa));
-++				if (!cookiebuf) {
-++					rval = XEVNT_CKY;
-++					break;
-++				}
-++
-+ 				if (RSA_private_decrypt(vallen,
-+ 				    (u_char *)ep->pkt,
-+-				    (u_char *)&temp32,
-++				    (u_char *)cookiebuf,
-+ 				    host_pkey->pkey.rsa,
-+-				    RSA_PKCS1_OAEP_PADDING) <= 0) {
-++				    RSA_PKCS1_OAEP_PADDING) != 4) {
-+ 					rval = XEVNT_CKY;
-++					free(cookiebuf);
-+ 					break;
-+ 				} else {
-+-					cookie = ntohl(temp32);
-++					cookie = ntohl(*cookiebuf);
-++					free(cookiebuf);
-+ 				}
-+ 			} else {
-+ 				rval = XEVNT_CKY;
-+Index: git/ntpd/ntp_control.c
-+===================================================================
-+--- git.orig/ntpd/ntp_control.c	2014-12-20 18:45:44.208851199 +0100
-++++ git/ntpd/ntp_control.c	2014-12-20 18:45:56.429100859 +0100
-+@@ -486,6 +486,10 @@
-+ static	char *reqpt;
-+ static	char *reqend;
-+ 
-++#ifndef MIN
-++#define MIN(a, b) (((a) <= (b)) ? (a) : (b))
-++#endif
-++
-+ /*
-+  * init_control - initialize request data
-+  */
-+@@ -995,6 +999,7 @@
-+ 	)
-+ {
-+ 	int overhead;
-++	unsigned int currentlen;
-+ 
-+ 	overhead = 0;
-+ 	if (!bin) {
-+@@ -1018,12 +1023,22 @@
-+ 	/*
-+ 	 * Save room for trailing junk
-+ 	 */
-+-	if (dlen + overhead + datapt > dataend) {
-++	while (dlen + overhead + datapt > dataend) {
-+ 		/*
-+ 		 * Not enough room in this one, flush it out.
-+ 		 */
-++		currentlen = MIN(dlen, dataend - datapt);
-++
-++		memcpy(datapt, dp, currentlen);
-++
-++		datapt += currentlen;
-++		dp += currentlen;
-++		dlen -= currentlen;
-++		datalinelen += currentlen;
-++
-+ 		ctl_flushpkt(CTL_MORE);
-+ 	}
-++
-+ 	memmove((char *)datapt, dp, (unsigned)dlen);
-+ 	datapt += dlen;
-+ 	datalinelen += dlen;
-+@@ -2492,6 +2507,20 @@
-+ 
-+ 	/* Initialize the remote config buffer */
-+ 	data_count = reqend - reqpt;
-++
-++	if (data_count > sizeof(remote_config.buffer) - 2) {
-++		snprintf(remote_config.err_msg,
-++			 sizeof(remote_config.err_msg),
-++			 "runtime configuration failed: request too long");
-++		ctl_putdata(remote_config.err_msg,
-++			    strlen(remote_config.err_msg), 0);
-++		ctl_flushpkt(0);
-++		msyslog(LOG_NOTICE,
-++			"runtime config from %s rejected: request too long",
-++			stoa(&rbufp->recv_srcadr));
-++		return;
-++	}
-++
-+ 	memcpy(remote_config.buffer, reqpt, data_count);
-+ 	if (data_count > 0
-+ 	    && '\n' != remote_config.buffer[data_count - 1])
-diff --git a/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch
-new file mode 100644
-index 0000000..a85f65d
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/files/ntp-4.2.6p5-cve-2014-9296.patch
-@@ -0,0 +1,21 @@
-+CVE-2014-9296 ntp: receive() missing return on error
-+
-+Upstream-Status: Backport [Debian]
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+2014-12-12 11:24:22+00:00, stenn@psp-fb1.ntp.org +1 -0
-+  [Sec 2670] Missing return; from error clause
-+
-+Index: git/ntpd/ntp_proto.c
-+===================================================================
-+--- git.orig/ntpd/ntp_proto.c	2014-12-20 18:45:42.760821618 +0100
-++++ git/ntpd/ntp_proto.c	2014-12-20 18:46:00.153176945 +0100
-+@@ -947,6 +947,7 @@
-+ 				fast_xmit(rbufp, MODE_ACTIVE, 0,
-+ 				    restrict_mask);
-+ 				sys_restricted++;
-++				return;
-+ 			}
-+ 		}
-+ 
-diff --git a/meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch b/meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch
-new file mode 100644
-index 0000000..f576e2e
---- /dev/null
-+++ b/meta-networking/recipes-support/ntp/files/ntp-keygen_no_openssl.patch
-@@ -0,0 +1,108 @@
-+Fix ntp-keygen build without OpenSSL
-+
-+Patch borrowed from Gentoo, originally from upstream
-+Added --enable-libenvent to config since this version
-+does not have local libevent support but we need the 
-+functions from the lib.
-+
-+Signed-off-by: Armin Kuster <akuster808@gmail.com>
-+
-+Upstream-Status: Backport
-+
-+Upstream commit:
-+http://bk1.ntp.org/ntp-stable/?PAGE=patch&REV=5497b345z5MNTuNvJWuqPSje25NQTg
-+Gentoo bugzilla: https://bugs.gentoo.org/show_bug.cgi?id=533238
-+
-+Signed-off-by: Markos Chandras <hwoarang@gentoo.org>
-+
-+Index: ntp-4.2.6p5/libntp/ntp_random.c
-+===================================================================
-+--- ntp-4.2.6p5.orig/libntp/ntp_random.c
-++++ ntp-4.2.6p5/libntp/ntp_random.c
-+@@ -498,6 +498,21 @@ ntp_random( void )
-+ int crypto_rand_init = 0;
-+ #endif
-+ 
-++#ifndef HAVE_ARC4RANDOM_BUF
-++static void
-++arc4random_buf(void *buf, size_t nbytes);
-++
-++void
-++evutil_secure_rng_get_bytes(void *buf, size_t nbytes);
-++
-++static void
-++arc4random_buf(void *buf, size_t nbytes)
-++{
-++  evutil_secure_rng_get_bytes(buf, nbytes);
-++  return;
-++}
-++#endif
-++
-+ /*
-+  * ntp_crypto_srandom:
-+  *
-+Index: ntp-4.2.6p5/util/Makefile.am
-+===================================================================
-+--- ntp-4.2.6p5.orig/util/Makefile.am
-++++ ntp-4.2.6p5/util/Makefile.am
-+@@ -21,6 +21,7 @@ AM_CPPFLAGS= -I$(top_srcdir)/include -I$
-+ LDADD=		../libntp/libntp.a
-+ ntp_keygen_SOURCES = ntp-keygen.c ntp-keygen-opts.c ntp-keygen-opts.h
-+ ntp_keygen_LDADD= version.o $(LIBOPTS_LDADD) ../libntp/libntp.a @LCRYPTO@
-++ntp_keygen_LDADD += $(LDADD_LIBEVENT)
-+ 
-+ ETAGS_ARGS=	Makefile.am
-+ #EXTRA_DIST=	README TAGS
-+Index: ntp-4.2.6p5/configure.ac
-+===================================================================
-+--- ntp-4.2.6p5.orig/configure.ac
-++++ ntp-4.2.6p5/configure.ac
-+@@ -376,6 +376,8 @@ AC_CHECK_FUNC([openlog], ,
-+ AC_SEARCH_LIBS([MD5Init], [md5 md])
-+ AC_CHECK_FUNCS(MD5Init)
-+ 
-++AC_CHECK_FUNC([arc4random_buf])
-++
-+ NTP_LINEEDITLIBS
-+ 
-+ dnl Digital UNIX V4.0 and Solaris 7 have POSIX.1c functions in -lrt
-+@@ -5205,6 +5207,39 @@ AC_MSG_RESULT([$ntp_use_dev_clockctl])
-+ 
-+ AC_CHECK_HEADERS([sys/capability.h sys/prctl.h])
-+ 
-++AC_MSG_CHECKING([if we have libevent capabilities (libevent)])
-++
-++case "$ac_cv_header_event2_event-config_h" in
-++ yes)
-++    case "$host" in
-++     *) ntp_have_linuxcaps=yes
-++	;;
-++    esac
-++    ;;
-++ *)
-++    ntp_have_linuxcaps=no
-++    ;;
-++esac
-++
-++AC_ARG_ENABLE(
-++    [libevent],
-++    [AS_HELP_STRING(
-++	[--enable-libevent],
-++	[+ Use libevent capabilities for arc4random]
-++    )],
-++    [ntp_have_libevent=$enableval]
-++)
-++
-++AC_MSG_RESULT([$ntp_have_libevent])
-++
-++case "$ntp_have_libevent" in
-++ yes)
-++    AC_DEFINE([HAVE_LIBEVENT], [1],
-++	[Do we have libevent capabilities?])
-++    LIBS="$LIBS -levent"
-++esac
-++
-++
-+ AC_MSG_CHECKING([if we have linux capabilities (libcap)])
-+ 
-+ case "$ac_cv_header_sys_capability_h$ac_cv_header_sys_prctl_h" in
-diff --git a/meta-networking/recipes-support/ntp/ntp.inc b/meta-networking/recipes-support/ntp/ntp.inc
-index fd29a78..ab7bd9c 100644
---- a/meta-networking/recipes-support/ntp/ntp.inc
-+++ b/meta-networking/recipes-support/ntp/ntp.inc
-@@ -26,13 +26,22 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://sntp \
-            file://ntpd.list \
-            file://CVE-2013-5211.patch \
-+           file://ntp-4.2.6p5-cve-2014-9293.patch \
-+           file://ntp-4.2.6p5-cve-2014-9294.patch \
-+           file://ntp-4.2.6p5-cve-2014-9295.patch \
-+           file://ntp-4.2.6p5-cve-2014-9296.patch  \
-+           file://ntp-keygen_no_openssl.patch  \
- "
- 
- inherit autotools update-rc.d useradd systemd
- 
- # The ac_cv_header_readline_history is to stop ntpdc depending on either
- # readline or curses
--EXTRA_OECONF += "--with-net-snmp-config=no --without-ntpsnmpd ac_cv_header_readline_history_h=no --with-binsubdir=sbin"
-+EXTRA_OECONF += "--with-net-snmp-config=no \
-+                --without-ntpsnmpd \
-+                ac_cv_header_readline_history_h=no \
-+                --with-binsubdir=sbin"
-+
- CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
- 
- USERADD_PACKAGES = "${PN}"
-@@ -42,7 +51,7 @@ USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
-                        --shell /bin/false --user-group ntp"
- 
- # NB: debug is default-enabled by NTP; keep it default-enabled here.
--PACKAGECONFIG ??= "cap debug"
-+PACKAGECONFIG ??= "event cap debug"
- PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
-                           --with-openssl-incdir=${STAGING_INCDIR} \
-                           --with-crypto, \
-@@ -51,6 +60,7 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
- PACKAGECONFIG[cap] = "--enable-linuxcaps,--disable-linuxcaps,libcap"
- PACKAGECONFIG[readline] = "--with-lineeditlibs,--without-lineeditlibs,readline"
- PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
-+PACKAGECONFIG[event] = "--enable-libevent,--disable-libevent, libevent"
- 
- do_install_append() {
-     install -d ${D}${sysconfdir}/init.d
-@@ -94,7 +104,7 @@ PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
- 
- # ntp originally includes tickadj. It's split off for inclusion in small firmware images on platforms
- # with wonky clocks (e.g. OpenSlug)
--RDEPENDS_${PN} = "${PN}-tickadj"
-+RDEPENDS_${PN} = "${PN}-tickadj libbsd"
- # Handle move from bin to utils package
- RPROVIDES_${PN}-utils = "${PN}-bin"
- RREPLACES_${PN}-utils = "${PN}-bin"
--- 
-1.9.1
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+=3D=3D Failed tasks 2014-12-11 =3D=3D
+
+INFO: jenkins-job.sh-1.0.0 Complete log available at http://logs.nslu2-linu=
+x.org/buildlogs/oe/world/log.report.20141229_090003.log
+
+=3D=3D=3D common (1) =3D=3D=3D
+    * /meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.=
+bb, do_configure
+
+=3D=3D=3D common-x86 (1) =3D=3D=3D
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-driver/xf86-video-gl=
+amo_git.bb, do_compile
+
+=3D=3D=3D qemuarm (3) =3D=3D=3D
+    * /meta-openembedded/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-blu=
+etooth_2.32.0.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-extended/polkit/polkit-gnome_0.102=
+=2Ebb, do_configure
+    * /meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb, do=
+_compile
+
+=3D=3D=3D qemux86 (1) =3D=3D=3D
+    * /meta-openembedded/meta-networking/recipes-daemons/openl2tp/openl2tp_=
+1.8.bb, do_compile
+
+=3D=3D=3D qemux86_64 (0) =3D=3D=3D
+
+=3D=3D=3D Number of failed tasks (12) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 4	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.wo=
+rld.20141211_131528.log/ || http://errors.yoctoproject.org:80/Errors/Search=
+/1/3583/
+|-
+|| qemux86 	|| 6	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.wo=
+rld.20141211_160107.log/ || http://errors.yoctoproject.org:80/Errors/Search=
+/1/3586/
+|-
+|| qemux86_64 	|| 2	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log=
+=2Eworld.20141212_105352.log/ || http://errors.yoctoproject.org:80/Errors/S=
+earch/1/3590/
+|}
+
+=3D=3D=3D PNBLACKLISTs (52) =3D=3D=3D
+
+=3D=3D=3D QA issues (88) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||version-going-backwards
+|-
+||1	||libdir
+|-
+||14	||textrel
+|-
+||20	||build-deps
+|-
+||3	||already-stripped
+|-
+||50	||file-rdeps
+|}
+
+=3D=3D Failed tasks 2014-12-22 =3D=3D
+
+INFO: jenkins-job.sh-1.0.0 Complete log available at http://logs.nslu2-linu=
+x.org/buildlogs/oe/world/log.report.20141229_085013.log
+
+=3D=3D=3D common () =3D=3D=3D
+
+=3D=3D=3D common-x86 (0) =3D=3D=3D
+
+=3D=3D=3D qemuarm (15) =3D=3D=3D
+    * /meta-openembedded/meta-multimedia/recipes-multimedia/vlc/vlc_2.1.4.b=
+b, do_compile
+    * /meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_=
+configure
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-adobe-100d=
+pi_1.0.3.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-adobe-utop=
+ia-100dpi_1.0.4.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_=
+1.0.3.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-bh-lucidat=
+ypewriter-100dpi_1.0.3.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-misc-misc_=
+1.1.2.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb=
+, do_configure
+    * /meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.=
+bb, do_configure
+    * /meta-qt5/recipes-qt/examples/qt5-opengles2-test_git.bb, do_compile
+    * /meta-smartphone/meta-android/recipes-core/libhybris/libhybris_git.bb=
+, do_populate_sysroot
+    * /meta-webos-ports/meta-luneos/recipes-containers/lxc/lxc_1.0.1.bb, do=
+_compile
+    * /meta-webos-ports/meta-luneos/recipes-core/images/webos-ports-emulato=
+r-appliance.bb, do_deploy
+    * /meta-webos-ports/meta-luneos/recipes-core/images/webos-ports-package=
+=2Ebb, do_deploy
+    * /meta-webos-ports/meta-luneos/recipes-kernel/memnotify/memnotify-modu=
+le_git.bb, do_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (0) =3D=3D=3D
+
+=3D=3D=3D Number of failed tasks (15) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 15	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.w=
+orld.20141222_012852.log/ || http://errors.yoctoproject.org:80/Errors/Searc=
+h/1/3773/
+|-
+|| qemux86 	|| 0	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.wo=
+rld.20141223_204321.log/ ||=20
+|-
+|| qemux86_64 	|| 0	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log=
+=2Eworld.20141224_083710.log/ ||=20
+|}
+
+=3D=3D=3D PNBLACKLISTs (52) =3D=3D=3D
+
+=3D=3D=3D QA issues (86) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||libdir
+|-
+||0	||version-going-backwards
+|-
+||28	||build-deps
+|-
+||3	||already-stripped
+|-
+||3	||textrel
+|-
+||52	||file-rdeps
+|}
+
+=3D=3D Failed tasks 2014-12-29 =3D=3D
+
+INFO: jenkins-job.sh-1.0.0 Complete log available at http://logs.nslu2-linu=
+x.org/buildlogs/oe/world/log.report.20141229_085050.log
+
+=3D=3D=3D common () =3D=3D=3D
+
+=3D=3D=3D common-x86 (0) =3D=3D=3D
+
+=3D=3D=3D qemuarm (14) =3D=3D=3D
+    * /meta-openembedded/meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb, do_=
+configure
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-adobe-100d=
+pi_1.0.3.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-adobe-utop=
+ia-100dpi_1.0.4.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_=
+1.0.3.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-bh-lucidat=
+ypewriter-100dpi_1.0.3.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-graphics/xorg-font/font-misc-misc_=
+1.1.2.bb, do_compile
+    * /meta-openembedded/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb=
+, do_configure
+    * /meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.=
+bb, do_configure
+    * /meta-qt5/recipes-qt/examples/qt5-opengles2-test_git.bb, do_compile
+    * /meta-smartphone/meta-android/recipes-core/libhybris/libhybris_git.bb=
+, do_populate_sysroot
+    * /meta-webos-ports/meta-luneos/recipes-containers/lxc/lxc_1.0.1.bb, do=
+_compile
+    * /meta-webos-ports/meta-luneos/recipes-core/images/webos-ports-emulato=
+r-appliance.bb, do_deploy
+    * /meta-webos-ports/meta-luneos/recipes-core/images/webos-ports-package=
+=2Ebb, do_deploy
+    * /meta-webos-ports/meta-luneos/recipes-kernel/memnotify/memnotify-modu=
+le_git.bb, do_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (2) =3D=3D=3D
+    * /meta-webos-ports/meta-luneos/recipes-support/crash-handler/crash-han=
+dler_git.bb, do_compile
+    * /openembedded-core/meta/recipes-kernel/perf/perf.bb, do_compile
+
+=3D=3D=3D Number of failed tasks (29) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 14	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.w=
+orld.20141225_104323.log/ || http://errors.yoctoproject.org:80/Errors/Searc=
+h/1/3834/
+|-
+|| qemux86 	|| 0	 || http://logs.nslu2-linux.org/buildlogs/oe/world//log.wo=
+rld.20141226_020648.log/ ||=20
+|-
+|| qemux86_64 	|| 15	 || http://logs.nslu2-linux.org/buildlogs/oe/world//lo=
+g.world.20141228_101818.log/ || http://errors.yoctoproject.org:80/Errors/Se=
+arch/1/3838/
+|}
+
+=3D=3D=3D PNBLACKLISTs (52) =3D=3D=3D
+
+=3D=3D=3D QA issues (98) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||version-going-backwards
+|-
+||1	||libdir
+|-
+||16	||textrel
+|-
+||3	||already-stripped
+|-
+||32	||build-deps
+|-
+||46	||file-rdeps
+|}
 
 
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+meta-openembedded:
+meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb:PNBLACKLIST[ifuse=
+] ?=3D "depends on blacklisted libimobiledevice"
+meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb:PNBLACKLIST[gn=
+ome-mplayer] ?=3D "rdepends on blacklisted mplayer"
+meta-gnome/recipes-connectivity/network-manager-applet/network-manager-appl=
+et_0.9.8.10.bb:PNBLACKLIST[network-manager-applet] ?=3D "Depends on broken =
+polkit-gnome"
+meta-gnome/recipes-gnome/gcr/gcr_3.8.2.bb:PNBLACKLIST[gcr] ?=3D "CONFLICT: =
+4 files conflict with gnome-keyring"
+meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb:PNBLACKLIST[gdm] ?=3D "Depends o=
+n broken polkit-gnome"
+meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb:PNBLACKL=
+IST[gnome-bluetooth] ?=3D "dbus-binding-tool fails with: Unable to load gno=
+me-bluetooth-2.32.0/lib/bluetooth-client.xml": "manager" is not a valid D-B=
+us interface name"
+meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb:PNBLACKLIST[gno=
+me-menus3] ?=3D "CONFLICT: 24 files are conflicting with gnome-menus"
+meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb:PNBLACKLIST[gnom=
+e-panel3] ?=3D "CONFLICT: depends on libgweather3 which conflicts with libg=
+weather"
+meta-gnome/recipes-gnome/gweather/libgweather3_3.0.2.bb:PNBLACKLIST[libgwea=
+ther3] ?=3D "CONFLICT: 876 files are conflicting with libgweather"
+meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb:PNBLACKLIST[zenity] ?=3D "=
+BROKEN: doesn't build with B!=3DS"
+meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb:PNBLACKLIST[xbmc] ?=3D=
+ "/usr/include/c++/ctime:70:11: error: '::gmtime' has not been declared"
+meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb:PNBLACKLIST=
+[coriander] ?=3D "BROKEN: fails to use SDL probably because libsdl-config w=
+as removed, error: unknown type name 'SDL_Overlay'"
+meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb:PN=
+BLACKLIST[renderer-service-upnp] ?=3D "BROKEN: doesn't build with B!=3DS (t=
+rying to install rendererconsole.py from ${B} instead of ${S})"
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb:PNBLACK=
+LIST[lksctp-tools] ?=3D "BROKEN: fails to link against sctp_connectx symbol"
+meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb:PNB=
+LACKLIST[libimobiledevice] ?=3D "cannot run test program while cross compil=
+ing"
+meta-oe/recipes-connectivity/soft66/soft66_git.bb:PNBLACKLIST[soft66] ?=3D =
+"BROKEN: depends on broken libftdi"
+meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb:PNBLACKLIST[zeroc=
+-ice] ?=3D "BROKEN: not compatible with default db version"
+meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb:PNBLACKLIST[polkit-gn=
+ome] ?=3D "Fails to build, m4:configure.ac:125: recursion limit of 1024 exc=
+eeded, use -L<N> to change it"
+meta-oe/recipes-extended/subsurface/subsurface_git.bb:PNBLACKLIST[subsurfac=
+e] ?=3D "Needs to be upgraded for compatibility with new libdivecomputer"
+meta-oe/recipes-graphics/clutter/clutter-box2d_git.bb:PNBLACKLIST[clutter-b=
+ox2d] ?=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb:PNBLACKLIST[fim] ?=3D "BROKEN: =
+doesn't build with B!=3DS (flex: can't open lex.lex)"
+meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb:PNBLACKLIST[xf8=
+6-input-mtev] ?=3D "BROKEN: doesn't build with B!=3DS (Makefile without ${S=
+} in sed call)"
+meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb:PNBLACKLIST[mplayer2] ?=
+=3D "Requires newer libav which has negative D_P"
+meta-oe/recipes-qt/qconnman/qconnman-e_git.bb:PNBLACKLIST[qconnman-e] ?=3D =
+"BROKEN: doesn't work with B!=3DS, ls: cannot access *.pro: No such file or=
+ directory"
+meta-oe/recipes-qt/qconnman/qconnman_git.bb:PNBLACKLIST[qconnman] ?=3D "BRO=
+KEN: doesn't work with B!=3DS, ls: cannot access *.pro: No such file or dir=
+ectory"
+meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb:PNBLACKLIST[sylpheed] ?=
+=3D "BROKEN: Doesn't work with B!=3DS"
+meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb:PNBLACKLIST[apcupsd] ?=
+=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/emacs/emacs_23.4.bb:PNBLACKLIST[emacs] ?=3D "qemu: =
+uncaught target signal 11 (Segmentation fault) - core dumped"
+meta-oe/recipes-support/maliit/maliit-framework_git.bb:PNBLACKLIST[maliit-f=
+ramework] ?=3D "BROKEN: Wasn't updated to work with B!=3DS, maybe incorrect=
+ly inherits autotools"
+meta-oe/recipes-support/maliit/maliit-plugins_git.bb:PNBLACKLIST[maliit-plu=
+gins] ?=3D "BROKEN: depends on broken maliit-framework"
+meta-oe/recipes-support/mongodb/mongodb_git.bb:PNBLACKLIST[mongodb] ?=3D "F=
+ails to build with system boost"
+meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb:PNBLACKLIST[openmotif]=
+ ?=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb:PNBLACKLIST[vala=
+-terminal] ?=3D "BROKEN: Doesn't work with B!=3DS, touch: cannot touch `src=
+/.stamp': No such file or directory"
+meta-webserver/recipes-php/modphp/modphp5.inc:PNBLACKLIST[modphp] ?=3D "CON=
+FLICT: 466 header files conflict with php"
+meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb:PNBLACKLIST[xdebug] ?=3D =
+"CONFLICT: depends on blocked modphp"
+meta-qt5:
+meta-smartphone:
+meta-shr/recipes-shr/3rdparty/ffalarms_git.bb:PNBLACKLIST[ffalarms] =3D "Do=
+esn't build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/3rdparty/iliwi_git.bb:PNBLACKLIST[iliwi] =3D "Doesn't =
+build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/3rdparty/intone_git.bb:PNBLACKLIST[intone] =3D "rdepen=
+ds on blacklisted mplayer2"
+meta-shr/recipes-shr/3rdparty/sensmon_git.bb:PNBLACKLIST[sensmon] =3D "Does=
+n't build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/3rdparty/valacompass_git.bb:PNBLACKLIST[valacompass] =
+=3D "Doesn't build after vala upgrade from 0.24.0 to 0.26.1"
+meta-webos-ports:
+conf/world_fixes.inc:PNBLACKLIST[mplayer2] =3D ""
+conf/world_fixes.inc:PNBLACKLIST[android-system] =3D "depends on lxc from m=
+eta-virtualiazation which isn't included in my world builds"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't r=
+eally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't re=
+ally need to be tested so much"
+conf/world_fixes.inc:PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't r=
+eally need to be tested so much"
+conf/world_mask.inc:PNBLACKLIST[evince] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[epiphany] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[gnome-power-manager] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[gnome-bluetooth] =3D "fails to build"
+conf/world_mask.inc:PNBLACKLIST[media-ctl] =3D "fails to build"
+QA issues by type:
+count: 3	issue: already-stripped
+qwt-6.0.1: File '/usr/lib/libqwt.so.6.0.1' from qwt was already stripped, t=
+his will prevent future debugging! [already-stripped]
+qwt-6.0.1: File '/usr/lib/libqwtmathml.so.6.0.1' from qwt was already strip=
+ped, this will prevent future debugging! [already-stripped]
+qwt-6.0.1: File '/usr/lib/qt4/plugins/designer/libqwt_designer_plugin.so' f=
+rom qwt was already stripped, this will prevent future debugging! [already-=
+stripped]
+
+
+count: 1	issue: libdir
+chromium-dbg: found library in wrong location: /usr/bin/chrome/.debug/libff=
+mpegsumo.so [libdir]
+
+
+count: 16	issue: textrel
+gstreamer1.0-libav-1.4.1: ELF binary '/tmp/work/armv5te-oe-linux-gnueabi/gs=
+treamer1.0-libav/1.4.1-r0/packages-split/gstreamer1.0-libav/usr/lib/gstream=
+er-1.0/libgstlibav.so' has relocations in .text [textrel]
+gstreamer1.0-libav-1.4.1: ELF binary '/tmp/work/i586-oe-linux/gstreamer1.0-=
+libav/1.4.1-r0/packages-split/gstreamer1.0-libav/usr/lib/gstreamer-1.0/libg=
+stlibav.so' has relocations in .text [textrel]
+libav-9.16: ELF binary '/tmp/work/armv5te-oe-linux-gnueabi/libav/9.16-r0/pa=
+ckages-split/libavcodec/usr/lib/libavcodec.so.54.35.0' has relocations in .=
+text [textrel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavcodec/usr/lib/libavcodec.so.54.35.0' has relocations in .text [textr=
+el]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavdevice/usr/lib/libavdevice.so.53.2.0' has relocations in .text [text=
+rel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavfilter/usr/lib/libavfilter.so.3.3.0' has relocations in .text [textr=
+el]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavformat/usr/lib/libavformat.so.54.20.4' has relocations in .text [tex=
+trel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavresample/usr/lib/libavresample.so.1.0.1' has relocations in .text [t=
+extrel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libavutil/usr/lib/libavutil.so.52.3.0' has relocations in .text [textrel]
+libav-9.16: ELF binary '/tmp/work/i586-oe-linux/libav/9.16-r0/packages-spli=
+t/libswscale/usr/lib/libswscale.so.2.1.1' has relocations in .text [textrel]
+libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary '/tmp/work/armv5te-oe-=
+linux-gnueabi/libpostproc/52.3.0+gitAUTOINC+811db3b957-r0/packages-split/li=
+bpostproc/usr/lib/libpostproc.so.52.3.0' has relocations in .text [textrel]
+libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary '/tmp/work/i586-oe-lin=
+ux/libpostproc/52.3.0+gitAUTOINC+811db3b957-r0/packages-split/libpostproc/u=
+sr/lib/libpostproc.so.52.3.0' has relocations in .text [textrel]
+mpg123-1.21.0: ELF binary '/tmp/work/i586-oe-linux/mpg123/1.21.0-r0/package=
+s-split/mpg123/usr/lib/libmpg123.so.0.40.3' has relocations in .text [textr=
+el]
+qtwebkit-5.4.0+gitAUTOINC+af15cefb39: ELF binary '/tmp/work/i586-oe-linux/q=
+twebkit/5.4.0+gitAUTOINC+af15cefb39-r0/packages-split/qtwebkit/usr/lib/libQ=
+t5WebKit.so.5.4.0' has relocations in .text [textrel]
+webkit-efl-1.11.0: ELF binary '/tmp/work/i586-oe-linux/webkit-efl/1_1.11.0-=
+r0/packages-split/webkit-efl/usr/lib/libjavascriptcore_efl.so.1.11.0' has r=
+elocations in .text [textrel]
+webkit-gtk-1.8.3: ELF binary '/tmp/work/i586-oe-linux/webkit-gtk/1.8.3-r1/p=
+ackages-split/libjavascriptcore/usr/lib/libjavascriptcoregtk-1.0.so.0.13.4'=
+ has relocations in .text [textrel]
+
+
+count: 32	issue: build-deps
+collectd-5.4.1: collectd rdepends on libesmtp, but it isn't a build depende=
+ncy? [build-deps]
+enchant-1.6.0: enchant rdepends on hunspell, but it isn't a build dependenc=
+y? [build-deps]
+exquisite-0.0.1+svnr82070: exquisite rdepends on initscripts-functions, but=
+ it isn't a build dependency? [build-deps]
+glade3-3.8.5: glade3 rdepends on libpython2, but it isn't a build dependenc=
+y? [build-deps]
+gpm-1.99.7: gpm rdepends on initscripts-functions, but it isn't a build dep=
+endency? [build-deps]
+irda-utils-0.9.18: irda-utils rdepends on initscripts-functions, but it isn=
+'t a build dependency? [build-deps]
+libssh-0.6.3: libssh rdepends on krb5, but it isn't a build dependency? [bu=
+ild-deps]
+libwebp-0.4.0: libwebp-bin rdepends on libgl-mesa, but it isn't a build dep=
+endency? [build-deps]
+libwebp-0.4.0: libwebp-bin rdepends on mesa-glut, but it isn't a build depe=
+ndency? [build-deps]
+log4c-1.2.4: log4c rdepends on expat, but it isn't a build dependency? [bui=
+ld-deps]
+mpd-0.19.1: mpd rdepends on libsmbclient, but it isn't a build dependency? =
+[build-deps]
+mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libpostproc, but =
+it isn't a build dependency? [build-deps]
+mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libvorbis, but it=
+ isn't a build dependency? [build-deps]
+mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libxscrnsaver, bu=
+t it isn't a build dependency? [build-deps]
+mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on mpg123, but it is=
+n't a build dependency? [build-deps]
+netkit-rwho-0.17: netkit-rwho-client rdepends on initscripts-functions, but=
+ it isn't a build dependency? [build-deps]
+opencv-2.4.9+gitAUTOINC+df8e28283f: libopencv-highgui rdepends on jasper, b=
+ut it isn't a build dependency? [build-deps]
+pidgin-2.10.9: finch-plugin-gntgf rdepends on libxml2, but it isn't a build=
+ dependency? [build-deps]
+pidgin-2.10.9: finch-plugin-grouping rdepends on libxml2, but it isn't a bu=
+ild dependency? [build-deps]
+pidgin-2.10.9: libgnt rdepends on dbus-glib, but it isn't a build dependenc=
+y? [build-deps]
+pidgin-2.10.9: libgnt rdepends on libxml2, but it isn't a build dependency?=
+ [build-deps]
+pidgin-2.10.9: libpurple rdepends on dbus-glib, but it isn't a build depend=
+ency? [build-deps]
+pidgin-2.10.9: libpurple rdepends on gconf, but it isn't a build dependency=
+? [build-deps]
+pidgin-2.10.9: libpurple rdepends on libxml2, but it isn't a build dependen=
+cy? [build-deps]
+pidgin-2.10.9: libpurple-plugin-dbus-example rdepends on dbus-glib, but it =
+isn't a build dependency? [build-deps]
+pidgin-2.10.9: libpurple-protocol-bonjour rdepends on libxml2, but it isn't=
+ a build dependency? [build-deps]
+pidgin-2.10.9: libpurple-protocol-xmpp rdepends on libxml2, but it isn't a =
+build dependency? [build-deps]
+proftpd-1.3.4b: proftpd rdepends on initscripts-functions, but it isn't a b=
+uild dependency? [build-deps]
+qtwayland-5.4.0+gitAUTOINC+a0c5ba81f4: qtwayland-plugins rdepends on libxco=
+mposite, but it isn't a build dependency? [build-deps]
+qtwebkit-5.4.0+gitAUTOINC+af15cefb39: qtwebkit rdepends on libxcomposite, b=
+ut it isn't a build dependency? [build-deps]
+squid-3.4.7: squid rdepends on libpam, but it isn't a build dependency? [bu=
+ild-deps]
+sysklogd-1.5: sysklogd rdepends on initscripts-functions, but it isn't a bu=
+ild dependency? [build-deps]
+
+
+count: 46	issue: file-rdeps
+apache2-2.4.10: apache2-dev requires /usr/bin/perl, but no providers in its=
+ RDEPENDS [file-rdeps]
+chkconfig-1.3.58: chkconfig requires libnewt.so, but no providers in its RD=
+EPENDS [file-rdeps]
+core-apps-3.0.0-2+gitAUTOINC+69850dd71e: core-apps requires /bin/bash, but =
+no providers in its RDEPENDS [file-rdeps]
+dpkg-1.17.21: dpkg requires /usr/bin/perl, but no providers in its RDEPENDS=
+ [file-rdeps]
+dvb-apps-1.1.1: dvb-apps requires libucsi.so, libdvben50221.so, libdvbsec.s=
+o, libdvbcfg.so, libdvbapi.so, but no providers in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvb-femon requires libdvbapi.so, but no providers in its RD=
+EPENDS [file-rdeps]
+dvb-apps-1.1.1: dvb-scan requires libdvbsec.so, libdvbcfg.so, libdvbapi.so,=
+ but no providers in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvbdate requires libucsi.so, libdvbapi.so, but no providers=
+ in its RDEPENDS [file-rdeps]
+dvb-apps-1.1.1: dvbnet requires libdvbapi.so, but no providers in its RDEPE=
+NDS [file-rdeps]
+dvb-apps-1.1.1: dvbtraffic requires libdvbapi.so, but no providers in its R=
+DEPENDS [file-rdeps]
+fakeroot-1.18.4: fakeroot requires /bin/bash, but no providers in its RDEPE=
+NDS [file-rdeps]
+fbida-2.09+gitAUTOINC+6aa5563cb3: fbida requires /bin/bash, but no provider=
+s in its RDEPENDS [file-rdeps]
+foxtrotgps-1.1.1: foxtrotgps requires /usr/bin/python, /usr/bin/perl, but n=
+o providers in its RDEPENDS [file-rdeps]
+gammu-1.32.0: gammu requires /bin/bash, but no providers in its RDEPENDS [f=
+ile-rdeps]
+gammu-1.32.0: gammu-dev requires /bin/bash, but no providers in its RDEPEND=
+S [file-rdeps]
+gateone-1.2: gateone requires /bin/bash, but no providers in its RDEPENDS [=
+file-rdeps]
+giflib-4.1.6: giflib-utils requires /usr/bin/perl, but no providers in its =
+RDEPENDS [file-rdeps]
+gnome-desktop-2.32.1: gnome-desktop requires /usr/bin/python, but no provid=
+ers in its RDEPENDS [file-rdeps]
+gnome-panel-2.32.1: gnome-panel requires /usr/bin/python, but no providers =
+in its RDEPENDS [file-rdeps]
+groff-1.22.2: groff requires /bin/sed, but no providers in its RDEPENDS [fi=
+le-rdeps]
+gupnp-0.20.12: gupnp-dev requires /usr/bin/python, but no providers in its =
+RDEPENDS [file-rdeps]
+hplip-3.12.6: hplip-filter requires /usr/bin/perl, but no providers in its =
+RDEPENDS [file-rdeps]
+hunspell-1.3.2: hunspell requires /usr/bin/perl, but no providers in its RD=
+EPENDS [file-rdeps]
+libbonobo-2.32.1: libbonobo requires /usr/bin/perl, but no providers in its=
+ RDEPENDS [file-rdeps]
+libnewt-0.52.18: whiptail requires libnewt.so, but no providers in its RDEP=
+ENDS [file-rdeps]
+libnewt-python-0.52.18: libnewt-python requires libnewt.so, but no provider=
+s in its RDEPENDS [file-rdeps]
+lio-utils-4.1+gitAUTOINC+28bd928655: lio-utils requires /bin/bash, but no p=
+roviders in its RDEPENDS [file-rdeps]
+lmsensors-config-1.0: lmsensors-config-cgi requires /usr/bin/rrdcgi, but no=
+ providers in its RDEPENDS [file-rdeps]
+loadable-frameworks-1.0.1-2+gitAUTOINC+492574fc81: loadable-frameworks requ=
+ires /bin/bash, but no providers in its RDEPENDS [file-rdeps]
+nodejs-0.10.25: nodejs requires /bin/bash, but no providers in its RDEPENDS=
+ [file-rdeps]
+numptyphysics-0.2+svnr109: numptyphysics requires /bin/bash, /usr/bin/perl,=
+ but no providers in its RDEPENDS [file-rdeps]
+org.webosports.service.update-0.1.0+gitrAUTOINC+b8e50019b8: org.webosports.=
+service.update requires /bin/bash, but no providers in its RDEPENDS [file-r=
+deps]
+packagekit-0.5.6: packagekit requires /bin/bash, but no providers in its RD=
+EPENDS [file-rdeps]
+pax-utils-0.9.2: pax-utils requires /usr/bin/python, but no providers in it=
+s RDEPENDS [file-rdeps]
+pcsc-lite-1.8.6: pcsc-lite requires /usr/bin/python, but no providers in it=
+s RDEPENDS [file-rdeps]
+php-5.4.33: php requires /tmp/work/armv5te-oe-linux-gnueabi/php/5.4.33-r0/i=
+mage/usr/bin/php, but no providers in its RDEPENDS [file-rdeps]
+php-5.4.33: php requires /tmp/work/i586-oe-linux/php/5.4.33-r0/image/usr/bi=
+n/php, but no providers in its RDEPENDS [file-rdeps]
+pm-qa-0.4.14: pm-qa requires /bin/bash, but no providers in its RDEPENDS [f=
+ile-rdeps]
+qt-creator-2.8.1: qt-creator requires /usr/bin/perl, but no providers in it=
+s RDEPENDS [file-rdeps]
+systemd-216+gitAUTOINC+5d0ae62c66: systemd-kernel-install requires /bin/bas=
+h, but no providers in its RDEPENDS [file-rdeps]
+tracker-0.14.2: tracker-nautilus-extension requires libnautilus-extension.s=
+o.1()(64bit), but no providers in its RDEPENDS [file-rdeps]
+tracker-0.14.2: tracker-nautilus-extension requires libnautilus-extension.s=
+o.1, but no providers in its RDEPENDS [file-rdeps]
+ubx-utils-0.0.0+gitrAUTOINC+b63c0932dd: ubx-utils requires /bin/bash, but n=
+o providers in its RDEPENDS [file-rdeps]
+unionfs-fuse-0.26: unionfs-fuse requires /bin/bash, but no providers in its=
+ RDEPENDS [file-rdeps]
+usbpath-0.0+svnr3172: usbpath requires /usr/bin/perl, but no providers in i=
+ts RDEPENDS [file-rdeps]
+wvstreams-4.6.1: wvstreams requires /usr/bin/perl, but no providers in its =
+RDEPENDS [file-rdeps]
+
+
+count: 0	issue: version-going-backwards
+
+--Bzq2cJcN05fcPrs+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlShHgQACgkQN1Ujt2V2gByRHQCfVIelh/xbe4wJ3j2VuPozwMb3
+nVYAoKa3U/N5a6pg0cvWt7CBFUlrcqYe
+=vWxA
+-----END PGP SIGNATURE-----
+
+--Bzq2cJcN05fcPrs+--
