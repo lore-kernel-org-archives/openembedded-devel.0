@@ -1,34 +1,35 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D2A2072513
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f178.google.com (mail-yk0-f178.google.com
+	[209.85.160.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 16A6172513
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2014 20:52:14 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id n3so23014045wiv.7
+	Mon, 29 Dec 2014 21:05:30 +0000 (UTC)
+Received: by mail-yk0-f178.google.com with SMTP id 20so6761421yks.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2014 12:52:14 -0800 (PST)
+	Mon, 29 Dec 2014 13:05:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=j2rICVNqoN4E4D1uMQaDIBBQe6urnjwMBFBL5qVzLUc=;
-	b=jeDsMr67XcTueYNVAR7eDc88Ur/x7vZ5rpyW/jKm7yP8Hz0qhEA1o6nEetrw5Mlqrx
-	MIk+iDQHNsSWXP8V8DLVAQwMfkmxQYt2JP6FTTcHJb9gsjVrQJkp/FQQjvjIdhit9Ko4
-	dwtbp+ql4y70x0qG+vdg9WN0z9ChKdCktrj/nowT4PIZa6Z1WPOYoH40jQ+25wGAXbcg
-	t9pna6MNWtGDFIugBKy3nO/stLd1Zd6GE1syPX6rP+9g3Voqw/m/pnuPo2Ccj4RlRJi6
-	cYpTkTaAVBsGOmL2NqUuby6szOFLzwtiUqoPek044RQccheeX/Sl6if1jYnuvnfij6Ei
-	t0AA==
-X-Received: by 10.180.73.206 with SMTP id n14mr101014725wiv.60.1419886334647; 
-	Mon, 29 Dec 2014 12:52:14 -0800 (PST)
-Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
-	by mx.google.com with ESMTPSA id l9sm40827016wic.21.2014.12.29.12.52.11
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 29 Dec 2014 12:52:12 -0800 (PST)
-From: Christopher Larson <kergoth@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Dec 2014 13:50:17 -0700
-Message-Id: <1419886217-19360-1-git-send-email-kergoth@gmail.com>
-X-Mailer: git-send-email 1.8.3.4
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH] rng-tools: obey the sysvinit distro feature
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=9XOHL4//wDzwh4JAsi3KLnnNZx0odpEOK/vhWLSGizs=;
+	b=wl7p+gwRC2cgIhmUd52DAaZ+Iqd54clNmaEy4QobQnlGgLqOH77dcioruAAwCdETi6
+	oQC+4JIvmjb7qVvrLjghM6WTL/fyeopAPjiO9Cm1S4Lf/f8NaqvZxS81qXQOHtWI1YES
+	E9vDj+mhW1o/e2v8MlmQQ1A0y+XFKiQVC9q0JzO8B3xlZBhLY2d0QD4sOkbcL+K+Diox
+	VrE/+SEI0Nk4RqC8IOqueWWGozVeM50WBXjZDT7cY33YuMY86EAiqgpZnyHgbZ7SMQAj
+	r3axN5FQJGmSiTiJiJP2PurfnEHoTDssqGGUUPjVt5AcPDVBwpnXcdMYpRDm7gnZCwI6
+	SS/g==
+MIME-Version: 1.0
+X-Received: by 10.236.30.98 with SMTP id j62mr29748002yha.105.1419887130183;
+	Mon, 29 Dec 2014 13:05:30 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.171.132 with HTTP; Mon, 29 Dec 2014 13:05:30 -0800 (PST)
+In-Reply-To: <02BDCB585301A044B5DBBDB58DDFDA0113EDF7@dor-sms-xch01.digi.com>
+References: <02BDCB585301A044B5DBBDB58DDFDA0113EDF7@dor-sms-xch01.digi.com>
+Date: Mon, 29 Dec 2014 19:05:30 -0200
+X-Google-Sender-Auth: T3_-FH0bB2CS5Q6VazRowFgMq5Y
+Message-ID: <CAP9ODKqGELnQYMttXvrHTcaL=J6HqvBrBpaWwpBqH1Y5jKO4eg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] Exception running x11 application
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,53 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Dec 2014 20:52:17 -0000
+X-List-Received-Date: Mon, 29 Dec 2014 21:05:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Christopher Larson <chris_larson@mentor.com>
+On Sat, Dec 27, 2014 at 6:02 PM, Gonzalez, Alex <Alex.Gonzalez@digi.com> wrote:
+> When running an example graphical application on X11 I get the following exception:
+>
+> Exception in thread "main" java.awt.AWTError: Toolkit not found: sun.awt.X11.XToolkit
+>         at java.awt.Toolkit$2.run(Toolkit.java:875)
+>         at java.security.AccessController.doPrivileged(Native Method)
+>         at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:860)
+>         at java.awt.Toolkit.getEventQueue(Toolkit.java:1730)
+>         at java.awt.EventQueue.invokeLater(EventQueue.java:1217)
+>         at javax.swing.SwingUtilities.invokeLater(SwingUtilities.java:1287)
+>         at HelloWorldSwing.main(HelloWorldSwing.java:17)
+>
+> This is similar to an issue reported for the dora branch on https://github.com/woglinde/meta-java/issues/60, however the suggested revert leaves a non buildable system.
+>
+> Has anyone succeeded in running a graphical java application over X11?
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
----
- meta-oe/recipes-support/rng-tools/rng-tools_4.bb | 22 ++++++++++++++++------
- 1 file changed, 16 insertions(+), 6 deletions(-)
+I didn't for a while (but succeed in past).
 
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-index f10fad1..0b40fc5 100644
---- a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-+++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-@@ -10,16 +10,26 @@ SRC_URI = "http://heanet.dl.sourceforge.net/sourceforge/gkernel/${BP}.tar.gz \
- SRC_URI[md5sum] = "ae89dbfcf08bdfbea19066cfbf599127"
- SRC_URI[sha256sum] = "b71bdfd4222c05e8316001556be90e1606f2a1bac3efde60153bd84e873cc195"
- 
-+# As the recipe doesn't inherit systemd.bbclass, we need to set this variable
-+# manually to avoid unnecessary postinst/preinst generated.
-+python () {
-+    if not bb.utils.contains('DISTRO_FEATURES', 'sysvinit', True, False, d):
-+        d.setVar("INHIBIT_UPDATERCD_BBCLASS", "1")
-+}
-+
- inherit autotools update-rc.d
- 
- do_install_append() {
--    install -d "${D}${sysconfdir}/init.d"
--    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
--    sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
--        ${D}${sysconfdir}/init.d/rng-tools
-+    # Only install the init script when 'sysvinit' is in DISTRO_FEATURES.
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+        install -d "${D}${sysconfdir}/init.d"
-+        install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
-+        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
-+            ${D}${sysconfdir}/init.d/rng-tools
- 
--    install -d "${D}${sysconfdir}/default"
--    install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
-+        install -d "${D}${sysconfdir}/default"
-+        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
-+    fi
- }
- 
- INITSCRIPT_NAME = "rng-tools"
+Anyway I tried to revert the change and it opens a can of worms. The
+initial fix I ended needing to work was to fix QEMU call and this,
+after some scratch head worked. However this didn't fix the build as
+QEMU eats a lot of memory doing the processing and eventually is
+killed:
+
+[1673545.675672] Out of memory: Kill process 22041 (qemu-arm) score
+960 or sacrifice child
+[1673545.675963] Killed process 22041 (qemu-arm) total-vm:31542644kB,
+anon-rss:31482564kB, file-rss:1368kB
+
+So this is very frustrating ...
+
 -- 
-1.8.3.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
