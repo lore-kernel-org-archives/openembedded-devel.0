@@ -1,32 +1,38 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f42.google.com (mail-yh0-f42.google.com
-	[209.85.213.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FD807259D
+Received: from mail-yh0-f51.google.com (mail-yh0-f51.google.com
+	[209.85.213.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 66D2A7264B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2014 12:02:03 +0000 (UTC)
-Received: by mail-yh0-f42.google.com with SMTP id v1so6552890yhn.29
+	Mon, 29 Dec 2014 12:08:03 +0000 (UTC)
+Received: by mail-yh0-f51.google.com with SMTP id a41so6462734yho.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Dec 2014 04:02:04 -0800 (PST)
+	Mon, 29 Dec 2014 04:08:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=zwSOo3cW2lzMbCI2SDeF58LsD23ATJGiYp8QTUxloBU=;
-	b=T1I3F1ZNACZIJ2a4dwA+nyhexUArS7xJYDLEbNuTb8uX1CjkeCGSFo5thWzGcQABXu
-	Cd11n2a62oIVlIojd/grbebJQJ4tJLy0+rqKxbEvisSqWznakylCWXr457YiW8+9meEO
-	8oGWI1I6RrNfa0FtMCxErBzF/JeDMHslehwXoMTokq1q203rLMBBVGmqEYZ5CFqi0LQM
-	QigZZQvU1sp5bJ7jvtBLOxPTxlqT1RzN8+rP7Lwl47BMZLc7cBQ7m+pGme6JR0AXtvsU
-	2a8m1FhQL8PvQ1ncUnJ3Ft7BeLdjxgWGVnJ3ua8X7mpupcDnCFjn7GSAojl+Xwjecm3W
-	PScQ==
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=Q+RZcAF9cCW3a/aVKabw1lfNLvm9U/ri36M8ZFjohck=;
+	b=oA+MNv0Lb41DeChViMBk59ZbxIpBx2fw8DhsNIoOV3je1cDm9U5tPOqDUUiK7hbywX
+	HtxzbTcee/4tIgiCfYmlWkWgVZVJWtgofrYLf26EDnMEzOsbphrUF1vh5x5K2o4DC9cM
+	OKS50GO9G7o6DxhWAvw11CAuePLOFrAZ01d3IBjxnw/XMvAJbIAes2ZO6zqqK8uu0l7E
+	GqaUsr6CaIghqniUUBz3sHlDjF1BzrczEvXgOv8alwYKxcegPHNYX3VGu7Q+x1WtPwAQ
+	YEwSlyjiB2xwDSgcBPSytUB8BdpwDPk5NpCUaoVPv3Lx3SJspxt1vv+7G2CaWogui+nr
+	uDBw==
 MIME-Version: 1.0
-X-Received: by 10.170.130.21 with SMTP id w21mr43469088ykb.22.1419854523788;
-	Mon, 29 Dec 2014 04:02:03 -0800 (PST)
+X-Received: by 10.236.39.134 with SMTP id d6mr15708336yhb.90.1419854884202;
+	Mon, 29 Dec 2014 04:08:04 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.170.171.132 with HTTP; Mon, 29 Dec 2014 04:02:03 -0800 (PST)
-Date: Mon, 29 Dec 2014 10:02:03 -0200
-X-Google-Sender-Auth: jtPLfCE7AIVRdTJ7EvBom9B1uCU
-Message-ID: <CAP9ODKpjdKT8TLxoAgg0aY6zDguRh-rgWchbRpu9T_pew70o7g@mail.gmail.com>
+Received: by 10.170.171.132 with HTTP; Mon, 29 Dec 2014 04:08:04 -0800 (PST)
+In-Reply-To: <2843303.CPYcjsZDpv@peggleto-mobl5.ger.corp.intel.com>
+References: <1859515.Hd60QW1tn7@peggleto-mobl5.ger.corp.intel.com>
+	<6010322.On4bLv5MV8@peggleto-mobl5.ger.corp.intel.com>
+	<2843303.CPYcjsZDpv@peggleto-mobl5.ger.corp.intel.com>
+Date: Mon, 29 Dec 2014 10:08:04 -0200
+X-Google-Sender-Auth: Jmq-3Qr8_xeILZyH9qHstA0ntGE
+Message-ID: <CAP9ODKosAV7tt_PV30EJanVMAdu=1hV8TZpV+GLCMALqz9Da9g@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: lttng-modules failing to build with Linux 3.18
+Cc: yocto <yocto@yoctoproject.org>
+Subject: Re: [yocto] meta-java layer maintainership
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,40 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Dec 2014 12:02:12 -0000
+X-List-Received-Date: Mon, 29 Dec 2014 12:08:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On Sun, Dec 28, 2014 at 10:31 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Monday 01 December 2014 11:57:10 Paul Eggleton wrote:
+>> On Monday 01 December 2014 10:16:24 Paul Eggleton wrote:
+>> > Henning would like some folks to help him maintain the meta-java layer,
+>> > which contains OpenJDK and other open source Java-related components.
+>> >
+>> > An ideal candidate maintainer would:
+>> >  * Have an interest in maintaining the Java-related recipes in the layer
+>> >  * Be willing to review and merge patches from the community
+>> >
+>> > If you'd like to help out here (and responsibility can be shared by more
+>> > than one person, it doesn't just have to be one) then please reply here or
+>> > in private and I'll arrange for you to get access to the repository.
+>>
+>> Looks like we now have enough people to take care of this, thanks everyone!
+>
+> I'm not sure if this ever got announced, but we now have the following
+> maintainers for meta-java:
+>
+>   Henning Heinold <henning@itconsulting-heinold.de>
+>   Mario Domenech Goulart <mario@ossystems.com.br>
+>   Maxin John <maxin.john@enea.com>
+>   Otavio Salvador <otavio@ossystems.com.br>
+>
+> At the same time, the layer has also been moved to the following location:
+>
+>   http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/
+>
+> I've just updated the OE layer index accordingly. Please update your local
+> clones using something similar to the following command:
+>
+>   git remote set-url origin git://git.yoctoproject.org/meta-java
 
-We found the following error in our autobuilder:
-
-framebuffer fsl-image-machine-test@imx23evk (3/11) |
-.../build-framebuffer/tmp/work/imx23evk-poky-linux-gnueabi/lttng-modules/2.5.0-r0/git/lib/ringbuffer/ring_buffer_frontend.c:
-In function 'lib_ring_buffer_open_read':
-framebuffer fsl-image-machine-test@imx23evk (3/11) |
-.../build-framebuffer/tmp/work/imx23evk-poky-linux-gnueabi/lttng-modules/2.5.0-r0/git/lib/ringbuffer/ring_buffer_frontend.c:795:2:
-error: implicit declaration of function 'smp_mb__after_atomic_inc'
-[-Werror=implicit-function-declaration]
-framebuffer fsl-image-machine-test@imx23evk (3/11) |
-smp_mb__after_atomic_inc();
-framebuffer fsl-image-machine-test@imx23evk (3/11) |   ^
-framebuffer fsl-image-machine-test@imx23evk (3/11) |
-.../build-framebuffer/tmp/work/imx23evk-poky-linux-gnueabi/lttng-modules/2.5.0-r0/git/lib/ringbuffer/ring_buffer_frontend.c:
-In function 'lib_ring_buffer_release_read':
-framebuffer fsl-image-machine-test@imx23evk (3/11) |
-.../build-framebuffer/tmp/work/imx23evk-poky-linux-gnueabi/lttng-modules/2.5.0-r0/git/lib/ringbuffer/ring_buffer_frontend.c:805:2:
-error: implicit declaration of function 'smp_mb__before_atomic_dec'
-[-Werror=implicit-function-declaration]
-framebuffer fsl-image-machine-test@imx23evk (3/11) |
-smp_mb__before_atomic_dec();
-framebuffer fsl-image-machine-test@imx23evk (3/11) |   ^
-framebuffer fsl-image-machine-test@imx23evk (3/11) | cc1: some
-warnings being treated as errors
-framebuffer fsl-image-machine-test@imx23evk (3/11) | make[3]: ***
-[.../build-framebuffer/tmp/work/imx23evk-poky-linux-gnueabi/lttng-modules/2.5.0-r0/git/lib/ringbuffer/ring_buffer_frontend.o]
-Error 1
-
-Regards,
+It'd be great if Henning could contact Github and as for a mirror to
+be set, in previous location. This allows for old repository to be
+kept in sync with this new one.
 
 -- 
 Otavio Salvador                             O.S. Systems
