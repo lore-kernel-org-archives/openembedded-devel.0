@@ -1,39 +1,34 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qa0-f41.google.com (mail-qa0-f41.google.com
-	[209.85.216.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 16B4B60167
+Return-Path: <ben.shelton@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 659246017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Dec 2014 17:00:50 +0000 (UTC)
-Received: by mail-qa0-f41.google.com with SMTP id s7so10399653qap.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Dec 2014 09:00:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=WSOtLKeuXfH04gxhvqtUClq+EDmN3eFoBhkiOgI4alM=;
-	b=VqpW6WQEb+DsTXcD5K5phTcyu3X81qjFeb+Z54Yb+UO8Ji2Pbc0sbya/bc5s7mQowr
-	CT+YvmrVehmW9DFrrQrtmrOsT1sQuBSj6xPw+7bvA9VzjyNcbBmX4tvc6pXKqCkhZhvD
-	3/Qne+CAToT6jyU1defAxyAQE47wNU6iCQmc0CT+50JBmW6/jwPAym4B8uyzgQxFLw0U
-	6bRiCPF6xV1AkUFM8wHozlUTS4rSgTRjAxvG4YS3Oi4tw+tYlBCKmZH0Z7ss75yhQSB5
-	owwB54kf71enOk5DsDmsCotz8qf90MqAZtgZqAc+eX/FHJMWPgOn9w3yxMmQfoMuW0rQ
-	aY7Q==
-X-Received: by 10.140.39.167 with SMTP id v36mr27340829qgv.77.1419958850824;
-	Tue, 30 Dec 2014 09:00:50 -0800 (PST)
-Received: from nano.lab.ossystems.com.br ([177.100.225.47])
-	by mx.google.com with ESMTPSA id n1sm36421123qag.21.2014.12.30.09.00.48
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Dec 2014 09:00:49 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id 60EDF1C9F2487; Tue, 30 Dec 2014 15:00:46 -0200 (BRST)
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Dec 2014 15:00:42 -0200
-Message-Id: <1419958842-9394-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] mailcap: Fix license format QA error
+	Tue, 30 Dec 2014 18:48:37 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod3.natinst.com (8.14.5/8.14.5) with ESMTP id
+	sBUImaK1025059; Tue, 30 Dec 2014 12:48:36 -0600
+Received: from bshelton-desktop.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
+	with ESMTP id 2014123012483687-1524144 ;
+	Tue, 30 Dec 2014 12:48:36 -0600 
+From: Ben Shelton <ben.shelton@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 30 Dec 2014 12:48:11 -0600
+Message-Id: <1419965292-10709-2-git-send-email-ben.shelton@ni.com>
+X-Mailer: git-send-email 2.2.1
+In-Reply-To: <1419965292-10709-1-git-send-email-ben.shelton@ni.com>
+References: <1419965292-10709-1-git-send-email-ben.shelton@ni.com>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 12/30/2014 12:48:36 PM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 12/30/2014 12:48:36 PM,
+	Serialize complete at 12/30/2014 12:48:36 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:5.13.68, 1.0.33,
+	0.0.0000
+	definitions=2014-12-30_08:2014-12-30, 2014-12-30,
+	1970-01-01 signatures=0
+Cc: Guy Morand <guy.morand@netmodule.com>, Guy Morand <morandg@gmail.com>
+Subject: [meta-oe][PATCH 1/2] iperf3: Adds git and 3.0.8 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,34 +42,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Dec 2014 17:00:53 -0000
+X-List-Received-Date: Tue, 30 Dec 2014 18:48:38 -0000
 
-Fix following QA error:
+From: Guy Morand <morandg@gmail.com>
 
-,----
-| WARNING: Recipe mailcap, LICENSE (PD MIT) has invalid format, LICENSES
-|     must have operator "([&|() ])" between them.
-`----
+iperf3 is the new successor of iperf. The project is now mature enough as it
+started in 2009 and has stable releases. It supports reporting results in the
+portable JSON format, provides more information than iperf does and also adds
+some features from other tools such as nuttcp and netperf but were missing from
+the original iperf.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Guy Morand <guy.morand@netmodule.com>
+Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+Acked-by: Ken Sharp <ken.sharp@ni.com>
 ---
- meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Natinst-ReviewBoard-ID: 85589
+---
+ meta-oe/recipes-benchmark/iperf3/iperf3.inc      | 20 ++++++++++++++++++++
+ meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb |  6 ++++++
+ meta-oe/recipes-benchmark/iperf3/iperf3_git.bb   |  7 +++++++
+ 3 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3.inc
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
+ create mode 100644 meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
 
-diff --git a/meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb b/meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb
-index bcc6496..95d7d11 100644
---- a/meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb
-+++ b/meta-oe/recipes-support/mailcap/mailcap_2.1.43.bb
-@@ -15,7 +15,7 @@ SECTION = "System Environment/Base"
- SRC_URI = "https://git.fedorahosted.org/cgit/${PN}.git/snapshot/r2-1-43.tar.gz"
- SRC_URI[md5sum] = "8fd185ffae710301de3bc297877a404b"
- SRC_URI[sha256sum] = "a630892b5fe59eb9e3bef30c597de1c2b7f35243dea4b0c995fd482aa20c2d6b"
--LICENSE = "PD MIT"
-+LICENSE = "PD & MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=100fcfb84512ccc03ffc7d89ac391305"
- S = "${WORKDIR}/r2-1-43"
- do_install() {
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3.inc b/meta-oe/recipes-benchmark/iperf3/iperf3.inc
+new file mode 100644
+index 0000000..029a144
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3.inc
+@@ -0,0 +1,20 @@
++SUMMARY = "Network benchmark tool"
++DESCRIPTION = \
++"iperf is a tool for active measurements of the maximum achievable bandwidth \
++on IP networks. It supports tuning of various parameters related to timing, \
++protocols, and buffers. For each test it reports the bandwidth, loss, and \
++other parameters."
++HOMEPAGE = "http://software.es.net/iperf/"
++SECTION = "console/network"
++BUGTRACKER = "https://github.com/esnet/iperf/issues"
++AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
++LICENSE = "BSD"
++
++BRANCH = "master"
++SRC_URI = "\
++           git://github.com/esnet/iperf.git;branch=${BRANCH} \
++           "
++
++S = "${WORKDIR}/git"
++
++inherit autotools
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
+new file mode 100644
+index 0000000..a39deff
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.0.8.bb
+@@ -0,0 +1,6 @@
++require iperf3.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ab59a0c3a4bc3954d1ece68ea19d77a4"
++
++BRANCH = "3.0-STABLE"
++SRCREV = "24d5cdec3731bc589f6cb7c359d8311dcaa41854"
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
+new file mode 100644
+index 0000000..77ebe15
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
+@@ -0,0 +1,7 @@
++require iperf3.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=062ab1bc33fae1926387ac1274cb0873"
++
++PV = "3.0.8+git${SRCPV}"
++SRCREV = "${AUTOREV}"
++
 -- 
-2.1.4
+2.2.1
 
 
