@@ -1,24 +1,41 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 07CCB7127F
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A500F72544
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Dec 2014 08:40:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id sBU8eHNO003953
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 30 Dec 2014 13:54:41 +0000 (UTC)
+Received: by mail-wi0-f180.google.com with SMTP id n3so24085915wiv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Dec 2014 00:40:17 -0800 (PST)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Tue, 30 Dec 2014 00:40:17 -0800
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 30 Dec 2014 00:40:16 -0800
-Message-ID: <1419928817-38602-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-Subject: [meta-networking] [PATCH 1/2 V2] esmtp: use BPN in SRC_URI
+	Tue, 30 Dec 2014 05:54:41 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=1584saf3OdfUraCFzBoSuGRfAwx0cKZjXU2gUc73n74=;
+	b=YzgvskAhm9f8XyllLNwdzMOImSZQV3YUZWs9uuVsUveogHpiCffImXmjzxjMJR3fyR
+	NyJ8bxubxSw9F0Sh+tsIPQZshkr+jVANGqcs+iHGWS1u8IxcPxTEfgRaEShLPSlnwXQf
+	BOoPCVgajkar+E9oZFN+VTdezNZrk7vARstEUnxDPwd8vsntLjc+nzLN7r6wHmX4uzyz
+	Y71Kn+ThgQDwiZPCSXTgx4c79dbq+JL8cirqJelFFccTTRgC1dcP/VD7yZOoKSPAtlzA
+	wBzHAwOrEkFGUHqBJvH3WRkNeN6gF/XbwdpFNGSVKwViw5Aa8zcQbLb5mgFFP0QG1a+D
+	5SkQ==
+X-Gm-Message-State: ALoCoQmjtC7qiXF64Ci894jIEnVcg4NtH1mqh0YYS5u+yd2skZFdn6OGx2YivkK0ZjMIfo3PMDzi
+X-Received: by 10.194.185.243 with SMTP id
+	ff19mr117570049wjc.126.1419947681701; 
+	Tue, 30 Dec 2014 05:54:41 -0800 (PST)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35]) by mx.google.com with ESMTPSA id
+	gb10sm28759925wjb.21.2014.12.30.05.54.40
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 30 Dec 2014 05:54:40 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 30 Dec 2014 13:53:32 +0000
+Message-Id: <1419947615-27947-2-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+In-Reply-To: <1419947615-27947-1-git-send-email-ross.burton@intel.com>
+References: <1419947615-27947-1-git-send-email-ross.burton@intel.com>
+Subject: [PATCH 2/5] telepathy-glib: add (moving from oe-core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,28 +49,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Dec 2014 08:40:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 30 Dec 2014 13:54:48 -0000
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-networking/recipes-support/esmtp/esmtp_1.2.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../telepathy/telepathy-glib_0.24.0.bb                 |   16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
 
-diff --git a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
-index 46d468c..60d34e1 100644
---- a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
-+++ b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
-@@ -11,7 +11,7 @@ DEPENDS = "libesmtp"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--SRC_URI = "http://nchc.dl.sourceforge.net/project/${PN}/${PN}/${PV}/${PN}-${PV}.tar.bz2"
-+SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.bz2"
- 
- # Have to set this or we get -L/lib in LDFLAGS
- EXTRA_OECONF = "--with-libesmtp=${STAGING_EXECPREFIXDIR}"
+diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
+new file mode 100644
+index 0000000..6b8c20c
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.0.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "Telepathy Framework glib-base helper library"
++DESCRIPTION = "Telepathy Framework: GLib-based helper library for connection managers"
++HOMEPAGE = "http://telepathy.freedesktop.org/wiki/"
++DEPENDS = "glib-2.0 dbus python-native-runtime dbus-native dbus-glib libxslt-native"
++LICENSE = "LGPLv2.1+"
++
++SRC_URI = "http://telepathy.freedesktop.org/releases/telepathy-glib/${BP}.tar.gz"
++SRC_URI[md5sum] = "93c429e37750b25dcf8de86bb514664f"
++SRC_URI[sha256sum] = "ae0002134991217f42e503c43dea7817853afc18863b913744d51ffa029818cf"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=e413d83db6ee8f2c8e6055719096a48e"
++
++inherit autotools pkgconfig gettext
++
++FILES_${PN} += "${datadir}/telepathy \
++                ${datadir}/dbus-1"
 -- 
-1.7.9.5
+1.7.10.4
 
 
