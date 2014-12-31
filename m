@@ -1,27 +1,47 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 23197601F5
+Return-Path: <jbriance@cisco.com>
+X-Greylist: delayed 591 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 31 Dec 2014 08:36:27 UTC
+Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 85B117249A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Dec 2014 08:25:59 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55416173"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Dec 2014 16:22:35 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBV8PSfb009840
+	Wed, 31 Dec 2014 08:36:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+	d=cisco.com; i=@cisco.com; l=1675; q=dns/txt; s=iport;
+	t=1420014995; x=1421224595;
+	h=from:to:cc:subject:date:message-id:references:
+	in-reply-to:content-transfer-encoding:mime-version;
+	bh=avU4m3Idh3g6Mqs1KyghxikSIKaQpX1U/L1PFup/x5g=;
+	b=evAXsPp5GO4kJj9RfjZceODasoGl0spfRpbh0kDKcNlqLmWnJzN6gq7s
+	opqB6D2Btxl1mEnbetMGVLkQkK00MxgzPJ8zPMbkCBH75i3g247Yzm3ek
+	e5KjwBBAH4pDMgNMXzHbtdUctQZyc3EHLvWUZ16GVZmLXN4y3xBLzFP/I o=;
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AjMFAEGyo1StJA2E/2dsb2JhbABcgwZSXMQRgieFJxE5AoEGFgEBAQEBfYQNAQEEOj8QAgEqFBAyJQIEDg2IJA3GdwEBAQEBAQEBAQEBAQEBAQEBAQEBARMEj0YxB4MWgRMFjhWDP48bh2kig250gUB+AQEB
+X-IronPort-AV: E=Sophos;i="5.07,671,1413244800"; d="scan'208";a="109394350"
+Received: from alln-core-10.cisco.com ([173.36.13.132])
+	by alln-iport-4.cisco.com with ESMTP; 31 Dec 2014 08:26:37 +0000
+Received: from xhc-aln-x12.cisco.com (xhc-aln-x12.cisco.com [173.36.12.86])
+	by alln-core-10.cisco.com (8.14.5/8.14.5) with ESMTP id sBV8QbKD032121
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Dec 2014 16:25:28 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 31 Dec 2014 16:26:00 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Dec 2014 16:22:06 +0800
-Message-ID: <1420014126-30814-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 31 Dec 2014 08:26:37 GMT
+Received: from xmb-aln-x12.cisco.com ([169.254.7.201]) by
+	xhc-aln-x12.cisco.com ([173.36.12.86]) with mapi id 14.03.0195.001;
+	Wed, 31 Dec 2014 02:26:37 -0600
+From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-qt5][PATCH] qtbase: Add gcc to QMAKE_COMPILER variable.
+Thread-Index: AQHQJND2wk4IQpXf/k+iKh9Mt7J/7ZypXQzA
+Date: Wed, 31 Dec 2014 08:26:36 +0000
+Message-ID: <5940D1D9F240BA44AEF939055CF1358D04A3DFE8@xmb-aln-x12.cisco.com>
+References: <1420013305-1133-1-git-send-email-jbriance@cisco.com>
+In-Reply-To: <1420013305-1133-1-git-send-email-jbriance@cisco.com>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.60.62.102]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-networking][PATCH] opensaf: add recipe
+Subject: [meta-qt5][PATCH] qtbase: Add gcc to QMAKE_COMPILER variable.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,83 +55,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Dec 2014 08:26:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 31 Dec 2014 08:36:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-OpenSAF is an open source implementation of the SAF AIS specification
+According to mkspecs/features/spec_post.prf, QMAKE_COMPILER variable should=
+ at least contain gcc for linux-oe-g++ platform.
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+This patch fixes a crash issue in QtWebKit introduced in v5.4.0 by:
+https://qt.gitorious.org/qt/qtwebkit/commit/34d4628b981add039a9a349723cbdff=
+1dadca144
 ---
- .../opensaf/install-samples-from-srcdir.patch      | 11 ++++++
- .../recipes-daemons/opensaf/opensaf_4.5.0.bb       | 40 ++++++++++++++++++++++
- 2 files changed, 51 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+ recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch | 2 +-
+ recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch b/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
-new file mode 100644
-index 0000000..016b64f
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
-@@ -0,0 +1,11 @@
-+--- opensaf-4.5.0.orig/Makefile.am	2014-12-31 14:45:54.088797989 +0800
-++++ opensaf-4.5.0/Makefile.am	2014-12-31 14:45:08.328796688 +0800
-+@@ -219,7 +219,7 @@ install-data-local:
-+ 	$(mkinstalldirs) $(DESTDIR)$(pkgpiddir)
-+ 	$(mkinstalldirs) $(DESTDIR)$(lockdir)
-+ 	$(mkinstalldirs) $(DESTDIR)$(pkglocalstatedir)
-+-	cp -R samples/ $(DESTDIR)$(pkgdatadir)
-++	cp -R $(srcdir)/samples/ $(DESTDIR)$(pkgdatadir)
-+ 
-+ install-data-hook:
-+ 	@for i in $$(grep -lr -e 'xxLIBDIRxx' -e 'xxLOGDIRxx' -e 'xxCLCCLIDIRxx' $(DESTDIR)$(pkgimmxml_svcdir)/*.xml) ; do \
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-new file mode 100644
-index 0000000..a58de5c
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "OpenSAF is an open source implementation of the SAF AIS specification"
-+DESCRIPTION = "OpenSAF is an open source project established to develop a base platform \
-+middleware consistent with Service Availability Forum (SA Forum) \
-+specifications, under the LGPLv2.1 license. The OpenSAF Foundation was \
-+established by leading Communications and Enterprise Computing Companies to \
-+facilitate the OpenSAF Project and to accelerate the adoption of the OpenSAF \
-+code base in commercial products. \
-+The OpenSAF project was launched in mid 2007 and has been under development by \
-+an informal group of supporters of the OpenSAF initiative. The OpenSAF \
-+Foundation was founded on January 22nd 2008 with Emerson Network Power, \
-+Ericsson, Nokia Siemens Networks, HP and Sun Microsystems as founding members."
-+HOMEPAGE = "http://www.opensaf.org"
-+
-+inherit autotools useradd systemd pkgconfig
-+
-+SRC_URI = "http://jaist.dl.sourceforge.net/project/opensaf/releases/${BPN}-${PV}.tar.gz \
-+           file://install-samples-from-srcdir.patch"
-+
-+SRC_URI[md5sum] = "534c0a99438a62c4c8dda56cfa67300c"
-+SRC_URI[sha256sum] = "2f5ba57fe67e94099c0df82d0a0dd207b5c583c93030035ba354c97b5471b590"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a916467b91076e631dd8edb7424769c7"
-+
-+DEPENDS = "libxml2 python"
-+
-+USERADD_PACKAGES = "${PN}"
-+GROUPADD_PARAM_${PN} = "-f -r opensaf"
-+USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nologin -c \"OpenSAF\" opensaf"
-+
-+SYSTEMD_SERVICE_${PN} += "opensafd.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+FILES_${PN} += "/run"
-+
-+INSANE_SKIP_${PN} = "dev-so"
-+
-+do_install_append() {
-+    rm -rf "${D}${localstatedir}/run"
-+}
--- 
-1.9.1
+diff --git a/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch b=
+/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
+index 081bcac..7a94dff 100644
+--- a/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
++++ b/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
+@@ -224,7 +224,7 @@ index 0000000..ca26b10
+ +include(../common/g++-unix.conf)
+ +
+ +# tc settings from g++-base.conf
+-+QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER)
+++QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER) gcc
+ +QMAKE_CC       =3D $(OE_QMAKE_CC)
+ +QMAKE_CXX      =3D $(OE_QMAKE_CXX)
+ +
+diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/rec=
+ipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+index 081bcac..7a94dff 100644
+--- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
++++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+@@ -224,7 +224,7 @@ index 0000000..ca26b10
+ +include(../common/g++-unix.conf)
+ +
+ +# tc settings from g++-base.conf
+-+QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER)
+++QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER) gcc
+ +QMAKE_CC       =3D $(OE_QMAKE_CC)
+ +QMAKE_CXX      =3D $(OE_QMAKE_CXX)
+ +
+--
+1.8.0
 
 
