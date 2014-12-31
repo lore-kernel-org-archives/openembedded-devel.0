@@ -1,47 +1,43 @@
-Return-Path: <jbriance@cisco.com>
-X-Greylist: delayed 591 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 31 Dec 2014 08:36:27 UTC
-Received: from alln-iport-4.cisco.com (alln-iport-4.cisco.com [173.37.142.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 85B117249A
+Return-Path: <Alex.Gonzalez@digi.com>
+Received: from mail1.bemta7.messagelabs.com (mail1.bemta7.messagelabs.com
+	[216.82.254.109])
+	by mail.openembedded.org (Postfix) with ESMTP id AA09A60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Dec 2014 08:36:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=1675; q=dns/txt; s=iport;
-	t=1420014995; x=1421224595;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-transfer-encoding:mime-version;
-	bh=avU4m3Idh3g6Mqs1KyghxikSIKaQpX1U/L1PFup/x5g=;
-	b=evAXsPp5GO4kJj9RfjZceODasoGl0spfRpbh0kDKcNlqLmWnJzN6gq7s
-	opqB6D2Btxl1mEnbetMGVLkQkK00MxgzPJ8zPMbkCBH75i3g247Yzm3ek
-	e5KjwBBAH4pDMgNMXzHbtdUctQZyc3EHLvWUZ16GVZmLXN4y3xBLzFP/I o=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AjMFAEGyo1StJA2E/2dsb2JhbABcgwZSXMQRgieFJxE5AoEGFgEBAQEBfYQNAQEEOj8QAgEqFBAyJQIEDg2IJA3GdwEBAQEBAQEBAQEBAQEBAQEBAQEBARMEj0YxB4MWgRMFjhWDP48bh2kig250gUB+AQEB
-X-IronPort-AV: E=Sophos;i="5.07,671,1413244800"; d="scan'208";a="109394350"
-Received: from alln-core-10.cisco.com ([173.36.13.132])
-	by alln-iport-4.cisco.com with ESMTP; 31 Dec 2014 08:26:37 +0000
-Received: from xhc-aln-x12.cisco.com (xhc-aln-x12.cisco.com [173.36.12.86])
-	by alln-core-10.cisco.com (8.14.5/8.14.5) with ESMTP id sBV8QbKD032121
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Dec 2014 08:26:37 GMT
-Received: from xmb-aln-x12.cisco.com ([169.254.7.201]) by
-	xhc-aln-x12.cisco.com ([173.36.12.86]) with mapi id 14.03.0195.001;
-	Wed, 31 Dec 2014 02:26:37 -0600
-From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5][PATCH] qtbase: Add gcc to QMAKE_COMPILER variable.
-Thread-Index: AQHQJND2wk4IQpXf/k+iKh9Mt7J/7ZypXQzA
-Date: Wed, 31 Dec 2014 08:26:36 +0000
-Message-ID: <5940D1D9F240BA44AEF939055CF1358D04A3DFE8@xmb-aln-x12.cisco.com>
-References: <1420013305-1133-1-git-send-email-jbriance@cisco.com>
-In-Reply-To: <1420013305-1133-1-git-send-email-jbriance@cisco.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.60.62.102]
+	Wed, 31 Dec 2014 15:25:06 +0000 (UTC)
+Received: from [216.82.254.195] by server-13.bemta-7.messagelabs.com id
+	F2/0A-02788-25514A45; Wed, 31 Dec 2014 15:25:06 +0000
+X-Env-Sender: Alex.Gonzalez@digi.com
+X-Msg-Ref: server-5.tower-200.messagelabs.com!1420039506!8843069!1
+X-Originating-IP: [66.77.174.14]
+X-StarScan-Received: 
+X-StarScan-Version: 6.12.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 26213 invoked from network); 31 Dec 2014 15:25:06 -0000
+Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
+	by server-5.tower-200.messagelabs.com with RC4-SHA encrypted SMTP;
+	31 Dec 2014 15:25:06 -0000
+Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
+	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.389.2;
+	Wed, 31 Dec 2014 09:24:55 -0600
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.210.2;
+	Wed, 31 Dec 2014 09:25:05 -0600
+Received: from log-linux-hp-agonzal.digi.com (10.101.2.169) by
+	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
+	14.3.210.2; Wed, 31 Dec 2014 16:25:03 +0100
+From: Alex Gonzalez <alex.gonzalez@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 31 Dec 2014 16:24:46 +0100
+Message-ID: <1420039486-18734-3-git-send-email-alex.gonzalez@digi.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1420039486-18734-1-git-send-email-alex.gonzalez@digi.com>
+References: <1420039486-18734-1-git-send-email-alex.gonzalez@digi.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qtbase: Add gcc to QMAKE_COMPILER variable.
+X-Originating-IP: [10.101.2.169]
+X-KSE-AntiSpam-Interceptor-Info: protection disabled
+X-KSE-Antivirus-Interceptor-Info: scan successful
+X-KSE-Antivirus-Info: Clean
+Subject: [meta-java][PATCH 2/2] openjdk: Remove currency data generation expiration date.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,51 +51,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Dec 2014 08:36:34 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 31 Dec 2014 15:25:11 -0000
+Content-Type: text/plain
 
-According to mkspecs/features/spec_post.prf, QMAKE_COMPILER variable should=
- at least contain gcc for linux-oe-g++ platform.
+The currency data generation class makes a 10 years expiration date
+check.
 
-This patch fixes a crash issue in QtWebKit introduced in v5.4.0 by:
-https://qt.gitorious.org/qt/qtwebkit/commit/34d4628b981add039a9a349723cbdff=
-1dadca144
+It might be reasonable to make sure the input data is updated
+periodically, but on an embedded system we don't want to have this
+type of built in time expirations.
+
+This commit removes the date expiration check.
+
+Signed-off-by: Alex Gonzalez <alex.gonzalez@digi.com>
 ---
- recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch | 2 +-
- recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ ...njdk-remove-currency-data-generation-expi.patch | 25 ++++++++++++++++++++++
+ recipes-core/openjdk/openjdk-7-release-25b30.inc   |  2 ++
+ 2 files changed, 27 insertions(+)
+ create mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-openjdk-remove-currency-data-generation-expi.patch
 
-diff --git a/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch b=
-/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
-index 081bcac..7a94dff 100644
---- a/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
-@@ -224,7 +224,7 @@ index 0000000..ca26b10
- +include(../common/g++-unix.conf)
- +
- +# tc settings from g++-base.conf
--+QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER)
-++QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER) gcc
- +QMAKE_CC       =3D $(OE_QMAKE_CC)
- +QMAKE_CXX      =3D $(OE_QMAKE_CXX)
- +
-diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/rec=
-ipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-index 081bcac..7a94dff 100644
---- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-@@ -224,7 +224,7 @@ index 0000000..ca26b10
- +include(../common/g++-unix.conf)
- +
- +# tc settings from g++-base.conf
--+QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER)
-++QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER) gcc
- +QMAKE_CC       =3D $(OE_QMAKE_CC)
- +QMAKE_CXX      =3D $(OE_QMAKE_CXX)
- +
---
-1.8.0
-
+diff --git a/recipes-core/openjdk/openjdk-7-25b30/icedtea-openjdk-remove-currency-data-generation-expi.patch b/recipes-core/openjdk/openjdk-7-25b30/icedtea-openjdk-remove-currency-data-generation-expi.patch
+new file mode 100644
+index 000000000000..6dd36af54df2
+--- /dev/null
++++ b/recipes-core/openjdk/openjdk-7-25b30/icedtea-openjdk-remove-currency-data-generation-expi.patch
+@@ -0,0 +1,25 @@
++From 7df2fd1014a0c31f518be4f6a0018533f469d584 Mon Sep 17 00:00:00 2001
++From: Alex Gonzalez <alex.gonzalez@digi.com>
++Date: Wed, 31 Dec 2014 16:07:32 +0100
++Subject: [PATCH] icedtea: openjdk: remove currency data generation expiration
++ date
++
++Signed-off-by: Alex Gonzalez <alex.gonzalez@digi.com>
++---
++ .../src/build/tools/generatecurrencydata/GenerateCurrencyData.java     | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
++index bf335fa22c1d..0e421360fef9 100644
++--- openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
+++++ openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
++@@ -281,9 +281,6 @@ public class GenerateCurrencyData {
++             checkCurrencyCode(newCurrency);
++             String timeString = currencyInfo.substring(4, length - 4);
++             long time = format.parse(timeString).getTime();
++-            if (Math.abs(time - System.currentTimeMillis()) > ((long) 10) * 365 * 24 * 60 * 60 * 1000) {
++-                throw new RuntimeException("time is more than 10 years from present: " + time);
++-            }
++             specialCaseCutOverTimes[specialCaseCount] = time;
++             specialCaseOldCurrencies[specialCaseCount] = oldCurrency;
++             specialCaseOldCurrenciesDefaultFractionDigits[specialCaseCount] = getDefaultFractionDigits(oldCurrency);
+diff --git a/recipes-core/openjdk/openjdk-7-release-25b30.inc b/recipes-core/openjdk/openjdk-7-release-25b30.inc
+index ccb638168b65..3b7d84e76ba2 100644
+--- a/recipes-core/openjdk/openjdk-7-release-25b30.inc
++++ b/recipes-core/openjdk/openjdk-7-release-25b30.inc
+@@ -80,6 +80,7 @@ ICEDTEAPATCHES = "\
+         file://icedtea-zero-hotspotfix.patch;apply=no \
+ 	file://icedtea-jdk-nio-use-host-cc.patch;apply=no \
+         file://icedtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch;apply=no \
++        file://icedtea-openjdk-remove-currency-data-generation-expi.patch;apply=no \
+ 	"
+ ICEDTEAPATCHES_append_powerpc = " \
+ 	file://icedtea-jdk-ppc64-jvm-cfg.patch;apply=no \
+@@ -110,6 +111,7 @@ DISTRIBUTION_PATCHES = "\
+         patches/icedtea-zero-hotspotfix.patch \
+ 	patches/icedtea-jdk-nio-use-host-cc.patch \
+ 	patches/icedtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch \
++	patches/icedtea-openjdk-remove-currency-data-generation-expi.patch \
+ 	"
+ 
+ DISTRIBUTION_PATCHES_append_libc-uclibc = "\
 
