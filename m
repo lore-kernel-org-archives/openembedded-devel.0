@@ -1,27 +1,27 @@
 Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7423C60557
+	by mail.openembedded.org (Postfix) with ESMTP id 23197601F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Dec 2014 05:34:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55411709"
+	Wed, 31 Dec 2014 08:25:59 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55416173"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Dec 2014 13:30:55 +0800
+	by heian.cn.fujitsu.com with ESMTP; 31 Dec 2014 16:22:35 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBV5XmGD002678
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id sBV8PSfb009840
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Dec 2014 13:33:48 +0800
+	Wed, 31 Dec 2014 16:25:28 +0800
 Received: from localhost.localdomain (10.167.226.31) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 31 Dec 2014 13:34:21 +0800
+	Server (TLS) id 14.3.181.6; Wed, 31 Dec 2014 16:26:00 +0800
 From: Bian Naimeng <biannm@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Dec 2014 13:29:40 +0800
-Message-ID: <1420003780-39552-1-git-send-email-biannm@cn.fujitsu.com>
+Date: Wed, 31 Dec 2014 16:22:06 +0800
+Message-ID: <1420014126-30814-1-git-send-email-biannm@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.31]
-Subject: [meta-networking][PATCH] openwsman: add recipe
+Subject: [meta-networking][PATCH] opensaf: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,126 +35,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Dec 2014 05:34:31 -0000
+X-List-Received-Date: Wed, 31 Dec 2014 08:26:03 -0000
 Content-Type: text/plain
 
-Opensource Implementation of WS-Management
+OpenSAF is an open source implementation of the SAF AIS specification
 
 Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- .../libssl-is-required-if-eventint-supported.patch | 17 +++++++
- .../openwsman/openwsman/openwsmand.service         | 12 +++++
- .../openwsman/openwsman_2.4.12.bb                  | 58 ++++++++++++++++++++++
- 3 files changed, 87 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
- create mode 100644 meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service
- create mode 100644 meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb
+ .../opensaf/install-samples-from-srcdir.patch      | 11 ++++++
+ .../recipes-daemons/opensaf/opensaf_4.5.0.bb       | 40 ++++++++++++++++++++++
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
 
-diff --git a/meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch b/meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch b/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
 new file mode 100644
-index 0000000..bd540e3
+index 0000000..016b64f
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
-@@ -0,0 +1,17 @@
-+libssl is required by wsman_client_transport if ENABLE_EVENTING_SUPPORT enabled.
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp openwsman-2.4.12.orig/src/lib/CMakeLists.txt openwsman-2.4.12/src/lib/CMakeLists.txt
-+--- openwsman-2.4.12.orig/src/lib/CMakeLists.txt	2014-10-28 23:04:47.000000000 +0800
-++++ openwsman-2.4.12/src/lib/CMakeLists.txt	2014-12-31 11:09:20.340428523 +0800
-+@@ -56,6 +56,9 @@ TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TR
-+ SET_TARGET_PROPERTIES( ${WSMAN_CLIENT_TRANSPORT_PKG} PROPERTIES VERSION 1.0.0 SOVERSION 1)
-+ INSTALL(TARGETS ${WSMAN_CLIENT_TRANSPORT_PKG} DESTINATION ${LIB_INSTALL_DIR})
++++ b/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
+@@ -0,0 +1,11 @@
++--- opensaf-4.5.0.orig/Makefile.am	2014-12-31 14:45:54.088797989 +0800
+++++ opensaf-4.5.0/Makefile.am	2014-12-31 14:45:08.328796688 +0800
++@@ -219,7 +219,7 @@ install-data-local:
++ 	$(mkinstalldirs) $(DESTDIR)$(pkgpiddir)
++ 	$(mkinstalldirs) $(DESTDIR)$(lockdir)
++ 	$(mkinstalldirs) $(DESTDIR)$(pkglocalstatedir)
++-	cp -R samples/ $(DESTDIR)$(pkgdatadir)
+++	cp -R $(srcdir)/samples/ $(DESTDIR)$(pkgdatadir)
 + 
-++IF( ENABLE_EVENTING_SUPPORT )
-++TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TRANSPORT_PKG} ${OPENSSL_LIBRARIES} )
-++ENDIF( ENABLE_EVENTING_SUPPORT )
-+ 
-+ ############### wsman_client ###############
-+ 
-diff --git a/meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service b/meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service
++ install-data-hook:
++ 	@for i in $$(grep -lr -e 'xxLIBDIRxx' -e 'xxLOGDIRxx' -e 'xxCLCCLIDIRxx' $(DESTDIR)$(pkgimmxml_svcdir)/*.xml) ; do \
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
 new file mode 100644
-index 0000000..154f3cd
+index 0000000..a58de5c
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service
-@@ -0,0 +1,12 @@
-+[Unit]
-+Description=Openwsman WS-Management Service
-+After=syslog.target
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "OpenSAF is an open source implementation of the SAF AIS specification"
++DESCRIPTION = "OpenSAF is an open source project established to develop a base platform \
++middleware consistent with Service Availability Forum (SA Forum) \
++specifications, under the LGPLv2.1 license. The OpenSAF Foundation was \
++established by leading Communications and Enterprise Computing Companies to \
++facilitate the OpenSAF Project and to accelerate the adoption of the OpenSAF \
++code base in commercial products. \
++The OpenSAF project was launched in mid 2007 and has been under development by \
++an informal group of supporters of the OpenSAF initiative. The OpenSAF \
++Foundation was founded on January 22nd 2008 with Emerson Network Power, \
++Ericsson, Nokia Siemens Networks, HP and Sun Microsystems as founding members."
++HOMEPAGE = "http://www.opensaf.org"
 +
-+[Service]
-+Type=forking
-+ExecStart=@SBINDIR@/openwsmand
-+ExecStartPre=@SYSCONFDIR@/openwsman/owsmangencert.sh
-+PIDFile=@LOCALSTATEDIR@/run/wsmand.pid
++inherit autotools useradd systemd pkgconfig
 +
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb b/meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb
-new file mode 100644
-index 0000000..d3fb9c2
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb
-@@ -0,0 +1,58 @@
-+SUMMARY = "Opensource Implementation of WS-Management"
-+DESCRIPTION = "Openwsman is a project intended to provide an open-source \
-+implementation of the Web Services Management specipication \
-+(WS-Management) and to expose system management information on the \
-+Linux operating system using the WS-Management protocol. WS-Management \
-+is based on a suite of web services specifications and usage \
-+requirements that exposes a set of operations focused on and covers \
-+all system management aspects. \
-+Openwsman Server and service libraries"
-+HOMEPAGE = "http://www.openwsman.org/"
-+SECTION = "Applications/System"
++SRC_URI = "http://jaist.dl.sourceforge.net/project/opensaf/releases/${BPN}-${PV}.tar.gz \
++           file://install-samples-from-srcdir.patch"
 +
-+DEPENDS = "curl libxml2 openssl libpam"
++SRC_URI[md5sum] = "534c0a99438a62c4c8dda56cfa67300c"
++SRC_URI[sha256sum] = "2f5ba57fe67e94099c0df82d0a0dd207b5c583c93030035ba354c97b5471b590"
 +
-+SRC_URI = "https://github.com/Openwsman/openwsman/archive/v2.4.12.tar.gz \
-+           file://libssl-is-required-if-eventint-supported.patch \
-+           file://openwsmand.service"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a916467b91076e631dd8edb7424769c7"
 +
-+SRC_URI[md5sum] = "4893a41c6fd89b33095c315c79638a75"
-+SRC_URI[sha256sum] = "6a4b75dfff1a51c7bc09fd1d44abbde55ae74906f3828797ce391883358120f4"
++DEPENDS = "libxml2 python"
 +
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
++USERADD_PACKAGES = "${PN}"
++GROUPADD_PARAM_${PN} = "-f -r opensaf"
++USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nologin -c \"OpenSAF\" opensaf"
 +
-+inherit systemd cmake pkgconfig pythonnative perlnative
-+
-+SYSTEMD_SERVICE_${PN} = "openwsmand.service"
++SYSTEMD_SERVICE_${PN} += "opensafd.service"
 +SYSTEMD_AUTO_ENABLE = "disable"
 +
-+EXTRA_OECMAKE = "-DBUILD_JAVA=NO -DBUILD_LIBCIM=NO -DLIB=lib"
-+
-+do_configure_prepend() {
-+    export HOST_SYS=${HOST_SYS}
-+    export BUILD_SYS=${BUILD_SYS}
-+    export STAGING_INCDIR=${STAGING_INCDIR}
-+    export STAGING_LIBDIR=${STAGING_LIBDIR}
-+}
-+
-+do_install_append() {
-+    install -d ${D}/${sysconfdir}/init.d
-+    install -m 755 ${B}/etc/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
-+    ln -sf ${sysconfdir}/init.d/openwsmand ${D}/${sbindir}/rcopenwsmand
-+
-+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}/${systemd_unitdir}/system
-+        install -m 644 ${WORKDIR}/openwsmand.service ${D}/${systemd_unitdir}/system
-+
-+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+    fi
-+}
-+
-+FILES_${PN}-dbg += "${libdir}/openwsman/plugins/.debug/ \
-+                    ${libdir}/openwsman/authenticators/.debug/ \
-+                   "
++FILES_${PN} += "/run"
 +
 +INSANE_SKIP_${PN} = "dev-so"
++
++do_install_append() {
++    rm -rf "${D}${localstatedir}/run"
++}
 -- 
 1.9.1
 
