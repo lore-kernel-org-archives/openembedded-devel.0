@@ -1,25 +1,21 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id CF0BF7274C
+	by mail.openembedded.org (Postfix) with ESMTP id CFFA27278D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jan 2015 09:32:17 +0000 (UTC)
+	Fri,  2 Jan 2015 09:32:16 +0000 (UTC)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 02 Jan 2015 01:32:18 -0800
+	by fmsmga101.fm.intel.com with ESMTP; 02 Jan 2015 01:32:17 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,683,1413270000"; d="scan'208";a="645538402"
+X-IronPort-AV: E=Sophos;i="5.07,683,1413270000"; d="scan'208";a="645538399"
 Received: from kregan-mobl.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
-	by fmsmga001.fm.intel.com with ESMTP; 02 Jan 2015 01:32:17 -0800
+	by fmsmga001.fm.intel.com with ESMTP; 02 Jan 2015 01:32:16 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Jan 2015 09:31:56 +0000
-Message-Id: <ea7b1f497731a701108d74384a3ca585690ddcc5.1420190530.git.paul.eggleton@linux.intel.com>
+Date: Fri,  2 Jan 2015 09:31:55 +0000
+Message-Id: <cover.1420190530.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-References: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-References: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-Subject: [meta-oe][PATCH 01/11] php: upgrade to 5.5.15
+Subject: [meta-oe/meta-webserver][PATCH 00/11] Merge modphp into php and upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,70 +31,82 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 02 Jan 2015 09:32:23 -0000
 
-Based on the corresponding changes to the modphp recipe in
-meta-webserver. From the commit message for the modphp upgrade:
+Finally resolve the overlap between the modphp and php recipes by
+merging the former into the latter. Along the way I fixed a few minor
+issues and upgraded related recipes.
 
-* LIC_FILES_CHKSUM needed to change because the copyright year changed
-* Enabled mcrypt since upstream recommend this for acceptable
-  performance
-* Disabled the opcache; this is a new feature in 5.5 and the configure
-  check for it currently breaks when cross-compiling.
+I've taken a stepped approach to doing the php merge / upgrade so it's
+easier to see what's going on and easier for me to test - first upgrade
+php to the same version as modphp, then do the integration, then upgrade
+to the latest 5.5 release. I would appreciate someone testing PHP in CGI
+mode however since I don't have a convenient test setup for that (as I
+do for mod_php).
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- meta-oe/recipes-devtools/php/{php_5.4.33.bb => php_5.5.15.bb} | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_5.4.33.bb => php_5.5.15.bb} (94%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_5.4.33.bb b/meta-oe/recipes-devtools/php/php_5.5.15.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/php/php_5.4.33.bb
-rename to meta-oe/recipes-devtools/php/php_5.5.15.bb
-index 6fdfe0f..ff81aee 100644
---- a/meta-oe/recipes-devtools/php/php_5.4.33.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.5.15.bb
-@@ -3,11 +3,11 @@ HOMEPAGE = "http://www.php.net"
- SECTION = "console/network"
- 
- LICENSE = "PHP-3.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=cb564efdf78cce8ea6e4b5a4f7c05d97"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
- 
- BBCLASSEXTEND = "native"
- DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
--           libc-client openssl"
-+           libc-client openssl libmcrypt"
- DEPENDS_virtclass-native = "zlib-native libxml2-native"
- 
- # The new PHP downloads server groups PHP releases by major version so find
-@@ -30,8 +30,8 @@ SRC_URI_append_class-target += " \
-             file://php-fpm-apache.conf \
-           "
- 
--SRC_URI[md5sum] = "c6878bb1cdb46bfc1e1a5cd67a024737"
--SRC_URI[sha256sum] = "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d19b74c2278e40bb5"
-+SRC_URI[md5sum] = "5cb5f2ed9099299f8a4c952d59d93812"
-+SRC_URI[sha256sum] = "00f24226b12fee27e332383b6304f1b9ed3f4d9173dd728a68c5c3f5a59b8ba7"
- 
- S = "${WORKDIR}/php-${PV}"
- 
-@@ -40,7 +40,7 @@ inherit autotools pkgconfig pythonnative gettext
- SSTATE_SCAN_FILES += "build-defs.h"
- 
- # Common EXTRA_OECONF
--COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
-+COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared --disable-opcache"
- EXTRA_OECONF = "--enable-mbstring \
-                 --enable-wddx \
-                 --enable-fpm \
-@@ -49,6 +49,7 @@ EXTRA_OECONF = "--enable-mbstring \
-                 --with-imap-ssl=${STAGING_DIR_HOST} \
-                 --with-zlib=${STAGING_LIBDIR}/.. \
-                 --with-iconv=${STAGING_LIBDIR}/.. \
-+                --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
-                 ${COMMON_EXTRA_OECONF} \
- "
- EXTRA_OECONF_virtclass-native = " \
+The following changes since commit 2ea3a19a478c526baa04d6b9a9e8c9f42aae9d34:
+
+  ctapi-common: Add new recipe (2014-12-31 16:38:22 +0100)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/php
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/php
+
+Paul Eggleton (11):
+  php: upgrade to 5.5.15
+  libc-client: rename to uw-imap, upgrade to 2007f
+  php: integrate modphp
+  php: upgrade to 5.5.20
+  modphp: remove
+  uw-imap: make libpam dependency dependent on DISTRO_FEATURES
+  php: add PACKAGECONFIG to fix implicit dependency on libpam
+  php: add PACKAGECONFIG for imap
+  xdebug: fix DEPENDS and un-blacklist
+  xdebug: update to 2.2.6
+  phpmyadmin: update to 4.3.4
+
+ .../recipes-devtools/php/php}/70_mod_php5.conf     |   0
+ .../recipes-devtools/php/php}/configure.patch      |   0
+ .../php/php}/pthread-check-threads-m4.patch        |   0
+ meta-oe/recipes-devtools/php/php_5.4.33.bb         | 150 -----------
+ meta-oe/recipes-devtools/php/php_5.5.20.bb         | 234 +++++++++++++++++
+ .../uw-imap/uw-imap/imap-2007e-shared.patch        |  82 ++++++
+ .../uw-imap/imap-2007f-format-security.patch       |  20 ++
+ .../files => uw-imap/uw-imap}/quote_cctype.patch   |   0
+ .../uw-imap_2007f.bb}                              |  24 +-
+ .../0001-using-pkgconfig-to-check-libxml.patch     |  74 ------
+ .../modphp/files/php-CVE-2014-3587.patch           |  31 ---
+ .../modphp/files/php-CVE-2014-3597.patch           | 282 ---------------------
+ .../modphp/files/php-CVE-2014-5120.patch           |  35 ---
+ meta-webserver/recipes-php/modphp/modphp5.inc      | 112 --------
+ meta-webserver/recipes-php/modphp/modphp_5.5.15.bb |   7 -
+ .../0001-Bug-4544-additional-fix-for-4.2.x.patch   |  29 ---
+ ...ug-4504-security-Self-XSS-in-query-charts.patch |  29 ---
+ ...4505-security-XSS-in-view-operations-page.patch |  43 ----
+ .../{phpmyadmin_4.2.7.bb => phpmyadmin_4.3.4.bb}   |   7 +-
+ .../xdebug/{xdebug_2.2.5.bb => xdebug_2.2.6.bb}    |   8 +-
+ 20 files changed, 358 insertions(+), 809 deletions(-)
+ rename {meta-webserver/recipes-php/modphp/files => meta-oe/recipes-devtools/php/php}/70_mod_php5.conf (100%)
+ rename {meta-webserver/recipes-php/modphp/files => meta-oe/recipes-devtools/php/php}/configure.patch (100%)
+ rename {meta-webserver/recipes-php/modphp/files => meta-oe/recipes-devtools/php/php}/pthread-check-threads-m4.patch (100%)
+ delete mode 100644 meta-oe/recipes-devtools/php/php_5.4.33.bb
+ create mode 100644 meta-oe/recipes-devtools/php/php_5.5.20.bb
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007e-shared.patch
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007f-format-security.patch
+ rename meta-oe/recipes-devtools/{libc-client/files => uw-imap/uw-imap}/quote_cctype.patch (100%)
+ rename meta-oe/recipes-devtools/{libc-client/libc-client_2007e.bb => uw-imap/uw-imap_2007f.bb} (51%)
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/0001-using-pkgconfig-to-check-libxml.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-3587.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-3597.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-5120.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/modphp5.inc
+ delete mode 100644 meta-webserver/recipes-php/modphp/modphp_5.5.15.bb
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4504-security-Self-XSS-in-query-charts.patch
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.2.7.bb => phpmyadmin_4.3.4.bb} (75%)
+ rename meta-webserver/recipes-php/xdebug/{xdebug_2.2.5.bb => xdebug_2.2.6.bb} (79%)
+
 -- 
 1.9.3
 
