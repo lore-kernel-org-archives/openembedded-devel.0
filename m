@@ -1,47 +1,25 @@
-Return-Path: <jbriance@cisco.com>
-X-Greylist: delayed 588 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 02 Jan 2015 08:22:30 UTC
-Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A75172453
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id CF0BF7274C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jan 2015 08:22:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=1731; q=dns/txt; s=iport;
-	t=1420186952; x=1421396552;
-	h=from:to:subject:date:message-id:references:in-reply-to:
-	content-transfer-encoding:mime-version;
-	bh=hxOauWOefCOl3hu421+ddo3zEzI7s1VvrO8jKWuw7ys=;
-	b=L6Bo+eTYkozm1uwTqzahQJIKfJO/4+91l7TUOyKIfImiGMd+U9lgW6BU
-	cdz6b53adEx9BT6KHLNm8YiiWxFuYbPsrsQEasiyQpwIAXIZAWnZo0p5S
-	3l7G0Ij0cEOdICQjvBuNojVmj0kuJ92D06jSVWDcieCZKu5Eu6mxnfJz8 o=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AmgFAC1SplStJA2M/2dsb2JhbABcgwZSWATECIInhScROQKBBRYBAQEBAX2EDQEBBDpPAgEqFBAyJQIEEwiIJA3CewEBAQEBAQEBAQEBAQEBAQEBAQEBARMEj0Y4gxaBEwWOFYM/jxuHaSKDbm8FgUB+AQEB
-X-IronPort-AV: E=Sophos;i="5.07,683,1413244800"; d="scan'208";a="383857499"
-Received: from alln-core-7.cisco.com ([173.36.13.140])
-	by rcdn-iport-6.cisco.com with ESMTP; 02 Jan 2015 08:12:43 +0000
-Received: from xhc-aln-x15.cisco.com (xhc-aln-x15.cisco.com [173.36.12.89])
-	by alln-core-7.cisco.com (8.14.5/8.14.5) with ESMTP id t028CgxQ008169
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Jan 2015 08:12:42 GMT
-Received: from xmb-aln-x12.cisco.com ([169.254.7.201]) by
-	xhc-aln-x15.cisco.com ([173.36.12.89]) with mapi id 14.03.0195.001;
-	Fri, 2 Jan 2015 02:12:42 -0600
-From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5][PATCH] qtbase: Add gcc to QMAKE_COMPILER variable.
-Thread-Index: AQHQJmOURsFMVonkaEOTkKjkq0CQJ5ysenKg
-Date: Fri, 2 Jan 2015 08:12:41 +0000
-Message-ID: <5940D1D9F240BA44AEF939055CF1358D04A3E1BB@xmb-aln-x12.cisco.com>
-References: <1420186221-10951-1-git-send-email-jbriance@cisco.com>
-In-Reply-To: <1420186221-10951-1-git-send-email-jbriance@cisco.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.60.62.100]
-MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qtbase: Add gcc to QMAKE_COMPILER variable.
+	Fri,  2 Jan 2015 09:32:17 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 02 Jan 2015 01:32:18 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.07,683,1413270000"; d="scan'208";a="645538402"
+Received: from kregan-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
+	by fmsmga001.fm.intel.com with ESMTP; 02 Jan 2015 01:32:17 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  2 Jan 2015 09:31:56 +0000
+Message-Id: <ea7b1f497731a701108d74384a3ca585690ddcc5.1420190530.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <cover.1420190530.git.paul.eggleton@linux.intel.com>
+References: <cover.1420190530.git.paul.eggleton@linux.intel.com>
+In-Reply-To: <cover.1420190530.git.paul.eggleton@linux.intel.com>
+References: <cover.1420190530.git.paul.eggleton@linux.intel.com>
+Subject: [meta-oe][PATCH 01/11] php: upgrade to 5.5.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +33,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jan 2015 08:22:31 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 02 Jan 2015 09:32:23 -0000
 
-According to mkspecs/features/spec_post.prf, QMAKE_COMPILER variable should=
- at least contain gcc for linux-oe-g++ platform.
+Based on the corresponding changes to the modphp recipe in
+meta-webserver. From the commit message for the modphp upgrade:
 
-This patch fixes a crash issue in QtWebKit introduced in v5.4.0 by:
-https://qt.gitorious.org/qt/qtwebkit/commit/34d4628b981add039a9a349723cbdff=
-1dadca144
+* LIC_FILES_CHKSUM needed to change because the copyright year changed
+* Enabled mcrypt since upstream recommend this for acceptable
+  performance
+* Disabled the opcache; this is a new feature in 5.5 and the configure
+  check for it currently breaks when cross-compiling.
 
-Signed-off-by: Julien Brianceau <jbriance@cisco.com>
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch | 2 +-
- recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/php/{php_5.4.33.bb => php_5.5.15.bb} | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_5.4.33.bb => php_5.5.15.bb} (94%)
 
-diff --git a/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch b=
-/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
-index 081bcac..7a94dff 100644
---- a/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtbase-git/0001-Add-linux-oe-g-platform.patch
-@@ -224,7 +224,7 @@ index 0000000..ca26b10
- +include(../common/g++-unix.conf)
- +
- +# tc settings from g++-base.conf
--+QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER)
-++QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER) gcc
- +QMAKE_CC       =3D $(OE_QMAKE_CC)
- +QMAKE_CXX      =3D $(OE_QMAKE_CXX)
- +
-diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/rec=
-ipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-index 081bcac..7a94dff 100644
---- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-@@ -224,7 +224,7 @@ index 0000000..ca26b10
- +include(../common/g++-unix.conf)
- +
- +# tc settings from g++-base.conf
--+QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER)
-++QMAKE_COMPILER =3D $(OE_QMAKE_COMPILER) gcc
- +QMAKE_CC       =3D $(OE_QMAKE_CC)
- +QMAKE_CXX      =3D $(OE_QMAKE_CXX)
- +
---
-1.8.0
+diff --git a/meta-oe/recipes-devtools/php/php_5.4.33.bb b/meta-oe/recipes-devtools/php/php_5.5.15.bb
+similarity index 94%
+rename from meta-oe/recipes-devtools/php/php_5.4.33.bb
+rename to meta-oe/recipes-devtools/php/php_5.5.15.bb
+index 6fdfe0f..ff81aee 100644
+--- a/meta-oe/recipes-devtools/php/php_5.4.33.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.15.bb
+@@ -3,11 +3,11 @@ HOMEPAGE = "http://www.php.net"
+ SECTION = "console/network"
+ 
+ LICENSE = "PHP-3.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=cb564efdf78cce8ea6e4b5a4f7c05d97"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
+ 
+ BBCLASSEXTEND = "native"
+ DEPENDS = "zlib libxml2 virtual/libiconv php-native lemon-native \
+-           libc-client openssl"
++           libc-client openssl libmcrypt"
+ DEPENDS_virtclass-native = "zlib-native libxml2-native"
+ 
+ # The new PHP downloads server groups PHP releases by major version so find
+@@ -30,8 +30,8 @@ SRC_URI_append_class-target += " \
+             file://php-fpm-apache.conf \
+           "
+ 
+-SRC_URI[md5sum] = "c6878bb1cdb46bfc1e1a5cd67a024737"
+-SRC_URI[sha256sum] = "1a75b2d0835e74b8886cd3980d9598a0e06691441bb7f91d19b74c2278e40bb5"
++SRC_URI[md5sum] = "5cb5f2ed9099299f8a4c952d59d93812"
++SRC_URI[sha256sum] = "00f24226b12fee27e332383b6304f1b9ed3f4d9173dd728a68c5c3f5a59b8ba7"
+ 
+ S = "${WORKDIR}/php-${PV}"
+ 
+@@ -40,7 +40,7 @@ inherit autotools pkgconfig pythonnative gettext
+ SSTATE_SCAN_FILES += "build-defs.h"
+ 
+ # Common EXTRA_OECONF
+-COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared"
++COMMON_EXTRA_OECONF = "--enable-sockets --enable-pcntl --enable-shared --disable-opcache"
+ EXTRA_OECONF = "--enable-mbstring \
+                 --enable-wddx \
+                 --enable-fpm \
+@@ -49,6 +49,7 @@ EXTRA_OECONF = "--enable-mbstring \
+                 --with-imap-ssl=${STAGING_DIR_HOST} \
+                 --with-zlib=${STAGING_LIBDIR}/.. \
+                 --with-iconv=${STAGING_LIBDIR}/.. \
++                --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
+                 ${COMMON_EXTRA_OECONF} \
+ "
+ EXTRA_OECONF_virtclass-native = " \
+-- 
+1.9.3
 
 
