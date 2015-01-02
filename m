@@ -1,25 +1,36 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 02815727B5
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id A2D127275B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jan 2015 09:32:19 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 02 Jan 2015 01:32:18 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,683,1413270000"; d="scan'208";a="645538404"
-Received: from kregan-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
-	by fmsmga001.fm.intel.com with ESMTP; 02 Jan 2015 01:32:18 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Jan 2015 09:31:57 +0000
-Message-Id: <28853535c3d7a4691ba5131cc423b4e92d847700.1420190530.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-References: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-References: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-Subject: [meta-oe][PATCH 02/11] libc-client: rename to uw-imap, upgrade to 2007f
+	Fri,  2 Jan 2015 11:18:50 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55460998"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Jan 2015 19:15:22 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t02BIFkY012347
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 2 Jan 2015 19:18:15 +0800
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0181.006; Fri, 2 Jan 2015 19:18:46 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH 1/2] GeoIP: add recipe
+Thread-Index: AQHQINSSYjcPCuRTskCFiG8LzAyaEZynTSeAgAVsWwA=
+Date: Fri, 2 Jan 2015 11:18:46 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDAE1B47@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1419575006-51771-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1419575006-51771-2-git-send-email-leimaohui@cn.fujitsu.com>
+	<20141230082735.GB2469@jama>
+In-Reply-To: <20141230082735.GB2469@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.48]
+MIME-Version: 1.0
+Subject: Re: [meta-networking][PATCH 1/2] GeoIP: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,184 +44,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jan 2015 09:32:27 -0000
+X-List-Received-Date: Fri, 02 Jan 2015 11:18:56 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-* Upgrade to 2007f
-* Rename to uw-imap; this is the name used by Fedora and is much more
-  sensible than libc-client
-* Fix errors when linking the library against code compiled with -fPIC
-  such as mod-php (patch from Fedora).
-* Add a security patch from Fedora
-* Rename files directory to uw-imap
+Hi Martin and Joe
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../uw-imap/uw-imap/imap-2007e-shared.patch        | 82 ++++++++++++++++++++++
- .../uw-imap/imap-2007f-format-security.patch       | 20 ++++++
- .../files => uw-imap/uw-imap}/quote_cctype.patch   |  0
- .../uw-imap_2007f.bb}                              | 16 +++--
- 4 files changed, 113 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007e-shared.patch
- create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007f-format-security.patch
- rename meta-oe/recipes-devtools/{libc-client/files => uw-imap/uw-imap}/quote_cctype.patch (100%)
- rename meta-oe/recipes-devtools/{libc-client/libc-client_2007e.bb => uw-imap/uw-imap_2007f.bb} (66%)
+Thank you for reply, I will modify my patches ,and then re submit them late=
+r.
 
-diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007e-shared.patch b/meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007e-shared.patch
-new file mode 100644
-index 0000000..4434e83
---- /dev/null
-+++ b/meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007e-shared.patch
-@@ -0,0 +1,82 @@
-+Fix linking libraries built with -fPIC with this library
-+
-+Patch borrowed from Fedora
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+
-+Upstream-Status: Pending
-+
-+diff -up imap-2007e/src/osdep/unix/Makefile.shared imap-2007e/src/osdep/unix/Makefile
-+--- imap-2007e/src/osdep/unix/Makefile.shared	2009-07-07 19:28:02.909755512 -0500
-++++ imap-2007e/src/osdep/unix/Makefile	2009-07-07 19:29:35.870006799 -0500
-+@@ -170,6 +170,10 @@ BUILD=$(MAKE) build EXTRACFLAGS='$(EXTRA
-+  EXTRADRIVERS='$(EXTRADRIVERS)' EXTRAAUTHENTICATORS='$(EXTRAAUTHENTICATORS)'\
-+  PASSWDTYPE=$(PASSWDTYPE) SSLTYPE=$(SSLTYPE) IP=$(IP)
-+ 
-++# Need this for the shared library rule to work correctly
-++.SUFFIXES: .o .so
-++SOFILES=${BINARIES:.o=.so}
-++
-+ 
-+ # Here if no make argument established
-+ 
-+@@ -845,18 +849,24 @@ vu2:	# VAX Ultrix 2.3, etc.
-+ 
-+ # Build it!
-+ 
-+-build:	clean once $(ARCHIVE)
-++build:	clean once $(ARCHIVE) $(SHLIBNAME)
-+ 
-+-all:	$(ARCHIVE)
-++all:	$(ARCHIVE) $(SHLIBNAME)
-+ 
-+ $(ARCHIVE): $(BINARIES)
-+ 	sh -c '$(RM) $(ARCHIVE) || true'
-+ 	@$(CAT) ARCHIVE
-+ 	@$(SH) ARCHIVE
-+ 
-+-.c.o:
-+-	`$(CAT) CCTYPE` -c `$(CAT) CFLAGS` $*.c
-++$(SHLIBNAME):	$(SOFILES)
-++	gcc -shared -Wl,-soname,$(SHLIBNAME) -o $(SHLIBNAME) $(SOFILES) `cat LDFLAGS`
-++	ln -s $(SHLIBNAME) lib$(SHLIBBASE).so
-+ 
-++.c.so:	osdep.h
-++	$(CC) -fPIC -DPIC -D_REENTRANT -c `$(CAT) CFLAGS` ${@:.so=.c} -o $@
-++
-++.c.o:
-++	$(CC) -fPIC -DPIC -D_REENTRANT -c `$(CAT) CFLAGS` $*.c
-+ 
-+ # Cleanup
-+ 
-+@@ -895,8 +905,7 @@ utf8aux.o: mail.h misc.h osdep.h utf8.h
-+ 
-+ 
-+ # OS-dependent
-+-
-+-osdep.o:mail.h misc.h env.h fs.h ftl.h nl.h tcp.h \
-++OSDEPS= mail.h misc.h env.h fs.h ftl.h nl.h tcp.h \
-+ 	osdep.h env_unix.h tcp_unix.h \
-+ 	osdep.c env_unix.c fs_unix.c ftl_unix.c nl_unix.c tcp_unix.c ip_unix.c\
-+ 	auths.c crexcl.c flockcyg.c flocklnx.c flocksim.c fsync.c \
-+@@ -910,12 +919,19 @@ osdep.o:mail.h misc.h env.h fs.h ftl.h n
-+ 	write.c sslstdio.c \
-+ 	strerror.c strpbrk.c strstr.c strtok.c strtoul.c \
-+ 	OSCFLAGS
-++
-++osdep.o:	$(OSDEPS)
-++	$(CC) -fPIC -DPIC -D_REENTRANT `$(CAT) CFLAGS` `$(CAT) OSCFLAGS` -c osdep.c
-++	@echo ========================================================================
-+ 	@echo Building OS-dependent module
-+ 	@echo If you get No such file error messages for files x509.h, ssl.h,
-+ 	@echo pem.h, buffer.h, bio.h, and crypto.h, that means that OpenSSL
-+ 	@echo is not installed on your system.  Either install OpenSSL first
-+ 	@echo or build with command: make `$(CAT) OSTYPE` SSLTYPE=none
-+-	`$(CAT) CCTYPE` -c `$(CAT) CFLAGS` `$(CAT) OSCFLAGS` -c osdep.c
-++	@echo ========================================================================
-++
-++osdep.so:	$(OSDEPS)
-++	$(CC) -fPIC -DPIC -D_REENTRANT `$(CAT) CFLAGS` `cat OSCFLAGS` -c osdep.c -o $@
-+ 
-+ osdep.c: osdepbas.c osdepckp.c osdeplog.c osdepssl.c
-+ 	$(CAT) osdepbas.c osdepckp.c osdeplog.c osdepssl.c > osdep.c
-diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007f-format-security.patch b/meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007f-format-security.patch
-new file mode 100644
-index 0000000..6ec0476
---- /dev/null
-+++ b/meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007f-format-security.patch
-@@ -0,0 +1,20 @@
-+Fix error found with "-Werror=format-security" flag
-+
-+Patch borrowed from Fedora
-+
-+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-+
-+Upstream-Status: Pending
-+
-+diff -Naur imap-2007f.orig/src/osdep/unix/flocklnx.c imap-2007f/src/osdep/unix/flocklnx.c
-+--- imap-2007f.orig/src/osdep/unix/flocklnx.c	2011-07-23 02:20:11.000000000 +0200
-++++ imap-2007f/src/osdep/unix/flocklnx.c	2014-04-14 19:17:46.429000000 +0200
-+@@ -57,7 +57,7 @@
-+     case ENOLCK:		/* lock table is full */
-+       sprintf (tmp,"File locking failure: %s",strerror (errno));
-+       mm_log (tmp,WARN);	/* give the user a warning of what happened */
-+-      if (!logged++) syslog (LOG_ERR,tmp);
-++      if (!logged++) syslog (LOG_ERR, "%s", tmp);
-+ 				/* return failure if non-blocking lock */
-+       if (op & LOCK_NB) return -1;
-+       sleep (5);		/* slow down in case it loops */
-diff --git a/meta-oe/recipes-devtools/libc-client/files/quote_cctype.patch b/meta-oe/recipes-devtools/uw-imap/uw-imap/quote_cctype.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/libc-client/files/quote_cctype.patch
-rename to meta-oe/recipes-devtools/uw-imap/uw-imap/quote_cctype.patch
-diff --git a/meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
-similarity index 66%
-rename from meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb
-rename to meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
-index 150ff90..e1a9877 100644
---- a/meta-oe/recipes-devtools/libc-client/libc-client_2007e.bb
-+++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
-@@ -6,13 +6,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a6a4ddbb7cd2999f6827ee143f6fcd97"
- 
- DEPENDS = "openssl libpam"
- 
--PR = "r1"
--
- SRC_URI = "ftp://ftp.cac.washington.edu/imap/imap-${PV}.tar.gz \
--           file://quote_cctype.patch"
-+           file://quote_cctype.patch \
-+           file://imap-2007e-shared.patch \
-+           file://imap-2007f-format-security.patch \
-+           "
- 
--SRC_URI[md5sum] = "7903800dc2604000016de070e0c55840"
--SRC_URI[sha256sum] = "4b1137b87249782496ec3eeacaf83bbf09312a7d2ae3aead262179041b55565f"
-+SRC_URI[md5sum] = "2126fd125ea26b73b20f01fcd5940369"
-+SRC_URI[sha256sum] = "53e15a2b5c1bc80161d42e9f69792a3fa18332b7b771910131004eb520004a28"
- 
- S = "${WORKDIR}/imap-${PV}"
- 
-@@ -32,4 +33,9 @@ do_install() {
-     install c-client/c-client.a ${D}${libdir}/libc-client.a
- }
- 
-+RPROVIDES_${PN} = "libc-client"
-+RREPLACES_${PN} = "libc-client"
-+RCONFLICTS_${PN} = "libc-client"
-+
- ALLOW_EMPTY_${PN} = "1"
-+
--- 
-1.9.3
+Cheers
 
+Lei Maohui
+
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Tuesday, December 30, 2014 4:28 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-networking][PATCH 1/2] GeoIP: add recipe
+>=20
+> On Fri, Dec 26, 2014 at 02:23:25PM +0800, leimaohui wrote:
+> > From: leimh <leimaohui@cn.fujitsu.com>
+> >
+> > GeoIP app allow you to look up information about a given IP address.
+>=20
+> Please use lowercase recipe/package names, this causes many warnings:
+>=20
+> GeoIP-1.6.0: GeoIP-database doesn't match the [a-z0-9.+-]+ regex [pkgname=
+]
+> GeoIP-1.6.0: GeoIP-dbg doesn't match the [a-z0-9.+-]+ regex [pkgname]
+> GeoIP-1.6.0: GeoIP-staticdev doesn't match the [a-z0-9.+-]+ regex [pkgnam=
+e]
+> GeoIP-1.6.0: GeoIP-dev doesn't match the [a-z0-9.+-]+ regex [pkgname]
+> GeoIP-1.6.0: GeoIP-doc doesn't match the [a-z0-9.+-]+ regex [pkgname]
+> GeoIP-1.6.0: GeoIP-locale doesn't match the [a-z0-9.+-]+ regex [pkgname]
+> GeoIP-1.6.0: GeoIP doesn't match the [a-z0-9.+-]+ regex [pkgname]
+>=20
+> >
+> > Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
+> > ---
+> >  meta-networking/recipes-support/GeoIP/GeoIP.inc    | 10 ++++
+> >  .../recipes-support/GeoIP/GeoIP_1.6.0.bb           | 54
+> ++++++++++++++++++++++
+> >  2 files changed, 64 insertions(+)
+> >  create mode 100644 meta-networking/recipes-support/GeoIP/GeoIP.inc
+> >  create mode 100644
+> > meta-networking/recipes-support/GeoIP/GeoIP_1.6.0.bb
+> >
+> > diff --git a/meta-networking/recipes-support/GeoIP/GeoIP.inc
+> > b/meta-networking/recipes-support/GeoIP/GeoIP.inc
+> > new file mode 100644
+> > index 0000000..d52f1f2
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/GeoIP/GeoIP.inc
+> > @@ -0,0 +1,10 @@
+> > +SUMMARY =3D "C library for country/city/organization to IP address or =
+hostname
+> mapping"
+> > +DESCRIPTION =3D "GeoIP is a C library that enables the user to find th=
+e
+> > +country that any IP\ address or hostname originates from. It uses a
+> > +file based database that is\ accurate as of March 2003. This database
+> > +simply contains IP blocks as keys, and\ countries as values. This
+> > +database should be more complete and accurate than\ using reverse DNS
+> lookups."
+> > +
+> > +HOMEPAGE =3D "http://www.maxmind.com/app/c"
+> > +SECTION =3D "Development/Libraries"
+> > +
+> > diff --git a/meta-networking/recipes-support/GeoIP/GeoIP_1.6.0.bb
+> > b/meta-networking/recipes-support/GeoIP/GeoIP_1.6.0.bb
+> > new file mode 100644
+> > index 0000000..ec00d76
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/GeoIP/GeoIP_1.6.0.bb
+> > @@ -0,0 +1,54 @@
+> > +require GeoIP.inc
+> > +
+> > +SRC_URI =3D
+> "http://www.maxmind.com/download/geoip/api/c/GeoIP-1.6.0.tar.gz;name=3Dta=
+rba
+> ll \
+> > +
+> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.d=
+a
+> t.gz;apply=3Dno;name=3DGeoIP-dat \
+> > +
+> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;apply=
+=3Dno
+> ;name=3DGeoIPv6-dat \
+> > +
+> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;app=
+l
+> y=3Dno;name=3DGeoLiteCity-dat \
+> > +
+> http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/Geo=
+L
+> iteCityv6.dat.gz;apply=3Dno;name=3DGeoLiteCityv6-dat \
+> > +          "
+> > +
+> > +SRC_URI[tarball.md5sum] =3D "89f4cdfdab43f1d67364cd7c85bbe8ca"
+> > +SRC_URI[tarball.sha256sum] =3D
+> "075a0c2815cd099e9ec35c9569db716a3fefcdbb6a10dbfa1ce7c6cd48d4a635"
+> > +
+> > +SRC_URI[GeoIP-dat.md5sum] =3D "53416cd33e556a8048ac522fc9a98e05"
+> > +SRC_URI[GeoIP-dat.sha256sum] =3D
+> "a423a0c87bf9a78ef8d68153b424987c6bbddec85b5f784ca747706f4df10361"
+> > +
+> > +SRC_URI[GeoIPv6-dat.md5sum] =3D "f1a4abf4015c0300267f4717c9d7ead2"
+> > +SRC_URI[GeoIPv6-dat.sha256sum] =3D
+> "1a8e61732e39ac9d9acc20d648b2530d7bd0ff1c250f51fd18148931fbfe2830"
+> > +
+> > +SRC_URI[GeoLiteCity-dat.md5sum] =3D "48af3b8a204d7c5f8e42a4f5f4dd1874"
+> > +SRC_URI[GeoLiteCity-dat.sha256sum] =3D
+> "2f3f62f171c333cdd4e68534585e51978cb3a12dc7b269786f50daf10071d7d6"
+> > +
+> > +SRC_URI[GeoLiteCityv6-dat.md5sum] =3D "a42504adfd8030c3a10f749191598b4=
+a"
+> > +SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D
+> "4a5eeaa4a9107e6ccdbe94ad1c7c987dc70cd250cd40624ada1e3a03836bbbdb"
+> > +
+> > +
+> > +LICENSE =3D "LGPL-2.1"
+> > +
+> > +LIC_FILES_CHKSUM =3D "\
+> > +file://COPYING;md5=3Dd5d53d6b948c064f4070183180a4fa89 \
+> > +file://LICENSE;md5=3Df04db71812ba70aaba8b38da91984cd2 \ "
+> > +
+> > +S =3D "${WORKDIR}/${PN}-1.6.0"
+> > +
+> > +inherit autotools
+> > +
+> > +EXTRA_OECONF =3D "\
+> > +        --disable-static               \
+> > +        --disable-dependency-tracking  \ "
+> > +
+> > +do_install() {
+> > +    make DESTDIR=3D${D} install
+> > +    install -d ${D}/${datadir}/GeoIP
+> > +    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
+> > +    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
+> > +    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
+> > +    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/ }
+> > +
+> > +PACKAGES =3D+ "${PN}-database"
+> > +FILES_${PN}-database =3D ""
+> > +FILES_${PN}-database +=3D "${datadir}/GeoIP/*"
+> > +
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
