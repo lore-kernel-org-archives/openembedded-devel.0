@@ -1,42 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 984357277D
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id C4CB57277D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jan 2015 17:41:04 +0000 (UTC)
-Received: by mail-wg0-f53.google.com with SMTP id x13so6503379wgg.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jan 2015 09:41:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=zKnQ2Sm6mCOLtrn98ljuuXE99BtycI4LjZoNnvoyPq0=;
-	b=prhma7vJrxl24xV6KO2fkk8KpnRvQrtdKBrHwMfD8mP7oFZa4om2OLgT6AMMeuuGmy
-	ViLN9gAg8gzWJkqLX+datxyfzCdQNOMs84Tl7G4Yhs0ZtBbJZSb1AEpX2n/gJ3u7SddY
-	hOUEBuhB5175Hm+7hRgHfLGVnSz6QGAcN4GUdp2ZipOvfdIfDuEJFB5YXkoO9adatHn8
-	W1MGeEOnLdPDdkTmR+AgHhKrIlocFeFcw05W5HvVQ8wFIAkvGKELE1bRXr/c65rELExJ
-	BdRUn5Jyc0V2ZOD+hmriKlHaR7kA3O8ooJrI280zflg8B5EZ/RP9brS9ybloP/BMBFIh
-	fExA==
-X-Received: by 10.194.20.67 with SMTP id l3mr72443238wje.94.1420220464561;
-	Fri, 02 Jan 2015 09:41:04 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	qg11sm54813983wic.17.2015.01.02.09.41.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 02 Jan 2015 09:41:03 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 2 Jan 2015 18:41:08 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150102174108.GI2469@jama>
-References: <cover.1420190530.git.paul.eggleton@linux.intel.com>
-	<5a7e4d1f909cba9ca5ff38262fcf638fc880028a.1420190530.git.paul.eggleton@linux.intel.com>
-	<20150102124942.GH2469@jama>
-	<loom.20150102T180131-945@post.gmane.org>
+	Fri,  2 Jan 2015 18:57:32 +0000 (UTC)
+Received: (qmail 20534 invoked by uid 1003); 2 Jan 2015 18:57:32 -0000
+Received: from unknown (HELO ?192.168.1.120?) (philip@opensdr.com@108.44.89.75)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	2 Jan 2015 18:57:32 -0000
+Message-ID: <54A6EA1B.8070308@balister.org>
+Date: Fri, 02 Jan 2015 13:57:31 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-In-Reply-To: <loom.20150102T180131-945@post.gmane.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 03/11] php: integrate modphp
+To: Paul Eggleton <paul.eggleton@linux.intel.com>, 
+	openembedded-devel@lists.openembedded.org
+References: <1420216478-16103-1-git-send-email-paul.eggleton@linux.intel.com>
+In-Reply-To: <1420216478-16103-1-git-send-email-paul.eggleton@linux.intel.com>
+Subject: Re: [meta-networking][PATCH] ntp: fix file locations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,63 +32,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jan 2015 17:41:09 -0000
-X-Groupsio-MsgNum: 53569
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="dCSxeJc5W8HZXZrD"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 02 Jan 2015 18:57:36 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
---dCSxeJc5W8HZXZrD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 01/02/2015 11:34 AM, Paul Eggleton wrote:
+> After the upgrade to 4.2.8, ntp's configure process now uses a custom
+> script which looks at the host to determine what install locations it
+> should use. This resulted in the recipe working on some people's
+> machines and failing during do_install on others. Force it to use the
+> "redhat" configuration as this seems closest to what we used to be
+> using prior to the upgrade (this means that binaries are now back in
+> sbindir as they used to be).
+> 
+> Thanks to Philip Balister for reporting this.
+> 
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
-On Fri, Jan 02, 2015 at 05:10:34PM +0000, Paul Eggleton wrote:
-> Martin Jansa <martin.jansa <at> gmail.com> writes:
-> > On Fri, Jan 02, 2015 at 09:31:58AM +0000, Paul Eggleton wrote:
-> > > Build the mod-php Apache module within the main php recipe; this avoi=
-ds
-> > > files in the sysroot from stepping on eachother and therefore avoids =
-the
-> > > resulting build failure.
-> > >=20
-> > > Changes made:
-> > > * Add an "apache2" PACKAGECONFIG, default enabled. This does mean that
-> > >   apache2 is a build dependency by default; if you don't want this,
-> > >   set your own PACKAGECONFIG value for the php recipe.
-> >=20
-> > I think it should be disabled by default, because meta-oe layer doesn't
-> > depend on meta-webserver layer where apache2 lives.
->=20
-> You're right, somehow I completely missed that - sorry. I'll fix in v2 on
-> Monday.
-> =20
-> > meta-webserver can have .bbappend which will add it to PACKAGECONFIG for
-> > xdebug to work with default php recipe.
->=20
-> As you may recall I'm of the opinion that software layers should not be
-> setting the policy of other layers, so I don't think this is really
-> appropriate; I'll just have to live with the fact that users who want it
-> will need to enable it themselves. In any case by the end of the patchset,
-> xdebug depends on php rather than modphp so it should still build fine
-> without apache2 in PACKAGECONFIG.
+Tested-by: Philip Balister<philip@balister.org>
 
-Ah, ok, I was assuming that xdebug depends on php with apache2
-PACKAGECONFIG enabled.
+Everyone blames Redhat :)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Note there is also a missing perl REDEPEND QA issue now.
 
---dCSxeJc5W8HZXZrD
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Philip
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+> ---
+>  meta-networking/recipes-support/ntp/ntp_4.2.8.bb | 21 ++++++++++-----------
+>  1 file changed, 10 insertions(+), 11 deletions(-)
+> 
+> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
+> index 7e1b1c1..e14921a 100644
+> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
+> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
+> @@ -35,6 +35,7 @@ EXTRA_OECONF += "--with-net-snmp-config=no \
+>                   --without-ntpsnmpd \
+>                   ac_cv_header_readline_history_h=no \
+>                   --with-yielding_select=yes \
+> +                 --with-locfile=redhat \
+>                   "
+>  CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
+>  
+> @@ -71,10 +72,10 @@ do_install_append() {
+>      sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+>      sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
+>      sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
+> -    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntptrace
+> -    sed -i '/use/i use warnings;' ${D}${bindir}/ntptrace
+> -    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntp-wait
+> -    sed -i '/use/i use warnings;' ${D}${bindir}/ntp-wait
+> +    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntptrace
+> +    sed -i '/use/i use warnings;' ${D}${sbindir}/ntptrace
+> +    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntp-wait
+> +    sed -i '/use/i use warnings;' ${D}${sbindir}/ntp-wait
+>  
+>      install -d ${D}/${sysconfdir}/default
+>      install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
+> @@ -90,8 +91,6 @@ do_install_append() {
+>  
+>      install -d ${D}${systemd_unitdir}/ntp-units.d
+>      install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
+> -
+> -    rmdir ${D}${sbindir}
+>  }
+>  
+>  PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
+> @@ -120,19 +119,19 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
+>  
+>  RSUGGESTS_${PN} = "iana-etc"
+>  
+> -FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
+> +FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
+>      ${NTP_USER_HOME} \
+>      ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
+>  "
+> -FILES_${PN}-tickadj = "${bindir}/tickadj"
+> -FILES_${PN}-utils = "${bindir} ${datadir}/ntp/lib"
+> -FILES_ntpdate = "${bindir}/ntpdate \
+> +FILES_${PN}-tickadj = "${sbindir}/tickadj"
+> +FILES_${PN}-utils = "${sbindir} ${datadir}/ntp/lib"
+> +FILES_ntpdate = "${sbindir}/ntpdate \
+>      ${sysconfdir}/network/if-up.d/ntpdate-sync \
+>      ${bindir}/ntpdate-sync \
+>      ${sysconfdir}/default/ntpdate \
+>      ${systemd_unitdir}/system/ntpdate.service \
+>  "
+> -FILES_sntp = "${bindir}/sntp \
+> +FILES_sntp = "${sbindir}/sntp \
+>                ${sysconfdir}/default/sntp \
+>                ${systemd_unitdir}/system/sntp.service \
+>               "
+> 
 
-iEYEARECAAYFAlSm2DQACgkQN1Ujt2V2gBy+agCfb2JBG+G8NvnWcpR7fo4eREoU
-OHgAn1urHcjbLox8QSehDrtgI6gnBh2S
-=te6W
------END PGP SIGNATURE-----
-
---dCSxeJc5W8HZXZrD--
