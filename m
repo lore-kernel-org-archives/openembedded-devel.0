@@ -1,24 +1,40 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id C4CB57277D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 052D77277A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jan 2015 18:57:32 +0000 (UTC)
-Received: (qmail 20534 invoked by uid 1003); 2 Jan 2015 18:57:32 -0000
-Received: from unknown (HELO ?192.168.1.120?) (philip@opensdr.com@108.44.89.75)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	2 Jan 2015 18:57:32 -0000
-Message-ID: <54A6EA1B.8070308@balister.org>
-Date: Fri, 02 Jan 2015 13:57:31 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Sat,  3 Jan 2015 10:12:07 +0000 (UTC)
+Received: by mail-wi0-f169.google.com with SMTP id r20so1617952wiv.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Jan 2015 02:12:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=XVK/a79ngFCmNEEz7rSxvY0BkEqXHwCCPTERJpfnHbQ=;
+	b=rMfz1W8AEqHXUp0sSVsm9lFmeFltOyOEdmP1DD/bbc1PoTq45xRw4qxIXky3uqvoh9
+	k9Y+y6G3SQsxBpTYwiTIK76kKPuQQT0EM/6A+omoKiYGMWE3JYKkspq3SFdhltxEVJOv
+	RoCY60L4RO9EFHUlU8Xsrk7rx+4qZDp8Hah/SSLU5ngC5+NzWExM8x15XD0im7OMOm+1
+	gvoKVmHjHb/MmPKoeWkBFJp/Lx4bpYV+N+Ise9pMexTIMYUhvVIauYJ9XUNDhBEfKGEq
+	mQ4WlSb4ESaBTdzlWe5b5+eU9IBf67sizUbpgluOzC1o6SCd7wt6WDF078btAkg7l1FL
+	dXJg==
+X-Received: by 10.194.200.1 with SMTP id jo1mr161850505wjc.64.1420279927032;
+	Sat, 03 Jan 2015 02:12:07 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	r3sm2049414wic.10.2015.01.03.02.12.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 03 Jan 2015 02:12:05 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 3 Jan 2015 11:12:11 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150103101211.GA24032@jama>
+References: <1417563094-28889-1-git-send-email-akuster@mvista.com>
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>, 
-	openembedded-devel@lists.openembedded.org
-References: <1420216478-16103-1-git-send-email-paul.eggleton@linux.intel.com>
-In-Reply-To: <1420216478-16103-1-git-send-email-paul.eggleton@linux.intel.com>
-Subject: Re: [meta-networking][PATCH] ntp: fix file locations
+In-Reply-To: <1417563094-28889-1-git-send-email-akuster@mvista.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH] strongswan: update package to 5.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,95 +48,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jan 2015 18:57:36 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Jan 2015 10:12:11 -0000
+X-Groupsio-MsgNum: 53571
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="OgqxwSJOaUobr8KG"
+Content-Disposition: inline
 
-On 01/02/2015 11:34 AM, Paul Eggleton wrote:
-> After the upgrade to 4.2.8, ntp's configure process now uses a custom
-> script which looks at the host to determine what install locations it
-> should use. This resulted in the recipe working on some people's
-> machines and failing during do_install on others. Force it to use the
-> "redhat" configuration as this seems closest to what we used to be
-> using prior to the upgrade (this means that binaries are now back in
-> sbindir as they used to be).
-> 
-> Thanks to Philip Balister for reporting this.
-> 
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+--OgqxwSJOaUobr8KG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Tested-by: Philip Balister<philip@balister.org>
+On Tue, Dec 02, 2014 at 03:31:34PM -0800, Armin Kuster wrote:
+> see https://wiki.strongswan.org/projects/strongswan/wiki/Changelog52
 
-Everyone blames Redhat :)
+Triggered ICE in world build, lets see if it fail repeatedly
 
-Note there is also a missing perl REDEPEND QA issue now.
+| i586-oe-linux-gcc  -m32 -march=3Di586 --sysroot=3D/home/jenkins/oe/world/=
+shr-core/tmp-glibc/sysroots/qemux86 -DHAVE_CONFIG_H -I. -I/home/jenkins/oe/=
+world/shr-core/tmp-glibc/work/i586-oe-linux/strongswan/5.2.1-r0/strongswan-=
+5.2.1/src/pki -I../..  -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/i58=
+6-oe-linux/strongswan/5.2.1-r0/strongswan-5.2.1/src/libstrongswan -DPLUGINS=
+=3D\""aes des rc2 sha1 sha2 md5 random x509 revocation pkcs1 pkcs7 pkcs8 pk=
+cs12 dnskey sshkey pem openssl gmp curl\""   -O2 -pipe -g -feliminate-unuse=
+d-debug-types -include /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-=
+oe-linux/strongswan/5.2.1-r0/build/config.h -c -o commands/req.o /home/jenk=
+ins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/strongswan/5.2.1-r0/stro=
+ngswan-5.2.1/src/pki/commands/req.c
+| In file included from /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586=
+-oe-linux/strongswan/5.2.1-r0/strongswan-5.2.1/src/libstrongswan/utils/prin=
+tf_hook/printf_hook.h:25:0,
+|                  from /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586=
+-oe-linux/strongswan/5.2.1-r0/strongswan-5.2.1/src/libstrongswan/library.h:=
+97,
+|                  from /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586=
+-oe-linux/strongswan/5.2.1-r0/strongswan-5.2.1/src/pki/pki.h:28,
+|                  from /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586=
+-oe-linux/strongswan/5.2.1-r0/strongswan-5.2.1/src/pki/command.c:17:
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/st=
+dlib.h: In function 'atoll':
+| i586-oe-linux-gcc  -m32 -march=3Di586 --sysroot=3D/home/jenkins/oe/world/=
+shr-core/tmp-glibc/sysroots/qemux86 -DHAVE_CONFIG_H -I. -I/home/jenkins/oe/=
+world/shr-core/tmp-glibc/work/i586-oe-linux/strongswan/5.2.1-r0/strongswan-=
+5.2.1/src/pki -I../..  -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/i58=
+6-oe-linux/strongswan/5.2.1-r0/strongswan-5.2.1/src/libstrongswan -DPLUGINS=
+=3D\""aes des rc2 sha1 sha2 md5 random x509 revocation pkcs1 pkcs7 pkcs8 pk=
+cs12 dnskey sshkey pem openssl gmp curl\""   -O2 -pipe -g -feliminate-unuse=
+d-debug-types -include /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-=
+oe-linux/strongswan/5.2.1-r0/build/config.h -c -o commands/self.o /home/jen=
+kins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/strongswan/5.2.1-r0/str=
+ongswan-5.2.1/src/pki/commands/self.c
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/st=
+dlib.h:293:1: internal compiler error: Segmentation fault
+|  {
+|  ^
+| Please submit a full bug report,
+| with preprocessed source if appropriate.
+| See <http://gcc.gnu.org/bugs.html> for instructions.
+| make[4]: *** [command.o] Error 1
+| make[4]: *** Waiting for unfinished jobs....
+| make[4]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/i586-oe-linux/strongswan/5.2.1-r0/build/src/pki'
+| make[3]: *** [all-recursive] Error 1
+| make[3]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/i586-oe-linux/strongswan/5.2.1-r0/build/src/pki'
+| make[2]: *** [all-recursive] Error 1
+| make[2]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/i586-oe-linux/strongswan/5.2.1-r0/build/src'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/i586-oe-linux/strongswan/5.2.1-r0/build'
+| make: *** [all] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
 
-Philip
-
+>=20
+> Signed-off-by: Armin Kuster <akuster@mvista.com>
 > ---
->  meta-networking/recipes-support/ntp/ntp_4.2.8.bb | 21 ++++++++++-----------
->  1 file changed, 10 insertions(+), 11 deletions(-)
-> 
-> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
-> index 7e1b1c1..e14921a 100644
-> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
-> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8.bb
-> @@ -35,6 +35,7 @@ EXTRA_OECONF += "--with-net-snmp-config=no \
->                   --without-ntpsnmpd \
->                   ac_cv_header_readline_history_h=no \
->                   --with-yielding_select=yes \
-> +                 --with-locfile=redhat \
->                   "
->  CFLAGS_append = " -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED"
->  
-> @@ -71,10 +72,10 @@ do_install_append() {
->      sed -i 's!/etc/!${sysconfdir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
->      sed -i 's!/var/!${localstatedir}/!g' ${D}${sysconfdir}/init.d/ntpd ${D}${bindir}/ntpdate-sync
->      sed -i 's!^PATH=.*!PATH=${base_sbindir}:${base_bindir}:${sbindir}:${bindir}!' ${D}${bindir}/ntpdate-sync
-> -    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntptrace
-> -    sed -i '/use/i use warnings;' ${D}${bindir}/ntptrace
-> -    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${bindir}/ntp-wait
-> -    sed -i '/use/i use warnings;' ${D}${bindir}/ntp-wait
-> +    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntptrace
-> +    sed -i '/use/i use warnings;' ${D}${sbindir}/ntptrace
-> +    sed -i '1s,#!.*perl -w,#! ${bindir}/env perl,' ${D}${sbindir}/ntp-wait
-> +    sed -i '/use/i use warnings;' ${D}${sbindir}/ntp-wait
->  
->      install -d ${D}/${sysconfdir}/default
->      install -m 644 ${WORKDIR}/ntpdate.default ${D}${sysconfdir}/default/ntpdate
-> @@ -90,8 +91,6 @@ do_install_append() {
->  
->      install -d ${D}${systemd_unitdir}/ntp-units.d
->      install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
-> -
-> -    rmdir ${D}${sbindir}
->  }
->  
->  PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
-> @@ -120,19 +119,19 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
->  
->  RSUGGESTS_${PN} = "iana-etc"
->  
-> -FILES_${PN} = "${bindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
-> +FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
->      ${NTP_USER_HOME} \
->      ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
+>  .../strongswan/{strongswan_5.2.0.bb =3D> strongswan_5.2.1.bb}           =
+| 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-support/strongswan/{strongswan_5.2.0.bb =
+=3D> strongswan_5.2.1.bb} (92%)
+>=20
+> diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.2.0.=
+bb b/meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
+> similarity index 92%
+> rename from meta-networking/recipes-support/strongswan/strongswan_5.2.0.bb
+> rename to meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
+> index 0997fd0..6b91319 100644
+> --- a/meta-networking/recipes-support/strongswan/strongswan_5.2.0.bb
+> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
+> @@ -11,8 +11,8 @@ SRC_URI =3D "http://download.strongswan.org/strongswan-=
+${PV}.tar.bz2 \
+>          file://fix-funtion-parameter.patch \
 >  "
-> -FILES_${PN}-tickadj = "${bindir}/tickadj"
-> -FILES_${PN}-utils = "${bindir} ${datadir}/ntp/lib"
-> -FILES_ntpdate = "${bindir}/ntpdate \
-> +FILES_${PN}-tickadj = "${sbindir}/tickadj"
-> +FILES_${PN}-utils = "${sbindir} ${datadir}/ntp/lib"
-> +FILES_ntpdate = "${sbindir}/ntpdate \
->      ${sysconfdir}/network/if-up.d/ntpdate-sync \
->      ${bindir}/ntpdate-sync \
->      ${sysconfdir}/default/ntpdate \
->      ${systemd_unitdir}/system/ntpdate.service \
->  "
-> -FILES_sntp = "${bindir}/sntp \
-> +FILES_sntp = "${sbindir}/sntp \
->                ${sysconfdir}/default/sntp \
->                ${systemd_unitdir}/system/sntp.service \
->               "
-> 
+> =20
+> -SRC_URI[md5sum] =3D "5cee4ee1a6ccb74400758b3ace54d46e"
+> -SRC_URI[sha256sum] =3D "b00c30bd2e60ff2e5fc85f54bbad54fe246585812fdf212d=
+be777a5258da26ce"
+> +SRC_URI[md5sum] =3D "dd3717c0aa59ab4591ca1812941ebb82"
+> +SRC_URI[sha256sum] =3D "ea51ab33b5bb39fecaf10668833a9936583b42145948ae9d=
+a1ab98f74e939215"
+> =20
+>  EXTRA_OECONF =3D "--enable-gmp \
+>          --enable-openssl \
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--OgqxwSJOaUobr8KG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlSnwHsACgkQN1Ujt2V2gBxpPgCff60HkIcvL/PXxmNQYuggacC4
+F/AAn3Pw/K7XsA3ImOGsg3r39KAowsw/
+=N7Y8
+-----END PGP SIGNATURE-----
+
+--OgqxwSJOaUobr8KG--
