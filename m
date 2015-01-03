@@ -1,38 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 18217727DA
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 80FAB727D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Jan 2015 23:21:02 +0000 (UTC)
-Received: by mail-pa0-f42.google.com with SMTP id et14so26092921pad.15
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Jan 2015 15:21:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=CHgje1breaTyHK27sA+Snq5//otbRbJmyzPEgMu0Pb0=;
-	b=pll97amuQzYKtTaV/lNMyYLVCJSB/DPJzLOhF4iw/dhWL8iCZz5ctpI78ABjz6EdKe
-	XvruZG47E9FjMdneXY2dp7TEilxIJemi5viRY0vWYwX3IoD5fWmr4DzfWunG9Pci3U8U
-	chnJMNNTM1zfd1rjqnQCoOM4hqAOUBVK3eF4m77/RwTmJxkfYENDMqTj5q0HNM638v3z
-	cgeElBJmjjgB8leq+6chZs9L0FI9SX7hjfDFlxybc1+9EvcVoJJE746uj7iLTOmth1Hi
-	aiqyjJCQdfOMiA7psrTixd2SbFks/Ji0tN8aEYxyOeo9coMkc70Z8LojPJHc8XTh+Uuc
-	4P3g==
-X-Received: by 10.70.45.39 with SMTP id j7mr134239005pdm.169.1420327263763;
-	Sat, 03 Jan 2015 15:21:03 -0800 (PST)
-Received: from [192.168.43.239] (mobile-166-171-249-123.mycingular.net.
-	[166.171.249.123]) by mx.google.com with ESMTPSA id
-	wf5sm50658142pab.40.2015.01.03.15.21.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Sat, 03 Jan 2015 15:21:03 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.1 \(1993\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1420326829-43562-1-git-send-email-liezhi.yang@windriver.com>
-Date: Sat, 3 Jan 2015 15:21:02 -0800
-Message-Id: <E1F36200-A2A9-419D-8B12-1324D2F493DE@gmail.com>
-References: <1420326829-43562-1-git-send-email-liezhi.yang@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1993)
+	Sat,  3 Jan 2015 23:23:44 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1Y7Y2r-0000pV-3H from Joe_MacDonald@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Jan 2015 15:23:45 -0800
+Received: from NA-MBX-02.mgc.mentorg.com ([169.254.2.162]) by
+	SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) with mapi id
+	14.03.0224.002; Sat, 3 Jan 2015 15:23:44 -0800
+From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking] [PATCH] dnrd: fix SRC_URI
+Thread-Index: AdAnrFDaCLJag7x4tE+tLpovmJJ0Ow==
+Date: Sat, 3 Jan 2015 23:23:43 +0000
+Message-ID: <EC21369A6993DD47985E1CBF1038266E2202214A@NA-MBX-02.mgc.mentorg.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-networking] [PATCH] dnrd: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -47,21 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Jan 2015 23:21:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 03 Jan 2015 23:23:45 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
-> On Jan 3, 2015, at 3:13 PM, Robert Yang <liezhi.yang@windriver.com> =
-wrote:
->=20
->=20
-> -SRC_URI =3D =
-"http://ncu.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BP}.tar.gz =
-\
-> +SRC_URI =3D =
-"http://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BP}.tar.gz =
-\
-
-while at it, can we use SOURCEFORGE_MIRROR as well ?=
+Q2FuIHdlIGp1c3QgY2hhbmdlIHRoaXMgdG8gJHtTT1VSQ0VGT1JHRV9NSVJST1J9IGhlcmU/DQoN
+Ci1KLg0KDQpPbiAzIEphbiAyMDE1IDE4OjE0LCBSb2JlcnQgWWFuZyA8bGllemhpLnlhbmdAd2lu
+ZHJpdmVyLmNvbT4gd3JvdGU6DQpGaXhlZDoNCkVSUk9SOiBGdW5jdGlvbiBmYWlsZWQ6IEZldGNo
+ZXIgZmFpbHVyZSBmb3IgVVJMOg0KICAgICdodHRwOi8vbmN1LmRsLnNvdXJjZWZvcmdlLm5ldC9w
+cm9qZWN0L2RucmQvZG5yZC8yLjIwLjMvZG5yZC0yLjIwLjMudGFyLmd6Jy4NCiAgICBVbmFibGUg
+dG8gZmV0Y2ggVVJMIGZyb20gYW55IHNvdXJjZS4NCg0KU2lnbmVkLW9mZi1ieTogUm9iZXJ0IFlh
+bmcgPGxpZXpoaS55YW5nQHdpbmRyaXZlci5jb20+DQotLS0NCiAuLi4vcmVjaXBlcy1kYWVtb25z
+L2RucmQvZG5yZF8yLjIwLjMuYmIgICAgICAgICAgICB8ICAgIDIgKy0NCiAxIGZpbGUgY2hhbmdl
+ZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCg0KZGlmZiAtLWdpdCBhL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvZG5yZC9kbnJkXzIuMjAuMy5iYiBiL21ldGEtbmV0d29y
+a2luZy9yZWNpcGVzLWRhZW1vbnMvZG5yZC9kbnJkXzIuMjAuMy5iYg0KaW5kZXggODVhNThjYy4u
+Nzg4Y2U3ZCAxMDA2NDQNCi0tLSBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvZG5y
+ZC9kbnJkXzIuMjAuMy5iYg0KKysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9k
+bnJkL2RucmRfMi4yMC4zLmJiDQpAQCAtOSw3ICs5LDcgQEAgU0VDVElPTiA9ICJTeXN0ZW0gRW52
+aXJvbm1lbnQvRGFlbW9ucyINCiBMSUNFTlNFID0gIkdQTHYyIg0KIExJQ19GSUxFU19DSEtTVU0g
+PSAiZmlsZTovL0NPUFlJTkc7bWQ1PTBiZTY3MDE3ZjFjNzcwMzEzYWQ3YjQwZTE4ZDU2OGYxIg0K
+DQotU1JDX1VSSSA9ICJodHRwOi8vbmN1LmRsLnNvdXJjZWZvcmdlLm5ldC9wcm9qZWN0LyR7QlBO
+fS8ke0JQTn0vJHtQVn0vJHtCUH0udGFyLmd6IFwNCitTUkNfVVJJID0gImh0dHA6Ly9zb3VyY2Vm
+b3JnZS5uZXQvcHJvamVjdHMvJHtCUE59L2ZpbGVzLyR7QlBOfS8ke1BWfS8ke0JQfS50YXIuZ3og
+XA0KICAgICAgICAgICAgZmlsZTovL2RucmQuc2VydmljZSBcDQogICAgICAgICAgICBmaWxlOi8v
+ZG5yZC5jb25mLnNhbXBsZSBcDQogICAgICAgICAgICBmaWxlOi8vZG5yZC5pbml0Ig0KLS0NCjEu
+Ny45LjUNCg0KLS0NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fDQpPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQpPcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFp
+bG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg==
 
