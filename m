@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3833E727EE
+	by mail.openembedded.org (Postfix) with ESMTP id 3A7B972803
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Jan 2015 23:53:12 +0000 (UTC)
+	Sat,  3 Jan 2015 23:53:13 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t03NrDQ4023023
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t03NrEd2023026
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 3 Jan 2015 15:53:13 -0800 (PST)
+	Sat, 3 Jan 2015 15:53:14 -0800 (PST)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 3 Jan 2015 15:53:12 -0800
+	Sat, 3 Jan 2015 15:53:13 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 3 Jan 2015 15:53:08 -0800
-Message-ID: <1420329190-40280-3-git-send-email-liezhi.yang@windriver.com>
+Date: Sat, 3 Jan 2015 15:53:10 -0800
+Message-ID: <1420329190-40280-5-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
 References: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH 3/5] procmail: use BPN in SRC_URI
+Subject: [meta-oe] [PATCH 5/5] tomoyo-tools: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,22 +39,27 @@ Content-Type: text/plain
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-support/procmail/procmail_3.22.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../tomoyo-tools/tomoyo-tools_2.5.0.bb             |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb b/meta-oe/recipes-support/procmail/procmail_3.22.bb
-index 6ab1e9b..1063654 100644
---- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
-+++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
-@@ -8,7 +8,7 @@ forward certain incoming mail automatically to someone."
- HOMEPAGE = "http://www.procmail.org/"
- SECTION = "Applications/System"
+diff --git a/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
+index bb2676b..70c039e 100644
+--- a/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
++++ b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
+@@ -5,11 +5,11 @@ being useful purely as a system analysis tool."
+ HOMEPAGE = "http://tomoyo.sourceforge.jp/"
+ SECTION = "System Environment/Kernel"
  
--SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${PN}/${BP}.tar.gz \
-+SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${BPN}/${BP}.tar.gz \
-     file://from-debian-to-fix-compile-errors.patch \
-     file://from-debian-to-modify-parameters.patch \
-     file://from-debian-to-fix-man-file.patch \
+-SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/53357/${PN}-${PV}-20140601.tar.gz"
++SRC_URI = "http://jaist.dl.sourceforge.jp/tomoyo/53357/${BPN}-${PV}-20140601.tar.gz"
+ SRC_URI[md5sum] = "888869b793127f00d6439a3246598b83"
+ SRC_URI[sha256sum] = "118ef6ba1fbf7c0b83018c3a0d4d5485dfb9b5b7f647f37ce9f63841a3133c2a"
+ 
+-S = "${WORKDIR}/${PN}"
++S = "${WORKDIR}/${BPN}"
+ 
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING.tomoyo;md5=751419260aa954499f7abaabaa882bbe"
 -- 
 1.7.9.5
 
