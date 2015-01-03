@@ -1,24 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 399CE727F7
+	by mail.openembedded.org (Postfix) with ESMTP id 3833E727EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Jan 2015 23:53:11 +0000 (UTC)
+	Sat,  3 Jan 2015 23:53:12 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t03NrBT3023020
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t03NrDQ4023023
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 3 Jan 2015 15:53:11 -0800 (PST)
+	Sat, 3 Jan 2015 15:53:13 -0800 (PST)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 3 Jan 2015 15:53:10 -0800
+	Sat, 3 Jan 2015 15:53:12 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 3 Jan 2015 15:53:06 -0800
-Message-ID: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
+Date: Sat, 3 Jan 2015 15:53:08 -0800
+Message-ID: <1420329190-40280-3-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
+References: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH 1/5] dash: use BPN in SRC_URI
+Subject: [meta-oe] [PATCH 3/5] procmail: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,22 +39,22 @@ Content-Type: text/plain
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-extended/dash/dash_0.5.8.bb |    2 +-
+ meta-oe/recipes-support/procmail/procmail_3.22.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/dash/dash_0.5.8.bb b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-index c2b5249..17fc924 100644
---- a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-+++ b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
+diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+index 6ab1e9b..1063654 100644
+--- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
++++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+@@ -8,7 +8,7 @@ forward certain incoming mail automatically to someone."
+ HOMEPAGE = "http://www.procmail.org/"
+ SECTION = "Applications/System"
  
- inherit autotools update-alternatives
- 
--SRC_URI = "http://gondor.apana.org.au/~herbert/dash/files/${PN}-${PV}.tar.gz"
-+SRC_URI = "http://gondor.apana.org.au/~herbert/dash/files/${BPN}-${PV}.tar.gz"
- SRC_URI[md5sum] = "5c152209680dab3c319e8923f6c51378"
- SRC_URI[sha256sum] = "c6db3a237747b02d20382a761397563d813b306c020ae28ce25a1c3915fac60f"
- 
+-SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${PN}/${BP}.tar.gz \
++SRC_URI = "http://www.ring.gr.jp/archives/net/mail/${BPN}/${BP}.tar.gz \
+     file://from-debian-to-fix-compile-errors.patch \
+     file://from-debian-to-modify-parameters.patch \
+     file://from-debian-to-fix-man-file.patch \
 -- 
 1.7.9.5
 
