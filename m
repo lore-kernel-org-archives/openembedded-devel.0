@@ -1,26 +1,24 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F17D77201A
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 399CE727F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Jan 2015 23:53:12 +0000 (UTC)
+	Sat,  3 Jan 2015 23:53:11 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t03NrClE022087
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t03NrBT3023020
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 3 Jan 2015 15:53:12 -0800 (PST)
+	Sat, 3 Jan 2015 15:53:11 -0800 (PST)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Sat, 3 Jan 2015 15:53:11 -0800
+	Sat, 3 Jan 2015 15:53:10 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 3 Jan 2015 15:53:07 -0800
-Message-ID: <1420329190-40280-2-git-send-email-liezhi.yang@windriver.com>
+Date: Sat, 3 Jan 2015 15:53:06 -0800
+Message-ID: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
-References: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH 2/5] rarpd: use BPN in SRC_URI
+Subject: [meta-oe] [PATCH 1/5] dash: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,31 +37,22 @@ Content-Type: text/plain
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/dash/dash_0.5.8.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-index d69499d..a9233af 100644
---- a/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-+++ b/meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb
-@@ -9,7 +9,7 @@ You should install rarpd if you want to set up a RARP server on your \
- network."
- SECTION = "System Environment/Daemons"
+diff --git a/meta-oe/recipes-extended/dash/dash_0.5.8.bb b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+index c2b5249..17fc924 100644
+--- a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
++++ b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
  
--SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/${PN}/${PN}-${PV}.tar.gz/be2a88f8ccddf2a40ac484cb3294fedc/${PN}-${PV}.tar.gz"
-+SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/${BPN}/${BPN}-${PV}.tar.gz/be2a88f8ccddf2a40ac484cb3294fedc/${BPN}-${PV}.tar.gz"
- SRC_URI[md5sum] = "be2a88f8ccddf2a40ac484cb3294fedc"
- SRC_URI[sha256sum] = "4d6145d435a5d8b567b9798620f57f9b0a464078a1deba267958f168fbe776e6"
+ inherit autotools update-alternatives
  
-@@ -25,7 +25,7 @@ SRC_URI += "file://0001-rarpd.8-add-man-file.patch \
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://rarpd.c;md5=199b20b172ea93121bc613a9c77b6931"
+-SRC_URI = "http://gondor.apana.org.au/~herbert/dash/files/${PN}-${PV}.tar.gz"
++SRC_URI = "http://gondor.apana.org.au/~herbert/dash/files/${BPN}-${PV}.tar.gz"
+ SRC_URI[md5sum] = "5c152209680dab3c319e8923f6c51378"
+ SRC_URI[sha256sum] = "c6db3a237747b02d20382a761397563d813b306c020ae28ce25a1c3915fac60f"
  
--S = "${WORKDIR}/${PN}"
-+S = "${WORKDIR}/${BPN}"
- 
- do_install() {
-     install -d ${D}${sysconfdir}/init.d
 -- 
 1.7.9.5
 
