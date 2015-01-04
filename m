@@ -1,33 +1,32 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id D9DF165D19
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 40988727B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Jan 2015 09:56:00 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id n12so25830618wgh.8
+	Sun,  4 Jan 2015 09:56:27 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id l18so719442wgh.14
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Jan 2015 01:56:00 -0800 (PST)
+	Sun, 04 Jan 2015 01:56:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=lwYL2VuoRTG576dlF74m+zj4Kmnvse514+RWXaSL5FU=;
-	b=gTKi5g3dILfFFfpxyxAIOiZk6GTzQhsb1tWNxiJo/TvcFsrzm5U3wdTxlU6NZWj9ld
-	vw0Srw+S5HxMfeMbnGEG1QvM6TWxAp42GVZjX41DeqARxIZ1mG6tZ78ayZDI9jfCZnE7
-	GwjnT+huazI8BkL64qZQg5Zq7IRLr7ezOO+I6OzZAkOiDropeHxE/RRJoMmmy2LnP5Pu
-	f//hgjCjDfsois8M47/LbpQHGTRThn9/pRvJNnCsqd3XWulb1f1E4gxZbWOoP6zQCyv2
-	yp/0RK/sKsnIKSI61fhZXUeYJZBhotidIHmXS9X9kM1wgLvs3JpQvlJ6Qpl5zC0pfyoq
-	riHQ==
+	:content-type; bh=hsV98i4ZakCqCk08tS3snCM9PwQCH2JKhNLlOR/pnaI=;
+	b=RY9XLQYZ4/o+cst1/hnFnVwIHPfxcD/I6VKaDXFooIxpQDLBA2xZOYf/0vG/1r53Ra
+	ZXGpXQnB/mquoY+2DnQkzXkqKESH8/MLMY/8wyB9iGUojUHKKPrWeXyzMwA9Q/lwJ44n
+	QOqaCvySATEFhAIHkwijGXHByP0U61sR3+ChirXkEcFwQs8fq7pITYAL7LvP9nDCg1BH
+	2fGayGwBzsJFl0CujmDLpJ6t2pKOGq1CKvf90wOPt7kq8VWtAZ1RtslIbjPsDZf8rtGz
+	6qVYiugu2toMC9TuxQ2nudwEFpJd9t+V77jhVJFGScApFhnpdV+qhescZl56Cof51SI8
+	pflQ==
 MIME-Version: 1.0
-X-Received: by 10.194.243.1 with SMTP id wu1mr81445621wjc.69.1420365360639;
-	Sun, 04 Jan 2015 01:56:00 -0800 (PST)
-Received: by 10.194.40.234 with HTTP; Sun, 4 Jan 2015 01:56:00 -0800 (PST)
-In-Reply-To: <1420329190-40280-5-git-send-email-liezhi.yang@windriver.com>
+X-Received: by 10.194.62.76 with SMTP id w12mr168836605wjr.5.1420365388035;
+	Sun, 04 Jan 2015 01:56:28 -0800 (PST)
+Received: by 10.194.40.234 with HTTP; Sun, 4 Jan 2015 01:56:28 -0800 (PST)
+In-Reply-To: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
 References: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
-	<1420329190-40280-5-git-send-email-liezhi.yang@windriver.com>
-Date: Sun, 4 Jan 2015 10:56:00 +0100
-Message-ID: <CA+chaQdSm-mNH8a75hpGNxy96gt94NcXaZoXghAypOxPR5zDkw@mail.gmail.com>
+Date: Sun, 4 Jan 2015 10:56:28 +0100
+Message-ID: <CA+chaQcnDANXTwkBhPpx_Og3-KT8p-MkeFCU=FDFkwT92rDkuQ@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe] [PATCH 5/5] tomoyo-tools: use BPN in SRC_URI
+Subject: Re: [meta-oe] [PATCH 1/5] dash: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,45 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jan 2015 09:56:03 -0000
+X-List-Received-Date: Sun, 04 Jan 2015 09:56:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
 ${BPN}-${PV}
 <http://pkgs.fedoraproject.org/repo/pkgs/$%7BBPN%7D/$%7BBPN%7D-$%7BPV%7D.tar.gz/be2a88f8ccddf2a40ac484cb3294fedc/$%7BBPN%7D-$%7BPV%7D.tar.gz>
 ->
-${BP} and can we use SOURCEFORGE_MIRROR again?
+${BP} please
 
 On Sun, Jan 4, 2015 at 12:53 AM, Robert Yang <liezhi.yang@windriver.com>
 wrote:
 
 > Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 > ---
->  .../tomoyo-tools/tomoyo-tools_2.5.0.bb             |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  meta-oe/recipes-extended/dash/dash_0.5.8.bb |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
-> b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
-> index bb2676b..70c039e 100644
-> --- a/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
-> +++ b/meta-oe/recipes-support/tomoyo-tools/tomoyo-tools_2.5.0.bb
-> @@ -5,11 +5,11 @@ being useful purely as a system analysis tool."
->  HOMEPAGE = "http://tomoyo.sourceforge.jp/"
->  SECTION = "System Environment/Kernel"
+> diff --git a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+> b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+> index c2b5249..17fc924 100644
+> --- a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+> +++ b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
+>
+>  inherit autotools update-alternatives
 >
 > -SRC_URI = "
-> http://jaist.dl.sourceforge.jp/tomoyo/53357/${PN}-${PV}-20140601.tar.gz"
+> http://gondor.apana.org.au/~herbert/dash/files/${PN}-${PV}.tar.gz"
 > +SRC_URI = "
-> http://jaist.dl.sourceforge.jp/tomoyo/53357/${BPN}-${PV}-20140601.tar.gz"
->  SRC_URI[md5sum] = "888869b793127f00d6439a3246598b83"
+> http://gondor.apana.org.au/~herbert/dash/files/${BPN}-${PV}.tar.gz"
+>  SRC_URI[md5sum] = "5c152209680dab3c319e8923f6c51378"
 >  SRC_URI[sha256sum] =
-> "118ef6ba1fbf7c0b83018c3a0d4d5485dfb9b5b7f647f37ce9f63841a3133c2a"
+> "c6db3a237747b02d20382a761397563d813b306c020ae28ce25a1c3915fac60f"
 >
-> -S = "${WORKDIR}/${PN}"
-> +S = "${WORKDIR}/${BPN}"
->
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM =
-> "file://COPYING.tomoyo;md5=751419260aa954499f7abaabaa882bbe"
 > --
 > 1.7.9.5
 >
