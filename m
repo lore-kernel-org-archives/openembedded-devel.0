@@ -1,32 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 40988727B5
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id C3FFA7264F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Jan 2015 09:56:27 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id l18so719442wgh.14
+	Sun,  4 Jan 2015 17:49:16 +0000 (UTC)
+Received: by mail-pd0-f178.google.com with SMTP id r10so26493388pdi.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Jan 2015 01:56:28 -0800 (PST)
+	Sun, 04 Jan 2015 09:49:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=hsV98i4ZakCqCk08tS3snCM9PwQCH2JKhNLlOR/pnaI=;
-	b=RY9XLQYZ4/o+cst1/hnFnVwIHPfxcD/I6VKaDXFooIxpQDLBA2xZOYf/0vG/1r53Ra
-	ZXGpXQnB/mquoY+2DnQkzXkqKESH8/MLMY/8wyB9iGUojUHKKPrWeXyzMwA9Q/lwJ44n
-	QOqaCvySATEFhAIHkwijGXHByP0U61sR3+ChirXkEcFwQs8fq7pITYAL7LvP9nDCg1BH
-	2fGayGwBzsJFl0CujmDLpJ6t2pKOGq1CKvf90wOPt7kq8VWtAZ1RtslIbjPsDZf8rtGz
-	6qVYiugu2toMC9TuxQ2nudwEFpJd9t+V77jhVJFGScApFhnpdV+qhescZl56Cof51SI8
-	pflQ==
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=n1rPXZU6LTH++56eQQFjZjsX/LSszoCGlc5PCIKfLBs=;
+	b=jtiRKh71svnX+vKn/BiMIxE6bfleGQwjQgr09Ns9fEx2Rkzg/aegiZhIMTwTcStX49
+	PkYvocsU1PjHxBvHGhupLUQ1KULoiOAqCn9n5+ABs2guO7oM6+NBh4EYS+H5k9OeqKUg
+	OBdyO69bHeuvA+xSCdzZdRhcXiYzu7S7Tfv+uS3Pykz7rFN7SsBaRKMOswLfy1f4XrKf
+	LPq+eHmxppfBDcvwxDHzW/59CmNSKMkrh2cgPCw9E6ui47sw1pAAwz8kZJQ33a2VdSey
+	kTqsgYN3/2meMMfLAxvXcfGOFRtucsWHRiXVVZO9m3Z6FLkhhbZ4GW5ceoj9+00ieddI
+	NpyQ==
+X-Received: by 10.66.160.199 with SMTP id xm7mr137326809pab.58.1420393757442; 
+	Sun, 04 Jan 2015 09:49:17 -0800 (PST)
+Received: from ?IPv6:2601:c:a700:272f:a5a9:3777:6846:fa5e?
+	([2601:c:a700:272f:a5a9:3777:6846:fa5e])
+	by mx.google.com with ESMTPSA id x8sm52173472pdi.7.2015.01.04.09.49.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 04 Jan 2015 09:49:16 -0800 (PST)
+Message-ID: <54A97D15.4080801@gmail.com>
+Date: Sun, 04 Jan 2015 09:49:09 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-X-Received: by 10.194.62.76 with SMTP id w12mr168836605wjr.5.1420365388035;
-	Sun, 04 Jan 2015 01:56:28 -0800 (PST)
-Received: by 10.194.40.234 with HTTP; Sun, 4 Jan 2015 01:56:28 -0800 (PST)
-In-Reply-To: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
-References: <1420329190-40280-1-git-send-email-liezhi.yang@windriver.com>
-Date: Sun, 4 Jan 2015 10:56:28 +0100
-Message-ID: <CA+chaQcnDANXTwkBhPpx_Og3-KT8p-MkeFCU=FDFkwT92rDkuQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe] [PATCH 1/5] dash: use BPN in SRC_URI
+To: openembedded-devel@lists.openembedded.org
+Subject: recent addition of libgxim depends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,47 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jan 2015 09:56:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 04 Jan 2015 17:49:26 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-${BPN}-${PV}
-<http://pkgs.fedoraproject.org/repo/pkgs/$%7BBPN%7D/$%7BBPN%7D-$%7BPV%7D.tar.gz/be2a88f8ccddf2a40ac484cb3294fedc/$%7BBPN%7D-$%7BPV%7D.tar.gz>
-->
-${BP} please
+Hello,
 
-On Sun, Jan 4, 2015 at 12:53 AM, Robert Yang <liezhi.yang@windriver.com>
-wrote:
+While building world I found and issue with libgxim.
 
-> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> ---
->  meta-oe/recipes-extended/dash/dash_0.5.8.bb |    2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-> b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-> index c2b5249..17fc924 100644
-> --- a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-> +++ b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
-> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =
-> "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
->
->  inherit autotools update-alternatives
->
-> -SRC_URI = "
-> http://gondor.apana.org.au/~herbert/dash/files/${PN}-${PV}.tar.gz"
-> +SRC_URI = "
-> http://gondor.apana.org.au/~herbert/dash/files/${BPN}-${PV}.tar.gz"
->  SRC_URI[md5sum] = "5c152209680dab3c319e8923f6c51378"
->  SRC_URI[sha256sum] =
-> "c6db3a237747b02d20382a761397563d813b306c020ae28ce25a1c3915fac60f"
->
-> --
-> 1.7.9.5
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+libgxim depends on ruby-native. meta-ruby is not a layer depends for 
+meta-oe.
+
+Can meta-oe have layer depends other then 'core' ? if so, this is an 
+easy fix.
+
+regards,
+Armin
 
