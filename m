@@ -1,25 +1,25 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id E2A0872606
+	by mail.openembedded.org (Postfix) with ESMTP id 25A777275B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 11:01:02 +0000 (UTC)
+	Mon,  5 Jan 2015 11:01:05 +0000 (UTC)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 05 Jan 2015 03:01:02 -0800
+	by fmsmga102.fm.intel.com with ESMTP; 05 Jan 2015 03:01:06 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646381094"
+X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646381121"
 Received: from kregan-mobl.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
-	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 03:01:02 -0800
+	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 03:01:05 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Jan 2015 11:00:45 +0000
-Message-Id: <74be454aeded97b7034f6bce3ee60af2cc8f60c3.1420455602.git.paul.eggleton@linux.intel.com>
+Date: Mon,  5 Jan 2015 11:00:49 +0000
+Message-Id: <8c7a8dd6dc63b7dd6ab191ded3425d73c0ea16ea.1420455602.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-Subject: [PATCH 01/10] iotop: update to 0.6
+Subject: [PATCH 05/10] libmodplug: update to 0.8.8.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +37,28 @@ X-List-Received-Date: Mon, 05 Jan 2015 11:01:06 -0000
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- meta-oe/recipes-extended/iotop/{iotop_0.4.4.bb => iotop_0.6.bb} | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-extended/iotop/{iotop_0.4.4.bb => iotop_0.6.bb} (81%)
+ .../libmodplug/{libmodplug_0.8.7.bb => libmodplug_0.8.8.5.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-multimedia/libmodplug/{libmodplug_0.8.7.bb => libmodplug_0.8.8.5.bb} (80%)
 
-diff --git a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb b/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-similarity index 81%
-rename from meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-rename to meta-oe/recipes-extended/iotop/iotop_0.6.bb
-index d629245..05eba3f 100644
---- a/meta-oe/recipes-extended/iotop/iotop_0.4.4.bb
-+++ b/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-@@ -4,14 +4,12 @@ DESCRIPTION = "iotop does for I/O usage what top(1) does for CPU usage. \
-     a table of current I/O usage by processes on the system."
- HOMEPAGE = "http://guichaz.free.fr/iotop/"
+diff --git a/meta-oe/recipes-multimedia/libmodplug/libmodplug_0.8.7.bb b/meta-oe/recipes-multimedia/libmodplug/libmodplug_0.8.8.5.bb
+similarity index 80%
+rename from meta-oe/recipes-multimedia/libmodplug/libmodplug_0.8.7.bb
+rename to meta-oe/recipes-multimedia/libmodplug/libmodplug_0.8.8.5.bb
+index 2361875..1070246 100644
+--- a/meta-oe/recipes-multimedia/libmodplug/libmodplug_0.8.7.bb
++++ b/meta-oe/recipes-multimedia/libmodplug/libmodplug_0.8.8.5.bb
+@@ -5,8 +5,8 @@ LICENSE = "PD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c9182faa1f7c316f7b97d404bcbe3685"
  
--PR = "r1"
--
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/modplug-xmms/libmodplug-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d2d9ccd8da22412999caed076140f786"
+-SRC_URI[sha256sum] = "3cfdebb60833a082e2f2b8faa3892bc9201d05c64051503e8007d8c98ae9e4c2"
++SRC_URI[md5sum] = "5f30241db109d647781b784e62ddfaa1"
++SRC_URI[sha256sum] = "77462d12ee99476c8645cb5511363e3906b88b33a6b54362b4dbc0f39aa2daad"
  
- SRC_URI = "http://guichaz.free.fr/iotop/files/${BP}.tar.bz2"
--SRC_URI[md5sum] = "cdd38b276cbf238676f5d2bcf098ba9c"
--SRC_URI[sha256sum] = "46f3279fb1a7dfc129b5d00950c6e8389e4aedeb58880e848b88d686483df0b0"
-+SRC_URI[md5sum] = "5ef9456b26d7694abf3101a72e1e0d1d"
-+SRC_URI[sha256sum] = "3adea2a24eda49bbbaeb4e6ed2042355b441dbd7161e883067a02bfc8dcef75b"
+ inherit autotools pkgconfig
  
- inherit distutils
- 
-@@ -20,6 +18,7 @@ do_install_append() {
-     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
- }
- 
-+FILES_${PN} += "${sbindir}"
- RDEPENDS_${PN} = "python-curses python-textutils \
-                   python-codecs python-ctypes python-pprint \
-                   python-shell"
 -- 
 1.9.3
 
