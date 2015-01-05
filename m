@@ -1,32 +1,37 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 7530860167
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 20:38:25 +0000 (UTC)
-Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
-	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1Y8EPy-0007AP-2O from Joe_MacDonald@mentor.com ;
-	Mon, 05 Jan 2015 12:38:26 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 5 Jan 2015 12:38:25 -0800
-Received: by burninator (Postfix, from userid 1000)	id 7E2E6580D10; Mon,  5
-	Jan 2015 15:38:21 -0500 (EST)
-Date: Mon, 5 Jan 2015 15:38:21 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20150105203821.GB28725@mentor.com>
-References: <1420489338-6024-1-git-send-email-joe_macdonald@mentor.com>
-	<20150105202949.GA19402@jama>
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 79EA77213F;
+	Mon,  5 Jan 2015 21:42:47 +0000 (UTC)
+Received: by mail-ie0-f177.google.com with SMTP id rd18so19402941iec.8;
+	Mon, 05 Jan 2015 13:42:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:mime-version:message-id:from:to:subject:content-type
+	:content-transfer-encoding;
+	bh=uznYpSsDCcTpoZqvs9n+nDjXKQ5I25XZr2Jn3iSgTgo=;
+	b=H00LRCDemIibgS+GnYZx3uhTBC5tjETf7tEGOWl1aBLDFr4Asw1V+mywx0MOfSJ4OE
+	4lPU4VKAz6XRZb/ilb71J0D1A4u9M0NnaEfD7N6ygbv0Z27rgofqGFJJptCiDnrq4Ot1
+	teVgRE+hfm3w5YMuVndamCx1vdGDV4I4ocKFiYvWRO7iGBXQWCD7jjagav4lGIPxOOHi
+	tREKYOZAuPqzvXxSZJg8xk2zgP+Qb3q/rhwRWtnqHfcIhrOIui+Lu7b32iEUsSpoQtXU
+	gAeBt7X8oTUG/ZfOqGFScF5q56B0Wf8+S0ZnrzYzqIxdmJKIP+/C2TCgOQUnTLE8aA7b
+	MMJg==
+X-Received: by 10.50.66.171 with SMTP id g11mr12917931igt.49.1420494167657;
+	Mon, 05 Jan 2015 13:42:47 -0800 (PST)
+Received: from [127.0.0.1] (cable2-pool191-cs-105.doycomm.com.
+	[66.219.191.105]) by mx.google.com with ESMTPSA id
+	c73sm27148947ioe.22.2015.01.05.13.42.46
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 05 Jan 2015 13:42:46 -0800 (PST)
+Date: Mon, 05 Jan 2015 13:42:46 -0800 (PST)
+X-Google-Original-Date: Mon, 05 Jan 2015 21:42:45 GMT
 MIME-Version: 1.0
-In-Reply-To: <20150105202949.GA19402@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [OE-core] [meta-networking][PATCH v2] openl2tp: add new recipe
+X-Mailer: Nodemailer (0.3.22; +http://andris9.github.com/Nodemailer/)
+Message-Id: <1420494165503.1e7c56fa@Nodemailer>
+From: cliff.brake@gmail.com
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	angstrom-distro-devel@linuxtogo.org, meta-ti@yoctoproject.org
+Subject: OE Changelog since 2014-12-28 until 2015-01-04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,258 +45,353 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 20:38:30 -0000
-X-Groupsio-MsgNum: 53667
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/NkBOFFp2J2Af1nK"
-Content-Disposition: inline
-
---/NkBOFFp2J2Af1nK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 05 Jan 2015 21:42:50 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [OE-core] [meta-networking][PATCH v2] openl2tp: add new recipe] On 15.=
-01.05 (Mon 21:29) Martin Jansa wrote:
+Changelog since 2014-12-28 until 2015-01-04.  Projects included in this =
+report:
 
-> On Mon, Jan 05, 2015 at 03:22:18PM -0500, Joe MacDonald wrote:
-> > From: Li xin <lixin.fnst@cn.fujitsu.com>
->=20
-> Wrong ML, belongs to openembedded-devel.
+bitbake: git://git.openembedded.org/bitbake
+openembedded-core: git://git.openembedded.org/openembedded-core
+meta-openembedded: git://git.openembedded.org/meta-openembedded
+meta-angstrom: git://github.com/Angstrom-distribution/meta-angstrom.git
+meta-arago: git://arago-project.org/git/meta-arago.git
+meta-atmel: https://github.com/linux4sam/meta-atmel.git
+meta-beagleboard: git://github.com/beagleboard/meta-beagleboard.git
+meta-browser: git://github.com/OSSystems/meta-browser.git
+meta-bug: git://github.com/buglabs/meta-bug.git
+meta-chicken: git://github.com/OSSystems/meta-chicken
+meta-efikamx: git://github.com/kraj/meta-efikamx.git
+meta-ettus: http://github.com/koenkooi/meta-ettus.git
+meta-fsl-arm: git://git.yoctoproject.org/meta-fsl-arm
+meta-fsl-arm-extra: git://github.com/Freescale/meta-fsl-arm-extra.git
+meta-fsl-ppc: git://git.yoctoproject.org/meta-fsl-ppc
+meta-guacamayo: git://github.com/Guacamayo/meta-guacamayo.git
+meta-gumstix: git://github.com/gumstix/meta-gumstix.git
+meta-gumstix-community: =
+git://gitorious.org/schnitzeltony-oe-meta/meta-gumstix-community.git
+meta-handheld: git://git.openembedded.org/meta-handheld
+meta-igep: http://github.com/ebutera/meta-igep.git
+meta-intel: git://git.yoctoproject.org/meta-intel
+meta-ivi: git://git.yoctoproject.org/meta-ivi
+meta-java: git://github.com/woglinde/meta-java
+meta-kde: git://gitorious.org/openembedded-core-layers/meta-kde.git
+meta-micro: git://git.openembedded.org/meta-micro
+meta-mono: git://git.yoctoproject.org/meta-mono.git
+meta-netbookpro: git://github.com/tworaz/meta-netbookpro
+meta-nslu2: git://github.com/kraj/meta-nslu2
+meta-opie: git://git.openembedded.org/meta-opie
+meta-qt3: git://git.yoctoproject.org/meta-qt3
+meta-qt5: git://github.com/meta-qt5/meta-qt5.git
+meta-slugos: git://github.com/kraj/meta-slugos
+meta-systemd: git://git.yoctoproject.org/meta-systemd
+meta-raspberrypi: git://github.com/djwillis/meta-raspberrypi.git
+meta-smartphone: http://git.shr-project.org/repo/meta-smartphone.git
+meta-ti: git://git.yoctoproject.org/meta-ti
+meta-webos: git://github.com/openwebos/meta-webos.git
+meta-xilinx: git://git.yoctoproject.org/meta-xilinx
+meta-yocto: git://git.yoctoproject.org/meta-yocto
+openembedded: git://git.openembedded.org/openembedded
 
-Yep, it does.  Command-line history failure.
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for bitbake:
 
--J.
+Paul Eggleton (2):
+=20=20bitbake-layers: fix error handling in add-layer / remove-layer
+=20=20utils: make edit_metadata_file() handle VARIABLE +=3D
 
->=20
-> >=20
-> > OpenL2TP is an open source L2TP client / server, written specifically
-> > for Linux. It has been designed for use as an enterprise L2TP VPN server
-> > or in commercial, Linux-based, embedded networking products and is able
-> > to support hundreds of sessions, each with different configuration.
-> > It is used by several ISPs to provide L2TP services and by corporations
-> > to implement L2TP VPNs.
-> >=20
-> > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> > Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> > ---
-> >=20
-> > Martin:
-> >=20
-> >    This is basically just a minor clean-up of the earlier openl2tp reci=
-pe.  So
-> >    far I've been unable to reproduce the error reported in the world bu=
-ild.  If
-> >    there's still a log kicking around from that failure, I'd love to ge=
-t a look
-> >    at it, I'm also doing a world build locally to try this out, but it =
-still
-> >    looks like it should be okay now.  If it fails for you again before =
-I get
-> >    some kind of results, can you point me at the log?
-> >=20
-> >    -J.
-> >=20
-> >  ...kefile-modify-CFLAGS-to-aviod-build-error.patch | 106 +++++++++++++=
-++++++++
-> >  .../recipes-protocols/openl2tp/openl2tp_1.8.bb     |  32 +++++++
-> >  2 files changed, 138 insertions(+)
-> >  create mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp=
-/Makefile-modify-CFLAGS-to-aviod-build-error.patch
-> >  create mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp=
-_1.8.bb
-> >=20
-> > diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/Makefi=
-le-modify-CFLAGS-to-aviod-build-error.patch b/meta-networking/recipes-proto=
-cols/openl2tp/openl2tp/Makefile-modify-CFLAGS-to-aviod-build-error.patch
-> > new file mode 100644
-> > index 0000000..96dbc75
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/Makefile-modi=
-fy-CFLAGS-to-aviod-build-error.patch
-> > @@ -0,0 +1,106 @@
-> > +From 152486fa3c36c3b99d17d5b553cf87ef412fae8e Mon Sep 17 00:00:00 2001
-> > +From: Li xin <lixin.fnst@cn.fujitsu.com>
-> > +Date: Mon, 1 Dec 2014 01:53:41 +0900
-> > +Subject: [PATCH] Makefile:modify CFLAGS to aviod build error.
-> > +
-> > +Upstream-Status: pending
-> > +
-> > +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> > +---
-> > + Makefile         | 22 +++++++++++-----------
-> > + plugins/Makefile |  6 +++---
-> > + 2 files changed, 14 insertions(+), 14 deletions(-)
-> > +
-> > +diff --git a/Makefile b/Makefile
-> > +index 4aaa448..baa7882 100644
-> > +--- a/Makefile
-> > ++++ b/Makefile
-> > +@@ -152,10 +152,10 @@ LIBS.dmalloc=3D		-ldmalloc
-> > + export USE_DMALLOC
-> > + endif
-> > +=20
-> > +-CPPFLAGS=3D		$(CPPFLAGS.l2tptest) $(CPPFLAGS-y)
-> > +-CFLAGS=3D			-I. -Iusl -Icli -isystem include \
-> > +-				-MMD -Wall -Werror -Wno-strict-aliasing \
-> > +-				$(CPPFLAGS) $(CPPFLAGS.dmalloc) \
-> > ++ADD_CPPFLAGS=3D		$(CPPFLAGS.l2tptest) $(CPPFLAGS-y)
-> > ++ADD_CFLAGS=3D			-I. -Iusl -Icli -isystem include \
-> > ++				-MMD -Wall -Wno-strict-aliasing \
-> > ++				$(ADD_CPPFLAGS) $(CPPFLAGS.dmalloc) \
-> > + 				-DSYS_LIBDIR=3D$(SYS_LIBDIR)
-> > + LDFLAGS.l2tpd=3D		-Wl,-E -L. -Lusl -lusl -ldl $(LIBS.dmalloc) -lc
-> > + LDFLAGS.l2tpconfig=3D	-Lcli -lcli -lreadline $(LIBS.dmalloc) $(READLI=
-NE_LDFLAGS) -lc
-> > +@@ -170,10 +170,10 @@ CFLAGS.optimize=3D	$(OPT_CFLAGS)
-> > + endif
-> > + export CFLAGS.optimize
-> > +=20
-> > +-CFLAGS+=3D		$(CFLAGS.optimize)
-> > ++ADD_CFLAGS+=3D		$(CFLAGS.optimize)
-> > +=20
-> > + ifeq ($(L2TP_USE_ASYNC_RPC),y)
-> > +-CPPFLAGS+=3D		-DL2TP_ASYNC_RPC
-> > ++ADD_CPPFLAGS+=3D		-DL2TP_ASYNC_RPC
-> > + endif
-> > +=20
-> > + ifeq ($(L2TP_FEATURE_RPC_MANAGEMENT),y)
-> > +@@ -220,13 +220,13 @@ endif
-> > +=20
-> > + # Compile without -Wall because rpcgen-generated code is full of warn=
-ings.
-> > + %_xdr.o:		%_xdr.c
-> > +-			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(CPPFLAGS) $<
-> > ++			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(ADD_CPPFLAGS) $<
-> > +=20
-> > + %_client.o:		%_client.c
-> > +-			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(CPPFLAGS) $<
-> > ++			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(ADD_CPPFLAGS) $<
-> > +=20
-> > + %_server.o:		%_server.c
-> > +-			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(CPPFLAGS) $<
-> > ++			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(ADD_CPPFLAGS) $<
-> > +=20
-> > + %_xdr.c:		%.x
-> > + 			-$(RM) $@
-> > +@@ -272,7 +272,7 @@ l2tpconfig:		$(L2TPCONFIG_SRCS.o)
-> > + 			$(CC) -o $@ $^ $(LDFLAGS.l2tpconfig)
-> > +=20
-> > + %.o:	%.c
-> > +-			$(CC) -c $(CFLAGS) $< -o $@
-> > ++			$(CC) -c $(CFLAGS) $(ADD_CFLAGS) $< -o $@
-> > +=20
-> > + l2tp_options.h:	FORCE
-> > + 	@rm -f $@.tmp
-> > +@@ -325,7 +325,7 @@ install:		install-all
-> > + install-all:		all install-daemon install-app
-> > +=20
-> > + install-daemon:
-> > +-			@for d in $(filter-out usl,$(SUBDIRS)); do $(MAKE) -C $$d $(MFLAGS=
-) EXTRA_CFLAGS=3D"$(CPPFLAGS)" install; if [ $$? -ne 0 ]; then exit 1; fi; =
-done
-> > ++			@for d in $(filter-out usl,$(SUBDIRS)); do $(MAKE) -C $$d $(MFLAGS=
-) EXTRA_CFLAGS=3D"$(CPPFLAGS) $(ADD_CPPFLAGS)" install; if [ $$? -ne 0 ]; t=
-hen exit 1; fi; done
-> > + 			$(INSTALL) -d $(DESTDIR)/usr/sbin
-> > + 			$(INSTALL) openl2tpd $(DESTDIR)/usr/sbin
-> > +=20
-> > +diff --git a/plugins/Makefile b/plugins/Makefile
-> > +index 5be996d..6810236 100644
-> > +--- a/plugins/Makefile
-> > ++++ b/plugins/Makefile
-> > +@@ -1,7 +1,7 @@
-> > +-CFLAGS	:=3D $(CFLAGS.optimize) -MMD -Wall \
-> > ++ADD_CFLAGS	:=3D $(CFLAGS.optimize) -MMD -Wall \
-> > + 	-isystem ../include \
-> > + 	-I. -I.. -I../usl -fPIC $(EXTRA_CFLAGS)
-> > +-LDFLAGS	:=3D -shared
-> > ++ADD_LDFLAGS	:=3D -shared
-> > +=20
-> > + PLUGINS.c:=3D	ppp_unix.c ppp_null.c ipsec.c event_sock.c
-> > +=20
-> > +@@ -21,7 +21,7 @@ clean:
-> > + 		$(RM) $(PLUGINS.so) $(wildcard *.o) $(wildcard *.d) $(SRC.generated)
-> > +=20
-> > + %.so: %.c
-> > +-		$(CC) -o $@ $(LDFLAGS) $(CFLAGS) $<
-> > ++		$(CC) -o $@ $(LDFLAGS) $(ADD_LDFLAGS) $(CFLAGS) $(ADD_CFLAGS) $<
-> > +=20
-> > + install:	all
-> > + 		$(INSTALL) -d $(DESTDIR)$(SYS_LIBDIR)/openl2tp
-> > +--=20
-> > +1.8.4.2
-> > +
-> > diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb=
- b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-> > new file mode 100644
-> > index 0000000..77f19ed
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-> > @@ -0,0 +1,32 @@
-> > +SUMMARY =3D "An L2TP client/server, designed for VPN use."
-> > +DESCRIPTION =3D "OpenL2TP is an open source L2TP client / server, writ=
-ten \
-> > +specifically for Linux. It has been designed for use as an enterprise \
-> > +L2TP VPN server or in commercial, Linux-based, embedded networking \
-> > +products and is able to support hundreds of sessions, each with \
-> > +different configuration. It is used by several ISPs to provide \
-> > +L2TP services and by corporations to implement L2TP VPNs."
-> > +HOMEPAGE =3D "http://www.openl2tp.org/"
-> > +SECTION =3D "console/network"
-> > +LICENSE =3D "GPL-2.0"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De9d9259cbbf00945adc25a470c1=
-d3585"
-> > +DEPENDS =3D "popt flex readline"
-> > +
-> > +SRC_URI =3D "http://ftp.jaist.ac.jp/pub/sourceforge/o/op/${PN}/${PN}/$=
-{PV}/${BP}.tar.gz \
-> > +           file://Makefile-modify-CFLAGS-to-aviod-build-error.patch"
-> > +SRC_URI[md5sum] =3D "e3d08dedfb9e6a9a1e24f6766f6dadd0"
-> > +SRC_URI[sha256sum] =3D "1c97704d4b963a87fbc0e741668d4530933991515ae9ab=
-0dffd11b5444f4860f"
-> > +
-> > +inherit autotools-brokensep pkgconfig
-> > +EXTRA_OEMAKE =3D 'CFLAGS=3D"${CFLAGS} -Wno-nused-but-set-variable"'
-> > +
-> > +do_compile_prepend() {
-> > +    sed -i -e "s:SYS_LIBDIR=3D.*:SYS_LIBDIR=3D${libdir}:g" \
-> > +        -e 's:$(CROSS_COMPILE)as:${AS}:g' \
-> > +        -e 's:$(CROSS_COMPILE)ld:${LD}:g' \
-> > +        -e 's:$(CROSS_COMPILE)gcc:${CC}:g' \
-> > +        -e 's:$(CROSS_COMPILE)ar:${AR}:g' \
-> > +        -e 's:$(CROSS_COMPILE)nm:${NM}:g' \
-> > +        -e 's:$(CROSS_COMPILE)strip:${STRIP}:g' \
-> > +        -e 's:$(CROSS_COMPILE)install:install:g' \
-> > +        ${S}/Makefile
-> > +}
-> > --=20
-> > 1.9.1
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-core mailing list
-> > Openembedded-core@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
->=20
---=20
--Joe MacDonald.
-:wq
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded-core:
 
---/NkBOFFp2J2Af1nK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+An=C3=ADbal Lim=C3=B3n (5):
+=20=20xrandr: Upgrade to 1.4.3
+=20=20acpid: Upgrade to 2.0.23
+=20=20lsof: Upgrade to 4.88
+=20=20mc: Upgrade to 4.8.13
+=20=20sqlite3: Upgrade to 3.8.7.4
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Armin Kuster (2):
+=20=20mmc-utils: update to latest git version
+=20=20libinput: update to 0.7.0
 
-iQEcBAEBAgAGBQJUqvY9AAoJEEn8ffcsOfaWluQH/RRaD0fo6Wbom2ce/pY3SqRU
-PoKvzMTjZDmZhs3EtTAtdx3tM+IorC8XMKoBFVKZA2y7P3y+L5CvzsDt9LzeXBSJ
-2/Pv9QCar9/eLyZBj52q8KhwchwHljMTW21CM4f0E3bjhEboGv3zj036z8AfHUha
-D6VqinYQpdLW2sEegdaXVCBmm9+AlanB4a+3P/IbNsddWkwMeJjPZEFIznRuySfV
-C5HKTXkEPBcb6ZGf9c/i1MZp6U1Rz8pz6EWomVAOL6wqpRzIMQLA9xQHPZseBlye
-X8oCirprp9gVIX8+flIc0/wUh2XoRrBsW3n/pFLrhmcHnkRmtG7kQExAi2aLUJM=
-=gwcy
------END PGP SIGNATURE-----
+Awais Belal (1):
+=20=20gstreamer1.0-omx: use mulitple SCMs to fetch submodules
 
---/NkBOFFp2J2Af1nK--
+Chen Qi (2):
+=20=20diffutils & diffstat: fix up EXTRA_OECONF
+=20=20pciutils: change default value of PACKAGECONFIG
+
+Justin Capella (1):
+=20=20wpa-supplicant: avoid host contamination of drivers by libnl3
+
+Kai Kang (1):
+=20=20qemu: upgrade to 2.2.0
+
+Mark Hatle (1):
+=20=20local.conf.sample: Add qemuarm64
+
+Otavio Salvador (4):
+=20=20lttng-modules: Update to revision to 16d7431c3
+=20=20lttng-tools: Update to 2.5.3 version
+=20=20lttng-ust: Update to 2.5.2 version
+=20=20image.bbclass: Remove 'set_image_autologin' function
+
+Richard Purdie (1):
+=20=20oeqa/parselogs: Add harmless failure warning introduced by new qemu =
+version=20
+
+Ross Burton (22):
+=20=20clutter: enable EGL backend by default
+=20=20glib-2.0: Upgrade to 2.42.1
+=20=20atk: upgrade to 2.14.0
+=20=20at-spi2-core: upgrade to 2.14.1
+=20=20at-spi2-atk: upgrade to 2.14.1.
+=20=20cairo: upgrade to 1.12.8
+=20=20harfbuzz: upgrade to 0.9.37
+=20=20pango: upgrade to 1.36.8
+=20=20gtk+: upgrade to 2.24.25
+=20=20libxext: upgrade to 1.3.3
+=20=20xtrans: upgrade to 1.3.5
+=20=20xcb-util: upgrade to 0.4.0
+=20=20xcb-util-image: upgrade to 0.4.0
+=20=20xcb-util-keysyms: upgrade to 0.4.0
+=20=20gstreamer1.0: upgrade to 1.4.5
+=20=20gstreamer1.0-plugins-base: upgrade to 1.4.5
+=20=20gstreamer1.0-plugins-bad: upgrade to 1.4.5
+=20=20gstreamer1.0-plugins-good: upgrade to 1.4.5
+=20=20gstreamer1.0-plugins-ugly: upgrade to 1.4.5
+=20=20gstreamer1.0-libav: upgrade to 1.4.5
+=20=20gstreamer1.0-rtsp-server: upgrade to 1.4.5
+=20=20telepathy: remove (moved to meta-oe)
+
+Sona Sarmadi (1):
+=20=20bind: fix for CVE-2014-8500
+
+Tim Orling (2):
+=20=20clutter-1.0: upgrade to v1.20.0
+=20=20clutter-1.0: add ptest
+
+Yi Zhao (1):
+=20=20oeqa/selftest: fix test_incremental_image_generation for changes in =
+log outp
+
+Zidan Wang (2):
+=20=20gstreamer1.0-plugins-good: Decrease the rank as havn't this kind of =
+decoder=20
+=20=20gstreamer1.0-plugins-base: Taglist will not be sent to downstream if =
+all the
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-openembedded:
+
+Armin Kuster (1):
+=20=20proftpd: update to 1.3.5
+
+Bian Naimeng (1):
+=20=20libgxim: Add recipe
+
+Graeme Gregory (1):
+=20=20fwts: add the Firmware Test Suite
+
+Li xin (1):
+=20=20dstat: add new recipe
+
+Martin Jansa (1):
+=20=20meta-efl: use MIT & BSD license
+
+Otavio Salvador (12):
+=20=20nbench-byte: Fix license QA error
+=20=20dash: Fix license format QA error
+=20=20sound-theme-freedesktop: Fix license format QA error
+=20=20soft66: Fix license format QA error
+=20=20log4cplus: Fix license format QA error
+=20=20libutempter: Fix license format QA error
+=20=20libftdi: Fix license format QA error
+=20=20procmail: Fix license format QA error
+=20=20libspatialite: Fix license format QA error
+=20=20ttf-sazanami: Fix license format QA error
+=20=20navit: Fix license format QA error
+=20=20t1lib: Fix license format QA error
+
+Paul Barker (1):
+=20=20distro-feed-configs: Make list of archs configurable
+
+Paul Eggleton (1):
+=20=20ntp: upgrade to 4.2.8
+
+Philip Balister (1):
+=20=20log4cpp: Add new recipe
+
+Qian Lei (2):
+=20=20dnrd: Add new recipe
+=20=20ctapi-common: Add new recipe
+
+Robert Yang (1):
+=20=20netkit-rusers: fix parallel build issue
+
+Wenzong Fan (1):
+=20=20collectd: add PACKAGECONFIG for libvirt, libesmtp
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-angstrom:
+
+Koen Kooi (1):
+=20=20angstrom-mirrors: point to the correct URI
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-arago:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-atmel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-beagleboard:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-browser:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-bug:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-chicken:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-efikamx:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ettus:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm:
+
+Carlos Rafael Giani (1):
+=20=20gstreamer1.0-plugins-imx: Update to version 0.10.0
+
+Chunrong Guo (1):
+=20=20linux-ls1: update to sdk v1.7 release
+
+Jacob Kroon (1):
+=20=20gpu-viv-bin-mx6q: Don't package X11 libraries in non-X11 builds
+
+Max Krummenacher (2):
+=20=20libmcc: provide explicit do_install
+=20=20mqxboot: provide explicit do_install
+
+Otavio Salvador (3):
+=20=20u-boot-fslc: Update to 2015.01-rc3 based version
+=20=20libfslcodec: Add a depends on imx-vpu
+=20=20libfslcodec: Use PACKAGECONFIG to handle VPU support
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-arm-extra:
+
+Raphael Silva (2):
+=20=20cgtqmx6: changing preferred kernel assignement type
+=20=20linux-congatec-rt: add initial recipe
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-fsl-ppc:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-guacamayo:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-gumstix-community:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-handheld:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-igep:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-intel:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ivi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-java:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-kde:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-micro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-mono:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-netbookpro:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-nslu2:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-opie:
+
+Khem Raj (1):
+=20=20packagegroups: Move inheriting packagegroup after setting PACKAGE_ARCH
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt3:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-qt5:
+
+Andreas M=C3=BCller (1):
+=20=20qtbase: Make libraries build with cmake find gl(es) headers
+
+Mingtao Qu (1):
+=20=20qtmultimedia: Fix crash when use Gstreamer 0.10 plugin
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-slugos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-systemd:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-raspberrypi:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-smartphone:
+
+Martin Jansa (8):
+=20=20android-audiosystem: Fix build with poisoned default sysroot
+=20=20meta-shr-distro: rename bbappend to match new version from oe-core
+=20=20midori: rename bbappend to match new version from oe-core
+=20=20meta-efl: use MIT & BSD license
+=20=20preferred-shr-versions: Drop unnecessary entries
+=20=20e-wm-config-illume2-shr: temporary drop elfe dependency
+=20=20meta-shr: replace eve with elbow - webkit2 based browser
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-ti:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-webos:
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-xilinx:
+
+David Holsgrove (1):
+=20=20external-xilinx-toolchain: Fix version detection for gcc
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for meta-yocto:
+
+Mark Hatle (1):
+=20=20local.conf.sample: Add qemuarm64
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Changelog for openembedded:
+
+
+
