@@ -1,27 +1,36 @@
-Return-Path: <biannm@cn.fujitsu.com>
+Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 414967213F
+	by mail.openembedded.org (Postfix) with ESMTP id 2FE6765CF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 09:06:03 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55541207"
+	Mon,  5 Jan 2015 10:07:11 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55544307"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Jan 2015 17:02:38 +0800
+	by heian.cn.fujitsu.com with ESMTP; 05 Jan 2015 18:03:47 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0595Uc9010999
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t05A6dTw016913
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Jan 2015 17:05:31 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 5 Jan 2015 17:06:03 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 5 Jan 2015 17:01:53 +0800
-Message-ID: <1420448513-21578-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 5 Jan 2015 18:06:39 +0800
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Mon, 5 Jan 2015 18:07:12 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 3/3] dlm: add a new recipe
+Thread-Index: AQHQKLgdzjRnU3XuvUmfTHVrERJBjZywtTQAgACTRfA=
+Date: Mon, 5 Jan 2015 10:07:14 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDAE36F1@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1420442394-39127-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1420442394-39127-4-git-send-email-leimaohui@cn.fujitsu.com>
+	<20150105090248.GD2484@jama>
+In-Reply-To: <20150105090248.GD2484@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.48]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-networking][PATCH v2] linux-atm: add recipe.
+Subject: Re: [meta-oe][PATCH 3/3] dlm: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,119 +44,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 09:06:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 05 Jan 2015 10:07:18 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-Drivers and tools to support ATM networking under Linux
+Hi Martin
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- .../linux-atm/linux-atm/install-from-buildir.patch | 19 +++++++++++
- .../linux-atm/linux-atm/link-with-ldflags.patch    | 38 ++++++++++++++++++++++
- .../recipes-support/linux-atm/linux-atm_2.5.2.bb   | 22 +++++++++++++
- 3 files changed, 79 insertions(+)
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+> > +SRC_URI =3D
+> "https://git.fedorahosted.org/cgit/dlm.git/snapshot/dlm-${PV}.tar.xz"
+>=20
+> dlm-${PV} -> ${BP} but more importantly is dlm.git/snapshots "stable"?
+> Doesn't it re-generated sometimes ?
 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch b/meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch
-new file mode 100644
-index 0000000..d1380eb
---- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/install-from-buildir.patch
-@@ -0,0 +1,19 @@
-+install binaries from builddir not srcdir.
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+--- linux-atm-2.5.2.orig/src/extra/Makefile.am	2010-12-21 05:07:22.000000000 +0800
-++++ linux-atm-2.5.2/src/extra/Makefile.am	2014-12-22 10:56:04.458563269 +0800
-+@@ -9,9 +9,9 @@ CLEANFILES = pca200e.bin pca200e_ecd.bin
-+ 
-+ install-exec-hook:
-+ 	$(MKDIR_P) $(DESTDIR)/lib/firmware
-+-	$(INSTALL_DATA) $(srcdir)/pca200e.bin $(DESTDIR)/lib/firmware
-+-	$(INSTALL_DATA) $(srcdir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
-+-	$(INSTALL_DATA) $(srcdir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
-++	$(INSTALL_DATA) $(builddir)/pca200e.bin $(DESTDIR)/lib/firmware
-++	$(INSTALL_DATA) $(builddir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
-++	$(INSTALL_DATA) $(builddir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
-+ 
-+ %.bin %.bin2: %.data
-+ 	objcopy -Iihex $< -Obinary $@.gz
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch b/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch
-new file mode 100644
-index 0000000..62fad2a
---- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldflags.patch
-@@ -0,0 +1,38 @@
-+LDFLAGS_FOR_BUILD should be required when doing link for qgen.
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp linux-atm-2.5.2.orig/configure.in linux-atm-2.5.2/configure.in
-+--- linux-atm-2.5.2.orig/configure.in	2010-12-28 23:36:07.000000000 +0800
-++++ linux-atm-2.5.2/configure.in	2014-12-22 10:25:23.830510932 +0800
-+@@ -66,6 +66,7 @@ else
-+ fi
-+ AC_SUBST(CC_FOR_BUILD)
-+ AC_SUBST(CFLAGS_FOR_BUILD)
-++AC_SUBST(LDFLAGS_FOR_BUILD)
-+ dnl Add -d flag to bison/yacc to create intermediate .h files
-+ YACC="$YACC -d"
-+ 
-+diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.am linux-atm-2.5.2/src/qgen/Makefile.am
-+--- linux-atm-2.5.2.orig/src/qgen/Makefile.am	2010-12-28 22:29:31.000000000 +0800
-++++ linux-atm-2.5.2/src/qgen/Makefile.am	2014-12-22 10:23:51.914508318 +0800
-+@@ -5,7 +5,7 @@ qgen_SOURCES = common.c common.h file.c
-+ qgen_LDADD = -lfl
-+ 
-+ COMPILE = @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@
-+-LINK = @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ -o $@
-++LINK = @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ @LDFLAGS_FOR_BUILD@ -o $@
-+ 
-+ #TESTS = $(check_PROGRAMS)
-+ 
-+diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.in linux-atm-2.5.2/src/qgen/Makefile.in
-+--- linux-atm-2.5.2.orig/src/qgen/Makefile.in	2010-12-29 00:06:11.000000000 +0800
-++++ linux-atm-2.5.2/src/qgen/Makefile.in	2014-12-22 10:23:51.914508318 +0800
-+@@ -106,6 +106,7 @@ INSTALL_SCRIPT = @INSTALL_SCRIPT@
-+ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
-+ LD = @LD@
-+ LDFLAGS = @LDFLAGS@
-++LDFLAGS_FOR_BUILD = @LDFLAGS_FOR_BUILD@
-+ LEX = @LEX@
-+ LEXLIB = @LEXLIB@
-+ LEX_OUTPUT_ROOT = @LEX_OUTPUT_ROOT@
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-new file mode 100644
-index 0000000..4c0345b
---- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Drivers and tools to support ATM networking under Linux"
-+HOMEPAGE = "http://linux-atm.sourceforge.net/"
-+SECTION = "libs"
-+LICENSE = "GPL-2.0 & LGPL-2.0"
-+
-+DEPENDS = "virtual/kernel flex flex-native"
-+
-+SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-+           file://link-with-ldflags.patch \
-+           file://install-from-buildir.patch"
-+
-+SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
-+SRC_URI[sha256sum] = "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37581018fbd16dd53a"
-+
-+LIC_FILES_CHKSUM = "\
-+file://COPYING;md5=d928de9537d846935a98af3bbc6e6ee1 \
-+file://COPYING.GPL;md5=ac2db169b9309e240555bc77be4f1a33 \
-+file://COPYING.LGPL;md5=6e29c688d912da12b66b73e32b03d812"
-+
-+inherit autotools pkgconfig
-+
-+FILES_${PN} += "${base_libdir}/firmware"
--- 
-1.9.1
+The download URL comes from https://git.fedorahosted.org/cgit/dlm.git/.
+Besides the latest version, the old versions are also provided by "dlm.git/=
+snapshots".
+Viewed the generated time of the old versions, I think it is "stable" enoug=
+h.
+And you know, dlm comes from fedora, I can't find a better download URL.
 
+
+Cheers
+
+Lei
+
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Monday, January 05, 2015 5:03 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][PATCH 3/3] dlm: add a new recipe
+>=20
+> On Mon, Jan 05, 2015 at 03:19:54PM +0800, leimaohui wrote:
+> > From: leimh <leimaohui@cn.fujitsu.com>
+> >
+> > The kernel dlm requires a user daemon to control membership.
+> >
+> > Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
+> > ---
+> >  meta-oe/recipes-extended/dlm/dlm_4.0.2.bb | 47
+> > +++++++++++++++++++++++++++++++
+> >  1 file changed, 47 insertions(+)
+> >  create mode 100644 meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> >
+> > diff --git a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > new file mode 100644
+> > index 0000000..b46c357
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > @@ -0,0 +1,47 @@
+> > +DESCRIPTION =3D "dlm control daemon and tool"
+> > +
+> > +SECTION =3D "utils"
+> > +HOMEPAGE =3D "https://fedorahosted.org/cluster/wiki/HomePage"
+> > +
+> > +SRC_URI =3D
+> "https://git.fedorahosted.org/cgit/dlm.git/snapshot/dlm-${PV}.tar.xz"
+>=20
+> dlm-${PV} -> ${BP} but more importantly is dlm.git/snapshots "stable"?
+> Doesn't it re-generated sometimes ?
+> > +
+> > +SRC_URI[md5sum] =3D "efc2ee6093aa6aa0a88aaad83e998a3f"
+> > +SRC_URI[sha256sum] =3D
+> "b89bc557aaffbab0ac005398025f247718a5589cff6574d902eaffe2b20e683e"
+> > +
+> > +LICENSE =3D "LGPLv2+&GPLv2&GPLv2+"
+>=20
+> Add spaces around &
+>=20
+> > +LIC_FILES_CHKSUM =3D
+> "file://README.license;md5=3D8f0bbcdd678df1bce9863492b6c8832d"
+> > +
+> > +DEPENDS =3D "corosync systemd"
+> > +
+> > +inherit pkgconfig systemd
+> > +
+> > +SYSTEMD_SERVICE_${PN} =3D "dlm.service"
+> > +SYSTEMD_AUTO_ENABLE =3D "enable"
+> > +
+> > +export EXTRA_OEMAKE =3D ""
+> > +
+> > +do_compile_prepend() {
+> > +    sed -i "s/libsystemd-daemon/libsystemd/g"
+> > +${S}/dlm_controld/Makefile }
+> > +
+> > +do_compile () {
+> > +    oe_runmake 'CC=3D${CC}'
+> > +}
+> > +
+> > +do_install_append (){
+> > +	install -d ${D}${sysconfdir}/sysconfig/
+> > +	install -d ${D}${sysconfdir}/init.d/
+> > +	install -m 0644 ${S}/init/dlm.sysconfig
+> ${D}${sysconfdir}/sysconfig/dlm
+> > +	install -m 0644 ${S}/init/dlm.init ${D}${sysconfdir}/init.d/dlm
+> > +
+> > +	# install systemd unit files
+> > +	if
+> ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+> > +		install -d ${D}${systemd_unitdir}/system
+> > +		install -m 0644 ${S}/init/dlm.service
+> ${D}${systemd_unitdir}/system
+> > +	fi
+> > +}
+>=20
+> Use 4 spaces for indentation
+>=20
+> > +
+> > +do_install() {
+> > +    oe_runmake install DESTDIR=3D${D} LIBDIR=3D${libdir} }
+> > +
+> > --
+> > 1.8.4.2
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
