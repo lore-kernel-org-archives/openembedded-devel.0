@@ -1,27 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id B89D172802
+Return-Path: <rpjday@crashcourse.ca>
+X-Greylist: delayed 4335 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 05 Jan 2015 16:10:25 UTC
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 373E9601F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 14:39:17 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga103.fm.intel.com with ESMTP; 05 Jan 2015 06:34:38 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,700,1413270000"; d="scan'208";a="646461719"
-Received: from kregan-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
-	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 06:39:17 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Fan, Xin" <fan.xin@jp.fujitsu.com>
-Date: Mon, 05 Jan 2015 14:39:16 +0000
-Message-ID: <7520305.c2EXCbKMb0@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.7-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <2746815.1G8tsLzyMa@peggleto-mobl5.ger.corp.intel.com>
-References: <72334B6CF8FF6542A565D43122925D601999FF@G01JPEXMBYT21>
-	<2746815.1G8tsLzyMa@peggleto-mobl5.ger.corp.intel.com>
+	Mon,  5 Jan 2015 16:10:25 +0000 (UTC)
+Received: from [70.30.87.145] (port=60540 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1Y896f-0000vh-BR for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Jan 2015 09:58:09 -0500
+Date: Mon, 5 Jan 2015 09:58:01 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.11.1501050948080.16705@localhost>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Question about ntp build option
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: missing trailing spaces in some "_prepend" expressions in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,44 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 14:39:25 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 05 Jan 2015 16:10:26 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Monday 05 January 2015 14:33:59 Paul Eggleton wrote:
-> Hi Fan,
-> 
-> On Friday 28 November 2014 06:05:36 Fan, Xin wrote:
-> > I wonder that why the ntp uses the without-openssl build option and
-> > disables the openssl by default.
-> > 
-> > In my opinion, the ntp needs openssl to support public key cryptography
-> > and
-> > it should be enabled by default.
-> 
-> I set it up this way originally because I didn't figure SSL to be that
-> important for a protocol like ntp for the common case. To my mind, it
-> depends on what you are doing with time on the system which is being
-> synchronised - if you are only using it to display a clock somewhere for
-> the user, the security of the connection to the ntp server isn't really
-> that important vs. avoiding the dependency on another library. If on the
-> other hand you are writing logs or you are using a time-sensitive protocol
-> such as Kerberos on the same system then you might want to consider
-> enabling it.
-> 
-> There will always be differences in how people expect software to be
-> configured for whatever target and application they are building for, hence
-> why we make it fairly easy to adjust the configuration. In this case you
-> only need to set your own PACKAGECONFIG value for ntp to include "openssl"
-> and SSL support will be enabled.
 
-(I should have added, my apologies for the very late reply).
+  after running across a variable "_prepend" assignment that had no
+trailing space, i did a quick grep through oe-core and ran across the
+following, which would all seem to need that trailing space:
 
-Cheers,
-Paul
+$ grep -rn "DEPENDS_prepend.*[^ ]\"$" *
+meta/classes/qt4e.bbclass:2:DEPENDS_prepend = "${QT4EDEPENDS}"
+meta/classes/cpan_build.bbclass:27:DEPENDS_prepend = "${@cpan_build_dep_prepend(d)}"
+meta/classes/autotools.bbclass:24:DEPENDS_prepend = "${@autotools_dep_prepend(d)}"
+meta/classes/qt4x11.bbclass:2:DEPENDS_prepend = "${QT4DEPENDS}"
+$
+
+and
+
+$ grep -rn "SRC_URI_prepend.*[^ ]\"$" *
+meta/recipes-devtools/qemu/qemu_git.bb:10:SRC_URI_prepend = "git://git.qemu.org/qemu.git"
+meta/recipes-devtools/qemu/qemu_2.2.0.bb:10:SRC_URI_prepend = "http://wiki.qemu-project.org/download/${BP}.tar.bz2"
+$
+
+  there may be more, i just left it at that, not sure if there's
+something magic about those examples or whether they really should
+have the space added, so i'll leave it with someone else to tweak.
+
+rday
+
+p.s. is there any difference between appending or prepending to the
+list of build-time dependencies in "DEPENDS"? most extensions to
+"DEPENDS" i've seen use "_append", but occasionally, i see "_prepend".
+does it matter?
 
 -- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
