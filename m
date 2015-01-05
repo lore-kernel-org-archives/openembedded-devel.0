@@ -1,40 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 18F4860232
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C787605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 16:25:56 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id h11so3641205wiw.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jan 2015 08:25:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=QHELqMBxqcDOBu4VmoGfZth/eUNBF07dqhc+C/cVg6A=;
-	b=jlgc9fj5oQhMDQY99mdjntISuR3xB/j4exLmekuLli2S1j5NAv8Ajqm8vfBc1Bx5ep
-	yJjdyOgX/oWHhHP+G/NQfkM27G/2LRvnX7atP4Hy5qDn5HKNAVWhGGEP21DOUVEotTwR
-	wbrkHmqR1luUoqFY8Q2kGa9cXoFBSSzBAEKd2mext/OIfFKjt0eRYztt/wSGvs5/dWai
-	dr/nDEe+ZYMSCvEzNWDQZYNlc7aEgkiz4DFwWwL274QhnKvSSTOIulzNKp5Im7gWvYEf
-	EeKaHj2FDnNAcRO+va/RdwyG5B1/d5Ad3vrm5h+A2F3fRBFJCnBTUB6I5Ri7YDPKxfpR
-	7qMQ==
-X-Received: by 10.180.73.101 with SMTP id k5mr26837255wiv.43.1420475156413;
-	Mon, 05 Jan 2015 08:25:56 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	e18sm75988460wjz.27.2015.01.05.08.25.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Jan 2015 08:25:55 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 5 Jan 2015 17:25:56 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150105162556.GL2484@jama>
-References: <alpine.LFD.2.11.1501050948080.16705@localhost>
+	Mon,  5 Jan 2015 16:29:19 +0000 (UTC)
+Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
+	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1Y8AWt-0002r9-9F from Joe_MacDonald@mentor.com ;
+	Mon, 05 Jan 2015 08:29:19 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
+	(147.34.96.168) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 5 Jan 2015 08:29:18 -0800
+Received: by burninator (Postfix, from userid 1000)	id C0090580D10; Mon,  5
+	Jan 2015 11:29:14 -0500 (EST)
+Date: Mon, 5 Jan 2015 11:29:14 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <20150105162914.GA12135@mentor.com>
+References: <1419928817-38602-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <alpine.LFD.2.11.1501050948080.16705@localhost>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: missing trailing spaces in some "_prepend" expressions in oe-core
+In-Reply-To: <1419928817-38602-1-git-send-email-liezhi.yang@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking] [PATCH 1/2 V2] esmtp: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,76 +39,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 16:26:02 -0000
-X-Groupsio-MsgNum: 53660
+X-List-Received-Date: Mon, 05 Jan 2015 16:29:20 -0000
+X-Groupsio-MsgNum: 53661
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4oQnj4jcM03NhqPN"
+	protocol="application/pgp-signature"; boundary="82I3+IH0IqGh5yIs"
 Content-Disposition: inline
 
---4oQnj4jcM03NhqPN
+--82I3+IH0IqGh5yIs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 05, 2015 at 09:58:01AM -0500, Robert P. J. Day wrote:
->=20
->   after running across a variable "_prepend" assignment that had no
-> trailing space, i did a quick grep through oe-core and ran across the
-> following, which would all seem to need that trailing space:
->=20
-> $ grep -rn "DEPENDS_prepend.*[^ ]\"$" *
-> meta/classes/qt4e.bbclass:2:DEPENDS_prepend =3D "${QT4EDEPENDS}"
-> meta/classes/cpan_build.bbclass:27:DEPENDS_prepend =3D "${@cpan_build_dep=
-_prepend(d)}"
-> meta/classes/autotools.bbclass:24:DEPENDS_prepend =3D "${@autotools_dep_p=
-repend(d)}"
-> meta/classes/qt4x11.bbclass:2:DEPENDS_prepend =3D "${QT4DEPENDS}"
-> $
+Merged these, with one minor tweak.  I dropped in ${SOURCEFORGE_MIRROR}
+in the SRC_URI here as we've been doing with others.
 
-e.g. QT4EDEPENDS QT4DEPENDS both end with space, so it's not causing any
-problem, but having the trailing space together with prepend is good.
+Thanks Robert.
+-J.
 
-Only exception I can think of is when you really don't want to introduce
-extra space when the variable used in prepend/append is set to empty,
-but that's not an issue for DEPENDS (but important e.x. for tune .inc files)
+[[oe] [meta-networking] [PATCH 1/2 V2] esmtp: use BPN in SRC_URI] On 14.12.=
+30 (Tue 00:40) Robert Yang wrote:
 
-> and
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  meta-networking/recipes-support/esmtp/esmtp_1.2.bb |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> $ grep -rn "SRC_URI_prepend.*[^ ]\"$" *
-> meta/recipes-devtools/qemu/qemu_git.bb:10:SRC_URI_prepend =3D "git://git.=
-qemu.org/qemu.git"
-> meta/recipes-devtools/qemu/qemu_2.2.0.bb:10:SRC_URI_prepend =3D "http://w=
-iki.qemu-project.org/download/${BP}.tar.bz2"
-> $
+> diff --git a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb b/meta-ne=
+tworking/recipes-support/esmtp/esmtp_1.2.bb
+> index 46d468c..60d34e1 100644
+> --- a/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+> +++ b/meta-networking/recipes-support/esmtp/esmtp_1.2.bb
+> @@ -11,7 +11,7 @@ DEPENDS =3D "libesmtp"
+>  LICENSE =3D "GPL-2.0"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317=
+bb3"
+> =20
+> -SRC_URI =3D "http://nchc.dl.sourceforge.net/project/${PN}/${PN}/${PV}/${=
+PN}-${PV}.tar.bz2"
+> +SRC_URI =3D "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/=
+${BPN}-${PV}.tar.bz2"
+> =20
+>  # Have to set this or we get -L/lib in LDFLAGS
+>  EXTRA_OECONF =3D "--with-libesmtp=3D${STAGING_EXECPREFIXDIR}"
+> --=20
+> 1.7.9.5
 >=20
->   there may be more, i just left it at that, not sure if there's
-> something magic about those examples or whether they really should
-> have the space added, so i'll leave it with someone else to tweak.
->=20
-> rday
->=20
-> p.s. is there any difference between appending or prepending to the
-> list of build-time dependencies in "DEPENDS"? most extensions to
-> "DEPENDS" i've seen use "_append", but occasionally, i see "_prepend".
-> does it matter?
-
-I don't think so, the order of DEPENDS is irrelevant.
-
-This e-mail belongs more into oe-core ML.
-
 --=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-Joe MacDonald.
+:wq
 
---4oQnj4jcM03NhqPN
+--82I3+IH0IqGh5yIs
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iEYEARECAAYFAlSquxQACgkQN1Ujt2V2gBzWMwCgkCJjz68xJpXww56IxItoDOx/
-Tj0AoJzdlGdxAbrKOCLalkWr3pkOa81j
-=lTDU
+iQEcBAEBAgAGBQJUqrvWAAoJEEn8ffcsOfaWRbcIAK4E3PnHxRvqxLDQo46EqFuL
+J7MECxdIrWAg/olmjMs8TiQbAzh0Cmoh9LRRg9P+cFDXytQe0ATahJ9FvFBk73vW
+Mml61NDb/iIH7vfJEMzenGU8TMsUjfpg9kuf19djwLyesOpJKH9qINrDXVge4UT8
+lmfMxkP0HaKZRXMrmI2VKcQjLyKfntl1t6OqnpuFgISH3n//w/otV1pFju/E2ycW
+/PwMyhKjk+949sUOPtHLsDtddc9pArGlRmLyJ9p1IhbL8q8oyjKW2T5n+qa7y1Vo
+q/62j0+5mnod1kxpapzDdH7E5xZ07PkzxjkXNEZGIUx30ea2Uxr2obKHl3rVkAY=
+=02s0
 -----END PGP SIGNATURE-----
 
---4oQnj4jcM03NhqPN--
+--82I3+IH0IqGh5yIs--
