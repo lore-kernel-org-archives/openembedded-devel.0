@@ -1,41 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 291BD724F4
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id AB00871F59
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 09:00:51 +0000 (UTC)
-Received: by mail-we0-f171.google.com with SMTP id u56so7524091wes.2
+	Mon,  5 Jan 2015 09:02:48 +0000 (UTC)
+Received: by mail-we0-f172.google.com with SMTP id k11so7520271wes.31
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jan 2015 01:00:52 -0800 (PST)
+	Mon, 05 Jan 2015 01:02:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=PYUWJgq6megF4HvmEZFdLxNyduoiP4hgOgrK2rZOsgg=;
-	b=ZMfsgum+yuJENCqmokDW55P/aYuqE/JsHE6IB3jBb6WCl4HwS64Q9M38tYwUnqY/Lk
-	m/vTtSEAtLB3FX4K3JSVAXtvrfl68tgkOAjj6vCbGDvYAsQT4zxjrBPOIL9D9L8Hdz70
-	cABcYTUzBhmQyI6tXNr9CxxlNLEkTCE1X7FA6Xwgyt62MGu0HCUdP+rPgEj6Sya07Qsc
-	hmxrqCnwB7w336cwvmOmqYHXtUFMumJdR9vOKGUgL12BwiUw9pHusu4Vidg6yNW3Gvh3
-	X3VqR4tcM6nDMVnWptZRHml24fVuWETplUNFEYs/RZ5C3+i+DbLmNkw7qyokA1Xhq7pJ
-	orUQ==
-X-Received: by 10.194.242.196 with SMTP id ws4mr180737222wjc.1.1420448451941; 
-	Mon, 05 Jan 2015 01:00:51 -0800 (PST)
+	bh=An1edgERcaYS0oDPZOI5GNhEANwzj34ls8tgpE7sOwQ=;
+	b=rPbp3wUJcvDms4ccXp7vX2Zff+qd/Ne/kRrjLRNlVnk8TcUxu91MkjsRlWz4UUJm/j
+	Gua3Tb6k9CKtZqYPGEo7JTRWgKBduk1mNyWbXU5fE0j4YehlNAhXz4gHKm9hAk0Ey7cW
+	6JDJGBN2xK+r/gh1dmReXiobMpXuV4MsW5I4d2Jr0E4HecpmaGZpC/YzeQedIyjsFfPO
+	VIN6rJzUA5fSdnXQ4abuBvPFHA/M9E4QQiV4BgYJ/VteLC6pT7/Utv6CFyzrVMUP6v7w
+	gHMgRSQ3bPGrsFCx39I20t+SC0Y4ysUKcxuV6jNE4a7MBuVuW7W4sCpslkXqaqEs+Kyk
+	dwJg==
+X-Received: by 10.180.98.162 with SMTP id ej2mr23483249wib.39.1420448568794;
+	Mon, 05 Jan 2015 01:02:48 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	s9sm9057040wiz.12.2015.01.05.01.00.51
+	u18sm74527875wjq.42.2015.01.05.01.02.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Jan 2015 01:00:51 -0800 (PST)
+	Mon, 05 Jan 2015 01:02:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 5 Jan 2015 10:00:52 +0100
+Date: Mon, 5 Jan 2015 10:02:48 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150105090052.GC2484@jama>
+Message-ID: <20150105090248.GD2484@jama>
 References: <1420442394-39127-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<1420442394-39127-3-git-send-email-leimaohui@cn.fujitsu.com>
+	<1420442394-39127-4-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1420442394-39127-3-git-send-email-leimaohui@cn.fujitsu.com>
+In-Reply-To: <1420442394-39127-4-git-send-email-leimaohui@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 2/3] corosync_2.3.4: add new recipe
+Subject: Re: [meta-oe][PATCH 3/3] dlm: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,117 +49,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 09:00:57 -0000
-X-Groupsio-MsgNum: 53612
+X-List-Received-Date: Mon, 05 Jan 2015 09:02:50 -0000
+X-Groupsio-MsgNum: 53613
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0IvGJv3f9h+YhkrH"
+	protocol="application/pgp-signature"; boundary="jTMWTj4UTAEmbWeb"
 Content-Disposition: inline
 
---0IvGJv3f9h+YhkrH
+--jTMWTj4UTAEmbWeb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 05, 2015 at 03:19:53PM +0800, leimaohui wrote:
+On Mon, Jan 05, 2015 at 03:19:54PM +0800, leimaohui wrote:
 > From: leimh <leimaohui@cn.fujitsu.com>
 >=20
-> The Corosync Cluster Engine and Application Programming Interfaces
+> The kernel dlm requires a user daemon to control membership.
 >=20
 > Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
 > ---
->  .../recipes-extended/corosync/corosync_2.3.4.bb    | 59 ++++++++++++++++=
+>  meta-oe/recipes-extended/dlm/dlm_4.0.2.bb | 47 +++++++++++++++++++++++++=
 ++++++
->  1 file changed, 59 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
+>  1 file changed, 47 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/corosync/corosync_2.3.4.bb b/meta-o=
-e/recipes-extended/corosync/corosync_2.3.4.bb
+> diff --git a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb b/meta-oe/recipes-=
+extended/dlm/dlm_4.0.2.bb
 > new file mode 100644
-> index 0000000..7a09862
+> index 0000000..b46c357
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
-> @@ -0,0 +1,59 @@
-> +SUMMARY =3D "The Corosync Cluster Engine and Application Programming Int=
-erfaces"
-> +DESCRIPTION =3D "This package contains the Corosync Cluster Engine Execu=
-tive, several default \
-> +APIs and libraries, default configuration files, and an init script."
-> +HOMEPAGE =3D "http://corosync.github.io/corosync/"
+> +++ b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> @@ -0,0 +1,47 @@
+> +DESCRIPTION =3D "dlm control daemon and tool"
 > +
-> +SECTION =3D "base"
+> +SECTION =3D "utils"
+> +HOMEPAGE =3D "https://fedorahosted.org/cluster/wiki/HomePage"
 > +
-> +inherit autotools pkgconfig systemd
-> +
-> +SRC_URI =3D "http://build.clusterlabs.org/corosync/releases/${BPN}-${PV}=
-=2Etar.gz \
-> +	   "
+> +SRC_URI =3D "https://git.fedorahosted.org/cgit/dlm.git/snapshot/dlm-${PV=
+}.tar.xz"
 
-${BPN}-${PV} -> ${BP}
+dlm-${PV} -> ${BP} but more importantly is dlm.git/snapshots "stable"?
+Doesn't it re-generated sometimes ?
+> +
+> +SRC_URI[md5sum] =3D "efc2ee6093aa6aa0a88aaad83e998a3f"
+> +SRC_URI[sha256sum] =3D "b89bc557aaffbab0ac005398025f247718a5589cff6574d9=
+02eaffe2b20e683e"
+> +
+> +LICENSE =3D "LGPLv2+&GPLv2&GPLv2+"
 
+Add spaces around &
+
+> +LIC_FILES_CHKSUM =3D "file://README.license;md5=3D8f0bbcdd678df1bce98634=
+92b6c8832d"
 > +
-> +SRC_URI[md5sum] =3D "4b0f36a1dc014527e5b192265dbd7e70"
-> +SRC_URI[sha256sum] =3D "3dae93fb1cf5c560295253b0560cbc25421ed053ee373852=
-864f3a60c03247d4"
+> +DEPENDS =3D "corosync systemd"
 > +
-> +LICENSE =3D "BSD"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da85eb4ce24033adb6088dd1d6ffc5=
-e5d"
+> +inherit pkgconfig systemd
 > +
-> +DEPENDS =3D "groff-native nss libqb"
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "corosync.service corosync-notifyd.service"
+> +SYSTEMD_SERVICE_${PN} =3D "dlm.service"
 > +SYSTEMD_AUTO_ENABLE =3D "enable"
 > +
-> +INITSCRIPT_NAME =3D "corosync-daemon"
+> +export EXTRA_OEMAKE =3D ""
 > +
-> +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', =
-'systemd', '', d)}"
-> +
-> +PACKAGECONFIG[systemd] =3D "--enable-systemd --with-systemddir=3D${syste=
-md_unitdir}/system/,--with-systemddir=3D"
-> +
-> +EXTRA_OECONF =3D "--disable-nss \
-> +                --with-upstartdir=3D%{_sysconfdir}/init \
-> +"
-> +EXTRA_OECONF +=3D " --enable-nss "
-> +
-> +do_configure_prepend() {
-> +    ( cd ${S}
-> +    ${S}/autogen.sh )
+> +do_compile_prepend() {
+> +    sed -i "s/libsystemd-daemon/libsystemd/g" ${S}/dlm_controld/Makefile
 > +}
 > +
-> +do_install_append() {
-> +        install -d ${D}${sysconfdir}/sysconfig/
-> +	install -d ${D}/${sysconfdir}/init.d
-> +	install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/=
-sysconfig/corosync
-> +	install -m 0644 ${S}/init/corosync-notifyd.conf.in ${D}${sysconfdir}/sy=
-sconfig/corosync-notifyd.conf
-> +	install -m 0644 ${S}/init/corosync.conf.in ${D}${sysconfdir}/sysconfig/=
-corosync.conf
-> +	install -m 0644 ${S}/init/corosync.in ${D}${sysconfdir}/init.d/corosync
-> +	install -m 0644 ${S}/init/corosync-notifyd.in ${D}${sysconfdir}/init.d/=
-corosync-notifyd
+> +do_compile () {
+> +    oe_runmake 'CC=3D${CC}'
+> +}
 > +
+> +do_install_append (){
+> +	install -d ${D}${sysconfdir}/sysconfig/
+> +	install -d ${D}${sysconfdir}/init.d/
+> +	install -m 0644 ${S}/init/dlm.sysconfig ${D}${sysconfdir}/sysconfig/dlm
+> +	install -m 0644 ${S}/init/dlm.init ${D}${sysconfdir}/init.d/dlm
+> +
+> +	# install systemd unit files
 > +	if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
 > +		install -d ${D}${systemd_unitdir}/system
-> +		install -m 0644 ${S}/init/corosync.service.in ${D}${systemd_unitdir}/s=
-ystem/corosync.service
-> +		install -m 0644 ${S}/init/corosync-notifyd.service.in ${D}${systemd_un=
-itdir}/system/corosync-notifyd.service
-> +		sed -i -e 's,@INITWRAPPERSDIR@,${sysconfdir}/init.d,g' ${D}${systemd_u=
-nitdir}/system/corosync.service
-> +		sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/syst=
-em/corosync-notifyd.service
-> +		sed -i -e 's,@SBINDIR@,${base_sbindir},g' ${D}${systemd_unitdir}/syste=
-m/corosync-notifyd.service
-> +	fi=09
+> +		install -m 0644 ${S}/init/dlm.service ${D}${systemd_unitdir}/system
+> +	fi
 > +}
 
-Use 4 spaces for indentation.
+Use 4 spaces for indentation
 
 > +
-> +FILES_${PN}-dbg +=3D "${libexecdir}/lcrso/.debug"
+> +do_install() {
+> +    oe_runmake install DESTDIR=3D${D} LIBDIR=3D${libdir}
+> +}
+> +
 > --=20
 > 1.8.4.2
 >=20
@@ -172,16 +150,16 @@ Use 4 spaces for indentation.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---0IvGJv3f9h+YhkrH
+--jTMWTj4UTAEmbWeb
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlSqUsQACgkQN1Ujt2V2gBxRqgCfeBBTjM9lGiK60N1w1JT3uEGv
-OVoAoKRvLZCJtIkrrBMyGV8ln6N5wOw3
-=TPzS
+iEYEARECAAYFAlSqUzgACgkQN1Ujt2V2gBzfDgCfVUYAugcscAb4Zx/TqLdVUbxK
+MWcAn0dQJggWSrPMGNdlE38EC4GGJPvZ
+=9ksX
 -----END PGP SIGNATURE-----
 
---0IvGJv3f9h+YhkrH--
+--jTMWTj4UTAEmbWeb--
