@@ -1,36 +1,32 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id AB39C60232
+	by mail.openembedded.org (Postfix) with ESMTP id 7530860167
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 19:22:51 +0000 (UTC)
+	Mon,  5 Jan 2015 20:38:25 +0000 (UTC)
 Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
 	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
 	by relay1.mentorg.com with esmtp 
-	id 1Y8DEp-0001x5-LM from Joe_MacDonald@mentor.com ;
-	Mon, 05 Jan 2015 11:22:51 -0800
+	id 1Y8EPy-0007AP-2O from Joe_MacDonald@mentor.com ;
+	Mon, 05 Jan 2015 12:38:26 -0800
 Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
 	(147.34.96.168) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 5 Jan 2015 11:22:51 -0800
-Received: by burninator (Postfix, from userid 1000)	id 0FC47580AF0; Mon,  5
-	Jan 2015 14:22:47 -0500 (EST)
-Date: Mon, 5 Jan 2015 14:22:47 -0500
+	Mon, 5 Jan 2015 12:38:25 -0800
+Received: by burninator (Postfix, from userid 1000)	id 7E2E6580D10; Mon,  5
+	Jan 2015 15:38:21 -0500 (EST)
+Date: Mon, 5 Jan 2015 15:38:21 -0500
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Robert Yang <liezhi.yang@windriver.com>
-Message-ID: <20150105192246.GA28725@mentor.com>
-References: <1420425561-36741-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<1420425561-36741-2-git-send-email-leimaohui@cn.fujitsu.com>
-	<54A9FFBB.7040609@windriver.com>
-	<1B56A49860EB2D45ADE3731B15C959FDAE1DE0@G08CNEXMBPEKD01.g08.fujitsu.local>
-	<54AA23B3.6010001@windriver.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20150105203821.GB28725@mentor.com>
+References: <1420489338-6024-1-git-send-email-joe_macdonald@mentor.com>
+	<20150105202949.GA19402@jama>
 MIME-Version: 1.0
-In-Reply-To: <54AA23B3.6010001@windriver.com>
+In-Reply-To: <20150105202949.GA19402@jama>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/2] GeoIP: add recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [OE-core] [meta-networking][PATCH v2] openl2tp: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,238 +40,258 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 19:22:57 -0000
-X-Groupsio-MsgNum: 53666
+X-List-Received-Date: Mon, 05 Jan 2015 20:38:30 -0000
+X-Groupsio-MsgNum: 53667
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qMm9M+Fa2AknHoGS"
+	protocol="application/pgp-signature"; boundary="/NkBOFFp2J2Af1nK"
 Content-Disposition: inline
 
---qMm9M+Fa2AknHoGS
+--/NkBOFFp2J2Af1nK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking][PATCH 1/2] GeoIP: add recipe] On 15.01.05 (Mon =
-13:40) Robert Yang wrote:
+[Re: [OE-core] [meta-networking][PATCH v2] openl2tp: add new recipe] On 15.=
+01.05 (Mon 21:29) Martin Jansa wrote:
 
+> On Mon, Jan 05, 2015 at 03:22:18PM -0500, Joe MacDonald wrote:
+> > From: Li xin <lixin.fnst@cn.fujitsu.com>
 >=20
->=20
-> On 01/05/2015 01:36 PM, Lei, Maohui wrote:
-> > Hi Robert
-> >=20
-> >=20
-> >>> +HOMEPAGE =3D "http://dev.maxmind.com/geoip/"
-> >>> +SECTION =3D "Development/Libraries"
-> >>
-> >> I think that this is a fedora like section name? We usually use debian=
- style
-> >> in OE, for example:
-> >>
-> >> SECTION =3D "net"
-> >=20
-> > Thank you, it does make sense. I didn't pay attention to this detail.
-> > But it is hard to find the rule of assignment of " SECTION " variable.
-> > I searched the meta-openembedded, "network" is also be used to be secti=
-on name.
-> > What's the difference between the "net" and the "network"?
->=20
-> I think they are the same, Joe M, who is the maintainer of meta-networkin=
-g may
-> know about it.
+> Wrong ML, belongs to openembedded-devel.
 
-I'm not aware of a stated policy on what format SECTION should follow or
-what options are recommended, actually.  At least in terms of
-meta-networking I've not really questioned anything (as far as I know)
-that looks sensible.
-
-Now that I'm thinking about it, though, I think some sort of structure
-would be good.  So to that end, I won't ask for any changes here, but
-I'll follow up (later on today, I hope) with my proposed changes to the
-meta-networking hierarchy and hopefully get some kind of pattern to
-what's set there.  Right now a raw count shows the Fedora-style
-convention is the most popular by a slim margin.  I'm inclined to go
-with, for example, SECTION =3D "console/network" here, since that conveys
-a reasonable amount of information and looks to be easily parsable and
-more closely matches what's used in, for example, meta-oe/.
+Yep, it does.  Command-line history failure.
 
 -J.
 
 >=20
-> // Robert
+> >=20
+> > OpenL2TP is an open source L2TP client / server, written specifically
+> > for Linux. It has been designed for use as an enterprise L2TP VPN server
+> > or in commercial, Linux-based, embedded networking products and is able
+> > to support hundreds of sessions, each with different configuration.
+> > It is used by several ISPs to provide L2TP services and by corporations
+> > to implement L2TP VPNs.
+> >=20
+> > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> > Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+> > ---
+> >=20
+> > Martin:
+> >=20
+> >    This is basically just a minor clean-up of the earlier openl2tp reci=
+pe.  So
+> >    far I've been unable to reproduce the error reported in the world bu=
+ild.  If
+> >    there's still a log kicking around from that failure, I'd love to ge=
+t a look
+> >    at it, I'm also doing a world build locally to try this out, but it =
+still
+> >    looks like it should be okay now.  If it fails for you again before =
+I get
+> >    some kind of results, can you point me at the log?
+> >=20
+> >    -J.
+> >=20
+> >  ...kefile-modify-CFLAGS-to-aviod-build-error.patch | 106 +++++++++++++=
+++++++++
+> >  .../recipes-protocols/openl2tp/openl2tp_1.8.bb     |  32 +++++++
+> >  2 files changed, 138 insertions(+)
+> >  create mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp=
+/Makefile-modify-CFLAGS-to-aviod-build-error.patch
+> >  create mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp=
+_1.8.bb
+> >=20
+> > diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/Makefi=
+le-modify-CFLAGS-to-aviod-build-error.patch b/meta-networking/recipes-proto=
+cols/openl2tp/openl2tp/Makefile-modify-CFLAGS-to-aviod-build-error.patch
+> > new file mode 100644
+> > index 0000000..96dbc75
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/Makefile-modi=
+fy-CFLAGS-to-aviod-build-error.patch
+> > @@ -0,0 +1,106 @@
+> > +From 152486fa3c36c3b99d17d5b553cf87ef412fae8e Mon Sep 17 00:00:00 2001
+> > +From: Li xin <lixin.fnst@cn.fujitsu.com>
+> > +Date: Mon, 1 Dec 2014 01:53:41 +0900
+> > +Subject: [PATCH] Makefile:modify CFLAGS to aviod build error.
+> > +
+> > +Upstream-Status: pending
+> > +
+> > +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> > +---
+> > + Makefile         | 22 +++++++++++-----------
+> > + plugins/Makefile |  6 +++---
+> > + 2 files changed, 14 insertions(+), 14 deletions(-)
+> > +
+> > +diff --git a/Makefile b/Makefile
+> > +index 4aaa448..baa7882 100644
+> > +--- a/Makefile
+> > ++++ b/Makefile
+> > +@@ -152,10 +152,10 @@ LIBS.dmalloc=3D		-ldmalloc
+> > + export USE_DMALLOC
+> > + endif
+> > +=20
+> > +-CPPFLAGS=3D		$(CPPFLAGS.l2tptest) $(CPPFLAGS-y)
+> > +-CFLAGS=3D			-I. -Iusl -Icli -isystem include \
+> > +-				-MMD -Wall -Werror -Wno-strict-aliasing \
+> > +-				$(CPPFLAGS) $(CPPFLAGS.dmalloc) \
+> > ++ADD_CPPFLAGS=3D		$(CPPFLAGS.l2tptest) $(CPPFLAGS-y)
+> > ++ADD_CFLAGS=3D			-I. -Iusl -Icli -isystem include \
+> > ++				-MMD -Wall -Wno-strict-aliasing \
+> > ++				$(ADD_CPPFLAGS) $(CPPFLAGS.dmalloc) \
+> > + 				-DSYS_LIBDIR=3D$(SYS_LIBDIR)
+> > + LDFLAGS.l2tpd=3D		-Wl,-E -L. -Lusl -lusl -ldl $(LIBS.dmalloc) -lc
+> > + LDFLAGS.l2tpconfig=3D	-Lcli -lcli -lreadline $(LIBS.dmalloc) $(READLI=
+NE_LDFLAGS) -lc
+> > +@@ -170,10 +170,10 @@ CFLAGS.optimize=3D	$(OPT_CFLAGS)
+> > + endif
+> > + export CFLAGS.optimize
+> > +=20
+> > +-CFLAGS+=3D		$(CFLAGS.optimize)
+> > ++ADD_CFLAGS+=3D		$(CFLAGS.optimize)
+> > +=20
+> > + ifeq ($(L2TP_USE_ASYNC_RPC),y)
+> > +-CPPFLAGS+=3D		-DL2TP_ASYNC_RPC
+> > ++ADD_CPPFLAGS+=3D		-DL2TP_ASYNC_RPC
+> > + endif
+> > +=20
+> > + ifeq ($(L2TP_FEATURE_RPC_MANAGEMENT),y)
+> > +@@ -220,13 +220,13 @@ endif
+> > +=20
+> > + # Compile without -Wall because rpcgen-generated code is full of warn=
+ings.
+> > + %_xdr.o:		%_xdr.c
+> > +-			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(CPPFLAGS) $<
+> > ++			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(ADD_CPPFLAGS) $<
+> > +=20
+> > + %_client.o:		%_client.c
+> > +-			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(CPPFLAGS) $<
+> > ++			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(ADD_CPPFLAGS) $<
+> > +=20
+> > + %_server.o:		%_server.c
+> > +-			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(CPPFLAGS) $<
+> > ++			$(CC) -I. -MMD -w $(CFLAGS.optimize) -c $(ADD_CPPFLAGS) $<
+> > +=20
+> > + %_xdr.c:		%.x
+> > + 			-$(RM) $@
+> > +@@ -272,7 +272,7 @@ l2tpconfig:		$(L2TPCONFIG_SRCS.o)
+> > + 			$(CC) -o $@ $^ $(LDFLAGS.l2tpconfig)
+> > +=20
+> > + %.o:	%.c
+> > +-			$(CC) -c $(CFLAGS) $< -o $@
+> > ++			$(CC) -c $(CFLAGS) $(ADD_CFLAGS) $< -o $@
+> > +=20
+> > + l2tp_options.h:	FORCE
+> > + 	@rm -f $@.tmp
+> > +@@ -325,7 +325,7 @@ install:		install-all
+> > + install-all:		all install-daemon install-app
+> > +=20
+> > + install-daemon:
+> > +-			@for d in $(filter-out usl,$(SUBDIRS)); do $(MAKE) -C $$d $(MFLAGS=
+) EXTRA_CFLAGS=3D"$(CPPFLAGS)" install; if [ $$? -ne 0 ]; then exit 1; fi; =
+done
+> > ++			@for d in $(filter-out usl,$(SUBDIRS)); do $(MAKE) -C $$d $(MFLAGS=
+) EXTRA_CFLAGS=3D"$(CPPFLAGS) $(ADD_CPPFLAGS)" install; if [ $$? -ne 0 ]; t=
+hen exit 1; fi; done
+> > + 			$(INSTALL) -d $(DESTDIR)/usr/sbin
+> > + 			$(INSTALL) openl2tpd $(DESTDIR)/usr/sbin
+> > +=20
+> > +diff --git a/plugins/Makefile b/plugins/Makefile
+> > +index 5be996d..6810236 100644
+> > +--- a/plugins/Makefile
+> > ++++ b/plugins/Makefile
+> > +@@ -1,7 +1,7 @@
+> > +-CFLAGS	:=3D $(CFLAGS.optimize) -MMD -Wall \
+> > ++ADD_CFLAGS	:=3D $(CFLAGS.optimize) -MMD -Wall \
+> > + 	-isystem ../include \
+> > + 	-I. -I.. -I../usl -fPIC $(EXTRA_CFLAGS)
+> > +-LDFLAGS	:=3D -shared
+> > ++ADD_LDFLAGS	:=3D -shared
+> > +=20
+> > + PLUGINS.c:=3D	ppp_unix.c ppp_null.c ipsec.c event_sock.c
+> > +=20
+> > +@@ -21,7 +21,7 @@ clean:
+> > + 		$(RM) $(PLUGINS.so) $(wildcard *.o) $(wildcard *.d) $(SRC.generated)
+> > +=20
+> > + %.so: %.c
+> > +-		$(CC) -o $@ $(LDFLAGS) $(CFLAGS) $<
+> > ++		$(CC) -o $@ $(LDFLAGS) $(ADD_LDFLAGS) $(CFLAGS) $(ADD_CFLAGS) $<
+> > +=20
+> > + install:	all
+> > + 		$(INSTALL) -d $(DESTDIR)$(SYS_LIBDIR)/openl2tp
+> > +--=20
+> > +1.8.4.2
+> > +
+> > diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb=
+ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+> > new file mode 100644
+> > index 0000000..77f19ed
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+> > @@ -0,0 +1,32 @@
+> > +SUMMARY =3D "An L2TP client/server, designed for VPN use."
+> > +DESCRIPTION =3D "OpenL2TP is an open source L2TP client / server, writ=
+ten \
+> > +specifically for Linux. It has been designed for use as an enterprise \
+> > +L2TP VPN server or in commercial, Linux-based, embedded networking \
+> > +products and is able to support hundreds of sessions, each with \
+> > +different configuration. It is used by several ISPs to provide \
+> > +L2TP services and by corporations to implement L2TP VPNs."
+> > +HOMEPAGE =3D "http://www.openl2tp.org/"
+> > +SECTION =3D "console/network"
+> > +LICENSE =3D "GPL-2.0"
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De9d9259cbbf00945adc25a470c1=
+d3585"
+> > +DEPENDS =3D "popt flex readline"
+> > +
+> > +SRC_URI =3D "http://ftp.jaist.ac.jp/pub/sourceforge/o/op/${PN}/${PN}/$=
+{PV}/${BP}.tar.gz \
+> > +           file://Makefile-modify-CFLAGS-to-aviod-build-error.patch"
+> > +SRC_URI[md5sum] =3D "e3d08dedfb9e6a9a1e24f6766f6dadd0"
+> > +SRC_URI[sha256sum] =3D "1c97704d4b963a87fbc0e741668d4530933991515ae9ab=
+0dffd11b5444f4860f"
+> > +
+> > +inherit autotools-brokensep pkgconfig
+> > +EXTRA_OEMAKE =3D 'CFLAGS=3D"${CFLAGS} -Wno-nused-but-set-variable"'
+> > +
+> > +do_compile_prepend() {
+> > +    sed -i -e "s:SYS_LIBDIR=3D.*:SYS_LIBDIR=3D${libdir}:g" \
+> > +        -e 's:$(CROSS_COMPILE)as:${AS}:g' \
+> > +        -e 's:$(CROSS_COMPILE)ld:${LD}:g' \
+> > +        -e 's:$(CROSS_COMPILE)gcc:${CC}:g' \
+> > +        -e 's:$(CROSS_COMPILE)ar:${AR}:g' \
+> > +        -e 's:$(CROSS_COMPILE)nm:${NM}:g' \
+> > +        -e 's:$(CROSS_COMPILE)strip:${STRIP}:g' \
+> > +        -e 's:$(CROSS_COMPILE)install:install:g' \
+> > +        ${S}/Makefile
+> > +}
+> > --=20
+> > 1.9.1
+> >=20
+> > --=20
+> > _______________________________________________
+> > Openembedded-core mailing list
+> > Openembedded-core@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
 >=20
-> >=20
-> > [meta-openembedded]$ grep "SECTION " ./ -r | grep bb
-> > ...
-> > ./meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb:SECTI=
-ON =3D "net"
-> > ...
-> > ./meta-networking/recipes-daemons/squid/squid_3.4.7.bb:SECTION =3D "net=
-work"
-> > ...
-> > [meta-openembedded]$
-> >=20
-> >>
-> >> The similar to geoipupdate.
-> >=20
-> >=20
-> > Lei
-> >=20
-> >=20
-> >=20
-> >> -----Original Message-----
-> >> From: openembedded-devel-bounces@lists.openembedded.org
-> >> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> >> Robert Yang
-> >> Sent: Monday, January 05, 2015 11:07 AM
-> >> To: openembedded-devel@lists.openembedded.org
-> >> Subject: Re: [oe] [meta-networking][PATCH 1/2] GeoIP: add recipe
-> >>
-> >>
-> >>
-> >> On 01/05/2015 10:39 AM, leimaohui wrote:
-> >>> From: leimh <leimaohui@cn.fujitsu.com>
-> >>>
-> >>> GeoIP app allow you to look up information about a given IP address.
-> >>>
-> >>> Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
-> >>> ---
-> >>>    .../recipes-support/geoip/geoip_1.6.0.bb           | 58
-> >> ++++++++++++++++++++++
-> >>>    1 file changed, 58 insertions(+)
-> >>>    create mode 100644
-> >>> meta-networking/recipes-support/geoip/geoip_1.6.0.bb
-> >>>
-> >>> diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.0.bb
-> >>> b/meta-networking/recipes-support/geoip/geoip_1.6.0.bb
-> >>> new file mode 100644
-> >>> index 0000000..d1bdae9
-> >>> --- /dev/null
-> >>> +++ b/meta-networking/recipes-support/geoip/geoip_1.6.0.bb
-> >>> @@ -0,0 +1,58 @@
-> >>> +SUMMARY =3D "C library for country/city/organization to IP address o=
-r hostname
-> >> mapping"
-> >>> +DESCRIPTION =3D "GeoIP is a C library that enables the user to find =
-the
-> >>> +country that any IP\ address or hostname originates from. It uses a
-> >>> +file based database that is\ accurate as of March 2003. This database
-> >>> +simply contains IP blocks as keys, and\ countries as values. This
-> >>> +database should be more complete and accurate than\ using reverse DNS
-> >> lookups."
-> >>> +
-> >>> +HOMEPAGE =3D "http://dev.maxmind.com/geoip/"
-> >>> +SECTION =3D "Development/Libraries"
-> >>
-> >> I think that this is a fedora like section name? We usually use debian=
- style
-> >> in OE, for example:
-> >>
-> >> SECTION =3D "net"
-> >>
-> >> The similar to geoipupdate.
-> >>
-> >> // Robert
-> >>
-> >>> +
-> >>> +SRC_URI =3D
-> >> "http://www.maxmind.com/download/geoip/api/c/GeoIP-1.6.0.tar.gz;name=
-=3Dtarba
-> >> ll \
-> >>> +
-> >> http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoI=
-P.da
-> >> t.gz;apply=3Dno;name=3DGeoIP-dat \
-> >>> +
-> >> http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz;appl=
-y=3Dno
-> >> ;name=3DGeoIPv6-dat \
-> >>> +
-> >> http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz;=
-appl
-> >> y=3Dno;name=3DGeoLiteCity-dat \
-> >>> +
-> >>>
-> >> +http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta=
-/Geo
-> >> LiteCityv6.dat.gz;apply=3Dno;name=3DGeoLiteCityv6-dat \ "
-> >>> +
-> >>> +SRC_URI[tarball.md5sum] =3D "89f4cdfdab43f1d67364cd7c85bbe8ca"
-> >>> +SRC_URI[tarball.sha256sum] =3D
-> >> "075a0c2815cd099e9ec35c9569db716a3fefcdbb6a10dbfa1ce7c6cd48d4a635"
-> >>> +
-> >>> +SRC_URI[GeoIP-dat.md5sum] =3D "53416cd33e556a8048ac522fc9a98e05"
-> >>> +SRC_URI[GeoIP-dat.sha256sum] =3D
-> >> "a423a0c87bf9a78ef8d68153b424987c6bbddec85b5f784ca747706f4df10361"
-> >>> +
-> >>> +SRC_URI[GeoIPv6-dat.md5sum] =3D "f1a4abf4015c0300267f4717c9d7ead2"
-> >>> +SRC_URI[GeoIPv6-dat.sha256sum] =3D
-> >> "1a8e61732e39ac9d9acc20d648b2530d7bd0ff1c250f51fd18148931fbfe2830"
-> >>> +
-> >>> +SRC_URI[GeoLiteCity-dat.md5sum] =3D "48af3b8a204d7c5f8e42a4f5f4dd187=
-4"
-> >>> +SRC_URI[GeoLiteCity-dat.sha256sum] =3D
-> >> "2f3f62f171c333cdd4e68534585e51978cb3a12dc7b269786f50daf10071d7d6"
-> >>> +
-> >>> +SRC_URI[GeoLiteCityv6-dat.md5sum] =3D "a42504adfd8030c3a10f749191598=
-b4a"
-> >>> +SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D
-> >> "4a5eeaa4a9107e6ccdbe94ad1c7c987dc70cd250cd40624ada1e3a03836bbbdb"
-> >>> +
-> >>> +
-> >>> +LICENSE =3D "LGPL-2.1"
-> >>> +
-> >>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd5d53d6b948c064f407018318=
-0a4fa89 \
-> >>> +                    file://LICENSE;md5=3Df04db71812ba70aaba8b38da919=
-84cd2
-> >> "
-> >>> +
-> >>> +S =3D "${WORKDIR}/GeoIP-1.6.0"
-> >>> +
-> >>> +inherit autotools
-> >>> +
-> >>> +EXTRA_OECONF =3D "--disable-static               \
-> >>> +                --disable-dependency-tracking  "
-> >>> +
-> >>> +do_install() {
-> >>> +    make DESTDIR=3D${D} install
-> >>> +    install -d ${D}/${datadir}/GeoIP
-> >>> +    install ${WORKDIR}/GeoIP.dat ${D}/${datadir}/GeoIP/
-> >>> +    install ${WORKDIR}/GeoIPv6.dat ${D}/${datadir}/GeoIP/
-> >>> +    install ${WORKDIR}/GeoLiteCity.dat ${D}/${datadir}/GeoIP/
-> >>> +    install ${WORKDIR}/GeoLiteCityv6.dat ${D}/${datadir}/GeoIP/ }
-> >>> +
-> >>> +PACKAGES =3D+ "${PN}-database"
-> >>> +FILES_${PN}-database =3D ""
-> >>> +FILES_${PN}-database +=3D "${datadir}/GeoIP/*"
-> >>> +
-> >>>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
-> >=20
-
 --=20
 -Joe MacDonald.
 :wq
 
---qMm9M+Fa2AknHoGS
+--/NkBOFFp2J2Af1nK
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJUquSGAAoJEEn8ffcsOfaWCkUIAK6IennfjDuHq5jQ70+Y+2BT
-fPV2k4mkex7fJGHrsVGHLD61Z1f3QCPKoJmcf8G6lmcuNqsotr1S3y9KayLTSml8
-IVxIcagG5GkvOf+s0Pyr3T/AY7Zo5nSIFhLdS8E3z5pYSBYVO8cYKrSIj16jx5Jg
-T3aGaN9272grwqGSiu+xMqDoKsfdmWdng+BThNYQCBmOaTHz/0lKELFxjdfVNW+x
-UKXX8ZxcOnygytFHw9fKaCPm+j1nOCfktn2/0yHh7GMBWeQY+fVyevatKi7zQMao
-V/BkSW1QNS0WfHoIQm+LldeZBSxcoBUZ8DRkEL0z/SKvkoMxqPHtUm2aXHYLD5Q=
-=TQ9Q
+iQEcBAEBAgAGBQJUqvY9AAoJEEn8ffcsOfaWluQH/RRaD0fo6Wbom2ce/pY3SqRU
+PoKvzMTjZDmZhs3EtTAtdx3tM+IorC8XMKoBFVKZA2y7P3y+L5CvzsDt9LzeXBSJ
+2/Pv9QCar9/eLyZBj52q8KhwchwHljMTW21CM4f0E3bjhEboGv3zj036z8AfHUha
+D6VqinYQpdLW2sEegdaXVCBmm9+AlanB4a+3P/IbNsddWkwMeJjPZEFIznRuySfV
+C5HKTXkEPBcb6ZGf9c/i1MZp6U1Rz8pz6EWomVAOL6wqpRzIMQLA9xQHPZseBlye
+X8oCirprp9gVIX8+flIc0/wUh2XoRrBsW3n/pFLrhmcHnkRmtG7kQExAi2aLUJM=
+=gwcy
 -----END PGP SIGNATURE-----
 
---qMm9M+Fa2AknHoGS--
+--/NkBOFFp2J2Af1nK--
