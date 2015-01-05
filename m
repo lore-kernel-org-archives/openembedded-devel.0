@@ -1,25 +1,39 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FBE3723D8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BB1360167
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 11:01:32 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 05 Jan 2015 03:01:11 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646381150"
-Received: from kregan-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
-	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 03:01:10 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Mon,  5 Jan 2015 11:59:08 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id k14so27622693wgh.29
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Jan 2015 03:59:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=7/ZLsza6qaX1NR/7peBwprkKcfuRKIV5JtmXwOl3ou8=;
+	b=gA3MisewqNW7U8BoWyFMsXqUERUenCBkHgSYXMVzsj/IRxsCC+h8HO4C7FD04BHdzI
+	BCUxRzXgnljj5gEe6MyecPiuHfOlkM5S8rFQiU2Dhd+HV8QpFtM8jIysnUXhL+C+XK94
+	x8SdoJSSgmtF5UHTDMRij5YekFo+wWCrKfjgGyD5SOPvR7ZoAo7TMEdnG3g4+jM6tZzh
+	I0HG+X/3UAj4/AooN0HnLrPdU8VU429H3QNJytAt9XH02E/ymNYCyUO80FAAliCMsuBQ
+	SwzfeXA6SJ4I+Iz3Li+aG/S6W0px29G5ztFQQGhlnJszsp9b3kWSnfuYMMtoUfByJnBz
+	imAA==
+X-Received: by 10.180.74.212 with SMTP id w20mr25327185wiv.22.1420459148852;
+	Mon, 05 Jan 2015 03:59:08 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	o1sm30402706wjf.41.2015.01.05.03.59.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 05 Jan 2015 03:59:02 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 5 Jan 2015 12:59:03 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Jan 2015 11:00:54 +0000
-Message-Id: <d5f5fbcfca49e7f704c5f26bb7cebf4a91801757.1420455602.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-Subject: [PATCH 10/10] libssh: update to just after 0.6.4
+Message-ID: <20150105115903.GE2484@jama>
+References: <1420425013-19013-1-git-send-email-liezhi.yang@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1420425013-19013-1-git-send-email-liezhi.yang@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe] [V2 PATCH 1/5] dash: use BP in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +47,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 11:01:32 -0000
+X-List-Received-Date: Mon, 05 Jan 2015 11:59:15 -0000
+X-Groupsio-MsgNum: 53646
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mrJd9p1Ce66CJMxE"
+Content-Disposition: inline
 
-Among other things, includes a fix for CVE-2014-8132.
+--mrJd9p1Ce66CJMxE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-(There are a couple of useful-looking fixes after 0.6.4 in the 0.6
-branch, hence I have renamed the recipe to _git and set PV to the
-standard format.)
+Thanks for v2
 
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- meta-oe/recipes-support/libssh/{libssh_0.6.3.bb => libssh_git.bb} | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-support/libssh/{libssh_0.6.3.bb => libssh_git.bb} (90%)
+Please remember to update your old series as superseded when pushing
+newer version, it would help me a lot when sorting the pending patches.
 
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.6.3.bb b/meta-oe/recipes-support/libssh/libssh_git.bb
-similarity index 90%
-rename from meta-oe/recipes-support/libssh/libssh_0.6.3.bb
-rename to meta-oe/recipes-support/libssh/libssh_git.bb
-index 771a47a..d21bdc3 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.6.3.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_git.bb
-@@ -8,9 +8,11 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=388a4fb1dea8ceae0be78ba9b01fc139"
- 
- SRC_URI = "git://git.libssh.org/projects/libssh.git;branch=v0-6"
--SRCREV = "87145387aa12b720b52d6bc75b4dd6cd058c868a"
-+SRCREV = "3880a8ed80a4b1e2c052bd62f328bba2f869d5ae"
- S = "${WORKDIR}/git"
- 
-+PV = "0.6.4+git${SRCPV}"
-+
- EXTRA_OECMAKE = " \
-     -DWITH_GCRYPT=1 \
-     -DWITH_PCAP=1 \
--- 
-1.9.3
+On Sun, Jan 04, 2015 at 06:30:09PM -0800, Robert Yang wrote:
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  meta-oe/recipes-extended/dash/dash_0.5.8.bb |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-extended/dash/dash_0.5.8.bb b/meta-oe/recipe=
+s-extended/dash/dash_0.5.8.bb
+> index c2b5249..4961d7b 100644
+> --- a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+> +++ b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db5262b4a1a1bff=
+72b48e935531976d2e"
+> =20
+>  inherit autotools update-alternatives
+> =20
+> -SRC_URI =3D "http://gondor.apana.org.au/~herbert/dash/files/${PN}-${PV}.=
+tar.gz"
+> +SRC_URI =3D "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.=
+gz"
+>  SRC_URI[md5sum] =3D "5c152209680dab3c319e8923f6c51378"
+>  SRC_URI[sha256sum] =3D "c6db3a237747b02d20382a761397563d813b306c020ae28c=
+e25a1c3915fac60f"
+> =20
+> --=20
+> 1.7.9.5
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--mrJd9p1Ce66CJMxE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlSqfIcACgkQN1Ujt2V2gBxhXACdEQztMmgI4Z8rfHWL1Upg2ROe
+P+sAoISGtsrxu7UuCyIVFMgbIyQZxrs+
+=rWg3
+-----END PGP SIGNATURE-----
+
+--mrJd9p1Ce66CJMxE--
