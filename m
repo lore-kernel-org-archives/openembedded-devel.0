@@ -1,25 +1,25 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BAFC7275B
+	by mail.openembedded.org (Postfix) with ESMTP id 5A39E7275B
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon,  5 Jan 2015 11:01:32 +0000 (UTC)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 05 Jan 2015 03:01:09 -0800
+	by fmsmga102.fm.intel.com with ESMTP; 05 Jan 2015 03:01:10 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646381139"
+X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646381141"
 Received: from kregan-mobl.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
-	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 03:01:08 -0800
+	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 03:01:09 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Jan 2015 11:00:52 +0000
-Message-Id: <3e885d401bb47a7fa5a53b39101bb729da7d522f.1420455602.git.paul.eggleton@linux.intel.com>
+Date: Mon,  5 Jan 2015 11:00:53 +0000
+Message-Id: <e651ee653fc441c06432689de86bdb16f64d61c0.1420455602.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-Subject: [PATCH 08/10] rfkill: update to 0.5
+Subject: [PATCH 09/10] picocom: update to 1.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,46 +35,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 05 Jan 2015 11:01:32 -0000
 
-Also make SUMMARY a bit more useful.
-
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- .../recipes-connectivity/rfkill/{rfkill_0.4.bb => rfkill_0.5.bb}  | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-connectivity/rfkill/{rfkill_0.4.bb => rfkill_0.5.bb} (76%)
+ meta-oe/recipes-support/picocom/{picocom_1.6.bb => picocom_1.7.bb} | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/picocom/{picocom_1.6.bb => picocom_1.7.bb} (67%)
 
-diff --git a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb b/meta-oe/recipes-connectivity/rfkill/rfkill_0.5.bb
-similarity index 76%
-rename from meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-rename to meta-oe/recipes-connectivity/rfkill/rfkill_0.5.bb
-index 3b2943c..3e64476 100644
---- a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
-+++ b/meta-oe/recipes-connectivity/rfkill/rfkill_0.5.bb
-@@ -1,20 +1,20 @@
--SUMMARY = "rfkill CLI utility"
-+SUMMARY = "Radio enable/disable command line utility"
- HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/rfkill"
- SECTION = "base"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c6036d0eb7edbfced28c4160e5d3fa94"
--PR = "r1"
+diff --git a/meta-oe/recipes-support/picocom/picocom_1.6.bb b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+similarity index 67%
+rename from meta-oe/recipes-support/picocom/picocom_1.6.bb
+rename to meta-oe/recipes-support/picocom/picocom_1.7.bb
+index 6b5200c..8141106 100644
+--- a/meta-oe/recipes-support/picocom/picocom_1.6.bb
++++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+@@ -4,7 +4,10 @@ LICENSE = "GPLv2+"
+ HOMEPAGE = "http://code.google.com/p/picocom/"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=393a5ca445f6965873eca0259a17f833"
  
- SRC_URI = "http://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.bz2 \
-            file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch \
-            file://dont.call.git.rev-parse.on.parent.dir.patch"
- 
--SRC_URI[md5sum] = "727892c0fb35c80ee3849fbe89b45350"
--SRC_URI[sha256sum] = "ca10e4827a5f0a36e093aee6ad81b5febf81f8097d7d858889ac51ff364168c1"
-+SRC_URI[md5sum] = "b957713a6cfbcd8ac0e94420aeddcf1a"
-+SRC_URI[sha256sum] = "3e160cca504a53679f2b3254f31c53a4fb38a021bc50fed8eb57a436d33dfa07"
- 
- do_compile() {
-     oe_runmake
- }
+-SRC_URI = "http://picocom.googlecode.com/files/picocom-1.6.tar.gz"
++SRC_URI = "http://picocom.googlecode.com/files/picocom-${PV}.tar.gz"
 +
- do_install() {
-     oe_runmake DESTDIR=${D} install
++SRC_URI[md5sum] = "8eaba1d31407e8408674d6e57af447ef"
++SRC_URI[sha256sum] = "d0f31c8f7a215a76922d30c81a52b9a2348c89e02a84935517002b3bc2c1129e"
+ 
+ CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
+ 
+@@ -13,5 +16,3 @@ do_install () {
+     install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
  }
+ 
+-SRC_URI[md5sum] = "426c3d30b82cbc80b0dafdccd6020c6c"
+-SRC_URI[sha256sum] = "df5774072de805ff06c6b1420dbcc932b1b00e919b49e22a7be14bcad5a0b3a1"
 -- 
 1.9.3
 
