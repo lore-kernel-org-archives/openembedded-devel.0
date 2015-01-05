@@ -1,25 +1,25 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id D0046725DC
+	by mail.openembedded.org (Postfix) with ESMTP id 2BAFC7275B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 11:01:07 +0000 (UTC)
+	Mon,  5 Jan 2015 11:01:32 +0000 (UTC)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 05 Jan 2015 03:01:08 -0800
+	by fmsmga102.fm.intel.com with ESMTP; 05 Jan 2015 03:01:09 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646381134"
+X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646381139"
 Received: from kregan-mobl.ger.corp.intel.com (HELO
 	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
 	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 03:01:08 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Jan 2015 11:00:51 +0000
-Message-Id: <a050b987768b6f8cd40b44aae13716e39b942c96.1420455602.git.paul.eggleton@linux.intel.com>
+Date: Mon,  5 Jan 2015 11:00:52 +0000
+Message-Id: <3e885d401bb47a7fa5a53b39101bb729da7d522f.1420455602.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1420455602.git.paul.eggleton@linux.intel.com>
 References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-Subject: [PATCH 07/10] mariadb: update to 5.5.41
+Subject: [PATCH 08/10] rfkill: update to 0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,97 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 11:01:08 -0000
+X-List-Received-Date: Mon, 05 Jan 2015 11:01:32 -0000
+
+Also make SUMMARY a bit more useful.
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- ...b-native_5.5.40.bb => mariadb-native_5.5.41.bb} |  0
- meta-oe/recipes-support/mysql/mariadb.inc          |  5 +--
- .../mysql/mariadb/revert-fix-for-MDEV-5120.patch   | 46 ----------------------
- .../mysql/{mariadb_5.5.40.bb => mariadb_5.5.41.bb} |  0
- 4 files changed, 2 insertions(+), 49 deletions(-)
- rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.40.bb => mariadb-native_5.5.41.bb} (100%)
- delete mode 100644 meta-oe/recipes-support/mysql/mariadb/revert-fix-for-MDEV-5120.patch
- rename meta-oe/recipes-support/mysql/{mariadb_5.5.40.bb => mariadb_5.5.41.bb} (100%)
+ .../recipes-connectivity/rfkill/{rfkill_0.4.bb => rfkill_0.5.bb}  | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-connectivity/rfkill/{rfkill_0.4.bb => rfkill_0.5.bb} (76%)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.40.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.41.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.40.bb
-rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.41.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index a04288d..cacb0d5 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -11,11 +11,10 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
-            file://my.cnf \
-            file://mysqld.service \
-            file://configure.cmake-fix-valgrind.patch \
--           file://revert-fix-for-MDEV-5120.patch \
-           "
+diff --git a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb b/meta-oe/recipes-connectivity/rfkill/rfkill_0.5.bb
+similarity index 76%
+rename from meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
+rename to meta-oe/recipes-connectivity/rfkill/rfkill_0.5.bb
+index 3b2943c..3e64476 100644
+--- a/meta-oe/recipes-connectivity/rfkill/rfkill_0.4.bb
++++ b/meta-oe/recipes-connectivity/rfkill/rfkill_0.5.bb
+@@ -1,20 +1,20 @@
+-SUMMARY = "rfkill CLI utility"
++SUMMARY = "Radio enable/disable command line utility"
+ HOMEPAGE = "http://linuxwireless.org/en/users/Documentation/rfkill"
+ SECTION = "base"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c6036d0eb7edbfced28c4160e5d3fa94"
+-PR = "r1"
  
--SRC_URI[md5sum] = "561bede89a8bd19c374dad2d8f24fdfe"
--SRC_URI[sha256sum] = "cbde17f4a31483143490def6fcce33310ebae49eafe92dc4ada0e7227202415a"
-+SRC_URI[md5sum] = "d2415efc6a6d73d7a58f3c79bb42f2e8"
-+SRC_URI[sha256sum] = "a16dc62e4bcabecd5c483f2f8b657483a8c51934e7be5ad4ab21b8baea1f5332"
+ SRC_URI = "http://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.bz2 \
+            file://0001-rfkill-makefile-don-t-use-t-the-OE-install-wrapper-d.patch \
+            file://dont.call.git.rev-parse.on.parent.dir.patch"
  
- S = "${WORKDIR}/mariadb-${PV}"
+-SRC_URI[md5sum] = "727892c0fb35c80ee3849fbe89b45350"
+-SRC_URI[sha256sum] = "ca10e4827a5f0a36e093aee6ad81b5febf81f8097d7d858889ac51ff364168c1"
++SRC_URI[md5sum] = "b957713a6cfbcd8ac0e94420aeddcf1a"
++SRC_URI[sha256sum] = "3e160cca504a53679f2b3254f31c53a4fb38a021bc50fed8eb57a436d33dfa07"
  
-diff --git a/meta-oe/recipes-support/mysql/mariadb/revert-fix-for-MDEV-5120.patch b/meta-oe/recipes-support/mysql/mariadb/revert-fix-for-MDEV-5120.patch
-deleted file mode 100644
-index 41493a1..0000000
---- a/meta-oe/recipes-support/mysql/mariadb/revert-fix-for-MDEV-5120.patch
-+++ /dev/null
-@@ -1,46 +0,0 @@
--Revert mariadb commit revno 4300 in branch 5.5 which fixes
--https://mariadb.atlassian.net/browse/MDEV-5120.
--
--------------------------------------------------------------
--revno: 4300
--fixes bug: https://mariadb.atlassian.net/browse/MDEV-5120
--committer: Sergei Golubchik <sergii@pisem.net>
--branch nick: 5.5
--timestamp: Thu 2014-10-02 11:57:40 +0200
--message:
--  MDEV-5120 Test suite test maria-no-logging fails
--  
--  stat structure (from <sys/stat.h>) is conditionally defined
--  to have different layout and size depending on the defined macros.
--  The correct macro is defined in my_config.h, which means it MUST be
--  included first (or, at least before <features.h> - so, practically,
--  before including any system headers).
--------------------------------------------------------------
--
--It causes modphp fails to build. Bug MDEV-5120 is an test suite test
--maria-no-logging fails. There is no side effect to revert it.
--
--Upstream-Status: Backport
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
----- mariadb-5.5.40/config.h.cmake.orig	2014-11-13 14:23:50.868147145 +0800
--+++ mariadb-5.5.40/config.h.cmake	2014-11-13 14:24:23.372148031 +0800
--@@ -641,17 +641,4 @@
-- #cmakedefine SIZEOF_TIME_T @SIZEOF_TIME_T@
-- #cmakedefine TIME_T_UNSIGNED @TIME_T_UNSIGNED@
-- 
---/*
---  stat structure (from <sys/stat.h>) is conditionally defined
---  to have different layout and size depending on the defined macros.
---  The correct macro is defined in my_config.h, which means it MUST be
---  included first (or at least before <features.h> - so, practically,
---  before including any system headers).
---
---  __GLIBC__ is defined in <features.h>
---*/
---#ifdef __GLIBC__
---#error <my_config.h> MUST be included first!
---#endif
---
-- #endif
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.40.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.41.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.40.bb
-rename to meta-oe/recipes-support/mysql/mariadb_5.5.41.bb
+ do_compile() {
+     oe_runmake
+ }
++
+ do_install() {
+     oe_runmake DESTDIR=${D} install
+ }
 -- 
 1.9.3
 
