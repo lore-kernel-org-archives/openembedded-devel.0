@@ -1,36 +1,21 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FE6765CF4
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id B5F9160232
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jan 2015 10:07:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55544307"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Jan 2015 18:03:47 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t05A6dTw016913
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Jan 2015 18:06:39 +0800
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Mon, 5 Jan 2015 18:07:12 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 3/3] dlm: add a new recipe
-Thread-Index: AQHQKLgdzjRnU3XuvUmfTHVrERJBjZywtTQAgACTRfA=
-Date: Mon, 5 Jan 2015 10:07:14 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDAE36F1@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1420442394-39127-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<1420442394-39127-4-git-send-email-leimaohui@cn.fujitsu.com>
-	<20150105090248.GD2484@jama>
-In-Reply-To: <20150105090248.GD2484@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.48]
-MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH 3/3] dlm: add a new recipe
+	Mon,  5 Jan 2015 10:33:33 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 05 Jan 2015 02:33:34 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.07,698,1413270000"; d="scan'208";a="646373603"
+Received: from kregan-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.116])
+	by fmsmga001.fm.intel.com with ESMTP; 05 Jan 2015 02:33:34 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  5 Jan 2015 10:33:13 +0000
+Message-Id: <cover.1420453688.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-oe/meta-webserver][PATCH v2 00/11] Merge modphp into php and upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,130 +29,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jan 2015 10:07:18 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Jan 2015 10:33:37 -0000
 
-Hi Martin
+Finally resolve the overlap between the modphp and php recipes by
+merging the former into the latter. Along the way I fixed a few minor
+issues and upgraded related recipes.
 
-> > +SRC_URI =3D
-> "https://git.fedorahosted.org/cgit/dlm.git/snapshot/dlm-${PV}.tar.xz"
->=20
-> dlm-${PV} -> ${BP} but more importantly is dlm.git/snapshots "stable"?
-> Doesn't it re-generated sometimes ?
+I've taken a stepped approach to doing the php merge / upgrade so it's
+easier to see what's going on and easier for me to test - first upgrade
+php to the same version as modphp, then do the integration, then upgrade
+to the latest 5.5 release. I would appreciate someone testing PHP in CGI
+mode however since I don't have a convenient test setup for that (as I
+do for mod_php).
 
-The download URL comes from https://git.fedorahosted.org/cgit/dlm.git/.
-Besides the latest version, the old versions are also provided by "dlm.git/=
-snapshots".
-Viewed the generated time of the old versions, I think it is "stable" enoug=
-h.
-And you know, dlm comes from fedora, I can't find a better download URL.
-
-
-Cheers
-
-Lei
+Changes since v1:
+* Default mod_php building to disabled since we don't have apache2 in 
+  meta-oe where the php recipe is and meta-oe can't depend on 
+  meta-webserver
+* Drop commented out line in uw-imap pam change
+* Update meta-webserver README as appropriate
 
 
+The following changes since commit 2ea3a19a478c526baa04d6b9a9e8c9f42aae9d34:
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Martin Jansa
-> Sent: Monday, January 05, 2015 5:03 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH 3/3] dlm: add a new recipe
->=20
-> On Mon, Jan 05, 2015 at 03:19:54PM +0800, leimaohui wrote:
-> > From: leimh <leimaohui@cn.fujitsu.com>
-> >
-> > The kernel dlm requires a user daemon to control membership.
-> >
-> > Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
-> > ---
-> >  meta-oe/recipes-extended/dlm/dlm_4.0.2.bb | 47
-> > +++++++++++++++++++++++++++++++
-> >  1 file changed, 47 insertions(+)
-> >  create mode 100644 meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> >
-> > diff --git a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> > b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> > new file mode 100644
-> > index 0000000..b46c357
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> > @@ -0,0 +1,47 @@
-> > +DESCRIPTION =3D "dlm control daemon and tool"
-> > +
-> > +SECTION =3D "utils"
-> > +HOMEPAGE =3D "https://fedorahosted.org/cluster/wiki/HomePage"
-> > +
-> > +SRC_URI =3D
-> "https://git.fedorahosted.org/cgit/dlm.git/snapshot/dlm-${PV}.tar.xz"
->=20
-> dlm-${PV} -> ${BP} but more importantly is dlm.git/snapshots "stable"?
-> Doesn't it re-generated sometimes ?
-> > +
-> > +SRC_URI[md5sum] =3D "efc2ee6093aa6aa0a88aaad83e998a3f"
-> > +SRC_URI[sha256sum] =3D
-> "b89bc557aaffbab0ac005398025f247718a5589cff6574d902eaffe2b20e683e"
-> > +
-> > +LICENSE =3D "LGPLv2+&GPLv2&GPLv2+"
->=20
-> Add spaces around &
->=20
-> > +LIC_FILES_CHKSUM =3D
-> "file://README.license;md5=3D8f0bbcdd678df1bce9863492b6c8832d"
-> > +
-> > +DEPENDS =3D "corosync systemd"
-> > +
-> > +inherit pkgconfig systemd
-> > +
-> > +SYSTEMD_SERVICE_${PN} =3D "dlm.service"
-> > +SYSTEMD_AUTO_ENABLE =3D "enable"
-> > +
-> > +export EXTRA_OEMAKE =3D ""
-> > +
-> > +do_compile_prepend() {
-> > +    sed -i "s/libsystemd-daemon/libsystemd/g"
-> > +${S}/dlm_controld/Makefile }
-> > +
-> > +do_compile () {
-> > +    oe_runmake 'CC=3D${CC}'
-> > +}
-> > +
-> > +do_install_append (){
-> > +	install -d ${D}${sysconfdir}/sysconfig/
-> > +	install -d ${D}${sysconfdir}/init.d/
-> > +	install -m 0644 ${S}/init/dlm.sysconfig
-> ${D}${sysconfdir}/sysconfig/dlm
-> > +	install -m 0644 ${S}/init/dlm.init ${D}${sysconfdir}/init.d/dlm
-> > +
-> > +	# install systemd unit files
-> > +	if
-> ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-> > +		install -d ${D}${systemd_unitdir}/system
-> > +		install -m 0644 ${S}/init/dlm.service
-> ${D}${systemd_unitdir}/system
-> > +	fi
-> > +}
->=20
-> Use 4 spaces for indentation
->=20
-> > +
-> > +do_install() {
-> > +    oe_runmake install DESTDIR=3D${D} LIBDIR=3D${libdir} }
-> > +
-> > --
-> > 1.8.4.2
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  ctapi-common: Add new recipe (2014-12-31 16:38:22 +0100)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/php
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=paule/php
+
+Paul Eggleton (12):
+  php: upgrade to 5.5.15
+  libc-client: rename to uw-imap, upgrade to 2007f
+  php: integrate modphp
+  php: upgrade to 5.5.20
+  modphp: remove
+  README: update for modphp merging into php
+  uw-imap: make libpam dependency dependent on DISTRO_FEATURES
+  php: add PACKAGECONFIG to fix implicit dependency on libpam
+  php: add PACKAGECONFIG for imap
+  xdebug: fix DEPENDS and un-blacklist
+  xdebug: update to 2.2.6
+  phpmyadmin: update to 4.3.4
+
+ .../recipes-devtools/php/php}/70_mod_php5.conf     |   0
+ .../recipes-devtools/php/php}/configure.patch      |   0
+ .../php/php}/pthread-check-threads-m4.patch        |   0
+ meta-oe/recipes-devtools/php/php_5.4.33.bb         | 150 -----------
+ meta-oe/recipes-devtools/php/php_5.5.20.bb         | 234 +++++++++++++++++
+ .../uw-imap/uw-imap/imap-2007e-shared.patch        |  82 ++++++
+ .../uw-imap/imap-2007f-format-security.patch       |  20 ++
+ .../files => uw-imap/uw-imap}/quote_cctype.patch   |   0
+ .../uw-imap_2007f.bb}                              |  23 +-
+ meta-webserver/README                              |  16 +-
+ .../0001-using-pkgconfig-to-check-libxml.patch     |  74 ------
+ .../modphp/files/php-CVE-2014-3587.patch           |  31 ---
+ .../modphp/files/php-CVE-2014-3597.patch           | 282 ---------------------
+ .../modphp/files/php-CVE-2014-5120.patch           |  35 ---
+ meta-webserver/recipes-php/modphp/modphp5.inc      | 112 --------
+ meta-webserver/recipes-php/modphp/modphp_5.5.15.bb |   7 -
+ .../0001-Bug-4544-additional-fix-for-4.2.x.patch   |  29 ---
+ ...ug-4504-security-Self-XSS-in-query-charts.patch |  29 ---
+ ...4505-security-XSS-in-view-operations-page.patch |  43 ----
+ .../{phpmyadmin_4.2.7.bb => phpmyadmin_4.3.4.bb}   |   7 +-
+ .../xdebug/{xdebug_2.2.5.bb => xdebug_2.2.6.bb}    |   8 +-
+ 21 files changed, 372 insertions(+), 810 deletions(-)
+ rename {meta-webserver/recipes-php/modphp/files => meta-oe/recipes-devtools/php/php}/70_mod_php5.conf (100%)
+ rename {meta-webserver/recipes-php/modphp/files => meta-oe/recipes-devtools/php/php}/configure.patch (100%)
+ rename {meta-webserver/recipes-php/modphp/files => meta-oe/recipes-devtools/php/php}/pthread-check-threads-m4.patch (100%)
+ delete mode 100644 meta-oe/recipes-devtools/php/php_5.4.33.bb
+ create mode 100644 meta-oe/recipes-devtools/php/php_5.5.20.bb
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007e-shared.patch
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007f-format-security.patch
+ rename meta-oe/recipes-devtools/{libc-client/files => uw-imap/uw-imap}/quote_cctype.patch (100%)
+ rename meta-oe/recipes-devtools/{libc-client/libc-client_2007e.bb => uw-imap/uw-imap_2007f.bb} (55%)
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/0001-using-pkgconfig-to-check-libxml.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-3587.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-3597.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-2014-5120.patch
+ delete mode 100644 meta-webserver/recipes-php/modphp/modphp5.inc
+ delete mode 100644 meta-webserver/recipes-php/modphp/modphp_5.5.15.bb
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4504-security-Self-XSS-in-query-charts.patch
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.2.7.bb => phpmyadmin_4.3.4.bb} (75%)
+ rename meta-webserver/recipes-php/xdebug/{xdebug_2.2.5.bb => xdebug_2.2.6.bb} (79%)
+
+-- 
+1.9.3
+
 
