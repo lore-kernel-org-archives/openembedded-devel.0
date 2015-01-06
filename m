@@ -1,28 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id DC4E0727B0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 12:00:01 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP; 06 Jan 2015 04:00:02 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="437039519"
-Received: from dmoore26-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.3.68])
-	by FMSMGA003.fm.intel.com with ESMTP; 06 Jan 2015 03:47:38 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 06 Jan 2015 11:59:55 +0000
-Message-ID: <7107163.Fin9r0pktx@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.7-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <20150106112502.GE19402@jama>
-References: <cover.1420455602.git.paul.eggleton@linux.intel.com>
-	<2344737.AuP89X4c5h@peggleto-mobl5.ger.corp.intel.com>
-	<20150106112502.GE19402@jama>
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-la0-f47.google.com (mail-la0-f47.google.com
+	[209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 9862265C75;
+	Tue,  6 Jan 2015 14:08:47 +0000 (UTC)
+Received: by mail-la0-f47.google.com with SMTP id hz20so19423776lab.20;
+	Tue, 06 Jan 2015 06:08:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=na2qxkk9P5VV8SoYFWjDquuPZktpVSw8WkEOK1zzsiI=;
+	b=aV8Mcf66FiFZsjRtl7AGRlWZlaZN4xFlcQkRFOTGJnZ1aH4lO8aKbt4ZIuc9QEjt0g
+	YIbPvYX9vFVBu4YHG3mKi5tEoAE3jH5a8DwRXRU59nCWwNISVYXov6TiVi9X2lnZd7m/
+	Rmoxhy0K1Jcy1/51N6DWFPsjT2CBOUcJttN4YyYmz5R87d8dVBtPnHQCh32ZX+ZcSifc
+	On/NkFvcSBbo2YHYFNsGB/de33i6oYhU5XpaFhxTRGvsR6UOp976BFT7MFwLILzSNPHs
+	oqjv3c/hob6BXJH6D2Zshoj4S079ZQ/xZxHxaXu/4ePHYcHHFG0NjKRkUJvnQKw6+4xA
+	4YDw==
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 03/10] ddrescue: update to 1.19
+X-Received: by 10.112.98.99 with SMTP id eh3mr98562688lbb.32.1420553327902;
+	Tue, 06 Jan 2015 06:08:47 -0800 (PST)
+Received: by 10.112.48.41 with HTTP; Tue, 6 Jan 2015 06:08:47 -0800 (PST)
+In-Reply-To: <CAJTo0Lbp=oNx9nd-LJ-sz1+N1ZSspPoz=7f9EoFdZhCUEVjiQg@mail.gmail.com>
+References: <54AA4536.7030101@topic.nl> <54AA4B86.9040905@topic.nl>
+	<CADkTA4MgqEASmHgGunCkTUR=1qdgxP6dqW90PmgYmZ2HHTUWPg@mail.gmail.com>
+	<54AB8B59.7080702@topic.nl> <20150106085731.GC19402@jama>
+	<20150106110406.GD19402@jama>
+	<CAJTo0Lbp=oNx9nd-LJ-sz1+N1ZSspPoz=7f9EoFdZhCUEVjiQg@mail.gmail.com>
+Date: Tue, 6 Jan 2015 09:08:47 -0500
+Message-ID: <CADkTA4Ns74isgMDWaOnm-P1-TNTAaV9tOEXV3pP2+y_9yUVNmg@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OE-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] What is expected of a kernel recipe nowadays?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,86 +46,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 12:00:06 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 06 Jan 2015 14:08:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tuesday 06 January 2015 12:25:02 Martin Jansa wrote:
-> On Mon, Jan 05, 2015 at 01:31:15PM +0000, Paul Eggleton wrote:
-> > On Monday 05 January 2015 13:35:52 Martin Jansa wrote:
-> > > On Mon, Jan 05, 2015 at 11:00:47AM +0000, Paul Eggleton wrote:
-> > > > * License changed to GPLv2+
-> > > > * Upstream now only releases .lz files for new releases
-> > > 
-> > > Is .lz working correctly now with current bitbake+oe-core (it didn't
-> > > last time I've re-tried)? Shouldn't we wait for base.bbclass change to
-> > > be merged as you mention above do_unpack?
-> > 
-> > Well, it worked for me, but you do need the lzip recipe which we do have
-> > in
-> > meta-oe. We don't necessarily have to wait since even when base.bbclass
-> > has
-> > been updated the line I added won't cause any issues.
-> > 
-> > > Duplicates http://patchwork.openembedded.org/patch/82165/
-> > > can you send incremental patch on top of this if needed?
-> > 
-> > Ah, I missed that. As it happens, the only difference is the
-> > aforementioned depends line.
-> 
-> Rebasing your change on top of Koen's shows bigger diff:
-> 
-> diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
-> b/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb index a605249..dc485b3
-> 100644
-> --- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
-> +++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.19.bb
-> @@ -13,30 +13,9 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
->  SRC_URI[md5sum] = "ed6b5b82d74cbd925db2b829350e74b1"
->  SRC_URI[sha256sum] =
-> "ed8d0c9d9aac80a9110e9cb0d0a91a7390d3bf9f816b67a62ca4eb140f4747b8"
-> 
-> -CONFIGUREOPTS = "\
-> -    '--srcdir=${S}' \
-> -    '--prefix=${prefix}' \
-> -    '--exec-prefix=${exec_prefix}' \
-> -    '--bindir=${bindir}' \
-> -    '--datadir=${datadir}' \
-> -    '--infodir=${infodir}' \
-> -    '--sysconfdir=${sysconfdir}' \
-> -    'CXX=${CXX}' \
-> -    'CPPFLAGS=${CPPFLAGS}' \
-> -    'CXXFLAGS=${CXXFLAGS}' \
-> -    'LDFLAGS=${LDFLAGS}' \
-> -"
-> -EXTRA_OEMAKE = ""
-> +# This isn't already added by base.bbclass
-> +do_unpack[depends] += "lzip-native:do_populate_sysroot"
-> 
-> -do_configure () {
-> -    ${S}/configure ${CONFIGUREOPTS}
-> -}
-> -
-> -do_install () {
-> -    oe_runmake 'DESTDIR=${D}' install
-> -    # Info dir listing isn't interesting at this point so remove it if it
-> exists. -    if [ -e "${D}${infodir}/dir" ]; then
-> -        rm -f ${D}${infodir}/dir
-> -    fi
-> -}
-> +inherit autotools
-> 
-> +EXTRA_OECONF = "'CXX=${CXX}' 'CPPFLAGS=${CPPFLAGS}' 'CXXFLAGS=${CXXFLAGS}'
-> 'LDFLAGS=${LDFLAGS}'"
+On Tue, Jan 6, 2015 at 6:33 AM, Burton, Ross <ross.burton@intel.com> wrote:
+>
+> On 6 January 2015 at 11:04, Martin Jansa <martin.jansa@gmail.com> wrote:
+>>
+>> > | make: *** No rule to make target `oldconfig'.  Stop.
+>> > | ERROR: oe_runmake failed
+>> > | WARNING: exit code 1 from a shell command.
+>> > | ERROR: Function failed: do_configure (log file is located at
+>> > /home/jenkins/workspace/luneos-unstable/webos-ports/tmp-glibc/work/mako-webos-linux-gnueabi/linux-lg-mako/3.4.0+gitrAUTOINC+38bdbfe224-r0/temp/log.do_configure.17498)
+>> > NOTE: recipe linux-lg-mako-3.4.0+gitrAUTOINC+38bdbfe224-r0: task
+>> > do_configure: Failed
+>> > ERROR: Task 491
+>> > (/home/jenkins/workspace/luneos-unstable/webos-ports/meta-smartphone/meta-lg/recipes-kernel/linux/linux-lg-mako_git.bb,
+>> > do_configure) failed with exit code '1'
+>>
+>> This was caused by linux.inc, fixed in:
+>>
+>> http://lists.openembedded.org/pipermail/openembedded-devel/2015-January/099687.html
+>
+>
+> I'm replicating this error with an oe-core kernel, so there's more causes
+> here.
 
-OK, perhaps I wasn't clear - I meant that that was the only addition that my 
-change made that his did not.
+Can you log the replicating steps and point me at the bug ? I can take any fixes
+from there.
 
-Cheers,
-Paul
+Bruce
+
+>
+> Ross
+>
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>
+
+
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
