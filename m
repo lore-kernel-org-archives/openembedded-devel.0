@@ -1,35 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by mail.openembedded.org (Postfix) with ESMTP id DCCEF728C2
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 67975728B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 14:59:12 +0000 (UTC)
-Received: by mail-we0-f181.google.com with SMTP id q58so9808507wes.40
+	Tue,  6 Jan 2015 15:59:29 +0000 (UTC)
+Received: by mail-pa0-f42.google.com with SMTP id et14so31361573pad.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jan 2015 06:59:12 -0800 (PST)
+	Tue, 06 Jan 2015 07:59:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=+VprTo6lAVsv74JBkixo3FMzhOcA3W+tCyqB8sF6AJw=;
-	b=y6HUgD1SyjEorSmKAD1zoPXGoEvXv8zbRntUUE26HM34J5sDjDvsiJY/yZ1yC6Ghkv
-	zUsfqGKjBSnhVoN58HbiPqgn3CJ1nFE+wBI1WNzcizgj6uUq0JonUHb3/29bL2KDSX6s
-	1mz/bhudAyC26EOma7jALi3w/jUbOf4SLMXcS1Vz7eC+yIigSQq+KSjnIhTBmGpkPd/V
-	hOWrrZ1wRDleOapZJRwEGqa7/HwMHbQZeNlVt3RVWSBtSZa7DZ3lDPPfEYBY6Y5rJhic
-	KosOG0uqlwm2GNH9GJN5iqtY4KMvaGC/XYObfVu0+oe4jlO4ErzP6Ch4f7nX+LsmcJfT
-	6JRA==
-X-Received: by 10.180.109.3 with SMTP id ho3mr37729765wib.39.1420556352398;
-	Tue, 06 Jan 2015 06:59:12 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	j10sm70295821wjn.23.2015.01.06.06.59.11
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Jan 2015 06:59:11 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=from:to:subject:date:message-id;
+	bh=NCldjBKoW+204fcZzg7wuQBlKF1yC7W/vkAwCJc+ITo=;
+	b=vjovpnI4khuMU3TN53s0tFlh5gJDt6i9bmi2baYSNXMofol/TAHPc46O0ylCPchFLR
+	x0/GaPo6jrQ28KQjzYaTZIZFrFRj/nM62TpepyuwY0+9BcRUbDyNZjRFBiWF0Ldok6eR
+	zX8RmmLM7T6g1lAy3oLqg7xbRIf/0LnxYvmX7WN8yZo9IZnFVHqx7aLo2e411Em0lUGX
+	KpwolwPqx3qyuHHDs/oG56dHEhA/rwxnFc8odSi7DBOTSt0q1DBMntUp3bO1Zml7ySdX
+	8C5uWXGHS23AeE/l61CdUQx3zf2K9vBMZ39goDFHwHJtMAtyjA5p2NhbDLivweXBIDTU
+	LqGA==
+X-Received: by 10.66.162.105 with SMTP id xz9mr152087826pab.77.1420559970533; 
+	Tue, 06 Jan 2015 07:59:30 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by mx.google.com with ESMTPSA id
+	kr10sm36866390pdb.42.2015.01.06.07.59.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 06 Jan 2015 07:59:29 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Jan 2015 15:59:07 +0100
-Message-Id: <1420556347-17472-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.2.1
-Subject: [meta-qt5][PATCH] qmake5_base: add *.prf to SSTATE_SCAN_FILES
+Date: Tue,  6 Jan 2015 07:59:18 -0800
+Message-Id: <1420559960-8518-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH 0/2] world build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 14:59:16 -0000
+X-List-Received-Date: Tue, 06 Jan 2015 15:59:35 -0000
 
-* e.g. maliit-framework-qt5 is staging sysroot specific paths in
-  sysroot-destdir/usr/lib/qt5/mkspecs/features/maliit-plugins.prf
-  sysroot-destdir/usr/lib/qt5/mkspecs/features/maliit-framework.prf
-  make sure they are replaced with correct ones on sstate reuse
+this should address the RDEPENDS issue found in world build
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- classes/qmake5_base.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Armin Kuster (2):
+  proftpd: fix rdepends  issue
+  netkit-rwho: fix rdepends issue
 
-diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
-index f1a0945..e7b85e3 100644
---- a/classes/qmake5_base.bbclass
-+++ b/classes/qmake5_base.bbclass
-@@ -14,7 +14,7 @@ OE_QMAKE_PLATFORM = "linux-oe-g++"
- OE_QMAKE_DEBUG_OUTPUT ?= ""
- 
- # Paths in .prl files contain SYSROOT value
--SSTATE_SCAN_FILES += "*.pri *.prl"
-+SSTATE_SCAN_FILES += "*.pri *.prl *.prf"
- 
- # drop default -e and add needed OE_QMAKE vars explicitly
- # the problem is that when generated Makefile has:
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb       | 2 +-
+ meta-networking/recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
 -- 
-2.2.1
+1.9.1
 
 
