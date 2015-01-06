@@ -1,36 +1,27 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 063B7601F5
+	by mail.openembedded.org (Postfix) with ESMTP id 2D782727B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 03:58:39 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55589565"
+	Tue,  6 Jan 2015 04:13:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55590091"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 11:55:08 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 12:09:48 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t063w0sb026263
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t064CfnK026893
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Jan 2015 11:58:00 +0800
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Tue, 6 Jan 2015 11:58:38 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 3/3] dlm: add a new recipe
-Thread-Index: AQHQKLgdzjRnU3XuvUmfTHVrERJBjZywtTQAgAHC1hA=
-Date: Tue, 6 Jan 2015 03:58:38 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDAE3B7C@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1420442394-39127-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<1420442394-39127-4-git-send-email-leimaohui@cn.fujitsu.com>
-	<20150105090248.GD2484@jama>
-In-Reply-To: <20150105090248.GD2484@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.48]
+	Tue, 6 Jan 2015 12:12:41 +0800
+Received: from localhost.localdomain (10.167.226.48) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 6 Jan 2015 12:13:14 +0800
+From: leimaohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 6 Jan 2015 12:12:33 +0800
+Message-ID: <1420517556-49274-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH 3/3] dlm: add a new recipe
+X-Originating-IP: [10.167.226.48]
+Subject: []meta-oe][V2 PATCH 0/3] add dlm and it's dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,116 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 03:58:43 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Jan 2015 04:13:18 -0000
+Content-Type: text/plain
 
-Hi Martin
+From: leimh <leimaohui@cn.fujitsu.com>
 
-   I will modify my patches, and then submit V2 patches later.
+Add dlm control daemon and tool because the kernel dlm requires a user daemon to control membership.
+corosync : the dependency of dlm
+libqb: the dependency of corosync
 
+leimh (3):
+  libqb: add new recipe
+  corosync_2.3.4: add new recipe
+  dlm: add a new recipe
 
-Cheers
-Lei
+ .../recipes-extended/corosync/corosync_2.3.4.bb    | 59 ++++++++++++++++++++++
+ meta-oe/recipes-extended/dlm/dlm_4.0.2.bb          | 47 +++++++++++++++++
+ meta-oe/recipes-extended/libqb/libqb_0.17.1.bb     | 26 ++++++++++
+ 3 files changed, 132 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
+ create mode 100644 meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+ create mode 100644 meta-oe/recipes-extended/libqb/libqb_0.17.1.bb
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Martin Jansa
-> Sent: Monday, January 05, 2015 5:03 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-oe][PATCH 3/3] dlm: add a new recipe
->=20
-> On Mon, Jan 05, 2015 at 03:19:54PM +0800, leimaohui wrote:
-> > From: leimh <leimaohui@cn.fujitsu.com>
-> >
-> > The kernel dlm requires a user daemon to control membership.
-> >
-> > Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
-> > ---
-> >  meta-oe/recipes-extended/dlm/dlm_4.0.2.bb | 47
-> > +++++++++++++++++++++++++++++++
-> >  1 file changed, 47 insertions(+)
-> >  create mode 100644 meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> >
-> > diff --git a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> > b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> > new file mode 100644
-> > index 0000000..b46c357
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
-> > @@ -0,0 +1,47 @@
-> > +DESCRIPTION =3D "dlm control daemon and tool"
-> > +
-> > +SECTION =3D "utils"
-> > +HOMEPAGE =3D "https://fedorahosted.org/cluster/wiki/HomePage"
-> > +
-> > +SRC_URI =3D
-> "https://git.fedorahosted.org/cgit/dlm.git/snapshot/dlm-${PV}.tar.xz"
->=20
-> dlm-${PV} -> ${BP} but more importantly is dlm.git/snapshots "stable"?
-> Doesn't it re-generated sometimes ?
-> > +
-> > +SRC_URI[md5sum] =3D "efc2ee6093aa6aa0a88aaad83e998a3f"
-> > +SRC_URI[sha256sum] =3D
-> "b89bc557aaffbab0ac005398025f247718a5589cff6574d902eaffe2b20e683e"
-> > +
-> > +LICENSE =3D "LGPLv2+&GPLv2&GPLv2+"
->=20
-> Add spaces around &
->=20
-> > +LIC_FILES_CHKSUM =3D
-> "file://README.license;md5=3D8f0bbcdd678df1bce9863492b6c8832d"
-> > +
-> > +DEPENDS =3D "corosync systemd"
-> > +
-> > +inherit pkgconfig systemd
-> > +
-> > +SYSTEMD_SERVICE_${PN} =3D "dlm.service"
-> > +SYSTEMD_AUTO_ENABLE =3D "enable"
-> > +
-> > +export EXTRA_OEMAKE =3D ""
-> > +
-> > +do_compile_prepend() {
-> > +    sed -i "s/libsystemd-daemon/libsystemd/g"
-> > +${S}/dlm_controld/Makefile }
-> > +
-> > +do_compile () {
-> > +    oe_runmake 'CC=3D${CC}'
-> > +}
-> > +
-> > +do_install_append (){
-> > +	install -d ${D}${sysconfdir}/sysconfig/
-> > +	install -d ${D}${sysconfdir}/init.d/
-> > +	install -m 0644 ${S}/init/dlm.sysconfig
-> ${D}${sysconfdir}/sysconfig/dlm
-> > +	install -m 0644 ${S}/init/dlm.init ${D}${sysconfdir}/init.d/dlm
-> > +
-> > +	# install systemd unit files
-> > +	if
-> ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-> > +		install -d ${D}${systemd_unitdir}/system
-> > +		install -m 0644 ${S}/init/dlm.service
-> ${D}${systemd_unitdir}/system
-> > +	fi
-> > +}
->=20
-> Use 4 spaces for indentation
->=20
-> > +
-> > +do_install() {
-> > +    oe_runmake install DESTDIR=3D${D} LIBDIR=3D${libdir} }
-> > +
-> > --
-> > 1.8.4.2
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+1.8.4.2
+
 
