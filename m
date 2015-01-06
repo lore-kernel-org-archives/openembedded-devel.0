@@ -1,27 +1,34 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BC51F65D19
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id CE9647201A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 05:58:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55594124"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 13:54:28 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t065vKwK032549
+	Tue,  6 Jan 2015 11:01:25 +0000 (UTC)
+Received: by mail-wg0-f45.google.com with SMTP id b13so29086247wgh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Jan 2015 13:57:20 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 6 Jan 2015 13:57:54 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Jan 2015 13:53:46 +0800
-Message-ID: <1420523626-4961-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH v2] imsettings: add recipe
+	Tue, 06 Jan 2015 03:01:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=iEuXicQ3EHoy28rql0CvIKwFWnR8I29bMgXJow9Vqcg=;
+	b=Oqjh/sJsDy2HwQ5UKoNXfQRPtS/p24lU7s2vsCAmf4KSAG5mCWAXasBOx7Y+J2re/Q
+	1J2Nv6OdnSDSfbMHx0S7E5bXjRgchOKtRzZRfQfnAJc2KBOwLgyqw7GQ6EXJ/MQpIZU/
+	K9MPyUdSwP3fUiUZnvza+3sWBPy8US5cmhhpgIdtxnDAoxVUlC/5+04MTqSp+OCNgDS0
+	w8QP54kgOLU5O/x04XVBp+kSthL6dRvMIGJiGi1/uJlUO4tNgZti3QZen8K0zNtCwcNY
+	fzs2uUoLvrXlbUyUzU7oNuaLNTLmAjGwkcGGLb0qYwGwErNsr68QaBYp17j7Tzhndo7X
+	Pbcw==
+X-Received: by 10.180.20.242 with SMTP id q18mr35154589wie.80.1420542086181;
+	Tue, 06 Jan 2015 03:01:26 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	c10sm78991054wjy.4.2015.01.06.03.01.25
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 06 Jan 2015 03:01:25 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Jan 2015 12:01:25 +0100
+Message-Id: <1420542085-9367-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.2.1
+Subject: [meta-oe][PATCH] linux.inc: support building with B != S which is default now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,108 +42,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 05:58:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 06 Jan 2015 11:01:35 -0000
 
-IMSettings is a framework that delivers Input Method settings and 
-applies the changes so they take effect immediately without 
-any need to restart applications or the desktop.
+* this .inc file wasn't working since oe-core commit:
+  commit 106dab2fd0321e6b4e77b40111e59a3a31d329d4
+  Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+  Date:   Fri Dec 19 17:46:27 2014 +0000
+  Subject: kernel: Fix non linux-yocto builds
+* Fixes following do_configure error
+  | NOTE: make oldconfig
+  | make: *** No rule to make target `oldconfig'.  Stop.
+  | ERROR: oe_runmake failed
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../imsettings/gtk-is-required-by-notify.patch     | 18 ++++++++++++++
- ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 20 ++++++++++++++++
- .../imsettings/imsettings_1.6.7.bb                 | 28 ++++++++++++++++++++++
- 3 files changed, 66 insertions(+)
- create mode 100644 meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
- create mode 100644 meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
- create mode 100644 meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb
+ meta-oe/recipes-kernel/linux/linux.inc | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch b/meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-new file mode 100644
-index 0000000..d42358d
---- /dev/null
-+++ b/meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-@@ -0,0 +1,18 @@
-+gtk+ is required by linnotify. So make sure gtk be linked before libnotify
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp imsettings-1.6.7.orig/configure.ac imsettings-1.6.7/configure.ac
-+--- imsettings-1.6.7.orig/configure.ac	2013-11-26 16:09:09.000000000 +0800
-++++ imsettings-1.6.7/configure.ac	2014-12-30 11:27:44.370003209 +0800
-+@@ -93,8 +93,8 @@ PKG_CHECK_MODULES(LIBNOTIFY, libnotify,
-+ 		has_old_libnotify=yes
-+ 		PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED)
-+ 		AC_DEFINE(HAS_OLD_LIBNOTIFY,, [Using older libnotify])
-+-		IMDAEMON_CFLAGS="$GTK_CFLAGS $LIBNOTIFY_OLD_CFLAGS"
-+-		IMDAEMON_LIBS="$GTK_LIBS $LIBNOTIFY_OLD_LIBS"],[
-++		IMDAEMON_CFLAGS="$LIBNOTIFY_OLD_CFLAGS $GTK_CFLAGS"
-++		IMDAEMON_LIBS="$LIBNOTIFY_OLD_LIBS $GTK_LIBS"],[
-+ 		has_old_libnotify=no
-+ 		IMDAEMON_CFLAGS="$LIBNOTIFY_CFLAGS"
-+ 		IMDAEMON_LIBS="$LIBNOTIFY_LIBS"])
-diff --git a/meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-new file mode 100644
-index 0000000..1327c85
---- /dev/null
-+++ b/meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-@@ -0,0 +1,20 @@
-+multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf.
-+It will cause configure error as follow.
-+
-+  aclocal: error: non-option arguments are not accepted: '\'.
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+--- imsettings-1.6.7.orig/Makefile.am	2013-02-08 10:33:59.000000000 +0800
-++++ imsettings-1.6.7/Makefile.am	2014-12-25 11:48:27.078022744 +0800
-+@@ -1,9 +1,7 @@
-+ NULL =
-+ SUBDIRS = data imsettings imsettings-daemon backends utils po tests docs
-+ 
-+-ACLOCAL_AMFLAGS =			\
-+-	-I m4macros			\
-+-	$(NULL)
-++ACLOCAL_AMFLAGS = -I m4macros $(NULL)
-+ 
-+ CONFIGURE_DEPENDENCIES =		\
-+ 	requires			\
-diff --git a/meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb b/meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb
-new file mode 100644
-index 0000000..056bfdb
---- /dev/null
-+++ b/meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Delivery framework for general Input Method configuration"
-+DESCRIPTION = "IMSettings is a framework that delivers Input Method \
-+settings and applies the changes so they take effect \
-+immediately without any need to restart applications \
-+or the desktop. \
-+This package contains the core DBus services and some utilities."
-+HOMEPAGE = "http://code.google.com/p/imsettings/"
-+SECTION = "Applications/System"
-+
-+inherit autotools gtk-doc
-+
-+SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
-+           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch \
-+           file://gtk-is-required-by-notify.patch"
-+
-+SRC_URI[md5sum] = "81ceddbbb443c101d7993a60c5ce6223"
-+SRC_URI[sha256sum] = "0d40099e93eb82bd35c29322df374297ae3286b5879b21f5056c8d4b5b7577dd"
-+
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+
-+EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
-+                --disable-static \
-+               "
-+
-+DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim"
-+
-+FILES_${PN} += "${datadir}/dbus-1/*"
+diff --git a/meta-oe/recipes-kernel/linux/linux.inc b/meta-oe/recipes-kernel/linux/linux.inc
+index 7b301ae..e200127 100644
+--- a/meta-oe/recipes-kernel/linux/linux.inc
++++ b/meta-oe/recipes-kernel/linux/linux.inc
+@@ -28,14 +28,14 @@ kernel_conf_variable() {
+     CONF_SED_SCRIPT="$CONF_SED_SCRIPT /CONFIG_$1[ =]/d;"
+     if test "$2" = "n"
+     then
+-        echo "# CONFIG_$1 is not set" >> ${S}/.config
++        echo "# CONFIG_$1 is not set" >> ${B}/.config
+     else
+-        echo "CONFIG_$1=$2" >> ${S}/.config
++        echo "CONFIG_$1=$2" >> ${B}/.config
+     fi
+ }
+ 
+ do_configure_prepend() {
+-    echo "" > ${S}/.config
++    echo "" > ${B}/.config
+     CONF_SED_SCRIPT=""
+ 
+     #
+@@ -43,8 +43,8 @@ do_configure_prepend() {
+     #
+     if [ -e ${WORKDIR}/logo_linux_clut224.ppm ]; then
+         install -m 0644 ${WORKDIR}/logo_linux_clut224.ppm drivers/video/logo/logo_linux_clut224.ppm
+-    kernel_conf_variable LOGO y
+-    kernel_conf_variable LOGO_LINUX_CLUT224 y
++        kernel_conf_variable LOGO y
++        kernel_conf_variable LOGO_LINUX_CLUT224 y
+     fi
+ 
+     #
+@@ -59,7 +59,7 @@ do_configure_prepend() {
+ 
+     # When enabling thumb for userspace we also need thumb support in the kernel
+     if [ "${ARM_INSTRUCTION_SET}" = "thumb" ] ; then
+-    kernel_conf_variable ARM_THUMB y
++        kernel_conf_variable ARM_THUMB y
+     fi
+ 
+     kernel_conf_variable CMDLINE "\"${CMDLINE} ${CMDLINE_DEBUG}\""
+@@ -112,9 +112,9 @@ do_configure_prepend() {
+     fi
+ 
+     sed -e "${CONF_SED_SCRIPT}" \
+-    < '${WORKDIR}/defconfig' >>'${S}/.config'
++    < '${WORKDIR}/defconfig' >>'${B}/.config'
+ 
+-    yes '' | oe_runmake oldconfig
++    yes '' | oe_runmake -C ${S} O=${B} oldconfig
+ }
+ 
+ do_configure_append() {
 -- 
-1.9.1
+2.2.1
 
 
