@@ -1,37 +1,33 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f44.google.com (mail-yh0-f44.google.com
-	[209.85.213.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EEE4728BD
+Return-Path: <lchristina26@gmail.com>
+Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
+	[209.85.213.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D3DB65C75
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 18:42:25 +0000 (UTC)
-Received: by mail-yh0-f44.google.com with SMTP id c41so11772489yho.3
+	Tue,  6 Jan 2015 22:54:46 +0000 (UTC)
+Received: by mail-ig0-f171.google.com with SMTP id z20so4964858igj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jan 2015 10:42:25 -0800 (PST)
+	Tue, 06 Jan 2015 14:54:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=kmjxaKy27NckC3YA6W0M6fUUTHdicPt5mEMWmGI/u+0=;
-	b=QCuXdVuwg3Hi7kceaBd4GkJdsVW5+ihFcZuZtbTRbcyri0DewSosvVX9AhcdM4L+gs
-	FMoSuJ52gCGUXydn94lMgQBNFSX9874kSVdFH6nnG2ARPEQDfS79wFAsXPl2SwNkzSdi
-	kulUrGzNf3gJH03gr+2vCgzYmm8hNo5PqqZHyeXCW2/ST/y/UwxE9JT8BmeVwZUY7slm
-	w5NJOFmTKGOxt6qNmDTArUfvpvLV3IRpALsPh3KaBMw7+xV1hvS1AMcA24cPYLlUTIWl
-	b35UPlAwAcRy9CClgGbGxAJelDBV7+H9UEh8ZfFJxS0QrMX9z0ESXypx64yOSpZC7M5o
-	itJg==
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=KbkL38D5iijcw5KlILJXyEg9bhlJ0JLhGn/hu9n47dU=;
+	b=jLfq0LtQs0hg7XSUKRuhoX6nMcPK2wdQRna+476jb9329DHhfGGA+ORTb/Ota7WAtY
+	kakG+IglGbfZFgyC0rKbVSEWxf1YReUbfqzZ0iRPvRVmg7/IC0FEMeHwpcmQOPqZ5cWB
+	3ENSP+pbicbQlSgspqZ6DX8x8viewt8pIV7ueZA3EdEdGBciZkr7qrtpBhqpn0LWRy+4
+	0KalYeNF9ORpQXBlQVLXc9s4dhEMPf8eDWnIGLm9aAkMIrmz5lsEeJ+ADCkCL2dWLBmX
+	pdzgs7k4ujzlGoNEmyrLF+ymzHu1dlLO/5N1o0KK4HnkTFkHIzHzdU8y/TN1bG2+E6Iv
+	zWIQ==
 MIME-Version: 1.0
-X-Received: by 10.236.30.98 with SMTP id j62mr54120466yha.105.1420569745690;
-	Tue, 06 Jan 2015 10:42:25 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.171.132 with HTTP; Tue, 6 Jan 2015 10:42:25 -0800 (PST)
-In-Reply-To: <20150106182225.GB29986@jama>
-References: <BLU436-SMTP224A703B53ECF80B0D6067DC2590@phx.gbl>
-	<20150106182225.GB29986@jama>
-Date: Tue, 6 Jan 2015 16:42:25 -0200
-X-Google-Sender-Auth: 5sgmlsaFrtG8DaFSLmnejnOumQs
-Message-ID: <CAP9ODKopG8=q9z9K6es06RFJR4ArP8mJCM4FWaSvyKLO+ZzkBw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: kkelly87 <kaneda18@hotmail.com>
-Subject: Re: [meta-qt5][dizzy][PATCH] qttranslations: adding recipe for various qt translation ipks
+X-Received: by 10.42.253.195 with SMTP id nb3mr519243icb.34.1420584886945;
+	Tue, 06 Jan 2015 14:54:46 -0800 (PST)
+Sender: lchristina26@gmail.com
+Received: by 10.64.8.200 with HTTP; Tue, 6 Jan 2015 14:54:46 -0800 (PST)
+Date: Tue, 6 Jan 2015 15:54:46 -0700
+X-Google-Sender-Auth: sYJVT1vLRSx8_7kgY-vAoeslk88
+Message-ID: <CAL0pqZ1m6yDmncWR5VzLX9WEkxjmqFhYTnzXow912CPQZnRw-Q@mail.gmail.com>
+From: Leah <leah@wolfssl.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: wolfSSL at FOSDEM 2015
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 18:42:26 -0000
+X-List-Received-Date: Tue, 06 Jan 2015 22:54:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Tue, Jan 6, 2015 at 4:22 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Jan 06, 2015 at 12:29:30PM -0500, kkelly87 wrote:
->> Since the layer does not have a specific recipe for the qttranslation submodule it was never being built
->> and ui elements like the OK and Cancel buttons had no translations.
->
-> Can you please create version for master branch as well?
->
-> In general new features shouldn't go to release branches, but
-> I'm willing to make exception after it's more tested in master
-> branch.
+wolfSSL (CyaSSL) will be attending FOSDEM 2015. We will be located at booth
+#9 in the AW building. If you are attending and want to learn more about
+our products and how we utilize OpenEmbedded, feel free to stop by! We can
+be contacted at info@wolfssl.com if you would like more information.
 
-Martin means make the patch for master, including 5.4 support. Than it
-could be backported to Dizzy.
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+Leah Thompson
+www.wolfssl.com
+leah@wolfssl.com
+406-570-1389
+Skype: lchristina26
 
