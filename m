@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E71472849
+	by mail.openembedded.org (Postfix) with ESMTP id 6825072852
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 04:13:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55590094"
+	Tue,  6 Jan 2015 04:13:17 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55590096"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 12:09:50 +0800
+	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 12:09:53 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t064ChP6026898
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t064Cje5026902
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Jan 2015 12:12:43 +0800
+	Tue, 6 Jan 2015 12:12:45 +0800
 Received: from localhost.localdomain (10.167.226.48) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 6 Jan 2015 12:13:16 +0800
+	Server (TLS) id 14.3.181.6; Tue, 6 Jan 2015 12:13:19 +0800
 From: leimaohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Jan 2015 12:12:34 +0800
-Message-ID: <1420517556-49274-2-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Tue, 6 Jan 2015 12:12:35 +0800
+Message-ID: <1420517556-49274-3-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1420517556-49274-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1420517556-49274-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.48]
-Subject: [meta-oe][V2 PATCH 1/3] libqb: add new recipe
+Subject: [meta-oe][V2 PATCH 2/3] corosync_2.3.4: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,46 +42,79 @@ Content-Type: text/plain
 
 From: leimh <leimaohui@cn.fujitsu.com>
 
-An IPC library for high performance servers.
+The Corosync Cluster Engine and Application Programming Interfaces.
 
 Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
 ---
- meta-oe/recipes-extended/libqb/libqb_0.17.1.bb | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libqb/libqb_0.17.1.bb
+ .../recipes-extended/corosync/corosync_2.3.4.bb    | 59 ++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
 
-diff --git a/meta-oe/recipes-extended/libqb/libqb_0.17.1.bb b/meta-oe/recipes-extended/libqb/libqb_0.17.1.bb
+diff --git a/meta-oe/recipes-extended/corosync/corosync_2.3.4.bb b/meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
 new file mode 100644
-index 0000000..77307fe
+index 0000000..7385d55
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libqb/libqb_0.17.1.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "An IPC library for high performance servers"
-+DESCRIPTION = "libqb is a library with the primary purpose of providing high performance client server reusable features. \
-+It provides high performance logging, tracing, ipc, and poll."
++++ b/meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
+@@ -0,0 +1,59 @@
++SUMMARY = "The Corosync Cluster Engine and Application Programming Interfaces"
++DESCRIPTION = "This package contains the Corosync Cluster Engine Executive, several default \
++APIs and libraries, default configuration files, and an init script."
++HOMEPAGE = "http://corosync.github.io/corosync/"
 +
-+HOMEPAGE = "https://github.com/clusterlabs/libqb/wiki"
++SECTION = "base"
 +
-+SECTION = "libs"
++inherit autotools pkgconfig systemd
 +
-+inherit autotools pkgconfig
++SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
++	   "
 +
-+SRC_URI = "https://fedorahosted.org/releases/q/u/quarterback/${BP}.tar.xz \
-+          "
++SRC_URI[md5sum] = "4b0f36a1dc014527e5b192265dbd7e70"
++SRC_URI[sha256sum] = "3dae93fb1cf5c560295253b0560cbc25421ed053ee373852864f3a60c03247d4"
 +
-+SRC_URI[md5sum] = "5770b343baa4528f6fec90120ec55048"
-+SRC_URI[sha256sum] = "7a2115f83bfe20eaa5f2e4ed235e8f2994235d3b87e3e5ca41ba47b320f12e29"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
 +
-+LICENSE = "LGPL-2.1"
++DEPENDS = "groff-native nss libqb"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
++SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service"
++SYSTEMD_AUTO_ENABLE = "enable"
++
++INITSCRIPT_NAME = "corosync-daemon"
++
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
++
++PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_unitdir}/system/,--with-systemddir="
++
++EXTRA_OECONF = "--disable-nss \
++                --with-upstartdir=%{_sysconfdir}/init \
++"
++EXTRA_OECONF += " --enable-nss "
 +
 +do_configure_prepend() {
 +    ( cd ${S}
 +    ${S}/autogen.sh )
 +}
 +
++do_install_append() {
++    install -d ${D}${sysconfdir}/sysconfig/
++    install -d ${D}/${sysconfdir}/init.d
++    install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
++    install -m 0644 ${S}/init/corosync-notifyd.conf.in ${D}${sysconfdir}/sysconfig/corosync-notifyd.conf
++    install -m 0644 ${S}/init/corosync.conf.in ${D}${sysconfdir}/sysconfig/corosync.conf
++    install -m 0644 ${S}/init/corosync.in ${D}${sysconfdir}/init.d/corosync
++    install -m 0644 ${S}/init/corosync-notifyd.in ${D}${sysconfdir}/init.d/corosync-notifyd
 +
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${S}/init/corosync.service.in ${D}${systemd_unitdir}/system/corosync.service
++        install -m 0644 ${S}/init/corosync-notifyd.service.in ${D}${systemd_unitdir}/system/corosync-notifyd.service
++        sed -i -e 's,@INITWRAPPERSDIR@,${sysconfdir}/init.d,g' ${D}${systemd_unitdir}/system/corosync.service
++        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/corosync-notifyd.service
++        sed -i -e 's,@SBINDIR@,${base_sbindir},g' ${D}${systemd_unitdir}/system/corosync-notifyd.service
++    fi	
++}
++
++FILES_${PN}-dbg += "${libexecdir}/lcrso/.debug"
 -- 
 1.8.4.2
 
