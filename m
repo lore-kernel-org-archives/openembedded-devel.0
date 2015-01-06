@@ -1,27 +1,35 @@
 Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FD7172849
+	by mail.openembedded.org (Postfix) with ESMTP id 3A20B72849
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 05:50:18 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55593844"
+	Tue,  6 Jan 2015 05:51:23 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55593896"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 13:46:33 +0800
+	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 13:47:58 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t065nP0u032033
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t065opTo032134
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Jan 2015 13:49:25 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 6 Jan 2015 13:49:59 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 6 Jan 2015 13:45:47 +0800
-Message-ID: <1420523147-3740-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Tue, 6 Jan 2015 13:50:51 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Tue, 6 Jan 2015 13:51:25 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH] opensaf: add recipe
+Thread-Index: AQHQJNNpk5Zbkv1gSk+rrp6phhU4FZyqEQuAgAiOjNA=
+Date: Tue, 6 Jan 2015 05:51:26 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE6D78@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1420014126-30814-1-git-send-email-biannm@cn.fujitsu.com>
+	<FB0357A0-FF54-472E-9D02-E7FCE744AFE5@gmail.com>
+In-Reply-To: <FB0357A0-FF54-472E-9D02-E7FCE744AFE5@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-networking][PATCH v2] openwsman: add recipe
+Subject: Re: [meta-networking][PATCH] opensaf: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,128 +43,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 05:50:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 06 Jan 2015 05:51:26 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Opensource Implementation of WS-Management
-
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- .../libssl-is-required-if-eventint-supported.patch | 17 +++++++
- .../openwsman/openwsman/openwsmand.service         | 12 +++++
- .../openwsman/openwsman_2.4.12.bb                  | 59 ++++++++++++++++++++++
- 3 files changed, 88 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
- create mode 100644 meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service
- create mode 100644 meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb
-
-diff --git a/meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch b/meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
-new file mode 100644
-index 0000000..bd540e3
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
-@@ -0,0 +1,17 @@
-+libssl is required by wsman_client_transport if ENABLE_EVENTING_SUPPORT enabled.
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp openwsman-2.4.12.orig/src/lib/CMakeLists.txt openwsman-2.4.12/src/lib/CMakeLists.txt
-+--- openwsman-2.4.12.orig/src/lib/CMakeLists.txt	2014-10-28 23:04:47.000000000 +0800
-++++ openwsman-2.4.12/src/lib/CMakeLists.txt	2014-12-31 11:09:20.340428523 +0800
-+@@ -56,6 +56,9 @@ TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TR
-+ SET_TARGET_PROPERTIES( ${WSMAN_CLIENT_TRANSPORT_PKG} PROPERTIES VERSION 1.0.0 SOVERSION 1)
-+ INSTALL(TARGETS ${WSMAN_CLIENT_TRANSPORT_PKG} DESTINATION ${LIB_INSTALL_DIR})
-+ 
-++IF( ENABLE_EVENTING_SUPPORT )
-++TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TRANSPORT_PKG} ${OPENSSL_LIBRARIES} )
-++ENDIF( ENABLE_EVENTING_SUPPORT )
-+ 
-+ ############### wsman_client ###############
-+ 
-diff --git a/meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service b/meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service
-new file mode 100644
-index 0000000..154f3cd
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openwsman/openwsman/openwsmand.service
-@@ -0,0 +1,12 @@
-+[Unit]
-+Description=Openwsman WS-Management Service
-+After=syslog.target
-+
-+[Service]
-+Type=forking
-+ExecStart=@SBINDIR@/openwsmand
-+ExecStartPre=@SYSCONFDIR@/openwsman/owsmangencert.sh
-+PIDFile=@LOCALSTATEDIR@/run/wsmand.pid
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb b/meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb
-new file mode 100644
-index 0000000..f188b1d
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openwsman/openwsman_2.4.12.bb
-@@ -0,0 +1,59 @@
-+SUMMARY = "Opensource Implementation of WS-Management"
-+DESCRIPTION = "Openwsman is a project intended to provide an open-source \
-+implementation of the Web Services Management specipication \
-+(WS-Management) and to expose system management information on the \
-+Linux operating system using the WS-Management protocol. WS-Management \
-+is based on a suite of web services specifications and usage \
-+requirements that exposes a set of operations focused on and covers \
-+all system management aspects. \
-+Openwsman Server and service libraries"
-+HOMEPAGE = "http://www.openwsman.org/"
-+SECTION = "Applications/System"
-+
-+DEPENDS = "curl libxml2 openssl libpam"
-+
-+SRC_URI = "https://github.com/Openwsman/openwsman/archive/v2.4.12.tar.gz \
-+           file://libssl-is-required-if-eventint-supported.patch \
-+           file://openwsmand.service"
-+
-+SRC_URI[md5sum] = "4893a41c6fd89b33095c315c79638a75"
-+SRC_URI[sha256sum] = "6a4b75dfff1a51c7bc09fd1d44abbde55ae74906f3828797ce391883358120f4"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
-+
-+inherit systemd cmake pkgconfig pythonnative perlnative
-+
-+SYSTEMD_SERVICE_${PN} = "openwsmand.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO -DBUILD_LIBCIM=NO -DBUILD_PERL=YES \
-+                 -DCMAKE_INSTALL_PREFIX=${prefix} -DLIB=lib"
-+
-+do_configure_prepend() {
-+    export HOST_SYS=${HOST_SYS}
-+    export BUILD_SYS=${BUILD_SYS}
-+    export STAGING_INCDIR=${STAGING_INCDIR}
-+    export STAGING_LIBDIR=${STAGING_LIBDIR}
-+}
-+
-+do_install_append() {
-+    install -d ${D}/${sysconfdir}/init.d
-+    install -m 755 ${B}/etc/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
-+    ln -sf ${sysconfdir}/init.d/openwsmand ${D}/${sbindir}/rcopenwsmand
-+
-+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}/${systemd_unitdir}/system
-+        install -m 644 ${WORKDIR}/openwsmand.service ${D}/${systemd_unitdir}/system
-+
-+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+    fi
-+}
-+
-+FILES_${PN}-dbg += "${libdir}/openwsman/plugins/.debug/ \
-+                    ${libdir}/openwsman/authenticators/.debug/ \
-+                   "
-+
-+INSANE_SKIP_${PN} = "dev-so"
--- 
-1.9.1
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRl
+ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBLaGVt
+DQo+IFJhag0KPiBTZW50OiBUaHVyc2RheSwgSmFudWFyeSAwMSwgMjAxNSAxMToxMCBBTQ0KPiBU
+bzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDog
+UmU6IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0hdIG9wZW5zYWY6IGFkZCByZWNpcGUNCj4g
+DQo+IA0KPiA+IE9uIERlYyAzMSwgMjAxNCwgYXQgMTI6MjIgQU0sIEJpYW4gTmFpbWVuZyA8Ymlh
+bm5tQGNuLmZ1aml0c3UuY29tPiB3cm90ZToNCj4gPg0KPiA+IE9wZW5TQUYgaXMgYW4gb3BlbiBz
+b3VyY2UgaW1wbGVtZW50YXRpb24gb2YgdGhlIFNBRiBBSVMgc3BlY2lmaWNhdGlvbg0KPiA+DQo+
+ID4gU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+
+ID4gLS0tDQo+ID4gLi4uL29wZW5zYWYvaW5zdGFsbC1zYW1wbGVzLWZyb20tc3JjZGlyLnBhdGNo
+ICAgICAgfCAxMSArKysrKysNCj4gPiAuLi4vcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3BlbnNh
+Zl80LjUuMC5iYiAgICAgICB8IDQwDQo+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiAyIGZp
+bGVzIGNoYW5nZWQsIDUxIGluc2VydGlvbnMoKykNCj4gPiBjcmVhdGUgbW9kZSAxMDA2NDQNCj4g
+PiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3BlbnNhZi9pbnN0YWxs
+LXNhbXBsZXMtZnJvbS1zDQo+ID4gcmNkaXIucGF0Y2ggY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4g
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVuc2FmL29wZW5zYWZfNC41LjAuYmIN
+Cj4gPg0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1v
+bnMvb3BlbnNhZi9vcGVuc2FmL2luc3RhbGwtc2FtcGxlcy1mcm9tDQo+ID4gLXNyY2Rpci5wYXRj
+aA0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVuc2FmL29wZW5zYWYv
+aW5zdGFsbC1zYW1wbGVzLWZyb20NCj4gPiAtc3JjZGlyLnBhdGNoDQo+ID4gbmV3IGZpbGUgbW9k
+ZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi4wMTZiNjRmDQo+ID4gLS0tIC9kZXYvbnVsbA0K
+PiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvb3BlbnNhZi9vcGVuc2Fm
+L2luc3RhbGwtc2FtcGxlcy0NCj4gPiArKysgZnJvbS1zcmNkaXIucGF0Y2gNCj4gPiBAQCAtMCww
+ICsxLDExIEBADQo+ID4gKy0tLSBvcGVuc2FmLTQuNS4wLm9yaWcvTWFrZWZpbGUuYW0JMjAxNC0x
+Mi0zMSAxNDo0NTo1NC4wODg3OTc5ODkgKzA4MDANCj4gPiArKysrIG9wZW5zYWYtNC41LjAvTWFr
+ZWZpbGUuYW0JMjAxNC0xMi0zMSAxNDo0NTowOC4zMjg3OTY2ODggKzA4MDANCj4gPiArQEAgLTIx
+OSw3ICsyMTksNyBAQCBpbnN0YWxsLWRhdGEtbG9jYWw6DQo+ID4gKyAJJChta2luc3RhbGxkaXJz
+KSAkKERFU1RESVIpJChwa2dwaWRkaXIpDQo+ID4gKyAJJChta2luc3RhbGxkaXJzKSAkKERFU1RE
+SVIpJChsb2NrZGlyKQ0KPiA+ICsgCSQobWtpbnN0YWxsZGlycykgJChERVNURElSKSQocGtnbG9j
+YWxzdGF0ZWRpcikNCj4gPiArLQljcCAtUiBzYW1wbGVzLyAkKERFU1RESVIpJChwa2dkYXRhZGly
+KQ0KPiA+ICsrCWNwIC1SICQoc3JjZGlyKS9zYW1wbGVzLyAkKERFU1RESVIpJChwa2dkYXRhZGly
+KQ0KPiA+ICsNCj4gPiArIGluc3RhbGwtZGF0YS1ob29rOg0KPiA+ICsgCUBmb3IgaSBpbiAkJChn
+cmVwIC1sciAtZSAneHhMSUJESVJ4eCcgLWUgJ3h4TE9HRElSeHgnIC1lDQo+ID4gKyAneHhDTEND
+TElESVJ4eCcgJChERVNURElSKSQocGtnaW1teG1sX3N2Y2RpcikvKi54bWwpIDsgZG8gXA0KPiA+
+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3Bl
+bnNhZl80LjUuMC5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVu
+c2FmL29wZW5zYWZfNC41LjAuYmINCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4
+IDAwMDAwMDAuLmE1OGRlNWMNCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1uZXR3
+b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVuc2FmL29wZW5zYWZfNC41LjAuYmINCj4gPiBAQCAt
+MCwwICsxLDQwIEBADQo+ID4gK1NVTU1BUlkgPSAiT3BlblNBRiBpcyBhbiBvcGVuIHNvdXJjZSBp
+bXBsZW1lbnRhdGlvbiBvZiB0aGUgU0FGIEFJUw0KPiBzcGVjaWZpY2F0aW9uIg0KPiA+ICtERVND
+UklQVElPTiA9ICJPcGVuU0FGIGlzIGFuIG9wZW4gc291cmNlIHByb2plY3QgZXN0YWJsaXNoZWQg
+dG8NCj4gPiArZGV2ZWxvcCBhIGJhc2UgcGxhdGZvcm0gXCBtaWRkbGV3YXJlIGNvbnNpc3RlbnQg
+d2l0aCBTZXJ2aWNlDQo+ID4gK0F2YWlsYWJpbGl0eSBGb3J1bSAoU0EgRm9ydW0pIFwgc3BlY2lm
+aWNhdGlvbnMsIHVuZGVyIHRoZSBMR1BMdjIuMQ0KPiA+ICtsaWNlbnNlLiBUaGUgT3BlblNBRiBG
+b3VuZGF0aW9uIHdhcyBcIGVzdGFibGlzaGVkIGJ5IGxlYWRpbmcNCj4gPiArQ29tbXVuaWNhdGlv
+bnMgYW5kIEVudGVycHJpc2UgQ29tcHV0aW5nIENvbXBhbmllcyB0byBcIGZhY2lsaXRhdGUgdGhl
+DQo+ID4gK09wZW5TQUYgUHJvamVjdCBhbmQgdG8gYWNjZWxlcmF0ZSB0aGUgYWRvcHRpb24gb2Yg
+dGhlIE9wZW5TQUYgXCBjb2RlDQo+ID4gK2Jhc2UgaW4gY29tbWVyY2lhbCBwcm9kdWN0cy4gXCBU
+aGUgT3BlblNBRiBwcm9qZWN0IHdhcyBsYXVuY2hlZCBpbg0KPiA+ICttaWQgMjAwNyBhbmQgaGFz
+IGJlZW4gdW5kZXIgZGV2ZWxvcG1lbnQgYnkgXCBhbiBpbmZvcm1hbCBncm91cCBvZg0KPiA+ICtz
+dXBwb3J0ZXJzIG9mIHRoZSBPcGVuU0FGIGluaXRpYXRpdmUuIFRoZSBPcGVuU0FGIFwgRm91bmRh
+dGlvbiB3YXMNCj4gPiArZm91bmRlZCBvbiBKYW51YXJ5IDIybmQgMjAwOCB3aXRoIEVtZXJzb24g
+TmV0d29yayBQb3dlciwgXCBFcmljc3NvbiwgTm9raWENCj4gU2llbWVucyBOZXR3b3JrcywgSFAg
+YW5kIFN1biBNaWNyb3N5c3RlbXMgYXMgZm91bmRpbmcgbWVtYmVycy4iDQo+ID4gK0hPTUVQQUdF
+ID0gImh0dHA6Ly93d3cub3BlbnNhZi5vcmciDQo+ID4gKw0KPiA+ICtpbmhlcml0IGF1dG90b29s
+cyB1c2VyYWRkIHN5c3RlbWQgcGtnY29uZmlnDQo+ID4gKw0KPiA+ICtTUkNfVVJJID0NCj4gImh0
+dHA6Ly9qYWlzdC5kbC5zb3VyY2Vmb3JnZS5uZXQvcHJvamVjdC9vcGVuc2FmL3JlbGVhc2VzLyR7
+QlBOfS0ke1BWfS50YXINCj4gLmd6IFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vaW5zdGFsbC1z
+YW1wbGVzLWZyb20tc3JjZGlyLnBhdGNoIg0KPiA+ICsNCj4gPiArU1JDX1VSSVttZDVzdW1dID0g
+IjUzNGMwYTk5NDM4YTYyYzRjOGRkYTU2Y2ZhNjczMDBjIg0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1
+bV0gPQ0KPiAiMmY1YmE1N2ZlNjdlOTQwOTljMGRmODJkMGEwZGQyMDdiNWM1ODNjOTMwMzAwMzVi
+YTM1NGM5N2I1NDcxYjU5MCINCj4gPiArDQo+ID4gK0xJQ0VOU0UgPSAiTEdQTHYyLjEiDQo+ID4g
+K0xJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0NPUFlJTkcuTElCO21kNT1hOTE2NDY3Yjkx
+MDc2ZTYzMWRkOGVkYjc0MjQ3NjljNyINCj4gPiArDQo+ID4gK0RFUEVORFMgPSAibGlieG1sMiBw
+eXRob24iDQo+ID4gKw0KPiA+ICtVU0VSQUREX1BBQ0tBR0VTID0gIiR7UE59Ig0KPiA+ICtHUk9V
+UEFERF9QQVJBTV8ke1BOfSA9ICItZiAtciBvcGVuc2FmIg0KPiA+ICtVU0VSQUREX1BBUkFNXyR7
+UE59ID0gICItciAtZyBvcGVuc2FmIC1kICR7ZGF0YWRpcn0vb3BlbnNhZi8gLXMNCj4gJHtzYmlu
+ZGlyfS9ub2xvZ2luIC1jIFwiT3BlblNBRlwiIG9wZW5zYWYiDQo+ID4gKw0KPiA+ICtTWVNURU1E
+X1NFUlZJQ0VfJHtQTn0gKz0gIm9wZW5zYWZkLnNlcnZpY2UiDQo+ID4gK1NZU1RFTURfQVVUT19F
+TkFCTEUgPSDigJxkaXNhYmxlIg0KPiANCj4gd2h5IGRpc2FibGUgPw0KPiANCg0KVGhhbmtzIGZv
+ciB5b3VyIHJldmlldy4NCg0KTG9va3MgbGlrZSAiZGlzYWJsZSIgaXMgZGVmYXVsdCBzZXR0aW5n
+IGluIG1ldGEtb3BlbmVtYmVkZGVkLg0KDQpUaGFua3MNCiBCaWFuDQoNCj4gPiArDQo+ID4gK0ZJ
+TEVTXyR7UE59ICs9ICIvcnVu4oCdDQo+IA0KPiBobW1tIC9ydW4gaXMgdXN1YWxseSB0bXBmcyBz
+byB0aGlzIHNob3VsZCBiZSBzb2x2ZWQgZGlmZmVyZW50bHkuDQo+IA0KPiA+ICsNCj4gPiArSU5T
+QU5FX1NLSVBfJHtQTn0gPSAiZGV2LXNvIg0KPiA+ICsNCj4gPiArZG9faW5zdGFsbF9hcHBlbmQo
+KSB7DQo+ID4gKyAgICBybSAtcmYgIiR7RH0ke2xvY2Fsc3RhdGVkaXJ9L3J1biINCj4gPiArfQ0K
+PiA+IC0tDQo+ID4gMS45LjENCj4gPg0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGlu
+ZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4g
+PiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJl
+ZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18NCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVu
+ZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
 
