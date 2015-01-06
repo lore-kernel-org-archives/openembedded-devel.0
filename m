@@ -1,42 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 87F1F7293D
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 7465F7289F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 16:30:27 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id p10so9997465wes.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jan 2015 08:30:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=m0+LVBFYAii8HCnACSMw9wbP6vlJw1UcmQSs73NBsUw=;
-	b=n0OmkH1lpsf5FI/tbe1FFcVxEmv/vm2derBkDCFX4JPVAbVfYMaQJ4GWEUAGUiQAI7
-	SJP8rcccdt2vT8kaSWRDqq0fwBVqgRpn9lIByLiSIG4Le3B3e+IgdXIFXuExs8FPmGGd
-	+Vg13EBqdLOjvx+cV50tWOMRcpZkH6ai59odsDSW/AmXiLcFfQf+pmwXV9xFpt++Daiy
-	qWRPJJgvGeDqGWVC7jkTrt1xSjVkxrPG62J5kVSnzvvGB0kGj6FL8GWdQdX07N09x2RK
-	ccc0jyxUb9lCuc989makVtF7dbMsNZpdv1Uf31u5RWfZsm73d4+1/2xwgVwhlHO1b7Z0
-	YOPA==
-X-Received: by 10.194.185.243 with SMTP id
-	ff19mr187826478wjc.126.1420561826884; 
-	Tue, 06 Jan 2015 08:30:26 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	bj3sm14560591wib.3.2015.01.06.08.30.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Jan 2015 08:30:26 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 6 Jan 2015 17:30:28 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150106163028.GA29986@jama>
-References: <1420560067-8617-1-git-send-email-akuster808@gmail.com>
-	<1420560067-8617-2-git-send-email-akuster808@gmail.com>
+	Tue,  6 Jan 2015 16:33:13 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga102.jf.intel.com with ESMTP; 06 Jan 2015 08:30:48 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.07,708,1413270000"; d="scan'208";a="657597105"
+Received: from dmoore26-mobl2.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.3.68])
+	by fmsmga002.fm.intel.com with ESMTP; 06 Jan 2015 08:33:11 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 06 Jan 2015 16:33:09 +0000
+Message-ID: <2587275.C6Dzbu6Uko@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.3 (Linux/3.17.7-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
+In-Reply-To: <20150106162610.GA12498@jama>
+References: <1420559960-8518-1-git-send-email-akuster808@gmail.com>
+	<1420559960-8518-2-git-send-email-akuster808@gmail.com>
+	<20150106162610.GA12498@jama>
 MIME-Version: 1.0
-In-Reply-To: <1420560067-8617-2-git-send-email-akuster808@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 2/2] libssh: fix krb5 rdepends issue
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 1/2] proftpd: fix rdepends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,71 +36,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 16:30:32 -0000
-X-Groupsio-MsgNum: 53699
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ZPt4rx8FFjLCG7dd"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 06 Jan 2015 16:33:14 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---ZPt4rx8FFjLCG7dd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tuesday 06 January 2015 17:26:10 Martin Jansa wrote:
+> On Tue, Jan 06, 2015 at 07:59:19AM -0800, Armin Kuster wrote:
+> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> > ---
+> > 
+> >  meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> > b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb index
+> > cba39e8..7d285a0 100644
+> > --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> > +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> > @@ -99,4 +99,4 @@ USERADD_PARAM_${PN} = "--system -g ${FTPGROUP}
+> > --home-dir /var/lib/${FTPUSER} --> 
+> >  FILES_${PN} += "/home/${FTPUSER}"
+> > 
+> > -RDEPENDS_${PN} += "perl"
+> > +RDEPENDS_${PN} += "perl initscripts-functions"
+> 
+> It's not that simple.
+> 
+> The initscripts-functions is added to RDEPENDS conditionally based on
+> "sysvinit" in DISTRO_FEATURES and INHIBIT_UPDATERCD_BBCLASS.
+> 
+> Adding it explicitly here will pull it to image even for people who
+> care only about systemd services (and don't want any iniscripts to
+> pollute their startup sequence).
+> 
+> See meta/classes/update-rc.d.bbclass
+> 
+> I know we already have one recipe like this:
+> meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb:RDEPENDS_${PN} +=
+> "initscripts-functions"
+> 
+> but honestly silencing this warning like this does more harm then
+> the warning. I think it should be fixed in bbclass, because all
+> recipes which inherit it, suffer from this. Maybe by adding another
+> VIRTUAL_RUNTIME which can be set to empty when sysv isn't enabled.
 
-On Tue, Jan 06, 2015 at 08:01:07AM -0800, Armin Kuster wrote:
-> the default is to build with GSSAPI enable so we need
-> krb5 support.
+What about just adding initscripts to DEPENDS in update-rc.d.bbclass ? At 
+least then the package would get built.
 
-shouldn't it be in DEPENDS then? RDEPENDS could be too late for
-do_configure to detect it.
+Cheers,
+Paul
 
-Also I don't see 0.6.3 version in current master:
-OE @ ~/meta-openembedded $ find . -name libssh\*
-=2E/meta-oe/recipes-support/libssh2
-=2E/meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb
-=2E/meta-oe/recipes-support/libssh
-=2E/meta-oe/recipes-support/libssh/libssh_git.bb
+-- 
 
->=20
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-oe/recipes-support/libssh/libssh_0.6.3.bb | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-support/libssh/libssh_0.6.3.bb b/meta-oe/rec=
-ipes-support/libssh/libssh_0.6.3.bb
-> index 771a47a..9c5ebf5 100644
-> --- a/meta-oe/recipes-support/libssh/libssh_0.6.3.bb
-> +++ b/meta-oe/recipes-support/libssh/libssh_0.6.3.bb
-> @@ -27,3 +27,6 @@ do_configure_prepend () {
->  }
-> =20
->  FILES_${PN}-dev +=3D "${libdir}/cmake"
-> +
-> +# This builds with GSSAPI enabled as default
-> +RDEPENDS_${PN} =3D "krb5"
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Paul Eggleton
+Intel Open Source Technology Centre
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ZPt4rx8FFjLCG7dd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlSsDaQACgkQN1Ujt2V2gBzGqgCgq0ziI/cH3StDhtWHfYXXqxUJ
-b5gAoIZmnrfbcufrU5t4Haf2tVVbUt54
-=rbJf
------END PGP SIGNATURE-----
-
---ZPt4rx8FFjLCG7dd--
