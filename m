@@ -1,35 +1,27 @@
 Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A20B72849
+	by mail.openembedded.org (Postfix) with ESMTP id BC51F65D19
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 05:51:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55593896"
+	Tue,  6 Jan 2015 05:58:28 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55594124"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 13:47:58 +0800
+	by heian.cn.fujitsu.com with ESMTP; 06 Jan 2015 13:54:28 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t065opTo032134
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t065vKwK032549
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Jan 2015 13:50:51 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Tue, 6 Jan 2015 13:51:25 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] opensaf: add recipe
-Thread-Index: AQHQJNNpk5Zbkv1gSk+rrp6phhU4FZyqEQuAgAiOjNA=
-Date: Tue, 6 Jan 2015 05:51:26 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE6D78@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1420014126-30814-1-git-send-email-biannm@cn.fujitsu.com>
-	<FB0357A0-FF54-472E-9D02-E7FCE744AFE5@gmail.com>
-In-Reply-To: <FB0357A0-FF54-472E-9D02-E7FCE744AFE5@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+	Tue, 6 Jan 2015 13:57:20 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 6 Jan 2015 13:57:54 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 6 Jan 2015 13:53:46 +0800
+Message-ID: <1420523626-4961-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] opensaf: add recipe
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-oe][PATCH v2] imsettings: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,95 +35,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 05:51:26 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 06 Jan 2015 05:58:32 -0000
+Content-Type: text/plain
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRl
-ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBLaGVt
-DQo+IFJhag0KPiBTZW50OiBUaHVyc2RheSwgSmFudWFyeSAwMSwgMjAxNSAxMToxMCBBTQ0KPiBU
-bzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDog
-UmU6IFtvZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0hdIG9wZW5zYWY6IGFkZCByZWNpcGUNCj4g
-DQo+IA0KPiA+IE9uIERlYyAzMSwgMjAxNCwgYXQgMTI6MjIgQU0sIEJpYW4gTmFpbWVuZyA8Ymlh
-bm5tQGNuLmZ1aml0c3UuY29tPiB3cm90ZToNCj4gPg0KPiA+IE9wZW5TQUYgaXMgYW4gb3BlbiBz
-b3VyY2UgaW1wbGVtZW50YXRpb24gb2YgdGhlIFNBRiBBSVMgc3BlY2lmaWNhdGlvbg0KPiA+DQo+
-ID4gU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+
-ID4gLS0tDQo+ID4gLi4uL29wZW5zYWYvaW5zdGFsbC1zYW1wbGVzLWZyb20tc3JjZGlyLnBhdGNo
-ICAgICAgfCAxMSArKysrKysNCj4gPiAuLi4vcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3BlbnNh
-Zl80LjUuMC5iYiAgICAgICB8IDQwDQo+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiAyIGZp
-bGVzIGNoYW5nZWQsIDUxIGluc2VydGlvbnMoKykNCj4gPiBjcmVhdGUgbW9kZSAxMDA2NDQNCj4g
-PiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3BlbnNhZi9pbnN0YWxs
-LXNhbXBsZXMtZnJvbS1zDQo+ID4gcmNkaXIucGF0Y2ggY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4g
-bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVuc2FmL29wZW5zYWZfNC41LjAuYmIN
-Cj4gPg0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1v
-bnMvb3BlbnNhZi9vcGVuc2FmL2luc3RhbGwtc2FtcGxlcy1mcm9tDQo+ID4gLXNyY2Rpci5wYXRj
-aA0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVuc2FmL29wZW5zYWYv
-aW5zdGFsbC1zYW1wbGVzLWZyb20NCj4gPiAtc3JjZGlyLnBhdGNoDQo+ID4gbmV3IGZpbGUgbW9k
-ZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi4wMTZiNjRmDQo+ID4gLS0tIC9kZXYvbnVsbA0K
-PiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvb3BlbnNhZi9vcGVuc2Fm
-L2luc3RhbGwtc2FtcGxlcy0NCj4gPiArKysgZnJvbS1zcmNkaXIucGF0Y2gNCj4gPiBAQCAtMCww
-ICsxLDExIEBADQo+ID4gKy0tLSBvcGVuc2FmLTQuNS4wLm9yaWcvTWFrZWZpbGUuYW0JMjAxNC0x
-Mi0zMSAxNDo0NTo1NC4wODg3OTc5ODkgKzA4MDANCj4gPiArKysrIG9wZW5zYWYtNC41LjAvTWFr
-ZWZpbGUuYW0JMjAxNC0xMi0zMSAxNDo0NTowOC4zMjg3OTY2ODggKzA4MDANCj4gPiArQEAgLTIx
-OSw3ICsyMTksNyBAQCBpbnN0YWxsLWRhdGEtbG9jYWw6DQo+ID4gKyAJJChta2luc3RhbGxkaXJz
-KSAkKERFU1RESVIpJChwa2dwaWRkaXIpDQo+ID4gKyAJJChta2luc3RhbGxkaXJzKSAkKERFU1RE
-SVIpJChsb2NrZGlyKQ0KPiA+ICsgCSQobWtpbnN0YWxsZGlycykgJChERVNURElSKSQocGtnbG9j
-YWxzdGF0ZWRpcikNCj4gPiArLQljcCAtUiBzYW1wbGVzLyAkKERFU1RESVIpJChwa2dkYXRhZGly
-KQ0KPiA+ICsrCWNwIC1SICQoc3JjZGlyKS9zYW1wbGVzLyAkKERFU1RESVIpJChwa2dkYXRhZGly
-KQ0KPiA+ICsNCj4gPiArIGluc3RhbGwtZGF0YS1ob29rOg0KPiA+ICsgCUBmb3IgaSBpbiAkJChn
-cmVwIC1sciAtZSAneHhMSUJESVJ4eCcgLWUgJ3h4TE9HRElSeHgnIC1lDQo+ID4gKyAneHhDTEND
-TElESVJ4eCcgJChERVNURElSKSQocGtnaW1teG1sX3N2Y2RpcikvKi54bWwpIDsgZG8gXA0KPiA+
-IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL29wZW5zYWYvb3Bl
-bnNhZl80LjUuMC5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVu
-c2FmL29wZW5zYWZfNC41LjAuYmINCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4
-IDAwMDAwMDAuLmE1OGRlNWMNCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1uZXR3
-b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9vcGVuc2FmL29wZW5zYWZfNC41LjAuYmINCj4gPiBAQCAt
-MCwwICsxLDQwIEBADQo+ID4gK1NVTU1BUlkgPSAiT3BlblNBRiBpcyBhbiBvcGVuIHNvdXJjZSBp
-bXBsZW1lbnRhdGlvbiBvZiB0aGUgU0FGIEFJUw0KPiBzcGVjaWZpY2F0aW9uIg0KPiA+ICtERVND
-UklQVElPTiA9ICJPcGVuU0FGIGlzIGFuIG9wZW4gc291cmNlIHByb2plY3QgZXN0YWJsaXNoZWQg
-dG8NCj4gPiArZGV2ZWxvcCBhIGJhc2UgcGxhdGZvcm0gXCBtaWRkbGV3YXJlIGNvbnNpc3RlbnQg
-d2l0aCBTZXJ2aWNlDQo+ID4gK0F2YWlsYWJpbGl0eSBGb3J1bSAoU0EgRm9ydW0pIFwgc3BlY2lm
-aWNhdGlvbnMsIHVuZGVyIHRoZSBMR1BMdjIuMQ0KPiA+ICtsaWNlbnNlLiBUaGUgT3BlblNBRiBG
-b3VuZGF0aW9uIHdhcyBcIGVzdGFibGlzaGVkIGJ5IGxlYWRpbmcNCj4gPiArQ29tbXVuaWNhdGlv
-bnMgYW5kIEVudGVycHJpc2UgQ29tcHV0aW5nIENvbXBhbmllcyB0byBcIGZhY2lsaXRhdGUgdGhl
-DQo+ID4gK09wZW5TQUYgUHJvamVjdCBhbmQgdG8gYWNjZWxlcmF0ZSB0aGUgYWRvcHRpb24gb2Yg
-dGhlIE9wZW5TQUYgXCBjb2RlDQo+ID4gK2Jhc2UgaW4gY29tbWVyY2lhbCBwcm9kdWN0cy4gXCBU
-aGUgT3BlblNBRiBwcm9qZWN0IHdhcyBsYXVuY2hlZCBpbg0KPiA+ICttaWQgMjAwNyBhbmQgaGFz
-IGJlZW4gdW5kZXIgZGV2ZWxvcG1lbnQgYnkgXCBhbiBpbmZvcm1hbCBncm91cCBvZg0KPiA+ICtz
-dXBwb3J0ZXJzIG9mIHRoZSBPcGVuU0FGIGluaXRpYXRpdmUuIFRoZSBPcGVuU0FGIFwgRm91bmRh
-dGlvbiB3YXMNCj4gPiArZm91bmRlZCBvbiBKYW51YXJ5IDIybmQgMjAwOCB3aXRoIEVtZXJzb24g
-TmV0d29yayBQb3dlciwgXCBFcmljc3NvbiwgTm9raWENCj4gU2llbWVucyBOZXR3b3JrcywgSFAg
-YW5kIFN1biBNaWNyb3N5c3RlbXMgYXMgZm91bmRpbmcgbWVtYmVycy4iDQo+ID4gK0hPTUVQQUdF
-ID0gImh0dHA6Ly93d3cub3BlbnNhZi5vcmciDQo+ID4gKw0KPiA+ICtpbmhlcml0IGF1dG90b29s
-cyB1c2VyYWRkIHN5c3RlbWQgcGtnY29uZmlnDQo+ID4gKw0KPiA+ICtTUkNfVVJJID0NCj4gImh0
-dHA6Ly9qYWlzdC5kbC5zb3VyY2Vmb3JnZS5uZXQvcHJvamVjdC9vcGVuc2FmL3JlbGVhc2VzLyR7
-QlBOfS0ke1BWfS50YXINCj4gLmd6IFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vaW5zdGFsbC1z
-YW1wbGVzLWZyb20tc3JjZGlyLnBhdGNoIg0KPiA+ICsNCj4gPiArU1JDX1VSSVttZDVzdW1dID0g
-IjUzNGMwYTk5NDM4YTYyYzRjOGRkYTU2Y2ZhNjczMDBjIg0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1
-bV0gPQ0KPiAiMmY1YmE1N2ZlNjdlOTQwOTljMGRmODJkMGEwZGQyMDdiNWM1ODNjOTMwMzAwMzVi
-YTM1NGM5N2I1NDcxYjU5MCINCj4gPiArDQo+ID4gK0xJQ0VOU0UgPSAiTEdQTHYyLjEiDQo+ID4g
-K0xJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0NPUFlJTkcuTElCO21kNT1hOTE2NDY3Yjkx
-MDc2ZTYzMWRkOGVkYjc0MjQ3NjljNyINCj4gPiArDQo+ID4gK0RFUEVORFMgPSAibGlieG1sMiBw
-eXRob24iDQo+ID4gKw0KPiA+ICtVU0VSQUREX1BBQ0tBR0VTID0gIiR7UE59Ig0KPiA+ICtHUk9V
-UEFERF9QQVJBTV8ke1BOfSA9ICItZiAtciBvcGVuc2FmIg0KPiA+ICtVU0VSQUREX1BBUkFNXyR7
-UE59ID0gICItciAtZyBvcGVuc2FmIC1kICR7ZGF0YWRpcn0vb3BlbnNhZi8gLXMNCj4gJHtzYmlu
-ZGlyfS9ub2xvZ2luIC1jIFwiT3BlblNBRlwiIG9wZW5zYWYiDQo+ID4gKw0KPiA+ICtTWVNURU1E
-X1NFUlZJQ0VfJHtQTn0gKz0gIm9wZW5zYWZkLnNlcnZpY2UiDQo+ID4gK1NZU1RFTURfQVVUT19F
-TkFCTEUgPSDigJxkaXNhYmxlIg0KPiANCj4gd2h5IGRpc2FibGUgPw0KPiANCg0KVGhhbmtzIGZv
-ciB5b3VyIHJldmlldy4NCg0KTG9va3MgbGlrZSAiZGlzYWJsZSIgaXMgZGVmYXVsdCBzZXR0aW5n
-IGluIG1ldGEtb3BlbmVtYmVkZGVkLg0KDQpUaGFua3MNCiBCaWFuDQoNCj4gPiArDQo+ID4gK0ZJ
-TEVTXyR7UE59ICs9ICIvcnVu4oCdDQo+IA0KPiBobW1tIC9ydW4gaXMgdXN1YWxseSB0bXBmcyBz
-byB0aGlzIHNob3VsZCBiZSBzb2x2ZWQgZGlmZmVyZW50bHkuDQo+IA0KPiA+ICsNCj4gPiArSU5T
-QU5FX1NLSVBfJHtQTn0gPSAiZGV2LXNvIg0KPiA+ICsNCj4gPiArZG9faW5zdGFsbF9hcHBlbmQo
-KSB7DQo+ID4gKyAgICBybSAtcmYgIiR7RH0ke2xvY2Fsc3RhdGVkaXJ9L3J1biINCj4gPiArfQ0K
-PiA+IC0tDQo+ID4gMS45LjENCj4gPg0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGlu
-ZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4g
-PiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJl
-ZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18NCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiBPcGVu
-ZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
+IMSettings is a framework that delivers Input Method settings and 
+applies the changes so they take effect immediately without 
+any need to restart applications or the desktop.
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ .../imsettings/gtk-is-required-by-notify.patch     | 18 ++++++++++++++
+ ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 20 ++++++++++++++++
+ .../imsettings/imsettings_1.6.7.bb                 | 28 ++++++++++++++++++++++
+ 3 files changed, 66 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
+ create mode 100644 meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+ create mode 100644 meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb
+
+diff --git a/meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch b/meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
+new file mode 100644
+index 0000000..d42358d
+--- /dev/null
++++ b/meta-oe/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
+@@ -0,0 +1,18 @@
++gtk+ is required by linnotify. So make sure gtk be linked before libnotify
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++diff -Nurp imsettings-1.6.7.orig/configure.ac imsettings-1.6.7/configure.ac
++--- imsettings-1.6.7.orig/configure.ac	2013-11-26 16:09:09.000000000 +0800
+++++ imsettings-1.6.7/configure.ac	2014-12-30 11:27:44.370003209 +0800
++@@ -93,8 +93,8 @@ PKG_CHECK_MODULES(LIBNOTIFY, libnotify,
++ 		has_old_libnotify=yes
++ 		PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED)
++ 		AC_DEFINE(HAS_OLD_LIBNOTIFY,, [Using older libnotify])
++-		IMDAEMON_CFLAGS="$GTK_CFLAGS $LIBNOTIFY_OLD_CFLAGS"
++-		IMDAEMON_LIBS="$GTK_LIBS $LIBNOTIFY_OLD_LIBS"],[
+++		IMDAEMON_CFLAGS="$LIBNOTIFY_OLD_CFLAGS $GTK_CFLAGS"
+++		IMDAEMON_LIBS="$LIBNOTIFY_OLD_LIBS $GTK_LIBS"],[
++ 		has_old_libnotify=no
++ 		IMDAEMON_CFLAGS="$LIBNOTIFY_CFLAGS"
++ 		IMDAEMON_LIBS="$LIBNOTIFY_LIBS"])
+diff --git a/meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+new file mode 100644
+index 0000000..1327c85
+--- /dev/null
++++ b/meta-oe/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+@@ -0,0 +1,20 @@
++multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf.
++It will cause configure error as follow.
++
++  aclocal: error: non-option arguments are not accepted: '\'.
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++--- imsettings-1.6.7.orig/Makefile.am	2013-02-08 10:33:59.000000000 +0800
+++++ imsettings-1.6.7/Makefile.am	2014-12-25 11:48:27.078022744 +0800
++@@ -1,9 +1,7 @@
++ NULL =
++ SUBDIRS = data imsettings imsettings-daemon backends utils po tests docs
++ 
++-ACLOCAL_AMFLAGS =			\
++-	-I m4macros			\
++-	$(NULL)
+++ACLOCAL_AMFLAGS = -I m4macros $(NULL)
++ 
++ CONFIGURE_DEPENDENCIES =		\
++ 	requires			\
+diff --git a/meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb b/meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb
+new file mode 100644
+index 0000000..056bfdb
+--- /dev/null
++++ b/meta-oe/recipes-extended/imsettings/imsettings_1.6.7.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Delivery framework for general Input Method configuration"
++DESCRIPTION = "IMSettings is a framework that delivers Input Method \
++settings and applies the changes so they take effect \
++immediately without any need to restart applications \
++or the desktop. \
++This package contains the core DBus services and some utilities."
++HOMEPAGE = "http://code.google.com/p/imsettings/"
++SECTION = "Applications/System"
++
++inherit autotools gtk-doc
++
++SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
++           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch \
++           file://gtk-is-required-by-notify.patch"
++
++SRC_URI[md5sum] = "81ceddbbb443c101d7993a60c5ce6223"
++SRC_URI[sha256sum] = "0d40099e93eb82bd35c29322df374297ae3286b5879b21f5056c8d4b5b7577dd"
++
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
++
++EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
++                --disable-static \
++               "
++
++DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim"
++
++FILES_${PN} += "${datadir}/dbus-1/*"
+-- 
+1.9.1
+
 
