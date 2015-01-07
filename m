@@ -1,32 +1,36 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id D06D465C66
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0426465D40
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 04:36:05 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1Y8iLl-0001tu-NS from Joe_MacDonald@mentor.com ;
-	Tue, 06 Jan 2015 20:36:05 -0800
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 6 Jan 2015 20:36:05 -0800
-Received: by burninator (Postfix, from userid 1000)	id 2BBF1580726; Tue,  6
-	Jan 2015 23:36:01 -0500 (EST)
-Date: Tue, 6 Jan 2015 23:36:01 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20150107043600.GD10013@mentor.com>
-References: <1420559960-8518-1-git-send-email-akuster808@gmail.com>
-	<1420559960-8518-2-git-send-email-akuster808@gmail.com>
-	<20150106162610.GA12498@jama> <54AC9065.70108@gmail.com>
+	Wed,  7 Jan 2015 06:02:43 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55664022"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2015 13:59:16 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t07628AM010233
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 7 Jan 2015 14:02:08 +0800
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Wed, 7 Jan 2015 14:02:46 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][V2 PATCH 3/3] dlm: add a new recipe
+Thread-Index: AQHQKb4XomH49ba6YU617bhsKvF8Vpy0KKkg
+Date: Wed, 7 Jan 2015 06:02:48 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDAE4143@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1420517556-49274-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1420517556-49274-4-git-send-email-leimaohui@cn.fujitsu.com>
+	<20150106143529.GF19402@jama>
+In-Reply-To: <20150106143529.GF19402@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.48]
 MIME-Version: 1.0
-In-Reply-To: <54AC9065.70108@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 1/2] proftpd: fix rdepends issue
+Subject: Re: [meta-oe][V2 PATCH 3/3] dlm: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,106 +44,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 04:36:07 -0000
-X-Groupsio-MsgNum: 53714
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Lb0e7rgc7IsuDeGj"
-Content-Disposition: inline
-
---Lb0e7rgc7IsuDeGj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Jan 2015 06:02:51 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [meta-networking][PATCH 1/2] proftpd: fix rdepends  issue] On 15.=
-01.06 (Tue 17:48) akuster808 wrote:
+Hi Martin
+
+> > +DEPENDS =3D "corosync systemd"
+>=20
+> Does it need explicit systemd dependency?
+> https://git.fedorahosted.org/cgit/dlm.git/tree/dlm_controld/Makefile
+> looks like yes with default USE_SD_NOTIFY
+
+Yes.
 
 >=20
->=20
-> On 01/06/2015 08:26 AM, Martin Jansa wrote:
-> >On Tue, Jan 06, 2015 at 07:59:19AM -0800, Armin Kuster wrote:
-> >>Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> >>---
-> >>  meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb | 2 +-
-> >>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >>diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb b=
-/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
-> >>index cba39e8..7d285a0 100644
-> >>--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
-> >>+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
-> >>@@ -99,4 +99,4 @@ USERADD_PARAM_${PN} =3D "--system -g ${FTPGROUP} --ho=
-me-dir /var/lib/${FTPUSER} --
-> >>
-> >>  FILES_${PN} +=3D "/home/${FTPUSER}"
-> >>
-> >>-RDEPENDS_${PN} +=3D "perl"
-> >>+RDEPENDS_${PN} +=3D "perl initscripts-functions"
-> >
-> >It's not that simple.
->=20
-> Had to try :)
-> >
-> >The initscripts-functions is added to RDEPENDS conditionally based on
-> >"sysvinit" in DISTRO_FEATURES and INHIBIT_UPDATERCD_BBCLASS.
-> >
-> >Adding it explicitly here will pull it to image even for people who
-> >care only about systemd services (and don't want any iniscripts to
-> >pollute their startup sequence).
->=20
-> make sense.
->=20
-> >
-> >See meta/classes/update-rc.d.bbclass
->=20
-> thanks for the reference.
-> >
-> >I know we already have one recipe like this:
-> >meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb:RDEPENDS_${PN} +=3D "in=
-itscripts-functions"
-> >
-> >but honestly silencing this warning like this does more harm then
-> >the warning. I think it should be fixed in bbclass, because all
-> >recipes which inherit it, suffer from this. Maybe by adding another
-> >VIRTUAL_RUNTIME which can be set to empty when sysv isn't enabled.
->=20
-> k.
->=20
-> Does the 5 second rule count ? or because I touched it I am stuck
-> with it ; )
+> If yes, then it should be together with
+> REQUIRED_DISTRO_FEATURES =3D "systemd"
+> to prevent world error when systemd isn't in DISTRO_FEATURES
+> ERROR: Nothing PROVIDES 'systemd' (but
+> meta-oe/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb DEPENDS on or otherwise
+> requires it)
+> ERROR: systemd was skipped: 'systemd' not in DISTRO_FEATURES
 
-If you invoke the five-second-rule, I think it can apply, but if you're
-anything like me, once you step in something it's almost impossible to
-pretend you didn't.  ;-)
+But I think add REQUIRED_DISTRO_FEATURES can't prevent the world error.
+Even if I add the REQUIRED_DISTRO_FEATURES =3D "systemd",the error still ap=
+pears.
+Unless add "system" into DISTRO_FEATURES.
+The following comes from http://www.yoctoproject.org/docs/1.7/ref-manual/re=
+f-manual.html .
+********************************************************
+REQUIRED_DISTRO_FEATURES
+When inheriting the distro_features_check class, this variable identifies d=
+istribution features that must exist in the current configuration in order =
+for the OpenEmbedded build system to build the recipe. In other words, if t=
+he REQUIRED_DISTRO_FEATURES variable lists a feature that does not appear i=
+n DISTRO_FEATURES within the current configuration, an error occurs and the=
+ build stops.
+********************************************************
 
--J.
 
+Cheers
+Lei
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Tuesday, January 06, 2015 10:35 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][V2 PATCH 3/3] dlm: add a new recipe
 >=20
-> I will take a look.
+> On Tue, Jan 06, 2015 at 12:12:36PM +0800, leimaohui wrote:
+> > From: leimh <leimaohui@cn.fujitsu.com>
+> >
+> > The kernel dlm requires a user daemon to control membership.
+> >
+> > Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
+> > ---
+> >  meta-oe/recipes-extended/dlm/dlm_4.0.2.bb | 47
+> > +++++++++++++++++++++++++++++++
+> >  1 file changed, 47 insertions(+)
+> >  create mode 100644 meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> >
+> > diff --git a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > new file mode 100644
+> > index 0000000..774f136
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > @@ -0,0 +1,47 @@
+> > +DESCRIPTION =3D "dlm control daemon and tool"
+> > +
+> > +SECTION =3D "utils"
+> > +HOMEPAGE =3D "https://fedorahosted.org/cluster/wiki/HomePage"
+> > +
+> > +SRC_URI =3D
+> "https://git.fedorahosted.org/cgit/dlm.git/snapshot/${BP}.tar.xz"
+> > +
+> > +SRC_URI[md5sum] =3D "efc2ee6093aa6aa0a88aaad83e998a3f"
+> > +SRC_URI[sha256sum] =3D
+> "b89bc557aaffbab0ac005398025f247718a5589cff6574d902eaffe2b20e683e"
+> > +
+> > +LICENSE =3D "LGPLv2+ & GPLv2 & GPLv2+"
+> > +LIC_FILES_CHKSUM =3D
+> "file://README.license;md5=3D8f0bbcdd678df1bce9863492b6c8832d"
+> > +
+> > +DEPENDS =3D "corosync systemd"
 >=20
-> thanks,
-> Armin
+> Does it need explicit systemd dependency?
+> https://git.fedorahosted.org/cgit/dlm.git/tree/dlm_controld/Makefile
+> looks like yes with default USE_SD_NOTIFY
+>=20
+> If yes, then it should be together with
+> REQUIRED_DISTRO_FEATURES =3D "systemd"
+> to prevent world error when systemd isn't in DISTRO_FEATURES
+> ERROR: Nothing PROVIDES 'systemd' (but
+> meta-oe/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb DEPENDS on or otherwise
+> requires it)
+> ERROR: systemd was skipped: 'systemd' not in DISTRO_FEATURES
+>=20
+> > +
+> > +inherit pkgconfig systemd
+> > +
+> > +SYSTEMD_SERVICE_${PN} =3D "dlm.service"
+> > +SYSTEMD_AUTO_ENABLE =3D "enable"
+> > +
+> > +export EXTRA_OEMAKE =3D ""
+> > +
+> > +do_compile_prepend() {
+> > +    sed -i "s/libsystemd-daemon/libsystemd/g"
+> > +${S}/dlm_controld/Makefile }
+> > +
+> > +do_compile () {
+> > +    oe_runmake 'CC=3D${CC}'
+> > +}
+> > +
+> > +do_install_append (){
+> > +    install -d ${D}${sysconfdir}/sysconfig/
+> > +    install -d ${D}${sysconfdir}/init.d/
+> > +    install -m 0644 ${S}/init/dlm.sysconfig
+> ${D}${sysconfdir}/sysconfig/dlm
+> > +    install -m 0644 ${S}/init/dlm.init ${D}${sysconfdir}/init.d/dlm
+> > +
+> > +    # install systemd unit files
+> > +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}=
+;
+> then
+> > +        install -d ${D}${systemd_unitdir}/system
+> > +        install -m 0644 ${S}/init/dlm.service
+> ${D}${systemd_unitdir}/system
+> > +    fi
+> > +}
+> > +
+> > +do_install() {
+> > +    oe_runmake install DESTDIR=3D${D} LIBDIR=3D${libdir} }
+> > +
+> > --
+> > 1.8.4.2
 > >
-> >
-> >
---=20
--Joe MacDonald.
-:wq
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---Lb0e7rgc7IsuDeGj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUrLewAAoJEEn8ffcsOfaW9PEIAJCD/JaKbqFvRnIWdm9/YUaG
-3/PFMwYUqEkJ4SkeeNdmr1v/R0TsX1nSpj/ab2jGZ5It8gceTEWdQB+T3t2jxDYa
-jmYTtSmc85H52Fozuaj8uOLKe3MtKsTxcqPKXwiWwVNp17SSoQ8fb1Dam/EMumnT
-0BrzKkOfuKXimOgRKoXm7lv0jiDKbLzb5JhwayTSrqZITzvkejxRVC4FiyY3jrAV
-m+oaFIirQAfKhz6ss2+VHKBYfTE5OFq3V/3TYaVeR2sEDcGM/X/EaDvTUO5awJVm
-tCFHR6POvIWME2/XZy2oczamLbJ6+W1vSezbp7ESbT4V+zaMrADvLmGCNAdMV40=
-=WRpG
------END PGP SIGNATURE-----
-
---Lb0e7rgc7IsuDeGj--
