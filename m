@@ -1,28 +1,30 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id DDCFD65D40
+Return-Path: <rapphil@gmail.com>
+Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
+	[209.85.192.41])
+	by mail.openembedded.org (Postfix) with ESMTP id AB69865C66
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 09:27:48 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga102.jf.intel.com with ESMTP; 07 Jan 2015 01:25:23 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,713,1413270000"; d="scan'208";a="647474064"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.3.155])
-	by fmsmga001.fm.intel.com with ESMTP; 07 Jan 2015 01:27:47 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org,
-	Bian Naimeng <biannm@cn.fujitsu.com>
-Date: Wed, 07 Jan 2015 09:27:46 +0000
-Message-ID: <2220709.jFTZT0BvCv@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.7-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <B851B2EA-9E81-40E6-A1E9-B8C30DD9E194@gmail.com>
-References: <54A97D15.4080801@gmail.com>
-	<B851B2EA-9E81-40E6-A1E9-B8C30DD9E194@gmail.com>
+	Wed,  7 Jan 2015 09:47:34 +0000 (UTC)
+Received: by mail-qg0-f41.google.com with SMTP id e89so656618qgf.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jan 2015 01:47:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=LIaF/mu2rU765cugj5xIMPnt3//vn+stT9cROg9ZSz8=;
+	b=BbDLIdYNv0CcafzfdOWaOBrLRAICy3g8GMcj8MgPSTijObq3Qqx3HtIadtxYtKLIEP
+	KXv//dtDA4FFhG7MADww6Vrt4PhjDiTLoI+P0dOnKbSASbC1q30/18GSAMZmgO1ZWnUp
+	ojfccTBFXtNL02aVEuszj4WmH1yYj2deLeo7peRtKKJtyVbxsDmqgm1x7lNABvw0MLip
+	anqbM97LMaEj4SzP7RM0SOhUTyWGykf6tWkngL2/uEJQEwZnMmXi3mWTxJe24+RCzomS
+	X+/E1yhOaupYLRSB7Hjwr52qIJ/8HoDdF14hEX0VbyrDQtPkKbac3jRXrxbdmRTtpV67
+	MCfA==
 MIME-Version: 1.0
-Subject: Re: recent addition of libgxim depends issue
+X-Received: by 10.229.130.65 with SMTP id r1mr3092347qcs.16.1420624055398;
+	Wed, 07 Jan 2015 01:47:35 -0800 (PST)
+Received: by 10.140.142.134 with HTTP; Wed, 7 Jan 2015 01:47:35 -0800 (PST)
+Date: Wed, 7 Jan 2015 07:47:35 -0200
+Message-ID: <CAENGNhdTiTo_xWs0uyLVWM6+A29xbF=4ROaxkN=fGkC+S97Zkw@mail.gmail.com>
+From: Raphael Philipe <rapphil@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Soft66 repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,32 +38,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 09:27:51 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 07 Jan 2015 09:47:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tuesday 06 January 2015 16:41:52 Khem Raj wrote:
-> > On Jan 4, 2015, at 9:49 AM, akuster808 <akuster808@gmail.com> wrote:
-> > While building world I found and issue with libgxim.
-> > 
-> > libgxim depends on ruby-native. meta-ruby is not a layer depends for
-> > meta-oe.
-> > 
-> > Can meta-oe have layer depends other then 'core' ? if so, this is an easy
-> > fix.
->
-> I would not like to have such a dependency. May be move this recipe to
-> meta-ruby
+Hi,
 
-If it's not specifically a ruby-related piece of software (which it doesn't 
-seem to be, at a glance) then that wouldn't seem right. Can the ruby 
-dependency be disabled by default using PACKAGECONFIG perhaps?
+I tried to remove soft66 from blacklist since libftdi was updated.
+However, I was not able to download it from the repository. Soft66
+failed in the do_fetch.
 
-Cheers,
-Paul
+Does someone know if Soft66 is still mantained?
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Regards,
 
