@@ -1,36 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CCE47201A
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id E3E4A72A0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 17:01:01 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id rd18so4692828iec.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jan 2015 09:01:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=rWBXiZ72Xz2w0xz+WvP5J8lE/EJOnMfunEjYYU0zbns=;
-	b=v9OmF+go4lyDVwR7cYoaMjB766MtIvmKux4P6kzg9oGcKZdRZMq0CBMehbaSC630At
-	J9U5Hy0OH8NeGjSTaGlxnBRzCeLYIn/wdVmQeZF5tyF23MzIQ+VDIAGgIgJsrjaUDNbi
-	b3GN0exzOG37PaYa5eEC03rQSDamHLVrQr2TXDG0XxiM1/tAmvlSdNR++f5Hc3KifOyI
-	t7jEcnrEliTyTJydFxQScNb7v4pFqSYJXwJwhdyJ6zCFYg8IIO2ESCIv0dr9vR7xnrBR
-	pOXkb9uxIzS7wJaljC0z3v+v2I+umFX8URZECooE8wyFWWv0QZnRmTDk7XNP4AoISs0K
-	MJ0A==
-X-Received: by 10.42.229.132 with SMTP id ji4mr3892738icb.86.1420650061823;
-	Wed, 07 Jan 2015 09:01:01 -0800 (PST)
+	Wed,  7 Jan 2015 19:11:04 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1Y8w0W-0005gB-Fo from Joe_MacDonald@mentor.com ;
+	Wed, 07 Jan 2015 11:11:04 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2; Wed, 7 Jan 2015
+	11:11:04 -0800
+Received: by burninator (Postfix, from userid 1000)	id 123D658251B; Wed,  7
+	Jan 2015 14:11:00 -0500 (EST)
+Date: Wed, 7 Jan 2015 14:11:00 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <20150107191059.GG10013@mentor.com>
+References: <1420325258-41206-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Received: by 10.50.117.7 with HTTP; Wed, 7 Jan 2015 09:00:31 -0800 (PST)
-In-Reply-To: <2220709.jFTZT0BvCv@peggleto-mobl5.ger.corp.intel.com>
-References: <54A97D15.4080801@gmail.com>
-	<B851B2EA-9E81-40E6-A1E9-B8C30DD9E194@gmail.com>
-	<2220709.jFTZT0BvCv@peggleto-mobl5.ger.corp.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 7 Jan 2015 09:00:31 -0800
-Message-ID: <CAMKF1so4_twi6X-df5xCbXjd5d1kSg8HdwxP74VNF3hboJhU8Q@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: recent addition of libgxim depends issue
+In-Reply-To: <1420325258-41206-1-git-send-email-liezhi.yang@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [V2 meta-networking] [PATCH 1/2] radiusclient-ng: use BPN in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,14 +38,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 17:01:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 07 Jan 2015 19:11:12 -0000
+X-Groupsio-MsgNum: 53747
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="VIOdPewhitSMo36n"
+Content-Disposition: inline
 
-On Wed, Jan 7, 2015 at 1:27 AM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> If it's not specifically a ruby-related piece of software (which it doesn't
-> seem to be, at a glance) then that wouldn't seem right. Can the ruby
-> dependency be disabled by default using PACKAGECONFIG perhaps?
+--VIOdPewhitSMo36n
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-thats another option yes
+Merged both of these, thanks.
+-J.
 
+[[oe] [V2 meta-networking] [PATCH 1/2] radiusclient-ng: use BPN in SRC_URI]=
+ On 15.01.03 (Sat 14:47) Robert Yang wrote:
+
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  .../radiusclient-ng/radiusclient-ng_0.5.6.bb       |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-protocols/radiusclient-ng/radiusclie=
+nt-ng_0.5.6.bb b/meta-networking/recipes-protocols/radiusclient-ng/radiuscl=
+ient-ng_0.5.6.bb
+> index 1fafe73..2350d4f 100644
+> --- a/meta-networking/recipes-protocols/radiusclient-ng/radiusclient-ng_0=
+=2E5.6.bb
+> +++ b/meta-networking/recipes-protocols/radiusclient-ng/radiusclient-ng_0=
+=2E5.6.bb
+> @@ -5,7 +5,7 @@ protocol (RFCs 2128 and 2139)."
+>  HOMEPAGE =3D "http://sourceforge.net/projects/radiusclient-ng.berlios/"
+>  SECTION =3D "Applications/Internet"
+> =20
+> -SRC_URI =3D "${DEBIAN_MIRROR}/main/r/${PN}/${PN}_${PV}.orig.tar.gz \
+> +SRC_URI =3D "${DEBIAN_MIRROR}/main/r/${BPN}/${BPN}_${PV}.orig.tar.gz \
+>     file://Modify-configure.in-and-etc-Makefile.am.patch \
+>     file://config-site.radiusclient-ng-${PV}"
+> =20
+> --=20
+> 1.7.9.5
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--VIOdPewhitSMo36n
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iQEcBAEBAgAGBQJUrYS9AAoJEEn8ffcsOfaWW9QIAKTH8ipu0Sf1XhnwyNnfzM77
+k/T9MvXTB9HzY/kel+ElrSHazBI03zcQyT4cU0PCrkoqwvNtkyVWqWJijSNnpN0l
+SILHHKTLMzgsPFWFdhciUwpRpdta64xeDLwesftg2hjKtrYzqhmNV0H20ZPki9sN
+5AyNUaCXOZQyaUJsSv7oTX6kJ0OHtTeGpBkz5x/ZOzochIhZtkSrTjdz5HxE+Cs3
+nHpYoKFREPnzTCDET6o16osw2R+i1x52ZU4tVoYATr9BbAi9noS1IvrFNPq+RGkg
+Ek8i3f8IFdrNXyty1JoQ5GwF3KgPI/fqIApCGh/krqtSYbhKVUVaz/4mz3MVde0=
+=R8nY
+-----END PGP SIGNATURE-----
+
+--VIOdPewhitSMo36n--
