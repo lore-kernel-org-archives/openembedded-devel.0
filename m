@@ -1,30 +1,30 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id C062872A13
+	by mail.openembedded.org (Postfix) with ESMTP id A21F065C66
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 19:12:00 +0000 (UTC)
+	Wed,  7 Jan 2015 19:12:29 +0000 (UTC)
 Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
 	by relay1.mentorg.com with esmtp 
-	id 1Y8w1R-0005xO-9I from Joe_MacDonald@mentor.com ;
-	Wed, 07 Jan 2015 11:12:01 -0800
+	id 1Y8w1u-000680-9C from Joe_MacDonald@mentor.com ;
+	Wed, 07 Jan 2015 11:12:30 -0800
 Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
 	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2; Wed, 7 Jan 2015
-	11:12:00 -0800
-Received: by burninator (Postfix, from userid 1000)	id EA3F058251B; Wed,  7
-	Jan 2015 14:11:56 -0500 (EST)
-Date: Wed, 7 Jan 2015 14:11:56 -0500
+	11:12:29 -0800
+Received: by burninator (Postfix, from userid 1000)	id 09F1358251B; Wed,  7
+	Jan 2015 14:12:26 -0500 (EST)
+Date: Wed, 7 Jan 2015 14:12:26 -0500
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Bian Naimeng <biannm@cn.fujitsu.com>
-Message-ID: <20150107191156.GH10013@mentor.com>
-References: <1420448513-21578-1-git-send-email-biannm@cn.fujitsu.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20150107191225.GI10013@mentor.com>
+References: <cover.1420454954.git.paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1420448513-21578-1-git-send-email-biannm@cn.fujitsu.com>
+In-Reply-To: <cover.1420454954.git.paul.eggleton@linux.intel.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v2] linux-atm: add recipe.
+Subject: Re: [meta-networking][PATCH 0/5] Networking fixes and upgrades
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,176 +38,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 19:12:00 -0000
-X-Groupsio-MsgNum: 53748
+X-List-Received-Date: Wed, 07 Jan 2015 19:12:31 -0000
+X-Groupsio-MsgNum: 53749
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FCF9ydJxlAJsfRTu"
+	protocol="application/pgp-signature"; boundary="RD6GsZsdEJvsf78O"
 Content-Disposition: inline
 
---FCF9ydJxlAJsfRTu
+--RD6GsZsdEJvsf78O
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Merged, I changed DESCRIPTION to SUMMARY in the recipe since it was just
-a one-liner, but that's it.  Thanks.
-
+Merged, thanks.
 -J.
 
-[[oe] [meta-networking][PATCH v2] linux-atm: add recipe.] On 15.01.05 (Mon =
-17:01) Bian Naimeng wrote:
+[[oe] [meta-networking][PATCH 0/5] Networking fixes and upgrades] On 15.01.=
+05 (Mon 10:51) Paul Eggleton wrote:
 
-> Drivers and tools to support ATM networking under Linux
+> Fix a couple of issues in the ntp recipe reported by Philip Balister
+> (the file locations patch was previously posted separately; this
+> version is identical). Also upgrade a few recipes.
 >=20
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> ---
->  .../linux-atm/linux-atm/install-from-buildir.patch | 19 +++++++++++
->  .../linux-atm/linux-atm/link-with-ldflags.patch    | 38 ++++++++++++++++=
-++++++
->  .../recipes-support/linux-atm/linux-atm_2.5.2.bb   | 22 +++++++++++++
->  3 files changed, 79 insertions(+)
->  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/i=
-nstall-from-buildir.patch
->  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/l=
-ink-with-ldflags.patch
->  create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm_2=
-=2E5.2.bb
 >=20
-> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/install-=
-=66rom-buildir.patch b/meta-networking/recipes-support/linux-atm/linux-atm/=
-install-from-buildir.patch
-> new file mode 100644
-> index 0000000..d1380eb
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/linux-atm/linux-atm/install-from-bu=
-ildir.patch
-> @@ -0,0 +1,19 @@
-> +install binaries from builddir not srcdir.
-> +
-> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> +
-> +--- linux-atm-2.5.2.orig/src/extra/Makefile.am	2010-12-21 05:07:22.00000=
-0000 +0800
-> ++++ linux-atm-2.5.2/src/extra/Makefile.am	2014-12-22 10:56:04.458563269 =
-+0800
-> +@@ -9,9 +9,9 @@ CLEANFILES =3D pca200e.bin pca200e_ecd.bin
-> +=20
-> + install-exec-hook:
-> + 	$(MKDIR_P) $(DESTDIR)/lib/firmware
-> +-	$(INSTALL_DATA) $(srcdir)/pca200e.bin $(DESTDIR)/lib/firmware
-> +-	$(INSTALL_DATA) $(srcdir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> +-	$(INSTALL_DATA) $(srcdir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> ++	$(INSTALL_DATA) $(builddir)/pca200e.bin $(DESTDIR)/lib/firmware
-> ++	$(INSTALL_DATA) $(builddir)/pca200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> ++	$(INSTALL_DATA) $(builddir)/sba200e_ecd.bin2 $(DESTDIR)/lib/firmware
-> +=20
-> + %.bin %.bin2: %.data
-> + 	objcopy -Iihex $< -Obinary $@.gz
-> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/link-wit=
-h-ldflags.patch b/meta-networking/recipes-support/linux-atm/linux-atm/link-=
-with-ldflags.patch
-> new file mode 100644
-> index 0000000..62fad2a
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/linux-atm/linux-atm/link-with-ldfla=
-gs.patch
-> @@ -0,0 +1,38 @@
-> +LDFLAGS_FOR_BUILD should be required when doing link for qgen.
-> +
-> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> +
-> +diff -Nurp linux-atm-2.5.2.orig/configure.in linux-atm-2.5.2/configure.in
-> +--- linux-atm-2.5.2.orig/configure.in	2010-12-28 23:36:07.000000000 +0800
-> ++++ linux-atm-2.5.2/configure.in	2014-12-22 10:25:23.830510932 +0800
-> +@@ -66,6 +66,7 @@ else
-> + fi
-> + AC_SUBST(CC_FOR_BUILD)
-> + AC_SUBST(CFLAGS_FOR_BUILD)
-> ++AC_SUBST(LDFLAGS_FOR_BUILD)
-> + dnl Add -d flag to bison/yacc to create intermediate .h files
-> + YACC=3D"$YACC -d"
-> +=20
-> +diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.am linux-atm-2.5.2/src=
-/qgen/Makefile.am
-> +--- linux-atm-2.5.2.orig/src/qgen/Makefile.am	2010-12-28 22:29:31.000000=
-000 +0800
-> ++++ linux-atm-2.5.2/src/qgen/Makefile.am	2014-12-22 10:23:51.914508318 +=
-0800
-> +@@ -5,7 +5,7 @@ qgen_SOURCES =3D common.c common.h file.c
-> + qgen_LDADD =3D -lfl
-> +=20
-> + COMPILE =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@
-> +-LINK =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ -o $@
-> ++LINK =3D @CC_FOR_BUILD@ @CFLAGS_FOR_BUILD@ @LDFLAGS_FOR_BUILD@ -o $@
-> +=20
-> + #TESTS =3D $(check_PROGRAMS)
-> +=20
-> +diff -Nurp linux-atm-2.5.2.orig/src/qgen/Makefile.in linux-atm-2.5.2/src=
-/qgen/Makefile.in
-> +--- linux-atm-2.5.2.orig/src/qgen/Makefile.in	2010-12-29 00:06:11.000000=
-000 +0800
-> ++++ linux-atm-2.5.2/src/qgen/Makefile.in	2014-12-22 10:23:51.914508318 +=
-0800
-> +@@ -106,6 +106,7 @@ INSTALL_SCRIPT =3D @INSTALL_SCRIPT@
-> + INSTALL_STRIP_PROGRAM =3D @INSTALL_STRIP_PROGRAM@
-> + LD =3D @LD@
-> + LDFLAGS =3D @LDFLAGS@
-> ++LDFLAGS_FOR_BUILD =3D @LDFLAGS_FOR_BUILD@
-> + LEX =3D @LEX@
-> + LEXLIB =3D @LEXLIB@
-> + LEX_OUTPUT_ROOT =3D @LEX_OUTPUT_ROOT@
-> diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb=
- b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-> new file mode 100644
-> index 0000000..4c0345b
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION =3D "Drivers and tools to support ATM networking under Linux"
-> +HOMEPAGE =3D "http://linux-atm.sourceforge.net/"
-> +SECTION =3D "libs"
-> +LICENSE =3D "GPL-2.0 & LGPL-2.0"
-> +
-> +DEPENDS =3D "virtual/kernel flex flex-native"
-> +
-> +SRC_URI =3D "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/=
-${BPN}-${PV}.tar.gz \
-> +           file://link-with-ldflags.patch \
-> +           file://install-from-buildir.patch"
-> +
-> +SRC_URI[md5sum] =3D "d49499368c3cf15f73a05d9bce8824a8"
-> +SRC_URI[sha256sum] =3D "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37=
-581018fbd16dd53a"
-> +
-> +LIC_FILES_CHKSUM =3D "\
-> +file://COPYING;md5=3Dd928de9537d846935a98af3bbc6e6ee1 \
-> +file://COPYING.GPL;md5=3Dac2db169b9309e240555bc77be4f1a33 \
-> +file://COPYING.LGPL;md5=3D6e29c688d912da12b66b73e32b03d812"
-> +
-> +inherit autotools pkgconfig
-> +
-> +FILES_${PN} +=3D "${base_libdir}/firmware"
+> The following changes since commit 2ea3a19a478c526baa04d6b9a9e8c9f42aae9d=
+34:
+>=20
+>   ctapi-common: Add new recipe (2014-12-31 16:38:22 +0100)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/meta-openembedded-contrib paule/networking-f=
+ixes
+>   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=
+=3Dpaule/networking-fixes
+>=20
+> Paul Eggleton (5):
+>   ntp: fix file locations
+>   ntp: add explicit perl dependency to ntp-utils package
+>   mtr: update to 0.86
+>   traceroute: update to 2.0.21
+>   dnsmasq: update to 2.72
+>=20
+>  .../recipes-support/dnsmasq/dnsmasq_2.71.bb        | 10 -------
+>  .../recipes-support/dnsmasq/dnsmasq_2.72.bb        | 10 +++++++
+>  .../recipes-support/mtr/files/configure.patch      | 12 ---------
+>  .../recipes-support/mtr/files/no-gtk.patch         | 31 ----------------=
+------
+>  .../mtr/{mtr_0.82.bb =3D> mtr_0.86.bb}               | 10 +++----
+>  meta-networking/recipes-support/ntp/ntp_4.2.8.bb   | 22 +++++++--------
+>  .../{traceroute_2.0.20.bb =3D> traceroute_2.0.21.bb} |  6 ++---
+>  7 files changed, 28 insertions(+), 73 deletions(-)
+>  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.71.=
+bb
+>  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.72.=
+bb
+>  delete mode 100644 meta-networking/recipes-support/mtr/files/configure.p=
+atch
+>  delete mode 100644 meta-networking/recipes-support/mtr/files/no-gtk.patch
+>  rename meta-networking/recipes-support/mtr/{mtr_0.82.bb =3D> mtr_0.86.bb=
+} (51%)
+>  rename meta-networking/recipes-support/traceroute/{traceroute_2.0.20.bb =
+=3D> traceroute_2.0.21.bb} (89%)
+>=20
 > --=20
-> 1.9.1
+> 1.9.3
 >=20
 --=20
 -Joe MacDonald.
 :wq
 
---FCF9ydJxlAJsfRTu
+--RD6GsZsdEJvsf78O
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJUrYT8AAoJEEn8ffcsOfaWGaoIAL1hvOXoys1BhgVnh+38TZPM
-lOVE/nT9UCXeyusyVUXqNltQIMODu+iwBsIkElgNJLhs5DYm/gWqbUe5kM15K+lg
-FpuIQysbefWATjG4s5l+Mo/m45n9PLz+UvhJ+4xjMK8l1ZaZj6ARJo+Jyh/0M77K
-CwDKSIirorRu9iG+TQsW0cXflOObaoGDLqd1sYcp4NHoabz5eSPqo558IAxw6ciz
-qHn7Oqyl4qPBevqnjEu+2eHjoxGzDxMA9eHaCsndlgLTNbJ47tDJbur5x5Lf8KCb
-WeG4VtH4C0woYduJrNIMJGj/rEJBIOpOrpYx8Q2P4hJWOR9TZvwkIcPacvBcd8E=
-=Pl6T
+iQEcBAEBAgAGBQJUrYUZAAoJEEn8ffcsOfaWKwIH/j49/cyiTdsh9TWDK1omMrb/
+uBy2MLpvEpscB3eiJyypMvZiyIabskljQK+eIel9tLjeCR26Ix4OUNWQTeO0UhRP
+zHfyd2+SunaokbC00uXU4/2CYRZCMsdv8LFaO/GJLIQ+zW09surJhQmCY7t4Y8cp
+Slv/HctqlWgJW29MHDaWt9IcGUGgD1tkyM/Ue10DCSP8ESUBhZnXmsjDCPHhU/ye
+FKZgGaHzzn+/aMy8uNE6WooU9Tk+WZE0Gf0sloz2NQxwrpXd0j6MH8k53oE8uGHh
+tsGi2QEYvjaHB7Ey7aFdvz6iEJ67Whcc9TCqE2HMzhnISEMiAq8Vr/rcS42lj2c=
+=gK+7
 -----END PGP SIGNATURE-----
 
---FCF9ydJxlAJsfRTu--
+--RD6GsZsdEJvsf78O--
