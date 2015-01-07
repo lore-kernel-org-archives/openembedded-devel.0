@@ -1,41 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 68A72729BB
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 997B3729BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 10:42:45 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id b13so923029wgh.3
+	Wed,  7 Jan 2015 11:53:20 +0000 (UTC)
+Received: by mail-wi0-f179.google.com with SMTP id ex7so1444078wid.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jan 2015 02:42:45 -0800 (PST)
+	Wed, 07 Jan 2015 03:53:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=VMDgTY7YVsPXE4djth3jb6YPGpVAu/f6vKPU+E7cDtQ=;
-	b=qz9Gck7s2JMzr5/1s++YLUbP5nzE8TgbyUSGFaNgWggj14ikM8pRXWtMwxvRbfJjc5
-	Tngo7zS2a/qgmb/f0x1PBsDCkYAv6ZMWH155uJ6/QxfL8sW90snBE08FDp2E9em4nPob
-	LA/g+YDvq7puf79rq08yK68OwxiW2DoZS4oQFVFIBhLWnUAk92li/upphqf1XEbA80Po
-	dvUFcO77DNkSjTrrvr66nGGszXa6utaMAGOJqZJY3dBoMudiXLujd910M2V4rUXneafw
-	x5mXKRdPsW8XQeNoNqgJ+jS5n84mig84JIXdoESEPJZaI6zd2m35F9Eth1VQ4QKv7nbl
-	5Jvg==
-X-Received: by 10.194.85.197 with SMTP id j5mr4786097wjz.106.1420627365381;
-	Wed, 07 Jan 2015 02:42:45 -0800 (PST)
+	bh=+tVPTqmM/cCRw9LOc0YeC+Mfoe4RMqz102wVIDrxjik=;
+	b=iDyjkjtHaviYWLxXhOiR/bAw7HHDv+iMZY+mzXk3jARZ697Q/gBsVONgJXg9U6e34n
+	Dm5F4BPnfqoRxN3OX8lPbLeR8QGqCqS2BqUbJzjknFuuokT+R6mM/eyiyrM7m1m/1Tbd
+	c6xzf4WQoP7iiFvXc8jdeq5pVRrr9aOGYs5cCSx5x+ICXv6X2Y0BzoKhI6v+duCbTuDv
+	KWE6I8D2TdK+Ff87ntS3eK+zNyEsH0FWxFDw/DiycY9FyYELWxOG9I3eaHI9CGGLIjtw
+	wida9iNd1iemtC7QCOPx5cFGqvmqizp8e05/uWj0cSMqsLNCzuAJZsFrDcSSGLYLbqIA
+	Zx2Q==
+X-Received: by 10.194.93.5 with SMTP id cq5mr5374616wjb.84.1420631601157;
+	Wed, 07 Jan 2015 03:53:21 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fx6sm1601668wjc.39.2015.01.07.02.42.44
+	b10sm2291300wiw.9.2015.01.07.03.53.19
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 07 Jan 2015 02:42:44 -0800 (PST)
+	Wed, 07 Jan 2015 03:53:19 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 7 Jan 2015 11:42:47 +0100
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20150107104247.GK29986@jama>
-References: <cover.1420453688.git.paul.eggleton@linux.intel.com>
-	<20150105115922.GF2484@jama> <20150107101423.GH29986@jama>
-	<2715569.PMW4haZ672@peggleto-mobl5.ger.corp.intel.com>
+Date: Wed, 7 Jan 2015 12:53:22 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150107115322.GL29986@jama>
+References: <1417659220-8645-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <2715569.PMW4haZ672@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <1417659220-8645-1-git-send-email-qianl.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe/meta-webserver][PATCH v2 00/11] Merge modphp into php and upgrade
+Subject: Re: [meta-oe][PATCH] libutempter: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,61 +48,293 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 10:42:49 -0000
-X-Groupsio-MsgNum: 53726
+X-List-Received-Date: Wed, 07 Jan 2015 11:53:22 -0000
+X-Groupsio-MsgNum: 53727
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vk/v8fjDPiDepTtA"
+	protocol="application/pgp-signature"; boundary="7l042bGvurpep9Wg"
 Content-Disposition: inline
 
---vk/v8fjDPiDepTtA
+--7l042bGvurpep9Wg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 07, 2015 at 10:34:43AM +0000, Paul Eggleton wrote:
-> On Wednesday 07 January 2015 11:14:23 Martin Jansa wrote:
-> > On Mon, Jan 05, 2015 at 12:59:22PM +0100, Martin Jansa wrote:
-> > > Thanks for v2
-> > >=20
-> > > Please remember to update your old series as superseded when pushing
-> > > newer version, it would help me a lot when sorting the pending patche=
-s.
-> >=20
-> > Something is wrong:
-> >=20
-> > php-5.5.20: php requires
-> > /tmp/work/core2-64-oe-linux/php/5.5.20-r0/image/usr/bin/php, but no
-> > providers in its RDEPENDS [file-rdeps]
->=20
-> That is very strange. Do you perhaps have any information on how you migh=
-t=20
-> reproduce that? I did not receive any QA warnings when building this.
+On Thu, Dec 04, 2014 at 10:13:40AM +0800, Qian Lei wrote:
+> Libutempter provides interface for terminal emulators such as
+> screen and xterm to record user sessions to utmp and wtmp files.
 
-Nothing special, it's shown in world builds as described in
-http://www.openembedded.org/wiki/Bitbake_World_Status_Setup
+It's failing for all MACHINEs in world builds now.
+
+Please fix it soon, otherwise it will be blacklisted/removed from meta-oe
+
+ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
+ibc/work/armv5te-oe-linux-gnueabi/libutempter/1.1.6-r0/temp/log.do_compile.=
+9839
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| NOTE: make -j 8 -e MAKEFLAGS=3D libdir=3D/usr/lib libexecdir=3D/usr/lib/l=
+ibutempter
+| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm  -mthumb-interwork --sys=
+root=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm  -O2 -pip=
+e -g -feliminate-unused-debug-types -DLIBEXECDIR=3D/usr/lib/libutempter  -W=
+l,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed  -Wl,-z,now,-stats  utempter.c=
+ -o utempter
+| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm  -mthumb-interwork --sys=
+root=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm  -O2 -pip=
+e -g -feliminate-unused-debug-types -DLIBEXECDIR=3D/usr/lib/libutempter   -=
+c -fPIC iface.c -o iface.os
+| arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -marm  -mthumb-interwork --sys=
+root=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm  -O2 -pip=
+e -g -feliminate-unused-debug-types -DLIBEXECDIR=3D/usr/lib/libutempter   -=
+c -o iface.o iface.c
+| iface.c: In function 'utempter_add_record':
+| <command-line>:0:12: error: expected expression before '/' token
+| iface.c:46:35: note: in expansion of macro 'LIBEXECDIR'
+|  #define UTEMPTER_DEFAULT_PATHNAME LIBEXECDIR "/utempter/utempter"
+|                                    ^
+| iface.c:144:27: note: in expansion of macro 'UTEMPTER_DEFAULT_PATHNAME'
+|    { utempter_pathname ? : UTEMPTER_DEFAULT_PATHNAME, "add",
+|                            ^
+| iface.c: In function 'utempter_remove_record':
+| <command-line>:0:12: error: expected expression before '/' token
+| iface.c:46:35: note: in expansion of macro 'LIBEXECDIR'
+|  #define UTEMPTER_DEFAULT_PATHNAME LIBEXECDIR "/utempter/utempter"
+|                                    ^
+| iface.c:158:27: note: in expansion of macro 'UTEMPTER_DEFAULT_PATHNAME'
+|    { utempter_pathname ? : UTEMPTER_DEFAULT_PATHNAME, "del", 0 };
+|                            ^
+| iface.c:158:25: warning: pointer type mismatch in conditional expression
+|    { utempter_pathname ? : UTEMPTER_DEFAULT_PATHNAME, "del", 0 };
+|                          ^
+| make: *** [iface.os] Error 1
+| make: *** Waiting for unfinished jobs....
+| iface.c: In function 'utempter_add_record':
+| <command-line>:0:12: error: expected expression before '/' token
+| iface.c:46:35: note: in expansion of macro 'LIBEXECDIR'
+|  #define UTEMPTER_DEFAULT_PATHNAME LIBEXECDIR "/utempter/utempter"
+|                                    ^
+| iface.c:144:27: note: in expansion of macro 'UTEMPTER_DEFAULT_PATHNAME'
+|    { utempter_pathname ? : UTEMPTER_DEFAULT_PATHNAME, "add",
+|                            ^
+| iface.c: In function 'utempter_remove_record':
+| <command-line>:0:12: error: expected expression before '/' token
+| iface.c:46:35: note: in expansion of macro 'LIBEXECDIR'
+|  #define UTEMPTER_DEFAULT_PATHNAME LIBEXECDIR "/utempter/utempter"
+|                                    ^
+| iface.c:158:27: note: in expansion of macro 'UTEMPTER_DEFAULT_PATHNAME'
+|    { utempter_pathname ? : UTEMPTER_DEFAULT_PATHNAME, "del", 0 };
+|                            ^
+| iface.c:158:25: warning: pointer type mismatch in conditional expression
+|    { utempter_pathname ? : UTEMPTER_DEFAULT_PATHNAME, "del", 0 };
+|                          ^
+| make: *** [iface.o] Error 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: initial tasks ru=
+n time: (user: 0.010000 sys: 0.010000 wall: 0.020000)
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: middle tasks run=
+ time: (user: 0.000000 sys: 0.000000 wall: 0.000000)
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: final tasks run =
+time: (user: 0.000000 sys: 0.000000 wall: 0.000000)
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: total run time: =
+(user: 0.010000 sys: 0.010000 wall: 0.020000)
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: total space allo=
+cated by malloc: 3207168 bytes
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: total bytes mapp=
+ed for read: 36264230
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: maximum bytes ma=
+pped for read at one time: 36264230
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: archive librarie=
+s: 7
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: total archive me=
+mbers: 5668
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: loaded archive m=
+embers: 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: lib groups: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: total lib groups=
+ members: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: loaded lib group=
+s members: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: output file size=
+: 18452 bytes
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: symbol table ent=
+ries: 6765; buckets: 12011
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: symbol table str=
+ingpool entries: 3410; buckets: 12011
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: symbol table str=
+ingpool Stringdata structures: 47
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: section name poo=
+l entries: 41; buckets: 47
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: section name poo=
+l Stringdata structures: 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: output symbol na=
+me pool entries: 62; buckets: 79
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: output symbol na=
+me pool Stringdata structures: 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: dynamic name poo=
+l entries: 25; buckets: 79
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: dynamic name poo=
+l Stringdata structures: 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .rodata merged c=
+onstants size: 4; input: 1; output: 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .rodata merged s=
+trings input bytes: 24
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .rodata merged s=
+trings input strings: 2
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .rodata merged s=
+trings entries: 3; buckets: 11
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .rodata merged s=
+trings Stringdata structures: 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .comment merged =
+strings input bytes: 90
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .comment merged =
+strings input strings: 5
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .comment merged =
+strings entries: 2; buckets: 11
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .comment merged =
+strings Stringdata structures: 1
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .debug_str merge=
+d strings input bytes: 2485
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .debug_str merge=
+d strings input strings: 185
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .debug_str merge=
+d strings entries: 168; buckets: 199
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: .debug_str merge=
+d strings Stringdata structures: 3
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: total free lists=
+: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: total free list =
+nodes: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: calls to Free_li=
+st::remove: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: nodes visited: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: calls to Free_li=
+st::allocate: 0
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.1/ld: nodes visited: 0
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
+oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/libutempter/1.1.6=
+-r0/temp/log.do_compile.9839)
+NOTE: recipe libutempter-1.1.6-r0: task do_compile: Failed
 
 >=20
-> Cheers,
-> Paul
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> ---
+>  .../libutempter/libutempter_1.1.6.bb               | 36 ++++++++++++++++=
+++++++
+>  1 file changed, 36 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libutempter/libutempter_1.1.6=
+=2Ebb
+>=20
+> diff --git a/meta-oe/recipes-support/libutempter/libutempter_1.1.6.bb b/m=
+eta-oe/recipes-support/libutempter/libutempter_1.1.6.bb
+> new file mode 100644
+> index 0000000..e1dccd6
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libutempter/libutempter_1.1.6.bb
+> @@ -0,0 +1,36 @@
+> +SUMMARY =3D "A privileged helper for utmp/wtmp updates"
+> +DESCRIPTION =3D "\
+> +This library provides interface for terminal emulators such as \
+> +screen and xterm to record user sessions to utmp and wtmp files."
+> +HOMEPAGE =3D "ftp://ftp.altlinux.org/pub/people/ldv/utempter"
+> +SECTION =3D "System Environment/Libraries"
+> +LICENSE =3D "GPLv2 GPLv2+ LGPLv2 MIT"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2d5025d4aa3495befef8f17206a5b=
+0a1"
+> +
+> +SRC_URI =3D "ftp://ftp.altlinux.org/pub/people/ldv/utempter/${BP}.tar.bz=
+2"
+> +SRC_URI[md5sum] =3D "b43827806923903aba2bc7cd3a2d45b7"
+> +SRC_URI[sha256sum] =3D "b898565f31ced7e5c1fa0a2eaa0f6ff0ed862b5fe375d263=
+75b64bfbdfeac397"
+> +
+> +CFLAGS +=3D "-DLIBEXECDIR=3D$(libexecdir)"
+> +
+> +do_compile() {
+> +    oe_runmake                      \
+> +        libdir=3D${libdir}            \
+> +        libexecdir=3D${libexecdir}    \
+> +}
+> +
+> +do_install() {
+> +    oe_runmake install              \
+> +        DESTDIR=3D${D}                \
+> +        libdir=3D"${libdir}"          \
+> +        libexecdir=3D"${libexecdir}"  \
+> +        includedir=3D${includedir}    \
+> +        mandir=3D${mandir}
+> +
+> +        rm -f ${D}${libdir}/*.a
+> +}
+> +
+> +FILES_${PN} =3D "${libdir}/*.so.*"
+> +FILES_${PN} +=3D "${libexecdir}/utempter/utempter"
+> +
+> +FILES_${PN}-dbg +=3D "${libexecdir}/utempter/.debug/utempter"
+> --=20
+> 1.8.3.1
 >=20
 > --=20
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---vk/v8fjDPiDepTtA
+--7l042bGvurpep9Wg
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlStDacACgkQN1Ujt2V2gBwBygCgooIfC+BvepitTVVv5vf11G5l
-0BwAniOsK/0Pt3/MnR4N3VtLGZxPRpeF
-=n8iz
+iEYEARECAAYFAlStHjIACgkQN1Ujt2V2gBzpkQCcCqjoFUeNEsYOOUECJ+H7blRc
+YEcAnjU/8ulVABUvkODJOA6NK6AyjLtX
+=6CX3
 -----END PGP SIGNATURE-----
 
---vk/v8fjDPiDepTtA--
+--7l042bGvurpep9Wg--
