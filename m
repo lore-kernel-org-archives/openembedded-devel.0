@@ -1,33 +1,39 @@
-Return-Path: <lchristina26@gmail.com>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D3DB65C75
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 88CD065C66
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jan 2015 22:54:46 +0000 (UTC)
-Received: by mail-ig0-f171.google.com with SMTP id z20so4964858igj.4
+	Wed,  7 Jan 2015 00:41:53 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id ey11so1117085pad.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jan 2015 14:54:47 -0800 (PST)
+	Tue, 06 Jan 2015 16:41:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=KbkL38D5iijcw5KlILJXyEg9bhlJ0JLhGn/hu9n47dU=;
-	b=jLfq0LtQs0hg7XSUKRuhoX6nMcPK2wdQRna+476jb9329DHhfGGA+ORTb/Ota7WAtY
-	kakG+IglGbfZFgyC0rKbVSEWxf1YReUbfqzZ0iRPvRVmg7/IC0FEMeHwpcmQOPqZ5cWB
-	3ENSP+pbicbQlSgspqZ6DX8x8viewt8pIV7ueZA3EdEdGBciZkr7qrtpBhqpn0LWRy+4
-	0KalYeNF9ORpQXBlQVLXc9s4dhEMPf8eDWnIGLm9aAkMIrmz5lsEeJ+ADCkCL2dWLBmX
-	pdzgs7k4ujzlGoNEmyrLF+ymzHu1dlLO/5N1o0KK4HnkTFkHIzHzdU8y/TN1bG2+E6Iv
-	zWIQ==
-MIME-Version: 1.0
-X-Received: by 10.42.253.195 with SMTP id nb3mr519243icb.34.1420584886945;
-	Tue, 06 Jan 2015 14:54:46 -0800 (PST)
-Sender: lchristina26@gmail.com
-Received: by 10.64.8.200 with HTTP; Tue, 6 Jan 2015 14:54:46 -0800 (PST)
-Date: Tue, 6 Jan 2015 15:54:46 -0700
-X-Google-Sender-Auth: sYJVT1vLRSx8_7kgY-vAoeslk88
-Message-ID: <CAL0pqZ1m6yDmncWR5VzLX9WEkxjmqFhYTnzXow912CPQZnRw-Q@mail.gmail.com>
-From: Leah <leah@wolfssl.com>
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=w3dKJBrZfw9oH0Ut2654tvYD5cxHfvZhi98BxyRUXt0=;
+	b=BTlvE+q/ZKbTCJW7L48uqQ39IWqOoMTxTjB1SqDw9uQbjl7HXiqVh17rVlggn4PKTR
+	uHROjUsKyOox3ar8NyauVft7cVeWzFDtdv0hwxjqiq2CouwM++OaRigpIyBbfZE48gjr
+	OCnbbdbg3AqSkVG33LS6F66p1Nr6BP1OX6hl2sZMwvRaR8w12qyFwLjRffR/QrQoF+9j
+	rfq7DWXvjKVcCAd3QS5uh9eQIuWJXD3qNlqHVNxwjOD8OWJRsgn9vQaPBFyU9Mn7yoZG
+	99ezxlIvgUTnO2e7ADnGa9ZQAzyhxdln7FYQzz2lcUkJyxooeWQL43NnNO0QtrP2zTlP
+	7T2Q==
+X-Received: by 10.67.22.162 with SMTP id ht2mr209573pad.49.1420591314481;
+	Tue, 06 Jan 2015 16:41:54 -0800 (PST)
+Received: from ?IPv6:2601:9:3580:84c:68b5:70a5:21d:f567?
+	([2601:9:3580:84c:68b5:70a5:21d:f567])
+	by mx.google.com with ESMTPSA id xx2sm69317pab.17.2015.01.06.16.41.53
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 06 Jan 2015 16:41:53 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.1 \(1993\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <54A97D15.4080801@gmail.com>
+Date: Tue, 6 Jan 2015 16:41:52 -0800
+Message-Id: <B851B2EA-9E81-40E6-A1E9-B8C30DD9E194@gmail.com>
+References: <54A97D15.4080801@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: wolfSSL at FOSDEM 2015
+X-Mailer: Apple Mail (2.1993)
+Subject: Re: recent addition of libgxim depends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,20 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jan 2015 22:54:49 -0000
-Content-Type: text/plain; charset=UTF-8
-
-wolfSSL (CyaSSL) will be attending FOSDEM 2015. We will be located at booth
-#9 in the AW building. If you are attending and want to learn more about
-our products and how we utilize OpenEmbedded, feel free to stop by! We can
-be contacted at info@wolfssl.com if you would like more information.
+X-List-Received-Date: Wed, 07 Jan 2015 00:41:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 
--- 
+> On Jan 4, 2015, at 9:49 AM, akuster808 <akuster808@gmail.com> wrote:
+>=20
+> Hello,
+>=20
+> While building world I found and issue with libgxim.
+>=20
+> libgxim depends on ruby-native. meta-ruby is not a layer depends for =
+meta-oe.
+>=20
+> Can meta-oe have layer depends other then 'core' ? if so, this is an =
+easy fix.
 
-Leah Thompson
-www.wolfssl.com
-leah@wolfssl.com
-406-570-1389
-Skype: lchristina26
+I would not like to have such a dependency. May be move this recipe to =
+meta-ruby
+
+>=20
+> regards,
+> Armin
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
