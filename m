@@ -1,37 +1,32 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 9952F65C66
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id D06D465C66
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 04:32:14 +0000 (UTC)
-Received: by mail-ig0-f172.google.com with SMTP id hl2so4491559igb.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jan 2015 20:32:15 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=uQCjol9EgXU7T09G9ejhhOmif4rlhbqu/scm5zkg7PM=;
-	b=ATur9N4btJRJ1OHf2wyn0SNdssHet4tCMmKgC5HpaoAD7/JLjL94XzOpe+e6Kv4mND
-	rJ59+7o2T0OUGV9uIK34hc3IZy0PFoRLuT3W/AEUiOeIW8bCuE8LXXMw35oPnV5i6vJT
-	PN62n5pvDjB8Jp9yRgiNlR8wwl8nj/kQS/34Yqa48RC/CYmp8+MacbaR7joeiXaTElbF
-	rJclrmjWuTZKANTgPzK+q2UuWUXELturoco1n1LBjDP8deXo00mURuo/aIkQLIlOZm6Y
-	mZ0lYu83A38podotYjzze+9B00fJV1eFWDIaZtOmfmMqMI5vMdpDVnekJ06wrCWeCI8R
-	0xww==
-X-Gm-Message-State: ALoCoQnlMCNe+gJ16pyFBalPqjoObRwhJ2/1k7I26k4xLMEBCpEBHYP7seWBpnKvlxOmEAyM0I+H
-X-Received: by 10.107.129.80 with SMTP id c77mr868190iod.92.1420605135143;
-	Tue, 06 Jan 2015 20:32:15 -0800 (PST)
-Received: from mir.deserted.net (24-246-4-250.cable.teksavvy.com.
-	[24.246.4.250])
-	by mx.google.com with ESMTPSA id h3sm503638igh.21.2015.01.06.20.32.14
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 06 Jan 2015 20:32:14 -0800 (PST)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Jan 2015 23:32:38 -0500
-Message-Id: <1420605158-14962-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] opensaf: update SRC_URI and install actions
+	Wed,  7 Jan 2015 04:36:05 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1Y8iLl-0001tu-NS from Joe_MacDonald@mentor.com ;
+	Tue, 06 Jan 2015 20:36:05 -0800
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 6 Jan 2015 20:36:05 -0800
+Received: by burninator (Postfix, from userid 1000)	id 2BBF1580726; Tue,  6
+	Jan 2015 23:36:01 -0500 (EST)
+Date: Tue, 6 Jan 2015 23:36:01 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20150107043600.GD10013@mentor.com>
+References: <1420559960-8518-1-git-send-email-akuster808@gmail.com>
+	<1420559960-8518-2-git-send-email-akuster808@gmail.com>
+	<20150106162610.GA12498@jama> <54AC9065.70108@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <54AC9065.70108@gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 1/2] proftpd: fix rdepends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,57 +40,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 04:32:19 -0000
+X-List-Received-Date: Wed, 07 Jan 2015 04:36:07 -0000
+X-Groupsio-MsgNum: 53714
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Lb0e7rgc7IsuDeGj"
+Content-Disposition: inline
 
-The default configuration for OpenSAF creates /run and /var/lock during
-install time.  Tweak the recipe to use ${localstatedir} as other recipes
-do, and clean up at the end of do_install.
+--Lb0e7rgc7IsuDeGj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Swap the hard-coded SRC_URI with ${SOURCEFORGE_MIRROR} while we're at it.
+[Re: [oe] [meta-networking][PATCH 1/2] proftpd: fix rdepends  issue] On 15.=
+01.06 (Tue 17:48) akuster808 wrote:
 
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
+>=20
+>=20
+> On 01/06/2015 08:26 AM, Martin Jansa wrote:
+> >On Tue, Jan 06, 2015 at 07:59:19AM -0800, Armin Kuster wrote:
+> >>Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> >>---
+> >>  meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >>diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb b=
+/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> >>index cba39e8..7d285a0 100644
+> >>--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> >>+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> >>@@ -99,4 +99,4 @@ USERADD_PARAM_${PN} =3D "--system -g ${FTPGROUP} --ho=
+me-dir /var/lib/${FTPUSER} --
+> >>
+> >>  FILES_${PN} +=3D "/home/${FTPUSER}"
+> >>
+> >>-RDEPENDS_${PN} +=3D "perl"
+> >>+RDEPENDS_${PN} +=3D "perl initscripts-functions"
+> >
+> >It's not that simple.
+>=20
+> Had to try :)
+> >
+> >The initscripts-functions is added to RDEPENDS conditionally based on
+> >"sysvinit" in DISTRO_FEATURES and INHIBIT_UPDATERCD_BBCLASS.
+> >
+> >Adding it explicitly here will pull it to image even for people who
+> >care only about systemd services (and don't want any iniscripts to
+> >pollute their startup sequence).
+>=20
+> make sense.
+>=20
+> >
+> >See meta/classes/update-rc.d.bbclass
+>=20
+> thanks for the reference.
+> >
+> >I know we already have one recipe like this:
+> >meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb:RDEPENDS_${PN} +=3D "in=
+itscripts-functions"
+> >
+> >but honestly silencing this warning like this does more harm then
+> >the warning. I think it should be fixed in bbclass, because all
+> >recipes which inherit it, suffer from this. Maybe by adding another
+> >VIRTUAL_RUNTIME which can be set to empty when sysv isn't enabled.
+>=20
+> k.
+>=20
+> Does the 5 second rule count ? or because I touched it I am stuck
+> with it ; )
 
-I was looking at the current OpenSAF patch and this looks like it will address
-the issue that Khem raised about /run being volatile (at least a similar same
-way to how samba does it).  If this looks sensible to everyone else, I'll
-cherry-pick over the OpenSAF recipe from master-next and add this patch on top
-of it.
+If you invoke the five-second-rule, I think it can apply, but if you're
+anything like me, once you step in something it's almost impossible to
+pretend you didn't.  ;-)
 
 -J.
 
- meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+>=20
+> I will take a look.
+>=20
+> thanks,
+> Armin
+> >
+> >
+> >
+--=20
+-Joe MacDonald.
+:wq
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-index a58de5c..5b42def 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-@@ -13,7 +13,7 @@ HOMEPAGE = "http://www.opensaf.org"
- 
- inherit autotools useradd systemd pkgconfig
- 
--SRC_URI = "http://jaist.dl.sourceforge.net/project/opensaf/releases/${BPN}-${PV}.tar.gz \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://install-samples-from-srcdir.patch"
- 
- SRC_URI[md5sum] = "534c0a99438a62c4c8dda56cfa67300c"
-@@ -31,10 +31,12 @@ USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nolog
- SYSTEMD_SERVICE_${PN} += "opensafd.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
--FILES_${PN} += "/run"
-+FILES_${PN} += "${localstatedir}/run"
- 
- INSANE_SKIP_${PN} = "dev-so"
- 
- do_install_append() {
--    rm -rf "${D}${localstatedir}/run"
-+    rm -fr "${D}${localstatedir}/lock"
-+    rm -fr "${D}${localstatedir}/run"
-+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
- }
--- 
-1.9.1
+--Lb0e7rgc7IsuDeGj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
+iQEcBAEBAgAGBQJUrLewAAoJEEn8ffcsOfaW9PEIAJCD/JaKbqFvRnIWdm9/YUaG
+3/PFMwYUqEkJ4SkeeNdmr1v/R0TsX1nSpj/ab2jGZ5It8gceTEWdQB+T3t2jxDYa
+jmYTtSmc85H52Fozuaj8uOLKe3MtKsTxcqPKXwiWwVNp17SSoQ8fb1Dam/EMumnT
+0BrzKkOfuKXimOgRKoXm7lv0jiDKbLzb5JhwayTSrqZITzvkejxRVC4FiyY3jrAV
+m+oaFIirQAfKhz6ss2+VHKBYfTE5OFq3V/3TYaVeR2sEDcGM/X/EaDvTUO5awJVm
+tCFHR6POvIWME2/XZy2oczamLbJ6+W1vSezbp7ESbT4V+zaMrADvLmGCNAdMV40=
+=WRpG
+-----END PGP SIGNATURE-----
+
+--Lb0e7rgc7IsuDeGj--
