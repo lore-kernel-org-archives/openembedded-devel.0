@@ -1,23 +1,36 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 547C872916
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 4CCE47201A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 16:59:29 +0000 (UTC)
-Received: (qmail 2783 invoked by uid 1003); 7 Jan 2015 16:59:29 -0000
-Received: from unknown (HELO ?192.168.1.124?) (philip@opensdr.com@108.44.89.75)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	7 Jan 2015 16:59:29 -0000
-Message-ID: <54AD65F0.3010707@balister.org>
-Date: Wed, 07 Jan 2015 11:59:28 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Wed,  7 Jan 2015 17:01:01 +0000 (UTC)
+Received: by mail-ie0-f177.google.com with SMTP id rd18so4692828iec.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jan 2015 09:01:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=rWBXiZ72Xz2w0xz+WvP5J8lE/EJOnMfunEjYYU0zbns=;
+	b=v9OmF+go4lyDVwR7cYoaMjB766MtIvmKux4P6kzg9oGcKZdRZMq0CBMehbaSC630At
+	J9U5Hy0OH8NeGjSTaGlxnBRzCeLYIn/wdVmQeZF5tyF23MzIQ+VDIAGgIgJsrjaUDNbi
+	b3GN0exzOG37PaYa5eEC03rQSDamHLVrQr2TXDG0XxiM1/tAmvlSdNR++f5Hc3KifOyI
+	t7jEcnrEliTyTJydFxQScNb7v4pFqSYJXwJwhdyJ6zCFYg8IIO2ESCIv0dr9vR7xnrBR
+	pOXkb9uxIzS7wJaljC0z3v+v2I+umFX8URZECooE8wyFWWv0QZnRmTDk7XNP4AoISs0K
+	MJ0A==
+X-Received: by 10.42.229.132 with SMTP id ji4mr3892738icb.86.1420650061823;
+	Wed, 07 Jan 2015 09:01:01 -0800 (PST)
 MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>
-Subject: OpenEmbedded at FOSDEM
+Received: by 10.50.117.7 with HTTP; Wed, 7 Jan 2015 09:00:31 -0800 (PST)
+In-Reply-To: <2220709.jFTZT0BvCv@peggleto-mobl5.ger.corp.intel.com>
+References: <54A97D15.4080801@gmail.com>
+	<B851B2EA-9E81-40E6-A1E9-B8C30DD9E194@gmail.com>
+	<2220709.jFTZT0BvCv@peggleto-mobl5.ger.corp.intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 7 Jan 2015 09:00:31 -0800
+Message-ID: <CAMKF1so4_twi6X-df5xCbXjd5d1kSg8HdwxP74VNF3hboJhU8Q@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: recent addition of libgxim depends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 16:59:31 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 07 Jan 2015 17:01:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-It is that time of the year again.
+On Wed, Jan 7, 2015 at 1:27 AM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> If it's not specifically a ruby-related piece of software (which it doesn't
+> seem to be, at a glance) then that wouldn't seem right. Can the ruby
+> dependency be disabled by default using PACKAGECONFIG perhaps?
 
-FOSDEM 2015 is Jan 31/ Feb 1 in Brussels.
-
-https://fosdem.org/2015/
-
-OpenEmbedded will have a stand again this year and we would like some
-help manning it.
-
-I've done a quick copy from the 2014 page on the wiki:
-
-http://openembedded.org/wiki/FOSDEM_2015
-
-We need to get some interesting demos that use OpenEmbedded for the
-stand. I should be able to bring the latest USRP with a USB screen.
-
-I'd also like to thank Paul Eggleton for arranging the stand.
-
-The ev board has approved two travel grants of 200 euros (not to exceed,
-actual expenses only) for people willing to help at FOSDEM. These should
-go to people who cannot get support from their employers and you need to
-be prepared to contirbute a significant amount of time manning the stand.
-
-Philip
+thats another option yes
 
