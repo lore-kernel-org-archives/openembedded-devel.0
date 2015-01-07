@@ -1,41 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id B4045706D9
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 1CD53706D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 10:14:22 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id r20so7729059wiv.0
+	Wed,  7 Jan 2015 10:14:58 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id w61so874259wes.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jan 2015 02:14:22 -0800 (PST)
+	Wed, 07 Jan 2015 02:14:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=q7hPiEhvrypc6xnQna4Fi/PwbLqyzXyYBSGORFf3ZAw=;
-	b=h+wd3CuiXYezUwqVRSDfG93qdB9bTPHvDZimtAaj6hTb5KrmV3QsCg2+ich6GlfdHY
-	PsvqQ/sdZxe54hFt/iiTVOZI1rhVH8n+muClR6lwX5tHbdZ3ffHsSqG7TP7ZP/O/J3Hj
-	gvGlJ9qGTY04h5eEso2yD9f0YwpBmPLhRTihA1W/Y9AF0uJV95FI8Xn99F247f5LnOK6
-	gLid79KifN6Js884MnFUXBYZoTNYZigPArNcO2Ka06Um8jSYZyho4gi1ARebSVoFs2ZT
-	JAQeFCMg2yJODUyZL0aGliMvdju1UU68LZX0jIwU+ELj/FtuHL/ra7ExGzYWuLmBjVsP
-	oieA==
-X-Received: by 10.180.91.36 with SMTP id cb4mr45711613wib.30.1420625660903;
-	Wed, 07 Jan 2015 02:14:20 -0800 (PST)
+	bh=c0QU37VfWJXygidd8YTWAqQJ8NYmUU6f5Ax1t5W9E/8=;
+	b=D4uhjpTaAjQhs5jFLgyjkFJ+etg8LdetYnLp1HXPVkHJ5fZDcmO4/1bjCgwPDdGDkR
+	e33vsbjfHTHyyJs12EnX1APVO3nVERpoQmBfbXARMQ8YiOmWrbkUaxxud4GpTkg7ewGM
+	VjOqt9SqG1yGDyO82icX8uqxypmz75EUo29AWTfUg/muiYpBLdDJ99syovanKqfpdiKU
+	XNTCWUFSOLClxGGgPxpiwIGRQnPdzZajOpZbEQvD9bQbA7AsTtffBwFWKn96Z9vsU0Z9
+	NONz2NqqnNGV1S9dazPB+BWuIzbV2y+yudDET/VDr8BKjk0o5FESRaR0ARnLi8oJv1kl
+	Rmtw==
+X-Received: by 10.194.240.201 with SMTP id wc9mr4629418wjc.57.1420625698842;
+	Wed, 07 Jan 2015 02:14:58 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	jp3sm17259610wid.9.2015.01.07.02.14.19
+	n4sm17266990wia.7.2015.01.07.02.14.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 07 Jan 2015 02:14:20 -0800 (PST)
+	Wed, 07 Jan 2015 02:14:58 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 7 Jan 2015 11:14:23 +0100
+Date: Wed, 7 Jan 2015 11:15:01 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150107101423.GH29986@jama>
-References: <cover.1420453688.git.paul.eggleton@linux.intel.com>
-	<20150105115922.GF2484@jama>
+Message-ID: <20150107101501.GI29986@jama>
+References: <1420517556-49274-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1420517556-49274-3-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <20150105115922.GF2484@jama>
+In-Reply-To: <1420517556-49274-3-git-send-email-leimaohui@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe/meta-webserver][PATCH v2 00/11] Merge modphp into php and upgrade
+Subject: Re: [meta-oe][V2 PATCH 2/3] corosync_2.3.4: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,164 +49,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 10:14:33 -0000
-X-Groupsio-MsgNum: 53721
+X-List-Received-Date: Wed, 07 Jan 2015 10:14:59 -0000
+X-Groupsio-MsgNum: 53722
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6cMF9JLEeZkfJjkP"
+	protocol="application/pgp-signature"; boundary="l0l+eSofNeLXHSnY"
 Content-Disposition: inline
 
---6cMF9JLEeZkfJjkP
+--l0l+eSofNeLXHSnY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 05, 2015 at 12:59:22PM +0100, Martin Jansa wrote:
-> Thanks for v2
+On Tue, Jan 06, 2015 at 12:12:35PM +0800, leimaohui wrote:
+> From: leimh <leimaohui@cn.fujitsu.com>
 >=20
-> Please remember to update your old series as superseded when pushing=20
-> newer version, it would help me a lot when sorting the pending patches.
+> The Corosync Cluster Engine and Application Programming Interfaces.
 
-Something is wrong:
-
-php-5.5.20: php requires
-/tmp/work/core2-64-oe-linux/php/5.5.20-r0/image/usr/bin/php, but no
-providers in its RDEPENDS [file-rdeps]
+Triggers QA warning:
+corosync-2.3.4: corosync requires /bin/bash, but no providers in its RDEPEN=
+DS [file-rdeps]
 
 >=20
-> On Mon, Jan 05, 2015 at 10:33:13AM +0000, Paul Eggleton wrote:
-> > Finally resolve the overlap between the modphp and php recipes by
-> > merging the former into the latter. Along the way I fixed a few minor
-> > issues and upgraded related recipes.
-> >=20
-> > I've taken a stepped approach to doing the php merge / upgrade so it's
-> > easier to see what's going on and easier for me to test - first upgrade
-> > php to the same version as modphp, then do the integration, then upgrade
-> > to the latest 5.5 release. I would appreciate someone testing PHP in CGI
-> > mode however since I don't have a convenient test setup for that (as I
-> > do for mod_php).
-> >=20
-> > Changes since v1:
-> > * Default mod_php building to disabled since we don't have apache2 in=
-=20
-> >   meta-oe where the php recipe is and meta-oe can't depend on=20
-> >   meta-webserver
-> > * Drop commented out line in uw-imap pam change
-> > * Update meta-webserver README as appropriate
-> >=20
-> >=20
-> > The following changes since commit 2ea3a19a478c526baa04d6b9a9e8c9f42aae=
-9d34:
-> >=20
-> >   ctapi-common: Add new recipe (2014-12-31 16:38:22 +0100)
-> >=20
-> > are available in the git repository at:
-> >=20
-> >   git://git.openembedded.org/meta-openembedded-contrib paule/php
-> >   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?=
-h=3Dpaule/php
-> >=20
-> > Paul Eggleton (12):
-> >   php: upgrade to 5.5.15
-> >   libc-client: rename to uw-imap, upgrade to 2007f
-> >   php: integrate modphp
-> >   php: upgrade to 5.5.20
-> >   modphp: remove
-> >   README: update for modphp merging into php
-> >   uw-imap: make libpam dependency dependent on DISTRO_FEATURES
-> >   php: add PACKAGECONFIG to fix implicit dependency on libpam
-> >   php: add PACKAGECONFIG for imap
-> >   xdebug: fix DEPENDS and un-blacklist
-> >   xdebug: update to 2.2.6
-> >   phpmyadmin: update to 4.3.4
-> >=20
-> >  .../recipes-devtools/php/php}/70_mod_php5.conf     |   0
-> >  .../recipes-devtools/php/php}/configure.patch      |   0
-> >  .../php/php}/pthread-check-threads-m4.patch        |   0
-> >  meta-oe/recipes-devtools/php/php_5.4.33.bb         | 150 -----------
-> >  meta-oe/recipes-devtools/php/php_5.5.20.bb         | 234 +++++++++++++=
-++++
-> >  .../uw-imap/uw-imap/imap-2007e-shared.patch        |  82 ++++++
-> >  .../uw-imap/imap-2007f-format-security.patch       |  20 ++
-> >  .../files =3D> uw-imap/uw-imap}/quote_cctype.patch   |   0
-> >  .../uw-imap_2007f.bb}                              |  23 +-
-> >  meta-webserver/README                              |  16 +-
-> >  .../0001-using-pkgconfig-to-check-libxml.patch     |  74 ------
-> >  .../modphp/files/php-CVE-2014-3587.patch           |  31 ---
-> >  .../modphp/files/php-CVE-2014-3597.patch           | 282 -------------=
---------
-> >  .../modphp/files/php-CVE-2014-5120.patch           |  35 ---
-> >  meta-webserver/recipes-php/modphp/modphp5.inc      | 112 --------
-> >  meta-webserver/recipes-php/modphp/modphp_5.5.15.bb |   7 -
-> >  .../0001-Bug-4544-additional-fix-for-4.2.x.patch   |  29 ---
-> >  ...ug-4504-security-Self-XSS-in-query-charts.patch |  29 ---
-> >  ...4505-security-XSS-in-view-operations-page.patch |  43 ----
-> >  .../{phpmyadmin_4.2.7.bb =3D> phpmyadmin_4.3.4.bb}   |   7 +-
-> >  .../xdebug/{xdebug_2.2.5.bb =3D> xdebug_2.2.6.bb}    |   8 +-
-> >  21 files changed, 372 insertions(+), 810 deletions(-)
-> >  rename {meta-webserver/recipes-php/modphp/files =3D> meta-oe/recipes-d=
-evtools/php/php}/70_mod_php5.conf (100%)
-> >  rename {meta-webserver/recipes-php/modphp/files =3D> meta-oe/recipes-d=
-evtools/php/php}/configure.patch (100%)
-> >  rename {meta-webserver/recipes-php/modphp/files =3D> meta-oe/recipes-d=
-evtools/php/php}/pthread-check-threads-m4.patch (100%)
-> >  delete mode 100644 meta-oe/recipes-devtools/php/php_5.4.33.bb
-> >  create mode 100644 meta-oe/recipes-devtools/php/php_5.5.20.bb
-> >  create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007e=
--shared.patch
-> >  create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/imap-2007f=
--format-security.patch
-> >  rename meta-oe/recipes-devtools/{libc-client/files =3D> uw-imap/uw-ima=
-p}/quote_cctype.patch (100%)
-> >  rename meta-oe/recipes-devtools/{libc-client/libc-client_2007e.bb =3D>=
- uw-imap/uw-imap_2007f.bb} (55%)
-> >  delete mode 100644 meta-webserver/recipes-php/modphp/files/0001-using-=
-pkgconfig-to-check-libxml.patch
-> >  delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-201=
-4-3587.patch
-> >  delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-201=
-4-3597.patch
-> >  delete mode 100644 meta-webserver/recipes-php/modphp/files/php-CVE-201=
-4-5120.patch
-> >  delete mode 100644 meta-webserver/recipes-php/modphp/modphp5.inc
-> >  delete mode 100644 meta-webserver/recipes-php/modphp/modphp_5.5.15.bb
-> >  delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/00=
-01-Bug-4544-additional-fix-for-4.2.x.patch
-> >  delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/00=
-01-bug-4504-security-Self-XSS-in-query-charts.patch
-> >  delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/00=
-01-bug-4505-security-XSS-in-view-operations-page.patch
-> >  rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.2.7.bb =3D>=
- phpmyadmin_4.3.4.bb} (75%)
-> >  rename meta-webserver/recipes-php/xdebug/{xdebug_2.2.5.bb =3D> xdebug_=
-2.2.6.bb} (79%)
-> >=20
-> > --=20
-> > 1.9.3
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
+
+Can you use full name in SOB line?
+
+> ---
+>  .../recipes-extended/corosync/corosync_2.3.4.bb    | 59 ++++++++++++++++=
+++++++
+>  1 file changed, 59 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
+>=20
+> diff --git a/meta-oe/recipes-extended/corosync/corosync_2.3.4.bb b/meta-o=
+e/recipes-extended/corosync/corosync_2.3.4.bb
+> new file mode 100644
+> index 0000000..7385d55
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/corosync/corosync_2.3.4.bb
+> @@ -0,0 +1,59 @@
+> +SUMMARY =3D "The Corosync Cluster Engine and Application Programming Int=
+erfaces"
+> +DESCRIPTION =3D "This package contains the Corosync Cluster Engine Execu=
+tive, several default \
+> +APIs and libraries, default configuration files, and an init script."
+> +HOMEPAGE =3D "http://corosync.github.io/corosync/"
+> +
+> +SECTION =3D "base"
+> +
+> +inherit autotools pkgconfig systemd
+> +
+> +SRC_URI =3D "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz=
+ \
+> +	   "
+> +
+> +SRC_URI[md5sum] =3D "4b0f36a1dc014527e5b192265dbd7e70"
+> +SRC_URI[sha256sum] =3D "3dae93fb1cf5c560295253b0560cbc25421ed053ee373852=
+864f3a60c03247d4"
+> +
+> +LICENSE =3D "BSD"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da85eb4ce24033adb6088dd1d6ffc5=
+e5d"
+> +
+> +DEPENDS =3D "groff-native nss libqb"
+> +
+> +SYSTEMD_SERVICE_${PN} =3D "corosync.service corosync-notifyd.service"
+> +SYSTEMD_AUTO_ENABLE =3D "enable"
+> +
+> +INITSCRIPT_NAME =3D "corosync-daemon"
+> +
+> +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', =
+'systemd', '', d)}"
+> +
+> +PACKAGECONFIG[systemd] =3D "--enable-systemd --with-systemddir=3D${syste=
+md_unitdir}/system/,--with-systemddir=3D"
+> +
+> +EXTRA_OECONF =3D "--disable-nss \
+> +                --with-upstartdir=3D%{_sysconfdir}/init \
+> +"
+> +EXTRA_OECONF +=3D " --enable-nss "
+> +
+> +do_configure_prepend() {
+> +    ( cd ${S}
+> +    ${S}/autogen.sh )
+> +}
+> +
+> +do_install_append() {
+> +    install -d ${D}${sysconfdir}/sysconfig/
+> +    install -d ${D}/${sysconfdir}/init.d
+> +    install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdi=
+r}/sysconfig/corosync
+> +    install -m 0644 ${S}/init/corosync-notifyd.conf.in ${D}${sysconfdir}=
+/sysconfig/corosync-notifyd.conf
+> +    install -m 0644 ${S}/init/corosync.conf.in ${D}${sysconfdir}/sysconf=
+ig/corosync.conf
+> +    install -m 0644 ${S}/init/corosync.in ${D}${sysconfdir}/init.d/coros=
+ync
+> +    install -m 0644 ${S}/init/corosync-notifyd.in ${D}${sysconfdir}/init=
+=2Ed/corosync-notifyd
+> +
+> +    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; =
+then
+> +        install -d ${D}${systemd_unitdir}/system
+> +        install -m 0644 ${S}/init/corosync.service.in ${D}${systemd_unit=
+dir}/system/corosync.service
+> +        install -m 0644 ${S}/init/corosync-notifyd.service.in ${D}${syst=
+emd_unitdir}/system/corosync-notifyd.service
+> +        sed -i -e 's,@INITWRAPPERSDIR@,${sysconfdir}/init.d,g' ${D}${sys=
+temd_unitdir}/system/corosync.service
+> +        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir=
+}/system/corosync-notifyd.service
+> +        sed -i -e 's,@SBINDIR@,${base_sbindir},g' ${D}${systemd_unitdir}=
+/system/corosync-notifyd.service
+> +    fi=09
+> +}
+> +
+> +FILES_${PN}-dbg +=3D "${libexecdir}/lcrso/.debug"
+> --=20
+> 1.8.4.2
 >=20
 > --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---6cMF9JLEeZkfJjkP
+--l0l+eSofNeLXHSnY
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlStBv8ACgkQN1Ujt2V2gByyPACfWM4KL/yuF4dCHyQ1dBp5BG12
-QnMAnju5BK2qI0j8q17EXIzcQon1Eygp
-=2W6W
+iEYEARECAAYFAlStByUACgkQN1Ujt2V2gBwkGQCgly/dJLFfyeTmxMfFmlz7k1nw
+d48An2LBJSQR0YVrH+LU1YvV7SSKoHAv
+=lSU9
 -----END PGP SIGNATURE-----
 
---6cMF9JLEeZkfJjkP--
+--l0l+eSofNeLXHSnY--
