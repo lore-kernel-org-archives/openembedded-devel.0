@@ -1,25 +1,25 @@
 Return-Path: <paul.eggleton@linux.intel.com>
 Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id AD7A57213F
+	by mail.openembedded.org (Postfix) with ESMTP id 6E5C67213F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 14:50:52 +0000 (UTC)
+	Wed,  7 Jan 2015 14:50:54 +0000 (UTC)
 Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga103.fm.intel.com with ESMTP; 07 Jan 2015 06:46:06 -0800
+	by fmsmga103.fm.intel.com with ESMTP; 07 Jan 2015 06:46:08 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,714,1413270000"; d="scan'208";a="665825827"
+X-IronPort-AV: E=Sophos;i="5.07,714,1413270000"; d="scan'208";a="665825843"
 Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
 	([10.252.3.155])
-	by orsmga002.jf.intel.com with ESMTP; 07 Jan 2015 06:50:52 -0800
+	by orsmga002.jf.intel.com with ESMTP; 07 Jan 2015 06:50:53 -0800
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Jan 2015 14:50:27 +0000
-Message-Id: <7c3b03d569b028a10560b94d203d3057e2d7165c.1420641979.git.paul.eggleton@linux.intel.com>
+Date: Wed,  7 Jan 2015 14:50:28 +0000
+Message-Id: <db284388acd455d3f6bf42db3bb3b399e3f395e0.1420641979.git.paul.eggleton@linux.intel.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <cover.1420641979.git.paul.eggleton@linux.intel.com>
 References: <cover.1420641979.git.paul.eggleton@linux.intel.com>
 In-Reply-To: <cover.1420641979.git.paul.eggleton@linux.intel.com>
 References: <cover.1420641979.git.paul.eggleton@linux.intel.com>
-Subject: [meta-webserver][PATCH v4 12/13] xdebug: update to 2.2.6
+Subject: [meta-webserver][PATCH v4 13/13] phpmyadmin: update to 4.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,31 +33,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 14:50:52 -0000
+X-List-Received-Date: Wed, 07 Jan 2015 14:50:54 -0000
+
+Drop patches merged upstream.
 
 Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 ---
- .../recipes-php/xdebug/{xdebug_2.2.5.bb => xdebug_2.2.6.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-php/xdebug/{xdebug_2.2.5.bb => xdebug_2.2.6.bb} (85%)
+ .../0001-Bug-4544-additional-fix-for-4.2.x.patch   | 29 ---------------
+ ...ug-4504-security-Self-XSS-in-query-charts.patch | 29 ---------------
+ ...4505-security-XSS-in-view-operations-page.patch | 43 ----------------------
+ .../{phpmyadmin_4.2.7.bb => phpmyadmin_4.3.4.bb}   |  7 +---
+ 4 files changed, 2 insertions(+), 106 deletions(-)
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4504-security-Self-XSS-in-query-charts.patch
+ delete mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.2.7.bb => phpmyadmin_4.3.4.bb} (75%)
 
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.2.6.bb
-similarity index 85%
-rename from meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
-rename to meta-webserver/recipes-php/xdebug/xdebug_2.2.6.bb
-index 6f472fb..1ecac88 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_2.2.5.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_2.2.6.bb
-@@ -6,8 +6,8 @@ DEPENDS = "php"
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
+deleted file mode 100644
+index e23f94b..0000000
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-Bug-4544-additional-fix-for-4.2.x.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 304fb2b645b36a39e03b954fdbd567173ebe6448 Mon Sep 17 00:00:00 2001
+-From: Marc Delisle <marc@infomarc.info>
+-Date: Wed, 1 Oct 2014 08:09:12 -0400
+-Subject: [PATCH] Bug 4544: additional fix for 4.2.x
+-
+-Upstream-Status: Backport
+-
+-Signed-off-by: Marc Delisle <marc@infomarc.info>
+----
+- libraries/TableSearch.class.php |    3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/libraries/TableSearch.class.php b/libraries/TableSearch.class.php
+-index a0b3fa4..b7eb42f 100644
+---- a/libraries/TableSearch.class.php
+-+++ b/libraries/TableSearch.class.php
+-@@ -992,7 +992,8 @@ EOT;
+-             $html_output .= '<td>' . $properties['collation'] . '</td>';
+-             $html_output .= '<td>' . $properties['func'] . '</td>';
+-             // here, the data-type attribute is needed for a date/time picker
+--            $html_output .= '<td data-type="' . $properties['type'] . '"'
+-+            $html_output .= '<td data-type="'
+-+                . htmlspecialchars($properties['type']) . '"'
+-                 . '>' . $properties['value'] . '</td>';
+-             $html_output .= '</tr>';
+-             //Displays hidden fields
+--- 
+-1.7.10.4
+-
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4504-security-Self-XSS-in-query-charts.patch b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4504-security-Self-XSS-in-query-charts.patch
+deleted file mode 100644
+index 27eac77..0000000
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4504-security-Self-XSS-in-query-charts.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 90ddeecf60fc029608b972e490b735f3a65ed0cb Mon Sep 17 00:00:00 2001
+-From: Madhura Jayaratne <madhura.cj@gmail.com>
+-Date: Sun, 17 Aug 2014 08:52:05 -0400
+-Subject: [PATCH] bug #4504 [security] Self-XSS in query charts
+-
+-Upstream-status: Backport
+-
+-Signed-off-by: Marc Delisle <marc@infomarc.info>
+----
+- js/tbl_chart.js |    2 +-
+- 2 files changed, 2 insertions(+), 1 deletion(-)
+-
+- 4.2.7.0 (2014-07-31)
+-diff --git a/js/tbl_chart.js b/js/tbl_chart.js
+-index 943d4ae..04c9c40 100644
+---- a/js/tbl_chart.js
+-+++ b/js/tbl_chart.js
+-@@ -47,7 +47,7 @@ function PMA_queryChart(data, columnNames, settings) {
+-         },
+-         axes : {
+-             xaxis : {
+--                label : settings.xaxisLabel
+-+                label : escapeHtml(settings.xaxisLabel)
+-             },
+-             yaxis : {
+-                 label : settings.yaxisLabel
+--- 
+-1.7.10.4
+-
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
+deleted file mode 100644
+index 164a072..0000000
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin/0001-bug-4505-security-XSS-in-view-operations-page.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 0cd293f5e13aa245e4a57b8d373597cc0e421b6f Mon Sep 17 00:00:00 2001
+-From: Madhura Jayaratne <madhura.cj@gmail.com>
+-Date: Sun, 17 Aug 2014 08:41:57 -0400
+-Subject: [PATCH] bug #4505 [security] XSS in view operations page
+-
+-Upstream-Status: Backport
+-
+-Signed-off-by: Marc Delisle <marc@infomarc.info>
+----
+- ChangeLog       |    3 +++
+- js/functions.js |    2 +-
+- 2 files changed, 4 insertions(+), 1 deletion(-)
+-
+-diff --git a/ChangeLog b/ChangeLog
+-index 7afac1a..cec9d77 100644
+---- a/ChangeLog
+-+++ b/ChangeLog
+-@@ -1,6 +1,9 @@
+- phpMyAdmin - ChangeLog
+- ======================
+- 
+-+4.2.7.1 (2014-08-17)
+-+- bug #4505 [security] XSS in view operations page
+-+
+- 4.2.7.0 (2014-07-31)
+- - bug       Broken links on home page
+- - bug #4494 Overlap in navigation panel
+-diff --git a/js/functions.js b/js/functions.js
+-index 09bfeda..a970a81 100644
+---- a/js/functions.js
+-+++ b/js/functions.js
+-@@ -3585,7 +3585,7 @@ AJAX.registerOnload('functions.js', function () {
+-         var question = PMA_messages.strDropTableStrongWarning + ' ';
+-         question += $.sprintf(
+-             PMA_messages.strDoYouReally,
+--            'DROP VIEW ' + PMA_commonParams.get('table')
+-+            'DROP VIEW ' + escapeHtml(PMA_commonParams.get('table'))
+-         );
+- 
+-         $(this).PMA_confirm(question, $(this).attr('href'), function (url) {
+--- 
+-1.7.10.4
+-
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.3.4.bb
+similarity index 75%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.3.4.bb
+index 7cc3604..76068e2 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.2.7.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.3.4.bb
+@@ -6,13 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
+                     file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
  
- SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
+-           file://0001-bug-4504-security-Self-XSS-in-query-charts.patch \
+-           file://0001-bug-4505-security-XSS-in-view-operations-page.patch \
+-           file://0001-Bug-4544-additional-fix-for-4.2.x.patch \
+            file://apache.conf"
  
--SRC_URI[md5sum] = "7e571ce8eb6fa969fd8263969019849d"
--SRC_URI[sha256sum] = "adc6fe92dcff2368be94d20a5997aadb4d46d74551e2dd6602a704a35a195a6f"
-+SRC_URI[md5sum] = "f216356861e27284580d0208060ea7fa"
-+SRC_URI[sha256sum] = "6dd1cba0605e75009331aa3625a19ef49ade5a75aa9fe2ff8a818108d2cce84e"
+-SRC_URI[md5sum] = "0dcd755450dac819f33502590c88ad29"
+-SRC_URI[sha256sum] = "5d101dd88a99a869bc0c684a7f687cf290abc4bf306daac73337cbde2d7743e4"
++SRC_URI[md5sum] = "f811243e241ee81defb97e014ca713ef"
++SRC_URI[sha256sum] = "91258e07e04e25c5e49284b194ebff8ffa807ad38832fbe802cc6af3f7cb96d3"
  
- inherit autotools
+ S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
  
 -- 
 1.9.3
