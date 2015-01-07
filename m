@@ -1,24 +1,39 @@
-Return-Path: <kaneda18@hotmail.com>
-Received: from BLU004-OMC4S31.hotmail.com (blu004-omc4s31.hotmail.com
-	[65.55.111.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0837C7169F
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qa0-f42.google.com (mail-qa0-f42.google.com
+	[209.85.216.42])
+	by mail.openembedded.org (Postfix) with ESMTP id EA71F609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jan 2015 20:05:33 +0000 (UTC)
-Received: from BLU437-SMTP29 ([65.55.111.135]) by BLU004-OMC4S31.hotmail.com
-	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751);
-	Wed, 7 Jan 2015 12:05:33 -0800
-X-TMN: [piLInbYEsWtLy6GPE3AvIg2ByC5R4tN1]
-X-Originating-Email: [kaneda18@hotmail.com]
-Message-ID: <BLU437-SMTP294FCF66D64C1A0B462E0AC2460@phx.gbl>
-From: kkelly87 <kaneda18@hotmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 7 Jan 2015 15:05:15 -0500
-X-Mailer: git-send-email 1.9.1
-X-OriginalArrivalTime: 07 Jan 2015 20:05:31.0480 (UTC)
-	FILETIME=[4A1FF580:01D02AB5]
-MIME-Version: 1.0
-Cc: kkelly87 <kaneda18@hotmail.com>
-Subject: [meta-qt5][PATCH] qttranslations: adding recipes for qt specific translations
+	Wed,  7 Jan 2015 21:33:45 +0000 (UTC)
+Received: by mail-qa0-f42.google.com with SMTP id n8so4569164qaq.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jan 2015 13:33:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=67xNLLQI7zI0rzhgsnQcnnCEjREjxBbYdJVNL9+A1uw=;
+	b=qL4c6NZWIErJYc4ZmN+wfeHAF3MVJLikaeXskzYwEI34VeCDfz8GZTf31l1zOzuixt
+	OVzRKeOJJJVu5+Jykgqlxd6hZEVk6a1V/xhwEXIn0YfADFw9l7Fh1r8LCy78SEXrCYD/
+	mBSUf4YBBYYI62f7RgTU/Io3vhbS0qU6dXnIR79yN9IuX2yhnPa778B6bCmg1/s1tkIr
+	3J7/A2YG21seTNguDbuV/yeGysrzwsYsT+/i/7OYStkjA89itIq94STPioTtddSP/3B7
+	KlWg0MdcG5+OaUt9oxUxhhyshiJ7RPZy0Lj12FXpQNX5iohsyRATKscEsvuVFSCgXPIT
+	gXJQ==
+X-Received: by 10.224.151.208 with SMTP id d16mr8632416qaw.30.1420666425686;
+	Wed, 07 Jan 2015 13:33:45 -0800 (PST)
+Received: from nano.lab.ossystems.com.br ([177.100.225.47])
+	by mx.google.com with ESMTPSA id a4sm2234849qge.24.2015.01.07.13.33.44
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 Jan 2015 13:33:44 -0800 (PST)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id 00B941CA7B062; Wed,  7 Jan 2015 19:33:41 -0200 (BRST)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed,  7 Jan 2015 19:33:38 -0200
+Message-Id: <1420666418-8503-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5][PATCH] qtmultimedia: Add support to enable/disable PulseAudio and ALSA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,136 +47,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jan 2015 20:05:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Jan 2015 21:33:49 -0000
 
-The meta-qt5 layer is missing a recipe for the qttranslation submodule so qt specific items like
-the OK or Cancel button had no associated translations. This submission is for master while my previous patch
- will work as a backport to dizzy.
+The way QtMultimedia use to detect the PulseAudio and ALSA makes it
+non obvious how to disable it. After researching how Gentoo does it
+the 'done_config_<flag>' has been found. So now, we respect the distro
+support for PulseAudio and ALSA.
 
-Signed-off-by: Kevin Kelly <kaneda18@hotmail.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes-qt/qt5/qttranslations.inc      | 85 ++++++++++++++++++++++++++++++++++
- recipes-qt/qt5/qttranslations_5.4.0.bb |  5 ++
- recipes-qt/qt5/qttranslations_git.bb   |  4 ++
- 3 files changed, 94 insertions(+)
- create mode 100644 recipes-qt/qt5/qttranslations.inc
- create mode 100644 recipes-qt/qt5/qttranslations_5.4.0.bb
- create mode 100644 recipes-qt/qt5/qttranslations_git.bb
+ recipes-qt/qt5/qtmultimedia.inc | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-qt/qt5/qttranslations.inc b/recipes-qt/qt5/qttranslations.inc
-new file mode 100644
-index 0000000..1aca7e2
---- /dev/null
-+++ b/recipes-qt/qt5/qttranslations.inc
-@@ -0,0 +1,85 @@
-+require qt5.inc
-+
-+DEPENDS += "qtbase"
-+
-+# older copyright year than what e.g. qtbase is using now
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
-+                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
-+                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6" 
-+
-+PACKAGES =. "${PN}-assistant \
-+             ${PN}-designer \
-+             ${PN}-linguist \
-+             ${PN}-qmlviewer \
-+             ${PN}-qtconnectivity \
-+             ${PN}-qtmultimedia \
-+             ${PN}-qtlocation \
-+             ${PN}-qtdeclarative \
-+             ${PN}-qtxmlpatterns \
-+             ${PN}-qtconfig \
-+             ${PN}-qtquick1 \
-+             ${PN}-qtscript \
-+             ${PN}-qtbase \
-+             ${PN}-qthelp \
-+             ${PN}-qt \
-+             "
-+
-+FILES_${PN}-assistant = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/assistant_*.qm \
-+            "
-+
-+FILES_${PN}-designer = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/designer_*.qm \
-+            "
-+
-+FILES_${PN}-linguist = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/linguist_*.qm \
-+            "
-+
-+FILES_${PN}-qmlviewer = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qmlviewer_*.qm \
-+            "
-+
-+FILES_${PN}-qtconnectivity = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtconnectivity_*.qm \
-+            "
-+
-+FILES_${PN}-qtmultimedia = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtmultimedia_*.qm \
-+            "
-+
-+FILES_${PN}-qtlocation = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtlocation_*.qm \
-+            "
-+
-+FILES_${PN}-qtdeclarative = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtdeclarative_*.qm \
-+            "
-+
-+FILES_${PN}-qtxmlpatterns = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtxmlpatterns_*.qm \
-+            "
-+
-+FILES_${PN}-qtconfig = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtconfig_*.qm \
-+            "
-+
-+FILES_${PN}-qtquick1 = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtquick1_*.qm \
-+            "
-+
-+FILES_${PN}-qtscript = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtscript_*.qm \
-+            "
-+
-+FILES_${PN}-qtbase = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qtbase_*.qm \
-+            "
-+
-+FILES_${PN}-qthelp = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qt_help_*.qm \
-+            "
-+
-+FILES_${PN}-qt = " \
-+                ${OE_QMAKE_PATH_TRANSLATIONS}/qt_*.qm \
-+            "
-diff --git a/recipes-qt/qt5/qttranslations_5.4.0.bb b/recipes-qt/qt5/qttranslations_5.4.0.bb
-new file mode 100644
-index 0000000..2e3a284
---- /dev/null
-+++ b/recipes-qt/qt5/qttranslations_5.4.0.bb
-@@ -0,0 +1,5 @@
-+require qt5-${PV}.inc
-+require ${PN}.inc
-+
-+SRC_URI[md5sum] = "6462eeefae00f048418ed6e4571c4cc9"
-+SRC_URI[sha256sum] = "aca78d9178481a21a7af8571beb9109b38f0f71ba75cf3b89ddf705962a3f98b"
-diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
-new file mode 100644
-index 0000000..211b211
---- /dev/null
-+++ b/recipes-qt/qt5/qttranslations_git.bb
-@@ -0,0 +1,4 @@
-+require qt5-git.inc
-+require ${PN}.inc
-+
-+SRCREV = "3aad4ab4718d4bf952275a07e406e93eb6a22eed"
+diff --git a/recipes-qt/qt5/qtmultimedia.inc b/recipes-qt/qt5/qtmultimedia.inc
+index 8904ca5..427f688 100644
+--- a/recipes-qt/qt5/qtmultimedia.inc
++++ b/recipes-qt/qt5/qtmultimedia.inc
+@@ -1,11 +1,16 @@
+ require qt5.inc
+ 
+-DEPENDS += "qtdeclarative alsa-lib"
++DEPENDS += "qtdeclarative"
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \
++                   ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
++PACKAGECONFIG[alsa] = ",,alsa-lib"
++PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
+ PACKAGECONFIG[openal] = ",,openal-soft"
+ PACKAGECONFIG[gstreamer010] = ",,gstreamer gst-plugins-base"
+ 
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'alsa', '', 'CONFIG+=done_config_alsa', d)}"
++EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'pulseaudio', '', 'CONFIG+=done_config_pulseaudio', d)}"
+ EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'openal', 'CONFIG+=OE_OPENAL_ENABLED', '', d)}"
+ EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'gstreamer010', 'CONFIG+=OE_GSTREAMER010_ENABLED', '', d)}"
+ 
 -- 
-1.9.1
+2.1.4
 
 
