@@ -1,22 +1,37 @@
-Return-Path: <pbarker@betafive.co.uk>
-X-Greylist: delayed 391 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 08 Jan 2015 18:11:18 UTC
-Received: from crash.betafive.co.uk (crash.betafive.co.uk [37.187.124.48])
-	by mail.openembedded.org (Postfix) with ESMTP id EB55E706D9
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 093F4706D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jan 2015 18:11:18 +0000 (UTC)
-Received: by crash.betafive.co.uk (Postfix, from userid 1000)
-	id 754C23E0F88; Thu,  8 Jan 2015 18:05:21 +0000 (GMT)
-Date: Thu, 8 Jan 2015 18:05:21 +0000
-From: Paul Barker <paul@paulbarker.me.uk>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20150108180521.GA28640@crash.betafive.co.uk>
-References: <54AD65F0.3010707@balister.org>
-MIME-Version: 1.0
-In-Reply-To: <54AD65F0.3010707@balister.org>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [OE-core] OpenEmbedded at FOSDEM
+	Thu,  8 Jan 2015 18:58:20 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id ey11so13407827pad.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Jan 2015 10:58:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=BAyaB6Fc56wIiAG1cg89AaQ3lCiZcMAvCTtegGEoxZc=;
+	b=PalfhnRbrswdvjvxJaNEyvfd/nAw5gGmyULlvs/deLmkRS41OZaYT/z6PI8t4VzAhT
+	CgwBKbfFBB+doVzIwTditkuCkcDtnq6IvGWtrHFE55+///QpuWUuiEI+rNgXwC5dZdVY
+	3mWnefu1Ia+Bzg8v1CVeFjbeSSo9OsULbnfbXEQgvXm7rX90MLMlVRjuOdYugovAiApZ
+	L0RnAMBNacKfHEW49MTiCBtbQkr2LvWiv3s6tAayz/P3LuCoNFtzLsWgsrQX0P7cMRi5
+	iHCfPJMxW5vGxXyzdGm5m+g0xIG0m/V1TVukbZkCW391eMtufJno8mrc3VaQXcz9xQri
+	ZsHw==
+X-Received: by 10.70.102.193 with SMTP id fq1mr17497303pdb.19.1420743501487;
+	Thu, 08 Jan 2015 10:58:21 -0800 (PST)
+Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
+	[206.116.3.18])
+	by mx.google.com with ESMTPSA id rb5sm5199121pab.14.2015.01.08.10.58.20
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 08 Jan 2015 10:58:20 -0800 (PST)
+From: Ash Charles <ashcharles@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  8 Jan 2015 10:58:19 -0800
+Message-Id: <1420743499-13211-1-git-send-email-ashcharles@gmail.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <20141124110858.GB2456@jama>
+References: <20141124110858.GB2456@jama>
+Cc: ubik3000@gmail.com
+Subject: [PATCH] mpd: ship systemd socket file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,84 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jan 2015 18:11:28 -0000
-X-Groupsio-MsgNum: 53769
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="wRRV7LY7NUeQGEoC"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Jan 2015 18:58:29 -0000
 
---wRRV7LY7NUeQGEoC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+As of mpd version 19.1, as systemd socket file, mpd.socket, is
+installed. Ship this file as part of the mpd-systemd package.
 
-On Wed, Jan 07, 2015 at 11:59:28AM -0500, Philip Balister wrote:
-> It is that time of the year again.
->=20
-> FOSDEM 2015 is Jan 31/ Feb 1 in Brussels.
->=20
-> https://fosdem.org/2015/
->=20
-> OpenEmbedded will have a stand again this year and we would like some
-> help manning it.
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
+---
+I also suppressed the 
+  "mpd rdepends on libsmbclient, but it isn't a build dependency? [build-deps]"
+warning by adding samba to the DEPENDS.  I haven't included it in the patch
+though as I have no idea if there is any real build dependency on Samba.
 
-I'll be at FOSDEM again this year and this time I'm not presenting so I'll =
-have
-more free time. I'm happy to help out manning the stand, just let me know w=
-hat
-times are the priorities.
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I can't bring any hardware but I can probably bring some photos which I'm h=
-appy
-to be shown. Let me know if you want me to do this.
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+index 04eed0a..feec985 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+@@ -48,7 +48,7 @@ do_install_append() {
+ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+ RCONFLICTS_${PN} += "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} = "mpd.service"
++SYSTEMD_SERVICE_${PN} = "mpd.service mpd.socket"
+ 
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM_${PN} = " \
+-- 
+2.1.0
 
->=20
-> I've done a quick copy from the 2014 page on the wiki:
->=20
-> http://openembedded.org/wiki/FOSDEM_2015
 
-I'll try to add my details to this later if I get time.
-
->=20
-> We need to get some interesting demos that use OpenEmbedded for the
-> stand. I should be able to bring the latest USRP with a USB screen.
->=20
-> I'd also like to thank Paul Eggleton for arranging the stand.
->=20
-> The ev board has approved two travel grants of 200 euros (not to exceed,
-> actual expenses only) for people willing to help at FOSDEM. These should
-> go to people who cannot get support from their employers and you need to
-> be prepared to contirbute a significant amount of time manning the stand.
->=20
-> Philip
-> --=20
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
-
-Thanks,
-
---=20
-Paul Barker
-
-Email: paul@paulbarker.me.uk
-http://www.paulbarker.me.uk
-
---wRRV7LY7NUeQGEoC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUrsbhAAoJEBwoJlo7UPQDfg4IAJpx3h0WwCiodsRXu51VbPRN
-cslyi6APPNyXnrr82tFEcytNM9nMaOQSAZ25fWv+2d1lr64kWKF+spJnuR6HkTKk
-Z53N2ZQp7zk67j8lTSIc2G5OmgEPS4IQw1z5BK7BLA6E6Q3Qf9+7g56yUeTJLLGJ
-zyYTWT/8m/SpycW1bzw6HsrvsaES4r7MDzwY03bepLPZr88cFPPYiBAkNj7QwTjK
-CHJEuBmqk/NawBo1nQX3n9mMdTwswd7aFlE1CY7paDeBCCQaHdUoYYL8cKgclI9Y
-/FB4Ma8P4IZbC3cbWZS2z9+EpTL8Bi8b4H+RWU7pcdFDDdbS8faX59oHDU+zNyA=
-=dtsV
------END PGP SIGNATURE-----
-
---wRRV7LY7NUeQGEoC--
