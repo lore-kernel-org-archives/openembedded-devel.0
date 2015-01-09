@@ -1,27 +1,34 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B8F827169F
+Return-Path: <rpjday@crashcourse.ca>
+Received: from astoria.ccjclearline.com (astoria.ccjclearline.com
+	[64.235.106.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 71E407169F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jan 2015 10:22:37 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga103.jf.intel.com with ESMTP; 09 Jan 2015 02:19:01 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="438430428"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.3.186])
-	by FMSMGA003.fm.intel.com with ESMTP; 09 Jan 2015 02:09:51 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 09 Jan 2015 10:22:24 +0000
-Message-ID: <2856855.3vO02ToI4x@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.7-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <20150109093810.GB3137@jama>
-References: <cover.1420641979.git.paul.eggleton@linux.intel.com>
-	<20150109093810.GB3137@jama>
+	Fri,  9 Jan 2015 12:58:04 +0000 (UTC)
+Received: from [70.30.87.145] (port=56470 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES128-SHA:128)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1Y9Z8b-0001Ay-UZ for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Jan 2015 07:58:02 -0500
+Date: Fri, 9 Jan 2015 07:57:54 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20150105162556.GL2484@jama>
+Message-ID: <alpine.LFD.2.11.1501090756330.10695@localhost>
+References: <alpine.LFD.2.11.1501050948080.16705@localhost>
+	<20150105162556.GL2484@jama>
+User-Agent: Alpine 2.11 (LFD 23 2013-08-11)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe/meta-webserver][PATCH v4 00/13] Merge modphp into php and upgrade
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: Re: missing trailing spaces in some "_prepend" expressions in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,58 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jan 2015 10:22:40 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 09 Jan 2015 12:58:16 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Friday 09 January 2015 10:38:10 Martin Jansa wrote:
-> On Wed, Jan 07, 2015 at 02:50:15PM +0000, Paul Eggleton wrote:
-> > Finally resolve the overlap between the modphp and php recipes by
-> > merging the former into the latter. Along the way I fixed a few minor
-> > issues and upgraded related recipes.
-> > 
-> > I've taken a stepped approach to doing the php merge / upgrade so it's
-> > easier to see what's going on and easier for me to test - first upgrade
-> > php to the same version as modphp, then do the integration, then upgrade
-> > to the latest 5.5 release. I would appreciate someone testing PHP in CGI
-> > mode however since I don't have a convenient test setup for that (as I
-> > do for mod_php).
-> > 
-> > Changes since v2/3:
-> > * Fix phar script installation and packaging, which also resolves a QA
-> >   warning
-> 
-> There is one more issue:
-> 
-> sstate-sysroot-crutf.sh script was whitelisting this entries:
-> [^/]*/usr/lib/php/\.channels.*
-> [^/]*/usr/lib/php/\.registry.*
-> [^/]*/usr/lib/php/\.depdb.*
-> [^/]*/usr/lib/php/\.filemap
-> [^/]*/usr/lib/php/\.lock
-> 
-> No it's in php5 directory so it's easy to change the whitelist, can you
-> please confirm that it's safe to ignore these files (that nobody will
-> miss them if they aren't there after sstate reuse) or check if we can
-> prevent creating them in first place?
+On Mon, 5 Jan 2015, Martin Jansa wrote:
 
-I'll have to look into this, I know next to nothing about PEAR at this point. 
-My gut feeling is that they could still be whitelisted without ill effect; 
-perhaps they could just not be installed at all.
+> On Mon, Jan 05, 2015 at 09:58:01AM -0500, Robert P. J. Day wrote:
+> >
+> >   after running across a variable "_prepend" assignment that had no
+> > trailing space, i did a quick grep through oe-core and ran across the
+> > following, which would all seem to need that trailing space:
+> >
+> > $ grep -rn "DEPENDS_prepend.*[^ ]\"$" *
+> > meta/classes/qt4e.bbclass:2:DEPENDS_prepend = "${QT4EDEPENDS}"
+> > meta/classes/cpan_build.bbclass:27:DEPENDS_prepend = "${@cpan_build_dep_prepend(d)}"
+> > meta/classes/autotools.bbclass:24:DEPENDS_prepend = "${@autotools_dep_prepend(d)}"
+> > meta/classes/qt4x11.bbclass:2:DEPENDS_prepend = "${QT4DEPENDS}"
+> > $
+>
+> e.g. QT4EDEPENDS QT4DEPENDS both end with space, so it's not causing
+> any problem, but having the trailing space together with prepend is
+> good.
+>
+> Only exception I can think of is when you really don't want to
+> introduce extra space when the variable used in prepend/append is
+> set to empty, but that's not an issue for DEPENDS (but important
+> e.x. for tune .inc files)
+>
+> > and
+> >
+> > $ grep -rn "SRC_URI_prepend.*[^ ]\"$" *
+> > meta/recipes-devtools/qemu/qemu_git.bb:10:SRC_URI_prepend = "git://git.qemu.org/qemu.git"
+> > meta/recipes-devtools/qemu/qemu_2.2.0.bb:10:SRC_URI_prepend = "http://wiki.qemu-project.org/download/${BP}.tar.bz2"
+> > $
+> >
+> >   there may be more, i just left it at that, not sure if there's
+> > something magic about those examples or whether they really should
+> > have the space added, so i'll leave it with someone else to tweak.
 
-> And is "/usr/lib/php5/php" expected, shouldn't it be just
-> "/usr/lib/php5"?
+  not sure if i replied to this already, but if someone wants to tweak
+those, i'll leave it up to them. obviously, as martin suggests,
+they're not actually causing problems, but i'm just a style guide kind
+of guy.
 
-I agree this looks odd, but it seems it's how it ends up with libdir set in 
-order to make the extensions directory be more sensible than the default 
-/usr/lib/extensions (which is a worse alternative than the current state IMO). 
-I couldn't immediately see how to fix this when I looked at it earlier.
-
-Cheers,
-Paul
+rday
 
 -- 
 
-Paul Eggleton
-Intel Open Source Technology Centre
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
