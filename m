@@ -1,40 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id A8C0F609B2
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id CA2FE65C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jan 2015 19:48:15 +0000 (UTC)
-Received: by mail-wg0-f54.google.com with SMTP id z12so4488369wgg.13
+	Fri,  9 Jan 2015 00:58:04 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55784862"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2015 08:54:39 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t090vV2P001667
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Jan 2015 11:48:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=C5IDtanJ7G6XYInfXtQk2kZ5W1gRkw+s91p9Qi/yC6c=;
-	b=ssd1J6ZYEfqixEkRJSjcPvI4A4C7poe8pWtrX4lp8u+ER8TZ4bEA/lmdopf3uKwb/s
-	3KF0b0wxZ94ZdVl9B+VeAnrLYmVaqB7AgoU3/WsOWSsdgjwnidZPnW92zK+JZyllkUis
-	WLXlEJJIQOP0TVeah0cfWZmq+z/Y6OdZPpW+QvII6z+DCweOzDkq8VkUOSXVZFnu7keC
-	v2rbCrItFxp+nQUQJn272mQWqoJGNtWO/eV3oPP/YkziLMFXqB2eOHNXijjrBuY8vHod
-	/qSbXvVD8Ji+dUW+/NLVNY0RXyTwlVl1OtC5lNLbSXeOafWTIfubDh+3b9FHTkLT4tVx
-	35Mw==
-X-Received: by 10.194.71.203 with SMTP id x11mr23035968wju.131.1420746495303; 
-	Thu, 08 Jan 2015 11:48:15 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	bo3sm7341667wjb.44.2015.01.08.11.48.13
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Jan 2015 11:48:14 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 8 Jan 2015 20:48:18 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150108194818.GM3972@jama>
-References: <BLU437-SMTP294FCF66D64C1A0B462E0AC2460@phx.gbl>
-	<20150108113605.GF3972@jama>
+	Fri, 9 Jan 2015 08:57:31 +0800
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Fri, 9 Jan 2015 08:58:09 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][V2 PATCH 3/3] dlm: add a new recipe
+Thread-Index: AQHQKb4XomH49ba6YU617bhsKvF8Vpy0KKkg//+xPwCAAyDRUA==
+Date: Fri, 9 Jan 2015 00:58:03 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDAE4A43@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1420517556-49274-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1420517556-49274-4-git-send-email-leimaohui@cn.fujitsu.com>
+	<20150106143529.GF19402@jama>
+	<1B56A49860EB2D45ADE3731B15C959FDAE4143@G08CNEXMBPEKD01.g08.fujitsu.local>
+	<20150107091016.GE29986@jama>
+In-Reply-To: <20150107091016.GE29986@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.48]
 MIME-Version: 1.0
-In-Reply-To: <20150108113605.GF3972@jama>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: kkelly87 <kaneda18@hotmail.com>
-Subject: Re: [meta-qt5][PATCH] qttranslations: adding recipes for qt specific translations
+Subject: Re: [meta-oe][V2 PATCH 3/3] dlm: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,198 +46,190 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jan 2015 19:48:19 -0000
-X-Groupsio-MsgNum: 53771
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9pS2hy4/DrI8BQlq"
-Content-Disposition: inline
-
---9pS2hy4/DrI8BQlq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 Jan 2015 00:58:07 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 08, 2015 at 12:36:05PM +0100, Martin Jansa wrote:
-> On Wed, Jan 07, 2015 at 03:05:15PM -0500, kkelly87 wrote:
-> > The meta-qt5 layer is missing a recipe for the qttranslation submodule =
-so qt specific items like
-> > the OK or Cancel button had no associated translations. This submission=
- is for master while my previous patch
-> >  will work as a backport to dizzy.
-> >=20
-> > Signed-off-by: Kevin Kelly <kaneda18@hotmail.com>
-> > ---
-> >  recipes-qt/qt5/qttranslations.inc      | 85 ++++++++++++++++++++++++++=
-++++++++
-> >  recipes-qt/qt5/qttranslations_5.4.0.bb |  5 ++
-> >  recipes-qt/qt5/qttranslations_git.bb   |  4 ++
-> >  3 files changed, 94 insertions(+)
-> >  create mode 100644 recipes-qt/qt5/qttranslations.inc
-> >  create mode 100644 recipes-qt/qt5/qttranslations_5.4.0.bb
-> >  create mode 100644 recipes-qt/qt5/qttranslations_git.bb
-> >=20
-> > diff --git a/recipes-qt/qt5/qttranslations.inc b/recipes-qt/qt5/qttrans=
-lations.inc
-> > new file mode 100644
-> > index 0000000..1aca7e2
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qttranslations.inc
-> > @@ -0,0 +1,85 @@
-> > +require qt5.inc
-> > +
-> > +DEPENDS +=3D "qtbase"
+Hi Martin
 
-One more change in master-next.. this needs to have qttools-native
-dependency, otherwise fails like this:
+OK,I will add REQUIRED_DISTRO_FEATURES =3D "systemd" and then submit my V3 =
+patch later.
 
-| lrelease /OE/build/oe-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qttran=
-slations/5.4.0-r0/qttranslations-opensource-src-5.4.0/translations/assistan=
-t_de.ts
-| /bin/sh: /OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/qt5/lr=
-elease: No such file or directory
-| Makefile:792: recipe for target 'assistant_de.qm' failed
-| make[1]: *** [assistant_de.qm] Error 127
+Cheers
+Lei
 
-> > +
-> > +# older copyright year than what e.g. qtbase is using now
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: Wednesday, January 07, 2015 5:10 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][V2 PATCH 3/3] dlm: add a new recipe
 >=20
-> This comment isn't correct for 5.4, will fix when cherry-picking to
-> master-next.
+> On Wed, Jan 07, 2015 at 06:02:48AM +0000, Lei, Maohui wrote:
+> > Hi Martin
+> >
+> > > > +DEPENDS =3D "corosync systemd"
+> > >
+> > > Does it need explicit systemd dependency?
+> > > https://git.fedorahosted.org/cgit/dlm.git/tree/dlm_controld/Makefile
+> > > looks like yes with default USE_SD_NOTIFY
+> >
+> > Yes.
+> >
+> > >
+> > > If yes, then it should be together with REQUIRED_DISTRO_FEATURES =3D
+> > > "systemd"
+> > > to prevent world error when systemd isn't in DISTRO_FEATURES
+> > > ERROR: Nothing PROVIDES 'systemd' (but
+> > > meta-oe/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb DEPENDS on or
+> > > otherwise requires it)
+> > > ERROR: systemd was skipped: 'systemd' not in DISTRO_FEATURES
+> >
+> > But I think add REQUIRED_DISTRO_FEATURES can't prevent the world error.
+> > Even if I add the REQUIRED_DISTRO_FEATURES =3D "systemd",the error stil=
+l
+> appears.
+> > Unless add "system" into DISTRO_FEATURES.
 >=20
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE.LGPLv21;md5=3Dcff17b12416c896e10a=
-e2c17a64252e7 \
-> > +                    file://LICENSE.LGPLv3;md5=3Dc1939be5579666be947371=
-bc8120425f \
-> > +                    file://LGPL_EXCEPTION.txt;md5=3D0145c4d1b6f96a661c=
-2c139dfb268fb6"=20
-> > +
-> > +PACKAGES =3D. "${PN}-assistant \
-> > +             ${PN}-designer \
-> > +             ${PN}-linguist \
-> > +             ${PN}-qmlviewer \
-> > +             ${PN}-qtconnectivity \
-> > +             ${PN}-qtmultimedia \
-> > +             ${PN}-qtlocation \
-> > +             ${PN}-qtdeclarative \
-> > +             ${PN}-qtxmlpatterns \
-> > +             ${PN}-qtconfig \
-> > +             ${PN}-qtquick1 \
-> > +             ${PN}-qtscript \
-> > +             ${PN}-qtbase \
-> > +             ${PN}-qthelp \
-> > +             ${PN}-qt \
-> > +             "
-> > +
-> > +FILES_${PN}-assistant =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/assistant_*.qm \
-> > +            "
+> It doesn't, because dlm will be skipped just like other recipes incompati=
+ble
+> with distro-less configuration.
 >=20
-> I've also fixed indentation (to use 4 spaces and " as first character)
+> > The following comes from
+> http://www.yoctoproject.org/docs/1.7/ref-manual/ref-manual.html .
+> > ********************************************************
+> > REQUIRED_DISTRO_FEATURES
+> > When inheriting the distro_features_check class, this variable identifi=
+es
+> distribution features that must exist in the current configuration in ord=
+er
+> for the OpenEmbedded build system to build the recipe. In other words, if=
+ the
+> REQUIRED_DISTRO_FEATURES variable lists a feature that does not appear in
+> DISTRO_FEATURES within the current configuration, an error occurs and the=
+ build
+> stops.
+> > ********************************************************
+> >
+> >
+> > Cheers
+> > Lei
+> >
+> >
+> > > -----Original Message-----
+> > > From: openembedded-devel-bounces@lists.openembedded.org
+> > > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
+> > > Of Martin Jansa
+> > > Sent: Tuesday, January 06, 2015 10:35 PM
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Subject: Re: [oe] [meta-oe][V2 PATCH 3/3] dlm: add a new recipe
+> > >
+> > > On Tue, Jan 06, 2015 at 12:12:36PM +0800, leimaohui wrote:
+> > > > From: leimh <leimaohui@cn.fujitsu.com>
+> > > >
+> > > > The kernel dlm requires a user daemon to control membership.
+> > > >
+> > > > Signed-off-by: leimh <leimaohui@cn.fujitsu.com>
+> > > > ---
+> > > >  meta-oe/recipes-extended/dlm/dlm_4.0.2.bb | 47
+> > > > +++++++++++++++++++++++++++++++
+> > > >  1 file changed, 47 insertions(+)
+> > > >  create mode 100644 meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > > >
+> > > > diff --git a/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > > > b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > > > new file mode 100644
+> > > > index 0000000..774f136
+> > > > --- /dev/null
+> > > > +++ b/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb
+> > > > @@ -0,0 +1,47 @@
+> > > > +DESCRIPTION =3D "dlm control daemon and tool"
+> > > > +
+> > > > +SECTION =3D "utils"
+> > > > +HOMEPAGE =3D "https://fedorahosted.org/cluster/wiki/HomePage"
+> > > > +
+> > > > +SRC_URI =3D
+> > > "https://git.fedorahosted.org/cgit/dlm.git/snapshot/${BP}.tar.xz"
+> > > > +
+> > > > +SRC_URI[md5sum] =3D "efc2ee6093aa6aa0a88aaad83e998a3f"
+> > > > +SRC_URI[sha256sum] =3D
+> > > "b89bc557aaffbab0ac005398025f247718a5589cff6574d902eaffe2b20e683e"
+> > > > +
+> > > > +LICENSE =3D "LGPLv2+ & GPLv2 & GPLv2+"
+> > > > +LIC_FILES_CHKSUM =3D
+> > > "file://README.license;md5=3D8f0bbcdd678df1bce9863492b6c8832d"
+> > > > +
+> > > > +DEPENDS =3D "corosync systemd"
+> > >
+> > > Does it need explicit systemd dependency?
+> > > https://git.fedorahosted.org/cgit/dlm.git/tree/dlm_controld/Makefile
+> > > looks like yes with default USE_SD_NOTIFY
+> > >
+> > > If yes, then it should be together with REQUIRED_DISTRO_FEATURES =3D
+> > > "systemd"
+> > > to prevent world error when systemd isn't in DISTRO_FEATURES
+> > > ERROR: Nothing PROVIDES 'systemd' (but
+> > > meta-oe/meta-oe/recipes-extended/dlm/dlm_4.0.2.bb DEPENDS on or
+> > > otherwise requires it)
+> > > ERROR: systemd was skipped: 'systemd' not in DISTRO_FEATURES
+> > >
+> > > > +
+> > > > +inherit pkgconfig systemd
+> > > > +
+> > > > +SYSTEMD_SERVICE_${PN} =3D "dlm.service"
+> > > > +SYSTEMD_AUTO_ENABLE =3D "enable"
+> > > > +
+> > > > +export EXTRA_OEMAKE =3D ""
+> > > > +
+> > > > +do_compile_prepend() {
+> > > > +    sed -i "s/libsystemd-daemon/libsystemd/g"
+> > > > +${S}/dlm_controld/Makefile }
+> > > > +
+> > > > +do_compile () {
+> > > > +    oe_runmake 'CC=3D${CC}'
+> > > > +}
+> > > > +
+> > > > +do_install_append (){
+> > > > +    install -d ${D}${sysconfdir}/sysconfig/
+> > > > +    install -d ${D}${sysconfdir}/init.d/
+> > > > +    install -m 0644 ${S}/init/dlm.sysconfig
+> > > ${D}${sysconfdir}/sysconfig/dlm
+> > > > +    install -m 0644 ${S}/init/dlm.init
+> > > > + ${D}${sysconfdir}/init.d/dlm
+> > > > +
+> > > > +    # install systemd unit files
+> > > > +    if
+> > > > + ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)};
+> > > then
+> > > > +        install -d ${D}${systemd_unitdir}/system
+> > > > +        install -m 0644 ${S}/init/dlm.service
+> > > ${D}${systemd_unitdir}/system
+> > > > +    fi
+> > > > +}
+> > > > +
+> > > > +do_install() {
+> > > > +    oe_runmake install DESTDIR=3D${D} LIBDIR=3D${libdir} }
+> > > > +
+> > > > --
+> > > > 1.8.4.2
+> > > >
+> > > > --
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > > --
+> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >=20
-> > +
-> > +FILES_${PN}-designer =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/designer_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-linguist =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/linguist_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qmlviewer =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qmlviewer_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtconnectivity =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtconnectivity_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtmultimedia =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtmultimedia_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtlocation =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtlocation_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtdeclarative =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtdeclarative_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtxmlpatterns =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtxmlpatterns_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtconfig =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtconfig_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtquick1 =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtquick1_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtscript =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtscript_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qtbase =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qtbase_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qthelp =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qt_help_*.qm \
-> > +            "
-> > +
-> > +FILES_${PN}-qt =3D " \
-> > +                ${OE_QMAKE_PATH_TRANSLATIONS}/qt_*.qm \
-> > +            "
-> > diff --git a/recipes-qt/qt5/qttranslations_5.4.0.bb b/recipes-qt/qt5/qt=
-translations_5.4.0.bb
-> > new file mode 100644
-> > index 0000000..2e3a284
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qttranslations_5.4.0.bb
-> > @@ -0,0 +1,5 @@
-> > +require qt5-${PV}.inc
-> > +require ${PN}.inc
-> > +
-> > +SRC_URI[md5sum] =3D "6462eeefae00f048418ed6e4571c4cc9"
-> > +SRC_URI[sha256sum] =3D "aca78d9178481a21a7af8571beb9109b38f0f71ba75cf3=
-b89ddf705962a3f98b"
-> > diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttr=
-anslations_git.bb
-> > new file mode 100644
-> > index 0000000..211b211
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qttranslations_git.bb
-> > @@ -0,0 +1,4 @@
-> > +require qt5-git.inc
-> > +require ${PN}.inc
-> > +
-> > +SRCREV =3D "3aad4ab4718d4bf952275a07e406e93eb6a22eed"
->=20
-> This revision isn't in 5.4 branch but from 5.4.0, will change it to
-> b9481cffeb41ceb9363b7be850bd9cd172b313be to fix do_fetch.
->=20
-> Similar changes will be needed in dizzy version.
->=20
-> --=20
+> --
 > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---9pS2hy4/DrI8BQlq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlSu3wIACgkQN1Ujt2V2gBy4WQCfcCXJLtM2yaIX9vA4eHmx2YaE
-ktYAoJT/+vwqLGp3sKOrHycvHvTuivxd
-=DFBM
------END PGP SIGNATURE-----
-
---9pS2hy4/DrI8BQlq--
