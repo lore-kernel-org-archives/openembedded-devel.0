@@ -1,36 +1,24 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 634DC609B2
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B92A71637
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jan 2015 15:24:55 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 0ABB4D40345
+	Sun, 11 Jan 2015 19:15:22 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0BJFLpV013088
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jan 2015 16:24:56 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 200EBD4025E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jan 2015 16:24:53 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de (e179143209.adsl.alicedsl.de
-	[85.179.143.209]) by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jan 2015 16:24:52 +0100 (CET)
-Date: Sun, 11 Jan 2015 16:24:44 +0100
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150111152441.GD2465@mail.itconsulting-heinold.de>
-References: <54B220B0.8070609@gmail.com>
- <54B222F2.4070802@gmail.com>
+	Sun, 11 Jan 2015 11:15:22 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Sun, 11 Jan 2015 11:15:21 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 11 Jan 2015 11:15:21 -0800
+Message-ID: <1421003721-12422-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-In-Reply-To: <54B222F2.4070802@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: Query on meta-java layer openjdk-7-jre build
+Subject: [meta-networking][PATCH 1/1] geoip-perl: add recipe for version 1.45
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,30 +32,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jan 2015 15:24:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 11 Jan 2015 19:15:31 -0000
+Content-Type: text/plain
 
-On Sun, Jan 11, 2015 at 12:44:58PM +0530, Victor Ascroft wrote:
-> Hello,
-> 
-> I have OpenEmbedded setup and using the daisy branch. For the meta-java layer I
-> am using the master branch of http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/.
-> 
-> For our embedded modules we have our own meta layer. I am trying to build
-> an angstrom image with LXDE.
-> 
-> We are using ARMv7 hard-float Thumb2 builds (armv7at2hf-vfp). Most errors seems
-> to be "not declared in this scope" errors. Are there some definitions to be 
-> declared in the conf file, so the build picks it up or is some modification
-> required to the source with a custome patch declared in the bb file for this?
-> 
-> Not much knowledge on OpenEmbedded. Also can someone explain the qemu segmentation
-> fault errors?
-> 
+The package includes a few data files.  Despite the names,
+these are very small databases only useful for running the
+perl test scripts.
 
-The segfaults comes with the latest update of qemu in openembedded-core. Try to revert the
-commits on your local branch for now.
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../recipes-support/geoip/geoip-perl/run-ptest     |   15 ++++++++
+ .../recipes-support/geoip/geoip-perl_1.45.bb       |   37 ++++++++++++++++++++
+ 2 files changed, 52 insertions(+)
+ create mode 100644 meta-networking/recipes-support/geoip/geoip-perl/run-ptest
+ create mode 100644 meta-networking/recipes-support/geoip/geoip-perl_1.45.bb
 
-Bye Henning
+diff --git a/meta-networking/recipes-support/geoip/geoip-perl/run-ptest b/meta-networking/recipes-support/geoip/geoip-perl/run-ptest
+new file mode 100644
+index 0000000..5404c24
+--- /dev/null
++++ b/meta-networking/recipes-support/geoip/geoip-perl/run-ptest
+@@ -0,0 +1,15 @@
++#!/bin/sh
++
++# The tests contain hard-coded relative paths and must be
++# executed from $pdir.
++#
++pdir=`dirname $0`
++cd ${pdir}
++for i in t/*.t ; do
++	perl ${i} 1>/dev/null 2>&1;
++	if [ $? == 0 ]; then
++		echo PASS: $i;
++	else
++		echo FAIL: $i;
++	fi;
++done
+diff --git a/meta-networking/recipes-support/geoip/geoip-perl_1.45.bb b/meta-networking/recipes-support/geoip/geoip-perl_1.45.bb
+new file mode 100644
+index 0000000..9188351
+--- /dev/null
++++ b/meta-networking/recipes-support/geoip/geoip-perl_1.45.bb
+@@ -0,0 +1,37 @@
++#
++# Copyright (C) 2014, 2015 Wind River Systems, Inc.
++#
++SUMMARY = "GeoIP perl API library to access location database"
++DESCRIPTION = "perl library for country/city/organization to IP address or hostname mapping"
++HOMEPAGE = "http://www.maxmind.com/app/ip-location"
++SECTION = "network"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++LIC_FILES_CHKSUM = "file://README;md5=b0fa745303912bd2d64430f7ae69487d"
++
++SRC_URI = "http://github.com/maxmind/geoip-api-perl/archive/v${PV}.tar.gz \
++           file://run-ptest \
++          "
++
++SRC_URI[md5sum] = "0ce57140890bf81958e0cea4fe1885b2"
++SRC_URI[sha256sum] = "c56437b1cc8887736cb1e435d0320c1c1ff3754830249516317b99137005fb23"
++
++S = "${WORKDIR}/geoip-api-perl-${PV}"
++
++DEPENDS += "geoip"
++
++inherit cpan ptest
++
++EXTRA_CPANFLAGS = "LIBS='-L${STAGING_LIBDIR}' INC='-I${STAGING_INCDIR}'"
++
++
++# perl scripts and some special small data files
++#
++do_install_ptest () {
++	install -d -m 0755 ${D}${PTEST_PATH}/t/data
++
++	install ${S}/t/*.t* ${D}${PTEST_PATH}/t
++	install ${S}/t/data/* ${D}${PTEST_PATH}/t/data
++}
++
++FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/Geo/IP/.debug"
++
+-- 
+1.7.9.5
+
 
