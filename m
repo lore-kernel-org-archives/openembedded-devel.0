@@ -1,40 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 65F487162E
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 5173F60601
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jan 2015 14:41:07 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id em10so14983766wid.5
+	Mon, 12 Jan 2015 15:16:26 +0000 (UTC)
+Received: by mail-we0-f178.google.com with SMTP id p10so19598356wes.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jan 2015 06:41:08 -0800 (PST)
+	Mon, 12 Jan 2015 07:16:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=dvdyRSCJyzT7NXISwTaly6hI8q2evNYu27Ax6s35cXc=;
-	b=HIGSGwxI46BCGriyaBw6FZkXpJU/gqA32MCTmDGkSs0Q9S/JCTk9uwcP414IcCE34q
-	1UYOsuIvUZ+2ad8fWYX/9GWTAR20QPWW8j84ocADj+Twd+RbIlNPzLVIJjoQRijgbwBK
-	J9MgvBBz8r4RayXz6IQhzc+mKMkZJBHSYjZWi3YVe5gttAjb9F5bk8z7PL1h8jechbZr
-	CDdsPupxXf4jTh9xLNW5wn4FwKkutdZSkKTxtsytnVfiBUVuqab07NHIWHEePqv27wRV
-	+nAYoMp9chSadaF5NdNfqOXUw5mhYoC3xHBIYWE6K0reuxHGpI/+UANjTIFg4pqW4h2X
-	kdbQ==
-X-Received: by 10.194.87.100 with SMTP id w4mr60411564wjz.65.1421073667968;
-	Mon, 12 Jan 2015 06:41:07 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=oCOaIuDb6/siwNEHibHKRioOo5/DxhSGiIwmcSi5OOg=;
+	b=tPCl2a837NKsnsJkculeHwBhrVvsiXtbqaZsliUhMDSUFYJGxPheYgiyPm1kPUe+LP
+	91Lu7BTfcEdgaxClAKILle9cu6pD3v40I1IqI2lo3GMp+Nva1uOtz27PnqeiHkvi0mxl
+	dSKWDkCcqhlDCYbFl43OmJO7meWmBX9DNU4tN1/ZFGaqyAGw7y0MGsvcZwAhX60utWq3
+	5+fDGiPIKSTNXU2z/Vr4cv2l53KmgWj85ox6ZYvK8iAR3A0fzCrilh8tnkRgF2/j0ovh
+	yXHc0Jy65lMxuegZI+g8qdIGAA36eP9APe9ZR6+Nx2G3NYCyeKJqoac/YEW/0R75kPOL
+	Sr7Q==
+X-Received: by 10.180.76.144 with SMTP id k16mr30742110wiw.3.1421075786995;
+	Mon, 12 Jan 2015 07:16:26 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	ej10sm10484269wib.1.2015.01.12.06.41.07
-	for <openembedded-devel@lists.openembedded.org>
+	f1sm21982716wjw.30.2015.01.12.07.16.25
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 12 Jan 2015 06:41:07 -0800 (PST)
+	Mon, 12 Jan 2015 07:16:25 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 12 Jan 2015 15:41:08 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150112144108.GD2513@jama>
-References: <1421065348-28990-1-git-send-email-akuster808@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1421065348-28990-1-git-send-email-akuster808@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v3] libssh: depends fix
+Date: Mon, 12 Jan 2015 16:16:25 +0100
+Message-Id: <1421075785-31199-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.2.1
+Subject: [meta-oe][PATCH] rsyslog: fix build with json-0.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,74 +43,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jan 2015 14:41:11 -0000
-X-Groupsio-MsgNum: 53811
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fWddYNRDgTk9wQGZ"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 12 Jan 2015 15:16:33 -0000
 
---fWddYNRDgTk9wQGZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../rsyslog/rsyslog/json-0.12-fix.patch            | 45 ++++++++++++++++++++++
+ meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb  |  1 +
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch
 
-On Mon, Jan 12, 2015 at 04:22:28AM -0800, Armin Kuster wrote:
-> the default was to build with GSSAPI enabled.
->=20
-> V3:
-> remove rdepends
->=20
-> V2:
-> add PACKAGEGROUP to define enable/disable GSSAPI with
-> proper depends of krb5
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch
+new file mode 100644
+index 0000000..7390a7f
+--- /dev/null
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch
+@@ -0,0 +1,45 @@
++json-c-0.12 unlike 0.11 doesn't install json -> json-c symlink in include
++
++* Resolved in Version 7.6.4 [v7.6-stable] 2014-09-12
++  https://github.com/rsyslog/rsyslog/blob/v7-stable/ChangeLog
++* permits to build against json-c 0.12
++  Unfortunately, json-c had an ABI breakage, so this is necessary. Note
++  that versions prior to 0.12 had security issues (CVE-2013-6370,
++  CVE-2013-6371) and so it is desirable to link against the new version.
++  Thanks to Thomas D. for the patch. Note that at least some distros
++  have fixed the security issue in older versions of json-c, so this
++  seems to apply mostly when building from sources.
++
++Upstream-Status: Backport
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++
++diff -uNr rsyslog-7.4.4.orig/plugins/ommongodb/ommongodb.c rsyslog-7.4.4/plugins/ommongodb/ommongodb.c
++--- rsyslog-7.4.4.orig/plugins/ommongodb/ommongodb.c	2013-09-03 11:54:20.000000000 +0200
+++++ rsyslog-7.4.4/plugins/ommongodb/ommongodb.c	2015-01-12 16:11:51.542591825 +0100
++@@ -33,9 +33,9 @@
++ #include <stdint.h>
++ #include <time.h>
++ #include <mongo.h>
++-#include <json.h>
+++#include <json-c/json.h>
++ /* For struct json_object_iter, should not be necessary in future versions */
++-#include <json/json_object_private.h>
+++#include <json-c/json_object_private.h>
++ 
++ #include "rsyslog.h"
++ #include "conf.h"
++diff -uNr rsyslog-7.4.4.orig/runtime/msg.c rsyslog-7.4.4/runtime/msg.c
++--- rsyslog-7.4.4.orig/runtime/msg.c	2013-09-03 12:31:42.000000000 +0200
+++++ rsyslog-7.4.4/runtime/msg.c	2015-01-12 16:12:00.403592142 +0100
++@@ -41,9 +41,9 @@
++ #endif
++ #include <netdb.h>
++ #include <libestr.h>
++-#include <json.h>
+++#include <json-c/json.h>
++ /* For struct json_object_iter, should not be necessary in future versions */
++-#include <json/json_object_private.h>
+++#include <json-c/json_object_private.h>
++ #if HAVE_MALLOC_H
++ #  include <malloc.h>
++ #endif
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+index aeca09a..a9d9464 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+@@ -25,6 +25,7 @@ SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
+            file://run-ptest \
+            file://rsyslog-fix-ptest-not-finish.patch \
+            file://rsyslog-use-serial-tests-config-needed-by-ptest.patch \
++           file://json-0.12-fix.patch \
+ "
+ 
+ SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
+-- 
+2.2.1
 
-Dropped these extra comments when cherry-picking to master-next (they belon=
-g under --- so they aren't part
-of commit message).
 
->=20
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-oe/recipes-support/libssh/libssh_git.bb | 3 +++
->  1 file changed, 3 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-support/libssh/libssh_git.bb b/meta-oe/recip=
-es-support/libssh/libssh_git.bb
-> index d21bdc3..47fb39a 100644
-> --- a/meta-oe/recipes-support/libssh/libssh_git.bb
-> +++ b/meta-oe/recipes-support/libssh/libssh_git.bb
-> @@ -20,6 +20,9 @@ EXTRA_OECMAKE =3D " \
->      -DWITH_ZLIB=3D1 \
->      "
-> =20
-> +PACKAGECONFIG ??=3D""
-> +PACKAGECONFIG[gssapi] =3D "-DWITH_GSSAPI=3D1, -DWITH_GSSAPI=3D0, krb5, "
-> +
->  inherit cmake
-> =20
->  do_configure_prepend () {
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---fWddYNRDgTk9wQGZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlSz3QQACgkQN1Ujt2V2gBya1ACgngE5u44C4+yHziXIAwBkiuBT
-xM0AoJ2Yu7tmISDd7kbGKBin7e2OnbTN
-=p//E
------END PGP SIGNATURE-----
-
---fWddYNRDgTk9wQGZ--
