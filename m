@@ -1,35 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 5173F60601
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id DB3757284C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jan 2015 15:16:26 +0000 (UTC)
-Received: by mail-we0-f178.google.com with SMTP id p10so19598356wes.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jan 2015 07:16:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=oCOaIuDb6/siwNEHibHKRioOo5/DxhSGiIwmcSi5OOg=;
-	b=tPCl2a837NKsnsJkculeHwBhrVvsiXtbqaZsliUhMDSUFYJGxPheYgiyPm1kPUe+LP
-	91Lu7BTfcEdgaxClAKILle9cu6pD3v40I1IqI2lo3GMp+Nva1uOtz27PnqeiHkvi0mxl
-	dSKWDkCcqhlDCYbFl43OmJO7meWmBX9DNU4tN1/ZFGaqyAGw7y0MGsvcZwAhX60utWq3
-	5+fDGiPIKSTNXU2z/Vr4cv2l53KmgWj85ox6ZYvK8iAR3A0fzCrilh8tnkRgF2/j0ovh
-	yXHc0Jy65lMxuegZI+g8qdIGAA36eP9APe9ZR6+Nx2G3NYCyeKJqoac/YEW/0R75kPOL
-	Sr7Q==
-X-Received: by 10.180.76.144 with SMTP id k16mr30742110wiw.3.1421075786995;
-	Mon, 12 Jan 2015 07:16:26 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	f1sm21982716wjw.30.2015.01.12.07.16.25
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 12 Jan 2015 07:16:25 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Jan 2015 16:16:25 +0100
-Message-Id: <1421075785-31199-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.2.1
-Subject: [meta-oe][PATCH] rsyslog: fix build with json-0.12
+	Mon, 12 Jan 2015 20:00:05 +0000 (UTC)
+Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
+	by relay1.mentorg.com with esmtp 
+	id 1YAl9g-0006bg-Kf from Joe_MacDonald@mentor.com ;
+	Mon, 12 Jan 2015 12:00:04 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 12 Jan 2015 12:00:03 -0800
+Received: by burninator (Postfix, from userid 1000)	id 90F005809F6; Mon, 12
+	Jan 2015 15:00:00 -0500 (EST)
+Date: Mon, 12 Jan 2015 15:00:00 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Qian Lei <qianl.fnst@cn.fujitsu.com>
+Message-ID: <20150112200000.GF6167@mentor.com>
+References: <1416473037-23326-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+MIME-Version: 1.0
+In-Reply-To: <1416473037-23326-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-selinux][PATCH 1/2] ustr: Get source from official upstream instead of Fedora Project
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,79 +38,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jan 2015 15:16:33 -0000
+X-List-Received-Date: Mon, 12 Jan 2015 20:00:15 -0000
+X-Groupsio-MsgNum: 53813
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="XRI2XbIfl/05pQwm"
+Content-Disposition: inline
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../rsyslog/rsyslog/json-0.12-fix.patch            | 45 ++++++++++++++++++++++
- meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb  |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch
+--XRI2XbIfl/05pQwm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch
-new file mode 100644
-index 0000000..7390a7f
---- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/json-0.12-fix.patch
-@@ -0,0 +1,45 @@
-+json-c-0.12 unlike 0.11 doesn't install json -> json-c symlink in include
-+
-+* Resolved in Version 7.6.4 [v7.6-stable] 2014-09-12
-+  https://github.com/rsyslog/rsyslog/blob/v7-stable/ChangeLog
-+* permits to build against json-c 0.12
-+  Unfortunately, json-c had an ABI breakage, so this is necessary. Note
-+  that versions prior to 0.12 had security issues (CVE-2013-6370,
-+  CVE-2013-6371) and so it is desirable to link against the new version.
-+  Thanks to Thomas D. for the patch. Note that at least some distros
-+  have fixed the security issue in older versions of json-c, so this
-+  seems to apply mostly when building from sources.
-+
-+Upstream-Status: Backport
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+diff -uNr rsyslog-7.4.4.orig/plugins/ommongodb/ommongodb.c rsyslog-7.4.4/plugins/ommongodb/ommongodb.c
-+--- rsyslog-7.4.4.orig/plugins/ommongodb/ommongodb.c	2013-09-03 11:54:20.000000000 +0200
-++++ rsyslog-7.4.4/plugins/ommongodb/ommongodb.c	2015-01-12 16:11:51.542591825 +0100
-+@@ -33,9 +33,9 @@
-+ #include <stdint.h>
-+ #include <time.h>
-+ #include <mongo.h>
-+-#include <json.h>
-++#include <json-c/json.h>
-+ /* For struct json_object_iter, should not be necessary in future versions */
-+-#include <json/json_object_private.h>
-++#include <json-c/json_object_private.h>
-+ 
-+ #include "rsyslog.h"
-+ #include "conf.h"
-+diff -uNr rsyslog-7.4.4.orig/runtime/msg.c rsyslog-7.4.4/runtime/msg.c
-+--- rsyslog-7.4.4.orig/runtime/msg.c	2013-09-03 12:31:42.000000000 +0200
-++++ rsyslog-7.4.4/runtime/msg.c	2015-01-12 16:12:00.403592142 +0100
-+@@ -41,9 +41,9 @@
-+ #endif
-+ #include <netdb.h>
-+ #include <libestr.h>
-+-#include <json.h>
-++#include <json-c/json.h>
-+ /* For struct json_object_iter, should not be necessary in future versions */
-+-#include <json/json_object_private.h>
-++#include <json-c/json_object_private.h>
-+ #if HAVE_MALLOC_H
-+ #  include <malloc.h>
-+ #endif
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-index aeca09a..a9d9464 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-@@ -25,6 +25,7 @@ SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
-            file://run-ptest \
-            file://rsyslog-fix-ptest-not-finish.patch \
-            file://rsyslog-use-serial-tests-config-needed-by-ptest.patch \
-+           file://json-0.12-fix.patch \
- "
- 
- SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
--- 
-2.2.1
+Clearing out the meta-selinux queue.  This has been merged with one
+minor tweak, PN -> BPN in the SRC_URI.
 
+Thanks.
 
+-J.
+
+[[meta-selinux][PATCH 1/2] ustr: Get source from official upstream instead =
+of Fedora Project] On 14.11.20 (Thu 16:43) Qian Lei wrote:
+
+> Official upstream is still OK, so we use it first
+>=20
+> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
+> ---
+>  recipes-extended/ustr/ustr_1.0.4.bb | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+>=20
+> diff --git a/recipes-extended/ustr/ustr_1.0.4.bb b/recipes-extended/ustr/=
+ustr_1.0.4.bb
+> index 6651a73..d1f3d93 100644
+> --- a/recipes-extended/ustr/ustr_1.0.4.bb
+> +++ b/recipes-extended/ustr/ustr_1.0.4.bb
+> @@ -11,11 +11,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc79c6e2ae13=
+418d16d7dc82df960a1e7 \
+>  		    file://LICENSE_LGPL;md5=3Dd8045f3b8f929c1cb29a1e3fd737b499 \
+>  		    file://LICENSE_MIT;md5=3Dc61e779b782608472bd87593c3c3916f"
+> =20
+> -# Official upstream seems to be offline.. replace w/ a Fedora Project mi=
+rror.
+> -# http://www.and.org/ustr/1.0.4/ustr-1.0.4.tar.bz2=20
+> -
+>  SRC_URI =3D "\
+> -    http://pkgs.fedoraproject.org/repo/pkgs/ustr/ustr-1.0.4.tar.bz2/9314=
+7d9f0c9765d4cd0f04f7e44bdfce/ustr-1.0.4.tar.bz2 \
+> +    http://www.and.org/ustr/${PV}/${PN}-${PV}.tar.bz2 \
+>      file://ustr-makefile-fix.patch;patch=3D1 \
+>      file://ustr-fix__va_copy-not-defined.patch;patch=3D2"
+>  SRC_URI[md5sum] =3D "93147d9f0c9765d4cd0f04f7e44bdfce"
+--=20
+-Joe MacDonald.
+:wq
+
+--XRI2XbIfl/05pQwm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iQEcBAEBAgAGBQJUtCfAAAoJEEn8ffcsOfaW6m8H/RdluFW0nstAsdWiYgXHsqCD
+aCve9ABSLDr2QJ0utQEHOkwGvR9PI1brt+u4PLBSrYiVwOLvawQz82f/ar5WZ3MU
+XZ6GQLTHDLBweUfzTsf6V2nIxl2wd3P9f37AD9MSiCE1x+9TXwaVQi2hvp+th0Ct
+/o6FycPCMYlv8IobI+vzh+wkXDLus4PcTS4Rr2mtEooWShxhKPNHA3a8tdlBEKYX
+Am9QBRdzMwxPM5SZ+DGEYeNlC/FCwhkakjn8Mt914oOHrL0+GFZIQ4CDzHJSNHB7
+jSkEsv3J2uysGvuTwu33EFRv2ByTU0PQCxOM1wDFyP4HNYSDU0GvsLHxdFEqkL8=
+=CC+P
+-----END PGP SIGNATURE-----
+
+--XRI2XbIfl/05pQwm--
