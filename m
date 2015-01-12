@@ -1,35 +1,33 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B5D7860601
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AEEE60670
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jan 2015 01:07:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55889326"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Jan 2015 09:03:56 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0C16l3S020274;
-	Mon, 12 Jan 2015 09:06:48 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Mon, 12 Jan 2015 09:07:22 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-Thread-Topic: [oe] [meta-networking][PATCH v2] openwsman: add recipe
-Thread-Index: AQHQKXSbfcLHr0jd306/phFQoGGLv5y3eYOAgAQ7QjA=
-Date: Mon, 12 Jan 2015 01:07:24 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE7ECE@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1420523147-3740-1-git-send-email-biannm@cn.fujitsu.com>
-	<20150109162814.GA5581@mentor.com>
-In-Reply-To: <20150109162814.GA5581@mentor.com>
-Accept-Language: en-US
+	Mon, 12 Jan 2015 03:25:09 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0C3P7CY015716
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL);
+	Sun, 11 Jan 2015 19:25:08 -0800 (PST)
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.42]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0174.001;
+	Sun, 11 Jan 2015 19:25:07 -0800
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Martin Jansa
+	<martin.jansa@gmail.com>
+Thread-Topic: [oe] [meta-perl][PATCH] adduser: add new recipe
+Thread-Index: AQHQKOJxA69Js2lBmkOyyNVZfGr+Qpy73LiA
+Date: Mon, 12 Jan 2015 03:25:06 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AAD2A74ED1@ALA-MBB.corp.ad.wrs.com>
+References: <1418969696-27325-1-git-send-email-jackie.huang@windriver.com>
+	<20150105122243.GJ2484@jama>
+In-Reply-To: <20150105122243.GJ2484@jama>
+Accept-Language: en-US, zh-CN
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+x-originating-ip: [128.224.163.159]
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2] openwsman: add recipe
+Subject: Re: [meta-perl][PATCH] adduser: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,128 +41,203 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jan 2015 01:07:37 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 12 Jan 2015 03:25:17 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-SGkgSm9lLA0KDQpUaGFua3MgZm9yIHlvdXIgcmVtaW5kLiBJIHdpbGwgY3JlYXRlIHRoZSBWMyB0
-b21vcnJvdy4NCg0KVGhhbmtzLA0KIEJpYW4NCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0t
-LQ0KPiBGcm9tOiBKb2UgTWFjRG9uYWxkIFttYWlsdG86Sm9lX01hY0RvbmFsZEBtZW50b3IuY29t
-XQ0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSCB2Ml0gb3Blbndz
-bWFuOiBhZGQgcmVjaXBlDQo+IA0KPiBCaWFuLA0KPiANCj4gSSBqdXN0IHdhbnRlZCB0byBiZSBz
-dXJlIHlvdSBoYWQgbm90aWNlZCB0aGUgZGlzY3Vzc2lvbiBvbiB0aGUgbGlzdCByZWdhcmRpbmcN
-Cj4gdGhpcyBzdWJtaXNzaW9uLCBpdCBoYXMgd2hhdCBsb29rcyBsaWtlIGEgLWxtIGlzc3VlIGlu
-IHRoZSBjb21waWxlIHN0YWdlIGFuZA0KPiBjb25zZXF1ZW50bHkgd2UnbGwgbmVlZCBhIHYzLCBw
-bGVhc2UuICBZb3UgY2FuIHNlZSBhbiBleGFtcGxlIG9mIHRoZSBmYWlsdXJlDQo+IGhlcmU6DQo+
-IA0KPiBodHRwOi8vZXJyb3JzLnlvY3RvcHJvamVjdC5vcmcvRXJyb3JzL1NlYXJjaC9EZXRhaWxz
-LzcxMDcvMS8xMC8zOTM5DQo+IA0KPiBUaGFua3MsDQo+IC1KLg0KPiANCj4gW1tvZV0gW21ldGEt
-bmV0d29ya2luZ11bUEFUQ0ggdjJdIG9wZW53c21hbjogYWRkIHJlY2lwZV0gT24gMTUuMDEuMDYg
-KFR1ZQ0KPiAxMzo0NSkgQmlhbiBOYWltZW5nIHdyb3RlOg0KPiANCj4gPiBPcGVuc291cmNlIElt
-cGxlbWVudGF0aW9uIG9mIFdTLU1hbmFnZW1lbnQNCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEJp
-YW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAuLi4vbGli
-c3NsLWlzLXJlcXVpcmVkLWlmLWV2ZW50aW50LXN1cHBvcnRlZC5wYXRjaCB8IDE3ICsrKysrKysN
-Cj4gPiAgLi4uL29wZW53c21hbi9vcGVud3NtYW4vb3BlbndzbWFuZC5zZXJ2aWNlICAgICAgICAg
-fCAxMiArKysrKw0KPiA+ICAuLi4vb3BlbndzbWFuL29wZW53c21hbl8yLjQuMTIuYmIgICAgICAg
-ICAgICAgICAgICB8IDU5DQo+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiAgMyBmaWxlcyBj
-aGFuZ2VkLCA4OCBpbnNlcnRpb25zKCspDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1l
-dGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL2xpYnNz
-bC1pcy1yZXF1aXINCj4gPiBlZC1pZi1ldmVudGludC1zdXBwb3J0ZWQucGF0Y2ggIGNyZWF0ZSBt
-b2RlIDEwMDY0NA0KPiA+IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3Nt
-YW4vb3BlbndzbWFuL29wZW53c21hbmQuc2VydmkNCj4gPiBjZSAgY3JlYXRlIG1vZGUgMTAwNjQ0
-DQo+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3Nt
-YW5fMi40LjEyLmJiDQo+ID4NCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdvcmtpbmcv
-cmVjaXBlcy1wcm90b2NvbHMvb3BlbndzbWFuL29wZW53c21hbi9saWJzc2wtaXMtcmVxdQ0KPiA+
-IGlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNoDQo+ID4gYi9tZXRhLW5ldHdvcmtpbmcv
-cmVjaXBlcy1wcm90b2NvbHMvb3BlbndzbWFuL29wZW53c21hbi9saWJzc2wtaXMtcmVxdQ0KPiA+
-IGlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNoDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2
-NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5iZDU0MGUzDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsr
-KyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFu
-L2xpYnNzbC1pcy0NCj4gPiArKysgcmVxdWlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNo
-DQo+ID4gQEAgLTAsMCArMSwxNyBAQA0KPiA+ICtsaWJzc2wgaXMgcmVxdWlyZWQgYnkgd3NtYW5f
-Y2xpZW50X3RyYW5zcG9ydCBpZiBFTkFCTEVfRVZFTlRJTkdfU1VQUE9SVA0KPiBlbmFibGVkLg0K
-PiA+ICsNCj4gPiArU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRz
-dS5jb20+DQo+ID4gKw0KPiA+ICtkaWZmIC1OdXJwIG9wZW53c21hbi0yLjQuMTIub3JpZy9zcmMv
-bGliL0NNYWtlTGlzdHMudHh0DQo+IG9wZW53c21hbi0yLjQuMTIvc3JjL2xpYi9DTWFrZUxpc3Rz
-LnR4dA0KPiA+ICstLS0gb3BlbndzbWFuLTIuNC4xMi5vcmlnL3NyYy9saWIvQ01ha2VMaXN0cy50
-eHQJMjAxNC0xMC0yOA0KPiAyMzowNDo0Ny4wMDAwMDAwMDAgKzA4MDANCj4gPiArKysrIG9wZW53
-c21hbi0yLjQuMTIvc3JjL2xpYi9DTWFrZUxpc3RzLnR4dAkyMDE0LTEyLTMxDQo+IDExOjA5OjIw
-LjM0MDQyODUyMyArMDgwMA0KPiA+ICtAQCAtNTYsNiArNTYsOSBAQCBUQVJHRVRfTElOS19MSUJS
-QVJJRVMoICR7V1NNQU5fQ0xJRU5UX1RSDQo+ID4gK1NFVF9UQVJHRVRfUFJPUEVSVElFUyggJHtX
-U01BTl9DTElFTlRfVFJBTlNQT1JUX1BLR30gUFJPUEVSVElFUw0KPiA+ICtWRVJTSU9OIDEuMC4w
-IFNPVkVSU0lPTiAxKSAgSU5TVEFMTChUQVJHRVRTDQo+ID4gKyR7V1NNQU5fQ0xJRU5UX1RSQU5T
-UE9SVF9QS0d9IERFU1RJTkFUSU9OICR7TElCX0lOU1RBTExfRElSfSkNCj4gPiArDQo+ID4gKytJ
-RiggRU5BQkxFX0VWRU5USU5HX1NVUFBPUlQgKQ0KPiA+ICsrVEFSR0VUX0xJTktfTElCUkFSSUVT
-KCAke1dTTUFOX0NMSUVOVF9UUkFOU1BPUlRfUEtHfQ0KPiA+ICsrJHtPUEVOU1NMX0xJQlJBUklF
-U30gKSBFTkRJRiggRU5BQkxFX0VWRU5USU5HX1NVUFBPUlQgKQ0KPiA+ICsNCj4gPiArICMjIyMj
-IyMjIyMjIyMjIyB3c21hbl9jbGllbnQgIyMjIyMjIyMjIyMjIyMjDQo+ID4gKw0KPiA+IGRpZmYg
-LS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4v
-b3BlbndzbWFuL29wZW53c21hbmQuc2VyDQo+ID4gdmljZQ0KPiA+IGIvbWV0YS1uZXR3b3JraW5n
-L3JlY2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3NtYW4vb3BlbndzbWFuZC5zZXINCj4g
-PiB2aWNlDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi4xNTRm
-M2NkDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVz
-LXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL29wZW53c21hbmQNCj4gPiArKysgLnNlcnZp
-Y2UNCj4gPiBAQCAtMCwwICsxLDEyIEBADQo+ID4gK1tVbml0XQ0KPiA+ICtEZXNjcmlwdGlvbj1P
-cGVud3NtYW4gV1MtTWFuYWdlbWVudCBTZXJ2aWNlIEFmdGVyPXN5c2xvZy50YXJnZXQNCj4gPiAr
-DQo+ID4gK1tTZXJ2aWNlXQ0KPiA+ICtUeXBlPWZvcmtpbmcNCj4gPiArRXhlY1N0YXJ0PUBTQklO
-RElSQC9vcGVud3NtYW5kDQo+ID4gK0V4ZWNTdGFydFByZT1AU1lTQ09ORkRJUkAvb3BlbndzbWFu
-L293c21hbmdlbmNlcnQuc2gNCj4gPiArUElERmlsZT1ATE9DQUxTVEFURURJUkAvcnVuL3dzbWFu
-ZC5waWQNCj4gPiArDQo+ID4gK1tJbnN0YWxsXQ0KPiA+ICtXYW50ZWRCeT1tdWx0aS11c2VyLnRh
-cmdldA0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3Rv
-Y29scy9vcGVud3NtYW4vb3BlbndzbWFuXzIuNC4xMi5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5n
-L3JlY2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3NtYW5fMi40LjEyLmJiDQo+ID4gbmV3
-IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5mMTg4YjFkDQo+ID4gLS0tIC9k
-ZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVu
-d3NtYW4vb3BlbndzbWFuXzIuNC4xMi5iYg0KPiA+IEBAIC0wLDAgKzEsNTkgQEANCj4gPiArU1VN
-TUFSWSA9ICJPcGVuc291cmNlIEltcGxlbWVudGF0aW9uIG9mIFdTLU1hbmFnZW1lbnQiDQo+ID4g
-K0RFU0NSSVBUSU9OID0gIk9wZW53c21hbiBpcyBhIHByb2plY3QgaW50ZW5kZWQgdG8gcHJvdmlk
-ZSBhbg0KPiA+ICtvcGVuLXNvdXJjZSBcIGltcGxlbWVudGF0aW9uIG9mIHRoZSBXZWIgU2Vydmlj
-ZXMgTWFuYWdlbWVudA0KPiA+ICtzcGVjaXBpY2F0aW9uIFwNCj4gPiArKFdTLU1hbmFnZW1lbnQp
-IGFuZCB0byBleHBvc2Ugc3lzdGVtIG1hbmFnZW1lbnQgaW5mb3JtYXRpb24gb24gdGhlIFwNCj4g
-PiArTGludXggb3BlcmF0aW5nIHN5c3RlbSB1c2luZyB0aGUgV1MtTWFuYWdlbWVudCBwcm90b2Nv
-bC4NCj4gPiArV1MtTWFuYWdlbWVudCBcIGlzIGJhc2VkIG9uIGEgc3VpdGUgb2Ygd2ViIHNlcnZp
-Y2VzIHNwZWNpZmljYXRpb25zDQo+ID4gK2FuZCB1c2FnZSBcIHJlcXVpcmVtZW50cyB0aGF0IGV4
-cG9zZXMgYSBzZXQgb2Ygb3BlcmF0aW9ucyBmb2N1c2VkIG9uDQo+ID4gK2FuZCBjb3ZlcnMgXCBh
-bGwgc3lzdGVtIG1hbmFnZW1lbnQgYXNwZWN0cy4gXCBPcGVud3NtYW4gU2VydmVyIGFuZA0KPiA+
-ICtzZXJ2aWNlIGxpYnJhcmllcyINCj4gPiArSE9NRVBBR0UgPSAiaHR0cDovL3d3dy5vcGVud3Nt
-YW4ub3JnLyINCj4gPiArU0VDVElPTiA9ICJBcHBsaWNhdGlvbnMvU3lzdGVtIg0KPiA+ICsNCj4g
-PiArREVQRU5EUyA9ICJjdXJsIGxpYnhtbDIgb3BlbnNzbCBsaWJwYW0iDQo+ID4gKw0KPiA+ICtT
-UkNfVVJJID0gImh0dHBzOi8vZ2l0aHViLmNvbS9PcGVud3NtYW4vb3BlbndzbWFuL2FyY2hpdmUv
-djIuNC4xMi50YXIuZ3oNCj4gXA0KPiA+ICsgICAgICAgICAgIGZpbGU6Ly9saWJzc2wtaXMtcmVx
-dWlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNoIFwNCj4gPiArICAgICAgICAgICBmaWxl
-Oi8vb3BlbndzbWFuZC5zZXJ2aWNlIg0KPiA+ICsNCj4gPiArU1JDX1VSSVttZDVzdW1dID0gIjQ4
-OTNhNDFjNmZkODliMzMwOTVjMzE1Yzc5NjM4YTc1Ig0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1bV0g
-PQ0KPiAiNmE0Yjc1ZGZmZjFhNTFjN2JjMDlmZDFkNDRhYmJkZTU1YWU3NDkwNmYzODI4Nzk3Y2Uz
-OTE4ODMzNTgxMjBmNCINCj4gPiArDQo+ID4gK0xJQ0VOU0UgPSAiQlNEIg0KPiA+ICtMSUNfRklM
-RVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT1kNGY1M2Q0YzZjZjczYjlkNDMxODZjZTNi
-ZTZkZDBiYSINCj4gPiArDQo+ID4gK2luaGVyaXQgc3lzdGVtZCBjbWFrZSBwa2djb25maWcgcHl0
-aG9ubmF0aXZlIHBlcmxuYXRpdmUNCj4gPiArDQo+ID4gK1NZU1RFTURfU0VSVklDRV8ke1BOfSA9
-ICJvcGVud3NtYW5kLnNlcnZpY2UiDQo+ID4gK1NZU1RFTURfQVVUT19FTkFCTEUgPSAiZGlzYWJs
-ZSINCj4gPiArDQo+ID4gK0VYVFJBX09FQ01BS0UgPSAiLURCVUlMRF9CSU5ESU5HUz1OTyAtREJV
-SUxEX0xJQkNJTT1OTyAtREJVSUxEX1BFUkw9WUVTIFwNCj4gPiArICAgICAgICAgICAgICAgICAt
-RENNQUtFX0lOU1RBTExfUFJFRklYPSR7cHJlZml4fSAtRExJQj1saWIiDQo+ID4gKw0KPiA+ICtk
-b19jb25maWd1cmVfcHJlcGVuZCgpIHsNCj4gPiArICAgIGV4cG9ydCBIT1NUX1NZUz0ke0hPU1Rf
-U1lTfQ0KPiA+ICsgICAgZXhwb3J0IEJVSUxEX1NZUz0ke0JVSUxEX1NZU30NCj4gPiArICAgIGV4
-cG9ydCBTVEFHSU5HX0lOQ0RJUj0ke1NUQUdJTkdfSU5DRElSfQ0KPiA+ICsgICAgZXhwb3J0IFNU
-QUdJTkdfTElCRElSPSR7U1RBR0lOR19MSUJESVJ9IH0NCj4gPiArDQo+ID4gK2RvX2luc3RhbGxf
-YXBwZW5kKCkgew0KPiA+ICsgICAgaW5zdGFsbCAtZCAke0R9LyR7c3lzY29uZmRpcn0vaW5pdC5k
-DQo+ID4gKyAgICBpbnN0YWxsIC1tIDc1NSAke0J9L2V0Yy9pbml0L29wZW53c21hbmQuc2gNCj4g
-JHtEfS8ke3N5c2NvbmZkaXJ9L2luaXQuZC9vcGVud3NtYW5kDQo+ID4gKyAgICBsbiAtc2YgJHtz
-eXNjb25mZGlyfS9pbml0LmQvb3BlbndzbWFuZA0KPiA+ICske0R9LyR7c2JpbmRpcn0vcmNvcGVu
-d3NtYW5kDQo+ID4gKw0KPiA+ICsgICAgaWYgJHtAYmFzZV9jb250YWlucygnRElTVFJPX0ZFQVRV
-UkVTJywnc3lzdGVtZCcsJ3RydWUnLCdmYWxzZScsZCl9Ow0KPiB0aGVuDQo+ID4gKyAgICAgICAg
-aW5zdGFsbCAtZCAke0R9LyR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0NCj4gPiArICAgICAgICBp
-bnN0YWxsIC1tIDY0NCAke1dPUktESVJ9L29wZW53c21hbmQuc2VydmljZQ0KPiA+ICsgJHtEfS8k
-e3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtDQo+ID4gKw0KPiA+ICsgICAgICAgIHNlZCAtaSAtZSAn
-cyxAU0JJTkRJUkAsJHtzYmluZGlyfSxnJw0KPiAke0R9JHtzeXN0ZW1kX3VuaXRkaXJ9L3N5c3Rl
-bS9vcGVud3NtYW5kLnNlcnZpY2UNCj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MsQFNZU0NPTkZE
-SVJALCR7c3lzY29uZmRpcn0sZycNCj4gJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0vb3Bl
-bndzbWFuZC5zZXJ2aWNlDQo+ID4gKyAgICAgICAgc2VkIC1pIC1lICdzLEBMT0NBTFNUQVRFRElS
-QCwke2xvY2Fsc3RhdGVkaXJ9LGcnDQo+ICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtL29w
-ZW53c21hbmQuc2VydmljZQ0KPiA+ICsgICAgZmkNCj4gPiArfQ0KPiA+ICsNCj4gPiArRklMRVNf
-JHtQTn0tZGJnICs9ICIke2xpYmRpcn0vb3BlbndzbWFuL3BsdWdpbnMvLmRlYnVnLyBcDQo+ID4g
-KyAgICAgICAgICAgICAgICAgICAgJHtsaWJkaXJ9L29wZW53c21hbi9hdXRoZW50aWNhdG9ycy8u
-ZGVidWcvIFwNCj4gPiArICAgICAgICAgICAgICAgICAgICINCj4gPiArDQo+ID4gK0lOU0FORV9T
-S0lQXyR7UE59ID0gImRldi1zbyINCj4gPiAtLQ0KPiA+IDEuOS4xDQo+ID4NCj4gLS0NCj4gLUpv
-ZSBNYWNEb25hbGQuDQo+IDp3cQ0K
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Monday, January 05, 2015 8:23 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-perl][PATCH] adduser: add new recipe
+>=20
+> On Fri, Dec 19, 2014 at 02:14:56PM +0800, jackie.huang@windriver.com wrot=
+e:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > This is a utility from debain to add users/groups to the system, which
+> > is actually a perl wrapper of the useradd/groupadd command.
+> >
+> > We want this to replace the same commands provided by busybox.
+> >
+> > Homepage: https://alioth.debian.org/projects/adduser
+> >
+> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > ---
+> >  .../recipes-perl/adduser/adduser_3.113+nmu3.bb     | 53 ++++++++++++++=
+++++++
+> >  ...-M-option-for-useradd-when-no-create-home.patch | 57
+> > ++++++++++++++++++++++
+> >  2 files changed, 110 insertions(+)
+> >  create mode 100644
+> > meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb
+> >  create mode 100644
+> > meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-
+> > when-no-create-home.patch
+> >
+> > diff --git a/meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb
+> > b/meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb
+> > new file mode 100644
+> > index 0000000..2ba74b0
+> > --- /dev/null
+> > +++ b/meta-perl/recipes-perl/adduser/adduser_3.113+nmu3.bb
+> > @@ -0,0 +1,53 @@
+> > +SUMMARY =3D "a utility to add users/groups to the system"
+> > +DESCRIPTION =3D "adduser, addgroup - add a user or group to the system=
+"
+> > +HOMEPAGE =3D "http://alioth.debian.org/projects/adduser/"
+> > +SECTION =3D "base/utils"
+> > +
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3Dcaed49ab166f22ef31=
+bf1127f558d0ef"
+> > +
+> > +SRC_URI =3D "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}=
+_${PV}.tar.gz \
+> > +
+> > +file://adduser-add-M-option-for-useradd-when-no-create-home.patch \ "
+> > +
+> > +SRC_URI[md5sum] =3D "ccb5864bde56683182c89c44474e7182"
+> > +SRC_URI[sha256sum] =3D "02682be3f51f3e732121f20a3e4922bb8bef15cfacb876=
+7fc250a01d09502122"
+> > +
+> > +inherit cpan-base update-alternatives
+> > +
+> > +do_install() {
+> > +	install -d ${D}${sbindir}
+> > +	install -m 0755 ${S}/adduser ${D}${sbindir}
+> > +	install -m 0755 ${S}/deluser ${D}${sbindir}
+> > +
+> > +	install -d ${D}${libdir}/perl/${PERLVERSION}/Debian
+> > +	install -m 0644 ${S}/AdduserCommon.pm ${D}${libdir}/perl/${PERLVERSIO=
+N}/Debian
+> > +	sed -i -e "s/VERSION/${PV}/" ${D}${sbindir}/*
+> > +
+> > +	install -d ${D}/${sysconfdir}
+> > +	install -m 0644 ${S}/*.conf ${D}/${sysconfdir}
+> > +
+> > +	install -d ${D}${mandir}/man5
+> > +	install -m 0644 ${S}/doc/*.conf.5 ${D}${mandir}/man5
+> > +	install -d ${D}${mandir}/man8
+> > +	install -m 0644 ${S}/doc/*.8 ${D}${mandir}/man8
+> > +	install -d ${D}${docdir}/${BPN}
+> > +	cp -rf ${S}/examples ${D}${docdir}/${BPN} }
+>=20
+> Use 4 spaces for indentation.
+
+Sure, I will change and send v2.
+
+Thanks,
+Jackie
+
+>=20
+> > +
+> > +RDEPENDS_${PN} +=3D "\
+> > +	shadow \
+> > +	perl-module-getopt-long \
+> > +	perl-module-overloading \
+> > +	perl-module-file-find \
+> > +	perl-module-file-temp \
+> > +"
+> > +
+> > +ALTERNATIVE_${PN} =3D "adduser deluser addgroup delgroup"
+> > +ALTERNATIVE_PRIORITY =3D "60"
+> > +ALTERNATIVE_LINK_NAME[adduser] =3D "${sbindir}/adduser"
+> > +ALTERNATIVE_LINK_NAME[deluser] =3D "${sbindir}/deluser"
+> > +ALTERNATIVE_LINK_NAME[addgroup] =3D "${sbindir}/addgroup"
+> > +ALTERNATIVE_LINK_NAME[delgroup] =3D "${sbindir}/delgroup"
+> > +ALTERNATIVE_TARGET[addgroup] =3D "${sbindir}/adduser.${BPN}"
+> > +ALTERNATIVE_TARGET[delgroup] =3D "${sbindir}/deluser.${BPN}"
+> > diff --git
+> > a/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-userad
+> > d-when-no-create-home.patch
+> > b/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-userad
+> > d-when-no-create-home.patch
+> > new file mode 100644
+> > index 0000000..4b0a03f
+> > --- /dev/null
+> > +++ b/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-us
+> > +++ eradd-when-no-create-home.patch
+> > @@ -0,0 +1,57 @@
+> > +From 809f00a6ef0224b41b2e1207194c8da3cd3e3c7e Mon Sep 17 00:00:00
+> > +2001
+> > +From: Jackie Huang <jackie.huang@windriver.com>
+> > +Date: Thu, 18 Dec 2014 17:23:37 +0800
+> > +Subject: [PATCH] adduser: add -M option for useradd when
+> > +--no-create-home is specified
+> > +
+> > +The useradd (from package passwd) in debian based system sets -M
+> > +(--no-create-home) by default, but the one we are using (from package
+> > +shadow) sets -m (--create-home) by default, so we need to explicitly a=
+dd -M option for useradd
+> call when --no-create-home is specified for adduser.
+> > +
+> > +Upstream-Status: Pending
+> > +
+> > +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > +---
+> > + adduser |   20 ++++++++++++++++----
+> > + 1 files changed, 16 insertions(+), 4 deletions(-)
+> > +
+> > +diff --git a/adduser b/adduser
+> > +index c3bd8b0..9a07f9f 100755
+> > +--- a/adduser
+> > ++++ b/adduser
+> > +@@ -434,8 +434,14 @@ if ($action eq "addsysuser") {
+> > +     $shell =3D $special_shell || '/bin/false';
+> > +     $undouser =3D $new_name;
+> > +     my $useradd =3D &which('useradd');
+> > +-    &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
+> > +-		$shell, '-u', $new_uid, $new_name);
+> > ++    if ($no_create_home) {
+> > ++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '=
+-s',
+> > ++		    $shell, '-u', $new_uid, '-M', $new_name);
+> > ++    }
+> > ++    else {
+> > ++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '=
+-s',
+> > ++                    $shell, '-u', $new_uid, $new_name);
+> > ++    }
+> > +     if(!$disabled_login) {
+> > +         my $usermod =3D &which('usermod');
+> > +         &systemcall($usermod, '-p', '*', $new_name); @@ -524,8
+> > ++530,14 @@ if ($action eq "adduser") {
+> > + 	$shell =3D $special_shell || $config{"dshell"};
+> > +     $undouser =3D $new_name;
+> > +     my $useradd =3D &which('useradd');
+> > +-    &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
+> > +-		$shell, '-u', $new_uid, $new_name);
+> > ++    if ($no_create_home) {
+> > ++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '=
+-s',
+> > ++	    	    $shell, '-u', $new_uid, '-M', $new_name);
+> > ++    }
+> > ++    else {
+> > ++        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '=
+-s',
+> > ++	    	    $shell, '-u', $new_uid, $new_name);
+> > ++    }
+> > +     &invalidate_nscd();
+> > +
+> > +     create_homedir (1); # copy skeleton data
+> > +--
+> > +1.7.1
+> > +
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
