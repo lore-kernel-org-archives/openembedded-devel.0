@@ -1,24 +1,35 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B92A71637
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B5D7860601
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jan 2015 19:15:22 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0BJFLpV013088
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jan 2015 11:15:22 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 11 Jan 2015 11:15:21 -0800
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 11 Jan 2015 11:15:21 -0800
-Message-ID: <1421003721-12422-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Mon, 12 Jan 2015 01:07:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="55889326"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Jan 2015 09:03:56 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0C16l3S020274;
+	Mon, 12 Jan 2015 09:06:48 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Mon, 12 Jan 2015 09:07:22 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Thread-Topic: [oe] [meta-networking][PATCH v2] openwsman: add recipe
+Thread-Index: AQHQKXSbfcLHr0jd306/phFQoGGLv5y3eYOAgAQ7QjA=
+Date: Mon, 12 Jan 2015 01:07:24 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE7ECE@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1420523147-3740-1-git-send-email-biannm@cn.fujitsu.com>
+	<20150109162814.GA5581@mentor.com>
+In-Reply-To: <20150109162814.GA5581@mentor.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] geoip-perl: add recipe for version 1.45
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH v2] openwsman: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,86 +43,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jan 2015 19:15:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 12 Jan 2015 01:07:37 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-The package includes a few data files.  Despite the names,
-these are very small databases only useful for running the
-perl test scripts.
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../recipes-support/geoip/geoip-perl/run-ptest     |   15 ++++++++
- .../recipes-support/geoip/geoip-perl_1.45.bb       |   37 ++++++++++++++++++++
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-networking/recipes-support/geoip/geoip-perl/run-ptest
- create mode 100644 meta-networking/recipes-support/geoip/geoip-perl_1.45.bb
-
-diff --git a/meta-networking/recipes-support/geoip/geoip-perl/run-ptest b/meta-networking/recipes-support/geoip/geoip-perl/run-ptest
-new file mode 100644
-index 0000000..5404c24
---- /dev/null
-+++ b/meta-networking/recipes-support/geoip/geoip-perl/run-ptest
-@@ -0,0 +1,15 @@
-+#!/bin/sh
-+
-+# The tests contain hard-coded relative paths and must be
-+# executed from $pdir.
-+#
-+pdir=`dirname $0`
-+cd ${pdir}
-+for i in t/*.t ; do
-+	perl ${i} 1>/dev/null 2>&1;
-+	if [ $? == 0 ]; then
-+		echo PASS: $i;
-+	else
-+		echo FAIL: $i;
-+	fi;
-+done
-diff --git a/meta-networking/recipes-support/geoip/geoip-perl_1.45.bb b/meta-networking/recipes-support/geoip/geoip-perl_1.45.bb
-new file mode 100644
-index 0000000..9188351
---- /dev/null
-+++ b/meta-networking/recipes-support/geoip/geoip-perl_1.45.bb
-@@ -0,0 +1,37 @@
-+#
-+# Copyright (C) 2014, 2015 Wind River Systems, Inc.
-+#
-+SUMMARY = "GeoIP perl API library to access location database"
-+DESCRIPTION = "perl library for country/city/organization to IP address or hostname mapping"
-+HOMEPAGE = "http://www.maxmind.com/app/ip-location"
-+SECTION = "network"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;md5=b0fa745303912bd2d64430f7ae69487d"
-+
-+SRC_URI = "http://github.com/maxmind/geoip-api-perl/archive/v${PV}.tar.gz \
-+           file://run-ptest \
-+          "
-+
-+SRC_URI[md5sum] = "0ce57140890bf81958e0cea4fe1885b2"
-+SRC_URI[sha256sum] = "c56437b1cc8887736cb1e435d0320c1c1ff3754830249516317b99137005fb23"
-+
-+S = "${WORKDIR}/geoip-api-perl-${PV}"
-+
-+DEPENDS += "geoip"
-+
-+inherit cpan ptest
-+
-+EXTRA_CPANFLAGS = "LIBS='-L${STAGING_LIBDIR}' INC='-I${STAGING_INCDIR}'"
-+
-+
-+# perl scripts and some special small data files
-+#
-+do_install_ptest () {
-+	install -d -m 0755 ${D}${PTEST_PATH}/t/data
-+
-+	install ${S}/t/*.t* ${D}${PTEST_PATH}/t
-+	install ${S}/t/data/* ${D}${PTEST_PATH}/t/data
-+}
-+
-+FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/Geo/IP/.debug"
-+
--- 
-1.7.9.5
-
+SGkgSm9lLA0KDQpUaGFua3MgZm9yIHlvdXIgcmVtaW5kLiBJIHdpbGwgY3JlYXRlIHRoZSBWMyB0
+b21vcnJvdy4NCg0KVGhhbmtzLA0KIEJpYW4NCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0t
+LQ0KPiBGcm9tOiBKb2UgTWFjRG9uYWxkIFttYWlsdG86Sm9lX01hY0RvbmFsZEBtZW50b3IuY29t
+XQ0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSCB2Ml0gb3Blbndz
+bWFuOiBhZGQgcmVjaXBlDQo+IA0KPiBCaWFuLA0KPiANCj4gSSBqdXN0IHdhbnRlZCB0byBiZSBz
+dXJlIHlvdSBoYWQgbm90aWNlZCB0aGUgZGlzY3Vzc2lvbiBvbiB0aGUgbGlzdCByZWdhcmRpbmcN
+Cj4gdGhpcyBzdWJtaXNzaW9uLCBpdCBoYXMgd2hhdCBsb29rcyBsaWtlIGEgLWxtIGlzc3VlIGlu
+IHRoZSBjb21waWxlIHN0YWdlIGFuZA0KPiBjb25zZXF1ZW50bHkgd2UnbGwgbmVlZCBhIHYzLCBw
+bGVhc2UuICBZb3UgY2FuIHNlZSBhbiBleGFtcGxlIG9mIHRoZSBmYWlsdXJlDQo+IGhlcmU6DQo+
+IA0KPiBodHRwOi8vZXJyb3JzLnlvY3RvcHJvamVjdC5vcmcvRXJyb3JzL1NlYXJjaC9EZXRhaWxz
+LzcxMDcvMS8xMC8zOTM5DQo+IA0KPiBUaGFua3MsDQo+IC1KLg0KPiANCj4gW1tvZV0gW21ldGEt
+bmV0d29ya2luZ11bUEFUQ0ggdjJdIG9wZW53c21hbjogYWRkIHJlY2lwZV0gT24gMTUuMDEuMDYg
+KFR1ZQ0KPiAxMzo0NSkgQmlhbiBOYWltZW5nIHdyb3RlOg0KPiANCj4gPiBPcGVuc291cmNlIElt
+cGxlbWVudGF0aW9uIG9mIFdTLU1hbmFnZW1lbnQNCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEJp
+YW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAuLi4vbGli
+c3NsLWlzLXJlcXVpcmVkLWlmLWV2ZW50aW50LXN1cHBvcnRlZC5wYXRjaCB8IDE3ICsrKysrKysN
+Cj4gPiAgLi4uL29wZW53c21hbi9vcGVud3NtYW4vb3BlbndzbWFuZC5zZXJ2aWNlICAgICAgICAg
+fCAxMiArKysrKw0KPiA+ICAuLi4vb3BlbndzbWFuL29wZW53c21hbl8yLjQuMTIuYmIgICAgICAg
+ICAgICAgICAgICB8IDU5DQo+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiAgMyBmaWxlcyBj
+aGFuZ2VkLCA4OCBpbnNlcnRpb25zKCspDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1l
+dGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL2xpYnNz
+bC1pcy1yZXF1aXINCj4gPiBlZC1pZi1ldmVudGludC1zdXBwb3J0ZWQucGF0Y2ggIGNyZWF0ZSBt
+b2RlIDEwMDY0NA0KPiA+IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3Nt
+YW4vb3BlbndzbWFuL29wZW53c21hbmQuc2VydmkNCj4gPiBjZSAgY3JlYXRlIG1vZGUgMTAwNjQ0
+DQo+ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3Nt
+YW5fMi40LjEyLmJiDQo+ID4NCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW5ldHdvcmtpbmcv
+cmVjaXBlcy1wcm90b2NvbHMvb3BlbndzbWFuL29wZW53c21hbi9saWJzc2wtaXMtcmVxdQ0KPiA+
+IGlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNoDQo+ID4gYi9tZXRhLW5ldHdvcmtpbmcv
+cmVjaXBlcy1wcm90b2NvbHMvb3BlbndzbWFuL29wZW53c21hbi9saWJzc2wtaXMtcmVxdQ0KPiA+
+IGlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNoDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2
+NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5iZDU0MGUzDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsr
+KyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFu
+L2xpYnNzbC1pcy0NCj4gPiArKysgcmVxdWlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNo
+DQo+ID4gQEAgLTAsMCArMSwxNyBAQA0KPiA+ICtsaWJzc2wgaXMgcmVxdWlyZWQgYnkgd3NtYW5f
+Y2xpZW50X3RyYW5zcG9ydCBpZiBFTkFCTEVfRVZFTlRJTkdfU1VQUE9SVA0KPiBlbmFibGVkLg0K
+PiA+ICsNCj4gPiArU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRz
+dS5jb20+DQo+ID4gKw0KPiA+ICtkaWZmIC1OdXJwIG9wZW53c21hbi0yLjQuMTIub3JpZy9zcmMv
+bGliL0NNYWtlTGlzdHMudHh0DQo+IG9wZW53c21hbi0yLjQuMTIvc3JjL2xpYi9DTWFrZUxpc3Rz
+LnR4dA0KPiA+ICstLS0gb3BlbndzbWFuLTIuNC4xMi5vcmlnL3NyYy9saWIvQ01ha2VMaXN0cy50
+eHQJMjAxNC0xMC0yOA0KPiAyMzowNDo0Ny4wMDAwMDAwMDAgKzA4MDANCj4gPiArKysrIG9wZW53
+c21hbi0yLjQuMTIvc3JjL2xpYi9DTWFrZUxpc3RzLnR4dAkyMDE0LTEyLTMxDQo+IDExOjA5OjIw
+LjM0MDQyODUyMyArMDgwMA0KPiA+ICtAQCAtNTYsNiArNTYsOSBAQCBUQVJHRVRfTElOS19MSUJS
+QVJJRVMoICR7V1NNQU5fQ0xJRU5UX1RSDQo+ID4gK1NFVF9UQVJHRVRfUFJPUEVSVElFUyggJHtX
+U01BTl9DTElFTlRfVFJBTlNQT1JUX1BLR30gUFJPUEVSVElFUw0KPiA+ICtWRVJTSU9OIDEuMC4w
+IFNPVkVSU0lPTiAxKSAgSU5TVEFMTChUQVJHRVRTDQo+ID4gKyR7V1NNQU5fQ0xJRU5UX1RSQU5T
+UE9SVF9QS0d9IERFU1RJTkFUSU9OICR7TElCX0lOU1RBTExfRElSfSkNCj4gPiArDQo+ID4gKytJ
+RiggRU5BQkxFX0VWRU5USU5HX1NVUFBPUlQgKQ0KPiA+ICsrVEFSR0VUX0xJTktfTElCUkFSSUVT
+KCAke1dTTUFOX0NMSUVOVF9UUkFOU1BPUlRfUEtHfQ0KPiA+ICsrJHtPUEVOU1NMX0xJQlJBUklF
+U30gKSBFTkRJRiggRU5BQkxFX0VWRU5USU5HX1NVUFBPUlQgKQ0KPiA+ICsNCj4gPiArICMjIyMj
+IyMjIyMjIyMjIyB3c21hbl9jbGllbnQgIyMjIyMjIyMjIyMjIyMjDQo+ID4gKw0KPiA+IGRpZmYg
+LS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4v
+b3BlbndzbWFuL29wZW53c21hbmQuc2VyDQo+ID4gdmljZQ0KPiA+IGIvbWV0YS1uZXR3b3JraW5n
+L3JlY2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3NtYW4vb3BlbndzbWFuZC5zZXINCj4g
+PiB2aWNlDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi4xNTRm
+M2NkDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVz
+LXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL29wZW53c21hbmQNCj4gPiArKysgLnNlcnZp
+Y2UNCj4gPiBAQCAtMCwwICsxLDEyIEBADQo+ID4gK1tVbml0XQ0KPiA+ICtEZXNjcmlwdGlvbj1P
+cGVud3NtYW4gV1MtTWFuYWdlbWVudCBTZXJ2aWNlIEFmdGVyPXN5c2xvZy50YXJnZXQNCj4gPiAr
+DQo+ID4gK1tTZXJ2aWNlXQ0KPiA+ICtUeXBlPWZvcmtpbmcNCj4gPiArRXhlY1N0YXJ0PUBTQklO
+RElSQC9vcGVud3NtYW5kDQo+ID4gK0V4ZWNTdGFydFByZT1AU1lTQ09ORkRJUkAvb3BlbndzbWFu
+L293c21hbmdlbmNlcnQuc2gNCj4gPiArUElERmlsZT1ATE9DQUxTVEFURURJUkAvcnVuL3dzbWFu
+ZC5waWQNCj4gPiArDQo+ID4gK1tJbnN0YWxsXQ0KPiA+ICtXYW50ZWRCeT1tdWx0aS11c2VyLnRh
+cmdldA0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3Rv
+Y29scy9vcGVud3NtYW4vb3BlbndzbWFuXzIuNC4xMi5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5n
+L3JlY2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3NtYW5fMi40LjEyLmJiDQo+ID4gbmV3
+IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5mMTg4YjFkDQo+ID4gLS0tIC9k
+ZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVu
+d3NtYW4vb3BlbndzbWFuXzIuNC4xMi5iYg0KPiA+IEBAIC0wLDAgKzEsNTkgQEANCj4gPiArU1VN
+TUFSWSA9ICJPcGVuc291cmNlIEltcGxlbWVudGF0aW9uIG9mIFdTLU1hbmFnZW1lbnQiDQo+ID4g
+K0RFU0NSSVBUSU9OID0gIk9wZW53c21hbiBpcyBhIHByb2plY3QgaW50ZW5kZWQgdG8gcHJvdmlk
+ZSBhbg0KPiA+ICtvcGVuLXNvdXJjZSBcIGltcGxlbWVudGF0aW9uIG9mIHRoZSBXZWIgU2Vydmlj
+ZXMgTWFuYWdlbWVudA0KPiA+ICtzcGVjaXBpY2F0aW9uIFwNCj4gPiArKFdTLU1hbmFnZW1lbnQp
+IGFuZCB0byBleHBvc2Ugc3lzdGVtIG1hbmFnZW1lbnQgaW5mb3JtYXRpb24gb24gdGhlIFwNCj4g
+PiArTGludXggb3BlcmF0aW5nIHN5c3RlbSB1c2luZyB0aGUgV1MtTWFuYWdlbWVudCBwcm90b2Nv
+bC4NCj4gPiArV1MtTWFuYWdlbWVudCBcIGlzIGJhc2VkIG9uIGEgc3VpdGUgb2Ygd2ViIHNlcnZp
+Y2VzIHNwZWNpZmljYXRpb25zDQo+ID4gK2FuZCB1c2FnZSBcIHJlcXVpcmVtZW50cyB0aGF0IGV4
+cG9zZXMgYSBzZXQgb2Ygb3BlcmF0aW9ucyBmb2N1c2VkIG9uDQo+ID4gK2FuZCBjb3ZlcnMgXCBh
+bGwgc3lzdGVtIG1hbmFnZW1lbnQgYXNwZWN0cy4gXCBPcGVud3NtYW4gU2VydmVyIGFuZA0KPiA+
+ICtzZXJ2aWNlIGxpYnJhcmllcyINCj4gPiArSE9NRVBBR0UgPSAiaHR0cDovL3d3dy5vcGVud3Nt
+YW4ub3JnLyINCj4gPiArU0VDVElPTiA9ICJBcHBsaWNhdGlvbnMvU3lzdGVtIg0KPiA+ICsNCj4g
+PiArREVQRU5EUyA9ICJjdXJsIGxpYnhtbDIgb3BlbnNzbCBsaWJwYW0iDQo+ID4gKw0KPiA+ICtT
+UkNfVVJJID0gImh0dHBzOi8vZ2l0aHViLmNvbS9PcGVud3NtYW4vb3BlbndzbWFuL2FyY2hpdmUv
+djIuNC4xMi50YXIuZ3oNCj4gXA0KPiA+ICsgICAgICAgICAgIGZpbGU6Ly9saWJzc2wtaXMtcmVx
+dWlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNoIFwNCj4gPiArICAgICAgICAgICBmaWxl
+Oi8vb3BlbndzbWFuZC5zZXJ2aWNlIg0KPiA+ICsNCj4gPiArU1JDX1VSSVttZDVzdW1dID0gIjQ4
+OTNhNDFjNmZkODliMzMwOTVjMzE1Yzc5NjM4YTc1Ig0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1bV0g
+PQ0KPiAiNmE0Yjc1ZGZmZjFhNTFjN2JjMDlmZDFkNDRhYmJkZTU1YWU3NDkwNmYzODI4Nzk3Y2Uz
+OTE4ODMzNTgxMjBmNCINCj4gPiArDQo+ID4gK0xJQ0VOU0UgPSAiQlNEIg0KPiA+ICtMSUNfRklM
+RVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT1kNGY1M2Q0YzZjZjczYjlkNDMxODZjZTNi
+ZTZkZDBiYSINCj4gPiArDQo+ID4gK2luaGVyaXQgc3lzdGVtZCBjbWFrZSBwa2djb25maWcgcHl0
+aG9ubmF0aXZlIHBlcmxuYXRpdmUNCj4gPiArDQo+ID4gK1NZU1RFTURfU0VSVklDRV8ke1BOfSA9
+ICJvcGVud3NtYW5kLnNlcnZpY2UiDQo+ID4gK1NZU1RFTURfQVVUT19FTkFCTEUgPSAiZGlzYWJs
+ZSINCj4gPiArDQo+ID4gK0VYVFJBX09FQ01BS0UgPSAiLURCVUlMRF9CSU5ESU5HUz1OTyAtREJV
+SUxEX0xJQkNJTT1OTyAtREJVSUxEX1BFUkw9WUVTIFwNCj4gPiArICAgICAgICAgICAgICAgICAt
+RENNQUtFX0lOU1RBTExfUFJFRklYPSR7cHJlZml4fSAtRExJQj1saWIiDQo+ID4gKw0KPiA+ICtk
+b19jb25maWd1cmVfcHJlcGVuZCgpIHsNCj4gPiArICAgIGV4cG9ydCBIT1NUX1NZUz0ke0hPU1Rf
+U1lTfQ0KPiA+ICsgICAgZXhwb3J0IEJVSUxEX1NZUz0ke0JVSUxEX1NZU30NCj4gPiArICAgIGV4
+cG9ydCBTVEFHSU5HX0lOQ0RJUj0ke1NUQUdJTkdfSU5DRElSfQ0KPiA+ICsgICAgZXhwb3J0IFNU
+QUdJTkdfTElCRElSPSR7U1RBR0lOR19MSUJESVJ9IH0NCj4gPiArDQo+ID4gK2RvX2luc3RhbGxf
+YXBwZW5kKCkgew0KPiA+ICsgICAgaW5zdGFsbCAtZCAke0R9LyR7c3lzY29uZmRpcn0vaW5pdC5k
+DQo+ID4gKyAgICBpbnN0YWxsIC1tIDc1NSAke0J9L2V0Yy9pbml0L29wZW53c21hbmQuc2gNCj4g
+JHtEfS8ke3N5c2NvbmZkaXJ9L2luaXQuZC9vcGVud3NtYW5kDQo+ID4gKyAgICBsbiAtc2YgJHtz
+eXNjb25mZGlyfS9pbml0LmQvb3BlbndzbWFuZA0KPiA+ICske0R9LyR7c2JpbmRpcn0vcmNvcGVu
+d3NtYW5kDQo+ID4gKw0KPiA+ICsgICAgaWYgJHtAYmFzZV9jb250YWlucygnRElTVFJPX0ZFQVRV
+UkVTJywnc3lzdGVtZCcsJ3RydWUnLCdmYWxzZScsZCl9Ow0KPiB0aGVuDQo+ID4gKyAgICAgICAg
+aW5zdGFsbCAtZCAke0R9LyR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0NCj4gPiArICAgICAgICBp
+bnN0YWxsIC1tIDY0NCAke1dPUktESVJ9L29wZW53c21hbmQuc2VydmljZQ0KPiA+ICsgJHtEfS8k
+e3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtDQo+ID4gKw0KPiA+ICsgICAgICAgIHNlZCAtaSAtZSAn
+cyxAU0JJTkRJUkAsJHtzYmluZGlyfSxnJw0KPiAke0R9JHtzeXN0ZW1kX3VuaXRkaXJ9L3N5c3Rl
+bS9vcGVud3NtYW5kLnNlcnZpY2UNCj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MsQFNZU0NPTkZE
+SVJALCR7c3lzY29uZmRpcn0sZycNCj4gJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0vb3Bl
+bndzbWFuZC5zZXJ2aWNlDQo+ID4gKyAgICAgICAgc2VkIC1pIC1lICdzLEBMT0NBTFNUQVRFRElS
+QCwke2xvY2Fsc3RhdGVkaXJ9LGcnDQo+ICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtL29w
+ZW53c21hbmQuc2VydmljZQ0KPiA+ICsgICAgZmkNCj4gPiArfQ0KPiA+ICsNCj4gPiArRklMRVNf
+JHtQTn0tZGJnICs9ICIke2xpYmRpcn0vb3BlbndzbWFuL3BsdWdpbnMvLmRlYnVnLyBcDQo+ID4g
+KyAgICAgICAgICAgICAgICAgICAgJHtsaWJkaXJ9L29wZW53c21hbi9hdXRoZW50aWNhdG9ycy8u
+ZGVidWcvIFwNCj4gPiArICAgICAgICAgICAgICAgICAgICINCj4gPiArDQo+ID4gK0lOU0FORV9T
+S0lQXyR7UE59ID0gImRldi1zbyINCj4gPiAtLQ0KPiA+IDEuOS4xDQo+ID4NCj4gLS0NCj4gLUpv
+ZSBNYWNEb25hbGQuDQo+IDp3cQ0K
 
