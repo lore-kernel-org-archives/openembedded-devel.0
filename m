@@ -1,30 +1,24 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id DB3757284C
+Return-Path: <Jianchuan.Wang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A3BD72369
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jan 2015 20:00:05 +0000 (UTC)
-Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
-	by relay1.mentorg.com with esmtp 
-	id 1YAl9g-0006bg-Kf from Joe_MacDonald@mentor.com ;
-	Mon, 12 Jan 2015 12:00:04 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 12 Jan 2015 12:00:03 -0800
-Received: by burninator (Postfix, from userid 1000)	id 90F005809F6; Mon, 12
-	Jan 2015 15:00:00 -0500 (EST)
-Date: Mon, 12 Jan 2015 15:00:00 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Qian Lei <qianl.fnst@cn.fujitsu.com>
-Message-ID: <20150112200000.GF6167@mentor.com>
-References: <1416473037-23326-1-git-send-email-qianl.fnst@cn.fujitsu.com>
+	Tue, 13 Jan 2015 02:57:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0D2v6rV010728
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jan 2015 18:57:07 -0800 (PST)
+Received: from PEK-JWANG7-D1.wrs.com (128.224.162.153) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 12 Jan 2015 18:57:05 -0800
+From: <jianchuan.wang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 13 Jan 2015 10:56:42 +0800
+Message-ID: <1421117802-4702-1-git-send-email-jianchuan.wang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1416473037-23326-1-git-send-email-qianl.fnst@cn.fujitsu.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-selinux][PATCH 1/2] ustr: Get source from official upstream instead of Fedora Project
+Subject: [meta-networking][PATCH] ipvsadm: Add version 1.26 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,73 +32,232 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jan 2015 20:00:15 -0000
-X-Groupsio-MsgNum: 53813
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XRI2XbIfl/05pQwm"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 13 Jan 2015 02:57:14 -0000
+Content-Type: text/plain
 
---XRI2XbIfl/05pQwm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Jianchuan Wang <jianchuan.wang@windriver.com>
 
-Clearing out the meta-selinux queue.  This has been merged with one
-minor tweak, PN -> BPN in the SRC_URI.
+* add ipvs administration tool
 
-Thanks.
+Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+---
+ ...001-Modify-the-Makefile-for-cross-compile.patch | 91 ++++++++++++++++++++++
+ .../files/0002-Replace-nl_handle-to-nl_sock.patch  | 63 +++++++++++++++
+ .../recipes-support/ipvsadm/ipvsadm_1.26.bb        | 36 +++++++++
+ 3 files changed, 190 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch
+ create mode 100644 meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
 
--J.
+diff --git a/meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch b/meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch
+new file mode 100644
+index 0000000..27358b9
+--- /dev/null
++++ b/meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch
+@@ -0,0 +1,91 @@
++From c2b9c96109c074851a8fd5ee249a4e68697282ce Mon Sep 17 00:00:00 2001
++From: Jianchuan Wang <jianchuan.wang@windriver.com>
++Date: Mon, 12 Jan 2015 15:53:23 +0800
++Subject: [PATCH 1/2] Modify the Makefile for cross compile.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
++---
++ Makefile         | 21 +++++----------------
++ libipvs/Makefile |  3 +--
++ 2 files changed, 6 insertions(+), 18 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index e4e03cc..ea44c1d 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -35,10 +35,9 @@ ARCH		= $(shell uname -m)
++ RPMSOURCEDIR	= $(shell rpm --eval '%_sourcedir')
++ RPMSPECDIR	= $(shell rpm --eval '%_specdir')
++ 
++-CC		= gcc
++ INCLUDE		=
++ SBIN		= $(BUILD_ROOT)/sbin
++-MANDIR		= usr/man
+++MANDIR		= usr/share/man
++ MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
++ INIT		= $(BUILD_ROOT)/etc/rc.d/init.d
++ MKDIR		= mkdir
++@@ -62,17 +61,7 @@ RPMBUILD = $(shell				\
++ 		echo "/bin/rpm";		\
++ 	fi )
++ 
++-ifeq (,$(FORCE_GETOPT))
++-LIB_SEARCH = /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/local/lib
++-POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
++-  if [ -f $$i/libpopt.a ]; then \
++-    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
++-	echo "-lpopt"; \
++-	break; \
++-    fi; \
++-  fi; \
++-done)
++-endif
+++POPT_LIB = -lpopt
++ 
++ ifneq (,$(POPT_LIB))
++ POPT_DEFINE = -DHAVE_POPT
++@@ -81,7 +70,7 @@ endif
++ OBJS		= ipvsadm.o config_stream.o dynamic_array.o
++ LIBS		= $(POPT_LIB)
++ ifneq (0,$(HAVE_NL))
++-LIBS		+= -lnl
+++LIBS		+= -lnl-3 -lnl-genl-3
++ endif
++ DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
++ 		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
++@@ -96,8 +85,8 @@ all:            libs ipvsadm
++ libs:
++ 		make -C libipvs
++ 
++-ipvsadm:	$(OBJS) $(STATIC_LIBS)
++-		$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+++ipvsadm:	$(OBJS) 
+++		$(CC) $(CFLAGS) -o $@ $^ $(STATIC_LIBS) $(LIBS)
++ 
++ install:        all
++ 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
++diff --git a/libipvs/Makefile b/libipvs/Makefile
++index a527a7f..b7300ec 100644
++--- a/libipvs/Makefile
+++++ b/libipvs/Makefile
++@@ -1,6 +1,5 @@
++ # Makefile for libipvs
++ 
++-CC		= gcc
++ CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -fPIC
++ ifneq (0,$(HAVE_NL))
++ CFLAGS		+= -DLIBIPVS_USE_NL
++@@ -18,7 +17,7 @@ SHARED_LIB	= libipvs.so
++ all:		$(STATIC_LIB) $(SHARED_LIB)
++ 
++ $(STATIC_LIB):	libipvs.o ip_vs_nl_policy.o
++-		ar rv $@ $^
+++		$(AR) rv $@ $^
++ 
++ $(SHARED_LIB):	libipvs.o ip_vs_nl_policy.o
++ 		$(CC) -shared -Wl,-soname,$@ -o $@ $^
++-- 
++1.8.3.1
++
+diff --git a/meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch b/meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch
+new file mode 100644
+index 0000000..7896d6d
+--- /dev/null
++++ b/meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch
+@@ -0,0 +1,63 @@
++From 2686213259b15df9cf1d969c5a14d62f14cfbaae Mon Sep 17 00:00:00 2001
++From: Jianchuan Wang <jianchuan.wang@windriver.com>
++Date: Thu, 8 Jan 2015 17:37:11 +0800
++Subject: [PATCH 2/2] Replace nl_handle to nl_sock.
++
++The nl_handle was replace with nl_sock in the libnl-3.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
++---
++ libipvs/libipvs.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/libipvs/libipvs.c b/libipvs/libipvs.c
++index a157e18..21a9bfa 100644
++--- a/libipvs/libipvs.c
+++++ b/libipvs/libipvs.c
++@@ -32,7 +32,7 @@ static void* ipvs_func = NULL;
++ struct ip_vs_getinfo ipvs_info;
++ 
++ #ifdef LIBIPVS_USE_NL
++-static struct nl_handle *sock = NULL;
+++static struct nl_sock *sock = NULL;
++ static int family, try_nl = 1;
++ #endif
++ 
++@@ -73,7 +73,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
++ {
++ 	int err = EINVAL;
++ 
++-	sock = nl_handle_alloc();
+++	sock = nl_socket_alloc();
++ 	if (!sock) {
++ 		nlmsg_free(msg);
++ 		return -1;
++@@ -88,7 +88,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
++ 
++ 	/* To test connections and set the family */
++ 	if (msg == NULL) {
++-		nl_handle_destroy(sock);
+++		nl_socket_free(sock);
++ 		sock = NULL;
++ 		return 0;
++ 	}
++@@ -104,12 +104,12 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
++ 
++ 	nlmsg_free(msg);
++ 
++-	nl_handle_destroy(sock);
+++	nl_socket_free(sock);
++ 
++ 	return 0;
++ 
++ fail_genl:
++-	nl_handle_destroy(sock);
+++	nl_socket_free(sock);
++ 	sock = NULL;
++ 	nlmsg_free(msg);
++ 	errno = err;
++-- 
++1.8.3.1
++
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+new file mode 100644
+index 0000000..88f619a
+--- /dev/null
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Linux Virtual Server administration Utility"
++DESCRIPTION = "Ipvsadm  is  used  to set up, maintain or inspect the virtual server \
++table in the Linux kernel. The Linux Virtual  Server  can  be  used  to \
++build  scalable  network  services  based  on  a cluster of two or more nodes. \
++The active node of the cluster redirects service requests  to  a \
++collection  of  server  hosts  that will actually perform the services. \
++Supported features include two protocols (TCP and UDP),  three  packet-forwarding \
++methods (NAT, tunneling, and direct routing), and eight load balancing algorithms \
++(round robin, weighted round robin,  least-connec-tion, weighted least-connection, \
++locality-based  least-connection, locality-based least-connection with replication, \
++destination-hashing, and source-hashing)."
++SECTION = "console/network"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=a54cba37b64924aa5008881607942892"
++
++DEPENDS += "libnl popt"
++
++SRC_URI = "http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.26.tar.gz \
++        file://0001-Modify-the-Makefile-for-cross-compile.patch \
++        file://0002-Replace-nl_handle-to-nl_sock.patch \
++        "
++
++SRC_URI[md5sum] = "eac3ba3f62cd4dea2da353aeddd353a8"
++SRC_URI[sha256sum] = "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f60269fd9cbee0eb2d"
++
++S="${WORKDIR}/${BPN}-${PV}"
++
++do_compile() { 
++    oe_runmake \
++    CC="${CC} -I${STAGING_INCDIR} -I${STAGING_INCDIR}/libnl3 -L${STAGING_LIBDIR}" \
++    all  
++}
++
++do_install() {
++    oe_runmake 'BUILD_ROOT=${D}' install
++}
+-- 
+1.9.1
 
-[[meta-selinux][PATCH 1/2] ustr: Get source from official upstream instead =
-of Fedora Project] On 14.11.20 (Thu 16:43) Qian Lei wrote:
 
-> Official upstream is still OK, so we use it first
->=20
-> Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-> ---
->  recipes-extended/ustr/ustr_1.0.4.bb | 5 +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
->=20
-> diff --git a/recipes-extended/ustr/ustr_1.0.4.bb b/recipes-extended/ustr/=
-ustr_1.0.4.bb
-> index 6651a73..d1f3d93 100644
-> --- a/recipes-extended/ustr/ustr_1.0.4.bb
-> +++ b/recipes-extended/ustr/ustr_1.0.4.bb
-> @@ -11,11 +11,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc79c6e2ae13=
-418d16d7dc82df960a1e7 \
->  		    file://LICENSE_LGPL;md5=3Dd8045f3b8f929c1cb29a1e3fd737b499 \
->  		    file://LICENSE_MIT;md5=3Dc61e779b782608472bd87593c3c3916f"
-> =20
-> -# Official upstream seems to be offline.. replace w/ a Fedora Project mi=
-rror.
-> -# http://www.and.org/ustr/1.0.4/ustr-1.0.4.tar.bz2=20
-> -
->  SRC_URI =3D "\
-> -    http://pkgs.fedoraproject.org/repo/pkgs/ustr/ustr-1.0.4.tar.bz2/9314=
-7d9f0c9765d4cd0f04f7e44bdfce/ustr-1.0.4.tar.bz2 \
-> +    http://www.and.org/ustr/${PV}/${PN}-${PV}.tar.bz2 \
->      file://ustr-makefile-fix.patch;patch=3D1 \
->      file://ustr-fix__va_copy-not-defined.patch;patch=3D2"
->  SRC_URI[md5sum] =3D "93147d9f0c9765d4cd0f04f7e44bdfce"
---=20
--Joe MacDonald.
-:wq
-
---XRI2XbIfl/05pQwm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUtCfAAAoJEEn8ffcsOfaW6m8H/RdluFW0nstAsdWiYgXHsqCD
-aCve9ABSLDr2QJ0utQEHOkwGvR9PI1brt+u4PLBSrYiVwOLvawQz82f/ar5WZ3MU
-XZ6GQLTHDLBweUfzTsf6V2nIxl2wd3P9f37AD9MSiCE1x+9TXwaVQi2hvp+th0Ct
-/o6FycPCMYlv8IobI+vzh+wkXDLus4PcTS4Rr2mtEooWShxhKPNHA3a8tdlBEKYX
-Am9QBRdzMwxPM5SZ+DGEYeNlC/FCwhkakjn8Mt914oOHrL0+GFZIQ4CDzHJSNHB7
-jSkEsv3J2uysGvuTwu33EFRv2ByTU0PQCxOM1wDFyP4HNYSDU0GvsLHxdFEqkL8=
-=CC+P
------END PGP SIGNATURE-----
-
---XRI2XbIfl/05pQwm--
