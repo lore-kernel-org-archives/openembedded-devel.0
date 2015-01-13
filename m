@@ -1,24 +1,34 @@
-Return-Path: <Jianchuan.Wang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A3BD72369
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 54702725F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jan 2015 02:57:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0D2v6rV010728
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 13 Jan 2015 13:05:03 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1YB19b-00038q-08 for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Jan 2015 14:05:03 +0100
+Received: from 46-140-72-82.static.cablecom.ch
+	([46-140-72-82.static.cablecom.ch])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jan 2015 14:05:02 +0100
+Received: from max.oss.09 by 46-140-72-82.static.cablecom.ch with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jan 2015 18:57:07 -0800 (PST)
-Received: from PEK-JWANG7-D1.wrs.com (128.224.162.153) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 12 Jan 2015 18:57:05 -0800
-From: <jianchuan.wang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 13 Jan 2015 10:56:42 +0800
-Message-ID: <1421117802-4702-1-git-send-email-jianchuan.wang@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ipvsadm: Add version 1.26 (initial recipe)
+	Tue, 13 Jan 2015 14:05:02 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Max Krummenacher <max.oss.09@gmail.com>
+Date: Tue, 13 Jan 2015 13:02:01 +0000 (UTC)
+Message-ID: <loom.20150113T130012-516@post.gmane.org>
+References: <54B220B0.8070609@gmail.com> <54B222F2.4070802@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 46.140.72.82 (Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:34.0) Gecko/20100101 Firefox/34.0 AlexaToolbar/alxf-2.21)
+Subject: Re: Query on meta-java layer openjdk-7-jre build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,232 +42,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jan 2015 02:57:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 13 Jan 2015 13:05:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-From: Jianchuan Wang <jianchuan.wang@windriver.com>
+Hi Victor
 
-* add ipvs administration tool
+> I have OpenEmbedded setup and using the daisy branch. For the meta-java
+layer I
+> am using the master branch of
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/.
+> 
+> For our embedded modules we have our own meta layer. I am trying to build
+> an angstrom image with LXDE.
+> 
+> We are using ARMv7 hard-float Thumb2 builds (armv7at2hf-vfp). Most errors
+seems
+> to be "not declared in this scope" errors. Are there some definitions to
+be 
+> declared in the conf file, so the build picks it up or is some modification
+> required to the source with a custome patch declared in the bb file for 
+this?
+I have run into the same issues.
 
-Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
----
- ...001-Modify-the-Makefile-for-cross-compile.patch | 91 ++++++++++++++++++++++
- .../files/0002-Replace-nl_handle-to-nl_sock.patch  | 63 +++++++++++++++
- .../recipes-support/ipvsadm/ipvsadm_1.26.bb        | 36 +++++++++
- 3 files changed, 190 insertions(+)
- create mode 100644 meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch
- create mode 100644 meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch
- create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+This are follow up errors. The failing qemu-arm runs should have produced
+header files which provide those definitions.
 
-diff --git a/meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch b/meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch
-new file mode 100644
-index 0000000..27358b9
---- /dev/null
-+++ b/meta-networking/recipes-support/ipvsadm/files/0001-Modify-the-Makefile-for-cross-compile.patch
-@@ -0,0 +1,91 @@
-+From c2b9c96109c074851a8fd5ee249a4e68697282ce Mon Sep 17 00:00:00 2001
-+From: Jianchuan Wang <jianchuan.wang@windriver.com>
-+Date: Mon, 12 Jan 2015 15:53:23 +0800
-+Subject: [PATCH 1/2] Modify the Makefile for cross compile.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
-+---
-+ Makefile         | 21 +++++----------------
-+ libipvs/Makefile |  3 +--
-+ 2 files changed, 6 insertions(+), 18 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index e4e03cc..ea44c1d 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -35,10 +35,9 @@ ARCH		= $(shell uname -m)
-+ RPMSOURCEDIR	= $(shell rpm --eval '%_sourcedir')
-+ RPMSPECDIR	= $(shell rpm --eval '%_specdir')
-+ 
-+-CC		= gcc
-+ INCLUDE		=
-+ SBIN		= $(BUILD_ROOT)/sbin
-+-MANDIR		= usr/man
-++MANDIR		= usr/share/man
-+ MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
-+ INIT		= $(BUILD_ROOT)/etc/rc.d/init.d
-+ MKDIR		= mkdir
-+@@ -62,17 +61,7 @@ RPMBUILD = $(shell				\
-+ 		echo "/bin/rpm";		\
-+ 	fi )
-+ 
-+-ifeq (,$(FORCE_GETOPT))
-+-LIB_SEARCH = /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/local/lib
-+-POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
-+-  if [ -f $$i/libpopt.a ]; then \
-+-    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
-+-	echo "-lpopt"; \
-+-	break; \
-+-    fi; \
-+-  fi; \
-+-done)
-+-endif
-++POPT_LIB = -lpopt
-+ 
-+ ifneq (,$(POPT_LIB))
-+ POPT_DEFINE = -DHAVE_POPT
-+@@ -81,7 +70,7 @@ endif
-+ OBJS		= ipvsadm.o config_stream.o dynamic_array.o
-+ LIBS		= $(POPT_LIB)
-+ ifneq (0,$(HAVE_NL))
-+-LIBS		+= -lnl
-++LIBS		+= -lnl-3 -lnl-genl-3
-+ endif
-+ DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
-+ 		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
-+@@ -96,8 +85,8 @@ all:            libs ipvsadm
-+ libs:
-+ 		make -C libipvs
-+ 
-+-ipvsadm:	$(OBJS) $(STATIC_LIBS)
-+-		$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-++ipvsadm:	$(OBJS) 
-++		$(CC) $(CFLAGS) -o $@ $^ $(STATIC_LIBS) $(LIBS)
-+ 
-+ install:        all
-+ 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
-+diff --git a/libipvs/Makefile b/libipvs/Makefile
-+index a527a7f..b7300ec 100644
-+--- a/libipvs/Makefile
-++++ b/libipvs/Makefile
-+@@ -1,6 +1,5 @@
-+ # Makefile for libipvs
-+ 
-+-CC		= gcc
-+ CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -fPIC
-+ ifneq (0,$(HAVE_NL))
-+ CFLAGS		+= -DLIBIPVS_USE_NL
-+@@ -18,7 +17,7 @@ SHARED_LIB	= libipvs.so
-+ all:		$(STATIC_LIB) $(SHARED_LIB)
-+ 
-+ $(STATIC_LIB):	libipvs.o ip_vs_nl_policy.o
-+-		ar rv $@ $^
-++		$(AR) rv $@ $^
-+ 
-+ $(SHARED_LIB):	libipvs.o ip_vs_nl_policy.o
-+ 		$(CC) -shared -Wl,-soname,$@ -o $@ $^
-+-- 
-+1.8.3.1
-+
-diff --git a/meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch b/meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch
-new file mode 100644
-index 0000000..7896d6d
---- /dev/null
-+++ b/meta-networking/recipes-support/ipvsadm/files/0002-Replace-nl_handle-to-nl_sock.patch
-@@ -0,0 +1,63 @@
-+From 2686213259b15df9cf1d969c5a14d62f14cfbaae Mon Sep 17 00:00:00 2001
-+From: Jianchuan Wang <jianchuan.wang@windriver.com>
-+Date: Thu, 8 Jan 2015 17:37:11 +0800
-+Subject: [PATCH 2/2] Replace nl_handle to nl_sock.
-+
-+The nl_handle was replace with nl_sock in the libnl-3.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
-+---
-+ libipvs/libipvs.c | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/libipvs/libipvs.c b/libipvs/libipvs.c
-+index a157e18..21a9bfa 100644
-+--- a/libipvs/libipvs.c
-++++ b/libipvs/libipvs.c
-+@@ -32,7 +32,7 @@ static void* ipvs_func = NULL;
-+ struct ip_vs_getinfo ipvs_info;
-+ 
-+ #ifdef LIBIPVS_USE_NL
-+-static struct nl_handle *sock = NULL;
-++static struct nl_sock *sock = NULL;
-+ static int family, try_nl = 1;
-+ #endif
-+ 
-+@@ -73,7 +73,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
-+ {
-+ 	int err = EINVAL;
-+ 
-+-	sock = nl_handle_alloc();
-++	sock = nl_socket_alloc();
-+ 	if (!sock) {
-+ 		nlmsg_free(msg);
-+ 		return -1;
-+@@ -88,7 +88,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
-+ 
-+ 	/* To test connections and set the family */
-+ 	if (msg == NULL) {
-+-		nl_handle_destroy(sock);
-++		nl_socket_free(sock);
-+ 		sock = NULL;
-+ 		return 0;
-+ 	}
-+@@ -104,12 +104,12 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
-+ 
-+ 	nlmsg_free(msg);
-+ 
-+-	nl_handle_destroy(sock);
-++	nl_socket_free(sock);
-+ 
-+ 	return 0;
-+ 
-+ fail_genl:
-+-	nl_handle_destroy(sock);
-++	nl_socket_free(sock);
-+ 	sock = NULL;
-+ 	nlmsg_free(msg);
-+ 	errno = err;
-+-- 
-+1.8.3.1
-+
-diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
-new file mode 100644
-index 0000000..88f619a
---- /dev/null
-+++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Linux Virtual Server administration Utility"
-+DESCRIPTION = "Ipvsadm  is  used  to set up, maintain or inspect the virtual server \
-+table in the Linux kernel. The Linux Virtual  Server  can  be  used  to \
-+build  scalable  network  services  based  on  a cluster of two or more nodes. \
-+The active node of the cluster redirects service requests  to  a \
-+collection  of  server  hosts  that will actually perform the services. \
-+Supported features include two protocols (TCP and UDP),  three  packet-forwarding \
-+methods (NAT, tunneling, and direct routing), and eight load balancing algorithms \
-+(round robin, weighted round robin,  least-connec-tion, weighted least-connection, \
-+locality-based  least-connection, locality-based least-connection with replication, \
-+destination-hashing, and source-hashing)."
-+SECTION = "console/network"
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=a54cba37b64924aa5008881607942892"
-+
-+DEPENDS += "libnl popt"
-+
-+SRC_URI = "http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsadm-1.26.tar.gz \
-+        file://0001-Modify-the-Makefile-for-cross-compile.patch \
-+        file://0002-Replace-nl_handle-to-nl_sock.patch \
-+        "
-+
-+SRC_URI[md5sum] = "eac3ba3f62cd4dea2da353aeddd353a8"
-+SRC_URI[sha256sum] = "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f60269fd9cbee0eb2d"
-+
-+S="${WORKDIR}/${BPN}-${PV}"
-+
-+do_compile() { 
-+    oe_runmake \
-+    CC="${CC} -I${STAGING_INCDIR} -I${STAGING_INCDIR}/libnl3 -L${STAGING_LIBDIR}" \
-+    all  
-+}
-+
-+do_install() {
-+    oe_runmake 'BUILD_ROOT=${D}' install
-+}
--- 
-1.9.1
+> 
+> Not much knowledge on OpenEmbedded. Also can someone explain the qemu
+segmentation
+> fault errors?
+see above
+
+> Trying to build openjdk-7-jre gives me the following error. A complete 
+log file is also attached.
+> 
+> Can someone give me any pointers on how can I get the build to be
+successful for
+> using Java?
+
+My investigation showed that qemu-arm can not execute any binary which is
+compiled with the compiler for Colibri-T20 and is linked with the -static
+flag.
+Even a simple hello world program does not work. When executing that hello
+world on the real hardware I also get a segmentation fault.
+
+I got java compiling and running by updating to the latest of meta-java,
+applying the patch which enables xawt and applying a patch which compiles
+all binaries without the -static flag. Compiling with dynamic linking
+however produces a binary which run on qemu-arm and on the target.
+Currently I have no idea why statically linked binaries fail.
+
+You likely want to use xawt.
+
+I do not think that the fix with removing '-static' should go into
+meta-java!
+
+cd stuff/meta-java
+git remote set-url origin git://git.yoctoproject.org/meta-java
+git fetch
+git checkout -b t20-test c600dd3
+git am 0001-openjdk-7-enable-xawt.patch
+git apply remove_static_qemu_binaries.patch
+
+0001-openjdk-7-enable-xawt.patch:
+https://github.com/MaxKrummenacher/meta-java/commit
+/ff0626363b3f11cc3435d3d081e2af93104faceb.patch
+0002-qemu-binaries-remove-linking-with-static.patch:
+https://github.com/MaxKrummenacher/meta-java/commit
+/71ddc9a85509e6bd1ba1a3be2cc5e588e776f0b5.patch
+
+Regards
+Max
 
 
