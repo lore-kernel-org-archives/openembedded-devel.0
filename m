@@ -1,35 +1,34 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CAD7722E7
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 26D927162E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jan 2015 00:52:18 +0000 (UTC)
-Received: by mail-ig0-f181.google.com with SMTP id r2so4525522igi.2
+	Wed, 14 Jan 2015 05:19:56 +0000 (UTC)
+Received: by mail-ie0-f174.google.com with SMTP id at20so7011369iec.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jan 2015 16:52:18 -0800 (PST)
+	Tue, 13 Jan 2015 21:19:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=U8hH3RTnNFbhMew8xIzQIZuFL83oyfVEHEv+KSU3amY=;
-	b=BWBL3uJeHAmsTjGXjdVau/wWJznss8jQ8b6LTQ1PSmv8lg9m+Rj39Stm3hGnwK2+Sf
-	i2l2oikSDyjN3qrQ0ZpT3aEpVFeP7ef67mT1e59Ik25Psw2UUly/bYduchLKu4FEPF7B
-	g8lowszvSM/DxwYKqCxOXmO4tbi+qTXv8OFjquVXjXOh8yDr8+xFmUaaUHQGXbqipnaI
-	7rwua/o6xlKVNdHP0OyyEvWetj9B0aW0EyO//s5gwQo/aW77mSgz/AVZVKkHitvDeKAK
-	a6zeoAoP4siG4sHAbGYOgd8Z+wj3OLHN9jlhhMnN9ce1q/qoKkqhvC6s+Sjvn6I/wB74
-	3ioA==
-X-Received: by 10.50.178.143 with SMTP id cy15mr1653298igc.8.1421196738047;
-	Tue, 13 Jan 2015 16:52:18 -0800 (PST)
+	bh=3iuqGlcQfPOArF1ymnJG+rb1/NmCGsOp+sBSfu8bnuQ=;
+	b=N0vCSaiYvzjHEOuEBHIFdTrY1bCJqFsTuClkV3On6epCeTv8UvLwRdZZiaPZLD+QMK
+	n3LhinPUpsnUf+x+hofGyO05GOLKigzJg+qG0vqW5r3CrRtQV6J0FiVUNsBQIdKyL1Gh
+	CwOICewaxwczXcACy/sfH2Hn3F0gJPWrKiTJNFCJG24VC7a0EGsmdQhdELkhvVbRfiw2
+	n5BOVBBT460vuP89i+cWV5+8YUvV0HUtcNUXm6rBy9BdCHtx6hoqGGf7lm0QuQ7B/SM2
+	G1l0p/viXNmwWhIWttReVafaArRYkY6lBX+HNd5n0Pbv9zwtbL1vDEovQxft3ApSzriF
+	WAcw==
+X-Received: by 10.43.92.9 with SMTP id bo9mr2981998icc.54.1421212797262;
+	Tue, 13 Jan 2015 21:19:57 -0800 (PST)
 Received: from e6520.cablelabs.com
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id
-	l14sm11227125ioi.31.2015.01.13.16.52.17
+	by mx.google.com with ESMTPSA id t5sm1456506ign.12.2015.01.13.21.19.56
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 13 Jan 2015 16:52:17 -0800 (PST)
+	Tue, 13 Jan 2015 21:19:56 -0800 (PST)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Jan 2015 16:52:09 -0800
-Message-Id: <1421196729-31411-1-git-send-email-armccurdy@gmail.com>
+Date: Tue, 13 Jan 2015 21:19:42 -0800
+Message-Id: <1421212782-5067-1-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH v2] libjpeg-turbo: update 1.3.1 -> 1.4.0
+Subject: [meta-oe][PATCH] cryptsetup: update 1.6.2 -> 1.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,45 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2015 00:52:26 -0000
-
-The LIC_FILES_CHKSUM updates are needed to account for minor
-formatting changes and the addition of 2014 to copyright notices.
+X-List-Received-Date: Wed, 14 Jan 2015 05:20:04 -0000
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- .../{libjpeg-turbo_8d+1.3.1.bb => libjpeg-turbo_8d+1.4.0.bb}   | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-core/jpeg/{libjpeg-turbo_8d+1.3.1.bb => libjpeg-turbo_8d+1.4.0.bb} (72%)
+ .../cryptsetup/{cryptsetup_1.6.2.bb => cryptsetup_1.6.6.bb}         | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/cryptsetup/{cryptsetup_1.6.2.bb => cryptsetup_1.6.6.bb} (84%)
 
-diff --git a/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.3.1.bb b/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.4.0.bb
-similarity index 72%
-rename from meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.3.1.bb
-rename to meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.4.0.bb
-index 6a09fda..8e214c9 100644
---- a/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.3.1.bb
-+++ b/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.4.0.bb
-@@ -2,16 +2,16 @@ DESCRIPTION = "libjpeg-turbo is a derivative of libjpeg that uses SIMD instructi
- HOMEPAGE = "http://libjpeg-turbo.org/"
+diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.2.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb
+similarity index 84%
+rename from meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.2.bb
+rename to meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb
+index 500dc57..d84ad2f 100644
+--- a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.2.bb
++++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.6.6.bb
+@@ -11,9 +11,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=78fa8dbac547bb5b2a0e6457a6cfe21d \
--                    file://jpeglib.h;endline=14;md5=a08bb0a80f782a9f8da313cc4015ed6f \
--                    file://djpeg.c;endline=9;md5=7629c51aed78174711c20a40194a8f1b \
-+LIC_FILES_CHKSUM = "file://cdjpeg.h;endline=12;md5=cad955d15145c3fdceec6855e078e953 \
-+                    file://jpeglib.h;endline=14;md5=dfc803dc51ae21178d1376ec73c4454d \
-+                    file://djpeg.c;endline=9;md5=e93a8f2061e8a0ac71c7a485c10489e2 \
- "
+ DEPENDS = "util-linux lvm2 popt libgcrypt"
  
- BASEPV = "${@d.getVar('PV',True).split('+')[1]}"
+-SRC_URI = "http://cryptsetup.googlecode.com/files/cryptsetup-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "cd834da49fbe92dd66df02cc5c61280f"
+-SRC_URI[sha256sum] = "15723f0198303d4bcb99d480b7a773918e2d319f0348457988c063bdd03e109a"
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.6/${BP}.tar.xz"
++SRC_URI[md5sum] = "179c0781de59838a4e39f61b2df5ea48"
++SRC_URI[sha256sum] = "2d2ce28e4e1137dd599d87884b62ef6dbf14fd7848b2a2bf7d61cf125fbd8e6f"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${BASEPV}.tar.gz"
--SRC_URI[md5sum] = "2c3a68129dac443a72815ff5bb374b05"
--SRC_URI[sha256sum] = "c132907417ddc40ed552fe53d6b91d5fecbb14a356a60ddc7ea50d6be9666fb9"
-+SRC_URI[md5sum] = "039153dabe61e1ac8d9323b5522b56b0"
-+SRC_URI[sha256sum] = "d93ad8546b510244f863b39b4c0da0fa4c0d53a77b61a8a3880f258c232bbbee"
- 
- S = "${WORKDIR}/${BPN}-${BASEPV}"
+ inherit autotools gettext pkgconfig
  
 -- 
 1.9.1
