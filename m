@@ -1,26 +1,61 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 34E5871634
+Return-Path: <ting.liu@freescale.com>
+X-Greylist: delayed 871 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 14 Jan 2015 15:50:40 UTC
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2on0111.outbound.protection.outlook.com [207.46.100.111])
+	by mail.openembedded.org (Postfix) with ESMTP id E9FF27162E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jan 2015 12:18:29 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga103.jf.intel.com with ESMTP; 14 Jan 2015 04:14:46 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.07,755,1413270000"; d="scan'208";a="637139482"
-Received: from unknown (HELO peggleto-mobl5.ger.corp.intel.com)
-	([10.252.23.139])
-	by orsmga001.jf.intel.com with ESMTP; 14 Jan 2015 04:18:24 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Boszormenyi Zoltan <zboszor@pr.hu>
-Date: Wed, 14 Jan 2015 12:18:23 +0000
-Message-ID: <27871649.cr5e5TgsPA@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.3 (Linux/3.17.7-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
-In-Reply-To: <5476192C.2030204@pr.hu>
-References: <5476192C.2030204@pr.hu>
+	Wed, 14 Jan 2015 15:50:40 +0000 (UTC)
+Received: from CH1PR03CA003.namprd03.prod.outlook.com (10.255.156.148) by
+	BN3PR0301MB1187.namprd03.prod.outlook.com (25.160.156.149) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.59.20; Wed, 14 Jan 2015 15:36:07 +0000
+Received: from BN1AFFO11FD060.protection.gbl (10.255.156.132) by
+	CH1PR03CA003.outlook.office365.com (10.255.156.148) with Microsoft SMTP
+	Server (TLS) id 15.1.59.20 via Frontend Transport;
+	Wed, 14 Jan 2015 15:36:07 +0000
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BN1AFFO11FD060.mail.protection.outlook.com (10.58.53.75) with Microsoft
+	SMTP Server (TLS) id 15.1.49.13 via Frontend Transport;
+	Wed, 14 Jan 2015 15:36:07 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t0EFa4e3027398;
+	Wed, 14 Jan 2015 08:36:05 -0700
+From: <b28495@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 14 Jan 2015 23:36:03 +0800
+Message-ID: <1421249763-31177-1-git-send-email-b28495@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.158.2 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=ting.liu@freescale.com; 
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10019020)(6009001)(339900001)(189002)(199003)(64706001)(33646002)(47776003)(229853001)(110136001)(104016003)(15188155005)(19300405004)(19273905006)(87936001)(97736003)(46102003)(36756003)(68736005)(77156002)(62966003)(86152002)(15975445007)(77096005)(50466002)(85426001)(48376002)(92566002)(69596002)(50226001)(6806004)(19580395003)(19580405001)(16799955002)(50986999)(2351001)(81156004)(105606002)(106466001)(562404015)(563064011);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BN3PR0301MB1187;
+	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv;
+	PTR:InfoDomainNonexistent; MX:1; A:1; LANG:en; 
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Escaping in PACKAGECONFIG
+X-DmarcAction-Test: None
+X-Microsoft-Antispam: UriScan:;
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005003);SRVR:BN3PR0301MB1187;
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
+	SRVR:BN3PR0301MB1187; 
+X-Forefront-PRVS: 04569283F9
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
+	SRVR:BN3PR0301MB1187; 
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Jan 2015 15:36:07.3279 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR0301MB1187
+Subject: [meta-oe][PATCH] lcov: add initial recipe 1.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,83 +69,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jan 2015 12:18:39 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 14 Jan 2015 15:50:50 -0000
+Content-Type: text/plain
 
-Hi Zolt=E1n,
+From: Ting Liu <ting.liu@freescale.com>
 
-On Wednesday 26 November 2014 19:17:16 Boszormenyi Zoltan wrote:
-> what is the proper way of escaping a comma in the string specified fo=
-r
-> PACKAGECONFIG? I would like to use something like the below in my cus=
-tom
-> PHP recipe:
->=20
-> PACKAGECONFIG[mysql] =3D ' \
->                         --enable-mysqlnd=3D"shared" \
->                         --with-mysql=3D"shared,mysqlnd" \
->                         --with-mysqli=3D"shared,mysqlnd" \
->                       =20
-> --with-mysql-sock=3D${localstatedir}/lib/mysql/mysql.sock \
-> --with-pdo-mysql=3D"shared,mysqlnd" \
->                         , \
->                         ,mysql5'
->=20
-> With ...=3D"shared,mysqlnd", ...=3D"shared\,mysqlnd" or ...=3D"shared=
-\\,mysqlnd" I
-> get:
->=20
-> ERROR: Only enable,disable,depend,rdepend can be specified!
->=20
-> and
->=20
-> ERROR: Nothing PROVIDES 'mysqlnd"' (but .../php/php_5.6.3.bb DEPENDS =
-on or
-> otherwise requires it). Close matches:
->   mysql5
-> ERROR: Required build target 'php' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['php', 'mysqlnd"']
->=20
-> But, this works:
->=20
-> MYSQLND=3D"shared,mysqlnd"
-> PACKAGECONFIG[mysql] =3D ' \
->                         --enable-mysqlnd=3D"shared" \
->                         --with-mysql=3D${MYSQLND} \
->                         --with-mysqli=3D${MYSQLND} \
->                       =20
-> --with-mysql-sock=3D${localstatedir}/lib/mysql/mysql.sock \
-> --with-pdo-mysql=3D${MYSQLND} \
->                         , \
->                         ,mysql5'
->=20
-> Why?
+Signed-off-by: Ting Liu <ting.liu@freescale.com>
+---
+ meta-oe/recipes-support/lcov/lcov_1.11.bb | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-support/lcov/lcov_1.11.bb
 
-Sorry for the delayed response. Basically, if you look at how PACKAGECO=
-NFIG is=20
-implemented in meta/classes/base.bbclass, we simply do a python split()=
- call=20
-on the value of each varflag value (i.e. each individual PACKAGECONFIG[=
-xyz]=20
-value). However, because we get that value using getVarFlags() without =
-passing=20
-True for the "expand" parameter, the value is unexpanded, so variable=20=
+diff --git a/meta-oe/recipes-support/lcov/lcov_1.11.bb b/meta-oe/recipes-support/lcov/lcov_1.11.bb
+new file mode 100644
+index 0000000..5f3b889
+--- /dev/null
++++ b/meta-oe/recipes-support/lcov/lcov_1.11.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "A graphical front-end for gcov"
++HOMEPAGE = "http://ltp.sourceforge.net/coverage/lcov.php"
++DESCRIPTION = "LCOV is a graphical front-end for GCC's coverage testing \
++tool gcov. It collects gcov data for multiple source files and creates \
++HTML pages containing the source code annotated with coverage information. \
++It also adds overview pages for easy navigation within the file structure. \
++LCOV supports statement, function and branch coverage measurement." 
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++
++RDEPENDS_${PN} += " \
++    gcov \
++    perl \
++    perl-module-filehandle \
++    perl-module-getopt-std \
++    perl-module-digest-sha \
++"
++
++SRC_URI = "http://downloads.sourceforge.net/ltp/${BP}.tar.gz"
++
++SRC_URI[md5sum] = "e79b799ae3ce149aa924c7520e993024"
++SRC_URI[sha256sum] = "c282de8d678ecbfda32ce4b5c85fc02f77c2a39a062f068bd8e774d29ddc9bf8"
++
++do_install() {
++    oe_runmake install PREFIX=${D}
++    sed -i -e '1s,#!.*perl,#! ${USRBINPATH}/env perl,' ${D}${bindir}/*
++}
++
+-- 
+1.9.1
 
-references such as ${MYSQLND} above won't have been expanded when the s=
-tring=20
-gets split. I'm not sure if that was intentional but it is how it has b=
-een=20
-implemented; I don't think anyone has given much thought to cases like =
-this=20
-where you need to have commas in the value since it's relatively uncomm=
-on.
-
-Cheers,
-Paul
-
---=20
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
