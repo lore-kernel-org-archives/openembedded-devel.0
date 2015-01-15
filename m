@@ -1,29 +1,41 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0787471144
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 4337271F23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 01:18:32 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="56082603"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jan 2015 09:15:04 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0F1Htb0031548
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 09:17:55 +0800
-Received: from localhost.localdomain (10.167.226.35) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 15 Jan 2015 09:18:30 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 15 Jan 2015 09:17:38 +0800
-Message-ID: <1421284658-4980-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <20141209102434.GE2470@jama>
-References: <20141209102434.GE2470@jama>
+	Thu, 15 Jan 2015 09:22:16 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B87DBD40346;
+	Thu, 15 Jan 2015 10:22:12 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id F3278D4025E;
+	Thu, 15 Jan 2015 10:22:11 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
+	autolearn=no version=3.3.2
+Received: from mail.itconsulting-heinold.de
+	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA;
+	Thu, 15 Jan 2015 10:22:11 +0100 (CET)
+Date: Thu, 15 Jan 2015 10:22:06 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150115092159.GC10646@mail.itconsulting-heinold.de>
+References: <54B220B0.8070609@gmail.com> <54B222F2.4070802@gmail.com>
+	<loom.20150113T130012-516@post.gmane.org>
+	<20150113132422.GJ18240@mail.itconsulting-heinold.de>
+	<CAP9ODKocqaD+cXFba28jxXyd75aRmWnpwNY3NNx1wVY4Q3wVuA@mail.gmail.com>
+	<loom.20150115T002923-253@post.gmane.org>
+	<CAP9ODKpZzfTV41SDZjacbMi9=_BKkA7AoTgU+az4+7oUDreB3Q@mail.gmail.com>
+	<D0DC62E4.8BDA%csmiley@icontrol.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.35]
-Subject: [meta-oe][PATCH v2] pkcs11-helper: add new recipe
+In-Reply-To: <D0DC62E4.8BDA%csmiley@icontrol.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: Henning Heinold <heinold@inf.fu-berlin.de>,
+	Alex de Cabo <alejandro.de-cabo-garcia@congatec.com>
+Subject: Re: Query on meta-java layer openjdk-7-jre build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,57 +49,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 01:18:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 15 Jan 2015 09:22:28 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-PKCS#11 is a published standard. PKCS#11 is the de-facto standard
-to access cryptographic devices.
-pkcs11-helper is a library that simplifies the interaction with
-PKCS#11 providers for end-user applications using a simple API
-and optional OpenSSL engine.
+On Thu, Jan 15, 2015 at 12:23:49AM +0000, Colin Smiley wrote:
+> 
+> Earlier this week, I’d sent an email to the list about my problems getting
+> openjdk-6 to build.
+> 
+> The short version of my build process is:
+> 
+> 1) install poky on daisy branch
+> 2) install open embedded on daisy branch
+> 3) install meta-java on trunk
+> 4) attempt to bitbake java-test-image (removing openjdk-7 line).
+> 5) Wait for java CurrencyData failure, fix it manually.
+> 6) re-reun bitbake java-test-image
+> 
+> At this point, my build fails running qemu-i36. The image will use up all
+> available memory on the system, and then get killed by the linux oom
+> killer. I have tried this on a variety of OS, VM, physical machine, and
+> memory combinations. The result is always the same.
+> 
+> Is the problem I’m seeing the same as what you’re describing below?
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../pkcs11-helper/pkcs11-helper_1.11.bb            | 29 ++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
+Hi,
 
-diff --git a/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
-new file mode 100644
-index 0000000..a833297
---- /dev/null
-+++ b/meta-oe/recipes-support/pkcs11-helper/pkcs11-helper_1.11.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "A library for using PKCS"
-+DESCRIPTION = "pkcs11-helper is a library that simplifies the interaction with PKCS \
-+providers for end-user applications using a simple API and optional OpenSSL \
-+engine. The library allows using multiple PKCS enumerating available token \
-+certificates, or selecting a certificate directly by serialized id, handling \
-+card removal and card insert events, handling card ie-insert to a different \
-+slot, supporting session expiration and much more all using a simple API."
-+
-+HOMEPAGE = "http://www.opensc-project.org/pkcs11-helper/"
-+SECTION = "Development/Libraries"
-+
-+LICENSE = "GPLv2 & BSD"
-+LIC_FILES_CHKSUM = " \
-+    file://COPYING;md5=4948810631bcac142af53d32df5b6ee1 \
-+    file://COPYING.GPL;md5=8a71d0475d08eee76d8b6d0c6dbec543 \
-+    file://COPYING.BSD;md5=f79f90ea7a106796af80b5d05f1f8da1 \
-+"
-+SRC_URI = "git://github.com/OpenSC/${BPN}.git"
-+SRC_URI[md5sum] = "9f62af9f475901b89355266141306673"
-+SRC_URI[sha256sum] = "494ec59c93e7c56c528f335d9353849e2e7c94a6b1b41c89604694e738113386"
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "e7adf8f35be232a4f04c53b4ac409be52792093e"
-+
-+DEPENDS = "zlib nettle gnutls gmp openssl"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = "--disable-static"
--- 
-1.8.4.2
+as I worte in another email try to revert to an older qemu version locally.
 
+> 
+> Also, is there an update to meta-java to fix the CurrencyData problem?
+> 
+
+Unfornatly no,
+
+someone has to update the icedtea-native recipes to a newer version. Which
+might be some work of the patches we apply.
+
+Bye Henning
 
