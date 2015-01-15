@@ -1,35 +1,34 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A245472BE0
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 95DD372BE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 20:47:55 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id l15so37795188wiw.2
+	Thu, 15 Jan 2015 20:47:56 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id l18so17230703wgh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 12:47:55 -0800 (PST)
+	Thu, 15 Jan 2015 12:47:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IIB1egeG+9vyi9Ksy8DWQErgpmtKfWxjo1VwqcnRgAo=;
-	b=OoVcJhgXqlKps77PVzFEHuyjkKNlznlY7LkC3aEdQLBQ/74R1uS3tShPxwuzlOf7cv
-	XbTy8PIgqEtV2mmybBIVdPQ9ADqSExhsR1vhQPBNZDN5aV6IwBvPgL8h4oJs94RN6JUC
-	2wneDHqEB5/TB4Og0odzbU/MgUbUC/IVAoT9dupSC5+kD6UYUQr4aqAxBUxuIF0MXmWX
-	KGslHn9+Ny/ZJDfaU7P1V/swN1FHW5Uz+KGJGcT6OJlc0VDYMwje5voxsKJDRUhNOBPV
-	pNTRGezeLgbZK3lBhdhw7nJoxBWdN6g05g8VicoJFnoKg2FoPkZOpYjVR6t3yuioPPMQ
-	ajIg==
-X-Received: by 10.194.203.234 with SMTP id kt10mr22434612wjc.88.1421354875435; 
-	Thu, 15 Jan 2015 12:47:55 -0800 (PST)
+	bh=ddSf790dvo8aOwJtyZpCSczRKVWCBBKyLP2UgpvlUDo=;
+	b=Pgy03M0g8eWWwK375neussz4A/589t5D5DbMpI+ft+xyx156DfSEQQoKUclkV0JwIT
+	iSaX02WGGJRJnkmAe3j25GcxCf3icsamL9QxQp1AGHV7SaX2/x7+jTS3wWWm/gAZSAxQ
+	FmbuskNpzASt81v/q9Umu/tcTHABKmheaXsgI0yksnglUig+tK+UB0+mmFpCdzXNXMa6
+	rAyC52ClK7O3Xht7F/dWZg65TqfMbg1uJJXDTKciUTWXVi8WLBti1/l/ArlNow/QUtYn
+	LWtIBz+yK+tdV3vrZGepeKd3fsYKcls1ocZBB/DSNRCueq7qeEkFtd9m2OhWDbH1logn
+	s6jQ==
+X-Received: by 10.194.83.98 with SMTP id p2mr22018462wjy.125.1421354877153;
+	Thu, 15 Jan 2015 12:47:57 -0800 (PST)
 Received: from linuxdev.toradex.int ([46.140.72.82])
-	by mx.google.com with ESMTPSA id gz7sm392409wib.22.2015.01.15.12.47.54
+	by mx.google.com with ESMTPSA id gz7sm392409wib.22.2015.01.15.12.47.56
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Jan 2015 12:47:54 -0800 (PST)
+	Thu, 15 Jan 2015 12:47:56 -0800 (PST)
 From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Jan 2015 21:47:01 +0100
-Message-Id: <1421354822-21485-3-git-send-email-max.oss.09@gmail.com>
+Date: Thu, 15 Jan 2015 21:47:02 +0100
+Message-Id: <1421354822-21485-4-git-send-email-max.oss.09@gmail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1421354822-21485-1-git-send-email-max.oss.09@gmail.com>
 References: <1421354822-21485-1-git-send-email-max.oss.09@gmail.com>
-Subject: [meta-java][RFC 2/3] gcc-static-test: initial commit
+Subject: [meta-java][RFC 3/3] openjdk-7: enable xawt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,74 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 20:47:57 -0000
+X-List-Received-Date: Thu, 15 Jan 2015 20:47:58 -0000
+
+The build of xawt has been disabled as its build seemed to fail during a qemu
+call to generate a file with information on variable sizes.
+
+This patch reenables xawt in the hope that changes to the qemu calls fixed the issues.
 
 Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
 ---
- recipes-test/gcc-static-test/gcc-static-test.bb    | 40 ++++++++++++++++++++++
- .../gcc-static-test/gcc-static-test/hello.c        |  6 ++++
- 2 files changed, 46 insertions(+)
- create mode 100644 recipes-test/gcc-static-test/gcc-static-test.bb
- create mode 100644 recipes-test/gcc-static-test/gcc-static-test/hello.c
+ .../icedtea-jdk-nio-use-host-cc.patch              | 22 ----------------------
+ 1 file changed, 22 deletions(-)
 
-diff --git a/recipes-test/gcc-static-test/gcc-static-test.bb b/recipes-test/gcc-static-test/gcc-static-test.bb
-new file mode 100644
-index 0000000..c0fd852
---- /dev/null
-+++ b/recipes-test/gcc-static-test/gcc-static-test.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "Test if cross-gcc can compile a linked binary which runs on qemu"
-+DESCRIPTION = \
-+"Have cross-gcc compile a simple helloworld style program linked statically \
-+and dynamically and then test if qemu is able to run it without segfaulting. \
-+Should help in hunting the following bug in building java: \
-+http://lists.openembedded.org/pipermail/openembedded-devel/2015-January/099795.html"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+
-+DEPENDS = ""
-+
-+SRC_URI = "file://hello.c"
-+
-+QEMU = "${@qemu_target_binary(d)} ${QEMU_OPTIONS} -s 2097152 -L ${STAGING_DIR_TARGET} -E LD_LIBRARY_PATH=${STAGING_BASELIBDIR}"
-+
-+trapsegfault() {
-+    echo "We have a segmenation fault!"
-+
-+    # Reset handler
-+    trap - 11
-+}
-+
-+do_compile() {
-+    #disable the trap built into run.do_compile by default
-+    set +e
-+    trap '' 0
-+    trap 'trapsegfault' 11
-+    ${CC} -static hello.c -o hello
-+    ${QEMU} hello ; FAILED_STATIC=$?
-+    ${CC} hello.c -o hello
-+    ${QEMU} hello ; FAILED_DYNAMIC=$?
-+    echo FAILED_STATIC $FAILED_STATIC
-+    echo FAILED_DYNAMIC $FAILED_DYNAMIC
-+    ( [ $FAILED_STATIC -eq 0 ] && [ $FAILED_DYNAMIC -eq 0 ] ) || exit -1
-+}
-+
-+S = "${WORKDIR}"
-+
-+inherit qemu
-diff --git a/recipes-test/gcc-static-test/gcc-static-test/hello.c b/recipes-test/gcc-static-test/gcc-static-test/hello.c
-new file mode 100644
-index 0000000..5bd0da7
---- /dev/null
-+++ b/recipes-test/gcc-static-test/gcc-static-test/hello.c
-@@ -0,0 +1,6 @@
-+#include <stdio.h>
-+int main (void) {
-+  printf("Hi\n");
-+  return 0;
-+}
-+
+diff --git a/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch b/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch
+index 94416bb..8e5da82 100644
+--- a/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch
++++ b/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch
+@@ -49,25 +49,3 @@ Index: openjdk/jdk/make/java/nio/Makefile
+ -endif
+  
+  .PHONY: sources 
+-Index: openjdk/jdk/make/sun/Makefile
+-===================================================================
+---- openjdk/jdk/make/sun/Makefile	2013-07-25 09:10:09.000000000 -0700
+-+++ openjdk/jdk/make/sun/Makefile	2013-10-01 21:32:01.625839149 -0700
+-@@ -55,7 +55,7 @@
+-     endif
+-   endif
+-   HEADLESS_SUBDIR = headless
+--  XAWT_SUBDIR     = xawt
+-+  XAWT_SUBDIR     =
+- endif
+- 
+- ifeq ($(PLATFORM), macosx)
+-@@ -87,7 +87,7 @@
+- endif
+- SUBDIRS_desktop    = audio $(RENDER_SUBDIR) image \
+-                      $(LWAWT_PRE_SUBDIR) $(DISPLAY_LIBS) $(DGA_SUBDIR) $(LWAWT_SUBDIR) \
+--                     jawt font jpeg cmm $(DISPLAY_TOOLS) beans
+-+                     font jpeg cmm $(DISPLAY_TOOLS) beans
+- SUBDIRS_management = management
+- SUBDIRS_misc       = $(ORG_SUBDIR) rmi $(JDBC_SUBDIR) tracing
+- SUBDIRS_tools      = native2ascii serialver tools jconsole
 -- 
 1.9.3
 
