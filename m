@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 91C6871F23
+Received: from mail-we0-f174.google.com (mail-we0-f174.google.com
+	[74.125.82.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 1ED6B72207
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 15:39:55 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id z2so13165179wiv.5
+	Thu, 15 Jan 2015 15:41:21 +0000 (UTC)
+Received: by mail-we0-f174.google.com with SMTP id k48so15424229wev.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 07:39:56 -0800 (PST)
+	Thu, 15 Jan 2015 07:41:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=tQIAQ6TsGhF3pGKh/m7uVhr+VYArcMNvA9Tpx3xTwRk=;
-	b=Ur3lKLwnzlRfZMgXE8LhnNdv2WBuTd1WxJtULsjjrEu4eNhh2TnHxPfl3uE9UhZrm9
-	Sxaao8z4YSAXC/peOV6F9v5zTUY6Z5Kkj+fRB7SAIcPTOlRz7iOhT+4RgC7maswjCnLf
-	KBrc1N6v3U3ZskHzVMlZhjX3dZ2m+k1c5SNj1lvc7vv8QgPxIXk/8jurZLKbeah6M9MD
-	5cjHPUF7RLnfsqzP8zyPvXxdzPvP7fjtuFXlpFY9+zkAmmP5EZP4mXbGY1KUp95OIH8T
-	P5MIeJYfQkL7UrlwdlSR3iBxSqNLRxKbeVVeaqSObsNJXIUdVC1ZKyMVNJZgsdMoS9BX
-	wzGQ==
-X-Received: by 10.194.22.6 with SMTP id z6mr18706930wje.55.1421336396038;
-	Thu, 15 Jan 2015 07:39:56 -0800 (PST)
+	bh=rihdW+SJtnmZcZS5oIw8jKDugSon8voj1LxjqA1Jquc=;
+	b=qNLIR36Xr8KC5YV9h04A+djHY3B3oXErNYcgTP2xPcoPfsdQKc5cqe9y8X8YRGLEBE
+	5fu6A+s166/tX6W5UaLwBo8qkJv/qXg8Nh4pJtxZylfo6zcLMJM44cbpqWUzUCmwFK5k
+	7LWaPQ0cO5sNKN/+bPnSu9oEL8yf3l9xU4asLyOE2UaB268vSfPpui3FDuhjvsBgsbG8
+	iwdLwjrL1iXC4A89jE4XxrK0gdNca3GGijCswZViwla5n22V8pGXCT0d/VV1QXkkW/be
+	XfBxAy0GD6FGmTR9RpLV7aEyFP1UJ4LYyUtpixwGh+/YhGBhe/SphsfJBakGFB3BzoqJ
+	grJw==
+X-Received: by 10.194.85.106 with SMTP id g10mr6401419wjz.39.1421336481752;
+	Thu, 15 Jan 2015 07:41:21 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	o2sm7929133wiy.11.2015.01.15.07.39.55
+	fo12sm23210166wic.19.2015.01.15.07.41.21
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Jan 2015 07:39:55 -0800 (PST)
+	Thu, 15 Jan 2015 07:41:21 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 15 Jan 2015 16:40:00 +0100
+Date: Thu, 15 Jan 2015 16:41:26 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150115154000.GB2482@jama>
+Message-ID: <20150115154126.GC2482@jama>
 References: <1421117802-4702-1-git-send-email-jianchuan.wang@windriver.com>
 MIME-Version: 1.0
 In-Reply-To: <1421117802-4702-1-git-send-email-jianchuan.wang@windriver.com>
@@ -48,13 +48,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 15:39:59 -0000
-X-Groupsio-MsgNum: 53843
+X-List-Received-Date: Thu, 15 Jan 2015 15:41:24 -0000
+X-Groupsio-MsgNum: 53844
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4bRzO86E/ozDv8r1"
+	protocol="application/pgp-signature"; boundary="Qbvjkv9qwOGw/5Fx"
 Content-Disposition: inline
 
---4bRzO86E/ozDv8r1
+--Qbvjkv9qwOGw/5Fx
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -76,9 +76,6 @@ e:
 dify-the-Makefile-for-cross-compile.patch
 >  create mode 100644 meta-networking/recipes-support/ipvsadm/files/0002-Re=
 place-nl_handle-to-nl_sock.patch
-
-Please use "ipvsadm" instead of "files" for slightly faster lookup.
-
 >  create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.=
 bb
 >=20
@@ -292,15 +289,23 @@ eplication, \
 > +
 > +SRC_URI =3D "http://www.linuxvirtualserver.org/software/kernel-2.6/ipvsa=
 dm-1.26.tar.gz \
+
+ipvsadm-1.26 -> ${BP}
+
 > +        file://0001-Modify-the-Makefile-for-cross-compile.patch \
 > +        file://0002-Replace-nl_handle-to-nl_sock.patch \
 > +        "
+
+" should be first character
+
 > +
 > +SRC_URI[md5sum] =3D "eac3ba3f62cd4dea2da353aeddd353a8"
 > +SRC_URI[sha256sum] =3D "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f6=
 0269fd9cbee0eb2d"
 > +
 > +S=3D"${WORKDIR}/${BPN}-${PV}"
+
+This is default, drop it.
 > +
 > +do_compile() {=20
 > +    oe_runmake \
@@ -324,16 +329,16 @@ NG_LIBDIR}" \
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---4bRzO86E/ozDv8r1
+--Qbvjkv9qwOGw/5Fx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlS331AACgkQN1Ujt2V2gBynFQCfWsHqjBJLcW/vrARmZ2bU+l3o
-03kAoLRZB40FfVDWJCJVhjMN15cXKvFb
-=2zgs
+iEYEARECAAYFAlS336YACgkQN1Ujt2V2gBxPSwCfcwRK+DTvrqJDlX1+xo6AzsdT
+3DwAoIa2I5hZWN2QUZIZBA3ie2Gf9efP
+=R6Nv
 -----END PGP SIGNATURE-----
 
---4bRzO86E/ozDv8r1--
+--Qbvjkv9qwOGw/5Fx--
