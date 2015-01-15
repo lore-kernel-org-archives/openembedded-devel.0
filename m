@@ -1,41 +1,56 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f45.google.com (mail-yh0-f45.google.com
-	[209.85.213.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E45D71637
+Return-Path: <csmiley@icontrol.com>
+X-Greylist: delayed 1945 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 15 Jan 2015 00:56:15 UTC
+Received: from na01-bl2-obe.outbound.protection.outlook.com
+	(mail-bl2on0108.outbound.protection.outlook.com [65.55.169.108])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AA3671633
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 00:11:54 +0000 (UTC)
-Received: by mail-yh0-f45.google.com with SMTP id f10so5939619yha.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jan 2015 16:11:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=NH2v5b0OvfZCusmWaMclPUvn/ci05buDSvune2hrK/s=;
-	b=UX9E52RZaWHkZOujNA/j9OZIZUYEOaNffxqljTYrRPRmv/LjkZUbBp2fhooKJtlPap
-	ARMIPFTxpgWU0Cu+Kr7CROAdJKtL4xQvXdJOoQJ3XaVZkgf3ukPBpx1xpSgaaIqI20j3
-	NmTj/pzX8mI3g0yhSVT9BpNKFWRCeNRzwLiY9stxA/l5qqggLbUcag0vgv7wSss75zF2
-	33jdUE1aZmPaVINUMSxlpgEVhkmxEUUc+HIXBMTo98AyHe57/aM4IvUCeiq99/Rv39aj
-	WC4cc7yCXQF33PxYYvUV8LRtNl+mhE0lcW40G+ZVrJ5+sZuYAe10VcTSDomudvuGyDlE
-	Zm/g==
-MIME-Version: 1.0
-X-Received: by 10.170.174.197 with SMTP id q188mr4455014ykd.110.1421280714597; 
-	Wed, 14 Jan 2015 16:11:54 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.171.132 with HTTP; Wed, 14 Jan 2015 16:11:54 -0800 (PST)
-In-Reply-To: <loom.20150115T002923-253@post.gmane.org>
+	Thu, 15 Jan 2015 00:56:15 +0000 (UTC)
+Received: from BN1PR05MB044.namprd05.prod.outlook.com (10.255.202.154) by
+	BN1PR05MB042.namprd05.prod.outlook.com (10.255.202.147) with Microsoft
+	SMTP Server (TLS) id 15.1.53.17; Thu, 15 Jan 2015 00:23:49 +0000
+Received: from BN1PR05MB044.namprd05.prod.outlook.com ([169.254.12.14]) by
+	BN1PR05MB044.namprd05.prod.outlook.com ([169.254.12.14]) with mapi id
+	15.01.0053.000; Thu, 15 Jan 2015 00:23:49 +0000
+From: Colin Smiley <csmiley@icontrol.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, "Alex
+	de Cabo" <alejandro.de-cabo-garcia@congatec.com>, Max Krummenacher
+	<max.oss.09@gmail.com>, Henning Heinold <heinold@inf.fu-berlin.de>
+Thread-Topic: [oe] Query on meta-java layer openjdk-7-jre build
+Thread-Index: AQHQMFUhIJi5tkepc0OlnLBIPLSk0pzATxEA//+evYA=
+Date: Thu, 15 Jan 2015 00:23:49 +0000
+Message-ID: <D0DC62E4.8BDA%csmiley@icontrol.com>
 References: <54B220B0.8070609@gmail.com> <54B222F2.4070802@gmail.com>
 	<loom.20150113T130012-516@post.gmane.org>
 	<20150113132422.GJ18240@mail.itconsulting-heinold.de>
 	<CAP9ODKocqaD+cXFba28jxXyd75aRmWnpwNY3NNx1wVY4Q3wVuA@mail.gmail.com>
 	<loom.20150115T002923-253@post.gmane.org>
-Date: Wed, 14 Jan 2015 22:11:54 -0200
-X-Google-Sender-Auth: jHZTpKLXZRe7_4eOHe0Vl1kXTA0
-Message-ID: <CAP9ODKpZzfTV41SDZjacbMi9=_BKkA7AoTgU+az4+7oUDreB3Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Alex de Cabo <alejandro.de-cabo-garcia@congatec.com>, 
-	Max Krummenacher <max.oss.09@gmail.com>,
-	Henning Heinold <heinold@inf.fu-berlin.de>
+	<CAP9ODKpZzfTV41SDZjacbMi9=_BKkA7AoTgU+az4+7oUDreB3Q@mail.gmail.com>
+In-Reply-To: <CAP9ODKpZzfTV41SDZjacbMi9=_BKkA7AoTgU+az4+7oUDreB3Q@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [63.239.122.42]
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=csmiley@icontrol.com; 
+x-dmarcaction-test: None
+x-microsoft-antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:BN1PR05MB042;
+x-exchange-antispam-report-test: UriScan:;
+x-exchange-antispam-report-cfa-test: BCL:0;PCL:0;RULEID:;SRVR:BN1PR05MB042;
+x-forefront-prvs: 0457F11EAF
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10019020)(6009001)(164054003)(24454002)(189002)(51704005)(377454003)(199003)(479174004)(2656002)(46102003)(230783001)(97736003)(36756003)(76176999)(87936001)(16601075003)(86362001)(64706001)(54356999)(50986999)(66066001)(101416001)(93886004)(106116001)(106356001)(105586002)(19580395003)(19580405001)(107886001)(99286002)(122556002)(2950100001)(2900100001)(92566002)(40100003)(62966003)(77156002)(1720100001)(102836002)(15975445007)(68736005)(94096001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BN1PR05MB042;
+	H:BN1PR05MB044.namprd05.prod.outlook.com; FPR:; SPF:None;
+	MLV:sfv; PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
+received-spf: None (protection.outlook.com: icontrol.com does not designate
+	permitted sender hosts)
+MIME-Version: 1.0
+X-OriginatorOrg: icontrol.com
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Jan 2015 00:23:49.4864 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 56af53c7-f954-4c24-b63a-3d793c349485
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN1PR05MB042
 Subject: Re: Query on meta-java layer openjdk-7-jre build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -50,43 +65,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 00:11:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 15 Jan 2015 00:56:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <E94E04BA3BB9394CBA213C3FDE0FC907@namprd05.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-Hello,
-
-(I am adding Alex on Cc as well)
-
-On Wed, Jan 14, 2015 at 9:52 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
-> Otavio Salvador <otavio <at> ossystems.com.br> writes:
->>  Can you prepare a patchset for it?
->>
->
-> I'm not really convinced that reverting the static linking is a good
-> approach as obviously something failed when linking dynamically.
->
-> Both mails which reported the issue with the failing qemu-arm run were built
-> for colibri-t20. The Tegra T20 SOC is a bit special as it does not have a
-> Neon unit. Plus our standard setup uses angstrom which builds the linaro
-> toolchain with thumb2 support.
->
-> So the failing builds are failing with an unusual oe toolchain configuration
-> and the root cause is the toolchain.
-> I'm unsure if risking the failing builds with dynamic linking poping up
-> again justifies fixing the build failures in an unusual configuration.
->
-> If you don't think so I can prepare a patch, no problem.
-
-It is failing on me as well.
-
-Alex has found that QEMU -L command is causing issue so if your patch
-fixes it, it could be an option for sure.
-
-I think there's no good answer as a patch for test. :-) I think we all
-can try it and see if it improves it after all.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+DQpFYXJsaWVyIHRoaXMgd2VlaywgSeKAmWQgc2VudCBhbiBlbWFpbCB0byB0aGUgbGlzdCBhYm91
+dCBteSBwcm9ibGVtcyBnZXR0aW5nDQpvcGVuamRrLTYgdG8gYnVpbGQuDQoNClRoZSBzaG9ydCB2
+ZXJzaW9uIG9mIG15IGJ1aWxkIHByb2Nlc3MgaXM6DQoNCjEpIGluc3RhbGwgcG9reSBvbiBkYWlz
+eSBicmFuY2gNCjIpIGluc3RhbGwgb3BlbiBlbWJlZGRlZCBvbiBkYWlzeSBicmFuY2gNCjMpIGlu
+c3RhbGwgbWV0YS1qYXZhIG9uIHRydW5rDQo0KSBhdHRlbXB0IHRvIGJpdGJha2UgamF2YS10ZXN0
+LWltYWdlIChyZW1vdmluZyBvcGVuamRrLTcgbGluZSkuDQo1KSBXYWl0IGZvciBqYXZhIEN1cnJl
+bmN5RGF0YSBmYWlsdXJlLCBmaXggaXQgbWFudWFsbHkuDQo2KSByZS1yZXVuIGJpdGJha2UgamF2
+YS10ZXN0LWltYWdlDQoNCkF0IHRoaXMgcG9pbnQsIG15IGJ1aWxkIGZhaWxzIHJ1bm5pbmcgcWVt
+dS1pMzYuIFRoZSBpbWFnZSB3aWxsIHVzZSB1cCBhbGwNCmF2YWlsYWJsZSBtZW1vcnkgb24gdGhl
+IHN5c3RlbSwgYW5kIHRoZW4gZ2V0IGtpbGxlZCBieSB0aGUgbGludXggb29tDQpraWxsZXIuIEkg
+aGF2ZSB0cmllZCB0aGlzIG9uIGEgdmFyaWV0eSBvZiBPUywgVk0sIHBoeXNpY2FsIG1hY2hpbmUs
+IGFuZA0KbWVtb3J5IGNvbWJpbmF0aW9ucy4gVGhlIHJlc3VsdCBpcyBhbHdheXMgdGhlIHNhbWUu
+DQoNCklzIHRoZSBwcm9ibGVtIEnigJltIHNlZWluZyB0aGUgc2FtZSBhcyB3aGF0IHlvdeKAmXJl
+IGRlc2NyaWJpbmcgYmVsb3c/DQoNCkFsc28sIGlzIHRoZXJlIGFuIHVwZGF0ZSB0byBtZXRhLWph
+dmEgdG8gZml4IHRoZSBDdXJyZW5jeURhdGEgcHJvYmxlbT8NCg0KDQpUaGFua3MsDQoNCg0KQ29s
+aW4NCg0KT24gMS8xNC8xNSwgNjoxMSBQTSwgIk90YXZpbyBTYWx2YWRvciIgPG90YXZpb0Bvc3N5
+c3RlbXMuY29tLmJyPiB3cm90ZToNCg0KPkhlbGxvLA0KPg0KPihJIGFtIGFkZGluZyBBbGV4IG9u
+IENjIGFzIHdlbGwpDQo+DQo+T24gV2VkLCBKYW4gMTQsIDIwMTUgYXQgOTo1MiBQTSwgTWF4IEty
+dW1tZW5hY2hlciA8bWF4Lm9zcy4wOUBnbWFpbC5jb20+DQo+d3JvdGU6DQo+PiBPdGF2aW8gU2Fs
+dmFkb3IgPG90YXZpbyA8YXQ+IG9zc3lzdGVtcy5jb20uYnI+IHdyaXRlczoNCj4+PiAgQ2FuIHlv
+dSBwcmVwYXJlIGEgcGF0Y2hzZXQgZm9yIGl0Pw0KPj4+DQo+Pg0KPj4gSSdtIG5vdCByZWFsbHkg
+Y29udmluY2VkIHRoYXQgcmV2ZXJ0aW5nIHRoZSBzdGF0aWMgbGlua2luZyBpcyBhIGdvb2QNCj4+
+IGFwcHJvYWNoIGFzIG9idmlvdXNseSBzb21ldGhpbmcgZmFpbGVkIHdoZW4gbGlua2luZyBkeW5h
+bWljYWxseS4NCj4+DQo+PiBCb3RoIG1haWxzIHdoaWNoIHJlcG9ydGVkIHRoZSBpc3N1ZSB3aXRo
+IHRoZSBmYWlsaW5nIHFlbXUtYXJtIHJ1biB3ZXJlDQo+PmJ1aWx0DQo+PiBmb3IgY29saWJyaS10
+MjAuIFRoZSBUZWdyYSBUMjAgU09DIGlzIGEgYml0IHNwZWNpYWwgYXMgaXQgZG9lcyBub3QgaGF2
+ZQ0KPj5hDQo+PiBOZW9uIHVuaXQuIFBsdXMgb3VyIHN0YW5kYXJkIHNldHVwIHVzZXMgYW5nc3Ry
+b20gd2hpY2ggYnVpbGRzIHRoZSBsaW5hcm8NCj4+IHRvb2xjaGFpbiB3aXRoIHRodW1iMiBzdXBw
+b3J0Lg0KPj4NCj4+IFNvIHRoZSBmYWlsaW5nIGJ1aWxkcyBhcmUgZmFpbGluZyB3aXRoIGFuIHVu
+dXN1YWwgb2UgdG9vbGNoYWluDQo+PmNvbmZpZ3VyYXRpb24NCj4+IGFuZCB0aGUgcm9vdCBjYXVz
+ZSBpcyB0aGUgdG9vbGNoYWluLg0KPj4gSSdtIHVuc3VyZSBpZiByaXNraW5nIHRoZSBmYWlsaW5n
+IGJ1aWxkcyB3aXRoIGR5bmFtaWMgbGlua2luZyBwb3BpbmcgdXANCj4+IGFnYWluIGp1c3RpZmll
+cyBmaXhpbmcgdGhlIGJ1aWxkIGZhaWx1cmVzIGluIGFuIHVudXN1YWwgY29uZmlndXJhdGlvbi4N
+Cj4+DQo+PiBJZiB5b3UgZG9uJ3QgdGhpbmsgc28gSSBjYW4gcHJlcGFyZSBhIHBhdGNoLCBubyBw
+cm9ibGVtLg0KPg0KPkl0IGlzIGZhaWxpbmcgb24gbWUgYXMgd2VsbC4NCj4NCj5BbGV4IGhhcyBm
+b3VuZCB0aGF0IFFFTVUgLUwgY29tbWFuZCBpcyBjYXVzaW5nIGlzc3VlIHNvIGlmIHlvdXIgcGF0
+Y2gNCj5maXhlcyBpdCwgaXQgY291bGQgYmUgYW4gb3B0aW9uIGZvciBzdXJlLg0KPg0KPkkgdGhp
+bmsgdGhlcmUncyBubyBnb29kIGFuc3dlciBhcyBhIHBhdGNoIGZvciB0ZXN0LiA6LSkgSSB0aGlu
+ayB3ZSBhbGwNCj5jYW4gdHJ5IGl0IGFuZCBzZWUgaWYgaXQgaW1wcm92ZXMgaXQgYWZ0ZXIgYWxs
+Lg0KPg0KPi0tIA0KPk90YXZpbyBTYWx2YWRvciAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+Ty5TLiBTeXN0ZW1zDQo+aHR0cDovL3d3dy5vc3N5c3RlbXMuY29tLmJyICAgICAgICBodHRwOi8v
+Y29kZS5vc3N5c3RlbXMuY29tLmJyDQo+TW9iaWxlOiArNTUgKDUzKSA5OTgxLTc4NTQgICAgICAg
+ICAgICBNb2JpbGU6ICsxICgzNDcpIDkwMy05NzUwDQo+LS0gDQo+X19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj5PcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGlu
+ZyBsaXN0DQo+T3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj5odHRw
+Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1k
+ZXZlbA0KDQo=
 
