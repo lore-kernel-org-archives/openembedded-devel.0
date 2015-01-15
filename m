@@ -1,22 +1,32 @@
-Return-Path: <Maxin.John@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id DD93972858
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D09F722C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 16:56:29 +0000 (UTC)
-Received: from sestofb10.enea.se (172.21.3.145) by smtp.enea.com
-	(172.21.1.209) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 15 Jan 2015 17:56:29 +0100
-Received: by sestofb10.enea.se (Postfix, from userid 4454)	id 3DAFC2800CB;
-	Thu, 15 Jan 2015 17:56:29 +0100 (CET)
-From: "Maxin B. John" <maxin.john@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 15 Jan 2015 17:56:19 +0100
-Message-ID: <1421340979-18937-1-git-send-email-maxin.john@enea.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Received-SPF: None (SESTOEX03.enea.se: maxin.john@enea.com does not
-	designate permitted sender hosts)
-Subject: [PATCH] fuse-exfat: upgrade to 1.1.0
+	Thu, 15 Jan 2015 20:47:48 +0000 (UTC)
+Received: by mail-wg0-f53.google.com with SMTP id x13so17156652wgg.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Jan 2015 12:47:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=pCGl1kLtvz1xaIxxDur9WmODoArvoKG/ThdmqgFof10=;
+	b=iGCTUPIOz+flqGIs5djUMn7LC1/ddntcdPCPKAlCYffJkQlAzHlCtp1mH9wg94t+mV
+	SPT5R+uGwciMJnNfBG5DBfqKqFW/kwwIiZcAXVl1OYiVTkcYfgCW+JHVtIgvreV0VdmW
+	/JtoaXbg/7ZrkqeABce8KH5pkH0IyRtCcwESn42ueGznEuBEN/LtZA6sBYEVa4M6U/DL
+	53Ap9RAMIxyAQDVLj6duSQ28bTEBAYsNfA65XjsB2DFCwPcuaRRJYiREX7icraeh5QZh
+	o8ptKz/Lt6Cdoa5vCXZsp+b0ItSe8E8a+3e3dLII7qtLsKv0Ave725Zi01m0gQGux1yr
+	HrNA==
+X-Received: by 10.180.73.170 with SMTP id m10mr22984739wiv.72.1421354868238;
+	Thu, 15 Jan 2015 12:47:48 -0800 (PST)
+Received: from linuxdev.toradex.int ([46.140.72.82])
+	by mx.google.com with ESMTPSA id gz7sm392409wib.22.2015.01.15.12.47.46
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 15 Jan 2015 12:47:47 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Jan 2015 21:46:59 +0100
+Message-Id: <1421354822-21485-1-git-send-email-max.oss.09@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-java][RFC 0/3] address failing qemu-arm runs in openjdk-7-jre build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,58 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 16:56:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 15 Jan 2015 20:47:53 -0000
 
-Bump to 1.1.0
-1. Updated LICENSE from GPLv3 to GPLv2 or later
-2. Misc. spelling fix
+With at least one cross compiler configuration we get a segmentation fault from
+the qemu-arm binary during do_compile of openjdk-7-jre.
+See the following thread:
+http://lists.openembedded.org/pipermail/openembedded-devel/2015-January/099795.html
 
-Signed-off-by: Maxin B. John <maxin.john@enea.com>
----
- .../fuse-exfat/{fuse-exfat_1.0.1.bb => fuse-exfat_1.1.0.bb}  | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
- rename meta-filesystems/recipes-filesystems/fuse-exfat/{fuse-exfat_1.0.1.bb => fuse-exfat_1.1.0.bb} (60%)
+1/3 addresses the issue, i.e. compiles all binaries for qemu dynamically linked.
+2/3 is a simple receipe which also shows the segmentation fault in a simple
+    hello world application.
+3/3 reenables xawt, so we can run the java demos to test if java works on a
+    target since probably all demos use the XToolkit, e.g.
+    java -jar /usr/lib/jvm/java-7-openjdk/demo/jfc/Font2DTest/Font2DTest.jar
 
-diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.0.1.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.1.0.bb
-similarity index 60%
-rename from meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.0.1.bb
-rename to meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.1.0.bb
-index f984c4b..6a83ab2 100644
---- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.0.1.bb
-+++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.1.0.bb
-@@ -1,12 +1,12 @@
- SUMMARY = "read and write exFAT driver for FUSE"
- DESCRIPTION = "fuse-exfat is a read and write driver implementing the \
- extended file allocation table as a filesystem in userspace. A mounthelper \
--is provided unter the name mount.exfat-fuse. \
-+is provided under the name mount.exfat-fuse. \
- "
- HOMEPAGE = "http://code.google.com/p/exfat/"
- SECTION = "universe/otherosfs"
--LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "${DEBIAN_MIRROR}/main/f/fuse-exfat/fuse-exfat_${PV}.orig.tar.gz \
- "
- DEPENDS = "fuse virtual/libc"
-@@ -14,11 +14,11 @@ RRECOMMENDS_${PN} = "util-linux-mount"
- 
- inherit scons
- 
--SRC_URI[md5sum] = "7988a5111841593231f20af22153362d"
--SRC_URI[sha256sum] = "12ac1ba1b7d4343bef64e7898176705a41cfe3b5a7a179e28549d242e2854758"
-+SRC_URI[md5sum] = "b2a23c032661cb1c1da4514e7af33916"
-+SRC_URI[sha256sum] = "198c520e417e955dc5c08687c278e63eefa56719da4452aa4a605be0327f953e"
- 
- EXTRA_OESCONS = " \
--    DESTDIR=${D}/${base_sbindir} \
-+    CCFLAGS='${CCFLAGS} -std=c99' DESTDIR=${D}/${base_sbindir} \
- "
- 
- do_install_prepend() {
+Max Krummenacher (3):
+  binaries run by qemu: remove linking with -static
+  gcc-static-test: initial commit
+  openjdk-7: enable xawt
+
+ .../openjdk-6-6b24/icedtea-zero-hotspotfix.patch   |  2 +-
+ .../openjdk-6-6b27/icedtea-crosscompile-fix.patch  |  2 +-
+ .../openjdk-6-6b32/icedtea-crosscompile-fix.patch  |  2 +-
+ .../openjdk-6-6b32/icedtea-zero-hotspotfix.patch   |  2 +-
+ .../openjdk-6/fix_hotspot_crosscompile.patch       |  2 +-
+ .../icedtea-jdk-nio-use-host-cc.patch              | 22 ------------
+ .../openjdk-7-25b30/icedtea-zero-hotspotfix.patch  |  4 +--
+ recipes-test/gcc-static-test/gcc-static-test.bb    | 40 ++++++++++++++++++++++
+ .../gcc-static-test/gcc-static-test/hello.c        |  6 ++++
+ 9 files changed, 53 insertions(+), 29 deletions(-)
+ create mode 100644 recipes-test/gcc-static-test/gcc-static-test.bb
+ create mode 100644 recipes-test/gcc-static-test/gcc-static-test/hello.c
+
 -- 
-1.9.1
+1.9.3
 
 
