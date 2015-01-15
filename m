@@ -1,35 +1,35 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
-	[74.125.82.175])
-	by mail.openembedded.org (Postfix) with ESMTP id B4E4F72BEC
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id A245472BE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 20:47:53 +0000 (UTC)
-Received: by mail-we0-f175.google.com with SMTP id k11so16918070wes.6
+	Thu, 15 Jan 2015 20:47:55 +0000 (UTC)
+Received: by mail-wi0-f175.google.com with SMTP id l15so37795188wiw.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 12:47:53 -0800 (PST)
+	Thu, 15 Jan 2015 12:47:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=wXGdvck6oAD1ikqpXbP5egMUgy3NzxBUTquUzzOb3zw=;
-	b=zrv1uYh31Nw+AtTLRytQsN9FNSZNnLRlfFFViKtCT1sSN5sfJrHeDLD07s9ihjXx/5
-	z2BKNRq+Q2YZ/4RO6fpsH2zQvJpKujFIDykWIoRR/w/1zt8lZaAi0vdr6+KMqVj8E4vT
-	s1E9AeAg04lSC3sPbaLrEZdOs4pgS+7DtSszA/c2VyHn3A1SRt4XRnvIReRMo+Poo6f/
-	2i4Jd4R8yMlw3tycEDzjfxvHtf3LskuKLVItPb2bhVwAyEBrzBNSPmyCY7Wm0sc0tYSD
-	Tcocm7fdDQjN7HxbTldxB1qDMBa5M/qk6QQNmzEoemhRXTB94aszXWmqEq2WJ1m1/rkB
-	LFoA==
-X-Received: by 10.194.94.164 with SMTP id dd4mr22638716wjb.56.1421354873597;
-	Thu, 15 Jan 2015 12:47:53 -0800 (PST)
+	bh=IIB1egeG+9vyi9Ksy8DWQErgpmtKfWxjo1VwqcnRgAo=;
+	b=OoVcJhgXqlKps77PVzFEHuyjkKNlznlY7LkC3aEdQLBQ/74R1uS3tShPxwuzlOf7cv
+	XbTy8PIgqEtV2mmybBIVdPQ9ADqSExhsR1vhQPBNZDN5aV6IwBvPgL8h4oJs94RN6JUC
+	2wneDHqEB5/TB4Og0odzbU/MgUbUC/IVAoT9dupSC5+kD6UYUQr4aqAxBUxuIF0MXmWX
+	KGslHn9+Ny/ZJDfaU7P1V/swN1FHW5Uz+KGJGcT6OJlc0VDYMwje5voxsKJDRUhNOBPV
+	pNTRGezeLgbZK3lBhdhw7nJoxBWdN6g05g8VicoJFnoKg2FoPkZOpYjVR6t3yuioPPMQ
+	ajIg==
+X-Received: by 10.194.203.234 with SMTP id kt10mr22434612wjc.88.1421354875435; 
+	Thu, 15 Jan 2015 12:47:55 -0800 (PST)
 Received: from linuxdev.toradex.int ([46.140.72.82])
-	by mx.google.com with ESMTPSA id gz7sm392409wib.22.2015.01.15.12.47.52
+	by mx.google.com with ESMTPSA id gz7sm392409wib.22.2015.01.15.12.47.54
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Jan 2015 12:47:53 -0800 (PST)
+	Thu, 15 Jan 2015 12:47:54 -0800 (PST)
 From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Jan 2015 21:47:00 +0100
-Message-Id: <1421354822-21485-2-git-send-email-max.oss.09@gmail.com>
+Date: Thu, 15 Jan 2015 21:47:01 +0100
+Message-Id: <1421354822-21485-3-git-send-email-max.oss.09@gmail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1421354822-21485-1-git-send-email-max.oss.09@gmail.com>
 References: <1421354822-21485-1-git-send-email-max.oss.09@gmail.com>
-Subject: [meta-java][RFC 1/3] binaries run by qemu: remove linking with -static
+Subject: [meta-java][RFC 2/3] gcc-static-test: initial commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,129 +43,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 20:47:54 -0000
-
-For the machine colibri-t20 a build of openjdk-7 fails with segmentation
-faults during the qemu-arm runs.
-e.g.
-Segmentation fault (core dumped) | qemu-arm -cpu cortex-a8 -s 2097152
-  -L .../sysroots/colibri-t20 \
-  -E LD_LIBRARY_PATH=.../sysroots/colibri-t20/lib ./mkbc - bytecodes_arm.s
-
-The machine uses the following tunes and (through angstrom) a Linaro toolchain:
-DEFAULTTUNE = "armv7athf"
-TUNE_CCARGS += "-mfpu=vfpv3-d16"
-
-Resulting in:
-TUNE_FEATURES     = "armv7a vfp thumb callconvention-hard"
-TARGET_FPU        = "vfp"
-
-I found that qemu-arm can not execute any binary which is compiled with the
-compiler for Colibri-T20 and is linked with the -static flag.
-Even a simple hello world program does not work. When executing that
-hello world on the real hardware it also generates a segmentation fault.
-
-Removing the -static flag fixed this.
-
-Note that other machines, colibri-t30 or i.mx6 based ones with neon but
-otherwise identical setup do not suffer from the issue.
-DEFAULTTUNE = "armv7athf-neon"
+X-List-Received-Date: Thu, 15 Jan 2015 20:47:57 -0000
 
 Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
 ---
- recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch  | 2 +-
- recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch | 2 +-
- recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch | 2 +-
- recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch  | 2 +-
- recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch      | 2 +-
- recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch | 4 ++--
- 6 files changed, 7 insertions(+), 7 deletions(-)
+ recipes-test/gcc-static-test/gcc-static-test.bb    | 40 ++++++++++++++++++++++
+ .../gcc-static-test/gcc-static-test/hello.c        |  6 ++++
+ 2 files changed, 46 insertions(+)
+ create mode 100644 recipes-test/gcc-static-test/gcc-static-test.bb
+ create mode 100644 recipes-test/gcc-static-test/gcc-static-test/hello.c
 
-diff --git a/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch b/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch
-index ec10e69..a67106b 100644
---- a/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch
-+++ b/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch
-@@ -35,7 +35,7 @@ Index: openjdk/hotspot/make/linux/makefiles/zeroshark.make
-  	@echo Compiling offset generator
-  	$(QUIETLY) $(REMOVE_TARGET)
- -	$(CC_COMPILE) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
--+	$(CC_COMPILE) -static -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
-++	$(CC_COMPILE) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
-  
-  endif
-  
-diff --git a/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch b/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch
-index 9a60bd6..2f952d9 100644
---- a/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch
-+++ b/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch
-@@ -463,7 +463,7 @@ index 1fa311d..f3d06ad 100644
-  $(SIZERS): $(SIZERS_C) 
-  	$(prep-target)
- -	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
--+	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -static -o $@ $(SIZER)$(suffix $@).c
-++	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
-  
-  $(WRAPPER_GENERATOR_CLASS): $(WRAPPER_GENERATOR_JAVA)
-  	$(prep-target)
-diff --git a/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch b/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch
-index 3b34160..ddc9bc2 100644
---- a/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch
-+++ b/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch
-@@ -247,7 +247,7 @@ index 1fa311d..f3d06ad 100644
-  $(SIZERS): $(SIZERS_C) 
-  	$(prep-target)
- -	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
--+	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -static -o $@ $(SIZER)$(suffix $@).c
-++	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
-  
-  $(WRAPPER_GENERATOR_CLASS): $(WRAPPER_GENERATOR_JAVA)
-  	$(prep-target)
-diff --git a/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch b/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch
-index 91ace0e..0bca9b1 100644
---- a/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch
-+++ b/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch
-@@ -35,7 +35,7 @@ index c2a1484..f460d85 100644
-  	@echo Compiling offset generator
-  	$(QUIETLY) $(REMOVE_TARGET)
- -	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
--+	$(CC_COMPILE) $(CFLAGS) -static -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
-++	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
-  
-  endif
-  
-diff --git a/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch b/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch
-index 38fb191..4ab9c7f 100644
---- a/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch
-+++ b/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch
-@@ -88,7 +88,7 @@ Index: icedtea6-1.8/ports/hotspot/make/linux/makefiles/zeroshark.make
-  	@echo Compiling offset generator
-  	$(QUIETLY) $(REMOVE_TARGET)
- -	$(CC_COMPILE) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
--+	$(CC_COMPILE) -static -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
-++	$(CC_COMPILE) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
-  
-  endif
-  
-diff --git a/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch b/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch
-index 83dba2b..7275d17 100644
---- a/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch
-+++ b/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch
-@@ -25,13 +25,13 @@ index c2a1484..156bdd0 100644
-  mkbc:	$(GAMMADIR)/tools/mkbc.c
-  	@echo Compiling mkbc tool
- -	$(CC_COMPILE) -o $@ $< $(COMPILE_DONE)
--+	$(CC_COMPILE) -static -o $@ $< $(COMPILE_DONE)
-++	$(CC_COMPILE) -o $@ $< $(COMPILE_DONE)
-  
-  mkoffsets:	asm_helper.cpp
-  	@echo Compiling offset generator
-  	$(QUIETLY) $(REMOVE_TARGET)
- -	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
--+	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -static -o $@ $< $(COMPILE_DONE)
-++	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
-  
-  endif
-  
+diff --git a/recipes-test/gcc-static-test/gcc-static-test.bb b/recipes-test/gcc-static-test/gcc-static-test.bb
+new file mode 100644
+index 0000000..c0fd852
+--- /dev/null
++++ b/recipes-test/gcc-static-test/gcc-static-test.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "Test if cross-gcc can compile a linked binary which runs on qemu"
++DESCRIPTION = \
++"Have cross-gcc compile a simple helloworld style program linked statically \
++and dynamically and then test if qemu is able to run it without segfaulting. \
++Should help in hunting the following bug in building java: \
++http://lists.openembedded.org/pipermail/openembedded-devel/2015-January/099795.html"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++
++DEPENDS = ""
++
++SRC_URI = "file://hello.c"
++
++QEMU = "${@qemu_target_binary(d)} ${QEMU_OPTIONS} -s 2097152 -L ${STAGING_DIR_TARGET} -E LD_LIBRARY_PATH=${STAGING_BASELIBDIR}"
++
++trapsegfault() {
++    echo "We have a segmenation fault!"
++
++    # Reset handler
++    trap - 11
++}
++
++do_compile() {
++    #disable the trap built into run.do_compile by default
++    set +e
++    trap '' 0
++    trap 'trapsegfault' 11
++    ${CC} -static hello.c -o hello
++    ${QEMU} hello ; FAILED_STATIC=$?
++    ${CC} hello.c -o hello
++    ${QEMU} hello ; FAILED_DYNAMIC=$?
++    echo FAILED_STATIC $FAILED_STATIC
++    echo FAILED_DYNAMIC $FAILED_DYNAMIC
++    ( [ $FAILED_STATIC -eq 0 ] && [ $FAILED_DYNAMIC -eq 0 ] ) || exit -1
++}
++
++S = "${WORKDIR}"
++
++inherit qemu
+diff --git a/recipes-test/gcc-static-test/gcc-static-test/hello.c b/recipes-test/gcc-static-test/gcc-static-test/hello.c
+new file mode 100644
+index 0000000..5bd0da7
+--- /dev/null
++++ b/recipes-test/gcc-static-test/gcc-static-test/hello.c
+@@ -0,0 +1,6 @@
++#include <stdio.h>
++int main (void) {
++  printf("Hi\n");
++  return 0;
++}
++
 -- 
 1.9.3
 
