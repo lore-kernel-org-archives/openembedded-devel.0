@@ -1,40 +1,35 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
-	[209.85.216.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BDB97210E
+Return-Path: <dbaryshkov@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 060B671144
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 09:57:44 +0000 (UTC)
-Received: by mail-qa0-f48.google.com with SMTP id v8so10329339qal.7
+	Thu, 15 Jan 2015 10:13:56 +0000 (UTC)
+Received: by mail-ig0-f176.google.com with SMTP id b16so11608986igk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 01:57:45 -0800 (PST)
+	Thu, 15 Jan 2015 02:13:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=LomStBrMLQmRhFQWVplukEGvLlhKOYi8TXXam60g3Xg=;
-	b=cGCVc1w35i9icaBiueIoZNCi4+RvvwzTR+nnd+inlG8NneWPJ/tKx3JqdQTRqPQ7lE
-	xpzcqDbtUSQ6XXokJv14Ewz8Ek6Q/OFq0HU/IivG7lXxvARCE4JL/MnIvYwh4BAf2/sq
-	wxZidh7T8s3hbWq9en0uLYSEPl6MIj6dG9gC8EfiFGb0GJApoGkl+7ZNYVnCativwkCw
-	GSCcPBKR9stERTpQWa/8JhIEOaSoM6bWMnH/TM3Igjc8njuhtfOAvLq/wDdcV2jQhDsy
-	7g72R7wMI/PHagD+LE3Ic//3CRsdZRW2yghRmBxAuyGERqq1blLNAg7nd7EUPVnXHFUL
-	7KOw==
-MIME-Version: 1.0
-X-Received: by 10.140.51.77 with SMTP id t71mr3441912qga.88.1421315865389;
-	Thu, 15 Jan 2015 01:57:45 -0800 (PST)
-Received: by 10.140.30.229 with HTTP; Thu, 15 Jan 2015 01:57:45 -0800 (PST)
-In-Reply-To: <D0DC62E4.8BDA%csmiley@icontrol.com>
-References: <54B220B0.8070609@gmail.com> <54B222F2.4070802@gmail.com>
-	<loom.20150113T130012-516@post.gmane.org>
-	<20150113132422.GJ18240@mail.itconsulting-heinold.de>
-	<CAP9ODKocqaD+cXFba28jxXyd75aRmWnpwNY3NNx1wVY4Q3wVuA@mail.gmail.com>
-	<loom.20150115T002923-253@post.gmane.org>
-	<CAP9ODKpZzfTV41SDZjacbMi9=_BKkA7AoTgU+az4+7oUDreB3Q@mail.gmail.com>
-	<D0DC62E4.8BDA%csmiley@icontrol.com>
-Date: Thu, 15 Jan 2015 10:57:45 +0100
-Message-ID: <CAEHkU3WTndrNzyyvGDB20TcX4rRD4dUfvdOHN-LhhzbnbA6SGg@mail.gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: Colin Smiley <csmiley@icontrol.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Query on meta-java layer openjdk-7-jre build
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=FhiwBAQM42MuL+PzHLMqvXFy8V8yFBkDey59rfmbvN8=;
+	b=vxpoNHwzAkg1hk054vPebdcpBWuN3N4zD+WYm/hb+8OEKNLoQGNpRwQFopDEV6eOY/
+	knLPDEeY2AEXf2u7SUu92/Tu+uFx2ztieaksWMF/3eJgTIkpHyK7ALeB+2icPKOziAoc
+	aJNnz7PH5cjg2wWhAtJeLPr0nk24KPAZtHO7f5rNk3HY8YGffDjN7t3k+xd9IGWNh16m
+	7cz0OymZOTP1Dq4D8vRaNQijvXECVtfZSxwfeJ/iGx/KTVnLiATk32h1RTVPQthO3sak
+	hvVbvZUxAY8QRfkSuAgbNodjJtKOVyBGjw40gyxui8etN8bY03/+OIpfzoB1MNW0MOyA
+	JnTA==
+X-Received: by 10.107.135.34 with SMTP id j34mr9113774iod.84.1421316836851;
+	Thu, 15 Jan 2015 02:13:56 -0800 (PST)
+Received: from fangorn.rup.mentorg.com (nat-min.mentorg.com. [139.181.32.34])
+	by mx.google.com with ESMTPSA id
+	c12sm3109008ign.13.2015.01.15.02.13.55
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 15 Jan 2015 02:13:56 -0800 (PST)
+Sender: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+From: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Jan 2015 13:13:46 +0300
+Message-Id: <1421316826-10404-1-git-send-email-dmitry_eremin@mentor.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-networking][PATCH] vlan: don't try to include files from ${HOME}/linux/include
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,50 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 09:57:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Jan 2015 10:13:59 -0000
 
-Hi Colin
+vlan sources explicitly adds ~/linux/include to compiler include path.
+If that directory does exist, this leads to various issues. Drop this
+explicit exclude path.
 
-> Is the problem I'm seeing the same as what you're describing below?
-Probably not.
-The GCC cross compiler in my setup produces executables which
-Segmentation Fault immediately when linked with --static.
-So when qemu-arm is run you get an immediate seg fault.
+Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+---
+ .../vlan/vlan-1.9/no-HOME-includes.patch           | 22 ++++++++++++++++++++++
+ .../recipes-connectivity/vlan/vlan_1.9.bb          |  3 ++-
+ 2 files changed, 24 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-connectivity/vlan/vlan-1.9/no-HOME-includes.patch
 
-You could test your gcc / qemu run as follows:
-Change the paths/crosscompiler name to your setup, Compile a
-helloworld program and run it under qemu.
-If the binary compiled with -static fails then you might have the same
-or related issue, if not it probably is unrelated.
+diff --git a/meta-networking/recipes-connectivity/vlan/vlan-1.9/no-HOME-includes.patch b/meta-networking/recipes-connectivity/vlan/vlan-1.9/no-HOME-includes.patch
+new file mode 100644
+index 0000000..b7ab7d9
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/vlan/vlan-1.9/no-HOME-includes.patch
+@@ -0,0 +1,22 @@
++From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
++Subject: vlan: do not include ${HOME}/linux/include dir
++
++~/linux/include dir may exist and so will be added to include path
++in front of sanitized kernel headers in OE chroot. Drop this include
++option.
++
++Upstream-Status: not-applicable
++
++Index: vlan/MakeInclude
++===================================================================
++--- vlan.orig/MakeInclude
+++++ vlan/MakeInclude
++@@ -16,7 +16,7 @@ ifeq "${PLATFORM}" ""
++ endif
++ 
++ ## You may need to change this linux/include part.
++-CCFLAGS = -g -D_GNU_SOURCE -Wall -I${HOME}/linux/include
+++CCFLAGS = -g -D_GNU_SOURCE -Wall
++ LDLIBS = # -lm #-lnsl # -lsocket
++ 
++ ARM_TC_BIN = ${HOME}/Intrinsyc/bin
+diff --git a/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb b/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb
+index 2c4f157..d980a47 100644
+--- a/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb
++++ b/meta-networking/recipes-connectivity/vlan/vlan_1.9.bb
+@@ -2,7 +2,8 @@ SUMMARY = "VLAN provides vconfig utility"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://vconfig.c;md5=293ef69c4e88434d37a5ee577a5288cb"
+ 
+-SRC_URI = "http://${BPN}.sourcearchive.com/downloads/${PV}-3ubuntu9/${BPN}_${PV}.orig.tar.gz"
++SRC_URI = "http://${BPN}.sourcearchive.com/downloads/${PV}-3ubuntu9/${BPN}_${PV}.orig.tar.gz \
++           file://no-HOME-includes.patch"
+ 
+ SRC_URI[md5sum] = "5f0c6060b33956fb16e11a15467dd394"
+ SRC_URI[sha256sum] = "3b8f0a1bf0d3642764e5f646e1f3bbc8b1eeec474a77392d9aeb4868842b4cca"
+-- 
+2.1.4
 
---- hello.c ---
-#include <stdio.h>
-int main (void) {
-        printf("Hi\n");
-        return 0;
-}
----------------
-
-$ export SYSROOTS=/build/krm/oe-core_V2.3/build/out-eglibc/sysroots/
-$ export PATH=$PATH:${SYSROOTS}/x86_64-linux/usr/bin/
-$ export PATH=$PATH:${SYSROOTS}/x86_64-linux/usr/bin/armv7at2hf-vfp-angstrom-linux-gnueabi/
-$ STAGING_DIR_TARGET=${SYSROOTS}/colibri-t20/
-
-$ arm-angstrom-linux-gnueabi-gcc -static hello.c -o hello
-$ qemu-arm -L ${STAGING_DIR_TARGET} -E
-LD_LIBRARY_PATH=${STAGING_DIR_TARGET}/lib hello
-qemu: uncaught target signal 11 (Segmentation fault) - core dumped
-Segmentation fault (core dumped)
-
-[krm@linuxdev ~]$ qemu-arm -L ${STAGING_DIR_TARGET} -E
-LD_LIBRARY_PATH=${STAGING_DIR_TARGET}/lib hello
-
-> Also, is there an update to meta-java to fix the CurrencyData problem?
-For me this is fixed with:
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=a7461bf7393c516c63c49a4b099d659ee467e93e
-http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=c600dd3ab5a6308c513f5fbf7243de1799d9ce62
-
-Regards
-Max
 
