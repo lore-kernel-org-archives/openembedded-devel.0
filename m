@@ -1,27 +1,27 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 4337271F23
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
+	[209.85.216.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BDB97210E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 09:22:16 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B87DBD40346;
-	Thu, 15 Jan 2015 10:22:12 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id F3278D4025E;
-	Thu, 15 Jan 2015 10:22:11 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.3.2
-Received: from mail.itconsulting-heinold.de
-	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
-	by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Thu, 15 Jan 2015 10:22:11 +0100 (CET)
-Date: Thu, 15 Jan 2015 10:22:06 +0100
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150115092159.GC10646@mail.itconsulting-heinold.de>
+	Thu, 15 Jan 2015 09:57:44 +0000 (UTC)
+Received: by mail-qa0-f48.google.com with SMTP id v8so10329339qal.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Jan 2015 01:57:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=LomStBrMLQmRhFQWVplukEGvLlhKOYi8TXXam60g3Xg=;
+	b=cGCVc1w35i9icaBiueIoZNCi4+RvvwzTR+nnd+inlG8NneWPJ/tKx3JqdQTRqPQ7lE
+	xpzcqDbtUSQ6XXokJv14Ewz8Ek6Q/OFq0HU/IivG7lXxvARCE4JL/MnIvYwh4BAf2/sq
+	wxZidh7T8s3hbWq9en0uLYSEPl6MIj6dG9gC8EfiFGb0GJApoGkl+7ZNYVnCativwkCw
+	GSCcPBKR9stERTpQWa/8JhIEOaSoM6bWMnH/TM3Igjc8njuhtfOAvLq/wDdcV2jQhDsy
+	7g72R7wMI/PHagD+LE3Ic//3CRsdZRW2yghRmBxAuyGERqq1blLNAg7nd7EUPVnXHFUL
+	7KOw==
+MIME-Version: 1.0
+X-Received: by 10.140.51.77 with SMTP id t71mr3441912qga.88.1421315865389;
+	Thu, 15 Jan 2015 01:57:45 -0800 (PST)
+Received: by 10.140.30.229 with HTTP; Thu, 15 Jan 2015 01:57:45 -0800 (PST)
+In-Reply-To: <D0DC62E4.8BDA%csmiley@icontrol.com>
 References: <54B220B0.8070609@gmail.com> <54B222F2.4070802@gmail.com>
 	<loom.20150113T130012-516@post.gmane.org>
 	<20150113132422.GJ18240@mail.itconsulting-heinold.de>
@@ -29,12 +29,11 @@ References: <54B220B0.8070609@gmail.com> <54B222F2.4070802@gmail.com>
 	<loom.20150115T002923-253@post.gmane.org>
 	<CAP9ODKpZzfTV41SDZjacbMi9=_BKkA7AoTgU+az4+7oUDreB3Q@mail.gmail.com>
 	<D0DC62E4.8BDA%csmiley@icontrol.com>
-MIME-Version: 1.0
-In-Reply-To: <D0DC62E4.8BDA%csmiley@icontrol.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Henning Heinold <heinold@inf.fu-berlin.de>,
-	Alex de Cabo <alejandro.de-cabo-garcia@congatec.com>
+Date: Thu, 15 Jan 2015 10:57:45 +0100
+Message-ID: <CAEHkU3WTndrNzyyvGDB20TcX4rRD4dUfvdOHN-LhhzbnbA6SGg@mail.gmail.com>
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: Colin Smiley <csmiley@icontrol.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: Query on meta-java layer openjdk-7-jre build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -49,44 +48,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jan 2015 09:22:28 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 15 Jan 2015 09:57:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Jan 15, 2015 at 12:23:49AM +0000, Colin Smiley wrote:
-> 
-> Earlier this week, I’d sent an email to the list about my problems getting
-> openjdk-6 to build.
-> 
-> The short version of my build process is:
-> 
-> 1) install poky on daisy branch
-> 2) install open embedded on daisy branch
-> 3) install meta-java on trunk
-> 4) attempt to bitbake java-test-image (removing openjdk-7 line).
-> 5) Wait for java CurrencyData failure, fix it manually.
-> 6) re-reun bitbake java-test-image
-> 
-> At this point, my build fails running qemu-i36. The image will use up all
-> available memory on the system, and then get killed by the linux oom
-> killer. I have tried this on a variety of OS, VM, physical machine, and
-> memory combinations. The result is always the same.
-> 
-> Is the problem I’m seeing the same as what you’re describing below?
+Hi Colin
 
-Hi,
+> Is the problem I'm seeing the same as what you're describing below?
+Probably not.
+The GCC cross compiler in my setup produces executables which
+Segmentation Fault immediately when linked with --static.
+So when qemu-arm is run you get an immediate seg fault.
 
-as I worte in another email try to revert to an older qemu version locally.
+You could test your gcc / qemu run as follows:
+Change the paths/crosscompiler name to your setup, Compile a
+helloworld program and run it under qemu.
+If the binary compiled with -static fails then you might have the same
+or related issue, if not it probably is unrelated.
 
-> 
+--- hello.c ---
+#include <stdio.h>
+int main (void) {
+        printf("Hi\n");
+        return 0;
+}
+---------------
+
+$ export SYSROOTS=/build/krm/oe-core_V2.3/build/out-eglibc/sysroots/
+$ export PATH=$PATH:${SYSROOTS}/x86_64-linux/usr/bin/
+$ export PATH=$PATH:${SYSROOTS}/x86_64-linux/usr/bin/armv7at2hf-vfp-angstrom-linux-gnueabi/
+$ STAGING_DIR_TARGET=${SYSROOTS}/colibri-t20/
+
+$ arm-angstrom-linux-gnueabi-gcc -static hello.c -o hello
+$ qemu-arm -L ${STAGING_DIR_TARGET} -E
+LD_LIBRARY_PATH=${STAGING_DIR_TARGET}/lib hello
+qemu: uncaught target signal 11 (Segmentation fault) - core dumped
+Segmentation fault (core dumped)
+
+[krm@linuxdev ~]$ qemu-arm -L ${STAGING_DIR_TARGET} -E
+LD_LIBRARY_PATH=${STAGING_DIR_TARGET}/lib hello
+
 > Also, is there an update to meta-java to fix the CurrencyData problem?
-> 
+For me this is fixed with:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=a7461bf7393c516c63c49a4b099d659ee467e93e
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=c600dd3ab5a6308c513f5fbf7243de1799d9ce62
 
-Unfornatly no,
-
-someone has to update the icedtea-native recipes to a newer version. Which
-might be some work of the patches we apply.
-
-Bye Henning
+Regards
+Max
 
