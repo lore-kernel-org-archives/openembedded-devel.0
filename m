@@ -1,26 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Jianchuan.Wang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C8E672C04
+	by mail.openembedded.org (Postfix) with ESMTP id AD3EA7226D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jan 2015 06:14:11 +0000 (UTC)
+	Fri, 16 Jan 2015 06:34:06 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0G6ECWt016887
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0G6Y6v0018274
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jan 2015 22:14:12 -0800 (PST)
-Received: from pek-kkang-d2.wrs.com (128.224.163.146) by
+	Thu, 15 Jan 2015 22:34:07 -0800 (PST)
+Received: from PEK-JWANG7-D1.wrs.com (128.224.162.153) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.174.1; Thu, 15 Jan 2015 22:14:11 -0800
-From: <jackie.huang@windriver.com>
+	14.3.174.1; Thu, 15 Jan 2015 22:34:06 -0800
+From: <jianchuan.wang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Jan 2015 14:14:03 +0800
-Message-ID: <f309958a1014cfcdbf1444358c9a279882f017a1.1421388212.git.jackie.huang@windriver.com>
+Date: Fri, 16 Jan 2015 14:33:38 +0800
+Message-ID: <1421390018-22395-1-git-send-email-jianchuan.wang@windriver.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1421388212.git.jackie.huang@windriver.com>
-References: <cover.1421388212.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/7] net-snmp: init script fixes
+Subject: [meta-networking][PATCH v2] ipvsadm: Add version 1.26 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,143 +32,229 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jan 2015 06:14:17 -0000
+X-List-Received-Date: Fri, 16 Jan 2015 06:34:15 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Jianchuan Wang <jianchuan.wang@windriver.com>
 
-Changes:
-1. Add source function and status command.
-2. make it possible to change the start arguments with a default file
-   in the same way as debian.
-3. change the default INITSCRIPT_PARAMS
-4. Add PIDFILE and fix restart
-5. remove the postrm sicne we use the one from update-rc.d
+* add ipvs administration tool
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
 ---
- .../recipes-protocols/net-snmp/files/init          | 51 +++++++++++-----------
- .../recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb | 11 +----
- 2 files changed, 27 insertions(+), 35 deletions(-)
+ ...001-Modify-the-Makefile-for-cross-compile.patch | 91 ++++++++++++++++++++++
+ .../0002-Replace-nl_handle-to-nl_sock.patch        | 63 +++++++++++++++
+ .../recipes-support/ipvsadm/ipvsadm_1.26.bb        | 34 ++++++++
+ 3 files changed, 188 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/files/init b/meta-networking/recipes-protocols/net-snmp/files/init
-index 6b02570..2b8fe18 100755
---- a/meta-networking/recipes-protocols/net-snmp/files/init
-+++ b/meta-networking/recipes-protocols/net-snmp/files/init
-@@ -1,6 +1,8 @@
- #! /bin/sh
- # /etc/init.d/snmpd: start snmp daemon.
- 
-+. /etc/init.d/functions
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch b/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
+new file mode 100644
+index 0000000..27358b9
+--- /dev/null
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
+@@ -0,0 +1,91 @@
++From c2b9c96109c074851a8fd5ee249a4e68697282ce Mon Sep 17 00:00:00 2001
++From: Jianchuan Wang <jianchuan.wang@windriver.com>
++Date: Mon, 12 Jan 2015 15:53:23 +0800
++Subject: [PATCH 1/2] Modify the Makefile for cross compile.
 +
- test -x /usr/sbin/snmpd || exit 0
- test -x /usr/sbin/snmptrapd || exit 0
- 
-@@ -10,21 +12,23 @@ SNMPDRUN=yes
- SNMPDOPTS='-Lsd -Lf /dev/null -p /var/run/snmpd.pid'
- TRAPDRUN=no
- TRAPDOPTS='-Lsd -p /var/run/snmptrapd.pid'
-+PIDFILE=/var/run/snmpd.pid
-+SPIDFILE=/var/run/snmptrapd.pid
- 
--# Cd to / before starting any daemons.
--cd /
-+# Reads config file if exists (will override defaults above)
-+[ -r /etc/default/snmpd ] && . /etc/default/snmpd
- 
- case "$1" in
-   start)
-     echo -n "Starting network management services:"
--    if [ "$SNMPDRUN" = "yes" -a -f /etc/snmp/snmpd.conf ]; then
--	start-stop-daemon -S -x /usr/sbin/snmpd \
--	    -- $SNMPDOPTS
-+    if [ "$SNMPDRUN" = "yes" -a -f /etc/snmp/snmpd.conf -a ! -f "$PIDFILE" ]; then
-+	start-stop-daemon -o --start --quiet --name snmpd --pidfile "$PIDFILE" \
-+		--exec /usr/sbin/snmpd -- $SNMPDOPTS
- 	echo -n " snmpd"
-     fi
--    if [ "$TRAPDRUN" = "yes" -a -f /etc/snmp/snmptrapd.conf ]; then
--	start-stop-daemon -S -x /usr/sbin/snmptrapd \
--	    -- $TRAPDOPTS
-+    if [ "$TRAPDRUN" = "yes" -a -f /etc/snmp/snmptrapd.conf -a ! -f "$SPIDFILE" ]; then
-+	start-stop-daemon -o --start --quiet --name snmptrapd  --pidfile "$SPIDFILE" \
-+		 --exec /usr/sbin/snmptrapd -- $TRAPDOPTS
- 	echo -n " snmptrapd"
-     fi
-     echo "."
-@@ -33,32 +37,29 @@ case "$1" in
-     ;;
-   stop)
-     echo -n "Stopping network management services:"
--    start-stop-daemon -K -x /usr/sbin/snmpd
-+    if [ -f  "$PIDFILE" ] ; then
-+	start-stop-daemon -o --stop  --quiet --pidfile $PIDFILE --name snmpd
-+    fi
-     echo -n " snmpd"
--    start-stop-daemon -K -x /usr/sbin/snmptrapd
-+    if [ -f "$SPIDFILE" ] ; then
-+	start-stop-daemon -o --stop  --quiet --pidfile $SPIDFILE --name snmptrapd
-+	rm -rf $SPIDFILE
-+    fi
-     echo -n " snmptrapd"
-     echo "."
-     ;;
-+  status)
-+    status /usr/sbin/snmpd;
-+    exit $?
-+    ;;
-   restart|reload|force-reload)
--    echo -n "Restarting network management services:"
--    start-stop-daemon -K -x /usr/sbin/snmpd
--    start-stop-daemon -K -x /usr/sbin/snmptrapd
-+    $0 stop
-     # Allow the daemons time to exit completely.
-     sleep 2
--    if [ "$SNMPDRUN" = "yes" -a -f /etc/snmp/snmpd.conf ]; then
--	start-stop-daemon -S -x /usr/sbin/snmpd -- $SNMPDOPTS
--	echo -n " snmpd"
--    fi
--    if [ "$TRAPDRUN" = "yes" -a -f /etc/snmp/snmptrapd.conf ]; then
--	# Allow snmpd time to start up.
--	sleep 1
--	start-stop-daemon -S -x /usr/sbin/snmptrapd -- $TRAPDOPTS
--	echo -n " snmptrapd"
--    fi
--    echo "."
-+    $0 start
-     ;;
-   *)
--    echo "Usage: /etc/init.d/snmpd {start|stop|restart|reload|force-reload}"
-+    echo "Usage: /etc/init.d/snmpd {start|stop|status|restart|reload|force-reload}"
-     exit 1
- esac
- 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-index 6736718..ecc5199 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-@@ -107,7 +107,7 @@ CONFFILES_${PN}-server-snmptrapd = "${sysconfdir}/snmp/snmptrapd.conf"
- 
- INITSCRIPT_PACKAGES = "${PN}-server"
- INITSCRIPT_NAME_${PN}-server = "snmpd"
--INITSCRIPT_PARAMS_${PN}-server = "defaults"
-+INITSCRIPT_PARAMS_${PN}-server = "start 90 2 3 4 5 . stop 60 0 1 6 ."
- 
- EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
- 
-@@ -133,12 +133,3 @@ RREPLACES_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
- RCONFLICTS_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
- 
- LEAD_SONAME = "libnetsnmp.so"
--
--pkg_postrm_${PN}-server() {
--    if test "x$D" != "x"; then
--        OPT="-r $D "
--    else
--        OPT=""
--        /etc/init.d/snmpd stop
--    fi
--}
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
++---
++ Makefile         | 21 +++++----------------
++ libipvs/Makefile |  3 +--
++ 2 files changed, 6 insertions(+), 18 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index e4e03cc..ea44c1d 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -35,10 +35,9 @@ ARCH		= $(shell uname -m)
++ RPMSOURCEDIR	= $(shell rpm --eval '%_sourcedir')
++ RPMSPECDIR	= $(shell rpm --eval '%_specdir')
++ 
++-CC		= gcc
++ INCLUDE		=
++ SBIN		= $(BUILD_ROOT)/sbin
++-MANDIR		= usr/man
+++MANDIR		= usr/share/man
++ MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
++ INIT		= $(BUILD_ROOT)/etc/rc.d/init.d
++ MKDIR		= mkdir
++@@ -62,17 +61,7 @@ RPMBUILD = $(shell				\
++ 		echo "/bin/rpm";		\
++ 	fi )
++ 
++-ifeq (,$(FORCE_GETOPT))
++-LIB_SEARCH = /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/local/lib
++-POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
++-  if [ -f $$i/libpopt.a ]; then \
++-    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
++-	echo "-lpopt"; \
++-	break; \
++-    fi; \
++-  fi; \
++-done)
++-endif
+++POPT_LIB = -lpopt
++ 
++ ifneq (,$(POPT_LIB))
++ POPT_DEFINE = -DHAVE_POPT
++@@ -81,7 +70,7 @@ endif
++ OBJS		= ipvsadm.o config_stream.o dynamic_array.o
++ LIBS		= $(POPT_LIB)
++ ifneq (0,$(HAVE_NL))
++-LIBS		+= -lnl
+++LIBS		+= -lnl-3 -lnl-genl-3
++ endif
++ DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
++ 		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
++@@ -96,8 +85,8 @@ all:            libs ipvsadm
++ libs:
++ 		make -C libipvs
++ 
++-ipvsadm:	$(OBJS) $(STATIC_LIBS)
++-		$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+++ipvsadm:	$(OBJS) 
+++		$(CC) $(CFLAGS) -o $@ $^ $(STATIC_LIBS) $(LIBS)
++ 
++ install:        all
++ 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
++diff --git a/libipvs/Makefile b/libipvs/Makefile
++index a527a7f..b7300ec 100644
++--- a/libipvs/Makefile
+++++ b/libipvs/Makefile
++@@ -1,6 +1,5 @@
++ # Makefile for libipvs
++ 
++-CC		= gcc
++ CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -fPIC
++ ifneq (0,$(HAVE_NL))
++ CFLAGS		+= -DLIBIPVS_USE_NL
++@@ -18,7 +17,7 @@ SHARED_LIB	= libipvs.so
++ all:		$(STATIC_LIB) $(SHARED_LIB)
++ 
++ $(STATIC_LIB):	libipvs.o ip_vs_nl_policy.o
++-		ar rv $@ $^
+++		$(AR) rv $@ $^
++ 
++ $(SHARED_LIB):	libipvs.o ip_vs_nl_policy.o
++ 		$(CC) -shared -Wl,-soname,$@ -o $@ $^
++-- 
++1.8.3.1
++
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch b/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch
+new file mode 100644
+index 0000000..7896d6d
+--- /dev/null
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch
+@@ -0,0 +1,63 @@
++From 2686213259b15df9cf1d969c5a14d62f14cfbaae Mon Sep 17 00:00:00 2001
++From: Jianchuan Wang <jianchuan.wang@windriver.com>
++Date: Thu, 8 Jan 2015 17:37:11 +0800
++Subject: [PATCH 2/2] Replace nl_handle to nl_sock.
++
++The nl_handle was replace with nl_sock in the libnl-3.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
++---
++ libipvs/libipvs.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/libipvs/libipvs.c b/libipvs/libipvs.c
++index a157e18..21a9bfa 100644
++--- a/libipvs/libipvs.c
+++++ b/libipvs/libipvs.c
++@@ -32,7 +32,7 @@ static void* ipvs_func = NULL;
++ struct ip_vs_getinfo ipvs_info;
++ 
++ #ifdef LIBIPVS_USE_NL
++-static struct nl_handle *sock = NULL;
+++static struct nl_sock *sock = NULL;
++ static int family, try_nl = 1;
++ #endif
++ 
++@@ -73,7 +73,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
++ {
++ 	int err = EINVAL;
++ 
++-	sock = nl_handle_alloc();
+++	sock = nl_socket_alloc();
++ 	if (!sock) {
++ 		nlmsg_free(msg);
++ 		return -1;
++@@ -88,7 +88,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
++ 
++ 	/* To test connections and set the family */
++ 	if (msg == NULL) {
++-		nl_handle_destroy(sock);
+++		nl_socket_free(sock);
++ 		sock = NULL;
++ 		return 0;
++ 	}
++@@ -104,12 +104,12 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
++ 
++ 	nlmsg_free(msg);
++ 
++-	nl_handle_destroy(sock);
+++	nl_socket_free(sock);
++ 
++ 	return 0;
++ 
++ fail_genl:
++-	nl_handle_destroy(sock);
+++	nl_socket_free(sock);
++ 	sock = NULL;
++ 	nlmsg_free(msg);
++ 	errno = err;
++-- 
++1.8.3.1
++
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+new file mode 100644
+index 0000000..ac97d47
+--- /dev/null
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+@@ -0,0 +1,34 @@
++SUMMARY = "Linux Virtual Server administration Utility"
++DESCRIPTION = "Ipvsadm  is  used  to set up, maintain or inspect the virtual server \
++table in the Linux kernel. The Linux Virtual  Server  can  be  used  to \
++build  scalable  network  services  based  on  a cluster of two or more nodes. \
++The active node of the cluster redirects service requests  to  a \
++collection  of  server  hosts  that will actually perform the services. \
++Supported features include two protocols (TCP and UDP),  three  packet-forwarding \
++methods (NAT, tunneling, and direct routing), and eight load balancing algorithms \
++(round robin, weighted round robin,  least-connec-tion, weighted least-connection, \
++locality-based  least-connection, locality-based least-connection with replication, \
++destination-hashing, and source-hashing)."
++SECTION = "console/network"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=a54cba37b64924aa5008881607942892"
++
++DEPENDS += "libnl popt"
++
++SRC_URI = "http://www.linuxvirtualserver.org/software/kernel-2.6/${BP}.tar.gz \
++        file://0001-Modify-the-Makefile-for-cross-compile.patch \
++        file://0002-Replace-nl_handle-to-nl_sock.patch \
++"
++
++SRC_URI[md5sum] = "eac3ba3f62cd4dea2da353aeddd353a8"
++SRC_URI[sha256sum] = "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f60269fd9cbee0eb2d"
++
++do_compile() {
++    oe_runmake \
++    CC="${CC} -I${STAGING_INCDIR} -I${STAGING_INCDIR}/libnl3 -L${STAGING_LIBDIR}" \
++    all
++}
++
++do_install() {
++    oe_runmake 'BUILD_ROOT=${D}' install
++}
 -- 
 1.9.1
 
