@@ -1,38 +1,31 @@
-Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C16F72C04
+Return-Path: <gary@mlbassoc.com>
+X-Greylist: delayed 539 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 16 Jan 2015 19:39:38 UTC
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 78CD7722C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jan 2015 19:20:00 +0000 (UTC)
-Received: by mail-qg0-f45.google.com with SMTP id z107so17685489qgd.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jan 2015 11:20:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=O0BbGDwUnKdyQJKdOtoDOL9XMUndzRUzOpBw0AVyRbI=;
-	b=nhUtO20APQo6IQhk5pkQ5QQBfNXOZ9oZlhn2Ug3aait/CVACeAEy55VufyYPbe0DNz
-	rsRWsIWhEXwKWO3VWo14rOVo8k2zgHh/72khPoS6wqVEveKZ0f6mZDG+TvS3YCQGsB++
-	JXwW4fHAxCMn0W4YvUWT3U7TpHRidsNpxRU3DdR6LZwyaScxXz1tPc9kxlsyIzB7sqrB
-	NQ8V0o+Z6JSYArUa2RK3/UR+X8hxNQrCwKiHE5ZhnvA034Io2uSy2VSeq/8S/TjoE2gZ
-	DD0h8z2qEil0ihFdWIbRJ20pIfpN1IgUJMSUFvRV8d+CQkokHeISVx4XRseoALm7QbSz
-	KiZA==
-X-Received: by 10.224.16.200 with SMTP id p8mr15203635qaa.23.1421435998348;
-	Fri, 16 Jan 2015 11:19:58 -0800 (PST)
-Received: from centrium.lab.ossystems.com.br ([177.100.225.47])
-	by mx.google.com with ESMTPSA id z67sm4939763qgz.10.2015.01.16.11.19.56
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jan 2015 11:19:57 -0800 (PST)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
+	Fri, 16 Jan 2015 19:39:38 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 61F35F811E7; Fri, 16 Jan 2015 12:30:40 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=4.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id A2BA8F811E7;
+	Fri, 16 Jan 2015 12:30:39 -0700 (MST)
+Message-ID: <54B966E7.8010102@mlbassoc.com>
+Date: Fri, 16 Jan 2015 12:30:47 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jan 2015 17:19:11 -0200
-Message-Id: <1421435951-15401-2-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1421435951-15401-1-git-send-email-mario@ossystems.com.br>
 References: <1421435951-15401-1-git-send-email-mario@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-browser][PATCH 2/2] layer.conf: add dependency on gnome-layer
+	<1421435951-15401-2-git-send-email-mario@ossystems.com.br>
+In-Reply-To: <1421435951-15401-2-git-send-email-mario@ossystems.com.br>
+Subject: Re: [meta-browser][PATCH 2/2] layer.conf: add dependency on gnome-layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +39,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jan 2015 19:20:01 -0000
+X-List-Received-Date: Fri, 16 Jan 2015 19:39:46 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This layer contains a bbappend file for gnome-settings-daemon, which
-is provided by meta-gnome.
+On 2015-01-16 12:19, Mario Domenech Goulart wrote:
+> This layer contains a bbappend file for gnome-settings-daemon, which
+> is provided by meta-gnome.
+>
+> Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+> ---
+>   conf/layer.conf | 2 ++
+>   1 file changed, 2 insertions(+)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 5275778..06cb69a 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -9,3 +9,5 @@ BBFILE_PATTERN_browser-layer := "^${LAYERDIR}/"
+>   BBFILE_PRIORITY_browser-layer = "7"
+>
+>   LAYERVERSION_browser-layer = "1"
+> +
+> +LAYERDEPENDS_browser-layer = "gnome-layer"
+>
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- conf/layer.conf | 2 ++
- 1 file changed, 2 insertions(+)
+It would be better to make inclusion of the .bbappend file
+dependent on whether or not you have meta-gnome present, much
+like many of the .bbappend files found in meta-fsl-arm.
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 5275778..06cb69a 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -9,3 +9,5 @@ BBFILE_PATTERN_browser-layer := "^${LAYERDIR}/"
- BBFILE_PRIORITY_browser-layer = "7"
- 
- LAYERVERSION_browser-layer = "1"
-+
-+LAYERDEPENDS_browser-layer = "gnome-layer"
+In particular, I want to use meta-browser but don't expect
+to need meta-gnome, so this change would break my systems :-(
+
 -- 
-2.1.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
