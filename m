@@ -1,36 +1,33 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7668B7210E
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 0541771F23
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jan 2015 05:22:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="56221548"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Jan 2015 13:19:03 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0I5LsWR000952;
-	Sun, 18 Jan 2015 13:21:54 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0181.006; Sun, 18 Jan 2015 13:22:33 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Joe MacDonald
-	<Joe_MacDonald@mentor.com>
-Thread-Topic: [oe] [meta-networking][PATCH v2] openwsman: add recipe
-Thread-Index: AQHQKXSbfcLHr0jd306/phFQoGGLv5y3eYOAgAQ7QjCACbSZQA==
-Date: Sun, 18 Jan 2015 05:22:32 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DE926C@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1420523147-3740-1-git-send-email-biannm@cn.fujitsu.com>
-	<20150109162814.GA5581@mentor.com>
-	<30DC4EDFD798C94083F3E083754532CC73DE7ECE@G08CNEXMBPEKD02.g08.fujitsu.local>
-In-Reply-To: <30DC4EDFD798C94083F3E083754532CC73DE7ECE@G08CNEXMBPEKD02.g08.fujitsu.local>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
-MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH v2] openwsman: add recipe
+	Sun, 18 Jan 2015 09:35:53 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1YCmGq-0005fK-PT for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Jan 2015 10:35:48 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Jan 2015 10:35:48 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Jan 2015 10:35:48 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Sun, 18 Jan 2015 10:35:43 +0100
+Message-ID: <m9fupf$ln2$1@ger.gmane.org>
+References: <1421446794-11403-1-git-send-email-ben.shelton@ni.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+In-Reply-To: <1421446794-11403-1-git-send-email-ben.shelton@ni.com>
+Subject: Re: [meta-oe][PATCH] msr-tools: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,149 +41,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jan 2015 05:22:45 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Sun, 18 Jan 2015 09:35:55 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-SGkgSm9lDQoNClNvcnJ5LiBJIGhhdmUgbm90IHJlcHJvZHVjZWQgdGhpcyBlcnJvciBvbiBteSBi
-dWlsZGluZyBob3N0Lg0KSSB3aWxsIHRyeSB0byByZXByb2R1Y2UgaXQgZmlyc3RseSBiZWZvcmUg
-Y3JlYXRlIHRoZSBWMyBwYXRjaCBsYXRlci4NCg0KVGhhbmtzDQogQmlhbg0KDQoNCj4gLS0tLS1P
-cmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3Vu
-Y2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZiBCaWFuLA0KPiBOYWltZW5n
-DQo+IFNlbnQ6IE1vbmRheSwgSmFudWFyeSAxMiwgMjAxNSA5OjA3IEFNDQo+IFRvOiBKb2UgTWFj
-RG9uYWxkDQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0K
-PiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSCB2Ml0gb3BlbndzbWFu
-OiBhZGQgcmVjaXBlDQo+IA0KPiBIaSBKb2UsDQo+IA0KPiBUaGFua3MgZm9yIHlvdXIgcmVtaW5k
-LiBJIHdpbGwgY3JlYXRlIHRoZSBWMyB0b21vcnJvdy4NCj4gDQo+IFRoYW5rcywNCj4gIEJpYW4N
-Cj4gDQo+ID4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gPiBGcm9tOiBKb2UgTWFjRG9u
-YWxkIFttYWlsdG86Sm9lX01hY0RvbmFsZEBtZW50b3IuY29tXQ0KPiA+IFN1YmplY3Q6IFJlOiBb
-b2VdIFttZXRhLW5ldHdvcmtpbmddW1BBVENIIHYyXSBvcGVud3NtYW46IGFkZCByZWNpcGUNCj4g
-Pg0KPiA+IEJpYW4sDQo+ID4NCj4gPiBJIGp1c3Qgd2FudGVkIHRvIGJlIHN1cmUgeW91IGhhZCBu
-b3RpY2VkIHRoZSBkaXNjdXNzaW9uIG9uIHRoZSBsaXN0DQo+ID4gcmVnYXJkaW5nIHRoaXMgc3Vi
-bWlzc2lvbiwgaXQgaGFzIHdoYXQgbG9va3MgbGlrZSBhIC1sbSBpc3N1ZSBpbiB0aGUNCj4gPiBj
-b21waWxlIHN0YWdlIGFuZCBjb25zZXF1ZW50bHkgd2UnbGwgbmVlZCBhIHYzLCBwbGVhc2UuICBZ
-b3UgY2FuIHNlZQ0KPiA+IGFuIGV4YW1wbGUgb2YgdGhlIGZhaWx1cmUNCj4gPiBoZXJlOg0KPiA+
-DQo+ID4gaHR0cDovL2Vycm9ycy55b2N0b3Byb2plY3Qub3JnL0Vycm9ycy9TZWFyY2gvRGV0YWls
-cy83MTA3LzEvMTAvMzkzOQ0KPiA+DQo+ID4gVGhhbmtzLA0KPiA+IC1KLg0KPiA+DQo+ID4gW1tv
-ZV0gW21ldGEtbmV0d29ya2luZ11bUEFUQ0ggdjJdIG9wZW53c21hbjogYWRkIHJlY2lwZV0gT24g
-MTUuMDEuMDYNCj4gPiAoVHVlDQo+ID4gMTM6NDUpIEJpYW4gTmFpbWVuZyB3cm90ZToNCj4gPg0K
-PiA+ID4gT3BlbnNvdXJjZSBJbXBsZW1lbnRhdGlvbiBvZiBXUy1NYW5hZ2VtZW50DQo+ID4gPg0K
-PiA+ID4gU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+
-DQo+ID4gPiAtLS0NCj4gPiA+ICAuLi4vbGlic3NsLWlzLXJlcXVpcmVkLWlmLWV2ZW50aW50LXN1
-cHBvcnRlZC5wYXRjaCB8IDE3ICsrKysrKysNCj4gPiA+ICAuLi4vb3BlbndzbWFuL29wZW53c21h
-bi9vcGVud3NtYW5kLnNlcnZpY2UgICAgICAgICB8IDEyICsrKysrDQo+ID4gPiAgLi4uL29wZW53
-c21hbi9vcGVud3NtYW5fMi40LjEyLmJiICAgICAgICAgICAgICAgICAgfCA1OQ0KPiA+ICsrKysr
-KysrKysrKysrKysrKysrKysNCj4gPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDg4IGluc2VydGlvbnMo
-KykNCj4gPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiA+IG1ldGEtbmV0d29ya2luZy9yZWNp
-cGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL2xpYnNzbC1pcy1yZXF1DQo+ID4gPiBp
-ciBlZC1pZi1ldmVudGludC1zdXBwb3J0ZWQucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+
-ID4gbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3NtYW4v
-b3BlbndzbWFuZC5zZXINCj4gPiA+IHZpDQo+ID4gPiBjZSAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+
-ID4gPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvb3BlbndzbWFuL29wZW53c21h
-bl8yLjQuMTIuYmINCj4gPiA+DQo+ID4gPiBkaWZmIC0tZ2l0DQo+ID4gPiBhL21ldGEtbmV0d29y
-a2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL2xpYnNzbC1pcy1yZQ0K
-PiA+ID4gcXUNCj4gPiA+IGlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBhdGNoDQo+ID4gPiBi
-L21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL2xp
-YnNzbC1pcy1yZQ0KPiA+ID4gcXUNCj4gPiA+IGlyZWQtaWYtZXZlbnRpbnQtc3VwcG9ydGVkLnBh
-dGNoDQo+ID4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+ID4gaW5kZXggMDAwMDAwMC4uYmQ1
-NDBlMw0KPiA+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ID4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3Jl
-Y2lwZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3NtYW4vbGlic3NsLWkNCj4gPiA+ICsrKyBz
-LSByZXF1aXJlZC1pZi1ldmVudGludC1zdXBwb3J0ZWQucGF0Y2gNCj4gPiA+IEBAIC0wLDAgKzEs
-MTcgQEANCj4gPiA+ICtsaWJzc2wgaXMgcmVxdWlyZWQgYnkgd3NtYW5fY2xpZW50X3RyYW5zcG9y
-dCBpZg0KPiA+ID4gK0VOQUJMRV9FVkVOVElOR19TVVBQT1JUDQo+ID4gZW5hYmxlZC4NCj4gPiA+
-ICsNCj4gPiA+ICtTaWduZWQtb2ZmLWJ5OiBCaWFuIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1
-LmNvbT4NCj4gPiA+ICsNCj4gPiA+ICtkaWZmIC1OdXJwIG9wZW53c21hbi0yLjQuMTIub3JpZy9z
-cmMvbGliL0NNYWtlTGlzdHMudHh0DQo+ID4gb3BlbndzbWFuLTIuNC4xMi9zcmMvbGliL0NNYWtl
-TGlzdHMudHh0DQo+ID4gPiArLS0tIG9wZW53c21hbi0yLjQuMTIub3JpZy9zcmMvbGliL0NNYWtl
-TGlzdHMudHh0CTIwMTQtMTAtMjgNCj4gPiAyMzowNDo0Ny4wMDAwMDAwMDAgKzA4MDANCj4gPiA+
-ICsrKysgb3BlbndzbWFuLTIuNC4xMi9zcmMvbGliL0NNYWtlTGlzdHMudHh0CTIwMTQtMTItMzEN
-Cj4gPiAxMTowOToyMC4zNDA0Mjg1MjMgKzA4MDANCj4gPiA+ICtAQCAtNTYsNiArNTYsOSBAQCBU
-QVJHRVRfTElOS19MSUJSQVJJRVMoICR7V1NNQU5fQ0xJRU5UX1RSDQo+ID4gPiArU0VUX1RBUkdF
-VF9QUk9QRVJUSUVTKCAke1dTTUFOX0NMSUVOVF9UUkFOU1BPUlRfUEtHfSBQUk9QRVJUSUVTDQo+
-ID4gPiArVkVSU0lPTiAxLjAuMCBTT1ZFUlNJT04gMSkgIElOU1RBTEwoVEFSR0VUUw0KPiA+ID4g
-KyR7V1NNQU5fQ0xJRU5UX1RSQU5TUE9SVF9QS0d9IERFU1RJTkFUSU9OICR7TElCX0lOU1RBTExf
-RElSfSkNCj4gPiA+ICsNCj4gPiA+ICsrSUYoIEVOQUJMRV9FVkVOVElOR19TVVBQT1JUICkNCj4g
-PiA+ICsrVEFSR0VUX0xJTktfTElCUkFSSUVTKCAke1dTTUFOX0NMSUVOVF9UUkFOU1BPUlRfUEtH
-fQ0KPiA+ID4gKyske09QRU5TU0xfTElCUkFSSUVTfSApIEVORElGKCBFTkFCTEVfRVZFTlRJTkdf
-U1VQUE9SVCApDQo+ID4gPiArDQo+ID4gPiArICMjIyMjIyMjIyMjIyMjIyB3c21hbl9jbGllbnQg
-IyMjIyMjIyMjIyMjIyMjDQo+ID4gPiArDQo+ID4gPiBkaWZmIC0tZ2l0DQo+ID4gPiBhL21ldGEt
-bmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL29wZW53c21h
-bmQucw0KPiA+ID4gZXINCj4gPiA+IHZpY2UNCj4gPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lw
-ZXMtcHJvdG9jb2xzL29wZW53c21hbi9vcGVud3NtYW4vb3BlbndzbWFuZC5zDQo+ID4gPiBlcg0K
-PiA+ID4gdmljZQ0KPiA+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiA+IGluZGV4IDAwMDAw
-MDAuLjE1NGYzY2QNCj4gPiA+IC0tLSAvZGV2L251bGwNCj4gPiA+ICsrKyBiL21ldGEtbmV0d29y
-a2luZy9yZWNpcGVzLXByb3RvY29scy9vcGVud3NtYW4vb3BlbndzbWFuL29wZW53c21hDQo+ID4g
-PiArKysgbmQNCj4gPiA+ICsrKyAuc2VydmljZQ0KPiA+ID4gQEAgLTAsMCArMSwxMiBAQA0KPiA+
-ID4gK1tVbml0XQ0KPiA+ID4gK0Rlc2NyaXB0aW9uPU9wZW53c21hbiBXUy1NYW5hZ2VtZW50IFNl
-cnZpY2UgQWZ0ZXI9c3lzbG9nLnRhcmdldA0KPiA+ID4gKw0KPiA+ID4gK1tTZXJ2aWNlXQ0KPiA+
-ID4gK1R5cGU9Zm9ya2luZw0KPiA+ID4gK0V4ZWNTdGFydD1AU0JJTkRJUkAvb3BlbndzbWFuZA0K
-PiA+ID4gK0V4ZWNTdGFydFByZT1AU1lTQ09ORkRJUkAvb3BlbndzbWFuL293c21hbmdlbmNlcnQu
-c2gNCj4gPiA+ICtQSURGaWxlPUBMT0NBTFNUQVRFRElSQC9ydW4vd3NtYW5kLnBpZA0KPiA+ID4g
-Kw0KPiA+ID4gK1tJbnN0YWxsXQ0KPiA+ID4gK1dhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0DQo+
-ID4gPiBkaWZmIC0tZ2l0DQo+ID4gPiBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29s
-cy9vcGVud3NtYW4vb3BlbndzbWFuXzIuNC4xMi5iYg0KPiA+ID4gYi9tZXRhLW5ldHdvcmtpbmcv
-cmVjaXBlcy1wcm90b2NvbHMvb3BlbndzbWFuL29wZW53c21hbl8yLjQuMTIuYmINCj4gPiA+IG5l
-dyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gPiBpbmRleCAwMDAwMDAwLi5mMTg4YjFkDQo+ID4gPiAt
-LS0gL2Rldi9udWxsDQo+ID4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2Nv
-bHMvb3BlbndzbWFuL29wZW53c21hbl8yLjQuMTIuYg0KPiA+ID4gKysrIGINCj4gPiA+IEBAIC0w
-LDAgKzEsNTkgQEANCj4gPiA+ICtTVU1NQVJZID0gIk9wZW5zb3VyY2UgSW1wbGVtZW50YXRpb24g
-b2YgV1MtTWFuYWdlbWVudCINCj4gPiA+ICtERVNDUklQVElPTiA9ICJPcGVud3NtYW4gaXMgYSBw
-cm9qZWN0IGludGVuZGVkIHRvIHByb3ZpZGUgYW4NCj4gPiA+ICtvcGVuLXNvdXJjZSBcIGltcGxl
-bWVudGF0aW9uIG9mIHRoZSBXZWIgU2VydmljZXMgTWFuYWdlbWVudA0KPiA+ID4gK3NwZWNpcGlj
-YXRpb24gXA0KPiA+ID4gKyhXUy1NYW5hZ2VtZW50KSBhbmQgdG8gZXhwb3NlIHN5c3RlbSBtYW5h
-Z2VtZW50IGluZm9ybWF0aW9uIG9uIHRoZQ0KPiA+ID4gK1wgTGludXggb3BlcmF0aW5nIHN5c3Rl
-bSB1c2luZyB0aGUgV1MtTWFuYWdlbWVudCBwcm90b2NvbC4NCj4gPiA+ICtXUy1NYW5hZ2VtZW50
-IFwgaXMgYmFzZWQgb24gYSBzdWl0ZSBvZiB3ZWIgc2VydmljZXMgc3BlY2lmaWNhdGlvbnMNCj4g
-PiA+ICthbmQgdXNhZ2UgXCByZXF1aXJlbWVudHMgdGhhdCBleHBvc2VzIGEgc2V0IG9mIG9wZXJh
-dGlvbnMgZm9jdXNlZA0KPiA+ID4gK29uIGFuZCBjb3ZlcnMgXCBhbGwgc3lzdGVtIG1hbmFnZW1l
-bnQgYXNwZWN0cy4gXCBPcGVud3NtYW4gU2VydmVyDQo+ID4gPiArYW5kIHNlcnZpY2UgbGlicmFy
-aWVzIg0KPiA+ID4gK0hPTUVQQUdFID0gImh0dHA6Ly93d3cub3BlbndzbWFuLm9yZy8iDQo+ID4g
-PiArU0VDVElPTiA9ICJBcHBsaWNhdGlvbnMvU3lzdGVtIg0KPiA+ID4gKw0KPiA+ID4gK0RFUEVO
-RFMgPSAiY3VybCBsaWJ4bWwyIG9wZW5zc2wgbGlicGFtIg0KPiA+ID4gKw0KPiA+ID4gK1NSQ19V
-UkkgPQ0KPiA+ID4gKyJodHRwczovL2dpdGh1Yi5jb20vT3BlbndzbWFuL29wZW53c21hbi9hcmNo
-aXZlL3YyLjQuMTIudGFyLmd6DQo+ID4gXA0KPiA+ID4gKyAgICAgICAgICAgZmlsZTovL2xpYnNz
-bC1pcy1yZXF1aXJlZC1pZi1ldmVudGludC1zdXBwb3J0ZWQucGF0Y2ggXA0KPiA+ID4gKyAgICAg
-ICAgICAgZmlsZTovL29wZW53c21hbmQuc2VydmljZSINCj4gPiA+ICsNCj4gPiA+ICtTUkNfVVJJ
-W21kNXN1bV0gPSAiNDg5M2E0MWM2ZmQ4OWIzMzA5NWMzMTVjNzk2MzhhNzUiDQo+ID4gPiArU1JD
-X1VSSVtzaGEyNTZzdW1dID0NCj4gPiAiNmE0Yjc1ZGZmZjFhNTFjN2JjMDlmZDFkNDRhYmJkZTU1
-YWU3NDkwNmYzODI4Nzk3Y2UzOTE4ODMzNTgxMjBmNCINCj4gPiA+ICsNCj4gPiA+ICtMSUNFTlNF
-ID0gIkJTRCINCj4gPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly9DT1BZSU5HO21k
-NT1kNGY1M2Q0YzZjZjczYjlkNDMxODZjZTNiZTZkZDBiYSINCj4gPiA+ICsNCj4gPiA+ICtpbmhl
-cml0IHN5c3RlbWQgY21ha2UgcGtnY29uZmlnIHB5dGhvbm5hdGl2ZSBwZXJsbmF0aXZlDQo+ID4g
-PiArDQo+ID4gPiArU1lTVEVNRF9TRVJWSUNFXyR7UE59ID0gIm9wZW53c21hbmQuc2VydmljZSIN
-Cj4gPiA+ICtTWVNURU1EX0FVVE9fRU5BQkxFID0gImRpc2FibGUiDQo+ID4gPiArDQo+ID4gPiAr
-RVhUUkFfT0VDTUFLRSA9ICItREJVSUxEX0JJTkRJTkdTPU5PIC1EQlVJTERfTElCQ0lNPU5PIC1E
-QlVJTERfUEVSTD1ZRVMNCj4gXA0KPiA+ID4gKyAgICAgICAgICAgICAgICAgLURDTUFLRV9JTlNU
-QUxMX1BSRUZJWD0ke3ByZWZpeH0gLURMSUI9bGliIg0KPiA+ID4gKw0KPiA+ID4gK2RvX2NvbmZp
-Z3VyZV9wcmVwZW5kKCkgew0KPiA+ID4gKyAgICBleHBvcnQgSE9TVF9TWVM9JHtIT1NUX1NZU30N
-Cj4gPiA+ICsgICAgZXhwb3J0IEJVSUxEX1NZUz0ke0JVSUxEX1NZU30NCj4gPiA+ICsgICAgZXhw
-b3J0IFNUQUdJTkdfSU5DRElSPSR7U1RBR0lOR19JTkNESVJ9DQo+ID4gPiArICAgIGV4cG9ydCBT
-VEFHSU5HX0xJQkRJUj0ke1NUQUdJTkdfTElCRElSfSB9DQo+ID4gPiArDQo+ID4gPiArZG9faW5z
-dGFsbF9hcHBlbmQoKSB7DQo+ID4gPiArICAgIGluc3RhbGwgLWQgJHtEfS8ke3N5c2NvbmZkaXJ9
-L2luaXQuZA0KPiA+ID4gKyAgICBpbnN0YWxsIC1tIDc1NSAke0J9L2V0Yy9pbml0L29wZW53c21h
-bmQuc2gNCj4gPiAke0R9LyR7c3lzY29uZmRpcn0vaW5pdC5kL29wZW53c21hbmQNCj4gPiA+ICsg
-ICAgbG4gLXNmICR7c3lzY29uZmRpcn0vaW5pdC5kL29wZW53c21hbmQNCj4gPiA+ICske0R9LyR7
-c2JpbmRpcn0vcmNvcGVud3NtYW5kDQo+ID4gPiArDQo+ID4gPiArICAgIGlmDQo+ID4gPiArICR7
-QGJhc2VfY29udGFpbnMoJ0RJU1RST19GRUFUVVJFUycsJ3N5c3RlbWQnLCd0cnVlJywnZmFsc2Un
-LGQpfTsNCj4gPiB0aGVuDQo+ID4gPiArICAgICAgICBpbnN0YWxsIC1kICR7RH0vJHtzeXN0ZW1k
-X3VuaXRkaXJ9L3N5c3RlbQ0KPiA+ID4gKyAgICAgICAgaW5zdGFsbCAtbSA2NDQgJHtXT1JLRElS
-fS9vcGVud3NtYW5kLnNlcnZpY2UNCj4gPiA+ICsgJHtEfS8ke3N5c3RlbWRfdW5pdGRpcn0vc3lz
-dGVtDQo+ID4gPiArDQo+ID4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MsQFNCSU5ESVJALCR7c2Jp
-bmRpcn0sZycNCj4gPiAke0R9JHtzeXN0ZW1kX3VuaXRkaXJ9L3N5c3RlbS9vcGVud3NtYW5kLnNl
-cnZpY2UNCj4gPiA+ICsgICAgICAgIHNlZCAtaSAtZSAncyxAU1lTQ09ORkRJUkAsJHtzeXNjb25m
-ZGlyfSxnJw0KPiA+ICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtL29wZW53c21hbmQuc2Vy
-dmljZQ0KPiA+ID4gKyAgICAgICAgc2VkIC1pIC1lICdzLEBMT0NBTFNUQVRFRElSQCwke2xvY2Fs
-c3RhdGVkaXJ9LGcnDQo+ID4gJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0vb3BlbndzbWFu
-ZC5zZXJ2aWNlDQo+ID4gPiArICAgIGZpDQo+ID4gPiArfQ0KPiA+ID4gKw0KPiA+ID4gK0ZJTEVT
-XyR7UE59LWRiZyArPSAiJHtsaWJkaXJ9L29wZW53c21hbi9wbHVnaW5zLy5kZWJ1Zy8gXA0KPiA+
-ID4gKyAgICAgICAgICAgICAgICAgICAgJHtsaWJkaXJ9L29wZW53c21hbi9hdXRoZW50aWNhdG9y
-cy8uZGVidWcvIFwNCj4gPiA+ICsgICAgICAgICAgICAgICAgICAgIg0KPiA+ID4gKw0KPiA+ID4g
-K0lOU0FORV9TS0lQXyR7UE59ID0gImRldi1zbyINCj4gPiA+IC0tDQo+ID4gPiAxLjkuMQ0KPiA+
-ID4NCj4gPiAtLQ0KPiA+IC1Kb2UgTWFjRG9uYWxkLg0KPiA+IDp3cQ0KPiAtLQ0KPiBfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQt
-ZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8v
-b3BlbmVtYmVkZGVkLWRldmVsDQo=
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Ben Shelton schreef op 16-01-15 om 23:19:
+> msr-tools provides the rdmsr and wrmsr tools to read and write Intel 
+> model-specific registers on the x86 and x64 architectures.
+> 
+> Signed-off-by: Ben Shelton <ben.shelton@ni.com> --- 
+> meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb | 21
+> +++++++++++++++++++++ 1 file changed, 21 insertions(+) create mode 100644
+> meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
+> 
+> diff --git a/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb
+> b/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb new file mode
+> 100644 index 0000000..5544920 --- /dev/null +++
+> b/meta-oe/recipes-devtools/msr-tools/msr-tools_1.3.bb @@ -0,0 +1,21 @@ 
+> +SUMMARY = "utilies to read and write Intel model-specific registers" 
+> +HOMEPAGE = "https://01.org/msr-tools" +LICENSE = "GPLv2" 
+> +LIC_FILES_CHKSUM =
+> "file://Makefile;beginline=1;endline=11;md5=678a3928c856042424c734f4a7586e65"
+>
+> 
++SECTION = "devel"
+> + +SRC_URI =
+> "https://01.org/sites/default/files/downloads/msr-tools/msr-tools-${PV}.zip"
+>
+> 
++SRC_URI[md5sum] = "67d18527f64fd707c9b7a79f13d19fd5"
+> +SRC_URI[sha256sum] =
+> "f9457b5340f5f274da4239a461f0db6b514142b40461559d9c6150f05aab1d1e" + +S =
+> "${WORKDIR}/msr-tools-master" + +COMPATIBLE_HOST =
+> '(i.86|x86_64).*-linux' + +do_install() { +    install -d ${D}/${bindir} 
+> +    install rdmsr ${D}/${bindir}/ +    install wrmsr ${D}/${bindir}/
+
+${bindir} already includes the slash, please change the above to
+${D}${bindir} and use -m0755 to get the proper permissions. And since this
+writes to registers ${sbindir} might be a better place for it.
+
+> +} + +FILES_${PN} += "${bindir}/*"
+
+${bindir} is in FILES by default, please drop this assignment.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFUu35vMkyGM64RGpERAtLCAJ94f2vQN8QJHU0V6bhn4+LaIZLR4ACbBLxv
+j0iHOMvXRl6w5z1AjSVg3L0=
+=V22G
+-----END PGP SIGNATURE-----
+
 
