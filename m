@@ -1,47 +1,24 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
-	[209.85.216.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A31B71F1B
+Return-Path: <joe.slater@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id F1BD57229E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2015 19:38:42 +0000 (UTC)
-Received: by mail-qa0-f48.google.com with SMTP id v8so25193990qal.7
+	Mon, 19 Jan 2015 21:07:00 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0JL70sV014810
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2015 11:38:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=h9VXyOHJ35BoQSJ100t0+G/v5jz8y1f6R3C1L01+82g=;
-	b=fPnQVsCP/BfYLNqAxqbYa/3nnrg5DmK22QbsX70CEeKhQEmAaePI5q5RkIMbHf/mQQ
-	kxQ18cOXbtyuKhZlnXdIgsxJd0OCGZv57mknuP2JOQYudw5qZKfeO4J3J+g8OQ6oLPOw
-	GquNwz0DfF4A01A+RoAP6TmnPp1Evs2wB8Aw2kWwyLp3+s4EdiKkAVvTpGefLUMiQ8UG
-	c2W6avLf/ODq9eou0mr4G6P1OcGixKqgRUYTGuSOLoV8WegokSmd9t97RIBU0k2rvn+G
-	QTPdrOR1j14buaiES8Eg483LIf3b7Un6wtYAXt98x1hSkSgMqjCZJgI279v9Tca/Q7Ua
-	nv2w==
+	Mon, 19 Jan 2015 13:07:00 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 19 Jan 2015 13:06:59 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 19 Jan 2015 13:06:59 -0800
+Message-ID: <1421701619-14831-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-X-Received: by 10.229.219.74 with SMTP id ht10mr45537542qcb.25.1421696322538; 
-	Mon, 19 Jan 2015 11:38:42 -0800 (PST)
-Received: by 10.140.30.229 with HTTP; Mon, 19 Jan 2015 11:38:42 -0800 (PST)
-In-Reply-To: <D0E2AB9D.8D80%csmiley@icontrol.com>
-References: <54B220B0.8070609@gmail.com> <54B222F2.4070802@gmail.com>
-	<loom.20150113T130012-516@post.gmane.org>
-	<20150113132422.GJ18240@mail.itconsulting-heinold.de>
-	<CAP9ODKocqaD+cXFba28jxXyd75aRmWnpwNY3NNx1wVY4Q3wVuA@mail.gmail.com>
-	<loom.20150115T002923-253@post.gmane.org>
-	<CAP9ODKpZzfTV41SDZjacbMi9=_BKkA7AoTgU+az4+7oUDreB3Q@mail.gmail.com>
-	<CAEHkU3WoztGsMLVriJWqFCSuYboaQAFf8G_y1EtYHiyrh3i0UQ@mail.gmail.com>
-	<CAEHkU3VmOOfi+nmyB2gERxghmb7n0uNXaNhiQ1zbaYtH33vAaw@mail.gmail.com>
-	<CAEHkU3UwSPmDXcXVeZpTWWjxvQ3DxJts7_Ci964f=Lrv8xNH0Q@mail.gmail.com>
-	<CAP9ODKrmQ2hLL-NFUqrB_sa24wB+WyzTPsdkssYgkknFKNO65A@mail.gmail.com>
-	<D0E2AB9D.8D80%csmiley@icontrol.com>
-Date: Mon, 19 Jan 2015 20:38:42 +0100
-Message-ID: <CAEHkU3WJWCyoxSVpM7z8HG_dq=RpoPfhPaQzLoh7+iMtwx63SA@mail.gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: Colin Smiley <csmiley@icontrol.com>
-Cc: Henning Heinold <heinold@inf.fu-berlin.de>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Alex de Cabo <alejandro.de-cabo-garcia@congatec.com>
-Subject: Re: Query on meta-java layer openjdk-7-jre build
+Subject: [meta-python][PATCH 1/1] python-ldap: move to version 2.4.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,98 +32,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jan 2015 19:38:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 19 Jan 2015 21:07:01 -0000
+Content-Type: text/plain
 
-Hi Colin
+Retain 2.3.9 in case configuration differences matter to
+some people.
 
-2015-01-19 19:43 GMT+01:00 Colin Smiley <csmiley@icontrol.com>:
-> Max, Otavio,
->
-> Thank you for the continued work you're doing on this.
->
->
-> On 1/19/15, 6:41 AM, "Otavio Salvador" <otavio@ossystems.com.br> wrote:
->
->>Hello Max,
->>
->>On Mon, Jan 19, 2015 at 9:56 AM, Max Krummenacher <max.oss.09@gmail.com>
->>wrote:
->>> I made some progress.
->>> We seem to be discussing two issues
->
-> ...
->
->>> 2)
->>> qemu runs indefinitely.
->>> While hunting the above mentioned bug I found that when using qemu
->>> with the sysroot, i.e. using the -L <path-to-sysroot> parameter qemu
->>> executes and never returns.
->>> On my machine free shows increasingly used RAM but I was to impatient
->>> to ever see an OOM kill of qemu but maybe this is also what Colin
->>> experiences and probably also why Alex does have issues with the "-L"
->>> change.
->>
->>Awesome analysis; I've been looking for some free time to debug this
->>for a while do a HUGE thanks for all your work on this :-)
->>
->>> An strace qemu .... run shows that qemu runs in circles of recursive
->>> symlink in /usr/lib/udev/ptest/.... files.
->>> Using the fsl-arm setup with poky enables ptest. When udev has been
->>> compiled in this setup those testfiles have been staged and qemu
->>> chokes on them..
->>>
->>>http://lists.openembedded.org/pipermail/openembedded-core/2014-September/
->>>097098.html
->>>
->>> a) One way to go would be to fix udev in oe-core, e.g.
->>> index 0f8e9b6..a93b58d 100644
->>> --- a/meta/recipes-core/udev/udev/add-install-ptest.patch
->>> +++ b/meta/recipes-core/udev/udev/add-install-ptest.patch
->>> @@ -21,7 +21,7 @@ Upstream-Status: Pending
->>>  +    sed -i -e 's|^Makefile:|_Makefile:|' $(DESTDIR)/Makefile
->>>  +    $(MKDIR_P) $(DESTDIR)/test
->>>  +    (cd $(top_srcdir) && install $(TESTS) $(DESTDIR)/test)
->>> -+    tar -C $(DESTDIR)/test/ -xJf $(top_srcdir)/test/sys.tar.xz
->>> ++    cp  $(top_srcdir)/test/sys.tar.xz $(DESTDIR)/test/
->>>  --- a/test/udev-test.pl    2012-03-18 16:43:36.000000000 +0100
->>>  +++ b/test/udev-test.pl    2013-02-18 10:31:29.706357321 +0100
->>>  @@ -1459,11 +1459,13 @@
->>> diff --git a/meta/recipes-core/udev/udev/run-ptest
->>> b/meta/recipes-core/udev/udev/run-ptest
->>> index c6961ce..0e39806 100644
->>> --- a/meta/recipes-core/udev/udev/run-ptest
->>> +++ b/meta/recipes-core/udev/udev/run-ptest
->>> @@ -1,3 +1,5 @@
->>>  #!/bin/sh
->>>
->>> +tar -C test/ -xJf test/sys.tar.xz
->>>  make -k check-TESTS
->>> +make test-sys-distclean
->>> --
->>> 1.8.4.5
->>
->>It'd be great if you could prepare a patch to address this in OE-Core;
->>once it proves stable we can ask for it to be backported for Dizzy.
->
->
-> If this is what is causing the meta-java qemu problems, wouldn't this have
-> to be ported back to daisy as well? Daisy is the latest branch meta-java
-> says it supports (it's the one I've been using, anyway).
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../recipes-devtools/python/python-ldap_2.4.10.bb  |   27 ++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-ldap_2.4.10.bb
 
-If we have solution b) in meta-java then meta-java would no longer
-need a change to OE-Core for this.
-However a patch to OE-Core would benefit other projects.
+diff --git a/meta-python/recipes-devtools/python/python-ldap_2.4.10.bb b/meta-python/recipes-devtools/python/python-ldap_2.4.10.bb
+new file mode 100644
+index 0000000..78a878a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-ldap_2.4.10.bb
+@@ -0,0 +1,27 @@
++#
++# Copyright (C) 2012 Wind River Systems, Inc.
++#
++SUMMARY = "Provides a wrapper in Python to LDAP"
++DESCRIPTION = "This module provides access to the LDAP \
++(Lightweight Directory Access Protocol) through Python operations \
++instead of C API. The module mainly acts as a wrapper for the \
++OpenLDAP 2.x libraries. Errors will appear as exceptions."
++
++SECTION = "devel/python"
++PRIORITY = "optional"
++LICENSE = "PSF"
++HOMEPAGE = "http://www.python-ldap.org/"
++DEPENDS = "python openldap cyrus-sasl"
++
++SRC_URI = "http://pypi.python.org/packages/source/p/${PN}/${BPN}-${PV}.tar.gz"
++
++inherit setuptools
++
++LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
++SRC_URI[md5sum] = "a15827ca13c90e9101e5e9405c1d83be"
++SRC_URI[sha256sum] = "67cc7801bf24c29386ab99966ceb68d6a60fa9e0566cc95a4fbb2c4695a8ce54"
++
++do_configure_prepend() {
++    sed -i -e 's:^library_dirs =.*::' setup.cfg
++    sed -i -e 's:^include_dirs =.*:include_dirs = =/usr/include/sasl/:' setup.cfg
++}
+-- 
+1.7.9.5
 
-The far more interesting question is if your OOM is fixed when doing
-either of solution b) or c).
-
-
->
->
-> Colin
->
->
-
-Max
 
