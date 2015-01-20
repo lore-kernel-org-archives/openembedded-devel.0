@@ -1,25 +1,27 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 610C272C91
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EB9F71353
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jan 2015 07:42:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0K7gJSD019443
-	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 20 Jan 2015 07:54:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="56320479"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 Jan 2015 15:50:46 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0K7raKi007828
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2015 23:42:19 -0800 (PST)
-Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.174.1; Mon, 19 Jan 2015 23:42:18 -0800
-From: Kai Kang <kai.kang@windriver.com>
+	Tue, 20 Jan 2015 15:53:36 +0800
+Received: from localhost.localdomain (10.167.226.35) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 20 Jan 2015 15:54:18 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 Jan 2015 15:42:12 +0800
-Message-ID: <1421739732-28362-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.1.1
+Date: Tue, 20 Jan 2015 15:53:36 +0800
+Message-ID: <1421740416-2479-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.231]
-Subject: [meta-networking][PATCH] lksctp-tools: add ptest subpackage and other updates
+X-Originating-IP: [10.167.226.35]
+Subject: [meta-networking][PATCH] radvd: add licenses file to fix warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,122 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jan 2015 07:42:23 -0000
+X-List-Received-Date: Tue, 20 Jan 2015 07:54:23 -0000
 Content-Type: text/plain
 
-Some updates for lksctp-tools:
+WARNING: radvd: No generic license file exists for: radvd in any provider
 
-* add ptest subpackage
-* only blacklist lksctp-tools when gold ld is used. Refer to:
-https://bugs.gentoo.org/show_bug.cgi?id=530318
-* update licenses and add homepage.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- .../lksctp-tools/lksctp-tools/run-ptest             |  5 +++++
- .../lksctp-tools/lksctp-tools/v4test.sh             | 11 +++++++++++
- .../lksctp-tools/lksctp-tools/v6test.sh             | 11 +++++++++++
- .../lksctp-tools/lksctp-tools_1.0.16.bb             | 21 +++++++++++++++++----
- 4 files changed, 44 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
- create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
- create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
+ meta-networking/licenses/radvd | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+ create mode 100644 meta-networking/licenses/radvd
 
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
+diff --git a/meta-networking/licenses/radvd b/meta-networking/licenses/radvd
 new file mode 100644
-index 0000000..e67f18e
+index 0000000..03db0b6
 --- /dev/null
-+++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
-@@ -0,0 +1,5 @@
-+#!/bin/sh
++++ b/meta-networking/licenses/radvd
+@@ -0,0 +1,37 @@
++The author(s) grant permission for redistribution and use in source and
++binary forms, with or without modification, of the software and documentation
++provided that the following conditions are met:
 +
-+sh v4test.sh
-+sh v6test.sh
++0. If you receive a version of the software that is specifically labelled
++   as not being for redistribution (check the version message and/or README),
++   you are not permitted to redistribute that version of the software in any
++   way or form.
++1. All terms of all other applicable copyrights and licenses must be
++   followed.
++2. Redistributions of source code must retain the authors' copyright
++   notice(s), this list of conditions, and the following disclaimer.
++3. Redistributions in binary form must reproduce the authors' copyright
++   notice(s), this list of conditions, and the following disclaimer in the
++   documentation and/or other materials provided with the distribution.
++4. All advertising materials mentioning features or use of this software
++   must display the following acknowledgement with the name(s) of the
++   authors as specified in the copyright notice(s) substituted where
++   indicated:
 +
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
-new file mode 100644
-index 0000000..5130856
---- /dev/null
-+++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
-@@ -0,0 +1,11 @@
-+#!/bin/sh
-+echo "v4test starting:"
-+for t in $(find -maxdepth 1 -type f \! -name test\*_v6 -name test\*); do
-+  echo "$t";
-+  if $t; then
-+    echo "PASS: $t"; echo "";
-+  else
-+    echo "FAIL: $t"; echo "";
-+  fi
-+  sleep 1;
-+done
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
-new file mode 100644
-index 0000000..3a667df
---- /dev/null
-+++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
-@@ -0,0 +1,11 @@
-+#!/bin/sh
-+echo "v6test starting:"
-+for t in $(find -maxdepth 1 -name test\*_v6); do
-+  echo "$t";
-+  if $t; then
-+    echo "PASS: $t"; echo "";
-+  else
-+    echo "FAIL: $t"; echo "";
-+  fi
-+  sleep 1;
-+done
-diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-index e2551e1..b756dd7 100644
---- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-+++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-@@ -1,13 +1,18 @@
- SUMMARY = "The Linux Kernel Stream Control Transmission Protocol (lksctp) project"
-+HOMEPAGE = "http://lksctp.org"
- SECTION = "libs"
--LICENSE = "LGPLv2"
-+LICENSE = "LGPLv2.1 & GPLv2"
- 
- LIC_FILES_CHKSUM = " \
-     file://COPYING.lib;md5=0a1b79af951c42a9c8573533fbba9a92 \
-     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
- "
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
-+           file://run-ptest \
-+           file://v4test.sh \
-+           file://v6test.sh \
-+          "
- 
- SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
- SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26"
-@@ -16,13 +21,21 @@ SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae
- #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symbol sctp_connectx has undefined version
- #| collect2: error: ld returned 1 exit status
- #| make[4]: *** [libsctp.la] Error 1
--PNBLACKLIST[lksctp-tools] = "BROKEN: fails to link against sctp_connectx symbol"
-+PNBLACKLIST[lksctp-tools] = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
- 
- S = "${WORKDIR}/${BP}"
- 
- BBCLASSEXTEND = "native"
- 
--inherit autotools pkgconfig binconfig
-+inherit autotools pkgconfig binconfig ptest
++        This product includes software developed by the authors which are 
++	mentioned at the start of the source files and other contributors.
 +
-+do_install_ptest () {
-+	install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
-+	install -m 0755 ${WORKDIR}/v6test.sh ${D}${PTEST_PATH}
-+	for testcase in `find ${B}/src/apps/.libs ${B}/src/func_tests/.libs -maxdepth 1 -type f -executable`; do
-+		install $testcase ${D}${PTEST_PATH}
-+	done
-+}
- 
- SOLIBVERSION="${PV}"
- SOLIBMAJORVERSION="1"
++5. Neither the name(s) of the author(s) nor the names of its contributors
++   may be used to endorse or promote products derived from this software
++   without specific prior written permission.
++
++THIS SOFTWARE IS PROVIDED BY ITS AUTHORS AND CONTRIBUTORS ``AS IS'' AND ANY
++EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
++WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE FOR ANY
++DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
++(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
++LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
++ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -- 
-2.1.1
+1.8.4.2
 
 
