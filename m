@@ -1,14 +1,14 @@
 Return-Path: <henning@itconsulting-heinold.de>
 Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 84E5F72858
+	by mail.openembedded.org (Postfix) with ESMTP id 8400A721E2
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 20 Jan 2015 16:40:54 +0000 (UTC)
 Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id D9475D40051;
-	Tue, 20 Jan 2015 17:40:54 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 89822D40348;
+	by mail.familie-heinold.de (Postfix) with ESMTP id 822ECD40346;
 	Tue, 20 Jan 2015 17:40:52 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 5F34ED40051;
+	Tue, 20 Jan 2015 17:40:50 +0100 (CET)
 X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
 	h873313.serverkompetenz.net
 X-Spam-Level: 
@@ -17,16 +17,14 @@ X-Spam-Status: No, score=0.2 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
 Received: from rhein2.am93.sysmocom.de
 	(ip5b41c286.dynamic.kabel-deutschland.de [91.65.194.134])
 	by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Tue, 20 Jan 2015 17:40:52 +0100 (CET)
+	Tue, 20 Jan 2015 17:40:50 +0100 (CET)
 From: Henning Heinold <henning@itconsulting-heinold.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Jan 2015 17:40:46 +0100
-Message-Id: <1421772046-14566-2-git-send-email-henning@itconsulting-heinold.de>
+Date: Tue, 20 Jan 2015 17:40:45 +0100
+Message-Id: <1421772046-14566-1-git-send-email-henning@itconsulting-heinold.de>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1421772046-14566-1-git-send-email-henning@itconsulting-heinold.de>
-References: <1421772046-14566-1-git-send-email-henning@itconsulting-heinold.de>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [meta-oe][PATCH] libspatialite: Upgrade to version 4.2.0
+Subject: [PATCH] libspatialite: Upgrade to version 4.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
