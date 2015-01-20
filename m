@@ -1,24 +1,25 @@
-Return-Path: <joe.slater@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FA0972BEC
+	by mail.openembedded.org (Postfix) with ESMTP id 610C272C91
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2015 21:07:08 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0JL78rD014292
+	Tue, 20 Jan 2015 07:42:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0K7gJSD019443
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jan 2015 13:07:09 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 19 Jan 2015 13:07:08 -0800
-From: Joe Slater <jslater@windriver.com>
+	Mon, 19 Jan 2015 23:42:19 -0800 (PST)
+Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.174.1; Mon, 19 Jan 2015 23:42:18 -0800
+From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 19 Jan 2015 13:07:08 -0800
-Message-ID: <1421701628-14864-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+Date: Tue, 20 Jan 2015 15:42:12 +0800
+Message-ID: <1421739732-28362-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.1.1
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 1/1] python-lxml: move to version 3.2.5
+X-Originating-IP: [128.224.162.231]
+Subject: [meta-networking][PATCH] lksctp-tools: add ptest subpackage and other updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,139 +33,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jan 2015 21:07:09 -0000
+X-List-Received-Date: Tue, 20 Jan 2015 07:42:23 -0000
 Content-Type: text/plain
 
-Remove version 3.0.2.
+Some updates for lksctp-tools:
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
+* add ptest subpackage
+* only blacklist lksctp-tools when gold ld is used. Refer to:
+https://bugs.gentoo.org/show_bug.cgi?id=530318
+* update licenses and add homepage.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../python-lxml-3.2.5-fix-CVE-2014-3146.patch      |   91 ++++++++++++++++++++
- .../{python-lxml_3.0.2.bb => python-lxml_3.2.5.bb} |    8 +-
- 2 files changed, 96 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-lxml/python-lxml-3.2.5-fix-CVE-2014-3146.patch
- rename meta-python/recipes-devtools/python/{python-lxml_3.0.2.bb => python-lxml_3.2.5.bb} (82%)
+ .../lksctp-tools/lksctp-tools/run-ptest             |  5 +++++
+ .../lksctp-tools/lksctp-tools/v4test.sh             | 11 +++++++++++
+ .../lksctp-tools/lksctp-tools/v6test.sh             | 11 +++++++++++
+ .../lksctp-tools/lksctp-tools_1.0.16.bb             | 21 +++++++++++++++++----
+ 4 files changed, 44 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
 
-diff --git a/meta-python/recipes-devtools/python/python-lxml/python-lxml-3.2.5-fix-CVE-2014-3146.patch b/meta-python/recipes-devtools/python/python-lxml/python-lxml-3.2.5-fix-CVE-2014-3146.patch
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
 new file mode 100644
-index 0000000..0a8e211
+index 0000000..e67f18e
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-lxml/python-lxml-3.2.5-fix-CVE-2014-3146.patch
-@@ -0,0 +1,91 @@
-+Upstream-status:Backport
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
+@@ -0,0 +1,5 @@
++#!/bin/sh
 +
-+--- a/src/lxml/html/clean.py
-++++ b/src/lxml/html/clean.py
-+@@ -70,9 +70,10 @@ _css_import_re = re.compile(
-+ 
-+ # All kinds of schemes besides just javascript: that can cause
-+ # execution:
-+-_javascript_scheme_re = re.compile(
-+-    r'\s*(?:javascript|jscript|livescript|vbscript|data|about|mocha):', re.I)
-+-_substitute_whitespace = re.compile(r'\s+').sub
-++_is_javascript_scheme = re.compile(
-++    r'(?:javascript|jscript|livescript|vbscript|data|about|mocha):',
-++    re.I).search
-++_substitute_whitespace = re.compile(r'[\s\x00-\x08\x0B\x0C\x0E-\x19]+').sub
-+ # FIXME: should data: be blocked?
-+ 
-+ # FIXME: check against: http://msdn2.microsoft.com/en-us/library/ms537512.aspx
-+@@ -467,7 +468,7 @@ class Cleaner(object):
-+     def _remove_javascript_link(self, link):
-+         # links like "j a v a s c r i p t:" might be interpreted in IE
-+         new = _substitute_whitespace('', link)
-+-        if _javascript_scheme_re.search(new):
-++        if _is_javascript_scheme(new):
-+             # FIXME: should this be None to delete?
-+             return ''
-+         return link
-+--- a/src/lxml/html/tests/test_clean.txt
-++++ b/src/lxml/html/tests/test_clean.txt
-+@@ -1,3 +1,4 @@
-++>>> import re
-+ >>> from lxml.html import fromstring, tostring
-+ >>> from lxml.html.clean import clean, clean_html, Cleaner
-+ >>> from lxml.html import usedoctest
-+@@ -17,6 +18,7 @@
-+ ...   <body onload="evil_function()">
-+ ...     <!-- I am interpreted for EVIL! -->
-+ ...     <a href="javascript:evil_function()">a link</a>
-++...     <a href="j\x01a\x02v\x03a\x04s\x05c\x06r\x07i\x0Ep t:evil_function()">a control char link</a>
-+ ...     <a href="data:text/html;base64,PHNjcmlwdD5hbGVydCgidGVzdCIpOzwvc2NyaXB0Pg==">data</a>
-+ ...     <a href="#" onclick="evil_function()">another link</a>
-+ ...     <p onclick="evil_function()">a paragraph</p>
-+@@ -33,7 +35,7 @@
-+ ...   </body>
-+ ... </html>'''
-+ 
-+->>> print(doc)
-++>>> print(re.sub('[\x00-\x07\x0E]', '', doc))
-+ <html>
-+   <head>
-+     <script type="text/javascript" src="evil-site"></script>
-+@@ -49,6 +51,7 @@
-+   <body onload="evil_function()">
-+     <!-- I am interpreted for EVIL! -->
-+     <a href="javascript:evil_function()">a link</a>
-++    <a href="javascrip t:evil_function()">a control char link</a>
-+     <a href="data:text/html;base64,PHNjcmlwdD5hbGVydCgidGVzdCIpOzwvc2NyaXB0Pg==">data</a>
-+     <a href="#" onclick="evil_function()">another link</a>
-+     <p onclick="evil_function()">a paragraph</p>
-+@@ -81,6 +84,7 @@
-+   <body onload="evil_function()">
-+     <!-- I am interpreted for EVIL! -->
-+     <a href="javascript:evil_function()">a link</a>
-++    <a href="javascrip%20t:evil_function()">a control char link</a>
-+     <a href="data:text/html;base64,PHNjcmlwdD5hbGVydCgidGVzdCIpOzwvc2NyaXB0Pg==">data</a>
-+     <a href="#" onclick="evil_function()">another link</a>
-+     <p onclick="evil_function()">a paragraph</p>
-+@@ -104,6 +108,7 @@
-+   </head>
-+   <body>
-+     <a href="">a link</a>
-++    <a href="">a control char link</a>
-+     <a href="">data</a>
-+     <a href="#">another link</a>
-+     <p>a paragraph</p>
-+@@ -123,6 +128,7 @@
-+   </head>
-+   <body>
-+     <a href="">a link</a>
-++    <a href="">a control char link</a>
-+     <a href="">data</a>
-+     <a href="#">another link</a>
-+     <p>a paragraph</p>
-+@@ -146,6 +152,7 @@
-+   </head>
-+   <body>
-+     <a href="">a link</a>
-++    <a href="">a control char link</a> 
-+     <a href="">data</a>
-+     <a href="#">another link</a>
-+     <p>a paragraph</p>
-diff --git a/meta-python/recipes-devtools/python/python-lxml_3.0.2.bb b/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python-lxml_3.0.2.bb
-rename to meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-index 5ab7b4a..1fa2889 100644
---- a/meta-python/recipes-devtools/python/python-lxml_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-@@ -8,9 +8,11 @@ SRCNAME = "lxml"
- 
- DEPENDS = "libxml2 libxslt"
- 
--SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz;name=lxml"
--SRC_URI[lxml.md5sum] = "38b15b0dd5e9292cf98be800e84a3ce4"
--SRC_URI[lxml.sha256sum] = "cadba4cf0e235127795f76a6f7092cb035da23a6e9ec4c93f8af43a6784cd101"
-+SRC_URI = "http://pypi.python.org/packages/source/l/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-+		file://python-lxml-3.2.5-fix-CVE-2014-3146.patch "
++sh v4test.sh
++sh v6test.sh
 +
-+SRC_URI[md5sum] = "6c4fb9b1840631cff09b8229a12a9ef7"
-+SRC_URI[sha256sum] = "2bf072808a6546d0e56bf1ad3b98a43cca828724360d7419fad135141bd31f7e"
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
+new file mode 100644
+index 0000000..5130856
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
+@@ -0,0 +1,11 @@
++#!/bin/sh
++echo "v4test starting:"
++for t in $(find -maxdepth 1 -type f \! -name test\*_v6 -name test\*); do
++  echo "$t";
++  if $t; then
++    echo "PASS: $t"; echo "";
++  else
++    echo "FAIL: $t"; echo "";
++  fi
++  sleep 1;
++done
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
+new file mode 100644
+index 0000000..3a667df
+--- /dev/null
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
+@@ -0,0 +1,11 @@
++#!/bin/sh
++echo "v6test starting:"
++for t in $(find -maxdepth 1 -name test\*_v6); do
++  echo "$t";
++  if $t; then
++    echo "PASS: $t"; echo "";
++  else
++    echo "FAIL: $t"; echo "";
++  fi
++  sleep 1;
++done
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+index e2551e1..b756dd7 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+@@ -1,13 +1,18 @@
+ SUMMARY = "The Linux Kernel Stream Control Transmission Protocol (lksctp) project"
++HOMEPAGE = "http://lksctp.org"
+ SECTION = "libs"
+-LICENSE = "LGPLv2"
++LICENSE = "LGPLv2.1 & GPLv2"
  
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+ LIC_FILES_CHKSUM = " \
+     file://COPYING.lib;md5=0a1b79af951c42a9c8573533fbba9a92 \
+     file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
+ "
  
+-SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
++           file://run-ptest \
++           file://v4test.sh \
++           file://v6test.sh \
++          "
+ 
+ SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
+ SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26"
+@@ -16,13 +21,21 @@ SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae
+ #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symbol sctp_connectx has undefined version
+ #| collect2: error: ld returned 1 exit status
+ #| make[4]: *** [libsctp.la] Error 1
+-PNBLACKLIST[lksctp-tools] = "BROKEN: fails to link against sctp_connectx symbol"
++PNBLACKLIST[lksctp-tools] = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
+ 
+ S = "${WORKDIR}/${BP}"
+ 
+ BBCLASSEXTEND = "native"
+ 
+-inherit autotools pkgconfig binconfig
++inherit autotools pkgconfig binconfig ptest
++
++do_install_ptest () {
++	install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
++	install -m 0755 ${WORKDIR}/v6test.sh ${D}${PTEST_PATH}
++	for testcase in `find ${B}/src/apps/.libs ${B}/src/func_tests/.libs -maxdepth 1 -type f -executable`; do
++		install $testcase ${D}${PTEST_PATH}
++	done
++}
+ 
+ SOLIBVERSION="${PV}"
+ SOLIBMAJORVERSION="1"
 -- 
-1.7.9.5
+2.1.1
 
 
