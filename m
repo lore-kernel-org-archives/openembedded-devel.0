@@ -1,40 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
-	[74.125.82.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 8792771F1B
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
+	[74.125.82.180])
+	by mail.openembedded.org (Postfix) with ESMTP id C54F072C22
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jan 2015 15:10:21 +0000 (UTC)
-Received: by mail-we0-f173.google.com with SMTP id q58so38023889wes.4
+	Tue, 20 Jan 2015 15:14:50 +0000 (UTC)
+Received: by mail-we0-f180.google.com with SMTP id m14so12900211wev.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jan 2015 07:10:22 -0800 (PST)
+	Tue, 20 Jan 2015 07:14:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ZQNClzi8FIfVxKy7Ks3C9teZmq7b20Vzq/wGGWgJajs=;
-	b=Bp5cKXFiXMGpVhw6nfhfsXXS8bccj2YJjFQtnjRxPTCqPAoCpdatsVh4kGJN8L4Aob
-	qce2bJx7U3rk3BRWncVzeX3NgNmi8ifScfd2C5GsqekJNzF3xftTUmW0sJvL3AwlnnWE
-	M+y9B0wi3OsWUklBOwu+lVwqHQ8meFHFtcRuXXGnwix9Tb1BtWmap2U0VGTBNoo+uZdD
-	vXGZWAix+Kc9ArH2VP6SfVM0DJ2eEsiJMc26WtjSY+ksVq3IwRVwhjaGd9sHWafodUVT
-	zQSp5nJw5q7Ie8y33t5E0x9hK5QLgLfrgGMbfrXKpvvp3py1z34FLhn8I8Px3aXdVGvL
-	Ka2w==
-X-Received: by 10.194.10.68 with SMTP id g4mr14353839wjb.5.1421766621962;
-	Tue, 20 Jan 2015 07:10:21 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	vs8sm21649415wjc.6.2015.01.20.07.10.20
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=fug2VlwhzWKmOm36DkLfLdorCXCgs6W9hmAjle74rTU=;
+	b=gDVx0F+cjhR4S7GsIigy3AhZvthMaZJ3rWvkrlkhKqzYaSfRpYLeN3fZeA8U7gud6C
+	JKUSj+os8gxUyk0NZ6lOH5/ab64UT6963gsjAfVOjp7qG6ZSsKsZRS5s355qGZxRX42V
+	uu7kAff5ePHfq5UPikpxtokvHE7Yw0kjhQ7SXaLuF4EkgG+Fd7t8YbnBWw1vGia8hvgk
+	SoUZswiBO3RRZ2NLNzj0IpNa29buaVm+BBevLQzvY+U00k4oq43D/L11xMeG3oklY78j
+	qLqErJg1AlnlkHkvskEFxfJm4lwuuR7A/3LAwubQmmD8qsNcH9DTqvCC9fQvSqggaYRX
+	r5lA==
+X-Received: by 10.180.91.201 with SMTP id cg9mr48299894wib.63.1421766890909;
+	Tue, 20 Jan 2015 07:14:50 -0800 (PST)
+Received: from linuxdev.toradex.int ([46.140.72.82])
+	by mx.google.com with ESMTPSA id gu5sm3372486wib.24.2015.01.20.07.14.49
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Jan 2015 07:10:20 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 20 Jan 2015 16:10:22 +0100
+	Tue, 20 Jan 2015 07:14:50 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150120151022.GA2453@jama>
-References: <1421739732-28362-1-git-send-email-kai.kang@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1421739732-28362-1-git-send-email-kai.kang@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] lksctp-tools: add ptest subpackage and other updates
+Date: Tue, 20 Jan 2015 16:14:23 +0100
+Message-Id: <1421766864-9515-1-git-send-email-max.oss.09@gmail.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-java][PATCH 1/2] binaries run by qemu: link with -static, force ld.bfd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,202 +41,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jan 2015 15:10:25 -0000
-X-Groupsio-MsgNum: 53891
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BXVAT5kNtrzKuDFl"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Jan 2015 15:14:55 -0000
 
---BXVAT5kNtrzKuDFl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+For machines using DEFAULTTUNE = "armv7ahf" or DEFAULTTUNE = "armv7athf" a build
+of openjdk-7 fails with segmentation faults during the qemu-arm runs.
 
-On Tue, Jan 20, 2015 at 03:42:12PM +0800, Kai Kang wrote:
-> Some updates for lksctp-tools:
->=20
-> * add ptest subpackage
-> * only blacklist lksctp-tools when gold ld is used. Refer to:
-> https://bugs.gentoo.org/show_bug.cgi?id=3D530318
-> * update licenses and add homepage.
->=20
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  .../lksctp-tools/lksctp-tools/run-ptest             |  5 +++++
->  .../lksctp-tools/lksctp-tools/v4test.sh             | 11 +++++++++++
->  .../lksctp-tools/lksctp-tools/v6test.sh             | 11 +++++++++++
->  .../lksctp-tools/lksctp-tools_1.0.16.bb             | 21 +++++++++++++++=
-++----
->  4 files changed, 44 insertions(+), 4 deletions(-)
->  create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-t=
-ools/run-ptest
->  create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-t=
-ools/v4test.sh
->  create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-t=
-ools/v6test.sh
+e.g.
+Segmentation fault (core dumped) | qemu-arm -cpu cortex-a8 -s 2097152
+  -L .../sysroots/colibri-t20 \
+  -E LD_LIBRARY_PATH=.../sysroots/colibri-t20/lib ./mkbc - bytecodes_arm.s
 
-OE @ ~/meta-openembedded $ pwam 87065
-2015-01-20 16:08:10 URL:http://patchwork.openembedded.org/patch/87065/mbox/=
- [4796] -> "pw-am-87065.patch" [1]
-Applying: lksctp-tools: add ptest subpackage and other updates
-/OE/meta-openembedded/.git/rebase-apply/patch:21: new blank line at EOF.
-+
-error: patch failed: meta-networking/recipes-support/lksctp-tools/lksctp-to=
-ols_1.0.16.bb:16
-error: meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb:=
- patch does not apply
-Patch failed at 0001 lksctp-tools: add ptest subpackage and other updates
-The copy of the patch that failed is found in:
-   /OE/meta-openembedded/.git/rebase-apply/patch
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
+I found that qemu-arm can not execute any binary which is compiled with the
+resulting compiler and is linked with the gold linker and the -static flag.
+Even a simple hello world program does not work. When executing that
+hello world on the real hardware it also generates a segmentation fault.
 
-most likely because the change was based on commit older than
+Removing the -static flag or forcing the bfd linker fixed this.
 
-OE @ ~/meta-openembedded $ git log meta-networking/recipes-support/lksctp-t=
-ools/lksctp-tools_1.0.16.bb  =20
-commit 96a92761c0a1bb2317fa4ea422c32e4473405103
-Author: Martin Jansa <Martin.Jansa@gmail.com>
-Date:   Sat Dec 6 08:01:57 2014 +0100
+Note that other machines, colibri-t30 or i.mx6 based ones with neon but
+otherwise identical setup do not suffer from the issue.
+DEFAULTTUNE = "armv7athf-neon" works.
 
-    PNBLACKLIST: use weak assignments
+While at it convert the sizer call for openjdk-7 used when building xawt
+also to use -static even though the code is currently disabled.
 
-please rebase before sending
+Further details:
+http://lists.openembedded.org/pipermail/openembedded-devel/2015-January/099795.html
 
->=20
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/ru=
-n-ptest b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-pte=
-st
-> new file mode 100644
-> index 0000000..e67f18e
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
-> @@ -0,0 +1,5 @@
-> +#!/bin/sh
-> +
-> +sh v4test.sh
-> +sh v6test.sh
-> +
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4=
-test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.=
-sh
-> new file mode 100644
-> index 0000000..5130856
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
-> @@ -0,0 +1,11 @@
-> +#!/bin/sh
-> +echo "v4test starting:"
-> +for t in $(find -maxdepth 1 -type f \! -name test\*_v6 -name test\*); do
-> +  echo "$t";
-> +  if $t; then
-> +    echo "PASS: $t"; echo "";
-> +  else
-> +    echo "FAIL: $t"; echo "";
-> +  fi
-> +  sleep 1;
-> +done
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6=
-test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.=
-sh
-> new file mode 100644
-> index 0000000..3a667df
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
-> @@ -0,0 +1,11 @@
-> +#!/bin/sh
-> +echo "v6test starting:"
-> +for t in $(find -maxdepth 1 -name test\*_v6); do
-> +  echo "$t";
-> +  if $t; then
-> +    echo "PASS: $t"; echo "";
-> +  else
-> +    echo "FAIL: $t"; echo "";
-> +  fi
-> +  sleep 1;
-> +done
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.=
-0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.=
-bb
-> index e2551e1..b756dd7 100644
-> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> @@ -1,13 +1,18 @@
->  SUMMARY =3D "The Linux Kernel Stream Control Transmission Protocol (lksc=
-tp) project"
-> +HOMEPAGE =3D "http://lksctp.org"
->  SECTION =3D "libs"
-> -LICENSE =3D "LGPLv2"
-> +LICENSE =3D "LGPLv2.1 & GPLv2"
-> =20
->  LIC_FILES_CHKSUM =3D " \
->      file://COPYING.lib;md5=3D0a1b79af951c42a9c8573533fbba9a92 \
->      file://COPYING;md5=3D0c56db0143f4f80c369ee3af7425af6e \
->  "
-> =20
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz"
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
-> +           file://run-ptest \
-> +           file://v4test.sh \
-> +           file://v6test.sh \
-> +          "
-> =20
->  SRC_URI[md5sum] =3D "708bb0b5a6806ad6e8d13c55b067518e"
->  SRC_URI[sha256sum] =3D "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4=
-f972f8deae351f26"
-> @@ -16,13 +21,21 @@ SRC_URI[sha256sum] =3D "0903dd526b7f30a89d5031aa2c827=
-57612becc38ed7bc6e4f972f8deae
->  #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/=
-libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symb=
-ol sctp_connectx has undefined version
->  #| collect2: error: ld returned 1 exit status
->  #| make[4]: *** [libsctp.la] Error 1
-> -PNBLACKLIST[lksctp-tools] =3D "BROKEN: fails to link against sctp_connec=
-tx symbol"
-> +PNBLACKLIST[lksctp-tools] =3D "${@base_contains('DISTRO_FEATURES', 'ld-i=
-s-gold', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
-> =20
->  S =3D "${WORKDIR}/${BP}"
-> =20
->  BBCLASSEXTEND =3D "native"
-> =20
-> -inherit autotools pkgconfig binconfig
-> +inherit autotools pkgconfig binconfig ptest
-> +
-> +do_install_ptest () {
-> +	install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
-> +	install -m 0755 ${WORKDIR}/v6test.sh ${D}${PTEST_PATH}
-> +	for testcase in `find ${B}/src/apps/.libs ${B}/src/func_tests/.libs -ma=
-xdepth 1 -type f -executable`; do
-> +		install $testcase ${D}${PTEST_PATH}
-> +	done
-> +}
-> =20
->  SOLIBVERSION=3D"${PV}"
->  SOLIBMAJORVERSION=3D"1"
-> --=20
-> 2.1.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+---
+ recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch  | 2 +-
+ recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch | 2 +-
+ recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch | 2 +-
+ recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch  | 2 +-
+ recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch      | 2 +-
+ .../openjdk/openjdk-7-25b30/icedtea-crosscompile-fix.patch         | 7 ++++++-
+ recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch | 4 ++--
+ 7 files changed, 13 insertions(+), 8 deletions(-)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch b/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch
+index ec10e69..ba738d6 100644
+--- a/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch
++++ b/recipes-core/openjdk/openjdk-6-6b24/icedtea-zero-hotspotfix.patch
+@@ -35,7 +35,7 @@ Index: openjdk/hotspot/make/linux/makefiles/zeroshark.make
+  	@echo Compiling offset generator
+  	$(QUIETLY) $(REMOVE_TARGET)
+ -	$(CC_COMPILE) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+-+	$(CC_COMPILE) -static -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+++	$(CC_COMPILE) -static -fuse-ld=bfd -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+  
+  endif
+  
+diff --git a/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch b/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch
+index 9a60bd6..0723954 100644
+--- a/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch
++++ b/recipes-core/openjdk/openjdk-6-6b27/icedtea-crosscompile-fix.patch
+@@ -463,7 +463,7 @@ index 1fa311d..f3d06ad 100644
+  $(SIZERS): $(SIZERS_C) 
+  	$(prep-target)
+ -	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
+-+	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -static -o $@ $(SIZER)$(suffix $@).c
+++	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -static -fuse-ld=bfd -o $@ $(SIZER)$(suffix $@).c
+  
+  $(WRAPPER_GENERATOR_CLASS): $(WRAPPER_GENERATOR_JAVA)
+  	$(prep-target)
+diff --git a/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch b/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch
+index 3b34160..067b356 100644
+--- a/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch
++++ b/recipes-core/openjdk/openjdk-6-6b32/icedtea-crosscompile-fix.patch
+@@ -247,7 +247,7 @@ index 1fa311d..f3d06ad 100644
+  $(SIZERS): $(SIZERS_C) 
+  	$(prep-target)
+ -	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
+-+	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -static -o $@ $(SIZER)$(suffix $@).c
+++	$(CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -static -fuse-ld=bfd -o $@ $(SIZER)$(suffix $@).c
+  
+  $(WRAPPER_GENERATOR_CLASS): $(WRAPPER_GENERATOR_JAVA)
+  	$(prep-target)
+diff --git a/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch b/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch
+index 91ace0e..f14deaf 100644
+--- a/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch
++++ b/recipes-core/openjdk/openjdk-6-6b32/icedtea-zero-hotspotfix.patch
+@@ -35,7 +35,7 @@ index c2a1484..f460d85 100644
+  	@echo Compiling offset generator
+  	$(QUIETLY) $(REMOVE_TARGET)
+ -	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+-+	$(CC_COMPILE) $(CFLAGS) -static -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+++	$(CC_COMPILE) $(CFLAGS) -static -fuse-ld=bfd -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+  
+  endif
+  
+diff --git a/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch b/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch
+index 38fb191..3d4a68c 100644
+--- a/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch
++++ b/recipes-core/openjdk/openjdk-6/fix_hotspot_crosscompile.patch
+@@ -88,7 +88,7 @@ Index: icedtea6-1.8/ports/hotspot/make/linux/makefiles/zeroshark.make
+  	@echo Compiling offset generator
+  	$(QUIETLY) $(REMOVE_TARGET)
+ -	$(CC_COMPILE) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+-+	$(CC_COMPILE) -static -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+++	$(CC_COMPILE) -static -fuse-ld=bfd -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+  
+  endif
+  
+diff --git a/recipes-core/openjdk/openjdk-7-25b30/icedtea-crosscompile-fix.patch b/recipes-core/openjdk/openjdk-7-25b30/icedtea-crosscompile-fix.patch
+index 39436a5..0c6aac4 100644
+--- a/recipes-core/openjdk/openjdk-7-25b30/icedtea-crosscompile-fix.patch
++++ b/recipes-core/openjdk/openjdk-7-25b30/icedtea-crosscompile-fix.patch
+@@ -319,7 +319,7 @@ index 53d31f3..183c063 100644
+  endif # 32
+  endif # !macosx
+  endif # solaris
+-@@ -337,11 +317,7 @@ WRAPPER_GENERATOR_TEMPDIR=$(TEMPDIR)/sun/awt/X11/generator
++@@ -337,15 +321,11 @@ WRAPPER_GENERATOR_TEMPDIR=$(TEMPDIR)/sun/awt/X11/generator
+  WRAPPER_GENERATOR_CLASS=$(WRAPPER_GENERATOR_TEMPDIR)/WrapperGenerator.class 
+  XLIBTYPES=$(PLATFORM_SRC)/classes/sun/awt/X11/generator/xlibtypes.txt
+  
+@@ -331,6 +331,11 @@ index 53d31f3..183c063 100644
+  
+  $(SIZERS): $(SIZERS_C) 
+  	$(prep-target)
++-	$(SIZERS_CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -o $@ $(SIZER)$(suffix $@).c
+++	$(SIZERS_CC) $(CFLAGS_$(subst .,,$(suffix $@))) $(CPPFLAGS) -static -fuse-ld=bfd -o $@ $(SIZER)$(suffix $@).c
++ 
++ $(WRAPPER_GENERATOR_CLASS): $(WRAPPER_GENERATOR_JAVA)
++ 	$(prep-target)
+ @@ -358,6 +334,16 @@ $(SIZERS_C): $(WRAPPER_GENERATOR_CLASS) $(XLIBTYPES)
+  	    $(SIZER_DIR) $(XLIBTYPES) "sizer" $(subst .,,$(suffix $(basename $@)))
+  
+diff --git a/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch b/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch
+index 83dba2b..784f2de 100644
+--- a/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch
++++ b/recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch
+@@ -25,13 +25,13 @@ index c2a1484..156bdd0 100644
+  mkbc:	$(GAMMADIR)/tools/mkbc.c
+  	@echo Compiling mkbc tool
+ -	$(CC_COMPILE) -o $@ $< $(COMPILE_DONE)
+-+	$(CC_COMPILE) -static -o $@ $< $(COMPILE_DONE)
+++	$(CC_COMPILE) -static -fuse-ld=bfd -o $@ $< $(COMPILE_DONE)
+  
+  mkoffsets:	asm_helper.cpp
+  	@echo Compiling offset generator
+  	$(QUIETLY) $(REMOVE_TARGET)
+ -	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+-+	$(CC_COMPILE) $(CFLAGS) -DSTATIC_OFFSETS -static -o $@ $< $(COMPILE_DONE)
+++	$(CC_COMPILE) $(CFLAGS) -static -fuse-ld=bfd -DSTATIC_OFFSETS -o $@ $< $(COMPILE_DONE)
+  
+  endif
+  
+-- 
+1.9.3
 
---BXVAT5kNtrzKuDFl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlS+b94ACgkQN1Ujt2V2gByJewCcD9eBZTRLhZhB7U2kJFQIDxTv
-YxAAoJwRZb+USOP0GnDW3XqCmwmyA7p2
-=bD3m
------END PGP SIGNATURE-----
-
---BXVAT5kNtrzKuDFl--
