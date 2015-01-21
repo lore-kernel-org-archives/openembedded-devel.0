@@ -1,62 +1,32 @@
-Return-Path: <ting.liu@freescale.com>
-Received: from na01-by2-obe.outbound.protection.outlook.com
-	(mail-by2on0115.outbound.protection.outlook.com [207.46.100.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 94EA972C9C
+Return-Path: <cristian.iorga@intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 8039271144
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2015 08:38:54 +0000 (UTC)
-Received: from DM2PR03CA0052.namprd03.prod.outlook.com (10.141.96.51) by
-	BN1PR0301MB0705.namprd03.prod.outlook.com (25.160.78.12) with Microsoft
-	SMTP Server (TLS) id 15.1.59.20; Wed, 21 Jan 2015 08:23:21 +0000
-Received: from BN1BFFO11FD050.protection.gbl (2a01:111:f400:7c10::1:107) by
-	DM2PR03CA0052.outlook.office365.com (2a01:111:e400:2428::51) with
-	Microsoft
-	SMTP Server (TLS) id 15.1.59.20 via Frontend Transport; Wed, 21 Jan 2015
-	08:23:21 +0000
-Received: from tx30smr01.am.freescale.net (192.88.168.50) by
-	BN1BFFO11FD050.mail.protection.outlook.com (10.58.145.5) with Microsoft
-	SMTP Server (TLS) id 15.1.59.14 via Frontend Transport;
-	Wed, 21 Jan 2015 08:23:19 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	t0L8NEes017727; Wed, 21 Jan 2015 01:23:17 -0700
-From: <b28495@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Jan 2015 16:23:03 +0800
-Message-ID: <1421828586-19021-2-git-send-email-b28495@freescale.com>
-X-Mailer: git-send-email 1.9.2
-In-Reply-To: <1421828586-19021-1-git-send-email-b28495@freescale.com>
-References: <1421828586-19021-1-git-send-email-b28495@freescale.com>
-X-EOPAttributedMessage: 0
-Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
-	designate 192.88.168.50 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=192.88.168.50; helo=tx30smr01.am.freescale.net;
-Authentication-Results: spf=fail (sender IP is 192.88.168.50)
-	smtp.mailfrom=ting.liu@freescale.com; 
-X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:NLI; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10019020)(6009001)(339900001)(189002)(199003)(47776003)(104016003)(87936001)(46102003)(105606002)(64706001)(97736003)(33646002)(77096005)(68736005)(19580395003)(85426001)(19580405001)(6806004)(575784001)(48376002)(92566002)(50226001)(50986999)(50466002)(76176999)(62966003)(110136001)(2351001)(86152002)(450100001)(36756003)(77156002)(229853001)(106466001)(2950100001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BN1PR0301MB0705;
-	H:tx30smr01.am.freescale.net; FPR:; SPF:Fail; MLV:sfv;
-	PTR:InfoDomainNonexistent; MX:1; A:1; LANG:en; 
+	Wed, 21 Jan 2015 09:35:20 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga103.fm.intel.com with ESMTP; 21 Jan 2015 01:29:39 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="443104838"
+Received: from irsmsx153.ger.corp.intel.com ([163.33.192.75])
+	by FMSMGA003.fm.intel.com with ESMTP; 21 Jan 2015 01:22:01 -0800
+Received: from irsmsx105.ger.corp.intel.com ([169.254.7.81]) by
+	IRSMSX153.ger.corp.intel.com ([169.254.9.2]) with mapi id
+	14.03.0195.001; Wed, 21 Jan 2015 09:35:19 +0000
+From: "Iorga, Cristian" <cristian.iorga@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: connman + wpa_supplicant
+Thread-Index: AdAv2ZrEyOJZ/4VQTuKJyV3JpT1KogFg1ZjQ
+Date: Wed, 21 Jan 2015 09:35:19 +0000
+Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F419387@irsmsx105.ger.corp.intel.com>
+References: <F48900D76F0D8349918584FEEFEB4BCA06272BF2@SEXCHANGE0100.lpg.priv>
+In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA06272BF2@SEXCHANGE0100.lpg.priv>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [163.33.239.182]
 MIME-Version: 1.0
-X-DmarcAction-Test: None
-X-Microsoft-Antispam: UriScan:;
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:BN1PR0301MB0705;
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
-	SRVR:BN1PR0301MB0705; 
-X-Forefront-PRVS: 04631F8F77
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
-	SRVR:BN1PR0301MB0705; 
-X-OriginatorOrg: freescale.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2015 08:23:19.9800 (UTC)
-X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d;
-	Ip=[192.88.168.50]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN1PR0301MB0705
-Subject: [meta-java][PATCH 1/4] openjdk-6: Remove currency data generation expiration date
+Subject: Re: connman + wpa_supplicant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,100 +40,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2015 08:38:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Jan 2015 09:35:24 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Ting Liu <ting.liu@freescale.com>
+Hi Daniel,
+Your issue description is very light on details.
+Can you add some logs to it, the detailed versions of connman and wpa_suppl=
+icant, maybe some logs from these components, etc?
 
-As the openjdk source was extracted during 'make patch-ecj' in
-do_configure, apply the patch via do_configure_append.
+I don't remember such an issue being reported, but everything is possible.
 
-icedtea6-1.13.4/Makefile.am:1200:stamps/extract-openjdk.stamp: stamps/download.stamp
-| if OPENJDK_SRC_DIR_FOUND
-|         if ! test -d openjdk ; then \
-|           cp -pPR $(OPENJDK_SRC_DIR_LINK) $(OPENJDK_SRC_DIR) openjdk ; \
-|         fi
-| else
-| if USE_HG
-|         if ! test -d openjdk ; then \
-|           cp -pPRl openjdk.hg openjdk ; \
-|         fi
-| else
-|         set -e ; \
-|         if ! test -d openjdk ; \
-|         then \
-|           mkdir openjdk ; \
-|           $(TAR) xf $(OPENJDK_SRC_ZIP) -C openjdk; \
-|           chmod -R ug+w openjdk ; \
-|           sh $(abs_top_srcdir)/fsg.sh ; \
-|         fi
-| endif
-| endif
+Regards,
+Cristian Iorga
+Yocto Project
+Intel Corporation
 
-Signed-off-by: Ting Liu <ting.liu@freescale.com>
----
- ...njdk-remove-currency-data-generation-expi.patch | 25 ++++++++++++++++++++++
- recipes-core/openjdk/openjdk-6-release-6b32.inc    |  8 +++++++
- 2 files changed, 33 insertions(+)
- create mode 100644 recipes-core/openjdk/openjdk-6-6b32/icedtea-openjdk-remove-currency-data-generation-expi.patch
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of MONDON Daniel
+Sent: Wednesday, January 14, 2015 11:08 AM
+To: openembedded-devel@lists.openembedded.org
+Subject: [oe] connman + wpa_supplicant
 
-diff --git a/recipes-core/openjdk/openjdk-6-6b32/icedtea-openjdk-remove-currency-data-generation-expi.patch b/recipes-core/openjdk/openjdk-6-6b32/icedtea-openjdk-remove-currency-data-generation-expi.patch
-new file mode 100644
-index 0000000..6dd36af
---- /dev/null
-+++ b/recipes-core/openjdk/openjdk-6-6b32/icedtea-openjdk-remove-currency-data-generation-expi.patch
-@@ -0,0 +1,25 @@
-+From 7df2fd1014a0c31f518be4f6a0018533f469d584 Mon Sep 17 00:00:00 2001
-+From: Alex Gonzalez <alex.gonzalez@digi.com>
-+Date: Wed, 31 Dec 2014 16:07:32 +0100
-+Subject: [PATCH] icedtea: openjdk: remove currency data generation expiration
-+ date
-+
-+Signed-off-by: Alex Gonzalez <alex.gonzalez@digi.com>
-+---
-+ .../src/build/tools/generatecurrencydata/GenerateCurrencyData.java     | 3 ---
-+ 1 file changed, 3 deletions(-)
-+
-+diff --git openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
-+index bf335fa22c1d..0e421360fef9 100644
-+--- openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
-++++ openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
-+@@ -281,9 +281,6 @@ public class GenerateCurrencyData {
-+             checkCurrencyCode(newCurrency);
-+             String timeString = currencyInfo.substring(4, length - 4);
-+             long time = format.parse(timeString).getTime();
-+-            if (Math.abs(time - System.currentTimeMillis()) > ((long) 10) * 365 * 24 * 60 * 60 * 1000) {
-+-                throw new RuntimeException("time is more than 10 years from present: " + time);
-+-            }
-+             specialCaseCutOverTimes[specialCaseCount] = time;
-+             specialCaseOldCurrencies[specialCaseCount] = oldCurrency;
-+             specialCaseOldCurrenciesDefaultFractionDigits[specialCaseCount] = getDefaultFractionDigits(oldCurrency);
-diff --git a/recipes-core/openjdk/openjdk-6-release-6b32.inc b/recipes-core/openjdk/openjdk-6-release-6b32.inc
-index fb7fb35..bf5e675 100644
---- a/recipes-core/openjdk/openjdk-6-release-6b32.inc
-+++ b/recipes-core/openjdk/openjdk-6-release-6b32.inc
-@@ -4,12 +4,20 @@ DEPENDS += "krb5"
- 
- FILESPATH =. "${FILE_DIRNAME}/openjdk-6-6b32:"
- 
-+ICEDTEAPATCHES += "file://icedtea-openjdk-remove-currency-data-generation-expi.patch;apply=no"
-+
- EXTRA_OECONF += "--disable-downloading \
-                  --enable-system-zlib \
-                  --enable-system-jpeg \
-                  --enable-system-png \
-                  --enable-system-gif \
-                 "
-+do_configure_append () {
-+    patch -p0 <${WORKDIR}/icedtea-openjdk-remove-currency-data-generation-expi.patch
-+    cd openjdk-ecj
-+    patch -p1 <${WORKDIR}/icedtea-openjdk-remove-currency-data-generation-expi.patch
-+    cd ..
-+}
- 
- OPENJDK_VERSION = "b32"
- OPENJDK_DATE = "15_jul_2014"
--- 
-1.9.1
+Hi,
 
+I've got a angstrom v2012.05 based system with 3.2.30 kernel (forbidden to =
+full update!).
+
+My application is using connmanctl (and wpa_supplicant) for wifi communicat=
+ion.
+In fact, the application is looking for wifi hot spot, connect if needed an=
+d the make tcp communication.
+
+When no network is present, of after user is disconnected, the application =
+is going more and more slowly.
+
+I found wpa_supplicant process which use more and more cpu.
+If I kill and restart the process, everything is ok.
+
+In fact, more I use connmanctl command, more the wpa_supplicant process use=
+ CPU.
+When connexion is established, there is no access to connmanctl, and no pro=
+blem occurs.
+But users may or may not use wifi.
+Then I have to correct the problem.
+
+Is it a known problem ? and solved ?
+
+Thanks
+Daniel.
+--=20
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
