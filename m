@@ -1,32 +1,32 @@
 Return-Path: <ting.liu@freescale.com>
-X-Greylist: delayed 690 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 21 Jan 2015 08:34:56 UTC
-Received: from na01-bl2-obe.outbound.protection.outlook.com
-	(mail-bl2on0111.outbound.protection.outlook.com [65.55.169.111])
-	by mail.openembedded.org (Postfix) with ESMTP id E4F0A71144
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2on0139.outbound.protection.outlook.com [207.46.100.139])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C96D721E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2015 08:34:56 +0000 (UTC)
-Received: from DM2PR03CA0036.namprd03.prod.outlook.com (10.141.96.35) by
-	BY2PR0301MB0712.namprd03.prod.outlook.com (25.160.63.154) with
-	Microsoft SMTP
-	Server (TLS) id 15.1.59.20; Wed, 21 Jan 2015 08:34:55 +0000
-Received: from BL2FFO11FD019.protection.gbl (2a01:111:f400:7c09::142) by
-	DM2PR03CA0036.outlook.office365.com (2a01:111:e400:2428::35) with
+	Wed, 21 Jan 2015 08:38:39 +0000 (UTC)
+Received: from BN3PR0301CA0045.namprd03.prod.outlook.com (25.160.152.141) by
+	DM2PR0301MB1199.namprd03.prod.outlook.com (25.160.217.149) with
 	Microsoft
-	SMTP Server (TLS) id 15.1.59.20 via Frontend Transport; Wed, 21 Jan 2015
-	08:34:54 +0000
+	SMTP Server (TLS) id 15.1.59.20; Wed, 21 Jan 2015 08:23:24 +0000
+Received: from BN1AFFO11FD007.protection.gbl (2a01:111:f400:7c10::104) by
+	BN3PR0301CA0045.outlook.office365.com (2a01:111:e400:401e::13) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.65.19 via Frontend Transport; Wed, 21 Jan 2015
+	08:23:24 +0000
 Received: from tx30smr01.am.freescale.net (192.88.168.50) by
-	BL2FFO11FD019.mail.protection.outlook.com (10.173.161.37) with
-	Microsoft SMTP Server (TLS) id 15.1.59.14 via Frontend Transport;
-	Wed, 21 Jan 2015 08:34:54 +0000
+	BN1AFFO11FD007.mail.protection.outlook.com (10.58.52.67) with Microsoft
+	SMTP Server (TLS) id 15.1.75.11 via Frontend Transport;
+	Wed, 21 Jan 2015 08:23:22 +0000
 Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
 	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	t0L8Yp1D023248; Wed, 21 Jan 2015 01:34:52 -0700
+	t0L8NEeu017727; Wed, 21 Jan 2015 01:23:20 -0700
 From: <b28495@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Jan 2015 16:34:50 +0800
-Message-ID: <1421829290-10623-1-git-send-email-b28495@freescale.com>
+Date: Wed, 21 Jan 2015 16:23:05 +0800
+Message-ID: <1421828586-19021-4-git-send-email-b28495@freescale.com>
 X-Mailer: git-send-email 1.9.2
+In-Reply-To: <1421828586-19021-1-git-send-email-b28495@freescale.com>
+References: <1421828586-19021-1-git-send-email-b28495@freescale.com>
 X-EOPAttributedMessage: 0
 Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
 	designate 192.88.168.50 as permitted sender)
@@ -36,28 +36,28 @@ Authentication-Results: spf=fail (sender IP is 192.88.168.50)
 	smtp.mailfrom=ting.liu@freescale.com; 
 X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:NLI; EFV:NLI;
 	SFV:NSPM;
-	SFS:(10019020)(6009001)(339900001)(199003)(189002)(50986999)(229853001)(33646002)(2351001)(86152002)(85426001)(87936001)(62966003)(6806004)(77156002)(450100001)(19580405001)(110136001)(19580395003)(50226001)(575784001)(46102003)(48376002)(92566002)(50466002)(105606002)(97736003)(64706001)(47776003)(104016003)(106466001)(36756003)(77096005)(68736005);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BY2PR0301MB0712;
+	SFS:(10019020)(6009001)(339900001)(199003)(189002)(50986999)(92566002)(106466001)(229853001)(2351001)(105606002)(76176999)(50226001)(36756003)(33646002)(86152002)(104016003)(62966003)(77156002)(450100001)(68736005)(77096005)(2950100001)(50466002)(110136001)(48376002)(47776003)(64706001)(97736003)(46102003)(87936001)(19580395003)(6806004)(19580405001)(85426001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DM2PR0301MB1199;
 	H:tx30smr01.am.freescale.net; FPR:; SPF:Fail; MLV:sfv;
 	PTR:InfoDomainNonexistent; A:1; MX:1; LANG:en; 
 MIME-Version: 1.0
 X-DmarcAction-Test: None
 X-Microsoft-Antispam: UriScan:;
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:BY2PR0301MB0712;
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:DM2PR0301MB1199;
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
-	SRVR:BY2PR0301MB0712; 
+	SRVR:DM2PR0301MB1199; 
 X-Forefront-PRVS: 04631F8F77
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
-	SRVR:BY2PR0301MB0712; 
+	SRVR:DM2PR0301MB1199; 
 X-OriginatorOrg: freescale.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2015 08:34:54.2548 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jan 2015 08:23:22.7226 (UTC)
 X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d;
 	Ip=[192.88.168.50]
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR0301MB0712
-Subject: [meta-java][PATCH] openjdk-6: Fix cross compilation for e6500 machines
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM2PR0301MB1199
+Subject: [meta-java][PATCH 3/4] openjdk-6: do not run gamma test for cross compiles
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,55 +71,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2015 08:35:05 -0000
+X-List-Received-Date: Wed, 21 Jan 2015 08:38:42 -0000
 Content-Type: text/plain
 
-From: Zhenhua Luo <zhenhua.luo@freescale.com>
+From: Ting Liu <ting.liu@freescale.com>
 
-This is only way for compile for now since qemu can not
-run the sizers binary for e6500 machines. It segfaults
-so we disable generating sizes and also xawt and jawt
-which depends on sizers, this lets jre to cross compile
-for ppc/e6500
+set CROSS_COMPILE_ARCH which will be checked before run gamma test.
 
-The fix is ported according to da0b3a20a67496dc8d4282d19a60672001b7f825
+Fix the below issue:
+| make[6]: Leaving directory `.../openjdk-6-jre/6b32-1.13.4-r22.0/build/openjdk.build/hotspot/outputdir/linux_ppc64_zero/product'
+| cd linux_ppc64_zero/product && ./test_gamma
+| ./test_gamma: line 72: ./gamma: cannot execute binary file
+| make[5]: *** [productzero] Error 126
 
-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
 Signed-off-by: Ting Liu <ting.liu@freescale.com>
 ---
- recipes-core/openjdk/openjdk-6-release-6b24.inc | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ recipes-core/openjdk/openjdk-6-common.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-core/openjdk/openjdk-6-release-6b24.inc b/recipes-core/openjdk/openjdk-6-release-6b24.inc
-index d0da379..da5299f 100644
---- a/recipes-core/openjdk/openjdk-6-release-6b24.inc
-+++ b/recipes-core/openjdk/openjdk-6-release-6b24.inc
-@@ -90,6 +90,13 @@ ICEDTEAPATCHES_append_e5500-64b = " \
- ICEDTEAPATCHES_append_e5500 = " \
-         file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
- 	"
-+ICEDTEAPATCHES_append_e6500-64b = " \
-+        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
-+        "
-+ICEDTEAPATCHES_append_e6500 = " \
-+        file://icedtea-jdk-sizers-crosscompile-hack.patch;apply=no \
-+        "
-+
- ICEDTEAPATCHES_append_libc-uclibc = " \
-         file://icedtea-hotspot-isfinte.patch;apply=no \
-         file://icedtea-hotspot-glibc-version.patch;apply=no \
-@@ -132,4 +139,11 @@ DISTRIBUTION_PATCHES_append_e5500-64b = " \
- DISTRIBUTION_PATCHES_append_e5500 = " \
-        patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-        "
-+DISTRIBUTION_PATCHES_append_e6500-64b = " \
-+       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-+       "
-+
-+DISTRIBUTION_PATCHES_append_e6500 = " \
-+       patches/icedtea-jdk-sizers-crosscompile-hack.patch \
-+       "
- export DISTRIBUTION_PATCHES
+diff --git a/recipes-core/openjdk/openjdk-6-common.inc b/recipes-core/openjdk/openjdk-6-common.inc
+index 4254c9f..7ad7097 100644
+--- a/recipes-core/openjdk/openjdk-6-common.inc
++++ b/recipes-core/openjdk/openjdk-6-common.inc
+@@ -167,6 +167,7 @@ EXTRA_OEMAKE += ' \
+                 OE_CXXFLAGS="${TARGET_CXXFLAGS}" \
+                 OE_LDFLAGS="${TARGET_LDFLAGS}" \
+                 ZIPEXE="${STAGING_BINDIR_NATIVE}/zip" \
++                CROSS_COMPILE_ARCH="${JDK_ARCH}" \
+                '
+ 
+ OE_LAUNCHER_LDFLAGS = "-Wl,-rpath-link,${STAGING_LIBDIR}/llvm${WANT_LLVM_RELEASE} -Wl,-rpath,/usr/lib/llvm${WANT_LLVM_RELEASE}"
 -- 
 1.9.1
 
