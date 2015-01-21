@@ -1,30 +1,25 @@
 Return-Path: <Kai.Kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FD2672C1A
+	by mail.openembedded.org (Postfix) with ESMTP id 4497B72858
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jan 2015 01:33:46 +0000 (UTC)
+	Wed, 21 Jan 2015 02:21:41 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0L1XjOc014660
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0L2LfwH019448
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL);
-	Tue, 20 Jan 2015 17:33:45 -0800 (PST)
-Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.174.1;
-	Tue, 20 Jan 2015 17:33:44 -0800
-Message-ID: <54BF01F2.3000901@windriver.com>
-Date: Wed, 21 Jan 2015 09:33:38 +0800
-From: Kang Kai <Kai.Kang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	Tue, 20 Jan 2015 18:21:41 -0800 (PST)
+Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.174.1; Tue, 20 Jan 2015 18:21:40 -0800
+From: Kai Kang <kai.kang@windriver.com>
+To: <martin.jansa@gmail.com>
+Date: Wed, 21 Jan 2015 10:21:28 +0800
+Message-ID: <1421806889-30564-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.1.1
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Martin Jansa
-	<martin.jansa@gmail.com>
-References: <1421739732-28362-1-git-send-email-kai.kang@windriver.com>
-	<20150120151022.GA2453@jama>
-In-Reply-To: <20150120151022.GA2453@jama>
 X-Originating-IP: [128.224.162.231]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH] lksctp-tools: add ptest subpackage and other updates
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] V2: lksctp-tools: add ptest subpackage and other updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,170 +33,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jan 2015 01:33:49 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 21 Jan 2015 02:21:48 -0000
+Content-Type: text/plain
 
-On 2015年01月20日 23:10, Martin Jansa wrote:
-> On Tue, Jan 20, 2015 at 03:42:12PM +0800, Kai Kang wrote:
->> Some updates for lksctp-tools:
->>
->> * add ptest subpackage
->> * only blacklist lksctp-tools when gold ld is used. Refer to:
->> https://bugs.gentoo.org/show_bug.cgi?id=530318
->> * update licenses and add homepage.
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   .../lksctp-tools/lksctp-tools/run-ptest             |  5 +++++
->>   .../lksctp-tools/lksctp-tools/v4test.sh             | 11 +++++++++++
->>   .../lksctp-tools/lksctp-tools/v6test.sh             | 11 +++++++++++
->>   .../lksctp-tools/lksctp-tools_1.0.16.bb             | 21 +++++++++++++++++----
->>   4 files changed, 44 insertions(+), 4 deletions(-)
->>   create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
->>   create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
->>   create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
-> OE @ ~/meta-openembedded $ pwam 87065
-> 2015-01-20 16:08:10 URL:http://patchwork.openembedded.org/patch/87065/mbox/ [4796] -> "pw-am-87065.patch" [1]
-> Applying: lksctp-tools: add ptest subpackage and other updates
-> /OE/meta-openembedded/.git/rebase-apply/patch:21: new blank line at EOF.
-> +
-> error: patch failed: meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb:16
-> error: meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb: patch does not apply
-> Patch failed at 0001 lksctp-tools: add ptest subpackage and other updates
-> The copy of the patch that failed is found in:
->     /OE/meta-openembedded/.git/rebase-apply/patch
-> When you have resolved this problem, run "git am --continue".
-> If you prefer to skip this patch, run "git am --skip" instead.
-> To restore the original branch and stop patching, run "git am --abort".
->
-> most likely because the change was based on commit older than
->
-> OE @ ~/meta-openembedded $ git log meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> commit 96a92761c0a1bb2317fa4ea422c32e4473405103
-> Author: Martin Jansa <Martin.Jansa@gmail.com>
-> Date:   Sat Dec 6 08:01:57 2014 +0100
->
->      PNBLACKLIST: use weak assignments
+V2:
+* rebased on origin/master-next and build for qemuarm
 
-Hi Martin,
+Kai Kang (1):
+  lksctp-tools: add ptest subpackage and other updates
 
-> please rebase before sending
-
-I am very sorry about that and will more careful next time.
-
---Kai
-
-
->
->> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
->> new file mode 100644
->> index 0000000..e67f18e
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
->> @@ -0,0 +1,5 @@
->> +#!/bin/sh
->> +
->> +sh v4test.sh
->> +sh v6test.sh
->> +
->> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
->> new file mode 100644
->> index 0000000..5130856
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
->> @@ -0,0 +1,11 @@
->> +#!/bin/sh
->> +echo "v4test starting:"
->> +for t in $(find -maxdepth 1 -type f \! -name test\*_v6 -name test\*); do
->> +  echo "$t";
->> +  if $t; then
->> +    echo "PASS: $t"; echo "";
->> +  else
->> +    echo "FAIL: $t"; echo "";
->> +  fi
->> +  sleep 1;
->> +done
->> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
->> new file mode 100644
->> index 0000000..3a667df
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
->> @@ -0,0 +1,11 @@
->> +#!/bin/sh
->> +echo "v6test starting:"
->> +for t in $(find -maxdepth 1 -name test\*_v6); do
->> +  echo "$t";
->> +  if $t; then
->> +    echo "PASS: $t"; echo "";
->> +  else
->> +    echo "FAIL: $t"; echo "";
->> +  fi
->> +  sleep 1;
->> +done
->> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
->> index e2551e1..b756dd7 100644
->> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
->> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
->> @@ -1,13 +1,18 @@
->>   SUMMARY = "The Linux Kernel Stream Control Transmission Protocol (lksctp) project"
->> +HOMEPAGE = "http://lksctp.org"
->>   SECTION = "libs"
->> -LICENSE = "LGPLv2"
->> +LICENSE = "LGPLv2.1 & GPLv2"
->>   
->>   LIC_FILES_CHKSUM = " \
->>       file://COPYING.lib;md5=0a1b79af951c42a9c8573533fbba9a92 \
->>       file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e \
->>   "
->>   
->> -SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz"
->> +SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
->> +           file://run-ptest \
->> +           file://v4test.sh \
->> +           file://v6test.sh \
->> +          "
->>   
->>   SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
->>   SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26"
->> @@ -16,13 +21,21 @@ SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae
->>   #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symbol sctp_connectx has undefined version
->>   #| collect2: error: ld returned 1 exit status
->>   #| make[4]: *** [libsctp.la] Error 1
->> -PNBLACKLIST[lksctp-tools] = "BROKEN: fails to link against sctp_connectx symbol"
->> +PNBLACKLIST[lksctp-tools] = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
->>   
->>   S = "${WORKDIR}/${BP}"
->>   
->>   BBCLASSEXTEND = "native"
->>   
->> -inherit autotools pkgconfig binconfig
->> +inherit autotools pkgconfig binconfig ptest
->> +
->> +do_install_ptest () {
->> +	install -m 0755 ${WORKDIR}/v4test.sh ${D}${PTEST_PATH}
->> +	install -m 0755 ${WORKDIR}/v6test.sh ${D}${PTEST_PATH}
->> +	for testcase in `find ${B}/src/apps/.libs ${B}/src/func_tests/.libs -maxdepth 1 -type f -executable`; do
->> +		install $testcase ${D}${PTEST_PATH}
->> +	done
->> +}
->>   
->>   SOLIBVERSION="${PV}"
->>   SOLIBMAJORVERSION="1"
->> -- 
->> 2.1.1
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-
+ .../lksctp-tools/lksctp-tools/run-ptest             |  5 +++++
+ .../lksctp-tools/lksctp-tools/v4test.sh             | 11 +++++++++++
+ .../lksctp-tools/lksctp-tools/v6test.sh             | 11 +++++++++++
+ .../lksctp-tools/lksctp-tools_1.0.16.bb             | 21 +++++++++++++++++----
+ 4 files changed, 44 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/run-ptest
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v4test.sh
+ create mode 100644 meta-networking/recipes-support/lksctp-tools/lksctp-tools/v6test.sh
 
 -- 
-Regards,
-Neil | Kai Kang
+2.1.1
 
 
