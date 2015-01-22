@@ -1,29 +1,24 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A3117251B
+Return-Path: <Jianchuan.Wang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DC14C71144
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jan 2015 08:20:55 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="56458393"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 22 Jan 2015 16:17:25 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0M8KFXe022473
+	Thu, 22 Jan 2015 09:36:29 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0M9aUZi024134
+	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jan 2015 16:20:15 +0800
-Received: from localhost.localdomain (10.167.226.35) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 22 Jan 2015 16:20:53 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
+	Thu, 22 Jan 2015 01:36:30 -0800 (PST)
+Received: from PEK-JWANG7-D1.wrs.com (128.224.162.153) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 22 Jan 2015 01:36:30 -0800
+From: <jianchuan.wang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 22 Jan 2015 16:20:14 +0800
-Message-ID: <1421914814-1907-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <20141209104015.GK2470@jama>
-References: <20141209104015.GK2470@jama>
+Date: Thu, 22 Jan 2015 17:35:56 +0800
+Message-ID: <1421919356-3982-1-git-send-email-jianchuan.wang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.35]
-Subject: [meta-networking][PATCH v2] netkit-telnet: add new recipe
+Subject: [meta-networking][PATCH v3] ipvsadm: Add version 1.26 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,1366 +32,236 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jan 2015 08:21:04 -0000
+X-List-Received-Date: Thu, 22 Jan 2015 09:36:38 -0000
 Content-Type: text/plain
 
-netkit-telnet includes the telnetd and client.
-telnetd: daemon for telnet protocol.
-telnet: client for telnet protocol.
+From: Jianchuan Wang <jianchuan.wang@windriver.com>
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+* add ipvs administration tool
+
+Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
 ---
- .../files/Fix-errors-in-the-step-of-install.patch  |   36 +
- .../files/To-aviod-buffer-overflow-in-telnet.patch | 1213 ++++++++++++++++++++
- .../netkit-telnet/files/telnet-xinetd              |   14 +
- .../netkit-telnet/netkit-telnet_0.17.bb            |   53 +
- 4 files changed, 1316 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/netkit-telnet/files/Fix-errors-in-the-step-of-install.patch
- create mode 100644 meta-networking/recipes-daemons/netkit-telnet/files/To-aviod-buffer-overflow-in-telnet.patch
- create mode 100644 meta-networking/recipes-daemons/netkit-telnet/files/telnet-xinetd
- create mode 100644 meta-networking/recipes-daemons/netkit-telnet/netkit-telnet_0.17.bb
+ ...001-Modify-the-Makefile-for-cross-compile.patch | 97 ++++++++++++++++++++++
+ .../0002-Replace-nl_handle-to-nl_sock.patch        | 63 ++++++++++++++
+ .../recipes-support/ipvsadm/ipvsadm_1.26.bb        | 34 ++++++++
+ 3 files changed, 194 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
 
-diff --git a/meta-networking/recipes-daemons/netkit-telnet/files/Fix-errors-in-the-step-of-install.patch b/meta-networking/recipes-daemons/netkit-telnet/files/Fix-errors-in-the-step-of-install.patch
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch b/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
 new file mode 100644
-index 0000000..b6b386f
+index 0000000..7c3dfe4
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/netkit-telnet/files/Fix-errors-in-the-step-of-install.patch
-@@ -0,0 +1,36 @@
-+From 31362e4c0d02b4a2b952ad0dd32acfb573c442f3 Mon Sep 17 00:00:00 2001
-+From: Li xin <lixin.fnst@cn.fujitsu.com>
-+Date: Fri, 28 Nov 2014 07:17:40 +0900
-+Subject: [PATCH 2/2] fix errors in the step of install
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
+@@ -0,0 +1,97 @@
++From 58292175115bae7a4c3600d3022e59ea57213025 Mon Sep 17 00:00:00 2001
++From: Jianchuan Wang <jianchuan.wang@windriver.com>
++Date: Mon, 12 Jan 2015 15:53:23 +0800
++Subject: [PATCH] Modify the Makefile for cross compile.
 +
-+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
 +---
-+ telnetd/Makefile | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
++ Makefile         | 23 ++++++-----------------
++ libipvs/Makefile |  3 +--
++ 2 files changed, 7 insertions(+), 19 deletions(-)
 +
-+diff --git a/telnetd/Makefile b/telnetd/Makefile
-+index 72650b4..a4cf9fa 100644
-+--- a/telnetd/Makefile
-++++ b/telnetd/Makefile
-+@@ -9,7 +9,8 @@ include ../MRULES
-+ # take out -DPARANOID_TTYS.
++diff --git a/Makefile b/Makefile
++index e4e03cc..461c021 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -35,10 +35,9 @@ ARCH		= $(shell uname -m)
++ RPMSOURCEDIR	= $(shell rpm --eval '%_sourcedir')
++ RPMSPECDIR	= $(shell rpm --eval '%_specdir')
 + 
-+ CFLAGS += '-DISSUE_FILE="/etc/issue.net"' -DPARANOID_TTYS \
-+-	   -DNO_REVOKE -DKLUDGELINEMODE -DDIAGNOSTICS
-++	   -DNO_REVOKE -DKLUDGELINEMODE -DDIAGNOSTICS \
-++	   -DLOGIN_WRAPPER=\"/usr/lib/telnetlogin\"
-+ # LIBS += $(LIBTERMCAP)
++-CC		= gcc
++ INCLUDE		=
++ SBIN		= $(BUILD_ROOT)/sbin
++-MANDIR		= usr/man
+++MANDIR		= usr/share/man
++ MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
++ INIT		= $(BUILD_ROOT)/etc/rc.d/init.d
++ MKDIR		= mkdir
++@@ -62,17 +61,7 @@ RPMBUILD = $(shell				\
++ 		echo "/bin/rpm";		\
++ 	fi )
 + 
-+ OBJS = telnetd.o state.o termstat.o slc.o sys_term.o utility.o \
-+@@ -27,7 +28,7 @@ $(OBJS): defs.h ext.h pathnames.h telnetd.h logwtmp.h logout.h setproctitle.h
-+ telnetd.o: ../version.h
++-ifeq (,$(FORCE_GETOPT))
++-LIB_SEARCH = /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/local/lib
++-POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
++-  if [ -f $$i/libpopt.a ]; then \
++-    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
++-	echo "-lpopt"; \
++-	break; \
++-    fi; \
++-  fi; \
++-done)
++-endif
+++POPT_LIB = -lpopt
 + 
-+ install: telnetd
-+-	install -s -m$(DAEMONMODE) telnetd $(INSTALLROOT)$(SBINDIR)/in.telnetd
-++	install -m$(DAEMONMODE) telnetd $(INSTALLROOT)$(SBINDIR)/in.telnetd
-+ 	install -m$(MANMODE) issue.net.5 $(INSTALLROOT)$(MANDIR)/man5/
-+ 	install -m$(MANMODE) telnetd.8 $(INSTALLROOT)$(MANDIR)/man8/in.telnetd.8
-+ 	ln -sf in.telnetd.8 $(INSTALLROOT)$(MANDIR)/man8/telnetd.8
++ ifneq (,$(POPT_LIB))
++ POPT_DEFINE = -DHAVE_POPT
++@@ -81,7 +70,7 @@ endif
++ OBJS		= ipvsadm.o config_stream.o dynamic_array.o
++ LIBS		= $(POPT_LIB)
++ ifneq (0,$(HAVE_NL))
++-LIBS		+= -lnl
+++LIBS		+= -lnl-3 -lnl-genl-3
++ endif
++ DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
++ 		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
++@@ -91,13 +80,13 @@ DEFINES		+= $(shell if [ ! -f ../ip_vs.h ]; then	\
++ 
++ .PHONY	= all clean install dist distclean rpm rpms
++ 
++-all:            libs ipvsadm
+++all: ipvsadm
++ 
++ libs:
++ 		make -C libipvs
++ 
++-ipvsadm:	$(OBJS) $(STATIC_LIBS)
++-		$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+++ipvsadm:	$(OBJS) libs
+++		$(CC) $(CFLAGS) -o $@ $(OBJS) $(STATIC_LIBS) $(LIBS)
++ 
++ install:        all
++ 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
++diff --git a/libipvs/Makefile b/libipvs/Makefile
++index a527a7f..b7300ec 100644
++--- a/libipvs/Makefile
+++++ b/libipvs/Makefile
++@@ -1,6 +1,5 @@
++ # Makefile for libipvs
++ 
++-CC		= gcc
++ CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -fPIC
++ ifneq (0,$(HAVE_NL))
++ CFLAGS		+= -DLIBIPVS_USE_NL
++@@ -18,7 +17,7 @@ SHARED_LIB	= libipvs.so
++ all:		$(STATIC_LIB) $(SHARED_LIB)
++ 
++ $(STATIC_LIB):	libipvs.o ip_vs_nl_policy.o
++-		ar rv $@ $^
+++		$(AR) rv $@ $^
++ 
++ $(SHARED_LIB):	libipvs.o ip_vs_nl_policy.o
++ 		$(CC) -shared -Wl,-soname,$@ -o $@ $^
 +-- 
-+1.8.4.2
++1.9.1
 +
-diff --git a/meta-networking/recipes-daemons/netkit-telnet/files/To-aviod-buffer-overflow-in-telnet.patch b/meta-networking/recipes-daemons/netkit-telnet/files/To-aviod-buffer-overflow-in-telnet.patch
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch b/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch
 new file mode 100644
-index 0000000..3ca2530
+index 0000000..7896d6d
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/netkit-telnet/files/To-aviod-buffer-overflow-in-telnet.patch
-@@ -0,0 +1,1213 @@
-+From f09a6460a62aacb87bb8683d16aa3ce55848bf7e Mon Sep 17 00:00:00 2001
-+From: Li xin <lixin.fnst@cn.fujitsu.com>
-+Date: Fri, 28 Nov 2014 07:06:24 +0900
-+Subject: [PATCH 1/2] To aviod buffer overflow in telnet
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_handle-to-nl_sock.patch
+@@ -0,0 +1,63 @@
++From 2686213259b15df9cf1d969c5a14d62f14cfbaae Mon Sep 17 00:00:00 2001
++From: Jianchuan Wang <jianchuan.wang@windriver.com>
++Date: Thu, 8 Jan 2015 17:37:11 +0800
++Subject: [PATCH 2/2] Replace nl_handle to nl_sock.
 +
-+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++The nl_handle was replace with nl_sock in the libnl-3.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
 +---
-+ telnet/Makefile     |   4 +-
-+ telnet/commands.cc  | 270 +++++++++++++++++++++++++++++++++++-----------------
-+ telnet/defines.h    |   2 +
-+ telnet/externs.h    |   7 +-
-+ telnet/main.cc      |  65 ++++++++++---
-+ telnet/netlink.cc   |  78 +++++++++------
-+ telnet/netlink.h    |   7 +-
-+ telnet/network.cc   |   1 +
-+ telnet/proto.h      |   2 +-
-+ telnet/ring.cc      |   2 +-
-+ telnet/ring.h       |   2 +-
-+ telnet/sys_bsd.cc   |  11 +++
-+ telnet/telnet.1     |  37 +++++--
-+ telnet/telnet.cc    |  45 +++++----
-+ telnet/terminal.cc  |  17 +++-
-+ telnet/utilities.cc |   2 +
-+ 16 files changed, 380 insertions(+), 172 deletions(-)
++ libipvs/libipvs.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
 +
-+diff --git a/telnet/Makefile b/telnet/Makefile
-+index cef866f..39249e1 100644
-+--- a/telnet/Makefile
-++++ b/telnet/Makefile
-+@@ -7,7 +7,7 @@ include ../MRULES
++diff --git a/libipvs/libipvs.c b/libipvs/libipvs.c
++index a157e18..21a9bfa 100644
++--- a/libipvs/libipvs.c
+++++ b/libipvs/libipvs.c
++@@ -32,7 +32,7 @@ static void* ipvs_func = NULL;
++ struct ip_vs_getinfo ipvs_info;
 + 
-+ # -DAUTHENTICATE
-+ CXXFLAGS += -DUSE_TERMIO -DKLUDGELINEMODE
-+-LIBS += $(LIBTERMCAP)
-++LIBS = $(LIBTERMCAP)
-+ 
-+ SRCS = commands.cc main.cc network.cc ring.cc sys_bsd.cc telnet.cc \
-+ 	terminal.cc tn3270.cc utilities.cc genget.cc environ.cc netlink.cc
-+@@ -22,7 +22,7 @@ depend:
-+ 	$(CXX) $(CXXFLAGS) -MM $(SRCS) >depend.mk
-+ 
-+ install: telnet
-+-	install -s -m$(BINMODE) telnet $(INSTALLROOT)$(BINDIR)
-++	install -m$(BINMODE) telnet $(INSTALLROOT)$(BINDIR)
-+ 	install -m$(MANMODE) telnet.1 $(INSTALLROOT)$(MANDIR)/man1
-+ 
-+ clean:
-+diff --git a/telnet/commands.cc b/telnet/commands.cc
-+index d92bccd..02c593e 100644
-+--- a/telnet/commands.cc
-++++ b/telnet/commands.cc
-+@@ -86,10 +86,6 @@ char cmd_rcsid[] =
-+ 
-+ #define HELPINDENT ((int) sizeof ("connect"))
-+ 
-+-#ifndef       MAXHOSTNAMELEN
-+-#define       MAXHOSTNAMELEN 64
-+-#endif        MAXHOSTNAMELEN
-+-
-+ #if	defined(HAS_IPPROTO_IP) && defined(IP_TOS)
-+ int tos = -1;
-+ #endif	/* defined(HAS_IPPROTO_IP) && defined(IP_TOS) */
-+@@ -98,7 +94,7 @@ static unsigned long sourceroute(char *arg, char **cpp, int *lenp);
-+ 
-+ 
-+ char	*hostname;
-+-static char _hostname[MAXHOSTNAMELEN];
-++static char *_hostname;
-+ 
-+ //typedef int (*intrtn_t)(int argc, const char *argv[]);
-+ 
-+@@ -161,7 +157,7 @@ class command_entry {
-+ 	assert(argc>=1);
-+ 	if (nargs>=0 && argc!=nargs+1) {
-+ 	    fprintf(stderr, "Wrong number of arguments for command.\n");
-+-	    fprintf(stderr, "Try %s ? for help\n", argv[0]);
-++	    fprintf(stderr, "Try ? %s for help\n", argv[0]);
-+ 	    return 0;    /* is this right? */
-+ 	}
-+ 	if (nargs==-2) {
-+@@ -480,6 +476,7 @@ static int send_wontcmd(const char *name, const char *) {
-+ int send_tncmd(int (*func)(int, int), const char *cmd, const char *name) {
-+     char **cpp;
-+     extern char *telopts[];
-++    long opt;
-+ 
-+     if (isprefix(name, "help") || isprefix(name, "?")) {
-+ 	register int col, len;
-+@@ -506,16 +503,23 @@ int send_tncmd(int (*func)(int, int), const char *cmd, const char *name) {
-+ 					name, cmd);
-+ 	return 0;
-+     }
-++
-++    opt = cpp - telopts;
-+     if (cpp == 0) {
-+-	fprintf(stderr, "'%s': unknown argument ('send %s ?' for help).\n",
-++	char *end;
-++
-++	opt = strtol(name, &end, 10);
-++	if (*end || opt < 0 || opt > 255) {
-++	    fprintf(stderr, "'%s': unknown argument ('send %s ?' for help).\n",
-+ 					name, cmd);
-+-	return 0;
-++	    return 0;
-++	}
-+     }
-+     if (!connected) {
-+ 	printf("?Need to be connected first.\n");
-+ 	return 0;
-+     }
-+-    (*func)(cpp - telopts, 1);
-++    (*func)(opt, 1);
-+     return 1;
-+ }
-+ 
-+@@ -689,9 +693,9 @@ static struct togglelist Togglelist[] = {
-+       "print encryption debugging information" },
++ #ifdef LIBIPVS_USE_NL
++-static struct nl_handle *sock = NULL;
+++static struct nl_sock *sock = NULL;
++ static int family, try_nl = 1;
 + #endif
 + 
-+-    { "skiprc", "don't read ~/.telnetrc file",
-++    { "skiprc", "don't read the telnetrc files",
-+       NULL, &skiprc,
-+-      "read ~/.telnetrc file" },
-++      "read the telnetrc files" },
-+     { "binary",
-+       "sending and receiving of binary data",
-+       togbinary, NULL,
-+@@ -1615,15 +1619,20 @@ void ayt_status(int) {
-+ #endif
-+ 
-+ int tn(int argc, const char *argv[]) {
-+-    register struct hostent *host = 0;
-+     struct sockaddr_in sn;
-+-    struct servent *sp = 0;
-+     char *srp = NULL;
-+     int srlen;
-+-
-+-    const char *cmd, *volatile user = 0;
-++    int family = 0;
-++    const char *cmd, *volatile user = 0, *srchostp = 0;
-+     const char *portp = NULL;
-+     char *hostp = NULL;
-++    char *resolv_hostp;
-++    struct addrinfo hints;
-++    struct addrinfo *hostaddr = 0;
-++    int res;
-++    char name[NI_MAXHOST];
-++    char service[NI_MAXSERV];
-++    struct addrinfo *tmpaddr;
-+ 
-+     /* clear the socket address prior to use */
-+     memset(&sn, 0, sizeof(sn));
-+@@ -1632,6 +1641,10 @@ int tn(int argc, const char *argv[]) {
-+ 	printf("?Already connected to %s\n", hostname);
-+ 	return 0;
-+     }
-++    if (_hostname) {
-++	delete[] _hostname;
-++	_hostname = 0;
-++    }
-+     if (argc < 2) {
-+ 	(void) strcpy(line, "open ");
-+ 	printf("(to) ");
-+@@ -1657,11 +1670,33 @@ int tn(int argc, const char *argv[]) {
-+ 	    --argc;
-+ 	    continue;
-+ 	}
-++	if (strcmp(*argv, "-b") == 0) {
-++	    --argc; ++argv;
-++	    if (argc == 0)
-++		goto usage;
-++	    srchostp = *argv++;
-++	    --argc;
-++	    continue;
-++	}
-+ 	if (strcmp(*argv, "-a") == 0) {
-+ 	    --argc; ++argv;
-+ 	    autologin = 1;
-+ 	    continue;
-+ 	}
-++	if (strcmp(*argv, "-6") == 0) {
-++	    --argc; ++argv;
-++#ifdef AF_INET6
-++	    family = AF_INET6;
-++#else
-++	    puts("IPv6 unsupported");
-++#endif
-++	    continue;
-++	}
-++	if (strcmp(*argv, "-4") == 0) {
-++	    --argc; ++argv;
-++	    family = AF_INET;
-++	    continue;
-++	}
-+ 	if (hostp == 0) {
-+ 	    /* this leaks memory - FIXME */
-+ 	    hostp = strdup(*argv++);
-+@@ -1680,6 +1715,8 @@ int tn(int argc, const char *argv[]) {
-+     if (hostp == 0)
-+ 	goto usage;
-+ 
-++    resolv_hostp = hostp;
-++
-+ #if defined(IP_OPTIONS) && defined(HAS_IPPROTO_IP)
-+     if (hostp[0] == '@' || hostp[0] == '!') {
-+ 	if ((hostname = strrchr(hostp, ':')) == NULL)
-+@@ -1696,78 +1733,122 @@ int tn(int argc, const char *argv[]) {
-+ 	} else {
-+ 	    sn.sin_addr.s_addr = temp;
-+ 	    sn.sin_family = AF_INET;
-++	    /*
-++	     * For source route we just make sure to get the IP given
-++	     * on the command line when looking up the port.
-++	     */
-++	    resolv_hostp = inet_ntoa(sn.sin_addr);
-+ 	}
-+     } 
-+-    else {
-+-#endif
-+-	if (inet_aton(hostp, &sn.sin_addr)) {
-+-	    sn.sin_family = AF_INET;
-+-	    strcpy(_hostname, hostp);
-+-	    hostname = _hostname;
-+-	} 
-+-	else {
-+-	    host = gethostbyname(hostp);
-+-	    if (host) {
-+-		sn.sin_family = host->h_addrtype;
-+-		if (host->h_length > (int)sizeof(sn.sin_addr)) {
-+-		    host->h_length = sizeof(sn.sin_addr);
-+-		}
-+-#if	defined(h_addr)		/* In 4.3, this is a #define */
-+-		memcpy((caddr_t)&sn.sin_addr,
-+-				host->h_addr_list[0], host->h_length);
-+-#else	/* defined(h_addr) */
-+-		memcpy((caddr_t)&sn.sin_addr, host->h_addr, host->h_length);
-+-#endif	/* defined(h_addr) */
-+-		strncpy(_hostname, host->h_name, sizeof(_hostname));
-+-		_hostname[sizeof(_hostname)-1] = '\0';
-+-		hostname = _hostname;
-+-	    } else {
-+-		herror(hostp);
-+-		return 0;
-+-	    }
-+-	}
-+-#if defined(IP_OPTIONS) && defined(HAS_IPPROTO_IP)
-+-    }
-+ #endif
-++
-++    /* User port or the default name of telnet. */
-+     if (portp) {
-+ 	if (*portp == '-') {
-+ 	    portp++;
-+ 	    telnetport = 1;
-+-	} else
-++	} else {
-+ 	    telnetport = 0;
-+-	sn.sin_port = atoi(portp);
-+-	if (sn.sin_port == 0) {
-+-	    sp = getservbyname(portp, "tcp");
-+-	    if (sp)
-+-		sn.sin_port = sp->s_port;
-+-	    else {
-+-		printf("%s: bad port number\n", portp);
-+-		return 0;
-++	    if (*portp >='0' && *portp<='9') {
-++	       char *end;
-++	       long int p;
-++
-++	       p=strtol(portp, &end, 10);
-++	       if (ERANGE==errno && (LONG_MIN==p || LONG_MAX==p)) {
-++	          fprintf(stderr, "telnet: port %s overflows\n", portp);
-++		  return 0;
-++	       } else if (p<=0 || p>=65536) {
-++	          fprintf(stderr, "telnet: port %s out of range\n", portp);
-++		  return 0;
-++	       }
-+ 	    }
-+-	} 
-+-	else {
-+-	    sn.sin_port = htons(sn.sin_port);
-+ 	}
-+-    } 
-++    }
-+     else {
-+-	if (sp == 0) {
-+-	    sp = getservbyname("telnet", "tcp");
-+-	    if (sp == 0) {
-+-		fprintf(stderr, "telnet: tcp/telnet: unknown service\n");
-+-		return 0;
-+-	    }
-+-	    sn.sin_port = sp->s_port;
-+-	}
-++	portp = "telnet";
-+ 	telnetport = 1;
-+     }
-+-    printf("Trying %s...\n", inet_ntoa(sn.sin_addr));
-++
-++    /* We only understand SOCK_STREAM sockets. */
-++    memset(&hints, 0, sizeof(hints));
-++    hints.ai_socktype = SOCK_STREAM;
-++    hints.ai_flags = AI_NUMERICHOST;
-++    hints.ai_family = family;
-++
-++    if (srchostp) {
-++	res = getaddrinfo(srchostp, "0", &hints, &hostaddr);
-++	if (res) {
-++	    fprintf(stderr, "telnet: could not resolve %s: %s\n", srchostp,
-++		    gai_strerror(res));
-++	    return 0;
-++	}
-++	hints.ai_family = hostaddr->ai_family;
-++	res = nlink.bind(hostaddr);
-++	freeaddrinfo(hostaddr);
-++	if (res < 0)
-++	    return 0;
-++    }
-++        
-++    /* Resolve both the host and service simultaneously. */
-++    res = getaddrinfo(resolv_hostp, portp, &hints, &hostaddr);
-++    if (res == EAI_NONAME) {
-++	hints.ai_flags = AI_CANONNAME;
-++	res = getaddrinfo(resolv_hostp, portp, &hints, &hostaddr);
-++    } else if (hostaddr) {
-++	hostaddr->ai_canonname = 0;
-++    }
-++    if (res || !hostaddr) {
-++	fprintf(stderr, "telnet: could not resolve %s/%s: %s\n", resolv_hostp, portp, gai_strerror(res));
-++	return 0;
-++    }
-++     
-++    /* Try to connect to every listed round robin IP. */
-++    tmpaddr = hostaddr;
-++    errno = 0;
-+     do {
-+-	int x = nlink.connect(debug, host, &sn, srp, srlen, tos);
-+-	if (!x) return 0;
-+-	else if (x==1) continue;
-++	int x;
-++
-++	if (!tmpaddr) {
-++	    if (errno)
-++		perror("telnet: Unable to connect to remote host");
-++	    else
-++		fputs("telnet: Unable to connect to remote host: "
-++		      "Bad port number\n", stderr);
-++err:
-++	    freeaddrinfo(hostaddr);
-++	    return 0;
-++	}
-++
-++	if (tmpaddr->ai_family == AF_UNIX) {
-++nextaddr:
-++	    tmpaddr = tmpaddr->ai_next;
-++	    continue;
-++	}
-++
-++	getnameinfo(tmpaddr->ai_addr, tmpaddr->ai_addrlen,
-++		    name, sizeof(name), service, sizeof(service),
-++		    NI_NUMERICHOST | NI_NUMERICSERV);
-++
-++	printf("Trying %s...\n", name);
-++	x = nlink.connect(debug, tmpaddr, srp, srlen, tos);
-++	if (!x)
-++	    goto err;
-++	else if (x==1)
-++	    goto nextaddr;
-++
-+ 	connected++;
-+     } while (connected == 0);
-+-    cmdrc(hostp, hostname);
-++    if (tmpaddr->ai_canonname == 0) {
-++	hostname = new char[strlen(hostp)+1];
-++	strcpy(hostname, hostp);
-++    }
-++    else {
-++	hostname = new char[strlen(tmpaddr->ai_canonname)+1];
-++	strcpy(hostname, tmpaddr->ai_canonname);
-++    }
-++
-++    cmdrc(hostp, hostname, portp);
-++    freeaddrinfo(hostaddr);
-+     if (autologin && user == NULL) {
-+ 	struct passwd *pw;
-+ 
-+@@ -2013,30 +2094,21 @@ static int help(command_table *tab, int argc, const char *argv[]) {
-+     return 0;
-+ }
-+ 
-+-static char *rcname = 0;
-+-static char rcbuf[128];
-+-
-+-void cmdrc(const char *m1, const char *m2) {
-++static void readrc(const char *m1, const char *m2, const char *port,
-++		   const char *rcname)
-++{
-+     FILE *rcfile;
-+     int gotmachine = 0;
-+     int l1 = strlen(m1);
-+     int l2 = strlen(m2);
-+-    char m1save[64];
-+-
-+-    if (skiprc) return;
-++    int lport = strlen(port);
-++    char m1save[l1 + 1];
-++    char portsave[lport + 1];
-+ 
-+     strcpy(m1save, m1);
-+     m1 = m1save;
-+-
-+-    if (rcname == 0) {
-+-	rcname = getenv("HOME");
-+-	if (rcname)
-+-	    strcpy(rcbuf, rcname);
-+-	else
-+-	    rcbuf[0] = '\0';
-+-	strcat(rcbuf, "/.telnetrc");
-+-	rcname = rcbuf;
-+-    }
-++    strcpy(portsave, port);
-++    port = portsave;
-+ 
-+     rcfile = fopen(rcname, "r");
-+     if (!rcfile) return;
-+@@ -2061,6 +2133,13 @@ void cmdrc(const char *m1, const char *m2) {
-+ 		strncpy(line, &line[7], sizeof(line) - 7);
-+ 	    else
-+ 		continue;
-++
-++	    if (line[0] == ':') {
-++		if (!strncasecmp(&line[1], port, lport))
-++		    continue;
-++		strncpy(line, &line[lport + 1], sizeof(line) - lport - 1);
-++	    }
-++
-+ 	    if (line[0] != ' ' && line[0] != '\t' && line[0] != '\n')
-+ 		continue;
-+ 	    gotmachine = 1;
-+@@ -2073,6 +2152,21 @@ void cmdrc(const char *m1, const char *m2) {
-+     fclose(rcfile);
-+ }
-+ 
-++void cmdrc(const char *m1, const char *m2, const char *port) {
-++    char *rcname = NULL;
-++
-++    if (skiprc) return;
-++
-++    readrc(m1, m2, port, "/etc/telnetrc");
-++    if (asprintf (&rcname, "%s/.telnetrc", getenv ("HOME")) == -1)
-++      {
-++        perror ("asprintf");
-++        return;
-++      }
-++    readrc(m1, m2, port, rcname);
-++    free (rcname);
-++}
-++
-+ #if defined(IP_OPTIONS) && defined(HAS_IPPROTO_IP)
-+ 
-+ /*
-+diff --git a/telnet/defines.h b/telnet/defines.h
-+index 2784400..d5edc46 100644
-+--- a/telnet/defines.h
-++++ b/telnet/defines.h
-+@@ -50,3 +50,5 @@
-+ #define	MODE_COMMAND_LINE(m)	((m)==-1)
-+ 
-+ #define	CONTROL(x)	((x)&0x1f)		/* CTRL(x) is not portable */
-++
-++#define MODE_OUT8	0x8000			/* binary mode sans -opost */
-+diff --git a/telnet/externs.h b/telnet/externs.h
-+index 955df79..0730e8a 100644
-+--- a/telnet/externs.h
-++++ b/telnet/externs.h
-+@@ -48,9 +48,7 @@
-+ typedef unsigned char cc_t;
-+ #endif
-+ 
-+-#ifdef __linux__
-+ #include <unistd.h>   /* get _POSIX_VDISABLE */
-+-#endif
-+ 
-+ #ifndef	_POSIX_VDISABLE
-+ #error "Please fix externs.h to define _POSIX_VDISABLE"
-+@@ -60,7 +58,8 @@ typedef unsigned char cc_t;
-+ 
-+ extern int autologin;		/* Autologin enabled */
-+ extern int skiprc;		/* Don't process the ~/.telnetrc file */
-+-extern int eight;		/* use eight bit mode (binary in and/or out */
-++extern int eight;		/* use eight bit mode (binary in and/or out) */
-++extern int binary;		/* use binary option (in and/or out) */
-+ extern int flushout;		/* flush output */
-+ extern int connected;		/* Are we connected to the other side? */
-+ extern int globalmode;		/* Mode tty should be in */
-+@@ -225,6 +224,8 @@ cc_t *tcval(int);
-+ 
-+ //#if 0
-+ extern struct termios new_tc;
-++extern struct termios old_tc;
-++
-+ 
-+ #define termEofChar		new_tc.c_cc[VEOF]
-+ #define termEraseChar		new_tc.c_cc[VERASE]
-+diff --git a/telnet/main.cc b/telnet/main.cc
-+index b67f2ce..b626e54 100644
-+--- a/telnet/main.cc
-++++ b/telnet/main.cc
-+@@ -45,7 +45,10 @@ char main_rcsid[] =
-+ 
-+ #include <sys/types.h>
-+ #include <getopt.h>
-++#include <stdlib.h>
-+ #include <string.h>
-++#include <netdb.h>
-++#include <errno.h>
-+ 
-+ #include "ring.h"
-+ #include "externs.h"
-+@@ -80,12 +83,13 @@ tninit(void)
-+ void usage(void) {
-+     fprintf(stderr, "Usage: %s %s%s%s%s\n",
-+ 	    prompt,
-+-	    " [-8] [-E] [-L] [-a] [-d] [-e char] [-l user] [-n tracefile]",
-+-	    "\n\t",
-++	    "[-4] [-6] [-8] [-E] [-L] [-a] [-d] [-e char] [-l user]",
-++	    "\n\t[-n tracefile] [ -b addr ]",
-+ #ifdef TN3270
-++	    "\n\t"
-+ 	    "[-noasynch] [-noasynctty] [-noasyncnet] [-r] [-t transcom]\n\t",
-+ #else
-+-	    "[-r] ",
-++	    " [-r] ",
-+ #endif
-+ 	    "[host-name [port]]"
-+ 	);
-+@@ -102,7 +106,8 @@ main(int argc, char *argv[])
-+ 	extern char *optarg;
-+ 	extern int optind;
-+ 	int ch;
-+-	char *user;
-++	char *user, *srcaddr;
-++	int family;
-+ 
-+ 	tninit();		/* Clear out things */
-+ #if	defined(CRAY) && !defined(__STDC__)
-+@@ -110,21 +115,38 @@ main(int argc, char *argv[])
-+ #endif
-+ 
-+ 	TerminalSaveState();
-++	if ((old_tc.c_cflag & (CSIZE|PARENB)) != CS8)
-++		eight = 0;
-+ 
-+ 	if ((prompt = strrchr(argv[0], '/'))!=NULL)
-+ 		++prompt;
-+ 	else
-+ 		prompt = argv[0];
-+ 
-+-	user = NULL;
-++	user = srcaddr = NULL;
-++	family = 0;
-+ 
-+ 	rlogin = (strncmp(prompt, "rlog", 4) == 0) ? '~' : _POSIX_VDISABLE;
-+ 	autologin = -1;
-+ 
-+-	while ((ch = getopt(argc, argv, "8EKLS:X:ade:k:l:n:rt:x")) != EOF) {
-++	while ((ch = getopt(argc, argv,
-++			    "4678EKLS:X:ab:de:k:l:n:rt:x")) != EOF) {
-+ 		switch(ch) {
-++		case '4':
-++			family = AF_INET;
-++			break;
-++		case '6':
-++#ifdef AF_INET6
-++			family = AF_INET6;
-++#else
-++			fputs("IPv6 unsupported\n", stderr);
-++#endif
-++			break;
-++		case '7':
-++			eight = 0;	/* 7-bit ouput and input */
-++			break;
-+ 		case '8':
-+-			eight = 3;	/* binary output and input */
-++			binary = 3;	/* binary output and input */
-+ 			break;
-+ 		case 'E':
-+ 			rlogin = escapechar = _POSIX_VDISABLE;
-+@@ -133,23 +155,26 @@ main(int argc, char *argv[])
-+ 		        //autologin = 0;
-+ 			break;
-+ 		case 'L':
-+-			eight |= 2;	/* binary output only */
-++			binary |= 2;	/* binary output only */
-+ 			break;
-+ 		case 'S':
-+ 		    {
-+-#ifdef	HAS_GETTOS
-+ 			extern int tos;
-++			int num;
-+ 
-+-			if ((tos = parsetos(optarg, "tcp")) < 0)
-++#ifdef	HAS_GETTOS
-++			if ((num = parsetos(optarg, "tcp")) < 0) {
-++#else
-++			errno = 0;
-++			num = strtol(optarg, 0, 0);
-++			if (errno) {
-++#endif
-+ 				fprintf(stderr, "%s%s%s%s\n",
-+ 					prompt, ": Bad TOS argument '",
-+ 					optarg,
-+ 					"; will try to use default TOS");
-+-#else
-+-			fprintf(stderr,
-+-			   "%s: Warning: -S ignored, no parsetos() support.\n",
-+-								prompt);
-+-#endif
-++			} else
-++				tos = num;
-+ 		    }
-+ 			break;
-+ 		case 'X':
-+@@ -210,6 +235,9 @@ main(int argc, char *argv[])
-+ 				"%s: -x ignored, no encryption support.\n",
-+ 				prompt);
-+ 			break;
-++		case 'b':
-++			srcaddr = optarg;
-++			break;
-+ 		case '?':
-+ 		default:
-+ 			usage();
-+@@ -233,6 +261,13 @@ main(int argc, char *argv[])
-+ 			*argp++ = "-l";
-+ 			*argp++ = user;
-+ 		}
-++		if (srcaddr) {
-++			*argp++ = "-b";
-++			*argp++ = srcaddr;
-++		}
-++		if (family) {
-++			*argp++ = family == AF_INET ? "-4" : "-6";
-++		}
-+ 		*argp++ = argv[0];		/* host */
-+ 		if (argc > 1)
-+ 			*argp++ = argv[1];	/* port */
-+diff --git a/telnet/netlink.cc b/telnet/netlink.cc
-+index f439cff..f839747 100644
-+--- a/telnet/netlink.cc
-++++ b/telnet/netlink.cc
-+@@ -79,22 +79,61 @@ void netlink::close(int doshutdown) {
-+ 	shutdown(net, 2);
-+     }
-+     ::close(net);
-++    net = -1;
-+ }
-+ 
-+-int netlink::connect(int debug, struct hostent *host, 
-+-		     struct sockaddr_in *sn, 
-+-		     char *srcroute, int srlen, int tos) 
-++int netlink::bind(struct addrinfo *addr)
++@@ -73,7 +73,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
 + {
-+-    int on=1;
-++    int res;
-++
-++    res = socket(addr->ai_family);
-++    if (res < 2) {
-++	if (res == 1)
-++	    perror("telnet: socket");
-++	return -1;
-++    }
-++
-++    if (::bind(net, addr->ai_addr, addr->ai_addrlen) < 0) {
-++	perror("telnet: bind");
-++	return -1;
-++    }
-++
-++    return 0;
-++}
-++
-++int netlink::socket(int family)
-++{
-++    if (this->family != family)
-++	close(0);
++ 	int err = EINVAL;
 + 
-+-    net = socket(AF_INET, SOCK_STREAM, 0);
-+     if (net < 0) {
-+-	perror("telnet: socket");
-+-	return 0;
-++	this->family = family;
-++	net = ::socket(family, SOCK_STREAM, 0);
-++	if (net < 0) {
-++	    if (errno == EAFNOSUPPORT)
-++		return 1;
-++	    perror("telnet: socket");
-++	    return 0;
-++	}
-+     }
++-	sock = nl_handle_alloc();
+++	sock = nl_socket_alloc();
++ 	if (!sock) {
++ 		nlmsg_free(msg);
++ 		return -1;
++@@ -88,7 +88,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
 + 
-++    return 2;
-++}
-++
-++int netlink::connect(int debug, struct addrinfo *addr, 
-++		     char *srcroute, int srlen, int tos) 
-++{
-++    int on=1;
-++    int res;
-++
-++    res = socket(addr->ai_family);
-++    if (res < 2)
-++	return res;
-++
-+ #if defined(IP_OPTIONS) && defined(HAS_IPPROTO_IP)
-+     if (srcroute) {
-++	if (addr->ai_family != AF_INET)
-++	    fputs("Source route is only supported for IPv4\n", stderr);
-+ 	if (setsockopt(net, IPPROTO_IP, IP_OPTIONS, srcroute, srlen) < 0)
-+ 	    perror("setsockopt (IP_OPTIONS)");
-+     }
-+@@ -108,7 +147,7 @@ int netlink::connect(int debug, struct hostent *host,
-+ #endif
-+     if (tos < 0) tos = 020;	/* Low Delay bit */
-+     if (tos && (setsockopt(net, IPPROTO_IP, IP_TOS, &tos, sizeof(int)) < 0)
-+-	&& (errno != ENOPROTOOPT))
-++	&& (errno != ENOPROTOOPT) && (errno != EOPNOTSUPP))
-+ 	perror("telnet: setsockopt (IP_TOS) (ignored)");
-+ #endif	/* defined(IPPROTO_IP) && defined(IP_TOS) */
-+ 
-+@@ -116,27 +155,8 @@ int netlink::connect(int debug, struct hostent *host,
-+ 	perror("setsockopt (SO_DEBUG)");
-+     }
-+     
-+-    if (::connect(net, (struct sockaddr *)sn, sizeof(*sn)) < 0) {
-+-#if defined(h_addr)		/* In 4.3, this is a #define */
-+-	if (host && host->h_addr_list[1]) {
-+-	    int oerrno = errno;
-+-	    
-+-	    fprintf(stderr, "telnet: connect to address %s: ",
-+-		    inet_ntoa(sn->sin_addr));
-+-	    errno = oerrno;
-+-	    perror(NULL);
-+-	    host->h_addr_list++;
-+-	    if (host->h_length > (int)sizeof(sn->sin_addr)) {
-+-		host->h_length = sizeof(sn->sin_addr);
-+-	    }
-+-	    memcpy(&sn->sin_addr, host->h_addr_list[0], host->h_length);
-+-	    close(net);
-+-	    return 1;
-+-	}
-+-#endif	/* defined(h_addr) */
-+-
-+-	perror("telnet: Unable to connect to remote host");
-+-	return 0;
-++    if (::connect(net, addr->ai_addr, addr->ai_addrlen) < 0) {
-++	return 1;
-+     }
-+     return 2;
-+ }
-+diff --git a/telnet/netlink.h b/telnet/netlink.h
-+index 9852b30..0ac8a08 100644
-+--- a/telnet/netlink.h
-++++ b/telnet/netlink.h
-+@@ -1,13 +1,16 @@
-+ 
-+ class netlink {
-++ private:
-++    int family;
-+  protected:
-+     int net;
-+  public:
-+     netlink();
-+     ~netlink();
-+ 
-+-    int connect(int debug, struct hostent *host, 
-+-		struct sockaddr_in *sin, 
-++    int bind(struct addrinfo *hostaddr);
-++    int socket(int family);
-++    int connect(int debug, struct addrinfo *hostaddr, 
-+ 		char *srcroute, int srlen,
-+ 		int tos);
-+     void close(int doshutdown);
-+diff --git a/telnet/network.cc b/telnet/network.cc
-+index 6a2c374..0dcf3e2 100644
-+--- a/telnet/network.cc
-++++ b/telnet/network.cc
-+@@ -40,6 +40,7 @@ char net_rcsid[] =
-+ #include <sys/types.h>
-+ #include <sys/socket.h>
-+ #include <sys/time.h>
-++#include <stdlib.h>
-+ #include <errno.h>
-+ #include <arpa/telnet.h>
-+ 
-+diff --git a/telnet/proto.h b/telnet/proto.h
-+index 8be4a39..92f2419 100644
-+--- a/telnet/proto.h
-++++ b/telnet/proto.h
-+@@ -13,7 +13,7 @@ int TerminalWindowSize(long *rows, long *cols);
-+ void auth_encrypt_user(char *);
-+ void auth_name(unsigned char *, int);
-+ void auth_printsub(unsigned char *, int, unsigned char *, int);
-+-void cmdrc(const char *m1, const char *m2);
-++void cmdrc(const char *, const char *, const char *);
-+ void env_init(void);
-+ int getconnmode(void);
-+ void init_network(void);
-+diff --git a/telnet/ring.cc b/telnet/ring.cc
-+index be57396..772c6c5 100644
-+--- a/telnet/ring.cc
-++++ b/telnet/ring.cc
-+@@ -165,7 +165,7 @@ int ringbuf::flush() {
-+ 
-+ /////////////////////////////////////////////////// supply //////////////
-+ 
-+-void ringbuf::printf(const char *format, ...) {
-++void ringbuf::xprintf(const char *format, ...) {
-+     char xbuf[256];
-+     va_list ap;
-+     va_start(ap, format);
-+diff --git a/telnet/ring.h b/telnet/ring.h
-+index 15d3f3f..049377e 100644
-+--- a/telnet/ring.h
-++++ b/telnet/ring.h
-+@@ -83,7 +83,7 @@ class ringbuf {
-+     // manual supply
-+     void putch(char c) { write(&c, 1); }
-+     void write(const char *buffer, int ct);
-+-    void printf(const char *format, ...);
-++    void xprintf(const char *format, ...);
-+     int empty_count() { return size - count; }
-+ 
-+     // automatic supply
-+diff --git a/telnet/sys_bsd.cc b/telnet/sys_bsd.cc
-+index 93fba7e..a8c9aab 100644
-+--- a/telnet/sys_bsd.cc
-++++ b/telnet/sys_bsd.cc
-+@@ -189,18 +189,25 @@ void NetSetPgrp(int fd) {
-+  * Various signal handling routines.
-+  */
-+ 
-++#if 0
-+ static void deadpeer(int /*sig*/) {
-+     setcommandmode();
-+     siglongjmp(peerdied, -1);
-+ }
-++#endif
-+ 
-+ static void intr(int /*sig*/) {
-+     if (localchars) {
-+ 	intp();
-+     }
-+     else {
-++#if 0
-+         setcommandmode();
-+ 	siglongjmp(toplevel, -1);
-++#else
-++	signal(SIGINT, SIG_DFL);
-++	raise(SIGINT);
-++#endif
-+     }
-+ }
-+ 
-+@@ -214,6 +221,8 @@ static void intr2(int /*sig*/) {
-+ 	    sendabort();
-+ 	return;
-+     }
-++    signal(SIGQUIT, SIG_DFL);
-++    raise(SIGQUIT);
-+ }
-+ 
-+ #ifdef	SIGWINCH
-+@@ -238,7 +247,9 @@ void ayt(int sig) {
-+ void sys_telnet_init(void) {
-+     signal(SIGINT, intr);
-+     signal(SIGQUIT, intr2);
-++#if 0
-+     signal(SIGPIPE, deadpeer);
-++#endif
-+ #ifdef	SIGWINCH
-+     signal(SIGWINCH, sendwin);
-+ #endif
-+diff --git a/telnet/telnet.1 b/telnet/telnet.1
-+index 54a47fb..8365e42 100644
-+--- a/telnet/telnet.1
-++++ b/telnet/telnet.1
-+@@ -42,8 +42,9 @@
-+ protocol
-+ .Sh SYNOPSIS
-+ .Nm telnet
-+-.Op Fl 8ELadr
-++.Op Fl 468ELadr
-+ .Op Fl S Ar tos
-++.Op Fl b Ar address
-+ .Op Fl e Ar escapechar
-+ .Op Fl l Ar user
-+ .Op Fl n Ar tracefile
-+@@ -68,6 +69,10 @@ command implicitly; see the description below.
-+ .Pp
-+ Options:
-+ .Bl -tag -width indent
-++.It Fl 4
-++Force IPv4 address resolution.
-++.It Fl 6
-++Force IPv6 address resolution.
-+ .It Fl 8
-+ Request 8-bit operation. This causes an attempt to negotiate the
-+ .Dv TELNET BINARY
-+@@ -89,6 +94,8 @@ of the
-+ option if supported by the remote system. The username is retrieved
-+ via
-+ .Xr getlogin 3 .
-++.It Fl b Ar address
-++Use bind(2) on the local socket to bind it to a specific local address.
-+ .It Fl d
-+ Sets the initial value of the
-+ .Ic debug
-+@@ -474,17 +481,29 @@ protocol without making a mess. Protocol negotiation can be forced by
-+ placing a dash before the port number.
-+ .Pp
-+ After establishing a connection, any commands associated with the
-+-remote host in the user's
-++remote host in
-++.Pa /etc/telnetrc
-++and the user's
-+ .Pa .telnetrc
-+-file are executed.
-++file are executed, in that order.
-+ .Pp
-+-The format of the .telnetrc file is as follows: Lines beginning with a
-++The format of the telnetrc files is as follows: Lines beginning with a
-+ #, and blank lines, are ignored.  The rest of the file should consist
-+ of hostnames and sequences of
-+ .Nm telnet
-+ commands to use with that host. Commands should be one per line,
-+ indented by whitespace; lines beginning without whitespace are
-+-interpreted as hostnames. Upon connecting to a particular host, the
-++interpreted as hostnames.  Lines beginning with the special hostname
-++.Ql DEFAULT
-++will apply to all hosts.  Hostnames including
-++.Ql DEFAULT
-++may be followed immediately by a colon and a port number or string.
-++If a port is specified it must match exactly with what is specified
-++on the command line.  If no port was specified on the command line,
-++then the value
-++.Ql telnet
-++is used.
-++Upon connecting to a particular host, the
-+ commands associated with that host are executed.
-+ .It Ic quit
-+ Close any open session and exit
-+@@ -1184,9 +1203,7 @@ escape sequences are preceded by a '*' to aid in locating them.
-+ When the skiprc toggle is
-+ .Dv TRUE ,
-+ .Tn telnet
-+-does not read the 
-+-.Pa \&.telnetrc
-+-file.  The initial value for this toggle is
-++does not read the telnetrc files.  The initial value for this toggle is
-+ .Dv FALSE.
-+ .It Ic termdata
-+ Toggles the display of all terminal data (in hexadecimal format).
-+@@ -1239,7 +1256,9 @@ to the other side via the
-+ .Dv TELNET ENVIRON
-+ option.
-+ .Sh FILES
-+-.Bl -tag -width ~/.telnetrc -compact
-++.Bl -tag -width /etc/telnetrc -compact
-++.It Pa /etc/telnetrc
-++global telnet startup values
-+ .It Pa ~/.telnetrc
-+ user customized telnet startup values
-+ .El
-+diff --git a/telnet/telnet.cc b/telnet/telnet.cc
-+index 4fc3b1f..7eca811 100644
-+--- a/telnet/telnet.cc
-++++ b/telnet/telnet.cc
-+@@ -88,7 +88,8 @@ char	do_dont_resp[256];
-+ char	will_wont_resp[256];
-+ 
-+ int
-+-eight = 0,
-++  eight = 3,
-++  binary = 0,
-+   autologin = 0,	/* Autologin anyone? */
-+   skiprc = 0,
-+   connected,
-+@@ -639,14 +640,14 @@ static const char *gettermname(void) {
-+   if (resettermname) {
-+     resettermname = 0;
-+     tname = env_getvalue("TERM", 0);
-+-    if (!tname || my_setupterm(tname, 1, &err)) {
-++    if (!tname /* || my_setupterm(tname, 1, &err) */) {
-+       termbuf[0] = 0;
-+       tname = "UNKNOWN";
-+     }
-+     mklist(termbuf, tname, termtypes);
-+     next = 0;
-+   }
-+-  if (next==termtypes.num()) next = 0;
-++  if (next==termtypes.num()-1) next = 0;
-+   return termtypes[next++];
-+ }
-+ /*
-+@@ -681,7 +682,7 @@ static void suboption(void) {
-+       }
-+ #endif /* TN3270 */
-+       name = gettermname();
-+-      netoring.printf("%c%c%c%c%s%c%c", IAC, SB, TELOPT_TTYPE,
-++      netoring.xprintf("%c%c%c%c%s%c%c", IAC, SB, TELOPT_TTYPE,
-+ 		      TELQUAL_IS, name, IAC, SE);
-+     }
-+     break;
-+@@ -693,7 +694,7 @@ static void suboption(void) {
-+     if (SB_GET() == TELQUAL_SEND) {
-+       long oospeed, iispeed;
-+       TerminalSpeeds(&iispeed, &oospeed);
-+-      netoring.printf("%c%c%c%c%ld,%ld%c%c", IAC, SB, TELOPT_TSPEED, 
-++      netoring.xprintf("%c%c%c%c%ld,%ld%c%c", IAC, SB, TELOPT_TSPEED, 
-+ 		      TELQUAL_IS, oospeed, iispeed, IAC, SE);
-+     }
-+     break;
-+@@ -780,7 +781,7 @@ static void suboption(void) {
-+ 	send_wont(TELOPT_XDISPLOC, 1);
-+ 	break;
-+       }
-+-      netoring.printf("%c%c%c%c%s%c%c", IAC, SB, TELOPT_XDISPLOC,
-++      netoring.xprintf("%c%c%c%c%s%c%c", IAC, SB, TELOPT_XDISPLOC,
-+ 		      TELQUAL_IS, dp, IAC, SE);
-+     }
-+     break;
-+@@ -798,7 +799,7 @@ void lm_will(unsigned char *cmd, int len) {
-+     return;
-+   }
-+   
-+-  netoring.printf("%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE, 
-++  netoring.xprintf("%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE, 
-+ 		  DONT, cmd[0], IAC, SE);
-+ }
-+ 
-+@@ -815,7 +816,7 @@ void lm_do(unsigned char *cmd, int len) {
-+     /*@*/	printf("lm_do: no command!!!\n");	/* Should not happen... */
-+     return;
-+   }
-+-  netoring.printf("%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE, 
-++  netoring.xprintf("%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE, 
-+ 		  WONT, cmd[0], IAC, SE);
-+ }
-+ 
-+@@ -838,7 +839,7 @@ void lm_mode(unsigned char *cmd, int len, int init) {
-+     k |= MODE_ACK;
-+   }
-+   
-+-  netoring.printf("%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE, LM_MODE,
-++  netoring.xprintf("%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE, LM_MODE,
-+ 		  k, IAC, SE);
-+   
-+   setconnmode(0);	/* set changed mode */
-+@@ -933,11 +934,11 @@ void slc_mode_import(int def) {
-+ 
-+ void slc_import(int def) {
-+   if (def) {
-+-    netoring.printf("%c%c%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE,
-++    netoring.xprintf("%c%c%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE,
-+ 		    LM_SLC, 0, SLC_DEFAULT, 0, IAC, SE);
-+   }
-+   else {
-+-    netoring.printf("%c%c%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE,
-++    netoring.xprintf("%c%c%c%c%c%c%c%c%c", IAC, SB, TELOPT_LINEMODE,
-+ 		    LM_SLC, 0, SLC_VARIABLE, 0, IAC, SE);
-+   }
-+ }
-+@@ -1050,6 +1051,7 @@ void slc_check(void) {
-+ 
-+ 
-+ unsigned char slc_reply[128];
-++unsigned char const * const slc_reply_eom = &slc_reply[sizeof(slc_reply)];
-+ unsigned char *slc_replyp;
-+ 
-+ void slc_start_reply(void) {
-+@@ -1061,6 +1063,14 @@ void slc_start_reply(void) {
-+ }
-+ 
-+ void slc_add_reply(int func, int flags, int value) {
-++  /* A sequence of up to 6 bytes my be written for this member of the SLC
-++   * suboption list by this function.  The end of negotiation command,
-++   * which is written by slc_end_reply(), will require 2 additional
-++   * bytes.  Do not proceed unless there is sufficient space for these
-++   * items.
-++   */
-++  if (&slc_replyp[6+2] > slc_reply_eom)
-++    return;
-+   if ((*slc_replyp++ = func) == IAC)
-+     *slc_replyp++ = IAC;
-+   if ((*slc_replyp++ = flags) == IAC)
-+@@ -1142,6 +1152,7 @@ void env_opt(unsigned char *buf, int len) {
-+   }
-+ }
-+ 
-++/* OPT_REPLY_SIZE must be a multiple of 2. */
-+ #define	OPT_REPLY_SIZE	256
-+ unsigned char *opt_reply;
-+ unsigned char *opt_replyp;
-+@@ -1173,6 +1184,7 @@ void env_opt_start_info(void) {
-+ 
-+ void env_opt_add(const char *ep) {
-+   const char *vp;
-++  const unsigned char *tp;
-+   unsigned char c;
-+   
-+   if (opt_reply == NULL)		/*XXX*/
-+@@ -1185,11 +1197,12 @@ void env_opt_add(const char *ep) {
-+     return;
-+   }
-+   vp = env_getvalue(ep, 1);
-+-  if (opt_replyp + (vp ? strlen(vp) : 0) + strlen(ep) + 6 > opt_replyend)
-++  tp = opt_replyp + (vp ? strlen(vp) * 2 : 0) + strlen(ep) * 2 + 6;
-++  if (tp > opt_replyend)
-+     {
-+       register int len;
-+-      opt_replyend += OPT_REPLY_SIZE;
-+-      len = opt_replyend - opt_reply;
-++      len = ((tp - opt_reply) + OPT_REPLY_SIZE - 1) & ~(OPT_REPLY_SIZE - 1);
-++      opt_replyend = opt_reply + len;
-+       opt_reply = (unsigned char *)realloc(opt_reply, len);
-+       if (opt_reply == NULL) {
-+ 	/*@*/			printf("env_opt_add: realloc() failed!!!\n");
-+@@ -1740,8 +1753,8 @@ void telnet(const char * /*user*/) {
-+     send_do(TELOPT_STATUS, 1);
-+     if (env_getvalue("DISPLAY", 0))
-+       send_will(TELOPT_XDISPLOC, 1);
-+-    if (eight)
-+-      tel_enter_binary(eight);
-++    if (binary)
-++      tel_enter_binary(binary);
-+   }
-+ #endif /* !defined(TN3270) */
-+   
-+diff --git a/telnet/terminal.cc b/telnet/terminal.cc
-+index 9eb47ae..764f18f 100644
-+--- a/telnet/terminal.cc
-++++ b/telnet/terminal.cc
-+@@ -45,6 +45,8 @@ char terminal_rcsid[] =
-+ #include <signal.h>
-+ #include <errno.h>
-+ #include <stdio.h>
-++#include <string.h>
-++#include <stdlib.h>
-+ 
-+ #include "ring.h"
-+ #include "defines.h"
-+@@ -155,9 +157,11 @@ int getconnmode(void) {
-+     if (localflow)
-+ 	mode |= MODE_FLOW;
-+ 
-+-    if (my_want_state_is_will(TELOPT_BINARY))
-++    if ((eight & 1) || my_want_state_is_will(TELOPT_BINARY))
-+ 	mode |= MODE_INBIN;
-+ 
-++    if (eight & 2)
-++	mode |= MODE_OUT8;
-+     if (his_want_state_is_will(TELOPT_BINARY))
-+ 	mode |= MODE_OUTBIN;
-+ 
-+@@ -449,10 +453,13 @@ void TerminalNewMode(int f)
-+ 		// breaks SunOS.
-+ 	 	tmp_tc.c_iflag |= ISTRIP;
++ 	/* To test connections and set the family */
++ 	if (msg == NULL) {
++-		nl_handle_destroy(sock);
+++		nl_socket_free(sock);
++ 		sock = NULL;
++ 		return 0;
 + 	}
-+-	if (f & MODE_OUTBIN) {
-++	if (f & (MODE_OUTBIN|MODE_OUT8)) {
-+ 		tmp_tc.c_cflag &= ~(CSIZE|PARENB);
-+ 		tmp_tc.c_cflag |= CS8;
-+-		tmp_tc.c_oflag &= ~OPOST;
-++		if (f & MODE_OUTBIN)
-++			tmp_tc.c_oflag &= ~OPOST;
-++		else
-++			tmp_tc.c_oflag |= OPOST;
-+ 	} else {
-+ 		tmp_tc.c_cflag &= ~(CSIZE|PARENB);
-+ 		tmp_tc.c_cflag |= old_tc.c_cflag & (CSIZE|PARENB);
-+@@ -468,7 +475,7 @@ void TerminalNewMode(int f)
++@@ -104,12 +104,12 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvmsg_msg_cb_t func, void *arg
 + 
-+ #ifdef	SIGINFO
-+ 	signal(SIGINFO, ayt);
-+-#endif	SIGINFO
-++#endif	/* SIGINFO */
++ 	nlmsg_free(msg);
 + 
-+ #if defined(NOKERNINFO)
-+ 	tmp_tc.c_lflag |= NOKERNINFO;
-+@@ -504,7 +511,7 @@ void TerminalNewMode(int f)
++-	nl_handle_destroy(sock);
+++	nl_socket_free(sock);
 + 
-+ #ifdef	SIGINFO
-+ 	signal(SIGINFO, ayt_status);
-+-#endif	SIGINFO
-++#endif	/* SIGINFO */
++ 	return 0;
 + 
-+ #ifdef	SIGTSTP
-+ 	signal(SIGTSTP, SIG_DFL);
-+diff --git a/telnet/utilities.cc b/telnet/utilities.cc
-+index 0448f0a..66839ab 100644
-+--- a/telnet/utilities.cc
-++++ b/telnet/utilities.cc
-+@@ -47,6 +47,8 @@ char util_rcsid[] =
-+ #include <sys/socket.h>
-+ #include <unistd.h>
-+ #include <ctype.h>
-++#include <string.h>
-++#include <stdlib.h>
-+ 
-+ #include "ring.h"
-+ #include "defines.h"
++ fail_genl:
++-	nl_handle_destroy(sock);
+++	nl_socket_free(sock);
++ 	sock = NULL;
++ 	nlmsg_free(msg);
++ 	errno = err;
 +-- 
-+1.8.4.2
++1.8.3.1
 +
-diff --git a/meta-networking/recipes-daemons/netkit-telnet/files/telnet-xinetd b/meta-networking/recipes-daemons/netkit-telnet/files/telnet-xinetd
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
 new file mode 100644
-index 0000000..12204c7
+index 0000000..ac97d47
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/netkit-telnet/files/telnet-xinetd
-@@ -0,0 +1,14 @@
-+# default: on
-+# description: The telnet server serves telnet sessions; it uses \
-+#	unencrypted username/password pairs for authentication.
-+service telnet
-+{
-+	flags		= REUSE
-+	socket_type	= stream
-+	wait		= no
-+	user		= root
-+	server		= /usr/sbin/in.telnetd
-+	log_on_failure	+= USERID
-+	disable		= yes
-+}
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+@@ -0,0 +1,34 @@
++SUMMARY = "Linux Virtual Server administration Utility"
++DESCRIPTION = "Ipvsadm  is  used  to set up, maintain or inspect the virtual server \
++table in the Linux kernel. The Linux Virtual  Server  can  be  used  to \
++build  scalable  network  services  based  on  a cluster of two or more nodes. \
++The active node of the cluster redirects service requests  to  a \
++collection  of  server  hosts  that will actually perform the services. \
++Supported features include two protocols (TCP and UDP),  three  packet-forwarding \
++methods (NAT, tunneling, and direct routing), and eight load balancing algorithms \
++(round robin, weighted round robin,  least-connec-tion, weighted least-connection, \
++locality-based  least-connection, locality-based least-connection with replication, \
++destination-hashing, and source-hashing)."
++SECTION = "console/network"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://README;beginline=40;endline=56;md5=a54cba37b64924aa5008881607942892"
 +
-diff --git a/meta-networking/recipes-daemons/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-daemons/netkit-telnet/netkit-telnet_0.17.bb
-new file mode 100644
-index 0000000..5de5426
---- /dev/null
-+++ b/meta-networking/recipes-daemons/netkit-telnet/netkit-telnet_0.17.bb
-@@ -0,0 +1,53 @@
-+DESCRIPTION = "netkit-telnet includes the telnet daemon and client."
-+SECTION = "base"
-+DEPENDS = "ncurses"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://telnet/telnet.cc;beginline=2;endline=3;md5=780868e7b566313e70cb701560ca95ef"
-+PR = "r1"
++DEPENDS += "libnl popt"
 +
-+SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
-+    file://To-aviod-buffer-overflow-in-telnet.patch \
-+    file://Fix-errors-in-the-step-of-install.patch \
-+    file://telnet-xinetd \
++SRC_URI = "http://www.linuxvirtualserver.org/software/kernel-2.6/${BP}.tar.gz \
++        file://0001-Modify-the-Makefile-for-cross-compile.patch \
++        file://0002-Replace-nl_handle-to-nl_sock.patch \
 +"
 +
-+EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
-+    MANMODE=644 MANDIR=${mandir}"
-+
-+do_configure() {
-+    ./configure --prefix=${prefix}
-+    echo "LDFLAGS=${LDFLAGS}" > MCONFIG
-+}
++SRC_URI[md5sum] = "eac3ba3f62cd4dea2da353aeddd353a8"
++SRC_URI[sha256sum] = "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f60269fd9cbee0eb2d"
 +
 +do_compile() {
-+    oe_runmake 'CC=${CC}' 'LD=${LD}' 'LDFLAGS=${LDFLAGS}' SUB=telnet
-+    oe_runmake 'CC=${CC}' 'LD=${LD}' 'LDFLAGS=${LDFLAGS}' LIBS=-lutil SUB=telnetd
++    oe_runmake \
++    CC="${CC} -I${STAGING_INCDIR} -I${STAGING_INCDIR}/libnl3 -L${STAGING_LIBDIR}" \
++    all
 +}
 +
 +do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 telnet/telnet ${D}${bindir}/telnet.${PN}
-+    install -d ${D}${sbindir}
-+    install -d ${D}${mandir}/man1
-+    install -d ${D}${mandir}/man5
-+    install -d ${D}${mandir}/man8
-+    oe_runmake SUB=telnetd install
-+    rm -rf ${D}${mandir}/man1
-+    # fix up hardcoded paths
-+    sed -i -e 's,/usr/sbin/,${sbindir}/,' ${WORKDIR}/telnet-xinetd
-+    install -d  ${D}/etc/xinetd.d/
-+    install -p -m644 ${WORKDIR}/telnet-xinetd ${D}/etc/xinetd.d/telnet
++    oe_runmake 'BUILD_ROOT=${D}' install
 +}
-+
-+pkg_postinst_${PN}() {
-+#!/bin/sh
-+    update-alternatives --install ${bindir}/telnet telnet telnet.${PN} 100
-+}
-+
-+pkg_prerm_${PN}() {
-+#!/bin/sh
-+    update-alternatives --remove telnet telnet.${PN} 100
-+}
-+
-+SRC_URI[md5sum] = "d6beabaaf53fe6e382c42ce3faa05a36"
-+SRC_URI[sha256sum] = "9c80d5c7838361a328fb6b60016d503def9ce53ad3c589f3b08ff71a2bb88e00"
 -- 
-1.8.4.2
+1.9.1
 
 
