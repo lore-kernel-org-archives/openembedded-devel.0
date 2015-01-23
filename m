@@ -1,17 +1,29 @@
-Return-Path: <ml@communistcode.co.uk>
-X-Greylist: delayed 2003 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 23 Jan 2015 11:05:33 UTC
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0ACDD65C7B
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CF2372718
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 11:05:33 +0000 (UTC)
-From: Jack Mitchell <ml@communistcode.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Jan 2015 10:32:07 +0000
-Message-Id: <1422009127-6666-1-git-send-email-ml@communistcode.co.uk>
-X-Mailer: git-send-email 2.2.2
-Cc: Jack Mitchell <jmitchell@cbnl.com>
-Subject: [meta-oe][PATCH] rsyslog: init file has been renamed, reflect in logrotate conf file
+	Fri, 23 Jan 2015 11:22:12 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga101.jf.intel.com with ESMTP; 23 Jan 2015 03:22:12 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="4.97,862,1389772800"; d="scan'208";a="444154963"
+Received: from vvatula-mobl2.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.22.114])
+	by FMSMGA003.fm.intel.com with ESMTP; 23 Jan 2015 03:08:44 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Szombathelyi =?ISO-8859-1?Q?Gy=F6rgy?= <gyurco@freemail.hu>,
+	Joe MacDonald <joe_macdonald@mentor.com>
+Date: Fri, 23 Jan 2015 11:22:10 +0000
+Message-ID: <3857819.a4dzGtPs1K@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.3 (Linux/3.17.8-200.fc20.x86_64; KDE/4.14.3; x86_64; ; )
+In-Reply-To: <1475068.2YaKjJgxm5@gyurco.localdomain>
+References: <3131686.1jEHazhdRQ@gyurco.localdomain>
+	<1443677.77tJzovrQh@gyurco.localdomain>
+	<1475068.2YaKjJgxm5@gyurco.localdomain>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH]ntp: fix perl path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,43 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2015 11:05:37 -0000
+X-List-Received-Date: Fri, 23 Jan 2015 11:22:19 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-From: Jack Mitchell <jmitchell@cbnl.com>
+On Wednesday 21 January 2015 21:05:12 Szombathelyi Gy=F6rgy wrote:
+> ...more precisely, without the patch ntp-utils will have a /bin/perl
+> dependency, so it becomes uninstallable (nothing provides /bin/perl).=
 
-rsyslogs init file was recently changed to support update-alternatives
-and in the process the init file is now /etc/init.d/syslogd rather than
-/etc/init.d/rsyslogd, change the logrotate config file to reflect this,
-other wise the daemon won't get restarted and the log files will get
-rotated but not re-created.
 
-Signed-off-by: Jack Mitchell <jmitchell@cbnl.com>
----
- meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+We do definitely want to fix this, yes - and the breakage may have been=
+ my=20
+fault, sorry about that.
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-index ba1120a..4853167 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-@@ -9,7 +9,7 @@
-         delaycompress
-         compress
-         postrotate
--		/etc/init.d/rsyslog reload 2> /dev/null || true
-+		/etc/init.d/syslog reload 2> /dev/null || true
-         endscript
- }
- 
-@@ -34,6 +34,6 @@
-         delaycompress
-         sharedscripts
-         postrotate
--		/etc/init.d/rsyslog reload 2> /dev/null || true
-+		/etc/init.d/syslog reload 2> /dev/null || true
-         endscript
- }
--- 
-2.2.2
+I think one reason your patch hasn't been picked up yet may be that it =
+should=20
+have been marked as [meta-networking] rather than [meta-oe] since meta-=
 
+networking is the layer in which the ntp recipe resides.
+
+Joe, can you please apply this?
+
+Thanks,
+Paul
+
+--=20
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
