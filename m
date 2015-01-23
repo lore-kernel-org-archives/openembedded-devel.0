@@ -1,39 +1,39 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 965CD72D23
+Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FCFE72CD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 22:54:20 +0000 (UTC)
-Received: by mail-pd0-f170.google.com with SMTP id p10so234541pdj.1
+	Fri, 23 Jan 2015 22:54:22 +0000 (UTC)
+Received: by mail-pd0-f175.google.com with SMTP id fl12so205688pdb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 14:54:21 -0800 (PST)
+	Fri, 23 Jan 2015 14:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=hqQe+crAWNf74K3nA5kWCwTMkrifDzmr5bkcdI+oKRA=;
-	b=VAOTQPL6q2W7KbipufeDBeOvjWrseQ5j7qcAWCKmgsrPki8uYdz3pXXbMA+IisMfvn
-	QcoJM2qFM1aJcL4iDXue7piEo44e6hF3g68MjgCAmJYAz1lsrDCJnSaXdFQFyLgnbw8J
-	xszOeQosyvk7ICR3ffAYG8F1lKvbIEDbGImpeQICMitZa/v84zbVyDbxZeDHwvr373bv
-	o8K+5DvlrSw1okX4cbxzN7hXJBtwU1stKKwHRbEKO2cHbQL/6fzAh9l5qnaWKk+28BM8
-	VymeZwFFJmcmUhnNjW0xIwn70s1lF3iwaHKrzjwIR7R4A9tTr6LyrIxAvod9r67dosk0
-	SAKg==
-X-Received: by 10.68.179.226 with SMTP id dj2mr15032202pbc.100.1422053661069; 
-	Fri, 23 Jan 2015 14:54:21 -0800 (PST)
+	:references; bh=iVL32IdV09F2cW0E5zdIIPuUlrPrCw6OXjhYS2Lnc0A=;
+	b=enFesEljpAt0HDOL/psreXBMkrI1t2eY9GcJx0lplFfDKBM5O+oUIEC7wO14y8QmIK
+	WKU31rb1zY735fYzXthaHT7bdtb2jBJ8vrw5Jrz+Ee6sq19GEnFUzsvB9imGu5kp3Ocy
+	x5Nk5hgkDTLTM919F48U4mY13XgO/dHkSA1mSXJomXnTkDlit7VV77lbSuturKDN90hX
+	gmUjAtDwvaCgTmpFjadpGcAEPRdiXZqF0sJD8FcAPigCKGDoBCvC5MrPSeLmtdM4lcp1
+	7bsWFyhNxhY/aZtvDP54NoztfRA3UrZHc8u6aVwQJ0f4mV6tsM553tJVZG3mCni3Sj29
+	AuOA==
+X-Received: by 10.68.217.97 with SMTP id ox1mr14853058pbc.53.1422053663165;
+	Fri, 23 Jan 2015 14:54:23 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by mx.google.com with ESMTPSA id gz6sm2932760pbc.38.2015.01.23.14.54.18
+	by mx.google.com with ESMTPSA id gz6sm2932760pbc.38.2015.01.23.14.54.21
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 23 Jan 2015 14:54:19 -0800 (PST)
+	Fri, 23 Jan 2015 14:54:21 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Fri, 23 Jan 2015 14:53:49 -0800
-Message-Id: <d3d6e7214be541847dfb166b69eb72082a9efb0f.1422053452.git.akuster808@gmail.com>
+Date: Fri, 23 Jan 2015 14:53:50 -0800
+Message-Id: <a38ff54d95fb5bfefd80a1e54d869a3fc17eea29.1422053452.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
 References: <cover.1422053452.git.akuster808@gmail.com>
 In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
 References: <cover.1422053452.git.akuster808@gmail.com>
-Subject: [PATCH 09/11] meta-gpe: Add LAYERVERSION and LAYERDEPENDS
+Subject: [PATCH 10/11] nbench-byte: Fix license QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,33 +47,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2015 22:54:20 -0000
+X-List-Received-Date: Fri, 23 Jan 2015 22:54:22 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 
-According to README, it depends on oe-core and openembedded-layer
+The license is not a common only and seems to be a 'free distribution'
+license but without explicit rules about modification or similar. Due
+that, we copied the license text from the README file and added it
+onto nbench-byte license file.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+This fixes following QA error:
+
+,----
+| WARNING: Recipe nbench-byte, LICENSE (freely distributable) has
+|     invalid format, LICENSES must have operator "([&|() ])" between
+| 	them.
+`----
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gpe/conf/layer.conf | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-oe/licenses/nbench-byte                               | 10 ++++++++++
+ meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb |  2 +-
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/licenses/nbench-byte
 
-diff --git a/meta-gpe/conf/layer.conf b/meta-gpe/conf/layer.conf
-index 6c018b1..00f3929 100644
---- a/meta-gpe/conf/layer.conf
-+++ b/meta-gpe/conf/layer.conf
-@@ -7,3 +7,9 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
- BBFILE_COLLECTIONS += "gpe-layer"
- BBFILE_PATTERN_gpe-layer := "^${LAYERDIR}/"
- BBFILE_PRIORITY_gpe-layer = "7"
-+
-+# This should only be incremented on significant changes that will
-+# cause compatibility issues with other layers
-+LAYERVERSION_gpe-layer = "1"
-+
-+LAYERDEPENDS_gpe-layer = "core openembedded-layer"
+diff --git a/meta-oe/licenses/nbench-byte b/meta-oe/licenses/nbench-byte
+new file mode 100644
+index 0000000..7e47ba6
+--- /dev/null
++++ b/meta-oe/licenses/nbench-byte
+@@ -0,0 +1,10 @@
++THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
++IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
++OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
++IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
++INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
++NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
++THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+index a98d507..2eedd7e 100644
+--- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "BYTE Magazine's native benchmarks (also called BYTEmark) \
+ designed to expose the capabilities of a system's CPU, FPU, \
+ and memory system."
+ HOMEPAGE = "http://www.tux.org/~mayer/linux/"
+-LICENSE = "freely distributable"
++LICENSE = "nbench-byte"
+ LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
+ SECTION = "console/utils"
+ 
 -- 
 1.9.1
 
