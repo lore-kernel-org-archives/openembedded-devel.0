@@ -1,39 +1,43 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
 	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F43472CD5
+	by mail.openembedded.org (Postfix) with ESMTP id 9898672D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 22:54:24 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id ey11so37665pad.7
+	Fri, 23 Jan 2015 23:37:53 +0000 (UTC)
+Received: by mail-pa0-f48.google.com with SMTP id ey11so210383pad.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 14:54:25 -0800 (PST)
+	Fri, 23 Jan 2015 15:37:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=e042UF9W4lqtD2yhf9gpMFfUqTMZ4EgkGUxpjshcpSI=;
-	b=K6iV1X6uXXR1MDDYRzg5izo450tB/cPU60DrNZulR+9zIEcp4EvvTwpgSPHf8xU1di
-	FDcy8l77OI8hP2rog8WgVpDqgqQjwgrNhd/JPs3/evV687VUz0xH48Y/ssucjpucgC6j
-	s3HL6AiJCiDyeMTDggRmpd9/TT55093Y8Vcjbxg0SOA2novncoVgSMoI+u9IFkcaYzoJ
-	OKa+qjHBvhLPXkKzDvqRb7VT4XSCfMScb5PjVQdDBaSJQIXkx6AX/Ysrz1cNfrK56exO
-	+m28DfWu8MehDEtEPJnNWrjfgVO1mZszwgMZAtEgLLvFL4QWY4o/uGGmfAtDSuuHSrxZ
-	PEvA==
-X-Received: by 10.68.223.196 with SMTP id qw4mr15309161pbc.26.1422053665111;
-	Fri, 23 Jan 2015 14:54:25 -0800 (PST)
-Received: from bigisland.hsd1.ca.comcast.net
-	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by mx.google.com with ESMTPSA id gz6sm2932760pbc.38.2015.01.23.14.54.23
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 23 Jan 2015 14:54:23 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	otavio@ossystems.com.br
-Date: Fri, 23 Jan 2015 14:53:51 -0800
-Message-Id: <bd4735a82ef196c5843d01bc56c87f182d8f33de.1422053452.git.akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
-References: <cover.1422053452.git.akuster808@gmail.com>
-In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
-References: <cover.1422053452.git.akuster808@gmail.com>
-Subject: [PATCH 11/11] xmlto: remove recipe as it's in OE core
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=5yX06cv58xeDCZqITeJVyWnyZm7+fsTNBwmFDnXB4es=;
+	b=fLcQt2CsSXhVWJYcVqCAbY8JPuiN0d926YcwCfRbRR1X3rWRXbPiEqZM+8/BhW5q6C
+	KnS81lVrHpybNZ4PIsQxPdzBsxTp2uSXVZMftvRL1K/Ur7sZCkQ2peDuw4T8DhEpda8x
+	Irco/UuBFx2e/UMnImZsRJSsmN1VRpI1zBMWauXXllWuALCpn45IVGClxACjrUfynt1L
+	D7BX9PW4AnnWPFeAM11Z/STXH6nPnVCWWI37ik8yLPVmnnBmq0Z4s2hiRliLL5CRRWh5
+	hCgY8acLCTl1DBF5rEozsWb4hD571ilwhaugSzB4DRPOlkTETb1cEYM6zAjw7zHN86TT
+	myLw==
+X-Received: by 10.68.57.225 with SMTP id l1mr15383631pbq.114.1422056274169;
+	Fri, 23 Jan 2015 15:37:54 -0800 (PST)
+Received: from ?IPv6:2601:c:a700:272f:c86a:c1a:2910:546?
+	([2601:c:a700:272f:c86a:c1a:2910:546])
+	by mx.google.com with ESMTPSA id nn7sm3012470pdb.4.2015.01.23.15.37.52
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 23 Jan 2015 15:37:53 -0800 (PST)
+Message-ID: <54C2DB4E.4090808@gmail.com>
+Date: Fri, 23 Jan 2015 15:37:50 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+MIME-Version: 1.0
+To: Paul Eggleton <paul.eggleton@linux.intel.com>, 
+	openembedded-devel@lists.openembedded.org, 
+	Bian Naimeng <biannm@cn.fujitsu.com>
+References: <54A97D15.4080801@gmail.com>
+	<B851B2EA-9E81-40E6-A1E9-B8C30DD9E194@gmail.com>
+	<2220709.jFTZT0BvCv@peggleto-mobl5.ger.corp.intel.com>
+In-Reply-To: <2220709.jFTZT0BvCv@peggleto-mobl5.ger.corp.intel.com>
+Subject: Re: recent addition of libgxim depends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,65 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2015 22:54:24 -0000
+X-List-Received-Date: Fri, 23 Jan 2015 23:37:57 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
 
-Remove xmlto recipe from meta-oe because it's in OE core now.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../xmlto/xmlto-0.0.25/obsolete_automake_macros.patch  | 12 ------------
- meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb          | 18 ------------------
- 2 files changed, 30 deletions(-)
- delete mode 100644 meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch
- delete mode 100644 meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
+On 01/07/2015 01:27 AM, Paul Eggleton wrote:
+> On Tuesday 06 January 2015 16:41:52 Khem Raj wrote:
+>>> On Jan 4, 2015, at 9:49 AM, akuster808 <akuster808@gmail.com> wrote:
+>>> While building world I found and issue with libgxim.
+>>>
+>>> libgxim depends on ruby-native. meta-ruby is not a layer depends for
+>>> meta-oe.
+>>>
+>>> Can meta-oe have layer depends other then 'core' ? if so, this is an easy
+>>> fix.
+>>
+>> I would not like to have such a dependency. May be move this recipe to
+>> meta-ruby
+>
+> If it's not specifically a ruby-related piece of software (which it doesn't
+> seem to be, at a glance) then that wouldn't seem right. Can the ruby
+> dependency be disabled by default using PACKAGECONFIG perhaps?
 
-diff --git a/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch b/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch
-deleted file mode 100644
-index faa8acc..0000000
---- a/meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--diff -Nurd xmlto-0.0.25/configure.in xmlto-0.0.25/configure.in
----- xmlto-0.0.25/configure.in	2011-12-01 17:49:00.000000000 +0200
--+++ xmlto-0.0.25/configure.in	2013-01-07 05:24:16.169953519 +0200
--@@ -1,7 +1,7 @@
-- AC_INIT(xmlto, 0.0.25)
-- AC_CONFIG_SRCDIR(xmlto.spec.in)
-- AM_INIT_AUTOMAKE([dist-bzip2 subdir-objects 1.6])
---AM_CONFIG_HEADER(config.h)
--+AC_CONFIG_HEADERS(config.h)
--
-- AC_PROG_CC
-- AM_PROG_CC_C_O
-diff --git a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb b/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-deleted file mode 100644
-index 9188c8a..0000000
---- a/meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "A shell-script tool for converting XML files to various formats"
--HOMEPAGE = "https://fedorahosted.org/xmlto/" 
--SECTION = "docs/xmlto" 
--LICENSE = "GPLv2" 
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--
--PR = "r1"
--
--SRC_URI = "https://fedorahosted.org/releases/x/m/xmlto/xmlto-${PV}.tar.gz \
--           file://obsolete_automake_macros.patch \
--"
--SRC_URI[md5sum] = "a88cd3f08789b4825d1ac89fa065170d"
--SRC_URI[sha256sum] = "c52b56d929e8d20fc19cd3b7ec238f8d039730c56ee311cc352e843147e3e31a"
--
--inherit autotools  
--
--BBCLASSEXTEND = "native nativesdk"
--- 
-1.9.1
+I did not see any configure option. The issue is
+"libgxim/mkacc.rb", it is used in the build process.
 
+- Armin
+
+> Cheers,
+> Paul
+>
 
