@@ -1,39 +1,39 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id C6AF172CD5
+Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id E7F2072D23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 22:54:06 +0000 (UTC)
-Received: by mail-pa0-f54.google.com with SMTP id eu11so27425pac.13
+	Fri, 23 Jan 2015 22:54:04 +0000 (UTC)
+Received: by mail-pd0-f175.google.com with SMTP id fl12so204633pdb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 14:54:07 -0800 (PST)
+	Fri, 23 Jan 2015 14:54:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=zCENHDuV3Sa77HxcX0K+LjARag5ZD0ZmiPQ3QBmFYN4=;
-	b=koGPJoUftZRkEZTVDRfaOkpMs0+nP2YqcQU3YmdTyv9yJB1znseo+8WjdFVdTvln8a
-	vkwszMjpShvW4CI1JLoAxh+cICHm6lqsC6qy1dCC59y3W8/R+SwLfnuFPp2N1LDhOhqI
-	QnP5dwcR5v09P4xYGCeIOVZcZAggbrmBxq59nwmitbUUHEVwz5zaCkRRdzQacYNMrUQ6
-	gS6/Y4iUG2Fl0Rs7tTPsyXbAJNSJ27KKYEW5PKi1q1Cn9xKcz1MuClckg2Exg4VRPyYv
-	4P2pUGighnqbjY3y7VtQeYfuFQJR6b5ZhXfrOIzEl/tFsbyQdpJkFQIh5wBJkDTiRGrM
-	gMUQ==
-X-Received: by 10.70.14.229 with SMTP id s5mr14812518pdc.143.1422053647244;
-	Fri, 23 Jan 2015 14:54:07 -0800 (PST)
+	:references; bh=uMDhdukrMaTJF6PDPOHs9uOaORSHsdZatomTrA4+Yjc=;
+	b=mFPGVdqkWcNjAwrcIGAXhHIpaxr147ous/ph/9KmIi/LrLLxgPOVsvn52aLt3MYtxN
+	JL5YLgO5PDM2Ufr2hp+gl6RiBTamKOqgIrWheKzgmq9S/BjqcHInGUN9a+y6swkKDPlP
+	W9SOuYhAUVc8w8BmDCzA58r8CRmBr1fWPKLV52pP/b/xF8rWBNWjydJ2dirD3fwpgI9G
+	54dtXINwrleQJGVds4g9FQbM44kTIRerKKFwm8ab28RUChpIWrzvICneA0YY5XHxHRDI
+	MYOTW80BqgZD8ipD+fcxCqs7R7/E6cyKCzetwAYixAXOaMpe786ITMldp3UEPQ2KSily
+	yAQg==
+X-Received: by 10.70.22.227 with SMTP id h3mr15146103pdf.160.1422053645290;
+	Fri, 23 Jan 2015 14:54:05 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by mx.google.com with ESMTPSA id gz6sm2932760pbc.38.2015.01.23.14.54.05
+	by mx.google.com with ESMTPSA id gz6sm2932760pbc.38.2015.01.23.14.54.03
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 23 Jan 2015 14:54:06 -0800 (PST)
+	Fri, 23 Jan 2015 14:54:04 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Fri, 23 Jan 2015 14:53:42 -0800
-Message-Id: <c1fd02e8cb751d9ec9852b712bc8f2a03bbb006c.1422053452.git.akuster808@gmail.com>
+Date: Fri, 23 Jan 2015 14:53:41 -0800
+Message-Id: <f3765d513c8971761e10bb0f249f8745b9aa3504.1422053452.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
 References: <cover.1422053452.git.akuster808@gmail.com>
 In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
 References: <cover.1422053452.git.akuster808@gmail.com>
-Subject: [PATCH 02/11] meta-gnome: Add LAYERVERSION and LAYERDEPENDS
+Subject: [PATCH 01/11] iperf: fix out of tree configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,31 +49,95 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 23 Jan 2015 22:54:10 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: "Belal, Awais" <Awais_Belal@mentor.com>
 
-According to README, it depends on oe-core and openembedded-layer
+The configure step uses a package header to check for support
+of types/declares, this package header encapsulates all the
+required system headers for providing the needed resources.
+When configured from an out of tree directory the package
+header is not found due to the hard path.
+We now make the path for package header relative to 'srcdir' so
+it is found appropriately.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Awais Belal <awais_belal@mentor.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-gnome/conf/layer.conf | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../iperf-2.0.5/0001-fix-out-of-tree-config.patch  | 52 ++++++++++++++++++++++
+ meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |  1 +
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
 
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index 902ab8f..58e12a9 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -7,3 +7,9 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
- BBFILE_COLLECTIONS += "gnome-layer"
- BBFILE_PATTERN_gnome-layer := "^${LAYERDIR}/"
- BBFILE_PRIORITY_gnome-layer = "7"
+diff --git a/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
+new file mode 100644
+index 0000000..e8a0297
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
+@@ -0,0 +1,52 @@
++iperf: fix out of tree configuration
 +
-+# This should only be incremented on significant changes that will
-+# cause compatibility issues with other layers
-+LAYERVERSION_gnome-layer = "1"
++The configure step uses a package header to check for support of types/declares,
++this package header encapsulates all the required system header for providing
++the needed resources. When configured from an out of tree directory the package
++header is not found due to the hard path.
++We now make the path for package header relative to our 'srcdir' so it is
++found appropriately.
 +
-+LAYERDEPENDS_gnome-layer = "core openembedded-layer"
++Signed-off-by: Awais Belal <awais_belal@mentor.com>
++---
++diff --git a/configure.ac b/configure.ac
++index 2b3fd20..d420f9e 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -176,8 +176,8 @@ dnl Check for system services
++ 
++ dnl check for multicast
++ if test "$ac_cv_multicast" != no; then
++-  AC_CHECK_TYPES(struct ip_mreq,,,[#include "compat/headers_slim.h"])
++-  AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"])
+++  AC_CHECK_TYPES(struct ip_mreq,,,[#include "${srcdir}/compat/headers_slim.h"])
+++  AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include "${srcdir}/compat/headers_slim.h"])
++   AC_MSG_CHECKING(for multicast support)
++   ac_cv_multicast=no
++   if test "$ac_cv_have_decl_IP_ADD_MEMBERSHIP" = yes; then
++@@ -193,9 +193,9 @@ fi
++ 
++ dnl check for IPv6
++ if test "$ac_cv_have_ipv6" != no; then
++-  AC_CHECK_TYPES(struct sockaddr_storage,,,[#include "compat/headers_slim.h"])
++-  AC_CHECK_TYPES(struct sockaddr_in6,,,[#include "compat/headers_slim.h"])
++-  AC_CHECK_DECLS(AF_INET6,,,[#include "compat/headers_slim.h"])
+++  AC_CHECK_TYPES(struct sockaddr_storage,,,[#include "${srcdir}/compat/headers_slim.h"])
+++  AC_CHECK_TYPES(struct sockaddr_in6,,,[#include "${srcdir}/compat/headers_slim.h"])
+++  AC_CHECK_DECLS(AF_INET6,,,[#include "${srcdir}/compat/headers_slim.h"])
++   AC_MSG_CHECKING(for IPv6 headers and structures)
++   ac_cv_have_ipv6=no
++   if test "$ac_cv_type_struct_sockaddr_storage" = yes; then
++@@ -211,9 +211,9 @@ fi
++ 
++ if test "$ac_cv_have_ipv6" = yes; then
++   if test "$ac_cv_multicast" = yes; then
++-    AC_CHECK_TYPES(struct ipv6_mreq,,,[#include "compat/headers_slim.h"])
++-    AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"])
++-    AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include "compat/headers_slim.h"])
+++    AC_CHECK_TYPES(struct ipv6_mreq,,,[#include "${srcdir}/compat/headers_slim.h"])
+++    AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include "${srcdir}/compat/headers_slim.h"])
+++    AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include "${srcdir}/compat/headers_slim.h"])
++     AC_MSG_CHECKING(for IPv6 multicast support)
++     ac_cv_have_ipv6_multicast=no
++     if test "$ac_cv_type_struct_ipv6_mreq" = yes; then
+diff --git a/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
+index 1bd554b..20adc0d 100644
+--- a/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
++++ b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
+ 
+ SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
+             file://iperf-2.0.5_ManPage.patch \
++            file://0001-fix-out-of-tree-config.patch \
+           "
+ 
+ SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
 -- 
 1.9.1
 
