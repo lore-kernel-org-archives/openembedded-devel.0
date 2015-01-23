@@ -1,33 +1,35 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 7ABE972D3C
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5101D72D0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 12:42:17 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
-	by relay1.mentorg.com with esmtp 
-	id 1YEdZ3-0003pK-Av from Joe_MacDonald@mentor.com ;
-	Fri, 23 Jan 2015 04:42:17 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 23 Jan 2015 04:42:17 -0800
-Received: by burninator (Postfix, from userid 1000)	id B616E580AD7; Fri, 23
-	Jan 2015 07:42:13 -0500 (EST)
-Date: Fri, 23 Jan 2015 07:42:13 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Message-ID: <20150123124213.GB4791@mentor.com>
-References: <3131686.1jEHazhdRQ@gyurco.localdomain>
-	<1443677.77tJzovrQh@gyurco.localdomain>
-	<1475068.2YaKjJgxm5@gyurco.localdomain>
-	<3857819.a4dzGtPs1K@peggleto-mobl5.ger.corp.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <3857819.a4dzGtPs1K@peggleto-mobl5.ger.corp.intel.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH]ntp: fix perl path
+	Fri, 23 Jan 2015 17:43:50 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id ft15so9724157pdb.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jan 2015 09:43:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=rOjQoUcSoO57Q0a/TiXTphPzYo9FV+V78+1GRh47TaA=;
+	b=Rhnn0WrjqCN9/bSRx5BdS3yRBPChQK30+qeGvBfEaVkhPxcNcsXNDTw0/Cfp9NpTrw
+	4H8XV7Ss36aFJr5BsnQoKLowUJhfamcybo4bHg6BJlrpDq/o/Kk4+oQ9shJvFMKRmV4u
+	tTllXqYP3VdRpoVAPAJ0eNO1eYEEu7SyxMMrSuRQuxvncClZac0j/5EDTR4qd3Xc96ox
+	RAlscpVgM1F8NRztjLgG34JQRik7eSW3QF8GomyimDlDlbpXY1MUkiCoX8sLhhRlhGbk
+	XdUcGLR+kzNLj1GwTZk4CHdBRU/J9e9rsRWoF9Qs3+PoP2ZZtkAYLuU8n0LG2SnGlGxj
+	ENDQ==
+X-Received: by 10.68.238.234 with SMTP id vn10mr13007274pbc.140.1422035030655; 
+	Fri, 23 Jan 2015 09:43:50 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id fm4sm2487462pdb.88.2015.01.23.09.43.48
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 23 Jan 2015 09:43:49 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 23 Jan 2015 09:43:46 -0800
+Message-Id: <1422035026-3909-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: [meta-networking][PATCH] wireshark: fix rdepends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,57 +43,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jan 2015 12:42:19 -0000
-X-Groupsio-MsgNum: 53940
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="St7VIuEGZ6dlpu13"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Jan 2015 17:43:57 -0000
 
---St7VIuEGZ6dlpu13
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Armin Kuster <akuster@mvista.com>
 
-[Re: [oe] [meta-oe][PATCH]ntp: fix perl path] On 15.01.23 (Fri 11:22) Paul =
-Eggleton wrote:
+Added a few more PACKAGECONF options
 
-> On Wednesday 21 January 2015 21:05:12 Szombathelyi Gy=F6rgy wrote:
-> > ...more precisely, without the patch ntp-utils will have a /bin/perl
-> > dependency, so it becomes uninstallable (nothing provides /bin/perl).
->=20
-> We do definitely want to fix this, yes - and the breakage may have been m=
-y=20
-> fault, sorry about that.
->=20
-> I think one reason your patch hasn't been picked up yet may be that it sh=
-ould=20
-> have been marked as [meta-networking] rather than [meta-oe] since meta-
-> networking is the layer in which the ntp recipe resides.
->=20
-> Joe, can you please apply this?
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ .../recipes-support/wireshark/wireshark_1.12.3.bb          | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
 
-Yep, no problem.  I'll grab it right now.  I did notice it last night,
-finally, but never thought to check the status as I thought it was
-typically the sort of thing Martin would grab.
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb
+index 2dd99d6..7604bd7 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb
+@@ -4,7 +4,7 @@ SECTION = "network"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
+ 
+-DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 libnl sbc"
++DEPENDS = "perl-native libcap libpcap pcre expat glib-2.0 sbc"
+ 
+ SRC_URI = " \
+     http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-${PV}.tar.bz2 \
+@@ -23,11 +23,12 @@ ARM_INSTRUCTION_SET = "arm"
+ # Works with either gtk+ or gtk3.
+ WHICH_GTK = "gtk3"
+ 
+-PACKAGECONFIG ??= "gnutls gcrypt"
++PACKAGECONFIG ??= "gnutls gcrypt libnl"
+ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${WHICH_GTK}  graphics", "", d)}"
+ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
+ 
+ PACKAGECONFIG[libsmi] = "--with-libsmi=yes, --with-libsmi=no, libsmi"
++PACKAGECONFIG[libnl] = "--with-libnl=yes, --with-libnl=no, libnl"
+ PACKAGECONFIG[portaudio] = "--with-portaudio=yes, --with-portaudio=no, portaudio-v19"
+ PACKAGECONFIG[gtk2] = "--with-gtk2=yes, --with-gtk2=no, gtk+"
+ PACKAGECONFIG[gtk3] = "--with-gtk3=yes, --with-gtk3=no, gtk+3"
+@@ -36,8 +37,15 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
+ PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
+ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
+ PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
++PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
++PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
++PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
+ 
+-EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
++# these next two options require addional layers
++PACKAGECONFIG[adns] = "--with-adns=yes, --with-adns=no, adns"
++PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
++
++EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark"
+ 
+ do_configure_prepend() {
+     # force to use fallback 
+-- 
+1.9.1
 
---=20
--Joe MacDonald.
-:wq
 
---St7VIuEGZ6dlpu13
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUwkGlAAoJEEn8ffcsOfaWnsYIALSguxUMuGREF+ZCRT1713Gw
-DIgnYfBSb69vjUHU0In7yi93YZb6fr2FR/GpJ7hOfqCOGIV0LukA6+tadzwQLTz4
-i1T0o0VGWFS3zTaHSv7We9ItPj17FPwYR6vPcgYS6cW4gr6cLwfkB94WU+Z8yabv
-htfMQ7sPqeGsh7pfKuj26lLtZxVDjNqcoc7jhDinxfh0p/SwD5GBRlV/bYtvTdhF
-GNUSSGrvHihkHeLQRTnj97AFLRol60hDS0csN+5xYGAVkFxswHlkd787i1HdYOPu
-WaCYxqpBmYE43ftrN+rr3zBexVJ5e68XRwdekDH8qrQQnxX00EMMX9PDqJNWnVo=
-=wxtW
------END PGP SIGNATURE-----
-
---St7VIuEGZ6dlpu13--
