@@ -1,35 +1,39 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E8E8A72D36
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EDF872D23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 22:54:02 +0000 (UTC)
-Received: by mail-pd0-f175.google.com with SMTP id fl12so204502pdb.6
+	Fri, 23 Jan 2015 22:54:08 +0000 (UTC)
+Received: by mail-pa0-f46.google.com with SMTP id lj1so47108pab.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jan 2015 14:54:03 -0800 (PST)
+	Fri, 23 Jan 2015 14:54:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=4gav+0eSyeOvEyz7uxG7ZrQn2NOziKVEpdKRU0sANlE=;
-	b=PczdKHh8GUaw16CUzM6kwJs9kI+fkAEUcoYBP6rgiwiAzxk96FJ1xHW6F8biTdP1ES
-	BZK9xtaPO+ixWYddmF08lRhnQDAx78xNy7oizXpC1vhOkXTg1xU0N4KFFvlOBHj9Zdhh
-	+hOev87rfHcfCuMQJq34X5lT87G94r7UnhKb7atz0nVPZPo/IWk0T32odqnG0vYpCpJ+
-	6MVdBQonPWsz3sGZx5fD5XH48vsvQh4ykkzsuSaw8MBJfYyrZ+llR7a/40nZPYFY4Elf
-	mmrdyTti6lAnCLBNW1wMgNH4FcSaCe9+2Q+om5hg/BXVgex5aC1pBuN7iUb4TyfvXnV1
-	eMIw==
-X-Received: by 10.66.65.75 with SMTP id v11mr14680081pas.81.1422053643340;
-	Fri, 23 Jan 2015 14:54:03 -0800 (PST)
+	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
+	:references; bh=8u9kPzfk0AcqUo8wYgNo/VlWhKQ46V2zHsGgvU/sydw=;
+	b=jlRrVDfU6fuRcInDw0og82IkXGl/X54aHZeV7nerhsdT1buXYzyF/ixOtMfFHhQ5GO
+	yQTYvdMKqoXrduHMEP9zl4CgSuDa6Im5gLhOmW2Vnowvj3hftWOt26wONY4pc5R2XQX8
+	6TtkJ5zVuqUC8h6s8oUDF/tRCMQX5NhL6xiB7azMRDcREbwgHdyMuD8WmaTMTpQ7pm6I
+	ITKaJE/PqjEplaZjci/rH0QWESaxrNk3eykwCd8skImGnCLwSJkcpFB44QIJEUpWnjHz
+	bToudIAP0jdbetRqjyM+FRjjigCxF25xWaMUO7LciamGJdjudGlGAekyLdTXHA5VYRnK
+	CULA==
+X-Received: by 10.68.232.33 with SMTP id tl1mr15028894pbc.65.1422053649267;
+	Fri, 23 Jan 2015 14:54:09 -0800 (PST)
 Received: from bigisland.hsd1.ca.comcast.net
 	(c-76-20-92-207.hsd1.ca.comcast.net. [76.20.92.207])
-	by mx.google.com with ESMTPSA id gz6sm2932760pbc.38.2015.01.23.14.54.01
+	by mx.google.com with ESMTPSA id gz6sm2932760pbc.38.2015.01.23.14.54.07
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 23 Jan 2015 14:54:02 -0800 (PST)
+	Fri, 23 Jan 2015 14:54:08 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	otavio@ossystems.com.br
-Date: Fri, 23 Jan 2015 14:53:40 -0800
-Message-Id: <cover.1422053452.git.akuster808@gmail.com>
+Date: Fri, 23 Jan 2015 14:53:43 -0800
+Message-Id: <6ed20e55a4aba46e0fae3eb741f7c3e79bc5cde4.1422053452.git.akuster808@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [PATCH 00/11] [Dizzy next] pull merge request
+In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
+References: <cover.1422053452.git.akuster808@gmail.com>
+In-Reply-To: <cover.1422053452.git.akuster808@gmail.com>
+References: <cover.1422053452.git.akuster808@gmail.com>
+Subject: [PATCH 03/11] meta-perl: Add LAYERVERSION and LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,56 +49,31 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 23 Jan 2015 22:54:10 -0000
 
-Please consider this changes for meta-openembedded dizzy
+From: Jackie Huang <jackie.huang@windriver.com>
 
-The following changes since commit 3b83aa44186fac44a679cd24a5ae64560cb4118f:
+According to README, it depends on oe-core layer
 
-  xf86-video-glamo: fix build with xserver 1.16 (2015-01-18 16:40:55 -0800)
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-perl/conf/layer.conf | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-are available in the git repository at:
-
-  git://github.com/akuster/meta-openembedded akuster/dizzy-next
-  https://github.com/akuster/meta-openembedded/tree/akuster/dizzy-next
-
-Belal, Awais (1):
-  iperf: fix out of tree configuration
-
-Jackie Huang (8):
-  meta-gnome: Add LAYERVERSION and LAYERDEPENDS
-  meta-perl: Add LAYERVERSION and LAYERDEPENDS
-  meta-python: Add LAYERVERSION and LAYERDEPENDS
-  meta-ruby: Add LAYERVERSION and LAYERDEPENDS
-  toolchain-layer: Add LAYERVERSION and LAYERDEPENDS
-  meta-efl: Add LAYERVERSION and LAYERDEPENDS
-  meta-filesystems: Add LAYERVERSION and LAYERDEPENDS
-  meta-gpe: Add LAYERVERSION and LAYERDEPENDS
-
-Otavio Salvador (1):
-  nbench-byte: Fix license QA error
-
-Qi.Chen@windriver.com (1):
-  xmlto: remove recipe as it's in OE core
-
- meta-efl/conf/layer.conf                           |  6 +++
- meta-filesystems/conf/layer.conf                   |  6 +++
- meta-gnome/conf/layer.conf                         |  6 +++
- meta-gpe/conf/layer.conf                           |  6 +++
- meta-oe/licenses/nbench-byte                       | 10 +++++
- .../iperf-2.0.5/0001-fix-out-of-tree-config.patch  | 52 ++++++++++++++++++++++
- meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |  1 +
- .../nbench-byte/nbench-byte_2.2.3.bb               |  2 +-
- .../xmlto-0.0.25/obsolete_automake_macros.patch    | 12 -----
- meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb      | 18 --------
- meta-perl/conf/layer.conf                          |  6 +++
- meta-python/conf/layer.conf                        |  6 +++
- meta-ruby/conf/layer.conf                          |  6 +++
- toolchain-layer/conf/layer.conf                    |  5 +++
- 14 files changed, 111 insertions(+), 31 deletions(-)
- create mode 100644 meta-oe/licenses/nbench-byte
- create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
- delete mode 100644 meta-oe/recipes-support/xmlto/xmlto-0.0.25/obsolete_automake_macros.patch
- delete mode 100644 meta-oe/recipes-support/xmlto/xmlto_0.0.25.bb
-
+diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
+index 09ed0e5..0485ac8 100644
+--- a/meta-perl/conf/layer.conf
++++ b/meta-perl/conf/layer.conf
+@@ -8,3 +8,9 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb \
+ BBFILE_COLLECTIONS += "perl-layer"
+ BBFILE_PATTERN_perl-layer := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_perl-layer = "6"
++
++# This should only be incremented on significant changes that will
++# cause compatibility issues with other layers
++LAYERVERSION_perl-layer = "1"
++
++LAYERDEPENDS_perl-layer = "core"
 -- 
 1.9.1
 
