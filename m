@@ -1,24 +1,26 @@
 Return-Path: <Chong.Lu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 483B2718E1
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FA54718E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 06:44:40 +0000 (UTC)
+	Mon, 26 Jan 2015 06:44:41 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t0Q6ietF023685
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0Q6iftM027665
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jan 2015 22:44:40 -0800 (PST)
+	Sun, 25 Jan 2015 22:44:42 -0800 (PST)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Sun, 25 Jan 2015 22:44:39 -0800
+	14.3.174.1; Sun, 25 Jan 2015 22:44:41 -0800
 From: Chong Lu <Chong.Lu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Jan 2015 14:39:39 +0800
-Message-ID: <1422254380-30419-1-git-send-email-Chong.Lu@windriver.com>
+Date: Mon, 26 Jan 2015 14:39:40 +0800
+Message-ID: <1422254380-30419-2-git-send-email-Chong.Lu@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1422254380-30419-1-git-send-email-Chong.Lu@windriver.com>
+References: <1422254380-30419-1-git-send-email-Chong.Lu@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] syslog-ng: Add a PACKAGECONFIG for syslog-ng-libs
+Subject: [meta-webserver][PATCH 2/2] cherokee: Add a PACKAGECONFIG for cherokee
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,26 +38,26 @@ X-List-Received-Date: Mon, 26 Jan 2015 06:44:45 -0000
 Content-Type: text/plain
 
 This solves the following warning:
-WARNING: QA Issue: syslog-ng-libs rdepends on geoip, but it isn't a build
-dependency? [build-deps]
+WARNING: QA Issue: cherokee rdepends on geoip, but it isn't a build dependency?
+[build-deps]
 
 Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 ---
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 1 +
+ meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 984af43..4aead31 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -53,6 +53,7 @@ PACKAGECONFIG[libnet] = "--enable-libnet --with-libnet=${STAGING_BINDIR_CROSS},-
- PACKAGECONFIG[smtp] = "--enable-smtp --with-libesmtp=${STAGING_LIBDIR},--disable-smtp,libesmtp,"
- PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
- PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
-+PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+index 054858e..451e97c 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+@@ -22,6 +22,7 @@ inherit autotools pkgconfig binconfig update-rc.d systemd
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[ffmpeg] = "--with-ffmpeg,--without-ffmpeg,libav"
+ PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
++PACKAGECONFIG[geoip] = "--with-geoip,--without-geoip,geoip"
  
- do_configure_prepend() {
-     eval "${@base_contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+ EXTRA_OECONF = "--disable-static \
+                 --disable-nls \
 -- 
 1.9.1
 
