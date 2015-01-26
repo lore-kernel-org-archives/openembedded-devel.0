@@ -1,37 +1,30 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 56EC86AC95
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id DF47960670
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 11:09:25 +0000 (UTC)
-Received: by mail-we0-f176.google.com with SMTP id w62so8377420wes.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 03:09:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=09DY5DIAziLo/6Ct7m83U9llafWDA67oqcG3Vg9gPQQ=;
-	b=fmt9w6K/FFKYYHeSad+HFmkvXFKEINX+Bv5/bwQ4R4/6km4ssp32aIjlIhLRBNFZuB
-	pS9WoAgjoX3I+EiJeUNhqy2wLPAA2AaCf5zi+HJJ0OiqBUgVPyYY56hzFFnssXRmIPBp
-	VK2xWW+TEjkN3m4myT6sNnNRtLKfLf+HK9wXDYT0bscHXWDxgpSR2pekIQXLmCJIL+Qm
-	OdrWVQO1dsLyKqpyUR7oKwShnT+xAHLyRlEtSBdCEz2fpVhbWULoBPCd47hC0a5owi9B
-	pKF00xfGOtU/sy4zq/HgyUbHO2Q/QNYRGGXF3I3J2x3FwMSID8C9ICOsFD/w1gqWHNO/
-	YPoA==
-X-Gm-Message-State: ALoCoQkTEDZVV5gtTWJGSUvbIKwU8fCWVLCrxE27b5Zy/Z2YD03VWDBnu6385M5G86fYycW9geBY
-X-Received: by 10.180.108.165 with SMTP id hl5mr25194052wib.39.1422270565310; 
-	Mon, 26 Jan 2015 03:09:25 -0800 (PST)
-Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
-	[81.2.106.35])
-	by mx.google.com with ESMTPSA id cy8sm13479665wib.9.2015.01.26.03.09.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Jan 2015 03:09:24 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Jan 2015 11:07:44 +0000
-Message-Id: <1422270464-4504-1-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [PATCH] debianutils: remove, this is in oe-core now
+	Mon, 26 Jan 2015 14:43:17 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1YFksn-0003V0-RQ from Joe_MacDonald@mentor.com ;
+	Mon, 26 Jan 2015 06:43:17 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 26 Jan 2015 06:43:17 -0800
+Received: by burninator (Postfix, from userid 1000)	id E821D58068C; Mon, 26
+	Jan 2015 09:43:13 -0500 (EST)
+Date: Mon, 26 Jan 2015 09:43:13 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <jianchuan.wang@windriver.com>
+Message-ID: <20150126144313.GG4791@mentor.com>
+References: <1421919356-3982-1-git-send-email-jianchuan.wang@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1421919356-3982-1-git-send-email-jianchuan.wang@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH v3] ipvsadm: Add version 1.26 (initial recipe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,231 +38,311 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 11:09:31 -0000
+X-List-Received-Date: Mon, 26 Jan 2015 14:43:26 -0000
+X-Groupsio-MsgNum: 53978
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="e5bfZ/T2xnjpUIbw"
+Content-Disposition: inline
 
-Also remove the SMAIL_GPL license, this is only used by debianutils and is also
-part of oe-core now.
+--e5bfZ/T2xnjpUIbw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- meta-oe/licenses/SMAIL_GPL                         |  164 --------------------
- .../recipes-support/debianutils/debianutils_4.4.bb |   35 -----
- 2 files changed, 199 deletions(-)
- delete mode 100644 meta-oe/licenses/SMAIL_GPL
- delete mode 100644 meta-oe/recipes-support/debianutils/debianutils_4.4.bb
+Hi Jianchuan,
 
-diff --git a/meta-oe/licenses/SMAIL_GPL b/meta-oe/licenses/SMAIL_GPL
-deleted file mode 100644
-index dfc3fd1..0000000
---- a/meta-oe/licenses/SMAIL_GPL
-+++ /dev/null
-@@ -1,164 +0,0 @@
--This is the Debian GNU/Linux package debianutils.
--
--It is an original Debian package.  Programs in it were maintained by
--Guy Maor <maor@debian.org>, and are now maintained by Clint Adams
--<schizo@debian.org>.
--
--All its programs except readlink, savelog, and which may be
--redistributed under the terms of the GNU GPL, Version 2 or later,
--found on Debian systems in the file /usr/share/common-licenses/GPL.
--
--which is in the public domain.
--
--readlink is Copyright (c) 1997 Kenneth Stailey, and may also be
--distributed under the terms of the BSD copyright.
--
--savelog may be redistributed under the following terms: (The rest of
--this file consists of savelog's distribution terms.)
--
--#ident	"@(#)smail:RELEASE-3_2:COPYING,v 1.2 1996/06/14 18:59:10 woods Exp"
--
--		     SMAIL GENERAL PUBLIC LICENSE
--		       (Clarified 11 Feb 1988)
--
-- Copyright (C)  1988 Landon Curt Noll & Ronald S. Karr
-- Copyright (C)  1992 Ronald S. Karr
-- Copyleft (GNU) 1988 Landon Curt Noll & Ronald S. Karr
--
-- Everyone is permitted to copy and distribute verbatim copies
-- of this license, but changing it is not allowed.  You can also
-- use this wording to make the terms for other programs.
--
--  The license agreements of most software companies keep you at the
--mercy of those companies.  By contrast, our general public license is
--intended to give everyone the right to share SMAIL.  To make sure that
--you get the rights we want you to have, we need to make restrictions
--that forbid anyone to deny you these rights or to ask you to surrender
--the rights.  Hence this license agreement.
--
--  Specifically, we want to make sure that you have the right to give
--away copies of SMAIL, that you receive source code or else can get it
--if you want it, that you can change SMAIL or use pieces of it in new
--free programs, and that you know you can do these things.
--
--  To make sure that everyone has such rights, we have to forbid you to
--deprive anyone else of these rights.  For example, if you distribute
--copies of SMAIL, you must give the recipients all the rights that you
--have.  You must make sure that they, too, receive or can get the
--source code.  And you must tell them their rights.
--
--  Also, for our own protection, we must make certain that everyone
--finds out that there is no warranty for SMAIL.  If SMAIL is modified by
--someone else and passed on, we want its recipients to know that what
--they have is not what we distributed, so that any problems introduced
--by others will not reflect on our reputation.
--
--  Therefore we (Landon Curt Noll and Ronald S. Karr) make the following 
--terms which say what you must do to be allowed to distribute or change 
--SMAIL.
--
--
--			COPYING POLICIES
--
--  1. You may copy and distribute verbatim copies of SMAIL source code
--as you receive it, in any medium, provided that you conspicuously and
--appropriately publish on each copy a valid copyright notice "Copyright
--(C) 1988 Landon Curt Noll & Ronald S. Karr" (or with whatever year is
--appropriate); keep intact the notices on all files that refer to this
--License Agreement and to the absence of any warranty; and give any
--other recipients of the SMAIL program a copy of this License
--Agreement along with the program.  You may charge a distribution fee
--for the physical act of transferring a copy.
--
--  2. You may modify your copy or copies of SMAIL or any portion of it,
--and copy and distribute such modifications under the terms of
--Paragraph 1 above, provided that you also do the following:
--
--    a) cause the modified files to carry prominent notices stating
--    that you changed the files and the date of any change; and
--
--    b) cause the whole of any work that you distribute or publish,
--    that in whole or in part contains or is a derivative of SMAIL or
--    any part thereof, to be licensed at no charge to all third
--    parties on terms identical to those contained in this License
--    Agreement (except that you may choose to grant more extensive
--    warranty protection to some or all third parties, at your option).
--
--    c) You may charge a distribution fee for the physical act of
--    transferring a copy, and you may at your option offer warranty
--    protection in exchange for a fee.
--
--Mere aggregation of another unrelated program with this program (or its
--derivative) on a volume of a storage or distribution medium does not bring
--the other program under the scope of these terms.
--
--  3. You may copy and distribute SMAIL (or a portion or derivative of it,
--under Paragraph 2) in object code or executable form under the terms of
--Paragraphs 1 and 2 above provided that you also do one of the following:
--
--    a) accompany it with the complete corresponding machine-readable
--    source code, which must be distributed under the terms of
--    Paragraphs 1 and 2 above; or,
--
--    b) accompany it with a written offer, valid for at least three
--    years, to give any third party free (except for a nominal
--    shipping charge) a complete machine-readable copy of the
--    corresponding source code, to be distributed under the terms of
--    Paragraphs 1 and 2 above; or,
--
--    c) accompany it with the information you received as to where the
--    corresponding source code may be obtained.  (This alternative is
--    allowed only for non-commercial distribution and only if you
--    received the program in object code or executable form alone.)
--
--For an executable file, complete source code means all the source code for
--all modules it contains; but, as a special exception, it need not include
--source code for modules which are standard libraries that accompany the
--operating system on which the executable file runs.
--
--  4. You may not copy, sublicense, distribute or transfer SMAIL
--except as expressly provided under this License Agreement.  Any attempt
--otherwise to copy, sublicense, distribute or transfer SMAIL is void and
--your rights to use the program under this License agreement shall be
--automatically terminated.  However, parties who have received computer
--software programs from you with this License Agreement will not have
--their licenses terminated so long as such parties remain in full compliance.
--
--  5. If you wish to incorporate parts of SMAIL into other free
--programs whose distribution conditions are different, write to Landon
--Curt Noll & Ronald S. Karr via the Free Software Foundation at 51
--Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.  We have not yet
--worked out a simple rule that can be stated here, but we will often
--permit this.  We will be guided by the two goals of preserving the
--free status of all derivatives of our free software and of promoting
--the sharing and reuse of software.
--
--Your comments and suggestions about our licensing policies and our
--software are welcome!  This contract was based on the contract made by
--the Free Software Foundation.  Please contact the Free Software
--Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
--USA, or call (617) 542-5942 for details on copylefted material in
--general.
--
--		       NO WARRANTY
--
--  BECAUSE SMAIL IS LICENSED FREE OF CHARGE, WE PROVIDE ABSOLUTELY NO
--WARRANTY, TO THE EXTENT PERMITTED BY APPLICABLE STATE LAW.  EXCEPT WHEN
--OTHERWISE STATED IN WRITING, LANDON CURT NOLL & RONALD S. KARR AND/OR
--OTHER PARTIES PROVIDE SMAIL "AS IS" WITHOUT WARRANTY OF ANY KIND,
--EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
--WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
--THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF SMAIL IS WITH
--YOU.  SHOULD SMAIL PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
--NECESSARY SERVICING, REPAIR OR CORRECTION.
--
--  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW WILL LANDON CURT NOLL &
--RONALD S. KARR AND/OR ANY OTHER PARTY WHO MAY MODIFY AND REDISTRIBUTE
--SMAIL AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
--LOST PROFITS, LOST MONIES, OR OTHER SPECIAL, INCIDENTAL OR
--CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
--(INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED
--INACCURATE OR LOSSES SUSTAINED BY THIRD PARTIES OR A FAILURE OF THE
--PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS) SMAIL, EVEN IF YOU HAVE
--BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, OR FOR ANY CLAIM BY
--ANY OTHER PARTY.
-diff --git a/meta-oe/recipes-support/debianutils/debianutils_4.4.bb b/meta-oe/recipes-support/debianutils/debianutils_4.4.bb
-deleted file mode 100644
-index 346eaf1..0000000
---- a/meta-oe/recipes-support/debianutils/debianutils_4.4.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--SUMMARY = "Miscellaneous utilities specific to Debian"
--SECTION = "base"
--LICENSE = "GPLv2 & SMAIL_GPL"
--LIC_FILES_CHKSUM = "file://debian/copyright;md5=f01a5203d50512fc4830b4332b696a9f"
--
--SRC_URI = "${DEBIAN_MIRROR}/main/d/${BPN}/${BPN}_${PV}.tar.gz"
--SRC_URI[md5sum] = "c0cb076754d7f4eb1e3397d00916647f"
--SRC_URI[sha256sum] = "190850cdd6b5302e0a1ba1aaed1bc7074d67d3bd8d04c613f242f7145afa53a6"
--
--inherit autotools update-alternatives
--
--do_configure_prepend() {
--    sed -i -e 's:tempfile.1 which.1:which.1:g' ${S}/Makefile.am
--}
--
--do_install_append() {
--    if [ "${base_bindir}" != "${bindir}" ]; then
--        # Debian places some utils into ${base_bindir} as does busybox
--        install -d ${D}${base_bindir}
--        for app in run-parts tempfile; do
--            mv ${D}${bindir}/$app ${D}${base_bindir}/$app
--        done
--    fi
--}
--
--ALTERNATIVE_PRIORITY="100"
--ALTERNATIVE_${PN} = "add-shell installkernel remove-shell run-parts savelog tempfile which"
--
--ALTERNATIVE_LINK_NAME[add-shell]="${sbindir}/add-shell"
--ALTERNATIVE_LINK_NAME[installkernel]="${sbindir}/installkernel"
--ALTERNATIVE_LINK_NAME[remove-shell]="${sbindir}/remove-shell"
--ALTERNATIVE_LINK_NAME[run-parts]="${base_bindir}/run-parts"
--ALTERNATIVE_LINK_NAME[savelog]="${bindir}/savelog"
--ALTERNATIVE_LINK_NAME[tempfile]="${base_bindir}/tempfile"
--ALTERNATIVE_LINK_NAME[which]="${bindir}/which"
--- 
-1.7.10.4
+Two things on this one.  First, v3 produces this:
 
+WARNING: QA Issue: ipvsadm requires /bin/bash, but no providers in its RDEP=
+ENDS [file-rdeps]
 
+Second, I don't think that it's necessarily the case that your first
+patch is inappropriate for up-stream.  Cross-compilation fixes aren't
+generally unwelcome by maintainers.  That's not a barrier to acceptance
+to meta-networking, of course, but you may want to consider sending it
+upstream anyway to see what the maintainers think.
+
+The second patch looks very much like it's required for up-stream so if
+they don't already have such a change, you should definitely submit it.
+
+-J.
+
+[[oe] [meta-networking][PATCH v3] ipvsadm: Add version 1.26 (initial recipe=
+)] On 15.01.22 (Thu 17:35) jianchuan.wang@windriver.com wrote:
+
+> From: Jianchuan Wang <jianchuan.wang@windriver.com>
+>=20
+> * add ipvs administration tool
+>=20
+> Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+> ---
+>  ...001-Modify-the-Makefile-for-cross-compile.patch | 97 ++++++++++++++++=
+++++++
+>  .../0002-Replace-nl_handle-to-nl_sock.patch        | 63 ++++++++++++++
+>  .../recipes-support/ipvsadm/ipvsadm_1.26.bb        | 34 ++++++++
+>  3 files changed, 194 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0001-=
+Modify-the-Makefile-for-cross-compile.patch
+>  create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0002-=
+Replace-nl_handle-to-nl_sock.patch
+>  create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.=
+bb
+>=20
+> diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-=
+the-Makefile-for-cross-compile.patch b/meta-networking/recipes-support/ipvs=
+adm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
+> new file mode 100644
+> index 0000000..7c3dfe4
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Mak=
+efile-for-cross-compile.patch
+> @@ -0,0 +1,97 @@
+> +From 58292175115bae7a4c3600d3022e59ea57213025 Mon Sep 17 00:00:00 2001
+> +From: Jianchuan Wang <jianchuan.wang@windriver.com>
+> +Date: Mon, 12 Jan 2015 15:53:23 +0800
+> +Subject: [PATCH] Modify the Makefile for cross compile.
+> +
+> +Upstream-Status: Inappropriate [embedded specific]
+> +
+> +Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+> +---
+> + Makefile         | 23 ++++++-----------------
+> + libipvs/Makefile |  3 +--
+> + 2 files changed, 7 insertions(+), 19 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index e4e03cc..461c021 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -35,10 +35,9 @@ ARCH		=3D $(shell uname -m)
+> + RPMSOURCEDIR	=3D $(shell rpm --eval '%_sourcedir')
+> + RPMSPECDIR	=3D $(shell rpm --eval '%_specdir')
+> +=20
+> +-CC		=3D gcc
+> + INCLUDE		=3D
+> + SBIN		=3D $(BUILD_ROOT)/sbin
+> +-MANDIR		=3D usr/man
+> ++MANDIR		=3D usr/share/man
+> + MAN		=3D $(BUILD_ROOT)/$(MANDIR)/man8
+> + INIT		=3D $(BUILD_ROOT)/etc/rc.d/init.d
+> + MKDIR		=3D mkdir
+> +@@ -62,17 +61,7 @@ RPMBUILD =3D $(shell				\
+> + 		echo "/bin/rpm";		\
+> + 	fi )
+> +=20
+> +-ifeq (,$(FORCE_GETOPT))
+> +-LIB_SEARCH =3D /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/lo=
+cal/lib
+> +-POPT_LIB =3D $(shell for i in $(LIB_SEARCH); do \
+> +-  if [ -f $$i/libpopt.a ]; then \
+> +-    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
+> +-	echo "-lpopt"; \
+> +-	break; \
+> +-    fi; \
+> +-  fi; \
+> +-done)
+> +-endif
+> ++POPT_LIB =3D -lpopt
+> +=20
+> + ifneq (,$(POPT_LIB))
+> + POPT_DEFINE =3D -DHAVE_POPT
+> +@@ -81,7 +70,7 @@ endif
+> + OBJS		=3D ipvsadm.o config_stream.o dynamic_array.o
+> + LIBS		=3D $(POPT_LIB)
+> + ifneq (0,$(HAVE_NL))
+> +-LIBS		+=3D -lnl
+> ++LIBS		+=3D -lnl-3 -lnl-genl-3
+> + endif
+> + DEFINES		=3D -DVERSION=3D\"$(VERSION)\" -DSCHEDULERS=3D\"$(SCHEDULERS)\=
+" \
+> + 		  -DPE_LIST=3D\"$(PE_LIST)\" $(POPT_DEFINE)
+> +@@ -91,13 +80,13 @@ DEFINES		+=3D $(shell if [ ! -f ../ip_vs.h ]; then	\
+> +=20
+> + .PHONY	=3D all clean install dist distclean rpm rpms
+> +=20
+> +-all:            libs ipvsadm
+> ++all: ipvsadm
+> +=20
+> + libs:
+> + 		make -C libipvs
+> +=20
+> +-ipvsadm:	$(OBJS) $(STATIC_LIBS)
+> +-		$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+> ++ipvsadm:	$(OBJS) libs
+> ++		$(CC) $(CFLAGS) -o $@ $(OBJS) $(STATIC_LIBS) $(LIBS)
+> +=20
+> + install:        all
+> + 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
+> +diff --git a/libipvs/Makefile b/libipvs/Makefile
+> +index a527a7f..b7300ec 100644
+> +--- a/libipvs/Makefile
+> ++++ b/libipvs/Makefile
+> +@@ -1,6 +1,5 @@
+> + # Makefile for libipvs
+> +=20
+> +-CC		=3D gcc
+> + CFLAGS		=3D -Wall -Wunused -Wstrict-prototypes -g -fPIC
+> + ifneq (0,$(HAVE_NL))
+> + CFLAGS		+=3D -DLIBIPVS_USE_NL
+> +@@ -18,7 +17,7 @@ SHARED_LIB	=3D libipvs.so
+> + all:		$(STATIC_LIB) $(SHARED_LIB)
+> +=20
+> + $(STATIC_LIB):	libipvs.o ip_vs_nl_policy.o
+> +-		ar rv $@ $^
+> ++		$(AR) rv $@ $^
+> +=20
+> + $(SHARED_LIB):	libipvs.o ip_vs_nl_policy.o
+> + 		$(CC) -shared -Wl,-soname,$@ -o $@ $^
+> +--=20
+> +1.9.1
+> +
+> diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace=
+-nl_handle-to-nl_sock.patch b/meta-networking/recipes-support/ipvsadm/ipvsa=
+dm/0002-Replace-nl_handle-to-nl_sock.patch
+> new file mode 100644
+> index 0000000..7896d6d
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_han=
+dle-to-nl_sock.patch
+> @@ -0,0 +1,63 @@
+> +From 2686213259b15df9cf1d969c5a14d62f14cfbaae Mon Sep 17 00:00:00 2001
+> +From: Jianchuan Wang <jianchuan.wang@windriver.com>
+> +Date: Thu, 8 Jan 2015 17:37:11 +0800
+> +Subject: [PATCH 2/2] Replace nl_handle to nl_sock.
+> +
+> +The nl_handle was replace with nl_sock in the libnl-3.
+> +
+> +Upstream-Status: Inappropriate [embedded specific]
+> +
+> +Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+> +---
+> + libipvs/libipvs.c | 10 +++++-----
+> + 1 file changed, 5 insertions(+), 5 deletions(-)
+> +
+> +diff --git a/libipvs/libipvs.c b/libipvs/libipvs.c
+> +index a157e18..21a9bfa 100644
+> +--- a/libipvs/libipvs.c
+> ++++ b/libipvs/libipvs.c
+> +@@ -32,7 +32,7 @@ static void* ipvs_func =3D NULL;
+> + struct ip_vs_getinfo ipvs_info;
+> +=20
+> + #ifdef LIBIPVS_USE_NL
+> +-static struct nl_handle *sock =3D NULL;
+> ++static struct nl_sock *sock =3D NULL;
+> + static int family, try_nl =3D 1;
+> + #endif
+> +=20
+> +@@ -73,7 +73,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvms=
+g_msg_cb_t func, void *arg
+> + {
+> + 	int err =3D EINVAL;
+> +=20
+> +-	sock =3D nl_handle_alloc();
+> ++	sock =3D nl_socket_alloc();
+> + 	if (!sock) {
+> + 		nlmsg_free(msg);
+> + 		return -1;
+> +@@ -88,7 +88,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvms=
+g_msg_cb_t func, void *arg
+> +=20
+> + 	/* To test connections and set the family */
+> + 	if (msg =3D=3D NULL) {
+> +-		nl_handle_destroy(sock);
+> ++		nl_socket_free(sock);
+> + 		sock =3D NULL;
+> + 		return 0;
+> + 	}
+> +@@ -104,12 +104,12 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_re=
+cvmsg_msg_cb_t func, void *arg
+> +=20
+> + 	nlmsg_free(msg);
+> +=20
+> +-	nl_handle_destroy(sock);
+> ++	nl_socket_free(sock);
+> +=20
+> + 	return 0;
+> +=20
+> + fail_genl:
+> +-	nl_handle_destroy(sock);
+> ++	nl_socket_free(sock);
+> + 	sock =3D NULL;
+> + 	nlmsg_free(msg);
+> + 	errno =3D err;
+> +--=20
+> +1.8.3.1
+> +
+> diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb b/me=
+ta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+> new file mode 100644
+> index 0000000..ac97d47
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
+> @@ -0,0 +1,34 @@
+> +SUMMARY =3D "Linux Virtual Server administration Utility"
+> +DESCRIPTION =3D "Ipvsadm  is  used  to set up, maintain or inspect the v=
+irtual server \
+> +table in the Linux kernel. The Linux Virtual  Server  can  be  used  to \
+> +build  scalable  network  services  based  on  a cluster of two or more =
+nodes. \
+> +The active node of the cluster redirects service requests  to  a \
+> +collection  of  server  hosts  that will actually perform the services. \
+> +Supported features include two protocols (TCP and UDP),  three  packet-f=
+orwarding \
+> +methods (NAT, tunneling, and direct routing), and eight load balancing a=
+lgorithms \
+> +(round robin, weighted round robin,  least-connec-tion, weighted least-c=
+onnection, \
+> +locality-based  least-connection, locality-based least-connection with r=
+eplication, \
+> +destination-hashing, and source-hashing)."
+> +SECTION =3D "console/network"
+> +LICENSE =3D "GPL-2.0"
+> +LIC_FILES_CHKSUM =3D "file://README;beginline=3D40;endline=3D56;md5=3Da5=
+4cba37b64924aa5008881607942892"
+> +
+> +DEPENDS +=3D "libnl popt"
+> +
+> +SRC_URI =3D "http://www.linuxvirtualserver.org/software/kernel-2.6/${BP}=
+=2Etar.gz \
+> +        file://0001-Modify-the-Makefile-for-cross-compile.patch \
+> +        file://0002-Replace-nl_handle-to-nl_sock.patch \
+> +"
+> +
+> +SRC_URI[md5sum] =3D "eac3ba3f62cd4dea2da353aeddd353a8"
+> +SRC_URI[sha256sum] =3D "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f6=
+0269fd9cbee0eb2d"
+> +
+> +do_compile() {
+> +    oe_runmake \
+> +    CC=3D"${CC} -I${STAGING_INCDIR} -I${STAGING_INCDIR}/libnl3 -L${STAGI=
+NG_LIBDIR}" \
+> +    all
+> +}
+> +
+> +do_install() {
+> +    oe_runmake 'BUILD_ROOT=3D${D}' install
+> +}
+> --=20
+> 1.9.1
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--e5bfZ/T2xnjpUIbw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iQEcBAEBAgAGBQJUxlKBAAoJEEn8ffcsOfaWFrQH/0CuFYc1GER5wIrFdacRBwAU
+dlCv32qyCEPJrkFhj52p/O5cAoCEg59WBLrUTUlo5mm8mUGd/7Ec3vDyAaBu7n/a
+Vbx9ohA3woi5nLy7FHkPhBzHQGwuZbtJpIlWUrW+zPiCzj29KCspYgPklBSKWsNy
+j59TUYtx2ZoGfG23LmN1/B4s9b0o9heAAUK5Q0JYO2HH/1EF4YxZi3igK4v19Q+0
+XFRUYKg5VHCLQoIBz81qO9/osBJ26IVii931UTwZux3QDkqpbkcFtbLw2mHbbHhv
+sKZjPFbzQWTbzRDvdXmo2Tg42T/THivlmCn3r++pAVB320cQ9i41ZfAkZuxSkkw=
+=9V6M
+-----END PGP SIGNATURE-----
+
+--e5bfZ/T2xnjpUIbw--
