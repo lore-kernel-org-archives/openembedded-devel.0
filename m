@@ -1,22 +1,24 @@
-Return-Path: <dv@pseudoterminal.org>
-X-Greylist: delayed 502 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 26 Jan 2015 08:22:08 UTC
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 88C5A718E1
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id BA7377265A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 08:22:08 +0000 (UTC)
-Received: from [192.168.178.14] (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id D8FB427C32
+	Mon, 26 Jan 2015 08:26:11 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0Q8QBX4028699
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 09:13:44 +0100 (CET)
-Message-ID: <54C5F739.40307@pseudoterminal.org>
-Date: Mon, 26 Jan 2015 09:13:45 +0100
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Mon, 26 Jan 2015 00:26:11 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.136) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Mon, 26 Jan 2015 00:26:11 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 26 Jan 2015 16:26:10 +0800
+Message-ID: <1422260770-6453-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-qt5] qtwebengine in master fails to build
+Subject: [PATCH][meta-networking] wireshark: add PACKAGECONFIG option to use geoip
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,39 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 08:22:17 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Jan 2015 08:26:11 -0000
+Content-Type: text/plain
 
-Hello,
+From: Roy Li <rongqing.li@windriver.com>
 
-I tried to build qtwebengine, but there is a linker error:
+Add geoip to PACKAGECONFIG to remove the warning:
+    WARNING: QA Issue: wireshark rdepends on geoip, but
+        it isn't a build dependency?
 
-[6/6694] LINK genmacro
-FAILED: 
-/home/dv/misc/yocto-fsl-setup-0002/poky/build/tmp/sysroots/x86_64-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++ 
--march=armv7-a -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9 
---sysroot=/home/dv/misc/yocto-fsl-setup-0002/poky/build/tmp/sysroots/cubox-i 
--Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro 
--Wl,--fatal-warnings -pthread -Wl,-z,noexecstack -fPIC 
--Wl,--disable-new-dtags -Wl,--gc-sections -o genmacro -Wl,--start-group 
-obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/genmacro/genmacro.genmacro.o 
--Wl,--end-group
-obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/genmacro/genmacro.genmacro.o: 
-file not recognized: File format not recognized
-collect2: error: ld returned 1 exit status
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-Looking at the ninja 
-fileqtwebengine-opensource-src-5.4.0/src/core/Release/obj.host/src/3rdparty/chromium/third_party/yasm/genmacro.ninja 
-, apparently this part is causing problems:
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
+index 5740730..3fa4991 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
+@@ -36,6 +36,7 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
+ PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
+ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
+ PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
++PACKAGECONFIG[geoip] = "--with-geoip,--without-geoip,geoip"
+ 
+ EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
+ 
+-- 
+2.1.0
 
-build genmacro: link $
-obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/genmacro/genmacro.genmacro.o
-
-It is linking with arm-poky-linux-gnueabi-g++ , but the object file is 
-built with the host's compiler. Considering the name "genmacro", I 
-suspect this is some kind of generator tool that is supposed to be run 
-as part of the build process, so therefore the linker should be the host 
-one. But I have no knowledge about ninja or the webengine internals, so 
-I do not know how to fix that. Any suggestions?
 
