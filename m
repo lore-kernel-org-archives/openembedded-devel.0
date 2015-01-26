@@ -1,36 +1,64 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vc0-f180.google.com (mail-vc0-f180.google.com
-	[209.85.220.180])
-	by mail.openembedded.org (Postfix) with ESMTP id AF3FE6AC95
+Return-Path: <B40869@freescale.com>
+X-Greylist: delayed 2012 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 26 Jan 2015 07:54:09 UTC
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1bbn0101.outbound.protection.outlook.com [157.56.111.101])
+	by mail.openembedded.org (Postfix) with ESMTP id 56F1472646
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 07:42:15 +0000 (UTC)
-Received: by mail-vc0-f180.google.com with SMTP id hy10so2245828vcb.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jan 2015 23:42:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=/WyrtVHyaBLxgGIo+yCie30ufey/ECeWyM8QPEerQtc=;
-	b=G1RkdHDRHeUtICuvydnpihgVvfXWlbC0WzIQ4oGhmgavRgFLRLNetfbPSPHjW6XdNA
-	n94EV+bIRcygtwI509GzVlTsJcCUA4/DuwJILj0pWsZqpkf9irYx/SOidL57Y2hpzUhe
-	mrFFXi9HOK3FN2g5gWX7kAB2hyosHjsQNklbJlFPeFstmX0RPuZjUVFbIW9JCmtn2r7R
-	h68FE/gEVszkjBX9K+yNm1R02UHOPGM0htBVIzGbI1ryWJ5UcXIu3lufulZuMiqwoUNR
-	VTCAhxXvJUhPsGt4GT0BW3Gosa40+q5zTLHN3SKEkOlxO+Ngn0hwVuwINsMSLK+5DIg4
-	AYLw==
+	Mon, 26 Jan 2015 07:54:09 +0000 (UTC)
+Received: from BY2PR03CA007.namprd03.prod.outlook.com (10.255.93.24) by
+	BY2PR0301MB0758.namprd03.prod.outlook.com (25.160.63.23) with Microsoft
+	SMTP Server (TLS) id 15.1.59.20; Mon, 26 Jan 2015 07:20:36 +0000
+Received: from BN1AFFO11FD029.protection.gbl (10.255.93.4) by
+	BY2PR03CA007.outlook.office365.com (10.255.93.24) with Microsoft SMTP
+	Server (TLS) id 15.1.65.19 via Frontend Transport;
+	Mon, 26 Jan 2015 07:20:35 +0000
+Received: from tx30smr01.am.freescale.net (192.88.168.50) by
+	BN1AFFO11FD029.mail.protection.outlook.com (10.58.52.184) with
+	Microsoft SMTP Server (TLS) id 15.1.75.11 via Frontend Transport;
+	Mon, 26 Jan 2015 07:20:35 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	t0Q7KWWg022281; Mon, 26 Jan 2015 00:20:33 -0700
+From: YangHaibo <b40869@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 26 Jan 2015 15:20:29 +0800
+Message-ID: <1422256829-16034-1-git-send-email-b40869@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.168.50 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.168.50; helo=tx30smr01.am.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.168.50)
+	smtp.mailfrom=b40869@freescale.com; freescale.mail.onmicrosoft.com;
+	dkim=none
+	(message not signed) header.d=none;freescale.mail.onmicrosoft.com;
+	dmarc=permerror action=none header.from=freescale.com;
+X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:NLI; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10019020)(6009001)(33646002)(6806004)(19580395003)(2351001)(110136001)(229853001)(77096005)(46102003)(106466001)(105606002)(50226001)(92566002)(86362001)(36756003)(450100001)(62966003)(50986999)(104016003)(85426001)(87936001)(48376002)(50466002)(77156002)(47776003);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BY2PR0301MB0758;
+	H:tx30smr01.am.freescale.net; FPR:; SPF:None; MLV:sfv; LANG:; 
 MIME-Version: 1.0
-X-Received: by 10.220.165.129 with SMTP id i1mr10370246vcy.50.1422258135843;
-	Sun, 25 Jan 2015 23:42:15 -0800 (PST)
-Received: by 10.52.183.71 with HTTP; Sun, 25 Jan 2015 23:42:15 -0800 (PST)
-In-Reply-To: <CADO9-pf7FC6Qhh+K2HvZ2xBdYCY-qvMoGh9Xa5tE_XF9LRuuPA@mail.gmail.com>
-References: <CADO9-pf7FC6Qhh+K2HvZ2xBdYCY-qvMoGh9Xa5tE_XF9LRuuPA@mail.gmail.com>
-Date: Mon, 26 Jan 2015 08:42:15 +0100
-Message-ID: <CALbNGRRh6aT=eUv08qUonR9ymux7jixt4rk_xt7Hr85qdDMkog@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: Yong Li <sdliyong@gmail.com>
-Subject: Re: [meta-xfce][PATCH]] Add XFCE iamge build file
+X-DmarcAction-Test: None
+X-Microsoft-Antispam: UriScan:;
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:BY2PR0301MB0758;
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
+	SRVR:BY2PR0301MB0758; 
+X-Forefront-PRVS: 0468FE4A2B
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
+	SRVR:BY2PR0301MB0758; 
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2015 07:20:35.6341 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d;
+	Ip=[192.88.168.50]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR0301MB0758
+Cc: YangHaibo <b40869@freescale.com>
+Subject: [meta-oe][PATCH] tclap: add ALLOW_EMPTY in bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,53 +72,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 07:42:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 26 Jan 2015 07:54:14 -0000
+Content-Type: text/plain
 
-On Mon, Jan 26, 2015 at 1:46 AM, Yong Li <sdliyong@gmail.com> wrote:
-> From 44c7c064bd7d735e31c2fea0149fc293db78c536 Mon Sep 17 00:00:00 2001
-> From: Yong Li <sdliyong@gmail.com>
-> Date: Mon, 26 Jan 2015 08:39:37 +0800
-> Subject: [PATCH] Add XFCE iamge build file
->
-> Signed-off-by: Yong Li <sdliyong@gmail.com>
-> ---
->  meta/recipes-graphics/images/core-image-xfce.bb | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 meta/recipes-graphics/images/core-image-xfce.bb
->
-> diff --git a/meta/recipes-graphics/images/core-image-xfce.bb
-> b/meta/recipes-graphics/images/core-image-xfce.bb
-> new file mode 100644
-> index 0000000..1d9bfdc
-> --- /dev/null
-> +++ b/meta/recipes-graphics/images/core-image-xfce.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY = "A very basic Wayland image with a terminal"
-xfce and wayland ??
-> +
-> +IMAGE_FEATURES += "splash package-management ssh-server-dropbear hwcodecs"
-> +
-> +LICENSE = "MIT"
-> +
-> +inherit core-image distro_features_check
-> +
-> +REQUIRED_DISTRO_FEATURES = "x11"
-> +
-> +CORE_IMAGE_BASE_INSTALL += "xserver-xorg xserver-xf86-config xinit xauth
-> xf86-input-evdev \
-> +xserver-nodm-init mini-x-session  xorg-minimal-fonts \
-> +xf86-video-fbdev xterm xclock xfwm4 xfce4-session xfdesktop xfce4-settings
-> \
-> +xfce4-panel xfce4-appfinder xfconf xfce4-terminal gtk-xfce-engine \
-> +packagegroup-fonts-truetype packagegroup-xfce-base"
-Most of these are included in packagegroup-xfce-base already
-> --
-> 1.9.1
-> --
-My personal opinion: This belongs to a distro (see angstrom - there
-are already images available) and there is not much value this image
-includes.
+---
+ meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Andreas
+diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+index c6bedea..ab15a7e 100644
+--- a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
++++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
+@@ -11,4 +11,6 @@ SRC_URI = "git://git.code.sf.net/p/tclap/code \
+ S = "${WORKDIR}/git"
+ inherit autotools
+ 
++ALLOW_EMPTY_${PN} = "1"
++
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+1.9.2
+
 
