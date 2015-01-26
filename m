@@ -1,20 +1,18 @@
 Return-Path: <dv@pseudoterminal.org>
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E50D718E1
+	by mail.openembedded.org (Postfix) with ESMTP id 5D6816AC95
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 23:19:52 +0000 (UTC)
+	Mon, 26 Jan 2015 23:19:51 +0000 (UTC)
 Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 47D4D27CB4
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 3448F27C97
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2015 00:19:51 +0100 (CET)
+	Tue, 27 Jan 2015 00:19:49 +0100 (CET)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Jan 2015 00:19:44 +0100
-Message-Id: <1422314384-9091-2-git-send-email-dv@pseudoterminal.org>
+Date: Tue, 27 Jan 2015 00:19:43 +0100
+Message-Id: <1422314384-9091-1-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1422314384-9091-1-git-send-email-dv@pseudoterminal.org>
-References: <1422314384-9091-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-browser][PATCH 2/2] chromium: chromium: Upgrade to version 40.0.2214.91
+Subject: [meta-browser][PATCH 1/2] chromium: Reorganize into .inc and .bb to allow for cleaner upgrades
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,325 +28,507 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 26 Jan 2015 23:19:54 -0000
 
+Since version 37, the structure of the recipe remained more or less the
+same, especially because starting with this version, the ozone-wayland
+integration is working properly. Therefore, put the common code into an
+.inc file to emphasize the version specific bits and make it easier to
+modify the recipe for newer versions.
+
 Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
 ---
- ...accelerated-Canvas-support-from-blacklist.patch | 43 ++++++++++++
- ...Add-Linux-to-impl-side-painting-whitelist.patch | 39 +++++++++++
- .../0003-Disable-API-keys-info-bar.patch           | 33 ++++++++++
- ...4-Remove-hard-coded-values-for-CC-and-CXX.patch | 43 ++++++++++++
- .../0005-Remove-X-libraries-from-GYP-files.patch   | 77 ++++++++++++++++++++++
- recipes-browser/chromium/chromium_40.0.2214.91.bb  | 32 +++++++++
- 6 files changed, 267 insertions(+)
- create mode 100644 recipes-browser/chromium/chromium/chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-40/0003-Disable-API-keys-info-bar.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch
- create mode 100644 recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch
- create mode 100644 recipes-browser/chromium/chromium_40.0.2214.91.bb
+ recipes-browser/chromium/chromium.inc              | 217 +++++++++++++++++++++
+ ...terization-whitelist-unlocking-impl-side-.patch |   0
+ .../0001-Remove-X-libraries-from-GYP-files.patch   |   0
+ ...accelerated-Canvas-support-from-blacklist.patch |   0
+ ...1-Remove-hard-coded-values-for-CC-and-CXX.patch |   0
+ ...ration-conditionally-compile-routines-for.patch |   0
+ .../0002-Disable-API-keys-info-bar.patch           |   0
+ recipes-browser/chromium/chromium_38.0.2125.101.bb | 215 ++------------------
+ 8 files changed, 235 insertions(+), 197 deletions(-)
+ create mode 100644 recipes-browser/chromium/chromium.inc
+ rename recipes-browser/chromium/chromium/{ => chromium-38}/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch (100%)
+ rename recipes-browser/chromium/chromium/{ => chromium-38}/0001-Remove-X-libraries-from-GYP-files.patch (100%)
+ rename recipes-browser/chromium/chromium/{ => chromium-38}/0001-Remove-accelerated-Canvas-support-from-blacklist.patch (100%)
+ rename recipes-browser/chromium/chromium/{ => chromium-38}/0001-Remove-hard-coded-values-for-CC-and-CXX.patch (100%)
+ rename recipes-browser/chromium/chromium/{ => chromium-38}/0001-shell-integration-conditionally-compile-routines-for.patch (100%)
+ rename recipes-browser/chromium/chromium/{ => chromium-38}/0002-Disable-API-keys-info-bar.patch (100%)
 
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch b/recipes-browser/chromium/chromium/chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
 new file mode 100644
-index 0000000..e2c1a5c
+index 0000000..ad976f9
 --- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-@@ -0,0 +1,43 @@
-+From 821d9fde2302f68f7cb7f0b211f4f78220c97180 Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Sun, 12 Oct 2014 17:54:18 +0200
-+Subject: [PATCH] Remove accelerated Canvas support from blacklist
++++ b/recipes-browser/chromium/chromium.inc
+@@ -0,0 +1,217 @@
++# Recipe files have to perform the following tasks after including this file:
++# 1) Add patches to SRC_URI. Version specific patches should be contained in a
++#    "chromium-XX" subdirectory, where XX is the major version. There are also
++#    patches that are shared amongst versions but may one day no longer be
++#    needed (like unistd2.patch). These do not belong in such a subdirectory,
++#    but still need to be explicitely be added. Do NOT add ozone-wayland patches
++#    to SRC_URI here!
++# 2) Add md5sum and sha256sum hashes of the tarball.
++# 3) Add ozone-wayland patches to the OZONE_WAYLAND_EXTRA_PATCHES variable.
++#    The rule with the chromium-XX subdirectory also applies here.
++# 4) Set the OZONE_WAYLAND_GIT_BRANCH and OZONE_WAYLAND_GIT_SRCREV values.
++# 5) Optionally, set values for these variables:
++#    * OZONE_WAYLAND_PATCH_FILE_GLOB
++#    * CHROMIUM_X11_DEPENDS
++#    * CHROMIUM_X11_GYP_DEFINES
++#    * CHROMIUM_WAYLAND_DEPENDS
++#    * CHROMIUM_WAYLAND_GYP_DEFINES
 +
-+Together with the --gpu-no-context-lost command line switch, this patch is
-+necessary to enable hardware accelerated 2D canvas rendering when using
-+EGL.
++DESCRIPTION = "Chromium browser"
++LICENSE = "BSD"
++DEPENDS = "xz-native pciutils pulseaudio cairo nss zlib-native libav libgnome-keyring cups ninja-native gconf libexif pango libdrm"
++SRC_URI = "\
++        http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
++        file://include.gypi \
++        file://oe-defaults.gypi \
++        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
++        file://google-chrome \
++        file://google-chrome.desktop \
++"
 +
-+Note the implications on the behavior of Canvas, in particular with lost
-+contexts, as discussed here:
++# PACKAGECONFIG explanations:
++#
++# * use-egl : Without this packageconfig, the Chromium build will use GLX for creating an OpenGL context in X11,
++#             and regular OpenGL for painting operations. Neither are desirable on embedded platforms. With this
++#             packageconfig, EGL and OpenGL ES 2.x are used instead. On by default.
++#
++# * disable-api-keys-info-bar : This disables the info bar that warns: "Google API keys are missing". With some
++#                               builds, missing API keys are considered OK, so the bar needs to go.
++#                               Off by default.
++#
++# * component-build : Enables component build mode. By default, all of Chromium (with the exception of FFmpeg)
++#                     is linked into one big binary. The linker step requires at least 8 GB RAM. Component mode
++#                     was created to facilitate development and testing, since with it, there is not one big
++#                     binary; instead, each component is linked to a separate shared object.
++#                     Use component mode for development, testing, and in case the build machine is not a 64-bit
++#                     one, or has less than 8 GB RAM. Off by default.
++#
++# * ignore-lost-context : There is a flaw in the HTML Canvas specification. When the canvas' backing store is
++#                         some kind of hardware resource like an OpenGL texture, this resource might get lost.
++#                         In case of OpenGL textures, this happens when the OpenGL context gets lost. The canvas
++#                         should then be repainted, but nothing in the Canvas standard reflects that.
++#                         This packageconfig is to be used if the underlying OpenGL (ES) drivers do not lose
++#                         the context, or if losing the context is considered okay (note that canvas contents can
++#                         vanish then). Off by default.
++#
++# * impl-side-painting : This is a new painting mechanism. Still in development stages, it can improve performance.
++#                        See http://www.chromium.org/developers/design-documents/impl-side-painting for more.
++#                        Off by default.
 +
-+http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
++# conditionally add ozone-wayland and its patches to the Chromium sources
 +
-+Upstream-Status: Inappropiate [see link above]
-+---
-+ gpu/config/software_rendering_list_json.cc | 10 ----------
-+ 1 file changed, 10 deletions(-)
++ENABLE_X11 = "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
++# only enable Wayland if X11 isn't already enabled
++ENABLE_WAYLAND = "${@base_contains('DISTRO_FEATURES', 'x11', '0', \
++                     base_contains('DISTRO_FEATURES', 'wayland', '1', \
++                     '0', d),d)}"
 +
-+diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
-+index b9f5e3a..ccf1460 100644
-+--- a/gpu/config/software_rendering_list_json.cc
-++++ b/gpu/config/software_rendering_list_json.cc
-+@@ -240,16 +240,6 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
-+       ]
-+     },
-+     {
-+-      "id": 24,
-+-      "description": "Accelerated 2d canvas is unstable in Linux at the moment",
-+-      "os": {
-+-        "type": "linux"
-+-      },
-+-      "features": [
-+-        "accelerated_2d_canvas"
-+-      ]
-+-    },
-+-    {
-+       "id": 27,
-+       "description": "ATI/AMD cards with older drivers in Linux are crash-prone",
-+       "cr_bugs": [95934, 94973, 136240, 357314],
-+-- 
-+1.9.1
++# variable for extra ozone-wayland patches, typically extended by BSP layer .bbappends
++# IMPORTANT: do not simply add extra ozone-wayland patches to the SRC_URI in a
++# .bbappend, since the base ozone-wayland patches need to be applied first (see below)
 +
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch b/recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch
-new file mode 100644
-index 0000000..b5916ca
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch
-@@ -0,0 +1,39 @@
-+From 61cbd67e88f5e99185d7df1a05f842c58e691495 Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Sun, 21 Dec 2014 01:01:04 +0100
-+Subject: [PATCH] Add Linux to impl side painting whitelist
++OZONE_WAYLAND_EXTRA_PATCHES = " "
 +
-+Upstream-Status: Inappropriate [enable feature]
++OZONE_WAYLAND_GIT_DESTSUFFIX = "ozone-wayland-git"
++OZONE_WAYLAND_GIT_BRANCH = ""
++OZONE_WAYLAND_GIT_SRCREV = ""
++SRC_URI += "${@base_conditional('ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
++OZONE_WAYLAND_PATCH_FILE_GLOB = "*.patch"
 +
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ gpu/config/software_rendering_list_json.cc | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
++do_unpack[postfuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
++do_patch[prefuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
 +
-+diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
-+index ccf1460..8630d75 100644
-+--- a/gpu/config/software_rendering_list_json.cc
-++++ b/gpu/config/software_rendering_list_json.cc
-+@@ -1088,13 +1088,18 @@ LONG_STRING_CONST(
-+     },
-+     {
-+       "id": 99,
-+-      "description": "GPU rasterization is blacklisted on non-Android",
-++      "description": "GPU rasterization is blacklisted on non-Android and non-Linux (Yocto patch)",
-+       "cr_bugs": [362779],
-+       "exceptions": [
-+         {
-+           "os": {
-+             "type": "android"
-+           }
-++        },
-++        {
-++          "os": {
-++            "type": "linux"
-++          }
-+         }
-+       ],
-+       "features": [
-+-- 
-+1.9.1
++copy_ozone_wayland_files() {
++	# ozone-wayland sources must be placed in an "ozone"
++	# subdirectory in ${S} in order for the .gyp build
++	# scripts to work
++	cp -r ${WORKDIR}/ozone-wayland-git ${S}/ozone
++}
 +
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0003-Disable-API-keys-info-bar.patch b/recipes-browser/chromium/chromium/chromium-40/0003-Disable-API-keys-info-bar.patch
-new file mode 100644
-index 0000000..f36fc24
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-40/0003-Disable-API-keys-info-bar.patch
-@@ -0,0 +1,33 @@
-+From 68773f2faea2608145e820bf23cf5efaf50e3399 Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Mon, 9 Jun 2014 15:05:11 +0200
-+Subject: [PATCH] Disable API keys info bar
++python add_ozone_wayland_patches() {
++    import glob
++    srcdir = d.getVar('S', True)
++    # find all ozone-wayland patches and add them to SRC_URI
++    upstream_patches_dir = srcdir + "/ozone/patches"
++    upstream_patches = glob.glob(upstream_patches_dir + "/" + d.getVar('OZONE_WAYLAND_PATCH_FILE_GLOB', True))
++    upstream_patches.sort()
++    for upstream_patch in upstream_patches:
++        d.appendVar('SRC_URI', ' file://' + upstream_patch)
++    # then, add the extra patches to SRC_URI order matters;
++    # extra patches may depend on the base ozone-wayland ones
++    d.appendVar('SRC_URI', ' ' + d.getVar('OZONE_WAYLAND_EXTRA_PATCHES'))
++}
 +
-+Upstream-Status: Inappropriate [other]
-+The info bar is not a bug; it is just undesirable in some use cases.
-+A clean approach - which requires discussion with upstream - is to
-+disable it by using a command line option.
 +
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc | 2 ++
-+ 1 file changed, 2 insertions(+)
++# include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
++COMPATIBLE_MACHINE = "(-)"
++COMPATIBLE_MACHINE_i586 = "(.*)"
++COMPATIBLE_MACHINE_x86-64 = "(.*)"
++COMPATIBLE_MACHINE_armv6 = "(.*)"
++COMPATIBLE_MACHINE_armv7a = "(.*)"
 +
-+diff --git a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
-+index edea11a..4aef68f 100644
-+--- a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
-++++ b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
-+@@ -18,8 +18,10 @@ void GoogleApiKeysInfoBarDelegate::Create(InfoBarService* infobar_service) {
-+   if (google_apis::HasKeysConfigured())
-+     return;
-+ 
-++#if 0
-+   infobar_service->AddInfoBar(ConfirmInfoBarDelegate::CreateInfoBar(
-+       scoped_ptr<ConfirmInfoBarDelegate>(new GoogleApiKeysInfoBarDelegate())));
-++#endif
-+ }
-+ 
-+ GoogleApiKeysInfoBarDelegate::GoogleApiKeysInfoBarDelegate()
-+-- 
-+1.9.1
++inherit gettext
 +
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/chromium/chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch
-new file mode 100644
-index 0000000..402a674
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch
-@@ -0,0 +1,43 @@
-+From 518135b0cd6878e91e5fcf489f3185740ec307c0 Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Sun, 12 Oct 2014 19:31:47 +0200
-+Subject: [PATCH] Remove hard coded values for CC and CXX
++PACKAGECONFIG ??= "use-egl"
 +
-+In spite of what the comment says, the environment variables do *not*
-+override the variables; "which which arm-linux-gnueabihf-gcc" etc. are
-+always called. To undo this, remove the change.
++# this makes sure the dependencies for the EGL mode are present; otherwise, the configure scripts
++# automatically and silently fall back to GLX
++PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
 +
-+Upstream-Status: Pending
++EXTRA_OEGYP =	" \
++	-Dangle_use_commit_id=0 \
++	-Dclang=0 \
++	-Dhost_clang=0 \
++	-Ddisable_fatal_linker_warnings=1 \
++	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_binary=0', d)} \
++	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
++	-I ${WORKDIR}/oe-defaults.gypi \
++	-I ${WORKDIR}/include.gypi \
++	${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
++	-f ninja \
++"
++ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
 +
-+The default values cannot be overriden without the patch; upstream
-+might be interested in this.
++CHROMIUM_EXTRA_ARGS ?= " \
++	${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
++	${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
++	${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', '--enable-gpu-rasterization --enable-impl-side-painting', '', d)} \
++"
 +
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ build/common.gypi | 10 ----------
-+ 1 file changed, 10 deletions(-)
++GYP_DEFINES = "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
 +
-+diff --git a/build/common.gypi b/build/common.gypi
-+index 7ec5ae2..11e8d1d 100644
-+--- a/build/common.gypi
-++++ b/build/common.gypi
-+@@ -5808,16 +5808,6 @@
-+         ['CXX.host', '<(host_cxx)'],
-+       ],
-+     }],
-+-    ['OS=="linux" and target_arch=="arm" and host_arch!="arm" and chromeos==0 and clang==0', {
-+-      # Set default ARM cross compiling on linux.  These can be overridden
-+-      # using CC/CXX/etc environment variables.
-+-      'make_global_settings': [
-+-        ['CC', '<!(which arm-linux-gnueabihf-gcc)'],
-+-        ['CXX', '<!(which arm-linux-gnueabihf-g++)'],
-+-        ['CC.host', '<(host_cc)'],
-+-        ['CXX.host', '<(host_cxx)'],
-+-      ],
-+-    }],
-+ 
-+     # TODO(yyanagisawa): supports GENERATOR==make
-+     #  make generator doesn't support CC_wrapper without CC
-+-- 
-+1.9.1
++# These are present as their own variables, since they have changed between versions
++# a few times in the past already; making them variables makes it easier to handle that
++CHROMIUM_X11_DEPENDS = "xextproto gtk+ libxi libxss"
++CHROMIUM_X11_GYP_DEFINES = ""
++CHROMIUM_WAYLAND_DEPENDS = "wayland libxkbcommon"
++CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1"
 +
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch b/recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch
-new file mode 100644
-index 0000000..632590a
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-40/0005-Remove-X-libraries-from-GYP-files.patch
-@@ -0,0 +1,77 @@
-+From 23e33854a1c5cddc56acd9abdbda14757b809c7d Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Sun, 12 Oct 2014 18:08:37 +0200
-+Subject: [PATCH] Remove X libraries from GYP files
++python() {
++    if d.getVar('ENABLE_X11', True) == '1':
++        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_X11_DEPENDS', True))
++        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_X11_GYP_DEFINES', True))
++    if d.getVar('ENABLE_WAYLAND', True) == '1':
++        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_WAYLAND_DEPENDS', True))
++        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_WAYLAND_GYP_DEFINES', True))
++}
 +
-+Some X libraries are linked even when ozone-wayland is used, causing
-+linker errors if no X libraries are around
++do_configure() {
++	cd ${S}
++	GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
++	# replace LD with CXX, to workaround a possible gyp issue?
++	LD="${CXX}" export LD
++	CC="${CC}" export CC
++	CXX="${CXX}" export CXX
++	CC_host="${BUILD_CC}" export CC_host
++	CXX_host="${BUILD_CXX}" export CXX_host
++	build/gyp_chromium --depth=. ${EXTRA_OEGYP}
++}
 +
-+Upstream-Status: Pending
++do_compile() {
++	# build with ninja
++	ninja -C ${S}/out/Release chrome chrome_sandbox
++}
 +
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ third_party/libjingle/source/talk/libjingle.gyp                 | 2 --
-+ third_party/libjingle/source/talk/libjingle_examples.gyp        | 4 ----
-+ third_party/webrtc/base/base.gyp                                | 4 ----
-+ third_party/webrtc/modules/desktop_capture/desktop_capture.gypi | 2 +-
-+ 4 files changed, 1 insertion(+), 11 deletions(-)
++do_install() {
++	install -d ${D}${bindir}
++	install -m 0755 ${WORKDIR}/google-chrome ${D}${bindir}/
 +
-+diff --git a/third_party/libjingle/source/talk/libjingle.gyp b/third_party/libjingle/source/talk/libjingle.gyp
-+index 90d1f41..22655dc 100755
-+--- a/third_party/libjingle/source/talk/libjingle.gyp
-++++ b/third_party/libjingle/source/talk/libjingle.gyp
-+@@ -455,8 +455,6 @@
-+           ],
-+           'libraries': [
-+             '-lrt',
-+-            '-lXext',
-+-            '-lX11',
-+           ],
-+         }],
-+         ['OS=="win"', {
-+diff --git a/third_party/libjingle/source/talk/libjingle_examples.gyp b/third_party/libjingle/source/talk/libjingle_examples.gyp
-+index f7ce53b..204bc1e 100755
-+--- a/third_party/libjingle/source/talk/libjingle_examples.gyp
-++++ b/third_party/libjingle/source/talk/libjingle_examples.gyp
-+@@ -207,10 +207,6 @@
-+                 'libraries': [
-+                   '<!@(pkg-config --libs-only-l glib-2.0 gobject-2.0'
-+                       ' gthread-2.0 gtk+-2.0)',
-+-                  '-lX11',
-+-                  '-lXcomposite',
-+-                  '-lXext',
-+-                  '-lXrender',
-+                 ],
-+               },
-+             }],  # OS=="linux"
-+diff --git a/third_party/webrtc/base/base.gyp b/third_party/webrtc/base/base.gyp
-+index 2fd64ba..ccab4e9 100644
-+--- a/third_party/webrtc/base/base.gyp
-++++ b/third_party/webrtc/base/base.gyp
-+@@ -593,10 +593,6 @@
-+             'libraries': [
-+               '-ldl',
-+               '-lrt',
-+-              '-lXext',
-+-              '-lX11',
-+-              '-lXcomposite',
-+-              '-lXrender',
-+             ],
-+           },
-+         }, {
-+diff --git a/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi b/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi
-+index 1b702f2..93ede57 100644
-+--- a/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi
-++++ b/third_party/webrtc/modules/desktop_capture/desktop_capture.gypi
-+@@ -97,7 +97,7 @@
-+             'desktop_capture_differ_sse2',
-+           ],
-+         }],
-+-        ['use_x11 == 1', {
-++        ['use_x11 == 1 and <(ozone_platform_wayland) != 1', {
-+           'link_settings': {
-+             'libraries': [
-+               '-lX11',
-+-- 
-+1.9.1
++	# Add extra command line arguments to google-chrome script by modifying
++	# the dummy "CHROME_EXTRA_ARGS" line
++	sed -i "s/^CHROME_EXTRA_ARGS=\"\"/CHROME_EXTRA_ARGS=\"${CHROMIUM_EXTRA_ARGS}\"/" ${D}${bindir}/google-chrome
 +
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-new file mode 100644
-index 0000000..d0ff07d
---- /dev/null
-+++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -0,0 +1,32 @@
++	install -d ${D}${datadir}/applications
++	install -m 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/
++
++	install -d ${D}${bindir}/chrome/
++	install -m 0755 ${S}/out/Release/chrome ${D}${bindir}/chrome/chrome
++	install -m 0644 ${S}/out/Release/resources.pak ${D}${bindir}/chrome/
++	install -m 0644 ${S}/out/Release/icudtl.dat ${D}${bindir}/chrome/
++	install -m 0644 ${S}/out/Release/content_resources.pak ${D}${bindir}/chrome/
++	install -m 0644 ${S}/out/Release/keyboard_resources.pak ${D}${bindir}/chrome/
++	install -m 0644 ${S}/out/Release/chrome_100_percent.pak ${D}${bindir}/chrome/
++	install -m 0644 ${S}/out/Release/product_logo_48.png ${D}${bindir}/chrome/
++	install -m 0755 ${S}/out/Release/libffmpegsumo.so ${D}${bindir}/chrome/
++
++	# Always adding this libdir (not just with component builds), because the
++	# LD_LIBRARY_PATH line in the google-chromium script refers to it
++	install -d ${D}${libdir}/chrome/
++	if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
++		install -m 0755 ${S}/out/Release/lib/*.so ${D}${libdir}/chrome/
++	fi
++
++	install -d ${D}${sbindir}
++	install -m 4755 ${S}/out/Release/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
++
++	install -d ${D}${bindir}/chrome/locales/
++	install -m 0644 ${S}/out/Release/locales/en-US.pak ${D}${bindir}/chrome/locales
++}
++
++FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
++FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
++
++PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
++
++
++
++
+diff --git a/recipes-browser/chromium/chromium/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch b/recipes-browser/chromium/chromium/chromium-38/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch
+similarity index 100%
+rename from recipes-browser/chromium/chromium/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch
+rename to recipes-browser/chromium/chromium/chromium-38/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch
+diff --git a/recipes-browser/chromium/chromium/0001-Remove-X-libraries-from-GYP-files.patch b/recipes-browser/chromium/chromium/chromium-38/0001-Remove-X-libraries-from-GYP-files.patch
+similarity index 100%
+rename from recipes-browser/chromium/chromium/0001-Remove-X-libraries-from-GYP-files.patch
+rename to recipes-browser/chromium/chromium/chromium-38/0001-Remove-X-libraries-from-GYP-files.patch
+diff --git a/recipes-browser/chromium/chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch b/recipes-browser/chromium/chromium/chromium-38/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
+similarity index 100%
+rename from recipes-browser/chromium/chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
+rename to recipes-browser/chromium/chromium/chromium-38/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
+diff --git a/recipes-browser/chromium/chromium/0001-Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/chromium/chromium-38/0001-Remove-hard-coded-values-for-CC-and-CXX.patch
+similarity index 100%
+rename from recipes-browser/chromium/chromium/0001-Remove-hard-coded-values-for-CC-and-CXX.patch
+rename to recipes-browser/chromium/chromium/chromium-38/0001-Remove-hard-coded-values-for-CC-and-CXX.patch
+diff --git a/recipes-browser/chromium/chromium/0001-shell-integration-conditionally-compile-routines-for.patch b/recipes-browser/chromium/chromium/chromium-38/0001-shell-integration-conditionally-compile-routines-for.patch
+similarity index 100%
+rename from recipes-browser/chromium/chromium/0001-shell-integration-conditionally-compile-routines-for.patch
+rename to recipes-browser/chromium/chromium/chromium-38/0001-shell-integration-conditionally-compile-routines-for.patch
+diff --git a/recipes-browser/chromium/chromium/0002-Disable-API-keys-info-bar.patch b/recipes-browser/chromium/chromium/chromium-38/0002-Disable-API-keys-info-bar.patch
+similarity index 100%
+rename from recipes-browser/chromium/chromium/0002-Disable-API-keys-info-bar.patch
+rename to recipes-browser/chromium/chromium/chromium-38/0002-Disable-API-keys-info-bar.patch
+diff --git a/recipes-browser/chromium/chromium_38.0.2125.101.bb b/recipes-browser/chromium/chromium_38.0.2125.101.bb
+index 8e347a9..55d2cca 100644
+--- a/recipes-browser/chromium/chromium_38.0.2125.101.bb
++++ b/recipes-browser/chromium/chromium_38.0.2125.101.bb
+@@ -1,206 +1,27 @@
+-DESCRIPTION = "Chromium browser"
+-LICENSE = "BSD"
 +include chromium.inc
 +
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5"
+-DEPENDS = "xz-native pciutils pulseaudio cairo nss zlib-native libav libgnome-keyring cups ninja-native gconf libexif pango libdrm"
+-SRC_URI = "\
+-        http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
+-        file://include.gypi \
+-        file://oe-defaults.gypi \
+-        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
+-        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
+-        ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch', '', d)} \
+-        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://0002-Disable-API-keys-info-bar.patch', '', d)} \
+-        file://0001-Remove-hard-coded-values-for-CC-and-CXX.patch \
 +SRC_URI += "\
-+        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium-40/0003-Disable-API-keys-info-bar.patch', '', d)} \
-+        file://chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch \
-+        file://unistd-2.patch \
-+"
-+SRC_URI[md5sum] = "1f5093bd7e435fdebad070e74bfb3438"
-+SRC_URI[sha256sum] = "f72fda9ff1ea256ab911610ee532eadf8303137d431f2481d01d3d60e5e64149"
-+
++        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-38/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
++        ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://chromium-38/0001-Disable-rasterization-whitelist-unlocking-impl-side-.patch', '', d)} \
++        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium-38/0002-Disable-API-keys-info-bar.patch', '', d)} \
++        file://chromium-38/0001-Remove-hard-coded-values-for-CC-and-CXX.patch \
+         file://unistd-2.patch \
+-        file://google-chrome \
+-        file://google-chrome.desktop \
+ "
+-SRC_URI[md5sum] = "be4d3ad6944e43132e4fbde5a23d1ab8"
+-SRC_URI[sha256sum] = "d3303519ab471a3bc831e9b366e64dc2fe651894e52ae5d1e74de60ee2a1198a"
+-
+-# PACKAGECONFIG explanations:
+-#
+-# * use-egl : Without this packageconfig, the Chromium build will use GLX for creating an OpenGL context in X11,
+-#             and regular OpenGL for painting operations. Neither are desirable on embedded platforms. With this
+-#             packageconfig, EGL and OpenGL ES 2.x are used instead. On by default.
+-#
+-# * disable-api-keys-info-bar : This disables the info bar that warns: "Google API keys are missing". With some
+-#                               builds, missing API keys are considered OK, so the bar needs to go.
+-#                               Off by default.
+-#
+-# * component-build : Enables component build mode. By default, all of Chromium (with the exception of FFmpeg)
+-#                     is linked into one big binary. The linker step requires at least 8 GB RAM. Component mode
+-#                     was created to facilitate development and testing, since with it, there is not one big
+-#                     binary; instead, each component is linked to a separate shared object.
+-#                     Use component mode for development, testing, and in case the build machine is not a 64-bit
+-#                     one, or has less than 8 GB RAM. Off by default.
+-#
+-# * ignore-lost-context : There is a flaw in the HTML Canvas specification. When the canvas' backing store is
+-#                         some kind of hardware resource like an OpenGL texture, this resource might get lost.
+-#                         In case of OpenGL textures, this happens when the OpenGL context gets lost. The canvas
+-#                         should then be repainted, but nothing in the Canvas standard reflects that.
+-#                         This packageconfig is to be used if the underlying OpenGL (ES) drivers do not lose
+-#                         the context, or if losing the context is considered okay (note that canvas contents can
+-#                         vanish then). Off by default.
+-#
+-# * impl-side-painting : This is a new painting mechanism. Still in development stages, it can improve performance.
+-#                        See http://www.chromium.org/developers/design-documents/impl-side-painting for more.
+-#                        Off by default.
+-
+ # conditionally add shell integration patch (ozone-wayland contains a patch that makes
+ # this one redundant, therefore use this patch only for X11 builds)
+-SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'file://0001-shell-integration-conditionally-compile-routines-for.patch', '', d)}"
+-
+-# conditionally add ozone-wayland and its patches to the Chromium sources
+-
+-ENABLE_X11 = "${@base_contains('DISTRO_FEATURES', 'x11', '1', '0', d)}"
+-# only enable Wayland if X11 isn't already enabled
+-ENABLE_WAYLAND = "${@base_contains('DISTRO_FEATURES', 'x11', '0', \
+-                     base_contains('DISTRO_FEATURES', 'wayland', '1', \
+-                     '0', d),d)}"
+-
+-# variable for extra ozone-wayland patches, typically extended by BSP layer .bbappends
+-# IMPORTANT: do not simply add extra ozone-wayland patches to the SRC_URI in a
+-# .bbappend, since the base ozone-wayland patches need to be applied first (see below)
++SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'file://chromium-38/0001-shell-integration-conditionally-compile-routines-for.patch', '', d)}"
++SRC_URI[md5sum] = "be4d3ad6944e43132e4fbde5a23d1ab8"
++SRC_URI[sha256sum] = "d3303519ab471a3bc831e9b366e64dc2fe651894e52ae5d1e74de60ee2a1198a"
+ 
+-OZONE_WAYLAND_EXTRA_PATCHES = " \
+-        file://0001-Remove-X-libraries-from-GYP-files.patch \
 +OZONE_WAYLAND_EXTRA_PATCHES += " \
-+        file://chromium-40/0005-Remove-X-libraries-from-GYP-files.patch \
-+"
-+OZONE_WAYLAND_GIT_BRANCH = "Milestone-ThanksGiving"
-+OZONE_WAYLAND_GIT_SRCREV = "5d7baa9bc3b8c88e9b7e476e3d6bc8cd44a887fe"
++        file://chromium-38/0001-Remove-X-libraries-from-GYP-files.patch \
+ "
+-
+-OZONE_WAYLAND_GIT_DESTSUFFIX = "ozone-wayland-git"
+ OZONE_WAYLAND_GIT_BRANCH = "Milestone-Harvest"
+ OZONE_WAYLAND_GIT_SRCREV = "0f8b830730d9b696a667c331c50ac6333bb85c13"
+-SRC_URI += "${@base_conditional('ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
+-
+-do_unpack[postfuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
+-do_patch[prefuncs] += "${@base_conditional('ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
+-
+-copy_ozone_wayland_files() {
+-	# ozone-wayland sources must be placed in an "ozone"
+-	# subdirectory in ${S} in order for the .gyp build
+-	# scripts to work
+-	cp -r ${WORKDIR}/ozone-wayland-git ${S}/ozone
+-}
+-
+-python add_ozone_wayland_patches() {
+-    import glob
+-    srcdir = d.getVar('S', True)
+-    # find all ozone-wayland patches and add them to SRC_URI
+-    upstream_patches_dir = srcdir + "/ozone/patches"
+-    # using 00*.patch to skip WebRTC patches
+-    # the WebRTC patches remove X11 libraries from the linker flags, which is
+-    # already done by another patch (see above). Furthermore, to be able to use
+-    # these patches, it is necessary to update the git repository in third_party/webrtc,
+-    # which would further complicate this recipe.
+-    upstream_patches = glob.glob(upstream_patches_dir + "/00*.patch")
+-    upstream_patches.sort()
+-    for upstream_patch in upstream_patches:
+-        d.appendVar('SRC_URI', ' file://' + upstream_patch)
+-    # then, add the extra patches to SRC_URI order matters;
+-    # extra patches may depend on the base ozone-wayland ones
+-    d.appendVar('SRC_URI', ' ' + d.getVar('OZONE_WAYLAND_EXTRA_PATCHES'))
+-}
+-
+-
+-# include.gypi exists only for armv6 and armv7a and there isn't something like COMPATIBLE_ARCH afaik
+-COMPATIBLE_MACHINE = "(-)"
+-COMPATIBLE_MACHINE_i586 = "(.*)"
+-COMPATIBLE_MACHINE_x86-64 = "(.*)"
+-COMPATIBLE_MACHINE_armv6 = "(.*)"
+-COMPATIBLE_MACHINE_armv7a = "(.*)"
+-
+-inherit gettext
+-
+-PACKAGECONFIG ??= "use-egl"
+-
+-# this makes sure the dependencies for the EGL mode are present; otherwise, the configure scripts
+-# automatically and silently fall back to GLX
+-PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
+-
+-EXTRA_OEGYP =	" \
+-	-Dangle_use_commit_id=0 \
+-	-Dclang=0 \
+-	-Dhost_clang=0 \
+-	-Ddisable_fatal_linker_warnings=1 \
+-	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_binary=0', d)} \
+-	${@base_contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
+-	-I ${WORKDIR}/oe-defaults.gypi \
+-	-I ${WORKDIR}/include.gypi \
+-	${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
+-	-f ninja \
+-"
+-ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
+-
+-CHROMIUM_EXTRA_ARGS ?= " \
+-	${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
+-	${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
+-	${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', '--enable-gpu-rasterization --enable-impl-side-painting', '', d)} \
+-"
+-
+-GYP_DEFINES = "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+-
+-python() {
+-    if d.getVar('ENABLE_X11', True) == '1':
+-        d.appendVar('DEPENDS', ' xextproto gtk+ libxi libxss ')
+-    if d.getVar('ENABLE_WAYLAND', True) == '1':
+-        d.appendVar('DEPENDS', ' wayland libxkbcommon ')
+-        d.appendVar('GYP_DEFINES', ' use_ash=1 use_aura=1 chromeos=0 use_ozone=1 ')
+-}
+-
+-do_configure() {
+-	cd ${S}
+-	GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
+-	# replace LD with CXX, to workaround a possible gyp issue?
+-	LD="${CXX}" export LD
+-	CC="${CC}" export CC
+-	CXX="${CXX}" export CXX
+-	CC_host="${BUILD_CC}" export CC_host
+-	CXX_host="${BUILD_CXX}" export CXX_host
+-	build/gyp_chromium --depth=. ${EXTRA_OEGYP}
+-}
+-
+-do_compile() {
+-	# build with ninja
+-	ninja -C ${S}/out/Release chrome chrome_sandbox
+-}
+-
+-do_install() {
+-	install -d ${D}${bindir}
+-	install -m 0755 ${WORKDIR}/google-chrome ${D}${bindir}/
+-
+-	# Add extra command line arguments to google-chrome script by modifying
+-	# the dummy "CHROME_EXTRA_ARGS" line
+-	sed -i "s/^CHROME_EXTRA_ARGS=\"\"/CHROME_EXTRA_ARGS=\"${CHROMIUM_EXTRA_ARGS}\"/" ${D}${bindir}/google-chrome
+-
+-	install -d ${D}${datadir}/applications
+-	install -m 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/
+-
+-	install -d ${D}${bindir}/chrome/
+-	install -m 0755 ${S}/out/Release/chrome ${D}${bindir}/chrome/chrome
+-	install -m 0644 ${S}/out/Release/resources.pak ${D}${bindir}/chrome/
+-	install -m 0644 ${S}/out/Release/icudtl.dat ${D}${bindir}/chrome/
+-	install -m 0644 ${S}/out/Release/content_resources.pak ${D}${bindir}/chrome/
+-	install -m 0644 ${S}/out/Release/keyboard_resources.pak ${D}${bindir}/chrome/
+-	install -m 0644 ${S}/out/Release/chrome_100_percent.pak ${D}${bindir}/chrome/
+-	install -m 0644 ${S}/out/Release/product_logo_48.png ${D}${bindir}/chrome/
+-	install -m 0755 ${S}/out/Release/libffmpegsumo.so ${D}${bindir}/chrome/
+-
+-	# Always adding this libdir (not just with component builds), because the
+-	# LD_LIBRARY_PATH line in the google-chromium script refers to it
+-	install -d ${D}${libdir}/chrome/
+-	if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
+-		install -m 0755 ${S}/out/Release/lib/*.so ${D}${libdir}/chrome/
+-	fi
+-
+-	install -d ${D}${sbindir}
+-	install -m 4755 ${S}/out/Release/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
+-
+-	install -d ${D}${bindir}/chrome/locales/
+-	install -m 0644 ${S}/out/Release/locales/en-US.pak ${D}${bindir}/chrome/locales
+-}
+-
+-FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
+-FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
+-
+-PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+-
 +# using 00*.patch to skip the WebRTC patches in ozone-wayland
 +# the WebRTC patches remove X11 libraries from the linker flags, which is
 +# already done by another patch (see above). Furthermore, to be able to use
 +# these patches, it is necessary to update the git repository in third_party/webrtc,
 +# which would further complicate this recipe.
 +OZONE_WAYLAND_PATCH_FILE_GLOB = "00*.patch"
-+
-+# Component build is broken in ozone-wayland for Chromium 40,
-+# and is not planned to work again before version 41
-+python() {
-+    if (d.getVar('ENABLE_X11', True) != '1') and (d.getVar('ENABLE_WAYLAND', True) == '1'):
-+        if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
-+            bb.fatal("Chromium 40 Wayland version cannot be built in component-mode")
-+}
 -- 
 1.9.1
 
