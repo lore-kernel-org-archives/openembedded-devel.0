@@ -1,64 +1,22 @@
-Return-Path: <B40869@freescale.com>
-X-Greylist: delayed 2012 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 26 Jan 2015 07:54:09 UTC
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1bbn0101.outbound.protection.outlook.com [157.56.111.101])
-	by mail.openembedded.org (Postfix) with ESMTP id 56F1472646
+Return-Path: <dv@pseudoterminal.org>
+X-Greylist: delayed 502 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 26 Jan 2015 08:22:08 UTC
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 88C5A718E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 07:54:09 +0000 (UTC)
-Received: from BY2PR03CA007.namprd03.prod.outlook.com (10.255.93.24) by
-	BY2PR0301MB0758.namprd03.prod.outlook.com (25.160.63.23) with Microsoft
-	SMTP Server (TLS) id 15.1.59.20; Mon, 26 Jan 2015 07:20:36 +0000
-Received: from BN1AFFO11FD029.protection.gbl (10.255.93.4) by
-	BY2PR03CA007.outlook.office365.com (10.255.93.24) with Microsoft SMTP
-	Server (TLS) id 15.1.65.19 via Frontend Transport;
-	Mon, 26 Jan 2015 07:20:35 +0000
-Received: from tx30smr01.am.freescale.net (192.88.168.50) by
-	BN1AFFO11FD029.mail.protection.outlook.com (10.58.52.184) with
-	Microsoft SMTP Server (TLS) id 15.1.75.11 via Frontend Transport;
-	Mon, 26 Jan 2015 07:20:35 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
-	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
-	t0Q7KWWg022281; Mon, 26 Jan 2015 00:20:33 -0700
-From: YangHaibo <b40869@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Jan 2015 15:20:29 +0800
-Message-ID: <1422256829-16034-1-git-send-email-b40869@freescale.com>
-X-Mailer: git-send-email 1.9.2
-X-EOPAttributedMessage: 0
-Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
-	designate 192.88.168.50 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=192.88.168.50; helo=tx30smr01.am.freescale.net;
-Authentication-Results: spf=fail (sender IP is 192.88.168.50)
-	smtp.mailfrom=b40869@freescale.com; freescale.mail.onmicrosoft.com;
-	dkim=none
-	(message not signed) header.d=none;freescale.mail.onmicrosoft.com;
-	dmarc=permerror action=none header.from=freescale.com;
-X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:NLI; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10019020)(6009001)(33646002)(6806004)(19580395003)(2351001)(110136001)(229853001)(77096005)(46102003)(106466001)(105606002)(50226001)(92566002)(86362001)(36756003)(450100001)(62966003)(50986999)(104016003)(85426001)(87936001)(48376002)(50466002)(77156002)(47776003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BY2PR0301MB0758;
-	H:tx30smr01.am.freescale.net; FPR:; SPF:None; MLV:sfv; LANG:; 
+	Mon, 26 Jan 2015 08:22:08 +0000 (UTC)
+Received: from [192.168.178.14] (chello062178118086.5.14.vie.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id D8FB427C32
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2015 09:13:44 +0100 (CET)
+Message-ID: <54C5F739.40307@pseudoterminal.org>
+Date: Mon, 26 Jan 2015 09:13:45 +0100
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-X-DmarcAction-Test: None
-X-Microsoft-Antispam: UriScan:;
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:BY2PR0301MB0758;
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
-	SRVR:BY2PR0301MB0758; 
-X-Forefront-PRVS: 0468FE4A2B
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
-	SRVR:BY2PR0301MB0758; 
-X-OriginatorOrg: freescale.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2015 07:20:35.6341 (UTC)
-X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d;
-	Ip=[192.88.168.50]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR0301MB0758
-Cc: YangHaibo <b40869@freescale.com>
-Subject: [meta-oe][PATCH] tclap: add ALLOW_EMPTY in bb file
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-qt5] qtwebengine in master fails to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -72,25 +30,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 07:54:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Jan 2015 08:22:17 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
----
- meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Hello,
 
-diff --git a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-index c6bedea..ab15a7e 100644
---- a/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-+++ b/meta-oe/recipes-devtools/tclap/tclap_1.2.1.bb
-@@ -11,4 +11,6 @@ SRC_URI = "git://git.code.sf.net/p/tclap/code \
- S = "${WORKDIR}/git"
- inherit autotools
- 
-+ALLOW_EMPTY_${PN} = "1"
-+
- BBCLASSEXTEND = "native nativesdk"
--- 
-1.9.2
+I tried to build qtwebengine, but there is a linker error:
 
+[6/6694] LINK genmacro
+FAILED: 
+/home/dv/misc/yocto-fsl-setup-0002/poky/build/tmp/sysroots/x86_64-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++ 
+-march=armv7-a -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9 
+--sysroot=/home/dv/misc/yocto-fsl-setup-0002/poky/build/tmp/sysroots/cubox-i 
+-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro 
+-Wl,--fatal-warnings -pthread -Wl,-z,noexecstack -fPIC 
+-Wl,--disable-new-dtags -Wl,--gc-sections -o genmacro -Wl,--start-group 
+obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/genmacro/genmacro.genmacro.o 
+-Wl,--end-group
+obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/genmacro/genmacro.genmacro.o: 
+file not recognized: File format not recognized
+collect2: error: ld returned 1 exit status
+
+Looking at the ninja 
+fileqtwebengine-opensource-src-5.4.0/src/core/Release/obj.host/src/3rdparty/chromium/third_party/yasm/genmacro.ninja 
+, apparently this part is causing problems:
+
+build genmacro: link $
+obj.host/src/3rdparty/chromium/third_party/yasm/source/patched-yasm/tools/genmacro/genmacro.genmacro.o
+
+It is linking with arm-poky-linux-gnueabi-g++ , but the object file is 
+built with the host's compiler. Considering the name "genmacro", I 
+suspect this is some kind of generator tool that is supposed to be run 
+as part of the build process, so therefore the linker should be the host 
+one. But I have no knowledge about ninja or the webengine internals, so 
+I do not know how to fix that. Any suggestions?
 
