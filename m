@@ -1,24 +1,27 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BA7377265A
+Return-Path: <mike.looijmans@topic.nl>
+X-Greylist: delayed 1855 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 26 Jan 2015 09:14:00 UTC
+Received: from atl4mhob06.myregisteredsite.com
+	(atl4mhob06.myregisteredsite.com [209.17.115.44])
+	by mail.openembedded.org (Postfix) with ESMTP id ED290718E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 08:26:11 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0Q8QBX4028699
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 00:26:11 -0800 (PST)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.136) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Mon, 26 Jan 2015 00:26:11 -0800
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Jan 2015 16:26:10 +0800
-Message-ID: <1422260770-6453-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
-MIME-Version: 1.0
-Subject: [PATCH][meta-networking] wireshark: add PACKAGECONFIG option to use geoip
+	Mon, 26 Jan 2015 09:14:00 +0000 (UTC)
+Received: from mailpod.hostingplatform.com ([10.30.71.204])
+	by atl4mhob06.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
+	t0Q8h4Xt023477 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2015 03:43:04 -0500
+Received: (qmail 5300 invoked by uid 0); 26 Jan 2015 08:43:04 -0000
+X-TCPREMOTEIP: 88.159.208.100
+X-Authenticated-UID: mike@milosoftware.com
+Received: from unknown (HELO mikebuntu.TOPIC.LOCAL)
+	(mike@milosoftware.com@88.159.208.100)
+	by 0 with ESMTPA; 26 Jan 2015 08:43:04 -0000
+From: Mike Looijmans <mike.looijmans@topic.nl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Jan 2015 09:42:53 +0100
+Message-Id: <1422261773-11620-1-git-send-email-mike.looijmans@topic.nl>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] iperf3: Add native support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 08:26:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Jan 2015 09:14:10 -0000
 
-From: Roy Li <rongqing.li@windriver.com>
+If you want to use iperf3 to measure your board's IP performance, you
+may also want to compile if for the build host, because unlike iperf,
+iperf3 isn't readily available as a standard Ubuntu package for example.
 
-Add geoip to PACKAGECONFIG to remove the warning:
-    WARNING: QA Issue: wireshark rdepends on geoip, but
-        it isn't a build dependency?
+Add a BBCLASSEXTEND="native" to the recipe so that you just can build
+iperf3-native and have bitbake compile it for you, instead of having to
+download, compile and install it manually on the build machine.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
 ---
- meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb | 1 +
+ meta-oe/recipes-benchmark/iperf3/iperf3_git.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
-index 5740730..3fa4991 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.2.bb
-@@ -36,6 +36,7 @@ PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
- PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
- PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
- PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
-+PACKAGECONFIG[geoip] = "--with-geoip,--without-geoip,geoip"
+diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
+index d34eb69..b4d2b61 100644
+--- a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
++++ b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
+@@ -23,3 +23,4 @@ SRCREV = "de420cc741dd8967ebc57f80b7712556442de81b"
+ S = "${WORKDIR}/git"
  
- EXTRA_OECONF = "--with-qt=no --enable-usr-local=no --enable-tshark --with-c-ares=no"
- 
+ inherit autotools
++BBCLASSEXTEND = "native"
 -- 
-2.1.0
+1.9.1
 
 
