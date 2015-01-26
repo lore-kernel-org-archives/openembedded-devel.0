@@ -1,27 +1,37 @@
-Return-Path: <mike.looijmans@topic.nl>
-X-Greylist: delayed 1855 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 26 Jan 2015 09:14:00 UTC
-Received: from atl4mhob06.myregisteredsite.com
-	(atl4mhob06.myregisteredsite.com [209.17.115.44])
-	by mail.openembedded.org (Postfix) with ESMTP id ED290718E1
+Return-Path: <ross.burton@intel.com>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 56EC86AC95
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 09:14:00 +0000 (UTC)
-Received: from mailpod.hostingplatform.com ([10.30.71.204])
-	by atl4mhob06.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	t0Q8h4Xt023477 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 03:43:04 -0500
-Received: (qmail 5300 invoked by uid 0); 26 Jan 2015 08:43:04 -0000
-X-TCPREMOTEIP: 88.159.208.100
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO mikebuntu.TOPIC.LOCAL)
-	(mike@milosoftware.com@88.159.208.100)
-	by 0 with ESMTPA; 26 Jan 2015 08:43:04 -0000
-From: Mike Looijmans <mike.looijmans@topic.nl>
+	Mon, 26 Jan 2015 11:09:25 +0000 (UTC)
+Received: by mail-we0-f176.google.com with SMTP id w62so8377420wes.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2015 03:09:25 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=09DY5DIAziLo/6Ct7m83U9llafWDA67oqcG3Vg9gPQQ=;
+	b=fmt9w6K/FFKYYHeSad+HFmkvXFKEINX+Bv5/bwQ4R4/6km4ssp32aIjlIhLRBNFZuB
+	pS9WoAgjoX3I+EiJeUNhqy2wLPAA2AaCf5zi+HJJ0OiqBUgVPyYY56hzFFnssXRmIPBp
+	VK2xWW+TEjkN3m4myT6sNnNRtLKfLf+HK9wXDYT0bscHXWDxgpSR2pekIQXLmCJIL+Qm
+	OdrWVQO1dsLyKqpyUR7oKwShnT+xAHLyRlEtSBdCEz2fpVhbWULoBPCd47hC0a5owi9B
+	pKF00xfGOtU/sy4zq/HgyUbHO2Q/QNYRGGXF3I3J2x3FwMSID8C9ICOsFD/w1gqWHNO/
+	YPoA==
+X-Gm-Message-State: ALoCoQkTEDZVV5gtTWJGSUvbIKwU8fCWVLCrxE27b5Zy/Z2YD03VWDBnu6385M5G86fYycW9geBY
+X-Received: by 10.180.108.165 with SMTP id hl5mr25194052wib.39.1422270565310; 
+	Mon, 26 Jan 2015 03:09:25 -0800 (PST)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35])
+	by mx.google.com with ESMTPSA id cy8sm13479665wib.9.2015.01.26.03.09.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 26 Jan 2015 03:09:24 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Jan 2015 09:42:53 +0100
-Message-Id: <1422261773-11620-1-git-send-email-mike.looijmans@topic.nl>
-X-Mailer: git-send-email 1.9.1
-Subject: [PATCH] iperf3: Add native support
+Date: Mon, 26 Jan 2015 11:07:44 +0000
+Message-Id: <1422270464-4504-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [PATCH] debianutils: remove, this is in oe-core now
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,31 +45,231 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 09:14:10 -0000
+X-List-Received-Date: Mon, 26 Jan 2015 11:09:31 -0000
 
-If you want to use iperf3 to measure your board's IP performance, you
-may also want to compile if for the build host, because unlike iperf,
-iperf3 isn't readily available as a standard Ubuntu package for example.
+Also remove the SMAIL_GPL license, this is only used by debianutils and is also
+part of oe-core now.
 
-Add a BBCLASSEXTEND="native" to the recipe so that you just can build
-iperf3-native and have bitbake compile it for you, instead of having to
-download, compile and install it manually on the build machine.
-
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-oe/recipes-benchmark/iperf3/iperf3_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/licenses/SMAIL_GPL                         |  164 --------------------
+ .../recipes-support/debianutils/debianutils_4.4.bb |   35 -----
+ 2 files changed, 199 deletions(-)
+ delete mode 100644 meta-oe/licenses/SMAIL_GPL
+ delete mode 100644 meta-oe/recipes-support/debianutils/debianutils_4.4.bb
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-index d34eb69..b4d2b61 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-@@ -23,3 +23,4 @@ SRCREV = "de420cc741dd8967ebc57f80b7712556442de81b"
- S = "${WORKDIR}/git"
- 
- inherit autotools
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/licenses/SMAIL_GPL b/meta-oe/licenses/SMAIL_GPL
+deleted file mode 100644
+index dfc3fd1..0000000
+--- a/meta-oe/licenses/SMAIL_GPL
++++ /dev/null
+@@ -1,164 +0,0 @@
+-This is the Debian GNU/Linux package debianutils.
+-
+-It is an original Debian package.  Programs in it were maintained by
+-Guy Maor <maor@debian.org>, and are now maintained by Clint Adams
+-<schizo@debian.org>.
+-
+-All its programs except readlink, savelog, and which may be
+-redistributed under the terms of the GNU GPL, Version 2 or later,
+-found on Debian systems in the file /usr/share/common-licenses/GPL.
+-
+-which is in the public domain.
+-
+-readlink is Copyright (c) 1997 Kenneth Stailey, and may also be
+-distributed under the terms of the BSD copyright.
+-
+-savelog may be redistributed under the following terms: (The rest of
+-this file consists of savelog's distribution terms.)
+-
+-#ident	"@(#)smail:RELEASE-3_2:COPYING,v 1.2 1996/06/14 18:59:10 woods Exp"
+-
+-		     SMAIL GENERAL PUBLIC LICENSE
+-		       (Clarified 11 Feb 1988)
+-
+- Copyright (C)  1988 Landon Curt Noll & Ronald S. Karr
+- Copyright (C)  1992 Ronald S. Karr
+- Copyleft (GNU) 1988 Landon Curt Noll & Ronald S. Karr
+-
+- Everyone is permitted to copy and distribute verbatim copies
+- of this license, but changing it is not allowed.  You can also
+- use this wording to make the terms for other programs.
+-
+-  The license agreements of most software companies keep you at the
+-mercy of those companies.  By contrast, our general public license is
+-intended to give everyone the right to share SMAIL.  To make sure that
+-you get the rights we want you to have, we need to make restrictions
+-that forbid anyone to deny you these rights or to ask you to surrender
+-the rights.  Hence this license agreement.
+-
+-  Specifically, we want to make sure that you have the right to give
+-away copies of SMAIL, that you receive source code or else can get it
+-if you want it, that you can change SMAIL or use pieces of it in new
+-free programs, and that you know you can do these things.
+-
+-  To make sure that everyone has such rights, we have to forbid you to
+-deprive anyone else of these rights.  For example, if you distribute
+-copies of SMAIL, you must give the recipients all the rights that you
+-have.  You must make sure that they, too, receive or can get the
+-source code.  And you must tell them their rights.
+-
+-  Also, for our own protection, we must make certain that everyone
+-finds out that there is no warranty for SMAIL.  If SMAIL is modified by
+-someone else and passed on, we want its recipients to know that what
+-they have is not what we distributed, so that any problems introduced
+-by others will not reflect on our reputation.
+-
+-  Therefore we (Landon Curt Noll and Ronald S. Karr) make the following 
+-terms which say what you must do to be allowed to distribute or change 
+-SMAIL.
+-
+-
+-			COPYING POLICIES
+-
+-  1. You may copy and distribute verbatim copies of SMAIL source code
+-as you receive it, in any medium, provided that you conspicuously and
+-appropriately publish on each copy a valid copyright notice "Copyright
+-(C) 1988 Landon Curt Noll & Ronald S. Karr" (or with whatever year is
+-appropriate); keep intact the notices on all files that refer to this
+-License Agreement and to the absence of any warranty; and give any
+-other recipients of the SMAIL program a copy of this License
+-Agreement along with the program.  You may charge a distribution fee
+-for the physical act of transferring a copy.
+-
+-  2. You may modify your copy or copies of SMAIL or any portion of it,
+-and copy and distribute such modifications under the terms of
+-Paragraph 1 above, provided that you also do the following:
+-
+-    a) cause the modified files to carry prominent notices stating
+-    that you changed the files and the date of any change; and
+-
+-    b) cause the whole of any work that you distribute or publish,
+-    that in whole or in part contains or is a derivative of SMAIL or
+-    any part thereof, to be licensed at no charge to all third
+-    parties on terms identical to those contained in this License
+-    Agreement (except that you may choose to grant more extensive
+-    warranty protection to some or all third parties, at your option).
+-
+-    c) You may charge a distribution fee for the physical act of
+-    transferring a copy, and you may at your option offer warranty
+-    protection in exchange for a fee.
+-
+-Mere aggregation of another unrelated program with this program (or its
+-derivative) on a volume of a storage or distribution medium does not bring
+-the other program under the scope of these terms.
+-
+-  3. You may copy and distribute SMAIL (or a portion or derivative of it,
+-under Paragraph 2) in object code or executable form under the terms of
+-Paragraphs 1 and 2 above provided that you also do one of the following:
+-
+-    a) accompany it with the complete corresponding machine-readable
+-    source code, which must be distributed under the terms of
+-    Paragraphs 1 and 2 above; or,
+-
+-    b) accompany it with a written offer, valid for at least three
+-    years, to give any third party free (except for a nominal
+-    shipping charge) a complete machine-readable copy of the
+-    corresponding source code, to be distributed under the terms of
+-    Paragraphs 1 and 2 above; or,
+-
+-    c) accompany it with the information you received as to where the
+-    corresponding source code may be obtained.  (This alternative is
+-    allowed only for non-commercial distribution and only if you
+-    received the program in object code or executable form alone.)
+-
+-For an executable file, complete source code means all the source code for
+-all modules it contains; but, as a special exception, it need not include
+-source code for modules which are standard libraries that accompany the
+-operating system on which the executable file runs.
+-
+-  4. You may not copy, sublicense, distribute or transfer SMAIL
+-except as expressly provided under this License Agreement.  Any attempt
+-otherwise to copy, sublicense, distribute or transfer SMAIL is void and
+-your rights to use the program under this License agreement shall be
+-automatically terminated.  However, parties who have received computer
+-software programs from you with this License Agreement will not have
+-their licenses terminated so long as such parties remain in full compliance.
+-
+-  5. If you wish to incorporate parts of SMAIL into other free
+-programs whose distribution conditions are different, write to Landon
+-Curt Noll & Ronald S. Karr via the Free Software Foundation at 51
+-Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.  We have not yet
+-worked out a simple rule that can be stated here, but we will often
+-permit this.  We will be guided by the two goals of preserving the
+-free status of all derivatives of our free software and of promoting
+-the sharing and reuse of software.
+-
+-Your comments and suggestions about our licensing policies and our
+-software are welcome!  This contract was based on the contract made by
+-the Free Software Foundation.  Please contact the Free Software
+-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301,
+-USA, or call (617) 542-5942 for details on copylefted material in
+-general.
+-
+-		       NO WARRANTY
+-
+-  BECAUSE SMAIL IS LICENSED FREE OF CHARGE, WE PROVIDE ABSOLUTELY NO
+-WARRANTY, TO THE EXTENT PERMITTED BY APPLICABLE STATE LAW.  EXCEPT WHEN
+-OTHERWISE STATED IN WRITING, LANDON CURT NOLL & RONALD S. KARR AND/OR
+-OTHER PARTIES PROVIDE SMAIL "AS IS" WITHOUT WARRANTY OF ANY KIND,
+-EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+-THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF SMAIL IS WITH
+-YOU.  SHOULD SMAIL PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
+-NECESSARY SERVICING, REPAIR OR CORRECTION.
+-
+-  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW WILL LANDON CURT NOLL &
+-RONALD S. KARR AND/OR ANY OTHER PARTY WHO MAY MODIFY AND REDISTRIBUTE
+-SMAIL AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
+-LOST PROFITS, LOST MONIES, OR OTHER SPECIAL, INCIDENTAL OR
+-CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
+-(INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED
+-INACCURATE OR LOSSES SUSTAINED BY THIRD PARTIES OR A FAILURE OF THE
+-PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS) SMAIL, EVEN IF YOU HAVE
+-BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES, OR FOR ANY CLAIM BY
+-ANY OTHER PARTY.
+diff --git a/meta-oe/recipes-support/debianutils/debianutils_4.4.bb b/meta-oe/recipes-support/debianutils/debianutils_4.4.bb
+deleted file mode 100644
+index 346eaf1..0000000
+--- a/meta-oe/recipes-support/debianutils/debianutils_4.4.bb
++++ /dev/null
+@@ -1,35 +0,0 @@
+-SUMMARY = "Miscellaneous utilities specific to Debian"
+-SECTION = "base"
+-LICENSE = "GPLv2 & SMAIL_GPL"
+-LIC_FILES_CHKSUM = "file://debian/copyright;md5=f01a5203d50512fc4830b4332b696a9f"
+-
+-SRC_URI = "${DEBIAN_MIRROR}/main/d/${BPN}/${BPN}_${PV}.tar.gz"
+-SRC_URI[md5sum] = "c0cb076754d7f4eb1e3397d00916647f"
+-SRC_URI[sha256sum] = "190850cdd6b5302e0a1ba1aaed1bc7074d67d3bd8d04c613f242f7145afa53a6"
+-
+-inherit autotools update-alternatives
+-
+-do_configure_prepend() {
+-    sed -i -e 's:tempfile.1 which.1:which.1:g' ${S}/Makefile.am
+-}
+-
+-do_install_append() {
+-    if [ "${base_bindir}" != "${bindir}" ]; then
+-        # Debian places some utils into ${base_bindir} as does busybox
+-        install -d ${D}${base_bindir}
+-        for app in run-parts tempfile; do
+-            mv ${D}${bindir}/$app ${D}${base_bindir}/$app
+-        done
+-    fi
+-}
+-
+-ALTERNATIVE_PRIORITY="100"
+-ALTERNATIVE_${PN} = "add-shell installkernel remove-shell run-parts savelog tempfile which"
+-
+-ALTERNATIVE_LINK_NAME[add-shell]="${sbindir}/add-shell"
+-ALTERNATIVE_LINK_NAME[installkernel]="${sbindir}/installkernel"
+-ALTERNATIVE_LINK_NAME[remove-shell]="${sbindir}/remove-shell"
+-ALTERNATIVE_LINK_NAME[run-parts]="${base_bindir}/run-parts"
+-ALTERNATIVE_LINK_NAME[savelog]="${bindir}/savelog"
+-ALTERNATIVE_LINK_NAME[tempfile]="${base_bindir}/tempfile"
+-ALTERNATIVE_LINK_NAME[which]="${bindir}/which"
 -- 
-1.9.1
+1.7.10.4
 
 
