@@ -1,30 +1,42 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id DF47960670
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id B22616AC95
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 14:43:17 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1YFksn-0003V0-RQ from Joe_MacDonald@mentor.com ;
-	Mon, 26 Jan 2015 06:43:17 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 26 Jan 2015 06:43:17 -0800
-Received: by burninator (Postfix, from userid 1000)	id E821D58068C; Mon, 26
-	Jan 2015 09:43:13 -0500 (EST)
-Date: Mon, 26 Jan 2015 09:43:13 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <jianchuan.wang@windriver.com>
-Message-ID: <20150126144313.GG4791@mentor.com>
-References: <1421919356-3982-1-git-send-email-jianchuan.wang@windriver.com>
+	Mon, 26 Jan 2015 15:37:33 +0000 (UTC)
+Received: by mail-pd0-f171.google.com with SMTP id fp1so12531508pdb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jan 2015 07:37:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=9K6CQjnhxmjwU6/OOWMFnqhxaARr7XoSisDjdhZ+Afo=;
+	b=rtYuCcVAIFHIL0tfJMLlvmy2f17ox5Pc8BNI4/MS6s/LTHGQgqsxrRPov97sFW8qpv
+	pUl563MikhBmvXvURS6sXmdS3vpsrillv0zu20lB+S7YRVjVW2tm9l0LFB2TiqLc/en0
+	RylX3KzRk8owjJA4Nn7N2PvmnykWazTLsm25zz7EtieOrEGN1KFdPE4tvrb8xl4M+Pxb
+	LRjyeCr9/u/RZgf4qHc89JsVN307F/+k2wOIx2U1c3U2ti5gg7sA6RetB3t2sQiZ3tfX
+	Z/I5j1geyqZNWliKGdeaxVXBtrFTSCjqR73rcaOR6xPNM5Mwh6fxPekYnxAqH3QK/2KJ
+	Kp6Q==
+X-Received: by 10.68.78.4 with SMTP id x4mr19681198pbw.74.1422286653731;
+	Mon, 26 Jan 2015 07:37:33 -0800 (PST)
+Received: from ?IPv6:2601:c:a700:272f:707b:3366:1172:a58?
+	([2601:c:a700:272f:707b:3366:1172:a58])
+	by mx.google.com with ESMTPSA id
+	ak5sm10220884pad.44.2015.01.26.07.37.31
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 26 Jan 2015 07:37:32 -0800 (PST)
+Message-ID: <54C65F38.3020404@gmail.com>
+Date: Mon, 26 Jan 2015 07:37:28 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
 MIME-Version: 1.0
-In-Reply-To: <1421919356-3982-1-git-send-email-jianchuan.wang@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v3] ipvsadm: Add version 1.26 (initial recipe)
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1422053452.git.akuster808@gmail.com>	<f3765d513c8971761e10bb0f249f8745b9aa3504.1422053452.git.akuster808@gmail.com>
+	<m9vng5$cmq$1@ger.gmane.org>
+In-Reply-To: <m9vng5$cmq$1@ger.gmane.org>
+Subject: Re: [PATCH 01/11] iperf: fix out of tree configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,311 +50,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 14:43:26 -0000
-X-Groupsio-MsgNum: 53978
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="e5bfZ/T2xnjpUIbw"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 26 Jan 2015 15:37:41 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---e5bfZ/T2xnjpUIbw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I appreciate the review but I got this patch from master with the 
+"Missing Upstream-status". This is for dizzy update. ( I really need to 
+fix my process)
 
-Hi Jianchuan,
+regards,
+- Armin
 
-Two things on this one.  First, v3 produces this:
-
-WARNING: QA Issue: ipvsadm requires /bin/bash, but no providers in its RDEP=
-ENDS [file-rdeps]
-
-Second, I don't think that it's necessarily the case that your first
-patch is inappropriate for up-stream.  Cross-compilation fixes aren't
-generally unwelcome by maintainers.  That's not a barrier to acceptance
-to meta-networking, of course, but you may want to consider sending it
-upstream anyway to see what the maintainers think.
-
-The second patch looks very much like it's required for up-stream so if
-they don't already have such a change, you should definitely submit it.
-
--J.
-
-[[oe] [meta-networking][PATCH v3] ipvsadm: Add version 1.26 (initial recipe=
-)] On 15.01.22 (Thu 17:35) jianchuan.wang@windriver.com wrote:
-
-> From: Jianchuan Wang <jianchuan.wang@windriver.com>
->=20
-> * add ipvs administration tool
->=20
-> Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
-> ---
->  ...001-Modify-the-Makefile-for-cross-compile.patch | 97 ++++++++++++++++=
-++++++
->  .../0002-Replace-nl_handle-to-nl_sock.patch        | 63 ++++++++++++++
->  .../recipes-support/ipvsadm/ipvsadm_1.26.bb        | 34 ++++++++
->  3 files changed, 194 insertions(+)
->  create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0001-=
-Modify-the-Makefile-for-cross-compile.patch
->  create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/0002-=
-Replace-nl_handle-to-nl_sock.patch
->  create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.=
-bb
->=20
-> diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-=
-the-Makefile-for-cross-compile.patch b/meta-networking/recipes-support/ipvs=
-adm/ipvsadm/0001-Modify-the-Makefile-for-cross-compile.patch
+On 01/24/2015 01:09 AM, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Armin Kuster schreef op 23-01-15 om 23:53:
+>> From: "Belal, Awais" <Awais_Belal@mentor.com>
+>>
+>> The configure step uses a package header to check for support of
+>> types/declares, this package header encapsulates all the required system
+>> headers for providing the needed resources. When configured from an out
+>> of tree directory the package header is not found due to the hard path.
+>> We now make the path for package header relative to 'srcdir' so it is
+>> found appropriately.
+>>
+>> Signed-off-by: Awais Belal <awais_belal@mentor.com> Signed-off-by: Martin
+>> Jansa <Martin.Jansa@gmail.com> Signed-off-by: Armin Kuster
+>> <akuster808@gmail.com> ---
+>> .../iperf-2.0.5/0001-fix-out-of-tree-config.patch  | 52
+>> ++++++++++++++++++++++ meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
+>> |  1 + 2 files changed, 53 insertions(+) create mode 100644
+>> meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
+>>
+>>   diff --git
+>> a/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
+>> b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
+>>
+>>
 > new file mode 100644
-> index 0000000..7c3dfe4
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0001-Modify-the-Mak=
-efile-for-cross-compile.patch
-> @@ -0,0 +1,97 @@
-> +From 58292175115bae7a4c3600d3022e59ea57213025 Mon Sep 17 00:00:00 2001
-> +From: Jianchuan Wang <jianchuan.wang@windriver.com>
-> +Date: Mon, 12 Jan 2015 15:53:23 +0800
-> +Subject: [PATCH] Modify the Makefile for cross compile.
-> +
-> +Upstream-Status: Inappropriate [embedded specific]
-> +
-> +Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
-> +---
-> + Makefile         | 23 ++++++-----------------
-> + libipvs/Makefile |  3 +--
-> + 2 files changed, 7 insertions(+), 19 deletions(-)
-> +
-> +diff --git a/Makefile b/Makefile
-> +index e4e03cc..461c021 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -35,10 +35,9 @@ ARCH		=3D $(shell uname -m)
-> + RPMSOURCEDIR	=3D $(shell rpm --eval '%_sourcedir')
-> + RPMSPECDIR	=3D $(shell rpm --eval '%_specdir')
-> +=20
-> +-CC		=3D gcc
-> + INCLUDE		=3D
-> + SBIN		=3D $(BUILD_ROOT)/sbin
-> +-MANDIR		=3D usr/man
-> ++MANDIR		=3D usr/share/man
-> + MAN		=3D $(BUILD_ROOT)/$(MANDIR)/man8
-> + INIT		=3D $(BUILD_ROOT)/etc/rc.d/init.d
-> + MKDIR		=3D mkdir
-> +@@ -62,17 +61,7 @@ RPMBUILD =3D $(shell				\
-> + 		echo "/bin/rpm";		\
-> + 	fi )
-> +=20
-> +-ifeq (,$(FORCE_GETOPT))
-> +-LIB_SEARCH =3D /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/lo=
-cal/lib
-> +-POPT_LIB =3D $(shell for i in $(LIB_SEARCH); do \
-> +-  if [ -f $$i/libpopt.a ]; then \
-> +-    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
-> +-	echo "-lpopt"; \
-> +-	break; \
-> +-    fi; \
-> +-  fi; \
-> +-done)
-> +-endif
-> ++POPT_LIB =3D -lpopt
-> +=20
-> + ifneq (,$(POPT_LIB))
-> + POPT_DEFINE =3D -DHAVE_POPT
-> +@@ -81,7 +70,7 @@ endif
-> + OBJS		=3D ipvsadm.o config_stream.o dynamic_array.o
-> + LIBS		=3D $(POPT_LIB)
-> + ifneq (0,$(HAVE_NL))
-> +-LIBS		+=3D -lnl
-> ++LIBS		+=3D -lnl-3 -lnl-genl-3
-> + endif
-> + DEFINES		=3D -DVERSION=3D\"$(VERSION)\" -DSCHEDULERS=3D\"$(SCHEDULERS)\=
-" \
-> + 		  -DPE_LIST=3D\"$(PE_LIST)\" $(POPT_DEFINE)
-> +@@ -91,13 +80,13 @@ DEFINES		+=3D $(shell if [ ! -f ../ip_vs.h ]; then	\
-> +=20
-> + .PHONY	=3D all clean install dist distclean rpm rpms
-> +=20
-> +-all:            libs ipvsadm
-> ++all: ipvsadm
-> +=20
-> + libs:
-> + 		make -C libipvs
-> +=20
-> +-ipvsadm:	$(OBJS) $(STATIC_LIBS)
-> +-		$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-> ++ipvsadm:	$(OBJS) libs
-> ++		$(CC) $(CFLAGS) -o $@ $(OBJS) $(STATIC_LIBS) $(LIBS)
-> +=20
-> + install:        all
-> + 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
-> +diff --git a/libipvs/Makefile b/libipvs/Makefile
-> +index a527a7f..b7300ec 100644
-> +--- a/libipvs/Makefile
-> ++++ b/libipvs/Makefile
-> +@@ -1,6 +1,5 @@
-> + # Makefile for libipvs
-> +=20
-> +-CC		=3D gcc
-> + CFLAGS		=3D -Wall -Wunused -Wstrict-prototypes -g -fPIC
-> + ifneq (0,$(HAVE_NL))
-> + CFLAGS		+=3D -DLIBIPVS_USE_NL
-> +@@ -18,7 +17,7 @@ SHARED_LIB	=3D libipvs.so
-> + all:		$(STATIC_LIB) $(SHARED_LIB)
-> +=20
-> + $(STATIC_LIB):	libipvs.o ip_vs_nl_policy.o
-> +-		ar rv $@ $^
-> ++		$(AR) rv $@ $^
-> +=20
-> + $(SHARED_LIB):	libipvs.o ip_vs_nl_policy.o
-> + 		$(CC) -shared -Wl,-soname,$@ -o $@ $^
-> +--=20
-> +1.9.1
-> +
-> diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace=
--nl_handle-to-nl_sock.patch b/meta-networking/recipes-support/ipvsadm/ipvsa=
-dm/0002-Replace-nl_handle-to-nl_sock.patch
-> new file mode 100644
-> index 0000000..7896d6d
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ipvsadm/ipvsadm/0002-Replace-nl_han=
-dle-to-nl_sock.patch
-> @@ -0,0 +1,63 @@
-> +From 2686213259b15df9cf1d969c5a14d62f14cfbaae Mon Sep 17 00:00:00 2001
-> +From: Jianchuan Wang <jianchuan.wang@windriver.com>
-> +Date: Thu, 8 Jan 2015 17:37:11 +0800
-> +Subject: [PATCH 2/2] Replace nl_handle to nl_sock.
-> +
-> +The nl_handle was replace with nl_sock in the libnl-3.
-> +
-> +Upstream-Status: Inappropriate [embedded specific]
-> +
-> +Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
-> +---
-> + libipvs/libipvs.c | 10 +++++-----
-> + 1 file changed, 5 insertions(+), 5 deletions(-)
-> +
-> +diff --git a/libipvs/libipvs.c b/libipvs/libipvs.c
-> +index a157e18..21a9bfa 100644
-> +--- a/libipvs/libipvs.c
-> ++++ b/libipvs/libipvs.c
-> +@@ -32,7 +32,7 @@ static void* ipvs_func =3D NULL;
-> + struct ip_vs_getinfo ipvs_info;
-> +=20
-> + #ifdef LIBIPVS_USE_NL
-> +-static struct nl_handle *sock =3D NULL;
-> ++static struct nl_sock *sock =3D NULL;
-> + static int family, try_nl =3D 1;
-> + #endif
-> +=20
-> +@@ -73,7 +73,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvms=
-g_msg_cb_t func, void *arg
-> + {
-> + 	int err =3D EINVAL;
-> +=20
-> +-	sock =3D nl_handle_alloc();
-> ++	sock =3D nl_socket_alloc();
-> + 	if (!sock) {
-> + 		nlmsg_free(msg);
-> + 		return -1;
-> +@@ -88,7 +88,7 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_recvms=
-g_msg_cb_t func, void *arg
-> +=20
-> + 	/* To test connections and set the family */
-> + 	if (msg =3D=3D NULL) {
-> +-		nl_handle_destroy(sock);
-> ++		nl_socket_free(sock);
-> + 		sock =3D NULL;
-> + 		return 0;
-> + 	}
-> +@@ -104,12 +104,12 @@ int ipvs_nl_send_message(struct nl_msg *msg, nl_re=
-cvmsg_msg_cb_t func, void *arg
-> +=20
-> + 	nlmsg_free(msg);
-> +=20
-> +-	nl_handle_destroy(sock);
-> ++	nl_socket_free(sock);
-> +=20
-> + 	return 0;
-> +=20
-> + fail_genl:
-> +-	nl_handle_destroy(sock);
-> ++	nl_socket_free(sock);
-> + 	sock =3D NULL;
-> + 	nlmsg_free(msg);
-> + 	errno =3D err;
-> +--=20
-> +1.8.3.1
-> +
-> diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb b/me=
-ta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
-> new file mode 100644
-> index 0000000..ac97d47
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb
-> @@ -0,0 +1,34 @@
-> +SUMMARY =3D "Linux Virtual Server administration Utility"
-> +DESCRIPTION =3D "Ipvsadm  is  used  to set up, maintain or inspect the v=
-irtual server \
-> +table in the Linux kernel. The Linux Virtual  Server  can  be  used  to \
-> +build  scalable  network  services  based  on  a cluster of two or more =
-nodes. \
-> +The active node of the cluster redirects service requests  to  a \
-> +collection  of  server  hosts  that will actually perform the services. \
-> +Supported features include two protocols (TCP and UDP),  three  packet-f=
-orwarding \
-> +methods (NAT, tunneling, and direct routing), and eight load balancing a=
-lgorithms \
-> +(round robin, weighted round robin,  least-connec-tion, weighted least-c=
-onnection, \
-> +locality-based  least-connection, locality-based least-connection with r=
-eplication, \
-> +destination-hashing, and source-hashing)."
-> +SECTION =3D "console/network"
-> +LICENSE =3D "GPL-2.0"
-> +LIC_FILES_CHKSUM =3D "file://README;beginline=3D40;endline=3D56;md5=3Da5=
-4cba37b64924aa5008881607942892"
-> +
-> +DEPENDS +=3D "libnl popt"
-> +
-> +SRC_URI =3D "http://www.linuxvirtualserver.org/software/kernel-2.6/${BP}=
-=2Etar.gz \
-> +        file://0001-Modify-the-Makefile-for-cross-compile.patch \
-> +        file://0002-Replace-nl_handle-to-nl_sock.patch \
-> +"
-> +
-> +SRC_URI[md5sum] =3D "eac3ba3f62cd4dea2da353aeddd353a8"
-> +SRC_URI[sha256sum] =3D "6d6c46fecb1c532a892616b4445c73b71730e8790d5630f6=
-0269fd9cbee0eb2d"
-> +
-> +do_compile() {
-> +    oe_runmake \
-> +    CC=3D"${CC} -I${STAGING_INCDIR} -I${STAGING_INCDIR}/libnl3 -L${STAGI=
-NG_LIBDIR}" \
-> +    all
-> +}
-> +
-> +do_install() {
-> +    oe_runmake 'BUILD_ROOT=3D${D}' install
-> +}
-> --=20
-> 1.9.1
->=20
---=20
--Joe MacDonald.
-:wq
+>> index 0000000..e8a0297 --- /dev/null +++
+>> b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
+>>
+>>
+> @@ -0,0 +1,52 @@
+>> +iperf: fix out of tree configuration + +The configure step uses a
+>> package header to check for support of types/declares, +this package
+>> header encapsulates all the required system header for providing +the
+>> needed resources. When configured from an out of tree directory the
+>> package +header is not found due to the hard path. +We now make the path
+>> for package header relative to our 'srcdir' so it is +found
+>> appropriately. + +Signed-off-by: Awais Belal <awais_belal@mentor.com>
+>
+> Missing Upstream-status
+>
+>
+>> +--- +diff --git a/configure.ac b/configure.ac +index 2b3fd20..d420f9e
+>> 100644 +--- a/configure.ac ++++ b/configure.ac +@@ -176,8 +176,8 @@ dnl
+>> Check for system services + + dnl check for multicast + if test
+>> "$ac_cv_multicast" != no; then +-  AC_CHECK_TYPES(struct
+>> ip_mreq,,,[#include "compat/headers_slim.h"]) +-
+>> AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"]) ++
+>> AC_CHECK_TYPES(struct ip_mreq,,,[#include
+>> "${srcdir}/compat/headers_slim.h"]) ++
+>> AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include
+>> "${srcdir}/compat/headers_slim.h"]) +   AC_MSG_CHECKING(for multicast
+>> support) +   ac_cv_multicast=no +   if test
+>> "$ac_cv_have_decl_IP_ADD_MEMBERSHIP" = yes; then +@@ -193,9 +193,9 @@ fi
+>> + + dnl check for IPv6 + if test "$ac_cv_have_ipv6" != no; then +-
+>> AC_CHECK_TYPES(struct sockaddr_storage,,,[#include
+>> "compat/headers_slim.h"]) +-  AC_CHECK_TYPES(struct
+>> sockaddr_in6,,,[#include "compat/headers_slim.h"]) +-
+>> AC_CHECK_DECLS(AF_INET6,,,[#include "compat/headers_slim.h"]) ++
+>> AC_CHECK_TYPES(struct sockaddr_storage,,,[#include
+>> "${srcdir}/compat/headers_slim.h"]) ++  AC_CHECK_TYPES(struct
+>> sockaddr_in6,,,[#include "${srcdir}/compat/headers_slim.h"]) ++
+>> AC_CHECK_DECLS(AF_INET6,,,[#include "${srcdir}/compat/headers_slim.h"]) +
+>> AC_MSG_CHECKING(for IPv6 headers and structures) +   ac_cv_have_ipv6=no +
+>> if test "$ac_cv_type_struct_sockaddr_storage" = yes; then +@@ -211,9
+>> +211,9 @@ fi + + if test "$ac_cv_have_ipv6" = yes; then +   if test
+>> "$ac_cv_multicast" = yes; then +-    AC_CHECK_TYPES(struct
+>> ipv6_mreq,,,[#include "compat/headers_slim.h"]) +-
+>> AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"])
+>> +-    AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include
+>> "compat/headers_slim.h"]) ++    AC_CHECK_TYPES(struct
+>> ipv6_mreq,,,[#include "${srcdir}/compat/headers_slim.h"]) ++
+>> AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include
+>> "${srcdir}/compat/headers_slim.h"]) ++
+>> AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include
+>> "${srcdir}/compat/headers_slim.h"]) +     AC_MSG_CHECKING(for IPv6
+>> multicast support) +     ac_cv_have_ipv6_multicast=no +     if test
+>> "$ac_cv_type_struct_ipv6_mreq" = yes; then diff --git
+>> a/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
+>> b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb index 1bd554b..20adc0d
+>> 100644 --- a/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb +++
+>> b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb @@ -6,6 +6,7 @@
+>> LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
+>>
+>> SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
+>> file://iperf-2.0.5_ManPage.patch \ +
+>> file://0001-fix-out-of-tree-config.patch \ "
+>>
+>> SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
+>>
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> Comment: GPGTools - http://gpgtools.org
+>
+> iD8DBQFUw2FFMkyGM64RGpERArugAJ4nkEYjuGS9ZOgyq/2ouo8dIUY7xQCeM58n
+> jN/V4SPAvQw8zcM6qCTjyAw=
+> =4Vn9
+> -----END PGP SIGNATURE-----
+>
 
---e5bfZ/T2xnjpUIbw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJUxlKBAAoJEEn8ffcsOfaWFrQH/0CuFYc1GER5wIrFdacRBwAU
-dlCv32qyCEPJrkFhj52p/O5cAoCEg59WBLrUTUlo5mm8mUGd/7Ec3vDyAaBu7n/a
-Vbx9ohA3woi5nLy7FHkPhBzHQGwuZbtJpIlWUrW+zPiCzj29KCspYgPklBSKWsNy
-j59TUYtx2ZoGfG23LmN1/B4s9b0o9heAAUK5Q0JYO2HH/1EF4YxZi3igK4v19Q+0
-XFRUYKg5VHCLQoIBz81qO9/osBJ26IVii931UTwZux3QDkqpbkcFtbLw2mHbbHhv
-sKZjPFbzQWTbzRDvdXmo2Tg42T/THivlmCn3r++pAVB320cQ9i41ZfAkZuxSkkw=
-=9V6M
------END PGP SIGNATURE-----
-
---e5bfZ/T2xnjpUIbw--
