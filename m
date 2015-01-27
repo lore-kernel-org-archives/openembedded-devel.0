@@ -1,30 +1,24 @@
-Return-Path: <miralipoor.meysam@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id D52207147D
+Return-Path: <milo-software@users.sourceforge.net>
+X-Greylist: delayed 428 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 27 Jan 2015 18:15:48 UTC
+Received: from smtp03.online.nl (smtp03.online.nl [194.134.41.33])
+	by mail.openembedded.org (Postfix) with ESMTP id 4265B7147D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2015 12:50:36 +0000 (UTC)
-Received: by mail-wi0-f178.google.com with SMTP id em10so4716946wid.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2015 04:50:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=/Jdnkbs+0//ZidSMeOA6Zx9O0v26e2PLv+Pc981bR9E=;
-	b=PaGXLm4ubKJOERPcy0PC07jW79h+hKjZlnq5TWlTk9ZbCacceIATmi0qvE/9avEUng
-	JqPOyeBcVQVvudgNqywn5OOQyIlSsu5oI6VPrPfvDHT9J5GL2tLyIiNPqvSTiCsCJqQR
-	2oYk5Z4abBBeKI+GCqV+Ie6QO5TmfiVfbbIwCtu90le5LrTuUy9fcaeplj85NLnhgjVa
-	iNrsiMfZIw8XVB/nraOqDfuSDDOz0Lnf3J0BIuXkFXqgUU8vY1U3Qza6pcPqdvtdPRKE
-	LHbdHjMuW9GourfWkrD5NvK+94IQWxe4Cn1COrPlBiz1T1Z6sqslL1WXUIESIfvonh0F
-	QEbg==
-MIME-Version: 1.0
-X-Received: by 10.181.13.42 with SMTP id ev10mr5589400wid.78.1422363036632;
-	Tue, 27 Jan 2015 04:50:36 -0800 (PST)
-Received: by 10.217.87.198 with HTTP; Tue, 27 Jan 2015 04:50:36 -0800 (PST)
-Date: Tue, 27 Jan 2015 16:20:36 +0330
-Message-ID: <CAH+2B08XWEdBpwQgZ09pSmimHS0NRhPRMJ6gjRnFRgCHvh+UXQ@mail.gmail.com>
-From: Meysam Miralipoor <miralipoor.meysam@gmail.com>
+	Tue, 27 Jan 2015 18:15:48 +0000 (UTC)
+Received: from smtp03.online.nl (localhost [127.0.0.1])
+	by smtp03.online.nl (Postfix) with ESMTP id B9E7B68624;
+	Tue, 27 Jan 2015 19:08:39 +0100 (CET)
+Received: from phenom.local (s55969068.adsl.online.nl [85.150.144.104])
+	by smtp03.online.nl (Postfix) with ESMTP;
+	Tue, 27 Jan 2015 19:08:39 +0100 (CET)
+From: Mike Looijmans <milo-software@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Subject: error in do-compile in VLC recipe
+Date: Tue, 27 Jan 2015 19:08:36 +0100
+Message-Id: <1422382116-22523-1-git-send-email-milo-software@users.sourceforge.net>
+X-Mailer: git-send-email 1.7.9.5
+X-Online-Scanned: by Cloudmark authority (on smtp03.online.nl)
+Cc: Mike Looijmans <milo-software@users.sourceforge.net>
+Subject: [PATCH] python-twisted: Fix dependencies of twisted modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,15 +32,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2015 12:50:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 27 Jan 2015 18:15:50 -0000
 
-Hi,
-I am totally feel confused when i could not compile VLC by bitbake. It
-seems there are several patch that must be applied on both recipe and
-sources. Unfortunately i doesn't have any experiences in patching of
-source or recipe , In other hand i don't know how to verify my current
-existed source in order to find out is it suitable for patching or
-not.Please help i really stuck in this situation.Any help appreciated.
-With best wishes
+When installing just "twisted-web" on a device, none of the dependencies
+are being copied, it wouldn't even install python-core. Fix the recipe so
+that its packages have proper dependencies, and no longer require to install
+the empty python-twisted meta recipe.
+
+Add "python-contextlib" to the core dependencies and stop causing systems
+to crash with:
+  File "/usr/lib/python2.7/site-packages/twisted/python/threadpool.py", line 18, in <module>
+    ImportError: No module named contextlib
+
+Signed-off-by: Mike Looijmans <milo-software@users.sourceforge.net>
+---
+ .../python/python-twisted_13.2.0.bb                |   17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
+index 80d64a0..8930169 100644
+--- a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
++++ b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
+@@ -38,8 +38,7 @@ PACKAGES += "\
+     ${PN}-core \
+ "
+ 
+-RDEPENDS_${PN} = "python-core python-zopeinterface"
+-RDEPENDS_${PN} += "\
++RDEPENDS_${PN} = "\
+     ${PN}-conch \
+     ${PN}-lore \
+     ${PN}-mail \
+@@ -50,6 +49,20 @@ RDEPENDS_${PN} += "\
+     ${PN}-words \
+ "
+ 
++RDEPENDS_${PN}-core = "python-core python-zopeinterface python-contextlib"
++RDEPENDS_${PN}-test = "${PN}"
++RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
++RDEPENDS_${PN}-lore = "${PN}-core"
++RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
++RDEPENDS_${PN}-names = "${PN}-core"
++RDEPENDS_${PN}-news = "${PN}-core ${PN}-protocols"
++RDEPENDS_${PN}-runner = "${PN}-core ${PN}-protocols"
++RDEPENDS_${PN}-web += "${PN}-core ${PN}-protocols"
++RDEPENDS_${PN}-words += "${PN}-core"
++RDEPENDS_${PN}-flow += "${PN}-core"
++RDEPENDS_${PN}-pair += "${PN}-core"
++RDEPENDS_${PN}-dbg = "${PN}"
++
+ ALLOW_EMPTY_${PN} = "1"
+ FILES_${PN} = ""
+ 
+-- 
+1.7.9.5
+
 
