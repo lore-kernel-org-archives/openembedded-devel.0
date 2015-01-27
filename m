@@ -1,40 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 88C6272BCE
+Return-Path: <coldnew.tw@gmail.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 58D64718E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2015 05:54:11 +0000 (UTC)
-Received: by mail-wg0-f44.google.com with SMTP id z12so12820975wgg.3
+	Tue, 27 Jan 2015 06:15:03 +0000 (UTC)
+Received: by mail-pa0-f46.google.com with SMTP id lj1so16434094pab.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 21:54:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=NZrVHHjC4nZsWNVgT/7Ci0FqBfzubd/jYB0h0Q34mwQ=;
-	b=LShQXgrSjEEojUD8dgEo7MATXu0dRcntD0xPWolJTdJFRn16V1ArFm66UnUqKOrF6Q
-	mcRPvjlKQVMuJXy7xCr3fUJ13Kr7rITxkyFC3ryco7GYWcagwAmc2wqwYJqL98hAM3LR
-	0LdEyVyg+OOA3RMTYk4DdkgfcpWEDeJuCI08qOtxWuQSINREsV5eG0GnIGaZk398NbsE
-	3iO1F5VTlCTRt9uPbfzA6Qc1kWAi0yV4Lx52JeJE4Q4BiYv/jKcPMX7Kpptg+RJr0sEt
-	57ATJrBg3V/aZYBZyFV+WLSVgoAW1CW9sAOeH7iZhtNxeATVDqEmRObZazqSt47m7nJb
-	LYmg==
-X-Received: by 10.180.96.4 with SMTP id do4mr3428612wib.46.1422338051625;
-	Mon, 26 Jan 2015 21:54:11 -0800 (PST)
-Received: from localhost.localdomain
-	(ip-176-198-254-85.hsi05.unitymediagroup.de. [176.198.254.85])
-	by mx.google.com with ESMTPSA id
-	gm10sm16610857wib.19.2015.01.26.21.54.10
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Jan 2015 21:54:11 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Mon, 26 Jan 2015 22:15:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=2ycof1QjMzTP4NWltKznGG9xdA+XM+7jwZ51pnJaxBA=;
+	b=hCpNI1p7OS4x3QNGSOVH2X065xea8xLHzscIcfZ1fp6a4mm4Ocm32t7iRXsh2wH/Pr
+	+zfTfBIZhvj6ihA4rA6qyI93/8tZ3NR0TgpWdwrBOEpKSWK1mOGyOv8o69cZFjqQn6Fg
+	XRC4v/Q9eA1PwTktipXpjAkOmj7oUwefdcX3oHLDOvn6/MVDGpwyHtpm8SXDa12WEKvU
+	5asUiBDRSUcVmFx8ZYCh1YvmO7xRKmRS62aQLQZ5XPC3FAsxKPDCwrotEM0IOxgE8wsW
+	Hi3qV0/zOWgxABU33qrUkZNpMF7rVvyE47lpfLZ+UyIJhNTBzTjzgqzaQtculj6ldC71
+	jW1g==
+X-Received: by 10.66.102.2 with SMTP id fk2mr39926339pab.149.1422339303702;
+	Mon, 26 Jan 2015 22:15:03 -0800 (PST)
+Received: from localhost.localdomain ([203.70.194.104])
+	by mx.google.com with ESMTPSA id s4sm384174pdd.40.2015.01.26.22.15.01
+	(version=TLSv1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 26 Jan 2015 22:15:02 -0800 (PST)
+From: Yen-Chin Lee <coldnew.tw@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Jan 2015 06:53:53 +0100
-Message-Id: <1422338033-18521-6-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 5/5] add gdb append to enable python packageconfig
+Date: Tue, 27 Jan 2015 14:14:51 +0800
+Message-Id: <1422339291-43625-1-git-send-email-coldnew.tw@gmail.com>
+X-Mailer: git-send-email 1.9.3 (Apple Git-50)
+Subject: [meta-raspberrypi][PATCH] layer.conf: handle dynamic layer configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,26 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2015 05:54:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Jan 2015 06:15:06 -0000
 
-debugging with qt-creator on target requires gdb build with python support
+Using a separate layer specific directory as meta-fsl-arm does with
+qt5-layer, this will prevent meta-raspberrypi change layer dependencies
+when add qt5 packages.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+patch is taken from:
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-fsl-arm/tree/conf/layer.conf#n20
+
+Signed-off-by: Yen-Chin Lee <coldnew.tw@gmail.com>
 ---
- recipes-devtools/gdb/gdb_%.bbappend | 1 +
- 1 file changed, 1 insertion(+)
- create mode 100644 recipes-devtools/gdb/gdb_%.bbappend
+ conf/layer.conf | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/recipes-devtools/gdb/gdb_%.bbappend b/recipes-devtools/gdb/gdb_%.bbappend
-new file mode 100644
-index 0000000..41592c4
---- /dev/null
-+++ b/recipes-devtools/gdb/gdb_%.bbappend
-@@ -0,0 +1 @@
-+PACKAGECONFIG ??= "python"
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 7bffd4b..71f22b4 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -12,3 +12,7 @@ BBFILE_PRIORITY_raspberrypi = "6"
+ # Additional license directories.
+ LICENSE_PATH += "${LAYERDIR}/files/custom-licenses"
+ 
++# Let us add layer-specific bbappends which are only applied when that
++# layer is included in our configuration
++BBFILES += "${@' '.join('${LAYERDIR}/%s/recipes*/*/*.bbappend' % layer \
++               for layer in BBFILE_COLLECTIONS.split())}"
 -- 
-1.8.3.1
+1.9.3 (Apple Git-50)
 
 
