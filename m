@@ -1,18 +1,18 @@
 Return-Path: <dv@pseudoterminal.org>
 Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D6816AC95
+	by mail.openembedded.org (Postfix) with ESMTP id 45C0E72692
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 23:19:51 +0000 (UTC)
+	Tue, 27 Jan 2015 00:07:32 +0000 (UTC)
 Received: from localhost.localdomain (chello062178118086.5.14.vie.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 3448F27C97
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id DB5B227C4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2015 00:19:49 +0100 (CET)
+	Tue, 27 Jan 2015 01:07:31 +0100 (CET)
 From: Carlos Rafael Giani <dv@pseudoterminal.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Jan 2015 00:19:43 +0100
-Message-Id: <1422314384-9091-1-git-send-email-dv@pseudoterminal.org>
+Date: Tue, 27 Jan 2015 01:07:24 +0100
+Message-Id: <1422317245-13808-1-git-send-email-dv@pseudoterminal.org>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-browser][PATCH 1/2] chromium: Reorganize into .inc and .bb to allow for cleaner upgrades
+Subject: [meta-browser][PATCH v2 1/2] chromium: Reorganize into .inc and .bb to allow for cleaner upgrades
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,7 +26,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jan 2015 23:19:54 -0000
+X-List-Received-Date: Tue, 27 Jan 2015 00:07:39 -0000
 
 Since version 37, the structure of the recipe remained more or less the
 same, especially because starting with this version, the ozone-wayland
