@@ -1,41 +1,41 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id EDF52718E1
+Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
+	[74.125.82.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 93330718E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2015 05:54:08 +0000 (UTC)
-Received: by mail-wi0-f182.google.com with SMTP id n3so2588415wiv.3
+	Tue, 27 Jan 2015 05:54:09 +0000 (UTC)
+Received: by mail-we0-f177.google.com with SMTP id l61so12869485wev.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jan 2015 21:54:08 -0800 (PST)
+	Mon, 26 Jan 2015 21:54:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=bbOOIi94FxDnPbqNxEkxRlFxBeUGOMcc6iHi8ky8B80=;
-	b=r1GRcnW1kIVDVZA80+8uQ82r/RoWvmxp05tqnamOcxDLqJXrt+qOSfx40UXKJmZAub
-	0o9NXAN/NQlcx2IZo2q8s+2YF2gw0ozqckEH/jHjh3k7IUaQJCnH+yS+57ys0VW8bddG
-	0/cgfbMhzbyaRCfNHp8u0BjD+oOv4XT9/7BthPGSSzIPuOVTTnDXfcZ2zpumS4uBEG/v
-	XRnbfhZgAiw3ZbrZxDOrEWGv2MVSgvl+meIWLnY7YZZYphX4NVLTA9rksH2Ltm9v2w9j
-	DnwDnlZdUiBZZ5ZZFIPFejgiUQTx3Gbcpujddsu1KDBAPsJyZDwDjX2NdBWeMDLc87DP
-	DyEg==
-X-Received: by 10.180.73.239 with SMTP id o15mr3430829wiv.14.1422338048441;
-	Mon, 26 Jan 2015 21:54:08 -0800 (PST)
+	bh=DZmywJa4UVTcZEQJQGod5yxC8fj/+yar6lvLO02VSw0=;
+	b=prhWS+/gReQixLtGe3vWpfGSRTmGZMGtcglEpIHzS8yq6cNCjV9iT7RCVM2c9BQ7+J
+	7y/hZcEgPurJmyOMVFJi68zra+ueGffXJWYayQGSc9Ylw3D+L2x3OI0x5+90AF1e96LQ
+	9jxuGiVqxUSSFppTJ2deNtKArUMkPLJCdbyOAaDTQ03BDWwklO/QrAsg8SCLqBLpykH9
+	mUNUnxSfpjOC32S0e5JFPixr7wuKDI/Z7QI3h1eVE6zWs04S9DeNg+4o5JekDTnKuLlt
+	Ui2+VrUVwKlJG/QidZ4aqml+GohfxWa8exhfp52LoV9fa5HwgXa/8C6ic6ivsz/eQ3yD
+	c1QQ==
+X-Received: by 10.180.87.42 with SMTP id u10mr33343135wiz.51.1422338049465;
+	Mon, 26 Jan 2015 21:54:09 -0800 (PST)
 Received: from localhost.localdomain
 	(ip-176-198-254-85.hsi05.unitymediagroup.de. [176.198.254.85])
 	by mx.google.com with ESMTPSA id
-	gm10sm16610857wib.19.2015.01.26.21.54.07
+	gm10sm16610857wib.19.2015.01.26.21.54.08
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Jan 2015 21:54:07 -0800 (PST)
+	Mon, 26 Jan 2015 21:54:08 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Jan 2015 06:53:50 +0100
-Message-Id: <1422338033-18521-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 27 Jan 2015 06:53:51 +0100
+Message-Id: <1422338033-18521-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 2/5] qtbase/EXTERNAL_HOST_BINS: split out code only required for native-(sdk)
+Subject: [meta-qt5][PATCH 3/5] qtbase: build qmake for target with paths aligned
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,280 +53,213 @@ X-List-Received-Date: Tue, 27 Jan 2015 05:54:09 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* code was moved from 0003-Add-external-hostbindir-option.patch to
-  0014-Add-external-hostbindir-option-native.patch
-* only native(-sdk) versions of qtbase apply
-  0014-Add-external-hostbindir-option-native.patch
+Proper qmake operation was tested with qt5-creator.
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase.inc                |   1 +
- recipes-qt/qt5/nativesdk-qtbase_git.bb             |   1 +
- recipes-qt/qt5/qtbase-native.inc                   |   1 +
- .../0003-Add-external-hostbindir-option.patch      |  75 ---------------
- ...014-Add-external-hostbindir-option-native.patch | 106 +++++++++++++++++++++
- 5 files changed, 109 insertions(+), 75 deletions(-)
- create mode 100644 recipes-qt/qt5/qtbase/0014-Add-external-hostbindir-option-native.patch
+ recipes-qt/qt5/qtbase.inc                          | 25 ++++----
+ ...-build-it-in-configure-but-allow-to-build.patch | 27 +++++---
+ .../0015-Set-paths-for-target-properly.patch       | 72 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase_git.bb                       |  1 +
+ 4 files changed, 106 insertions(+), 19 deletions(-)
+ create mode 100644 recipes-qt/qt5/qtbase/0015-Set-paths-for-target-properly.patch
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
-index b3eab76..8a0b31a 100644
---- a/recipes-qt/qt5/nativesdk-qtbase.inc
-+++ b/recipes-qt/qt5/nativesdk-qtbase.inc
-@@ -27,6 +27,7 @@ SRC_URI += "\
- # common for qtbase-native and nativesdk-qtbase
- SRC_URI += " \
-     file://0011-Always-build-uic.patch \
-+    file://0014-Add-external-hostbindir-option-native.patch \
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index a8748ef..cbb8e4f 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -16,6 +16,7 @@ SRC_URI += "\
+ # specific for qtbase
+ SRC_URI += "\
+     file://0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch \
++    file://0015-Set-paths-for-target-properly.patch \
  "
  
- # specific for nativesdk-qtbase
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 1e93891..0bfa442 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -25,6 +25,7 @@ SRC_URI += "\
- # common for qtbase-native and nativesdk-qtbase
- SRC_URI += " \
-     file://0011-Always-build-uic.patch \
-+    file://0014-Add-external-hostbindir-option-native.patch \
- "
+ DEPENDS += "qtbase-native"
+@@ -196,23 +197,23 @@ do_configure() {
+ }
  
- # specific for nativesdk-qtbase
-diff --git a/recipes-qt/qt5/qtbase-native.inc b/recipes-qt/qt5/qtbase-native.inc
-index 4023844..6a0191d 100644
---- a/recipes-qt/qt5/qtbase-native.inc
-+++ b/recipes-qt/qt5/qtbase-native.inc
-@@ -24,6 +24,7 @@ SRC_URI += "\
- # common for qtbase-native and nativesdk-qtbase
- SRC_URI += " \
-     file://0011-Always-build-uic.patch \
-+    file://0014-Add-external-hostbindir-option-native.patch \
- "
+ do_compile_append() {
+-    # Build qmake for the target arch
+-    # Disable for now, because doesn't work well with separate ${B}
+-    # cp -ra ${S}/qmake ${B}
+-    # cd ${B}/qmake
+-    # ${OE_QMAKE_QMAKE}
+-    # Fix to use headers in ${B}
+-    # sed '/INCPATH/s#${S}#${B}#g' -i Makefile
+-    # oe_runmake CC="${CC}" CXX="${CXX}"
+-    # cd ${B}
++    # copy corelib/3rdparty/qmake sources required by qmake -> ${B}
++    cp -ra ${S}/src/corelib ${B}/src
++    cp -ra ${S}/src/3rdparty ${B}/src
++    cp -ra ${S}/qmake ${B}
++    cp ${S}/.qmake.conf ${B}/qmake
++    cd ${B}/qmake
++    # align qt5 tools source path to ${S}
++    sed -i 's:\.\./tools:${S}/tools:g' qmake.pro
++    ../${OE_QMAKE_QMAKE}
++    oe_runmake CC="${CC}" CXX="${CXX}"
+ }
  
- QT_CONF_PATH = "${B}/qt.conf"
-diff --git a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
-index c633ea7..87e8f0f 100644
---- a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
-+++ b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
-@@ -27,14 +27,10 @@ Signed-off-by: Jonathan Liu <net147@gmail.com>
-  configure                                   | 15 +++++++++++++++
-  mkspecs/features/qt_functions.prf           |  6 +++++-
-  mkspecs/features/qt_tool.prf                |  4 ++--
-- qmake/property.cpp                          |  1 +
-  qtbase.pro                                  | 13 ++++++++++---
-  src/corelib/Qt5CoreConfigExtras.cmake.in    |  6 +++---
-- src/corelib/global/qlibraryinfo.cpp         |  3 ++-
-- src/corelib/global/qlibraryinfo.h           |  1 +
-  src/dbus/Qt5DBusConfigExtras.cmake.in       |  4 ++--
-  src/widgets/Qt5WidgetsConfigExtras.cmake.in |  2 +-
-- tools/configure/configureapp.cpp            |  8 ++++++++
-  11 files changed, 50 insertions(+), 13 deletions(-)
+ do_install_append() {
++    install -m 0755 ${B}/qmake/bin/qmake ${D}/${bindir}/${QT_DIR_NAME}
++
+     ### Fix up the binaries to the right location
+     ### TODO: FIX
+-    # qemu built on host breaks do_package, remove it here (will be replaces with right qemu when do_compile is fixed
+-    # ERROR: objcopy failed with exit code 1 (cmd was 'arm-oe-linux-gnueabi-objcopy' --only-keep-debug '/OE/oe-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/qtbase/5.0.1-r0.0/package/usr/bin/qmake' '/OE/oe-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/qtbase/5.0.1-r0.0/package/usr/bin/.debug/qmake')
+-    rm -f ${D}/${bindir}/${QT_DIR_NAME}/qmake
+     # install fonts manually if they are missing
+     if [ ! -d ${D}/${OE_QMAKE_PATH_LIBS}/fonts ]; then
+         cp -a ${S}/lib/fonts ${D}/${OE_QMAKE_PATH_LIBS}
+diff --git a/recipes-qt/qt5/qtbase/0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch b/recipes-qt/qt5/qtbase/0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
+index 21e0987..4d4291c 100644
+--- a/recipes-qt/qt5/qtbase/0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
++++ b/recipes-qt/qt5/qtbase/0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
+@@ -14,17 +14,17 @@ Signed-off-by: Yu Ke <ke.yu@intel.com>
+ Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+ Signed-off-by: Mikko Levonmaa <mikko.levonmaa@gmail.com>
+ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+  configure       | 2 +-
++ qmake/qmake.pri | 3 ++-
+  qmake/qmake.pro | 2 ++
+- 2 files changed, 3 insertions(+), 1 deletion(-)
++ 3 files changed, 5 insertions(+), 2 deletions(-)
  
  diff --git a/configure b/configure
-@@ -133,18 +129,6 @@ index 1d3e88c..9b26adf 100644
-      isEmpty(MODULE):MODULE = $$TARGET
-  
-      !host_build|!force_bootstrap: MODULE_DEPENDS = $$replace(QT, -private$, _private)
--diff --git a/qmake/property.cpp b/qmake/property.cpp
--index 051e056..50da6ed 100644
----- a/qmake/property.cpp
--+++ b/qmake/property.cpp
--@@ -67,6 +67,7 @@ static const struct {
--     { "QT_HOST_DATA", QLibraryInfo::HostDataPath, true },
--     { "QT_HOST_BINS", QLibraryInfo::HostBinariesPath, true },
--     { "QT_HOST_LIBS", QLibraryInfo::HostLibrariesPath, true },
--+    { "QT_EXTERNAL_HOST_BINS", QLibraryInfo::ExternalHostBinariesPath, true },
--     { "QMAKE_SPEC", QLibraryInfo::HostSpecPath, true },
--     { "QMAKE_XSPEC", QLibraryInfo::TargetSpecPath, true },
-- };
- diff --git a/qtbase.pro b/qtbase.pro
- index 6d0de44..ddf7478 100644
- --- a/qtbase.pro
-@@ -209,39 +193,6 @@ index 9bda70e..6e3605a 100644
-  !!ENDIF
-      _qt5_Core_check_file_exists(${imported_location})
-  
--diff --git a/src/corelib/global/qlibraryinfo.cpp b/src/corelib/global/qlibraryinfo.cpp
--index d68c51b..7191159 100644
----- a/src/corelib/global/qlibraryinfo.cpp
--+++ b/src/corelib/global/qlibraryinfo.cpp
--@@ -349,7 +349,7 @@ QLibraryInfo::isDebugBuild()
--  */
+-index bd43281..5d1b3aa 100755
++index 43be722..39516d2 100755
+ --- a/configure
+ +++ b/configure
+-@@ -3724,7 +3724,7 @@ setBootstrapEvalVariable()
 - 
-- static const struct {
---    char key[19], value[13];
--+    char key[21], value[13];
-- } qtConfEntries[] = {
--     { "Prefix", "." },
--     { "Documentation", "doc" }, // should be ${Data}/doc
--@@ -375,6 +375,7 @@ static const struct {
--     { "HostBinaries", "bin" },
--     { "HostLibraries", "lib" },
--     { "HostData", "." },
--+    { "ExternalHostBinaries", "" },
--     { "TargetSpec", "" },
--     { "HostSpec", "" },
-- #endif
--diff --git a/src/corelib/global/qlibraryinfo.h b/src/corelib/global/qlibraryinfo.h
--index 543c4b3..a02e03a 100644
----- a/src/corelib/global/qlibraryinfo.h
--+++ b/src/corelib/global/qlibraryinfo.h
--@@ -80,6 +80,7 @@ public:
--         HostBinariesPath,
--         HostLibrariesPath,
--         HostDataPath,
--+        ExternalHostBinariesPath,
--         TargetSpecPath,
--         HostSpecPath,
--         LastHostPath = HostSpecPath,
- diff --git a/src/dbus/Qt5DBusConfigExtras.cmake.in b/src/dbus/Qt5DBusConfigExtras.cmake.in
- index 1d94715..301af8f 100644
- --- a/src/dbus/Qt5DBusConfigExtras.cmake.in
-@@ -277,32 +228,6 @@ index 99d87e2..5621dc0 100644
-  !!ENDIF
-      _qt5_Widgets_check_file_exists(${imported_location})
++@@ -3759,7 +3759,7 @@ setBootstrapVariable()
++ }
   
--diff --git a/tools/configure/configureapp.cpp b/tools/configure/configureapp.cpp
--index 92422c2..d0a62c8 100644
----- a/tools/configure/configureapp.cpp
--+++ b/tools/configure/configureapp.cpp
--@@ -1191,6 +1191,13 @@ void Configure::parseCmdLine()
--             dictionary[ "QT_EXT_PREFIX" ] = configCmdLine.at(i);
--         }
-- 
--+        else if (configCmdLine.at(i) == "-external-hostbindir") {
--+            ++i;
--+            if (i == argCount)
--+                break;
--+            dictionary[ "QT_EXTERNAL_HOST_BINS" ] = configCmdLine.at(i);
--+        }
--+
--         else if (configCmdLine.at(i) == "-make-tool") {
--             ++i;
--             if (i == argCount)
--@@ -3995,6 +4002,7 @@ void Configure::generateQConfigCpp()
--                   << "    \"qt_hbinpath=" << formatPath(dictionary["QT_HOST_BINS"]) << "\"," << endl
--                   << "    \"qt_hlibpath=" << formatPath(dictionary["QT_HOST_LIBS"]) << "\"," << endl
--                   << "    \"qt_hdatpath=" << formatPath(dictionary["QT_HOST_DATA"]) << "\"," << endl
--+                  << "    \"qt_ebinpath=" << formatPath(dictionary["QT_EXTERNAL_HOST_BINS"]) << "\"," << endl
--                   << "    \"qt_targspec=" << targSpec << "\"," << endl
--                   << "    \"qt_hostspec=" << hostSpec << "\"," << endl
--                   << "#endif" << endl
- -- 
- 2.1.3
- 
-diff --git a/recipes-qt/qt5/qtbase/0014-Add-external-hostbindir-option-native.patch b/recipes-qt/qt5/qtbase/0014-Add-external-hostbindir-option-native.patch
+  # build qmake
+ -if true; then ###[ '!' -f "$outpath/bin/qmake" ];
+@@ -32,15 +32,28 @@ index bd43281..5d1b3aa 100755
+      echo "Creating qmake..."
+  
+      mkdir -p "$outpath/qmake" || exit
++diff --git a/qmake/qmake.pri b/qmake/qmake.pri
++index 57dcbb0..e2c5845 100644
++--- a/qmake/qmake.pri
+++++ b/qmake/qmake.pri
++@@ -82,7 +82,8 @@ bootstrap { #Qt code
++         qjsonparser.cpp \
++         qjsonarray.cpp \
++         qjsonobject.cpp \
++-        qjsonvalue.cpp
+++        qjsonvalue.cpp \
+++        qdebug.cpp
++ 
++    HEADERS+= \
++         qbitarray.h \
+ diff --git a/qmake/qmake.pro b/qmake/qmake.pro
+ index 89d6ea5..7c605b9 100644
+ --- a/qmake/qmake.pro
+ +++ b/qmake/qmake.pro
+-@@ -8,6 +8,8 @@ CONFIG -= qt
++@@ -8,6 +8,7 @@ CONFIG -= qt
+  DEFINES += \
+      QT_BUILD_QMAKE \
+      PROEVALUATOR_FULL
+-+DESTDIR = ../bin/
+ +TARGET = qmake
+  
+  VPATH += \
+diff --git a/recipes-qt/qt5/qtbase/0015-Set-paths-for-target-properly.patch b/recipes-qt/qt5/qtbase/0015-Set-paths-for-target-properly.patch
 new file mode 100644
-index 0000000..08a1cbd
+index 0000000..28512f0
 --- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0014-Add-external-hostbindir-option-native.patch
-@@ -0,0 +1,106 @@
-+From f2d51e50a7fbdf485696d1b8b2d29e64c729c76b Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Sat, 6 Apr 2013 13:15:07 +0200
-+Subject: [PATCH 03/11] Add -external-hostbindir option
++++ b/recipes-qt/qt5/qtbase/0015-Set-paths-for-target-properly.patch
+@@ -0,0 +1,72 @@
++From d84b7386902e024a0cfe5a6689930e5548a60480 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Thu, 22 Jan 2015 16:09:35 +0100
++Subject: [PATCH] Set paths for target properly
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+* when cross-compiling it's sometimes useful to use existing tools from machine
-+  (or in OpenEmbedded built with separate native recipe) when building for target
++Upstream-Status: Inappropriate [OE specific]
 +
-+* this way we can skip bootstraping tools we already have
-+
-+* qt_functions: temporary remove isEmpty check
-+* now we assume that every build will provide QT_EXTERNAL_HOST_BINS value
-+* isEmpty works correctly only with qmake variables (e.g. $$FOO -
-+  isEmpty(FOO)), but doesn't work with system properties like $$[FOO].
-+
-+* cmake: Use OE_QMAKE_PATH_EXTERNAL_HOST_BINS to determine path to host binaries
-+
-+Upstream-Status: Pending
-+  is a lot better for upstreaming (and it was already sort of approved by
-+  Oswald) but in 5.2.0 I've noticed that he added something similar for
-+  android builds
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+Signed-off-by: Simon Busch <morphis@gravedo.de>
-+Signed-off-by: Jonathan Liu <net147@gmail.com>
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +---
-+ qmake/property.cpp                          |  1 +
-+ tools/configure/configureapp.cpp            |  8 ++++++++
-+ src/corelib/global/qlibraryinfo.cpp         |  3 ++-
-+ src/corelib/global/qlibraryinfo.h           |  1 +
-+ 1 files changed, 50 insertions(+), 13 deletions(-)
++ configure | 42 +++++++++++++++++++++---------------------
++ 1 file changed, 21 insertions(+), 21 deletions(-)
 +
-+diff --git a/tools/configure/configureapp.cpp b/tools/configure/configureapp.cpp
-+index 92422c2..d0a62c8 100644
-+--- a/tools/configure/configureapp.cpp
-++++ b/tools/configure/configureapp.cpp
-+@@ -1191,6 +1191,13 @@ void Configure::parseCmdLine()
-+             dictionary[ "QT_EXT_PREFIX" ] = configCmdLine.at(i);
-+         }
-+ 
-++        else if (configCmdLine.at(i) == "-external-hostbindir") {
-++            ++i;
-++            if (i == argCount)
-++                break;
-++            dictionary[ "QT_EXTERNAL_HOST_BINS" ] = configCmdLine.at(i);
-++        }
-++
-+         else if (configCmdLine.at(i) == "-make-tool") {
-+             ++i;
-+             if (i == argCount)
-+@@ -3995,6 +4002,7 @@ void Configure::generateQConfigCpp()
-+                   << "    \"qt_hbinpath=" << formatPath(dictionary["QT_HOST_BINS"]) << "\"," << endl
-+                   << "    \"qt_hlibpath=" << formatPath(dictionary["QT_HOST_LIBS"]) << "\"," << endl
-+                   << "    \"qt_hdatpath=" << formatPath(dictionary["QT_HOST_DATA"]) << "\"," << endl
-++                  << "    \"qt_ebinpath=" << formatPath(dictionary["QT_EXTERNAL_HOST_BINS"]) << "\"," << endl
-+                   << "    \"qt_targspec=" << targSpec << "\"," << endl
-+                   << "    \"qt_hostspec=" << hostSpec << "\"," << endl
-+                   << "#endif" << endl
-+diff --git a/qmake/property.cpp b/qmake/property.cpp
-+index 051e056..50da6ed 100644
-+--- a/qmake/property.cpp
-++++ b/qmake/property.cpp
-+@@ -67,6 +67,7 @@ static const struct {
-+     { "QT_HOST_DATA", QLibraryInfo::HostDataPath, true },
-+     { "QT_HOST_BINS", QLibraryInfo::HostBinariesPath, true },
-+     { "QT_HOST_LIBS", QLibraryInfo::HostLibrariesPath, true },
-++    { "QT_EXTERNAL_HOST_BINS", QLibraryInfo::ExternalHostBinariesPath, true },
-+     { "QMAKE_SPEC", QLibraryInfo::HostSpecPath, true },
-+     { "QMAKE_XSPEC", QLibraryInfo::TargetSpecPath, true },
-+ };
-+diff --git a/src/corelib/global/qlibraryinfo.cpp b/src/corelib/global/qlibraryinfo.cpp
-+index d68c51b..7191159 100644
-+--- a/src/corelib/global/qlibraryinfo.cpp
-++++ b/src/corelib/global/qlibraryinfo.cpp
-+@@ -349,7 +349,7 @@ QLibraryInfo::isDebugBuild()
-+  */
-+ 
-+ static const struct {
-+-    char key[19], value[13];
-++    char key[21], value[13];
-+ } qtConfEntries[] = {
-+     { "Prefix", "." },
-+     { "Documentation", "doc" }, // should be ${Data}/doc
-+@@ -375,6 +375,7 @@ static const struct {
-+     { "HostBinaries", "bin" },
-+     { "HostLibraries", "lib" },
-+     { "HostData", "." },
-++    { "ExternalHostBinaries", "" },
-+     { "TargetSpec", "" },
-+     { "HostSpec", "" },
++diff --git a/configure b/configure
++index 43be722..0e1a64a 100755
++--- a/configure
+++++ b/configure
++@@ -3634,28 +3634,27 @@ static const char qt_configure_prefix_path_strs[][512 + 12] = {
++     "qt_xmplpath=$QT_SYSROOT_EXAMPLES",
++     "qt_tstspath=$QT_SYSROOT_TESTS",
++ #else
++-    "qt_prfxpath=$QT_INSTALL_PREFIX",
++-    "qt_docspath=$QT_INSTALL_DOCS",
++-    "qt_hdrspath=$QT_INSTALL_HEADERS",
++-    "qt_libspath=$QT_INSTALL_LIBS",
++-    "qt_lbexpath=$QT_INSTALL_LIBEXECS",
++-    "qt_binspath=$QT_INSTALL_BINS",
++-    "qt_plugpath=$QT_INSTALL_PLUGINS",
++-    "qt_impspath=$QT_INSTALL_IMPORTS",
++-    "qt_qml2path=$QT_INSTALL_QML",
++-    "qt_adatpath=$QT_INSTALL_ARCHDATA",
++-    "qt_datapath=$QT_INSTALL_DATA",
++-    "qt_trnspath=$QT_INSTALL_TRANSLATIONS",
++-    "qt_xmplpath=$QT_INSTALL_EXAMPLES",
++-    "qt_tstspath=$QT_INSTALL_TESTS",
++-    "qt_ssrtpath=$CFG_SYSROOT",
++-    "qt_hpfxpath=$QT_HOST_PREFIX",
++-    "qt_hbinpath=$QT_HOST_BINS",
++-    "qt_hlibpath=$QT_HOST_LIBS",
++-    "qt_hdatpath=$QT_HOST_DATA",
++-    "qt_ebinpath=$QT_EXTERNAL_HOST_BINS",
++-    "qt_targspec=$shortxspec",
++-    "qt_hostspec=$shortspec",
+++    "qt_prfxpath=$QT_SYSROOT_PREFIX",
+++    "qt_docspath=$QT_SYSROOT_DOCS",
+++    "qt_hdrspath=$QT_SYSROOT_HEADERS",
+++    "qt_libspath=$QT_SYSROOT_LIBS",
+++    "qt_lbexpath=$QT_SYSROOT_LIBEXECS",
+++    "qt_binspath=$QT_SYSROOT_BINS",
+++    "qt_plugpath=$QT_SYSROOT_PLUGINS",
+++    "qt_impspath=$QT_SYSROOT_IMPORTS",
+++    "qt_qml2path=$QT_SYSROOT_QML",
+++    "qt_adatpath=$QT_SYSROOT_ARCHDATA",
+++    "qt_datapath=$QT_SYSROOT_DATA",
+++    "qt_trnspath=$QT_SYSROOT_TRANSLATIONS",
+++    "qt_xmplpath=$QT_SYSROOT_EXAMPLES",
+++    "qt_tstspath=$QT_SYSROOT_TESTS",
+++    "qt_ssrtpath=",
+++    "qt_hpfxpath=$QT_SYSROOT_PREFIX",
+++    "qt_hbinpath=$QT_SYSROOT_BINS",
+++    "qt_hlibpath=$QT_SYSROOT_LIBS",
+++    "qt_hdatpath=$QT_SYSROOT_LIBS/qt5",
+++    "qt_targspec=linux-g++",
+++    "qt_hostspec=linux-g++",
 + #endif
-+diff --git a/src/corelib/global/qlibraryinfo.h b/src/corelib/global/qlibraryinfo.h
-+index 543c4b3..a02e03a 100644
-+--- a/src/corelib/global/qlibraryinfo.h
-++++ b/src/corelib/global/qlibraryinfo.h
-+@@ -80,6 +80,7 @@ public:
-+         HostBinariesPath,
-+         HostLibrariesPath,
-+         HostDataPath,
-++        ExternalHostBinariesPath,
-+         TargetSpecPath,
-+         HostSpecPath,
-+         LastHostPath = HostSpecPath,
++ };
++ static const char qt_configure_settings_path_str[256 + 12] = "qt_stngpath=$QT_INSTALL_SETTINGS";
 +-- 
-+2.1.3
++1.8.3.1
 +
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 611e19a..0424bc2 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -20,6 +20,7 @@ SRC_URI += "\
+ # specific for qtbase
+ SRC_URI += "\
+     file://0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch \
++    file://0015-Set-paths-for-target-properly.patch \
+ "
+ 
+ SRCREV = "47326b9c5c38fea39f8539f50f32667d2c391b70"
 -- 
 1.8.3.1
 
