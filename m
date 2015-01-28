@@ -1,34 +1,31 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E436718E9
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id 15D5872608
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 19:59:58 +0000 (UTC)
-Received: by mail-ie0-f181.google.com with SMTP id rp18so24255810iec.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 11:59:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=xPAL3Sqo5YFaO9/bidLnTBr1Fd5FdVq/SYkK2IaWni8=;
-	b=CMa4DUeX5a24EZW9TLJ4DS8mQWmF2lQ7fdRw5JuATnLjr9gvHC8hztgLQ+VXl+huzL
-	TPjWtZnqz2A+s31aOk86LW5GPv8IIxGurgAdD2fzGRsoXzTL1d0KMAyRTwcG6Z6WtyJ/
-	ncdRXyNOnH2mIRYX9nDVA2bQVhuEtn8a63iyL05usUv5cxqIZexdCr+LwweWUwf0L3Qf
-	BCjLUvFjSAYVlgaw8O6lYV0W0JWluT51jxjTgtncdgtzDiYE2+PBeiK+2hXJsHT3hlq9
-	5jgyUUqX/t7BHrFivlGfTxCG2YfIEdWsX+QsX/S2e95WG5BOMa9rcTcmFKM+7mkvr1s+
-	AnNQ==
-X-Received: by 10.50.43.169 with SMTP id x9mr5756144igl.28.1422475199111;
-	Wed, 28 Jan 2015 11:59:59 -0800 (PST)
-Received: from Pahoa2.mvista.com (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by mx.google.com with ESMTPSA id s17sm9947499igr.2.2015.01.28.11.59.57
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 28 Jan 2015 11:59:58 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+	Wed, 28 Jan 2015 22:07:21 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 7B848D4025E;
+	Wed, 28 Jan 2015 23:07:21 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 01C3CD40345;
+	Wed, 28 Jan 2015 23:07:19 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.3.2
+Received: from localhost.localdomain (e179143082.adsl.alicedsl.de
+	[85.179.143.82]) by mail.familie-heinold.de (Postfix) with ESMTPSA;
+	Wed, 28 Jan 2015 23:07:18 +0100 (CET)
+From: Henning Heinold <henning@itconsulting-heinold.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Jan 2015 11:59:47 -0800
-Message-Id: <1422475187-9011-1-git-send-email-akuster808@gmail.com>
+Date: Wed, 28 Jan 2015 23:07:11 +0100
+Message-Id: <1422482831-12376-2-git-send-email-henning@itconsulting-heinold.de>
 X-Mailer: git-send-email 1.9.1
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-oe][PATCH] libcap-ng: move pakage from other layers
+In-Reply-To: <1422482831-12376-1-git-send-email-henning@itconsulting-heinold.de>
+References: <1422482831-12376-1-git-send-email-henning@itconsulting-heinold.de>
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: [PATCH] libspatialite: Upgrade to version 4.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,110 +39,306 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2015 19:59:59 -0000
+X-List-Received-Date: Wed, 28 Jan 2015 22:07:26 -0000
 
-From: Armin Kuster <akuster@mvista.com>
+From: Holger Hans Peter Freyther <holger@moiji-mobile.com>
 
-Please consider this package for inclusion to meta-oe so we
-can remove it from both meta-security and meta-selinux.
+Package the new sqlite3 plugin into a new package and skip
+the dev-so qa issue. Add some extra depends that are now used
+by the library.
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+The patch was adapted for meta-openembedded by Henning Heinold, setting
+the upstream status for the geos-config.patch
+
+V2: squash .inc into .bb and remove PR and INC_PR
+
+Signed-off-by: Henning Heinold <henning@itconsulting-heinold.de>
 ---
- .../libcap-ng/libcap-ng/python.patch               | 39 ++++++++++++++++++++++
- .../recipes-support/libcap-ng/libcap-ng_0.7.4.bb   | 37 ++++++++++++++++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
- create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
+ .../libspatialite-4.2.0/geos-config.patch          |  17 ++
+ .../fix-the-configure-script-and-freexl.patch      | 200 ---------------------
+ .../libspatialite/libspatialite_3.0.1.bb           |   9 -
+ .../{libspatialite.inc => libspatialite_4.2.0.bb}  |  13 +-
+ 4 files changed, 27 insertions(+), 212 deletions(-)
+ create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch
+ delete mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
+ delete mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb
+ rename meta-oe/recipes-navigation/libspatialite/{libspatialite.inc => libspatialite_4.2.0.bb} (56%)
 
-diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch
 new file mode 100644
-index 0000000..d82ceb4
+index 0000000..28bd7da
 --- /dev/null
-+++ b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
-@@ -0,0 +1,39 @@
-+configure.ac - Avoid an incorrect check for python.
-+Makefile.am - avoid hard coded host include paths.
++++ b/meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch
+@@ -0,0 +1,17 @@
++https://www.gaia-gis.it/fossil/libspatialite/tktview?name=abeeaad448
 +
-+Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
++Upstream-Status: Submitted [rpm5-devel@rpm5.org]
 +
-+--- libcap-ng-0.6.5/configure.ac.orig	2012-01-17 13:59:03.645898989 -0600
-++++ libcap-ng-0.6.5/configure.ac	2012-01-17 13:59:46.353959252 -0600
-+@@ -120,17 +120,8 @@
-+ else
-+ AC_MSG_RESULT(testing)
-+ AM_PATH_PYTHON
-+-if test -f /usr/include/python${am_cv_python_version}/Python.h ; then
-+-	python_found="yes"
-+-	AC_MSG_NOTICE(Python bindings will be built)
-+-else
-+-	python_found="no"
-+-	if test x$use_python = xyes ; then
-+-		AC_MSG_ERROR([Python explicitly required and python headers found])
-+-	else
-+-		AC_MSG_WARN("Python headers not found - python bindings will not be made")
-+-	fi
-+-fi
-++python_found="yes"
-++AC_MSG_NOTICE(Python bindings will be built)
-+ fi
-+ AM_CONDITIONAL(HAVE_PYTHON, test ${python_found} = "yes")
-+ 
-+--- libcap-ng-0.6.5/bindings/python/Makefile.am.orig	2010-11-03 12:31:59.000000000 -0500
-++++ libcap-ng-0.6.5/bindings/python/Makefile.am	2012-01-17 14:05:50.199834467 -0600
-+@@ -24,7 +24,8 @@
-+ CONFIG_CLEAN_FILES = *.loT *.rej *.orig
-+ AM_CFLAGS = -fPIC -DPIC
-+ PYLIBVER ?= python$(PYTHON_VERSION)
-+-INCLUDES = -I. -I$(top_builddir) -I/usr/include/$(PYLIBVER)
-++PYINC ?= /usr/include/$(PYLIBVER)
-++INCLUDES = -I. -I$(top_builddir) -I$(PYINC)
-+ LIBS = $(top_builddir)/src/libcap-ng.la
-+ pyexec_PYTHON = capng.py
-+ pyexec_LTLIBRARIES = _capng.la
-diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
-new file mode 100644
-index 0000000..2e778cb
---- /dev/null
-+++ b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "An alternate posix capabilities library"
-+DESCRIPTION = "The libcap-ng library is intended to make programming \
-+with POSIX capabilities much easier than the traditional libcap library."
-+HOMEPAGE = "http://freecode.com/projects/libcap-ng"
-+SECTION = "base"
-+LICENSE = "GPLv2+ & LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-+		    file://COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
++Index: libspatialite-4.2.0/configure.ac
++===================================================================
++--- libspatialite-4.2.0.orig/configure.ac
+++++ libspatialite-4.2.0/configure.ac
++@@ -260,7 +260,7 @@ if test x"$enable_geos" != "xno"; then
++   fi
++   # Extract the linker and include flags
++   GEOS_LDFLAGS=`$GEOSCONFIG --ldflags`
++-  GEOS_CFLAGS=-I`$GEOSCONFIG --includes`
+++  GEOS_CFLAGS=`$GEOSCONFIG --cflags`
++   AC_SUBST([GEOS_LDFLAGS])
++   AC_SUBST([GEOS_CFLAGS])	
++   # Ensure that we can parse geos_c.h
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
+deleted file mode 100644
+index 0cd0c3f..0000000
+--- a/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
++++ /dev/null
+@@ -1,200 +0,0 @@
+-From upstream fossil repo, extracted via git, dropping configure.ac for amalgamation
+-
+-From: sandro <sandro>
+-Date: Sat, 21 Jan 2012 16:53:28 +0000
+-Subject: [PATCH] fixing the ./configure script: --enable-geocallbacks=no is
+- the new default and fixing some flaws for
+- --enable-freexl=no
+-
+----
+- configure                   |   20 ++++++++++----------
+- configure.ac                |   20 ++++++++++----------
+- src/shapefiles/shapefiles.c |    2 ++
+- 4 files changed, 32 insertions(+), 30 deletions(-)
+-
+-diff --git a/configure b/configure
+-index e8cf620..917bfca 100755
+---- a/configure
+-+++ b/configure
+-@@ -1410,7 +1410,7 @@ Optional Features:
+-                           optimize for fast installation [default=yes]
+-   --disable-libtool-lock  avoid locking (might break parallel builds)
+-   --enable-mathsql        enables SQL math functions [default=yes]
+--  --enable-geocallbacks   enables geometry callbacks [default=yes]
+-+  --enable-geocallbacks   enables geometry callbacks [default=no]
+-   --enable-proj           enables PROJ.4 inclusion [default=yes]
+-   --enable-geos           enables GEOS inclusion [default=yes]
+-   --enable-geosadvanced   enables GEOS advanced features [default=yes]
+-@@ -16980,7 +16980,7 @@ ac_config_files="$ac_config_files Makefile src/Makefile src/headers/Makefile src
+- if test "${enable_mathsql+set}" = set; then :
+-   enableval=$enable_mathsql;
+- else
+--  mathsql=yes
+-+  enable_mathsql=yes
+- fi
+- 
+- if test x"$enable_mathsql" != "xno"; then
+-@@ -16998,10 +16998,10 @@ fi
+- if test "${enable_geocallbacks+set}" = set; then :
+-   enableval=$enable_geocallbacks;
+- else
+--  geocallbacks=yes
+-+  enable_geocallbacks=no
+- fi
+- 
+--if test x"$enable_geocallbacks" != "xno"; then
+-+if test x"$enable_geocallbacks" == "xyes"; then
+-   OMIT_GEOCALLBACKS_FLAGS=
+-   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for sqlite3_rtree_geometry_callback in -lsqlite3" >&5
+- $as_echo_n "checking for sqlite3_rtree_geometry_callback in -lsqlite3... " >&6; }
+-@@ -17063,7 +17063,7 @@ fi
+- if test "${enable_proj+set}" = set; then :
+-   enableval=$enable_proj;
+- else
+--  proj=yes
+-+  enable_proj=yes
+- fi
+- 
+- if test x"$enable_proj" != "xno"; then
+-@@ -17153,7 +17153,7 @@ fi
+- if test "${enable_geos+set}" = set; then :
+-   enableval=$enable_geos;
+- else
+--  geos=yes
+-+  enable_geos=yes
+- fi
+- 
+- if test x"$enable_geos" != "xno"; then
+-@@ -17237,7 +17237,7 @@ fi
+- if test "${enable_geosadvanced+set}" = set; then :
+-   enableval=$enable_geosadvanced;
+- else
+--  geosadvanced=yes
+-+  enable_geosadvanced=yes
+- fi
+- 
+-   if test x"$enable_geosadvanced" != "xno"; then
+-@@ -17316,7 +17316,7 @@ fi
+- if test "${enable_iconv+set}" = set; then :
+-   enableval=$enable_iconv;
+- else
+--  geos=yes
+-+  enable_iconv=yes
+- fi
+- 
+- if test x"$enable_iconv" != "xno"; then
+-@@ -17579,7 +17579,7 @@ fi
+- if test "${enable_freexl+set}" = set; then :
+-   enableval=$enable_freexl;
+- else
+--  proj=yes
+-+  enable_freexl=yes
+- fi
+- 
+- if test x"$enable_freexl" != "xno"; then
+-@@ -17669,7 +17669,7 @@ fi
+- if test "${enable_epsg+set}" = set; then :
+-   enableval=$enable_epsg;
+- else
+--  epsg=yes
+-+  enable_epsg=yes
+- fi
+- 
+- if test x"$enable_epsg" != "xno"; then
+-diff --git a/configure.ac b/configure.ac
+-index 216cc9f..69cb6c5 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -79,7 +79,7 @@ AC_CONFIG_FILES([Makefile \
+- #
+- AC_ARG_ENABLE(mathsql, [AS_HELP_STRING(
+-   [--enable-mathsql], [enables SQL math functions [default=yes]])],
+--  [], [mathsql=yes])
+-+  [], [enable_mathsql=yes])
+- if test x"$enable_mathsql" != "xno"; then
+-   OMIT_MATHSQL_FLAGS=
+- else
+-@@ -92,9 +92,9 @@ AC_SUBST(OMIT_MATHSQL_FLAGS)
+- #   --enable-geocallbacks
+- #
+- AC_ARG_ENABLE(geocallbacks, [AS_HELP_STRING(
+--  [--enable-geocallbacks], [enables geometry callbacks [default=yes]])],
+--  [], [geocallbacks=yes])
+--if test x"$enable_geocallbacks" != "xno"; then
+-+  [--enable-geocallbacks], [enables geometry callbacks [default=no]])],
+-+  [], [enable_geocallbacks=no])
+-+if test x"$enable_geocallbacks" == "xyes"; then
+-   OMIT_GEOCALLBACKS_FLAGS=
+-   AC_CHECK_LIB(sqlite3,sqlite3_rtree_geometry_callback,,AC_MSG_ERROR([obsolete 'libsqlite3' (< v.3.7.3). please retry specifying: --disable-geocallbacks]),-lm)
+- else
+-@@ -108,7 +108,7 @@ AC_SUBST(OMIT_GEOCALLBACKS_FLAGS)
+- #
+- AC_ARG_ENABLE(proj, [AS_HELP_STRING(
+-   [--enable-proj], [enables PROJ.4 inclusion [default=yes]])],
+--  [], [proj=yes])
+-+  [], [enable_proj=yes])
+- if test x"$enable_proj" != "xno"; then
+-   OMIT_PROJ_FLAGS=
+-   AC_CHECK_HEADERS(proj_api.h,, [AC_MSG_ERROR([cannot find proj_api.h, bailing out])])
+-@@ -124,7 +124,7 @@ AC_SUBST(OMIT_PROJ_FLAGS)
+- #
+- AC_ARG_ENABLE(geos, [AS_HELP_STRING(
+-   [--enable-geos], [enables GEOS inclusion [default=yes]])],
+--  [], [geos=yes])
+-+  [], [enable_geos=yes])
+- if test x"$enable_geos" != "xno"; then
+-   OMIT_GEOS_FLAGS=
+-   AC_CHECK_HEADERS(geos_c.h,, [AC_MSG_ERROR([cannot find geos_c.h, bailing out])])
+-@@ -134,7 +134,7 @@ if test x"$enable_geos" != "xno"; then
+-   #
+-   AC_ARG_ENABLE(geosadvanced, [AS_HELP_STRING(
+- 	  [--enable-geosadvanced], [enables GEOS advanced features [default=yes]])],
+--	  [], [geosadvanced=yes])
+-+	  [], [enable_geosadvanced=yes])
+-   if test x"$enable_geosadvanced" != "xno"; then
+- 	  GEOSADVANCED_FLAGS=-DGEOS_ADVANCED
+- 	  AC_SEARCH_LIBS(GEOSCoveredBy,geos_c,,AC_MSG_ERROR([obsolete 'libgeos_c' (< v.3.3.0). please retry specifying: --disable-geosadvanced.]),-lm -lgeos)
+-@@ -152,7 +152,7 @@ AC_SUBST(OMIT_GEOS_FLAGS)
+- #
+- AC_ARG_ENABLE(iconv, [AS_HELP_STRING(
+-   [--enable-iconv], [enables ICONV inclusion [default=yes]])],
+--  [], [geos=yes])
+-+  [], [enable_iconv=yes])
+- if test x"$enable_iconv" != "xno"; then
+-   OMIT_ICONV_FLAGS=
+-   AC_CHECK_HEADERS(iconv.h,, [AC_MSG_ERROR([cannot find iconv.h, bailing out])])
+-@@ -172,7 +172,7 @@ AC_SUBST(OMIT_ICONV_FLAGS)
+- #
+- AC_ARG_ENABLE(freexl, [AS_HELP_STRING(
+-   [--enable-freexl], [enables FreeXL inclusion [default=yes]])],
+--  [], [proj=yes])
+-+  [], [enable_freexl=yes])
+- if test x"$enable_freexl" != "xno"; then
+-   OMIT_FREEXL_FLAGS=
+-   AC_CHECK_HEADERS(freexl.h,, [AC_MSG_ERROR([cannot find freexl.h, bailing out])])
+-@@ -188,7 +188,7 @@ AC_SUBST(OMIT_FREEXL_FLAGS)
+- #
+- AC_ARG_ENABLE(epsg, [AS_HELP_STRING(
+-   [--enable-epsg], [enables full EPSG dataset support [default=yes]])],
+--  [], [epsg=yes])
+-+  [], [enable_epsg=yes])
+- if test x"$enable_epsg" != "xno"; then
+-   OMIT_EPSG_FLAGS=
+- else
+-diff --git a/src/shapefiles/shapefiles.c b/src/shapefiles/shapefiles.c
+-index 4bf5fd0..09e3cd3 100644
+---- a/src/shapefiles/shapefiles.c
+-+++ b/src/shapefiles/shapefiles.c
+-@@ -62,7 +62,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
+- #include <spatialite/gaiageo.h>
+- #include <spatialite.h>
+- 
+-+#ifndef OMIT_FREEXL
+- #include <freexl.h>
+-+#endif
+- 
+- #if defined(_WIN32) && !defined(__MINGW32__)
+- #define strcasecmp	_stricmp
+--- 
+-1.7.9.1
+-
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb b/meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb
+deleted file mode 100644
+index 1cb72e8..0000000
+--- a/meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require libspatialite.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "450d1a0d9da1bd9f770b7db3f2509f69"
+-SRC_URI[sha256sum] = "4983d6584069fd5ff0cfcccccee1015088dab2db177c0dc7050ce8306b68f8e6"
+-
+-SRC_URI =+ "file://fix-the-configure-script-and-freexl.patch"
+-
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
+similarity index 56%
+rename from meta-oe/recipes-navigation/libspatialite/libspatialite.inc
+rename to meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
+index b5c3879..d66dc87 100644
+--- a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
++++ b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
+@@ -1,9 +1,7 @@
+ DESCRIPTION = "Library extending the SQLite core to support fully fledged Spatial SQL capabilities"
+ HOMEPAGE = "https://www.gaia-gis.it/fossil/libspatialite/"
+ SECTION = "libs"
+-DEPENDS = "proj geos sqlite3"
+-
+-INC_PR = "r0"
++DEPENDS = "proj geos sqlite3 libxml2 zlib"
+ 
+ LICENSE = "MPLv1.1 & GPLv2+ & LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
+@@ -14,3 +12,12 @@ inherit autotools pkgconfig
+ 
+ EXTRA_OECONF = "--enable-freexl=no"
+ 
++# package plugins for SQLite3
++PACKAGES += "${PN}-plugin"
++INSANE_SKIP_${PN}-plugin = "dev-so"
++FILES_${PN}-plugin += "${libdir}/mod_*"
 +
-+SRC_URI = "http://people.redhat.com/sgrubb/${BPN}/${BP}.tar.gz \
-+	   file://python.patch"
++SRC_URI[md5sum] = "83305ed694a77152120d1f74c5151779"
++SRC_URI[sha256sum] = "9f138a6854740c7827fdee53845eb1485fce3e805a7aa9fc9151f8046ebd312d"
 +
-+inherit lib_package autotools pythonnative
-+
-+SRC_URI[md5sum] = "55c57c0673b944ea1a755bcb2636dabd"
-+SRC_URI[sha256sum] = "48a2083276f9820cb92dcb05d001b30733bcbf48c14c230303cac3cd08b45b6b"
-+
-+DEPENDS += "swig-native python"
-+
-+EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' PYINC='${STAGING_INCDIR}/${PYLIBVER}'"
-+
-+PACKAGES += "${PN}-python"
-+
-+FILES_${PN}-dbg += "${libdir}/python${PYTHON_BASEVERSION}/*/.debug"
-+FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
-+
-+BBCLASSEXTEND = "native"
-+
-+do_install_append() {
-+	# Moving libcap-ng to base_libdir
-+	if [ ! ${D}${libdir} -ef ${D}${base_libdir} ]; then
-+		mkdir -p ${D}/${base_libdir}/
-+		mv -f ${D}${libdir}/libcap-ng.so.* ${D}${base_libdir}/
-+		relpath=${@os.path.relpath("${base_libdir}", "${libdir}")}
-+		ln -sf ${relpath}/libcap-ng.so.0.0.0 ${D}${libdir}/libcap-ng.so
-+	fi
-+}
++SRC_URI += "file://geos-config.patch"
 -- 
 1.9.1
-
 
