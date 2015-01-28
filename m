@@ -1,40 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id F2C447147D
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vc0-f177.google.com (mail-vc0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 8340F60017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 10:54:31 +0000 (UTC)
-Received: by mail-wi0-f170.google.com with SMTP id bs8so2470961wib.1
+	Wed, 28 Jan 2015 12:13:46 +0000 (UTC)
+Received: by mail-vc0-f177.google.com with SMTP id hy4so6591268vcb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 02:54:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=govGpLrMGBmvGDFxK4ZvmCjZ3bKUSuWhzYG3KDsSjrw=;
-	b=yKVid/s1xCGRK86b8l6cCvxyoDTay03joRM9618sxRZLtY+w4zPUr4CUXBCYg3CEqD
-	03NMkbvdrK5WrJEtL3c9bwTCet8rylg8CjSHDGmYsXxjYNOq3pVm6+b4hQh+/weInLuW
-	AmrHOckFfbfC1TG7N/CLj+MCJZqiMoScL2uGvIhpDOrnO5EjTEhrigUdhgo/cjFAN2ng
-	VZAQA9e1oaiL/LOn5RNTCFrRdX31wm8M/hOOSFjlqWCuUn4BV3o2oS791rkWLpJMpO98
-	r7//owEVbEXtUJYdg/qUTiz7BD9tGtQ+15wXmqNId/ypWw3ByUbMY4AuesAJHrVt6gzL
-	1rrQ==
-X-Received: by 10.194.237.41 with SMTP id uz9mr6298469wjc.80.1422442472150;
-	Wed, 28 Jan 2015 02:54:32 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	ud9sm2275531wib.5.2015.01.28.02.54.31
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Jan 2015 02:54:31 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 28 Jan 2015 11:54:33 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150128105433.GG2477@jama>
-References: <1422006376-4509-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	Wed, 28 Jan 2015 04:13:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=fzQb8xqCqdIofcgEpT8foC7jxCI7L3uEXdprBkeb69Q=;
+	b=qk7nQ82CAbOYQFS32J6ku2aYvvmrFyKm0Uwz+juhaskLIPFeAKKwRXL4eudNz58bzx
+	ywqs6F5mAuegGE3tE6dDee2P8YUGD/eoR61pTYXjD9rdo9QlDt+iMPSa0OLmBYn8Rg66
+	jvKd5+Ew9HlACyLQrZuZSdXzFGHfdaDct1udUEt34n4VNThwm6dKifU3/Bknl7WClM3+
+	d7JPrBXwEJUbWxakbSegQJF4ARR4fSebBNb9/Oh7u9BOX3K+0lP+evAJf4HcsEz+V+Pu
+	/yyuBc8njBRbEVTE9YmvQrTrytpJqk4LmLHp0yiy4ONxUv//FRXWO44MXEgjvQri9GTu
+	/ARQ==
 MIME-Version: 1.0
-In-Reply-To: <1422006376-4509-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2] opensc: add new recipe
+X-Received: by 10.52.94.76 with SMTP id da12mr1325190vdb.6.1422447227354; Wed,
+	28 Jan 2015 04:13:47 -0800 (PST)
+Received: by 10.52.183.37 with HTTP; Wed, 28 Jan 2015 04:13:47 -0800 (PST)
+In-Reply-To: <20150128105148.GE2477@jama>
+References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
+	<20150128105148.GE2477@jama>
+Date: Wed, 28 Jan 2015 13:13:47 +0100
+Message-ID: <CALbNGRRMX6r7Tvnp4eN0Kh3JW1K2gGb59=RsMSJ7-bqrXzRvBw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 0/5] qt-creator for target machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,122 +44,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2015 10:54:32 -0000
-X-Groupsio-MsgNum: 54011
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="7uYPyRQQ5N0D02nI"
-Content-Disposition: inline
-
---7uYPyRQQ5N0D02nI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 28 Jan 2015 12:13:52 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 23, 2015 at 05:46:16PM +0800, Li xin wrote:
-> OpenSC provides a set of libraries and utilities to work with smart cards.
-> Its main focus is on cards that support cryptographic operations,
-> and facilitate their use in security applications such as authentication,
-> mail encryption and digital signatures.
->=20
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-support/opensc/opensc_0.14.0.bb | 42 +++++++++++++++++++=
-++++++
->  1 file changed, 42 insertions(+)
->  create mode 100644 meta-oe/recipes-support/opensc/opensc_0.14.0.bb
->=20
-> diff --git a/meta-oe/recipes-support/opensc/opensc_0.14.0.bb b/meta-oe/re=
-cipes-support/opensc/opensc_0.14.0.bb
-> new file mode 100644
-> index 0000000..bdb8d23
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/opensc/opensc_0.14.0.bb
-> @@ -0,0 +1,42 @@
-> +SUMMARY =3D "Smart card library and applications"
-> +DESCRIPTION =3D "OpenSC is a tool for accessing smart card devices. Basi=
-c \
-> +functionality (e.g. SELECT FILE, READ BINARY) should work on any ISO \
-> +7816-4 compatible smart card. Encryption and decryption using private \
-> +keys on the smart card is possible with PKCS \
-> +such as the FINEID (Finnish Electronic IDentity) card. Swedish Posten \
-> +eID cards have also been confirmed to work."
-> +
-> +HOMEPAGE =3D "https://github.com/OpenSC/OpenSC/wiki"
-> +
-> +SRC_URI =3D "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz"
-> +SRC_URI[md5sum] =3D "1ee31dc2e89860458fd984e0cac9795e"
-> +SRC_URI[sha256sum] =3D "ffe8bcc704f2ab9a05c6781bc815f00eaf75cba0a1bd21e3=
-142b9194a7bed5c9"
-> +
-> +S =3D "${WORKDIR}/OpenSC-${PV}"
-> +LICENSE =3D "LGPLv2+"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
-e34"
-> +
-> +inherit autotools pkgconfig
-> +DEPENDS =3D "openct pcsc-lite virtual/libiconv openssl"
-> +
-> +EXTRA_OECONF =3D " \
-> +    --disable-static \
-> +    --enable-openct \
-> +    --disable-pcsc \
-> +    --disable-ctapi \
-> +    --enable-doc \
-> +"
-> +EXTRA_OEMAKE =3D "DESTDIR=3D${D}"
-> +
-> +RDEPENDS_${PN} =3D "readline"
-> +
-> +FILES_${PN} +=3D "\
-> +    ${libdir}/opensc-pkcs11.so \
-> +    ${libdir}/onepin-opensc-pkcs11.so \
-> +    ${libdir}/pkcs11-spy.so \
-> +"
-> +FILES_${PN}-dev +=3D "\
-> +    ${libdir}/pkcs11/opensc-pkcs11.so \
-> +    ${libdir}/pkcs11/onepin-opensc-pkcs11.so \
-> +    ${libdir}/pkcs11/pkcs11-spy.so \
-> +"
+On Wed, Jan 28, 2015 at 11:51 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> On Tue, Jan 27, 2015 at 06:53:48AM +0100, Andreas M=C3=BCller wrote:
+>> These patches were build tested for 5.4.0 with all qt5 recipes I am work=
+ing on
+>> currently (kf5/hawaii/mauii). Git versions were not yet tested.
+>> On target:
+>>
+>> * toolchain was set
+>> * QT5 c++ project was build and debugged
+>>
+>> We shall see what Martin's world says - maybe we need a EXCLUDE_FROM_WOR=
+LD for
+>> meta-oe's qt-creator (conditional on meta-qt5 included in layer).
+>
+> One of these is causing qtbase_git build failure:
+>
+> | generators/win32/cesdkhandler.cpp:96: error: undefined reference to 'QD=
+ebug::~QDebug()'
+> | ../src/corelib/io/qdir.cpp:2330: error: undefined reference to 'QDebug:=
+:~QDebug()'
+> | ../src/corelib/io/qdir.cpp:2330: error: undefined reference to 'QDebug:=
+:~QDebug()'
+> | ../src/corelib/io/qdir.cpp:2328: error: undefined reference to 'QDebug:=
+:~QDebug()'
+> | collect2: error: ld returned 1 exit status
+> | make: *** [bin/qmake] Error 1
+> | ERROR: oe_runmake failed
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_compile (log file is located at /home/jenkin=
+s/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtbase/5.4.0+gi=
+tAUTOINC+47326b9c5c-r0/temp/log.do_compile.23226)
+>
+>> Andreas M=C3=BCller (5):
+>>   qtbase: remove patches required for native(-sdk) only
+>>   qtbase/EXTERNAL_HOST_BINS: split out code only required for
+>>     native-(sdk)
+>>   qtbase: build qmake for target with paths aligned
+>>   qt5-creator: add 3.3.0 of qt-creator
+>>   add gdb append to enable python packageconfig
+>>
+>>  recipes-devtools/gdb/gdb_%.bbappend                |   1 +
+>>  recipes-qt/qt5/nativesdk-qtbase.inc                |   1 +
+>>  recipes-qt/qt5/nativesdk-qtbase_git.bb             |   1 +
+>>  ...t-creator-to-build-on-arm-aarch32-and-aar.patch |  94 ++++++++++++++=
+++++
+>>  recipes-qt/qt5/qt5-creator/qtcreator.desktop.in    |  10 ++
+>>  recipes-qt/qt5/qt5-creator_3.3.0.bb                |  87 ++++++++++++++=
++++
+>>  recipes-qt/qt5/qtbase-native.inc                   |   1 +
+>>  recipes-qt/qt5/qtbase.inc                          |  27 +++---
+>>  .../0003-Add-external-hostbindir-option.patch      |  75 --------------=
+-
+>>  ...-build-it-in-configure-but-allow-to-build.patch |  27 ++++--
+>>  ...014-Add-external-hostbindir-option-native.patch | 106 ++++++++++++++=
++++++++
+>>  .../0015-Set-paths-for-target-properly.patch       |  72 ++++++++++++++
+>>  recipes-qt/qt5/qtbase_git.bb                       |   3 +-
+>>  13 files changed, 407 insertions(+), 98 deletions(-)
+>>  create mode 100644 recipes-devtools/gdb/gdb_%.bbappend
+>>  create mode 100644 recipes-qt/qt5/qt5-creator/0001-Fix-Allow-qt-creator=
+-to-build-on-arm-aarch32-and-aar.patch
+>>  create mode 100644 recipes-qt/qt5/qt5-creator/qtcreator.desktop.in
+>>  create mode 100644 recipes-qt/qt5/qt5-creator_3.3.0.bb
+>>  create mode 100644 recipes-qt/qt5/qtbase/0014-Add-external-hostbindir-o=
+ption-native.patch
+>>  create mode 100644 recipes-qt/qt5/qtbase/0015-Set-paths-for-target-prop=
+erly.patch
+>>
+>> --
+>> 1.8.3.1
+>>
+>> --
+OK - so I need to take care for git part. I should learn not to expect
+good of untested code...
 
-Fails to build in world:
+Andreas
 
-| checking for OPENCT... yes
-| checking XSLTPROC requirement... configure: error: Missing xslstylesheets=
-dir
-| Configure failed. The contents of all config.log files follows to aid deb=
-ugging
-| ERROR: oe_runconf failed
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
-s/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opensc/0.14.0-r=
-0/temp/log.do_configure.22998)
-NOTE: recipe opensc-0.14.0-r0: task do_configure: Failed
-ERROR: Task 8944 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe=
-/recipes-support/opensc/opensc_0.14.0.bb, do_configure) failed with exit co=
-de '1'
-
-> --=20
-> 1.8.4.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---7uYPyRQQ5N0D02nI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlTIv+kACgkQN1Ujt2V2gBxxZQCeMj+Jyu4TPOCYQUrvb1xLhcI0
-NSAAn1DzzhCtz7ynhCp5v9mBRiBY25J5
-=2VNH
------END PGP SIGNATURE-----
-
---7uYPyRQQ5N0D02nI--
