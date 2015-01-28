@@ -1,41 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by mail.openembedded.org (Postfix) with ESMTP id A4D4B7147D
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id F2C447147D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 10:53:42 +0000 (UTC)
-Received: by mail-we0-f176.google.com with SMTP id w62so20003350wes.7
+	Wed, 28 Jan 2015 10:54:31 +0000 (UTC)
+Received: by mail-wi0-f170.google.com with SMTP id bs8so2470961wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 02:53:42 -0800 (PST)
+	Wed, 28 Jan 2015 02:54:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jK2Sha/ldkpOB7wP3DGfsnDraugK5zGvNFZAhigyM0I=;
-	b=eGXK17MkC32g3zHp98/3g4+u45hxZ0ECgoD9G0JSyfbpNMwIrJWmQuKVQ8Zd9Ksq+h
-	1BRdd4SrPN0lrQG7+t16kjZliVvy2rzR27OzTeVlr1LRZQnR14Lo9vs0OdTE3pfQOa3p
-	y4Nu4YDwm3OwKIDqiWlaKVfDenrZlsJ8Da0jK/PJ95jyASDfBbw3gTLhz7oQ6IlyDYzX
-	4fwqXHWPTKDkZXznb+FL1lSFVf6kDp9vYHfffsf1QysCDy8GELHnwTerlgUtA6FhwOZ9
-	X2fAeGoTp+KNXkwKduPRPco98I0JxDmrvqG8iRdWkaxST4MiOKecfHhsJO00TIJrfkpx
-	P0Qg==
-X-Received: by 10.194.2.240 with SMTP id 16mr6220690wjx.108.1422442422666;
-	Wed, 28 Jan 2015 02:53:42 -0800 (PST)
+	bh=govGpLrMGBmvGDFxK4ZvmCjZ3bKUSuWhzYG3KDsSjrw=;
+	b=yKVid/s1xCGRK86b8l6cCvxyoDTay03joRM9618sxRZLtY+w4zPUr4CUXBCYg3CEqD
+	03NMkbvdrK5WrJEtL3c9bwTCet8rylg8CjSHDGmYsXxjYNOq3pVm6+b4hQh+/weInLuW
+	AmrHOckFfbfC1TG7N/CLj+MCJZqiMoScL2uGvIhpDOrnO5EjTEhrigUdhgo/cjFAN2ng
+	VZAQA9e1oaiL/LOn5RNTCFrRdX31wm8M/hOOSFjlqWCuUn4BV3o2oS791rkWLpJMpO98
+	r7//owEVbEXtUJYdg/qUTiz7BD9tGtQ+15wXmqNId/ypWw3ByUbMY4AuesAJHrVt6gzL
+	1rrQ==
+X-Received: by 10.194.237.41 with SMTP id uz9mr6298469wjc.80.1422442472150;
+	Wed, 28 Jan 2015 02:54:32 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	eu8sm2239314wib.21.2015.01.28.02.53.41
+	ud9sm2275531wib.5.2015.01.28.02.54.31
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Jan 2015 02:53:42 -0800 (PST)
+	Wed, 28 Jan 2015 02:54:31 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 28 Jan 2015 11:53:43 +0100
+Date: Wed, 28 Jan 2015 11:54:33 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150128105343.GF2477@jama>
-References: <20150122151631.GB2456@jama>
-	<1421981390-3786-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Message-ID: <20150128105433.GG2477@jama>
+References: <1422006376-4509-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1421981390-3786-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <1422006376-4509-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v3] sgpio: add new recipe
+Subject: Re: [meta-oe][PATCH v2] opensc: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,234 +48,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2015 10:53:46 -0000
-X-Groupsio-MsgNum: 54010
+X-List-Received-Date: Wed, 28 Jan 2015 10:54:32 -0000
+X-Groupsio-MsgNum: 54011
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bGR76rFJjkSxVeRa"
+	protocol="application/pgp-signature"; boundary="7uYPyRQQ5N0D02nI"
 Content-Disposition: inline
 
---bGR76rFJjkSxVeRa
+--7uYPyRQQ5N0D02nI
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 23, 2015 at 10:49:50AM +0800, Li xin wrote:
-> Intel SGPIO enclosure management utility.
+On Fri, Jan 23, 2015 at 05:46:16PM +0800, Li xin wrote:
+> OpenSC provides a set of libraries and utilities to work with smart cards.
+> Its main focus is on cards that support cryptographic operations,
+> and facilitate their use in security applications such as authentication,
+> mail encryption and digital signatures.
 >=20
 > Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 > ---
->  .../sgpio/sgpio/Makefile-error-fix.patch           | 127 +++++++++++++++=
+>  meta-oe/recipes-support/opensc/opensc_0.14.0.bb | 42 +++++++++++++++++++=
 ++++++
->  meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb   |  26 +++++
->  2 files changed, 153 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/sgpio/sgpio/Makefile-error-f=
-ix.patch
->  create mode 100644 meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
+>  1 file changed, 42 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/opensc/opensc_0.14.0.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/sgpio/sgpio/Makefile-error-fix.patc=
-h b/meta-oe/recipes-extended/sgpio/sgpio/Makefile-error-fix.patch
+> diff --git a/meta-oe/recipes-support/opensc/opensc_0.14.0.bb b/meta-oe/re=
+cipes-support/opensc/opensc_0.14.0.bb
 > new file mode 100644
-> index 0000000..709f831
+> index 0000000..bdb8d23
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/sgpio/sgpio/Makefile-error-fix.patch
-> @@ -0,0 +1,127 @@
-> +Fix Makefile:
+> +++ b/meta-oe/recipes-support/opensc/opensc_0.14.0.bb
+> @@ -0,0 +1,42 @@
+> +SUMMARY =3D "Smart card library and applications"
+> +DESCRIPTION =3D "OpenSC is a tool for accessing smart card devices. Basi=
+c \
+> +functionality (e.g. SELECT FILE, READ BINARY) should work on any ISO \
+> +7816-4 compatible smart card. Encryption and decryption using private \
+> +keys on the smart card is possible with PKCS \
+> +such as the FINEID (Finnish Electronic IDentity) card. Swedish Posten \
+> +eID cards have also been confirmed to work."
 > +
-> +* change the file format from dos to unix to avoid do_patch failed.
-> +* override gcc,SBIN_DIR and INSTALL for cross-compilation.
-
-And now it fails :)
-
-ERROR: Command Error: exit status: 1  Output:
-Applying patch Makefile-error-fix.patch
-patching file Makefile
-Hunk #1 FAILED at 1.
-1 out of 1 hunk FAILED -- rejects in file Makefile
-Patch Makefile-error-fix.patch does not apply (enforce with -f)
-ERROR: Function failed: patch_do_patch
-NOTE: Running task 24080 of 31430 (ID: 15862, /home/jenkins/oe/world/shr-co=
-re/meta-openembedded/meta-gnome/recipes-gnome/libwnck/libwnck3_3.0.2.bb, do=
-_rm_work_all)
-ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
-ibc/work/armv5te-oe-linux-gnueabi/sgpio/1.2.0.10-r0/temp/log.do_patch.22993
-NOTE: recipe sgpio-1.2.0.10-r0: task do_patch: Failed
-ERROR: Task 15924 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
-e/recipes-extended/sgpio/sgpio_1.2.0.10.bb, do_patch) failed with exit code=
- '1'
-
-> +Upstream-Status: pending
+> +HOMEPAGE =3D "https://github.com/OpenSC/OpenSC/wiki"
 > +
-> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +---
-> + Makefile | 107 ++++++++++++++++++++++++++++++++------------------------=
--------
-> + 1 file changed, 55 insertions(+), 52 deletions(-)
+> +SRC_URI =3D "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz"
+> +SRC_URI[md5sum] =3D "1ee31dc2e89860458fd984e0cac9795e"
+> +SRC_URI[sha256sum] =3D "ffe8bcc704f2ab9a05c6781bc815f00eaf75cba0a1bd21e3=
+142b9194a7bed5c9"
 > +
-> +diff --git a/Makefile b/Makefile
-> +index 278d966..c2b0bc7 100755
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -1,52 +1,55 @@
-> +-########################################################################
-> +-# Copyright (C) 2007-2008, Intel Corp. All rights reserved.
-> +-#
-> +-#
-> +-# This program is free software; you can redistribute it and/or modify =
-it under
-> +-# the terms of the GNU General Public License as published by the Free =
-Software
-> +-# Foundation; either version 2 of the License, or (at your option) any =
-later version.
-> +-#
-> +-# This program is distributed in the hope that it will be useful, but
-> +-# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTAB=
-ILITY or
-> +-# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License=
-=20
-> +-# for more details.
-> +-#
-> +-# You should have received a copy of the GNU General Public License alo=
-ng
-> +-# with this program; if not, write to the Free Software Foundation, Inc=
-=2E,
-> +-# 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-> +-########################################################################
-> +-
-> +-
-> +-# Intel SGPIO enclosure management utility
-> +-#
-> +-# Author: Eric R Hall <Eric.R.Hall@intel.com>
-> +-
-> +-
-> +-MANDIR ?=3D /usr/local/man
-> +-ALL =3D sgpio
-> +-
-> +-all: $(ALL)
-> +-
-> +-sgpio.o: sgpio.c
-> +-	gcc -g -Wall -c sgpio.c
-> +-
-> +-sgpio: sgpio.o
-> +-	gcc -g sgpio.o -o sgpio
-> +-
-> +-clean:
-> +-	rm -f sgpio.o sgpio
-> +-
-> +-install: $(ALL)
-> +-	for i in $(ALL); do \
-> +-		install $$i /sbin/$$i; \
-> +-	done
-> +-	install -d $(MANDIR)/man1
-> +-	install -m 0644 *.1 $(MANDIR)/man1
-> +-
-> +-uninstall:
-> +-	for i in $(ALL); do \
-> +-		rm -f /sbin/$$i; \
-> +-	done
-> +-	for i in $(ALL:=3D.1); do \
-> +-		rm -f $(MANDIR)/man1/$$i; \
-> +-	done
-> ++########################################################################
-> ++# Copyright (C) 2007-2008, Intel Corp. All rights reserved.
-> ++#
-> ++#
-> ++# This program is free software; you can redistribute it and/or modify =
-it under
-> ++# the terms of the GNU General Public License as published by the Free =
-Software
-> ++# Foundation; either version 2 of the License, or (at your option) any =
-later version.
-> ++#
-> ++# This program is distributed in the hope that it will be useful, but
-> ++# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTAB=
-ILITY or
-> ++# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License=
-=20
-> ++# for more details.
-> ++#
-> ++# You should have received a copy of the GNU General Public License alo=
-ng
-> ++# with this program; if not, write to the Free Software Foundation, Inc=
-=2E,
-> ++# 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-> ++########################################################################
-> ++
-> ++
-> ++# Intel SGPIO enclosure management utility
-> ++#
-> ++# Author: Eric R Hall <Eric.R.Hall@intel.com>
-> ++
-> ++
-> ++MANDIR ?=3D /usr/local/man
-> ++SBIN_DIR =3D /sbin
-> ++INSTALL =3D/usr/bin/install -c
-> ++ALL =3D sgpio
-> ++CFLAGS =3D -g -Wall
-> ++
-> ++all: $(ALL)
-> ++
-> ++sgpio.o: sgpio.c
-> ++	${CC} $(CFLAGS) -c sgpio.c
-> ++
-> ++sgpio: sgpio.o
-> ++	${CC} -g sgpio.o -o sgpio
-> ++
-> ++clean:
-> ++	rm -f sgpio.o sgpio
-> ++
-> ++install: $(ALL)
-> ++	for i in $(ALL); do \
-> ++		$(INSTALL) -D $$i $(SBIN_DIR)/$$i; \
-> ++	done
-> ++	$(INSTALL) -d $(MANDIR)/man1
-> ++	$(INSTALL) -m 0644 *.1 $(MANDIR)/man1
-> ++
-> ++uninstall:
-> ++	for i in $(ALL); do \
-> ++		rm -f /sbin/$$i; \
-> ++	done
-> ++	for i in $(ALL:=3D.1); do \
-> ++		rm -f $(MANDIR)/man1/$$i; \
-> ++	done
-> +--=20
-> +1.8.3.1
+> +S =3D "${WORKDIR}/OpenSC-${PV}"
+> +LICENSE =3D "LGPLv2+"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7fbc338309ac38fefcd64b04bb903=
+e34"
 > +
-> diff --git a/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb b/meta-oe/r=
-ecipes-extended/sgpio/sgpio_1.2.0.10.bb
-> new file mode 100644
-> index 0000000..9807a31
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/sgpio/sgpio_1.2.0.10.bb
-> @@ -0,0 +1,26 @@
-> +SUMMARY =3D "SGPIO captive backplane tool"
-> +DESCRIPTION =3D "Intel SGPIO enclosure management utility"
+> +inherit autotools pkgconfig
+> +DEPENDS =3D "openct pcsc-lite virtual/libiconv openssl"
 > +
-> +SRC_URI =3D " \
-> +    http://pkgs.fedoraproject.org/repo/pkgs/${BPN}/${BPN}-1.2-0.10-src.t=
-ar.gz/a417bf68da4e9bd79a4664c11d7debd1/${BPN}-1.2-0.10-src.tar.gz \
-> +    file://Makefile-error-fix.patch \
+> +EXTRA_OECONF =3D " \
+> +    --disable-static \
+> +    --enable-openct \
+> +    --disable-pcsc \
+> +    --disable-ctapi \
+> +    --enable-doc \
 > +"
-> +SRC_URI[md5sum] =3D "a417bf68da4e9bd79a4664c11d7debd1"
-> +SRC_URI[sha256sum] =3D "9bf8c42acaa247efd9321bdb1fc2390022f0c554d77fbbd4=
-a7363d990fc0270b"
+> +EXTRA_OEMAKE =3D "DESTDIR=3D${D}"
 > +
-> +S =3D "${WORKDIR}/${PN}"
+> +RDEPENDS_${PN} =3D "readline"
 > +
-> +LICENSE =3D "GPLv2+"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE_GPL;md5=3D393a5ca445f6965873eca0259=
-a17f833"
-> +
-> +do_compile_prepend() {
-> +    oe_runmake clean
-> +}
-> +
-> +do_install() {
-> +    oe_runmake install \
-> +        INSTALL=3D"/usr/bin/install -p" \
-> +        DESTDIR=3D${D} \
-> +        SBIN_DIR=3D${D}/${sbindir} \
-> +        MANDIR=3D${D}/${mandir}
-> +}
+> +FILES_${PN} +=3D "\
+> +    ${libdir}/opensc-pkcs11.so \
+> +    ${libdir}/onepin-opensc-pkcs11.so \
+> +    ${libdir}/pkcs11-spy.so \
+> +"
+> +FILES_${PN}-dev +=3D "\
+> +    ${libdir}/pkcs11/opensc-pkcs11.so \
+> +    ${libdir}/pkcs11/onepin-opensc-pkcs11.so \
+> +    ${libdir}/pkcs11/pkcs11-spy.so \
+> +"
+
+Fails to build in world:
+
+| checking for OPENCT... yes
+| checking XSLTPROC requirement... configure: error: Missing xslstylesheets=
+dir
+| Configure failed. The contents of all config.log files follows to aid deb=
+ugging
+| ERROR: oe_runconf failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
+s/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/opensc/0.14.0-r=
+0/temp/log.do_configure.22998)
+NOTE: recipe opensc-0.14.0-r0: task do_configure: Failed
+ERROR: Task 8944 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe=
+/recipes-support/opensc/opensc_0.14.0.bb, do_configure) failed with exit co=
+de '1'
+
 > --=20
 > 1.8.4.2
 >=20
@@ -289,16 +154,16 @@ a17f833"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---bGR76rFJjkSxVeRa
+--7uYPyRQQ5N0D02nI
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlTIv7cACgkQN1Ujt2V2gBwU0ACgqI2yxsStEC7KK7yYUM0jULuG
-5ukAoIi8N15pPof9kRn7R1s91BtV/3fk
-=ZijS
+iEYEARECAAYFAlTIv+kACgkQN1Ujt2V2gBxxZQCeMj+Jyu4TPOCYQUrvb1xLhcI0
+NSAAn1DzzhCtz7ynhCp5v9mBRiBY25J5
+=2VNH
 -----END PGP SIGNATURE-----
 
---bGR76rFJjkSxVeRa--
+--7uYPyRQQ5N0D02nI--
