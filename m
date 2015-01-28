@@ -1,25 +1,37 @@
-Return-Path: <raphael.freudiger@siemens.com>
-X-Greylist: delayed 465 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 28 Jan 2015 15:48:17 UTC
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id D731472608
+Return-Path: <ross.burton@intel.com>
+Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 98E4460017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 15:48:17 +0000 (UTC)
-Received: from mail1.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.14.3/8.14.3) with ESMTP id t0SFeRvl022852
+	Wed, 28 Jan 2015 15:51:49 +0000 (UTC)
+Received: by mail-we0-f173.google.com with SMTP id w62so21616576wes.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 16:40:27 +0100
-Received: from localhost.localdomain (MD1AT2FC.ww002.siemens.net
-	[139.16.78.251])
-	by mail1.siemens.de (8.14.3/8.14.3) with ESMTP id t0SFeQB3006226;
-	Wed, 28 Jan 2015 16:40:27 +0100
-From: Raphael Freudiger <raphael.freudiger@siemens.com>
+	Wed, 28 Jan 2015 07:51:50 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=vH0xvuhOC0p0jiqRQs2QLXq1m3e0rp2LcDqyqe0mHC4=;
+	b=Dn8KKHOG9KkAUgQQG0gmNisL/C5fJf5p7mPI4CHgVcjV0hJkyJupnpph6HbTKqhvQX
+	GRwGhm2rvS38mbriwC23SsHzy1EmJXC6zRPUzgye0tn9J/GS3WV+1LB7iAcEbGhsxkAE
+	8GxTLrFjhFH30XMGJ5kWCB7EzzuGdBKieuVzhCNlZyh8ijyS5oK0FRPCmLlF9+i+BN1E
+	nRpL7dkIFW8Rs1V2gSTV2aSbZ4w8NuqulC1x0B2eOXan9x6emoXq4KwCElpf/dY8vfm+
+	zwy3EGincaA0CIMacb70gu6ne0RT3TzYnq2kayeI9JQkgPRaActexko9kFXwkkJ+sQX4
+	Lxlg==
+X-Gm-Message-State: ALoCoQmBPerVIg7gH1Gxynn7JUVl8IJxteakdJOom8Y3qDpiD2dkMHrJKPBiErIGORaZ2a40c2We
+X-Received: by 10.180.23.36 with SMTP id j4mr8071247wif.69.1422460310058;
+	Wed, 28 Jan 2015 07:51:50 -0800 (PST)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35])
+	by mx.google.com with ESMTPSA id q10sm6626050wjr.41.2015.01.28.07.51.49
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 28 Jan 2015 07:51:49 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Jan 2015 16:40:13 +0100
-Message-Id: <1422459613-29410-1-git-send-email-raphael.freudiger@siemens.com>
+Date: Wed, 28 Jan 2015 15:50:05 +0000
+Message-Id: <1422460205-18051-1-git-send-email-ross.burton@intel.com>
 X-Mailer: git-send-email 1.7.10.4
-Cc: Raphael Freudiger <raphael.freudiger@siemens.com>
-Subject: [meta-oe][PATCH] p7zip: new recipe
+Subject: [PATCH][meta-gnome] gnome-settings-daemon: add PACKAGECONFIG for smartcard support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,77 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jan 2015 15:48:20 -0000
+X-List-Received-Date: Wed, 28 Jan 2015 15:51:51 -0000
 
-p7zip is the command line version of 7-Zip for Unix/Linux.
+Smartcard support is enabled by default and results in a floating dependency on
+NSS.  Add a PACKAGECONFIG for this and disable it by default.
 
-Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../p7zip/files/do_not_override_compiler.patch     |   24 ++++++++++++++++++++
- meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb     |   22 ++++++++++++++++++
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
- create mode 100644 meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+ .../gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb             |    1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
-new file mode 100644
-index 0000000..c97a1ee
---- /dev/null
-+++ b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
-@@ -0,0 +1,24 @@
-+do not override compiler
-+
-+The default makefile sets the compiler to g++ or gcc. This leads to a wrong architecture when cross-compiling.
-+Remove the hardcoded compiler and just append the flags to CXX and CC.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-+Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
-+
-+Index: p7zip_9.20.1/makefile.machine
-+=====================================================================
-+--- p7zip_9.20.1.orig/makefile.machine	2011-03-13 12:54:57.000000000 +0100
-++++ p7zip_9.20.1/makefile.machine	2014-11-12 16:20:22.880349826 +0100
-+@@ -10,8 +10,8 @@
-+ 	-D_7ZIP_LARGE_PAGES \
-+ 	$(LOCAL_FLAGS)
-+ 
-+-CXX=g++ $(ALLFLAGS)
-+-CC=gcc $(ALLFLAGS)
-++CXX+=$(ALLFLAGS)
-++CC+=$(ALLFLAGS)
-+ CC_SHARED=-fPIC
-+ LINK_SHARED=-fPIC -shared
-+ 
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-new file mode 100644
-index 0000000..b67db00
---- /dev/null
-+++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
-+HOMEPAGE = "http://www.7-zip.org/"
-+LICENSE = "LGPL-2.1+"
-+LIC_FILES_CHKSUM = "file://./DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a"
-+PR = "r1"
-+
-+SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
-+          file://do_not_override_compiler.patch"
-+
-+S = "${WORKDIR}/${PN}_${PV}"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/bin/* ${D}${bindir}    
-+}
-+
-+
-+SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
-+SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+index 729d750..f45acab 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+@@ -15,6 +15,7 @@ S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)"
+ PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio glib-2.0 libcanberra"
++PACKAGECONFIG[smartcard] = "--enable-smartcard-support,--disable-smartcard-support,nss"
+ 
+ EXTRA_OECONF = " \
+     --x-includes=${STAGING_INCDIR} \
 -- 
 1.7.10.4
 
