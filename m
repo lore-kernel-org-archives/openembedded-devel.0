@@ -1,22 +1,24 @@
-Return-Path: <milo-software@users.sourceforge.net>
-Received: from smtp02.online.nl (smtp02.online.nl [194.134.41.32])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BD41718DD
+Return-Path: <Chong.Lu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DFE337147D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jan 2015 18:34:57 +0000 (UTC)
-Received: from smtp02.online.nl (localhost [127.0.0.1])
-	by smtp02.online.nl (Postfix) with ESMTP id 4813AA1D9;
-	Tue, 27 Jan 2015 19:34:56 +0100 (CET)
-Received: from phenom.local (s55969068.adsl.online.nl [85.150.144.104])
-	by smtp02.online.nl (Postfix) with ESMTP;
-	Tue, 27 Jan 2015 19:34:56 +0100 (CET)
-From: Mike Looijmans <milo-software@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Jan 2015 19:34:53 +0100
-Message-Id: <1422383693-15316-1-git-send-email-milo-software@users.sourceforge.net>
-X-Mailer: git-send-email 1.7.9.5
-X-Online-Scanned: by Cloudmark authority (on smtp02.online.nl)
-Cc: Mike Looijmans <milo-software@users.sourceforge.net>
-Subject: [PATCH] python-twisted: Create a separate source code package and bin package
+	Wed, 28 Jan 2015 03:28:51 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t0S3SphK000045
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Jan 2015 19:28:51 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Tue, 27 Jan 2015 19:28:50 -0800
+From: Chong Lu <Chong.Lu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Jan 2015 11:23:43 +0800
+Message-ID: <1422415423-19807-1-git-send-email-Chong.Lu@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] samba: disable service by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,53 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jan 2015 18:35:04 -0000
+X-List-Received-Date: Wed, 28 Jan 2015 03:28:53 -0000
+Content-Type: text/plain
 
-Python-twisted installs about 1MB of ".py" files that are not actually
-being used for anything. To save on flash space on devices, move the
-source code into its own package.
+Disable smb, nmb, winbind service by default.
 
-This modification has been in use for several years in the OpenPLi project,
-which heavily leans on twisted for the GUI and web interfaces, and did not
-cause any problems.
-
-Move the /usr/bin/ scripts into their own package as well. Installing
-python-twisted will still install these scripts.
-
-Signed-off-by: Mike Looijmans <milo-software@users.sourceforge.net>
+Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 ---
- .../python/python-twisted_13.2.0.bb                |   12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ meta-oe/recipes-connectivity/samba/samba.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-index 8930169..2b433f7 100644
---- a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-@@ -38,7 +38,13 @@ PACKAGES += "\
-     ${PN}-core \
- "
+diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+index fd96bbe..b04a9dd 100644
+--- a/meta-oe/recipes-connectivity/samba/samba.inc
++++ b/meta-oe/recipes-connectivity/samba/samba.inc
+@@ -20,6 +20,8 @@ inherit autotools-brokensep update-rc.d systemd
+ SYSTEMD_PACKAGES = "${PN} winbind"
+ SYSTEMD_SERVICE_${PN} = "nmb.service smb.service"
+ SYSTEMD_SERVICE_winbind = "winbind.service"
++SYSTEMD_AUTO_ENABLE_${PN} = "disable"
++SYSTEMD_AUTO_ENABLE_winbind = "disable"
  
-+PACKAGES =+ "\
-+    ${PN}-src \
-+    ${PN}-bin \
-+"
-+
- RDEPENDS_${PN} = "\
-+    ${PN}-bin \
-     ${PN}-conch \
-     ${PN}-lore \
-     ${PN}-mail \
-@@ -233,3 +239,9 @@ ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/.debug \
- ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/.debug \
- "
- 
-+RDEPENDS_{PN}-src = "${PN}"
-+FILES_${PN}-src = " \
-+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py \
-+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*.py \
-+	${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*.py \
-+	"
+ SAMBAMMAP = "no"
+ SAMBAMMAP_libc-glibc = "yes"
 -- 
-1.7.9.5
+1.9.1
 
 
