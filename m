@@ -1,14 +1,14 @@
 Return-Path: <henning@itconsulting-heinold.de>
 Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 15D5872608
+	by mail.openembedded.org (Postfix) with ESMTP id 14F4E60017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jan 2015 22:07:21 +0000 (UTC)
+	Wed, 28 Jan 2015 22:07:20 +0000 (UTC)
 Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7B848D4025E;
-	Wed, 28 Jan 2015 23:07:21 +0100 (CET)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 01C3CD40345;
+	by mail.familie-heinold.de (Postfix) with ESMTP id 07D32D40347;
 	Wed, 28 Jan 2015 23:07:19 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 05B6AD4025E;
+	Wed, 28 Jan 2015 23:07:16 +0100 (CET)
 X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
 	h873313.serverkompetenz.net
 X-Spam-Level: 
@@ -16,16 +16,14 @@ X-Spam-Status: No, score=-1.5 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.3.2
 Received: from localhost.localdomain (e179143082.adsl.alicedsl.de
 	[85.179.143.82]) by mail.familie-heinold.de (Postfix) with ESMTPSA;
-	Wed, 28 Jan 2015 23:07:18 +0100 (CET)
+	Wed, 28 Jan 2015 23:07:15 +0100 (CET)
 From: Henning Heinold <henning@itconsulting-heinold.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Jan 2015 23:07:11 +0100
-Message-Id: <1422482831-12376-2-git-send-email-henning@itconsulting-heinold.de>
+Date: Wed, 28 Jan 2015 23:07:10 +0100
+Message-Id: <1422482831-12376-1-git-send-email-henning@itconsulting-heinold.de>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1422482831-12376-1-git-send-email-henning@itconsulting-heinold.de>
-References: <1422482831-12376-1-git-send-email-henning@itconsulting-heinold.de>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [PATCH] libspatialite: Upgrade to version 4.2.0
+Subject: [meta-oe][PATCH v2] libspatialite: Upgrade to version 4.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,14 +53,16 @@ V2: squash .inc into .bb and remove PR and INC_PR
 Signed-off-by: Henning Heinold <henning@itconsulting-heinold.de>
 ---
  .../libspatialite-4.2.0/geos-config.patch          |  17 ++
+ .../libspatialite/libspatialite.inc                |  16 --
  .../fix-the-configure-script-and-freexl.patch      | 200 ---------------------
  .../libspatialite/libspatialite_3.0.1.bb           |   9 -
- .../{libspatialite.inc => libspatialite_4.2.0.bb}  |  13 +-
- 4 files changed, 27 insertions(+), 212 deletions(-)
+ .../libspatialite/libspatialite_4.2.0.bb           |  23 +++
+ 5 files changed, 40 insertions(+), 225 deletions(-)
  create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch
+ delete mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite.inc
  delete mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
  delete mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite_3.0.1.bb
- rename meta-oe/recipes-navigation/libspatialite/{libspatialite.inc => libspatialite_4.2.0.bb} (56%)
+ create mode 100644 meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
 
 diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite-4.2.0/geos-config.patch
 new file mode 100644
@@ -87,6 +87,28 @@ index 0000000..28bd7da
 +   AC_SUBST([GEOS_LDFLAGS])
 +   AC_SUBST([GEOS_CFLAGS])	
 +   # Ensure that we can parse geos_c.h
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc b/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
+deleted file mode 100644
+index b5c3879..0000000
+--- a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
++++ /dev/null
+@@ -1,16 +0,0 @@
+-DESCRIPTION = "Library extending the SQLite core to support fully fledged Spatial SQL capabilities"
+-HOMEPAGE = "https://www.gaia-gis.it/fossil/libspatialite/"
+-SECTION = "libs"
+-DEPENDS = "proj geos sqlite3"
+-
+-INC_PR = "r0"
+-
+-LICENSE = "MPLv1.1 & GPLv2+ & LGPLv2.1+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
+-
+-SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz"
+-
+-inherit autotools pkgconfig
+-
+-EXTRA_OECONF = "--enable-freexl=no"
+-
 diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch b/meta-oe/recipes-navigation/libspatialite/libspatialite/fix-the-configure-script-and-freexl.patch
 deleted file mode 100644
 index 0cd0c3f..0000000
@@ -308,28 +330,26 @@ index 1cb72e8..0000000
 -
 -SRC_URI =+ "file://fix-the-configure-script-and-freexl.patch"
 -
-diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
-similarity index 56%
-rename from meta-oe/recipes-navigation/libspatialite/libspatialite.inc
-rename to meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
-index b5c3879..d66dc87 100644
---- a/meta-oe/recipes-navigation/libspatialite/libspatialite.inc
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
+new file mode 100644
+index 0000000..d66dc87
+--- /dev/null
 +++ b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
-@@ -1,9 +1,7 @@
- DESCRIPTION = "Library extending the SQLite core to support fully fledged Spatial SQL capabilities"
- HOMEPAGE = "https://www.gaia-gis.it/fossil/libspatialite/"
- SECTION = "libs"
--DEPENDS = "proj geos sqlite3"
--
--INC_PR = "r0"
+@@ -0,0 +1,23 @@
++DESCRIPTION = "Library extending the SQLite core to support fully fledged Spatial SQL capabilities"
++HOMEPAGE = "https://www.gaia-gis.it/fossil/libspatialite/"
++SECTION = "libs"
 +DEPENDS = "proj geos sqlite3 libxml2 zlib"
- 
- LICENSE = "MPLv1.1 & GPLv2+ & LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
-@@ -14,3 +12,12 @@ inherit autotools pkgconfig
- 
- EXTRA_OECONF = "--enable-freexl=no"
- 
++
++LICENSE = "MPLv1.1 & GPLv2+ & LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0e92e1a36cc384b60f5b31dde0bdd39e"
++
++SRC_URI = "http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-${PV}.tar.gz"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = "--enable-freexl=no"
++
 +# package plugins for SQLite3
 +PACKAGES += "${PN}-plugin"
 +INSANE_SKIP_${PN}-plugin = "dev-so"
