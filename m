@@ -1,24 +1,24 @@
 Return-Path: <hugo.saldanha@aker.com.br>
-X-Greylist: delayed 603 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 29 Jan 2015 20:17:57 UTC
+X-Greylist: delayed 601 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 29 Jan 2015 20:30:57 UTC
 Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id 3E6FA6012B
-	for <openembedded-devel@openembedded.org>;
-	Thu, 29 Jan 2015 20:17:56 +0000 (UTC)
+	by mail.openembedded.org (Postfix) with SMTP id 0D00660034
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Jan 2015 20:30:57 +0000 (UTC)
 Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
-	by asmg.aker.com.br [10.0.1.3]; Thu, 29 Jan 2015 18:17:49 -0200
+	by asmg.aker.com.br [10.0.1.3]; Thu, 29 Jan 2015 18:30:44 -0200
 	(envelope-from hugo.saldanha@aker.com.br)
 Received: from saldanha.aker.com.br (10.4.3.1) by mail.aker.com.br (10.0.0.20)
 	with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Thu, 29 Jan 2015 18:07:23 -0200
+	Thu, 29 Jan 2015 18:20:27 -0200
 From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
-To: openembedded-devel@openembedded.org
-Date: Thu, 29 Jan 2015 18:09:10 -0200
-Message-ID: <1422562150-955-1-git-send-email-hugo.saldanha@aker.com.br>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 29 Jan 2015 18:22:19 -0200
+Message-ID: <1422562939-1146-1-git-send-email-hugo.saldanha@aker.com.br>
 X-Mailer: git-send-email 2.2.2
 MIME-Version: 1.0
 X-AkerSMTPGW-ServerID: 51f68171b98dfe728ef69b3fd9ed422989bd9b1e
-X-AkerSMTPGW-MessageID: 1d7c799fd40aa0e97c8e22430a8a39c50201aa12-10o
+X-AkerSMTPGW-MessageID: c4e125024fd606ce0136db5d399506a437d1635a-10o
 Subject: [meta-networking][PATCH] crda: upgrade to 3.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2015 20:18:06 -0000
+X-List-Received-Date: Thu, 29 Jan 2015 20:31:03 -0000
 Content-Type: text/plain
 
 CRDA has been relicensed under the copyleft-next license.
