@@ -1,35 +1,18 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id AD26B60043
+Return-Path: <ml@communistcode.co.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id B06C360024
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jan 2015 09:47:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="56820214"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Jan 2015 17:44:06 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t0T9ktUi029759;
-	Thu, 29 Jan 2015 17:46:56 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Thu, 29 Jan 2015 17:47:40 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v3] sgpio: add new recipe
-Thread-Index: AQHQNrdnqKlrTgTj00WgZ4zE+lXa7ZzU3dKAgAIClOA=
-Date: Thu, 29 Jan 2015 09:47:35 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E8738F1C4B@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <20150122151631.GB2456@jama>
-	<1421981390-3786-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<20150128105343.GF2477@jama>
-In-Reply-To: <20150128105343.GF2477@jama>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.35]
+	Thu, 29 Jan 2015 10:12:20 +0000 (UTC)
+Message-ID: <54CA078D.5070702@communistcode.co.uk>
+Date: Thu, 29 Jan 2015 10:12:29 +0000
+From: Jack Mitchell <ml@communistcode.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v3] sgpio: add new recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1422517574-31477-1-git-send-email-jackie.huang@windriver.com>
+In-Reply-To: <1422517574-31477-1-git-send-email-jackie.huang@windriver.com>
+Subject: Re: [meta-oe][PATCH] rsyslog: don't call init script in logrotate conf file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,39 +26,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2015 09:47:41 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Jan 2015 10:12:23 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Hi, Jansa:
+On 29/01/15 07:46, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+> 
+> Send HUP signal instead of calling the reload command
+> of init script in logrotate configure file, so that it
+> also works when the init system is systemd.
+> 
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
+> index ba1120a..94ec517 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
+> @@ -9,7 +9,7 @@
+>          delaycompress
+>          compress
+>          postrotate
+> -		/etc/init.d/rsyslog reload 2> /dev/null || true
+> +		/bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
+>          endscript
+>  }
+>  
+> @@ -34,6 +34,6 @@
+>          delaycompress
+>          sharedscripts
+>          postrotate
+> -		/etc/init.d/rsyslog reload 2> /dev/null || true
+> +		/bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
+>          endscript
+>  }
+> 
 
-Thank you very much for your reply.
+This is better than my approach to fixing this as it works with systemd
+also. I would take this patch in favour of my
 
-> ERROR: Command Error: exit status: 1  Output:
-> Applying patch Makefile-error-fix.patch
-> patching file Makefile
-> Hunk #1 FAILED at 1.
-> 1 out of 1 hunk FAILED -- rejects in file Makefile Patch Makefile-error-f=
-ix.patch does
-> not apply (enforce with -f)
-> ERROR: Function failed: patch_do_patch
-> NOTE: Running task 24080 of 31430 (ID: 15862,
-> /home/jenkins/oe/world/shr-core/meta-openembedded/meta-gnome/recipes-gno
-> me/libwnck/libwnck3_3.0.2.bb, do_rm_work_all)
-> ERROR: Logfile of failure stored in:
-> /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/s=
-gpio/
-> 1.2.0.10-r0/temp/log.do_patch.22993
-> NOTE: recipe sgpio-1.2.0.10-r0: task do_patch: Failed
-> ERROR: Task 15924
-> (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extend=
-e
-> d/sgpio/sgpio_1.2.0.10.bb, do_patch) failed with exit code '1'
->=20
-I will rebuild it on my Ubuntu host, and resent the patch.
+[PATCH] rsyslog: init file has been renamed, reflect in logrotate conf file
 
-Best regards,
-Li xin
+Ack from me.
 
+-- 
+  Jack Mitchell (jack@embed.me.uk)
+  Embedded Systems Engineer
+  Cambridgeshire, UK
+  http://www.embed.me.uk
+-- 
 
