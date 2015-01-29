@@ -1,18 +1,21 @@
-Return-Path: <ml@communistcode.co.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id B06C360024
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id EE9BA6018F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jan 2015 10:12:20 +0000 (UTC)
-Message-ID: <54CA078D.5070702@communistcode.co.uk>
-Date: Thu, 29 Jan 2015 10:12:29 +0000
-From: Jack Mitchell <ml@communistcode.co.uk>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
-MIME-Version: 1.0
+	Thu, 29 Jan 2015 11:22:53 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga103.jf.intel.com with ESMTP; 29 Jan 2015 03:18:23 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.09,485,1418112000"; d="scan'208";a="519576050"
+Received: from jamiewei-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.23.125])
+	by orsmga003.jf.intel.com with ESMTP; 29 Jan 2015 03:15:31 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1422517574-31477-1-git-send-email-jackie.huang@windriver.com>
-In-Reply-To: <1422517574-31477-1-git-send-email-jackie.huang@windriver.com>
-Subject: Re: [meta-oe][PATCH] rsyslog: don't call init script in logrotate conf file
+Date: Thu, 29 Jan 2015 11:22:36 +0000
+Message-Id: <1422530556-15569-1-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [meta-oe][PATCH] tmux: remove sed-native from DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,56 +29,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2015 10:12:23 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Jan 2015 11:22:56 -0000
 
-On 29/01/15 07:46, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
-> 
-> Send HUP signal instead of calling the reload command
-> of init script in logrotate configure file, so that it
-> also works when the init system is systemd.
-> 
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-> index ba1120a..94ec517 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/rsyslog.logrotate
-> @@ -9,7 +9,7 @@
->          delaycompress
->          compress
->          postrotate
-> -		/etc/init.d/rsyslog reload 2> /dev/null || true
-> +		/bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
->          endscript
->  }
->  
-> @@ -34,6 +34,6 @@
->          delaycompress
->          sharedscripts
->          postrotate
-> -		/etc/init.d/rsyslog reload 2> /dev/null || true
-> +		/bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
->          endscript
->  }
-> 
+We rely on the host sed all over the place; we don't need sed-native
+here just because it's being used in do_configure.
 
-This is better than my approach to fixing this as it works with systemd
-also. I would take this patch in favour of my
+Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+---
+ meta-oe/recipes-extended/tmux/tmux_1.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-[PATCH] rsyslog: init file has been renamed, reflect in logrotate conf file
-
-Ack from me.
-
+diff --git a/meta-oe/recipes-extended/tmux/tmux_1.6.bb b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+index 5ce99ea..b4294d7 100644
+--- a/meta-oe/recipes-extended/tmux/tmux_1.6.bb
++++ b/meta-oe/recipes-extended/tmux/tmux_1.6.bb
+@@ -5,7 +5,7 @@ SECTION = "console/utils"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://tmux.c;beginline=3;endline=17;md5=8685b4455330a940fab1ff451aa941a0"
+ 
+-DEPENDS = "ncurses libevent sed-native"
++DEPENDS = "ncurses libevent"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/tmux/${BP}.tar.gz"
+ SRC_URI[md5sum] = "3e37db24aa596bf108a0442a81c845b3"
 -- 
-  Jack Mitchell (jack@embed.me.uk)
-  Embedded Systems Engineer
-  Cambridgeshire, UK
-  http://www.embed.me.uk
--- 
+1.9.3
+
 
