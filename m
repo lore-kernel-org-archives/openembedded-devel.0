@@ -1,40 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id DC6CE60034
+Return-Path: <net147@gmail.com>
+Received: from mail-qg0-f51.google.com (mail-qg0-f51.google.com
+	[209.85.192.51])
+	by mail.openembedded.org (Postfix) with ESMTP id BB02065C96
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jan 2015 21:43:21 +0000 (UTC)
-Received: by mail-pa0-f43.google.com with SMTP id eu11so43757909pac.2
+	Fri, 30 Jan 2015 04:01:35 +0000 (UTC)
+Received: by mail-qg0-f51.google.com with SMTP id z107so36541336qgd.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jan 2015 13:43:23 -0800 (PST)
+	Thu, 29 Jan 2015 20:01:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=iYFsOkU9gyUpJStoNe8cauubqaBIPCoZnPgEf711+dg=;
-	b=LF6XIJfiR2hXbnI7m/6qijujj526mSqa7vi4PGMzs46Nqcf3NECFT+cEnaF1c+tNtl
-	Mefy359z/qyVYkQsvWnL5IIiMCvTpaCNQcdT8+f3cb5nZOZuGGfOIP+fL8bTEWCgSYgg
-	hmdkCjV63LjiUqKRrqIs1i0xaktaE3fPJcpcsQUYW6/sQJfsk3ZvwQv8vePlIRiHMh3k
-	gGpXOKM7LDxKbQ/8IEMXbjYWbMNJp0ZRf6cIBVtOWZVSyQ2rBXSRijaMG01WwZrJCQRE
-	WatoFXn6O/qGMjQd7GlxZiliXgyHx2rLmK7HSMORZS6Z0Cl4ybv9QsDO3yXjkTqeSY3m
-	oa/g==
-X-Received: by 10.70.128.107 with SMTP id nn11mr3779644pdb.67.1422567803052;
-	Thu, 29 Jan 2015 13:43:23 -0800 (PST)
-Received: from ?IPv6:2601:c:a700:272f:edf9:51d3:8122:c109?
-	([2601:c:a700:272f:edf9:51d3:8122:c109])
-	by mx.google.com with ESMTPSA id ms9sm8704272pdb.41.2015.01.29.13.43.20
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 29 Jan 2015 13:43:21 -0800 (PST)
-Message-ID: <54CAA977.1000303@gmail.com>
-Date: Thu, 29 Jan 2015 13:43:19 -0800
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=5VkFFlyWgjrOs220DC93/S19oRmQA6d/edCuOFg663M=;
+	b=qG4R1QVhwlZMlRHWmkCMLjZpfS9p0u6sqxJ0xtZH7qI6iXf5wbSGoLdVq5vhVAqQdQ
+	Lodr0sDnwxXqpTekbNnpSQTPdnmTDrJQk+tSUsTPhah2x6rUueRwP+mqJBFpXwSM7m8G
+	EoRK5gWaKaijK7NEdargY4FBZVWewCp3EbL+NkvOOXHNLBLen0A1O9Xj2/jq4LKE3G92
+	2gOHdgivBjYkWEvE4bMzKebhxe2mPXDDRKFHtJTZqPsd6kc0U0mzeY3tRLPy5LMT8nSf
+	JnxG3SO5TdmCewyhyhFFv2UAJdgXW8MsfKQPkfTynqr1pSy4WGzkm3iK/9FgwSJyr3wN
+	IJ6Q==
 MIME-Version: 1.0
-To: Armin Kuster <akuster808@gmail.com>, 
-	openembedded-devel@lists.openembedded.org
-References: <1422475187-9011-1-git-send-email-akuster808@gmail.com>
-In-Reply-To: <1422475187-9011-1-git-send-email-akuster808@gmail.com>
-Subject: Re: [meta-oe][PATCH] libcap-ng: move pakage from other layers
+X-Received: by 10.140.22.234 with SMTP id 97mr7999536qgn.21.1422590496782;
+	Thu, 29 Jan 2015 20:01:36 -0800 (PST)
+Received: by 10.96.28.129 with HTTP; Thu, 29 Jan 2015 20:01:36 -0800 (PST)
+In-Reply-To: <1422459613-29410-1-git-send-email-raphael.freudiger@siemens.com>
+References: <1422459613-29410-1-git-send-email-raphael.freudiger@siemens.com>
+Date: Fri, 30 Jan 2015 15:01:36 +1100
+Message-ID: <CANwerB0-7GuxY5Ekd6Utt=R=2eKDo2sdVqfXrQcXzWsYyW7-OQ@mail.gmail.com>
+From: Jonathan Liu <net147@gmail.com>
+To: Raphael Freudiger <raphael.freudiger@siemens.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] p7zip: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,115 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jan 2015 21:43:30 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Jan 2015 04:01:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Did I submit this incorrectly? I don't see it in the patch queue.
+Hi Raphael,
 
-- Armin
-
-On 01/28/2015 11:59 AM, Armin Kuster wrote:
-> From: Armin Kuster <akuster@mvista.com>
->
-> Please consider this package for inclusion to meta-oe so we
-> can remove it from both meta-security and meta-selinux.
->
-> Signed-off-by: Armin Kuster <akuster@mvista.com>
-> ---
->   .../libcap-ng/libcap-ng/python.patch               | 39 ++++++++++++++++++++++
->   .../recipes-support/libcap-ng/libcap-ng_0.7.4.bb   | 37 ++++++++++++++++++++
->   2 files changed, 76 insertions(+)
->   create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
->   create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
->
-> diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
+On 29 January 2015 at 02:40, Raphael Freudiger
+<raphael.freudiger@siemens.com> wrote:
+> diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
 > new file mode 100644
-> index 0000000..d82ceb4
+> index 0000000..b67db00
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
-> @@ -0,0 +1,39 @@
-> +configure.ac - Avoid an incorrect check for python.
-> +Makefile.am - avoid hard coded host include paths.
-> +
-> +Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
-> +
-> +--- libcap-ng-0.6.5/configure.ac.orig	2012-01-17 13:59:03.645898989 -0600
-> ++++ libcap-ng-0.6.5/configure.ac	2012-01-17 13:59:46.353959252 -0600
-> +@@ -120,17 +120,8 @@
-> + else
-> + AC_MSG_RESULT(testing)
-> + AM_PATH_PYTHON
-> +-if test -f /usr/include/python${am_cv_python_version}/Python.h ; then
-> +-	python_found="yes"
-> +-	AC_MSG_NOTICE(Python bindings will be built)
-> +-else
-> +-	python_found="no"
-> +-	if test x$use_python = xyes ; then
-> +-		AC_MSG_ERROR([Python explicitly required and python headers found])
-> +-	else
-> +-		AC_MSG_WARN("Python headers not found - python bindings will not be made")
-> +-	fi
-> +-fi
-> ++python_found="yes"
-> ++AC_MSG_NOTICE(Python bindings will be built)
-> + fi
-> + AM_CONDITIONAL(HAVE_PYTHON, test ${python_found} = "yes")
-> +
-> +--- libcap-ng-0.6.5/bindings/python/Makefile.am.orig	2010-11-03 12:31:59.000000000 -0500
-> ++++ libcap-ng-0.6.5/bindings/python/Makefile.am	2012-01-17 14:05:50.199834467 -0600
-> +@@ -24,7 +24,8 @@
-> + CONFIG_CLEAN_FILES = *.loT *.rej *.orig
-> + AM_CFLAGS = -fPIC -DPIC
-> + PYLIBVER ?= python$(PYTHON_VERSION)
-> +-INCLUDES = -I. -I$(top_builddir) -I/usr/include/$(PYLIBVER)
-> ++PYINC ?= /usr/include/$(PYLIBVER)
-> ++INCLUDES = -I. -I$(top_builddir) -I$(PYINC)
-> + LIBS = $(top_builddir)/src/libcap-ng.la
-> + pyexec_PYTHON = capng.py
-> + pyexec_LTLIBRARIES = _capng.la
-> diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
-> new file mode 100644
-> index 0000000..2e778cb
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
-> @@ -0,0 +1,37 @@
-> +SUMMARY = "An alternate posix capabilities library"
-> +DESCRIPTION = "The libcap-ng library is intended to make programming \
-> +with POSIX capabilities much easier than the traditional libcap library."
-> +HOMEPAGE = "http://freecode.com/projects/libcap-ng"
-> +SECTION = "base"
-> +LICENSE = "GPLv2+ & LGPLv2.1+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-> +		    file://COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
-> +
-> +SRC_URI = "http://people.redhat.com/sgrubb/${BPN}/${BP}.tar.gz \
-> +	   file://python.patch"
-> +
-> +inherit lib_package autotools pythonnative
-> +
-> +SRC_URI[md5sum] = "55c57c0673b944ea1a755bcb2636dabd"
-> +SRC_URI[sha256sum] = "48a2083276f9820cb92dcb05d001b30733bcbf48c14c230303cac3cd08b45b6b"
-> +
-> +DEPENDS += "swig-native python"
-> +
-> +EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' PYINC='${STAGING_INCDIR}/${PYLIBVER}'"
-> +
-> +PACKAGES += "${PN}-python"
-> +
-> +FILES_${PN}-dbg += "${libdir}/python${PYTHON_BASEVERSION}/*/.debug"
-> +FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
-> +
-> +BBCLASSEXTEND = "native"
-> +
-> +do_install_append() {
-> +	# Moving libcap-ng to base_libdir
-> +	if [ ! ${D}${libdir} -ef ${D}${base_libdir} ]; then
-> +		mkdir -p ${D}/${base_libdir}/
-> +		mv -f ${D}${libdir}/libcap-ng.so.* ${D}${base_libdir}/
-> +		relpath=${@os.path.relpath("${base_libdir}", "${libdir}")}
-> +		ln -sf ${relpath}/libcap-ng.so.0.0.0 ${D}${libdir}/libcap-ng.so
-> +	fi
-> +}
->
+> +++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
+> +HOMEPAGE = "http://www.7-zip.org/"
+
+> +LICENSE = "LGPL-2.1+"
+> +LIC_FILES_CHKSUM = "file://./DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a"
+The unRAR license is missing (it is in DOCS/unRarLicense.txt and
+mentioned in DOCS/License.txt).
+
+> +PR = "r1"
+
+Regards,
+Jonathan
 
