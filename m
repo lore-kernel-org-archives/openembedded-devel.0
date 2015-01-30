@@ -1,46 +1,36 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.4])
-	by mail.openembedded.org (Postfix) with ESMTP id A5D2460132
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 39F1165D4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 16:51:27 +0000 (UTC)
-Received: from [216.82.249.147] by server-4.bemta-12.messagelabs.com id
-	61/8F-03166-E86BBC45; Fri, 30 Jan 2015 16:51:26 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-2.tower-29.messagelabs.com!1422636685!36678667!1
-X-Originating-IP: [66.77.174.14]
-X-StarScan-Received: 
-X-StarScan-Version: 6.12.5; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 16236 invoked from network); 30 Jan 2015 16:51:26 -0000
-Received: from mail.mx2.digi.com (HELO mcl-sms-ns2.DIGI.COM) (66.77.174.14)
-	by server-2.tower-29.messagelabs.com with RC4-SHA encrypted SMTP;
-	30 Jan 2015 16:51:26 -0000
-Received: from MCL-VMS-XCH01.digi.com (10.5.8.49) by mail.mx2.digi.com
-	(172.16.1.14) with Microsoft SMTP Server (TLS) id 8.3.389.2;
-	Fri, 30 Jan 2015 10:51:09 -0600
-Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 30 Jan 2015 10:51:24 -0600
-Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
-	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0224.002;
-	Fri, 30 Jan 2015 17:51:22 +0100
-From: "Viguera, Javier" <Javier.Viguera@digi.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-networking] crda-1.1.3 broken in dylan, dora, daisy and
-	dizzy
-Thread-Index: AdA8rPh2Zfsck6QFTD2cTRlgCM//eA==
-Date: Fri, 30 Jan 2015 16:51:22 +0000
-Message-ID: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.101.2.188]
-x-kse-antivirus-interceptor-info: scan successful
-x-kse-antivirus-info: Clean
-MIME-Version: 1.0
-Subject: [meta-networking] crda-1.1.3 broken in dylan, dora, daisy and dizzy
+	Fri, 30 Jan 2015 17:16:34 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id eu11so54622439pac.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Jan 2015 09:16:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=tiAtySnXg2Pa/JpL6JXXqUwe7jU/O5jFNPFHoQ6evVo=;
+	b=bFWMWUzn1LZeI+4SlHoPETP0uVid1lCTRt1M1JJlNhjm/eg0jQsV/QxXxod7IHli3v
+	lXJ1Ey62Itd3KHt2ZtcJey3q8/r3ocWaR6P7H8aYHT05lPE25m69LFHVA5s9RW349/Bb
+	yjfQ+e3dCO+F+AxtIuHJQ9yD3x7d/4q9u+ek9UMQB+NSLs/2wP7c0jfxXL2rAKpCoxjZ
+	OuwaHXVRx1mjApf8hJ8B+yKiM2nP6REkIvD1j+mH2V/Agd2Epyz2ZF7WxCFVxKEd1S3l
+	GT9EfEccI4oOqhkoTUH88nqok4/Gbm1OXLTxUDRti29NA+uJIkaEzjIaT/k1XQygyLVy
+	Oj8g==
+X-Received: by 10.70.55.105 with SMTP id r9mr4457330pdp.147.1422638196354;
+	Fri, 30 Jan 2015 09:16:36 -0800 (PST)
+Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
+	[206.116.3.18]) by mx.google.com with ESMTPSA id
+	uc2sm11316859pbc.56.2015.01.30.09.16.35
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 30 Jan 2015 09:16:35 -0800 (PST)
+From: Ash Charles <ashcharles@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 30 Jan 2015 09:16:34 -0800
+Message-Id: <1422638194-21335-2-git-send-email-ashcharles@gmail.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1422638194-21335-1-git-send-email-ashcharles@gmail.com>
+References: <1422638194-21335-1-git-send-email-ashcharles@gmail.com>
+Subject: [PATCH 2/2] xfce4-diskperf-plugin: Specify BSD license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 16:51:30 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 30 Jan 2015 17:16:43 -0000
 
-Hi all,
+This software contains an older or slightly modified BSD license in
+its COPYING file and assigns copyright to the specific authors.  The
+code (see the About function) makes it clear that a BSD
+license is intended:
 
-Seems that CRDA maintainers did some changes that broke the fetch of the pa=
-ckage for all those releases.
+      "license", xfce_get_license_text (XFCE_LICENSE_TEXT_BSD),
 
-These are the URIs in the package recipe:
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
+---
+ meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-http://wireless.kernel.org/download/crda/crda-1.1.3.tar.bz2
-http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.=
-11-regulatory.bin
-
-The correct ones are:
-
-https://www.kernel.org/pub/software/network/crda/crda-1.1.3.tar.bz2
-https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2=
-013.01.11.tar.bz2
-
-Notice that they not only changed the address but also now the regulatory b=
-inary is packed in a tarball.
-
-So at this point there are two options here:
-
-1. Rework the recipe with the new locations, checksums and adapting the 'do=
-_install' to copy the regulatory binary from a different directory. This ha=
-s to be done for all the releases in the subject.
-
-2. Just put the 'crda-1.1.3.tar.bz2' and '2013.01.11-regulatory.bin' in the=
- openembedded mirror and let all the old releases work without changes in t=
-he recipes.
-
-My preference is number 2, along with an upgrade of the package to the new =
-version 3.13 for the not-yet-released 'master' branch (there is currently a=
- patch for that in the mailing list).
-
-Comments?
-
--
-Javier Viguera
-Software Engineer
+diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb
+index 1aadd2c..2df9b9f 100644
+--- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb
++++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Panel plugin displaying instant disk/partition performance"
+ HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-diskperf-plugin"
+-LICENSE = "RogerSeguin"
++LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
+ 
+ inherit xfce-panel-plugin
+-- 
+2.1.0
 
 
