@@ -1,59 +1,40 @@
-Return-Path: <ting.liu@freescale.com>
-X-Greylist: delayed 860 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 30 Jan 2015 08:35:09 UTC
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1on0111.outbound.protection.outlook.com [157.56.110.111])
-	by mail.openembedded.org (Postfix) with ESMTP id A24EB6076E
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
+	[209.85.220.50])
+	by mail.openembedded.org (Postfix) with ESMTP id DA0B465C6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 08:35:09 +0000 (UTC)
-Received: from BY2PR03CA064.namprd03.prod.outlook.com (10.141.249.37) by
-	DM2PR0301MB1200.namprd03.prod.outlook.com (25.160.217.15) with
-	Microsoft SMTP
-	Server (TLS) id 15.1.65.19; Fri, 30 Jan 2015 08:20:50 +0000
-Received: from BL2FFO11OLC003.protection.gbl (2a01:111:f400:7c09::166) by
-	BY2PR03CA064.outlook.office365.com (2a01:111:e400:2c5d::37) with
-	Microsoft
-	SMTP Server (TLS) id 15.1.75.20 via Frontend Transport; Fri, 30 Jan 2015
-	08:20:49 +0000
-Received: from az84smr01.freescale.net (192.88.158.2) by
-	BL2FFO11OLC003.mail.protection.outlook.com (10.173.161.187) with
-	Microsoft
-	SMTP Server (TLS) id 15.1.75.11 via Frontend Transport; Fri, 30 Jan 2015
-	08:20:48 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
-	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t0U8KjBK011221;
-	Fri, 30 Jan 2015 01:20:46 -0700
-From: <ting.liu@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 Jan 2015 16:20:44 +0800
-Message-ID: <1422606045-7713-1-git-send-email-ting.liu@freescale.com>
-X-Mailer: git-send-email 1.9.2
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10019020)(6009001)(50466002)(48376002)(106466001)(87936001)(92566002)(77156002)(77096005)(62966003)(36756003)(15975445007)(104016003)(33646002)(110136001)(50986999)(86152002)(2351001)(47776003)(229853001)(50226001)(6806004)(19580405001)(575784001)(86362001)(19580395003)(46102003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DM2PR0301MB1200;
-	H:az84smr01.freescale.net; FPR:; SPF:None; MLV:sfv; LANG:en; 
+	Fri, 30 Jan 2015 09:08:00 +0000 (UTC)
+Received: by mail-pa0-f50.google.com with SMTP id rd3so50047519pab.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Jan 2015 01:08:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:cc:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=GQNseeudthPlF9A4BL/P3zptLJ15RD3hjOrEanW10gs=;
+	b=vDueUJSdPQjJ1yUOvPnCfPfxZlEMENa0vasLO4Q/PljTTRMRymmxiRubHhSSCcMfaj
+	2v11uaLxljGahGlhaVYgTxzz/nKGSxmVEO2iDNpPOb7S+g3vT9ZiZdW5kqSFPelM6fZi
+	SCa+sM6YXM9Mroc2Agud4wvNsXYxNqDddTWjdCu37c4AYioWC3LF5nHt546OcHZM5oam
+	kJR01f15gbAaxAxi3/TmSCjz8l+f3cCQZZEG6ZvIobmuj2HjCmUTGLhXEYecORiia95Z
+	eOSDYDPGCEaRw09ETuoKBr3IMgucr2nfFQpTnb5/2ZuyOF8hveRXGjkbAQuK/RLw7AHq
+	tOOA==
+X-Received: by 10.67.13.12 with SMTP id eu12mr7258745pad.157.1422608882071;
+	Fri, 30 Jan 2015 01:08:02 -0800 (PST)
+Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
+	[60.242.179.244])
+	by mx.google.com with ESMTPSA id i3sm10115862pdf.39.2015.01.30.01.07.59
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 30 Jan 2015 01:08:01 -0800 (PST)
+Message-ID: <54CB49EA.5010602@gmail.com>
+Date: Fri, 30 Jan 2015 20:07:54 +1100
+From: Jonathan Liu <net147@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-Authentication-Results: gmail.com; dkim=none (message not signed)
-	header.d=none; gmail.com;
-	dmarc=none action=none header.from=freescale.com; 
-X-DmarcAction-Test: None
-X-Microsoft-Antispam: UriScan:;
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:DM2PR0301MB1200;
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
-	SRVR:DM2PR0301MB1200; 
-X-Forefront-PRVS: 04724A515E
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
-	SRVR:DM2PR0301MB1200; 
-X-OriginatorOrg: freescale.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2015 08:20:48.9583 (UTC)
-X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM2PR0301MB1200
-Subject: [meta-oe][PATCH 1/2] python-pip: correct license to GPLv2+
+To: Raphael Freudiger <raphael.freudiger@siemens.com>
+References: <1422603250-24453-1-git-send-email-raphael.freudiger@siemens.com>
+In-Reply-To: <1422603250-24453-1-git-send-email-raphael.freudiger@siemens.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2] p7zip: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,30 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 08:35:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 30 Jan 2015 09:08:07 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Ting Liu <ting.liu@freescale.com>
+Hi Raphael,
 
-WARNING: python-pip: No generic license file exists for: GPL in any provider
+On 30/01/2015 6:34 PM, Raphael Freudiger wrote:
+> diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+> new file mode 100644
+> index 0000000..d70cd66
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
+> +HOMEPAGE = "http://www.7-zip.org/"
+> +LICENSE = "LGPL-2.1+ & unRAR"
+> +LIC_FILES_CHKSUM = "file://./DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a"
+> +LIC_FILES_CHKSUM = "file://./DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
+You're assigning LIC_FILES_CHKSHM twice and isn't the ./ redundant?
 
-Signed-off-by: Ting Liu <ting.liu@freescale.com>
----
- meta-python/recipes-devtools/python/python-pip_1.3.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+LIC_FILES_CHKSUM = 
+"file://DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a \
+file://DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
 
-diff --git a/meta-python/recipes-devtools/python/python-pip_1.3.1.bb b/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-index d1a7c8b..87493f5 100644
---- a/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "PIP is a tool for installing and managing Python packages"
--LICENSE = "MIT & GPL"
-+LICENSE = "MIT & GPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cd00425a3465a0e4c81929b94241d3de"
- 
- SRC_URI = "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar.gz"
--- 
-1.9.1
-
+Regards,
+Jonathan
 
