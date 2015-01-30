@@ -1,23 +1,23 @@
 Return-Path: <raphael.freudiger@siemens.com>
 Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 33C466AB99
+	by mail.openembedded.org (Postfix) with ESMTP id 3B4BF60132
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 12:54:02 +0000 (UTC)
-Received: from mail2.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.14.3/8.14.3) with ESMTP id t0UCs3Tp031684
+	Fri, 30 Jan 2015 12:57:37 +0000 (UTC)
+Received: from mail3.siemens.de (localhost [127.0.0.1])
+	by david.siemens.de (8.14.3/8.14.3) with ESMTP id t0UCvbCl007711
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 13:54:03 +0100
+	Fri, 30 Jan 2015 13:57:38 +0100
 Received: from localhost.localdomain (MD1AT2FC.ww002.siemens.net
 	[139.16.78.251])
-	by mail2.siemens.de (8.14.3/8.14.3) with ESMTP id t0UCs3dd025285;
-	Fri, 30 Jan 2015 13:54:03 +0100
+	by mail3.siemens.de (8.14.3/8.14.3) with ESMTP id t0UCvbpm018452;
+	Fri, 30 Jan 2015 13:57:37 +0100
 From: Raphael Freudiger <raphael.freudiger@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jan 2015 13:53:50 +0100
-Message-Id: <1422622430-28180-1-git-send-email-raphael.freudiger@siemens.com>
+Date: Fri, 30 Jan 2015 13:57:32 +0100
+Message-Id: <1422622652-28318-1-git-send-email-raphael.freudiger@siemens.com>
 X-Mailer: git-send-email 1.7.10.4
 Cc: Raphael Freudiger <raphael.freudiger@siemens.com>
-Subject: [meta-oe][PATCH v4] p7zip: new recipe
+Subject: [meta-oe][PATCH v5] p7zip: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 12:54:04 -0000
+X-List-Received-Date: Fri, 30 Jan 2015 12:57:40 -0000
 
 p7zip is the command line version of 7-Zip for Unix/Linux.
 
@@ -40,8 +40,8 @@ Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
 ---
  meta-oe/licenses/unRAR                             |   41 ++++++++++++++++++++
  .../p7zip/files/do_not_override_compiler.patch     |   24 ++++++++++++
- meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb     |   18 +++++++++
- 3 files changed, 83 insertions(+)
+ meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb     |   20 ++++++++++
+ 3 files changed, 85 insertions(+)
  create mode 100644 meta-oe/licenses/unRAR
  create mode 100644 meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
  create mode 100644 meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
@@ -126,10 +126,10 @@ index 0000000..c97a1ee
 + 
 diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
 new file mode 100644
-index 0000000..e1b2497
+index 0000000..9d683bb
 --- /dev/null
 +++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-@@ -0,0 +1,18 @@
+@@ -0,0 +1,20 @@
 +DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
 +HOMEPAGE = "http://www.7-zip.org/"
 +LICENSE = "LGPL-2.1+ & unRAR"
@@ -141,9 +141,11 @@ index 0000000..e1b2497
 +
 +S = "${WORKDIR}/${PN}_${PV}"
 +
++INHIBIT_PACKAGE_STRIP = "1"
++
 +do_install() {
 +    install -d ${D}${bindir}
-+    install -m 0755 ${S}/bin/* ${D}${bindir}    
++    install -m 0755 ${S}/bin/* ${D}${bindir}
 +}
 +
 +SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
