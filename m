@@ -1,40 +1,23 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id DA0B465C6D
+Return-Path: <raphael.freudiger@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 35B026070F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 09:08:00 +0000 (UTC)
-Received: by mail-pa0-f50.google.com with SMTP id rd3so50047519pab.9
+	Fri, 30 Jan 2015 09:14:16 +0000 (UTC)
+Received: from mail2.siemens.de (localhost [127.0.0.1])
+	by goliath.siemens.de (8.14.3/8.14.3) with ESMTP id t0U9EG8d026774
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 01:08:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=GQNseeudthPlF9A4BL/P3zptLJ15RD3hjOrEanW10gs=;
-	b=vDueUJSdPQjJ1yUOvPnCfPfxZlEMENa0vasLO4Q/PljTTRMRymmxiRubHhSSCcMfaj
-	2v11uaLxljGahGlhaVYgTxzz/nKGSxmVEO2iDNpPOb7S+g3vT9ZiZdW5kqSFPelM6fZi
-	SCa+sM6YXM9Mroc2Agud4wvNsXYxNqDddTWjdCu37c4AYioWC3LF5nHt546OcHZM5oam
-	kJR01f15gbAaxAxi3/TmSCjz8l+f3cCQZZEG6ZvIobmuj2HjCmUTGLhXEYecORiia95Z
-	eOSDYDPGCEaRw09ETuoKBr3IMgucr2nfFQpTnb5/2ZuyOF8hveRXGjkbAQuK/RLw7AHq
-	tOOA==
-X-Received: by 10.67.13.12 with SMTP id eu12mr7258745pad.157.1422608882071;
-	Fri, 30 Jan 2015 01:08:02 -0800 (PST)
-Received: from [192.168.0.2] (60-242-179-244.static.tpgi.com.au.
-	[60.242.179.244])
-	by mx.google.com with ESMTPSA id i3sm10115862pdf.39.2015.01.30.01.07.59
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jan 2015 01:08:01 -0800 (PST)
-Message-ID: <54CB49EA.5010602@gmail.com>
-Date: Fri, 30 Jan 2015 20:07:54 +1100
-From: Jonathan Liu <net147@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
-MIME-Version: 1.0
-To: Raphael Freudiger <raphael.freudiger@siemens.com>
-References: <1422603250-24453-1-git-send-email-raphael.freudiger@siemens.com>
-In-Reply-To: <1422603250-24453-1-git-send-email-raphael.freudiger@siemens.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] p7zip: new recipe
+	Fri, 30 Jan 2015 10:14:17 +0100
+Received: from localhost.localdomain (MD1AT2FC.ww002.siemens.net
+	[139.16.78.251])
+	by mail2.siemens.de (8.14.3/8.14.3) with ESMTP id t0U9EGdX024752;
+	Fri, 30 Jan 2015 10:14:16 +0100
+From: Raphael Freudiger <raphael.freudiger@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 30 Jan 2015 10:13:51 +0100
+Message-Id: <1422609231-10378-1-git-send-email-raphael.freudiger@siemens.com>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Raphael Freudiger <raphael.freudiger@siemens.com>
+Subject: [meta-oe][PATCH v3] p7zip: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,30 +31,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 09:08:07 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Jan 2015 09:14:19 -0000
 
-Hi Raphael,
+p7zip is the command line version of 7-Zip for Unix/Linux.
 
-On 30/01/2015 6:34 PM, Raphael Freudiger wrote:
-> diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-> new file mode 100644
-> index 0000000..d70cd66
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
-> +HOMEPAGE = "http://www.7-zip.org/"
-> +LICENSE = "LGPL-2.1+ & unRAR"
-> +LIC_FILES_CHKSUM = "file://./DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a"
-> +LIC_FILES_CHKSUM = "file://./DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
-You're assigning LIC_FILES_CHKSHM twice and isn't the ./ redundant?
+Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
+Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
+---
+ meta-oe/licenses/unRAR                             |   41 ++++++++++++++++++++
+ .../p7zip/files/do_not_override_compiler.patch     |   24 ++++++++++++
+ meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb     |   23 +++++++++++
+ 3 files changed, 88 insertions(+)
+ create mode 100644 meta-oe/licenses/unRAR
+ create mode 100644 meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
+ create mode 100644 meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
 
-LIC_FILES_CHKSUM = 
-"file://DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a \
-file://DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
+diff --git a/meta-oe/licenses/unRAR b/meta-oe/licenses/unRAR
+new file mode 100644
+index 0000000..5f78b72
+--- /dev/null
++++ b/meta-oe/licenses/unRAR
+@@ -0,0 +1,41 @@
++ ******    *****   ******   unRAR - free utility for RAR archives
++ **   **  **   **  **   **  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ ******   *******  ******    License for use and distribution of
++ **   **  **   **  **   **   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ **   **  **   **  **   **         FREE portable version
++                                   ~~~~~~~~~~~~~~~~~~~~~
++
++      The source code of unRAR utility is freeware. This means:
++
++   1. All copyrights to RAR and the utility unRAR are exclusively
++      owned by the author - Alexander Roshal.
++
++   2. The unRAR sources may be used in any software to handle RAR
++      archives without limitations free of charge, but cannot be used
++      to re-create the RAR compression algorithm, which is proprietary.
++      Distribution of modified unRAR sources in separate form or as a
++      part of other software is permitted, provided that it is clearly
++      stated in the documentation and source comments that the code may
++      not be used to develop a RAR (WinRAR) compatible archiver.
++
++   3. The unRAR utility may be freely distributed. No person or company 
++      may charge a fee for the distribution of unRAR without written
++      permission from the copyright holder.
++
++   4. THE RAR ARCHIVER AND THE UNRAR UTILITY ARE DISTRIBUTED "AS IS".
++      NO WARRANTY OF ANY KIND IS EXPRESSED OR IMPLIED.  YOU USE AT 
++      YOUR OWN RISK. THE AUTHOR WILL NOT BE LIABLE FOR DATA LOSS, 
++      DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE USING
++      OR MISUSING THIS SOFTWARE.
++
++   5. Installing and using the unRAR utility signifies acceptance of
++      these terms and conditions of the license.
++
++   6. If you don't agree with terms of the license you must remove
++      unRAR files from your storage devices and cease to use the
++      utility.
++
++      Thank you for your interest in RAR and unRAR.
++
++
++                                            Alexander L. Roshal
+\ No newline at end of file
+diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
+new file mode 100644
+index 0000000..c97a1ee
+--- /dev/null
++++ b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
+@@ -0,0 +1,24 @@
++do not override compiler
++
++The default makefile sets the compiler to g++ or gcc. This leads to a wrong architecture when cross-compiling.
++Remove the hardcoded compiler and just append the flags to CXX and CC.
++
++Upstream-Status: Pending
++Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
++Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
++
++Index: p7zip_9.20.1/makefile.machine
++=====================================================================
++--- p7zip_9.20.1.orig/makefile.machine	2011-03-13 12:54:57.000000000 +0100
+++++ p7zip_9.20.1/makefile.machine	2014-11-12 16:20:22.880349826 +0100
++@@ -10,8 +10,8 @@
++ 	-D_7ZIP_LARGE_PAGES \
++ 	$(LOCAL_FLAGS)
++ 
++-CXX=g++ $(ALLFLAGS)
++-CC=gcc $(ALLFLAGS)
+++CXX+=$(ALLFLAGS)
+++CC+=$(ALLFLAGS)
++ CC_SHARED=-fPIC
++ LINK_SHARED=-fPIC -shared
++ 
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+new file mode 100644
+index 0000000..db46271
+--- /dev/null
++++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
++HOMEPAGE = "http://www.7-zip.org/"
++LICENSE = "LGPL-2.1+ & unRAR"
++LIC_FILES_CHKSUM = "file://DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a \
++                    file://DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
++PR = "r1"
++
++SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
++          file://do_not_override_compiler.patch"
++
++S = "${WORKDIR}/${PN}_${PV}"
++
++INHIBIT_PACKAGE_STRIP = "1"
++
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/bin/* ${D}${bindir}    
++}
++
++
++SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
++SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
+-- 
+1.7.10.4
 
-Regards,
-Jonathan
 
