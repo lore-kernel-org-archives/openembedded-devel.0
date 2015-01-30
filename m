@@ -1,34 +1,26 @@
-Return-Path: <ashcharles@gmail.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D7F16076E
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id C930660132
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 17:16:34 +0000 (UTC)
-Received: by mail-pa0-f53.google.com with SMTP id kx10so54559275pab.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 09:16:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=dWb+9yz15evB19nkpzwPOvYvoADaX9Qb1iH3yioWnD4=;
-	b=Bb+OEwUjqa2YR0zBXV9POL++31eYfcEUaoc/8MA/oCetUQ8YZyUYko+O+ssb+sCDPK
-	DvOJ8l/Ibb4tlZnVgHEiXTDONNjcAmVmt1mMG7zzI2pZ0OpREfiPysx0H/LoGsPHdz9K
-	S7vnEXbtNXPi7OYl9n85za59Z3rdjwWhZjpxX58NtF/5XuuPXZZsspYxjxMm+9B5lc4i
-	fRRuRWsBz3SqO1TZpIw3nhRTNP60jK6s0M4pd0p/6dynRY0tNaGFTnEa0oKvC4YCHI+o
-	pqtwPp5Ynb29yiIhmmSFQ3OctJfd8hSl5sE6a6Be8Q5weZJkaIYeGxIcBG/OilNZ8Nqf
-	STEw==
-X-Received: by 10.70.88.231 with SMTP id bj7mr10123848pdb.168.1422638195603;
-	Fri, 30 Jan 2015 09:16:35 -0800 (PST)
-Received: from gumstux.bchsia.telus.net (s206-116-3-18.bc.hsia.telus.net.
-	[206.116.3.18]) by mx.google.com with ESMTPSA id
-	uc2sm11316859pbc.56.2015.01.30.09.16.34
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 30 Jan 2015 09:16:34 -0800 (PST)
-From: Ash Charles <ashcharles@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jan 2015 09:16:33 -0800
-Message-Id: <1422638194-21335-1-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [PATCH 1/2] xfce4-xkb-plugin: Specify GPLv2 license
+	Fri, 30 Jan 2015 17:23:57 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 30 Jan 2015 09:23:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.09,492,1418112000"; d="scan'208";a="670405186"
+Received: from fergalmc-mobl2.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.20.70])
+	by fmsmga002.fm.intel.com with ESMTP; 30 Jan 2015 09:23:55 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: "Viguera, Javier" <Javier.Viguera@digi.com>, Tom King <ka6sox@gmail.com>
+Date: Fri, 30 Jan 2015 17:23:55 +0000
+Message-ID: <3777411.pG0mYOicST@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.4 (Linux/3.17.8-200.fc20.x86_64; KDE/4.14.4; x86_64; ; )
+In-Reply-To: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
+References: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking] crda-1.1.3 broken in dylan, dora, daisy and dizzy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,37 +34,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 17:16:43 -0000
+X-List-Received-Date: Fri, 30 Jan 2015 17:23:59 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Like several other xfce plugins, this software contains an older or
-slightly modified BSD license in its COPYING file and assigns copyright
-to the specific authors.  The code itself (see the xfce_xkb_about
-function) however makes it clear that a GPL license is intended:
+On Friday 30 January 2015 16:51:22 Viguera, Javier wrote:
+> Seems that CRDA maintainers did some changes that broke the fetch of the
+> package for all those releases.
+> 
+> These are the URIs in the package recipe:
+> 
+> http://wireless.kernel.org/download/crda/crda-1.1.3.tar.bz2
+> http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.1
+> 1-regulatory.bin
+> 
+> The correct ones are:
+> 
+> https://www.kernel.org/pub/software/network/crda/crda-1.1.3.tar.bz2
+> https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-20
+> 13.01.11.tar.bz2
+> 
+> Notice that they not only changed the address but also now the regulatory
+> binary is packed in a tarball.
+> 
+> So at this point there are two options here:
+> 
+> 1. Rework the recipe with the new locations, checksums and adapting the
+> 'do_install' to copy the regulatory binary from a different directory. This
+> has to be done for all the releases in the subject.
+> 
+> 2. Just put the 'crda-1.1.3.tar.bz2' and '2013.01.11-regulatory.bin' in the
+> openembedded mirror and let all the old releases work without changes in
+> the recipes.
+> 
+> My preference is number 2, along with an upgrade of the package to the new
+> version 3.13 for the not-yet-released 'master' branch (there is currently a
+> patch for that in the mailing list).
 
-    xfce_get_license_text (XFCE_LICENSE_TEXT_GPL));
+I agree, #2 is the best option to take care of the older branches.
 
-Use GPLv2, not the author's name, as the LICENSE matching other plugins
-with the same license text.
+Tom, can you please fetch the following files and add them to the OE source 
+mirror:
 
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
----
- meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  http://distfiles.lesslinux.org/crda-1.1.3.tar.bz2
+  http://distfiles.lesslinux.org/2013.01.11-regulatory.bin
 
-diff --git a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb
-index 1109f31..22ead2a 100644
---- a/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/xkb/xfce4-xkb-plugin_0.7.0.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "XKB layout switching panel plug-in for the Xfce desktop environment"
- HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-xkb-plugin"
- SECTION = "x11/application"
--LICENSE = "Alexander_Iliev"
-+LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=496f09f084b0f7e6f02f769a84490c6b"
- 
- inherit xfce-panel-plugin
+I've verified the md5sums match the recipe:
+
+  29579185e06a75675507527243d28e5c  crda-1.1.3.tar.bz2
+  e0c8a5ca63fb8bf803213f9a0c90b50b  2013.01.11-regulatory.bin
+
+Cheers,
+Paul
+
 -- 
-2.1.0
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
