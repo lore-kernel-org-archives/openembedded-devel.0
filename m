@@ -1,23 +1,63 @@
-Return-Path: <raphael.freudiger@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 35EE56072F
+Return-Path: <ting.liu@freescale.com>
+Received: from na01-bl2-obe.outbound.protection.outlook.com
+	(mail-bl2on0116.outbound.protection.outlook.com [65.55.169.116])
+	by mail.openembedded.org (Postfix) with ESMTP id 0910E6076E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 07:36:11 +0000 (UTC)
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by david.siemens.de (8.14.3/8.14.3) with ESMTP id t0U7a6oY001530
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 08:36:06 +0100
-Received: from localhost.localdomain (MD1AT2FC.ww002.siemens.net
-	[139.16.78.251])
-	by mail3.siemens.de (8.14.3/8.14.3) with ESMTP id t0U7a6TP020432;
-	Fri, 30 Jan 2015 08:36:06 +0100
-From: Raphael Freudiger <raphael.freudiger@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jan 2015 08:34:09 +0100
-Message-Id: <1422603250-24453-1-git-send-email-raphael.freudiger@siemens.com>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Raphael Freudiger <raphael.freudiger@siemens.com>
-Subject: [meta-oe][PATCH v2] p7zip: new recipe
+	Fri, 30 Jan 2015 08:20:51 +0000 (UTC)
+Received: from BN3PR0301CA0011.namprd03.prod.outlook.com (25.160.180.149) by
+	BY1PR0301MB1191.namprd03.prod.outlook.com (25.160.195.15) with
+	Microsoft SMTP
+	Server (TLS) id 15.1.75.20; Fri, 30 Jan 2015 08:20:51 +0000
+Received: from BN1AFFO11FD005.protection.gbl (2a01:111:f400:7c10::197) by
+	BN3PR0301CA0011.outlook.office365.com (2a01:111:e400:4000::21) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.75.20 via Frontend Transport; Fri, 30 Jan 2015
+	08:20:50 +0000
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BN1AFFO11FD005.mail.protection.outlook.com (10.58.52.65) with Microsoft
+	SMTP Server (TLS) id 15.1.75.11 via Frontend Transport;
+	Fri, 30 Jan 2015 08:20:50 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t0U8KjBL011221;
+	Fri, 30 Jan 2015 01:20:48 -0700
+From: <ting.liu@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 30 Jan 2015 16:20:45 +0800
+Message-ID: <1422606045-7713-2-git-send-email-ting.liu@freescale.com>
+X-Mailer: git-send-email 1.9.2
+In-Reply-To: <1422606045-7713-1-git-send-email-ting.liu@freescale.com>
+References: <1422606045-7713-1-git-send-email-ting.liu@freescale.com>
+X-EOPAttributedMessage: 0
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.158.2 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=ting.liu@freescale.com; gmail.com; dkim=none (message not
+	signed) header.d=none;gmail.com; dmarc=none action=none
+	header.from=freescale.com;
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10019020)(6009001)(339900001)(106466001)(110136001)(229853001)(87936001)(105606002)(104016003)(2351001)(50466002)(48376002)(6806004)(62966003)(77156002)(19580405001)(33646002)(19580395003)(50226001)(86362001)(76176999)(50986999)(46102003)(85426001)(77096005)(15975445007)(2950100001)(47776003)(92566002)(86152002)(36756003);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BY1PR0301MB1191;
+	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; LANG:en; 
+MIME-Version: 1.0
+X-DmarcAction-Test: None
+X-Microsoft-Antispam: UriScan:;
+X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:(3005004);SRVR:BY1PR0301MB1191;
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
+	SRVR:BY1PR0301MB1191; 
+X-Forefront-PRVS: 04724A515E
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
+	SRVR:BY1PR0301MB1191; 
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jan 2015 08:20:50.5203 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR0301MB1191
+Subject: [meta-oe][PATCH 2/2] rng-tools: Fixes for latest OE layouts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,129 +71,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 07:36:14 -0000
+X-List-Received-Date: Fri, 30 Jan 2015 08:20:57 -0000
+Content-Type: text/plain
 
-p7zip is the command line version of 7-Zip for Unix/Linux.
+From: Gary Thomas <gary@mlbassoc.com>
 
-Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
+The current recipe has a few installation errors:
+  * The manipulation of configurable paths drops a '/'
+  * The init script defaults are placed in the wrong file
+  * Finer control over init script start/stop
+  * The default device is non-standard
+
+This patch fixes these little nits and makes the package usable again.
+
+Based on the original patch:
+http://patchwork.openembedded.org/patch/41049/
+
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+Signed-off-by: Ting Liu <ting.liu@freescale.com>
 ---
- meta-oe/licenses/unRAR                             |   41 ++++++++++++++++++++
- .../p7zip/files/do_not_override_compiler.patch     |   24 ++++++++++++
- meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb     |   23 +++++++++++
- 3 files changed, 88 insertions(+)
- create mode 100644 meta-oe/licenses/unRAR
- create mode 100644 meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
- create mode 100644 meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+ meta-oe/recipes-support/rng-tools/files/default  | 3 ++-
+ meta-oe/recipes-support/rng-tools/rng-tools_4.bb | 6 +++---
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/licenses/unRAR b/meta-oe/licenses/unRAR
-new file mode 100644
-index 0000000..5f78b72
---- /dev/null
-+++ b/meta-oe/licenses/unRAR
-@@ -0,0 +1,41 @@
-+ ******    *****   ******   unRAR - free utility for RAR archives
-+ **   **  **   **  **   **  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ ******   *******  ******    License for use and distribution of
-+ **   **  **   **  **   **   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ **   **  **   **  **   **         FREE portable version
-+                                   ~~~~~~~~~~~~~~~~~~~~~
-+
-+      The source code of unRAR utility is freeware. This means:
-+
-+   1. All copyrights to RAR and the utility unRAR are exclusively
-+      owned by the author - Alexander Roshal.
-+
-+   2. The unRAR sources may be used in any software to handle RAR
-+      archives without limitations free of charge, but cannot be used
-+      to re-create the RAR compression algorithm, which is proprietary.
-+      Distribution of modified unRAR sources in separate form or as a
-+      part of other software is permitted, provided that it is clearly
-+      stated in the documentation and source comments that the code may
-+      not be used to develop a RAR (WinRAR) compatible archiver.
-+
-+   3. The unRAR utility may be freely distributed. No person or company 
-+      may charge a fee for the distribution of unRAR without written
-+      permission from the copyright holder.
-+
-+   4. THE RAR ARCHIVER AND THE UNRAR UTILITY ARE DISTRIBUTED "AS IS".
-+      NO WARRANTY OF ANY KIND IS EXPRESSED OR IMPLIED.  YOU USE AT 
-+      YOUR OWN RISK. THE AUTHOR WILL NOT BE LIABLE FOR DATA LOSS, 
-+      DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE USING
-+      OR MISUSING THIS SOFTWARE.
-+
-+   5. Installing and using the unRAR utility signifies acceptance of
-+      these terms and conditions of the license.
-+
-+   6. If you don't agree with terms of the license you must remove
-+      unRAR files from your storage devices and cease to use the
-+      utility.
-+
-+      Thank you for your interest in RAR and unRAR.
-+
-+
-+                                            Alexander L. Roshal
-\ No newline at end of file
-diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
-new file mode 100644
-index 0000000..c97a1ee
---- /dev/null
-+++ b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
-@@ -0,0 +1,24 @@
-+do not override compiler
-+
-+The default makefile sets the compiler to g++ or gcc. This leads to a wrong architecture when cross-compiling.
-+Remove the hardcoded compiler and just append the flags to CXX and CC.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-+Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
-+
-+Index: p7zip_9.20.1/makefile.machine
-+=====================================================================
-+--- p7zip_9.20.1.orig/makefile.machine	2011-03-13 12:54:57.000000000 +0100
-++++ p7zip_9.20.1/makefile.machine	2014-11-12 16:20:22.880349826 +0100
-+@@ -10,8 +10,8 @@
-+ 	-D_7ZIP_LARGE_PAGES \
-+ 	$(LOCAL_FLAGS)
-+ 
-+-CXX=g++ $(ALLFLAGS)
-+-CC=gcc $(ALLFLAGS)
-++CXX+=$(ALLFLAGS)
-++CC+=$(ALLFLAGS)
-+ CC_SHARED=-fPIC
-+ LINK_SHARED=-fPIC -shared
-+ 
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-new file mode 100644
-index 0000000..d70cd66
---- /dev/null
-+++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
-+HOMEPAGE = "http://www.7-zip.org/"
-+LICENSE = "LGPL-2.1+ & unRAR"
-+LIC_FILES_CHKSUM = "file://./DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a"
-+LIC_FILES_CHKSUM = "file://./DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
-+PR = "r1"
-+
-+SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
-+          file://do_not_override_compiler.patch"
-+
-+S = "${WORKDIR}/${PN}_${PV}"
-+
-+INHIBIT_PACKAGE_STRIP = "1"
-+
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/bin/* ${D}${bindir}    
-+}
-+
-+
-+SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
-+SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
+diff --git a/meta-oe/recipes-support/rng-tools/files/default b/meta-oe/recipes-support/rng-tools/files/default
+index ab7cd93..7aede9b 100644
+--- a/meta-oe/recipes-support/rng-tools/files/default
++++ b/meta-oe/recipes-support/rng-tools/files/default
+@@ -1,2 +1,3 @@
+ # Specify rng device
+-RNG_DEVICE=/dev/hwrng
++#RNG_DEVICE=/dev/hwrng
++RNG_DEVICE=/dev/urandom
+diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+index 0b40fc5..b3d880f 100644
+--- a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
++++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+@@ -24,13 +24,13 @@ do_install_append() {
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+         install -d "${D}${sysconfdir}/init.d"
+         install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
+-        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir},' \
++        sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
+             ${D}${sysconfdir}/init.d/rng-tools
+ 
+         install -d "${D}${sysconfdir}/default"
+-        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default
++        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
+     fi
+ }
+ 
+ INITSCRIPT_NAME = "rng-tools"
+-INITSCRIPT_PARAMS = "defaults"
++INITSCRIPT_PARAMS = "start 30 S . stop 30 0 6 1 ."
 -- 
-1.7.10.4
+1.9.1
 
 
