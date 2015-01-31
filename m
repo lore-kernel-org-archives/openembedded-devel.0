@@ -1,26 +1,42 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id C930660132
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-we0-f179.google.com (mail-we0-f179.google.com
+	[74.125.82.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D8566AC56
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jan 2015 17:23:57 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 30 Jan 2015 09:23:58 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.09,492,1418112000"; d="scan'208";a="670405186"
-Received: from fergalmc-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.20.70])
-	by fmsmga002.fm.intel.com with ESMTP; 30 Jan 2015 09:23:55 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Viguera, Javier" <Javier.Viguera@digi.com>, Tom King <ka6sox@gmail.com>
-Date: Fri, 30 Jan 2015 17:23:55 +0000
-Message-ID: <3777411.pG0mYOicST@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.4 (Linux/3.17.8-200.fc20.x86_64; KDE/4.14.4; x86_64; ; )
-In-Reply-To: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
-References: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
+	Sat, 31 Jan 2015 00:36:39 +0000 (UTC)
+Received: by mail-we0-f179.google.com with SMTP id q59so29929891wes.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Jan 2015 16:36:40 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-type:content-disposition:in-reply-to
+	:user-agent;
+	bh=SH9eAjQ+f6i0cL3btDArdmcLx+Zo4nsYk4x0+c58aXY=;
+	b=Wlm5EZ0DOgSAs9Ov4EnObb6AORW9TUUbP30VNs+SrdGlWP8WhSKSkb7KMbwiOnF9jo
+	eEfYubLy/ErieWuIA6V8jgBxbBmsNjGfELratl/ADVKF2QAPI+ADk/Nb0JHD2fgiU8Ch
+	AB0tfHgFNmp/5TL1ebddkWKx7uZLER9xJMff17Qd6zfD/GZVsVyBewGtxMQD376RZMsP
+	nVaBXorSvJRRQSf6gWdPY8G3dWg/B1d8WbQEc5vxXTEMXH+BuZna9xSnWqkuwlip2Plh
+	VUHWFbquNtjcoJGSWUpwYALN5UHfzdTh2vrI04e3+SnQTrxpqWq3XZoYbAr4bgziNqct
+	UMIg==
+X-Gm-Message-State: ALoCoQmxhHqqOMXgsCQM4RD9ieO8c/fD2QURTgHJQbg5M+Ytj9BPgBwp6kxz2p+cRrIxb1ruNEoV
+X-Received: by 10.180.73.84 with SMTP id j20mr32307wiv.43.1422664600069;
+	Fri, 30 Jan 2015 16:36:40 -0800 (PST)
+Received: from gmail.com (dhcp-186-165.gjk.dk. [195.249.186.165])
+	by mx.google.com with ESMTPSA id
+	ku8sm17077423wjb.23.2015.01.30.16.36.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 30 Jan 2015 16:36:39 -0800 (PST)
+Date: Sat, 31 Jan 2015 02:36:37 +0200
+From: Andrei Gherzan <andrei@gherzan.ro>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150131003637.GB9471@gmail.com>
+References: <1422339291-43625-1-git-send-email-coldnew.tw@gmail.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking] crda-1.1.3 broken in dylan, dora, daisy and dizzy
+In-Reply-To: <1422339291-43625-1-git-send-email-coldnew.tw@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-raspberrypi][PATCH] layer.conf: handle dynamic layer configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,61 +50,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jan 2015 17:23:59 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 31 Jan 2015 00:36:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Friday 30 January 2015 16:51:22 Viguera, Javier wrote:
-> Seems that CRDA maintainers did some changes that broke the fetch of the
-> package for all those releases.
-> 
-> These are the URIs in the package recipe:
-> 
-> http://wireless.kernel.org/download/crda/crda-1.1.3.tar.bz2
-> http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.1
-> 1-regulatory.bin
-> 
-> The correct ones are:
-> 
-> https://www.kernel.org/pub/software/network/crda/crda-1.1.3.tar.bz2
-> https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-20
-> 13.01.11.tar.bz2
-> 
-> Notice that they not only changed the address but also now the regulatory
-> binary is packed in a tarball.
-> 
-> So at this point there are two options here:
-> 
-> 1. Rework the recipe with the new locations, checksums and adapting the
-> 'do_install' to copy the regulatory binary from a different directory. This
-> has to be done for all the releases in the subject.
-> 
-> 2. Just put the 'crda-1.1.3.tar.bz2' and '2013.01.11-regulatory.bin' in the
-> openembedded mirror and let all the old releases work without changes in
-> the recipes.
-> 
-> My preference is number 2, along with an upgrade of the package to the new
-> version 3.13 for the not-yet-released 'master' branch (there is currently a
-> patch for that in the mailing list).
+Hello,
 
-I agree, #2 is the best option to take care of the older branches.
+On Tue, Jan 27, 2015 at 02:14:51PM +0800, Yen-Chin Lee wrote:
+> Using a separate layer specific directory as meta-fsl-arm does with
+> qt5-layer, this will prevent meta-raspberrypi change layer dependencies
+> when add qt5 packages.
+>
+> patch is taken from:
+> http://git.yoctoproject.org/cgit/cgit.cgi/meta-fsl-arm/tree/conf/layer.conf#n20
+>
+> Signed-off-by: Yen-Chin Lee <coldnew.tw@gmail.com>
+> ---
+>  conf/layer.conf | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 7bffd4b..71f22b4 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -12,3 +12,7 @@ BBFILE_PRIORITY_raspberrypi = "6"
+>  # Additional license directories.
+>  LICENSE_PATH += "${LAYERDIR}/files/custom-licenses"
+>
+> +# Let us add layer-specific bbappends which are only applied when that
+> +# layer is included in our configuration
+> +BBFILES += "${@' '.join('${LAYERDIR}/%s/recipes*/*/*.bbappend' % layer \
+> +               for layer in BBFILE_COLLECTIONS.split())}"
+> --
+> 1.9.3 (Apple Git-50)
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Tom, can you please fetch the following files and add them to the OE source 
-mirror:
+Thanks for your contribution but meta-raspberrypi uses the yocto mailinglist as
+stated in README. Please resend this patch accordingly.
 
-  http://distfiles.lesslinux.org/crda-1.1.3.tar.bz2
-  http://distfiles.lesslinux.org/2013.01.11-regulatory.bin
+Thanks a lot,
 
-I've verified the md5sums match the recipe:
-
-  29579185e06a75675507527243d28e5c  crda-1.1.3.tar.bz2
-  e0c8a5ca63fb8bf803213f9a0c90b50b  2013.01.11-regulatory.bin
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+--
+Andrei Gherzan
 
