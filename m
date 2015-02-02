@@ -1,40 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B10F6E5CF;
-	Mon,  2 Feb 2015 17:43:39 +0000 (UTC)
-Received: by mail-pa0-f52.google.com with SMTP id kx10so84902260pab.11;
-	Mon, 02 Feb 2015 09:43:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=hZT0wDGqbxLT9t5RHUZ+tC+OfLrxTEUB8wRh5tDLYzI=;
-	b=qR9CGAvBG5l538eujMfo7hjJjr/03uXd3dtmmRW/bazS8u+IpHicxwrC9dMlu6voH4
-	f54DQ7fVSfr188UzoRlmzZPhmYOV2aC1miFYwg16527iAPAbFEHWd7oqCIsh8cJ2ZonE
-	xKpOADO3jjwQEhE2rjbE4/EszHuep9woILzApNPWKek+6xrps9QNnpIs+sHApjxcHWwC
-	1HThxs3hfD1AKwKtbIhfp0fJ1wbmvcrGCAuFt9Uvbj7l/5kM2lc42HvD0kWCanvJrFCm
-	PzV+EZ91L7Rvwrq71kL+lOTxcLcNp7F+l2JBY10jiLBNC3lUX8C5zfqhcDkrbfg3t7Cb
-	ssDg==
-X-Received: by 10.68.216.161 with SMTP id or1mr30845097pbc.120.1422899020965; 
-	Mon, 02 Feb 2015 09:43:40 -0800 (PST)
-Received: from ?IPv6:2601:9:3580:84c:208e:756e:d63f:530d?
-	([2601:9:3580:84c:208e:756e:d63f:530d])
-	by mx.google.com with ESMTPSA id c9sm19435349pdm.51.2015.02.02.09.43.40
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 02 Feb 2015 09:43:40 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAJTo0LbhMAnd=TKhbWHhTsbca_bVSvtjLFsR6b_P5gsarO7AOg@mail.gmail.com>
-Date: Mon, 2 Feb 2015 09:43:39 -0800
-Message-Id: <E753DBB2-6DEA-41CB-B266-34B35807F5D7@gmail.com>
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qa0-f48.google.com (mail-qa0-f48.google.com
+	[209.85.216.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DFCC60017
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Feb 2015 17:51:07 +0000 (UTC)
+Received: by mail-qa0-f48.google.com with SMTP id v8so30105202qal.7
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Feb 2015 09:51:08 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=TtsCqboOVxoCcvJ+3OEysKFuRTgOSWNbH/oesMbJP7g=;
+	b=lywEmCMQuYX5CNE/fe928GyVVilhJFpWPk5i3m1JkmPThtsiUSQRj9Fy1GvDjXeqhc
+	ntQEzPMb1u1gD/eIN4B9RWlA2NbbrecnIgU8fmM1PWosSIovIIVhG35exAJNHdSyiy2a
+	2l4ZezC/d3mvWJVUv8doTW2Lid2NBCy+/bkKPgXENHYZ6RrP4dbbGpPRQhLlvaGAM0G5
+	ZTd8Ht+iEU7ywhsuyI2csBIt8yMI37SjKxKJrJOMWWelcZ7wBJPkw6s+471jCK7f+enT
+	Q17t39lDa9NUMq+pv+c8K/j/eMypoXpNHF1R3fYurOMVwqTvX6kAkDdGZTwADGAwwNH5
+	fEFg==
+X-Gm-Message-State: ALoCoQl62LQdlJB37ZQMF9vxW7ybboLn0LbV0SXcKGclMcWD5vVu5fbZ72h3btBJYWg3QUe4B1vW
+X-Received: by 10.229.80.3 with SMTP id r3mr510379qck.23.1422899468596; Mon,
+	02 Feb 2015 09:51:08 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.96.166 with HTTP; Mon, 2 Feb 2015 09:50:48 -0800 (PST)
+In-Reply-To: <EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
 References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
-	<54CFA8A5.7090504@mvista.com>
-	<CAJTo0LbhMAnd=TKhbWHhTsbca_bVSvtjLFsR6b_P5gsarO7AOg@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-X-Mailer: Apple Mail (2.2070.6)
+	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
+	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
+	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
+	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 2 Feb 2015 17:50:48 +0000
+Message-ID: <CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	akuster <akuster@mvista.com>,
 	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
@@ -52,34 +52,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2015 17:43:42 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 02 Feb 2015 17:51:14 -0000
+Content-Type: text/plain; charset=UTF-8
+
+On 2 February 2015 at 17:40, Khem Raj <raj.khem@gmail.com> wrote:
+
+> Yeah, you must be using a weirdly compiled gcc on your host which is
+> defaulting to -std  < c99 and hence the problem. I have fix for that issue
+> already locally.
 
 
-> On Feb 2, 2015, at 9:26 AM, Burton, Ross <ross.burton@intel.com> =
-wrote:
->=20
-> Armin,
->=20
-> On 2 February 2015 at 16:41, akuster <akuster@mvista.com =
-<mailto:akuster@mvista.com>> wrote:
-> If I knew what "testing' entailed I would through some time at this.
->=20
-> "Please build your stuff with this glibc/gcc and check it still =
-works".
->=20
+$ gcc --version
+gcc (Debian 4.7.2-5) 4.7.2
 
-anything helps. apply the patches and see if they apply and parse =
-correctly with your layer combo
-then second step is compile and build images/sdks as Ross said.
-Third would be boot and runt the images and workloads which you normally =
-do
-4th would be run your tests
-5th would be run gcc and glibc unit tests.
-and repeat same for as many architectures as possible.
+This is the default gcc in current Debian stable.
 
-> Ross
-
+Ross
 
