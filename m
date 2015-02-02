@@ -1,39 +1,46 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2422F60017
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2015 18:33:22 +0000 (UTC)
-Received: by mail-pa0-f51.google.com with SMTP id fb1so85669094pad.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Feb 2015 10:33:24 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 41E9D60017;
+	Mon,  2 Feb 2015 18:33:37 +0000 (UTC)
+Received: by mail-pa0-f46.google.com with SMTP id lj1so85457994pab.5;
+	Mon, 02 Feb 2015 10:33:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=4QuLNPUz+/t3vFTDM1LTvORgqAziwlbHjNj/oVdsGvs=;
-	b=SuJp3W3C98Gusm5PGAf54DA2awb7FYuI2viuvgo4Rp1VzULoKsyEwfsCy5rnGAvoHC
-	yu4zGuDb3hDENJtWosCDuWORzbaFr6REJyIvlB0U4g/RmQn/RWZ+I1lEf45E9fI26v5Z
-	3YgDi41MP0GG4xVD5IhEgQO/GCNkRGVZFtfto48RnKdhxldmhk0iOnsIkmxwbYm0SxEP
-	32tlDfzqGY65ahkARaPO0M1zE0jaI3vvwo+/Xi9kj84EqOBTjlYDlAAr4qE+NJDqFZ55
-	q7qPMJA8PsNv2O4dTxt9crBITqvL3+xGnREsWD2UCAz1KCDc59aA7tS8R4XrfcssHzPF
-	CzJQ==
-X-Received: by 10.66.102.41 with SMTP id fl9mr31156029pab.7.1422902004232;
-	Mon, 02 Feb 2015 10:33:24 -0800 (PST)
-Received: from ?IPv6:2601:c:a700:272f:c42b:9a19:c8d3:f701?
-	([2601:c:a700:272f:c42b:9a19:c8d3:f701])
-	by mx.google.com with ESMTPSA id
-	ob4sm19521833pdb.48.2015.02.02.10.33.21
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Feb 2015 10:33:22 -0800 (PST)
-Message-ID: <54CFC2ED.7040704@gmail.com>
-Date: Mon, 02 Feb 2015 10:33:17 -0800
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
-MIME-Version: 1.0
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: --should-not-have-used-
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=GivLn0cFX8myKpTiyttXcgweEEyy7mLSkJnyrKKxzic=;
+	b=b03Ih1JgqbyMWkMgUOGccP+7Al63eY/eofn7W4PSXc212PSrTGvvC9rmfl7KEw5bt6
+	zxPUllb9x8PNdfh3iBL3u4uN29hwXZHQa9zkNcE+6fJREDtSEUQFulzweBlx4OU8xzsl
+	h7jeMiJamSGwf2/gEUISn4NyPZ6miPunWLCLW8xjI4aUbxFXYEp3GsMYOSkgtg2gROFW
+	ukEuaNUDFVaNWDu1q6wCsTcaJrbb1e4oZfDmLSJetNcj9fmZB/1e1S1xW+BCQFmPRWbQ
+	j1BRuJP4gOP/qRLCu12DBDcEe+0nHt+hQAzBv8OMhEG5y0NLt2wVoxkyrvBmZeexjETI
+	MlBw==
+X-Received: by 10.68.69.5 with SMTP id a5mr31620547pbu.57.1422902019091;
+	Mon, 02 Feb 2015 10:33:39 -0800 (PST)
+Received: from ?IPv6:2601:9:3580:84c:55be:bb2b:a02a:e844?
+	([2601:9:3580:84c:55be:bb2b:a02a:e844])
+	by mx.google.com with ESMTPSA id po4sm4859158pdb.85.2015.02.02.10.33.38
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 02 Feb 2015 10:33:38 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+Date: Mon, 2 Feb 2015 10:33:37 -0800
+Message-Id: <80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
+	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
+	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
+	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
+	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+X-Mailer: Apple Mail (2.2070.6)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,23 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2015 18:33:30 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Feb 2015 18:33:39 -0000
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 
+> On Feb 2, 2015, at 9:50 AM, Burton, Ross <ross.burton@intel.com> =
+wrote:
+>=20
+>=20
+> On 2 February 2015 at 17:40, Khem Raj <raj.khem@gmail.com =
+<mailto:raj.khem@gmail.com>> wrote:
+> Yeah, you must be using a weirdly compiled gcc on your host which is =
+defaulting to -std  < c99 and hence the problem. I have fix for that =
+issue already locally.
+>=20
+> $ gcc --version
+> gcc (Debian 4.7.2-5) 4.7.2
+>=20
+> This is the default gcc in current Debian stable.
 
-Hello,
+Yeah, I am on archlinux (the other end of spectrum). Nevertheless, I =
+have updated the contrib tree which fixes cross-localedef-native compile =
+time issue. So you should be good
+to go now.
 
-I am now seeing an issue in one of my recipes during configure.
+>=20
+> Ross
 
---should-not-have-used-/usr/bin/pcap-config
-
-
-Is this indicating an issue with my recipe or with pcap?
-
-binconfig-disabled.bbclass comments is not very helpful.
-
-regards,
-Armin
 
