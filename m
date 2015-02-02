@@ -1,26 +1,39 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E68260017
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2422F60017
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2015 18:26:28 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 02 Feb 2015 10:26:29 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.09,507,1418112000"; d="scan'208";a="671624625"
-Received: from bbodonog-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.3.158])
-	by fmsmga002.fm.intel.com with ESMTP; 02 Feb 2015 10:26:27 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Raphael Freudiger <raphael.freudiger@siemens.com>
-Date: Mon, 02 Feb 2015 18:26:27 +0000
-Message-ID: <7694448.9cNyM1zEqv@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.4 (Linux/3.17.8-200.fc20.x86_64; KDE/4.14.4; x86_64; ; )
-In-Reply-To: <1422877877-4570-1-git-send-email-raphael.freudiger@siemens.com>
-References: <1422877877-4570-1-git-send-email-raphael.freudiger@siemens.com>
+	Mon,  2 Feb 2015 18:33:22 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id fb1so85669094pad.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Feb 2015 10:33:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=4QuLNPUz+/t3vFTDM1LTvORgqAziwlbHjNj/oVdsGvs=;
+	b=SuJp3W3C98Gusm5PGAf54DA2awb7FYuI2viuvgo4Rp1VzULoKsyEwfsCy5rnGAvoHC
+	yu4zGuDb3hDENJtWosCDuWORzbaFr6REJyIvlB0U4g/RmQn/RWZ+I1lEf45E9fI26v5Z
+	3YgDi41MP0GG4xVD5IhEgQO/GCNkRGVZFtfto48RnKdhxldmhk0iOnsIkmxwbYm0SxEP
+	32tlDfzqGY65ahkARaPO0M1zE0jaI3vvwo+/Xi9kj84EqOBTjlYDlAAr4qE+NJDqFZ55
+	q7qPMJA8PsNv2O4dTxt9crBITqvL3+xGnREsWD2UCAz1KCDc59aA7tS8R4XrfcssHzPF
+	CzJQ==
+X-Received: by 10.66.102.41 with SMTP id fl9mr31156029pab.7.1422902004232;
+	Mon, 02 Feb 2015 10:33:24 -0800 (PST)
+Received: from ?IPv6:2601:c:a700:272f:c42b:9a19:c8d3:f701?
+	([2601:c:a700:272f:c42b:9a19:c8d3:f701])
+	by mx.google.com with ESMTPSA id
+	ob4sm19521833pdb.48.2015.02.02.10.33.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 02 Feb 2015 10:33:22 -0800 (PST)
+Message-ID: <54CFC2ED.7040704@gmail.com>
+Date: Mon, 02 Feb 2015 10:33:17 -0800
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v6] p7zip: new recipe
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: --should-not-have-used-
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,38 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2015 18:26:29 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 02 Feb 2015 18:33:30 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Raphael,
 
-On Monday 02 February 2015 12:51:17 Raphael Freudiger wrote:
-> p7zip is the command line version of 7-Zip for Unix/Linux.
-> 
-> Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-> Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
-> ---
-> ...
-> +# binary is already stripped, don't strip it again
-> +INHIBIT_PACKAGE_STRIP = "1"
 
-I know there have been a lot of suggested revisions already, and someone
-should have said this earlier - but in general we prefer to stop the original
-stripping from happening rather than trying to work around the result being
-stripped. There is a section in the Yocto Project reference manual on how to
-deal with various QA issues, the one in question is here:
+Hello,
 
-http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#qa-issue-already-stripped
+I am now seeing an issue in one of my recipes during configure.
 
-While you are at it if you could set SUMMARY instead of DESCRIPTION (since
-the value you're setting is short) that would be great.
+--should-not-have-used-/usr/bin/pcap-config
 
-Thanks,
-Paul
 
--- 
+Is this indicating an issue with my recipe or with pcap?
 
-Paul Eggleton
-Intel Open Source Technology Centre
+binconfig-disabled.bbclass comments is not very helpful.
+
+regards,
+Armin
 
