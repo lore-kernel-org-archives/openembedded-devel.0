@@ -1,23 +1,38 @@
-Return-Path: <raphael.freudiger@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 027AF605F1
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 06C296018F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Feb 2015 11:51:38 +0000 (UTC)
-Received: from mail3.siemens.de (localhost [127.0.0.1])
-	by thoth.sbs.de (8.14.3/8.14.3) with ESMTP id t12BpYLl022506
+	Mon,  2 Feb 2015 15:28:21 +0000 (UTC)
+Received: by mail-we0-f182.google.com with SMTP id l61so39648935wev.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 2 Feb 2015 12:51:34 +0100
-Received: from localhost.localdomain (MD1AT2FC.ww002.siemens.net
-	[139.16.78.251])
-	by mail3.siemens.de (8.14.3/8.14.3) with ESMTP id t12BpYcU022809;
-	Mon, 2 Feb 2015 12:51:34 +0100
-From: Raphael Freudiger <raphael.freudiger@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Feb 2015 12:51:17 +0100
-Message-Id: <1422877877-4570-1-git-send-email-raphael.freudiger@siemens.com>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Raphael Freudiger <raphael.freudiger@siemens.com>
-Subject: [meta-oe][PATCH v6] p7zip: new recipe
+	Mon, 02 Feb 2015 07:28:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=GERPTuYbvRevYhY5kLMN5DZ0vAXu/NSzltZzD1yPFCE=;
+	b=MUt3dNhqxDFTvIKaaHo8+l6/X2rWI88P38xDPMO+/U2wezzx0hxMFz+722U5Cf0Naa
+	CjtSJ+02eVc7lbx+QFFM1sKP10BqsL/6qxPGUkS0ZMjM6pV2H0rHIP9dAlwFC4Xrd1Jv
+	4YhXVTRv2E96dfMMM7O7wERucAQj947iCttrRwd4jG2T1xo72JTaDU3k5c9XMawcztCW
+	fvJ8UEildvOivOvkQhs6UzZalV6orhKKn+XwWlQazlV4JdMGcLv4R25ngb7REC4qhB3R
+	pAkAi3qwl/1cmTegzQoEHHucV4CbGOqSyO8B9RZkMH5xYQIwyD7KF7AWOzF0sU0EGY+/
+	17xw==
+X-Gm-Message-State: ALoCoQlngbQ3mGw9yRvhzw2krdIbGY9/R9OP/dILvjtt+sqTq9KdE3Ee0bCpcllQqgsAJfsVB3cK
+X-Received: by 10.194.81.161 with SMTP id b1mr45545912wjy.2.1422890902810;
+	Mon, 02 Feb 2015 07:28:22 -0800 (PST)
+Received: from hackbox.linaro.org ([81.128.185.36])
+	by mx.google.com with ESMTPSA id
+	x10sm20336299wif.15.2015.02.02.07.28.21
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 02 Feb 2015 07:28:22 -0800 (PST)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+To: openembedded-devel@lists.openembedded.org,
+	cazfi74@gmail.com
+Date: Mon,  2 Feb 2015 15:27:44 +0000
+Message-Id: <1422890864-24641-1-git-send-email-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 1.9.1
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-games][PATCH] supertuxkart: initial recipe for v0.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,126 +46,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Feb 2015 11:51:42 -0000
+X-List-Received-Date: Mon, 02 Feb 2015 15:28:35 -0000
 
-p7zip is the command line version of 7-Zip for Unix/Linux.
+* the 2 patches are needed to build against mesa 10, they are backported from
+  upstream, since there is no new release as of yet.
+* tested on Snapdragon (ARMv7 + adreno GPU), running freedreno Mesa Gallium
+  driver
+* Build tested for qemux86
 
-Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 ---
- meta-oe/licenses/unRAR                             |   41 ++++++++++++++++++++
- .../p7zip/files/do_not_override_compiler.patch     |   24 ++++++++++++
- meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb     |   20 ++++++++++
- 3 files changed, 85 insertions(+)
- create mode 100644 meta-oe/licenses/unRAR
- create mode 100644 meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
- create mode 100644 meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+On some distro like Debian/Ubuntu the package is split in supertuxkart and
+supertuxkart-data to separate the rather large (~300MB) platform
+independent media files. I haven't done it here, but that could be
+done if needed..
 
-diff --git a/meta-oe/licenses/unRAR b/meta-oe/licenses/unRAR
+
+ ...01-Use-system-s-glext.h-glxext.h-on-linux.patch | 28 ++++++++++++++++++
+ ...ch-from-jpirie-for-fixing-mesa-10-compila.patch | 33 ++++++++++++++++++++++
+ recipes-games/supertuxkart/supertuxkart_0.8.1.bb   | 19 +++++++++++++
+ 3 files changed, 80 insertions(+)
+ create mode 100644 recipes-games/supertuxkart/files/0001-Use-system-s-glext.h-glxext.h-on-linux.patch
+ create mode 100644 recipes-games/supertuxkart/files/0002-Applied-patch-from-jpirie-for-fixing-mesa-10-compila.patch
+ create mode 100644 recipes-games/supertuxkart/supertuxkart_0.8.1.bb
+
+diff --git a/recipes-games/supertuxkart/files/0001-Use-system-s-glext.h-glxext.h-on-linux.patch b/recipes-games/supertuxkart/files/0001-Use-system-s-glext.h-glxext.h-on-linux.patch
 new file mode 100644
-index 0000000..5f78b72
+index 0000000..cf61c44
 --- /dev/null
-+++ b/meta-oe/licenses/unRAR
-@@ -0,0 +1,41 @@
-+ ******    *****   ******   unRAR - free utility for RAR archives
-+ **   **  **   **  **   **  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ ******   *******  ******    License for use and distribution of
-+ **   **  **   **  **   **   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+ **   **  **   **  **   **         FREE portable version
-+                                   ~~~~~~~~~~~~~~~~~~~~~
++++ b/recipes-games/supertuxkart/files/0001-Use-system-s-glext.h-glxext.h-on-linux.patch
+@@ -0,0 +1,28 @@
++From 8771edf61fcf3ced4afb9e9bc08897f575d86834 Mon Sep 17 00:00:00 2001
++From: Deve <deveee@gmail.com>
++Date: Sat, 17 May 2014 09:18:25 +0200
++Subject: [PATCH 1/2] Use system's glext.h/glxext.h on linux.
 +
-+      The source code of unRAR utility is freeware. This means:
++---
++ lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+   1. All copyrights to RAR and the utility unRAR are exclusively
-+      owned by the author - Alexander Roshal.
-+
-+   2. The unRAR sources may be used in any software to handle RAR
-+      archives without limitations free of charge, but cannot be used
-+      to re-create the RAR compression algorithm, which is proprietary.
-+      Distribution of modified unRAR sources in separate form or as a
-+      part of other software is permitted, provided that it is clearly
-+      stated in the documentation and source comments that the code may
-+      not be used to develop a RAR (WinRAR) compatible archiver.
-+
-+   3. The unRAR utility may be freely distributed. No person or company 
-+      may charge a fee for the distribution of unRAR without written
-+      permission from the copyright holder.
-+
-+   4. THE RAR ARCHIVER AND THE UNRAR UTILITY ARE DISTRIBUTED "AS IS".
-+      NO WARRANTY OF ANY KIND IS EXPRESSED OR IMPLIED.  YOU USE AT 
-+      YOUR OWN RISK. THE AUTHOR WILL NOT BE LIABLE FOR DATA LOSS, 
-+      DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE USING
-+      OR MISUSING THIS SOFTWARE.
-+
-+   5. Installing and using the unRAR utility signifies acceptance of
-+      these terms and conditions of the license.
-+
-+   6. If you don't agree with terms of the license you must remove
-+      unRAR files from your storage devices and cease to use the
-+      utility.
-+
-+      Thank you for your interest in RAR and unRAR.
-+
-+
-+                                            Alexander L. Roshal
-\ No newline at end of file
-diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
-new file mode 100644
-index 0000000..c97a1ee
---- /dev/null
-+++ b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler.patch
-@@ -0,0 +1,24 @@
-+do not override compiler
-+
-+The default makefile sets the compiler to g++ or gcc. This leads to a wrong architecture when cross-compiling.
-+Remove the hardcoded compiler and just append the flags to CXX and CC.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-+Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
-+
-+Index: p7zip_9.20.1/makefile.machine
-+=====================================================================
-+--- p7zip_9.20.1.orig/makefile.machine	2011-03-13 12:54:57.000000000 +0100
-++++ p7zip_9.20.1/makefile.machine	2014-11-12 16:20:22.880349826 +0100
-+@@ -10,8 +10,8 @@
-+ 	-D_7ZIP_LARGE_PAGES \
-+ 	$(LOCAL_FLAGS)
++diff --git a/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h b/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h
++index 7f9e0df..586d0c4 100644
++--- a/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h
+++++ b/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h
++@@ -61,9 +61,9 @@
++ 	#include <GL/gl.h>
++ 	#include <GL/glx.h>
++ 	#if defined(_IRR_OPENGL_USE_EXTPOINTER_)
++-	#include "glext.h"
+++	#include <GL/glext.h>
++ 	#undef GLX_ARB_get_proc_address // avoid problems with local glxext.h
++-	#include "glxext.h"
+++	#include <GL/glxext.h>
++ 	#endif
++ #endif
 + 
-+-CXX=g++ $(ALLFLAGS)
-+-CC=gcc $(ALLFLAGS)
-++CXX+=$(ALLFLAGS)
-++CC+=$(ALLFLAGS)
-+ CC_SHARED=-fPIC
-+ LINK_SHARED=-fPIC -shared
-+ 
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
++-- 
++2.1.4
++
+diff --git a/recipes-games/supertuxkart/files/0002-Applied-patch-from-jpirie-for-fixing-mesa-10-compila.patch b/recipes-games/supertuxkart/files/0002-Applied-patch-from-jpirie-for-fixing-mesa-10-compila.patch
 new file mode 100644
-index 0000000..45fdbdf
+index 0000000..3162ba6
 --- /dev/null
-+++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "7-zip is a commandline utility handling 7z archives."
-+HOMEPAGE = "http://www.7-zip.org/"
-+LICENSE = "LGPL-2.1+ & unRAR"
-+LIC_FILES_CHKSUM = "file://DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a \
-+                    file://DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
++++ b/recipes-games/supertuxkart/files/0002-Applied-patch-from-jpirie-for-fixing-mesa-10-compila.patch
+@@ -0,0 +1,33 @@
++From 1a922afa0b03b9cc35e9fb4945deb3f73a5d39b4 Mon Sep 17 00:00:00 2001
++From: Deve <deveee@gmail.com>
++Date: Sat, 17 May 2014 09:21:07 +0200
++Subject: [PATCH 2/2] Applied patch from jpirie for fixing mesa 10 compilation
++ problems.
 +
-+SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
-+          file://do_not_override_compiler.patch"
-+SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
-+SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
++---
++ lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+S = "${WORKDIR}/${PN}_${PV}"
++diff --git a/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h b/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h
++index 586d0c4..b39f8b5 100644
++--- a/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h
+++++ b/lib/irrlicht/source/Irrlicht/COpenGLExtensionHandler.h
++@@ -49,6 +49,7 @@
++ 	#define NO_SDL_GLEXT
++ 	#include <SDL/SDL_video.h>
++ 	#include <SDL/SDL_opengl.h>
+++	typedef void (APIENTRYP PFNGLBLENDEQUATIONPROC) (GLenum mode);
++ 	#include "glext.h"
++ #else
++ 	#if defined(_IRR_OPENGL_USE_EXTPOINTER_)
++@@ -61,6 +62,7 @@
++ 	#include <GL/gl.h>
++ 	#include <GL/glx.h>
++ 	#if defined(_IRR_OPENGL_USE_EXTPOINTER_)
+++	typedef void (APIENTRYP PFNGLBLENDEQUATIONPROC) (GLenum mode);
++ 	#include <GL/glext.h>
++ 	#undef GLX_ARB_get_proc_address // avoid problems with local glxext.h
++ 	#include <GL/glxext.h>
++-- 
++2.1.4
 +
-+# binary is already stripped, don't strip it again
-+INHIBIT_PACKAGE_STRIP = "1"
+diff --git a/recipes-games/supertuxkart/supertuxkart_0.8.1.bb b/recipes-games/supertuxkart/supertuxkart_0.8.1.bb
+new file mode 100644
+index 0000000..126bbd2
+--- /dev/null
++++ b/recipes-games/supertuxkart/supertuxkart_0.8.1.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "SuperTuxKart is a kart racing game featuring Tux and his friends"
++HOMEAPAGE = "http://supertuxkart.sourceforge.net"
++SECTION = "x11/application"
++LICENSE = "GPLv2 & GPLv3+ "
++LIC_FILES_CHKSUM = "file://COPYING;md5=a71cb78659d60f2ced58a594cb65bfba"
 +
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/bin/* ${D}${bindir}
-+}
++DEPENDS = "libogg libvorbis libxrandr virtual/libgl openal-soft fribidi curl"
++
++inherit cmake
++
++S = "${WORKDIR}/SuperTuxKart-${PV}"
++
++SRC_URI = "http://sourceforge.net/projects/supertuxkart/files/SuperTuxKart/${PV}/supertuxkart-${PV}-src.tar.bz2;protocol=https \
++           file://0001-Use-system-s-glext.h-glxext.h-on-linux.patch  \
++           file://0002-Applied-patch-from-jpirie-for-fixing-mesa-10-compila.patch"
++
++SRC_URI[md5sum] = "aa31ecf883dc35859eec76c667f1a6d6"
++SRC_URI[sha256sum] = "335301ae61b0c177be68d5593c65e5b197dc807421f08a8a35740a254cacf8d6"
++
 -- 
-1.7.10.4
+1.9.1
 
 
