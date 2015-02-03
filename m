@@ -1,25 +1,36 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id A7D4B6E5D7
+Return-Path: <riku.voipio@linaro.org>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 16DF46E5D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Feb 2015 13:44:08 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 417B1F811DE; Tue,  3 Feb 2015 06:44:09 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=4.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from Zeus.chez-thomas.org (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 46730F811DB;
-	Tue,  3 Feb 2015 06:44:08 -0700 (MST)
-From: Gary Thomas <gary@mlbassoc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Feb 2015 06:44:07 -0700
-Message-Id: <1422971047-17965-1-git-send-email-gary@mlbassoc.com>
-X-Mailer: git-send-email 1.9.1
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: [meta-oe][PATCH] mplayer2: Remove blacklist
+	Tue,  3 Feb 2015 14:38:45 +0000 (UTC)
+Received: by mail-wi0-f181.google.com with SMTP id fb4so22187798wid.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Feb 2015 06:38:46 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=LC1tG/MeYt6q6Og50gks0XcyRGHlL0JuqxwGzgln+Wg=;
+	b=OEWU5Mws6fJfJyFUohP+Z2hXgoBHcX/z79iarzadXsjbE270gsToyeAw1i8xVxVwdx
+	ADqtakSt0ek8y+wSaA4HvoyIUKLKIhhY4TMTDexoqNOxZ/JkE5HpNWso2krVmEfo/JUn
+	e3LNGYWiogP6PeTA9ASp//VWMFLKygt7tl6ooSsM4ps0s+cVIu1NyHiGlLd1A65xW6zs
+	6eyU4wYPDQr/kpotw1DQQ6kbX+WBthMu+LdVXO1bBSNVbhIHq8is7SvVwKIVCMBgJs0g
+	o8jgB/mlZFzRowh09Y1CaCwPtS8QhzE81nC95BOqNY6ZiN6Kqlw90ltb/S4pNRRiMNCU
+	OL5A==
+X-Gm-Message-State: ALoCoQlNqZAaZbU/ySqd3iVkaalFpnUyKnrwQpoyil6lmkgs6jPCuHGkScY3XUAqleBxGrHfhXHQ
+MIME-Version: 1.0
+X-Received: by 10.194.23.6 with SMTP id i6mr53298143wjf.26.1422974326306; Tue,
+	03 Feb 2015 06:38:46 -0800 (PST)
+Received: by 10.27.76.20 with HTTP; Tue, 3 Feb 2015 06:38:46 -0800 (PST)
+Date: Tue, 3 Feb 2015 16:38:46 +0200
+Message-ID: <CAAqcGHm5+XwhKnc6cjgHr7q78W1Xpi-XvywQmpkp=EHpwiecXA@mail.gmail.com>
+From: Riku Voipio <riku.voipio@linaro.org>
+To: Cross Distro Mailman List <cross-distro@lists.linaro.org>,
+	debian-arm@lists.debian.org, 
+	arm@lists.fedoraproject.org, opensuse-arm@lists.opensuse.org, 
+	openembedded-devel@lists.openembedded.org
+Subject: Cross Distribution sync on ARM issues session at Linaro connect
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,30 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Feb 2015 13:44:15 -0000
+X-List-Received-Date: Tue, 03 Feb 2015 14:38:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-mplayer2 no longer needs to be blacklisted as OE-core has moved
-to libav_9.16
+Hi everyone,
 
-Signed-off-by: Gary Thomas <gary@mlbassoc.com>
----
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 --
- 1 file changed, 2 deletions(-)
+Since cross-distribution meetings at Linaro Connect have been popular,
+we are continuing the tradition and having a session[1] in Linaro Connect next
+week.
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-index 7c04ff1..089aa15 100644
---- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-@@ -13,8 +13,6 @@ RCONFLICTS_${PN} = "mplayer"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
- 
--PNBLACKLIST[mplayer2] ?= "Requires newer libav which has negative D_P"
--
- SRC_URI = "git://repo.or.cz/mplayer.git \
-     file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
- "
--- 
-1.9.1
+https://hkg15.pathable.com/meetings/250818
 
+The event is on Wednesday 11 February, 14.00 hong kong time (06.00 UTC).
+We'll try to get session broadcasted on google hangouts for remote
+participation, but I don't have the link at hand yet.
+
+If you have anything specific in your mind, feel free to reply to this mail to
+cross-distribution list, and I'll get it added to agenda.
+
+Riku
 
