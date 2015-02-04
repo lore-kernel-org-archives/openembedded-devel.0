@@ -1,35 +1,35 @@
 Return-Path: <danismostlikely@gmail.com>
-Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A0A565D00
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 90F2D601DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Feb 2015 18:38:29 +0000 (UTC)
-Received: by mail-ig0-f180.google.com with SMTP id b16so6101889igk.1
+	Wed,  4 Feb 2015 18:39:58 +0000 (UTC)
+Received: by mail-ie0-f177.google.com with SMTP id vy18so4256769iec.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Feb 2015 10:38:30 -0800 (PST)
+	Wed, 04 Feb 2015 10:39:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id;
-	bh=6PqB9wfeUpq3oi65YmH1rrVomayG0RmHurle+hHHKv4=;
-	b=nfuHdwzqTEHywtn7/fOhyyGcudJTO4GrVapzKto34Hu0FiUV/yB1TFfvMYUNkerbTu
-	JXy4kRe5Lzf8spqZqFj/kv2hks4bbHYk+YkGAZXQ3mMOSP2Rrgk7PByYqtILsaCWStYN
-	UC990/lBH3qG64fcyl6si96r969ZVpUOQGScZRrK7FjeQaS66diugw6OaIIh26CFLfrr
-	faDQdPEW3+1m809Q+WMuw7wpz4nNEpPmgg7tQ0BqZQZ3lmzdrRiYdPVtWK78P03QCkEL
-	/udMUiI8WYI4FJY12it4KfE+1TpiSLJdXndwiEKn+58xGlz0TJR9lUCcaryGSQjxGiyk
-	bBDA==
-X-Received: by 10.42.102.5 with SMTP id g5mr3149976ico.74.1423075110862;
-	Wed, 04 Feb 2015 10:38:30 -0800 (PST)
+	bh=eB3g3R014/wtbHNYSwaAMUfO431tfvLDQnWPFaoMeC4=;
+	b=EyW46eBZjBbCMU4X0HR6xOlagfb6omGI2zc8nQGPecRHRht6w5B72qteC0GBiE+IZ2
+	sOYS0xzCdCuF42fKankLn9TCCXnyQjuvRuu5NCipW+BD9SBLTa5IhSzaerAOnpbern1f
+	nOygZnIQ3PvXAMH8a2AtVRpyGRayteMuQAgnX5R+7p93490CLRhCIuW5NENI5vRjsUon
+	eXnR4QweJB7waNJ4uj4rLmvn3pdQhM8zOe5Jxx/mQHBuMkWIr0zBx2HOQcuCOtbyGJNj
+	laOF95emnFMcXNmZm8v8QyCGEo2deKgIOZqNhNjZL6CQ/nbQJQkEyXQhT3PeMOREQ0Vt
+	nIaQ==
+X-Received: by 10.51.16.1 with SMTP id fs1mr25747942igd.8.1423075191566;
+	Wed, 04 Feb 2015 10:39:51 -0800 (PST)
 Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
 	[71.17.233.74])
-	by mx.google.com with ESMTPSA id yq1sm1478329igb.21.2015.02.04.10.38.30
+	by mx.google.com with ESMTPSA id z9sm1266672igw.21.2015.02.04.10.39.50
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Feb 2015 10:38:30 -0800 (PST)
+	Wed, 04 Feb 2015 10:39:51 -0800 (PST)
 From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Feb 2015 12:38:28 -0600
-Message-Id: <1423075108-24559-1-git-send-email-danismostlikely@gmail.com>
+Date: Wed,  4 Feb 2015 12:39:50 -0600
+Message-Id: <1423075190-24676-1-git-send-email-danismostlikely@gmail.com>
 X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][PATCH 1/5] xserver-nodm-init: only enable for runlevel 5
+Subject: [meta-oe][PATCH 2/5] lxdm: RDEPEND on libsvg-gtk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,62 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 18:38:32 -0000
-
-From: Dan McGregor <dan.mcgregor@usask.ca>
-
-Runlevel 5 is traditionally graphical. If it starts in runlevel 2
-or 3 systemd gets confused and adds it as a dependency of the
-multi-user target, not just the graphical target.
-
-Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
----
- .../xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm         | 9 +++++++++
- .../recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb  | 4 ++--
- 2 files changed, 11 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm
-index d2e2f86..5d7e8a2 100755
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm
-@@ -1,4 +1,13 @@
- #!/bin/sh
-+#
-+### BEGIN INIT INFO
-+# Provides: xserver
-+# Required-Start: $local_fs $remote_fs dbus
-+# Required-Stop: $local_fs $remote_fs
-+# Default-Start:     5
-+# Default-Stop:      0 1 2 3 6
-+### END INIT INFO
-+
- 
- . /etc/init.d/functions
- 
-diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-index 47470fb..f9bf007 100644
---- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-+++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
-@@ -15,8 +15,8 @@ S = "${WORKDIR}"
- inherit allarch update-rc.d systemd
- 
- INITSCRIPT_NAME = "xserver-nodm"
--INITSCRIPT_PARAMS = "start 01 5 2 . stop 01 0 1 6 ."
--INITSCRIPT_PARAMS_shr = "start 90 5 2 . stop 90 0 1 6 ."
-+INITSCRIPT_PARAMS = "start 01 5 . stop 01 0 1 2 3 6 ."
-+INITSCRIPT_PARAMS_shr = "start 90 5 . stop 90 0 1 2 3 6 ."
- 
- do_install() {
-     install -d ${D}${sysconfdir}/init.d
--- 
-2.1.0
-
-
-From 326102dab4af209f6e171ee5773b1eae91e1fdf8 Mon Sep 17 00:00:00 2001
-From: Dan McGregor <danismostlikely@gmail.com>
-Date: Tue, 3 Feb 2015 18:46:42 -0600
-Subject: [meta-oe][PATCH 2/5] lxdm: RDEPEND on libsvg-gtk
-To: openembedded-devel@lists.openembedded.org
+X-List-Received-Date: Wed, 04 Feb 2015 18:39:59 -0000
 
 From: Dan McGregor <dan.mcgregor@usask.ca>
 
