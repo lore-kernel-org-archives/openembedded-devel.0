@@ -1,35 +1,35 @@
 Return-Path: <danismostlikely@gmail.com>
-Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id B3E83601DC
+Received: from mail-ie0-f180.google.com (mail-ie0-f180.google.com
+	[209.85.223.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A83072184
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Feb 2015 18:40:27 +0000 (UTC)
-Received: by mail-ie0-f181.google.com with SMTP id rd18so4218018iec.12
+	Wed,  4 Feb 2015 18:40:43 +0000 (UTC)
+Received: by mail-ie0-f180.google.com with SMTP id rl12so4242744iec.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Feb 2015 10:40:28 -0800 (PST)
+	Wed, 04 Feb 2015 10:40:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id;
-	bh=TJSiv0bZDiXc9bDDjMzgWA/sOxfCbATXXIMvIOz0G5Y=;
-	b=YNTTSr2bsf0BooAxsHMJIb54nX5WE5iqwWwRXTXW3TQ34i7v2lKx7VXKPZQBBp0aMG
-	/IDM0oBXSEIeFO60SvNG5S60jppYsovA5mFyTTUq6U8goGRTivfSZXWHnu9VqYuvrBZz
-	+GxryN53s9wOh6XtNyaevILrH+M8OUfSDxINxMiAzdabDstjV8+lT/MwpEb6o5mSUaJE
-	Jd8r0JuXxyjZRGrW4so0sP4jshA8mGnhcwJNmRVLwUvfi931jG1BEIhfX3BMZ7UAYWkr
-	Cy5XUn3Tu99/mIEg8ZO7j1YJCsjbc43R5XEwgRyPAPh/AoIwKuuy/+tD12HzarZzq3pb
-	qPCw==
-X-Received: by 10.50.254.4 with SMTP id ae4mr3847780igd.10.1423075228791;
-	Wed, 04 Feb 2015 10:40:28 -0800 (PST)
+	bh=nXBH3DyfZA0ouTzZ0E8as/SfTfPa4y6HnBzLL0D7nbw=;
+	b=tZzKz+laBtGmne4kSW8CPFTXUa1SunCpo9bujYSNwOf7UzuxiE3pRJnacFda+w8yox
+	RxkrDc58EjGHZU2ViG8PPq5Wmk+zTrwdeQhEB7vZuG+1CEDjWp6ZuWA3ijPqBYhoIZoM
+	rYJ3tegjsMasnwluxbwYNG58/gX41Ibej2zXUUOUDMrpp6h/9lQZkHZnObHLILqasDgI
+	i0bazcDXl825qq6ULNN93gGpXTozAjfPjz6yS+yMb8EQqIgAhQ9lYy/nBiQtdiYpWmI6
+	4OXYsSYRAuiiVvO/W+QS2mkKOa1iGx83G8BegHfRdEm5GSVLa8BY6IiaT66yChUHTApu
+	Ykyg==
+X-Received: by 10.50.234.194 with SMTP id ug2mr25999727igc.39.1423075244959;
+	Wed, 04 Feb 2015 10:40:44 -0800 (PST)
 Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
 	[71.17.233.74])
-	by mx.google.com with ESMTPSA id aw9sm1484008igc.18.2015.02.04.10.40.28
+	by mx.google.com with ESMTPSA id a204sm1265297ioe.2.2015.02.04.10.40.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Feb 2015 10:40:28 -0800 (PST)
+	Wed, 04 Feb 2015 10:40:44 -0800 (PST)
 From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Feb 2015 12:40:27 -0600
-Message-Id: <1423075227-24769-1-git-send-email-danismostlikely@gmail.com>
+Date: Wed,  4 Feb 2015 12:40:43 -0600
+Message-Id: <1423075243-24859-1-git-send-email-danismostlikely@gmail.com>
 X-Mailer: git-send-email 2.1.0
-Subject: [meta-gnome][PATCH 4/5] gdm: Only start in runlevel 5
+Subject: [meta-initramfs][PATCH 5/5] dracut: recipe cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,57 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 18:40:30 -0000
-
-From: Dan McGregor <dan.mcgregor@usask.ca>
-
-Runlevel 5 is traditionally graphical. If it starts in runlevel 2
-or 3 systemd gets confused and adds it as a dependency of the
-multi-user target, not just the graphical target.
-
-Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
----
- meta-gnome/recipes-gnome/gdm/gdm/gdm       | 4 ++--
- meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm/gdm b/meta-gnome/recipes-gnome/gdm/gdm/gdm
-index 43eae95..bb5b418 100755
---- a/meta-gnome/recipes-gnome/gdm/gdm/gdm
-+++ b/meta-gnome/recipes-gnome/gdm/gdm/gdm
-@@ -4,8 +4,8 @@
- # Should-Start:      console-screen acpid dbus hal network-manager
- # Required-Start:    $local_fs $remote_fs
- # Required-Stop:     $local_fs $remote_fs
--# Default-Start:     2 3 4 5
--# Default-Stop:      0 1 6
-+# Default-Start:     5
-+# Default-Stop:      0 1 2 3 6
- # Short-Description: GNOME Display Manager
- # Description:       Debian init script for the GNOME Display Manager
- ### END INIT INFO
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-index b2ae9ac..fcd51ff 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-@@ -88,7 +88,7 @@ RCONFLICTS_${PN} += "${PN}-systemd"
- SYSTEMD_SERVICE_${PN} = "gdm.service"
- 
- INITSCRIPT_NAME = "gdm"
--INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
-+INITSCRIPT_PARAMS = "start 99 5 . stop 20 0 1 2 3 6 ."
- 
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM_${PN} = "--system --no-create-home --home ${localstatedir}/lib/gdm --user-group gdm"
--- 
-2.1.0
-
-
-From 4dbe8a0bc32d09ea82726d78cfd1292a3a6b3719 Mon Sep 17 00:00:00 2001
-From: Dan McGregor <danismostlikely@gmail.com>
-Date: Tue, 3 Feb 2015 18:46:42 -0600
-Subject: [meta-initramfs][PATCH 5/5] dracut: recipe cleanup
-To: openembedded-devel@lists.openembedded.org
+X-List-Received-Date: Wed, 04 Feb 2015 18:40:44 -0000
 
 From: Dan McGregor <dan.mcgregor@usask.ca>
 
