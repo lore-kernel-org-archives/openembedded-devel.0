@@ -1,24 +1,25 @@
-Return-Path: <joe.slater@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 275776AC5A
+	by mail.openembedded.org (Postfix) with ESMTP id 0CE8E605F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Feb 2015 19:41:15 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t13JfFXT003710
+	Wed,  4 Feb 2015 02:46:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t142k5ia012892
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 3 Feb 2015 11:41:15 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Tue, 3 Feb 2015 11:41:15 -0800
-From: Joe Slater <jslater@windriver.com>
+	Tue, 3 Feb 2015 18:46:05 -0800 (PST)
+Received: from pek-kkang-d1.wrs.com (128.224.162.231) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.174.1; Tue, 3 Feb 2015 18:46:04 -0800
+From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 3 Feb 2015 11:41:14 -0800
-Message-ID: <1422992474-28087-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+Date: Wed, 4 Feb 2015 10:45:59 +0800
+Message-ID: <1423017959-7634-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.1.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/1] rsnapshot: specify where perl is on the target
+X-Originating-IP: [128.224.162.231]
+Subject: [meta-networking][PATCH] quagga: fix typo in systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,27 +33,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Feb 2015 19:41:22 -0000
+X-List-Received-Date: Wed, 04 Feb 2015 02:46:16 -0000
 Content-Type: text/plain
 
-Do not let configure find the host perl.
+Fix typo in systemd service file ripngd.service.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb |    1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-protocols/quagga/files/ripngd.service | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-index 3f919b5..d680511 100644
---- a/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-+++ b/meta-oe/recipes-support/rsnapshot/rsnapshot_git.bb
-@@ -39,4 +39,5 @@ EXTRA_OECONF += "--without-cp \
-                  --without-ssh \
-                  --without-logger \
-                  --without-rsync \
-+                 ac_cv_path_PERL=${bindir}/perl \
-                 "
+diff --git a/meta-networking/recipes-protocols/quagga/files/ripngd.service b/meta-networking/recipes-protocols/quagga/files/ripngd.service
+index 936b81f..72562d5 100644
+--- a/meta-networking/recipes-protocols/quagga/files/ripngd.service
++++ b/meta-networking/recipes-protocols/quagga/files/ripngd.service
+@@ -1,4 +1,4 @@
+-i[Unit]
++[Unit]
+ Description=RIP routing daemon for IPv6
+ BindTo=zebra.service
+ After=zebra.service
 -- 
-1.7.9.5
+2.1.1
 
 
