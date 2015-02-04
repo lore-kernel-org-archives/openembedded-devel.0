@@ -1,25 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C68666E6BE
+Return-Path: <danismostlikely@gmail.com>
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id C7D8B6E6C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Feb 2015 17:45:48 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga103.jf.intel.com with ESMTP; 04 Feb 2015 09:41:08 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.09,519,1418112000"; d="scan'208";a="647332279"
-Received: from bdrobeso-mobl3.amr.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.17.70])
-	by orsmga001.jf.intel.com with ESMTP; 04 Feb 2015 09:45:49 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
+	Wed,  4 Feb 2015 18:33:51 +0000 (UTC)
+Received: by mail-ie0-f171.google.com with SMTP id tr6so4240180ieb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Feb 2015 10:33:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=xR0g5y7Rc1xCeQrrBT425gL4Efc64FGiFHguyKyn0os=;
+	b=p5SmYxjtkUWnFvPdVidEyIpeNhW4pKctDuD3JfNbNkMdYxCzhgF3Z850xh7uBTGbbB
+	kCfaP9MVz9Cfd0AvC/Fsv11zUDDr5z8GiuV5m/rHr5HEtxsCqdFIivu13UQK0KrEMoKi
+	5cQP3nG5t8ea/acCFnX0LTrgcNP2XwWf+F/H0kEsLhK7naRpX4b5EJRlwW+j51zmznKa
+	gmPDSV4ZXJb1y77ezWazghp1D3m6MoJwXeh+er8pEY4tBAUxzxLgYFffD0JSjeRgqNua
+	Y1JDsHOo0WmnftbsnrhAZMltNXRz4YqGZuJJVn0yTUf4Ydr9i4vDCfhc8oxr2U9s0qmp
+	D8PQ==
+X-Received: by 10.107.135.212 with SMTP id r81mr8286347ioi.38.1423074832625;
+	Wed, 04 Feb 2015 10:33:52 -0800 (PST)
+Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
+	[71.17.233.74])
+	by mx.google.com with ESMTPSA id nv8sm9937755igb.6.2015.02.04.10.33.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Feb 2015 10:33:52 -0800 (PST)
+From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Feb 2015 17:45:37 +0000
-Message-Id: <3b22d908188e4c0f7876800dc580e0198fabafd2.1423071889.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <cover.1423071889.git.paul.eggleton@linux.intel.com>
-References: <cover.1423071889.git.paul.eggleton@linux.intel.com>
-In-Reply-To: <cover.1423071889.git.paul.eggleton@linux.intel.com>
-References: <cover.1423071889.git.paul.eggleton@linux.intel.com>
-Subject: [meta-python][PATCH 3/3] python-django-south: add version 1.0.2
+Date: Wed,  4 Feb 2015 12:33:49 -0600
+Message-Id: <1423074829-24463-1-git-send-email-danismostlikely@gmail.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [PATCH 0/5] Fixes for display managers, emacs, and dracut
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,42 +43,415 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 17:45:49 -0000
+X-List-Received-Date: Wed, 04 Feb 2015 18:33:59 -0000
 
-From: Saul Wold <sgw@linux.intel.com>
+From: Dan McGregor <dan.mcgregor@usask.ca>
 
-Signed-off-by: Saul Wold <sgw@linux.intel.com>
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../python/python-django-south_1.0.2.bb                | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-django-south_1.0.2.bb
+Here are a bunch of patches that I've been sitting on for
+far too long; it's time to push them up.
 
-diff --git a/meta-python/recipes-devtools/python/python-django-south_1.0.2.bb b/meta-python/recipes-devtools/python/python-django-south_1.0.2.bb
-new file mode 100644
-index 0000000..a349983
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-django-south_1.0.2.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Migrations for Django"
-+DESCRIPTION = "South is an intelligent database migrations library for the Django web framework. It is database-independent and DVCS-friendly, as well as a whole host of other features."
-+HOMEPAGE = "http://south.aeracode.org/"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=17;endline=18;md5=2155d8ae21e7c23101d5febac696b27e"
-+
-+SRCNAME = "South"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/S/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "c76a9758b2011bc3b6c39f881bba2f66"
-+SRC_URI[sha256sum] = "d360bd31898f9df59f6faa786551065bba45b35e7ee3c39b381b4fbfef7392f4"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit distutils
-+
+Dan McGregor (5):
+  xserver-nodm-init: only enable for runlevel 5
+  lxdm: RDEPEND on libsvg-gtk
+  emacs: Un-blacklist, seems to work fine with new qemu
+  gdm: Only start in runlevel 5
+  dracut: recipe cleanup
+
+ meta-gnome/recipes-gnome/gdm/gdm/gdm               |  4 +-
+ meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb         |  2 +-
+ .../recipes-devtools/dracut/dracut_git.bb          | 25 ++++--
+ meta-oe/recipes-graphics/lxdm/lxdm_git.bb          |  2 +-
+ .../xserver-nodm-init-2.0/xserver-nodm             |  9 +++
+ .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |  4 +-
+ meta-oe/recipes-support/emacs/emacs.inc            | 89 +---------------------
+ meta-oe/recipes-support/emacs/emacs_23.4.bb        |  2 -
+ 8 files changed, 36 insertions(+), 101 deletions(-)
+
 -- 
-1.9.3
+2.1.0
+
+From 2e55392c655f8cfa934d589d337b00b0264c9664 Mon Sep 17 00:00:00 2001
+From: Dan McGregor <danismostlikely@gmail.com>
+Date: Wed, 13 Aug 2014 16:46:42 -0600
+Subject: [meta-oe][PATCH 1/5] xserver-nodm-init: only enable for runlevel 5
+To: openembedded-devel@lists.openembedded.org
+
+From: Dan McGregor <dan.mcgregor@usask.ca>
+
+Runlevel 5 is traditionally graphical. If it starts in runlevel 2
+or 3 systemd gets confused and adds it as a dependency of the
+multi-user target, not just the graphical target.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ .../xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm         | 9 +++++++++
+ .../recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb  | 4 ++--
+ 2 files changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm
+index d2e2f86..5d7e8a2 100755
+--- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm
++++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init-2.0/xserver-nodm
+@@ -1,4 +1,13 @@
+ #!/bin/sh
++#
++### BEGIN INIT INFO
++# Provides: xserver
++# Required-Start: $local_fs $remote_fs dbus
++# Required-Stop: $local_fs $remote_fs
++# Default-Start:     5
++# Default-Stop:      0 1 2 3 6
++### END INIT INFO
++
+ 
+ . /etc/init.d/functions
+ 
+diff --git a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
+index 47470fb..f9bf007 100644
+--- a/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
++++ b/meta-oe/recipes-graphics/xserver-nodm-init/xserver-nodm-init_2.0.bb
+@@ -15,8 +15,8 @@ S = "${WORKDIR}"
+ inherit allarch update-rc.d systemd
+ 
+ INITSCRIPT_NAME = "xserver-nodm"
+-INITSCRIPT_PARAMS = "start 01 5 2 . stop 01 0 1 6 ."
+-INITSCRIPT_PARAMS_shr = "start 90 5 2 . stop 90 0 1 6 ."
++INITSCRIPT_PARAMS = "start 01 5 . stop 01 0 1 2 3 6 ."
++INITSCRIPT_PARAMS_shr = "start 90 5 . stop 90 0 1 2 3 6 ."
+ 
+ do_install() {
+     install -d ${D}${sysconfdir}/init.d
+-- 
+2.1.0
+
+
+From 326102dab4af209f6e171ee5773b1eae91e1fdf8 Mon Sep 17 00:00:00 2001
+From: Dan McGregor <danismostlikely@gmail.com>
+Date: Fri, 10 Oct 2014 10:14:52 -0600
+Subject: [meta-oe][PATCH 2/5] lxdm: RDEPEND on libsvg-gtk
+To: openembedded-devel@lists.openembedded.org
+
+From: Dan McGregor <dan.mcgregor@usask.ca>
+
+The theme uses svg files. If libsvg-gtk isn't available lxdm
+still runs, but throws a bunch of pixbuf errors.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+index a3dcc1b..66dc269 100644
+--- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
++++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
+@@ -70,7 +70,7 @@ done
+ sed -i "s:last_langs=.*$:last_langs=$langs:g" $D${localstatedir}/lib/lxdm/lxdm.conf
+ }
+ 
+-RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash"
++RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash librsvg-gtk"
+ 
+ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+-- 
+2.1.0
+
+
+From 9a238ca43caf0989b4ace91926500493741e6e02 Mon Sep 17 00:00:00 2001
+From: Dan McGregor <danismostlikely@gmail.com>
+Date: Mon, 24 Nov 2014 08:00:34 -0600
+Subject: [meta-oe][PATCH 3/5] emacs: Un-blacklist, seems to work fine with new
+ qemu
+To: openembedded-devel@lists.openembedded.org
+
+From: Dan McGregor <dan.mcgregor@usask.ca>
+
+I've only tested the build with armv7 and x86, but the build
+doesn't segfault anymore. The last time this was tested was
+with qemu 1.5, we're now using 2.1.
+
+While here, don't copy stuff from the sysroot into the qemu tree
+just use the sysroot itself.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ meta-oe/recipes-support/emacs/emacs.inc     | 89 +----------------------------
+ meta-oe/recipes-support/emacs/emacs_23.4.bb |  2 -
+ 2 files changed, 2 insertions(+), 89 deletions(-)
+
+diff --git a/meta-oe/recipes-support/emacs/emacs.inc b/meta-oe/recipes-support/emacs/emacs.inc
+index a1a4965..e052c5e 100644
+--- a/meta-oe/recipes-support/emacs/emacs.inc
++++ b/meta-oe/recipes-support/emacs/emacs.inc
+@@ -14,14 +14,13 @@ X11DEPENDS = " \
+     libx11 libxau libxcomposite libxcursor libxdamage libxdmcp libxext libxfixes \
+     libxft libxpm libxrandr libxrender \
+     gdk-pixbuf glib-2.0 gtk+ pango libxcb harfbuzz icu \
+-" 
++"
+ 
+ EXTRA_OECONF =  "--without-sound --with-crt-dir=${STAGING_LIBDIR} "
+ 
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+ PACKAGECONFIG[x11] = "--with-x-toolkit=gtk,--without-x --without-dbus,${X11DEPENDS}"
+ 
+-
+ inherit autotools
+ 
+ PACKAGES =+ "${PN}-el"
+@@ -33,15 +32,13 @@ FILES_${PN} += "${datadir}/emacs ${datadir}/icons"
+ 
+ FILES_${PN}-dbg += "${libexecdir}/emacs/*/*/.debug ${datadir}/emacs/*/*/.debug"
+ 
+-TREEDIR = "${WORKDIR}/qemu-treedir"
+-
+ QEMUARCH= "${TARGET_ARCH}"
+ QEMUARCH_i486 = "i386"
+ QEMUARCH_i586 = "i386"
+ QEMUARCH_i686 = "i386"
+ 
+ # Large stack is required at least on x86_64 host, otherwise random segfaults appear:
+-QEMU = "qemu-${QEMUARCH} ${QEMU_OPTIONS} -s 1048576 -L ${TREEDIR} "
++QEMU = "qemu-${QEMUARCH} ${QEMU_OPTIONS} -s 1048576 -L ${STAGING_DIR_HOST} "
+ 
+ export LOGNAME = "$(whoami)"
+ 
+@@ -52,88 +49,6 @@ do_compile_prepend() {
+     ln -sf ../src/emacs lisp/emacs
+     ln -sf ../src/emacs lib-src/emacs
+     ln -sf ../src/emacs leim/emacs
+-#copy STAGING_DIR_TARGET and libgcc_s.so* to WORKDIR/qemu-treedir #copied code from glibc-package.bbclass
+-    treedir=${TREEDIR}
+-    if [ -e $treedir ];then
+-        rm -rf $treedir
+-    fi
+-    
+-    mkdir -p $treedir/${base_libdir}
+-
+-    if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so ]; then
+-        cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so $treedir/${base_libdir}
+-    fi
+-    if [ -f ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* ]; then
+-        cp -pPR ${TOOLCHAIN_PATH}/${TARGET_SYS}/${base_libdir}/libgcc_s.so.* $treedir/${base_libdir}
+-    fi
+-    # stupid hack, but without it, it tries to use /usr/lib/libc.so from host and fails
+-    # temacs: error while loading shared libraries: /usr/lib/libc.so: ELF file version does not match current one
+-    if [ ! -f $treedir/${base_libdir}/libc.so ]; then
+-        ln -s libc.so.6 $treedir/${base_libdir}/libc.so
+-    fi
+-
+-    # copy only as much stuff as we need
+-    # before: 5.5G   ../../qemu-treedir/
+-    # after:   17M   ../../qemu-treedir/
+-    cp -pPR \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/ld-* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libc.* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libc-* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libm-* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libm.* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libtinfo.so.* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libresolv* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libdl* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/librt* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libgcc_s.so.* \
+-    ${STAGING_DIR_TARGET}/${base_libdir}/libpthread* $treedir/${base_libdir}/
+-
+-    if [ ! -z "${@base_contains('PACKAGECONFIG', 'x11', 'x11', '', d)}" ] ; then
+-        echo "X11 build enabled"
+-        # copy only as much stuff as we need
+-        # before: 5.5G   ../../qemu-treedir/
+-        # after:   86M   ../../qemu-treedir/
+-        cp -pPR \
+-        ${STAGING_DIR_TARGET}/${base_libdir}/libuuid.so.* \
+-        ${STAGING_DIR_TARGET}/${base_libdir}/libz.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libICE.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libSM.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libatk-1.0.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libcairo.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libdbus-1.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libdbus-glib-1.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libexpat.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libffi.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libfontconfig.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libfreetype.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libgconf-2.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libgif.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libjpeg.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/liblzma.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libpixman-1.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libpng1*.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/librsvg-2.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libstdc++.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libtiff.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libxml2.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libcroco-0.6.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libharfbuzz.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libicule.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libicuuc.so.* \
+-        ${STAGING_DIR_TARGET}/${libdir}/libicudata.so.* $treedir/${base_libdir}/
+-
+-        # X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes Xft Xpm Xrandr Xrender
+-        cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libX*.so.* $treedir/${base_libdir}/
+-
+-        # gdk-x11 gdk_pixbuf gio glib gmodule gobject gthread gtk-x11
+-        cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libg*-2.0.so.* $treedir/${base_libdir}/
+-
+-        # pango pangocairo pangoft2
+-        cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libpango*-1.0.so.* $treedir/${base_libdir}/
+-
+-        # xcb-render xcb-shm xcb
+-        cp -pPR ${STAGING_DIR_TARGET}/${libdir}/libxcb*.so.* $treedir/${base_libdir}/
+-    fi
+ }
+ 
+ do_install_append() {
+diff --git a/meta-oe/recipes-support/emacs/emacs_23.4.bb b/meta-oe/recipes-support/emacs/emacs_23.4.bb
+index a324828..36e8f0c 100644
+--- a/meta-oe/recipes-support/emacs/emacs_23.4.bb
++++ b/meta-oe/recipes-support/emacs/emacs_23.4.bb
+@@ -2,8 +2,6 @@ require emacs.inc
+ 
+ PR = "r4"
+ 
+-PNBLACKLIST[emacs] ?= "qemu: uncaught target signal 11 (Segmentation fault) - core dumped"
+-
+ SRC_URI = "${GNU_MIRROR}/emacs/emacs-${PV}.tar.gz;name=tarball \
+            file://use-qemu.patch \
+            file://nostdlib-unwind.patch \
+-- 
+2.1.0
+
+
+From 09961c681ffd5bd98d5f96ee6a82a710386e119a Mon Sep 17 00:00:00 2001
+From: Dan McGregor <danismostlikely@gmail.com>
+Date: Thu, 14 Aug 2014 08:21:02 -0600
+Subject: [meta-gnome][PATCH 4/5] gdm: Only start in runlevel 5
+To: openembedded-devel@lists.openembedded.org
+
+From: Dan McGregor <dan.mcgregor@usask.ca>
+
+Runlevel 5 is traditionally graphical. If it starts in runlevel 2
+or 3 systemd gets confused and adds it as a dependency of the
+multi-user target, not just the graphical target.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ meta-gnome/recipes-gnome/gdm/gdm/gdm       | 4 ++--
+ meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm/gdm b/meta-gnome/recipes-gnome/gdm/gdm/gdm
+index 43eae95..bb5b418 100755
+--- a/meta-gnome/recipes-gnome/gdm/gdm/gdm
++++ b/meta-gnome/recipes-gnome/gdm/gdm/gdm
+@@ -4,8 +4,8 @@
+ # Should-Start:      console-screen acpid dbus hal network-manager
+ # Required-Start:    $local_fs $remote_fs
+ # Required-Stop:     $local_fs $remote_fs
+-# Default-Start:     2 3 4 5
+-# Default-Stop:      0 1 6
++# Default-Start:     5
++# Default-Stop:      0 1 2 3 6
+ # Short-Description: GNOME Display Manager
+ # Description:       Debian init script for the GNOME Display Manager
+ ### END INIT INFO
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+index b2ae9ac..fcd51ff 100644
+--- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
++++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
+@@ -88,7 +88,7 @@ RCONFLICTS_${PN} += "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN} = "gdm.service"
+ 
+ INITSCRIPT_NAME = "gdm"
+-INITSCRIPT_PARAMS = "start 99 5 2 . stop 20 0 1 6 ."
++INITSCRIPT_PARAMS = "start 99 5 . stop 20 0 1 2 3 6 ."
+ 
+ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM_${PN} = "--system --no-create-home --home ${localstatedir}/lib/gdm --user-group gdm"
+-- 
+2.1.0
+
+
+From 4dbe8a0bc32d09ea82726d78cfd1292a3a6b3719 Mon Sep 17 00:00:00 2001
+From: Dan McGregor <danismostlikely@gmail.com>
+Date: Fri, 23 Jan 2015 08:13:23 -0600
+Subject: [meta-initramfs][PATCH 5/5] dracut: recipe cleanup
+To: openembedded-devel@lists.openembedded.org
+
+From: Dan McGregor <dan.mcgregor@usask.ca>
+
+Split out bash-completion data
+Update RDEPENDS: getopt is util-linux-getopt now
+Use distro_features_check to require systemd
+Recommend busybox
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ .../recipes-devtools/dracut/dracut_git.bb          | 25 ++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
+
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index ea55a4d..8ef0749 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -4,6 +4,8 @@ DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut (the t
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
++PACKAGES =+ "${PN}-bash-completion"
++
+ PE = "1"
+ PV = "038"
+ 
+@@ -13,8 +15,10 @@ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+ 
+ S = "${WORKDIR}/git"
+ 
+-do_configure() {
+-    ./configure --prefix=${prefix} \
++inherit distro_features_check
++REQUIRED_DISTRO_FEATURES = "systemd"
++
++EXTRA_OECONF = "--prefix=${prefix} \
+                 --libdir=${libdir} \
+                 --datadir=${datadir} \
+                 --sysconfdir=${sysconfdir} \
+@@ -23,20 +27,29 @@ do_configure() {
+                 --bindir=${bindir} \
+                 --includedir=${includedir} \
+                 --localstatedir=${localstatedir} \
++                --systemdsystemunitdir=${systemd_unitdir}/system"
++
++do_configure() {
++    ./configure ${EXTRA_OECONF}
+ }
+ 
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
+ 
+-FILES_${PN} += "${datadir}/bash-completion \ 
+-                ${libdir}/kernel \
++FILES_${PN}-bash-completion = "${datadir}/bash-completion"
++
++FILES_${PN} += " ${libdir}/kernel \
++                ${systemd_unitdir} \
+                "
++CONFFILES_${PN} += "${sysconfdir}/dracut.conf"
++
++RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux-getopt util-linux bash ldd"
++RDEPENDS_${PN}-bash-completion = "bash-completion"
+ 
+-# 'getopt' is in the util-linux main package
+-RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux bash ldd"
+ # This could be optimized a bit, but let's avoid non-booting systems :)
+ RRECOMMENDS_${PN} = " \
+                      kernel-modules \
++                     busybox \
+                      coreutils \ 
+                     "
+-- 
+2.1.0
 
 
