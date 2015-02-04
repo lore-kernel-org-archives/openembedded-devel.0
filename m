@@ -1,35 +1,35 @@
 Return-Path: <danismostlikely@gmail.com>
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id C7D8B6E6C2
+Received: from mail-ig0-f180.google.com (mail-ig0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A0A565D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Feb 2015 18:33:51 +0000 (UTC)
-Received: by mail-ie0-f171.google.com with SMTP id tr6so4240180ieb.2
+	Wed,  4 Feb 2015 18:38:29 +0000 (UTC)
+Received: by mail-ig0-f180.google.com with SMTP id b16so6101889igk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Feb 2015 10:33:52 -0800 (PST)
+	Wed, 04 Feb 2015 10:38:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id;
-	bh=xR0g5y7Rc1xCeQrrBT425gL4Efc64FGiFHguyKyn0os=;
-	b=p5SmYxjtkUWnFvPdVidEyIpeNhW4pKctDuD3JfNbNkMdYxCzhgF3Z850xh7uBTGbbB
-	kCfaP9MVz9Cfd0AvC/Fsv11zUDDr5z8GiuV5m/rHr5HEtxsCqdFIivu13UQK0KrEMoKi
-	5cQP3nG5t8ea/acCFnX0LTrgcNP2XwWf+F/H0kEsLhK7naRpX4b5EJRlwW+j51zmznKa
-	gmPDSV4ZXJb1y77ezWazghp1D3m6MoJwXeh+er8pEY4tBAUxzxLgYFffD0JSjeRgqNua
-	Y1JDsHOo0WmnftbsnrhAZMltNXRz4YqGZuJJVn0yTUf4Ydr9i4vDCfhc8oxr2U9s0qmp
-	D8PQ==
-X-Received: by 10.107.135.212 with SMTP id r81mr8286347ioi.38.1423074832625;
-	Wed, 04 Feb 2015 10:33:52 -0800 (PST)
+	bh=6PqB9wfeUpq3oi65YmH1rrVomayG0RmHurle+hHHKv4=;
+	b=nfuHdwzqTEHywtn7/fOhyyGcudJTO4GrVapzKto34Hu0FiUV/yB1TFfvMYUNkerbTu
+	JXy4kRe5Lzf8spqZqFj/kv2hks4bbHYk+YkGAZXQ3mMOSP2Rrgk7PByYqtILsaCWStYN
+	UC990/lBH3qG64fcyl6si96r969ZVpUOQGScZRrK7FjeQaS66diugw6OaIIh26CFLfrr
+	faDQdPEW3+1m809Q+WMuw7wpz4nNEpPmgg7tQ0BqZQZ3lmzdrRiYdPVtWK78P03QCkEL
+	/udMUiI8WYI4FJY12it4KfE+1TpiSLJdXndwiEKn+58xGlz0TJR9lUCcaryGSQjxGiyk
+	bBDA==
+X-Received: by 10.42.102.5 with SMTP id g5mr3149976ico.74.1423075110862;
+	Wed, 04 Feb 2015 10:38:30 -0800 (PST)
 Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
 	[71.17.233.74])
-	by mx.google.com with ESMTPSA id nv8sm9937755igb.6.2015.02.04.10.33.51
+	by mx.google.com with ESMTPSA id yq1sm1478329igb.21.2015.02.04.10.38.30
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Feb 2015 10:33:52 -0800 (PST)
+	Wed, 04 Feb 2015 10:38:30 -0800 (PST)
 From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Feb 2015 12:33:49 -0600
-Message-Id: <1423074829-24463-1-git-send-email-danismostlikely@gmail.com>
+Date: Wed,  4 Feb 2015 12:38:28 -0600
+Message-Id: <1423075108-24559-1-git-send-email-danismostlikely@gmail.com>
 X-Mailer: git-send-email 2.1.0
-Subject: [PATCH 0/5] Fixes for display managers, emacs, and dracut
+Subject: [meta-oe][PATCH 1/5] xserver-nodm-init: only enable for runlevel 5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,38 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 18:33:59 -0000
-
-From: Dan McGregor <dan.mcgregor@usask.ca>
-
-Here are a bunch of patches that I've been sitting on for
-far too long; it's time to push them up.
-
-Dan McGregor (5):
-  xserver-nodm-init: only enable for runlevel 5
-  lxdm: RDEPEND on libsvg-gtk
-  emacs: Un-blacklist, seems to work fine with new qemu
-  gdm: Only start in runlevel 5
-  dracut: recipe cleanup
-
- meta-gnome/recipes-gnome/gdm/gdm/gdm               |  4 +-
- meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb         |  2 +-
- .../recipes-devtools/dracut/dracut_git.bb          | 25 ++++--
- meta-oe/recipes-graphics/lxdm/lxdm_git.bb          |  2 +-
- .../xserver-nodm-init-2.0/xserver-nodm             |  9 +++
- .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |  4 +-
- meta-oe/recipes-support/emacs/emacs.inc            | 89 +---------------------
- meta-oe/recipes-support/emacs/emacs_23.4.bb        |  2 -
- 8 files changed, 36 insertions(+), 101 deletions(-)
-
--- 
-2.1.0
-
-From 2e55392c655f8cfa934d589d337b00b0264c9664 Mon Sep 17 00:00:00 2001
-From: Dan McGregor <danismostlikely@gmail.com>
-Date: Wed, 13 Aug 2014 16:46:42 -0600
-Subject: [meta-oe][PATCH 1/5] xserver-nodm-init: only enable for runlevel 5
-To: openembedded-devel@lists.openembedded.org
+X-List-Received-Date: Wed, 04 Feb 2015 18:38:32 -0000
 
 From: Dan McGregor <dan.mcgregor@usask.ca>
 
@@ -127,7 +96,7 @@ index 47470fb..f9bf007 100644
 
 From 326102dab4af209f6e171ee5773b1eae91e1fdf8 Mon Sep 17 00:00:00 2001
 From: Dan McGregor <danismostlikely@gmail.com>
-Date: Fri, 10 Oct 2014 10:14:52 -0600
+Date: Tue, 3 Feb 2015 18:46:42 -0600
 Subject: [meta-oe][PATCH 2/5] lxdm: RDEPEND on libsvg-gtk
 To: openembedded-devel@lists.openembedded.org
 
@@ -160,7 +129,7 @@ index a3dcc1b..66dc269 100644
 
 From 9a238ca43caf0989b4ace91926500493741e6e02 Mon Sep 17 00:00:00 2001
 From: Dan McGregor <danismostlikely@gmail.com>
-Date: Mon, 24 Nov 2014 08:00:34 -0600
+Date: Tue, 3 Feb 2015 18:46:42 -0600
 Subject: [meta-oe][PATCH 3/5] emacs: Un-blacklist, seems to work fine with new
  qemu
 To: openembedded-devel@lists.openembedded.org
@@ -325,7 +294,7 @@ index a324828..36e8f0c 100644
 
 From 09961c681ffd5bd98d5f96ee6a82a710386e119a Mon Sep 17 00:00:00 2001
 From: Dan McGregor <danismostlikely@gmail.com>
-Date: Thu, 14 Aug 2014 08:21:02 -0600
+Date: Tue, 3 Feb 2015 18:46:42 -0600
 Subject: [meta-gnome][PATCH 4/5] gdm: Only start in runlevel 5
 To: openembedded-devel@lists.openembedded.org
 
@@ -375,7 +344,7 @@ index b2ae9ac..fcd51ff 100644
 
 From 4dbe8a0bc32d09ea82726d78cfd1292a3a6b3719 Mon Sep 17 00:00:00 2001
 From: Dan McGregor <danismostlikely@gmail.com>
-Date: Fri, 23 Jan 2015 08:13:23 -0600
+Date: Tue, 3 Feb 2015 18:46:42 -0600
 Subject: [meta-initramfs][PATCH 5/5] dracut: recipe cleanup
 To: openembedded-devel@lists.openembedded.org
 
