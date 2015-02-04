@@ -1,37 +1,37 @@
 Return-Path: <danismostlikely@gmail.com>
-Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id D56E971E61
+Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E9707261A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Feb 2015 20:29:26 +0000 (UTC)
-Received: by mail-ie0-f181.google.com with SMTP id rd18so4999559iec.12
+	Wed,  4 Feb 2015 20:29:29 +0000 (UTC)
+Received: by mail-ie0-f179.google.com with SMTP id x19so5035256ier.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Feb 2015 12:29:27 -0800 (PST)
+	Wed, 04 Feb 2015 12:29:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=XblEPhOLuYlleJTQa0QBBkNXy+SSa7ByoI3JN1Avz8k=;
-	b=FQX9o/6NMoLcW3m1K6uarDP2K0n6vr3eo9Kgmz8rUqsju3CbXi5+7C5JEPxxFrpvMv
-	1zEzoJmczXgCHKep+zAKAxthsg8bqaRTWsJ8DWk9Kl/rBPf/5jFeGtTLLJo9JKUCP55o
-	5nJJBqpu2h6LouyjIp+poLqM6NAX9LvTI1XVzpaWQDzUG5owUNHB41tKkn7S89Kd4qlS
-	kUp4aghs3zfEDgp/akZgXGW1SXzPs/0qkvk3V4/vgw52X1Sy/DPnbuzB2BWKJ1mU+qUB
-	DOfy8nQilMWngXDPIn32oNEiu7PIuP3AacQ57f6/a8YVaA7Po/Wqe41GLd3mHIL/RV/W
-	cqKA==
-X-Received: by 10.50.109.228 with SMTP id hv4mr26714909igb.45.1423081767737;
-	Wed, 04 Feb 2015 12:29:27 -0800 (PST)
+	bh=nXBH3DyfZA0ouTzZ0E8as/SfTfPa4y6HnBzLL0D7nbw=;
+	b=BlmrsepxGocqpx8Gv99cu3Oj7fhRx7x3LAI3aLXi53qqp+yMFJceI6D+dn3XCpTbT5
+	6Cwj1lFlaOaMA8PzLXWtJRlbgegjUQBnSeBL5US05c47OhnWqDAb+LP75+bXBTB6HxV2
+	4GeF4VF1y8czIO8ZgyMLiDt19keVc01X2F4WnMHRoD613A2H6sYB909z5a6jVBNMroDY
+	xEMOwes32iryTSFy94wX8ul9BXd7ZZh1KxWXh7uW43wqdA2B8dw8tV1GtPJS05wgcspG
+	Z/wt1fMCdp+pR6zraxOibnjf+uuw93kCA3PnOOcIoMb0QGqvET52eXXfiFmbyW2O59Dr
+	KanQ==
+X-Received: by 10.42.95.12 with SMTP id d12mr3750527icn.12.1423081770297;
+	Wed, 04 Feb 2015 12:29:30 -0800 (PST)
 Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
 	[71.17.233.74])
-	by mx.google.com with ESMTPSA id 16sm1382580ion.23.2015.02.04.12.29.26
+	by mx.google.com with ESMTPSA id 16sm1382580ion.23.2015.02.04.12.29.29
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Feb 2015 12:29:27 -0800 (PST)
+	Wed, 04 Feb 2015 12:29:29 -0800 (PST)
 From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Feb 2015 14:29:20 -0600
-Message-Id: <1423081763-2905-3-git-send-email-danismostlikely@gmail.com>
+Date: Wed,  4 Feb 2015 14:29:23 -0600
+Message-Id: <1423081763-2905-6-git-send-email-danismostlikely@gmail.com>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1423081763-2905-1-git-send-email-danismostlikely@gmail.com>
 References: <1423081763-2905-1-git-send-email-danismostlikely@gmail.com>
-Subject: [meta-oe][PATCH 2/5] lxdm: RDEPEND on libsvg-gtk
+Subject: [meta-initramfs][PATCH 5/5] dracut: recipe cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,27 +49,76 @@ X-List-Received-Date: Wed, 04 Feb 2015 20:29:30 -0000
 
 From: Dan McGregor <dan.mcgregor@usask.ca>
 
-The theme uses svg files. If libsvg-gtk isn't available lxdm
-still runs, but throws a bunch of pixbuf errors.
+Split out bash-completion data
+Update RDEPENDS: getopt is util-linux-getopt now
+Use distro_features_check to require systemd
+Recommend busybox
 
 Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
 ---
- meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-devtools/dracut/dracut_git.bb          | 25 ++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-index a3dcc1b..66dc269 100644
---- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-@@ -70,7 +70,7 @@ done
- sed -i "s:last_langs=.*$:last_langs=$langs:g" $D${localstatedir}/lib/lxdm/lxdm.conf
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index ea55a4d..8ef0749 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -4,6 +4,8 @@ DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut (the t
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
++PACKAGES =+ "${PN}-bash-completion"
++
+ PE = "1"
+ PV = "038"
+ 
+@@ -13,8 +15,10 @@ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+ 
+ S = "${WORKDIR}/git"
+ 
+-do_configure() {
+-    ./configure --prefix=${prefix} \
++inherit distro_features_check
++REQUIRED_DISTRO_FEATURES = "systemd"
++
++EXTRA_OECONF = "--prefix=${prefix} \
+                 --libdir=${libdir} \
+                 --datadir=${datadir} \
+                 --sysconfdir=${sysconfdir} \
+@@ -23,20 +27,29 @@ do_configure() {
+                 --bindir=${bindir} \
+                 --includedir=${includedir} \
+                 --localstatedir=${localstatedir} \
++                --systemdsystemunitdir=${systemd_unitdir}/system"
++
++do_configure() {
++    ./configure ${EXTRA_OECONF}
  }
  
--RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash"
-+RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash librsvg-gtk"
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
  
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
+-FILES_${PN} += "${datadir}/bash-completion \ 
+-                ${libdir}/kernel \
++FILES_${PN}-bash-completion = "${datadir}/bash-completion"
++
++FILES_${PN} += " ${libdir}/kernel \
++                ${systemd_unitdir} \
+                "
++CONFFILES_${PN} += "${sysconfdir}/dracut.conf"
++
++RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux-getopt util-linux bash ldd"
++RDEPENDS_${PN}-bash-completion = "bash-completion"
+ 
+-# 'getopt' is in the util-linux main package
+-RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux bash ldd"
+ # This could be optimized a bit, but let's avoid non-booting systems :)
+ RRECOMMENDS_${PN} = " \
+                      kernel-modules \
++                     busybox \
+                      coreutils \ 
+                     "
 -- 
 2.1.0
 
