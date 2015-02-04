@@ -1,24 +1,29 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AFEE1606BF
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D7426013C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Feb 2015 09:36:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t149an1F002778
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  4 Feb 2015 10:49:32 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="57107789"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 04 Feb 2015 18:45:58 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t14Amk7I001055
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Feb 2015 01:36:49 -0800 (PST)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.174.1; Wed, 4 Feb 2015 01:36:48 -0800
-From: <wenzong.fan@windriver.com>
+	Wed, 4 Feb 2015 18:48:46 +0800
+Received: from localhost.localdomain (10.167.226.35) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 4 Feb 2015 18:49:34 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Feb 2015 17:33:32 +0800
-Message-ID: <1423042412-17651-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 4 Feb 2015 18:48:51 +0800
+Message-ID: <1423046931-1884-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <20150128105433.GG2477@jama>
+References: <20150128105433.GG2477@jama>
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] iscsi-initiator-utils: fix SELinux label for initiatorname.iscsi
+X-Originating-IP: [10.167.226.35]
+Subject: [meta-oe][PATCH v3] opensc: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,42 +37,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 09:36:56 -0000
+X-List-Received-Date: Wed, 04 Feb 2015 10:49:33 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+OpenSC provides a set of libraries and utilities to work with smart cards.
+Its main focus is on cards that support cryptographic operations, and
+facilitate their use in security applications such as authentication,
+mail encryption and digital signatures.
 
-* /etc/iscsi/initiatorname.iscsi: etc_runtime_t -> etc_t
-
-This config file was created by postinstall or initscript, fix SELinux
-label for it to remove:
-
-  avc: denied { read } for pid=6094 comm="iscsid" \
-  name="initiatorname.iscsi" dev="sda3" ino=1057846 \
-  scontext=system_u:system_r:iscsid_t:s0-s15:c0.c1023 \
-  tcontext=system_u:object_r:etc_runtime_t:s0 tclass=file
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- .../recipes-daemons/iscsi-initiator-utils/files/initd.debian          | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-oe/recipes-support/opensc/opensc_0.14.0.bb | 45 +++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opensc/opensc_0.14.0.bb
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
-index 99a7638..43fb348 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
-@@ -39,6 +39,10 @@ start() {
- InitiatorName=$INITIATORNAME
- EOF
- 	fi
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.14.0.bb b/meta-oe/recipes-support/opensc/opensc_0.14.0.bb
+new file mode 100644
+index 0000000..87ea2ad
+--- /dev/null
++++ b/meta-oe/recipes-support/opensc/opensc_0.14.0.bb
+@@ -0,0 +1,45 @@
++SUMMARY = "Smart card library and applications"
++DESCRIPTION = "OpenSC is a tool for accessing smart card devices. Basic\
++functionality (e.g. SELECT FILE, READ BINARY) should work on any ISO\
++7816-4 compatible smart card. Encryption and decryption using private\
++keys on the smart card is possible with PKCS\
++such as the FINEID (Finnish Electronic IDentity) card. Swedish Posten\
++eID cards have also been confirmed to work."
 +
-+	# Fix label for /etc/iscsi/initiatorname.iscsi if SELinux was enabled
-+	test ! -x /sbin/restorecon || /sbin/restorecon -F /etc/iscsi/initiatorname.iscsi
++HOMEPAGE = "http://www.opensc-project.org/opensc/"
++SECTION = "System Environment/Libraries"
 +
- 	start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON
- 	RETVAL=$?
- 	starttargets
++SRC_URI = "${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz"
++
++SRC_URI[md5sum] = "1ee31dc2e89860458fd984e0cac9795e"
++SRC_URI[sha256sum] = "ffe8bcc704f2ab9a05c6781bc815f00eaf75cba0a1bd21e3142b9194a7bed5c9"
++
++S = "${WORKDIR}/OpenSC-${PV}"
++DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
++
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = " \
++    --disable-static \
++    --enable-openct \
++    --disable-pcsc \
++    --disable-ctapi \
++    --disable-doc \
++"
++EXTRA_OEMAKE = "DESTDIR=${D}"
++
++RDEPENDS_${PN} = "readline"
++
++FILES_${PN} += "\
++    ${libdir}/opensc-pkcs11.so \
++    ${libdir}/onepin-opensc-pkcs11.so \
++    ${libdir}/pkcs11-spy.so \
++"
++FILES_${PN}-dev += "\
++    ${libdir}/pkcs11/opensc-pkcs11.so \
++    ${libdir}/pkcs11/onepin-opensc-pkcs11.so \
++    ${libdir}/pkcs11/pkcs11-spy.so \
++"
 -- 
-1.9.1
+1.8.4.2
 
 
