@@ -1,35 +1,35 @@
 Return-Path: <danismostlikely@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 90F2D601DC
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C7EF4727D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Feb 2015 18:39:58 +0000 (UTC)
-Received: by mail-ie0-f177.google.com with SMTP id vy18so4256769iec.8
+	Wed,  4 Feb 2015 18:40:09 +0000 (UTC)
+Received: by mail-ie0-f173.google.com with SMTP id tr6so4282615ieb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Feb 2015 10:39:59 -0800 (PST)
+	Wed, 04 Feb 2015 10:40:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id;
-	bh=eB3g3R014/wtbHNYSwaAMUfO431tfvLDQnWPFaoMeC4=;
-	b=EyW46eBZjBbCMU4X0HR6xOlagfb6omGI2zc8nQGPecRHRht6w5B72qteC0GBiE+IZ2
-	sOYS0xzCdCuF42fKankLn9TCCXnyQjuvRuu5NCipW+BD9SBLTa5IhSzaerAOnpbern1f
-	nOygZnIQ3PvXAMH8a2AtVRpyGRayteMuQAgnX5R+7p93490CLRhCIuW5NENI5vRjsUon
-	eXnR4QweJB7waNJ4uj4rLmvn3pdQhM8zOe5Jxx/mQHBuMkWIr0zBx2HOQcuCOtbyGJNj
-	laOF95emnFMcXNmZm8v8QyCGEo2deKgIOZqNhNjZL6CQ/nbQJQkEyXQhT3PeMOREQ0Vt
-	nIaQ==
-X-Received: by 10.51.16.1 with SMTP id fs1mr25747942igd.8.1423075191566;
-	Wed, 04 Feb 2015 10:39:51 -0800 (PST)
+	bh=bggPgR1fj9anlW0D42DaKus8ClKR69ILExkGkktqn8c=;
+	b=LZ/mFXpKoMHV2GeKZFrUVz4NH3AC+Uxo2FvRfx2V0+EZvTvMJdkTrEkpse3AFvbGIc
+	3+9O2lPPgucCGh3Ialkiygr09FYRMzUYhD+xl1CUwjfufloGcIcO3QpPIMaPzGKW6GBA
+	g/D4bzxbSuqynxE1Wuh4bo+ub5kSeyeL2gwFzmswVYJNkq+iRLHV7h/mi3yEkz0nYFWJ
+	FO55FZwvi9sx3Cha1TfYgBb1FbXzmS0rT/Xjujifh7JHDxGtrZ+kQA9SnUg6Juc3TcQY
+	ulAT1JdknXQEJlFaf+ez30TviNPSHPSwQlBfKbbjHYyirwi1g03EYYdexNRON0FxZHon
+	SL2w==
+X-Received: by 10.107.8.216 with SMTP id h85mr2298901ioi.34.1423075210833;
+	Wed, 04 Feb 2015 10:40:10 -0800 (PST)
 Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
 	[71.17.233.74])
-	by mx.google.com with ESMTPSA id z9sm1266672igw.21.2015.02.04.10.39.50
+	by mx.google.com with ESMTPSA id 16sm1251153ion.23.2015.02.04.10.40.10
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Feb 2015 10:39:51 -0800 (PST)
+	Wed, 04 Feb 2015 10:40:10 -0800 (PST)
 From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Feb 2015 12:39:50 -0600
-Message-Id: <1423075190-24676-1-git-send-email-danismostlikely@gmail.com>
+Date: Wed,  4 Feb 2015 12:40:09 -0600
+Message-Id: <1423075209-24723-1-git-send-email-danismostlikely@gmail.com>
 X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][PATCH 2/5] lxdm: RDEPEND on libsvg-gtk
+Subject: [meta-oe][PATCH 3/5] emacs: Un-blacklist, seems to work fine with new qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Feb 2015 18:39:59 -0000
-
-From: Dan McGregor <dan.mcgregor@usask.ca>
-
-The theme uses svg files. If libsvg-gtk isn't available lxdm
-still runs, but throws a bunch of pixbuf errors.
-
-Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
----
- meta-oe/recipes-graphics/lxdm/lxdm_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-index a3dcc1b..66dc269 100644
---- a/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-+++ b/meta-oe/recipes-graphics/lxdm/lxdm_git.bb
-@@ -70,7 +70,7 @@ done
- sed -i "s:last_langs=.*$:last_langs=$langs:g" $D${localstatedir}/lib/lxdm/lxdm.conf
- }
- 
--RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash"
-+RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam-plugin-loginuid', '', d)} setxkbmap bash librsvg-gtk"
- 
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
--- 
-2.1.0
-
-
-From 9a238ca43caf0989b4ace91926500493741e6e02 Mon Sep 17 00:00:00 2001
-From: Dan McGregor <danismostlikely@gmail.com>
-Date: Tue, 3 Feb 2015 18:46:42 -0600
-Subject: [meta-oe][PATCH 3/5] emacs: Un-blacklist, seems to work fine with new
- qemu
-To: openembedded-devel@lists.openembedded.org
+X-List-Received-Date: Wed, 04 Feb 2015 18:40:12 -0000
 
 From: Dan McGregor <dan.mcgregor@usask.ca>
 
