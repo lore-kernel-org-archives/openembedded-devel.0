@@ -1,33 +1,36 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 9071B6AC35
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-oi0-f47.google.com (mail-oi0-f47.google.com
+	[209.85.218.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 65D926AC35
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Feb 2015 13:42:27 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1YJMhI-0006Yh-3u for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Feb 2015 14:42:20 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Feb 2015 14:42:20 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu,  5 Feb 2015 13:43:36 +0000 (UTC)
+Received: by mail-oi0-f47.google.com with SMTP id a141so6468965oig.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Feb 2015 14:42:20 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 05 Feb 2015 14:42:12 +0100
-Message-ID: <mavrvk$83v$1@ger.gmane.org>
-References: <1423075243-24859-1-git-send-email-danismostlikely@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
-In-Reply-To: <1423075243-24859-1-git-send-email-danismostlikely@gmail.com>
-Subject: Re: [meta-initramfs][PATCH 5/5] dracut: recipe cleanup
+	Thu, 05 Feb 2015 05:43:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=N2v1e7hyiDO87eE6U6ncm9TlgzpALKHzyDdN2vXlvuQ=;
+	b=QZi4IKbzcBx9qoCFJ4bkpbciGYEqr58ECtAxeGCiGe0Z2f/7/KX078oHZxS4UlV9v8
+	a5/HKhNAvVhkuwjV4bshlJav19QYNxPuZlK+QQt9P1wsta6jJd6heDfgYyHj/Zz2ifZj
+	MJ05CUjma/82Q19shzUXtand6Yfi4KnFF5GNCulxnATrWZJvGk31QnFfwZSwVdux+wHK
+	aHPfW3+4rbCDWvpvgGmQjrplq7tEQ6jSbxDomR2NvLzyVFLJ6I/v3aIsfzljzgsEjZPI
+	tBmiZ9b/mRwhu3w2OXHIwPMLSGPcQO2uQH1lAkQqHrc+0ei+Dfem/5ESGP0tWuM98JDX
+	PJYA==
+X-Gm-Message-State: ALoCoQmPOK6lp4pbdZWeTPBAIvTTqMF8SDVqphNisW9h9b1i+p4nk3GNJirhmYl/fsUSEjtK0Ukv
+X-Received: by 10.182.58.20 with SMTP id m20mr2438320obq.32.1423143817383;
+	Thu, 05 Feb 2015 05:43:37 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.76.116.167 with HTTP; Thu, 5 Feb 2015 05:43:17 -0800 (PST)
+In-Reply-To: <1423081763-2905-4-git-send-email-danismostlikely@gmail.com>
+References: <1423081763-2905-1-git-send-email-danismostlikely@gmail.com>
+	<1423081763-2905-4-git-send-email-danismostlikely@gmail.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Thu, 5 Feb 2015 14:43:17 +0100
+Message-ID: <CAP71WjxPCVC6BcdmrDUz0HJ36Uw-4P-a4skKEFOZtudE2PWSDg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 3/5] emacs: Un-blacklist, seems to work fine with new qemu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,77 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2015 13:42:35 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Feb 2015 13:43:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Dan McGregor schreef op 04-02-15 om 19:40:
-> From: Dan McGregor <dan.mcgregor@usask.ca>
-> 
-> Split out bash-completion data Update RDEPENDS: getopt is
-> util-linux-getopt now Use distro_features_check to require systemd 
-> Recommend busybox
-> 
-> Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca> --- 
-> .../recipes-devtools/dracut/dracut_git.bb          | 25
-> ++++++++++++++++------ 1 file changed, 19 insertions(+), 6 deletions(-)
-> 
-> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb index
-> ea55a4d..8ef0749 100644 ---
-> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb +++
-> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb @@ -4,6 +4,8 @@
-> DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut
-> (the t LICENSE = "GPLv2" LIC_FILES_CHKSUM =
-> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> 
-> +PACKAGES =+ "${PN}-bash-completion"
-
-PACKAGES is runtime, so move that below do_install
+On Wed, Feb 4, 2015 at 9:29 PM, Dan McGregor <danismostlikely@gmail.com> wrote:
+>
+> I've only tested the build with armv7 and x86, but the build
+> doesn't segfault anymore. The last time this was tested was
+> with qemu 1.5, we're now using 2.1.
+>
+> While here, don't copy stuff from the sysroot into the qemu tree
+> just use the sysroot itself.
 
 
-> + PE = "1" PV = "038"
-> 
-> @@ -13,8 +15,10 @@ SRC_URI =
-> "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
-> 
-> S = "${WORKDIR}/git"
-> 
-> -do_configure() { -    ./configure --prefix=${prefix} \ +inherit
-> distro_features_check +REQUIRED_DISTRO_FEATURES = "systemd" + 
-> +EXTRA_OECONF = "--prefix=${prefix} \ --libdir=${libdir} \ 
-> --datadir=${datadir} \ --sysconfdir=${sysconfdir} \ @@ -23,20 +27,29 @@
-> do_configure() { --bindir=${bindir} \ --includedir=${includedir} \ 
-> --localstatedir=${localstatedir} \ +
-> --systemdsystemunitdir=${systemd_unitdir}/system" + +do_configure() { +
-> ./configure ${EXTRA_OECONF} }
-> 
-> do_install() { oe_runmake install DESTDIR=${D} }
-> 
-> -FILES_${PN} += "${datadir}/bash-completion \ -
-> ${libdir}/kernel \ +FILES_${PN}-bash-completion =
-> "${datadir}/bash-completion" + +FILES_${PN} += " ${libdir}/kernel \ +
-> ${systemd_unitdir} \ " +CONFFILES_${PN} += "${sysconfdir}/dracut.conf" + 
-> +RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
-> util-linux-getopt util-linux bash ldd" +RDEPENDS_${PN}-bash-completion =
-> "bash-completion"
-> 
-> -# 'getopt' is in the util-linux main package -RDEPENDS_${PN} = "systemd
-> findutils cpio util-linux-blkid util-linux bash ldd" # This could be
-> optimized a bit, but let's avoid non-booting systems :) RRECOMMENDS_${PN}
-> = " \ kernel-modules \ +                     busybox \ coreutils \ "
-> 
+I tried this patch, and I was able to build and install emacs package,
+on an armv7 board, using master branch as of today. emacs seems to be
+working fine under X11 here, however when I run it from a console
+without X11 (over ssh, or on the serial console), emacs would start,
+but I am not able to use it. keyboard is no working from within the
+application. ctrl+z isn't working as well, so I need to manually kill
+the process.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+i know the emacs build process isn't straightforward, and maybe we aim
+to support only emacs + X11 with our recipe.. i am not sure..
 
-iD8DBQFU03M0MkyGM64RGpERAsSgAJ4sxWUVqtCD2DKYpzAca3LK73vuXgCgnww/
-s7RbVFpxvlWMqI2+kurk6E8=
-=GmZH
------END PGP SIGNATURE-----
+have you tried to use emacs without X11?
 
+thanks
 
