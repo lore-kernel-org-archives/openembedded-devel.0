@@ -1,27 +1,33 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A95A60169
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 9071B6AC35
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Feb 2015 01:22:35 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="57140511"
-Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Feb 2015 09:19:04 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t151LqUt027329
+	Thu,  5 Feb 2015 13:42:27 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1YJMhI-0006Yh-3u for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Feb 2015 14:42:20 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Feb 2015 14:42:20 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 Feb 2015 09:21:52 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 5 Feb 2015 09:22:38 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Feb 2015 09:17:49 +0800
-Message-ID: <1423099069-12700-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH v2] php: update to 5.5.21 to fix some bugs
+	Thu, 05 Feb 2015 14:42:20 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 05 Feb 2015 14:42:12 +0100
+Message-ID: <mavrvk$83v$1@ger.gmane.org>
+References: <1423075243-24859-1-git-send-email-danismostlikely@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+In-Reply-To: <1423075243-24859-1-git-send-email-danismostlikely@gmail.com>
+Subject: Re: [meta-initramfs][PATCH 5/5] dracut: recipe cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,39 +41,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2015 01:22:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 Feb 2015 13:42:35 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- meta-oe/recipes-devtools/php/{php_5.5.20.bb => php_5.5.21.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_5.5.20.bb => php_5.5.21.bb} (98%)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.20.bb b/meta-oe/recipes-devtools/php/php_5.5.21.bb
-similarity index 98%
-rename from meta-oe/recipes-devtools/php/php_5.5.20.bb
-rename to meta-oe/recipes-devtools/php/php_5.5.21.bb
-index 1c0557f..31ef1f2 100644
---- a/meta-oe/recipes-devtools/php/php_5.5.20.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.5.21.bb
-@@ -29,8 +29,8 @@ SRC_URI_append_class-target += " \
-             file://70_mod_php5.conf \
-           "
- 
--SRC_URI[md5sum] = "9dfc1d4d2b44fb7e2b4ee9651d032203"
--SRC_URI[sha256sum] = "f28a150d1cd8991bd1a41dce4fdff4e343d1dbe01a48b9b44bea74532ce0391a"
-+SRC_URI[md5sum] = "8fe631ac52a3df9d6429faad81cf2562"
-+SRC_URI[sha256sum] = "62e9429975c4ca5d7067a5052d5388fbf2ac8c51eeee581d59b04cc5a8da83fe"
- 
- S = "${WORKDIR}/php-${PV}"
- 
-@@ -233,4 +233,3 @@ MODPHP_OLDPACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'modphp',
- RPROVIDES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
- RREPLACES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
- RCONFLICTS_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
--
--- 
-1.9.1
+Dan McGregor schreef op 04-02-15 om 19:40:
+> From: Dan McGregor <dan.mcgregor@usask.ca>
+> 
+> Split out bash-completion data Update RDEPENDS: getopt is
+> util-linux-getopt now Use distro_features_check to require systemd 
+> Recommend busybox
+> 
+> Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca> --- 
+> .../recipes-devtools/dracut/dracut_git.bb          | 25
+> ++++++++++++++++------ 1 file changed, 19 insertions(+), 6 deletions(-)
+> 
+> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb index
+> ea55a4d..8ef0749 100644 ---
+> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb +++
+> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb @@ -4,6 +4,8 @@
+> DESCRIPTION = "Dracut is an event driven initramfs infrastructure. dracut
+> (the t LICENSE = "GPLv2" LIC_FILES_CHKSUM =
+> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> 
+> +PACKAGES =+ "${PN}-bash-completion"
+
+PACKAGES is runtime, so move that below do_install
+
+
+> + PE = "1" PV = "038"
+> 
+> @@ -13,8 +15,10 @@ SRC_URI =
+> "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+> 
+> S = "${WORKDIR}/git"
+> 
+> -do_configure() { -    ./configure --prefix=${prefix} \ +inherit
+> distro_features_check +REQUIRED_DISTRO_FEATURES = "systemd" + 
+> +EXTRA_OECONF = "--prefix=${prefix} \ --libdir=${libdir} \ 
+> --datadir=${datadir} \ --sysconfdir=${sysconfdir} \ @@ -23,20 +27,29 @@
+> do_configure() { --bindir=${bindir} \ --includedir=${includedir} \ 
+> --localstatedir=${localstatedir} \ +
+> --systemdsystemunitdir=${systemd_unitdir}/system" + +do_configure() { +
+> ./configure ${EXTRA_OECONF} }
+> 
+> do_install() { oe_runmake install DESTDIR=${D} }
+> 
+> -FILES_${PN} += "${datadir}/bash-completion \ -
+> ${libdir}/kernel \ +FILES_${PN}-bash-completion =
+> "${datadir}/bash-completion" + +FILES_${PN} += " ${libdir}/kernel \ +
+> ${systemd_unitdir} \ " +CONFFILES_${PN} += "${sysconfdir}/dracut.conf" + 
+> +RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
+> util-linux-getopt util-linux bash ldd" +RDEPENDS_${PN}-bash-completion =
+> "bash-completion"
+> 
+> -# 'getopt' is in the util-linux main package -RDEPENDS_${PN} = "systemd
+> findutils cpio util-linux-blkid util-linux bash ldd" # This could be
+> optimized a bit, but let's avoid non-booting systems :) RRECOMMENDS_${PN}
+> = " \ kernel-modules \ +                     busybox \ coreutils \ "
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFU03M0MkyGM64RGpERAsSgAJ4sxWUVqtCD2DKYpzAca3LK73vuXgCgnww/
+s7RbVFpxvlWMqI2+kurk6E8=
+=GmZH
+-----END PGP SIGNATURE-----
 
 
