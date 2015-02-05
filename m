@@ -1,44 +1,40 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F4D36AC35
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id E540C72DEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Feb 2015 18:44:16 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id l15so12580548wiw.0
+	Thu,  5 Feb 2015 18:49:52 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id hn18so46795803igb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Feb 2015 10:44:17 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=T//PBcQ+XaW40kXBWsAt3SOxAsHYxFrU4ZPOfq/hBsw=;
-	b=gGx75LfIlkCmBP3VCXtp2u2gkxQjHFThPrbBuw/CbINZAq3JQacbh8iT1UKR3ViXWv
-	kiuAUB2ywkatIRCzimdke3966SIUvoX1Moiixtzj34rccvmHlq6+E5V4x7wB0SLA1PZ9
-	dJD6FRtw1FCBzSXelwWNCXwG6dWWFlmlIDlGDkfTBAT2G6jjIu6Cf4qvloVvUvvd00i0
-	xHgp+Ix4KUk053xKRZPrCFOt3Iv0hHOHPXNWq9y7xi0xY3dmcJ3u+os5DU8sG+oLPhW2
-	5dzdqVH1DumqPqPmTxeJXMRGq6yO4MQdH9yiBRPE5mzu8Y5iIdWwyw08hV6JtbLT4Fnf
-	9DoQ==
-X-Gm-Message-State: ALoCoQld7CYR8R0enCZ4He789wFjUhdmox6CAET8nOuAJmNDY4q0rvtk7Sczn6tNTxJVV4BtTCfz
-X-Received: by 10.194.23.39 with SMTP id j7mr10691673wjf.9.1423161857600;
-	Thu, 05 Feb 2015 10:44:17 -0800 (PST)
-Received: from iMac.local ([2001:610:612:0:7d07:684d:ded3:59d1])
-	by mx.google.com with ESMTPSA id
-	pp10sm8496769wjc.31.2015.02.05.10.44.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Feb 2015 10:44:16 -0800 (PST)
-Message-ID: <54D3B9FF.4030405@dominion.thruhere.net>
-Date: Thu, 05 Feb 2015 19:44:15 +0100
-From: Koen Kooi <koen@dominion.thruhere.net>
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	Thu, 05 Feb 2015 10:49:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=ZRgmAt1oiy7bFjXAvR7P9XV2oYVauBxGxozGvwFJd+4=;
+	b=jcitwGx7C+oGH1vIBPOAAdNv8UB1fBQFZYfFKGX42K2L7fWLh1OrOnkL9S3al6O5sK
+	iD04UPQjtLh2G7cMqCdc4AynQXtRAE7aKywM1vB0jO4mtQU5oESphMKgnVadpT0dk8LW
+	Gp9r9v9gojMKVwHVJp4Hcau7zLt1Tk/Hd3/Oq07iziu5vYrRITV5DHpQtQgkkuf/sY/d
+	vCm8mlTFAErPTgliqCO0IYKRt0AXWZ1zi6RKxgR/yIK7O4ToJM52SVMM6EHrvG4FNToQ
+	ER9N+nBm19+UiwfOf4FD75mJQ2yJ35rXeXxt6Qh1ZaP8suxBW0gwTxANx/+i9konPk3p
+	yA8A==
+X-Received: by 10.50.78.232 with SMTP id e8mr10559687igx.5.1423162193646; Thu,
+	05 Feb 2015 10:49:53 -0800 (PST)
 MIME-Version: 1.0
+Received: by 10.107.8.166 with HTTP; Thu, 5 Feb 2015 10:49:23 -0800 (PST)
+In-Reply-To: <CAHQecY5gQE=3tgBfAUffiw=Q3wvY3x3wN07w4G_M+Hy83bQwqw@mail.gmail.com>
+References: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
+	<3777411.pG0mYOicST@peggleto-mobl5.ger.corp.intel.com>
+	<DA8287CC96892A4EB4FCF4FB3FBDA1AB0D891E@dor-sms-xch01.digi.com>
+	<3700387.1Q9y16bqhG@peggleto-mobl5.ger.corp.intel.com>
+	<C89D77F8-3BC6-412A-B220-67AD52600F5F@gmail.com>
+	<CAHQecY5gQE=3tgBfAUffiw=Q3wvY3x3wN07w4G_M+Hy83bQwqw@mail.gmail.com>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Thu, 5 Feb 2015 10:49:23 -0800
+Message-ID: <CAK8F28kB5SDdjm76_DgReMSFJuZ60-hpHjUhnAVkPw14eELpoA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <mavrvk$83v$1@ger.gmane.org>
-	<1423153742-11829-1-git-send-email-danismostlikely@gmail.com>
-In-Reply-To: <1423153742-11829-1-git-send-email-danismostlikely@gmail.com>
-Subject: Re: [meta-initramfs][PATCH v2 5/5] dracut: recipe cleanup
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>, "Viguera,
+	Javier" <Javier.Viguera@digi.com>
+Subject: Re: [meta-networking] crda-1.1.3 broken in dylan, dora, daisy and dizzy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,67 +48,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2015 18:44:20 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Feb 2015 18:50:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-Dan McGregor schreef op 05-02-15 om 17:29:
-> From: Dan McGregor <dan.mcgregor@usask.ca>
-> 
-> Split out bash-completion data Update RDEPENDS: getopt is
-> util-linux-getopt now
+Why clean the downloads directory?
 
-So the blanket 'util-linux' RDEPENDS can go away, right?
+Roughly how big is the download directory after a world build?
 
-> Use distro_features_check to require systemd Recommend busybox
-> 
-> Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca> --- 
-> .../recipes-devtools/dracut/dracut_git.bb          | 25
-> ++++++++++++++++------ 1 file changed, 19 insertions(+), 6 deletions(-)
-> 
-> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb index
-> ea55a4d..e425845 100644 ---
-> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb +++
-> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb @@ -13,8 +13,10 @@
-> SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
-> 
-> S = "${WORKDIR}/git"
-> 
-> -do_configure() { -    ./configure --prefix=${prefix} \ +inherit
-> distro_features_check +REQUIRED_DISTRO_FEATURES = "systemd" + 
-> +EXTRA_OECONF = "--prefix=${prefix} \ --libdir=${libdir} \ 
-> --datadir=${datadir} \ --sysconfdir=${sysconfdir} \ @@ -23,20 +25,31 @@
-> do_configure() { --bindir=${bindir} \ --includedir=${includedir} \ 
-> --localstatedir=${localstatedir} \ +
-> --systemdsystemunitdir=${systemd_unitdir}/system" + +do_configure() { +
-> ./configure ${EXTRA_OECONF} }
-> 
-> do_install() { oe_runmake install DESTDIR=${D} }
-> 
-> -FILES_${PN} += "${datadir}/bash-completion \ -
-> ${libdir}/kernel \ +PACKAGES =+ "${PN}-bash-completion" + 
-> +FILES_${PN}-bash-completion = "${datadir}/bash-completion" + 
-> +FILES_${PN} += " ${libdir}/kernel \ +                ${systemd_unitdir}
-> \ " +CONFFILES_${PN} += "${sysconfdir}/dracut.conf" + +RDEPENDS_${PN} =
-> "systemd findutils cpio util-linux-blkid util-linux-getopt util-linux
-> bash ldd" +RDEPENDS_${PN}-bash-completion = "bash-completion"
-> 
-> -# 'getopt' is in the util-linux main package -RDEPENDS_${PN} = "systemd
-> findutils cpio util-linux-blkid util-linux bash ldd" # This could be
-> optimized a bit, but let's avoid non-booting systems :) RRECOMMENDS_${PN}
-> = " \ kernel-modules \ +                     busybox \ coreutils \ "
-> 
+For gumstix, I maintain a source mirror on AWS S3 populated by our
+automated builders running BB_GENERATE_MIRROR_TARBALLS =3D "1".  If it
+would be useful to the community, I can see about adding files to this
+as an additional mirror.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+--Ash
 
-iD8DBQFU07n/MkyGM64RGpERAuZ6AKCK1aT62H7XvOeZU2+9RCZnMeMSqACfc/Ej
-8ubI00/FGsDFssxdkXURRY0=
-=SpL4
------END PGP SIGNATURE-----
+On Thu, Feb 5, 2015 at 10:04 AM, Tom King <ka6sox@gmail.com> wrote:
+> We have the BW, Jenkins can do the rsync from the World Builds (if we
+>  clean the downloads directory) and I'll have to add some space to the
+> Mirror Server but thats doable.
+>
+> Tom
+>
+> On Thu, Feb 5, 2015 at 9:52 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>>
+>> > On Feb 5, 2015, at 8:49 AM, Paul Eggleton <paul.eggleton@linux.intel.c=
+om>
+>> wrote:
+>> >
+>> > On Tuesday 03 February 2015 09:05:54 Viguera, Javier wrote:
+>> >>> -----Original Message-----
+>> >>> From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]
+>> >>>
+>> >>> I agree, #2 is the best option to take care of the older branches.
+>> >>>
+>> >>> Tom, can you please fetch the following files and add them to the OE
+>> >>> source
+>> >>>
+>> >>> mirror:
+>> >>>  http://distfiles.lesslinux.org/crda-1.1.3.tar.bz2
+>> >>>  http://distfiles.lesslinux.org/2013.01.11-regulatory.bin
+>> >>>
+>> >>> I've verified the md5sums match the recipe:
+>> >>>  29579185e06a75675507527243d28e5c  crda-1.1.3.tar.bz2
+>> >>>  e0c8a5ca63fb8bf803213f9a0c90b50b  2013.01.11-regulatory.bin
+>> >>
+>> >> Good to know we agree on the best option.
+>> >>
+>> >> Could I make a humble request to speed up the copy of the packages to=
+ OE
+>> >> source mirror?
+>> >>
+>> >> We have a BSP layer that depends on this and currently our build is
+>> broken
+>> >> fetching crda.
+>> >
+>> > I've been thinking about this, and this is getting ridiculous. Instead=
+ of
+>> > manually adding files to the OE source mirror, I think it's time we
+>> simply had
+>> > a populated fallback source mirror that has all the sources for at lea=
+st
+>> the
+>> > recipes in layers hosted on openembedded.org (if not other commonly us=
+ed
+>> > layers) aside from OE-Core which is already handled by the
+>> yoctoproject.org
+>> > mirrors. This issue keeps coming up far too often.
+>> >
+>> > Is there a possibility we can set this up?
+>>
+>> We can infact setup a rsync from download directory of Martin=E2=80=99s =
+world
+>> build jobs
+>> looking at Tom for help
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
