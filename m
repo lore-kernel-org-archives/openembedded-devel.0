@@ -1,40 +1,30 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f175.google.com (mail-yk0-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id D152765C75
+Return-Path: <fenixk19@mail.ru>
+Received: from fallback6.mail.ru (fallback6.mail.ru [94.100.181.147])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D8E160169
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Feb 2015 17:27:46 +0000 (UTC)
-Received: by mail-yk0-f175.google.com with SMTP id 9so3764617ykp.6
+	Thu,  5 Feb 2015 17:33:04 +0000 (UTC)
+Received: from smtp47.i.mail.ru (smtp47.i.mail.ru [94.100.177.107])
+	by fallback6.mail.ru (mPOP.Fallback_MX) with ESMTP id 57B026842CD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Feb 2015 09:27:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=BAN+BQhxpzRGPkOfyhnYZDW9xK5dRm49Aid3xV+zENc=;
-	b=YN3hSd1rGCv6fsRXLMfzqo5srVv9qXl/A2XsqL7sdvQh+6LV7cOaiZkTcML1TzXk+L
-	8w4NIk2vYMj/qMq01DpHZFclWj726i0GV+MkGkHHsY62FcAiRfUit506N3+wCCIkYYys
-	RbZszIM0E+OPt6jvcf7C+EK4uzdjsq7KF8oS+3USaCMzGDC1R+d2Wc4uv8FSyP6c0bVT
-	BdK1S1j383wchMs2neoWc72DE4bKliZySE4TUcm4ccc5JswMJ0JpAX+QmsRuXDsKytYV
-	Cw9Q5jdMgFy96TPsIgBDr4dChlcPynzuup5BkZfnxLhvRllF8ZYyiUb8xoOsP7OJbMh6
-	8tIg==
-MIME-Version: 1.0
-X-Received: by 10.236.199.103 with SMTP id w67mr2017151yhn.37.1423157267364;
-	Thu, 05 Feb 2015 09:27:47 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.143 with HTTP; Thu, 5 Feb 2015 09:27:47 -0800 (PST)
-In-Reply-To: <CAENGNhd58fiBF81D6V8H7uSjmmVeVx8-oWU=Pn32OwJs1EStDA@mail.gmail.com>
-References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
-	<1422338033-18521-5-git-send-email-schnitzeltony@googlemail.com>
-	<CAENGNhfzVESxGmQVz3SA6gGv_H+NBE+q9J+FB=Zg1J4WHdg=CQ@mail.gmail.com>
-	<CALbNGRQEfMiaVMKVVFnUFdZNokBQ=F5eQCDe7o75H507=uwHvg@mail.gmail.com>
-	<CALbNGRRSRUewugNgWeQqguEgHMjmiLetzi=v6rqWXYXy4WJ=Vw@mail.gmail.com>
-	<CAENGNhd58fiBF81D6V8H7uSjmmVeVx8-oWU=Pn32OwJs1EStDA@mail.gmail.com>
-Date: Thu, 5 Feb 2015 15:27:47 -0200
-X-Google-Sender-Auth: WH6vmfii3of3C3uRKFn1GOXnCVc
-Message-ID: <CAP9ODKpMwfn83T=aXWxd49GcVEN4Uw3nuHW+2YKgADNMo-K=gQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 4/5] qt5-creator: add 3.3.0 of qt-creator
+	Thu,  5 Feb 2015 18:47:14 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+	s=mail2; 
+	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=YzMCSMS0cyI47QD2E5IM0pTJpL9zjWjWtu6/joLxLps=; 
+	b=mHmf8M/3XpdtHmRvKaX/iJl6LirnEA3fib/sCZiDyOsqQdPH0C3feJ2D6/JYqkvrQc5jbcSTfm5MPwjh0t08vQSHHbygjYwfMZoWDRTxhfhf4WMzsWQ9g3Fz940zvXUuxPRmRAF/AAv9/3hDKJJNA/Auo4MNCdjisX88p/pU1dI=;
+Received: from [37.204.187.134] (port=35721 helo=localhost.localdomain)
+	by smtp47.i.mail.ru with esmtpa (envelope-from <fenixk19@mail.ru>)
+	id 1YJOe2-0002gI-5x; Thu, 05 Feb 2015 18:47:06 +0300
+From: "A. Varnin" <fenixk19@mail.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 Feb 2015 18:46:45 +0300
+Message-Id: <1423151205-8219-2-git-send-email-fenixk19@mail.ru>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1423151205-8219-1-git-send-email-fenixk19@mail.ru>
+References: <1423151205-8219-1-git-send-email-fenixk19@mail.ru>
+X-Spam: Not detected
+X-Mras: Ok
+Subject: [meta-oe][PATCH 2/2] freetds: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,18 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2015 17:27:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 05 Feb 2015 17:33:11 -0000
 
-On Thu, Feb 5, 2015 at 3:22 PM, Raphael Philipe <rapphil@gmail.com> wrote:
-> In my local.conf I used:
->
->  PACKAGECONFIG_append_pn-qtbase = "accessibility"
+From: Alexander Varnin <fenixk19@mail.ru>
 
-PACKAGECONFIG_append_pn-qtbase = "<space>accessibility"
+FreeTDS is a set of libraries for Unix and Linux that allows your programs
+to natively talk to Microsoft SQL Server and Sybase databases.
 
+Signed-off-by: Alexander Varnin <fenixk19@mail.ru>
+---
+ meta-oe/recipes-extended/freetds/freetds_0.92.79.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/freetds/freetds_0.92.79.bb
+
+diff --git a/meta-oe/recipes-extended/freetds/freetds_0.92.79.bb b/meta-oe/recipes-extended/freetds/freetds_0.92.79.bb
+new file mode 100644
+index 0000000..c7946d1
+--- /dev/null
++++ b/meta-oe/recipes-extended/freetds/freetds_0.92.79.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "FreeTDS is a set of libraries for Unix and Linux that allows your programs to natively talk to Microsoft SQL Server and Sybase databases."
++HOMEPAGE = "http://www.freetds.org"
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b \
++                    file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
++
++SRC_URI = "ftp://ftp.freetds.org/pub/freetds/stable/${PN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "b97e9bdd3f461af3e8ea559404582f70"
++
++S = "${WORKDIR}/${PN}-${PV}"
++
++inherit autotools
++
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.1
+
 
