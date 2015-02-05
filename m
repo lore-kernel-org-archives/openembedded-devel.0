@@ -1,26 +1,37 @@
-Return-Path: <fenixk19@mail.ru>
-Received: from smtp34.i.mail.ru (smtp34.i.mail.ru [94.100.177.94])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B2AF72DE5
+Return-Path: <danismostlikely@gmail.com>
+Received: from mail-yk0-f173.google.com (mail-yk0-f173.google.com
+	[209.85.160.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AD6372E23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Feb 2015 16:27:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
-	s=mail2; 
-	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=YzMCSMS0cyI47QD2E5IM0pTJpL9zjWjWtu6/joLxLps=; 
-	b=oxU/Yu6s1/sac1S+sW/EdloNByP0VlM0/yVgYdqjUz9KnqtBDcvQNyvXacjEWXHFgMbxtUCwpG79OsIh7KPzu7OSAM37AYjd1A1thkq6ImOh+qV4cKcHyA1x9bEw2s/Fq7B+0B+MoV/U7EUwFGPPlMz6ol4K2TvfjWX+8ut4yeg=;
-Received: from [37.204.187.134] (port=36041 helo=localhost.localdomain)
-	by smtp34.i.mail.ru with esmtpa (envelope-from <fenixk19@mail.ru>)
-	id 1YJPHK-0004Vf-OQ; Thu, 05 Feb 2015 19:27:47 +0300
-From: "A. Varnin" <fenixk19@mail.ru>
+	Thu,  5 Feb 2015 16:29:05 +0000 (UTC)
+Received: by mail-yk0-f173.google.com with SMTP id 142so3627459ykq.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Feb 2015 08:29:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=g0OnjjJZrUZ439dxsSLM05Zub9Ir5eL7Ah+MzozvVNM=;
+	b=CFNAAo4JEfFLInCDLNd1/MLN2Ko0dK+ZQLNhbWd+/Av2yMJXmg6Cj+01mjAKe7P63A
+	5HvSjhSog+cHtnLnF1V5/psmbu4bgIuo3r8q+q8NLSikWWOY7MQvci9GfWEDSFf9xPiw
+	+23kKoRGXfPye/2grnu+8iyO0AEXVzvND8kIEhXifH5ir4lJbHLFN95woSkczifrq3hx
+	J+yo3x5rj2ftefd8JW5jFo4KpyaWc1eXLUNLAutUZjt91O6Ax41Pk6d2kfFKPoFq/uxj
+	nD06VbLuSKbK7B0sJwfN92rXcZ5gFlXThQuPHRrm+A30LoqKzdo+Nth0oFxrkqBm64TB
+	rLhQ==
+X-Received: by 10.107.7.18 with SMTP id 18mr5533796ioh.42.1423153746203;
+	Thu, 05 Feb 2015 08:29:06 -0800 (PST)
+Received: from mediabox.local (71-17-233-74.sktn.hsdb.sasknet.sk.ca.
+	[71.17.233.74]) by mx.google.com with ESMTPSA id
+	hi15sm11370453igb.19.2015.02.05.08.29.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 05 Feb 2015 08:29:05 -0800 (PST)
+From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Feb 2015 19:27:25 +0300
-Message-Id: <1423153645-9754-2-git-send-email-fenixk19@mail.ru>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1423153645-9754-1-git-send-email-fenixk19@mail.ru>
-References: <1423153645-9754-1-git-send-email-fenixk19@mail.ru>
-X-Spam: Not detected
-X-Mras: Ok
-Subject: [meta-oe][PATCH 2/2] freetds: add new recipe
+Date: Thu,  5 Feb 2015 10:29:02 -0600
+Message-Id: <1423153742-11829-1-git-send-email-danismostlikely@gmail.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <mavrvk$83v$1@ger.gmane.org>
+References: <mavrvk$83v$1@ger.gmane.org>
+Subject: [meta-initramfs][PATCH v2 5/5] dracut: recipe cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,40 +45,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Feb 2015 16:27:52 -0000
+X-List-Received-Date: Thu, 05 Feb 2015 16:29:06 -0000
 
-From: Alexander Varnin <fenixk19@mail.ru>
+From: Dan McGregor <dan.mcgregor@usask.ca>
 
-FreeTDS is a set of libraries for Unix and Linux that allows your programs
-to natively talk to Microsoft SQL Server and Sybase databases.
+Split out bash-completion data
+Update RDEPENDS: getopt is util-linux-getopt now
+Use distro_features_check to require systemd
+Recommend busybox
 
-Signed-off-by: Alexander Varnin <fenixk19@mail.ru>
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
 ---
- meta-oe/recipes-extended/freetds/freetds_0.92.79.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-extended/freetds/freetds_0.92.79.bb
+ .../recipes-devtools/dracut/dracut_git.bb          | 25 ++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/freetds/freetds_0.92.79.bb b/meta-oe/recipes-extended/freetds/freetds_0.92.79.bb
-new file mode 100644
-index 0000000..c7946d1
---- /dev/null
-+++ b/meta-oe/recipes-extended/freetds/freetds_0.92.79.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "FreeTDS is a set of libraries for Unix and Linux that allows your programs to natively talk to Microsoft SQL Server and Sybase databases."
-+HOMEPAGE = "http://www.freetds.org"
-+LICENSE = "GPLv2"
+diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+index ea55a4d..e425845 100644
+--- a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
++++ b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
+@@ -13,8 +13,10 @@ SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git"
+ 
+ S = "${WORKDIR}/git"
+ 
+-do_configure() {
+-    ./configure --prefix=${prefix} \
++inherit distro_features_check
++REQUIRED_DISTRO_FEATURES = "systemd"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c93c0550bd3173f4504b2cbd8991e50b \
-+                    file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
++EXTRA_OECONF = "--prefix=${prefix} \
+                 --libdir=${libdir} \
+                 --datadir=${datadir} \
+                 --sysconfdir=${sysconfdir} \
+@@ -23,20 +25,31 @@ do_configure() {
+                 --bindir=${bindir} \
+                 --includedir=${includedir} \
+                 --localstatedir=${localstatedir} \
++                --systemdsystemunitdir=${systemd_unitdir}/system"
 +
-+SRC_URI = "ftp://ftp.freetds.org/pub/freetds/stable/${PN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "b97e9bdd3f461af3e8ea559404582f70"
++do_configure() {
++    ./configure ${EXTRA_OECONF}
+ }
+ 
+ do_install() {
+     oe_runmake install DESTDIR=${D}
+ }
+ 
+-FILES_${PN} += "${datadir}/bash-completion \ 
+-                ${libdir}/kernel \
++PACKAGES =+ "${PN}-bash-completion"
 +
-+S = "${WORKDIR}/${PN}-${PV}"
++FILES_${PN}-bash-completion = "${datadir}/bash-completion"
 +
-+inherit autotools
++FILES_${PN} += " ${libdir}/kernel \
++                ${systemd_unitdir} \
+                "
++CONFFILES_${PN} += "${sysconfdir}/dracut.conf"
 +
++RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux-getopt util-linux bash ldd"
++RDEPENDS_${PN}-bash-completion = "bash-completion"
+ 
+-# 'getopt' is in the util-linux main package
+-RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid util-linux bash ldd"
+ # This could be optimized a bit, but let's avoid non-booting systems :)
+ RRECOMMENDS_${PN} = " \
+                      kernel-modules \
++                     busybox \
+                      coreutils \ 
+                     "
 -- 
-1.9.1
+2.1.0
 
 
