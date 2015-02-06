@@ -1,38 +1,35 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
-	[74.125.82.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 8065B605F1
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F723605F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Feb 2015 21:38:41 +0000 (UTC)
-Received: by mail-we0-f175.google.com with SMTP id p10so16231667wes.6
+	Fri,  6 Feb 2015 22:44:17 +0000 (UTC)
+Received: by mail-yk0-f171.google.com with SMTP id 10so7173388ykt.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Feb 2015 13:38:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=3yAEh3FYi6FFwxDSdreSTBNXuv9hEd/hUNzZpvLXyQY=;
-	b=rLyBO9udoKlFzGh+xx7w4iYGz3RXhl3Y+w7UsuQWLjtae4eV0qn3dxBHWrhOu6h3fG
-	BXyyCYLufLwaHAIQB8SO2BoQ04jnOwy8W5n36xVyAaNBbQIJ1r62GwKb7sMZxJmoWcM3
-	NkKkNyu8QzzpQXNBK9lVmuQk6jVz6Ei1WVoeTYhilGy7TeQV+Qfrkj9S+74YfOAPp3HC
-	vCexqrD92mmaPb6bWTNtfv+nOnA4gbAU68c0MXTdJvRDAGKGZhzOZk5q0sQMJJgR3s7/
-	zZy6wqTtz5cBNJnzA4YI7nKNYhTmfaebQQcF+EVyrpAE+ULSkuSS0jOKsvhNDN7MRiNC
-	U/Ug==
-X-Received: by 10.194.189.138 with SMTP id gi10mr12559111wjc.86.1423258721998; 
-	Fri, 06 Feb 2015 13:38:41 -0800 (PST)
-Received: from localhost.localdomain (p5B0A28DE.dip0.t-ipconnect.de.
-	[91.10.40.222])
-	by mx.google.com with ESMTPSA id lk2sm3058368wic.22.2015.02.06.13.38.40
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 Feb 2015 13:38:40 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Feb 2015 22:38:29 +0100
-Message-Id: <1423258709-5226-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.9.3
+	Fri, 06 Feb 2015 14:44:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=7bRBYW79PLdMXznL3sMAXclKs7Yvpjjb6CG2js+AnrM=;
+	b=KOAB0rTqbvnjjImyEgImFlKLEjePy6i75K/SWAxuYXKaVhqF8HagKpeFmjP5on+Bfx
+	FQDcAO0aR4D1VR1+rzMv5PV105Dcwl4hvfXORbVnpxq/iZsXMQ6aA0Ch8kxwKv8aVfYI
+	o0ul7gHS1y/j/T7jtkyGoi83Z1ulHd83UyJNaERgJxHOzqXNTRnr6DeIrkd5d97SNve/
+	kBSROvoeSEn9BwShl3X6kKia7blidCWYaN4UiljOIm0nLZSbY21Ww2XBg1eb2yu70haV
+	UdsDkjNrBcz/ar8bSG2hM3xAapqZk8OKRpFBAVt/PjrI21mL9dx9FJyABb3UnMQYSQIz
+	wDKw==
 MIME-Version: 1.0
-Subject: [PATCH] samba: add mirrors
+X-Received: by 10.236.32.37 with SMTP id n25mr2179812yha.102.1423262658305;
+	Fri, 06 Feb 2015 14:44:18 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.123.143 with HTTP; Fri, 6 Feb 2015 14:44:18 -0800 (PST)
+In-Reply-To: <6968631.gt1QZ91jDt@fridolin>
+References: <6968631.gt1QZ91jDt@fridolin>
+Date: Fri, 6 Feb 2015 20:44:18 -0200
+X-Google-Sender-Auth: mDxllV3c4npVOB1iKEEdt-cM1tU
+Message-ID: <CAP9ODKrVig+Zg6215sa6Mgtf+z4Eo8+B-6wPseKg97kMtRTNTg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] Add qtwebchannel recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,39 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Feb 2015 21:38:43 -0000
+X-List-Received-Date: Fri, 06 Feb 2015 22:44:19 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Samba server is down currently so add mirrors. Both were short tested
-by wget.
+On Fri, Feb 6, 2015 at 1:47 PM, Stephan Binner
+<stephan.binner@basyskom.com> wrote:
+> From: Stephan Binner <stephan.binner@basyskom.com>
+>
+> Signed-off-by: Stephan Binner <stephan.binner@basyskom.com>
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-connectivity/samba/samba.inc | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Your patch seem corrupted; please send it using git-send-email as your
+e-mail client seems to have corrupted it.
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
-index 68e1b1f..aef8aac 100644
---- a/meta-oe/recipes-connectivity/samba/samba.inc
-+++ b/meta-oe/recipes-connectivity/samba/samba.inc
-@@ -2,7 +2,14 @@ SECTION = "console/network"
- LICENSE = "GPL-3.0"
- DEPENDS = "readline virtual/libiconv zlib popt"
- 
--SRC_URI = "http://samba.org/samba/ftp/stable/samba-${PV}.tar.gz \
-+SAMBA_MIRROR = "http://samba.org/samba/ftp"
-+
-+MIRRORS += "\
-+${SAMBA_MIRROR}    http://mirror.internode.on.net/pub/samba \n \
-+${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
-+"
-+
-+SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://volatiles.03_samba \
-            file://smb.conf \
-            file://init.samba \
 -- 
-1.9.3
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
