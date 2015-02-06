@@ -1,45 +1,24 @@
-Return-Path: <rapphil@gmail.com>
-Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 851E06AC35
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FC586AC12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Feb 2015 00:28:02 +0000 (UTC)
-Received: by mail-yh0-f43.google.com with SMTP id 29so4873611yhl.2
+	Fri,  6 Feb 2015 05:59:47 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t165xmnY023937
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Feb 2015 16:28:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=+Jha9mxz5TtBG6R1Yf9we0MhAOczg9XcRFuXPrBIx9w=;
-	b=aZ0TFgYSGdGhkMh79v4jNb8//PIN8v7T1y8rfAjNjMP7MO+4kR0CinSuvSNtG/bRxl
-	ZC2VXGzivr4FVPJMSZ7Blik0NA+tLPHTxLxANsFa8beVxk7YXACqzkDOVRgQeWnFA4gG
-	QOxqm3Cd12+Pe/fN9f1mn44fjuSALjZjZ7dwcro7TRVNWAXllxKDJOLvfzOooj1kaOMY
-	3yTMfHnPREhVCh8ApbZwKYqPezIkG4oG/+ZxibmdLFG7UxEBohoMQE+5+SA0FhFPX6tt
-	SAcpUKnvsOrlnS2+kTH58dlTgql05UsbazpR280E0XX3CSaX7m813HAf8qsaQzIu736b
-	KD/A==
-X-Received: by 10.236.110.10 with SMTP id t10mr154441yhg.35.1423182483942;
-	Thu, 05 Feb 2015 16:28:03 -0800 (PST)
-Received: from gmail.com ([186.222.38.123])
-	by mx.google.com with ESMTPSA id y50sm501170yhy.30.2015.02.05.16.28.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=RC4-SHA bits=128/128);
-	Thu, 05 Feb 2015 16:28:03 -0800 (PST)
-Date: Thu, 5 Feb 2015 22:27:55 -0200
-From: Firstname Lastname <rapphil@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150206002755.GA3594@gmail.com>
-References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
-	<1422338033-18521-5-git-send-email-schnitzeltony@googlemail.com>
-	<CAENGNhfzVESxGmQVz3SA6gGv_H+NBE+q9J+FB=Zg1J4WHdg=CQ@mail.gmail.com>
-	<CALbNGRQEfMiaVMKVVFnUFdZNokBQ=F5eQCDe7o75H507=uwHvg@mail.gmail.com>
-	<CALbNGRRSRUewugNgWeQqguEgHMjmiLetzi=v6rqWXYXy4WJ=Vw@mail.gmail.com>
-	<CAENGNhd58fiBF81D6V8H7uSjmmVeVx8-oWU=Pn32OwJs1EStDA@mail.gmail.com>
-	<CALbNGRT0r612O8Yn+Vsn-3jCXk8i0yqhAc-Df9ukBiLRV5gRhQ@mail.gmail.com>
+	Thu, 5 Feb 2015 21:59:48 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.136) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Thu, 5 Feb 2015 21:59:47 -0800
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 6 Feb 2015 13:59:46 +0800
+Message-ID: <1423202386-4040-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRT0r612O8Yn+Vsn-3jCXk8i0yqhAc-Df9ukBiLRV5gRhQ@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-qt5][PATCH 4/5] qt5-creator: add 3.3.0 of qt-creator
+Subject: [PATCH] mariadb: make it be able to work with SELinux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,26 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Feb 2015 00:28:04 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 06 Feb 2015 05:59:57 -0000
+Content-Type: text/plain
 
-On Thu, Feb 05, 2015 at 09:34:02PM +0100, Andreas Müller wrote:
-> On Thu, Feb 5, 2015 at 6:22 PM, Raphael Philipe <rapphil@gmail.com> wrote:
-> > In my local.conf I used:
-> >
-> >  PACKAGECONFIG_append_pn-qtbase = "accessibility"
-> >
-> > Attached you can find the log.do_compile for qt5-creator
-> You attached log.do_configure :)
-My mistake. Here it is: 
-https://www.dropbox.com/s/ekuys8g3ud9vet7/log.do_compile.1044.tar.gz?dl=
-> 
-> Andreas
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+From: Roy Li <rongqing.li@windriver.com>
+
+1. change the datadir from /var/mysql to /var/lib/mysql
+2. after creating datedir, restorecon on it, make SELinux be able to
+work
+3. Add the PIDFile for systemd unit file, otherwise systemctl can not
+stop mysqld
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-oe/recipes-support/mysql/mariadb.inc            | 1 +
+ meta-oe/recipes-support/mysql/mariadb/my.cnf         | 2 +-
+ meta-oe/recipes-support/mysql/mariadb/mysqld.service | 1 +
+ 3 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index 8068862..f385bfc 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -128,6 +128,7 @@ pkg_postinst_${PN}-server () {
+ 
+     mysql_install_db --basedir=${prefix} --user=mysql
+ 
++    [ -x /sbin/restorecon ] && /sbin/restorecon -RF /var/lib/mysql
+ }
+ 
+ PACKAGES = "${PN}-dbg ${PN} \
+diff --git a/meta-oe/recipes-support/mysql/mariadb/my.cnf b/meta-oe/recipes-support/mysql/mariadb/my.cnf
+index 876ce36..28d3899 100644
+--- a/meta-oe/recipes-support/mysql/mariadb/my.cnf
++++ b/meta-oe/recipes-support/mysql/mariadb/my.cnf
+@@ -13,7 +13,7 @@ socket 						= /var/lib/mysql/mysql.sock
+ pid-file 					= /var/lib/mysql/mysqld.pid
+ log-error 					= /var/log/mysqld.err
+ basedir 					= /usr
+-datadir 					= /var/mysql
++datadir 					= /var/lib/mysql
+ skip-external-locking
+ skip-networking
+ ignore-builtin-innodb
+diff --git a/meta-oe/recipes-support/mysql/mariadb/mysqld.service b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
+index 18ad8d5..757d038 100644
+--- a/meta-oe/recipes-support/mysql/mariadb/mysqld.service
++++ b/meta-oe/recipes-support/mysql/mariadb/mysqld.service
+@@ -4,6 +4,7 @@ After=syslog.target
+ After=network.target
+ 
+ [Service]
++PIDFile=/var/lib/mysql/mysqld.pid
+ Type=simple
+ User=mysql
+ Group=mysql
+-- 
+2.1.0
+
 
