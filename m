@@ -1,33 +1,40 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 84865605F1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E76F72DE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Feb 2015 08:42:11 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1YJeUM-00053V-J7 for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Feb 2015 09:42:10 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Feb 2015 09:42:10 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri,  6 Feb 2015 13:15:25 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id r20so2309197wiv.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Feb 2015 09:42:10 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 06 Feb 2015 09:41:49 +0100
-Message-ID: <mb1uod$cqu$1@ger.gmane.org>
-References: <1423202386-4040-1-git-send-email-rongqing.li@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
-In-Reply-To: <1423202386-4040-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH] mariadb: make it be able to work with SELinux
+	Fri, 06 Feb 2015 05:15:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=/zNX4kdzPU6ipOfMEp5j9VblHEhsukMMwNJoyMFgLEU=;
+	b=l2FOguKkDLc7Qe1vfq2c1/4v2KJKCSfDZdyw/GXMWmXFpf25tb9v25wXC5aw5IMnBP
+	ni+VgKnUE/OTdzS+5kn6zKIBm0kSOdZKdVgBRR+JtTJiyMT5DXUiYVS+fBMnxBgvuOmH
+	ptRBvttC+yaufbSmWD30VNJ2Co5n95ooDU1bBe6bJDcfdxEyG6W8nn03TU77UnHVorTU
+	hx+i5W2OzVhNQP1YH6J1N4tBVvv0xFUdzYK/+92ZB9ksvOiW056iI8aU1qFPlnq3kdG3
+	z1YG1aDW6XltQKLe11dIfASVJ7Gf+gUf3TZzuMzmHfppaPPD90ZYrXRQYR1JgG0ndpa8
+	U15A==
+X-Received: by 10.194.179.194 with SMTP id di2mr7548836wjc.4.1423228526189;
+	Fri, 06 Feb 2015 05:15:26 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	r3sm1450205wic.10.2015.02.06.05.15.25
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 Feb 2015 05:15:25 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 6 Feb 2015 14:15:43 +0100
+To: ting.liu@freescale.com
+Message-ID: <20150206131543.GB2287@jama>
+References: <1422606045-7713-1-git-send-email-ting.liu@freescale.com>
+MIME-Version: 1.0
+In-Reply-To: <1422606045-7713-1-git-send-email-ting.liu@freescale.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/2] python-pip: correct license to GPLv2+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,67 +48,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Feb 2015 08:42:12 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 Feb 2015 13:15:30 -0000
+X-Groupsio-MsgNum: 54131
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mxv5cy4qt+RJ9ypb"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--mxv5cy4qt+RJ9ypb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-rongqing.li@windriver.com schreef op 06-02-15 om 06:59:
-> From: Roy Li <rongqing.li@windriver.com>
-> 
-> 1. change the datadir from /var/mysql to /var/lib/mysql 2. after creating
-> datedir, restorecon on it, make SELinux be able to work 3. Add the
-> PIDFile for systemd unit file, otherwise systemctl can not stop mysqld
+On Fri, Jan 30, 2015 at 04:20:44PM +0800, ting.liu@freescale.com wrote:
+> From: Ting Liu <ting.liu@freescale.com>
+>=20
+> WARNING: python-pip: No generic license file exists for: GPL in any provi=
+der
 
-Shouldn't those all use the ${localstatedir} variable instead of hardcoding?
+It looks like LGPL-2.0 as http://patchwork.openembedded.org/patch/88013/
+does, so I'll drop this patch.
 
+>=20
+> Signed-off-by: Ting Liu <ting.liu@freescale.com>
+> ---
+>  meta-python/recipes-devtools/python/python-pip_1.3.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-python/recipes-devtools/python/python-pip_1.3.1.bb b/me=
+ta-python/recipes-devtools/python/python-pip_1.3.1.bb
+> index d1a7c8b..87493f5 100644
+> --- a/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
+> +++ b/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
+> @@ -1,5 +1,5 @@
+>  SUMMARY =3D "PIP is a tool for installing and managing Python packages"
+> -LICENSE =3D "MIT & GPL"
+> +LICENSE =3D "MIT & GPLv2+"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Dcd00425a3465a0e4c81929b94=
+241d3de"
+> =20
+>  SRC_URI =3D "https://pypi.python.org/packages/source/p/pip/pip-${PV}.tar=
+=2Egz"
+> --=20
+> 1.9.1
+>=20
 
-> 
-> Signed-off-by: Roy Li <rongqing.li@windriver.com> --- 
-> meta-oe/recipes-support/mysql/mariadb.inc            | 1 + 
-> meta-oe/recipes-support/mysql/mariadb/my.cnf         | 2 +- 
-> meta-oe/recipes-support/mysql/mariadb/mysqld.service | 1 + 3 files
-> changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
-> b/meta-oe/recipes-support/mysql/mariadb.inc index 8068862..f385bfc
-> 100644 --- a/meta-oe/recipes-support/mysql/mariadb.inc +++
-> b/meta-oe/recipes-support/mysql/mariadb.inc @@ -128,6 +128,7 @@
-> pkg_postinst_${PN}-server () {
-> 
-> mysql_install_db --basedir=${prefix} --user=mysql
-> 
-> +    [ -x /sbin/restorecon ] && /sbin/restorecon -RF /var/lib/mysql }
-> 
-> PACKAGES = "${PN}-dbg ${PN} \ diff --git
-> a/meta-oe/recipes-support/mysql/mariadb/my.cnf
-> b/meta-oe/recipes-support/mysql/mariadb/my.cnf index 876ce36..28d3899
-> 100644 --- a/meta-oe/recipes-support/mysql/mariadb/my.cnf +++
-> b/meta-oe/recipes-support/mysql/mariadb/my.cnf @@ -13,7 +13,7 @@ socket
-> = /var/lib/mysql/mysql.sock pid-file 					= /var/lib/mysql/mysqld.pid 
-> log-error 					= /var/log/mysqld.err basedir 					= /usr -datadir 					=
-> /var/mysql +datadir 					= /var/lib/mysql skip-external-locking 
-> skip-networking ignore-builtin-innodb diff --git
-> a/meta-oe/recipes-support/mysql/mariadb/mysqld.service
-> b/meta-oe/recipes-support/mysql/mariadb/mysqld.service index
-> 18ad8d5..757d038 100644 ---
-> a/meta-oe/recipes-support/mysql/mariadb/mysqld.service +++
-> b/meta-oe/recipes-support/mysql/mariadb/mysqld.service @@ -4,6 +4,7 @@
-> After=syslog.target After=network.target
-> 
-> [Service] +PIDFile=/var/lib/mysql/mysqld.pid Type=simple User=mysql 
-> Group=mysql
-> 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--mxv5cy4qt+RJ9ypb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
+Version: GnuPG v2
 
-iD8DBQFU1H5NMkyGM64RGpERAiEDAJ9sJEaiGqhauXo0DJD2+cgMPshg8wCgsfHO
-DBiU69t3NR66pAvdQyNlh/Y=
-=KiCJ
+iEYEARECAAYFAlTUvn8ACgkQN1Ujt2V2gBzABACfWmgm6wwHDgCzgxUMtxp9G/Om
+CrAAoJgtRtn20TNCwM/fl888TiRJWZad
+=6y4t
 -----END PGP SIGNATURE-----
 
-
+--mxv5cy4qt+RJ9ypb--
