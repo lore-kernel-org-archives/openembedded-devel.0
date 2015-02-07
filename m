@@ -1,35 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f171.google.com (mail-yk0-f171.google.com
-	[209.85.160.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F723605F1
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E49F601F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Feb 2015 22:44:17 +0000 (UTC)
-Received: by mail-yk0-f171.google.com with SMTP id 10so7173388ykt.2
+	Sat,  7 Feb 2015 06:24:14 +0000 (UTC)
+Received: by mail-pa0-f43.google.com with SMTP id fa1so6700094pad.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Feb 2015 14:44:18 -0800 (PST)
+	Fri, 06 Feb 2015 22:24:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=7bRBYW79PLdMXznL3sMAXclKs7Yvpjjb6CG2js+AnrM=;
-	b=KOAB0rTqbvnjjImyEgImFlKLEjePy6i75K/SWAxuYXKaVhqF8HagKpeFmjP5on+Bfx
-	FQDcAO0aR4D1VR1+rzMv5PV105Dcwl4hvfXORbVnpxq/iZsXMQ6aA0Ch8kxwKv8aVfYI
-	o0ul7gHS1y/j/T7jtkyGoi83Z1ulHd83UyJNaERgJxHOzqXNTRnr6DeIrkd5d97SNve/
-	kBSROvoeSEn9BwShl3X6kKia7blidCWYaN4UiljOIm0nLZSbY21Ww2XBg1eb2yu70haV
-	UdsDkjNrBcz/ar8bSG2hM3xAapqZk8OKRpFBAVt/PjrI21mL9dx9FJyABb3UnMQYSQIz
-	wDKw==
-MIME-Version: 1.0
-X-Received: by 10.236.32.37 with SMTP id n25mr2179812yha.102.1423262658305;
-	Fri, 06 Feb 2015 14:44:18 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.143 with HTTP; Fri, 6 Feb 2015 14:44:18 -0800 (PST)
-In-Reply-To: <6968631.gt1QZ91jDt@fridolin>
-References: <6968631.gt1QZ91jDt@fridolin>
-Date: Fri, 6 Feb 2015 20:44:18 -0200
-X-Google-Sender-Auth: mDxllV3c4npVOB1iKEEdt-cM1tU
-Message-ID: <CAP9ODKrVig+Zg6215sa6Mgtf+z4Eo8+B-6wPseKg97kMtRTNTg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] Add qtwebchannel recipe
+	h=from:to:subject:date:message-id;
+	bh=5940hPKsUBWUiuARAtjjdj2XrTPEBpUTYMyPVmtEACU=;
+	b=Yd6XYMS/2bWRV0vSx04wMzfvVVTpr0AL9jEH1+T7PExiOvhhEsuLL65V5cb7hOSRDE
+	qoUKGLLGiJeeAE/iB2BVMfR9w9uxoc843yrtAFkWAJdIRuEUlBT9oPKWYzR+gHcV8pRU
+	10eulBqwsZBlJK4qPU08gS596JAgqZ5z7Y8oXKr9uhOBLojmORLz09hXvQOKb2ck44Ck
+	bC3I7pngeyywakfqi9DYKwBxlKysyCgQ/Cwlxpa8NlMy9snJyli5S9qtjMXksc7NcSAO
+	T3ZgRPYRQ5LJASfzglENutlO5rCZ7+52UrkGlV36LJQBZ6dA0sCqZVDlSyBmBkQuECA/
+	MkVQ==
+X-Received: by 10.68.132.42 with SMTP id or10mr11530537pbb.162.1423290255956; 
+	Fri, 06 Feb 2015 22:24:15 -0800 (PST)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id or4sm8818142pdb.66.2015.02.06.22.24.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 06 Feb 2015 22:24:14 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  6 Feb 2015 22:24:06 -0800
+Message-Id: <1423290246-10493-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] libcap-ng: add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,20 +43,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Feb 2015 22:44:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 07 Feb 2015 06:24:24 -0000
 
-On Fri, Feb 6, 2015 at 1:47 PM, Stephan Binner
-<stephan.binner@basyskom.com> wrote:
-> From: Stephan Binner <stephan.binner@basyskom.com>
->
-> Signed-off-by: Stephan Binner <stephan.binner@basyskom.com>
+this moves libcap-ng out of meta-selinux and meta-security into
+a common layer
 
-Your patch seem corrupted; please send it using git-send-email as your
-e-mail client seems to have corrupted it.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../libcap-ng/libcap-ng/python.patch               | 39 ++++++++++++++++++++++
+ .../recipes-support/libcap-ng/libcap-ng_0.7.4.bb   | 37 ++++++++++++++++++++
+ 2 files changed, 76 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
+ create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
 
+diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
+new file mode 100644
+index 0000000..d82ceb4
+--- /dev/null
++++ b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
+@@ -0,0 +1,39 @@
++configure.ac - Avoid an incorrect check for python.
++Makefile.am - avoid hard coded host include paths.
++
++Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
++
++--- libcap-ng-0.6.5/configure.ac.orig	2012-01-17 13:59:03.645898989 -0600
+++++ libcap-ng-0.6.5/configure.ac	2012-01-17 13:59:46.353959252 -0600
++@@ -120,17 +120,8 @@
++ else
++ AC_MSG_RESULT(testing)
++ AM_PATH_PYTHON
++-if test -f /usr/include/python${am_cv_python_version}/Python.h ; then
++-	python_found="yes"
++-	AC_MSG_NOTICE(Python bindings will be built)
++-else
++-	python_found="no"
++-	if test x$use_python = xyes ; then
++-		AC_MSG_ERROR([Python explicitly required and python headers found])
++-	else
++-		AC_MSG_WARN("Python headers not found - python bindings will not be made")
++-	fi
++-fi
+++python_found="yes"
+++AC_MSG_NOTICE(Python bindings will be built)
++ fi
++ AM_CONDITIONAL(HAVE_PYTHON, test ${python_found} = "yes")
++ 
++--- libcap-ng-0.6.5/bindings/python/Makefile.am.orig	2010-11-03 12:31:59.000000000 -0500
+++++ libcap-ng-0.6.5/bindings/python/Makefile.am	2012-01-17 14:05:50.199834467 -0600
++@@ -24,7 +24,8 @@
++ CONFIG_CLEAN_FILES = *.loT *.rej *.orig
++ AM_CFLAGS = -fPIC -DPIC
++ PYLIBVER ?= python$(PYTHON_VERSION)
++-INCLUDES = -I. -I$(top_builddir) -I/usr/include/$(PYLIBVER)
+++PYINC ?= /usr/include/$(PYLIBVER)
+++INCLUDES = -I. -I$(top_builddir) -I$(PYINC)
++ LIBS = $(top_builddir)/src/libcap-ng.la
++ pyexec_PYTHON = capng.py
++ pyexec_LTLIBRARIES = _capng.la
+diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
+new file mode 100644
+index 0000000..8823dad
+--- /dev/null
++++ b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
+@@ -0,0 +1,37 @@
++SUMMARY = "An alternate posix capabilities library"
++DESCRIPTION = "The libcap-ng library is intended to make programming \
++with POSIX capabilities much easier than the traditional libcap library."
++HOMEPAGE = "http://freecode.com/projects/libcap-ng"
++SECTION = "base"
++LICENSE = "GPLv2+ & LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
++		    file://COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
++
++SRC_URI = "http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-${PV}.tar.gz \
++	   file://python.patch"
++
++inherit lib_package autotools pythonnative
++
++SRC_URI[md5sum] = "55c57c0673b944ea1a755bcb2636dabd"
++SRC_URI[sha256sum] = "48a2083276f9820cb92dcb05d001b30733bcbf48c14c230303cac3cd08b45b6b"
++
++DEPENDS += "swig-native python"
++
++EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' PYINC='${STAGING_INCDIR}/${PYLIBVER}'"
++
++PACKAGES += "${PN}-python"
++
++FILES_${PN}-dbg += "${libdir}/python${PYTHON_BASEVERSION}/*/.debug"
++FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
++
++BBCLASSEXTEND = "native"
++
++do_install_append() {
++	# Moving libcap-ng to base_libdir
++	if [ ! ${D}${libdir} -ef ${D}${base_libdir} ]; then
++		mkdir -p ${D}/${base_libdir}/
++		mv -f ${D}${libdir}/libcap-ng.so.* ${D}${base_libdir}/
++		relpath=${@os.path.relpath("${base_libdir}", "${libdir}")}
++		ln -sf ${relpath}/libcap-ng.so.0.0.0 ${D}${libdir}/libcap-ng.so
++	fi
++}
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.1
+
 
