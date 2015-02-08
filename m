@@ -1,24 +1,18 @@
 Return-Path: <pab@pabigot.com>
-X-Greylist: delayed 429 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 08 Feb 2015 18:54:50 UTC
 Received: from p3plsmtpa08-07.prod.phx3.secureserver.net
 	(p3plsmtpa08-07.prod.phx3.secureserver.net [173.201.193.108])
-	by mail.openembedded.org (Postfix) with ESMTP id B421360089
+	by mail.openembedded.org (Postfix) with ESMTP id 7F5C460089
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun,  8 Feb 2015 18:54:50 +0000 (UTC)
 Received: from llc.pab ([75.72.225.8])
 	by p3plsmtpa08-07.prod.phx3.secureserver.net with 
-	id punh1p0050BVjqb01unipN; Sun, 08 Feb 2015 11:47:42 -0700
+	id punh1p0050BVjqb01unhpG; Sun, 08 Feb 2015 11:47:42 -0700
 From: "Peter A. Bigot" <pab@pabigot.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Feb 2015 12:47:35 -0600
-Message-Id: <4ad2b41b888ebddd6951dfe8ef83c89bf5f3d2e5.1423421018.git.pab@pabigot.com>
+Date: Sun,  8 Feb 2015 12:47:33 -0600
+Message-Id: <cover.1423421017.git.pab@pabigot.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <cover.1423421017.git.pab@pabigot.com>
-References: <cover.1423421017.git.pab@pabigot.com>
-In-Reply-To: <cover.1423421017.git.pab@pabigot.com>
-References: <cover.1423421017.git.pab@pabigot.com>
-Subject: [PATCHv3 2/3] gpsd: select distro preference for bluez provider
+Subject: [PATCHv3 0/3] bluez5 support updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,37 +26,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Feb 2015 18:54:53 -0000
+X-List-Received-Date: Sun, 08 Feb 2015 18:54:57 -0000
 
-Signed-off-by: Peter A. Bigot <pab@pabigot.com>
----
- meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+This is the meta-oe changes supporting the proposed fix for Yocto
+5031, just refreshed as described at:
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
-index 6d3adc1..93cf1ae 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
-@@ -20,7 +20,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
- SRC_URI[md5sum] = "fc5b03aae38b9b5b6880b31924d0ace3"
- SRC_URI[sha256sum] = "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320"
- 
--inherit scons update-rc.d python-dir pythonnative systemd
-+inherit scons update-rc.d python-dir pythonnative systemd bluetooth
- 
- INITSCRIPT_NAME = "gpsd"
- INITSCRIPT_PARAMS = "defaults 35"
-@@ -30,8 +30,8 @@ SYSTEMD_OESCONS = "${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false
- export STAGING_INCDIR
- export STAGING_LIBDIR
- 
--PACKAGECONFIG ??= "bluez"
--PACKAGECONFIG[bluez] = "bluez='true',bluez='false',bluez4"
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
-+PACKAGECONFIG[bluez4] = "bluez='true',bluez='false',bluez4"
- 
- EXTRA_OESCONS = " \
-     sysroot=${STAGING_DIR_TARGET} \
+http://lists.openembedded.org/pipermail/openembedded-core/2015-February/101535.html
+
+The following changes since commit 9c926ef2d463e643fb0dc87f6535a12e35d039ab:
+
+  msr-tools: add recipe (2015-01-28 09:54:41 +0100)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib pabigot/bluez5
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=pabigot/bluez5
+
+Peter A. Bigot (3):
+  gnokii: refine selector for bluez4 package config
+  gpsd: select distro preference for bluez provider
+  packagegroup-basic: select distro preference for bluez provider
+
+ meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb     | 2 +-
+ meta-oe/recipes-core/packagegroups/packagegroup-basic.bb | 3 ++-
+ meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb             | 6 +++---
+ 3 files changed, 6 insertions(+), 5 deletions(-)
+
 -- 
 1.9.1
 
