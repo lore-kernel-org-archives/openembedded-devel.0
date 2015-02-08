@@ -1,18 +1,22 @@
 Return-Path: <pab@pabigot.com>
 Received: from p3plsmtpa08-07.prod.phx3.secureserver.net
 	(p3plsmtpa08-07.prod.phx3.secureserver.net [173.201.193.108])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F5C460089
+	by mail.openembedded.org (Postfix) with ESMTP id 803C072DE1
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun,  8 Feb 2015 18:54:50 +0000 (UTC)
 Received: from llc.pab ([75.72.225.8])
 	by p3plsmtpa08-07.prod.phx3.secureserver.net with 
-	id punh1p0050BVjqb01unhpG; Sun, 08 Feb 2015 11:47:42 -0700
+	id punh1p0050BVjqb01unipL; Sun, 08 Feb 2015 11:47:42 -0700
 From: "Peter A. Bigot" <pab@pabigot.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Feb 2015 12:47:33 -0600
-Message-Id: <cover.1423421017.git.pab@pabigot.com>
+Date: Sun,  8 Feb 2015 12:47:34 -0600
+Message-Id: <755eef61918d9e50cba60c72d5adf8878d9b37c0.1423421018.git.pab@pabigot.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [PATCHv3 0/3] bluez5 support updates
+In-Reply-To: <cover.1423421017.git.pab@pabigot.com>
+References: <cover.1423421017.git.pab@pabigot.com>
+In-Reply-To: <cover.1423421017.git.pab@pabigot.com>
+References: <cover.1423421017.git.pab@pabigot.com>
+Subject: [PATCHv3 1/3] gnokii: refine selector for bluez4 package config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,30 +32,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 08 Feb 2015 18:54:57 -0000
 
-This is the meta-oe changes supporting the proposed fix for Yocto
-5031, just refreshed as described at:
+Use bluez4 or bluez5 to avoid ambiguity.
 
-http://lists.openembedded.org/pipermail/openembedded-core/2015-February/101535.html
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+---
+ meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The following changes since commit 9c926ef2d463e643fb0dc87f6535a12e35d039ab:
-
-  msr-tools: add recipe (2015-01-28 09:54:41 +0100)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib pabigot/bluez5
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=pabigot/bluez5
-
-Peter A. Bigot (3):
-  gnokii: refine selector for bluez4 package config
-  gpsd: select distro preference for bluez provider
-  packagegroup-basic: select distro preference for bluez provider
-
- meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb     | 2 +-
- meta-oe/recipes-core/packagegroups/packagegroup-basic.bb | 3 ++-
- meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb             | 6 +++---
- 3 files changed, 6 insertions(+), 5 deletions(-)
-
+diff --git a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
+index 4826452..acae868 100644
+--- a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
++++ b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
+@@ -9,7 +9,7 @@ DEPENDS = "glib-2.0"
+ X11DEPENDS = " libxpm gtk+"
+ 
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+-PACKAGECONFIG[bluez] = "--enable-bluetooth,--disable-bluetooth,bluez4"
++PACKAGECONFIG[bluez4] = "--enable-bluetooth,--disable-bluetooth,bluez4"
+ PACKAGECONFIG[libical] = "--enable-libical,--disable-libical,libical"
+ PACKAGECONFIG[pcsc-lite] = "--enable-libpcsclite,--disable-libpcsclite,pcsc-lite"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
 -- 
 1.9.1
 
