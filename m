@@ -1,35 +1,22 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E49F601F5
+Return-Path: <pab@pabigot.com>
+Received: from p3plsmtpa08-07.prod.phx3.secureserver.net
+	(p3plsmtpa08-07.prod.phx3.secureserver.net [173.201.193.108])
+	by mail.openembedded.org (Postfix) with ESMTP id 54D207280D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Feb 2015 06:24:14 +0000 (UTC)
-Received: by mail-pa0-f43.google.com with SMTP id fa1so6700094pad.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Feb 2015 22:24:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=5940hPKsUBWUiuARAtjjdj2XrTPEBpUTYMyPVmtEACU=;
-	b=Yd6XYMS/2bWRV0vSx04wMzfvVVTpr0AL9jEH1+T7PExiOvhhEsuLL65V5cb7hOSRDE
-	qoUKGLLGiJeeAE/iB2BVMfR9w9uxoc843yrtAFkWAJdIRuEUlBT9oPKWYzR+gHcV8pRU
-	10eulBqwsZBlJK4qPU08gS596JAgqZ5z7Y8oXKr9uhOBLojmORLz09hXvQOKb2ck44Ck
-	bC3I7pngeyywakfqi9DYKwBxlKysyCgQ/Cwlxpa8NlMy9snJyli5S9qtjMXksc7NcSAO
-	T3ZgRPYRQ5LJASfzglENutlO5rCZ7+52UrkGlV36LJQBZ6dA0sCqZVDlSyBmBkQuECA/
-	MkVQ==
-X-Received: by 10.68.132.42 with SMTP id or10mr11530537pbb.162.1423290255956; 
-	Fri, 06 Feb 2015 22:24:15 -0800 (PST)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id or4sm8818142pdb.66.2015.02.06.22.24.14
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 06 Feb 2015 22:24:14 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+	Sun,  8 Feb 2015 18:54:51 +0000 (UTC)
+Received: from llc.pab ([75.72.225.8])
+	by p3plsmtpa08-07.prod.phx3.secureserver.net with 
+	id punh1p0050BVjqb01unjpQ; Sun, 08 Feb 2015 11:47:43 -0700
+From: "Peter A. Bigot" <pab@pabigot.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Feb 2015 22:24:06 -0800
-Message-Id: <1423290246-10493-1-git-send-email-akuster808@gmail.com>
+Date: Sun,  8 Feb 2015 12:47:36 -0600
+Message-Id: <e05ed530c44d410a99e84e9430708d6a674b5cd1.1423421018.git.pab@pabigot.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] libcap-ng: add package
+In-Reply-To: <cover.1423421017.git.pab@pabigot.com>
+References: <cover.1423421017.git.pab@pabigot.com>
+In-Reply-To: <cover.1423421017.git.pab@pabigot.com>
+References: <cover.1423421017.git.pab@pabigot.com>
+Subject: [PATCHv3 3/3] packagegroup-basic: select distro preference for bluez provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,107 +30,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Feb 2015 06:24:24 -0000
+X-List-Received-Date: Sun, 08 Feb 2015 18:54:53 -0000
 
-this moves libcap-ng out of meta-selinux and meta-security into
-a common layer
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
 ---
- .../libcap-ng/libcap-ng/python.patch               | 39 ++++++++++++++++++++++
- .../recipes-support/libcap-ng/libcap-ng_0.7.4.bb   | 37 ++++++++++++++++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
- create mode 100644 meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
+ meta-oe/recipes-core/packagegroups/packagegroup-basic.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
-new file mode 100644
-index 0000000..d82ceb4
---- /dev/null
-+++ b/meta-oe/recipes-support/libcap-ng/libcap-ng/python.patch
-@@ -0,0 +1,39 @@
-+configure.ac - Avoid an incorrect check for python.
-+Makefile.am - avoid hard coded host include paths.
-+
-+Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
-+
-+--- libcap-ng-0.6.5/configure.ac.orig	2012-01-17 13:59:03.645898989 -0600
-++++ libcap-ng-0.6.5/configure.ac	2012-01-17 13:59:46.353959252 -0600
-+@@ -120,17 +120,8 @@
-+ else
-+ AC_MSG_RESULT(testing)
-+ AM_PATH_PYTHON
-+-if test -f /usr/include/python${am_cv_python_version}/Python.h ; then
-+-	python_found="yes"
-+-	AC_MSG_NOTICE(Python bindings will be built)
-+-else
-+-	python_found="no"
-+-	if test x$use_python = xyes ; then
-+-		AC_MSG_ERROR([Python explicitly required and python headers found])
-+-	else
-+-		AC_MSG_WARN("Python headers not found - python bindings will not be made")
-+-	fi
-+-fi
-++python_found="yes"
-++AC_MSG_NOTICE(Python bindings will be built)
-+ fi
-+ AM_CONDITIONAL(HAVE_PYTHON, test ${python_found} = "yes")
-+ 
-+--- libcap-ng-0.6.5/bindings/python/Makefile.am.orig	2010-11-03 12:31:59.000000000 -0500
-++++ libcap-ng-0.6.5/bindings/python/Makefile.am	2012-01-17 14:05:50.199834467 -0600
-+@@ -24,7 +24,8 @@
-+ CONFIG_CLEAN_FILES = *.loT *.rej *.orig
-+ AM_CFLAGS = -fPIC -DPIC
-+ PYLIBVER ?= python$(PYTHON_VERSION)
-+-INCLUDES = -I. -I$(top_builddir) -I/usr/include/$(PYLIBVER)
-++PYINC ?= /usr/include/$(PYLIBVER)
-++INCLUDES = -I. -I$(top_builddir) -I$(PYINC)
-+ LIBS = $(top_builddir)/src/libcap-ng.la
-+ pyexec_PYTHON = capng.py
-+ pyexec_LTLIBRARIES = _capng.la
-diff --git a/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
-new file mode 100644
-index 0000000..8823dad
---- /dev/null
-+++ b/meta-oe/recipes-support/libcap-ng/libcap-ng_0.7.4.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "An alternate posix capabilities library"
-+DESCRIPTION = "The libcap-ng library is intended to make programming \
-+with POSIX capabilities much easier than the traditional libcap library."
-+HOMEPAGE = "http://freecode.com/projects/libcap-ng"
-+SECTION = "base"
-+LICENSE = "GPLv2+ & LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-+		    file://COPYING.LIB;md5=e3eda01d9815f8d24aae2dbd89b68b06"
-+
-+SRC_URI = "http://people.redhat.com/sgrubb/libcap-ng/libcap-ng-${PV}.tar.gz \
-+	   file://python.patch"
-+
-+inherit lib_package autotools pythonnative
-+
-+SRC_URI[md5sum] = "55c57c0673b944ea1a755bcb2636dabd"
-+SRC_URI[sha256sum] = "48a2083276f9820cb92dcb05d001b30733bcbf48c14c230303cac3cd08b45b6b"
-+
-+DEPENDS += "swig-native python"
-+
-+EXTRA_OEMAKE += "PYLIBVER='python${PYTHON_BASEVERSION}' PYINC='${STAGING_INCDIR}/${PYLIBVER}'"
-+
-+PACKAGES += "${PN}-python"
-+
-+FILES_${PN}-dbg += "${libdir}/python${PYTHON_BASEVERSION}/*/.debug"
-+FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}"
-+
-+BBCLASSEXTEND = "native"
-+
-+do_install_append() {
-+	# Moving libcap-ng to base_libdir
-+	if [ ! ${D}${libdir} -ef ${D}${base_libdir} ]; then
-+		mkdir -p ${D}/${base_libdir}/
-+		mv -f ${D}${libdir}/libcap-ng.so.* ${D}${base_libdir}/
-+		relpath=${@os.path.relpath("${base_libdir}", "${libdir}")}
-+		ln -sf ${relpath}/libcap-ng.so.0.0.0 ${D}${libdir}/libcap-ng.so
-+	fi
-+}
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+index 20b1652..4f2992c 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-basic.bb
+@@ -9,6 +9,7 @@ PR = "r13"
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ inherit packagegroup
++inherit bluetooth
+ 
+ # Poke extra recomendations into the list using your machine.conf
+ #
+@@ -45,7 +46,7 @@ RRECOMMENDS_${PN} = "\
+     ${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
+     ${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
+     \
+-    ${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \
++    ${@base_contains("DISTRO_FEATURES", "bluetooth", "${BLUEZ}", "", d)} \
+     ${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
+     \
+     tzdata \
 -- 
 1.9.1
 
