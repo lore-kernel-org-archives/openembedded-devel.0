@@ -1,61 +1,27 @@
-Return-Path: <zhenhua.luo@freescale.com>
-X-Greylist: delayed 925 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 10 Feb 2015 07:08:48 UTC
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1bn0101.outbound.protection.outlook.com [157.56.110.101])
-	by mail.openembedded.org (Postfix) with ESMTP id 498A4601A0
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 0098B732DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Feb 2015 07:08:48 +0000 (UTC)
-Received: from BY2PR03CA009.namprd03.prod.outlook.com (10.255.93.26) by
-	CY1PR0301MB0715.namprd03.prod.outlook.com (25.160.159.145) with
-	Microsoft
-	SMTP Server (TLS) id 15.1.75.20; Tue, 10 Feb 2015 06:53:23 +0000
-Received: from BL2FFO11FD035.protection.gbl (10.255.93.4) by
-	BY2PR03CA009.outlook.office365.com (10.255.93.26) with Microsoft SMTP
-	Server (TLS) id 15.1.81.19 via Frontend Transport;
-	Tue, 10 Feb 2015 06:53:22 +0000
-Received: from az84smr01.freescale.net (192.88.158.2) by
-	BL2FFO11FD035.mail.protection.outlook.com (10.173.161.131) with
-	Microsoft
-	SMTP Server (TLS) id 15.1.87.10 via Frontend Transport; Tue, 10 Feb 2015
-	06:53:21 +0000
-Received: from sweet.ap.freescale.net (sweet.ap.freescale.net [10.193.20.55])
-	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id
-	t1A6rJZL019766; Mon, 9 Feb 2015 23:53:20 -0700
-From: Zhenhua Luo <zhenhua.luo@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Feb 2015 14:55:10 +0800
-Message-ID: <1423551310-1863-1-git-send-email-zhenhua.luo@freescale.com>
-X-Mailer: git-send-email 2.1.0
-X-EOPAttributedMessage: 0
-Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
-	designate 192.88.158.2 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
-Authentication-Results: spf=fail (sender IP is 192.88.158.2)
-	smtp.mailfrom=zhenhua.luo@freescale.com; freescale.mail.onmicrosoft.com;
-	dkim=none (message not signed) header.d=none;
-X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10019020)(6009001)(339900001)(50226001)(87936001)(6806004)(19580405001)(19580395003)(86362001)(85426001)(46102003)(36756003)(2351001)(77156002)(106466001)(62966003)(105606002)(110136001)(229853001)(450100001)(77096005)(104016003)(33646002)(47776003)(50986999)(50466002)(48376002)(92566002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:CY1PR0301MB0715;
-	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; LANG:en; 
+	Tue, 10 Feb 2015 20:27:26 +0000 (UTC)
+Received: (qmail 12108 invoked by uid 1003); 10 Feb 2015 20:27:26 -0000
+Received: from unknown (HELO ?192.168.11.101?)
+	(philip@opensdr.com@108.44.84.240)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	10 Feb 2015 20:27:26 -0000
+Message-ID: <54DA69AB.1020204@balister.org>
+Date: Tue, 10 Feb 2015 15:27:23 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-X-Microsoft-Antispam: UriScan:;
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;SRVR:CY1PR0301MB0715;
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004);
-	SRVR:CY1PR0301MB0715; 
-X-Forefront-PRVS: 048396AFA0
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:;
-	SRVR:CY1PR0301MB0715; 
-X-OriginatorOrg: freescale.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2015 06:53:21.7545 (UTC)
-X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR0301MB0715
-Subject: [meta-oe][PATCH] python-pip: add python-distribute in RDEPENDS
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>
+Cc: Yocto Project <yocto@yoctoproject.org>
+Subject: OpenEmbedded Developer America's Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,32 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Feb 2015 07:08:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Feb 2015 20:27:29 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Fix the following runtime issue of pip:
-    # pip
-    Traceback (most recent call last):
-      File "/usr/bin/pip", line 5, in <module>
-        from pkg_resources import load_entry_point
-    ImportError: No module named pkg_resources
+We've scheduled a meeting in San Jose at a Monte Vista facility for
+March 27-28. This is after ELC (also in San Jose). There is a Yocto
+Project developer Day the day after ELC.
 
-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
----
- meta-python/recipes-devtools/python/python-pip_1.3.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I've made a page on the wiki to start collecting information:
 
-diff --git a/meta-python/recipes-devtools/python/python-pip_1.3.1.bb b/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-index d1a7c8b..1388a3d 100644
---- a/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pip_1.3.1.bb
-@@ -11,4 +11,4 @@ S = "${WORKDIR}/pip-${PV}"
- inherit setuptools
- 
- # Since PIP is like CPAN for PERL we need to drag in all python modules to ensure everything works
--RDEPENDS_${PN} = "python-modules"
-+RDEPENDS_${PN} = "python-modules python-distribute"
--- 
-2.1.0
+http://openembedded.org/wiki/OEDAM_2015
 
+To get an idea of what we cover, see the page from the prior year:
+
+http://openembedded.org/wiki/OEDAM_2014
+
+I apologize for the late notice. There were issues that led to a delay
+with dates due to the YP Dev day.
+
+Philip
 
