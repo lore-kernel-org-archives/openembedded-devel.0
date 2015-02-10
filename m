@@ -1,35 +1,34 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-yh0-f46.google.com (mail-yh0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 419A4606E8
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 71BFC601A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Feb 2015 15:59:47 +0000 (UTC)
-Received: by mail-yh0-f46.google.com with SMTP id z6so1814334yhz.5
+	Tue, 10 Feb 2015 01:20:57 +0000 (UTC)
+Received: by mail-ig0-f172.google.com with SMTP id l13so20501509iga.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Feb 2015 07:59:48 -0800 (PST)
+	Mon, 09 Feb 2015 17:20:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=occMzAkBUHaCmtBpzbwmwCLoAC1at4n/wahiKcsiKY8=;
-	b=gMn6wPM7JrZjTEWPDQXBWlGSa/O9Lft/DAy+jirXfeQBTogI93Ge823e2IiWblGAlW
-	+0jAftQECwqL0v83NIcnpQtk7sm1iBfQjcQoqxTmyXPtGfZqCZ0D2WHUoc9tLbq4ND2g
-	LQiATAsQcE7VSpgCVC6m1sLC5ThaNyM1OT5ZvCy0r9UPQH6UDbP6n/usxnZsDJfqYfQj
-	vW5WNuhIb8lCfGi+DlvfQubtoylHFviT+N2ZYYczrBw2A/BUTmwV233fl4eSz76omevK
-	s31w1rogROVA7LWn3TLcxs9t2pW+Jb8+50Krw95pYLZzLd1SZHUQv2aRi4qY0+E5UZAu
-	STPQ==
-X-Received: by 10.170.148.4 with SMTP id p4mr7270871ykc.72.1423497588649;
-	Mon, 09 Feb 2015 07:59:48 -0800 (PST)
-Received: from thuvia.localdomain (pool-108-44-84-240.ronkva.east.verizon.net.
-	[108.44.84.240])
-	by mx.google.com with ESMTPSA id m5sm7780370yhb.24.2015.02.09.07.59.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 09 Feb 2015 07:59:47 -0800 (PST)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=P/kAJUJVasGG+1Uijo2xIiP8LdgR8w5f4mBiN5l7QIc=;
+	b=ms8pS4iUk+cGDLjFO6WVstid3Z9AyBXXjun5W1r19KHvkEzKeIYXwqrAsTSM2DPZLk
+	3/BY1hXFGwE9XAHDCe5O30CD/14g8JF8tWlzx/4b2v2Mkk36VWt7ZiaMZ/fC8VKlWiPh
+	iE4MrS4c+ArS3MXK+KFqQE6oxoZWgeWLi5VI/IJ216KoFVnGe68kIu2f38hxdexRp7r6
+	bGB2/F6F9ytEtsDEM4SQHZJYhSxva0OglVlWQsEQsMsoOwKnD+GktbAFvF/sNEr1/Mx0
+	YkE7xc7yjFwn8uCqUgSe21eGYIdLgKlSQmMbrkz/+kejbqVQUkmpbmHefX1raIkA1pDl
+	3zUQ==
+X-Received: by 10.50.30.202 with SMTP id u10mr20392572igh.35.1423531258266;
+	Mon, 09 Feb 2015 17:20:58 -0800 (PST)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by mx.google.com with ESMTPSA id 19sm7559522ioo.24.2015.02.09.17.20.57
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 09 Feb 2015 17:20:57 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Feb 2015 10:59:40 -0500
-Message-Id: <1423497580-7172-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-python][PATCH] python-lxml : Use pkgconfig to find libxml2 instead of binconfig.
+Date: Mon,  9 Feb 2015 17:20:47 -0800
+Message-Id: <1423531247-14774-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] zram: remove bash dependency from init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,27 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Feb 2015 15:59:48 -0000
+X-List-Received-Date: Tue, 10 Feb 2015 01:21:07 -0000
 
-Signed-off-by: Philip Balister <philip@balister.org>
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-lxml_3.2.5.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/zram/zram/init | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb b/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-index 1fa2889..68e3677 100644
---- a/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-+++ b/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb
-@@ -20,7 +20,7 @@ inherit setuptools
+diff --git a/meta-oe/recipes-extended/zram/zram/init b/meta-oe/recipes-extended/zram/zram/init
+index d126169..7b6cbf4 100644
+--- a/meta-oe/recipes-extended/zram/zram/init
++++ b/meta-oe/recipes-extended/zram/zram/init
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/bin/sh
+ ### BEGIN INIT INFO
+ # Provides: zram
+ # Required-Start:
+@@ -26,7 +26,7 @@ start() {
+     #default Factor % = 90 change this value here or create /etc/default/zram
+     FACTOR=90
+     #& put the above single line in /etc/default/zram with the value you want
+-    [ -f /etc/default/zram ] && source /etc/default/zram || true
++    [ -f /etc/default/zram ] && . /etc/default/zram || true
+     factor=$FACTOR # percentage
  
- DISTUTILS_BUILD_ARGS += " \
-                      --with-xslt-config='${STAGING_BINDIR_NATIVE}/pkg-config libxslt' \
--                     --with-xml2-config='${STAGING_BINDIR_CROSS}/xml2-config' \
-+                     --with-xml2-config='${STAGING_BINDIR_CROSS}/pkg-config libxml2' \
- "
- 
- DISTUTILS_INSTALL_ARGS += " \
+     # get the amount of memory in the machine
 -- 
-2.1.0
+1.9.1
 
 
