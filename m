@@ -1,34 +1,27 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 71BFC601A0
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 5666B606E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Feb 2015 01:20:57 +0000 (UTC)
-Received: by mail-ig0-f172.google.com with SMTP id l13so20501509iga.5
+	Tue, 10 Feb 2015 01:43:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="57359466"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 10 Feb 2015 09:40:19 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t1A1h70p026636
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Feb 2015 17:20:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=P/kAJUJVasGG+1Uijo2xIiP8LdgR8w5f4mBiN5l7QIc=;
-	b=ms8pS4iUk+cGDLjFO6WVstid3Z9AyBXXjun5W1r19KHvkEzKeIYXwqrAsTSM2DPZLk
-	3/BY1hXFGwE9XAHDCe5O30CD/14g8JF8tWlzx/4b2v2Mkk36VWt7ZiaMZ/fC8VKlWiPh
-	iE4MrS4c+ArS3MXK+KFqQE6oxoZWgeWLi5VI/IJ216KoFVnGe68kIu2f38hxdexRp7r6
-	bGB2/F6F9ytEtsDEM4SQHZJYhSxva0OglVlWQsEQsMsoOwKnD+GktbAFvF/sNEr1/Mx0
-	YkE7xc7yjFwn8uCqUgSe21eGYIdLgKlSQmMbrkz/+kejbqVQUkmpbmHefX1raIkA1pDl
-	3zUQ==
-X-Received: by 10.50.30.202 with SMTP id u10mr20392572igh.35.1423531258266;
-	Mon, 09 Feb 2015 17:20:58 -0800 (PST)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id 19sm7559522ioo.24.2015.02.09.17.20.57
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 09 Feb 2015 17:20:57 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Feb 2015 17:20:47 -0800
-Message-Id: <1423531247-14774-1-git-send-email-armccurdy@gmail.com>
+	Tue, 10 Feb 2015 09:43:07 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 10 Feb 2015 09:43:54 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 10 Feb 2015 09:38:52 +0800
+Message-ID: <1423532332-48457-1-git-send-email-biannm@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] zram: remove bash dependency from init script
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-networking][PATCH] snmpd: instead option -LS by -Ls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,32 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Feb 2015 01:21:07 -0000
+X-List-Received-Date: Tue, 10 Feb 2015 01:43:57 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Option -LS does not work, we should instead it by -Ls as usage said.
+
+ Deprecated options:
+   -l FILE               use -Lf <FILE> instead
+   -P                    use -p instead
+   -s                    use -Lsd instead
+   -S d|i|0-7            use -Ls <facility> instead
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- meta-oe/recipes-extended/zram/zram/init | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/zram/zram/init b/meta-oe/recipes-extended/zram/zram/init
-index d126169..7b6cbf4 100644
---- a/meta-oe/recipes-extended/zram/zram/init
-+++ b/meta-oe/recipes-extended/zram/zram/init
-@@ -1,4 +1,4 @@
--#!/bin/bash
-+#!/bin/sh
- ### BEGIN INIT INFO
- # Provides: zram
- # Required-Start:
-@@ -26,7 +26,7 @@ start() {
-     #default Factor % = 90 change this value here or create /etc/default/zram
-     FACTOR=90
-     #& put the above single line in /etc/default/zram with the value you want
--    [ -f /etc/default/zram ] && source /etc/default/zram || true
-+    [ -f /etc/default/zram ] && . /etc/default/zram || true
-     factor=$FACTOR # percentage
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service b/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
+index 10a1eb2..3b336a0 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/snmpd.service
+@@ -4,7 +4,7 @@ After=syslog.target network.target
  
-     # get the amount of memory in the machine
+ [Service]
+ Type=notify
+-Environment=OPTIONS="-LS0-6d"
++Environment=OPTIONS="-Ls0-6d"
+ EnvironmentFile=-/etc/default/snmpd
+ ExecStart=/usr/sbin/snmpd $OPTIONS -f
+ ExecReload=/bin/kill -HUP $MAINPID
 -- 
 1.9.1
 
