@@ -1,35 +1,36 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3605 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 10 Feb 2015 21:47:43 UTC
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by mail.openembedded.org (Postfix) with ESMTP id F10A77213F;
-	Tue, 10 Feb 2015 21:47:43 +0000 (UTC)
-Received: from gandalf.denix.org ([108.28.89.130]) by vms173023.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NJK0004PPQWOQ40@vms173023.mailsrvcs.net>; Tue,
-	10 Feb 2015 14:47:21 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=Kc1larcG c=1 sm=1 tr=0	a=ckUr7rGttv+NBxkAVUaaIw==:117
-	a=jLWw55sr_RoA:10 a=kj9zAlcOel0A:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
-	a=-9mUelKeXuEA:10 a=0HtSIViG9nkA:10	a=8pif782wAAAA:8 a=Q4-j1AaZAAAA:8
-	a=GzR5wWNw3st9Dkt0Wl0A:9	a=CjuIK1q_8ugA:10 a=i_FDLqkPTtEA:10
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2A1EE20099; Tue,
-	10 Feb 2015 15:47:19 -0500 (EST)
-Date: Tue, 10 Feb 2015 15:47:19 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-members@lists.openembedded.org
-Message-id: <20150210204719.GE14949@denix.org>
-References: <54DA69AB.1020204@balister.org>
-MIME-version: 1.0
-In-reply-to: <54DA69AB.1020204@balister.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: OpenEmbedded Developer America's Meeting
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
+	[74.125.82.180])
+	by mail.openembedded.org (Postfix) with ESMTP id CF8986E593
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Feb 2015 23:52:47 +0000 (UTC)
+Received: by mail-we0-f180.google.com with SMTP id k11so157584wes.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Feb 2015 15:52:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=oKW1BHd3ecyPtFLkIfxERXd7FxepWpiTw5yTtvS9jRQ=;
+	b=GPn3AIX08dEQWx58/69HNKGzRhTVuECsM9VROv4wYv1jtqaObyO/xNUoSR5SN/eSPb
+	w837gcz70zhpjzel/Wl0jYiVCWromOIrvC7s05Ghims3qLdbLyA0TmIb6Y5jp1L1OfqL
+	v2li5hUWIQ7OFyKu9EXljMcKcE3kb6D+021JQund4U92DO5TvK0j0X03vJeOKDjF/6ek
+	byqypHQsqccXa0dE3H5r1eXq55haKTDF0Clr4UasiRZ5v/AP+vWoX8p3E8/Hqq5eAqvK
+	eSmaEgmJreees+aKTshmIOuOw0/mvFTJNBxZetNtUhW6zCkcpwpHmSN+of39BN75R8sp
+	6HfQ==
+MIME-Version: 1.0
+X-Received: by 10.180.74.6 with SMTP id p6mr49898867wiv.17.1423612368476; Tue,
+	10 Feb 2015 15:52:48 -0800 (PST)
+Received: by 10.194.85.225 with HTTP; Tue, 10 Feb 2015 15:52:48 -0800 (PST)
+In-Reply-To: <1423431280-890-8-git-send-email-otavio@ossystems.com.br>
+References: <1423431280-890-1-git-send-email-otavio@ossystems.com.br>
+	<1423431280-890-8-git-send-email-otavio@ossystems.com.br>
+Date: Wed, 11 Feb 2015 00:52:48 +0100
+Message-ID: <CA+chaQfduKxT=R17gcxpMamtDBRJ3_-3ZAdWNfxwaB7iFLdzgQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5][PATCH 8/8] qt5.inc: Fix packaging of architecture independent data
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,37 +44,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Feb 2015 21:47:50 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 10 Feb 2015 23:52:56 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, Feb 10, 2015 at 03:27:23PM -0500, Philip Balister wrote:
-> We've scheduled a meeting in San Jose at a Monte Vista facility for
+This series is causing few new warnings:
 
-Correction, it's MontaVista with an 'a':
-http://en.wikipedia.org/wiki/MontaVista
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins
+rdepends on libgstphotography-0.10, but it isn't a build dependency?
+[build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins
+rdepends on libgstapp-0.10, but it isn't a build dependency?
+[build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins
+rdepends on gstreamer, but it isn't a build dependency? [build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins
+rdepends on libgstpbutils-0.10, but it isn't a build dependency?
+[build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins
+rdepends on libgstinterfaces-0.10, but it isn't a build dependency?
+[build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+libgstapp-0.10, but it isn't a build dependency? [build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+gstreamer, but it isn't a build dependency? [build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+libgstvideo-0.10, but it isn't a build dependency? [build-deps]
+qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+libgstinterfaces-0.10, but it isn't a build dependency? [build-deps]
 
-Do you have an address of said facility?
+qttools-5.4.0+gitAUTOINC+33eb6cdf93: qttools: Files/directories were
+installed but not shipped
+  /usr/share
+  /usr/share/qt5
+  /usr/share/qt5/phrasebooks
+  /usr/share/qt5/phrasebooks/danish.qph
+  /usr/share/qt5/phrasebooks/dutch.qph
+  /usr/share/qt5/phrasebooks/finnish.qph
+  /usr/share/qt5/phrasebooks/french.qph
+  /usr/share/qt5/phrasebooks/german.qph
+  /usr/share/qt5/phrasebooks/hungarian.qph
+  /usr/share/qt5/phrasebooks/italian.qph
+  /usr/share/qt5/phrasebooks/japanese.qph
+  /usr/share/qt5/phrasebooks/norwegian.qph
+  /usr/share/qt5/phrasebooks/polish.qph
+  /usr/share/qt5/phrasebooks/russian.qph
+  /usr/share/qt5/phrasebooks/spanish.qph
+  /usr/share/qt5/phrasebooks/swedish.qph [installed-vs-shipped]
+
+qttranslations-5.4.0: qttranslations: Files/directories were installed
+but not shipped
+  /usr/share/qt5/translations/qtquickcontrols_de.qm
+  /usr/share/qt5/translations/qtquickcontrols_ja.qm
+  /usr/share/qt5/translations/qtquickcontrols_ru.qm
+  /usr/share/qt5/translations/qtquickcontrols_uk.qm [installed-vs-shipped]
 
 
-> March 27-28. This is after ELC (also in San Jose). There is a Yocto
-> Project developer Day the day after ELC.
-> 
-> I've made a page on the wiki to start collecting information:
-> 
-> http://openembedded.org/wiki/OEDAM_2015
-> 
-> To get an idea of what we cover, see the page from the prior year:
-> 
-> http://openembedded.org/wiki/OEDAM_2014
-> 
-> I apologize for the late notice. There were issues that led to a delay
-> with dates due to the YP Dev day.
-> 
-> Philip
-> -- 
+On Sun, Feb 8, 2015 at 10:34 PM, Otavio Salvador <otavio@ossystems.com.br>
+wrote:
+
+> The architecture independent data were being added to the '-dev'
+> package however it shouldn't be. For example the QtWebEngine had the
+> translation and the resources package were not being installed with
+> the main package, as it should be.
+>
+> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+> ---
+>  recipes-qt/qt5/qt5.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+> index bb0bcdc..af0a906 100644
+> --- a/recipes-qt/qt5/qt5.inc
+> +++ b/recipes-qt/qt5/qt5.inc
+> @@ -118,7 +118,6 @@ FILES_${PN}-dev += " \
+>      ${OE_QMAKE_PATH_LIBS}/cmake/* \
+>      ${OE_QMAKE_PATH_LIBS}/*.prl \
+>      ${OE_QMAKE_PATH_LIBS}/*.la \
+> -    ${OE_QMAKE_PATH_DATA}/* \
+>      ${OE_QMAKE_PATH_HEADERS}/* \
+>  "
+>  FILES_${PN}-dbg += " \
+> @@ -129,6 +128,7 @@ FILES_${PN}-staticdev += " \
+>      ${OE_QMAKE_PATH_LIBS}/*.a \
+>  "
+>  FILES_${PN}-examples = " \
+> +    ${OE_QMAKE_PATH_EXAMPLES}/README \
+>      ${OE_QMAKE_PATH_EXAMPLES}/*/* \
+>  "
+>  FILES_${PN}-examples-dev = " \
+> --
+> 2.1.4
+>
+> --
 > _______________________________________________
-> Openembedded-members mailing list
-> Openembedded-members@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-members
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
