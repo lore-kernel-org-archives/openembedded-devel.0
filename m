@@ -1,35 +1,25 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-yh0-f49.google.com (mail-yh0-f49.google.com
-	[209.85.213.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 05712732F4
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 85DFF732A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 16:25:24 +0000 (UTC)
-Received: by mail-yh0-f49.google.com with SMTP id f10so1550575yha.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 08:25:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:content-type;
-	bh=gwzMOML2X1+pLhNHeAiaPyQao5fYYpNuszbfjTAPH/4=;
-	b=cPzETIcPKimheraGTiyQyJQzjRndSJgKpotd/lGZkmwO0jlHRR0fLMXMswCKZazTbd
-	GirtW2W9n/hCxcZIgr3aywa0UIHwm5shwKTnvnZRvJxyO2RvKkR+CGxkKv2vxnzl1PE8
-	AtoG94p8MRvzqxhEK69m8D0uNRAd68k2oOtpvwoQQsBhKf778G6Gh577QG4B43BAWgWl
-	yM8xgXo1AC8DHBKon+wy9JcPc9a1rHSjgEJDEIv9zzAwSMutDi5jhX+oxT88rYv9ZpkY
-	oVKMyE7iErdleQ70X/qCxi6BR50/r1gOv1tzDeXa81DPSPWV5leU1qZdW6p5NXR+yOzv
-	a8Kw==
-X-Received: by 10.170.52.14 with SMTP id 14mr999209yku.77.1423671925528; Wed,
-	11 Feb 2015 08:25:25 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.170.205.88 with HTTP; Wed, 11 Feb 2015 08:25:05 -0800 (PST)
+	Wed, 11 Feb 2015 16:29:24 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga101.jf.intel.com with ESMTP; 11 Feb 2015 08:29:06 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.09,559,1418112000"; d="scan'208";a="676406153"
+Received: from jjurski-mobl3.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.24.180])
+	by fmsmga002.fm.intel.com with ESMTP; 11 Feb 2015 08:29:04 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: dpquigl <dpquigl@tycho.nsa.gov>
+Date: Wed, 11 Feb 2015 16:29:03 +0000
+Message-ID: <6445648.XiRzhvmYHl@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.4 (Linux/3.17.8-200.fc20.x86_64; KDE/4.14.4; x86_64; ; )
 In-Reply-To: <1423669983.23617.78.camel@tycho.nsa.gov>
 References: <1423669983.23617.78.camel@tycho.nsa.gov>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Wed, 11 Feb 2015 09:25:05 -0700
-X-Google-Sender-Auth: O9c3MIpP2UKec6U1B-b_QUlYVUA
-Message-ID: <CABcZANn4cy3YzOYgpSh6hC=vAA=NpyEPghs_jPNY433OeYWKSA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+MIME-Version: 1.0
+Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
 Subject: Re: meta-selinux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,36 +34,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2015 16:25:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Feb 2015 16:29:27 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Wed, Feb 11, 2015 at 8:53 AM, dpquigl <dpquigl@tycho.nsa.gov> wrote:
+(Adding yocto@yoctoproject.org to CC since that is where meta-selinux patches 
+tend to go at least)
 
+On Wednesday 11 February 2015 10:53:03 dpquigl wrote:
 > I'm working on OpenXT and it makes use of the meta-selinux repo hosted
 > by the yocto project. I'm trying to use it with a base openembedded core
-> and its not in sync with oe-core because its based on pokey. This made
-> me think of two questions. 1) Why is this not in OE core since so many
-> packages in core can potentially have SELinux support enabled and 2) if
+> and its not in sync with oe-core because its based on pokey. 
+
+To be clear, poky and OE-Core are in lock-step. No patch to core recipes goes 
+into Poky directly, they are applied to OE-Core and then they flow into Poky 
+immediately thereafter (Richard, who does the merging of patches into OE-Core, 
+does the sync to Poky immediately afterwards.)
+
+What's more likely happening I suspect is that you are on a newer 
+branch/revision of OE-Core/Poky than the meta-selinux maintainers have tested. 
+I can't speak to the maintenance schedule for meta-selinux but maybe others 
+with knowledge there can chime in.
+
+> This made me think of two questions. 1) Why is this not in OE core since so
+> many packages in core can potentially have SELinux support enabled and 2) if
 > its not supposed to be in core where should turning on SELinux support
 > in a recipe go? For example coreutils can have SELinux support enabled.
 > Currently this is in meta-selinux as a bbappend to the coreutils
 > package. This works out because its always going to be there. However
 > there is also a bbappend for an LXC recipe. LXC isn't in core which
 > means it has a dependency on a layer not in core.
->
+> 
+> Ideally I would put the recipes needed for SELinux support in core and
+> have a distro feature which is checked in the recipes in core for
+> whether or not to add --with-selinux to the build flags. Then LXC could
+> check a core distro feature and enable SELinux if it wants to.
 
-This is a bug in the layer. It's fairly trivial to construct a layer in
-such a way that you can have per-layer bbappends that are only applied when
-that layer exists. This is likely the approach meta-selinux should take to
-address this implicit dependency upon meta-virtualization.
+We have to draw the line somewhere for what to include in OE-Core, and at the 
+moment I guess we have considered SELinux to be outside its scope. Obviously 
+these things get re-evaluated from time to time, and SELinux is a little bit 
+painful for this because of how many recipes it has to touch. Ultimately it 
+depends on how many people in the embedded space want to enable and use 
+SELinux.
 
-That said, I think most folks would be open to PACKAGECONFIGs for selinux
-capability going into the main recipes, as that's not an invasive change,
-nor a patch, but just a tweak in configuration.
+Thoughts from others?
+
+Cheers,
+Paul
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
