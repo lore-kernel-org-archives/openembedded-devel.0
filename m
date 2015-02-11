@@ -1,43 +1,36 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
-	[209.85.220.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 537AA73307
+Return-Path: <flihp@twobit.us>
+X-Greylist: delayed 1119 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 11 Feb 2015 20:02:49 UTC
+Received: from smtp.twobit.us (smtp.twobit.us [38.83.192.235])
+	by mail.openembedded.org (Postfix) with ESMTP id 803837280D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 16:59:05 +0000 (UTC)
-Received: by mail-pa0-f52.google.com with SMTP id ey11so5115696pad.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 08:59:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=akXJnpSMSDemb+C6NqgGj1UR5WlPTH9RB2CMcRRxyCE=;
-	b=BTsrgtfzKsrPa8xwP6bpm38CHlay2S45UUPMTS0CC0Qgd+669GAHFlSXBK/1y26QuO
-	p7wDwW167XIq0VHMyZJtlylyyUNcgpWfNOqW4XD7inZ6NtsGMReOvGIwJM1fRpCp/M/F
-	g/uoe9GQ9HvTxHBk4iJyMs4NQDYSJyszu8eSkbdFqwpMuIU2+K61DUgsEatznbqE6eK0
-	uS3r8CX3ScX9nHWgPiwSghmC2uTcrZHbnavkoJABwk5AGY9jW4GISSVfGwnBKb4gh3FU
-	UgJdCopSyeaugeuNjce4WZWKhHBke9JBElcRW48ZiZh1+KPQlhDykRgjQggx4Ggj2VIy
-	f8Lw==
+	Wed, 11 Feb 2015 20:02:49 +0000 (UTC)
+Received: from c-50-185-54-102.hsd1.ca.comcast.net ([50.185.54.102]
+	helo=[172.16.1.11])
+	by smtp.twobit.us with esmtpsa (TLSv1.2:DHE-RSA-AES128-SHA:128)
+	(Exim 4.80) (envelope-from <flihp@twobit.us>)
+	id 1YLdAe-00010g-Ul; Wed, 11 Feb 2015 19:42:01 +0000
+Message-ID: <54DBB0FF.6090305@twobit.us>
+Date: Wed, 11 Feb 2015 14:43:59 -0500
+From: Philip Tricca <flihp@twobit.us>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:31.0) Gecko/20100101 Icedove/31.3.0
 MIME-Version: 1.0
-X-Received: by 10.68.253.233 with SMTP id ad9mr48257181pbd.167.1423673946933; 
-	Wed, 11 Feb 2015 08:59:06 -0800 (PST)
-Received: by 10.70.44.167 with HTTP; Wed, 11 Feb 2015 08:59:06 -0800 (PST)
-In-Reply-To: <CAENGNhcaECYxdBDdYqBYj6Zu-2kz93SPa+HaAZo-xRzNuaUPvA@mail.gmail.com>
-References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
-	<1422338033-18521-5-git-send-email-schnitzeltony@googlemail.com>
-	<CAENGNhfzVESxGmQVz3SA6gGv_H+NBE+q9J+FB=Zg1J4WHdg=CQ@mail.gmail.com>
-	<CALbNGRQEfMiaVMKVVFnUFdZNokBQ=F5eQCDe7o75H507=uwHvg@mail.gmail.com>
-	<CALbNGRRSRUewugNgWeQqguEgHMjmiLetzi=v6rqWXYXy4WJ=Vw@mail.gmail.com>
-	<CAENGNhd58fiBF81D6V8H7uSjmmVeVx8-oWU=Pn32OwJs1EStDA@mail.gmail.com>
-	<CALbNGRT0r612O8Yn+Vsn-3jCXk8i0yqhAc-Df9ukBiLRV5gRhQ@mail.gmail.com>
-	<20150206002755.GA3594@gmail.com>
-	<CAENGNhcaECYxdBDdYqBYj6Zu-2kz93SPa+HaAZo-xRzNuaUPvA@mail.gmail.com>
-Date: Wed, 11 Feb 2015 17:59:06 +0100
-Message-ID: <CALbNGRQ6S10MLWXD44e8g5fjrkHR7Mu32v5UV-4eX06zfPp59w@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 4/5] qt5-creator: add 3.3.0 of qt-creator
+To: openembedded-devel@lists.openembedded.org, 
+	Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <1423669983.23617.78.camel@tycho.nsa.gov>	<6445648.XiRzhvmYHl@peggleto-mobl5.ger.corp.intel.com>
+	<1423673755.1873.5.camel@tycho.nsa.gov>
+In-Reply-To: <1423673755.1873.5.camel@tycho.nsa.gov>
+X-SA-Exim-Connect-IP: 50.185.54.102
+X-SA-Exim-Mail-From: flihp@twobit.us
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on smtp.twobit.us
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.2 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+X-SA-Exim-Version: 4.2.1 (built Mon, 26 Dec 2011 16:24:06 +0000)
+X-SA-Exim-Scanned: Yes (on smtp.twobit.us)
+Cc: yocto@yoctoproject.org
+Subject: Re: meta-selinux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,36 +44,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2015 16:59:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Feb 2015 20:02:56 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 11, 2015 at 4:10 PM, Raphael Philipe <rapphil@gmail.com> wrote:
-> Hi Andreas,
-> Have you seen my log?
->
->
-> Regards,
->
-> On Thu, Feb 5, 2015 at 10:27 PM, Firstname Lastname <rapphil@gmail.com> w=
-rote:
->> On Thu, Feb 05, 2015 at 09:34:02PM +0100, Andreas M=C3=BCller wrote:
->>> On Thu, Feb 5, 2015 at 6:22 PM, Raphael Philipe <rapphil@gmail.com> wro=
-te:
->>> > In my local.conf I used:
->>> >
->>> >  PACKAGECONFIG_append_pn-qtbase =3D "accessibility"
->>> >
->>> > Attached you can find the log.do_compile for qt5-creator
->>> You attached log.do_configure :)
->> My mistake. Here it is:
->> https://www.dropbox.com/s/ekuys8g3ud9vet7/log.do_compile.1044.tar.gz?dl=
-=3D
+On 02/11/2015 11:55 AM, dpquigl wrote:
+> On Wed, 2015-02-11 at 16:29 +0000, Paul Eggleton wrote:
+>> (Adding yocto@yoctoproject.org to CC since that is where meta-selinux patches 
+>> tend to go at least)
+>>
+>> On Wednesday 11 February 2015 10:53:03 dpquigl wrote:
+>>> I'm working on OpenXT and it makes use of the meta-selinux repo hosted
+>>> by the yocto project. I'm trying to use it with a base openembedded core
+>>> and its not in sync with oe-core because its based on pokey. 
+>>
+>> To be clear, poky and OE-Core are in lock-step. No patch to core recipes goes 
+>> into Poky directly, they are applied to OE-Core and then they flow into Poky 
+>> immediately thereafter (Richard, who does the merging of patches into OE-Core, 
+>> does the sync to Poky immediately afterwards.)
+>>
+>> What's more likely happening I suspect is that you are on a newer 
+>> branch/revision of OE-Core/Poky than the meta-selinux maintainers have tested. 
+>> I can't speak to the maintenance schedule for meta-selinux but maybe others 
+>> with knowledge there can chime in.
+> 
+> 
+> I think this makes the most sense. 3 of the problems were bbappend files
+> trying to append the wrong version of a recipe (although with these
+> changes I should move them over to a wildcard) and the last one was with
+> LXC. After that I encountered a typo in one of the recipes where it
+> wasn't able to pull the sources down. 
+
+I sent out patches to fix these 4 issues to the list a week or so back.
+Reviewing these things and getting them merged takes time though. AFAIK
+the meta-selinux master branch hasn't built for months now mostly
+because of bbappends trailing behind versions in oe-core. I've been
+playing whack-a-mole on this but by the time patches get merged a new
+version has changed elsewhere. I've been using wild-cards as much as
+possible on account of this.
+
+>>> This made me think of two questions. 1) Why is this not in OE core since so
+>>> many packages in core can potentially have SELinux support enabled and 2) if
+>>> its not supposed to be in core where should turning on SELinux support
+>>> in a recipe go? For example coreutils can have SELinux support enabled.
+>>> Currently this is in meta-selinux as a bbappend to the coreutils
+>>> package. This works out because its always going to be there. However
+>>> there is also a bbappend for an LXC recipe. LXC isn't in core which
+>>> means it has a dependency on a layer not in core.
 >>>
->>> Andreas
->>> --
-I had no time yet - but target qt-creator (and your log) is definitely
-on my todo list.
+>>> Ideally I would put the recipes needed for SELinux support in core and
+>>> have a distro feature which is checked in the recipes in core for
+>>> whether or not to add --with-selinux to the build flags. Then LXC could
+>>> check a core distro feature and enable SELinux if it wants to.
+>>
+>> We have to draw the line somewhere for what to include in OE-Core, and at the 
+>> moment I guess we have considered SELinux to be outside its scope. Obviously 
+>> these things get re-evaluated from time to time, and SELinux is a little bit 
+>> painful for this because of how many recipes it has to touch. Ultimately it 
+>> depends on how many people in the embedded space want to enable and use 
+>> SELinux.
+>>
+>> Thoughts from others?
 
-Andreas
+If SELinux support were to be integrated into oe-core directly this
+would force similar support into other layers too no? The reach of
+meta-selinux has expanded and the layers that must be pulled in to get
+it to build has expanded from just oe-core to meta-virtualization (for
+LXC) as well as a few layers in meta-oe.
+
+I don't know much about the process here but these cross layer
+dependencies would complicate things. I guess this would mean
+integrating SELinux support as a distro feature (or whatever is
+appropriate) into all of these layers directly. Not impossible but
+getting buy-in from the relevant maintainers is necessary.
+
+> In OpenXT we're using OE to generate images for dom0, a user interface
+> domain, a network driver domain, and various other service domains for
+> isolating tasks in the platform. In addition to that we're using
+> openembedded for building on various embedded research platforms. I'm
+> assuming yocto is using SELinux to some extent since they are
+> maintaining the repository for it and there are quite a few developers
+> using SELiunx on embedded products in Japan.
+
+I guess I've been wondering the same thing. For OpenXT we had
+implemented our own SELinux support on top of OE (we weren't OSS at the
+time). Now that we are OSS we've re-based on meta-selinux but I don't
+know of anyone else using this layer or at least discussing it publicly.
+
+Philip
 
