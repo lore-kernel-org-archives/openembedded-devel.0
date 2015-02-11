@@ -1,40 +1,38 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qa0-f42.google.com (mail-qa0-f42.google.com
-	[209.85.216.42])
-	by mail.openembedded.org (Postfix) with ESMTP id B0B8F732FD
+Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 80EC672DAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 01:44:24 +0000 (UTC)
-Received: by mail-qa0-f42.google.com with SMTP id w8so270503qac.1
+	Wed, 11 Feb 2015 01:44:26 +0000 (UTC)
+Received: by mail-yh0-f50.google.com with SMTP id a41so254615yho.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Feb 2015 17:44:25 -0800 (PST)
+	Tue, 10 Feb 2015 17:44:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=Tv1IjtPQC3RWAcxouf/ZH4FHjFhhJWL/McI50wlWYY0=;
-	b=ETkfycRGZPLBwtnbwg8faVOvyeyU9GB35xvybxXT18oUK5xBRhdf2+XgpjC20ju3tI
-	Pnjq+4mLl3HEhVZhHg61CsgsF4SkmqnYXDv6kGiqsNQ5O1k6qv+PM6cThWkV5INPIBqZ
-	2d30LhfSoS/VCfwmkwRD7rV5eEtFU1q48Glk30mwMUT2Jyvj5pnzfub2dVJGQEMoabZL
-	1B6PW8V3nPKI07blw7gzcE3mggpQ+zV+TBnJ/B5obtWQ9I202tt9/iRUxcBnEtZFxrHw
-	3J5yZlXaSOpxZCeMDoMa5W9AHYqTdAiUT6DSSw8rKWtGeWmWxm3Js8xYxQ9Bo0I5AU5l
-	fX/A==
-X-Received: by 10.224.75.7 with SMTP id w7mr60350015qaj.6.1423619065853;
-	Tue, 10 Feb 2015 17:44:25 -0800 (PST)
-Received: from centrium.lab.ossystems.com.br ([177.100.225.47])
-	by mx.google.com with ESMTPSA id
-	n13sm17222934qaa.25.2015.02.10.17.44.23
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Feb 2015 17:44:24 -0800 (PST)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=YepmBTtewuUT2ZnOObn4pt7j0DCBmrmuZOM0UhnuZ1s=;
+	b=U8vy+Pf+Fjd3Ez9JsVeiqXIyHj6wTOK+zgBVkZO4uYmbgWf1TUv5kGENz8ItLfLmK/
+	Ge9mkAKzQDt0lTZrrqzbjki01nz+UmP24qF4zw67TVblA7CoDx3l8mwlV3gdVz6figTI
+	3ptRH/1SXWOkxvH8LNrZKoRetoMucVKGvqFh5Hf2IdaqSiqBk7fK5ZHeN6XlDvYr4OC2
+	gQ+ap2orqe4ucrWsDyZR+p27wfdRt/AGZ6OxdBMaGwglAo1WdvBfBN7noFDLXshSATXM
+	KcWw5+xWKOlXCgA0ZHR1sC1ojKrywZykD1mfp88y4E/T3Y3l/dynFHYnhoYxZkf03XcI
+	Z0Fg==
+MIME-Version: 1.0
+X-Received: by 10.236.210.5 with SMTP id t5mr9976829yho.104.1423619067894;
+	Tue, 10 Feb 2015 17:44:27 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.123.143 with HTTP; Tue, 10 Feb 2015 17:44:27 -0800 (PST)
+In-Reply-To: <CA+chaQfduKxT=R17gcxpMamtDBRJ3_-3ZAdWNfxwaB7iFLdzgQ@mail.gmail.com>
+References: <1423431280-890-1-git-send-email-otavio@ossystems.com.br>
+	<1423431280-890-8-git-send-email-otavio@ossystems.com.br>
+	<CA+chaQfduKxT=R17gcxpMamtDBRJ3_-3ZAdWNfxwaB7iFLdzgQ@mail.gmail.com>
+Date: Tue, 10 Feb 2015 23:44:27 -0200
+X-Google-Sender-Auth: 5tmIXpmE-4wgwDhMmNet3qcOxKk
+Message-ID: <CAP9ODKqFtXvSKJqvBmyX+O3NRE7iLZRBuE5xm40U_QCM9P4OXg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Feb 2015 23:43:39 -0200
-Message-Id: <1423619019-17403-8-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1423619019-17403-1-git-send-email-otavio@ossystems.com.br>
-References: <1423619019-17403-1-git-send-email-otavio@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5][PATCH v2 8/8] qt5.inc: Fix packaging of architecture independent data
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 8/8] qt5.inc: Fix packaging of architecture independent data
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,82 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2015 01:44:24 -0000
+X-List-Received-Date: Wed, 11 Feb 2015 01:44:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The architecture independent data were being added to the '-dev'
-package however it shouldn't be. For example the QtWebEngine had the
-translation and the resources package were not being installed with
-the main package, as it should be.
+Hello Martin,
 
-This commit changes the qttools and qttranslations recipes as well so
-those keep its contents in the respective packages:
+Thanks for running it in your builder.
 
- qttools: add the phrasebooks in the qttools-tools package
- qttranslations: add a new subpackage for qtquickcontrols
+On Tue, Feb 10, 2015 at 9:52 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> This series is causing few new warnings:
+>
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
+> libgstphotography-0.10, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
+> libgstapp-0.10, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
+> gstreamer, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
+> libgstpbutils-0.10, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
+> libgstinterfaces-0.10, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+> libgstapp-0.10, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+> gstreamer, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+> libgstvideo-0.10, but it isn't a build dependency? [build-deps]
+> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
+> libgstinterfaces-0.10, but it isn't a build dependency? [build-deps]
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- recipes-qt/qt5/qt5.inc            | 2 +-
- recipes-qt/qt5/qttools.inc        | 1 +
- recipes-qt/qt5/qttranslations.inc | 5 +++++
- 3 files changed, 7 insertions(+), 1 deletion(-)
+I found the error, it was a typo in the PACKAGECONFIG handling. I fixed it.
 
-diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index bb0bcdc..af0a906 100644
---- a/recipes-qt/qt5/qt5.inc
-+++ b/recipes-qt/qt5/qt5.inc
-@@ -118,7 +118,6 @@ FILES_${PN}-dev += " \
-     ${OE_QMAKE_PATH_LIBS}/cmake/* \
-     ${OE_QMAKE_PATH_LIBS}/*.prl \
-     ${OE_QMAKE_PATH_LIBS}/*.la \
--    ${OE_QMAKE_PATH_DATA}/* \
-     ${OE_QMAKE_PATH_HEADERS}/* \
- "
- FILES_${PN}-dbg += " \
-@@ -129,6 +128,7 @@ FILES_${PN}-staticdev += " \
-     ${OE_QMAKE_PATH_LIBS}/*.a \
- "
- FILES_${PN}-examples = " \
-+    ${OE_QMAKE_PATH_EXAMPLES}/README \
-     ${OE_QMAKE_PATH_EXAMPLES}/*/* \
- "
- FILES_${PN}-examples-dev = " \
-diff --git a/recipes-qt/qt5/qttools.inc b/recipes-qt/qt5/qttools.inc
-index 8c97e24..97717ae 100644
---- a/recipes-qt/qt5/qttools.inc
-+++ b/recipes-qt/qt5/qttools.inc
-@@ -7,6 +7,7 @@ SRC_URI += " \
-     file://0003-add-noqtwebkit-configuration.patch \
- "
- 
-+FILES_${PN}-tools += "${datadir}/${QT_DIR_NAME}/phrasebooks"
- FILES_${PN}-examples = "${datadir}/${QT_DIR_NAME}/examples"
- 
- PACKAGECONFIG ??= ""
-diff --git a/recipes-qt/qt5/qttranslations.inc b/recipes-qt/qt5/qttranslations.inc
-index c04aee6..c522694 100644
---- a/recipes-qt/qt5/qttranslations.inc
-+++ b/recipes-qt/qt5/qttranslations.inc
-@@ -16,6 +16,7 @@ PACKAGES =. " \
-     ${PN}-qtmultimedia \
-     ${PN}-qtlocation \
-     ${PN}-qtdeclarative \
-+    ${PN}-qtquickcontrols \
-     ${PN}-qtxmlpatterns \
-     ${PN}-qtconfig \
-     ${PN}-qtquick1 \
-@@ -57,6 +58,10 @@ FILES_${PN}-qtdeclarative = " \
-     ${OE_QMAKE_PATH_TRANSLATIONS}/qtdeclarative_*.qm \
- "
- 
-+FILES_${PN}-qtquickcontrols = " \
-+    ${OE_QMAKE_PATH_TRANSLATIONS}/qtquickcontrols_*.qm \
-+"
-+
- FILES_${PN}-qtxmlpatterns = " \
-     ${OE_QMAKE_PATH_TRANSLATIONS}/qtxmlpatterns_*.qm \
- "
+> qttools-5.4.0+gitAUTOINC+33eb6cdf93: qttools: Files/directories were
+> installed but not shipped
+...
+>   /usr/share/qt5/phrasebooks/danish.qph
+...
+>   /usr/share/qt5/phrasebooks/swedish.qph [installed-vs-shipped]
+
+I have added those to the qttools-tools subpackage.
+
+> qttranslations-5.4.0: qttranslations: Files/directories were installed but
+> not shipped
+...
+>   /usr/share/qt5/translations/qtquickcontrols_uk.qm [installed-vs-shipped]
+
+This is indeed a bug and has been brought up by the change. So I made
+a new subpackage for qtquickcontrols related files.
+
+So I have sent a v2 of those patches. Please take a look on them.
+
 -- 
-2.1.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
