@@ -1,33 +1,32 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 18D9F72DAE
+	by mail.openembedded.org (Postfix) with ESMTP id DD3C2609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 21:26:14 +0000 (UTC)
+	Wed, 11 Feb 2015 21:31:10 +0000 (UTC)
 Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
 	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
 	by relay1.mentorg.com with esmtp 
-	id 1YLenX-0004qm-Ik from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Feb 2015 13:26:15 -0800
+	id 1YLesJ-0006HS-91 from Joe_MacDonald@mentor.com ;
+	Wed, 11 Feb 2015 13:31:11 -0800
 Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
 	(147.34.96.168) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 11 Feb 2015 13:26:15 -0800
-Received: by burninator (Postfix, from userid 1000)	id 7F5F1581332; Wed, 11
-	Feb 2015 16:26:14 -0500 (EST)
-Date: Wed, 11 Feb 2015 16:26:14 -0500
+	Wed, 11 Feb 2015 13:31:10 -0800
+Received: by burninator (Postfix, from userid 1000)	id 04F0A581332; Wed, 11
+	Feb 2015 16:31:09 -0500 (EST)
+Date: Wed, 11 Feb 2015 16:31:09 -0500
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20150211212614.GG30457@mentor.com>
+Message-ID: <20150211213109.GH30457@mentor.com>
 References: <1423669983.23617.78.camel@tycho.nsa.gov>
-	<CABcZANn4cy3YzOYgpSh6hC=vAA=NpyEPghs_jPNY433OeYWKSA@mail.gmail.com>
-	<1423674029.1873.9.camel@tycho.nsa.gov>
-	<54DBC210.5020308@twobit.us>
+	<6445648.XiRzhvmYHl@peggleto-mobl5.ger.corp.intel.com>
+	<1423673755.1873.5.camel@tycho.nsa.gov>
 MIME-Version: 1.0
-In-Reply-To: <54DBC210.5020308@twobit.us>
+In-Reply-To: <1423673755.1873.5.camel@tycho.nsa.gov>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>, yocto@yoctoproject.org
 Subject: Re: meta-selinux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -42,97 +41,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2015 21:26:26 -0000
-X-Groupsio-MsgNum: 54189
+X-List-Received-Date: Wed, 11 Feb 2015 21:31:18 -0000
+X-Groupsio-MsgNum: 54190
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0XhtP95kHFp3KGBe"
+	protocol="application/pgp-signature"; boundary="+PbGPm1eXpwOoWkI"
 Content-Disposition: inline
 
---0XhtP95kHFp3KGBe
+--+PbGPm1eXpwOoWkI
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] meta-selinux] On 15.02.11 (Wed 15:56) Philip Tricca wrote:
+[Re: [oe] meta-selinux] On 15.02.11 (Wed 11:55) dpquigl wrote:
 
-> On 02/11/2015 12:00 PM, dpquigl wrote:
-> > On Wed, 2015-02-11 at 09:25 -0700, Christopher Larson wrote:
-> >> On Wed, Feb 11, 2015 at 8:53 AM, dpquigl <dpquigl@tycho.nsa.gov> wrote:
-> >>
-> >>> I'm working on OpenXT and it makes use of the meta-selinux repo hosted
-> >>> by the yocto project. I'm trying to use it with a base openembedded c=
+> On Wed, 2015-02-11 at 16:29 +0000, Paul Eggleton wrote:
+> > (Adding yocto@yoctoproject.org to CC since that is where meta-selinux p=
+atches=20
+> > tend to go at least)
+> >=20
+> > On Wednesday 11 February 2015 10:53:03 dpquigl wrote:
+> > > I'm working on OpenXT and it makes use of the meta-selinux repo hosted
+> > > by the yocto project. I'm trying to use it with a base openembedded c=
 ore
-> >>> and its not in sync with oe-core because its based on pokey. This made
-> >>> me think of two questions. 1) Why is this not in OE core since so many
-> >>> packages in core can potentially have SELinux support enabled and 2) =
-if
-> >>> its not supposed to be in core where should turning on SELinux support
-> >>> in a recipe go? For example coreutils can have SELinux support enable=
+> > > and its not in sync with oe-core because its based on pokey.=20
+> >=20
+> > To be clear, poky and OE-Core are in lock-step. No patch to core recipe=
+s goes=20
+> > into Poky directly, they are applied to OE-Core and then they flow into=
+ Poky=20
+> > immediately thereafter (Richard, who does the merging of patches into O=
+E-Core,=20
+> > does the sync to Poky immediately afterwards.)
+> >=20
+> > What's more likely happening I suspect is that you are on a newer=20
+> > branch/revision of OE-Core/Poky than the meta-selinux maintainers have =
+tested.=20
+> > I can't speak to the maintenance schedule for meta-selinux but maybe ot=
+hers=20
+> > with knowledge there can chime in.
+>=20
+>=20
+> I think this makes the most sense. 3 of the problems were bbappend files
+> trying to append the wrong version of a recipe (although with these
+> changes I should move them over to a wildcard) and the last one was with
+> LXC. After that I encountered a typo in one of the recipes where it
+> wasn't able to pull the sources down.=20
+
+I merged a set of patches just in the last couple of days that addresses
+a SRC_URI issue and wildcards for bbappends that I hope resolves all of
+the current crop of these.  If you update your tree now you will likely
+see those go away.  If not, please let me know.
+
+Alternatively, I'm not aware of any issues in 1.7 of that sort (though
+now that I think about it, I need to check the SRC_URI one, I bet that's
+there), so using the latest released Yocto with a like-named branch in
+meta-selinux should always be safe.
+
+-J.
+
+> > > This made me think of two questions. 1) Why is this not in OE core si=
+nce so
+> > > many packages in core can potentially have SELinux support enabled an=
+d 2) if
+> > > its not supposed to be in core where should turning on SELinux support
+> > > in a recipe go? For example coreutils can have SELinux support enable=
 d.
-> >>> Currently this is in meta-selinux as a bbappend to the coreutils
-> >>> package. This works out because its always going to be there. However
-> >>> there is also a bbappend for an LXC recipe. LXC isn't in core which
-> >>> means it has a dependency on a layer not in core.
-> >>>
-> >>
-> >> This is a bug in the layer. It's fairly trivial to construct a layer in
-> >> such a way that you can have per-layer bbappends that are only applied=
- when
-> >> that layer exists. This is likely the approach meta-selinux should tak=
-e to
-> >> address this implicit dependency upon meta-virtualization.
+> > > Currently this is in meta-selinux as a bbappend to the coreutils
+> > > package. This works out because its always going to be there. However
+> > > there is also a bbappend for an LXC recipe. LXC isn't in core which
+> > > means it has a dependency on a layer not in core.
+> > >=20
+> > > Ideally I would put the recipes needed for SELinux support in core and
+> > > have a distro feature which is checked in the recipes in core for
+> > > whether or not to add --with-selinux to the build flags. Then LXC cou=
+ld
+> > > check a core distro feature and enable SELinux if it wants to.
 > >=20
-> > Thanks for the suggestion. I figured there was a way to do this but I'm
-> > new enough to OE and bitbake that it wasn't immediately obvious to me
-> > how to accomplish this. I'll look into giving it a try.
->=20
-> I didn't know this was possible either. Will be useful to have in
-> meta-selinux independent of this conversation. Looks like a good example
-> of this method used in meta-mentor can be found here:
->=20
-> https://lists.yoctoproject.org/pipermail/meta-mentor/2013-May/000052.html
-
-I absolutely think this will be a benefit to anyone using meta-selinux.
-
-> >> That said, I think most folks would be open to PACKAGECONFIGs for seli=
-nux
-> >> capability going into the main recipes, as that's not an invasive chan=
-ge,
-> >> nor a patch, but just a tweak in configuration.
+> > We have to draw the line somewhere for what to include in OE-Core, and =
+at the=20
+> > moment I guess we have considered SELinux to be outside its scope. Obvi=
+ously=20
+> > these things get re-evaluated from time to time, and SELinux is a littl=
+e bit=20
+> > painful for this because of how many recipes it has to touch. Ultimatel=
+y it=20
+> > depends on how many people in the embedded space want to enable and use=
+=20
+> > SELinux.
 > >=20
-> > That is good to hear. I'm going through the repo now to figure out what
-> > is really needed to get SELinux working and what is extra. We've been
-> > having a discussion here about the need to support certain policy
-> > configurations on embedded SELinux systems. I'm still new enough to all
-> > of this that I imagine it will take me a while to figure out how and
-> > what to add PACKAGECONFIG wise to fit meta-selinux into oe-core.
+> > Thoughts from others?
+> >=20
 >=20
-> I'm happy to take a crack at using the per-layer bbappend method
-> described above in meta-selinux. When meta-selinux picked up a
-> dependency on 3 new layers caused by bbappends I had to update a bunch
-> of my build stuff even though I'm not using said layers.
-
-If you don't mind and you've got the time, I'll be happy to merge the
-patch, Philip.
-
+> In OpenXT we're using OE to generate images for dom0, a user interface
+> domain, a network driver domain, and various other service domains for
+> isolating tasks in the platform. In addition to that we're using
+> openembedded for building on various embedded research platforms. I'm
+> assuming yocto is using SELinux to some extent since they are
+> maintaining the repository for it and there are quite a few developers
+> using SELiunx on embedded products in Japan.
+>=20
+>=20
+> Dave
+>=20
+>=20
+>=20
 --=20
 -Joe MacDonald.
 :wq
 
---0XhtP95kHFp3KGBe
+--+PbGPm1eXpwOoWkI
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJU28j2AAoJEEn8ffcsOfaWbzgIAI6VBM4ImlWtl0wJ/kOl1Hfx
-geOYJSePLeNqQ3hVIOnRneQ0bhR/aCqPpfbcZWdmiifj1nmsB8im1wNumuL19GmZ
-TZc3P07pmFbqsOf0vFUXHuk6HR/cTGlht/5XK0MS2i+HmFYV54MbRuB5DUzFNHoS
-ggAQkKgmAmj7ut71oBXiTz0gv6PjGhaCTOuFPbWYhfxawQMR3ZiamCaOUkslkAzp
-lzamCvwKMbzQcMKXVC7G+IOenIwlzeJpCimtazM1eGUZxypsMIJxQyAWyBzIUzN+
-aj4JQcOdTa6R8CnlVuRxZd5j0+zQUB6ZgkIsT+qW161I+8gwebksTj1nC5XQMKA=
-=Mvum
+iQEcBAEBAgAGBQJU28odAAoJEEn8ffcsOfaWoYYH/2olELkUmvPQ6ZLQCwhk6uKW
+i3GETf07eRXmGFXftVePUMdiJO7q69JvWOVpM4k7oMmc4lbJ4KmaMziIAFhBPIPq
+0gZq1cw62RITZXNDqmwrpUL0s4v6RKbHohOHhOzLYImIDXqsLrYhPFEJabzYYSf4
+7rBI31ah+FTZYt7GiN0zrOQCwruQjcZu3LqZnadLOuv+HRB/0rQR3vCMMOBDFckO
+ARI/RyccchVv2PM7ShKYLyTtJ9TOob8bRaApYBPC8WUX5w2Og6kg9v2lWGDX1qIZ
+hM+A/mdabjOAQj+QxtJhfepwnZLQt42ZZVyAs9dCFlnFdhPCI2NsS4EvUdPTzC4=
+=/+fm
 -----END PGP SIGNATURE-----
 
---0XhtP95kHFp3KGBe--
+--+PbGPm1eXpwOoWkI--
