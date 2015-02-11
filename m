@@ -1,38 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f50.google.com (mail-yh0-f50.google.com
-	[209.85.213.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 80EC672DAE
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id CB1517066B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 01:44:26 +0000 (UTC)
-Received: by mail-yh0-f50.google.com with SMTP id a41so254615yho.9
+	Wed, 11 Feb 2015 05:30:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="57429392"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Feb 2015 13:26:57 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t1B5TiYp009664
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Feb 2015 17:44:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=YepmBTtewuUT2ZnOObn4pt7j0DCBmrmuZOM0UhnuZ1s=;
-	b=U8vy+Pf+Fjd3Ez9JsVeiqXIyHj6wTOK+zgBVkZO4uYmbgWf1TUv5kGENz8ItLfLmK/
-	Ge9mkAKzQDt0lTZrrqzbjki01nz+UmP24qF4zw67TVblA7CoDx3l8mwlV3gdVz6figTI
-	3ptRH/1SXWOkxvH8LNrZKoRetoMucVKGvqFh5Hf2IdaqSiqBk7fK5ZHeN6XlDvYr4OC2
-	gQ+ap2orqe4ucrWsDyZR+p27wfdRt/AGZ6OxdBMaGwglAo1WdvBfBN7noFDLXshSATXM
-	KcWw5+xWKOlXCgA0ZHR1sC1ojKrywZykD1mfp88y4E/T3Y3l/dynFHYnhoYxZkf03XcI
-	Z0Fg==
+	Wed, 11 Feb 2015 13:29:44 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 11 Feb 2015 13:30:33 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Feb 2015 13:25:25 +0800
+Message-ID: <1423632325-41448-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.236.210.5 with SMTP id t5mr9976829yho.104.1423619067894;
-	Tue, 10 Feb 2015 17:44:27 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.143 with HTTP; Tue, 10 Feb 2015 17:44:27 -0800 (PST)
-In-Reply-To: <CA+chaQfduKxT=R17gcxpMamtDBRJ3_-3ZAdWNfxwaB7iFLdzgQ@mail.gmail.com>
-References: <1423431280-890-1-git-send-email-otavio@ossystems.com.br>
-	<1423431280-890-8-git-send-email-otavio@ossystems.com.br>
-	<CA+chaQfduKxT=R17gcxpMamtDBRJ3_-3ZAdWNfxwaB7iFLdzgQ@mail.gmail.com>
-Date: Tue, 10 Feb 2015 23:44:27 -0200
-X-Google-Sender-Auth: 5tmIXpmE-4wgwDhMmNet3qcOxKk
-Message-ID: <CAP9ODKqFtXvSKJqvBmyX+O3NRE7iLZRBuE5xm40U_QCM9P4OXg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 8/8] qt5.inc: Fix packaging of architecture independent data
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-networking][PATCH] openvpn: install /etc/tmpfiles.d/openvpn.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,58 +35,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2015 01:44:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Feb 2015 05:30:31 -0000
+Content-Type: text/plain
 
-Hello Martin,
+ Directory /var/run/openvpn is required by service.
 
-Thanks for running it in your builder.
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ .../recipes-support/openvpn/openvpn/openvpn-volatile.conf           | 1 +
+ meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb            | 6 +++++-
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf
 
-On Tue, Feb 10, 2015 at 9:52 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> This series is causing few new warnings:
->
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
-> libgstphotography-0.10, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
-> libgstapp-0.10, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
-> gstreamer, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
-> libgstpbutils-0.10, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia-plugins rdepends on
-> libgstinterfaces-0.10, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
-> libgstapp-0.10, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
-> gstreamer, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
-> libgstvideo-0.10, but it isn't a build dependency? [build-deps]
-> qtmultimedia-5.4.0+gitAUTOINC+f420ac286a: qtmultimedia rdepends on
-> libgstinterfaces-0.10, but it isn't a build dependency? [build-deps]
-
-I found the error, it was a typo in the PACKAGECONFIG handling. I fixed it.
-
-> qttools-5.4.0+gitAUTOINC+33eb6cdf93: qttools: Files/directories were
-> installed but not shipped
-...
->   /usr/share/qt5/phrasebooks/danish.qph
-...
->   /usr/share/qt5/phrasebooks/swedish.qph [installed-vs-shipped]
-
-I have added those to the qttools-tools subpackage.
-
-> qttranslations-5.4.0: qttranslations: Files/directories were installed but
-> not shipped
-...
->   /usr/share/qt5/translations/qtquickcontrols_uk.qm [installed-vs-shipped]
-
-This is indeed a bug and has been brought up by the change. So I made
-a new subpackage for qtquickcontrols related files.
-
-So I have sent a v2 of those patches. Please take a look on them.
-
+diff --git a/meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf b/meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf
+new file mode 100644
+index 0000000..4a3dc4a
+--- /dev/null
++++ b/meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf
+@@ -0,0 +1 @@
++d /var/run/openvpn 0755 root root -
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
+index 58ddcc8..08f30b5 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb
+@@ -9,7 +9,8 @@ inherit autotools systemd
+ 
+ SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
+            file://openvpn \
+-           file://openvpn@.service "
++           file://openvpn@.service \
++           file://openvpn-volatile.conf"
+ 
+ SRC_URI[md5sum] = "6ca03fe0fd093e0d01601abee808835c"
+ SRC_URI[sha256sum] = "7baed2ff39c12e1a1a289ec0b46fcc49ff094ca58b8d8d5f29b36ac649ee5b26"
+@@ -48,6 +49,9 @@ do_install_append() {
+         install -d -m 710 ${D}/${localstatedir}/lib/openvpn
+         install -d -m 755 ${D}/${localstatedir}/run/
+         install -d -m 755 ${D}/${localstatedir}/run/openvpn
++
++        install -d ${D}${sysconfdir}/tmpfiles.d
++        install -m 0644 ${WORKDIR}/openvpn-volatile.conf ${D}${sysconfdir}/tmpfiles.d/openvpn.conf
+     fi
+ }
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.1
+
 
