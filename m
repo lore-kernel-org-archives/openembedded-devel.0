@@ -1,38 +1,31 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id F25A9609B2;
-	Wed, 11 Feb 2015 21:09:17 +0000 (UTC)
-Received: by mail-pa0-f54.google.com with SMTP id kx10so6471497pab.13;
-	Wed, 11 Feb 2015 13:09:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=MprQVKJ2hDpedSL0TGEwgg4BuA8RqsHD39LjgsAqsag=;
-	b=foxgysX8pZqDAtl0OZckLtjOMkomLxkuvOtC4a0DOSSmvIQJFb0xrkrG8XJqeEnEVe
-	ArQgIolqrVSLHbjn21AdxkmPuR31Fpb6NVlEVEWY4Tq0MaCcbdmRYNKalpG3GJiMI5+I
-	fUe4OLs6c7KMdtxF7epDZjNd2swjK35YxuzRB4lCpZULKjgYVL/IT9RVj0CSgMoYzP1r
-	HFXr4H1HIXfg9Re8IqQyRQEEdVLqorLIegiR5Pi1xFsRv9Lx5Ueckzv9xRSoFsOve8OQ
-	qmzAGPl2EyeZ35/aZKosPiX/j9o09GbahST0CkoYuJBvLa+vaF3G3bFop3DSAmUggEc6
-	Ztgw==
-X-Received: by 10.68.107.2 with SMTP id gy2mr676659pbb.63.1423688958635;
-	Wed, 11 Feb 2015 13:09:18 -0800 (PST)
-Received: from [10.22.11.16] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by mx.google.com with ESMTPSA id bi11sm1797772pdb.8.2015.02.11.13.09.16
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Feb 2015 13:09:17 -0800 (PST)
-Message-ID: <54DBC4FB.1000509@gmail.com>
-Date: Wed, 11 Feb 2015 13:09:15 -0800
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id F3A2A72DAE
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Feb 2015 21:22:23 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1YLejo-0003qP-K1 from Joe_MacDonald@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Feb 2015 13:22:24 -0800
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 11 Feb 2015 13:22:24 -0800
+Received: by burninator (Postfix, from userid 1000)	id 883A8581332; Wed, 11
+	Feb 2015 16:22:23 -0500 (EST)
+Date: Wed, 11 Feb 2015 16:22:23 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20150211212223.GF30457@mentor.com>
+References: <1423669983.23617.78.camel@tycho.nsa.gov>
+	<CABcZANn4cy3YzOYgpSh6hC=vAA=NpyEPghs_jPNY433OeYWKSA@mail.gmail.com>
 MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>, 
-	openembedded-core@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
-References: <20150211202632.GA2272@jama> <20150211203512.GB2272@jama>
-In-Reply-To: <20150211203512.GB2272@jama>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-02-10
+In-Reply-To: <CABcZANn4cy3YzOYgpSh6hC=vAA=NpyEPghs_jPNY433OeYWKSA@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: meta-selinux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,68 +39,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Feb 2015 21:09:27 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Feb 2015 21:22:33 -0000
+X-Groupsio-MsgNum: 54188
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="S5HS5MvDw4DmbRmb"
+Content-Disposition: inline
 
-Thanks.
+--S5HS5MvDw4DmbRmb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+[Re: [oe] meta-selinux] On 15.02.11 (Wed 09:25) Christopher Larson wrote:
 
+> On Wed, Feb 11, 2015 at 8:53 AM, dpquigl <dpquigl@tycho.nsa.gov> wrote:
+>=20
+> > I'm working on OpenXT and it makes use of the meta-selinux repo hosted
+> > by the yocto project. I'm trying to use it with a base openembedded core
+> > and its not in sync with oe-core because its based on pokey. This made
+> > me think of two questions. 1) Why is this not in OE core since so many
+> > packages in core can potentially have SELinux support enabled and 2) if
+> > its not supposed to be in core where should turning on SELinux support
+> > in a recipe go? For example coreutils can have SELinux support enabled.
+> > Currently this is in meta-selinux as a bbappend to the coreutils
+> > package. This works out because its always going to be there. However
+> > there is also a bbappend for an LXC recipe. LXC isn't in core which
+> > means it has a dependency on a layer not in core.
+> >
+>=20
+> This is a bug in the layer. It's fairly trivial to construct a layer in
+> such a way that you can have per-layer bbappends that are only applied wh=
+en
+> that layer exists. This is likely the approach meta-selinux should take to
+> address this implicit dependency upon meta-virtualization.
 
+I agree.  As Philip mentioned, there's been creep in meta-selinux
+dependencies that I really would prefer to avoid but I haven't gotten
+around to making the dependencies optional and proposing a patch set on
+the list yet.  It's something I think we need, though, particularly for
+meta-selinux, but I imagine it's not the only layer that could use such
+a change.
 
+> That said, I think most folks would be open to PACKAGECONFIGs for selinux
+> capability going into the main recipes, as that's not an invasive change,
+> nor a patch, but just a tweak in configuration.
 
-On 02/11/2015 12:35 PM, Martin Jansa wrote:
-> On Wed, Feb 11, 2015 at 09:26:32PM +0100, Martin Jansa wrote:
->> http://www.openembedded.org/wiki/Bitbake_World_Status
->>
->> == Failed tasks 2015-02-10 ==
->>
->> INFO: jenkins-job.sh-1.1.0 Complete log available at http://logs.nslu2-linux.org/buildlogs/oe/world/log.report.20150210_214029.log
->>
->
-> More details bellow:
->
-> * /meta-openembedded/meta-oe/recipes-support/fltk/fltk_1.1.10.bb, do_compile
-> * /meta-openembedded/meta-python/recipes-devtools/python/python-lxml_3.2.5.bb, do_compile
-> are trying to use xml2-config
->
-> * /meta-openembedded/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb, do_compile
-> * /meta-openembedded/meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb, do_configure
-> are trying to use pcap-config
+I know that's been the case in several places already, and in a lot of
+cases I think that's probably the better place to do such things, so
+that at least in theory the layer maintainers themselves are aware of
+selinux issues, but I try to be a practical sort and since I don't
+expect up-stream developers to be maintaining their own policy modules,
+I also don't expect layer maintainers to be testing with selinux all
+that often.  :-)
 
-I will look into this.
+FWIW, though, there're plenty of examples in oe-core of SELinux
+PACKAGECONFIGs and that works out pretty well for everyone, I think.
 
-- armin
->
->
-> * /meta-openembedded/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb, do_compile
-> | i586-oe-linux-gcc: error: unrecognized command line option '--should-not-have-used-/usr/bin/freetype-config'
->
-> * /meta-openembedded/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.2.bb, do_compile
-> *** error: gettext infrastructure mismatch: using a Makefile.in.in from
-> gettext version 0.18 but the autoconf macros are from gettext version
-> 0.19
->
-> * /openembedded-core/meta/recipes-bsp/u-boot/u-boot-mkimage_2014.07.bb, do_compile
-> | tools/dumpimage.c:195:37: error: 'PLAIN_VERSION' undeclared (first use in this function)
->
-> * /meta-openembedded/meta-oe/recipes-extended/unixodbc/unixodbc_2.3.2.bb, do_configure
-> | gnu-configize: 'configure.ac' or 'configure.in' is required
->
-> * /meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb, do_compile
-> | qemu: uncaught target signal 11 (Segmentation fault) - core dumped
->
-> * /openembedded-core/meta/recipes-devtools/btrfs-tools/btrfs-tools_git.bb, do_compile
-> | btrfs.c:172:17: error: 'BTRFS_BUILD_VERSION' undeclared (first use in this function)
+--=20
+-Joe MacDonald.
+:wq
 
+--S5HS5MvDw4DmbRmb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
->
-> * /meta-openembedded/meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb, do_configure
-> ERROR!  Libpcre header not found.
->
-> * /meta-openembedded/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb, do_compile
-> ktap.c:33:2: error: #error "Please enable CONFIG_EVENT_TRACING before compile ktap"
->
->
->
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
+iQEcBAEBAgAGBQJU28gPAAoJEEn8ffcsOfaWsa4H/0eJKjVZrElLtzogSmCgEvYq
+9MCd38JzSadH8WcgdP0O4KniO2f4oLp4zwGJeR9Wky+4wLPwCBnVR2CTk61p4TkI
+6Kqb0CMfdgzvg798SfjhQBmZgxWeZoqwMIuujGeVTGBKnkmjkzXe4rLVr39iQ1mR
+h6drRMaJY0xCTpYUKOmL0n4WA5JQOODGsF2cgDJidh+Mw1Dhu26Ft/vTtu+JfaDM
+mLJDDzunJc4F6CLrpaQ4cKhzAl6kE3DZIlv0MbC2wFut3P9gVjtqZhKVSgVYnBHl
+Mj1kiu52oa60/hnk+2ZkqbdH41UEJ080u00v4XH2uTGJ+S8xGKk2CR5v+KWk/es=
+=nvAG
+-----END PGP SIGNATURE-----
+
+--S5HS5MvDw4DmbRmb--
