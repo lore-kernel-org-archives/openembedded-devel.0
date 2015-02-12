@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EC3B733B3
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 120EB733B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 21:22:37 +0000 (UTC)
-Received: by mail-we0-f177.google.com with SMTP id m14so6971566wev.8
+	Thu, 12 Feb 2015 21:22:39 +0000 (UTC)
+Received: by mail-wg0-f41.google.com with SMTP id b13so12921475wgh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 13:22:39 -0800 (PST)
+	Thu, 12 Feb 2015 13:22:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=NNGijPT+7eOViabmMVIwiPkyqEPaOinsrWzSPLiusd8=;
-	b=LBl4/kNEoYRFQOof47rV+fqpF5vcr4rdDkPbi2tX6QMwLPFpu9DZY4EaUlZc9riF/8
-	Y4mfp8nVmLCrdZUS5V/fWNHZ3iPYjifV7WU8FJ9NcxMq5omxiiX3STohIbejPJZqxcwj
-	FvTtu/UdV2arKtKrA/+0yfXkJ4RtSYd9xNxBM8OW9uayCx+q5prVWYb24CucwCVKr3+u
-	w7vzu2aPV2y6fLhKN8RjjRTy0snpcr7ZXydwGyDuAmss8uT6WQkemXi9T9mJzlNzCBxu
-	0vqzdbwiUoFCG9wr6W4x7Ch7+v9/SYnAV/jLYyj0o4FBuAGgSRXOi0E0uwHvtvb8j0H/
-	Inww==
-X-Received: by 10.180.211.83 with SMTP id na19mr489422wic.29.1423776159071;
-	Thu, 12 Feb 2015 13:22:39 -0800 (PST)
+	bh=bh2/RyUV9/UVheY+aWazm/txZA1SMaeQnQdG0vm9xNs=;
+	b=syGyNd738m5bzmzbTnISoUA2VAOWYjsNYzxp4T3JyqtvUOCXJOvDjJVHek0O/L2oxD
+	v6xFNnxbac+4q7o7E8+7KS5NrEQWKhq1e/ooeFwmj+JevTUlmG7E6RMwjESqIUSi17Kw
+	z9tgw1lISQB3gV2IO9o0OhEdZlBtVr7GveejBB9z0tH4yrhkkilzwAHMvt7Vo0EHmW9d
+	558hTJ0lNd9ocgOEey3K7DT2L6+OlRpmb0CVRZ3y0h0xanqLQQVPeXdvQpnbkCcD0QE0
+	IFsIjjJvHL8qz4V86cqjo01otsVApOKf1c3egQotN9PzTl+/3sn2q3Oy8NqNd3CACaD6
+	H8ZQ==
+X-Received: by 10.180.187.200 with SMTP id fu8mr10300353wic.28.1423776160464; 
+	Thu, 12 Feb 2015 13:22:40 -0800 (PST)
 Received: from localhost.localdomain (p5B0A0430.dip0.t-ipconnect.de.
 	[91.10.4.48])
-	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.37
+	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.39
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 13:22:38 -0800 (PST)
+	Thu, 12 Feb 2015 13:22:39 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Feb 2015 22:21:58 +0100
-Message-Id: <1423776119-14981-19-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 12 Feb 2015 22:21:59 +0100
+Message-Id: <1423776119-14981-20-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 18/19] gnome-bluetooth: fix build by using a valid dbus interface + unblacklist
+Subject: [PATCH 19/19] gimp: update to 2.8.14 / fix build by not configuring with freetype-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,169 +47,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2015 21:22:39 -0000
+X-List-Received-Date: Thu, 12 Feb 2015 21:22:40 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...luetooth-client-use-valid-interface-names.patch | 122 +++++++++++++++++++++
- .../gnome-bluetooth/gnome-bluetooth_2.32.0.bb      |   8 +-
- 2 files changed, 126 insertions(+), 4 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch
+ ...igure-ac-do-not-check-for-freetype-config.patch | 38 ++++++++++++++++++++++
+ meta-oe/recipes-graphics/gimp/gimp/freetype.patch  | 30 -----------------
+ .../gimp/{gimp_2.8.10.bb => gimp_2.8.14.bb}        | 13 ++++----
+ 3 files changed, 45 insertions(+), 36 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch
+ delete mode 100644 meta-oe/recipes-graphics/gimp/gimp/freetype.patch
+ rename meta-oe/recipes-graphics/gimp/{gimp_2.8.10.bb => gimp_2.8.14.bb} (73%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch
+diff --git a/meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch b/meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch
 new file mode 100644
-index 0000000..99049a0
+index 0000000..fecd012
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch
-@@ -0,0 +1,122 @@
-+From 1555f85b222db0d536efe277d31b57b2a8b938f4 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch
+@@ -0,0 +1,38 @@
++From 72ad76841d87e857428693d812a961935284ac62 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Thu, 12 Feb 2015 01:19:41 +0100
-+Subject: [PATCH] bluetooth-client: use valid interface names
++Date: Thu, 12 Feb 2015 15:57:47 +0100
++Subject: [PATCH] configure-ac: do not check for freetype-config
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
 +
-+Upstream-Status: Inappropriate[version unmaintained upstream]
++freetype-config is not allowed in our environment - see also binconfig-disabled
++
++Upstream-Status: inappropriate [OE specific]
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +---
-+ lib/bluetooth-client.c   | 12 ++++++------
-+ lib/bluetooth-client.xml |  6 +++---
-+ lib/test-agent.c         |  2 +-
-+ 3 files changed, 10 insertions(+), 10 deletions(-)
++ configure.ac | 7 -------
++ 1 file changed, 7 deletions(-)
 +
-+diff --git a/lib/bluetooth-client.c b/lib/bluetooth-client.c
-+index d62d56d..02e194c 100644
-+--- a/lib/bluetooth-client.c
-++++ b/lib/bluetooth-client.c
-+@@ -721,7 +721,7 @@ static void add_device(DBusGProxy *adapter, GtkTreeIter *parent,
-+ 						BLUEZ_DEVICE_INTERFACE, path);
++diff --git a/configure.ac b/configure.ac
++index 26812b6..abec714 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -647,13 +647,6 @@ if test "x$fontconfig_ok" = xno; then
++ fi
 + 
-+ 		if (device != NULL)
-+-			device_get_properties(device, &hash, NULL);
-++			org_bluez_device_get_properties(device, &hash, NULL);
-+ 	} else
-+ 		device = NULL;
 + 
-+@@ -945,7 +945,7 @@ static void adapter_added(DBusGProxy *manager,
-+ 	adapter = dbus_g_proxy_new_from_proxy(manager,
-+ 					BLUEZ_ADAPTER_INTERFACE, path);
++-AC_PATH_PROG(FREETYPE_CONFIG, freetype-config, no)
++-if test "x$FREETYPE_CONFIG" != "xno" ; then
++-  AC_MSG_CHECKING([for freetype libraries])
++-  FREETYPE_LIBS=`$FREETYPE_CONFIG --libs`
++-  AC_MSG_RESULT($FREETYPE_LIBS)
++-fi
++-AC_SUBST(FREETYPE_LIBS)
 + 
-+-	adapter_get_properties(adapter, &hash, NULL);
-++	org_bluez_adapter_get_properties(adapter, &hash, NULL);
-+ 	if (hash != NULL) {
-+ 		value = g_hash_table_lookup(hash, "Address");
-+ 		address = value ? g_value_get_string(value) : NULL;
-+@@ -1178,7 +1178,7 @@ static void bluetooth_client_init(BluetoothClient *client)
-+ 	dbus_g_proxy_connect_signal(priv->manager, "DefaultAdapterChanged",
-+ 			G_CALLBACK(default_adapter_changed), client, NULL);
 + 
-+-	manager_list_adapters(priv->manager, &array, NULL);
-++	org_bluez_manager_list_adapters(priv->manager, &array, NULL);
-+ 	if (array != NULL) {
-+ 		int i;
-+ 
-+@@ -1189,7 +1189,7 @@ static void bluetooth_client_init(BluetoothClient *client)
-+ 		}
-+ 	}
-+ 
-+-	manager_default_adapter(priv->manager, &default_path, NULL);
-++	org_bluez_manager_default_adapter(priv->manager, &default_path, NULL);
-+ 	if (default_path != NULL) {
-+ 		default_adapter_changed(priv->manager, default_path, client);
-+ 		g_free(default_path);
-+@@ -1541,7 +1541,7 @@ gboolean bluetooth_client_start_discovery(BluetoothClient *client)
-+ 	if (adapter == NULL)
-+ 		return FALSE;
-+ 
-+-	adapter_start_discovery(adapter, NULL);
-++	org_bluez_adapter_start_discovery(adapter, NULL);
-+ 
-+ 	g_object_unref(adapter);
-+ 
-+@@ -1568,7 +1568,7 @@ gboolean bluetooth_client_stop_discovery(BluetoothClient *client)
-+ 	if (adapter == NULL)
-+ 		return FALSE;
-+ 
-+-	adapter_stop_discovery(adapter, NULL);
-++	org_bluez_adapter_stop_discovery(adapter, NULL);
-+ 
-+ 	g_object_unref(adapter);
-+ 
-+diff --git a/lib/bluetooth-client.xml b/lib/bluetooth-client.xml
-+index 2326277..38c7fb0 100644
-+--- a/lib/bluetooth-client.xml
-++++ b/lib/bluetooth-client.xml
-+@@ -1,7 +1,7 @@
-+ <?xml version="1.0" encoding="UTF-8" ?>
-+ 
-+ <node name="/">
-+-  <interface name="manager">
-++  <interface name="org.bluez.manager">
-+     <method name="DefaultAdapter">
-+       <arg type="o" direction="out"/>
-+     </method>
-+@@ -16,7 +16,7 @@
-+     </method>
-+   </interface>
-+ 
-+-  <interface name="adapter">
-++  <interface name="org.bluez.adapter">
-+     <method name="GetProperties">
-+       <arg type="a{sv}" direction="out"/>
-+     </method>
-+@@ -44,7 +44,7 @@
-+     </method>
-+   </interface>
-+ 
-+-  <interface name="device">
-++  <interface name="org.bluez.device">
-+     <method name="GetProperties">
-+       <arg type="a{sv}" direction="out"/>
-+     </method>
-+diff --git a/lib/test-agent.c b/lib/test-agent.c
-+index 8d60da6..83464eb 100644
-+--- a/lib/test-agent.c
-++++ b/lib/test-agent.c
-+@@ -40,7 +40,7 @@ static gboolean agent_pincode(DBusGMethodInvocation *context,
-+ 	GValue *value;
-+ 	const gchar *address, *name;
-+ 
-+-	device_get_properties(device, &hash, NULL);
-++	org_bluez_device_get_properties(device, &hash, NULL);
-+ 
-+ 	if (hash != NULL) {
-+ 		value = g_hash_table_lookup(hash, "Address");
++ ##########################################
 +-- 
 +1.9.3
 +
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-index b9b7355..8711b8a 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-@@ -6,15 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
- 
- PR = "r1"
- 
--PNBLACKLIST[gnome-bluetooth] ?= "dbus-binding-tool fails with: Unable to load gnome-bluetooth-2.32.0/lib/bluetooth-client.xml": "manager" is not a valid D-Bus interface name"
+diff --git a/meta-oe/recipes-graphics/gimp/gimp/freetype.patch b/meta-oe/recipes-graphics/gimp/gimp/freetype.patch
+deleted file mode 100644
+index ed6c097..0000000
+--- a/meta-oe/recipes-graphics/gimp/gimp/freetype.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-Include the freetype headers via macros ( recommended way)
 -
- SECTION = "x11/gnome"
- DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib libunique libnotify bluez4 gnome-keyring virtual/libx11 libxi intltool-native"
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Upstream-Status: Backport
+-
+-From 6c73f28b6d87a2afd11974552a075bffec52347f Mon Sep 17 00:00:00 2001
+-From: Michael Natterer <mitch@gimp.org>
+-Date: Fri, 29 Nov 2013 20:57:46 +0000
+-Subject: Bug 719560 - Build failure with freetype 2.5.1
+-
+-Apply patch from su-v that fixes the freetype include to
+-the madness devised and recommended by freetype.
+----
+-diff --git a/app/text/gimpfont.c b/app/text/gimpfont.c
+-index 4045ca9..66c6e52 100644
+---- a/app/text/gimpfont.c
+-+++ b/app/text/gimpfont.c
+-@@ -28,7 +28,9 @@
+- 
+- #define PANGO_ENABLE_ENGINE  1   /* Argh */
+- #include <pango/pango-ot.h>
+--#include <freetype/tttables.h>
+-+
+-+#include <ft2build.h>
+-+#include FT_TRUETYPE_TABLES_H
+- 
+- #include "text-types.h"
+- 
+---
+-cgit v0.9.2
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+similarity index 73%
+rename from meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
+rename to meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+index a893dc2..7d52cf1 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+@@ -7,16 +7,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff lcms gegl poppler jasper bzip2"
+ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
  
- inherit gnomebase gtk-icon-cache
+-inherit gnome
++inherit gnome gtk-doc
  
--SRC_URI += "file://0001-bluetooth-input-Fix-compile-errors.patch \
--           "
-+SRC_URI += " \
-+    file://0001-bluetooth-input-Fix-compile-errors.patch \
-+    file://0002-bluetooth-client-use-valid-interface-names.patch \
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[helpbrowser] = "--with-webkit, --without-webkit, webkit-gtk"
+ 
+-SRC_URI = "http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
+-           file://freetype.patch \
+-          "
+-SRC_URI[md5sum] = "84c964aab7044489af69f7319bb59b47"
+-SRC_URI[sha256sum] = "e7fd8b19f989138d826003c75f56bd5b6f136eef597e86e3978ede0bba470ae6"
++SRC_URI = " \
++    http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
++    file://0001-configure-ac-do-not-check-for-freetype-config.patch \
 +"
- SRC_URI[archive.md5sum] = "f129686fe46c4c98eb70a0cc85d59cae"
- SRC_URI[archive.sha256sum] = "57b1f06c96a1b85e1c19ff919d708cc38e95edae658881ed99968c325839a973"
++SRC_URI[md5sum] = "233c948203383fa078434cc3f8f925cb"
++SRC_URI[sha256sum] = "d82a958641c9c752d68e35f65840925c08e314cea90222ad845892a40e05b22d"
  
+ EXTRA_OECONF = "--disable-python \
+                 --without-wmf"
 -- 
 1.9.3
 
