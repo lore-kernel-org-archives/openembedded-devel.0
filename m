@@ -1,39 +1,30 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 120EB733B3
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 548A273450
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 21:22:39 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id b13so12921475wgh.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 13:22:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=bh2/RyUV9/UVheY+aWazm/txZA1SMaeQnQdG0vm9xNs=;
-	b=syGyNd738m5bzmzbTnISoUA2VAOWYjsNYzxp4T3JyqtvUOCXJOvDjJVHek0O/L2oxD
-	v6xFNnxbac+4q7o7E8+7KS5NrEQWKhq1e/ooeFwmj+JevTUlmG7E6RMwjESqIUSi17Kw
-	z9tgw1lISQB3gV2IO9o0OhEdZlBtVr7GveejBB9z0tH4yrhkkilzwAHMvt7Vo0EHmW9d
-	558hTJ0lNd9ocgOEey3K7DT2L6+OlRpmb0CVRZ3y0h0xanqLQQVPeXdvQpnbkCcD0QE0
-	IFsIjjJvHL8qz4V86cqjo01otsVApOKf1c3egQotN9PzTl+/3sn2q3Oy8NqNd3CACaD6
-	H8ZQ==
-X-Received: by 10.180.187.200 with SMTP id fu8mr10300353wic.28.1423776160464; 
-	Thu, 12 Feb 2015 13:22:40 -0800 (PST)
-Received: from localhost.localdomain (p5B0A0430.dip0.t-ipconnect.de.
-	[91.10.4.48])
-	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 13:22:39 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Feb 2015 22:21:59 +0100
-Message-Id: <1423776119-14981-20-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
+	Thu, 12 Feb 2015 21:34:59 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id C855CF811DC; Thu, 12 Feb 2015 14:34:54 -0700 (MST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 07718F811D8;
+	Thu, 12 Feb 2015 14:34:50 -0700 (MST)
+Message-ID: <54DD1C8B.90205@mlbassoc.com>
+Date: Thu, 12 Feb 2015 14:35:07 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-Subject: [PATCH 19/19] gimp: update to 2.8.14 / fix build by not configuring with freetype-config
+To: Martin Jansa <martin.jansa@gmail.com>, 
+	openembedded-devel@lists.openembedded.org
+References: <1422971047-17965-1-git-send-email-gary@mlbassoc.com>
+	<20150212183043.GF2272@jama>
+In-Reply-To: <20150212183043.GF2272@jama>
+Subject: Re: [meta-oe][PATCH] mplayer2: Remove blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,132 +38,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2015 21:22:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 Feb 2015 21:35:00 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...igure-ac-do-not-check-for-freetype-config.patch | 38 ++++++++++++++++++++++
- meta-oe/recipes-graphics/gimp/gimp/freetype.patch  | 30 -----------------
- .../gimp/{gimp_2.8.10.bb => gimp_2.8.14.bb}        | 13 ++++----
- 3 files changed, 45 insertions(+), 36 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch
- delete mode 100644 meta-oe/recipes-graphics/gimp/gimp/freetype.patch
- rename meta-oe/recipes-graphics/gimp/{gimp_2.8.10.bb => gimp_2.8.14.bb} (73%)
+On 2015-02-12 11:30, Martin Jansa wrote:
+> On Tue, Feb 03, 2015 at 06:44:07AM -0700, Gary Thomas wrote:
+>> mplayer2 no longer needs to be blacklisted as OE-core has moved
+>> to libav_9.16
+>
+> Please fix following issues before blacklisting it:
+> mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libpostproc,
+> but it isn't a build dependency? [build-deps]
+> mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libvorbis, but
+> it isn't a build dependency? [build-deps]
+> mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libxscrnsaver,
+> but it isn't a build dependency? [build-deps]
+> mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on mpg123, but it
+> isn't a build dependency? [build-deps]
 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch b/meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch
-new file mode 100644
-index 0000000..fecd012
---- /dev/null
-+++ b/meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch
-@@ -0,0 +1,38 @@
-+From 72ad76841d87e857428693d812a961935284ac62 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Thu, 12 Feb 2015 15:57:47 +0100
-+Subject: [PATCH] configure-ac: do not check for freetype-config
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+freetype-config is not allowed in our environment - see also binconfig-disabled
-+
-+Upstream-Status: inappropriate [OE specific]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ configure.ac | 7 -------
-+ 1 file changed, 7 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 26812b6..abec714 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -647,13 +647,6 @@ if test "x$fontconfig_ok" = xno; then
-+ fi
-+ 
-+ 
-+-AC_PATH_PROG(FREETYPE_CONFIG, freetype-config, no)
-+-if test "x$FREETYPE_CONFIG" != "xno" ; then
-+-  AC_MSG_CHECKING([for freetype libraries])
-+-  FREETYPE_LIBS=`$FREETYPE_CONFIG --libs`
-+-  AC_MSG_RESULT($FREETYPE_LIBS)
-+-fi
-+-AC_SUBST(FREETYPE_LIBS)
-+ 
-+ 
-+ ##########################################
-+-- 
-+1.9.3
-+
-diff --git a/meta-oe/recipes-graphics/gimp/gimp/freetype.patch b/meta-oe/recipes-graphics/gimp/gimp/freetype.patch
-deleted file mode 100644
-index ed6c097..0000000
---- a/meta-oe/recipes-graphics/gimp/gimp/freetype.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--Include the freetype headers via macros ( recommended way)
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Upstream-Status: Backport
--
--From 6c73f28b6d87a2afd11974552a075bffec52347f Mon Sep 17 00:00:00 2001
--From: Michael Natterer <mitch@gimp.org>
--Date: Fri, 29 Nov 2013 20:57:46 +0000
--Subject: Bug 719560 - Build failure with freetype 2.5.1
--
--Apply patch from su-v that fixes the freetype include to
--the madness devised and recommended by freetype.
-----
--diff --git a/app/text/gimpfont.c b/app/text/gimpfont.c
--index 4045ca9..66c6e52 100644
----- a/app/text/gimpfont.c
--+++ b/app/text/gimpfont.c
--@@ -28,7 +28,9 @@
-- 
-- #define PANGO_ENABLE_ENGINE  1   /* Argh */
-- #include <pango/pango-ot.h>
---#include <freetype/tttables.h>
--+
--+#include <ft2build.h>
--+#include FT_TRUETYPE_TABLES_H
-- 
-- #include "text-types.h"
-- 
----
--cgit v0.9.2
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-similarity index 73%
-rename from meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-rename to meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-index a893dc2..7d52cf1 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.10.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-@@ -7,16 +7,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- DEPENDS = "babl gdk-pixbuf-native libart-lgpl gtk+ jpeg libpng libexif tiff lcms gegl poppler jasper bzip2"
- DEPENDS += "${@base_contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '', d)}"
- 
--inherit gnome
-+inherit gnome gtk-doc
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[helpbrowser] = "--with-webkit, --without-webkit, webkit-gtk"
- 
--SRC_URI = "http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
--           file://freetype.patch \
--          "
--SRC_URI[md5sum] = "84c964aab7044489af69f7319bb59b47"
--SRC_URI[sha256sum] = "e7fd8b19f989138d826003c75f56bd5b6f136eef597e86e3978ede0bba470ae6"
-+SRC_URI = " \
-+    http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
-+    file://0001-configure-ac-do-not-check-for-freetype-config.patch \
-+"
-+SRC_URI[md5sum] = "233c948203383fa078434cc3f8f925cb"
-+SRC_URI[sha256sum] = "d82a958641c9c752d68e35f65840925c08e314cea90222ad845892a40e05b22d"
- 
- EXTRA_OECONF = "--disable-python \
-                 --without-wmf"
+This must be an inferred dependency as mpg123 is not in meta-oe, but
+rather meta-multimedia and it is possible to build mplayer using only
+meta-oe and not meta-multimedia.  How should that be handled?
+
+> mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on portaudio-v19,
+> but it isn't a build dependency? [build-deps]
+>
+>> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+>> ---
+>>   meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 --
+>>   1 file changed, 2 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+>> index 7c04ff1..089aa15 100644
+>> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+>> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+>> @@ -13,8 +13,6 @@ RCONFLICTS_${PN} = "mplayer"
+>>   LICENSE = "GPLv3"
+>>   LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
+>>
+>> -PNBLACKLIST[mplayer2] ?= "Requires newer libav which has negative D_P"
+>> -
+>>   SRC_URI = "git://repo.or.cz/mplayer.git \
+>>       file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
+>>   "
+>> --
+>> 1.9.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
 -- 
-1.9.3
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
