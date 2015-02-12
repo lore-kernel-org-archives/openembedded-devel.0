@@ -1,40 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 3038D733F3
+Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id E189C7340C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 22:20:54 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id l18so10019874wgh.7
+	Thu, 12 Feb 2015 22:21:59 +0000 (UTC)
+Received: by mail-wg0-f43.google.com with SMTP id n12so13150866wgh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 14:20:55 -0800 (PST)
+	Thu, 12 Feb 2015 14:22:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yFQ3hkEwhPr29oA5EVUwIGQJtk+NvNinLfE8a2UIkTc=;
-	b=Bva5fbOc/UerYMugd1K3XcWJ1sFOANB+OwkObo/7io1zMTmTGedqtIiGduzyjPyqHQ
-	n2bowyjouognHeSnJW8zf3RADYq16Old3QIzQ0M1VV10k8T/JUeKEDz9WMFx4t5GXAqi
-	rv+0D2p5pPEQsbOewlOiEvgj8rzZT5pym4AA64fyOAKr4CKoLNK5TNP70AWtwM4zJjax
-	1AFGjTLeVIkP+iew2fAlsnZSFXieeHNCzzxErsRhSlEpfSaMR85AYOgs75CvVTOBHi15
-	+0lFYfX6XtDWm+iC6vWoazxX/FeYWL7K0lsqk/a+jjSA2HcS4It6PzJo7HSK1jolj4Uz
-	71tA==
-X-Received: by 10.194.187.236 with SMTP id fv12mr7961969wjc.131.1423779655614; 
-	Thu, 12 Feb 2015 14:20:55 -0800 (PST)
+	bh=IGYPDPcYep+8uLkRCnClRqRouAEuvGowVDAgqlggXw0=;
+	b=HXGpsmwqOWNq20dXkSkvjMQ7+drf5NOKlHOVquCMjMi0DUd/9wExhL6/CtwsQo+f0x
+	ZNgTD1GGjrgAIYGjsvtpYFuEcHYBm7vxKtVm/jRMvPZd0tTnV32q6cDxPFgZpzM3bNuV
+	JozXAFFTUQ/dbnQ3+0zch3aQCjqVH+9JPL2NUriAWGNQqSJ7lrk/MU8xnF4+OTI8URkJ
+	tcy5vzQ7VBT8aKpeJZqTHrNNKKKLw4HdVrSq4FkGP+KUaDbMOK+8Ibw2bFiEWYpnhN4m
+	RavOwBD5JeAUyEZiXP/HX49mHksg1Tkk1DOxQsTs9OGCikFUz3j2Cpr4BJjDqiQj6KTZ
+	sB7g==
+X-Received: by 10.180.211.83 with SMTP id na19mr888084wic.29.1423779720296;
+	Thu, 12 Feb 2015 14:22:00 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	dj4sm7436842wjc.13.2015.02.12.14.20.54
+	by mx.google.com with ESMTPSA id c4sm317502wik.0.2015.02.12.14.21.59
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 14:20:54 -0800 (PST)
+	Thu, 12 Feb 2015 14:21:59 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 12 Feb 2015 23:20:59 +0100
-To: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <20150212222059.GI2272@jama>
-References: <1422971047-17965-1-git-send-email-gary@mlbassoc.com>
-	<20150212183043.GF2272@jama> <54DD1C8B.90205@mlbassoc.com>
+Date: Thu, 12 Feb 2015 23:22:04 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150212222204.GJ2272@jama>
+References: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
+	<1423776119-14981-2-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <54DD1C8B.90205@mlbassoc.com>
+In-Reply-To: <1423776119-14981-2-git-send-email-schnitzeltony@googlemail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] mplayer2: Remove blacklist
+Subject: Re: [PATCH 01/19] libmbim: initial add 1.12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,95 +47,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2015 22:20:57 -0000
-X-Groupsio-MsgNum: 54238
+X-List-Received-Date: Thu, 12 Feb 2015 22:22:00 -0000
+X-Groupsio-MsgNum: 54239
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="itqfrb9Qq3wY07cp"
+	protocol="application/pgp-signature"; boundary="8jNwmpfkpox/fiJK"
 Content-Disposition: inline
 
---itqfrb9Qq3wY07cp
-Content-Type: text/plain; charset=us-ascii
+--8jNwmpfkpox/fiJK
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 12, 2015 at 02:35:07PM -0700, Gary Thomas wrote:
-> On 2015-02-12 11:30, Martin Jansa wrote:
-> > On Tue, Feb 03, 2015 at 06:44:07AM -0700, Gary Thomas wrote:
-> >> mplayer2 no longer needs to be blacklisted as OE-core has moved
-> >> to libav_9.16
-> >
-> > Please fix following issues before blacklisting it:
-> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libpostproc,
-> > but it isn't a build dependency? [build-deps]
-> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libvorbis, but
-> > it isn't a build dependency? [build-deps]
-> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libxscrnsaver,
-> > but it isn't a build dependency? [build-deps]
-> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on mpg123, but it
-> > isn't a build dependency? [build-deps]
+On Thu, Feb 12, 2015 at 10:21:41PM +0100, Andreas M=FCller wrote:
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb | 15 ++++++++++++=
++++
+>  1 file changed, 15 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb
 >=20
-> This must be an inferred dependency as mpg123 is not in meta-oe, but
-> rather meta-multimedia and it is possible to build mplayer using only
-> meta-oe and not meta-multimedia.  How should that be handled?
+> diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb b/met=
+a-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb
+> new file mode 100644
+> index 0000000..17cfba2
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY =3D "libmbim is a glib-based library for talking to WWAN modems =
+and devices which speak the Mobile Interface Broadband Model (MBIM) protoco=
+l"
 
-PACKAGECONFIG[mpg123] which isn't enabled by default (so that people
-with meta-multimedia can enable it if they want and by default it's
-explicitly disabled for everybody
+SUMMARY should be short, please change to short SUMMARY + longer
+DESCRIPTION.
 
-> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on portaudio-v19,
-> > but it isn't a build dependency? [build-deps]
-> >
-> >> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-> >> ---
-> >>   meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 --
-> >>   1 file changed, 2 deletions(-)
-> >>
-> >> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta=
--oe/recipes-multimedia/mplayer/mplayer2_git.bb
-> >> index 7c04ff1..089aa15 100644
-> >> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-> >> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-> >> @@ -13,8 +13,6 @@ RCONFLICTS_${PN} =3D "mplayer"
-> >>   LICENSE =3D "GPLv3"
-> >>   LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd32239bcb673463ab874e80d4=
-7fae504"
-> >>
-> >> -PNBLACKLIST[mplayer2] ?=3D "Requires newer libav which has negative D=
-_P"
-> >> -
-> >>   SRC_URI =3D "git://repo.or.cz/mplayer.git \
-> >>       file://0001-configure-don-t-disable-ASS-support-when-explicitly-=
-=2Epatch \
-> >>   "
-> >> --
-> >> 1.9.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+> +HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/libmbim/"
+> +LICENSE =3D "GPLv2 & LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D " \
+> +    file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263 \
+> +    file://COPYING.LIB;md5=3D4fbd65380cdd255951079008b364516c \
+> +"
+> +
+> +DEPENDS =3D "glib-2.0 udev"
+> +
+> +inherit autotools pkgconfig
+> +
+> +SRC_URI =3D "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar=
+=2Exz"
+> +SRC_URI[md5sum] =3D "921fb5ab3f13f1e00833e009d8f3b4f6"
+> +SRC_URI[sha256sum] =3D "949351d3e3d69b81e40a49f1d187944c26149e0647a415f0=
+227ccdc112047b29"
+> --=20
+> 1.9.3
 >=20
 > --=20
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---itqfrb9Qq3wY07cp
+--8jNwmpfkpox/fiJK
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlTdJ0sACgkQN1Ujt2V2gBwD4wCgr+uUOJ9PCQ24VF9wvMpX9LLn
-SYkAn2YISqQ/2Rcxzj2aAJExXrHmXqyz
-=LjTw
+iEYEARECAAYFAlTdJ4wACgkQN1Ujt2V2gBwNHACeM+AluOgV2eIBf4hH1iv0ajAU
+NhoAnjjalqMmqN3sCptqUtBZ611+TUmG
+=pHA7
 -----END PGP SIGNATURE-----
 
---itqfrb9Qq3wY07cp--
+--8jNwmpfkpox/fiJK--
