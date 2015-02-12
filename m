@@ -1,38 +1,27 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id AB0A373310
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 6048B72374
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 03:26:47 +0000 (UTC)
-Received: by iecrd18 with SMTP id rd18so8987175iec.8
+	Thu, 12 Feb 2015 06:24:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="57485633"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Feb 2015 14:21:13 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t1C6O0rK010389
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Feb 2015 19:26:46 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=mrMa6jQXCpWRFdJwetNbpPEtKE70AGKbWsf/aTYqvMU=;
-	b=ZZe0GmoBlhdUKofVst7VTU9V2UpJgVC+CsBVIoZc+ajkTVpUeAb7Lq8VJp/vLD+BqP
-	BD2i62HDr0K4oqT2G6VTDVol7XDBFPOXLA0cqRyTEK0GKnV8vT4vS9ILLSnAffvFZQYZ
-	hHaGzwPgcUbNsJqKulv35KIu7GNeY+gPUcsh3pzoVc3v2dmr93hMSj63RGQ02ZTUHtZe
-	GeiG+XLTMisFD+PPmUw7TViMFn0khzC/Oz4UN2522wUYPYubRTOKbL+PG795M4dnE5FP
-	yO/eAe5pDQKo0xNQruD+QD62A29+Kgil99hxieefbkiw+gPOjJ7toRR1nrcPFMATOM2m
-	ziOQ==
-X-Gm-Message-State: ALoCoQlMf8Zm54bYoGWuhQrVdhiMcKFLIY4P5xWCk0z0Y0kSjz1T8fdeRxhxgAkOTm7ab5cRNOf9
-X-Received: by 10.107.164.221 with SMTP id d90mr2327333ioj.13.1423711606630;
-	Wed, 11 Feb 2015 19:26:46 -0800 (PST)
-Received: from mir.deserted.net (24-246-4-250.cable.teksavvy.com.
-	[24.246.4.250])
-	by mx.google.com with ESMTPSA id l6sm458953igv.8.2015.02.11.19.26.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 11 Feb 2015 19:26:45 -0800 (PST)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Feb 2015 22:27:34 -0500
-Message-Id: <1423711654-4649-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] postfix: Update SRC_URI
+	Thu, 12 Feb 2015 14:24:00 +0800
+Received: from localhost.localdomain (10.167.226.63) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 12 Feb 2015 14:24:58 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 12 Feb 2015 14:24:10 +0800
+Message-ID: <1423722250-1839-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.63]
+Subject: [meta-oe][PATCH] logwatch_7.4.1.bb: Bug fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,35 +35,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2015 03:26:55 -0000
+X-List-Received-Date: Thu, 12 Feb 2015 06:24:47 -0000
+Content-Type: text/plain
 
-A significant number of the postfix mirrors are offline, including
-Wietse's own site.  Swap in one of the functional mirrors.
+The "ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sysconfdir}/cron.daily/0logwatch" is wrong.
+it will lead to the logwatch unable to be used. so delete it.
 
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
+ meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-Considering the number of mirrors available for postfix, I considered defining a
-POSTFIX_MIRRORS variable and using that in the SRC_URI, but that seems like
-over-kill for something that is likely not going to be a long-term issue.
-
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index e73f2f0..1428114 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -15,7 +15,7 @@ DEPENDS_virtclass-native = "virtual/db-native openssl-native libpcre-native"
- LICENSE = "IPL-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=64375f37431336ea1b1b3005fe3fa354"
+diff --git a/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb b/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
+index 650d6f8..001b3de 100644
+--- a/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
++++ b/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
+@@ -36,7 +36,6 @@ do_install() {
  
--SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
-+SRC_URI = "http://cdn.postfix.johnriley.me/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
-     file://makedefs.patch \
-     file://install.patch \
-     file://main.cf_2.0 \
+     install -m 0755 -d ${D}${sysconfdir}/cron.daily
+     install -m 0755 -d ${D}${sbindir}
+-    ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sysconfdir}/cron.daily/0logwatch
+     ln -sf ../..${datadir}/logwatch/scripts/logwatch.pl ${D}${sbindir}/logwatch
+     cat > ${D}${sysconfdir}/cron.daily/0logwatch <<EOF
+     DailyReport=\`grep -e "^[[:space:]]*DailyReport[[:space:]]*=[[:space:]]*" /usr/share/logwatch/default.conf/logwatch.conf | head -n1 | sed -e "s|^\s*DailyReport\s*=\s*||"\`
 -- 
-1.9.1
+1.8.4.2
 
 
