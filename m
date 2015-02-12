@@ -1,39 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E49F4606E8
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CF5CA733BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 18:30:39 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id l18so11968692wgh.8
+	Thu, 12 Feb 2015 18:40:51 +0000 (UTC)
+Received: by mail-wi0-f179.google.com with SMTP id hi2so6625196wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 10:30:40 -0800 (PST)
+	Thu, 12 Feb 2015 10:40:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=snHOpVyyx7QfOBDnTX+wkUB5Br/uVg4qkkUM/CCD/Qw=;
-	b=wvFICXFeJKiahPkxNeyUywxNtMm5KJAaTzKR3FMmv7JgTgTa2r4qxvt4gUbe8BcUd/
-	Bie2J4nL3hDh/dja+Sl8VARS8j0jYd7pPgpCnJl+q4EjHVyDugUk6Hygk8E6DFN7c0dN
-	0w0c0CGkclwN5HjOzWj/OZkTQK8vHELw0dOaB51Q8JwDa6kGKS4vCAgzi21ku0Q/olr7
-	Bihi9XO0gpYqe0maW5Rr2QcUmRX8vooLLlH68MBNbL37/J79X41SRWCBLH2n8Wru3Apn
-	wP2+23ontn2SUSNOuHLRfrNzDeonz3jgJqtY6o5lVI2RNA6hVJqY/aH6drLZypjKJJdU
-	XnPQ==
-X-Received: by 10.180.74.52 with SMTP id q20mr9751930wiv.0.1423765840400;
-	Thu, 12 Feb 2015 10:30:40 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=WVr+U8VXY9igYLbwc3ubmStgBMzv+GMvKGBdxiI9C78=;
+	b=fAI2kP3F6ty5eb6h4vvAkDfkst+DwYtrKri9RFModYMu7o/PWPPtJs/Xf/fNK+2681
+	ecM0nWR1IObVF9z0aGVNDF/O/vhbZntUL1ONV414Bo+cudRpt2o02GBbqNUfGnkWDcIC
+	VmilrhXvVGiMxaMfkMvyDkJUOqtUaJ6QOAVxxyI53CWuCYmeWfruycC/5GkDLlZEaKvN
+	fQCrNkR02GmqYUd7s/zQCT6FMllZgrGEEyd5HWwVF+JGrT/+LBG2lQ1UBAZ6zrWFajQL
+	RRIGre1Y79Z5mJ+YYTT3J5xHVdznWixHg45y31wyHSAPJdoXdZrcG/cWz0bwsyz5Njhi
+	F8JA==
+X-Received: by 10.180.37.197 with SMTP id a5mr8934727wik.2.1423766451263;
+	Thu, 12 Feb 2015 10:40:51 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	di11sm3613730wid.8.2015.02.12.10.30.39
+	dj4sm6786106wjc.13.2015.02.12.10.40.50
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 10:30:39 -0800 (PST)
+	Thu, 12 Feb 2015 10:40:50 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 12 Feb 2015 19:30:43 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150212183043.GF2272@jama>
-References: <1422971047-17965-1-git-send-email-gary@mlbassoc.com>
-MIME-Version: 1.0
-In-Reply-To: <1422971047-17965-1-git-send-email-gary@mlbassoc.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: Re: [meta-oe][PATCH] mplayer2: Remove blacklist
+Date: Thu, 12 Feb 2015 19:40:51 +0100
+Message-Id: <1423766452-23118-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.3.0
+Subject: [meta-efl][PATCH 1/2] efl, elementary, emotion-generic-players, evas-generic-loaders: Upgrade to 1.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,76 +43,253 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2015 18:30:46 -0000
-X-Groupsio-MsgNum: 54213
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1Ow488MNN9B9o/ov"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Feb 2015 18:40:52 -0000
 
---1Ow488MNN9B9o/ov
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* announcement:
+  https://phab.enlightenment.org/phame/live/3/post/efl_1_13_is_out/
 
-On Tue, Feb 03, 2015 at 06:44:07AM -0700, Gary Thomas wrote:
-> mplayer2 no longer needs to be blacklisted as OE-core has moved
-> to libav_9.16
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...igure.ac-Don-t-check-for-Xprint-extension.patch |  8 +++---
+ .../efl/efl/0002-evas_3d-Add-Eet.h-includes.patch  | 26 +++++++++----------
+ ..._cc-Avoid-segfault-when-strcmp-NULL-items.patch | 30 ++++++++++++++++++++++
+ .../efl/{efl_1.12.2.bb => efl_1.13.0.bb}           |  5 ++--
+ .../{elementary_1.12.2.bb => elementary_1.13.0.bb} |  4 +--
+ .../efl/emotion-generic-players_1.12.0.bb          |  8 ------
+ .../efl/emotion-generic-players_1.13.0.bb          |  8 ++++++
+ .../recipes-efl/efl/evas-generic-loaders_1.12.0.bb |  8 ------
+ .../recipes-efl/efl/evas-generic-loaders_1.13.0.bb |  8 ++++++
+ 9 files changed, 68 insertions(+), 37 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/efl/efl/0003-edje_cc-Avoid-segfault-when-strcmp-NULL-items.patch
+ rename meta-efl/recipes-efl/efl/{efl_1.12.2.bb => efl_1.13.0.bb} (89%)
+ rename meta-efl/recipes-efl/efl/{elementary_1.12.2.bb => elementary_1.13.0.bb} (79%)
+ delete mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.12.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.12.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.0.bb
 
-Please fix following issues before blacklisting it:
-mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libpostproc,
-but it isn't a build dependency? [build-deps]
-mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libvorbis, but
-it isn't a build dependency? [build-deps]
-mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libxscrnsaver,
-but it isn't a build dependency? [build-deps]
-mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on mpg123, but it
-isn't a build dependency? [build-deps]
-mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on portaudio-v19,
-but it isn't a build dependency? [build-deps]
+diff --git a/meta-efl/recipes-efl/efl/efl/0001-configure.ac-Don-t-check-for-Xprint-extension.patch b/meta-efl/recipes-efl/efl/efl/0001-configure.ac-Don-t-check-for-Xprint-extension.patch
+index f34b957..fa85f81 100644
+--- a/meta-efl/recipes-efl/efl/efl/0001-configure.ac-Don-t-check-for-Xprint-extension.patch
++++ b/meta-efl/recipes-efl/efl/efl/0001-configure.ac-Don-t-check-for-Xprint-extension.patch
+@@ -1,4 +1,4 @@
+-From a7ee62a2e90a346bf9aaf9260c918d87e21cfba6 Mon Sep 17 00:00:00 2001
++From 27aedcdcdafbf079dc022bab72ec309cf7db3172 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Fri, 10 Jan 2014 17:07:13 +0100
+ Subject: [PATCH 1/3] configure.ac: Don't check for Xprint extension
+@@ -11,10 +11,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 1 deletion(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 779763a..57d3601 100644
++index c108b1b..f019bfc 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -3445,7 +3445,6 @@ if test "x${want_x11_xlib}" = "xyes" ; then
++@@ -3474,7 +3474,6 @@ if test "x${want_x11_xlib}" = "xyes" ; then
+     ECORE_CHECK_X_EXTENSION([Xdpms], [dpms.h], [Xext], [DPMSQueryExtension])
+     ECORE_CHECK_X_EXTENSION([Xfixes], [Xfixes.h], [Xfixes], [XFixesExpandRegion])
+     ECORE_CHECK_X_EXTENSION([Xinerama], [Xinerama.h], [Xinerama], [XineramaQueryScreens])
+@@ -23,5 +23,5 @@ index 779763a..57d3601 100644
+     ECORE_CHECK_X_EXTENSION([Xrender], [Xrender.h], [Xrender], [XRenderFindVisualFormat])
+     ECORE_CHECK_X_EXTENSION([Xtest], [XTest.h], [Xtst], [XTestFakeKeyEvent])
+ -- 
+-2.1.3
++2.3.0
+ 
+diff --git a/meta-efl/recipes-efl/efl/efl/0002-evas_3d-Add-Eet.h-includes.patch b/meta-efl/recipes-efl/efl/efl/0002-evas_3d-Add-Eet.h-includes.patch
+index 9847c07..aa7fd4b 100644
+--- a/meta-efl/recipes-efl/efl/efl/0002-evas_3d-Add-Eet.h-includes.patch
++++ b/meta-efl/recipes-efl/efl/efl/0002-evas_3d-Add-Eet.h-includes.patch
+@@ -1,4 +1,4 @@
+-From 9db1f2f9dfe785e3a42445b766e7f4736821264a Mon Sep 17 00:00:00 2001
++From b3cbe31c38a088af7b0dade82545475fc9b72492 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Tue, 2 Dec 2014 12:21:10 +0100
+ Subject: [PATCH 2/3] evas_3d: Add Eet.h includes
+@@ -8,9 +8,9 @@ Subject: [PATCH 2/3] evas_3d: Add Eet.h includes
+ 
+ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+ ---
+- src/lib/evas/canvas/evas_3d_eet.c             | 1 +
+- src/lib/evas/canvas/evas_3d_mesh_loader_eet.c | 1 +
+- src/lib/evas/canvas/evas_3d_mesh_saver_eet.c  | 1 +
++ src/lib/evas/canvas/evas_3d_eet.c                        | 1 +
++ src/modules/evas/model_loaders/eet/evas_model_load_eet.c | 1 +
++ src/modules/evas/model_savers/eet/evas_model_save_eet.c  | 1 +
+  3 files changed, 3 insertions(+)
+ 
+ diff --git a/src/lib/evas/canvas/evas_3d_eet.c b/src/lib/evas/canvas/evas_3d_eet.c
+@@ -22,10 +22,10 @@ index 1515f5a..a438217 100644
+  #include <stdio.h>
+  #include "evas_common_private.h"
+  #include "evas_private.h"
+-diff --git a/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c b/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c
+-index 26c3569..a93efca 100644
+---- a/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c
+-+++ b/src/lib/evas/canvas/evas_3d_mesh_loader_eet.c
++diff --git a/src/modules/evas/model_loaders/eet/evas_model_load_eet.c b/src/modules/evas/model_loaders/eet/evas_model_load_eet.c
++index 815b9f1..bff2cea 100644
++--- a/src/modules/evas/model_loaders/eet/evas_model_load_eet.c
+++++ b/src/modules/evas/model_loaders/eet/evas_model_load_eet.c
+ @@ -3,6 +3,7 @@
+  #endif
+  
+@@ -34,10 +34,10 @@ index 26c3569..a93efca 100644
+  #include <stdio.h>
+  #include "evas_common_private.h"
+  #include "evas_private.h"
+-diff --git a/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c b/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c
+-index c801ac1..0a4d269 100644
+---- a/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c
+-+++ b/src/lib/evas/canvas/evas_3d_mesh_saver_eet.c
++diff --git a/src/modules/evas/model_savers/eet/evas_model_save_eet.c b/src/modules/evas/model_savers/eet/evas_model_save_eet.c
++index e445dca..2e1cf4e 100644
++--- a/src/modules/evas/model_savers/eet/evas_model_save_eet.c
+++++ b/src/modules/evas/model_savers/eet/evas_model_save_eet.c
+ @@ -2,6 +2,7 @@
+     #include "config.h"
+  #endif
+@@ -47,5 +47,5 @@ index c801ac1..0a4d269 100644
+  #include "evas_common_private.h"
+  #include "evas_private.h"
+ -- 
+-2.1.3
++2.3.0
+ 
+diff --git a/meta-efl/recipes-efl/efl/efl/0003-edje_cc-Avoid-segfault-when-strcmp-NULL-items.patch b/meta-efl/recipes-efl/efl/efl/0003-edje_cc-Avoid-segfault-when-strcmp-NULL-items.patch
+new file mode 100644
+index 0000000..55d7b54
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/efl/0003-edje_cc-Avoid-segfault-when-strcmp-NULL-items.patch
+@@ -0,0 +1,30 @@
++From 84259714c2376fdb919299e8e01af1ccc6fbe2c0 Mon Sep 17 00:00:00 2001
++From: Stefan Schmidt <s.schmidt@samsung.com>
++Date: Thu, 12 Feb 2015 15:24:27 +0100
++Subject: [PATCH 3/3] edje_cc: Avoid segfault when strcmp NULL items
++
++Martin reported a porblem with one of the SHR project edc files after an upgrade
++to 1.13. The segfault itself is easy enough to fix here but I think there might
++be other problems with the edc after this segfault is gone. We will see.
++
++Fixes T2106
++---
++ src/bin/edje/edje_cc_out.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/bin/edje/edje_cc_out.c b/src/bin/edje/edje_cc_out.c
++index 4f582c7..bc85444 100755
++--- a/src/bin/edje/edje_cc_out.c
+++++ b/src/bin/edje/edje_cc_out.c
++@@ -386,7 +386,7 @@ check_source_links(Edje_Part_Collection *pc, Edje_Part *ep, Eet_File *ef, Eina_L
++    EINA_LIST_FOREACH(edje_collections, l, pc_source)
++      {
++         /* Find sourced group */
++-        if (strcmp(ep->source, pc_source->part) == 0)
+++        if (ep->source && pc_source->part && strcmp(ep->source, pc_source->part) == 0)
++           {
++              /* Go through every part to find parts with type GROUP */
++              for (i = 0; i < pc_source->parts_count; ++i)
++-- 
++2.3.0
++
+diff --git a/meta-efl/recipes-efl/efl/efl_1.12.2.bb b/meta-efl/recipes-efl/efl/efl_1.13.0.bb
+similarity index 89%
+rename from meta-efl/recipes-efl/efl/efl_1.12.2.bb
+rename to meta-efl/recipes-efl/efl/efl_1.13.0.bb
+index 0d5b090..b243b81 100644
+--- a/meta-efl/recipes-efl/efl/efl_1.12.2.bb
++++ b/meta-efl/recipes-efl/efl/efl_1.13.0.bb
+@@ -4,10 +4,11 @@ SRC_URI = "\
+     ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+     file://0001-configure.ac-Don-t-check-for-Xprint-extension.patch \
+     file://0002-evas_3d-Add-Eet.h-includes.patch \
++    file://0003-edje_cc-Avoid-segfault-when-strcmp-NULL-items.patch \
+ "
+ 
+-SRC_URI[md5sum] = "27b8578e5797ee2c484d886fb49704f2"
+-SRC_URI[sha256sum] = "dc4a3fe448e0a8019030fe7c045de30d9ac1e92033620fbfbefb761c3ba9ddce"
++SRC_URI[md5sum] = "c73f00e1e25b3b660e15ef754c76541d"
++SRC_URI[sha256sum] = "7ff797d4cd01143edc1258a287be3ddfb11264f0b855878d8f5ad5129dee9357"
+ 
+ # Temporary disable until error like the one following are fixed
+ # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
+diff --git a/meta-efl/recipes-efl/efl/elementary_1.12.2.bb b/meta-efl/recipes-efl/efl/elementary_1.13.0.bb
+similarity index 79%
+rename from meta-efl/recipes-efl/efl/elementary_1.12.2.bb
+rename to meta-efl/recipes-efl/efl/elementary_1.13.0.bb
+index 9e6f2ea..e7be246 100644
+--- a/meta-efl/recipes-efl/efl/elementary_1.12.2.bb
++++ b/meta-efl/recipes-efl/efl/elementary_1.13.0.bb
+@@ -8,8 +8,8 @@ SRC_URI = "\
+ # these paths aren't passed in -native build
+ SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
+ 
+-SRC_URI[md5sum] = "b01329104e8eb61be1581e24a1951eaf"
+-SRC_URI[sha256sum] = "b1b84dd061b6e93f38bbba4c91ea4c9b5de5d190828b5c00fb051a6e61834b62"
++SRC_URI[md5sum] = "e8464cc2d89585cfe189584c7081845b"
++SRC_URI[sha256sum] = "52f1b4304f22156ab53d2d13b8d8f15c58a110a3bc3f31a13fc357eb9527778c"
+ 
+ # autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
+ # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
+diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.12.0.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.12.0.bb
+deleted file mode 100644
+index 1e1bb8f..0000000
+--- a/meta-efl/recipes-efl/efl/emotion-generic-players_1.12.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "fb67cd4e0c6f13da9cdd864763217a59"
+-SRC_URI[sha256sum] = "2f2b3c60b113bb637c6b40b575ceffe4055aa424f4585c64ddef6638dbc2a0da"
+diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb
+new file mode 100644
+index 0000000..e42c516
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "36e5fc6a2bc83b1ab90c5c72b344f00e"
++SRC_URI[sha256sum] = "23a3966d38cafece2c39d1e9904f26da11b9b282676f2d1fd8e54807251b363e"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.12.0.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.12.0.bb
+deleted file mode 100644
+index c172895..0000000
+--- a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.12.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "d60282b9cfad5336e75264767be07179"
+-SRC_URI[sha256sum] = "c531c82845b656cb8ea8e2db1e413509d9b4558450be6c5ee27da0cdc781376e"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.0.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.0.bb
+new file mode 100644
+index 0000000..cae8df7
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.0.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "45df9e4816ceba40219db0167c549e1e"
++SRC_URI[sha256sum] = "c3bcb7d418b8cea79bbaf0731d008e527697b44239ff6b69064df785ca94df9b"
+-- 
+2.3.0
 
-> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-> ---
->  meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 2 --
->  1 file changed, 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe=
-/recipes-multimedia/mplayer/mplayer2_git.bb
-> index 7c04ff1..089aa15 100644
-> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
-> @@ -13,8 +13,6 @@ RCONFLICTS_${PN} =3D "mplayer"
->  LICENSE =3D "GPLv3"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-> =20
-> -PNBLACKLIST[mplayer2] ?=3D "Requires newer libav which has negative D_P"
-> -
->  SRC_URI =3D "git://repo.or.cz/mplayer.git \
->      file://0001-configure-don-t-disable-ASS-support-when-explicitly-.pat=
-ch \
->  "
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---1Ow488MNN9B9o/ov
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlTc8VMACgkQN1Ujt2V2gBzDNACgsJrapWyGFgkbHf2X1APf0Vlh
-wmEAn1nkBzAGQKl4V6yMC1xcnYl4vqcy
-=KalG
------END PGP SIGNATURE-----
-
---1Ow488MNN9B9o/ov--
