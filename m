@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id EC3C0733FC
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 607AB733FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 21:22:30 +0000 (UTC)
-Received: by mail-we0-f171.google.com with SMTP id p10so12865024wes.2
+	Thu, 12 Feb 2015 21:22:29 +0000 (UTC)
+Received: by mail-wi0-f173.google.com with SMTP id bs8so7608069wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 13:22:31 -0800 (PST)
+	Thu, 12 Feb 2015 13:22:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=j5hsNX64xyzq1sZ9ne5twU4UH8iOaAGYMGiUj+cCgGk=;
-	b=Yiru6hpbYN7mCHAu0wUlw4oR9gFrXm2lyG4UsnY9NUXalfhYc+2RFJ0owBVcVdjKEi
-	U+Lx3Bh9PvqIHip59Jja1JNtUqVXj/Y8ggbd1RGUw4qUw3QaWaY1rRT3ey9tbGR6wT94
-	lmHgiT7pVOHEBGTL/48swMbmpBJ61cvXqwL0TCwHCHXw8vC6O4om3pNU1rhFo5lixV1q
-	TjF3Wx+Zlt2C0V4BqiVpSpC7bvqTxczi+g02r3PVMqGDXTSYyA6UB4U5pFOIxpEmw/vN
-	WoK3SAj8F8jVFwZGn35sVMsrBIeIkebctwqhD2aGQ08iAzaMnnalqNAVekAw2YfvIeRj
-	wbNg==
-X-Received: by 10.180.207.237 with SMTP id lz13mr706718wic.15.1423776151532;
-	Thu, 12 Feb 2015 13:22:31 -0800 (PST)
+	bh=7fIN0aI4gGTW4pVo2pHtc1MkQDMExtWx0eqpczJ2I3U=;
+	b=XMyrt+Hae0WZRkMx45fPX4JAOgHjTr+MaSFBIAQ8eZ7BW7+nzkNK6Vp7fpHLH/sAVP
+	6EnooWBwZM645wA+tH6Gw7sMBkDJmzCWbLLGMDaYrbVmnztUh1r/3k75zsT2XyhI00OL
+	KoeHrYkAt9wdnaswQv8NH278W4fnWKjKqyy4617aOvoe9hRRk7n8VeDeItQflmjtQJ+A
+	aiv5xJFzMHPXfa8AnFavaw+fQfzELeCLja+FNifqMpPe3HMGNUhXYGpfP81R2OSU4lRN
+	UwvGmIntybFXD9q9gcaoxsMA8LihXAdU451VmrhYkYFla7F0OH748ylmGalEL0kctd8c
+	uiqA==
+X-Received: by 10.180.99.42 with SMTP id en10mr374924wib.26.1423776150154;
+	Thu, 12 Feb 2015 13:22:30 -0800 (PST)
 Received: from localhost.localdomain (p5B0A0430.dip0.t-ipconnect.de.
 	[91.10.4.48])
-	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.30
+	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 13:22:30 -0800 (PST)
+	Thu, 12 Feb 2015 13:22:29 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Feb 2015 22:21:53 +0100
-Message-Id: <1423776119-14981-14-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 12 Feb 2015 22:21:52 +0100
+Message-Id: <1423776119-14981-13-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 13/19] xfce4-eyes-plugin: update to 4.4.3
+Subject: [PATCH 12/19] xfce4-netload-plugin: update to 1.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,27 +54,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../eyes/{xfce4-eyes-plugin_4.4.2.bb => xfce4-eyes-plugin_4.4.3.bb}   | 4 ++--
+ .../{xfce4-netload-plugin_1.2.0.bb => xfce4-netload-plugin_1.2.4.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.4.2.bb => xfce4-eyes-plugin_4.4.3.bb} (68%)
+ rename meta-xfce/recipes-panel-plugins/netload/{xfce4-netload-plugin_1.2.0.bb => xfce4-netload-plugin_1.2.4.bb} (66%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.2.bb b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.3.bb
-similarity index 68%
-rename from meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.2.bb
-rename to meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.3.bb
-index f1ed6c7..2ac63f9 100644
---- a/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/eyes/xfce4-eyes-plugin_4.4.3.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.0.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.4.bb
+similarity index 66%
+rename from meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.0.bb
+rename to meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.4.bb
+index ef1039b..c9f7a2a 100644
+--- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.0.bb
++++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.4.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=35a7203c41b86d15546dddc05995f97f"
  
  inherit xfce-panel-plugin
  
--SRC_URI[md5sum] = "1ef352c68dd8929c9e8743200b758b3c"
--SRC_URI[sha256sum] = "dad102fedd0d9e6df45338a018387b2aacaf24b05eb798275be0dfc05ffa3021"
-+SRC_URI[md5sum] = "86ae8bce96e028921fcc0ee8424ff565"
-+SRC_URI[sha256sum] = "4b9a335bcfdb8e4e2f6aedb3556575e5331f181912565f4289e354126230817c"
- 
- FILES_${PN} += "${datadir}/xfce4/eyes"
+-SRC_URI[md5sum] = "05180d60ed347029dc125368c1d4406e"
+-SRC_URI[sha256sum] = "c824f09e2d3860011b44d8272d661c458237786828027f3d9ad6a1d4f0096845"
++SRC_URI[md5sum] = "ce53e1135e4bff5afcd899627110bd11"
++SRC_URI[sha256sum] = "fface918822c012d806717116566e54947ad7613b9290b45a18e2d5ffb8730d3"
 -- 
 1.9.3
 
