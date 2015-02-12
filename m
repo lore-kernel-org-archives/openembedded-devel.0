@@ -1,40 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 7955473419
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BF9A733B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 20:44:08 +0000 (UTC)
-Received: by mail-wi0-f169.google.com with SMTP id em10so7864924wid.0
+	Thu, 12 Feb 2015 21:22:11 +0000 (UTC)
+Received: by mail-wg0-f51.google.com with SMTP id y19so12827325wgg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 12:44:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=JuYvhNBGuX32th/TGB9NGq8B8gvJ3Kf4jvyje7onKeE=;
-	b=QeG22ef0AHz/KNQW5Hzn0oT+xSOuG+tQnIR3xdhjSe2sd2aTBsPX/rOJQ4ehZdJEw5
-	XXj+Wi5aqsq7pw2j6XqDayPe7EV+/ZQI8R7hUVVieY80gmsbI1ichN2OelDL/YwIIMsx
-	DFJtu17+mEsmhqetJOz5l+ULYFFkdIx6SYXTPdcX5CB18IeXsBA+kSFX+rd1DM6Bmdaa
-	G6lg5DTH8a3orduYCOD7q8i3ZePnsjhzm/u6IAZSNsZUcBzxXPX6L/D3jTYCt2sa2GsD
-	dQEjR8AazAjr6IXfL/Olh/McUpPe3ZoJQwS9tCWuVMEWTPggUmO77JF4kkYt31qU78Bm
-	o3aA==
-X-Received: by 10.194.6.228 with SMTP id e4mr11360223wja.63.1423773849805;
-	Thu, 12 Feb 2015 12:44:09 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	kr5sm2223823wjc.1.2015.02.12.12.44.08
+	Thu, 12 Feb 2015 13:22:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=b1fgNSEMaIn7kfq3O/lN2lY+cuSK7In+s2qCoFfdrmU=;
+	b=vIlF+dEUc9dtdrUQKTaFcxwRF8s+183DH4cpZZc8XKs6D5484TYfJEhTPtDNBhvk8M
+	gBs+EO/ZDMG2T4Gmp9jznb4q60e7Pdg1JXV5WrQ089ukhh4JL2Iwm88EfTxDlV22jfwZ
+	TE1u3tlxP9qiFQJmwzdJxIAS2PBsiVMuzOuCf3ByFWyqKa2/fOWso/wYQ87n1r3Py78/
+	Vra0yPZgyNLJwW3RAvwWuadg/shxbUO0n0BObaSKt/llzbJtEJBhBG8cuTtVnoBbTRFQ
+	AFBUZEKJEqZTmzrUGjc707UC0CvZ8Ly+Na8xgBweiKjdz57TX3E4f+20Qc7VVzgr7Rd+
+	fuJA==
+X-Received: by 10.181.13.4 with SMTP id eu4mr10054371wid.41.1423776132047;
+	Thu, 12 Feb 2015 13:22:12 -0800 (PST)
+Received: from localhost.localdomain (p5B0A0430.dip0.t-ipconnect.de.
+	[91.10.4.48])
+	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.10
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 12:44:09 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 12 Feb 2015 21:44:13 +0100
+	Thu, 12 Feb 2015 13:22:11 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150212204413.GG2272@jama>
-References: <1423751798-25797-1-git-send-email-philip@balister.org>
+Date: Thu, 12 Feb 2015 22:21:40 +0100
+Message-Id: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
 MIME-Version: 1.0
-In-Reply-To: <1423751798-25797-1-git-send-email-philip@balister.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-python][PATCH] python-pyzmq : Add recipe for Python Zero Message Queue bindings.
+Subject: [PATCH 00/19] various adds/updates/fxes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,136 +45,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Feb 2015 20:44:13 -0000
-X-Groupsio-MsgNum: 54216
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1XWsVB21DFCvn2e8"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Feb 2015 21:22:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---1XWsVB21DFCvn2e8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 4e08e7c3a5c36c859e01e4d2168ea3e1b287bcc0:
 
-On Thu, Feb 12, 2015 at 09:36:38AM -0500, Philip Balister wrote:
-> Signed-off-by: Philip Balister <philip@balister.org>
+  snmpd: instead option -LS by -Ls (2015-02-11 21:27:29 -0500)
 
-Drop space before ":" in subject.
+are available in the git repository at:
 
-> ---
->  .../python/python-pyzmq/club-rpath-out.patch       | 26 ++++++++++++++++=
-+++++
->  .../recipes-devtools/python/python-pyzmq_14.5.0.bb | 27 ++++++++++++++++=
-++++++
->  2 files changed, 53 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python-pyzmq/club=
--rpath-out.patch
->  create mode 100644 meta-python/recipes-devtools/python/python-pyzmq_14.5=
-=2E0.bb
->=20
-> diff --git a/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-=
-out.patch b/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out=
-=2Epatch
-> new file mode 100644
-> index 0000000..2dc3b73
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-pyzmq/club-rpath-out.pat=
-ch
-> @@ -0,0 +1,26 @@
-> +diff --git a/setup.py b/setup.py
-> +index 62df445..1fdbdeb 100755
-> +--- a/setup.py
-> ++++ b/setup.py
-> +@@ -213,12 +213,6 @@ def settings_from_prefix(prefix=3DNone, bundle_libz=
-mq_dylib=3DFalse):
-> +                 pass
-> +                 # unused rpath args for OS X:
-> +                 # settings['extra_link_args'] =3D ['-Wl,-rpath','-Wl,$O=
-RIGIN/..']
-> +-            else:
-> +-                settings['runtime_library_dirs'] +=3D ['$ORIGIN/..']
-> +-        elif sys.platform !=3D 'darwin':
-> +-            settings['runtime_library_dirs'] +=3D [
-> +-                os.path.abspath(x) for x in settings['library_dirs']
-> +-            ]
-> +    =20
-> +     return settings
-> +=20
-> +@@ -592,8 +586,6 @@ class Configure(build_ext):
-> +                 pass
-> +                 # unused rpath args for OS X:
-> +                 # settings['extra_link_args'] =3D ['-Wl,-rpath','-Wl,$O=
-RIGIN/../zmq']
-> +-            else:
-> +-                settings['runtime_library_dirs'] =3D [ os.path.abspath(=
-pjoin('.', 'zmq')) ]
-> +        =20
-> +         line()
-> +         info("Configure: Autodetecting ZMQ settings...")
-> diff --git a/meta-python/recipes-devtools/python/python-pyzmq_14.5.0.bb b=
-/meta-python/recipes-devtools/python/python-pyzmq_14.5.0.bb
-> new file mode 100644
-> index 0000000..8b921b5
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-pyzmq_14.5.0.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY =3D "Pyzmq provides Zero message queue access for the Python lan=
-guage"
-> +HOMEPAGE =3D "http://zeromq.org/bindings:python"
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "BSD"
-> +LIC_FILES_CHKSUM =3D "file://COPYING.BSD;md5=3D11c65680f637c3df7f58bbc8d=
-133e96e"
-> +DEPENDS =3D "zeromq"
-> +
-> +SRC_URI =3D "https://pypi.python.org/packages/source/p/pyzmq/pyzmq-${PV}=
-=2Etar.gz \
-> +           file://club-rpath-out.patch \
-> +"
-> +SRC_URI[md5sum] =3D "8d3351a8ca2ca2a272a3f96bcb963e41"
-> +SRC_URI[sha256sum] =3D "5d6e045634456cf5496f50871fd3e3a5ede2b90433284dbf=
-e985bb67c97f77bd"
-> +
-> +S =3D "${WORKDIR}/pyzmq-${PV}"
-> +
-> +inherit setuptools pkgconfig
-> +
-> +FILES_${PN}-dbg =3D+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.deb=
-ug"
-> +
-> +do_compile_prepend() {
-> +	echo [global] > ${S}/setup.cfg
-> +	echo zmq_prefix =3D ${STAGING_DIR_HOST} >> ${S}/setup.cfg
-> +	echo have_sys_un_h =3D True >> ${S}/setup.cfg
-> +	echo skip_check_zmq =3D True >> ${S}/setup.cfg
-> +	echo libzmq_extension =3D False >> ${S}/setup.cfg
-> +	echo no_libzmq_extension =3D True >> ${S}/setup.cfg
+  https://gitorious.org/schnitzeltony-oe-meta/meta-openembedded.git patches
 
-Use 4 spaces for indentation, no tabs in meta-oe and other sane layers!
+for you to fetch changes up to d79e10f595f569a177efbd09e4778a87dbd3fed5:
 
-> +}
-> --=20
-> 2.1.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  gimp: update to 2.8.14 / fix build by not configuring with freetype-config (2015-02-12 16:09:33 +0100)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+----------------------------------------------------------------
+Andreas Müller (19):
+      libmbim: initial add 1.12.2
+      libqmi: initial add 1.12.2
+      modemmanager: update to 1.4.2
+      network-manager-applet: add PACKAGCONFIG for modemmanager - disabled by default
+      initial add xmessage 1.0.4
+      xfce4-kbdleds-plugin: Initial add 0.0.6
+      packagegroup-xfce-extended: add xfce4-kbdleds-plugin
+      xfce4-screenshooter: update to 1.8.2
+      xfce4-weather-plugin: update to 0.8.5
+      xfce4-whiskermenu-plugin: update to 1.4.2
+      xfce4-cpufreq-plugin: update to 1.1.1
+      xfce4-netload-plugin: update to 1.2.4
+      xfce4-eyes-plugin: update to 4.4.3
+      xfce4-systemload-plugin: update to 1.1.2
+      xfce4-equake-plugin: update to 1.3.6
+      xfce4-timer-plugin: initial add 1.6.0
+      packagegroup-xfce-extended: add xfce4-timer-plugin
+      gnome-bluetooth: fix build by using a valid dbus interface + unblacklist
+      gimp: update to 2.8.14 / fix build by not configuring with freetype-config
 
---1XWsVB21DFCvn2e8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+ meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb                         |   1 +
+ meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch    | 122 +++++++++++++++++++++++++++++++++++++++++++
+ meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb                                                |   8 +--
+ meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb                                                            |  15 ++++++
+ meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb                                                              |  15 ++++++
+ meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb                                                   |  39 ++++++++++++++
+ meta-oe/recipes-connectivity/networkmanager/modemmanager_0.6.0.0.bb                                               |  29 -----------
+ meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch                       |  38 ++++++++++++++
+ meta-oe/recipes-graphics/gimp/gimp/freetype.patch                                                                 |  30 -----------
+ meta-oe/recipes-graphics/gimp/{gimp_2.8.10.bb => gimp_2.8.14.bb}                                                  |  13 ++---
+ meta-oe/recipes-graphics/xorg-app/xmessage_1.0.4.bb                                                               |  10 ++++
+ meta-xfce/recipes-apps/xfce4-screenshooter/files/0001-Fix-panel-plugin-build.patch                                |  43 ----------------
+ meta-xfce/recipes-apps/xfce4-screenshooter/{xfce4-screenshooter_1.8.1.bb => xfce4-screenshooter_1.8.2.bb}         |  12 +++--
+ meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.0.bb                                             |  15 ------
+ meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.1.bb                                             |   9 ++++
+ meta-xfce/recipes-panel-plugins/equake/{xfce4-equake-plugin_1.3.5.bb => xfce4-equake-plugin_1.3.6.bb}             |   4 +-
+ meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.4.2.bb => xfce4-eyes-plugin_4.4.3.bb}                   |   4 +-
+ meta-xfce/recipes-panel-plugins/kbdleds/xfce4-kbdleds-plugin_0.0.6.bb                                             |  14 +++++
+ meta-xfce/recipes-panel-plugins/netload/{xfce4-netload-plugin_1.2.0.bb => xfce4-netload-plugin_1.2.4.bb}          |   4 +-
+ meta-xfce/recipes-panel-plugins/systemload/{xfce4-systemload-plugin_1.1.1.bb => xfce4-systemload-plugin_1.1.2.bb} |   4 +-
+ meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb                                                 |   9 ++++
+ meta-xfce/recipes-panel-plugins/weather/files/0001-Make-plugin-ready-for-met.no-locationforecast-1.2-AP.patch     | 162 ----------------------------------------------------------
+ meta-xfce/recipes-panel-plugins/weather/files/0002-Switch-to-met.no-locationforecastLTS-1.2-API-bug-109.patch     |  27 ----------
+ meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.3.bb => xfce4-weather-plugin_0.8.5.bb}          |   8 +--
+ .../{whisker/xfce4-whiskermenu-plugin_1.3.2.bb => whiskermenu/xfce4-whiskermenu-plugin_1.4.2.bb}                  |   4 +-
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb                                                |   2 +
+ 26 files changed, 304 insertions(+), 337 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth/0002-bluetooth-client-use-valid-interface-names.patch
+ create mode 100644 meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb
+ create mode 100644 meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb
+ create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
+ delete mode 100644 meta-oe/recipes-connectivity/networkmanager/modemmanager_0.6.0.0.bb
+ create mode 100644 meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch
+ delete mode 100644 meta-oe/recipes-graphics/gimp/gimp/freetype.patch
+ rename meta-oe/recipes-graphics/gimp/{gimp_2.8.10.bb => gimp_2.8.14.bb} (73%)
+ create mode 100644 meta-oe/recipes-graphics/xorg-app/xmessage_1.0.4.bb
+ delete mode 100644 meta-xfce/recipes-apps/xfce4-screenshooter/files/0001-Fix-panel-plugin-build.patch
+ rename meta-xfce/recipes-apps/xfce4-screenshooter/{xfce4-screenshooter_1.8.1.bb => xfce4-screenshooter_1.8.2.bb} (59%)
+ delete mode 100644 meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.0.bb
+ create mode 100644 meta-xfce/recipes-panel-plugins/cpufreq/xfce4-cpufreq-plugin_1.1.1.bb
+ rename meta-xfce/recipes-panel-plugins/equake/{xfce4-equake-plugin_1.3.5.bb => xfce4-equake-plugin_1.3.6.bb} (74%)
+ rename meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.4.2.bb => xfce4-eyes-plugin_4.4.3.bb} (68%)
+ create mode 100644 meta-xfce/recipes-panel-plugins/kbdleds/xfce4-kbdleds-plugin_0.0.6.bb
+ rename meta-xfce/recipes-panel-plugins/netload/{xfce4-netload-plugin_1.2.0.bb => xfce4-netload-plugin_1.2.4.bb} (66%)
+ rename meta-xfce/recipes-panel-plugins/systemload/{xfce4-systemload-plugin_1.1.1.bb => xfce4-systemload-plugin_1.1.2.bb} (70%)
+ create mode 100644 meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/files/0001-Make-plugin-ready-for-met.no-locationforecast-1.2-AP.patch
+ delete mode 100644 meta-xfce/recipes-panel-plugins/weather/files/0002-Switch-to-met.no-locationforecastLTS-1.2-API-bug-109.patch
+ rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.3.bb => xfce4-weather-plugin_0.8.5.bb} (53%)
+ rename meta-xfce/recipes-panel-plugins/{whisker/xfce4-whiskermenu-plugin_1.3.2.bb => whiskermenu/xfce4-whiskermenu-plugin_1.4.2.bb} (68%)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+-- 
+1.9.3
 
-iEYEARECAAYFAlTdEJ0ACgkQN1Ujt2V2gBw1RACfXxnODCVpYSJcYuroML4T7lIE
-ZZAAn0+MFfWQ1Y22XjPQvUepyrtdOoeQ
-=oYoQ
------END PGP SIGNATURE-----
 
---1XWsVB21DFCvn2e8--
