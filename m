@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id D1332733B3
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 46C6473459
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 21:22:33 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id bs8so7608545wib.0
+	Thu, 12 Feb 2015 21:22:35 +0000 (UTC)
+Received: by mail-we0-f170.google.com with SMTP id q59so12858094wes.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 13:22:34 -0800 (PST)
+	Thu, 12 Feb 2015 13:22:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=9jzKtA4t4fe0A0zfT1gZ4sLj1ttS9Y4o4TVXv0DRZ3U=;
-	b=tKtsw45572sFFQIQ5yHaCmcmwRrV2iQRNiUS8pUWRn6VkL2y4nTAmPUhu2Mi11dd9a
-	tQSRG6nsiuFCIQMpUFMQov3QXOTMjTypyIf686rqUo+8fjByZb5RfxQtL8YbYWyfsHTi
-	/HYb6QcxhNzodfzo0V9Wx+Zsn60/U2a9qCG62akDmnFW5GrNDYVdB286SCL3msCD9VKl
-	w42/fOw7VEV7nT9Qn5FmHpOIPx/GIqB07dSwJBDQ14LfwDEQ/rzaZalhpmubHox/UTqQ
-	eifXi+lyXQttvWzxO4peDK1l0n2U4qlkvli7Afq5XXoP+FRtaTBVlUYiXIfnGrWkqYen
-	VJnA==
-X-Received: by 10.194.190.162 with SMTP id gr2mr11881833wjc.13.1423776154763; 
-	Thu, 12 Feb 2015 13:22:34 -0800 (PST)
+	bh=I61khJiRFWYCSgksQz9z6e6R/6gDlf0NA+u6yxj08XM=;
+	b=GSHAbfU1QV2aKbfZAEnnM60GLiMLCdHAGtTSzyKJlCb624Iip/ZhFe2xZ0GpemubBJ
+	G5kBCwGuriUuxxW8wg0twIBxzs2U+rlqPxzFnkdOOYU9TQnR5xlPyKD5s8ZSuiw2Z8nm
+	wPQFosKD3MeSykLWRvGICHf5uyoFAAJhu6GSwtCvzTqonK0lYCL9JfcWXA24EWuJpK8p
+	/OKRPM9vtr8MZzHHwhFjL+VGlPLCK+ox/4UAP0kvkCUhxlVZre0yGr0HYz58sINRq/Op
+	UgMFI8cMCPlcu2Ht01JFyeoavAjTBSSGj9iNpY5A/AzxUpZc02DSQ4vPJIkH10uhqeId
+	XLAg==
+X-Received: by 10.194.191.228 with SMTP id hb4mr6589265wjc.116.1423776156198; 
+	Thu, 12 Feb 2015 13:22:36 -0800 (PST)
 Received: from localhost.localdomain (p5B0A0430.dip0.t-ipconnect.de.
 	[91.10.4.48])
-	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.33
+	by mx.google.com with ESMTPSA id fm10sm4136024wib.7.2015.02.12.13.22.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 13:22:33 -0800 (PST)
+	Thu, 12 Feb 2015 13:22:35 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Feb 2015 22:21:55 +0100
-Message-Id: <1423776119-14981-16-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 12 Feb 2015 22:21:56 +0100
+Message-Id: <1423776119-14981-17-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 15/19] xfce4-equake-plugin: update to 1.3.6
+Subject: [PATCH 16/19] xfce4-timer-plugin: initial add 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,27 +54,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-equake-plugin_1.3.5.bb => xfce4-equake-plugin_1.3.6.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/equake/{xfce4-equake-plugin_1.3.5.bb => xfce4-equake-plugin_1.3.6.bb} (74%)
+ .../recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb      | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb
 
-diff --git a/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.5.bb b/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.6.bb
-similarity index 74%
-rename from meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.5.bb
-rename to meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.6.bb
-index 76cd5d4..d4f069f 100644
---- a/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.5.bb
-+++ b/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.6.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI[md5sum] = "7c520e2f1cd0cc5e33d8346b12e31c02"
--SRC_URI[sha256sum] = "43bbc781575c357c13ac6720eb8e8485115099411d5382668e106de58ab0e416"
-+SRC_URI[md5sum] = "ee76ed3825999b24ee9c2c976d906e22"
-+SRC_URI[sha256sum] = "8129067080c8a4656063e7cde20f13fabb47b49c84ce610916f54644acb93d67"
- 
- FILES_${PN} += "${libdir}/xfce4/panel-plugins/xfce4-equake-plugin"
+diff --git a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb
+new file mode 100644
+index 0000000..67da684
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "This is a simple plugin that lets the user run an alarm at a specified time or at the end of a specified countdown period"
++HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-timer-plugin"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ae39271267fd63eb7619432ff24e7ff1"
++
++inherit xfce-panel-plugin
++
++SRC_URI[md5sum] = "3be2a4ccfb2af20441b1d25c2cea5f28"
++SRC_URI[sha256sum] = "39d7d21f099bc4219f6a6156142f0bbb8374986ee1970a9c0c8dc138b87f867c"
 -- 
 1.9.3
 
