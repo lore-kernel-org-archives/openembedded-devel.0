@@ -1,41 +1,38 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
-	[74.125.82.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 04435733DC
+Return-Path: <Daniel.MONDON@lpgsystems.com>
+Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
+	by mail.openembedded.org (Postfix) with ESMTP id 27BD0733F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 10:35:51 +0000 (UTC)
-Received: by mail-we0-f173.google.com with SMTP id w55so15691543wes.4
+	Fri, 13 Feb 2015 10:57:37 +0000 (UTC)
+Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
+	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 094F71A7392
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 02:35:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:subject:from:to:date:in-reply-to:references:content-type
-	:mime-version:content-transfer-encoding;
-	bh=diPisWaMD5riLkVfJEn32f84RVdespaScGSnNK+2IUw=;
-	b=I5di6w5zzkenEcaSs97K5WFsGm02Zb60Y6AhTqwreTsREyMn2DENBZoZWtlDxAWRgW
-	yL48vhANDbBG3UAOtkpwtNFAl313/I+2dj8AmEV6aX9KFZ1aHmgZcJUVFtgiU+n6OHhf
-	vNAH4kdZ+A4N+P8NYJ7N+jZxPwUd0M/o/dHQ/BOTkLe+UpGsea7XXplTJLtBH5xgKsQu
-	LLJMCKgNMffXGhtaXUeEtQgZOfAe5wbOySI7qmnjjOyXkfBk3h+kbHO7qVS6Vv4qcf3j
-	272baIR/bpCPgSi+eOCah0drOiRq+YCO0lDqQrydiFt+k8o9vI8HYFZRuCaAuOQeNwU7
-	4zhQ==
-X-Received: by 10.180.35.72 with SMTP id f8mr14718450wij.31.1423823752267;
-	Fri, 13 Feb 2015 02:35:52 -0800 (PST)
-Received: from [192.168.0.7] (212-41-70-184.adsl.solnet.ch. [212.41.70.184])
-	by mx.google.com with ESMTPSA id q10sm9488241wjr.41.2015.02.13.02.35.51
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Fri, 13 Feb 2015 02:35:51 -0800 (PST)
-Message-ID: <1423823635.2285.5.camel@Saturn.local.all>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Feb 2015 11:33:55 +0100
-In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
+	Fri, 13 Feb 2015 11:57:38 +0100 (CET)
+Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
+	([::1]) with mapi id 14.03.0224.002; Fri, 13 Feb 2015 11:57:38 +0100
+From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
+Thread-Index: AQHQR3jjp5YS124hHUiBKr5QPNNHIZzuZoQw
+Date: Fri, 13 Feb 2015 10:57:37 +0000
+Message-ID: <F48900D76F0D8349918584FEEFEB4BCA0629F4F8@SEXCHANGE0100.lpg.priv>
 References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
 	<1423810919-9857-19-git-send-email-schnitzeltony@googlemail.com>
 	<F48900D76F0D8349918584FEEFEB4BCA0629F403@SEXCHANGE0100.lpg.priv>
 	<20150213094951.GA14290@mail.itconsulting-heinold.de>
 	<F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
-X-Mailer: Evolution 3.10.4 
-Mime-Version: 1.0
+	<1423823635.2285.5.camel@Saturn.local.all>
+In-Reply-To: <1423823635.2285.5.camel@Saturn.local.all>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.5.31]
+MIME-Version: 1.0
+X-DRWEB-SCAN: ok
+X-VRSPAM-SCORE: 0
+X-VRSPAM-STATE: legit
+X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejkedrkedvgddvudcutefuodetggdotefrucfrrhhofhhilhgvmecuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedttdenucenucfjughrpefhvffuthffkfhfjghitgfgggesthgstddttddtjeenucfhrhhomhepoffqpfffqffpucffrghnihgvlhcuoeffrghnihgvlhdroffqpfffqffpsehlphhgshihshhtvghmshdrtghomheqnecuffhomhgrihhnpehophgvnhgvmhgsvgguuggvugdrohhrghdphihotghtohhprhhojhgvtghtrdhorhhg
+X-VRSPAM-EXTCAUSE: mhhouggvpehsmhhtphhouhht
 Subject: Re: package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -50,78 +47,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 10:35:52 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 13 Feb 2015 10:57:39 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Daniel
-
-
-Am Freitag, den 13.02.2015, 10:08 +0000 schrieb MONDON Daniel:
-> Ok, but my problem is I must not change distribution.
-> The system is installed on many machines, and moving to and other repo will generate too many work (dev and validation)!
-In order to fix an error you will have to change something.
-
-> I have not enough time to pass on this problem : It was so complicated to build, install and configure Java on angstromv2012.05 environment!
-> 
-> Is it because Ubuntu 12.04 java was updated ?
-No.
-
-The error you see is because some sources test if now is more than 10 years from 2015 and refuse to compile (and maybe execute later?) if this is the case.
-
-This is fixed in meta-java, but as Henning said you have to get the
-meta-java layer from git://git.yoctoproject.org/meta-java and update to
-HEAD.
-
-Regards
-Max
-
-> Thanks
-> Daniel.
-> 
-> -----Message d'origine-----
-> De : openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] De la part de Henning Heinold
-> Envoyé : vendredi 13 février 2015 10:50
-> À : openembedded-devel@lists.openembedded.org
-> Objet : Re: [oe] package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
-> 
-> On Fri, Feb 13, 2015 at 08:36:45AM +0000, MONDON Daniel wrote:
-> > Hi,
-> > 
-> > I am under Ubuntu 12.04 server and I build an angstromv2012.05 distribution.
-> > 
-> > Making a build all (from scratch), I've got the error:
-> > | Error: time is more than 10 years from present: 1104530400000
-> > | java.lang.RuntimeException: time is more than 10 years from present: 1104530400000
-> > |    at build.tools.generatecurrencydata.GenerateCurrencyData.makeSpecialCaseEntry(GenerateCurrencyData.java:285)
-> > |    at build.tools.generatecurrencydata.GenerateCurrencyData.buildMainAndSpecialCaseTables(GenerateCurrencyData.java:225)
-> > |    at build.tools.generatecurrencydata.GenerateCurrencyData.main(GenerateCurrencyData.java:154)
-> > |    at java.lang.reflect.VMMethod.invoke(Native Method)
-> > |    at java.lang.reflect.Method.invoke(Method.java:327)
-> > |    at jamvm.java.lang.JarLauncher.main(JarLauncheERROR: Function failed: do_compile (see /home/lpg/VPN/lpg-project/build/tmp-angstrom_v2012_05-eglibc/work/x86_64-linux/icedtea6-native-1.8.11-r5.3/temp/log.do_compile.8710 for further information)
-> > 
-> > The log.do_compile.8710 is attached.
-> > 
-> > Please help :)
-> > 
-> > Thanks
-> > Daniel.
-> 
-> The layer has moved and is now available under git://git.yoctoproject.org/meta-java
-> 
-> Bye Henning
-> 
-> 
-> > -- 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
+VGhhbmtzIG1heCENCg0KSSdtIGp1c3QgY2hlY2tpbmcgaWYgY2hhbmdpbmcgc2VydmVyIGRhdGUg
+ZG8gY29tcGlsYXRpb24gaXMgb2shDQpDb21waWxhdGlvbiBzZWVtcyB0byBzdWNjZWVkIQ0KDQoN
+Cg0KPkhpIERhbmllbA0KDQo+QW0gRnJlaXRhZywgZGVuIDEzLjAyLjIwMTUsIDEwOjA4ICswMDAw
+IHNjaHJpZWIgTU9ORE9OIERhbmllbDoNCj4+IE9rLCBidXQgbXkgcHJvYmxlbSBpcyBJIG11c3Qg
+bm90IGNoYW5nZSBkaXN0cmlidXRpb24uDQo+PiBUaGUgc3lzdGVtIGlzIGluc3RhbGxlZCBvbiBt
+YW55IG1hY2hpbmVzLCBhbmQgbW92aW5nIHRvIGFuZCBvdGhlciByZXBvIHdpbGwgZ2VuZXJhdGUg
+dG9vIG1hbnkgd29yayAoZGV2IGFuZCB2YWxpZGF0aW9uKSENCj5JbiBvcmRlciB0byBmaXggYW4g
+ZXJyb3IgeW91IHdpbGwgaGF2ZSB0byBjaGFuZ2Ugc29tZXRoaW5nLg0KWWVzLCBJIGtub3cuDQpC
+dXQgcGVyaGFwcyBvbmx5IHRoZSAxMCB5ZWFycyB0aW1lIG91dD8NCg0KPg0KPj4gSSBoYXZlIG5v
+dCBlbm91Z2ggdGltZSB0byBwYXNzIG9uIHRoaXMgcHJvYmxlbSA6IEl0IHdhcyBzbyBjb21wbGlj
+YXRlZCB0byBidWlsZCwgaW5zdGFsbCBhbmQgY29uZmlndXJlIEphdmEgb24gYW5nc3Ryb212MjAx
+Mi4wNSBlbnZpcm9ubWVudCENCj4+IA0KPj4gSXMgaXQgYmVjYXVzZSBVYnVudHUgMTIuMDQgamF2
+YSB3YXMgdXBkYXRlZCA/DQo+Tm8uDQo+DQo+VGhlIGVycm9yIHlvdSBzZWUgaXMgYmVjYXVzZSBz
+b21lIHNvdXJjZXMgdGVzdCBpZiBub3cgaXMgbW9yZSB0aGFuIDEwIHllYXJzIGZyb20gMjAxNSBh
+bmQgcmVmdXNlIHRvIGNvbXBpbGUgKGFuZCBtYXliZSBleGVjdXRlIGxhdGVyPykgaWYgdGhpcyBp
+cyB0aGUgY2FzZS4NCg0KRXhlY3V0aW9uIGlzIG9rIQ0KDQo+VGhpcyBpcyBmaXhlZCBpbiBtZXRh
+LWphdmEsIGJ1dCBhcyBIZW5uaW5nIHNhaWQgeW91IGhhdmUgdG8gZ2V0IHRoZSBtZXRhLWphdmEg
+bGF5ZXIgZnJvbSBnaXQ6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9tZXRhLWphdmEgYW5kIHVwZGF0
+ZSB0byBIRUFELg0KSSBjYW4ndCBkbyB0aGF0IChiZWNhdXNlIG9mIGFsbG93ZWQgdGltZSkNCg0K
+PlJlZ2FyZHMNCj5NYXgNCg0KPiBUaGFua3MNCj4gRGFuaWVsLg0KPiANCj4gLS0tLS1NZXNzYWdl
+IGQnb3JpZ2luZS0tLS0tDQo+IERlIDogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZyANCj4gW21haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0Bs
+aXN0cy5vcGVuZW1iZWRkZWQub3JnXSBEZSBsYSBwYXJ0IA0KPiBkZSBIZW5uaW5nIEhlaW5vbGQg
+RW52b3nDqSA6IHZlbmRyZWRpIDEzIGbDqXZyaWVyIDIwMTUgMTA6NTAgw4AgOiANCj4gb3BlbmVt
+YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gT2JqZXQgOiBSZTogW29lXSBw
+YWNrYWdlIGljZWR0ZWE2LW5hdGl2ZS0xLjguMTEtcjUuMzogdGFzayBkb19jb21waWxlOiANCj4g
+RmFpbGVkDQo+IA0KPiBPbiBGcmksIEZlYiAxMywgMjAxNSBhdCAwODozNjo0NUFNICswMDAwLCBN
+T05ET04gRGFuaWVsIHdyb3RlOg0KPiA+IEhpLA0KPiA+IA0KPiA+IEkgYW0gdW5kZXIgVWJ1bnR1
+IDEyLjA0IHNlcnZlciBhbmQgSSBidWlsZCBhbiBhbmdzdHJvbXYyMDEyLjA1IGRpc3RyaWJ1dGlv
+bi4NCj4gPiANCj4gPiBNYWtpbmcgYSBidWlsZCBhbGwgKGZyb20gc2NyYXRjaCksIEkndmUgZ290
+IHRoZSBlcnJvcjoNCj4gPiB8IEVycm9yOiB0aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFycyBmcm9t
+IHByZXNlbnQ6IDExMDQ1MzA0MDAwMDANCj4gPiB8IGphdmEubGFuZy5SdW50aW1lRXhjZXB0aW9u
+OiB0aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFycyBmcm9tIHByZXNlbnQ6IDExMDQ1MzA0MDAwMDAN
+Cj4gPiB8ICAgIGF0IGJ1aWxkLnRvb2xzLmdlbmVyYXRlY3VycmVuY3lkYXRhLkdlbmVyYXRlQ3Vy
+cmVuY3lEYXRhLm1ha2VTcGVjaWFsQ2FzZUVudHJ5KEdlbmVyYXRlQ3VycmVuY3lEYXRhLmphdmE6
+Mjg1KQ0KPiA+IHwgICAgYXQgYnVpbGQudG9vbHMuZ2VuZXJhdGVjdXJyZW5jeWRhdGEuR2VuZXJh
+dGVDdXJyZW5jeURhdGEuYnVpbGRNYWluQW5kU3BlY2lhbENhc2VUYWJsZXMoR2VuZXJhdGVDdXJy
+ZW5jeURhdGEuamF2YToyMjUpDQo+ID4gfCAgICBhdCBidWlsZC50b29scy5nZW5lcmF0ZWN1cnJl
+bmN5ZGF0YS5HZW5lcmF0ZUN1cnJlbmN5RGF0YS5tYWluKEdlbmVyYXRlQ3VycmVuY3lEYXRhLmph
+dmE6MTU0KQ0KPiA+IHwgICAgYXQgamF2YS5sYW5nLnJlZmxlY3QuVk1NZXRob2QuaW52b2tlKE5h
+dGl2ZSBNZXRob2QpDQo+ID4gfCAgICBhdCBqYXZhLmxhbmcucmVmbGVjdC5NZXRob2QuaW52b2tl
+KE1ldGhvZC5qYXZhOjMyNykNCj4gPiB8ICAgIGF0IGphbXZtLmphdmEubGFuZy5KYXJMYXVuY2hl
+ci5tYWluKEphckxhdW5jaGVFUlJPUjogRnVuY3Rpb24gDQo+ID4gfCBmYWlsZWQ6IGRvX2NvbXBp
+bGUgKHNlZSANCj4gPiB8IC9ob21lL2xwZy9WUE4vbHBnLXByb2plY3QvYnVpbGQvdG1wLWFuZ3N0
+cm9tX3YyMDEyXzA1LWVnbGliYy93b3JrLw0KPiA+IHwgeDg2XzY0LWxpbnV4L2ljZWR0ZWE2LW5h
+dGl2ZS0xLjguMTEtcjUuMy90ZW1wL2xvZy5kb19jb21waWxlLjg3MTAgDQo+ID4gfCBmb3IgZnVy
+dGhlciBpbmZvcm1hdGlvbikNCj4gPiANCj4gPiBUaGUgbG9nLmRvX2NvbXBpbGUuODcxMCBpcyBh
+dHRhY2hlZC4NCj4gPiANCj4gPiBQbGVhc2UgaGVscCA6KQ0KPiA+IA0KPiA+IFRoYW5rcw0KPiA+
+IERhbmllbC4NCj4gDQo+IFRoZSBsYXllciBoYXMgbW92ZWQgYW5kIGlzIG5vdyBhdmFpbGFibGUg
+dW5kZXIgDQo+IGdpdDovL2dpdC55b2N0b3Byb2plY3Qub3JnL21ldGEtamF2YQ0KPiANCj4gQnll
+IEhlbm5pbmcNCj4gDQo+IA0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0
+DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRw
+Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1k
+ZXZlbA0KPiAtLQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1k
+ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQu
+b3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQoNCg0KLS0gDQpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRl
+dmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVt
+YmVkZGVkLWRldmVsDQo=
 
