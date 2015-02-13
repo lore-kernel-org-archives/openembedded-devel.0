@@ -1,38 +1,31 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 58FDA732DC
+Return-Path: <hugo.saldanha@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id C8E7665C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 14:12:01 +0000 (UTC)
-Received: by pdev10 with SMTP id v10so19596644pde.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 06:12:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=1qUrN2+xRIgIkn8w3l4E/lGl43NQKc3eHx0bOasxEhw=;
-	b=ys9YXk+pbY5TrfJ73gu52S3AHH2EmOu4MhHtySydJMvO1rirXx0URd3Wyx15K/IRen
-	3HGZjKN3j5ZL2BijjfseVw3PyhifIW4S9zQhXnAa5TdZCN7u3Zn/M0dphxWz0Pbno9Ul
-	88B1VMbqR/YAvT50JLvWxZs8eMsc7uhXWZl1bNt0m/p2ubmtap4aTiZbQ5+B4+eQXKzp
-	Jvc7d0e5gtLpA1p3CPci22PubJh1ZSOfw31GR9wOqFA93OhnkCoUtn0EtudheLq5zI4e
-	gi2QCTacew/t+fc8GVPVH8WgpEzsK/faXQsb5HRHKBDoRmPKJanqSbxXEhUtEADni5p/
-	uw2g==
-MIME-Version: 1.0
-X-Received: by 10.70.132.71 with SMTP id os7mr15795452pdb.94.1423836722665;
-	Fri, 13 Feb 2015 06:12:02 -0800 (PST)
-Received: by 10.70.36.36 with HTTP; Fri, 13 Feb 2015 06:12:02 -0800 (PST)
-In-Reply-To: <20150213115717.GA2297@jama>
-References: <1423776119-14981-1-git-send-email-schnitzeltony@googlemail.com>
-	<1423776119-14981-2-git-send-email-schnitzeltony@googlemail.com>
-	<20150212222204.GJ2272@jama>
-	<CALbNGRR=AJAqS2MD=Ve7VMSi5qiCPaxHtRBVKBmhMEQvpURR5A@mail.gmail.com>
-	<20150213115717.GA2297@jama>
-Date: Fri, 13 Feb 2015 15:12:02 +0100
-Message-ID: <CALbNGRT9BNR24i_xmot+_7=83kJHaaNmwx3wt8uV651YWqsD6Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Fri, 13 Feb 2015 14:18:51 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Fri, 13 Feb 2015 12:18:43 -0200
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from localhost (10.4.3.1) by mail.aker.com.br (10.0.0.20) with
+	Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Fri, 13 Feb 2015 12:18:23 -0200
+Date: Fri, 13 Feb 2015 12:20:36 -0200
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 01/19] libmbim: initial add 1.12.2
+Message-ID: <20150213142036.GC7116@saldanha.aker.com.br>
+References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
+	<1423810919-9857-19-git-send-email-schnitzeltony@googlemail.com>
+	<F48900D76F0D8349918584FEEFEB4BCA0629F403@SEXCHANGE0100.lpg.priv>
+	<20150213094951.GA14290@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
+	<1423823635.2285.5.camel@Saturn.local.all>
+MIME-Version: 1.0
+In-Reply-To: <1423823635.2285.5.camel@Saturn.local.all>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-AkerSMTPGW-ServerID: 5de71414d6a5ac0be1dec76f647836bb21381a41
+X-AkerSMTPGW-MessageID: 023f011511cbc595f2588282148793c32a3a7f6b-10o
+Subject: Re: package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,18 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 14:12:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 Feb 2015 14:18:55 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Fri, Feb 13, 2015 at 12:57 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> >
->> Wow - I don't care for this but want to be a good boy: What is maximum
->> length of SUMMARY?
->
-> 72
-> http://www.yoctoproject.org/docs/current/ref-manual/ref-manual.html#var-SUMMARY
->
-Thank you for clarification. I checked: V2 should be OK from summary perspective
+Hi,
 
-Andreas
+On Fri, Feb 13, 2015 at 08:33:55AM -0200, Max Krummenacher wrote:
+> Hi Daniel
+> 
+> 
+> Am Freitag, den 13.02.2015, 10:08 +0000 schrieb MONDON Daniel:
+> > Ok, but my problem is I must not change distribution.
+> > The system is installed on many machines, and moving to and other repo will generate too many work (dev and validation)!
+> In order to fix an error you will have to change something.
+> 
+> > I have not enough time to pass on this problem : It was so complicated to build, install and configure Java on angstromv2012.05 environment!
+> > 
+> > Is it because Ubuntu 12.04 java was updated ?
+> No.
+> 
+> The error you see is because some sources test if now is more than 10 years from 2015 and refuse to compile (and maybe execute later?) if this is the case.
+> 
+> This is fixed in meta-java, but as Henning said you have to get the
+> meta-java layer from git://git.yoctoproject.org/meta-java and update to
+> HEAD.
+
+It seems that icedtea7-native was not fixed.
+
+-- 
+		Hugo
+
 
