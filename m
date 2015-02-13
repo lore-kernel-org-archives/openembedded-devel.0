@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D5EF733C3
+Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id A30B3733CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 07:02:13 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id h11so9679955wiw.3
+	Fri, 13 Feb 2015 07:02:16 +0000 (UTC)
+Received: by mail-wg0-f53.google.com with SMTP id x13so14708220wgg.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 23:02:15 -0800 (PST)
+	Thu, 12 Feb 2015 23:02:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=j2sw5XZLke0dfsuNqpakvNMpCPc4IHjTA0mmDCzmK6U=;
-	b=riwOC7P4V2L6F0OIDYZinaN2COXvHJ4tf3nutD5lBHvi5FO1PgOJCW3WLjBA5sqiPj
-	+DV0ClQlFBqOFfKwsC8rk9B/GxBxQIafZBmUw02t+d2nCrEAuwio2oA/Ijrz9T+dHhci
-	baxVaBr8k8f6WwWbTdA5HGR23uvgVFx/xjpsPUfajElFL95Kx6xduTLxDs7yxVMFKUft
-	gMAlTssVzbZS4Dwk3gfHlP1YMK6biDoikGyWH+bp3ZUtdzatJYVpvN4RGPMafDsUmCNY
-	mD2LuHwnDf+7a9ZGrFCoYPEwe/cy8Ypwv5eDim1VKrNOFqN1T/YuiDDf5xztEAJHmoVY
-	viiA==
-X-Received: by 10.194.71.175 with SMTP id w15mr10683078wju.16.1423810934939;
-	Thu, 12 Feb 2015 23:02:14 -0800 (PST)
+	bh=2uv/bj0oPQiYwLLmcumF1ZDMjZb3aKUq35+9D+X6I4k=;
+	b=KLwG0GHXNCyrElZGoLcrcWgspPFm9NsRvju79gifdHtR9QuQtghprTP3fL8L1K1Ucd
+	k0fZ/xO2DVj1VXUNteI7FOUL8O+mgambWwzqGiBVepExd5w4lDbxobLNbU9BTCmcbWVR
+	vMOD0epMopmlbq8AroHhJpdFeA2vMRP4ekYutCN4//6AnoxgsRnQnFmryxt+dfoK4+kQ
+	j5uW3+Mfx8WmXKLHVppJtb/cQZ/rpnI8aDMQlFQcUX+aABLXXg28wafoxejyu3+qyPjJ
+	fWJpt7k3lFGNRv5QSmLxf2zNKOeA+FJrMqc34TK0FTTUcdkUctJvjZLGk/ab8srR3PVj
+	W3Lw==
+X-Received: by 10.180.92.199 with SMTP id co7mr12991144wib.47.1423810937363;
+	Thu, 12 Feb 2015 23:02:17 -0800 (PST)
 Received: from localhost.localdomain (p5B0A1394.dip0.t-ipconnect.de.
 	[91.10.19.148])
-	by mx.google.com with ESMTPSA id v16sm1635972wib.5.2015.02.12.23.02.13
+	by mx.google.com with ESMTPSA id v16sm1635972wib.5.2015.02.12.23.02.14
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 23:02:14 -0800 (PST)
+	Thu, 12 Feb 2015 23:02:16 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Feb 2015 08:01:43 +0100
-Message-Id: <1423810919-9857-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 13 Feb 2015 08:01:44 +0100
+Message-Id: <1423810919-9857-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [V2][PATCH 03/19] modemmanager: update to 1.4.2
+Subject: [V2][PATCH 04/19] network-manager-applet: add PACKAGCONFIG for modemmanager - disabled by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,101 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 07:02:15 -0000
+X-List-Received-Date: Fri, 13 Feb 2015 07:02:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-modemmanager has moved to freedesktop.org
+by updating modemmanager configuration of network-manager-applet now auto
+detects modemmanager - the old version had no (lib)mm-glib. By using a
+packageconfig build is deterministic again.
+
+Fixes:
+
+| WARNING: QA Issue: network-manager-applet rdepends on modemmanager, but it isn't a build dependency? [build-deps]
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../modemmanager/modemmanager_1.4.2.bb             | 40 ++++++++++++++++++++++
- .../networkmanager/modemmanager_0.6.0.0.bb         | 29 ----------------
- 2 files changed, 40 insertions(+), 29 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
- delete mode 100644 meta-oe/recipes-connectivity/networkmanager/modemmanager_0.6.0.0.bb
+ .../network-manager-applet/network-manager-applet_0.9.8.10.bb            | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
-new file mode 100644
-index 0000000..6dfd0e2
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.2.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "ModemManager is a daemon controlling broadband devices/connections"
-+DESCRIPTION = "ModemManager is a DBus-activated daemon which controls mobile broadband (2G/3G/4G) devices and connections"
-+HOMEPAGE = "http://www.freedesktop.org/wiki/Software/ModemManager/"
-+LICENSE = "GPLv2 & LGPLv2.1"
-+LIC_FILES_CHKSUM = " \
-+    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
-+"
-+
-+inherit autotools gettext gtk-doc systemd
-+
-+DEPENDS = "glib-2.0 libmbim libqmi polkit udev dbus-glib"
-+
-+SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
-+SRC_URI[md5sum] = "fe74eaa9a77e51e552b4356b4c7195cb"
-+SRC_URI[sha256sum] = "07d332fbe6f45f788f740810951e04042aaf023bd5ecf8ef0b3a06e37703585d"
-+
-+S = "${WORKDIR}/ModemManager-${PV}"
-+
-+FILES_${PN} += " \
-+    ${datadir}/icons \
-+    ${datadir}/polkit-1 \
-+    ${libdir}/ModemManager \
-+    ${systemd_unitdir}/system \
-+"
-+
-+FILES_${PN}-dev += " \
-+    ${datadir}/dbus-1 \
-+    ${libdir}/ModemManager/*.la \
-+"
-+
-+FILES_${PN}-staticdev += " \
-+    ${libdir}/ModemManager/*.a \
-+"
-+
-+FILES_${PN}-dbg += "${libdir}/ModemManager/.debug"
-+
-+SYSTEMD_SERVICE_${PN} = "ModemManager.service"
-+# no need to start on boot - dbus will start on demand
-+SYSTEMD_AUTO_ENABLE = "disable"
-diff --git a/meta-oe/recipes-connectivity/networkmanager/modemmanager_0.6.0.0.bb b/meta-oe/recipes-connectivity/networkmanager/modemmanager_0.6.0.0.bb
-deleted file mode 100644
-index 5ff18da..0000000
---- a/meta-oe/recipes-connectivity/networkmanager/modemmanager_0.6.0.0.bb
-+++ /dev/null
-@@ -1,29 +0,0 @@
--DEPENDS = "ppp udev glib-2.0 dbus-glib"
--
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--
--
--inherit gnomebase gettext
--
--SRC_URI = "${GNOME_MIRROR}/ModemManager/${@gnome_verdir("${PV}")}/ModemManager-${PV}.tar.xz"
--
--SRC_URI[md5sum] = "f32640f6672d997ec0887307186e9639"
--SRC_URI[sha256sum] = "d4468300cf4aa7baf21c8564fa515e578056f34de5a64f452b053331f89e8ae2"
--
--S = "${WORKDIR}/ModemManager-${PV}"
--
--FILES_${PN}-dbg += "${libdir}/ModemManager/.debug \
--                    ${libdir}/pppd/*/.debug"
--FILES_${PN}-dev += "${datadir}/dbus-1/interfaces \
--                    ${libdir}/pppd/*/*.la \
--                    ${libdir}/ModemManager/*.la"
--FILES_${PN}-staticdev += "\
--                          ${libdir}/ModemManager/*.a \
--                          ${libdir}/pppd/*/*.a"
--FILES_${PN} += "${datadir}/dbus-1/*services/ \
--                ${libdir}/ModemManager/*.so \
--                ${libdir}/pppd/*/*.so \
--                ${base_libdir}/udev"
--
--RRECOMMENDS_${PN} += "ppp"
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
+index 545b2cf..00cea74 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
+@@ -22,6 +22,7 @@ EXTRA_OECONF += " \
+ "
+ 
+ PACKAGECONFIG[bluetooth] = "--with-bluetooth,--without-bluetooth,gnome-bluetooth,gnome-bluetooth"
++PACKAGECONFIG[modemmanager] = "--with-modem-manager-1,--without-modem-manager-1,modemmanager"
+ PACKAGECONFIG ??= ""
+ 
+ do_configure_append() {
 -- 
 1.9.3
 
