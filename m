@@ -1,30 +1,39 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id D7652606E8
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CBBB60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 02:01:08 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id B3C0CF811DC; Thu, 12 Feb 2015 19:01:08 -0700 (MST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 35447F811D8;
-	Thu, 12 Feb 2015 19:00:59 -0700 (MST)
-Message-ID: <54DD5AED.9050707@mlbassoc.com>
-Date: Thu, 12 Feb 2015 19:01:17 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	Fri, 13 Feb 2015 07:02:12 +0000 (UTC)
+Received: by mail-wg0-f52.google.com with SMTP id x12so4897543wgg.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Feb 2015 23:02:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=3MVQUUwnEg0sXM0yV+x0x02z+xVS2C/IPevxiJZ0pkk=;
+	b=UenOnQsodqZDZkBZTnxBOx3oO5ydC17TBYDddL3VbZbotKfbJ0K83caC3veai3R52m
+	IQg0hohOGw4MU9Zhg6tQxLjx75JkaucABiJ1SvT+wvass4Y8dNGa/T7ccwLY/++j32uN
+	8BudOW6BHGXDY5JMqTYhYhrTUNAhfrpRBEEqGJs7f/egbmVs6r4SVugLJcGKu1Nyk8nB
+	iCqWuELyuchPoo9UoHRsv40DnFp6Fo2t7JP7ZKK/5sS70Q+GKC5ufYaH5PH9Jpk9Bngo
+	m66oVRVKZVdhapSXSu/C652j0M9ZW4fUsvwC21TRnwRO3Yi9GWQZIeJ80b2Eot166ZAj
+	7oWg==
+X-Received: by 10.181.12.5 with SMTP id em5mr13367065wid.84.1423810933519;
+	Thu, 12 Feb 2015 23:02:13 -0800 (PST)
+Received: from localhost.localdomain (p5B0A1394.dip0.t-ipconnect.de.
+	[91.10.19.148])
+	by mx.google.com with ESMTPSA id v16sm1635972wib.5.2015.02.12.23.02.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Feb 2015 23:02:12 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Feb 2015 08:01:42 +0100
+Message-Id: <1423810919-9857-3-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-To: Martin Jansa <martin.jansa@gmail.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <1423788858-16687-1-git-send-email-gary@mlbassoc.com>
-	<CA+chaQdfVy4bdE+-Yq7YakQ9pYnSkDLEGiqxAsVnkq7rP26KrA@mail.gmail.com>
-In-Reply-To: <CA+chaQdfVy4bdE+-Yq7YakQ9pYnSkDLEGiqxAsVnkq7rP26KrA@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v3] mplayer2: Remove blacklist
+Subject: [V2][PATCH 02/19] libqmi: initial add 1.12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,81 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 02:01:09 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Feb 2015 07:02:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 2015-02-12 18:08, Martin Jansa wrote:
-> Does it have --enable-* options for the new PACKAGECONFIGs? If yes then it should specify them as well (advantage at least in some projects is that when it explicitly asking for
-> foo and foo is unusable it will end with fatal error instead of ignoring broken foo dependency.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb
 
-No, those are auto-discover and only have disable options.
-
->
-> On Fri, Feb 13, 2015 at 1:54 AM, Gary Thomas <gary@mlbassoc.com <mailto:gary@mlbassoc.com>> wrote:
->
->     mplayer2 no longer needs to be blacklisted as OE-core has moved
->     to libav_9.16.
->
->     [v2-v3] Also update build dependencies to quash QA warnings, using
->     PACKAGECONFIG for most optional features.
->
->     Signed-off-by: Gary Thomas <gary@mlbassoc.com <mailto:gary@mlbassoc.com>>
->     ---
->       meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mplayer2_git.bb> | 9 ++++++---
->       1 file changed, 6 insertions(+), 3 deletions(-)
->
->     diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mplayer2_git.bb> b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mplayer2_git.bb>
->     index 7c04ff1..2de26b0 100644
->     --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mplayer2_git.bb>
->     +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mplayer2_git.bb>
->     @@ -3,7 +3,7 @@ SECTION = "multimedia"
->       HOMEPAGE = "http://www.mplayerhq.hu/"
->       DEPENDS = "libvpx libdvdread libtheora virtual/libsdl ffmpeg xsp zlib \
->                  libpng jpeg liba52 freetype fontconfig alsa-lib lzo ncurses \
->     -           libxv virtual/libx11 libass speex faad2"
->     +           libxv virtual/libx11 libass speex faad2 libxscrnsaver"
->
->       RDEPENDS_${PN} = "mplayer-common"
->       PROVIDES = "mplayer"
->     @@ -13,8 +13,6 @@ RCONFLICTS_${PN} = "mplayer"
->       LICENSE = "GPLv3"
->       LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
->
->     -PNBLACKLIST[mplayer2] ?= "Requires newer libav which has negative D_P"
->     -
->       SRC_URI = "git://repo.or.cz/mplayer.git <http://repo.or.cz/mplayer.git> \
->           file://0001-configure-don-t-disable-ASS-support-when-explicitly-.patch \
->       "
->     @@ -109,9 +107,14 @@ EXTRA_OECONF = " \
->       EXTRA_OECONF_append_armv6 = " --enable-armv6"
->       EXTRA_OECONF_append_armv7a = " --enable-armv6 --enable-neon"
->
->     +PACKAGECONFIG ??= "vorbis postproc"
->       PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
->       PACKAGECONFIG[a52] = "--enable-liba52,--disable-liba52,liba52"
->       PACKAGECONFIG[lame] = ",,lame"
->     +PACKAGECONFIG[postproc] = ",--disable-libpostproc,libpostproc"
->     +PACKAGECONFIG[vorbis] = ",--disable-libvorbis,libvorbis"
->     +PACKAGECONFIG[portaudio] = ",--disable-portaudio,portaudio-v19"
->     +PACKAGECONFIG[mpg123] = ",--disable-mpg123,mpg123"
->
->       FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -O4 -ffast-math"
->       BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
->     --
->     1.9.1
->
->     --
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb
+new file mode 100644
+index 0000000..789692b
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.2.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "libqmi is a library for talking to WWAN devices by QMI protocol"
++DESCRIPTION = "libqmi is a glib-based library for talking to WWAN modems and devices which speak the Qualcomm MSM Interface (QMI) protocol"
++HOMEPAGE = "http://www.freedesktop.org/wiki/Software/libqmi"
++LICENSE = "GPLv2 & LGPLv2.1"
++LIC_FILES_CHKSUM = " \
++    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
++"
++
++DEPENDS = "glib-2.0"
++
++inherit autotools pkgconfig
++
++SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "5b3b6b37a57e2fa828fd4cb6f86d7a9f"
++SRC_URI[sha256sum] = "d1661d73b510482b29b93b7e396756c433d35360b3d44c72afa7921339a98624"
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.9.3
+
 
