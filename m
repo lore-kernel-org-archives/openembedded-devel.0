@@ -1,39 +1,27 @@
-Return-Path: <Daniel.MONDON@lpgsystems.com>
-Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
-	by mail.openembedded.org (Postfix) with ESMTP id 27BD0733F3
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 6743E733F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 10:57:37 +0000 (UTC)
-Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
-	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 094F71A7392
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 11:57:38 +0100 (CET)
-Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
-	([::1]) with mapi id 14.03.0224.002; Fri, 13 Feb 2015 11:57:38 +0100
-From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
-Thread-Index: AQHQR3jjp5YS124hHUiBKr5QPNNHIZzuZoQw
-Date: Fri, 13 Feb 2015 10:57:37 +0000
-Message-ID: <F48900D76F0D8349918584FEEFEB4BCA0629F4F8@SEXCHANGE0100.lpg.priv>
-References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
-	<1423810919-9857-19-git-send-email-schnitzeltony@googlemail.com>
-	<F48900D76F0D8349918584FEEFEB4BCA0629F403@SEXCHANGE0100.lpg.priv>
-	<20150213094951.GA14290@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
-	<1423823635.2285.5.camel@Saturn.local.all>
-In-Reply-To: <1423823635.2285.5.camel@Saturn.local.all>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.5.31]
+	Fri, 13 Feb 2015 10:58:32 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga101.fm.intel.com with ESMTP; 13 Feb 2015 02:58:12 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.09,570,1418112000"; d="scan'208";a="527075174"
+Received: from jaloughr-mobl5.amr.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.3.120])
+	by orsmga003.jf.intel.com with ESMTP; 13 Feb 2015 02:49:54 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>, Gary Thomas <gary@mlbassoc.com>
+Date: Fri, 13 Feb 2015 10:58:10 +0000
+Message-ID: <101705652.1SzHARi5R4@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.4 (Linux/3.18.5-101.fc20.x86_64; KDE/4.14.4; x86_64; ; )
+In-Reply-To: <54DD1C8B.90205@mlbassoc.com>
+References: <1422971047-17965-1-git-send-email-gary@mlbassoc.com>
+	<20150212183043.GF2272@jama> <54DD1C8B.90205@mlbassoc.com>
 MIME-Version: 1.0
-X-DRWEB-SCAN: ok
-X-VRSPAM-SCORE: 0
-X-VRSPAM-STATE: legit
-X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejkedrkedvgddvudcutefuodetggdotefrucfrrhhofhhilhgvmecuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedttdenucenucfjughrpefhvffuthffkfhfjghitgfgggesthgstddttddtjeenucfhrhhomhepoffqpfffqffpucffrghnihgvlhcuoeffrghnihgvlhdroffqpfffqffpsehlphhgshihshhtvghmshdrtghomheqnecuffhomhgrihhnpehophgvnhgvmhgsvgguuggvugdrohhrghdphihotghtohhprhhojhgvtghtrdhorhhg
-X-VRSPAM-EXTCAUSE: mhhouggvpehsmhhtphhouhht
-Subject: Re: package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] mplayer2: Remove blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,71 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 10:57:39 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 13 Feb 2015 10:58:34 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-VGhhbmtzIG1heCENCg0KSSdtIGp1c3QgY2hlY2tpbmcgaWYgY2hhbmdpbmcgc2VydmVyIGRhdGUg
-ZG8gY29tcGlsYXRpb24gaXMgb2shDQpDb21waWxhdGlvbiBzZWVtcyB0byBzdWNjZWVkIQ0KDQoN
-Cg0KPkhpIERhbmllbA0KDQo+QW0gRnJlaXRhZywgZGVuIDEzLjAyLjIwMTUsIDEwOjA4ICswMDAw
-IHNjaHJpZWIgTU9ORE9OIERhbmllbDoNCj4+IE9rLCBidXQgbXkgcHJvYmxlbSBpcyBJIG11c3Qg
-bm90IGNoYW5nZSBkaXN0cmlidXRpb24uDQo+PiBUaGUgc3lzdGVtIGlzIGluc3RhbGxlZCBvbiBt
-YW55IG1hY2hpbmVzLCBhbmQgbW92aW5nIHRvIGFuZCBvdGhlciByZXBvIHdpbGwgZ2VuZXJhdGUg
-dG9vIG1hbnkgd29yayAoZGV2IGFuZCB2YWxpZGF0aW9uKSENCj5JbiBvcmRlciB0byBmaXggYW4g
-ZXJyb3IgeW91IHdpbGwgaGF2ZSB0byBjaGFuZ2Ugc29tZXRoaW5nLg0KWWVzLCBJIGtub3cuDQpC
-dXQgcGVyaGFwcyBvbmx5IHRoZSAxMCB5ZWFycyB0aW1lIG91dD8NCg0KPg0KPj4gSSBoYXZlIG5v
-dCBlbm91Z2ggdGltZSB0byBwYXNzIG9uIHRoaXMgcHJvYmxlbSA6IEl0IHdhcyBzbyBjb21wbGlj
-YXRlZCB0byBidWlsZCwgaW5zdGFsbCBhbmQgY29uZmlndXJlIEphdmEgb24gYW5nc3Ryb212MjAx
-Mi4wNSBlbnZpcm9ubWVudCENCj4+IA0KPj4gSXMgaXQgYmVjYXVzZSBVYnVudHUgMTIuMDQgamF2
-YSB3YXMgdXBkYXRlZCA/DQo+Tm8uDQo+DQo+VGhlIGVycm9yIHlvdSBzZWUgaXMgYmVjYXVzZSBz
-b21lIHNvdXJjZXMgdGVzdCBpZiBub3cgaXMgbW9yZSB0aGFuIDEwIHllYXJzIGZyb20gMjAxNSBh
-bmQgcmVmdXNlIHRvIGNvbXBpbGUgKGFuZCBtYXliZSBleGVjdXRlIGxhdGVyPykgaWYgdGhpcyBp
-cyB0aGUgY2FzZS4NCg0KRXhlY3V0aW9uIGlzIG9rIQ0KDQo+VGhpcyBpcyBmaXhlZCBpbiBtZXRh
-LWphdmEsIGJ1dCBhcyBIZW5uaW5nIHNhaWQgeW91IGhhdmUgdG8gZ2V0IHRoZSBtZXRhLWphdmEg
-bGF5ZXIgZnJvbSBnaXQ6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9tZXRhLWphdmEgYW5kIHVwZGF0
-ZSB0byBIRUFELg0KSSBjYW4ndCBkbyB0aGF0IChiZWNhdXNlIG9mIGFsbG93ZWQgdGltZSkNCg0K
-PlJlZ2FyZHMNCj5NYXgNCg0KPiBUaGFua3MNCj4gRGFuaWVsLg0KPiANCj4gLS0tLS1NZXNzYWdl
-IGQnb3JpZ2luZS0tLS0tDQo+IERlIDogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZyANCj4gW21haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0Bs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnXSBEZSBsYSBwYXJ0IA0KPiBkZSBIZW5uaW5nIEhlaW5vbGQg
-RW52b3nDqSA6IHZlbmRyZWRpIDEzIGbDqXZyaWVyIDIwMTUgMTA6NTAgw4AgOiANCj4gb3BlbmVt
-YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gT2JqZXQgOiBSZTogW29lXSBw
-YWNrYWdlIGljZWR0ZWE2LW5hdGl2ZS0xLjguMTEtcjUuMzogdGFzayBkb19jb21waWxlOiANCj4g
-RmFpbGVkDQo+IA0KPiBPbiBGcmksIEZlYiAxMywgMjAxNSBhdCAwODozNjo0NUFNICswMDAwLCBN
-T05ET04gRGFuaWVsIHdyb3RlOg0KPiA+IEhpLA0KPiA+IA0KPiA+IEkgYW0gdW5kZXIgVWJ1bnR1
-IDEyLjA0IHNlcnZlciBhbmQgSSBidWlsZCBhbiBhbmdzdHJvbXYyMDEyLjA1IGRpc3RyaWJ1dGlv
-bi4NCj4gPiANCj4gPiBNYWtpbmcgYSBidWlsZCBhbGwgKGZyb20gc2NyYXRjaCksIEkndmUgZ290
-IHRoZSBlcnJvcjoNCj4gPiB8IEVycm9yOiB0aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFycyBmcm9t
-IHByZXNlbnQ6IDExMDQ1MzA0MDAwMDANCj4gPiB8IGphdmEubGFuZy5SdW50aW1lRXhjZXB0aW9u
-OiB0aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFycyBmcm9tIHByZXNlbnQ6IDExMDQ1MzA0MDAwMDAN
-Cj4gPiB8ICAgIGF0IGJ1aWxkLnRvb2xzLmdlbmVyYXRlY3VycmVuY3lkYXRhLkdlbmVyYXRlQ3Vy
-cmVuY3lEYXRhLm1ha2VTcGVjaWFsQ2FzZUVudHJ5KEdlbmVyYXRlQ3VycmVuY3lEYXRhLmphdmE6
-Mjg1KQ0KPiA+IHwgICAgYXQgYnVpbGQudG9vbHMuZ2VuZXJhdGVjdXJyZW5jeWRhdGEuR2VuZXJh
-dGVDdXJyZW5jeURhdGEuYnVpbGRNYWluQW5kU3BlY2lhbENhc2VUYWJsZXMoR2VuZXJhdGVDdXJy
-ZW5jeURhdGEuamF2YToyMjUpDQo+ID4gfCAgICBhdCBidWlsZC50b29scy5nZW5lcmF0ZWN1cnJl
-bmN5ZGF0YS5HZW5lcmF0ZUN1cnJlbmN5RGF0YS5tYWluKEdlbmVyYXRlQ3VycmVuY3lEYXRhLmph
-dmE6MTU0KQ0KPiA+IHwgICAgYXQgamF2YS5sYW5nLnJlZmxlY3QuVk1NZXRob2QuaW52b2tlKE5h
-dGl2ZSBNZXRob2QpDQo+ID4gfCAgICBhdCBqYXZhLmxhbmcucmVmbGVjdC5NZXRob2QuaW52b2tl
-KE1ldGhvZC5qYXZhOjMyNykNCj4gPiB8ICAgIGF0IGphbXZtLmphdmEubGFuZy5KYXJMYXVuY2hl
-ci5tYWluKEphckxhdW5jaGVFUlJPUjogRnVuY3Rpb24gDQo+ID4gfCBmYWlsZWQ6IGRvX2NvbXBp
-bGUgKHNlZSANCj4gPiB8IC9ob21lL2xwZy9WUE4vbHBnLXByb2plY3QvYnVpbGQvdG1wLWFuZ3N0
-cm9tX3YyMDEyXzA1LWVnbGliYy93b3JrLw0KPiA+IHwgeDg2XzY0LWxpbnV4L2ljZWR0ZWE2LW5h
-dGl2ZS0xLjguMTEtcjUuMy90ZW1wL2xvZy5kb19jb21waWxlLjg3MTAgDQo+ID4gfCBmb3IgZnVy
-dGhlciBpbmZvcm1hdGlvbikNCj4gPiANCj4gPiBUaGUgbG9nLmRvX2NvbXBpbGUuODcxMCBpcyBh
-dHRhY2hlZC4NCj4gPiANCj4gPiBQbGVhc2UgaGVscCA6KQ0KPiA+IA0KPiA+IFRoYW5rcw0KPiA+
-IERhbmllbC4NCj4gDQo+IFRoZSBsYXllciBoYXMgbW92ZWQgYW5kIGlzIG5vdyBhdmFpbGFibGUg
-dW5kZXIgDQo+IGdpdDovL2dpdC55b2N0b3Byb2plY3Qub3JnL21ldGEtamF2YQ0KPiANCj4gQnll
-IEhlbm5pbmcNCj4gDQo+IA0KPiA+IC0tDQo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0
-DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRw
-Oi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1k
-ZXZlbA0KPiAtLQ0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1k
-ZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQu
-b3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQoNCg0KLS0gDQpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRl
-dmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmcNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVt
-YmVkZGVkLWRldmVsDQo=
+On Thursday 12 February 2015 14:35:07 Gary Thomas wrote:
+> On 2015-02-12 11:30, Martin Jansa wrote:
+> > On Tue, Feb 03, 2015 at 06:44:07AM -0700, Gary Thomas wrote:
+> >> mplayer2 no longer needs to be blacklisted as OE-core has moved
+> >> to libav_9.16
+> > 
+> > Please fix following issues before blacklisting it:
+> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libpostproc,
+> > but it isn't a build dependency? [build-deps]
+> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libvorbis, but
+> > it isn't a build dependency? [build-deps]
+> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on libxscrnsaver,
+> > but it isn't a build dependency? [build-deps]
+> > mplayer2-2.0+gitrAUTOINC+2c378c71a4: mplayer2 rdepends on mpg123, but it
+> > isn't a build dependency? [build-deps]
+> 
+> This must be an inferred dependency as mpg123 is not in meta-oe, but
+> rather meta-multimedia and it is possible to build mplayer using only
+> meta-oe and not meta-multimedia.  How should that be handled?
+
+Should mplayer2 in fact be moved to meta-multimedia? I can't see any 
+dependencies on it in meta-oe itself, only gnome-player in meta-gnome seems to 
+need it.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
