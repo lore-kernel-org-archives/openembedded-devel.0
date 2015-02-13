@@ -1,34 +1,24 @@
-Return-Path: <pespin.shar@gmail.com>
-Received: from mail-qg0-f42.google.com (mail-qg0-f42.google.com
-	[209.85.192.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F9FA733C9
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CB2E5733C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 12:47:42 +0000 (UTC)
-Received: by mail-qg0-f42.google.com with SMTP id z107so12923408qgd.1
+	Fri, 13 Feb 2015 13:30:22 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t1DDUNER025657
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 04:47:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=ZjEgluS+mKU3Tv2c8fUDav6inhgbFEkxVD3yfIWCZOE=;
-	b=f62bpjcfZ1dPu1a5ihWOs5KrWa08VoGODLsLK3OeYvwbRU6tBjf5wu78mmOK5FvVZa
-	mZdjj9jkPlyMsZLjiImHtUxwmOOYHyznELsIdvpdJXJIaGTd6Re+SiFG4CKug+vOecXh
-	qH7wiQCDGCvWFsbxS7CEHO44L2UIYIPBz/H50Sv0AiPII6KASVbjugN9KVaLAO2YknbP
-	0cjqcwSJjO7QYyXoqqDQNUeg4++rEXlnUSb/ZtXPiHGPekozH2WNY4IxgNKPVE4EKoq9
-	+0pd+JUoRbeyapFyg0908XZRR1MfIp6vXL+FJnSH/IXfv6GTwHAU8rOHp5AQgSC0hhbN
-	kuyA==
+	Fri, 13 Feb 2015 05:30:23 -0800 (PST)
+Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 13 Feb 2015 05:30:23 -0800
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 13 Feb 2015 05:30:22 -0800
+Message-ID: <1423834223-25626-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Received: by 10.140.194.139 with SMTP id p133mr2254992qha.21.1423831663769; 
-	Fri, 13 Feb 2015 04:47:43 -0800 (PST)
-Received: by 10.229.221.66 with HTTP; Fri, 13 Feb 2015 04:47:43 -0800 (PST)
-In-Reply-To: <CAP9ODKpzYyVB+K6XZ=oQtYZ_TSce19D0r=_bk5RPxxtvVUgxhw@mail.gmail.com>
-References: <1423649212-5156-1-git-send-email-pau.espin@aweurope.be>
-	<CAP9ODKpzYyVB+K6XZ=oQtYZ_TSce19D0r=_bk5RPxxtvVUgxhw@mail.gmail.com>
-Date: Fri, 13 Feb 2015 13:47:43 +0100
-Message-ID: <CAEGpDubcHDv+PYTukYV=N+va3837GwvioesHMgKO7nCenQSDiQ@mail.gmail.com>
-From: Pau Espin Pedrol <pespin.shar@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtmultimedia: Enable building of package qtmultimedia-examples
+Subject: [PATCH 1/2] opensaf: install opensafd.service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,52 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 12:47:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 Feb 2015 13:30:24 -0000
+Content-Type: text/plain
 
-Hi,
-I did that patch several weeks ago but actually I didn't have the
-occasion to sent it till recently.
+Fixed when systemd:
+ERROR: Function failed: SYSTEMD_SERVICE_opensaf value opensafd.service does not exist
 
-I remember I had to add those lines in order to get the -examples
-package being built at the time I did it. Maybe it has been fixed in
-HEAD somehow with other commits in the meantime...
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ .../recipes-daemons/opensaf/opensaf_4.5.0.bb       |    3 +++
+ 1 file changed, 3 insertions(+)
 
-Indeed, I checked: I'm using meta-qt rev
-adeaa6128b665920eb98eb7c064f4aacbd74b873 and if I remove the lines
-added by the patch then I get no qtmultimedia-examples .deb package.
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+index 5b42def..5fe929c 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+@@ -39,4 +39,7 @@ do_install_append() {
+     rm -fr "${D}${localstatedir}/lock"
+     rm -fr "${D}${localstatedir}/run"
+     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
++        ${D}${systemd_unitdir}/system
+ }
+-- 
+1.7.9.5
 
-In packages-split directory I get these dirs but they are empty:
-qtmultimedia-examples
-qtmultimedia-examples-dbg
-qtmultimedia-examples-dev
-qtmultimedia-examples-staticdev
-
-I will try to let you know if the problem persists for me when we
-upgrade to newer meta-qt.
-
-Thanks for reviewing it!
-
-Pau Espin Pedrol
-mail/jabber: pespin.shar@gmail.com
-http://blog.espeweb.net
-
-
-2015-02-11 23:36 GMT+01:00 Otavio Salvador <otavio@ossystems.com.br>:
-> On Wed, Feb 11, 2015 at 8:06 AM, Pau Espin Pedrol <pespin.shar@gmail.com> wrote:
->> From: Pau Espin Pedrol <pau.espin@essensium.com>
->>
->> Signed-off-by: Pau Espin Pedrol <pau.espin@essensium.com>
->
-> I am wondering why your examples were not build. Mine were build.
->
-> --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
