@@ -1,39 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 70CBF60167
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id D9854733FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Feb 2015 07:02:34 +0000 (UTC)
-Received: by mail-wg0-f52.google.com with SMTP id x12so4898951wgg.11
+	Fri, 13 Feb 2015 07:02:35 +0000 (UTC)
+Received: by mail-wi0-f171.google.com with SMTP id hi2so9703550wib.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Feb 2015 23:02:35 -0800 (PST)
+	Thu, 12 Feb 2015 23:02:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=9jzKtA4t4fe0A0zfT1gZ4sLj1ttS9Y4o4TVXv0DRZ3U=;
-	b=smUIBsxY6ZkXGTwZKBGMoVE94ryBizDplgf2jhrHCE5CFftw17mxruINbeDtax15QY
-	zE6ecMjR5KU3CD1I6RLvsEdEYwwKP6NL6F4neTCCQEtA4S/bcXYl2KlPEUG0dZktX5uQ
-	sWZ7zNpW2qqRob87/d4hLgl89yYfSLYLcX0XlBSeRehkhOu6Ai2//1VIdcvo6ptR3Ki2
-	ucUL7pWeVG1MeEUpoCgtONl4CcSWIfYW90Odu+krTXaYnqmz96GJkKzHhx9KHXSCwG+f
-	xCSGJo65wj8Ya/JLv//FjAQ7WmJF3HQv6ml5kk3/QPyuWDS+p1/4B1t8pk9Tj8+ZXmTF
-	G/Ng==
-X-Received: by 10.180.14.104 with SMTP id o8mr12983157wic.47.1423810955237;
-	Thu, 12 Feb 2015 23:02:35 -0800 (PST)
+	bh=HAS9DiJYZx0pQfeEx9ECrTHUj3ExcQkK97a+/v9U9/Y=;
+	b=uAChNormL0JLsgmyxDXZGqss8dcIkuY2ujdVKDWxzJTVA02oQ/L7vDgJ+2CX7T3uoa
+	Ng0E/y0qyP28D1aOPZ2OD+hsRoGujJHP6IYWxcknAC1pAaTASOXP9EwXJFdlz9OAzns2
+	bAiKlqMwxkerCdhfFghwT483enZGXFpqCQ0G2+wUrIB/48msW7E8PtN3TkfsSRY75+ar
+	YmO+wb15C9ge1TZmfzbxaFwx/9n2Q/aRsacq2VR3Mk4O4t/W3xryyEZhuZ4Scsw8rQZi
+	cOtG0yQV0kQMvXj5OjOv5I1SpEB5YYUjGrnrgEGFdtrXlQLXG3Njr9TmiBk8+b6LhwqN
+	YRtA==
+X-Received: by 10.180.21.161 with SMTP id w1mr13100334wie.44.1423810956695;
+	Thu, 12 Feb 2015 23:02:36 -0800 (PST)
 Received: from localhost.localdomain (p5B0A1394.dip0.t-ipconnect.de.
 	[91.10.19.148])
-	by mx.google.com with ESMTPSA id v16sm1635972wib.5.2015.02.12.23.02.33
+	by mx.google.com with ESMTPSA id v16sm1635972wib.5.2015.02.12.23.02.35
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Feb 2015 23:02:34 -0800 (PST)
+	Thu, 12 Feb 2015 23:02:35 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Feb 2015 08:01:55 +0100
-Message-Id: <1423810919-9857-16-git-send-email-schnitzeltony@googlemail.com>
+Date: Fri, 13 Feb 2015 08:01:56 +0100
+Message-Id: <1423810919-9857-17-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [V2][PATCH 15/19] xfce4-equake-plugin: update to 1.3.6
+Subject: [V2][PATCH 16/19] xfce4-timer-plugin: initial add 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,33 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Feb 2015 07:02:34 -0000
+X-List-Received-Date: Fri, 13 Feb 2015 07:02:36 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-equake-plugin_1.3.5.bb => xfce4-equake-plugin_1.3.6.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/equake/{xfce4-equake-plugin_1.3.5.bb => xfce4-equake-plugin_1.3.6.bb} (74%)
+ .../recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb    | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb
 
-diff --git a/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.5.bb b/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.6.bb
-similarity index 74%
-rename from meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.5.bb
-rename to meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.6.bb
-index 76cd5d4..d4f069f 100644
---- a/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.5.bb
-+++ b/meta-xfce/recipes-panel-plugins/equake/xfce4-equake-plugin_1.3.6.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI[md5sum] = "7c520e2f1cd0cc5e33d8346b12e31c02"
--SRC_URI[sha256sum] = "43bbc781575c357c13ac6720eb8e8485115099411d5382668e106de58ab0e416"
-+SRC_URI[md5sum] = "ee76ed3825999b24ee9c2c976d906e22"
-+SRC_URI[sha256sum] = "8129067080c8a4656063e7cde20f13fabb47b49c84ce610916f54644acb93d67"
- 
- FILES_${PN} += "${libdir}/xfce4/panel-plugins/xfce4-equake-plugin"
+diff --git a/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb
+new file mode 100644
+index 0000000..d61235f
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/timer/xfce4-timer-plugin_1.6.0.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "XFCE panel plugin to generate alarm messages"
++DESCRIPTION = "This is a simple plugin that lets the user run an alarm at a specified time or at the end of a specified countdown period"
++HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-timer-plugin"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ae39271267fd63eb7619432ff24e7ff1"
++
++inherit xfce-panel-plugin
++
++SRC_URI[md5sum] = "3be2a4ccfb2af20441b1d25c2cea5f28"
++SRC_URI[sha256sum] = "39d7d21f099bc4219f6a6156142f0bbb8374986ee1970a9c0c8dc138b87f867c"
 -- 
 1.9.3
 
