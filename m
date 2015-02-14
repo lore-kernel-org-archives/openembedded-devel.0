@@ -1,23 +1,29 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 79ED0733C3;
-	Sat, 14 Feb 2015 10:06:58 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t1EA6vdu032740; Sat, 14 Feb 2015 10:06:57 GMT
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id RFuyvFggqnMT; Sat, 14 Feb 2015 10:06:57 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t1EA6inG032729
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Sat, 14 Feb 2015 10:06:55 GMT
-Message-ID: <1423908404.20217.100.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 14 Feb 2015 10:06:44 +0000
-In-Reply-To: <CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f53.google.com (mail-qg0-f53.google.com
+	[209.85.192.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 867BE732FE
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Feb 2015 13:09:18 +0000 (UTC)
+Received: by mail-qg0-f53.google.com with SMTP id f51so17289996qge.12
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Feb 2015 05:09:19 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=mTP15OGQaSWXyMIVQkKvD+M0S6ql/b8F4pin5Xx/eaY=;
+	b=av9JdNKf536byLMS/1Jl/n8n+nSqb6SMtJs64309r5xI5/d073WqkTn6Fu5C/d1FA6
+	0ZFbo4C7eEjuVC3fWgLLW1PRLsmSdKS5Og6m+1NoNw+ruJrm1r1jfJpERnFKJQg9D6Y0
+	bdWsMOucLYyI8FBLeITgU9ZEuWLM46OC5H3FujgmgS09z+KGk0kYd3Q5SPmb7C18JAZe
+	rXU8Y9ejjbBreuPVhaMLaZAbsT0SrKucg2MZeVtMED12zUE2Zj5BVnIHHTmn0vqC+9SY
+	zrudz1VXXPWWmCiFa/UE0c3rQ9+AI8IRwX7X1+QRgmnBGJhDCI5344AAqVP4IYKd6z5B
+	1x6A==
+X-Gm-Message-State: ALoCoQnnDJn7UO+DtjOtCPOjNqGjVl8znpP/bwasZABrzFr+Dpfq4HHXesPQmWoU0yitXyaZvtLg
+X-Received: by 10.140.133.69 with SMTP id 66mr6674483qhf.17.1423919359590;
+	Sat, 14 Feb 2015 05:09:19 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.96.166 with HTTP; Sat, 14 Feb 2015 05:08:59 -0800 (PST)
+In-Reply-To: <1423908404.20217.100.camel@linuxfoundation.org>
 References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
 	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
 	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
@@ -29,8 +35,12 @@ References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
 	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
 	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
 	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
-X-Mailer: Evolution 3.12.7-0ubuntu1 
-Mime-Version: 1.0
+	<1423908404.20217.100.camel@linuxfoundation.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Sat, 14 Feb 2015 13:08:59 +0000
+Message-ID: <CAJTo0La6i2hDqPcZFjvrcPsRReNhirfsbOxD-_udJJDQ7YrKhw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
 	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
@@ -49,35 +59,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2015 10:07:00 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 14 Feb 2015 13:09:19 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Khem,
+Hi,
 
-On Thu, 2015-02-12 at 15:35 +0800, Khem Raj wrote:
-> I have refreshed the branch to include the patch which moves the src
-> uri to use the newly released glibc 2.21 branch
-> and please run it via autobuilder ( top 5 commits )
+On 14 February 2015 at 10:06, Richard Purdie <
+richard.purdie@linuxfoundation.org> wrote:
 
-Its running on the autobuilder at the moment. Errors will be reported to
-the error reporting system and can be seen at:
+> Right now, poky-tiny failed due to warning are errors and unused
+> symbols. Minnow failed due to SSE instruction issues. Full build logs
+> are also available on the autobuilder:
+>
 
-http://errors.yoctoproject.org/Errors/Search/?items=10&query=be29d13a847d458efaf542ed302e48050f67a655
+Now those SSE errors I thought were fixed - is this more of the same or did
+I manage to drop a patch when merging?
 
-Right now, poky-tiny failed due to warning are errors and unused
-symbols. Minnow failed due to SSE instruction issues. Full build logs
-are also available on the autobuilder:
-
-https://autobuilder.yoctoproject.org/main/tgrid
-
-as ross/mut-next. We do have other changes in the branch but the above
-are pretty clearly glibc.
-
-Other errors will go to the places above as the builds complete/fail.
-
-Cheers,
-
-Richard
-
+Ross
 
