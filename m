@@ -1,35 +1,42 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f179.google.com (mail-yk0-f179.google.com
-	[209.85.160.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CB43606E8
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Feb 2015 21:34:27 +0000 (UTC)
-Received: by mail-yk0-f179.google.com with SMTP id 9so11818539ykp.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Feb 2015 13:34:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=pFOLKODmfh3zY8Grmk4oW26xs7rB8fmJMLyI/XcC3X4=;
-	b=nk9VGXRNKEyS35pT1uJsFIfGZSi1HehyxA/PzaqJIkfY0Q6GCSENnyovYKGm1SW/pY
-	B18v7qA2Ww0LPKcF6BIkWtLAgfkZbO5IZMCcgmmiHz6Xo1nK/HGGgY+78MPaWubjCygG
-	wWpKsIEGZVLnVLjD4RDgp8QPbO4ScOaleJZk/Y5ieK/XPD2alMwcXBJI4BLuFyVEb/Ts
-	5gvqcSNFwKhFnhFtGLMhxd6LZThPnjj+qWUGhN4moTAEg4kzAxV/pqgaW+GyGrNhFp96
-	sjs5YiJqilD8VfIBPEKk+wyO09S30q/F4HAdaWPsF9NxkHAGNehX9iQGRv0hKNN6Zjog
-	3ySw==
-MIME-Version: 1.0
-X-Received: by 10.236.22.71 with SMTP id s47mr14538713yhs.37.1424036068422;
-	Sun, 15 Feb 2015 13:34:28 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.133 with HTTP; Sun, 15 Feb 2015 13:34:28 -0800 (PST)
-In-Reply-To: <54DF0A5A.80700@pseudoterminal.org>
-References: <54DF0A5A.80700@pseudoterminal.org>
-Date: Sun, 15 Feb 2015 19:34:28 -0200
-X-Google-Sender-Auth: OtWMclDgQcrdERlExvwJ8UfZ8u4
-Message-ID: <CAP9ODKpqBjbbSam7+p0cvYKQUwyAsa9tK24DTo+-=uGofJs9cQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Question about RDEPENDS and RRECOMMENDS
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id B9FB7727D1;
+	Sun, 15 Feb 2015 21:59:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1FLxHGo023005; Sun, 15 Feb 2015 21:59:26 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 5vu3h50iRxsU; Sun, 15 Feb 2015 21:59:26 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1FLxBK3022909
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Sun, 15 Feb 2015 21:59:23 GMT
+Message-ID: <1424037551.20217.103.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 15 Feb 2015 21:59:11 +0000
+In-Reply-To: <1423908404.20217.100.camel@linuxfoundation.org>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
+	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
+	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
+	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
+	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
+	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
+	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
+	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
+	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
+	<1423908404.20217.100.camel@linuxfoundation.org>
+X-Mailer: Evolution 3.12.7-0ubuntu1 
+Mime-Version: 1.0
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,56 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Feb 2015 21:34:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 15 Feb 2015 21:59:30 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello Carlos,
+On Sat, 2015-02-14 at 10:06 +0000, Richard Purdie wrote:
+> Hi Khem,
+> 
+> On Thu, 2015-02-12 at 15:35 +0800, Khem Raj wrote:
+> > I have refreshed the branch to include the patch which moves the src
+> > uri to use the newly released glibc 2.21 branch
+> > and please run it via autobuilder ( top 5 commits )
+> 
+> Its running on the autobuilder at the moment. Errors will be reported to
+> the error reporting system and can be seen at:
+> 
+> http://errors.yoctoproject.org/Errors/Search/?items=10&query=be29d13a847d458efaf542ed302e48050f67a655
+> 
+> Right now, poky-tiny failed due to warning are errors and unused
+> symbols. Minnow failed due to SSE instruction issues. Full build logs
+> are also available on the autobuilder:
+> 
+> https://autobuilder.yoctoproject.org/main/tgrid
+> 
+> as ross/mut-next. We do have other changes in the branch but the above
+> are pretty clearly glibc.
+> 
+> Other errors will go to the places above as the builds complete/fail.
 
-On Sat, Feb 14, 2015 at 6:42 AM, Carlos Rafael Giani
-<dv@pseudoterminal.org> wrote:
-...
-> So, it would make sense to establish some sort of dependency. But how
-> exactly? I thought of something like this:
->
->   RDEPENDS_gstreamer1.0-plugins-imx-imxaudio =
-> "gstreamer1.0-plugins-good-audioparsers"
->   RDEPENDS_gstreamer1.0-plugins-imx-imxvpu =
-> "gstreamer1.0-plugins-bad-videoparsersbad"
->
-> but then I also need to add gstreamer1.0-plugins-good and
-> gstreamer1.0-plugins-bad to the DEPENDS list, otherwise I get a warning
-> like:
->
->   QA Issue: gstreamer1.0-plugins-imx-imxaudio rdepends on
-> gstreamer1.0-plugins-good-audioparsers, but it isn't a build dependency?
-> [build-deps]
+FWIW I tested the gcc upgrade without glibc and that seems ok so I've
+merged that whilst we work out the issues with glibc.
 
-> But if I add these recipes to the DEPENDS variable, then the RDEPENDS spec
-> is pointless, isn't it?
-> Another option would be to use RRECOMMENDS instead of RDEPENDS, but I am not
-> sure if this is such a good idea.
+Cheers,
 
-The border line between RDEPENDS and RRECOMMENDS is very thin. The
-rule that I use is basically:
+Richard
 
- - if something requires A to run - RDEPENDS
- - if something is usually used with A installed - RRECOMMENDS
- - if something can make use of A in some cases - RSUGGESTS
-
-As you said "It is possible to install gstreamer1.0-plugins-imx
-packages without these other packages." it seems to be that the right
-one is RRECOMMENDS so all users will have those installed by default
-while you keep the possibility of skipping (using BAD_RECOMMENDS) for
-advanced users.
-
-Just for completeness, the QA issue about missing build-dependency is
-something we should pay attention to but it may be a false positive as
-in your cause you don't depends on them for building, just runtime. So
-you can whitelist the warning to avoid the noise but adding the
-depends would be wrong.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
