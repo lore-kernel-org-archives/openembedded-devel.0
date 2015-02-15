@@ -1,49 +1,29 @@
-Return-Path: <danismostlikely@gmail.com>
-Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
-	[209.85.192.46])
-	by mail.openembedded.org (Postfix) with ESMTP id C9CE760167;
-	Sat, 14 Feb 2015 15:15:52 +0000 (UTC)
-Received: by mail-qg0-f46.google.com with SMTP id z107so17550055qgd.5;
-	Sat, 14 Feb 2015 07:15:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=h8/xFKjtA4aVJkAVwIV2FE2z/lkuWzzx/Dk6jeMH/xQ=;
-	b=BMPkFwRbu7JFI1zGMBRD7DZepj7X7k3J7tz+CS0RPZfNGawcktsM068BByauVbcTp3
-	4dgLLFFtQHqC3PHNPA5ZmAuRpRptsHz089QFdmU9995wHw5nLCRuzdA6AjfDKRrUdax6
-	Sa+pCBv49k+M3XmeA2tBVaWr4yRMs0pGYwrQ7VHhA6GmOufuUyr0kCCVo3YSSkqanuY2
-	YstR1C9EBhwLR0DpCJjOy2B4DeN5qx1G0LZ8zkQY23MVOgNEXHVCEiG3Ub6VqD/28dcN
-	EAWcFUpiCfQhdX5RaCrHfWndERldTBOxwH2CE5vQl2dBcz3/yfO8qqP5o9VwnaAtZS+Q
-	CSmg==
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 24725606E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Feb 2015 06:51:06 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="57615182"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 15 Feb 2015 14:47:25 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t1F6oCUP005839
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Feb 2015 14:50:12 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Sun, 15 Feb 2015 14:50:59 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 15 Feb 2015 14:45:55 +0800
+Message-ID: <1423982756-45953-2-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1423982756-45953-1-git-send-email-biannm@cn.fujitsu.com>
+References: <1423982756-45953-1-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Received: by 10.229.131.138 with SMTP id x10mr23780111qcs.25.1423926954004; 
-	Sat, 14 Feb 2015 07:15:54 -0800 (PST)
-Received: by 10.96.118.39 with HTTP; Sat, 14 Feb 2015 07:15:53 -0800 (PST)
-Received: by 10.96.118.39 with HTTP; Sat, 14 Feb 2015 07:15:53 -0800 (PST)
-In-Reply-To: <CAJTo0La6i2hDqPcZFjvrcPsRReNhirfsbOxD-_udJJDQ7YrKhw@mail.gmail.com>
-References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
-	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
-	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
-	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
-	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
-	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
-	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
-	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
-	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
-	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
-	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
-	<1423908404.20217.100.camel@linuxfoundation.org>
-	<CAJTo0La6i2hDqPcZFjvrcPsRReNhirfsbOxD-_udJJDQ7YrKhw@mail.gmail.com>
-Date: Sat, 14 Feb 2015 09:15:53 -0600
-Message-ID: <CACS+7ZTHKHN1cnKo0YvN03LBj5KRgH_MgDa5ZEquoZg6qruL4w@mail.gmail.com>
-From: Dan McGregor <danismostlikely@gmail.com>
-To: Ross Burton <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: yocto@yoctoproject.org,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-oe][PATCH 1/2] lmsensors: install sensord into sbindir same as ubuntu and debian
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,34 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Feb 2015 15:15:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 15 Feb 2015 06:51:07 -0000
+Content-Type: text/plain
 
-On 14 Feb 2015 07:09, "Burton, Ross" <ross.burton@intel.com> wrote:
->
-> Hi,
->
-> On 14 February 2015 at 10:06, Richard Purdie <
-richard.purdie@linuxfoundation.org> wrote:
->>
->> Right now, poky-tiny failed due to warning are errors and unused
->> symbols. Minnow failed due to SSE instruction issues. Full build logs
->> are also available on the autobuilder:
->
->
-> Now those SSE errors I thought were fixed - is this more of the same or
-did I manage to drop a patch when merging?
->
-> Ross
->
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-There are SSE errors that were fixed upstream post-release. I don't know if
-that's what's affecting you, but they're not in these recipes.
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb
+index c2aefba..113c6fc 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.3.5.bb
+@@ -37,7 +37,7 @@ do_compile() {
+ 
+ do_install() {
+     oe_runmake user_install DESTDIR=${D}
+-    install -m 0755 ${S}/prog/sensord/sensord ${D}${bindir}
++    install -m 0755 ${S}/prog/sensord/sensord ${D}${sbindir}
+     install -m 0644 ${S}/prog/sensord/sensord.8 ${D}${mandir}/man8
+ 
+     # Install directory
+@@ -90,7 +90,7 @@ FILES_${PN}-sensors-doc = "${mandir}/man1 ${mandir}/man5"
+ RDEPENDS_${PN}-sensors = "${PN}-libsensors"
+ 
+ # sensord logging daemon
+-FILES_${PN}-sensord = "${bindir}/sensord ${sysconfdir}/init.d/sensord"
++FILES_${PN}-sensord = "${sbindir}/sensord ${sysconfdir}/init.d/sensord"
+ FILES_${PN}-sensord-dbg = "${bindir}/.debug/sensord"
+ FILES_${PN}-sensord-doc = "${mandir}/man8/sensord.8"
+ RDEPENDS_${PN}-sensord = "${PN}-sensors rrdtool"
+-- 
+1.9.1
 
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
 
