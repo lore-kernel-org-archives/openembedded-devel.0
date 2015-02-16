@@ -1,39 +1,28 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f54.google.com (mail-yh0-f54.google.com
-	[209.85.213.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AEFB60556
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AD8865C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 13:02:30 +0000 (UTC)
-Received: by mail-yh0-f54.google.com with SMTP id z6so13868112yhz.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 05:02:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=0lSjEoDWZCfBX+C8oS92qm4skBiIhiBNzz2kZIn9qVg=;
-	b=bQo/hcFB9o+/DXvUP9QtaQneax2ct65EBuyOjDhJT/lNo/HN8cN0MajGQLSMRBR3p/
-	bvP3vM0ZakhO9A+gehF/F+OOYtXWO2JuX9mhFx5PWBK/nA6R+fK2id/WBcPu2ADeOxFH
-	RwKvNj23YxvHehuM6DLR6EVTMzrUQ77gCD7mmuSO+AMWwaWRGkYfQc5abYKvGKbBrr6f
-	bo8orFARMhYdmjqYA0QQsk2dMJyZIwjI660bJZtlh9zSoGf/WQDA9MFiXbuwj5srx498
-	qAG83cmCjm4bad65lDq48giMvWNmKqAYHDk7BQpc8G1FNNge3YrGUsTOuXiLQy+0a2Zf
-	QfAw==
+	Mon, 16 Feb 2015 13:24:51 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga102.fm.intel.com with ESMTP; 16 Feb 2015 05:24:51 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.09,587,1418112000"; d="scan'208";a="686347512"
+Received: from mmettala-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.7.57])
+	by orsmga002.jf.intel.com with ESMTP; 16 Feb 2015 05:24:51 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Tom King <ka6sox@gmail.com>
+Date: Mon, 16 Feb 2015 13:24:50 +0000
+Message-ID: <37480247.FvVHZhi4X8@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.4 (Linux/3.18.5-101.fc20.x86_64; KDE/4.14.4; x86_64; ; )
+In-Reply-To: <3777411.pG0mYOicST@peggleto-mobl5.ger.corp.intel.com>
+References: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
+	<3777411.pG0mYOicST@peggleto-mobl5.ger.corp.intel.com>
 MIME-Version: 1.0
-X-Received: by 10.236.44.98 with SMTP id m62mr15798777yhb.136.1424091751761;
-	Mon, 16 Feb 2015 05:02:31 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.133 with HTTP; Mon, 16 Feb 2015 05:02:31 -0800 (PST)
-In-Reply-To: <54E1E839.1000706@pseudoterminal.org>
-References: <54DF0A5A.80700@pseudoterminal.org>
-	<CAP9ODKpqBjbbSam7+p0cvYKQUwyAsa9tK24DTo+-=uGofJs9cQ@mail.gmail.com>
-	<2529087.slZT0YBCqg@peggleto-mobl5.ger.corp.intel.com>
-	<CAP9ODKpWO7wbutYpZBwRh-TPoNhGjCPnun_gJ4SnQaDAPjwCAQ@mail.gmail.com>
-	<54E1E839.1000706@pseudoterminal.org>
-Date: Mon, 16 Feb 2015 11:02:31 -0200
-X-Google-Sender-Auth: cFtgTu6Njk2LWrR9f1PwJJNg5Bs
-Message-ID: <CAP9ODKr47rHwxzAuzaTs_W=s=j4D5q2iN5x0YqvnkPm7XX6HxA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Question about RDEPENDS and RRECOMMENDS
+Cc: "Viguera, Javier" <Javier.Viguera@digi.com>,
+	openembedded-devel@lists.openembedded.org, scerveau <scerveau@voxtok.com>
+Subject: Re: [meta-networking] crda-1.1.3 broken in dylan, dora, daisy and dizzy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,69 +36,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2015 13:02:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Feb 2015 13:24:56 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Mon, Feb 16, 2015 at 10:53 AM, Carlos Rafael Giani
-<dv@pseudoterminal.org> wrote:
-> On 02/16/2015 01:42 PM, Otavio Salvador wrote:
->>
->> On Mon, Feb 16, 2015 at 9:12 AM, Paul Eggleton
->> <paul.eggleton@linux.intel.com> wrote:
-...
->>> The QA warning message could perhaps be worded more accurately - what it
->>> means
->>> is there in an implicit runtime dependency and there is no RDEPENDS (not
->>> DEPENDS) explicitly telling the system to ensure that that dependency is
->>> satisfied. Whitelisting is never the proper way to fix this warning -
->>> either add
->>> an explicit RDEPENDS, or use configuration to ensure that the implicit
->>> dependency isn't needed.
->>
->>  From my understand, which Carlos can confirm, what he did was adding
->> the package on the rdepends. Once this was done the QA warnings shows
->> up which is wrong.
->>
->> This can be seen at 'sed' recipe:
->>
->> ---
->> SUMMARY = "Stream EDitor (text filtering utility)"
->> ...
->> RDEPENDS_${PN}-ptest += "make locale-base-ru-ru ${PN}"
->> ---
->>
->> In my system, with ptest enabled, I see:
->>
->> WARNING: QA Issue: sed-ptest rdepends on locale-base-ru-ru, but it
->> isn't a build dependency? [build-deps]
->>
->> and this is clearly a false positive as this uses this locale at
->> runtime for a test. Not necessarily it needs to have a DEPENDS on it
->> which would imply it would need to be available in sysroot before sed
->> configure could start.
->>
->> What I think is missing is that the 'build-deps' check would need to
->> whitelist the dependencies which come from a /explict/ package added
->> in a RDEPENDS. What do you think?
->>
->
-> Yes, exactly. The current QA warning greatly limits the usefulness of
-> RDEPENDS, in my opinion.  If I explicitely add a package name B to RDEPENDS
-> in recipe A, and I add A to the IMAGE_INSTALL list, then I am stating that B
-> must also be built and installed on the image, but it does *not* have to be
-> built before A. Yet, the warnings makes it look as if B has to be built
-> before A. This is confusing.
->
-> It makes a lot of sense to warn if for example a build script autodetects
-> and links against a certain library which is not mentioned in the DEPENDS
-> variable. But this is a different use case than the one mentioned above, and
-> somehow it seems that both were lumped together.
+On Friday 30 January 2015 17:23:55 Paul Eggleton wrote:
+> On Friday 30 January 2015 16:51:22 Viguera, Javier wrote:
+> > Seems that CRDA maintainers did some changes that broke the fetch of the
+> > package for all those releases.
+> > 
+> > These are the URIs in the package recipe:
+> > 
+> > http://wireless.kernel.org/download/crda/crda-1.1.3.tar.bz2
+> > http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01
+> > .1 1-regulatory.bin
+> > 
+> > The correct ones are:
+> > 
+> > https://www.kernel.org/pub/software/network/crda/crda-1.1.3.tar.bz2
+> > https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-> > 20 13.01.11.tar.bz2
+> > 
+> > Notice that they not only changed the address but also now the regulatory
+> > binary is packed in a tarball.
+> > 
+> > So at this point there are two options here:
+> > 
+> > 1. Rework the recipe with the new locations, checksums and adapting the
+> > 'do_install' to copy the regulatory binary from a different directory.
+> > This
+> > has to be done for all the releases in the subject.
+> > 
+> > 2. Just put the 'crda-1.1.3.tar.bz2' and '2013.01.11-regulatory.bin' in
+> > the
+> > openembedded mirror and let all the old releases work without changes in
+> > the recipes.
+> > 
+> > My preference is number 2, along with an upgrade of the package to the new
+> > version 3.13 for the not-yet-released 'master' branch (there is currently
+> > a
+> > patch for that in the mailing list).
+> 
+> I agree, #2 is the best option to take care of the older branches.
+> 
+> Tom, can you please fetch the following files and add them to the OE source
+> mirror:
+> 
+>   http://distfiles.lesslinux.org/crda-1.1.3.tar.bz2
+>   http://distfiles.lesslinux.org/2013.01.11-regulatory.bin
+> 
+> I've verified the md5sums match the recipe:
+> 
+>   29579185e06a75675507527243d28e5c  crda-1.1.3.tar.bz2
+>   e0c8a5ca63fb8bf803213f9a0c90b50b  2013.01.11-regulatory.bin
 
-What seems to be missing is the QA check to verify if B is explicitly
-cited in the recipe and in case it should be whitelisted.
+Tom could you please upload these files? People are still stumbling over this 
+problem.
+
+Thanks,
+Paul
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
