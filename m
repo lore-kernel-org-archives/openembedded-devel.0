@@ -1,35 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 1589E7355F
+Return-Path: <sledz@dresearch-fe.de>
+Received: from zk223.dresearch-fe.de (zk223.dresearch-fe.de [217.92.177.116])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A29A71EC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 18:01:27 +0000 (UTC)
-Received: by mail-we0-f181.google.com with SMTP id w62so30625517wes.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 10:01:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=iHqX7bYqoXyzuXsi/qdUA4JMgMkXzUJr9R06sTukYfI=;
-	b=eOxA2jQPo1j+NAJeK6eoHiWwrhh550JfulqhygX6Sdgw2dEGLc7b+aapu1Q8O9zhNh
-	5t8wizhdRajVwU8VFmnO/QzVY3d4SAzy44w56gYTolU8nKzWU1rRB4djSDo02fOshXKS
-	NWcFKsl2MoMdeKYhPYX+ZguyIrTKsCdPrO6VeTY1dkyfT/KQHlOFaeM6gd33cBvvvST/
-	bRNG6KPqFXtbAFRtWafMAhYFbjOIQD4BurkI3Y2Qr1ijzr0KgJ9XmuROabEVX93YnxgZ
-	BTzVpXcYbE9zf3LvIytFrzbilsPXTyrR41j18tSnXifoq/cedQharP603FgLqQk/qmSf
-	QPag==
-X-Received: by 10.180.92.226 with SMTP id cp2mr49831630wib.67.1424109688316;
-	Mon, 16 Feb 2015 10:01:28 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	l6sm23853499wjx.33.2015.02.16.10.01.27
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Feb 2015 10:01:27 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Feb 2015 19:01:30 +0100
-Message-Id: <1424109690-28034-1-git-send-email-Martin.Jansa@gmail.com>
+	Mon, 16 Feb 2015 18:37:54 +0000 (UTC)
+Received: from fensuse.internal.dresearch-fe.de
+	(fensuse.internal.dresearch-fe.de [172.29.23.6])
+	by zk223.dresearch-fe.de (Postfix) with ESMTP id 121DCE00E9;
+	Mon, 16 Feb 2015 19:37:52 +0100 (CET)
+Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
+	id 8BE267001FF; Mon, 16 Feb 2015 19:37:51 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch-fe.de>
+To: openembedded-devel@lists.openembedded.org,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 16 Feb 2015 19:37:34 +0100
+Message-Id: <1424111855-22867-1-git-send-email-sledz@dresearch-fe.de>
 X-Mailer: git-send-email 2.3.0
-Subject: [meta-qt5][PATCH] qt5-plugin-generic-vboxtouch: fix unpackaged cmake file
+In-Reply-To: <1423846960-4749-1-git-send-email-sledz@dresearch-fe.de>
+References: <1423846960-4749-1-git-send-email-sledz@dresearch-fe.de>
+Subject: [meta-oe][PATCH v2] rsyslog: fix name of syslogd ua group
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,26 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2015 18:01:33 -0000
+X-List-Received-Date: Mon, 16 Feb 2015 18:37:55 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+All the other syslogd implementations use 'syslogd' as update alternatives
+group name. So rsyslogd should use this too.
+
+Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 ---
- recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb b/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
-index 7308064..5352d15 100644
---- a/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
-+++ b/recipes-qt/qt5/qt5-plugin-generic-vboxtouch_git.bb
-@@ -19,5 +19,6 @@ S = "${WORKDIR}/git/vboxtouch"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+index 422def3..5ab6a30 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+@@ -127,10 +127,10 @@ INITSCRIPT_PARAMS = "defaults"
+ # higher than sysklogd's 100
+ ALTERNATIVE_PRIORITY = "110"
  
- inherit qmake5
+-ALTERNATIVE_${PN} = "rsyslogd syslog-conf syslog-logrotate"
++ALTERNATIVE_${PN} = "syslogd syslog-conf syslog-logrotate"
  
--FILES_${PN} += "${libdir}/qt5/plugins/generic/libvboxtouchplugin.so"
--FILES_${PN}-dbg += "${libdir}/qt5/plugins/generic/.debug/"
-+FILES_${PN} += "${OE_QMAKE_PATH_PLUGINS}/generic/libvboxtouchplugin.so"
-+FILES_${PN}-dbg += "${OE_QMAKE_PATH_PLUGINS}/generic/.debug/"
-+FILES_${PN}-dev += "${OE_QMAKE_PATH_LIBS}/cmake/*"
+-ALTERNATIVE_LINK_NAME[rsyslogd] = "${base_sbindir}/syslogd"
+-ALTERNATIVE_TARGET[rsyslogd] = "${sbindir}/rsyslogd"
++ALTERNATIVE_LINK_NAME[syslogd] = "${base_sbindir}/syslogd"
++ALTERNATIVE_TARGET[syslogd] = "${sbindir}/rsyslogd"
+ ALTERNATIVE_LINK_NAME[syslog-conf] = "${sysconfdir}/syslog.conf"
+ ALTERNATIVE_TARGET[syslog-conf] = "${sysconfdir}/rsyslog.conf"
+ ALTERNATIVE_LINK_NAME[syslog-logrotate] = "${sysconfdir}/logrotate.d/syslog"
 -- 
 2.3.0
 
