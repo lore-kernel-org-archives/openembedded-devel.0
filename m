@@ -1,37 +1,35 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
-	[74.125.82.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 2098865C85
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-yk0-f169.google.com (mail-yk0-f169.google.com
+	[209.85.160.169])
+	by mail.openembedded.org (Postfix) with ESMTP id D86AF606E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 22:28:30 +0000 (UTC)
-Received: by mail-we0-f182.google.com with SMTP id m14so25822113wev.13
+	Mon, 16 Feb 2015 23:13:15 +0000 (UTC)
+Received: by mail-yk0-f169.google.com with SMTP id 79so14439659ykr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 14:28:31 -0800 (PST)
+	Mon, 16 Feb 2015 15:13:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Nb6rRktXsXdt/eXsSecnwQ/q2iZoifU+EQ3KEewREhk=;
-	b=AgAitfLmy5CPylERP2RgDJYvk0DC98w2of7kBikivFnk+x8ax/N8fQpCnKlTGesvdk
-	eEzKlXbBP7nw6bZFSMr+8zkG98kemyQBix2VLMxtgbJ8er2j4sNXZPTW9qN911rx8eVt
-	xR098BZ8F8JLU6hB+V9nKc2KphmpFncOFJYKKMdft+MpjILjoAsZahVHJi5dS58Fw2Bh
-	t2YLipTWFiIaouieGYpHLLpnEIu/PBSjbagBMDqb7SNLcyeDvU9wHzScTHVTmz14fXhR
-	umLtip9UDKQxM06YhA6gFDzaeAD1SdmLId46m383EA5CjPea/56DOkgkwt7ycBEb6AOf
-	1Qqw==
-X-Received: by 10.181.13.148 with SMTP id ey20mr50142080wid.79.1424125711912; 
-	Mon, 16 Feb 2015 14:28:31 -0800 (PST)
-Received: from linuxdev.toradex.int ([46.140.72.82])
-	by mx.google.com with ESMTPSA id
-	fo15sm21520200wic.19.2015.02.16.14.28.30
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Feb 2015 14:28:31 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Feb 2015 23:27:38 +0100
-Message-Id: <1424125658-20285-2-git-send-email-max.oss.09@gmail.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <1424125658-20285-1-git-send-email-max.oss.09@gmail.com>
-References: <1424125658-20285-1-git-send-email-max.oss.09@gmail.com>
-Cc: koen@dominion.thruhere.net
-Subject: [OE-core][RFC] openjdk-7: enable xawt
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=Tve2Jn1MQr4cJbdx48KobILtnftpkCSWZi5oW2hwMCo=;
+	b=1DAswMFlewJL725+McEblyh6yqBKWO+W4Aus36n91nYxXOkx8dewX/u4Ahrsr1nsKP
+	aocXkC9v+gYzZKD3T1q1w3ftbwo1zv6PutSNo6DNG31guXSRtivfmotUOYn+Tc+JO0Cy
+	vX1SKVDuPzD/U3MLciKihq8coEIXf5tXEZvCFbIKWB/zvyuB8L8gK1VtqztY3VKSoBg0
+	/0vB+a3CAaCk60STiooGYsE715el1nKj37OTRLZkvQTmzlsMpD/e+YAas4kzNu+1IeOL
+	AxKmbYdPsQRKDC2yqDKq+svN9WhEEl89AxNrSFJaYD4NNgitMHR4JVyu5JLytmcushgR
+	Z2AQ==
+MIME-Version: 1.0
+X-Received: by 10.170.132.144 with SMTP id y138mr281788ykb.70.1424128396607;
+	Mon, 16 Feb 2015 15:13:16 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.170.123.133 with HTTP; Mon, 16 Feb 2015 15:13:16 -0800 (PST)
+In-Reply-To: <1424123733-16696-1-git-send-email-max.oss.09@gmail.com>
+References: <1424123733-16696-1-git-send-email-max.oss.09@gmail.com>
+Date: Mon, 16 Feb 2015 21:13:16 -0200
+X-Google-Sender-Auth: ohW1a4OWq7mNy9OK4tGUjULoSZk
+Message-ID: <CAP9ODKqN2iTwBSQUJW46YH8A-qSkV4FPbCsJ-Y2ArSr9mBTXFQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH 0/7] Allow build for multiple ARCH in the same builddir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,51 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2015 22:28:31 -0000
+X-List-Received-Date: Mon, 16 Feb 2015 23:13:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The build of xawt has been disabled as its build seemed to fail during a qemu
-call to generate a file with information on variable sizes.
+Hello Max,
 
-qemu is now called with the relevant path into sysroot and thus works.
+First I want to Thank you for all the hard work you've been putting in
+the meta-java lately. This is an important step on the right direction
+and fixes several things a lot the process...
 
-This patch enables xawt again.
+On Mon, Feb 16, 2015 at 7:55 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
+> Building a recipe which provides packages for allarch and ${TUNE_PKGARCH}
+> fails if one builds in the same build directory for different TUNE_PKGARCHs.
+>
+> An example is rhino which fails as follows when one builds first for
+> armv7at2hf-vfp and then for armv7at2hf-vfp-neon.
+>     ERROR: The recipe rhino is trying to install files into a
+>     shared area when those files already exist. Those files and their
+>     manifest location are:
+>        /.../ipk/all/librhino-java_1.7r4-r0_all.ipk
+>     Matched in manifest-armv7at2hf-vfp-rhino-package_write_ipk
+>
+> The change in package arch is done in java-library.bbclass. Most of the
+> users of java-library.bbclass don't install any files in the ${TUNE_PKGARCH}
+> packages or install shell scripts which may also be deployed in an allarch
+> package.
+>
+> Most of the recipes including java-library.bbclass no longer build with newer
+> layer revisions.
+> This patchset first update the recipes to build again, changes java-library
+> build all packages in allarch by default and recipes which must have some
+> of their packages in ${TUNE_PKGARCH} to have all of their recipes in
+> ${TUNE_PKGARCH}.
 
-Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
----
- .../icedtea-jdk-nio-use-host-cc.patch              | 22 ----------------------
- 1 file changed, 22 deletions(-)
+All this is perfect. I agree with all here and it does move things on
+a saner way.
 
-diff --git a/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch b/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch
-index 94416bb..8e5da82 100644
---- a/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch
-+++ b/recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch
-@@ -49,25 +49,3 @@ Index: openjdk/jdk/make/java/nio/Makefile
- -endif
-  
-  .PHONY: sources 
--Index: openjdk/jdk/make/sun/Makefile
--===================================================================
----- openjdk/jdk/make/sun/Makefile	2013-07-25 09:10:09.000000000 -0700
--+++ openjdk/jdk/make/sun/Makefile	2013-10-01 21:32:01.625839149 -0700
--@@ -55,7 +55,7 @@
--     endif
--   endif
--   HEADLESS_SUBDIR = headless
---  XAWT_SUBDIR     = xawt
--+  XAWT_SUBDIR     =
-- endif
-- 
-- ifeq ($(PLATFORM), macosx)
--@@ -87,7 +87,7 @@
-- endif
-- SUBDIRS_desktop    = audio $(RENDER_SUBDIR) image \
--                      $(LWAWT_PRE_SUBDIR) $(DISPLAY_LIBS) $(DGA_SUBDIR) $(LWAWT_SUBDIR) \
---                     jawt font jpeg cmm $(DISPLAY_TOOLS) beans
--+                     font jpeg cmm $(DISPLAY_TOOLS) beans
-- SUBDIRS_management = management
-- SUBDIRS_misc       = $(ORG_SUBDIR) rmi $(JDBC_SUBDIR) tracing
-- SUBDIRS_tools      = native2ascii serialver tools jconsole
+> Finaly some of the recipes I tried did not build before and after the proposed
+> changes. I document these in README.nonworking. I don't have the time to work
+> on these and I guess no one has been interested in years.
+
+This is the only thing I believe we can improve. We could use
+PNBLACKLIST as done in meta-oe and put a short reasoning on why it
+fails. I prefer this mostly because people don't read README often and
+will end reporting it is failing...
+
+What do you think?
+
 -- 
-1.9.3
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
