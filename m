@@ -1,31 +1,31 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 270686E614
+Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
+	[74.125.82.175])
+	by mail.openembedded.org (Postfix) with ESMTP id AB3A0606E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 21:45:17 +0000 (UTC)
-Received: by mail-wi0-f181.google.com with SMTP id r20so29053494wiv.2
+	Mon, 16 Feb 2015 21:55:45 +0000 (UTC)
+Received: by mail-we0-f175.google.com with SMTP id x3so31638443wes.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 13:45:18 -0800 (PST)
+	Mon, 16 Feb 2015 13:55:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
 	bh=UZp1ThJEsgul0UAWecdEOs1R0aQpOgz8IL+DUaNkkc8=;
-	b=jSgp4SqVa529cz8jP7bdFxpjI9MtkY/BoRuU5wzPpMdF7oPX54OeCkiNhCmpOCCLPY
-	OVm2lAOoQ0ezjrWJyZ4DATtLq57Oaf9w9/e/ALOVRrPSU6FSzmwwkHfXq8YjIDWkhmsf
-	PSJeh14NjhA8l+Q3Je9jkDJfzSHG7GBYx8jA86HyUgfBIdrZAWM9cyAYOMTby7I52GAu
-	iUsGZoshULaa6tYAefrhPL56oeH2Ty34Rez62XOoWmRr6p6Aq70K7gCFGrpy68EGWcYj
-	MzvlyDRhmQO6bowbY+1SLH8zGOJNXqLj1AMxT54niwRoSC1FlUXwB/hGKXi/BaxqrxJO
-	hqWQ==
-X-Received: by 10.180.73.239 with SMTP id o15mr50657428wiv.14.1424123118853;
-	Mon, 16 Feb 2015 13:45:18 -0800 (PST)
+	b=ie3rVzsttoHfR0ecxnxKdFvA/F+GNM3xRn8VwM4JA+VGAZAAWcsc7NzGPUr686VdtC
+	cfWsRyoiESRlXnzG1pxRblvMK+IJoeOZdJzYWtSnQHSBTbef4cpwlvumJZKgDMvWAojt
+	pyb33rqyYiP/PZhAWNiA1cfFQbnfDXkCi1MR+kQsb6ABPxBTpCeGp9MMLGFuuiGNzPEz
+	lPk4Iw7eiTbyGfCWdhzU1tQgK08K7sweQDnuZMRUqhEylTdSKUh5a8q3CgDFtsT6ldTi
+	0UrEeh67nlBjFa0ejdrmceu2rqq4PE1p15R+PQKGN8xYywFLxya2bPiQ6Vz1GVTQZr6G
+	G/rA==
+X-Received: by 10.194.185.68 with SMTP id fa4mr53646937wjc.111.1424123746103; 
+	Mon, 16 Feb 2015 13:55:46 -0800 (PST)
 Received: from linuxdev.toradex.int ([46.140.72.82])
-	by mx.google.com with ESMTPSA id dn1sm4983701wid.11.2015.02.16.13.45.17
+	by mx.google.com with ESMTPSA id p1sm365956wib.23.2015.02.16.13.55.44
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Feb 2015 13:45:17 -0800 (PST)
+	Mon, 16 Feb 2015 13:55:45 -0800 (PST)
 From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Feb 2015 22:44:41 +0100
-Message-Id: <1424123087-14922-1-git-send-email-max.oss.09@gmail.com>
+Date: Mon, 16 Feb 2015 22:55:27 +0100
+Message-Id: <1424123733-16696-1-git-send-email-max.oss.09@gmail.com>
 X-Mailer: git-send-email 1.9.3
 Subject: [meta-java][PATCH 0/7] Allow build for multiple ARCH in the same builddir
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2015 21:45:19 -0000
+X-List-Received-Date: Mon, 16 Feb 2015 21:55:48 -0000
 
 Building a recipe which provides packages for allarch and ${TUNE_PKGARCH}
 fails if one builds in the same build directory for different TUNE_PKGARCHs.
