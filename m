@@ -1,29 +1,27 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 71FBA73398
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 03C94606E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 07:57:40 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="57783915"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Feb 2015 15:54:06 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t1G7urJ5008298
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Feb 2015 15:56:53 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 16 Feb 2015 15:57:41 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Feb 2015 15:52:36 +0800
-Message-ID: <1424073156-18834-3-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1424073156-18834-1-git-send-email-biannm@cn.fujitsu.com>
-References: <1424073156-18834-1-git-send-email-biannm@cn.fujitsu.com>
+	Mon, 16 Feb 2015 11:12:25 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga103.fm.intel.com with ESMTP; 16 Feb 2015 03:05:01 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.09,587,1418112000"; d="scan'208";a="678590296"
+Received: from mmettala-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.7.57])
+	by fmsmga002.fm.intel.com with ESMTP; 16 Feb 2015 03:12:24 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Date: Mon, 16 Feb 2015 11:12:24 +0000
+Message-ID: <2529087.slZT0YBCqg@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.4 (Linux/3.18.5-101.fc20.x86_64; KDE/4.14.4; x86_64; ; )
+In-Reply-To: <CAP9ODKpqBjbbSam7+p0cvYKQUwyAsa9tK24DTo+-=uGofJs9cQ@mail.gmail.com>
+References: <54DF0A5A.80700@pseudoterminal.org>
+	<CAP9ODKpqBjbbSam7+p0cvYKQUwyAsa9tK24DTo+-=uGofJs9cQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-networking][PATCH v2 2/2] postfix: fix bug of main.cf_2.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Question about RDEPENDS and RRECOMMENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,30 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Feb 2015 07:57:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 16 Feb 2015 11:12:29 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
- ${exec_prefix}/libexec/${PN} => ${libexecdir}
+On Sunday 15 February 2015 19:34:28 Otavio Salvador wrote:
+> On Sat, Feb 14, 2015 at 6:42 AM, Carlos Rafael Giani
+> <dv@pseudoterminal.org> wrote:
+> ...
+> > So, it would make sense to establish some sort of dependency. But how
+> > 
+> > exactly? I thought of something like this:
+> >   RDEPENDS_gstreamer1.0-plugins-imx-imxaudio =
+> > 
+> > "gstreamer1.0-plugins-good-audioparsers"
+> > 
+> >   RDEPENDS_gstreamer1.0-plugins-imx-imxvpu =
+> > 
+> > "gstreamer1.0-plugins-bad-videoparsersbad"
+> > 
+> > but then I also need to add gstreamer1.0-plugins-good and
+> > gstreamer1.0-plugins-bad to the DEPENDS list, otherwise I get a warning
+> > 
+> > like:
+> >   QA Issue: gstreamer1.0-plugins-imx-imxaudio rdepends on
+> > 
+> > gstreamer1.0-plugins-good-audioparsers, but it isn't a build dependency?
+> > [build-deps]
+> > 
+> > But if I add these recipes to the DEPENDS variable, then the RDEPENDS spec
+> > is pointless, isn't it?
+>...
+>
+> Just for completeness, the QA issue about missing build-dependency is
+> something we should pay attention to but it may be a false positive as
+> in your cause you don't depends on them for building, just runtime. So
+> you can whitelist the warning to avoid the noise but adding the
+> depends would be wrong.
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- meta-networking/recipes-daemons/postfix/files/main.cf_2.0 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The QA warning message could perhaps be worded more accurately - what it means 
+is there in an implicit runtime dependency and there is no RDEPENDS (not 
+DEPENDS) explicitly telling the system to ensure that that dependency is 
+satisfied. Whitelisting is never the proper way to fix this warning - either add 
+an explicit RDEPENDS, or use configuration to ensure that the implicit 
+dependency isn't needed.
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0 b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-index bb31451..9e1077f 100644
---- a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-+++ b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-@@ -30,7 +30,7 @@ queue_directory = /var/spool/postfix
- mail_spool_directory = /var/spool/mail
- readme_directory = no
- command_directory = /usr/sbin
--daemon_directory = /usr/libexec/postfix
-+daemon_directory = /usr/lib/postfix
- mail_owner = postfix
- setgid_group = postdrop
- unknown_local_recipient_reject_code = 450
+Cheers,
+Paul
+
 -- 
-1.9.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
