@@ -1,34 +1,35 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FCB97356B
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
+	[209.85.192.45])
+	by mail.openembedded.org (Postfix) with ESMTP id F10297182C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 08:03:05 +0000 (UTC)
-Received: by iecrl12 with SMTP id rl12so36916159iec.2
+	Tue, 17 Feb 2015 08:38:11 +0000 (UTC)
+Received: by mail-qg0-f45.google.com with SMTP id h3so27025639qgf.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 00:03:06 -0800 (PST)
+	Tue, 17 Feb 2015 00:38:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=5fMJaoihR6Gn1ipr/b9lsPrN6gX7xTq4bOFUYgisAq4=;
-	b=e6t2WrtfCikM2eDmW3bkdw0Ip8ITnRccIB/1gwrAju/VOg4j8Tj/shHDQEFjtUzmCw
-	ECVVzHGeu+XM55ShZHeMXdBoTXK7J+4e5RKldOpX4d30H7XHyul8w1L9PUvrGUTKtgk/
-	sPfGogXTK0PbSgAXfXtjR8KLANZTq8DdQQi80fREtk5iqfHg8lbKmFFVbNcc+4sMxlLd
-	zWfyfrrDQXbGCd1NEnGJJU6fhNKKR9NtynxOF+qHn4vCg2kIXE+7ympobo4yH47ZjBH4
-	DzfagGZU5EvV/WXMdza6yORxMkBSTxTmpr8V4Cr6M3MfsNiEXitKGEH9RvdZZUj4p6XQ
-	aWgg==
+	:cc:content-type;
+	bh=Z7NfQT/sATaYPwviizGGpM0V6fRQB5MrsScAPJfAOXg=;
+	b=SVG///48gNT0mKIkW3CvwBLsuwmBbDVbC4l3owA9afaB6OVYUQmiaObF2AuK/PTlge
+	F6rLtDT56p4A3jYADl/TNr2OLueYrVlVEUwkCrUfPPIs+7xtQrbcfjHCbS6LhoUODIKk
+	LGlxLQIVNPPDSy4ZhhWBTy8e1+ffQw3H1B25OUKF2DOC6Fc2gyyJFswzQgWzazZLzxcJ
+	AB9a5gQCKQCwpwMpxoa3/ow847tonKN0FxOHH5RfTW09C2ohlMQ3oBf53lP3AA6UU3RW
+	pYlkSx70gWLTRQ9a4l8gLU21eJYVMKQSf9639NWOxEVqAn5BPAz1TtnhHPbHQbUuwkLp
+	eeZA==
 MIME-Version: 1.0
-X-Received: by 10.50.66.198 with SMTP id h6mr26861314igt.22.1424160186610;
-	Tue, 17 Feb 2015 00:03:06 -0800 (PST)
-Received: by 10.107.138.30 with HTTP; Tue, 17 Feb 2015 00:03:06 -0800 (PST)
-In-Reply-To: <20150216174719.GI2297@jama>
-References: <1423651677-15387-1-git-send-email-sven.ebenfeld@gmail.com>
-	<20150216174719.GI2297@jama>
-Date: Tue, 17 Feb 2015 09:03:06 +0100
-Message-ID: <CAD0=qkLQLHf4+i9jrARQZqwdEzVO4vJefigz6Ge-uQ3H5k7C-Q@mail.gmail.com>
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] stunnel: Update to 5.10
+X-Received: by 10.140.104.1 with SMTP id z1mr829516qge.76.1424162292242; Tue,
+	17 Feb 2015 00:38:12 -0800 (PST)
+Received: by 10.140.82.72 with HTTP; Tue, 17 Feb 2015 00:38:12 -0800 (PST)
+In-Reply-To: <CAP9ODKqN2iTwBSQUJW46YH8A-qSkV4FPbCsJ-Y2ArSr9mBTXFQ@mail.gmail.com>
+References: <1424123733-16696-1-git-send-email-max.oss.09@gmail.com>
+	<CAP9ODKqN2iTwBSQUJW46YH8A-qSkV4FPbCsJ-Y2ArSr9mBTXFQ@mail.gmail.com>
+Date: Tue, 17 Feb 2015 09:38:12 +0100
+Message-ID: <CAEHkU3UQ01La1rSaMSWaeCQUE4jxMqpb9GZgswKu1_oJN5k7KQ@mail.gmail.com>
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-java][PATCH 0/7] Allow build for multiple ARCH in the same builddir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,111 +43,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2015 08:03:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Feb 2015 08:38:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I have posted an updated PATCH v2 to fix these qa issues.
-Mit freundlichen Gr=C3=BC=C3=9Fen,
-Sven Ebenfeld
+Hi Otavio
 
-
-2015-02-16 18:47 GMT+01:00 Martin Jansa <martin.jansa@gmail.com>:
-> On Wed, Feb 11, 2015 at 11:47:57AM +0100, Sven Ebenfeld wrote:
->> Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
->> ---
->>  .../recipes-support/stunnel/stunnel_4.56.bb            | 17 -----------=
-------
->>  .../recipes-support/stunnel/stunnel_5.10.bb            | 18 +++++++++++=
-+++++++
->>  2 files changed, 18 insertions(+), 17 deletions(-)
->>  delete mode 100644 meta-networking/recipes-support/stunnel/stunnel_4.56=
-.bb
->>  create mode 100644 meta-networking/recipes-support/stunnel/stunnel_5.10=
-.bb
+2015-02-17 0:13 GMT+01:00 Otavio Salvador <otavio@ossystems.com.br>:
+> Hello Max,
 >
-> Causes new QA warnings:
-> stunnel-5.10: stunnel rdepends on libsystemd, but it isn't a build
-> dependency? [build-deps]
-> stunnel-5.10: stunnel rdepends on liblzma, but it isn't a build
-> dependency? [build-deps]
+> First I want to Thank you for all the hard work you've been putting in
+> the meta-java lately. This is an important step on the right direction
+> and fixes several things a lot the process...
+Welcome.
+
 >
+> On Mon, Feb 16, 2015 at 7:55 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
+>> Building a recipe which provides packages for allarch and ${TUNE_PKGARCH}
+>> fails if one builds in the same build directory for different TUNE_PKGARCHs.
 >>
->> diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/m=
-eta-networking/recipes-support/stunnel/stunnel_4.56.bb
->> deleted file mode 100644
->> index 74f2234..0000000
->> --- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
->> +++ /dev/null
->> @@ -1,17 +0,0 @@
->> -SUMMARY =3D "Program for providing universal TLS/SSL tunneling service"
->> -DESCRIPTION =3D "SSL encryption wrapper between remote client and local=
- (inetd-startable) or remote server."
->> -SECTION =3D "net"
->> -LICENSE =3D "GPLv2"
->> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df41ebed8571077706fee0b860c4d=
-6666"
->> -DEPENDS =3D "openssl zlib tcp-wrappers"
->> -
->> -RDEPENDS_${PN} +=3D "perl"
->> -
->> -SRC_URI =3D "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz=
-"
->> -
->> -SRC_URI[md5sum] =3D "ac4c4a30bd7a55b6687cbd62d864054c"
->> -SRC_URI[sha256sum] =3D "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2e=
-c8d2778a01c871293"
->> -
->> -inherit autotools
->> -
->> -EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_EXECPREFIXDIR}' --disable-fi=
-ps"
->> diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.10.bb b/m=
-eta-networking/recipes-support/stunnel/stunnel_5.10.bb
->> new file mode 100644
->> index 0000000..0feacc1
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/stunnel/stunnel_5.10.bb
->> @@ -0,0 +1,18 @@
->> +SUMMARY =3D "Program for providing universal TLS/SSL tunneling service"
->> +DESCRIPTION =3D "SSL encryption wrapper between remote client and local=
- (inetd-startable) or remote server."
->> +SECTION =3D "net"
->> +LICENSE =3D "GPLv2"
->> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D866cdc7459d91e092b174388fab8=
-d283"
->> +
->> +DEPENDS =3D "openssl zlib tcp-wrappers"
->> +
->> +RDEPENDS_${PN} +=3D "perl"
->> +
->> +SRC_URI =3D "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz"
->> +
->> +SRC_URI[md5sum] =3D "a0edda805eb7d6ea600a230fb0979ea1"
->> +SRC_URI[sha256sum] =3D "032bfc1854f8a0b9e452343c36ec6b52c7e0daef0863423=
-c6b13a61a7c92eb23"
->> +
->> +inherit autotools
->> +
->> +EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_EXECPREFIXDIR}' --disable-fi=
-ps"
->> \ No newline at end of file
->> --
->> 1.8.1.rc3
+>> An example is rhino which fails as follows when one builds first for
+>> armv7at2hf-vfp and then for armv7at2hf-vfp-neon.
+>>     ERROR: The recipe rhino is trying to install files into a
+>>     shared area when those files already exist. Those files and their
+>>     manifest location are:
+>>        /.../ipk/all/librhino-java_1.7r4-r0_all.ipk
+>>     Matched in manifest-armv7at2hf-vfp-rhino-package_write_ipk
 >>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> The change in package arch is done in java-library.bbclass. Most of the
+>> users of java-library.bbclass don't install any files in the ${TUNE_PKGARCH}
+>> packages or install shell scripts which may also be deployed in an allarch
+>> package.
+>>
+>> Most of the recipes including java-library.bbclass no longer build with newer
+>> layer revisions.
+>> This patchset first update the recipes to build again, changes java-library
+>> build all packages in allarch by default and recipes which must have some
+>> of their packages in ${TUNE_PKGARCH} to have all of their recipes in
+>> ${TUNE_PKGARCH}.
+>
+> All this is perfect. I agree with all here and it does move things on
+> a saner way.
+Great.
+
+>
+>> Finaly some of the recipes I tried did not build before and after the proposed
+>> changes. I document these in README.nonworking. I don't have the time to work
+>> on these and I guess no one has been interested in years.
+>
+> This is the only thing I believe we can improve. We could use
+> PNBLACKLIST as done in meta-oe and put a short reasoning on why it
+> fails. I prefer this mostly because people don't read README often and
+> will end reporting it is failing...
+>
+> What do you think?
+I have a look into the PNBLACKLIST syntax and send a V2 of the patchset.
+
 >
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+Regards
+Max
 
