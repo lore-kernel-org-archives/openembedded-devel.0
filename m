@@ -1,35 +1,35 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 778807357D
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 89C557358C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 09:57:58 +0000 (UTC)
-Received: by mail-wg0-f41.google.com with SMTP id b13so34218105wgh.0
+	Tue, 17 Feb 2015 09:58:01 +0000 (UTC)
+Received: by mail-wg0-f47.google.com with SMTP id x12so20516611wgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 01:58:00 -0800 (PST)
+	Tue, 17 Feb 2015 01:58:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=HMPDMikoBba6Xe8NFAu5nN4kmNygcWunvplU50cjroM=;
-	b=MvsDr+qkjwRphzu2MeiSf6K7EVaADdTYfzSJYjl2IdecVEKXptP3IoIuS9RQkY6ECo
-	6eK7vyaWBjLvDRzCe79HFBY0tsmucOvU2G371GaPzgYBuLyc8/BmMQ2aqe3cenukbvb+
-	eRsq8R5L4YhUdnlsMIIW+M9j8yxpnLq1HUhZqXPvvsUh3PqQvGrbKQVGpxz0ax+8lF43
-	aOUIJRC60ljzxwf16NaZwk9yKP73KtmAFrtUa34fu2xKQ1nyd9vTjXxTibRrJ3LERdU7
-	ZEHsRHW05IxiB1auLqBI+eN/gofBtp1NdUc9yUh8H2qzEDp10grfjPcFZkn7Uwsgocaf
-	dv7A==
-X-Received: by 10.194.78.231 with SMTP id e7mr58585829wjx.33.1424167080000;
-	Tue, 17 Feb 2015 01:58:00 -0800 (PST)
+	bh=brlZVWw2ukLYM93NejBcsHqeQEOtVEA6wFOp/GMR3yQ=;
+	b=NDio3Z3ysW9TXdNIpZCYyZoIpfGUGM2sW3hmarozNGB88irTab5K9Vh+Evptc98Q5x
+	7PPXRClnNM4aMMYADHEGN0MjTpaXrVLW+b5OUDm5mKZDEWRQRyJwiFM92aLESiUd/OK7
+	gvZTB49L1WhboklZAkM8wrikmeZHJ4D2895nsCj7xiul3/9zfFIT3VoyaYpQsLjb67Tl
+	0MMXPm+6BFCbqY8GxGTwN5ofMdrPnbBknBR+g4pVcbxkmZkcUyviauhbetBGKB42/N/X
+	6vWS91n+Dbd3ahTG0+RS6FHbspvoAyh9IgU1BQwDPmVehi88RgmmaA+vxkiDlcLrhuZ5
+	JZUw==
+X-Received: by 10.194.191.228 with SMTP id hb4mr55417718wjc.116.1424167082130; 
+	Tue, 17 Feb 2015 01:58:02 -0800 (PST)
 Received: from linuxdev.toradex.int ([46.140.72.82])
-	by mx.google.com with ESMTPSA id nb9sm13736945wic.3.2015.02.17.01.57.58
+	by mx.google.com with ESMTPSA id nb9sm13736945wic.3.2015.02.17.01.58.01
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Feb 2015 01:57:59 -0800 (PST)
+	Tue, 17 Feb 2015 01:58:01 -0800 (PST)
 From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Feb 2015 10:57:12 +0100
-Message-Id: <1424167036-15517-3-git-send-email-max.oss.09@gmail.com>
+Date: Tue, 17 Feb 2015 10:57:14 +0100
+Message-Id: <1424167036-15517-5-git-send-email-max.oss.09@gmail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1424167036-15517-1-git-send-email-max.oss.09@gmail.com>
 References: <1424167036-15517-1-git-send-email-max.oss.09@gmail.com>
 Cc: otavio@ossystems.com.br
-Subject: [meta-java][PATCH v2 2/6] licence: add missing LIC_FILES_CHKSUM
+Subject: [meta-java][PATCH v2 4/6] java-library: inherit allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,261 +43,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2015 09:58:00 -0000
+X-List-Received-Date: Tue, 17 Feb 2015 09:58:04 -0000
 
-While at it change the LICENSE string to the oe one if applicable.
-e.g. AL-2.0 -> Apache-2.0
+Use the allarch class to make every packages in the 'all' ARCH.
+Recipes inheriting java-library which build additional packages which
+don't belong in to all ARCH must manually setting PACKAGE_ARCH after
+inheritting java-library.
+
+This fixes the following error when building e.g. rhino for a second
+machine of different architecture in the same build directory:
+    ERROR: The recipe rhino is trying to install files into a
+    shared area when those files already exist. Those files and their
+    manifest location are:
+       /.../ipk/all/librhino-java_1.7r4-r0_all.ipk
+    Matched in manifest-armv7at2hf-vfp-rhino-package_write_ipk
 
 Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
 ---
- recipes-core/jakarta-commons/commons-cli_1.1.bb          | 1 +
- recipes-core/jakarta-commons/commons-codec_1.3.bb        | 1 +
- recipes-core/jakarta-commons/commons-discovery_0.4.bb    | 1 +
- recipes-core/jakarta-commons/commons-el_1.0.bb           | 3 ++-
- recipes-core/jakarta-commons/commons-fileupload_1.2.1.bb | 1 +
- recipes-core/jakarta-commons/commons-httpclient_3.1.bb   | 1 +
- recipes-core/jakarta-commons/commons-io_1.4.bb           | 1 +
- recipes-core/jakarta-commons/commons-lang_2.4.bb         | 1 +
- recipes-core/jakarta-commons/commons-logging_1.1.1.bb    | 1 -
- recipes-core/jakarta-commons/commons-pool_1.4.bb         | 1 +
- recipes-core/jakarta-commons/jakarta-commons.inc         | 2 ++
- recipes-core/jakarta-libs/poi_3.0.bb                     | 3 ++-
- recipes-core/junit/junit4_4.3.1.bb                       | 3 ++-
- recipes-core/servlet-api/jsp2.0_5.5.26.bb                | 3 ++-
- recipes-core/servlet-api/servlet2.4_5.5.26.bb            | 3 ++-
- recipes-core/xml-commons/jaxme_0.5.2.bb                  | 4 ++--
- recipes-core/xml-commons/xom_1.1.bb                      | 3 ++-
- recipes-core/xml-commons/xpp2_2.1.10.bb                  | 2 +-
- recipes-core/xml-commons/xpp3_1.1.3.4.O.bb               | 1 +
- recipes-extended/hsqldb/hsqldb_1.8.0.10.bb               | 3 ++-
- 20 files changed, 28 insertions(+), 11 deletions(-)
+ classes/java-library.bbclass           | 8 +++++---
+ recipes-core/libmatthew/libmatthew.inc | 1 +
+ recipes-extended/rxtx/rxtx_2.2.0.bb    | 1 +
+ 3 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-core/jakarta-commons/commons-cli_1.1.bb b/recipes-core/jakarta-commons/commons-cli_1.1.bb
-index cb51765..52dc0ce 100644
---- a/recipes-core/jakarta-commons/commons-cli_1.1.bb
-+++ b/recipes-core/jakarta-commons/commons-cli_1.1.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=2a944942e1496af1886903d274dedb13"
+diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+index a74c8d3..144cd2f 100644
+--- a/classes/java-library.bbclass
++++ b/classes/java-library.bbclass
+@@ -7,8 +7,12 @@
+ # starts with "lib" and/or ends with "-java". In case the "lib" prefix is part of
+ # your package's normal name (e.g. liberator) the guessing is wrong and you have
+ # to set JPN manually!
++#
++# package archs are set to all, if the recipe builds also packages which
++# can not be used for all archs, then set the PACKAGE_ARCH of that package
++# manually, see rxtx_xx.bb for an example.
  
- PR = "${INC_PR}.1"
+-inherit java
++inherit java allarch
  
-diff --git a/recipes-core/jakarta-commons/commons-codec_1.3.bb b/recipes-core/jakarta-commons/commons-codec_1.3.bb
-index 3a7ddd4..0377168 100644
---- a/recipes-core/jakarta-commons/commons-codec_1.3.bb
-+++ b/recipes-core/jakarta-commons/commons-codec_1.3.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://src/java/org/apache/commons/codec/BinaryDecoder.java;endline=15;md5=c08c3e117b4fc42b50c1f621fdcecc5f"
+ # use java_stage for native packages
+ JAVA_NATIVE_STAGE_INSTALL = "1"
+@@ -35,8 +39,6 @@ DEPENDS_prepend = "virtual/javac-native fastjar-native "
  
- PR = "${INC_PR}.1"
+ PACKAGES += "${JPN}"
  
-diff --git a/recipes-core/jakarta-commons/commons-discovery_0.4.bb b/recipes-core/jakarta-commons/commons-discovery_0.4.bb
-index 75db064..08c2462 100644
---- a/recipes-core/jakarta-commons/commons-discovery_0.4.bb
-+++ b/recipes-core/jakarta-commons/commons-discovery_0.4.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- PR = "${INC_PR}.1"
- 
-diff --git a/recipes-core/jakarta-commons/commons-el_1.0.bb b/recipes-core/jakarta-commons/commons-el_1.0.bb
-index 5821473..1446edd 100644
---- a/recipes-core/jakarta-commons/commons-el_1.0.bb
-+++ b/recipes-core/jakarta-commons/commons-el_1.0.bb
-@@ -1,5 +1,6 @@
- require jakarta-commons.inc
+-PACKAGE_ARCH_${JPN} = "all"
 -
-+LICENSE = "Apache-1.1"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9147d939b3f3f97692e4441bf20bd1cd"
- PR = "${INC_PR}.1"
+ FILES_${JPN} = "${datadir_java}"
  
- DESCRIPTION = "Implementation of the JSP2.0 Expression Language API"
-diff --git a/recipes-core/jakarta-commons/commons-fileupload_1.2.1.bb b/recipes-core/jakarta-commons/commons-fileupload_1.2.1.bb
-index 3954363..dab7996 100644
---- a/recipes-core/jakarta-commons/commons-fileupload_1.2.1.bb
-+++ b/recipes-core/jakarta-commons/commons-fileupload_1.2.1.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ # File name of the libraries' main Jar file
+diff --git a/recipes-core/libmatthew/libmatthew.inc b/recipes-core/libmatthew/libmatthew.inc
+index b7e50bd..36622a8 100644
+--- a/recipes-core/libmatthew/libmatthew.inc
++++ b/recipes-core/libmatthew/libmatthew.inc
+@@ -8,6 +8,7 @@ DEPENDS = "virtual/java-native classpath-native classpath"
+ S = "${WORKDIR}/libmatthew-java-${PV}"
  
- PR = "${INC_PR}.1"
+ inherit java-library
++PACKAGE_ARCH = "${TUNE_PKGARCH}"
  
-diff --git a/recipes-core/jakarta-commons/commons-httpclient_3.1.bb b/recipes-core/jakarta-commons/commons-httpclient_3.1.bb
-index 4f6b1af..dffa9a0 100644
---- a/recipes-core/jakarta-commons/commons-httpclient_3.1.bb
-+++ b/recipes-core/jakarta-commons/commons-httpclient_3.1.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=369b6d7c5a954dcc3f2e7ac3323507c3"
+ # Some internal version numbers which change from time to time.
+ # Allowing to override them makes this include file more
+diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
+index 85f55c0..0d5aa21 100644
+--- a/recipes-extended/rxtx/rxtx_2.2.0.bb
++++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
+@@ -23,6 +23,7 @@ S = "${WORKDIR}/rxtx-2.2pre2"
+ INSANE_SKIP_${PN} += "dev-so"
  
- PR = "${INC_PR}.1"
+ inherit autotools-brokensep java-library
++PACKAGE_ARCH = "${TUNE_PKGARCH}"
  
-diff --git a/recipes-core/jakarta-commons/commons-io_1.4.bb b/recipes-core/jakarta-commons/commons-io_1.4.bb
-index f4308d2..f1dbc88 100644
---- a/recipes-core/jakarta-commons/commons-io_1.4.bb
-+++ b/recipes-core/jakarta-commons/commons-io_1.4.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fd707e76aa29b6984fbe80629ec55f78"
- 
- PR = "${INC_PR}.1"
- 
-diff --git a/recipes-core/jakarta-commons/commons-lang_2.4.bb b/recipes-core/jakarta-commons/commons-lang_2.4.bb
-index 60c6346..48cc291 100644
---- a/recipes-core/jakarta-commons/commons-lang_2.4.bb
-+++ b/recipes-core/jakarta-commons/commons-lang_2.4.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- PR = "${INC_PR}.1"
- 
-diff --git a/recipes-core/jakarta-commons/commons-logging_1.1.1.bb b/recipes-core/jakarta-commons/commons-logging_1.1.1.bb
-index b04c812..b3b508a 100644
---- a/recipes-core/jakarta-commons/commons-logging_1.1.1.bb
-+++ b/recipes-core/jakarta-commons/commons-logging_1.1.1.bb
-@@ -3,7 +3,6 @@ require jakarta-commons.inc
- PR = "${INC_PR}.1"
- 
- DESCRIPTION = "Java Internet protocol suite library"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d273d63619c9aeaf15cdaf76422c4f87"
- 
- SRC_URI = "http://archive.apache.org/dist/commons/logging/source/${BP}-src.tar.gz"
- 
-diff --git a/recipes-core/jakarta-commons/commons-pool_1.4.bb b/recipes-core/jakarta-commons/commons-pool_1.4.bb
-index d5b6def..cacbde7 100644
---- a/recipes-core/jakarta-commons/commons-pool_1.4.bb
-+++ b/recipes-core/jakarta-commons/commons-pool_1.4.bb
-@@ -1,4 +1,5 @@
- require jakarta-commons.inc
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- PR = "${INC_PR}.1"
- 
-diff --git a/recipes-core/jakarta-commons/jakarta-commons.inc b/recipes-core/jakarta-commons/jakarta-commons.inc
-index bd85610..5968164 100644
---- a/recipes-core/jakarta-commons/jakarta-commons.inc
-+++ b/recipes-core/jakarta-commons/jakarta-commons.inc
-@@ -1,5 +1,7 @@
- AUTHOR = "Apache Software Foundation"
- LICENSE = "Apache-2.0"
-+#add the common md5sum and overwrite in bb file if changed
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d273d63619c9aeaf15cdaf76422c4f87"
- 
- INC_PR = "r0"
- 
-diff --git a/recipes-core/jakarta-libs/poi_3.0.bb b/recipes-core/jakarta-libs/poi_3.0.bb
-index 6adcf2c..f9178f2 100644
---- a/recipes-core/jakarta-libs/poi_3.0.bb
-+++ b/recipes-core/jakarta-libs/poi_3.0.bb
-@@ -1,5 +1,6 @@
- DESCRIPTION = "Java library for manipulating various file formats based upon Microsoft's OLE 2 Compound Document"
--LICENSE = "AL2.0"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- AUTHOR = "Apache Software Foundation"
- 
- SRC_URI = "http://archive.apache.org/dist/jakarta/poi/release/src/${BPN}-src-${PV}-FINAL-20070503.tar.gz"
-diff --git a/recipes-core/junit/junit4_4.3.1.bb b/recipes-core/junit/junit4_4.3.1.bb
-index 6b4d158..1cb8674 100644
---- a/recipes-core/junit/junit4_4.3.1.bb
-+++ b/recipes-core/junit/junit4_4.3.1.bb
-@@ -1,5 +1,6 @@
- DESCRIPTION = "JUnit is a testing framework for Java"
--LICENSE = "CPL"
-+LICENSE = "CPL-1.0"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CPL-1.0;md5=5295cd12fc5acc87bf1cf754455a1c56"
- AUTHOR = "junit.org"
- HOMEPAGE = "http://www.junit.org"
- 
-diff --git a/recipes-core/servlet-api/jsp2.0_5.5.26.bb b/recipes-core/servlet-api/jsp2.0_5.5.26.bb
-index ca94f08..e831501 100644
---- a/recipes-core/servlet-api/jsp2.0_5.5.26.bb
-+++ b/recipes-core/servlet-api/jsp2.0_5.5.26.bb
-@@ -1,5 +1,6 @@
- DESCRIPTION = "Java Server Page (JSP) API 2.0 (from Tomcat 5.5)"
--LICENSE = "AL2.0"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- AUTHOR = "Apache Software Foundation"
- 
- SRC_URI = "http://archive.apache.org/dist/tomcat/tomcat-5/v${PV}/src/apache-tomcat-${PV}-src.tar.gz"
-diff --git a/recipes-core/servlet-api/servlet2.4_5.5.26.bb b/recipes-core/servlet-api/servlet2.4_5.5.26.bb
-index ee80e5e..b34b23d 100644
---- a/recipes-core/servlet-api/servlet2.4_5.5.26.bb
-+++ b/recipes-core/servlet-api/servlet2.4_5.5.26.bb
-@@ -1,5 +1,6 @@
- DESCRIPTION = "Servlet API 2.4 (from Tomcat 5.5)"
--LICENSE = "AL2.0"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- AUTHOR = "Apache Software Foundation"
- 
- SRC_URI = "http://archive.apache.org/dist/tomcat/tomcat-5/v${PV}/src/apache-tomcat-${PV}-src.tar.gz"
-diff --git a/recipes-core/xml-commons/jaxme_0.5.2.bb b/recipes-core/xml-commons/jaxme_0.5.2.bb
-index 65b406e..b4ec750 100644
---- a/recipes-core/xml-commons/jaxme_0.5.2.bb
-+++ b/recipes-core/xml-commons/jaxme_0.5.2.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Implementation of the JAXB API"
--LICENSE = "AL2.0"
--
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
- AUTHOR = "Apache Software Foundation"
- HOMEPAGE = "http://ws.apache.org/jaxme"
- 
-diff --git a/recipes-core/xml-commons/xom_1.1.bb b/recipes-core/xml-commons/xom_1.1.bb
-index 56701b2..7405dab 100644
---- a/recipes-core/xml-commons/xom_1.1.bb
-+++ b/recipes-core/xml-commons/xom_1.1.bb
-@@ -1,5 +1,6 @@
- DESCRIPTION = "Tree-based API for processing XML with Java"
--LICENSE = "LGPL"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=456080cf80cd56d4d58118c1d10d824f"
- 
- HOMEPAGE = "http://xom.nu"
- 
-diff --git a/recipes-core/xml-commons/xpp2_2.1.10.bb b/recipes-core/xml-commons/xpp2_2.1.10.bb
-index 54d69f4..d3baca4 100644
---- a/recipes-core/xml-commons/xpp2_2.1.10.bb
-+++ b/recipes-core/xml-commons/xpp2_2.1.10.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Streaming pull XML parser for java"
- LICENSE = "BSD-like"
--
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d40c660a53e36a103a35c170d38d0ef6"
- HOMEPAGE = "http://www.extreme.indiana.edu/xgws/xsoap/xpp/"
- 
- SRC_URI = "http://www.extreme.indiana.edu/xgws/xsoap/xpp/download/PullParser2/PullParser2.1.10.tgz"
-diff --git a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
-index b87cccd..bedb8a9 100644
---- a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
-+++ b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
-@@ -1,5 +1,6 @@
- DESCRIPTION = "Streaming pull XML parser for Java (3rd edition)"
- LICENSE = "BSD-like"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=35235e1ea47db355da0627f8d93e3a6c"
- 
- HOMEPAGE = "http://www.extreme.indiana.edu/xgws/xsoap/xpp/mxp1"
- 
-diff --git a/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb b/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb
-index ff4908a..139d3ae 100644
---- a/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb
-+++ b/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb
-@@ -1,7 +1,8 @@
- DESCRIPTION = "Lightweight 100% Java SQL Database Engine"
- # BSD-like
- LICENSE = "HypersonicSQL"
--
-+LIC_FILES_CHKSUM = "file://doc/hypersonic_lic.txt;md5=778452795343df6f459b725185966888"
-+LIC_FILES_CHKSUM = "file://doc/hsqldb_lic.txt;md5=beb9a0581941064345aba5de7e519d53"
- AUTHOR = "HSQLDB Development Group"
- HOMEPAGE = "http://hsqldb.org"
- 
+ JARFILENAME = "RXTXcomm.jar"
+ EXTRA_OEMAKE += "RXTX_PATH=${D}${libdir_jni} \
 -- 
 1.9.3
 
