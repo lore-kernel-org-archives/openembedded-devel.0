@@ -1,33 +1,36 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 3344A65C85
+Received: from mail-we0-f182.google.com (mail-we0-f182.google.com
+	[74.125.82.182])
+	by mail.openembedded.org (Postfix) with ESMTP id C32BD73575
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 09:57:35 +0000 (UTC)
-Received: by mail-wg0-f49.google.com with SMTP id l18so34187275wgh.8
+	Tue, 17 Feb 2015 09:57:57 +0000 (UTC)
+Received: by mail-we0-f182.google.com with SMTP id m14so28070982wev.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 01:57:36 -0800 (PST)
+	Tue, 17 Feb 2015 01:57:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=IYiwVaWug8Mt7PgO1PZbMSsa9OOhDyfq8aNJa61TeEk=;
-	b=ZKMRAAawilLMrZ8AXgpbiMmsQUPEiCmixVX+wQyJkkXgntPi20vdpfJLLbFfEgNlRl
-	VUklk20hgOMkoY7FBxI2d8NUP64+HMqatCtKngnRWHo66XM949i+e/mWNwgJncR5iH0d
-	PiXYbh3BKl6ace9FxPjm4d/dPbPkoQ8XOdFD3hdF+NZhMiQj0EedbH9dSPAUNd5G/7uH
-	ZPZu90RggKdZgmB2hIeC7pq16rgthz/esNIf540p9tmKtkyFBnRAShMzVB3pbBrs1Ozg
-	DVNApjpND5x/K02uRhgAOG+57k9zpkl0rdQ8F6GJNVwQDPN1unjJY+L57dqZ6/PdxJDE
-	cesw==
-X-Received: by 10.195.12.71 with SMTP id eo7mr46516649wjd.3.1424167056680;
-	Tue, 17 Feb 2015 01:57:36 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=+qmOd27cqNS3J01ULd/PUZAV5BwTO6N3mMqEPTse0qM=;
+	b=nvvPeY8eP/X65v1qatz/36F0PFQzeMUlbnszgJZOfCqX565tSTWAP2glRxSOkTV+rU
+	GHZInkhpt0sK4GdXIqoYeUV/jLSgGtuNckP10pD+4XQ6HfXnTXnMjZMjRg3mNKHH39gb
+	4p3c3EWTIXIW9T+XXJnbl16AI4a4jYr3bMDNrnyKpNUC2NbRWuXRZcQfvkG4kF1C1H/9
+	+oo/Aawa/VFvXcBS+vSFXsXQIhoKzXDCg5Ukv3XVHBhYA39JJF1Q/dlEuwmPbdguQB89
+	I/xkhtdbaGOdRV+oN6j9I8KQZ8EszPyUnlnDWPzojbXCATxyyVN9wR8cLGqPs+NctyIN
+	H3fA==
+X-Received: by 10.194.20.67 with SMTP id l3mr58645421wje.94.1424167078790;
+	Tue, 17 Feb 2015 01:57:58 -0800 (PST)
 Received: from linuxdev.toradex.int ([46.140.72.82])
-	by mx.google.com with ESMTPSA id nb9sm13736945wic.3.2015.02.17.01.57.34
+	by mx.google.com with ESMTPSA id nb9sm13736945wic.3.2015.02.17.01.57.57
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Feb 2015 01:57:35 -0800 (PST)
+	Tue, 17 Feb 2015 01:57:58 -0800 (PST)
 From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Feb 2015 10:57:10 +0100
-Message-Id: <1424167036-15517-1-git-send-email-max.oss.09@gmail.com>
+Date: Tue, 17 Feb 2015 10:57:11 +0100
+Message-Id: <1424167036-15517-2-git-send-email-max.oss.09@gmail.com>
 X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1424167036-15517-1-git-send-email-max.oss.09@gmail.com>
+References: <1424167036-15517-1-git-send-email-max.oss.09@gmail.com>
 Cc: otavio@ossystems.com.br
-Subject: [meta-java][PATCH v2 0/6] Allow build for multiple ARCH in the same builddir
+Subject: [meta-java][PATCH v2 1/6] cleanup whitespace in tasks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,80 +44,350 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2015 09:57:36 -0000
+X-List-Received-Date: Tue, 17 Feb 2015 09:57:58 -0000
 
-v2: Patch 6/6: mark broken recipes with PNBLACKLIST[recipe] rather than
-    documenting them in a README.nonworking
+Indent with 4 spaces in task definitions.
 
+Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+---
+ recipes-core/jakarta-commons/jakarta-commons.inc | 66 ++++++++++++------------
+ recipes-core/xml-commons/jaxme_0.5.2.bb          | 39 +++++++-------
+ recipes-core/xml-commons/xom_1.1.bb              | 26 +++++-----
+ recipes-core/xml-commons/xpp2_2.1.10.bb          | 22 ++++----
+ recipes-core/xml-commons/xpp3_1.1.3.4.O.bb       | 38 +++++++-------
+ recipes-extended/hsqldb/hsqldb_1.8.0.10.bb       | 26 +++++-----
+ 6 files changed, 108 insertions(+), 109 deletions(-)
 
-Building a recipe which provides packages for allarch and ${TUNE_PKGARCH}
-fails if one builds in the same build directory for different TUNE_PKGARCHs.
-
-An example is rhino which fails as follows when one builds first for
-armv7at2hf-vfp and then for armv7at2hf-vfp-neon.
-    ERROR: The recipe rhino is trying to install files into a
-    shared area when those files already exist. Those files and their
-    manifest location are:
-       /.../ipk/all/librhino-java_1.7r4-r0_all.ipk
-    Matched in manifest-armv7at2hf-vfp-rhino-package_write_ipk
-
-The change in package arch is done in java-library.bbclass. Most of the
-users of java-library.bbclass don't install any files in the ${TUNE_PKGARCH}
-packages or install shell scripts which may also be deployed in an allarch
-package.
-
-Most of the recipes including java-library.bbclass no longer build with newer
-layer revisions.
-This patchset first update the recipes to build again, changes java-library
-build all packages in allarch by default and recipes which must have some
-of their packages in ${TUNE_PKGARCH} to have all of their recipes in
-${TUNE_PKGARCH}.
-Finaly some of the recipes I tried did not build before and after the proposed
-changes. Adding a PNBLACKLIST statement to mark them as I don't have the time
-to work on these and I guess no one has been interested in years.
-
-Regards
-Max
-
-Max Krummenacher (6):
-  cleanup whitespace in tasks
-  licence: add missing LIC_FILES_CHKSUM
-  rxtx: use autotools-brokensep
-  java-library: inherit allarch
-  antlr: fix override for native build
-  mark broken recipes with PNBLACKLIST
-
- classes/java-library.bbclass                       |  8 ++-
- recipes-core/antlr/antlr_2.7.7.bb                  | 18 +++---
- recipes-core/jakarta-commons/commons-cli_1.1.bb    |  1 +
- recipes-core/jakarta-commons/commons-codec_1.3.bb  |  1 +
- .../jakarta-commons/commons-configuration_1.5.bb   |  2 +
- .../jakarta-commons/commons-discovery_0.4.bb       |  1 +
- recipes-core/jakarta-commons/commons-el_1.0.bb     |  3 +-
- .../jakarta-commons/commons-fileupload_1.2.1.bb    |  1 +
- .../jakarta-commons/commons-httpclient_3.1.bb      |  1 +
- recipes-core/jakarta-commons/commons-io_1.4.bb     |  1 +
- recipes-core/jakarta-commons/commons-jxpath_1.3.bb |  2 +
- recipes-core/jakarta-commons/commons-lang_2.4.bb   |  1 +
- .../jakarta-commons/commons-logging_1.1.1.bb       |  1 -
- recipes-core/jakarta-commons/commons-pool_1.4.bb   |  1 +
- recipes-core/jakarta-commons/jakarta-commons.inc   | 68 +++++++++++-----------
- recipes-core/jakarta-libs/poi_3.0.bb               |  3 +-
- recipes-core/junit/junit4_4.3.1.bb                 |  3 +-
- recipes-core/libmatthew/libmatthew.inc             |  1 +
- recipes-core/servlet-api/jsp2.0_5.5.26.bb          |  3 +-
- recipes-core/servlet-api/servlet2.4_5.5.26.bb      |  3 +-
- recipes-core/xml-commons/dom4j_1.6.1.bb            |  2 +
- recipes-core/xml-commons/jaxen_1.1.1.bb            |  2 +
- recipes-core/xml-commons/jaxme_0.5.2.bb            | 57 +++++++++++-------
- recipes-core/xml-commons/jdom_1.1.bb               |  2 +
- recipes-core/xml-commons/xom_1.1.bb                | 40 ++++++++-----
- recipes-core/xml-commons/xpp2_2.1.10.bb            | 24 ++++----
- recipes-core/xml-commons/xpp3_1.1.3.4.O.bb         | 39 +++++++------
- recipes-extended/hsqldb/hsqldb_1.8.0.10.bb         | 29 ++++-----
- recipes-extended/rxtx/rxtx_2.2.0.bb                |  3 +-
- 29 files changed, 188 insertions(+), 133 deletions(-)
-
+diff --git a/recipes-core/jakarta-commons/jakarta-commons.inc b/recipes-core/jakarta-commons/jakarta-commons.inc
+index 4f7b700..bd85610 100644
+--- a/recipes-core/jakarta-commons/jakarta-commons.inc
++++ b/recipes-core/jakarta-commons/jakarta-commons.inc
+@@ -21,42 +21,42 @@ CLEAN_PATH = ""
+ 
+ # Some projects have a replaceable version number in their manifest template.
+ do_unpackpost() {
+-  if [ -d src/conf ]
+-  then
+-    find src/conf -exec \
+-      sed -i -e "s|@version@|${PV}|" {} \;
+-  fi
++    if [ -d src/conf ]
++    then
++        find src/conf -exec \
++        sed -i -e "s|@version@|${PV}|" {} \;
++    fi
+ }
+ 
+ addtask unpackpost after do_unpack before do_patch
+ # Compile step is very similar for Jakarta commons packages
+ do_compile() {
+-  mkdir -p build
+-
+-  if [ "${CP}" ]
+-  then
+-     oe_makeclasspath cp -s ${CP}
+-  else
+-     cp=.
+-  fi
+-
+-  echo "javac -sourcepath ${COMPILE_SOURCEPATH} -cp $cp -d build \`find ${MAINSOURCES} ${COMPILE_FINDARGS}\`"
+-  javac -sourcepath ${COMPILE_SOURCEPATH} -cp $cp -d build `find ${MAINSOURCES} ${COMPILE_FINDARGS}`
+-
+-  # Copy extraneous files
+-  echo "(cd ${MAINSOURCES} && find . ${FINDARGS} -exec cp {} ../../build/{} \;)"
+-  (cd ${MAINSOURCES} && find . ${FINDARGS} -exec cp {} ../../build/{} \;)
+-
+-	# Optionally remove stuff after compilation (needed for sourcepath hacks).
+-	if [ ${CLEAN_PATH} ]; then
+-		rm -rf ${CLEAN_PATH}
+-	fi
+-
+-  # Some projects have manifest, some have not. This works for both.
+-  if [ -f src/conf/MANIFEST.MF ]
+-  then
+-    fastjar cfm ${JARFILENAME} src/conf/MANIFEST.MF -C build .
+-  else
+-    fastjar cf ${JARFILENAME} -C build .
+-  fi
++    mkdir -p build
++
++    if [ "${CP}" ]
++    then
++       oe_makeclasspath cp -s ${CP}
++    else
++       cp=.
++    fi
++
++    echo "javac -sourcepath ${COMPILE_SOURCEPATH} -cp $cp -d build \`find ${MAINSOURCES} ${COMPILE_FINDARGS}\`"
++    javac -sourcepath ${COMPILE_SOURCEPATH} -cp $cp -d build `find ${MAINSOURCES} ${COMPILE_FINDARGS}`
++
++    # Copy extraneous files
++    echo "(cd ${MAINSOURCES} && find . ${FINDARGS} -exec cp {} ../../build/{} \;)"
++    (cd ${MAINSOURCES} && find . ${FINDARGS} -exec cp {} ../../build/{} \;)
++
++    # Optionally remove stuff after compilation (needed for sourcepath hacks).
++    if [ ${CLEAN_PATH} ]; then
++        rm -rf ${CLEAN_PATH}
++    fi
++
++    # Some projects have manifest, some have not. This works for both.
++    if [ -f src/conf/MANIFEST.MF ]
++    then
++        fastjar cfm ${JARFILENAME} src/conf/MANIFEST.MF -C build .
++    else
++        fastjar cf ${JARFILENAME} -C build .
++    fi
+ }
+diff --git a/recipes-core/xml-commons/jaxme_0.5.2.bb b/recipes-core/xml-commons/jaxme_0.5.2.bb
+index 304c06d..65b406e 100644
+--- a/recipes-core/xml-commons/jaxme_0.5.2.bb
++++ b/recipes-core/xml-commons/jaxme_0.5.2.bb
+@@ -16,27 +16,26 @@ inherit java-library
+ DEPENDS = "fastjar-native log4j1.2 xerces-j xalan-j commons-codec hsqldb antlr antlr-native"
+ 
+ do_compile() {
+-	oe_makeclasspath cp -s log4j-1.2 xercesImpl xalan2 commons-codec hsqldb antlr
+-  cp=build-api:build-jaxme:build-js:build-xs:build-pm:$cp
++    oe_makeclasspath cp -s log4j-1.2 xercesImpl xalan2 commons-codec hsqldb antlr
++    cp=build-api:build-jaxme:build-js:build-xs:build-pm:$cp
+ 
++    jaxme_build src/api build-api $cp jaxmeapi-${PV}.jar
+ 
+-	jaxme_build src/api build-api $cp jaxmeapi-${PV}.jar
++    runantlr -o src/js/org/apache/ws/jaxme/js/jparser src/js/org/apache/ws/jaxme/js/jparser/java15.g
++    jaxme_build src/js build-js $cp jaxmejs-${PV}.jar
+ 
+-	runantlr -o src/js/org/apache/ws/jaxme/js/jparser src/js/org/apache/ws/jaxme/js/jparser/java15.g
+-	jaxme_build src/js build-js $cp jaxmejs-${PV}.jar
++    jaxme_build src/xs build-xs $cp jaxmexs-${PV}.jar
+ 
+-	jaxme_build src/xs build-xs $cp jaxmexs-${PV}.jar
++    jaxme_build src/jaxme build-jaxme $cp ${JARFILENAME}
+ 
+-	jaxme_build src/jaxme build-jaxme $cp ${JARFILENAME}
+-
+-#	jaxme_build src/pm build-pm $cp jaxmepm-${PV}.jar
++#    jaxme_build src/pm build-pm $cp jaxmepm-${PV}.jar
+ }
+ 
+ do_install_append() {
+-	oe_jarinstall jaxmeapi-${PV}.jar jaxmeapi.jar
+-	oe_jarinstall jaxmejs-${PV}.jar jaxmejs.jar
+-	oe_jarinstall jaxmexs-${PV}.jar jaxmexs.jar
+-	oe_jarinstall jaxmepm-${PV}.jar jaxmepm.jar
++    oe_jarinstall jaxmeapi-${PV}.jar jaxmeapi.jar
++    oe_jarinstall jaxmejs-${PV}.jar jaxmejs.jar
++    oe_jarinstall jaxmexs-${PV}.jar jaxmexs.jar
++    oe_jarinstall jaxmepm-${PV}.jar jaxmepm.jar
+ }
+ 
+ # Compile helper
+@@ -45,17 +44,17 @@ do_install_append() {
+ # 3 - classpath
+ # 4 - jar file name
+ jaxme_build() {
+-  mkdir -p $2
++    mkdir -p $2
+ 
+-	ant_sourcepath=${WORKDIR}/apache-ant-1.7.1/src/main
++    ant_sourcepath=${WORKDIR}/apache-ant-1.7.1/src/main
+ 
+-  echo "javac -sourcepath $ant_sourcepath:$1 -cp $3 -d $2 \`find $1 -name "*.java"\`"
+-  javac -sourcepath $ant_sourcepath:$1 -cp $3 -d $2 `find $1 -name "*.java" -and -not \( -wholename "*junit*" -or -wholename "*examples*" \) `
+-  (cd $1 && find . -name "*.properties" -exec cp {} ${S}/$2/{} \;)
++    echo "javac -sourcepath $ant_sourcepath:$1 -cp $3 -d $2 \`find $1 -name "*.java"\`"
++    javac -sourcepath $ant_sourcepath:$1 -cp $3 -d $2 `find $1 -name "*.java" -and -not \( -wholename "*junit*" -or -wholename "*examples*" \) `
++    (cd $1 && find . -name "*.properties" -exec cp {} ${S}/$2/{} \;)
+ 
+-	rm -rf $2/org/apache/tools
++    rm -rf $2/org/apache/tools
+ 
+-  fastjar -C $2 -c -f $4 .
++    fastjar -C $2 -c -f $4 .
+ }
+ 
+ SRC_URI[archive.md5sum] = "084ebfe4a816058f8ff6bd731fa70df4"
+diff --git a/recipes-core/xml-commons/xom_1.1.bb b/recipes-core/xml-commons/xom_1.1.bb
+index 697e01d..56701b2 100644
+--- a/recipes-core/xml-commons/xom_1.1.bb
++++ b/recipes-core/xml-commons/xom_1.1.bb
+@@ -16,24 +16,24 @@ inherit java-library
+ DEPENDS = "fastjar-native xerces-j xalan-j"
+ 
+ do_compile() {
+-  mkdir -p build
++    mkdir -p build
+ 
+-	oe_makeclasspath cp -s xercesImpl xalan2
+-  cp=build:$cp
++    oe_makeclasspath cp -s xercesImpl xalan2
++    cp=build:$cp
+ 
+-	scp="${WORKDIR}/jaxen-1.1.1/src/java/main"
+-                 
+-  javac -sourcepath src:$scp -cp $cp -d build `find src -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
+-  javac -sourcepath fatsrc:$scp -cp $cp -d build `find fatsrc -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
+-  javac -sourcepath src15:$scp -cp $cp -d build `find src15 -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
++    scp="${WORKDIR}/jaxen-1.1.1/src/java/main"
+ 
+-  (cd src && find . -name "*.properties" -exec cp {} ../build/{} \;)
++    javac -sourcepath src:$scp -cp $cp -d build `find src -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
++    javac -sourcepath fatsrc:$scp -cp $cp -d build `find fatsrc -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
++    javac -sourcepath src15:$scp -cp $cp -d build `find src15 -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
+ 
+-	#	Remove Jaxen classes from build
+-	rm -rf build/org/jaxen
+-	rm -rf build/org/w3c
++    (cd src && find . -name "*.properties" -exec cp {} ../build/{} \;)
+ 
+-  fastjar -C build -c -f ${JARFILENAME} .
++    # Remove Jaxen classes from build
++    rm -rf build/org/jaxen
++    rm -rf build/org/w3c
++
++    fastjar -C build -c -f ${JARFILENAME} .
+ }
+ 
+ SRC_URI[archive.md5sum] = "e5ae82568d7b1faeb950140c34fbbcb1"
+diff --git a/recipes-core/xml-commons/xpp2_2.1.10.bb b/recipes-core/xml-commons/xpp2_2.1.10.bb
+index 2239173..54d69f4 100644
+--- a/recipes-core/xml-commons/xpp2_2.1.10.bb
++++ b/recipes-core/xml-commons/xpp2_2.1.10.bb
+@@ -12,22 +12,22 @@ inherit java-library
+ DEPENDS = "fastjar-native virtual/javac-native"
+ 
+ do_compile() {
+-	if [ -d build-oe ]; then
+-		rm -rf build-oe
+-	fi
+-  mkdir -p build-oe
++    if [ -d build-oe ]; then
++        rm -rf build-oe
++    fi
++    mkdir -p build-oe
+ 
+-	sourcepath="src/java/drivers/jaxp11:src/java/drivers/sax2:src/java/impl/factory:src/java/impl/format:src/java/impl/node:src/java/impl/pullparser:src/java/impl/tag:src/java/intf"
++    sourcepath="src/java/drivers/jaxp11:src/java/drivers/sax2:src/java/impl/factory:src/java/impl/format:src/java/impl/node:src/java/impl/pullparser:src/java/impl/tag:src/java/intf"
+ 
+-	findpath="${sourcepath//:/ }"
++    findpath="${sourcepath//:/ }"
+ 
+-  javac -sourcepath $sourcepath -d build-oe `find $findpath -name "*.java"`
++    javac -sourcepath $sourcepath -d build-oe `find $findpath -name "*.java"`
+ 
+-	mkdir -p build-oe/META-INF/services
+-	cp src/java/drivers/jaxp11/META-INF/services/javax.xml.parsers.SAXParserFactory build-oe/META-INF/services
+-	cp src/java/impl/factory/META-INF/services/org.gjt.xpp.XmlPullParserFactory build-oe/META-INF/services
++    mkdir -p build-oe/META-INF/services
++    cp src/java/drivers/jaxp11/META-INF/services/javax.xml.parsers.SAXParserFactory build-oe/META-INF/services
++    cp src/java/impl/factory/META-INF/services/org.gjt.xpp.XmlPullParserFactory build-oe/META-INF/services
+ 
+-  fastjar -C build-oe -c -f ${JARFILENAME} .
++    fastjar -C build-oe -c -f ${JARFILENAME} .
+ }
+ 
+ SRC_URI[md5sum] = "865ca4e2496c215d301b57450137626f"
+diff --git a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
+index 40f7cb2..b87cccd 100644
+--- a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
++++ b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
+@@ -12,34 +12,34 @@ DEPENDS = "fastjar-native virtual/javac-native"
+ PACKAGES = "libxpp3-xpath-java ${JPN}"
+ 
+ do_compile() {
+-	if [ -d build-oe ]; then
+-		rm -rf build-oe
+-	fi
+-  mkdir -p build-oe
++    if [ -d build-oe ]; then
++        rm -rf build-oe
++    fi
++    mkdir -p build-oe
+ 
+-	sourcepath="src/java/api:src/java/builder:src/java/dom2_builder:src/java/mxp1_min:src/java/mxp1_standard:src/java/parser_pool:src/java/sax2_driver:src/java/serializer_impl:src/java/util:src/java/wrapper"
+-	findpath="${sourcepath//:/ }"
++    sourcepath="src/java/api:src/java/builder:src/java/dom2_builder:src/java/mxp1_min:src/java/mxp1_standard:src/java/parser_pool:src/java/sax2_driver:src/java/serializer_impl:src/java/util:src/java/wrapper"
++    findpath="${sourcepath//:/ }"
+ 
+-  javac -sourcepath $sourcepath -d build-oe `find $findpath -name "*.java"`
++    javac -sourcepath $sourcepath -d build-oe `find $findpath -name "*.java"`
+ 
+-	mkdir -p build-oe/META-INF/services
+-	cp src/java/mxp1_standard/META-INF/services/org.xml* build-oe/META-INF/services
+-  fastjar -C build-oe -c -f ${JARFILENAME} .
++    mkdir -p build-oe/META-INF/services
++    cp src/java/mxp1_standard/META-INF/services/org.xml* build-oe/META-INF/services
++    fastjar -C build-oe -c -f ${JARFILENAME} .
+ 
+-	if [ -d build-xpath ]; then
+-		rm -rf build-xpath
+-	fi
+-  mkdir -p build-xpath
++    if [ -d build-xpath ]; then
++        rm -rf build-xpath
++    fi
++    mkdir -p build-xpath
+ 
+-	sourcepath="src/java/xpath"
+-	findpath="${sourcepath//:/ }"
+-  javac -sourcepath $sourcepath -cp build-oe -d build-xpath `find $findpath -name "*.java"`
++    sourcepath="src/java/xpath"
++    findpath="${sourcepath//:/ }"
++    javac -sourcepath $sourcepath -cp build-oe -d build-xpath `find $findpath -name "*.java"`
+ 
+-  fastjar -C build-xpath -c -f xpp3-xpath-${PV}.jar .
++    fastjar -C build-xpath -c -f xpp3-xpath-${PV}.jar .
+ }
+ 
+ do_install_append() {
+-	oe_jarinstall xpp3-xpath-${PV}.jar xpp3-xpath.jar
++    oe_jarinstall xpp3-xpath-${PV}.jar xpp3-xpath.jar
+ }
+ 
+ FILES_libxpp3-xpath-java = "${datadir}/java/xpp3-xpath*"
+diff --git a/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb b/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb
+index e886ae4..ff4908a 100644
+--- a/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb
++++ b/recipes-extended/hsqldb/hsqldb_1.8.0.10.bb
+@@ -14,25 +14,25 @@ inherit java-library
+ DEPENDS = "fastjar-native servlet2.4"
+ 
+ do_compile() {
+-  # Build instructions according to build/buildJDK14.bat
+-        mkdir -p classes
++    # Build instructions according to build/buildJDK14.bat
++    mkdir -p classes
+ 
+-        oe_makeclasspath cp -s servlet-api-2.4
++    oe_makeclasspath cp -s servlet-api-2.4
+ 
+-        javac -sourcepath src -cp $cp -d build `find src -name "*.java" -and -not -wholename "*test*"`
++    javac -sourcepath src -cp $cp -d build `find src -name "*.java" -and -not -wholename "*test*"`
+ 
+-        mkdir -p classes/org/hsqldb/util
+-        mkdir -p classes/org/hsqldb/util/sqltool
+-        mkdir -p classes/org/hsqldb/resources
++    mkdir -p classes/org/hsqldb/util
++    mkdir -p classes/org/hsqldb/util/sqltool
++    mkdir -p classes/org/hsqldb/resources
+ 
+-        cp src/org/hsqldb/util/*.gif classes/org/hsqldb/util/
+-        cp src/org/hsqldb/util/*.png classes/org/hsqldb/util/
+-        cp src/org/hsqldb/util/*.properties classes/org/hsqldb/util/
+-        cp src/org/hsqldb/util/sqltool/*.text classes/org/hsqldb/util/sqltool/
++    cp src/org/hsqldb/util/*.gif classes/org/hsqldb/util/
++    cp src/org/hsqldb/util/*.png classes/org/hsqldb/util/
++    cp src/org/hsqldb/util/*.properties classes/org/hsqldb/util/
++    cp src/org/hsqldb/util/sqltool/*.text classes/org/hsqldb/util/sqltool/
+ 
+-        cp src/org/hsqldb/resources/*.properties classes/org/hsqldb/resources
++    cp src/org/hsqldb/resources/*.properties classes/org/hsqldb/resources
+ 
+-  fastjar -C classes -c -f ${JARFILENAME} .
++    fastjar -C classes -c -f ${JARFILENAME} .
+ }
+ 
+ SRC_URI[md5sum] = "17410483b5b5f267aa18b7e00b65e6e0"
 -- 
 1.9.3
 
