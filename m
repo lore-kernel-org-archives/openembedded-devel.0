@@ -1,48 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id C0108606E8;
-	Tue, 17 Feb 2015 17:50:53 +0000 (UTC)
-Received: by mail-wi0-f179.google.com with SMTP id hi2so35834839wib.0;
-	Tue, 17 Feb 2015 09:50:54 -0800 (PST)
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 720D271F05
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Feb 2015 18:19:55 +0000 (UTC)
+Received: by wesw55 with SMTP id w55so89247wes.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Feb 2015 10:19:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=F4S9cBwLNgF8NsqFx5oqR2kr90y0krIGVHdWO/hFbSQ=;
-	b=WU4tgZXZoTsaMT/p6JjvLJlymozS1AkvDokI16lksHxAjQLJ4nlFoJRaIQHy4hoQWx
-	Nzxq8Lc8NqVlS509rEFKhz0vWN0Qs2+TT/hUlYWnqbRcdRG9lTyEPSHsH5MXjlL+AyaD
-	RGXN7lRkGHeOn9f1YZp8nFbXyeajzMP1YVt0vuzwgQsE9ruB1LvqBQ6Trw8Ghu1x08t2
-	tmZ9cIgCPG147vo1GSdWRSAPmhzzZPYDQXRyLX9Q0eeF3Mt2Vv4vjp5GuZvp779FKdbd
-	aCYn+RjiZVlGtQKXmbCgzQwirQGy+9jB8k2tmTzeHMAIJlM2jrGirfUfrmxVEcX50i9M
-	8LwQ==
-MIME-Version: 1.0
-X-Received: by 10.194.5.37 with SMTP id p5mr64759179wjp.20.1424195454008; Tue,
-	17 Feb 2015 09:50:54 -0800 (PST)
-Received: by 10.194.85.225 with HTTP; Tue, 17 Feb 2015 09:50:53 -0800 (PST)
-In-Reply-To: <1424037551.20217.103.camel@linuxfoundation.org>
-References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
-	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
-	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
-	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
-	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
-	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
-	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
-	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
-	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
-	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
-	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
-	<1423908404.20217.100.camel@linuxfoundation.org>
-	<1424037551.20217.103.camel@linuxfoundation.org>
-Date: Tue, 17 Feb 2015 18:50:53 +0100
-Message-ID: <CA+chaQdaa+S3AC8YYzmHdv7beMxBzP_03C25Jn=5NiE=DxmGjg@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:content-type:mime-version:content-transfer-encoding;
+	bh=XCputJcFmp4OV9mJnel31hu6x7O20Cp3XiDK6/7Kl14=;
+	b=wU7N4sI9htaUbCaU/poedXVPoo5TRLhd+hKK1BoWAZYHhvn5QGV1ZLIRNnb5VIn4bv
+	DkwMfAbgQ+GmiFbvWYYoECfsFPiNXJA360GJ2YTsAW6jxIaAD7kV0knUQA+FErwa6QOE
+	rnUELyJNw07VR2IYnp71tqKCsuf9PWRpIRUWB8ECz3OFUeyqeOJM0F2speMJ/ewekGtb
+	FYjzg0Nrz8rPYYaimxAl0E1Q16go8wPjZyA1alz4JKdpZQoN4mMv493MoCST0UAEJqBF
+	wtaditsBm46lm3OcLB1o28H/QV8gNPSS8vExoYVIvFtfLIVRfeUvuvcplReT/uuv/vaQ
+	gDGw==
+X-Received: by 10.194.108.162 with SMTP id hl2mr65321643wjb.134.1424197196075; 
+	Tue, 17 Feb 2015 10:19:56 -0800 (PST)
+Received: from [192.168.0.7] (212-41-66-143.adsl.solnet.ch. [212.41.66.143])
+	by mx.google.com with ESMTPSA id
+	fo15sm25321193wic.19.2015.02.17.10.19.54
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Tue, 17 Feb 2015 10:19:55 -0800 (PST)
+Message-ID: <1424197193.2293.9.camel@Saturn.local.all>
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Feb 2015 19:19:53 +0100
+In-Reply-To: <CAP9ODKq6QKYojHUiO96s9Kpi4-c4qD1UtnLKi88D0MkbitKE=g@mail.gmail.com>
+References: <1424125658-20285-1-git-send-email-max.oss.09@gmail.com>
+	<1424125658-20285-2-git-send-email-max.oss.09@gmail.com>
+	<CAP9ODKq6QKYojHUiO96s9Kpi4-c4qD1UtnLKi88D0MkbitKE=g@mail.gmail.com>
+X-Mailer: Evolution 3.10.4 
+Mime-Version: 1.0
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: Re: [OE-core][RFC] openjdk-7: enable xawt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,60 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2015 17:50:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 Feb 2015 18:19:55 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-We should extend:
-./meta/recipes-devtools/valgrind/valgrind/glibc-2.20.patch
+Am Dienstag, den 17.02.2015, 10:57 -0200 schrieb Otavio Salvador:
+> On Mon, Feb 16, 2015 at 8:27 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
+> > The build of xawt has been disabled as its build seemed to fail during a qemu
+> > call to generate a file with information on variable sizes.
+> >
+> > qemu is now called with the relevant path into sysroot and thus works.
+> >
+> > This patch enables xawt again.
+> >
+> > Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+> 
+> I am fine with this change the only remark I may have is force X11
+> dependency. Would be easy to put this in a PACKAGECONFIG?
 
-to allow building valgrind with glibc-2.21, currently it fails with:
+I thought about this. As it is not simply a configure option it's not
+straight forward using the PACKAGECONFIG system.
 
-| checking the GLIBC_VERSION version... unsupported version 2.21
-| configure: error: Valgrind requires glibc version 2.2 - 2.19
-| Configure failed. The contents of all config.log files follows to aid
-debugging
-| ERROR: oe_runconf failed
+On second thought one could probably make it a PACKAGECONFIG option,
+even conditionally set it with DISTRO_FEATURES but then use some python
+magic to conditionally apply a patch removing xawt if headless is
+configured.
+
+I'm a bit loaded with work at the moment, so it will take some weeks to
+come up with a tested v2 of the patch.
+
+Regards
+Max
+
+> -- 
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
 
-On Sun, Feb 15, 2015 at 10:59 PM, Richard Purdie <
-richard.purdie@linuxfoundation.org> wrote:
-
-> On Sat, 2015-02-14 at 10:06 +0000, Richard Purdie wrote:
-> > Hi Khem,
-> >
-> > On Thu, 2015-02-12 at 15:35 +0800, Khem Raj wrote:
-> > > I have refreshed the branch to include the patch which moves the src
-> > > uri to use the newly released glibc 2.21 branch
-> > > and please run it via autobuilder ( top 5 commits )
-> >
-> > Its running on the autobuilder at the moment. Errors will be reported to
-> > the error reporting system and can be seen at:
-> >
-> >
-> http://errors.yoctoproject.org/Errors/Search/?items=10&query=be29d13a847d458efaf542ed302e48050f67a655
-> >
-> > Right now, poky-tiny failed due to warning are errors and unused
-> > symbols. Minnow failed due to SSE instruction issues. Full build logs
-> > are also available on the autobuilder:
-> >
-> > https://autobuilder.yoctoproject.org/main/tgrid
-> >
-> > as ross/mut-next. We do have other changes in the branch but the above
-> > are pretty clearly glibc.
-> >
-> > Other errors will go to the places above as the builds complete/fail.
->
-> FWIW I tested the gcc upgrade without glibc and that seems ok so I've
-> merged that whilst we work out the issues with glibc.
->
-> Cheers,
->
-> Richard
->
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
 
