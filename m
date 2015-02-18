@@ -1,46 +1,39 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E6E9606E8;
-	Wed, 18 Feb 2015 13:07:00 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t1ID6x9j027328; Wed, 18 Feb 2015 13:06:59 GMT
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id fO-4zgqsnaWi; Wed, 18 Feb 2015 13:06:59 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t1ID6lhe027324
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Wed, 18 Feb 2015 13:06:58 GMT
-Message-ID: <1424264807.11836.1.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Feb 2015 13:06:47 +0000
-In-Reply-To: <1424260309.25541.23.camel@linuxfoundation.org>
-References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
-	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
-	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
-	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
-	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
-	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
-	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
-	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
-	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
-	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
-	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
-	<1423908404.20217.100.camel@linuxfoundation.org>
-	<CAMKF1sofS7MteZnPsTYRNAcMwrrh=T3FP+ASmAOGDMhcwyXB4g@mail.gmail.com>
-	<1424245575.25541.19.camel@linuxfoundation.org>
-	<BCB8524E-91CB-41F6-83C0-7B90E60BC82D@gmail.com>
-	<1424260309.25541.23.camel@linuxfoundation.org>
-X-Mailer: Evolution 3.12.7-0ubuntu1 
-Mime-Version: 1.0
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
+Return-Path: <Daniel.MONDON@lpgsystems.com>
+Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
+	by mail.openembedded.org (Postfix) with ESMTP id B1EF16B0CB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2015 14:14:11 +0000 (UTC)
+Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
+	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 1AD801A7399
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2015 15:14:11 +0100 (CET)
+Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
+	([::1]) with mapi id 14.03.0224.002; Wed, 18 Feb 2015 15:14:10 +0100
+From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
+Thread-Index: AQHQR3jjp5YS124hHUiBKr5QPNNHIZz2ezCw
+Date: Wed, 18 Feb 2015 14:14:10 +0000
+Message-ID: <F48900D76F0D8349918584FEEFEB4BCA062A05E9@SEXCHANGE0100.lpg.priv>
+References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
+	<1423810919-9857-19-git-send-email-schnitzeltony@googlemail.com>
+	<F48900D76F0D8349918584FEEFEB4BCA0629F403@SEXCHANGE0100.lpg.priv>
+	<20150213094951.GA14290@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
+	<1423823635.2285.5.camel@Saturn.local.all>
+In-Reply-To: <1423823635.2285.5.camel@Saturn.local.all>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.5.31]
+MIME-Version: 1.0
+X-DRWEB-SCAN: ok
+X-VRSPAM-SCORE: 0
+X-VRSPAM-STATE: legit
+X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejkedruddtfedgtdekucetufdoteggodetrfcurfhrohhfihhlvgemucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufhtfffkfhgjihgtgfggsehtsgdttddttdejnecuhfhrohhmpefoqffpfffqpfcuffgrnhhivghluceoffgrnhhivghlrdfoqffpfffqpfeslhhpghhshihsthgvmhhsrdgtohhmqeenucffohhmrghinhepohhpvghnvghmsggvugguvggurdhorhhgpdihohgtthhophhrohhjvggtthdrohhrgh
+X-VRSPAM-EXTCAUSE: mhhouggvpehsmhhtphhouhht
+Subject: Re: package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +47,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 13:07:02 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Feb 2015 14:14:15 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, 2015-02-18 at 11:51 +0000, Richard Purdie wrote:
-> On Wed, 2015-02-18 at 01:01 -0800, Khem Raj wrote:
-> > OK thats why I am not seeing it on my qemux86 build. 
-> > 
-> > this leaves us with only one problem - glibc/qemuarm issue
-> > 
-> > http://errors.yoctoproject.org/Errors/Details/8679/
-> > 
-> > I have seen this error with eglibc-2.19 and glibc 2.20 as well on x86 and arm as well in cases when using
-> > toolchain from sstate and rebuilding glibc with that. I assume this could be  unrelated to glibc upgrade
-> > and may be a latent problem. Could be missing dependency on a native tool or some such. I have been attributing it to gold
-> > but that just might have been a red herring.
-> > 
-> > I will see if I can get to reproduce it.
-> 
-> I tried another build with the three patches from your oe-core contrib
-> branch applied. Error report out is:
-> 
-> http://errors.yoctoproject.org/Errors/Search/?items=10&query=b75fed99f2aa86b49844dd0cf06991767f6f26d3
-> 
-> i.e. we're still seeing SSE errors in glibc builds. Am I missing some
-> patches or something?
-
-The series needs:
-
- TUNE_CCARGS_x86 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}"
-+TUNE_CCARGS_x86-64 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}"
-
-since the x86 override doesn't cover x86_64. I'll queue that and run yet
-another build. We do have another poky-tiny issue too:
-
-https://autobuilder.yoctoproject.org/main/builders/poky-tiny/builds/204
-
-Cheers,
-
-RIchard
-
+SGksDQoNCkkndmUgZ290IHNhbWUgcHJvYmxlbSBjb21waWxpbmcgbXkgb2xkIG9wZW5lbWJlZGRl
+ZCBBbmdzdHJvbXYyMDEyLjA1IHdpdGggY2hhbmdpbmcgc2VydmVyIGRhdGUuDQpOb3Qgb24gaWNl
+ZHRlYTYtbmF0aXZlLTEuOC4xMSwgYnV0IG9wZW5qZGstNi1uYXRpdmUuDQpJJ20gY2hlY2tpbmcg
+YWN0dWFsbHkgZm9yIGEgZGF0ZSBjaGFuZ2Ugc29sdXRpb24gOiBmdWxsIGNvbXBpbGF0aW9uIGlz
+IHN0aWxsIHJ1bm5pbmcgKHJlc3RhcnRlZCBmcm9tIHNjcmF0Y2ggOiBtb3JlIHRoYW4gMTJoKQ0K
+DQoNCkNoZWNraW5nIHRoZSBuZXcgZ2l0Oi8vZ2l0LnlvY3RvcHJvamVjdC5vcmcvbWV0YS1qYXZh
+IGFzIHNhaWQgSGVubmluZyAhDQpJbXBvc3NpYmxlIHRvIG1vdmUgdG8gZGVwZW5kZW5jaWVzIGR1
+ZSB0byBkaXN0cmlidXRpb24gY3VzdG9taXNhdGlvbiAodG9vIG1hbnkgd29yayBhbmQgbm8gc3Vj
+Y2VzcyBndWFyYW50eSEpLg0KDQoNCkNhbid0IEkganVzdCBoYXZlIGEgcGF0Y2gsIG9yIHNpbXBs
+eSBjaGFuZ2luZyBzb3VyY2VzIHdoZXJlIHRoaXMgdGVzdCBpcyBkb25lIChjaGFuZ2luZyB0ZXN0
+IG9yIGRhdGVzIHZhbHVlcykgPw0KDQpUaGFua3MsDQpEYW5pZWwuDQoNCi0tLS0tTWVzc2FnZSBk
+J29yaWdpbmUtLS0tLQ0KRGXCoDogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9w
+ZW5lbWJlZGRlZC5vcmddIERlIGxhIHBhcnQgZGUgTWF4IEtydW1tZW5hY2hlcg0KRW52b3nDqcKg
+OiB2ZW5kcmVkaSAxMyBmw6l2cmllciAyMDE1IDExOjM0DQrDgMKgOiBvcGVuZW1iZWRkZWQtZGV2
+ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KT2JqZXTCoDogUmU6IFtvZV0gcGFja2FnZSBpY2Vk
+dGVhNi1uYXRpdmUtMS44LjExLXI1LjM6IHRhc2sgZG9fY29tcGlsZTogRmFpbGVkDQoNCkhpIERh
+bmllbA0KDQoNCkFtIEZyZWl0YWcsIGRlbiAxMy4wMi4yMDE1LCAxMDowOCArMDAwMCBzY2hyaWVi
+IE1PTkRPTiBEYW5pZWw6DQo+IE9rLCBidXQgbXkgcHJvYmxlbSBpcyBJIG11c3Qgbm90IGNoYW5n
+ZSBkaXN0cmlidXRpb24uDQo+IFRoZSBzeXN0ZW0gaXMgaW5zdGFsbGVkIG9uIG1hbnkgbWFjaGlu
+ZXMsIGFuZCBtb3ZpbmcgdG8gYW5kIG90aGVyIHJlcG8gd2lsbCBnZW5lcmF0ZSB0b28gbWFueSB3
+b3JrIChkZXYgYW5kIHZhbGlkYXRpb24pIQ0KSW4gb3JkZXIgdG8gZml4IGFuIGVycm9yIHlvdSB3
+aWxsIGhhdmUgdG8gY2hhbmdlIHNvbWV0aGluZy4NCg0KPiBJIGhhdmUgbm90IGVub3VnaCB0aW1l
+IHRvIHBhc3Mgb24gdGhpcyBwcm9ibGVtIDogSXQgd2FzIHNvIGNvbXBsaWNhdGVkIHRvIGJ1aWxk
+LCBpbnN0YWxsIGFuZCBjb25maWd1cmUgSmF2YSBvbiBhbmdzdHJvbXYyMDEyLjA1IGVudmlyb25t
+ZW50IQ0KPiANCj4gSXMgaXQgYmVjYXVzZSBVYnVudHUgMTIuMDQgamF2YSB3YXMgdXBkYXRlZCA/
+DQpOby4NCg0KVGhlIGVycm9yIHlvdSBzZWUgaXMgYmVjYXVzZSBzb21lIHNvdXJjZXMgdGVzdCBp
+ZiBub3cgaXMgbW9yZSB0aGFuIDEwIHllYXJzIGZyb20gMjAxNSBhbmQgcmVmdXNlIHRvIGNvbXBp
+bGUgKGFuZCBtYXliZSBleGVjdXRlIGxhdGVyPykgaWYgdGhpcyBpcyB0aGUgY2FzZS4NCg0KVGhp
+cyBpcyBmaXhlZCBpbiBtZXRhLWphdmEsIGJ1dCBhcyBIZW5uaW5nIHNhaWQgeW91IGhhdmUgdG8g
+Z2V0IHRoZSBtZXRhLWphdmEgbGF5ZXIgZnJvbSBnaXQ6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9t
+ZXRhLWphdmEgYW5kIHVwZGF0ZSB0byBIRUFELg0KDQpSZWdhcmRzDQpNYXgNCg0KPiBUaGFua3MN
+Cj4gRGFuaWVsLg0KPiANCj4gLS0tLS1NZXNzYWdlIGQnb3JpZ2luZS0tLS0tDQo+IERlIDogb3Bl
+bmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyANCj4gW21haWx0
+bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBEZSBs
+YSBwYXJ0IA0KPiBkZSBIZW5uaW5nIEhlaW5vbGQgRW52b3nDqSA6IHZlbmRyZWRpIDEzIGbDqXZy
+aWVyIDIwMTUgMTA6NTAgw4AgOiANCj4gb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJl
+ZGRlZC5vcmcNCj4gT2JqZXQgOiBSZTogW29lXSBwYWNrYWdlIGljZWR0ZWE2LW5hdGl2ZS0xLjgu
+MTEtcjUuMzogdGFzayBkb19jb21waWxlOiANCj4gRmFpbGVkDQo+IA0KPiBPbiBGcmksIEZlYiAx
+MywgMjAxNSBhdCAwODozNjo0NUFNICswMDAwLCBNT05ET04gRGFuaWVsIHdyb3RlOg0KPiA+IEhp
+LA0KPiA+IA0KPiA+IEkgYW0gdW5kZXIgVWJ1bnR1IDEyLjA0IHNlcnZlciBhbmQgSSBidWlsZCBh
+biBhbmdzdHJvbXYyMDEyLjA1IGRpc3RyaWJ1dGlvbi4NCj4gPiANCj4gPiBNYWtpbmcgYSBidWls
+ZCBhbGwgKGZyb20gc2NyYXRjaCksIEkndmUgZ290IHRoZSBlcnJvcjoNCj4gPiB8IEVycm9yOiB0
+aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFycyBmcm9tIHByZXNlbnQ6IDExMDQ1MzA0MDAwMDANCj4g
+PiB8IGphdmEubGFuZy5SdW50aW1lRXhjZXB0aW9uOiB0aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFy
+cyBmcm9tIHByZXNlbnQ6IDExMDQ1MzA0MDAwMDANCj4gPiB8ICAgIGF0IGJ1aWxkLnRvb2xzLmdl
+bmVyYXRlY3VycmVuY3lkYXRhLkdlbmVyYXRlQ3VycmVuY3lEYXRhLm1ha2VTcGVjaWFsQ2FzZUVu
+dHJ5KEdlbmVyYXRlQ3VycmVuY3lEYXRhLmphdmE6Mjg1KQ0KPiA+IHwgICAgYXQgYnVpbGQudG9v
+bHMuZ2VuZXJhdGVjdXJyZW5jeWRhdGEuR2VuZXJhdGVDdXJyZW5jeURhdGEuYnVpbGRNYWluQW5k
+U3BlY2lhbENhc2VUYWJsZXMoR2VuZXJhdGVDdXJyZW5jeURhdGEuamF2YToyMjUpDQo+ID4gfCAg
+ICBhdCBidWlsZC50b29scy5nZW5lcmF0ZWN1cnJlbmN5ZGF0YS5HZW5lcmF0ZUN1cnJlbmN5RGF0
+YS5tYWluKEdlbmVyYXRlQ3VycmVuY3lEYXRhLmphdmE6MTU0KQ0KPiA+IHwgICAgYXQgamF2YS5s
+YW5nLnJlZmxlY3QuVk1NZXRob2QuaW52b2tlKE5hdGl2ZSBNZXRob2QpDQo+ID4gfCAgICBhdCBq
+YXZhLmxhbmcucmVmbGVjdC5NZXRob2QuaW52b2tlKE1ldGhvZC5qYXZhOjMyNykNCj4gPiB8ICAg
+IGF0IGphbXZtLmphdmEubGFuZy5KYXJMYXVuY2hlci5tYWluKEphckxhdW5jaGVFUlJPUjogRnVu
+Y3Rpb24gDQo+ID4gfCBmYWlsZWQ6IGRvX2NvbXBpbGUgKHNlZSANCj4gPiB8IC9ob21lL2xwZy9W
+UE4vbHBnLXByb2plY3QvYnVpbGQvdG1wLWFuZ3N0cm9tX3YyMDEyXzA1LWVnbGliYy93b3JrLw0K
+PiA+IHwgeDg2XzY0LWxpbnV4L2ljZWR0ZWE2LW5hdGl2ZS0xLjguMTEtcjUuMy90ZW1wL2xvZy5k
+b19jb21waWxlLjg3MTAgDQo+ID4gfCBmb3IgZnVydGhlciBpbmZvcm1hdGlvbikNCj4gPiANCj4g
+PiBUaGUgbG9nLmRvX2NvbXBpbGUuODcxMCBpcyBhdHRhY2hlZC4NCj4gPiANCj4gPiBQbGVhc2Ug
+aGVscCA6KQ0KPiA+IA0KPiA+IFRoYW5rcw0KPiA+IERhbmllbC4NCj4gDQo+IFRoZSBsYXllciBo
+YXMgbW92ZWQgYW5kIGlzIG5vdyBhdmFpbGFibGUgdW5kZXIgDQo+IGdpdDovL2dpdC55b2N0b3By
+b2plY3Qub3JnL21ldGEtamF2YQ0KPiANCj4gQnllIEhlbm5pbmcNCj4gDQo+IA0KPiA+IC0tDQo+
+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBP
+cGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxp
+c3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiAtLQ0KPiBfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwg
+bWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
+DQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVt
+YmVkZGVkLWRldmVsDQoNCg0KLS0gDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVk
+ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRk
+ZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
 
