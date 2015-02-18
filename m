@@ -1,25 +1,48 @@
-Return-Path: <alexandre.belloni@free-electrons.com>
-Received: from mail.free-electrons.com (down.free-electrons.com
-	[37.187.137.238])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B91365C85
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 20:58:36 +0000 (UTC)
-Received: by mail.free-electrons.com (Postfix, from userid 106)
-	id 9ECD110F5; Wed, 18 Feb 2015 21:58:38 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	mail.free-electrons.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
-	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
-Received: from localhost (128-79-216-6.hfc.dyn.abo.bbox.fr [128.79.216.6])
-	by mail.free-electrons.com (Postfix) with ESMTPSA id 3240B3C0;
-	Wed, 18 Feb 2015 21:58:03 +0100 (CET)
-From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Feb 2015 21:57:57 +0100
-Message-Id: <1424293077-4542-1-git-send-email-alexandre.belloni@free-electrons.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-qt5][dizzy][PATCH] qmake5: don't always look in directories recursively
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id E66446E614;
+	Wed, 18 Feb 2015 21:41:24 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1ILfNWd027606; Wed, 18 Feb 2015 21:41:23 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id haKAJtwAHKiz; Wed, 18 Feb 2015 21:41:22 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1ILf8ii027591
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 18 Feb 2015 21:41:19 GMT
+Message-ID: <1424295668.11836.19.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 18 Feb 2015 21:41:08 +0000
+In-Reply-To: <3F6EFBD4-AC35-4CE0-B52C-0ABDA0D17838@gmail.com>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
+	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
+	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
+	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
+	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
+	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
+	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
+	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
+	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
+	<1423908404.20217.100.camel@linuxfoundation.org>
+	<CAMKF1sofS7MteZnPsTYRNAcMwrrh=T3FP+ASmAOGDMhcwyXB4g@mail.gmail.com>
+	<1424245575.25541.19.camel@linuxfoundation.org>
+	<BCB8524E-91CB-41F6-83C0-7B90E60BC82D@gmail.com>
+	<1424260309.25541.23.camel@linuxfoundation.org>
+	<1424264807.11836.1.camel@linuxfoundation.org>
+	<3F6EFBD4-AC35-4CE0-B52C-0ABDA0D17838@gmail.com>
+X-Mailer: Evolution 3.12.7-0ubuntu1 
+Mime-Version: 1.0
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [OE-core] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,93 +56,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 20:58:37 -0000
+X-List-Received-Date: Wed, 18 Feb 2015 21:41:28 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-QT needs to be compiled without the -r parameter from the qmake command
-line. This is necessary to avoid those errors when building
-qtdeclarative or qt3d without opengl for example:
-Project ERROR: Unknown module(s) in QT: quick-private
-or
-Project ERROR: Unknown module(s) in QT: quick
+On Wed, 2015-02-18 at 10:38 -0800, Khem Raj wrote:
+> > On Feb 18, 2015, at 5:06 AM, Richard Purdie <richard.purdie@linuxfoundation.org> wrote:
+> > On Wed, 2015-02-18 at 11:51 +0000, Richard Purdie wrote:
+> >> On Wed, 2015-02-18 at 01:01 -0800, Khem Raj wrote:
+> > The series needs:
+> > 
+> > TUNE_CCARGS_x86 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}"
+> > +TUNE_CCARGS_x86-64 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}”
+> > 
+> 
+> hmmm I assumed x86 was common across 32bit and 64bit x86 but seems not so I replaced the old patch instead of appending it 
 
-Also update comments regarding the dependencies.
+Thanks, I'll update the patch for the next round.
 
-Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
----
- classes/qmake5_base.bbclass | 7 +++++--
- recipes-qt/qt5/qt5.inc      | 2 ++
- recipes-qt/qt5/qtbase.inc   | 5 +----
- 3 files changed, 8 insertions(+), 6 deletions(-)
+> 
+> > since the x86 override doesn't cover x86_64. I'll queue that and run yet
+> > another build. We do have another poky-tiny issue too:
+> > 
+> > https://autobuilder.yoctoproject.org/main/builders/poky-tiny/builds/204
+> > 
+> 
+> OK. I am creating a local config to use tiny config for libc and weed out remaining build issues for tiny config 
 
-diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
-index f1a09450efca..f58d291ab12a 100644
---- a/classes/qmake5_base.bbclass
-+++ b/classes/qmake5_base.bbclass
-@@ -13,6 +13,9 @@ OE_QMAKE_PLATFORM = "linux-oe-g++"
- # Add -d to show debug output from every qmake call, but it prints *a lot*, better to add it only to debugged recipe
- OE_QMAKE_DEBUG_OUTPUT ?= ""
- 
-+# Look through supplied directories recursively by default
-+OE_QMAKE_RECURSIVE ?= "-r"
-+
- # Paths in .prl files contain SYSROOT value
- SSTATE_SCAN_FILES += "*.pri *.prl"
- 
-@@ -159,8 +162,8 @@ qmake5_base_do_configure () {
-     # for config.tests to read this
-     export QMAKE_MAKE_ARGS="${EXTRA_OEMAKE}"
- 
--    CMD="${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} -r $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST"
--    ${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} -r $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST || die "Error calling $CMD"
-+    CMD="${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} ${OE_QMAKE_RECURSIVE} $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST"
-+    ${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} ${OE_QMAKE_RECURSIVE} $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST || die "Error calling $CMD"
- }
- 
- qmake5_base_do_install() {
-diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-index bb0bcdcac0af..22f0d30e0298 100644
---- a/recipes-qt/qt5/qt5.inc
-+++ b/recipes-qt/qt5/qt5.inc
-@@ -18,6 +18,8 @@ OE_QMAKE_PATH_SETTINGS = "${OE_QMAKE_PATH_QT_SETTINGS}"
- OE_QMAKE_PATH_EXAMPLES = "${OE_QMAKE_PATH_QT_EXAMPLES}"
- OE_QMAKE_PATH_TESTS = "${OE_QMAKE_PATH_QT_TESTS}"
- 
-+OE_QMAKE_RECURSIVE = ""
-+
- # If Qt5 (qtbase) is machine specific, then everything will be,
- # because the (initial) qtbase configuration becomes part of Qt5/qmake
- python __anonymous() {
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index 1d2efa020b3b..2d2bc07c6148 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -30,8 +30,6 @@ RDEPENDS_${PN}-tools += "perl"
- # PACKAGECONFIG is kept rather minimal for people who don't need
- # stuff like webkit (and it's easier to add options than remove)
- 
--# gl or gles needs to be enabled in order to build qtdeclarative
--# http://qt.gitorious.org/qt/qtdeclarative/commit/e988998a08b1420ed10bd02d9d4b3b8ed2289df9
- PACKAGECONFIG_GL ?= "${@base_contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)}"
- PACKAGECONFIG_FB ?= "${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
- PACKAGECONFIG_X11 ?= "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor gtkstyle xkb', '', d)}"
-@@ -77,7 +75,6 @@ PACKAGECONFIG[jpeg] = "-system-libjpeg,-no-libjpeg,jpeg"
- PACKAGECONFIG[libpng] = "-system-libpng,-no-libpng,libpng"
- PACKAGECONFIG[zlib] = "-system-zlib,-qt-zlib,zlib"
- PACKAGECONFIG[pcre] = "-system-pcre,-qt-pcre,pcre"
--# gl or gles2 is needed in order to build qtdeclarative (qtdeclarative.do_configure fails to find quick module without)
- PACKAGECONFIG[gl] = "-opengl desktop -no-eglfs,,virtual/libgl"
- PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
- PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
-@@ -115,7 +112,7 @@ PACKAGECONFIG[directfb] = "-directfb,-no-directfb,directfb"
- PACKAGECONFIG[linuxfb] = "-linuxfb,-no-linuxfb"
- PACKAGECONFIG[mitshm] = "-mitshm,-no-mitshm,mitshm"
- PACKAGECONFIG[kms] = "-kms,-no-kms,virtual/mesa virtual/egl"
--# needed for qtdeclarative (qtdeclarative.do_configure fails to find quick module without)
-+# needed for qtwebkit
- PACKAGECONFIG[icu] = "-icu,-no-icu,icu"
- PACKAGECONFIG[udev] = "-libudev,-no-libudev,udev"
- # use -openssl-linked here to ensure that RDEPENDS for libcrypto and libssl are detected
--- 
-2.1.0
+Cool, thanks.
+
+The next build is in progress and looking greener than the last. Next up
+it appears we still have multilib issues:
+
+https://autobuilder.yoctoproject.org/main/builders/nightly-multilib/builds/201
+
+There is a possibility this "from sstate" build may have run into a
+problem with sstate but something looks to be wrong with glibc in some
+regard.
+
+Cheers,
+
+Richard
 
 
