@@ -1,34 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 458306E614
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 12:47:48 +0000 (UTC)
-Received: by mail-wg0-f42.google.com with SMTP id n12so968252wgh.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 04:47:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=74yFjid7ZtFUwYWRw6CbQVmwQaj1pHsbCxb1LftF/FE=;
-	b=yWFubIDNuweN0btLZIeO/t6DgQkQrqkeMNAGfIAnHTsH0WK2QE7tnTp59HZWL6SJBc
-	dMX6eNKES75d2/dXIXNTLEBR9iGH2SPI1EQeavdzu3xrG29ihaaVFQkEu5Dpz09uo3QE
-	0rwNX/HUJLpHGIK0Cxj473HFdk9ibhncoQSFzM0euwYOI7S5Ynzf65OBLHhTb0jlGJkY
-	Wr/lAsICZsBd/FgxHnAO5g9bu2FDAGLG7W39t1JqxFu+B/sjrFHBGNWuuIH+XGLTQhgs
-	XnysDji/OERmufLaG7y9frJJk3qD8sIbCfFcSUV1oiYyW95uEJqCXuYlVEOsTkn0lZZu
-	M/kA==
-X-Received: by 10.194.81.161 with SMTP id b1mr71785600wjy.2.1424263668847;
-	Wed, 18 Feb 2015 04:47:48 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	bd8sm32512281wjc.21.2015.02.18.04.47.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Feb 2015 04:47:47 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Feb 2015 13:47:48 +0100
-Message-Id: <1424263669-17774-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.3.0
-Subject: [meta-oe][meta-efl][PATCH 1/2] entrance, diskio: blacklist
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E6E9606E8;
+	Wed, 18 Feb 2015 13:07:00 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1ID6x9j027328; Wed, 18 Feb 2015 13:06:59 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id fO-4zgqsnaWi; Wed, 18 Feb 2015 13:06:59 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1ID6lhe027324
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 18 Feb 2015 13:06:58 GMT
+Message-ID: <1424264807.11836.1.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 18 Feb 2015 13:06:47 +0000
+In-Reply-To: <1424260309.25541.23.camel@linuxfoundation.org>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
+	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
+	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
+	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
+	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
+	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
+	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
+	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
+	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
+	<1423908404.20217.100.camel@linuxfoundation.org>
+	<CAMKF1sofS7MteZnPsTYRNAcMwrrh=T3FP+ASmAOGDMhcwyXB4g@mail.gmail.com>
+	<1424245575.25541.19.camel@linuxfoundation.org>
+	<BCB8524E-91CB-41F6-83C0-7B90E60BC82D@gmail.com>
+	<1424260309.25541.23.camel@linuxfoundation.org>
+X-Mailer: Evolution 3.12.7-0ubuntu1 
+Mime-Version: 1.0
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [OE-core] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,41 +54,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 12:47:52 -0000
+X-List-Received-Date: Wed, 18 Feb 2015 13:07:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* they are old and now incompatible with edje_cc from 1.13.0
+On Wed, 2015-02-18 at 11:51 +0000, Richard Purdie wrote:
+> On Wed, 2015-02-18 at 01:01 -0800, Khem Raj wrote:
+> > OK thats why I am not seeing it on my qemux86 build. 
+> > 
+> > this leaves us with only one problem - glibc/qemuarm issue
+> > 
+> > http://errors.yoctoproject.org/Errors/Details/8679/
+> > 
+> > I have seen this error with eglibc-2.19 and glibc 2.20 as well on x86 and arm as well in cases when using
+> > toolchain from sstate and rebuilding glibc with that. I assume this could be  unrelated to glibc upgrade
+> > and may be a latent problem. Could be missing dependency on a native tool or some such. I have been attributing it to gold
+> > but that just might have been a red herring.
+> > 
+> > I will see if I can get to reproduce it.
+> 
+> I tried another build with the three patches from your oe-core contrib
+> branch applied. Error report out is:
+> 
+> http://errors.yoctoproject.org/Errors/Search/?items=10&query=b75fed99f2aa86b49844dd0cf06991767f6f26d3
+> 
+> i.e. we're still seeing SSE errors in glibc builds. Am I missing some
+> patches or something?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/e17/diskio_svn.bb   | 2 ++
- meta-efl/recipes-efl/efl/entrance_svn.bb | 2 ++
- 2 files changed, 4 insertions(+)
+The series needs:
 
-diff --git a/meta-efl/recipes-efl/e17/diskio_svn.bb b/meta-efl/recipes-efl/e17/diskio_svn.bb
-index 01a6576..a26186e 100644
---- a/meta-efl/recipes-efl/e17/diskio_svn.bb
-+++ b/meta-efl/recipes-efl/e17/diskio_svn.bb
-@@ -5,4 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35 \
- PV = "0.0.1+svnr${SRCPV}"
- PR = "${INC_PR}.0"
- 
-+PNBLACKLIST[diskio] ?= "broken: switch to https://git.enlightenment.org/enlightenment/modules/diskio.git/ and fix 0.0.1+svnr82070-r0.0/E-MODULES-EXTRA/diskio/e-module-diskio.edc:58. invalid state name: 'off'. "default" state must always be first."
-+
- require e-module.inc
-diff --git a/meta-efl/recipes-efl/efl/entrance_svn.bb b/meta-efl/recipes-efl/efl/entrance_svn.bb
-index 198fe03..3374737 100644
---- a/meta-efl/recipes-efl/efl/entrance_svn.bb
-+++ b/meta-efl/recipes-efl/efl/entrance_svn.bb
-@@ -11,6 +11,8 @@ SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
- "
- S = "${WORKDIR}/${SRCNAME}"
- 
-+PNBLACKLIST[entrance] ?= "broken: switch to https://git.enlightenment.org/misc/entrance.git and fix 0.0.4+svnr82070-r7/entrance/data/themes/old/default.edc:678. invalid state name: 'defaault'. "default" state must always be first."
-+
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[consolekit] = "--enable-consolekit,--disable-consolekit,consolekit"
- 
--- 
-2.3.0
+ TUNE_CCARGS_x86 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}"
++TUNE_CCARGS_x86-64 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}"
+
+since the x86 override doesn't cover x86_64. I'll queue that and run yet
+another build. We do have another poky-tiny issue too:
+
+https://autobuilder.yoctoproject.org/main/builders/poky-tiny/builds/204
+
+Cheers,
+
+RIchard
 
 
