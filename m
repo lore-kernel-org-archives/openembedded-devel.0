@@ -1,39 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f170.google.com (mail-yk0-f170.google.com
-	[209.85.160.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 5267D72DE2
+Return-Path: <Shalini.KP@lnttechservices.com>
+Received: from mailout1.ltindia.com (mailout1.ltindia.com [203.199.60.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 99BBB6B6B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 18:26:11 +0000 (UTC)
-Received: by mail-yk0-f170.google.com with SMTP id 10so13734066ykt.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 10:26:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=9bW5i3VI3MM/W6QQAGapqnwrvJPEMxiHQ9ah5Dq2xOU=;
-	b=y2GE72mjZ2ud8vPdUZTUejGcHjBqHPycx14HTjS/51cf7sG05IxkJ/XrPx6K6Rwo2o
-	S5+BiuNuWs8oI++7Vedrw9VIvZBZbJ5ctj60jOj+c1EX+czHdzK8rVDfzOhlhxVpXII/
-	C3h8Pwx//C9E9uZxg2orT9QHYktxvpXk8HgTZyqyunHyBqyHV8WagoWwCpBBhU2dKrG0
-	UV/F/CUIhIEVf+Gn8u28IJCTTc5SuibA8VuWe+2dMFqmZWkPZWNWWL+8FYKXnajlzNBn
-	30aIHO/4KuVdkOAOywCL8lyAGXJhZLrwd1dA4giUPQf9kXLkqn7wbCGKoWO7WgafAXQS
-	lLKw==
+	Wed, 18 Feb 2015 04:52:19 +0000 (UTC)
+Received: from unknown (HELO POCITMSEXHUB04.LntUniverse.com) ([10.2.1.69])
+	by mailout1.ltindia.com with ESMTP; 18 Feb 2015 10:22:07 +0530
+Received: from POCITMSEXMB05.LntUniverse.com ([fe80::518c:4525:d15f:548a]) by
+	POCITMSEXHUB04.LntUniverse.com ([fe80::8c5f:9589:e5d5:ce78%11]) with
+	mapi id 14.03.0181.006; Wed, 18 Feb 2015 10:22:07 +0530
+From: Shalini K P <Shalini.KP@LntTechservices.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Error while building openjdk-6 using meta-java
+Thread-Index: AdBLNoSmNLTPzjspSAmeaEbEblmBdw==
+Date: Wed, 18 Feb 2015 04:52:06 +0000
+Message-ID: <E5FF0F26CCED3843A9B0899B389686BA42E571@POCITMSEXMB05.LntUniverse.com>
+Accept-Language: en-IN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.2.1.199]
 MIME-Version: 1.0
-X-Received: by 10.236.30.98 with SMTP id j62mr1751747yha.105.1424197573143;
-	Tue, 17 Feb 2015 10:26:13 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.133 with HTTP; Tue, 17 Feb 2015 10:26:12 -0800 (PST)
-In-Reply-To: <1424197193.2293.9.camel@Saturn.local.all>
-References: <1424125658-20285-1-git-send-email-max.oss.09@gmail.com>
-	<1424125658-20285-2-git-send-email-max.oss.09@gmail.com>
-	<CAP9ODKq6QKYojHUiO96s9Kpi4-c4qD1UtnLKi88D0MkbitKE=g@mail.gmail.com>
-	<1424197193.2293.9.camel@Saturn.local.all>
-Date: Tue, 17 Feb 2015 16:26:12 -0200
-X-Google-Sender-Auth: 83G6040adMErR55lvKWvkK9Zid0
-Message-ID: <CAP9ODKrLhjmwo2w1d4pgfcJTa0p03xws+CjYX=uqn-eqB8RvmQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [OE-core][RFC] openjdk-7: enable xawt
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Error while building openjdk-6 using meta-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,40 +35,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Feb 2015 18:26:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 18 Feb 2015 04:52:33 -0000
+Content-Language: en-IN
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 17, 2015 at 4:19 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
-> Am Dienstag, den 17.02.2015, 10:57 -0200 schrieb Otavio Salvador:
->> On Mon, Feb 16, 2015 at 8:27 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
->> > The build of xawt has been disabled as its build seemed to fail during a qemu
->> > call to generate a file with information on variable sizes.
->> >
->> > qemu is now called with the relevant path into sysroot and thus works.
->> >
->> > This patch enables xawt again.
->> >
->> > Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
->>
->> I am fine with this change the only remark I may have is force X11
->> dependency. Would be easy to put this in a PACKAGECONFIG?
->
-> I thought about this. As it is not simply a configure option it's not
-> straight forward using the PACKAGECONFIG system.
->
-> On second thought one could probably make it a PACKAGECONFIG option,
-> even conditionally set it with DISTRO_FEATURES but then use some python
-> magic to conditionally apply a patch removing xawt if headless is
-> configured.
->
-> I'm a bit loaded with work at the moment, so it will take some weeks to
-> come up with a tested v2 of the patch.
+Hi,
 
-Yes. You can take a look how we did in meta-fsl-arm for Chromium
-patches. It has some conditional patching.
+        I m using "git://git.yoctoproject.org/meta-java" layer. I m getting=
+ error while compiling java in the compilestep2. Not able to fix this. Belo=
+w is the error log.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+/home/ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linu=
+x-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/bootstrap/jdk1.6.0/bin/java=
+  -client -Xmx896m -Xms128m -XX:PermSize=3D32m -XX:MaxPermSize=3D160m -jar =
+/homeError: time is more than 10 years from present: 1104530400000
+| java.lang.RuntimeException: time is more than 10 years from present: 1104=
+530400000
+|
+|     at build.tools.generatecurrencydata.GenerateCurrencyData.makeSpecialC=
+aseEntry(GenerateCurrencyData.java:285)
+|     at build.tools.generatecurrencydata.GenerateCurrencyData.buildMainAnd=
+SpecialCaseTables(GenerateCurrencyData.java:225)
+|     at build.tools.generatecurrencydata.GenerateCurrencyData.main(Generat=
+eCurrencyData.java:154)
+|
+| make[5]: *** [/home/ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vf=
+p-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/openjdk.bui=
+ld-ecj/lib/currency.data] Error 1
+|
+| make[5]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj/jdk/make/java/java'
+|
+| make[4]: *** [all] Error 1
+| make[4]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj/jdk/make/java'
+|
+| make[3]: *** [all] Error 1
+| make[3]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj/jdk/make'
+|
+| make[2]: *** [jdk-build] Error 2
+| make[2]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj'
+|
+| make[1]: *** [build_product_image] Error 2
+| make[1]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj'
+|
+| make: *** [stamps/icedtea-ecj.stamp] Error 2
+|
+| + die oe_runmake failed
+| + bbfatal oe_runmake failed
+| + echo ERROR: oe_runmake failed
+| ERROR: oe_runmake failed
+| + exit 1
+| + bb_exit_handler
+| + ret=3D1
+| + echo WARNING: exit code 1 from a shell command.
+| WARNING: exit code 1 from a shell command.
+| + exit 1
+|
+| /ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linux-g=
+nueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/openjdk.build-ecj/btjars/gener=
+atecurrencydata.jar -o /home/ubuntu/fsl-community-bsp/build/tmp/work/cortex=
+a9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/open=
+jdk.build-ecj/lib/currency.data.temp \
+|         < ../../../src/share/classes/java/util/CurrencyData.properties
+| Error: time is more than 10 years from present: 1104530400000
+| java.lang.RuntimeException: time is more than 10 years from present: 1104=
+530400000
+|     at build.tools.generatecurrencydata.GenerateCurrencyData.makeSpecialC=
+aseEntry(GenerateCurrencyData.java:285)
+|     at build.tools.generatecurrencydata.GenerateCurrencyData.buildMainAnd=
+SpecialCaseTables(GenerateCurrencyData.java:225)
+|     at build.tools.generatecurrencydata.GenerateCurrencyData.main(Generat=
+eCurrencyData.java:154)
+| make[5]: *** [/home/ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vf=
+p-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/openjdk.bui=
+ld-ecj/lib/currency.data] Error 1
+| make[5]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj/jdk/make/java/java'
+| make[4]: *** [all] Error 1
+| make[4]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj/jdk/make/java'
+| make[3]: *** [all] Error 1
+| make[3]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj/jdk/make'
+| make[2]: *** [jdk-build] Error 2
+| make[2]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj'
+| make[1]: *** [build_product_image] Error 2
+| make[1]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
+/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
+ld/openjdk-ecj'
+| make: *** [stamps/icedtea-ecj.stamp] Error 2
+| + die oe_runmake failed
+| + bbfatal oe_runmake failed
+| + echo ERROR: oe_runmake failed
+| ERROR: oe_runmake failed
+| + exit 1
+| + bb_exit_handler
+| + ret=3D1
+| + echo WARNING: exit code 1 from a shell command.
+| WARNING: exit code 1 from a shell command.
+| + exit 1
+| ERROR: Function failed: do_compilesteptwo (log file is located at /home/u=
+buntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnuea=
+bi/openjdk-6-jre/6b24-1.11.9-r22.1/temp/log.do_compilesteptwo.28700)
+ERROR: Task 6 (/home/ubuntu/fsl-community-bsp/sources/meta-java/recipes-cor=
+e/openjdk/openjdk-6_6b24-1.11.9.bb, do_compilesteptwo) failed with exit cod=
+e '1'
+NOTE: Tasks Summary: Attempted 1894 tasks of which 1887 didn't need to be r=
+erun and 1 failed.
+No currently running tasks (1894 of 1903)
+
+Summary: 1 task failed:
+  /home/ubuntu/fsl-community-bsp/sources/meta-java/recipes-core/openjdk/ope=
+njdk-6_6b24-1.11.9.bb, do_compilesteptwo
+Summary: There were 5 WARNING messages shown.
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
+Request help in this regard.
+
+
+Thanks & Regards
+Shalini K P
+
+L&T Technology Services Ltd
+
+www.LntTechservices.com<http://www.lnttechservices.com/>
+
+This Email may contain confidential or privileged information for the inten=
+ded recipient (s). If you are not the intended recipient, please do not use=
+ or disseminate the information, notify the sender and delete it from your =
+system.
 
