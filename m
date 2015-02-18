@@ -1,37 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id D17846E614
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 458306E614
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 12:47:49 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id h11so40713146wiw.3
+	Wed, 18 Feb 2015 12:47:48 +0000 (UTC)
+Received: by mail-wg0-f42.google.com with SMTP id n12so968252wgh.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 04:47:50 -0800 (PST)
+	Wed, 18 Feb 2015 04:47:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=loEpM0oY3O8mjHrwO3zxRqKetHAfjN+tbCDMN7Pdg6c=;
-	b=PJidr27H9w8Lf6fdIaxnL/7It97427o7Rji/ROadGe8iK6Iv86qBtLZaP1CzdmTajx
-	LjCIZxnUINDuLfZusf07PT44Pz6VlaEkfgjKYZIbkIswB861n+kBNBdkCvNzY4wsWjyp
-	qWNG/QGoe0VpM4WAFnVbDSO43S9FTaHeOzzyzwsjKIBAIEhL5eOz3TJIwls/97kaNaey
-	6UAaaogs1O2F3B45TzY7X3Kt7RC8XiH0zy+Hlbka3t/NKAwKJmdelxOjrYVb3Uy2BPmu
-	YrTe9yWjNC3i6rXflfu6AMc2Ob7pacDu6IItBDIDkcc2M1tHJWQ8cbXrU93ZOazURVK8
-	hfmQ==
-X-Received: by 10.194.122.38 with SMTP id lp6mr74252339wjb.24.1424263670154;
-	Wed, 18 Feb 2015 04:47:50 -0800 (PST)
+	h=from:to:cc:subject:date:message-id;
+	bh=74yFjid7ZtFUwYWRw6CbQVmwQaj1pHsbCxb1LftF/FE=;
+	b=yWFubIDNuweN0btLZIeO/t6DgQkQrqkeMNAGfIAnHTsH0WK2QE7tnTp59HZWL6SJBc
+	dMX6eNKES75d2/dXIXNTLEBR9iGH2SPI1EQeavdzu3xrG29ihaaVFQkEu5Dpz09uo3QE
+	0rwNX/HUJLpHGIK0Cxj473HFdk9ibhncoQSFzM0euwYOI7S5Ynzf65OBLHhTb0jlGJkY
+	Wr/lAsICZsBd/FgxHnAO5g9bu2FDAGLG7W39t1JqxFu+B/sjrFHBGNWuuIH+XGLTQhgs
+	XnysDji/OERmufLaG7y9frJJk3qD8sIbCfFcSUV1oiYyW95uEJqCXuYlVEOsTkn0lZZu
+	M/kA==
+X-Received: by 10.194.81.161 with SMTP id b1mr71785600wjy.2.1424263668847;
+	Wed, 18 Feb 2015 04:47:48 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	hd5sm29316483wib.21.2015.02.18.04.47.49
+	bd8sm32512281wjc.21.2015.02.18.04.47.47
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Feb 2015 04:47:49 -0800 (PST)
+	Wed, 18 Feb 2015 04:47:47 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Feb 2015 13:47:49 +0100
-Message-Id: <1424263669-17774-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 18 Feb 2015 13:47:48 +0100
+Message-Id: <1424263669-17774-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.3.0
-In-Reply-To: <1424263669-17774-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1424263669-17774-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][meta-efl][PATCH 2/2] fltk: blacklist, still uses /usr/bin/freetype-config
+Subject: [meta-oe][meta-efl][PATCH 1/2] entrance, diskio: blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,24 +44,38 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 18 Feb 2015 12:47:52 -0000
 
+* they are old and now incompatible with edje_cc from 1.13.0
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/fltk/fltk_1.1.10.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-efl/recipes-efl/e17/diskio_svn.bb   | 2 ++
+ meta-efl/recipes-efl/efl/entrance_svn.bb | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-index fa01455..4fd3645 100644
---- a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-+++ b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-@@ -8,6 +8,8 @@ DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
+diff --git a/meta-efl/recipes-efl/e17/diskio_svn.bb b/meta-efl/recipes-efl/e17/diskio_svn.bb
+index 01a6576..a26186e 100644
+--- a/meta-efl/recipes-efl/e17/diskio_svn.bb
++++ b/meta-efl/recipes-efl/e17/diskio_svn.bb
+@@ -5,4 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=344895f253c32f38e182dcaf30fe8a35 \
+ PV = "0.0.1+svnr${SRCPV}"
+ PR = "${INC_PR}.0"
  
- PR = "r1"
- 
-+PNBLACKLIST[fltk] ?= "broken: still uses /usr/bin/freetype-config"
++PNBLACKLIST[diskio] ?= "broken: switch to https://git.enlightenment.org/enlightenment/modules/diskio.git/ and fix 0.0.1+svnr82070-r0.0/E-MODULES-EXTRA/diskio/e-module-diskio.edc:58. invalid state name: 'off'. "default" state must always be first."
 +
- SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fltk-${PV}-source.tar.bz2 \
-            file://disable_test.patch \
-            file://dso-fix.patch \
+ require e-module.inc
+diff --git a/meta-efl/recipes-efl/efl/entrance_svn.bb b/meta-efl/recipes-efl/efl/entrance_svn.bb
+index 198fe03..3374737 100644
+--- a/meta-efl/recipes-efl/efl/entrance_svn.bb
++++ b/meta-efl/recipes-efl/efl/entrance_svn.bb
+@@ -11,6 +11,8 @@ SRC_URI = "${E_SVN}/trunk/PROTO;module=${SRCNAME};protocol=http;scmdata=keep \
+ "
+ S = "${WORKDIR}/${SRCNAME}"
+ 
++PNBLACKLIST[entrance] ?= "broken: switch to https://git.enlightenment.org/misc/entrance.git and fix 0.0.4+svnr82070-r7/entrance/data/themes/old/default.edc:678. invalid state name: 'defaault'. "default" state must always be first."
++
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[consolekit] = "--enable-consolekit,--disable-consolekit,consolekit"
+ 
 -- 
 2.3.0
 
