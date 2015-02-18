@@ -1,48 +1,32 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id E66446E614;
-	Wed, 18 Feb 2015 21:41:24 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t1ILfNWd027606; Wed, 18 Feb 2015 21:41:23 GMT
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id haKAJtwAHKiz; Wed, 18 Feb 2015 21:41:22 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t1ILf8ii027591
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Wed, 18 Feb 2015 21:41:19 GMT
-Message-ID: <1424295668.11836.19.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Feb 2015 21:41:08 +0000
-In-Reply-To: <3F6EFBD4-AC35-4CE0-B52C-0ABDA0D17838@gmail.com>
-References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
-	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
-	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
-	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
-	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
-	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
-	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
-	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
-	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
-	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
-	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
-	<1423908404.20217.100.camel@linuxfoundation.org>
-	<CAMKF1sofS7MteZnPsTYRNAcMwrrh=T3FP+ASmAOGDMhcwyXB4g@mail.gmail.com>
-	<1424245575.25541.19.camel@linuxfoundation.org>
-	<BCB8524E-91CB-41F6-83C0-7B90E60BC82D@gmail.com>
-	<1424260309.25541.23.camel@linuxfoundation.org>
-	<1424264807.11836.1.camel@linuxfoundation.org>
-	<3F6EFBD4-AC35-4CE0-B52C-0ABDA0D17838@gmail.com>
-X-Mailer: Evolution 3.12.7-0ubuntu1 
-Mime-Version: 1.0
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
+Return-Path: <ben.shelton@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 620A66E614
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2015 23:04:14 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
+	[130.164.19.134])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t1IN4FbV011117 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2015 17:04:15 -0600
+Received: from bshelton-desktop.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
+	with ESMTP id 2015021817041509-152644 ;
+	Wed, 18 Feb 2015 17:04:15 -0600 
+From: Ben Shelton <ben.shelton@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Feb 2015 17:03:42 -0600
+Message-Id: <1424300622-28832-4-git-send-email-ben.shelton@ni.com>
+X-Mailer: git-send-email 2.3.0
+In-Reply-To: <1424300622-28832-1-git-send-email-ben.shelton@ni.com>
+References: <1424300622-28832-1-git-send-email-ben.shelton@ni.com>
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 02/18/2015 05:04:15 PM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 02/18/2015 05:04:15 PM,
+	Serialize complete at 02/18/2015 05:04:15 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-02-18_07:, , signatures=0
+Subject: [meta-python][PATCH 4/4] python-requests: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,46 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 21:41:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 18 Feb 2015 23:04:14 -0000
 
-On Wed, 2015-02-18 at 10:38 -0800, Khem Raj wrote:
-> > On Feb 18, 2015, at 5:06 AM, Richard Purdie <richard.purdie@linuxfoundation.org> wrote:
-> > On Wed, 2015-02-18 at 11:51 +0000, Richard Purdie wrote:
-> >> On Wed, 2015-02-18 at 01:01 -0800, Khem Raj wrote:
-> > The series needs:
-> > 
-> > TUNE_CCARGS_x86 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}"
-> > +TUNE_CCARGS_x86-64 := "${@oe_filter_out('-mfpmath=sse', '${TUNE_CCARGS}', d)}”
-> > 
-> 
-> hmmm I assumed x86 was common across 32bit and 64bit x86 but seems not so I replaced the old patch instead of appending it 
+Requests is an HTTP library for Python with a clean and succinct API.
 
-Thanks, I'll update the patch for the next round.
+Copied from commit bc572006bfcec10523658b8675f30bf45b43a998 in
+meta-cloud-services/meta-openstack and updated to version 2.5.1.
 
-> 
-> > since the x86 override doesn't cover x86_64. I'll queue that and run yet
-> > another build. We do have another poky-tiny issue too:
-> > 
-> > https://autobuilder.yoctoproject.org/main/builders/poky-tiny/builds/204
-> > 
-> 
-> OK. I am creating a local config to use tiny config for libc and weed out remaining build issues for tiny config 
+Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+---
+ .../recipes-devtools/python/python-requests_2.5.1.bb    | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-requests_2.5.1.bb
 
-Cool, thanks.
-
-The next build is in progress and looking greener than the last. Next up
-it appears we still have multilib issues:
-
-https://autobuilder.yoctoproject.org/main/builders/nightly-multilib/builds/201
-
-There is a possibility this "from sstate" build may have run into a
-problem with sstate but something looks to be wrong with glibc in some
-regard.
-
-Cheers,
-
-Richard
+diff --git a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb b/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
+new file mode 100644
+index 0000000..b719dca
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Python HTTP for Humans."
++HOMEPAGE = "http://python-requests.org"
++SECTION = "devel/python"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c7869e52c8275537186de35e3cd5f9ec"
++
++PR = "r0"
++SRCNAME = "requests"
++
++SRC_URI = "http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "c270eb5551a02e8ab7a4cbb83e22af2e"
++SRC_URI[sha256sum] = "7b7735efd3b1e2323dc9fcef060b380d05f5f18bd0f247f5e9e74a628279de66"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit setuptools
+-- 
+2.3.0
 
 
