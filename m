@@ -1,38 +1,41 @@
-Return-Path: <Daniel.MONDON@lpgsystems.com>
-Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
-	by mail.openembedded.org (Postfix) with ESMTP id B1EF16B0CB
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id ED39765C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 14:14:11 +0000 (UTC)
-Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
-	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 1AD801A7399
+	Wed, 18 Feb 2015 14:56:13 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 6CCA5D407FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 15:14:11 +0100 (CET)
-Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
-	([::1]) with mapi id 14.03.0224.002; Wed, 18 Feb 2015 15:14:10 +0100
-From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
-Thread-Index: AQHQR3jjp5YS124hHUiBKr5QPNNHIZz2ezCw
-Date: Wed, 18 Feb 2015 14:14:10 +0000
-Message-ID: <F48900D76F0D8349918584FEEFEB4BCA062A05E9@SEXCHANGE0100.lpg.priv>
+	Wed, 18 Feb 2015 15:56:13 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id AF790D40369
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2015 15:56:12 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from mail.itconsulting-heinold.de
+	(fb-n15-11.unbelievable-machine.net [94.198.62.204])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2015 15:56:12 +0100 (CET)
+Date: Wed, 18 Feb 2015 15:56:10 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150218145609.GD23103@mail.itconsulting-heinold.de>
 References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
 	<1423810919-9857-19-git-send-email-schnitzeltony@googlemail.com>
 	<F48900D76F0D8349918584FEEFEB4BCA0629F403@SEXCHANGE0100.lpg.priv>
 	<20150213094951.GA14290@mail.itconsulting-heinold.de>
 	<F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
 	<1423823635.2285.5.camel@Saturn.local.all>
-In-Reply-To: <1423823635.2285.5.camel@Saturn.local.all>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.5.31]
+	<F48900D76F0D8349918584FEEFEB4BCA062A05E9@SEXCHANGE0100.lpg.priv>
 MIME-Version: 1.0
-X-DRWEB-SCAN: ok
-X-VRSPAM-SCORE: 0
-X-VRSPAM-STATE: legit
-X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejkedruddtfedgtdekucetufdoteggodetrfcurfhrohhfihhlvgemucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufhtfffkfhgjihgtgfggsehtsgdttddttdejnecuhfhrohhmpefoqffpfffqpfcuffgrnhhivghluceoffgrnhhivghlrdfoqffpfffqpfeslhhpghhshihsthgvmhhsrdgtohhmqeenucffohhmrghinhepohhpvghnvghmsggvugguvggurdhorhhgpdihohgtthhophhrohhjvggtthdrohhrgh
-X-VRSPAM-EXTCAUSE: mhhouggvpehsmhhtphhouhht
+In-Reply-To: <F48900D76F0D8349918584FEEFEB4BCA062A05E9@SEXCHANGE0100.lpg.priv>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -47,83 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 14:14:15 -0000
-Content-Language: fr-FR
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 18 Feb 2015 14:56:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-SGksDQoNCkkndmUgZ290IHNhbWUgcHJvYmxlbSBjb21waWxpbmcgbXkgb2xkIG9wZW5lbWJlZGRl
-ZCBBbmdzdHJvbXYyMDEyLjA1IHdpdGggY2hhbmdpbmcgc2VydmVyIGRhdGUuDQpOb3Qgb24gaWNl
-ZHRlYTYtbmF0aXZlLTEuOC4xMSwgYnV0IG9wZW5qZGstNi1uYXRpdmUuDQpJJ20gY2hlY2tpbmcg
-YWN0dWFsbHkgZm9yIGEgZGF0ZSBjaGFuZ2Ugc29sdXRpb24gOiBmdWxsIGNvbXBpbGF0aW9uIGlz
-IHN0aWxsIHJ1bm5pbmcgKHJlc3RhcnRlZCBmcm9tIHNjcmF0Y2ggOiBtb3JlIHRoYW4gMTJoKQ0K
-DQoNCkNoZWNraW5nIHRoZSBuZXcgZ2l0Oi8vZ2l0LnlvY3RvcHJvamVjdC5vcmcvbWV0YS1qYXZh
-IGFzIHNhaWQgSGVubmluZyAhDQpJbXBvc3NpYmxlIHRvIG1vdmUgdG8gZGVwZW5kZW5jaWVzIGR1
-ZSB0byBkaXN0cmlidXRpb24gY3VzdG9taXNhdGlvbiAodG9vIG1hbnkgd29yayBhbmQgbm8gc3Vj
-Y2VzcyBndWFyYW50eSEpLg0KDQoNCkNhbid0IEkganVzdCBoYXZlIGEgcGF0Y2gsIG9yIHNpbXBs
-eSBjaGFuZ2luZyBzb3VyY2VzIHdoZXJlIHRoaXMgdGVzdCBpcyBkb25lIChjaGFuZ2luZyB0ZXN0
-IG9yIGRhdGVzIHZhbHVlcykgPw0KDQpUaGFua3MsDQpEYW5pZWwuDQoNCi0tLS0tTWVzc2FnZSBk
-J29yaWdpbmUtLS0tLQ0KRGXCoDogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmddIERlIGxhIHBhcnQgZGUgTWF4IEtydW1tZW5hY2hlcg0KRW52b3nDqcKg
-OiB2ZW5kcmVkaSAxMyBmw6l2cmllciAyMDE1IDExOjM0DQrDgMKgOiBvcGVuZW1iZWRkZWQtZGV2
-ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KT2JqZXTCoDogUmU6IFtvZV0gcGFja2FnZSBpY2Vk
-dGVhNi1uYXRpdmUtMS44LjExLXI1LjM6IHRhc2sgZG9fY29tcGlsZTogRmFpbGVkDQoNCkhpIERh
-bmllbA0KDQoNCkFtIEZyZWl0YWcsIGRlbiAxMy4wMi4yMDE1LCAxMDowOCArMDAwMCBzY2hyaWVi
-IE1PTkRPTiBEYW5pZWw6DQo+IE9rLCBidXQgbXkgcHJvYmxlbSBpcyBJIG11c3Qgbm90IGNoYW5n
-ZSBkaXN0cmlidXRpb24uDQo+IFRoZSBzeXN0ZW0gaXMgaW5zdGFsbGVkIG9uIG1hbnkgbWFjaGlu
-ZXMsIGFuZCBtb3ZpbmcgdG8gYW5kIG90aGVyIHJlcG8gd2lsbCBnZW5lcmF0ZSB0b28gbWFueSB3
-b3JrIChkZXYgYW5kIHZhbGlkYXRpb24pIQ0KSW4gb3JkZXIgdG8gZml4IGFuIGVycm9yIHlvdSB3
-aWxsIGhhdmUgdG8gY2hhbmdlIHNvbWV0aGluZy4NCg0KPiBJIGhhdmUgbm90IGVub3VnaCB0aW1l
-IHRvIHBhc3Mgb24gdGhpcyBwcm9ibGVtIDogSXQgd2FzIHNvIGNvbXBsaWNhdGVkIHRvIGJ1aWxk
-LCBpbnN0YWxsIGFuZCBjb25maWd1cmUgSmF2YSBvbiBhbmdzdHJvbXYyMDEyLjA1IGVudmlyb25t
-ZW50IQ0KPiANCj4gSXMgaXQgYmVjYXVzZSBVYnVudHUgMTIuMDQgamF2YSB3YXMgdXBkYXRlZCA/
-DQpOby4NCg0KVGhlIGVycm9yIHlvdSBzZWUgaXMgYmVjYXVzZSBzb21lIHNvdXJjZXMgdGVzdCBp
-ZiBub3cgaXMgbW9yZSB0aGFuIDEwIHllYXJzIGZyb20gMjAxNSBhbmQgcmVmdXNlIHRvIGNvbXBp
-bGUgKGFuZCBtYXliZSBleGVjdXRlIGxhdGVyPykgaWYgdGhpcyBpcyB0aGUgY2FzZS4NCg0KVGhp
-cyBpcyBmaXhlZCBpbiBtZXRhLWphdmEsIGJ1dCBhcyBIZW5uaW5nIHNhaWQgeW91IGhhdmUgdG8g
-Z2V0IHRoZSBtZXRhLWphdmEgbGF5ZXIgZnJvbSBnaXQ6Ly9naXQueW9jdG9wcm9qZWN0Lm9yZy9t
-ZXRhLWphdmEgYW5kIHVwZGF0ZSB0byBIRUFELg0KDQpSZWdhcmRzDQpNYXgNCg0KPiBUaGFua3MN
-Cj4gRGFuaWVsLg0KPiANCj4gLS0tLS1NZXNzYWdlIGQnb3JpZ2luZS0tLS0tDQo+IERlIDogb3Bl
-bmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyANCj4gW21haWx0
-bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBEZSBs
-YSBwYXJ0IA0KPiBkZSBIZW5uaW5nIEhlaW5vbGQgRW52b3nDqSA6IHZlbmRyZWRpIDEzIGbDqXZy
-aWVyIDIwMTUgMTA6NTAgw4AgOiANCj4gb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmcNCj4gT2JqZXQgOiBSZTogW29lXSBwYWNrYWdlIGljZWR0ZWE2LW5hdGl2ZS0xLjgu
-MTEtcjUuMzogdGFzayBkb19jb21waWxlOiANCj4gRmFpbGVkDQo+IA0KPiBPbiBGcmksIEZlYiAx
-MywgMjAxNSBhdCAwODozNjo0NUFNICswMDAwLCBNT05ET04gRGFuaWVsIHdyb3RlOg0KPiA+IEhp
-LA0KPiA+IA0KPiA+IEkgYW0gdW5kZXIgVWJ1bnR1IDEyLjA0IHNlcnZlciBhbmQgSSBidWlsZCBh
-biBhbmdzdHJvbXYyMDEyLjA1IGRpc3RyaWJ1dGlvbi4NCj4gPiANCj4gPiBNYWtpbmcgYSBidWls
-ZCBhbGwgKGZyb20gc2NyYXRjaCksIEkndmUgZ290IHRoZSBlcnJvcjoNCj4gPiB8IEVycm9yOiB0
-aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFycyBmcm9tIHByZXNlbnQ6IDExMDQ1MzA0MDAwMDANCj4g
-PiB8IGphdmEubGFuZy5SdW50aW1lRXhjZXB0aW9uOiB0aW1lIGlzIG1vcmUgdGhhbiAxMCB5ZWFy
-cyBmcm9tIHByZXNlbnQ6IDExMDQ1MzA0MDAwMDANCj4gPiB8ICAgIGF0IGJ1aWxkLnRvb2xzLmdl
-bmVyYXRlY3VycmVuY3lkYXRhLkdlbmVyYXRlQ3VycmVuY3lEYXRhLm1ha2VTcGVjaWFsQ2FzZUVu
-dHJ5KEdlbmVyYXRlQ3VycmVuY3lEYXRhLmphdmE6Mjg1KQ0KPiA+IHwgICAgYXQgYnVpbGQudG9v
-bHMuZ2VuZXJhdGVjdXJyZW5jeWRhdGEuR2VuZXJhdGVDdXJyZW5jeURhdGEuYnVpbGRNYWluQW5k
-U3BlY2lhbENhc2VUYWJsZXMoR2VuZXJhdGVDdXJyZW5jeURhdGEuamF2YToyMjUpDQo+ID4gfCAg
-ICBhdCBidWlsZC50b29scy5nZW5lcmF0ZWN1cnJlbmN5ZGF0YS5HZW5lcmF0ZUN1cnJlbmN5RGF0
-YS5tYWluKEdlbmVyYXRlQ3VycmVuY3lEYXRhLmphdmE6MTU0KQ0KPiA+IHwgICAgYXQgamF2YS5s
-YW5nLnJlZmxlY3QuVk1NZXRob2QuaW52b2tlKE5hdGl2ZSBNZXRob2QpDQo+ID4gfCAgICBhdCBq
-YXZhLmxhbmcucmVmbGVjdC5NZXRob2QuaW52b2tlKE1ldGhvZC5qYXZhOjMyNykNCj4gPiB8ICAg
-IGF0IGphbXZtLmphdmEubGFuZy5KYXJMYXVuY2hlci5tYWluKEphckxhdW5jaGVFUlJPUjogRnVu
-Y3Rpb24gDQo+ID4gfCBmYWlsZWQ6IGRvX2NvbXBpbGUgKHNlZSANCj4gPiB8IC9ob21lL2xwZy9W
-UE4vbHBnLXByb2plY3QvYnVpbGQvdG1wLWFuZ3N0cm9tX3YyMDEyXzA1LWVnbGliYy93b3JrLw0K
-PiA+IHwgeDg2XzY0LWxpbnV4L2ljZWR0ZWE2LW5hdGl2ZS0xLjguMTEtcjUuMy90ZW1wL2xvZy5k
-b19jb21waWxlLjg3MTAgDQo+ID4gfCBmb3IgZnVydGhlciBpbmZvcm1hdGlvbikNCj4gPiANCj4g
-PiBUaGUgbG9nLmRvX2NvbXBpbGUuODcxMCBpcyBhdHRhY2hlZC4NCj4gPiANCj4gPiBQbGVhc2Ug
-aGVscCA6KQ0KPiA+IA0KPiA+IFRoYW5rcw0KPiA+IERhbmllbC4NCj4gDQo+IFRoZSBsYXllciBo
-YXMgbW92ZWQgYW5kIGlzIG5vdyBhdmFpbGFibGUgdW5kZXIgDQo+IGdpdDovL2dpdC55b2N0b3By
-b2plY3Qub3JnL21ldGEtamF2YQ0KPiANCj4gQnllIEhlbm5pbmcNCj4gDQo+IA0KPiA+IC0tDQo+
-ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBP
-cGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxp
-c3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiAtLQ0KPiBfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBPcGVuZW1iZWRkZWQtZGV2ZWwg
-bWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-DQo+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVt
-YmVkZGVkLWRldmVsDQoNCg0KLS0gDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVk
-ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRk
-ZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
+On Wed, Feb 18, 2015 at 02:14:10PM +0000, MONDON Daniel wrote:
+> Hi,
+> 
+> I've got same problem compiling my old openembedded Angstromv2012.05 with changing server date.
+> Not on icedtea6-native-1.8.11, but openjdk-6-native.
+> I'm checking actually for a date change solution : full compilation is still running (restarted from scratch : more than 12h)
+> 
+> 
+> Checking the new git://git.yoctoproject.org/meta-java as said Henning !
+> Impossible to move to dependencies due to distribution customisation (too many work and no success guaranty!).
+> 
+> 
+> Can't I just have a patch, or simply changing sources where this test is done (changing test or dates values) ?
+> 
+> Thanks,
+> Daniel.
+> 
+
+git.yocotoproject.org has web frontend so have a look at
+
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=58c5f41799bec30a5576137d5477e8ba14a0a802
+
+Bye Henning
 
