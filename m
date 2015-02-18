@@ -1,27 +1,34 @@
-Return-Path: <Shalini.KP@lnttechservices.com>
-Received: from mailout1.ltindia.com (mailout1.ltindia.com [203.199.60.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 99BBB6B6B7
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id E459A65C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 04:52:19 +0000 (UTC)
-Received: from unknown (HELO POCITMSEXHUB04.LntUniverse.com) ([10.2.1.69])
-	by mailout1.ltindia.com with ESMTP; 18 Feb 2015 10:22:07 +0530
-Received: from POCITMSEXMB05.LntUniverse.com ([fe80::518c:4525:d15f:548a]) by
-	POCITMSEXHUB04.LntUniverse.com ([fe80::8c5f:9589:e5d5:ce78%11]) with
-	mapi id 14.03.0181.006; Wed, 18 Feb 2015 10:22:07 +0530
-From: Shalini K P <Shalini.KP@LntTechservices.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Error while building openjdk-6 using meta-java
-Thread-Index: AdBLNoSmNLTPzjspSAmeaEbEblmBdw==
-Date: Wed, 18 Feb 2015 04:52:06 +0000
-Message-ID: <E5FF0F26CCED3843A9B0899B389686BA42E571@POCITMSEXMB05.LntUniverse.com>
-Accept-Language: en-IN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.2.1.199]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Error while building openjdk-6 using meta-java
+	Wed, 18 Feb 2015 06:22:34 +0000 (UTC)
+Received: by iebtr6 with SMTP id tr6so36005750ieb.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Feb 2015 22:22:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=NBePYJDuVQtqR+SZmdWoOAz0RqYlCXjuLCTLdKyKGnw=;
+	b=aOvxcrqUe6gnnMLrAv1qf/sc38oCbS1not2ocf8RPlfuG8EKh/1zYU84B6zROktq8/
+	PV00SfWUnS52emmebK9jsRNpeudruyfHtJ4JNstYgXBF6y2tIlI5iyvr3yOoFqaNeSY9
+	S/zNC8HJyTK34gSz6PSGW8W8wtknoI9toPakhihQ7fezhmsHDZ2RqQaHmm/qa3Yz8CEc
+	bEFgbN5n24NSMvBsu7d0j3p7JD2KW2tIW9Ov3K92HjjjPXv9r+XYwZOq9RqSbgti3KC/
+	llS7GOr/N2q4/4bBylvtEgp5o/ULpYLcEI+YqOYDA3XjmG/e2wBMI5SE2xf/ywbjkCmQ
+	anug==
+X-Received: by 10.50.129.3 with SMTP id ns3mr1257810igb.1.1424240555830;
+	Tue, 17 Feb 2015 22:22:35 -0800 (PST)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by mx.google.com with ESMTPSA id j6sm11503590igv.4.2015.02.17.22.22.34
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 17 Feb 2015 22:22:35 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Feb 2015 22:22:12 -0800
+Message-Id: <1424240532-13118-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-qt5][PATCH] qtwebkit: fix textrel QA warnings when building qtwebkit for x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,149 +42,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 04:52:33 -0000
-Content-Language: en-IN
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Feb 2015 06:22:35 -0000
 
-Hi,
+  WARNING: QA Issue: ELF binary '/home/andre/rdk/rdk-master/build-vbox32/tmp/work/core2-32-rdk-linux/qtwebkit/5.4.0-r0/packages-split/qtwebkit/usr/lib/libQt5WebKit.so.5.4.0' has relocations in .text [textrel]
 
-        I m using "git://git.yoctoproject.org/meta-java" layer. I m getting=
- error while compiling java in the compilestep2. Not able to fix this. Belo=
-w is the error log.
+Patch from upstream webkit:
 
+  https://bugs.webkit.org/show_bug.cgi?id=70610
 
-/home/ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linu=
-x-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/bootstrap/jdk1.6.0/bin/java=
-  -client -Xmx896m -Xms128m -XX:PermSize=3D32m -XX:MaxPermSize=3D160m -jar =
-/homeError: time is more than 10 years from present: 1104530400000
-| java.lang.RuntimeException: time is more than 10 years from present: 1104=
-530400000
-|
-|     at build.tools.generatecurrencydata.GenerateCurrencyData.makeSpecialC=
-aseEntry(GenerateCurrencyData.java:285)
-|     at build.tools.generatecurrencydata.GenerateCurrencyData.buildMainAnd=
-SpecialCaseTables(GenerateCurrencyData.java:225)
-|     at build.tools.generatecurrencydata.GenerateCurrencyData.main(Generat=
-eCurrencyData.java:154)
-|
-| make[5]: *** [/home/ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vf=
-p-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/openjdk.bui=
-ld-ecj/lib/currency.data] Error 1
-|
-| make[5]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj/jdk/make/java/java'
-|
-| make[4]: *** [all] Error 1
-| make[4]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj/jdk/make/java'
-|
-| make[3]: *** [all] Error 1
-| make[3]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj/jdk/make'
-|
-| make[2]: *** [jdk-build] Error 2
-| make[2]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj'
-|
-| make[1]: *** [build_product_image] Error 2
-| make[1]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj'
-|
-| make: *** [stamps/icedtea-ecj.stamp] Error 2
-|
-| + die oe_runmake failed
-| + bbfatal oe_runmake failed
-| + echo ERROR: oe_runmake failed
-| ERROR: oe_runmake failed
-| + exit 1
-| + bb_exit_handler
-| + ret=3D1
-| + echo WARNING: exit code 1 from a shell command.
-| WARNING: exit code 1 from a shell command.
-| + exit 1
-|
-| /ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linux-g=
-nueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/openjdk.build-ecj/btjars/gener=
-atecurrencydata.jar -o /home/ubuntu/fsl-community-bsp/build/tmp/work/cortex=
-a9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/open=
-jdk.build-ecj/lib/currency.data.temp \
-|         < ../../../src/share/classes/java/util/CurrencyData.properties
-| Error: time is more than 10 years from present: 1104530400000
-| java.lang.RuntimeException: time is more than 10 years from present: 1104=
-530400000
-|     at build.tools.generatecurrencydata.GenerateCurrencyData.makeSpecialC=
-aseEntry(GenerateCurrencyData.java:285)
-|     at build.tools.generatecurrencydata.GenerateCurrencyData.buildMainAnd=
-SpecialCaseTables(GenerateCurrencyData.java:225)
-|     at build.tools.generatecurrencydata.GenerateCurrencyData.main(Generat=
-eCurrencyData.java:154)
-| make[5]: *** [/home/ubuntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vf=
-p-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/build/openjdk.bui=
-ld-ecj/lib/currency.data] Error 1
-| make[5]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj/jdk/make/java/java'
-| make[4]: *** [all] Error 1
-| make[4]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj/jdk/make/java'
-| make[3]: *** [all] Error 1
-| make[3]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj/jdk/make'
-| make[2]: *** [jdk-build] Error 2
-| make[2]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj'
-| make[1]: *** [build_product_image] Error 2
-| make[1]: Leaving directory `/home/ubuntu/fsl-community-bsp/build/tmp/work=
-/cortexa9hf-vfp-neon-poky-linux-gnueabi/openjdk-6-jre/6b24-1.11.9-r22.1/bui=
-ld/openjdk-ecj'
-| make: *** [stamps/icedtea-ecj.stamp] Error 2
-| + die oe_runmake failed
-| + bbfatal oe_runmake failed
-| + echo ERROR: oe_runmake failed
-| ERROR: oe_runmake failed
-| + exit 1
-| + bb_exit_handler
-| + ret=3D1
-| + echo WARNING: exit code 1 from a shell command.
-| WARNING: exit code 1 from a shell command.
-| + exit 1
-| ERROR: Function failed: do_compilesteptwo (log file is located at /home/u=
-buntu/fsl-community-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnuea=
-bi/openjdk-6-jre/6b24-1.11.9-r22.1/temp/log.do_compilesteptwo.28700)
-ERROR: Task 6 (/home/ubuntu/fsl-community-bsp/sources/meta-java/recipes-cor=
-e/openjdk/openjdk-6_6b24-1.11.9.bb, do_compilesteptwo) failed with exit cod=
-e '1'
-NOTE: Tasks Summary: Attempted 1894 tasks of which 1887 didn't need to be r=
-erun and 1 failed.
-No currently running tasks (1894 of 1903)
+Minor refresh required to apply cleanly to the older webkit sources used
+by qtwebkit. Specifically, the patch needed to be modified to account
+for PLATFORM(MAC) -> OS(DARWIN) renaming in recent webkit which is not
+part of qtwebkit yet ( https://bugs.webkit.org/show_bug.cgi?id=99683 ).
 
-Summary: 1 task failed:
-  /home/ubuntu/fsl-community-bsp/sources/meta-java/recipes-core/openjdk/ope=
-njdk-6_6b24-1.11.9.bb, do_compilesteptwo
-Summary: There were 5 WARNING messages shown.
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ recipes-qt/qt5/qtwebkit.inc                        |  7 ++-
+ .../qtwebkit/0002-qtwebkit-fix-textrel-x86.patch   | 68 ++++++++++++++++++++++
+ 2 files changed, 73 insertions(+), 2 deletions(-)
+ create mode 100644 recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch
 
-Request help in this regard.
+diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
+index bdc676b..d9eaabb 100644
+--- a/recipes-qt/qt5/qtwebkit.inc
++++ b/recipes-qt/qt5/qtwebkit.inc
+@@ -8,6 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
+ 
+ DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt leveldb"
+ 
++SRC_URI += "\
++    file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch \
++    file://0002-qtwebkit-fix-textrel-x86.patch \
++"
++
+ PACKAGECONFIG ??= "gstreamer qtlocation qtmultimedia qtsensors"
+ PACKAGECONFIG[gstreamer] = "OE_GSTREAMER_ENABLED,,gstreamer1.0 gstreamer1.0-plugins-base"
+ PACKAGECONFIG[gstreamer010] = "OE_GSTREAMER010_ENABLED,,gstreamer gst-plugins-base"
+@@ -39,8 +44,6 @@ EXTRA_QMAKEVARS_PRE += "${QTWEBKIT_DEBUG}"
+ # remove default ${PN}-examples-dbg ${PN}-examples set in qt5.inc, because it conflicts with ${PN} from separate webkit-examples recipe
+ PACKAGES = "${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale ${PACKAGE_BEFORE_PN} ${PN} ${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs "
+ 
+-SRC_URI += "file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch"
+-
+ # make sure rb files are used from sysroot, not from host
+ # ruby-1.9.3-always-use-i386.patch is doing target_cpu=`echo $target_cpu | sed s/i.86/i386/`
+ # we need to replace it too (a bit longer version without importing re)
+diff --git a/recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch b/recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch
+new file mode 100644
+index 0000000..e5f1538
+--- /dev/null
++++ b/recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch
+@@ -0,0 +1,68 @@
++Fix textrel QA warnings when building qtwebkit for x86:
++
++  WARNING: QA Issue: ELF binary '/home/andre/rdk/rdk-master/build-vbox32/tmp/work/core2-32-rdk-linux/qtwebkit/5.4.0-r0/packages-split/qtwebkit/usr/lib/libQt5WebKit.so.5.4.0' has relocations in .text [textrel]
++
++Patch from upstream webkit:
++
++  https://bugs.webkit.org/show_bug.cgi?id=70610
++
++Minor refresh required to apply cleanly to the older webkit sources used
++by qtwebkit. Specifically, the patch needed to be modified to account
++for PLATFORM(MAC) -> OS(DARWIN) renaming in recent webkit which is not
++part of qtwebkit yet ( https://bugs.webkit.org/show_bug.cgi?id=99683 ).
++
++Upstream status [webkit] : backport
++Upstream status [qtwebkit] : unclear
++
++
++From: Magnus Granberg <zorry@gentoo.org>
++Subject: Remove TEXTREL tag in x86
++Bug: https://bugs.webkit.org/show_bug.cgi?id=70610
++Index: webkitgtk/Source/WTF/wtf/InlineASM.h
++===================================================================
++--- webkitgtk.orig/Source/WTF/wtf/InlineASM.h
+++++ webkitgtk/Source/WTF/wtf/InlineASM.h
++@@ -46,6 +46,8 @@
++ #define GLOBAL_REFERENCE(name) #name "@plt"
++ #elif CPU(X86) && COMPILER(MINGW)
++ #define GLOBAL_REFERENCE(name) "@" #name "@4"
+++#elif OS(LINUX) && CPU(X86) && defined(__PIC__)
+++#define GLOBAL_REFERENCE(name) SYMBOL_STRING(name) "@plt"
++ #else
++ #define GLOBAL_REFERENCE(name) SYMBOL_STRING(name)
++ #endif
++Index: webkitgtk/Source/JavaScriptCore/jit/ThunkGenerators.cpp
++===================================================================
++--- webkitgtk.orig/Source/JavaScriptCore/jit/ThunkGenerators.cpp
+++++ webkitgtk/Source/JavaScriptCore/jit/ThunkGenerators.cpp
++@@ -524,6 +524,30 @@ double jsRound(double d)
++     } \
++     static MathThunk UnaryDoubleOpWrapper(function) = &function##Thunk;
++ 
+++#elif CPU(X86) && COMPILER(GCC) && OS(LINUX) && defined(__PIC__)
+++#define defineUnaryDoubleOpWrapper(function) \
+++    asm( \
+++        ".text\n" \
+++        ".globl " SYMBOL_STRING(function##Thunk) "\n" \
+++        HIDE_SYMBOL(function##Thunk) "\n" \
+++        SYMBOL_STRING(function##Thunk) ":" "\n" \
+++        "pushl %ebx\n" \
+++        "subl $20, %esp\n" \
+++        "movsd %xmm0, (%esp) \n" \
+++        "call __x86.get_pc_thunk.bx\n" \
+++        "addl $_GLOBAL_OFFSET_TABLE_, %ebx\n" \
+++        "call " GLOBAL_REFERENCE(function) "\n" \
+++        "fstpl (%esp) \n" \
+++        "movsd (%esp), %xmm0 \n" \
+++        "addl $20, %esp\n" \
+++        "popl %ebx\n" \
+++        "ret\n" \
+++    );\
+++    extern "C" { \
+++        MathThunkCallingConvention function##Thunk(MathThunkCallingConvention); \
+++    } \
+++    static MathThunk UnaryDoubleOpWrapper(function) = &function##Thunk;
+++
++ #elif CPU(X86) && COMPILER(GCC) && (PLATFORM(MAC) || OS(LINUX))
++ #define defineUnaryDoubleOpWrapper(function) \
++     asm( \
+-- 
+1.9.1
 
-
-Thanks & Regards
-Shalini K P
-
-L&T Technology Services Ltd
-
-www.LntTechservices.com<http://www.lnttechservices.com/>
-
-This Email may contain confidential or privileged information for the inten=
-ded recipient (s). If you are not the intended recipient, please do not use=
- or disseminate the information, notify the sender and delete it from your =
-system.
 
