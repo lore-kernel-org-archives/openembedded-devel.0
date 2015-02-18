@@ -1,33 +1,37 @@
-Return-Path: <hugo.saldanha@aker.com.br>
-Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id 3678171F05
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A6AE17182C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 16:22:06 +0000 (UTC)
-Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
-	by asmg.aker.com.br [10.0.1.3]; Wed, 18 Feb 2015 14:21:56 -0200
-	(envelope-from hugo.saldanha@aker.com.br)
-Received: from localhost (10.4.3.1) by mail.aker.com.br (10.0.0.20) with
-	Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Wed, 18 Feb 2015 14:21:17 -0200
-Date: Wed, 18 Feb 2015 14:23:58 -0200
-From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+	Wed, 18 Feb 2015 17:35:32 +0000 (UTC)
+Received: by pdjz10 with SMTP id z10so2538971pdj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Feb 2015 09:35:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=qB5i0RcePq8rKHjbmFx4thx2FmFERuAqui9TDvWsX/8=;
+	b=ePM5FANDzkTUFekoVFaQOTaLAoV4/pU5zE5OnBD/cVP3r1dipfpHDsEO4YFQnvUHuw
+	n+VaG9iHXepPtWOK/mWpAgIIWovd9gBrnA6XaugrQod+2C8pzJtiJYpxjCVW2IzwDUjw
+	4PmNdUs8bkSuVujmteaqIlq8L01Yzq/jYgxU3ZiAlutVbYZ6w3ik+E/Wd+E+bHQW+ejE
+	25tOmYOpPxvAVSC0IvWGsJNCErylBQGbHSE134xbgg2LUl8XMnaDybTxKlQK7bWcAs+S
+	HOvzz4S8taM4RV8lOxd8gcsU/tuLGjMGt2WX7mrOtRcfUfiyMO5UDL3RoqqV2ooKb7Nk
+	Ph+A==
+MIME-Version: 1.0
+X-Received: by 10.67.6.225 with SMTP id cx1mr552751pad.1.1424280933601; Wed,
+	18 Feb 2015 09:35:33 -0800 (PST)
+Received: by 10.70.36.36 with HTTP; Wed, 18 Feb 2015 09:35:33 -0800 (PST)
+In-Reply-To: <20150218160919.GB2276@jama>
+References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
+	<1422338033-18521-2-git-send-email-schnitzeltony@googlemail.com>
+	<20150218160919.GB2276@jama>
+Date: Wed, 18 Feb 2015 18:35:33 +0100
+Message-ID: <CALbNGRSSk=gNtvn=nwkLqO=BwPF7+WmL6hpQFdvSRXn5u_kJoA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20150218162358.GA1846@saldanha.aker.com.br>
-References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
-	<1423810919-9857-19-git-send-email-schnitzeltony@googlemail.com>
-	<F48900D76F0D8349918584FEEFEB4BCA0629F403@SEXCHANGE0100.lpg.priv>
-	<20150213094951.GA14290@mail.itconsulting-heinold.de>
-	<F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
-	<1423823635.2285.5.camel@Saturn.local.all>
-	<20150213142036.GC7116@saldanha.aker.com.br>
-	<CAP9ODKopq=3zswceRwSDisfaS1WXiJBg8-MT+8rARQ_ncu3QZQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKopq=3zswceRwSDisfaS1WXiJBg8-MT+8rARQ_ncu3QZQ@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-X-AkerSMTPGW-ServerID: 5de71414d6a5ac0be1dec76f647836bb21381a41
-X-AkerSMTPGW-MessageID: 796b9dda8298208893c7b107248fa219b6576d8b-10o
-Subject: Re: package icedtea6-native-1.8.11-r5.3: task do_compile: Failed
+Subject: Re: [meta-qt5][PATCH 1/5] qtbase: remove patches required for native(-sdk) only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,38 +45,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 16:22:10 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Feb 2015 17:35:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 17, 2015 at 11:00:27AM -0200, Otavio Salvador wrote:
-> On Fri, Feb 13, 2015 at 12:20 PM, Hugo Vasconcelos Saldanha
-> <hugo.saldanha@aker.com.br> wrote:
-> > On Fri, Feb 13, 2015 at 08:33:55AM -0200, Max Krummenacher wrote:
-> >> Am Freitag, den 13.02.2015, 10:08 +0000 schrieb MONDON Daniel:
-> >> > Ok, but my problem is I must not change distribution.
-> >> > The system is installed on many machines, and moving to and other repo will generate too many work (dev and validation)!
-> >> In order to fix an error you will have to change something.
-> >>
-> >> > I have not enough time to pass on this problem : It was so complicated to build, install and configure Java on angstromv2012.05 environment!
-> >> >
-> >> > Is it because Ubuntu 12.04 java was updated ?
-> >> No.
-> >>
-> >> The error you see is because some sources test if now is more than 10 years from 2015 and refuse to compile (and maybe execute later?) if this is the case.
-> >>
-> >> This is fixed in meta-java, but as Henning said you have to get the
-> >> meta-java layer from git://git.yoctoproject.org/meta-java and update to
-> >> HEAD.
-> >
-> > It seems that icedtea7-native was not fixed.
-> 
-> Patches are welcome :-)
-> 
+On Wed, Feb 18, 2015 at 5:09 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Tue, Jan 27, 2015 at 06:53:49AM +0100, Andreas M=C3=BCller wrote:
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>
+> Are you sure these are useful only for native(sdk) only?
+>
+> FYI: I'm updating your patches for latest revision in 5.4 branch, I'll
+> update them together with 5.4.1 recipes (when 5.4.1 is released).
+>
+> Regards,
+>
+>> ---
+>>  recipes-qt/qt5/qtbase.inc    | 2 --
+>>  recipes-qt/qt5/qtbase_git.bb | 2 --
+>>  2 files changed, 4 deletions(-)
+>>
+>> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+>> index 5b2c08c..a8748ef 100644
+>> --- a/recipes-qt/qt5/qtbase.inc
+>> +++ b/recipes-qt/qt5/qtbase.inc
+>> @@ -5,8 +5,6 @@ SRC_URI +=3D "\
+>>      file://0001-Add-linux-oe-g-platform.patch \
+>>      file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.pa=
+tch \
+>>      file://0003-Add-external-hostbindir-option.patch \
+>> -    file://0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.pa=
+tch \
+>> -    file://0005-qt_module-Fix-pkgconfig-and-libtool-replacements.patch =
+\
+>>      file://0006-Revert-eglfs-Print-the-chosen-config-in-debug-mode.patc=
+h \
+>>      file://0007-qeglplatformintegration-Undefine-CursorShape-from-X..pa=
+tch \
+>>      file://0008-configure-bump-path-length-from-256-to-512-character.pa=
+tch \
+>> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+>> index f67ea16..611e19a 100644
+>> --- a/recipes-qt/qt5/qtbase_git.bb
+>> +++ b/recipes-qt/qt5/qtbase_git.bb
+>> @@ -10,8 +10,6 @@ SRC_URI +=3D "\
+>>      file://0001-Add-linux-oe-g-platform.patch \
+>>      file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.pa=
+tch \
+>>      file://0003-Add-external-hostbindir-option.patch \
+>> -    file://0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.pa=
+tch \
+>> -    file://0005-qt_module-Fix-pkgconfig-and-libtool-replacements.patch =
+\
+>>      file://0006-Revert-eglfs-Print-the-chosen-config-in-debug-mode.patc=
+h \
+>>      file://0007-qeglplatformintegration-Undefine-CursorShape-from-X..pa=
+tch \
+>>      file://0008-configure-bump-path-length-from-256-to-512-character.pa=
+tch \
+>> --
+>> 1.8.3.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+First of all thanks for doing this: I have these patches on my TODO
+but have other issues of higher priorities (ask my boss) to fix.
 
-OK. I'll send the patch ASAP.
+Answering your question frankly: No I am not 100% sure these patches
+can be removed from target build..
 
--- 
-		Hugo
+* 0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.patch: If
+I don't go wrong here configureapp is the windows-replacement for
+configure script -> this patch is not needed AT ALL (except we build
+for windows which we usually don't).
+* 0005-qt_module-Fix-pkgconfig-and-libtool-replacements.patch:
+Intention here was to keep target sysroot clean of host paths - as
+this patch was part qt-creator series. Raphael Philipe reported
+failures for -L/usr/lib when building qt5-creator I'd suggest to keep
+this patch in.
 
+Andreas
 
