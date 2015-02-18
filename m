@@ -1,34 +1,46 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E459A65C85
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 06:22:34 +0000 (UTC)
-Received: by iebtr6 with SMTP id tr6so36005750ieb.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Feb 2015 22:22:35 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id F0BEE7182C;
+	Wed, 18 Feb 2015 07:15:51 +0000 (UTC)
+Received: by mail-ig0-f175.google.com with SMTP id hn18so34848800igb.2;
+	Tue, 17 Feb 2015 23:15:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=NBePYJDuVQtqR+SZmdWoOAz0RqYlCXjuLCTLdKyKGnw=;
-	b=aOvxcrqUe6gnnMLrAv1qf/sc38oCbS1not2ocf8RPlfuG8EKh/1zYU84B6zROktq8/
-	PV00SfWUnS52emmebK9jsRNpeudruyfHtJ4JNstYgXBF6y2tIlI5iyvr3yOoFqaNeSY9
-	S/zNC8HJyTK34gSz6PSGW8W8wtknoI9toPakhihQ7fezhmsHDZ2RqQaHmm/qa3Yz8CEc
-	bEFgbN5n24NSMvBsu7d0j3p7JD2KW2tIW9Ov3K92HjjjPXv9r+XYwZOq9RqSbgti3KC/
-	llS7GOr/N2q4/4bBylvtEgp5o/ULpYLcEI+YqOYDA3XjmG/e2wBMI5SE2xf/ywbjkCmQ
-	anug==
-X-Received: by 10.50.129.3 with SMTP id ns3mr1257810igb.1.1424240555830;
-	Tue, 17 Feb 2015 22:22:35 -0800 (PST)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id j6sm11503590igv.4.2015.02.17.22.22.34
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 17 Feb 2015 22:22:35 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Feb 2015 22:22:12 -0800
-Message-Id: <1424240532-13118-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-qt5][PATCH] qtwebkit: fix textrel QA warnings when building qtwebkit for x86
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=H3CPAJzBz8I4RwSAj3qQrxfROe9VRHr8YKtUAymv4z4=;
+	b=BkV831BYQeZ/TTEvWhON4irc9MuL5cnCZXjJJ27S2ZBBFE/4Wh381tbYnARsA7Ir76
+	AnzfwO/67QrEgpoRLNY4hR7ZtaVD5kk7LnB9mKBmKDTiv9yZLgX42qeE96tZ2Ln1G8MI
+	EhNLo2S7EW8l0YcOVbtUtnelGkEhgsEYXNvjIDdcqy9E682kb5ECBFks1VJfBIEHHx+T
+	I4qSMyLGq8xyPzZEWhUsvqxM6AM0MXkpQZUJRuxI6jJzu+8UJwlwCN7cPb7+p2p2OW0Y
+	glABOmwPKMajJFU+Y1w5eSjXKrbmekZo7+uLoVkf1xq6YM5eOYrs3Tmh10G+lONlCH0T
+	mv/w==
+X-Received: by 10.50.39.112 with SMTP id o16mr1283905igk.0.1424243752703; Tue,
+	17 Feb 2015 23:15:52 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.50.117.7 with HTTP; Tue, 17 Feb 2015 23:15:22 -0800 (PST)
+In-Reply-To: <1423908404.20217.100.camel@linuxfoundation.org>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
+	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
+	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
+	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
+	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
+	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
+	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
+	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
+	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
+	<1423908404.20217.100.camel@linuxfoundation.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 17 Feb 2015 23:15:22 -0800
+Message-ID: <CAMKF1sofS7MteZnPsTYRNAcMwrrh=T3FP+ASmAOGDMhcwyXB4g@mail.gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,126 +54,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 06:22:35 -0000
+X-List-Received-Date: Wed, 18 Feb 2015 07:15:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-  WARNING: QA Issue: ELF binary '/home/andre/rdk/rdk-master/build-vbox32/tmp/work/core2-32-rdk-linux/qtwebkit/5.4.0-r0/packages-split/qtwebkit/usr/lib/libQt5WebKit.so.5.4.0' has relocations in .text [textrel]
+On Sat, Feb 14, 2015 at 2:06 AM, Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+> Hi Khem,
+>
+> On Thu, 2015-02-12 at 15:35 +0800, Khem Raj wrote:
+>> I have refreshed the branch to include the patch which moves the src
+>> uri to use the newly released glibc 2.21 branch
+>> and please run it via autobuilder ( top 5 commits )
+>
+> Its running on the autobuilder at the moment. Errors will be reported to
+> the error reporting system and can be seen at:
+>
+> http://errors.yoctoproject.org/Errors/Search/?items=10&query=be29d13a847d458efaf542ed302e48050f67a655
+>
+> Right now, poky-tiny failed due to warning are errors and unused
+> symbols. Minnow failed due to SSE instruction issues. Full build logs
+> are also available on the autobuilder:
+>
+> https://autobuilder.yoctoproject.org/main/tgrid
+>
+> as ross/mut-next. We do have other changes in the branch but the above
+> are pretty clearly glibc.
+>
+> Other errors will go to the places above as the builds complete/fail.
 
-Patch from upstream webkit:
+Thanks. So I see following errors categories and status
 
-  https://bugs.webkit.org/show_bug.cgi?id=70610
+1. valgrind - Martin already sent a patch for that
+2. slang - I could not yet reproduce it on my active build (mips) (
+seems specific to x86/ppc )
+3. poky-tiny - glibc build - ( pushed a fix for that in latest pull tree)
+4. minnow/qemux86 - glibc failure - ( pushed a fix for that in latest
+pull tree )
+5. glibc build failure on qemuarm - need to reproduce here
+6. Image failures are probably due to above not building
 
-Minor refresh required to apply cleanly to the older webkit sources used
-by qtwebkit. Specifically, the patch needed to be modified to account
-for PLATFORM(MAC) -> OS(DARWIN) renaming in recent webkit which is not
-part of qtwebkit yet ( https://bugs.webkit.org/show_bug.cgi?id=99683 ).
+I might get slang reproduced soon on qemux86 if I do I will try to
+push for a fix
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- recipes-qt/qt5/qtwebkit.inc                        |  7 ++-
- .../qtwebkit/0002-qtwebkit-fix-textrel-x86.patch   | 68 ++++++++++++++++++++++
- 2 files changed, 73 insertions(+), 2 deletions(-)
- create mode 100644 recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch
 
-diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
-index bdc676b..d9eaabb 100644
---- a/recipes-qt/qt5/qtwebkit.inc
-+++ b/recipes-qt/qt5/qtwebkit.inc
-@@ -8,6 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
- 
- DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt leveldb"
- 
-+SRC_URI += "\
-+    file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch \
-+    file://0002-qtwebkit-fix-textrel-x86.patch \
-+"
-+
- PACKAGECONFIG ??= "gstreamer qtlocation qtmultimedia qtsensors"
- PACKAGECONFIG[gstreamer] = "OE_GSTREAMER_ENABLED,,gstreamer1.0 gstreamer1.0-plugins-base"
- PACKAGECONFIG[gstreamer010] = "OE_GSTREAMER010_ENABLED,,gstreamer gst-plugins-base"
-@@ -39,8 +44,6 @@ EXTRA_QMAKEVARS_PRE += "${QTWEBKIT_DEBUG}"
- # remove default ${PN}-examples-dbg ${PN}-examples set in qt5.inc, because it conflicts with ${PN} from separate webkit-examples recipe
- PACKAGES = "${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale ${PACKAGE_BEFORE_PN} ${PN} ${PN}-qmlplugins-dbg ${PN}-tools-dbg ${PN}-plugins-dbg ${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-mkspecs "
- 
--SRC_URI += "file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch"
--
- # make sure rb files are used from sysroot, not from host
- # ruby-1.9.3-always-use-i386.patch is doing target_cpu=`echo $target_cpu | sed s/i.86/i386/`
- # we need to replace it too (a bit longer version without importing re)
-diff --git a/recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch b/recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch
-new file mode 100644
-index 0000000..e5f1538
---- /dev/null
-+++ b/recipes-qt/qt5/qtwebkit/0002-qtwebkit-fix-textrel-x86.patch
-@@ -0,0 +1,68 @@
-+Fix textrel QA warnings when building qtwebkit for x86:
-+
-+  WARNING: QA Issue: ELF binary '/home/andre/rdk/rdk-master/build-vbox32/tmp/work/core2-32-rdk-linux/qtwebkit/5.4.0-r0/packages-split/qtwebkit/usr/lib/libQt5WebKit.so.5.4.0' has relocations in .text [textrel]
-+
-+Patch from upstream webkit:
-+
-+  https://bugs.webkit.org/show_bug.cgi?id=70610
-+
-+Minor refresh required to apply cleanly to the older webkit sources used
-+by qtwebkit. Specifically, the patch needed to be modified to account
-+for PLATFORM(MAC) -> OS(DARWIN) renaming in recent webkit which is not
-+part of qtwebkit yet ( https://bugs.webkit.org/show_bug.cgi?id=99683 ).
-+
-+Upstream status [webkit] : backport
-+Upstream status [qtwebkit] : unclear
-+
-+
-+From: Magnus Granberg <zorry@gentoo.org>
-+Subject: Remove TEXTREL tag in x86
-+Bug: https://bugs.webkit.org/show_bug.cgi?id=70610
-+Index: webkitgtk/Source/WTF/wtf/InlineASM.h
-+===================================================================
-+--- webkitgtk.orig/Source/WTF/wtf/InlineASM.h
-++++ webkitgtk/Source/WTF/wtf/InlineASM.h
-+@@ -46,6 +46,8 @@
-+ #define GLOBAL_REFERENCE(name) #name "@plt"
-+ #elif CPU(X86) && COMPILER(MINGW)
-+ #define GLOBAL_REFERENCE(name) "@" #name "@4"
-++#elif OS(LINUX) && CPU(X86) && defined(__PIC__)
-++#define GLOBAL_REFERENCE(name) SYMBOL_STRING(name) "@plt"
-+ #else
-+ #define GLOBAL_REFERENCE(name) SYMBOL_STRING(name)
-+ #endif
-+Index: webkitgtk/Source/JavaScriptCore/jit/ThunkGenerators.cpp
-+===================================================================
-+--- webkitgtk.orig/Source/JavaScriptCore/jit/ThunkGenerators.cpp
-++++ webkitgtk/Source/JavaScriptCore/jit/ThunkGenerators.cpp
-+@@ -524,6 +524,30 @@ double jsRound(double d)
-+     } \
-+     static MathThunk UnaryDoubleOpWrapper(function) = &function##Thunk;
-+ 
-++#elif CPU(X86) && COMPILER(GCC) && OS(LINUX) && defined(__PIC__)
-++#define defineUnaryDoubleOpWrapper(function) \
-++    asm( \
-++        ".text\n" \
-++        ".globl " SYMBOL_STRING(function##Thunk) "\n" \
-++        HIDE_SYMBOL(function##Thunk) "\n" \
-++        SYMBOL_STRING(function##Thunk) ":" "\n" \
-++        "pushl %ebx\n" \
-++        "subl $20, %esp\n" \
-++        "movsd %xmm0, (%esp) \n" \
-++        "call __x86.get_pc_thunk.bx\n" \
-++        "addl $_GLOBAL_OFFSET_TABLE_, %ebx\n" \
-++        "call " GLOBAL_REFERENCE(function) "\n" \
-++        "fstpl (%esp) \n" \
-++        "movsd (%esp), %xmm0 \n" \
-++        "addl $20, %esp\n" \
-++        "popl %ebx\n" \
-++        "ret\n" \
-++    );\
-++    extern "C" { \
-++        MathThunkCallingConvention function##Thunk(MathThunkCallingConvention); \
-++    } \
-++    static MathThunk UnaryDoubleOpWrapper(function) = &function##Thunk;
-++
-+ #elif CPU(X86) && COMPILER(GCC) && (PLATFORM(MAC) || OS(LINUX))
-+ #define defineUnaryDoubleOpWrapper(function) \
-+     asm( \
--- 
-1.9.1
 
+
+>
+> Cheers,
+>
+> Richard
+>
 
