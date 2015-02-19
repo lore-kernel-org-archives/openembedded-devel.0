@@ -1,32 +1,59 @@
-Return-Path: <ben.shelton@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id B03F1733AA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 23:04:14 +0000 (UTC)
-Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-chan1-1338.natinst.com
-	[130.164.19.134])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t1IN4EE6027730 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Feb 2015 17:04:15 -0600
-Received: from bshelton-desktop.natinst.com ([130.164.14.198])
-	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
-	with ESMTP id 2015021817041506-152640 ;
-	Wed, 18 Feb 2015 17:04:15 -0600 
-From: Ben Shelton <ben.shelton@ni.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Feb 2015 17:03:40 -0600
-Message-Id: <1424300622-28832-2-git-send-email-ben.shelton@ni.com>
-X-Mailer: git-send-email 2.3.0
-In-Reply-To: <1424300622-28832-1-git-send-email-ben.shelton@ni.com>
-References: <1424300622-28832-1-git-send-email-ben.shelton@ni.com>
-X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 02/18/2015 05:04:15 PM,
-	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 02/18/2015 05:04:15 PM,
-	Serialize complete at 02/18/2015 05:04:15 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-02-18_07:, , signatures=0
-Subject: [meta-python][PATCH 2/4] python-markupsafe: add recipe
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id DDE4D71F05;
+	Thu, 19 Feb 2015 00:23:16 +0000 (UTC)
+Received: by pdbnh10 with SMTP id nh10so4810704pdb.11;
+	Wed, 18 Feb 2015 16:23:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=eETRexsQo0FwWf+e9eUvAhE0XGz79ou6Jw/Xvwcdua4=;
+	b=qLvWR3yN4mFvLUpfUFSnYS2wS3RDExW/c7gSIOl3IHLtmKYFJcBmAcr6CvjL5We30l
+	iuJq8NE08K2A4hKwNBNoeNVsx5dsKvTQa8MACgJwsYhOjZt45CL6WdgF/dWzhY3wdPJD
+	ns9ScWYt+nX9In6MKr/+jRKTSOo92jcRYOoiW/DaTZprNxhCzkkCywud934Jdtcq17Wg
+	+zGA9Y7y2P6eutLRWH/WzS1FUT9Sofraq+E4k2pGJ4zO7SGzmBZuqIHDbiuc7PCG4FzX
+	4aMtaeHxp4t/CQzH7iUGadeIxqa5Z3xW4iFbq1FoXKPlJWbhOqV+lGZLVtLlk3hipgJA
+	QvMQ==
+X-Received: by 10.66.142.100 with SMTP id rv4mr3217701pab.84.1424305397642;
+	Wed, 18 Feb 2015 16:23:17 -0800 (PST)
+Received: from ?IPv6:2601:9:3580:84c:ac05:bc97:a5e3:53c?
+	([2601:9:3580:84c:ac05:bc97:a5e3:53c])
+	by mx.google.com with ESMTPSA id
+	pu10sm17223479pdb.27.2015.02.18.16.23.15
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 18 Feb 2015 16:23:16 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1424295668.11836.19.camel@linuxfoundation.org>
+Date: Wed, 18 Feb 2015 16:23:14 -0800
+Message-Id: <E5ADEF30-DBC9-4250-ACA4-F889D8CFDA89@gmail.com>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<CAJTo0LaN3HMhjrpii2pPbJw5zWbywgr1keZe=iQmuKFMFFf=gQ@mail.gmail.com>
+	<CAMKF1sq8NsuNYZDQRPtXruBeRndOP+0qwBuTO2ahb6q-fS8XGw@mail.gmail.com>
+	<CAJTo0LYpKbwOHg-DBMJycy+KNayTCsnhToJR8K-REKZ2jxhnhw@mail.gmail.com>
+	<EA0C9DE9-9E5F-4B74-8464-138895268F2F@gmail.com>
+	<CAJTo0LbSFesauhA_H39Znd07SR5JCs45izy2us=cFWVGXtW8hg@mail.gmail.com>
+	<80920FD0-CA08-45D7-9A41-3971FB2D58D7@gmail.com>
+	<CAJTo0LbqTrQzk0KeHDxYnmtZrrFdZD12DWrjA=Y4RtbQzwM0ow@mail.gmail.com>
+	<CAMKF1sr7bYpKqzTmvX5rCuYc-Rb2se7Vsrr4aYA43E_b1Z=vWA@mail.gmail.com>
+	<CACS+7ZRNm2Y0SJn76imF6DNoEsL2+ppC1zG45iGspOmL0EN0BQ@mail.gmail.com>
+	<CAMKF1sqjQm+n5xKfS0utm9B9h_S+RYWrgnGUCboRNCk5XSUmzg@mail.gmail.com>
+	<1423908404.20217.100.camel@linuxfoundation.org>
+	<CAMKF1sofS7MteZnPsTYRNAcMwrrh=T3FP+ASmAOGDMhcwyXB4g@mail.gmail.com>
+	<1424245575.25541.19.camel@linuxfoundation.org>
+	<BCB8524E-91CB-41F6-83C0-7B90E60BC82D@gmail.com>
+	<1424260309.25541.23.camel@linuxfoundation.org>
+	<1424264807.11836.1.camel@linuxfoundation.org>
+	<3F6EFBD4-AC35-4CE0-B52C-0ABDA0D17838@gmail.com>
+	<1424295668.11836.19.camel@linuxfoundation.org>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Mailer: Apple Mail (2.2070.6)
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [OE-core] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,46 +67,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Feb 2015 23:04:15 -0000
+X-List-Received-Date: Thu, 19 Feb 2015 00:23:18 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-MarkupSafe is a Python library for escaping HTML strings, and it is a
-dependency for Jinja2.  Add a recipe to build it.
 
-Copied from commit 6ba88a72843826370773cda29309545c7c800dc0 in
-meta-cloud-services/meta-openstack and updated to version 0.23.
+> On Feb 18, 2015, at 1:41 PM, Richard Purdie =
+<richard.purdie@linuxfoundation.org> wrote:
+>=20
+> On Wed, 2015-02-18 at 10:38 -0800, Khem Raj wrote:
+>>> On Feb 18, 2015, at 5:06 AM, Richard Purdie =
+<richard.purdie@linuxfoundation.org> wrote:
+>>> On Wed, 2015-02-18 at 11:51 +0000, Richard Purdie wrote:
+>>>> On Wed, 2015-02-18 at 01:01 -0800, Khem Raj wrote:
+>>> The series needs:
+>>>=20
+>>> TUNE_CCARGS_x86 :=3D "${@oe_filter_out('-mfpmath=3Dsse', =
+'${TUNE_CCARGS}', d)}"
+>>> +TUNE_CCARGS_x86-64 :=3D "${@oe_filter_out('-mfpmath=3Dsse', =
+'${TUNE_CCARGS}', d)}=E2=80=9D
+>>>=20
+>>=20
+>> hmmm I assumed x86 was common across 32bit and 64bit x86 but seems =
+not so I replaced the old patch instead of appending it=20
+>=20
+> Thanks, I'll update the patch for the next round.
+>=20
+>>=20
+>>> since the x86 override doesn't cover x86_64. I'll queue that and run =
+yet
+>>> another build. We do have another poky-tiny issue too:
+>>>=20
+>>> =
+https://autobuilder.yoctoproject.org/main/builders/poky-tiny/builds/204
+>>>=20
+>>=20
+>> OK. I am creating a local config to use tiny config for libc and weed =
+out remaining build issues for tiny config=20
+>=20
+> Cool, thanks.
+>=20
+> The next build is in progress and looking greener than the last. Next =
+up
+> it appears we still have multilib issues:
 
-Signed-off-by: Ben Shelton <ben.shelton@ni.com>
----
- .../recipes-devtools/python/python-markupsafe_0.23.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-markupsafe_0.23.bb
+I have pushed a new patchset to same branch. That should fix the tiny =
+build issues.
 
-diff --git a/meta-python/recipes-devtools/python/python-markupsafe_0.23.bb b/meta-python/recipes-devtools/python/python-markupsafe_0.23.bb
-new file mode 100644
-index 0000000..4821c0a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-markupsafe_0.23.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Implements a XML/HTML/XHTML Markup safe string for Python"
-+HOMEPAGE = "http://github.com/mitsuhiko/markupsafe"
-+SECTION = "devel/python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c6d1adcf45d69359f256c1cea3254127"
-+
-+PR = "r0"
-+SRCNAME = "MarkupSafe"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/M/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "f5ab3deee4c37cd6a922fb81e730da6e"
-+SRC_URI[sha256sum] = "a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3"
-+
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit setuptools
-+
-+RDEPENDS_${PN} += "python-re"
--- 
-2.3.0
+>=20
+> =
+https://autobuilder.yoctoproject.org/main/builders/nightly-multilib/builds=
+/201
+
+
+| dcigettext.c: In function '__dcigettext':
+| dcigettext.c:856:30: error: '__libc_setlocale_lock' undeclared (first =
+use in this function)
+|         __libc_rwlock_unlock (__libc_setlocale_lock);
+
+is what I see.
+
+I have fixed this in the latest patchset. So lets start with the new =
+patchset.
+
+
+> There is a possibility this "from sstate" build may have run into a
+> problem with sstate but something looks to be wrong with glibc in some
+> regard.
+>=20
+> Cheers,
+>=20
+> Richard
+>=20
 
 
