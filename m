@@ -1,45 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B6186B6B7
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-lb0-f181.google.com (mail-lb0-f181.google.com
+	[209.85.217.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C8FA6B6B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Feb 2015 16:14:17 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id h11so49177831wiw.3
+	Thu, 19 Feb 2015 17:06:56 +0000 (UTC)
+Received: by lbvn10 with SMTP id n10so1132172lbv.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Feb 2015 08:14:19 -0800 (PST)
+	Thu, 19 Feb 2015 09:06:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=1+Acac9d3HfFf9KFORTqHq2p2HORmuXtF2RcX00cdfc=;
-	b=X7UNYnNlQ/jg5dW34BVMowbhIFThmqWzPnMWXkWOCPeCM1ycEsHWvC4HJWq6rjfTGL
-	kpyRFpaaqli0uQUIukxipBhd8SePxha8dAIH+uIQgt235PQxqedzrvHo/FbmsRKsnc09
-	KoBNtXPnMkXbsLyhqNmZxQj8K/3N5k+ZoLu4JDL2v2Kcvu1RvnY9Ojjb/ScyIGIajoAR
-	udZB3KhtGikdi8tO50rZDlWPG6BZUmOPZ44y+eU35TOslrT3Q7O3W6LxqGAG+7VtMGC0
-	OshC2Cd4oh1MRkliKybD1EekaB6ucWjjeVXYoV+LmxkKWQSOU8gO0OB0778PWe1LqTKg
-	aVuw==
-X-Received: by 10.180.74.111 with SMTP id s15mr11269511wiv.61.1424362458852;
-	Thu, 19 Feb 2015 08:14:18 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	n3sm38016910wja.36.2015.02.19.08.14.17
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Feb 2015 08:14:18 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 19 Feb 2015 17:14:22 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150219161422.GD2311@jama>
-References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
-	<1422338033-18521-2-git-send-email-schnitzeltony@googlemail.com>
-	<20150218160919.GB2276@jama>
-	<CALbNGRSSk=gNtvn=nwkLqO=BwPF7+WmL6hpQFdvSRXn5u_kJoA@mail.gmail.com>
-	<20150219144746.GB2311@jama>
-	<CALbNGRRMOfs+b8EwGNjU7cP_ifBR2xbNW=5jrVntC9A5TVfGmA@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=emu9x/1HzQujyQsMhZmBaY+DaK8Jh7HNxJaTVNMXRbk=;
+	b=010AiT4kc6Q6JNxWlhSxReWpNHftEqo8XaljGmbvozT2adicgtpR2Ri6Z2XhFHH5qI
+	I56UM54Xwk5/EfKae9O5N3RYYIGRV25cnt8CVgHZx01G7z9WMAFML0cr4UFzXhu7N1qZ
+	jnagJ02yInsBxzuGbk7BH+SGJRLJyrCgKBXeSfLPa3dFwYBMFMpBWXwyYbIcBfa2oGvQ
+	hseCrZIhVF3sn5fjsOhxvHvNkqfT67VxJRBXMVWeZa30v2A6bFDDdxErOjw+wjacB1tJ
+	FEV4DWVSpmDXD6lMQFhO1v4Fu2Vrfg6jggpEfR3+S92hTdZQaqPTBteJglZYUJaRd5NA
+	Jh+A==
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRRMOfs+b8EwGNjU7cP_ifBR2xbNW=5jrVntC9A5TVfGmA@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-qt5][PATCH 1/5] qtbase: remove patches required for native(-sdk) only
+X-Received: by 10.152.45.100 with SMTP id l4mr4782772lam.112.1424365616691;
+	Thu, 19 Feb 2015 09:06:56 -0800 (PST)
+Received: by 10.112.40.11 with HTTP; Thu, 19 Feb 2015 09:06:56 -0800 (PST)
+In-Reply-To: <1424300622-28832-4-git-send-email-ben.shelton@ni.com>
+References: <1424300622-28832-1-git-send-email-ben.shelton@ni.com>
+	<1424300622-28832-4-git-send-email-ben.shelton@ni.com>
+Date: Thu, 19 Feb 2015 12:06:56 -0500
+Message-ID: <CADkTA4P5C2JW+n9C0TMt7n7YHgORB0cuqEie+mYZHvKyr9LqRA@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 4/4] python-requests: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,165 +41,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2015 16:14:18 -0000
-X-Groupsio-MsgNum: 54407
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pZs/OQEoSSbxGlYw"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Feb 2015 17:06:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
---pZs/OQEoSSbxGlYw
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Feb 18, 2015 at 6:03 PM, Ben Shelton <ben.shelton@ni.com> wrote:
+> Requests is an HTTP library for Python with a clean and succinct API.
+>
+> Copied from commit bc572006bfcec10523658b8675f30bf45b43a998 in
+> meta-cloud-services/meta-openstack and updated to version 2.5.1.
 
-On Thu, Feb 19, 2015 at 04:30:17PM +0100, Andreas M=FCller wrote:
-> On Thu, Feb 19, 2015 at 3:47 PM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > On Wed, Feb 18, 2015 at 06:35:33PM +0100, Andreas M=FCller wrote:
-> >> On Wed, Feb 18, 2015 at 5:09 PM, Martin Jansa <martin.jansa@gmail.com>=
- wrote:
-> >> > On Tue, Jan 27, 2015 at 06:53:49AM +0100, Andreas M=FCller wrote:
-> >> >> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
-> >> >
-> >> > Are you sure these are useful only for native(sdk) only?
-> >> >
-> >> > FYI: I'm updating your patches for latest revision in 5.4 branch, I'=
-ll
-> >> > update them together with 5.4.1 recipes (when 5.4.1 is released).
-> >> >
-> >> > Regards,
-> >> >
-> >> >> ---
-> >> >>  recipes-qt/qt5/qtbase.inc    | 2 --
-> >> >>  recipes-qt/qt5/qtbase_git.bb | 2 --
-> >> >>  2 files changed, 4 deletions(-)
-> >> >>
-> >> >> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-> >> >> index 5b2c08c..a8748ef 100644
-> >> >> --- a/recipes-qt/qt5/qtbase.inc
-> >> >> +++ b/recipes-qt/qt5/qtbase.inc
-> >> >> @@ -5,8 +5,6 @@ SRC_URI +=3D "\
-> >> >>      file://0001-Add-linux-oe-g-platform.patch \
-> >> >>      file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside=
--u.patch \
-> >> >>      file://0003-Add-external-hostbindir-option.patch \
-> >> >> -    file://0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-wi=
-th.patch \
-> >> >> -    file://0005-qt_module-Fix-pkgconfig-and-libtool-replacements.p=
-atch \
-> >> >>      file://0006-Revert-eglfs-Print-the-chosen-config-in-debug-mode=
-=2Epatch \
-> >> >>      file://0007-qeglplatformintegration-Undefine-CursorShape-from-=
-X..patch \
-> >> >>      file://0008-configure-bump-path-length-from-256-to-512-charact=
-er.patch \
-> >> >> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_g=
-it.bb
-> >> >> index f67ea16..611e19a 100644
-> >> >> --- a/recipes-qt/qt5/qtbase_git.bb
-> >> >> +++ b/recipes-qt/qt5/qtbase_git.bb
-> >> >> @@ -10,8 +10,6 @@ SRC_URI +=3D "\
-> >> >>      file://0001-Add-linux-oe-g-platform.patch \
-> >> >>      file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside=
--u.patch \
-> >> >>      file://0003-Add-external-hostbindir-option.patch \
-> >> >> -    file://0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-wi=
-th.patch \
-> >> >> -    file://0005-qt_module-Fix-pkgconfig-and-libtool-replacements.p=
-atch \
-> >> >>      file://0006-Revert-eglfs-Print-the-chosen-config-in-debug-mode=
-=2Epatch \
-> >> >>      file://0007-qeglplatformintegration-Undefine-CursorShape-from-=
-X..patch \
-> >> >>      file://0008-configure-bump-path-length-from-256-to-512-charact=
-er.patch \
-> >> >> --
-> >> >> 1.8.3.1
-> >> >>
-> >> >> --
-> >> >> _______________________________________________
-> >> >> Openembedded-devel mailing list
-> >> >> Openembedded-devel@lists.openembedded.org
-> >> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >> >
-> >> > --
-> >> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >> >
-> >> First of all thanks for doing this: I have these patches on my TODO
-> >> but have other issues of higher priorities (ask my boss) to fix.
-> >
-> > In the end the fix was simple..
-> > 0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
-> > wasn't refreshed in qtbase-git directory, now it builds fine, I'll push
-> > it to master soon.
-> >
-> >> Answering your question frankly: No I am not 100% sure these patches
-> >> can be removed from target build..
-> >>
-> >> * 0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.patch: If
-> >> I don't go wrong here configureapp is the windows-replacement for
-> >> configure script -> this patch is not needed AT ALL (except we build
-> >> for windows which we usually don't).
-> >
-> > Ah right, it was looking a bit different at 5.0.0 version and now after
-> > many rebases it really looks useless, will drop with 5.4.1 (and now in
-> > git recipe).
-> >
-> >> * 0005-qt_module-Fix-pkgconfig-and-libtool-replacements.patch:
-> >> Intention here was to keep target sysroot clean of host paths - as
-> >> this patch was part qt-creator series. Raphael Philipe reported
-> >> failures for -L/usr/lib when building qt5-creator I'd suggest to keep
-> >> this patch in.
-> >
-> > OK, thanks.
-> >
-> > I've refreshed b5.4-shared b5.4-native b5.4-nativesdk b5.4-target
-> > branches at https://github.com/meta-qt5/qtbase this will be used to
-> > refresh patches for 5.4.1 recipes.
-> >
-> > --
-> Ehm - I checked at github but I don't really look though the branch
-> systematics. As 5.4.1 is near and I have tons of KDE/Hawai/LxQt stuff
-> around for build test: Which branch should I use (qt/git-versions
-> enabled)?
+When you do this .. you should be broadcasting to the meta-virtualization list.
 
-b5.4 is 5.4 branch from upstream without any modifications (just to remembe=
-r my base revision)
-\
- \
-  b5.4-shared (patches shared by target, native, nativesdk qtbase)
-  |
-  \ b5.4-target (patches only for target qtbase)
-  |
-  \ b5.4-native (patches shared by native and nativesdk)
-     \
-      \b5.4-nativesdk (patches only for nativesdk)
+Otherwise, how can we decide to drop (or keep the recipe) ? It's not hard to
+send an email (like others have done), and there's no reason to leave this to
+chance.
 
-so to refresh meta-qt5 patches I use:
-git format-patch origin/5.4..b5.4-nativesdk
-git format-patch origin/5.4..b5.4-target
-mv 00* ~/meta-qt5/recipes-qt/qt5/qtbase-git/
+Bruce
 
-meta-qt5/master-next (and jansa/master) now contain your changes with
-qtbase/qtdeclarative upgrade/fix on top.
+>
+> Signed-off-by: Ben Shelton <ben.shelton@ni.com>
+> ---
+>  .../recipes-devtools/python/python-requests_2.5.1.bb    | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python-requests_2.5.1.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-requests_2.5.1.bb b/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
+> new file mode 100644
+> index 0000000..b719dca
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-requests_2.5.1.bb
+> @@ -0,0 +1,17 @@
+> +DESCRIPTION = "Python HTTP for Humans."
+> +HOMEPAGE = "http://python-requests.org"
+> +SECTION = "devel/python"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=c7869e52c8275537186de35e3cd5f9ec"
+> +
+> +PR = "r0"
+> +SRCNAME = "requests"
+> +
+> +SRC_URI = "http://pypi.python.org/packages/source/r/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] = "c270eb5551a02e8ab7a4cbb83e22af2e"
+> +SRC_URI[sha256sum] = "7b7735efd3b1e2323dc9fcef060b380d05f5f18bd0f247f5e9e74a628279de66"
+> +
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit setuptools
+> --
+> 2.3.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-You just need to set P_V like this:
-QT5_VERSION =3D "5.4.0+git%"
-require conf/distro/include/qt5-versions.inc
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---pZs/OQEoSSbxGlYw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+-- 
+"Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlTmC94ACgkQN1Ujt2V2gBxuDwCfVYydFtk7gtLRE/Z5KDzWZH1W
-Dc0An0NnQ8NILSUk9nn2J5Ie7vYWWjZy
-=6v4Z
------END PGP SIGNATURE-----
-
---pZs/OQEoSSbxGlYw--
