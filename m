@@ -1,38 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 779EE60556;
-	Thu, 19 Feb 2015 15:22:47 +0000 (UTC)
-Received: by mail-wi0-f173.google.com with SMTP id bs8so48870253wib.0;
-	Thu, 19 Feb 2015 07:22:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=jBFUz/BCpRYOkQQFKmYvNMx67ybF/1ElsUWUWFB75Xc=;
-	b=nYksFtOwdm56BOEZ54RXIPpgpitY4zQE4HcxVZ1G1yL6TiYY3vqVLzxyckOgyxF6mp
-	o1Zvam3pcsXqzEgwNZlMRuiYneKOR0For9LxsuMFKPBPheqgXqyr+t9UIphYXUnfYUau
-	Tx3/ZUJ96gkJ8qzLy1Omqfgj2fAozxFC7m9+/oF3FiUDXAxH9IEsER/HPqo6L+unZODC
-	/EseihDFusJy1pGchOM7D/ppsF35asEhtkpJDoocmcunBxv45N9/YdPwRMCkunyrZv1I
-	9Fa7Pk1zs0DUrQeyxyF7LVvwmIFYKK5HcOdEKIQn7nrjs6Jt3YKHcDVsKYFRH45lUH0i
-	BEhw==
-X-Received: by 10.194.110.69 with SMTP id hy5mr10025099wjb.121.1424359368776; 
-	Thu, 19 Feb 2015 07:22:48 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	gz3sm18487581wib.1.2015.02.19.07.22.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 Feb 2015 07:22:47 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 19 Feb 2015 16:22:51 +0100
-To: jackie.huang@windriver.com, openembedded-devel@lists.openembedded.org
-Message-ID: <20150219152251.GC2311@jama>
-References: <20150115153808.97C47501EF@opal.openembedded.org>
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 447B660556
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2015 15:30:17 +0000 (UTC)
+Received: by pdbfp1 with SMTP id fp1so432569pdb.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2015 07:30:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=pyUAdy2RRbJQhmjSyvS3KCPbuHHDXWmwTDnByWQMgQw=;
+	b=bBOSiW32xk6aLELwZ94IuwKDEHE487h+O2Fhb7y091he26B0/fYLiWHlX37hqFqaE/
+	Cdra21ZmkcsSBXygXRp3dCvk+k8OraFmSPB0atFasMqgRG2cs+zmF6oYQN0HyebiXe5x
+	1XL3ns2eiVoRERA0YPJKCJWEy487hITauH4rcGfRe9yYv7jNIELieoZSGO5jOaoxrgsV
+	iwKk/2eogr5fGzKKlNtkz2zj7C7RUmJz35an1f9DSeaN0IWLO/yA0m7XvPm41FU+bggG
+	RqERDfrB0Mnfi0CWYdQrtudvDuXRvPzyeFlnqktbJfojYBHP2RLGD9Uc+QRXYkU57na7
+	8CEg==
 MIME-Version: 1.0
-In-Reply-To: <20150115153808.97C47501EF@opal.openembedded.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Jackie Huang : vim: add recipe for vim-tiny
+X-Received: by 10.68.136.7 with SMTP id pw7mr8502560pbb.168.1424359818025;
+	Thu, 19 Feb 2015 07:30:18 -0800 (PST)
+Received: by 10.70.36.36 with HTTP; Thu, 19 Feb 2015 07:30:17 -0800 (PST)
+In-Reply-To: <20150219144746.GB2311@jama>
+References: <1422338033-18521-1-git-send-email-schnitzeltony@googlemail.com>
+	<1422338033-18521-2-git-send-email-schnitzeltony@googlemail.com>
+	<20150218160919.GB2276@jama>
+	<CALbNGRSSk=gNtvn=nwkLqO=BwPF7+WmL6hpQFdvSRXn5u_kJoA@mail.gmail.com>
+	<20150219144746.GB2311@jama>
+Date: Thu, 19 Feb 2015 16:30:17 +0100
+Message-ID: <CALbNGRRMOfs+b8EwGNjU7cP_ifBR2xbNW=5jrVntC9A5TVfGmA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH 1/5] qtbase: remove patches required for native(-sdk) only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,154 +47,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2015 15:22:49 -0000
-X-Groupsio-MsgNum: 54402
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JWEK1jqKZ6MHAcjA"
-Content-Disposition: inline
-
---JWEK1jqKZ6MHAcjA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Feb 2015 15:30:19 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 15, 2015 at 03:38:08PM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: 95dc2ddce7a0ee4d16d6c69fd123e4e6921bdf2e
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3D95dc2ddce7a0ee4d16d6c69fd123e4e6921bdf2e
->=20
-> Author: Jackie Huang <jackie.huang@windriver.com>
-> Date:   Thu Nov  6 03:22:27 2014 -0500
->=20
-> vim: add recipe for vim-tiny
->=20
-> Changes:
-> - Add bb for vim-tiny based on vim.bb
-> - Change PACKAGECONFIG and do_install for vim-tiny
-> - Change BPN to vim in vim.bb so it works fine when required by vim-tiny
-> - Add proper alternative links for vim and vim-tiny to avoid conflicts
-> - Don't use do_install_append in vim.bb so it works fine when required by=
- vim-tiny
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> ---
->=20
->  meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb | 13 +++++++++++++
->  meta-oe/recipes-support/vim/vim_7.4.481.bb      | 20 +++++++++++++-------
->  2 files changed, 26 insertions(+), 7 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb b/meta-oe/re=
-cipes-support/vim/vim-tiny_7.4.481.bb
-> new file mode 100644
-> index 0000000..bb8f2b7
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/vim/vim-tiny_7.4.481.bb
-> @@ -0,0 +1,13 @@
-> +require vim_${PV}.bb
-> +
-> +SUMMARY +=3D " (with tiny features)"
-> +
-> +PACKAGECONFIG +=3D "tiny"
-> +
-> +do_install() {
-> +    install -d ${D}/${bindir}
-> +    install -m 0755 ${S}/vim ${D}/${bindir}/vim.tiny
-> +}
-> +
-> +ALTERNATIVE_PRIORITY =3D "90"
-> +ALTERNATIVE_TARGET =3D "${bindir}/vim.tiny"
-> diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes=
--support/vim/vim_7.4.481.bb
-> index b85ff63..7490229 100644
-> --- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
-> +++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-> @@ -12,9 +12,9 @@ SRC_URI =3D "hg://vim.googlecode.com/hg/;protocol=3Dhtt=
-ps;module=3Dvim \
->  "
->  SRCREV =3D "v7-4-481"
-> =20
-> -S =3D "${WORKDIR}/${BPN}/src"
-> +S =3D "${WORKDIR}/vim/src"
-> =20
-> -VIMDIR =3D "${BPN}${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).=
-split('.')[1]}"
-> +VIMDIR =3D "vim${@d.getVar('PV',1).split('.')[0]}${@d.getVar('PV',1).spl=
-it('.')[1]}"
-> =20
->  inherit autotools update-alternatives
->  inherit autotools-brokensep
-> @@ -59,7 +59,9 @@ EXTRA_OECONF =3D " \
->      STRIP=3D/bin/true \
->  "
-> =20
-> -do_install_append() {
-> +do_install() {
-> +    autotools_do_install
-> +
->      # Work around rpm picking up csh or awk or perl as a dep
->      chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/vim132
->      chmod -x ${D}${datadir}/${BPN}/${VIMDIR}/tools/mve.awk
-> @@ -67,6 +69,9 @@ do_install_append() {
-> =20
->      # Install example vimrc from runtime files
->      install -m 0644 ../runtime/vimrc_example.vim ${D}/${datadir}/${BPN}/=
-vimrc
-> +
-> +    # we use --with-features=3Dbig as default
-> +    mv ${D}${bindir}/${BPN} ${D}${bindir}/${BPN}.${BPN}
->  }
-> =20
->  PARALLEL_MAKEINST =3D ""
-> @@ -97,7 +102,8 @@ RDEPENDS_${PN} =3D "ncurses-terminfo-base"
->  # Recommend that runtime data is installed along with vim
->  RRECOMMENDS_${PN} =3D "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc $=
-{PN}-common"
-> =20
-> -ALTERNATIVE_${PN} =3D "vi"
-> -ALTERNATIVE_TARGET[vi] =3D "${bindir}/${BPN}"
-> -ALTERNATIVE_LINK_NAME[vi] =3D "${base_bindir}/vi"
-> -ALTERNATIVE_PRIORITY[vi] =3D "100"
-> +ALTERNATIVE_${PN} =3D "vi vim"
-> +ALTERNATIVE_TARGET =3D "${bindir}/${BPN}.${BPN}"
-> +ALTERNATIVE_LINK_NAME[vi] =3D "${bindir}/vi"
-> +ALTERNATIVE_LINK_NAME[vim] =3D "${bindir}/vim"
+On Thu, Feb 19, 2015 at 3:47 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Wed, Feb 18, 2015 at 06:35:33PM +0100, Andreas M=C3=BCller wrote:
+>> On Wed, Feb 18, 2015 at 5:09 PM, Martin Jansa <martin.jansa@gmail.com> w=
+rote:
+>> > On Tue, Jan 27, 2015 at 06:53:49AM +0100, Andreas M=C3=BCller wrote:
+>> >> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> >
+>> > Are you sure these are useful only for native(sdk) only?
+>> >
+>> > FYI: I'm updating your patches for latest revision in 5.4 branch, I'll
+>> > update them together with 5.4.1 recipes (when 5.4.1 is released).
+>> >
+>> > Regards,
+>> >
+>> >> ---
+>> >>  recipes-qt/qt5/qtbase.inc    | 2 --
+>> >>  recipes-qt/qt5/qtbase_git.bb | 2 --
+>> >>  2 files changed, 4 deletions(-)
+>> >>
+>> >> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+>> >> index 5b2c08c..a8748ef 100644
+>> >> --- a/recipes-qt/qt5/qtbase.inc
+>> >> +++ b/recipes-qt/qt5/qtbase.inc
+>> >> @@ -5,8 +5,6 @@ SRC_URI +=3D "\
+>> >>      file://0001-Add-linux-oe-g-platform.patch \
+>> >>      file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u=
+.patch \
+>> >>      file://0003-Add-external-hostbindir-option.patch \
+>> >> -    file://0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with=
+.patch \
+>> >> -    file://0005-qt_module-Fix-pkgconfig-and-libtool-replacements.pat=
+ch \
+>> >>      file://0006-Revert-eglfs-Print-the-chosen-config-in-debug-mode.p=
+atch \
+>> >>      file://0007-qeglplatformintegration-Undefine-CursorShape-from-X.=
+.patch \
+>> >>      file://0008-configure-bump-path-length-from-256-to-512-character=
+.patch \
+>> >> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git=
+.bb
+>> >> index f67ea16..611e19a 100644
+>> >> --- a/recipes-qt/qt5/qtbase_git.bb
+>> >> +++ b/recipes-qt/qt5/qtbase_git.bb
+>> >> @@ -10,8 +10,6 @@ SRC_URI +=3D "\
+>> >>      file://0001-Add-linux-oe-g-platform.patch \
+>> >>      file://0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u=
+.patch \
+>> >>      file://0003-Add-external-hostbindir-option.patch \
+>> >> -    file://0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with=
+.patch \
+>> >> -    file://0005-qt_module-Fix-pkgconfig-and-libtool-replacements.pat=
+ch \
+>> >>      file://0006-Revert-eglfs-Print-the-chosen-config-in-debug-mode.p=
+atch \
+>> >>      file://0007-qeglplatformintegration-Undefine-CursorShape-from-X.=
+.patch \
+>> >>      file://0008-configure-bump-path-length-from-256-to-512-character=
+.patch \
+>> >> --
+>> >> 1.8.3.1
+>> >>
+>> >> --
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> >
+>> > --
+>> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>> >
+>> First of all thanks for doing this: I have these patches on my TODO
+>> but have other issues of higher priorities (ask my boss) to fix.
+>
+> In the end the fix was simple..
+> 0011-qmake-don-t-build-it-in-configure-but-allow-to-build.patch
+> wasn't refreshed in qtbase-git directory, now it builds fine, I'll push
+> it to master soon.
+>
+>> Answering your question frankly: No I am not 100% sure these patches
+>> can be removed from target build..
+>>
+>> * 0004-configureapp-Prefix-default-LIBDIRS-and-INCDIRS-with.patch: If
+>> I don't go wrong here configureapp is the windows-replacement for
+>> configure script -> this patch is not needed AT ALL (except we build
+>> for windows which we usually don't).
+>
+> Ah right, it was looking a bit different at 5.0.0 version and now after
+> many rebases it really looks useless, will drop with 5.4.1 (and now in
+> git recipe).
+>
+>> * 0005-qt_module-Fix-pkgconfig-and-libtool-replacements.patch:
+>> Intention here was to keep target sysroot clean of host paths - as
+>> this patch was part qt-creator series. Raphael Philipe reported
+>> failures for -L/usr/lib when building qt5-creator I'd suggest to keep
+>> this patch in.
+>
+> OK, thanks.
+>
+> I've refreshed b5.4-shared b5.4-native b5.4-nativesdk b5.4-target
+> branches at https://github.com/meta-qt5/qtbase this will be used to
+> refresh patches for 5.4.1 recipes.
+>
+> --
+Ehm - I checked at github but I don't really look though the branch
+systematics. As 5.4.1 is near and I have tons of KDE/Hawai/LxQt stuff
+around for build test: Which branch should I use (qt/git-versions
+enabled)?
 
-Why did you change ALTERNATIVE_LINK_NAME[vi] from base_bindir to bindir?
+Andreas
 
-busybox still registers ${base_bindir}/vi so this breaks u-a
-
-update-alternatives: Error: cannot register alternative vi to
-/usr/bin/vi since it is already registered to /bin/vi
-update-alternatives: Linking
-/OE/build/shr-core/tmp-glibc/work/nokia900-oe-linux-gnueabi/shr-image/2.0-r=
-20/rootfs/usr/bin/vim
-to /usr/bin/vim.vim
-
-> +ALTERNATIVE_PRIORITY =3D "100"
->=20
-> --=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---JWEK1jqKZ6MHAcjA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlTl/8sACgkQN1Ujt2V2gBzugACeInnDH+kfwgTX1lFYCbbTrWaS
-uZoAniXPA+QJ2w4DMYe4OIZhxVYe2C9y
-=2SR8
------END PGP SIGNATURE-----
-
---JWEK1jqKZ6MHAcjA--
