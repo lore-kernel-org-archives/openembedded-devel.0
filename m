@@ -1,36 +1,36 @@
-Return-Path: <krzysztof.m.sywula@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 226AF73617
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id EC6AE73608
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Feb 2015 20:58:23 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga102.jf.intel.com with ESMTP; 19 Feb 2015 12:54:05 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.09,610,1418112000"; 
-	d="scan'208,217";a="668809556"
-Received: from orsmsx110.amr.corp.intel.com ([10.22.240.8])
-	by fmsmga001.fm.intel.com with ESMTP; 19 Feb 2015 12:58:10 -0800
-Received: from fmsmsx154.amr.corp.intel.com (10.18.116.70) by
-	ORSMSX110.amr.corp.intel.com (10.22.240.8) with Microsoft SMTP Server
-	(TLS) id 14.3.195.1; Thu, 19 Feb 2015 12:58:09 -0800
-Received: from fmsmsx116.amr.corp.intel.com ([169.254.2.201]) by
-	FMSMSX154.amr.corp.intel.com ([169.254.6.133]) with mapi id
-	14.03.0195.001; Thu, 19 Feb 2015 12:58:09 -0800
-From: "Sywula, Krzysztof M" <krzysztof.m.sywula@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe][meta-oe][dylan]opencv: master->dylan backport
-Thread-Index: AdBMhlisNtPIO8QFRTG9GjpwWr5OGA==
-Date: Thu, 19 Feb 2015 20:58:08 +0000
-Message-ID: <6741EAAB26B57F4995668065CB62D86B490C6648@fmsmsx116.amr.corp.intel.com>
-Accept-Language: en-GB, pl-PL, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.200.106]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "Eggleton, Paul" <paul.eggleton@intel.com>
-Subject: [meta-oe][dylan]opencv: master->dylan backport
+	Fri, 20 Feb 2015 05:44:01 +0000 (UTC)
+Received: by mail-ig0-f176.google.com with SMTP id hl2so858127igb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Feb 2015 21:44:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=mDI6mIgQMncwGSDgECdyVB84Lk2DNlnyEY7vtfZ4GMI=;
+	b=YyzBBMcSqTfnGSwvbeFh7lLdxnU5w+OBZ6e+XCRI4xVbhbgw4dcrqZKM6v8lvZNASr
+	dFzUeyc6eyMnQgEgq+laqfs+6G92C/m49hxSvin9nK939pKVuwQp+5HlZqYFIrUQcJYJ
+	LgZqzBAfOi7sDZR0nGebi0neZzESzoT5XO/QeSQ4+6it/XyxYjiss+ICG7xQ+gAotThJ
+	O7lMFOlt4i42JJNPTDQrjKX44x1xNkJvXlE7vuASYroof1Z09dqu0wYaD1DbLbqNRagr
+	jJv2VfzGu2UD2sjClCcKdfAU+V4QRGIt6lpsI62K3O4BryfZbNgzLyI2JOUfZWx+yDnq
+	aVNQ==
+X-Received: by 10.50.97.41 with SMTP id dx9mr9633518igb.1.1424411042826;
+	Thu, 19 Feb 2015 21:44:02 -0800 (PST)
+Received: from kraj-ch2e.sys.comcast.net (a-96-119-88-205.sys.comcast.net.
+	[96.119.88.205]) by mx.google.com with ESMTPSA id
+	p138sm16404022ioe.9.2015.02.19.21.44.02
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 19 Feb 2015 21:44:02 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 20 Feb 2015 05:43:37 +0000
+Message-Id: <1424411017-31055-2-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1424411017-31055-1-git-send-email-raj.khem@gmail.com>
+References: <1424411017-31055-1-git-send-email-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] collectd: Backport fix build with newer gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,15 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Feb 2015 20:58:29 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Feb 2015 05:44:04 -0000
 
-Paul, please cherry-pick a commit from master to dylan:
-fe81c0e5af2df3890f2ab0f267562fdce5b5b166
-right now opencv on dylan has a broken download URI.
+on mips we get the errors of type mismatch
 
-Thanks,
-Krzysztof Sywula
+Change-Id: Ib7b3bd243417d1ba77e8167daf761fd4a2fc2e64
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...ure-size_t-portability-in-DEBUG-statement.patch | 30 ++++++++++++++++++++++
+ .../recipes-extended/collectd/collectd_5.4.1.bb    |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch
+
+diff --git a/meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch b/meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch
+new file mode 100644
+index 0000000..52b9a86
+--- /dev/null
++++ b/meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch
+@@ -0,0 +1,30 @@
++From f6c89c17955223bf8c99a901ca6f901b83fa521f Mon Sep 17 00:00:00 2001
++From: Marc Fournier <marc.fournier@camptocamp.com>
++Date: Wed, 3 Dec 2014 16:15:28 +0100
++Subject: [PATCH] netlink: ensure size_t portability in DEBUG() statement
++
++This prevents the following error when building on 32bit systems with
++gcc 4.7.2:
++
++netlink.c: In function 'ir_read':
++netlink.c:783:7: error: format '%lu' expects argument of type 'long unsigned int', but argument 5 has type 'size_t' [-Werror=format]
++---
++ src/netlink.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/netlink.c b/src/netlink.c
++index 422dc8c..3c4642c 100644
++--- a/src/netlink.c
+++++ b/src/netlink.c
++@@ -683,7 +683,7 @@ static int ir_read (void)
++         continue;
++       }
++ 
++-      DEBUG ("netlink plugin: ir_read: querying %s from %s (%lu).",
+++      DEBUG ("netlink plugin: ir_read: querying %s from %s (%zu).",
++           type_name[type_index], iflist[ifindex], ifindex);
++ 
++       nlh = mnl_nlmsg_put_header (buf);
++-- 
++2.1.4
++
+diff --git a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
+index 92b231c..6e40076 100644
+--- a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
++++ b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
+@@ -9,6 +9,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
+            file://no-gcrypt-badpath.patch \
+            file://collectd-version.patch \
+            file://glibc-2.20-compatiblity.patch \
++           file://0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch \
+            file://collectd.init \
+            file://collectd.service"
+ SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
+-- 
+2.1.4
+
 
