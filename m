@@ -1,37 +1,38 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id C45CE73647
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D30B73613
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 10:06:31 +0000 (UTC)
-Received: by pdbnh10 with SMTP id nh10so6560095pdb.11
+	Fri, 20 Feb 2015 10:55:50 +0000 (UTC)
+Received: by pdjz10 with SMTP id z10so6801940pdj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 02:06:33 -0800 (PST)
+	Fri, 20 Feb 2015 02:55:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=RfBOFNZKqoLv7FNElHJnXtWMlyGPlegljOvbgAMQ1YA=;
-	b=lhegNgCi1ztzHoH6D47EzB8Y7FJam7Si3eGSicsaBr9ilhJvPREd6eNtPNZ24CbnDG
-	HjjMNj3CC/jfzjMETJ4wj5AZqXyiC2zIgpelE/Y8H5J/nC6+ft5pQ5VFqD64T/G8N1Ne
-	y2N4ajAeEIbCA8BloXCtjR2kmDVmYWUtR+orUpLeeaWav0iSxufSjYpwfUKdE+p0JHkG
-	XKz/+itEJK1IO5QXI+04fJuH3kk6iU+6LBBWPjyMvagqaw+CYNtgVsL0QIWq44zVPzWT
-	2qciwTiDfABTUwig3kSmBtGq9I1IIpnowds+cyAloHvvMJvqhv6gOrnI5HNPc5aCpwy0
-	MVjw==
-X-Received: by 10.70.42.47 with SMTP id k15mr15689465pdl.134.1424426793289;
-	Fri, 20 Feb 2015 02:06:33 -0800 (PST)
-Received: from Pahoa2.mvista.com ([192.165.183.201])
+	h=from:content-type:content-transfer-encoding:subject:message-id:date
+	:to:mime-version;
+	bh=OVVZDWEMA1IPbHcxuN7rvwt33KkiXlEo8gGZoyUWwao=;
+	b=FSu3AkJQn27JKautdlEEFn/Uc+Qu0OR+pRq/1ZlZ2Pq3CIpcy4lEVQbPKPOgyMKZXr
+	FHgfwISIUUcj3Azp6uMOUtPMwRNHIVOvrVFHkxiVZ8ivcZHHa4yam1ZD6W253CFZ3qC8
+	dNGfPIZ6V1qk13HZhnKUSmyg1l51z9olBWinj2HzfwJ+BwYRHVWzzuU4SiXlMZcmkMHe
+	8IyZYWN1jMmfdbc0kzIZBV4kOx82A21wCicWhIWTiK9pYs1bujmAT8FnQOXmMTYx2mig
+	oo/R8lC/f9jwhfcqgIvnaCfubZxrHf3IfYmZWbCOH4QdtD65lAbMm3p3+579SK+4uMxX
+	KbjA==
+X-Received: by 10.68.115.196 with SMTP id jq4mr15892487pbb.150.1424429751790; 
+	Fri, 20 Feb 2015 02:55:51 -0800 (PST)
+Received: from ?IPv6:2601:9:3580:84c:852e:3540:d404:25e3?
+	([2601:9:3580:84c:852e:3540:d404:25e3])
 	by mx.google.com with ESMTPSA id
-	qm12sm26443109pdb.36.2015.02.20.02.06.26
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 20 Feb 2015 02:06:32 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Feb 2015 02:06:15 -0800
-Message-Id: <1424426775-17553-2-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1424426775-17553-1-git-send-email-akuster808@gmail.com>
-References: <1424426775-17553-1-git-send-email-akuster808@gmail.com>
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-oe][PATCH 2/2] mcelog: update to latest
+	je2sm26457318pbd.44.2015.02.20.02.55.50
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Fri, 20 Feb 2015 02:55:51 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Message-Id: <BB19F3C7-2950-4E41-BF62-70BFE4FB9C9B@gmail.com>
+Date: Fri, 20 Feb 2015 02:55:48 -0800
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core@lists.openemebedded.org, yocto <yocto@yoctoproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+X-Mailer: Apple Mail (2.2070.6)
+Subject: [RFT] gcc 5.0 recipes available for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,37 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 10:06:35 -0000
+X-List-Received-Date: Fri, 20 Feb 2015 10:55:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-From: Armin Kuster <akuster@mvista.com>
+Hi All
 
-remove unused md5sum check since using git.
+Encouraged by help received on testing out glibc 2.21, now  I have put =
+together OE recipes for gcc-5
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- meta-oe/recipes-support/mcelog/{mcelog_1.04.bb => mcelog_1.09.bb} | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-oe/recipes-support/mcelog/{mcelog_1.04.bb => mcelog_1.09.bb} (82%)
+GCC 5.0 is in prerelease stage 4 ( open for regression and doc fixes =
+only)=20
 
-diff --git a/meta-oe/recipes-support/mcelog/mcelog_1.04.bb b/meta-oe/recipes-support/mcelog/mcelog_1.09.bb
-similarity index 82%
-rename from meta-oe/recipes-support/mcelog/mcelog_1.04.bb
-rename to meta-oe/recipes-support/mcelog/mcelog_1.09.bb
-index ceadf7a..34ff643 100644
---- a/meta-oe/recipes-support/mcelog/mcelog_1.04.bb
-+++ b/meta-oe/recipes-support/mcelog/mcelog_1.09.bb
-@@ -6,9 +6,7 @@ HOMEPAGE = "http://mcelog.org/"
- SECTION = "System Environment/Base"
- DEPENDS += "bash"
- SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git"
--SRC_URI[md5sum] = "a06761ad5fed8596238b5a5ea76ed662"
--SRC_URI[sha256sum] = "519390825ec5a0545a7ed48717ef7c7480bb8b9bce68d63a58a52f4e4e275e0f"
--SRCREV = "9de4924e751346df6e2d40ae1007b40ea1915e2b"
-+SRCREV = "0fc9f702232cb2d9969916f899c67c3e64deedda"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://README;md5=3eb76ca64fa07ad53ebb0ebb5b4c8ede"
- 
--- 
-1.9.1
+https://gcc.gnu.org/ml/gcc/2015-01/msg00156.html
+
+The recipes are available here
+
+=
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-5.=
+0
+
+you just need the topmost commit and then set=20
+
+GCCVERSION =3D "5.0"
+SDKGCCVERSION =3D "5.0"
+
+in local.conf
+
+It has been lightly tested thus far but try it out and report issues you =
+observe in your build setups, we will bake it there
+until 5.0 release
+
+Thanks for helping out
+
+-Khem
 
 
