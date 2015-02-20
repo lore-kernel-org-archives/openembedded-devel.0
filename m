@@ -1,36 +1,34 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id EC6AE73608
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 9EF3D735BA
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 20 Feb 2015 05:44:01 +0000 (UTC)
-Received: by mail-ig0-f176.google.com with SMTP id hl2so858127igb.3
+Received: by mail-ig0-f182.google.com with SMTP id h15so861617igd.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 19 Feb 2015 21:44:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mDI6mIgQMncwGSDgECdyVB84Lk2DNlnyEY7vtfZ4GMI=;
-	b=YyzBBMcSqTfnGSwvbeFh7lLdxnU5w+OBZ6e+XCRI4xVbhbgw4dcrqZKM6v8lvZNASr
-	dFzUeyc6eyMnQgEgq+laqfs+6G92C/m49hxSvin9nK939pKVuwQp+5HlZqYFIrUQcJYJ
-	LgZqzBAfOi7sDZR0nGebi0neZzESzoT5XO/QeSQ4+6it/XyxYjiss+ICG7xQ+gAotThJ
-	O7lMFOlt4i42JJNPTDQrjKX44x1xNkJvXlE7vuASYroof1Z09dqu0wYaD1DbLbqNRagr
-	jJv2VfzGu2UD2sjClCcKdfAU+V4QRGIt6lpsI62K3O4BryfZbNgzLyI2JOUfZWx+yDnq
-	aVNQ==
-X-Received: by 10.50.97.41 with SMTP id dx9mr9633518igb.1.1424411042826;
+	h=from:to:cc:subject:date:message-id;
+	bh=Q7RAb8jmzaeAs5Y4SGqtZrjOVRNniysGa3XKoDuFGtI=;
+	b=rdkyRxv5ONwngozwQ+J1V24+HTbzr+/F7lZYQ3LmRmlI/qb3uxldmFNKvwtumHHGi2
+	i1Tkle8YITkoaRtDc72maIVlkUzChDvbNPnxGDPY5jIBtFbzR1wVGlTOLVXny2Ahi0N7
+	a7EsE6JYLSnapMIJiIvC9YJ8UyFoafj+mnMFh8C6p76y2i+n3Zg+KSgSqBtYejaBRfK/
+	OG2bCCTBM4APaej3ZH20iJoCvOnYry1oaUlLG2+r00gGLvi5bYqDwzKCpJmz7hqJfxDu
+	+oQk7fb1prFagNZ7wkaOOanLJ/IZaRSfVd6n1KS8pIujelESyZxbJu1THer+EgaxmOPC
+	HGBQ==
+X-Received: by 10.50.222.70 with SMTP id qk6mr2079353igc.47.1424411042227;
 	Thu, 19 Feb 2015 21:44:02 -0800 (PST)
 Received: from kraj-ch2e.sys.comcast.net (a-96-119-88-205.sys.comcast.net.
 	[96.119.88.205]) by mx.google.com with ESMTPSA id
-	p138sm16404022ioe.9.2015.02.19.21.44.02
+	p138sm16404022ioe.9.2015.02.19.21.44.01
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 19 Feb 2015 21:44:02 -0800 (PST)
+	Thu, 19 Feb 2015 21:44:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Feb 2015 05:43:37 +0000
-Message-Id: <1424411017-31055-2-git-send-email-raj.khem@gmail.com>
+Date: Fri, 20 Feb 2015 05:43:36 +0000
+Message-Id: <1424411017-31055-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1424411017-31055-1-git-send-email-raj.khem@gmail.com>
-References: <1424411017-31055-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] collectd: Backport fix build with newer gcc
+Subject: [meta-oe][PATCH 1/2] soci: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,64 +44,68 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 20 Feb 2015 05:44:04 -0000
 
-on mips we get the errors of type mismatch
+Define PACKAGECONFIG to enable a given backend of choice
+by default its 'empty'
 
-Change-Id: Ib7b3bd243417d1ba77e8167daf761fd4a2fc2e64
+Change-Id: Ie1123af658ca94d2fe22a3ca1a32dfb47d58979e
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ure-size_t-portability-in-DEBUG-statement.patch | 30 ++++++++++++++++++++++
- .../recipes-extended/collectd/collectd_5.4.1.bb    |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch
+ meta-oe/recipes-support/soci/soci_3.2.2.bb | 46 ++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-support/soci/soci_3.2.2.bb
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch b/meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch
+diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb b/meta-oe/recipes-support/soci/soci_3.2.2.bb
 new file mode 100644
-index 0000000..52b9a86
+index 0000000..1c333cb
 --- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch
-@@ -0,0 +1,30 @@
-+From f6c89c17955223bf8c99a901ca6f901b83fa521f Mon Sep 17 00:00:00 2001
-+From: Marc Fournier <marc.fournier@camptocamp.com>
-+Date: Wed, 3 Dec 2014 16:15:28 +0100
-+Subject: [PATCH] netlink: ensure size_t portability in DEBUG() statement
++++ b/meta-oe/recipes-support/soci/soci_3.2.2.bb
+@@ -0,0 +1,46 @@
++# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
-+This prevents the following error when building on 32bit systems with
-+gcc 4.7.2:
++DESCRIPTION = "The C++ Database Access Library"
++HOMEPAGE = "http://soci.sourceforge.net"
++LICENSE = "BSL-1.0"
++SECTION = "libs"
++DEPENDS = "boost"
 +
-+netlink.c: In function 'ir_read':
-+netlink.c:783:7: error: format '%lu' expects argument of type 'long unsigned int', but argument 5 has type 'size_t' [-Werror=format]
-+---
-+ src/netlink.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 +
-+diff --git a/src/netlink.c b/src/netlink.c
-+index 422dc8c..3c4642c 100644
-+--- a/src/netlink.c
-++++ b/src/netlink.c
-+@@ -683,7 +683,7 @@ static int ir_read (void)
-+         continue;
-+       }
-+ 
-+-      DEBUG ("netlink plugin: ir_read: querying %s from %s (%lu).",
-++      DEBUG ("netlink plugin: ir_read: querying %s from %s (%zu).",
-+           type_name[type_index], iflist[ifindex], ifindex);
-+ 
-+       nlh = mnl_nlmsg_put_header (buf);
-+-- 
-+2.1.4
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.gz"
++SRC_URI[md5sum] = "bc3c35f6cd3f80a1be19fe30b3c111bf"
++SRC_URI[sha256sum] = "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743582de2ff443ccb1c"
 +
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-index 92b231c..6e40076 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.4.1.bb
-@@ -9,6 +9,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-            file://no-gcrypt-badpath.patch \
-            file://collectd-version.patch \
-            file://glibc-2.20-compatiblity.patch \
-+           file://0001-netlink-ensure-size_t-portability-in-DEBUG-statement.patch \
-            file://collectd.init \
-            file://collectd.service"
- SRC_URI[md5sum] = "6f56c71c96573a7f4f7fb3bfab185974"
++TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy" -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \
++              -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING="dbname=soci_test" \
++              -DSOCI_TEST_MYSQL_CONNSTR:STRING="db=soci_test user=oe password=oe"'
++
++OBASEDIR ?= "/opt/oracle"
++OINCDIR = "rdbms/public"
++OLIBDIR = "lib"
++
++PACKAGECONFIG[sqlite3] = "-DSOCI_SQLITE3=ON,-DSOCI_SQLITE3=OFF,sqlite3,"
++PACKAGECONFIG[mysql] = "-DSOCI_MYSQL=ON,-DSOCI_MYSQL=OFF,mariadb,"
++PACKAGECONFIG[postgresql] = "-DSOCI_POSTGRESQL=ON,-DSOCI_POSTGRESQL=OFF,postgresql,"
++PACKAGECONFIG[odbc] = "-DSOCI_ODBC=ON,-DSOCI_ODBC=OFF,,"
++PACKAGECONFIG[empty] = "-DSOCI_EMPTY=ON,-DSOCI_EMPTY=OFF,,"
++PACKAGECONFIG[oracle] = "-DWITH_ORACLE=ON --with-oracle-include=${OINCDIR} --with-oracle-lib=${OLIBDIR},-DWITH_ORACLE=OFF,,"
++PACKAGECONFIG[ptest] = "${TESTCONFIG},,,"
++
++# enable your backend by default we enable 'empty'
++PACKAGECONFIG ??= "empty"
++
++# Take the flags added by PACKAGECONFIG and pass them to cmake.
++EXTRA_OECMAKE = "${EXTRA_OECONF}"
++
++inherit cmake
++
++PACKAGES += "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc ${PN}-oracle"
++
++FILES_${PN}-sqlite3 = "${libdir}/lib${BPN}_sqlite3.so.*"
++FILES_${PN}-mysql = "${libdir}/lib${BPN}_mysql.so.*"
++FILES_${PN}-postgresql = "${libdir}/lib${BPN}_postgresql.so.*"
++FILES_${PN}-odbc = "${libdir}/lib${BPN}_odbc.so.*"
++FILES_${PN}-oracle = "${libdir}/lib${BPN}_oracle.so.*"
 -- 
 2.1.4
 
