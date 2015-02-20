@@ -1,43 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C94B6B6B7
+Return-Path: <danismostlikely@gmail.com>
+Received: from mail-qa0-f51.google.com (mail-qa0-f51.google.com
+	[209.85.216.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C77D6B6B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 14:33:55 +0000 (UTC)
-Received: by wesx3 with SMTP id x3so5941490wes.7
+	Fri, 20 Feb 2015 14:36:00 +0000 (UTC)
+Received: by mail-qa0-f51.google.com with SMTP id i13so12566523qae.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 06:33:56 -0800 (PST)
+	Fri, 20 Feb 2015 06:36:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wD44mYDalAX8qVqJb8QXt9QkfUXEapOmmqgZ3AmaHCE=;
-	b=SwuCZZqyQry4QTgx0stSpaVlji3RuL2h96/KFxOn8rfox2DeweRzsZ93tlMnHU8Pzq
-	4S8J4nlqNU8Jt3wMeUY1n9c//49z9qBY9fATGUwnvoSfWq5H5Su6iPXk25ayOljfuoWd
-	wZgSnMJoYufe884ZKF4W8/cPSUgZ/qHFJUTnfUKl0Apg5podjORMS1LNrVBWSTpYt6g1
-	+jZ6hla/ZcOy1Y9pQZYQz3WKgliWlxQtQTo95fCzj/Zv4WTV+ZDmDD9qgEELSfAdaMTf
-	X0u51urjxiFVW5ZDihBBnq2tHox1VFld+Sx95eizs+Av9IXXqPKIj3WPOZU5uA+NYZsE
-	LpeA==
-X-Received: by 10.180.74.111 with SMTP id s15mr6085764wiv.61.1424442836005;
-	Fri, 20 Feb 2015 06:33:56 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	yy9sm42327427wjc.20.2015.02.20.06.33.55
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 20 Feb 2015 06:33:55 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 20 Feb 2015 15:34:00 +0100
-To: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <20150220143400.GH2322@jama>
-References: <1423788858-16687-1-git-send-email-gary@mlbassoc.com>
-	<CA+chaQdfVy4bdE+-Yq7YakQ9pYnSkDLEGiqxAsVnkq7rP26KrA@mail.gmail.com>
-	<54DD5AED.9050707@mlbassoc.com> <20150220134358.GE2322@jama>
-	<54E73E6E.3040303@mlbassoc.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=wEtjNT6+YD+RVug6ZWCT4rxaxbGjQ4qOmb9RBYd6eJo=;
+	b=nGaz+Ec/TXFfgkrDkLfEmOYkwWsQx938kz5kE+Z61+eHeWGx6K4R/wtjWzHPGrjAdp
+	oCYbqfWCILuHdBdqSPgl/a/02g1NJgqEPmObZN9k2NmICT8blA9/IdEtY2w4GsFulFL1
+	fSTYQwWJPOgGR8gbvtsUiCK8nDQfD24UJ33cnIEpdfvrTmKoEg2eB5NkFUNSXsH6lVAx
+	jOS7asCD1CDmOh4Zv4BKblNAqOpadkyqkpbkFl2qKfpaiu0f85k3JhwfqK8pjL8w6hJg
+	sLeSlk/yT1k4T6bH1VqRGNgjPnJaRkdPr9f7N3RHK+6vXsGsugkOcnboI+a06hEorOnH
+	JWtg==
 MIME-Version: 1.0
-In-Reply-To: <54E73E6E.3040303@mlbassoc.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] mplayer2: Remove blacklist
+X-Received: by 10.140.41.169 with SMTP id z38mr23200792qgz.56.1424442962064;
+	Fri, 20 Feb 2015 06:36:02 -0800 (PST)
+Received: by 10.96.118.39 with HTTP; Fri, 20 Feb 2015 06:36:01 -0800 (PST)
+In-Reply-To: <BB19F3C7-2950-4E41-BF62-70BFE4FB9C9B@gmail.com>
+References: <BB19F3C7-2950-4E41-BF62-70BFE4FB9C9B@gmail.com>
+Date: Fri, 20 Feb 2015 08:36:01 -0600
+Message-ID: <CACS+7ZTe-PfQ0VjLJ3pkEi8chSg4rH2+fLog7aNUqkPQ=ZZssg@mail.gmail.com>
+From: Dan McGregor <danismostlikely@gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: yocto <yocto@yoctoproject.org>, openembedded-core@lists.openemebedded.org
+Subject: Re: [RFT] gcc 5.0 recipes available for testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,153 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 14:33:55 -0000
-X-Groupsio-MsgNum: 54431
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XjbSsFHOHxvQpKib"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 20 Feb 2015 14:36:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
---XjbSsFHOHxvQpKib
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 20 February 2015 at 04:55, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi All
+>
+> Encouraged by help received on testing out glibc 2.21, now  I have put together OE recipes for gcc-5
+>
+> GCC 5.0 is in prerelease stage 4 ( open for regression and doc fixes only)
+>
+> https://gcc.gnu.org/ml/gcc/2015-01/msg00156.html
+>
+> The recipes are available here
+>
+> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-5.0
+>
+> you just need the topmost commit and then set
+>
+> GCCVERSION = "5.0"
+> SDKGCCVERSION = "5.0"
+>
+> in local.conf
+>
+> It has been lightly tested thus far but try it out and report issues you observe in your build setups, we will bake it there
+> until 5.0 release
+>
+> Thanks for helping out
 
-On Fri, Feb 20, 2015 at 07:02:22AM -0700, Gary Thomas wrote:
-> On 2015-02-20 06:43, Martin Jansa wrote:
-> > On Thu, Feb 12, 2015 at 07:01:17PM -0700, Gary Thomas wrote:
-> >> On 2015-02-12 18:08, Martin Jansa wrote:
-> >>> Does it have --enable-* options for the new PACKAGECONFIGs? If yes th=
-en it should specify them as well (advantage at least in some projects is t=
-hat when it explicitly asking for
-> >>> foo and foo is unusable it will end with fatal error instead of ignor=
-ing broken foo dependency.
-> >>
-> >> No, those are auto-discover and only have disable options.
-> >
-> > Please add REQUIRED_DISTRO_FEATURES =3D "x11"
-> > because it depends on couple of recipes which aren't available without
-> > x11: xsp, libxv, virtual/libx11, libxscrnsaver
-> >
-> > and it should set LICENSE_FLAGS like libpostproc has to resolve:
-> > ERROR: Nothing PROVIDES 'libpostproc' (but meta-oe/meta-oe/recipes-mult=
-imedia/mplayer/mplayer2_git.bb DEPENDS on or otherwise requires it)
-> > ERROR: libpostproc was skipped: because it has a restricted license not=
- whitelisted in LICENSE_FLAGS_WHITELIST
->=20
-> Is there a way to make these conditional?  For example, you could build
-> without libpostproc and the result would not need the commercial license.
-> There may also be a way to build without X11, but I've not investigated
-> that yet.
+I'll get to testing it later today, but allegedly the address
+sanitizer and undefined behaviour sanitizer runtime libraries support
+more architectures now, so I'll need to look into turning them on for
+AArch64 at least.
 
-You have added postproc to default PACKAGECONFIG, I haven't tried if it
-works without it. The same for x11 related dependencies.
+>
+> -Khem
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-> >>> On Fri, Feb 13, 2015 at 1:54 AM, Gary Thomas <gary@mlbassoc.com <mail=
-to:gary@mlbassoc.com>> wrote:
-> >>>
-> >>>      mplayer2 no longer needs to be blacklisted as OE-core has moved
-> >>>      to libav_9.16.
-> >>>
-> >>>      [v2-v3] Also update build dependencies to quash QA warnings, usi=
-ng
-> >>>      PACKAGECONFIG for most optional features.
-> >>>
-> >>>      Signed-off-by: Gary Thomas <gary@mlbassoc.com <mailto:gary@mlbas=
-soc.com>>
-> >>>      ---
-> >>>        meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mpl=
-ayer2_git.bb> | 9 ++++++---
-> >>>        1 file changed, 6 insertions(+), 3 deletions(-)
-> >>>
-> >>>      diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb =
-<http://mplayer2_git.bb> b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.=
-bb <http://mplayer2_git.bb>
-> >>>      index 7c04ff1..2de26b0 100644
-> >>>      --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http:/=
-/mplayer2_git.bb>
-> >>>      +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http:/=
-/mplayer2_git.bb>
-> >>>      @@ -3,7 +3,7 @@ SECTION =3D "multimedia"
-> >>>        HOMEPAGE =3D "http://www.mplayerhq.hu/"
-> >>>        DEPENDS =3D "libvpx libdvdread libtheora virtual/libsdl ffmpeg=
- xsp zlib \
-> >>>                   libpng jpeg liba52 freetype fontconfig alsa-lib lzo=
- ncurses \
-> >>>      -           libxv virtual/libx11 libass speex faad2"
-> >>>      +           libxv virtual/libx11 libass speex faad2 libxscrnsave=
-r"
-> >>>
-> >>>        RDEPENDS_${PN} =3D "mplayer-common"
-> >>>        PROVIDES =3D "mplayer"
-> >>>      @@ -13,8 +13,6 @@ RCONFLICTS_${PN} =3D "mplayer"
-> >>>        LICENSE =3D "GPLv3"
-> >>>        LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd32239bcb673463ab87=
-4e80d47fae504"
-> >>>
-> >>>      -PNBLACKLIST[mplayer2] ?=3D "Requires newer libav which has nega=
-tive D_P"
-> >>>      -
-> >>>        SRC_URI =3D "git://repo.or.cz/mplayer.git <http://repo.or.cz/m=
-player.git> \
-> >>>            file://0001-configure-don-t-disable-ASS-support-when-expli=
-citly-.patch \
-> >>>        "
-> >>>      @@ -109,9 +107,14 @@ EXTRA_OECONF =3D " \
-> >>>        EXTRA_OECONF_append_armv6 =3D " --enable-armv6"
-> >>>        EXTRA_OECONF_append_armv7a =3D " --enable-armv6 --enable-neon"
-> >>>
-> >>>      +PACKAGECONFIG ??=3D "vorbis postproc"
-> >>>        PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
-> >>>        PACKAGECONFIG[a52] =3D "--enable-liba52,--disable-liba52,liba5=
-2"
-> >>>        PACKAGECONFIG[lame] =3D ",,lame"
-> >>>      +PACKAGECONFIG[postproc] =3D ",--disable-libpostproc,libpostproc"
-> >>>      +PACKAGECONFIG[vorbis] =3D ",--disable-libvorbis,libvorbis"
-> >>>      +PACKAGECONFIG[portaudio] =3D ",--disable-portaudio,portaudio-v1=
-9"
-> >>>      +PACKAGECONFIG[mpg123] =3D ",--disable-mpg123,mpg123"
-> >>>
-> >>>        FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-=
-pointer -frename-registers -O4 -ffast-math"
-> >>>        BUILD_OPTIMIZATION =3D "${FULL_OPTIMIZATION}"
-> >>>      --
-> >>>      1.9.1
-> >>>
-> >>>      --
-> >>>      _______________________________________________
-> >>>      Openembedded-devel mailing list
-> >>>      Openembedded-devel@lists.openembedded.org <mailto:Openembedded-d=
-evel@lists.openembedded.org>
-> >>>      http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>>
-> >>>
-> >>
-> >> --
-> >> ------------------------------------------------------------
-> >> Gary Thomas                 |  Consulting for the
-> >> MLB Associates              |    Embedded world
-> >> ------------------------------------------------------------
-> >
->=20
-> --=20
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---XjbSsFHOHxvQpKib
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlTnRdgACgkQN1Ujt2V2gBy+UwCguThSiKjEWEL75Pc7fOX6iWQW
-8SoAoLLRGkCCXvlz6GrA96Sa4Ljj8lc1
-=mYYr
------END PGP SIGNATURE-----
-
---XjbSsFHOHxvQpKib--
