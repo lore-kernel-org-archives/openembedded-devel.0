@@ -1,41 +1,31 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DD0373335
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 15:31:48 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id bs8so3709967wib.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 07:31:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=hZd2/OEUAKTq4YzhsL/Xx3ed8VD6NT63aXCoSWGnMUY=;
-	b=k5kBmt/atqhVjYZUyXi1K8PyVc3Oo0zlUukSKHZwmPXSjB0ft/xCTn0/hetTEvKC7u
-	VfH0LbLnaaYE3w0xtRyLk9UdGuprwrO7v8+5avq+MJwB+JUNeLTVfoaU4xBZrZZs5K/5
-	2Xd9xhWe/PmG/iW+Nd/ocafAtGN0fc4h1X5w0Bap66iFwh4qaBIoykzXRd0xHDgPwZt5
-	GPt8s8Fczq/QE/5o8MbvCy85d2f/FSaNnt+TSGZGayGmZmKSVM36pRBzLt/npSGyCku1
-	rY1kFFRgpC21kBBBaxDDxMmzFBN3yViAU98BOL4HcLRy36QgW5zCF5oUajrSRbf2puB0
-	Wgpg==
-X-Received: by 10.194.120.132 with SMTP id lc4mr20518264wjb.92.1424446309447; 
-	Fri, 20 Feb 2015 07:31:49 -0800 (PST)
-Received: from [192.168.50.198] (ip-84-119-96-251.unity-media.net.
-	[84.119.96.251])
-	by mx.google.com with ESMTPSA id m4sm42534624wjb.25.2015.02.20.07.31.48
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 20 Feb 2015 07:31:48 -0800 (PST)
-Message-ID: <54E75371.8030500@gmail.com>
-Date: Fri, 20 Feb 2015 16:32:01 +0100
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1424160094-5937-1-git-send-email-sven.ebenfeld@gmail.com>
-	<20150220134113.GD2322@jama>
-In-Reply-To: <20150220134113.GD2322@jama>
-Subject: Re: [meta-oe][PATCH v2] stunnel: Update to version 5.10
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 03B9171E68;
+	Fri, 20 Feb 2015 18:03:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1KI3N8R029760; Fri, 20 Feb 2015 18:03:23 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id FUafucRq-WOL; Fri, 20 Feb 2015 18:03:23 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t1KI37MX029707
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Fri, 20 Feb 2015 18:03:18 GMT
+Message-ID: <1424455387.11836.57.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 20 Feb 2015 18:03:07 +0000
+In-Reply-To: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+X-Mailer: Evolution 3.12.7-0ubuntu1 
+Mime-Version: 1.0
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,22 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 15:31:49 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Fri, 20 Feb 2015 18:03:26 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Am 20.02.2015 um 14:41 schrieb Martin Jansa:
->> +EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
->> +
->> +PACKAGECONFIG ??= "systemd"
+On Mon, 2015-02-02 at 02:02 -0800, Khem Raj wrote:
+> I have put together upgrade to gcc 4.9.2 as well as glibc 2.21 (
+> upcoming ) on  a contrib branch ( top 2 patches) its has not got much
+> testing besides x86 qemu thus far.
 > 
-> Please respect systemd in DISTRO_FEATURES, otherwise you cause this
-> error in "bitbake world"
-> ERROR: Nothing PROVIDES 'systemd' (but build/meta-oe/meta-networking/recipes-support/stunnel/stunnel_5.10.bb DEPENDS on or otherwise requires it)
-> ERROR: systemd was skipped: 'systemd' not in DISTRO_FEATURES
+> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-glibc-upgrade
 > 
+> I would like to request some help in testing these out in your
+> respective environments and please report any issues you see so we can
+> start sorting them out at earlier and making its way into OE-Core.
+> 
+> Thanks for your help
 
-I've sent an updated patch that considers if systemd is in DISTRO_FEATURES
+For info, I've now merged the glibc part of this change now too.
 
->> +PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
+Khem: Thanks for the work on this!
+
+Cheers,
+
+Richard
+
+
+
 
