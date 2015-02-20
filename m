@@ -1,39 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 277CE716CE
+Received: from mail-we0-f179.google.com (mail-we0-f179.google.com
+	[74.125.82.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D9088716CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 13:41:09 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id l18so13190065wgh.7
+	Fri, 20 Feb 2015 13:43:54 +0000 (UTC)
+Received: by wevl61 with SMTP id l61so1541524wev.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 05:41:10 -0800 (PST)
+	Fri, 20 Feb 2015 05:43:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=qrqbYYhAGBqmLUgK9WAFtyXRBrhuxJ8VM78ZlGIpc80=;
-	b=cMoKPXknh6ObXyu7Oj9RVYJVUPhDvAjGbHc3dHBgZTKLskFx9wfWO3T3WnpozNs/OZ
-	tGaxWGk5cVdv9FhkYJjgpGGaEU2vhO5FHenhE5WU1SLvuMpS19tkiPulOqLZaDCMBYXj
-	NDtdO/nzC3jRmhFRNzp0WWFceu3swoV+Zhp/hkd/svBnj4eeeaMaGpY11ho7t2uICiSt
-	JqyhQ7nQ3fUKjvI86ouwwC2dGx55M/w3zchZCrTP82EsjJvBlLdPlbT5r4HhVYw5I8ay
-	gPl7JaUyoF7mODHSLMxVYcDlJOcfuilFF1bb//QAXjCGIxWFNHkX0/4ca0+WzR3/Y4fU
-	jlIA==
-X-Received: by 10.194.61.51 with SMTP id m19mr19119653wjr.39.1424439670109;
-	Fri, 20 Feb 2015 05:41:10 -0800 (PST)
+	bh=B0J1EDUMjnYRiE4QQQib4UYGQ42m0yOkM3oYsm5IHow=;
+	b=QUKsjw257MET4XikwjThw+Dz2a7m1pkZH8ApbfvFfFaViFzPTk1fCQQCSUWa4eEO9t
+	iLKfGB/WnVVB+mYCZgzxGa4n1euGbaEQZheGBxlW3qrLtUnV7dDHzcrQD7rB777qQw/m
+	wETEllJie/kens3mL/KIumcBFuJazUCgd/9vAr8m3rqomLAtEavEZjp3DNyTag71mOkH
+	YcBm2nBTLYIlmFXIvU2UCSk1Z7TM3vcZijRMBOWruPsz1INTd9cmftJ/jHn+EExCpPc/
+	75zwEPNjimLZD3YXIeurcvgfyfi68I9p5ZPT2fAOW7Jk7DcUJc84/EQWhwCM3/IlW6Dp
+	Z/Pw==
+X-Received: by 10.194.75.193 with SMTP id e1mr18790077wjw.126.1424439834997;
+	Fri, 20 Feb 2015 05:43:54 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	fs8sm2456692wib.8.2015.02.20.05.41.08
-	for <openembedded-devel@lists.openembedded.org>
+	fs8sm2467228wib.8.2015.02.20.05.43.54
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 20 Feb 2015 05:41:09 -0800 (PST)
+	Fri, 20 Feb 2015 05:43:54 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 20 Feb 2015 14:41:13 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150220134113.GD2322@jama>
-References: <1424160094-5937-1-git-send-email-sven.ebenfeld@gmail.com>
+Date: Fri, 20 Feb 2015 14:43:58 +0100
+To: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <20150220134358.GE2322@jama>
+References: <1423788858-16687-1-git-send-email-gary@mlbassoc.com>
+	<CA+chaQdfVy4bdE+-Yq7YakQ9pYnSkDLEGiqxAsVnkq7rP26KrA@mail.gmail.com>
+	<54DD5AED.9050707@mlbassoc.com>
 MIME-Version: 1.0
-In-Reply-To: <1424160094-5937-1-git-send-email-sven.ebenfeld@gmail.com>
+In-Reply-To: <54DD5AED.9050707@mlbassoc.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2] stunnel: Update to version 5.10
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3] mplayer2: Remove blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,118 +50,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 13:41:13 -0000
-X-Groupsio-MsgNum: 54428
+X-List-Received-Date: Fri, 20 Feb 2015 13:43:55 -0000
+X-Groupsio-MsgNum: 54429
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="d8Lz2Tf5e5STOWUP"
+	protocol="application/pgp-signature"; boundary="B0nZA57HJSoPbsHY"
 Content-Disposition: inline
 
---d8Lz2Tf5e5STOWUP
+--B0nZA57HJSoPbsHY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 17, 2015 at 09:01:34AM +0100, Sven Ebenfeld wrote:
-> Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-> ---
->  .../recipes-support/stunnel/stunnel_4.56.bb          | 17 --------------=
----
->  .../recipes-support/stunnel/stunnel_5.10.bb          | 20 ++++++++++++++=
-++++++
->  2 files changed, 20 insertions(+), 17 deletions(-)
->  delete mode 100644 meta-networking/recipes-support/stunnel/stunnel_4.56.=
-bb
->  create mode 100644 meta-networking/recipes-support/stunnel/stunnel_5.10.=
-bb
+On Thu, Feb 12, 2015 at 07:01:17PM -0700, Gary Thomas wrote:
+> On 2015-02-12 18:08, Martin Jansa wrote:
+> > Does it have --enable-* options for the new PACKAGECONFIGs? If yes then=
+ it should specify them as well (advantage at least in some projects is tha=
+t when it explicitly asking for
+> > foo and foo is unusable it will end with fatal error instead of ignorin=
+g broken foo dependency.
 >=20
-> diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/me=
-ta-networking/recipes-support/stunnel/stunnel_4.56.bb
-> deleted file mode 100644
-> index 74f2234..0000000
-> --- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -SUMMARY =3D "Program for providing universal TLS/SSL tunneling service"
-> -DESCRIPTION =3D "SSL encryption wrapper between remote client and local =
-(inetd-startable) or remote server."
-> -SECTION =3D "net"
-> -LICENSE =3D "GPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df41ebed8571077706fee0b860c4d6=
-666"
-> -DEPENDS =3D "openssl zlib tcp-wrappers"
-> -
-> -RDEPENDS_${PN} +=3D "perl"
-> -
-> -SRC_URI =3D "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz"
-> -
-> -SRC_URI[md5sum] =3D "ac4c4a30bd7a55b6687cbd62d864054c"
-> -SRC_URI[sha256sum] =3D "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec=
-8d2778a01c871293"
-> -
-> -inherit autotools
-> -
-> -EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_EXECPREFIXDIR}' --disable-fip=
-s"
-> diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.10.bb b/me=
-ta-networking/recipes-support/stunnel/stunnel_5.10.bb
-> new file mode 100644
-> index 0000000..5a24523
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/stunnel/stunnel_5.10.bb
-> @@ -0,0 +1,20 @@
-> +SUMMARY =3D "Program for providing universal TLS/SSL tunneling service"
-> +DESCRIPTION =3D "SSL encryption wrapper between remote client and local =
-(inetd-startable) or remote server."
-> +SECTION =3D "net"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D866cdc7459d91e092b174388fab8d=
-283"
-> +DEPENDS =3D "openssl zlib tcp-wrappers"
-> +
-> +RDEPENDS_${PN} +=3D "perl"
-> +
-> +SRC_URI =3D "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz"
-> +
-> +SRC_URI[md5sum] =3D "a0edda805eb7d6ea600a230fb0979ea1"
-> +SRC_URI[sha256sum] =3D "032bfc1854f8a0b9e452343c36ec6b52c7e0daef0863423c=
-6b13a61a7c92eb23"
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF +=3D "--with-ssl=3D'${STAGING_EXECPREFIXDIR}' --disable-fip=
-s"
-> +
-> +PACKAGECONFIG ??=3D "systemd"
+> No, those are auto-discover and only have disable options.
 
-Please respect systemd in DISTRO_FEATURES, otherwise you cause this
-error in "bitbake world"
-ERROR: Nothing PROVIDES 'systemd' (but build/meta-oe/meta-networking/recipe=
-s-support/stunnel/stunnel_5.10.bb DEPENDS on or otherwise requires it)
-ERROR: systemd was skipped: 'systemd' not in DISTRO_FEATURES
+Please add REQUIRED_DISTRO_FEATURES =3D "x11"
+because it depends on couple of recipes which aren't available without
+x11: xsp, libxv, virtual/libx11, libxscrnsaver
 
-> +PACKAGECONFIG[systemd] =3D "--enable-systemd,--disable-systemd,systemd"
-> --=20
-> 1.8.1.rc3
+and it should set LICENSE_FLAGS like libpostproc has to resolve:
+ERROR: Nothing PROVIDES 'libpostproc' (but meta-oe/meta-oe/recipes-multimed=
+ia/mplayer/mplayer2_git.bb DEPENDS on or otherwise requires it)
+ERROR: libpostproc was skipped: because it has a restricted license not whi=
+telisted in LICENSE_FLAGS_WHITELIST
+
+> > On Fri, Feb 13, 2015 at 1:54 AM, Gary Thomas <gary@mlbassoc.com <mailto=
+:gary@mlbassoc.com>> wrote:
+> >
+> >     mplayer2 no longer needs to be blacklisted as OE-core has moved
+> >     to libav_9.16.
+> >
+> >     [v2-v3] Also update build dependencies to quash QA warnings, using
+> >     PACKAGECONFIG for most optional features.
+> >
+> >     Signed-off-by: Gary Thomas <gary@mlbassoc.com <mailto:gary@mlbassoc=
+=2Ecom>>
+> >     ---
+> >       meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mplaye=
+r2_git.bb> | 9 ++++++---
+> >       1 file changed, 6 insertions(+), 3 deletions(-)
+> >
+> >     diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <ht=
+tp://mplayer2_git.bb> b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb =
+<http://mplayer2_git.bb>
+> >     index 7c04ff1..2de26b0 100644
+> >     --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mp=
+layer2_git.bb>
+> >     +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb <http://mp=
+layer2_git.bb>
+> >     @@ -3,7 +3,7 @@ SECTION =3D "multimedia"
+> >       HOMEPAGE =3D "http://www.mplayerhq.hu/"
+> >       DEPENDS =3D "libvpx libdvdread libtheora virtual/libsdl ffmpeg xs=
+p zlib \
+> >                  libpng jpeg liba52 freetype fontconfig alsa-lib lzo nc=
+urses \
+> >     -           libxv virtual/libx11 libass speex faad2"
+> >     +           libxv virtual/libx11 libass speex faad2 libxscrnsaver"
+> >
+> >       RDEPENDS_${PN} =3D "mplayer-common"
+> >       PROVIDES =3D "mplayer"
+> >     @@ -13,8 +13,6 @@ RCONFLICTS_${PN} =3D "mplayer"
+> >       LICENSE =3D "GPLv3"
+> >       LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd32239bcb673463ab874e8=
+0d47fae504"
+> >
+> >     -PNBLACKLIST[mplayer2] ?=3D "Requires newer libav which has negativ=
+e D_P"
+> >     -
+> >       SRC_URI =3D "git://repo.or.cz/mplayer.git <http://repo.or.cz/mpla=
+yer.git> \
+> >           file://0001-configure-don-t-disable-ASS-support-when-explicit=
+ly-.patch \
+> >       "
+> >     @@ -109,9 +107,14 @@ EXTRA_OECONF =3D " \
+> >       EXTRA_OECONF_append_armv6 =3D " --enable-armv6"
+> >       EXTRA_OECONF_append_armv7a =3D " --enable-armv6 --enable-neon"
+> >
+> >     +PACKAGECONFIG ??=3D "vorbis postproc"
+> >       PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
+> >       PACKAGECONFIG[a52] =3D "--enable-liba52,--disable-liba52,liba52"
+> >       PACKAGECONFIG[lame] =3D ",,lame"
+> >     +PACKAGECONFIG[postproc] =3D ",--disable-libpostproc,libpostproc"
+> >     +PACKAGECONFIG[vorbis] =3D ",--disable-libvorbis,libvorbis"
+> >     +PACKAGECONFIG[portaudio] =3D ",--disable-portaudio,portaudio-v19"
+> >     +PACKAGECONFIG[mpg123] =3D ",--disable-mpg123,mpg123"
+> >
+> >       FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-poi=
+nter -frename-registers -O4 -ffast-math"
+> >       BUILD_OPTIMIZATION =3D "${FULL_OPTIMIZATION}"
+> >     --
+> >     1.9.1
+> >
+> >     --
+> >     _______________________________________________
+> >     Openembedded-devel mailing list
+> >     Openembedded-devel@lists.openembedded.org <mailto:Openembedded-deve=
+l@lists.openembedded.org>
+> >     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
 >=20
 > --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> ------------------------------------------------------------
+> Gary Thomas                 |  Consulting for the
+> MLB Associates              |    Embedded world
+> ------------------------------------------------------------
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---d8Lz2Tf5e5STOWUP
+--B0nZA57HJSoPbsHY
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlTnOXkACgkQN1Ujt2V2gBwtnwCgkhh3ifL9vFsVXFK9SpXCHvY/
-OyMAn1ZxI3o5h6KKwbm+lQFYgZgkldrC
-=v9Z7
+iEYEARECAAYFAlTnOh4ACgkQN1Ujt2V2gBxS9ACeOnHDdR8gfDl54f+t2j09K47o
+bEAAn3rTfaVSPEV/jPpM4KJVSQPBf/kp
+=9pDt
 -----END PGP SIGNATURE-----
 
---d8Lz2Tf5e5STOWUP--
+--B0nZA57HJSoPbsHY--
