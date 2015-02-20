@@ -1,35 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id B9C8B73613
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 519C473613
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 08:21:17 +0000 (UTC)
-Received: by mail-wi0-f175.google.com with SMTP id r20so1222785wiv.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 00:21:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=wZhfeqqunwBqMGPZwnicnID0yc0O1GzVMtaRjHX9gcU=;
-	b=PYGkZ7IeAr2ajq8ai+wnyR0nKKqkxB1GMGIhP9c8oBo/6fpUxX8MwZ9mnZCA0cjdzz
-	dRuFsp0wtziB1FdsgQgOTDhv14ikPxu2PaY0cicVplGjQXTMrIwrREVsQrOwxk82UMot
-	f+vbkvQDLan7ctUYTfyG2v+w4fKyDwATnJ24DbOlnOF5NG8EL53Yk2W9TKG8TniOD+Qx
-	UX7hnENzBnl+unI/t4245D8ANGNichiteN7yqLgnj40HMohPrgbpLa38roYpB8XmhKoY
-	yZJ6kxdQNgZ118KN40MxFEVkSsSLUKkIpaLZ90HBTDRKFOWse0550CXZv8bU3WuM28qw
-	+rew==
-X-Received: by 10.194.77.230 with SMTP id v6mr16776558wjw.25.1424420477686;
-	Fri, 20 Feb 2015 00:21:17 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fo8sm1257279wib.14.2015.02.20.00.21.16
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 20 Feb 2015 00:21:16 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Feb 2015 09:21:17 +0100
-Message-Id: <1424420477-30493-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.3.0
-Subject: [meta-initramfs][PATCH] linux-yocto-tiny-kexecboot: remove 3.10, 3.17 and add 3.19
+	Fri, 20 Feb 2015 09:43:53 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga102.fm.intel.com with ESMTP; 20 Feb 2015 01:43:53 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.09,613,1418112000"; d="scan'208";a="457168889"
+Received: from marazel-mobl2.ger.corp.intel.com (HELO
+	peggleto-mobl5.ger.corp.intel.com) ([10.252.23.180])
+	by FMSMGA003.fm.intel.com with ESMTP; 20 Feb 2015 01:28:41 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Tom King <ka6sox@gmail.com>
+Date: Fri, 20 Feb 2015 09:43:52 +0000
+Message-ID: <1771492.7bYYpQOHjy@peggleto-mobl5.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.4 (Linux/3.18.6-100.fc20.x86_64; KDE/4.14.4; x86_64; ; )
+In-Reply-To: <37480247.FvVHZhi4X8@peggleto-mobl5.ger.corp.intel.com>
+References: <DA8287CC96892A4EB4FCF4FB3FBDA1AB0D86B1@dor-sms-xch01.digi.com>
+	<3777411.pG0mYOicST@peggleto-mobl5.ger.corp.intel.com>
+	<37480247.FvVHZhi4X8@peggleto-mobl5.ger.corp.intel.com>
+MIME-Version: 1.0
+Cc: "Viguera, Javier" <Javier.Viguera@digi.com>,
+	openembedded-devel@lists.openembedded.org, scerveau <scerveau@voxtok.com>
+Subject: Re: [meta-networking] crda-1.1.3 broken in dylan, dora, daisy and dizzy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,64 +37,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 08:21:17 -0000
+X-List-Received-Date: Fri, 20 Feb 2015 09:43:58 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-* 3.10 and 3.17 were removed in oe-core and parsing fails because of the require line
+On Monday 16 February 2015 13:24:50 Paul Eggleton wrote:
+> On Friday 30 January 2015 17:23:55 Paul Eggleton wrote:
+> > On Friday 30 January 2015 16:51:22 Viguera, Javier wrote:
+> > > Seems that CRDA maintainers did some changes that broke the fetch of the
+> > > package for all those releases.
+> > > 
+> > > These are the URIs in the package recipe:
+> > > 
+> > > http://wireless.kernel.org/download/crda/crda-1.1.3.tar.bz2
+> > > http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.
+> > > 01
+> > > .1 1-regulatory.bin
+> > > 
+> > > The correct ones are:
+> > > 
+> > > https://www.kernel.org/pub/software/network/crda/crda-1.1.3.tar.bz2
+> > > https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regd
+> > > b-> > 20 13.01.11.tar.bz2
+> > > 
+> > > Notice that they not only changed the address but also now the
+> > > regulatory
+> > > binary is packed in a tarball.
+> > > 
+> > > So at this point there are two options here:
+> > > 
+> > > 1. Rework the recipe with the new locations, checksums and adapting the
+> > > 'do_install' to copy the regulatory binary from a different directory.
+> > > This
+> > > has to be done for all the releases in the subject.
+> > > 
+> > > 2. Just put the 'crda-1.1.3.tar.bz2' and '2013.01.11-regulatory.bin' in
+> > > the
+> > > openembedded mirror and let all the old releases work without changes in
+> > > the recipes.
+> > > 
+> > > My preference is number 2, along with an upgrade of the package to the
+> > > new
+> > > version 3.13 for the not-yet-released 'master' branch (there is
+> > > currently
+> > > a
+> > > patch for that in the mailing list).
+> > 
+> > I agree, #2 is the best option to take care of the older branches.
+> > 
+> > Tom, can you please fetch the following files and add them to the OE
+> > source
+> > 
+> > mirror:
+> >   http://distfiles.lesslinux.org/crda-1.1.3.tar.bz2
+> >   http://distfiles.lesslinux.org/2013.01.11-regulatory.bin
+> > 
+> > I've verified the md5sums match the recipe:
+> >   29579185e06a75675507527243d28e5c  crda-1.1.3.tar.bz2
+> >   e0c8a5ca63fb8bf803213f9a0c90b50b  2013.01.11-regulatory.bin
+> 
+> Tom could you please upload these files? People are still stumbling over
+> this problem.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../linux/linux-yocto-tiny-kexecboot_3.17.bb       | 26 ----------------------
- ..._3.10.bb => linux-yocto-tiny-kexecboot_3.19.bb} |  2 +-
- 2 files changed, 1 insertion(+), 27 deletions(-)
- delete mode 100644 meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb
- rename meta-initramfs/recipes-kernel/linux/{linux-yocto-tiny-kexecboot_3.10.bb => linux-yocto-tiny-kexecboot_3.19.bb} (93%)
+ping?
 
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb
-deleted file mode 100644
-index f3296c7..0000000
---- a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--require recipes-kernel/linux/linux-yocto-tiny_3.17.bb
--SUMMARY = "Yocto tiny kernel embedding a minimalistic kexecboot initramfs"
--
--PACKAGES = ""
--PROVIDES = ""
--
--KERNEL_IMAGE_BASE_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${MACHINE}"
--KERNEL_IMAGE_SYMLINK_NAME = "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}"
--
--INITRAMFS_IMAGE = "initramfs-kexecboot-klibc-image"
--INITRAMFS_TASK = "${INITRAMFS_IMAGE}:do_rootfs"
--
--# disable unneeded tasks
--do_install[noexec] = "1"
--do_package[noexec] = "1"
--do_package_qa[noexec] = "1"
--do_packagedata[noexec] = "1"
--do_package_deb[noexec] = "1"
--do_package_ipk[noexec] = "1"
--do_package_rpm[noexec] = "1"
--do_package_tar[noexec] = "1"
--do_package_write_deb[noexec] = "1"
--do_package_write_ipk[noexec] = "1"
--do_package_write_rpm[noexec] = "1"
--do_package_write_tar[noexec] = "1"
--do_populate_sysroot[noexec] = "1"
-diff --git a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb
-similarity index 93%
-rename from meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-rename to meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb
-index a823e0f..f6d2fa0 100644
---- a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-+++ b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb
-@@ -1,4 +1,4 @@
--require recipes-kernel/linux/linux-yocto-tiny_3.10.bb
-+require recipes-kernel/linux/linux-yocto-tiny_${PV}.bb
- SUMMARY = "Yocto tiny kernel embedding a minimalistic kexecboot initramfs"
- 
- PACKAGES = ""
 -- 
-2.3.0
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
