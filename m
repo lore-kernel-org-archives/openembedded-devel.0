@@ -1,33 +1,41 @@
 Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id C360073335
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DD0373335
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 15:30:25 +0000 (UTC)
-Received: by mail-wg0-f48.google.com with SMTP id l18so13781638wgh.7
+	Fri, 20 Feb 2015 15:31:48 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id bs8so3709967wib.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Feb 2015 07:30:27 -0800 (PST)
+	Fri, 20 Feb 2015 07:31:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=sMd+oIMdNvM2EvjQIaILnYRH10NKfhIhClZkxJ5iVPo=;
-	b=Po5sKoaVh5m1b6/iLmjPfyTe58FvoeC9jPRfpWRcSnuNBvJaLBRcZPLkuL9GeyzM32
-	UYQzJtvNtQYOHA9SJOfV959+5S+N1s2zEBUuP61fyjNYQ5ehN647vZZt0u2+2259e+G7
-	XopGF9Tqp+BwDlAyNVGgXgeRK5/EKk6ZBUg4mgTdnCyezOW9oN/uXhuDQFzqPf9lLPk9
-	PjTDngCHl3j3D23XiK5B7GRd/4JhPR7YaXUDykrnXoGVcfSTCtAsQal18PFUPRs6g6Ws
-	K/UxhvAYQQ7lbesy2iOjKUgoH3Oi9VB6w3YAd0+0/5UBfYJ2ifI/s+8CfW/dPwCccAMx
-	Zpqw==
-X-Received: by 10.194.48.74 with SMTP id j10mr20611256wjn.38.1424446227080;
-	Fri, 20 Feb 2015 07:30:27 -0800 (PST)
-Received: from localhost.localdomain (ip-84-119-96-251.unity-media.net.
-	[84.119.96.251]) by mx.google.com with ESMTPSA id
-	lg18sm2808307wic.23.2015.02.20.07.30.25
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=hZd2/OEUAKTq4YzhsL/Xx3ed8VD6NT63aXCoSWGnMUY=;
+	b=k5kBmt/atqhVjYZUyXi1K8PyVc3Oo0zlUukSKHZwmPXSjB0ft/xCTn0/hetTEvKC7u
+	VfH0LbLnaaYE3w0xtRyLk9UdGuprwrO7v8+5avq+MJwB+JUNeLTVfoaU4xBZrZZs5K/5
+	2Xd9xhWe/PmG/iW+Nd/ocafAtGN0fc4h1X5w0Bap66iFwh4qaBIoykzXRd0xHDgPwZt5
+	GPt8s8Fczq/QE/5o8MbvCy85d2f/FSaNnt+TSGZGayGmZmKSVM36pRBzLt/npSGyCku1
+	rY1kFFRgpC21kBBBaxDDxMmzFBN3yViAU98BOL4HcLRy36QgW5zCF5oUajrSRbf2puB0
+	Wgpg==
+X-Received: by 10.194.120.132 with SMTP id lc4mr20518264wjb.92.1424446309447; 
+	Fri, 20 Feb 2015 07:31:49 -0800 (PST)
+Received: from [192.168.50.198] (ip-84-119-96-251.unity-media.net.
+	[84.119.96.251])
+	by mx.google.com with ESMTPSA id m4sm42534624wjb.25.2015.02.20.07.31.48
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 20 Feb 2015 07:30:26 -0800 (PST)
+	Fri, 20 Feb 2015 07:31:48 -0800 (PST)
+Message-ID: <54E75371.8030500@gmail.com>
+Date: Fri, 20 Feb 2015 16:32:01 +0100
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Feb 2015 16:29:13 +0100
-Message-Id: <1424446153-36118-1-git-send-email-sven.ebenfeld@gmail.com>
-X-Mailer: git-send-email 1.9.3
-Subject: [meta-oe][PATCH v3] stunnel: Update to version 5.10
+References: <1424160094-5937-1-git-send-email-sven.ebenfeld@gmail.com>
+	<20150220134113.GD2322@jama>
+In-Reply-To: <20150220134113.GD2322@jama>
+Subject: Re: [meta-oe][PATCH v2] stunnel: Update to version 5.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,42 +49,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Feb 2015 15:30:31 -0000
+X-List-Received-Date: Fri, 20 Feb 2015 15:31:49 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
----
- meta-networking/recipes-support/stunnel/stunnel_4.56.bb | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+Am 20.02.2015 um 14:41 schrieb Martin Jansa:
+>> +EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
+>> +
+>> +PACKAGECONFIG ??= "systemd"
+> 
+> Please respect systemd in DISTRO_FEATURES, otherwise you cause this
+> error in "bitbake world"
+> ERROR: Nothing PROVIDES 'systemd' (but build/meta-oe/meta-networking/recipes-support/stunnel/stunnel_5.10.bb DEPENDS on or otherwise requires it)
+> ERROR: systemd was skipped: 'systemd' not in DISTRO_FEATURES
+> 
 
-diff --git a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb b/meta-networking/recipes-support/stunnel/stunnel_5.10.bb
-index 74f2234..5753198 100644
---- a/meta-networking/recipes-support/stunnel/stunnel_4.56.bb
-+++ b/meta-networking/recipes-support/stunnel/stunnel_5.10.bb
-@@ -2,16 +2,19 @@ SUMMARY = "Program for providing universal TLS/SSL tunneling service"
- DESCRIPTION = "SSL encryption wrapper between remote client and local (inetd-startable) or remote server."
- SECTION = "net"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=f41ebed8571077706fee0b860c4d6666"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=866cdc7459d91e092b174388fab8d283"
- DEPENDS = "openssl zlib tcp-wrappers"
- 
- RDEPENDS_${PN} += "perl"
- 
--SRC_URI = "https://www.stunnel.org/downloads/archive/4.x/${BP}.tar.gz"
-+SRC_URI = "ftp://ftp.stunnel.org/stunnel/archive/5.x/${BP}.tar.gz"
- 
--SRC_URI[md5sum] = "ac4c4a30bd7a55b6687cbd62d864054c"
--SRC_URI[sha256sum] = "9cae2cfbe26d87443398ce50d7d5db54e5ea363889d5d2ec8d2778a01c871293"
-+SRC_URI[md5sum] = "a0edda805eb7d6ea600a230fb0979ea1"
-+SRC_URI[sha256sum] = "032bfc1854f8a0b9e452343c36ec6b52c7e0daef0863423c6b13a61a7c92eb23"
- 
- inherit autotools
- 
- EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
-+
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','',d)}"
-+PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
--- 
-1.9.3
+I've sent an updated patch that considers if systemd is in DISTRO_FEATURES
 
+>> +PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 
