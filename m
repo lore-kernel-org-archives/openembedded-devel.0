@@ -1,40 +1,46 @@
-Return-Path: <openembedded-devel@urbanec.net>
-X-Greylist: delayed 659 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 21 Feb 2015 00:40:01 UTC
-Received: from mail16.tpgi.com.au (smtp-out16.tpgi.com.au [220.244.226.126])
-	by mail.openembedded.org (Postfix) with ESMTP id F3261606E8
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Feb 2015 00:40:01 +0000 (UTC)
-X-TPG-Junk-Status: Message not scanned
-X-TPG-Antivirus: Passed
-X-TPG-Abuse: host=60-242-171-118.static.tpgi.com.au; ip=60.242.171.118;
-	date=Sat, 21 Feb 2015 11:27:07 +1100
-Received: from gw.urbanec.net (60-242-171-118.static.tpgi.com.au
-	[60.242.171.118])
-	by mail16.tpgi.com.au (envelope-from openembedded-devel@urbanec.net)
-	(8.14.3/8.14.3) with ESMTP id t1L0R44X028262
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=NO);
-	Sat, 21 Feb 2015 11:27:07 +1100
-Received: from beep.urbanec.net ([192.168.42.2]) by gw.urbanec.net with esmtpsa
-	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.84)
-	(envelope-from <openembedded-devel@urbanec.net>)
-	id 1YOxuS-0007mk-9V; Sat, 21 Feb 2015 11:27:04 +1100
-Message-ID: <54E7D0D8.2060900@urbanec.net>
-Date: Sat, 21 Feb 2015 11:27:04 +1100
-From: Peter Urbanec <openembedded-devel@urbanec.net>
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-we0-f170.google.com (mail-we0-f170.google.com
+	[74.125.82.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 90AD0606E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Feb 2015 08:34:10 +0000 (UTC)
+Received: by wesw55 with SMTP id w55so9484594wes.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Feb 2015 00:34:11 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=h4Rfe/BrOJm4kWFpgt9LBkLQb2xOXnRbfO0m/AdwVGY=;
+	b=hhYQ5GnyfQSzewWExafrlSUKRfbnjk3phpBP6KylquLbc7sZs2Z5G8GY2uBxRO9og0
+	+FzEyvetNy+ZMdPh2qNms3ejydRIT42wWAIKRXMZy+FgMJ3ii3vDA0q8JEB0TNEnrAH8
+	9Ierwwh258DybswerR/4c5nzeqjbb0J1c5g6FuQkjPachyhAtBUMtBNiRroc05LD7HOR
+	hHPY5U5g9+MADtEhtRP/A9VNvFaEoxynw6yA+VgNxYo0F3vNBL38GvRKyAt87mCygdM6
+	1x0TI4Xmf0Ukj6/AculbOY927PlnNqRVebdlFMiMwTo2ZtLgRxN5JYDPoYhcE3VOyJYN
+	3/Xw==
+X-Gm-Message-State: ALoCoQm+wwCZcPuJDj8LNwJ4i/NjfkX+FmLn2szDGLHLONbk07WGh8Xa9M2628Nf+jJHJP6KmDYy
+X-Received: by 10.194.240.164 with SMTP id wb4mr2903924wjc.66.1424507651663;
+	Sat, 21 Feb 2015 00:34:11 -0800 (PST)
+Received: from mobil-400-586.internal.dresearch-fe.de
+	([2001:bf0:c080:403:1919:390:da5d:b887])
+	by mx.google.com with ESMTPSA id v7sm45666897wju.22.2015.02.21.00.34.09
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 21 Feb 2015 00:34:10 -0800 (PST)
+Message-ID: <54E84300.8070808@dresearch-fe.de>
+Date: Sat, 21 Feb 2015 09:34:08 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-To: Richard Purdie <richard.purdie@linuxfoundation.org>,
-	Khem Raj <raj.khem@gmail.com>
-References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
-	<1424455387.11836.57.camel@linuxfoundation.org>
-In-Reply-To: <1424455387.11836.57.camel@linuxfoundation.org>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
+To: openembedded-devel@lists.openembedded.org, 
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>, 
+	Jackie Huang <jackie.huang@windriver.com>, Chen Qi <Qi.Chen@windriver.com>
+References: <1423846960-4749-1-git-send-email-sledz@dresearch-fe.de>
+	<1424111855-22867-1-git-send-email-sledz@dresearch-fe.de>
+In-Reply-To: <1424111855-22867-1-git-send-email-sledz@dresearch-fe.de>
+Subject: Re: [meta-oe][PATCH v2] rsyslog: fix name of syslogd ua group
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +54,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Feb 2015 00:40:03 -0000
+X-List-Received-Date: Sat, 21 Feb 2015 08:34:12 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 21/02/15 05:03, Richard Purdie wrote:
-> On Mon, 2015-02-02 at 02:02 -0800, Khem Raj wrote:
->> I have put together upgrade to gcc 4.9.2 as well as glibc 2.21 (
-...
-> For info, I've now merged the glibc part of this change now too.
+On 16.02.2015 19:37, Steffen Sledz wrote:
+> All the other syslogd implementations use 'syslogd' as update alternatives
+> group name. So rsyslogd should use this too.
+> 
+> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+> ---
+>  meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+> index 422def3..5ab6a30 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
+> @@ -127,10 +127,10 @@ INITSCRIPT_PARAMS = "defaults"
+>  # higher than sysklogd's 100
+>  ALTERNATIVE_PRIORITY = "110"
+>  
+> -ALTERNATIVE_${PN} = "rsyslogd syslog-conf syslog-logrotate"
+> +ALTERNATIVE_${PN} = "syslogd syslog-conf syslog-logrotate"
+>  
+> -ALTERNATIVE_LINK_NAME[rsyslogd] = "${base_sbindir}/syslogd"
+> -ALTERNATIVE_TARGET[rsyslogd] = "${sbindir}/rsyslogd"
+> +ALTERNATIVE_LINK_NAME[syslogd] = "${base_sbindir}/syslogd"
+> +ALTERNATIVE_TARGET[syslogd] = "${sbindir}/rsyslogd"
+>  ALTERNATIVE_LINK_NAME[syslog-conf] = "${sysconfdir}/syslog.conf"
+>  ALTERNATIVE_TARGET[syslog-conf] = "${sysconfdir}/rsyslog.conf"
+>  ALTERNATIVE_LINK_NAME[syslog-logrotate] = "${sysconfdir}/logrotate.d/syslog"
 
-It looks like the new glibc turns all gcc warnings into errors. That does not seem to work too well in all cases:
+Ping!
 
-| mipsel-oe-linux-gcc -mel -mabi=32 -mhard-float --sysroot=/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/sysroots/inihdp-tcbootstrap pthread_equal.c -c -std=gnu99 -fgnu89-inline  -Os -Wall -Werror -Winline -Wno-error=undef -Wundef -Wwrite-strings -feliminate-unused-debug-types -fmerge-all-constants -frounding-math -g -pipe -Wstrict-prototypes   -fPIC        -I../include -I/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/nptl  -I/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux  -I../sysdeps/unix/sysv/linux/mips/mips32/fpu  -I../sysdeps/unix/sysv/linux/mips/mips32  -I../sysdeps/unix/sysv/linux/mips  -I../sysdeps/mips/nptl  -I../sysdeps/unix/sysv/linux/include -I../sysdeps/unix/sysv/linux  -I../sysdeps/nptl  -I../sysdeps/pthread  -I../sysdeps/gnu  -I../!
- sysdeps/un
-ix/inet  -I../sysdeps/unix/sysv  -I../sysdeps/unix/mips/mips32  -I../sysdeps/unix/mips  -I../sysdeps/unix  -I../sysdeps/posix  -I../sysdeps/mips/mips32/fpu  -I../sysdeps/mips/mips32  -I../sysdeps/mips/ieee754  -I../sysdeps/mips/soft-fp  -I../sysdeps/mips/include -I../sysdeps/mips  -I../sysdeps/ieee754/flt-32  -I../sysdeps/ieee754/dbl-64  -I../sysdeps/wordsize-32  -I../sysdeps/mips/fpu  -I../sysdeps/ieee754  -I../sysdeps/generic  -I.. -I../libio -I. -nostdinc -isystem /home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/sysroots/x86_64-linux/usr/lib/mipsel-oe-linux.gcc-cross-initial-mipsel/gcc/mipsel-oe-linux/4.9.2/include -isystem /home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/sysroots/x86_64-linux/usr/lib/mipsel-oe-linux.gcc-cross-initial-mipsel/gcc/mipsel-oe-linux/4.9.2/include-fixed -isystem /home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/sysroots/inihdp/usr/include  -D_LIBC_REE!
- NTRANT -in
-clude /home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/libc-modules.h -DMODULE_NAME=libpthread -include ../include/libc-symbols.h  -DPIC -DSHARED     -o /home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/nptl/pthread_equal.os -MD -MP -MF /home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/nptl/pthread_equal.os.dt -MT /home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/nptl/pthread_equal.os
-| In file included from allocatestack.c:30:0,
-|                  from pthread_create.c:55:
-| allocatestack.c: In function 'stack_list_add':
-| ../include/list.h:58:1: error: inlining failed in call to 'list_add': call is unlikely and code size would grow [-Werror=inline]
-|  list_add (list_t *newp, list_t *head)
-|  ^
-| In file included from pthread_create.c:55:0:
-| allocatestack.c:159:3: error: called from here [-Werror=inline]
-|    list_add (elem, list);
-|    ^
+Something wrong with this patch? I think it fixes an obvious bug.
 
+Regards,
+Steffen
+
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
