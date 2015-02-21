@@ -1,36 +1,36 @@
 Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-we0-f171.google.com (mail-we0-f171.google.com
-	[74.125.82.171])
-	by mail.openembedded.org (Postfix) with ESMTP id ADFB771637
+Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
+	[74.125.82.173])
+	by mail.openembedded.org (Postfix) with ESMTP id CA857732B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Feb 2015 09:52:49 +0000 (UTC)
-Received: by wevk48 with SMTP id k48so9676304wev.3
+	Sat, 21 Feb 2015 09:52:51 +0000 (UTC)
+Received: by wesx3 with SMTP id x3so9653196wes.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Feb 2015 01:52:50 -0800 (PST)
+	Sat, 21 Feb 2015 01:52:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Km/Nw9MxOE1V/yPxQCC9t36BP5fDLvVv+CDp335pY64=;
-	b=PQquqlK/qlzs64wCudkIQ2PFjsBokfiwHtldiF4wneWjJhcMIE1+mh5Jbju1LaX8PN
-	WkuMD2aVcCmcki1I3j1EoC0P8lGfeGbMFFlXaoz+A8q9OxFvd4XHGZm9CLg4iWqvqrmT
-	vL9xrcYtudDleGq3qYkDH3uLrNvxLLVywjpqUtWTAmDIEFPGYcD2Z2axeSDxTs91hLGv
-	c3iBFIDR6vxlqDfpqmCiR9uN5DqgPOUV44H2bgapOMl6MVRrhw1IF5j/9g0nSByZ6elS
-	dfNo/QRuxzhhITBehkkPiEq+HqvJdn/UZMisq5RmELscEfXJ3i5yGRg2UkQ//IHj+xyo
-	lS8Q==
-X-Received: by 10.194.178.161 with SMTP id cz1mr3463373wjc.102.1424512370256; 
-	Sat, 21 Feb 2015 01:52:50 -0800 (PST)
+	bh=Y5ur0KseAItcT0Jew+Ho+t/ESTz2DPcy7JfABB+QOho=;
+	b=AUK3sGrvfvMqbuIgVMBkPx1BVsOvNJODEq8nKcMWVoZa3EpUutvG5JNVAOuOCApgHM
+	GDlf7RA258kX87lNUGNzmjg7shP7LmAwxIeGyV3eNcZY6yR5ICGT289yY1MF7mcywSmf
+	KQjCpD2+F5LrshkAqI+FWn/v087rSiX18Jzj+/pTkMPB3RuoUlqHtkLqTr8KznrcxzJx
+	JShzbKYMYhr8CivA040iOnnr/ijjhEL8RvOg1QhN0gSQ10FjQjlSMLkJc2PqHc0A8aJn
+	qlzYmUxbgmS6CZ8Ixl+YJrMo90JHWaCJCxfH79giDY1PJ6pqOxUe0h+rS7V2wBmjs13G
+	IlEA==
+X-Received: by 10.180.75.132 with SMTP id c4mr2665431wiw.78.1424512372800;
+	Sat, 21 Feb 2015 01:52:52 -0800 (PST)
 Received: from localhost.localdomain (ip-84-119-96-251.unity-media.net.
 	[84.119.96.251])
-	by mx.google.com with ESMTPSA id dm6sm6232120wib.22.2015.02.21.01.52.48
+	by mx.google.com with ESMTPSA id dm6sm6232120wib.22.2015.02.21.01.52.51
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Feb 2015 01:52:49 -0800 (PST)
+	Sat, 21 Feb 2015 01:52:52 -0800 (PST)
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Feb 2015 10:52:09 +0100
-Message-Id: <1424512336-47007-2-git-send-email-sven.ebenfeld@gmail.com>
+Date: Sat, 21 Feb 2015 10:52:11 +0100
+Message-Id: <1424512336-47007-4-git-send-email-sven.ebenfeld@gmail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1424512336-47007-1-git-send-email-sven.ebenfeld@gmail.com>
 References: <1424512336-47007-1-git-send-email-sven.ebenfeld@gmail.com>
-Subject: [meta-oe][PATCH 1/7] lightmediascanner: Fix SRC_URI
+Subject: [meta-oe][PATCH 3/7] libgee: Update to Version 0.16.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,34 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Feb 2015 09:52:51 -0000
+X-List-Received-Date: Sat, 21 Feb 2015 09:52:52 -0000
 
-Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 ---
- .../lightmediascanner/lightmediascanner_0.4.4.bb                  | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb | 10 ++++++++++
+ meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb  | 10 ----------
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb
+ delete mode 100644 meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb
 
-diff --git a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-index a50563a..4ed3664 100644
---- a/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-+++ b/meta-efl/recipes-multimedia/lightmediascanner/lightmediascanner_0.4.4.bb
-@@ -8,12 +8,12 @@ DEPENDS = "sqlite3 flac virtual/libiconv"
- 
- PR = "r2"
- 
--SRC_URI = "http://git.profusion.mobi/cgit.cgi/lightmediascanner.git/snapshot/release_${PV}.tar.bz2 \
-+SRC_URI = "https://github.com/profusion/lightmediascanner/archive/release_${PV}.tar.gz \
- "
--SRC_URI[md5sum] = "f423376a70f8f321af69b12563b176fe"
--SRC_URI[sha256sum] = "302a7f6cc355467cd20332f4e02c8b87ba6c0c7a6818a6a987e007aace19b41e"
-+SRC_URI[md5sum] = "0c758d40eb70288a2c714dfb44c35171"
-+SRC_URI[sha256sum] = "1bbc28fbe5efbc24aa4eac9e43bbb178a1669de1418afee47b0c6898aff53433"
- 
--S = "${WORKDIR}/release_${PV}"
-+S = "${WORKDIR}/lightmediascanner-release_${PV}"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[ogg] = "--enable-ogg,--disable-ogg,libvorbis"
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb b/meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb
+new file mode 100644
+index 0000000..b761b26
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb
+@@ -0,0 +1,10 @@
++require libgee.inc
++PE = "1"
++PR = "${INC_PR}.2"
++DEPENDS += "gobject-introspection-stub"
++DEPENDS_virtclass-native += "gobject-introspection-stub-native"
++
++SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
++SRC_URI[md5sum] = "d30cf203784431b0fdc3216b1acd999c"
++SRC_URI[sha256sum] = "d95f8ea8e78f843c71b1958fa2fb445e4a325e4821ec23d0d5108d8170e564a5"
+diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb b/meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb
+deleted file mode 100644
+index fbd1466..0000000
+--- a/meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require libgee.inc
+-PE = "1"
+-PR = "${INC_PR}.2"
+-DEPENDS += "gobject-introspection-stub"
+-DEPENDS_virtclass-native += "gobject-introspection-stub-native"
+-
+-SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libgee/${SHRT_VER}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "a32bf498cf33d5e3417823a7b252ad22"
+-SRC_URI[sha256sum] = "55f39f3b28e676f6cbd9377d83edd031084436a4da41280a9503c94faffb1665"
 -- 
 1.9.3
 
