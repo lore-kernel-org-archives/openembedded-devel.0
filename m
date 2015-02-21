@@ -1,36 +1,36 @@
 Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F247606E8
+Received: from mail-we0-f175.google.com (mail-we0-f175.google.com
+	[74.125.82.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E793606E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Feb 2015 09:52:54 +0000 (UTC)
-Received: by mail-wi0-f180.google.com with SMTP id h11so7502899wiw.1
+	Sat, 21 Feb 2015 09:52:55 +0000 (UTC)
+Received: by wesq59 with SMTP id q59so9709393wes.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Feb 2015 01:52:55 -0800 (PST)
+	Sat, 21 Feb 2015 01:52:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=6jv7Qk8DWxJ/FXxi96tnchsB+ts6EheJrJOkjKc+eqk=;
-	b=PZ6yfOfNyvcyTXn7ehder4C9WHIFmSq0h9qtLWrO+kYjbE8hhWb2PMd0prY0uxhU4S
-	uy6+6+4KQVy17/M70y/lEaw2AHEQKLqQVk+9GHGiqVEJKogwe7EeZKpnHRXcNtbRHs4c
-	GA/wEEwvrBV4LXvrbWfz+ogG9+XwkdHuKYtTNzWSAD5HJzmW1g+/8vUqDrqOdwp9ApMU
-	ewswjYujlBwzb2bELxNJzuRGGmbt5qq1dawaPisPdCxewcBoO4uBpzCxfDGz/YwT0R4N
-	3Jbz5/WPPu4st283yl2MCUAbdT5ncnLn/dXhZmDsJJ30JE3OJ5epil1aZoIAw4fe9lBs
-	stdQ==
-X-Received: by 10.180.77.40 with SMTP id p8mr2698272wiw.53.1424512375448;
-	Sat, 21 Feb 2015 01:52:55 -0800 (PST)
+	bh=Ymu88C7saXh9vWgrJZwjPHBIW9wMQI4uuHGUxQTL2FU=;
+	b=ntiKBIS0/L0+xQAWQZ9t4xROxjWfuyizEUlQlagiN2fEjx4AAKSK5BjLHbTf6dPULk
+	VL0JaJtt/UJ8CBDQ11DVMUITQMMbe/90RnWebz9Oxw5kkpExjZp+5zZL9XgLsshnpCn1
+	soCFEfOFofM1m1GiXHkvqvm1S/2URGLHZt+vtLnGU0DLtyH8gRT+hnJ+EBhgE10YjBHc
+	/S5CLfBcTJ3Aofdoik0N3UM3XC6aJ6yXuW++Mfx2v4d5hWY9rBk1QSN0XFf7Byrt7KqD
+	EGlEdhP7N+C/kJd/dCIAvOIGp0psE9MnOfBFHONsyfVHuVZAZy0ZHfxY9czcP+cSOhCT
+	pdNA==
+X-Received: by 10.194.200.1 with SMTP id jo1mr3359291wjc.64.1424512377008;
+	Sat, 21 Feb 2015 01:52:57 -0800 (PST)
 Received: from localhost.localdomain (ip-84-119-96-251.unity-media.net.
 	[84.119.96.251])
-	by mx.google.com with ESMTPSA id dm6sm6232120wib.22.2015.02.21.01.52.54
+	by mx.google.com with ESMTPSA id dm6sm6232120wib.22.2015.02.21.01.52.55
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Feb 2015 01:52:54 -0800 (PST)
+	Sat, 21 Feb 2015 01:52:56 -0800 (PST)
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Feb 2015 10:52:13 +0100
-Message-Id: <1424512336-47007-6-git-send-email-sven.ebenfeld@gmail.com>
+Date: Sat, 21 Feb 2015 10:52:14 +0100
+Message-Id: <1424512336-47007-7-git-send-email-sven.ebenfeld@gmail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1424512336-47007-1-git-send-email-sven.ebenfeld@gmail.com>
 References: <1424512336-47007-1-git-send-email-sven.ebenfeld@gmail.com>
-Subject: [meta-oe][PATCH 5/7] vala-dbus-binding-tool: Update to 0.4.1 and fix SRC_URI
+Subject: [meta-oe][PATCH 6/7] claws-mail: Fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,50 +48,22 @@ X-List-Received-Date: Sat, 21 Feb 2015 09:52:57 -0000
 
 Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 ---
- .../vala-dbus-binding-tool/vala-dbus-binding-tool.inc                 | 4 +++-
- .../vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.0.bb            | 4 ----
- .../vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.1.bb            | 4 ++++
- 3 files changed, 7 insertions(+), 5 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.0.bb
- create mode 100644 meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.1.bb
+ meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
-index 7c8e341..976c087 100644
---- a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
-+++ b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
-@@ -9,8 +9,10 @@ INC_PR = "r3"
+diff --git a/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb b/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb
+index a8bee71..1f61c39 100644
+--- a/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb
++++ b/meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb
+@@ -9,7 +9,7 @@ inherit autotools pkgconfig gettext
  
- export XDG_DATA_DIRS = "${STAGING_DATADIR}"
+ # translation patch: http://www.thewildbeast.co.uk/claws-mail/bugzilla/show_bug.cgi?id=1774
+ SRC_URI = "\
+-        ${SOURCEFORGE_MIRROR}/sylpheed-claws/claws-mail-${PV}.tar.bz2;name=archive "
++        ${SOURCEFORGE_MIRROR}/project/claws-mail/Claws%20Mail/${PV}/claws-mail-${PV}.tar.bz2;name=archive "
+ SRC_URI[archive.md5sum] = "4c5ac7b21f0ed17d0f6404124c2229a4"
+ SRC_URI[archive.sha256sum] = "ed70975a5056b3ffc4fe6e977f0d9606febc1499763c090241b029a73ff24e65"
  
--SRC_URI = "http://downloads.freesmartphone.org/sources/${BPN}/${BP}.tar.bz2;name=archive"
-+SRC_URI = "https://github.com/freesmartphone/vala-dbus-binding-tool/archive/vdbt-${PV}.tar.gz;name=archive"
- 
- inherit autotools perlnative pkgconfig
- 
- BBCLASSEXTEND = "native"
-+
-+S = "${WORKDIR}/vala-dbus-binding-tool-vdbt-${PV}"
-\ No newline at end of file
-diff --git a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.0.bb b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.0.bb
-deleted file mode 100644
-index 3473971..0000000
---- a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.0.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require vala-dbus-binding-tool.inc
--
--SRC_URI[archive.md5sum] = "b7537a087f9f468e25170e81df0ed93f"
--SRC_URI[archive.sha256sum] = "6b0d3796e92b031839e2e2f484e294153ad9eaf9d32915056199a49ce8328722"
-diff --git a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.1.bb b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.1.bb
-new file mode 100644
-index 0000000..c51298b
---- /dev/null
-+++ b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_0.4.1.bb
-@@ -0,0 +1,4 @@
-+require vala-dbus-binding-tool.inc
-+
-+SRC_URI[archive.md5sum] = "76540eb575bef04d4250166208c0bb5b"
-+SRC_URI[archive.sha256sum] = "656e8fedaac7ab783bbe4bcfb3584c785998792136d8e3fd83e4956613a6e728"
 -- 
 1.9.3
 
