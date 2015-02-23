@@ -1,32 +1,40 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D34F706B3
+Return-Path: <sven.ebenfeld@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id E051C706B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Feb 2015 19:29:45 +0000 (UTC)
-Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
-	by relay1.mentorg.com with esmtp 
-	id 1YPyhO-0005an-Qn from Joe_MacDonald@mentor.com ;
-	Mon, 23 Feb 2015 11:29:46 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 23 Feb 2015 11:29:46 -0800
-Received: by burninator (Postfix, from userid 1000)	id 4AE56582837; Mon, 23
-	Feb 2015 14:29:50 -0500 (EST)
-Date: Mon, 23 Feb 2015 14:29:50 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Bian Naimeng <biannm@cn.fujitsu.com>
-Message-ID: <20150223192949.GB8949@mentor.com>
-References: <1424073156-18834-1-git-send-email-biannm@cn.fujitsu.com>
-	<1424073156-18834-3-git-send-email-biannm@cn.fujitsu.com>
-	<20150223191307.GA8949@mentor.com>
+	Mon, 23 Feb 2015 19:49:48 +0000 (UTC)
+Received: by wghl18 with SMTP id l18so948991wgh.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Feb 2015 11:49:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=SagT/hF2d8PIJAszGzK9Nliq6Mfkx+2iPktR3qfXwOw=;
+	b=joEZxgd3esvjO75QK6AE6kJDa69U6pvTW6poGAfSMWteQ2FGxPB8HHrZY2OOyLY6xv
+	huQ2d4vJm671jkVad/52dexaXcP0mX41KDCSgkeTlNwZzecgGIT/2jKFiAu9sontSSip
+	D16ASvloThFUo/Eb4/1Yxen7Zhf3CaDhGB2TJp3JGAyDLmQVP4NX7puyEiHkgKD71SRE
+	FQNcc/63w1wgmKPzQWrsgJ14cslPNOT6AnyFq9bdBDrgEC9TySbXDRrikqTEEtYHUR9y
+	j3RlAi3OSb68K9VEUz3lkZikMoq//KNvJcOujOuB0/lLk9g9Bht4dUQPeAXpfcGXTwqZ
+	H3NQ==
+X-Received: by 10.180.76.133 with SMTP id k5mr23725943wiw.30.1424720989171;
+	Mon, 23 Feb 2015 11:49:49 -0800 (PST)
+Received: from [192.168.50.198] (ip-84-119-96-251.unity-media.net.
+	[84.119.96.251]) by mx.google.com with ESMTPSA id
+	pp10sm56969442wjc.31.2015.02.23.11.49.47
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 23 Feb 2015 11:49:48 -0800 (PST)
+Message-ID: <54EB846E.9090304@gmail.com>
+Date: Mon, 23 Feb 2015 20:50:06 +0100
+From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-In-Reply-To: <20150223191307.GA8949@mentor.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v2 2/2] postfix: fix bug of main.cf_2.0
+To: Sven Ebenfeld <sven.ebenfeld@gmail.com>, 
+	openembedded-devel@lists.openembedded.org
+References: <1424512336-47007-1-git-send-email-sven.ebenfeld@gmail.com>
+	<1424512336-47007-3-git-send-email-sven.ebenfeld@gmail.com>
+In-Reply-To: <1424512336-47007-3-git-send-email-sven.ebenfeld@gmail.com>
+Subject: Re: [meta-oe][PATCH 2/7] crda: Fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,85 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Feb 2015 19:29:46 -0000
-X-Groupsio-MsgNum: 54464
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WYTEVAkct0FjGQmd"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Feb 2015 19:49:49 -0000
+Content-Type: text/plain; charset=iso-8859-15
+Content-Transfer-Encoding: 7bit
 
---WYTEVAkct0FjGQmd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please don't hesitate about trying this patch as crda just got updated.
 
-[Re: [oe] [meta-networking][PATCH v2 2/2] postfix: fix bug of main.cf_2.0] =
-On 15.02.23 (Mon 14:13) Joe MacDonald wrote:
+Am 21.02.2015 um 10:52 schrieb Sven Ebenfeld:
+> Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+> ---
+>  meta-networking/recipes-connectivity/crda/crda_1.1.3.bb | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
+> index 0bb8998..5b86058 100644
+> --- a/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
+> +++ b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
+> @@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
+>  
+>  DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
+>  
+> -SRC_URI = "http://wireless.kernel.org/download/crda/${BP}.tar.bz2;name=crda \
+> -           http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.11-regulatory.bin;name=bin \
+> +SRC_URI = "https://www.kernel.org/pub/software/network/${PN}/${BP}.tar.bz2;name=crda \
+> +           https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2013.01.11.tar.bz2;name=bin \
+>  "
+>  SRC_URI[crda.md5sum] = "29579185e06a75675507527243d28e5c"
+>  SRC_URI[crda.sha256sum] = "aa8a7fe92f0765986c421a5b6768a185375ac210393df0605ee132f6754825f0"
+> -SRC_URI[bin.md5sum] = "e0c8a5ca63fb8bf803213f9a0c90b50b"
+> -SRC_URI[bin.sha256sum] = "b1ee0b20c123c612dfdb6851ab42c01666f66fb583e0e590942f19bb54cf84be"
+> +SRC_URI[bin.md5sum] = "f137585abd5e07454932ea555b826149"
+> +SRC_URI[bin.sha256sum] = "6eb469555eb547b22738ce7bf59ebba42138560f128085a5e238eb6c8075792e"
+>  
+>  inherit python-dir pythonnative
+>  # Recursive make problem
+> @@ -28,7 +28,7 @@ do_install() {
+>  
+>      install -d ${D}${libdir}/crda/
+>  
+> -    install -m 0644 ${WORKDIR}/2013.01.11-regulatory.bin ${D}${libdir}/crda/regulatory.bin
+> +    install -m 0644 ${WORKDIR}/wireless-regdb-2013.01.11/regulatory.bin ${D}${libdir}/crda/regulatory.bin
+>  }
+>  
+>  
+> 
 
-> Hi Bian,
->=20
-> I merged the other postfix change, but this one I'm less sure about.  Is
-> this actually incorrect?  The standard place to install postfix is in
-> /usr/libexec and that seems to be where we install it as well.
-
-Okay, I've just confirmed that this is the current location after all,
-I'll merge this as well.  Thanks.
-
--J.
-
->=20
-> -J.
->=20
-> [[oe] [meta-networking][PATCH v2 2/2] postfix: fix bug of main.cf_2.0] On=
- 15.02.16 (Mon 15:52) Bian Naimeng wrote:
->=20
-> >  ${exec_prefix}/libexec/${PN} =3D> ${libexecdir}
-> >=20
-> > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> > ---
-> >  meta-networking/recipes-daemons/postfix/files/main.cf_2.0 | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0 =
-b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-> > index bb31451..9e1077f 100644
-> > --- a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-> > +++ b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-> > @@ -30,7 +30,7 @@ queue_directory =3D /var/spool/postfix
-> >  mail_spool_directory =3D /var/spool/mail
-> >  readme_directory =3D no
-> >  command_directory =3D /usr/sbin
-> > -daemon_directory =3D /usr/libexec/postfix
-> > +daemon_directory =3D /usr/lib/postfix
-> >  mail_owner =3D postfix
-> >  setgid_group =3D postdrop
-> >  unknown_local_recipient_reject_code =3D 450
-> > --=20
-> > 1.9.1
-> >=20
-> --=20
-> -Joe MacDonald.
-> :wq
-
-
-
---=20
--Joe MacDonald.
-:wq
-
---WYTEVAkct0FjGQmd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJU63+tAAoJEEn8ffcsOfaWpjMH/0Qa4opZs2SqbkbUpZOb96QN
-JQFshRwsAm5Xu1rAtfjDAF9g0n9gB91ZfZY7lHAuaX+aLuibsLbb0u7GwyNFKj+B
-xRxRvWtlcRKvJK7cAtr+xk0WobT88YDZGTXB3G1gWEeBOrMrkc1U/a77RrQayQ4k
-QczQFO19OC20dF4srBTeUxHQU7qyTJrNzP5+ZGmwslaLWCDkt+TbtMjibRnJZGnK
-W48MSnALO7Yaf4GQTI00oMeeORO+cYQA0j7GwacC+LqIQCWnmWRavE+oPINLT8Ba
-vove3mrOW2M+jdw54rgwbv02FTfEez4Ozf1KfaEpbQwEyYD98RiadHKFD7fEFLk=
-=iSnz
------END PGP SIGNATURE-----
-
---WYTEVAkct0FjGQmd--
