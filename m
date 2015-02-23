@@ -1,38 +1,42 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
-	[209.85.220.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 56F54606E8
+Return-Path: <Daniel.MONDON@lpgsystems.com>
+Received: from antispam.lpg.priv (mail.lpgsystems.com [46.18.228.1])
+	by mail.openembedded.org (Postfix) with ESMTP id 05FD4706B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Feb 2015 21:20:06 +0000 (UTC)
-Received: by padbj1 with SMTP id bj1so22399023pad.5
+	Mon, 23 Feb 2015 10:49:05 +0000 (UTC)
+Received: from SEXCHANGE0100.lpg.priv (unknown [10.1.1.25])
+	by antispam.lpg.priv (mail.lpgsystems.com) with ESMTP id 30A521A7390
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Feb 2015 13:20:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=8pq2W51q897eBS2TtVqNbBwIsrwDeJlVJHC10coJFvU=;
-	b=s4fZGGHV7M81EM5pSzFuyzpEugynaQkSKussGPH1JwZbUJx+NlDtUsKJlOeOy/ZyU8
-	Q4JXGZrOeOf6CAzPNT4K+0d++r8iVbM4LjEGNRV9cxtnz6Jq3OgdTdQCNBAPHk5KtieW
-	4a6BhWq1uOigAMidk3MiR0Olu/Ci3LfdKg5dzDltvULc1AEyxMyTgkp/EtLPr9yRPR3D
-	VN5ZbDW4YF4EbuVYdMtcXITiFb/b5exiwtVcrWDl65AuJ4cGlhj48hhGXUDCUX9eFQNR
-	AfAehxmcyBjOw6zgNIBGaDr6mVfuJ/QLE8FXfySBVi3xFz3l7oWhdaAcLLuJ1SxBOE5d
-	G/sQ==
-MIME-Version: 1.0
-X-Received: by 10.70.101.225 with SMTP id fj1mr13832187pdb.69.1424640007754;
-	Sun, 22 Feb 2015 13:20:07 -0800 (PST)
-Received: by 10.70.36.36 with HTTP; Sun, 22 Feb 2015 13:20:07 -0800 (PST)
-In-Reply-To: <CAK8F28nFL+h-YSRo+ydn1+_OsytChTco7UPD9aHMNSjaO36Z-g@mail.gmail.com>
-References: <1424621742-17713-1-git-send-email-ashcharles@gmail.com>
-	<CALbNGRR1Q_JOMPPWR21-Y0WmQGTA=r8TRDuSfRwUUsV-yh11Xw@mail.gmail.com>
-	<CAK8F28nFL+h-YSRo+ydn1+_OsytChTco7UPD9aHMNSjaO36Z-g@mail.gmail.com>
-Date: Sun, 22 Feb 2015 22:20:07 +0100
-Message-ID: <CALbNGRTLC3TRDDOkce6VTGaiwKmKtO=PCuXJOZ7EyDMzq=X=Og@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Ash Charles <ashcharles@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
+	Mon, 23 Feb 2015 11:49:05 +0100 (CET)
+Received: from SEXCHANGE0100.lpg.priv ([::1]) by SEXCHANGE0100.lpg.priv
+	([::1]) with mapi id 14.03.0224.002; Mon, 23 Feb 2015 11:49:05 +0100
+From: MONDON Daniel <Daniel.MONDON@lpgsystems.com>
+To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] xfce4-session: Make package MACHINE specific
+Thread-Topic: [oe] package icedtea6-native-1.8.11-r5.3: task do_compile:
+	Failed : solved!
+Thread-Index: AQHQT1ZX8lf9sNQcdEKInyhnj88XGg==
+Date: Mon, 23 Feb 2015 10:49:04 +0000
+Message-ID: <F48900D76F0D8349918584FEEFEB4BCA062A1370@SEXCHANGE0100.lpg.priv>
+References: <1423810919-9857-1-git-send-email-schnitzeltony@googlemail.com>
+	<1423810919-9857-19-git-send-email-schnitzeltony@googlemail.com>
+	<F48900D76F0D8349918584FEEFEB4BCA0629F403@SEXCHANGE0100.lpg.priv>
+	<20150213094951.GA14290@mail.itconsulting-heinold.de>
+	<F48900D76F0D8349918584FEEFEB4BCA0629F481@SEXCHANGE0100.lpg.priv>
+	<1423823635.2285.5.camel@Saturn.local.all>
+	<F48900D76F0D8349918584FEEFEB4BCA062A05E9@SEXCHANGE0100.lpg.priv>
+	<20150218145609.GD23103@mail.itconsulting-heinold.de>
+In-Reply-To: <20150218145609.GD23103@mail.itconsulting-heinold.de>
+Accept-Language: fr-FR, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.5.31]
+MIME-Version: 1.0
+X-DRWEB-SCAN: ok
+X-VRSPAM-SCORE: 0
+X-VRSPAM-STATE: legit
+X-VRSPAM-CAUSE: gggruggvucftvghtrhhoucdtuddrfeejledrudekgddvudcutefuodetggdotefrucfrrhhofhhilhgvmecuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedttdenucenucfjughrpefhvffuthffkfhfjghitgfgggesthhqtddttddtudenucfhrhhomhepoffqpfffqffpucffrghnihgvlhcuoeffrghnihgvlhdroffqpfffqffpsehlphhgshihshhtvghmshdrtghomheqnecuffhomhgrihhnpeihohgtthhophhrohhjvggtthdrohhrghdphihotghothhophhrohhjvggtthdrohhrghdpohhpvghnvghmsggvugguvggurdhorhhg
+X-VRSPAM-EXTCAUSE: mhhouggvpehsmhhtphhouhht
+Subject: Re: package icedtea6-native-1.8.11-r5.3: task do_compile:	Failed : solved!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,25 +50,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Feb 2015 21:20:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Feb 2015 10:49:09 -0000
+Content-Language: fr-FR
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 22, 2015 at 9:48 PM, Ash Charles <ashcharles@gmail.com> wrote:
-> Hi Andreas,
->
-> Good question.  I just tried removing it and didn't see an error when
-> building the package but it is not clear if this was trying to deal
-> with a runtime or build-time error.  Do you happen to remember?  I
-> tracked through the commit history but I think this has been in the
-> recipe since it was first added.
->
-> --Ash
+Hi,
 
-It is a runtime error: When you start XFCE a error/warning pops up
-telling something <MachineName> missing. I can't remember exactly. I
-even don't know if this error comes up once on first start or on every
-start. Could you give that a try? Maybe this quirk is no more
-required.
+Both cases are running!
+:)
 
-Andreas
+- Changing date allow to go to the end of generation (if time is not update=
+d during compilation).
+
+- Icedtea6 and openjdk6 patched with today date=20
+
+Thanks
+Regards
+Daniel.
+
+-----Message d'origine-----
+De=A0: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
+ed-devel-bounces@lists.openembedded.org] De la part de Henning Heinold
+Envoy=E9=A0: mercredi 18 f=E9vrier 2015 15:56
+=C0=A0: openembedded-devel@lists.openembedded.org
+Objet=A0: Re: [oe] package icedtea6-native-1.8.11-r5.3: task do_compile: Fa=
+iled
+
+On Wed, Feb 18, 2015 at 02:14:10PM +0000, MONDON Daniel wrote:
+> Hi,
+>=20
+> I've got same problem compiling my old openembedded Angstromv2012.05 with=
+ changing server date.
+> Not on icedtea6-native-1.8.11, but openjdk-6-native.
+> I'm checking actually for a date change solution : full compilation is st=
+ill running (restarted from scratch : more than 12h)
+>=20
+>=20
+> Checking the new git://git.yoctoproject.org/meta-java as said Henning !
+> Impossible to move to dependencies due to distribution customisation (too=
+ many work and no success guaranty!).
+>=20
+>=20
+> Can't I just have a patch, or simply changing sources where this test is =
+done (changing test or dates values) ?
+>=20
+> Thanks,
+> Daniel.
+>=20
+
+git.yocotoproject.org has web frontend so have a look at
+
+http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/commit/?id=3D58c5f41799=
+bec30a5576137d5477e8ba14a0a802
+
+Bye Henning
+--=20
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
