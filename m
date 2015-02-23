@@ -1,34 +1,38 @@
 Return-Path: <ashcharles@gmail.com>
-Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 93394706B3
+Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
+	[209.85.213.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AFAC706B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Feb 2015 16:40:53 +0000 (UTC)
-Received: by pdno5 with SMTP id o5so26582051pdn.8
+	Mon, 23 Feb 2015 16:44:48 +0000 (UTC)
+Received: by mail-ig0-f171.google.com with SMTP id h15so19542450igd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Feb 2015 08:40:54 -0800 (PST)
+	Mon, 23 Feb 2015 08:44:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=5RMl2r7U9tj4uYDRuKw8TtLUZJvqSRVK9kfFVmtUwVM=;
-	b=BttTjup65tjJNQ7Axim5nv0cQPePVCnQ32a+hR5hfjFCSuKieX3JoD+IBAd+Mu834u
-	6YHnjek+IuCAJBhY+RtMZnG2/nJDc6jUxkBVFAo7Kf4iQ9bSHf6eLoivnqW3Z4DU5Awq
-	3QggWSeQ9cYkAvukn3zyGtZl2n9Wdk6NS3gAp7511x35VIsvhi46J+uK3xI9ov6Ef0QJ
-	FwWuBID8VXtETz1qmEgzWlWFp5qANoW/r/AYXVHpjt7s0HmNfTfPMFzlHw0xSaaBlqO7
-	3UDQCDyWmqjzENW2AiA/RvwqG/gQRhNoZ7W1vCx3gO7VeddnsuwdY6Dm8upXYiG0G1cx
-	Hu5Q==
-X-Received: by 10.68.242.229 with SMTP id wt5mr20623521pbc.25.1424709654504;
-	Mon, 23 Feb 2015 08:40:54 -0800 (PST)
-Received: from gumstux.bc.hsia.telus.net (s206-116-3-180.bc.hsia.telus.net.
-	[206.116.3.180])
-	by mx.google.com with ESMTPSA id x1sm8570245pdl.51.2015.02.23.08.40.53
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 23 Feb 2015 08:40:54 -0800 (PST)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=sUNl6brhAzKXQ2z+V2pZarBYjj6EHf9Nq1e0ZiiQHdU=;
+	b=v2gFZ8+WY5uFfEQFKvygeL2V+smN9JiZ2vUu2lCRjW/hvpD4Jub8/41hqeeXjSyfPB
+	n69DJI26l8a4qjwHGGlQ5CtMIgTFJbMNw3r0qAFbt4Ih0T+WKRDmwxYN5BjG3EcRAsUZ
+	VHTTFHJM1gTTvQIHvtJFTuG01PpGVlm2pibKndDH0Zpl68XpBGDGHjCwcUBBklljKabf
+	lZUq7PDHseKZTVidYzHaoKqqgPA3IKdhsFJsvN7ELYljWukyGmR8IHJAzU9OmTC7YGJR
+	4niHyB3QadrHtGO+FxfnrlEVd3UL5o+OQG+oc3rb/w2hydG779dIe60QEJiOez6nUx44
+	JSyA==
+X-Received: by 10.43.88.8 with SMTP id ay8mr12434534icc.52.1424709889285; Mon,
+	23 Feb 2015 08:44:49 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.18.92 with HTTP; Mon, 23 Feb 2015 08:44:19 -0800 (PST)
+In-Reply-To: <CALbNGRTLC3TRDDOkce6VTGaiwKmKtO=PCuXJOZ7EyDMzq=X=Og@mail.gmail.com>
+References: <1424621742-17713-1-git-send-email-ashcharles@gmail.com>
+	<CALbNGRR1Q_JOMPPWR21-Y0WmQGTA=r8TRDuSfRwUUsV-yh11Xw@mail.gmail.com>
+	<CAK8F28nFL+h-YSRo+ydn1+_OsytChTco7UPD9aHMNSjaO36Z-g@mail.gmail.com>
+	<CALbNGRTLC3TRDDOkce6VTGaiwKmKtO=PCuXJOZ7EyDMzq=X=Og@mail.gmail.com>
 From: Ash Charles <ashcharles@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Feb 2015 08:40:53 -0800
-Message-Id: <1424709653-10906-1-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [PATCH] xfce4-session: Remove unneeded pkg_postinst
+Date: Mon, 23 Feb 2015 08:44:19 -0800
+Message-ID: <CAK8F28nX4QY8_Z+_MpiaRN-3yE9J+wA6W+RS=d++o3zgQY7yCQ@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] xfce4-session: Make package MACHINE specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,38 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Feb 2015 16:40:56 -0000
+X-List-Received-Date: Mon, 23 Feb 2015 16:44:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The pkg_postinst inherited from previous versions of this recipe no
-longer seems necessary; no error message seen at runtime in a quick
-test.  As it made the generated packages unnecessarily
-machine-specific, remove this post-install step. Based on the ensuring
-discussion, this supersedes the original patch [1].
+On Sun, Feb 22, 2015 at 1:20 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+>
+> It is a runtime error: When you start XFCE a error/warning pops up
+> telling something <MachineName> missing. I can't remember exactly. I
+> even don't know if this error comes up once on first start or on every
+> start. Could you give that a try? Maybe this quirk is no more
+> required.
+I tested it out this morning on an Overo but didn't see the error
+message even without the pkg_postinst.  As such, I sent a new patch
+"xfce4-session: Remove unneeded pkg_postinst" (sorry, forgot to thread
+it here) instead---the patch on this thread should be dropped.
 
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2015-February/100454.html
-
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
----
- meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb | 5 -----
- 1 file changed, 5 deletions(-)
-
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-index 74289fb..aa82a7c 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-@@ -17,11 +17,6 @@ ALTERNATIVE_${PN} = "x-session-manager"
- ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
- ALTERNATIVE_PRIORITY_${PN} = "100"
- 
--# protect from frightening message that xfce might not work correctly
--pkg_postinst_${PN} () {
--    echo 127.0.0.1    ${MACHINE} >> /etc/hosts
--}
--
- PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
- PACKAGECONFIG[systemd] = "--enable-systemd, --disable-systemd, polkit, systemd"
- PACKAGECONFIG[consolekit] = ",,,consolekit"
--- 
-2.1.0
-
+--Ash
 
