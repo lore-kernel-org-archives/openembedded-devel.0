@@ -1,35 +1,43 @@
-Return-Path: <henry.bruce@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id E9C5C724E4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2015 06:37:22 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga102.jf.intel.com with ESMTP; 23 Feb 2015 22:33:06 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.09,637,1418112000"; 
-	d="scan'208,217";a="670631284"
-Received: from orsmsx102.amr.corp.intel.com ([10.22.225.129])
-	by fmsmga001.fm.intel.com with ESMTP; 23 Feb 2015 22:37:22 -0800
-Received: from orsmsx155.amr.corp.intel.com (10.22.240.21) by
-	ORSMSX102.amr.corp.intel.com (10.22.225.129) with Microsoft SMTP Server
-	(TLS) id 14.3.195.1; Mon, 23 Feb 2015 22:37:22 -0800
-Received: from orsmsx104.amr.corp.intel.com ([169.254.3.113]) by
-	ORSMSX155.amr.corp.intel.com ([169.254.7.16]) with mapi id
-	14.03.0195.001; Mon, 23 Feb 2015 22:37:22 -0800
-From: "Bruce, Henry" <henry.bruce@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: iecedtea7-native will not build. Possible fix attached
-Thread-Index: AdBP+fLsafhPhiqMR7u7y2+QNY7Acw==
-Date: Tue, 24 Feb 2015 06:37:21 +0000
-Message-ID: <F81DC1078564A34BB4DA30CAE03814D1276975E1@ORSMSX104.amr.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.22.254.139]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: iecedtea7-native will not build. Possible fix attached
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id DBF9071633;
+	Tue, 24 Feb 2015 06:59:53 +0000 (UTC)
+Received: by pdjy10 with SMTP id y10so31319208pdj.6;
+	Mon, 23 Feb 2015 22:59:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=0Mzf6jhiYadmKUQHafbMI7qUcfiMvw2vaSY1Fseou7g=;
+	b=OxTaqt8kWiSG05B1RS2rlavyA6ERWMXBWVIiSKngAlipkQDtdxagnsQT29y5bPDK5+
+	f+xWrBBwqu0ifMcvrLAc6/0dkRJV9j50DecNw7uPt7nStj+ghdD4iR7fPoaFZNUV+zp7
+	SnUHoUg8fHCxrWWRt35xvlbgj8ZGfaBHn5dXQVpybauiM7fspl0Si+tI5zllZSkcoGwF
+	IIx/CiPmMyy2kLU4LZ+xZNeQS06aijm+m6bQj6OGMGn6OIps2lWyE4KcxrRlrYZeri2G
+	LP/8tzFHuGbdZ1r4jBPgTQCtUOw++RxGsL/TaMgNq8KXZRWUbnfu3tWt8rPLZmFZzYth
+	QtGA==
+X-Received: by 10.68.239.102 with SMTP id vr6mr1362482pbc.35.1424761194461;
+	Mon, 23 Feb 2015 22:59:54 -0800 (PST)
+Received: from ?IPv6:2601:9:3580:84c:201b:b105:13ca:8330?
+	([2601:9:3580:84c:201b:b105:13ca:8330])
+	by mx.google.com with ESMTPSA id
+	ah1sm38207966pad.16.2015.02.23.22.59.53
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 23 Feb 2015 22:59:53 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1424510550.11836.66.camel@linuxfoundation.org>
+Date: Mon, 23 Feb 2015 22:59:52 -0800
+Message-Id: <9D1FFBD5-9F30-42BF-8242-4C06614F9F34@gmail.com>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<1424455387.11836.57.camel@linuxfoundation.org>
+	<1424510550.11836.66.camel@linuxfoundation.org>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Mailer: Apple Mail (2.2070.6)
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,52 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 06:37:23 -0000
-X-Groupsio-MsgNum: 54467
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_004_F81DC1078564A34BB4DA30CAE03814D1276975E1ORSMSX104amrcor_"
-
---_004_F81DC1078564A34BB4DA30CAE03814D1276975E1ORSMSX104amrcor_
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 24 Feb 2015 06:59:54 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello openjdk community,
 
-iecedtea7-native from git://git.yoctoproject.org/meta-java doesn't build du=
-e to well documented Turkish currency expiration problem. This has been fix=
-ed for icedtea6 so I borrowed the patch (not sure if this is appropriate) a=
-nd put into a the attached bbappend that fixes the problem. I went with a b=
-bappend as I wasn't sure of the process for patching a recipe. Resulting JV=
-M seems to work for my application.
+> On Feb 21, 2015, at 1:22 AM, Richard Purdie =
+<richard.purdie@linuxfoundation.org> wrote:
+>=20
+> On Fri, 2015-02-20 at 18:03 +0000, Richard Purdie wrote:
+>> On Mon, 2015-02-02 at 02:02 -0800, Khem Raj wrote:
+>>> I have put together upgrade to gcc 4.9.2 as well as glibc 2.21 (
+>>> upcoming ) on  a contrib branch ( top 2 patches) its has not got =
+much
+>>> testing besides x86 qemu thus far.
+>>>=20
+>>> =
+http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/gcc-gl=
+ibc-upgrade
+>>>=20
+>>> I would like to request some help in testing these out in your
+>>> respective environments and please report any issues you see so we =
+can
+>>> start sorting them out at earlier and making its way into OE-Core.
+>>>=20
+>>> Thanks for your help
+>>=20
+>> For info, I've now merged the glibc part of this change now too.
+>>=20
+>> Khem: Thanks for the work on this!
+>=20
+> New issue that caught my eye:
+>=20
+> =
+https://autobuilder.yoctoproject.org/main/builders/nightly-qa-logrotate/bu=
+ilds/204/steps/Running%20Sanity%20Tests/logs/stdio
+>=20
+> segfault in init within libc :/.
 
-Out of interest, why has v6 been fixed and v7 left broken? Is openjdk7 deem=
-ed unstable or otherwise not worth the effort to maintain? I'd like to keep=
- with the v7 features, but if this is not recommend, I'll back off to v6.
+I have booted core-image-minimal, for all arches and that have worked =
+fine for both systemd and sysvinit and some of non-oe-core graphic =
+images booted well too
+but here it seems its using core-image-sato wondering what changed there =
+=E2=80=A6 can someone try it out and may be see what is it trying to =
+launch during boot that is in addition
+to core image minimal.=
 
-Regards,
-
-Henry Bruce
-
-
-
-
---_004_F81DC1078564A34BB4DA30CAE03814D1276975E1ORSMSX104amrcor_
-Content-Type: application/octet-stream;
-	name="icedtea7-native_2.1.3.bbappend"
-Content-Description: icedtea7-native_2.1.3.bbappend
-Content-Disposition: attachment; filename="icedtea7-native_2.1.3.bbappend";
-	size=453; creation-date="Tue, 24 Feb 2015 06:34:50 GMT";
-	modification-date="Thu, 19 Feb 2015 18:59:35 GMT"
-Content-Transfer-Encoding: base64
-
-RklMRVNFWFRSQVBBVEhTX3ByZXBlbmQgOj0gIiR7VEhJU0RJUn0vZmlsZXM6IgoKIyBEb24ndCBh
-dXRvbWF0aWNhbGx5IGFwcGx5IHBhdGNoIGFzIGl0IG11c3QgYmUgZG9uZSBhZnRlciBkb19jb25m
-aWd1cmUKU1JDX1VSSSArPSAgImZpbGU6Ly9pY2VkdGVhLW9wZW5qZGstcmVtb3ZlLWN1cnJlbmN5
-LWRhdGEtZ2VuZXJhdGlvbi1leHBpLnBhdGNoO2FwcGx5PW5vIgoKZG9fY29uZmlndXJlX2FwcGVu
-ZCAoKSB7CiAgIGNkIG9wZW5qZGsKICAgcGF0Y2ggLXAxIDwgJHtXT1JLRElSfS9pY2VkdGVhLW9w
-ZW5qZGstcmVtb3ZlLWN1cnJlbmN5LWRhdGEtZ2VuZXJhdGlvbi1leHBpLnBhdGNoCiAgIGNkIC4u
-L29wZW5qZGstYm9vdAogICBwYXRjaCAtcDEgPCAke1dPUktESVJ9L2ljZWR0ZWEtb3Blbmpkay1y
-ZW1vdmUtY3VycmVuY3ktZGF0YS1nZW5lcmF0aW9uLWV4cGkucGF0Y2gKICAgY2QgLi4KfQoK
-
---_004_F81DC1078564A34BB4DA30CAE03814D1276975E1ORSMSX104amrcor_--
