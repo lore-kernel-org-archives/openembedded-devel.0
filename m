@@ -1,25 +1,35 @@
-Return-Path: <hugo.saldanha@aker.com.br>
-Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id 0894B736EE
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-we0-f169.google.com (mail-we0-f169.google.com
+	[74.125.82.169])
+	by mail.openembedded.org (Postfix) with ESMTP id B109171633
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2015 16:03:53 +0000 (UTC)
-Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
-	by asmg.aker.com.br [10.0.1.3]; Tue, 24 Feb 2015 13:03:39 -0300
-	(envelope-from hugo.saldanha@aker.com.br)
-Received: from saldanha.aker.com.br (10.4.3.1) by mail.aker.com.br (10.0.0.20)
-	with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Tue, 24 Feb 2015 13:03:49 -0300
-From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 24 Feb 2015 13:05:38 -0300
-Message-ID: <1424793939-31190-3-git-send-email-hugo.saldanha@aker.com.br>
-X-Mailer: git-send-email 2.3.0
-In-Reply-To: <1424793939-31190-1-git-send-email-hugo.saldanha@aker.com.br>
-References: <1424793939-31190-1-git-send-email-hugo.saldanha@aker.com.br>
+	Tue, 24 Feb 2015 17:06:41 +0000 (UTC)
+Received: by wevk48 with SMTP id k48so26561923wev.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2015 09:06:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=BlbrKSR+CqEzP6HCfCQSCcSbzIIVqEpRKxICGCe/ApU=;
+	b=x11Cn59pp0nBAXFH1oLn66qsM+e/6VERbvm+fnIlDueHa8f+YYXFD4kZPNmyk/FMKn
+	iCNLtCciq9Aq+VMAMqhZLrsS23MW/ubCZhKlGPksMzJSjlCZdYcmTv3kir6a7PPnoC2p
+	QlQ8GVWimnrNizgJy7ZWz5Sk8cdNWnZ1b8JMFSxmuS6izv1e7WKVVPMZ+8ZiXXCeFgzL
+	xUreqgbZ6feUAqpw4TCenIixWOSILyW9tH/+nDPuD9q6NHNkdYXYHDURxBO8NMylQK85
+	yEJyWe85a5nCt2+hP7UaPvY4m6/FTYdmiMquXS7s3+KaCjV0k7RFp80Ao1Ju1EJQRmpH
+	39uw==
 MIME-Version: 1.0
-X-AkerSMTPGW-ServerID: 5de71414d6a5ac0be1dec76f647836bb21381a41
-X-AkerSMTPGW-MessageID: 63b4a07ef12765705166e4419b9a17d9a5aa71c5-10o
-Subject: [meta-java][PATCH 2/3] gnujaf: remove unnecessary reference to autotools
+X-Received: by 10.180.104.3 with SMTP id ga3mr31409282wib.66.1424797601837;
+	Tue, 24 Feb 2015 09:06:41 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.27.11.18 with HTTP; Tue, 24 Feb 2015 09:06:41 -0800 (PST)
+In-Reply-To: <F81DC1078564A34BB4DA30CAE03814D127697625@ORSMSX104.amr.corp.intel.com>
+References: <F81DC1078564A34BB4DA30CAE03814D127697625@ORSMSX104.amr.corp.intel.com>
+Date: Tue, 24 Feb 2015 14:06:41 -0300
+X-Google-Sender-Auth: KHTGwO1wPJ26L4_JmTBQPRgKYt4
+Message-ID: <CAP9ODKpdNS16hMUpiuogNna=YpO-m8LgCD5O87XBKFysKeQH3Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Why no recipe for openjdk-headless?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,32 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 16:03:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 Feb 2015 17:06:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-do_install was calling an unnecessary 'make install'. oe_jarinstall
-provided by java-library class is sufficient.
+On Tue, Feb 24, 2015 at 4:00 AM, Bruce, Henry <henry.bruce@intel.com> wrote=
+:
+> I'm putting together an OS image that includes  a Java headless applicati=
+on. Having used the openjdk7-jre-headless package on Ubuntu I was hoping to=
+ find a matching recipe, but sadly none exist,.  The openjdk7-jre recipe re=
+quires the X11 distro feature which adds unnecessary luggage for a small fo=
+otprint IoT solution. Thanks to a bbappend from https://github.com/woglinde=
+/meta-java/issues/45 I can minimize footprint, but a headless recipe would =
+be a better solution.  I'm fairly new to Yocto so could someone explain the=
+ challenges of a headless recipe and where one might start when creating on=
+e?
 
-Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
----
- recipes-core/classpathx/gnujaf_1.1.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Patches are welcome. I think the link you posted has a good base of
+work done so you could start there and later follow the README file to
+post the patches here.
 
-diff --git a/recipes-core/classpathx/gnujaf_1.1.1.bb b/recipes-core/classpathx/gnujaf_1.1.1.bb
-index 69681b4..0bd8b57 100644
---- a/recipes-core/classpathx/gnujaf_1.1.1.bb
-+++ b/recipes-core/classpathx/gnujaf_1.1.1.bb
-@@ -10,7 +10,7 @@ SRC_URI = "http://ftp.gnu.org/gnu/classpathx/activation-${PV}.tar.gz \
-            file://MimeType-symbols-fix.patch \
-           "
- 
--inherit autotools java-library
-+inherit java-library
- 
- S = "${WORKDIR}/activation-${PV}"
- 
--- 
-2.3.0
-
-
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
