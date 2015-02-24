@@ -1,36 +1,37 @@
-Return-Path: <vomegaz@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 3300071633;
-	Tue, 24 Feb 2015 11:32:14 +0000 (UTC)
-Received: by mail-wi0-f176.google.com with SMTP id h11so24655371wiw.3;
-	Tue, 24 Feb 2015 03:32:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:reply-to:sender:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=rIA8yfkCtCYulX69hqKSpmvg/QaTmOdtDTN6bdG11H8=;
-	b=ZrqtTjIakEqwylInL198UvPp1lGNge1NOPR9OtzfWhc6OQ+msBc50eQomVch6Z/vuu
-	K7zY47BQkZ4LnjaqCKhKF6O/lNQfsbQEY9zkqveqAeynpfD2xrV7/STk66AimIos8H2J
-	68Xwke9pe/bEjEWP+DkFMIlDx9pzCS19yhLjCU0h9HR907+ElFmVC6auLpcg1mDbknYd
-	uD6F/rzBzhtt19V7A3SmP03lDCWmOcdvgjbMVeY3hOxdydMrX5gKnH5ZkNS3VRYV79Lj
-	9gkJ6YoQN/88hhKEq2FQvNwuG3DcAFeU5XJbSJYC6GP79cTAhnWAdrSypf3L/EVArsRX
-	7D3g==
-X-Received: by 10.180.89.238 with SMTP id br14mr7040914wib.68.1424777535521;
-	Tue, 24 Feb 2015 03:32:15 -0800 (PST)
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 33CD371633
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2015 12:13:00 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="58144866"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Feb 2015 20:09:23 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t1OCC9b0002688;
+	Tue, 24 Feb 2015 20:12:09 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0181.006; Tue, 24 Feb 2015 20:13:07 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Thread-Topic: [oe] [meta-networking][PATCH v2 2/2] postfix: fix bug of
+	main.cf_2.0
+Thread-Index: AQHQSb49PBRfnEbLt0yqa1ujgceyoZz+H+mAgAAErACAAZxWoA==
+Date: Tue, 24 Feb 2015 12:13:03 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DF4332@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1424073156-18834-1-git-send-email-biannm@cn.fujitsu.com>
+	<1424073156-18834-3-git-send-email-biannm@cn.fujitsu.com>
+	<20150223191307.GA8949@mentor.com> <20150223192949.GB8949@mentor.com>
+In-Reply-To: <20150223192949.GB8949@mentor.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-Sender: vomegaz@gmail.com
-Received: by 10.194.134.97 with HTTP; Tue, 24 Feb 2015 03:31:35 -0800 (PST)
-In-Reply-To: <54EA0B1E.5020905@gmail.com>
-References: <20150220230920.GA2306@jama> <54EA0B1E.5020905@gmail.com>
-From: Thomas PERROT <thomas.perrot@tupi.fr>
-Date: Tue, 24 Feb 2015 12:31:35 +0100
-X-Google-Sender-Auth: 8YRr3E8a7NWTCLK5-UsT6OA7QTQ
-Message-ID: <CAGXeWgmKeS=JcaaffbNOh4bZz1D6xWfFqsgy_oiQ-w6JyakCbg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-02-20
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH v2 2/2] postfix: fix bug of main.cf_2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,694 +45,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 11:32:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Feb 2015 12:13:04 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-Hi Martin,
-
-Please, what is it your configuration to run "bitbake world" ?
-I tried to run "bitbake world" only on oe-core, for some targets and I
-obtain already the same issue, and I don't see this issue in your list of
-failed tasks.
-
-Here <https://travis-ci.org/tprrt/meta-musl>, I also tried with meta-musl
-and I obtain the same issue.
-
-The issue:
-
-ERROR: Nothing PROVIDES 'virtual/egl' (but
-/tmp/build_env/meta/recipes-graphics/clutter/clutter-1.0_1.20.0.bb,
-/tmp/build_env/meta/recipes-graphics/eglinfo/eglinfo-fb_1.0.bb,
-/tmp/build_env/meta/recipes-graphics/cogl/cogl-1.0_1.18.2.bb,
-/tmp/build_env/meta/recipes-graphics/mesa/mesa-demos_8.2.0.bb,
-/tmp/build_env/meta/recipes-multimedia/gstreamer/gst-plugins-gl_0.10.3.bb,
-/tmp/build_env/meta/recipes-graphics/eglinfo/eglinfo-x11_1.0.bb,
-/tmp/build_env/meta/recipes-graphics/wayland/weston_1.6.0.bb DEPENDS
-on or otherwise requires it)
-
-ERROR: mesa PROVIDES virtual/egl but was skipped: missing required
-distro feature 'opengl' (not in DISTRO_FEATURES)
-
-ERROR: mesa PROVIDES virtual/egl but was skipped: missing required
-distro feature 'opengl' (not in DISTRO_FEATURES)
-
-ERROR: Required build target 'clutter-gst-1.0' has no buildable providers.
-
-Missing or unbuildable dependency chain was: ['clutter-gst-1.0',
-'clutter-1.0', 'virtual/egl']
-
-
-*Best regards*
-
------------------------------------------------------------------------------------------
-
-*Thomas P.*
-
-
-On 22 February 2015 at 18:00, akuster808 <akuster808@gmail.com> wrote:
-
-> Martin
->
-> On 02/20/2015 03:09 PM, Martin Jansa wrote:
->
->> http://www.openembedded.org/wiki/Bitbake_World_Status
->>
->> == Failed tasks 2015-02-20 ==
->>
->> INFO: jenkins-job.sh-1.1.0 Complete log available at
->> http://logs.nslu2-linux.org/buildlogs/oe/world/log.report.
->> 20150220_202958.log
->>
->> === common (5) ===
->>      * /meta-openembedded/meta-efl/recipes-navigation/mcnavi/mcna
->> vi_0.3.4.bb, do_compile
->>      * /meta-openembedded/meta-networking/recipes-daemons/ptpd/
->> ptpd_2.3.1-rc2.bb, do_compile
->>      * /meta-openembedded/meta-networking/recipes-support/nis/
->> yp-tools_2.12.bb, do_compile
->>      * /meta-openembedded/meta-oe/recipes-extended/unixodbc/unix
->> odbc_2.3.2.bb, do_configure
->>      * /meta-openembedded/meta-oe/recipes-support/start-stop-daemon/
->> start-stop-daemon_1.16.0.2.bb, do_compile
->>
->> === common-x86 (2) ===
->>      * /meta-openembedded/meta-oe/recipes-kernel/ktap/ktap-module_0.4.bb,
->> do_compile
->>      * /meta-openembedded/meta-oe/recipes-support/emacs/emacs_23.4.bb,
->> do_compile
->>
->> === qemuarm (6) ===
->>      * /meta-openembedded/meta-networking/recipes-connectivity/snort/
->> snort_2.9.6.0.bb, do_configure
->>      * /meta-openembedded/meta-networking/recipes-support/wireshark/
->> wireshark_1.12.3.bb, do_configure
->>
->
-> Do you have my latest patch for wireshark?
->
->  b51998bf63a625757f0497342b53e0c351814fba in master-next
->
-> - armin
->
->
->       * /meta-openembedded/meta-oe/recipes-benchmark/fio/fio_2.0.5.bb,
->> do_compile
->>      * /meta-openembedded/meta-oe/recipes-devtools/nodejs/nodejs
->> 4_0.4.12.bb, do_compile
->>      * /meta-openembedded/meta-oe/recipes-devtools/nodejs/nodejs
->> _0.8.18.bb, do_compile
->>      * /meta-smartphone/meta-android/recipes-multimedia/android-
->> audiosystem/android-audiosystem_bzr.bb, do_compile
->>
->> === qemux86 (0) ===
->>
->> === qemux86_64 (1) ===
->>      * /meta-qt5/recipes-qt/qt5/qt5-creator_3.3.0.bb, do_populate_sysroot
->>
->> === Number of failed tasks (27) ===
->> {| class=wikitable
->> |-
->> || qemuarm      || 11    || http://logs.nslu2-linux.org/
->> buildlogs/oe/world//log.world.20150218_225838.log// ||
->> http://errors.yoctoproject.org:80/Errors/Build/4802/
->> |-
->> || qemux86      || 8     || http://logs.nslu2-linux.org/
->> buildlogs/oe/world//log.world.20150219_132710.log// ||
->> http://errors.yoctoproject.org:80/Errors/Build/4806/
->> |-
->> || qemux86_64   || 8     || http://logs.nslu2-linux.org/
->> buildlogs/oe/world//log.world.20150220_044745.log// ||
->> http://errors.yoctoproject.org:80/Errors/Build/4811/
->> |}
->>
->> === PNBLACKLISTs (52) ===
->>
->> === QA issues (143) ===
->> {| class=wikitable
->> !| Count                ||Issue
->> |-
->> ||0     ||version-going-backwards
->> |-
->> ||1     ||libdir
->> |-
->> ||26    ||build-deps
->> |-
->> ||3     ||already-stripped
->> |-
->> ||50    ||file-rdeps
->> |-
->> ||63    ||textrel
->> |}
->>
->>
->> PNBLACKLISTs:
->> openembedded-core/:
->> meta-browser:
->> meta-openembedded:
->> meta-efl/recipes-efl/e17/diskio_svn.bb:PNBLACKLIST[diskio] ?= "broken:
->> switch to https://git.enlightenment.org/enlightenment/modules/diskio.git/
->> and fix 0.0.1+svnr82070-r0.0/E-MODULES-EXTRA/diskio/e-module-diskio.edc:58.
->> invalid state name: 'off'. "default" state must always be first."
->> meta-efl/recipes-efl/efl/entrance_svn.bb:PNBLACKLIST[entrance] ?=
->> "broken: switch to https://git.enlightenment.org/misc/entrance.git and
->> fix 0.0.4+svnr82070-r7/entrance/data/themes/old/default.edc:678. invalid
->> state name: 'defaault'. "default" state must always be first."
->> meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb:PNBLACKLIST[ifuse]
->> ?= "depends on blacklisted libimobiledevice"
->> meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb:PNBLACKLIST[gnome-mplayer]
->> ?= "rdepends on blacklisted mplayer"
->> meta-gnome/recipes-gnome/gcr/gcr_3.8.2.bb:PNBLACKLIST[gcr] ?= "CONFLICT:
->> 4 files conflict with gnome-keyring"
->> meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb:PNBLACKLIST[gdm] ?= "Depends
->> on broken polkit-gnome"
->> meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3.10.1.bb:PNBLACKLIST[gnome-menus3]
->> ?= "CONFLICT: 24 files are conflicting with gnome-menus"
->> meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb:PNBLACKLIST[gnome-panel3]
->> ?= "CONFLICT: depends on libgweather3 which conflicts with libgweather"
->> meta-gnome/recipes-gnome/gweather/libgweather3_3.0.2.bb:PNBLACKLIST[libgweather3]
->> ?= "CONFLICT: 876 files are conflicting with libgweather"
->> meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb:PNBLACKLIST[zenity] ?=
->> "BROKEN: doesn't build with B!=S"
->> meta-multimedia/recipes-mediacentre/xbmc/xbmc_git.bb:PNBLACKLIST[xbmc]
->> ?= "/usr/include/c++/ctime:70:11: error: '::gmtime' has not been declared"
->> meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb:
->> PNBLACKLIST[coriander] ?= "BROKEN: fails to use SDL probably because
->> libsdl-config was removed, error: unknown type name 'SDL_Overlay'"
->> meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb:
->> PNBLACKLIST[renderer-service-upnp] ?= "BROKEN: doesn't build with B!=S
->> (trying to install rendererconsole.py from ${B} instead of ${S})"
->> meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb:PNBLACKLIST[snort]
->> ?= "BROKEN: autotools processing causes OOM condition on configure"
->> meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb:
->> PNBLACKLIST[lksctp-tools] ?= "${@base_contains('DISTRO_FEATURES',
->> 'ld-is-gold', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
->> meta-oe/recipes-connectivity/libimobiledevice/libimobiledevice_1.1.4.bb:
->> PNBLACKLIST[libimobiledevice] ?= "cannot run test program while cross
->> compiling"
->> meta-oe/recipes-connectivity/soft66/soft66_git.bb:PNBLACKLIST[soft66] ?=
->> "BROKEN: depends on broken libftdi"
->> meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb:PNBLACKLIST[zeroc-ice]
->> ?= "BROKEN: not compatible with default db version"
->> meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb:PNBLACKLIST[polkit-gnome]
->> ?= "Fails to build, m4:configure.ac:125: recursion limit of 1024
->> exceeded, use -L<N> to change it"
->> meta-oe/recipes-extended/subsurface/subsurface_git.bb:PNBLACKLIST[subsurface]
->> ?= "Needs to be upgraded for compatibility with new libdivecomputer"
->> meta-oe/recipes-graphics/clutter/clutter-box2d_git.bb:PNBLACKLIST[clutter-box2d]
->> ?= "BROKEN: doesn't build with B!=S"
->> meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb:PNBLACKLIST[fim] ?= "BROKEN:
->> doesn't build with B!=S (flex: can't open lex.lex)"
->> meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb:PNBLACKLIST[xf86-input-mtev]
->> ?= "BROKEN: doesn't build with B!=S (Makefile without ${S} in sed call)"
->> meta-oe/recipes-qt/qconnman/qconnman-e_git.bb:PNBLACKLIST[qconnman-e] ?=
->> "BROKEN: doesn't work with B!=S, ls: cannot access *.pro: No such file or
->> directory"
->> meta-oe/recipes-qt/qconnman/qconnman_git.bb:PNBLACKLIST[qconnman] ?=
->> "BROKEN: doesn't work with B!=S, ls: cannot access *.pro: No such file or
->> directory"
->> meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb:PNBLACKLIST[sylpheed]
->> ?= "BROKEN: Doesn't work with B!=S"
->> meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb:PNBLACKLIST[apcupsd]
->> ?= "BROKEN: doesn't build with B!=S"
->> meta-oe/recipes-support/fltk/fltk_1.1.10.bb:PNBLACKLIST[fltk] ?=
->> "broken: still uses /usr/bin/freetype-config"
->> meta-oe/recipes-support/maliit/maliit-framework_git.
->> bb:PNBLACKLIST[maliit-framework] ?= "BROKEN: Wasn't updated to work with
->> B!=S, maybe incorrectly inherits autotools"
->> meta-oe/recipes-support/maliit/maliit-plugins_git.bb:PNBLACKLIST[maliit-plugins]
->> ?= "BROKEN: depends on broken maliit-framework"
->> meta-oe/recipes-support/mongodb/mongodb_git.bb:PNBLACKLIST[mongodb] ?=
->> "Fails to build with system boost"
->> meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb:PNBLACKLIST[openmotif]
->> ?= "BROKEN: doesn't build with B!=S"
->> meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb:PNBLACKLIST[vala-terminal]
->> ?= "BROKEN: Doesn't work with B!=S, touch: cannot touch `src/.stamp': No
->> such file or directory"
->> meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb:PNBLACKLIST[xfce4-vala]
->> ?= "Fails to build since vala upgrade to 0.26.1"
->> meta-qt5:
->> meta-smartphone:
->> meta-shr/recipes-shr/3rdparty/ffalarms_git.bb:PNBLACKLIST[ffalarms] =
->> "Doesn't build after vala upgrade from 0.24.0 to 0.26.1"
->> meta-shr/recipes-shr/3rdparty/gwaterpas_0.3.bb:PNBLACKLIST[gwaterpas] ?=
->> "broken: depends on blacklisted fltk"
->> meta-shr/recipes-shr/3rdparty/iliwi_git.bb:PNBLACKLIST[iliwi] = "Doesn't
->> build after vala upgrade from 0.24.0 to 0.26.1"
->> meta-shr/recipes-shr/3rdparty/intone_git.bb:PNBLACKLIST[intone] =
->> "rdepends on blacklisted mplayer2"
->> meta-shr/recipes-shr/3rdparty/sensmon_git.bb:PNBLACKLIST[sensmon] =
->> "Doesn't build after vala upgrade from 0.24.0 to 0.26.1"
->> meta-shr/recipes-shr/3rdparty/valacompass_git.bb:PNBLACKLIST[valacompass]
->> = "Doesn't build after vala upgrade from 0.24.0 to 0.26.1"
->> meta-webos-ports:
->> conf/world_fixes.inc:PNBLACKLIST[mplayer2] = ""
->> conf/world_fixes.inc:PNBLACKLIST[android-system] = "depends on lxc from
->> meta-virtualiazation which isn't included in my world builds"
->> conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't
->> really need to be tested so much"
->> conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't
->> really need to be tested so much"
->> conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't
->> really need to be tested so much"
->> conf/world_fixes.inc:PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't
->> really need to be tested so much"
->> conf/world_fixes.inc:PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't
->> really need to be tested so much"
->> conf/world_mask.inc:PNBLACKLIST[evince] = "fails to build"
->> conf/world_mask.inc:PNBLACKLIST[epiphany] = "fails to build"
->> conf/world_mask.inc:PNBLACKLIST[gnome-power-manager] = "fails to build"
->> conf/world_mask.inc:PNBLACKLIST[gnome-bluetooth] = "fails to build"
->> conf/world_mask.inc:PNBLACKLIST[media-ctl] = "fails to build"
->> QA issues by type:
->> count: 3        issue: already-stripped
->> qwt-6.0.1: File '/usr/lib/libqwt.so.6.0.1' from qwt was already stripped,
->> this will prevent future debugging! [already-stripped]
->> qwt-6.0.1: File '/usr/lib/libqwtmathml.so.6.0.1' from qwt was already
->> stripped, this will prevent future debugging! [already-stripped]
->> qwt-6.0.1: File '/usr/lib/qt4/plugins/designer/libqwt_designer_plugin.so'
->> from qwt was already stripped, this will prevent future debugging!
->> [already-stripped]
->>
->>
->> count: 1        issue: libdir
->> chromium-dbg: found library in wrong location: /usr/bin/chrome/.debug/libffmpegsumo.so
->> [libdir]
->>
->>
->> count: 63       issue: textrel
->> chromium-38.0.2125.101: ELF binary '/tmp/work/i586-oe-linux/
->> chromium/38.0.2125.101-r0/packages-split/chromium/usr/bin/chrome/libffmpegsumo.so'
->> has relocations in .text [textrel]
->> gstreamer1.0-libav-1.4.5: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/gstreamer1.0-libav/1.4.5-r0/packages-split/
->> gstreamer1.0-libav/usr/lib/gstreamer-1.0/libgstlibav.so' has relocations
->> in .text [textrel]
->> gstreamer1.0-libav-1.4.5: ELF binary '/tmp/work/i586-oe-linux/
->> gstreamer1.0-libav/1.4.5-r0/packages-split/gstreamer1.0-
->> libav/usr/lib/gstreamer-1.0/libgstlibav.so' has relocations in .text
->> [textrel]
->> libav-9.16: ELF binary '/tmp/work/armv5e-oe-linux-gnueabi/libav/9.16-r0/
->> packages-split/libavcodec/usr/lib/libavcodec.so.54.35.0' has relocations
->> in .text [textrel]
->> libav-9.16: ELF binary '/tmp/work/i586-oe-linux/
->> libav/9.16-r0/packages-split/libavcodec/usr/lib/libavcodec.so.54.35.0'
->> has relocations in .text [textrel]
->> libav-9.16: ELF binary '/tmp/work/i586-oe-linux/
->> libav/9.16-r0/packages-split/libavdevice/usr/lib/libavdevice.so.53.2.0'
->> has relocations in .text [textrel]
->> libav-9.16: ELF binary '/tmp/work/i586-oe-linux/
->> libav/9.16-r0/packages-split/libavfilter/usr/lib/libavfilter.so.3.3.0'
->> has relocations in .text [textrel]
->> libav-9.16: ELF binary '/tmp/work/i586-oe-linux/
->> libav/9.16-r0/packages-split/libavformat/usr/lib/libavformat.so.54.20.4'
->> has relocations in .text [textrel]
->> libav-9.16: ELF binary '/tmp/work/i586-oe-linux/
->> libav/9.16-r0/packages-split/libavresample/usr/lib/libavresample.so.1.0.1'
->> has relocations in .text [textrel]
->> libav-9.16: ELF binary '/tmp/work/i586-oe-linux/
->> libav/9.16-r0/packages-split/libavutil/usr/lib/libavutil.so.52.3.0' has
->> relocations in .text [textrel]
->> libav-9.16: ELF binary '/tmp/work/i586-oe-linux/
->> libav/9.16-r0/packages-split/libswscale/usr/lib/libswscale.so.2.1.1' has
->> relocations in .text [textrel]
->> libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary
->> '/tmp/work/armv5e-oe-linux-gnueabi/libpostproc/52.3.0+
->> gitAUTOINC+811db3b957-r0/packages-split/libpostproc/usr/lib/libpostproc.so.52.3.0'
->> has relocations in .text [textrel]
->> libpostproc-52.3.0+gitAUTOINC+811db3b957: ELF binary
->> '/tmp/work/i586-oe-linux/libpostproc/52.3.0+gitAUTOINC+
->> 811db3b957-r0/packages-split/libpostproc/usr/lib/libpostproc.so.52.3.0'
->> has relocations in .text [textrel]
->> mpg123-1.21.0: ELF binary '/tmp/work/i586-oe-linux/
->> mpg123/1.21.0-r0/packages-split/mpg123/usr/lib/libmpg123.so.0.40.3' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-audio/
->> usr/lib/python3.3/lib-dynload/ossaudiodev.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-codecs/
->> usr/lib/python3.3/lib-dynload/_codecs_tw.cpython-33m.so' has relocations
->> in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-core/
->> usr/lib/python3.3/lib-dynload/binascii.cpython-33m.so' has relocations
->> in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-crypt/
->> usr/lib/python3.3/lib-dynload/_sha256.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-ctypes/
->> usr/lib/python3.3/lib-dynload/_ctypes_test.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-curses/
->> usr/lib/python3.3/lib-dynload/_curses.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-
->> elementtree/usr/lib/python3.3/lib-dynload/_elementtree.cpython-33m.so'
->> has relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-fcntl/
->> usr/lib/python3.3/lib-dynload/fcntl.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-gdbm/
->> usr/lib/python3.3/lib-dynload/_gdbm.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-io/usr/
->> lib/python3.3/lib-dynload/_socket.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-json/
->> usr/lib/python3.3/lib-dynload/_json.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-lang/
->> usr/lib/python3.3/lib-dynload/_bisect.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-math/
->> usr/lib/python3.3/lib-dynload/cmath.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-misc/
->> usr/lib/python3.3/lib-dynload/_posixsubprocess.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-mmap/
->> usr/lib/python3.3/lib-dynload/mmap.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-
->> multiprocessing/usr/lib/python3.3/lib-dynload/_multipr
->> ocessing.cpython-33m.so' has relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-
->> profile/usr/lib/python3.3/lib-dynload/_lsprof.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-
->> readline/usr/lib/python3.3/lib-dynload/readline.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-
->> resource/usr/lib/python3.3/lib-dynload/resource.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-syslog/
->> usr/lib/python3.3/lib-dynload/syslog.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-
->> textutils/usr/lib/python3.3/lib-dynload/_csv.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-
->> unixadmin/usr/lib/python3.3/lib-dynload/grp.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/armv5e-oe-linux-
->> gnueabi/python3/3.3.3-r1.0/packages-split/python3-xml/
->> usr/lib/python3.3/lib-dynload/pyexpat.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-audio/usr/lib/
->> python3.3/lib-dynload/ossaudiodev.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-codecs/usr/lib/
->> python3.3/lib-dynload/_codecs_cn.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-core/usr/lib/
->> python3.3/lib-dynload/binascii.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-crypt/usr/lib/
->> python3.3/lib-dynload/_sha256.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-ctypes/usr/lib/
->> python3.3/lib-dynload/_ctypes_test.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-curses/usr/lib/
->> python3.3/lib-dynload/_curses.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-elementtree/usr/
->> lib/python3.3/lib-dynload/_elementtree.cpython-33m.so' has relocations
->> in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-fcntl/usr/lib/
->> python3.3/lib-dynload/fcntl.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-gdbm/usr/lib/
->> python3.3/lib-dynload/_gdbm.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-io/usr/lib/
->> python3.3/lib-dynload/_socket.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-json/usr/lib/
->> python3.3/lib-dynload/_json.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-lang/usr/lib/
->> python3.3/lib-dynload/_bisect.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-math/usr/lib/
->> python3.3/lib-dynload/cmath.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-misc/usr/lib/
->> python3.3/lib-dynload/_md5.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-mmap/usr/lib/
->> python3.3/lib-dynload/mmap.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-multiprocessing/
->> usr/lib/python3.3/lib-dynload/_multiprocessing.cpython-33m.so' has
->> relocations in .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-profile/usr/lib/
->> python3.3/lib-dynload/_lsprof.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-readline/usr/
->> lib/python3.3/lib-dynload/readline.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-resource/usr/
->> lib/python3.3/lib-dynload/resource.cpython-33m.so' has relocations in
->> .text [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-syslog/usr/lib/
->> python3.3/lib-dynload/syslog.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-textutils/usr/
->> lib/python3.3/lib-dynload/_csv.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-unixadmin/usr/
->> lib/python3.3/lib-dynload/grp.cpython-33m.so' has relocations in .text
->> [textrel]
->> python3-3.3.3: ELF binary '/tmp/work/i586-oe-linux/
->> python3/3.3.3-r1.0/packages-split/python3-xml/usr/lib/
->> python3.3/lib-dynload/pyexpat.cpython-33m.so' has relocations in .text
->> [textrel]
->> qtwebkit-5.4.0+gitAUTOINC+3a2cb4770c: ELF binary
->> '/tmp/work/i586-oe-linux/qtwebkit/5.4.0+gitAUTOINC+
->> 3a2cb4770c-r0/packages-split/qtwebkit/usr/lib/libQt5WebKit.so.5.4.0' has
->> relocations in .text [textrel]
->> webkit-efl-1.11.0: ELF binary '/tmp/work/i586-oe-linux/
->> webkit-efl/1_1.11.0-r0/packages-split/webkit-efl/usr/
->> lib/libjavascriptcore_efl.so.1.11.0' has relocations in .text [textrel]
->> webkit-gtk-1.8.3: ELF binary '/tmp/work/i586-oe-linux/
->> webkit-gtk/1.8.3-r1/packages-split/libjavascriptcore/usr/
->> lib/libjavascriptcoregtk-1.0.so.0.13.4' has relocations in .text
->> [textrel]
->>
->>
->> count: 26       issue: build-deps
->> emacs-23.4: emacs rdepends on ncurses-libtinfo, but it isn't a build
->> dependency? [build-deps]
->> exquisite-0.0.1+svnr82070: exquisite rdepends on initscripts-functions,
->> but it isn't a build dependency? [build-deps]
->> freetds-0.92.79: freetds rdepends on readline, but it isn't a build
->> dependency? [build-deps]
->> geoclue-2.0.0: geoclue rdepends on geoip, but it isn't a build
->> dependency? [build-deps]
->> glade3-3.8.5: glade3 rdepends on libpython2, but it isn't a build
->> dependency? [build-deps]
->> gpm-1.99.7: gpm rdepends on initscripts-functions, but it isn't a build
->> dependency? [build-deps]
->> grub-efi-2.00: grub-efi rdepends on fuse, but it isn't a build
->> dependency? [build-deps]
->> irda-utils-0.9.18: irda-utils rdepends on initscripts-functions, but it
->> isn't a build dependency? [build-deps]
->> libwebp-0.4.0: libwebp-bin rdepends on libgl-mesa, but it isn't a build
->> dependency? [build-deps]
->> libwebp-0.4.0: libwebp-bin rdepends on mesa-glut, but it isn't a build
->> dependency? [build-deps]
->> log4c-1.2.4: log4c rdepends on expat, but it isn't a build dependency?
->> [build-deps]
->> mpd-0.19.1: mpd rdepends on libsmbclient, but it isn't a build
->> dependency? [build-deps]
->> netkit-rwho-0.17: netkit-rwho-client rdepends on initscripts-functions,
->> but it isn't a build dependency? [build-deps]
->> pkcs11-helper-1.11: pkcs11-helper rdepends on nspr, but it isn't a build
->> dependency? [build-deps]
->> pkcs11-helper-1.11: pkcs11-helper rdepends on nss, but it isn't a build
->> dependency? [build-deps]
->> qt5-creator-3.3.0: qt5-creator rdepends on qt-creator, but it isn't a
->> build dependency? [build-deps]
->> qt5-creator-3.3.0: qt5-creator rdepends on qtquick1, but it isn't a build
->> dependency? [build-deps]
->> qtwayland-5.4.0+gitAUTOINC+50d6c0ae94: qtwayland-plugins rdepends on
->> libxcomposite, but it isn't a build dependency? [build-deps]
->> qtwebkit-5.4.0+gitAUTOINC+3a2cb4770c: qtwebkit rdepends on
->> libxcomposite, but it isn't a build dependency? [build-deps]
->> sox-14.4.0: sox rdepends on libflac, but it isn't a build dependency?
->> [build-deps]
->> stunnel-5.10: stunnel rdepends on libcap, but it isn't a build
->> dependency? [build-deps]
->> stunnel-5.10: stunnel rdepends on liblzma, but it isn't a build
->> dependency? [build-deps]
->> stunnel-5.10: stunnel rdepends on libsystemd, but it isn't a build
->> dependency? [build-deps]
->> sysklogd-1.5.1: sysklogd rdepends on initscripts-functions, but it isn't
->> a build dependency? [build-deps]
->> tcpdump-4.6.1: tcpdump rdepends on libsmi, but it isn't a build
->> dependency? [build-deps]
->> vlc-2.1.4: vlc rdepends on libsamplerate0, but it isn't a build
->> dependency? [build-deps]
->>
->>
->> count: 50       issue: file-rdeps
->> apache2-2.4.10: apache2-dev requires /usr/bin/perl, but no providers in
->> its RDEPENDS [file-rdeps]
->> chkconfig-1.3.58: chkconfig requires libnewt.so()(64bit), but no
->> providers in its RDEPENDS [file-rdeps]
->> chkconfig-1.3.58: chkconfig requires libnewt.so, but no providers in its
->> RDEPENDS [file-rdeps]
->> cloud9-0.6: cloud9 requires /bin/bash, but no providers in its RDEPENDS
->> [file-rdeps]
->> dvb-apps-1.1.1: dvb-apps requires libucsi.so()(64bit),
->> libdvbapi.so()(64bit), libdvbcfg.so()(64bit), libdvben50221.so()(64bit),
->> libdvbsec.so()(64bit), but no providers in its RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvb-apps requires libucsi.so, libdvben50221.so,
->> libdvbsec.so, libdvbcfg.so, libdvbapi.so, but no providers in its RDEPENDS
->> [file-rdeps]
->> dvb-apps-1.1.1: dvb-femon requires libdvbapi.so()(64bit), but no
->> providers in its RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvb-femon requires libdvbapi.so, but no providers in its
->> RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvb-scan requires libdvbsec.so()(64bit),
->> libdvbapi.so()(64bit), libdvbcfg.so()(64bit), but no providers in its
->> RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvb-scan requires libdvbsec.so, libdvbcfg.so,
->> libdvbapi.so, but no providers in its RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvbdate requires libucsi.so()(64bit),
->> libdvbapi.so()(64bit), but no providers in its RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvbdate requires libucsi.so, libdvbapi.so, but no
->> providers in its RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvbnet requires libdvbapi.so()(64bit), but no providers
->> in its RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvbnet requires libdvbapi.so, but no providers in its
->> RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvbtraffic requires libdvbapi.so()(64bit), but no
->> providers in its RDEPENDS [file-rdeps]
->> dvb-apps-1.1.1: dvbtraffic requires libdvbapi.so, but no providers in its
->> RDEPENDS [file-rdeps]
->> emacs-23.4: emacs requires /usr/bin/perl, but no providers in its
->> RDEPENDS [file-rdeps]
->> fakeroot-1.18.4: fakeroot requires /bin/bash, but no providers in its
->> RDEPENDS [file-rdeps]
->> fbida-2.09+gitAUTOINC+6aa5563cb3: fbida requires /bin/bash, but no
->> providers in its RDEPENDS [file-rdeps]
->> foxtrotgps-1.1.1: foxtrotgps requires /usr/bin/python, /usr/bin/perl, but
->> no providers in its RDEPENDS [file-rdeps]
->> gammu-1.32.0: gammu requires /bin/bash, but no providers in its RDEPENDS
->> [file-rdeps]
->> gammu-1.32.0: gammu-dev requires /bin/bash, but no providers in its
->> RDEPENDS [file-rdeps]
->> gateone-1.2: gateone requires /bin/bash, but no providers in its RDEPENDS
->> [file-rdeps]
->> giflib-4.1.6: giflib-utils requires /usr/bin/perl, but no providers in
->> its RDEPENDS [file-rdeps]
->> gnome-desktop-2.32.1: gnome-desktop requires /usr/bin/python, but no
->> providers in its RDEPENDS [file-rdeps]
->> gnome-panel-2.32.1: gnome-panel requires /usr/bin/python, but no
->> providers in its RDEPENDS [file-rdeps]
->> groff-1.22.2: groff requires /bin/sed, but no providers in its RDEPENDS
->> [file-rdeps]
->> gupnp-0.20.12: gupnp-dev requires /usr/bin/python, but no providers in
->> its RDEPENDS [file-rdeps]
->> hplip-3.12.6: hplip-filter requires /usr/bin/perl, but no providers in
->> its RDEPENDS [file-rdeps]
->> ipvsadm-1.26: ipvsadm requires /bin/bash, but no providers in its
->> RDEPENDS [file-rdeps]
->> libbonobo-2.32.1: libbonobo requires /usr/bin/perl, but no providers in
->> its RDEPENDS [file-rdeps]
->> libnewt-0.52.18: whiptail requires libnewt.so()(64bit), but no providers
->> in its RDEPENDS [file-rdeps]
->> libnewt-0.52.18: whiptail requires libnewt.so, but no providers in its
->> RDEPENDS [file-rdeps]
->> libnewt-python-0.52.18: libnewt-python requires libnewt.so()(64bit), but
->> no providers in its RDEPENDS [file-rdeps]
->> libnewt-python-0.52.18: libnewt-python requires libnewt.so, but no
->> providers in its RDEPENDS [file-rdeps]
->> lio-utils-4.1+gitAUTOINC+28bd928655: lio-utils requires /bin/bash, but
->> no providers in its RDEPENDS [file-rdeps]
->> lmsensors-config-1.0: lmsensors-config-cgi requires /usr/bin/rrdcgi, but
->> no providers in its RDEPENDS [file-rdeps]
->> nodejs-0.8.18: nodejs requires /bin/bash, but no providers in its
->> RDEPENDS [file-rdeps]
->> numptyphysics-0.2+svnr109: numptyphysics requires /bin/bash,
->> /usr/bin/perl, but no providers in its RDEPENDS [file-rdeps]
->> opensaf-4.5.0: opensaf requires /bin/bash, /usr/bin/python, but no
->> providers in its RDEPENDS [file-rdeps]
->> packagekit-0.5.6: packagekit requires /bin/bash, but no providers in its
->> RDEPENDS [file-rdeps]
->> pcsc-lite-1.8.6: pcsc-lite requires /usr/bin/python, but no providers in
->> its RDEPENDS [file-rdeps]
->> pm-qa-0.4.14: pm-qa requires /bin/bash, but no providers in its RDEPENDS
->> [file-rdeps]
->> qt-creator-2.8.1: qt-creator requires /usr/bin/perl, but no providers in
->> its RDEPENDS [file-rdeps]
->> tracker-0.14.2: tracker-nautilus-extension requires
->> libnautilus-extension.so.1()(64bit), but no providers in its RDEPENDS
->> [file-rdeps]
->> tracker-0.14.2: tracker-nautilus-extension requires
->> libnautilus-extension.so.1, but no providers in its RDEPENDS [file-rdeps]
->> ubx-utils-0.0.0+gitrAUTOINC+b63c0932dd: ubx-utils requires /bin/bash,
->> but no providers in its RDEPENDS [file-rdeps]
->> unionfs-fuse-0.26: unionfs-fuse requires /bin/bash, but no providers in
->> its RDEPENDS [file-rdeps]
->> usbpath-0.0+svnr3172: usbpath requires /usr/bin/perl, but no providers in
->> its RDEPENDS [file-rdeps]
->> wvstreams-4.6.1: wvstreams requires /usr/bin/perl, but no providers in
->> its RDEPENDS [file-rdeps]
->>
->>
->> count: 0        issue: version-going-backwards
->>
->>
->>
->>  --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
+SGkgSm9lLA0KDQpTb3JyeSBmb3IgbXkgbGF0ZSByZXBseSAoVGhlIGxhc3Qgd2VlayB3YXMgQ2hp
+bmVzZSBOZXcgWWVhciBeX14pLg0KQW5kIHRoYW5rcyBmb3IgeW91ciBjb25maXJtYXRpb24uDQoN
+ClRoYW5rcw0KIEJpYW4NCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBK
+b2UgTWFjRG9uYWxkIFttYWlsdG86Sm9lX01hY0RvbmFsZEBtZW50b3IuY29tXQ0KPiBTZW50OiBU
+dWVzZGF5LCBGZWJydWFyeSAyNCwgMjAxNSAzOjMwIEFNDQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2
+ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1uZXR3
+b3JraW5nXVtQQVRDSCB2MiAyLzJdIHBvc3RmaXg6IGZpeCBidWcgb2YNCj4gbWFpbi5jZl8yLjAN
+Cj4gDQo+IFtSZTogW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSCB2MiAyLzJdIHBvc3RmaXg6
+IGZpeCBidWcgb2YgbWFpbi5jZl8yLjBdIE9uDQo+IDE1LjAyLjIzIChNb24gMTQ6MTMpIEpvZSBN
+YWNEb25hbGQgd3JvdGU6DQo+IA0KPiA+IEhpIEJpYW4sDQo+ID4NCj4gPiBJIG1lcmdlZCB0aGUg
+b3RoZXIgcG9zdGZpeCBjaGFuZ2UsIGJ1dCB0aGlzIG9uZSBJJ20gbGVzcyBzdXJlIGFib3V0Lg0K
+PiA+IElzIHRoaXMgYWN0dWFsbHkgaW5jb3JyZWN0PyAgVGhlIHN0YW5kYXJkIHBsYWNlIHRvIGlu
+c3RhbGwgcG9zdGZpeCBpcw0KPiA+IGluIC91c3IvbGliZXhlYyBhbmQgdGhhdCBzZWVtcyB0byBi
+ZSB3aGVyZSB3ZSBpbnN0YWxsIGl0IGFzIHdlbGwuDQo+IA0KPiBPa2F5LCBJJ3ZlIGp1c3QgY29u
+ZmlybWVkIHRoYXQgdGhpcyBpcyB0aGUgY3VycmVudCBsb2NhdGlvbiBhZnRlciBhbGwsIEknbGwN
+Cj4gbWVyZ2UgdGhpcyBhcyB3ZWxsLiAgVGhhbmtzLg0KPiANCj4gLUouDQo+IA0KPiA+DQo+ID4g
+LUouDQo+ID4NCj4gPiBbW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSCB2MiAyLzJdIHBvc3Rm
+aXg6IGZpeCBidWcgb2YgbWFpbi5jZl8yLjBdIE9uDQo+IDE1LjAyLjE2IChNb24gMTU6NTIpIEJp
+YW4gTmFpbWVuZyB3cm90ZToNCj4gPg0KPiA+ID4gICR7ZXhlY19wcmVmaXh9L2xpYmV4ZWMvJHtQ
+Tn0gPT4gJHtsaWJleGVjZGlyfQ0KPiA+ID4NCj4gPiA+IFNpZ25lZC1vZmYtYnk6IEJpYW4gTmFp
+bWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+ID4gLS0tDQo+ID4gPiAgbWV0YS1uZXR3
+b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9wb3N0Zml4L2ZpbGVzL21haW4uY2ZfMi4wIHwgMiArLQ0K
+PiA+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPiA+
+ID4NCj4gPiA+IGRpZmYgLS1naXQNCj4gPiA+IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFl
+bW9ucy9wb3N0Zml4L2ZpbGVzL21haW4uY2ZfMi4wDQo+ID4gPiBiL21ldGEtbmV0d29ya2luZy9y
+ZWNpcGVzLWRhZW1vbnMvcG9zdGZpeC9maWxlcy9tYWluLmNmXzIuMA0KPiA+ID4gaW5kZXggYmIz
+MTQ1MS4uOWUxMDc3ZiAxMDA2NDQNCj4gPiA+IC0tLSBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVz
+LWRhZW1vbnMvcG9zdGZpeC9maWxlcy9tYWluLmNmXzIuMA0KPiA+ID4gKysrIGIvbWV0YS1uZXR3
+b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9wb3N0Zml4L2ZpbGVzL21haW4uY2ZfMi4wDQo+ID4gPiBA
+QCAtMzAsNyArMzAsNyBAQCBxdWV1ZV9kaXJlY3RvcnkgPSAvdmFyL3Nwb29sL3Bvc3RmaXgNCj4g
+PiA+IG1haWxfc3Bvb2xfZGlyZWN0b3J5ID0gL3Zhci9zcG9vbC9tYWlsICByZWFkbWVfZGlyZWN0
+b3J5ID0gbm8NCj4gPiA+IGNvbW1hbmRfZGlyZWN0b3J5ID0gL3Vzci9zYmluIC1kYWVtb25fZGly
+ZWN0b3J5ID0NCj4gPiA+IC91c3IvbGliZXhlYy9wb3N0Zml4DQo+ID4gPiArZGFlbW9uX2RpcmVj
+dG9yeSA9IC91c3IvbGliL3Bvc3RmaXgNCj4gPiA+ICBtYWlsX293bmVyID0gcG9zdGZpeA0KPiA+
+ID4gIHNldGdpZF9ncm91cCA9IHBvc3Rkcm9wDQo+ID4gPiAgdW5rbm93bl9sb2NhbF9yZWNpcGll
+bnRfcmVqZWN0X2NvZGUgPSA0NTANCj4gPiA+IC0tDQo+ID4gPiAxLjkuMQ0KPiA+ID4NCj4gPiAt
+LQ0KPiA+IC1Kb2UgTWFjRG9uYWxkLg0KPiA+IDp3cQ0KPiANCj4gDQo+IA0KPiAtLQ0KPiAtSm9l
+IE1hY0RvbmFsZC4NCj4gOndxDQo=
 
