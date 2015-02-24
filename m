@@ -1,30 +1,25 @@
-Return-Path: <lionel.ains@legrand.fr>
-Received: from grpleg.net (smtp1-22.grpleg.net [85.158.16.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C5C273728
+Return-Path: <hugo.saldanha@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id 07BBF735B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2015 15:14:08 +0000 (UTC)
-Received: from ([10.0.51.15])
-	by smtp1-22.grpleg.net with ESMTP  id 7RSHRF1.321663953;
-	Tue, 24 Feb 2015 15:59:04 +0100
-Received: from localhost.localdomain ([10.0.250.7])
-	by fr-lgs-hub-02.srvnts.grpleg.com (Lotus Domino Release 8.5.3FP1)
-	with ESMTP id 2015022415590378-33189 ;
-	Tue, 24 Feb 2015 15:59:03 +0100 
-From: Lionel AINS <lionel.ains@legrand.fr>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Feb 2015 15:57:32 +0100
-Message-Id: <1424789852-28989-2-git-send-email-lionel.ains@legrand.fr>
-X-Mailer: git-send-email 1.7.10.4
-In-Reply-To: <1424789852-28989-1-git-send-email-lionel.ains@legrand.fr>
-References: <1424789852-28989-1-git-send-email-lionel.ains@legrand.fr>
-X-MIMETrack: Itemize by SMTP Server on FR-LGS-HUB-02/SRV/GRPLEG(Release
-	8.5.3FP1|March 07, 2012) at 24/02/2015 15:59:03,
-	Serialize by Router on FR-LGS-HUB-02/SRV/GRPLEG(Release 8.5.3FP1|March
-	07, 2012) at 24/02/2015 15:59:04,
-	Serialize complete at 24/02/2015 15:59:04
-X-TNEFEvaluated: 1
-Cc: Lionel AINS <lionel.ains@legrand.fr>
-Subject: [meta-oe][daisy][PATCH] php: do_install cleanup tests dir exists before trying rmdir $TMP
+	Tue, 24 Feb 2015 16:03:53 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Tue, 24 Feb 2015 13:03:39 -0300
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from saldanha.aker.com.br (10.4.3.1) by mail.aker.com.br (10.0.0.20)
+	with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 24 Feb 2015 13:03:50 -0300
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 24 Feb 2015 13:05:39 -0300
+Message-ID: <1424793939-31190-4-git-send-email-hugo.saldanha@aker.com.br>
+X-Mailer: git-send-email 2.3.0
+In-Reply-To: <1424793939-31190-1-git-send-email-hugo.saldanha@aker.com.br>
+References: <1424793939-31190-1-git-send-email-hugo.saldanha@aker.com.br>
+MIME-Version: 1.0
+X-AkerSMTPGW-ServerID: 5de71414d6a5ac0be1dec76f647836bb21381a41
+X-AkerSMTPGW-MessageID: 08071eccea7194ed16c1a6b157f3bee7a8530253-10o
+Subject: [meta-java][PATCH 3/3] icedtea7-native: remove currency data generation expiration date
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,46 +33,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 15:14:11 -0000
-Content-Type: text/plain;
-	charset="UTF-8"
+X-List-Received-Date: Tue, 24 Feb 2015 16:03:56 -0000
+Content-Type: text/plain
 
+Removes a currency date expiration check whis causes a build
+failure.
+
+Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
 ---
- meta-oe/recipes-devtools/php/php.inc |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...njdk-remove-currency-data-generation-expi.patch | 25 ++++++++++++++++++++++
+ recipes-core/icedtea/openjdk-7-release-03b147.inc  |  2 ++
+ 2 files changed, 27 insertions(+)
+ create mode 100644 recipes-core/icedtea/openjdk-7-03b147/icedtea-openjdk-remove-currency-data-generation-expi.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 1e2aa72..b03c9bd 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -92,7 +92,7 @@ do_install_append_pn-php() {
-     install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
-     TMP=`dirname ${D}/${TMPDIR}`
-     while test ${TMP} != ${D}; do
--        rmdir ${TMP}
-+        test -d ${TMP} && rmdir ${TMP}
-         TMP=`dirname ${TMP}`;
-     done
- }
+diff --git a/recipes-core/icedtea/openjdk-7-03b147/icedtea-openjdk-remove-currency-data-generation-expi.patch b/recipes-core/icedtea/openjdk-7-03b147/icedtea-openjdk-remove-currency-data-generation-expi.patch
+new file mode 100644
+index 0000000..6dd36af
+--- /dev/null
++++ b/recipes-core/icedtea/openjdk-7-03b147/icedtea-openjdk-remove-currency-data-generation-expi.patch
+@@ -0,0 +1,25 @@
++From 7df2fd1014a0c31f518be4f6a0018533f469d584 Mon Sep 17 00:00:00 2001
++From: Alex Gonzalez <alex.gonzalez@digi.com>
++Date: Wed, 31 Dec 2014 16:07:32 +0100
++Subject: [PATCH] icedtea: openjdk: remove currency data generation expiration
++ date
++
++Signed-off-by: Alex Gonzalez <alex.gonzalez@digi.com>
++---
++ .../src/build/tools/generatecurrencydata/GenerateCurrencyData.java     | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
++index bf335fa22c1d..0e421360fef9 100644
++--- openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
+++++ openjdk/jdk/make/tools/src/build/tools/generatecurrencydata/GenerateCurrencyData.java
++@@ -281,9 +281,6 @@ public class GenerateCurrencyData {
++             checkCurrencyCode(newCurrency);
++             String timeString = currencyInfo.substring(4, length - 4);
++             long time = format.parse(timeString).getTime();
++-            if (Math.abs(time - System.currentTimeMillis()) > ((long) 10) * 365 * 24 * 60 * 60 * 1000) {
++-                throw new RuntimeException("time is more than 10 years from present: " + time);
++-            }
++             specialCaseCutOverTimes[specialCaseCount] = time;
++             specialCaseOldCurrencies[specialCaseCount] = oldCurrency;
++             specialCaseOldCurrenciesDefaultFractionDigits[specialCaseCount] = getDefaultFractionDigits(oldCurrency);
+diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+index 1f3533c..47813cd 100644
+--- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
++++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+@@ -80,6 +80,7 @@ OPENJDK_PATCHES = " \
+         file://icedtea-hotspot-make-arch-sane-for-x86.patch;apply=no \
+         file://icedtea-jdk-sane-x86-arch.patch;apply=no \
+ 	file://icedtea-flags.patch;apply=no \
++	file://icedtea-openjdk-remove-currency-data-generation-expi.patch;apply=no \
+         "
+ 
+ export DISTRIBUTION_PATCHES = " \
+@@ -89,4 +90,5 @@ export DISTRIBUTION_PATCHES = " \
+         patches/icedtea-hotspot-make-arch-sane-for-x86.patch \
+         patches/icedtea-jdk-sane-x86-arch.patch \
+ 	patches/icedtea-flags.patch \
++	patches/icedtea-openjdk-remove-currency-data-generation-expi.patch \
+         "
 -- 
-1.7.10.4
+2.3.0
 
 
-
-Ce message, ainsi que tous les fichiers joints à ce message,
-peuvent contenir des informations sensibles et/ ou confidentielles
-ne devant pas être divulguées. Si vous n'êtes pas le destinataire
-de ce message (ou que vous recevez ce message par erreur), nous
-vous remercions de le notifier immédiatement à son expéditeur, et
-de détruire ce message. Toute copie, divulgation, modification,
-utilisation ou diffusion, non autorisée, directe ou indirecte, de
-tout ou partie de ce message, est strictement interdite.
-
-This e-mail, and any document attached hereby, may contain
-confidential and/or privileged information. If you are not the
-intended recipient (or have received this e-mail in error) please
-notify the sender immediately and destroy this e-mail. Any
-unauthorized, direct or indirect, copying, disclosure, distribution
-or other use of the material or parts thereof is strictly
-forbidden.
 
