@@ -1,38 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
-	[74.125.82.177])
-	by mail.openembedded.org (Postfix) with ESMTP id A900371633
+Return-Path: <hugo.saldanha@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id B018871633
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2015 17:57:50 +0000 (UTC)
-Received: by wevk48 with SMTP id k48so26858877wev.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2015 09:57:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=myeeObaIeYMp3JhvCilG+YVH8f5syzieMW0IIsQu8Ko=;
-	b=mGYymxO1raCCazqWg1ygnym8+zXUlUrlxO0vC3YYu7aZrvlQiivp7OEwZgHkZ7aWFW
-	mo/Pky3fC6Av11rZR/1zVbfgQhTdXkDes6kWqzWG2fN2FkIf+kO/mFgdSgzleTD0IdNq
-	tqeErPyEzfNvaxWm4F93ebLob1IHqIqERmOhow6n7SIEiht9buqQrxEb4D+ZY2oZGAuf
-	Bmjyv555NADo50V2BRjmDOHmiETiaHRbqBkf3ou8tte24FeonxO51Kp6SRRbZqpMvSqu
-	C+Q5veG4MrIp97K/5T1y2/ZXGjhXEeBqhp5D264BtMCzHl6BVAT+bGF1NOd5nL+HJhHH
-	AD6A==
+	Tue, 24 Feb 2015 18:08:45 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Tue, 24 Feb 2015 15:08:32 -0300
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from localhost (10.4.3.1) by mail.aker.com.br (10.0.0.20) with
+	Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 24 Feb 2015 15:08:41 -0300
+Date: Tue, 24 Feb 2015 15:10:46 -0300
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Message-ID: <20150224181045.GF1284@saldanha.aker.com.br>
+References: <F81DC1078564A34BB4DA30CAE03814D1276975E1@ORSMSX104.amr.corp.intel.com>
+	<CAP9ODKo1c8NuZvTY-j+dbiYVeRo4Qe6HdqHEdiZULPxNb4ASpQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.180.8.10 with SMTP id n10mr31926174wia.79.1424800671156;
-	Tue, 24 Feb 2015 09:57:51 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.27.11.18 with HTTP; Tue, 24 Feb 2015 09:57:51 -0800 (PST)
-In-Reply-To: <2039424.onani1CoMk@peggleto-mobl5.ger.corp.intel.com>
-References: <F81DC1078564A34BB4DA30CAE03814D127697625@ORSMSX104.amr.corp.intel.com>
-	<CAP9ODKpdNS16hMUpiuogNna=YpO-m8LgCD5O87XBKFysKeQH3Q@mail.gmail.com>
-	<2039424.onani1CoMk@peggleto-mobl5.ger.corp.intel.com>
-Date: Tue, 24 Feb 2015 14:57:51 -0300
-X-Google-Sender-Auth: VMH7NC1mAVgwO43AFQOnftuOVOI
-Message-ID: <CAP9ODKpz2e5usvJNihsA9Cq9wSzxoP1-oLdULupAvxXnFqd19Q@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
+In-Reply-To: <CAP9ODKo1c8NuZvTY-j+dbiYVeRo4Qe6HdqHEdiZULPxNb4ASpQ@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-AkerSMTPGW-ServerID: 5de71414d6a5ac0be1dec76f647836bb21381a41
+X-AkerSMTPGW-MessageID: 37fe78b2cdb308742a31ab9a8ba617e94025f409-10o
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Why no recipe for openjdk-headless?
+Subject: Re: iecedtea7-native will not build. Possible fix attached
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,51 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 17:57:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 Feb 2015 18:08:49 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Tue, Feb 24, 2015 at 2:54 PM, Paul Eggleton
-<paul.eggleton@linux.intel.com> wrote:
-> On Tuesday 24 February 2015 14:06:41 Otavio Salvador wrote:
->> On Tue, Feb 24, 2015 at 4:00 AM, Bruce, Henry <henry.bruce@intel.com> wrote:
->> > I'm putting together an OS image that includes  a Java headless
->> > application. Having used the openjdk7-jre-headless package on Ubuntu I
->> > was hoping to find a matching recipe, but sadly none exist,.  The
->> > openjdk7-jre recipe requires the X11 distro feature which adds
->> > unnecessary luggage for a small footprint IoT solution. Thanks to a
->> > bbappend from https://github.com/woglinde/meta-java/issues/45 I can
->> > minimize footprint, but a headless recipe would be a better solution.
->> > I'm fairly new to Yocto so could someone explain the challenges of a
->> > headless recipe and where one might start when creating one?
->>
->> Patches are welcome. I think the link you posted has a good base of
->> work done so you could start there and later follow the README file to
->> post the patches here.
->
-> Perhaps more concretely, this would presumably be a place where you would use
-> PACKAGECONFIG to add and remove the appropriate dependencies and also options
-> in EXTRA_OECONF. It looks like that bbappend has a mixture of things that are
-> and aren't related to building without X. Henry, I'm not sure if you've come
-> across PACKAGECONFIG yet but just in case, here is an example from our
-> mpeg2dec recipe:
->
-> PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-> PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 libxext libxv"
->
-> (Obviously you'd need to use values appropriate for the openjdk recipe in
-> the second line.)
+On Tue, Feb 24, 2015 at 02:08:20PM -0300, Otavio Salvador wrote:
+> On Tue, Feb 24, 2015 at 3:37 AM, Bruce, Henry <henry.bruce@intel.com> wrote:
+> > Hello openjdk community,
+> >
+> > iecedtea7-native from git://git.yoctoproject.org/meta-java doesn't build due to well documented Turkish currency expiration problem. This has been fixed for icedtea6 so I borrowed the patch (not sure if this is appropriate) and put into a the attached bbappend that fixes the problem. I went with a bbappend as I wasn't sure of the process for patching a recipe. Resulting JVM seems to work for my application.
+> 
+> Check the current patchset which Hugo has sent (now in Cc) as I think
+> this address the issue you had.
+> 
 
-The only drawback I see from the PACKAGECONFIG solution, for this
-specific case, is that I can see use cases where one product will use
-headless and another use complete Java and this would impose or
-machine specific packages or split distros.
-
-However I also think that MOST people will use headless so maybe we
-could add the PACKAGECONFIG and default to headless and handle the
-exception when it happens...
+That is true. I've just taken a different approach, based on what was done
+with openjdk-7, but essentially the patch does the same thing.
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+		Hugo
+
 
