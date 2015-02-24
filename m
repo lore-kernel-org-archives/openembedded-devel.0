@@ -1,40 +1,44 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id E051C706B3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Feb 2015 19:49:48 +0000 (UTC)
-Received: by wghl18 with SMTP id l18so948991wgh.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Feb 2015 11:49:49 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 506E971633;
+	Tue, 24 Feb 2015 06:34:12 +0000 (UTC)
+Received: by pdev10 with SMTP id v10so31118390pde.10;
+	Mon, 23 Feb 2015 22:34:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=SagT/hF2d8PIJAszGzK9Nliq6Mfkx+2iPktR3qfXwOw=;
-	b=joEZxgd3esvjO75QK6AE6kJDa69U6pvTW6poGAfSMWteQ2FGxPB8HHrZY2OOyLY6xv
-	huQ2d4vJm671jkVad/52dexaXcP0mX41KDCSgkeTlNwZzecgGIT/2jKFiAu9sontSSip
-	D16ASvloThFUo/Eb4/1Yxen7Zhf3CaDhGB2TJp3JGAyDLmQVP4NX7puyEiHkgKD71SRE
-	FQNcc/63w1wgmKPzQWrsgJ14cslPNOT6AnyFq9bdBDrgEC9TySbXDRrikqTEEtYHUR9y
-	j3RlAi3OSb68K9VEUz3lkZikMoq//KNvJcOujOuB0/lLk9g9Bht4dUQPeAXpfcGXTwqZ
-	H3NQ==
-X-Received: by 10.180.76.133 with SMTP id k5mr23725943wiw.30.1424720989171;
-	Mon, 23 Feb 2015 11:49:49 -0800 (PST)
-Received: from [192.168.50.198] (ip-84-119-96-251.unity-media.net.
-	[84.119.96.251]) by mx.google.com with ESMTPSA id
-	pp10sm56969442wjc.31.2015.02.23.11.49.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 Feb 2015 11:49:48 -0800 (PST)
-Message-ID: <54EB846E.9090304@gmail.com>
-Date: Mon, 23 Feb 2015 20:50:06 +0100
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
-MIME-Version: 1.0
-To: Sven Ebenfeld <sven.ebenfeld@gmail.com>, 
-	openembedded-devel@lists.openembedded.org
-References: <1424512336-47007-1-git-send-email-sven.ebenfeld@gmail.com>
-	<1424512336-47007-3-git-send-email-sven.ebenfeld@gmail.com>
-In-Reply-To: <1424512336-47007-3-git-send-email-sven.ebenfeld@gmail.com>
-Subject: Re: [meta-oe][PATCH 2/7] crda: Fix SRC_URI
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=/wCRkwrIbXV/e4KAej8PqtJteCabyZOsmYnloMRwFlE=;
+	b=esuudj8JPixg4ISoeOZTVR4YR81X8DKgPLHPbaDj0sUY9Jykiq/1X7iSL1sxKpdcE3
+	/HMSwc6Wxoju50dhpDuTuo1qfM0JAcuCPsUmvcu7lUklfrTVOVjiNx/0s774tMv6iZf8
+	Qvf55A+CCg8UpNr46w5VT1ulYz59xOkmTPaotGghmi3gZdYdD9xR0pj3Z4NMxiAhPw15
+	g8EH0nTGCDMzxuYAQ0mfuGC8Hx+Xud8+PFg/iMH7GxrssTCyd48bzRWhwFNv0NhDgSrD
+	qecHfCTjqIeX4PqDhBl+nl7iU9BNOgb+FaIosNng+kO9Ty+daTQVhnOiEWCwWz+nz04Y
+	Ikcg==
+X-Received: by 10.68.57.139 with SMTP id i11mr1175189pbq.59.1424759654136;
+	Mon, 23 Feb 2015 22:34:14 -0800 (PST)
+Received: from ?IPv6:2601:9:3580:84c:201b:b105:13ca:8330?
+	([2601:9:3580:84c:201b:b105:13ca:8330])
+	by mx.google.com with ESMTPSA id
+	ci17sm37799334pdb.70.2015.02.23.22.34.12
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 23 Feb 2015 22:34:12 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <54E7D0D8.2060900@urbanec.net>
+Date: Mon, 23 Feb 2015 22:34:11 -0800
+Message-Id: <71B007D1-AE38-41DB-827E-67DE9A3C3DD1@gmail.com>
+References: <CAMKF1souj1-FLTjkQb0y8myTiKMJyNeAa7wiM5-pW1fz0EtheA@mail.gmail.com>
+	<1424455387.11836.57.camel@linuxfoundation.org>
+	<54E7D0D8.2060900@urbanec.net>
+To: Peter Urbanec <openembedded-devel@urbanec.net>
+X-Mailer: Apple Mail (2.2070.6)
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [yocto] [RFT] upcoming glibc 2.21 and gcc 4.9 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,48 +52,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Feb 2015 19:49:49 -0000
-Content-Type: text/plain; charset=iso-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Feb 2015 06:34:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Please don't hesitate about trying this patch as crda just got updated.
 
-Am 21.02.2015 um 10:52 schrieb Sven Ebenfeld:
-> Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-> ---
->  meta-networking/recipes-connectivity/crda/crda_1.1.3.bb | 10 +++++-----
->  1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
-> index 0bb8998..5b86058 100644
-> --- a/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
-> +++ b/meta-networking/recipes-connectivity/crda/crda_1.1.3.bb
-> @@ -7,13 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
->  
->  DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
->  
-> -SRC_URI = "http://wireless.kernel.org/download/crda/${BP}.tar.bz2;name=crda \
-> -           http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/2013.01.11-regulatory.bin;name=bin \
-> +SRC_URI = "https://www.kernel.org/pub/software/network/${PN}/${BP}.tar.bz2;name=crda \
-> +           https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2013.01.11.tar.bz2;name=bin \
->  "
->  SRC_URI[crda.md5sum] = "29579185e06a75675507527243d28e5c"
->  SRC_URI[crda.sha256sum] = "aa8a7fe92f0765986c421a5b6768a185375ac210393df0605ee132f6754825f0"
-> -SRC_URI[bin.md5sum] = "e0c8a5ca63fb8bf803213f9a0c90b50b"
-> -SRC_URI[bin.sha256sum] = "b1ee0b20c123c612dfdb6851ab42c01666f66fb583e0e590942f19bb54cf84be"
-> +SRC_URI[bin.md5sum] = "f137585abd5e07454932ea555b826149"
-> +SRC_URI[bin.sha256sum] = "6eb469555eb547b22738ce7bf59ebba42138560f128085a5e238eb6c8075792e"
->  
->  inherit python-dir pythonnative
->  # Recursive make problem
-> @@ -28,7 +28,7 @@ do_install() {
->  
->      install -d ${D}${libdir}/crda/
->  
-> -    install -m 0644 ${WORKDIR}/2013.01.11-regulatory.bin ${D}${libdir}/crda/regulatory.bin
-> +    install -m 0644 ${WORKDIR}/wireless-regdb-2013.01.11/regulatory.bin ${D}${libdir}/crda/regulatory.bin
->  }
->  
->  
-> 
+> On Feb 20, 2015, at 4:27 PM, Peter Urbanec =
+<openembedded-devel@urbanec.net> wrote:
+>=20
+> On 21/02/15 05:03, Richard Purdie wrote:
+>> On Mon, 2015-02-02 at 02:02 -0800, Khem Raj wrote:
+>>> I have put together upgrade to gcc 4.9.2 as well as glibc 2.21 (
+> ...
+>> For info, I've now merged the glibc part of this change now too.
+>=20
+> It looks like the new glibc turns all gcc warnings into errors. That =
+does not seem to work too well in all cases:
+
+you seem to be overriding default selected optimization to use -Os =
+instead of -O2, with 2.21 glibc is now using -Werror by default which is =
+a good thing
+but then not all combinations have been tested out so when you override =
+the default opt level then please add -Wno-error as well. May be I =
+should just send a patch to detect this usecase
+
+
+>=20
+> | mipsel-oe-linux-gcc -mel -mabi=3D32 -mhard-float =
+--sysroot=3D/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwi=
+z/inihdp/tmp-glibc/sysroots/inihdp-tcbootstrap pthread_equal.c -c =
+-std=3Dgnu99 -fgnu89-inline  -Os -Wall -Werror -Winline -Wno-error=3Dundef=
+ -Wundef -Wwrite-strings -feliminate-unused-debug-types =
+-fmerge-all-constants -frounding-math -g -pipe -Wstrict-prototypes   =
+-fPIC        -I../include =
+-I/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/t=
+mp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/=
+nptl  =
+-I/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/t=
+mp-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux =
+ -I../sysdeps/unix/sysv/linux/mips/mips32/fpu  =
+-I../sysdeps/unix/sysv/linux/mips/mips32  =
+-I../sysdeps/unix/sysv/linux/mips  -I../sysdeps/mips/nptl  =
+-I../sysdeps/unix/sysv/linux/include -I../sysdeps/unix/sysv/linux  =
+-I../sysdeps/nptl  -I../sysdeps/pthread  -I../sysdeps/gnu  -I../!
+> sysdeps/un
+> ix/inet  -I../sysdeps/unix/sysv  -I../sysdeps/unix/mips/mips32  =
+-I../sysdeps/unix/mips  -I../sysdeps/unix  -I../sysdeps/posix  =
+-I../sysdeps/mips/mips32/fpu  -I../sysdeps/mips/mips32  =
+-I../sysdeps/mips/ieee754  -I../sysdeps/mips/soft-fp  =
+-I../sysdeps/mips/include -I../sysdeps/mips  -I../sysdeps/ieee754/flt-32 =
+ -I../sysdeps/ieee754/dbl-64  -I../sysdeps/wordsize-32  =
+-I../sysdeps/mips/fpu  -I../sysdeps/ieee754  -I../sysdeps/generic  -I.. =
+-I../libio -I. -nostdinc -isystem =
+/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp=
+-glibc/sysroots/x86_64-linux/usr/lib/mipsel-oe-linux.gcc-cross-initial-mip=
+sel/gcc/mipsel-oe-linux/4.9.2/include -isystem =
+/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp=
+-glibc/sysroots/x86_64-linux/usr/lib/mipsel-oe-linux.gcc-cross-initial-mip=
+sel/gcc/mipsel-oe-linux/4.9.2/include-fixed -isystem =
+/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp=
+-glibc/sysroots/inihdp/usr/include  -D_LIBC_REE!
+> NTRANT -in
+> clude =
+/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp=
+-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/li=
+bc-modules.h -DMODULE_NAME=3Dlibpthread -include =
+../include/libc-symbols.h  -DPIC -DSHARED     -o =
+/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp=
+-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/np=
+tl/pthread_equal.os -MD -MP -MF =
+/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp=
+-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/np=
+tl/pthread_equal.os.dt -MT =
+/home/peteru/Source/T3/build-enviroment-core-24/builds/beyonwiz/inihdp/tmp=
+-glibc/work/mips32el-oe-linux/glibc/glibc-2.21-r0/build-mipsel-oe-linux/np=
+tl/pthread_equal.os
+> | In file included from allocatestack.c:30:0,
+> |                  from pthread_create.c:55:
+> | allocatestack.c: In function 'stack_list_add':
+> | ../include/list.h:58:1: error: inlining failed in call to =
+'list_add': call is unlikely and code size would grow [-Werror=3Dinline]
+> |  list_add (list_t *newp, list_t *head)
+> |  ^
+> | In file included from pthread_create.c:55:0:
+> | allocatestack.c:159:3: error: called from here [-Werror=3Dinline]
+> |    list_add (elem, list);
+> |    ^
+>=20
+
 
