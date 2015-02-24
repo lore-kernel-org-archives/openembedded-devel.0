@@ -1,27 +1,37 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 9420671633
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-we0-f177.google.com (mail-we0-f177.google.com
+	[74.125.82.177])
+	by mail.openembedded.org (Postfix) with ESMTP id A900371633
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Feb 2015 17:54:56 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga101.fm.intel.com with ESMTP; 24 Feb 2015 09:54:55 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.09,639,1418112000"; d="scan'208";a="459028882"
-Received: from aryan3-mobl1.ger.corp.intel.com (HELO
-	peggleto-mobl5.ger.corp.intel.com) ([10.252.21.162])
-	by FMSMGA003.fm.intel.com with ESMTP; 24 Feb 2015 09:39:26 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Bruce, Henry" <henry.bruce@intel.com>
-Date: Tue, 24 Feb 2015 17:54:52 +0000
-Message-ID: <2039424.onani1CoMk@peggleto-mobl5.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.4 (Linux/3.18.7-100.fc20.x86_64; KDE/4.14.4; x86_64; ; )
-In-Reply-To: <CAP9ODKpdNS16hMUpiuogNna=YpO-m8LgCD5O87XBKFysKeQH3Q@mail.gmail.com>
+	Tue, 24 Feb 2015 17:57:50 +0000 (UTC)
+Received: by wevk48 with SMTP id k48so26858877wev.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Feb 2015 09:57:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=myeeObaIeYMp3JhvCilG+YVH8f5syzieMW0IIsQu8Ko=;
+	b=mGYymxO1raCCazqWg1ygnym8+zXUlUrlxO0vC3YYu7aZrvlQiivp7OEwZgHkZ7aWFW
+	mo/Pky3fC6Av11rZR/1zVbfgQhTdXkDes6kWqzWG2fN2FkIf+kO/mFgdSgzleTD0IdNq
+	tqeErPyEzfNvaxWm4F93ebLob1IHqIqERmOhow6n7SIEiht9buqQrxEb4D+ZY2oZGAuf
+	Bmjyv555NADo50V2BRjmDOHmiETiaHRbqBkf3ou8tte24FeonxO51Kp6SRRbZqpMvSqu
+	C+Q5veG4MrIp97K/5T1y2/ZXGjhXEeBqhp5D264BtMCzHl6BVAT+bGF1NOd5nL+HJhHH
+	AD6A==
+MIME-Version: 1.0
+X-Received: by 10.180.8.10 with SMTP id n10mr31926174wia.79.1424800671156;
+	Tue, 24 Feb 2015 09:57:51 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.27.11.18 with HTTP; Tue, 24 Feb 2015 09:57:51 -0800 (PST)
+In-Reply-To: <2039424.onani1CoMk@peggleto-mobl5.ger.corp.intel.com>
 References: <F81DC1078564A34BB4DA30CAE03814D127697625@ORSMSX104.amr.corp.intel.com>
 	<CAP9ODKpdNS16hMUpiuogNna=YpO-m8LgCD5O87XBKFysKeQH3Q@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio@ossystems.com.br>
+	<2039424.onani1CoMk@peggleto-mobl5.ger.corp.intel.com>
+Date: Tue, 24 Feb 2015 14:57:51 -0300
+X-Google-Sender-Auth: VMH7NC1mAVgwO43AFQOnftuOVOI
+Message-ID: <CAP9ODKpz2e5usvJNihsA9Cq9wSzxoP1-oLdULupAvxXnFqd19Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: Why no recipe for openjdk-headless?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -36,44 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Feb 2015 17:55:00 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 24 Feb 2015 17:57:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tuesday 24 February 2015 14:06:41 Otavio Salvador wrote:
-> On Tue, Feb 24, 2015 at 4:00 AM, Bruce, Henry <henry.bruce@intel.com> wrote:
-> > I'm putting together an OS image that includes  a Java headless
-> > application. Having used the openjdk7-jre-headless package on Ubuntu I
-> > was hoping to find a matching recipe, but sadly none exist,.  The
-> > openjdk7-jre recipe requires the X11 distro feature which adds
-> > unnecessary luggage for a small footprint IoT solution. Thanks to a
-> > bbappend from https://github.com/woglinde/meta-java/issues/45 I can
-> > minimize footprint, but a headless recipe would be a better solution. 
-> > I'm fairly new to Yocto so could someone explain the challenges of a
-> > headless recipe and where one might start when creating one?
+On Tue, Feb 24, 2015 at 2:54 PM, Paul Eggleton
+<paul.eggleton@linux.intel.com> wrote:
+> On Tuesday 24 February 2015 14:06:41 Otavio Salvador wrote:
+>> On Tue, Feb 24, 2015 at 4:00 AM, Bruce, Henry <henry.bruce@intel.com> wrote:
+>> > I'm putting together an OS image that includes  a Java headless
+>> > application. Having used the openjdk7-jre-headless package on Ubuntu I
+>> > was hoping to find a matching recipe, but sadly none exist,.  The
+>> > openjdk7-jre recipe requires the X11 distro feature which adds
+>> > unnecessary luggage for a small footprint IoT solution. Thanks to a
+>> > bbappend from https://github.com/woglinde/meta-java/issues/45 I can
+>> > minimize footprint, but a headless recipe would be a better solution.
+>> > I'm fairly new to Yocto so could someone explain the challenges of a
+>> > headless recipe and where one might start when creating one?
+>>
+>> Patches are welcome. I think the link you posted has a good base of
+>> work done so you could start there and later follow the README file to
+>> post the patches here.
 >
-> Patches are welcome. I think the link you posted has a good base of
-> work done so you could start there and later follow the README file to
-> post the patches here.
+> Perhaps more concretely, this would presumably be a place where you would use
+> PACKAGECONFIG to add and remove the appropriate dependencies and also options
+> in EXTRA_OECONF. It looks like that bbappend has a mixture of things that are
+> and aren't related to building without X. Henry, I'm not sure if you've come
+> across PACKAGECONFIG yet but just in case, here is an example from our
+> mpeg2dec recipe:
+>
+> PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
+> PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 libxext libxv"
+>
+> (Obviously you'd need to use values appropriate for the openjdk recipe in
+> the second line.)
 
-Perhaps more concretely, this would presumably be a place where you would use
-PACKAGECONFIG to add and remove the appropriate dependencies and also options
-in EXTRA_OECONF. It looks like that bbappend has a mixture of things that are
-and aren't related to building without X. Henry, I'm not sure if you've come
-across PACKAGECONFIG yet but just in case, here is an example from our
-mpeg2dec recipe:
+The only drawback I see from the PACKAGECONFIG solution, for this
+specific case, is that I can see use cases where one product will use
+headless and another use complete Java and this would impose or
+machine specific packages or split distros.
 
-PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-PACKAGECONFIG[x11] = "--with-x,--without-x,virtual/libx11 libxext libxv"
-
-(Obviously you'd need to use values appropriate for the openjdk recipe in
-the second line.)
-
-Cheers,
-Paul
+However I also think that MOST people will use headless so maybe we
+could add the PACKAGECONFIG and default to headless and handle the
+exception when it happens...
 
 -- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
