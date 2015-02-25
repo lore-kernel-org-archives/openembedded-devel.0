@@ -1,36 +1,35 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A987605B3
+Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 52F66735C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2015 18:29:40 +0000 (UTC)
-Received: by mail-wi0-f177.google.com with SMTP id bs8so7164305wib.4
+	Wed, 25 Feb 2015 18:30:59 +0000 (UTC)
+Received: by wesq59 with SMTP id q59so5456571wes.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2015 10:29:41 -0800 (PST)
+	Wed, 25 Feb 2015 10:31:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:content-type;
-	bh=W8x91aUtqqxkB9YEAOVal+sAfig9ZGV7x6j9dWM7ACE=;
-	b=URa0W+WFGkAnMGKBCPY9AsPWYGuEOvNAB1JJNXnbLgSigsURHqmVdtUD1nM6yEtZSV
-	TgI9QtZgqpFAMTEdhj3Js0C/KRJG2rE0/1ClNc7y4FeWk2L30E0eyQdhY4VOvkPo7lYD
-	H+/9H97mcucAWNAVsVM28M5P9Hy1Ja2y+v1jaSQ9U42TsUnlPk2EF/InwQzlbpGZNH4V
-	KGrQD7dnUEV4jKJP3FLQkL7hPWlpQ8tcvguRb41ALEP/cPvKJcBF2VLBR9RyLW7uITJe
-	HdKUw76Qmg+/vrLykimaNlSmRcW2qBcO0IMQQQkBT2m4qSuW2Uwg7bRlvvQosVPgRd+b
-	5qow==
+	bh=D7/dUx1IjdoX1bQ7k/44ntptOG36uogVDno/uGdGC5o=;
+	b=VFueoZEgb70+SI2xwsptKpNwouWCr2SqIiIWEhDd5sAyAuCjwxvePjmZMMx1w//lzM
+	opQjKghbHqFiCgJpSbX5xXtg0HF/IciuBwYe4J5ePxL8Z5Y/peaTKluWYXO38Ubh3pgj
+	ltibgB0/RvcN9v0L8rY6Dvzjwtz6sEJPkA/v0yUpylt5sHtWnynAQl/VS3o7fLYwsDti
+	Rxu2GyHdhbYflGh1te58+HxrAl7CIRDZFkvmcAIwpAAIIGpOS1Y/qgbS3Tx89xF0+bZx
+	D4QYopZvV/v7Lb85io8km2Q5epotI8TEFcGseW4A1iS5S3LhHMrgMie81rsx6m1/Cy6Z
+	1MTw==
 MIME-Version: 1.0
-X-Received: by 10.180.8.10 with SMTP id n10mr8686720wia.79.1424888981490; Wed,
-	25 Feb 2015 10:29:41 -0800 (PST)
+X-Received: by 10.180.104.3 with SMTP id ga3mr8817390wib.66.1424889059831;
+	Wed, 25 Feb 2015 10:30:59 -0800 (PST)
 Sender: otavio.salvador@gmail.com
-Received: by 10.27.11.18 with HTTP; Wed, 25 Feb 2015 10:29:41 -0800 (PST)
-In-Reply-To: <54ED1B78.4040101@balister.org>
-References: <54ED1B78.4040101@balister.org>
-Date: Wed, 25 Feb 2015 15:29:41 -0300
-X-Google-Sender-Auth: FSqkfBWFfFXKf5k3cFAwgKhn2g8
-Message-ID: <CAP9ODKp6xYoi4tfiSv2Pvfc2q7DAKg7zDdLj2-WYcTz9+4Jw8w@mail.gmail.com>
+Received: by 10.27.11.18 with HTTP; Wed, 25 Feb 2015 10:30:59 -0800 (PST)
+In-Reply-To: <1424845712-34105-1-git-send-email-biannm@cn.fujitsu.com>
+References: <1424845712-34105-1-git-send-email-biannm@cn.fujitsu.com>
+Date: Wed, 25 Feb 2015 15:30:59 -0300
+X-Google-Sender-Auth: kuUvr55LsIYKrw3twbLewSH-mVg
+Message-ID: <CAP9ODKoZi_H04uOF7AiZSpU5F1T32UmFLKtNeM+Y0Vq-90v7Hg@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Armin Kuster <akuster808@gmail.com>
-Subject: Re: [meta-oe][dizzy]Update PyQt and related recipes
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] xbitmaps: fix build warning.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,25 +43,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2015 18:29:41 -0000
+X-List-Received-Date: Wed, 25 Feb 2015 18:30:59 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello Philip,
+On Wed, Feb 25, 2015 at 3:28 AM, Bian Naimeng <biannm@cn.fujitsu.com> wrote:
+>  Can't install xbitmaps-dev-1.1.1-r0: no package provides xbitmaps = 1.1.1-r0
+>
+> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 
-On Tue, Feb 24, 2015 at 9:46 PM, Philip Balister <philip@balister.org> wrote:
-> Please pull these three patches into meta-oe/dizzy.
->
-> https://github.com/openembedded/meta-oe/pull/19
->
-> These lead to a working PyQt4, which will reduce the number of questions
-> I get about gnuradio-companion not working on dizzy.
->
-> 1) I apologize for using the meta-oe repo instead of meta-openembedded.
-> 2) If this is annoying, I can send via email like a sane person.
-
-I think this can be included in the upcoming pull request. Armin, do
-you have a branch for me to pick and do it all at same time? This ease
-the Martin's life for pulling once.
+ALLOW_EMPTY_${PN} = "1" would be nicer I think.
 
 -- 
 Otavio Salvador                             O.S. Systems
