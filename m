@@ -1,38 +1,30 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id DACC573731
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E97771F1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2015 15:41:48 +0000 (UTC)
-Received: by mail-ig0-f171.google.com with SMTP id h15so36417813igd.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2015 07:41:49 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=P+TdFUvbfRt+BUAX9/Cely9Jv14UBgQo9llGxFKwydw=;
-	b=a+a+WABrsLrGha9K9wlXmvVzhcNfhQXVnK68VnRyQFRcCs+WD6haSJEhxwjv2uPWuW
-	HbPAnQSGYgojBMyDSSPxSVabXBTcpYDdM2Gq4dLpbK7dlr6p5/57K51x262pkPNLnEpo
-	jkBaKgetm7c27Cy0CPqvYJmt7lcVquYKHG0GwwW8RjC6ZdfFtWTkPC8wdS7oPxJB4NbF
-	UyEqXiL7TdR1mGW0dhkuOE13yY5Q3Fu8bTSeqIkHZptmToFFSm6OKb9IuMIzKys/Mkhv
-	hi8gxCAqkCNEivbm8/GaneZgZ8XEBxLdcTGaJ2RgZ6tKij9i/ws1t+eqkPzUNOvOnHYQ
-	x2Jg==
-X-Gm-Message-State: ALoCoQnCPMSOGjQkWyeFT9MI8d6n83YRkPI+YW98ALdgp8+UOWHqF7ObBWGRTU5VI6DUok68wuFG
-X-Received: by 10.107.47.90 with SMTP id j87mr5051523ioo.33.1424878909602;
-	Wed, 25 Feb 2015 07:41:49 -0800 (PST)
-Received: from mir.deserted.net (24-246-4-250.cable.teksavvy.com.
-	[24.246.4.250]) by mx.google.com with ESMTPSA id
-	184sm16360487ion.14.2015.02.25.07.41.48
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 25 Feb 2015 07:41:48 -0800 (PST)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Feb 2015 10:42:47 -0500
-Message-Id: <1424878967-17755-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] ptpd: use pkgconfig
+	Wed, 25 Feb 2015 15:53:13 +0000 (UTC)
+Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
+	by relay1.mentorg.com with esmtp 
+	id 1YQeGw-0005XT-Ih from Joe_MacDonald@mentor.com ;
+	Wed, 25 Feb 2015 07:53:14 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 25 Feb 2015 07:53:14 -0800
+Received: by burninator (Postfix, from userid 1000)	id C358C580C40; Wed, 25
+	Feb 2015 10:53:18 -0500 (EST)
+Date: Wed, 25 Feb 2015 10:53:18 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <rongqing.li@windriver.com>
+Message-ID: <20150225155318.GJ8949@mentor.com>
+References: <1424853093-6107-1-git-send-email-rongqing.li@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1424853093-6107-1-git-send-email-rongqing.li@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] lksctp: adjust the shipping of the major version shared library files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,89 +38,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2015 15:41:50 -0000
+X-List-Received-Date: Wed, 25 Feb 2015 15:53:14 -0000
+X-Groupsio-MsgNum: 54493
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nywXBoy70X0GaB8B"
+Content-Disposition: inline
 
-pcap-config should not be used for determining how to build against
-libpcap in a yocto environment.
+--nywXBoy70X0GaB8B
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
+[[oe] [meta-networking][PATCH] lksctp: adjust the shipping of the major ver=
+sion shared library files] On 15.02.25 (Wed 16:31) rongqing.li@windriver.co=
+m wrote:
 
-ptpd will still fail to build unless libpcap has a suitable pkgconfig entry, but
-at least one option for providing such is under discussion now, so this will
-make things no worse in the short term and will automagically repair things in
-the long term.
+> From: Roy Li <rongqing.li@windriver.com>
+>=20
+> not ship the major version shared library files in the dev packages,
+> and ship it into a package which is shipping the full version shared
+> library files.
+>=20
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 
+This is a pretty obvious change, so I went ahead and integrated it.  I
+rewrote your commit log, though.
+
+Thanks Roy.
 -J.
 
- .../ptpd/ptpd/ptpd-use-pkgconfig.patch             | 35 ++++++++++++++++++++++
- .../recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb         |  3 +-
- 2 files changed, 37 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/ptpd/ptpd/ptpd-use-pkgconfig.patch
+> ---
+>  meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb | 4 =
+++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.=
+0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.=
+bb
+> index 1651eb8..4cc955f 100644
+> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+> @@ -43,17 +43,17 @@ SOLIBMAJORVERSION=3D"1"
+>  PACKAGES =3D+ "${PN}-withsctp ${PN}-utils"
+> =20
+>  FILES_${PN} =3D " \
+> +    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
+>      ${libdir}/libsctp.so.${SOLIBVERSION} \
+>  "
+> =20
+>  FILES_${PN}-withsctp =3D " \
+> +    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
+>      ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
+>  "
+> =20
+>  FILES_${PN}-dev +=3D " \
+> -    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
+>      ${libdir}/libsctp.so \
+> -    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
+>      ${libdir}/lksctp-tools/libwithsctp.so \
+>      ${datadir}/lksctp-tools/*.c \
+>      ${datadir}/lksctp-tools/*.h \
+> --=20
+> 2.1.0
+>=20
+--=20
+-Joe MacDonald.
+:wq
 
-diff --git a/meta-networking/recipes-daemons/ptpd/ptpd/ptpd-use-pkgconfig.patch b/meta-networking/recipes-daemons/ptpd/ptpd/ptpd-use-pkgconfig.patch
-new file mode 100644
-index 0000000..e4578dd
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ptpd/ptpd/ptpd-use-pkgconfig.patch
-@@ -0,0 +1,35 @@
-+From 4c850b92a1cf8cfa19677c66bcde2edfab1a4490 Mon Sep 17 00:00:00 2001
-+From: Joe MacDonald <joe_macdonald@mentor.com>
-+Date: Tue, 24 Feb 2015 23:02:14 -0500
-+Subject: [PATCH] ptpd: use pkgconfig
-+
-+Yocto uses pkg-config for libpcap, rather than pcap-config, so use that
-+instead as the source for libs and cflags.
-+
-+Upstream-status: Inappropriate [ embedded specific ]
-+
-+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-+---
-+ configure.ac | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index dc9541f..288f547 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -112,10 +112,10 @@ case "$try_pcap" in
-+  yes)
-+     case "$PATH_PCAP_CONFIG" in
-+      /*)
-+-	PCAP_LIBS=`$PATH_PCAP_CONFIG --libs`
-++	PCAP_LIBS=`$PATH_PCAP_CONFIG --libs libpcap`
-+ 	AC_SUBST([PCAP_LIBS])
-+ 	# Separate CPPFLAGS and CFLAGS
-+-	foo=`$PATH_PCAP_CONFIG --cflags`
-++	foo=`$PATH_PCAP_CONFIG --cflags libpcap`
-+ 	PCAP_CPPFLAGS=
-+ 	PCAP_CFLAGS=
-+ 	for i in $foo; do
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
-index 50cdc7f..0dcfc1f 100644
---- a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
-+++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
-@@ -23,6 +23,7 @@ def get_sub(d):
- 
- SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${@get_sub(d)}/ptpd-${PV}.tar.gz \
-            file://ptpd-add-dpaa-etsec-support.patch \
-+           file://ptpd-use-pkgconfig.patch \
-            file://ptpd.service \
-            file://ptpd.conf \
- "
-@@ -34,7 +35,7 @@ S = "${WORKDIR}/ptpd-${PV}"
- 
- EXTRA_OEMAKE = ""
- 
--EXTRA_OECONF += "--disable-snmp"
-+EXTRA_OECONF += "--disable-snmp --with-pcap-config=pkg-config"
- 
- do_install() {
-     install -d ${D}${bindir} ${D}${mandir}/man8
--- 
-1.9.1
+--nywXBoy70X0GaB8B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
 
+iQEcBAEBAgAGBQJU7e/uAAoJEEn8ffcsOfaWfJUH/0IIYm4NfuhjYI2EJJqKO1Az
+fcd104DOhu/tunH8uoJ3Lk9+2TYY+ejGmejCv/Jue49Xvocn85Z+UWcSVuCEqKbw
+5SpTGbX5F4M4KO7Qf6VORi07BdWfaGq8fM/4tOTnBi7So/DF8fgn6bvl9TOKf0Qm
+Su8njkJJ/tZ5eCWwOW/g2fY42tx9A1V3jFRy+Hln1X5v25XgSJkUWXDroYok9TFv
+vXwxq9m/Gmc7pSahhGn2PT/n9rZnjWsabgoIL1GdOnYmuKTOvAmChIDJNOp29KPD
+fAKaFFRnxhUII2F86Z+ZMbvjzAizOM7XQJR3h42DWBufmwhERDN28tCZJqLTCPo=
+=WVUk
+-----END PGP SIGNATURE-----
+
+--nywXBoy70X0GaB8B--
