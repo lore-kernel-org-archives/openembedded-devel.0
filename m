@@ -1,27 +1,24 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C54CB71F1B
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A6BD171F1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2015 07:00:52 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="58194896"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Feb 2015 14:57:15 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t1P6X52T008951
+	Wed, 25 Feb 2015 08:31:35 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t1P8VZ4A003913
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2015 14:33:12 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 25 Feb 2015 14:33:58 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
+	Wed, 25 Feb 2015 00:31:35 -0800 (PST)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.137) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.174.1; Wed, 25 Feb 2015 00:31:35 -0800
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Feb 2015 14:28:32 +0800
-Message-ID: <1424845712-34105-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 25 Feb 2015 16:31:33 +0800
+Message-ID: <1424853093-6107-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH] xbitmaps: fix build warning.
+Subject: [meta-networking][PATCH] lksctp: adjust the shipping of the major version shared library files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,29 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2015 07:00:56 -0000
+X-List-Received-Date: Wed, 25 Feb 2015 08:31:39 -0000
 Content-Type: text/plain
 
- Can't install xbitmaps-dev-1.1.1-r0: no package provides xbitmaps = 1.1.1-r0
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+not ship the major version shared library files in the dev packages,
+and ship it into a package which is shipping the full version shared
+library files.
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb b/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb
-index 973a00f..8647f03 100644
---- a/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb
-+++ b/meta-oe/recipes-graphics/xorg-data/xbitmaps_1.1.1.bb
-@@ -3,6 +3,7 @@ require xorg-data-common.inc
- SUMMARY = "Common X11 Bitmaps"
- LICENSE = "MIT"
- DEPENDS += "libxmu"
-+RDEPENDS_${PN}-dev = ""
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+index 1651eb8..4cc955f 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+@@ -43,17 +43,17 @@ SOLIBMAJORVERSION="1"
+ PACKAGES =+ "${PN}-withsctp ${PN}-utils"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=dbd075aaffa4a60a8d00696f2e4b9a8f"
+ FILES_${PN} = " \
++    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
+     ${libdir}/libsctp.so.${SOLIBVERSION} \
+ "
  
+ FILES_${PN}-withsctp = " \
++    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
+     ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
+ "
+ 
+ FILES_${PN}-dev += " \
+-    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
+     ${libdir}/libsctp.so \
+-    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
+     ${libdir}/lksctp-tools/libwithsctp.so \
+     ${datadir}/lksctp-tools/*.c \
+     ${datadir}/lksctp-tools/*.h \
 -- 
-1.9.1
+2.1.0
 
 
