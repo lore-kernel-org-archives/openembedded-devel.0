@@ -1,30 +1,36 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E97771F1B
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A987605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Feb 2015 15:53:13 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
-	by relay1.mentorg.com with esmtp 
-	id 1YQeGw-0005XT-Ih from Joe_MacDonald@mentor.com ;
-	Wed, 25 Feb 2015 07:53:14 -0800
-Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 25 Feb 2015 07:53:14 -0800
-Received: by burninator (Postfix, from userid 1000)	id C358C580C40; Wed, 25
-	Feb 2015 10:53:18 -0500 (EST)
-Date: Wed, 25 Feb 2015 10:53:18 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <rongqing.li@windriver.com>
-Message-ID: <20150225155318.GJ8949@mentor.com>
-References: <1424853093-6107-1-git-send-email-rongqing.li@windriver.com>
+	Wed, 25 Feb 2015 18:29:40 +0000 (UTC)
+Received: by mail-wi0-f177.google.com with SMTP id bs8so7164305wib.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Feb 2015 10:29:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=W8x91aUtqqxkB9YEAOVal+sAfig9ZGV7x6j9dWM7ACE=;
+	b=URa0W+WFGkAnMGKBCPY9AsPWYGuEOvNAB1JJNXnbLgSigsURHqmVdtUD1nM6yEtZSV
+	TgI9QtZgqpFAMTEdhj3Js0C/KRJG2rE0/1ClNc7y4FeWk2L30E0eyQdhY4VOvkPo7lYD
+	H+/9H97mcucAWNAVsVM28M5P9Hy1Ja2y+v1jaSQ9U42TsUnlPk2EF/InwQzlbpGZNH4V
+	KGrQD7dnUEV4jKJP3FLQkL7hPWlpQ8tcvguRb41ALEP/cPvKJcBF2VLBR9RyLW7uITJe
+	HdKUw76Qmg+/vrLykimaNlSmRcW2qBcO0IMQQQkBT2m4qSuW2Uwg7bRlvvQosVPgRd+b
+	5qow==
 MIME-Version: 1.0
-In-Reply-To: <1424853093-6107-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] lksctp: adjust the shipping of the major version shared library files
+X-Received: by 10.180.8.10 with SMTP id n10mr8686720wia.79.1424888981490; Wed,
+	25 Feb 2015 10:29:41 -0800 (PST)
+Sender: otavio.salvador@gmail.com
+Received: by 10.27.11.18 with HTTP; Wed, 25 Feb 2015 10:29:41 -0800 (PST)
+In-Reply-To: <54ED1B78.4040101@balister.org>
+References: <54ED1B78.4040101@balister.org>
+Date: Wed, 25 Feb 2015 15:29:41 -0300
+X-Google-Sender-Auth: FSqkfBWFfFXKf5k3cFAwgKhn2g8
+Message-ID: <CAP9ODKp6xYoi4tfiSv2Pvfc2q7DAKg7zDdLj2-WYcTz9+4Jw8w@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Armin Kuster <akuster808@gmail.com>
+Subject: Re: [meta-oe][dizzy]Update PyQt and related recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,87 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Feb 2015 15:53:14 -0000
-X-Groupsio-MsgNum: 54493
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="nywXBoy70X0GaB8B"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Feb 2015 18:29:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
---nywXBoy70X0GaB8B
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello Philip,
 
-[[oe] [meta-networking][PATCH] lksctp: adjust the shipping of the major ver=
-sion shared library files] On 15.02.25 (Wed 16:31) rongqing.li@windriver.co=
-m wrote:
+On Tue, Feb 24, 2015 at 9:46 PM, Philip Balister <philip@balister.org> wrote:
+> Please pull these three patches into meta-oe/dizzy.
+>
+> https://github.com/openembedded/meta-oe/pull/19
+>
+> These lead to a working PyQt4, which will reduce the number of questions
+> I get about gnuradio-companion not working on dizzy.
+>
+> 1) I apologize for using the meta-oe repo instead of meta-openembedded.
+> 2) If this is annoying, I can send via email like a sane person.
 
-> From: Roy Li <rongqing.li@windriver.com>
->=20
-> not ship the major version shared library files in the dev packages,
-> and ship it into a package which is shipping the full version shared
-> library files.
->=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+I think this can be included in the upcoming pull request. Armin, do
+you have a branch for me to pick and do it all at same time? This ease
+the Martin's life for pulling once.
 
-This is a pretty obvious change, so I went ahead and integrated it.  I
-rewrote your commit log, though.
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
-Thanks Roy.
--J.
-
-> ---
->  meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb | 4 =
-++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.=
-0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.=
-bb
-> index 1651eb8..4cc955f 100644
-> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> @@ -43,17 +43,17 @@ SOLIBMAJORVERSION=3D"1"
->  PACKAGES =3D+ "${PN}-withsctp ${PN}-utils"
-> =20
->  FILES_${PN} =3D " \
-> +    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
->      ${libdir}/libsctp.so.${SOLIBVERSION} \
->  "
-> =20
->  FILES_${PN}-withsctp =3D " \
-> +    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
->      ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
->  "
-> =20
->  FILES_${PN}-dev +=3D " \
-> -    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
->      ${libdir}/libsctp.so \
-> -    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
->      ${libdir}/lksctp-tools/libwithsctp.so \
->      ${datadir}/lksctp-tools/*.c \
->      ${datadir}/lksctp-tools/*.h \
-> --=20
-> 2.1.0
->=20
---=20
--Joe MacDonald.
-:wq
-
---nywXBoy70X0GaB8B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJU7e/uAAoJEEn8ffcsOfaWfJUH/0IIYm4NfuhjYI2EJJqKO1Az
-fcd104DOhu/tunH8uoJ3Lk9+2TYY+ejGmejCv/Jue49Xvocn85Z+UWcSVuCEqKbw
-5SpTGbX5F4M4KO7Qf6VORi07BdWfaGq8fM/4tOTnBi7So/DF8fgn6bvl9TOKf0Qm
-Su8njkJJ/tZ5eCWwOW/g2fY42tx9A1V3jFRy+Hln1X5v25XgSJkUWXDroYok9TFv
-vXwxq9m/Gmc7pSahhGn2PT/n9rZnjWsabgoIL1GdOnYmuKTOvAmChIDJNOp29KPD
-fAKaFFRnxhUII2F86Z+ZMbvjzAizOM7XQJR3h42DWBufmwhERDN28tCZJqLTCPo=
-=WVUk
------END PGP SIGNATURE-----
-
---nywXBoy70X0GaB8B--
