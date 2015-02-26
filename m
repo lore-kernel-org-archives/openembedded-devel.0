@@ -1,32 +1,27 @@
 Return-Path: <daniel.markus@leica-geosystems.com>
-X-Greylist: delayed 344 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 26 Feb 2015 07:37:00 UTC
-Received: from eu-smtp-delivery-94.mimecast.com
-	(eu-smtp-delivery-94.mimecast.com [207.82.80.94])
-	by mail.openembedded.org (Postfix) with ESMTP id C5A66733AE
+Received: from outbound.sbg.se (outbound.sbg.se [83.241.165.85])
+	by mail.openembedded.org (Postfix) with ESMTP id B2AFB605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2015 07:36:59 +0000 (UTC)
-Received: from AHERSRVDOM03.lgs-net.com (ahersrvdom03.leica-geosystems.com
-	[193.8.40.98]) by uk-mta-9.uk.mimecast.lan;
-	Thu, 26 Feb 2015 07:30:06 +0000
-MIME-Version: 1.0
-In-Reply-To: <CADt1enOOO21Vnz5qNk_WGjTKiY8OT7gdzNSUBK-1CErijEoxBg@mail.gmail.com>
-References: <CADt1enOOO21Vnz5qNk_WGjTKiY8OT7gdzNSUBK-1CErijEoxBg@mail.gmail.com>,
-	<1424783606-8936-1-git-send-email-daniel.markus@leica-geosystems.com>
-From: daniel.markus@leica-geosystems.com
+	Thu, 26 Feb 2015 10:07:27 +0000 (UTC)
+Received: from hermes.sbg.se (mail.sbg.se [83.241.165.77])
+	by outbound.sbg.se (Postfix) with ESMTP id 8452F1847D2;
+	Thu, 26 Feb 2015 11:07:26 +0100 (CET)
+Received: from localhost.localdomain (unknown [10.213.0.77])
+	by hermes.sbg.se (Postfix) with ESMTP id C6A5C1405E1;
+	Thu, 26 Feb 2015 11:06:53 +0100 (CET)
+From: Daniel Markus <daniel.markus@leica-geosystems.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Lotus Domino Web Server Release 9.0.1FP1 HF275 June 13, 2014
-X-MIMETrack: Serialize by HTTP Server on HXSESRVDOM01/EMEA/Leica(Release
-	9.0.1FP1 HF275|June 13, 2014) at 02/26/2015 08:30:04 AM,
-	Serialize complete at 02/26/2015 08:30:04 AM,
-	Serialize by Router on AHERSRVDOM03/EMEA/Leica(Release 9.0.1FP3|January
-	12, 2015) at 26.02.2015 08:30:06
-Message-ID: <OF4ED77A65.06E70BBA-ONC1257DF8.0027D228-C1257DF8.002934CB@leica-geosystems.com>
-X-Priority: 3 (Normal)
-Importance: Normal
-Date: Thu, 26 Feb 2015 08:30:04 +0100
-X-MC-Unique: -HE6HcTzSRaaYk6hnBRpmw-1
-Subject: Re: [meta-oe][PATCH] socorro-syms: Add Breakpad symbol generation adapted for Socorro
+Date: Thu, 26 Feb 2015 11:06:37 +0100
+Message-Id: <1424945197-5406-1-git-send-email-daniel.markus@leica-geosystems.com>
+X-Mailer: git-send-email 1.9.1
+X-SBG-MailScanner-ID: C6A5C1405E1.0BD38
+X-SBG-MailScanner: Found to be clean
+X-SBG-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
+	score=-102.9, required 5, autolearn=not spam, ALL_TRUSTED -1.00,
+	BAYES_00 -1.90, USER_IN_WHITELIST -100.00)
+X-SBG-MailScanner-From: daniel.markus@leica-geosystems.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH v2] socorro-syms: Make usage less verbose
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,42 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2015 07:37:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Feb 2015 10:07:29 -0000
 
-> +#
-> +# Use example:
-> +#
-> +# inherit breakpad
-> +# inherit socorro-syms
-> +# BREAKPAD_BIN =3D "YourBinary"
-> +#
-> +
-> +# We depend on Breakpad creating the original symbol file.
-> +DEPENDS +=3D "breakpad"
->
-> Is this necessary? If the recipe using this class files your instructions
-> and inherits breakpad, this is already added to DEPENDS. And of the recip=
-e
-> doesn't inherit breakpad, it won't work anyway...
->
+When using Socorro symbols we automatically depend on Breakpad, so
+there's no need for the user to explicitly state that dependency.
 
-I'm always keen on the idea to be explicit. This class is truly dependent o=
-n
-the existence of the Breakpad symbols so I think it's good to show that.
+Let the inheritance of Breakpad be done in the Socorro class,
+making the usage of socorro-syms less verbose and less error prone.
 
-> Maybe you should have your class inherit breakpad directly, and only
-> instruct the recipe author top add BREAKPAD_BIN to the recipes using this
-> class?
->
+Signed-off-by: Daniel Markus <daniel.markus@leica-geosystems.com>
+---
+ meta-oe/classes/socorro-syms.bbclass | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-Yes, that's a less verbose solution.
-
-Thanks Anders, I'll fix that!
-
-
-Best regards,
-Daniel
+diff --git a/meta-oe/classes/socorro-syms.bbclass b/meta-oe/classes/socorro-syms.bbclass
+index a4ac079..766a9e6 100644
+--- a/meta-oe/classes/socorro-syms.bbclass
++++ b/meta-oe/classes/socorro-syms.bbclass
+@@ -7,13 +7,12 @@
+ #
+ # Use example:
+ #
+-# inherit breakpad
+-# inherit socorro-syms
+ # BREAKPAD_BIN = "YourBinary"
++# inherit socorro-syms
+ #
+ 
+ # We depend on Breakpad creating the original symbol file.
+-DEPENDS += "breakpad"
++inherit breakpad
+ 
+ PACKAGE_PREPROCESS_FUNCS += "symbol_file_preprocess"
+ PACKAGES =+ "${PN}-socorro-syms"
+-- 
+1.9.1
 
 
