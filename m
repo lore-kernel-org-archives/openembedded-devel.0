@@ -1,32 +1,36 @@
-Return-Path: <cliff.brake@gmail.com>
-Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
-	[209.85.192.52])
-	by mail.openembedded.org (Postfix) with ESMTP id C27AC605B3
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qc0-f172.google.com (mail-qc0-f172.google.com
+	[209.85.216.172])
+	by mail.openembedded.org (Postfix) with ESMTP id B30C5605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2015 14:31:44 +0000 (UTC)
-Received: by mail-qg0-f52.google.com with SMTP id h3so8719882qgf.11
+	Thu, 26 Feb 2015 14:40:34 +0000 (UTC)
+Received: by qcxr5 with SMTP id r5so8618763qcx.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2015 06:31:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:date:message-id:subject:from:to:content-type;
-	bh=+kpkSoy6bVM8Vo7seO0tqwby/JMGYzUjc1umDpG1M0g=;
-	b=rv+zxwF20NH1NAJFZCIjYoMI+6pbVvQTKB5EFkAzIf9wLzeACIFX9QvoigqJBrWiz+
-	IPDyexL6Lcm2rgMXasiWEPU1PBAPHOIWqOEAMQjJ3NvQohBcsTE/AwVGuHPTcEjnsa3T
-	Tt/WzJgnA0haO8n7FrwCsxHXGujJzEcSCvOcg7F6srY9HDb/Njc1GxjMw8PEu+fI5e2/
-	kDr4fleYLo0YzjL9aYZlsehs6QeV+feyNDhzXPhr8Fy8RGoigwCdA6OSg0BvK6VsnyxL
-	3sELd9Z7YHgKyBrFu58thih0U/yd3dYUjkf76+xKdIA9BlVLc6TyRQWDL7pQf51UBjs+
-	mCoA==
+	Thu, 26 Feb 2015 06:40:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=ax7U75lHdNy0bSlX/DGOktjCWmKgWGdhdT4OTnSaeR4=;
+	b=RXtvT/0OJuZrOG6AIaIitGZ9puh/I5h4AH0xyLQ2J95M79y2GQj8wwTyRvIoHTvENv
+	rWOY+ptX2Ij2dBnZ5SdxxIo1d3aa9WE9wH0WFzUSqQvbLlXYtY7T9NzzOjXsjqci+tXV
+	z5byxn7qaIG8zWiYTUBI+C1U188xlu8n9QrGfNGf3odZimVKGJgjY+3hLUHOXuNr63Z5
+	SSqbWgmmWGxAvwkIShqJfaCvHY5hsRnp/S0nSce76LSwG7u/m5RLJX1OdVJ9vpq+vpN7
+	Vgt9/vXiMJWkjW8HbXT32sUgiaqnMZJ9bVOzalnm7Go6KdX94rzaqQPrMrtYHDImpXt8
+	o4IA==
+X-Gm-Message-State: ALoCoQlYFUR7WO59wC3NMI94ZtECei9xdDzql4VnQ4gp2f+j9jZZovN0QaIGWzUvdBHFDfT0YbKc
+X-Received: by 10.140.85.9 with SMTP id m9mr17792649qgd.7.1424961635479; Thu,
+	26 Feb 2015 06:40:35 -0800 (PST)
 MIME-Version: 1.0
-X-Received: by 10.140.105.97 with SMTP id b88mr18091535qgf.94.1424961105844;
-	Thu, 26 Feb 2015 06:31:45 -0800 (PST)
-Sender: cliff.brake@gmail.com
-Received: by 10.140.109.227 with HTTP; Thu, 26 Feb 2015 06:31:45 -0800 (PST)
-Date: Thu, 26 Feb 2015 09:31:45 -0500
-X-Google-Sender-Auth: OGygcYO2WPnkjkd21G7PKZjIDFc
-Message-ID: <CAOd_LFwt57hC7kxYeNA2bY-pLkJcJBZ5c2w9LZxxE1CxvCJ06g@mail.gmail.com>
-From: Cliff Brake <cbrake@bec-systems.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: building 32-bit SDK on 64-bit machine?
+Received: by 10.140.102.203 with HTTP; Thu, 26 Feb 2015 06:40:15 -0800 (PST)
+In-Reply-To: <CAOd_LFwt57hC7kxYeNA2bY-pLkJcJBZ5c2w9LZxxE1CxvCJ06g@mail.gmail.com>
+References: <CAOd_LFwt57hC7kxYeNA2bY-pLkJcJBZ5c2w9LZxxE1CxvCJ06g@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 26 Feb 2015 14:40:15 +0000
+Message-ID: <CAJTo0LZfuBksC=C7aESKOPH4Zc8sn_zpTLZa+dy84Eq7OwrJWQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: building 32-bit SDK on 64-bit machine?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,14 +44,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2015 14:31:45 -0000
+X-List-Received-Date: Thu, 26 Feb 2015 14:40:38 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi,
+On 26 February 2015 at 14:31, Cliff Brake <cbrake@bec-systems.com> wrote:
 
-Does anyone know if its possible to build a 32-bit SDK on a 64-bit
-workstation in OE?
+> Does anyone know if its possible to build a 32-bit SDK on a 64-bit
+> workstation in OE?
+>
 
-Thanks,
-Cliff
+I can't see why that wouldn't work.
+
+Ross
 
