@@ -1,28 +1,32 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 755EE71F1B
+Return-Path: <daniel.markus@leica-geosystems.com>
+X-Greylist: delayed 344 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 26 Feb 2015 07:37:00 UTC
+Received: from eu-smtp-delivery-94.mimecast.com
+	(eu-smtp-delivery-94.mimecast.com [207.82.80.94])
+	by mail.openembedded.org (Postfix) with ESMTP id C5A66733AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Feb 2015 00:21:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t1Q0LrHo018109
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 25 Feb 2015 16:21:53 -0800 (PST)
-Received: from [128.224.162.137] (128.224.162.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.174.1;
-	Wed, 25 Feb 2015 16:21:53 -0800
-Message-ID: <54EE6720.1000605@windriver.com>
-Date: Thu, 26 Feb 2015 08:21:52 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Thu, 26 Feb 2015 07:36:59 +0000 (UTC)
+Received: from AHERSRVDOM03.lgs-net.com (ahersrvdom03.leica-geosystems.com
+	[193.8.40.98]) by uk-mta-9.uk.mimecast.lan;
+	Thu, 26 Feb 2015 07:30:06 +0000
 MIME-Version: 1.0
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-References: <1424853093-6107-1-git-send-email-rongqing.li@windriver.com>
-	<20150225155318.GJ8949@mentor.com>
-In-Reply-To: <20150225155318.GJ8949@mentor.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] lksctp: adjust the shipping of the major version shared library files
+In-Reply-To: <CADt1enOOO21Vnz5qNk_WGjTKiY8OT7gdzNSUBK-1CErijEoxBg@mail.gmail.com>
+References: <CADt1enOOO21Vnz5qNk_WGjTKiY8OT7gdzNSUBK-1CErijEoxBg@mail.gmail.com>,
+	<1424783606-8936-1-git-send-email-daniel.markus@leica-geosystems.com>
+From: daniel.markus@leica-geosystems.com
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Lotus Domino Web Server Release 9.0.1FP1 HF275 June 13, 2014
+X-MIMETrack: Serialize by HTTP Server on HXSESRVDOM01/EMEA/Leica(Release
+	9.0.1FP1 HF275|June 13, 2014) at 02/26/2015 08:30:04 AM,
+	Serialize complete at 02/26/2015 08:30:04 AM,
+	Serialize by Router on AHERSRVDOM03/EMEA/Leica(Release 9.0.1FP3|January
+	12, 2015) at 26.02.2015 08:30:06
+Message-ID: <OF4ED77A65.06E70BBA-ONC1257DF8.0027D228-C1257DF8.002934CB@leica-geosystems.com>
+X-Priority: 3 (Normal)
+Importance: Normal
+Date: Thu, 26 Feb 2015 08:30:04 +0100
+X-MC-Unique: -HE6HcTzSRaaYk6hnBRpmw-1
+Subject: Re: [meta-oe][PATCH] socorro-syms: Add Breakpad symbol generation adapted for Socorro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,70 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Feb 2015 00:21:57 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 26 Feb 2015 07:37:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-
-
-On 2015年02月25日 23:53, Joe MacDonald wrote:
-> [[oe] [meta-networking][PATCH] lksctp: adjust the shipping of the major version shared library files] On 15.02.25 (Wed 16:31) rongqing.li@windriver.com wrote:
+> +#
+> +# Use example:
+> +#
+> +# inherit breakpad
+> +# inherit socorro-syms
+> +# BREAKPAD_BIN =3D "YourBinary"
+> +#
+> +
+> +# We depend on Breakpad creating the original symbol file.
+> +DEPENDS +=3D "breakpad"
 >
->> From: Roy Li <rongqing.li@windriver.com>
->>
->> not ship the major version shared library files in the dev packages,
->> and ship it into a package which is shipping the full version shared
->> library files.
->>
->> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> Is this necessary? If the recipe using this class files your instructions
+> and inherits breakpad, this is already added to DEPENDS. And of the recip=
+e
+> doesn't inherit breakpad, it won't work anyway...
 >
-> This is a pretty obvious change, so I went ahead and integrated it.  I
-> rewrote your commit log, though.
+
+I'm always keen on the idea to be explicit. This class is truly dependent o=
+n
+the existence of the Breakpad symbols so I think it's good to show that.
+
+> Maybe you should have your class inherit breakpad directly, and only
+> instruct the recipe author top add BREAKPAD_BIN to the recipes using this
+> class?
 >
-> Thanks Roy.
-> -J.
+
+Yes, that's a less verbose solution.
+
+Thanks Anders, I'll fix that!
 
 
-thank you, Joe MacDonald
+Best regards,
+Daniel
 
-
--Roy
-
-
->
->> ---
->>   meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
->> index 1651eb8..4cc955f 100644
->> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
->> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
->> @@ -43,17 +43,17 @@ SOLIBMAJORVERSION="1"
->>   PACKAGES =+ "${PN}-withsctp ${PN}-utils"
->>
->>   FILES_${PN} = " \
->> +    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
->>       ${libdir}/libsctp.so.${SOLIBVERSION} \
->>   "
->>
->>   FILES_${PN}-withsctp = " \
->> +    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
->>       ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBVERSION} \
->>   "
->>
->>   FILES_${PN}-dev += " \
->> -    ${libdir}/libsctp.so.${SOLIBMAJORVERSION} \
->>       ${libdir}/libsctp.so \
->> -    ${libdir}/lksctp-tools/libwithsctp.so.${SOLIBMAJORVERSION} \
->>       ${libdir}/lksctp-tools/libwithsctp.so \
->>       ${datadir}/lksctp-tools/*.c \
->>       ${datadir}/lksctp-tools/*.h \
->> --
->> 2.1.0
->>
-
--- 
-Best Reagrds,
-Roy | RongQing Li
 
