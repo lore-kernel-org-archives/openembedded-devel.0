@@ -1,21 +1,23 @@
 Return-Path: <sledz@dresearch-fe.de>
 Received: from zk223.dresearch-fe.de (zk223.dresearch-fe.de [217.92.177.116])
-	by mail.openembedded.org (Postfix) with ESMTP id DC67F737C7
+	by mail.openembedded.org (Postfix) with ESMTP id 84228737C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 12:46:17 +0000 (UTC)
-Received: from fensuse.internal.dresearch-fe.de (unknown
-	[IPv6:fd44:4645:4e53:217:f484:69a5:ddbf:8c3e])
-	by zk223.dresearch-fe.de (Postfix) with ESMTP id B3685E00AB;
-	Fri, 27 Feb 2015 13:46:17 +0100 (CET)
+	Fri, 27 Feb 2015 12:46:27 +0000 (UTC)
+Received: from fensuse.internal.dresearch-fe.de
+	(fensuse.internal.dresearch-fe.de [172.29.23.6])
+	by zk223.dresearch-fe.de (Postfix) with ESMTP id 2521DE00AB;
+	Fri, 27 Feb 2015 13:46:28 +0100 (CET)
 Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
-	id 2F69F7001FF; Fri, 27 Feb 2015 13:46:16 +0100 (CET)
+	id 1A1B97001FF; Fri, 27 Feb 2015 13:46:28 +0100 (CET)
 From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org,
 	Otavio Salvador <otavio@ossystems.com.br>,
 	Armin Kuster <akuster808@gmail.com>
-Date: Fri, 27 Feb 2015 13:45:51 +0100
-Message-Id: <1425041152-21513-1-git-send-email-sledz@dresearch-fe.de>
+Date: Fri, 27 Feb 2015 13:45:52 +0100
+Message-Id: <1425041152-21513-2-git-send-email-sledz@dresearch-fe.de>
 X-Mailer: git-send-email 2.3.0
+In-Reply-To: <1425041152-21513-1-git-send-email-sledz@dresearch-fe.de>
+References: <1425041152-21513-1-git-send-email-sledz@dresearch-fe.de>
 Subject: [meta-oe][dizzy][PATCH] rsyslog: fix name of syslogd ua group
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -30,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2015 12:46:20 -0000
+X-List-Received-Date: Fri, 27 Feb 2015 12:46:29 -0000
 
 (backport from master)
 
