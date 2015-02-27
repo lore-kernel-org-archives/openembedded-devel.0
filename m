@@ -1,35 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
-	[74.125.82.180])
-	by mail.openembedded.org (Postfix) with ESMTP id BF81972491
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 96AD373808
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 08:47:00 +0000 (UTC)
-Received: by wesw55 with SMTP id w55so18410385wes.4
+	Fri, 27 Feb 2015 08:56:48 +0000 (UTC)
+Received: by wggz12 with SMTP id z12so18569964wgg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 00:47:01 -0800 (PST)
+	Fri, 27 Feb 2015 00:56:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=WrXlDya5y3F45Ig4t6fCP6OGr3nj2YvYVHd6QlBLRxg=;
-	b=VEw2n/+uFL6JBUI08i4T6nunS6PDgvYV+1sdd7Ok4QsyQMyA9e6vIkZT/c6paO4tra
-	WgHZ654xTTwdiV3ybxipQxdP44MKYoUSqpXFH/no0vT+fCvZUC+22eCzDIWmJ97TB8Xo
-	iezMnMvONNJDYoWDVjfUX+qNxTO4bJcofP39bH4xjkYPW3v2veYfIV9RW4RH/LQOUFza
-	icdKyaP8/wXtf1RAu3noCjaq9z05cLjb1hwxncIdtgZbC1TNy2EsVkhHwCjYtAAXIkjB
-	5Lnwgqc9y327Zt5UiCQ3U8SwIV5jMJr36lnoG6EoFC3yyzPfGTCliMgtD07rG7GVBOAH
-	B8kQ==
-X-Received: by 10.180.126.69 with SMTP id mw5mr4453414wib.12.1425026820795;
-	Fri, 27 Feb 2015 00:47:00 -0800 (PST)
+	bh=wRQCCuWE7SM6pBcL8tybTTtQPYm3XZDT0ovAFphsAGQ=;
+	b=0tZOXogyhbI8H24mfyb/eZhBdTNJwvfH6Pg2LoFL0YgM3G97wQqDMw9YlLD3Pn1fi8
+	t3uPtJgwdoVWSDrVw85NWwpnFoEq2dNhl5xQOGvdJ39+iJS9tVOzklkXzGD5SUKFIdQe
+	rZOlsn+qJALNFJbTd0RGAuhInFLQ8sm8zOUnVvteDLKUr6ytoGT1SBfnhLjTUb02OPHl
+	AyLeOBOwyDL+mhe5PAOA2ro2HnBEb2wWXKeFmHQHcLDfrOG3+tjm3w71e4eG0CIG5Kw3
+	tKI0J/IDw+rXrhiKNHdahdXFUUofDAtVDi7X9IlZKiKMWQubp9Ha3JSgJ6CYAS5g/fFN
+	p0Ug==
+X-Received: by 10.194.235.71 with SMTP id uk7mr25614289wjc.13.1425027409272;
+	Fri, 27 Feb 2015 00:56:49 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	dn1sm1803566wid.11.2015.02.27.00.46.59
+	jy7sm1791770wid.22.2015.02.27.00.56.48
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Feb 2015 00:46:59 -0800 (PST)
+	Fri, 27 Feb 2015 00:56:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Feb 2015 09:47:16 +0100
-Message-Id: <1425026836-25251-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 27 Feb 2015 09:57:05 +0100
+Message-Id: <1425027425-28350-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.3.1
-Subject: [meta-oe][PATCH] vim: fix up for /bin/vi
+Subject: [meta-efl][PATCH] e-wm: upgrade to 0.19.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,36 +42,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2015 08:47:01 -0000
+X-List-Received-Date: Fri, 27 Feb 2015 08:56:50 -0000
 
-* it was changed in:
-  Commit: 95dc2ddce7a0ee4d16d6c69fd123e4e6921bdf2e
-  URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=95dc2ddce7a0ee4d16d6c69fd123e4e6921bdf2e
-  Author: Jackie Huang <jackie.huang@windriver.com>
-  Date:   Thu Nov  6 03:22:27 2014 -0500
-  Subject: vim: add recipe for vim-tiny
-
-  but busybox still registers /bin/vi, so u-a was broken
-  update-alternatives: Error: cannot register alternative vi to
-  /usr/bin/vi since it is already registered to /bin/vi
+* announcement:
+  https://phab.enlightenment.org/phame/live/3/post/e19_3_release/
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/vim/vim_7.4.481.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../e17/e-wm/0001-configure.ac-add-foreign.patch   | 29 ++++++++++++++++++++++
+ .../e17/{e-wm_0.19.2.bb => e-wm_0.19.3.bb}         |  4 +--
+ meta-efl/recipes-efl/e17/e-wm_git.bb               |  5 ++--
+ 3 files changed, 34 insertions(+), 4 deletions(-)
+ create mode 100644 meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch
+ rename meta-efl/recipes-efl/e17/{e-wm_0.19.2.bb => e-wm_0.19.3.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-index 7490229..afdea84 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-@@ -104,6 +104,6 @@ RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-commo
+diff --git a/meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch b/meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch
+new file mode 100644
+index 0000000..c7a574c
+--- /dev/null
++++ b/meta-efl/recipes-efl/e17/e-wm/0001-configure.ac-add-foreign.patch
+@@ -0,0 +1,29 @@
++From 19e59b6e8148388e7a17f10d4390176a50e2917f Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 25 Aug 2014 16:06:03 +0200
++Subject: [PATCH] configure.ac: add foreign
++
++* fixes:
++  | configure.ac:312: error: required file './ABOUT-NLS' not found
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 51ad0ba..cd77739 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -34,7 +34,7 @@ AH_BOTTOM([
++ #endif /* EFL_CONFIG_H__ */
++ ])
++ 
++-AM_INIT_AUTOMAKE([1.11 dist-bzip2 dist-xz -Wno-portability])
+++AM_INIT_AUTOMAKE([1.11 dist-bzip2 dist-xz -Wno-portability foreign])
++ AM_SILENT_RULES([yes])
++ 
++ AC_USE_SYSTEM_EXTENSIONS
++-- 
++2.3.0
++
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.19.2.bb b/meta-efl/recipes-efl/e17/e-wm_0.19.3.bb
+similarity index 80%
+rename from meta-efl/recipes-efl/e17/e-wm_0.19.2.bb
+rename to meta-efl/recipes-efl/e17/e-wm_0.19.3.bb
+index ac33406..489cb2d 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.19.2.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.19.3.bb
+@@ -15,5 +15,5 @@ SRC_URI = "\
+     file://applications.menu \
+ "
  
- ALTERNATIVE_${PN} = "vi vim"
- ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
--ALTERNATIVE_LINK_NAME[vi] = "${bindir}/vi"
-+ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
- ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
- ALTERNATIVE_PRIORITY = "100"
+-SRC_URI[md5sum] = "ca76c640c2a54f89f069176258151334"
+-SRC_URI[sha256sum] = "9063d3de704a5700468a558f6707f402fe239c0807bc38ed29aaf7c62db1cd02"
++SRC_URI[md5sum] = "001b657528aadafcfae5b89b2c81aee8"
++SRC_URI[sha256sum] = "9d2e3c9e25dd48a8f5948d9c7757863d40f7b5bdbc13fdca5a72fb050e048dec"
+diff --git a/meta-efl/recipes-efl/e17/e-wm_git.bb b/meta-efl/recipes-efl/e17/e-wm_git.bb
+index 1873878..f4b893b 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_git.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_git.bb
+@@ -1,13 +1,14 @@
+ require ${BPN}.inc
+ 
+-PV = "0.19.2+git${SRCPV}"
++PV = "0.19.3+git${SRCPV}"
+ DEFAULT_PREFERENCE = "-2"
+ 
+ SRC_URI = " \
+     git://git.enlightenment.org/core/enlightenment.git;branch=enlightenment-0.19 \
++    file://0001-configure.ac-add-foreign.patch \
+     file://enlightenment_start.oe \
+     file://applications.menu \
+ "
+ S = "${WORKDIR}/git"
+ 
+-SRCREV = "be0d07877e561edd7242368797a90c36c4e77ee4"
++SRCREV = "19e59b6e8148388e7a17f10d4390176a50e2917f"
 -- 
 2.3.1
 
