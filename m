@@ -1,35 +1,32 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id ED06372667
+Return-Path: <stephan.binner@basyskom.com>
+Received: from mx1.basyskom.com (groupware.basyskom.com [144.76.148.65])
+	by mail.openembedded.org (Postfix) with ESMTP id BA4DF72667
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 13:41:32 +0000 (UTC)
-Received: by wggy19 with SMTP id y19so20447602wgg.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 05:41:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=4EvVhAec9UV95W4b90E9eQ5IoCnK+lEIvclNvjwSr/Y=;
-	b=jiChvpruV2eR17CvOvSTK6+b3tQddLSGBRw2iEs+YQeoxb1StpVi3viNz3LQkIUNmx
-	V7W87YUGhjSOiUqrF2w6i1sL7TrY2pEFD6p99SfzX5n7RP/P8GHK7Ptb1Y0jZrsIqyxx
-	KMJwLo/O1bixebWIjR6DNU3A0LmNV9pydnuCdsNuynN+9gNHQUrpxExxAZhsrJsNW6mo
-	CvFKBBP7P0L0vhLMEtB1pkqHk/KiLtMvaOrvpKC7OzYnz7TSdd58PC7TuPMEBnCYGUxP
-	5hyc7Fl1XRQGJvx/F12K4TFyz717miEqy5GzH+FAcw3qljNEo2joF3koT0zgic2gGQQt
-	VzZA==
+	Fri, 27 Feb 2015 13:53:45 +0000 (UTC)
+Received: from fridolin.localnet ([193.158.222.114])
+	(authenticated user sbin@basyskom.com)
+	by mx1.basyskom.com (Kerio Connect 8.4.0)
+	(using TLSv1.1 with cipher DHE-RSA-AES256-SHA (256 bits))
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Feb 2015 14:53:44 +0100
+X-Spam-Status: No, hits=0.0 required=5.0 tests=AWL: 0.000, BAYES_00: -1.665,
+	TOTAL_SCORE: -1.665, autolearn=ham
+X-Footer: YmFzeXNrb20uY29t
+Received: from sirius.nbg.basyskom.de ([193.158.222.114]) by mx1.basyskom.com
+	(Kerio Connect 8.4.0) (using TLSv1.2 with cipher AES256-SHA256
+	(256 bits)); Fri, 27 Feb 2015 14:51:17 +0100
+From: Stephan Binner <stephan.binner@basyskom.com>
+Date: Fri, 27 Feb 2015 14:51:13 +0100
+Message-ID: <1425045073-21251-1-git-send-email-stephan.binner@basyskom.com>
+X-Mailer: git-send-email 1.9.1
+Resent-Message-ID: <201502271453.43602.>
+Resent-Date: Fri, 27 Feb 2015 14:53:43 +0100
+Resent-From: Stephan Binner <stephan.binner@basyskom.com>
+To: openembedded-devel@lists.openembedded.org
+Resent-To: openembedded-devel@lists.openembedded.org
+Resent-Cc: Stephan Binner <stephan.binner@basyskom.com>
 MIME-Version: 1.0
-X-Received: by 10.194.97.139 with SMTP id ea11mr1072370wjb.108.1425044493272; 
-	Fri, 27 Feb 2015 05:41:33 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.27.11.18 with HTTP; Fri, 27 Feb 2015 05:41:33 -0800 (PST)
-In-Reply-To: <20150227083113.GF2309@jama>
-References: <54ED1B78.4040101@balister.org>
-	<20150227083113.GF2309@jama>
-Date: Fri, 27 Feb 2015 10:41:33 -0300
-X-Google-Sender-Auth: MXj6h9_FYMMKfCj8okHj7cLIHGo
-Message-ID: <CAP9ODKqFPNyF4ZoXv0C1Jw==opnmrj+cWAEHUhr6nXbbXUKw6g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][dizzy]Update PyQt and related recipes
+Subject: [meta-qt5][PATCH] Add qttranslations to qt5-versions.inc and packagegroups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +40,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2015 13:41:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Feb 2015 13:53:47 -0000
 
-Hello Martin,
+Signed-off-by: Stephan Binner <stephan.binner@basyskom.com>
+---
+ conf/distro/include/qt5-versions.inc                         |  1 +
+ .../packagegroups/packagegroup-qt5-toolchain-target.bb       | 12 ++++++++++++
+ 2 files changed, 13 insertions(+)
 
-On Fri, Feb 27, 2015 at 5:31 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Tue, Feb 24, 2015 at 04:46:48PM -0800, Philip Balister wrote:
->> Please pull these three patches into meta-oe/dizzy.
->>
->> https://github.com/openembedded/meta-oe/pull/19
->>
->> These lead to a working PyQt4, which will reduce the number of questions
->> I get about gnuradio-companion not working on dizzy.
->
-> I'm not sure if we should do upgrades in release branch which should
-> receive only bug fixes, but I'll let daisy maintainers to decide.
-
-I agree with your concern but I also see the improvement
-(cross-compile support and like) of the new PyQt4.
-
-At same time, I think this is not ready to be merged. Checking the
-code changes I think we need to:
-
-* split python-sip runtime package
-
-This will fix the upgrade path.
-
+diff --git a/conf/distro/include/qt5-versions.inc b/conf/distro/include/qt5-versions.inc
+index 2ecd49c..c61bb6f 100644
+--- a/conf/distro/include/qt5-versions.inc
++++ b/conf/distro/include/qt5-versions.inc
+@@ -22,6 +22,7 @@ PREFERRED_VERSION_qtserialport = "${QT5_VERSION}"
+ PREFERRED_VERSION_qtscript = "${QT5_VERSION}"
+ PREFERRED_VERSION_qtsvg = "${QT5_VERSION}"
+ PREFERRED_VERSION_qtsystems = "${QT5_VERSION}"
++PREFERRED_VERSION_qttranslations = "${QT5_VERSION}"
+ PREFERRED_VERSION_qttools = "${QT5_VERSION}"
+ PREFERRED_VERSION_qttools-native = "${QT5_VERSION}"
+ PREFERRED_VERSION_nativesdk-qttools = "${QT5_VERSION}"
+diff --git a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+index 6318dc6..8e8f98e 100644
+--- a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
++++ b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+@@ -13,6 +13,7 @@ USE_RUBY = " \
+     qtquick1-mkspecs \
+     qtquick1-plugins \
+     qtquick1-qmlplugins \
++    qttranslations-qtquick1 \
+     qtwebkit-dev \
+     qtwebkit-mkspecs \
+     qtwebkit-qmlplugins \
+@@ -43,14 +44,21 @@ RDEPENDS_${PN} += " \
+     qtbase-mkspecs \
+     qtbase-plugins \
+     qtbase-staticdev \
++    qttranslations-qt \
++    qttranslations-qtbase \
++    qttranslations-qtconfig \
++    qttranslations-qthelp \
+     qtconnectivity-dev \
+     qtconnectivity-mkspecs \
+     qtconnectivity-qmlplugins \
++    qttranslations-qtconnectivity \
+     qtdeclarative-dev \
+     qtdeclarative-mkspecs \
+     qtdeclarative-plugins \
+     qtdeclarative-qmlplugins \
+     qtdeclarative-staticdev \
++    qttranslations-qmlviewer \
++    qttranslations-qtdeclarative \
+     qtenginio-dev \
+     qtenginio-mkspecs \
+     qtenginio-qmlplugins \
+@@ -61,12 +69,15 @@ RDEPENDS_${PN} += " \
+     qtlocation-mkspecs \
+     qtlocation-plugins \
+     qtlocation-qmlplugins \
++    qttranslations-qtlocation \
+     qtmultimedia-dev \
+     qtmultimedia-mkspecs \
+     qtmultimedia-plugins \
+     qtmultimedia-qmlplugins \
++    qttranslations-qtmultimedia \
+     qtscript-dev \
+     qtscript-mkspecs \
++    qttranslations-qtscript \
+     qtsensors-dev \
+     qtsensors-mkspecs \
+     qtsensors-plugins \
+@@ -95,6 +106,7 @@ RDEPENDS_${PN} += " \
+     qtwebchannel-qmlplugins \
+     qtxmlpatterns-dev \
+     qtxmlpatterns-mkspecs \
++    qttranslations-qtxmlpatterns \
+ "
+ 
+ RRECOMMENDS_${PN} += " \
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.1
+
+
+
 
