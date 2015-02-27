@@ -1,36 +1,29 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f42.google.com (mail-yh0-f42.google.com
-	[209.85.213.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E10B605B3
+Return-Path: <Paul.Gortmaker@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 885B2605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 16:53:50 +0000 (UTC)
-Received: by yhot59 with SMTP id t59so8545028yho.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 08:53:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=FSueIiJUb5mia/BbIz693ldrgxSt1pDElTLreMv5zzE=;
-	b=gcOomBZRKI6ltAqOOopezpUnVtRWR4/wYDhsKEkcoS84V1wbKT3yHcjnIY60R/nvrJ
-	elZui/qnElZaNhzKCGWaznkbgttlTW2ZeX2VRls43pC9iYIwk25qFTKCbE/ROBKs8eyR
-	HgPTupuZk99lDTx3DgZ1xtXVA28+suPgMMJ+WEq8VRFZBO9IhpOn2HszSLBEYwcsOMyW
-	pPDmnzJIFVhQyC0u2/YtBE62HHEBTkBLxFUjO5DUAlyP6rGFDjW3+V04LP9iEw3H6w0d
-	pQkXAiXSZm8X6DRT33sGuyevJJ0UmWMrJ3777p0N4HCT1m+vHTGCYJg1vpgGToruccJy
-	Qb+Q==
+	Fri, 27 Feb 2015 19:55:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t1RJtTth006709
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 27 Feb 2015 11:55:29 -0800 (PST)
+Received: from [128.224.56.57] (128.224.56.57) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.174.1;
+	Fri, 27 Feb 2015 11:55:28 -0800
+Message-ID: <54F0CBBA.8010403@windriver.com>
+Date: Fri, 27 Feb 2015 14:55:38 -0500
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-X-Received: by 10.236.44.98 with SMTP id m62mr14437654yhb.136.1425056031868;
-	Fri, 27 Feb 2015 08:53:51 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.133 with HTTP; Fri, 27 Feb 2015 08:53:51 -0800 (PST)
-In-Reply-To: <20150227155848.GO2309@jama>
-References: <4018372.oWEBFrtGCE@fridolin> <20150227144201.GN2309@jama>
-	<1924700.0Y3Fg92bfb@fridolin> <20150227155848.GO2309@jama>
-Date: Fri, 27 Feb 2015 13:53:51 -0300
-X-Google-Sender-Auth: br3HNAO1VWPSPQlSSYijVL9_zuQ
-Message-ID: <CAP9ODKqBVy57VMEe6_aM6-T0VwTXM1MtWrnrxL9uO9HV7S_wVA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] recipes: upgrade from 5.4.0 to 5.4.1
+To: <openembedded-devel@lists.openembedded.org>
+References: <1425053339-17979-1-git-send-email-paul.gortmaker@windriver.com>
+	<20150227162031.GP2309@jama>
+In-Reply-To: <20150227162031.GP2309@jama>
+X-Originating-IP: [128.224.56.57]
+Cc: Peter Urbanec <openembedded-devel@urbanec.net>
+Subject: Re: [PATCH v2] mozjs: fix build failure due to failed X11 configure test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +37,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2015 16:53:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Feb 2015 19:55:29 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 27, 2015 at 12:58 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Feb 27, 2015 at 04:14:19PM +0100, Stephan Binner wrote:
->> On Friday 27 February 2015 15:42:01 Martin Jansa wrote:
+On 15-02-27 11:20 AM, Martin Jansa wrote:
+> On Fri, Feb 27, 2015 at 11:08:59AM -0500, Paul Gortmaker wrote:
+>> The failure intermittently shows up as follows:
 >>
->> > I've fixed these issues in separate commit in meta-qt5/master-next and
+>> ERROR: This autoconf log indicates errors, it looked at host include and/or library paths while determining system capabilities.
+>> Rerun configure task after fixing this. The path was 'poky/build/tmp/work/core2-64-poky-linux/mozjs/17.0.0-r0/build'
+>> ERROR: Function failed: do_qa_configure
+>> ERROR: Logfile of failure stored in: poky/build/tmp/work/core2-64-poky-linux/mozjs/17.0.0-r0/temp/log.do_configure.8047
+>> ERROR: Task 5 (poky/meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb, do_configure) failed with exit code '1'
 >>
->> Thanks.
+>> The configure log has:
 >>
->> > - please confirm that you agree with SOB line.
+>> configure:5494: checking for IceConnectionNumber in -lICE
+>> configure:5513: x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse --sysroot=poky/build/tmp/sysroots/genericx86-64 -o conftest  -O2 -pipe -g -feliminate-unused-debug-types  -Wl, -O1 -Wl,--hash-style=gnu -Wl,--as-needed -L/usr/lib conftest.c -lICE   1>&5
+>> poky/build/tmp/sysroots/x86_64-linux/usr/libexec/x86_64-poky-linux/gcc/x86_64-poky-linux/4.9.1/ld: warning: library search path "/usr/lib" is unsafe for cross-compilation
 >>
->> Sure I do. :-)
+>> Checking build/config/autoconf.mk we find:
 >>
->> Today I noticed that qtwebengine doesn't compile if qtbase is not built with
->> "accessibility" (which I usually have defined via some qtbase*.bbappend).
+>> X_CFLAGS =  -I/usr/include
+>> X_EXTRA_LIBS =
+>> X_LIBS =  -L/usr/lib
 >>
->> The situation was the same with 5.4.0 - not sure if it's worth the effort
->> to patch qtwebengine to be able to compile without accessibility though.
->
-> It's the same with qtwebkit, I'll just mention qtwebengine in
-> qtbase.inc.
->
-> Thanks for letting me know.
+>> Looking at the configure script, we see these invalid values are output
+>> when the autoconf test for X11 fails.  That test fails in the following
+>> fashion:
+>>
+>> configure:4768:27: fatal error: X11/Intrinsic.h: No such file or directory
+>>
+>> This header in turn gets put in the sysroot by our build of libxt.  So we
+>> get build fails whenever mozjs is built before libxt.
+>>
+>> Aside from the configure test, it doesn't appear that mozjs really has
+>> a hard dependency on libxt in order to compile.  So we can avoid the
+>> problem by simply avoiding the configure test - and here we do that by
+>> looking for X11 in the distro features.
+>>
+>> Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+>> ---
+>>
+>> [apologies if anyone gets this 2x ; the mailing list is misconfigured and
+>>  currently operating in subscriber-only mode; someone please fix that.]
+>>
+>> [v2: change depends on libxt to distro features solution]
+>>
+>> [v1: http://patchwork.openembedded.org/patch/88625/  ]
+>>
+>>  meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb | 2 ++
+>>  1 file changed, 2 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+>> index 174f6fe0a89b..0a4cf6b03cc4 100644
+>> --- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+>> +++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+>> @@ -27,6 +27,8 @@ EXTRA_OECONF = " \
+>>      --libdir=${libdir} \
+>>  "
+>>  
+>> +EXTRA_OECONF_X = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '--with-x', '--without-x', d)}"
+> 
+> Does it need some extra dependency when enabled?
 
-I think there is a patch for webengine in dev to allow it to succeed.
+Not as far as I can tell ; only the libxt thing showed up, and
+that only happens as a result of configure autotests.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> 
+> Why don't you use PACKAGECONFIG for this?
+
+I searched for existing solutions in recipes for X/no-X type
+problems and found this.  And it follows a block of EXTRA_OECONF
+settings in the recipe that already exist, so I'm not sure why
+PACKAGECONFIG would be better/advantageous....
+
+P.
+--
+
+> 
+>>  # mozjs requires autoreconf 2.13
+>>  do_configure() {
+>>      ${S}/configure ${EXTRA_OECONF}
+>> -- 
+>> 2.2.1
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
+> 
 
