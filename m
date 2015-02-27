@@ -1,41 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id E0C7072491
+Return-Path: <alexandre.belloni@free-electrons.com>
+Received: from mail.free-electrons.com (down.free-electrons.com
+	[37.187.137.238])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FBE672667
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 20:44:45 +0000 (UTC)
-Received: by widex7 with SMTP id ex7so2945374wid.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 12:44:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+tGD3qkGcmAzs7QxK4y3xS5pi7H4cD6UWd5OGo33hVY=;
-	b=ifKPWBZxUheQfQQHM3JWocJN3VxE/JVFpSPYNy+FMvdw9XabBz6I3G5M7YHs3/re4Y
-	yk7t477/E8SHVpsr0+hC20ckg8tweUYd0jCMT9wuMZUUoIJUS54Gy0usTHH5hgI+xI2F
-	hk82++Am0SP0f0koDg7TWGMFGCTiTiqlnqIXsffC1sHUHsdMjJ7145txYfKd6XAW0bXB
-	DXQh6xViCrLKkBESchgio6qjaEL1vSb/MAULUt29dps32ssgKwoN4evwbTB+3KcngwG7
-	YYfYkTELi6mgt5Gk9wgLQ7HC6sbLmuloqvbBF3UN+MRROtBfHXW/wbV1JjgvcOiHiZFp
-	b4dg==
-X-Received: by 10.194.121.10 with SMTP id lg10mr9585873wjb.71.1425069886359;
-	Fri, 27 Feb 2015 12:44:46 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	n2sm4341863wiw.16.2015.02.27.12.44.45
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Feb 2015 12:44:45 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 27 Feb 2015 21:45:05 +0100
+	Fri, 27 Feb 2015 20:53:26 +0000 (UTC)
+Received: by mail.free-electrons.com (Postfix, from userid 106)
+	id CAC1C5E5; Fri, 27 Feb 2015 21:53:31 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	mail.free-electrons.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
+	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
+Received: from localhost (128-79-216-6.hfc.dyn.abo.bbox.fr [128.79.216.6])
+	by mail.free-electrons.com (Postfix) with ESMTPSA id 93F75265;
+	Fri, 27 Feb 2015 21:53:31 +0100 (CET)
+From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150227204505.GQ2309@jama>
-References: <1425053339-17979-1-git-send-email-paul.gortmaker@windriver.com>
-	<20150227162031.GP2309@jama> <54F0CBBA.8010403@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <54F0CBBA.8010403@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Peter Urbanec <openembedded-devel@urbanec.net>
-Subject: Re: [PATCH v2] mozjs: fix build failure due to failed X11 configure test
+Date: Fri, 27 Feb 2015 21:53:18 +0100
+Message-Id: <1425070398-1602-2-git-send-email-alexandre.belloni@free-electrons.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1425070398-1602-1-git-send-email-alexandre.belloni@free-electrons.com>
+References: <1425070398-1602-1-git-send-email-alexandre.belloni@free-electrons.com>
+Subject: [meta-qt5][PATCH 2/2] qtmultimedia: Fix build without opengl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,142 +35,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2015 20:44:46 -0000
-X-Groupsio-MsgNum: 54545
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="de1H0RjRxOSdb4we"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 27 Feb 2015 20:53:32 -0000
 
---de1H0RjRxOSdb4we
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Backport a patch from 5.4.1 to get qtmultimedia to build without opengl.
 
-On Fri, Feb 27, 2015 at 02:55:38PM -0500, Paul Gortmaker wrote:
-> On 15-02-27 11:20 AM, Martin Jansa wrote:
-> > On Fri, Feb 27, 2015 at 11:08:59AM -0500, Paul Gortmaker wrote:
-> >> The failure intermittently shows up as follows:
-> >>
-> >> ERROR: This autoconf log indicates errors, it looked at host include a=
-nd/or library paths while determining system capabilities.
-> >> Rerun configure task after fixing this. The path was 'poky/build/tmp/w=
-ork/core2-64-poky-linux/mozjs/17.0.0-r0/build'
-> >> ERROR: Function failed: do_qa_configure
-> >> ERROR: Logfile of failure stored in: poky/build/tmp/work/core2-64-poky=
--linux/mozjs/17.0.0-r0/temp/log.do_configure.8047
-> >> ERROR: Task 5 (poky/meta-openembedded/meta-oe/recipes-extended/mozjs/m=
-ozjs_17.0.0.bb, do_configure) failed with exit code '1'
-> >>
-> >> The configure log has:
-> >>
-> >> configure:5494: checking for IceConnectionNumber in -lICE
-> >> configure:5513: x86_64-poky-linux-gcc  -m64 -march=3Dcore2 -mtune=3Dco=
-re2 -msse3 -mfpmath=3Dsse --sysroot=3Dpoky/build/tmp/sysroots/genericx86-64=
- -o conftest  -O2 -pipe -g -feliminate-unused-debug-types  -Wl, -O1 -Wl,--h=
-ash-style=3Dgnu -Wl,--as-needed -L/usr/lib conftest.c -lICE   1>&5
-> >> poky/build/tmp/sysroots/x86_64-linux/usr/libexec/x86_64-poky-linux/gcc=
-/x86_64-poky-linux/4.9.1/ld: warning: library search path "/usr/lib" is uns=
-afe for cross-compilation
-> >>
-> >> Checking build/config/autoconf.mk we find:
-> >>
-> >> X_CFLAGS =3D  -I/usr/include
-> >> X_EXTRA_LIBS =3D
-> >> X_LIBS =3D  -L/usr/lib
-> >>
-> >> Looking at the configure script, we see these invalid values are output
-> >> when the autoconf test for X11 fails.  That test fails in the following
-> >> fashion:
-> >>
-> >> configure:4768:27: fatal error: X11/Intrinsic.h: No such file or direc=
-tory
-> >>
-> >> This header in turn gets put in the sysroot by our build of libxt.  So=
- we
-> >> get build fails whenever mozjs is built before libxt.
-> >>
-> >> Aside from the configure test, it doesn't appear that mozjs really has
-> >> a hard dependency on libxt in order to compile.  So we can avoid the
-> >> problem by simply avoiding the configure test - and here we do that by
-> >> looking for X11 in the distro features.
-> >>
-> >> Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
-> >> ---
-> >>
-> >> [apologies if anyone gets this 2x ; the mailing list is misconfigured =
-and
-> >>  currently operating in subscriber-only mode; someone please fix that.]
-> >>
-> >> [v2: change depends on libxt to distro features solution]
-> >>
-> >> [v1: http://patchwork.openembedded.org/patch/88625/  ]
-> >>
-> >>  meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb | 2 ++
-> >>  1 file changed, 2 insertions(+)
-> >>
-> >> diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/=
-recipes-extended/mozjs/mozjs_17.0.0.bb
-> >> index 174f6fe0a89b..0a4cf6b03cc4 100644
-> >> --- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-> >> +++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-> >> @@ -27,6 +27,8 @@ EXTRA_OECONF =3D " \
-> >>      --libdir=3D${libdir} \
-> >>  "
-> >> =20
-> >> +EXTRA_OECONF_X =3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-=
--with-x', '--without-x', d)}"
-> >=20
-> > Does it need some extra dependency when enabled?
->=20
-> Not as far as I can tell ; only the libxt thing showed up, and
-> that only happens as a result of configure autotests.
->=20
-> >=20
-> > Why don't you use PACKAGECONFIG for this?
->=20
-> I searched for existing solutions in recipes for X/no-X type
-> problems and found this.  And it follows a block of EXTRA_OECONF
-> settings in the recipe that already exist, so I'm not sure why
-> PACKAGECONFIG would be better/advantageous....
+Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+---
+ .../0002-qtmultimedia-fix-no-opengl.patch          | 36 ++++++++++++++++++++++
+ recipes-qt/qt5/qtmultimedia_5.4.0.bb               |  2 ++
+ 2 files changed, 38 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtmultimedia/0002-qtmultimedia-fix-no-opengl.patch
 
-Because it's newer common solution for this kind of configuration and
-allows to easily adjust it on per-recipe basis (e.g. from distro
-config).
+diff --git a/recipes-qt/qt5/qtmultimedia/0002-qtmultimedia-fix-no-opengl.patch b/recipes-qt/qt5/qtmultimedia/0002-qtmultimedia-fix-no-opengl.patch
+new file mode 100644
+index 000000000000..0991e5d08212
+--- /dev/null
++++ b/recipes-qt/qt5/qtmultimedia/0002-qtmultimedia-fix-no-opengl.patch
+@@ -0,0 +1,36 @@
++From 2b181d546970d18a48a0f36f5d1a22418b61cd4d Mon Sep 17 00:00:00 2001
++From: Laszlo Agocs <laszlo.agocs@theqtcompany.com>
++Date: Tue, 9 Dec 2014 15:34:10 +0100
++Subject: Make it compile with no-opengl
++
++Change-Id: I71358bb1268e5b28b66b1817a3ec0cd98459cfd2
++Reviewed-by: Friedemann Kleint <Friedemann.Kleint@theqtcompany.com>
++Reviewed-by: Yoann Lopes <yoann.lopes@theqtcompany.com>
++
++diff --git a/src/multimediawidgets/qpaintervideosurface.cpp b/src/multimediawidgets/qpaintervideosurface.cpp
++index 3a880de..2ab5dcb 100644
++--- a/src/multimediawidgets/qpaintervideosurface.cpp
+++++ b/src/multimediawidgets/qpaintervideosurface.cpp
++@@ -96,7 +96,9 @@ QVideoSurfaceGenericPainter::QVideoSurfaceGenericPainter()
++         << QVideoFrame::Format_ARGB32
++         << QVideoFrame::Format_RGB565;
++     // The raster formats should be a subset of the GL formats.
+++#ifndef QT_NO_OPENGL
++     if (QOpenGLContext::openGLModuleType() != QOpenGLContext::LibGLES)
+++#endif
++         m_imagePixelFormats << QVideoFrame::Format_RGB24;
++ }
++ 
++@@ -137,7 +139,9 @@ QAbstractVideoSurface::Error QVideoSurfaceGenericPainter::start(const QVideoSurf
++     const QAbstractVideoBuffer::HandleType t = format.handleType();
++     if (t == QAbstractVideoBuffer::NoHandle) {
++         bool ok = m_imageFormat != QImage::Format_Invalid && !m_imageSize.isEmpty();
+++#ifndef QT_NO_OPENGL
++         if (QOpenGLContext::openGLModuleType() == QOpenGLContext::LibGLES)
+++#endif
++             ok &= format.pixelFormat() != QVideoFrame::Format_RGB24;
++         if (ok)
++             return QAbstractVideoSurface::NoError;
++-- 
++cgit v0.10.1
++
+diff --git a/recipes-qt/qt5/qtmultimedia_5.4.0.bb b/recipes-qt/qt5/qtmultimedia_5.4.0.bb
+index 0fc982a196f1..a71bb700c6ea 100644
+--- a/recipes-qt/qt5/qtmultimedia_5.4.0.bb
++++ b/recipes-qt/qt5/qtmultimedia_5.4.0.bb
+@@ -1,5 +1,7 @@
+ require qt5-${PV}.inc
+ require ${PN}.inc
+ 
++SRC_URI += "file://0002-qtmultimedia-fix-no-opengl.patch"
++
+ SRC_URI[md5sum] = "3a6a415813b54a54cf283a5e2906e012"
+ SRC_URI[sha256sum] = "5ab9dba27ae64123f2d0124b6884da276d8982aa959d65aa44125f758ef9af51"
+-- 
+2.1.0
 
-> >=20
-> >>  # mozjs requires autoreconf 2.13
-> >>  do_configure() {
-> >>      ${S}/configure ${EXTRA_OECONF}
-> >> --=20
-> >> 2.2.1
-> >>
-> >> --=20
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
-> >=20
-> >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---de1H0RjRxOSdb4we
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlTw11EACgkQN1Ujt2V2gBxePACgrWAE+3cJBSB9S3JJPm3dFRKy
-7V0AoIpI/WfBNV/axnwnXpPP2lFqjsj7
-=1LER
------END PGP SIGNATURE-----
-
---de1H0RjRxOSdb4we--
