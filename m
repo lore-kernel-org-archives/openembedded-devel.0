@@ -1,36 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f42.google.com (mail-yh0-f42.google.com
-	[209.85.213.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 681B0605B3
+Return-Path: <rapphil@gmail.com>
+Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
+	[209.85.192.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FE14721E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 22:27:06 +0000 (UTC)
-Received: by yhl29 with SMTP id 29so9480728yhl.0
+	Sat, 28 Feb 2015 14:56:38 +0000 (UTC)
+Received: by mail-qg0-f41.google.com with SMTP id i50so18660258qgf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Feb 2015 14:27:08 -0800 (PST)
+	Sat, 28 Feb 2015 06:56:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=PzBTM0Wvutiqa0mp2Dda9An++I81nZ/Xwy/JeKoEX8k=;
-	b=FdXTcOnEHYvHnndXifJ705D0lBSM740uO/dy29cOkN2/araUH3v9bYFhGr3qE0y1FX
-	eQEih7UQDEfRBMwrwDUSA72CBbMA4gXY90RidlOHLf3krNbWs0TFZsnXulaDD/RyNReQ
-	8/y+aNDDACpwZQdKalBswMNIoE0ykHWXAsPP1hvM8nKWXzxX6W98bPRLXUCUPWhhw+Tk
-	xsYmvOlMWniIXYSbaHqtdLj5OSGky8jl8uJQrA85mACmNgReeVJJ2WsmaVwdYgv9X3nw
-	3Ti8yPTCfjMkQlJINfk2UabAzxV5cXmjtL+ns0bcL3f4ofAhb+3imwoVWp3a05Fwcc6m
-	yWCg==
-MIME-Version: 1.0
-X-Received: by 10.236.30.98 with SMTP id j62mr15252710yha.105.1425076027940;
-	Fri, 27 Feb 2015 14:27:07 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.133 with HTTP; Fri, 27 Feb 2015 14:27:07 -0800 (PST)
-In-Reply-To: <1425070398-1602-2-git-send-email-alexandre.belloni@free-electrons.com>
-References: <1425070398-1602-1-git-send-email-alexandre.belloni@free-electrons.com>
-	<1425070398-1602-2-git-send-email-alexandre.belloni@free-electrons.com>
-Date: Fri, 27 Feb 2015 19:27:07 -0300
-X-Google-Sender-Auth: G8SJ7FcvXTNxkpI24yze93FJhAM
-Message-ID: <CAP9ODKqpo7=a4hN61LMMcAXYmeqoneBFoRhs3PPM6UOQ9z-Vmg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH 2/2] qtmultimedia: Fix build without opengl
+	h=from:to:cc:subject:date:message-id;
+	bh=azNkiGR+Jki6oNCU6SBF3siEtGNQJgHmwGkTcuOxD5o=;
+	b=vd1Qbl41Gj9gadX3tmjbDA8wymCAHBsYbDe03iRXMy3+AbgqIG427NFOd4gsLgwgmq
+	ZPTDVQLRA7N4aB+wTIlMcdqgMjsJNp0T9lOPGIPAeyax9zfE2r5ohvWIx2Oj3ud5qy48
+	hPcHQMoIuTVxjoa5VpLs+8dnoVSic9uawphr/6oireI7KjxWvOYULY5mpaYH0WtBac1H
+	Jdp8U5Ksl1+3yYiGw9HCovCN2qXANgpXSJlyhmeGwiPf08YeleWvwfCzQDjlq153aro/
+	50FS/t8LnRyVmQZe+HOKXJZZ5UgNSzBifoSjSUJK6gr8PJaMdLfZQG/MGrUnmVMComWc
+	9OKw==
+X-Received: by 10.229.139.194 with SMTP id f2mr37369596qcu.14.1425135400114;
+	Sat, 28 Feb 2015 06:56:40 -0800 (PST)
+Received: from localhost.localdomain (host29.reason.com.br. [187.49.239.29])
+	by mx.google.com with ESMTPSA id q3sm4704985qan.20.2015.02.28.06.56.38
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 28 Feb 2015 06:56:39 -0800 (PST)
+From: Raphael Silva <rapphil@gmail.com>
+X-Google-Original-From: Raphael Silva <raphael.philipe@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 28 Feb 2015 11:56:22 -0300
+Message-Id: <1425135382-2851-1-git-send-email-raphael.philipe@ossystems.com.br>
+X-Mailer: git-send-email 2.3.0
+Cc: Raphael Silva <raphael.philipe@ossystems.com.br>
+Subject: [meta-oe][PATCH] fio: fix do_compile error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,19 +43,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Feb 2015 22:27:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 28 Feb 2015 14:56:41 -0000
 
-On Fri, Feb 27, 2015 at 5:53 PM, Alexandre Belloni
-<alexandre.belloni@free-electrons.com> wrote:
-> Backport a patch from 5.4.1 to get qtmultimedia to build without opengl.
->
-> Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+  * Update to v2.2.5
+  * Add patch for missing pre-defined __ARM_ARCH_5E__ compiler macro
 
-We are in the process of updating to 5.4.1 so I think this can be dropped, no?
+Signed-off-by: Raphael Silva <raphael.philipe@ossystems.com.br>
+---
+ ...sing-pre-defined-ARM-arch-compiler-macro.patch} | 34 ++++++++++------------
+ .../fio/{fio_2.0.5.bb => fio_2.2.5.bb}             | 10 +++----
+ 2 files changed, 21 insertions(+), 23 deletions(-)
+ rename meta-oe/recipes-benchmark/fio/fio/{0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch => 0001-Add-missing-pre-defined-ARM-arch-compiler-macro.patch} (33%)
+ rename meta-oe/recipes-benchmark/fio/{fio_2.0.5.bb => fio_2.2.5.bb} (75%)
 
+diff --git a/meta-oe/recipes-benchmark/fio/fio/0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch b/meta-oe/recipes-benchmark/fio/fio/0001-Add-missing-pre-defined-ARM-arch-compiler-macro.patch
+similarity index 33%
+rename from meta-oe/recipes-benchmark/fio/fio/0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch
+rename to meta-oe/recipes-benchmark/fio/fio/0001-Add-missing-pre-defined-ARM-arch-compiler-macro.patch
+index db97244..fffc9b8 100644
+--- a/meta-oe/recipes-benchmark/fio/fio/0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch
++++ b/meta-oe/recipes-benchmark/fio/fio/0001-Add-missing-pre-defined-ARM-arch-compiler-macro.patch
+@@ -1,30 +1,28 @@
+-From 152b969cd4ff5b4b7e1c65eca1f9ab243b8a30c8 Mon Sep 17 00:00:00 2001
+-From: Otavio Salvador <otavio@ossystems.com.br>
+-Date: Sun, 14 Apr 2013 13:53:35 -0300
+-Subject: [PATCH] ARM: Use generic assembly nop and barrier code for armv6
++From e5d058e203766690b301a8bdae74e908c04c659e Mon Sep 17 00:00:00 2001
++From: Raphael Silva <raphael.philipe@ossystems.com.br>
++Date: Wed, 25 Feb 2015 09:56:43 -0300
++Subject: [PATCH] Add missing pre-defined ARM arch compiler macro
+ 
+-Upstream-Status: Submitted
+-
+-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++Signed-off-by: Raphael Silva <raphael.philipe@ossystems.com.br>
++Upstream status: accepted
+ ---
+- arch/arch-arm.h |    4 +++-
+- 1 files changed, 3 insertions(+), 1 deletions(-)
++ arch/arch-arm.h | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/arch/arch-arm.h b/arch/arch-arm.h
+-index 658b688..7cd9502 100644
++index 7cd9502..bab886e 100644
+ --- a/arch/arch-arm.h
+ +++ b/arch/arch-arm.h
+-@@ -18,7 +18,9 @@
+- #define __NR_sys_vmsplice	343
++@@ -19,7 +19,8 @@
+  #endif
+  
+--#if defined (__ARM_ARCH_4__) || defined (__ARM_ARCH_4T__) || defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__)
+-+#if defined (__ARM_ARCH_4__) || defined (__ARM_ARCH_4T__) \
+-+	|| defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__) \
+-+	|| defined(__ARM_ARCH_6__)  || defined(__ARM_ARCH_6J__) || defined(__ARM_ARCH_6Z__) || defined(__ARM_ARCH_6ZK__)
++ #if defined (__ARM_ARCH_4__) || defined (__ARM_ARCH_4T__) \
++-	|| defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__) \
+++	|| defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5E__)\
+++	|| defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__) \
++ 	|| defined(__ARM_ARCH_6__)  || defined(__ARM_ARCH_6J__) || defined(__ARM_ARCH_6Z__) || defined(__ARM_ARCH_6ZK__)
+  #define nop             __asm__ __volatile__("mov\tr0,r0\t@ nop\n\t")
+  #define read_barrier()	__asm__ __volatile__ ("" : : : "memory")
+- #define write_barrier()	__asm__ __volatile__ ("" : : : "memory")
+ -- 
+-1.7.2.5
++2.3.0
+ 
+diff --git a/meta-oe/recipes-benchmark/fio/fio_2.0.5.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.5.bb
+similarity index 75%
+rename from meta-oe/recipes-benchmark/fio/fio_2.0.5.bb
+rename to meta-oe/recipes-benchmark/fio/fio_2.2.5.bb
+index 8dcf637..3eeaa41 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_2.0.5.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_2.2.5.bb
+@@ -12,17 +12,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+ 
+ DEPENDS = "libaio"
+ 
+-# rev for v2.0.5
+-SRCREV = "02efadeb8b05144bcf2fc7796e1da2e7db211d00"
++# rev for v2.2.5
++SRCREV = "5b9836f24c63754c800bc423d6db8866753ed4b4"
+ SRC_URI = "git://git.kernel.dk/fio.git \
+-           file://0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch"
++           file://0001-Add-missing-pre-defined-ARM-arch-compiler-macro.patch"
+ 
+ S = "${WORKDIR}/git"
+ 
+-EXTRA_OEMAKE = "CC='${CC}' CFLAGS='${CFLAGS}' LDFLAGS='${LDFLAGS}'"
++EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
+ 
+ do_install() {
+-    oe_runmake install DESTDIR=${D} bindir=${bindir} mandir=${mandir}
++    oe_runmake install DESTDIR=${D} prefix=${prefix} mandir=${mandir}
+     install -d ${D}/${docdir}/${PN}
+     cp -a ${S}/examples ${D}/${docdir}/${PN}/
+ }
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.3.0
+
 
