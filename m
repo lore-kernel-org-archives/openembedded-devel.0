@@ -1,36 +1,37 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yh0-f48.google.com (mail-yh0-f48.google.com
-	[209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id D48A865C7B
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D17465C7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Mar 2015 14:16:18 +0000 (UTC)
-Received: by yhzz6 with SMTP id z6so12247356yhz.13
+	Sun,  1 Mar 2015 22:23:54 +0000 (UTC)
+Received: by wghl2 with SMTP id l2so30094623wgh.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Mar 2015 06:16:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=sh0KVbNZbMH2SqoEnpsmSTQyxk3Bd74DthGvil0X/j8=;
-	b=RrKEE2QDAKJFJYOg/F6E/u7kHS7pd1sqnT0bjMN1xK0/3iEa0bclTfZicdJ6aEu4u1
-	BgKPjdgQ3Fv3INLVPIhbAN6V+MGDgrdEQ32Yt/+WAjcB22yaeeo10oH17kM05kZV7dKm
-	R1Ua0t25RfOANku/IDWKcdGf84f6L6ae85Zqn0DqEWGa2gubg8u64dN8JHZlyF3tSqd5
-	W5CKN2dWPVkpOXFyYEkmEWr27zVf9H0xaYRTCm0l1x0wgHCnua1IWEwel1KOiJhLgBKQ
-	ygY/0SZwngeQ8hTJrLszAOFHERen14Nh8ByfZpdZkJXFIwxE8x07JT/D/sKiYKU4vDzw
-	lwtA==
+	Sun, 01 Mar 2015 14:23:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=Wu9PQEu/+hNgCx2aGVQ1kwBEjlumPquggUquR1LCDHY=;
+	b=qNUiG2dZihNlAZdUCFqW1UdmzkNt2x4KZS2Sx2L4jlYYLX1te1Kb8jujB3ZORQKTf4
+	fgTGvcS4hbioUFjcHtSC6e0D15yRZuBj5tc0F5ta9uvCiQujUTaQKqSENHYcecUACAwz
+	D714a00a5cgaT+3N7TlfA89i0AkYcijJRuRIQOIE6PVCOsR50oHp0U4XegJCZx/KjO4B
+	gf1DtC83xu66AWsxFwYqUowH9ebyTgBJ6tV4RVVdYd22Ha4myFg0RIsM7Tu7eCt4LYy/
+	N7mXD2+6ThhdDzt9NgOicUHVhjINB9G3fdDVp33DlKMgSw1x9OiboOU5vwhhAGPiykf/
+	8mag==
+X-Received: by 10.194.19.166 with SMTP id g6mr13965048wje.150.1425248635260;
+	Sun, 01 Mar 2015 14:23:55 -0800 (PST)
+Received: from localhost.localdomain (p5B0A2149.dip0.t-ipconnect.de.
+	[91.10.33.73]) by mx.google.com with ESMTPSA id
+	hv5sm16549333wjb.16.2015.03.01.14.23.53
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 01 Mar 2015 14:23:54 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  1 Mar 2015 23:23:44 +0100
+Message-Id: <1425248624-2993-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
 MIME-Version: 1.0
-X-Received: by 10.170.133.202 with SMTP id z193mr23072838ykb.30.1425219379286; 
-	Sun, 01 Mar 2015 06:16:19 -0800 (PST)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.123.133 with HTTP; Sun, 1 Mar 2015 06:16:18 -0800 (PST)
-In-Reply-To: <1425165316-3988-1-git-send-email-raphael.philipe@ossystems.com.br>
-References: <1425165316-3988-1-git-send-email-raphael.philipe@ossystems.com.br>
-Date: Sun, 1 Mar 2015 11:16:18 -0300
-X-Google-Sender-Auth: YQ0GAfhZwIVBJzu008po4a-lkrQ
-Message-ID: <CAP9ODKpYxL=rAsGM9=6ghxiwbCmnxMyk_kqW8C-xyLEFEWZ8AQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Raphael Silva <raphael.philipe@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH v2] fio: fix do_compile error
+Subject: [meta-oe][PATCH] qt-creator: avoid conflicts with meta-qt5's qt5-creator
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,19 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2015 14:16:19 -0000
+X-List-Received-Date: Sun, 01 Mar 2015 22:23:55 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Feb 28, 2015 at 8:15 PM, Raphael Silva <rapphil@gmail.com> wrote:
->   * Update to v2.2.6
->
-> Signed-off-by: Raphael Silva <raphael.philipe@ossystems.com.br>
+We avoid conflicts by installing no files to sysroot. This causes no fallout
+because nothing depends on qt5-creator (if something included later depending
+on qt-creator it should depend on qt5-creator).
+Note that
 
+| WARNING: QA Issue: qt5-creator rdepends on qt-creator, but it isn't a build dependency? [build-deps]
 
-Acked-by:  Otavio Salvador <otavio@ossystems.com.br>
+is a false positve because the names of the libraries are same as for
+qt5-creator (see test below).
 
+This patch was tested by:
+
+1. building qt-creator from scratch
+2. building an image containing qt5-creator.
+   * qt5-creator did not fail for sysroot conflicts
+   * image was build without pulling qt-creator
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb b/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
+index 11d7be7..670ffad 100644
+--- a/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
++++ b/meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb
+@@ -33,6 +33,11 @@ RRECOMMENDS_${PN} += "packagegroup-core-buildessential \
+                       qt4-plugin-sqldriver-sqlite \
+ "
+ 
++# avoid conflicts with meta-qt5's qt-creator and do install nothing to sysroot
++# this does no harm cause nothing depends on qt-creator
++sysroot_stage_all() {
++}
++
+ # the regexp in insane.bbclass doesn't allow this valid path:
+ # qt-creator-2.8.1: qt-creator: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/libqbs_cpp_scanner.so
+ # qt-creator: found library in wrong location: /usr/share/qtcreator/qbs/lib/qbs/plugins/libqbs_qt_scanner.so
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.3
+
 
