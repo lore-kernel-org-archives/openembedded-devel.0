@@ -1,20 +1,41 @@
-Return-Path: <florian.boor@kernelconcepts.de>
-Received: from mail.kernelconcepts.de (mail.kernelconcepts.de [212.60.202.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D87B72130
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FB0471F1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 11:09:07 +0000 (UTC)
-Received: from [192.168.2.78] (helo=serenity.kc.loc)
-	by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1YSNfR-0005Bt-Ly; Mon, 02 Mar 2015 11:33:41 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
+	Mon,  2 Mar 2015 11:33:02 +0000 (UTC)
+Received: by wggz12 with SMTP id z12so32852380wgg.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Mar 2015 03:33:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=WkZhk2c3KBqxoEGp8W9US3gQNibo4DHal30RL2ert+M=;
+	b=PCaF+Za8/n5OyAgq4FUqMggzpTzqYjdAVia0gi8/HRMmuf9xW7qbLnpGsdnWOBMuF1
+	LXhbwMIkHM//JvKPhZbx+N8Qq+B3zV4yE6pHcgwEs7aDZbUa0yw2A71poE7i9mRyNx6D
+	H916IMXtgcytBM6/GXJ+RCcWfRYPUXmYxlpVRnRSxZFijuYXeizHFsAmtb/cFTsbjPOg
+	mbKZ+EHu+xoqRNATB/Iq49wHHCgTlBf96lvkYVXemQfnfucQ6yslAKUuW+F9T0rkUiYe
+	nt33onRFWVmR0CHvuJq6NpwpnqNYsadaygz7pqU0SIL8McrsyvdzYKmx/B3Wvkvafcyf
+	dCmA==
+X-Received: by 10.194.204.131 with SMTP id ky3mr41620259wjc.95.1425295982894; 
+	Mon, 02 Mar 2015 03:33:02 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	ka1sm18876372wjc.2.2015.03.02.03.33.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 02 Mar 2015 03:33:02 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 2 Mar 2015 12:33:25 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Mar 2015 11:33:47 +0100
-Message-Id: <1425292427-603-1-git-send-email-florian.boor@kernelconcepts.de>
-X-Mailer: git-send-email 1.7.10.4
-Cc: Florian Boor <florian@kernelconcepts.de>
-Subject: [meta-oe][PATCH] fltk: Replace use of freetype-config with pkg-config Drop blacklist entry
+Message-ID: <20150302113325.GA2309@jama>
+References: <1425283365-19326-1-git-send-email-Martin.Jansa@gmail.com>
+	<54F439E6.3010906@dominion.thruhere.net>
+	<20150302102611.GY2309@jama> <54F441BA.7090602@kernelconcepts.de>
+MIME-Version: 1.0
+In-Reply-To: <54F441BA.7090602@kernelconcepts.de>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH] vboxguestdrivers: import recipe from meta-luneos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,71 +49,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 11:09:08 -0000
+X-List-Received-Date: Mon, 02 Mar 2015 11:33:07 -0000
+X-Groupsio-MsgNum: 54581
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GD+uNaHYxbVPHaQt"
+Content-Disposition: inline
 
-From: Florian Boor <florian@kernelconcepts.de>
+--GD+uNaHYxbVPHaQt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Tested building for MIPS 32bit QEMU
+On Mon, Mar 02, 2015 at 11:55:54AM +0100, Florian Boor wrote:
+> Hi,
+>=20
+> On 02.03.2015 11:26, Martin Jansa wrote:
+> >> Please don't ever RDEPEND on kernel modules, even when the recipe will=
+=20
+> >> build them, it sets a bad precedent.
+>=20
+> > I think it makes sense in this case.. nobody will ever include them in=
+=20
+> > kernel image and vboxguestdrivers utils don't make much sense without t=
+he=20
+> > modules installed.
+>=20
+> I see its unlikely but in some cases (e.g. highly secure environments) yo=
+u do
+> not want to use modules at all. So unless there is a real need to depend =
+on
+> the modules I would just recommend it.
 
-Signed-off-by: Florian Boor <florian@kernelconcepts.de>
----
- .../fltk/fltk-1.1.10/fltk-no-freetype-config.patch   |   18 ++++++++++++++++++
- meta-oe/recipes-support/fltk/fltk_1.1.10.bb          |    7 +++----
- 2 files changed, 21 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch
+In such environment you won't be installing vboxguestdrivers package, right?
 
-diff --git a/meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch b/meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch
-new file mode 100644
-index 0000000..5dbb054
---- /dev/null
-+++ b/meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch
-@@ -0,0 +1,18 @@
-+--- a/configure.in.orig	2015-03-01 16:00:35.956432907 +0100
-++++ b/configure.in	2015-03-01 16:04:23.269580093 +0100
-+@@ -865,11 +865,11 @@
-+         AC_ARG_ENABLE(xft, [  --enable-xft            turn on Xft support [default=no]])
-+ 
-+ 	if test x$enable_xft = xyes; then
-+-            AC_PATH_PROG(FTCONFIG,freetype-config)
-++            AC_PATH_PROG(PKGCONFIG,pkg-config)
-+ 
-+-	    if test "x$FTCONFIG" != x; then
-+-	        CPPFLAGS="`$FTCONFIG --cflags` $CPPFLAGS"
-+-	        CXXFLAGS="`$FTCONFIG --cflags` $CXXFLAGS"
-++	    if test "x$PKGCONFIG" != x; then
-++	        CPPFLAGS="`$PKGCONFIG --cflags xft` $CPPFLAGS"
-++	        CXXFLAGS="`$PKGCONFIG --cflags xft` $CXXFLAGS"
-+ 
-+ 		AC_CHECK_HEADER(X11/Xft/Xft.h,
-+ 		    AC_CHECK_LIB(Xft, XftDrawCreate,
-diff --git a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-index 4fd3645..3229ed0 100644
---- a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-+++ b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
-@@ -6,19 +6,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c0b73db66884b6a925e727400315130"
- 
- DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
- 
--PR = "r1"
--
--PNBLACKLIST[fltk] ?= "broken: still uses /usr/bin/freetype-config"
-+PR = "r2"
- 
- SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fltk-${PV}-source.tar.bz2 \
-            file://disable_test.patch \
-            file://dso-fix.patch \
-            file://libpng15.patch \
-+           file://fltk-no-freetype-config.patch \
- "
- 
- S = "${WORKDIR}/fltk-${PV}"
- 
--inherit lib_package autotools-brokensep binconfig
-+inherit lib_package autotools-brokensep binconfig pkgconfig
- 
- TARGET_CC_ARCH += "${LDFLAGS} -DXFT_MAJOR=2"
- 
--- 
-1.7.10.4
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--GD+uNaHYxbVPHaQt
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlT0SoUACgkQN1Ujt2V2gBw3HwCgl0zX6abEO8rVWTayJN95Xl1D
+CnAAoJ0gD4Fdb8lgEyJ7GRnCXK6X+pIa
+=9QkJ
+-----END PGP SIGNATURE-----
+
+--GD+uNaHYxbVPHaQt--
