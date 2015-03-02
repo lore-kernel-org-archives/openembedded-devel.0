@@ -1,41 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f179.google.com (mail-we0-f179.google.com
-	[74.125.82.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 569EE72130
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 15CC372130
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 10:24:31 +0000 (UTC)
-Received: by wesx3 with SMTP id x3so32300968wes.7
+	Mon,  2 Mar 2015 10:25:47 +0000 (UTC)
+Received: by wghl2 with SMTP id l2so32443330wgh.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2015 02:24:32 -0800 (PST)
+	Mon, 02 Mar 2015 02:25:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=6c99SqM1swvTLJMfyiK7lndFP9z325nnwldSvsIw42U=;
-	b=irBu7OhHu56RKoH7H1BEkZdZw6ziaRjxdfvsBnMR045oqMo5NpOMqhXrnRD9IjcjY5
-	kwar4piqScluAAAfe0pQaS2WeyqywqoD/P8pI0mpQqJ6ECB/+KIR1+GRcMbukjKfshZI
-	ty7VamDtG20HRI+PDMmgkMnEBl2gzxByxUjcm7lLjuJvM1LmDmYynT8dWFR6Gzu340/M
-	eVkZZILeNsTLeu2SP6sAJrIHy+AgOutBgF4/Za0bhqOGJIh1+Td3ayw6Asi8h/ULUvr/
-	iCWrn/qXVratgE/2LGqcodTccDnVA8KsFdBZF7JIBeFGwnW+vTzMCJG2dc4HJywlnAsq
-	gVCw==
-X-Received: by 10.194.209.237 with SMTP id mp13mr30891402wjc.120.1425291872356;
-	Mon, 02 Mar 2015 02:24:32 -0800 (PST)
+	bh=OhrNxcPeeJ68m6dYCZoL68YbwppLXwd7oXdbatm3yB0=;
+	b=nQhpjRF7EJ1KxpoB9qS4NbyaD9wNqVT3XPCp79n/kXkrPObUCvgLEcNOggG436J+mO
+	2kPkr0/Oi4L1lXSHXruyO2gbV3AwWn8E8vm6Et7DbtdECX/e4/4A11XW1wrMTHiuA0Rq
+	Hytm/gAN4C79JV5vQ6bcR5fVRdTayNizdnP2h2VseVD8x05miogXcimHQiAuw8Ez1JPw
+	9ow3I3yE7YqyVq4S+YgOWAYv4UHoBOMitwsu1EHHDSgprp7YLKXJIomrIoCqC2agZrr1
+	oLPTQAaiiqgj211KIZl8FVK5Z7wrcYZNDwCT3HCQtMaXZH1mf5ZQSri/eCcn0OE5fQvB
+	T7OQ==
+X-Received: by 10.180.76.45 with SMTP id h13mr33158479wiw.51.1425291948627;
+	Mon, 02 Mar 2015 02:25:48 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	n1sm15412582wib.11.2015.03.02.02.24.31
+	gm2sm15447261wib.5.2015.03.02.02.25.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Mar 2015 02:24:31 -0800 (PST)
+	Mon, 02 Mar 2015 02:25:47 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Mar 2015 11:24:54 +0100
+Date: Mon, 2 Mar 2015 11:26:11 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150302102454.GX2309@jama>
-References: <1424420477-30493-1-git-send-email-Martin.Jansa@gmail.com>
-	<md1dit$n3m$1@ger.gmane.org>
+Message-ID: <20150302102611.GY2309@jama>
+References: <1425283365-19326-1-git-send-email-Martin.Jansa@gmail.com>
+	<54F439E6.3010906@dominion.thruhere.net>
 MIME-Version: 1.0
-In-Reply-To: <md1dit$n3m$1@ger.gmane.org>
+In-Reply-To: <54F439E6.3010906@dominion.thruhere.net>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-initramfs][PATCH] linux-yocto-tiny-kexecboot: remove 3.10, 3.17 and add 3.19
+Subject: Re: [meta-oe][PATCH] vboxguestdrivers: import recipe from meta-luneos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,104 +48,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 10:24:35 -0000
-X-Groupsio-MsgNum: 54576
+X-List-Received-Date: Mon, 02 Mar 2015 10:25:49 -0000
+X-Groupsio-MsgNum: 54577
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RGnAp+RkZMffi58C"
+	protocol="application/pgp-signature"; boundary="RUvhGz2nhX7DIu1B"
 Content-Disposition: inline
 
---RGnAp+RkZMffi58C
+--RUvhGz2nhX7DIu1B
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 02, 2015 at 11:21:17AM +0100, Koen Kooi wrote:
+On Mon, Mar 02, 2015 at 11:22:30AM +0100, Koen Kooi wrote:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
 >=20
-> Martin Jansa schreef op 20-02-15 om 09:21:
-> > * 3.10 and 3.17 were removed in oe-core and parsing fails because of the
-> > require line
+> Martin Jansa schreef op 02-03-15 om 09:02:
+> > * useful to run our qemu* builds inside VirtualBox
 > >=20
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> ---=20
+> > .../vboxguestdrivers/Makefile.utils                | 43 ++++++++++++++=
+=20
+> > .../vboxguestdrivers/vboxguestdrivers_4.3.22.bb    | 65
+> > ++++++++++++++++++++++
 >=20
-> Tested-by: Koen Kooi <koen@dominion.thruhere.net
+> > +PACKAGES +=3D "kernel-module-vboxguest kernel-module-vboxsf
+> > kernel-module-vboxvideo" +RDEPENDS_${PN} +=3D "kernel-module-vboxguest
+> > kernel-module-vboxsf kernel-module-vboxvideo"
 >=20
-> Any ETA when this will go in?
+> Please don't ever RDEPEND on kernel modules, even when the recipe will bu=
+ild
+> them, it sets a bad precedent.
 
-today/now
+I think it makes sense in this case.. nobody will ever include them in
+kernel image and vboxguestdrivers utils don't make much sense without
+the modules installed.
 
->=20
-> > --- .../linux/linux-yocto-tiny-kexecboot_3.17.bb       | 26
-> > ---------------------- ..._3.10.bb =3D> linux-yocto-tiny-kexecboot_3.19=
-=2Ebb}
-> > |  2 +- 2 files changed, 1 insertion(+), 27 deletions(-) delete mode
-> > 100644
-> > meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb=
-=20
-> > rename
-> > meta-initramfs/recipes-kernel/linux/{linux-yocto-tiny-kexecboot_3.10.bb
-> > =3D> linux-yocto-tiny-kexecboot_3.19.bb} (93%)
-> >=20
-> > diff --git
-> > a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb
-> > b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.b=
-b=20
-> > deleted file mode 100644 index f3296c7..0000000 ---
-> > a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.b=
-b=20
-> > +++ /dev/null @@ -1,26 +0,0 @@ -require
-> > recipes-kernel/linux/linux-yocto-tiny_3.17.bb -SUMMARY =3D "Yocto tiny
-> > kernel embedding a minimalistic kexecboot initramfs" - -PACKAGES =3D ""=
-=20
-> > -PROVIDES =3D "" - -KERNEL_IMAGE_BASE_NAME =3D
-> > "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${MACHINE}"=20
-> > -KERNEL_IMAGE_SYMLINK_NAME =3D
-> > "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}" - -INITRAMFS_IMAGE
-> > =3D "initramfs-kexecboot-klibc-image" -INITRAMFS_TASK =3D
-> > "${INITRAMFS_IMAGE}:do_rootfs" - -# disable unneeded tasks=20
-> > -do_install[noexec] =3D "1" -do_package[noexec] =3D "1"=20
-> > -do_package_qa[noexec] =3D "1" -do_packagedata[noexec] =3D "1"=20
-> > -do_package_deb[noexec] =3D "1" -do_package_ipk[noexec] =3D "1"=20
-> > -do_package_rpm[noexec] =3D "1" -do_package_tar[noexec] =3D "1"=20
-> > -do_package_write_deb[noexec] =3D "1" -do_package_write_ipk[noexec] =3D=
- "1"=20
-> > -do_package_write_rpm[noexec] =3D "1" -do_package_write_tar[noexec] =3D=
- "1"=20
-> > -do_populate_sysroot[noexec] =3D "1" diff --git
-> > a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
-> > b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.b=
-b=20
-> > similarity index 93% rename from
-> > meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb=
-=20
-> > rename to
-> > meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb=
-=20
-> > index a823e0f..f6d2fa0 100644 ---
-> > a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.b=
-b=20
-> > +++
-> > b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.b=
-b=20
-> > @@ -1,4 +1,4 @@ -require recipes-kernel/linux/linux-yocto-tiny_3.10.bb=
-=20
-> > +require recipes-kernel/linux/linux-yocto-tiny_${PV}.bb SUMMARY =3D "Yo=
-cto
-> > tiny kernel embedding a minimalistic kexecboot initramfs"
-> >=20
-> > PACKAGES =3D ""
-> >=20
->=20
 > -----BEGIN PGP SIGNATURE-----
 > Version: GnuPG v1.4.5 (Darwin)
 > Comment: GPGTools - http://gpgtools.org
 >=20
-> iD8DBQFU9DmdMkyGM64RGpERAl6xAJ9l92nP7qWzX/ymjVYLkO4cT5UT6ACfUdHY
-> hZBp07nZNhyH1UykJFmKbzk=3D
-> =3DLyMJ
+> iD8DBQFU9DnmMkyGM64RGpERAu+jAJ92mQgg4UU7QBoaClZcMsh7Bd/8+wCggBRt
+> iXq6vplV1z4aJMxG2xY9+nk=3D
+> =3DSREn
 > -----END PGP SIGNATURE-----
->=20
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -156,16 +101,16 @@ cto
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---RGnAp+RkZMffi58C
+--RUvhGz2nhX7DIu1B
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlT0OnYACgkQN1Ujt2V2gBypnwCfeuJpsPnvk7k6M+e8HA6zNdBw
-McUAn36C1d7PxGzVb0wZ+vlpfW8qKcD2
-=r4gr
+iEYEARECAAYFAlT0OsMACgkQN1Ujt2V2gBwxaQCgtZJbhefE12kGMzVD9yHmeadZ
+V1wAn22IBYPuS3AReI1mMvKcXNLM9Y30
+=wwp5
 -----END PGP SIGNATURE-----
 
---RGnAp+RkZMffi58C--
+--RUvhGz2nhX7DIu1B--
