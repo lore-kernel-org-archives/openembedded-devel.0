@@ -1,39 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id E99C17212A
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 91A1865C7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 07:59:07 +0000 (UTC)
-Received: by wiwl15 with SMTP id l15so12678842wiw.3
+	Mon,  2 Mar 2015 08:02:23 +0000 (UTC)
+Received: by wggz12 with SMTP id z12so31770540wgg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Mar 2015 23:59:08 -0800 (PST)
+	Mon, 02 Mar 2015 00:02:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ZMAcAFL6QBb0teGOxb1ZEQn3YOwjRZOTv6LFA4n+47w=;
-	b=ZJRZ8QAPJwQu/Egw6sEsBgqZwqS9g682qLBK4hLVY/tT2XMqCGjH/gi61h/r5ZCND1
-	c/+FVyTG2Y3wAAEx2EFMzgCPtbjwMIqdWXLiAxTiLrKj9KkoE19I65QgPLrnwkiEIRa7
-	r75WtGQ55p/n4kYucsErX19ui7lAcW99X97H8XgBrTUpb/bR19KxBwKWzxIy4uWFHwis
-	diq2Md+MA0RLWAvTYhVIETPI70lsfHgPb4E6kKUHWKxu6OpZm7wWOeFbgc0UZIdFfk6L
-	7aqrf9M/nIEfiLkEFyAcnaEruRU9gpS3JRWxzvRH9gxF5zyhOmp1kVKqL/dZ3x7K9aZ6
-	Ponw==
-X-Received: by 10.180.72.98 with SMTP id c2mr33393090wiv.87.1425283148475;
-	Sun, 01 Mar 2015 23:59:08 -0800 (PST)
-Received: from localhost ([89.176.104.3]) by mx.google.com with ESMTPSA id
-	dt7sm14850488wib.19.2015.03.01.23.59.06
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=nugr2SYY/UTEX+6i7qbyVUyanm4/r60UwtbJi1goRZo=;
+	b=WL98EKLZuIgzEc7Wq//g4Q1yKi0HD9afsxMWxzRv8UctHo3JORMbLqeRWC0pl1CiMZ
+	x5F+5npIu0FQnxO0ZK/Sm16UIkobPTpj5cAbqJYNCIM2lip8Qf2CdxvVzuGV6vMFcJRJ
+	WV63ZIDYw/Oktpt4ZoejU0EWXXIVv8ktD4uJ2yZ6pm1SlHdn0aQbFT7e1mNzkre7NuUH
+	tRmqIVC9crPqCKACL/zXES8dgyfk76XIMbbJxHH8knlJiSLmYi65m7zMxwAxlX/ITNqw
+	Us6dUIFEoNHzN5znXYtMupJUe1rz5ohLl1l5l6nxWsN5LUBwAdT7Jys+VzOrKFk50NqK
+	S4XA==
+X-Received: by 10.180.184.230 with SMTP id ex6mr32604167wic.73.1425283344069; 
+	Mon, 02 Mar 2015 00:02:24 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	hj10sm18032501wjc.48.2015.03.02.00.02.23
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 01 Mar 2015 23:59:07 -0800 (PST)
+	Mon, 02 Mar 2015 00:02:23 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Mar 2015 08:59:28 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150302075928.GV2309@jama>
-References: <1425248708-4076-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1425248708-4076-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 1/4] soci: Add recipe
+Date: Mon,  2 Mar 2015 09:02:45 +0100
+Message-Id: <1425283365-19326-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.3.1
+Subject: [meta-oe][PATCH] vboxguestdrivers: import recipe from meta-luneos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,131 +42,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 07:59:09 -0000
-X-Groupsio-MsgNum: 54571
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jn/MQTzma+jNUHFC"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Mar 2015 08:02:25 -0000
 
---jn/MQTzma+jNUHFC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* useful to run our qemu* builds inside VirtualBox
 
-On Sun, Mar 01, 2015 at 10:25:05PM +0000, Khem Raj wrote:
-> Define PACKAGECONFIG to enable a given backend of choice
-> by default its 'empty'
->=20
-> Change-Id: Ie1123af658ca94d2fe22a3ca1a32dfb47d58979e
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-support/soci/soci_3.2.2.bb | 46 ++++++++++++++++++++++++=
-++++++
->  1 file changed, 46 insertions(+)
->  create mode 100644 meta-oe/recipes-support/soci/soci_3.2.2.bb
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../vboxguestdrivers/Makefile.utils                | 43 ++++++++++++++
+ .../vboxguestdrivers/vboxguestdrivers_4.3.22.bb    | 65 ++++++++++++++++++++++
+ 2 files changed, 108 insertions(+)
+ create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/Makefile.utils
+ create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.22.bb
 
-Is this v2 to fix following QA?
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/Makefile.utils b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/Makefile.utils
+new file mode 100644
+index 0000000..3749b95
+--- /dev/null
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/Makefile.utils
+@@ -0,0 +1,43 @@
++## -----------------------------------------------------------------------
++##
++##   Copyright 2001-2008 H. Peter Anvin - All Rights Reserved
++##
++##   This program is free software; you can redistribute it and/or modify
++##   it under the terms of the GNU General Public License as published by
++##   the Free Software Foundation, Inc., 53 Temple Place Ste 330,
++##   Boston MA 02111-1307, USA; either version 2 of the License, or
++##   (at your option) any later version; incorporated herein by reference.
++##
++## -----------------------------------------------------------------------
++
++INCLUDES = -I. -I../vboxsf
++CFLAGS	 = ${INCLUDES}
++LDFLAGS	 =
++
++SRCS     = mount.vboxsf.c \
++           vbsfmount.c
++
++OBJS	 = $(patsubst %.c,%.o,$(notdir $(SRCS)))
++
++.SUFFIXES: .c .o .i .s .S
++
++
++all: mount.vboxsf
++
++clean:
++	-rm -f *.o mount.vboxsf
++
++spotless: clean
++	-rm -f *~
++
++mount.vboxsf: $(OBJS)
++	$(CC) $(LDFLAGS) -o $@ $^
++
++%.o: %.c
++	$(CC) $(UMAKEDEPS) $(CFLAGS) -c -o $@ $<
++%.i: %.c
++	$(CC) $(UMAKEDEPS) $(CFLAGS) -E -o $@ $<
++%.s: %.c
++	$(CC) $(UMAKEDEPS) $(CFLAGS) -S -o $@ $<
++
++-include .*.d *.tmp
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.22.bb
+new file mode 100644
+index 0000000..0e12ea7
+--- /dev/null
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.22.bb
+@@ -0,0 +1,65 @@
++SUMMARY = "VirtualBox Linux Guest Drivers"
++SECTION = "core"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/${VBOX_NAME}/COPYING;md5=e197d5641bb35b29d46ca8c4bf7f2660"
++
++DEPENDS = "virtual/kernel"
++
++inherit module kernel-module-split
++
++COMPATIBLE_MACHINE = "(qemux86|qemux86-64)"
++
++VBOX_NAME = "VirtualBox-${PV}"
++
++SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
++           file://Makefile.utils \
++"
++SRC_URI[md5sum] = "fc21ecc1044dc13cd6c6b601823c6df3"
++SRC_URI[sha256sum] = "0d41e044589d3371f765a98ddc071d9cf9788289f72b7efbb5db64f5488c8eba"
++
++S = "${WORKDIR}/vbox_module"
++
++export BUILD_TARGET_ARCH="${ARCH}"
++export BUILD_TARGET_ARCH_x86-64="amd64"
++export KERN_DIR="${STAGING_KERNEL_DIR}"
++
++addtask export_sources before do_patch after do_unpack
++
++do_export_sources() {
++    mkdir -p "${S}"
++    ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/export_modules ${T}/vbox_modules.tar.gz
++    tar -C "${S}" -xzf ${T}/vbox_modules.tar.gz
++
++    # add a mount utility to use shared folder from VBox Addition Source Code
++    mkdir -p "${S}/utils"
++    install ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/sharedfolders/mount.vboxsf.c ${S}/utils
++    install ${WORKDIR}/${VBOX_NAME}/src/VBox/Additions/linux/sharedfolders/vbsfmount.c ${S}/utils
++    install ${S}/../Makefile.utils ${S}/utils/Makefile
++
++}
++
++# compile and install mount utility
++do_compile_append() {
++    oe_runmake -C ${S}/utils
++}
++
++module_do_install() {
++    MODULE_DIR=${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/misc
++    install -d $MODULE_DIR
++    install -m 644 vboxguest.ko $MODULE_DIR
++    install -m 644 vboxsf.ko $MODULE_DIR
++    install -m 644 vboxvideo.ko $MODULE_DIR
++}
++
++do_install_append() {
++    install -d ${D}${base_sbindir}
++    install -m 755 ${S}/utils/mount.vboxsf ${D}${base_sbindir}
++}
++
++PACKAGES += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
++RDEPENDS_${PN} += "kernel-module-vboxguest kernel-module-vboxsf kernel-module-vboxvideo"
++
++FILES_${PN} = "${base_sbindir}"
++
++# autoload if installed
++KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
+-- 
+2.3.1
 
-soci-3.2.2: soci: Files/directories were installed but not shipped
-  /usr/lib64
-  /usr/lib64/libsoci_core.so.3.2.2
-  /usr/lib64/libsoci_empty.so.3.2.2
-  /usr/lib64/libsoci_core.so.3.2
-  /usr/lib64/libsoci_core.so
-  /usr/lib64/libsoci_core.a
-  /usr/lib64/libsoci_empty.so.3.2
-  /usr/lib64/libsoci_empty.so
-  /usr/lib64/libsoci_empty.a
-  /usr/lib64/.debug
-  /usr/lib64/.debug/libsoci_core.so.3.2.2
-  /usr/lib64/.debug/libsoci_empty.so.3.2.2 [installed-vs-shipped]
 
->=20
-> diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb b/meta-oe/recipes=
--support/soci/soci_3.2.2.bb
-> new file mode 100644
-> index 0000000..1c333cb
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/soci/soci_3.2.2.bb
-> @@ -0,0 +1,46 @@
-> +# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
-> +# Released under the MIT license (see COPYING.MIT for the terms)
-> +
-> +DESCRIPTION =3D "The C++ Database Access Library"
-> +HOMEPAGE =3D "http://soci.sourceforge.net"
-> +LICENSE =3D "BSL-1.0"
-> +SECTION =3D "libs"
-> +DEPENDS =3D "boost"
-> +
-> +LIC_FILES_CHKSUM =3D "file://LICENSE_1_0.txt;md5=3De4224ccaecb14d942c71d=
-31bef20d78c"
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.g=
-z"
-> +SRC_URI[md5sum] =3D "bc3c35f6cd3f80a1be19fe30b3c111bf"
-> +SRC_URI[sha256sum] =3D "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743=
-582de2ff443ccb1c"
-> +
-> +TESTCONFIG =3D '-DSOCI_TEST_EMPTY_CONNSTR=3D"dummy" -DSOCI_TEST_SQLITE3_=
-CONNSTR=3D"test.db" \
-> +              -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING=3D"dbname=3Dsoci_tes=
-t" \
-> +              -DSOCI_TEST_MYSQL_CONNSTR:STRING=3D"db=3Dsoci_test user=3D=
-oe password=3Doe"'
-> +
-> +OBASEDIR ?=3D "/opt/oracle"
-> +OINCDIR =3D "rdbms/public"
-> +OLIBDIR =3D "lib"
-> +
-> +PACKAGECONFIG[sqlite3] =3D "-DSOCI_SQLITE3=3DON,-DSOCI_SQLITE3=3DOFF,sql=
-ite3,"
-> +PACKAGECONFIG[mysql] =3D "-DSOCI_MYSQL=3DON,-DSOCI_MYSQL=3DOFF,mariadb,"
-> +PACKAGECONFIG[postgresql] =3D "-DSOCI_POSTGRESQL=3DON,-DSOCI_POSTGRESQL=
-=3DOFF,postgresql,"
-> +PACKAGECONFIG[odbc] =3D "-DSOCI_ODBC=3DON,-DSOCI_ODBC=3DOFF,,"
-> +PACKAGECONFIG[empty] =3D "-DSOCI_EMPTY=3DON,-DSOCI_EMPTY=3DOFF,,"
-> +PACKAGECONFIG[oracle] =3D "-DWITH_ORACLE=3DON --with-oracle-include=3D${=
-OINCDIR} --with-oracle-lib=3D${OLIBDIR},-DWITH_ORACLE=3DOFF,,"
-> +PACKAGECONFIG[ptest] =3D "${TESTCONFIG},,,"
-> +
-> +# enable your backend by default we enable 'empty'
-> +PACKAGECONFIG ??=3D "empty"
-> +
-> +# Take the flags added by PACKAGECONFIG and pass them to cmake.
-> +EXTRA_OECMAKE =3D "${EXTRA_OECONF}"
-> +
-> +inherit cmake
-> +
-> +PACKAGES +=3D "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc ${P=
-N}-oracle"
-> +
-> +FILES_${PN}-sqlite3 =3D "${libdir}/lib${BPN}_sqlite3.so.*"
-> +FILES_${PN}-mysql =3D "${libdir}/lib${BPN}_mysql.so.*"
-> +FILES_${PN}-postgresql =3D "${libdir}/lib${BPN}_postgresql.so.*"
-> +FILES_${PN}-odbc =3D "${libdir}/lib${BPN}_odbc.so.*"
-> +FILES_${PN}-oracle =3D "${libdir}/lib${BPN}_oracle.so.*"
-> --=20
-> 2.1.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---jn/MQTzma+jNUHFC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlT0GGAACgkQN1Ujt2V2gBw2aACePtKQ9BciVXqrWVHNgBQ/u7T3
-NrgAn1yQSWL7pvy9EnMzuI67tJkznKBg
-=ezbs
------END PGP SIGNATURE-----
-
---jn/MQTzma+jNUHFC--
