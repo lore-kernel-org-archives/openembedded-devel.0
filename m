@@ -1,26 +1,40 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DDAF73824
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A3CD7382E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 14:14:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.5) with ESMTP id t22EEUAN006410
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 2 Mar 2015 06:14:30 -0800 (PST)
-Received: from [128.224.56.84] (128.224.56.84) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 2 Mar 2015 06:14:30 -0800
-Message-ID: <54F47045.4080503@windriver.com>
-Date: Mon, 2 Mar 2015 09:14:29 -0500
-From: Randy MacLeod <randy.macleod@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	Mon,  2 Mar 2015 14:26:23 +0000 (UTC)
+Received: by wevk48 with SMTP id k48so33659204wev.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Mar 2015 06:26:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=+IqOifOBFSxy0VOf/a9a0ESVtd1Notytvxn3rwPaVDk=;
+	b=mgIzUqlmzvRiR68dKUY9mGbne2Hz9mULSi4ztQYV6b3QwcRV19aeTIqbj6GqPBdeLW
+	xkgd2m3VHPgninXC/i+gEXwlId5F/RuPE//NKfG3u+3WcIgaljlRS8G8EbC6iyzbm1ji
+	MT0kzrSiEoJxeyCiwwhEcpb/HpcRuhjBt5ZLyl0YtJ2zZqDaN62wnRj1aHJtkznF298V
+	LuWuxr8DLU8Ie0hG3FKafoRQhv4ID5voMCG4s4kC+nwIl6v0KyOxWKf9YD2uwgR+60bX
+	q3APLacu0GpjhRuZ9LmMNWbsUO5ccUAObeDyVcrtb/X4ytu+3uuO6dNcjOsWsuIboqf5
+	zB0A==
+X-Received: by 10.194.88.131 with SMTP id bg3mr60216396wjb.119.1425306383739; 
+	Mon, 02 Mar 2015 06:26:23 -0800 (PST)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	gz3sm16313008wib.1.2015.03.02.06.26.22
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 02 Mar 2015 06:26:22 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 2 Mar 2015 15:26:45 +0100
+To: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <20150302142645.GC2309@jama>
+References: <54F47045.4080503@windriver.com>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, Martin Jansa
-	<martin.jansa@gmail.com>
-X-Originating-IP: [128.224.56.84]
-Subject: Discuss: ruby-1.9.x EOL -- someone to add ruby-2.2?
+In-Reply-To: <54F47045.4080503@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Discuss: ruby-1.9.x EOL -- someone to add ruby-2.2?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,42 +48,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 14:14:32 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 02 Mar 2015 14:26:24 -0000
+X-Groupsio-MsgNum: 54587
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="fzZfjcV6kaBgkq89"
+Content-Disposition: inline
 
+--fzZfjcV6kaBgkq89
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-As stated in the post below, ruby-1.9.3 is no longer supported
-and CVEs will not be released.
+On Mon, Mar 02, 2015 at 09:14:29AM -0500, Randy MacLeod wrote:
+>=20
+> As stated in the post below, ruby-1.9.3 is no longer supported
+> and CVEs will not be released.
+>=20
+> I'm not a rubyist but I assume we should upgrade to ruby-2.2.0 which
+> became the stable version as of December 25, 2014. Comments?
+> Martin, you are listed as maintainer of the meta-multimedia,
+> do you have any concerns about such an upgrade?
 
-I'm not a rubyist but I assume we should upgrade to ruby-2.2.0 which
-became the stable version as of December 25, 2014. Comments?
-Martin, you are listed as maintainer of the meta-multimedia,
-do you have any concerns about such an upgrade?
+No concerns from me.. I don't use ruby much (mostly ruby-native for
+webkit builds) so I would welcome such upgrade.
 
-If anyone wants to start work on this for meta-oe, that'd be great.
-If no one gets around to it, then a developer from WindRiver will
-likely be able to work on it but not a few months.
+> If anyone wants to start work on this for meta-oe, that'd be great.
+> If no one gets around to it, then a developer from WindRiver will
+> likely be able to work on it but not a few months.
+>=20
+> ../Randy
+>=20
+> ---
+> As of today, all support for Ruby 1.9.3 has ended. Bug and security=20
+> fixes from more recent Ruby versions will no longer be backported to 1.9.=
+3.
+>=20
+> This end of life was announced over a year ago.
+>=20
+> We highly recommend that you upgrade to Ruby 2.0.0 or above as soon as=20
+> possible. Please contact us if you=E2=80=99d like to continue maintaining=
+ the=20
+> 1.9.3 branch or if for some reason you can=E2=80=99t upgrade.
+>=20
+> Posted by Olivier Lacan on 23 Feb 2015
+> ---
+> Also see:
+> https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
+>=20
+> --=20
+> # Randy MacLeod. SMTS, Linux, Wind River
+> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200 Ottawa, Ontario,=20
+> Canada K2K 2W5
 
-../Randy
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
----
-As of today, all support for Ruby 1.9.3 has ended. Bug and security 
-fixes from more recent Ruby versions will no longer be backported to 1.9.3.
+--fzZfjcV6kaBgkq89
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-This end of life was announced over a year ago.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-We highly recommend that you upgrade to Ruby 2.0.0 or above as soon as 
-possible. Please contact us if you’d like to continue maintaining the 
-1.9.3 branch or if for some reason you can’t upgrade.
+iEYEARECAAYFAlT0cyUACgkQN1Ujt2V2gBx20ACgqJi0l7BVKoGmOGrsOkxw+B6u
+BZAAnRKE6gwJHz9OuQqoiMJbxolQYXy6
+=tXS9
+-----END PGP SIGNATURE-----
 
-Posted by Olivier Lacan on 23 Feb 2015
----
-Also see:
-https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
-
--- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200 Ottawa, Ontario, 
-Canada K2K 2W5
-
+--fzZfjcV6kaBgkq89--
