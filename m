@@ -1,44 +1,39 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-we0-f179.google.com (mail-we0-f179.google.com
-	[74.125.82.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 672777212A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id E99C17212A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 07:24:54 +0000 (UTC)
-Received: by wesu56 with SMTP id u56so31420542wes.10
+	Mon,  2 Mar 2015 07:59:07 +0000 (UTC)
+Received: by wiwl15 with SMTP id l15so12678842wiw.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Mar 2015 23:24:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:cc:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=a54GsPf9kkPTqeKqnzgSo/tZiSSmtPz8eBEDD6NWiqI=;
-	b=e9t67cLCTr33gTCkzuOvErTIgvg0SZBaGeqtDppu+ZLIp14zy0IM83FVPukK63Ft7+
-	ZR49EFb8xFtT4U+xKqbHK+Rsw157eVNo6qDDcBsQbldbATRhc2JXebnUAR+0nVh3YiMZ
-	RqQOgQ93gcQLziXg5bbiVOLh1XX5klvwrC07nSutjGBFudVZVTozBd5ESfLe19OeGvNX
-	kY50rEYD8027jwhUdFiPJzWUt48f8oUAH5QTYtSGjyZ6BQbspjFlCWMUYHPxRExcqS2x
-	da519+5vk7o37IGhrQnnZYJB8xsoDCgbJs2+gPDpLc9XICz/eGDFzZU7KqqG2l7iJSeu
-	9gDQ==
-X-Gm-Message-State: ALoCoQlI0duBucXzYe4wa4MTlveHeyReZyXYyayXOdlF7xdfSEkIVkfueFOwYKWl1smlDWBUzzaR
-X-Received: by 10.180.83.69 with SMTP id o5mr32011219wiy.48.1425281095675;
-	Sun, 01 Mar 2015 23:24:55 -0800 (PST)
-Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
-	by mx.google.com with ESMTPSA id n6sm17963841wjy.8.2015.03.01.23.24.54
+	Sun, 01 Mar 2015 23:59:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=ZMAcAFL6QBb0teGOxb1ZEQn3YOwjRZOTv6LFA4n+47w=;
+	b=ZJRZ8QAPJwQu/Egw6sEsBgqZwqS9g682qLBK4hLVY/tT2XMqCGjH/gi61h/r5ZCND1
+	c/+FVyTG2Y3wAAEx2EFMzgCPtbjwMIqdWXLiAxTiLrKj9KkoE19I65QgPLrnwkiEIRa7
+	r75WtGQ55p/n4kYucsErX19ui7lAcW99X97H8XgBrTUpb/bR19KxBwKWzxIy4uWFHwis
+	diq2Md+MA0RLWAvTYhVIETPI70lsfHgPb4E6kKUHWKxu6OpZm7wWOeFbgc0UZIdFfk6L
+	7aqrf9M/nIEfiLkEFyAcnaEruRU9gpS3JRWxzvRH9gxF5zyhOmp1kVKqL/dZ3x7K9aZ6
+	Ponw==
+X-Received: by 10.180.72.98 with SMTP id c2mr33393090wiv.87.1425283148475;
+	Sun, 01 Mar 2015 23:59:08 -0800 (PST)
+Received: from localhost ([89.176.104.3]) by mx.google.com with ESMTPSA id
+	dt7sm14850488wib.19.2015.03.01.23.59.06
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 01 Mar 2015 23:24:54 -0800 (PST)
-Message-ID: <54F41044.4070206@dresearch-fe.de>
-Date: Mon, 02 Mar 2015 08:24:52 +0100
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	Sun, 01 Mar 2015 23:59:07 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 2 Mar 2015 08:59:28 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150302075928.GV2309@jama>
+References: <1425248708-4076-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Armin Kuster <akuster808@gmail.com>
-References: <1425041152-21513-1-git-send-email-sledz@dresearch-fe.de>
-	<1425041152-21513-2-git-send-email-sledz@dresearch-fe.de>
-In-Reply-To: <1425041152-21513-2-git-send-email-sledz@dresearch-fe.de>
-Subject: Re: [meta-oe][dizzy][PATCH] rsyslog: fix name of syslogd ua group
+In-Reply-To: <1425248708-4076-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH 1/4] soci: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,54 +47,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 07:25:00 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 02 Mar 2015 07:59:09 -0000
+X-Groupsio-MsgNum: 54571
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jn/MQTzma+jNUHFC"
+Content-Disposition: inline
 
-On 27.02.2015 13:45, Steffen Sledz wrote:
-> (backport from master)
-> 
-> All the other syslogd implementations use 'syslogd' as update alternatives
-> group name. So rsyslogd should use this too.
-> 
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+--jn/MQTzma+jNUHFC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Mar 01, 2015 at 10:25:05PM +0000, Khem Raj wrote:
+> Define PACKAGECONFIG to enable a given backend of choice
+> by default its 'empty'
+>=20
+> Change-Id: Ie1123af658ca94d2fe22a3ca1a32dfb47d58979e
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-> index aeca09a..7593dfb 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-> @@ -125,10 +125,10 @@ INITSCRIPT_PARAMS = "defaults"
->  # higher than sysklogd's 100
->  ALTERNATIVE_PRIORITY = "110"
->  
-> -ALTERNATIVE_${PN} = "rsyslogd syslog-conf syslog-logrotate"
-> +ALTERNATIVE_${PN} = "syslogd syslog-conf syslog-logrotate"
->  
-> -ALTERNATIVE_LINK_NAME[rsyslogd] = "${base_sbindir}/syslogd"
-> -ALTERNATIVE_TARGET[rsyslogd] = "${sbindir}/rsyslogd"
-> +ALTERNATIVE_LINK_NAME[syslogd] = "${base_sbindir}/syslogd"
-> +ALTERNATIVE_TARGET[syslogd] = "${sbindir}/rsyslogd"
->  ALTERNATIVE_LINK_NAME[syslog-conf] = "${sysconfdir}/syslog.conf"
->  ALTERNATIVE_TARGET[syslog-conf] = "${sysconfdir}/rsyslog.conf"
->  ALTERNATIVE_LINK_NAME[syslog-logrotate] = "${sysconfdir}/logrotate.d/syslog"
+>  meta-oe/recipes-support/soci/soci_3.2.2.bb | 46 ++++++++++++++++++++++++=
+++++++
+>  1 file changed, 46 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/soci/soci_3.2.2.bb
 
-Would be great if this patch could make it expeditiously to dizzy
+Is this v2 to fix following QA?
 
-Without this patch it is not possible to use rsyslog without problems because the wrong ua group name leads to running rsyslog and busybox-syslogd in parallel fighting on sockets and other ressources.
+soci-3.2.2: soci: Files/directories were installed but not shipped
+  /usr/lib64
+  /usr/lib64/libsoci_core.so.3.2.2
+  /usr/lib64/libsoci_empty.so.3.2.2
+  /usr/lib64/libsoci_core.so.3.2
+  /usr/lib64/libsoci_core.so
+  /usr/lib64/libsoci_core.a
+  /usr/lib64/libsoci_empty.so.3.2
+  /usr/lib64/libsoci_empty.so
+  /usr/lib64/libsoci_empty.a
+  /usr/lib64/.debug
+  /usr/lib64/.debug/libsoci_core.so.3.2.2
+  /usr/lib64/.debug/libsoci_empty.so.3.2.2 [installed-vs-shipped]
 
-Thx,
-Steffen
+>=20
+> diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb b/meta-oe/recipes=
+-support/soci/soci_3.2.2.bb
+> new file mode 100644
+> index 0000000..1c333cb
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/soci/soci_3.2.2.bb
+> @@ -0,0 +1,46 @@
+> +# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
+> +# Released under the MIT license (see COPYING.MIT for the terms)
+> +
+> +DESCRIPTION =3D "The C++ Database Access Library"
+> +HOMEPAGE =3D "http://soci.sourceforge.net"
+> +LICENSE =3D "BSL-1.0"
+> +SECTION =3D "libs"
+> +DEPENDS =3D "boost"
+> +
+> +LIC_FILES_CHKSUM =3D "file://LICENSE_1_0.txt;md5=3De4224ccaecb14d942c71d=
+31bef20d78c"
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.g=
+z"
+> +SRC_URI[md5sum] =3D "bc3c35f6cd3f80a1be19fe30b3c111bf"
+> +SRC_URI[sha256sum] =3D "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743=
+582de2ff443ccb1c"
+> +
+> +TESTCONFIG =3D '-DSOCI_TEST_EMPTY_CONNSTR=3D"dummy" -DSOCI_TEST_SQLITE3_=
+CONNSTR=3D"test.db" \
+> +              -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING=3D"dbname=3Dsoci_tes=
+t" \
+> +              -DSOCI_TEST_MYSQL_CONNSTR:STRING=3D"db=3Dsoci_test user=3D=
+oe password=3Doe"'
+> +
+> +OBASEDIR ?=3D "/opt/oracle"
+> +OINCDIR =3D "rdbms/public"
+> +OLIBDIR =3D "lib"
+> +
+> +PACKAGECONFIG[sqlite3] =3D "-DSOCI_SQLITE3=3DON,-DSOCI_SQLITE3=3DOFF,sql=
+ite3,"
+> +PACKAGECONFIG[mysql] =3D "-DSOCI_MYSQL=3DON,-DSOCI_MYSQL=3DOFF,mariadb,"
+> +PACKAGECONFIG[postgresql] =3D "-DSOCI_POSTGRESQL=3DON,-DSOCI_POSTGRESQL=
+=3DOFF,postgresql,"
+> +PACKAGECONFIG[odbc] =3D "-DSOCI_ODBC=3DON,-DSOCI_ODBC=3DOFF,,"
+> +PACKAGECONFIG[empty] =3D "-DSOCI_EMPTY=3DON,-DSOCI_EMPTY=3DOFF,,"
+> +PACKAGECONFIG[oracle] =3D "-DWITH_ORACLE=3DON --with-oracle-include=3D${=
+OINCDIR} --with-oracle-lib=3D${OLIBDIR},-DWITH_ORACLE=3DOFF,,"
+> +PACKAGECONFIG[ptest] =3D "${TESTCONFIG},,,"
+> +
+> +# enable your backend by default we enable 'empty'
+> +PACKAGECONFIG ??=3D "empty"
+> +
+> +# Take the flags added by PACKAGECONFIG and pass them to cmake.
+> +EXTRA_OECMAKE =3D "${EXTRA_OECONF}"
+> +
+> +inherit cmake
+> +
+> +PACKAGES +=3D "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc ${P=
+N}-oracle"
+> +
+> +FILES_${PN}-sqlite3 =3D "${libdir}/lib${BPN}_sqlite3.so.*"
+> +FILES_${PN}-mysql =3D "${libdir}/lib${BPN}_mysql.so.*"
+> +FILES_${PN}-postgresql =3D "${libdir}/lib${BPN}_postgresql.so.*"
+> +FILES_${PN}-odbc =3D "${libdir}/lib${BPN}_odbc.so.*"
+> +FILES_${PN}-oracle =3D "${libdir}/lib${BPN}_oracle.so.*"
+> --=20
+> 2.1.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--jn/MQTzma+jNUHFC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlT0GGAACgkQN1Ujt2V2gBw2aACePtKQ9BciVXqrWVHNgBQ/u7T3
+NrgAn1yQSWL7pvy9EnMzuI67tJkznKBg
+=ezbs
+-----END PGP SIGNATURE-----
+
+--jn/MQTzma+jNUHFC--
