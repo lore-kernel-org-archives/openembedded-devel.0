@@ -1,40 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
-	[74.125.82.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A3CD7382E
+Return-Path: <Andy.Nichols@theqtcompany.com>
+X-Greylist: delayed 892 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 02 Mar 2015 15:46:05 UTC
+Received: from emea01-db3-obe.outbound.protection.outlook.com
+	(mail-db3on0118.outbound.protection.outlook.com [157.55.234.118])
+	by mail.openembedded.org (Postfix) with ESMTP id D2C9B73864
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 14:26:23 +0000 (UTC)
-Received: by wevk48 with SMTP id k48so33659204wev.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2015 06:26:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+IqOifOBFSxy0VOf/a9a0ESVtd1Notytvxn3rwPaVDk=;
-	b=mgIzUqlmzvRiR68dKUY9mGbne2Hz9mULSi4ztQYV6b3QwcRV19aeTIqbj6GqPBdeLW
-	xkgd2m3VHPgninXC/i+gEXwlId5F/RuPE//NKfG3u+3WcIgaljlRS8G8EbC6iyzbm1ji
-	MT0kzrSiEoJxeyCiwwhEcpb/HpcRuhjBt5ZLyl0YtJ2zZqDaN62wnRj1aHJtkznF298V
-	LuWuxr8DLU8Ie0hG3FKafoRQhv4ID5voMCG4s4kC+nwIl6v0KyOxWKf9YD2uwgR+60bX
-	q3APLacu0GpjhRuZ9LmMNWbsUO5ccUAObeDyVcrtb/X4ytu+3uuO6dNcjOsWsuIboqf5
-	zB0A==
-X-Received: by 10.194.88.131 with SMTP id bg3mr60216396wjb.119.1425306383739; 
-	Mon, 02 Mar 2015 06:26:23 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	gz3sm16313008wib.1.2015.03.02.06.26.22
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Mar 2015 06:26:22 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Mar 2015 15:26:45 +0100
-To: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <20150302142645.GC2309@jama>
-References: <54F47045.4080503@windriver.com>
+	Mon,  2 Mar 2015 15:46:05 +0000 (UTC)
+Received: from localhost.localdomain (91.237.34.118) by
+	AM2PR02MB0595.eurprd02.prod.outlook.com (25.160.57.23) with Microsoft
+	SMTP Server (TLS) id 15.1.99.14; Mon, 2 Mar 2015 15:31:12 +0000
+From: Andy Nichols <andy.nichols@theqtcompany.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 2 Mar 2015 16:30:28 +0100
+Message-ID: <1425310228-14311-1-git-send-email-andy.nichols@theqtcompany.com>
+X-Mailer: git-send-email 2.3.1
 MIME-Version: 1.0
-In-Reply-To: <54F47045.4080503@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Discuss: ruby-1.9.x EOL -- someone to add ruby-2.2?
+X-Originating-IP: [91.237.34.118]
+X-ClientProxiedBy: AM3PR01CA024.eurprd01.prod.exchangelabs.com (10.141.191.14)
+	To AM2PR02MB0595.eurprd02.prod.outlook.com (25.160.57.23)
+Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
+	header.d=none;
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:AM2PR02MB0595;
+X-Microsoft-Antispam-PRVS: <AM2PR02MB05951037AB4512983B526866CD100@AM2PR02MB0595.eurprd02.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0; RULEID:(601004)(5005006);
+	SRVR:AM2PR02MB0595; BCL:0; PCL:0; RULEID:; SRVR:AM2PR02MB0595; 
+X-Forefront-PRVS: 0503FF9A3E
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10019020)(6009001)(6069001)(50986999)(46102003)(47776003)(50466002)(48376002)(33646002)(86362001)(575784001)(66066001)(92566002)(40100003)(19580405001)(122386002)(2351001)(19580395003)(36756003)(42186005)(229853001)(77156002)(110136001)(62966003)(50226001)(450100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:AM2PR02MB0595;
+	H:localhost.localdomain; FPR:; SPF:None; MLV:sfv; LANG:en; 
+X-OriginatorOrg: theqtcompany.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Mar 2015 15:31:12.5060 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM2PR02MB0595
+Subject: [meta-qt5][PATCH] qtwebengine: change license to LGPL-3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,71 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 14:26:24 -0000
-X-Groupsio-MsgNum: 54587
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fzZfjcV6kaBgkq89"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Mar 2015 15:46:06 -0000
+Content-Type: text/plain
 
---fzZfjcV6kaBgkq89
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The opensource license for qtwebegine as of Qt 5.4.0-beta
+has been changed to only be available under LGPL-3.0. The
+checksum for this license is already for the LGPL-3.0 version
+so no need to update.
 
-On Mon, Mar 02, 2015 at 09:14:29AM -0500, Randy MacLeod wrote:
->=20
-> As stated in the post below, ruby-1.9.3 is no longer supported
-> and CVEs will not be released.
->=20
-> I'm not a rubyist but I assume we should upgrade to ruby-2.2.0 which
-> became the stable version as of December 25, 2014. Comments?
-> Martin, you are listed as maintainer of the meta-multimedia,
-> do you have any concerns about such an upgrade?
+Signed-off-by: Andy Nichols <andy.nichols@theqtcompany.com>
+---
+ recipes-qt/qt5/qtwebengine.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-No concerns from me.. I don't use ruby much (mostly ruby-native for
-webkit builds) so I would welcome such upgrade.
+diff --git a/recipes-qt/qt5/qtwebengine.inc b/recipes-qt/qt5/qtwebengine.inc
+index a9c7005..29c31ef 100644
+--- a/recipes-qt/qt5/qtwebengine.inc
++++ b/recipes-qt/qt5/qtwebengine.inc
+@@ -1,5 +1,5 @@
+ SUMMARY = "QtWebEngine combines the power of Chromium and Qt"
+-LICENSE = "LGPL-2.1 & BSD"
++LICENSE = "LGPL-3.0 & BSD"
+ LIC_FILES_CHKSUM = " \
+   file://src/core/browser_context_qt.cpp;md5=91895ac1852e1b07202d9716194e8dd8;beginline=1;endline=35 \
+   file://src/3rdparty/chromium/LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5 \
+-- 
+2.3.1
 
-> If anyone wants to start work on this for meta-oe, that'd be great.
-> If no one gets around to it, then a developer from WindRiver will
-> likely be able to work on it but not a few months.
->=20
-> ../Randy
->=20
-> ---
-> As of today, all support for Ruby 1.9.3 has ended. Bug and security=20
-> fixes from more recent Ruby versions will no longer be backported to 1.9.=
-3.
->=20
-> This end of life was announced over a year ago.
->=20
-> We highly recommend that you upgrade to Ruby 2.0.0 or above as soon as=20
-> possible. Please contact us if you=E2=80=99d like to continue maintaining=
- the=20
-> 1.9.3 branch or if for some reason you can=E2=80=99t upgrade.
->=20
-> Posted by Olivier Lacan on 23 Feb 2015
-> ---
-> Also see:
-> https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
->=20
-> --=20
-> # Randy MacLeod. SMTS, Linux, Wind River
-> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200 Ottawa, Ontario,=20
-> Canada K2K 2W5
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---fzZfjcV6kaBgkq89
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlT0cyUACgkQN1Ujt2V2gBx20ACgqJi0l7BVKoGmOGrsOkxw+B6u
-BZAAnRKE6gwJHz9OuQqoiMJbxolQYXy6
-=tXS9
------END PGP SIGNATURE-----
-
---fzZfjcV6kaBgkq89--
