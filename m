@@ -1,31 +1,25 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3611 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 02 Mar 2015 17:18:43 UTC
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by mail.openembedded.org (Postfix) with ESMTP id C574B73820
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 9CDC87381B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 17:18:43 +0000 (UTC)
-Received: from gandalf.denix.org ([108.18.33.236]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NKL00A3PEM40OC0@vms173021.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	02 Mar 2015 10:18:05 -0600 (CST)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=NqFmqHZM c=1 sm=1 tr=0	a=SSUdfGXV8XCffJJ8+gLrig==:117
-	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=emO1SXQWCLwA:10
-	a=sozttTNsAAAA:8	a=cCoHmxC58U_5Qzzq_5YA:9
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 9F81B20076;	Mon,
-	2 Mar 2015 11:18:04 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon,  2 Mar 2015 20:49:10 +0000 (UTC)
+Received: (qmail 25775 invoked by uid 1003); 2 Mar 2015 20:49:11 -0000
+Received: from unknown (HELO ?192.168.11.101?)
+	(philip@opensdr.com@108.44.84.240)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	2 Mar 2015 20:49:11 -0000
+Message-ID: <54F4CCC6.7070107@balister.org>
+Date: Mon, 02 Mar 2015 15:49:10 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 02 Mar 2015 11:17:58 -0500
-Message-id: <1425313078-31685-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.2.0
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-qt5][PATCH v2] nativesdk-qtbase.inc: avoid removing directories, namely /usr/lib itself
+References: <54ED1B78.4040101@balister.org>
+	<20150227083113.GF2309@jama>	<54F0D69F.1090209@balister.org>
+	<CAP9ODKojHgfGhYNBRwkCHNdA_1Rp+JuFLSu0tz7D5iUTMjYoKA@mail.gmail.com>
+In-Reply-To: <CAP9ODKojHgfGhYNBRwkCHNdA_1Rp+JuFLSu0tz7D5iUTMjYoKA@mail.gmail.com>
+Subject: Re: [meta-oe][dizzy]Update PyQt and related recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,29 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 17:18:44 -0000
+X-List-Received-Date: Mon, 02 Mar 2015 20:49:18 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+On 02/27/2015 04:37 PM, Otavio Salvador wrote:
+> On Fri, Feb 27, 2015 at 5:42 PM, Philip Balister <philip@balister.org> wrote:
+>> On 02/27/2015 12:31 AM, Martin Jansa wrote:
+>>> On Tue, Feb 24, 2015 at 04:46:48PM -0800, Philip Balister wrote:
+>>>> Please pull these three patches into meta-oe/dizzy.
+>>>>
+>>>> https://github.com/openembedded/meta-oe/pull/19
+>>>>
+>>>> These lead to a working PyQt4, which will reduce the number of questions
+>>>> I get about gnuradio-companion not working on dizzy.
+>>>
+>>> I'm not sure if we should do upgrades in release branch which should
+>>> receive only bug fixes, but I'll let daisy maintainers to decide.
+>>
+>> Basically, what is in dizzy doesn't work for anyone. To make it work, we
+>> need to upgrade to pickup some changes that made pyqt easier to cross
+>> compile.
+> 
+> Yes, this is why I support this update however we need to fix the sip
+> upgrade path.
+> 
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- recipes-qt/qt5/nativesdk-qtbase.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+What's wrong with the sip update path? Originally, there was only a
+recipe for sip-native, this patch replaces the sip-native recipe with
+one that works for native and target.
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase.inc b/recipes-qt/qt5/nativesdk-qtbase.inc
-index 3bad980..35953bb 100644
---- a/recipes-qt/qt5/nativesdk-qtbase.inc
-+++ b/recipes-qt/qt5/nativesdk-qtbase.inc
-@@ -230,7 +230,7 @@ do_install() {
-            ${D}/${OE_QMAKE_PATH_PLUGINS} \
-            ${D}${libdir}/cmake \
-            ${D}${libdir}/pkgconfig
--    find ${D}${libdir} -maxdepth 1 -name 'lib*' -and \
-+    find ${D}${libdir} -maxdepth 1 -name 'lib*' -and -not -type d -and \
-                                    -not -name 'libQt5Core.so*' -and \
-                                    ${QTLIBSPRESERVE} \
-                                    -not -name 'libQt5Bootstrap.a' \
--- 
-2.2.0
-
+Philip
 
