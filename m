@@ -1,26 +1,20 @@
 Return-Path: <florian.boor@kernelconcepts.de>
-X-Greylist: delayed 1331 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 02 Mar 2015 10:56:08 UTC
 Received: from mail.kernelconcepts.de (mail.kernelconcepts.de [212.60.202.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C45F737A9
+	by mail.openembedded.org (Postfix) with ESMTP id 6D87B72130
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 10:56:08 +0000 (UTC)
-Received: from [192.168.2.140] by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim 4.72)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1YSO0v-0005Fl-MY
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Mar 2015 11:55:53 +0100
-Message-ID: <54F441BA.7090602@kernelconcepts.de>
-Date: Mon, 02 Mar 2015 11:55:54 +0100
+	Mon,  2 Mar 2015 11:09:07 +0000 (UTC)
+Received: from [192.168.2.78] (helo=serenity.kc.loc)
+	by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.72)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1YSNfR-0005Bt-Ly; Mon, 02 Mar 2015 11:33:41 +0100
 From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.4.0
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1425283365-19326-1-git-send-email-Martin.Jansa@gmail.com>	<54F439E6.3010906@dominion.thruhere.net>
-	<20150302102611.GY2309@jama>
-In-Reply-To: <20150302102611.GY2309@jama>
-Subject: Re: [meta-oe][PATCH] vboxguestdrivers: import recipe from meta-luneos
+Date: Mon,  2 Mar 2015 11:33:47 +0100
+Message-Id: <1425292427-603-1-git-send-email-florian.boor@kernelconcepts.de>
+X-Mailer: git-send-email 1.7.10.4
+Cc: Florian Boor <florian@kernelconcepts.de>
+Subject: [meta-oe][PATCH] fltk: Replace use of freetype-config with pkg-config Drop blacklist entry
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +28,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 10:56:10 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Mar 2015 11:09:08 -0000
 
-Hi,
+From: Florian Boor <florian@kernelconcepts.de>
 
-On 02.03.2015 11:26, Martin Jansa wrote:
->> Please don't ever RDEPEND on kernel modules, even when the recipe will 
->> build them, it sets a bad precedent.
+Tested building for MIPS 32bit QEMU
 
-> I think it makes sense in this case.. nobody will ever include them in 
-> kernel image and vboxguestdrivers utils don't make much sense without the 
-> modules installed.
+Signed-off-by: Florian Boor <florian@kernelconcepts.de>
+---
+ .../fltk/fltk-1.1.10/fltk-no-freetype-config.patch   |   18 ++++++++++++++++++
+ meta-oe/recipes-support/fltk/fltk_1.1.10.bb          |    7 +++----
+ 2 files changed, 21 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch
 
-I see its unlikely but in some cases (e.g. highly secure environments) you do
-not want to use modules at all. So unless there is a real need to depend on
-the modules I would just recommend it.
-
-Greetings
-
-Florian
-
+diff --git a/meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch b/meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch
+new file mode 100644
+index 0000000..5dbb054
+--- /dev/null
++++ b/meta-oe/recipes-support/fltk/fltk-1.1.10/fltk-no-freetype-config.patch
+@@ -0,0 +1,18 @@
++--- a/configure.in.orig	2015-03-01 16:00:35.956432907 +0100
+++++ b/configure.in	2015-03-01 16:04:23.269580093 +0100
++@@ -865,11 +865,11 @@
++         AC_ARG_ENABLE(xft, [  --enable-xft            turn on Xft support [default=no]])
++ 
++ 	if test x$enable_xft = xyes; then
++-            AC_PATH_PROG(FTCONFIG,freetype-config)
+++            AC_PATH_PROG(PKGCONFIG,pkg-config)
++ 
++-	    if test "x$FTCONFIG" != x; then
++-	        CPPFLAGS="`$FTCONFIG --cflags` $CPPFLAGS"
++-	        CXXFLAGS="`$FTCONFIG --cflags` $CXXFLAGS"
+++	    if test "x$PKGCONFIG" != x; then
+++	        CPPFLAGS="`$PKGCONFIG --cflags xft` $CPPFLAGS"
+++	        CXXFLAGS="`$PKGCONFIG --cflags xft` $CXXFLAGS"
++ 
++ 		AC_CHECK_HEADER(X11/Xft/Xft.h,
++ 		    AC_CHECK_LIB(Xft, XftDrawCreate,
+diff --git a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
+index 4fd3645..3229ed0 100644
+--- a/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
++++ b/meta-oe/recipes-support/fltk/fltk_1.1.10.bb
+@@ -6,19 +6,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1c0b73db66884b6a925e727400315130"
+ 
+ DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
+ 
+-PR = "r1"
+-
+-PNBLACKLIST[fltk] ?= "broken: still uses /usr/bin/freetype-config"
++PR = "r2"
+ 
+ SRC_URI = "ftp://ftp.rz.tu-bs.de/pub/mirror/ftp.easysw.com/ftp/pub/fltk/${PV}/fltk-${PV}-source.tar.bz2 \
+            file://disable_test.patch \
+            file://dso-fix.patch \
+            file://libpng15.patch \
++           file://fltk-no-freetype-config.patch \
+ "
+ 
+ S = "${WORKDIR}/fltk-${PV}"
+ 
+-inherit lib_package autotools-brokensep binconfig
++inherit lib_package autotools-brokensep binconfig pkgconfig
+ 
+ TARGET_CC_ARCH += "${LDFLAGS} -DXFT_MAJOR=2"
+ 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+1.7.10.4
+
 
