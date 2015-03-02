@@ -1,40 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 15CC372130
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 2196F72130
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 10:25:47 +0000 (UTC)
-Received: by wghl2 with SMTP id l2so32443330wgh.9
+	Mon,  2 Mar 2015 10:29:10 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1YSNb4-00047K-U0 for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Mar 2015 11:29:11 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Mar 2015 11:29:10 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2015 02:25:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=OhrNxcPeeJ68m6dYCZoL68YbwppLXwd7oXdbatm3yB0=;
-	b=nQhpjRF7EJ1KxpoB9qS4NbyaD9wNqVT3XPCp79n/kXkrPObUCvgLEcNOggG436J+mO
-	2kPkr0/Oi4L1lXSHXruyO2gbV3AwWn8E8vm6Et7DbtdECX/e4/4A11XW1wrMTHiuA0Rq
-	Hytm/gAN4C79JV5vQ6bcR5fVRdTayNizdnP2h2VseVD8x05miogXcimHQiAuw8Ez1JPw
-	9ow3I3yE7YqyVq4S+YgOWAYv4UHoBOMitwsu1EHHDSgprp7YLKXJIomrIoCqC2agZrr1
-	oLPTQAaiiqgj211KIZl8FVK5Z7wrcYZNDwCT3HCQtMaXZH1mf5ZQSri/eCcn0OE5fQvB
-	T7OQ==
-X-Received: by 10.180.76.45 with SMTP id h13mr33158479wiw.51.1425291948627;
-	Mon, 02 Mar 2015 02:25:48 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	gm2sm15447261wib.5.2015.03.02.02.25.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Mar 2015 02:25:47 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Mar 2015 11:26:11 +0100
+	Mon, 02 Mar 2015 11:29:10 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150302102611.GY2309@jama>
-References: <1425283365-19326-1-git-send-email-Martin.Jansa@gmail.com>
-	<54F439E6.3010906@dominion.thruhere.net>
-MIME-Version: 1.0
-In-Reply-To: <54F439E6.3010906@dominion.thruhere.net>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] vboxguestdrivers: import recipe from meta-luneos
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 02 Mar 2015 11:28:56 +0100
+Message-ID: <md1e18$243$1@ger.gmane.org>
+References: <1425248708-4076-1-git-send-email-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+In-Reply-To: <1425248708-4076-1-git-send-email-raj.khem@gmail.com>
+Subject: Re: [PATCH 1/4] soci: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,69 +41,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 10:25:49 -0000
-X-Groupsio-MsgNum: 54577
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RUvhGz2nhX7DIu1B"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Mar 2015 10:29:11 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
---RUvhGz2nhX7DIu1B
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Mon, Mar 02, 2015 at 11:22:30AM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Martin Jansa schreef op 02-03-15 om 09:02:
-> > * useful to run our qemu* builds inside VirtualBox
-> >=20
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> ---=20
-> > .../vboxguestdrivers/Makefile.utils                | 43 ++++++++++++++=
-=20
-> > .../vboxguestdrivers/vboxguestdrivers_4.3.22.bb    | 65
-> > ++++++++++++++++++++++
->=20
-> > +PACKAGES +=3D "kernel-module-vboxguest kernel-module-vboxsf
-> > kernel-module-vboxvideo" +RDEPENDS_${PN} +=3D "kernel-module-vboxguest
-> > kernel-module-vboxsf kernel-module-vboxvideo"
->=20
-> Please don't ever RDEPEND on kernel modules, even when the recipe will bu=
-ild
-> them, it sets a bad precedent.
+Khem Raj schreef op 01-03-15 om 23:25:
+> Define PACKAGECONFIG to enable a given backend of choice by default its
+> 'empty'
+> 
+> Change-Id: Ie1123af658ca94d2fe22a3ca1a32dfb47d58979e Signed-off-by: Khem
+> Raj <raj.khem@gmail.com> --- meta-oe/recipes-support/soci/soci_3.2.2.bb |
+> 46 ++++++++++++++++++++++++++++++ 1 file changed, 46 insertions(+) create
+> mode 100644 meta-oe/recipes-support/soci/soci_3.2.2.bb
+> 
+> diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb
+> b/meta-oe/recipes-support/soci/soci_3.2.2.bb new file mode 100644 index
+> 0000000..1c333cb --- /dev/null +++
+> b/meta-oe/recipes-support/soci/soci_3.2.2.bb @@ -0,0 +1,46 @@ +#
+> Copyright (C) 2015 Khem Raj <raj.khem@gmail.com> +# Released under the
+> MIT license (see COPYING.MIT for the terms) + +DESCRIPTION = "The C++
+> Database Access Library" +HOMEPAGE = "http://soci.sourceforge.net" 
+> +LICENSE = "BSL-1.0" +SECTION = "libs" +DEPENDS = "boost" + 
+> +LIC_FILES_CHKSUM =
+> "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 
-I think it makes sense in this case.. nobody will ever include them in
-kernel image and vboxguestdrivers utils don't make much sense without
-the modules installed.
+Please group this with the lICENSE field
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> Comment: GPGTools - http://gpgtools.org
->=20
-> iD8DBQFU9DnmMkyGM64RGpERAu+jAJ92mQgg4UU7QBoaClZcMsh7Bd/8+wCggBRt
-> iXq6vplV1z4aJMxG2xY9+nk=3D
-> =3DSREn
-> -----END PGP SIGNATURE-----
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---RUvhGz2nhX7DIu1B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+> + +SRC_URI =
+> "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.gz" 
+> +SRC_URI[md5sum] = "bc3c35f6cd3f80a1be19fe30b3c111bf" +SRC_URI[sha256sum]
+> = "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743582de2ff443ccb1c" + 
+> +TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy"
+> -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \ +
+> -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING="dbname=soci_test" \ +
+> -DSOCI_TEST_MYSQL_CONNSTR:STRING="db=soci_test user=oe password=oe"' + 
+> +OBASEDIR ?= "/opt/oracle" +OINCDIR = "rdbms/public" +OLIBDIR = "lib" + 
+> +PACKAGECONFIG[sqlite3] =
+> "-DSOCI_SQLITE3=ON,-DSOCI_SQLITE3=OFF,sqlite3," +PACKAGECONFIG[mysql] =
+> "-DSOCI_MYSQL=ON,-DSOCI_MYSQL=OFF,mariadb," +PACKAGECONFIG[postgresql] =
+> "-DSOCI_POSTGRESQL=ON,-DSOCI_POSTGRESQL=OFF,postgresql," 
+> +PACKAGECONFIG[odbc] = "-DSOCI_ODBC=ON,-DSOCI_ODBC=OFF,," 
+> +PACKAGECONFIG[empty] = "-DSOCI_EMPTY=ON,-DSOCI_EMPTY=OFF,," 
+> +PACKAGECONFIG[oracle] = "-DWITH_ORACLE=ON
+> --with-oracle-include=${OINCDIR}
+> --with-oracle-lib=${OLIBDIR},-DWITH_ORACLE=OFF,," +PACKAGECONFIG[ptest] =
+> "${TESTCONFIG},,," + +# enable your backend by default we enable 'empty' 
+> +PACKAGECONFIG ??= "empty" + +# Take the flags added by PACKAGECONFIG and
+> pass them to cmake. +EXTRA_OECMAKE = "${EXTRA_OECONF}" + +inherit cmake 
+> + +PACKAGES += "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc
+> ${PN}-oracle" + +FILES_${PN}-sqlite3 =
+> "${libdir}/lib${BPN}_sqlite3.so.*" +FILES_${PN}-mysql =
+> "${libdir}/lib${BPN}_mysql.so.*" +FILES_${PN}-postgresql =
+> "${libdir}/lib${BPN}_postgresql.so.*" +FILES_${PN}-odbc =
+> "${libdir}/lib${BPN}_odbc.so.*" +FILES_${PN}-oracle =
+> "${libdir}/lib${BPN}_oracle.so.*"
+> 
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlT0OsMACgkQN1Ujt2V2gBwxaQCgtZJbhefE12kGMzVD9yHmeadZ
-V1wAn22IBYPuS3AReI1mMvKcXNLM9Y30
-=wwp5
+iD8DBQFU9DtoMkyGM64RGpERAtcGAJ0dzZ17XwT7UJyHij29TcbpTM1wlQCfTebl
+d2QKkc75bG2LTXTDp5pXVM0=
+=cKrw
 -----END PGP SIGNATURE-----
 
---RUvhGz2nhX7DIu1B--
+
