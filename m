@@ -1,42 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 25C277384D
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E83F72130
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 08:26:20 +0000 (UTC)
-Received: by widex7 with SMTP id ex7so12819347wid.0
+	Mon,  2 Mar 2015 10:21:39 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1YSNTl-0001Pf-72 for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Mar 2015 11:21:37 +0100
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Mar 2015 11:21:37 +0100
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2015 00:26:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=nfGEsSl0TaA4CnhrjBCD0CAtMg3l8UNRHt9z6aszTUM=;
-	b=N0FhehZerlhjlCqxRejALjiEHbfR9uPLKjN3lpiBdicil5M4Xn8/l7iWGb+aud1uk2
-	lgxESfbfuKRn4tXGiOE9ltqDrDao+ySqJYXKG6IjI5q7YPF3CZURzJ4NwdsMlWrkwTwB
-	GvqGgx2io3BnH/VTzVQhiN7VidDHul9Ryntys21AeJJv+LPJBkpyF49I+jaF3hHR3/NU
-	NsUrwlmSJnGlHel6+Rr3hI013r2mtN6dNkneyVCl7mu9xFq9vV6RxDPdr/dpHUvltJwn
-	VUGGu68ttC8Obhc4fRp9zUkJJ+wuCj62juNMDntVoyVELC9VUTAZRRvMtsCKuRH0PT+b
-	utMw==
-X-Received: by 10.194.58.84 with SMTP id o20mr57121201wjq.75.1425284781335;
-	Mon, 02 Mar 2015 00:26:21 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	u16sm18188851wjr.5.2015.03.02.00.26.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Mar 2015 00:26:20 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Mar 2015 09:26:43 +0100
+	Mon, 02 Mar 2015 11:21:37 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150302082643.GW2309@jama>
-References: <1424512336-47007-1-git-send-email-sven.ebenfeld@gmail.com>
-	<1424512336-47007-4-git-send-email-sven.ebenfeld@gmail.com>
-	<20150301061927.GR2309@jama> <54F31AC9.5020308@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <54F31AC9.5020308@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 3/7] libgee: Update to Version 0.16.1
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 02 Mar 2015 11:21:17 +0100
+Message-ID: <md1dit$n3m$1@ger.gmane.org>
+References: <1424420477-30493-1-git-send-email-Martin.Jansa@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+In-Reply-To: <1424420477-30493-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: Re: [meta-initramfs][PATCH] linux-yocto-tiny-kexecboot: remove 3.10, 3.17 and add 3.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,66 +41,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 08:26:22 -0000
-X-Groupsio-MsgNum: 54573
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OEa2bCMk+rg6xBXy"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Mar 2015 10:21:41 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
---OEa2bCMk+rg6xBXy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Sun, Mar 01, 2015 at 02:57:29PM +0100, Sven Ebenfeld wrote:
-> Am 01.03.2015 um 07:19 schrieb Martin Jansa:
-> > On Sat, Feb 21, 2015 at 10:52:11AM +0100, Sven Ebenfeld wrote:
-> >> ---
-> >>  meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb | 10 ++++++++++
-> >>  meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb  | 10 ----------
-> >>  2 files changed, 10 insertions(+), 10 deletions(-)
-> >>  create mode 100644 meta-oe/recipes-devtools/libgee/libgee_0.16.1.bb
-> >>  delete mode 100644 meta-oe/recipes-devtools/libgee/libgee_0.6.4.bb
-> >=20
-> > be aware that this change breaks some components, because libgee's
-> > pkgconfig file was renamed from gee-1.0 to gee-0.8 in
-> > https://github.com/GNOME/libgee/commit/e6fc195b449f1462bd6eea962799b814=
-ad2c519b
-> >=20
->=20
-> You are right, the website of libgee states incompatibility between
-> these two versions. But I've only found two recipes in oe-core and
-> meta-openembedded, that had libgee as dependency.
->=20
-> Vala-Dbus-binding-tool in version 0.4.1 required the newer libgee
-> version. The other recipe (sry, I don't remember which one it was)
-> compiled well even with the change to the newer version.
->=20
-> If there are recipe that can't be switchted to the newer version of
-> libgee, I think we should rename the recipes to libgee0.6_0.6.4 and
-> libgee0.8_0.16.1.
+Martin Jansa schreef op 20-02-15 om 09:21:
+> * 3.10 and 3.17 were removed in oe-core and parsing fails because of the
+> require line
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-freesmartphone is heavily using libgee+vala and libfsoframework was
-failing in world build.
+Tested-by: Koen Kooi <koen@dominion.thruhere.net
 
-There is wip branch for libgee 0.8 compatibility, but not enough to fix
-the do_compile issue (fixes only configuration).
+Any ETA when this will go in?
 
-https://github.com/freesmartphone/cornucopia/tree/wip/gee-0.8
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---OEa2bCMk+rg6xBXy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+> --- .../linux/linux-yocto-tiny-kexecboot_3.17.bb       | 26
+> ---------------------- ..._3.10.bb => linux-yocto-tiny-kexecboot_3.19.bb}
+> |  2 +- 2 files changed, 1 insertion(+), 27 deletions(-) delete mode
+> 100644
+> meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb 
+> rename
+> meta-initramfs/recipes-kernel/linux/{linux-yocto-tiny-kexecboot_3.10.bb
+> => linux-yocto-tiny-kexecboot_3.19.bb} (93%)
+> 
+> diff --git
+> a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb
+> b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb 
+> deleted file mode 100644 index f3296c7..0000000 ---
+> a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.17.bb 
+> +++ /dev/null @@ -1,26 +0,0 @@ -require
+> recipes-kernel/linux/linux-yocto-tiny_3.17.bb -SUMMARY = "Yocto tiny
+> kernel embedding a minimalistic kexecboot initramfs" - -PACKAGES = "" 
+> -PROVIDES = "" - -KERNEL_IMAGE_BASE_NAME =
+> "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${PV}-${MACHINE}" 
+> -KERNEL_IMAGE_SYMLINK_NAME =
+> "${KERNEL_IMAGETYPE}-yocto-tiny-kexecboot-${MACHINE}" - -INITRAMFS_IMAGE
+> = "initramfs-kexecboot-klibc-image" -INITRAMFS_TASK =
+> "${INITRAMFS_IMAGE}:do_rootfs" - -# disable unneeded tasks 
+> -do_install[noexec] = "1" -do_package[noexec] = "1" 
+> -do_package_qa[noexec] = "1" -do_packagedata[noexec] = "1" 
+> -do_package_deb[noexec] = "1" -do_package_ipk[noexec] = "1" 
+> -do_package_rpm[noexec] = "1" -do_package_tar[noexec] = "1" 
+> -do_package_write_deb[noexec] = "1" -do_package_write_ipk[noexec] = "1" 
+> -do_package_write_rpm[noexec] = "1" -do_package_write_tar[noexec] = "1" 
+> -do_populate_sysroot[noexec] = "1" diff --git
+> a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb
+> b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb 
+> similarity index 93% rename from
+> meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb 
+> rename to
+> meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb 
+> index a823e0f..f6d2fa0 100644 ---
+> a/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.10.bb 
+> +++
+> b/meta-initramfs/recipes-kernel/linux/linux-yocto-tiny-kexecboot_3.19.bb 
+> @@ -1,4 +1,4 @@ -require recipes-kernel/linux/linux-yocto-tiny_3.10.bb 
+> +require recipes-kernel/linux/linux-yocto-tiny_${PV}.bb SUMMARY = "Yocto
+> tiny kernel embedding a minimalistic kexecboot initramfs"
+> 
+> PACKAGES = ""
+> 
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlT0HsMACgkQN1Ujt2V2gBxU7gCfTdGIPpQFNH0QMRpDS6zsYg9x
-a5gAn0TQiihd+b9WujXjMHw7o5G4zVvx
-=INuT
+iD8DBQFU9DmdMkyGM64RGpERAl6xAJ9l92nP7qWzX/ymjVYLkO4cT5UT6ACfUdHY
+hZBp07nZNhyH1UykJFmKbzk=
+=LyMJ
 -----END PGP SIGNATURE-----
 
---OEa2bCMk+rg6xBXy--
+
