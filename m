@@ -1,41 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 4FB0471F1B
+Return-Path: <lpapp@archlinux.us>
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D6A972130
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2015 11:33:02 +0000 (UTC)
-Received: by wggz12 with SMTP id z12so32852380wgg.2
+	Mon,  2 Mar 2015 11:38:53 +0000 (UTC)
+Received: by wggx12 with SMTP id x12so32796991wgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2015 03:33:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=WkZhk2c3KBqxoEGp8W9US3gQNibo4DHal30RL2ert+M=;
-	b=PCaF+Za8/n5OyAgq4FUqMggzpTzqYjdAVia0gi8/HRMmuf9xW7qbLnpGsdnWOBMuF1
-	LXhbwMIkHM//JvKPhZbx+N8Qq+B3zV4yE6pHcgwEs7aDZbUa0yw2A71poE7i9mRyNx6D
-	H916IMXtgcytBM6/GXJ+RCcWfRYPUXmYxlpVRnRSxZFijuYXeizHFsAmtb/cFTsbjPOg
-	mbKZ+EHu+xoqRNATB/Iq49wHHCgTlBf96lvkYVXemQfnfucQ6yslAKUuW+F9T0rkUiYe
-	nt33onRFWVmR0CHvuJq6NpwpnqNYsadaygz7pqU0SIL8McrsyvdzYKmx/B3Wvkvafcyf
-	dCmA==
-X-Received: by 10.194.204.131 with SMTP id ky3mr41620259wjc.95.1425295982894; 
-	Mon, 02 Mar 2015 03:33:02 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	ka1sm18876372wjc.2.2015.03.02.03.33.02
-	for <openembedded-devel@lists.openembedded.org>
+	Mon, 02 Mar 2015 03:38:54 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=ewYRHWWw7BY+Hz8BuYObcnwrlD2/LsBlpl5izlCzHXg=;
+	b=cya9CXDCetbMlg1Xv0qngS0nVG2MpTGiW9kzMbQBvrPCvWQwK+pJxkZSgATmdqTMvx
+	GkSTpgikAw31e8vGk2NTOR6A8jMT9g33Uy2Qxq1ooUNN2O8Rk0Kmbg0k8wY0Te63CBeg
+	Q+ihbD4gU2qJ5fLZzHc8L389245awXi0ikFMVmwxs0xaRGmawY4BsjopHoz5K1pCahof
+	iDvYP6qGaaFht8/4czt9je7LOSkJ7m2P5bd3PFszeHDwyv5CJuhbj15luqElw3s78XII
+	woetgdk+V9apyyKzomeM7JRD3klwazNt93Pd4OYe1ITuOzdUUlpZWCZkuOBaIZKgu86X
+	ae1w==
+X-Gm-Message-State: ALoCoQnoomIqh8Qw9wCl0JEM4xNtBDQUJE8PUclPQ/d0bN0rUMtni6vymVUSGeoCktWXZbUJNTt0
+X-Received: by 10.194.134.68 with SMTP id pi4mr58310044wjb.101.1425296334794; 
+	Mon, 02 Mar 2015 03:38:54 -0800 (PST)
+Received: from lpapp@archlinux.us (mail.polatis.com. [212.44.19.228])
+	by mx.google.com with ESMTPSA id gi9sm535751wib.21.2015.03.02.03.38.52
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Mar 2015 03:33:02 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Mar 2015 12:33:25 +0100
+	Mon, 02 Mar 2015 03:38:53 -0800 (PST)
+Sender: Laszlo Papp <lpapp@archlinux.us>
+From: Laszlo Papp <lpapp@kde.org>
+X-Google-Original-From: Laszlo Papp <laszlo.papp@polatis.com>
+Received: by lpapp@archlinux.us (sSMTP sendmail emulation);
+	Mon, 02 Mar 2015 11:38:47 +0000
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150302113325.GA2309@jama>
-References: <1425283365-19326-1-git-send-email-Martin.Jansa@gmail.com>
-	<54F439E6.3010906@dominion.thruhere.net>
-	<20150302102611.GY2309@jama> <54F441BA.7090602@kernelconcepts.de>
-MIME-Version: 1.0
-In-Reply-To: <54F441BA.7090602@kernelconcepts.de>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] vboxguestdrivers: import recipe from meta-luneos
+Date: Mon,  2 Mar 2015 11:38:46 +0000
+Message-Id: <1425296326-2605-1-git-send-email-laszlo.papp@polatis.com>
+X-Mailer: git-send-email 2.3.0
+Cc: Laszlo Papp <laszlo.papp@polatis.com>
+Subject: [meta-oe][PATCH] Add uthash recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,52 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2015 11:33:07 -0000
-X-Groupsio-MsgNum: 54581
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GD+uNaHYxbVPHaQt"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Mar 2015 11:38:54 -0000
 
---GD+uNaHYxbVPHaQt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Laszlo Papp <laszlo.papp@polatis.com>
+---
+ meta-oe/recipes-support/uthash_1.9.7.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-support/uthash_1.9.7.bb
 
-On Mon, Mar 02, 2015 at 11:55:54AM +0100, Florian Boor wrote:
-> Hi,
->=20
-> On 02.03.2015 11:26, Martin Jansa wrote:
-> >> Please don't ever RDEPEND on kernel modules, even when the recipe will=
-=20
-> >> build them, it sets a bad precedent.
->=20
-> > I think it makes sense in this case.. nobody will ever include them in=
-=20
-> > kernel image and vboxguestdrivers utils don't make much sense without t=
-he=20
-> > modules installed.
->=20
-> I see its unlikely but in some cases (e.g. highly secure environments) yo=
-u do
-> not want to use modules at all. So unless there is a real need to depend =
-on
-> the modules I would just recommend it.
+diff --git a/meta-oe/recipes-support/uthash_1.9.7.bb b/meta-oe/recipes-support/uthash_1.9.7.bb
+new file mode 100644
+index 0000000..4504dfe
+--- /dev/null
++++ b/meta-oe/recipes-support/uthash_1.9.7.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "Hash table for C structures"
++SECTION = "base"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=564f9c44927f6247dc810bf557e2b240"
++PR = "r1"
++
++SRC_URI = "http://downloads.sourceforge.net/uthash/${PN}-${PV}.tar.bz2"
++
++SRC_URI[md5sum] = "1f14bbee7ee73ed0ceb3549f8cf378b4"
++SRC_URI[sha256sum] = "956f5c99798349c413275fe4c9ff128d72e280655dadbe4365f8e9fbda91393f"
++
++do_install () {
++    install -dm755 ${D}${includedir}
++    install -m 0644 ${S}/src/*.h ${D}${includedir}
++}
+-- 
+2.3.0
 
-In such environment you won't be installing vboxguestdrivers package, right?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---GD+uNaHYxbVPHaQt
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlT0SoUACgkQN1Ujt2V2gBw3HwCgl0zX6abEO8rVWTayJN95Xl1D
-CnAAoJ0gD4Fdb8lgEyJ7GRnCXK6X+pIa
-=9QkJ
------END PGP SIGNATURE-----
-
---GD+uNaHYxbVPHaQt--
