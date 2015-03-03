@@ -1,35 +1,36 @@
 Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BE486013D
+Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
+	[74.125.82.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D9F765DA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2015 12:34:47 +0000 (UTC)
-Received: by wggx12 with SMTP id x12so39678775wgg.6
+	Tue,  3 Mar 2015 12:48:45 +0000 (UTC)
+Received: by wesu56 with SMTP id u56so39603574wes.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2015 04:34:47 -0800 (PST)
+	Tue, 03 Mar 2015 04:48:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1rG0e8DlMQTRRGynF82j01ap+aWTG3y4KroNl32Jqyw=;
-	b=PRg/FMsdqNkVsJsPcA3tVOSbhdAWU2xqsFlcb2xJIh99e1C7hjJTszHJVKo5LZRWJ5
-	p35DeB0dvryh5AxOcr4hKle/P6BP2g8M6xHg47rzpeGi8zUqDzK+LaCudqtsNcxC851t
-	IIGr05bR1rIUsexcSk1Ej+4GwBYK+HSbAFHuyU7RmDvMVY4KvWR94sEFVga3UwG9AO/t
-	gFRGqa5JehwzEOcPwotVSe/F5i7TTluMKke9+7omXfS4+3rdOnDE2QA/7H1TnUfHQIQe
-	Mm0Rtk0EFq/S7BkvSnYThkOMiXT9pt+KL2rreKapxUrWzSS6boKLkJGdjfPsg/XGLIz2
-	iqbQ==
-X-Gm-Message-State: ALoCoQkoRvLl0yNOs5BWoKy3ixjBE2k6zVnj3FdMw25R2s99zbrUxNYg2OZK/qyMFLcx2n0OdJGD
-X-Received: by 10.180.12.84 with SMTP id w20mr2457395wib.9.1425386087400;
-	Tue, 03 Mar 2015 04:34:47 -0800 (PST)
+	bh=LgVnmzFuBZqJK1R8qjCFqO2pBU7n6i9sK7hNlB4M0vg=;
+	b=Hl6ZYMSWSjwkROj/U2hMeMxaokOOrhAy4FZ8Waxy1cYstYIExwj4roQxGOB+R0rEXZ
+	rVmROfMPvZ1gY1nwDsCVj86FFv4b2TMLPmNUNN0sDYfNvi1Bx+0EmrwVYmAvVt54+vJu
+	j2TqcvkayDFyOcxrh9d6/Qxme/F6lX9fDwITdOKj7vi8/Z1VL7lqUrYCmrL+11ERHa56
+	k15FCffsDBl1D3AAa3lf6Jz8X3w5SKAV8WiYow4j9ZVfnPMR5U8UfqrPnBkqBaiiyjze
+	y83efS96Q5FBECnsjK2TB5OmiQAeUZ4atFXZA5vUSiIulGF61Dacehi71vB2Tnzom5W6
+	cWow==
+X-Gm-Message-State: ALoCoQnKZ3kBPoOfuUs2npqwIUOZeYkz7OsZFRpx+tmZmp28xJRbbpga3BwJMhsQWODTD7p/6g+K
+X-Received: by 10.180.14.66 with SMTP id n2mr44507967wic.50.1425386926738;
+	Tue, 03 Mar 2015 04:48:46 -0800 (PST)
 Received: from localhost ([2001:610:612:0:2ad2:44ff:fe4b:bc17])
-	by mx.google.com with ESMTPSA id vh8sm1154874wjc.12.2015.03.03.04.34.45
+	by mx.google.com with ESMTPSA id lj13sm2343376wic.9.2015.03.03.04.48.44
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 03 Mar 2015 04:34:46 -0800 (PST)
+	Tue, 03 Mar 2015 04:48:45 -0800 (PST)
 From: Koen Kooi <koen.kooi@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Mar 2015 20:34:32 +0800
-Message-Id: <1425386072-16888-1-git-send-email-koen.kooi@linaro.org>
+Date: Tue,  3 Mar 2015 20:47:55 +0800
+Message-Id: <1425386875-28526-1-git-send-email-koen.kooi@linaro.org>
 X-Mailer: git-send-email 1.9.3
 Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-oe][PATCH] mozjs 17.0.0: fix aarch64 and 64k page builds, generic cleanups
+Subject: [meta-oe][PATCHv2] mozjs 17.0.0: fix aarch64 and 64k page builds, generic cleanups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,7 +44,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2015 12:34:52 -0000
+X-List-Received-Date: Tue, 03 Mar 2015 12:48:51 -0000
 
 * Mozjs17 has problems with 64k page sizes (powerpc64, aarch64 and probably others) and lacks support for aarch64. Patches were lifted from the fedora src rpm and rediffed.
 
@@ -57,63 +58,19 @@ X-List-Received-Date: Tue, 03 Mar 2015 12:34:52 -0000
 
 Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
 ---
- ...ozjs17.0.0-fix-the-compile-bug-of-powerpc.patch |   36 -
  .../mozjs/mozjs/0001-regenerate-configure.patch    | 3238 ++++++++++++++++++++
  ...02-Move-JS_BYTES_PER_WORD-out-of-config.h.patch |   75 +
  .../mozjs/mozjs/0003-Add-AArch64-support.patch     |   76 +
  ...4-mozbug746112-no-decommit-on-large-pages.patch |  103 +
  .../mozjs/mozjs/0005-aarch64-64k-page.patch        |   44 +
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |   28 +-
- 7 files changed, 3561 insertions(+), 39 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |   29 +-
+ 6 files changed, 3562 insertions(+), 3 deletions(-)
  create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-regenerate-configure.patch
  create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch
  create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0003-Add-AArch64-support.patch
  create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0004-mozbug746112-no-decommit-on-large-pages.patch
  create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0005-aarch64-64k-page.patch
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch
-deleted file mode 100644
-index de72d4f..0000000
---- a/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From da3929a96d9c74e11bf37d128890e18fcb745365 Mon Sep 17 00:00:00 2001
--From: Lei Maohui <leimaohui@cn.fujitsu.com>
--Date: Mon, 26 Jan 2015 08:53:19 +0900
--Subject: [PATCH] mozjs17.0.0: fix the compile bug of powerpc
--
--To fix the bug as following
--
--error: cannot convert '__va_list_tag**' to '__va_list_tag (*)[1]' for
--argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const char**,
--JSBool, jsval**, __va_list_tag (*)[1])'
--
--Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-----
-- jscpucfg.h | 6 ++++++
-- 1 file changed, 6 insertions(+)
--
--diff --git a/jscpucfg.h b/jscpucfg.h
--index dfb1c14..8683491 100644
----- a/jscpucfg.h
--+++ b/jscpucfg.h
--@@ -47,6 +47,12 @@
-- #elif defined(JS_HAVE_ENDIAN_H)
-- # include <endian.h>
-- 
--+#if defined(_POWER) || defined(__powerpc__) || \
--+    defined(__ppc__)
--+# define HAVE_VA_LIST_AS_ARRAY 1
--+# endif
--+
--+
-- # if defined(__BYTE_ORDER)
-- #  if __BYTE_ORDER == __LITTLE_ENDIAN
-- #   define IS_LITTLE_ENDIAN 1
---- 
--1.8.4.2
--
 diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-regenerate-configure.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-regenerate-configure.patch
 new file mode 100644
 index 0000000..fa413ea
@@ -3681,15 +3638,17 @@ index 0000000..bc99ecc
 +1.9.3
 +
 diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-index 174f6fe..5096991 100644
+index 174f6fe..91ee9a2 100644
 --- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
 +++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-@@ -5,8 +5,13 @@ LIC_FILES_CHKSUM = "file://../../LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+@@ -4,9 +4,15 @@ LIC_FILES_CHKSUM = "file://../../LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+ 
  SRC_URI = " \
      http://ftp.mozilla.org/pub/mozilla.org/js/${BPN}${PV}.tar.gz \
-     file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
--    file://0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch \
+-    file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
+     file://0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch \
 -"
++    file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
 +    file://0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch;patchdir=../../ \
 +    file://0003-Add-AArch64-support.patch;patchdir=../../ \
 +    file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../../ \
@@ -3700,7 +3659,7 @@ index 174f6fe..5096991 100644
  SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
  SRC_URI[sha256sum] = "321e964fe9386785d3bf80870640f2fa1c683e32fe988eeb201b04471c172fba"
  
-@@ -22,16 +27,33 @@ EXTRA_OECONF = " \
+@@ -22,16 +28,33 @@ EXTRA_OECONF = " \
      --host=${BUILD_SYS} \
      --build=${BUILD_SYS} \
      --prefix=${prefix} \
