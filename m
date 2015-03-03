@@ -1,37 +1,34 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E41265DA3
+Return-Path: <binner@kde.org>
+X-Greylist: delayed 1512 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 03 Mar 2015 18:07:33 UTC
+Received: from mx1.basyskom.com (groupware.basyskom.com [144.76.148.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D86036013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2015 12:50:54 +0000 (UTC)
-Received: by iecrd18 with SMTP id rd18so57373893iec.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2015 04:50:55 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-type;
-	bh=+LScrJXQbIzXygtZYtdYVTsOHIGTKkk7+ylhyRT29Tg=;
-	b=dHyQM869kn5iLL3LixvWyE4tk3de1xosMbSWYN/FyNwYunO7B+aM221IN1vfQ+PuoW
-	1M7Y/obHLW1/TALk6JWwkrQA/VPxknEyqFihkZODiZviYj31+ZkATPyGIhMxU1eDUY6W
-	7d03/ks0hIAMY09U0l3XqyrV+oOPG0Yrd5USbIHR2YNJ8PZQ4o495UYVeQEG8F4n3+UO
-	P1XmdBT7nuxDEZr1IHPHAigapdA+qOtf+19wzXmiDJVfldLEMy0ffRcdgToeiNz4kNz8
-	dwbuCcaRjEwmWCrdVQxVhyPvCLDFVueEXA/pwKSB9gt98rnbxeTVOhog/6qy210fOuxQ
-	KCgg==
-X-Gm-Message-State: ALoCoQngVMJKVn2KzVUcFfGO+viSAzRRQZ/3jR9HAaFNYT8wa7zZ9m3pnN1ZrosA+w6V5JU+XwBo
+	Tue,  3 Mar 2015 18:07:33 +0000 (UTC)
+Received: from ultra.site ([84.145.169.190])
+	(authenticated user sbin@basyskom.com)
+	by mx1.basyskom.com (Kerio Connect 8.4.0)
+	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 3 Mar 2015 19:07:33 +0100
+X-Spam-Status: No, hits=0.0 required=5.0 tests=AWL: 0.000, BAYES_00: -1.665,
+	TOTAL_SCORE: -1.665, autolearn=ham
+X-Footer: YmFzeXNrb20uY29t
+Received: from basyskom.com ([193.158.222.114]) by mx1.basyskom.com (Kerio
+	Connect 8.4.0) (using TLSv1.2 with cipher AES256-SHA256 (256
+	bits)); Tue, 3 Mar 2015 18:25:41 +0100
+From: Stephan Binner <stephan.binner@basyskom.com>
+Date: Tue, 03 Mar 2015 18:25:41 +0100
+Message-ID: <1425403541-19039-1-git-send-email-stephan.binner@basyskom.com>
+X-Mailer: git-send-email 1.9.1
+Resent-Message-ID: <201503031907.44629.>
+Resent-Date: Tue, 03 Mar 2015 19:07:44 +0100
+Resent-From: Stephan Binner <stephan.binner@basyskom.com>
+To: openembedded-devel@lists.openembedded.org
+Resent-To: openembedded-devel@lists.openembedded.org
+Resent-Cc: Stephan Binner <stephan.binner@basyskom.com>
 MIME-Version: 1.0
-X-Received: by 10.107.155.13 with SMTP id d13mr1486664ioe.29.1425387055833;
-	Tue, 03 Mar 2015 04:50:55 -0800 (PST)
-Received: by 10.36.31.65 with HTTP; Tue, 3 Mar 2015 04:50:55 -0800 (PST)
-In-Reply-To: <1425386072-16888-1-git-send-email-koen.kooi@linaro.org>
-References: <1425386072-16888-1-git-send-email-koen.kooi@linaro.org>
-Date: Tue, 3 Mar 2015 13:50:55 +0100
-Message-ID: <CAP0W-RmFSh3g4-bnC6xJ-SUjFTUTe+hrQhM0axrm4+mQcR6b7A@mail.gmail.com>
-From: Koen Kooi <koen.kooi@linaro.org>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: Re: [meta-oe][PATCH] mozjs 17.0.0: fix aarch64 and 64k page builds, generic cleanups
+Subject: [meta-qt5][PATCH] fix build of qtwebengine if qtbase has no accessibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,43 +42,546 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2015 12:51:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Mar 2015 18:07:39 -0000
 
-On 3 March 2015 at 13:34, Koen Kooi <koen.kooi@linaro.org> wrote:
+Signed-off-by: Stephan Binner <stephan.binner@basyskom.com>
+---
+ recipes-qt/qt5/qtbase.inc                          |   2 +-
+ .../0004-fix-build-without-accessiblity.diff       | 498 +++++++++++++++++++++
+ recipes-qt/qt5/qtwebengine_5.4.1.bb                |   1 +
+ 3 files changed, 500 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-qt/qt5/qtwebengine/0004-fix-build-without-accessiblity.diff
 
-> * Mozjs17 has problems with 64k page sizes (powerpc64, aarch64 and
-> probably others) and lacks support for aarch64. Patches were lifted from
-> the fedora src rpm and rediffed.
->
-> * Regenerate configure with autoconf-2.13 to make the fixes mentioned
-> above take effect.
->
-> * Provide proper config.guess and config.sub files
->
-> * Explicitly disable static builds and regroup configure options.
->
-> * Also clean out the patches/ dir present in the tarball to avoid
-> conflicts with the OE patcher.
->
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> ---
->  ...ozjs17.0.0-fix-the-compile-bug-of-powerpc.patch |   36 -
->  .../mozjs/mozjs/0001-regenerate-configure.patch    | 3238
-> ++++++++++++++++++++
->  ...02-Move-JS_BYTES_PER_WORD-out-of-config.h.patch |   75 +
->  .../mozjs/mozjs/0003-Add-AArch64-support.patch     |   76 +
->  ...4-mozbug746112-no-decommit-on-large-pages.patch |  103 +
->  .../mozjs/mozjs/0005-aarch64-64k-page.patch        |   44 +
->  meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |   28 +-
->  7 files changed, 3561 insertions(+), 39 deletions(-)
->  delete mode 100644
-> meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch
->
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index c6fe358..d7c027f 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -64,7 +64,7 @@ PACKAGECONFIG[examples] = "-make examples -compile-examples,-nomake examples"
+ PACKAGECONFIG[tools] = "-make tools,-nomake tools"
+ # only for completeness, configure will add libs even if you try to explicitly remove it
+ PACKAGECONFIG[libs] = "-make libs,-nomake libs"
+-# accessibility is required to compile qtquickcontrols and qtwebengine
++# accessibility is required to compile qtquickcontrols
+ PACKAGECONFIG[accessibility] = "-accessibility,-no-accessibility"
+ PACKAGECONFIG[glib] = "-glib,-no-glib,glib-2.0"
+ # use either system freetype or bundled freetype, if you disable freetype completely
+diff --git a/recipes-qt/qt5/qtwebengine/0004-fix-build-without-accessiblity.diff b/recipes-qt/qt5/qtwebengine/0004-fix-build-without-accessiblity.diff
+new file mode 100644
+index 0000000..85255d1
+--- /dev/null
++++ b/recipes-qt/qt5/qtwebengine/0004-fix-build-without-accessiblity.diff
+@@ -0,0 +1,498 @@
++commit 11786ea03a2c474c5629c016ca5bf59d07c69a04
++Author: Stephan Binner <stephan.binner@basyskom.com>
++Date:   Mon Mar 2 14:06:48 2015 +0100
++
++    Enable building Qt WebEngine without accessiblity enabled.
++    
++    Backport of https://codereview.qt-project.org/#/c/104207/
++
++diff --git a/examples/webengine/quicknanobrowser/quicknanobrowser.pro b/examples/webengine/quicknanobrowser/quicknanobrowser.pro
++index 3628b81..a8e57b0 100644
++--- a/examples/webengine/quicknanobrowser/quicknanobrowser.pro
+++++ b/examples/webengine/quicknanobrowser/quicknanobrowser.pro
++@@ -1,3 +1,5 @@
+++requires(contains(QT_CONFIG, accessibility))
+++
++ TEMPLATE = app
++ TARGET = quicknanobrowser
++ 
++diff --git a/src/core/browser_accessibility_manager_qt.cpp b/src/core/browser_accessibility_manager_qt.cpp
++index 28d0dd7..6729866 100644
++--- a/src/core/browser_accessibility_manager_qt.cpp
+++++ b/src/core/browser_accessibility_manager_qt.cpp
++@@ -45,9 +45,14 @@ namespace content {
++ 
++ BrowserAccessibility *BrowserAccessibilityFactoryQt::Create()
++ {
+++#ifndef QT_NO_ACCESSIBILITY
++     return new BrowserAccessibilityQt();
+++#else
+++    return 0;
+++#endif // QT_NO_ACCESSIBILITY
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ BrowserAccessibilityManagerQt::BrowserAccessibilityManagerQt(
++     QObject* parentObject,
++     const ui::AXTreeUpdate& initialTree,
++@@ -131,5 +136,6 @@ void BrowserAccessibilityManagerQt::NotifyAccessibilityEvent(ui::AXEvent event_t
++         break;
++     }
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ }
++diff --git a/src/core/browser_accessibility_manager_qt.h b/src/core/browser_accessibility_manager_qt.h
++index 5d8498d..49b3af3 100644
++--- a/src/core/browser_accessibility_manager_qt.h
+++++ b/src/core/browser_accessibility_manager_qt.h
++@@ -38,6 +38,7 @@
++ #define BROWSER_ACCESSIBILITY_MANAGER_QT_H
++ 
++ #include "content/browser/accessibility/browser_accessibility_manager.h"
+++#ifndef QT_NO_ACCESSIBILITY
++ #include <QtCore/qobject.h>
++ 
++ QT_BEGIN_NAMESPACE
++@@ -74,4 +75,5 @@ private:
++ 
++ }
++ 
+++#endif // QT_NO_ACCESSIBILITY
++ #endif
++diff --git a/src/core/browser_accessibility_qt.cpp b/src/core/browser_accessibility_qt.cpp
++index b5cd26f..4b8e97a 100644
++--- a/src/core/browser_accessibility_qt.cpp
+++++ b/src/core/browser_accessibility_qt.cpp
++@@ -40,6 +40,8 @@
++ 
++ #include "browser_accessibility_qt.h"
++ 
+++#ifndef QT_NO_ACCESSIBILITY
+++
++ #include "third_party/WebKit/public/web/WebAXEnums.h"
++ #include "ui/accessibility/ax_node_data.h"
++ 
++@@ -898,3 +900,5 @@ void BrowserAccessibilityQt::modelChange(QAccessibleTableModelChangeEvent *)
++ }
++ 
++ } // namespace content
+++
+++#endif // QT_NO_ACCESSIBILITY
++diff --git a/src/core/browser_accessibility_qt.h b/src/core/browser_accessibility_qt.h
++index db190ff..e87b5d8 100644
++--- a/src/core/browser_accessibility_qt.h
+++++ b/src/core/browser_accessibility_qt.h
++@@ -38,6 +38,8 @@
++ #define BROWSER_ACCESSIBILITY_QT_H
++ 
++ #include <QtGui/qaccessible.h>
+++
+++#ifndef QT_NO_ACCESSIBILITY
++ #include "content/browser/accessibility/browser_accessibility.h"
++ 
++ namespace content {
++@@ -145,4 +147,5 @@ public:
++ 
++ }
++ 
+++#endif // QT_NO_ACCESSIBILITY
++ #endif
++diff --git a/src/core/render_widget_host_view_qt.cpp b/src/core/render_widget_host_view_qt.cpp
++index c221e94..349028e 100644
++--- a/src/core/render_widget_host_view_qt.cpp
+++++ b/src/core/render_widget_host_view_qt.cpp
++@@ -198,15 +198,18 @@ RenderWidgetHostViewQt::RenderWidgetHostViewQt(content::RenderWidgetHost* widget
++     , m_initPending(false)
++ {
++     m_host->SetView(this);
++-
+++#ifndef QT_NO_ACCESSIBILITY
++     QAccessible::installActivationObserver(this);
++     if (QAccessible::isActive())
++         content::BrowserAccessibilityStateImpl::GetInstance()->EnableAccessibility();
+++#endif // QT_NO_ACCESSIBILITY
++ }
++ 
++ RenderWidgetHostViewQt::~RenderWidgetHostViewQt()
++ {
+++#ifndef QT_NO_ACCESSIBILITY
++     QAccessible::removeActivationObserver(this);
+++#endif // QT_NO_ACCESSIBILITY
++ }
++ 
++ void RenderWidgetHostViewQt::setDelegate(RenderWidgetHostViewQtDelegate* delegate)
++@@ -296,6 +299,7 @@ gfx::NativeViewAccessible RenderWidgetHostViewQt::GetNativeViewAccessible()
++ 
++ void RenderWidgetHostViewQt::CreateBrowserAccessibilityManagerIfNeeded()
++ {
+++#ifndef QT_NO_ACCESSIBILITY
++     if (GetBrowserAccessibilityManager())
++         return;
++ 
++@@ -303,6 +307,9 @@ void RenderWidgetHostViewQt::CreateBrowserAccessibilityManagerIfNeeded()
++         m_adapterClient->accessibilityParentObject(),
++         content::BrowserAccessibilityManagerQt::GetEmptyDocument(),
++         this));
+++else
+++    return 0;
+++#endif // QT_NO_ACCESSIBILITY
++ }
++ 
++ // Set focus to the associated View component.
++@@ -953,6 +960,7 @@ void RenderWidgetHostViewQt::AccessibilityFatalError()
++     SetBrowserAccessibilityManager(NULL);
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ void RenderWidgetHostViewQt::accessibilityActiveChanged(bool active)
++ {
++     if (active)
++@@ -960,6 +968,7 @@ void RenderWidgetHostViewQt::accessibilityActiveChanged(bool active)
++     else
++         content::BrowserAccessibilityStateImpl::GetInstance()->DisableAccessibility();
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ void RenderWidgetHostViewQt::handleWheelEvent(QWheelEvent *ev)
++ {
++@@ -1042,6 +1051,7 @@ void RenderWidgetHostViewQt::handleFocusEvent(QFocusEvent *ev)
++     }
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ QAccessibleInterface *RenderWidgetHostViewQt::GetQtAccessible()
++ {
++     // Assume we have a screen reader doing stuff
++@@ -1051,6 +1061,7 @@ QAccessibleInterface *RenderWidgetHostViewQt::GetQtAccessible()
++     content::BrowserAccessibilityQt *accQt = static_cast<content::BrowserAccessibilityQt*>(acc);
++     return accQt;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ void RenderWidgetHostViewQt::didFirstVisuallyNonEmptyLayout()
++ {
++diff --git a/src/core/render_widget_host_view_qt.h b/src/core/render_widget_host_view_qt.h
++index d4a3ff2..fac7efd 100644
++--- a/src/core/render_widget_host_view_qt.h
+++++ b/src/core/render_widget_host_view_qt.h
++@@ -50,6 +50,7 @@
++ #include <QRect>
++ #include <QtGlobal>
++ #include <QtGui/qaccessible.h>
+++#include <QtGui/QTouchEvent>
++ 
++ #include "delegated_frame_node.h"
++ 
++@@ -59,7 +60,6 @@ class QFocusEvent;
++ class QHoverEvent;
++ class QKeyEvent;
++ class QMouseEvent;
++-class QTouchEvent;
++ class QVariant;
++ class QWheelEvent;
++ class QAccessibleInterface;
++@@ -93,7 +93,9 @@ class RenderWidgetHostViewQt
++     , public RenderWidgetHostViewQtDelegateClient
++     , public content::BrowserAccessibilityDelegate
++     , public base::SupportsWeakPtr<RenderWidgetHostViewQt>
+++#ifndef QT_NO_ACCESSIBILITY
++     , public QAccessible::ActivationObserver
+++#endif // QT_NO_ACCESSIBILITY
++ {
++ public:
++     RenderWidgetHostViewQt(content::RenderWidgetHost* widget);
++@@ -213,9 +215,11 @@ public:
++     virtual gfx::Point AccessibilityOriginInScreen(const gfx::Rect& bounds) const Q_DECL_OVERRIDE  { return gfx::Point(); }
++     virtual void AccessibilityHitTest(const gfx::Point& point) Q_DECL_OVERRIDE  { }
++     virtual void AccessibilityFatalError() Q_DECL_OVERRIDE;
+++#ifndef QT_NO_ACCESSIBILITY
++     virtual void accessibilityActiveChanged(bool active) Q_DECL_OVERRIDE;
++ 
++     QAccessibleInterface *GetQtAccessible();
+++#endif // QT_NO_ACCESSIBILITY
++ 
++     void didFirstVisuallyNonEmptyLayout();
++ 
++diff --git a/src/core/web_contents_adapter.cpp b/src/core/web_contents_adapter.cpp
++index 3f223f7..e41acd0 100644
++--- a/src/core/web_contents_adapter.cpp
+++++ b/src/core/web_contents_adapter.cpp
++@@ -628,12 +628,14 @@ void WebContentsAdapter::enableInspector(bool enable)
++     ContentBrowserClientQt::Get()->enableInspector(enable);
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ QAccessibleInterface *WebContentsAdapter::browserAccessible()
++ {
++     Q_D(const WebContentsAdapter);
++     RenderWidgetHostViewQt *rwhv = static_cast<RenderWidgetHostViewQt*>(d->webContents->GetRenderWidgetHostView());
++     return rwhv ? rwhv->GetQtAccessible() : Q_NULLPTR;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ void WebContentsAdapter::runJavaScript(const QString &javaScript)
++ {
++diff --git a/src/core/web_contents_adapter_client.h b/src/core/web_contents_adapter_client.h
++index 8fd401f..df18980 100644
++--- a/src/core/web_contents_adapter_client.h
+++++ b/src/core/web_contents_adapter_client.h
++@@ -168,7 +168,9 @@ public:
++     virtual void passOnFocus(bool reverse) = 0;
++     // returns the last QObject (QWidget/QQuickItem) based object in the accessibility
++     // hierarchy before going into the BrowserAccessibility tree
+++#ifndef QT_NO_ACCESSIBILITY
++     virtual QObject *accessibilityParentObject() = 0;
+++#endif // QT_NO_ACCESSIBILITY
++     virtual void javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, const QString& message, int lineNumber, const QString& sourceID) = 0;
++     virtual void authenticationRequired(const QUrl &requestUrl, const QString &realm, bool isProxy, const QString &challengingHost, QString *outUser, QString *outPassword) = 0;
++     virtual void runMediaAccessPermissionRequest(const QUrl &securityOrigin, MediaRequestFlags requestFlags) = 0;
++diff --git a/src/webengine/api/qquickwebengineview.cpp b/src/webengine/api/qquickwebengineview.cpp
++index 3497c16..a35cfc3 100644
++--- a/src/webengine/api/qquickwebengineview.cpp
+++++ b/src/webengine/api/qquickwebengineview.cpp
++@@ -61,16 +61,20 @@
++ #include <QScreen>
++ #include <QStringBuilder>
++ #include <QUrl>
+++#ifndef QT_NO_ACCESSIBILITY
++ #include <private/qquickaccessibleattached_p.h>
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ QT_BEGIN_NAMESPACE
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ static QAccessibleInterface *webAccessibleFactory(const QString &, QObject *object)
++ {
++     if (QQuickWebEngineView *v = qobject_cast<QQuickWebEngineView*>(object))
++         return new QQuickWebEngineViewAccessible(v);
++     return 0;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ QQuickWebEngineViewPrivate::QQuickWebEngineViewPrivate()
++     : adapter(new WebContentsAdapter)
++@@ -102,7 +106,9 @@ QQuickWebEngineViewPrivate::QQuickWebEngineViewPrivate()
++         // 1x, 2x, 3x etc assets that fit an integral number of pixels.
++         setDevicePixelRatio(qMax(1, qRound(webPixelRatio)));
++     }
+++#ifndef QT_NO_ACCESSIBILITY
++     QAccessible::installFactory(&webAccessibleFactory);
+++#endif // QT_NO_ACCESSIBILITY
++ }
++ 
++ QQuickWebEngineViewPrivate::~QQuickWebEngineViewPrivate()
++@@ -395,11 +401,13 @@ void QQuickWebEngineViewPrivate::runMediaAccessPermissionRequest(const QUrl &sec
++    Q_EMIT e->featurePermissionRequested(securityOrigin, feature);
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ QObject *QQuickWebEngineViewPrivate::accessibilityParentObject()
++ {
++     Q_Q(QQuickWebEngineView);
++     return q;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ WebEngineSettings *QQuickWebEngineViewPrivate::webEngineSettings() const
++ {
++@@ -414,6 +422,7 @@ void QQuickWebEngineViewPrivate::setDevicePixelRatio(qreal devicePixelRatio)
++     m_dpiScale = devicePixelRatio / screen->devicePixelRatio();
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ QQuickWebEngineViewAccessible::QQuickWebEngineViewAccessible(QQuickWebEngineView *o)
++     : QAccessibleObject(o)
++ {}
++@@ -460,6 +469,7 @@ QAccessible::State QQuickWebEngineViewAccessible::state() const
++     QAccessible::State s;
++     return s;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ void QQuickWebEngineViewPrivate::adoptWebContents(WebContentsAdapter *webContents)
++ {
++@@ -497,8 +507,10 @@ QQuickWebEngineView::QQuickWebEngineView(QQuickItem *parent)
++     this->setActiveFocusOnTab(true);
++     this->setFlag(QQuickItem::ItemIsFocusScope);
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++     QQuickAccessibleAttached *accessible = QQuickAccessibleAttached::qmlAttachedProperties(this);
++     accessible->setRole(QAccessible::Grouping);
+++#endif // QT_NO_ACCESSIBILITY
++ }
++ 
++ QQuickWebEngineView::~QQuickWebEngineView()
++diff --git a/src/webengine/api/qquickwebengineview_p.h b/src/webengine/api/qquickwebengineview_p.h
++index 22713ee..f3ceb2c 100644
++--- a/src/webengine/api/qquickwebengineview_p.h
+++++ b/src/webengine/api/qquickwebengineview_p.h
++@@ -155,7 +155,9 @@ private:
++     friend class QQuickWebEngineViewExperimental;
++     friend class QQuickWebEngineViewExperimentalExtension;
++     friend class QQuickWebEngineNewViewRequest;
+++#ifndef QT_NO_ACCESSIBILITY
++     friend class QQuickWebEngineViewAccessible;
+++#endif // QT_NO_ACCESSIBILITY
++ };
++ 
++ QT_END_NAMESPACE
++diff --git a/src/webengine/api/qquickwebengineview_p_p.h b/src/webengine/api/qquickwebengineview_p_p.h
++index 6662f1f..3ab95c6 100644
++--- a/src/webengine/api/qquickwebengineview_p_p.h
+++++ b/src/webengine/api/qquickwebengineview_p_p.h
++@@ -175,7 +175,9 @@ public:
++     virtual void javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, const QString& message, int lineNumber, const QString& sourceID) Q_DECL_OVERRIDE;
++     virtual void authenticationRequired(const QUrl&, const QString&, bool, const QString&, QString*, QString*) Q_DECL_OVERRIDE { }
++     virtual void runMediaAccessPermissionRequest(const QUrl &securityOrigin, MediaRequestFlags requestFlags) Q_DECL_OVERRIDE;
+++#ifndef QT_NO_ACCESSIBILITY
++     virtual QObject *accessibilityParentObject() Q_DECL_OVERRIDE;
+++#endif // QT_NO_ACCESSIBILITY
++     virtual WebEngineSettings *webEngineSettings() const Q_DECL_OVERRIDE;
++     virtual void allowCertificateError(const QExplicitlySharedDataPointer<CertificateErrorController> &errorController);
++ 
++@@ -202,6 +204,7 @@ private:
++     qreal m_dpiScale;
++ };
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ class QQuickWebEngineViewAccessible : public QAccessibleObject
++ {
++ public:
++@@ -217,7 +220,7 @@ public:
++ private:
++     QQuickWebEngineView *engineView() const { return static_cast<QQuickWebEngineView*>(object()); }
++ };
++-
+++#endif // QT_NO_ACCESSIBILITY
++ QT_END_NAMESPACE
++ 
++ QML_DECLARE_TYPE(QQuickWebEngineViewExperimental)
++diff --git a/src/webenginewidgets/api/qwebenginepage.cpp b/src/webenginewidgets/api/qwebenginepage.cpp
++index 72b16f2..068c175 100644
++--- a/src/webenginewidgets/api/qwebenginepage.cpp
+++++ b/src/webenginewidgets/api/qwebenginepage.cpp
++@@ -39,6 +39,7 @@
++ #include <QApplication>
++ #include <QAuthenticator>
++ #include <QClipboard>
+++#include <QContextMenuEvent>
++ #include <QFileDialog>
++ #include <QIcon>
++ #include <QInputDialog>
++@@ -342,10 +343,12 @@ void QWebEnginePagePrivate::runMediaAccessPermissionRequest(const QUrl &security
++     Q_EMIT q->featurePermissionRequested(securityOrigin, requestedFeature);
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ QObject *QWebEnginePagePrivate::accessibilityParentObject()
++ {
++     return view;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ void QWebEnginePagePrivate::updateAction(QWebEnginePage::WebAction action) const
++ {
++diff --git a/src/webenginewidgets/api/qwebenginepage.h b/src/webenginewidgets/api/qwebenginepage.h
++index 7856b82..9fd81b0 100644
++--- a/src/webenginewidgets/api/qwebenginepage.h
+++++ b/src/webenginewidgets/api/qwebenginepage.h
++@@ -258,7 +258,9 @@ private:
++ 
++     friend class QWebEngineView;
++     friend class QWebEngineViewPrivate;
+++#ifndef QT_NO_ACCESSIBILITY
++     friend class QWebEngineViewAccessible;
+++#endif // QT_NO_ACCESSIBILITY
++ };
++ 
++ 
++diff --git a/src/webenginewidgets/api/qwebenginepage_p.h b/src/webenginewidgets/api/qwebenginepage_p.h
++index 5412922..2307e7a 100644
++--- a/src/webenginewidgets/api/qwebenginepage_p.h
+++++ b/src/webenginewidgets/api/qwebenginepage_p.h
++@@ -135,7 +135,9 @@ public:
++     virtual void javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, const QString& message, int lineNumber, const QString& sourceID) Q_DECL_OVERRIDE;
++     virtual void authenticationRequired(const QUrl &requestUrl, const QString &realm, bool isProxy, const QString &challengingHost, QString *outUser, QString *outPassword) Q_DECL_OVERRIDE;
++     virtual void runMediaAccessPermissionRequest(const QUrl &securityOrigin, MediaRequestFlags requestFlags) Q_DECL_OVERRIDE;
+++#ifndef QT_NO_ACCESSIBILITY
++     virtual QObject *accessibilityParentObject() Q_DECL_OVERRIDE;
+++#endif // QT_NO_ACCESSIBILITY
++     virtual WebEngineSettings *webEngineSettings() const Q_DECL_OVERRIDE;
++     virtual void allowCertificateError(const QExplicitlySharedDataPointer<CertificateErrorController> &controller) Q_DECL_OVERRIDE;
++ 
++diff --git a/src/webenginewidgets/api/qwebengineview.cpp b/src/webenginewidgets/api/qwebengineview.cpp
++index 8d21989..63ac405 100644
++--- a/src/webenginewidgets/api/qwebengineview.cpp
+++++ b/src/webenginewidgets/api/qwebengineview.cpp
++@@ -85,19 +85,22 @@ void QWebEngineViewPrivate::bind(QWebEngineView *view, QWebEnginePage *page)
++     }
++ }
++ 
++-
+++#ifndef QT_NO_ACCESSIBILITY
++ static QAccessibleInterface *webAccessibleFactory(const QString &, QObject *object)
++ {
++     if (QWebEngineView *v = qobject_cast<QWebEngineView*>(object))
++         return new QWebEngineViewAccessible(v);
++     return Q_NULLPTR;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ QWebEngineViewPrivate::QWebEngineViewPrivate()
++     : page(0)
++     , m_pendingContextMenuEvent(false)
++ {
+++#ifndef QT_NO_ACCESSIBILITY
++     QAccessible::installFactory(&webAccessibleFactory);
+++#endif // QT_NO_ACCESSIBILITY
++ }
++ 
++ QWebEngineView::QWebEngineView(QWidget *parent)
++@@ -274,6 +277,7 @@ void QWebEngineView::contextMenuEvent(QContextMenuEvent *event)
++     menu->popup(event->globalPos());
++ }
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ int QWebEngineViewAccessible::childCount() const
++ {
++     if (view() && child(0))
++@@ -294,6 +298,7 @@ int QWebEngineViewAccessible::indexOfChild(const QAccessibleInterface *c) const
++         return 0;
++     return -1;
++ }
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ QT_END_NAMESPACE
++ 
++diff --git a/src/webenginewidgets/api/qwebengineview_p.h b/src/webenginewidgets/api/qwebengineview_p.h
++index 9db971f..e0cc3f4 100644
++--- a/src/webenginewidgets/api/qwebengineview_p.h
+++++ b/src/webenginewidgets/api/qwebengineview_p.h
++@@ -59,6 +59,7 @@ public:
++     bool m_pendingContextMenuEvent;
++ };
++ 
+++#ifndef QT_NO_ACCESSIBILITY
++ class QWebEngineViewAccessible : public QAccessibleWidget
++ {
++ public:
++@@ -72,7 +73,7 @@ public:
++ private:
++     QWebEngineView *view() const { return static_cast<QWebEngineView*>(object()); }
++ };
++-
+++#endif // QT_NO_ACCESSIBILITY
++ 
++ QT_END_NAMESPACE
++ 
++diff --git a/tests/quicktestbrowser/quicktestbrowser.pro b/tests/quicktestbrowser/quicktestbrowser.pro
++index ac8fe74..51ea5a2 100644
++--- a/tests/quicktestbrowser/quicktestbrowser.pro
+++++ b/tests/quicktestbrowser/quicktestbrowser.pro
++@@ -1,3 +1,5 @@
+++requires(contains(QT_CONFIG, accessibility))
+++
++ TEMPLATE = app
++ TARGET = quicktestbrowser
++ 
+diff --git a/recipes-qt/qt5/qtwebengine_5.4.1.bb b/recipes-qt/qt5/qtwebengine_5.4.1.bb
+index 92e8c04..2935f18 100644
+--- a/recipes-qt/qt5/qtwebengine_5.4.1.bb
++++ b/recipes-qt/qt5/qtwebengine_5.4.1.bb
+@@ -9,4 +9,5 @@ SRC_URI += " \
+     file://0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch \
+     file://0003-functions.prf-allow-build-for-linux-oe-g-platform.patch \
+     file://0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch \
++    file://0004-fix-build-without-accessiblity.diff \
+ "
+-- 
+1.9.1
 
-That deletion shouldn't have happened, v2 on its way.
 
 
->
->
 
