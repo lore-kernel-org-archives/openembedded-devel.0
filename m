@@ -1,34 +1,38 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 2108965DA3
+Return-Path: <lpapp@archlinux.us>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 68EA465DA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2015 09:19:56 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1YSizW-0006UR-A2 for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Mar 2015 10:19:50 +0100
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2015 10:19:50 +0100
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue,  3 Mar 2015 12:04:09 +0000 (UTC)
+Received: by wggy19 with SMTP id y19so39489658wgg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2015 10:19:50 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 03 Mar 2015 04:04:11 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=66wBxzqjz94OP1PuW4NAE0gQIAQFT2EePp4JrPuxD1A=;
+	b=Z+xm5tgj8UP2EiidhsuaI6t+LStnVmbN0pdi1lDlv5PEetgqOX6vZPWd9VJWL7TBTA
+	vtgkLRKoQcdwVLqd6LmAbwWdUt5ZX0CuIr1Jra2CydpxtEkNY2jsb26Ko3/XoQCrZ4qC
+	hcZL9J1haHgBIZF0NnNCHCV00t+b49mRi9cwhrepY/dM/RaY4KDtRpVi4Z3/XxhPLsf8
+	IAoAaJAh9UobEeOh1VhuqaK52GKTFVEug0gGx22tuVcvBqvuvkokMcRahsn6nH0kW0Ia
+	WKldQuK76aY0Nv2PIHruMFBaI5dJmWKsAInV4I2BOelDYZ78cDpiCJNpTrPTiQ3SVE9P
+	OAyw==
+X-Gm-Message-State: ALoCoQlcFdYfNycSUGpV61x20xbD5gxzUJyC7zdKb51Aa2MGY7lVaTXAeowmU0V37JxiEhkCO0k3
+X-Received: by 10.180.83.69 with SMTP id o5mr43966440wiy.48.1425384249800;
+	Tue, 03 Mar 2015 04:04:09 -0800 (PST)
+Received: from lpapp@archlinux.us (mail.polatis.com. [212.44.19.228])
+	by mx.google.com with ESMTPSA id u16sm1054492wjr.5.2015.03.03.04.04.07
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 03 Mar 2015 04:04:08 -0800 (PST)
+Sender: Laszlo Papp <lpapp@archlinux.us>
+From: Laszlo Papp <lpapp@kde.org>
+X-Google-Original-From: Laszlo Papp <laszlo.papp@polatis.com>
+Received: by lpapp@archlinux.us (sSMTP sendmail emulation);
+	Tue, 03 Mar 2015 12:04:03 +0000
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 03 Mar 2015 10:19:32 +0100
-Message-ID: <md3ub4$594$1@ger.gmane.org>
-References: <1425283365-19326-1-git-send-email-Martin.Jansa@gmail.com>	<54F439E6.3010906@dominion.thruhere.net>
-	<20150302102611.GY2309@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
-In-Reply-To: <20150302102611.GY2309@jama>
-Subject: Re: [meta-oe][PATCH] vboxguestdrivers: import recipe from meta-luneos
+Date: Tue,  3 Mar 2015 12:04:02 +0000
+Message-Id: <1425384242-2662-1-git-send-email-laszlo.papp@polatis.com>
+X-Mailer: git-send-email 2.3.0
+Subject: [meta-oe][PATCH v2] Add uthash recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,50 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2015 09:20:01 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 03 Mar 2015 12:04:16 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+From: Laszlo Papp <lpapp@kde.org>
 
-Martin Jansa schreef op 02-03-15 om 11:26:
-> On Mon, Mar 02, 2015 at 11:22:30AM +0100, Koen Kooi wrote: Martin Jansa
-> schreef op 02-03-15 om 09:02:
->>>> * useful to run our qemu* builds inside VirtualBox
->>>> 
->>>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com> --- 
->>>> .../vboxguestdrivers/Makefile.utils                | 43
->>>> ++++++++++++++ .../vboxguestdrivers/vboxguestdrivers_4.3.22.bb    |
->>>> 65 ++++++++++++++++++++++
-> 
->>>> +PACKAGES += "kernel-module-vboxguest kernel-module-vboxsf 
->>>> kernel-module-vboxvideo" +RDEPENDS_${PN} +=
->>>> "kernel-module-vboxguest kernel-module-vboxsf
->>>> kernel-module-vboxvideo"
-> 
-> Please don't ever RDEPEND on kernel modules, even when the recipe will
-> build them, it sets a bad precedent.
-> 
->> I think it makes sense in this case.. nobody will ever include them in 
->> kernel image and vboxguestdrivers utils don't make much sense without 
->> the modules installed.
+Signed-off-by: Laszlo Papp <lpapp@kde.org>
+---
+ meta-oe/recipes-support/uthash_1.9.7.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-support/uthash_1.9.7.bb
 
-I agree completely with that, my objection is setting a bad precedent that
-people will copy/paste into other recipes.
-I see v2 has RRECOMMENDS, thank you for changing it.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFU9XykMkyGM64RGpERAtp/AJ9/M6P16FGCn/EvTXEWCygoon+NHACfWKPA
-j0bXmjsmVkWxKsJ+e5Ulaog=
-=H4No
------END PGP SIGNATURE-----
+diff --git a/meta-oe/recipes-support/uthash_1.9.7.bb b/meta-oe/recipes-support/uthash_1.9.7.bb
+new file mode 100644
+index 0000000..e5dde1a
+--- /dev/null
++++ b/meta-oe/recipes-support/uthash_1.9.7.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Hash table for C structures"
++SECTION = "base"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=564f9c44927f6247dc810bf557e2b240"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.bz2"
++
++SRC_URI[md5sum] = "1f14bbee7ee73ed0ceb3549f8cf378b4"
++SRC_URI[sha256sum] = "956f5c99798349c413275fe4c9ff128d72e280655dadbe4365f8e9fbda91393f"
++
++do_install () {
++    install -dm755 ${D}${includedir}
++    install -m 0644 ${S}/src/*.h ${D}${includedir}
++}
+-- 
+2.3.0
 
 
