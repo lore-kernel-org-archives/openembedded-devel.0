@@ -1,41 +1,36 @@
-Return-Path: <Javier.Viguera@digi.com>
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.15])
-	by mail.openembedded.org (Postfix) with ESMTP id ABBD660144
+Return-Path: <eduardo@monkey.io>
+Received: from mail-yh0-f52.google.com (mail-yh0-f52.google.com
+	[209.85.213.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 841E4738B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2015 16:39:23 +0000 (UTC)
-Received: from [216.82.249.131] by server-15.bemta-12.messagelabs.com id
-	D7/55-02757-B3537F45; Wed, 04 Mar 2015 16:39:23 +0000
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-4.tower-28.messagelabs.com!1425487162!32545512!1
-X-Originating-IP: [66.77.174.13]
-X-StarScan-Received: 
-X-StarScan-Version: 6.13.4; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 25501 invoked from network); 4 Mar 2015 16:39:23 -0000
-Received: from mail.mx3.digi.com (HELO mcl-sms-ns1.digi.com) (66.77.174.13)
-	by server-4.tower-28.messagelabs.com with RC4-SHA encrypted SMTP;
-	4 Mar 2015 16:39:23 -0000
-Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by mail.mx1.digi.com
-	(172.16.1.13) with Microsoft SMTP Server (TLS) id 8.3.389.2;
-	Wed, 4 Mar 2015 10:39:11 -0600
-Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH02.digi.com
-	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Wed, 4 Mar 2015 10:39:21 -0600
-Received: from log-cln-jviguera.digi.com (10.101.2.54) by
-	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
-	14.3.224.2; Wed, 4 Mar 2015 17:39:15 +0100
-From: Javier Viguera <javier.viguera@digi.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Mar 2015 17:39:04 +0100
-Message-ID: <1425487144-27730-1-git-send-email-javier.viguera@digi.com>
-X-Mailer: git-send-email 2.3.0
-MIME-Version: 1.0
-X-Originating-IP: [10.101.2.54]
-X-KSE-AntiSpam-Interceptor-Info: protection disabled
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-Subject: [meta-networking][PATCH] crda: move libgcrypt to DEPENDS
+	Wed,  4 Mar 2015 16:50:26 +0000 (UTC)
+Received: by yhaf10 with SMTP id f10so22689048yha.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Mar 2015 08:50:27 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=SL6VtBj7mL/Ox3HqEZ0MARJ4xaUCAgg2vTZuaEdivYc=;
+	b=ljheRfi9peaOcCEen7QEbuMXwptUGv9vmtgBScWHVW6jga+GRcVzQwVb9o5MeuxktO
+	z20Y06qoqcfTlzgDZHDKteAIspRGsh2Mkv092uuKPcAXEy6W1UrRCEEOmhVceyQ0ln5r
+	VBqu+oFQXGoOkSIbBfq71WFrVRi4xno4fAtUdv89nLiY2A3SVb8IfLj+FBPuVg3f+Hlo
+	otksAtwQG0KcrwHhIh39U5p9RgMUBndEaASco2ABtrl9B8d8V0pWXcnhCmsBMbcUlU5B
+	EIB+iWBoI4FZuFych9/GGhEH1gh+su2VkD7CKh5ipO7H4DjsBzTDi8Sgedja2ELihIn6
+	g1WQ==
+X-Gm-Message-State: ALoCoQkUIt4IbBq70XF+w9cPRf91hzKG6mBzY4p0eHC7lHD7KHoUJJce6ZJRhactvno8JtPUo4mI
+X-Received: by 10.170.60.17 with SMTP id c17mr3936460ykc.128.1425487827670;
+	Wed, 04 Mar 2015 08:50:27 -0800 (PST)
+Received: from monotop.cabletica.com (ip95-195-15-186.ct.co.cr.
+	[186.15.195.95])
+	by mx.google.com with ESMTPSA id 30sm3488257yhf.8.2015.03.04.08.50.26
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 04 Mar 2015 08:50:27 -0800 (PST)
+From: Eduardo Silva <eduardo@monkey.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Mar 2015 10:50:08 -0600
+Message-Id: <1425487808-22201-1-git-send-email-eduardo@monkey.io>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-webserver][PATCH] Monkey: new v1.5.6 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,41 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2015 16:39:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Mar 2015 16:50:27 -0000
 
-crda has a build time dependence on libgcrypt, so move the dependence
-from RDEPENDS to DEPENDS.
+This patch add the new Monkey HTTP Server v1.5.6.
 
-Otherwise the build fails with:
+For more details about software changes please visit:
 
-reglib.c:28:20: fatal error: gcrypt.h: No such file or directory
+    http://monkey-project.com/Announcements/v1.5.6
 
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+=== Build Tests ==
+
+ This version have been tested on Yocto/Daisy based on RPM.
+
+ monkey-yocto/5aee7684cd66f78fb51f78138603a4dde4ef2484
+
+Signed-off-by: Eduardo Silva <eduardo@monkey.io>
 ---
- meta-networking/recipes-connectivity/crda/crda_3.13.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-httpd/monkey/{monkey_1.5.4.bb => monkey_1.5.6.bb}       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-webserver/recipes-httpd/monkey/{monkey_1.5.4.bb => monkey_1.5.6.bb} (93%)
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.13.bb b/meta-networking/recipes-connectivity/crda/crda_3.13.bb
-index 2ccced42e600..dc544469424f 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.13.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.13.bb
-@@ -5,7 +5,7 @@ LICENSE = "copyleft-next-0.3.0 & ISC"
- LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe \
-                     file://${WORKDIR}/wireless-regdb-2014.11.18/LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
+diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+similarity index 93%
+rename from meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
+rename to meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+index a4963af..d7330a1 100644
+--- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.4.bb
++++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
+@@ -11,8 +11,8 @@ SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
+            file://monkey.service \
+            file://monkey.init"
  
--DEPENDS = "python-m2crypto-native python-native"
-+DEPENDS = "python-m2crypto-native python-native libgcrypt"
+-SRC_URI[md5sum] = "b794724ac38cfedee2a5d27c175bc87e"
+-SRC_URI[sha256sum] = "662bbafc614d32f645059e6e00258fed640665594f5b7f11cf4c4763cf09ddcf"
++SRC_URI[md5sum] = "9699e4c9ea6ce6b989907c252ae80254"
++SRC_URI[sha256sum] = "7c3d845306aa74ee6effd7ab6169d16ac4e6450e564954d0d0baa2d1e9be1a22"
  
- SRC_URI = "https://www.kernel.org/pub/software/network/crda/${BP}.tar.xz;name=crda \
-            https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2014.11.18.tar.xz;name=bin \
-@@ -37,7 +37,7 @@ do_install() {
- }
+ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
+                 --logdir=${localstatedir}/log/monkey/ \
+@@ -21,7 +21,7 @@ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
+                 --datadir=${localstatedir}/www/monkey/ \
+                 --sysconfdir=${sysconfdir}/monkey/ \
+                 --enable-plugins=* \
+-                --disable-plugins=polarssl \
++                --disable-plugins=mbedtls \
+                 --debug \
+                 --malloc-libc"
  
- 
--RDEPENDS_${PN} = "udev libgcrypt libnl"
-+RDEPENDS_${PN} = "udev libnl"
- FILES_${PN} += "${libdir}crda/regulatory.bin \
-                 ${base_libdir}/udev/rules.d/85-regulatory.rules \
- "
+-- 
+2.1.0
+
 
