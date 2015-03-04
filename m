@@ -1,40 +1,37 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-we0-f173.google.com (mail-we0-f173.google.com
-	[74.125.82.173])
-	by mail.openembedded.org (Postfix) with ESMTP id F2D547376C
+Return-Path: <obi@opendreambox.org>
+X-Greylist: delayed 467 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 04 Mar 2015 09:20:30 UTC
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 2614E65C88
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2015 09:02:43 +0000 (UTC)
-Received: by wevl61 with SMTP id l61so44936187wev.2
+	Wed,  4 Mar 2015 09:20:30 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id AC06F31513A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Mar 2015 01:02:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=l0m/F5ilOH2UiUNhh2xXGxFque3viI6jJfdr2Hh5FIw=;
-	b=SxQzWoYG64eOm27gYvIjE4HjUv0/omRXxeSpAP/Sj2xg6X8CrRrLHASffUE5ZJXFsJ
-	wGirdbPr2jiNqoK04xc2sEcgwpJiAzOh8JMxdfhZep6CeXZiS2BKcdkV01HDy6s0i6CX
-	afD2/lM7apbvgZ46dxnJR5U0RUvLEYtq5QUGr0E4tzAZh29pz7Lk7IZNRqJ/gWc4+19b
-	q4bOY0atYZhFuvBEybmalaOMePL3NDL03TwRocbsZJbPW2TAwBpxDNahLplmOhvAXa3q
-	1ZiUNZFCJrEXLNkL8qf7EUuA560+EiLldUmrjG72IIAuzRFgZbLHORi1g3CcSwzP7kNK
-	l35Q==
-X-Received: by 10.194.24.103 with SMTP id t7mr5613033wjf.15.1425459762984;
-	Wed, 04 Mar 2015 01:02:42 -0800 (PST)
-Received: from localhost.localdomain
-	(ip-176-198-254-85.hsi05.unitymediagroup.de. [176.198.254.85])
-	by mx.google.com with ESMTPSA id lj13sm6128171wic.9.2015.03.04.01.02.41
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Mar 2015 01:02:42 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2015 10:02:10 +0100
-Message-Id: <1425459730-7272-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <1425459730-7272-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1425459730-7272-1-git-send-email-schnitzeltony@googlemail.com>
+	Wed,  4 Mar 2015 10:12:42 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id tSKI2rObmMEN
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Mar 2015 10:12:41 +0100 (CET)
+Received: from [172.22.22.61] (55d473d5.access.ecotel.net [85.212.115.213])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id D871B31513A7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Mar 2015 10:12:40 +0100 (CET)
+Message-ID: <54F6CC88.8080402@opendreambox.org>
+Date: Wed, 04 Mar 2015 10:12:40 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH 2/2] qt5-creator: update to 3.3.1
+To: openembedded-devel@lists.openembedded.org
+References: <1425449908-22847-1-git-send-email-wenzong.fan@windriver.com>
+In-Reply-To: <1425449908-22847-1-git-send-email-wenzong.fan@windriver.com>
+Subject: Re: [PATCH][meta-oe] samba: disable services for sysvinit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,52 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2015 09:02:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 04 Mar 2015 09:20:36 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-* LGPL_EXCEPTION.TXT: 'Digia' -> 'The Qt Company'
-* LICENSE.LGPLv3: Preamble added
-* LICENSE.LGPLv21: Preamble added
+Dear Wenzong Fan,
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- recipes-qt/qt5/{qt5-creator_3.3.0.bb => qt5-creator_3.3.1.bb} | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename recipes-qt/qt5/{qt5-creator_3.3.0.bb => qt5-creator_3.3.1.bb} (88%)
+On 04.03.2015 07:18, wenzong.fan@windriver.com wrote:
+> From: Wenzong Fan <wenzong.fan@windriver.com>
+> 
+> The smb, nmb, winbind services have been disabled for systemd system
+> by default, disable them for sysvinit as well.
 
-diff --git a/recipes-qt/qt5/qt5-creator_3.3.0.bb b/recipes-qt/qt5/qt5-creator_3.3.1.bb
-similarity index 88%
-rename from recipes-qt/qt5/qt5-creator_3.3.0.bb
-rename to recipes-qt/qt5/qt5-creator_3.3.1.bb
-index cbcd4bb..8f993ca 100644
---- a/recipes-qt/qt5/qt5-creator_3.3.0.bb
-+++ b/recipes-qt/qt5/qt5-creator_3.3.1.bb
-@@ -9,9 +9,9 @@ SUMMARY = "Qt Creator is a new cross-platform Qt IDE"
- HOMEPAGE = "https://qt-project.org/"
- LICENSE = "LGPLv2.1 | GPLv3"
- LIC_FILES_CHKSUM = " \
--    file://LGPL_EXCEPTION.TXT;md5=eb6c371255e1262c55ae9b652a90b528 \
--    file://LICENSE.LGPLv21;md5=243b725d71bb5df4a1e5920b344b86ad \
--    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
-+    file://LGPL_EXCEPTION.TXT;md5=f4748b0d1a72c5c8fb5dab2dd1f7fa46 \
-+    file://LICENSE.LGPLv21;md5=825920de5f6db2eeb1bebe625476346d \
-+    file://LICENSE.LGPLv3;md5=0786418af032b9e608909874f334a2d1 \
- "
- 
- inherit qmake5
-@@ -23,8 +23,8 @@ SRC_URI = " \
-     file://0001-Fix-Allow-qt-creator-to-build-on-arm-aarch32-and-aar.patch \
-     file://qtcreator.desktop.in \
- "
--SRC_URI[md5sum] = "5e33988908282c779f2e6e4dca2bba3e"
--SRC_URI[sha256sum] = "27a5c8815fab95f959134047f8315686de4de6f99b0bedfd46b5dedae390525a"
-+SRC_URI[md5sum] = "54cb5918c6852731612672a22627dd08"
-+SRC_URI[sha256sum] = "afefb73a05cdc36cdfb8a760c2b39eb6c366a22ef47c7d365d446092dd1d5331"
- 
- S = "${WORKDIR}/qt-creator-opensource-src-${PV}"
- 
--- 
-1.9.3
+why would anybody install these services without the desire for using
+them? Did the patch disabling them for systemd get merged by mistake? I
+remember Paul objecting to it.
+
+Regards,
+Andreas
+
+> 
+> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> ---
+>  meta-oe/recipes-connectivity/samba/samba.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-connectivity/samba/samba.inc b/meta-oe/recipes-connectivity/samba/samba.inc
+> index abfd5ca..99216ce 100644
+> --- a/meta-oe/recipes-connectivity/samba/samba.inc
+> +++ b/meta-oe/recipes-connectivity/samba/samba.inc
+> @@ -69,7 +69,7 @@ INITSCRIPT_NAME_winbind = "winbind"
+>  # No dependencies, goes in at level 20 (NOTE: take care with the
+>  # level, later levels put the shutdown later too - see the links
+>  # in rc6.d, the shutdown must precede network shutdown).
+> -INITSCRIPT_PARAMS = "defaults"
+> +INITSCRIPT_PARAMS = "disable"
+>  CONFFILES_${PN} = "${sysconfdir}/samba/smb.conf"
+>  
+>  do_configure_prepend () {
+> 
 
 
