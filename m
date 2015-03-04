@@ -1,27 +1,38 @@
-Return-Path: <stephan.binner@basyskom.com>
-Received: from mx1.basyskom.com (groupware.basyskom.com [144.76.148.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F25B65C88
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 99FDE738B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2015 08:47:24 +0000 (UTC)
-X-Footer: YmFzeXNrb20uY29t
-Received: from fridolin.localnet ([193.158.222.114])
-	(authenticated user sbin@basyskom.com)
-	by mx1.basyskom.com (Kerio Connect 8.4.0)
-	(using TLSv1.1 with cipher DHE-RSA-AES256-SHA (256 bits))
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 4 Mar 2015 09:47:24 +0100
-From: Stephan Binner <stephan.binner@basyskom.com>
+	Wed,  4 Mar 2015 09:02:40 +0000 (UTC)
+Received: by widex7 with SMTP id ex7so27117023wid.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Mar 2015 01:02:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=BlTArB1UEECyzag1zjpk5VN7evO5hxF06r4LRLy9X4k=;
+	b=SjirowLSyscyKSB/fHsOx7+Zemd4EIhX0MWOn8XOdLo+71CL8BAPTDbXj88VnytLDv
+	13c5Q0v9ImHc4fk+oN6PGzr6gOfqZvKUkz0XIU6YbEqj6wKRWoyBwD7SPsSyC49zz+R5
+	uscmDnd4wFApXeiE6z99p5nIdZ4u/QqJk9vqBDVAneW7WbRA9lOxZSQ/GykhKb/fWUhk
+	A1dwCLt0XoBAkOKQ7ZsYRVzpiNa7uYuCGzAJwDGjrMqame5gBkvL6CHatVgw6L+VHJHb
+	8gUU6dMQrMb/qun1/JhnNTvmPorOoICQqvkVUjVJ+qom3HXwBoL6MfPKlME56FomJv5O
+	ZPtA==
+X-Received: by 10.194.11.40 with SMTP id n8mr5780796wjb.43.1425459761510;
+	Wed, 04 Mar 2015 01:02:41 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-176-198-254-85.hsi05.unitymediagroup.de. [176.198.254.85])
+	by mx.google.com with ESMTPSA id lj13sm6128171wic.9.2015.03.04.01.02.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 04 Mar 2015 01:02:40 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 04 Mar 2015 09:47:23 +0100
-Message-ID: <3137890.DjIWZ5FYZB@fridolin>
-Organization: basysKom GmbH
-User-Agent: KMail/4.8.5 (Linux/3.2.0-76-generic; KDE/4.8.5; x86_64; ; )
-In-Reply-To: <20150304022546.GG2337@jama>
-References: <20150303182827.GC2337@jama>
-	<1425411609-21528-1-git-send-email-Martin.Jansa@gmail.com>
-	<20150304022546.GG2337@jama>
+Date: Wed,  4 Mar 2015 10:02:09 +0100
+Message-Id: <1425459730-7272-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
 MIME-Version: 1.0
-Subject: Re: [meta-qt5][PATCHv2] fix build of qtwebengine if qtbase has no accessibility
+Subject: [meta-qt5][PATCH 1/2] qt5-creator: add qtquick1 to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,21 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2015 08:47:30 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Wed, 04 Mar 2015 09:02:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wednesday 04 March 2015 03:25:46 Martin Jansa wrote:
+| qt5-creator-3.3.0: qt5-creator rdepends on qtquick1, but it isn't a build dependency? [build-deps]
 
-> > ++else
-> This doesn't look right and also fails to build.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-qt/qt5/qt5-creator_3.3.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Yeah, dunno how I messed that up yesterday evening. :-/
-
-I will try to get the backport reviewed and integrated into 5.4 branch 
-upstream and then will post patch with proper branch annotation etc.
-
-Regards,
-Stephan
+diff --git a/recipes-qt/qt5/qt5-creator_3.3.0.bb b/recipes-qt/qt5/qt5-creator_3.3.0.bb
+index 76f9982..cbcd4bb 100644
+--- a/recipes-qt/qt5/qt5-creator_3.3.0.bb
++++ b/recipes-qt/qt5/qt5-creator_3.3.0.bb
+@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = " \
+ 
+ inherit qmake5
+ 
+-DEPENDS = "qtbase qtscript qtwebkit qtxmlpatterns qtx11extras qtdeclarative qttools qttools-native qtsvg"
++DEPENDS = "qtbase qtscript qtwebkit qtxmlpatterns qtx11extras qtdeclarative qttools qttools-native qtsvg qtquick1"
+ 
+ SRC_URI = " \
+     http://download.qt.io/official_releases/qtcreator/3.3/${PV}/qt-creator-opensource-src-${PV}.tar.gz \
+-- 
+1.9.3
 
 
