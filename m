@@ -1,39 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 4063560144
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f49.google.com (mail-pa0-f49.google.com
+	[209.85.220.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 0444160144
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2015 22:03:44 +0000 (UTC)
-Received: by wggx13 with SMTP id x13so2337591wgg.12
+	Wed,  4 Mar 2015 22:20:45 +0000 (UTC)
+Received: by pablj1 with SMTP id lj1so27849642pab.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Mar 2015 14:03:45 -0800 (PST)
+	Wed, 04 Mar 2015 14:20:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=5YR/UMrSOY9gqg3taQ+Tuje5UEEJ//H//aahtnkB8M0=;
-	b=a0WMbt/hDTMGOwqu/vBT1hdcxiLCP9Cq1vK/u334gTKAN+FyPvrMyycIaR8nJosXQT
-	LnkgiX/0e0ZmHByv0EycCCRygIXkxqJFAtuj6OeIoRmJLyMLZrSNhVVZhssa78rGqFWs
-	8vf2bhwsYDwIOrUqqQfD1aaxVJtMKdsbaAeFHaTVN3rKeHUKKvh+Y6iLPN6tfyKeWHX/
-	CnQ9Zjq4VV7IitnSmBHW8eyWRhmooW/cD/DefIWHKybFAJLSYhTF6/fQf/Avua4zqj8o
-	bSncQYdxWfYguBHLLk7DBn/Deroxrby0RZcVK/p+JG3+m8QhyYPtj5BqIVZDMkd0gmXl
-	cHWQ==
-X-Received: by 10.180.184.136 with SMTP id eu8mr5056930wic.45.1425506625301;
-	Wed, 04 Mar 2015 14:03:45 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fu1sm6182187wic.2.2015.03.04.14.03.44
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 04 Mar 2015 14:03:44 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 4 Mar 2015 23:03:48 +0100
+	h=from:to:cc:subject:date:message-id;
+	bh=GPXVraq3+QXUB7Wn/5WUY0/VAg0JZd6n93/ay5pbKxg=;
+	b=owDIlGHZ0CVEyFtCtdih84UruD3oqzJeLVGcvoFyCSxqM/kooX2avVLi6jZBz4NnaG
+	PGQBAuTe74ZsapwGh3O7E9osu0QGtwRqtR99023cCATal1ltGd8xZWujkmavJEBKRwbK
+	mKzmfxymE7J/npjmzc69d+UT88mXOmHmY+JdCCjK8ID1wzUc6ceeM6eBSYO6TzEobwwD
+	/m5Oid1T4EAS3lsFr2UHYKOcdEBBogTbDSUTr1U6QvMQKGo32BxdndQcmWY3DKfIYkZh
+	OWf1cbY+sx1Ie1AwINKbGeTfKTHXknA6tS96rEuNVu9nqCuVG2iml0dSrpQBXeCKlv1d
+	RaHA==
+X-Received: by 10.68.215.65 with SMTP id og1mr10320138pbc.79.1425507646919;
+	Wed, 04 Mar 2015 14:20:46 -0800 (PST)
+Received: from Pahoa2.mvista.com (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
+	by mx.google.com with ESMTPSA id zc3sm4958095pbb.46.2015.03.04.14.20.45
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 04 Mar 2015 14:20:45 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150304220348.GK2337@jama>
-References: <1425457252-8056-1-git-send-email-mike.looijmans@topic.nl>
-MIME-Version: 1.0
-In-Reply-To: <1425457252-8056-1-git-send-email-mike.looijmans@topic.nl>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] opencv: Upgrade to 2.4.11
+Date: Wed,  4 Mar 2015 14:20:43 -0800
+Message-Id: <1425507643-15027-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: [meta-networking][PATCH] wireshark: update to 12.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,139 +42,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2015 22:03:46 -0000
-X-Groupsio-MsgNum: 54627
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DozTQjXnjm3C9Xhk"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Mar 2015 22:20:54 -0000
 
---DozTQjXnjm3C9Xhk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Armin Kuster <akuster@mvista.com>
 
-On Wed, Mar 04, 2015 at 09:20:52AM +0100, Mike Looijmans wrote:
-> Upgrade OpenCV to the 2.4.11 release.
->=20
-> Remove the opencv-fix-pkgconfig-generation patch which has been integrate=
-d upstream,
-> be it in modified form.
-> ---
->  .../opencv/opencv-fix-pkgconfig-generation.patch   | 44 ----------------=
-------
->  meta-oe/recipes-support/opencv/opencv_2.4.bb       |  8 ++--
->  2 files changed, 3 insertions(+), 49 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/opencv/opencv/opencv-fix-pkgc=
-onfig-generation.patch
->=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv/opencv-fix-pkgconfig-g=
-eneration.patch b/meta-oe/recipes-support/opencv/opencv/opencv-fix-pkgconfi=
-g-generation.patch
-> deleted file mode 100644
-> index d352778..0000000
-> --- a/meta-oe/recipes-support/opencv/opencv/opencv-fix-pkgconfig-generati=
-on.patch
-> +++ /dev/null
-> @@ -1,44 +0,0 @@
-> -Fix pkg-config generation
-> -
-> -Replace absolute library path with library name spec and library search
-> -path option.
-> -
-> -The fix has been provided by Ray Rashif (code.opencv.org/issues/1925)
-> -
-> -Upstream-Status: Pending
-> -
-> -diff -Nbaur OpenCV-2.4.3.orig/cmake/OpenCVGenPkgconfig.cmake OpenCV-2.4.=
-3/cmake/OpenCVGenPkgconfig.cmake
-> ---- OpenCV-2.4.3.orig/cmake/OpenCVGenPkgconfig.cmake	2012-11-04 08:40:14=
-=2E243505926 +0000
-> -+++ OpenCV-2.4.3/cmake/OpenCVGenPkgconfig.cmake	2012-11-04 08:40:42.2866=
-49120 +0000
-> -@@ -10,7 +10,7 @@
-> - # ---------------------------------------------------------------------=
-----------------------
-> - set(prefix      "${CMAKE_INSTALL_PREFIX}")
-> - set(exec_prefix "\${prefix}")
-> --set(libdir      "") #TODO: need link paths for OpenCV_EXTRA_COMPONENTS
-> -+set(libdir      "\${prefix}/${OPENCV_LIB_INSTALL_PATH}")
-> - set(includedir  "\${prefix}/${OPENCV_INCLUDE_INSTALL_PATH}")
-> - set(VERSION     ${OPENCV_VERSION})
-> -=20
-> -@@ -36,10 +36,11 @@
-> - ocv_list_reverse(OpenCV_EXTRA_COMPONENTS)
-> -=20
-> - #build the list of components
-> --set(OpenCV_LIB_COMPONENTS_ "")
-> -+set(OpenCV_LIB_COMPONENTS_ "-L\${libdir}")
-> - foreach(CVLib ${OpenCV_LIB_COMPONENTS})
-> -   get_target_property(libpath ${CVLib} LOCATION_${CMAKE_BUILD_TYPE})
-> -   get_filename_component(libname "${libpath}" NAME)
-> -+  get_filename_component(lname "${libpath}" NAME_WE)
-> -=20
-> -   if(INSTALL_TO_MANGLED_PATHS)
-> -     set(libname "${libname}.${OPENCV_VERSION}")
-> -@@ -52,7 +53,8 @@
-> -     set(installDir "${OPENCV_LIB_INSTALL_PATH}")
-> -   endif()
-> -=20
-> --  set(OpenCV_LIB_COMPONENTS_ "${OpenCV_LIB_COMPONENTS_} \${exec_prefix}=
-/${installDir}/${libname}")
-> -+  string(REPLACE "libopencv" "-lopencv" lname "${lname}")
-> -+  set(OpenCV_LIB_COMPONENTS_ "${OpenCV_LIB_COMPONENTS_} ${lname}")
-> - endforeach()
-> -=20
-> - # add extra dependencies required for OpenCV
-> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recip=
-es-support/opencv/opencv_2.4.bb
-> index 63d7c8b..e57f9a6 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-> @@ -9,12 +9,10 @@ ARM_INSTRUCTION_SET =3D "arm"
-> =20
->  DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib gli=
-b-2.0"
-> =20
-> -SRCREV =3D "df8e28283f09825cca0c2902160b7abebcfe1b64"
-> -SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4 \
-> -           file://opencv-fix-pkgconfig-generation.patch \
-> -"
-> +SRCREV =3D "2c9547e3147779001811d01936aed38f560929fc"
-> +SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4"
-> =20
-> -PV =3D "2.4.9+git${SRCPV}"
-> +PV =3D "2.4.11+git${SRCPV}"
+The following vulnerabilities have been fixed.
+* [1]wnpa-sec-2015-06
+    The ATN-CPDLC dissector could crash. ([2]Bug 9952) [3]CVE-2015-2187
+* [4]wnpa-sec-2015-07
+    The WCP dissector could crash. ([5]Bug 10844) [6]CVE-2015-2188
+* [7]wnpa-sec-2015-08
+    The pcapng file parser could crash. ([8]Bug 10895) [9]CVE-2015-2189
+* [10]wnpa-sec-2015-09
+    The LLDP dissector could crash. ([11]Bug 10983) [12]CVE-2015-2190
+* [13]wnpa-sec-2015-10
+    The TNEF dissector could go into an infinite loop. Discovered by
+    Vlad Tsyrklevich. ([14]Bug 11023) [15]CVE-2015-2191
+* [16]wnpa-sec-2015-11
+    The SCSI OSD dissector could go into an infinite loop. Discovered
+    by Vlad Tsyrklevich. ([17]Bug 11024) [18]CVE-2015-2192
 
-Please Fix this issue first:
-WARNING: QA Issue: libopencv-highgui rdepends on jasper, but it isn't a
-build dependency? [build-deps]
-WARNING: QA Issue: libopencv-highgui rdepends on libdc1394, but it isn't
-a build dependency? [build-deps]
+For more information see
+https://www.wireshark.org/docs/relnotes/wireshark-1.12.4.html
 
->  S =3D "${WORKDIR}/git"
-> =20
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+---
+ .../wireshark/{wireshark_1.12.3.bb => wireshark_1.12.4.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_1.12.3.bb => wireshark_1.12.4.bb} (93%)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb
+similarity index 93%
+rename from meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb
+index f16d0f6..6833216 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.3.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb
+@@ -13,8 +13,8 @@ SRC_URI = " \
+ 
+ PE = "1"
+ 
+-SRC_URI[md5sum] = "e6318b8451d4e56d39bd911da296ef19"
+-SRC_URI[sha256sum] = "69950b9dcb1a630982b5f680554d73d27ee0dc856fc6aeef88c8d04eb5ac33ea"
++SRC_URI[md5sum] = "acfa156fd35cb66c867b1ace992e4b5b"
++SRC_URI[sha256sum] = "de804e98e252e4b795d28d6ac2d48d7f5aacd9b046ee44d44266983795ebc312"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+1.9.1
 
---DozTQjXnjm3C9Xhk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlT3gUQACgkQN1Ujt2V2gBwfzQCfW5fVXY8aV1x/dNCcBwurPict
-K9AAoJ/ZEaOzToWz16OrIETH7ypTUVx3
-=4OXl
------END PGP SIGNATURE-----
-
---DozTQjXnjm3C9Xhk--
