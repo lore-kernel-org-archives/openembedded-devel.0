@@ -1,54 +1,30 @@
-Return-Path: <mike.looijmans@topic.nl>
-X-Greylist: delayed 347 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 05 Mar 2015 07:38:58 UTC
-Received: from retry101.mer-nm.internl.net (vif1-retry101.mer-nm.internl.net
-	[217.149.192.107])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F01565C7B
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DD2B665C7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 07:38:58 +0000 (UTC)
-Received: from smtp102.mer-nm.internl.net (smtp102.mer-nm.internl.net
-	[217.149.192.138])
-	by retry101.mer-nm.internl.net (Postfix) with ESMTP id 81FBC414B2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 08:33:16 +0100 (CET)
-Received: from amavisd-new (mailscanner05.wrt-nm.internl.net [217.149.192.128])
-	by smtp102.mer-nm.internl.net (Postfix) with ESMTP id C876A4033C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 08:33:10 +0100 (CET)
-X-Spam-Flag: NO
-X-Spam-Score: -2.899
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.899 tagged_above=-999 required=3.5
-	tests=[BAYES_00=-2.9, URIBL_BLOCKED=0.001] autolearn=disabled
-X-Spam-Languages: en la eo
-Received: from smtp102.mer-nm.internl.net ([217.149.192.138])
-	by amavisd-new (mailscanner05.wrt-nm.internl.net [217.149.192.160])
-	(amavisd-new, port 10024)
-	with ESMTP for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 08:33:09 +0100 (CET)
-Received: from TOP-EX01.TOPIC.LOCAL (mail.topic.nl [82.204.13.182])
-	(using TLSv1 with cipher AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by smtp102.mer-nm.internl.net (Postfix) with ESMTPS
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 08:33:09 +0100 (CET)
-Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Thu, 5 Mar 2015 08:34:24 +0100
-Message-ID: <54F806B4.7040005@topic.nl>
-Date: Thu, 5 Mar 2015 08:33:08 +0100
-From: Mike Looijmans <mike.looijmans@topic.nl>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.3.0
+	Thu,  5 Mar 2015 07:57:52 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t257vrsX015769
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 4 Mar 2015 23:57:54 -0800 (PST)
+Received: from [128.224.162.201] (128.224.162.201) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 4 Mar 2015 23:57:53 -0800
+Message-ID: <54F80C7F.9040301@windriver.com>
+Date: Thu, 5 Mar 2015 15:57:51 +0800
+From: wenzong fan <wenzong.fan@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1425457252-8056-1-git-send-email-mike.looijmans@topic.nl>
-	<20150304220348.GK2337@jama>
-In-Reply-To: <20150304220348.GK2337@jama>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-Subject: Re: [meta-oe][PATCH] opencv: Upgrade to 2.4.11
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+References: <1423042412-17651-1-git-send-email-wenzong.fan@windriver.com>
+	<20150212021749.GK30457@mentor.com>
+	<54F6B37C.6040706@windriver.com>
+	<20150304133913.GA26456@mentor.com>
+In-Reply-To: <20150304133913.GA26456@mentor.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][meta-networking] iscsi-initiator-utils: fix SELinux label for initiatorname.iscsi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,148 +38,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2015 07:38:59 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 05 Mar 2015 07:57:53 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-=EF=BB=BFOn 04-03-15 23:03, Martin Jansa wrote:
-> On Wed, Mar 04, 2015 at 09:20:52AM +0100, Mike Looijmans wrote:
->> Upgrade OpenCV to the 2.4.11 release.
->>
->> Remove the opencv-fix-pkgconfig-generation patch which has been integrat=
-ed upstream,
->> be it in modified form.
->> ---
->>   .../opencv/opencv-fix-pkgconfig-generation.patch   | 44 --------------=
---------
->>   meta-oe/recipes-support/opencv/opencv_2.4.bb       |  8 ++--
->>   2 files changed, 3 insertions(+), 49 deletions(-)
->>   delete mode 100644 meta-oe/recipes-support/opencv/opencv/opencv-fix-pk=
-gconfig-generation.patch
->>
->> diff --git a/meta-oe/recipes-support/opencv/opencv/opencv-fix-pkgconfig-=
-generation.patch b/meta-oe/recipes-support/opencv/opencv/opencv-fix-pkgconf=
-ig-generation.patch
->> deleted file mode 100644
->> index d352778..0000000
->> --- a/meta-oe/recipes-support/opencv/opencv/opencv-fix-pkgconfig-generat=
-ion.patch
->> +++ /dev/null
->> @@ -1,44 +0,0 @@
->> -Fix pkg-config generation
->> -
->> -Replace absolute library path with library name spec and library search
->> -path option.
->> -
->> -The fix has been provided by Ray Rashif (code.opencv.org/issues/1925)
->> -
->> -Upstream-Status: Pending
->> -
->> -diff -Nbaur OpenCV-2.4.3.orig/cmake/OpenCVGenPkgconfig.cmake OpenCV-2.4=
-.3/cmake/OpenCVGenPkgconfig.cmake
->> ---- OpenCV-2.4.3.orig/cmake/OpenCVGenPkgconfig.cmake	2012-11-04 08:40:1=
-4.243505926 +0000
->> -+++ OpenCV-2.4.3/cmake/OpenCVGenPkgconfig.cmake	2012-11-04 08:40:42.286=
-649120 +0000
->> -@@ -10,7 +10,7 @@
->> - # --------------------------------------------------------------------=
------------------------
->> - set(prefix      "${CMAKE_INSTALL_PREFIX}")
->> - set(exec_prefix "\${prefix}")
->> --set(libdir      "") #TODO: need link paths for OpenCV_EXTRA_COMPONENTS
->> -+set(libdir      "\${prefix}/${OPENCV_LIB_INSTALL_PATH}")
->> - set(includedir  "\${prefix}/${OPENCV_INCLUDE_INSTALL_PATH}")
->> - set(VERSION     ${OPENCV_VERSION})
->> -
->> -@@ -36,10 +36,11 @@
->> - ocv_list_reverse(OpenCV_EXTRA_COMPONENTS)
->> -
->> - #build the list of components
->> --set(OpenCV_LIB_COMPONENTS_ "")
->> -+set(OpenCV_LIB_COMPONENTS_ "-L\${libdir}")
->> - foreach(CVLib ${OpenCV_LIB_COMPONENTS})
->> -   get_target_property(libpath ${CVLib} LOCATION_${CMAKE_BUILD_TYPE})
->> -   get_filename_component(libname "${libpath}" NAME)
->> -+  get_filename_component(lname "${libpath}" NAME_WE)
->> -
->> -   if(INSTALL_TO_MANGLED_PATHS)
->> -     set(libname "${libname}.${OPENCV_VERSION}")
->> -@@ -52,7 +53,8 @@
->> -     set(installDir "${OPENCV_LIB_INSTALL_PATH}")
->> -   endif()
->> -
->> --  set(OpenCV_LIB_COMPONENTS_ "${OpenCV_LIB_COMPONENTS_} \${exec_prefix=
-}/${installDir}/${libname}")
->> -+  string(REPLACE "libopencv" "-lopencv" lname "${lname}")
->> -+  set(OpenCV_LIB_COMPONENTS_ "${OpenCV_LIB_COMPONENTS_} ${lname}")
->> - endforeach()
->> -
->> - # add extra dependencies required for OpenCV
->> diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/reci=
-pes-support/opencv/opencv_2.4.bb
->> index 63d7c8b..e57f9a6 100644
->> --- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
->> +++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
->> @@ -9,12 +9,10 @@ ARM_INSTRUCTION_SET =3D "arm"
->>
->>   DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib g=
-lib-2.0"
->>
->> -SRCREV =3D "df8e28283f09825cca0c2902160b7abebcfe1b64"
->> -SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4 \
->> -           file://opencv-fix-pkgconfig-generation.patch \
->> -"
->> +SRCREV =3D "2c9547e3147779001811d01936aed38f560929fc"
->> +SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4"
->>
->> -PV =3D "2.4.9+git${SRCPV}"
->> +PV =3D "2.4.11+git${SRCPV}"
+On 03/04/2015 09:39 PM, Joe MacDonald wrote:
+> [Re: [oe] [PATCH][meta-networking] iscsi-initiator-utils: fix SELinux label for initiatorname.iscsi] On 15.03.04 (Wed 15:25) wenzong fan wrote:
 >
-> Please Fix this issue first:
-> WARNING: QA Issue: libopencv-highgui rdepends on jasper, but it isn't a
-> build dependency? [build-deps]
-> WARNING: QA Issue: libopencv-highgui rdepends on libdc1394, but it isn't
-> a build dependency? [build-deps]
+>> On 02/12/2015 10:17 AM, Joe MacDonald wrote:
+>>> Hey Wenzong,
+>>>
+>>> [[oe] [PATCH][meta-networking] iscsi-initiator-utils: fix SELinux label for initiatorname.iscsi] On 15.02.04 (Wed 17:33) wenzong.fan@windriver.com wrote:
+>>>
+>>>> From: Wenzong Fan <wenzong.fan@windriver.com>
+>>>>
+>>>> * /etc/iscsi/initiatorname.iscsi: etc_runtime_t -> etc_t
+>>>>
+>>>> This config file was created by postinstall or initscript, fix SELinux
+>>>> label for it to remove:
+>>>>
+>>>>    avc: denied { read } for pid=6094 comm="iscsid" \
+>>>>    name="initiatorname.iscsi" dev="sda3" ino=1057846 \
+>>>>    scontext=system_u:system_r:iscsid_t:s0-s15:c0.c1023 \
+>>>>    tcontext=system_u:object_r:etc_runtime_t:s0 tclass=file
+>>>
+>>> Since this is an issue that only shows up when you have SELinux on your
+>>> system and since it is tweaking a file that is manually installed by a
+>>> do_install() in iscsi-initiator-utils, could you re-work this as a
+>>> bbappend in meta-selinux?
+>>
+>> Hi Joe,
+>>
+>> This make sense, but there's an issue that meta-networking is not
+>> depended by meta-selinux, adding a bbappend may block the building
+>> of meta-selinux & oe-core only.
+>>
+>> Any suggestions about that?
+>
+> As a matter of fact, we just addressed that with
+> d382d54f0a9a913791fca1d7f61e87fcfd32842b in meta-selinux a couple of
+> weeks back.  There is still a mistake in that, but Philip has a patch
+> for it that I'm integrating now, but the core idea works.  So your patch
+> would go into a networking-layer/ hierarchy in meta-selinux/ and then it
+> would either be picked up if meta-networking is included or ignored in
+> the meta-selinux+oe-core-only scenario.
 
-I didn't get any warnings, which platform did you use?
-I guess the recipe needs some explicit "disable" calls, it probably=20
-auto-detected these on your system.
+Cool, I've made the bbappend and sent meta-selinux patches to 
+yocto@yoctoproject.org.
 
+Thanks a lot!
+
+Wenzong
 
 >
->>   S =3D "${WORKDIR}/git"
+> -J.
+>
 >>
->> --
->> 1.9.1
+>> Thanks
+>> Wenzong
 >>
->> --
->>=20
-
-Met vriendelijke groet / kind regards,
-
-Mike Looijmans
-System Expert
-
-
-TOPIC Embedded Systems
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: (+31) (0) 499 33 69 79
-Telefax:  (+31) (0) 499 33 69 70
-E-mail: mike.looijmans@topic.nl
-Website: www.topic.nl
-
-Please consider the environment before printing this e-mail
-
-Topic zoekt gedreven (embedded) software specialisten!
-http://topic.nl/vacatures/topic-zoekt-software-engineers/
-
-_______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>> -J.
+>>>
+>>>>
+>>>> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+>>>> ---
+>>>>   .../recipes-daemons/iscsi-initiator-utils/files/initd.debian          | 4 ++++
+>>>>   1 file changed, 4 insertions(+)
+>>>>
+>>>> diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
+>>>> index 99a7638..43fb348 100644
+>>>> --- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
+>>>> +++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
+>>>> @@ -39,6 +39,10 @@ start() {
+>>>>   InitiatorName=$INITIATORNAME
+>>>>   EOF
+>>>>   	fi
+>>>> +
+>>>> +	# Fix label for /etc/iscsi/initiatorname.iscsi if SELinux was enabled
+>>>> +	test ! -x /sbin/restorecon || /sbin/restorecon -F /etc/iscsi/initiatorname.iscsi
+>>>> +
+>>>>   	start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON
+>>>>   	RETVAL=$?
+>>>>   	starttargets
+>>>> --
+>>>> 1.9.1
+>>>>
 >
->
->
-
 
