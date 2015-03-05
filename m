@@ -1,30 +1,35 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id DD2B665C7B
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BA0C65C7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 07:57:52 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t257vrsX015769
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 4 Mar 2015 23:57:54 -0800 (PST)
-Received: from [128.224.162.201] (128.224.162.201) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 4 Mar 2015 23:57:53 -0800
-Message-ID: <54F80C7F.9040301@windriver.com>
-Date: Thu, 5 Mar 2015 15:57:51 +0800
-From: wenzong fan <wenzong.fan@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:24.0) Gecko/20100101 Thunderbird/24.2.0
+	Thu,  5 Mar 2015 08:14:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 08E8431513F4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2015 09:14:46 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id cBPZ21sJccDi
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2015 09:14:43 +0100 (CET)
+Received: from [172.22.22.61] (55d44e54.access.ecotel.net [85.212.78.84])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 7D18631513F3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2015 09:14:43 +0100 (CET)
+Message-ID: <54F81073.7070607@opendreambox.org>
+Date: Thu, 05 Mar 2015 09:14:43 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-References: <1423042412-17651-1-git-send-email-wenzong.fan@windriver.com>
-	<20150212021749.GK30457@mentor.com>
-	<54F6B37C.6040706@windriver.com>
-	<20150304133913.GA26456@mentor.com>
-In-Reply-To: <20150304133913.GA26456@mentor.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] iscsi-initiator-utils: fix SELinux label for initiatorname.iscsi
+To: openembedded-devel@lists.openembedded.org
+References: <1425473768-30297-1-git-send-email-baptiste.durand@gmail.com>
+In-Reply-To: <1425473768-30297-1-git-send-email-baptiste.durand@gmail.com>
+Subject: Re: [meta-oe][PATCH] minidlna: Fix package and bump to version 1.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,91 +43,307 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2015 07:57:53 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Thu, 05 Mar 2015 08:14:46 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
-On 03/04/2015 09:39 PM, Joe MacDonald wrote:
-> [Re: [oe] [PATCH][meta-networking] iscsi-initiator-utils: fix SELinux label for initiatorname.iscsi] On 15.03.04 (Wed 15:25) wenzong fan wrote:
->
->> On 02/12/2015 10:17 AM, Joe MacDonald wrote:
->>> Hey Wenzong,
->>>
->>> [[oe] [PATCH][meta-networking] iscsi-initiator-utils: fix SELinux label for initiatorname.iscsi] On 15.02.04 (Wed 17:33) wenzong.fan@windriver.com wrote:
->>>
->>>> From: Wenzong Fan <wenzong.fan@windriver.com>
->>>>
->>>> * /etc/iscsi/initiatorname.iscsi: etc_runtime_t -> etc_t
->>>>
->>>> This config file was created by postinstall or initscript, fix SELinux
->>>> label for it to remove:
->>>>
->>>>    avc: denied { read } for pid=6094 comm="iscsid" \
->>>>    name="initiatorname.iscsi" dev="sda3" ino=1057846 \
->>>>    scontext=system_u:system_r:iscsid_t:s0-s15:c0.c1023 \
->>>>    tcontext=system_u:object_r:etc_runtime_t:s0 tclass=file
->>>
->>> Since this is an issue that only shows up when you have SELinux on your
->>> system and since it is tweaking a file that is manually installed by a
->>> do_install() in iscsi-initiator-utils, could you re-work this as a
->>> bbappend in meta-selinux?
->>
->> Hi Joe,
->>
->> This make sense, but there's an issue that meta-networking is not
->> depended by meta-selinux, adding a bbappend may block the building
->> of meta-selinux & oe-core only.
->>
->> Any suggestions about that?
->
-> As a matter of fact, we just addressed that with
-> d382d54f0a9a913791fca1d7f61e87fcfd32842b in meta-selinux a couple of
-> weeks back.  There is still a mistake in that, but Philip has a patch
-> for it that I'm integrating now, but the core idea works.  So your patch
-> would go into a networking-layer/ hierarchy in meta-selinux/ and then it
-> would either be picked up if meta-networking is included or ignored in
-> the meta-selinux+oe-core-only scenario.
+Hello Baptiste,
 
-Cool, I've made the bbappend and sent meta-selinux patches to 
-yocto@yoctoproject.org.
+On 04.03.2015 13:56, Baptiste DURAND wrote:
+> Signed-off-by: Baptiste DURAND <baptiste.durand@gmail.com>
+> ---
+>  meta-oe/recipes-multimedia/minidlna/minidlna.inc   | 39 ++++++++++++++++
+>  .../minidlna/minidlna/minidlna-daemon.init.d       | 54 ++++++++++++++++++++++
+>  .../minidlna/minidlna/minidlna-daemon.service      | 10 ++++
+>  .../recipes-multimedia/minidlna/minidlna_1.1.4.bb  |  6 +++
+>  .../minidlna/minidlna/fix-makefile.patch           | 41 ----------------
+>  .../search-for-headers-in-staging-dir.patch        | 48 -------------------
+>  .../nonworking/minidlna/minidlna_1.0.25.bb         | 19 --------
+>  7 files changed, 109 insertions(+), 108 deletions(-)
+>  create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna.inc
+>  create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
+>  create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.service
+>  create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+>  delete mode 100644 meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
+>  delete mode 100644 meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
+>  delete mode 100644 meta-oe/recipes-multimedia/nonworking/minidlna/minidlna_1.0.25.bb
+> 
+> diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna.inc b/meta-oe/recipes-multimedia/minidlna/minidlna.inc
+> new file mode 100644
+> index 0000000..9d6568d
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/minidlna/minidlna.inc
+> @@ -0,0 +1,39 @@
+> +DESCRIPTION = "MiniDLNA (aka ReadyDLNA) is server software with the aim of \
+> +being fully compliant with DLNA/UPnP-AV clients."
+> +LICENSE = "GPL-2.0|BSD"
+> +DEPENDS = "virtual/gettext ffmpeg flac libav jpeg sqlite3 libexif libogg libid3tag libvorbis"
+> +
+> +inherit autotools update-rc.d systemd
+> +
+> +SRC_URI = "git://git.code.sf.net/p/minidlna/git;branch=master;module=git"
+> +SRC_URI =+ "${@base_contains('DISTRO_FEATURES', 'systemd', 'file://minidlna-daemon.service', 'file://minidlna-daemon.init.d', d)}"
 
-Thanks a lot!
+DISTRO_FEATUES may contain both systemd and sysvinit at the same time.
 
-Wenzong
+> +
+> +S = "${WORKDIR}/git"
+> +B = "${S}"
 
->
-> -J.
->
->>
->> Thanks
->> Wenzong
->>
->>>
->>> -J.
->>>
->>>>
->>>> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->>>> ---
->>>>   .../recipes-daemons/iscsi-initiator-utils/files/initd.debian          | 4 ++++
->>>>   1 file changed, 4 insertions(+)
->>>>
->>>> diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
->>>> index 99a7638..43fb348 100644
->>>> --- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
->>>> +++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/initd.debian
->>>> @@ -39,6 +39,10 @@ start() {
->>>>   InitiatorName=$INITIATORNAME
->>>>   EOF
->>>>   	fi
->>>> +
->>>> +	# Fix label for /etc/iscsi/initiatorname.iscsi if SELinux was enabled
->>>> +	test ! -x /sbin/restorecon || /sbin/restorecon -F /etc/iscsi/initiatorname.iscsi
->>>> +
->>>>   	start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON
->>>>   	RETVAL=$?
->>>>   	starttargets
->>>> --
->>>> 1.9.1
->>>>
->
+inherit autotools-brokensep instead of setting B.
+
+> +
+> +do_configure_prepend() {
+> +cd ${S}
+> +./autogen.sh
+> +}
+
+Is this required?
+
+> +
+> +do_install_initd() {
+> +	install -d ${D}${sysconfdir}/init.d
+> +	install -m 0755 ${WORKDIR}/minidlna-daemon.init.d ${D}${sysconfdir}/init.d/minidlna
+> +}
+> +
+> +do_install_systemd() {
+> +	install -d ${D}${nonarch_base_libdir}/systemd/system
+> +	install -m 0755 ${WORKDIR}/minidlna-daemon.service ${D}${nonarch_base_libdir}/systemd/system
+> +}
+> +
+> +do_install_append(){
+> +	install -d ${D}${sysconfdir}
+> +	install -m 0755 minidlna.conf ${D}${sysconfdir}
+> +	${@base_contains('DISTRO_FEATURES', 'systemd', 'do_install_systemd', 'do_install_initd', d)}
+> +}
+> +
+> +SYSTEMD_SERVICE_${PN} = "minidlna-daemon.service"
+> +
+> +INITSCRIPT_NAME = "minidlna"
+> +INITSCRIPT_PARAMS = "defaults 90"
+
+If the systemd unit had the same basename as the init script, i.e.
+minidlna.service, then systemd would be able to ignore the init script
+automatically.
+
+Regards,
+Andreas
+
+> +
+> diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
+> new file mode 100644
+> index 0000000..61b5b54
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
+> @@ -0,0 +1,54 @@
+> +#!/bin/sh
+> +
+> +NAME="minidlna"
+> +DAEMON=/usr/sbin/minidlnad
+> +SCRIPTNAME=/etc/init.d/$NAME
+> +PIDFILE=/var/run/$NAME.pid
+> +CONF=/etc/$NAME.conf
+> +ARGS="-f $CONF"
+> +
+> +# Exit if the package is not installed
+> +[ -x "$DAEMON" ] || exit 0
+> +
+> +start_function() {
+> +
+> +    export PATH=$PWD:$PATH
+> +
+> +    if [ -f ${PIDFILE} ]; then
+> +        echo "$SCRIPTNAME already running with PID #`cat $PIDFILE` ( according to ${PIDFILE} )";
+> +        exit 0
+> +    fi
+> +    
+> +    $DAEMON $ARGS
+> + 
+> +    pid=$!
+> +
+> +    if [ "$pid" != "" ]; then
+> +        echo -n "$pid" > ${PIDFILE}
+> +    fi
+> +} 
+> +
+> +stop_function() {
+> +
+> +    export PATH=$PWD:$PATH
+> +
+> +    if [ ! -e "${PIDFILE}" ]; then
+> +        echo "${SCRIPTNAME} not running ( according to ${PIDFILE} )";
+> +        exit 1;
+> +    fi
+> +    PID=`cat ${PIDFILE}`
+> +    kill -INT ${PID}
+> +    rm -f ${PIDFILE}
+> +}
+> +
+> +case $1 in
+> +    "start")
+> +        start_function
+> +        ;;
+> +    "stop")
+> +        stop_function
+> +        ;;
+> +    *)
+> +    echo "Usage: $0 {start | stop}"
+> +
+> +esac
+> diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.service b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.service
+> new file mode 100644
+> index 0000000..656100b
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.service
+> @@ -0,0 +1,10 @@
+> +[Unit]
+> +Description=Minidlna Daemon
+> +After=network.target
+> +
+> +[Service]
+> +Type=notify
+> +ExecStart=/usr/sbin/minidlnad -f /etc/minidlna.conf
+> +
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+> new file mode 100644
+> index 0000000..0531e69
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+> @@ -0,0 +1,6 @@
+> +require ${BPN}.inc
+> +
+> +SRCREV = "v1_1_4"
+> +LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
+> +SRC_URI[md5sum] = "d966256baf2f9b068b9de871ab5dade5"
+> +SRC_URI[sha256sum] = "170560fbe042c2bbcba78c5f15b54f4fac321ff770490b23b55789be463f2851"
+> diff --git a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
+> deleted file mode 100644
+> index 96429fd..0000000
+> --- a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
+> +++ /dev/null
+> @@ -1,41 +0,0 @@
+> -Fix Makefile:
+> -* don't overwrite CFLAGS but append to it
+> -* use gcc as CC only if CC is not already defined
+> -* use -I= to include paths
+> -* fix compile of minidlna binary by removing ${LIBS} dependency
+> -
+> -Upstream-status: Pending
+> -Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> -
+> -Index: minidlna-1.0.25/Makefile
+> -===================================================================
+> ---- minidlna-1.0.25.orig/Makefile	2012-01-18 00:49:01.000000000 +0200
+> -+++ minidlna-1.0.25/Makefile	2013-02-10 17:46:49.000000000 +0200
+> -@@ -12,13 +12,13 @@
+> - #
+> - #CFLAGS = -Wall -O -D_GNU_SOURCE -g -DDEBUG
+> - #CFLAGS = -Wall -g -Os -D_GNU_SOURCE
+> --CFLAGS = -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
+> --	 -I/usr/include/ffmpeg \
+> --	 -I/usr/include/libavutil -I/usr/include/libavcodec -I/usr/include/libavformat \
+> --	 -I/usr/include/ffmpeg/libavutil -I/usr/include/ffmpeg/libavcodec -I/usr/include/ffmpeg/libavformat
+> -+CFLAGS += -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
+> -+	 -I=/usr/include/ffmpeg \
+> -+	 -I=/usr/include/libavutil -I=/usr/include/libavcodec -I=/usr/include/libavformat \
+> -+	 -I=/usr/include/ffmpeg/libavutil -I=/usr/include/ffmpeg/libavcodec -I=/usr/include/ffmpeg/libavformat
+> - #STATIC_LINKING: CFLAGS += -DSTATIC
+> - #STATIC_LINKING: LDFLAGS = -static
+> --CC = gcc
+> -+CC ?= gcc
+> - RM = rm -f
+> - INSTALL = install
+> -
+> -@@ -64,7 +64,7 @@
+> - 	$(INSTALL) -d $(ETCINSTALLDIR)
+> - 	$(INSTALL) --mode=0644 minidlna.conf $(ETCINSTALLDIR)
+> -
+> --minidlna:	$(BASEOBJS) $(LNXOBJS) $(LIBS)
+> -+minidlna:	$(BASEOBJS) $(LNXOBJS)
+> - 	@echo Linking $@
+> - 	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(BASEOBJS) $(LNXOBJS) $(LIBS)
+> -
+> diff --git a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
+> deleted file mode 100644
+> index 573d88c..0000000
+> --- a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
+> +++ /dev/null
+> @@ -1,48 +0,0 @@
+> -Search for headers in STAGING_DIR_GOST.
+> -
+> -Upstream-status: Pending
+> -Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> -
+> -Index: minidlna-1.0.25/genconfig.sh
+> -===================================================================
+> ---- minidlna-1.0.25.orig/genconfig.sh	2012-01-21 02:34:13.000000000 +0200
+> -+++ minidlna-1.0.25/genconfig.sh	2013-02-10 17:12:06.000000000 +0200
+> -@@ -40,22 +40,22 @@
+> -
+> - # Detect if there are missing headers
+> - # NOTE: This check only works with a normal distro
+> --[ ! -e "/usr/include/sqlite3.h" ] && MISSING="libsqlite3 $MISSING"
+> --[ ! -e "/usr/include/jpeglib.h" ] && MISSING="libjpeg $MISSING"
+> --[ ! -e "/usr/include/libexif/exif-loader.h" ] && MISSING="libexif $MISSING"
+> --[ ! -e "/usr/include/id3tag.h" ] && MISSING="libid3tag $MISSING"
+> --[ ! -e "/usr/include/ogg/ogg.h" ] && MISSING="libogg $MISSING"
+> --[ ! -e "/usr/include/vorbis/codec.h" ] && MISSING="libvorbis $MISSING"
+> --[ ! -e "/usr/include/FLAC/metadata.h" ] && MISSING="libflac $MISSING"
+> --[ ! -e "/usr/include/ffmpeg/avutil.h" -a \
+> --  ! -e "/usr/include/libavutil/avutil.h" -a \
+> --  ! -e "/usr/include/ffmpeg/libavutil/avutil.h" ] && MISSING="libavutil $MISSING"
+> --[ ! -e "/usr/include/ffmpeg/avformat.h" -a \
+> --  ! -e "/usr/include/libavformat/avformat.h" -a \
+> --  ! -e "/usr/include/ffmpeg/libavformat/avformat.h" ] && MISSING="libavformat $MISSING"
+> --[ ! -e "/usr/include/ffmpeg/avcodec.h" -a \
+> --  ! -e "/usr/include/libavcodec/avcodec.h" -a \
+> --  ! -e "/usr/include/ffmpeg/libavcodec/avcodec.h" ] && MISSING="libavcodec $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/sqlite3.h" ] && MISSING="libsqlite3 $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/jpeglib.h" ] && MISSING="libjpeg $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/libexif/exif-loader.h" ] && MISSING="libexif $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/id3tag.h" ] && MISSING="libid3tag $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/ogg/ogg.h" ] && MISSING="libogg $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/vorbis/codec.h" ] && MISSING="libvorbis $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/FLAC/metadata.h" ] && MISSING="libflac $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avutil.h" -a \
+> -+  ! -e "$STAGING_DIR_HOST/usr/include/libavutil/avutil.h" -a \
+> -+  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavutil/avutil.h" ] && MISSING="libavutil $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avformat.h" -a \
+> -+  ! -e "$STAGING_DIR_HOST/usr/include/libavformat/avformat.h" -a \
+> -+  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavformat/avformat.h" ] && MISSING="libavformat $MISSING"
+> -+[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avcodec.h" -a \
+> -+  ! -e "$STAGING_DIR_HOST/usr/include/libavcodec/avcodec.h" -a \
+> -+  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavcodec/avcodec.h" ] && MISSING="libavcodec $MISSING"
+> - if [ -n "$MISSING" ]; then
+> - 	echo -e "\nERROR!  Cannot continue."
+> - 	echo -e "The following required libraries are either missing, or are missing development headers:\n"
+> diff --git a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna_1.0.25.bb b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna_1.0.25.bb
+> deleted file mode 100644
+> index 9264bc2..0000000
+> --- a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna_1.0.25.bb
+> +++ /dev/null
+> @@ -1,19 +0,0 @@
+> -DESCRIPTION = "MiniDLNA (aka ReadyDLNA) is server software with the aim of \
+> -being fully compliant with DLNA/UPnP-AV clients."
+> -LICENSE = "GPL-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENCE;md5=b1a795ac1a06805cf8fd74920bc46b5c"
+> -
+> -DEPENDS = "flac libav jpeg sqlite3 libexif libogg libid3tag"
+> -
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}_${PV}_src.tar.gz \
+> -    file://search-for-headers-in-staging-dir.patch \
+> -    file://fix-makefile.patch \
+> -"
+> -
+> -SRC_URI[md5sum] = "d966256baf2f9b068b9de871ab5dade5"
+> -SRC_URI[sha256sum] = "170560fbe042c2bbcba78c5f15b54f4fac321ff770490b23b55789be463f2851"
+> -
+> -export STAGING_DIR_HOST
+> -
+> -inherit autotools
+> -
+> 
+
 
