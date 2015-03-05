@@ -1,42 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
-	[74.125.82.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 47977738D8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 21:32:02 +0000 (UTC)
-Received: by wevl61 with SMTP id l61so55697818wev.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2015 13:32:03 -0800 (PST)
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DEFB7378D;
+	Thu,  5 Mar 2015 23:02:01 +0000 (UTC)
+Received: by wevk48 with SMTP id k48so9429220wev.5;
+	Thu, 05 Mar 2015 15:02:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=9FnekA0Nhw8FepxxP4k1dSg9o75ttA9r/GaTDTCH/JQ=;
-	b=rawIMaadqqdtWediVs9/kFW5qZ7cQ54wHE9H8T7I3jALnooFHNKf/VUH+ijEDLPbgP
-	1yRtsN/ic19rJRFf7XtlE7cI7KSjsxE8QSR6tg7TDobWxkvpyJeBd1nvk2iAVMHQCCwY
-	LmbYIhmJ99jLdY6wsE8xn2NjHNEeiQnkpklRfvklsM6ph59NrB1o98rxXAhx4LzTT39O
-	wv0g9Dbe5N+vrZTSeJf8ybLpEpSmQK38AZ9IzmL7l/KAUWw52nIWAIzqPy1YLSO88XNs
-	TU17Uvu31KRy7drAXqpNXE92vaWg7AqyHdWuIucC67+aMKzE8BkYge7oUnnh6asnexxb
-	UIaw==
-X-Received: by 10.194.24.103 with SMTP id t7mr22291334wjf.15.1425591123253;
-	Thu, 05 Mar 2015 13:32:03 -0800 (PST)
+	bh=xwiw8cpgJ/+rPQfGgqyTsREzzWzrLkluBrY9Z1kyqVM=;
+	b=q2eEfb9jzUXvCSsPMPwAIrOdwFW7LpK/D1YUZJDqO6FpzND1lTqa6dYdnCEND6bkZh
+	JFr50Q8x0qJLmFXs5CD3IGZpmQDCEEtgQ7iGOOE3CFxb3t2sZQnB8fnck4lHMmd4+57W
+	4TpoMPzWg4IoqxIgRE9vbZcg1Yg0ljdDAg8eaBf2BDJFO/E1RoX1iCf+TrtMJX/r6fNS
+	jBH/dWiVkLXqkKIoN2TW83zXRSQqMkttmi5dtoY9avttGprrrq3raS3R6KSKVuu+jePR
+	ulGzTvZXOY6rTaIDRzReb546mzzyXMfPngZHjLYcqVqPBlcY86fsR+htklAdvPift2QV
+	kVEw==
+X-Received: by 10.180.99.34 with SMTP id en2mr27647323wib.81.1425596522915;
+	Thu, 05 Mar 2015 15:02:02 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	yr10sm9382224wjc.0.2015.03.05.13.32.02
-	for <openembedded-devel@lists.openembedded.org>
+	vh8sm12440973wjc.12.2015.03.05.15.02.01
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Mar 2015 13:32:02 -0800 (PST)
+	Thu, 05 Mar 2015 15:02:01 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 5 Mar 2015 22:32:07 +0100
+Date: Fri, 6 Mar 2015 00:02:07 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150305213207.GA2337@jama>
-References: <1425248624-2993-1-git-send-email-schnitzeltony@googlemail.com>
-	<20150305180120.GX2337@jama>
-	<CALbNGRSb40o4eW=keqYx+3Ty04f-DHPj53h9bysC_WfhxgG_gA@mail.gmail.com>
+Message-ID: <20150305230207.GB2337@jama>
+References: <20150305151234.AD31A501C6@opal.openembedded.org>
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRSb40o4eW=keqYx+3Ty04f-DHPj53h9bysC_WfhxgG_gA@mail.gmail.com>
+In-Reply-To: <20150305151234.AD31A501C6@opal.openembedded.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] qt-creator: avoid conflicts with meta-qt5's qt5-creator
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Joe MacDonald : nis: blacklist updated yp tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,101 +46,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2015 21:32:03 -0000
-X-Groupsio-MsgNum: 54669
+X-List-Received-Date: Thu, 05 Mar 2015 23:02:03 -0000
+X-Groupsio-MsgNum: 54670
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RQRqO9v0HfCoqppm"
+	protocol="application/pgp-signature"; boundary="Bixl4pq/MaomSJT0"
 Content-Disposition: inline
 
---RQRqO9v0HfCoqppm
-Content-Type: text/plain; charset=iso-8859-1
+--Bixl4pq/MaomSJT0
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 05, 2015 at 09:57:37PM +0100, Andreas M=FCller wrote:
-> On Thu, Mar 5, 2015 at 7:01 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> > On Sun, Mar 01, 2015 at 11:23:44PM +0100, Andreas M=FCller wrote:
-> >> We avoid conflicts by installing no files to sysroot. This causes no f=
-allout
-> >> because nothing depends on qt5-creator (if something included later de=
-pending
-> >> on qt-creator it should depend on qt5-creator).
-> >> Note that
-> >>
-> >> | WARNING: QA Issue: qt5-creator rdepends on qt-creator, but it isn't =
-a build dependency? [build-deps]
-> >>
-> >> is a false positve because the names of the libraries are same as for
-> >> qt5-creator (see test below).
-> >
-> > This isn't enough to resolve the warning (but it resolves the sysroot
-> > conflict which is good).
-> >
-> > qt-creator is still recorded as runtime provider for couple of
-> > libraries, we can list them all in PRIVATE_LIBS (if we can assume that
-> > nothing will link against them - which is already assumed by not staging
-> > them).
-> >
-> > Here is the list from qt5-creator log.do_package:
-> >
-> > $ grep "requires package qt-creator" log.do_package
-> > DEBUG: qt5-creator: Dependency libCore.so requires package qt-creator (=
-used by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5e-oe-lin=
-ux-gnueabi/qt5-creator/3.3.1-r0/packages-split/qt5-creator/usr/lib/qt5/qtcr=
-eator/plugins/libQmlJSTools.so)
-> Very interesting:
+On Thu, Mar 05, 2015 at 03:12:34PM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 345463da86ea4703bb61708f31e86f380ec8a093
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3D345463da86ea4703bb61708f31e86f380ec8a093
 >=20
-> * qt5-creator complains for libs it has installed itself (see qt5 in path)
-> * how should someone link against libraries that are not in sysroot?
-
-See the code for shlibs providers in package.bbclass, this warning and
-this whole issue originates there.
-
-shlibs providers record all installed libraries (not staged in sysroot),
-so that it can automatically add RDEPENDS in case some other package
-will require already found library.
-
-This happens with qt*-creators, there are plans to improve it by
-including the whole path, but that doesn't work yet with current
-package.bbclass.
-
-> * during my tests for sysroot patch I have build qt-creator from
-> scratch and then an image with qt5-creator included. If this warning
-> would be true the image creation would have failed because qt5-creator
-> RCONFLICTS qt-creator (error occured when starting the last patch)
+> Author: Joe MacDonald <joe_macdonald@mentor.com>
+> Date:   Thu Mar  5 10:11:11 2015 -0500
 >=20
-> Problem seems that that the instance creating (have not looked
-> further) these warnings just checks the name of the library without
-> path. Library names are same for both versions of qt-creator.
+> nis: blacklist updated yp tools
 >=20
-> We could try it with PRIVATE_LIBS but I'd suggest to simply ignore
-> these false warnings.
+> The updated yp-tools fails on qemuarm:
+>=20
+>     /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5e-oe-linux-gnueab=
+i/yp-tools/3.3-r0/yp-tools-3.3/lib/do_ypcall.c: In function 'do_ypcall_tr':
+>     /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5e-oe-linux-gnueab=
+i/yp-tools/3.3-r0/yp-tools-3.3/lib/do_ypcall.c:461:27:
+>     error: cast increases required alignment of target type [-Werror=3Dca=
+st-align]
+>          status =3D ypprot_err (((struct ypresp_val *) resp)->status);
+>=20
+> http://errors.yoctoproject.org/Errors/Details/9221/
+>=20
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+>=20
+> ---
+>=20
+>  meta-networking/recipes-support/nis/yp-tools_3.3.bb  | 2 ++
+>  meta-networking/recipes-support/nis/ypbind-mt_2.2.bb | 2 ++
+>  2 files changed, 4 insertions(+)
+>=20
+> diff --git a/meta-networking/recipes-support/nis/yp-tools_3.3.bb b/meta-n=
+etworking/recipes-support/nis/yp-tools_3.3.bb
+> index 75ad989..b89f0b8 100644
+> --- a/meta-networking/recipes-support/nis/yp-tools_3.3.bb
+> +++ b/meta-networking/recipes-support/nis/yp-tools_3.3.bb
+> @@ -11,6 +11,8 @@ ypwhich, yppasswd, domainname, nisdomainname \
+>  and ypdomainname. \
+>  "
+> =20
+> +PNBLACKLIST[yp-tools] ?=3D "BROKEN: fails to build for qemuarm."
+> +
+>  SRC_URI =3D "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
+>             file://domainname.service \
+>             file://yp-tools-ipv4-ipv6-Provide-an-in-place-version-of-mapv=
+4v6addr.patch \
+> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-=
+networking/recipes-support/nis/ypbind-mt_2.2.bb
+> index b960757..0444bfe 100644
+> --- a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
+> @@ -18,6 +18,8 @@ HOMEPAGE =3D "http://www.linux-nis.org/nis/ypbind-mt/in=
+dex.html"
+>  DEPENDS =3D "yp-tools"
+>  PROVIDES +=3D "ypbind"
+> =20
+> +PNBLACKLIST[yp-bind] ?=3D "BROKEN: Depends on broken yp-tools"
 
-I was suggesting PRIVATE_LIBS because it sort of matches with skipping
-the staging of the libraries.
+typo yp-bind ypbind-mt
 
-The warning is still valid in cases when someone builds qt-creator
-first, then qt5-creator which will automatically get RDEPENDS on
-qt-creator, so installing qt5-creator from package feed will bring both
-of them :(.
+as result ypbind-mt now fails to build with:
+| configure: error: Package requirements (libnis) were not met:
+|=20
+| No package 'libnis' found
+|=20
+| Consider adjusting the PKG_CONFIG_PATH environment variable if you
+| installed software in a non-standard prefix.
+|=20
+| Alternatively, you may set the environment variables NIS_CFLAGS
+| and NIS_LIBS to avoid the need to call pkg-config.
+| See the pkg-config man page for more details.
+| Configure failed. The contents of all config.log files follows to aid deb=
+ugging
+| ERROR: oe_runconf failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
+s/oe/world/shr-core/tmp-glibc/work/armv5e-oe-linux-gnueabi/ypbind-mt/2.2-r0=
+/temp/log.do_configure.16370)
+NOTE: recipe ypbind-mt-2.2-r0: task do_configure: Failed
 
-If we set PRIVATE_LIBS in qt-creator, it won't ever be registered as
-shlib provider, so qt5-creator won't get the RDEPENDS.
+probably because yp-tools are too old
+
+> +
+>  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+>             file://ypbind-yocto.init \
+>             file://ypbind.service \
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---RQRqO9v0HfCoqppm
+--Bixl4pq/MaomSJT0
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlT4y1cACgkQN1Ujt2V2gByUyACfW1Yt+IaQLkukIX5JplwsJg9g
-fRMAnRNiMLKPqsdV4SL+II/buQe5L4kj
-=LAQ0
+iEYEARECAAYFAlT44G8ACgkQN1Ujt2V2gBwHhgCdH4R0e2BOzd8J+aKBwGKAr/D7
+l3AAn1vlJH/xomUcPEDBZN2xVohkd9i+
+=pZfv
 -----END PGP SIGNATURE-----
 
---RQRqO9v0HfCoqppm--
+--Bixl4pq/MaomSJT0--
