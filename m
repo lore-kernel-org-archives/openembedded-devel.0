@@ -1,37 +1,42 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 15F017388F;
-	Thu,  5 Mar 2015 21:22:07 +0000 (UTC)
-Received: by wggy19 with SMTP id y19so56059081wgg.13;
-	Thu, 05 Mar 2015 13:22:08 -0800 (PST)
+Received: from mail-we0-f180.google.com (mail-we0-f180.google.com
+	[74.125.82.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 47977738D8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2015 21:32:02 +0000 (UTC)
+Received: by wevl61 with SMTP id l61so55697818wev.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Mar 2015 13:32:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=0hssuX8HJzxd0fJPf+nxUm3m3QHv9R8I/0Y9ykxXm50=;
-	b=VWA4jjhiASevHuQOGKjc8EdrY1cnyuEOd9iaxEJ6sv+Lq4AzPDyT0nWBubXxcVgmoT
-	R/2xmRQbnYHn4hi5QBkBsMS5nDkb+O98dZicgNpVgLMsTajWQPZIEN7335gkosNJtJgv
-	INB4ZEIKPTVLNnRBguFCq3FAdMLwuD4bg99K5nUbFOf7v7/J4fuezwncXPru1YQeizJT
-	2uSaQV9IFHbtGGZWOWo6sQVRbb1bEMmKIlb34wxeYRMKIUZzD3dSOb+uly31MbfVQsgA
-	Va55bRXcI1lPWV8/1PaUiDrlML+gYNLW9KSgnk5Cj1h5aSAtZUFbP/yiBDcjEiu1vLZN
-	9V9g==
-X-Received: by 10.194.175.164 with SMTP id cb4mr2168068wjc.14.1425590528364;
-	Thu, 05 Mar 2015 13:22:08 -0800 (PST)
+	bh=9FnekA0Nhw8FepxxP4k1dSg9o75ttA9r/GaTDTCH/JQ=;
+	b=rawIMaadqqdtWediVs9/kFW5qZ7cQ54wHE9H8T7I3jALnooFHNKf/VUH+ijEDLPbgP
+	1yRtsN/ic19rJRFf7XtlE7cI7KSjsxE8QSR6tg7TDobWxkvpyJeBd1nvk2iAVMHQCCwY
+	LmbYIhmJ99jLdY6wsE8xn2NjHNEeiQnkpklRfvklsM6ph59NrB1o98rxXAhx4LzTT39O
+	wv0g9Dbe5N+vrZTSeJf8ybLpEpSmQK38AZ9IzmL7l/KAUWw52nIWAIzqPy1YLSO88XNs
+	TU17Uvu31KRy7drAXqpNXE92vaWg7AqyHdWuIucC67+aMKzE8BkYge7oUnnh6asnexxb
+	UIaw==
+X-Received: by 10.194.24.103 with SMTP id t7mr22291334wjf.15.1425591123253;
+	Thu, 05 Mar 2015 13:32:03 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	e18sm12151923wjz.27.2015.03.05.13.22.07
+	yr10sm9382224wjc.0.2015.03.05.13.32.02
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Mar 2015 13:22:07 -0800 (PST)
+	Thu, 05 Mar 2015 13:32:02 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 5 Mar 2015 22:22:12 +0100
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20150305212212.GZ2337@jama>
-References: <20141211092332.GA2467@jama>
+Date: Thu, 5 Mar 2015 22:32:07 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150305213207.GA2337@jama>
+References: <1425248624-2993-1-git-send-email-schnitzeltony@googlemail.com>
+	<20150305180120.GX2337@jama>
+	<CALbNGRSb40o4eW=keqYx+3Ty04f-DHPj53h9bysC_WfhxgG_gA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20141211092332.GA2467@jama>
+In-Reply-To: <CALbNGRSb40o4eW=keqYx+3Ty04f-DHPj53h9bysC_WfhxgG_gA@mail.gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: State of bitbake world, test-dependencies 2015-03-05
+Subject: Re: [meta-oe][PATCH] qt-creator: avoid conflicts with meta-qt5's qt5-creator
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,91 +50,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2015 21:22:08 -0000
-X-Groupsio-MsgNum: 54668
+X-List-Received-Date: Thu, 05 Mar 2015 21:32:03 -0000
+X-Groupsio-MsgNum: 54669
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MziYxCZO8WOaTd4I"
+	protocol="application/pgp-signature"; boundary="RQRqO9v0HfCoqppm"
 Content-Disposition: inline
 
---MziYxCZO8WOaTd4I
-Content-Type: text/plain; charset=us-ascii
+--RQRqO9v0HfCoqppm
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 11, 2014 at 10:23:32AM +0100, Martin Jansa wrote:
-> On Sat, Aug 09, 2014 at 11:01:10AM +0200, Martin Jansa wrote:
-> > Complete logs:
-> > http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.2014080=
-8_063907.log/
-> >=20
-> > ERROR: 483 issues were found in these recipes: directfb engrave epiphan=
-y expedite gd gmtk gnome-disk-utility gst-ffmpeg guile leptonica libarchive=
- libmicrohttpd libmikmod libungif libwebp libwmf mariadb midori mpd mpeg2de=
-c mpg123 openal-soft opendataplane oscam piglit protobuf snort sox stunnel =
-synergy tesseract tracker
+On Thu, Mar 05, 2015 at 09:57:37PM +0100, Andreas M=FCller wrote:
+> On Thu, Mar 5, 2015 at 7:01 PM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> > On Sun, Mar 01, 2015 at 11:23:44PM +0100, Andreas M=FCller wrote:
+> >> We avoid conflicts by installing no files to sysroot. This causes no f=
+allout
+> >> because nothing depends on qt5-creator (if something included later de=
+pending
+> >> on qt-creator it should depend on qt5-creator).
+> >> Note that
+> >>
+> >> | WARNING: QA Issue: qt5-creator rdepends on qt-creator, but it isn't =
+a build dependency? [build-deps]
+> >>
+> >> is a false positve because the names of the libraries are same as for
+> >> qt5-creator (see test below).
+> >
+> > This isn't enough to resolve the warning (but it resolves the sysroot
+> > conflict which is good).
+> >
+> > qt-creator is still recorded as runtime provider for couple of
+> > libraries, we can list them all in PRIVATE_LIBS (if we can assume that
+> > nothing will link against them - which is already assumed by not staging
+> > them).
+> >
+> > Here is the list from qt5-creator log.do_package:
+> >
+> > $ grep "requires package qt-creator" log.do_package
+> > DEBUG: qt5-creator: Dependency libCore.so requires package qt-creator (=
+used by files: /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5e-oe-lin=
+ux-gnueabi/qt5-creator/3.3.1-r0/packages-split/qt5-creator/usr/lib/qt5/qtcr=
+eator/plugins/libQmlJSTools.so)
+> Very interesting:
 >=20
-> Complete logs;
-> http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependencies.20141210_=
-162427.log/
->=20
-> This was only partial build, so the results don't look so bad.
-> ERROR: 27 issues were found in these recipes: android-audiosystem
-> collectd fbida gnome-bluetooth gst-plugins-bad mongodb opencv
-> polkit-gnome qtbase tcpdump udisks xbmc xfce4-vala
->=20
-> Found differences:=20
-> WARN: collectd: collectd rdepends on libcrypto, but it isn't a build depe=
-ndency?
-> WARN: collectd: collectd rdepends on libesmtp, but it isn't a build depen=
-dency?
-> WARN: collectd: collectd rdepends on libssl, but it isn't a build depende=
-ncy?
-> WARN: fbida: fbida rdepends on libwebp, but it isn't a build dependency?
-> WARN: gst-plugins-bad: gst-plugins-bad-meta rdepends on gst-plugins-bad-r=
-tmp, but it isn't a build dependency?
-> WARN: opencv: libopencv-highgui rdepends on jasper, but it isn't a build =
-dependency?
-> WARN: opencv: libopencv-highgui rdepends on libdc1394, but it isn't a bui=
-ld dependency?
-> WARN: qtbase: qtbase-plugins rdepends on cups-lib, but it isn't a build d=
-ependency?
-> WARN: tcpdump: tcpdump rdepends on libsmi, but it isn't a build dependenc=
-y?
-> WARN: udisks: udisks rdepends on lvm2, but it isn't a build dependency?
->=20
-> Found errors:=20
-> ERROR: gst-plugins-bad: gst-plugins-bad-rtmp package isn't created when b=
-uilding with minimal dependencies?
-> ERROR: gst-plugins-bad: gst-plugins-bad-rtmp-dev package isn't created wh=
-en building with minimal dependencies?
+> * qt5-creator complains for libs it has installed itself (see qt5 in path)
+> * how should someone link against libraries that are not in sysroot?
 
-I've another partial build which basically confirmed that some of these
-issues are still there.
+See the code for shlibs providers in package.bbclass, this warning and
+this whole issue originates there.
 
-Found differences:=20
-WARN: fbida: fbida rdepends on libwebp, but it isn't a build dependency?
-WARN: fbida: fbida rdepends on lirc, but it isn't a build dependency?
-WARN: qt5-creator: qt5-creator rdepends on qt-creator, but it isn't a build=
- dependency?
-WARN: tcpdump: tcpdump rdepends on libsmi, but it isn't a build dependency?
-WARN: udisks: udisks rdepends on lvm2, but it isn't a build dependency?
+shlibs providers record all installed libraries (not staged in sysroot),
+so that it can automatically add RDEPENDS in case some other package
+will require already found library.
 
-Logs weren't uploaded this time, because we've run out of space on
-logs.nslu2-linux.org/buildlogs/
+This happens with qt*-creators, there are plans to improve it by
+including the whole path, but that doesn't work yet with current
+package.bbclass.
+
+> * during my tests for sysroot patch I have build qt-creator from
+> scratch and then an image with qt5-creator included. If this warning
+> would be true the image creation would have failed because qt5-creator
+> RCONFLICTS qt-creator (error occured when starting the last patch)
+>=20
+> Problem seems that that the instance creating (have not looked
+> further) these warnings just checks the name of the library without
+> path. Library names are same for both versions of qt-creator.
+>=20
+> We could try it with PRIVATE_LIBS but I'd suggest to simply ignore
+> these false warnings.
+
+I was suggesting PRIVATE_LIBS because it sort of matches with skipping
+the staging of the libraries.
+
+The warning is still valid in cases when someone builds qt-creator
+first, then qt5-creator which will automatically get RDEPENDS on
+qt-creator, so installing qt5-creator from package feed will bring both
+of them :(.
+
+If we set PRIVATE_LIBS in qt-creator, it won't ever be registered as
+shlib provider, so qt5-creator won't get the RDEPENDS.
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---MziYxCZO8WOaTd4I
+--RQRqO9v0HfCoqppm
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlT4yQQACgkQN1Ujt2V2gBx0VQCbB4379xlYcLbYIL5rfr7zZOgH
-bwgAoIl+rT6Sxq8NdWJwHXizH3aJ0ouZ
-=1ESb
+iEYEARECAAYFAlT4y1cACgkQN1Ujt2V2gByUyACfW1Yt+IaQLkukIX5JplwsJg9g
+fRMAnRNiMLKPqsdV4SL+II/buQe5L4kj
+=LAQ0
 -----END PGP SIGNATURE-----
 
---MziYxCZO8WOaTd4I--
+--RQRqO9v0HfCoqppm--
