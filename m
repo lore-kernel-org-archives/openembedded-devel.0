@@ -1,34 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 79AE17385B
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E86F738CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2015 15:49:45 +0000 (UTC)
-Received: by wggx13 with SMTP id x13so14112386wgg.4
+	Thu,  5 Mar 2015 15:49:47 +0000 (UTC)
+Received: by widem10 with SMTP id em10so39672447wid.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2015 07:49:46 -0800 (PST)
+	Thu, 05 Mar 2015 07:49:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=EXy4ZZAC4rmLKid/U4w+F2JKv4pggFCThu6jxGAjvPM=;
-	b=UMpUBcUpJ/H+BboaG3y7fkcVpvUaUIGM0d6ju67dw+7poDO5KXJ2qIT0J+stM0uUcd
-	I7f+Kl/8hxTNGYcLKpHVyqI3qHfjMWR9HAYKXEMh5MRh6AfRuO9KX6q2fXRKe0qavjWa
-	efRKfqFPhVYBi77i+4LBTSgXVyJ0d+L8tVQldDIMSJ3nvuYtckJVoaPS8koTCI+iyUjA
-	16mOFjZrykORtAERdNMF/YqxgMmiGpJ5iUSXAR42esrjLuNXjOWtVngoTNBSXKks4FDn
-	cAMPdZCiB7ASpgJM6KyIwT0oLmqvBNEQOTvW2qpkI4Q4Nf2FwIlKxnVUpvLtxyyQPAV7
-	pyzg==
-X-Received: by 10.180.106.103 with SMTP id gt7mr67292315wib.59.1425570586064; 
-	Thu, 05 Mar 2015 07:49:46 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=LOvrJViFr+66R6qOioZLqCzJHPw5ws+ydmi0lXI3EeU=;
+	b=Njg4qZJlbDFqiJ0GDU1AuIFD1j5vaZY2aqEhC78Kvvdtz8l+69ULTntUU1gJqp881w
+	pC4ZivuuKlM+mwmoQEoOlGJLu1yFYfcwysjrSfRHfp8QYEIaZtt88nzhTwf0FO/hkTIj
+	C/FAefzFOum7pyfP0S03O2ileqN3+qjf69e3rCh18LZns46Pts7vi3ivXmPlRvLoIQN/
+	wXm6/SwNHFmujfTI40yln+RAqOPUfKdNf7wmIg8gIJuBZ58Mw+EFUsWB+qnZDnN4hq+H
+	e9JrsRVnga78WKV30ZsdgukCbOSDaV+LvDuYEy19wZeu4gNWe8ku9ct2k1CqL4aRhREq
+	CPUA==
+X-Received: by 10.180.184.136 with SMTP id eu8mr12230122wic.45.1425570588015; 
+	Thu, 05 Mar 2015 07:49:48 -0800 (PST)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	lj13sm12185015wic.9.2015.03.05.07.49.45
+	hw7sm7157364wjb.24.2015.03.05.07.49.46
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Mar 2015 07:49:45 -0800 (PST)
+	Thu, 05 Mar 2015 07:49:46 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Mar 2015 16:49:46 +0100
-Message-Id: <1425570588-20920-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu,  5 Mar 2015 16:49:47 +0100
+Message-Id: <1425570588-20920-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.3.1
-Subject: [meta-oe][PATCH 1/3] ktap-module: blacklist because it's not compatible with 3.19 kernel
+In-Reply-To: <1425570588-20920-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1425570588-20920-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: [meta-oe][PATCH 2/3] mplayer2: set REQUIRED_DISTRO_FEATURES and LICENSE_FLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,26 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2015 15:49:45 -0000
+X-List-Received-Date: Thu, 05 Mar 2015 15:49:47 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-kernel/ktap/ktap-module_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-kernel/ktap/ktap-module_git.bb b/meta-oe/recipes-kernel/ktap/ktap-module_git.bb
-index 62f2a99..e3c94e3 100644
---- a/meta-oe/recipes-kernel/ktap/ktap-module_git.bb
-+++ b/meta-oe/recipes-kernel/ktap/ktap-module_git.bb
-@@ -6,6 +6,9 @@ SUMMARY = "KTAP is a scripting dynamic tracing tool for Linux"
+diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+index 2de26b0..8c5f4eb 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+@@ -10,6 +10,12 @@ PROVIDES = "mplayer"
+ RPROVIDES_${PN} = "mplayer"
+ RCONFLICTS_${PN} = "mplayer"
  
- inherit module
- 
-+# See https://github.com/ktap/ktap/issues/80
-+PNBLACKLIST[ktap-module] ?= "Not compatible with 3.19 kernel"
++# Depends on xsp, libxv, virtual/libx11, libxscrnsaver
++REQUIRED_DISTRO_FEATURES = "x11"
 +
- # Available package configs: ffi (only supported on x86_64)
- PACKAGECONFIG ?= ""
++# because it depends on libpostproc/libav which has commercial flag
++LICENSE_FLAGS = "${@base_contains('PACKAGECONFIG', 'postproc', 'commercial', '', d)}"
++
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
  
 -- 
 2.3.1
