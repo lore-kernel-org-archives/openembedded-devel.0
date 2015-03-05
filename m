@@ -1,38 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 13E2E71637;
-	Thu,  5 Mar 2015 14:29:07 +0000 (UTC)
-Received: by wghk14 with SMTP id k14so9948150wgh.7;
-	Thu, 05 Mar 2015 06:29:08 -0800 (PST)
+Return-Path: <baptiste.durand@gmail.com>
+Received: from mail-ie0-f174.google.com (mail-ie0-f174.google.com
+	[209.85.223.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 12F63738BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Mar 2015 14:30:30 +0000 (UTC)
+Received: by iecar1 with SMTP id ar1so76793636iec.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Mar 2015 06:30:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=/CiEpQRsi0/PCZ8DXwvvzn+t4pCo5S8mF4dCe0KvDTs=;
-	b=W5iswE/dovvlKthVjRZwk5IDQKdusQDq8fwl7vrkdjULPmBaB1gdf6PDdszDtX2CKR
-	Pbxz5dxmr6mYYeVQukZS7Cx2Lc63g+e9zc/0QpZAtI8jMp6BhQlrRwMOZ3lhFBeXzqjo
-	T5gv29wtdJZMR/YZHXYKBSWzDfOq/keTShKQYknFsQxoz7c3HL2UGM5B06m4bOrTuCBT
-	1SNSRj8hlK7JVfYG8IbG9HVAGz2++HTvMk5P435kLjvguEWaRpaKni54VKvKNFEtVVdH
-	t45tqxa8tT0FOWDhMlEuTCaPg2VA2YLJVUI43DpGYuZsHsV8IKg40vjdyOz1FxRh4TxD
-	iTOw==
-X-Received: by 10.180.105.40 with SMTP id gj8mr67646439wib.67.1425565748742;
-	Thu, 05 Mar 2015 06:29:08 -0800 (PST)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	a13sm10754294wjx.30.2015.03.05.06.29.07
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Mar 2015 06:29:08 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 5 Mar 2015 15:29:13 +0100
-To: openembedded-devel@lists.openembedded.org,
-	Joe MacDonald <joe_macdonald@mentor.com>
-Message-ID: <20150305142913.GU2337@jama>
-References: <20150304135132.54A3D5017B@opal.openembedded.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=jXztGPqJZIcfuOvLlhNvL7FHFmWfb7whrrMuqUcyms0=;
+	b=AAzeMKWu/dPCQd2Naamk2J/R2KbCL76JC6mQd71MDgy2Xs76FdyfgG7BDQeKuuKnV6
+	mmEbraOAVAWeggSsweAYpMbIc0D8a5LlZgffwYoH/syGTC5c9cqEO8M1wiqFITcEmYco
+	/EfF2cHNmKBXcU+KPyjHVnTkjjgtkKITtLMcGzrnrDzwmC4GD/9Fjei1fKfMLKncgEfA
+	D4Lrk0zohxRhFbU1PaptMzn4da+U0oPkUeRCVe4rHaSE1g/nJH0To27usZWwPsK4lnqf
+	qyTLHawSOAabEM32pSBEk1NaHg/t2l6yMBe6aoY8zcgzluckdrRAqGEeQdKE5PeASKvb
+	LR1Q==
 MIME-Version: 1.0
-In-Reply-To: <20150304135132.54A3D5017B@opal.openembedded.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Joe MacDonald : nis: integrate latest stable yp-tools and ypbind
+X-Received: by 10.107.19.156 with SMTP id 28mr20244112iot.83.1425565831698;
+	Thu, 05 Mar 2015 06:30:31 -0800 (PST)
+Received: by 10.107.3.72 with HTTP; Thu, 5 Mar 2015 06:30:31 -0800 (PST)
+In-Reply-To: <20150305131826.GQ2337@jama>
+References: <1425559979-15196-1-git-send-email-baptiste.durand@gmail.com>
+	<20150305131826.GQ2337@jama>
+Date: Thu, 5 Mar 2015 15:30:31 +0100
+Message-ID: <CAB0T2v84Lagh0zqm2zcbQ9qkG1HpESyjTQZVkCk2XSALtHOmgw@mail.gmail.com>
+From: Baptiste Durand <baptiste.durand@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v3] minidlna: Fix package and bump to version 1.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,338 +44,383 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2015 14:29:08 -0000
-X-Groupsio-MsgNum: 54649
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="TPGKQYD3WP7vMswh"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Mar 2015 14:30:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
---TPGKQYD3WP7vMswh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+2015-03-05 14:18 GMT+01:00 Martin Jansa <martin.jansa@gmail.com>:
 
-On Wed, Mar 04, 2015 at 01:51:32PM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: e00832bc4dbeacb5eb09864674b6ba7a04fc8622
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3De00832bc4dbeacb5eb09864674b6ba7a04fc8622
->=20
-> Author: Joe MacDonald <joe_macdonald@mentor.com>
-> Date:   Mon Mar  2 00:23:43 2015 -0500
->=20
-> nis: integrate latest stable yp-tools and ypbind
->=20
-> Update to the latest stable NIS tools.  The yp-tools libraries and headers
-> conflict with the RPC headers provided by glibc, so install them to a
-> different location.  Systems that intend to build using the NIS-provided
-> versions will need to specify the alternate location, but that is covered
-> by pkg-config, so it should only be necessary to point pkg-config at the
-> alternate .pc file.
->=20
-> The older stable versions are suitable for IPv4-only setups, so keep them
-> around in case those are required for some systems.
+> On Thu, Mar 05, 2015 at 01:52:59PM +0100, Baptiste DURAND wrote:
+> > Signed-off-by: Baptiste DURAND <baptiste.durand@gmail.com>
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  meta-oe/recipes-multimedia/minidlna/minidlna.inc   | 36 +++++++++++++++
+> >  .../minidlna/minidlna/minidlna-daemon.init.d       | 54
+> ++++++++++++++++++++++
+> >  .../minidlna/minidlna/minidlna.service             | 10 ++++
+> >  .../recipes-multimedia/minidlna/minidlna_1.1.4.bb  |  6 +++
+> >  .../minidlna/minidlna/fix-makefile.patch           | 41 ----------------
+> >  .../search-for-headers-in-staging-dir.patch        | 48
+> -------------------
+> >  .../nonworking/minidlna/minidlna_1.0.25.bb         | 19 --------
+> >  7 files changed, 106 insertions(+), 108 deletions(-)
+> >  create mode 100644 meta-oe/recipes-multimedia/minidlna/minidlna.inc
+> >  create mode 100644
+> meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
+> >  create mode 100644
+> meta-oe/recipes-multimedia/minidlna/minidlna/minidlna.service
+> >  create mode 100644 meta-oe/recipes-multimedia/minidlna/
+> minidlna_1.1.4.bb
+> >  delete mode 100644
+> meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
+> >  delete mode 100644
+> meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
+> >  delete mode 100644 meta-oe/recipes-multimedia/nonworking/minidlna/
+> minidlna_1.0.25.bb
+> >
+> > diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna.inc
+> b/meta-oe/recipes-multimedia/minidlna/minidlna.inc
+> > new file mode 100644
+> > index 0000000..f553acb
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-multimedia/minidlna/minidlna.inc
+> > @@ -0,0 +1,36 @@
+> > +DESCRIPTION = "MiniDLNA (aka ReadyDLNA) is server software with the aim
+> of \
+> > +being fully compliant with DLNA/UPnP-AV clients."
+> > +LICENSE = "GPL-2.0|BSD"
+> > +DEPENDS = "ffmpeg flac libav jpeg sqlite3 libexif libogg libid3tag
+> libvorbis"
+>
+> Please set LICENSE_FLAGS_WHITELIST because of libav dependency, otherwise
+> the build
+> will fail with:
+>
+> ERROR: Nothing PROVIDES 'libav' (but
+> meta-oe/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb DEPENDS on
+> or otherwise requires it)
+> ERROR: libav was skipped: because it has a restricted license not
+> whitelisted in LICENSE_FLAGS_WHITELIST
+>
+>
 
-This seems to break yp-tools build for qemuarm:
-yp-tools/3.3-r0/yp-tools-3.3/lib/do_ypcall.c:461:27: error: cast
-increases required alignment of target type [-Werror=3Dcast-align]
+Hello Martin
+I'm not sure to understand what do you mean exactly :S
 
-http://errors.yoctoproject.org/Errors/Details/9221/
+I thought this variable (LICENSE_FLAGS_WHITELIST)  should be used only in
+distro configuration or local.conf, not in a recipe.
 
->=20
-> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->=20
-> ---
->=20
->  ...rovide-an-in-place-version-of-mapv4v6addr.patch | 110 +++++++++++++++=
-++++++
->  .../recipes-support/nis/yp-tools_3.3.bb            |  46 +++++++++
->  .../recipes-support/nis/ypbind-mt_2.2.bb           |  51 ++++++++++
->  3 files changed, 207 insertions(+)
->=20
-> diff --git a/meta-networking/recipes-support/nis/yp-tools/yp-tools-ipv4-i=
-pv6-Provide-an-in-place-version-of-mapv4v6addr.patch b/meta-networking/reci=
-pes-support/nis/yp-tools/yp-tools-ipv4-ipv6-Provide-an-in-place-version-of-=
-mapv4v6addr.patch
-> new file mode 100644
-> index 0000000..9ef569f
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/nis/yp-tools/yp-tools-ipv4-ipv6-Pro=
-vide-an-in-place-version-of-mapv4v6addr.patch
-> @@ -0,0 +1,110 @@
-> +From a1ef10d63b0ea34c788d5432e94c72b00ae55e04 Mon Sep 17 00:00:00 2001
-> +From: Joe MacDonald <joe_macdonald@mentor.com>
-> +Date: Fri, 27 Feb 2015 12:04:10 -0500
-> +Subject: [PATCH] ipv4/ipv6: Provide an in-place version of mapv4v6addr.h
-> +
-> +mapv4v6addr.h isn't always available, depending on your build, but
-> +nis-hosts.c only needs it for a single, inline function.  So drop a copy
-> +here rather than playing games with the include path that would
-> +potentially lead to cross-compilation issues.
-> +
-> +Upstream-status: Inappropriate [embedded specific]
-> +
-> +Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> +---
-> + nss_nis6/mapv4v6addr.h | 69 +++++++++++++++++++++++++++++++++++++++++++=
-+++++++
-> + nss_nis6/nis-hosts.c   |  2 +-
-> + 2 files changed, 70 insertions(+), 1 deletion(-)
-> + create mode 100644 nss_nis6/mapv4v6addr.h
-> +
-> +diff --git a/nss_nis6/mapv4v6addr.h b/nss_nis6/mapv4v6addr.h
-> +new file mode 100644
-> +index 0000000..7f85f7d
-> +--- /dev/null
-> ++++ b/nss_nis6/mapv4v6addr.h
-> +@@ -0,0 +1,69 @@
-> ++/*
-> ++ * ++Copyright++ 1985, 1988, 1993
-> ++ * -
-> ++ * Copyright (c) 1985, 1988, 1993
-> ++ *    The Regents of the University of California.  All rights reserved.
-> ++ *
-> ++ * Redistribution and use in source and binary forms, with or without
-> ++ * modification, are permitted provided that the following conditions
-> ++ * are met:
-> ++ * 1. Redistributions of source code must retain the above copyright
-> ++ *    notice, this list of conditions and the following disclaimer.
-> ++ * 2. Redistributions in binary form must reproduce the above copyright
-> ++ *    notice, this list of conditions and the following disclaimer in t=
-he
-> ++ *    documentation and/or other materials provided with the distributi=
-on.
-> ++ * 4. Neither the name of the University nor the names of its contribut=
-ors
-> ++ *    may be used to endorse or promote products derived from this soft=
-ware
-> ++ *    without specific prior written permission.
-> ++ *
-> ++ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' =
-AND
-> ++ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-> ++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR P=
-URPOSE
-> ++ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LI=
-ABLE
-> ++ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQU=
-ENTIAL
-> ++ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GO=
-ODS
-> ++ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-> ++ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, =
-STRICT
-> ++ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN AN=
-Y WAY
-> ++ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY =
-OF
-> ++ * SUCH DAMAGE.
-> ++ * -
-> ++ * Portions Copyright (c) 1993 by Digital Equipment Corporation.
-> ++ *
-> ++ * Permission to use, copy, modify, and distribute this software for any
-> ++ * purpose with or without fee is hereby granted, provided that the abo=
-ve
-> ++ * copyright notice and this permission notice appear in all copies, an=
-d that
-> ++ * the name of Digital Equipment Corporation not be used in advertising=
- or
-> ++ * publicity pertaining to distribution of the document or software wit=
-hout
-> ++ * specific, written prior permission.
-> ++ *
-> ++ * THE SOFTWARE IS PROVIDED "AS IS" AND DIGITAL EQUIPMENT CORP. DISCLAI=
-MS ALL
-> ++ * WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRA=
-NTIES
-> ++ * OF MERCHANTABILITY AND FITNESS.   IN NO EVENT SHALL DIGITAL EQUIPMENT
-> ++ * CORPORATION BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUE=
-NTIAL
-> ++ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
-> ++ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTI=
-OUS
-> ++ * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE =
-OF THIS
-> ++ * SOFTWARE.
-> ++ * -
-> ++ * --Copyright--
-> ++ */
-> ++
-> ++#include <string.h>
-> ++#include <arpa/nameser.h>
-> ++
-> ++static void
-> ++map_v4v6_address (const char *src, char *dst)
-> ++{
-> ++  u_char *p =3D (u_char *) dst;
-> ++  int i;
-> ++
-> ++  /* Move the IPv4 part to the right position.  */
-> ++  memcpy (dst + 12, src, INADDRSZ);
-> ++
-> ++  /* Mark this ipv6 addr as a mapped ipv4. */
-> ++  for (i =3D 0; i < 10; i++)
-> ++    *p++ =3D 0x00;
-> ++  *p++ =3D 0xff;
-> ++  *p =3D 0xff;
-> ++}
-> +diff --git a/nss_nis6/nis-hosts.c b/nss_nis6/nis-hosts.c
-> +index af99c74..96d8fa1 100644
-> +--- a/nss_nis6/nis-hosts.c
-> ++++ b/nss_nis6/nis-hosts.c
-> +@@ -36,7 +36,7 @@
-> + #include "nss-nis6.h"
-> +=20
-> + /* Get implementation for some internal functions. */
-> +-#include <resolv/mapv4v6addr.h>
-> ++#include "mapv4v6addr.h"
-> +=20
-> + #define ENTNAME         hostent
-> + #define DATABASE        "hosts"
-> +--=20
-> +1.9.1
-> +
-> diff --git a/meta-networking/recipes-support/nis/yp-tools_3.3.bb b/meta-n=
-etworking/recipes-support/nis/yp-tools_3.3.bb
-> new file mode 100644
-> index 0000000..75ad989
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/nis/yp-tools_3.3.bb
-> @@ -0,0 +1,46 @@
-> +# This package builds tools to manage NIS
-> +# The source package is utils/net/NIS/yp-tools
-> +#
-> +require nis.inc
-> +
-> +SUMMARY =3D "NIS client programs"
-> +DESCRIPTION =3D " \
-> +Network Information Service tools.  \
-> +This package contains ypcat, ypmatch, ypset, \
-> +ypwhich, yppasswd, domainname, nisdomainname \
-> +and ypdomainname. \
-> +"
-> +
-> +SRC_URI =3D "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
-> +           file://domainname.service \
-> +           file://yp-tools-ipv4-ipv6-Provide-an-in-place-version-of-mapv=
-4v6addr.patch \
-> +"
-> +SRC_URI[md5sum] =3D "acebeecc11a73fb8097503670344834c"
-> +SRC_URI[sha256sum] =3D "812be817df3d4c25813552be336c6c6ad5aedaf65611b81a=
-f3ad9f98fb3c2e50"
-> +
-> +DEPENDS =3D "libtirpc"
-> +
-> +inherit autotools systemd
-> +SYSTEMD_SERVICE_${PN} =3D "domainname.service"
-> +
-> +RPROVIDES_${PN} +=3D "${PN}-systemd"
-> +RREPLACES_${PN} +=3D "${PN}-systemd"
-> +RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> +
-> +CACHED_CONFIGUREVARS +=3D "ac_cv_prog_STRIP=3D/bin/true"
-> +
-> +EXTRA_OECONF =3D " \
-> +                --disable-rpath \
-> +                --libdir=3D${libdir}/yp-nis/ \
-> +                --includedir=3D${includedir}/yp-nis/ \
-> +               "
-> +
-> +FILES_${PN} +=3D " ${libdir}/yp-nis/*.so.*.* ${libdir}/yp-nis/pkgconfig/"
-> +FILES_${PN}-dbg +=3D " ${libdir}/yp-nis/.debug"
-> +FILES_${PN}-dev +=3D " ${libdir}/yp-nis/*.so ${libdir}/yp-nis/*.so.[12] =
-${libdir}/yp-nis/*.la"
-> +FILES_${PN}-staticdev +=3D " ${libdir}/yp-nis/*.a"
-> +
-> +do_install_append() {
-> +    install -d ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/domainname.service ${D}${systemd_unitdir}=
-/system
-> +}
-> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb b/meta-=
-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> new file mode 100644
-> index 0000000..b960757
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/nis/ypbind-mt_2.2.bb
-> @@ -0,0 +1,51 @@
-> +# This package builds the NIS ypbind daemon
-> +# The source package is utils/net/NIS/ypbind-mt
-> +#
-> +require nis.inc
-> +
-> +DESCRIPTION =3D " \
-> +Multithreaded NIS bind service (ypbind-mt).  \
-> +ypbind-mt is a complete new implementation of a NIS \
-> +binding daemon for Linux. It has the following \
-> +features.  Supports ypbind protocol V1 and V2.  \
-> +Uses threads for better response.  Supports multiple \
-> +domain bindings.  Supports /var/yp/binding/* file \
-> +for Linux libc 4/5 and glibc 2.x.  Supports a list \
-> +of known secure NIS server (/etc/yp.conf) Binds to \
-> +the server which answered as first. \
-> +"
-> +HOMEPAGE =3D "http://www.linux-nis.org/nis/ypbind-mt/index.html"
-> +DEPENDS =3D "yp-tools"
-> +PROVIDES +=3D "ypbind"
-> +
-> +SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
-> +           file://ypbind-yocto.init \
-> +           file://ypbind.service \
-> +"
-> +SRC_URI[md5sum] =3D "54e2040d8266ae7d302d081ca310c8a8"
-> +SRC_URI[sha256sum] =3D "dc2f7d97c94dcab0acfdcd115cd8b464eb8c427e4bb0fe68=
-404ae7465f517cd3"
-> +
-> +inherit systemd update-rc.d
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "ypbind.service"
-> +INITSCRIPT_NAME =3D "ypbind"
-> +INITSCRIPT_PARAMS =3D "start 44 3 5 . stop 70 0 1 2 6 ."
-> +
-> +CACHED_CONFIGUREVARS =3D "ac_cv_prog_STRIP=3D/bin/true"
-> +
-> +EXTRA_OECONF =3D "PKG_CONFIG_PATH=3D'${STAGING_LIBDIR}/yp-nis/pkgconfig/=
-'"
-> +
-> +do_install_append () {
-> +    install -d ${D}${sysconfdir}/init.d
-> +    install -d ${D}${sysconfdir}/rcS.d
-> +
-> +    install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.=
-d/ypbind
-> +
-> +    install -d ${D}${systemd_unitdir}/system
-> +    install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/sys=
-tem
-> +}
-> +
-> +
-> +RPROVIDES_${PN} +=3D "${PN}-systemd"
-> +RREPLACES_${PN} +=3D "${PN}-systemd"
-> +RCONFLICTS_${PN} +=3D "${PN}-systemd"
->=20
-> --=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+The purpose of this varaibel is to be able to build rootfs with or without
+commercial packages, is it correct?
 
---TPGKQYD3WP7vMswh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+In my point of view , setting this variable to the value commercial
+directly in a recipe is not a good idea.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlT4aDkACgkQN1Ujt2V2gByhiwCgpn70FEKvgYBGXACsYkE5xOSb
-QUwAn2aIZ6ZyRbExAJApJ3edYCID0PGO
-=KhCi
------END PGP SIGNATURE-----
+BR
 
---TPGKQYD3WP7vMswh--
+Baptiste
+
+
+
+> +
+> > +inherit gettext autotools-brokensep update-rc.d systemd
+> > +
+> > +SRC_URI = "git://
+> git.code.sf.net/p/minidlna/git;branch=master;module=git \
+> > +           file://minidlna-daemon.init.d \
+> > +           file://minidlna.service "
+> > +
+> > +S = "${WORKDIR}/git"
+> > +
+> > +# This remove "--exclude=autopoint" option from autoreconf argument to
+> avoid
+> > +# configure.ac:30: error: required file './ABOUT-NLS' not found
+> > +EXTRA_AUTORECONF = ""
+> > +
+> > +do_install_append(){
+> > +     install -d ${D}${sysconfdir}
+> > +     install -m 0755 minidlna.conf ${D}${sysconfdir}
+> > +
+> > +# Systemd script
+> > +     install -d ${D}${nonarch_base_libdir}/systemd/system
+> > +     install -m 0755 ${WORKDIR}/minidlna.service
+> ${D}${nonarch_base_libdir}/systemd/system
+> > +
+> > +# Sysvinit script
+> > +     install -d ${D}${sysconfdir}/init.d
+> > +     install -m 0755 ${WORKDIR}/minidlna-daemon.init.d
+> ${D}${sysconfdir}/init.d/minidlna
+> > +
+> > +}
+> > +
+> > +SYSTEMD_SERVICE_${PN} = "minidlna.service"
+> > +
+> > +INITSCRIPT_NAME = "minidlna"
+> > +INITSCRIPT_PARAMS = "defaults 90"
+> > +
+> > diff --git
+> a/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
+> b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
+> > new file mode 100644
+> > index 0000000..9e64a20
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna-daemon.init.d
+> > @@ -0,0 +1,54 @@
+> > +#!/bin/sh
+> > +
+> > +NAME="minidlna"
+> > +DAEMON=/usr/sbin/minidlnad
+> > +SCRIPTNAME=/etc/init.d/$NAME
+> > +PIDFILE=/var/run/$NAME.pid
+> > +CONF=/etc/$NAME.conf
+> > +ARGS="-f $CONF"
+> > +
+> > +# Exit if the package is not installed
+> > +[ -x "$DAEMON" ] || exit 0
+> > +
+> > +start_function() {
+> > +
+> > +    export PATH=$PWD:$PATH
+> > +
+> > +    if [ -f ${PIDFILE} ]; then
+> > +        echo "$SCRIPTNAME already running with PID #`cat $PIDFILE` (
+> according to ${PIDFILE} )";
+> > +        exit 0
+> > +    fi
+> > +
+> > +    $DAEMON $ARGS
+> > +
+> > +    pid=$!
+> > +
+> > +    if [ "$pid" != "" ]; then
+> > +        echo -n "$pid" > ${PIDFILE}
+> > +    fi
+> > +}
+> > +
+> > +stop_function() {
+> > +
+> > +    export PATH=$PWD:$PATH
+> > +
+> > +    if [ ! -e "${PIDFILE}" ]; then
+> > +        echo "${SCRIPTNAME} not running ( according to ${PIDFILE} )";
+> > +        exit 1;
+> > +    fi
+> > +    PID=`cat ${PIDFILE}`
+> > +    kill -INT ${PID}
+> > +    rm -f ${PIDFILE}
+> > +}
+> > +
+> > +case $1 in
+> > +    "start")
+> > +        start_function
+> > +        ;;
+> > +    "stop")
+> > +        stop_function
+> > +        ;;
+> > +    *)
+> > +    echo "Usage: $0 {start | stop}"
+> > +
+> > +esac
+> > diff --git
+> a/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna.service
+> b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna.service
+> > new file mode 100644
+> > index 0000000..656100b
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-multimedia/minidlna/minidlna/minidlna.service
+> > @@ -0,0 +1,10 @@
+> > +[Unit]
+> > +Description=Minidlna Daemon
+> > +After=network.target
+> > +
+> > +[Service]
+> > +Type=notify
+> > +ExecStart=/usr/sbin/minidlnad -f /etc/minidlna.conf
+> > +
+> > +[Install]
+> > +WantedBy=multi-user.target
+> > diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+> b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+> > new file mode 100644
+> > index 0000000..0531e69
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.4.bb
+> > @@ -0,0 +1,6 @@
+> > +require ${BPN}.inc
+> > +
+> > +SRCREV = "v1_1_4"
+> > +LIC_FILES_CHKSUM =
+> "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
+> > +SRC_URI[md5sum] = "d966256baf2f9b068b9de871ab5dade5"
+> > +SRC_URI[sha256sum] =
+> "170560fbe042c2bbcba78c5f15b54f4fac321ff770490b23b55789be463f2851"
+> > diff --git
+> a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
+> b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
+> > deleted file mode 100644
+> > index 96429fd..0000000
+> > ---
+> a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/fix-makefile.patch
+> > +++ /dev/null
+> > @@ -1,41 +0,0 @@
+> > -Fix Makefile:
+> > -* don't overwrite CFLAGS but append to it
+> > -* use gcc as CC only if CC is not already defined
+> > -* use -I= to include paths
+> > -* fix compile of minidlna binary by removing ${LIBS} dependency
+> > -
+> > -Upstream-status: Pending
+> > -Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> > -
+> > -Index: minidlna-1.0.25/Makefile
+> > -===================================================================
+> > ---- minidlna-1.0.25.orig/Makefile    2012-01-18 00:49:01.000000000 +0200
+> > -+++ minidlna-1.0.25/Makefile 2013-02-10 17:46:49.000000000 +0200
+> > -@@ -12,13 +12,13 @@
+> > - #
+> > - #CFLAGS = -Wall -O -D_GNU_SOURCE -g -DDEBUG
+> > - #CFLAGS = -Wall -g -Os -D_GNU_SOURCE
+> > --CFLAGS = -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
+> > --     -I/usr/include/ffmpeg \
+> > --     -I/usr/include/libavutil -I/usr/include/libavcodec
+> -I/usr/include/libavformat \
+> > --     -I/usr/include/ffmpeg/libavutil -I/usr/include/ffmpeg/libavcodec
+> -I/usr/include/ffmpeg/libavformat
+> > -+CFLAGS += -Wall -g -O3 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 \
+> > -+     -I=/usr/include/ffmpeg \
+> > -+     -I=/usr/include/libavutil -I=/usr/include/libavcodec
+> -I=/usr/include/libavformat \
+> > -+     -I=/usr/include/ffmpeg/libavutil
+> -I=/usr/include/ffmpeg/libavcodec -I=/usr/include/ffmpeg/libavformat
+> > - #STATIC_LINKING: CFLAGS += -DSTATIC
+> > - #STATIC_LINKING: LDFLAGS = -static
+> > --CC = gcc
+> > -+CC ?= gcc
+> > - RM = rm -f
+> > - INSTALL = install
+> > -
+> > -@@ -64,7 +64,7 @@
+> > -     $(INSTALL) -d $(ETCINSTALLDIR)
+> > -     $(INSTALL) --mode=0644 minidlna.conf $(ETCINSTALLDIR)
+> > -
+> > --minidlna:   $(BASEOBJS) $(LNXOBJS) $(LIBS)
+> > -+minidlna:   $(BASEOBJS) $(LNXOBJS)
+> > -     @echo Linking $@
+> > -     @$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(BASEOBJS) $(LNXOBJS) $(LIBS)
+> > -
+> > diff --git
+> a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
+> b/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
+> > deleted file mode 100644
+> > index 573d88c..0000000
+> > ---
+> a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna/search-for-headers-in-staging-dir.patch
+> > +++ /dev/null
+> > @@ -1,48 +0,0 @@
+> > -Search for headers in STAGING_DIR_GOST.
+> > -
+> > -Upstream-status: Pending
+> > -Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> > -
+> > -Index: minidlna-1.0.25/genconfig.sh
+> > -===================================================================
+> > ---- minidlna-1.0.25.orig/genconfig.sh        2012-01-21
+> 02:34:13.000000000 +0200
+> > -+++ minidlna-1.0.25/genconfig.sh     2013-02-10 17:12:06.000000000 +0200
+> > -@@ -40,22 +40,22 @@
+> > -
+> > - # Detect if there are missing headers
+> > - # NOTE: This check only works with a normal distro
+> > --[ ! -e "/usr/include/sqlite3.h" ] && MISSING="libsqlite3 $MISSING"
+> > --[ ! -e "/usr/include/jpeglib.h" ] && MISSING="libjpeg $MISSING"
+> > --[ ! -e "/usr/include/libexif/exif-loader.h" ] && MISSING="libexif
+> $MISSING"
+> > --[ ! -e "/usr/include/id3tag.h" ] && MISSING="libid3tag $MISSING"
+> > --[ ! -e "/usr/include/ogg/ogg.h" ] && MISSING="libogg $MISSING"
+> > --[ ! -e "/usr/include/vorbis/codec.h" ] && MISSING="libvorbis $MISSING"
+> > --[ ! -e "/usr/include/FLAC/metadata.h" ] && MISSING="libflac $MISSING"
+> > --[ ! -e "/usr/include/ffmpeg/avutil.h" -a \
+> > --  ! -e "/usr/include/libavutil/avutil.h" -a \
+> > --  ! -e "/usr/include/ffmpeg/libavutil/avutil.h" ] &&
+> MISSING="libavutil $MISSING"
+> > --[ ! -e "/usr/include/ffmpeg/avformat.h" -a \
+> > --  ! -e "/usr/include/libavformat/avformat.h" -a \
+> > --  ! -e "/usr/include/ffmpeg/libavformat/avformat.h" ] &&
+> MISSING="libavformat $MISSING"
+> > --[ ! -e "/usr/include/ffmpeg/avcodec.h" -a \
+> > --  ! -e "/usr/include/libavcodec/avcodec.h" -a \
+> > --  ! -e "/usr/include/ffmpeg/libavcodec/avcodec.h" ] &&
+> MISSING="libavcodec $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/sqlite3.h" ] &&
+> MISSING="libsqlite3 $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/jpeglib.h" ] && MISSING="libjpeg
+> $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/libexif/exif-loader.h" ] &&
+> MISSING="libexif $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/id3tag.h" ] &&
+> MISSING="libid3tag $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/ogg/ogg.h" ] && MISSING="libogg
+> $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/vorbis/codec.h" ] &&
+> MISSING="libvorbis $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/FLAC/metadata.h" ] &&
+> MISSING="libflac $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avutil.h" -a \
+> > -+  ! -e "$STAGING_DIR_HOST/usr/include/libavutil/avutil.h" -a \
+> > -+  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavutil/avutil.h" ] &&
+> MISSING="libavutil $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avformat.h" -a \
+> > -+  ! -e "$STAGING_DIR_HOST/usr/include/libavformat/avformat.h" -a \
+> > -+  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavformat/avformat.h" ]
+> && MISSING="libavformat $MISSING"
+> > -+[ ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/avcodec.h" -a \
+> > -+  ! -e "$STAGING_DIR_HOST/usr/include/libavcodec/avcodec.h" -a \
+> > -+  ! -e "$STAGING_DIR_HOST/usr/include/ffmpeg/libavcodec/avcodec.h" ]
+> && MISSING="libavcodec $MISSING"
+> > - if [ -n "$MISSING" ]; then
+> > -     echo -e "\nERROR!  Cannot continue."
+> > -     echo -e "The following required libraries are either missing, or
+> are missing development headers:\n"
+> > diff --git a/meta-oe/recipes-multimedia/nonworking/minidlna/
+> minidlna_1.0.25.bb b/meta-oe/recipes-multimedia/nonworking/minidlna/
+> minidlna_1.0.25.bb
+> > deleted file mode 100644
+> > index 9264bc2..0000000
+> > --- a/meta-oe/recipes-multimedia/nonworking/minidlna/minidlna_1.0.25.bb
+> > +++ /dev/null
+> > @@ -1,19 +0,0 @@
+> > -DESCRIPTION = "MiniDLNA (aka ReadyDLNA) is server software with the aim
+> of \
+> > -being fully compliant with DLNA/UPnP-AV clients."
+> > -LICENSE = "GPL-2.0"
+> > -LIC_FILES_CHKSUM = "file://LICENCE;md5=b1a795ac1a06805cf8fd74920bc46b5c"
+> > -
+> > -DEPENDS = "flac libav jpeg sqlite3 libexif libogg libid3tag"
+> > -
+> > -SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}_${PV}_src.tar.gz \
+> > -    file://search-for-headers-in-staging-dir.patch \
+> > -    file://fix-makefile.patch \
+> > -"
+> > -
+> > -SRC_URI[md5sum] = "d966256baf2f9b068b9de871ab5dade5"
+> > -SRC_URI[sha256sum] =
+> "170560fbe042c2bbcba78c5f15b54f4fac321ff770490b23b55789be463f2851"
+> > -
+> > -export STAGING_DIR_HOST
+> > -
+> > -inherit autotools
+> > -
+> > --
+> > 1.8.1.4
+> >
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+
+
+
+-- 
+Baptiste DURAND
+
