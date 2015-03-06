@@ -1,26 +1,30 @@
-Return-Path: <stephan.binner@basyskom.com>
-Received: from mx1.basyskom.com (groupware.basyskom.com [144.76.148.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A9B36017E
+Return-Path: <sadlife1990@gmail.com>
+Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id B60607385B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Mar 2015 07:27:38 +0000 (UTC)
-X-Footer: YmFzeXNrb20uY29t
-Received: from fridolin.localnet ([193.158.222.114])
-	(authenticated user sbin@basyskom.com)
-	by mx1.basyskom.com (Kerio Connect 8.4.1)
-	(using TLSv1.1 with cipher DHE-RSA-AES256-SHA (256 bits))
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 6 Mar 2015 08:27:38 +0100
-From: Stephan Binner <stephan.binner@basyskom.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 06 Mar 2015 08:27:35 +0100
-Message-ID: <2899618.yEhnJzyaiQ@fridolin>
-Organization: basysKom GmbH
-User-Agent: KMail/4.8.5 (Linux/3.2.0-77-generic; KDE/4.8.5; x86_64; ; )
-In-Reply-To: <20150305140403.GR2337@jama>
-References: <20150303182827.GC2337@jama> <3137890.DjIWZ5FYZB@fridolin>
-	<20150305140403.GR2337@jama>
+	Fri,  6 Mar 2015 12:06:43 +0000 (UTC)
+Received: by wghk14 with SMTP id k14so15826699wgh.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Mar 2015 04:06:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=1tQkxZ2a8cFhZ+mOioShoi935dJDhe7i/rpJgvgp9Nc=;
+	b=IeuMt2FcgR8qo/1Uw+YeJhTyBHX0Ywm692PKU4YoRqKbXdC/kopLlb3XmeU6ags+YU
+	P5WEfckVC8UT3ldZly87B4JWwEqzCKOBYL2wukVlCPa3e/8XczaU19ig4Fkc6msajR5J
+	0eDwOfWjvH8tjMaUvuGGOP99yZtmplyWEvM4bzSW5LAd2F2HxEpRyrwZSQwtykQ4ZRUq
+	fWsfIglR15UI5cHOKggMZWHxgaOIRS1L8cIJueNQLBPxUSd9XdeUGt0xoDSRcUN5rE7l
+	aM8Oar1ZQMfjuDkswK23Zl+n08fgHaJxPAIxGvV3Epf51TH/pAoR/hl3Q/cGEjqY9VaS
+	MkQA==
 MIME-Version: 1.0
-Subject: Re: [meta-qt5][PATCHv2] fix build of qtwebengine if qtbase has no accessibility
+X-Received: by 10.180.219.102 with SMTP id pn6mr31611857wic.50.1425643604246; 
+	Fri, 06 Mar 2015 04:06:44 -0800 (PST)
+Received: by 10.194.36.196 with HTTP; Fri, 6 Mar 2015 04:06:44 -0800 (PST)
+Date: Fri, 6 Mar 2015 14:06:44 +0200
+Message-ID: <CAAHuHfyJJUiAYxOAhn521eFHB8gA8x9PTixhjr5GSnnT2uGXmw@mail.gmail.com>
+From: Life Life <sadlife1990@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Yocto Cups Print Problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,21 +38,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2015 07:27:45 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="ISO-8859-1"
+X-List-Received-Date: Fri, 06 Mar 2015 12:06:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thursday 05 March 2015 15:04:03 Martin Jansa wrote:
+Hello,
 
-> I've sent additional patch to fix building with accessibility enabled.
-
-You mean "without accessibility" :-)... (damn double negation #ifdef)
-
-> Please get it merged in upstream, because your patch seems to be broken
-
-It's merged in 5.4 branch: https://codereview.qt-project.org/#/c/107873/
-
-Regards,
-Stephan
-
+We are testint cups with embedded system. I want to try print simple
+echo "Test" | lp it isn't working. I see this error.
+lp: Unsupported document-format "text/plain".
 
