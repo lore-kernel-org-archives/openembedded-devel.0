@@ -1,34 +1,36 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CC3A6AC2B
+Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 310DB738ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Mar 2015 10:59:43 +0000 (UTC)
-Received: by iecvy18 with SMTP id vy18so32066245iec.9
+	Sun,  8 Mar 2015 10:59:46 +0000 (UTC)
+Received: by iecrd18 with SMTP id rd18so5388828iec.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Mar 2015 03:59:45 -0700 (PDT)
+	Sun, 08 Mar 2015 03:59:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=ehfcYlCZNDPTRc/wdtlX0ZK7lGVEiZY32LK8STvYuvo=;
-	b=Td20OdnNhVODSr9ZRtF5cV0JoYpdmjdiY7FE4RGf6CIGeGFnBCNJ0if3I4VaqxELDB
-	+omyB5gcKNEzp6u4ws5sj7upc9hUHVRWVg3pEeFbpilOPmOoKgzENoQIyfsK9+mlLzBk
-	aJYwSia4/8v5m7343/ta+Bq4hbBY8LyffE1urZ5PCZPPCAYQFWUJQDRJjgxEneRWqvY/
-	RHalFh0FV6EuDcDmtWPWfBjpu5fxjbjjVUr1bsuK2Kx8A2PX8CQNglROWI01LMp5QV5b
-	l9r5QpKkRWSfH3dxJhL2nvTqiX3IJv+eR5+3vtDxdH3k/RqTBruOLXxPbG6FgRVIE8cM
-	WYDw==
-X-Received: by 10.50.50.142 with SMTP id c14mr39186597igo.42.1425812385064;
-	Sun, 08 Mar 2015 03:59:45 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=uHoPdwkNVzCqk7BWGY6/m+d52qlraFAz9tpf4CRlKo4=;
+	b=ZDDdmAmSbvjw5jxjrxwqkyDx1qM2+iR7lNOkXQ4VVQ9JqdsfuAhhn0+5yaB9Bwt3A2
+	d3aFkjot9EnvqSpgU6RHvaU/oAyTFAgBzoyySJnOyH/y6DCPT8Tt9aJiNrY3W9VvFXky
+	99DkDhhsnghERE18iU9h/HVqlw5gtGEPcfSc20H9banYQdP43tp/2Gkkt1ivlhsNMnyZ
+	Xczu3KtpUppFYzWhhiKiFbXMUJo2INbt/0k8p4svONVDY/MZwgXOI+LU+tg1p0MlAXOU
+	kXNY3qH0tbzE6ueGcc2Ai7NOF2Zvu1kPMzLg6ifmpY3OmZsu8wEgmgo+BKSvW/ZyTUsW
+	SZfQ==
+X-Received: by 10.50.129.9 with SMTP id ns9mr39162861igb.24.1425812387929;
+	Sun, 08 Mar 2015 03:59:47 -0700 (PDT)
 Received: from kraj-ch2e.sys.comcast.net (a-96-119-88-205.sys.comcast.net.
 	[96.119.88.205]) by mx.google.com with ESMTPSA id
-	k191sm10353663ioe.21.2015.03.08.03.59.43
+	k191sm10353663ioe.21.2015.03.08.03.59.45
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 08 Mar 2015 03:59:44 -0700 (PDT)
+	Sun, 08 Mar 2015 03:59:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Mar 2015 10:59:30 +0000
-Message-Id: <1425812371-1564-1-git-send-email-raj.khem@gmail.com>
+Date: Sun,  8 Mar 2015 10:59:31 +0000
+Message-Id: <1425812371-1564-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [PATCHv3 1/2] soci: Add recipe
+In-Reply-To: <1425812371-1564-1-git-send-email-raj.khem@gmail.com>
+References: <1425812371-1564-1-git-send-email-raj.khem@gmail.com>
+Subject: [PATCHv3 2/2] nodejs: Upgrade to 0.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,108 +44,158 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Mar 2015 10:59:44 -0000
+X-List-Received-Date: Sun, 08 Mar 2015 10:59:47 -0000
 
-Define PACKAGECONFIG to enable a given backend of choice
-by default its 'empty'
+Tested on mips1
 
-Change-Id: Ie1123af658ca94d2fe22a3ca1a32dfb47d58979e
+Change-Id: I54211c2c323dbec1d38eb526ae183775ba3241f1
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/soci/soci/soci_libdir.patch    | 28 +++++++++++++
- meta-oe/recipes-support/soci/soci_3.2.2.bb         | 48 ++++++++++++++++++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-support/soci/soci/soci_libdir.patch
- create mode 100644 meta-oe/recipes-support/soci/soci_3.2.2.bb
+ meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb | 83 ++++++++++++++++++++++++
+ meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb | 44 -------------
+ 2 files changed, 83 insertions(+), 44 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
 
-diff --git a/meta-oe/recipes-support/soci/soci/soci_libdir.patch b/meta-oe/recipes-support/soci/soci/soci_libdir.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb
 new file mode 100644
-index 0000000..8da57ce
+index 0000000..b514837
 --- /dev/null
-+++ b/meta-oe/recipes-support/soci/soci/soci_libdir.patch
-@@ -0,0 +1,28 @@
-+Define SOCI_LIBDIR only if its not passed via environemnt. In OE we
-+want to set it per our choice since we use 'lib' for 64bit unless we
-+are using multilib
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb
+@@ -0,0 +1,83 @@
++DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
++HOMEPAGE = "http://nodejs.org"
++LICENSE = "MIT & BSD & Artistic-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=14115ff11211df04b031ec7d40b6d31b"
 +
-+-Khem
++DEPENDS = "openssl"
 +
-+Index: soci-3.2.2/CMakeLists.txt
-+===================================================================
-+--- soci-3.2.2.orig/CMakeLists.txt
-++++ soci-3.2.2/CMakeLists.txt
-+@@ -69,11 +69,12 @@ include(SociDependencies)
-+ ###############################################################################
-+ # Installation
-+ ###############################################################################
-+-
-+-if(APPLE OR CMAKE_SIZEOF_VOID_P EQUAL 4)
-+-  set(SOCI_LIBDIR "lib")
-+-else()
-+-  set(SOCI_LIBDIR "lib")
-++if(NOT DEFINED SOCI_LIBDIR)
-++  if(APPLE OR CMAKE_SIZEOF_VOID_P EQUAL 4)
-++    set(SOCI_LIBDIR "lib")
-++  else()
-++    set(SOCI_LIBDIR "lib")
-++  endif()
-+ endif()
-+ 
-+ set(BINDIR "bin" CACHE PATH "The directory to install binaries into.")
-diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb b/meta-oe/recipes-support/soci/soci_3.2.2.bb
-new file mode 100644
-index 0000000..887f5a2
---- /dev/null
-+++ b/meta-oe/recipes-support/soci/soci_3.2.2.bb
-@@ -0,0 +1,48 @@
-+# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
++SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz"
++SRC_URI[md5sum] = "62c8d9c74c8f68193f60e4cba020eb48"
++SRC_URI[sha256sum] = "9700e23af4e9b3643af48cef5f2ad20a1331ff531a12154eef2bfb0bb1682e32"
 +
-+DESCRIPTION = "The C++ Database Access Library"
-+HOMEPAGE = "http://soci.sourceforge.net"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
-+SECTION = "libs"
-+DEPENDS = "boost"
++S = "${WORKDIR}/node-v${PV}"
++
++# v8 errors out if you have set CCACHE
++CCACHE = ""
++
++def map_nodejs_arch(a, d):
++    import re
++
++    if   re.match('p(pc|owerpc)(|64)', a): return 'ppc'
++    elif re.match('i.86$', a): return 'ia32'
++    elif re.match('x86_64$', a): return 'x64'
++    elif re.match('arm64$', a): return 'arm'
++    return a
++
++ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)}"
++GYP_DEFINES_append_mipsel = " mips_arch_variant='r1' "
++ARCHFLAGS ?= ""
++
++# Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
++do_configure () {
++    export LD="${CXX}"
++    GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
++    # $TARGET_ARCH settings don't match --dest-cpu settings
++   ./configure --prefix=${prefix} --without-snapshot --shared-openssl \
++               --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH', True), d)}" \
++               --dest-os=linux \
++               ${ARCHFLAGS}
++}
++
++do_compile () {
++    export LD="${CXX}"
++    make BUILDTYPE=Release
++}
++
++do_install () {
++    oe_runmake install DESTDIR=${D}
++}
++
++do_install_append_class-native() {
++    # use node from PATH instead of absolute path to sysroot
++    # node-v0.10.25/tools/install.py is using:
++    # shebang = os.path.join(node_prefix, 'bin/node')
++    # update_shebang(link_path, shebang)
++    # and node_prefix can be very long path to bindir in native sysroot and
++    # when it exceeds 128 character shebang limit it's stripped to incorrect path
++    # and npm fails to execute like in this case with 133 characters show in log.do_install:
++    # updating shebang of /home/jenkins/workspace/build-webos-nightly/device/qemux86/label/open-webos-builder/BUILD-qemux86/work/x86_64-linux/nodejs-native/0.10.15-r0/image/home/jenkins/workspace/build-webos-nightly/device/qemux86/label/open-webos-builder/BUILD-qemux86/sysroots/x86_64-linux/usr/bin/npm to /home/jenkins/workspace/build-webos-nightly/device/qemux86/label/open-webos-builder/BUILD-qemux86/sysroots/x86_64-linux/usr/bin/node
++    # /usr/bin/npm is symlink to /usr/lib/node_modules/npm/bin/npm-cli.js
++    # use sed on npm-cli.js because otherwise symlink is replaced with normal file and
++    # npm-cli.js continues to use old shebang
++    sed "1s^.*^#\!/usr/bin/env node^g" -i ${D}${libdir}/node_modules/npm/bin/npm-cli.js
++}
++
++do_install_append_class-target() {
++    sed "1s^.*^#\!${bindir}/env node^g" -i ${D}${libdir}/node_modules/npm/bin/npm-cli.js
++}
++
++RDEPENDS_${PN} = "curl"
++RDEPENDS_${PN}_class-native = ""
++
++PACKAGES =+ "${PN}-npm"
++FILES_${PN}-npm = "${libdir}/node_modules ${bindir}/npm"
++RDEPENDS_${PN}-npm = "bash python-shell python-datetime python-subprocess python-textutils"
++
++PACKAGES =+ "${PN}-dtrace"
++FILES_${PN}-dtrace = "${libdir}/dtrace"
++
++PACKAGES =+ "${PN}-systemtap"
++FILES_${PN}-systemtap = "${datadir}/systemtap"
 +
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.gz \
-+           file://soci_libdir.patch \
-+          "
-+SRC_URI[md5sum] = "bc3c35f6cd3f80a1be19fe30b3c111bf"
-+SRC_URI[sha256sum] = "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743582de2ff443ccb1c"
-+
-+TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy" -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \
-+              -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING="dbname=soci_test" \
-+              -DSOCI_TEST_MYSQL_CONNSTR:STRING="db=soci_test user=oe password=oe"'
-+
-+OBASEDIR ?= "/opt/oracle"
-+OINCDIR = "rdbms/public"
-+OLIBDIR = "lib"
-+
-+PACKAGECONFIG[sqlite3] = "-DSOCI_SQLITE3=ON,-DSOCI_SQLITE3=OFF,sqlite3,"
-+PACKAGECONFIG[mysql] = "-DSOCI_MYSQL=ON,-DSOCI_MYSQL=OFF,mariadb,"
-+PACKAGECONFIG[postgresql] = "-DSOCI_POSTGRESQL=ON,-DSOCI_POSTGRESQL=OFF,postgresql,"
-+PACKAGECONFIG[odbc] = "-DSOCI_ODBC=ON,-DSOCI_ODBC=OFF,,"
-+PACKAGECONFIG[empty] = "-DSOCI_EMPTY=ON,-DSOCI_EMPTY=OFF,,"
-+PACKAGECONFIG[oracle] = "-DWITH_ORACLE=ON --with-oracle-include=${OINCDIR} --with-oracle-lib=${OLIBDIR},-DWITH_ORACLE=OFF,,"
-+PACKAGECONFIG[ptest] = "${TESTCONFIG},,,"
-+
-+# enable your backend by default we enable 'empty'
-+PACKAGECONFIG ??= "empty"
-+
-+# Take the flags added by PACKAGECONFIG and pass them to cmake.
-+EXTRA_OECMAKE = "${EXTRA_OECONF} -DSOCI_LIBDIR=${libdir}"
-+
-+inherit cmake
-+
-+PACKAGES += "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc ${PN}-oracle"
-+
-+FILES_${PN}-sqlite3 = "${libdir}/lib${BPN}_sqlite3.so.*"
-+FILES_${PN}-mysql = "${libdir}/lib${BPN}_mysql.so.*"
-+FILES_${PN}-postgresql = "${libdir}/lib${BPN}_postgresql.so.*"
-+FILES_${PN}-odbc = "${libdir}/lib${BPN}_odbc.so.*"
-+FILES_${PN}-oracle = "${libdir}/lib${BPN}_oracle.so.*"
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
+deleted file mode 100644
+index 839bfa4..0000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_0.8.18.bb
++++ /dev/null
+@@ -1,44 +0,0 @@
+-SUMMARY = "nodeJS Evented I/O for V8 JavaScript"
+-HOMEPAGE = "http://nodejs.org"
+-LICENSE = "MIT & BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=95a589a3257ab7dfe37d8a8379e3c72d"
+-
+-DEPENDS = "openssl"
+-
+-inherit pythonnative
+-
+-SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+-           file://0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch \
+-"
+-SRC_URI[md5sum] = "25ed6aa5710ac46b867ff3f17a4da1d6"
+-SRC_URI[sha256sum] = "1d63dd42f9bd22f087585ddf80a881c6acbe1664891b1dda3b71306fe9ae00f9"
+-
+-S = "${WORKDIR}/node-v${PV}"
+-
+-# v8 errors out if you have set CCACHE
+-CCACHE = ""
+-
+-ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)}"
+-ARCHFLAGS ?= ""
+-
+-# Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
+-do_configure () {
+-    export LD="${CXX}"
+-
+-    ./configure --prefix=${prefix} --without-snapshot ${ARCHFLAGS}
+-}
+-
+-do_compile () {
+-    export LD="${CXX}"
+-    make BUILDTYPE=Release
+-}
+-
+-do_install () {
+-    oe_runmake install DESTDIR=${D}
+-}
+-
+-RDEPENDS_${PN} = "curl python-shell python-datetime python-subprocess python-crypt python-textutils python-netclient "
+-RDEPENDS_${PN}_class-native = ""
+-
+-FILES_${PN} += "${libdir}/node/wafadmin ${libdir}/node_modules ${libdir}/dtrace ${libdir}/*"
+-BBCLASSEXTEND = "native"
 -- 
 2.1.4
 
