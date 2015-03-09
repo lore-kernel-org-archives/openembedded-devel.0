@@ -1,25 +1,39 @@
-Return-Path: <victor.rodriguez.bahena@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B432739A7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id E845073994
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Mar 2015 20:57:49 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga102.jf.intel.com with ESMTP; 09 Mar 2015 13:56:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,370,1422950400"; d="scan'208";a="677499135"
-Received: from vrodri3-mobl2.amr.corp.intel.com (HELO
-	vrodri3-mobl2.zpn.intel.com) ([10.219.4.31])
-	by fmsmga001.fm.intel.com with ESMTP; 09 Mar 2015 13:57:50 -0700
-From: Victor Rodriguez <victor.rodriguez.bahena@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Mar 2015 14:57:44 -0600
-Message-Id: <1425934664-14174-2-git-send-email-victor.rodriguez.bahena@intel.com>
-X-Mailer: git-send-email 1.9.3
+	Mon,  9 Mar 2015 21:02:55 +0000 (UTC)
+Received: by pdjy10 with SMTP id y10so27797349pdj.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Mar 2015 14:02:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=kWiPnZ0/HafVWIXTeF2SR+WCT3eI0aTfzFRUfFzd/gA=;
+	b=hWC/2NX/BvgK5QJp2NI4EUrAeKn9FcwnbgxoIMFJJBEDG8k5BvBTkMVkJ5OnnDByHC
+	Acmn05RrkenB9epj1jKyWmTizmWtvnExN2CSjXDBrycTvlruGEHZqIE/lOgxnlk8RnY9
+	+t1DiqeT0RCWW1xo0OIO1X+qsRo7ZbAEFzB4itj0QDSJ6aWIZz8qjcjSKglgK6XA/nt8
+	USyjY1KkhAemhRvAkE2WBd7NafmxQuGtlef0sGyIxSojNw5xorrqCaqWLzl9VMNe4woq
+	D2Q/EO0RRKUp4oRcsgAjR6cYeQ3uRx0IJSD9DuvTsNLbCnWWV9QUzTsTJf9beO2OB+4b
+	sVJg==
+X-Received: by 10.70.131.227 with SMTP id op3mr16903820pdb.12.1425934976741;
+	Mon, 09 Mar 2015 14:02:56 -0700 (PDT)
+Received: from ?IPv6:2601:9:3580:84c:489f:26b4:52a3:63c4?
+	([2601:9:3580:84c:489f:26b4:52a3:63c4])
+	by mx.google.com with ESMTPSA id n4sm20719053pdl.12.2015.03.09.14.02.55
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 09 Mar 2015 14:02:56 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+From: Khem Raj <raj.khem@gmail.com>
 In-Reply-To: <1425934664-14174-1-git-send-email-victor.rodriguez.bahena@intel.com>
+Date: Mon, 9 Mar 2015 14:02:54 -0700
+Message-Id: <02D93F92-159E-49EA-994E-3F82E6E3A955@gmail.com>
 References: <1425934664-14174-1-git-send-email-victor.rodriguez.bahena@intel.com>
-MIME-Version: 1.0
-Cc: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linux.intel.com>
-Subject: [meta-oe][PATCH 2/2] mpich: Disable RPATH to avoid issues in package_qa
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2070.6)
+Subject: Re: [meta-oe][PATCH 1/2] Add mpich support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,58 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2015 20:57:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Mar 2015 21:02:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Aníbal Limón <anibal.limon@linux.intel.com>
 
-Set --disable-rpath to extra opts in order to avoid issues
-in package_qa also change default pm to gforker because
-hydra has problems with RPATH.
+> On Mar 9, 2015, at 1:57 PM, Victor Rodriguez =
+<victor.rodriguez.bahena@intel.com> wrote:
+>=20
+> +do_configure_prepend() {
+> +    autoreconf --verbose --install --force -I . -I confdb/ -I maint/
+> +    oe_runconf
+> +    exit
+> +}
 
-TODO: Make a patch for solve hydra rpath issues.
-
-Signed-off-by: Aníbal Limón <anibal.limon@linux.intel.com>
----
- meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-index 2f4226e..0225cee 100644
---- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-+++ b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-@@ -1,20 +1,25 @@
--SUMMARY = "Message Passing Interface(MPI) implementation"
--HOMEPAGE = "http://git.mpich.org/mpich.git/"
-+SUMMARY = "Message Passing Interface (MPI) implementation"
-+HOMEPAGE = "http://www.mpich.org/"
- SECTION = "devel"
- 
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=2106f0435056f3dd9349747a766e5816"
- 
--SRC_URI = "http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz"
-+SRC_URI = " \
-+	http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz \
-+"
-+
- SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
- SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
- 
--RDEPENDS_${PN} += "bash perl tcsh"
-+RDEPENDS_${PN} += "bash perl libxml2"
- S = "${WORKDIR}/${PN}-${PV}"
- 
- EXTRA_OECONF = "--enable-debuginfo \
-                 --enable-fast \
-                 --enable-shared  \
-+                --with-pm=gforker  \
-+		--disable-rpath \
-                 --disable-f77 \
-                 --disable-fc \
-                 --disable-fortran \
--- 
-1.9.3
+Can this be replaced with EXTRA_AUTORECONF +=3D =E2=80=9C=E2=80=9D =
+mentioning any extra options you added above to autoreconf
 
 
