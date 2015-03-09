@@ -1,42 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DBDC7394F
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qg0-f43.google.com (mail-qg0-f43.google.com
+	[209.85.192.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 7668673996
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Mar 2015 16:18:41 +0000 (UTC)
-Received: by pdbft15 with SMTP id ft15so35559451pdb.6
+	Mon,  9 Mar 2015 19:21:22 +0000 (UTC)
+Received: by qgdz60 with SMTP id z60so31129473qgd.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Mar 2015 09:18:42 -0700 (PDT)
+	Mon, 09 Mar 2015 12:21:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=3O3qYDG8qR1KIoXCPsT7INc091S0o2xkdLabVFwn+AU=;
-	b=l+YXFz2eMdDs09Y3J0fDrfHp2eu3F815eKBn6NcN0GIm4V/pCZYHPBiTg/NyHruMIl
-	JFjmC04v9DVx7HOhRJSFxQsej/QBuhgecCXlqITgolckcIJl5oHvvp50F7Ma+drqro23
-	bR0pJydE5oZNfVF3fT2PsXyXx6UsltdW2x3xCb2qjSrQVzwzoo15dRt8iiEcdnkv9r7v
-	ATqz11xx5n/383JER7nokSqewm5Hv1OMFWz0bztQkreWhezm2T1a025iDrqIqh3RyWdL
-	aoEE2uEvdK7mZBHsHiDe+mDWZI0IsJOMw48vPWxWSEdd32+EB5Tch/Iad64DsfbKwx/m
-	uHkA==
-X-Received: by 10.70.90.110 with SMTP id bv14mr48713600pdb.8.1425917922717;
-	Mon, 09 Mar 2015 09:18:42 -0700 (PDT)
-Received: from ?IPv6:2601:9:3580:84c:5dec:324d:fc8d:ab4d?
-	([2601:9:3580:84c:5dec:324d:fc8d:ab4d])
-	by mx.google.com with ESMTPSA id
-	kn4sm20058186pab.48.2015.03.09.09.18.41
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 09 Mar 2015 09:18:42 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CANwerB1yuL_DBndAnH6WtZz5vfVGeEqG6N0HvC++hxP0mvxUww@mail.gmail.com>
-Date: Mon, 9 Mar 2015 09:18:41 -0700
-Message-Id: <38091DCF-053B-4916-B0BF-F0E918AEA133@gmail.com>
-References: <1425812371-1564-1-git-send-email-raj.khem@gmail.com>
-	<1425812371-1564-2-git-send-email-raj.khem@gmail.com>
-	<CANwerB1yuL_DBndAnH6WtZz5vfVGeEqG6N0HvC++hxP0mvxUww@mail.gmail.com>
-To: Jonathan Liu <net147@gmail.com>
-X-Mailer: Apple Mail (2.2070.6)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCHv3 2/2] nodejs: Upgrade to 0.12.0
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=cxf9ZMmpRAaBOQ48/0gRDeqbmhxoqOA1r42E+Tcr7j8=;
+	b=i3P8LU1WsAuD8Ov65TAudc+SPK4XWltqYimFXQisb2IKf9wRK9JjnHG6xcPCfc/moq
+	g7fBwJS2RetnnagFMMPOWusYuJCwhWzPdVLmqbLr2a1CsxFIRS+f9lKcyjyhMQKNY4Hy
+	YOJ/oU9sB1QHOljqWMwckXGdj45i3pWKe595GuIlW8ARG8Gjvrwogb248n9NKiHZTk9l
+	12sgbfzcyId7yzZ2ppTpBXm26eDOkMklebLELqrEy5dCvelDWRaUT2IhsZ1amCXT/x+m
+	7grYnrQtPNzmoR4nupEaSHmM0ypIXgCBS5mytfUdsqhcRrI5z64giVa6koSCrjgvYxDX
+	tVGQ==
+X-Received: by 10.140.27.129 with SMTP id 1mr35907600qgx.64.1425928884083;
+	Mon, 09 Mar 2015 12:21:24 -0700 (PDT)
+Received: from thuvia.localdomain (pool-71-171-10-241.ronkva.east.verizon.net.
+	[71.171.10.241])
+	by mx.google.com with ESMTPSA id 22sm12141195qgj.49.2015.03.09.12.21.20
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 09 Mar 2015 12:21:20 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  9 Mar 2015 15:21:14 -0400
+Message-Id: <1425928875-29697-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-oe][PATCH 1/2] sip: Split python into a new package for runtime support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,24 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2015 16:18:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 Mar 2015 19:21:25 -0000
 
+The package is named python-sip for backwards compatibility.
 
-> On Mar 9, 2015, at 12:51 AM, Jonathan Liu <net147@gmail.com> wrote:
->=20
-> Hi Khem,
->=20
-> On 8 March 2015 at 21:59, Khem Raj <raj.khem@gmail.com> wrote:
->> +RDEPENDS_${PN} =3D "curl"
->> +RDEPENDS_${PN}_class-native =3D ""
->=20
-> Does using node actually depend on curl at runtime?
-> I haven't noticed any runtime dependency on curl when using the node =
-executable.
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ meta-oe/recipes-extended/sip/sip_4.16.4.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-its cruft from past. at best it could be RSUGGESTS for nodejs-nmp =
-package
-send a followup if you can.=
+diff --git a/meta-oe/recipes-extended/sip/sip_4.16.4.bb b/meta-oe/recipes-extended/sip/sip_4.16.4.bb
+index 607ace6..780ccdc 100644
+--- a/meta-oe/recipes-extended/sip/sip_4.16.4.bb
++++ b/meta-oe/recipes-extended/sip/sip_4.16.4.bb
+@@ -14,6 +14,8 @@ SRC_URI[sha256sum] = "ceda443fc5e129e67a067e2cd7b73ff037f8b10b50e407baa2b1d9f219
+ 
+ BBCLASSEXTEND = "native"
+ 
++PACKAGES += "python-sip"
++
+ inherit qmake2 python-dir pythonnative distro_features_check
+ # depends on qt4-x11-free
+ REQUIRED_DISTRO_FEATURES = "x11"
+@@ -47,6 +49,6 @@ do_install() {
+     oe_runmake install
+ }
+ 
+-FILES_${PN} += "${libdir}/${PYTHON_DIR}/site-packages/"
++FILES_python-${PN} = "${libdir}/${PYTHON_DIR}/site-packages/"
+ FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
+ 
+-- 
+2.1.0
+
 
