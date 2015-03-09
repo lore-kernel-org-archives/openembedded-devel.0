@@ -1,48 +1,37 @@
-Return-Path: <jbriance@cisco.com>
-X-Greylist: delayed 636 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 09 Mar 2015 13:11:58 UTC
-Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
-	by mail.openembedded.org (Postfix) with ESMTP id C780373927
+Return-Path: <frederico@cadete.eu>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 55CC673929
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Mar 2015 13:11:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=1326; q=dns/txt; s=iport;
-	t=1425906722; x=1427116322;
-	h=from:to:subject:date:message-id:references:in-reply-to:
-	content-transfer-encoding:mime-version;
-	bh=p1S2dfEcEv7B28geUfl1CaY6FpJuDTAtAPnGSHzMvFc=;
-	b=JMjvCKbpEQpQSaKKr4VwJSSuV8d4sH1fKUgqGyjHFN9pP7HhggQhZ0Dy
-	WltBNyZo4ZmwfeT5iUu4+Vl5jWsVkkbf0ERn2bp2aplCSLKp6t7Q2vFmh
-	4eiK5PljDYWHQp3ZXryyCDfdjfwvJTRG9h9zIvCZCIx1HXZifR9KeGCY0 Y=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A0CIHQBxmf1U/4sNJK1XA4MGUloEv2lFgiwKhSdJAoElTQEBAQEBAXyEDwEBAQQBAQE3NBcEAgEIEQQBAQEKFAkHJwEKFAkIAgQTCIgnDcNNAQEBAQEBAQEBAQEBAQEBAQEBAQEBF4sXhD0hFwYLgwaBFgWQD4Nkg06DdJIhI4IygTxvgUR/AQEB
-X-IronPort-AV: E=Sophos;i="5.11,367,1422921600"; d="scan'208";a="402030081"
-Received: from alln-core-6.cisco.com ([173.36.13.139])
-	by rcdn-iport-6.cisco.com with ESMTP; 09 Mar 2015 13:01:14 +0000
-Received: from xhc-aln-x01.cisco.com (xhc-aln-x01.cisco.com [173.36.12.75])
-	by alln-core-6.cisco.com (8.14.5/8.14.5) with ESMTP id t29D1E8n017185
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  9 Mar 2015 13:50:31 +0000 (UTC)
+Received: by padfa1 with SMTP id fa1so66708004pad.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 Mar 2015 13:01:14 GMT
-Received: from xmb-aln-x12.cisco.com ([169.254.7.174]) by
-	xhc-aln-x01.cisco.com ([173.36.12.75]) with mapi id 14.03.0195.001;
-	Mon, 9 Mar 2015 08:01:14 -0500
-From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-qt5][PATCH] qt5-git, qtbase, qt5everywheredemo: use
-	https protocol for gitorious
-Thread-Index: AQHQWmiJ33xeLmJoBUWxdw2Dwk7aoJ0UHMPw
-Date: Mon, 9 Mar 2015 13:01:13 +0000
-Message-ID: <5940D1D9F240BA44AEF939055CF1358D05983328@xmb-aln-x12.cisco.com>
+	Mon, 09 Mar 2015 06:50:33 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=7HF5nY1pK3nnLAAdsX2U8uoHO98Ea+mZCsM9kT9oBss=;
+	b=KaU7zislqlnvmzcp709x6BQfVqzh7rue89jfzGWMtSkTMYwhFKEsfJqXiL3Hz1c+2M
+	Qzc/I30+1Uc/g1mD+iie5KDY4aWZLxaTVcaqHz8D43L5KjwQg7Dqw+QsoQwDXmcIjccP
+	PIXFHgb+SW4U1DpuIWN75Gxj4BVMlEdspM76OGWdmthVqyxkFIh1GWDIecqmniyfLh6p
+	PndcpCswa862vODbUEMtP5l7GupldbQnJQNbTVNngcB5zpDUsVocuqwZGdAoNXDPtTiA
+	f3UfuppqYiVIitSm5rBayOclCdk4R8LkmfFobTb/Y+ErawIrqmKcm1GUOb4yQ+Ya4Kiy
+	z4Hw==
+X-Gm-Message-State: ALoCoQkBYIvXmeq4gko41otzKm0dsBlh8L69786X6UkioiHNZPWG6YybeGdtoct+GF23TLuKHC3r
+X-Received: by 10.66.221.194 with SMTP id qg2mr54198397pac.106.1425909033341; 
+	Mon, 09 Mar 2015 06:50:33 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.66.139.198 with HTTP; Mon, 9 Mar 2015 06:50:13 -0700 (PDT)
+X-Originating-IP: [212.166.56.147]
+In-Reply-To: <5940D1D9F240BA44AEF939055CF1358D05983328@xmb-aln-x12.cisco.com>
 References: <CAL5ScNULNnnK5NyZ9SN2q2fidHpDW8XR6DL_kkMujgTXDCogFw@mail.gmail.com>
 	<CAP9ODKqqy9xU3NW=0LDzsVDokA5xiCnH49kY2Kw_wVSL9U1bQA@mail.gmail.com>
-In-Reply-To: <CAP9ODKqqy9xU3NW=0LDzsVDokA5xiCnH49kY2Kw_wVSL9U1bQA@mail.gmail.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.60.62.144]
-MIME-Version: 1.0
+	<5940D1D9F240BA44AEF939055CF1358D05983328@xmb-aln-x12.cisco.com>
+From: Frederico Cadete <frederico@cadete.eu>
+Date: Mon, 9 Mar 2015 14:50:13 +0100
+Message-ID: <CAL5ScNUOLrvKqKerezbgBrNmgHuvQr-b6ZrARU9wHqBa+43NiQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-qt5][PATCH] qt5-git, qtbase, qt5everywheredemo: use https protocol for gitorious
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -57,43 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2015 13:12:01 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 09 Mar 2015 13:50:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Wouldn't be better to move to http://code.qt.io/ ? This is the new place wh=
-ere Qt repositories are hosted, and it supports git:// protocol.
-
-Julien
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Otavio Salvador
-Sent: lundi 9 mars 2015 13:56
-To: Frederico Cadete
-Cc: OpenEmbedded Devel List
-Subject: Re: [oe] [meta-qt5][PATCH] qt5-git, qtbase, qt5everywheredemo: use=
- https protocol for gitorious
-
-On Mon, Mar 9, 2015 at 9:52 AM, Frederico Cadete <frederico@cadete.eu> wrot=
-e:
-> As of Gitorious 3.2, this service no longer supports the git:// protocol.
+On Mon, Mar 9, 2015 at 2:01 PM, Julien Brianceau (jbriance)
+<jbriance@cisco.com> wrote:
+> Wouldn't be better to move to http://code.qt.io/ ? This is the new place where Qt repositories are hosted, and it supports git:// protocol.
 >
-> Added ";protocol=3Dhttps" to the SRC_URI's that are pointing there.
+> Julien
 >
-> Signed-off-by:Frederico Cadete <frederico@cadete.eu>
 
-Being it now a GitLab company it seems good to move out to github and avoid=
- another migration in near future.
+That sounds good and is working on my side.
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+The remaining question is qt5everywheredemo. It has
+ HOMEPAGE = "https://qt.gitorious.org/qt-labs"
+
+This will have to change soon, but I don't know to where.
+
+Sorry for the "invisible" patch, the mailing list blocked it while I
+was not a subscriber.
+I will follow up with a PR.
 
