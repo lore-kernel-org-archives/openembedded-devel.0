@@ -1,35 +1,45 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-yk0-f181.google.com (mail-yk0-f181.google.com
-	[209.85.160.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 48C30739CF
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-we0-f176.google.com (mail-we0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 40CB473A6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 14:08:49 +0000 (UTC)
-Received: by ykp9 with SMTP id 9so811104ykp.3
+	Tue, 10 Mar 2015 14:38:51 +0000 (UTC)
+Received: by wevl61 with SMTP id l61so2278543wev.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 07:08:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=hAY3o9gZYswwRm2IhwIrqENQG7p7mkm8ne5EPzvgn5A=;
-	b=Av4bokNh4x3Digb2A+34x9RMtK7SWuUiTF4JuvULgAuezNRpTBl2kZbf4VjMJAxFmg
-	J/BJXShjecnCAF9xqLFP3ZkD8yKo2Cbhf9RfVGWnGAliXPszlKJhMNYocyX0WTbzVvut
-	iAWRJg+OEcX+WQBK42/szbnaAwR74JjQOL64hezWcvQ30rWScMcwOG90+l0hlE6gEzSg
-	VE/xHSDfv2bj46whEwG9fYFdZiU/ACtAe27MrMW/eUs9oByP4WxZTV06EpmXnH6Dz/gT
-	krt7tm1+MUOu1SkAv7GOpER3nFHL/gQA3uIRz2ILiouahktM67GxzXeslIAcDu3lPrzP
-	zdvA==
+	Tue, 10 Mar 2015 07:38:52 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=9BzSWzQVudIOAUCj4VZ4Y8b2GU0e/r7LNuyIfVS44yA=;
+	b=Ob51dcK3RQWHx13irGRWwMCoGBPq9ypiCF6T4nsfZ8GDuveeNwgPnRyGfgsS+Bfahw
+	v0ituQJR11EQbiSVBqOtLZKmugbQBV8fVLRsDlTgskyINhLAd9IPMDCQB7ULFD3BNWV2
+	5hyKCD9AobM72zexRC170bbNB/8v/UcZCdawtPe2Rew+JyIuhmDdDDo4h3KNibax46H2
+	LNrE2H7GVCm5eeyQ2bIz8hXbno0etpY5jGDAfewvUhg2xgFpTdRxMQlVAtLuPTVc45Pa
+	0rfijG7NAkGTZEnEfZ+szaBSTYzDY9CpvUjNetf9qLAKEpl1Y/OfOt3eF4ksTF296/3a
+	WEig==
+X-Gm-Message-State: ALoCoQmcyokp3e3ZDTokYk1lynCp8+VNWtZI/MWCSDnqsgJanRlyWpVi6gdP+TkAxOrpVwZeAHIr
+X-Received: by 10.194.59.112 with SMTP id y16mr70835755wjq.36.1425998332763;
+	Tue, 10 Mar 2015 07:38:52 -0700 (PDT)
+Received: from [172.29.23.6] (zk223.dresearch-fe.de. [217.92.177.116])
+	by mx.google.com with ESMTPSA id q10sm2147529wic.5.2015.03.10.07.38.51
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 10 Mar 2015 07:38:51 -0700 (PDT)
+Message-ID: <54FF01FA.4040403@dresearch-fe.de>
+Date: Tue, 10 Mar 2015 15:38:50 +0100
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-X-Received: by 10.170.133.13 with SMTP id z13mr4069653ykb.30.1425996530905;
-	Tue, 10 Mar 2015 07:08:50 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.170.112.71 with HTTP; Tue, 10 Mar 2015 07:08:50 -0700 (PDT)
-In-Reply-To: <1425989994-22071-1-git-send-email-magnus@minimum.se>
-References: <1425989994-22071-1-git-send-email-magnus@minimum.se>
-Date: Tue, 10 Mar 2015 11:08:50 -0300
-X-Google-Sender-Auth: tEd5oghwAjeufW0OOQLOxR5LrPY
-Message-ID: <CAP9ODKpy9HsOfQF+Shy7HON7k34+RJ97d=azmGt=hrvkhE50jw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] initials: silence "populate_sysroot manifest not found" warnings
+To: Koen Kooi <koen@dominion.thruhere.net>
+References: <54FD8999.4030303@dresearch-fe.de>
+	<FAE79245-0EDA-4219-86E5-A3950BDA7682@dominion.thruhere.net>
+In-Reply-To: <FAE79245-0EDA-4219-86E5-A3950BDA7682@dominion.thruhere.net>
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
+Subject: Re: meta-angstrom commit 75f0f25e breaks build of opencv from meta-openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,38 +53,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 14:08:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Mar 2015 14:38:52 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 8bit
 
-On Tue, Mar 10, 2015 at 9:19 AM, Magnus Olsson <magnus@minimum.se> wrote:
-> A number of recipes in meta-java use autotools.bbclass for building; internally
-> it uses the sstate-control populate_sysroot manifests to locate and copy
-> aslocals for configure dependencies as part of the do_configure step.
-> The manifest path differs depending on if it's a native package or not so
-> autotools.bbclass looks at the package name to determine if its native or not
-> (it's native if it ends with "-native").
->
-> The warnings are emitted because a few (native) recipes in meta-java (such as
-> cacao-initial, classpath-initial and more) are incorrectly being classified as
-> non-native by autotools.bbclass, which makes it look for the manifest in the
-> wrong place and finally gives up with the warning:
->
-> WARNING: /home/oe/tmp-glibc/sstate-control/manifest-mymachine-libecj-bootstrap.populate_sysroot not found
->
-> This happens for cacao-initial, classpath-initial, ecj-initial, libecj-boostrap,
-> jamvm-initial and jikes-initial since they are all native and rely on autotools.
->
-> This patch renames the recipes so they end with -native, e.g ecj-initial-native.
-> It also updates the recipes so they DEPEND on the corresponding new name. This
-> helps autotools.bbclass to properly classify the recipes are native and silence
-> the warnings.
->
-> Signed-off-by: Magnus Olsson <magnus@minimum.se>
+On 10.03.2015 14:50, Koen Kooi wrote:
+> 
+>> Op 9 mrt. 2015, om 12:52 heeft Steffen Sledz <sledz@dresearch-fe.de> het volgende geschreven:
+>>
+>> Commit 75f0f25e55f0745a011640b5c81d88be99366f45 in meta-angstrom/recipes-tweaks (branch angstrom-v2014.12-yocto1.7) introduces version 10.5 of libav.
+>>
+>> This version does no longer provide defines like CODEC_ID_H264 which are needed for opencv 2.4.9 from meta-openembedded/meta-oe/recipes-support (branch dizzy).
+>>
+>> ---------------------> snip <----------------------
+>> .../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:104:7: error: 'CODEC_ID_H264' was not declared in this scope
+>>     { CODEC_ID_H264, MKTAG('H', '2', '6', '4') },
+>>       ^
+>> .../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:105:7: error: 'CODEC_ID_H264' was not declared in this scope
+>>     { CODEC_ID_H264, MKTAG('h', '2', '6', '4') },
+>>       ^
+>> .../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:106:7: error: 'CODEC_ID_H264' was not declared in this scope
+>>     { CODEC_ID_H264, MKTAG('X', '2', '6', '4') },
+>>       ^
+>> .../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:107:7: error: 'CODEC_ID_H264' was not declared in this scope
+>>     { CODEC_ID_H264, MKTAG('x', '2', '6', '4') },
+>> ...
+>> ---------------------> snip <----------------------
+>>
+>> I'm not sure if this problem occurs in the master branches too, but the dizzy/angstrom-v2014.12-yocto1.7 branches are unusable for some of our applications beacause of this problem at the moment. :(
+> 
+> Sorry about that, I looked at that this weekend, but forgot to push the patches to meta-angstrom. 744d6439175058909002d1e22439e93945d53e22 should fix the issues you are seeing.
 
-What about the target packages? instead a class extend could be used.
+Yupp. Fixed.
+
+Thx,
+Steffen
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
