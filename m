@@ -1,28 +1,43 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id A119773A1E
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 6165D73A1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 13:44:36 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1YVKSb-0006Tj-Uo from Joe_MacDonald@mentor.com ;
-	Tue, 10 Mar 2015 06:44:37 -0700
-Received: from NA-MBX-04.mgc.mentorg.com ([169.254.4.29]) by
-	SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) with mapi id
-	14.03.0224.002; Tue, 10 Mar 2015 06:44:35 -0700
-From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: meta-networking pending patches
-Thread-Index: AdBbOFeMuMy4VCkQlk2sS9/D01u7Hg==
-Date: Tue, 10 Mar 2015 13:44:34 +0000
-Message-ID: <EC21369A6993DD47985E1CBF1038266E263DC619@NA-MBX-04.mgc.mentorg.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-networking pending patches
+	Tue, 10 Mar 2015 13:50:31 +0000 (UTC)
+Received: by wiwl15 with SMTP id l15so28737659wiw.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Mar 2015 06:50:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:content-type:mime-version:subject:from
+	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
+	:to; bh=yCi60xBwd1zeoarVK49Ovh8wG0rD4fNclShEt6H8oYk=;
+	b=JYPtcCCSbgcCspQ4r/t9ycmGlkrXlOo1l8HCdv4XOfCL2D0HAi9zC60IqNHhVZyiCk
+	qcy9pTEYNey7jTNTcPSk0D8a+BkdweAkY+QEy+DY61BssF06nHIRCZIfcatgPZZdGWtA
+	fGlumlTzDDUYAYCGf6lw9m/ZgglQQFnfL8NAUEfrPU1MbuXkGhPA93b+qRr4K91amJeG
+	E1EvUuQngyWn891Ci09QWarod6XYurI0eYl0Qy7wd++WUCRVhTtNdZzvCtcf/Qz0KT48
+	cehRG8yHXHmQK9nmbfRwXML7V+2eOF1Qhbey5V5kO2bo8LkN4jvjKqxvP8ggOvQVdsVp
+	S4Zg==
+X-Gm-Message-State: ALoCoQlHzcsbwsazlLWer2Nj4xRXcRBHuQ+HOAHPv4IAs6nQ4Ph//PiuZIXAvPY1zymgm0UI2Bp7
+X-Received: by 10.194.192.167 with SMTP id hh7mr68820065wjc.151.1425995432022; 
+	Tue, 10 Mar 2015 06:50:32 -0700 (PDT)
+Received: from ?IPv6:2001:610:612::5ded:8042:1da1:b2fd?
+	([2001:610:612:0:5ded:8042:1da1:b2fd])
+	by mx.google.com with ESMTPSA id gt4sm1666698wib.21.2015.03.10.06.50.30
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 10 Mar 2015 06:50:30 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <54FD8999.4030303@dresearch-fe.de>
+Date: Tue, 10 Mar 2015 14:50:28 +0100
+Message-Id: <FAE79245-0EDA-4219-86E5-A3950BDA7682@dominion.thruhere.net>
+References: <54FD8999.4030303@dresearch-fe.de>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+X-Mailer: Apple Mail (2.2070.6)
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	angstrom-distro-devel <angstrom-distro-devel@linuxtogo.org>
+Subject: Re: meta-angstrom commit 75f0f25e breaks build of opencv from meta-openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,26 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 13:44:39 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 10 Mar 2015 13:50:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-U3VyZSB0aGluZy4gSSdsbCBoYXZlIGEgbG9vayB0b2RheSBhbmQgdXBkYXRlIHRoZSBzdGF0dXMg
-YXBwcm9wcmlhdGVseS4NCg0KLUouDQoNCk9uIDEwIE1hciAyMDE1IDA2OjMwLCBNYXJ0aW4gSmFu
-c2EgPG1hcnRpbi5qYW5zYUBnbWFpbC5jb20+IHdyb3RlOg0KSGkgSm9lLA0KDQpjYW4geW91IHBs
-ZWFzZSBjaGVjayBwZW5kaW5nIG1ldGEtbmV0d29ya2luZyBwYXRjaGVzPw0KDQpteSBtYXN0ZXIt
-bmV4dCBzaG93czoNCnBpY2sgZTdiZTMzMSBvcGVubDJ0cDogYWRkIG5ldyByZWNpcGUNCnBpY2sg
-NjQ0NjFlMSBpcHZzYWRtOiBBZGQgdmVyc2lvbiAxLjI2IChpbml0aWFsIHJlY2lwZSkNCnBpY2sg
-ZjViYTVhZiBuZXRraXQtdGVsbmV0OiBhZGQgbmV3IHJlY2lwZQ0KcGljayAxZTZkZDk5IGlzY3Np
-LWluaXRpYXRvci11dGlsczogZml4IFNFTGludXggbGFiZWwgZm9yIGluaXRpYXRvcm5hbWUuaXNj
-c2kNCnBpY2sgOGEwOWFjNiB2bGFuOiBpbnN0YWxsIHZjb25maWcgaW50byAvc2JpbiBzYW1lIGFz
-IFVidW50dSBhbmQgRmVkb3JhLg0KcGljayA2ZmRhZGJlIHN0dW5uZWw6IFVwZGF0ZSB0byB2ZXJz
-aW9uIDUuMTANCnBpY2sgZTc0YjMyNSBwb3N0Zml4OiBhZGQgbGluayBmaWxlIC91c3IvbGliL3Nl
-bmRtYWlsDQpwaWNrIDY0ZGU1MGMgd2lyZXNoYXJrOiB1cGRhdGUgdG8gMTIuNA0KcGljayA0NDI4
-YTQ0IGNyZGE6IG1vdmUgbGlibmwsIGxpYmdjcnlwdCB0byBERVBFTkRTDQpwaWNrIDVjZDk0MTcg
-ZXNtdHA6IHVwZGF0ZSBzZW5kbWFpbCBsaW5rIGZpbGVzDQoNCmFuZCBmZXcgbW9yZSBhcmUgaW4g
-cGF0Y2h3b3JrOg0KaHR0cDovL3BhdGNod29yay5vcGVuZW1iZWRkZWQub3JnL2J1bmRsZS9qYW1h
-L21ldGEtbmV0d29ya2luZy8/YXJjaGl2ZT1ib3RoDQoNClRoYW5rcw0KLS0NCk1hcnRpbiAnSmFN
-YScgSmFuc2EgICAgIGphYmJlcjogTWFydGluLkphbnNhQGdtYWlsLmNvbQ0K
+
+> Op 9 mrt. 2015, om 12:52 heeft Steffen Sledz <sledz@dresearch-fe.de> =
+het volgende geschreven:
+>=20
+> Commit 75f0f25e55f0745a011640b5c81d88be99366f45 in =
+meta-angstrom/recipes-tweaks (branch angstrom-v2014.12-yocto1.7) =
+introduces version 10.5 of libav.
+>=20
+> This version does no longer provide defines like CODEC_ID_H264 which =
+are needed for opencv 2.4.9 from =
+meta-openembedded/meta-oe/recipes-support (branch dizzy).
+>=20
+> ---------------------> snip <----------------------
+> =
+.../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+=
+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:104:7: error: =
+'CODEC_ID_H264' was not declared in this scope
+>     { CODEC_ID_H264, MKTAG('H', '2', '6', '4') },
+>       ^
+> =
+.../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+=
+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:105:7: error: =
+'CODEC_ID_H264' was not declared in this scope
+>     { CODEC_ID_H264, MKTAG('h', '2', '6', '4') },
+>       ^
+> =
+.../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+=
+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:106:7: error: =
+'CODEC_ID_H264' was not declared in this scope
+>     { CODEC_ID_H264, MKTAG('X', '2', '6', '4') },
+>       ^
+> =
+.../tmp-glibc/work/armv5te-angstrom-linux-gnueabi/opencv/2.4.9+gitAUTOINC+=
+df8e28283f-r0/git/modules/highgui/src/ffmpeg_codecs.hpp:107:7: error: =
+'CODEC_ID_H264' was not declared in this scope
+>     { CODEC_ID_H264, MKTAG('x', '2', '6', '4') },
+> ...
+> ---------------------> snip <----------------------
+>=20
+> I'm not sure if this problem occurs in the master branches too, but =
+the dizzy/angstrom-v2014.12-yocto1.7 branches are unusable for some of =
+our applications beacause of this problem at the moment. :(
+
+Sorry about that, I looked at that this weekend, but forgot to push the =
+patches to meta-angstrom. 744d6439175058909002d1e22439e93945d53e22 =
+should fix the issues you are seeing.
+
+regards,
+
+Koen=
 
