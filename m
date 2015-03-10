@@ -1,32 +1,30 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by mail.openembedded.org (Postfix) with ESMTP id A2A1C73A92;
-	Tue, 10 Mar 2015 21:16:28 +0000 (UTC)
-Received: by obbnt9 with SMTP id nt9so4668213obb.12;
-	Tue, 10 Mar 2015 14:16:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=DYHQ8fqmmghG4FOSQSEdnZfFXvWoaTeU/V3uRzRlACw=;
-	b=c6IHNC122BnIUI8WirtcH4GqDde2/uqxDMIvZA1U2qp5IBaZkA7/7qRKZ6xWdo8xZ7
-	e++SAhdilFaBvg4MQqW/GLn0yhJ6vTsxvkgGdRTzUSGOiAS48bef4WL8PeyKA704uo5y
-	9zkcRd17DLl1k58ZpeHgFaufLcz8fpXbzx2BzmPpo/Q3evsZzywLXMJaAJBdU2/vqt77
-	HhI1sVTzmqzdmZC1JcRmS8wn4I5qM35BzKbdnqX3FDWusj55iLVBYbQvBWBI20NbmrOU
-	fV4N8OIU2qu07I8C77jnK6ch37OXjql0DOJaqhskSjEltNimnkQqOIgJaKuxehtHgOqN
-	sSXQ==
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B9B473A9A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Mar 2015 21:28:25 +0000 (UTC)
+Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
+	by relay1.mentorg.com with esmtp 
+	id 1YVRhS-0007Mh-Q5 from Joe_MacDonald@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Mar 2015 14:28:26 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 10 Mar 2015 14:28:26 -0700
+Received: by burninator (Postfix, from userid 1000)	id 350B9581E85; Tue, 10
+	Mar 2015 17:28:33 -0400 (EDT)
+Date: Tue, 10 Mar 2015 17:28:33 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20150310212832.GA4083@mentor.com>
+References: <CAL0pqZ15mf+jANcqzD=EAYs-BOKThCdWdzO2J2aRaV1v4moO=g@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.60.94.199 with SMTP id de7mr27309007oeb.23.1426022189407;
-	Tue, 10 Mar 2015 14:16:29 -0700 (PDT)
-Received: by 10.202.217.69 with HTTP; Tue, 10 Mar 2015 14:16:29 -0700 (PDT)
-In-Reply-To: <1421387378-4580-1-git-send-email-armccurdy@gmail.com>
-References: <1421387378-4580-1-git-send-email-armccurdy@gmail.com>
-Date: Tue, 10 Mar 2015 14:16:29 -0700
-Message-ID: <CAJ86T=VcAgAVpk0EtU10miZzUjVb7RCqw1DQ0zgZHrktuyZ_DA@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	OE Core mailing list <openembedded-core@lists.openembedded.org>
-Subject: Re: [meta-qt5] hardcoded rpath in Qt 5.4.0 qtbase-native uic binary
+In-Reply-To: <CAL0pqZ15mf+jANcqzD=EAYs-BOKThCdWdzO2J2aRaV1v4moO=g@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: Recipe Name Change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,85 +38,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 21:16:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Mar 2015 21:28:27 -0000
+X-Groupsio-MsgNum: 54728
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="h31gzZEtNLTqOjlF"
+Content-Disposition: inline
 
-On Thu, Jan 15, 2015 at 9:49 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> The Qt 5.4.0 qtbase-native uic binary seems to get built with a
-> hardcoded RUNPATH, which causes problems when qtbase-native from
-> sstate is later reused by a different build. The issue has been
-> there since 5.4.0 alpha1 (5.3.2 is OK).
->
+--h31gzZEtNLTqOjlF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I'm still seeing this issue with Qt 5.4.1 and it seems to be related
-to using gold as the linker (ie adding ld-is-gold to DISTRO_FEATURES).
+[[oe] Recipe Name Change] On 15.03.10 (Tue 11:59) Leah wrote:
 
-With Qt 5.4.x, including ld-is-gold in DISTRO_FEATURES causes uic (and
-other qtbase-native binaries) to be linked with "-fuse-ld=gold", which
-causes these binaries to have runtime library paths defined via
-"RUNPATH" instead of "RPATH".
+> Hi,
+>=20
+> We have recently changed the name of our product from CyaSSL to wolfSSL. I
+> would like to update to a recipe reflecting this name. Our current recipe
+> is located at
+> https://github.com/openembedded/meta-oe/tree/master/meta-networking/recip=
+es-connectivity/cyassl.
+> Should I make a commit to delete cyassl and a separate commit to add the
+> new wolfssl recipe? Or should this be done in one commit?
 
-Since chrpath.bbclass only fixes absolute paths in "RPATH", the
-absolute paths specified via "RUNPATH" in the installed binaries don't
-get fixed.
+I would rather see it done as a 'git mv', meaning one commit, with the
+proper migration path variables added either in the same commit (the
+diffs will still be nice and clean when you do a -M on them) as Khem
+described.
 
+-J.
 
-> --
->
-> Build Configuration:
-> BB_VERSION        = "1.25.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "LinuxMint-17.1"
-> TARGET_SYS        = "i586-rdk-linux"
-> MACHINE           = "vbox32"
-> DISTRO            = "rdk"
-> DISTRO_VERSION    = "2.0"
-> TUNE_FEATURES     = "m32 core2"
-> TARGET_FPU        = ""
-> meta-bsp-vbox     = "(detachedfrom253724d):253724dfeace58edbb40025fa8e4b5ace2c90164"
-> meta-rdk          = "(detachedfrom724d5c0):724d5c0030e3d2a53aad1929393ba2c00122ab91"
-> meta-qt5          = "(detachedfromec50df6):ec50df68b80f9704f135dd4c9f384a5596ec77cb"
-> meta-metrological = "(nobranch):abbd111fee3ae1ade2fc2997ccda0eb9782da761"
-> meta-multimedia
-> meta-filesystems
-> meta-oe
-> meta-python
-> meta-networking
-> meta-ruby         = "(detachedfrom7bbacd0):7bbacd0023fa1111da94ba0b2aafd7d872301ffe"
-> meta              = "(detachedfromb61a2ac):b61a2acc321489c3427f0afa3059486dc144a13b"
->
->
-> $ readelf -d tmp/sysroots/x86_64-linux/usr/bin/qt5/uic
->
-> Dynamic section at offset 0x80c60 contains 27 entries:
->   Tag        Type                         Name/Value
->  0x0000000000000003 (PLTGOT)             0x481fe8
->  0x0000000000000002 (PLTRELSZ)           4368 (bytes)
->  0x0000000000000017 (JMPREL)             0x4033a0
->  0x0000000000000014 (PLTREL)             RELA
->  0x0000000000000007 (RELA)               0x4031a8
->  0x0000000000000008 (RELASZ)             504 (bytes)
->  0x0000000000000009 (RELAENT)            24 (bytes)
->  0x0000000000000015 (DEBUG)              0x0
->  0x0000000000000006 (SYMTAB)             0x400298
->  0x000000000000000b (SYMENT)             24 (bytes)
->  0x0000000000000005 (STRTAB)             0x401570
->  0x000000000000000a (STRSZ)              6625 (bytes)
->  0x000000006ffffef5 (GNU_HASH)           0x402f58
->  0x0000000000000001 (NEEDED)             Shared library: [libQt5Core.so.5]
->  0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]
->  0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
->  0x000000000000000c (INIT)               0x4044b0
->  0x000000000000000d (FINI)               0x4571cc
->  0x000000000000001a (FINI_ARRAY)         0x480ce8
->  0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)
->  0x0000000000000019 (INIT_ARRAY)         0x480cf0
->  0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)
->  0x000000000000001d (RUNPATH)            Library runpath: [/home/andre/rdk/rdk-master/build-vbox32/tmp/sysroots/x86_64-linux/usr/lib:/home/andre/rdk/rdk-master/build-vbox32/tmp/sysroots/x86_64-linux/lib]
->  0x000000006ffffff0 (VERSYM)             0x402f90
->  0x000000006ffffffe (VERNEED)            0x403124
->  0x000000006fffffff (VERNEEDNUM)         2
->  0x0000000000000000 (NULL)               0x0
->
->
+>=20
+> Thanks,
+>=20
+> Leah
+>=20
+>=20
+> --=20
+>=20
+> Leah Thompson
+> www.wolfssl.com
+> leah@wolfssl.com
+> 406-570-1389
+> Skype: lchristina26
+--=20
+-Joe MacDonald.
+:wq
 
+--h31gzZEtNLTqOjlF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iQEcBAEBAgAGBQJU/2H9AAoJEEn8ffcsOfaWY5oIAJn5Do02v/ZcSFenPSunR8rI
+o1EYp+K0nm3waJM/Mtu38csjZmr6BxmFTamwu+/KazfG+Bk263D43lcM0w16ZH1H
+E7QGmOrvmYmWJC4rHLiVujaoEtG7Tyfa0fgShrFx+lBcSon18glkh9b1eh/CdejM
+brUtW/8ql3xVsmRagtEupjGg46Cm8oxXxhlDeG30EW4PyUsrF0QEMJn0s3o9Jm+e
+qMVBh6OecOYQuTXWdIDB47FlNympmElE+P2uyWZXHOF3KvnsWSmhtNECJYiClZcQ
+USUV5xj4DE9NNwzNsPUyuKaSzmh+y9BsuuuNNBOwflr9p5hZmEO87806MuMXr2U=
+=e2tU
+-----END PGP SIGNATURE-----
+
+--h31gzZEtNLTqOjlF--
