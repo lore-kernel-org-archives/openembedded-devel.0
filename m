@@ -1,38 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B06873A22
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id A119773A1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 13:30:00 +0000 (UTC)
-Received: by wibbs8 with SMTP id bs8so30211647wib.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 06:30:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=Shci06xStZVEXTZ/joElv+VexZ5OyTnplE6RJYFqsc4=;
-	b=b3E/EMjTZWw5PQBwTOk9t2yxI0arRWVLBYN5xPcobSRrJApUvJFacPmQYrUe0gop/z
-	ufjTpitd0WQd20fiNmOGdva5zyCPNHcFv5OynPLjHesJomD3emEmd2YCMEpSoB7LFaPo
-	pHBlBP94N/SOkNAOZuYdfCue339KL0cIbkck42QMDTcUAFsvZk3iLczTxab4xBymzLX7
-	da5mZoy6whkYrk6a7O4C7nBHlWTv13PGD7YqaZnnxJG9elYJIDiRvBxv89YEWYVYAxU5
-	fWcWg0Mh5xYm5onr13e6iY0DeDekSrLwsZP2a6hyHjaeDb81QkA4RO9Hp8bV7aFB7cmq
-	uS1Q==
-X-Received: by 10.194.177.132 with SMTP id cq4mr65524272wjc.99.1425994201496; 
-	Tue, 10 Mar 2015 06:30:01 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	fo9sm20286841wib.16.2015.03.10.06.29.58
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Mar 2015 06:29:59 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 10 Mar 2015 14:30:30 +0100
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-Message-ID: <20150310133030.GA2340@jama>
+	Tue, 10 Mar 2015 13:44:36 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1YVKSb-0006Tj-Uo from Joe_MacDonald@mentor.com ;
+	Tue, 10 Mar 2015 06:44:37 -0700
+Received: from NA-MBX-04.mgc.mentorg.com ([169.254.4.29]) by
+	SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) with mapi id
+	14.03.0224.002; Tue, 10 Mar 2015 06:44:35 -0700
+From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Thread-Topic: meta-networking pending patches
+Thread-Index: AdBbOFeMuMy4VCkQlk2sS9/D01u7Hg==
+Date: Tue, 10 Mar 2015 13:44:34 +0000
+Message-ID: <EC21369A6993DD47985E1CBF1038266E263DC619@NA-MBX-04.mgc.mentorg.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: meta-networking pending patches
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: meta-networking pending patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,52 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 13:30:01 -0000
-X-Groupsio-MsgNum: 54706
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="gBBFr7Ir9EOA20Yy"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 10 Mar 2015 13:44:39 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---gBBFr7Ir9EOA20Yy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+U3VyZSB0aGluZy4gSSdsbCBoYXZlIGEgbG9vayB0b2RheSBhbmQgdXBkYXRlIHRoZSBzdGF0dXMg
+YXBwcm9wcmlhdGVseS4NCg0KLUouDQoNCk9uIDEwIE1hciAyMDE1IDA2OjMwLCBNYXJ0aW4gSmFu
+c2EgPG1hcnRpbi5qYW5zYUBnbWFpbC5jb20+IHdyb3RlOg0KSGkgSm9lLA0KDQpjYW4geW91IHBs
+ZWFzZSBjaGVjayBwZW5kaW5nIG1ldGEtbmV0d29ya2luZyBwYXRjaGVzPw0KDQpteSBtYXN0ZXIt
+bmV4dCBzaG93czoNCnBpY2sgZTdiZTMzMSBvcGVubDJ0cDogYWRkIG5ldyByZWNpcGUNCnBpY2sg
+NjQ0NjFlMSBpcHZzYWRtOiBBZGQgdmVyc2lvbiAxLjI2IChpbml0aWFsIHJlY2lwZSkNCnBpY2sg
+ZjViYTVhZiBuZXRraXQtdGVsbmV0OiBhZGQgbmV3IHJlY2lwZQ0KcGljayAxZTZkZDk5IGlzY3Np
+LWluaXRpYXRvci11dGlsczogZml4IFNFTGludXggbGFiZWwgZm9yIGluaXRpYXRvcm5hbWUuaXNj
+c2kNCnBpY2sgOGEwOWFjNiB2bGFuOiBpbnN0YWxsIHZjb25maWcgaW50byAvc2JpbiBzYW1lIGFz
+IFVidW50dSBhbmQgRmVkb3JhLg0KcGljayA2ZmRhZGJlIHN0dW5uZWw6IFVwZGF0ZSB0byB2ZXJz
+aW9uIDUuMTANCnBpY2sgZTc0YjMyNSBwb3N0Zml4OiBhZGQgbGluayBmaWxlIC91c3IvbGliL3Nl
+bmRtYWlsDQpwaWNrIDY0ZGU1MGMgd2lyZXNoYXJrOiB1cGRhdGUgdG8gMTIuNA0KcGljayA0NDI4
+YTQ0IGNyZGE6IG1vdmUgbGlibmwsIGxpYmdjcnlwdCB0byBERVBFTkRTDQpwaWNrIDVjZDk0MTcg
+ZXNtdHA6IHVwZGF0ZSBzZW5kbWFpbCBsaW5rIGZpbGVzDQoNCmFuZCBmZXcgbW9yZSBhcmUgaW4g
+cGF0Y2h3b3JrOg0KaHR0cDovL3BhdGNod29yay5vcGVuZW1iZWRkZWQub3JnL2J1bmRsZS9qYW1h
+L21ldGEtbmV0d29ya2luZy8/YXJjaGl2ZT1ib3RoDQoNClRoYW5rcw0KLS0NCk1hcnRpbiAnSmFN
+YScgSmFuc2EgICAgIGphYmJlcjogTWFydGluLkphbnNhQGdtYWlsLmNvbQ0K
 
-Hi Joe,
-
-can you please check pending meta-networking patches?
-
-my master-next shows:
-pick e7be331 openl2tp: add new recipe
-pick 64461e1 ipvsadm: Add version 1.26 (initial recipe)
-pick f5ba5af netkit-telnet: add new recipe
-pick 1e6dd99 iscsi-initiator-utils: fix SELinux label for initiatorname.isc=
-si
-pick 8a09ac6 vlan: install vconfig into /sbin same as Ubuntu and Fedora.
-pick 6fdadbe stunnel: Update to version 5.10
-pick e74b325 postfix: add link file /usr/lib/sendmail
-pick 64de50c wireshark: update to 12.4
-pick 4428a44 crda: move libnl, libgcrypt to DEPENDS
-pick 5cd9417 esmtp: update sendmail link files
-
-and few more are in patchwork:
-http://patchwork.openembedded.org/bundle/jama/meta-networking/?archive=3Dbo=
-th
-
-Thanks
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---gBBFr7Ir9EOA20Yy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlT+8fYACgkQN1Ujt2V2gBzpUQCfSal0C16LzTvnQXlrquuBflNb
-RVkAoIafGDmbQE20aW+rzSuwo1uWJWbB
-=Dmpd
------END PGP SIGNATURE-----
-
---gBBFr7Ir9EOA20Yy--
