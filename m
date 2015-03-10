@@ -1,25 +1,20 @@
-Return-Path: <amber_sarosh@hotmail.com>
-Received: from COL004-OMC4S6.hotmail.com (col004-omc4s6.hotmail.com
-	[65.55.34.208])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D851739D0
+Return-Path: <magnus@minimum.se>
+X-Greylist: delayed 600 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 10 Mar 2015 12:18:10 UTC
+Received: from mail.glesys.se (mail.glesys.se [195.238.77.166])
+	by mail.openembedded.org (Postfix) with ESMTP id DB34B73A01
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 10:25:33 +0000 (UTC)
-Received: from COL131-W63 ([65.55.34.199]) by COL004-OMC4S6.hotmail.com over
-	TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751); 
-	Tue, 10 Mar 2015 03:22:35 -0700
-X-TMN: [V5TmmYj0lWz+3PFH3Xk8H0EuiSTAn9SN]
-X-Originating-Email: [amber_sarosh@hotmail.com]
-Message-ID: <COL131-W63142F5BE1185049314139FD180@phx.gbl>
-From: Amber and Sarosh <amber_sarosh@hotmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Mar 2015 15:22:34 +0500
-Importance: Normal
-MIME-Version: 1.0
-X-OriginalArrivalTime: 10 Mar 2015 10:22:35.0271 (UTC)
-	FILETIME=[204A8170:01D05B1C]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Installing packages - opkg
+	Tue, 10 Mar 2015 12:18:10 +0000 (UTC)
+Received: from DEV095.hms.se (smtp.hms.se [88.131.56.171])
+	(Authenticated sender: magnus@minimum.se)
+	by mail.glesys.se (Postfix) with ESMTPSA id DB8A9600DB9;
+	Tue, 10 Mar 2015 13:05:15 +0100 (CET)
+From: Magnus Olsson <magnus@minimum.se>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Mar 2015 13:07:57 +0100
+Message-Id: <1425989277-21852-1-git-send-email-magnus@minimum.se>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] giflib: RDEPENDS on perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,19 +28,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 10:25:33 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 10 Mar 2015 12:18:11 -0000
 
-Hi
-Can someone please guide us how can we install any packages on an openembed=
-ded system? We are unable to do this using opkg. Maybe our system lack appr=
-opriate sources or something like that. We have tried adding sources in opk=
-g.conf but still opkg update or any other trial for installing other packag=
-es is not successful. Please guide if anything else is to be done.
-Any help in this regard is much appreciated.
+The giflib utility "gifburst" is a Perl-script, so make sure Perl
+is a run-time dependency for the giflib-utils package.
 
-Regards=2C
-Amber & Sarosh
- 		 	   		  =
+This will silence file-rdeps QA issue.
+
+Signed-off-by: Magnus Olsson <magnus@minimum.se>
+---
+ meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+index 1f85308..e59d0e5 100644
+--- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
++++ b/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+@@ -16,5 +16,7 @@ FILES_${PN}-utils = "${bindir}"
+ 
+ BBCLASSEXTEND = "native"
+ 
++RDEPENDS_${PN}-utils = "perl"
++
+ SRC_URI[md5sum] = "7125644155ae6ad33dbc9fc15a14735f"
+ SRC_URI[sha256sum] = "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d2285e8e1f3b93f2bed"
+-- 
+1.9.1
+
 
