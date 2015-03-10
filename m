@@ -1,24 +1,33 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id ABA1D73A86
+Return-Path: <lchristina26@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 167A173A82
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 17:54:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.5) with ESMTP id t2AHs4tf015824
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 10 Mar 2015 17:59:51 +0000 (UTC)
+Received: by igbhn18 with SMTP id hn18so5827563igb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 10:54:04 -0700 (PDT)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Tue, 10 Mar 2015 10:54:04 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Mar 2015 10:54:04 -0700
-Message-ID: <1426010044-16355-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Tue, 10 Mar 2015 10:59:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:date:message-id:subject:from:to:content-type;
+	bh=Z4osY1onFL6cxnIat8GUWK3yxxlKpiZvEx0AZArP1h4=;
+	b=YPUSoaoNGUplwudiws88xTvUU6+PqXgUr/u6H0cLDxpn3ZeJfObVv0rn+HdmPHhWbL
+	xuqfjLkgt5cKKD/xmzT2Nm9xMg9lvjfDLsixh3NLDKij1fbKSwK7cdjAMV2WpIMVw6f2
+	YJycHYvyHr3nyVc3Azdg/vzVd5ZzdXl9d6rPnHvtx4qce/e8wEbDhNklc4xF/YwSUC3f
+	glpcNbcr7pJBBH/6D87tlnChoRiBaqQEulGNr32LVzdZDGdCcyUO4jwC7WjfVSUP0QbL
+	tXlYxF3eeuzePhSCTZFJKj+p4I81pLeRPPB7jWD/JmB9NwBRQtWp0PQwbzw7p6xn+xve
+	bDQA==
 MIME-Version: 1.0
-Subject: [meta-oe][ 1/1] openldap: fix uninitialized ptr access problem
+X-Received: by 10.107.129.88 with SMTP id c85mr26969443iod.81.1426010392914;
+	Tue, 10 Mar 2015 10:59:52 -0700 (PDT)
+Sender: lchristina26@gmail.com
+Received: by 10.64.41.166 with HTTP; Tue, 10 Mar 2015 10:59:52 -0700 (PDT)
+Date: Tue, 10 Mar 2015 11:59:52 -0600
+X-Google-Sender-Auth: gsjtSpPE5jIGZfx41G5i5Deapus
+Message-ID: <CAL0pqZ15mf+jANcqzD=EAYs-BOKThCdWdzO2J2aRaV1v4moO=g@mail.gmail.com>
+From: Leah <leah@wolfssl.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Recipe Name Change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,59 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 17:54:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Mar 2015 17:59:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-To be safe, the ldap_pvt_thread_pool_getkey() function should
-always set the data parameter.  If this is not done, slapd can
-segfault during shutdown.
+Hi,
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../openldap/openldap-2.4.39/thread_stub.patch     |   20 ++++++++++++++++++++
- .../recipes-support/openldap/openldap_2.4.39.bb    |    1 +
- 2 files changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/openldap/openldap-2.4.39/thread_stub.patch
+We have recently changed the name of our product from CyaSSL to wolfSSL. I
+would like to update to a recipe reflecting this name. Our current recipe
+is located at
+https://github.com/openembedded/meta-oe/tree/master/meta-networking/recipes-connectivity/cyassl.
+Should I make a commit to delete cyassl and a separate commit to add the
+new wolfssl recipe? Or should this be done in one commit?
 
-diff --git a/meta-oe/recipes-support/openldap/openldap-2.4.39/thread_stub.patch b/meta-oe/recipes-support/openldap/openldap-2.4.39/thread_stub.patch
-new file mode 100644
-index 0000000..540ba4a
---- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap-2.4.39/thread_stub.patch
-@@ -0,0 +1,20 @@
-+openldap: set pointer
-+
-+When the function ldap_pvt_thread_pool_getkey() succeeds, it
-+must set the value of *data since the caller may try to use it.
-+
-+Upstream-Status: pending
-+
-+Signed-off-by: Joe Slater <jslater@windriver.com>
-+
-+
-+--- a/libraries/libldap_r/thr_stub.c
-++++ b/libraries/libldap_r/thr_stub.c
-+@@ -217,6 +217,7 @@ ldap_pvt_thread_pool_unidle ( ldap_pvt_t
-+ int ldap_pvt_thread_pool_getkey (
-+ 	void *ctx, void *key, void **data, ldap_pvt_thread_pool_keyfree_t **kfree )
-+ {
-++	if (data) *data = NULL;  /* avoid problems with uninitialized *data */
-+ 	return(0);
-+ }
-+ 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.39.bb b/meta-oe/recipes-support/openldap/openldap_2.4.39.bb
-index e2c700f..0183d02 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.39.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.39.bb
-@@ -25,6 +25,7 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
-     file://use-urandom.patch \
-     file://initscript \
-     file://slapd.service \
-+    file://thread_stub.patch \
- "
- SRC_URI[md5sum] = "b0d5ee4b252c841dec6b332d679cf943"
- SRC_URI[sha256sum] = "8267c87347103fef56b783b24877c0feda1063d3cb85d070e503d076584bf8a7"
+Thanks,
+
+Leah
+
+
 -- 
-1.7.9.5
 
+Leah Thompson
+www.wolfssl.com
+leah@wolfssl.com
+406-570-1389
+Skype: lchristina26
 
