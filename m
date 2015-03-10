@@ -1,41 +1,43 @@
-Return-Path: <heikki.sarkanen@tamtron.fi>
-Received: from emea01-am1-obe.outbound.protection.outlook.com
-	(mail-am1on0120.outbound.protection.outlook.com [157.56.112.120])
-	by mail.openembedded.org (Postfix) with ESMTP id F31D173A6B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 888E273A68
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 15:49:48 +0000 (UTC)
-Received: from heikki-HP-Compaq-6000-Pro-SFF-PC.tamtrongroup.local
-	(194.215.174.189) by HE1PR03MB1004.eurprd03.prod.outlook.com
-	(25.162.248.142) with Microsoft SMTP Server (TLS) id 15.1.99.14;
-	Tue, 10 Mar 2015 15:49:46 +0000
-From: Heikki Sarkanen <heikki.sarkanen@tamtron.fi>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Mar 2015 17:47:10 +0200
-Message-ID: <1426002430-18540-1-git-send-email-heikki.sarkanen@tamtron.fi>
-X-Mailer: git-send-email 1.9.1
+	Tue, 10 Mar 2015 16:39:40 +0000 (UTC)
+Received: by wghk14 with SMTP id k14so3155052wgh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Mar 2015 09:39:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=cMhKfNzDG7CRsUc0OQ+5YVjggCvCbnhstZQystAYUMU=;
+	b=Ye3JzC6n/RvSMOpVKbfkDaQmNvPq3yfmbBciDtz0OXxAcWgtxY5N5J9GIRtPKopKH4
+	lMNncp58EVwNJACunUWQrTlx6ZuwiMxPYFPzADHkTn1B4j4gP5RhfksQ3jsYXSxwHOwv
+	/IbDvtiNkMgqljDr5jF+lT5AWtcuUumrKqsBHHwouYwKe+ry/xg+ZBKyTjE79qx/s1J5
+	BLOh06iRlycTFjwKGPKupI6i4skv8T390AamOtFYNXzNYozmGL/IwlxFOjKfeQX2vhg9
+	KYiFcWvziY+y+Tj4uXhjcyLZBPLi2BZFUcoW45zGO+in52bswqJ570a5UkrwvOXaKxuU
+	Z7pw==
+X-Received: by 10.180.82.129 with SMTP id i1mr70684658wiy.77.1426005581014;
+	Tue, 10 Mar 2015 09:39:41 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	g5sm1629164wjr.19.2015.03.10.09.39.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 10 Mar 2015 09:39:39 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 10 Mar 2015 17:40:11 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150310164011.GE2340@jama>
+References: <CAL5ScNULNnnK5NyZ9SN2q2fidHpDW8XR6DL_kkMujgTXDCogFw@mail.gmail.com>
+	<CAP9ODKqqy9xU3NW=0LDzsVDokA5xiCnH49kY2Kw_wVSL9U1bQA@mail.gmail.com>
+	<5940D1D9F240BA44AEF939055CF1358D05983328@xmb-aln-x12.cisco.com>
+	<CAL5ScNUOLrvKqKerezbgBrNmgHuvQr-b6ZrARU9wHqBa+43NiQ@mail.gmail.com>
+	<CAL5ScNVr2nWU-M-9EsGT0Hhd++t=b16u4kS=TgLia2hunrS+5A@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [194.215.174.189]
-X-ClientProxiedBy: AM2PR03CA0023.eurprd03.prod.outlook.com (25.160.207.33) To
-	HE1PR03MB1004.eurprd03.prod.outlook.com (25.162.248.142)
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
-	header.d=none;
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:HE1PR03MB1004;
-X-Microsoft-Antispam-PRVS: <HE1PR03MB100492D526C203CEE5667CD8AB180@HE1PR03MB1004.eurprd03.prod.outlook.com>
-X-Forefront-Antispam-Report: BMV:0; SFV:NSPM;
-	SFS:(10019020)(6009001)(77156002)(110136001)(40100003)(122386002)(86362001)(33646002)(450100001)(66066001)(92566002)(47776003)(36756003)(50466002)(62966003)(87976001)(19580395003)(19580405001)(42186005)(46102003)(48376002)(2351001)(74482002)(50226001)(229853001)(50986999);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR03MB1004;
-	H:heikki-HP-Compaq-6000-Pro-SFF-PC.tamtrongroup.local; FPR:;
-	SPF:None; MLV:sfv; LANG:en; 
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(5005006)(5001009); SRVR:HE1PR03MB1004; BCL:0;
-	PCL:0; RULEID:; SRVR:HE1PR03MB1004; 
-X-Forefront-PRVS: 051158ECBB
-X-OriginatorOrg: tamtron.fi
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2015 15:49:46.1749 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR03MB1004
-Subject: [meta-qt5][PATCH] qt5: fix current git version
+In-Reply-To: <CAL5ScNVr2nWU-M-9EsGT0Hhd++t=b16u4kS=TgLia2hunrS+5A@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-qt5][PATCH] qt5-git, qtbase, qt5everywheredemo: use https protocol for gitorious
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,30 +51,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 15:49:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Mar 2015 16:39:40 -0000
+X-Groupsio-MsgNum: 54715
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="8vCeF2GUdMpe9ZbK"
+Content-Disposition: inline
 
-Bitbake doesn't detect lower git version:
-NOTE: preferred version 5.4.0+git% of qtbase-native not available (for item qtbase-native)
-NOTE: versions of qtbase-native available: 5.4.1 5.4.1+gitAUTOINC+a782369071
+--8vCeF2GUdMpe9ZbK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Heikki Sarkanen <heikki.sarkanen@tamtron.fi>
----
- conf/distro/include/qt5-versions.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, Mar 09, 2015 at 02:53:30PM +0100, Frederico Cadete wrote:
+> The following changes since commit 936d70288fd30f4df42bc382fec886a6495ef5=
+82:
+>=20
+>   qtwebengine: Fix build with accessibility enabled (2015-03-06 11:04:22 =
++0100)
+>=20
+> are available in the git repository at:
+>=20
+>   https://github.com/fredcadete/meta-qt5 master
+>=20
+> for you to fetch changes up to 06cb6a48d52b8e2eefb53ccdf616a24ffa58df6e:
+>=20
+>   qt5-git, *qtbase*, qt5everywheredemo: Fetch from code.qt.io
+> (2015-03-09 14:51:39 +0100)
+>=20
+> ----------------------------------------------------------------
+> Frederico Cadete (1):
+>       qt5-git, *qtbase*, qt5everywheredemo: Fetch from code.qt.io
+>=20
+>  recipes-qt/examples/qt5everywheredemo_1.0.bb | 2 +-
+>  recipes-qt/qt5/nativesdk-qtbase_git.bb       | 2 +-
+>  recipes-qt/qt5/qt5-git.inc                   | 2 +-
+>  recipes-qt/qt5/qtbase-native_git.bb          | 2 +-
+>  recipes-qt/qt5/qtbase_git.bb                 | 2 +-
+>  5 files changed, 5 insertions(+), 5 deletions(-)
+>=20
+> On Mon, Mar 9, 2015 at 2:50 PM, Frederico Cadete <frederico@cadete.eu> wr=
+ote:
+> > On Mon, Mar 9, 2015 at 2:01 PM, Julien Brianceau (jbriance)
+> > <jbriance@cisco.com> wrote:
+> >> Wouldn't be better to move to http://code.qt.io/ ? This is the new pla=
+ce where Qt repositories are hosted, and it supports git:// protocol.
+> >>
+> >> Julien
+> >>
+> >
+> > That sounds good and is working on my side.
+> >
+> > The remaining question is qt5everywheredemo. It has
+> >  HOMEPAGE =3D "https://qt.gitorious.org/qt-labs"
+> >
+> > This will have to change soon, but I don't know to where.
+> >
+> > Sorry for the "invisible" patch, the mailing list blocked it while I
+> > was not a subscriber.
+> > I will follow up with a PR.
 
-diff --git a/conf/distro/include/qt5-versions.inc b/conf/distro/include/qt5-versions.inc
-index c61bb6f..d367676 100644
---- a/conf/distro/include/qt5-versions.inc
-+++ b/conf/distro/include/qt5-versions.inc
-@@ -1,5 +1,5 @@
- # Select which version you prefer by defining QT5_VERSION and including this file
--# possible values now "5.4.1", "5.4.0+git%"
-+# possible values now "5.4.1", "5.4.1+git%"
- 
- QT5_VERSION ?= "5.4.1"
- 
--- 
-1.9.1
+Can you resend the patch with switch to code.qt.io? I don't see it on ML
+and in patchwork.
 
+Thanks,
 
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--8vCeF2GUdMpe9ZbK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlT/HmsACgkQN1Ujt2V2gByhMACfX0aOMiwmDgJJOkPCHPl2HztT
+I2MAn0FfmiqjjDN8M+mgeKgYOoFt0kid
+=jA5d
+-----END PGP SIGNATURE-----
+
+--8vCeF2GUdMpe9ZbK--
