@@ -1,34 +1,34 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 620F173A39
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CF1173AA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 22:48:40 +0000 (UTC)
-Received: by iecvj10 with SMTP id vj10so34311048iec.0
+	Tue, 10 Mar 2015 23:12:31 +0000 (UTC)
+Received: by iecsl2 with SMTP id sl2so35097293iec.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 15:48:42 -0700 (PDT)
+	Tue, 10 Mar 2015 16:12:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=Yx1N55M4kipv/QeKaCI6cx79Fh+lnDp6QlfDawME4Ic=;
-	b=DU+xKZLUPV8GAi+Kw5aLf3f7J2TUVUCz4S8oClrgRFPxVZdJI2ET3XWNdxrOwfa3Nv
-	5b3MD+JJOxJDGohqG5S0uf4qMofWbWaJOKMFMd/Hr3qW75EpordWyJs3A2ZoTmFk+s9u
-	JztBAM+eZJ57XsUYVT3HS9gKNfaqRFECd3H+g8WgQgITGUS9Znro6r4U/UpzDyWkTJhF
-	CA4X7mrXPsXgjhxNv8NvVQf4qdpNVSc3xbPZehGvM7obNbQWb7XcZSYrKB6lOOK2S49c
-	DmctmhnLGw7BIZtfsUFVVFCF80b0Auzm7TPLU6ICBF0n4fO8vTdVm5FJiBqzu8gM8KFs
-	iPWA==
-X-Received: by 10.42.77.4 with SMTP id g4mr37153760ick.17.1426027721944;
-	Tue, 10 Mar 2015 15:48:41 -0700 (PDT)
+	bh=vrc8Elu9cE4dx+y2lu9jk99v1zyskfeY1IrZ0VoXv3w=;
+	b=KI+OcTcB/5zILmpgYAiqMfqui6Df4KPS+UbCUutIsWq1cylRKy7AdFC2ndd6b4GkRy
+	nuUFwNV6v/7TkF3/pu3pCjYTRvSqZecybXFfPD4J90B2PELVM5XCGsQ5T3Bm0hzv+Huz
+	fEoVa6vkh2REK7UG525hu9U7XF9/2rjAFsJP2iLIBoWdekIitqMJX5/UJDDXWn/aYp+9
+	CYCeiJ+DtP6/F5gHULPOrPEK7NrUHdV3kxQPQyLgdhX0IYfMbUwcR6KFC1qqFTywG9bJ
+	Xr1SauSfRlLaKCdqaUvmHWjZtfHx08UVbvO+0nem9oK24loq+iSilooli9MqkoQII63J
+	Bx2w==
+X-Received: by 10.50.66.198 with SMTP id h6mr61619318igt.22.1426029152253;
+	Tue, 10 Mar 2015 16:12:32 -0700 (PDT)
 Received: from e6520.cablelabs.com
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id ik7sm1341586igb.1.2015.03.10.15.48.41
+	by mx.google.com with ESMTPSA id ha4sm1359703igb.21.2015.03.10.16.12.31
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Mar 2015 15:48:41 -0700 (PDT)
+	Tue, 10 Mar 2015 16:12:31 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Mar 2015 15:47:51 -0700
-Message-Id: <1426027671-9071-1-git-send-email-armccurdy@gmail.com>
+Date: Tue, 10 Mar 2015 16:12:13 -0700
+Message-Id: <1426029133-9403-1-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] tinymembench: add initial recipe
+Subject: [meta-webserver][PATCH] spawn-fcgi: add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,39 +42,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 22:48:41 -0000
+X-List-Received-Date: Tue, 10 Mar 2015 23:12:33 -0000
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- .../tinymembench/tinymembench_git.bb                  | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+ .../spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch | 35 ++++++++++++++++++++++
+ .../recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb | 16 ++++++++++
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
+ create mode 100644 meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
 
-diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
 new file mode 100644
-index 0000000..ae7887d
+index 0000000..9409dd2
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "A simple memory benchmark program, which tries to measure the \
-+peak bandwidth of sequential memory accesses and the latency of random memory \
-+accesses. Bandwidth is measured by running different assembly code for the \
-+aligned memory blocks and attempting different prefetch strategies"
-+HOMEPAGE = "https://github.com/ssvb/tinymembench/wiki"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://main.c;endline=22;md5=879b9bbb60851454885b5fa47eb6b345"
++++ b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
+@@ -0,0 +1,35 @@
++Testing for IPv6 support got broken by configure.ac changes in 1.6.4
++As a temp workaround, revert back to the 1.6.3 version.
 +
-+PV = "0.3.9+git${SRCPV}"
++Upstream-Status: Pending
 +
-+SRCREV = "95e68477588d41187b2d2e52ecf6be0e7eb06b8d"
-+SRC_URI = "git://github.com/ssvb/tinymembench.git"
++--- spawn-fcgi-1.6.4/configure.ac
+++++ spawn-fcgi-1.6.3/configure.ac
++@@ -66,8 +47,8 @@
++ # Check for IPv6 support
++ 
++ AC_ARG_ENABLE(ipv6,
++-  AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
++-  [case "${enableval}" in
+++ AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
+++ [case "${enableval}" in
++    yes) ipv6=true ;;
++     no) ipv6=false ;;
++      *) AC_MSG_ERROR(bad value ${enableval} for --enable-ipv6) ;;
++@@ -75,13 +56,10 @@
++ 
++ if test x$ipv6 = xtrue; then
++   AC_CACHE_CHECK([for IPv6 support], ac_cv_ipv6_support,
++-    [AC_TRY_LINK([[
++-#include <sys/types.h>
+++  [AC_TRY_LINK([ #include <sys/types.h>
++ #include <sys/socket.h>
++-#include <netinet/in.h>
++-    ]], [[
++-struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0;
++-    ]], [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
+++#include <netinet/in.h>], [struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0; ],
+++  [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
++ 
++   if test "$ac_cv_ipv6_support" = yes; then
++     AC_DEFINE(HAVE_IPV6,1,[Whether to enable IPv6 support])
+diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
+new file mode 100644
+index 0000000..99e58bd
+--- /dev/null
++++ b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
+@@ -0,0 +1,16 @@
++SUMMARRY = "spawn-fcgi is used to spawn FastCGI applications"
++HOMEPAGE = "http://redmine.lighttpd.net/projects/spawn-fcgi"
 +
-+S = "${WORKDIR}/git"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
 +
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m755 tinymembench ${D}${bindir}/
-+}
++SRC_URI = "http://download.lighttpd.net/spawn-fcgi/releases-1.6.x/spawn-fcgi-${PV}.tar.gz \
++           file://fix_configure_ipv6_test.patch"
++
++SRC_URI[md5sum] = "e970de4efe8045c01dd76280f39901aa"
++SRC_URI[sha256sum] = "ab327462cb99894a3699f874425a421d934f957cb24221f00bb888108d9dd09e"
++
++inherit autotools
++
++PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
++PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
 -- 
 1.9.1
 
