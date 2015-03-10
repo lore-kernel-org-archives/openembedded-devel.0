@@ -1,24 +1,39 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 10F0D73A54
+Return-Path: <mario.goulart@gmail.com>
+Received: from mail-qc0-f177.google.com (mail-qc0-f177.google.com
+	[209.85.216.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E2A873A52
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 20:55:04 +0000 (UTC)
-Received: (qmail 9196 invoked by uid 1003); 10 Mar 2015 20:55:03 -0000
-Received: from unknown (HELO ?192.168.11.101?)
-	(philip@opensdr.com@71.171.10.241)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	10 Mar 2015 20:55:03 -0000
-Message-ID: <54FF5A1D.90907@balister.org>
-Date: Tue, 10 Mar 2015 16:54:53 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
-MIME-Version: 1.0
+	Tue, 10 Mar 2015 21:11:44 +0000 (UTC)
+Received: by qcxr5 with SMTP id r5so5455772qcx.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Mar 2015 14:11:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+	:organization; bh=WCchHSKq037nDzvEmvlSKcDDUn9YImRGy7NmmXSK9kM=;
+	b=o/dQN3uU3EzcRmeSCjKMWZgNhiQU5m1+Q37fp+0nCCq/avECfe5wm4MqPpXZHNLVIW
+	A/V9o/AY0oJSWyeKckEXSt6W0dDPNUrKRfMGpRutkHVzeCZZk+FHZdM3k7AoxyIKLdTb
+	fyr9vKZVSGk9QbT5qK1mAsEOvsbZOeZoDG/yy4EdffhEHkpsLHes8Hii236olDMlGqn0
+	ZH3sCh020twtbv/B4mLhu5XUHUiwuT1PVkiGZWqkpKvVCYsvlOqQzWLWL2mb0KMdRfZC
+	RLiSAabwpCFLGLpV2W433JQfOVYIOcWbNPn0oI3FoWbSmuty7T2fMpYc/ZOQ4qefvuJO
+	6eJg==
+X-Received: by 10.140.108.116 with SMTP id i107mr42207976qgf.73.1426021905813; 
+	Tue, 10 Mar 2015 14:11:45 -0700 (PDT)
+Received: from centrium.lab.ossystems.com.br ([177.100.224.72])
+	by mx.google.com with ESMTPSA id
+	c199sm1179624qka.21.2015.03.10.14.11.44
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 10 Mar 2015 14:11:45 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-References: <54ED1B78.4040101@balister.org>	<20150227083113.GF2309@jama>	<CAP9ODKqFPNyF4ZoXv0C1Jw==opnmrj+cWAEHUhr6nXbbXUKw6g@mail.gmail.com>
-	<54FF59B5.20900@gmail.com>
-In-Reply-To: <54FF59B5.20900@gmail.com>
-Subject: Re: [meta-oe][dizzy]Update PyQt and related recipes
+Date: Tue, 10 Mar 2015 18:10:21 -0300
+Message-Id: <1426021821-26379-2-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1426021821-26379-1-git-send-email-mario@ossystems.com.br>
+References: <1426021821-26379-1-git-send-email-mario@ossystems.com.br>
+Organization: O.S. Systems Software LTDA.
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-java][PATCH 2/2] rxtx: add patch to support i.MX serial ports
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,50 +47,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 20:55:05 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Mar 2015 21:11:45 -0000
 
-On 03/10/2015 04:53 PM, akuster808 wrote:
-> 
-> 
-> On 02/27/2015 05:41 AM, Otavio Salvador wrote:
->> Hello Martin,
->>
->> On Fri, Feb 27, 2015 at 5:31 AM, Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->>> On Tue, Feb 24, 2015 at 04:46:48PM -0800, Philip Balister wrote:
->>>> Please pull these three patches into meta-oe/dizzy.
->>>>
->>>> https://github.com/openembedded/meta-oe/pull/19
->>>>
->>>> These lead to a working PyQt4, which will reduce the number of
->>>> questions
->>>> I get about gnuradio-companion not working on dizzy.
->>>
->>> I'm not sure if we should do upgrades in release branch which should
->>> receive only bug fixes, but I'll let daisy maintainers to decide.
->>
->> I agree with your concern but I also see the improvement
->> (cross-compile support and like) of the new PyQt4.
-> 
-> Sorry I have head down for the last two weeks.
-> 
->>
->> At same time, I think this is not ready to be merged. Checking the
->> code changes I think we need to:
->>
->> * split python-sip runtime package
-> 
-> So is this split being worked on ?
+Support for /dev/ttymxc* devices.
 
-Yes. I sent in patches yesterday. Thanks for checking.
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ .../0001-Support-Freescale-i.MX-serial-ports.patch | 27 ++++++++++++++++++++++
+ recipes-extended/rxtx/rxtx_2.2.0.bb                |  3 ++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-extended/rxtx/files/0001-Support-Freescale-i.MX-serial-ports.patch
 
-Philip
+diff --git a/recipes-extended/rxtx/files/0001-Support-Freescale-i.MX-serial-ports.patch b/recipes-extended/rxtx/files/0001-Support-Freescale-i.MX-serial-ports.patch
+new file mode 100644
+index 0000000..91b1207
+--- /dev/null
++++ b/recipes-extended/rxtx/files/0001-Support-Freescale-i.MX-serial-ports.patch
+@@ -0,0 +1,27 @@
++From 9295c8c954c28f30d90f7521048be17790ddb878 Mon Sep 17 00:00:00 2001
++From: Mario Domenech Goulart <mario@ossystems.com.br>
++Date: Mon, 9 Mar 2015 16:18:12 -0300
++Subject: [PATCH] Support Freescale i.MX serial ports
++Organization: O.S. Systems Software LTDA.
++
++Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
++Upstream-Status: Pending
++---
++ src/gnu/io/RXTXCommDriver.java | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/gnu/io/RXTXCommDriver.java b/src/gnu/io/RXTXCommDriver.java
++index 16225dc..4cadd03 100644
++--- a/src/gnu/io/RXTXCommDriver.java
+++++ b/src/gnu/io/RXTXCommDriver.java
++@@ -612,6 +612,7 @@ public class RXTXCommDriver implements CommDriver
++ 						"ttyH", // linux Chase serial card
++ 						"ttyI", // linux virtual modems
++ 						"ttyL", // linux SDL RISCom serial card
+++						"ttymxc", // linux Freescale i.MX serial card
++ 						"ttyM", // linux PAM Software's multimodem boards
++ 							// linux ISI serial card
++ 						"ttyMX",// linux Moxa Smart IO cards
++-- 
++2.1.4
++
+diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
+index ff17e9c..56c939f 100644
+--- a/recipes-extended/rxtx/rxtx_2.2.0.bb
++++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
+@@ -18,7 +18,8 @@ SRC_URI = "http://rxtx.qbang.org/pub/rxtx/rxtx-2.2pre2.zip \
+            file://MonitorThread-daemon.patch \
+            file://usb_38400.patch \
+            file://fix_snprintf.patch \
+-           file://format_security.patch"
++           file://format_security.patch \
++           file://0001-Support-Freescale-i.MX-serial-ports.patch"
+ 
+ SRC_URI[md5sum] = "7eedb18e3f33a427e2b0e9be8ce3f94c"
+ SRC_URI[sha256sum] = "3c30373e760f444def3650c76c5a00ae12fb1d860ec008750d084f4880495b03"
+-- 
+2.1.4
 
-> 
-> - armin
->>
->> This will fix the upgrade path.
->>
 
