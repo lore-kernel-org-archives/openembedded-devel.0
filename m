@@ -1,18 +1,21 @@
-Return-Path: <magnus@minimum.se>
-Received: from mail.glesys.se (mail.glesys.se [195.238.77.166])
-	by mail.openembedded.org (Postfix) with ESMTP id CEA58739FE
+Return-Path: <David.Andrey@netmodule.com>
+Received: from webmail.netmodule.com (webmail.netmodule.com [194.29.26.242])
+	by mail.openembedded.org (Postfix) with ESMTP id DA79473A90
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2015 07:48:06 +0000 (UTC)
-Received: from DEV095.hms.se (smtp.hms.se [88.131.56.171])
-	(Authenticated sender: magnus@minimum.se)
-	by mail.glesys.se (Postfix) with ESMTPSA id 19336600B27;
-	Wed, 11 Mar 2015 08:45:12 +0100 (CET)
-From: Magnus Olsson <magnus@minimum.se>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Mar 2015 08:47:55 +0100
-Message-Id: <1426060075-11913-1-git-send-email-magnus@minimum.se>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-java][PATCH] openjdk-7-jre: RDEPENDS openjdk-7-common
+	Wed, 11 Mar 2015 11:16:56 +0000 (UTC)
+Received: from ebro.netmodule.intranet (172.16.92.40) by
+	ebro.netmodule.intranet (172.16.92.40) with Microsoft SMTP Server (TLS)
+	id 15.0.913.22; Wed, 11 Mar 2015 12:16:57 +0100
+Received: from LOIRE.netmodule.intranet (172.16.92.120) by
+	webmail.netmodule.com (172.16.92.40) with Microsoft SMTP Server id
+	15.0.913.22 via Frontend Transport; Wed, 11 Mar 2015 12:16:57 +0100
+From: David Andrey <david.andrey@netmodule.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Mar 2015 12:16:53 +0100
+Message-ID: <1426072613-28274-1-git-send-email-david.andrey@netmodule.com>
+X-Mailer: git-send-email 1.7.10.4
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] nano: use FTP as download method
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,36 +29,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2015 07:48:08 -0000
+X-List-Received-Date: Wed, 11 Mar 2015 11:16:57 -0000
+Content-Type: text/plain
 
--jre binaries such as keytool, policytool and more requires libjli.so
-so ensure there's a RDEPEND that provides it.
+FTP was noticed as the prefered file access method for nano sources
+after several HTTP server hang-up.
 
-Same goes for openjdk-7-java (java binary FILERDEPENDS libjli.so).
+The nano-devel mailing list refers to this change
 
-Both of these already DEPENDS -common, so the build was not broken before
-but this patch will also silence the QA file-rdeps issue.
-
-Signed-off-by: Magnus Olsson <magnus@minimum.se>
+Signed-off-by: David Andrey <david.andrey@netmodule.com>
 ---
- recipes-core/openjdk/openjdk-7-common.inc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/nano/nano.inc |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
-index e14603c..55d010e 100644
---- a/recipes-core/openjdk/openjdk-7-common.inc
-+++ b/recipes-core/openjdk/openjdk-7-common.inc
-@@ -323,7 +323,8 @@ FILES_${JDKPN}-jdk = " \
-                        ${JDK_HOME}/lib \
-                        ${JDK_HOME}/include \
-                       "
--RDEPENDS_${JDKPN}-jre = "${JDKPN}-java"
-+RDEPENDS_${JDKPN}-jre = "${JDKPN}-java ${JDKPN}-common"
-+RDEPENDS_${JDKPN}-java = "${JDKPN}-common"
- RPROVIDES_${JDKPN}-jre = "java2-runtime"
+diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano.inc
+index b73aae0..bdefe9b 100644
+--- a/meta-oe/recipes-support/nano/nano.inc
++++ b/meta-oe/recipes-support/nano/nano.inc
+@@ -12,7 +12,7 @@ INC_PR = "r3"
  
- RDEPENDS_${JDKPN}-jdk = "${JDKPN}-jre"
+ PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+ 
+-SRC_URI = "http://www.nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
++SRC_URI = "ftp://nano-editor.org/pub/nano/v${PV_MAJOR}/nano-${PV}.tar.gz"
+ 
+ inherit autotools gettext
+ 
 -- 
-1.9.1
+1.7.10.4
 
 
