@@ -1,34 +1,37 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CF1173AA9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F58B739F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 23:12:31 +0000 (UTC)
-Received: by iecsl2 with SMTP id sl2so35097293iec.1
+	Wed, 11 Mar 2015 01:53:01 +0000 (UTC)
+Received: by iecsf10 with SMTP id sf10so3683567iec.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2015 16:12:32 -0700 (PDT)
+	Tue, 10 Mar 2015 18:52:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=vrc8Elu9cE4dx+y2lu9jk99v1zyskfeY1IrZ0VoXv3w=;
-	b=KI+OcTcB/5zILmpgYAiqMfqui6Df4KPS+UbCUutIsWq1cylRKy7AdFC2ndd6b4GkRy
-	nuUFwNV6v/7TkF3/pu3pCjYTRvSqZecybXFfPD4J90B2PELVM5XCGsQ5T3Bm0hzv+Huz
-	fEoVa6vkh2REK7UG525hu9U7XF9/2rjAFsJP2iLIBoWdekIitqMJX5/UJDDXWn/aYp+9
-	CYCeiJ+DtP6/F5gHULPOrPEK7NrUHdV3kxQPQyLgdhX0IYfMbUwcR6KFC1qqFTywG9bJ
-	Xr1SauSfRlLaKCdqaUvmHWjZtfHx08UVbvO+0nem9oK24loq+iSilooli9MqkoQII63J
-	Bx2w==
-X-Received: by 10.50.66.198 with SMTP id h6mr61619318igt.22.1426029152253;
-	Tue, 10 Mar 2015 16:12:32 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id ha4sm1359703igb.21.2015.03.10.16.12.31
+	bh=UAf6sQ6IKFCvChZyY6Qu36YkRz1fzrpWzne4Dx4EWUE=;
+	b=E/cMIkQnXIBNaHbm3qAFLL6QTo/CoX33NzSAyboTg+Mk0jTcz6DphLAE090XXpTQhO
+	wCOFNHKePdd8yR/LFSfOp/nDzB/Z/MA2rayUdOW2zy3C/GQg0T2f5VCLAJfnZuPC0LHI
+	gWiD6rYjXgPBfbcAke5YqeG6ImvvHhS55LwR9uXjmAQAgm+1ub46U2ZQqPjiNr74KnHW
+	JyAnhDYtaQPKNjnyiq/f9tjhZW47GNQoQDLfgJfymV1fVpl9bUieOEShJgyvMPPjcmnu
+	kxbqqteagGZEOD+DP5LsV6dT3SGkVf9XyLfvtFnXHWiQ+1UQdemG+tFOsn8p2lkGP9ny
+	ONdw==
+X-Received: by 10.42.85.3 with SMTP id o3mr38242354icl.38.1426038778107;
+	Tue, 10 Mar 2015 18:52:58 -0700 (PDT)
+Received: from kraj-ch2e.sys.comcast.net (a-96-119-88-205.sys.comcast.net.
+	[96.119.88.205])
+	by mx.google.com with ESMTPSA id p2sm1607356ioi.0.2015.03.10.18.52.57
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Mar 2015 16:12:31 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
+	Tue, 10 Mar 2015 18:52:57 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Mar 2015 16:12:13 -0700
-Message-Id: <1426029133-9403-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-webserver][PATCH] spawn-fcgi: add initial recipe
+Date: Wed, 11 Mar 2015 01:52:32 +0000
+Message-Id: <1426038752-29983-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: pnandyala <Pavan.Nandyala@LntTechservices.com>,
+	Zoltan Kuscsik <zoltan.kuscsik@linaro.org>,
+	knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
+Subject: [meta-browser][PATCH] cef3: Add recipe for Chromium Embedded Framework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,80 +45,207 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2015 23:12:33 -0000
+X-List-Received-Date: Wed, 11 Mar 2015 01:53:05 -0000
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+CEF is a framework to embed chromium based browsers into other
+applications
+
+Change-Id: I7cb987828837b3aef6e87aa9b9f73a8babe26a06
+Signed-off-by: pnandyala <Pavan.Nandyala@LntTechservices.com>
+Signed-off-by: knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
+Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch | 35 ++++++++++++++++++++++
- .../recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb | 16 ++++++++++
- 2 files changed, 51 insertions(+)
- create mode 100644 meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
- create mode 100644 meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
+ .../cef3/01_get_svn_version_from_LASTCHANGE.patch  |  25 ++++
+ recipes-browser/chromium/cef3_280796.bb            | 146 +++++++++++++++++++++
+ 2 files changed, 171 insertions(+)
+ create mode 100644 recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
+ create mode 100644 recipes-browser/chromium/cef3_280796.bb
 
-diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
+diff --git a/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch b/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
 new file mode 100644
-index 0000000..9409dd2
+index 0000000..61f88b4
 --- /dev/null
-+++ b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi-1.6.4/fix_configure_ipv6_test.patch
-@@ -0,0 +1,35 @@
-+Testing for IPv6 support got broken by configure.ac changes in 1.6.4
-+As a temp workaround, revert back to the 1.6.3 version.
++++ b/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
+@@ -0,0 +1,25 @@
++diff --git a/cef/tools/make_version_header.py b/cef/tools/make_version_header.py
++index 84d49f5..395c2cf 100644
++--- a/cef/tools/make_version_header.py
+++++ b/cef/tools/make_version_header.py
++@@ -64,6 +64,8 @@ def write_svn_header(header, chrome_version, cef_version, cpp_header_dir):
++       revision = svn.get_revision()
++     elif git.is_checkout('.'):
++       revision = git.get_svn_revision()
+++    elif os.path.isfile("../build/util/LASTCHANGE"):
+++      revision = open("../build/util/LASTCHANGE").read().split("=")[1].strip()
++     else:
++       raise Exception('Not a valid checkout')
 +
-+Upstream-Status: Pending
-+
-+--- spawn-fcgi-1.6.4/configure.ac
-++++ spawn-fcgi-1.6.3/configure.ac
-+@@ -66,8 +47,8 @@
-+ # Check for IPv6 support
-+ 
-+ AC_ARG_ENABLE(ipv6,
-+-  AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
-+-  [case "${enableval}" in
-++ AC_HELP_STRING([--disable-ipv6],[disable IPv6 support]),
-++ [case "${enableval}" in
-+    yes) ipv6=true ;;
-+     no) ipv6=false ;;
-+      *) AC_MSG_ERROR(bad value ${enableval} for --enable-ipv6) ;;
-+@@ -75,13 +56,10 @@
-+ 
-+ if test x$ipv6 = xtrue; then
-+   AC_CACHE_CHECK([for IPv6 support], ac_cv_ipv6_support,
-+-    [AC_TRY_LINK([[
-+-#include <sys/types.h>
-++  [AC_TRY_LINK([ #include <sys/types.h>
-+ #include <sys/socket.h>
-+-#include <netinet/in.h>
-+-    ]], [[
-+-struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0;
-+-    ]], [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
-++#include <netinet/in.h>], [struct sockaddr_in6 s; struct in6_addr t=in6addr_any; int i=AF_INET6; s; t.s6_addr[0] = 0; ],
-++  [ac_cv_ipv6_support=yes], [ac_cv_ipv6_support=no])])
-+ 
-+   if test "$ac_cv_ipv6_support" = yes; then
-+     AC_DEFINE(HAVE_IPV6,1,[Whether to enable IPv6 support])
-diff --git a/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
++diff --git a/cef/tools/revision.py b/cef/tools/revision.py
++index 1d94602..eb89e3b 100644
++--- a/cef/tools/revision.py
+++++ b/cef/tools/revision.py
++@@ -16,6 +16,8 @@ if os.path.exists(os.path.join('.', '.svn')):
++   sys.stdout.write(svn.get_revision())
++ elif os.path.exists(os.path.join('.', '.git')):
++   sys.stdout.write(git.get_svn_revision())
+++elif os.path.isfile("../build/util/LASTCHANGE"):
+++  revision = open("../build/util/LASTCHANGE").read().split("=")[1].strip()
++ else:
++   raise Exception('Not a valid checkout')
+diff --git a/recipes-browser/chromium/cef3_280796.bb b/recipes-browser/chromium/cef3_280796.bb
 new file mode 100644
-index 0000000..99e58bd
+index 0000000..9834eac
 --- /dev/null
-+++ b/meta-webserver/recipes-support/spawn-fcgi/spawn-fcgi_1.6.4.bb
-@@ -0,0 +1,16 @@
-+SUMMARRY = "spawn-fcgi is used to spawn FastCGI applications"
-+HOMEPAGE = "http://redmine.lighttpd.net/projects/spawn-fcgi"
-+
++++ b/recipes-browser/chromium/cef3_280796.bb
+@@ -0,0 +1,146 @@
++DESCRIPTION = "Chromium Embedded Framework"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e4dac5c6ab169aa212feb5028853a579"
 +
-+SRC_URI = "http://download.lighttpd.net/spawn-fcgi/releases-1.6.x/spawn-fcgi-${PV}.tar.gz \
-+           file://fix_configure_ipv6_test.patch"
++# Based on Chromium dependencies
++DEPENDS = " \
++	xz-native \
++	pciutils \
++	pulseaudio \
++	xextproto \
++	pango \
++	cairo \
++	nss \
++	zlib-native \
++	cups \
++	ninja-native \
++	gconf \
++	libexif \
++	libxkbcommon \
++	fontconfig \
++	libdrm \
++	virtual/egl \
++	virtual/libgles2 \
++	"
++RDEPENDS_${PN} = " \
++	pango \
++	cairo \
++	fontconfig \
++	pciutils \
++	pulseaudio \
++	freetype \
++	fontconfig-utils \
++        "
++#Generic Fonts are needed
 +
-+SRC_URI[md5sum] = "e970de4efe8045c01dd76280f39901aa"
-+SRC_URI[sha256sum] = "ab327462cb99894a3699f874425a421d934f957cb24221f00bb888108d9dd09e"
++COMPATIBLE_MACHINE = "(-)"
++COMPATIBLE_MACHINE_i586 = "(.*)"
++COMPATIBLE_MACHINE_x86-64 = "(.*)"
++COMPATIBLE_MACHINE_armv6 = "(.*)"
++COMPATIBLE_MACHINE_armv7a = "(.*)"
 +
-+inherit autotools
++SRC_URI = "http://people.linaro.org/~zoltan.kuscsik/chromium-browser/chromium_rev_${PV}.tar.xz"
++SRC_URI +="git://github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=src/cef;branch=aura;name=cef"
++SRC_URI +="git://github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=src/ui/ozone/platform/egl;branch=master;name=egl"
++SRC_URI +="git://chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools"
++SRC_URI +="file://01_get_svn_version_from_LASTCHANGE.patch"
 +
-+PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
-+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
++SRCREV = "${AUTOREV}"
++SRCREV_cef ?= "${AUTOREV}"
++SRCREV_egl = "${AUTOREV}"
++SRCREV_FORMAT = "default_cef_egl_tools"
++S = "${WORKDIR}/chromium_rev_${PV}"
++
++do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl SRCREV_tools"
++
++SRC_URI[md5sum] = "9efbb50283b731042e62b9bd5e312b2f"
++SRC_URI[sha256sum] = "f608e97dadf6ea4d885b24fd876896d46840fa39bf743ea2025075aee9fb348d"
++
++export CHROMIUM_BUILD_TYPE="Release"
++
++GYP_ARCH_DEFINES_armv7a = " target_arch=arm arm_float_abi=hard"
++GYP_ARCH_DEFINES_i586 = " target_arch=ia32"
++export GYP_GENERATORS="ninja"
++export BUILD_TARGET_ARCH="${TARGET_ARCH}"
++export GYP_DEFINES="${GYP_ARCH_DEFINES} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
++
++inherit gettext
++
++do_configure() {
++    # LD workaround taken from meta-browser
++    # replace LD with CXX, to workaround a possible gyp issue?
++    export PATH=${WORKDIR}/depot_tools:"$PATH"
++    LD="${CXX}" export LD
++    CC="${CC}" export CC
++    CXX="${CXX}" export CXX
++    CC_host="gcc" export CC_host
++    CXX_host="g++" export CXX_host
++    # End of LD Workaround
++
++    #-----------------------
++    # Configure and build cef
++    #------------------------
++    cd cef
++    ./cef_create_projects.sh -I ${BUILD_TARGET_ARCH}_ozone.gypi --depth ../
++    cd -
++}
++
++# Workaround to disable qa_configure
++do_qa_configure() {
++    echo "do_qa_configure"
++}
++
++do_compile() {
++    ninja -C out/${CHROMIUM_BUILD_TYPE} cefsimple
++}
++
++do_install() {
++   install -d ${D}${bindir}
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}
++   if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat" ]; then
++   install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}
++   fi
++   install -d ${D}${libdir}
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${libdir}
++   if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so" ]; then
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so ${D}${libdir}
++   fi
++   if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so" ]; then
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so ${D}${libdir}
++   fi
++   install -d ${D}${bindir}/chrome
++   if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_100_percent.pak" ]; then
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_100_percent.pak ${D}${bindir}/chrome
++   fi
++   if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_200_percent.pak" ]; then
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_200_percent.pak ${D}${bindir}/chrome
++   fi
++   if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_resources.pak" ]; then
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_resources.pak ${D}${bindir}/chrome
++   fi
++   if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef.pak" ]; then
++   install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef.pak ${D}${bindir}/chrome
++   fi
++   install -d ${D}${bindir}/chrome/locales
++   install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/locales/en-US.pak ${D}${bindir}/chrome/locales
++   # take care of libraries naming (versions)
++    cd ${D}${libdir}
++    for library in $(find -type f -name '*.so'); do
++         startDir="$(pwd)"
++          cd "$(dirname "$library")"
++          rm -f "$library.0.0.1"
++          mv "$library" "$library.0.0.1"
++          ln -sf "$library.0.0.1" "$library.0.0"
++          ln -sf "$library.0.0" "$library.0"
++          ln -sf "$library.0" "$library"
++        cd "$startDir"
++    done
++
++}
++
++INSANE_SKIP_${PN} = "dev-so ldflags"
++FILES_SOLIBSDEV = ""
++FILES_${PN} = "${bindir} ${bindir}/chrome/ ${libdir}"
++FILES_${PN} += "${bindir}/chrome/*.pak"
++FILES_${PN} += "${bindir}/chrome/locales/*.pak"
++FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/.debug/"
++
 -- 
-1.9.1
+2.1.4
 
 
