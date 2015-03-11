@@ -1,29 +1,43 @@
-Return-Path: <Nicolas.FERRE@atmel.com>
-X-Greylist: delayed 318 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 11 Mar 2015 13:42:34 UTC
-Received: from eusmtp01.atmel.com (eusmtp01.atmel.com [212.144.249.243])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F31273B02
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
+	[209.85.192.49])
+	by mail.openembedded.org (Postfix) with ESMTP id C170373A05
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2015 13:42:34 +0000 (UTC)
-Received: from HNOCHT01.corp.atmel.com (10.161.30.161) by eusmtp01.atmel.com
-	(10.161.101.31) with Microsoft SMTP Server (TLS) id 14.2.347.0;
-	Wed, 11 Mar 2015 14:37:11 +0100
-Received: from [10.159.245.112] (10.161.30.18) by HNOCHT01.corp.atmel.com
-	(10.161.30.161) with Microsoft SMTP Server (TLS) id 14.2.342.3;
-	Wed, 11 Mar 2015 14:37:16 +0100
-Message-ID: <55004509.7060600@atmel.com>
-Date: Wed, 11 Mar 2015 14:37:13 +0100
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
-Organization: atmel
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+	Wed, 11 Mar 2015 13:45:17 +0000 (UTC)
+Received: by qgea108 with SMTP id a108so9925267qge.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2015 06:45:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:date:to:subject:user-agent:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=cOk6617VF9kWusrXsPMyqEo4jREMNATj0t9yLlkloQU=;
+	b=GAfIvOEfSlD+828gvBTN5ieUU5tL2gwMk6jHM+9jNrwY1eFIJUZ6FgA9caK63Er6HB
+	d9YEyC/bdymJvK+9BHvup0bsX7svVi+LvU1frIDsCxJ6zhZMNROgyIOtcCMtgvY8wElL
+	1ynHIk/8VNTVPz0bKlq4rBXgsC9ZyfGuRSdPfrG8PMf4D77VKbMdE3dIGz/pzxfIW8OK
+	MYKnIS5QvrQ3U0ecxHWBNuF6UAT/xv9S6pbaVZ/8NsaDFVboqqkf28y/uPA/6FXGxNON
+	U/s+dk2zujXlCWUxDy1eqvcGLMvtQBh1vlZTA8yCAqyOfpYIMT58LIFNlLDn+HC2BXFN
+	7PvQ==
+X-Received: by 10.55.52.146 with SMTP id b140mr75063001qka.43.1426081518345;
+	Wed, 11 Mar 2015 06:45:18 -0700 (PDT)
+Received: from nano.lab.ossystems.com.br ([177.100.224.72])
+	by mx.google.com with ESMTPSA id
+	q193sm2570667qha.14.2015.03.11.06.45.17
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 11 Mar 2015 06:45:17 -0700 (PDT)
+Sender: Otavio Salvador <otavio.salvador@gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+X-Google-Original-From: otavio@nano.lab.ossystems.com.br (Otavio Salvador)
+Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
+	id 50B121CD1A507; Wed, 11 Mar 2015 10:45:14 -0300 (BRT)
+Date: Wed, 11 Mar 2015 10:45:14 -0300
+To: <openembedded-devel@lists.openembedded.org>,
+	listing@nano.lab.ossystems.com.br, Mailing@nano.lab.ossystems.com.br,
+	Meta-OpenEmbedded@nano.lab.ossystems.com.br
+User-Agent: Heirloom mailx 12.5 6/20/10
 MIME-Version: 1.0
-To: Alexandre Belloni <alexandre.belloni@free-electrons.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1424293077-4542-1-git-send-email-alexandre.belloni@free-electrons.com>
-In-Reply-To: <1424293077-4542-1-git-send-email-alexandre.belloni@free-electrons.com>
-X-Originating-IP: [10.161.30.18]
-Subject: Re: [meta-qt5][dizzy][PATCH] qmake5: don't always look in directories recursively
+Message-Id: <20150311134514.50B121CD1A507@nano.lab.ossystems.com.br>
+Subject: Updates to meta-java (master) in 2015-03-11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,108 +51,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2015 13:42:35 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Mar 2015 13:45:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Le 18/02/2015 21:57, Alexandre Belloni a écrit :
-> QT needs to be compiled without the -r parameter from the qmake command
-> line. This is necessary to avoid those errors when building
-> qtdeclarative or qt3d without opengl for example:
-> Project ERROR: Unknown module(s) in QT: quick-private
-> or
-> Project ERROR: Unknown module(s) in QT: quick
-> 
-> Also update comments regarding the dependencies.
-> 
-> Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+Hello,
 
-Tested-by: Nicolas Ferre <nicolas.ferre@atmel.com>
+I pushed following updates:
 
-While building for dizzy, I used the master branch (commit ID:
-7a65ba6089560efdd840a9590684c24fbcdb7818) to benefit from these patches:
-can you please update the dizzy branch of meta-qt5 to integrate them?
+commit e977e9317f854be38c23fc72ffa2b250bca1cc3f (HEAD, origin/master, origin/HEAD, pending)
+Author: Magnus Olsson <magnus@minimum.se>
+Date:   Wed Mar 11 08:47:55 2015 +0100
 
-Thanks, bye,
+    openjdk-7-jre: RDEPENDS openjdk-7-common
+    
+    -jre binaries such as keytool, policytool and more requires libjli.so
+    so ensure there's a RDEPEND that provides it.
+    
+    Same goes for openjdk-7-java (java binary FILERDEPENDS libjli.so).
+    
+    Both of these already DEPENDS -common, so the build was not broken before
+    but this patch will also silence the QA file-rdeps issue.
+    
+    Signed-off-by: Magnus Olsson <magnus@minimum.se>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
+commit 1b6a492c6e04673864204bcbeb14215c1b462e7d
+Author: Mario Domenech Goulart <mario@ossystems.com.br>
+Date:   Tue Mar 10 18:10:21 2015 -0300
 
-> ---
->  classes/qmake5_base.bbclass | 7 +++++--
->  recipes-qt/qt5/qt5.inc      | 2 ++
->  recipes-qt/qt5/qtbase.inc   | 5 +----
->  3 files changed, 8 insertions(+), 6 deletions(-)
-> 
-> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
-> index f1a09450efca..f58d291ab12a 100644
-> --- a/classes/qmake5_base.bbclass
-> +++ b/classes/qmake5_base.bbclass
-> @@ -13,6 +13,9 @@ OE_QMAKE_PLATFORM = "linux-oe-g++"
->  # Add -d to show debug output from every qmake call, but it prints *a lot*, better to add it only to debugged recipe
->  OE_QMAKE_DEBUG_OUTPUT ?= ""
->  
-> +# Look through supplied directories recursively by default
-> +OE_QMAKE_RECURSIVE ?= "-r"
-> +
->  # Paths in .prl files contain SYSROOT value
->  SSTATE_SCAN_FILES += "*.pri *.prl"
->  
-> @@ -159,8 +162,8 @@ qmake5_base_do_configure () {
->      # for config.tests to read this
->      export QMAKE_MAKE_ARGS="${EXTRA_OEMAKE}"
->  
-> -    CMD="${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} -r $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST"
-> -    ${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} -r $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST || die "Error calling $CMD"
-> +    CMD="${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} ${OE_QMAKE_RECURSIVE} $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST"
-> +    ${OE_QMAKE_QMAKE} -makefile -o Makefile ${OE_QMAKE_DEBUG_OUTPUT} ${OE_QMAKE_RECURSIVE} $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST || die "Error calling $CMD"
->  }
->  
->  qmake5_base_do_install() {
-> diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
-> index bb0bcdcac0af..22f0d30e0298 100644
-> --- a/recipes-qt/qt5/qt5.inc
-> +++ b/recipes-qt/qt5/qt5.inc
-> @@ -18,6 +18,8 @@ OE_QMAKE_PATH_SETTINGS = "${OE_QMAKE_PATH_QT_SETTINGS}"
->  OE_QMAKE_PATH_EXAMPLES = "${OE_QMAKE_PATH_QT_EXAMPLES}"
->  OE_QMAKE_PATH_TESTS = "${OE_QMAKE_PATH_QT_TESTS}"
->  
-> +OE_QMAKE_RECURSIVE = ""
-> +
->  # If Qt5 (qtbase) is machine specific, then everything will be,
->  # because the (initial) qtbase configuration becomes part of Qt5/qmake
->  python __anonymous() {
-> diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-> index 1d2efa020b3b..2d2bc07c6148 100644
-> --- a/recipes-qt/qt5/qtbase.inc
-> +++ b/recipes-qt/qt5/qtbase.inc
-> @@ -30,8 +30,6 @@ RDEPENDS_${PN}-tools += "perl"
->  # PACKAGECONFIG is kept rather minimal for people who don't need
->  # stuff like webkit (and it's easier to add options than remove)
->  
-> -# gl or gles needs to be enabled in order to build qtdeclarative
-> -# http://qt.gitorious.org/qt/qtdeclarative/commit/e988998a08b1420ed10bd02d9d4b3b8ed2289df9
->  PACKAGECONFIG_GL ?= "${@base_contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)}"
->  PACKAGECONFIG_FB ?= "${@base_contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
->  PACKAGECONFIG_X11 ?= "${@base_contains('DISTRO_FEATURES', 'x11', 'xcb xvideo xsync xshape xrender xrandr xfixes xinput2 xinput xinerama xcursor gtkstyle xkb', '', d)}"
-> @@ -77,7 +75,6 @@ PACKAGECONFIG[jpeg] = "-system-libjpeg,-no-libjpeg,jpeg"
->  PACKAGECONFIG[libpng] = "-system-libpng,-no-libpng,libpng"
->  PACKAGECONFIG[zlib] = "-system-zlib,-qt-zlib,zlib"
->  PACKAGECONFIG[pcre] = "-system-pcre,-qt-pcre,pcre"
-> -# gl or gles2 is needed in order to build qtdeclarative (qtdeclarative.do_configure fails to find quick module without)
->  PACKAGECONFIG[gl] = "-opengl desktop -no-eglfs,,virtual/libgl"
->  PACKAGECONFIG[gles2] = "-opengl es2 -eglfs,,virtual/libgles2 virtual/egl"
->  PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
-> @@ -115,7 +112,7 @@ PACKAGECONFIG[directfb] = "-directfb,-no-directfb,directfb"
->  PACKAGECONFIG[linuxfb] = "-linuxfb,-no-linuxfb"
->  PACKAGECONFIG[mitshm] = "-mitshm,-no-mitshm,mitshm"
->  PACKAGECONFIG[kms] = "-kms,-no-kms,virtual/mesa virtual/egl"
-> -# needed for qtdeclarative (qtdeclarative.do_configure fails to find quick module without)
-> +# needed for qtwebkit
->  PACKAGECONFIG[icu] = "-icu,-no-icu,icu"
->  PACKAGECONFIG[udev] = "-libudev,-no-libudev,udev"
->  # use -openssl-linked here to ensure that RDEPENDS for libcrypto and libssl are detected
-> 
+    rxtx: add patch to support i.MX serial ports
+    
+    Support for /dev/ttymxc* devices.
+    
+    Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
+commit a3ede8721f19af849c6a23e3f8e60485ef9f30df
+Author: Mario Domenech Goulart <mario@ossystems.com.br>
+Date:   Tue Mar 10 18:10:20 2015 -0300
 
--- 
-Nicolas Ferre
+    rxtx: update to the latest Debian patchset
+    
+    Update the recipe to apply all patches available from
+    git://anonscm.debian.org/pkg-java/rxtx.git as of
+    a4cd13e04254cea7842df2e30e9d12e9765a3ef9.
+    
+    Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit bd9c60238c4c62d9a0f2d60b89aef429a1b71e34
+Author: Magnus Olsson <magnus@minimum.se>
+Date:   Tue Mar 10 13:19:54 2015 +0100
+
+    initials: silence "populate_sysroot manifest not found" warnings
+    
+    A number of recipes in meta-java use autotools.bbclass for building; internally
+    it uses the sstate-control populate_sysroot manifests to locate and copy
+    aslocals for configure dependencies as part of the do_configure step.
+    The manifest path differs depending on if it's a native package or not so
+    autotools.bbclass looks at the package name to determine if its native or not
+    (it's native if it ends with "-native").
+    
+    The warnings are emitted because a few (native) recipes in meta-java (such as
+    cacao-initial, classpath-initial and more) are incorrectly being classified as
+    non-native by autotools.bbclass, which makes it look for the manifest in the
+    wrong place and finally gives up with the warning:
+    
+    WARNING: /home/oe/tmp-glibc/sstate-control/manifest-mymachine-libecj-bootstrap.populate_sysroot not found
+    
+    This happens for cacao-initial, classpath-initial, ecj-initial, libecj-boostrap,
+    jamvm-initial and jikes-initial since they are all native and rely on autotools.
+    
+    This patch renames the recipes so they end with -native, e.g ecj-initial-native.
+    It also updates the recipes so they DEPEND on the corresponding new name. This
+    helps autotools.bbclass to properly classify the recipes are native and silence
+    the warnings.
+    
+    Signed-off-by: Magnus Olsson <magnus@minimum.se>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Regards,
+
+--
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
