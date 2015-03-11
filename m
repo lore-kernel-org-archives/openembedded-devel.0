@@ -1,31 +1,33 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B69573AD2
+Return-Path: <ridishonline@gmail.com>
+Received: from mail-yh0-f41.google.com (mail-yh0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id DCBF07399A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2015 16:27:44 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1YVjU0-0006Sl-Qm from Joe_MacDonald@mentor.com ;
-	Wed, 11 Mar 2015 09:27:44 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 11 Mar 2015 09:27:43 -0700
-Received: by burninator (Postfix, from userid 1000)	id 35E155810F5; Wed, 11
-	Mar 2015 12:27:50 -0400 (EDT)
-Date: Wed, 11 Mar 2015 12:27:50 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20150311162750.GA4894@mentor.com>
-References: <EC21369A6993DD47985E1CBF1038266E263DC619@NA-MBX-04.mgc.mentorg.com>
-	<20150310222718.GB4083@mentor.com> <20150311123902.GA6713@jama>
+	Wed, 11 Mar 2015 17:40:05 +0000 (UTC)
+Received: by yhai57 with SMTP id i57so5279560yha.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2015 10:40:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=2mcSqagPjzYs9Pglf5hvOu8q1uSmBP8vYvi6wcNtLy0=;
+	b=AlEquPob96SAc7vYSRiF6BP/+0uau0gXU9Wf68O0Yh0prgU0IVzXzRdnzaV5AXCABQ
+	Rb5Q5Fb8mI3ifNQ7rkNDAMv3OLaaEcOJ/g1V2OqCGppCq4T/XE8Y6MJn55qV3UiEr1f6
+	l7j04xB35f39PrGer4I1cX9X4bJBXMYfY+JHiiVtePXplNfsmGyiWDeLk7UrSnz8umDx
+	MjtYu2OYr93XAU3mnXQAES65Y7E/wMxNnOAVsR/p0sTx0dcrncLsPPAwQAxh3UhyCzlJ
+	jDUjtjCdS/5vCN3cCjanMwj51o5zzbnSW/68iAGvu9Q5/8iFc7NDqYcOIfKknK0X8hgT
+	uA9g==
 MIME-Version: 1.0
-In-Reply-To: <20150311123902.GA6713@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-networking pending patches
+X-Received: by 10.236.208.36 with SMTP id p24mr37875064yho.1.1426095606572;
+	Wed, 11 Mar 2015 10:40:06 -0700 (PDT)
+Received: by 10.170.166.198 with HTTP; Wed, 11 Mar 2015 10:40:06 -0700 (PDT)
+In-Reply-To: <1426089592-16955-1-git-send-email-raj.khem@gmail.com>
+References: <1426089592-16955-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 11 Mar 2015 10:40:06 -0700
+Message-ID: <CAMHavc+PBUWD3Hkj7hj4nQnxVjSf-AYmrys3hEd626kFVXnpjA@mail.gmail.com>
+From: Ridish Rema Aravindan <ridishonline@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH V2] var/volatile: Mount it if doing ro-rfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,98 +41,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2015 16:27:46 -0000
-X-Groupsio-MsgNum: 54744
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="sm4nu43k4a2Rpi4c"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Mar 2015 17:40:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
---sm4nu43k4a2Rpi4c
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Khem,
 
-[Re: [oe] meta-networking pending patches] On 15.03.11 (Wed 13:39) Martin J=
-ansa wrote:
+Yes this is a welcome change.
 
-> On Tue, Mar 10, 2015 at 06:27:18PM -0400, Joe MacDonald wrote:
-> > [Re: [oe] meta-networking pending patches] On 15.03.10 (Tue 13:44) MacD=
-onald, Joe wrote:
-> >=20
-> > > Sure thing. I'll have a look today and update the status appropriatel=
-y.
-> > >=20
-> > > -J.
-> > >=20
-> > > On 10 Mar 2015 06:30, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > > Hi Joe,
-> > >=20
-> > > can you please check pending meta-networking patches?
-> > >=20
-> > > my master-next shows:
-> > > pick e7be331 openl2tp: add new recipe
-> >=20
-> > This has already been merged (ab75a8c8d0a57411af1452f9f8f41ccf29bb0cc7)
-> > and I don't see it in my patchworks list now.  The filter I'm using is
-> > this:
-> >=20
-> > http://patchwork.openembedded.org/project/oe/list/?state=3D1&q=3Dmeta-n=
-etworking&archive=3Dboth
->=20
-> OK, master-next version was adding it to recipes-daemons instead of
-> recipes-protocols, that's why it wasn't resolved when rebasing
-> master-next. Will drop it now from master-next.
->=20
-> Please use meta-networking bundle as filter as well:
-> http://patchwork.openembedded.org/bundle/jama/meta-networking/?archive=3D=
-both
-> http://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_sa=
-me_oe_project_on_patchwork
+Ridish
 
-Sure.  I'm working on reviewing the other outstanding ones now.
+On Wed, Mar 11, 2015 at 8:59 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> > > and few more are in patchwork:
-> > > http://patchwork.openembedded.org/bundle/jama/meta-networking/?archiv=
-e=3Dboth
-> >=20
-> > The others in this list also look like they were missed because they
-> > didn't contain the meta-networking tag in the subject line.  Are you
-> > manually creating that bundle or do you just have better filtering
-> > technology than I do for catching these oddball ones?
->=20
-> I'm maintaining all bundles manually
->=20
-> First I add to bundles based on e-mail prefix, but then when I'm reading
-> the commits for cherry-picking them to master-next I sometimes notice
-> that the patch is touching some layer without saying so in subject
-> prefix and I add these oddball onces to separate bundle just before
-> cherry-pick.
+> - Do not mount /var/volatile to be tmpfs always only when generating
+>   readonly rootfs
+> - Generate var-volatile.mount unit when using system in readonly-rootfs
+>   to mount /var/volatile as tmpfs
+> - for sysvinit, mount /var/volatile to be tmpfs if its not already
+>   mounted so
+> - Use RequiresMountsFor instead of After=, so systemd figures out the
+>   needed dependencies for making /var/volatile accessible for journald
+>   and not us.
+>
+> Change-Id: I0b176b3e1c1e88e84d2c93154aac04cef565d8ea
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta/classes/image.bbclass                                             |
+> 1 +
+>  meta/recipes-core/base-files/base-files/fstab                          |
+> 1 -
+>  meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh |
+> 2 +-
+>  meta/recipes-core/systemd/systemd/journald-volatile.conf               |
+> 2 +-
+>  4 files changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta/classes/image.bbclass b/meta/classes/image.bbclass
+> index 89eb5f3..818af86 100644
+> --- a/meta/classes/image.bbclass
+> +++ b/meta/classes/image.bbclass
+> @@ -228,6 +228,7 @@ read_only_rootfs_hook () {
+>         fi
+>
+>         if ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "true",
+> "false", d)}; then
+> +           sed -e 's#/tmp#/var/volatile#g'
+> ${IMAGE_ROOTFS}/lib/systemd/system/tmp.mount >
+> ${IMAGE_ROOTFS}/lib/systemd/system/var-volatile.mount
+>             # Update user database files so that services don't fail for a
+> read-only systemd system
+>             for conffile in
+> ${IMAGE_ROOTFS}/usr/lib/sysusers.d/systemd.conf
+> ${IMAGE_ROOTFS}/usr/lib/sysusers.d/systemd-remote.conf; do
+>                 [ -e $conffile ] || continue
+> diff --git a/meta/recipes-core/base-files/base-files/fstab
+> b/meta/recipes-core/base-files/base-files/fstab
+> index 739b844..56b14d7 100644
+> --- a/meta/recipes-core/base-files/base-files/fstab
+> +++ b/meta/recipes-core/base-files/base-files/fstab
+> @@ -5,7 +5,6 @@ proc                 /proc                proc
+>  defaults              0  0
+>  devpts               /dev/pts             devpts     mode=0620,gid=5
+>  0  0
+>  usbdevfs             /proc/bus/usb        usbdevfs   noauto
+>   0  0
+>  tmpfs                /run                 tmpfs
+> mode=0755,nodev,nosuid,strictatime 0  0
+> -tmpfs                /var/volatile        tmpfs      defaults
+>   0  0
+>
+>  # uncomment this if your device has a SD/MMC/Transflash slot
+>  #/dev/mmcblk0p1       /media/card          auto
+>  defaults,sync,noauto  0  0
+> diff --git
+> a/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh
+> b/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh
+> index 1a0328d..3ff39f4 100644
+> ---
+> a/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh
+> +++
+> b/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh
+> @@ -29,7 +29,7 @@ is_on_read_only_partition () {
+>
+>  if [ "$1" = "start" ] ; then
+>         if [ `is_on_read_only_partition /var/lib` = "yes" ]; then
+> -               grep -q "tmpfs /var/volatile" /proc/mounts || mount
+> /var/volatile
+> +               grep -q "tmpfs /var/volatile" /proc/mounts || mount -t
+> tmpfs -o strictatime tmpfs /var/volatile
+>                 mkdir -p /var/volatile/lib
+>                 cp -a /var/lib/* /var/volatile/lib
+>                 mount --bind /var/volatile/lib /var/lib
+> diff --git a/meta/recipes-core/systemd/systemd/journald-volatile.conf
+> b/meta/recipes-core/systemd/systemd/journald-volatile.conf
+> index b11e160..9356a4e 100644
+> --- a/meta/recipes-core/systemd/systemd/journald-volatile.conf
+> +++ b/meta/recipes-core/systemd/systemd/journald-volatile.conf
+> @@ -3,4 +3,4 @@
+>  # /var/log -> /var/volatile/log. And if the journal starts before the
+> mount
+>  # happens, the journal will appear empty until restarted.
+>  [Unit]
+> -After=var-volatile.mount
+> +RequiresMountsFor=/var/volatile
+> --
+> 2.1.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-Okay, good to know.  I've completely switched to using pwclient for my
-workflow, but I'll try to keep on top of the outliers as well.  Unless
-there's a pwclient-friendly way to work with bundles.  I haven't found
-anything while poking around except some out-of-tree patches from ~6y
-ago.  If you notice something lingering in the bundle, please go ahead
-and ping me on it.
-
---=20
--Joe MacDonald.
-:wq
-
---sm4nu43k4a2Rpi4c
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
-
-iQEcBAEBAgAGBQJVAG0CAAoJEEn8ffcsOfaWfZkH/jQQjTwbTS6t/kDMk8M1HPyy
-vblq4e99ai23ANbQMTqBtq1H505LPgeQKyYhdEVODiPOwgMuHDH7zit1F1oduEvh
-UKS7FUGD0CTWaBqmAwe9XEJzc33kDabdchi+8AP0ZZ/DRMDPN9QPd4xiNiECdJD+
-PlOC3kksMpAr+MzYRYFka5wiKPV3WBBTBD2TK2yHhJIf1idiun21hBgRm88lQ7jN
-urwd+610Rqb2CG37x/VGoWxOfgwliWyAPPAp1wBs3TWShMrFhMpejLCkt6J1LCIs
-Moq/7p5/OIwQ84j2CAk1NIE17v6OljnZ3NEFifOydVzmnLjrcEA+ixO0JxnYwg0=
-=/JtX
------END PGP SIGNATURE-----
-
---sm4nu43k4a2Rpi4c--
