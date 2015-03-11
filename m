@@ -1,43 +1,34 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
-	[209.85.192.49])
-	by mail.openembedded.org (Postfix) with ESMTP id C170373A05
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id DD87B73AE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2015 13:45:17 +0000 (UTC)
-Received: by qgea108 with SMTP id a108so9925267qge.8
+	Wed, 11 Mar 2015 16:00:15 +0000 (UTC)
+Received: by igbhl2 with SMTP id hl2so38164599igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2015 06:45:18 -0700 (PDT)
+	Wed, 11 Mar 2015 09:00:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:date:to:subject:user-agent:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=cOk6617VF9kWusrXsPMyqEo4jREMNATj0t9yLlkloQU=;
-	b=GAfIvOEfSlD+828gvBTN5ieUU5tL2gwMk6jHM+9jNrwY1eFIJUZ6FgA9caK63Er6HB
-	d9YEyC/bdymJvK+9BHvup0bsX7svVi+LvU1frIDsCxJ6zhZMNROgyIOtcCMtgvY8wElL
-	1ynHIk/8VNTVPz0bKlq4rBXgsC9ZyfGuRSdPfrG8PMf4D77VKbMdE3dIGz/pzxfIW8OK
-	MYKnIS5QvrQ3U0ecxHWBNuF6UAT/xv9S6pbaVZ/8NsaDFVboqqkf28y/uPA/6FXGxNON
-	U/s+dk2zujXlCWUxDy1eqvcGLMvtQBh1vlZTA8yCAqyOfpYIMT58LIFNlLDn+HC2BXFN
-	7PvQ==
-X-Received: by 10.55.52.146 with SMTP id b140mr75063001qka.43.1426081518345;
-	Wed, 11 Mar 2015 06:45:18 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([177.100.224.72])
-	by mx.google.com with ESMTPSA id
-	q193sm2570667qha.14.2015.03.11.06.45.17
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Mar 2015 06:45:17 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-X-Google-Original-From: otavio@nano.lab.ossystems.com.br (Otavio Salvador)
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id 50B121CD1A507; Wed, 11 Mar 2015 10:45:14 -0300 (BRT)
-Date: Wed, 11 Mar 2015 10:45:14 -0300
-To: <openembedded-devel@lists.openembedded.org>,
-	listing@nano.lab.ossystems.com.br, Mailing@nano.lab.ossystems.com.br,
-	Meta-OpenEmbedded@nano.lab.ossystems.com.br
-User-Agent: Heirloom mailx 12.5 6/20/10
-MIME-Version: 1.0
-Message-Id: <20150311134514.50B121CD1A507@nano.lab.ossystems.com.br>
-Subject: Updates to meta-java (master) in 2015-03-11
+	h=from:to:cc:subject:date:message-id;
+	bh=wen0BgBxwcrVJkGF/TjLvdGf2nnqbud8hx4YeXWM5wo=;
+	b=UxUTOba6QG6FNDFuCa24rETBUQCVLbhBa85B6808BT+Ln1hjR23llcyQrdQ+tBVEHy
+	6j8ox5favywDFlMBDrjgq7OcCG83qFWKKBGOLUE3fTtk0Saa5EIyj98KyyvQW08q3OIo
+	5TR6dmn/Ec3qJHYO8jqWwRXZoltqaB9oJBImJmfvt7g/WpyjEMH67EglULu+0/7RmLkh
+	ECAEONuX1QZMD3EDwvmILeoElPLshuvd0mlwfl7t84GYqD/885FPpNQ9IeRkuvs5tIL4
+	XTyR7MewpATBpWAJ2bxBh6rwPRdn2V0BSCev7HiLT4Rj1VTf3cnaZ2ThFtUSVgtEv1Nk
+	hzDw==
+X-Received: by 10.42.37.144 with SMTP id y16mr41730423icd.51.1426089616052;
+	Wed, 11 Mar 2015 09:00:16 -0700 (PDT)
+Received: from kraj-ch2e.sys.comcast.net (a-96-119-88-205.sys.comcast.net.
+	[96.119.88.205])
+	by mx.google.com with ESMTPSA id c76sm2667790ioc.16.2015.03.11.09.00.14
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 11 Mar 2015 09:00:14 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Mar 2015 15:59:52 +0000
+Message-Id: <1426089592-16955-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [PATCH V2] var/volatile: Mount it if doing ro-rfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,90 +42,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2015 13:45:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Mar 2015 16:00:17 -0000
 
-Hello,
+- Do not mount /var/volatile to be tmpfs always only when generating
+  readonly rootfs
+- Generate var-volatile.mount unit when using system in readonly-rootfs
+  to mount /var/volatile as tmpfs
+- for sysvinit, mount /var/volatile to be tmpfs if its not already
+  mounted so
+- Use RequiresMountsFor instead of After=, so systemd figures out the
+  needed dependencies for making /var/volatile accessible for journald
+  and not us.
 
-I pushed following updates:
+Change-Id: I0b176b3e1c1e88e84d2c93154aac04cef565d8ea
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta/classes/image.bbclass                                             | 1 +
+ meta/recipes-core/base-files/base-files/fstab                          | 1 -
+ meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh | 2 +-
+ meta/recipes-core/systemd/systemd/journald-volatile.conf               | 2 +-
+ 4 files changed, 3 insertions(+), 3 deletions(-)
 
-commit e977e9317f854be38c23fc72ffa2b250bca1cc3f (HEAD, origin/master, origin/HEAD, pending)
-Author: Magnus Olsson <magnus@minimum.se>
-Date:   Wed Mar 11 08:47:55 2015 +0100
+diff --git a/meta/classes/image.bbclass b/meta/classes/image.bbclass
+index 89eb5f3..818af86 100644
+--- a/meta/classes/image.bbclass
++++ b/meta/classes/image.bbclass
+@@ -228,6 +228,7 @@ read_only_rootfs_hook () {
+ 	fi
+ 
+ 	if ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "true", "false", d)}; then
++	    sed -e 's#/tmp#/var/volatile#g' ${IMAGE_ROOTFS}/lib/systemd/system/tmp.mount > ${IMAGE_ROOTFS}/lib/systemd/system/var-volatile.mount
+ 	    # Update user database files so that services don't fail for a read-only systemd system
+ 	    for conffile in ${IMAGE_ROOTFS}/usr/lib/sysusers.d/systemd.conf ${IMAGE_ROOTFS}/usr/lib/sysusers.d/systemd-remote.conf; do
+ 		[ -e $conffile ] || continue
+diff --git a/meta/recipes-core/base-files/base-files/fstab b/meta/recipes-core/base-files/base-files/fstab
+index 739b844..56b14d7 100644
+--- a/meta/recipes-core/base-files/base-files/fstab
++++ b/meta/recipes-core/base-files/base-files/fstab
+@@ -5,7 +5,6 @@ proc                 /proc                proc       defaults              0  0
+ devpts               /dev/pts             devpts     mode=0620,gid=5       0  0
+ usbdevfs             /proc/bus/usb        usbdevfs   noauto                0  0
+ tmpfs                /run                 tmpfs      mode=0755,nodev,nosuid,strictatime 0  0
+-tmpfs                /var/volatile        tmpfs      defaults              0  0
+ 
+ # uncomment this if your device has a SD/MMC/Transflash slot
+ #/dev/mmcblk0p1       /media/card          auto       defaults,sync,noauto  0  0
+diff --git a/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh b/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh
+index 1a0328d..3ff39f4 100644
+--- a/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh
++++ b/meta/recipes-core/initscripts/initscripts-1.0/read-only-rootfs-hook.sh
+@@ -29,7 +29,7 @@ is_on_read_only_partition () {
+ 
+ if [ "$1" = "start" ] ; then
+ 	if [ `is_on_read_only_partition /var/lib` = "yes" ]; then
+-		grep -q "tmpfs /var/volatile" /proc/mounts || mount /var/volatile
++		grep -q "tmpfs /var/volatile" /proc/mounts || mount -t tmpfs -o strictatime tmpfs /var/volatile
+ 		mkdir -p /var/volatile/lib
+ 		cp -a /var/lib/* /var/volatile/lib
+ 		mount --bind /var/volatile/lib /var/lib
+diff --git a/meta/recipes-core/systemd/systemd/journald-volatile.conf b/meta/recipes-core/systemd/systemd/journald-volatile.conf
+index b11e160..9356a4e 100644
+--- a/meta/recipes-core/systemd/systemd/journald-volatile.conf
++++ b/meta/recipes-core/systemd/systemd/journald-volatile.conf
+@@ -3,4 +3,4 @@
+ # /var/log -> /var/volatile/log. And if the journal starts before the mount
+ # happens, the journal will appear empty until restarted.
+ [Unit]
+-After=var-volatile.mount
++RequiresMountsFor=/var/volatile
+-- 
+2.1.4
 
-    openjdk-7-jre: RDEPENDS openjdk-7-common
-    
-    -jre binaries such as keytool, policytool and more requires libjli.so
-    so ensure there's a RDEPEND that provides it.
-    
-    Same goes for openjdk-7-java (java binary FILERDEPENDS libjli.so).
-    
-    Both of these already DEPENDS -common, so the build was not broken before
-    but this patch will also silence the QA file-rdeps issue.
-    
-    Signed-off-by: Magnus Olsson <magnus@minimum.se>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-commit 1b6a492c6e04673864204bcbeb14215c1b462e7d
-Author: Mario Domenech Goulart <mario@ossystems.com.br>
-Date:   Tue Mar 10 18:10:21 2015 -0300
-
-    rxtx: add patch to support i.MX serial ports
-    
-    Support for /dev/ttymxc* devices.
-    
-    Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-commit a3ede8721f19af849c6a23e3f8e60485ef9f30df
-Author: Mario Domenech Goulart <mario@ossystems.com.br>
-Date:   Tue Mar 10 18:10:20 2015 -0300
-
-    rxtx: update to the latest Debian patchset
-    
-    Update the recipe to apply all patches available from
-    git://anonscm.debian.org/pkg-java/rxtx.git as of
-    a4cd13e04254cea7842df2e30e9d12e9765a3ef9.
-    
-    Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-commit bd9c60238c4c62d9a0f2d60b89aef429a1b71e34
-Author: Magnus Olsson <magnus@minimum.se>
-Date:   Tue Mar 10 13:19:54 2015 +0100
-
-    initials: silence "populate_sysroot manifest not found" warnings
-    
-    A number of recipes in meta-java use autotools.bbclass for building; internally
-    it uses the sstate-control populate_sysroot manifests to locate and copy
-    aslocals for configure dependencies as part of the do_configure step.
-    The manifest path differs depending on if it's a native package or not so
-    autotools.bbclass looks at the package name to determine if its native or not
-    (it's native if it ends with "-native").
-    
-    The warnings are emitted because a few (native) recipes in meta-java (such as
-    cacao-initial, classpath-initial and more) are incorrectly being classified as
-    non-native by autotools.bbclass, which makes it look for the manifest in the
-    wrong place and finally gives up with the warning:
-    
-    WARNING: /home/oe/tmp-glibc/sstate-control/manifest-mymachine-libecj-bootstrap.populate_sysroot not found
-    
-    This happens for cacao-initial, classpath-initial, ecj-initial, libecj-boostrap,
-    jamvm-initial and jikes-initial since they are all native and rely on autotools.
-    
-    This patch renames the recipes so they end with -native, e.g ecj-initial-native.
-    It also updates the recipes so they DEPEND on the corresponding new name. This
-    helps autotools.bbclass to properly classify the recipes are native and silence
-    the warnings.
-    
-    Signed-off-by: Magnus Olsson <magnus@minimum.se>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
