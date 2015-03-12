@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id EE14E6AC3A
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id CDF4773B3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 11:31:07 +0000 (UTC)
-Received: by wghl18 with SMTP id l18so15622717wgh.5
+	Thu, 12 Mar 2015 11:32:17 +0000 (UTC)
+Received: by wggy19 with SMTP id y19so15667430wgg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 04:31:07 -0700 (PDT)
+	Thu, 12 Mar 2015 04:32:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=yI0tWqXtgfWgXtIDDJdowpTeFN700+EM1Rlbb3+lHSU=;
-	b=JyqKSva/DEbcU+i5LsgCKjPYi0CBMh0d8830TGGCsRN/JWJMdP/Mk6rDl0uy2kKKOS
-	CJpSdyVJElzMQCaRX4lSaYY4Yc5g3ibAMnWDhuEwbOVs6bNl4HQOU4LBrkp9JUHut1Pm
-	X1uMvD6wHiISB10xbKATLO3vB8xYmnwU6k0NCwi2QsvRQNbM7fI43Q/PeopFkcrhqW/z
-	8T3aFVwQiXmfj5H0T8orgts20QGFTg8y2EroXxc8oJIdxlt8jY2EH7pkIOv09cMgR9GV
-	qIVIKhqpy7ZugJ2GEL3V1q5lo51o7UinZCrvXjnL5Ns1ReE5zumnlZm9VpobEXpLEWI8
-	tjIA==
-X-Received: by 10.194.193.99 with SMTP id hn3mr87218718wjc.148.1426159867727; 
-	Thu, 12 Mar 2015 04:31:07 -0700 (PDT)
+	bh=+Iz3Ujozr4AYIsZrC0Sr/u9c4CFUUCz5DiI3l2nTQBE=;
+	b=0W1ET6QCKTwESHOSOzKcqEaDQoz78PCx7TBHdMkjw+kezjflOTut6CGXIrNnIce9o5
+	A/WIg6ldi/PboSCHyBhrxZLj3JrCfWFw4YlqX9wXX7iRGcrk0nzRq6Pd5Rxr2ky1j5qm
+	XvyvRx4FydFHFoK+D0edPbHAti6eQubwDIoMZc98AZcydT+zwwdMjWRPUuSZ40P5Fkyc
+	3DwKgQeTLBKohHO/T4UDUl6RnRP51hDbsLflIAUzIfCclOOnZjoRlX8Xe62TTmvbFBoY
+	PGlZMZzuB6aGEuWsYQTs5SIg0kAs+c1FRYVpl3jT6/jeUNUvvFifGZ6OUh82aDepCOTO
+	M+pQ==
+X-Received: by 10.194.192.104 with SMTP id hf8mr86747683wjc.44.1426159938187; 
+	Thu, 12 Mar 2015 04:32:18 -0700 (PDT)
 Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
 	by mx.google.com with ESMTPSA id
-	cj9sm9568145wjc.42.2015.03.12.04.31.06
+	ei3sm15544781wib.4.2015.03.12.04.32.17
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Mar 2015 04:31:06 -0700 (PDT)
+	Thu, 12 Mar 2015 04:32:17 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 12 Mar 2015 12:31:47 +0100
+Date: Thu, 12 Mar 2015 12:32:58 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150312113147.GA2338@jama>
-References: <1426157761-31744-1-git-send-email-ronan.lemartret@gmail.com>
+Message-ID: <20150312113258.GB2338@jama>
+References: <1425812371-1564-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1426157761-31744-1-git-send-email-ronan.lemartret@gmail.com>
+In-Reply-To: <1425812371-1564-1-git-send-email-raj.khem@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] add libgcrypt-native to avoid host corruption
+Subject: Re: [PATCHv3 1/2] soci: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,49 +47,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2015 11:31:10 -0000
-X-Groupsio-MsgNum: 54751
+X-List-Received-Date: Thu, 12 Mar 2015 11:32:20 -0000
+X-Groupsio-MsgNum: 54752
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ew6BAiZeqk4r7MaW"
+	protocol="application/pgp-signature"; boundary="zx4FCpZtqtKETZ7O"
 Content-Disposition: inline
 
---ew6BAiZeqk4r7MaW
+--zx4FCpZtqtKETZ7O
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 12, 2015 at 11:56:01AM +0100, Ronan wrote:
-> Signed-off-by: Ronan <ronan.lemartret@gmail.com>
-> ---
->  meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+On Sun, Mar 08, 2015 at 10:59:30AM +0000, Khem Raj wrote:
+> Define PACKAGECONFIG to enable a given backend of choice
+> by default its 'empty'
 >=20
-> diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.b=
-b b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-> index e3c833b..5c4c6b1 100644
-> --- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-> +++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
-> @@ -3,7 +3,10 @@ HOMEPAGE =3D "http://www.gnu.org/software/libmicrohttpd/"
->  LICENSE =3D "LGPL-2.1+"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9331186f4f80db7da0e724bdd6554=
-ee5"
->  SECTION =3D "net"
-> -DEPENDS =3D "libgcrypt gnutls file"
-> +DEPENDS =3D "gnutls file"
+> Change-Id: Ie1123af658ca94d2fe22a3ca1a32dfb47d58979e
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../recipes-support/soci/soci/soci_libdir.patch    | 28 +++++++++++++
+>  meta-oe/recipes-support/soci/soci_3.2.2.bb         | 48 ++++++++++++++++=
+++++++
+>  2 files changed, 76 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/soci/soci/soci_libdir.patch
+>  create mode 100644 meta-oe/recipes-support/soci/soci_3.2.2.bb
+
+The patch fails to apply:
+ERROR: Command Error: exit status: 1  Output:
+Applying patch soci_libdir.patch
+patching file CMakeLists.txt
+Hunk #1 FAILED at 69.
+1 out of 1 hunk FAILED -- rejects in file CMakeLists.txt
+Patch soci_libdir.patch does not apply (enforce with -f)
+ERROR: Function failed: patch_do_patch
+ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
+ibc/work/armv5e-oe-linux-gnueabi/soci/3.2.2-r0/temp/log.do_patch.26404
+NOTE: recipe soci-3.2.2-r0: task do_patch: Failed
+ERROR: Task 21069 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
+e/recipes-support/soci/soci_3.2.2.bb, do_patch) failed with exit code '1'
+
+Can you push it to contrib repo to exclude possible patchwork breakage of i=
+t?
+
+> diff --git a/meta-oe/recipes-support/soci/soci/soci_libdir.patch b/meta-o=
+e/recipes-support/soci/soci/soci_libdir.patch
+> new file mode 100644
+> index 0000000..8da57ce
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/soci/soci/soci_libdir.patch
+> @@ -0,0 +1,28 @@
+> +Define SOCI_LIBDIR only if its not passed via environemnt. In OE we
+> +want to set it per our choice since we use 'lib' for 64bit unless we
+> +are using multilib
 > +
-> +#libmicrohttpd uses the tool libgcrypt-config, so we need libgcrypt-nati=
-ve
-> +DEPENDS_append =3D " libgcrypt libgcrypt-native"
-
-Why do you use append instead of adding it directly in DEPENDS?
-
-We should fix configure to use pkgconfig for libgcrypt, not to add
-libgcrypt-config from native recipe (when we want target sysroot paths).
-
->  SRC_URI =3D "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
->  SRC_URI[md5sum] =3D "2947eee13c2c8affb95023a0cb6fda0c"
+> +-Khem
+> +
+> +Index: soci-3.2.2/CMakeLists.txt
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- soci-3.2.2.orig/CMakeLists.txt
+> ++++ soci-3.2.2/CMakeLists.txt
+> +@@ -69,11 +69,12 @@ include(SociDependencies)
+> + #######################################################################=
+########
+> + # Installation
+> + #######################################################################=
+########
+> +-
+> +-if(APPLE OR CMAKE_SIZEOF_VOID_P EQUAL 4)
+> +-  set(SOCI_LIBDIR "lib")
+> +-else()
+> +-  set(SOCI_LIBDIR "lib")
+> ++if(NOT DEFINED SOCI_LIBDIR)
+> ++  if(APPLE OR CMAKE_SIZEOF_VOID_P EQUAL 4)
+> ++    set(SOCI_LIBDIR "lib")
+> ++  else()
+> ++    set(SOCI_LIBDIR "lib")
+> ++  endif()
+> + endif()
+> +=20
+> + set(BINDIR "bin" CACHE PATH "The directory to install binaries into.")
+> diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb b/meta-oe/recipes=
+-support/soci/soci_3.2.2.bb
+> new file mode 100644
+> index 0000000..887f5a2
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/soci/soci_3.2.2.bb
+> @@ -0,0 +1,48 @@
+> +# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
+> +# Released under the MIT license (see COPYING.MIT for the terms)
+> +
+> +DESCRIPTION =3D "The C++ Database Access Library"
+> +HOMEPAGE =3D "http://soci.sourceforge.net"
+> +LICENSE =3D "BSL-1.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE_1_0.txt;md5=3De4224ccaecb14d942c71d=
+31bef20d78c"
+> +SECTION =3D "libs"
+> +DEPENDS =3D "boost"
+> +
+> +
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.g=
+z \
+> +           file://soci_libdir.patch \
+> +          "
+> +SRC_URI[md5sum] =3D "bc3c35f6cd3f80a1be19fe30b3c111bf"
+> +SRC_URI[sha256sum] =3D "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743=
+582de2ff443ccb1c"
+> +
+> +TESTCONFIG =3D '-DSOCI_TEST_EMPTY_CONNSTR=3D"dummy" -DSOCI_TEST_SQLITE3_=
+CONNSTR=3D"test.db" \
+> +              -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING=3D"dbname=3Dsoci_tes=
+t" \
+> +              -DSOCI_TEST_MYSQL_CONNSTR:STRING=3D"db=3Dsoci_test user=3D=
+oe password=3Doe"'
+> +
+> +OBASEDIR ?=3D "/opt/oracle"
+> +OINCDIR =3D "rdbms/public"
+> +OLIBDIR =3D "lib"
+> +
+> +PACKAGECONFIG[sqlite3] =3D "-DSOCI_SQLITE3=3DON,-DSOCI_SQLITE3=3DOFF,sql=
+ite3,"
+> +PACKAGECONFIG[mysql] =3D "-DSOCI_MYSQL=3DON,-DSOCI_MYSQL=3DOFF,mariadb,"
+> +PACKAGECONFIG[postgresql] =3D "-DSOCI_POSTGRESQL=3DON,-DSOCI_POSTGRESQL=
+=3DOFF,postgresql,"
+> +PACKAGECONFIG[odbc] =3D "-DSOCI_ODBC=3DON,-DSOCI_ODBC=3DOFF,,"
+> +PACKAGECONFIG[empty] =3D "-DSOCI_EMPTY=3DON,-DSOCI_EMPTY=3DOFF,,"
+> +PACKAGECONFIG[oracle] =3D "-DWITH_ORACLE=3DON --with-oracle-include=3D${=
+OINCDIR} --with-oracle-lib=3D${OLIBDIR},-DWITH_ORACLE=3DOFF,,"
+> +PACKAGECONFIG[ptest] =3D "${TESTCONFIG},,,"
+> +
+> +# enable your backend by default we enable 'empty'
+> +PACKAGECONFIG ??=3D "empty"
+> +
+> +# Take the flags added by PACKAGECONFIG and pass them to cmake.
+> +EXTRA_OECMAKE =3D "${EXTRA_OECONF} -DSOCI_LIBDIR=3D${libdir}"
+> +
+> +inherit cmake
+> +
+> +PACKAGES +=3D "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc ${P=
+N}-oracle"
+> +
+> +FILES_${PN}-sqlite3 =3D "${libdir}/lib${BPN}_sqlite3.so.*"
+> +FILES_${PN}-mysql =3D "${libdir}/lib${BPN}_mysql.so.*"
+> +FILES_${PN}-postgresql =3D "${libdir}/lib${BPN}_postgresql.so.*"
+> +FILES_${PN}-odbc =3D "${libdir}/lib${BPN}_odbc.so.*"
+> +FILES_${PN}-oracle =3D "${libdir}/lib${BPN}_oracle.so.*"
 > --=20
-> 1.9.1
+> 2.1.4
 >=20
 > --=20
 > _______________________________________________
@@ -100,16 +205,16 @@ libgcrypt-config from native recipe (when we want target sysroot paths).
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ew6BAiZeqk4r7MaW
+--zx4FCpZtqtKETZ7O
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlUBeSMACgkQN1Ujt2V2gByeiQCgoCL0WRBtFTfLvMBBRKqcnyTd
-eboAoLQdpq5E8JWhDztSkzKhS3+jqFi+
-=imsr
+iEYEARECAAYFAlUBeWoACgkQN1Ujt2V2gBwfZQCfWz/cNJ2esQ1hhFBAmzSdf4zK
+jDMAn3LCzrBmL8mo2jTbd0YXJaTBvaww
+=Q9fY
 -----END PGP SIGNATURE-----
 
---ew6BAiZeqk4r7MaW--
+--zx4FCpZtqtKETZ7O--
