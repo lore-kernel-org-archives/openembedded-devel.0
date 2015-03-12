@@ -1,40 +1,27 @@
-Return-Path: <frederico@cadete.eu>
-Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
-	[209.85.220.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 18FBC73B50
+Return-Path: <daniel.markus@leica-geosystems.com>
+Received: from outbound.sbg.se (outbound.sbg.se [83.241.165.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 74F4773B6C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 12:22:03 +0000 (UTC)
-Received: by padet14 with SMTP id et14so20107802pad.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 05:22:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type:content-transfer-encoding;
-	bh=3aLb6724GR9Co41t7xUCtZJILzCGHZJ6FrnlvTddi5s=;
-	b=HtjeTK6/UJY5aJfv9Mk1qOXE1oJgVSP82iPXNdPGIIxiLxx0Fa13Fy0u6UGsDl8O28
-	zfoRfHPFJd1swSGighOkqqqL+0DjsigDthzEvUhw7o6qSuE85lh5Xc4I/rUuoCZG43Bv
-	ySs9bEY5V2pQQZlPn4hvhWhOxwAao4DG/uoytQY03XzyUXp+wuN3/K6t9SCCHg+B3mpf
-	BpesKXihtK1VjUZCU/4AFbclUFbSdYJ0wrixGFPBFEzFVkrLJoHgRgkbgVTwtkehGguz
-	srWB3kP2n0nhgj0xdPu2n9ucWmYe/cbNP/kSjcfEFbGLuYCewQVZobhdDZthkL1G8H9Y
-	fImQ==
-X-Gm-Message-State: ALoCoQkoiRa8xDGdKW7MQOTttKYmUpuMQcZs0q7a6ZQDIRxMjmNDPSPaPkX9+CdxrNiFSAZYieS+
-X-Received: by 10.70.134.102 with SMTP id pj6mr12030619pdb.95.1426162924871;
-	Thu, 12 Mar 2015 05:22:04 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.66.139.198 with HTTP; Thu, 12 Mar 2015 05:21:44 -0700 (PDT)
-X-Originating-IP: [212.166.56.147]
-In-Reply-To: <20150312114832.GC2338@jama>
-References: <20150310172917.GF2340@jama>
-	<1426019866-3634-1-git-send-email-frederico@cadete.eu>
-	<20150312114832.GC2338@jama>
-From: Frederico Cadete <frederico@cadete.eu>
-Date: Thu, 12 Mar 2015 13:21:44 +0100
-Message-ID: <CAL5ScNWvNufp4KdpGVzwnFMwCQ5H+5Gfg2B4Tf=fsZpoPrNvzA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: Frederico Cadete <frederico.cadete@awtce.be>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v2] qt5-git, *qtbase*, qt5everywheredemo: Fetch from code.qt.io
+	Thu, 12 Mar 2015 13:36:37 +0000 (UTC)
+Received: from hermes.sbg.se (mail.sbg.se [83.241.165.77])
+	by outbound.sbg.se (Postfix) with ESMTP id 77545184830;
+	Thu, 12 Mar 2015 14:36:36 +0100 (CET)
+Received: from localhost.localdomain (unknown [10.213.0.77])
+	by hermes.sbg.se (Postfix) with ESMTP id E998D1403DE;
+	Thu, 12 Mar 2015 14:35:13 +0100 (CET)
+From: Daniel Markus <daniel.markus@leica-geosystems.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Mar 2015 14:34:49 +0100
+Message-Id: <1426167289-12437-1-git-send-email-daniel.markus@leica-geosystems.com>
+X-Mailer: git-send-email 1.9.1
+X-SBG-MailScanner-ID: E998D1403DE.A7B5D
+X-SBG-MailScanner: Found to be clean
+X-SBG-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
+	score=-102.9, required 5, autolearn=not spam, ALL_TRUSTED -1.00,
+	BAYES_00 -1.90, USER_IN_WHITELIST -100.00)
+X-SBG-MailScanner-From: daniel.markus@leica-geosystems.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] socorro-syms: Add directory arrangement needed by minidump_stackwalk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,144 +35,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2015 12:22:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Mar 2015 13:36:39 -0000
 
-Thanks, and sorry about that. I realize now (i.e. too late) that my
-yocto setup is not building qt5everywheredemo.
+http://code.google.com/p/google-breakpad/wiki/LinuxStarterGuide
 
-On Thu, Mar 12, 2015 at 12:48 PM, Martin Jansa <martin.jansa@gmail.com> wro=
-te:
-> On Tue, Mar 10, 2015 at 09:37:46PM +0100, Frederico Cadete wrote:
->> From: Frederico Cadete <frederico.cadete@awtce.be>
->>
->> Gitorious disabled the git:// protocol, breaking fetches.
->> Also, this service is scheduled to stop in May 2015, so move to
->> code.qt.io.
->>
->> Signed-off-by: Frederico Cadete <frederico@cadete.eu>
->> ---
->>  recipes-qt/examples/qt5everywheredemo_1.0.bb | 2 +-
->>  recipes-qt/qt5/nativesdk-qtbase_git.bb       | 2 +-
->>  recipes-qt/qt5/qt5-git.inc                   | 2 +-
->>  recipes-qt/qt5/qtbase-native_git.bb          | 2 +-
->>  recipes-qt/qt5/qtbase_git.bb                 | 2 +-
->>  5 files changed, 5 insertions(+), 5 deletions(-)
->>
->> diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb b/recipes-qt/e=
-xamples/qt5everywheredemo_1.0.bb
->> index 4f7022c..60edaa4 100644
->> --- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
->> +++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
->> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://main.cpp;md5=3D1187cb795a0f=
-96bce64e63dd1a67dc2b"
->>  DEPENDS =3D "qtdeclarative qtgraphicaleffects"
->>
->>  SRCREV =3D "9a868f96ee63c21ceda890d8dfc9d33f093d1b6d"
->> -SRC_URI =3D "git://gitorious.org/qt-labs/qt5-everywhere-demo.git"
->> +SRC_URI =3D "git://code.qt.io/qt-labs/qt5-everywhere-demo.git"
->
-> This one doesn't work:
-> WARNING: Failed to fetch URL git://code.qt.io/qt-labs/qt5-everywhere-demo=
-.git, attempting MIRRORS if available
-> ERROR: Fetcher failure: Unable to find revision 9a868f96ee63c21ceda890d8d=
-fc9d33f093d1b6d in branch master even from upstream
-> ERROR: Function failed: Fetcher failure for URL: 'git://code.qt.io/qt-lab=
-s/qt5-everywhere-demo.git'. Unable to fetch URL from any source.
-> ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-=
-glibc/work/armv5e-oe-linux-gnueabi/qt5everywheredemo/1.0-r0/temp/log.do_fet=
-ch.12973
-> NOTE: recipe qt5everywheredemo-1.0-r0: task do_fetch: Failed
-> ERROR: Task 6740 (/home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/exa=
-mples/qt5everywheredemo_1.0.bb, do_fetch) failed with exit code '1'
->
-> SRCREV 9a868f96ee63c21ceda890d8dfc9d33f093d1b6d doesn't exist on code.qt.=
-io
->
-> It was initial commit in gitorious repo:
-> commit 9a868f96ee63c21ceda890d8dfc9d33f093d1b6d
-> Author: Sergio Ahumada <sergio.ahumada@digia.com>
-> Date:   Wed Jul 3 12:09:40 2013 +0200
->
->     Initial commit
->
-> This is exactly matching with this commit in code.qt.io:
-> commit c17fe9e0ec0882ac4c4dc1168095f569acab5d09
-> Author: Kimmo Ollila <kimmo.ollila@digia.com>
-> Date:   Wed Jun 19 13:02:05 2013 +0300
->
->     Fixed radio crash on application close
->
->     Change-Id: Iaae40f9112e70ac9ac09b7127128560470e5ca91
->     Reviewed-by: Lasse R=C3=A4ih=C3=A4 <lasse.raiha@digia.com>
->
-> So I'll update SRCREV in this recipe, you don't need to resend.
->
->>  S =3D "${WORKDIR}/git/QtDemo"
->>
->> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nat=
-ivesdk-qtbase_git.bb
->> index 9194a83..df80407 100644
->> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
->> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
->> @@ -5,7 +5,7 @@ require ${PN}.inc
->>  FILESEXTRAPATHS =3D. "${FILE_DIRNAME}/${BPN}-git:"
->>
->>  SRC_URI =3D "\
->> -    git://qt.gitorious.org/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRA=
-NCH} \
->> +    git://code.qt.io/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRANCH} \
->>  "
->>
->>  # common for qtbase-native, qtbase-nativesdk and qtbase
->> diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
->> index da962b8..84ddf49 100644
->> --- a/recipes-qt/qt5/qt5-git.inc
->> +++ b/recipes-qt/qt5/qt5-git.inc
->> @@ -5,7 +5,7 @@ QT_MODULE_BRANCH ?=3D "5.4"
->>
->>  # each module needs to define valid SRCREV
->>  SRC_URI +=3D " \
->> -    git://qt.gitorious.org/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRA=
-NCH} \
->> +    git://code.qt.io/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRANCH} \
->>  "
->>
->>  S =3D "${WORKDIR}/git"
->> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase=
--native_git.bb
->> index cebc021..5a308d4 100644
->> --- a/recipes-qt/qt5/qtbase-native_git.bb
->> +++ b/recipes-qt/qt5/qtbase-native_git.bb
->> @@ -2,7 +2,7 @@ require qt5-git.inc
->>  require ${PN}.inc
->>
->>  SRC_URI =3D "\
->> -    git://qt.gitorious.org/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRA=
-NCH} \
->> +    git://code.qt.io/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRANCH} \
->>  "
->>
->>  # common for qtbase-native, qtbase-nativesdk and qtbase
->> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
->> index d33eb68..549c92a 100644
->> --- a/recipes-qt/qt5/qtbase_git.bb
->> +++ b/recipes-qt/qt5/qtbase_git.bb
->> @@ -2,7 +2,7 @@ require qt5-git.inc
->>  require ${PN}.inc
->>
->>  SRC_URI =3D "\
->> -    git://qt.gitorious.org/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRA=
-NCH} \
->> +    git://code.qt.io/qt/${QT_MODULE}.git;branch=3D${QT_MODULE_BRANCH} \
->>  "
->>
->>  # common for qtbase-native, qtbase-nativesdk and qtbase
->> --
->> 2.1.4
->>
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+When extracting a stack trace out of a Breakpad minidump, the application
+minidump_stackwalk is used. This application needs all symbol files to be
+arranged in a particular directory structure in order to match the correct
+symbol file with the version of the crashed program in question.
+
+A directory structure is created in accordance with minidump_stackwalk. The
+structure contains the name of the application binary and a hash value where the
+hash corresponds to the binary the symbol file was produced from. The symbol
+file is moved to the hash directory allowing multiple versions of the same
+symbol file.
+
+Signed-off-by: Daniel Markus <daniel.markus@leica-geosystems.com>
+---
+ meta-oe/classes/socorro-syms.bbclass | 50 +++++++++++++++++++++++++++++++++++-
+ 1 file changed, 49 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/classes/socorro-syms.bbclass b/meta-oe/classes/socorro-syms.bbclass
+index 766a9e6..c272952 100644
+--- a/meta-oe/classes/socorro-syms.bbclass
++++ b/meta-oe/classes/socorro-syms.bbclass
+@@ -42,6 +42,16 @@ python symbol_file_preprocess() {
+     breakpad_sym_file_path = os.path.join(breakpad_syms_dir, sym_file_name)
+     socorro_sym_file_path = os.path.join(socorro_syms_dir, sym_file_name)
+ 
++    create_socorro_sym_file(breakpad_sym_file_path, socorro_sym_file_path)
++
++    arrange_socorro_sym_file(socorro_sym_file_path, socorro_syms_dir)
++
++    return
++}
++
++
++def create_socorro_sym_file(breakpad_sym_file_path, socorro_sym_file_path):
++
+     # In the symbol file, all source files are referenced like the following.
+     # FILE 123 /path/to/some/File.cpp
+     # Go through all references and replace the file paths with repository
+@@ -56,7 +66,6 @@ python symbol_file_preprocess() {
+                 socorro_sym_file.write(line)
+ 
+     return
+-}
+ 
+ 
+ def socorro_file_reference(line):
+@@ -162,3 +171,42 @@ def git_repository_path(source_file_path):
+ 
+     return socorro_reference
+ 
++
++def arrange_socorro_sym_file(socorro_sym_file_path, socorro_syms_dir):
++
++    import re
++
++    # Breakpad's minidump_stackwalk needs a certain directory structure in order
++    # to find correct symbols when extracting a stack trace out of a minidump.
++    # The directory structure must look like the following.
++    # YourBinary/<hash>/YourBinary.sym
++    # YourLibrary.so/<hash>/YourLibrary.so.sym
++    # To be able to create such structure we need to extract the hash value that
++    # is found in each symbol file. The header of the symbol file looks
++    # something like this:
++    # MODULE Linux x86 A079E473106CE51C74C1C25AF536CCD30 YourBinary
++    # See
++    # http://code.google.com/p/google-breakpad/wiki/LinuxStarterGuide
++
++    # Create the directory with the same name as the binary.
++    binary_dir = re.sub("\.sym$", "", socorro_sym_file_path)
++    if not os.path.exists(binary_dir):
++        os.makedirs(binary_dir)
++
++    # Get the hash from the header of the symbol file.
++    with open(socorro_sym_file_path, 'r') as socorro_sym_file:
++
++        # The hash is the 4th argument of the first line.
++        sym_file_hash = socorro_sym_file.readline().split()[3]
++
++    # Create the hash directory.
++    hash_dir = os.path.join(binary_dir, sym_file_hash)
++    if not os.path.exists(hash_dir):
++        os.makedirs(hash_dir)
++
++    # Move the symbol file to the hash directory.
++    sym_file_name = os.path.basename(socorro_sym_file_path)
++    os.rename(socorro_sym_file_path, os.path.join(hash_dir, sym_file_name))
++
++    return
++
+-- 
+1.9.1
+
 
