@@ -1,32 +1,35 @@
-Return-Path: <kaiu@gmx.de>
-X-Greylist: delayed 312 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 12 Mar 2015 08:47:58 UTC
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
-	by mail.openembedded.org (Postfix) with ESMTP id 13A0173952
+Return-Path: <ronan.lemartret@gmail.com>
+Received: from mail-we0-f178.google.com (mail-we0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BB2173949
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 08:47:58 +0000 (UTC)
-Received: from mail-wg0-f50.google.com ([74.125.82.50]) by mail.gmx.com
-	(mrgmx101) with ESMTPSA (Nemesis) id 0LgdBZ-1ZJMDx2BN7-00o2ei for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 09:42:44 +0100
-Received: by wggx12 with SMTP id x12so14628721wgg.13
+	Thu, 12 Mar 2015 10:56:56 +0000 (UTC)
+Received: by wesk11 with SMTP id k11so15411527wes.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 01:42:43 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.194.184.148 with SMTP id eu20mr83197522wjc.77.1426149763956; 
-	Thu, 12 Mar 2015 01:42:43 -0700 (PDT)
-Received: by 10.194.1.67 with HTTP; Thu, 12 Mar 2015 01:42:43 -0700 (PDT)
-Date: Thu, 12 Mar 2015 09:42:43 +0100
-Message-ID: <CAAKMwiovYTX2wuaE9WkagS9X-06pPbcujd2L_g=+unf49Ov1Vw@mail.gmail.com>
-From: Kai Ulrich <kaiu@gmx.de>
+	Thu, 12 Mar 2015 03:56:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=ZVDLDaCAbsLQ5q+ZaGGtDmQ+rNItc1oFi5sz88OJlgQ=;
+	b=Jgd3sJ5tDX4xxOzCk+rU1XeR6RM2on2Gn+qEFQjIZtHTufptNhJIdh2H1lzyJ2mxdy
+	mGff8SZrb9K6xIM0bDdqXWH+8ngVu9K0ReiF+0K6p96bngl5QGe70S1hFKIQDCMppDr1
+	vZiI9bKT0AEGxUwRdLL+6L4DDpJEOnriItbQ9P3oOyJG7OW4dhZNs/nXXmAkqDmbqOzL
+	4QmCC5XeuGEStB5fH5doFZoYJUgyj3XqtbQyOyjZVYDmr1Ri2SUgxj+Uu59Z/LuYsxgz
+	B9nQJsERWC34SBpzYTgaHm/LjPbtWr14G1yHOtqDTeSynu5eFGyBhPbF65xLzN60mUHG
+	39Lw==
+X-Received: by 10.194.93.165 with SMTP id cv5mr4464607wjb.24.1426157817985;
+	Thu, 12 Mar 2015 03:56:57 -0700 (PDT)
+Received: from eurogiciel-EURO-LINUX-V1.eurogiciel.fr
+	(130.167.26.109.rev.sfr.net. [109.26.167.130])
+	by mx.google.com with ESMTPSA id
+	fo8sm10137968wib.14.2015.03.12.03.56.57
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 12 Mar 2015 03:56:57 -0700 (PDT)
+From: Ronan <ronan.lemartret@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Provags-ID: V03:K0:kBtwFYexWV8IVZUtwmwjPU73JGlIx8cGhc8oDX+12i0625NqFUX
-	MbMpU6g9bF9Ep7c++5SgSaNWnwlK4JzDK3ImWlTtmGPFuXJMy6ci/s0kLnqTGG2HyOtJMUp
-	+z8NyqWC9z5VorB2LTfASxcDsghqszW4Z/2iEFnRLN1n18H8/dtYWnXIid/fXrJZm3SeVzK
-	LOGeNNbp3pqFkXZudR9nw==
-X-UI-Out-Filterresults: notjunk:1;
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: shearing smstools3 recipe
+Date: Thu, 12 Mar 2015 11:56:01 +0100
+Message-Id: <1426157761-31744-1-git-send-email-ronan.lemartret@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] add libgcrypt-native to avoid host corruption
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,16 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2015 08:47:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Mar 2015 10:56:57 -0000
 
-Hi
+Signed-off-by: Ronan <ronan.lemartret@gmail.com>
+---
+ meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-I created an layer with a recipe for smstools3.
-You can find it on https://github.com/kaiulrich/meta-smstools3
-If you have any comments to improve meta-smstools3,
-please tell me (It is my first layer / recipe :-) )
+diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+index e3c833b..5c4c6b1 100644
+--- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
++++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.34.bb
+@@ -3,7 +3,10 @@ HOMEPAGE = "http://www.gnu.org/software/libmicrohttpd/"
+ LICENSE = "LGPL-2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9331186f4f80db7da0e724bdd6554ee5"
+ SECTION = "net"
+-DEPENDS = "libgcrypt gnutls file"
++DEPENDS = "gnutls file"
++
++#libmicrohttpd uses the tool libgcrypt-config, so we need libgcrypt-native
++DEPENDS_append = " libgcrypt libgcrypt-native"
+ 
+ SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+ SRC_URI[md5sum] = "2947eee13c2c8affb95023a0cb6fda0c"
+-- 
+1.9.1
 
-Friendly regrades
-Kai Ulrich
 
