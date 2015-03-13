@@ -1,34 +1,36 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A6B26AC37
+Return-Path: <erik.boto@pelagicore.com>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EC726013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2015 03:50:52 +0000 (UTC)
-Received: by iecvj10 with SMTP id vj10so76606965iec.0
+	Fri, 13 Mar 2015 07:30:22 +0000 (UTC)
+Received: by wghl2 with SMTP id l2so21344226wgh.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 20:50:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=gMfmwSy96J3e9HzQxk4Yk5mhQyUJw+HEt5s9NRbNj9c=;
-	b=XQOINjQJ0QHr4aftkvqQOjr5G0cY/Cg2hnpzEHlXnWcKPUP/WeYqswjLmqm72qYB95
-	cjJy+otDSGXbqv1eyaPkLArpXAjhm+8MeeJ4oa7JV0ehXsdzZdGHEXx6jOiJ0ZxRiAfR
-	IhuqlE0H3MLIR0ihTZ/spuD3l4vxZxcdNoL3j1bBKm5KY4tMV9cR75+Fr4u+Xg2HRI/Z
-	eQrY8tnFEAvNmDdvxaLT3q91XDya0J38/WxGnODKKWG40rw7tq4s5/dhHp7+pQb60f6U
-	UwxZMziorQ5KV+X7W9mpApwDkHVF25GBz2wupSMLejfXnZTwUKKOG4qnRJtxBkikXJYA
-	NCug==
-X-Received: by 10.42.48.78 with SMTP id r14mr54285997icf.33.1426218653331;
-	Thu, 12 Mar 2015 20:50:53 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id ig15sm616615igb.10.2015.03.12.20.50.52
+	Fri, 13 Mar 2015 00:30:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-type:content-transfer-encoding;
+	bh=BVfdrhysYFi/YVRm22Mf8gMw6VtyBx4HX4AIow9Sfdw=;
+	b=Ij1OJsEYb2rj8BrEnDS9U3PaWzOzNZo4Z7J7jhhwCvhZjVcbbVs6a+O5GZXHLxBHKt
+	atnCaSaynR1XR3h3/yLiEj5YVLmTXnovMq/95u7DxypG+48FVjnd8kFiY6jKO/e8dRnQ
+	+STFHQUZrougQ0ETm+7guFqcajtfAPH3SxvpSzZvpUrYGz2KMN00UjliRLR/6bLzmTM2
+	S8DCoARPWmssDLcIxqH/bFmgfKVQoKQaU9wlXEsxNjprqg4hYFtYl/sV/hoNxEVeWv2q
+	uBYaiyx0h646xFLCDF3JEXeBJ1cCzTKLqFF55e34GJGm3PP2GnEhNLeRw9jHzRXqUcBa
+	v7dw==
+X-Gm-Message-State: ALoCoQncttOjpteAjlrC9eYz2RY5gJGFgCvOu3mtVgMtVE/kxWmrjeInmByOiyN6k79K8y2a2k3T
+X-Received: by 10.180.75.108 with SMTP id b12mr92877226wiw.44.1426231823828;
+	Fri, 13 Mar 2015 00:30:23 -0700 (PDT)
+Received: from erik-debian.office.pelagicore.net ([83.218.80.242])
+	by mx.google.com with ESMTPSA id fm10sm1598297wib.7.2015.03.13.00.30.22
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 12 Mar 2015 20:50:52 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
+	Fri, 13 Mar 2015 00:30:22 -0700 (PDT)
+From: =?UTF-8?q?Erik=20Bot=C3=B6?= <erik.boto@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Mar 2015 20:50:41 -0700
-Message-Id: <1426218641-28745-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-qt5][PATCH] qt5: add QT_GIT to define git repo for Qt core components
+Date: Fri, 13 Mar 2015 08:29:51 +0100
+Message-Id: <1426231791-25435-1-git-send-email-erik.boto@pelagicore.com>
+X-Mailer: git-send-email 2.1.4
+MIME-Version: 1.0
+Subject: [meta-qt5][daisy][PATCH] qt5-git.inc: Move to code.qt.io
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,77 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2015 03:50:54 -0000
+X-List-Received-Date: Fri, 13 Mar 2015 07:30:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Replace four duplicate git URIs with a single definition.
+Gitorious switch of git:// protocol and will close down in a while, so
+move over to code.qt.io.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Signed-off-by: Erik Botö <erik.boto@pelagicore.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
- recipes-qt/qt5/qt5-git.inc             | 4 +++-
- recipes-qt/qt5/qtbase-native_git.bb    | 2 +-
- recipes-qt/qt5/qtbase_git.bb           | 2 +-
- 4 files changed, 6 insertions(+), 4 deletions(-)
+ recipes-qt/qt5/qt5-git.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index df80407..9832eee 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -5,7 +5,7 @@ require ${PN}.inc
- FILESEXTRAPATHS =. "${FILE_DIRNAME}/${BPN}-git:"
- 
- SRC_URI = "\
--    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
-+    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
- "
- 
- # common for qtbase-native, qtbase-nativesdk and qtbase
 diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-index 84ddf49..a2d96a2 100644
+index fa0c06e..2281b75 100644
 --- a/recipes-qt/qt5/qt5-git.inc
 +++ b/recipes-qt/qt5/qt5-git.inc
-@@ -1,11 +1,13 @@
- # Copyright (C) 2012 O.S. Systems Software LTDA.
- # Copyright (C) 2013-2014 Martin Jansa <martin.jansa@gmail.com>
- 
-+QT_GIT ?= "git://code.qt.io"
-+
- QT_MODULE_BRANCH ?= "5.4"
+@@ -5,7 +5,7 @@ QT_MODULE_BRANCH ?= "stable"
  
  # each module needs to define valid SRCREV
  SRC_URI += " \
--    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
-+    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
+-    git://qt.gitorious.org/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
++    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
  "
  
  S = "${WORKDIR}/git"
-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 5a308d4..e558ee6 100644
---- a/recipes-qt/qt5/qtbase-native_git.bb
-+++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -2,7 +2,7 @@ require qt5-git.inc
- require ${PN}.inc
- 
- SRC_URI = "\    
--    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
-+    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
- "
- 
- # common for qtbase-native, qtbase-nativesdk and qtbase
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 549c92a..1be31ea 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -2,7 +2,7 @@ require qt5-git.inc
- require ${PN}.inc
- 
- SRC_URI = "\
--    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
-+    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
- "
- 
- # common for qtbase-native, qtbase-nativesdk and qtbase
 -- 
-1.9.1
+2.1.4
 
 
