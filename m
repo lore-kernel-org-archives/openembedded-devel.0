@@ -1,36 +1,30 @@
-Return-Path: <erik.boto@pelagicore.com>
-Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EC726013D
+Return-Path: <kaiu@gmx.de>
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+	by mail.openembedded.org (Postfix) with ESMTP id 923066013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2015 07:30:22 +0000 (UTC)
-Received: by wghl2 with SMTP id l2so21344226wgh.8
+	Fri, 13 Mar 2015 11:08:36 +0000 (UTC)
+Received: from mail-wg0-f49.google.com ([74.125.82.49]) by mail.gmx.com
+	(mrgmx103) with ESMTPSA (Nemesis) id 0LzbXq-1ZZffz2zru-014nOw for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Mar 2015 12:08:37 +0100
+Received: by wghl18 with SMTP id l18so22420284wgh.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2015 00:30:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-type:content-transfer-encoding;
-	bh=BVfdrhysYFi/YVRm22Mf8gMw6VtyBx4HX4AIow9Sfdw=;
-	b=Ij1OJsEYb2rj8BrEnDS9U3PaWzOzNZo4Z7J7jhhwCvhZjVcbbVs6a+O5GZXHLxBHKt
-	atnCaSaynR1XR3h3/yLiEj5YVLmTXnovMq/95u7DxypG+48FVjnd8kFiY6jKO/e8dRnQ
-	+STFHQUZrougQ0ETm+7guFqcajtfAPH3SxvpSzZvpUrYGz2KMN00UjliRLR/6bLzmTM2
-	S8DCoARPWmssDLcIxqH/bFmgfKVQoKQaU9wlXEsxNjprqg4hYFtYl/sV/hoNxEVeWv2q
-	uBYaiyx0h646xFLCDF3JEXeBJ1cCzTKLqFF55e34GJGm3PP2GnEhNLeRw9jHzRXqUcBa
-	v7dw==
-X-Gm-Message-State: ALoCoQncttOjpteAjlrC9eYz2RY5gJGFgCvOu3mtVgMtVE/kxWmrjeInmByOiyN6k79K8y2a2k3T
-X-Received: by 10.180.75.108 with SMTP id b12mr92877226wiw.44.1426231823828;
-	Fri, 13 Mar 2015 00:30:23 -0700 (PDT)
-Received: from erik-debian.office.pelagicore.net ([83.218.80.242])
-	by mx.google.com with ESMTPSA id fm10sm1598297wib.7.2015.03.13.00.30.22
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 13 Mar 2015 00:30:22 -0700 (PDT)
-From: =?UTF-8?q?Erik=20Bot=C3=B6?= <erik.boto@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Mar 2015 08:29:51 +0100
-Message-Id: <1426231791-25435-1-git-send-email-erik.boto@pelagicore.com>
-X-Mailer: git-send-email 2.1.4
+	Fri, 13 Mar 2015 04:08:37 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-qt5][daisy][PATCH] qt5-git.inc: Move to code.qt.io
+X-Received: by 10.194.143.20 with SMTP id sa20mr42931668wjb.75.1426244917072; 
+	Fri, 13 Mar 2015 04:08:37 -0700 (PDT)
+Received: by 10.194.1.67 with HTTP; Fri, 13 Mar 2015 04:08:37 -0700 (PDT)
+Date: Fri, 13 Mar 2015 12:08:37 +0100
+Message-ID: <CAAKMwirhdq7H2ULjwOXCOfs3JEWCXJR2QyyCmGjFuf1uF6Doqg@mail.gmail.com>
+From: Kai Ulrich <kaiu@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+X-Provags-ID: V03:K0:fpIRxc37Xeyi+uqno9AmHMGlTZW5GmK7LiVQruo1FIgnQ2eXK9Q
+	fhVD3MX0FLOhtXPHjxYal+Sw06UAoMNuBF0mqTg+/YtkHCpw8Uwk6tnXVuWteuQJMLB7S7s
+	RidMczecX5KU/HMmrzRAaaiedtpRLBo1rcngN8W2dHaxub3dbxDy/PHmR0hWKOauiF84xtx
+	ONEW+vW4KfWSTpDiQ79gg==
+X-UI-Out-Filterresults: notjunk:1;
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: How is the process to add a recipe to meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +38,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2015 07:30:26 -0000
+X-List-Received-Date: Fri, 13 Mar 2015 11:08:40 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Gitorious switch of git:// protocol and will close down in a while, so
-move over to code.qt.io.
+Hi,
 
-Signed-off-by: Erik Botö <erik.boto@pelagicore.com>
----
- recipes-qt/qt5/qt5-git.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I created an layer with a recipe for smstools3.
+You can find it on https://github.com/kaiulrich/meta-smstools3
+I would like to share my work with the openembedded commity.
+How is the process to add a recipe to meta-oe?
 
-diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-index fa0c06e..2281b75 100644
---- a/recipes-qt/qt5/qt5-git.inc
-+++ b/recipes-qt/qt5/qt5-git.inc
-@@ -5,7 +5,7 @@ QT_MODULE_BRANCH ?= "stable"
- 
- # each module needs to define valid SRCREV
- SRC_URI += " \
--    git://qt.gitorious.org/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
-+    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
- "
- 
- S = "${WORKDIR}/git"
--- 
-2.1.4
-
+Friendly regrades
+Kai Ulrich
 
