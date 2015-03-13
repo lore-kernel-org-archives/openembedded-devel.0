@@ -1,34 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BFE560034
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A6B26AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2015 03:07:34 +0000 (UTC)
-Received: by ieclw3 with SMTP id lw3so77922725iec.2
+	Fri, 13 Mar 2015 03:50:52 +0000 (UTC)
+Received: by iecvj10 with SMTP id vj10so76606965iec.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2015 20:07:35 -0700 (PDT)
+	Thu, 12 Mar 2015 20:50:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=qYNmefJSqJuOI/K25X1EEX5tDIvXdDDerfFw4KgOYJY=;
-	b=dnlnNHZ++/sXNNLFnAxDHShw/Tzv4QB3oy9yD7Midc4GtR6qL5JLyDG/Q/aebcJQQ0
-	wNeXtL+8oUs12BhsriVrBAYZxX61jcquMK4R2wu66wqChQp1xMy3KU1rcaSWsV6HYsA1
-	Rtfm41bQhBaDlF8uz035b74YY9FoomREwtIIvd0eox7CJVNuzAQZzwdIth0G2IhThsw+
-	Tc6UpgbUqopvWBlTH1N9MayX/VX75qZBrlznuRefWMsKAD5LzXej4omBrHzbdmj+Lw5G
-	MgMIVKbx5+Ug+biyhzS5nMSJK4Oc1fvOsxZZ6SrI8ihyTy8Y1rFhb/HigEJ+RQAPSRWs
-	t14w==
-X-Received: by 10.50.62.110 with SMTP id x14mr107452756igr.2.1426216053722;
-	Thu, 12 Mar 2015 20:07:33 -0700 (PDT)
-Received: from kraj-ch2e.sys.comcast.net (a-96-119-88-205.sys.comcast.net.
-	[96.119.88.205])
-	by mx.google.com with ESMTPSA id v15sm553281igd.15.2015.03.12.20.07.32
+	bh=gMfmwSy96J3e9HzQxk4Yk5mhQyUJw+HEt5s9NRbNj9c=;
+	b=XQOINjQJ0QHr4aftkvqQOjr5G0cY/Cg2hnpzEHlXnWcKPUP/WeYqswjLmqm72qYB95
+	cjJy+otDSGXbqv1eyaPkLArpXAjhm+8MeeJ4oa7JV0ehXsdzZdGHEXx6jOiJ0ZxRiAfR
+	IhuqlE0H3MLIR0ihTZ/spuD3l4vxZxcdNoL3j1bBKm5KY4tMV9cR75+Fr4u+Xg2HRI/Z
+	eQrY8tnFEAvNmDdvxaLT3q91XDya0J38/WxGnODKKWG40rw7tq4s5/dhHp7+pQb60f6U
+	UwxZMziorQ5KV+X7W9mpApwDkHVF25GBz2wupSMLejfXnZTwUKKOG4qnRJtxBkikXJYA
+	NCug==
+X-Received: by 10.42.48.78 with SMTP id r14mr54285997icf.33.1426218653331;
+	Thu, 12 Mar 2015 20:50:53 -0700 (PDT)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by mx.google.com with ESMTPSA id ig15sm616615igb.10.2015.03.12.20.50.52
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 12 Mar 2015 20:07:32 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 12 Mar 2015 20:50:52 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Mar 2015 03:07:14 +0000
-Message-Id: <1426216034-16739-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [PATCH V4] soci: Add recipe
+Date: Thu, 12 Mar 2015 20:50:41 -0700
+Message-Id: <1426218641-28745-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-qt5][PATCH] qt5: add QT_GIT to define git repo for Qt core components
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,109 +42,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2015 03:07:38 -0000
+X-List-Received-Date: Fri, 13 Mar 2015 03:50:54 -0000
 
-Define PACKAGECONFIG to enable a given backend of choice
-by default its 'empty'
+Replace four duplicate git URIs with a single definition.
 
-Change-Id: Ie1123af658ca94d2fe22a3ca1a32dfb47d58979e
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- .../recipes-support/soci/soci/soci_libdir.patch    | 28 +++++++++++++
- meta-oe/recipes-support/soci/soci_3.2.2.bb         | 48 ++++++++++++++++++++++
- 2 files changed, 76 insertions(+)
- create mode 100644 meta-oe/recipes-support/soci/soci/soci_libdir.patch
- create mode 100644 meta-oe/recipes-support/soci/soci_3.2.2.bb
+ recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
+ recipes-qt/qt5/qt5-git.inc             | 4 +++-
+ recipes-qt/qt5/qtbase-native_git.bb    | 2 +-
+ recipes-qt/qt5/qtbase_git.bb           | 2 +-
+ 4 files changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-support/soci/soci/soci_libdir.patch b/meta-oe/recipes-support/soci/soci/soci_libdir.patch
-new file mode 100644
-index 0000000..00a1a5c
---- /dev/null
-+++ b/meta-oe/recipes-support/soci/soci/soci_libdir.patch
-@@ -0,0 +1,28 @@
-+Define SOCI_LIBDIR only if its not passed via environemnt. In OE we
-+want to set it per our choice since we use 'lib' for 64bit unless we
-+are using multilib
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+index df80407..9832eee 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+@@ -5,7 +5,7 @@ require ${PN}.inc
+ FILESEXTRAPATHS =. "${FILE_DIRNAME}/${BPN}-git:"
+ 
+ SRC_URI = "\
+-    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
++    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
+ "
+ 
+ # common for qtbase-native, qtbase-nativesdk and qtbase
+diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
+index 84ddf49..a2d96a2 100644
+--- a/recipes-qt/qt5/qt5-git.inc
++++ b/recipes-qt/qt5/qt5-git.inc
+@@ -1,11 +1,13 @@
+ # Copyright (C) 2012 O.S. Systems Software LTDA.
+ # Copyright (C) 2013-2014 Martin Jansa <martin.jansa@gmail.com>
+ 
++QT_GIT ?= "git://code.qt.io"
 +
-+-Khem
-+
-+Index: soci-3.2.2/CMakeLists.txt
-+===================================================================
-+--- soci-3.2.2.orig/CMakeLists.txt
-++++ soci-3.2.2/CMakeLists.txt
-+@@ -69,11 +69,12 @@ include(SociDependencies)
-+ ###############################################################################
-+ # Installation
-+ ###############################################################################
-+-
-+-if(APPLE OR CMAKE_SIZEOF_VOID_P EQUAL 4)
-+-  set(SOCI_LIBDIR "lib")
-+-else()
-+-  set(SOCI_LIBDIR "lib64")
-++if(NOT DEFINED SOCI_LIBDIR)
-++  if(APPLE OR CMAKE_SIZEOF_VOID_P EQUAL 4)
-++    set(SOCI_LIBDIR "lib")
-++  else()
-++    set(SOCI_LIBDIR "lib")
-++  endif()
-+ endif()
-+ 
-+ set(BINDIR "bin" CACHE PATH "The directory to install binaries into.")
-diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb b/meta-oe/recipes-support/soci/soci_3.2.2.bb
-new file mode 100644
-index 0000000..887f5a2
---- /dev/null
-+++ b/meta-oe/recipes-support/soci/soci_3.2.2.bb
-@@ -0,0 +1,48 @@
-+# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+DESCRIPTION = "The C++ Database Access Library"
-+HOMEPAGE = "http://soci.sourceforge.net"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
-+SECTION = "libs"
-+DEPENDS = "boost"
-+
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.gz \
-+           file://soci_libdir.patch \
-+          "
-+SRC_URI[md5sum] = "bc3c35f6cd3f80a1be19fe30b3c111bf"
-+SRC_URI[sha256sum] = "30ea2f4d26639ef5b5cdc24fb300b3896746243dbb77b743582de2ff443ccb1c"
-+
-+TESTCONFIG = '-DSOCI_TEST_EMPTY_CONNSTR="dummy" -DSOCI_TEST_SQLITE3_CONNSTR="test.db" \
-+              -DSOCI_TEST_POSTGRESQL_CONNSTR:STRING="dbname=soci_test" \
-+              -DSOCI_TEST_MYSQL_CONNSTR:STRING="db=soci_test user=oe password=oe"'
-+
-+OBASEDIR ?= "/opt/oracle"
-+OINCDIR = "rdbms/public"
-+OLIBDIR = "lib"
-+
-+PACKAGECONFIG[sqlite3] = "-DSOCI_SQLITE3=ON,-DSOCI_SQLITE3=OFF,sqlite3,"
-+PACKAGECONFIG[mysql] = "-DSOCI_MYSQL=ON,-DSOCI_MYSQL=OFF,mariadb,"
-+PACKAGECONFIG[postgresql] = "-DSOCI_POSTGRESQL=ON,-DSOCI_POSTGRESQL=OFF,postgresql,"
-+PACKAGECONFIG[odbc] = "-DSOCI_ODBC=ON,-DSOCI_ODBC=OFF,,"
-+PACKAGECONFIG[empty] = "-DSOCI_EMPTY=ON,-DSOCI_EMPTY=OFF,,"
-+PACKAGECONFIG[oracle] = "-DWITH_ORACLE=ON --with-oracle-include=${OINCDIR} --with-oracle-lib=${OLIBDIR},-DWITH_ORACLE=OFF,,"
-+PACKAGECONFIG[ptest] = "${TESTCONFIG},,,"
-+
-+# enable your backend by default we enable 'empty'
-+PACKAGECONFIG ??= "empty"
-+
-+# Take the flags added by PACKAGECONFIG and pass them to cmake.
-+EXTRA_OECMAKE = "${EXTRA_OECONF} -DSOCI_LIBDIR=${libdir}"
-+
-+inherit cmake
-+
-+PACKAGES += "${PN}-sqlite3 ${PN}-mysql ${PN}-postgresql ${PN}-odbc ${PN}-oracle"
-+
-+FILES_${PN}-sqlite3 = "${libdir}/lib${BPN}_sqlite3.so.*"
-+FILES_${PN}-mysql = "${libdir}/lib${BPN}_mysql.so.*"
-+FILES_${PN}-postgresql = "${libdir}/lib${BPN}_postgresql.so.*"
-+FILES_${PN}-odbc = "${libdir}/lib${BPN}_odbc.so.*"
-+FILES_${PN}-oracle = "${libdir}/lib${BPN}_oracle.so.*"
+ QT_MODULE_BRANCH ?= "5.4"
+ 
+ # each module needs to define valid SRCREV
+ SRC_URI += " \
+-    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
++    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
+ "
+ 
+ S = "${WORKDIR}/git"
+diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+index 5a308d4..e558ee6 100644
+--- a/recipes-qt/qt5/qtbase-native_git.bb
++++ b/recipes-qt/qt5/qtbase-native_git.bb
+@@ -2,7 +2,7 @@ require qt5-git.inc
+ require ${PN}.inc
+ 
+ SRC_URI = "\    
+-    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
++    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
+ "
+ 
+ # common for qtbase-native, qtbase-nativesdk and qtbase
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 549c92a..1be31ea 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -2,7 +2,7 @@ require qt5-git.inc
+ require ${PN}.inc
+ 
+ SRC_URI = "\
+-    git://code.qt.io/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
++    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
+ "
+ 
+ # common for qtbase-native, qtbase-nativesdk and qtbase
 -- 
-2.1.4
+1.9.1
 
 
