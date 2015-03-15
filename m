@@ -1,38 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
 	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 321F060034
+	by mail.openembedded.org (Postfix) with ESMTP id D46426AC33
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 23:33:51 +0000 (UTC)
-Received: by wibg7 with SMTP id g7so21286201wib.1
+	Sun, 15 Mar 2015 23:33:53 +0000 (UTC)
+Received: by wibdy8 with SMTP id dy8so25142756wib.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 16:33:52 -0700 (PDT)
+	Sun, 15 Mar 2015 16:33:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=BmJkmyTOCsCxH7hf2eilII1Pu2d2hOZk07kjFXyqkkg=;
-	b=BpZ9a/4mc6XujBlxNQlaw2T56Tb7hcdL9eKgHm9nG4fUNBFNPru3npisKMzMJLFijr
-	pQ5taoQK5NjZJ3nYXrQ+j1dSnWVeuYZC4cgx9BFyK8RdwLyQh0NI33nNAQyCIIIJ48La
-	C2ARen9eTnHcAMovfrvVAn/ulabHAUfP11pJor4ITQldD2L8CXr8qpWrCuRu2eVkAZkL
-	Aa4gqCRav9a2aPq7NKv6w67uzsohD/4F/pi72vn20+RFzKnvkuRNDU890Mmk8CDUQB4P
-	OhRYvurPhYBA7Uzx8h1sQWaQ3jhYsfQPj7o7tRyGFQKNiGTyOFoayzFGB/QyfOgzyKA5
-	Z7Iw==
-X-Received: by 10.180.171.35 with SMTP id ar3mr118798261wic.24.1426462432096; 
-	Sun, 15 Mar 2015 16:33:52 -0700 (PDT)
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=Vn478uOpeBuCazxOnO56k9kEZcbzi7dWtdIT19uY1CM=;
+	b=B8s9ygBlltSerMkAgrruYXajpDVFmQH4KdHObRpcjfGkIpIm8mqmrHZnXymhWl0Y3M
+	D4UlZtx1uLsDsF3ZhV7vaSudDaEerkTjnRLY89FmOfG2zmmm3iYcbCFYi9AicErpuebk
+	CNg4ZRYa/xP1ZEdxAWqwSXqUeg5X0m9g8YPqMthg60mvg6CQuKKAi9vdzPLh2eeMGamN
+	hU49EXY9BLgTtFy3WGPiCbNikj4wc3SOnTDWYbE8wzMJCsdzG48yEkBuuJO95ZwHej+e
+	DOvyKbtcsEV+rU3a2GDQ05kHD54rOfde1zc49g0v+IBc7H8VQV5HUwFvdY81PprkbDTr
+	yvTA==
+X-Received: by 10.194.90.210 with SMTP id by18mr113388867wjb.80.1426462434565; 
+	Sun, 15 Mar 2015 16:33:54 -0700 (PDT)
 Received: from localhost.localdomain (p54AA52CC.dip0.t-ipconnect.de.
 	[84.170.82.204]) by mx.google.com with ESMTPSA id
-	r14sm12804945wiv.13.2015.03.15.16.33.49
+	r14sm12804945wiv.13.2015.03.15.16.33.52
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 15 Mar 2015 16:33:50 -0700 (PDT)
+	Sun, 15 Mar 2015 16:33:53 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2015 00:33:09 +0100
-Message-Id: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 16 Mar 2015 00:33:10 +0100
+Message-Id: <1426462419-10173-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 00/30] xfce 4.12
+Subject: [PATCH][meta-xfce 01/30] exo: update to 0.10.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,122 +52,104 @@ X-List-Received-Date: Sun, 15 Mar 2015 23:33:54 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following changes since commit 7f274585316a3ac85b3b14f4bb8a297662141f05:
-
-  postfix: get rid of useless code (2015-03-11 19:29:34 -0400)
-
-are available in the git repository at:
-
-  git@github.com:schnitzeltony/meta-openembedded.git xfce-4.12
-
-for you to fetch changes up to b0b2fbe7211f031e551e13fe081d798ff3bf07b2:
-
-  xfce4-eyes-plugin_ update to 4.4.4 (2015-03-15 22:29:47 +0100)
-
-----------------------------------------------------------------
-Andreas Müller (30):
-      exo: update to 0.10.3
-      xfce4-dev-tools: update to 4.12.0
-      libxfce4util: update to 4.12.1
-      xfconf: update to 4.12.0
-      libxfce4ui: update to 4.12.1
-      garcon: update to 0.4.0
-      xfwm4: update to 4.12.2
-      xfce4-panel: update to 4.12.0
-      xfce4-session: update to 4.12.0
-      xfce4-appfinder: update to 4.12.0
-      thunar: update to 1.6.6
-      thunar-volman: update to 0.8.1
-      xfdesktop: update to 4.12.0
-      tumbler: update to 0.1.31
-      xfce4-power-manager: update to 1.4.3
-      ristretto: update to 0.8.0
-      mousepad: update to 0.4.0
-      gtk-xfce-engine: update to 3.2.0
-      xfce4-diskperf-plugin: update to 2.5.5
-      xfce4-fsguard-plugin: update to 1.0.2
-      xfce4-whiskermenu-plugin: update to 1.5.0.bb
-      xfce4-taskmanager: update to 1.1.0
-      xfce4-mixer: update to 4.11.0
-      xfce4-settings: update to 4.12.0
-      xfce4-wavelan-plugin: update to 0.5.12
-      xfce4-mpc-plugin: update to 0.4.5
-      xfce4-places-plugin: update to 1.7.0
-      xarchiver: git repo was moved to github
-      xfce4-closebutton-plugin: git repo was moved to github
-      xfce4-eyes-plugin_ update to 4.4.4
-
- meta-xfce/recipes-apps/mousepad/{mousepad_0.3.0.bb => mousepad_0.4.0.bb}                                          |   9 +++--
- meta-xfce/recipes-apps/ristretto/{ristretto_0.6.3.bb => ristretto_0.8.0.bb}                                       |   6 ++--
- meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb                                                                 |   2 +-
- meta-xfce/recipes-apps/xfce4-mixer/{xfce4-mixer_4.10.0.bb => xfce4-mixer_4.11.0.bb}                               |   4 +--
- meta-xfce/recipes-apps/xfce4-taskmanager/files/0001-do-not-build-documantation-Makefile-has-no-install-t.patch    |  29 ---------------
- meta-xfce/recipes-apps/xfce4-taskmanager/{xfce4-taskmanager_1.0.1.bb => xfce4-taskmanager_1.1.0.bb}               |   4 +--
- meta-xfce/recipes-multimedia/xfce4-mpc-plugin/{xfce4-mpc-plugin_0.4.4.bb => xfce4-mpc-plugin_0.4.5.bb}            |   4 +--
- meta-xfce/recipes-panel-plugins/closebutton/xfce4-closebutton-plugin_git.bb                                       |   2 +-
- meta-xfce/recipes-panel-plugins/diskperf/{xfce4-diskperf-plugin_2.5.4.bb => xfce4-diskperf-plugin_2.5.5.bb}       |   4 +--
- meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.4.3.bb => xfce4-eyes-plugin_4.4.4.bb}                   |   4 +--
- meta-xfce/recipes-panel-plugins/fsguard/{xfce4-fsguard-plugin_1.0.1.bb => xfce4-fsguard-plugin_1.0.2.bb}          |   4 +--
- meta-xfce/recipes-panel-plugins/places/{xfce4-places-plugin_1.6.0.bb => xfce4-places-plugin_1.7.0.bb}             |   4 +--
- meta-xfce/recipes-panel-plugins/wavelan/{xfce4-wavelan-plugin_0.5.11.bb => xfce4-wavelan-plugin_0.5.12.bb}        |   4 +--
- .../recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_1.4.2.bb => xfce4-whiskermenu-plugin_1.5.0.bb}    |   4 +--
- meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch                                             |  26 +++++++-------
- meta-xfce/recipes-xfce/exo/{exo_0.10.2.bb => exo_0.10.3.bb}                                                       |   5 ++-
- meta-xfce/recipes-xfce/garcon/{garcon_0.2.1.bb => garcon_0.4.0.bb}                                                |   7 ++--
- meta-xfce/recipes-xfce/gtk-xfce-engine/{gtk-xfce-engine_3.0.1.bb => gtk-xfce-engine_3.2.0.bb}                     |   9 +++--
- ...02-configure.ac.in-remove-optional-gtk3-support.patch => 0002-configure.ac-remove-optional-gtk3-support.patch} |  10 +++---
- meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.10.0.bb => libxfce4ui_4.12.1.bb}                                  |  14 ++++----
- meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.10.1.bb => libxfce4util_4.12.1.bb}                            |   4 +--
- meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_0.8.0.bb => thunar-volman_0.8.1.bb}                           |   4 +--
- meta-xfce/recipes-xfce/thunar/{thunar_1.6.3.bb => thunar_1.6.6.bb}                                                |  24 +++++++------
- meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.30.bb => tumbler_0.1.31.bb}                                           |  11 ++----
- meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.10.1.bb => xfce4-appfinder_4.12.0.bb}                   |   6 ++--
- meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools-4.11.0/xdt-autogen_dependency.patch                        |  13 -------
- meta-xfce/recipes-xfce/xfce4-dev-tools/{xfce4-dev-tools_4.11.0.bb => xfce4-dev-tools_4.12.0.bb}                   |   9 ++---
- meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.10.1.bb => xfce4-panel_4.12.0.bb}                               |   8 ++---
- meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.4.1.bb => xfce4-power-manager_1.4.3.bb}         |   4 +--
- meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb                                                      |  31 ----------------
- meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.0.bb                                                      |  28 +++++++++++++++
- meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings/0002-xsettings.xml-Set-default-themes.patch                  |   2 +-
- meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb                                                       |  19 ++--------
- meta-xfce/recipes-xfce/xfconf/files/0001-Simplify-checks.patch                                                    | 112 ----------------------------------------------------------
- meta-xfce/recipes-xfce/xfconf/{xfconf_4.10.0.bb => xfconf_4.12.0.bb}                                              |   5 ++-
- meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.10.2.bb => xfdesktop_4.12.0.bb}                                     |   4 +--
- meta-xfce/recipes-xfce/xfwm4/{xfwm4_git.bb => xfwm4_4.12.2.bb}                                                    |  15 +++-----
- 37 files changed, 140 insertions(+), 314 deletions(-)
- rename meta-xfce/recipes-apps/mousepad/{mousepad_0.3.0.bb => mousepad_0.4.0.bb} (66%)
- rename meta-xfce/recipes-apps/ristretto/{ristretto_0.6.3.bb => ristretto_0.8.0.bb} (65%)
- rename meta-xfce/recipes-apps/xfce4-mixer/{xfce4-mixer_4.10.0.bb => xfce4-mixer_4.11.0.bb} (72%)
- delete mode 100644 meta-xfce/recipes-apps/xfce4-taskmanager/files/0001-do-not-build-documantation-Makefile-has-no-install-t.patch
- rename meta-xfce/recipes-apps/xfce4-taskmanager/{xfce4-taskmanager_1.0.1.bb => xfce4-taskmanager_1.1.0.bb} (60%)
- rename meta-xfce/recipes-multimedia/xfce4-mpc-plugin/{xfce4-mpc-plugin_0.4.4.bb => xfce4-mpc-plugin_0.4.5.bb} (72%)
- rename meta-xfce/recipes-panel-plugins/diskperf/{xfce4-diskperf-plugin_2.5.4.bb => xfce4-diskperf-plugin_2.5.5.bb} (65%)
- rename meta-xfce/recipes-panel-plugins/eyes/{xfce4-eyes-plugin_4.4.3.bb => xfce4-eyes-plugin_4.4.4.bb} (68%)
- rename meta-xfce/recipes-panel-plugins/fsguard/{xfce4-fsguard-plugin_1.0.1.bb => xfce4-fsguard-plugin_1.0.2.bb} (71%)
- rename meta-xfce/recipes-panel-plugins/places/{xfce4-places-plugin_1.6.0.bb => xfce4-places-plugin_1.7.0.bb} (74%)
- rename meta-xfce/recipes-panel-plugins/wavelan/{xfce4-wavelan-plugin_0.5.11.bb => xfce4-wavelan-plugin_0.5.12.bb} (65%)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_1.4.2.bb => xfce4-whiskermenu-plugin_1.5.0.bb} (68%)
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../exo/exo/reduce-build-to-exo-csource-only.patch | 26 ++++++++++++----------
+ .../exo/{exo_0.10.2.bb => exo_0.10.3.bb}           |  5 ++---
+ 2 files changed, 16 insertions(+), 15 deletions(-)
  rename meta-xfce/recipes-xfce/exo/{exo_0.10.2.bb => exo_0.10.3.bb} (86%)
- rename meta-xfce/recipes-xfce/garcon/{garcon_0.2.1.bb => garcon_0.4.0.bb} (57%)
- rename meta-xfce/recipes-xfce/gtk-xfce-engine/{gtk-xfce-engine_3.0.1.bb => gtk-xfce-engine_3.2.0.bb} (72%)
- rename meta-xfce/recipes-xfce/libxfce4ui/files/{0002-configure.ac.in-remove-optional-gtk3-support.patch => 0002-configure.ac-remove-optional-gtk3-support.patch} (86%)
- rename meta-xfce/recipes-xfce/libxfce4ui/{libxfce4ui_4.10.0.bb => libxfce4ui_4.12.1.bb} (69%)
- rename meta-xfce/recipes-xfce/libxfce4util/{libxfce4util_4.10.1.bb => libxfce4util_4.12.1.bb} (62%)
- rename meta-xfce/recipes-xfce/thunar-volman/{thunar-volman_0.8.0.bb => thunar-volman_0.8.1.bb} (74%)
- rename meta-xfce/recipes-xfce/thunar/{thunar_1.6.3.bb => thunar_1.6.6.bb} (56%)
- rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.30.bb => tumbler_0.1.31.bb} (68%)
- rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.10.1.bb => xfce4-appfinder_4.12.0.bb} (56%)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-dev-tools/xfce4-dev-tools-4.11.0/xdt-autogen_dependency.patch
- rename meta-xfce/recipes-xfce/xfce4-dev-tools/{xfce4-dev-tools_4.11.0.bb => xfce4-dev-tools_4.12.0.bb} (62%)
- rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.10.1.bb => xfce4-panel_4.12.0.bb} (82%)
- rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.4.1.bb => xfce4-power-manager_1.4.3.bb} (89%)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
- create mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.0.bb
- delete mode 100644 meta-xfce/recipes-xfce/xfconf/files/0001-Simplify-checks.patch
- rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.10.0.bb => xfconf_4.12.0.bb} (70%)
- rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.10.2.bb => xfdesktop_4.12.0.bb} (73%)
- rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_git.bb => xfwm4_4.12.2.bb} (71%)
 
+diff --git a/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch b/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
+index 84b2370..246511c 100644
+--- a/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
++++ b/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
+@@ -14,15 +14,17 @@ Upstream-Status: Inappropriate [configuration]
+ 
+ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+ ---
+- Makefile.am  |   10 +---------
+- configure.ac |   20 --------------------
+- 2 files changed, 1 insertions(+), 29 deletions(-)
++ Makefile.am  | 10 +---------
++ configure.ac | 20 --------------------
++ 2 files changed, 1 insertion(+), 29 deletions(-)
+ 
+ diff --git a/Makefile.am b/Makefile.am
+-index c2e3fff..79b0931 100644
++index ad7c6ce..3acd94a 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+-@@ -1,13 +1,5 @@
++@@ -1,15 +1,7 @@
++ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
++ 
+  SUBDIRS =								\
+ -	exo								\
+ -	exo-csource							\
+@@ -35,16 +37,16 @@ index c2e3fff..79b0931 100644
+ -	po
+ +	exo-csource
+  
+- AUTOMAKE_OPTIONS =							\
+- 	1.9								\
++ distclean-local:
++ 	rm -rf *.cache *~
+ diff --git a/configure.ac b/configure.ac
+-index efcd62e..aac2495 100644
++index bb9be05..23471d0 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -110,15 +110,6 @@ AC_PROG_CC()
++@@ -116,15 +116,6 @@ AC_PROG_CC()
+  AM_PROG_CC_C_O()
+  AC_PROG_INSTALL()
+- AC_PROG_INTLTOOL([0.31], [no-xml])
++ IT_PROG_INTLTOOL([intltool_minimum_version], [no-xml])
+ -AC_CHECK_PROGS([PERL], [perl5 perl])
+ -
+ -dnl ***************************************
+@@ -57,7 +59,7 @@ index efcd62e..aac2495 100644
+  
+  dnl ***************************************
+  dnl *** Check for standard header files ***
+-@@ -165,17 +156,6 @@ dnl ***********************************
++@@ -171,17 +162,6 @@ dnl ***********************************
+  dnl *** Check for required packages ***
+  dnl ***********************************
+  XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.30.0])
+@@ -76,5 +78,5 @@ index efcd62e..aac2495 100644
+  dnl *************************
+  dnl *** Check for gtk-doc ***
+ -- 
+-1.7.4.4
++1.9.3
+ 
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb b/meta-xfce/recipes-xfce/exo/exo_0.10.3.bb
+similarity index 86%
+rename from meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
+rename to meta-xfce/recipes-xfce/exo/exo_0.10.3.bb
+index ef8e55f..f11f049 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.10.2.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.10.3.bb
+@@ -4,7 +4,6 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "gtk+ libxfce4util libxfce4ui virtual/libx11 liburi-perl-native cairo"
+ DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native intltool-native"
+-PR = "r4"
+ 
+ inherit xfce pythonnative perlnative gtk-doc
+ 
+@@ -18,8 +17,8 @@ SRC_URI_append_class-native = " \
+     file://reduce-build-to-exo-csource-only.patch \
+ "
+ 
+-SRC_URI[md5sum] = "c70f2a217811bfba2e62f938d4b8f748"
+-SRC_URI[sha256sum] = "b385828bf8a38204da3254b57fdfa25a72694495aa189fabd5040f707eec76ce"
++SRC_URI[md5sum] = "d45b7e18e3a73e4a7b2ec6ef7943de17"
++SRC_URI[sha256sum] = "95704b14ef9065268c3aa9a7c0bacbe0ddb490a183a4f5ab13bba4a1722826bd"
+ 
+ PACKAGES =+ "exo-csource"
+ 
 -- 
 1.9.3
 
