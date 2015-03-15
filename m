@@ -1,39 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 03C607391D
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id C9E6A6AC43
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 23:34:04 +0000 (UTC)
-Received: by wgbcc7 with SMTP id cc7so27056807wgb.0
+	Sun, 15 Mar 2015 23:34:06 +0000 (UTC)
+Received: by wgdm6 with SMTP id m6so27056706wgd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 16:34:05 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=G5qAgbxc8YNCusRGFs4DMh/xcW99hrD3ES+LLvm3Vj8=;
-	b=NvfzmpYVELKFLW2I8idTU1pF4P+HgxRca2GBO8+EfmPJ9ebSPuOBVfn+O1tyBj5Ydo
-	zT9iq4lWpiXbgEFvOLZ1UstJdGIJjD9ax3amJ5kdk5QTnxKAYXUkWCFl+tWIzv40wQwq
-	D3Ds5NxiJdY1JVTNHtbsP2OWBJbzzNFR2xN6XBkrxlM0SYv3NnmVBcR9Q7hbiyIE25+r
-	MOHbYIHQHTPUmhmWM+6aAAtWnMPPK38f/rYtFA3cpffofQEsgnVgMBJBsDpeg7Y4i6pj
-	omicSDjlO9vU3AKOaS9NHo66ELVjGgU9Y+h57gS7N3mT4asamUj+N4thp7n1LLPxJjNz
-	J17w==
-X-Received: by 10.194.11.40 with SMTP id n8mr119239577wjb.43.1426462445934;
-	Sun, 15 Mar 2015 16:34:05 -0700 (PDT)
+	bh=dcx3Yoin/ZAmOR/EbiJdZgpGDJOf3DkThTCfDVLVY1c=;
+	b=tYndfwuYxLKrxeLvhp/sCA9JlNVNYgzMp2hI/mLyY3hQKPcm5myyhNP0kdqXTk669X
+	kIHdBAo5PGPL3K6u2+zO7LAt0jFrV9q7Pxn9MB+Fij17sFwMZWgupIxa8GY68jgkypco
+	BrUtyEfFjMWK09T4Dmknmzyl/OCWNdv8y81uvk04XUuBWfggeboHX4eg1Oc3Sp+N+MFY
+	3vV14F8C9JHO0Hr0Y6e5wZszfJ7daJAc1w3N6yykyqkcQONWxeUPYQ1TPOxjyE9U7g9F
+	tJ1KOAMmxWX8d+gZ6Ahw15fFMM9TQKaRWhlDcLZsuHfekreylnQu+j/kXjzSZnkbEX7n
+	4JHw==
+X-Received: by 10.194.63.206 with SMTP id i14mr119329512wjs.107.1426462447584; 
+	Sun, 15 Mar 2015 16:34:07 -0700 (PDT)
 Received: from localhost.localdomain (p54AA52CC.dip0.t-ipconnect.de.
 	[84.170.82.204]) by mx.google.com with ESMTPSA id
-	r14sm12804945wiv.13.2015.03.15.16.34.04
+	r14sm12804945wiv.13.2015.03.15.16.34.05
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 15 Mar 2015 16:34:05 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:06 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2015 00:33:18 +0100
-Message-Id: <1426462419-10173-10-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 16 Mar 2015 00:33:19 +0100
+Message-Id: <1426462419-10173-11-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 09/30] xfce4-session: update to 4.12.0
+Subject: [PATCH][meta-xfce 10/30] xfce4-appfinder: update to 4.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,91 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2015 23:34:05 -0000
+X-List-Received-Date: Sun, 15 Mar 2015 23:34:07 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-consolekit support is gone
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../xfce4-session/xfce4-session_4.10.1.bb          | 31 ----------------------
- .../xfce4-session/xfce4-session_4.12.0.bb          | 28 +++++++++++++++++++
- 2 files changed, 28 insertions(+), 31 deletions(-)
- delete mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
- create mode 100644 meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.0.bb
+ .../{xfce4-appfinder_4.10.1.bb => xfce4-appfinder_4.12.0.bb}        | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.10.1.bb => xfce4-appfinder_4.12.0.bb} (56%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-deleted file mode 100644
-index aa82a7c..0000000
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.10.1.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
--SECTION = "x11"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
--DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf"
--RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower"
--
--inherit xfce update-alternatives
--
--SRC_URI[md5sum] = "1757657c1d590aa6274b7b7cbba33352"
--SRC_URI[sha256sum] = "0154fabdc398798c3445374ccc52a2f5bcb2d867fc94bc54114395b24f9cfc83"
--SRC_URI += " \
--    file://0001-configure.in-hard-code-path-to-iceauth.patch \
--"
--
--ALTERNATIVE_${PN} = "x-session-manager"
--ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
--ALTERNATIVE_PRIORITY_${PN} = "100"
--
--PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
--PACKAGECONFIG[systemd] = "--enable-systemd, --disable-systemd, polkit, systemd"
--PACKAGECONFIG[consolekit] = ",,,consolekit"
--
--FILES_${PN} += "${libdir}/xfce4/*/*/*.so \
--                ${libdir}/xfce4/session/*-*-* \
--                ${datadir}/xsessions \
--                ${datadir}/themes/Default/balou/*"
--
--FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
--
--FILES_${PN}-staticdev += "${libdir}/xfce4/*/*/*.*a"
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.0.bb
-new file mode 100644
-index 0000000..eaef4c6
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.0.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
-+SECTION = "x11"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
-+DEPENDS = "virtual/libx11 libsm libxfce4util libxfce4ui gtk+ libwnck dbus dbus-glib xfconf polkit"
-+RDEPENDS_${PN} = "netbase xinit dbus-x11 iceauth upower"
+diff --git a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.10.1.bb b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.12.0.bb
+similarity index 56%
+rename from meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.10.1.bb
+rename to meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.12.0.bb
+index f2d688f..79e06da 100644
+--- a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.10.1.bb
++++ b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.12.0.bb
+@@ -6,5 +6,7 @@ DEPENDS="glib-2.0 gtk+ libxfce4util libxfce4ui garcon dbus-glib xfconf"
+ 
+ inherit xfce
+ 
+-SRC_URI[md5sum] = "bea253956638e2df2dd950343b3b1b7b"
+-SRC_URI[sha256sum] = "65ee74ffa76334d273e4c9ae501ec7f81f7de028813849f7d1441cbf7788eb77"
++SRC_URI[md5sum] = "0b238b30686388c507c119b12664f1a1"
++SRC_URI[sha256sum] = "2ad4a58019a76a6b64a816050db25f96854917c2f2e89d6a9df6c18e6c84c567"
 +
-+inherit xfce update-alternatives
-+
-+SRC_URI[md5sum] = "d75b257bc0954c238d3c82ce498525aa"
-+SRC_URI[sha256sum] = "68c85453b097d3ada573dcb7e72acd06e0fc34531996122c10d20096405b7b06"
-+SRC_URI += " \
-+    file://0001-configure.in-hard-code-path-to-iceauth.patch \
-+"
-+
-+ALTERNATIVE_${PN} = "x-session-manager"
-+ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
-+ALTERNATIVE_PRIORITY_${PN} = "100"
-+
-+FILES_${PN} += " \
-+    ${libdir}/xfce4/*/*/*.so \
-+    ${libdir}/xfce4/session/*-*-* \
-+    ${datadir}/xsessions \
-+    ${datadir}/themes/Default/balou/* \
-+    ${datadir}/polkit-1 \
-+"
-+
-+FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
++FILES_${PN} += "${datadir}/appdata"
 -- 
 1.9.3
 
