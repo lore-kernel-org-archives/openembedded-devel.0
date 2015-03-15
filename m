@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-we0-f181.google.com (mail-we0-f181.google.com
-	[74.125.82.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C7857391E
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 9145760034
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 23:34:17 +0000 (UTC)
-Received: by wetk59 with SMTP id k59so26881602wet.3
+	Sun, 15 Mar 2015 23:34:19 +0000 (UTC)
+Received: by wifj2 with SMTP id j2so29396479wif.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 16:34:18 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=TXG3l2R+DiLgR+DcZshzFdzR3hhqz54tmQ9rLbFRDRQ=;
-	b=KNs+AWOlY7O12cOXfguF0yPmrQhxEGP+XtLhXtmsPtoi0xbhDC1m6HsxlMcksi0Or7
-	NVKny+GGfSKOw4u4iFXI4upkIGOq2VCZmRGTQ7T1t4kfp0lzkMY/+ZPJOEFCoV2AsubP
-	44l+AyicqV9xQ5IOMOMzqkPU7R5k1i6In91JWkJMm3ht661/Vy3fGTUfd/nMXPDTjstR
-	0NYpemyL5CV0vViFeevb7AcwmN4f8/IcOruNKcGHsELyH2TJ/2Bnr4CwAa8nSuD4HyHI
-	9WMRLB3JVQkEqGZxyatJWy3XUSig0K6xqNnrR1/UgsQDHazXQ9EADYt5OKPZEFjJknBh
-	4nLw==
-X-Received: by 10.180.23.193 with SMTP id o1mr676037wif.14.1426462458887;
-	Sun, 15 Mar 2015 16:34:18 -0700 (PDT)
+	bh=KCw07KHCrs8IkvcNH7ByNUQikWFx8szsvDgSCLd9hso=;
+	b=wdpEEdm67MyINJ3bm8ecRiHBQlQXv+gQqDeg4H5v9SmKgSXP7sGpZJ7SGzbSB3NUs1
+	ru4bfXnicMSXAVYrpiPK9ZxTt0rb10P62rKn2t//me9WSI4oTw0ZGq4nljeFhUwkrSKg
+	kJfQiOvFNOM4IjeWZ8uNPJkJ12766dG0zrup3WG17rc7Kqz2Td2Sv1Shte1XxUy6cpBA
+	BFsCJBN/pYq36tEx7G9UFIbdRJrkqCeCmXsWa/eMpCviRPNQZoqYyA1SBxa9T43pZdDZ
+	hSbUcA0J6lgWRJYyZxfHCvlrHhgbyJ4+oyetuelkcrngmhkVlZdIyzPaXuH1l0huBCOZ
+	f9kQ==
+X-Received: by 10.180.208.46 with SMTP id mb14mr11878339wic.31.1426462460246; 
+	Sun, 15 Mar 2015 16:34:20 -0700 (PDT)
 Received: from localhost.localdomain (p54AA52CC.dip0.t-ipconnect.de.
 	[84.170.82.204]) by mx.google.com with ESMTPSA id
-	r14sm12804945wiv.13.2015.03.15.16.34.17
+	r14sm12804945wiv.13.2015.03.15.16.34.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 15 Mar 2015 16:34:18 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:19 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2015 00:33:27 +0100
-Message-Id: <1426462419-10173-19-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 16 Mar 2015 00:33:28 +0100
+Message-Id: <1426462419-10173-20-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 18/30] gtk-xfce-engine: update to 3.2.0
+Subject: [PATCH][meta-xfce 19/30] xfce4-diskperf-plugin: update to 2.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,48 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2015 23:34:18 -0000
+X-List-Received-Date: Sun, 15 Mar 2015 23:34:20 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-announcement for 3.2.0 [1] notes that gtk3 engine is not used in
-Xfce 4.12 and is disabled by default. For users still wanting gtk3
-part build, a PACKAGECONFIG was introduced.
-
-[1] https://mail.xfce.org/pipermail/xfce/2015-February/034198.html
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{gtk-xfce-engine_3.0.1.bb => gtk-xfce-engine_3.2.0.bb}       | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-xfce/recipes-xfce/gtk-xfce-engine/{gtk-xfce-engine_3.0.1.bb => gtk-xfce-engine_3.2.0.bb} (72%)
+ ...{xfce4-diskperf-plugin_2.5.4.bb => xfce4-diskperf-plugin_2.5.5.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/diskperf/{xfce4-diskperf-plugin_2.5.4.bb => xfce4-diskperf-plugin_2.5.5.bb} (65%)
 
-diff --git a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.0.1.bb b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-similarity index 72%
-rename from meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.0.1.bb
-rename to meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-index d62208f..6feb4bc 100644
---- a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.0.1.bb
-+++ b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-@@ -2,12 +2,15 @@ SUMMARY = "XFCE theme for GTK"
- SECTION = "x11/libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--DEPENDS = "gtk+ gtk+3 xfce4-dev-tools-native"
-+DEPENDS = "gtk+ xfce4-dev-tools-native"
+diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
+similarity index 65%
+rename from meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb
+rename to meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
+index 2df9b9f..801699c 100644
+--- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb
++++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
  
- inherit xfce
+ inherit xfce-panel-plugin
  
--SRC_URI[md5sum] = "174e774d0debb052ec457640275f065d"
--SRC_URI[sha256sum] = "eb03cf81da1a91e426a2141c092ed7a1634cab29ea2f3546480e901290a7a06d"
-+SRC_URI[md5sum] = "363d6c16a48a00e26d45c45c2e1fd739"
-+SRC_URI[sha256sum] = "875c9c3bda96faf050a2224649cc42129ffb662c4de33add8c0fd1fb860b47ed"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[gtk3] = "--enable-gtk3,--disable-gtk3, gtk+3"
- 
- PACKAGES += "${PN}-themes gtk3-xfce-engine"
- FILES_${PN} += "${libdir}/gtk-2.0/*/engines/*.so"
+-SRC_URI[md5sum] = "2db453fc3ea2e4fe073ec313a25b0961"
+-SRC_URI[sha256sum] = "aab6b9c4e2f78620920efac6874c4edf426f05b63b94cfda0da8c99a91110a0b"
++SRC_URI[md5sum] = "199e4365cb3a1fcd5f6164044aedba17"
++SRC_URI[sha256sum] = "cbeb0c00f97362eef3f135afb77947aef73e938bae0386250a122ac6644b521b"
 -- 
 1.9.3
 
