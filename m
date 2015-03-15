@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id AF3C673944
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id A672B73944
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 23:34:32 +0000 (UTC)
-Received: by wibg7 with SMTP id g7so25192904wib.1
+	Sun, 15 Mar 2015 23:34:33 +0000 (UTC)
+Received: by wgdm6 with SMTP id m6so27060718wgd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 16:34:33 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=jg3bgX+3uZBkInG/iy4XVn7EFwkO05fznUB9X+AJEX4=;
-	b=lidf7nnKLfcA+x/980AeiKxtV3MwOHw7sLc32ECdpaoh5YI/H2vZDpqo5ummPXPnp3
-	2Ze04jgXvlI71w9BYGETnynw3g0fSEsDKvoXPDtSagSSeRHtiwOX6jWE5s/r12JDIV3s
-	2OZ0k634z/VapVR3MKeM4L92+u8WIxtN+SsQI4IWA2tEm4yAz6veyvuYRoFL29lMqRPe
-	mBMC6E+xBNesWJKhvMFwVQ+LYwf4vqn2QYL9z5JsrFCydlfIb/fWZwmahCJ0bDczI4nR
-	lthb4HBN6r+zNu+z94lljJryq8agrVsm0oiZqdPB6ynz5qQ+XYwIspv5smqHEKT+/6xz
-	CmcA==
-X-Received: by 10.194.90.210 with SMTP id by18mr113391787wjb.80.1426462473473; 
-	Sun, 15 Mar 2015 16:34:33 -0700 (PDT)
+	bh=U9JZ7Ud2oNrr0Ihj0ydBbsFW9QLCkXhDRHoALUxwNA4=;
+	b=XUBbGRqJ/pLnLKxryOq314U3YV3QeVUp+3lxrzg8B5rWrMGQ1pmJPAazWtmCiZg6Zx
+	7SSnwXpM6/a8ffbp/ku8SmPT9gaJyAYoELG/i/gdftxWN3x2jZiFOKTuovn8fodkqi24
+	p/npONVY07SDtQnTYtBAnbUK1e2lUbQK/wOFDKT+CdM+y0kyl9+QvhwoQKHB0EkQGd9a
+	JpMGdTwOf224qp1xI2A1F9dsECduOjbFANzxZs6WPOUJGV+NwWU6b+/G2qkOCCIsVuuK
+	Ou3Pld6rBsl67sk4cIYBWXP8ILiU9myYvI4sIs8G6msUBzR7O0mnhpIL633JhUFm7LCP
+	pS5w==
+X-Received: by 10.194.222.135 with SMTP id qm7mr68131579wjc.14.1426462474865; 
+	Sun, 15 Mar 2015 16:34:34 -0700 (PDT)
 Received: from localhost.localdomain (p54AA52CC.dip0.t-ipconnect.de.
 	[84.170.82.204]) by mx.google.com with ESMTPSA id
-	r14sm12804945wiv.13.2015.03.15.16.34.32
+	r14sm12804945wiv.13.2015.03.15.16.34.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 15 Mar 2015 16:34:32 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:34 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2015 00:33:36 +0100
-Message-Id: <1426462419-10173-28-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 16 Mar 2015 00:33:37 +0100
+Message-Id: <1426462419-10173-29-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 27/30] xfce4-places-plugin: update to 1.7.0
+Subject: [PATCH][meta-xfce 28/30] xarchiver: git repo was moved to github
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,34 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2015 23:34:33 -0000
+X-List-Received-Date: Sun, 15 Mar 2015 23:34:34 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-places-plugin_1.6.0.bb => xfce4-places-plugin_1.7.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/places/{xfce4-places-plugin_1.6.0.bb => xfce4-places-plugin_1.7.0.bb} (74%)
+ meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.6.0.bb b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.7.0.bb
-similarity index 74%
-rename from meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.6.0.bb
-rename to meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.7.0.bb
-index c76340f..16be09d 100644
---- a/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.6.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/places/xfce4-places-plugin_1.7.0.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b6952d9a47fc2ad0f315510e1290455f"
+diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
+index 9e4b696..ca29922 100644
+--- a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
++++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- inherit xfce-panel-plugin
+ DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native intltool-native"
  
--SRC_URI[md5sum] = "8f3ec883efb0775052eeea816bbd8a23"
--SRC_URI[sha256sum] = "07b044025a75f02b84e8848d6f81b0fcbb0cd9b8a4bf919cb7f0777b096b27a4"
-+SRC_URI[md5sum] = "fcae9b38a8affcd82699a94991bba29b"
-+SRC_URI[sha256sum] = "4175c614749abbb5bcf6f49c88125fb0dd36db69f4c374df23563907b16e2c3f"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+-SRC_URI = "git://gitorious.org/xfce/xarchiver.git;branch=master"
++SRC_URI = "git://github.com/schnitzeltony/xarchiver.git;branch=master"
+ SRCREV = "e80e90528c9aab2fe36d9078b945b44c05cc20d3"
+ PV = "0.5.3"
+ S = "${WORKDIR}/git"
 -- 
 1.9.3
 
