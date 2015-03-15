@@ -1,39 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id A21456AC33
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id B884173919
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 23:34:12 +0000 (UTC)
-Received: by wgra20 with SMTP id a20so27050903wgr.3
+	Sun, 15 Mar 2015 23:34:13 +0000 (UTC)
+Received: by wgdm6 with SMTP id m6so27057804wgd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 16:34:13 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=F8iYKsP3RiVOchGLjbgHTGZlHNm5hd8AiBpGLwZxBuA=;
-	b=Z3D35rH6Rw922H+Ufgttc+7H/UrshqQkekL5RQ1VdgLhjbzRkSZ5K/VGKS2p/Maixf
-	AW1oWWwDmRpNGGRiKm/J8P1DsSGJA/RBhab5vAWuJweEvnI79AB2tqTePCmEajwepmAk
-	CznH4xmD9gWe5yOG3BRsAwP3SmWm3sBc6jrsBYOnthyOutaXIznvykjGDO2XwD0D9Abu
-	qQfVRoHMrXGA+UcJ+lii+GmVOSg8JLNJPsd+cZ5OpA5qb7bw3OUBFL+pGNPRcdTQrs2k
-	8Jt0IymbY21LXrta/o2FeUz0NYfOpcJvrBr97fDNEMSgO0izJVwTT4xuf+9TT/XYzmsC
-	wo2A==
-X-Received: by 10.180.206.101 with SMTP id ln5mr50594137wic.55.1426462453180; 
-	Sun, 15 Mar 2015 16:34:13 -0700 (PDT)
+	bh=WpsRusdOLiJB+jJtMOG3bwMRd1ugPOAuDCjM5PVzhMg=;
+	b=YjZP+NltckJPiuKXo80rQeqDP731CsV+/wYXqgEf/GqUDvh8Qo2HTgwJ79NwI+n8zz
+	+rcpwqhyYfoHd2la0ym5Ft7AHVYtrBX3J0i697PtRc1nPGRk7RPr+GKZEZ1cUknkniyH
+	mOtmWWsmMULONxh1WiIZ7ru0V3Y2XchvlLEmrEapxHTk8xR43lLfvnQinz7wPvfnY41Y
+	erC0bcGyoDWoHQ6FJ65tdZY7hgNUS6V1OE/6boWgIML1CHFgbvbXf8xBy0+lWVx/rLgJ
+	hLmnz/ZesuczfeOec8XIr3toivhlXbcAeAjFtjqZmTMAJruPu7PTWQhCVfBcYN++GzzP
+	yWVQ==
+X-Received: by 10.194.122.232 with SMTP id lv8mr112720324wjb.146.1426462454544;
+	Sun, 15 Mar 2015 16:34:14 -0700 (PDT)
 Received: from localhost.localdomain (p54AA52CC.dip0.t-ipconnect.de.
 	[84.170.82.204]) by mx.google.com with ESMTPSA id
-	r14sm12804945wiv.13.2015.03.15.16.34.11
+	r14sm12804945wiv.13.2015.03.15.16.34.13
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 15 Mar 2015 16:34:12 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:13 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2015 00:33:23 +0100
-Message-Id: <1426462419-10173-15-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 16 Mar 2015 00:33:24 +0100
+Message-Id: <1426462419-10173-16-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 14/30] tumbler: update to 0.1.31
+Subject: [PATCH][meta-xfce 15/30] xfce4-power-manager: update to 1.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,51 +51,30 @@ X-List-Received-Date: Sun, 15 Mar 2015 23:34:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* static libraries are gone
-* plugin link is created correctly so no need to recreate
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../tumbler/{tumbler_0.1.30.bb => tumbler_0.1.31.bb}          | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
- rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.30.bb => tumbler_0.1.31.bb} (68%)
+ .../{xfce4-power-manager_1.4.1.bb => xfce4-power-manager_1.4.3.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.4.1.bb => xfce4-power-manager_1.4.3.bb} (89%)
 
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-similarity index 68%
-rename from meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
-rename to meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-index 5359545..66385a4 100644
---- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.30.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-@@ -6,17 +6,12 @@ DEPENDS = "dbus-glib freetype gdk-pixbuf poppler curl xfce4-dev-tools-native lib
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.1.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.3.bb
+similarity index 89%
+rename from meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.1.bb
+rename to meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.3.bb
+index a4aaf66..496b3fd 100644
+--- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.1.bb
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.3.bb
+@@ -10,8 +10,8 @@ inherit xfce
+ DEPENDS = "gtk+ glib-2.0 dbus-glib xfconf libxfce4ui libxfce4util libnotify \
+            libxrandr virtual/libx11 libxext xfce4-panel"
  
- inherit xfce gtk-doc
+-SRC_URI[md5sum] = "808a2630487d75e6eae915e464b7fda3"
+-SRC_URI[sha256sum] = "16a9e9bf3e0f8480d05b248817fbdc59e701e9161d3d0c7e53f3de28ed491f58"
++SRC_URI[md5sum] = "caa17bfd96c0879e7bcc7432896fad52"
++SRC_URI[sha256sum] = "018e11dd315745f582d70108b6071d37fb94854fde70961e17325bc19c4e2011"
  
--SRC_URI[md5sum] = "2524e39439c13238565160da0b6fed2d"
--SRC_URI[sha256sum] = "e7c20d79c830465f8b3b792893f05e8b8d5ba90aec4973e7517e07ef31537304"
-+SRC_URI[md5sum] = "0067054e6f1f90a13f90faadfca1e89e"
-+SRC_URI[sha256sum] = "d0fd329273ff6ac98885eade4c3d8c87a4dd0816f713646130808bfa90b87173"
- SRC_URI += "file://0001-configure-use-pkg-config-for-freetype2.patch"
- 
- INSANE_SKIP_${PN} = "dev-so"
- 
--do_install_append() {
--    # correct tumbler-cache-plugin.so link (see plugins/xdg-cache/Makefile.am)
--    ln -sf ${libdir}/tumbler-1/plugins/cache/tumbler-xdg-cache.so ${D}${libdir}/tumbler-1/plugins/cache/tumbler-cache-plugin.so
--}
--
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gstreamer-thumbnailer] = "--enable-gstreamer-thumbnailer,--disable-gstreamer-thumbnailer,gstreamer1.0 gstreamer1.0-plugins-base"
- 
-@@ -28,8 +23,6 @@ FILES_${PN} += "${datadir}/dbus-1/services \
- 
- FILES_${PN}-dev += "${libdir}/tumbler-1/plugins/*.la \
-                     ${libdir}/tumbler-1/plugins/cache/*.la"
--FILES_${PN}-staticdev += "${libdir}/tumbler-1/plugins/*.a \
--                          ${libdir}/tumbler-1/plugins/cache/*.a"
- FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
-                     ${libdir}/tumbler-1/plugins/.debug \
-                     ${libdir}/tumbler-1/plugins/cache/.debug \
+ EXTRA_OECONF = " \
+     --enable-network-manager \
 -- 
 1.9.3
 
