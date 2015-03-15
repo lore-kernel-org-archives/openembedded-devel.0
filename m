@@ -1,40 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 9145760034
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 3433C60034
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 23:34:19 +0000 (UTC)
-Received: by wifj2 with SMTP id j2so29396479wif.1
+	Sun, 15 Mar 2015 23:34:20 +0000 (UTC)
+Received: by wggv3 with SMTP id v3so27019886wgg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2015 16:34:20 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=KCw07KHCrs8IkvcNH7ByNUQikWFx8szsvDgSCLd9hso=;
-	b=wdpEEdm67MyINJ3bm8ecRiHBQlQXv+gQqDeg4H5v9SmKgSXP7sGpZJ7SGzbSB3NUs1
-	ru4bfXnicMSXAVYrpiPK9ZxTt0rb10P62rKn2t//me9WSI4oTw0ZGq4nljeFhUwkrSKg
-	kJfQiOvFNOM4IjeWZ8uNPJkJ12766dG0zrup3WG17rc7Kqz2Td2Sv1Shte1XxUy6cpBA
-	BFsCJBN/pYq36tEx7G9UFIbdRJrkqCeCmXsWa/eMpCviRPNQZoqYyA1SBxa9T43pZdDZ
-	hSbUcA0J6lgWRJYyZxfHCvlrHhgbyJ4+oyetuelkcrngmhkVlZdIyzPaXuH1l0huBCOZ
-	f9kQ==
-X-Received: by 10.180.208.46 with SMTP id mb14mr11878339wic.31.1426462460246; 
-	Sun, 15 Mar 2015 16:34:20 -0700 (PDT)
+	bh=1CsoRVa3LnARINMkdtfBAO9k/jvgdxAMMuxJaSFqrTE=;
+	b=vCuJU+vuIc5pq0rj87pGOuAuYuFYWoukF2mdtp0VJXqdD4uy9nvGLkQuJ06unGsnSn
+	s5oaOejPC2gcVh+gZWT7GQ36qe4OwPSZSpJwPC/AYOV6FNNXHrSaVfHO7ABv/8MB9qIs
+	MCuCtzH2e87wv+bAxFcRPhHb8Yyb9QSb9zCIQODmAYYC/n8BKlgu4oO5RC4ccoHMeEE6
+	FNYWyMChWRQqKJ6qrmRwKg4NPXGHKCRmD1IKUwUGK/JGV4jCmXmikiS5fuTw2wO2MA4e
+	xP4IkqXNjN+v7BbYf9pmbnDFXgHWKOYLZaeG3HVPuQuo1PEPs2Ufr2vJ6nXv1yyeJZJH
+	kmIQ==
+X-Received: by 10.180.82.40 with SMTP id f8mr115865672wiy.60.1426462461641;
+	Sun, 15 Mar 2015 16:34:21 -0700 (PDT)
 Received: from localhost.localdomain (p54AA52CC.dip0.t-ipconnect.de.
 	[84.170.82.204]) by mx.google.com with ESMTPSA id
-	r14sm12804945wiv.13.2015.03.15.16.34.18
+	r14sm12804945wiv.13.2015.03.15.16.34.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 15 Mar 2015 16:34:19 -0700 (PDT)
+	Sun, 15 Mar 2015 16:34:20 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2015 00:33:28 +0100
-Message-Id: <1426462419-10173-20-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 16 Mar 2015 00:33:29 +0100
+Message-Id: <1426462419-10173-21-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1426462419-10173-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 19/30] xfce4-diskperf-plugin: update to 2.5.5
+Subject: [PATCH][meta-xfce 20/30] xfce4-fsguard-plugin: update to 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,31 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2015 23:34:20 -0000
+X-List-Received-Date: Sun, 15 Mar 2015 23:34:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...{xfce4-diskperf-plugin_2.5.4.bb => xfce4-diskperf-plugin_2.5.5.bb} | 4 ++--
+ .../{xfce4-fsguard-plugin_1.0.1.bb => xfce4-fsguard-plugin_1.0.2.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/diskperf/{xfce4-diskperf-plugin_2.5.4.bb => xfce4-diskperf-plugin_2.5.5.bb} (65%)
+ rename meta-xfce/recipes-panel-plugins/fsguard/{xfce4-fsguard-plugin_1.0.1.bb => xfce4-fsguard-plugin_1.0.2.bb} (71%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
-similarity index 65%
-rename from meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb
-rename to meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
-index 2df9b9f..801699c 100644
---- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.4.bb
-+++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
+diff --git a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.1.bb b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.2.bb
+similarity index 71%
+rename from meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.1.bb
+rename to meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.2.bb
+index 1446115..0f9199d 100644
+--- a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.1.bb
++++ b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.2.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
  inherit xfce-panel-plugin
  
--SRC_URI[md5sum] = "2db453fc3ea2e4fe073ec313a25b0961"
--SRC_URI[sha256sum] = "aab6b9c4e2f78620920efac6874c4edf426f05b63b94cfda0da8c99a91110a0b"
-+SRC_URI[md5sum] = "199e4365cb3a1fcd5f6164044aedba17"
-+SRC_URI[sha256sum] = "cbeb0c00f97362eef3f135afb77947aef73e938bae0386250a122ac6644b521b"
+-SRC_URI[md5sum] = "9c179371475e2837004cc208026e30c1"
+-SRC_URI[sha256sum] = "fffb7ee09769ec0b991b8752b848578e6434a675a939c5588f0728c2ef33aab7"
++SRC_URI[md5sum] = "db7741d1827e428b005e94d25e2ec00a"
++SRC_URI[sha256sum] = "a2c8d59386ae3d23cf6bdd06a1cdd7a1b9473cf6f38ae106600b194c601040ae"
 -- 
 1.9.3
 
