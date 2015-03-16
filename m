@@ -1,36 +1,23 @@
 Return-Path: <kaiu@gmx.de>
-X-Greylist: delayed 305 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 16 Mar 2015 17:33:06 UTC
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 576E86AC3E
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BA307391B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2015 17:33:06 +0000 (UTC)
-Received: from mail-we0-f176.google.com ([74.125.82.176]) by mail.gmx.com
-	(mrgmx003) with ESMTPSA (Nemesis) id 0MTBsk-1YwPkE21lG-00SBTG for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2015 18:28:00 +0100
-Received: by weop45 with SMTP id p45so18163713weo.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2015 10:27:59 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.180.171.35 with SMTP id ar3mr126105259wic.24.1426526879838; 
-	Mon, 16 Mar 2015 10:27:59 -0700 (PDT)
-Received: by 10.194.1.67 with HTTP; Mon, 16 Mar 2015 10:27:59 -0700 (PDT)
-In-Reply-To: <5502F0C9.8050009@balister.org>
-References: <CAAKMwirhdq7H2ULjwOXCOfs3JEWCXJR2QyyCmGjFuf1uF6Doqg@mail.gmail.com>
-	<CAGiJk9cTPf8TOg+h2rYbsT-Pvyo6EbDkR1_ps+dRPkx=43d9zQ@mail.gmail.com>
-	<5502F0C9.8050009@balister.org>
-Date: Mon, 16 Mar 2015 18:27:59 +0100
-Message-ID: <CAAKMwirh6+QTkeT7EKOYPcGX_cjPYhu-HVrzx0D=N5QtLdwOJw@mail.gmail.com>
+	Mon, 16 Mar 2015 17:48:28 +0000 (UTC)
+Received: from kulrich-SVE1712W1EB.fritz.box ([217.187.243.10]) by
+	mail.gmx.com (mrgmx101) with ESMTPSA (Nemesis) id
+	0MgXCF-1YrgPj2SKV-00NwNR; Mon, 16 Mar 2015 18:48:29 +0100
 From: Kai Ulrich <kaiu@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-Provags-ID: V03:K0:OZRIYqdqC+gnbS3uZ/pwqEESR7OqM7cCGqdWlpMWxtOBFzlQjmX
-	5wXw6Sf6ulGARG7C7yunodVvaukEm8mr1UwTCusCBLeoCFfEPCUzIHjlwtEJYS5ZjGLpm7K
-	inYiW3WQsc+5pEgFK9gpqiiBRo9DW4R2NandHRLYrszVFLZ+RyYqbCqUcMrzbqXqTzTKTbS
-	WxWtlYSZZxc7DAEJ/ulCg==
+Date: Mon, 16 Mar 2015 18:48:17 +0100
+Message-Id: <1426528097-14698-1-git-send-email-kaiu@gmx.de>
+X-Mailer: git-send-email 1.9.1
+X-Provags-ID: V03:K0:x7l9KqcoFETNxGgsUybl1h5AWODfWvCW4b7jCNdbpSM4Sgqsz2O
+	dL/YzOIvqlGJ65yUiC4so7dSp87w7LNlOgKb7aB50TE8UFbp7lYxsh3kT4vRa4MVOhLjBuq
+	EeHQ24TZ0ckVZHhXNb678QyNqai2lnkFWcFa/DMctJFmkmKicWQIMs4FmR5N8W1PvgHv9eS
+	eKQHlejOHzvbkNvQQDcWg==
 X-UI-Out-Filterresults: notjunk:1;
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: How is the process to add a recipe to meta-oe?
+Cc: kulrich <ulrich.kai@gmail.com>
+Subject: [meta-oe][PATCH] Add smstools3 http://smstools3.kekekasvi.com to meta-oe recipes-connectivity.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,46 +31,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2015 17:33:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Mar 2015 17:48:30 -0000
 
-Just sended the patch via git send-email. :-)
+From: kulrich <ulrich.kai@gmail.com>
 
-See openembedded-core@lists.openembedded.org mailinglist:
-[meta-oe][PATCH] Add smstools3 http://smstools3.kekekasvi.com to meta-oe
-recipes-connectivity.
+Signed-off-by: kulrich <ulrich.kai@gmail.com>
+---
+ .../smstools3/sms_binpath_and_psops.patch          | 19 ++++++++++
+ .../smstools3/smstools3_3.1.15.bb                  | 44 ++++++++++++++++++++++
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+ create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
 
-Kai
+diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+new file mode 100644
+index 0000000..ffcaa09
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+@@ -0,0 +1,19 @@
++Index: smstools3/scripts/sms3
++===================================================================
++--- smstools3.orig/scripts/sms3	2010-05-04 11:21:44.000000000 +0200
+++++ smstools3/scripts/sms3	2015-02-22 20:05:51.615074469 +0100
++@@ -24,11 +24,11 @@
++ # Logfile can also be defined in here:
++ LOGFILE="/var/log/smsd.log"
++ 
++-DAEMON=/usr/local/bin/smsd
+++DAEMON=/usr/bin/smsd
++ # A program which turns power off for couple of seconds:
++-RESETMODEMS=/usr/local/bin/smsd_resetmodems
+++RESETMODEMS=/usr/bin/smsd_resetmodems
++ NAME=smsd
++-PSOPT="-e"
+++PSOPT=""
++ ECHO=echo
++ case `uname` in
++   *BSD|Darwin)
+diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+new file mode 100644
+index 0000000..55a2583
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+@@ -0,0 +1,44 @@
++SUMMARY = "The SMS Server Tools 3 is a SMS Gateway software which can send and receive short messages through GSM modems and mobile phones."
++SECTION = "network"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
++HOMEPAGE = "http://smstools3.kekekasvi.com"
++
++SRC_URI = "http://smstools3.kekekasvi.com/packages/${PN}-${PV}.tar.gz \
++           file://sms_binpath_and_psops.patch"
++
++SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
++SRC_URI[sha256sum] = "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
++
++
++S = "${WORKDIR}/${PN}"
++
++RDEPENDS_${PN} = " bash "
++INITSCRIPT_NAME = "sms3"
++INITSCRIPT_PARAMS = "defaults"
++
++inherit update-rc.d
++
++do_install () {
++	
++	install -d ${D}${bindir}	
++	install -m 755 ${S}/src/smsd "${D}${bindir}/smsd"
++	
++	install -m 755 ${S}/scripts/sendsms "${D}${bindir}/sendsms"
++	install -m 755 ${S}/scripts/sms2html "${D}${bindir}/sms2html"
++	install -m 755 ${S}/scripts/sms2unicode "${D}${bindir}/sms2unicode" 
++	install -m 755 ${S}/scripts/unicode2sms "${D}${bindir}/unicode2sms"
++
++	install -d ${D}${sysconfdir}	
++	install -m 644 ${S}/examples/smsd.conf.easy "${D}${sysconfdir}/smsd.conf"
++
++	install -d "${D}${localstatedir}/spool"
++	install -d "${D}${localstatedir}/spool/sms"
++	install -d "${D}${localstatedir}/spool/sms/incoming"
++	install -d "${D}${localstatedir}/spool/sms/outgoing"
++	install -d "${D}${localstatedir}/spool/sms/checked"
++
++	install -d ${D}${sysconfdir}/init.d
++	install -m 755 ${S}/scripts/sms3 "${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}"
++
++}
+-- 
+1.9.1
 
-2015-03-13 15:14 GMT+01:00 Philip Balister <philip@balister.org>:
-
-> On 03/13/2015 07:23 AM, Samuel Stirtzel wrote:
-> > 2015-03-13 12:08 GMT+01:00 Kai Ulrich <kaiu@gmx.de>:
-> >> Hi,
-> >>
-> >> I created an layer with a recipe for smstools3.
-> >> You can find it on https://github.com/kaiulrich/meta-smstools3
-> >> I would like to share my work with the openembedded commity.
-> >> How is the process to add a recipe to meta-oe?
-> >>
-> >
-> > See:
-> > http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
-> >
-> > Also see the README file of the layer where you want to put the recipe in
-> >
-> >
->
-> It might be a good candidate for meta-telephony.
->
->
-> http://layers.openembedded.org/layerindex/branch/master/layer/meta-telephony/
->
-> Philip
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
