@@ -1,25 +1,32 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 3066465CD0
+Return-Path: <kaiu@gmx.de>
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 3636B60034
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2015 12:44:38 +0000 (UTC)
-Received: (qmail 8481 invoked by uid 1003); 17 Mar 2015 12:44:39 -0000
-Received: from unknown (HELO ?10.212.226.128?)
-	(philip@opensdr.com@98.191.4.207)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	17 Mar 2015 12:44:39 -0000
-Message-ID: <550821AC.6080908@balister.org>
-Date: Tue, 17 Mar 2015 08:44:28 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+	Tue, 17 Mar 2015 14:52:01 +0000 (UTC)
+Received: from mail-wg0-f52.google.com ([74.125.82.52]) by mail.gmx.com
+	(mrgmx001) with ESMTPSA (Nemesis) id 0MQ2Wx-1Yd5VZ26CZ-005LXZ for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2015 15:52:02 +0100
+Received: by wggv3 with SMTP id v3so10594414wgg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2015 07:52:01 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+X-Received: by 10.180.171.35 with SMTP id ar3mr134268899wic.24.1426603921983; 
+	Tue, 17 Mar 2015 07:52:01 -0700 (PDT)
+Received: by 10.194.1.67 with HTTP; Tue, 17 Mar 2015 07:52:01 -0700 (PDT)
+In-Reply-To: <550821AC.6080908@balister.org>
 References: <1426528097-14698-1-git-send-email-kaiu@gmx.de>
-	<20150317120552.GA4738@jama>
-In-Reply-To: <20150317120552.GA4738@jama>
-Cc: kulrich <ulrich.kai@gmail.com>, Holger Freyther <zecke@selfish.org>
+	<20150317120552.GA4738@jama> <550821AC.6080908@balister.org>
+Date: Tue, 17 Mar 2015 15:52:01 +0100
+Message-ID: <CAAKMwiphPcGqXcX6WBrst0BSeJZ_rsazju8L3gQNLB1t2CxZQw@mail.gmail.com>
+From: Kai Ulrich <kaiu@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+X-Provags-ID: V03:K0:KiLrVxhcC8FUXYDQwoIpCHfeNrlNCnHgUZudI5hVqAujnYj29qw
+	5Ntka+kc0DlUQT99zBPSGPWowyG3wTcmy026G6PmFd1orgGdQgIlhNqx6cwCldBIL3bz1CM
+	+hh+9e007cCUsHPsqbjy1t9yAv2IpXfbP+abHXvpjDQP5X0/MKIbpqV+Wcfz/0FD+x4ZnmL
+	trdmZfg23Kf4VF3WHM/TQ==
+X-UI-Out-Filterresults: notjunk:1;
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-oe][PATCH] Add smstools3 http://smstools3.kekekasvi.com to meta-oe recipes-connectivity.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -34,164 +41,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2015 12:44:40 -0000
-X-Groupsio-MsgNum: 54813
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="TWTb2gHiJ5JI9qsI8TdeOJjtnL9mpfjlJ"
+X-List-Received-Date: Tue, 17 Mar 2015 14:52:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
---TWTb2gHiJ5JI9qsI8TdeOJjtnL9mpfjlJ
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+Well, smstools3 main-feature is a smsgateway.
+Gammu SMSD provides similar functionality and is located
+recipes-connectivity.
+So if somebody is looking for these features, both alternatives are located
+in the same place.
+So we might move Gammu as well?
 
-Also does this belong in meta-telephony?
+2015-03-17 13:44 GMT+01:00 Philip Balister <philip@balister.org>:
 
-Philip
+> Also does this belong in meta-telephony?
+>
+> Philip
+>
+> On 03/17/2015 08:05 AM, Martin Jansa wrote:
+> >
+> > subject should start with smstools3:
+> >
+> > On Mon, Mar 16, 2015 at 06:48:17PM +0100, Kai Ulrich wrote:
+> >> From: kulrich <ulrich.kai@gmail.com>
+> >>
+> >> Signed-off-by: kulrich <ulrich.kai@gmail.com>
+> >> ---
+> >>  .../smstools3/sms_binpath_and_psops.patch          | 19 ++++++++++
+> >>  .../smstools3/smstools3_3.1.15.bb                  | 44
+> ++++++++++++++++++++++
+> >>  2 files changed, 63 insertions(+)
+> >>  create mode 100644
+> meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+> >>  create mode 100644 meta-oe/recipes-connectivity/smstools3/
+> smstools3_3.1.15.bb
+> >>
+> >> diff --git
+> a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+> b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+> >> new file mode 100644
+> >> index 0000000..ffcaa09
+> >> --- /dev/null
+> >> +++
+> b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+> >> @@ -0,0 +1,19 @@
+> >> +Index: smstools3/scripts/sms3
+> >> +===================================================================
+> >> +--- smstools3.orig/scripts/sms3     2010-05-04 11:21:44.000000000 +0200
+> >> ++++ smstools3/scripts/sms3  2015-02-22 20:05:51.615074469 +0100
+> >> +@@ -24,11 +24,11 @@
+> >> + # Logfile can also be defined in here:
+> >> + LOGFILE="/var/log/smsd.log"
+> >> +
+> >> +-DAEMON=/usr/local/bin/smsd
+> >> ++DAEMON=/usr/bin/smsd
+> >> + # A program which turns power off for couple of seconds:
+> >> +-RESETMODEMS=/usr/local/bin/smsd_resetmodems
+> >> ++RESETMODEMS=/usr/bin/smsd_resetmodems
+> >> + NAME=smsd
+> >> +-PSOPT="-e"
+> >> ++PSOPT=""
+> >> + ECHO=echo
+> >> + case `uname` in
+> >> +   *BSD|Darwin)
+> >> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> >> new file mode 100644
+> >> index 0000000..55a2583
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> >> @@ -0,0 +1,44 @@
+> >> +SUMMARY = "The SMS Server Tools 3 is a SMS Gateway software which can
+> send and receive short messages through GSM modems and mobile phones."
+> >
+> > SUMMARY should be short, split to SUMMARY and DESCRIPTION.
+> >
+> >> +SECTION = "network"
+> >> +LICENSE = "GPLv2"
+> >> +LIC_FILES_CHKSUM =
+> "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
+> >> +HOMEPAGE = "http://smstools3.kekekasvi.com"
+> >> +
+> >> +SRC_URI = "http://smstools3.kekekasvi.com/packages/${PN}-${PV}.tar.gz
+> \
+> >
+> > ${PN}-${PV} -> ${BP}
+> >
+> >> +           file://sms_binpath_and_psops.patch"
+> >> +
+> >> +SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
+> >> +SRC_URI[sha256sum] =
+> "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
+> >> +
+> >> +
+> >> +S = "${WORKDIR}/${PN}"
+> >> +
+> >> +RDEPENDS_${PN} = " bash "
+> >
+> > drop unnecessary spaces around bash.
+> >
+> >> +INITSCRIPT_NAME = "sms3"
+> >> +INITSCRIPT_PARAMS = "defaults"
+> >> +
+> >> +inherit update-rc.d
+> >> +
+> >> +do_install () {
+> >> +
+> >> +    install -d ${D}${bindir}
+> >> +    install -m 755 ${S}/src/smsd "${D}${bindir}/smsd"
+> >> +
+> >> +    install -m 755 ${S}/scripts/sendsms "${D}${bindir}/sendsms"
+> >> +    install -m 755 ${S}/scripts/sms2html "${D}${bindir}/sms2html"
+> >> +    install -m 755 ${S}/scripts/sms2unicode "${D}${bindir}/sms2unicode"
+> >> +    install -m 755 ${S}/scripts/unicode2sms "${D}${bindir}/unicode2sms"
+> >> +
+> >> +    install -d ${D}${sysconfdir}
+> >> +    install -m 644 ${S}/examples/smsd.conf.easy
+> "${D}${sysconfdir}/smsd.conf"
+> >> +
+> >> +    install -d "${D}${localstatedir}/spool"
+> >> +    install -d "${D}${localstatedir}/spool/sms"
+> >> +    install -d "${D}${localstatedir}/spool/sms/incoming"
+> >> +    install -d "${D}${localstatedir}/spool/sms/outgoing"
+> >> +    install -d "${D}${localstatedir}/spool/sms/checked"
+> >> +
+> >> +    install -d ${D}${sysconfdir}/init.d
+> >> +    install -m 755 ${S}/scripts/sms3
+> "${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}"
+> >> +
+> >> +}
+> >> --
+> >> 1.9.1
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+> >
+>
+>
 
-On 03/17/2015 08:05 AM, Martin Jansa wrote:
->=20
-> subject should start with smstools3:
->=20
-> On Mon, Mar 16, 2015 at 06:48:17PM +0100, Kai Ulrich wrote:
->> From: kulrich <ulrich.kai@gmail.com>
->>
->> Signed-off-by: kulrich <ulrich.kai@gmail.com>
->> ---
->>  .../smstools3/sms_binpath_and_psops.patch          | 19 ++++++++++
->>  .../smstools3/smstools3_3.1.15.bb                  | 44 +++++++++++++=
-+++++++++
->>  2 files changed, 63 insertions(+)
->>  create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3/s=
-ms_binpath_and_psops.patch
->>  create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3_3=
-=2E1.15.bb
->>
->> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binp=
-ath_and_psops.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/sm=
-s_binpath_and_psops.patch
->> new file mode 100644
->> index 0000000..ffcaa09
->> --- /dev/null
->> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and=
-_psops.patch
->> @@ -0,0 +1,19 @@
->> +Index: smstools3/scripts/sms3
->> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> +--- smstools3.orig/scripts/sms3	2010-05-04 11:21:44.000000000 +0200
->> ++++ smstools3/scripts/sms3	2015-02-22 20:05:51.615074469 +0100
->> +@@ -24,11 +24,11 @@
->> + # Logfile can also be defined in here:
->> + LOGFILE=3D"/var/log/smsd.log"
->> +=20
->> +-DAEMON=3D/usr/local/bin/smsd
->> ++DAEMON=3D/usr/bin/smsd
->> + # A program which turns power off for couple of seconds:
->> +-RESETMODEMS=3D/usr/local/bin/smsd_resetmodems
->> ++RESETMODEMS=3D/usr/bin/smsd_resetmodems
->> + NAME=3Dsmsd
->> +-PSOPT=3D"-e"
->> ++PSOPT=3D""
->> + ECHO=3Decho
->> + case `uname` in
->> +   *BSD|Darwin)
->> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.b=
-b b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
->> new file mode 100644
->> index 0000000..55a2583
->> --- /dev/null
->> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
->> @@ -0,0 +1,44 @@
->> +SUMMARY =3D "The SMS Server Tools 3 is a SMS Gateway software which c=
-an send and receive short messages through GSM modems and mobile phones."=
-
->=20
-> SUMMARY should be short, split to SUMMARY and DESCRIPTION.
->=20
->> +SECTION =3D "network"
->> +LICENSE =3D "GPLv2"
->> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4d21efa1bb2a186360dde4035f=
-860682"
->> +HOMEPAGE =3D "http://smstools3.kekekasvi.com"
->> +
->> +SRC_URI =3D "http://smstools3.kekekasvi.com/packages/${PN}-${PV}.tar.=
-gz \
->=20
-> ${PN}-${PV} -> ${BP}
->=20
->> +           file://sms_binpath_and_psops.patch"
->> +
->> +SRC_URI[md5sum] =3D "0241ef60e646fac1a06254a848e61ed7"
->> +SRC_URI[sha256sum] =3D "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393=
-ea02f5bf05234814d59"
->> +
->> +
->> +S =3D "${WORKDIR}/${PN}"
->> +
->> +RDEPENDS_${PN} =3D " bash "
->=20
-> drop unnecessary spaces around bash.
->=20
->> +INITSCRIPT_NAME =3D "sms3"
->> +INITSCRIPT_PARAMS =3D "defaults"
->> +
->> +inherit update-rc.d
->> +
->> +do_install () {
->> +=09
->> +	install -d ${D}${bindir}=09
->> +	install -m 755 ${S}/src/smsd "${D}${bindir}/smsd"
->> +=09
->> +	install -m 755 ${S}/scripts/sendsms "${D}${bindir}/sendsms"
->> +	install -m 755 ${S}/scripts/sms2html "${D}${bindir}/sms2html"
->> +	install -m 755 ${S}/scripts/sms2unicode "${D}${bindir}/sms2unicode" =
-
->> +	install -m 755 ${S}/scripts/unicode2sms "${D}${bindir}/unicode2sms"
->> +
->> +	install -d ${D}${sysconfdir}=09
->> +	install -m 644 ${S}/examples/smsd.conf.easy "${D}${sysconfdir}/smsd.=
-conf"
->> +
->> +	install -d "${D}${localstatedir}/spool"
->> +	install -d "${D}${localstatedir}/spool/sms"
->> +	install -d "${D}${localstatedir}/spool/sms/incoming"
->> +	install -d "${D}${localstatedir}/spool/sms/outgoing"
->> +	install -d "${D}${localstatedir}/spool/sms/checked"
->> +
->> +	install -d ${D}${sysconfdir}/init.d
->> +	install -m 755 ${S}/scripts/sms3 "${D}${sysconfdir}/init.d/${INITSCR=
-IPT_NAME}"
->> +
->> +}
->> --=20
->> 1.9.1
->>
->> --=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
->=20
->=20
-
-
---TWTb2gHiJ5JI9qsI8TdeOJjtnL9mpfjlJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVCCGvAAoJEMDJd4rr0merI9YIAMRpCS2Tb7SZNGjDBncc3q5I
-8/BxliGURbkmkC8rZrpjTKNBx4he8cNbc+NWLuSvKGKkrY7vzretBAhCvEGKNkse
-PHpmc2BXUBLxOUlLxIkLYPsDpDJ0kOS3uVC+Nys5CBLeZhbqqHLRLtXDUW+2+LZK
-iDhuOpVqzZlJlmCir3S24I+i42rmYcnQkBbUu3VW2hHCckP839w2oHqD/LQuuizA
-CwNO/+ROvQ1o3vn5WOnZo5TCGL3+J5Vrd75GjyNr8ECJ5nKBwo3BePtYm7i+7ktC
-LGE18JEd6ts/pUk+7RH1FBuixDBUyH21jW0N/+uSPvzpz7RrDqNEjIX4KGGgoTE=
-=NnLZ
------END PGP SIGNATURE-----
-
---TWTb2gHiJ5JI9qsI8TdeOJjtnL9mpfjlJ--
