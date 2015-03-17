@@ -1,23 +1,32 @@
-Return-Path: <kaiu@gmx.de>
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BA307391B
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3614 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 17 Mar 2015 01:43:01 UTC
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id C9AE26AC43
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2015 17:48:28 +0000 (UTC)
-Received: from kulrich-SVE1712W1EB.fritz.box ([217.187.243.10]) by
-	mail.gmx.com (mrgmx101) with ESMTPSA (Nemesis) id
-	0MgXCF-1YrgPj2SKV-00NwNR; Mon, 16 Mar 2015 18:48:29 +0100
-From: Kai Ulrich <kaiu@gmx.de>
+	Tue, 17 Mar 2015 01:43:01 +0000 (UTC)
+Received: from gandalf.denix.org ([108.18.33.236]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NLB00KK6ZAX8M20@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	16 Mar 2015 19:42:33 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=WpCc6mbq c=1 sm=1 tr=0	a=SSUdfGXV8XCffJJ8+gLrig==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=emO1SXQWCLwA:10
+	a=sozttTNsAAAA:8 a=5rCe5-i4AAAA:8	a=NEAV23lmAAAA:8
+	a=z5E4bW7GdpvrKwfNQeQA:9 a=phLkc5FJxekA:10
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 20388200F0;	Mon,
+	16 Mar 2015 20:42:33 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Mar 2015 18:48:17 +0100
-Message-Id: <1426528097-14698-1-git-send-email-kaiu@gmx.de>
-X-Mailer: git-send-email 1.9.1
-X-Provags-ID: V03:K0:x7l9KqcoFETNxGgsUybl1h5AWODfWvCW4b7jCNdbpSM4Sgqsz2O
-	dL/YzOIvqlGJ65yUiC4so7dSp87w7LNlOgKb7aB50TE8UFbp7lYxsh3kT4vRa4MVOhLjBuq
-	EeHQ24TZ0ckVZHhXNb678QyNqai2lnkFWcFa/DMctJFmkmKicWQIMs4FmR5N8W1PvgHv9eS
-	eKQHlejOHzvbkNvQQDcWg==
-X-UI-Out-Filterresults: notjunk:1;
-Cc: kulrich <ulrich.kai@gmail.com>
-Subject: [meta-oe][PATCH] Add smstools3 http://smstools3.kekekasvi.com to meta-oe recipes-connectivity.
+Date: Mon, 16 Mar 2015 20:42:27 -0400
+Message-id: <1426552947-18113-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-networking][PATCH] smcroute: add version 2.0.0 with /usr/sbin and endless loop fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,94 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2015 17:48:30 -0000
+X-List-Received-Date: Tue, 17 Mar 2015 01:43:02 -0000
 
-From: kulrich <ulrich.kai@gmail.com>
+From: Denys Dmytriyenko <denys@ti.com>
 
-Signed-off-by: kulrich <ulrich.kai@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- .../smstools3/sms_binpath_and_psops.patch          | 19 ++++++++++
- .../smstools3/smstools3_3.1.15.bb                  | 44 ++++++++++++++++++++++
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
- create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+ meta-networking/recipes-support/smcroute/smcroute_2.0.0.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-networking/recipes-support/smcroute/smcroute_2.0.0.bb
 
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+diff --git a/meta-networking/recipes-support/smcroute/smcroute_2.0.0.bb b/meta-networking/recipes-support/smcroute/smcroute_2.0.0.bb
 new file mode 100644
-index 0000000..ffcaa09
+index 0000000..c206cb9
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
-@@ -0,0 +1,19 @@
-+Index: smstools3/scripts/sms3
-+===================================================================
-+--- smstools3.orig/scripts/sms3	2010-05-04 11:21:44.000000000 +0200
-++++ smstools3/scripts/sms3	2015-02-22 20:05:51.615074469 +0100
-+@@ -24,11 +24,11 @@
-+ # Logfile can also be defined in here:
-+ LOGFILE="/var/log/smsd.log"
-+ 
-+-DAEMON=/usr/local/bin/smsd
-++DAEMON=/usr/bin/smsd
-+ # A program which turns power off for couple of seconds:
-+-RESETMODEMS=/usr/local/bin/smsd_resetmodems
-++RESETMODEMS=/usr/bin/smsd_resetmodems
-+ NAME=smsd
-+-PSOPT="-e"
-++PSOPT=""
-+ ECHO=echo
-+ case `uname` in
-+   *BSD|Darwin)
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
-new file mode 100644
-index 0000000..55a2583
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
-@@ -0,0 +1,44 @@
-+SUMMARY = "The SMS Server Tools 3 is a SMS Gateway software which can send and receive short messages through GSM modems and mobile phones."
-+SECTION = "network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
-+HOMEPAGE = "http://smstools3.kekekasvi.com"
++++ b/meta-networking/recipes-support/smcroute/smcroute_2.0.0.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Static Multicast Routing Daemon"
++DESCRIPTION = "SMCRoute is a daemon and command line tool to manipulate the multicast routing table in the UNIX kernel."
++HOMEPAGE = "http://troglobit.github.io/smcroute.html"
++SECTION = "console/network"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 +
-+SRC_URI = "http://smstools3.kekekasvi.com/packages/${PN}-${PV}.tar.gz \
-+           file://sms_binpath_and_psops.patch"
++SRCREV = "d6280e64b27d5a4bd7f37dac36b455f4ae5f9ab3"
++SRC_URI = "git://github.com/troglobit/smcroute.git;branch=master;protocol=git"
 +
-+SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
-+SRC_URI[sha256sum] = "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
++S = "${WORKDIR}/git"
 +
-+
-+S = "${WORKDIR}/${PN}"
-+
-+RDEPENDS_${PN} = " bash "
-+INITSCRIPT_NAME = "sms3"
-+INITSCRIPT_PARAMS = "defaults"
-+
-+inherit update-rc.d
-+
-+do_install () {
-+	
-+	install -d ${D}${bindir}	
-+	install -m 755 ${S}/src/smsd "${D}${bindir}/smsd"
-+	
-+	install -m 755 ${S}/scripts/sendsms "${D}${bindir}/sendsms"
-+	install -m 755 ${S}/scripts/sms2html "${D}${bindir}/sms2html"
-+	install -m 755 ${S}/scripts/sms2unicode "${D}${bindir}/sms2unicode" 
-+	install -m 755 ${S}/scripts/unicode2sms "${D}${bindir}/unicode2sms"
-+
-+	install -d ${D}${sysconfdir}	
-+	install -m 644 ${S}/examples/smsd.conf.easy "${D}${sysconfdir}/smsd.conf"
-+
-+	install -d "${D}${localstatedir}/spool"
-+	install -d "${D}${localstatedir}/spool/sms"
-+	install -d "${D}${localstatedir}/spool/sms/incoming"
-+	install -d "${D}${localstatedir}/spool/sms/outgoing"
-+	install -d "${D}${localstatedir}/spool/sms/checked"
-+
-+	install -d ${D}${sysconfdir}/init.d
-+	install -m 755 ${S}/scripts/sms3 "${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}"
-+
-+}
++inherit autotools
 -- 
-1.9.1
+2.2.0
 
 
