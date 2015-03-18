@@ -1,42 +1,25 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 86CD660034
+Return-Path: <lchristina26@hotmail.com>
+X-Greylist: delayed 301 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 18 Mar 2015 18:45:30 UTC
+Received: from BLU004-OMC3S37.hotmail.com (blu004-omc3s37.hotmail.com
+	[65.55.116.112])
+	by mail.openembedded.org (Postfix) with ESMTP id A52F160034
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2015 15:21:53 +0000 (UTC)
-Received: by pdnc3 with SMTP id c3so46108923pdn.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2015 08:21:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=Fv/N/1293cQif9n3KJmwwhHXHMDdHf9u9HsiVbzBkAk=;
-	b=nx392amAZTe8FSTOu4aeMqXtikJOBsXplErlf+74R28gptd9Ux81GjqYwdLnUob+Fi
-	M/DtPOwrIWNXB8PC7oXtkjM/V48oPBxA65DGUVceVICrYPrza0nA/IKtSREvs4hj6IBW
-	defaSwNYt66Euumk25j7OEed/PySEdCL5+uMngXHhuaP/t9PTsdQ4Fjxa7iOE/IAum1Y
-	apFOwwfo2DnkbFNMKC2nsUJrU3xrYF5QHmJHANUxsrBwdPu3jXGtmtwr7cZ6Pojnsvj2
-	54EPrkRj1AT3VKs6a9yEJ2KOHXf7ws2aXaZ5beY8shEF8ZytxhoJoveFw+HGRuiVerPk
-	aCMQ==
-X-Received: by 10.66.102.99 with SMTP id fn3mr141920084pab.118.1426692115087; 
-	Wed, 18 Mar 2015 08:21:55 -0700 (PDT)
-Received: from ?IPv6:2601:c:a700:3ba7:890f:8bf8:53cc:4b2c?
-	([2601:c:a700:3ba7:890f:8bf8:53cc:4b2c])
-	by mx.google.com with ESMTPSA id
-	pa6sm28184456pac.45.2015.03.18.08.21.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Mar 2015 08:21:53 -0700 (PDT)
-Message-ID: <55099809.9050509@gmail.com>
-Date: Wed, 18 Mar 2015 08:21:45 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
-MIME-Version: 1.0
+	Wed, 18 Mar 2015 18:45:30 +0000 (UTC)
+Received: from BLU436-SMTP74 ([65.55.116.73]) by BLU004-OMC3S37.hotmail.com
+	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751);
+	Wed, 18 Mar 2015 11:40:31 -0700
+X-TMN: [nO4ax3QfoCV/cKgneSMhkbSTGoYiAwZB]
+X-Originating-Email: [lchristina26@hotmail.com]
+Message-ID: <BLU436-SMTP740E8A01B854DAB7A40768D6000@phx.gbl>
+From: LC Mac <lchristina26@hotmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <54ED1B78.4040101@balister.org>	<20150227083113.GF2309@jama>	<CAP9ODKqFPNyF4ZoXv0C1Jw==opnmrj+cWAEHUhr6nXbbXUKw6g@mail.gmail.com>	<54FF59B5.20900@gmail.com>
-	<54FF5A1D.90907@balister.org>
-In-Reply-To: <54FF5A1D.90907@balister.org>
-Subject: Re: [meta-oe][dizzy]Update PyQt and related recipes
+Date: Wed, 18 Mar 2015 12:40:14 -0600
+X-Mailer: git-send-email 1.9.1
+X-OriginalArrivalTime: 18 Mar 2015 18:40:29.0021 (UTC)
+	FILETIME=[01BD00D0:01D061AB]
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] wolfssl: change name from cyassl to wolfssl, update to version 3.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,57 +33,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2015 15:21:56 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Mar 2015 18:45:32 -0000
+Content-Type: text/plain
 
-Changing is my staging tree.
+CyaSSL is now called wolfSSL. Recipe updates included RPROVIDE and
+PROVIDE lines, with updates to sha/md5 sums.
 
-hope to make a request this weekend. I have a few more backports to do.
+Signed-off-by: lchristina26 <leah@wolfssl.com>
+---
+ .../recipes-connectivity/cyassl/cyassl_3.3.0.bb     | 18 ------------------
+ .../recipes-connectivity/wolfssl/wolfssl_3.4.0.bb   | 21 +++++++++++++++++++++
+ 2 files changed, 21 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
 
-- armin
+diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
+deleted file mode 100644
+index b6f852d..0000000
+--- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "CyaSSL Lightweight, Embedded SSL Library"
+-DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
+-               optimized for embedded and RTOS environments. It can be \
+-               Up to 20 times smaller than OpenSSL while still supporting \
+-               a full TLS 1.2 client and server."
+-HOMEPAGE = "http://www.yassl.com/yaSSL/Products-cyassl.html"
+-BUGTRACKER = "http://github.com/cyassl/cyassl/issues"
+-SECTION = "libs/network"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-
+-SRC_URI = "http://www.yassl.com/${BP}.zip"
+-
+-SRC_URI[md5sum] = "0303eb0f2f9065a1207d9104ab0eba7c"
+-SRC_URI[sha256sum] = "e51583ea1e4d64537553922d67a96360312811dffef58d4c05506aa98a296fe3"
+-
+-inherit autotools
+-
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
+new file mode 100644
+index 0000000..2366fb1
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "wolfSSL Lightweight, Embedded SSL Library"
++DESCRIPTION = "wolfSSL, formerly CyaSSL, is a lightweight SSL library written in C and \
++               optimized for embedded and RTOS environments. It can be \
++               Up to 20 times smaller than OpenSSL while still supporting \
++               a full TLS 1.2 client and server."
++HOMEPAGE = "http://www.wolfssl.com/yaSSL/Products-wolfssl.html"
++BUGTRACKER = "http://github.com/wolfssl/wolfssl/issues"
++SECTION = "libs/network"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++PROVIDES += "cyassl"
++RPROVIDES_${PN} = "cyassl"
++
++SRC_URI = "http://www.wolfssl.com/${BP}.zip"
++
++SRC_URI[md5sum] = "ec6ed4c5847454ac928215a46b3e0c33"
++SRC_URI[sha256sum] = "bc49a142c17b1e52a126417e5d7cbadcb7f18f5c81e446c12e214483395159ea"
++
++inherit autotools
++
+-- 
+1.9.1
 
-On 03/10/2015 01:54 PM, Philip Balister wrote:
-> On 03/10/2015 04:53 PM, akuster808 wrote:
->>
->>
->> On 02/27/2015 05:41 AM, Otavio Salvador wrote:
->>> Hello Martin,
->>>
->>> On Fri, Feb 27, 2015 at 5:31 AM, Martin Jansa <martin.jansa@gmail.com>
->>> wrote:
->>>> On Tue, Feb 24, 2015 at 04:46:48PM -0800, Philip Balister wrote:
->>>>> Please pull these three patches into meta-oe/dizzy.
->>>>>
->>>>> https://github.com/openembedded/meta-oe/pull/19
->>>>>
->>>>> These lead to a working PyQt4, which will reduce the number of
->>>>> questions
->>>>> I get about gnuradio-companion not working on dizzy.
->>>>
->>>> I'm not sure if we should do upgrades in release branch which should
->>>> receive only bug fixes, but I'll let daisy maintainers to decide.
->>>
->>> I agree with your concern but I also see the improvement
->>> (cross-compile support and like) of the new PyQt4.
->>
->> Sorry I have head down for the last two weeks.
->>
->>>
->>> At same time, I think this is not ready to be merged. Checking the
->>> code changes I think we need to:
->>>
->>> * split python-sip runtime package
->>
->> So is this split being worked on ?
->
-> Yes. I sent in patches yesterday. Thanks for checking.
->
-> Philip
->
->>
->> - armin
->>>
->>> This will fix the upgrade path.
->>>
 
