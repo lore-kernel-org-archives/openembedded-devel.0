@@ -1,34 +1,25 @@
-Return-Path: <sam.nelson@ti.com>
-Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
-	by mail.openembedded.org (Postfix) with ESMTP id 9956D60034
+Return-Path: <sgw@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 891F060034
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2015 18:50:09 +0000 (UTC)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2IIoAaX021977;
-	Wed, 18 Mar 2015 13:50:10 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2IIo942020259;
-	Wed, 18 Mar 2015 13:50:09 -0500
-Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
-	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
-	14.03.0224.002; Wed, 18 Mar 2015 13:50:09 -0500
-From: "Nelson, Sam" <sam.nelson@ti.com>
-To: Max Krummenacher <max.oss.09@gmail.com>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] Query on meta-java layer: openjdk-7-jre: compilation
-	issue with '-fuse-ld-bfd'
-Thread-Index: AdBg76GigPIijuwIRJSeq1NY3JWS8gARdG2AABnJ47A=
-Date: Wed, 18 Mar 2015 18:50:08 +0000
-Message-ID: <4F9216F96E5DF9428610502835A9F49058151608@DLEE11.ent.ti.com>
-References: <4F9216F96E5DF9428610502835A9F4905814FFE9@DLEE11.ent.ti.com>
-	<CAEHkU3XTfCB5DdmsOo4V1kRuR1+NzqoV-Rn-UsMM95ReK7zKrQ@mail.gmail.com>
-In-Reply-To: <CAEHkU3XTfCB5DdmsOo4V1kRuR1+NzqoV-Rn-UsMM95ReK7zKrQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.247.5.50]
+	Wed, 18 Mar 2015 22:23:10 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by orsmga102.jf.intel.com with ESMTP; 18 Mar 2015 15:23:12 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,425,1422950400"; d="scan'208";a="682143972"
+Received: from swold-mobl.amr.corp.intel.com ([10.219.16.68])
+	by fmsmga001.fm.intel.com with ESMTP; 18 Mar 2015 15:23:11 -0700
+Message-ID: <5509FACD.6020507@linux.intel.com>
+Date: Wed, 18 Mar 2015 16:23:09 -0600
+From: Saul Wold <sgw@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
 MIME-Version: 1.0
-Subject: Re: Query on meta-java layer: openjdk-7-jre: compilation issue with '-fuse-ld-bfd'
+To: openembedded-devel@lists.openembedded.org
+References: <1426647253-12404-1-git-send-email-sgw@linux.intel.com>	<1426647253-12404-2-git-send-email-sgw@linux.intel.com>
+	<20150318134409.GD4738@jama>
+In-Reply-To: <20150318134409.GD4738@jama>
+Subject: Re: [PATCH 2/2] openflow: update libopenflow.m4 to use openssl instead of libssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,65 +33,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2015 18:50:13 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Mar 2015 22:23:11 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Thanks a lot for your response. Appreciate it.
-I have created a patch as you  have suggested and it works now.
-I will send out a patch to the mailing list.
-Regards,
-Sam
-> -----Original Message-----
-> From: Max Krummenacher [mailto:max.oss.09@gmail.com]
-> Sent: Tuesday, March 17, 2015 7:39 PM
-> To: OpenEmbedded Devel List; Nelson, Sam
-> Subject: Re: [oe] Query on meta-java layer: openjdk-7-jre: compilation is=
-sue
-> with '-fuse-ld-bfd'
->=20
-> Hello Sam
->=20
-> > I am using an openembedded setup and using the daisy branch.
-> > I am trying to use meta java: git://git.yoctoproject.org/meta-java  to =
-compile
-> openjdk-7-jre and seeing the following error:
-> >
-> > | arm-linux-gnueabihf-gcc: error: unrecognized command line option '-fu=
-se-
-> ld=3Dbfd'
-> >
-> > Looks like the addition of '-fuse-ld=3Dbfd" was introduced with the fol=
-lowing
-> commit in meta-java:
-> > commit cb351db824b0eb4a71514156bba543f6dde19740
-> > Author: Max Krummenacher <max.oss.09@gmail.com>
-> > Date:   Tue Jan 20 16:14:23 2015 +0100
-> >
-> > I am using linaro toolchain: gcc-linaro-arm-linx-gnueabihf-4.7-2013 and=
- does
-> not support "-fuse-ld" option. Any ideas on how this can be fixed?
-> >
-> The openemembedded built toolchain in daisy, both from the oe-core and
-> the linaro layers are gcc 4.8 based and do support the option.
-> So  having the toolchain built by oe or using a newer external
-> toolchain can fix your issue.
->=20
-> If you're looked to a 4.7 toolchain because of some other issue you
-> could go through the commit which introduced the -fuse-ld and remove
-> the -fuse-ld=3Dbfd from the patches in
-> recipes-core/openjdk/openjdk-7-25b30/. I guess your toolchain by
-> default does link with the classic bfd linker rather than using gold.
->=20
-> If that is a bigger problem one could probably add support for your
-> use case, e.g. by trying to compile on failure without the option and
-> commit such a patch to meta-java. :
->=20
-> $(CC_COMPILE) -static -fuse-ld=3Dbfd -o $@ $< $(COMPILE_DONE) ||
-> $(CC_COMPILE) -static -o $@ $< $(COMPILE_DONE)
->=20
->=20
-> Regards
-> Max
+On 03/18/2015 07:44 AM, Martin Jansa wrote:
+> On Tue, Mar 17, 2015 at 08:54:13PM -0600, Saul Wold wrote:
+>> openssl provides both the libssl and libcrypto APIs for linkage, the 1.0.2 of
+>> OpenSSL removed libcrypto from the libssl.pc
+>
+> This should be already resolved by:
+> Joe MacDonald : openflow: add libcrypto to static openflow library
+> which was merged today.
+>
+Oh well, this is a more correct fix I think.  Timing is.
+
+Sau!
+
+>>
+>> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+>> ---
+>>   .../recipes-protocols/openflow/openflow.inc        |  4 ++-
+>>   .../openflow/use-openssl-instead-of-libssl.patch   | 34 ++++++++++++++++++++++
+>>   2 files changed, 37 insertions(+), 1 deletion(-)
+>>   create mode 100644 meta-networking/recipes-protocols/openflow/openflow/use-openssl-instead-of-libssl.patch
+>>
+>> diff --git a/meta-networking/recipes-protocols/openflow/openflow.inc b/meta-networking/recipes-protocols/openflow/openflow.inc
+>> index 1a226f8..7eca1d7 100644
+>> --- a/meta-networking/recipes-protocols/openflow/openflow.inc
+>> +++ b/meta-networking/recipes-protocols/openflow/openflow.inc
+>> @@ -11,7 +11,9 @@ LICENSE = "GPLv2"
+>>
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=e870c934e2c3d6ccf085fd7cf0a1e2e2"
+>>
+>> -SRC_URI = "git://gitosis.stanford.edu/openflow.git;protocol=git"
+>> +SRC_URI = "git://gitosis.stanford.edu/openflow.git;protocol=git \
+>> +           file://use-openssl-instead-of-libssl.patch \
+>> +          "
+>>
+>>   DEPENDS = "virtual/libc"
+>>
+>> diff --git a/meta-networking/recipes-protocols/openflow/openflow/use-openssl-instead-of-libssl.patch b/meta-networking/recipes-protocols/openflow/openflow/use-openssl-instead-of-libssl.patch
+>> new file mode 100644
+>> index 0000000..724855f
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-protocols/openflow/openflow/use-openssl-instead-of-libssl.patch
+>> @@ -0,0 +1,34 @@
+>> +OpenSSL 1.0.2 removed -lcrypto from the libssl.pc, but the openssl.pc
+>> +contains both. Since openflow uses both libcrypto and libssl API we
+>> +should use openssl.pc.
+>> +
+>> +Signed-off-by: Saul Wold <sgw@linux.intel.com>
+>> +
+>> +Upstream-Status: Inappropriate [upstream obsolete]
+>> +
+>> +Index: git/m4/libopenflow.m4
+>> +===================================================================
+>> +--- git.orig/m4/libopenflow.m4
+>> ++++ git/m4/libopenflow.m4
+>> +@@ -65,7 +65,7 @@ AC_DEFUN([OFP_CHECK_OPENSSL],
+>> +   [AC_ARG_ENABLE(
+>> +      [ssl],
+>> +      [AC_HELP_STRING([--enable-ssl],
+>> +-                     [Enable ssl support (requires libssl)])],
+>> ++                     [Enable ssl support (requires libssl and libcrypto)])],
+>> +      [case "${enableval}" in
+>> +         (yes) ssl=true ;;
+>> +         (no)  ssl=false ;;
+>> +@@ -76,10 +76,10 @@ AC_DEFUN([OFP_CHECK_OPENSSL],
+>> +    if test "$ssl" = true; then
+>> +    dnl Make sure that pkg-config is installed.
+>> +    m4_pattern_forbid([PKG_CHECK_MODULES])
+>> +-   PKG_CHECK_MODULES([SSL], [libssl],
+>> ++   PKG_CHECK_MODULES([SSL], [openssl],
+>> +      [HAVE_OPENSSL=yes],
+>> +      [HAVE_OPENSSL=no
+>> +-      AC_MSG_WARN([Cannot find libssl:
+>> ++      AC_MSG_WARN([Cannot find OpenSSL Libraries:
+>> +
+>> +    $SSL_PKG_ERRORS
+>> +
+>> --
+>> 2.1.0
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>
 
