@@ -1,31 +1,41 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id D1D3660034
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 2189E60034
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2015 13:35:16 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
-	by relay1.mentorg.com with esmtp 
-	id 1YYE7x-0001UB-3s from Joe_MacDonald@mentor.com ;
-	Wed, 18 Mar 2015 06:35:17 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 18 Mar 2015 06:35:16 -0700
-Received: by burninator (Postfix, from userid 1000)	id 78C4E581815; Wed, 18
-	Mar 2015 09:35:26 -0400 (EDT)
-Date: Wed, 18 Mar 2015 09:35:26 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20150318133526.GC4756@mentor.com>
-References: <20150107190635.8482C5028F@opal.openembedded.org>
-	<20150318115652.GB4738@jama>
+	Wed, 18 Mar 2015 13:44:02 +0000 (UTC)
+Received: by wibdy8 with SMTP id dy8so90679830wib.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Mar 2015 06:44:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=Q53Mi4K6v8CcohaP1QnWSCc5IECFlk9S+bDOj9OEVZE=;
+	b=F3yyswFlZUkgWhlXPKT3xjlWjGvJMTszde1YkdEtsGtx8lWmLSIlTpLWhV+vYkmle5
+	llvozvymeS9J+ER9oQZ9wOkVTIktOttoGoHjdys4Oj9vibfPNjbBRRaYbz5PlLhwuvfV
+	g3FiQWN7mELZc4KSsqKxN4TMncwLIdYSdb1zx4Q3EVyRuCIn5FL00+fLOhxrvvlW4NK1
+	qZUL6qAkxft7D08v8O5OKwevAexp+EH0gU8t2/NtV9Vvm/1gNQaJAbfZyt7PZgTiLmrx
+	fgbNsNWbq9E8GrY4o1naTgN/QhCJMvqs0wZusGQpKTDXorO1TiaJ+Py56TMhqTbEC4Ts
+	L/aA==
+X-Received: by 10.180.75.103 with SMTP id b7mr7093972wiw.32.1426686243508;
+	Wed, 18 Mar 2015 06:44:03 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	hn8sm3264541wib.18.2015.03.18.06.44.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 18 Mar 2015 06:44:02 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 18 Mar 2015 14:44:09 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150318134409.GD4738@jama>
+References: <1426647253-12404-1-git-send-email-sgw@linux.intel.com>
+	<1426647253-12404-2-git-send-email-sgw@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <20150318115652.GB4738@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Joe MacDonald : GeoIP: update checksums
+In-Reply-To: <1426647253-12404-2-git-send-email-sgw@linux.intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH 2/2] openflow: update libopenflow.m4 to use openssl instead of libssl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,157 +49,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2015 13:35:22 -0000
-X-Groupsio-MsgNum: 54821
+X-List-Received-Date: Wed, 18 Mar 2015 13:44:04 -0000
+X-Groupsio-MsgNum: 54822
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1SQmhf2mF2YjsYvc"
+	protocol="application/pgp-signature"; boundary="cHMo6Wbp1wrKhbfi"
 Content-Disposition: inline
 
---1SQmhf2mF2YjsYvc
+--cHMo6Wbp1wrKhbfi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe-commits] Joe MacDonald : GeoIP: update checksums] On 15.03.18 (Wed=
- 12:56) Martin Jansa wrote:
+On Tue, Mar 17, 2015 at 08:54:13PM -0600, Saul Wold wrote:
+> openssl provides both the libssl and libcrypto APIs for linkage, the 1.0.=
+2 of
+> OpenSSL removed libcrypto from the libssl.pc
 
-> On Wed, Jan 07, 2015 at 07:06:35PM +0000, git@git.openembedded.org wrote:
-> > Module: meta-openembedded.git
-> > Branch: master
-> > Commit: b5afd31f7637f8a206b720f332d115c5a395cafc
-> > URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcomm=
-it;h=3Db5afd31f7637f8a206b720f332d115c5a395cafc
-> >=20
-> > Author: Joe MacDonald <joe_macdonald@mentor.com>
-> > Date:   Wed Jan  7 12:20:07 2015 -0500
-> >=20
-> > GeoIP: update checksums
-> >=20
-> > The raw IP databases have been updated, so for the time being just upda=
-te
-> > the checksums.
-> >=20
-> > Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
->=20
-> GeoIP.dat.gz was update again
-
-Hmm.  So I sunk a bit more time in trying to clean this up as we
-discussed in January, but I can't see any path that lets me co-opt
-AUTOREV into working here, as it appears intended to be used solely with
-SCM-managed downloads (which makes sense, what's being done with these
-tarballs is a crime, if you ask me).
-
-So for now I've committed the updated checksums as a band-aid and I'll
-revisit one of the more complicated options before they update the
-tarballs again, I hope.
-
--J.
+This should be already resolved by:
+Joe MacDonald : openflow: add libcrypto to static openflow library
+which was merged today.
 
 >=20
-> ERROR: Fetcher failure for URL: 'http://geolite.maxmind.com/download/geoi=
-p/database/GeoLiteCountry/GeoIP.dat.gz;apply=3Dno;name=3DGeoIP-dat'. Checks=
-um mismatch!
-> File: '/home/jenkins/oe/world/shr-core/downloads/GeoIP.dat.gz' has md5 ch=
-ecksum 37c84ead332dda0362a5ac7b049b72d4 when 4bc1e8280fe2db0adc3fe48663b892=
-6e was expected
-> File: '/home/jenkins/oe/world/shr-core/downloads/GeoIP.dat.gz' has sha256=
- checksum 79ff1099e96c2dc1c2539c9a18aaa13a9afd085cae477df60d95f1644d42bc07 =
-when 7fd7e4829aaaae2677a7975eeecd170134195e5b7e6fc7d30bf3caf34db41bcd was e=
-xpected
-> If this change is expected (e.g. you have upgraded to a new version witho=
-ut updating the checksums) then you can use these lines within the recipe:
-> SRC_URI[GeoIP-dat.md5sum] =3D "37c84ead332dda0362a5ac7b049b72d4"
-> SRC_URI[GeoIP-dat.sha256sum] =3D "79ff1099e96c2dc1c2539c9a18aaa13a9afd085=
-cae477df60d95f1644d42bc07"
-> Otherwise you should retry the download and/or check with upstream to det=
-ermine if the file has become corrupted or otherwise unexpectedly modified.
+> Signed-off-by: Saul Wold <sgw@linux.intel.com>
+> ---
+>  .../recipes-protocols/openflow/openflow.inc        |  4 ++-
+>  .../openflow/use-openssl-instead-of-libssl.patch   | 34 ++++++++++++++++=
+++++++
+>  2 files changed, 37 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-networking/recipes-protocols/openflow/openflow/u=
+se-openssl-instead-of-libssl.patch
 >=20
-> ERROR: Function failed: Fetcher failure for URL: 'http://geolite.maxmind.=
-com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz;apply=3Dno;name=3DG=
-eoIP-dat'. Unable to fetch URL from any source.
-> ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-=
-glibc/work/i586-oe-linux/geoip/1.6.0-r0/temp/log.do_fetch.11727
-> NOTE: recipe geoip-1.6.0-r0: task do_fetch: Failed
-> NOTE: recipe asio-1.10.1-r0: task do_patch: Started
-> ERROR: Task 485 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-n=
-etworking/recipes-support/geoip/geoip_1.6.0.bb, do_fetch) failed with exit =
-code '1'
+> diff --git a/meta-networking/recipes-protocols/openflow/openflow.inc b/me=
+ta-networking/recipes-protocols/openflow/openflow.inc
+> index 1a226f8..7eca1d7 100644
+> --- a/meta-networking/recipes-protocols/openflow/openflow.inc
+> +++ b/meta-networking/recipes-protocols/openflow/openflow.inc
+> @@ -11,7 +11,9 @@ LICENSE =3D "GPLv2"
+> =20
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De870c934e2c3d6ccf085fd7cf0a1e=
+2e2"
+> =20
+> -SRC_URI =3D "git://gitosis.stanford.edu/openflow.git;protocol=3Dgit"
+> +SRC_URI =3D "git://gitosis.stanford.edu/openflow.git;protocol=3Dgit \
+> +           file://use-openssl-instead-of-libssl.patch \
+> +          "
+> =20
+>  DEPENDS =3D "virtual/libc"
+> =20
+> diff --git a/meta-networking/recipes-protocols/openflow/openflow/use-open=
+ssl-instead-of-libssl.patch b/meta-networking/recipes-protocols/openflow/op=
+enflow/use-openssl-instead-of-libssl.patch
+> new file mode 100644
+> index 0000000..724855f
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/openflow/openflow/use-openssl-ins=
+tead-of-libssl.patch
+> @@ -0,0 +1,34 @@
+> +OpenSSL 1.0.2 removed -lcrypto from the libssl.pc, but the openssl.pc
+> +contains both. Since openflow uses both libcrypto and libssl API we
+> +should use openssl.pc.
+> +
+> +Signed-off-by: Saul Wold <sgw@linux.intel.com>
+> +
+> +Upstream-Status: Inappropriate [upstream obsolete]
+> +
+> +Index: git/m4/libopenflow.m4
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- git.orig/m4/libopenflow.m4
+> ++++ git/m4/libopenflow.m4
+> +@@ -65,7 +65,7 @@ AC_DEFUN([OFP_CHECK_OPENSSL],
+> +   [AC_ARG_ENABLE(
+> +      [ssl],
+> +      [AC_HELP_STRING([--enable-ssl],=20
+> +-                     [Enable ssl support (requires libssl)])],
+> ++                     [Enable ssl support (requires libssl and libcrypto=
+)])],
+> +      [case "${enableval}" in
+> +         (yes) ssl=3Dtrue ;;
+> +         (no)  ssl=3Dfalse ;;
+> +@@ -76,10 +76,10 @@ AC_DEFUN([OFP_CHECK_OPENSSL],
+> +    if test "$ssl" =3D true; then
+> +    dnl Make sure that pkg-config is installed.
+> +    m4_pattern_forbid([PKG_CHECK_MODULES])
+> +-   PKG_CHECK_MODULES([SSL], [libssl],=20
+> ++   PKG_CHECK_MODULES([SSL], [openssl],=20
+> +      [HAVE_OPENSSL=3Dyes],
+> +      [HAVE_OPENSSL=3Dno
+> +-      AC_MSG_WARN([Cannot find libssl:
+> ++      AC_MSG_WARN([Cannot find OpenSSL Libraries:
+> +=20
+> +    $SSL_PKG_ERRORS
+> +=20
+> --=20
+> 2.1.0
 >=20
-> >=20
-> > ---
-> >=20
-> >  meta-networking/recipes-support/geoip/geoip_1.6.0.bb | 16 ++++++++----=
-----
-> >  1 file changed, 8 insertions(+), 8 deletions(-)
-> >=20
-> > diff --git a/meta-networking/recipes-support/geoip/geoip_1.6.0.bb b/met=
-a-networking/recipes-support/geoip/geoip_1.6.0.bb
-> > index 782d2e7..65e8362 100644
-> > --- a/meta-networking/recipes-support/geoip/geoip_1.6.0.bb
-> > +++ b/meta-networking/recipes-support/geoip/geoip_1.6.0.bb
-> > @@ -18,17 +18,17 @@ SRC_URI =3D "http://www.maxmind.com/download/geoip/=
-api/c/GeoIP-1.6.0.tar.gz;name=3Dt
-> >  SRC_URI[tarball.md5sum] =3D "89f4cdfdab43f1d67364cd7c85bbe8ca"
-> >  SRC_URI[tarball.sha256sum] =3D "075a0c2815cd099e9ec35c9569db716a3fefcd=
-bb6a10dbfa1ce7c6cd48d4a635"
-> > =20
-> > -SRC_URI[GeoIP-dat.md5sum] =3D "53416cd33e556a8048ac522fc9a98e05"
-> > -SRC_URI[GeoIP-dat.sha256sum] =3D "a423a0c87bf9a78ef8d68153b424987c6bbd=
-dec85b5f784ca747706f4df10361"
-> > +SRC_URI[GeoIP-dat.md5sum] =3D "4bc1e8280fe2db0adc3fe48663b8926e"
-> > +SRC_URI[GeoIP-dat.sha256sum] =3D "7fd7e4829aaaae2677a7975eeecd17013419=
-5e5b7e6fc7d30bf3caf34db41bcd"
-> > =20
-> > -SRC_URI[GeoIPv6-dat.md5sum] =3D "f1a4abf4015c0300267f4717c9d7ead2"
-> > -SRC_URI[GeoIPv6-dat.sha256sum] =3D "1a8e61732e39ac9d9acc20d648b2530d7b=
-d0ff1c250f51fd18148931fbfe2830"
-> > +SRC_URI[GeoIPv6-dat.md5sum] =3D "aac7e6e9b141de80934ecee52daf7f56"
-> > +SRC_URI[GeoIPv6-dat.sha256sum] =3D "126fd2953eb193e60538e30b4465610530=
-383f7a782745cacdca5ba6825f471c"
-> > =20
-> > -SRC_URI[GeoLiteCity-dat.md5sum] =3D "48af3b8a204d7c5f8e42a4f5f4dd1874"
-> > -SRC_URI[GeoLiteCity-dat.sha256sum] =3D "2f3f62f171c333cdd4e68534585e51=
-978cb3a12dc7b269786f50daf10071d7d6"
-> > +SRC_URI[GeoLiteCity-dat.md5sum] =3D "15a42c684c53d2309e6632a6d6e02531"
-> > +SRC_URI[GeoLiteCity-dat.sha256sum] =3D "5ec02a6d39d545c77ec12cc30c6a88=
-56883d8f55522fc5cd4f25af80163c6b3c"
-> > =20
-> > -SRC_URI[GeoLiteCityv6-dat.md5sum] =3D "a42504adfd8030c3a10f749191598b4=
-a"
-> > -SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D "4a5eeaa4a9107e6ccdbe94ad1c7c=
-987dc70cd250cd40624ada1e3a03836bbbdb"
-> > +SRC_URI[GeoLiteCityv6-dat.md5sum] =3D "49d6ec946fa0a2575b5112a68d71f93=
-3"
-> > +SRC_URI[GeoLiteCityv6-dat.sha256sum] =3D "7a345e6cf0e59f8ab589ff150202=
-41f0b03342dd04cc584f814c4f4700d49405"
-> > =20
-> > =20
-> >  LICENSE =3D "LGPL-2.1"
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-commits mailing list
-> > Openembedded-commits@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 --=20
--Joe MacDonald.
-:wq
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---1SQmhf2mF2YjsYvc
+--cHMo6Wbp1wrKhbfi
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.12 (GNU/Linux)
+Version: GnuPG v2
 
-iQEcBAEBAgAGBQJVCX8eAAoJEEn8ffcsOfaWVDMIAJFlyLoajIHiWpHAWCSyB5Dv
-P6q22AkVt6O8ftym6tGK7UE7uxaLyaCCIUGtP4RZZrFMiQ2U8G8upV0rqSR5lUm7
-EIj7z4MyOqgXYYsaPs24i9KAoTOKrFiDSnqkqN4LrlaF9WscRXeroiniW+kK2wwB
-U4ckHisMbGlY16Ho2k8n3ITxoTjvZVkoSqSVkETADmsLyE7Bsd82HQVz+CnJHMT+
-BWLYxPohTD7517W6/NFrkiDPPxCdmqb+50O955aVEA81OwbpP1SO181fwaGJkJX9
-0jZRoHbcKEpDJUxXy1+twkZ/wX4dwTIqqSR/25s9y3OehTpgcC0hTxCnejIcAGs=
-=PmFt
+iEYEARECAAYFAlUJgSkACgkQN1Ujt2V2gBzG0wCfZpGS/3hxOcKMci85AyFPf2VB
+ofcAoJGKpffk21A95UcqjwjVc8CCYiUb
+=fqY1
 -----END PGP SIGNATURE-----
 
---1SQmhf2mF2YjsYvc--
+--cHMo6Wbp1wrKhbfi--
