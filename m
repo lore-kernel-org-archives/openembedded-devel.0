@@ -1,33 +1,21 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
-	[209.85.192.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 18B0E60034
+Return-Path: <sgw@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EA4660034
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2015 23:38:58 +0000 (UTC)
-Received: by qgfa8 with SMTP id a8so23624430qgf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2015 16:38:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=2/Sr8xvpKMpF1owRXH+/S2n6uA61FXm6PlLc7AueX4E=;
-	b=q2tC4lewz05/pMRpMXXlW0QG31x9gEIfl0ithIZRLzVCopu2N2qyj0OWMEaYS4WtPx
-	m4smIwMvUPrwjLzOfajVzsiCJvY1uNU5bZi1Y+ylcXgE7CisF/KaVlXudhnu6LzNgbiC
-	RbHzxw+YosVpXfisvChX/WzhE4P9V5kaPRALSbVW4i/BwmDC7OoPy4+YtUt3d5+ZjESY
-	CM4RnteCuopA5OEzetHZG7vkR4sw0xvtePKWq89JPCsQx+bHNMJoR4tuBj4jn65F8QHY
-	O/Sf//7LfkNG+stFnfNgnPdoHPJRQulCHoGooT3yCdCgUY8UXhMmlfl2jCpKEyb+lAHn
-	F5ew==
-MIME-Version: 1.0
-X-Received: by 10.140.104.13 with SMTP id z13mr83062208qge.76.1426635539882;
-	Tue, 17 Mar 2015 16:38:59 -0700 (PDT)
-Received: by 10.140.82.72 with HTTP; Tue, 17 Mar 2015 16:38:59 -0700 (PDT)
-In-Reply-To: <4F9216F96E5DF9428610502835A9F4905814FFE9@DLEE11.ent.ti.com>
-References: <4F9216F96E5DF9428610502835A9F4905814FFE9@DLEE11.ent.ti.com>
-Date: Wed, 18 Mar 2015 00:38:59 +0100
-Message-ID: <CAEHkU3XTfCB5DdmsOo4V1kRuR1+NzqoV-Rn-UsMM95ReK7zKrQ@mail.gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	sam.nelson@ti.com
-Subject: Re: Query on meta-java layer: openjdk-7-jre: compilation issue with '-fuse-ld-bfd'
+	Wed, 18 Mar 2015 02:54:41 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga101.fm.intel.com with ESMTP; 17 Mar 2015 19:54:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,419,1422950400"; d="scan'208";a="700217084"
+Received: from liuxin1-mobl.amr.corp.intel.com (HELO
+	swold-mobl.amr.corp.intel.com) ([10.254.180.202])
+	by orsmga002.jf.intel.com with ESMTP; 17 Mar 2015 19:54:23 -0700
+From: Saul Wold <sgw@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Mar 2015 20:54:12 -0600
+Message-Id: <1426647253-12404-1-git-send-email-sgw@linux.intel.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [PATCH 1/2] python-pyopenssl: Upgrade to 0.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,42 +29,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2015 23:38:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 18 Mar 2015 02:54:42 -0000
 
-Hello Sam
+This upgrade will match with the openssl 1.0.2 changes
+The newer verion of pyopenssl now uses setuptools instead of distutils
 
-> I am using an openembedded setup and using the daisy branch.
-> I am trying to use meta java: git://git.yoctoproject.org/meta-java  to compile openjdk-7-jre and seeing the following error:
->
-> | arm-linux-gnueabihf-gcc: error: unrecognized command line option '-fuse-ld=bfd'
->
-> Looks like the addition of '-fuse-ld=bfd" was introduced with the following commit in meta-java:
-> commit cb351db824b0eb4a71514156bba543f6dde19740
-> Author: Max Krummenacher <max.oss.09@gmail.com>
-> Date:   Tue Jan 20 16:14:23 2015 +0100
->
-> I am using linaro toolchain: gcc-linaro-arm-linx-gnueabihf-4.7-2013 and does not support "-fuse-ld" option. Any ideas on how this can be fixed?
->
-The openemembedded built toolchain in daisy, both from the oe-core and
-the linaro layers are gcc 4.8 based and do support the option.
-So  having the toolchain built by oe or using a newer external
-toolchain can fix your issue.
+Signed-off-by: Saul Wold <sgw@linux.intel.com>
+---
+ .../python/{python-pyopenssl_0.13.bb => python-pyopenssl_0.14.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-pyopenssl_0.13.bb => python-pyopenssl_0.14.bb} (75%)
 
-If you're looked to a 4.7 toolchain because of some other issue you
-could go through the commit which introduced the -fuse-ld and remove
-the -fuse-ld=bfd from the patches in
-recipes-core/openjdk/openjdk-7-25b30/. I guess your toolchain by
-default does link with the classic bfd linker rather than using gold.
+diff --git a/meta-oe/recipes-devtools/python/python-pyopenssl_0.13.bb b/meta-oe/recipes-devtools/python/python-pyopenssl_0.14.bb
+similarity index 75%
+rename from meta-oe/recipes-devtools/python/python-pyopenssl_0.13.bb
+rename to meta-oe/recipes-devtools/python/python-pyopenssl_0.14.bb
+index 01f43da..1f609e3 100644
+--- a/meta-oe/recipes-devtools/python/python-pyopenssl_0.13.bb
++++ b/meta-oe/recipes-devtools/python/python-pyopenssl_0.14.bb
+@@ -7,15 +7,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRCNAME = "pyOpenSSL"
+ 
+ DEPENDS = "openssl"
+-PR = "r1"
+ 
+ SRC_URI = "http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-${PV}.tar.gz"
+-SRC_URI[md5sum] = "767bca18a71178ca353dff9e10941929"
+-SRC_URI[sha256sum] = "21e12b03abaa0e04ecc8cd9c251598f71bae11c9f385304234e4ea5618c6163b"
++
++SRC_URI[md5sum] = "8579ff3a1d858858acfba5f046a4ddf7"
++SRC_URI[sha256sum] = "a99db8e59c120138ad8a72eecedcc24b4510d2eed3ce48213b7e32f22cc4ee6e"
+ 
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
+-inherit distutils
++inherit setuptools
+ 
+ PACKAGES =+ "${PN}-tests"
+ FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
+-- 
+2.1.0
 
-If that is a bigger problem one could probably add support for your
-use case, e.g. by trying to compile on failure without the option and
-commit such a patch to meta-java. :
-
-$(CC_COMPILE) -static -fuse-ld=bfd -o $@ $< $(COMPILE_DONE) ||
-$(CC_COMPILE) -static -o $@ $< $(COMPILE_DONE)
-
-
-Regards
-Max
 
