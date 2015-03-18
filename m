@@ -1,41 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2189E60034
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f171.google.com (mail-pd0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 86CD660034
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2015 13:44:02 +0000 (UTC)
-Received: by wibdy8 with SMTP id dy8so90679830wib.0
+	Wed, 18 Mar 2015 15:21:53 +0000 (UTC)
+Received: by pdnc3 with SMTP id c3so46108923pdn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2015 06:44:03 -0700 (PDT)
+	Wed, 18 Mar 2015 08:21:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=Q53Mi4K6v8CcohaP1QnWSCc5IECFlk9S+bDOj9OEVZE=;
-	b=F3yyswFlZUkgWhlXPKT3xjlWjGvJMTszde1YkdEtsGtx8lWmLSIlTpLWhV+vYkmle5
-	llvozvymeS9J+ER9oQZ9wOkVTIktOttoGoHjdys4Oj9vibfPNjbBRRaYbz5PlLhwuvfV
-	g3FiQWN7mELZc4KSsqKxN4TMncwLIdYSdb1zx4Q3EVyRuCIn5FL00+fLOhxrvvlW4NK1
-	qZUL6qAkxft7D08v8O5OKwevAexp+EH0gU8t2/NtV9Vvm/1gNQaJAbfZyt7PZgTiLmrx
-	fgbNsNWbq9E8GrY4o1naTgN/QhCJMvqs0wZusGQpKTDXorO1TiaJ+Py56TMhqTbEC4Ts
-	L/aA==
-X-Received: by 10.180.75.103 with SMTP id b7mr7093972wiw.32.1426686243508;
-	Wed, 18 Mar 2015 06:44:03 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=Fv/N/1293cQif9n3KJmwwhHXHMDdHf9u9HsiVbzBkAk=;
+	b=nx392amAZTe8FSTOu4aeMqXtikJOBsXplErlf+74R28gptd9Ux81GjqYwdLnUob+Fi
+	M/DtPOwrIWNXB8PC7oXtkjM/V48oPBxA65DGUVceVICrYPrza0nA/IKtSREvs4hj6IBW
+	defaSwNYt66Euumk25j7OEed/PySEdCL5+uMngXHhuaP/t9PTsdQ4Fjxa7iOE/IAum1Y
+	apFOwwfo2DnkbFNMKC2nsUJrU3xrYF5QHmJHANUxsrBwdPu3jXGtmtwr7cZ6Pojnsvj2
+	54EPrkRj1AT3VKs6a9yEJ2KOHXf7ws2aXaZ5beY8shEF8ZytxhoJoveFw+HGRuiVerPk
+	aCMQ==
+X-Received: by 10.66.102.99 with SMTP id fn3mr141920084pab.118.1426692115087; 
+	Wed, 18 Mar 2015 08:21:55 -0700 (PDT)
+Received: from ?IPv6:2601:c:a700:3ba7:890f:8bf8:53cc:4b2c?
+	([2601:c:a700:3ba7:890f:8bf8:53cc:4b2c])
 	by mx.google.com with ESMTPSA id
-	hn8sm3264541wib.18.2015.03.18.06.44.02
+	pa6sm28184456pac.45.2015.03.18.08.21.52
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Mar 2015 06:44:02 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 18 Mar 2015 14:44:09 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150318134409.GD4738@jama>
-References: <1426647253-12404-1-git-send-email-sgw@linux.intel.com>
-	<1426647253-12404-2-git-send-email-sgw@linux.intel.com>
+	Wed, 18 Mar 2015 08:21:53 -0700 (PDT)
+Message-ID: <55099809.9050509@gmail.com>
+Date: Wed, 18 Mar 2015 08:21:45 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-In-Reply-To: <1426647253-12404-2-git-send-email-sgw@linux.intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 2/2] openflow: update libopenflow.m4 to use openssl instead of libssl
+To: openembedded-devel@lists.openembedded.org
+References: <54ED1B78.4040101@balister.org>	<20150227083113.GF2309@jama>	<CAP9ODKqFPNyF4ZoXv0C1Jw==opnmrj+cWAEHUhr6nXbbXUKw6g@mail.gmail.com>	<54FF59B5.20900@gmail.com>
+	<54FF5A1D.90907@balister.org>
+In-Reply-To: <54FF5A1D.90907@balister.org>
+Subject: Re: [meta-oe][dizzy]Update PyQt and related recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,121 +50,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2015 13:44:04 -0000
-X-Groupsio-MsgNum: 54822
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cHMo6Wbp1wrKhbfi"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Mar 2015 15:21:56 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---cHMo6Wbp1wrKhbfi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changing is my staging tree.
 
-On Tue, Mar 17, 2015 at 08:54:13PM -0600, Saul Wold wrote:
-> openssl provides both the libssl and libcrypto APIs for linkage, the 1.0.=
-2 of
-> OpenSSL removed libcrypto from the libssl.pc
+hope to make a request this weekend. I have a few more backports to do.
 
-This should be already resolved by:
-Joe MacDonald : openflow: add libcrypto to static openflow library
-which was merged today.
+- armin
 
->=20
-> Signed-off-by: Saul Wold <sgw@linux.intel.com>
-> ---
->  .../recipes-protocols/openflow/openflow.inc        |  4 ++-
->  .../openflow/use-openssl-instead-of-libssl.patch   | 34 ++++++++++++++++=
-++++++
->  2 files changed, 37 insertions(+), 1 deletion(-)
->  create mode 100644 meta-networking/recipes-protocols/openflow/openflow/u=
-se-openssl-instead-of-libssl.patch
->=20
-> diff --git a/meta-networking/recipes-protocols/openflow/openflow.inc b/me=
-ta-networking/recipes-protocols/openflow/openflow.inc
-> index 1a226f8..7eca1d7 100644
-> --- a/meta-networking/recipes-protocols/openflow/openflow.inc
-> +++ b/meta-networking/recipes-protocols/openflow/openflow.inc
-> @@ -11,7 +11,9 @@ LICENSE =3D "GPLv2"
-> =20
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De870c934e2c3d6ccf085fd7cf0a1e=
-2e2"
-> =20
-> -SRC_URI =3D "git://gitosis.stanford.edu/openflow.git;protocol=3Dgit"
-> +SRC_URI =3D "git://gitosis.stanford.edu/openflow.git;protocol=3Dgit \
-> +           file://use-openssl-instead-of-libssl.patch \
-> +          "
-> =20
->  DEPENDS =3D "virtual/libc"
-> =20
-> diff --git a/meta-networking/recipes-protocols/openflow/openflow/use-open=
-ssl-instead-of-libssl.patch b/meta-networking/recipes-protocols/openflow/op=
-enflow/use-openssl-instead-of-libssl.patch
-> new file mode 100644
-> index 0000000..724855f
-> --- /dev/null
-> +++ b/meta-networking/recipes-protocols/openflow/openflow/use-openssl-ins=
-tead-of-libssl.patch
-> @@ -0,0 +1,34 @@
-> +OpenSSL 1.0.2 removed -lcrypto from the libssl.pc, but the openssl.pc
-> +contains both. Since openflow uses both libcrypto and libssl API we
-> +should use openssl.pc.
-> +
-> +Signed-off-by: Saul Wold <sgw@linux.intel.com>
-> +
-> +Upstream-Status: Inappropriate [upstream obsolete]
-> +
-> +Index: git/m4/libopenflow.m4
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/m4/libopenflow.m4
-> ++++ git/m4/libopenflow.m4
-> +@@ -65,7 +65,7 @@ AC_DEFUN([OFP_CHECK_OPENSSL],
-> +   [AC_ARG_ENABLE(
-> +      [ssl],
-> +      [AC_HELP_STRING([--enable-ssl],=20
-> +-                     [Enable ssl support (requires libssl)])],
-> ++                     [Enable ssl support (requires libssl and libcrypto=
-)])],
-> +      [case "${enableval}" in
-> +         (yes) ssl=3Dtrue ;;
-> +         (no)  ssl=3Dfalse ;;
-> +@@ -76,10 +76,10 @@ AC_DEFUN([OFP_CHECK_OPENSSL],
-> +    if test "$ssl" =3D true; then
-> +    dnl Make sure that pkg-config is installed.
-> +    m4_pattern_forbid([PKG_CHECK_MODULES])
-> +-   PKG_CHECK_MODULES([SSL], [libssl],=20
-> ++   PKG_CHECK_MODULES([SSL], [openssl],=20
-> +      [HAVE_OPENSSL=3Dyes],
-> +      [HAVE_OPENSSL=3Dno
-> +-      AC_MSG_WARN([Cannot find libssl:
-> ++      AC_MSG_WARN([Cannot find OpenSSL Libraries:
-> +=20
-> +    $SSL_PKG_ERRORS
-> +=20
-> --=20
-> 2.1.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On 03/10/2015 01:54 PM, Philip Balister wrote:
+> On 03/10/2015 04:53 PM, akuster808 wrote:
+>>
+>>
+>> On 02/27/2015 05:41 AM, Otavio Salvador wrote:
+>>> Hello Martin,
+>>>
+>>> On Fri, Feb 27, 2015 at 5:31 AM, Martin Jansa <martin.jansa@gmail.com>
+>>> wrote:
+>>>> On Tue, Feb 24, 2015 at 04:46:48PM -0800, Philip Balister wrote:
+>>>>> Please pull these three patches into meta-oe/dizzy.
+>>>>>
+>>>>> https://github.com/openembedded/meta-oe/pull/19
+>>>>>
+>>>>> These lead to a working PyQt4, which will reduce the number of
+>>>>> questions
+>>>>> I get about gnuradio-companion not working on dizzy.
+>>>>
+>>>> I'm not sure if we should do upgrades in release branch which should
+>>>> receive only bug fixes, but I'll let daisy maintainers to decide.
+>>>
+>>> I agree with your concern but I also see the improvement
+>>> (cross-compile support and like) of the new PyQt4.
+>>
+>> Sorry I have head down for the last two weeks.
+>>
+>>>
+>>> At same time, I think this is not ready to be merged. Checking the
+>>> code changes I think we need to:
+>>>
+>>> * split python-sip runtime package
+>>
+>> So is this split being worked on ?
+>
+> Yes. I sent in patches yesterday. Thanks for checking.
+>
+> Philip
+>
+>>
+>> - armin
+>>>
+>>> This will fix the upgrade path.
+>>>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---cHMo6Wbp1wrKhbfi
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlUJgSkACgkQN1Ujt2V2gBzG0wCfZpGS/3hxOcKMci85AyFPf2VB
-ofcAoJGKpffk21A95UcqjwjVc8CCYiUb
-=fqY1
------END PGP SIGNATURE-----
-
---cHMo6Wbp1wrKhbfi--
