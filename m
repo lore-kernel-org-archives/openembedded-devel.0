@@ -1,25 +1,34 @@
-Return-Path: <lchristina26@hotmail.com>
-X-Greylist: delayed 301 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 18 Mar 2015 18:45:30 UTC
-Received: from BLU004-OMC3S37.hotmail.com (blu004-omc3s37.hotmail.com
-	[65.55.116.112])
-	by mail.openembedded.org (Postfix) with ESMTP id A52F160034
+Return-Path: <sam.nelson@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by mail.openembedded.org (Postfix) with ESMTP id 9956D60034
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2015 18:45:30 +0000 (UTC)
-Received: from BLU436-SMTP74 ([65.55.116.73]) by BLU004-OMC3S37.hotmail.com
-	over TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751);
-	Wed, 18 Mar 2015 11:40:31 -0700
-X-TMN: [nO4ax3QfoCV/cKgneSMhkbSTGoYiAwZB]
-X-Originating-Email: [lchristina26@hotmail.com]
-Message-ID: <BLU436-SMTP740E8A01B854DAB7A40768D6000@phx.gbl>
-From: LC Mac <lchristina26@hotmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Mar 2015 12:40:14 -0600
-X-Mailer: git-send-email 1.9.1
-X-OriginalArrivalTime: 18 Mar 2015 18:40:29.0021 (UTC)
-	FILETIME=[01BD00D0:01D061AB]
+	Wed, 18 Mar 2015 18:50:09 +0000 (UTC)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2IIoAaX021977;
+	Wed, 18 Mar 2015 13:50:10 -0500
+Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2IIo942020259;
+	Wed, 18 Mar 2015 13:50:09 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE71.ent.ti.com ([fe80::4dce:5c82:1ad0:d462%28]) with mapi id
+	14.03.0224.002; Wed, 18 Mar 2015 13:50:09 -0500
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: Max Krummenacher <max.oss.09@gmail.com>, OpenEmbedded Devel List
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Query on meta-java layer: openjdk-7-jre: compilation
+	issue with '-fuse-ld-bfd'
+Thread-Index: AdBg76GigPIijuwIRJSeq1NY3JWS8gARdG2AABnJ47A=
+Date: Wed, 18 Mar 2015 18:50:08 +0000
+Message-ID: <4F9216F96E5DF9428610502835A9F49058151608@DLEE11.ent.ti.com>
+References: <4F9216F96E5DF9428610502835A9F4905814FFE9@DLEE11.ent.ti.com>
+	<CAEHkU3XTfCB5DdmsOo4V1kRuR1+NzqoV-Rn-UsMM95ReK7zKrQ@mail.gmail.com>
+In-Reply-To: <CAEHkU3XTfCB5DdmsOo4V1kRuR1+NzqoV-Rn-UsMM95ReK7zKrQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] wolfssl: change name from cyassl to wolfssl, update to version 3.4.0
+Subject: Re: Query on meta-java layer: openjdk-7-jre: compilation issue with '-fuse-ld-bfd'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,72 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2015 18:45:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Mar 2015 18:50:13 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-CyaSSL is now called wolfSSL. Recipe updates included RPROVIDE and
-PROVIDE lines, with updates to sha/md5 sums.
-
-Signed-off-by: lchristina26 <leah@wolfssl.com>
----
- .../recipes-connectivity/cyassl/cyassl_3.3.0.bb     | 18 ------------------
- .../recipes-connectivity/wolfssl/wolfssl_3.4.0.bb   | 21 +++++++++++++++++++++
- 2 files changed, 21 insertions(+), 18 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
- create mode 100644 meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
-
-diff --git a/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb b/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
-deleted file mode 100644
-index b6f852d..0000000
---- a/meta-networking/recipes-connectivity/cyassl/cyassl_3.3.0.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "CyaSSL Lightweight, Embedded SSL Library"
--DESCRIPTION = "CyaSSL is a lightweight SSL library written in C and \
--               optimized for embedded and RTOS environments. It can be \
--               Up to 20 times smaller than OpenSSL while still supporting \
--               a full TLS 1.2 client and server."
--HOMEPAGE = "http://www.yassl.com/yaSSL/Products-cyassl.html"
--BUGTRACKER = "http://github.com/cyassl/cyassl/issues"
--SECTION = "libs/network"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--
--SRC_URI = "http://www.yassl.com/${BP}.zip"
--
--SRC_URI[md5sum] = "0303eb0f2f9065a1207d9104ab0eba7c"
--SRC_URI[sha256sum] = "e51583ea1e4d64537553922d67a96360312811dffef58d4c05506aa98a296fe3"
--
--inherit autotools
--
-diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
-new file mode 100644
-index 0000000..2366fb1
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "wolfSSL Lightweight, Embedded SSL Library"
-+DESCRIPTION = "wolfSSL, formerly CyaSSL, is a lightweight SSL library written in C and \
-+               optimized for embedded and RTOS environments. It can be \
-+               Up to 20 times smaller than OpenSSL while still supporting \
-+               a full TLS 1.2 client and server."
-+HOMEPAGE = "http://www.wolfssl.com/yaSSL/Products-wolfssl.html"
-+BUGTRACKER = "http://github.com/wolfssl/wolfssl/issues"
-+SECTION = "libs/network"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+PROVIDES += "cyassl"
-+RPROVIDES_${PN} = "cyassl"
-+
-+SRC_URI = "http://www.wolfssl.com/${BP}.zip"
-+
-+SRC_URI[md5sum] = "ec6ed4c5847454ac928215a46b3e0c33"
-+SRC_URI[sha256sum] = "bc49a142c17b1e52a126417e5d7cbadcb7f18f5c81e446c12e214483395159ea"
-+
-+inherit autotools
-+
--- 
-1.9.1
-
+Thanks a lot for your response. Appreciate it.
+I have created a patch as you  have suggested and it works now.
+I will send out a patch to the mailing list.
+Regards,
+Sam
+> -----Original Message-----
+> From: Max Krummenacher [mailto:max.oss.09@gmail.com]
+> Sent: Tuesday, March 17, 2015 7:39 PM
+> To: OpenEmbedded Devel List; Nelson, Sam
+> Subject: Re: [oe] Query on meta-java layer: openjdk-7-jre: compilation is=
+sue
+> with '-fuse-ld-bfd'
+>=20
+> Hello Sam
+>=20
+> > I am using an openembedded setup and using the daisy branch.
+> > I am trying to use meta java: git://git.yoctoproject.org/meta-java  to =
+compile
+> openjdk-7-jre and seeing the following error:
+> >
+> > | arm-linux-gnueabihf-gcc: error: unrecognized command line option '-fu=
+se-
+> ld=3Dbfd'
+> >
+> > Looks like the addition of '-fuse-ld=3Dbfd" was introduced with the fol=
+lowing
+> commit in meta-java:
+> > commit cb351db824b0eb4a71514156bba543f6dde19740
+> > Author: Max Krummenacher <max.oss.09@gmail.com>
+> > Date:   Tue Jan 20 16:14:23 2015 +0100
+> >
+> > I am using linaro toolchain: gcc-linaro-arm-linx-gnueabihf-4.7-2013 and=
+ does
+> not support "-fuse-ld" option. Any ideas on how this can be fixed?
+> >
+> The openemembedded built toolchain in daisy, both from the oe-core and
+> the linaro layers are gcc 4.8 based and do support the option.
+> So  having the toolchain built by oe or using a newer external
+> toolchain can fix your issue.
+>=20
+> If you're looked to a 4.7 toolchain because of some other issue you
+> could go through the commit which introduced the -fuse-ld and remove
+> the -fuse-ld=3Dbfd from the patches in
+> recipes-core/openjdk/openjdk-7-25b30/. I guess your toolchain by
+> default does link with the classic bfd linker rather than using gold.
+>=20
+> If that is a bigger problem one could probably add support for your
+> use case, e.g. by trying to compile on failure without the option and
+> commit such a patch to meta-java. :
+>=20
+> $(CC_COMPILE) -static -fuse-ld=3Dbfd -o $@ $< $(COMPILE_DONE) ||
+> $(CC_COMPILE) -static -o $@ $< $(COMPILE_DONE)
+>=20
+>=20
+> Regards
+> Max
 
