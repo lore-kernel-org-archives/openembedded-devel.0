@@ -1,35 +1,28 @@
-Return-Path: <rafael.carre@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D49E773A76
+Return-Path: <funman@videolan.org>
+X-Greylist: delayed 451 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 20 Mar 2015 14:22:36 UTC
+Received: from smtp21.services.sfr.fr (smtp21.services.sfr.fr [93.17.128.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 5282773A17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 14:20:26 +0000 (UTC)
-Received: by wibgn9 with SMTP id gn9so15816353wib.1
+	Fri, 20 Mar 2015 14:22:36 +0000 (UTC)
+Received: from filter.sfr.fr (localhost [62.147.165.143])
+	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id 0C8367000148
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 07:20:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id;
-	bh=LbPu6mKALO4+7dwVj7qO+VGGfK5mKecY5WRhfbkgCnI=;
-	b=oXZMIffj8Nkc2VTIA5njOoicvlfJzBh+kS3m6AE1hOmQolh2kcsoMcAiG+fFkFb6m4
-	lstfKxVES84KIKEiJDgte+Tf2QOyvfuWm7VLGEcIYFycXwi2AZEVl/b8SnhjOkQ0Zv6S
-	Pm0spNQJ1TXHkG0O6nnvUzS16vz1BxFmdzPi/HqyAqAKWG68G4NEp/C2dIcfMXb1lU4W
-	UICEniyrYK0jdYLEJ6EmE341XzmdzvU04b1eYKHysCTW6tuHBqItC7Gz2WTjHgciB99/
-	1N3EpiN//JJ3lEPKpkM1RtXB4mmX68EFUXY57nEUYSnOPWD0hmunV8gbvE7iOoAAhxqt
-	Hd9g==
-X-Received: by 10.194.23.39 with SMTP id j7mr164873968wjf.9.1426861226219;
-	Fri, 20 Mar 2015 07:20:26 -0700 (PDT)
+	Fri, 20 Mar 2015 15:15:05 +0100 (CET)
+Authentication-Results: sfrmc.priv.atos.fr; dkim=none (no signature);
+	dkim-adsp=none (no policy) header.from=funman@videolan.org
 Received: from localhost.localdomain
-	(lns-bzn-49f-62-147-165-143.adsl.proxad.net. [62.147.165.143])
-	by mx.google.com with ESMTPSA id ch6sm6581513wjc.3.2015.03.20.07.20.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 20 Mar 2015 07:20:25 -0700 (PDT)
-Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
-From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
+	(lns-bzn-49f-62-147-165-143.adsl.proxad.net [62.147.165.143])
+	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id A360970000BD
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Mar 2015 15:15:04 +0100 (CET)
+X-SFR-UUID: 20150320141504669.A360970000BD@msfrf2112.sfr.fr
+From: =?iso-8859-1?q?Rafa=EBl_Carr=E9?= <funman@videolan.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Mar 2015 15:20:20 +0100
-Message-Id: <1426861220-30221-1-git-send-email-funman@videolan.org>
+Date: Fri, 20 Mar 2015 15:15:03 +0100
+Message-Id: <1426860903-30149-1-git-send-email-funman@videolan.org>
 X-Mailer: git-send-email 2.1.0
+MIME-Version: 1.0
 Subject: [meta-oe][PATCH] vim: add checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,7 +37,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Mar 2015 14:20:29 -0000
+X-List-Received-Date: Fri, 20 Mar 2015 14:22:36 -0000
 
 ---
  meta-oe/recipes-support/vim/vim_7.4.481.bb | 4 ++++
@@ -67,5 +60,4 @@ index afdea84..ac59077 100644
  S = "${WORKDIR}/vim/src"
 -- 
 2.1.0
-
 
