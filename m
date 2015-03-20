@@ -1,29 +1,32 @@
-Return-Path: <funman@videolan.org>
-X-Greylist: delayed 451 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 20 Mar 2015 14:22:36 UTC
-Received: from smtp21.services.sfr.fr (smtp21.services.sfr.fr [93.17.128.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 5282773A17
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-yk0-f179.google.com (mail-yk0-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 623AE6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 14:22:36 +0000 (UTC)
-Received: from filter.sfr.fr (localhost [62.147.165.143])
-	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id 0C8367000148
+	Fri, 20 Mar 2015 20:26:26 +0000 (UTC)
+Received: by ykcn8 with SMTP id n8so47879745ykc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 15:15:05 +0100 (CET)
-Authentication-Results: sfrmc.priv.atos.fr; dkim=none (no signature);
-	dkim-adsp=none (no policy) header.from=funman@videolan.org
-Received: from localhost.localdomain
-	(lns-bzn-49f-62-147-165-143.adsl.proxad.net [62.147.165.143])
-	by msfrf2112.sfr.fr (SMTP Server) with ESMTP id A360970000BD
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 15:15:04 +0100 (CET)
-X-SFR-UUID: 20150320141504669.A360970000BD@msfrf2112.sfr.fr
-From: =?iso-8859-1?q?Rafa=EBl_Carr=E9?= <funman@videolan.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Mar 2015 15:15:03 +0100
-Message-Id: <1426860903-30149-1-git-send-email-funman@videolan.org>
-X-Mailer: git-send-email 2.1.0
+	Fri, 20 Mar 2015 13:26:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=oBlYmIAt+qLZkzk2ZlMzMN3T7ttjAwDeBlvV3HUvJvw=;
+	b=kA12OQPD70SNyhpf5IKMMYaxHTCslUNkbxQK7aWSEEZQM9ECfHll9ZSE3wiwoKWJd5
+	aonS7I01MPaLkL1LzuPECmT933pn1i2fS/5lqRZx0cxU/RfZ88efkBWtUJThRDAdqBrl
+	tJGE+XUsuml2/ao6uLd/76nH4ZG0HJdmtQA0sTFmcBZf3Vr8Z5bMYB9rFJ2nWJ7LBqWT
+	gGCR/OFKVOSI2yn6J+y527rjy31OuBemWqJSs6BprBPWTA5BKwglfiNiiTrjrWvGXgk9
+	BqVhcxQ85+3DqUitElXt5l5xARdcUc3xUpbEsotj/KasxoEXPgE3OR2pXeXaf5SO367X
+	/wEg==
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] vim: add checksum
+X-Received: by 10.52.78.35 with SMTP id y3mr15492669vdw.5.1426883187621; Fri,
+	20 Mar 2015 13:26:27 -0700 (PDT)
+Received: by 10.52.171.11 with HTTP; Fri, 20 Mar 2015 13:26:27 -0700 (PDT)
+Date: Fri, 20 Mar 2015 13:26:27 -0700
+Message-ID: <CAFeBWL4OG8=Nxw6pj+81JnsAdzUSPacJTM97+N_Cnq1eHrwtbw@mail.gmail.com>
+From: Adam Lee <adam.yh.lee@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Reference to sysroot in PHP packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,27 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Mar 2015 14:22:36 -0000
+X-List-Received-Date: Fri, 20 Mar 2015 20:26:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
----
- meta-oe/recipes-support/vim/vim_7.4.481.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+On Yocto 1.7.1, running `bitbake php` will show a QA warning:
 
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-index afdea84..ac59077 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
-@@ -10,6 +10,10 @@ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
-            file://disable_acl_header_check.patch;patchdir=.. \
-            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
- "
-+
-+SRC_URI[md5sum] = "5fd5d754581a673a25733c12367cf9d2"
-+SRC_URI[sha256sum] = "e2cc416dabea503e9e5631afc21bb00dcbfb9d05481641b75f247fd89ff4d7e8"
-+
- SRCREV = "v7-4-481"
- 
- S = "${WORKDIR}/vim/src"
--- 
-2.1.0
+WARNING: QA Issue: php requires
+/media/Build/master/build/tmp/work/cortexa8hf-vfp-neon-poky-linux-gnueabi/php/5.4.36-r0/image/usr/bin/php,
+but no providers in its RDEPENDS [file-rdeps]
+
+
+Doing a grep for sysroot within the packages-split directory shows a number
+of references:
+
+root@pine:/media/Build/master/build/tmp/work/cortexa8hf-vfp-neon-poky-linux-gnueabi/php/5.4.36-r0/packages-split#
+grep media/Build/master/build/tmp/sysroots/x86_64-linux -r .
+
+./php-pear/usr/bin/pear:  if test
+"/media/Build/master/build/tmp/sysroots/x86_64-linux/usr/bin/php" =
+'@'php_bin'@'; then
+./php-pear/usr/bin/pear:
+ PHP="/media/Build/master/build/tmp/sysroots/x86_64-linux/usr/bin/php"
+./php-pear/usr/bin/peardev:  if test
+"/media/Build/master/build/tmp/sysroots/x86_64-linux/usr/bin/php" =
+'@'php_bin'@'; then
+./php-pear/usr/bin/peardev:
+ PHP="/media/Build/master/build/tmp/sysroots/x86_64-linux/usr/bin/php"
+./php-pear/usr/bin/pecl:  if test
+"/media/Build/master/build/tmp/sysroots/x86_64-linux/usr/bin/php" =
+'@'php_bin'@'; then
+./php-pear/usr/bin/pecl:
+ PHP="/media/Build/master/build/tmp/sysroots/x86_64-linux/usr/bin/php"
+
+I believe this problem also results in the failure of populate_sdk task.
 
