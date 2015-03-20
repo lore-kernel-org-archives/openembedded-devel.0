@@ -1,33 +1,36 @@
-Return-Path: <kaiu@gmx.de>
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
-	by mail.openembedded.org (Postfix) with ESMTP id ECE8B6013D
+Return-Path: <rafael.carre@gmail.com>
+Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
+	[209.85.212.180])
+	by mail.openembedded.org (Postfix) with ESMTP id D49E773A76
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 08:02:34 +0000 (UTC)
-Received: from mail-wg0-f42.google.com ([74.125.82.42]) by mail.gmx.com
-	(mrgmx101) with ESMTPSA (Nemesis) id 0LuKHz-1ZYZED2OIx-011hzv for
-	<openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 09:02:34 +0100
-Received: by wgdm6 with SMTP id m6so82591241wgd.2
+	Fri, 20 Mar 2015 14:20:26 +0000 (UTC)
+Received: by wibgn9 with SMTP id gn9so15816353wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
-MIME-Version: 1.0
-X-Received: by 10.180.171.35 with SMTP id ar3mr3431177wic.24.1426838553896;
-	Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
-Received: by 10.194.1.67 with HTTP; Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
-Received: by 10.194.1.67 with HTTP; Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
-In-Reply-To: <1426674053-3772-1-git-send-email-kaiu@gmx.de>
-References: <1426674053-3772-1-git-send-email-kaiu@gmx.de>
-Date: Fri, 20 Mar 2015 09:02:33 +0100
-Message-ID: <CAAKMwiompwm1vZ=8rBBRDtaEkv4fzKGnjAG1ekc3JXzhZeNjbg@mail.gmail.com>
-From: Kai Ulrich <kaiu@gmx.de>
+	Fri, 20 Mar 2015 07:20:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id;
+	bh=LbPu6mKALO4+7dwVj7qO+VGGfK5mKecY5WRhfbkgCnI=;
+	b=oXZMIffj8Nkc2VTIA5njOoicvlfJzBh+kS3m6AE1hOmQolh2kcsoMcAiG+fFkFb6m4
+	lstfKxVES84KIKEiJDgte+Tf2QOyvfuWm7VLGEcIYFycXwi2AZEVl/b8SnhjOkQ0Zv6S
+	Pm0spNQJ1TXHkG0O6nnvUzS16vz1BxFmdzPi/HqyAqAKWG68G4NEp/C2dIcfMXb1lU4W
+	UICEniyrYK0jdYLEJ6EmE341XzmdzvU04b1eYKHysCTW6tuHBqItC7Gz2WTjHgciB99/
+	1N3EpiN//JJ3lEPKpkM1RtXB4mmX68EFUXY57nEUYSnOPWD0hmunV8gbvE7iOoAAhxqt
+	Hd9g==
+X-Received: by 10.194.23.39 with SMTP id j7mr164873968wjf.9.1426861226219;
+	Fri, 20 Mar 2015 07:20:26 -0700 (PDT)
+Received: from localhost.localdomain
+	(lns-bzn-49f-62-147-165-143.adsl.proxad.net. [62.147.165.143])
+	by mx.google.com with ESMTPSA id ch6sm6581513wjc.3.2015.03.20.07.20.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 20 Mar 2015 07:20:25 -0700 (PDT)
+Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
+From: =?UTF-8?q?Rafa=C3=ABl=20Carr=C3=A9?= <funman@videolan.org>
 To: openembedded-devel@lists.openembedded.org
-X-Provags-ID: V03:K0:L90dHx0Sm/TkFJF+A30P7ac1BdJ6H/Zh2ex6ganEF9c6VQz7vqx
-	ZBjqVABNtkZ/YA0T6GW9PXh6fQ9iWgyiPn6I4nroONAyYRt5W0W094mykTSK8yAhbRqyq/w
-	lcMWl+DQfwXCYtgOp88tHpP84hKVvxdrHBLhQXSKycTipJPpOxiTWsN7nak4LAsIMLCcTcz
-	KDjUzUasDEMDLqrz9Yt7w==
-X-UI-Out-Filterresults: notjunk:1;
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] smstools3: Add smstools3 to meta-oe/recipes-connectivity
+Date: Fri, 20 Mar 2015 15:20:20 +0100
+Message-Id: <1426861220-30221-1-git-send-email-funman@videolan.org>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-oe][PATCH] vim: add checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,115 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Mar 2015 08:02:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Mar 2015 14:20:29 -0000
 
-Hi,
-So better move it to meta-telephonie?
-Any thing more I can do?
-Regardes
-Kai.
+---
+ meta-oe/recipes-support/vim/vim_7.4.481.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Sent from my mobile
-Am 18.03.2015 11:20 schrieb "Kai Ulrich" <kaiu@gmx.de>:
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.481.bb b/meta-oe/recipes-support/vim/vim_7.4.481.bb
+index afdea84..ac59077 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.481.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.481.bb
+@@ -10,6 +10,10 @@ SRC_URI = "hg://vim.googlecode.com/hg/;protocol=https;module=vim \
+            file://disable_acl_header_check.patch;patchdir=.. \
+            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
+ "
++
++SRC_URI[md5sum] = "5fd5d754581a673a25733c12367cf9d2"
++SRC_URI[sha256sum] = "e2cc416dabea503e9e5631afc21bb00dcbfb9d05481641b75f247fd89ff4d7e8"
++
+ SRCREV = "v7-4-481"
+ 
+ S = "${WORKDIR}/vim/src"
+-- 
+2.1.0
 
-> Signed-off-by: Kai Ulrich <kaiu@gmx.de>
-> ---
->  .../smstools3/sms_binpath_and_psops.patch          | 19 +++++++++
->  .../smstools3/smstools3_3.1.15.bb                  | 45
-> ++++++++++++++++++++++
->  2 files changed, 64 insertions(+)
->  create mode 100644
-> meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
->  create mode 100644 meta-oe/recipes-connectivity/smstools3/
-> smstools3_3.1.15.bb
->
-> diff --git
-> a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
-> b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
-> new file mode 100644
-> index 0000000..ffcaa09
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
-> @@ -0,0 +1,19 @@
-> +Index: smstools3/scripts/sms3
-> +===================================================================
-> +--- smstools3.orig/scripts/sms3        2010-05-04 11:21:44.000000000 +0200
-> ++++ smstools3/scripts/sms3     2015-02-22 20:05:51.615074469 +0100
-> +@@ -24,11 +24,11 @@
-> + # Logfile can also be defined in here:
-> + LOGFILE="/var/log/smsd.log"
-> +
-> +-DAEMON=/usr/local/bin/smsd
-> ++DAEMON=/usr/bin/smsd
-> + # A program which turns power off for couple of seconds:
-> +-RESETMODEMS=/usr/local/bin/smsd_resetmodems
-> ++RESETMODEMS=/usr/bin/smsd_resetmodems
-> + NAME=smsd
-> +-PSOPT="-e"
-> ++PSOPT=""
-> + ECHO=echo
-> + case `uname` in
-> +   *BSD|Darwin)
-> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
-> b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
-> new file mode 100644
-> index 0000000..7a72a1e
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
-> @@ -0,0 +1,45 @@
-> +SUMMARY = "SMS Gateway software"
-> +DESCRIPTION = "The SMS Server Tools 3 is a SMS Gateway software which can
-> send and receive short messages through GSM modems and mobile phones."
-> +SECTION = "console/network"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
-> +HOMEPAGE = "http://smstools3.kekekasvi.com"
-> +
-> +SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
-> +           file://sms_binpath_and_psops.patch"
-> +
-> +SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
-> +SRC_URI[sha256sum] =
-> "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
-> +
-> +
-> +S = "${WORKDIR}/${PN}"
-> +
-> +RDEPENDS_${PN} = "bash"
-> +INITSCRIPT_NAME = "sms3"
-> +INITSCRIPT_PARAMS = "defaults"
-> +
-> +inherit update-rc.d
-> +
-> +do_install () {
-> +
-> +       install -d ${D}${bindir}
-> +       install -m 755 ${S}/src/smsd "${D}${bindir}/smsd"
-> +
-> +       install -m 755 ${S}/scripts/sendsms "${D}${bindir}/sendsms"
-> +       install -m 755 ${S}/scripts/sms2html "${D}${bindir}/sms2html"
-> +       install -m 755 ${S}/scripts/sms2unicode "${D}${bindir}/sms2unicode"
-> +       install -m 755 ${S}/scripts/unicode2sms "${D}${bindir}/unicode2sms"
-> +
-> +       install -d ${D}${sysconfdir}
-> +       install -m 644 ${S}/examples/smsd.conf.easy
-> "${D}${sysconfdir}/smsd.conf"
-> +
-> +       install -d "${D}${localstatedir}/spool"
-> +       install -d "${D}${localstatedir}/spool/sms"
-> +       install -d "${D}${localstatedir}/spool/sms/incoming"
-> +       install -d "${D}${localstatedir}/spool/sms/outgoing"
-> +       install -d "${D}${localstatedir}/spool/sms/checked"
-> +
-> +       install -d ${D}${sysconfdir}/init.d
-> +       install -m 755 ${S}/scripts/sms3
-> "${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}"
-> +
-> +}
-> --
-> 1.9.1
->
->
 
