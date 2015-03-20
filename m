@@ -1,25 +1,33 @@
-Return-Path: <alexandre.belloni@free-electrons.com>
-Received: from mail.free-electrons.com (down.free-electrons.com
-	[37.187.137.238])
-	by mail.openembedded.org (Postfix) with ESMTP id B17E865CD0
+Return-Path: <kaiu@gmx.de>
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+	by mail.openembedded.org (Postfix) with ESMTP id ECE8B6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2015 22:42:22 +0000 (UTC)
-Received: by mail.free-electrons.com (Postfix, from userid 106)
-	id BF259499; Thu, 19 Mar 2015 23:42:22 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	mail.free-electrons.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
-	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
-Received: from localhost (128-79-216-6.hfc.dyn.abo.bbox.fr [128.79.216.6])
-	by mail.free-electrons.com (Postfix) with ESMTPSA id 76AF391;
-	Thu, 19 Mar 2015 23:42:22 +0100 (CET)
-From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+	Fri, 20 Mar 2015 08:02:34 +0000 (UTC)
+Received: from mail-wg0-f42.google.com ([74.125.82.42]) by mail.gmx.com
+	(mrgmx101) with ESMTPSA (Nemesis) id 0LuKHz-1ZYZED2OIx-011hzv for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Mar 2015 09:02:34 +0100
+Received: by wgdm6 with SMTP id m6so82591241wgd.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.180.171.35 with SMTP id ar3mr3431177wic.24.1426838553896;
+	Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
+Received: by 10.194.1.67 with HTTP; Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
+Received: by 10.194.1.67 with HTTP; Fri, 20 Mar 2015 01:02:33 -0700 (PDT)
+In-Reply-To: <1426674053-3772-1-git-send-email-kaiu@gmx.de>
+References: <1426674053-3772-1-git-send-email-kaiu@gmx.de>
+Date: Fri, 20 Mar 2015 09:02:33 +0100
+Message-ID: <CAAKMwiompwm1vZ=8rBBRDtaEkv4fzKGnjAG1ekc3JXzhZeNjbg@mail.gmail.com>
+From: Kai Ulrich <kaiu@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Mar 2015 23:42:07 +0100
-Message-Id: <1426804927-4541-1-git-send-email-alexandre.belloni@free-electrons.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-oe][PATCH] v4l-utils: properly package libv4l-dev
+X-Provags-ID: V03:K0:L90dHx0Sm/TkFJF+A30P7ac1BdJ6H/Zh2ex6ganEF9c6VQz7vqx
+	ZBjqVABNtkZ/YA0T6GW9PXh6fQ9iWgyiPn6I4nroONAyYRt5W0W094mykTSK8yAhbRqyq/w
+	lcMWl+DQfwXCYtgOp88tHpP84hKVvxdrHBLhQXSKycTipJPpOxiTWsN7nak4LAsIMLCcTcz
+	KDjUzUasDEMDLqrz9Yt7w==
+X-UI-Out-Filterresults: notjunk:1;
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] smstools3: Add smstools3 to meta-oe/recipes-connectivity
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,28 +41,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2015 22:42:23 -0000
+X-List-Received-Date: Fri, 20 Mar 2015 08:02:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-libv4l-dev is missing headers, .so links and packageconfig files.
+Hi,
+So better move it to meta-telephonie?
+Any thing more I can do?
+Regardes
+Kai.
 
-Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
----
- meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Sent from my mobile
+Am 18.03.2015 11:20 schrieb "Kai Ulrich" <kaiu@gmx.de>:
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-index cea97dc76f89..a5c802c090be 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
-@@ -40,4 +40,6 @@ FILES_libv4l += "${libdir}/libv4l*${SOLIBS} ${libdir}/libv4l/*.so ${libdir}/libv
-                  ${libdir}/libv4l/*-decomp"
- 
- FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
--FILES_libv4l-dev += "${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
-+FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
-+                     ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
-+                     ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
--- 
-2.1.0
-
+> Signed-off-by: Kai Ulrich <kaiu@gmx.de>
+> ---
+>  .../smstools3/sms_binpath_and_psops.patch          | 19 +++++++++
+>  .../smstools3/smstools3_3.1.15.bb                  | 45
+> ++++++++++++++++++++++
+>  2 files changed, 64 insertions(+)
+>  create mode 100644
+> meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+>  create mode 100644 meta-oe/recipes-connectivity/smstools3/
+> smstools3_3.1.15.bb
+>
+> diff --git
+> a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+> b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+> new file mode 100644
+> index 0000000..ffcaa09
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
+> @@ -0,0 +1,19 @@
+> +Index: smstools3/scripts/sms3
+> +===================================================================
+> +--- smstools3.orig/scripts/sms3        2010-05-04 11:21:44.000000000 +0200
+> ++++ smstools3/scripts/sms3     2015-02-22 20:05:51.615074469 +0100
+> +@@ -24,11 +24,11 @@
+> + # Logfile can also be defined in here:
+> + LOGFILE="/var/log/smsd.log"
+> +
+> +-DAEMON=/usr/local/bin/smsd
+> ++DAEMON=/usr/bin/smsd
+> + # A program which turns power off for couple of seconds:
+> +-RESETMODEMS=/usr/local/bin/smsd_resetmodems
+> ++RESETMODEMS=/usr/bin/smsd_resetmodems
+> + NAME=smsd
+> +-PSOPT="-e"
+> ++PSOPT=""
+> + ECHO=echo
+> + case `uname` in
+> +   *BSD|Darwin)
+> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> new file mode 100644
+> index 0000000..7a72a1e
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> @@ -0,0 +1,45 @@
+> +SUMMARY = "SMS Gateway software"
+> +DESCRIPTION = "The SMS Server Tools 3 is a SMS Gateway software which can
+> send and receive short messages through GSM modems and mobile phones."
+> +SECTION = "console/network"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
+> +HOMEPAGE = "http://smstools3.kekekasvi.com"
+> +
+> +SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
+> +           file://sms_binpath_and_psops.patch"
+> +
+> +SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
+> +SRC_URI[sha256sum] =
+> "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
+> +
+> +
+> +S = "${WORKDIR}/${PN}"
+> +
+> +RDEPENDS_${PN} = "bash"
+> +INITSCRIPT_NAME = "sms3"
+> +INITSCRIPT_PARAMS = "defaults"
+> +
+> +inherit update-rc.d
+> +
+> +do_install () {
+> +
+> +       install -d ${D}${bindir}
+> +       install -m 755 ${S}/src/smsd "${D}${bindir}/smsd"
+> +
+> +       install -m 755 ${S}/scripts/sendsms "${D}${bindir}/sendsms"
+> +       install -m 755 ${S}/scripts/sms2html "${D}${bindir}/sms2html"
+> +       install -m 755 ${S}/scripts/sms2unicode "${D}${bindir}/sms2unicode"
+> +       install -m 755 ${S}/scripts/unicode2sms "${D}${bindir}/unicode2sms"
+> +
+> +       install -d ${D}${sysconfdir}
+> +       install -m 644 ${S}/examples/smsd.conf.easy
+> "${D}${sysconfdir}/smsd.conf"
+> +
+> +       install -d "${D}${localstatedir}/spool"
+> +       install -d "${D}${localstatedir}/spool/sms"
+> +       install -d "${D}${localstatedir}/spool/sms/incoming"
+> +       install -d "${D}${localstatedir}/spool/sms/outgoing"
+> +       install -d "${D}${localstatedir}/spool/sms/checked"
+> +
+> +       install -d ${D}${sysconfdir}/init.d
+> +       install -m 755 ${S}/scripts/sms3
+> "${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}"
+> +
+> +}
+> --
+> 1.9.1
+>
+>
 
