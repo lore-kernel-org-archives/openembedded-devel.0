@@ -1,31 +1,31 @@
 Return-Path: <sam.nelson@ti.com>
-X-Greylist: delayed 422 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 21 Mar 2015 02:40:00 UTC
-Received: from bear.ext.ti.com (bear.ext.ti.com [192.94.94.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A6136013D
+Received: from arroyo.ext.ti.com (arroyo.ext.ti.com [192.94.94.40])
+	by mail.openembedded.org (Postfix) with ESMTP id 5975173A1F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Mar 2015 02:40:00 +0000 (UTC)
-Received: from dlelxv90.itg.ti.com ([172.17.2.17])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2L2Wx4j030261
+	Sat, 21 Mar 2015 02:44:59 +0000 (UTC)
+Received: from dflxv15.itg.ti.com ([128.247.5.124])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id t2L2X1P3011213
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 21:32:59 -0500
-Received: from DLEE71.ent.ti.com (dlee71.ent.ti.com [157.170.170.114])
-	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2L2WvNl005424
+	Fri, 20 Mar 2015 21:33:01 -0500
+Received: from DFLE72.ent.ti.com (dfle72.ent.ti.com [128.247.5.109])
+	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id t2L2X0sL022108
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2015 21:32:58 -0500
-Received: from dflp33.itg.ti.com (10.64.6.16) by DLEE71.ent.ti.com
-	(157.170.170.114) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 20 Mar 2015 21:32:57 -0500
+	Fri, 20 Mar 2015 21:33:00 -0500
+Received: from dflp33.itg.ti.com (10.64.6.16) by DFLE72.ent.ti.com
+	(128.247.5.109) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 20 Mar 2015 21:33:00 -0500
 Received: from udb0862859.am.dhcp.ti.com (ileax41-snat.itg.ti.com
 	[10.172.224.153])	by dflp33.itg.ti.com (8.14.3/8.13.8) with ESMTP id
-	t2L2WsNk028261;	Fri, 20 Mar 2015 21:32:56 -0500
+	t2L2WsNl028261;	Fri, 20 Mar 2015 21:33:00 -0500
 From: Sam Nelson <sam.nelson@ti.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Mar 2015 22:32:49 -0400
-Message-ID: <1426905170-24218-1-git-send-email-sam.nelson@ti.com>
+Date: Fri, 20 Mar 2015 22:32:50 -0400
+Message-ID: <1426905170-24218-2-git-send-email-sam.nelson@ti.com>
 X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <1426905170-24218-1-git-send-email-sam.nelson@ti.com>
+References: <1426905170-24218-1-git-send-email-sam.nelson@ti.com>
 MIME-Version: 1.0
-Subject: [PATCH] openjdk: Add patch to avoid build issue with linaro toolchain 4.7
+Subject: [meta-java][PATCH] openjdk: Add patch to avoid build issue with linaro toolchain 4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,7 +39,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2015 02:40:00 -0000
+X-List-Received-Date: Sat, 21 Mar 2015 02:45:03 -0000
 Content-Type: text/plain
 
 - "-fuse-ld=bfd" is only supported in the linaro toolchain verion 4.8
