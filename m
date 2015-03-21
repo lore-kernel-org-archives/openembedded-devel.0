@@ -1,38 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-we0-f172.google.com (mail-we0-f172.google.com
-	[74.125.82.172])
-	by mail.openembedded.org (Postfix) with ESMTP id DDA1A60034;
-	Sat, 21 Mar 2015 15:34:23 +0000 (UTC)
-Received: by weop45 with SMTP id p45so103849275weo.0;
-	Sat, 21 Mar 2015 08:34:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=pgLM5fH9AyMyrLKFfQz4xh/sENs4QVkhZWnbXpxvZb4=;
-	b=ez3ySyrLW5H5KfhvI7+cmexw/XpQozSvVY3hlEmLU4tPjRsX6au58hNGd8QdM4JD1X
-	4iI9j5WUkJgb7hsQo5KxiMUbNjBqre/3oZU7QriJB3u2XV2uJY0bJRQAcnzrGlUdWvVb
-	pn0HvxmGUcSOFFkg+ZL1gmvLNT689jIEAlyxV3rsRRkYg6v24594Br3ns9gTZoq89nXg
-	5K6h7JQHlRqu23ukn0+hJLawsFJiof66VBpDmJk2/gHfyWCfwKZVJJlK47Pj7gBEB5HG
-	oSIaIZJP6zOp1YROX1EmKYa1U/lzAmtWChajKhBb1Tt2sywBzE0n6azSCggXas7AoQca
-	RVyQ==
-X-Received: by 10.194.77.230 with SMTP id v6mr173338659wjw.25.1426952064760;
-	Sat, 21 Mar 2015 08:34:24 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	z13sm11033929wjr.44.2015.03.21.08.34.23
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Mar 2015 08:34:24 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 21 Mar 2015 16:34:34 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150321153434.GM4738@jama>
-References: <20150301200217.0D5625019A@opal.openembedded.org>
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 846D873B8B;
+	Sat, 21 Mar 2015 16:33:12 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1YZMKn-0004tr-Ak from Joe_MacDonald@mentor.com ;
+	Sat, 21 Mar 2015 09:33:13 -0700
+Received: from NA-MBX-04.mgc.mentorg.com ([169.254.4.29]) by
+	SVR-ORW-FEM-05.mgc.mentorg.com ([147.34.97.43]) with mapi id
+	14.03.0224.002; Sat, 21 Mar 2015 09:33:13 -0700
+From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [oe-commits] Joe MacDonald : nis: update yp-tools and ypbind
+Thread-Index: AdBj9LkAMetB4jIh+kiWeLkkQ0CiZw==
+Date: Sat, 21 Mar 2015 16:33:12 +0000
+Message-ID: <EC21369A6993DD47985E1CBF1038266E263EBA83@NA-MBX-04.mgc.mentorg.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
 MIME-Version: 1.0
-In-Reply-To: <20150301200217.0D5625019A@opal.openembedded.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] Joe MacDonald : nis: update yp-tools and ypbind
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
+Subject: Re: [oe-commits] Joe MacDonald : nis: update yp-tools and	ypbind
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,271 +36,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Mar 2015 15:34:24 -0000
-X-Groupsio-MsgNum: 54840
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BHMq0+oGliEfCAkH"
-Content-Disposition: inline
+X-List-Received-Date: Sat, 21 Mar 2015 16:33:15 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---BHMq0+oGliEfCAkH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+V2lsbCBkby4NCg0KLUouDQoNCk9uIDIxIE1hciAyMDE1IDExOjM0LCBNYXJ0aW4gSmFuc2EgPG1h
+cnRpbi5qYW5zYUBnbWFpbC5jb20+IHdyb3RlOg0KT24gU3VuLCBNYXIgMDEsIDIwMTUgYXQgMDg6
+MDI6MTdQTSArMDAwMCwgZ2l0QGdpdC5vcGVuZW1iZWRkZWQub3JnIHdyb3RlOg0KPiBNb2R1bGU6
+IG1ldGEtb3BlbmVtYmVkZGVkLmdpdA0KPiBCcmFuY2g6IG1hc3Rlcg0KPiBDb21taXQ6IDEwMTNm
+NTg2YzVhMzM4YjhiZTAwYjM4MDU2MDA1ODgxYmVmOTJkNTINCj4gVVJMOiAgICBodHRwOi8vZ2l0
+Lm9wZW5lbWJlZGRlZC5vcmcvP3A9bWV0YS1vcGVuZW1iZWRkZWQuZ2l0JmE9Y29tbWl0O2g9MTAx
+M2Y1ODZjNWEzMzhiOGJlMDBiMzgwNTYwMDU4ODFiZWY5MmQ1Mg0KPg0KPiBBdXRob3I6IEpvZSBN
+YWNEb25hbGQgPGpvZV9tYWNkb25hbGRAbWVudG9yLmNvbT4NCj4gRGF0ZTogICBGcmkgRmViIDI3
+IDA5OjUzOjUxIDIwMTUgLTA1MDANCj4NCj4gbmlzOiB1cGRhdGUgeXAtdG9vbHMgYW5kIHlwYmlu
+ZA0KPg0KPiBCb3RoIHlwLXRvb2xzIGFuZCB5cGJpbmQtbXQgd2VyZSBvdXQgb2YgZGF0ZSB3aXRo
+IHRoZWlyIGxhdGVzdCByZWxlYXNlZA0KPiB2ZXJzaW9ucywgc28gYnVtcCB0aGVtIHVwIHRvIGN1
+cnJlbnQuICBSZW1vdmUgdHdvIGRlYWQgcGF0Y2hlcyBhdCB0aGUgc2FtZQ0KPiB0aW1lIGFuZCBy
+ZW9yZ2FuaXplIHRoZSByZWNpcGVzIHRvIGJldHRlciBmb2xsb3cgdGhlIHByZWZlcnJlZCBPRSBz
+dHlsZS4NCj4gRmluYWxseSwgdGhlIG5ldyByZWxlYXNlIGluY2x1ZGVzIGEgbmV3IHZlcnNpb24g
+b2YgdGhlIEdQTHYyIENPUFlJTkcgZmlsZSwNCj4gd2l0aCBhIHNpZ25pZmljYW50IGFtb3VudCBv
+ZiB3aGl0ZXNwYWNlIGZpeGVzLCBzbyB1cGRhdGUgdGhlIGxpY2Vuc2UNCj4gY2hlY2tzdW0uDQoN
+CkNhbiB5b3UgcGxlYXNlIGZpeCB0aGlzIHFhOg0KeXBiaW5kLW10LTEuMzg6IHlwYmluZC1tdCBy
+ZGVwZW5kcyBvbiBsaWJzeXN0ZW1kLCBidXQgaXQgaXNuJ3QgYSBidWlsZCBkZXBlbmRlbmN5PyBb
+YnVpbGQtZGVwc10NCg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBKb2UgTWFjRG9uYWxkIDxqb2VfbWFj
+ZG9uYWxkQG1lbnRvci5jb20+DQo+DQo+IC0tLQ0KPg0KPiAgLi4uL3JlY2lwZXMtc3VwcG9ydC9u
+aXMvZmlsZXMvbGliZGwucGF0Y2ggICAgICAgICAgfCAxMiAtLS0tLS0tDQo+ICAuLi4vcmVjaXBl
+cy1zdXBwb3J0L25pcy9maWxlcy9uby1zZWxpbnV4LnBhdGNoICAgICB8IDE2IC0tLS0tLS0tLS0N
+Cj4gIG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmlzL25pcy5pbmMgICAgICAgIHwg
+IDIgKy0NCj4gIC4uLi9uaXMve3lwLXRvb2xzXzIuMTIuYmIgPT4geXAtdG9vbHNfMi4xNC5iYn0g
+ICAgIHwgMjMgKysrKysrKystLS0tLS0NCj4gIC4uLi9uaXMve3lwYmluZC1tdF8xLjM2LmJiID0+
+IHlwYmluZC1tdF8xLjM4LmJifSAgIHwgMzcgKysrKysrKysrKystLS0tLS0tLS0tLQ0KPiAgNSBm
+aWxlcyBjaGFuZ2VkLCAzMyBpbnNlcnRpb25zKCspLCA1NyBkZWxldGlvbnMoLSkNCj4NCj4gZGlm
+ZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmlzL2ZpbGVzL2xpYmRs
+LnBhdGNoIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uaXMvZmlsZXMvbGliZGwu
+cGF0Y2gNCj4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDYwNWFmMzEuLjAwMDAw
+MDANCj4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uaXMvZmlsZXMvbGli
+ZGwucGF0Y2gNCj4gKysrIC9kZXYvbnVsbA0KPiBAQCAtMSwxMiArMCwwIEBADQo+IC0tLS0gcHdk
+dXRpbHMtMi42L2NvbmZpZ3VyZS5pbi5vcmlnICAgMjAwNS0wNC0xOSAyMDoyMjozNi42MDMwNTIx
+OTIgLTA3MDANCj4gLSsrKyBwd2R1dGlscy0yLjYvY29uZmlndXJlLmluICAgICAgICAyMDA1LTA0
+LTE5IDIxOjA5OjQ1LjMwODAyMzY3MiAtMDcwMA0KPiAtQEAgLTE3OCw2ICsxNzgsOSBAQA0KPiAt
+ICAgICBBQ19DSEVDS19MSUIobGRhcCwgbWFpbiwgTERBUF9MSUJTPSItbGxkYXAgJExEQVBfTElC
+UyIgZm91bmRfbGRhcF9saWI9eWVzLCwkTERBUF9MSUJTKQ0KPiAtICAgZmkNCj4gLQ0KPiAtKyAg
+ZG5sIHRoaXMgYWx3YXlzIG5lZWRzIGRsDQo+IC0rICBBQ19DSEVDS19MSUIoZGwsIGRsb3Blbiwg
+TERBUF9MSUJTPSIkTERBUF9MSUJTIC1sZGwiKQ0KPiAtKw0KPiAtICAgaWYgdGVzdCAteiAiJGZv
+dW5kX2xkYXBfbGliIiAtYSBcKCAkd2l0aF9sZGFwX2xpYiA9IGF1dG8gLW8gJHdpdGhfbGRhcF9s
+aWIgPSBuZXRzY2FwZTUgXCk7IHRoZW4NCj4gLSAgICAgQUNfQ0hFQ0tfTElCKGxkYXA1MCwgbWFp
+biwgTERBUF9MSUJTPSItbGxkYXA1MCAtbHNzbGRhcDUwIC1sc3NsMyAtbG5zczMgLWxuc3ByNCAt
+bHBybGRhcDUwIC1scGxjNCAtbHBsZHM0IiBmb3VuZF9sZGFwX2xpYj15ZXMgbmVlZF9wdGhyZWFk
+PXRydWUsLCAtbHB0aHJlYWQpDQo+IC0gICBmaQ0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3Jr
+aW5nL3JlY2lwZXMtc3VwcG9ydC9uaXMvZmlsZXMvbm8tc2VsaW51eC5wYXRjaCBiL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmlzL2ZpbGVzL25vLXNlbGludXgucGF0Y2gNCj4gZGVs
+ZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDcxZGEzZTMuLjAwMDAwMDANCj4gLS0tIGEv
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uaXMvZmlsZXMvbm8tc2VsaW51eC5wYXRj
+aA0KPiArKysgL2Rldi9udWxsDQo+IEBAIC0xLDE2ICswLDAgQEANCj4gLS0tLSBwd2R1dGlscy0y
+LjYvbGliL2NvcHlfeGF0dHIuYy5vcmlnICAgICAgIDIwMDUtMDQtMTYgMTc6MTU6NTIuOTE2NjYw
+ODgwIC0wNzAwDQo+IC0rKysgcHdkdXRpbHMtMi42L2xpYi9jb3B5X3hhdHRyLmMgICAgMjAwNS0w
+NC0xNiAxNzoxODoxMC4zNDU3Njg0ODAgLTA3MDANCj4gLUBAIC0xMjcsOCArMTI3LDExIEBADQo+
+IC0NCj4gLSAgICAgICAgaWYgKGxzZXR4YXR0ciAodG8sIG5hbWUsIHZhbHVlLCBzaXplLCAwKSAh
+PSAwKQ0KPiAtICAgICAgICAgIHsNCj4gLS0gICAgICAgICAgaWYgKHN0cmNtcCAobmFtZSwgInNl
+Y3VyaXR5LnNlbGludXgiKSA9PSAwICYmDQo+IC0tICAgICAgICAgICAgICBpc19zZWxpbnV4X2Vu
+YWJsZWQoKSA9PSAwKQ0KPiAtKyAgICAgICAgICBpZiAoc3RyY21wIChuYW1lLCAic2VjdXJpdHku
+c2VsaW51eCIpID09IDANCj4gLSsjaWYgZGVmaW5lZChXSVRIX1NFTElOVVgpDQo+IC0rICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgJiYgaXNfc2VsaW51eF9lbmFibGVkKCkgPT0gMA0KPiAt
+KyNlbmRpZg0KPiAtKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICkNCj4gLSAgICAgICAg
+ICAgICAgZnByaW50ZiAoc3RkZXJyLA0KPiAtICAgICAgICAgICAgICAgICAgICAgICBfKCJTRUxp
+bnV4IG5vdCBlbmFibGVkLCBpZ25vcmUgYXR0cmlidXRlICVzIGZvciBgJXMnLlxuIiksDQo+IC0g
+ICAgICAgICAgICAgICAgICAgICAgIG5hbWUsIHRvKTsNCj4gZGlmZiAtLWdpdCBhL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmlzL25pcy5pbmMgYi9tZXRhLW5ldHdvcmtpbmcvcmVj
+aXBlcy1zdXBwb3J0L25pcy9uaXMuaW5jDQo+IGluZGV4IDA3NWQyNzUuLmVhZmY5NDkgMTAwNjQ0
+DQo+IC0tLSBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmlzL25pcy5pbmMNCj4g
+KysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uaXMvbmlzLmluYw0KPiBAQCAt
+Nyw3ICs3LDcgQEAgREVTQ1JJUFRJT04gPSAiTklTIFNlcnZlciBhbmQgVG9vbHMiDQo+ICBIT01F
+UEFHRSA9ICJodHRwOi8vd3d3LmxpbnV4LW5pcy5vcmcvbmlzLyINCj4gIFNFQ1RJT04gPSAiY29u
+c29sZS9uZXR3b3JrIg0KPiAgTElDRU5TRSA9ICJHUEwtMi4wIg0KPiAtTElDX0ZJTEVTX0NIS1NV
+TSA9ICJmaWxlOi8vQ09QWUlORzttZDU9OTRkNTVkNTEyYTliYTM2Y2FhOWI3ZGYwNzliYWUxOWYi
+DQo+ICtMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT03NTE0MTkyNjBhYTk1
+NDQ5OWY3YWJhYWJhYTg4MmJiZSINCj4NCj4gIGluaGVyaXQgYXV0b3Rvb2xzIGdldHRleHQgcGtn
+Y29uZmlnDQo+DQo+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0
+L25pcy95cC10b29sc18yLjEyLmJiIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9u
+aXMveXAtdG9vbHNfMi4xNC5iYg0KPiBzaW1pbGFyaXR5IGluZGV4IDczJQ0KPiByZW5hbWUgZnJv
+bSBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L25pcy95cC10b29sc18yLjEyLmJiDQo+
+IHJlbmFtZSB0byBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L25pcy95cC10b29sc18y
+LjE0LmJiDQo+IGluZGV4IDAwMTc4NDUuLjhjNjgzN2IgMTAwNjQ0DQo+IC0tLSBhL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmlzL3lwLXRvb2xzXzIuMTIuYmINCj4gKysrIGIvbWV0
+YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uaXMveXAtdG9vbHNfMi4xNC5iYg0KPiBAQCAt
+MSwyOSArMSwzMiBAQA0KPiAgIyBUaGlzIHBhY2thZ2UgYnVpbGRzIHRvb2xzIHRvIG1hbmFnZSBO
+SVMNCj4gICMgVGhlIHNvdXJjZSBwYWNrYWdlIGlzIHV0aWxzL25ldC9OSVMveXAtdG9vbHMNCj4g
+ICMNCj4gLVBSID0gInIzIg0KPiAtREVTQ1JJUFRJT049IlwNCj4gK3JlcXVpcmUgbmlzLmluYw0K
+PiArDQo+ICtTVU1NQVJZID0gIk5JUyBjbGllbnQgcHJvZ3JhbXMiDQo+ICtERVNDUklQVElPTiA9
+ICIgXA0KPiAgTmV0d29yayBJbmZvcm1hdGlvbiBTZXJ2aWNlIHRvb2xzLiAgXA0KPiAgVGhpcyBw
+YWNrYWdlIGNvbnRhaW5zIHlwY2F0LCB5cG1hdGNoLCB5cHNldCwgXA0KPiAgeXB3aGljaCwgeXBw
+YXNzd2QsIGRvbWFpbm5hbWUsIG5pc2RvbWFpbm5hbWUgXA0KPiAtYW5kIHlwZG9tYWlubmFtZS4i
+DQo+ICthbmQgeXBkb21haW5uYW1lLiBcDQo+ICtcDQo+ICtUaGlzIGlzIHRoZSBmaW5hbCBJUHY0
+LW9ubHkgdmVyc2lvbiBvZiB5cC10b29scy4gXA0KPiArIg0KPg0KPiAtcmVxdWlyZSBuaXMuaW5j
+DQo+ICBTUkNfVVJJID0gImh0dHA6Ly93d3cubGludXgtbmlzLm9yZy9kb3dubG9hZC95cC10b29s
+cy8ke0JQfS50YXIuYnoyIFwNCj4gICAgICAgICAgICAgZmlsZTovL2RvbWFpbm5hbWUuc2Vydmlj
+ZSBcDQo+ICAiDQo+IC0NCj4gLVNSQ19VUklbbWQ1c3VtXSA9ICJjZTFlMDZkODZjYWEyODVmYThj
+ZDc2ZmRmMTAzZjUxZSINCj4gLVNSQ19VUklbc2hhMjU2c3VtXSA9ICI2YWU4MzIxNjY2ZWVhNzgz
+N2RhMzQzZWVhOTBlYTMwMjczZmI3NDk0M2FkMTExZDVhNGJlZmQyYWZiMjUyMDYzIg0KPiAtDQo+
+IC1DQUNIRURfQ09ORklHVVJFVkFSUyArPSAiYWNfY3ZfcHJvZ19TVFJJUD0vYmluL3RydWUiDQo+
+ICtTUkNfVVJJW21kNXN1bV0gPSAiYmExZjEyMWMxN2UzYWQ2NTM2OGJlMTczYjk3N2NkMTMiDQo+
+ICtTUkNfVVJJW3NoYTI1NnN1bV0gPSAiZDAxZjcwZmFkYzY0M2E1NTEwN2EwZWRjNDdjNmJlOTlk
+MDMwNmJjYzRmNjZkZjU2ZjY1ZTc0MjM4YjAxMjRjOSINCj4NCj4gIGluaGVyaXQgc3lzdGVtZA0K
+PiArU1lTVEVNRF9TRVJWSUNFXyR7UE59ID0gImRvbWFpbm5hbWUuc2VydmljZSINCj4NCj4gIFJQ
+Uk9WSURFU18ke1BOfSArPSAiJHtQTn0tc3lzdGVtZCINCj4gIFJSRVBMQUNFU18ke1BOfSArPSAi
+JHtQTn0tc3lzdGVtZCINCj4gIFJDT05GTElDVFNfJHtQTn0gKz0gIiR7UE59LXN5c3RlbWQiDQo+
+IC1TWVNURU1EX1NFUlZJQ0VfJHtQTn0gPSAiZG9tYWlubmFtZS5zZXJ2aWNlIg0KPiArDQo+ICtD
+QUNIRURfQ09ORklHVVJFVkFSUyArPSAiYWNfY3ZfcHJvZ19TVFJJUD0vYmluL3RydWUiDQo+DQo+
+ICBkb19pbnN0YWxsX2FwcGVuZCgpIHsNCj4gICAgICBpbnN0YWxsIC1kICR7RH0ke3N5c3RlbWRf
+dW5pdGRpcn0vc3lzdGVtDQo+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1z
+dXBwb3J0L25pcy95cGJpbmQtbXRfMS4zNi5iYiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1
+cHBvcnQvbmlzL3lwYmluZC1tdF8xLjM4LmJiDQo+IHNpbWlsYXJpdHkgaW5kZXggNzQlDQo+IHJl
+bmFtZSBmcm9tIG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmlzL3lwYmluZC1tdF8x
+LjM2LmJiDQo+IHJlbmFtZSB0byBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L25pcy95
+cGJpbmQtbXRfMS4zOC5iYg0KPiBpbmRleCAzNWVmMTZhLi5mN2U2YjQzIDEwMDY0NA0KPiAtLS0g
+YS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L25pcy95cGJpbmQtbXRfMS4zNi5iYg0K
+PiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L25pcy95cGJpbmQtbXRfMS4z
+OC5iYg0KPiBAQCAtMSw4ICsxLDkgQEANCj4gICMgVGhpcyBwYWNrYWdlIGJ1aWxkcyB0aGUgTklT
+IHlwYmluZCBkYWVtb24NCj4gICMgVGhlIHNvdXJjZSBwYWNrYWdlIGlzIHV0aWxzL25ldC9OSVMv
+eXBiaW5kLW10DQo+ICAjDQo+IC1QUiA9ICJyMyINCj4gLURFU0NSSVBUSU9OPSJcDQo+ICtyZXF1
+aXJlIG5pcy5pbmMNCj4gKw0KPiArREVTQ1JJUFRJT04gPSAiIFwNCj4gIE11bHRpdGhyZWFkZWQg
+TklTIGJpbmQgc2VydmljZSAoeXBiaW5kLW10KS4gIFwNCj4gIHlwYmluZC1tdCBpcyBhIGNvbXBs
+ZXRlIG5ldyBpbXBsZW1lbnRhdGlvbiBvZiBhIE5JUyBcDQo+ICBiaW5kaW5nIGRhZW1vbiBmb3Ig
+TGludXguIEl0IGhhcyB0aGUgZm9sbG93aW5nIFwNCj4gQEAgLTExLDIzICsxMiwyOCBAQCBVc2Vz
+IHRocmVhZHMgZm9yIGJldHRlciByZXNwb25zZS4gIFN1cHBvcnRzIG11bHRpcGxlIFwNCj4gIGRv
+bWFpbiBiaW5kaW5ncy4gIFN1cHBvcnRzIC92YXIveXAvYmluZGluZy8qIGZpbGUgXA0KPiAgZm9y
+IExpbnV4IGxpYmMgNC81IGFuZCBnbGliYyAyLnguICBTdXBwb3J0cyBhIGxpc3QgXA0KPiAgb2Yg
+a25vd24gc2VjdXJlIE5JUyBzZXJ2ZXIgKC9ldGMveXAuY29uZikgQmluZHMgdG8gXA0KPiAtdGhl
+IHNlcnZlciB3aGljaCBhbnN3ZXJlZCBhcyBmaXJzdC4iDQo+IC1IT01FUEFHRT0iaHR0cDovL3d3
+dy5saW51eC1uaXMub3JnL25pcy95cGJpbmQtbXQvaW5kZXguaHRtbCINCj4gLQ0KPiAtcmVxdWly
+ZSBuaXMuaW5jDQo+IC0NCj4gLUxJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1
+PTA4MmM5YTA4ODZjN2MzZGIxYmM4NjJiNWI2MmZmZTA4Ig0KPiArdGhlIHNlcnZlciB3aGljaCBh
+bnN3ZXJlZCBhcyBmaXJzdC4gXA0KPiArXA0KPiArVGhpcyBpcyB0aGUgZmluYWwgSVB2NC1vbmx5
+IHZlcnNpb24gb2YgeXBiaW5kLW10LiBcDQo+ICsiDQo+ICtIT01FUEFHRSA9ICJodHRwOi8vd3d3
+LmxpbnV4LW5pcy5vcmcvbmlzL3lwYmluZC1tdC9pbmRleC5odG1sIg0KPiArREVQRU5EUyA9ICJ5
+cC10b29scyINCj4gKyMgeXBiaW5kLW10IG5vdyBwcm92aWRlcyBhbGwgdGhlIGZ1bmN0aW9uYWxp
+dHkgb2YgeXBiaW5kDQo+ICsjIGFuZCBpcyB1c2VkIGluIHBsYWNlIG9mIGl0Lg0KPiArUFJPVklE
+RVMgKz0gInlwYmluZCINCj4NCj4gIFNSQ19VUkkgPSAiaHR0cDovL3d3dy5saW51eC1uaXMub3Jn
+L2Rvd25sb2FkL3lwYmluZC1tdC8ke0JQfS50YXIuYnoyIFwNCj4gICAgICAgICAgICAgZmlsZTov
+L3lwYmluZC15b2N0by5pbml0IFwNCj4gICAgICAgICAgICAgZmlsZTovL3lwYmluZC5zZXJ2aWNl
+IFwNCj4gICINCj4gLVNSQ19VUklbbWQ1c3VtXSA9ICIxMzU4MzRkYjk3ZDc4ZmY2ZDc5ZmRlZTI4
+MTBiNDA1NiINCj4gLVNSQ19VUklbc2hhMjU2c3VtXSA9ICIwZWZmNzZjMTg0OWY0YjM4ZWExYTYw
+MjgwZDgzOTdjNDI0MDM2OWM2NDFmZTU0MDJjZTU3ZWRmMWE5MDk1OGM3Ig0KPiArU1JDX1VSSVtt
+ZDVzdW1dID0gIjA5NDA4OGMwZTI4MmZhN2YzYjNkZDZjYzUxZDBhNGUxIg0KPiArU1JDX1VSSVtz
+aGEyNTZzdW1dID0gIjE5MzBjZTE5ZjZjY2ZlMTA0MDBmMzQ5N2IzMTg2N2Y3MTY5MGQyYmNkM2Y1
+YjU3NTE5OWZhOTE1NTU5Yjc3NDYiDQo+DQo+IC0jIHlwYmluZC1tdCBub3cgcHJvdmlkZXMgYWxs
+IHRoZSBmdW5jdGlvbmFsaXR5IG9mIHlwYmluZA0KPiAtIyBhbmQgaXMgdXNlZCBpbiBwbGFjZSBv
+ZiBpdC4NCj4gLVBST1ZJREVTICs9ICJ5cGJpbmQiDQo+ICtpbmhlcml0IHN5c3RlbWQgdXBkYXRl
+LXJjLmQNCj4gKw0KPiArU1lTVEVNRF9TRVJWSUNFXyR7UE59ID0gInlwYmluZC5zZXJ2aWNlIg0K
+PiArSU5JVFNDUklQVF9OQU1FID0gInlwYmluZCINCj4gK0lOSVRTQ1JJUFRfUEFSQU1TID0gInN0
+YXJ0IDQ0IDMgNSAuIHN0b3AgNzAgMCAxIDIgNiAuIg0KPg0KPiAgQ0FDSEVEX0NPTkZJR1VSRVZB
+UlMgPSAiYWNfY3ZfcHJvZ19TVFJJUD0vYmluL3RydWUiDQo+DQo+IEBAIC0zNywxNiArNDMsMTEg
+QEAgZG9faW5zdGFsbF9hcHBlbmQgKCkgew0KPg0KPiAgICAgIGluc3RhbGwgLW0gMDc1NSAke1dP
+UktESVJ9L3lwYmluZC15b2N0by5pbml0ICR7RH0ke3N5c2NvbmZkaXJ9L2luaXQuZC95cGJpbmQN
+Cj4NCj4gLSAgICAjIFRPRE8sIHVzZSB1cGRhdGUtcmMuZA0KPiAtICAgIGxuIC1zIC4uL2luaXQu
+ZC95cGJpbmQgJHtEfSR7c3lzY29uZmRpcn0vcmNTLmQvUzQ0eXBiaW5kDQo+IC0NCj4gICAgICBp
+bnN0YWxsIC1kICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtDQo+ICAgICAgaW5zdGFsbCAt
+bSAwNjQ0ICR7V09SS0RJUn0veXBiaW5kLnNlcnZpY2UgJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9z
+eXN0ZW0NCj4gIH0NCj4NCj4gLWluaGVyaXQgc3lzdGVtZA0KPg0KPiAgUlBST1ZJREVTXyR7UE59
+ICs9ICIke1BOfS1zeXN0ZW1kIg0KPiAgUlJFUExBQ0VTXyR7UE59ICs9ICIke1BOfS1zeXN0ZW1k
+Ig0KPiAgUkNPTkZMSUNUU18ke1BOfSArPSAiJHtQTn0tc3lzdGVtZCINCj4gLVNZU1RFTURfU0VS
+VklDRV8ke1BOfSA9ICJ5cGJpbmQuc2VydmljZSINCj4NCj4gLS0NCj4gX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gT3BlbmVtYmVkZGVkLWNvbW1pdHMg
+bWFpbGluZyBsaXN0DQo+IE9wZW5lbWJlZGRlZC1jb21taXRzQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcNCj4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVu
+ZW1iZWRkZWQtY29tbWl0cw0KDQotLQ0KTWFydGluICdKYU1hJyBKYW5zYSAgICAgamFiYmVyOiBN
+YXJ0aW4uSmFuc2FAZ21haWwuY29tDQo=
 
-On Sun, Mar 01, 2015 at 08:02:17PM +0000, git@git.openembedded.org wrote:
-> Module: meta-openembedded.git
-> Branch: master
-> Commit: 1013f586c5a338b8be00b38056005881bef92d52
-> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
-;h=3D1013f586c5a338b8be00b38056005881bef92d52
->=20
-> Author: Joe MacDonald <joe_macdonald@mentor.com>
-> Date:   Fri Feb 27 09:53:51 2015 -0500
->=20
-> nis: update yp-tools and ypbind
->=20
-> Both yp-tools and ypbind-mt were out of date with their latest released
-> versions, so bump them up to current.  Remove two dead patches at the same
-> time and reorganize the recipes to better follow the preferred OE style.
-> Finally, the new release includes a new version of the GPLv2 COPYING file,
-> with a significant amount of whitespace fixes, so update the license
-> checksum.
-
-Can you please fix this qa:
-ypbind-mt-1.38: ypbind-mt rdepends on libsystemd, but it isn't a build depe=
-ndency? [build-deps]
-
->=20
-> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
->=20
-> ---
->=20
->  .../recipes-support/nis/files/libdl.patch          | 12 -------
->  .../recipes-support/nis/files/no-selinux.patch     | 16 ----------
->  meta-networking/recipes-support/nis/nis.inc        |  2 +-
->  .../nis/{yp-tools_2.12.bb =3D> yp-tools_2.14.bb}     | 23 ++++++++------
->  .../nis/{ypbind-mt_1.36.bb =3D> ypbind-mt_1.38.bb}   | 37 +++++++++++---=
---------
->  5 files changed, 33 insertions(+), 57 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-support/nis/files/libdl.patch b/meta=
--networking/recipes-support/nis/files/libdl.patch
-> deleted file mode 100644
-> index 605af31..0000000
-> --- a/meta-networking/recipes-support/nis/files/libdl.patch
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> ---- pwdutils-2.6/configure.in.orig	2005-04-19 20:22:36.603052192 -0700
-> -+++ pwdutils-2.6/configure.in	2005-04-19 21:09:45.308023672 -0700
-> -@@ -178,6 +178,9 @@
-> -     AC_CHECK_LIB(ldap, main, LDAP_LIBS=3D"-lldap $LDAP_LIBS" found_ldap=
-_lib=3Dyes,,$LDAP_LIBS)
-> -   fi
-> -=20
-> -+  dnl this always needs dl
-> -+  AC_CHECK_LIB(dl, dlopen, LDAP_LIBS=3D"$LDAP_LIBS -ldl")
-> -+
-> -   if test -z "$found_ldap_lib" -a \( $with_ldap_lib =3D auto -o $with_l=
-dap_lib =3D netscape5 \); then
-> -     AC_CHECK_LIB(ldap50, main, LDAP_LIBS=3D"-lldap50 -lssldap50 -lssl3 =
--lnss3 -lnspr4 -lprldap50 -lplc4 -lplds4" found_ldap_lib=3Dyes need_pthread=
-=3Dtrue,, -lpthread)
-> -   fi
-> diff --git a/meta-networking/recipes-support/nis/files/no-selinux.patch b=
-/meta-networking/recipes-support/nis/files/no-selinux.patch
-> deleted file mode 100644
-> index 71da3e3..0000000
-> --- a/meta-networking/recipes-support/nis/files/no-selinux.patch
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> ---- pwdutils-2.6/lib/copy_xattr.c.orig	2005-04-16 17:15:52.916660880 -07=
-00
-> -+++ pwdutils-2.6/lib/copy_xattr.c	2005-04-16 17:18:10.345768480 -0700
-> -@@ -127,8 +127,11 @@
-> -=20
-> - 	  if (lsetxattr (to, name, value, size, 0) !=3D 0)
-> - 	    {
-> --	      if (strcmp (name, "security.selinux") =3D=3D 0 &&
-> --		  is_selinux_enabled() =3D=3D 0)
-> -+	      if (strcmp (name, "security.selinux") =3D=3D 0
-> -+#if defined(WITH_SELINUX)
-> -+				  && is_selinux_enabled() =3D=3D 0
-> -+#endif
-> -+				  )
-> - 		fprintf (stderr,
-> - 			 _("SELinux not enabled, ignore attribute %s for `%s'.\n"),
-> - 			 name, to);
-> diff --git a/meta-networking/recipes-support/nis/nis.inc b/meta-networkin=
-g/recipes-support/nis/nis.inc
-> index 075d275..eaff949 100644
-> --- a/meta-networking/recipes-support/nis/nis.inc
-> +++ b/meta-networking/recipes-support/nis/nis.inc
-> @@ -7,7 +7,7 @@ DESCRIPTION =3D "NIS Server and Tools"
->  HOMEPAGE =3D "http://www.linux-nis.org/nis/"
->  SECTION =3D "console/network"
->  LICENSE =3D "GPL-2.0"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-> =20
->  inherit autotools gettext pkgconfig
-> =20
-> diff --git a/meta-networking/recipes-support/nis/yp-tools_2.12.bb b/meta-=
-networking/recipes-support/nis/yp-tools_2.14.bb
-> similarity index 73%
-> rename from meta-networking/recipes-support/nis/yp-tools_2.12.bb
-> rename to meta-networking/recipes-support/nis/yp-tools_2.14.bb
-> index 0017845..8c6837b 100644
-> --- a/meta-networking/recipes-support/nis/yp-tools_2.12.bb
-> +++ b/meta-networking/recipes-support/nis/yp-tools_2.14.bb
-> @@ -1,29 +1,32 @@
->  # This package builds tools to manage NIS
->  # The source package is utils/net/NIS/yp-tools
->  #
-> -PR =3D "r3"
-> -DESCRIPTION=3D"\
-> +require nis.inc
-> +
-> +SUMMARY =3D "NIS client programs"
-> +DESCRIPTION =3D " \
->  Network Information Service tools.  \
->  This package contains ypcat, ypmatch, ypset, \
->  ypwhich, yppasswd, domainname, nisdomainname \
-> -and ypdomainname."
-> +and ypdomainname. \
-> +\
-> +This is the final IPv4-only version of yp-tools. \
-> +"
-> =20
-> -require nis.inc
->  SRC_URI =3D "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
->             file://domainname.service \
->  "
-> -
-> -SRC_URI[md5sum] =3D "ce1e06d86caa285fa8cd76fdf103f51e"
-> -SRC_URI[sha256sum] =3D "6ae8321666eea7837da343eea90ea30273fb74943ad111d5=
-a4befd2afb252063"
-> -
-> -CACHED_CONFIGUREVARS +=3D "ac_cv_prog_STRIP=3D/bin/true"
-> +SRC_URI[md5sum] =3D "ba1f121c17e3ad65368be173b977cd13"
-> +SRC_URI[sha256sum] =3D "d01f70fadc643a55107a0edc47c6be99d0306bcc4f66df56=
-f65e74238b0124c9"
-> =20
->  inherit systemd
-> +SYSTEMD_SERVICE_${PN} =3D "domainname.service"
-> =20
->  RPROVIDES_${PN} +=3D "${PN}-systemd"
->  RREPLACES_${PN} +=3D "${PN}-systemd"
->  RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> -SYSTEMD_SERVICE_${PN} =3D "domainname.service"
-> +
-> +CACHED_CONFIGUREVARS +=3D "ac_cv_prog_STRIP=3D/bin/true"
-> =20
->  do_install_append() {
->      install -d ${D}${systemd_unitdir}/system
-> diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.36.bb b/meta=
--networking/recipes-support/nis/ypbind-mt_1.38.bb
-> similarity index 74%
-> rename from meta-networking/recipes-support/nis/ypbind-mt_1.36.bb
-> rename to meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-> index 35ef16a..f7e6b43 100644
-> --- a/meta-networking/recipes-support/nis/ypbind-mt_1.36.bb
-> +++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
-> @@ -1,8 +1,9 @@
->  # This package builds the NIS ypbind daemon
->  # The source package is utils/net/NIS/ypbind-mt
->  #
-> -PR =3D "r3"
-> -DESCRIPTION=3D"\
-> +require nis.inc
-> +
-> +DESCRIPTION =3D " \
->  Multithreaded NIS bind service (ypbind-mt).  \
->  ypbind-mt is a complete new implementation of a NIS \
->  binding daemon for Linux. It has the following \
-> @@ -11,23 +12,28 @@ Uses threads for better response.  Supports multiple \
->  domain bindings.  Supports /var/yp/binding/* file \
->  for Linux libc 4/5 and glibc 2.x.  Supports a list \
->  of known secure NIS server (/etc/yp.conf) Binds to \
-> -the server which answered as first."
-> -HOMEPAGE=3D"http://www.linux-nis.org/nis/ypbind-mt/index.html"
-> -
-> -require nis.inc
-> -
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D082c9a0886c7c3db1bc862b5b62ff=
-e08"
-> +the server which answered as first. \
-> +\
-> +This is the final IPv4-only version of ypbind-mt. \
-> +"
-> +HOMEPAGE =3D "http://www.linux-nis.org/nis/ypbind-mt/index.html"
-> +DEPENDS =3D "yp-tools"
-> +# ypbind-mt now provides all the functionality of ypbind
-> +# and is used in place of it.
-> +PROVIDES +=3D "ypbind"
-> =20
->  SRC_URI =3D "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
->             file://ypbind-yocto.init \
->             file://ypbind.service \
->  "
-> -SRC_URI[md5sum] =3D "135834db97d78ff6d79fdee2810b4056"
-> -SRC_URI[sha256sum] =3D "0eff76c1849f4b38ea1a60280d8397c4240369c641fe5402=
-ce57edf1a90958c7"
-> +SRC_URI[md5sum] =3D "094088c0e282fa7f3b3dd6cc51d0a4e1"
-> +SRC_URI[sha256sum] =3D "1930ce19f6ccfe10400f3497b31867f71690d2bcd3f5b575=
-199fa915559b7746"
-> =20
-> -# ypbind-mt now provides all the functionality of ypbind
-> -# and is used in place of it.
-> -PROVIDES +=3D "ypbind"
-> +inherit systemd update-rc.d
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "ypbind.service"
-> +INITSCRIPT_NAME =3D "ypbind"
-> +INITSCRIPT_PARAMS =3D "start 44 3 5 . stop 70 0 1 2 6 ."
-> =20
->  CACHED_CONFIGUREVARS =3D "ac_cv_prog_STRIP=3D/bin/true"
-> =20
-> @@ -37,16 +43,11 @@ do_install_append () {
-> =20
->      install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.=
-d/ypbind
-> =20
-> -    # TODO, use update-rc.d
-> -    ln -s ../init.d/ypbind ${D}${sysconfdir}/rcS.d/S44ypbind
-> -
->      install -d ${D}${systemd_unitdir}/system
->      install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/sys=
-tem
->  }
-> =20
-> -inherit systemd
-> =20
->  RPROVIDES_${PN} +=3D "${PN}-systemd"
->  RREPLACES_${PN} +=3D "${PN}-systemd"
->  RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> -SYSTEMD_SERVICE_${PN} =3D "ypbind.service"
->=20
-> --=20
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---BHMq0+oGliEfCAkH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlUNj4oACgkQN1Ujt2V2gBzI0gCggwPmYdMgA+ifWic1WQVfrGmH
-zIAAn1kVkmrG1J/MVrNSjDOz7G8Wbu5e
-=8Y+P
------END PGP SIGNATURE-----
-
---BHMq0+oGliEfCAkH--
