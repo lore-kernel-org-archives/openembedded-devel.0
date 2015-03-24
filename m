@@ -1,37 +1,34 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
 	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C7E46AC33
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2015 03:02:06 +0000 (UTC)
-Received: by iedfl3 with SMTP id fl3so58428746ied.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Mar 2015 20:02:07 -0700 (PDT)
+	by mail.openembedded.org (Postfix) with ESMTP id 5197D60034;
+	Tue, 24 Mar 2015 05:10:42 +0000 (UTC)
+Received: by ieclw3 with SMTP id lw3so52502290iec.2;
+	Mon, 23 Mar 2015 22:10:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:cc:content-type;
-	bh=xdZkc4q/iJvTT/3ZGIxlfhBELT7Aob/VALvt8Nihnd4=;
-	b=ab5Hdl5zyEayyYkgjMxQTonFI5/35B8z9louLEk9O4jBLiQmQA+EYGQm4GiJcEX+5Z
-	U+0c+Pou4EWHdwXL6mZng966RgTTEN5FR21c3LAxEvAUbaw4fKBCwNvEAsvcvmbwYXQr
-	3Md3OWlyQhjfujhPiqEv98rbeES6VEczzGnRtXXeDoXAjm4pw+YbdenW7SdwIMnZa041
-	6gHv9j6ZkWkF5qn0XsJvEUsKsS6kkf4z7q4zlVswpcopxD/7AFEeQQQDvbD6bSnoKRjz
-	pCIP4f3h6cs8+GsGsidge0UovKuKF1ojySy72MsFSkBp6gA7ixm8VKMkv6JIfeEStNn5
-	f7WQ==
-X-Received: by 10.107.129.88 with SMTP id c85mr3013857iod.81.1427166127585;
-	Mon, 23 Mar 2015 20:02:07 -0700 (PDT)
+	bh=bltvKWjBRoKK6vv0Z5+Kdm0qL89OV/LG+QL7urVvAFM=;
+	b=nJtNjpUOm2uzi2S+L8k5SxWg0h4kyxzCCWU43+LSQ2xG+1loAvd6FzDE+iAAw8/n34
+	+tKPa0m3bf9hLolPt4Xwe5Ui4nbtqVbCbHnHNMlhLwaP9hf3stBoQ5nFMFZJr+mLO3cM
+	oAXKxBCU8Phvtn+8vx702Jymozha6IO1DUbkoamlTfMirBb6pYoj1zBy5qo28IbpjvLs
+	X0LC2UsfjlVy3dUtLItPSpeJN3t0DKpE34Qbr8zL2+HTICA1Ma71BI0vY2qyp5cuT9FR
+	rfRasMXZfYqv4OLdn0qT21Ma6aGV8EcRhpbK1VNAQUVrd5xeCz5yU4t8myz6FTGwnEee
+	qKyA==
+X-Received: by 10.42.76.6 with SMTP id c6mr23417398ick.52.1427173844130; Mon,
+	23 Mar 2015 22:10:44 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.50.117.7 with HTTP; Mon, 23 Mar 2015 20:01:37 -0700 (PDT)
-In-Reply-To: <CAP9ODKp=x2GpWVZLB1kf2CjZpMCuBfGZxYuOAQRUsx-D+uRiVw@mail.gmail.com>
-References: <1427045315-13142-1-git-send-email-raj.khem@gmail.com>
-	<CAP9ODKp=x2GpWVZLB1kf2CjZpMCuBfGZxYuOAQRUsx-D+uRiVw@mail.gmail.com>
+Received: by 10.50.117.7 with HTTP; Mon, 23 Mar 2015 22:10:13 -0700 (PDT)
+In-Reply-To: <1427126757-16368-1-git-send-email-ashcharles@gmail.com>
+References: <20150321153245.GK4738@jama>
+	<1427126757-16368-1-git-send-email-ashcharles@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 23 Mar 2015 20:01:37 -0700
-Message-ID: <CAMKF1sqm5ARrWih-TgnzFXgEGXR97o=iUU_xR-fvp_bLC=SyEQ@mail.gmail.com>
+Date: Mon, 23 Mar 2015 22:10:13 -0700
+Message-ID: <CAMKF1spUz8OsY5b50tCXE==Na=iPicbg-zUZt-NH91gjn6XbdQ@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: pnandyala <Pavan.Nandyala@lnttechservices.com>,
-	Zoltan Kuscsik <zoltan.kuscsik@linaro.org>,
-	knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
-Subject: Re: meta-browser][PATCH V2] cef3: Add recipe for Chromium Embedded Framework
+Cc: "openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
+Subject: Re: [PATCH] mpd: Add build dependency on samba
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,16 +42,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2015 03:02:07 -0000
+X-List-Received-Date: Tue, 24 Mar 2015 05:10:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Mar 23, 2015 at 1:00 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
->
-> Couldn't it reuse the Chromium recipe we use?
+On Mon, Mar 23, 2015 at 9:05 AM, Ash Charles <ashcharles@gmail.com> wrote:
+> -DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug boost icu dbus expat zlib"
+> +DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug boost icu dbus expat zlib samba"
 
-Surely and I have thought that for as second iteration after its soaked in
-Right now they use different versions of chromium so there are some
-issues around.
-this will also mean some changes in chromium recipes.
+where is this dependency coming from ? some explanation to this would
+be nice. Can this be avoided ?
 
