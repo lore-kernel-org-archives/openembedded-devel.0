@@ -1,29 +1,37 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D03D73BFC;
-	Tue, 24 Mar 2015 11:13:00 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t2OBCxi9019857; Tue, 24 Mar 2015 11:12:59 GMT
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id OI9efSCwLIIb; Tue, 24 Mar 2015 11:12:59 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t2OBCiif019850
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Tue, 24 Mar 2015 11:12:55 GMT
-Message-ID: <1427195564.14020.31.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Date: Tue, 24 Mar 2015 11:12:44 +0000
-In-Reply-To: <551143C5.90207@dresearch-fe.de>
-References: <551143C5.90207@dresearch-fe.de>
-X-Mailer: Evolution 3.12.10-0ubuntu1~14.10.1 
-Mime-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] fetch race problem
+Return-Path: <rapphil@gmail.com>
+Received: from mail-qg0-f41.google.com (mail-qg0-f41.google.com
+	[209.85.192.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 4126A6AC43;
+	Tue, 24 Mar 2015 11:54:57 +0000 (UTC)
+Received: by qgez102 with SMTP id z102so102400569qge.3;
+	Tue, 24 Mar 2015 04:54:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=uX7NQFSsptlulaLKxHTHz4btCbb2P8mmtu48a7q1Qew=;
+	b=wdwiNYI9m94K4WSnv4dULhrtuWDTK7W154K/D+5L4koQLdMT12M9c0GEXllCaTaTbh
+	jfBxDQwLIipg5z/vp8GqewP3/94QRZ+ZLoG9V/nbsqf4D4We5vdlyVH+BbeFpMRl7RVk
+	IJefP7lijsJcjnb6dF7fXtCRrtshK2+26gisXK0fYNyigEBp3VO+BejOz6Kn0Q062wVS
+	7N6lxN6kkYc3shFxXecPcBatJ+BHJayKqg9TXGDZkXmqQRG33Yl+qEwqe4lAnL5CLX9a
+	dczQK3POPyg3l3iNfUkj0R7pBBwbgj2lEJBz+YRYIOjmdEdogdi5JR9njXfiHH3jj5LC
+	LDfg==
+MIME-Version: 1.0
+X-Received: by 10.229.214.199 with SMTP id hb7mr5272231qcb.12.1427198098733;
+	Tue, 24 Mar 2015 04:54:58 -0700 (PDT)
+Received: by 10.140.142.200 with HTTP; Tue, 24 Mar 2015 04:54:58 -0700 (PDT)
+In-Reply-To: <20150324010258.GG3904@jama>
+References: <20150303074258.E353A50433@opal.openembedded.org>
+	<20150321153142.GJ4738@jama>
+	<CAENGNheZZ67eAKA1O58kj7ztXG3Sv8tBagvOnLQJDx77=S1ouw@mail.gmail.com>
+	<20150324010258.GG3904@jama>
+Date: Tue, 24 Mar 2015 08:54:58 -0300
+Message-ID: <CAENGNhfZJxWeQcsugydhrrALrzM0L6XT0u7gEjXFQOfy2HYT+w@mail.gmail.com>
+From: Raphael Philipe <rapphil@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-commits@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org,
+	Raphael Silva <raphael.philipe@ossystems.com.br>
+Subject: Re: [oe-commits] Raphael Silva : fio: fix do_compile error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,49 +45,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2015 11:13:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Mar 2015 11:55:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, 2015-03-24 at 12:00 +0100, Steffen Sledz wrote:
-> We hit the following problem in oe-classic. And we're not sure if this problem may occur in current oe too, or if it is fixed there.
-> 
-> They are two or more recipes (may be in different layers) for packages with sources from the same (git) repository. If the fetching from the repo needs some time we see "file changed as we read it" errors in all likelihood.
-> 
-> ------------------> snip <-------------------
-> ERROR: Error evaluating '${PF}:${P}:${PN}:${BP}:${BPN}:files:.'
-> Traceback (most recent call last):
->   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 116, in expandWithRefs
->     s = __expand_var_regexp__.sub(varparse.var_sub, s)
->   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 60, in var_sub
->     var = self.d.getVar(key, 1)
->   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 260, in getVar
->     return self.expand(value, var)
->   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 132, in expand
->     return self.expandWithRefs(s, varname).value
->   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 116, in expandWithRefs
->     s = __expand_var_regexp__.sub(varparse.var_sub, s)
-> FetchError: Fetch command export HOME="/var/lib/jenkins"; export PATH="/CACHE/jenkins-workspace/foo/OE//bin:/CACHE/jenkins-workspace/foo/openembedded/bin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/usr/armv5te/bin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/usr/sbin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/usr/bin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/sbin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux//bin:/CACHE/jenkins-workspace/foo/OE/bin-HYP-6339:/CACHE/jenkins-workspace/foo/bitbake/bin:/sbin:/usr/sbin:/bin:/usr/bin"; tar -czf /var/lib/jenkins/sources/git_bitbucket.org.dresearchfe.drconfig.git.tar.gz ./.git/* failed with signal 1, output:
-> /bin/tar: ./.git/objects/pack/tmp_pack_BwThcc: File removed before we read it
-> /bin/tar: ./.git/objects/pack/tmp_pack_Ans7xK: File removed before we read it
-> /bin/tar: ./.git/objects/pack: file changed as we read it
-> ------------------> snap <-------------------
-> 
-> Is this a problem in oe-core too (or oe-classic only)?
-> 
-> Any ideas how to avoid such errors?
+Now I can see it!
 
-In theory bitbake has locks on files in DL_DIR, even for git
-repositories so it should only touch the repo with one fetch process at
-a time even if multiple recipes reference the same thing.
+Thank you. I will provide a patch for this soon.
 
-There were some big fetcher reworks in more recent versions of bitbake.
-For OE-Classic, I'm guessing you're using an older version. You could
-try transplanting the modern fetcher core onto your older bitbake I
-guess.
+Regards,
 
-Cheers,
-
-Richard
-
+On Mon, Mar 23, 2015 at 10:02 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Mon, Mar 23, 2015 at 09:56:29PM -0300, Raphael Philipe wrote:
+>> Hi Martin,
+>>
+>> I'm sorry, but I wasn't able to reproduce this problem. Could you
+>> please give more details on how you setup your build?
+>
+> Have you tried to build numactl before rebuilding fio?
+> meta-oe/recipes-support/numactl/numactl_2.0.9.bb
+>
+> bitbake numactl
+> bitbake -c cleansstate fio
+> bitbake fio
+>
+> should show the error
+>
+>>
+>> Regards,
+>>
+>> On Sat, Mar 21, 2015 at 12:31 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> > On Tue, Mar 03, 2015 at 07:42:58AM +0000, git@git.openembedded.org wrote:
+>> >> Module: meta-openembedded.git
+>> >> Branch: master
+>> >> Commit: 9b35e07cabaf3ed9bd681423a758b9c0dc3945af
+>> >> URL:    http://git.openembedded.org/?p=meta-openembedded.git&a=commit;h=9b35e07cabaf3ed9bd681423a758b9c0dc3945af
+>> >>
+>> >> Author: Raphael Silva <rapphil@gmail.com>
+>> >> Date:   Sat Feb 28 20:15:16 2015 -0300
+>> >>
+>> >> fio: fix do_compile error
+>> >>
+>> >> * Update to v2.2.6
+>> >
+>> > Please fix these issues:
+>> > fio-2.2.6: fio rdepends on numactl, but it isn't a build dependency? [build-deps]
+>> > fio-2.2.6: fio rdepends on zlib, but it isn't a build dependency? [build-deps]
+>> >>
+>> >> Signed-off-by: Raphael Silva <raphael.philipe@ossystems.com.br>
+>> >> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> >>
+>> >> ---
+>> >>
+>> >>  ...eric-assembly-nop-and-barrier-code-for-ar.patch | 30 ----------------------
+>> >>  .../fio/{fio_2.0.5.bb => fio_2.2.6.bb}             | 11 ++++----
+>> >>  2 files changed, 5 insertions(+), 36 deletions(-)
+>> >>
+>> >> diff --git a/meta-oe/recipes-benchmark/fio/fio/0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch b/meta-oe/recipes-benchmark/fio/fio/0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch
+>> >> deleted file mode 100644
+>> >> index db97244..0000000
+>> >> --- a/meta-oe/recipes-benchmark/fio/fio/0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch
+>> >> +++ /dev/null
+>> >> @@ -1,30 +0,0 @@
+>> >> -From 152b969cd4ff5b4b7e1c65eca1f9ab243b8a30c8 Mon Sep 17 00:00:00 2001
+>> >> -From: Otavio Salvador <otavio@ossystems.com.br>
+>> >> -Date: Sun, 14 Apr 2013 13:53:35 -0300
+>> >> -Subject: [PATCH] ARM: Use generic assembly nop and barrier code for armv6
+>> >> -
+>> >> -Upstream-Status: Submitted
+>> >> -
+>> >> -Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>> >> ----
+>> >> - arch/arch-arm.h |    4 +++-
+>> >> - 1 files changed, 3 insertions(+), 1 deletions(-)
+>> >> -
+>> >> -diff --git a/arch/arch-arm.h b/arch/arch-arm.h
+>> >> -index 658b688..7cd9502 100644
+>> >> ---- a/arch/arch-arm.h
+>> >> -+++ b/arch/arch-arm.h
+>> >> -@@ -18,7 +18,9 @@
+>> >> - #define __NR_sys_vmsplice   343
+>> >> - #endif
+>> >> -
+>> >> --#if defined (__ARM_ARCH_4__) || defined (__ARM_ARCH_4T__) || defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__)
+>> >> -+#if defined (__ARM_ARCH_4__) || defined (__ARM_ARCH_4T__) \
+>> >> -+    || defined (__ARM_ARCH_5__) || defined (__ARM_ARCH_5T__) || defined (__ARM_ARCH_5TE__) || defined (__ARM_ARCH_5TEJ__) \
+>> >> -+    || defined(__ARM_ARCH_6__)  || defined(__ARM_ARCH_6J__) || defined(__ARM_ARCH_6Z__) || defined(__ARM_ARCH_6ZK__)
+>> >> - #define nop             __asm__ __volatile__("mov\tr0,r0\t@ nop\n\t")
+>> >> - #define read_barrier()      __asm__ __volatile__ ("" : : : "memory")
+>> >> - #define write_barrier()     __asm__ __volatile__ ("" : : : "memory")
+>> >> ---
+>> >> -1.7.2.5
+>> >> -
+>> >> diff --git a/meta-oe/recipes-benchmark/fio/fio_2.0.5.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+>> >> similarity index 72%
+>> >> rename from meta-oe/recipes-benchmark/fio/fio_2.0.5.bb
+>> >> rename to meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+>> >> index 8dcf637..016b1f2 100644
+>> >> --- a/meta-oe/recipes-benchmark/fio/fio_2.0.5.bb
+>> >> +++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+>> >> @@ -12,17 +12,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+>> >>
+>> >>  DEPENDS = "libaio"
+>> >>
+>> >> -# rev for v2.0.5
+>> >> -SRCREV = "02efadeb8b05144bcf2fc7796e1da2e7db211d00"
+>> >> -SRC_URI = "git://git.kernel.dk/fio.git \
+>> >> -           file://0001-ARM-Use-generic-assembly-nop-and-barrier-code-for-ar.patch"
+>> >> +# rev for v2.2.6
+>> >> +SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
+>> >> +SRC_URI = "git://git.kernel.dk/fio.git"
+>> >>
+>> >>  S = "${WORKDIR}/git"
+>> >>
+>> >> -EXTRA_OEMAKE = "CC='${CC}' CFLAGS='${CFLAGS}' LDFLAGS='${LDFLAGS}'"
+>> >> +EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
+>> >>
+>> >>  do_install() {
+>> >> -    oe_runmake install DESTDIR=${D} bindir=${bindir} mandir=${mandir}
+>> >> +    oe_runmake install DESTDIR=${D} prefix=${prefix} mandir=${mandir}
+>> >>      install -d ${D}/${docdir}/${PN}
+>> >>      cp -a ${S}/examples ${D}/${docdir}/${PN}/
+>> >>  }
+>> >>
+>> >> --
+>> >> _______________________________________________
+>> >> Openembedded-commits mailing list
+>> >> Openembedded-commits@lists.openembedded.org
+>> >> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+>> >
+>> > --
+>> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
