@@ -1,39 +1,36 @@
-Return-Path: <krzysztof.m.sywula@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 589FF60034
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Mar 2015 20:54:05 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga101.jf.intel.com with ESMTP; 24 Mar 2015 13:54:06 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,460,1422950400"; d="scan'208";a="685032264"
-Received: from orsmsx107.amr.corp.intel.com ([10.22.240.5])
-	by fmsmga001.fm.intel.com with ESMTP; 24 Mar 2015 13:54:06 -0700
-Received: from orsmsx112.amr.corp.intel.com (10.22.240.13) by
-	ORSMSX107.amr.corp.intel.com (10.22.240.5) with Microsoft SMTP Server
-	(TLS) id 14.3.195.1; Tue, 24 Mar 2015 13:54:06 -0700
-Received: from fmsmsx119.amr.corp.intel.com (10.18.124.207) by
-	ORSMSX112.amr.corp.intel.com (10.22.240.13) with Microsoft SMTP Server
-	(TLS) id 14.3.195.1; Tue, 24 Mar 2015 13:54:05 -0700
-Received: from fmsmsx116.amr.corp.intel.com ([169.254.2.172]) by
-	FMSMSX119.amr.corp.intel.com ([10.18.124.207]) with mapi id
-	14.03.0195.001; Tue, 24 Mar 2015 13:54:05 -0700
-From: "Sywula, Krzysztof M" <krzysztof.m.sywula@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][dylan][PATCH] opencv: Update SRC_URI to use git
-Thread-Index: AQHQWr7Sxjsn+Db/x0KJlRKyMSYTq50sHN2g
-Date: Tue, 24 Mar 2015 20:54:05 +0000
-Message-ID: <6741EAAB26B57F4995668065CB62D86B490E37D7@fmsmsx116.amr.corp.intel.com>
-References: <1425942761-8314-1-git-send-email-krzysztof.m.sywula@intel.com>
-In-Reply-To: <1425942761-8314-1-git-send-email-krzysztof.m.sywula@intel.com>
-Accept-Language: en-GB, pl-PL, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.200.108]
-MIME-Version: 1.0
-Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][dylan][PATCH] opencv: Update SRC_URI to use git
+Return-Path: <ashcharles@gmail.com>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 42BFC60034;
+	Tue, 24 Mar 2015 23:48:49 +0000 (UTC)
+Received: by pacwe9 with SMTP id we9so8967733pac.1;
+	Tue, 24 Mar 2015 16:48:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=03qoGP3FhXbvngYaMdp/Z2ulTL1d23Q5cyTQcfW8lN8=;
+	b=YKtsGAKjjheum0qBZsOymwsBUyGnKk+HUmC8aTzz+78SRUsQCrwNyA622ylaVgk6nD
+	I9v2VUTbGZlaxKVsEDvAfqdCofKQk/AiUnvC7L0mAUqTDdPiib4QUL/UugXJKx2M4evo
+	KRGT+LuWt8blZbwPtQ556lFNRDLicQIfuVDVJUAbJYCCthQdL10nojW95CWBwRjBGWXE
+	USntl2AobPzqaxqjra3GD0Ibp3g5JeIZSFgeWAedSbS4/53s2uVQjrEBtdN3/2BQRl1N
+	+oX00T9CRhrnwMB04QdZ2Mu+imyYfJ9H4slOMS6Ew71IPJqYGP5dyZ+vtt8dby80F4GF
+	099A==
+X-Received: by 10.68.212.227 with SMTP id nn3mr11498975pbc.59.1427240930793;
+	Tue, 24 Mar 2015 16:48:50 -0700 (PDT)
+Received: from gumstux.mystix.com (s206-116-3-180.bc.hsia.telus.net.
+	[206.116.3.180])
+	by mx.google.com with ESMTPSA id bv5sm226992pbb.61.2015.03.24.16.48.49
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 24 Mar 2015 16:48:50 -0700 (PDT)
+From: Ash Charles <ashcharles@gmail.com>
+To: martin.jansa@gmail.com, openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Date: Tue, 24 Mar 2015 16:48:43 -0700
+Message-Id: <1427240923-7428-1-git-send-email-ashcharles@gmail.com>
+X-Mailer: git-send-email 2.1.0
+In-Reply-To: <CAMKF1spUz8OsY5b50tCXE==Na=iPicbg-zUZt-NH91gjn6XbdQ@mail.gmail.com>
+References: <CAMKF1spUz8OsY5b50tCXE==Na=iPicbg-zUZt-NH91gjn6XbdQ@mail.gmail.com>
+Cc: openembedded-commits@lists.openembedded.org
+Subject: [PATCH v2] mpd: Add build dependency on samba
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,104 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2015 20:54:06 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 Mar 2015 23:48:50 -0000
 
-Hi guys, will this patch be applied? OpenCV download URI is broken on Dylan=
- otherwise.
+Version 0.19 [1], adds the smbclient plugins for storage and input so
+needs samba when building with the --enable-samba option.
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Krzysztof Sywula
-Sent: Monday, March 09, 2015 4:13 PM
-To: openembedded-devel@lists.openembedded.org
-Cc: koen@dominion.thruhere.net
-Subject: [oe] [meta-oe][dylan][PATCH] opencv: Update SRC_URI to use git
+[1] http://git.musicpd.org/cgit/master/mpd.git/plain/NEWS?h=v0.19
 
-From: Khem Raj <raj.khem@gmail.com>
-
-opencv now has moved to using git. Lets use the git version to fetch SRCs
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Ash Charles <ashcharles@gmail.com>
 ---
- .../{opencv-samples_2.4.3.bb =3D> opencv-samples_2.4.bb}     |   12 +++++-=
-------
- .../opencv/{opencv_2.4.3.bb =3D> opencv_2.4.bb}              |   10 ++++--=
-----
- 2 files changed, 9 insertions(+), 13 deletions(-)  rename meta-oe/recipes-=
-support/opencv/{opencv-samples_2.4.3.bb =3D> opencv-samples_2.4.bb} (82%)  =
-rename meta-oe/recipes-support/opencv/{opencv_2.4.3.bb =3D> opencv_2.4.bb} =
-(91%)
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb b/meta-=
-oe/recipes-support/opencv/opencv-samples_2.4.bb
-similarity index 82%
-rename from meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
-rename to meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
-index 50efd77..e00a5e6 100644
---- a/meta-oe/recipes-support/opencv/opencv-samples_2.4.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv-samples_2.4.bb
-@@ -7,14 +7,12 @@ DEPENDS =3D "opencv"
-=20
- LIC_FILES_CHKSUM =3D "file://include/opencv2/opencv.hpp;endline=3D41;md5=
-=3D6d690d8488a6fca7a2c192932466bb14 \  "
-+SRCREV =3D "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
-+SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4 \
-+          "
-+PV =3D "2.4.3+git${SRCPV}"
-=20
--SRC_URI =3D "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-=
-${PV}.tar.bz2 \ -"
--
--SRC_URI[md5sum] =3D "c0a5af4ff9d0d540684c0bf00ef35dbe"
--SRC_URI[sha256sum] =3D "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b0352=
-33f58146f6f59b"
--
--S =3D "${WORKDIR}/OpenCV-${PV}"
-+S =3D "${WORKDIR}/git"
-=20
- do_install() {
-     cd samples/c
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb b/meta-oe/recip=
-es-support/opencv/opencv_2.4.bb
-similarity index 91%
-rename from meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-rename to meta-oe/recipes-support/opencv/opencv_2.4.bb
-index 39b608a..3ca32f9 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -9,16 +9,14 @@ ARM_INSTRUCTION_SET =3D "arm"
-=20
- DEPENDS =3D "python-numpy v4l-utils libav gtk+ libtool swig swig-native py=
-thon jpeg bzip2 zlib libpng tiff glib-2.0"
-=20
--SRC_URI =3D "${SOURCEFORGE_MIRROR}/opencvlibrary/opencv-unix/${PV}/OpenCV-=
-${PV}.tar.bz2 \
-+SRCREV =3D "6fae07ba8867b8fd2c53344a774aab669afa7c5e"
-+SRC_URI =3D "git://github.com/Itseez/opencv.git;branch=3D2.4 \
-            file://opencv-fix-pkgconfig-generation.patch \  "
-=20
--SRC_URI[md5sum] =3D "c0a5af4ff9d0d540684c0bf00ef35dbe"
--SRC_URI[sha256sum] =3D "f8fbe985978d4eae73e8c3b526ed40a37d4761d2029a5b0352=
-33f58146f6f59b"
-+PV =3D "2.4.3+git${SRCPV}"
-=20
--PR =3D "r2"
--
--S =3D "${WORKDIR}/OpenCV-${PV}"
-+S =3D "${WORKDIR}/git"
-=20
- # Do an out-of-tree build
- OECMAKE_SOURCEPATH =3D "${S}"
---
-1.7.10.4
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+index feec985..f6152a6 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+@@ -20,6 +20,7 @@ EXTRA_OECONF += "${@base_contains('DISTRO_FEATURES', 'systemd', '--with-systemds
+ PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+ PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
+ PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
++PACKAGECONFIG[smb] = "--enable-smbclient,--disable-smbclient,samba,samba"
+ 
+ do_install_append() {
+     install -d ${D}/${localstatedir}/lib/mpd/music
+-- 
+2.1.0
 
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
