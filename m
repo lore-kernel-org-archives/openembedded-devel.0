@@ -1,36 +1,39 @@
-Return-Path: <ashcharles@gmail.com>
-Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id C6745734E3;
-	Tue, 24 Mar 2015 23:48:46 +0000 (UTC)
-Received: by iedm5 with SMTP id m5so10400850ied.3;
-	Tue, 24 Mar 2015 16:48:47 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 03AD572458;
+	Wed, 25 Mar 2015 00:11:03 +0000 (UTC)
+Received: by wgbcc7 with SMTP id cc7so8588516wgb.0;
+	Tue, 24 Mar 2015 17:11:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=POn9PCNGxwjDjkwSs3EOxtfxSChKQUK/6pA+6OxyM30=;
-	b=a8kZMK71BuiKtjX2NAPgEITx9wzJzYZ3k5Ouin/pgQSVlbglOzagl7nRSgiFQ7RMVM
-	Brnno7gBpkz27zrczSxgwiZ/NL3G9zpMo+TdduevMOPK3mUCa16HB2oJqAmahjqdeIye
-	jRZe9AkLbvxRimJbunvaCgVOC3o4/r3EFcottniASJd3n1Q460k/sVsQhQOkY/g/+Igw
-	E3iDsXqjznEcbYYgWEp4dL8foAZ7KaiqQ97YQINEPytc9WzYzvVVTHXxvZMyWuugAdd7
-	dl2gFUP54xeNZFSM3ADGPk2CUWwC1ymk0n8H0ebgw8QnbqwLx4AFS86VAbjTSyZ28IL4
-	QWZw==
-X-Received: by 10.50.122.68 with SMTP id lq4mr25761420igb.10.1427240927404;
-	Tue, 24 Mar 2015 16:48:47 -0700 (PDT)
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=CzONmbNiXzbKt152067q+ZsJ0r730EXZIrVlzTRGGwU=;
+	b=KPLQpxwB/wciqdBVhrmut3T53H6gofjucigv4IFV7+kRpNXF8NSFwm9qbLdWIRtUXh
+	g3czfy1zCEe7QZbw4NOMQ5054PaYJni+4SfPd28FF/tb1Ub+wixFTSkZV1AsGkShsO4x
+	gLonWclGBEND6xxIzIIprWYwM/evHnlS93vgiR0xGDOvtGARo+r1lyQ9kS3faxPykxDC
+	oEXQ6CGtFTT5U5rUwTE5k9+SQaTgkY8oXdMzNzSw+2NSG5FuYgHDsTNmzTeyninFJn8d
+	ZByBNASAYVDhYFzo7S9IRMQ7tOxr1/1ZL7w+PpDnxg0vMXhZPw6U32sex4xUQd7NEHas
+	yU+Q==
+X-Received: by 10.194.201.2 with SMTP id jw2mr12410483wjc.158.1427242264250;
+	Tue, 24 Mar 2015 17:11:04 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id
+	eo1sm1696980wib.16.2015.03.24.17.11.03
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 24 Mar 2015 17:11:03 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 25 Mar 2015 01:11:17 +0100
+To: Ash Charles <ashcharles@gmail.com>
+Message-ID: <20150325001117.GI3904@jama>
+References: <CAMKF1spUz8OsY5b50tCXE==Na=iPicbg-zUZt-NH91gjn6XbdQ@mail.gmail.com>
+	<1427240923-7428-1-git-send-email-ashcharles@gmail.com>
 MIME-Version: 1.0
-Received: by 10.107.138.7 with HTTP; Tue, 24 Mar 2015 16:48:17 -0700 (PDT)
-In-Reply-To: <CAMKF1spUz8OsY5b50tCXE==Na=iPicbg-zUZt-NH91gjn6XbdQ@mail.gmail.com>
-References: <20150321153245.GK4738@jama>
-	<1427126757-16368-1-git-send-email-ashcharles@gmail.com>
-	<CAMKF1spUz8OsY5b50tCXE==Na=iPicbg-zUZt-NH91gjn6XbdQ@mail.gmail.com>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Tue, 24 Mar 2015 16:48:17 -0700
-Message-ID: <CAK8F28muE7bFAoBY0FW+0hvz-ctTDLC37RRtpd0KcJGAS4LKaQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Khem Raj <raj.khem@gmail.com>
-Cc: "openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Subject: Re: [PATCH] mpd: Add build dependency on samba
+In-Reply-To: <1427240923-7428-1-git-send-email-ashcharles@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-commits@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH v2] mpd: Add build dependency on samba
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +47,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Mar 2015 23:48:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Mar 2015 00:11:05 -0000
+X-Groupsio-MsgNum: 54870
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="smOfPzt+Qjm5bNGJ"
+Content-Disposition: inline
 
-Hi Khem,
+--smOfPzt+Qjm5bNGJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Sorry--my commit message was rather unhelpful!  I'll confess I was
-just trying to resolve a build warning as I don't have detailed
-knowledge of the package.  Digging a little deeper, version 0.19
-introduces smbclient which looks to be the source of the dependency of
-samba.
+On Tue, Mar 24, 2015 at 04:48:43PM -0700, Ash Charles wrote:
+> Version 0.19 [1], adds the smbclient plugins for storage and input so
+> needs samba when building with the --enable-samba option.
+>=20
+> [1] http://git.musicpd.org/cgit/master/mpd.git/plain/NEWS?h=3Dv0.19
+>=20
+> Signed-off-by: Ash Charles <ashcharles@gmail.com>
+> ---
+>  meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb b/m=
+eta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+> index feec985..f6152a6 100644
+> --- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.1.bb
+> @@ -20,6 +20,7 @@ EXTRA_OECONF +=3D "${@base_contains('DISTRO_FEATURES', =
+'systemd', '--with-systemds
+>  PACKAGECONFIG[mad] =3D "--enable-mad,--disable-mad,libmad"
+>  PACKAGECONFIG[id3tag] =3D "--enable-id3,--disable-id3,libid3tag"
+>  PACKAGECONFIG[lame] =3D "--enable-lame-encoder,--disable-lame-encoder,la=
+me"
+> +PACKAGECONFIG[smb] =3D "--enable-smbclient,--disable-smbclient,samba,sam=
+ba"
 
-Sending a v2 with an updated commit message and packageconfig.  Please
-let me know if you see any issues.
+You don't need to repeat samba in 4th parameter.
 
---Ash
+> =20
+>  do_install_append() {
+>      install -d ${D}/${localstatedir}/lib/mpd/music
+> --=20
+> 2.1.0
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-On Mon, Mar 23, 2015 at 10:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Mon, Mar 23, 2015 at 9:05 AM, Ash Charles <ashcharles@gmail.com> wrote:
->> -DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug boost icu dbus expat zlib"
->> +DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug boost icu dbus expat zlib samba"
->
-> where is this dependency coming from ? some explanation to this would
-> be nice. Can this be avoided ?
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+--smOfPzt+Qjm5bNGJ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlUR/SUACgkQN1Ujt2V2gBwNbgCgsebCm08UxhOVFTL1Am1VB1Xc
+FfIAn2mxSVWEGmAUwfHb2TVZRvFsrijA
+=oyK3
+-----END PGP SIGNATURE-----
+
+--smOfPzt+Qjm5bNGJ--
