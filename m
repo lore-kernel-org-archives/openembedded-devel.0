@@ -1,27 +1,16 @@
-Return-Path: <s.mueller-klieser@phytec.de>
-Received: from root.phytec.de (mail.phytec.eu [217.6.246.34])
-	by mail.openembedded.org (Postfix) with ESMTP id 0731D723B3
+Return-Path: <obi@opendreambox.org>
+Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 101386AC36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Mar 2015 11:00:07 +0000 (UTC)
-Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
-	by root.phytec.de (Postfix) with ESMTP id EF6C6A002DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Mar 2015 11:52:53 +0100 (CET)
-Received: from augenblix.phytec.de ([172.16.0.56])
-	by idefix.phytec.de (IBM Domino Release 9.0.1FP2 HF590)
-	with ESMTP id 2015032611515322-18438 ;
-	Thu, 26 Mar 2015 11:51:53 +0100 
-From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
+	Thu, 26 Mar 2015 18:43:33 +0000 (UTC)
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Mar 2015 11:48:50 +0100
-Message-Id: <1427366930-41626-1-git-send-email-s.mueller-klieser@phytec.de>
+Date: Thu, 26 Mar 2015 19:43:31 +0100
+Message-Id: <1427395411-16303-5-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP2
-	HF590|December 11, 2014) at 26.03.2015 11:51:53,
-	Serialize by Router on Idefix/Phytec(Release 9.0.1FP2 HF590|December 11,
-	2014) at 26.03.2015 11:51:53
-Subject: [meta-oe][dizzy][PATCH] can-utils_git.bb: fix SRC_URI
+In-Reply-To: <1427395411-16303-1-git-send-email-obi@opendreambox.org>
+References: <1427395411-16303-1-git-send-email-obi@opendreambox.org>
+Subject: [meta-python][PATCH 5/5] python-cffi: Foreign Function Interface for Python calling C code, version 0.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,35 +24,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2015 11:00:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Mar 2015 18:43:35 -0000
 
-gitorious.org is closing down the can-utils project moved to github.com
-
-Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-cffi_0.9.2.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb b/meta-o=
-e/recipes-extended/socketcan/can-utils=5Fgit.bb
-index d8de9df..931e332 100644
---- a/meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb
-@@ -5,7 +5,7 @@ LIC=5FFILES=5FCHKSUM =3D "file://include/linux/can.h;endlin=
-e=3D43;md5=3D390a2c9a3c5e3595a0
-=20
- DEPENDS =3D "libsocketcan"
-=20
--SRC=5FURI =3D "git://git.gitorious.org/linux-can/${BPN}.git;protocol=3Dgit=
-;branch=3Dmaster"
-+SRC=5FURI =3D "git://github.com/linux-can/${BPN}.git;protocol=3Dgit;branch=
-=3Dmaster"
- SRCREV =3D "67a2bdcd336e6becfa5784742e18c88dbeddc973"
-=20
- PV =3D "0.0+gitr${SRCPV}"
---=20
+diff --git a/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb b/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
+new file mode 100644
+index 0000000..6c34b67
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "Foreign Function Interface for Python calling C code"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
++DEPENDS = "libffi python-pycparser"
++
++SRC_URI[md5sum] = "b1bf4625ae07a8a932f2f1a2eb200c54"
++SRC_URI[sha256sum] = "1988ce7ff9c64ecd5077776175e90fd8f0a8c827cb241a23647175ce08126bb2"
++
++inherit pypi
+-- 
 1.9.1
 
 
