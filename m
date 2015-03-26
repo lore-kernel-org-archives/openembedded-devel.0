@@ -1,27 +1,30 @@
-Return-Path: <dl9pf@gmx.de>
-X-Greylist: delayed 304 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 26 Mar 2015 18:54:50 UTC
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 99E626013D
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 249056013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Mar 2015 18:54:50 +0000 (UTC)
-Received: from samweis.auenland.lan ([139.181.7.34]) by mail.gmx.com
-	(mrgmx101) with ESMTPSA (Nemesis) id 0MC8iq-1Yk2YK1jd2-008uOs;
-	Thu, 26 Mar 2015 19:49:44 +0100
-From: Jan-Simon =?ISO-8859-1?Q?M=F6ller?= <dl9pf@gmx.de>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 26 Mar 2015 19:48:52 +0100
-Message-ID: <3303347.WRWmiSbDbc@samweis.auenland.lan>
-User-Agent: KMail/4.14.6 (Linux/4.0.0-rc3-jsm1; KDE/4.14.6; x86_64; ; )
+	Thu, 26 Mar 2015 19:16:20 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 6EB7E3151C17;
+	Thu, 26 Mar 2015 20:16:21 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id T3fyHQaNWIV8; Thu, 26 Mar 2015 20:16:19 +0100 (CET)
+Received: from [172.22.22.61] (55d4454e.access.ecotel.net [85.212.69.78])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 762433151842;
+	Thu, 26 Mar 2015 20:16:19 +0100 (CET)
+Message-ID: <55145B03.7070107@opendreambox.org>
+Date: Thu, 26 Mar 2015 20:16:19 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-X-Provags-ID: V03:K0:ZTDE1YfgGelof/R3ulVu3HMOuHM1y4Pb9vIH/jpUEGx4c6WxDmR
-	OCjhqJwtPs0OyuRRV69GGJobllsmCxVs8LoDAzq5te3I1QRq93Xn6eBi83yXsOxoax1KxaL
-	AIqmKn78vxDVD7sX1egtg4uOYkB+6sqq+sDygixb7OfVyWqwFzkUf7OmwlEVL/xCoSZV7JC
-	T+Euwljqk2lfDyX1WhESA==
-X-UI-Out-Filterresults: notjunk:1;
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Bug in cooker - networked PR_SERV
+To: openembedded-devel@lists.openembedded.org
+Subject: pyOpenSSL in meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,100 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2015 18:54:52 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 26 Mar 2015 19:16:21 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Hi !
+Since version 0.14, pyOpenSSL has an unfulfilled runtime dependency on
+python-cryptographic (which in turn depends on python-cffi,
+python-enum34, python-pycparser) and python-six, and is therefore
+unusable in its current state.
 
-I found a bug in cooker that shows up when I try to enable the networke=
-d=20
-PRSERV. bitbake will crash (and still run at 100% after CTRL-C) until k=
-ill -9.
+I've just submitted recipes for all but python-cryptographic, because I
+couldn't get the latter to work.
 
-I tracked it down to bitbake/lib/bb/cooker.py line 169:
-        if self.state !=3D state.initial:
-            raise Exception("Illegal state for feature set change")
+Upstream bugs:
+https://github.com/pyca/pyopenssl/issues/157
+https://github.com/pyca/cryptography/issues/1325
 
-self.state seems to be 6 at this stage and state.initial is 0 .
+I guess it would be easier to switch back to 0.13 and fix the compile
+error that appeared with openssl 1.0.2, unless somebody else steps
+forward to write a working recipe for python-cryptographic.
 
-Hack: If I comment out this check, it seems to continue, but I see no s=
-ize-
-increase in the prserv sqlite and also nothing printed for loglevel=3DD=
-EBUG in=20
-the log.=20
+Btw, how about moving python-pyopenssl to meta-python? There's only one
+recipe depending on it, which should IMHO be moved as well (gateone).
 
-
-Here are the details:
-
-My setup is:
-Build Configuration:
-BB_VERSION        =3D "1.24.0"
-BUILD_SYS         =3D "x86_64-linux"
-NATIVELSBSTRING   =3D "openSUSE-project-13.2"
-TARGET_SYS        =3D "i586-poky-linux"
-MACHINE           =3D "qemux86"
-DISTRO            =3D "poky"
-DISTRO_VERSION    =3D "1.7.1"
-TUNE_FEATURES     =3D "m32 i586"
-TARGET_FPU        =3D ""
-meta             =20
-meta-yocto       =20
-meta-yocto-bsp    =3D "<unknown>:<unknown>"
-
-####### Only changes to conf/local.conf:
-PRSERV_HOST=3D"127.0.0.1:5555"
-(an a prserv started in a separate terminal)
-
-####### Crash=20
-
-x86> bitbake core-image-minimal
-Traceback (most recent call last):
-  File "/home/dl9pf/test1/script/4.1/poky-dizzy-12.0.1/bitbake/bin/bitb=
-ake",=20
-line 382, in <module>
-    ret =3D main()
-  File "/home/dl9pf/test1/script/4.1/poky-dizzy-12.0.1/bitbake/bin/bitb=
-ake",=20
-line 347, in main
-    server_connection =3D server.establishConnection(featureset)
-  File "/home/dl9pf/test1/script/4.1/poky-
-dizzy-12.0.1/bitbake/lib/bb/server/process.py", line 247, in=20
-establishConnection
-    raise BaseException(error)
-BaseException: Traceback (most recent call last):
-  File "/home/dl9pf/test1/script/4.1/poky-
-dizzy-12.0.1/bitbake/lib/bb/command.py", line 71, in runCommand
-    result =3D command_method(self, commandline)
-  File "/home/dl9pf/test1/script/4.1/poky-
-dizzy-12.0.1/bitbake/lib/bb/command.py", line 268, in setFeatures
-    command.cooker.setFeatures(features)
-  File "/home/dl9pf/test1/script/4.1/poky-
-dizzy-12.0.1/bitbake/lib/bb/cooker.py", line 169, in setFeatures
-    raise Exception("Illegal state for feature set change")
-Exception: Illegal state for feature set change
-
-ERROR: Unable to set the cooker to the correct featureset: Traceback (m=
-ost=20
-recent call last):
-  File "/home/dl9pf/test1/script/4.1/poky-
-dizzy-12.0.1/bitbake/lib/bb/command.py", line 71, in runCommand
-    result =3D command_method(self, commandline)
-  File "/home/dl9pf/test1/script/4.1/poky-
-dizzy-12.0.1/bitbake/lib/bb/command.py", line 268, in setFeatures
-    command.cooker.setFeatures(features)
-  File "/home/dl9pf/test1/script/4.1/poky-
-dizzy-12.0.1/bitbake/lib/bb/cooker.py", line 169, in setFeatures
-    raise Exception("Illegal state for feature set change")
-Exception: Illegal state for feature set change
-
-
-
-Best,
----=20
-
-Dipl.-Ing.
-Jan-Simon M=F6ller
-
-jansimon.moeller@gmx.de
+Regards,
+Andreas
 
