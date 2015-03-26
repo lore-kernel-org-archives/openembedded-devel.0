@@ -1,34 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id DB52872B1E
+Return-Path: <daniel.markus@leica-geosystems.com>
+Received: from outbound.sbg.se (outbound.sbg.se [83.241.165.85])
+	by mail.openembedded.org (Postfix) with ESMTP id E8AC76013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2015 21:53:01 +0000 (UTC)
-Received: by igcau2 with SMTP id au2so2564983igc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Mar 2015 14:53:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=bMsgo/STb/YJh65RpkyaqIIQX6W3H9Bzw/URny5E6pw=;
-	b=h7PVl3xcFGVu37o18jbYu7/G5yXvkRojq/rjdDURLOZpyF1fdppi1fhj06PuSuwXWd
-	shMG3HHigaGUAMSDEdrFHgXvZYgY1StIENrBiL0jmzYuf2qEx9QnPuJBMFaxM4BFunDM
-	8VJhCQHzqAEVCKK/SjMKDAqG1RJMezmylEiFmZtvUuGgL3jlJ8+S6727NiQx+1t4XR69
-	db8tmVpnPZsMxP7Er4QUINYsOgWUabVf5MAXIbYFod73/QdPtF9PgwuZ8UFEk4S7nSUY
-	bt0Bnwvs8HpM6gOdVC039FvpfapsyXh5H1lLIl7UNUOaNX740yUe2sjYH4ko5mqdGADa
-	cJDw==
-X-Received: by 10.42.199.193 with SMTP id et1mr33680898icb.75.1427320382644;
-	Wed, 25 Mar 2015 14:53:02 -0700 (PDT)
-Received: from nebula.sys.comcast.net (a-96-119-40-215.sys.comcast.net.
-	[96.119.40.215])
-	by mx.google.com with ESMTPSA id e3sm10943914igg.16.2015.03.25.14.53.01
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 25 Mar 2015 14:53:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 26 Mar 2015 08:21:15 +0000 (UTC)
+Received: from hermes.sbg.se (mail.sbg.se [83.241.165.77])
+	by outbound.sbg.se (Postfix) with ESMTP id 4B2D3184826;
+	Thu, 26 Mar 2015 09:21:15 +0100 (CET)
+Received: from localhost.localdomain (unknown [10.213.0.77])
+	by hermes.sbg.se (Postfix) with ESMTP id 7F37F1407B0;
+	Thu, 26 Mar 2015 09:20:38 +0100 (CET)
+From: Daniel Markus <daniel.markus@leica-geosystems.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Mar 2015 14:50:52 -0700
-Message-Id: <1427320252-6933-1-git-send-email-raj.khem@gmail.com>
+Date: Thu, 26 Mar 2015 09:20:06 +0100
+Message-Id: <1427358006-6443-1-git-send-email-daniel.markus@leica-geosystems.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] breakpad: Install missing headers
+X-SBG-MailScanner-ID: 7F37F1407B0.54B0E
+X-SBG-MailScanner: Found to be clean
+X-SBG-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
+	score=-102.9, required 5, autolearn=not spam, ALL_TRUSTED -1.00,
+	BAYES_00 -1.90, USER_IN_WHITELIST -100.00)
+X-SBG-MailScanner-From: daniel.markus@leica-geosystems.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] socorro-syms: Add support for local repositories
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,34 +35,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Mar 2015 21:53:03 -0000
+X-List-Received-Date: Thu, 26 Mar 2015 08:21:17 -0000
 
-We have compile failures due these headers missing from sysroot
-and other breakpad headers referring to them. So when some package
-wants to link with breakpad ends up in build errors.
+This socorro-syms functionality tries to extract the host name out of the source
+code repository origin. This causes problems when the origin is a local
+repository.
 
-Change-Id: I61161e33dfb1ea6383e421e7bd2cb96bb9b06688
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+The solution is to look for the origin in two steps. If the origin in the first
+step is a local directory we assume it is a temporary download repository. In
+the second step we look for the origin to that download repository and if that
+also redirects to a local repository, we provide the absolute path instead of a
+Socorro repository link.
+
+Signed-off-by: Daniel Markus <daniel.markus@leica-geosystems.com>
 ---
- meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/classes/socorro-syms.bbclass | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-index 00c3637..fcebccf 100644
---- a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-+++ b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-@@ -28,6 +28,11 @@ do_install_append() {
-         install -m 0644 ${S}/src/client/linux/handler/exception_handler.h ${D}${includedir}/breakpad/client/linux/handler/exception_handler.h
-         install -m 0644 ${S}/src/client/linux/handler/minidump_descriptor.h ${D}${includedir}/breakpad/client/linux/handler/minidump_descriptor.h
+diff --git a/meta-oe/classes/socorro-syms.bbclass b/meta-oe/classes/socorro-syms.bbclass
+index c272952..0312031 100644
+--- a/meta-oe/classes/socorro-syms.bbclass
++++ b/meta-oe/classes/socorro-syms.bbclass
+@@ -108,6 +108,12 @@ def run_command(command, directory):
+     return output.rstrip()
  
-+        install -d ${D}${includedir}/breakpad/client/linux/dump_writer_common
-+        install -m 0644 ${S}/src/client/linux/dump_writer_common/mapping_info.h ${D}${includedir}/breakpad/client/linux/dump_writer_common/mapping_info.h
-+        install -m 0644 ${S}/src/client/linux/dump_writer_common/thread_info.h ${D}${includedir}/breakpad/client/linux/dump_writer_common/thread_info.h
-+        install -m 0644 ${S}/src/client/linux/dump_writer_common/raw_context_cpu.h ${D}${includedir}/breakpad/client/linux/dump_writer_common/raw_context_cpu.h
+ 
++def is_local_url(url):
 +
-         install -d ${D}${includedir}/breakpad/client/linux/minidump_writer
-         install -m 0644 ${S}/src/client/linux/minidump_writer/linux_dumper.h ${D}${includedir}/breakpad/client/linux/minidump_writer/linux_dumper.h
-         install -m 0644 ${S}/src/client/linux/minidump_writer/minidump_writer.h ${D}${includedir}/breakpad/client/linux/minidump_writer/minidump_writer.h
++    return \
++        url.startswith("file:") or url.startswith("/") or url.startswith("./")
++
++
+ def git_repository_path(source_file_path):
+ 
+     import re
+@@ -125,12 +131,18 @@ def git_repository_path(source_file_path):
+ 
+     # The URL could be a local download directory. If so, get the URL again
+     # using the local directory's config file.
+-    if os.path.isdir(source_long_url):
++    if is_local_url(source_long_url):
+         git_config_file = os.path.join(source_long_url, "config")
+         source_long_url = run_command(
+             "git config --file %s --get remote.origin.url" % git_config_file,
+             source_file_dir)
+ 
++        # If also the download directory redirects to a local git directory,
++        # then we're probably using source code from a local debug branch which
++        # won't be accessible by Socorro.
++        if is_local_url(source_long_url):
++            return None
++
+     # The URL can have several formats. A full list can be found using
+     # git help clone. Extract the server part with a regex.
+     url_match = re.search(".*(://|@)([^:/]*).*", source_long_url)
 -- 
 1.9.1
 
