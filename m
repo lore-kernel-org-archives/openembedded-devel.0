@@ -1,27 +1,29 @@
-Return-Path: <daniel.markus@leica-geosystems.com>
-Received: from outbound.sbg.se (outbound.sbg.se [83.241.165.85])
-	by mail.openembedded.org (Postfix) with ESMTP id E8AC76013D
+Return-Path: <s.mueller-klieser@phytec.de>
+X-Greylist: delayed 494 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 26 Mar 2015 11:00:07 UTC
+Received: from root.phytec.de (mail.phycard.de [217.6.246.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 05CB56013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Mar 2015 08:21:15 +0000 (UTC)
-Received: from hermes.sbg.se (mail.sbg.se [83.241.165.77])
-	by outbound.sbg.se (Postfix) with ESMTP id 4B2D3184826;
-	Thu, 26 Mar 2015 09:21:15 +0100 (CET)
-Received: from localhost.localdomain (unknown [10.213.0.77])
-	by hermes.sbg.se (Postfix) with ESMTP id 7F37F1407B0;
-	Thu, 26 Mar 2015 09:20:38 +0100 (CET)
-From: Daniel Markus <daniel.markus@leica-geosystems.com>
+	Thu, 26 Mar 2015 11:00:07 +0000 (UTC)
+Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
+	by root.phytec.de (Postfix) with ESMTP id 72999A0043A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Mar 2015 11:55:39 +0100 (CET)
+Received: from augenblix.phytec.de ([172.16.0.56])
+	by idefix.phytec.de (IBM Domino Release 9.0.1FP2 HF590)
+	with ESMTP id 2015032611543861-18440 ;
+	Thu, 26 Mar 2015 11:54:38 +0100 
+From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Mar 2015 09:20:06 +0100
-Message-Id: <1427358006-6443-1-git-send-email-daniel.markus@leica-geosystems.com>
+Date: Thu, 26 Mar 2015 11:51:36 +0100
+Message-Id: <1427367096-41823-1-git-send-email-s.mueller-klieser@phytec.de>
 X-Mailer: git-send-email 1.9.1
-X-SBG-MailScanner-ID: 7F37F1407B0.54B0E
-X-SBG-MailScanner: Found to be clean
-X-SBG-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
-	score=-102.9, required 5, autolearn=not spam, ALL_TRUSTED -1.00,
-	BAYES_00 -1.90, USER_IN_WHITELIST -100.00)
-X-SBG-MailScanner-From: daniel.markus@leica-geosystems.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] socorro-syms: Add support for local repositories
+MIME-Version: 1.0
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP2
+	HF590|December 11, 2014) at 26.03.2015 11:54:38,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP2 HF590|December 11,
+	2014) at 26.03.2015 11:54:38
+Subject: [meta-oe][master][PATCH] can-utils_git.bb: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,61 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Mar 2015 08:21:17 -0000
+X-List-Received-Date: Thu, 26 Mar 2015 11:00:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-This socorro-syms functionality tries to extract the host name out of the source
-code repository origin. This causes problems when the origin is a local
-repository.
+gitorious.org is closing down the can-utils project moved to github.com
 
-The solution is to look for the origin in two steps. If the origin in the first
-step is a local directory we assume it is a temporary download repository. In
-the second step we look for the origin to that download repository and if that
-also redirects to a local repository, we provide the absolute path instead of a
-Socorro repository link.
-
-Signed-off-by: Daniel Markus <daniel.markus@leica-geosystems.com>
+Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
 ---
- meta-oe/classes/socorro-syms.bbclass | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/classes/socorro-syms.bbclass b/meta-oe/classes/socorro-syms.bbclass
-index c272952..0312031 100644
---- a/meta-oe/classes/socorro-syms.bbclass
-+++ b/meta-oe/classes/socorro-syms.bbclass
-@@ -108,6 +108,12 @@ def run_command(command, directory):
-     return output.rstrip()
- 
- 
-+def is_local_url(url):
-+
-+    return \
-+        url.startswith("file:") or url.startswith("/") or url.startswith("./")
-+
-+
- def git_repository_path(source_file_path):
- 
-     import re
-@@ -125,12 +131,18 @@ def git_repository_path(source_file_path):
- 
-     # The URL could be a local download directory. If so, get the URL again
-     # using the local directory's config file.
--    if os.path.isdir(source_long_url):
-+    if is_local_url(source_long_url):
-         git_config_file = os.path.join(source_long_url, "config")
-         source_long_url = run_command(
-             "git config --file %s --get remote.origin.url" % git_config_file,
-             source_file_dir)
- 
-+        # If also the download directory redirects to a local git directory,
-+        # then we're probably using source code from a local debug branch which
-+        # won't be accessible by Socorro.
-+        if is_local_url(source_long_url):
-+            return None
-+
-     # The URL can have several formats. A full list can be found using
-     # git help clone. Extract the server part with a regex.
-     url_match = re.search(".*(://|@)([^:/]*).*", source_long_url)
--- 
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb b/meta-o=
+e/recipes-extended/socketcan/can-utils=5Fgit.bb
+index 1f7f751..931e332 100644
+--- a/meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb
++++ b/meta-oe/recipes-extended/socketcan/can-utils=5Fgit.bb
+@@ -5,7 +5,7 @@ LIC=5FFILES=5FCHKSUM =3D "file://include/linux/can.h;endlin=
+e=3D43;md5=3D390a2c9a3c5e3595a0
+=20
+ DEPENDS =3D "libsocketcan"
+=20
+-SRC=5FURI =3D "git://git.gitorious.org/linux-can/${BPN}.git;protocol=3Dhtt=
+ps;branch=3Dmaster"
++SRC=5FURI =3D "git://github.com/linux-can/${BPN}.git;protocol=3Dgit;branch=
+=3Dmaster"
+ SRCREV =3D "67a2bdcd336e6becfa5784742e18c88dbeddc973"
+=20
+ PV =3D "0.0+gitr${SRCPV}"
+--=20
 1.9.1
 
 
