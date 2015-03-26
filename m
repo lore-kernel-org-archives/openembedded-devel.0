@@ -1,16 +1,14 @@
 Return-Path: <obi@opendreambox.org>
 Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 1208373C4E
+	by mail.openembedded.org (Postfix) with ESMTP id 13E5273C5A
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 26 Mar 2015 18:43:33 +0000 (UTC)
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Mar 2015 19:43:28 +0100
-Message-Id: <1427395411-16303-2-git-send-email-obi@opendreambox.org>
+Date: Thu, 26 Mar 2015 19:43:27 +0100
+Message-Id: <1427395411-16303-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1427395411-16303-1-git-send-email-obi@opendreambox.org>
-References: <1427395411-16303-1-git-send-email-obi@opendreambox.org>
-Subject: [meta-python][PATCH 2/5] python-six: Python 2 and 3 compatibility library, version 1.9.0
+Subject: [meta-python][PATCH 1/5] pypi.bbclass: new class to ease writing pypi recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,24 +26,37 @@ X-List-Received-Date: Thu, 26 Mar 2015 18:43:36 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-python/recipes-devtools/python/python-six_1.9.0.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-six_1.9.0.bb
+ meta-python/classes/pypi.bbclass | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/classes/pypi.bbclass
 
-diff --git a/meta-python/recipes-devtools/python/python-six_1.9.0.bb b/meta-python/recipes-devtools/python/python-six_1.9.0.bb
+diff --git a/meta-python/classes/pypi.bbclass b/meta-python/classes/pypi.bbclass
 new file mode 100644
-index 0000000..aa96dc9
+index 0000000..41a70e2
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-six_1.9.0.bb
-@@ -0,0 +1,8 @@
-+SUMMARY = "Python 2 and 3 compatibility library"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6f00d4a50713fa859858dd9abaa35b21"
++++ b/meta-python/classes/pypi.bbclass
+@@ -0,0 +1,21 @@
++def pypi_package(d):
++    bpn = d.getVar('BPN', True)
++    if bpn.startswith('python-'):
++        return bpn[7:]
++    return bpn
 +
-+SRC_URI[md5sum] = "476881ef4012262dfc8adc645ee786c4"
-+SRC_URI[sha256sum] = "e24052411fc4fbd1f672635537c3fc2330d9481b18c0317695b46259512c91d5"
++PYPI_PACKAGE ?= "${@pypi_package(d)}"
 +
-+inherit pypi
++def pypi_src_uri(d):
++    package = d.getVar('PYPI_PACKAGE', True)
++    pv = d.getVar('PV', True)
++    return 'https://pypi.python.org/packages/source/%s/%s/%s-%s.tar.gz' % (package[0], package, package, pv)
++
++PYPI_SRC_URI ?= "${@pypi_src_uri(d)}"
++
++HOMEPAGE ?= "https://pypi.python.org/pypi/${PYPI_PACKAGE}/"
++SECTION = "devel/python"
++SRC_URI += "${PYPI_SRC_URI}"
++S = "${WORKDIR}/${PYPI_PACKAGE}-${PV}"
++
++inherit setuptools
 -- 
 1.9.1
 
