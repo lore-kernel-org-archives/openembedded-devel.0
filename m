@@ -1,24 +1,26 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 036A36013D
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5ADBE6AC36
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 08:58:30 +0000 (UTC)
+	Mon, 30 Mar 2015 08:58:31 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t2U8wVdb007153
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t2U8wWo9023847
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 01:58:31 -0700 (PDT)
+	Mon, 30 Mar 2015 01:58:32 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 30 Mar 2015 01:58:31 -0700
+	14.3.224.2; Mon, 30 Mar 2015 01:58:32 -0700
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 30 Mar 2015 16:51:35 +0800
-Message-ID: <1427705496-30307-1-git-send-email-wenzong.fan@windriver.com>
+Date: Mon, 30 Mar 2015 16:51:36 +0800
+Message-ID: <1427705496-30307-2-git-send-email-wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1427705496-30307-1-git-send-email-wenzong.fan@windriver.com>
+References: <1427705496-30307-1-git-send-email-wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2][meta-networking] vsftpd / init: add LSB init infos
+Subject: [PATCH 2/2][meta-networking] postfix: add LSB init infos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,27 +43,26 @@ Keep compatibility with chkconfig tool.
 
 Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- meta-networking/recipes-daemons/vsftpd/files/init | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ meta-networking/recipes-daemons/postfix/files/postfix | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/vsftpd/files/init b/meta-networking/recipes-daemons/vsftpd/files/init
-index d0ec010..72adf0d 100755
---- a/meta-networking/recipes-daemons/vsftpd/files/init
-+++ b/meta-networking/recipes-daemons/vsftpd/files/init
-@@ -1,4 +1,13 @@
+diff --git a/meta-networking/recipes-daemons/postfix/files/postfix b/meta-networking/recipes-daemons/postfix/files/postfix
+index 7bcc816..0ea67ef 100755
+--- a/meta-networking/recipes-daemons/postfix/files/postfix
++++ b/meta-networking/recipes-daemons/postfix/files/postfix
+@@ -1,4 +1,12 @@
  #!/bin/sh
 +### BEGIN INIT INFO
-+# Provides: vsftpd
-+# Default-Start:  2345
-+# Default-Stop:   016
-+# Short-Description: Very Secure Ftp Daemon
-+# Description: vsftpd is a Very Secure FTP daemon. It was written completely from
-+#              scratch
++# Provides: postfix MTA
++# Default-Start: 2345
++# Default-Stop: 016
++# Short-Description: start and stop postfix
++# Description: Postfix is a Mail Transport Agent, which is the program
++#              that moves mail from one machine to another.
 +### END INIT INFO
-+
- DAEMON=/usr/sbin/vsftpd
- NAME=vsftpd
- DESC="FTP Server"
+ 
+ success() {
+         echo " Successful"
 -- 
 1.9.1
 
