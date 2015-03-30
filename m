@@ -1,32 +1,23 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-oi0-f48.google.com (mail-oi0-f48.google.com
-	[209.85.218.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 74D2A73C0D
+Return-Path: <hugo.saldanha@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id 707AE6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 15:41:47 +0000 (UTC)
-Received: by oiag65 with SMTP id g65so132458386oia.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 08:41:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type;
-	bh=8PA8LLwNFeXO6P47fdd/BLyGJ8SXNpBIXJtvOrl1uw4=;
-	b=m/31mN9uCFhqssDn7sTSdJGOuDshtc42S+tm1X71XqrNp3AmGBOzkGBPjJSyqklLuU
-	l98HbVCxj3vHYwwfi54VPL7tNX8pTMl5LNd8dycBMkis7BBMVp6UyUQqR0UZhmwlqhGK
-	rtTL22DVuKnElBwCeJQiNsHOY0JOQpJO54YC7GSHJ0nTJF5PcebRRUGn8rX1A0fIq6sx
-	EA01yop6OdCQqCiMu7xUGHpwTgFAfA5bQFmUr44a++UyfSA1tjk7WeNZKpWFarBExXwP
-	gMp8J/SfcBffFMxX1JRecGgdtbr7KFj9cxClB8Wvj/cXHubOqAX9SIGXKZjiEBXKPKxX
-	sK9Q==
+	Mon, 30 Mar 2015 19:03:45 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Mon, 30 Mar 2015 16:03:31 -0300
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from saldanha.aker.com.br (10.4.3.1) by mail.aker.com.br (10.0.0.20)
+	with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Mon, 30 Mar 2015 16:03:37 -0300
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 30 Mar 2015 16:06:11 -0300
+Message-ID: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
+X-Mailer: git-send-email 2.3.4
 MIME-Version: 1.0
-X-Received: by 10.182.166.71 with SMTP id ze7mr25527466obb.73.1427730107837;
-	Mon, 30 Mar 2015 08:41:47 -0700 (PDT)
-Received: by 10.76.177.33 with HTTP; Mon, 30 Mar 2015 08:41:47 -0700 (PDT)
-Date: Mon, 30 Mar 2015 17:41:47 +0200
-Message-ID: <CA+chaQdFo2M-=_PP7x-KnPEvEAQLX9vkudnaC9VJQxe90AhTbQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Stephan Binner <stephan.binner@basyskom.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] Qt 5.5 Alpha Recipes?
+X-AkerSMTPGW-ServerID: d3ca878c259c98dab9711b092908c214d1fd543e
+X-AkerSMTPGW-MessageID: e4d19cac616af3fc9aeb4b779d3a87241b425942-10o
+Subject: [meta-java][PATCH] cacao: fix problem with internal garbage collector
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,41 +31,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2015 15:41:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 30 Mar 2015 19:03:52 -0000
+Content-Type: text/plain
 
-Hello Stephan,
+Cacao uses an internal version of bdwgc that was being installed
+(headers, libs, etc.) together with the JVM, unnecessarily conflicting
+with original bwdgc package.
 
-they usually follow "stable" branch, but that's not a rule, it can be
-changed to any branch as long as you update corresponding variable.
+A patch from Gentoo is applied so the system's bdwgc is used instead.
 
-For myself I don't know if we'll be more interested in trying newer
-revision in 5.4 (e.g. if we find critical bug in 5.4.1 which is supposed to
-be fixed in 5.4.2) or trying new features from 5.5.
+Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+---
+ .../cacao/cacao-1.6.1/system-boehm-gc.patch        | 47 ++++++++++++++++++++++
+ recipes-core/cacao/cacao_1.6.1.bb                  |  8 ++--
+ 2 files changed, 51 insertions(+), 4 deletions(-)
+ create mode 100644 recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
 
-I think it's safe to say that "fido" branch should only get 5.4.x* in git
-recipes and lets leave 5.5-alpha only for master branch. Fido branch will
-be created soon (1-2 weeks).
+diff --git a/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch b/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
+new file mode 100644
+index 0000000..27b6258
+--- /dev/null
++++ b/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
+@@ -0,0 +1,47 @@
++diff --git a/configure.ac b/configure.ac
++--- a/configure.ac
+++++ b/configure.ac
++@@ -691,6 +691,8 @@
++ 
++ AC_CHECK_ENABLE_PIC_ASM
++ 
+++PKG_CHECK_MODULES([BOEHM], bdw-gc,,AC_MSG_ERROR[boehm-gc not found])
+++
++ dnl Define version numbers.
++ AC_VERSION_DETAIL
++ AC_VERSION_CONFIG
++@@ -793,12 +795,6 @@
++ )
++ 
++ 
++-dnl We only build the shared library objects but we use it as
++-dnl noinst_LTLIBRARIES.
++-ac_configure_args="$ac_configure_args --disable-static"
++-AC_CONFIG_SUBDIRS(src/mm/boehm-gc)
++-
++-
++ AC_OUTPUT
++ 
++ 
++diff --git a/src/mm/Makefile.am b/src/mm/Makefile.am
++--- a/src/mm/Makefile.am
+++++ b/src/mm/Makefile.am
++@@ -35,14 +35,13 @@
++ endif
++ 
++ if ENABLE_GC_BOEHM
++-SUBDIRS = \
++-	boehm-gc
++-
++ GC_FILE = \
++ 	gc-boehm.cpp
++ 
++-GC_LIB = \
++-	$(top_builddir)/src/mm/boehm-gc/libgc.la
+++AM_CPPFLAGS += $(BOEHM_CFLAGS)
+++
+++GC_LIB = $(BOEHM_LIBS)
+++
++ endif
++ 
++ if ENABLE_GC_CACAO
+diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
+index 9f07946..65aaf93 100644
+--- a/recipes-core/cacao/cacao_1.6.1.bb
++++ b/recipes-core/cacao/cacao_1.6.1.bb
+@@ -4,14 +4,14 @@ LICENSE  = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ SECTION  = "interpreters"
+ 
+-DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native"
++DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
+ PROVIDES_class-native = "virtual/java-native"
+ 
+-DEPENDS = "zlib libtool classpath virtual/javac-native"
+-DEPENDS_${PN} = "classpath"
++DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
+ RPROVIDES_${PN} = "java2-runtime"
+ 
+-SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz"
++SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz \
++           file://system-boehm-gc.patch"
+ SRC_URI[md5sum] = "2c18478404afd1cffdd15ad1e9d85a57"
+ SRC_URI[sha256sum] = "eecc8bd1b528a028f43d9d1d0c06b97855bbf1d40e03826d911ebbc0b6971e12"
+ 
+-- 
+2.3.4
 
-How does this sound?
 
-CCing oe-devel in case someone else wanted to start on it.
-
-On Mon, Mar 30, 2015 at 1:13 PM, Stephan Binner <stephan.binner@basyskom.com
-> wrote:
-
-> Hello Martin,
->
-> with which Qt development release (Alpha, Beta, RC) are the qt*_git.bb
-> recipes
-> usually upgraded to next major version? If with Alpha are you working on or
-> aware of anybody currently working on upgrading qt*_git.bb to Qt 5.5
-> Alpha?
->
-> I don't want to promise anything but I may have some time to spend on it...
->
-> Regards,
-> Stephan
->
->
 
