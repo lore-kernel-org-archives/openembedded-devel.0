@@ -1,35 +1,27 @@
-Return-Path: <henning@itconsulting-heinold.de>
-Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
-	by mail.openembedded.org (Postfix) with ESMTP id 060C673CA7
+Return-Path: <hugo.saldanha@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id E6F81736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 20:25:25 +0000 (UTC)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id BEE44D40815
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 22:25:24 +0200 (CEST)
-Received: from mail.familie-heinold.de (localhost [127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 28151D4080B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 22:25:22 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
-	autolearn=ham version=3.3.2
-Received: from mail.itconsulting-heinold.de (x5ce107db.dyn.telefonica.de
-	[92.225.7.219]) by mail.familie-heinold.de (Postfix) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 22:25:21 +0200 (CEST)
-Date: Mon, 30 Mar 2015 22:25:08 +0200
-From: Henning Heinold <henning@itconsulting-heinold.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150330202507.GA22676@mail.itconsulting-heinold.de>
-References: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
+	Mon, 30 Mar 2015 20:35:06 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Mon, 30 Mar 2015 17:34:49 -0300
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from localhost (10.4.3.1) by mail.aker.com.br (10.0.0.20) with
+	Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Mon, 30 Mar 2015 17:35:00 -0300
+Date: Mon, 30 Mar 2015 17:37:48 -0300
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20150330203748.GA14683@saldanha.aker.com.br>
+References: <cover.1427426569.git.akuster808@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [meta-java][PATCH] cacao: fix problem with internal garbage collector
+In-Reply-To: <cover.1427426569.git.akuster808@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-AkerSMTPGW-ServerID: d3ca878c259c98dab9711b092908c214d1fd543e
+X-AkerSMTPGW-MessageID: ae085c61433306a536d5729b3ca4fe20829a8302-10o
+Cc: "otavio@ossystems.com.br" <otavio@ossystems.com.br>
+Subject: Re: [PATCH 00/18] Dizzy pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,106 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Mar 2015 20:25:27 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 30 Mar 2015 20:35:09 -0000
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
-On Mon, Mar 30, 2015 at 04:06:11PM -0300, Hugo Vasconcelos Saldanha wrote:
-> Cacao uses an internal version of bdwgc that was being installed
-> (headers, libs, etc.) together with the JVM, unnecessarily conflicting
-> with original bwdgc package.
-> 
-> A patch from Gentoo is applied so the system's bdwgc is used instead.
-> 
-> Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
-> ---
->  .../cacao/cacao-1.6.1/system-boehm-gc.patch        | 47 ++++++++++++++++++++++
->  recipes-core/cacao/cacao_1.6.1.bb                  |  8 ++--
->  2 files changed, 51 insertions(+), 4 deletions(-)
->  create mode 100644 recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
-> 
-> diff --git a/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch b/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
-> new file mode 100644
-> index 0000000..27b6258
-> --- /dev/null
-> +++ b/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
-> @@ -0,0 +1,47 @@
-> +diff --git a/configure.ac b/configure.ac
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -691,6 +691,8 @@
-> + 
-> + AC_CHECK_ENABLE_PIC_ASM
-> + 
-> ++PKG_CHECK_MODULES([BOEHM], bdw-gc,,AC_MSG_ERROR[boehm-gc not found])
-> ++
-> + dnl Define version numbers.
-> + AC_VERSION_DETAIL
-> + AC_VERSION_CONFIG
-> +@@ -793,12 +795,6 @@
-> + )
-> + 
-> + 
-> +-dnl We only build the shared library objects but we use it as
-> +-dnl noinst_LTLIBRARIES.
-> +-ac_configure_args="$ac_configure_args --disable-static"
-> +-AC_CONFIG_SUBDIRS(src/mm/boehm-gc)
-> +-
-> +-
-> + AC_OUTPUT
-> + 
-> + 
-> +diff --git a/src/mm/Makefile.am b/src/mm/Makefile.am
-> +--- a/src/mm/Makefile.am
-> ++++ b/src/mm/Makefile.am
-> +@@ -35,14 +35,13 @@
-> + endif
-> + 
-> + if ENABLE_GC_BOEHM
-> +-SUBDIRS = \
-> +-	boehm-gc
-> +-
-> + GC_FILE = \
-> + 	gc-boehm.cpp
-> + 
-> +-GC_LIB = \
-> +-	$(top_builddir)/src/mm/boehm-gc/libgc.la
-> ++AM_CPPFLAGS += $(BOEHM_CFLAGS)
-> ++
-> ++GC_LIB = $(BOEHM_LIBS)
-> ++
-> + endif
-> + 
-> + if ENABLE_GC_CACAO
-> diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
-> index 9f07946..65aaf93 100644
-> --- a/recipes-core/cacao/cacao_1.6.1.bb
-> +++ b/recipes-core/cacao/cacao_1.6.1.bb
-> @@ -4,14 +4,14 @@ LICENSE  = "GPL-2.0"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
->  SECTION  = "interpreters"
->  
-> -DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native"
-> +DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
->  PROVIDES_class-native = "virtual/java-native"
->  
-> -DEPENDS = "zlib libtool classpath virtual/javac-native"
-> -DEPENDS_${PN} = "classpath"
-> +DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
->  RPROVIDES_${PN} = "java2-runtime"
->  
-> -SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz"
-> +SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz \
-> +           file://system-boehm-gc.patch"
->  SRC_URI[md5sum] = "2c18478404afd1cffdd15ad1e9d85a57"
->  SRC_URI[sha256sum] = "eecc8bd1b528a028f43d9d1d0c06b97855bbf1d40e03826d911ebbc0b6971e12"
->  
-> -- 
-> 2.3.4
+Hi,
 
-Hm,
+On Fri, Mar 27, 2015 at 12:26:59AM -0300, Armin Kuster wrote:
+> Please consider this changes for meta-openembedded dizzy-next
 
-if I remember correctly, than the bdwgc inside cacao differs from upstream.
+It would be great if commit c5398fc0fe246e4828c9e950f779f437266bfaa1
+gets added do dizzy also.
 
-Bye Henning
+Thanks!
+
+
+-- 
+		Hugo
+
 
