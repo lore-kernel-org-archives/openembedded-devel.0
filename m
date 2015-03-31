@@ -1,27 +1,36 @@
-Return-Path: <daniel.markus@leica-geosystems.com>
-Received: from outbound.sbg.se (outbound.sbg.se [83.241.165.85])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EE05724B9
+Return-Path: <mario.goulart@gmail.com>
+Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
+	[209.85.192.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D5B67391D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 13:01:28 +0000 (UTC)
-Received: from hermes.sbg.se (mail.sbg.se [83.241.165.77])
-	by outbound.sbg.se (Postfix) with ESMTP id 60D6E1847BC;
-	Tue, 31 Mar 2015 15:01:27 +0200 (CEST)
-Received: from localhost.localdomain (unknown [10.213.0.77])
-	by hermes.sbg.se (Postfix) with ESMTP id D0FA1140156;
-	Tue, 31 Mar 2015 15:00:13 +0200 (CEST)
-From: Daniel Markus <daniel.markus@leica-geosystems.com>
+	Tue, 31 Mar 2015 13:23:02 +0000 (UTC)
+Received: by qgfa8 with SMTP id a8so13866109qgf.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Mar 2015 06:23:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:organization;
+	bh=BLX4aplbCDTLdN4I8EzXKLR8vbxMspJ90sJvRJLfqBs=;
+	b=wnftQQwiHkjI/l5v9x2QG526Inunu9BkBHf6rL6sGg1dIjILyONxAGKPhh9HNzoX2S
+	xfTAAf+n0ssZSU6tHyTM8Lv4cqU/Ju9yH6q9l+o/Gjs8YT7VEKhZUr/9WlN3WJtp8/s8
+	GCAHh2GgtEII0La0D0VoByddiVrIWIeN+kYguRWYIXPNBptDs3Tj01uBfxHlQdm/A8M7
+	+Buksw7hLafYZ1OJmXNlu/yVGgs9+slVDr+v3FMWusYHkaOlBid+uDvT1lNN7OgEA6jz
+	UyhlLUi4aMUEKANTvCwCh9sden+uah3XHl3He+m3C5x+FEoYDXwjMSrom2MT/22u5QXD
+	IeVQ==
+X-Received: by 10.140.239.85 with SMTP id k82mr25795219qhc.22.1427808183628;
+	Tue, 31 Mar 2015 06:23:03 -0700 (PDT)
+Received: from centrium.lab.ossystems.com.br ([177.100.224.72])
+	by mx.google.com with ESMTPSA id q129sm9859631qha.4.2015.03.31.06.23.02
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 31 Mar 2015 06:23:03 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Mar 2015 14:59:57 +0200
-Message-Id: <1427806797-560-1-git-send-email-daniel.markus@leica-geosystems.com>
-X-Mailer: git-send-email 1.9.1
-X-SBG-MailScanner-ID: D0FA1140156.7E482
-X-SBG-MailScanner: Found to be clean
-X-SBG-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
-	score=-102.9, required 5, autolearn=not spam, ALL_TRUSTED -1.00,
-	BAYES_00 -1.90, USER_IN_WHITELIST -100.00)
-X-SBG-MailScanner-From: daniel.markus@leica-geosystems.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] socorro-syms: Correct the extraction of repository branch
+Date: Tue, 31 Mar 2015 10:22:34 -0300
+Message-Id: <1427808158-16502-1-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-java][PATCH 1/5] rxtx: put .jar and .so files into the same package (librxtx-java)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,42 +44,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 13:01:33 -0000
+X-List-Received-Date: Tue, 31 Mar 2015 13:23:03 -0000
 
-When a recipe has git-cloned source code to compile, it may be checked out with
-a detached HEAD. The current VCS information extraction in socorro-syms
-incorrectly assumes a detached HEAD belongs to the master branch.
+That's how Debian does, supposedly because it does not make sense to
+ship .jar and .so files into separate packages.
 
-With the proper git command we find the branch the detached HEAD belongs to and
-use that in the Socorro link.
-
-Signed-off-by: Daniel Markus <daniel.markus@leica-geosystems.com>
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 ---
- meta-oe/classes/socorro-syms.bbclass | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ recipes-extended/rxtx/rxtx_2.2.0.bb | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/classes/socorro-syms.bbclass b/meta-oe/classes/socorro-syms.bbclass
-index 0312031..7a7b208 100644
---- a/meta-oe/classes/socorro-syms.bbclass
-+++ b/meta-oe/classes/socorro-syms.bbclass
-@@ -148,12 +148,10 @@ def git_repository_path(source_file_path):
-     url_match = re.search(".*(://|@)([^:/]*).*", source_long_url)
-     source_server = url_match.group(2)
+diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
+index 56c939f..b9b3027 100644
+--- a/recipes-extended/rxtx/rxtx_2.2.0.bb
++++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
+@@ -26,7 +26,7 @@ SRC_URI[sha256sum] = "3c30373e760f444def3650c76c5a00ae12fb1d860ec008750d084f4880
  
--    # (2) Get the branch for this file. If it's detached and just shows HEAD
--    # then set it to master and hope we can get the correct revision from there.
--    source_branch = run_command(
--        "git rev-parse --abbrev-ref HEAD", source_file_dir)
--    if source_branch == "HEAD":
--        source_branch = "master"
-+    # (2) Get the branch for this file.
-+    source_branch_list = run_command("git show-branch --list", source_file_dir)
-+    source_branch_match = re.search(".*?\[(.*?)\].*", source_branch_list)
-+    source_branch = source_branch_match.group(1)
+ S = "${WORKDIR}/rxtx-2.2pre2"
  
-     # (3) Since the repo root directory name can be changed without affecting
-     # git, we need to extract the name from something more reliable.
+-INSANE_SKIP_${PN} += "dev-so"
++INSANE_SKIP_${JPN} += "dev-so"
+ 
+ inherit autotools-brokensep java-library
+ PACKAGE_ARCH = "${TUNE_PKGARCH}"
+@@ -51,5 +51,11 @@ do_install_prepend() {
+     install -d ${D}${datadir_java}/ext
+ }
+ 
+-FILES_${PN} += "${libdir_jni}"
++PACKAGES_remove = "${PN}"
++
++FILES_${JPN} += "${libdir_jni}"
++RPROVIDES_${JPN} = "${PN}"
++RCONFLICTS_${JPN} = "${PN}"
++RREPLACES_${JPN} = "${PN}"
++
+ FILES_${PN}-dbg += "${libdir_jni}/.debug"
 -- 
-1.9.1
+2.1.4
 
 
