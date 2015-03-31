@@ -1,42 +1,53 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id EBDCD736B6
+Return-Path: <praveenr@tataelxsi.co.in>
+X-Greylist: delayed 954 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 31 Mar 2015 10:19:02 UTC
+Received: from APAC01-SG1-obe.outbound.protection.outlook.com
+	(mail-sg1on0137.outbound.protection.outlook.com [134.170.132.137])
+	by mail.openembedded.org (Postfix) with ESMTP id D1961736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 07:07:09 +0000 (UTC)
-Received: by wixo5 with SMTP id o5so2551646wix.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 00:07:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=buUT5JJR4AUpneE2zktWYszTgbMeOwqF8nAlN0gnbY0=;
-	b=Zjw8DwtvK1tJb7nZNAXReIbrWEjKBwXeK39YTaWos/7n0nMDDhEY4bOuJk6tkN83TN
-	AyIiikFtDXFRiogH6CuIe3pdO3VqFOhXNzYd3d10EwbseG3r/p4SqaxEvvrO7Ij2OhZA
-	gpGqu/2gY2I17RujUZbJCotqHPhK5eLJMoVcuwZQnKDGLJ2ZK4M8hbMVL30fJQ69r9BY
-	F2ZHWBcWz+H8Lw/m9/KJ87Eq1COXqY4lemagEMr6oaOSdgFRK1HR5+XaPR7boJbokbpL
-	fvrv4He3+UqB88pjLSewewiIkNpizYhavPDYzV7DXMHXieHtlbWtM4UogTz0o/s4l6Qr
-	a2rQ==
-X-Received: by 10.180.218.162 with SMTP id ph2mr2774062wic.22.1427785629891;
-	Tue, 31 Mar 2015 00:07:09 -0700 (PDT)
-Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
-	by mx.google.com with ESMTPSA id
-	o10sm19543727wiy.18.2015.03.31.00.07.07
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 31 Mar 2015 00:07:08 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 31 Mar 2015 09:07:31 +0200
-To: "Gary S. Robertson" <gary.robertson@linaro.org>
-Message-ID: <20150331070731.GI14928@jama>
-References: <1413992945-33655-1-git-send-email-mike.holmes@linaro.org>
-	<1427775041-9330-1-git-send-email-gary.robertson@linaro.org>
-	<1427775041-9330-2-git-send-email-gary.robertson@linaro.org>
+	Tue, 31 Mar 2015 10:19:02 +0000 (UTC)
+Received: from SIXPR04MB0462.apcprd04.prod.outlook.com (25.160.229.150) by
+	SIXPR04MB0464.apcprd04.prod.outlook.com (25.160.229.152) with Microsoft
+	SMTP Server (TLS) id 15.1.118.21; Tue, 31 Mar 2015 10:03:08 +0000
+Received: from SIXPR04MB0462.apcprd04.prod.outlook.com ([25.160.229.150]) by
+	SIXPR04MB0462.apcprd04.prod.outlook.com ([25.160.229.150]) with mapi id
+	15.01.0118.022; Tue, 31 Mar 2015 10:03:07 +0000
+From: PRAVEEN KUMAR R <praveenr@tataelxsi.co.in>
+To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: tip and cu utility
+Thread-Index: AQHQa5nB48/jBlSUhku9JFG59X5Svw==
+Date: Tue, 31 Mar 2015 10:03:07 +0000
+Message-ID: <1427796186892.42571@tataelxsi.co.in>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [14.141.44.158]
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=praveenr@tataelxsi.co.in; 
+x-microsoft-antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:SIXPR04MB0464;
+x-forefront-antispam-report: BMV:1; SFV:NSPM;
+	SFS:(10019020)(6009001)(15395725005)(102836002)(40100003)(117636001)(2501003)(46102003)(122556002)(15975445007)(19580395003)(16236675004)(92566002)(87936001)(62966003)(66066001)(74482002)(107886001)(229853001)(36756003)(54356999)(50986999)(19627405001)(2656002)(19625215002)(77156002)(15198665003)(106116001)(2900100001)(86362001)(558084003)(80872002)(10090945008)(19477635001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:SIXPR04MB0464;
+	H:SIXPR04MB0462.apcprd04.prod.outlook.com; FPR:; SPF:None;
+	MLV:nov; PTR:InfoNoRecords; LANG:en; 
+x-microsoft-antispam-prvs: <SIXPR04MB04646BB5949A0EAF08AF519493F40@SIXPR04MB0464.apcprd04.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:;
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(601004)(5002010)(5005006); SRVR:SIXPR04MB0464; BCL:0;
+	PCL:0; RULEID:; SRVR:SIXPR04MB0464; 
+x-forefront-prvs: 0532BF6DC2
+received-spf: None (protection.outlook.com: tataelxsi.co.in does not designate
+	permitted sender hosts)
 MIME-Version: 1.0
-In-Reply-To: <1427775041-9330-2-git-send-email-gary.robertson@linaro.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] add CUnit test suite
+X-OriginatorOrg: tataelxsi.co.in
+X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Mar 2015 10:03:07.3468 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: ad6a39dd-96b6-4368-82da-f2ec4d92e26a
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SIXPR04MB0464
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: tip and cu utility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,143 +61,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 07:07:11 -0000
-X-Groupsio-MsgNum: 54912
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="aFi3jz1oiPowsTUB"
-Content-Disposition: inline
-
---aFi3jz1oiPowsTUB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 31 Mar 2015 10:19:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 30, 2015 at 11:10:41PM -0500, Gary S. Robertson wrote:
-> From: Mike Holmes <mike.holmes@linaro.org>
->=20
-> This patch adds a recipe for building the CUnit test framework libraries
->=20
-> Upstream Status - not applicable - recipe addition only
+Is there any existing package that provide tip and cu utility ?
 
-Upstream-Status belongs to .patch files not metadata commit messages.
 
->=20
-> Signed-off-by: Mike Holmes <mike.holmes@linaro.org>
-> Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
-> ---
->  meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb      | 19 ++++++++++++
->  .../cunit/files/fixup-install-docdir.patch         | 36 ++++++++++++++++=
-++++++
->  2 files changed, 55 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
->  create mode 100644 meta-oe/recipes-devtools/cunit/files/fixup-install-do=
-cdir.patch
->=20
-> diff --git a/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb b/meta-oe/reci=
-pes-devtools/cunit/cunit_2.1-3.bb
-> new file mode 100644
-> index 0000000..246a121
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/cunit/cunit_2.1-3.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION =3D "CUnit is a C framework for unit testing. Test output su=
-pports comandline and GUI results reporting"
-> +HOMEPAGE =3D "http://cunit.sourceforge.net"
-> +LICENSE =3D "LGPL-2.0"
-> +SECTION =3D "libs"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D7734aa853b85d6f935466f081490d=
-dbb"
-> +
-> +S =3D "${WORKDIR}/CUnit-${PV}"
-> +
-> +SRC_URI =3D "http://downloads.sourceforge.net/project/cunit/CUnit/${PV}/=
-CUnit-${PV}.tar.bz2 \
-> +		file://fixup-install-docdir.patch;patch=3D1"
+http://man.cx/TIP(1)?
+?
 
-Use 4 spaces for indentation and ";patch=3D1" shouldn't be needed, drop
-it.
 
-Use SOURCEFORGE_MIRROR =3D "http://downloads.sourceforge.net" variable.
-
-> +SRC_URI[md5sum] =3D "b5f1a9f6093869c070c6e4a9450cc10c"
-> +SRC_URI[sha256sum] =3D "f5b29137f845bb08b77ec60584fdb728b4e58f1023e6f249=
-a464efa49a40f214"
-> +
-> +inherit autotools-brokensep
-> +
-> +EXTRA_OECONF =3D "--enable-memtrace --enable-automated --enable-basic --=
-enable-console"
-> +
-> +FILES_${PN}-dev +=3D "${datadir}/CUnit"
-> +FILES_${PN}-doc +=3D "${docdir}"
-> diff --git a/meta-oe/recipes-devtools/cunit/files/fixup-install-docdir.pa=
-tch b/meta-oe/recipes-devtools/cunit/files/fixup-install-docdir.patch
-> new file mode 100644
-> index 0000000..a9dc4bc
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/cunit/files/fixup-install-docdir.patch
-> @@ -0,0 +1,36 @@
-> +From: "Mike Holmes" <mike.holmes@linaro.org>
-> +Date: Thu, 30 October 2014 16:21:03 -0500
-> +Subject: [PATCH] fixup-install-docdir
-> +
-> +The default configuration macros for CUnit install the documentation and
-> +header files in locations not consistent with the OE filesystem layout.
-> +This patch specifies new locations which are consistent with OE filesyst=
-ems.
-> +
-> +Upstream Status - not applicable - customizes configs for OE build envir=
-onment
-
-See:
-http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines#Patch_Head=
-er_Recommendations
-for proper format
-
-> +
-> +Signed-off-by: Mike Holmes <mike.holmes@linaro.org>
-> +Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
-> +---
-> +
-> +diff -uNr a/doc/headers/Makefile.am b/doc/headers/Makefile.am
-> +--- a/doc/headers/Makefile.am	2014-10-30 22:06:29.704574162 +0100
-> ++++ b/doc/headers/Makefile.am	2014-10-30 22:07:43.578524791 +0100
-> +@@ -1,6 +1,6 @@
-> + ## Process this file with automake to produce Makefile.in
-> +=20
-> +-dochdrdir =3D $(prefix)/doc/@PACKAGE@/headers
-> ++dochdrdir =3D $(docdir)/headers
-> +=20
-> + INCLUDE_FILES =3D \
-> + 	Automated.h \
-> +diff -uNr a/doc/Makefile.am b/doc/Makefile.am
-> +--- a/doc/Makefile.am	2014-10-30 22:06:29.704574162 +0100
-> ++++ b/doc/Makefile.am	2014-10-30 22:07:01.461412166 +0100
-> +@@ -1,7 +1,5 @@
-> + ## Process this file with automake to produce Makefile.in
-> +=20
-> +-docdir =3D $(prefix)/doc/@PACKAGE@
-> +-
-> + doc_DATA =3D \
-> + 	CUnit_doc.css \
-> + 	error_handling.html \
-> --=20
-> 1.9.1
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---aFi3jz1oiPowsTUB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlUaR7MACgkQN1Ujt2V2gBwvTACfaArYRK/XKAeHiyTtTdvX92Le
-MqkAnRoPDAtynkKdhV/GrNph1snRTud6
-=5qiy
------END PGP SIGNATURE-----
-
---aFi3jz1oiPowsTUB--
