@@ -1,38 +1,31 @@
-Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qg0-f43.google.com (mail-qg0-f43.google.com
-	[209.85.192.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 8DED073CB7
+Return-Path: <hugo.saldanha@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id 86B1B736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 13:23:14 +0000 (UTC)
-Received: by qgfa8 with SMTP id a8so13871303qgf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 06:23:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=0kO1EPoWZaVFyuyeMejFeexNuJp06P9kkplRhSaRGKY=;
-	b=nWUOEejXg1PnzL8IX3vmIZLh5k83MSAQ5Xe4e3nYrgQJnSdUOtvt/HikOqHbcMD7BV
-	k0ttoavEOFjO8P+AYwRKHC6xNqddJhe1LLt23obOKkLaHTPa4T9jmCwVB8psgZwJNIwF
-	vliNr4NNJwrklP0sXxA3jiYXyXMLpWJk8urRvDpBPS8DXa6qM+vBkdC0u4gCZio3fwG5
-	Y1rRdn/K1bctuCzmzHtEB7FjdaZ332tL1S7y/hitVjn2P/kbbi2iIwz51w33t+G/woEW
-	WXWUHXagG/lkJk4Z9P48Mj/G3M1CHEvwXfEP0ocUOXj97mFZJdjQR/XWp23mfZnZG71O
-	GUVA==
-X-Received: by 10.229.71.72 with SMTP id g8mr49747808qcj.25.1427808195362;
-	Tue, 31 Mar 2015 06:23:15 -0700 (PDT)
-Received: from centrium.lab.ossystems.com.br ([177.100.224.72])
-	by mx.google.com with ESMTPSA id q129sm9859631qha.4.2015.03.31.06.23.13
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 31 Mar 2015 06:23:14 -0700 (PDT)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Mar 2015 10:22:38 -0300
-Message-Id: <1427808158-16502-5-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1427808158-16502-1-git-send-email-mario@ossystems.com.br>
-References: <1427808158-16502-1-git-send-email-mario@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-java][PATCH 5/5] icedtea6-native.inc: remove --disable-npplugin
+	Tue, 31 Mar 2015 13:45:14 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Tue, 31 Mar 2015 10:44:58 -0300
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from localhost (10.4.3.1) by mail.aker.com.br (10.0.0.20) with
+	Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 31 Mar 2015 10:45:05 -0300
+Date: Tue, 31 Mar 2015 10:47:58 -0300
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20150331134758.GA5096@saldanha.aker.com.br>
+References: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
+	<20150330202507.GA22676@mail.itconsulting-heinold.de>
+	<CAP9ODKoLZAv_ae7vJQ1vL_UPTX_mS9t__42Uac7Nf-6ivnNvHg@mail.gmail.com>
+	<3AB4D6A9-5462-4A7D-8C7F-0E7FDE38DD18@gmail.com>
+	<CAP9ODKrzSGThUHqiV3dCYxbXJk_m-VeCwpVm54c2f2Zu3vmtAQ@mail.gmail.com>
+	<A6835A71-8AC7-4456-9C50-24015CBB79FA@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <A6835A71-8AC7-4456-9C50-24015CBB79FA@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+X-AkerSMTPGW-ServerID: d3ca878c259c98dab9711b092908c214d1fd543e
+X-AkerSMTPGW-MessageID: 44951a420d5a27c3fc61ab18eb76c53ad8b45fa0-10o
+Subject: Re: [meta-java][PATCH] cacao: fix problem with internal garbage collector
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,31 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 13:23:15 -0000
+X-List-Received-Date: Tue, 31 Mar 2015 13:45:19 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Fixes:
+On Mon, Mar 30, 2015 at 11:08:43PM -0300, Khem Raj wrote:
+> 
+> > On Mar 30, 2015, at 6:42 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> > 
+> > On Mon, Mar 30, 2015 at 10:40 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> >> 
+> >>> On Mar 30, 2015, at 5:45 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> >>> 
+> >>> On Mon, Mar 30, 2015 at 5:25 PM, Henning Heinold
+> >>> <henning@itconsulting-heinold.de> wrote:
+> >>>> if I remember correctly, than the bdwgc inside cacao differs from upstream.
+> >>> 
+> >> 
+> >> there must be a reason why cacao decided to fork its own copy. Do we know ?
+> > 
+> > I don't. We could compare the versions and see if it has any change.
+> > 
+> 
+> we should find the reason before we conclude anything and go one  way or other
+> sometimes differences are very subtle
 
-WARNING: QA Issue: icedtea6-native: configure was passed unrecognised
-  options: --disable-npplugin
+Looking at commit log [1], I couldn't find anything that explains why there is
+a fork. I was not able to clone the repository, but browsing the source online
+I cound only see commits that are upgrades and one that specifically reverts all
+CACAO modifications [2].
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- recipes-core/icedtea/icedtea6-native.inc | 1 -
- 1 file changed, 1 deletion(-)
+[1] http://mips.complang.tuwien.ac.at/hg/cacao/
+[2] http://mips.complang.tuwien.ac.at/hg/cacao/rev/160a7ee3aa30
 
-diff --git a/recipes-core/icedtea/icedtea6-native.inc b/recipes-core/icedtea/icedtea6-native.inc
-index df1be9c..43377ce 100644
---- a/recipes-core/icedtea/icedtea6-native.inc
-+++ b/recipes-core/icedtea/icedtea6-native.inc
-@@ -28,7 +28,6 @@ EXTRA_OECONF = "\
- 	--disable-docs \
- 	--disable-pulse-java \
- 	--disable-plugin \
--        --disable-npplugin \
- 	--disable-xrender \
- 	\
- 	--with-ecj=${STAGING_BINDIR_NATIVE}/ecj-bootstrap \
 -- 
-2.1.4
+		Hugo
 
 
