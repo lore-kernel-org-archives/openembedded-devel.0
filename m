@@ -1,44 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
-	[209.85.192.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 516B3736C1
+Return-Path: <gary.robertson@linaro.org>
+Received: from mail-ob0-f169.google.com (mail-ob0-f169.google.com
+	[209.85.214.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C022736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 02:08:43 +0000 (UTC)
-Received: by pddn5 with SMTP id n5so4441875pdd.2
+	Tue, 31 Mar 2015 04:11:33 +0000 (UTC)
+Received: by obbgh1 with SMTP id gh1so8734507obb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 19:08:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date
-	:content-transfer-encoding:message-id:references:to;
-	bh=5pyK83ceVs2PjuDQUgW+4GylafLuyXH7dP2te8rPY/Y=;
-	b=FUWjF3FIbVYaP018qxR//FfGEBVV0nnEUbz2Vk+66mMaMxdESP+QcUJYNzf0E+3bKf
-	bRfpr0WCKl9dtzDroJo+NeFqHeJDhjy+MhA9qn3OnK16CXHqZ1CMnB2PydFGN8QKMET7
-	R3uxsr9P8LN52zLuCA9Dr5iFKUog/KZKB5Z3IRYlO4WwlBnfdBiVp9UXnf5x1PuiMREe
-	NhXEdCs6yutWEN/3p5KobczJ549hkP0oQs07f3ZEXykkDqKDoCyupZRkZwtmIyABCw+D
-	SbiPrz0LxJdrRJDYIXd9FJ1FOmmbN+FCb2DMnbw97nCQ+AduXNfAv1KYJbAcLk/I4wZw
-	kCZg==
-X-Received: by 10.70.131.38 with SMTP id oj6mr64240717pdb.150.1427767725336;
-	Mon, 30 Mar 2015 19:08:45 -0700 (PDT)
-Received: from ?IPv6:2601:9:3580:84c:4995:8e53:6540:74d8?
-	([2601:9:3580:84c:4995:8e53:6540:74d8])
-	by mx.google.com with ESMTPSA id
-	qa3sm11391760pab.16.2015.03.30.19.08.44
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Mon, 30 Mar 2015 19:08:44 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAP9ODKrzSGThUHqiV3dCYxbXJk_m-VeCwpVm54c2f2Zu3vmtAQ@mail.gmail.com>
-Date: Mon, 30 Mar 2015 19:08:43 -0700
-Message-Id: <A6835A71-8AC7-4456-9C50-24015CBB79FA@gmail.com>
-References: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
-	<20150330202507.GA22676@mail.itconsulting-heinold.de>
-	<CAP9ODKoLZAv_ae7vJQ1vL_UPTX_mS9t__42Uac7Nf-6ivnNvHg@mail.gmail.com>
-	<3AB4D6A9-5462-4A7D-8C7F-0E7FDE38DD18@gmail.com>
-	<CAP9ODKrzSGThUHqiV3dCYxbXJk_m-VeCwpVm54c2f2Zu3vmtAQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2070.6)
-Subject: Re: [meta-java][PATCH] cacao: fix problem with internal garbage collector
+	Mon, 30 Mar 2015 21:11:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=morXCq+m8TXcghNcjYnigZPfu+wAw4Nl7uRKLwL34gU=;
+	b=bLffA+riERZqA03lIejPvZ+XYEO3L/mXLfWuI1hLKvdNVT5M3OwZZfYmgoxHfcAenj
+	IVBpgNo1UdrjghNPK0YZNOhn+a15r91a+yYCJ+dhVD+09dKkHRLpyDGezX8ugVLNL9Hw
+	CwnhD5HTd8Yt5OfygZBDMtFDSs0cUQ5orUeHjx9h7j6rQCbjp7axM6TI8cD29f/mYf4G
+	JWS6Y6hsuS2HlsyzgIUdf94/RSQnvT1H9CZWc5T5qiVLfTIEMLozWT2K6U1+Vz+tUOmV
+	8hHMAF5ts/taKNRLoM+xoWZWGxmGjaunmOXLTYB4VY4nvpmiFCwEBpzcNKvn7BJ3gVRx
+	rJxw==
+X-Gm-Message-State: ALoCoQlHt0rENBvloo4UwhQ+WQlFqTPqrJqQohY0UH6Vu6mWxGLG94pyj8xA0wYaS6xZZIIyWF5w
+X-Received: by 10.60.96.5 with SMTP id do5mr8060331oeb.34.1427775094012;
+	Mon, 30 Mar 2015 21:11:34 -0700 (PDT)
+Received: from honkintosh.cybertech.lan (65-120-133-114.dia.static.qwest.net.
+	[65.120.133.114])
+	by mx.google.com with ESMTPSA id v10sm8025488obo.19.2015.03.30.21.11.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 30 Mar 2015 21:11:32 -0700 (PDT)
+From: "Gary S. Robertson" <gary.robertson@linaro.org>
+To: Martin Jansa <martin.jansa@gmail.com>, Ross Burton <ross.burton@intel.com>
+Date: Mon, 30 Mar 2015 23:10:40 -0500
+Message-Id: <1427775041-9330-1-git-send-email-gary.robertson@linaro.org>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1413992945-33655-1-git-send-email-mike.holmes@linaro.org>
+References: <1413992945-33655-1-git-send-email-mike.holmes@linaro.org>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH V2] add CUnit test suite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,32 +48,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 02:08:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 Mar 2015 04:11:35 -0000
 
+Mike Holmes has asked me to resubmit this patch on his behalf, as other
+duties have currently preempted his efforts to pursue acceptance of this
+new recipe in OE.
 
-> On Mar 30, 2015, at 6:42 PM, Otavio Salvador <otavio@ossystems.com.br> =
-wrote:
->=20
-> On Mon, Mar 30, 2015 at 10:40 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>=20
->>> On Mar 30, 2015, at 5:45 PM, Otavio Salvador =
-<otavio@ossystems.com.br> wrote:
->>>=20
->>> On Mon, Mar 30, 2015 at 5:25 PM, Henning Heinold
->>> <henning@itconsulting-heinold.de> wrote:
->>>> if I remember correctly, than the bdwgc inside cacao differs from =
-upstream.
->>>=20
->>=20
->> there must be a reason why cacao decided to fork its own copy. Do we =
-know ?
->=20
-> I don't. We could compare the versions and see if it has any change.
->=20
+A new patch file was added which sets the path configuration variables
+to place documentation and headers in locations consistent with the
+OE filesystem layout.
 
-we should find the reason before we conclude anything and go one  way or =
-other
-sometimes differences are very subtle=
+Looking in the ${WORKDIR}/*destdir and ${WORKDIR}/deploy-ipks subdirectories
+after performing the recipe build, it appears that everything is being placed
+into the appropriate locations.
+
+We believe this version of the recipe addresses the concerns
+raised in the email exchanges regarding the initial recipe submission,
+and hope you will now find it acceptable.
+
 
