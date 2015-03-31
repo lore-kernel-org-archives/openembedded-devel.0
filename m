@@ -1,27 +1,25 @@
 Return-Path: <hugo.saldanha@aker.com.br>
 Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id 7926C73C86
+	by mail.openembedded.org (Postfix) with SMTP id 6A74A736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 13:48:28 +0000 (UTC)
+	Tue, 31 Mar 2015 16:37:40 +0000 (UTC)
 Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
-	by asmg.aker.com.br [10.0.1.3]; Tue, 31 Mar 2015 10:48:09 -0300
+	by asmg.aker.com.br [10.0.1.3]; Tue, 31 Mar 2015 13:37:21 -0300
 	(envelope-from hugo.saldanha@aker.com.br)
-Received: from localhost (10.4.3.1) by mail.aker.com.br (10.0.0.20) with
-	Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Tue, 31 Mar 2015 10:48:20 -0300
-Date: Tue, 31 Mar 2015 10:51:13 -0300
+Received: from saldanha.aker.com.br (10.4.3.1) by mail.aker.com.br (10.0.0.20)
+	with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 31 Mar 2015 13:37:30 -0300
 From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <20150331135113.GB5096@saldanha.aker.com.br>
-References: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
-	<CAP9ODKpr0mxqDF3+ORP5Ee3=qr3rMhXgTGWyD4BPU-jgEcOJ3A@mail.gmail.com>
-MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 31 Mar 2015 13:39:59 -0300
+Message-ID: <1427819999-7437-1-git-send-email-hugo.saldanha@aker.com.br>
+X-Mailer: git-send-email 2.3.4
 In-Reply-To: <CAP9ODKpr0mxqDF3+ORP5Ee3=qr3rMhXgTGWyD4BPU-jgEcOJ3A@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+References: <CAP9ODKpr0mxqDF3+ORP5Ee3=qr3rMhXgTGWyD4BPU-jgEcOJ3A@mail.gmail.com>
+MIME-Version: 1.0
 X-AkerSMTPGW-ServerID: d3ca878c259c98dab9711b092908c214d1fd543e
-X-AkerSMTPGW-MessageID: b8ae918f9bedb2ed474e944fe18cb18f3e4f80e7-10o
-Subject: Re: [meta-java][PATCH] cacao: fix problem with internal garbage collector
+X-AkerSMTPGW-MessageID: 23d084f6fbac8a31502062eca73bf7d3a09efbd8-10o
+Subject: [meta-java][PATCH v2] cacao: fix problem with internal garbage collector
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,29 +33,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 13:48:30 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 31 Mar 2015 16:37:42 -0000
+Content-Type: text/plain
 
-Hi Otavio,
+Cacao uses an internal version of bdwgc that was being installed
+(headers, libs, etc.) together with the JVM, unnecessarily conflicting
+with original bdwgc package.
 
-On Mon, Mar 30, 2015 at 09:46:24PM -0300, Otavio Salvador wrote:
-> On Mon, Mar 30, 2015 at 4:06 PM, Hugo Vasconcelos Saldanha
-> <hugo.saldanha@aker.com.br> wrote:
-> > Cacao uses an internal version of bdwgc that was being installed
-> > (headers, libs, etc.) together with the JVM, unnecessarily conflicting
-> > with original bwdgc package.
-> >
-> > A patch from Gentoo is applied so the system's bdwgc is used instead.
-> >
-> > Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
-> 
-> Please add a patch description, signed-off-by and also Upstream-Status header.
-> 
+A patch from Gentoo is applied so the system's bdwgc is used instead.
 
-Sure.
+Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+---
+ .../cacao/cacao-1.6.1/system-boehm-gc.patch        | 60 ++++++++++++++++++++++
+ recipes-core/cacao/cacao_1.6.1.bb                  |  8 +--
+ 2 files changed, 64 insertions(+), 4 deletions(-)
+ create mode 100644 recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
 
+diff --git a/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch b/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
+new file mode 100644
+index 0000000..c30f5be
+--- /dev/null
++++ b/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
+@@ -0,0 +1,60 @@
++cacao: use system's boehm garbage collector
++
++This is a Gentoo's patch [1] to force the use of system's bdwgc.
++
++Cacao was installing an internal version of bdwgc which conflicts
++with the system's version.
++
++[1] https://gitweb.gentoo.org/proj/java.git/plain/dev-java/cacao/files/system-boehm-gc.patch
++
++Upstream-Status: Inappropriate [not author]
++
++Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
++
++diff --git a/configure.ac b/configure.ac
++--- a/configure.ac
+++++ b/configure.ac
++@@ -691,6 +691,8 @@
++ 
++ AC_CHECK_ENABLE_PIC_ASM
++ 
+++PKG_CHECK_MODULES([BOEHM], bdw-gc,,AC_MSG_ERROR[boehm-gc not found])
+++
++ dnl Define version numbers.
++ AC_VERSION_DETAIL
++ AC_VERSION_CONFIG
++@@ -793,12 +795,6 @@
++ )
++ 
++ 
++-dnl We only build the shared library objects but we use it as
++-dnl noinst_LTLIBRARIES.
++-ac_configure_args="$ac_configure_args --disable-static"
++-AC_CONFIG_SUBDIRS(src/mm/boehm-gc)
++-
++-
++ AC_OUTPUT
++ 
++ 
++diff --git a/src/mm/Makefile.am b/src/mm/Makefile.am
++--- a/src/mm/Makefile.am
+++++ b/src/mm/Makefile.am
++@@ -35,14 +35,13 @@
++ endif
++ 
++ if ENABLE_GC_BOEHM
++-SUBDIRS = \
++-	boehm-gc
++-
++ GC_FILE = \
++ 	gc-boehm.cpp
++ 
++-GC_LIB = \
++-	$(top_builddir)/src/mm/boehm-gc/libgc.la
+++AM_CPPFLAGS += $(BOEHM_CFLAGS)
+++
+++GC_LIB = $(BOEHM_LIBS)
+++
++ endif
++ 
++ if ENABLE_GC_CACAO
+diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
+index 9f07946..65aaf93 100644
+--- a/recipes-core/cacao/cacao_1.6.1.bb
++++ b/recipes-core/cacao/cacao_1.6.1.bb
+@@ -4,14 +4,14 @@ LICENSE  = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ SECTION  = "interpreters"
+ 
+-DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native"
++DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
+ PROVIDES_class-native = "virtual/java-native"
+ 
+-DEPENDS = "zlib libtool classpath virtual/javac-native"
+-DEPENDS_${PN} = "classpath"
++DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
+ RPROVIDES_${PN} = "java2-runtime"
+ 
+-SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz"
++SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz \
++           file://system-boehm-gc.patch"
+ SRC_URI[md5sum] = "2c18478404afd1cffdd15ad1e9d85a57"
+ SRC_URI[sha256sum] = "eecc8bd1b528a028f43d9d1d0c06b97855bbf1d40e03826d911ebbc0b6971e12"
+ 
 -- 
-		Hugo
+2.3.4
+
 
 
