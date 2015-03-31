@@ -1,53 +1,27 @@
-Return-Path: <praveenr@tataelxsi.co.in>
-X-Greylist: delayed 954 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 31 Mar 2015 10:19:02 UTC
-Received: from APAC01-SG1-obe.outbound.protection.outlook.com
-	(mail-sg1on0137.outbound.protection.outlook.com [134.170.132.137])
-	by mail.openembedded.org (Postfix) with ESMTP id D1961736B6
+Return-Path: <daniel.markus@leica-geosystems.com>
+Received: from outbound.sbg.se (outbound.sbg.se [83.241.165.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EE05724B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 10:19:02 +0000 (UTC)
-Received: from SIXPR04MB0462.apcprd04.prod.outlook.com (25.160.229.150) by
-	SIXPR04MB0464.apcprd04.prod.outlook.com (25.160.229.152) with Microsoft
-	SMTP Server (TLS) id 15.1.118.21; Tue, 31 Mar 2015 10:03:08 +0000
-Received: from SIXPR04MB0462.apcprd04.prod.outlook.com ([25.160.229.150]) by
-	SIXPR04MB0462.apcprd04.prod.outlook.com ([25.160.229.150]) with mapi id
-	15.01.0118.022; Tue, 31 Mar 2015 10:03:07 +0000
-From: PRAVEEN KUMAR R <praveenr@tataelxsi.co.in>
-To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: tip and cu utility
-Thread-Index: AQHQa5nB48/jBlSUhku9JFG59X5Svw==
-Date: Tue, 31 Mar 2015 10:03:07 +0000
-Message-ID: <1427796186892.42571@tataelxsi.co.in>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [14.141.44.158]
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=praveenr@tataelxsi.co.in; 
-x-microsoft-antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:SIXPR04MB0464;
-x-forefront-antispam-report: BMV:1; SFV:NSPM;
-	SFS:(10019020)(6009001)(15395725005)(102836002)(40100003)(117636001)(2501003)(46102003)(122556002)(15975445007)(19580395003)(16236675004)(92566002)(87936001)(62966003)(66066001)(74482002)(107886001)(229853001)(36756003)(54356999)(50986999)(19627405001)(2656002)(19625215002)(77156002)(15198665003)(106116001)(2900100001)(86362001)(558084003)(80872002)(10090945008)(19477635001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:SIXPR04MB0464;
-	H:SIXPR04MB0462.apcprd04.prod.outlook.com; FPR:; SPF:None;
-	MLV:nov; PTR:InfoNoRecords; LANG:en; 
-x-microsoft-antispam-prvs: <SIXPR04MB04646BB5949A0EAF08AF519493F40@SIXPR04MB0464.apcprd04.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:;
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(601004)(5002010)(5005006); SRVR:SIXPR04MB0464; BCL:0;
-	PCL:0; RULEID:; SRVR:SIXPR04MB0464; 
-x-forefront-prvs: 0532BF6DC2
-received-spf: None (protection.outlook.com: tataelxsi.co.in does not designate
-	permitted sender hosts)
-MIME-Version: 1.0
-X-OriginatorOrg: tataelxsi.co.in
-X-MS-Exchange-CrossTenant-originalarrivaltime: 31 Mar 2015 10:03:07.3468 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: ad6a39dd-96b6-4368-82da-f2ec4d92e26a
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SIXPR04MB0464
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: tip and cu utility
+	Tue, 31 Mar 2015 13:01:28 +0000 (UTC)
+Received: from hermes.sbg.se (mail.sbg.se [83.241.165.77])
+	by outbound.sbg.se (Postfix) with ESMTP id 60D6E1847BC;
+	Tue, 31 Mar 2015 15:01:27 +0200 (CEST)
+Received: from localhost.localdomain (unknown [10.213.0.77])
+	by hermes.sbg.se (Postfix) with ESMTP id D0FA1140156;
+	Tue, 31 Mar 2015 15:00:13 +0200 (CEST)
+From: Daniel Markus <daniel.markus@leica-geosystems.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 Mar 2015 14:59:57 +0200
+Message-Id: <1427806797-560-1-git-send-email-daniel.markus@leica-geosystems.com>
+X-Mailer: git-send-email 1.9.1
+X-SBG-MailScanner-ID: D0FA1140156.7E482
+X-SBG-MailScanner: Found to be clean
+X-SBG-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
+	score=-102.9, required 5, autolearn=not spam, ALL_TRUSTED -1.00,
+	BAYES_00 -1.90, USER_IN_WHITELIST -100.00)
+X-SBG-MailScanner-From: daniel.markus@leica-geosystems.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] socorro-syms: Correct the extraction of repository branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,15 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 10:19:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 Mar 2015 13:01:33 -0000
 
-Is there any existing package that provide tip and cu utility ?
+When a recipe has git-cloned source code to compile, it may be checked out with
+a detached HEAD. The current VCS information extraction in socorro-syms
+incorrectly assumes a detached HEAD belongs to the master branch.
 
+With the proper git command we find the branch the detached HEAD belongs to and
+use that in the Socorro link.
 
-http://man.cx/TIP(1)?
-?
+Signed-off-by: Daniel Markus <daniel.markus@leica-geosystems.com>
+---
+ meta-oe/classes/socorro-syms.bbclass | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/meta-oe/classes/socorro-syms.bbclass b/meta-oe/classes/socorro-syms.bbclass
+index 0312031..7a7b208 100644
+--- a/meta-oe/classes/socorro-syms.bbclass
++++ b/meta-oe/classes/socorro-syms.bbclass
+@@ -148,12 +148,10 @@ def git_repository_path(source_file_path):
+     url_match = re.search(".*(://|@)([^:/]*).*", source_long_url)
+     source_server = url_match.group(2)
+ 
+-    # (2) Get the branch for this file. If it's detached and just shows HEAD
+-    # then set it to master and hope we can get the correct revision from there.
+-    source_branch = run_command(
+-        "git rev-parse --abbrev-ref HEAD", source_file_dir)
+-    if source_branch == "HEAD":
+-        source_branch = "master"
++    # (2) Get the branch for this file.
++    source_branch_list = run_command("git show-branch --list", source_file_dir)
++    source_branch_match = re.search(".*?\[(.*?)\].*", source_branch_list)
++    source_branch = source_branch_match.group(1)
+ 
+     # (3) Since the repo root directory name can be changed without affecting
+     # git, we need to extract the name from something more reliable.
+-- 
+1.9.1
 
 
