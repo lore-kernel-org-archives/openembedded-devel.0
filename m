@@ -1,34 +1,41 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
-	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A27673C22
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id BC790736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 00:46:23 +0000 (UTC)
-Received: by iedm5 with SMTP id m5so3906092ied.3
+	Tue, 31 Mar 2015 01:40:24 +0000 (UTC)
+Received: by patj18 with SMTP id j18so3568450pat.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Mar 2015 17:46:25 -0700 (PDT)
+	Mon, 30 Mar 2015 18:40:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=omQTn6MZOnHVWAq5lsEKbYOgKN/sOw+skVmb8JkXdpA=;
-	b=ArP7WH9nJCI+8AEbZb36ocFXNF4BG4GwVRNWZSjDU/dM5HI5z5gDeLtr/T0ylc9Dkm
-	e1XWi/y7FLFSz1ZN5C/v2jL5bk9LAZ+20gC0SS36HoOfscvLAnTd2c8nIvKWT4aQabJq
-	n20f1ntT4o95sv3pr1eCdDPVIgjvEwnAo+Yh4dy/jQB5AJV40JyqMI4D04+z6If4KR+y
-	uPsrcCelScok6fEbb0gPiuSOMs1bm4ZOqemC29mfaTdc5dMaj2i46t9/FG6rd2XBcuJG
-	ET2cm2zIJNLV5FH4y3K772Y26D98eCQdt89PEKi6Onv7zacEXELfBHpEdeoUgpnCHv/1
-	2ZrQ==
-MIME-Version: 1.0
-X-Received: by 10.50.79.163 with SMTP id k3mr589951igx.30.1427762784957; Mon,
-	30 Mar 2015 17:46:24 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.107.23.6 with HTTP; Mon, 30 Mar 2015 17:46:24 -0700 (PDT)
-In-Reply-To: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=cVWAcMJyT/TIO2vA6c1fchd3FNyk95ctsmE2UplvI9M=;
+	b=jWMPk16vVQCHQFQkQJEw17X/G/LCl0FDiZh8tTGn+GVU4amo4iGwcqnxn7GdnYU08X
+	9CjeFFGlw0CX6YSUcrsoI0QDOxB3ef9N7cm4pR8K+EwRehDxKgOPxmnlc4ChAy9bwqGS
+	L/jbtsYBmnGQPWRBKIiGGwhs6HlZUbKrmYsIV7fUl+i7uFQoUSEhA9iovyqwUh00xJSZ
+	KR67aZezxoi0vwZ2cg+doipXok8lfSK0O2jTz/Am8AX+DTWF3YdOCHy27tOFxclyMTun
+	CnevWbQUlQKNT1GySMLnmcGAYk3d9euEivlUxRTceYaSGV5Kdhq0KsPDsYga4ypOlai3
+	J9nA==
+X-Received: by 10.68.174.132 with SMTP id bs4mr63685046pbc.135.1427766025443; 
+	Mon, 30 Mar 2015 18:40:25 -0700 (PDT)
+Received: from ?IPv6:2601:9:3580:84c:4995:8e53:6540:74d8?
+	([2601:9:3580:84c:4995:8e53:6540:74d8])
+	by mx.google.com with ESMTPSA id
+	dh3sm11972513pdb.69.2015.03.30.18.40.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 30 Mar 2015 18:40:24 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2070.6\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAP9ODKoLZAv_ae7vJQ1vL_UPTX_mS9t__42Uac7Nf-6ivnNvHg@mail.gmail.com>
+Date: Mon, 30 Mar 2015 18:40:23 -0700
+Message-Id: <3AB4D6A9-5462-4A7D-8C7F-0E7FDE38DD18@gmail.com>
 References: <1427742371-19160-1-git-send-email-hugo.saldanha@aker.com.br>
-Date: Mon, 30 Mar 2015 21:46:24 -0300
-X-Google-Sender-Auth: fFRmtU1IeJYKZDEFyGGL8L9tKhU
-Message-ID: <CAP9ODKpr0mxqDF3+ORP5Ee3=qr3rMhXgTGWyD4BPU-jgEcOJ3A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+	<20150330202507.GA22676@mail.itconsulting-heinold.de>
+	<CAP9ODKoLZAv_ae7vJQ1vL_UPTX_mS9t__42Uac7Nf-6ivnNvHg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2070.6)
 Subject: Re: [meta-java][PATCH] cacao: fix problem with internal garbage collector
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,108 +50,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 00:46:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 31 Mar 2015 01:40:24 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 30, 2015 at 4:06 PM, Hugo Vasconcelos Saldanha
-<hugo.saldanha@aker.com.br> wrote:
-> Cacao uses an internal version of bdwgc that was being installed
-> (headers, libs, etc.) together with the JVM, unnecessarily conflicting
-> with original bwdgc package.
->
-> A patch from Gentoo is applied so the system's bdwgc is used instead.
->
-> Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
 
-Please add a patch description, signed-off-by and also Upstream-Status header.
+> On Mar 30, 2015, at 5:45 PM, Otavio Salvador <otavio@ossystems.com.br> =
+wrote:
+>=20
+> On Mon, Mar 30, 2015 at 5:25 PM, Henning Heinold
+> <henning@itconsulting-heinold.de> wrote:
+>> if I remember correctly, than the bdwgc inside cacao differs from =
+upstream.
+>=20
 
-> --- /dev/null
-> +++ b/recipes-core/cacao/cacao-1.6.1/system-boehm-gc.patch
-> @@ -0,0 +1,47 @@
-> +diff --git a/configure.ac b/configure.ac
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -691,6 +691,8 @@
-> +
-> + AC_CHECK_ENABLE_PIC_ASM
-> +
-> ++PKG_CHECK_MODULES([BOEHM], bdw-gc,,AC_MSG_ERROR[boehm-gc not found])
-> ++
-> + dnl Define version numbers.
-> + AC_VERSION_DETAIL
-> + AC_VERSION_CONFIG
-> +@@ -793,12 +795,6 @@
-> + )
-> +
-> +
-> +-dnl We only build the shared library objects but we use it as
-> +-dnl noinst_LTLIBRARIES.
-> +-ac_configure_args="$ac_configure_args --disable-static"
-> +-AC_CONFIG_SUBDIRS(src/mm/boehm-gc)
-> +-
-> +-
-> + AC_OUTPUT
-> +
-> +
-> +diff --git a/src/mm/Makefile.am b/src/mm/Makefile.am
-> +--- a/src/mm/Makefile.am
-> ++++ b/src/mm/Makefile.am
-> +@@ -35,14 +35,13 @@
-> + endif
-> +
-> + if ENABLE_GC_BOEHM
-> +-SUBDIRS = \
-> +-      boehm-gc
-> +-
-> + GC_FILE = \
-> +       gc-boehm.cpp
-> +
-> +-GC_LIB = \
-> +-      $(top_builddir)/src/mm/boehm-gc/libgc.la
-> ++AM_CPPFLAGS += $(BOEHM_CFLAGS)
-> ++
-> ++GC_LIB = $(BOEHM_LIBS)
-> ++
-> + endif
-> +
-> + if ENABLE_GC_CACAO
-> diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
-> index 9f07946..65aaf93 100644
-> --- a/recipes-core/cacao/cacao_1.6.1.bb
-> +++ b/recipes-core/cacao/cacao_1.6.1.bb
-> @@ -4,14 +4,14 @@ LICENSE  = "GPL-2.0"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
->  SECTION  = "interpreters"
->
-> -DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native"
-> +DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
->  PROVIDES_class-native = "virtual/java-native"
->
-> -DEPENDS = "zlib libtool classpath virtual/javac-native"
-> -DEPENDS_${PN} = "classpath"
-> +DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
->  RPROVIDES_${PN} = "java2-runtime"
->
-> -SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz"
-> +SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.xz \
-> +           file://system-boehm-gc.patch"
->  SRC_URI[md5sum] = "2c18478404afd1cffdd15ad1e9d85a57"
->  SRC_URI[sha256sum] = "eecc8bd1b528a028f43d9d1d0c06b97855bbf1d40e03826d911ebbc0b6971e12"
->
-> --
-> 2.3.4
->
->
-> --
+there must be a reason why cacao decided to fork its own copy. Do we =
+know ?
+
+> I didn't compare them but assuming this works fine I am fine with this
+> change. It reduces build time and also fixes a conflicting binary
+> installation.
+>=20
+> --=20
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
