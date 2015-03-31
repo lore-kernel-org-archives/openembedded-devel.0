@@ -1,36 +1,38 @@
 Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qg0-f50.google.com (mail-qg0-f50.google.com
-	[209.85.192.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D5B67391D
+Received: from mail-qc0-f174.google.com (mail-qc0-f174.google.com
+	[209.85.216.174])
+	by mail.openembedded.org (Postfix) with ESMTP id BEB697391D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 13:23:02 +0000 (UTC)
-Received: by qgfa8 with SMTP id a8so13866109qgf.0
+	Tue, 31 Mar 2015 13:23:10 +0000 (UTC)
+Received: by qcgx3 with SMTP id x3so12939033qcg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 06:23:03 -0700 (PDT)
+	Tue, 31 Mar 2015 06:23:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=BLX4aplbCDTLdN4I8EzXKLR8vbxMspJ90sJvRJLfqBs=;
-	b=wnftQQwiHkjI/l5v9x2QG526Inunu9BkBHf6rL6sGg1dIjILyONxAGKPhh9HNzoX2S
-	xfTAAf+n0ssZSU6tHyTM8Lv4cqU/Ju9yH6q9l+o/Gjs8YT7VEKhZUr/9WlN3WJtp8/s8
-	GCAHh2GgtEII0La0D0VoByddiVrIWIeN+kYguRWYIXPNBptDs3Tj01uBfxHlQdm/A8M7
-	+Buksw7hLafYZ1OJmXNlu/yVGgs9+slVDr+v3FMWusYHkaOlBid+uDvT1lNN7OgEA6jz
-	UyhlLUi4aMUEKANTvCwCh9sden+uah3XHl3He+m3C5x+FEoYDXwjMSrom2MT/22u5QXD
-	IeVQ==
-X-Received: by 10.140.239.85 with SMTP id k82mr25795219qhc.22.1427808183628;
-	Tue, 31 Mar 2015 06:23:03 -0700 (PDT)
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+	:organization; bh=cxtxsgiUvjMz7r/UQzPD3AMxnQ5MmXVoX1wesZQoLM8=;
+	b=zj+dHBwpFONUmfwUeHLlHwiNN9YeQLrU6PI4dLYUFYMsQyF377SWo03T0r895uCSKg
+	bRTuwX1bahwdCFc9lsAkOs5IRePxdWuUrkvS9Ibtq7gQN/4PswBFFa+fqNpDCW/t2Ym1
+	vWhJ9AHxZ6J8eRo3wQm8+eRdCxbOoK7l3qzydRGgv7ek8K8BKllXGcc3fuTlkgrSsAkv
+	XzPu4Rda+e9z37fGhaAC30euNliDLIFVU/XBs2SQeTcrrtNC+XhdFADOJjLqn4Gcdr0s
+	1scg+5NKLLke83YkgEwT6xCRxE3VUtZQi5NCw9q3PhMlvzfAYbrR3erySeGOPXTWBqyH
+	FKiw==
+X-Received: by 10.229.95.74 with SMTP id c10mr49744159qcn.17.1427808191721;
+	Tue, 31 Mar 2015 06:23:11 -0700 (PDT)
 Received: from centrium.lab.ossystems.com.br ([177.100.224.72])
-	by mx.google.com with ESMTPSA id q129sm9859631qha.4.2015.03.31.06.23.02
+	by mx.google.com with ESMTPSA id q129sm9859631qha.4.2015.03.31.06.23.10
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 31 Mar 2015 06:23:03 -0700 (PDT)
+	Tue, 31 Mar 2015 06:23:11 -0700 (PDT)
 Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
 From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Mar 2015 10:22:34 -0300
-Message-Id: <1427808158-16502-1-git-send-email-mario@ossystems.com.br>
+Date: Tue, 31 Mar 2015 10:22:36 -0300
+Message-Id: <1427808158-16502-3-git-send-email-mario@ossystems.com.br>
 X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1427808158-16502-1-git-send-email-mario@ossystems.com.br>
+References: <1427808158-16502-1-git-send-email-mario@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-java][PATCH 1/5] rxtx: put .jar and .so files into the same package (librxtx-java)
+Subject: [meta-java][PATCH 3/5] cacao-initial-native, jamvm-initial-native: provide virtual/java-initial-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,42 +46,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Mar 2015 13:23:03 -0000
+X-List-Received-Date: Tue, 31 Mar 2015 13:23:11 -0000
 
-That's how Debian does, supposedly because it does not make sense to
-ship .jar and .so files into separate packages.
+Since bd9c6023, virtual/java-initial is provided by
+cacao-initial-native and jamvm-initial-native.  For consistency, this
+commit makes them provide virtual/java-initial-native instead.
 
 Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
 ---
- recipes-extended/rxtx/rxtx_2.2.0.bb | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ README                                           | 2 +-
+ recipes-core/cacao/cacao-initial-native_0.98.bb  | 2 +-
+ recipes-core/ecj/libecj-bootstrap.inc            | 2 +-
+ recipes-core/jamvm/jamvm-initial-native_1.4.5.bb | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
-index 56c939f..b9b3027 100644
---- a/recipes-extended/rxtx/rxtx_2.2.0.bb
-+++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
-@@ -26,7 +26,7 @@ SRC_URI[sha256sum] = "3c30373e760f444def3650c76c5a00ae12fb1d860ec008750d084f4880
+diff --git a/README b/README
+index c5bba6c..70af588 100644
+--- a/README
++++ b/README
+@@ -54,7 +54,7 @@ Usage instructions
  
- S = "${WORKDIR}/rxtx-2.2pre2"
+ You should define at least the following variables in a distro include file or local.conf
  
--INSANE_SKIP_${PN} += "dev-so"
-+INSANE_SKIP_${JPN} += "dev-so"
+-PREFERRED_PROVIDER_virtual/java-initial = "cacao-initial"
++PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
  
- inherit autotools-brokensep java-library
- PACKAGE_ARCH = "${TUNE_PKGARCH}"
-@@ -51,5 +51,11 @@ do_install_prepend() {
-     install -d ${D}${datadir_java}/ext
- }
+ PREFERRED_PROVIDER_virtual/java-native = "jamvm-native"
+ PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+diff --git a/recipes-core/cacao/cacao-initial-native_0.98.bb b/recipes-core/cacao/cacao-initial-native_0.98.bb
+index 181faca..72c6246 100644
+--- a/recipes-core/cacao/cacao-initial-native_0.98.bb
++++ b/recipes-core/cacao/cacao-initial-native_0.98.bb
+@@ -4,7 +4,7 @@ LICENSE  = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ SECTION  = "interpreters"
  
--FILES_${PN} += "${libdir_jni}"
-+PACKAGES_remove = "${PN}"
-+
-+FILES_${JPN} += "${libdir_jni}"
-+RPROVIDES_${JPN} = "${PN}"
-+RCONFLICTS_${JPN} = "${PN}"
-+RREPLACES_${JPN} = "${PN}"
-+
- FILES_${PN}-dbg += "${libdir_jni}/.debug"
+-PROVIDES = "virtual/java-initial"
++PROVIDES = "virtual/java-initial-native"
+ 
+ inherit native autotools-brokensep
+ 
+diff --git a/recipes-core/ecj/libecj-bootstrap.inc b/recipes-core/ecj/libecj-bootstrap.inc
+index 9fb4156..020b8d3 100644
+--- a/recipes-core/ecj/libecj-bootstrap.inc
++++ b/recipes-core/ecj/libecj-bootstrap.inc
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.eclipse.org/"
+ LICENSE = "EPL-1.0"
+ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/EPL-1.0;md5=57f8d5e2b3e98ac6e088986c12bf94e6"
+ 
+-DEPENDS = "fastjar-native jikes-initial-native virtual/java-initial"
++DEPENDS = "fastjar-native jikes-initial-native virtual/java-initial-native"
+ 
+ INC_PR = "r5"
+ 
+diff --git a/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb b/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
+index 25b42b0..bf005db 100644
+--- a/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
++++ b/recipes-core/jamvm/jamvm-initial-native_1.4.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ DEPENDS = "zlib-native classpath-initial-native jikes-initial-native libffi-native"
+ 
+-PROVIDES = "virtual/java-initial"
++PROVIDES = "virtual/java-initial-native"
+ 
+ PR = "r1"
+ 
 -- 
 2.1.4
 
