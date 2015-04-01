@@ -1,34 +1,35 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A2076013D
+Return-Path: <texier.pj2@gmail.com>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id A1607724DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Apr 2015 02:38:52 +0000 (UTC)
-Received: by pddn5 with SMTP id n5so39793525pdd.2
+	Wed,  1 Apr 2015 09:13:50 +0000 (UTC)
+Received: by wibgn9 with SMTP id gn9so58071104wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Mar 2015 19:38:54 -0700 (PDT)
+	Wed, 01 Apr 2015 02:13:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=dM8GMA36C5iqKqxiazI3sAlho6S4M1AT3wNW7ZqcLaI=;
-	b=0O0uf4F/8v0MLHHbZo3tlt626koL3qw9/bf8EnM3ffeL/rPGP45Bw2RULf6/9wTdoo
-	7lnyU2R8CgkBsgG3KrPComDG0/hscR2ZftXgJb98z2PoOUNzJFsZMJBbZ8bnOjNUVspV
-	3E8Re1T3TGS8TbUjcCBQPE9XRgGpyxqvgvwHNf3TfT4KAPO7HZK2VzLs3PHzd+dknm0Z
-	Kg4QgTbQl4cRokIaNxwR0zTXhnioHLuBaTOBUN/wEgIWE4qRlid2pXDAnbDJACKYwhGV
-	fj+m+xNe+xK6MdzIflX2Hw0z0k/jGHuo/A7kWk1v7+LykXbJP8vyAL99o9e9XBg0OBNN
-	dVRw==
-X-Received: by 10.68.110.37 with SMTP id hx5mr73710846pbb.46.1427855933934;
-	Tue, 31 Mar 2015 19:38:53 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id dl1sm306989pdb.75.2015.03.31.19.38.52
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 31 Mar 2015 19:38:53 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	bh=WJ7VibvEHs754fWnQytoXfJCXhdxMSrvcltxwbOO1yc=;
+	b=TSQsdwJJoSW9vXufGBep7O9aW+06/qL//cxx9x4LmmYhV7WE1LU8zs54oEgwwWuXxd
+	iSSx4OC3qjITUwuF1T5VT2jVdGvdPbmCYwOUeXmlHgxnKnmOjtopP/RoWfxIE8FvtAsX
+	apHV4L5+FpKulaKCzut8ePMcqrlrJs+7VW57x1fxyx0NLoQleew8OJ1tJWS5gXc/pkoJ
+	3f8rlps3es32uyYLYF185o8Zq4TEI6GD6mpQ9FiLh02Cu7SCKC+sn0wM2BFS9GEb5Oqt
+	viG1DPu+2t5anj2dtIDVK1WpJbUsZBdoPeMWCK9swVe0DTCOf8zH6GtFhjefB5Z9WPBF
+	oREQ==
+X-Received: by 10.194.8.99 with SMTP id q3mr83607683wja.88.1427879631199;
+	Wed, 01 Apr 2015 02:13:51 -0700 (PDT)
+Received: from amplitude.amplitude.local ([46.20.167.230])
+	by mx.google.com with ESMTPSA id pa4sm1754978wjb.11.2015.04.01.02.13.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 01 Apr 2015 02:13:50 -0700 (PDT)
+From: texierp <texier.pj2@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Apr 2015 13:36:12 +1100
-Message-Id: <1427855772-13120-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.3.4
-Subject: [meta-oe][PATCH] nodejs: update to 0.12.2
+Date: Wed,  1 Apr 2015 11:13:48 +0200
+Message-Id: <1427879628-7499-1-git-send-email-texier.pj2@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Cc: texierp <ouf_du_45@hotmail.com>,
+	Pierre-Jean TEXIER <pjtexier@amplitude-systemes.com>
+Subject: [meta-oe][PATCH] spitools : add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2015 02:38:53 -0000
+X-List-Received-Date: Wed, 01 Apr 2015 09:13:51 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+From: texierp <ouf_du_45@hotmail.com>
+
+This tool allows you to test the SPI interface (through spidev).
+
+Signed-off-by: Pierre-Jean TEXIER <pjtexier@amplitude-systemes.com>
 ---
- .../recipes-devtools/nodejs/{nodejs_0.12.0.bb => nodejs_0.12.2.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.0.bb => nodejs_0.12.2.bb} (95%)
+ meta-oe/recipes-support/spitools/spitools_git.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-support/spitools/spitools_git.bb
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb
-index cefc0bc..945d9b4 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=14115ff11211df04b031ec7d40b6d31b"
- DEPENDS = "openssl"
- 
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz"
--SRC_URI[md5sum] = "62c8d9c74c8f68193f60e4cba020eb48"
--SRC_URI[sha256sum] = "9700e23af4e9b3643af48cef5f2ad20a1331ff531a12154eef2bfb0bb1682e32"
-+SRC_URI[md5sum] = "b7f4a9f2e361a7026789a7d6c45a6d30"
-+SRC_URI[sha256sum] = "ac7e78ade93e633e7ed628532bb8e650caba0c9c33af33581957f3382e2a772d"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
+new file mode 100644
+index 0000000..20e545b
+--- /dev/null
++++ b/meta-oe/recipes-support/spitools/spitools_git.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "This package contains some simple command line tools to help using Linux spidev devices"
++HOMEPAGE = "https://github.com/cpb-/spi-tools"
++AUTHOR = "Christophe BLAESS"
++LICENSE="GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
++
++S = "${WORKDIR}/git"
++
++SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
++
++SRCREV = "cc6a41fdcec60610703ba6db488c621c64952898"
++
++inherit autotools
++
 -- 
-2.3.4
+1.9.1
 
 
