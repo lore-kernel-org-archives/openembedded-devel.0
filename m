@@ -1,38 +1,26 @@
-Return-Path: <andrei@gherzan.ro>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id ADCEB60034
+Return-Path: <Matthieu.CRAPET@ingenico.com>
+X-Greylist: delayed 763 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 01 Apr 2015 09:38:03 UTC
+Received: from smtp1.ingenico.com (smtp1.ingenico.com [217.108.148.240])
+	by mail.openembedded.org (Postfix) with ESMTP id 0BDAE65C9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Apr 2015 09:34:48 +0000 (UTC)
-Received: by wgra20 with SMTP id a20so46786550wgr.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Apr 2015 02:34:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=9vH+IxSoeWF9BvYIaOTI2mw84AohYzMw4ANVrv6M6a8=;
-	b=OQ2MI4KtyyqN8O8h+CkhqYy5PwmHsCUdU3y9YLJye3dzQWNpZo9Ay2bdzeuT2IiUwd
-	d/2/X6I1TU8LSwdPhkFTiwB3TSWwPm+gYFIq1MFNydBcXByJz1MTg/ZbRAKp2dldHiTM
-	9tuUDE1IA+0jWql0izcJCn1THk1CGjY4OqqzRI7+v/SHn+vzFdeMYI0cyPR/PV/UxP+h
-	TKTw/whkU8WYqRg0NNWuBTxv/Dvpa7xslvDcOnt12Z0VXj19Pd2uX5qWyeRF5zWWIhIi
-	grceXGywPXhdZO8dYYQse7py0MaeLfBskO/1hMKGBwyOW9mP15tvYX3UxpEFX0nLthPT
-	fBBQ==
-X-Gm-Message-State: ALoCoQmxWWzHrIwWIIrw3lJ80/TegibPkzn6alnIcgucXFZB84qk637Ih3zqC5wBDOaJ/K6jIrXS
-X-Received: by 10.194.110.233 with SMTP id id9mr82316240wjb.136.1427880888984; 
-	Wed, 01 Apr 2015 02:34:48 -0700 (PDT)
+	Wed,  1 Apr 2015 09:38:03 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.11,503,1422918000"; d="scan'208";a="72259151"
+Received: from cosnadexc21.usr.ingenico.loc ([10.31.4.221])
+	by antispam1.usr.ingenico.loc with ESMTP; 01 Apr 2015 11:25:00 +0200
+Received: from COSNADEXC12.usr.ingenico.loc (10.31.4.212) by
+	COSNADEXC21.usr.ingenico.loc (10.31.4.221) with Microsoft SMTP Server
+	(TLS) id 14.3.210.2; Wed, 1 Apr 2015 11:24:59 +0200
+Received: from u56.usr.ingenico.loc (10.23.7.56) by
+	COSNADEXC12.usr.ingenico.loc (10.31.4.212) with Microsoft SMTP Server
+	id 14.3.210.2; Wed, 1 Apr 2015 11:24:59 +0200
+From: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 1 Apr 2015 11:24:50 +0200
+Message-ID: <1427880290-14408-1-git-send-email-Matthieu.Crapet@ingenico.com>
+X-Mailer: git-send-email 1.9.2
 MIME-Version: 1.0
-Received: by 10.28.224.193 with HTTP; Wed, 1 Apr 2015 02:34:28 -0700 (PDT)
-X-Originating-IP: [89.121.200.106]
-In-Reply-To: <1427879628-7499-1-git-send-email-texier.pj2@gmail.com>
-References: <1427879628-7499-1-git-send-email-texier.pj2@gmail.com>
-From: Andrei Gherzan <andrei@gherzan.ro>
-Date: Wed, 1 Apr 2015 12:34:28 +0300
-Message-ID: <CAK18fxG54HG5Lsc=xoarEGruKsfLQvUjsHZgu++tctYnrnieDA@mail.gmail.com>
-To: openembedded <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: texierp <ouf_du_45@hotmail.com>,
-	Pierre-Jean TEXIER <pjtexier@amplitude-systemes.com>
-Subject: Re: [meta-oe][PATCH] spitools : add new recipe
+Subject: [meta-oe][PATCH] fbida: update to 2.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,62 +34,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2015 09:34:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 01 Apr 2015 09:38:04 -0000
+Content-Type: text/plain
 
-On Wed, Apr 1, 2015 at 12:13 PM, texierp <texier.pj2@gmail.com> wrote:
+This release fixes QA Issue [file-rdeps]
 
-> From: texierp <ouf_du_45@hotmail.com>
->
-> This tool allows you to test the SPI interface (through spidev).
->
-> Signed-off-by: Pierre-Jean TEXIER <pjtexier@amplitude-systemes.com>
->
+Changes:
+- fix HAVE_LIBUNGIF => HAVE_LIBGIF
+- add "curl" and "webp" to PACKAGECONFIG
 
-Ack
+Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+---
+ .../fbida/{fbida_git.bb => fbida_2.10.bb}           | 21 ++++++++++++++-------
+ 1 file changed, 14 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-graphics/fbida/{fbida_git.bb => fbida_2.10.bb} (66%)
 
-
-> ---
->  meta-oe/recipes-support/spitools/spitools_git.bb | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->  create mode 100644 meta-oe/recipes-support/spitools/spitools_git.bb
->
-> diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb
-> b/meta-oe/recipes-support/spitools/spitools_git.bb
-> new file mode 100644
-> index 0000000..20e545b
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/spitools/spitools_git.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION = "This package contains some simple command line tools to
-> help using Linux spidev devices"
-> +HOMEPAGE = "https://github.com/cpb-/spi-tools"
-> +AUTHOR = "Christophe BLAESS"
-> +LICENSE="GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
-> +
-> +SRCREV = "cc6a41fdcec60610703ba6db488c621c64952898"
-> +
-> +inherit autotools
-> +
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-
-
-
+diff --git a/meta-oe/recipes-graphics/fbida/fbida_git.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
+similarity index 66%
+rename from meta-oe/recipes-graphics/fbida/fbida_git.bb
+rename to meta-oe/recipes-graphics/fbida/fbida_2.10.bb
+index 41c14b8..c7195fc 100644
+--- a/meta-oe/recipes-graphics/fbida/fbida_git.bb
++++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
+@@ -8,20 +8,21 @@ SECTION = "utils"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ 
+-DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif curl"
++DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif"
+ 
+-SRC_URI = "git://git.kraxel.org/fbida"
+-SRCREV = "6aa5563cb3c8864ad15cf83eb6fca3b773da1099"
+-PV = "2.09+git${SRCPV}"
+-S = "${WORKDIR}/git"
++SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz"
++SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
++SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
+ 
+ EXTRA_OEMAKE = "STRIP="
+ 
+-PACKAGECONFIG ??= "gif png"
++PACKAGECONFIG ??= "gif png curl"
++PACKAGECONFIG[curl] = ",,curl"
+ PACKAGECONFIG[gif] = ",,giflib"
+ PACKAGECONFIG[png] = ",,libpng"
+ PACKAGECONFIG[tiff] = ",,tiff"
+ PACKAGECONFIG[motif] = ",,libx11 libxext libxpm libxt openmotif"
++PACKAGECONFIG[webp] = ",,libwebp"
+ 
+ do_compile() {
+     sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
+@@ -29,8 +30,11 @@ do_compile() {
+ 
+     # Be sure to respect preferences (force to "no")
+     # Also avoid issues when ${BUILD_ARCH} == ${HOST_ARCH}
++    if [ -z "${@base_contains('PACKAGECONFIG', 'curl', 'curl', '', d)}" ]; then
++        sed -i -e '/^HAVE_LIBCURL/s/:=.*$/:= no/' ${S}/GNUmakefile
++    fi
+     if [ -z "${@base_contains('PACKAGECONFIG', 'gif', 'gif', '', d)}" ]; then
+-        sed -i -e '/^HAVE_LIBUNGIF/s/:=.*$/:= no/' ${S}/GNUmakefile
++        sed -i -e '/^HAVE_LIBGIF/s/:=.*$/:= no/' ${S}/GNUmakefile
+     fi
+     if [ -z "${@base_contains('PACKAGECONFIG', 'png', 'png', '', d)}" ]; then
+         sed -i -e '/^HAVE_LIBPNG/s/:=.*$/:= no/' ${S}/GNUmakefile
+@@ -41,6 +45,9 @@ do_compile() {
+     if [ -z "${@base_contains('PACKAGECONFIG', 'motif', 'motif', '', d)}" ]; then
+         sed -i -e '/^HAVE_MOTIF/s/:=.*$/:= no/' ${S}/GNUmakefile
+     fi
++    if [ -z "${@base_contains('PACKAGECONFIG', 'webp', 'webp', '', d)}" ]; then
++        sed -i -e '/^HAVE_LIBWEBP/s/:=.*$/:= no/' ${S}/GNUmakefile
++    fi
+ 
+     oe_runmake
+ }
 -- 
-*Andrei Gherzan*
-*e: **andrei@gherzan.ro <andrei@gherzan.ro>*
-*w: *www.gherzan.ro
+1.9.1
+
 
