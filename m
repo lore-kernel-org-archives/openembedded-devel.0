@@ -1,32 +1,39 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
-	[209.85.192.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 61E4660034
+Return-Path: <sven.ebenfeld@gmail.com>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 4CBDA736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Apr 2015 17:17:10 +0000 (UTC)
-Received: by qgfa8 with SMTP id a8so48500458qgf.0
+	Wed,  1 Apr 2015 20:02:41 +0000 (UTC)
+Received: by wgoe14 with SMTP id e14so64741755wgo.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Apr 2015 10:17:12 -0700 (PDT)
+	Wed, 01 Apr 2015 13:02:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=hOJtr9MocSziAnRqnfxE3onfEWhWMPUvPsbsFev729g=;
-	b=KPwSSorGSMMOHam3xT/aTzAx+04aSI0J/SHGhy7v+PiWmpbNGIimQGSg7qA5WpbhsF
-	/s4GdrmCaSQBBa4rMAoCDvGF+3QM2kOHpZ65jY7DAoKK127HMeGBs7tKbKFqrn84h///
-	bXXTqq8OH626gtec+nnjtLVwnMjHi6DhgdZD3PwAyeu0JKcOgXVTt1XsRvNZ0RqDqMQi
-	ZkhB2Kmwisxa6rMeMLw2c2BdrkRPr+eJP+G0DsHCq4BqTeXyBC/fWGnsCKfw4pHK0rv5
-	TsJomKv3Etp5C8Uq+FqV25UQhLBWs8L4vCsZE65morwUEsO+xiD6c/GyPtMhM9Cqu17+
-	7egA==
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=1Vxsy/dSSiL9uJE5jEo69oPV1jd220GUHTcurmyG1cI=;
+	b=pKaQUPjWmFQ+y4nq3IPtNIHcjRT/ccoEtMbMoMgQ7CTI+wpNau5uu7z6HhmAzUnrKT
+	CHpbmHLFJVIICDgqw5bdNFQvdTEwocpxXxvNVxJiPM72eOmE8JaJN/zS113wC1hwLhG7
+	aLPzSSRFymoWJGRBFDMVQxf3Iuf5dLWsWk87q8HdBFzJACTTlfnJXQnJ6m1LqJ742hbr
+	Fy/Ui0G+4VbUyO9Aks/31mR1CgMY4bSWxpQlVILA1XTgkcq2mopY6bteg24SaodFBEay
+	p2KDanNempoaDtKYgIq3/VvDUN+2yVARnnHhwhFIkrX6RTRnJrvD5O6LNPs7McYpdWKF
+	aduQ==
+X-Received: by 10.194.210.103 with SMTP id mt7mr88529142wjc.103.1427918559389; 
+	Wed, 01 Apr 2015 13:02:39 -0700 (PDT)
+Received: from [192.168.50.199] (ip-84-119-99-153.unity-media.net.
+	[84.119.99.153])
+	by mx.google.com with ESMTPSA id m4sm4113725wjb.25.2015.04.01.13.02.38
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Apr 2015 13:02:38 -0700 (PDT)
+Message-ID: <551C4EE6.5080507@gmail.com>
+Date: Wed, 01 Apr 2015 22:02:46 +0200
+From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
 MIME-Version: 1.0
-X-Received: by 10.140.235.216 with SMTP id g207mr19431257qhc.9.1427908631956; 
-	Wed, 01 Apr 2015 10:17:11 -0700 (PDT)
-Received: by 10.140.82.72 with HTTP; Wed, 1 Apr 2015 10:17:11 -0700 (PDT)
-In-Reply-To: <CAD0=qkK3-x3CXStZkOVqOwfZioaLq+A9XwXehVT+HdLRzGPanw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Otavio Salvador <otavio@ossystems.com.br>
 References: <CAD0=qkK3-x3CXStZkOVqOwfZioaLq+A9XwXehVT+HdLRzGPanw@mail.gmail.com>
-Date: Wed, 1 Apr 2015 19:17:11 +0200
-Message-ID: <CAEHkU3VM9sWOcBVynfQhesMXsXo5kQDabQuZLypxembQzfdePA@mail.gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	sven.ebenfeld@gmail.com
+	<CAP9ODKoR5VYhDGVgoj8HLzXwc6H4mAGfBh64bFx5drLE9W+pSg@mail.gmail.com>
+In-Reply-To: <CAP9ODKoR5VYhDGVgoj8HLzXwc6H4mAGfBh64bFx5drLE9W+pSg@mail.gmail.com>
 Subject: Re: [meta-java] Trying to update openjdk-7 to icedtea 2.5.4 and jdk75b13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,47 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Apr 2015 17:17:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 01 Apr 2015 20:02:47 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Hi Sven
+Hello Otavio,
 
-Maybe this pull request to the old meta-java repo location contains
-already contains some of the stuff you need.
-https://github.com/woglinde/meta-java/pull/62
+Am 01.04.2015 um 17:25 schrieb Otavio Salvador:
+> Hello Sven,
+> 
+> On Wed, Apr 1, 2015 at 12:19 PM, Sven Ebenfeld <sven.ebenfeld@gmail.com> wrote:
+>> I'm currently trying to update openjdk-7 to the current icedtea-release.
+>> I'm getting as far as to the compile step which fails during a run of rmic.
+>> In difference to earlier builds, it tries to run the just compiled
+>> rmic java-classes.
+> 
+> Thanks a lot for doing this, this is indeed an important change to be
+> done ... also due security reasons.
+> 
+>> The bootstrap jdk6 complains about incompatible class version.
+>> "Exception in thread "main" java.lang.UnsupportedClassVersionError:
+>> sun/rmi/rmic/Main : Unsupported major.minor version 51.0"
+>>
+>> That is correct as the build process compiles these classes with
+>> "-source 7" and "-target 7".
+>> Currently I don't really know how to fix this problem. Atm I guess I
+>> would need to add a jdk6 bootstrap version of rmic. Can anyone give me
+>> a hint how to fix this problem?
+> 
+> Yes, you likely needs a rmic-native variant.
 
-Regards
-Max
+Do you think it makes sense to create a new rmic-native recipe or should
+it be created within the recipe?
 
-2015-04-01 17:19 GMT+02:00 Sven Ebenfeld <sven.ebenfeld@gmail.com>:
-> Hi,
->
-> I'm currently trying to update openjdk-7 to the current icedtea-release.
-> I'm getting as far as to the compile step which fails during a run of rmic.
-> In difference to earlier builds, it tries to run the just compiled
-> rmic java-classes.
->
-> The bootstrap jdk6 complains about incompatible class version.
-> "Exception in thread "main" java.lang.UnsupportedClassVersionError:
-> sun/rmi/rmic/Main : Unsupported major.minor version 51.0"
->
-> That is correct as the build process compiles these classes with
-> "-source 7" and "-target 7".
-> Currently I don't really know how to fix this problem. Atm I guess I
-> would need to add a jdk6 bootstrap version of rmic. Can anyone give me
-> a hint how to fix this problem?
->
-> If someone wants to have a look at my work and try themselves, I've
-> quickly posted it to github:
-> https://github.com/esven/meta-java/tree/jdk_update/
->
-> (Just the last one dirty commit)
->
-> Cheers,
-> Sven
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> I am very busy now and won't have bandwidth to help on this, am sorry.
+> 
+> One side note though ... you might want, before, clean old versions of
+> the recipe and rework it so in the process you gain more intimacy of
+> the build process ... and helps to provide a nicer base of work as
+> well.
+> 
+
+You're right, I will see, how I get used to this process.
+
+--
+Cheers,
+Sven
 
