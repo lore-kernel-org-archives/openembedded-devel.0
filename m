@@ -1,41 +1,36 @@
-Return-Path: <gary.robertson@linaro.org>
-Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
-	[209.85.214.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 5039273CB9
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-qg0-f52.google.com (mail-qg0-f52.google.com
+	[209.85.192.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 57BC4724DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Apr 2015 16:04:48 +0000 (UTC)
-Received: by obbec2 with SMTP id ec2so134969173obb.3
+	Thu,  2 Apr 2015 18:28:39 +0000 (UTC)
+Received: by qgh3 with SMTP id 3so76618782qgh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Apr 2015 09:04:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=eYflZYobOe0hPO6kv1wLyRPFvCqclUwP0wH1Nq7qtuw=;
-	b=b7b2NQOkDBZ5lA7Vj55QpjzFNUhyY/zi48r+rNB3juefRvOZEr4ax0sACqbqo8MQCs
-	Gg77jK2/5U5MS20mhr1vXE4NMI4BzjvModKvfS/tKsHQ6a0DlPqPReLQzzYmkoX5PPzs
-	XwQAClhQjwBoSHLLcu6d7Va8vdmLbTPl72n2YKNxlrJzMQjRw0+gReRCCav8D5awE8b/
-	crZgcnWLr7FnMymQ6ZYfY99cDIyKolHnhfxLOQJSNAhRJRA0smoev2ejXFvJBZNNYCR/
-	XbhtTvxkTO4AaILpPjfNzC74yiO7FBunDhSvfLEaAAxjv1jaPLFzRfx2ErVGumRfIhYd
-	ek7Q==
-X-Gm-Message-State: ALoCoQm9xHIpx/9QkPj0BEu9Il572MsBHdDWIiR0ByEem0wDLEo9xV3KNjkKgFR7DOES0llF6+oX
-X-Received: by 10.182.121.225 with SMTP id ln1mr47797401obb.65.1427990688749; 
-	Thu, 02 Apr 2015 09:04:48 -0700 (PDT)
-Received: from honkintosh.cybertech.lan (65-120-133-114.dia.static.qwest.net.
-	[65.120.133.114])
-	by mx.google.com with ESMTPSA id ds7sm4711356obc.3.2015.04.02.09.04.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 02 Apr 2015 09:04:47 -0700 (PDT)
-From: "Gary S. Robertson" <gary.robertson@linaro.org>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Date: Thu,  2 Apr 2015 11:04:03 -0500
-Message-Id: <1427990643-16120-2-git-send-email-gary.robertson@linaro.org>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1427990643-16120-1-git-send-email-gary.robertson@linaro.org>
-References: <CAP9ODKpdtB_kq173kcoURafhoNGTmQqU2i-RabmG9fJro6KOOg@mail.gmail.com>
-	<1427990643-16120-1-git-send-email-gary.robertson@linaro.org>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH V4] libhugetlbfs: Add i586 to list of compatible host architectures
+	Thu, 02 Apr 2015 11:28:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=7lO0qfTRfeJWLeuUHZSj66sVAi1RiEICnTat1MdKz9s=;
+	b=jGp93+I9xhlg0sGGpby+DyhkA55PJHYAg0d8KLz7rPuX8cMZ5q7/aBN3BkZTOUdmJL
+	i+9VE1j9EkuEC8iu72BxqXmh6pxbr/ZXKVn9rUYFycGOT7woCDSc/vhuSB+10zm7q/SX
+	+ZyCOyounTwkKTRey8ghn9sOILHgVx8Mltiez5s+bP6YAJPXYajE6DcGbAXfugq0ISTf
+	bpIZb+UrF8vyzIUKRT/batTpBLs5/korttsfkXgr7HRY4vM+jandKu2Fp2vI80fdpMGk
+	YaEQ1o46d3dknigq8lD1gRZB4htjwOMDQ8k2A5geqqQkTllOKWTPhOj6nXFG+YArUCRu
+	YH9w==
+MIME-Version: 1.0
+X-Received: by 10.55.25.228 with SMTP id 97mr3980985qkz.105.1427999320611;
+	Thu, 02 Apr 2015 11:28:40 -0700 (PDT)
+Received: by 10.140.82.72 with HTTP; Thu, 2 Apr 2015 11:28:40 -0700 (PDT)
+In-Reply-To: <551C4F35.7020001@gmail.com>
+References: <CAD0=qkK3-x3CXStZkOVqOwfZioaLq+A9XwXehVT+HdLRzGPanw@mail.gmail.com>
+	<CAEHkU3VM9sWOcBVynfQhesMXsXo5kQDabQuZLypxembQzfdePA@mail.gmail.com>
+	<551C4F35.7020001@gmail.com>
+Date: Thu, 2 Apr 2015 20:28:40 +0200
+Message-ID: <CAEHkU3Xg=NSPw2gc1rmPLy3RD68BRNK5hczmS5e6tTE9gEBk+A@mail.gmail.com>
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] Trying to update openjdk-7 to icedtea 2.5.4 and jdk75b13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,30 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2015 16:04:51 -0000
+X-List-Received-Date: Thu, 02 Apr 2015 18:28:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-COMPATIBLE_HOST included support for x86_64 but not for
-32-bit x86 architectures - added i586 arch name to cover qemux86, etc.
+Hi Sven
 
-Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
----
- meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+To be honest I don't know.
+I remembered that pull request when I saw your question, however I did
+not build nor test the updated OpenJDK.
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index 4ce6a19..6fe5dce 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -24,7 +24,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
- 
- S = "${WORKDIR}/git"
- 
--COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
-+COMPATIBLE_HOST = "(i586|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
- 
- LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
- LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
--- 
-1.9.1
+Regards
+Max
 
+2015-04-01 22:04 GMT+02:00 Sven Ebenfeld <sven.ebenfeld@gmail.com>:
+> Hi Max,
+>
+> Am 01.04.2015 um 19:17 schrieb Max Krummenacher:
+>> Hi Sven
+>>
+>> Maybe this pull request to the old meta-java repo location contains
+>> already contains some of the stuff you need.
+>> https://github.com/woglinde/meta-java/pull/62
+>
+> Thanks, I will have a look at this.
+> Did you have the same problem with rmic as well?
+>
+>>
+>> Regards
+>> Max
+>>
+> Cheers,
+> Sven
+>
 
