@@ -1,38 +1,39 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 9108660034
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id EAAD0736C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Apr 2015 00:33:33 +0000 (UTC)
-Received: by wixo5 with SMTP id o5so66781238wix.1
+	Thu,  2 Apr 2015 02:04:04 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so127512wiz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Apr 2015 17:33:35 -0700 (PDT)
+	Wed, 01 Apr 2015 19:04:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=qrBJn31I0LGjPVZxZxOAHFoQ29JSKrZyLOqxStMsFDA=;
-	b=UyGP0se0SfyQg0GJC4lOl3tUvz/K8Zmk8IuKfG0de6Qz7XBjk08doTba966bAqK6Rj
-	Y3PM+muVibDL3DaI1cKYlmfINkahQgXgBpCxHmkUiItJ6IJomJJWL8dM8iuOT48/MniV
-	PxoYb51D9XHeTdWCx/vrqXywnxF3sqBcsIcuFf0g41WdYsjobICILBOjCsoyC+1VEqhr
-	3TUdmraqVqmvK8h426+5iJnq+3B42puhNKwwUR1H0RLwOWng4JuA9aSen3W/N3x0v6+4
-	kOgf9f1RbU5CUyGlx1oiGraTuCSL3XjRpX7ZqYB9k2wfVvd83cA9GYuYUr0hTNzvg35Q
-	s0Ng==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=SbqISdnBk1q+aV950R7wOyDPmiJh6OH0JISdNIYHRfY=;
+	b=gDVzB+8EV6HcDnPJX0tqHY0tB55BMnJCNrel5Oo6Dsk41whIT6cdWFx8C2vMYEAQo2
+	j3ODCEMpdHKD3xSAZyJD4Ggba3KrlNJrej/w7LMwImurBu29AEVhxrfjNlY0wRHQaZ2N
+	nRnRjhj7+OtN16NKF5a51PmC0WxJ1vxffqZAjNMvhuRyXBTq2V2mGAl96gUdqvktjkVv
+	TGQh8bYZ9KsxYo4YBufC4HsO/9ILhzZ6+oMhxeM5lGY6e2M7SkmvVFdp43m65ADxeWh8
+	8uz8cLCiCCLDsYa628dVKRLQjl246hO/02eQqes/r1FKNjmkQcYhmV+coUt/d2Jx5U+/
+	8AnA==
+X-Received: by 10.180.74.40 with SMTP id q8mr19916074wiv.32.1427940245258;
+	Wed, 01 Apr 2015 19:04:05 -0700 (PDT)
+Received: from localhost (ip-89-176-104-3.net.upcbroadband.cz. [89.176.104.3])
+	by mx.google.com with ESMTPSA id e2sm2595843wij.5.2015.04.01.19.04.03
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Apr 2015 19:04:03 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 2 Apr 2015 04:04:28 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150402020428.GM14928@jama>
+References: <cover.1427931203.git.akuster808@gmail.com>
 MIME-Version: 1.0
-X-Received: by 10.180.20.177 with SMTP id o17mr19118122wie.66.1427934815001;
-	Wed, 01 Apr 2015 17:33:35 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.27.131.224 with HTTP; Wed, 1 Apr 2015 17:33:34 -0700 (PDT)
-In-Reply-To: <CAP9ODKpZOQRq8zPth=Svap7v8GuzOT739aGhSRe4uzJKjkrP6g@mail.gmail.com>
-References: <CA+chaQdOQKZRW7QH0qHS-ta8+oZDspRVGguF3iMDgOyrPAxg_Q@mail.gmail.com>
-	<1427927005-7808-1-git-send-email-gary.robertson@linaro.org>
-	<1427927005-7808-2-git-send-email-gary.robertson@linaro.org>
-	<CAP9ODKpZOQRq8zPth=Svap7v8GuzOT739aGhSRe4uzJKjkrP6g@mail.gmail.com>
-Date: Wed, 1 Apr 2015 21:33:34 -0300
-X-Google-Sender-Auth: 37ZU7DiIgrzkmabaSfImqNsCrpQ
-Message-ID: <CAP9ODKpdtB_kq173kcoURafhoNGTmQqU2i-RabmG9fJro6KOOg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] libhugetlbfs: Add i586 to list of compatible host architectures
+In-Reply-To: <cover.1427931203.git.akuster808@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: otavio@ossystems.com.br
+Subject: Re: [PATCH 00/15] Fido add maintainers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,23 +47,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2015 00:33:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Apr 2015 02:04:05 -0000
+X-Groupsio-MsgNum: 54952
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="/jvaajy/zP2g41+Q"
+Content-Disposition: inline
 
-On Wed, Apr 1, 2015 at 9:31 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
-> On Wed, Apr 1, 2015 at 7:23 PM, Gary S. Robertson
-> <gary.robertson@linaro.org> wrote:
->> COMPATIBLE_HOST included support for x86_64 but not for
->> 32-bit x86 architectures - added i586 arch name to cover qemux86, etc.
->>
->> Upstream-Status: Inappropriate - OE recipe change only
->
-> This field is used in patch files, not commit log of the Git changes. Drop this.
+--/jvaajy/zP2g41+Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Also, respect version of patch. I think your next send is v4, isn't it?
+On Wed, Apr 01, 2015 at 04:43:34PM -0700, Armin Kuster wrote:
+> please consider these maintainers for the meta-openembdded fido branch
+>=20
+> The following changes since commit df6c7b1279790d27ebfd58fbdfbac89bde5782=
+ec:
+>=20
+>   python-pyopenssl: Upgrade to 0.14 (2015-03-21 16:42:30 +0100)
+>=20
+> are available in the git repository at:
+>=20
+>   https://github.com/akuster/meta-openembedded akuster/fido-next
+>   https://github.com//tree/akuster/fido-next
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Would you mind (me) squashing them together so that it's easier to create t=
+he
+patch for next release?
 
+> Armin Kuster (15):
+>   meta-efl: update maintainers list
+>   meta-filesystems: update for fido maintainer
+>   meta-gnome: update maintainers list
+>   meta-gpe: update maintainers list
+>   meta-initramfs: update maintainers list
+>   meta-multimedia: update maintainers list
+>   meta-networking: update maintainers list
+>   meta-oe: update maintainers list
+>   meta-perl: update maintainers list
+>   meta-python: update maintainers list
+>   meta-ruby: update maintainers list
+>   meta-systemd: update maintainers list
+>   meta-xfce: update maintainers list
+>   meta-webserver: updated maintainers list
+>   toolchain-layer: update maintainers list
+>=20
+>  meta-efl/README             | 13 +++++++------
+>  meta-filesystems/README     | 14 +++++++++-----
+>  meta-gnome/README           | 12 +++++++-----
+>  meta-gpe/README             | 13 +++++++------
+>  meta-initramfs/README       | 11 ++++++-----
+>  meta-multimedia/README      | 14 +++++++-------
+>  meta-networking/MAINTAINERS |  8 ++++++--
+>  meta-networking/README      |  6 +++---
+>  meta-oe/README              | 11 ++++++-----
+>  meta-perl/README            | 10 ++++++----
+>  meta-python/README          | 11 +++++++----
+>  meta-ruby/README            | 12 +++++++-----
+>  meta-systemd/README         | 11 +++++++----
+>  meta-webserver/README       | 13 ++++++++++---
+>  meta-xfce/README            | 11 ++++++-----
+>  toolchain-layer/README      |  9 ++++++---
+>  16 files changed, 107 insertions(+), 72 deletions(-)
+>=20
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--/jvaajy/zP2g41+Q
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlUco6wACgkQN1Ujt2V2gBwBaQCdEPDyFqNCjLGbFGWjTytupcKp
+pVkAnA+oXRJqQYzvq3I9ciA42AMtUvy/
+=779N
+-----END PGP SIGNATURE-----
+
+--/jvaajy/zP2g41+Q--
