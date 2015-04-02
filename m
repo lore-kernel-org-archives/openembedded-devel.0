@@ -1,26 +1,33 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F04C6AC56
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 94F826AC56
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Apr 2015 08:20:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t328KLO9005489
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  2 Apr 2015 09:56:54 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ydbrl-000549-E1 for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Apr 2015 11:56:49 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Apr 2015 11:56:49 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Apr 2015 01:20:21 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.236) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Thu, 2 Apr 2015 01:20:20 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Apr 2015 16:20:22 +0800
-Message-ID: <1427962822-14751-2-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1427962822-14751-1-git-send-email-Qi.Chen@windriver.com>
-References: <1427962822-14751-1-git-send-email-Qi.Chen@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-systemd][PATCH] meta-systemd: add "core" to LAYERDEPENDS in layer.conf
+	Thu, 02 Apr 2015 11:56:49 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Thu, 02 Apr 2015 11:56:32 +0200
+Message-ID: <mfj3og$ele$1@ger.gmane.org>
+References: <1427796186892.42571@tataelxsi.co.in>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+In-Reply-To: <1427796186892.42571@tataelxsi.co.in>
+Subject: Re: tip and cu utility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,26 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2015 08:20:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Apr 2015 09:56:54 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-From: Chen Qi <Qi.Chen@windriver.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-systemd/conf/layer.conf | 1 +
- 1 file changed, 1 insertion(+)
+PRAVEEN KUMAR R schreef op 31-03-15 om 12:03:
+> Is there any existing package that provide tip and cu utility ?
 
-diff --git a/meta-systemd/conf/layer.conf b/meta-systemd/conf/layer.conf
-index f3fc45d..0563f44 100644
---- a/meta-systemd/conf/layer.conf
-+++ b/meta-systemd/conf/layer.conf
-@@ -29,3 +29,4 @@ BBFILE_PRIORITY_systemd-layer = "7"
- SIGGEN_EXCLUDERECIPES_ABISAFE += " \
-   systemd-serialgetty \
- "
-+LAYERDEPENDS_systemd-layer = "core"
--- 
-1.9.1
+cu is part of 'uucp'
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFVHRJQMkyGM64RGpERAgWkAJ9ecah4aodYChbtOoFxt/KWwynFKACfUKsD
+Q886rZbc6V6SwlasFSejYK4=
+=lMQs
+-----END PGP SIGNATURE-----
 
 
