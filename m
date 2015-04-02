@@ -1,36 +1,37 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id CB9D9736C5
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 96C1660034
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Apr 2015 00:13:58 +0000 (UTC)
-Received: by widdi4 with SMTP id di4so62000158wid.0
+	Thu,  2 Apr 2015 00:31:36 +0000 (UTC)
+Received: by wixo5 with SMTP id o5so39800362wix.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Apr 2015 17:13:59 -0700 (PDT)
+	Wed, 01 Apr 2015 17:31:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
 	:from:to:cc:content-type;
-	bh=Q2M3CraZEgwnXkTB4QcK7f81DRagw8y1S0JFf/RmBS4=;
-	b=Uuyg7Rvc87u1QENneGmJ5nMhvqLRVISGYypg+a+9lx3CPXJD6MvdAsw+4OmMmglk9Y
-	31180gKiaviO1UYs584Q42wRaWGfmRPWrCmFwXAzC0NCTjOMNWWmh0y7ryVRDHNooHuv
-	FIDBUY8ZvVvDPa/0TTel65o94qUrNP9oVjC6o/wmnEm7ZfaQmQ6DQvjrFRTWHTVQuLSp
-	Bsb+FV0/0sa+ojTAVUWbVGfdsEfTUFavEVtC5p7V5jVMBwaWypNnwt6hvoreG9Pokgvo
-	nD4CCD48D3HBYkq+tosddbvqClgfSifn+59Xo2GqFmSTfQv0Yrogu2urSs5SgoexiGXG
-	XzPg==
+	bh=/QKz7aTsX5NyJfFSUotsCPLHboTo3VnrBMjZt6i8lUc=;
+	b=Thr4A12HIAGcMmwyOCTL+FQGI0mREOrMYhf6c4T4jcvqO/TJIZxyQkGGteVxMI7JZ5
+	23skARd0IJkkcQj/7OGlk3gv9GzbS8rchLSp4DZWQou7XuBWaQi0T+ikLx06MqQB+qQd
+	Nafc0GRWE8bWrONbWoVCsxBONRQ/DrGZWyYZZh6XG9Rtq7tJUwf+BWaPYkQstPCL4ECg
+	O4UpPkK5cg4amZeOe2lwJXgzPh5K26xPt3W5m76Gc69YPCdKHmPMlJiSynBXXz3SdGOj
+	MxFVLSZtGFkIqDIvihZAb1qQdfWgZErM12mNcFPICyKUv/rHtoQGCI58Bfg/it+MKVFT
+	4Qfw==
 MIME-Version: 1.0
-X-Received: by 10.194.208.229 with SMTP id mh5mr88674606wjc.108.1427933639528; 
-	Wed, 01 Apr 2015 17:13:59 -0700 (PDT)
+X-Received: by 10.181.13.146 with SMTP id ey18mr19069784wid.21.1427934697997; 
+	Wed, 01 Apr 2015 17:31:37 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.27.131.224 with HTTP; Wed, 1 Apr 2015 17:13:59 -0700 (PDT)
-In-Reply-To: <cover.1427931203.git.akuster808@gmail.com>
-References: <cover.1427931203.git.akuster808@gmail.com>
-Date: Wed, 1 Apr 2015 21:13:59 -0300
-X-Google-Sender-Auth: wqmGlFCVy0m3G9F3GSlm24nWDrU
-Message-ID: <CAP9ODKpk-iQxV-omOyTgfqTFU-jC2Ck82qA3O+uWYrz8pR39qA@mail.gmail.com>
+Received: by 10.27.131.224 with HTTP; Wed, 1 Apr 2015 17:31:37 -0700 (PDT)
+In-Reply-To: <1427927005-7808-2-git-send-email-gary.robertson@linaro.org>
+References: <CA+chaQdOQKZRW7QH0qHS-ta8+oZDspRVGguF3iMDgOyrPAxg_Q@mail.gmail.com>
+	<1427927005-7808-1-git-send-email-gary.robertson@linaro.org>
+	<1427927005-7808-2-git-send-email-gary.robertson@linaro.org>
+Date: Wed, 1 Apr 2015 21:31:37 -0300
+X-Google-Sender-Auth: JuvC-k-PPma50agv-WwS2LS3TNg
+Message-ID: <CAP9ODKpZOQRq8zPth=Svap7v8GuzOT739aGhSRe4uzJKjkrP6g@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: Armin Kuster <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/15] Fido add maintainers
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] libhugetlbfs: Add i586 to list of compatible host architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,13 +45,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2015 00:14:06 -0000
+X-List-Received-Date: Thu, 02 Apr 2015 00:31:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Apr 1, 2015 at 8:43 PM, Armin Kuster <akuster808@gmail.com> wrote:
-> please consider these maintainers for the meta-openembdded fido branch
+On Wed, Apr 1, 2015 at 7:23 PM, Gary S. Robertson
+<gary.robertson@linaro.org> wrote:
+> COMPATIBLE_HOST included support for x86_64 but not for
+> 32-bit x86 architectures - added i586 arch name to cover qemux86, etc.
+>
+> Upstream-Status: Inappropriate - OE recipe change only
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+This field is used in patch files, not commit log of the Git changes. Drop this.
+
+> Signed-off-by: Gary S. Robertson <gary.robertson@linaro.org>
+> ---
+>  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> index 4ce6a19..6fe5dce 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -24,7 +24,7 @@ SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
+>
+>  S = "${WORKDIR}/git"
+>
+> -COMPATIBLE_HOST = "(x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+> +COMPATIBLE_HOST = "(i586|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+>
+>  LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
+>  LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
 -- 
 Otavio Salvador                             O.S. Systems
