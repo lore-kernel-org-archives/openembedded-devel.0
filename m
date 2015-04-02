@@ -1,25 +1,24 @@
-Return-Path: <amber_sarosh@hotmail.com>
-Received: from COL004-OMC4S13.hotmail.com (col004-omc4s13.hotmail.com
-	[65.55.34.215])
-	by mail.openembedded.org (Postfix) with ESMTP id F074A736B6
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 643686AC56
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Apr 2015 07:20:18 +0000 (UTC)
-Received: from COL131-W27 ([65.55.34.200]) by COL004-OMC4S13.hotmail.com over
-	TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751); 
-	Thu, 2 Apr 2015 00:20:19 -0700
-X-TMN: [De2d+z9JL7AHBc58Fd3VGervIpQgsvcQ]
-X-Originating-Email: [amber_sarosh@hotmail.com]
-Message-ID: <COL131-W2708E8DD6F8340DA051BD1FDF20@phx.gbl>
-From: Amber and Sarosh <amber_sarosh@hotmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Apr 2015 12:20:19 +0500
-Importance: Normal
+	Thu,  2 Apr 2015 08:20:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t328KKp4004821
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Apr 2015 01:20:20 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.236) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Thu, 2 Apr 2015 01:20:19 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Apr 2015 16:20:21 +0800
+Message-ID: <1427962822-14751-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-OriginalArrivalTime: 02 Apr 2015 07:20:19.0559 (UTC)
-	FILETIME=[79998770:01D06D15]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Cloning Openembedded Firmware
+Subject: [meta-initramfs][PATCH] meta-initramfs: add "core" to LAYERDEPENDS in layer.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,16 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2015 07:20:19 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Apr 2015 08:20:20 -0000
+Content-Type: text/plain
 
-Hi
-Can anyone please help us making an image of the openembedded firmware =0A=
-on E310 with our custom installations such that it can be burned as it is o=
-n an =0A=
-other device?
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Regards=2C
-Amber=2C Sarosh & Naheed 		 	   		  =
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ meta-initramfs/conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
+index cc78c1a..0026e04 100644
+--- a/meta-initramfs/conf/layer.conf
++++ b/meta-initramfs/conf/layer.conf
+@@ -14,3 +14,4 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
+ # other layers.
+ 
+ BBFILE_PRIORITY_meta-initramfs = "8"
++LAYERDEPENDS_meta-initramfs = "core"
+-- 
+1.9.1
+
 
