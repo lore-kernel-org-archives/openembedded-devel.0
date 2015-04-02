@@ -1,36 +1,25 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id C3B3265C9C
+Return-Path: <amber_sarosh@hotmail.com>
+Received: from COL004-OMC4S13.hotmail.com (col004-omc4s13.hotmail.com
+	[65.55.34.215])
+	by mail.openembedded.org (Postfix) with ESMTP id F074A736B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Apr 2015 04:57:04 +0000 (UTC)
-Received: by iedfl3 with SMTP id fl3so68014456ied.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Apr 2015 21:57:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=fVx/giBli2pYRMx2DwU7mXyC+lzCo/YUzFYoVkqM5xk=;
-	b=O16eWVU3XQN6blCJInROIsXnYIQ7ocWF9AQqyDWOYT8J/593zvPFWB6rLQKVUHwLKf
-	88IeFA+Y+FwptyMDW6diBA5L9fNZKhTQZqsV0xtYYqERigoQJn7btFRak19sJbJCksHr
-	NbqCY+Awbgc6BAfKEGz8QzwECNp8Jw2DT1dgoqwpseN1IK30fso031Q9N06mKJFXQwwa
-	QEODdRPLUIuk7urmtV4027EJvV+ZuEAu+oz/Nxd6wC1AixfC01GCulYSPv9sF9s7+jIv
-	Mz8R99BqGi7db/efXsz4zlG7bTkIq+/ZnkgJXE+dIJz8wk0b0NIaZnHK2GOb+Xp1ick0
-	D7Sw==
-MIME-Version: 1.0
-X-Received: by 10.50.137.2 with SMTP id qe2mr11402661igb.20.1427950625859;
-	Wed, 01 Apr 2015 21:57:05 -0700 (PDT)
-Received: by 10.36.76.151 with HTTP; Wed, 1 Apr 2015 21:57:05 -0700 (PDT)
-In-Reply-To: <551CC7F3.9080300@gmail.com>
-References: <54F47045.4080503@windriver.com> <20150302142645.GC2309@jama>
-	<551CC7F3.9080300@gmail.com>
-Date: Wed, 1 Apr 2015 21:57:05 -0700
-Message-ID: <CANx9H-CJXC1OHRqV0G58_xKVhez-VD3A8a4aHXO2MPthvcwD-Q@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
+	Thu,  2 Apr 2015 07:20:18 +0000 (UTC)
+Received: from COL131-W27 ([65.55.34.200]) by COL004-OMC4S13.hotmail.com over
+	TLS secured channel with Microsoft SMTPSVC(7.5.7601.22751); 
+	Thu, 2 Apr 2015 00:20:19 -0700
+X-TMN: [De2d+z9JL7AHBc58Fd3VGervIpQgsvcQ]
+X-Originating-Email: [amber_sarosh@hotmail.com]
+Message-ID: <COL131-W2708E8DD6F8340DA051BD1FDF20@phx.gbl>
+From: Amber and Sarosh <amber_sarosh@hotmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Apr 2015 12:20:19 +0500
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 02 Apr 2015 07:20:19.0559 (UTC)
+	FILETIME=[79998770:01D06D15]
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Discuss: ruby-1.9.x EOL -- someone to add ruby-2.2?
+Subject: Cloning Openembedded Firmware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,77 +33,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Apr 2015 04:57:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Apr 2015 07:20:19 -0000
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 1, 2015 at 9:39 PM, akuster808 <akuster808@gmail.com> wrote:
+Hi
+Can anyone please help us making an image of the openembedded firmware =0A=
+on E310 with our custom installations such that it can be burned as it is o=
+n an =0A=
+other device?
 
-> Randy,
->
->
-> On 03/02/2015 06:26 AM, Martin Jansa wrote:
->
->> On Mon, Mar 02, 2015 at 09:14:29AM -0500, Randy MacLeod wrote:
->>
->>>
->>> As stated in the post below, ruby-1.9.3 is no longer supported
->>> and CVEs will not be released.
->>>
->>> I'm not a rubyist but I assume we should upgrade to ruby-2.2.0 which
->>> became the stable version as of December 25, 2014. Comments?
->>> Martin, you are listed as maintainer of the meta-multimedia,
->>> do you have any concerns about such an upgrade?
->>>
->>
->> No concerns from me.. I don't use ruby much (mostly ruby-native for
->> webkit builds) so I would welcome such upgrade.
->>
->>  If anyone wants to start work on this for meta-oe, that'd be great.
->>> If no one gets around to it, then a developer from WindRiver will
->>> likely be able to work on it but not a few months.
->>>
->>
-> I started on the upgrade. Hope to have it done soon.
-> - Armin
->
-
-I will help if there is any collateral damage in meta-openembedded.
--Tim
-
->
->
->>> ../Randy
->>>
->>> ---
->>> As of today, all support for Ruby 1.9.3 has ended. Bug and security
->>> fixes from more recent Ruby versions will no longer be backported to
->>> 1.9.3.
->>>
->>> This end of life was announced over a year ago.
->>>
->>> We highly recommend that you upgrade to Ruby 2.0.0 or above as soon as
->>> possible. Please contact us if you=E2=80=99d like to continue maintaini=
-ng the
->>> 1.9.3 branch or if for some reason you can=E2=80=99t upgrade.
->>>
->>> Posted by Olivier Lacan on 23 Feb 2015
->>> ---
->>> Also see:
->>> https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
->>>
->>> --
->>> # Randy MacLeod. SMTS, Linux, Wind River
->>> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200 Ottawa, Ontario,
->>> Canada K2K 2W5
->>>
->>
->>
->>
->>  --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Regards=2C
+Amber=2C Sarosh & Naheed 		 	   		  =
 
