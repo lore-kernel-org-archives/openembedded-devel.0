@@ -1,36 +1,32 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id E3FBA73CD1
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ob0-f170.google.com (mail-ob0-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A7526013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Apr 2015 19:01:07 +0000 (UTC)
-Received: by iebmp1 with SMTP id mp1so89464077ieb.0
+	Fri,  3 Apr 2015 19:05:43 +0000 (UTC)
+Received: by obbec2 with SMTP id ec2so180574947obb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Apr 2015 12:01:08 -0700 (PDT)
+	Fri, 03 Apr 2015 12:05:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=FxR1Xsnhvle2v0fyZlgvh1+D0i1ZG6U14bfhdY2z6U0=;
-	b=id5UqeKHRWcEnduZhHng25BQmy8ul1mctj/TxggPqapG+W45Th2YpQBgSwwX0hlU1N
-	Y+3Z3weoJ1wpTjKX0LkaPkKzexFXvBOhoLGqcQKEi3Hsh5ZjqTUDL1Ku6byLm8Fw6K17
-	KbdZxSpZcvq3LKYi6xp8OOkQiXgWR7PWSsJeNKcwaPLoW/p0s0450HifQ4HthNMFCB//
-	NgAYXYWBH2TSifUueNDV40wQsLeWBo1aC19vBet5fX6sLpaF4Nzgv/k5+dRifialfKcA
-	sP9iIuNnQ4JNQsjXwG15LQEpn9TIv7zzJ2MAmr6pjDIiIv9lw1uWdQ/F3iBfjbIQK+tl
-	YssA==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=yRxAO33BTYYWDKtnLDYehENoRigZhvmJEw+Y0LKjdbk=;
+	b=I/yFHdNvxmNbLLU328ZgU/019WfFgL6/xX9Vv0iBlVVBMkXTS1VtNBbWpYMzh2FOwb
+	3pFy4jqgvu2MxIXqo02ggcZ2MBm2FJ7+1a5LG7HgjzrUHq7S5gCIBwOufI/ITXnpyvWi
+	WsfhVYoPzotigcG28enFxMOHG8UIGVd78A2meMO6L2LL0FSQzpHcwD3t2zNtORpcJ2/z
+	pIQRWndOxS5JXH7BEGmJ+Xn4wkeHMRRpx8YhBrZ2yBn13m95sGv8YO6M8c9eJM2eK7on
+	erjt24zf3M+zPNQwoP9YX5uI3HloAFC4flpbOS1rW/zChtuG7DJHLq1eP+UmPOD/xvA8
+	qaVg==
 MIME-Version: 1.0
-X-Received: by 10.107.34.210 with SMTP id i201mr5941515ioi.1.1428087668710;
-	Fri, 03 Apr 2015 12:01:08 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.107.23.6 with HTTP; Fri, 3 Apr 2015 12:01:08 -0700 (PDT)
-In-Reply-To: <1427988182-26274-2-git-send-email-dmitry_eremin@mentor.com>
-References: <1427988182-26274-1-git-send-email-dmitry_eremin@mentor.com>
-	<1427988182-26274-2-git-send-email-dmitry_eremin@mentor.com>
-Date: Fri, 3 Apr 2015 16:01:08 -0300
-X-Google-Sender-Auth: KwGsh2cCHj5SfJhT9bLsyFrGtns
-Message-ID: <CAP9ODKqxBzYOoLAX7+NV+6NgM-FHJfvNcj2Tz8HbfXwt_x2aug@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH 2/2] initramfs-debug-image: tiny debugging initramfs image
+X-Received: by 10.60.179.99 with SMTP id df3mr4683750oec.70.1428087944383;
+	Fri, 03 Apr 2015 12:05:44 -0700 (PDT)
+Received: by 10.202.217.69 with HTTP; Fri, 3 Apr 2015 12:05:44 -0700 (PDT)
+In-Reply-To: <1427916099-30314-1-git-send-email-gshastri@juniper.net>
+References: <1427916099-30314-1-git-send-email-gshastri@juniper.net>
+Date: Fri, 3 Apr 2015 12:05:44 -0700
+Message-ID: <CAJ86T=Xg9h4eVbahpOLqJbxx2E89CFkj9j_OiA+utHSO71pN-g@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [[meta-filesystems][Add xorriso support]] Add xorriso tool support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,20 +40,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Apr 2015 19:01:08 -0000
+X-List-Received-Date: Fri, 03 Apr 2015 19:05:48 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Apr 2, 2015 at 12:23 PM, Dmitry Eremin-Solenikov
-<dmitry_eremin@mentor.com> wrote:
-> A tiny initramfs image suitable for initial bringup of the hardware.
+On Wed, Apr 1, 2015 at 12:21 PM, Gaurang Shastri <gshastri@juniper.net> wrote:
+> xorriso copies file objects from POSIX compliant filesystems into
+> Rock Ridge enhanced ISO 9660 filesystems and allows session-wise
+> manipulation of such filesystems.
 >
-> Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+> Signed-off-by: Gaurang Shastri <gshastri@juniper.net>
+> ---
+>  .../recipes-utils/xorriso/xorriso_1.3.8.bb         |   17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.bb
+>
+> diff --git a/meta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.bb b/meta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.bb
+> new file mode 100644
+> index 0000000..93914b4
+> --- /dev/null
+> +++ b/meta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.bb
+> @@ -0,0 +1,17 @@
+> +DESCRIPTIONS = "xorriso copies file objects from POSIX compliant filesystems into Rock Ridge enhanced ISO 9660 filesystems and allows session-wise manipulation of such filesystems"
 
-I've been using core-image-minimal for this purpose. What you think is
-missing there?
+DESCRIPTION, not DESCRIPTIONS.
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> +
+> +inherit autotools
+> +
+> +DEPENDS += "attr zlib"
+> +
+> +SRC_URI = "http://www.gnu.org/software/${BPN}/${BPN}-${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] = "a0fc534ef8f9589282a189f0e6cdf952"
+> +SRC_URI[sha256sum] = "901204634651533f7cbd105eab560534702458258529aac4b2f0fc946992107e"
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> +LICENSE = "GPLv3"
+
+License fields should be nearer the top of the recipe. See
+http://www.openembedded.org/wiki/Styleguide
+
+> +EXTRA_OECONF = "--disable-libacl"
+
+Consider making acl a PACKAGECONFIG option, controlled by the acl
+DISTRO feature (see coreutils recipe for an example).
+
+To prevent non-deterministic dependencies, consider adding a
+PACKAGECONFIG option for bzip2 as well.
+
+> +BBCLASSEXTEND = "nativesdk"
+> --
+> 1.7.9.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
