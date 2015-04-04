@@ -1,39 +1,35 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
-	[209.85.220.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CB7E724DC
+Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 8494273C60
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Apr 2015 16:24:20 +0000 (UTC)
-Received: by pactp5 with SMTP id tp5so149152609pac.1
+	Sat,  4 Apr 2015 16:49:41 +0000 (UTC)
+Received: by pdbnk13 with SMTP id nk13so75425962pdb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Apr 2015 09:24:22 -0700 (PDT)
+	Sat, 04 Apr 2015 09:49:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:in-reply-to
-	:references; bh=FRn5S9ju0SWC4fCn/AtU+CUWWAHZBUqPZ6X381ngteg=;
-	b=NtkhAUw4Ve56d1tAn3FTSbI72pZLjmH+tzYaJ+NU8WCYFeGp40xpabEYes2bfs8fJF
-	BkDK0IJlpVd3/t7ZmMHKg4UQ303t9S9GHaIMhThVVgcCWaQgrbOqL26CN/WYsk1Ln4l4
-	EjnMKa5zFG6CV60j9yuYQl/CnyGzg2rfpQTe3hdqzRKmlGR5m3iT/Vmi6/ZQCwoJYi7/
-	MzDA3E3RvA74Pz8FGx0lmgz3Ml4g9HlnAaV5lWXo9zPmRdPp7xc5tlpGiRCBKTT2Wl0L
-	VRBtTBVm+Up4bMbPAhO3girnTZix5uiQvm5ph3ETTPtg/r0NCy3rSkq4belKX3yTBONI
-	1D6A==
-X-Received: by 10.66.141.143 with SMTP id ro15mr13736261pab.4.1428164662341;
-	Sat, 04 Apr 2015 09:24:22 -0700 (PDT)
+	h=from:to:subject:date:message-id;
+	bh=D2/FOPrCaaY9n2g2Gwix8LPuBc4RTqLcsZgK8o3ui8s=;
+	b=nQ0K3WEeMNVtFoCinxntQ/PzuUXIKFEgw9k1uVflvOisRe+CJj1YVVeAdHoYNzT45F
+	L7n9nlbUKU0fY9X4tDpqr3ZYdT8lCnukLJlGcQVl3pr6XJR90F3PcCV7VwIG8RnJJaHR
+	jSk+NE+aMwTwz+aDhLb8IjOaDBC4SXr7sj8G72CHFynDOGg1mIHkjymdaubCQgNZs8Kj
+	aZkOn1wmuEyTkTrYKGqN3BWNlVdd+P9klJfPR53/wYgfSCYy8yR8clgkpMIqIJdxF8/M
+	19Zjx80GqxxdFVjENAhA4zLuA8//+plOtiaAaRvW+EnxIWIwxRWR+bqBuHUFoOqwJLJL
+	kIxA==
+X-Received: by 10.66.149.106 with SMTP id tz10mr13552269pab.90.1428166182513; 
+	Sat, 04 Apr 2015 09:49:42 -0700 (PDT)
 Received: from Pahoa2.hsd1.ca.comcast.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id eo1sm6618896pbd.36.2015.04.04.09.24.20
-	for <openembedded-devel@lists.openembedded.org>
+	[76.20.92.207]) by mx.google.com with ESMTPSA id
+	li10sm11487391pbc.33.2015.04.04.09.49.40
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 04 Apr 2015 09:24:21 -0700 (PDT)
+	Sat, 04 Apr 2015 09:49:41 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Apr 2015 09:24:12 -0700
-Message-Id: <c92e632f1362090f4792e6757e014135e64be640.1428164164.git.akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	otavio@ossystems.com.br
+Date: Sat,  4 Apr 2015 09:49:36 -0700
+Message-Id: <cover.1428166003.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.3.5
-In-Reply-To: <cover.1428164164.git.akuster808@gmail.com>
-References: <cover.1428164164.git.akuster808@gmail.com>
-In-Reply-To: <cover.1428164164.git.akuster808@gmail.com>
-References: <cover.1428164164.git.akuster808@gmail.com>
-Subject: [PATCH 2/2] README: update maintainer
+Subject: [PATCH 0/1 V2] Add Fido maintainers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,23 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2015 16:24:21 -0000
+X-List-Received-Date: Sat, 04 Apr 2015 16:49:42 -0000
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-ruby/README | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+squashed commits.
 
-diff --git a/meta-ruby/README b/meta-ruby/README
-index 99cd9bc..08e0aa7 100644
---- a/meta-ruby/README
-+++ b/meta-ruby/README
-@@ -13,4 +13,4 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-ruby
- When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-ruby][PATCH'
- 
--Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
-+Layer maintainer: Armin Kuster <akuster808@gmail.com>
+please consider these maintainers for fido
+
+The following changes since commit df6c7b1279790d27ebfd58fbdfbac89bde5782ec:
+
+  python-pyopenssl: Upgrade to 0.14 (2015-03-21 16:42:30 +0100)
+
+are available in the git repository at:
+
+  git://github.com/akuster/meta-openembedded.git akuster/fido-next
+  https://github.com//tree/akuster/fido-next
+
+Armin Kuster (1):
+  fido README: update maintainers list
+
+ meta-efl/README             | 13 +++++++------
+ meta-filesystems/README     | 14 +++++++++-----
+ meta-gnome/README           | 12 +++++++-----
+ meta-gpe/README             | 13 +++++++------
+ meta-initramfs/README       | 11 ++++++-----
+ meta-multimedia/README      | 14 +++++++-------
+ meta-networking/MAINTAINERS |  8 ++++++--
+ meta-networking/README      |  6 +++---
+ meta-oe/README              | 11 ++++++-----
+ meta-perl/README            | 10 ++++++----
+ meta-python/README          | 11 +++++++----
+ meta-ruby/README            | 12 +++++++-----
+ meta-systemd/README         | 11 +++++++----
+ meta-webserver/README       | 13 ++++++++++---
+ meta-xfce/README            | 11 ++++++-----
+ toolchain-layer/README      |  9 ++++++---
+ 16 files changed, 107 insertions(+), 72 deletions(-)
+
 -- 
 2.3.5
 
