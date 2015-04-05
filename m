@@ -1,42 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f44.google.com (mail-qg0-f44.google.com
-	[209.85.192.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C68F736BA
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
+	[209.85.220.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A6C472A2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Apr 2015 19:54:16 +0000 (UTC)
-Received: by qgfi89 with SMTP id i89so494917qgf.1
+	Sun,  5 Apr 2015 23:51:47 +0000 (UTC)
+Received: by patj18 with SMTP id j18so27218672pat.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Apr 2015 12:54:17 -0700 (PDT)
+	Sun, 05 Apr 2015 16:51:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:date:to:subject:user-agent:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=Y3ocwMgFU4R6H++o8x4v5TIPVH4cd9EUk5S1rVgOYms=;
-	b=zBQ3y4f/ZBfCqDulMp1P2ix5IFvRSFuElJbgbNLomt07rjpLH5cA49wVRESGrw2iBl
-	o5ANZa8pxjkadImEEcjYd11DlmrHbpU0+3UScOFFVC/HihjuMe/X7dMXaD1smhxNWEwM
-	DIBcknI/fw6cz12SUqcXPz/G3nk3lbqcR+TyZioZzYO9ydtVMYmAMTgZs36jwJh6W6mZ
-	11TE3HOF0WGVkHYWYSQ2sasyKGU0Gdx0k28nL4USnNn6TxEkDU8jres+Bqj2t1eqIvxm
-	qIzxpnfrQixJFz1dIUzljmS5WyFRb/pOxfLqAIyl9W8kpHqBMxuOZiPbOb1ksZZo2Tt9
-	Snxw==
-X-Received: by 10.229.61.134 with SMTP id t6mr9508485qch.7.1428177257082;
-	Sat, 04 Apr 2015 12:54:17 -0700 (PDT)
-Received: from nano.lab.ossystems.com.br ([177.100.224.72])
-	by mx.google.com with ESMTPSA id g64sm56447qkh.18.2015.04.04.12.54.15
+	h=from:to:subject:date:message-id;
+	bh=Nner6B8Do6JCzfB2bav6mZvwi0g+Qyu0c3kj0Hs3vsQ=;
+	b=JOUtGDUEHWKygH3F/UxQEEoroofaLiMkmdD+N6iWwWwXGDHYNjZuJ4iQNNXoI4NsjL
+	3ytlv/SMm+yBjh+FybyEprf2ghvgTxQxBOgi7DOlOhkc5TfGv8kLyLuWI9RUufcU/V1S
+	b7xmQR7KUFDLaxyCaABiMixZiX2itZcGSx5eQwRMfSGjeFASn9UOSZ1j1POF8ODXh107
+	nspdrK3HJUZ8Qo/WZu4AncY+YkBFdN7jhv25357P23bhzLw5n0AgK8oZrwmAyhTVzQDm
+	r/92nlwLSOHZt4psWUtG4AmLUfsn3HHJW0YNxF/1fqTAVZ37+S4q+MZbDDWry7mXCz4D
+	EdMA==
+X-Received: by 10.70.136.106 with SMTP id pz10mr22721380pdb.105.1428277908253; 
+	Sun, 05 Apr 2015 16:51:48 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id z4sm2563536pdo.84.2015.04.05.16.51.46
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 04 Apr 2015 12:54:16 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-X-Google-Original-From: otavio@nano.lab.ossystems.com.br (Otavio Salvador)
-Received: by nano.lab.ossystems.com.br (Postfix, from userid 1000)
-	id E34AD1CDF57C3; Sat,  4 Apr 2015 16:54:12 -0300 (BRT)
-Date: Sat, 04 Apr 2015 16:54:12 -0300
-To: <openembedded-devel@lists.openembedded.org>,
-	listing@nano.lab.ossystems.com.br, Mailing@nano.lab.ossystems.com.br,
-	Meta-OpenEmbedded@nano.lab.ossystems.com.br
-User-Agent: Heirloom mailx 12.5 6/20/10
-MIME-Version: 1.0
-Message-Id: <20150404195412.E34AD1CDF57C3@nano.lab.ossystems.com.br>
-Subject: Updates to meta-java (master) in 2015-04-04
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 05 Apr 2015 16:51:47 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  5 Apr 2015 16:51:40 -0700
+Message-Id: <cover.1428277313.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [PATCH 00/33][master] Meta-oe misc build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,30 +43,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Apr 2015 19:54:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 05 Apr 2015 23:51:50 -0000
 
-Hello,
+please consider these misc build fixes for meta-oe. I hope there are not too many dups in the pipe line. I could not tell.
 
-I pushed following updates:
+Also I have moved a few recipes out of meta-oe as they have depends on other layers.
 
-commit d5a2a31aaad8f6bdf19860f7a858b10d7dba08b6 (HEAD, origin/master, origin/HEAD, pending)
-Author: Otavio Salvador <otavio@ossystems.com.br>
-Date:   Sun Jan 25 23:11:51 2015 -0200
+The following changes since commit df6c7b1279790d27ebfd58fbdfbac89bde5782ec:
 
-    openjdk-6: Add libxslt-native as dependency
-    
-    The build system looks for xsltproc during configure, when bootstrap
-    is required, so we need to have it around. This has been catch when
-    building the recipe in a clean tmp directory.
-    
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+  python-pyopenssl: Upgrade to 0.14 (2015-03-21 16:42:30 +0100)
 
-Regards,
+are available in the git repository at:
 
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+  git://github.com/akuster/meta-openembedded.git akuster/build_fixes
+  https://github.com//tree/akuster/build_fixes
+
+Armin Kuster (33):
+  daq: move recipe to meta-networking
+  opencv: build issue
+  collectd: fix world build issue
+  libgxim: fix world build issues
+  networkmanger: meta-oe world build failes
+  fingerterm: package update to 1.1.14
+  protbuf: update update and build fix
+  serial-forward: fix fetch error
+  dialog: update SRC_URI
+  xterm: fix issue with SRC_URI
+  ckermit: update SRC_URI
+  lirc: fix QA warnings
+  hplib: fix QA warnings
+  udisks: fix QA warnings
+  lio-utils: fix QA warnings
+  pm-qa: Fix QA warnings
+  gateone: Fix QA warnings
+  rarpd: Fix QA warnings
+  syslog-ng: Fix QA warnings
+  pscs-lite: Fix QA warnings
+  fbida: Fix QA warnings
+  qt-creator: Fix QA warnings
+  fio: Fix QA warnings
+  foxtrotgps: Fix QA warnings
+  usbpath: Fix QA warnings
+  wvstreams: Fix QA warnings
+  pksc11-helper: Fix QA warnings
+  lmsensors-config: Fix QA warnings
+  libutempter: update SRC_URI
+  gammu: Fix QA warnings
+  mosh: Fix QA warnings
+  numactl: Fix QA warnings
+  packagekit: Fix QA warnings
+
+ .../recipes-connectivity/daq/daq_2.0.2.bb          |  0
+ ...le-run-test-program-while-cross-compiling.patch |  0
+ ...c-Check-only-for-libsystemd-not-libsystem.patch |  0
+ ...o-run-sbin-dhclient-to-get-the-version-nu.patch |  0
+ .../networkmanager/networkmanager_0.9.8.10.bb      |  0
+ meta-oe/recipes-benchmark/fio/fio_2.2.6.bb         |  2 +-
+ meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb |  3 ++
+ .../recipes-connectivity/gateone/gateone_git.bb    |  1 +
+ meta-oe/recipes-connectivity/lirc/lirc.inc         |  2 +-
+ meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb    |  1 +
+ meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb    |  2 +-
+ .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |  1 +
+ .../packagekit/packagekit_0.5.6.bb                 |  9 +++---
+ meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb        |  1 +
+ .../{protobuf_2.5.0.bb => protobuf_2.6.1.bb}       | 13 +++++----
+ .../recipes-extended/collectd/collectd_5.4.1.bb    |  3 +-
+ meta-oe/recipes-extended/dialog/dialog.inc         |  2 +-
+ meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |  3 +-
+ meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb   |  2 ++
+ meta-oe/recipes-graphics/fbida/fbida_git.bb        |  2 +-
+ meta-oe/recipes-graphics/xorg-app/xterm_303.bb     |  2 +-
+ .../foxtrotgps/foxtrotgps_1.1.1.bb                 |  1 +
+ .../{fingerterm_1.0.2.bb => fingerterm.bb}         | 34 ++++++++++------------
+ meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb  |  2 ++
+ meta-oe/recipes-support/ckermit/ckermit_302.bb     |  4 +--
+ .../{libutempter_1.1.6.bb => libutempter.bb}       | 11 ++++---
+ meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb |  3 +-
+ .../lm_sensors/lmsensors-config_1.0.bb             |  2 +-
+ meta-oe/recipes-support/numactl/numactl_2.0.9.bb   |  2 ++
+ .../recipes-support/opencv/opencv-samples_2.4.bb   |  3 ++
+ meta-oe/recipes-support/opencv/opencv_2.4.bb       |  2 ++
+ .../recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb   |  1 +
+ .../pkcs11-helper/pkcs11-helper_1.11.bb            |  2 +-
+ .../serial-utils/serial-forward_git.bb             |  2 +-
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |  2 +-
+ meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |  2 +-
+ meta-oe/recipes-support/usbpath/usbpath_svn.bb     |  2 ++
+ ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch |  0
+ .../recipes-extended/libgxim/libgxim_0.5.0.bb      |  0
+ 39 files changed, 75 insertions(+), 49 deletions(-)
+ rename {meta-oe => meta-networking}/recipes-connectivity/daq/daq_2.0.2.bb (100%)
+ rename {meta-oe => meta-networking}/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch (100%)
+ rename {meta-oe => meta-networking}/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch (100%)
+ rename {meta-oe => meta-networking}/recipes-connectivity/networkmanager/networkmanager/0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch (100%)
+ rename {meta-oe => meta-networking}/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb (100%)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_2.5.0.bb => protobuf_2.6.1.bb} (56%)
+ rename meta-oe/recipes-qt/fingerterm/{fingerterm_1.0.2.bb => fingerterm.bb} (56%)
+ rename meta-oe/recipes-support/libutempter/{libutempter_1.1.6.bb => libutempter.bb} (79%)
+ rename {meta-oe => meta-ruby}/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch (100%)
+ rename {meta-oe => meta-ruby}/recipes-extended/libgxim/libgxim_0.5.0.bb (100%)
+
+-- 
+2.3.5
+
 
