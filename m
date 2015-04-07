@@ -1,45 +1,43 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A9B372A23
+Return-Path: <sven.ebenfeld@gmail.com>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id CA6FE605F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Apr 2015 08:35:24 +0000 (UTC)
-Received: by wiaa2 with SMTP id a2so9251332wia.0
+	Tue,  7 Apr 2015 09:41:56 +0000 (UTC)
+Received: by iggg4 with SMTP id g4so6997249igg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Apr 2015 01:35:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:cc:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=plM3VxzeM7EXesRXAhjVHfS5z+1KRx5dVvKUzybnqz4=;
-	b=XpRBvd1Dx1SI0C6jGOvzwXyZZa8xkfrmpqVgXqXrpU7z8eorpdYHoR5YwKWdVEQBe5
-	VglOmo857NlRQKY9GxI2UiZpnWl/zmR7OZ9wVjTloEKs46BWfxWpHmIoenGV8i9IqBHe
-	KY2LUdpJRbCI2A4qIzuJN2lTYyVtkOHWqn1lDYEzEnH3l5AqNGs1RH5ep8h+BahWTMO9
-	bGusWiQaA175cRBK1Zh2pzpc/c/bzmOge2LOS3HJ3XwRBklVsp5oE98n5atR314PSud8
-	2jbMSe0IHbU3pfP8u+nopr94nwwPbyjVYr50ChZ9ERJB3zG7/OJYRvXqBj5xLEJs6lNt
-	yn7A==
-X-Gm-Message-State: ALoCoQlX3jOL7sMW7qMvtqXDcmDliZc3qcJU69S+chA2SX4TwJEANQV4uXBnkpR1zRw4PC4LPs+O
-X-Received: by 10.194.60.203 with SMTP id j11mr38417331wjr.5.1428395725126;
-	Tue, 07 Apr 2015 01:35:25 -0700 (PDT)
-Received: from ?IPv6:2001:bf0:c080:403:3ca1:db9f:ae2e:51cc?
-	([2001:bf0:c080:403:3ca1:db9f:ae2e:51cc])
-	by mx.google.com with ESMTPSA id e2sm9865831wjy.46.2015.04.07.01.35.23
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 Apr 2015 01:35:24 -0700 (PDT)
-Message-ID: <552396CA.7060806@dresearch-fe.de>
-Date: Tue, 07 Apr 2015 10:35:22 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.4.0
+	Tue, 07 Apr 2015 02:41:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=rmN9AEz1H3bkWN9TAdFoWrbfSzMsJ1X8npj0f9cdMbE=;
+	b=w9UQQgs9VET+7w//ZwI+7KzNWeU7zMjDTo9PtC/70HC7MAAZBg4fkcI47HBqnFvUex
+	CPNnMxSvgkiP+q8pkhs/tZSq2pDqzQPl6CYYMKmSaKUoWVsO+EfExmMJvVD1xvdY1TqE
+	QOkTDr57zOaYwupnTvQ19C04oR2rbNfXDwMtPYHBe6b82wlH9MmTd7e8xPJ4YQ4Tee1t
+	2mxdqfhREYo/XAXgwk9TNGMglKqbIvn6a9YvbXrjcBbptoi9BpKDe+aCvNcv1Jlw4wGE
+	iZrbISdwYGaVki2BWMOBj3KZkGv5GZgbqX25RTEo4h2MBX8qfBA9ngh15Z/0rYAyfwSU
+	V7yg==
 MIME-Version: 1.0
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-References: <551143C5.90207@dresearch-fe.de>
-	<1427195564.14020.31.camel@linuxfoundation.org>
-In-Reply-To: <1427195564.14020.31.camel@linuxfoundation.org>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] fetch race problem
+X-Received: by 10.50.43.231 with SMTP id z7mr2277297igl.22.1428399717900; Tue,
+	07 Apr 2015 02:41:57 -0700 (PDT)
+Received: by 10.107.158.133 with HTTP; Tue, 7 Apr 2015 02:41:57 -0700 (PDT)
+In-Reply-To: <CAP9ODKqgAQqCxNg=fWMC6iW1Ks3HDd4c-YroMVOgJ=doTmsWLQ@mail.gmail.com>
+References: <CAD0=qkK3-x3CXStZkOVqOwfZioaLq+A9XwXehVT+HdLRzGPanw@mail.gmail.com>
+	<CAEHkU3VM9sWOcBVynfQhesMXsXo5kQDabQuZLypxembQzfdePA@mail.gmail.com>
+	<551C4F35.7020001@gmail.com>
+	<CAEHkU3Xg=NSPw2gc1rmPLy3RD68BRNK5hczmS5e6tTE9gEBk+A@mail.gmail.com>
+	<551DA5BA.3050505@gmail.com>
+	<CAP9ODKqazzhOMQtsdKaGhA-1pNQOHNRQ2vvp_uXDtq+gce2gqg@mail.gmail.com>
+	<551E4A44.7050708@gmail.com>
+	<CAP9ODKr4Xz8_OLD+DKqZ1wxx4c0Rc6bdSDwqLecFnhZa2x5kVg@mail.gmail.com>
+	<CAD0=qk+2f1qORQLQzD_r8p_VaF0+mAkVu+E=yz5-zzipf7RHXQ@mail.gmail.com>
+	<CAP9ODKqgAQqCxNg=fWMC6iW1Ks3HDd4c-YroMVOgJ=doTmsWLQ@mail.gmail.com>
+Date: Tue, 7 Apr 2015 11:41:57 +0200
+Message-ID: <CAD0=qkKX-6afKD8H+sD+MrVp3LRspmuieJC8T=R57ktcnJauxw@mail.gmail.com>
+From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] Trying to update openjdk-7 to icedtea 2.5.4 and jdk75b13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,51 +51,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2015 08:35:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Apr 2015 09:41:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Am 24.03.2015 um 12:12 schrieb Richard Purdie:
-> On Tue, 2015-03-24 at 12:00 +0100, Steffen Sledz wrote:
->> We hit the following problem in oe-classic. And we're not sure if this problem may occur in current oe too, or if it is fixed there.
->>
->> They are two or more recipes (may be in different layers) for packages with sources from the same (git) repository. If the fetching from the repo needs some time we see "file changed as we read it" errors in all likelihood.
->>
->> ------------------> snip <-------------------
->> ERROR: Error evaluating '${PF}:${P}:${PN}:${BP}:${BPN}:files:.'
->> Traceback (most recent call last):
->>   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 116, in expandWithRefs
->>     s = __expand_var_regexp__.sub(varparse.var_sub, s)
->>   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 60, in var_sub
->>     var = self.d.getVar(key, 1)
->>   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 260, in getVar
->>     return self.expand(value, var)
->>   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 132, in expand
->>     return self.expandWithRefs(s, varname).value
->>   File "/CACHE/jenkins-workspace/foo/bitbake/lib/bb/data_smart.py", line 116, in expandWithRefs
->>     s = __expand_var_regexp__.sub(varparse.var_sub, s)
->> FetchError: Fetch command export HOME="/var/lib/jenkins"; export PATH="/CACHE/jenkins-workspace/foo/OE//bin:/CACHE/jenkins-workspace/foo/openembedded/bin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/usr/armv5te/bin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/usr/sbin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/usr/bin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux/sbin:/CACHE/jenkins-workspace/foo/OE/tmp.7/sysroots/x86_64-linux//bin:/CACHE/jenkins-workspace/foo/OE/bin-HYP-6339:/CACHE/jenkins-workspace/foo/bitbake/bin:/sbin:/usr/sbin:/bin:/usr/bin"; tar -czf /var/lib/jenkins/sources/git_bitbucket.org.dresearchfe.drconfig.git.tar.gz ./.git/* failed with signal 1, output:
->> /bin/tar: ./.git/objects/pack/tmp_pack_BwThcc: File removed before we read it
->> /bin/tar: ./.git/objects/pack/tmp_pack_Ans7xK: File removed before we read it
->> /bin/tar: ./.git/objects/pack: file changed as we read it
->> ------------------> snap <-------------------
->>
->> Is this a problem in oe-core too (or oe-classic only)?
->>
->> Any ideas how to avoid such errors?
-> 
-> In theory bitbake has locks on files in DL_DIR, even for git
-> repositories so it should only touch the repo with one fetch process at
-> a time even if multiple recipes reference the same thing.
-> 
-> There were some big fetcher reworks in more recent versions of bitbake.
-> For OE-Classic, I'm guessing you're using an older version. You could
-> try transplanting the modern fetcher core onto your older bitbake I
-> guess.
+I tried some debugging with the old HotSpot, finding that the SIGSEGV
+appeared in parts of the Assembler Code which got recent patches in
+IcedTea-Repositories.
+So I updated the HotSpot-Changeset to 24.80b07 and the Bug disappeared
+for me. I've pushed my changes to my github repository.
 
-I do not feel competent enough to try this.
-
-Is it possible (in oe-classic) to mark two or more recipes (or single stages) to run exclusive?
+I don't know if this is acceptable for you? It's running on my arm
+target quit well at the moment.
+If you want, I could create a patchset based on the meta-java
+repository on yoctoproject.org?!
 
 
+Mit freundlichen Gr=C3=BC=C3=9Fen,
+Sven Ebenfeld
+
+
+2015-04-04 21:27 GMT+02:00 Otavio Salvador <otavio@ossystems.com.br>:
+> On Fri, Apr 3, 2015 at 5:24 PM, Sven Ebenfeld <sven.ebenfeld@gmail.com> w=
+rote:
+>> Okay, thanks for the reply! I'm going to run it with debug symbols withi=
+n
+>> the next days.
+>> But I have one more question. Icedtea7-native needs xsltproc native. Do =
+you
+>> know the recipe which is providing it?
+>
+> commit d5a2a31aaad8f6bdf19860f7a858b10d7dba08b6 (HEAD, pending)
+> Author: Otavio Salvador <otavio@ossystems.com.br>
+> Date:   Sun Jan 25 23:11:51 2015 -0200
+>
+>     openjdk-6: Add libxslt-native as dependency
+>
+>     The build system looks for xsltproc during configure, when bootstrap
+>     is required, so we need to have it around. This has been catch when
+>     building the recipe in a clean tmp directory.
+>
+>     Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
