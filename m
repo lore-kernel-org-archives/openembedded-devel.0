@@ -1,31 +1,46 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 2289360089;
-	Tue,  7 Apr 2015 12:30:07 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t37CU5JX006588; Tue, 7 Apr 2015 13:30:05 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id xqsH2-eUEt6j; Tue,  7 Apr 2015 13:30:05 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t37CTmj4006570
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Tue, 7 Apr 2015 13:30:00 +0100
-Message-ID: <1428409788.14020.461.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Date: Tue, 07 Apr 2015 13:29:48 +0100
-In-Reply-To: <552396CA.7060806@dresearch-fe.de>
-References: <551143C5.90207@dresearch-fe.de>
-	<1427195564.14020.31.camel@linuxfoundation.org>
-	<552396CA.7060806@dresearch-fe.de>
-X-Mailer: Evolution 3.12.10-0ubuntu1~14.10.1 
-Mime-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] fetch race problem
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A7C360043
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  7 Apr 2015 13:17:38 +0000 (UTC)
+Received: by iebrs15 with SMTP id rs15so45824443ieb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Apr 2015 06:17:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=ClfW6gYoJwTajhfh+Sixq+2CbZhZjFaHnL/+Iip7Kqg=;
+	b=YDH8Xek+SZcnJ6aRzIuZfIJdZ+XFQB69HqkvtpDyy5Wb+WffqtAXNaVGGX3NjJeUNq
+	X+b767pvYO+Mr4/GPJOME6RI+ZCgj9Fd8yh/FAS+bQa0V6ygCafiKq/UzhnwwFSPjd9U
+	PUqqCHYGOqPZKpe9kjomWb8BEUKd/6pzjMY/sj8MOwitSFylj7BB0pmi867SE1HOo+mb
+	NSA1zuVy55Z6CAs5cR8OcotgwXhl2obszuOyFcyzABSESOsQg9AEz9s0HlS9hdyRG3GZ
+	szyFVFcmjwmmAfxD4VDqsL6ZMFwpUqyivFsnSsWNbY9A3ZBWYoDXTPx6IjtT/c5bZFB2
+	2JSQ==
+MIME-Version: 1.0
+X-Received: by 10.50.66.37 with SMTP id c5mr3518339igt.26.1428412660025; Tue,
+	07 Apr 2015 06:17:40 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.107.23.6 with HTTP; Tue, 7 Apr 2015 06:17:39 -0700 (PDT)
+In-Reply-To: <CAD0=qkKX-6afKD8H+sD+MrVp3LRspmuieJC8T=R57ktcnJauxw@mail.gmail.com>
+References: <CAD0=qkK3-x3CXStZkOVqOwfZioaLq+A9XwXehVT+HdLRzGPanw@mail.gmail.com>
+	<CAEHkU3VM9sWOcBVynfQhesMXsXo5kQDabQuZLypxembQzfdePA@mail.gmail.com>
+	<551C4F35.7020001@gmail.com>
+	<CAEHkU3Xg=NSPw2gc1rmPLy3RD68BRNK5hczmS5e6tTE9gEBk+A@mail.gmail.com>
+	<551DA5BA.3050505@gmail.com>
+	<CAP9ODKqazzhOMQtsdKaGhA-1pNQOHNRQ2vvp_uXDtq+gce2gqg@mail.gmail.com>
+	<551E4A44.7050708@gmail.com>
+	<CAP9ODKr4Xz8_OLD+DKqZ1wxx4c0Rc6bdSDwqLecFnhZa2x5kVg@mail.gmail.com>
+	<CAD0=qk+2f1qORQLQzD_r8p_VaF0+mAkVu+E=yz5-zzipf7RHXQ@mail.gmail.com>
+	<CAP9ODKqgAQqCxNg=fWMC6iW1Ks3HDd4c-YroMVOgJ=doTmsWLQ@mail.gmail.com>
+	<CAD0=qkKX-6afKD8H+sD+MrVp3LRspmuieJC8T=R57ktcnJauxw@mail.gmail.com>
+Date: Tue, 7 Apr 2015 10:17:39 -0300
+X-Google-Sender-Auth: mv0wR4f5ppmZOkDxkUDyV50Pz8Y
+Message-ID: <CAP9ODKq_yN=M8-+Hbjk_NHyTGQ=oVEs=tEEQwkGWghR_LBHLfA@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] Trying to update openjdk-7 to icedtea 2.5.4 and jdk75b13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,41 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2015 12:30:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Apr 2015 13:17:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, 2015-04-07 at 10:35 +0200, Steffen Sledz wrote:
-> Am 24.03.2015 um 12:12 schrieb Richard Purdie:
-> >>> Is this a problem in oe-core too (or oe-classic only)?
-> >>
-> >> Any ideas how to avoid such errors?
-> > 
-> > In theory bitbake has locks on files in DL_DIR, even for git
-> > repositories so it should only touch the repo with one fetch process at
-> > a time even if multiple recipes reference the same thing.
-> > 
-> > There were some big fetcher reworks in more recent versions of bitbake.
-> > For OE-Classic, I'm guessing you're using an older version. You could
-> > try transplanting the modern fetcher core onto your older bitbake I
-> > guess.
-> 
-> I do not feel competent enough to try this.
-> 
-> Is it possible (in oe-classic) to mark two or more recipes (or single stages) to run exclusive?
+On Tue, Apr 7, 2015 at 6:41 AM, Sven Ebenfeld <sven.ebenfeld@gmail.com> wrote:
+> I tried some debugging with the old HotSpot, finding that the SIGSEGV
+> appeared in parts of the Assembler Code which got recent patches in
+> IcedTea-Repositories.
+> So I updated the HotSpot-Changeset to 24.80b07 and the Bug disappeared
+> for me. I've pushed my changes to my github repository.
+>
+> I don't know if this is acceptable for you? It's running on my arm
+> target quit well at the moment.
+> If you want, I could create a patchset based on the meta-java
+> repository on yoctoproject.org?!
 
-do_fetch[depends] += "xxx:do_fetch"
+Sure. If you want, please also cook some clean up patches. Both are
+very welcome additions :)
 
-in one recipe would make it run after the fetch of the other recipe
-(xxx) ...
-
-I will say that oe-classic is dead at this point, its not something I'd
-recommend people to be working with.
-
-Cheers,
-
-Richard
-
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
