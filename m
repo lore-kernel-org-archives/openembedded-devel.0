@@ -1,26 +1,23 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id E14FA60043
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id B0D8660043
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Apr 2015 13:56:31 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 8C280F811DA; Tue,  7 Apr 2015 07:56:30 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 27E57F811D8;
-	Tue,  7 Apr 2015 07:56:30 -0600 (MDT)
-Message-ID: <5523E21B.5070100@mlbassoc.com>
-Date: Tue, 07 Apr 2015 07:56:43 -0600
-From: Gary Thomas <gary@mlbassoc.com>
+	Tue,  7 Apr 2015 14:00:13 +0000 (UTC)
+Received: (qmail 9492 invoked by uid 1003); 7 Apr 2015 14:00:14 -0000
+Received: from unknown (HELO ?192.168.11.132?)
+	(philip@opensdr.com@108.44.116.31)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	7 Apr 2015 14:00:14 -0000
+Message-ID: <5523E2EE.7020904@balister.org>
+Date: Tue, 07 Apr 2015 10:00:14 -0400
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Issues building vlc
+References: <5523E21B.5070100@mlbassoc.com>
+In-Reply-To: <5523E21B.5070100@mlbassoc.com>
+Subject: Re: Issues building vlc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,25 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2015 13:56:35 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Tue, 07 Apr 2015 14:00:15 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
-I'm trying to build vlc and I get this error:
-ERROR: Multiple .bb files are due to be built which each provide jpeg (/local/poky-cutting-edge/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.4.0.bb 
-/local/poky-cutting-edge/meta/recipes-core/jpeg/jpeg_8d.bb).
-  This usually means one provides something the other doesn't and should.
+On 04/07/2015 09:56 AM, Gary Thomas wrote:
+> I'm trying to build vlc and I get this error:
+> ERROR: Multiple .bb files are due to be built which each provide jpeg
+> (/local/poky-cutting-edge/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.4.0.bb
+> /local/poky-cutting-edge/meta/recipes-core/jpeg/jpeg_8d.bb).
+>  This usually means one provides something the other doesn't and should.
+> 
+> This comes from the fact that vlc depends on libjpeg-turbo
+> which conflicts with the main jpeg library in OE-core.
+> 
+> What's the best way to fix this?
 
-This comes from the fact that vlc depends on libjpeg-turbo
-which conflicts with the main jpeg library in OE-core.
+This page starts to explain:
 
-What's the best way to fix this?
+http://openembedded.org/wiki/PREFERRED_PROVIDER_for_jpeg_and_jpeg-native
 
-Thanks
+It could use some work explaining the difference between the two
+alternatives.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Philip
+
+> 
+> Thanks
+> 
 
