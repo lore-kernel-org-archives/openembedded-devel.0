@@ -1,40 +1,40 @@
 Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 84BA265C9C
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 69CAF65C9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Apr 2015 15:05:10 +0000 (UTC)
-Received: by widdi4 with SMTP id di4so21119578wid.0
+	Tue,  7 Apr 2015 15:05:12 +0000 (UTC)
+Received: by wgbdm7 with SMTP id dm7so59315302wgb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Apr 2015 08:05:12 -0700 (PDT)
+	Tue, 07 Apr 2015 08:05:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=5zAmzVBfSPJ6QgYjm/RE2+lxhhpjOtae7pME1qJZtKU=;
-	b=Q2A1InTB47deqgEzFSXUFbq3rYK9i493lOWVGZVsrneiF392WMgB+PcH6s+Keo9FLI
-	HQVqQcWz/l8VEWtMiMdUYJEC7jr20TA3DL5lMtJa2f/bLsEW25IICbbtOCCgZfH9ynO9
-	qHIl418c3aiPLXM/xtZgaiS7c07bMNDdQh+CtUi42wBJlppQOa4BcZQj5trrt24UTkgd
-	/hZpZ0Wtnc9o1Ir17L/JQsqF9iWUUAGP3E7zkMApu0NTeHv3q0AawuPFkp2jc7J0nWZ4
-	wgK/AbfXtp/fMQyAaqe0vz2IA52O6lM8TyEYi+VURIhNgiwQ1tVGgcZvUUlmc1G8LWm5
-	8n2g==
-X-Received: by 10.180.105.136 with SMTP id gm8mr5559801wib.13.1428419112143;
-	Tue, 07 Apr 2015 08:05:12 -0700 (PDT)
+	bh=jg+TNsMR02P+HIH1zTWstXVP0avayeyaCsY2uijygAI=;
+	b=0zFJtUe42gpbHJxF89dPi7NcHtl8GpJicwoZUVrj+wd+U+ihtpNrZ3Q8lDLqNxwlnM
+	kUsoNPcAKlAtKtfRpR+4yJcWpgkf8K5O0+8B/0eoPWl0e3ZnaLKdRpRUoHe1BjV4A9HX
+	epBs9g6PuXWHKVj1b1SQYYy/KKmrDuRqd7epvwXLBguWiyADNmTj482yps+Y0o3xLjge
+	Gc4d6qT0x6V+Eb33kgcL4TNzHox747A4G5xj8eDHJFO3ZC88OLEN484Yc97KUdmIbNni
+	gsjzKPc4eF8HrIjF2VhMv+VuuVBtw98bpUBIyDJjIunRSwUAF2sd7o1HocBhH+UX9dDE
+	ZMQw==
+X-Received: by 10.180.80.199 with SMTP id t7mr5618175wix.52.1428419113668;
+	Tue, 07 Apr 2015 08:05:13 -0700 (PDT)
 Received: from localhost.localdomain (pD9F9B505.dip0.t-ipconnect.de.
 	[217.249.181.5]) by mx.google.com with ESMTPSA id
-	dr7sm11370730wib.22.2015.04.07.08.05.11
+	dr7sm11370730wib.22.2015.04.07.08.05.12
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 07 Apr 2015 08:05:11 -0700 (PDT)
+	Tue, 07 Apr 2015 08:05:12 -0700 (PDT)
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Apr 2015 17:04:37 +0200
-Message-Id: <1428419079-30420-6-git-send-email-sven.ebenfeld@gmail.com>
+Date: Tue,  7 Apr 2015 17:04:38 +0200
+Message-Id: <1428419079-30420-7-git-send-email-sven.ebenfeld@gmail.com>
 X-Mailer: git-send-email 1.8.1.rc3
-In-Reply-To: <1428419079-30420-5-git-send-email-sven.ebenfeld@gmail.com>
+In-Reply-To: <1428419079-30420-6-git-send-email-sven.ebenfeld@gmail.com>
 References: <1428419079-30420-1-git-send-email-sven.ebenfeld@gmail.com>
 	<1428419079-30420-2-git-send-email-sven.ebenfeld@gmail.com>
 	<1428419079-30420-3-git-send-email-sven.ebenfeld@gmail.com>
 	<1428419079-30420-4-git-send-email-sven.ebenfeld@gmail.com>
 	<1428419079-30420-5-git-send-email-sven.ebenfeld@gmail.com>
-Subject: [meta-java][PATCH 5/7] openjdk-7: use icedtea7-native as dependency instead of icedtea6
+	<1428419079-30420-6-git-send-email-sven.ebenfeld@gmail.com>
+Subject: [meta-java][PATCH 6/7] openjdk-7: Add libxslt-native as dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,37 +48,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2015 15:05:11 -0000
-
-Due to problems when using native rmic, I switched to using icedtea7.
+X-List-Received-Date: Tue, 07 Apr 2015 15:05:14 -0000
 
 Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 ---
- recipes-core/openjdk/openjdk-7-common.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-core/openjdk/openjdk-7-common.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
-index b9ec571..29519fa 100644
+index 29519fa..2bcca07 100644
 --- a/recipes-core/openjdk/openjdk-7-common.inc
 +++ b/recipes-core/openjdk/openjdk-7-common.inc
-@@ -26,7 +26,7 @@ PN = "${JDKPN}-jre"
- PROVIDES += "${JDKPN}"
+@@ -27,7 +27,7 @@ PROVIDES += "${JDKPN}"
  
  DEPENDS = " \
--           icedtea6-native zip-native ant-native \
-+           icedtea7-native zip-native ant-native \
-            zlib \
+            icedtea7-native zip-native ant-native \
+-           zlib \
++           zlib libxslt-native \
  	   jpeg libpng giflib \
             gtk+ glib-2.0 \
-@@ -101,7 +101,7 @@ EXTRA_OECONF = " \
- 	\
-         --enable-zero \
- 	\
--	--with-jdk-home=${STAGING_LIBDIR_JVM_NATIVE}/icedtea6-native \
-+	--with-jdk-home=${STAGING_LIBDIR_JVM_NATIVE}/icedtea7-native \
- 	--with-rhino=${STAGING_DATADIR_JAVA}/rhino.jar \
- 	\
-         --with-openjdk-src-zip=${WORKDIR}/${OPENJDK_FILE} \
+            cups fontconfig \
 -- 
 1.8.1.rc3
 
