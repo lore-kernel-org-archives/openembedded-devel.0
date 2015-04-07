@@ -1,35 +1,28 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id CB81A73C63
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id A50A360097
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Apr 2015 16:11:20 +0000 (UTC)
-Received: by igbqf9 with SMTP id qf9so15983727igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Apr 2015 09:11:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=DDF7qcnWob+GV6PFc429RscCAbAFoiCjCtsls6fPrA8=;
-	b=Y44ExPZJ70daehXNpXfdjAAIpKb+mEap46P15IPN0PIVzOg3Wt/FpnV5wL/L7sju6j
-	/kPr4ZBqeiV//a1VdwazN+lMQZZy8hEcJHOfNJvypfpVa1e8T+58wJrLxjUVg2Xe0bNb
-	XNfPxiZ0zjLbMfCRosPw1Cs8uhoASaTfyfCo61Z2CsYyIHWOV4hn6+qn4/aClmNMYl9m
-	1T2kT+s+yhPVYJBuIWk+AENChmYLNyXG+xZO28vxJn3cpUdCJORlsMOiUUSXOSYE8lSc
-	zhlpquEQeKUtpCK/Cp6f1NvAWNHy1ra4HBS3qMMaYs6TCW81GIOSYF2EXhiDGUEAl7hm
-	ZjTQ==
+	Tue,  7 Apr 2015 17:53:07 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 71CF7F811DA; Tue,  7 Apr 2015 11:53:08 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id E1D16F811DA;
+	Tue,  7 Apr 2015 11:53:07 -0600 (MDT)
+Message-ID: <55241991.3090801@mlbassoc.com>
+Date: Tue, 07 Apr 2015 11:53:21 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-X-Received: by 10.50.79.233 with SMTP id m9mr4893164igx.45.1428423081095; Tue,
-	07 Apr 2015 09:11:21 -0700 (PDT)
-Received: by 10.36.76.151 with HTTP; Tue, 7 Apr 2015 09:11:21 -0700 (PDT)
-In-Reply-To: <1427494862-25016-3-git-send-email-obi@opendreambox.org>
-References: <1427494862-25016-1-git-send-email-obi@opendreambox.org>
-	<1427494862-25016-3-git-send-email-obi@opendreambox.org>
-Date: Tue, 7 Apr 2015 09:11:21 -0700
-Message-ID: <CANx9H-CZqgf7uUyjOWVWbgzEax-m7J7ZFvUsDt6dOYzPZwSWZQ@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 3/3] python-pyopenssl: Downgrade to 0.13
+To: openembedded-devel@lists.openembedded.org
+References: <5523E21B.5070100@mlbassoc.com> <5523E2EE.7020904@balister.org>
+In-Reply-To: <5523E2EE.7020904@balister.org>
+Subject: Re: Issues building vlc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,105 +36,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Apr 2015 16:11:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Apr 2015 17:53:07 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I have python-cryptography building. After testing on multiple
-architectures and dependency checking, I will submit to ML. ETA 1 to 2 days.
+On 2015-04-07 08:00, Philip Balister wrote:
+> On 04/07/2015 09:56 AM, Gary Thomas wrote:
+>> I'm trying to build vlc and I get this error:
+>> ERROR: Multiple .bb files are due to be built which each provide jpeg
+>> (/local/poky-cutting-edge/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.4.0.bb
+>> /local/poky-cutting-edge/meta/recipes-core/jpeg/jpeg_8d.bb).
+>>   This usually means one provides something the other doesn't and should.
+>>
+>> This comes from the fact that vlc depends on libjpeg-turbo
+>> which conflicts with the main jpeg library in OE-core.
+>>
+>> What's the best way to fix this?
+>
+> This page starts to explain:
+>
+> http://openembedded.org/wiki/PREFERRED_PROVIDER_for_jpeg_and_jpeg-native
+>
+> It could use some work explaining the difference between the two
+> alternatives.
 
---Tim
+Thanks, that helped.  Sadly, the build of vlc still failed.
+   | arm-amltd-linux-gnueabi-libtool:   error: cannot find the library '' or unhandled argument '-DLINUX=1'
+   | make[6]: *** [libqt4_plugin.la] Error 1
+   | make[6]: Leaving directory `/local/p0382-cutting-edge_2014-11-21/tmp/work/cortexa9hf-vfp-neon-amltd-linux-gnueabi/vlc/2.1.4-r0/build/modules/gui/qt4'
 
-On Fri, Mar 27, 2015 at 3:21 PM, Andreas Oberritter <obi@opendreambox.org>
-wrote:
+It's not clear at all to me why this fails - any clues?
 
-> Version 0.14 depends python-cryptography, which is
-> currently unavailable in meta-openembedded.
->
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  .../python-pyopenssl-0.13/x509_revoked_dup.patch      | 19
-> +++++++++++++++++++
->  ...hon-pyopenssl_0.14.bb => python-pyopenssl_0.13.bb} | 11 ++++++-----
->  2 files changed, 25 insertions(+), 5 deletions(-)
->  create mode 100644
-> meta-python/recipes-devtools/python/python-pyopenssl-0.13/x509_revoked_dup.patch
->  rename meta-python/recipes-devtools/python/{python-pyopenssl_0.14.bb =>
-> python-pyopenssl_0.13.bb} (68%)
->
-> diff --git
-> a/meta-python/recipes-devtools/python/python-pyopenssl-0.13/x509_revoked_dup.patch
-> b/meta-python/recipes-devtools/python/python-pyopenssl-0.13/x509_revoked_dup.patch
-> new file mode 100644
-> index 0000000..c386e9c
-> --- /dev/null
-> +++
-> b/meta-python/recipes-devtools/python/python-pyopenssl-0.13/x509_revoked_dup.patch
-> @@ -0,0 +1,19 @@
-> +diff -Naur pyOpenSSL-0.13.orig/OpenSSL/crypto/crl.c
-> pyOpenSSL-0.13/OpenSSL/crypto/crl.c
-> +--- pyOpenSSL-0.13.orig/OpenSSL/crypto/crl.c   2011-09-02
-> 17:46:13.000000000 +0200
-> ++++ pyOpenSSL-0.13/OpenSSL/crypto/crl.c        2015-03-26
-> 20:53:08.984999223 +0100
-> +@@ -3,6 +3,7 @@
-> + #include "crypto.h"
-> +
-> +
-> ++#if 0
-> + static X509_REVOKED * X509_REVOKED_dup(X509_REVOKED *orig) {
-> +     X509_REVOKED *dupe = NULL;
-> +
-> +@@ -32,6 +33,7 @@
-> +     dupe->sequence = orig->sequence;
-> +     return dupe;
-> + }
-> ++#endif
-> +
-> + static char crypto_CRL_get_revoked_doc[] = "\n\
-> + Return revoked portion of the CRL structure (by value\n\
-> diff --git a/meta-python/recipes-devtools/python/python-pyopenssl_0.14.bb
-> b/meta-python/recipes-devtools/python/python-pyopenssl_0.13.bb
-> similarity index 68%
-> rename from meta-python/recipes-devtools/python/python-pyopenssl_0.14.bb
-> rename to meta-python/recipes-devtools/python/python-pyopenssl_0.13.bb
-> index 1f609e3..cf9d73e 100644
-> --- a/meta-python/recipes-devtools/python/python-pyopenssl_0.14.bb
-> +++ b/meta-python/recipes-devtools/python/python-pyopenssl_0.13.bb
-> @@ -7,15 +7,16 @@ LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
->  SRCNAME = "pyOpenSSL"
->
->  DEPENDS = "openssl"
-> +PE = "1"
->
-> -SRC_URI = "
-> http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-${PV}.tar.gz"
-> -
-> -SRC_URI[md5sum] = "8579ff3a1d858858acfba5f046a4ddf7"
-> -SRC_URI[sha256sum] =
-> "a99db8e59c120138ad8a72eecedcc24b4510d2eed3ce48213b7e32f22cc4ee6e"
-> +SRC_URI = "
-> http://pypi.python.org/packages/source/p/pyOpenSSL/pyOpenSSL-${PV}.tar.gz
-> \
-> +           file://x509_revoked_dup.patch"
-> +SRC_URI[md5sum] = "767bca18a71178ca353dff9e10941929"
-> +SRC_URI[sha256sum] =
-> "21e12b03abaa0e04ecc8cd9c251598f71bae11c9f385304234e4ea5618c6163b"
->
->  S = "${WORKDIR}/${SRCNAME}-${PV}"
->
-> -inherit setuptools
-> +inherit distutils
->
->  PACKAGES =+ "${PN}-tests"
->  FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+See http://www.mlbassoc.com/poky/vlc-log.do_compile for the full log
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
