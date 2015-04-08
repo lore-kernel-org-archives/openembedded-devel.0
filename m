@@ -1,29 +1,36 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B07560089
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id E1B1760089
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 21:30:43 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id D3753F811E2; Wed,  8 Apr 2015 15:30:44 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 791E3F811E0;
-	Wed,  8 Apr 2015 15:30:44 -0600 (MDT)
-Message-ID: <55259E14.40902@mlbassoc.com>
-Date: Wed, 08 Apr 2015 15:31:00 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	Wed,  8 Apr 2015 21:34:44 +0000 (UTC)
+Received: by iggg4 with SMTP id g4so51588606igg.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Apr 2015 14:34:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=F/di6wO8phjG/22c1mH4Zl2UX4aRs9S1aUwc23uWg3M=;
+	b=bzjcHGCW3aA+Hcn4rrdEXMJdJjvGtSOGVdaarHHeuniNsPgbU90Ki+IrDsU7IKFI4d
+	aKVcMqNUfKzmEWyRdt99IJwPLBR0c+1MuP1PYZkNxpXrHOI/CzMCWRGKb4cGM7d3nWiT
+	5u/o6DeG0MK1yGofUeWIWhjunkHbp/jtiHgMaL3fLq8C/gG3ZZLYrExXhnUOxyAflXgq
+	IG8JOWipdOsx0VCbks1g9fjB3s7bfrwErX6qjTIYxpDAqNXdggWXijZeuex/fEN/j1gn
+	8hmJ3kt1NJ7E7EbPDpbqI9W86LYWUuRkvffnQm3iNuVs3RM7FjISTPcxHFMMoPP64a1w
+	S1GA==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <5523E21B.5070100@mlbassoc.com> <5523E2EE.7020904@balister.org>
-	<55241991.3090801@mlbassoc.com>
-In-Reply-To: <55241991.3090801@mlbassoc.com>
-Subject: Re: Issues building vlc
+X-Received: by 10.43.55.12 with SMTP id vw12mr35358447icb.30.1428528885533;
+	Wed, 08 Apr 2015 14:34:45 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.107.23.6 with HTTP; Wed, 8 Apr 2015 14:34:45 -0700 (PDT)
+In-Reply-To: <1428518576-11800-1-git-send-email-denis@denix.org>
+References: <1428518576-11800-1-git-send-email-denis@denix.org>
+Date: Wed, 8 Apr 2015 18:34:45 -0300
+X-Google-Sender-Auth: n18gq3niRKYeRBU_xA6MayNSNBc
+Message-ID: <CAP9ODKqy+EVbMrYG44jfQbCSHcca8qB6CKQdZJutm-YQjtUp=Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [PATCH 1/2] serialcheck: add version 1.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,47 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 21:30:46 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Apr 2015 21:34:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2015-04-07 11:53, Gary Thomas wrote:
-> On 2015-04-07 08:00, Philip Balister wrote:
->> On 04/07/2015 09:56 AM, Gary Thomas wrote:
->>> I'm trying to build vlc and I get this error:
->>> ERROR: Multiple .bb files are due to be built which each provide jpeg
->>> (/local/poky-cutting-edge/meta-oe/recipes-core/jpeg/libjpeg-turbo_8d+1.4.0.bb
->>> /local/poky-cutting-edge/meta/recipes-core/jpeg/jpeg_8d.bb).
->>>   This usually means one provides something the other doesn't and should.
->>>
->>> This comes from the fact that vlc depends on libjpeg-turbo
->>> which conflicts with the main jpeg library in OE-core.
->>>
->>> What's the best way to fix this?
->>
->> This page starts to explain:
->>
->> http://openembedded.org/wiki/PREFERRED_PROVIDER_for_jpeg_and_jpeg-native
->>
->> It could use some work explaining the difference between the two
->> alternatives.
->
-> Thanks, that helped.  Sadly, the build of vlc still failed.
->    | arm-amltd-linux-gnueabi-libtool:   error: cannot find the library '' or unhandled argument '-DLINUX=1'
->    | make[6]: *** [libqt4_plugin.la] Error 1
->    | make[6]: Leaving directory `/local/p0382-cutting-edge_2014-11-21/tmp/work/cortexa9hf-vfp-neon-amltd-linux-gnueabi/vlc/2.1.4-r0/build/modules/gui/qt4'
->
-> It's not clear at all to me why this fails - any clues?
->
-> See http://www.mlbassoc.com/poky/vlc-log.do_compile for the full log
->
+Hello Denys,
 
-This turned out to be a problem with the Qt libraries, but only
-on i.MX5/i.MX6 (using meta-fsl-arm)
+On Wed, Apr 8, 2015 at 3:42 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> From: Denys Dmytriyenko <denys@ti.com>
+>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+
+There are some things I see as possible improvements:
+
+ - a long commit log which says what is the use case for the tool
+ - fix homepage to the right cgit URL
+ - add Upstream-Status field in the two included patches (btw, it
+would be good to send them for inclusion)
+ - add nativesdk support as it is useful for SDK deployment so it can
+be used for board test
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
