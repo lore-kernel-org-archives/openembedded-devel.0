@@ -1,39 +1,62 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f180.google.com (mail-wi0-f180.google.com
-	[209.85.212.180])
-	by mail.openembedded.org (Postfix) with ESMTP id C79B060089
+Return-Path: <neena.busireddy@freescale.com>
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2on0117.outbound.protection.outlook.com [207.46.100.117])
+	by mail.openembedded.org (Postfix) with ESMTP id D069B60089
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 19:55:12 +0000 (UTC)
-Received: by wizk4 with SMTP id k4so67952042wiz.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Apr 2015 12:55:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=upxEzEgI3PeW6O87tSdGnOLhvvg2aoKXzajZ1/65svw=;
-	b=OhsI19/L1kYoXr3oCgehQ18NCdkq/Owka5U/Ps61cPkDgcfF8YXOB/Gb50HEzsJnO+
-	oIe6lJXuoa0Z9y6hDol6IJujmlTna3Il4cmCntEuznbQbMWrqzRKbZSxd8/X0GBgx+6c
-	6pUn6dYDn6Bd63bBPE+OTRTO0bJWgbtu4OG73h14VcyAQsXmVmXhvVN0GQI3w1io+rKx
-	kRtpu6+EJZ9iGJ720Zt67/OZVHRpWhTAEyfz72JoFduYNmLOd/bKLpV+IAGoSKt7vAwM
-	6VoJj6WT0pocip6wT7Nzdcyb4gm3z2gcJQ7M1nk+D2ftorR9N2w+II2NGomf4XT49Bl8
-	PYng==
-X-Received: by 10.180.77.199 with SMTP id u7mr17581860wiw.42.1428522914024;
-	Wed, 08 Apr 2015 12:55:14 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id z12sm406481wjq.12.2015.04.08.12.55.13
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Apr 2015 12:55:13 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 8 Apr 2015 21:55:16 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150408195516.GB29645@jama>
-References: <1427916099-30314-1-git-send-email-gshastri@juniper.net>
+	Wed,  8 Apr 2015 20:30:57 +0000 (UTC)
+Received: from BLUPR03MB471.namprd03.prod.outlook.com (10.141.78.145) by
+	BLUPR03MB1378.namprd03.prod.outlook.com (0.163.81.12) with Microsoft
+	SMTP Server (TLS) id 15.1.130.23; Wed, 8 Apr 2015 20:30:57 +0000
+Received: from BY2PR03CA064.namprd03.prod.outlook.com (10.141.249.37) by
+	BLUPR03MB471.namprd03.prod.outlook.com (10.141.78.145) with Microsoft
+	SMTP Server (TLS) id 15.1.136.17; Wed, 8 Apr 2015 20:30:56 +0000
+Received: from BN1AFFO11FD038.protection.gbl (2a01:111:f400:7c10::133) by
+	BY2PR03CA064.outlook.office365.com (2a01:111:e400:2c5d::37) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.130.23 via Frontend Transport; Wed, 8 Apr 2015
+	20:30:55 +0000
+Authentication-Results: spf=temperror (sender IP is 192.88.168.50)
+	smtp.mailfrom=freescale.com; freescale.mail.onmicrosoft.com; dkim=none
+	(message not signed) header.d=none;
+Received-SPF: TempError (protection.outlook.com: error in processing during
+	lookup of freescale.com: DNS Timeout)
+Received: from tx30smr01.am.freescale.net (192.88.168.50) by
+	BN1AFFO11FD038.mail.protection.outlook.com (10.58.52.242) with
+	Microsoft SMTP Server (TLS) id 15.1.136.16 via Frontend Transport;
+	Wed, 8 Apr 2015 20:30:53 +0000
+Received: from bluemeany.am.freescale.net (bluemeany.am.freescale.net
+	[10.81.16.144])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	t38KUqv7020899; Wed, 8 Apr 2015 13:30:52 -0700
+From: Neena Busireddy <neena.busireddy@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 8 Apr 2015 15:30:47 -0500
+Message-ID: <1428525047-18093-1-git-send-email-neena.busireddy@freescale.com>
+X-Mailer: git-send-email 1.7.9.5
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.168.50; CTRY:US; IPV:NLI; EFV:NLI;
+	BMV:1; SFV:NSPM;
+	SFS:(10019020)(6009001)(189002)(199003)(15395725005)(33646002)(19580405001)(450100001)(77156002)(50466002)(46102003)(48376002)(2351001)(229853001)(106466001)(86362001)(6806004)(19580395003)(110136001)(575784001)(104016003)(47776003)(87936001)(50986999)(15975445007)(92566002)(36756003)(77096005)(62966003)(50226001)(32563001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR03MB471;
+	H:tx30smr01.am.freescale.net; FPR:; SPF:TempError; MLV:sfv; MX:1;
+	A:1; LANG:en; 
 MIME-Version: 1.0
-In-Reply-To: <1427916099-30314-1-git-send-email-gshastri@juniper.net>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [[meta-filesystems][Add xorriso support]] Add xorriso tool support
+X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0; RULEID:; SRVR:BLUPR03MB471;
+	UriScan:; BCL:0; PCL:0; RULEID:; SRVR:BLUPR03MB1378; 
+X-Microsoft-Antispam-PRVS: <BLUPR03MB471E6AEDD31EA54E7B57C29F5FC0@BLUPR03MB471.namprd03.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(5002010)(5005006); SRVR:BLUPR03MB471; BCL:0;
+	PCL:0; RULEID:; SRVR:BLUPR03MB471; 
+X-Forefront-PRVS: 0540846A1D
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2015 20:30:53.3868 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d;
+	Ip=[192.88.168.50]; Helo=[tx30smr01.am.freescale.net]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLUPR03MB471
+X-OriginatorOrg: freescale.com
+Subject: [meta-qt5][PATCH V2] qt5nmapper: Fix compatibility issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,97 +70,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 19:55:14 -0000
-X-Groupsio-MsgNum: 55025
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="7ZAtKRhVyVSsbBD2"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Apr 2015 20:30:58 -0000
+Content-Type: text/plain
 
---7ZAtKRhVyVSsbBD2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+qt5nmapper app fails to run with the following error:
 
-On Wed, Apr 01, 2015 at 12:21:39PM -0700, Gaurang Shastri wrote:
-> xorriso copies file objects from POSIX compliant filesystems into
-> Rock Ridge enhanced ISO 9660 filesystems and allows session-wise
-> manipulation of such filesystems.
+file:///usr/share/qt5nmapper-1.0/Qt5_NMapper.qml:34:5: Type Panel unavailable
+         Panel {
+         ^
+file:///usr/share/qt5nmapper-1.0/content/Panel.qml:118:9: Type Switch unavailable
+             Switch {
+             ^
+file:///usr/share/qt5nmapper-1.0/content/Switch.qml:8:21: Cannot assign a value to a signal (expecting a script to be run)
+         property string onText: "On"
 
-Have you tested this recipe before sending it?
+This patch changes the string from onText to onTextstring which was introduced with Qt 5.3
 
-It fails to build, most likely because of missing foreign flag to
-automake.
+Signed-off-by: Neena Busireddy <neena.busireddy@freescale.com>
+---
+ .../qt5nmapper/change-property-string.patch        |   26 ++++++++++++++++++++
+ recipes-qt/examples/qt5nmapper_1.0.bb              |    3 ++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-qt/examples/qt5nmapper/change-property-string.patch
 
-| configure.ac:47: installing './compile'
-| configure.ac:14: installing './missing'
-| Makefile.am: error: required file './NEWS' not found
-| Makefile.am: installing './depcomp'
-| autoreconf: automake failed with exit status: 1
-| ERROR: autoreconf execution failed.
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
-s/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/xorriso/1.3.8-r0/temp/log.=
-do_configure.16725)
-NOTE: recipe xorriso-1.3.8-r0: task do_configure: Failed
+diff --git a/recipes-qt/examples/qt5nmapper/change-property-string.patch b/recipes-qt/examples/qt5nmapper/change-property-string.patch
+new file mode 100644
+index 0000000..c77a553
+--- /dev/null
++++ b/recipes-qt/examples/qt5nmapper/change-property-string.patch
+@@ -0,0 +1,26 @@
++qt5nmapper:  Change property string to onTextString 
++
++Upstream Status: Pending
++
++diff --git a/content_org/Switch.qml b/content/Switch.qml
++index 08a2cba..a8b8b26 100644
++--- a/content_org/Switch.qml
+++++ b/content/Switch.qml
++@@ -5,7 +5,7 @@ Item {
++ 
++     property alias text: textItem.text
++     property bool checked: false
++-    property string onText: "On"
+++    property string onTextString: "On"
++     property string offText: "Off"
++ 
++     QtObject {
++@@ -76,7 +76,7 @@ Item {
++             color: "#000000"
++             font.pixelSize: 18
++             font.bold: true
++-            text: onText
+++            text: onTextString
++         }
++         Text {
++             anchors.verticalCenter: parent.verticalCenter
+diff --git a/recipes-qt/examples/qt5nmapper_1.0.bb b/recipes-qt/examples/qt5nmapper_1.0.bb
+index 9b1b727..77cb067 100644
+--- a/recipes-qt/examples/qt5nmapper_1.0.bb
++++ b/recipes-qt/examples/qt5nmapper_1.0.bb
+@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://README;beginline=47;endline=58;md5=9fb5bf76d564bc5381
+ 
+ DEPENDS = "qtdeclarative qtgraphicaleffects"
+ 
+-SRC_URI = "http://quitcoding.com/download/Qt5_NMapper_1.0.tgz"
++SRC_URI = "http://quitcoding.com/download/Qt5_NMapper_1.0.tgz \
++           file://change-property-string.patch"
+ SRC_URI[md5sum] = "dafc425280144d8e286788e75a0dba0f"
+ SRC_URI[sha256sum] = "607fbf4c448f00d3c563f9ef8a582bcb6e8fe550e80b56bf8d9127a417faa53b"
+ 
+-- 
+1.7.9.5
 
-> Signed-off-by: Gaurang Shastri <gshastri@juniper.net>
-> ---
->  .../recipes-utils/xorriso/xorriso_1.3.8.bb         |   17 ++++++++++++++=
-+++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.=
-bb
->=20
-> diff --git a/meta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.bb b/me=
-ta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.bb
-> new file mode 100644
-> index 0000000..93914b4
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/xorriso/xorriso_1.3.8.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTIONS =3D "xorriso copies file objects from POSIX compliant files=
-ystems into Rock Ridge enhanced ISO 9660 filesystems and allows session-wis=
-e manipulation of such filesystems"
-> +
-> +inherit autotools
-> +
-> +DEPENDS +=3D "attr zlib"
-> +
-> +SRC_URI =3D "http://www.gnu.org/software/${BPN}/${BPN}-${PV}.tar.gz"
-> +
-> +SRC_URI[md5sum] =3D "a0fc534ef8f9589282a189f0e6cdf952"
-> +SRC_URI[sha256sum] =3D "901204634651533f7cbd105eab560534702458258529aac4=
-b2f0fc946992107e"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-> +LICENSE =3D "GPLv3"
-> +
-> +EXTRA_OECONF =3D "--disable-libacl"
-> +
-> +BBCLASSEXTEND =3D "nativesdk"
-> --=20
-> 1.7.9.5
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---7ZAtKRhVyVSsbBD2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlUlh6QACgkQN1Ujt2V2gBy4iQCgrLBj4IyCYb+kjgTHIRIU5DRL
-WCEAnjX4mW/o9v4qWDOyTyqv3T2Dp23L
-=eCbI
------END PGP SIGNATURE-----
-
---7ZAtKRhVyVSsbBD2--
