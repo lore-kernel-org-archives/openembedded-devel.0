@@ -1,32 +1,53 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 62AD16E268
+Return-Path: <martin.beaudet@intelia.com>
+Received: from smtp-out-1.satelmail.com (smtp-out-1.satelcom.qc.ca
+	[208.77.80.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 32A2F60089
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 14:28:01 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga103.fm.intel.com with ESMTP; 08 Apr 2015 07:28:03 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,544,1422950400"; d="scan'208";a="677088749"
-Received: from irsmsx104.ger.corp.intel.com ([163.33.3.159])
-	by orsmga001.jf.intel.com with ESMTP; 08 Apr 2015 07:28:02 -0700
-Received: from irsmsx105.ger.corp.intel.com ([169.254.7.2]) by
-	IRSMSX104.ger.corp.intel.com ([169.254.3.49]) with mapi id
-	14.03.0224.002; Wed, 8 Apr 2015 15:28:01 +0100
-From: "Iorga, Cristian" <cristian.iorga@intel.com>
+	Wed,  8 Apr 2015 15:18:58 +0000 (UTC)
+Received: from mta-1.satelcom.qc.ca (mta-1.satelcom.qc.ca [172.16.16.49])
+	by smtp-out-1.satelmail.com (Postfix) with ESMTP id 3390242D07
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Apr 2015 11:19:00 -0400 (EDT)
+Received: from assp-db2.satelcom.qc.ca (unknown [172.16.16.118])
+	by mta-1.satelcom.qc.ca (Postfix) with ESMTPS id 291B141FE3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Apr 2015 11:19:00 -0400 (EDT)
+Received: from smtp-1.satelcom.qc.ca (localhost [127.0.0.1])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by assp-db2.satelcom.qc.ca (Postfix) with ESMTPS id E427237BBC
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Apr 2015 11:20:16 -0400 (EDT)
+Received: from smtp-1.satelcom.qc.ca ([172.16.16.54]
+	helo=smtp-1.satelcom.qc.ca)
+	by assp-db.satelcom.qc.ca with SMTP (2.4.3); 8 Apr 2015 11:20:16 -0400
+Received: from remote.intelia.com (unknown [204.80.6.198])
+	by smtp-1.satelcom.qc.ca (Postfix) with ESMTPS id DAAFE41E3F
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Apr 2015 11:18:58 -0400 (EDT)
+Received: from CT-SERVEUR.ctaq.local ([fe80::7895:8268:18d2:9278]) by
+	CT-SERVEUR.ctaq.local ([fe80::7895:8268:18d2:9278%10]) with mapi;
+	Wed, 8 Apr 2015 11:18:59 -0400
+From: Martin Beaudet <martin.beaudet@intelia.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH V2] bluez collection: add (moved from oe-core)
-Thread-Index: AQHQcggN3OZ/WJgPXESA8jiNrIxxxp1DLBlw
-Date: Wed, 8 Apr 2015 14:28:00 +0000
-Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F497624@irsmsx105.ger.corp.intel.com>
-References: <1428503190-20210-1-git-send-email-cristian.iorga@intel.com>
-In-Reply-To: <1428503190-20210-1-git-send-email-cristian.iorga@intel.com>
-Accept-Language: en-US
+Date: Wed, 8 Apr 2015 11:18:58 -0400
+Thread-Topic: Yocto Dizzy + Beaglebone + Qt5 (Internal compiler error)
+Thread-Index: AdByD1EW9gmKf7wTR3+n39tIwVdQJw==
+Message-ID: <muid.55403ae0f2.00FFF1D896D3FF4482179DF8C27DEFAFA329F13E86@CT-SERVEUR.ctaq.local>
+Accept-Language: fr-FR, fr-CA
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.182]
+acceptlanguage: fr-FR, fr-CA
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH V2] bluez collection: add (moved from oe-core)
+X-Assp-Version: 2.4.3(15059) on assp-db.satelcom.qc.ca
+X-Assp-ID: assp-db.satelcom.qc.ca a119-06416-12012
+X-Assp-Session: B2CCFBB0 (mail 1)
+X-Assp-Envelope-From: martin.beaudet@intelia.com
+X-Assp-Intended-For: openembedded-devel@lists.openembedded.org
+X-Assp-Server-TLS: yes
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Yocto Dizzy + Beaglebone + Qt5 (Internal compiler error)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,538 +61,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 14:28:03 -0000
+X-List-Received-Date: Wed, 08 Apr 2015 15:18:59 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-For V2:
-1. Commit message corrected (clearer).
-2. Respect OE styling
+Hi,
 
-Thanks,
-Cristian
+I'm building an image for the beaglebone. I would like to use (at least) th=
+e version 5.4 or more of QT with elgfs platform.
+Also the hardware accelerated support on Beaglebone Black.
 
------Original Message-----
-From: Iorga, Cristian=20
-Sent: Wednesday, April 8, 2015 5:27 PM
-To: openembedded-devel@lists.openembedded.org
-Cc: Iorga, Cristian
-Subject: [meta-oe][PATCH V2] bluez collection: add (moved from oe-core)
+Here is what I've done yet :
+# SHELL COMMAND :
+$ mkdir poky
+$ git clone -b dizzy git://git.yoctoproject.org/poky
+$ cd poky
+$ git clone git://git.yoctoproject.org/meta-ti
+$ git clone -b dizzy git://github.com/meta-qt5/meta-qt5.git
+$ git clone -b dizzy git://git.openembedded.org/meta-openembedded
+$ git clone -b daisy https://bitbucket.org/embarcados/meta-embarcados.git
+$ source oe-init-build-env beaglebone
+# FILE : poky/beaglebone/conf/local.conf
+DISTRO_FEATURES_remove =3D "x11 wayland"
+ # FILE : poky/beaglebone/conf/bblayers.conf
+BBLAYERS ?=3D \
+  ${TOPDIR}/../meta \
+  ${TOPDIR}/../meta-yocto \
+  ${TOPDIR}/../meta-openembedded/meta-oe \
+  ${TOPDIR}/../meta-ti \
+  ${TOPDIR}/../meta-qt5 \
+  ${TOPDIR}/../meta-embarcados \
+  ${TOPDIR}/../meta-embarcados/meta-bbb \
+# SHELL COMMAND :
+$ bitbake qt5-image-demo
+Now I'm getting a compiler error :
+/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
+i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
+ In function 'bool loadPO(Translator&, QIODevice&, ConversionData&)':
+/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
+i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
+717:1: internal compiler error: in add_stores, at var-tracking.c:6000
+}
+^
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+Makefile:934: recipe for target '.obj/po.o' failed
+make[3]: *** [.obj/po.o] Error 1
+make[3]: Leaving directory '/home/test/poky/beaglebone/tmp/work/cortexa8t2h=
+f-vfp-neon-poky-linux-gnueabi/qttools/5.3.2-r0/build/src/linguist/lupdate'
+Makefile:66: recipe for target 'sub-lupdate-make_first' failed
+make[2]: *** [sub-lupdate-make_first] Error 2
+make[2]: *** Waiting for unfinished jobs....
+compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
+nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
+ed/po.cpp
+compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
+nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
+ed/ts.cpp
+compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
+nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
+ed/ts.cpp
+/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
+i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
+ In function 'bool loadPO(Translator&, QIODevice&, ConversionData&)':
+/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
+i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
+717:1: internal compiler error: in add_stores, at var-tracking.c:6000
+}
+^
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+Makefile:1022: recipe for target '.obj/po.o' failed
+make[3]: *** [.obj/po.o] Error 1
+make[3]: *** Waiting for unfinished jobs....
+compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
+nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
+ed/ts.cpp
+/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
+i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
+ In function 'bool loadPO(Translator&, QIODevice&, ConversionData&)':
+/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
+i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
+717:1: internal compiler error: in add_stores, at var-tracking.c:6000
+}
+^
 
-BlueZ 4.x Bluetooth stack has been removed from oe-core.
-However, it is still supported, so add it to meta-oe connectivity layer.
 
-In order to use it in oe-core/poky/YP 'bluez4' needs to be added to distro =
-features. 'bluetooth' distro feature needs to be present also.
+I read about similar error here (https://bugs.launchpad.net/gcc-linaro/+bug=
+/1312931) but they seem to indicate that this error has been fixed in new r=
+elease of GCC and they are talking about 4.8 so I supposed it has been fixe=
+d in 4.9 ?
 
-Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
----
- .../obsolete_automake_macros.patch                 | 14 +++++++
- .../bluez/bluez-hcidump_2.5.bb                     | 22 +++++++++++
- .../bluez/bluez4-4.101/bluetooth.conf              | 16 ++++++++
- .../bluez/bluez4-4.101/fix-udev-paths.patch        | 37 +++++++++++++++++
- .../bluez/bluez4-4.101/install-test-script.patch   | 26 ++++++++++++
- ...ork-fix-network-Connect-method-parameters.patch | 30 ++++++++++++++
- .../bluez4-4.101/obsolete_automake_macros.patch    | 14 +++++++
- .../bluez/bluez4-4.101/sbc_mmx.patch               | 24 +++++++++++
- ...pygobject-instead-ofgobject-introspection.patch | 27 +++++++++++++
- meta-oe/recipes-connectivity/bluez/bluez4.inc      | 44 ++++++++++++++++++=
-+++
- meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb | 46 ++++++++++++++++++=
-++++
- .../bluez/gst-plugin-bluetooth_4.101.bb            | 39 ++++++++++++++++++
- 12 files changed, 339 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/ob=
-solete_automake_macros.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetoo=
-th.conf
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-ude=
-v-paths.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/install=
--test-script.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/network=
--fix-network-Connect-method-parameters.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolet=
-e_automake_macros.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx=
-.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-leg=
-acy-pygobject-instead-ofgobject-introspection.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4.inc
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
- create mode 100644 meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth=
-_4.101.bb
+I hope you can help me out this compiler error because I'm out of idea :(
 
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_=
-automake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.=
-5/obsolete_automake_macros.patch
-new file mode 100644
-index 0000000..0c77f1a
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_auto
-+++ make_macros.patch
-@@ -0,0 +1,14 @@
-+Upstream-Status: Pending [package obsolete/not maintained by upstream]
-+
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com> diff -Nurd=20
-+bluez-hcidump-2.5/configure.ac bluez-hcidump-2.5/configure.ac
-+--- bluez-hcidump-2.5/configure.ac	2012-11-30 10:29:41.000000000 +0200
-++++ bluez-hcidump-2.5/configure.ac	2013-01-12 10:02:10.609511463 +0200
-+@@ -2,7 +2,7 @@
-+ AC_INIT(bluez-hcidump, 2.5)
-+
-+ AM_INIT_AUTOMAKE([foreign subdir-objects])
-+-AM_CONFIG_HEADER(config.h)
-++AC_CONFIG_HEADERS(config.h)
-+
-+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb b/meta=
--oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
-new file mode 100644
-index 0000000..3950630
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
-@@ -0,0 +1,22 @@
-+SUMMARY =3D "Linux Bluetooth Stack HCI Debugger Tool"
-+DESCRIPTION =3D "The hcidump tool reads raw HCI data coming from and=20
-+going to a Bluetooth device \ and displays the commands, events and data i=
-n a human-readable form."
-+
-+SECTION =3D "console"
-+# hcidump was integrated into bluez5
-+DEPENDS =3D "bluez4"
-+RCONFLICTS_${PN} =3D "bluez5"
-+LICENSE =3D "GPLv2+"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Deb723b61539feef013de476e68b5c50=
-a \
-+                    file://src/hcidump.c;beginline=3D1;endline=3D23;md5=3D=
-3bee3a162dff43a5be7470710b99fbcf"
-+PR =3D "r1"
-+
-+SRC_URI =3D "http://www.kernel.org/pub/linux/bluetooth/bluez-hcidump-${PV}=
-.tar.gz \
-+           file://obsolete_automake_macros.patch \ "
-+
-+SRC_URI[md5sum] =3D "2eab54bbd2b59a2ed4274ebb9390cf18"
-+SRC_URI[sha256sum] =3D "9b7c52b375081883738cf049ecabc103b97d094b19c6544fb2=
-41267905d88881"
-+S =3D "${WORKDIR}/bluez-hcidump-${PV}"
-+
-+inherit autotools
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf=
- b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
-new file mode 100644
-index 0000000..ca5e9e4
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
-@@ -0,0 +1,16 @@
-+<!-- This configuration file specifies the required security policies
-+     for Bluetooth core daemon to work. -->
-+
-+<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.=
-0//EN"
-+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
-+<busconfig>
-+
-+  <!-- ../system.conf have denied everything, so we just punch some=20
-+ holes -->
-+
-+  <policy context=3D"default">
-+    <allow own=3D"org.bluez"/>
-+    <allow send_destination=3D"org.bluez"/>
-+    <allow send_interface=3D"org.bluez.Agent"/>
-+  </policy>
-+
-+</busconfig>
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths=
-.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.pat=
-ch
-new file mode 100644
-index 0000000..8089914
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.pat
-+++ ch
-@@ -0,0 +1,37 @@
-+Add udevdir/udevrulesdir options
-+
-+Upstream-Status: Inappropriate [configuration]
-+Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
-+
-+Index: bluez-4.101/Makefile.am
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- bluez-4.101.orig/Makefile.am
-++++ bluez-4.101/Makefile.am
-+@@ -395,7 +395,7 @@ EXTRA_DIST +=3D audio/bluetooth.conf  include=20
-+Makefile.tools
-+=20
-+ if DATAFILES
-+-rulesdir =3D @UDEV_DIR@/rules.d
-++rulesdir =3D @UDEV_RULES_DIR@
-+=20
-+ udev_files =3D
-+=20
-+Index: bluez-4.101/configure.ac
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- bluez-4.101.orig/configure.ac
-++++ bluez-4.101/configure.ac
-+@@ -61,4 +61,14 @@ if (test -n "${path_systemdunit}"); then  fi =20
-+AM_CONDITIONAL(SYSTEMD, test -n "${path_systemdunit}")
-+=20
-++AC_ARG_WITH([udevdir],
-++    AS_HELP_STRING([--with-udevdir=3DDIR], [udev directory]),
-++    [], [with_udevdir=3D/lib/udev/])
-++AC_SUBST([UDEV_DIR], [$with_udevdir])
-++
-++AC_ARG_WITH([udevrulesdir],
-++    AS_HELP_STRING([--with-udevrulesdir=3DDIR], [udev rules directory]),
-++    [], [with_udevrulesdir=3D/lib/udev/rules.d])
-++AC_SUBST([UDEV_RULES_DIR], [$with_udevrulesdir])
-++
-+ AC_OUTPUT(Makefile doc/version.xml src/bluetoothd.8=20
-+ src/bluetooth.service bluez.pc)
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-s=
-cript.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-=
-script.patch
-new file mode 100644
-index 0000000..23f7d99
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-scrip
-+++ t.patch
-@@ -0,0 +1,26 @@
-+Upstream-Status: Inappropriate
-+
-+Install the bluez's test scripts
-+
-+Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com> diff -Nurd=20
-+bluez-4.101.orig/Makefile.tools bluez-4.101/Makefile.tools
-+--- bluez-4.101.orig/Makefile.tools	2013-11-19 15:49:07.688838000 +0800
-++++ bluez-4.101/Makefile.tools	2013-11-19 15:50:09.256837848 +0800
-+@@ -227,6 +227,17 @@
-+ 		test/service-spp.xml test/service-opp.xml test/service-ftp.xml \
-+ 		test/simple-player test/test-nap
-+=20
-++bluez4_testdir =3D $(libdir)/bluez4/test/ dist_bluez4_test_SCRIPTS =3D=20
-++test/sap-client test/hsplay test/hsmicro \
-++		test/monitor-bluetooth test/list-devices \
-++		test/test-discovery test/test-manager test/test-adapter \
-++		test/test-device test/test-service test/test-serial \
-++		test/test-telephony test/test-network test/simple-agent \
-++		test/simple-service test/simple-endpoint test/test-audio \
-++		test/test-input test/test-sap-server test/test-oob \
-++		test/test-attrib test/test-proximity test/test-thermometer \
-++		test/test-serial-proxy test/test-health test/test-health-sink \
-++		test/simple-player test/test-nap
-+ if HIDD
-+ bin_PROGRAMS +=3D compat/hidd
-+=20
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-ne=
-twork-Connect-method-parameters.patch b/meta-oe/recipes-connectivity/bluez/=
-bluez4-4.101/network-fix-network-Connect-method-parameters.patch
-new file mode 100644
-index 0000000..37f9199
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-networ
-+++ k-Connect-method-parameters.patch
-@@ -0,0 +1,30 @@
-+Upstream-Status: Backport
-+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
-+
-+From 57170b311f1468330f4a9961dc0b3ac45f97bc13 Mon Sep 17 00:00:00 2001
-+From: Gustavo Padovan <gustavo.padovan@collabora.co.uk>
-+Date: Sat, 30 Jun 2012 00:39:05 -0300
-+Subject: [PATCH] network: fix network Connect() method parameters
-+
-+---
-+ network/connection.c |    4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/network/connection.c b/network/connection.c index=20
-+544ec3a..59423a9 100644
-+--- a/network/connection.c
-++++ b/network/connection.c
-+@@ -554,7 +554,9 @@ static void path_unregister(void *data)
-+=20
-+ static const GDBusMethodTable connection_methods[] =3D {
-+ 	{ GDBUS_ASYNC_METHOD("Connect",
-+-			NULL, NULL, connection_connect) },
-++				GDBUS_ARGS({"uuid", "s"}),
-++				GDBUS_ARGS({"interface", "s"}),
-++				connection_connect) },
-+ 	{ GDBUS_METHOD("Disconnect",
-+ 			NULL, NULL, connection_disconnect) },
-+ 	{ GDBUS_METHOD("GetProperties",
-+--
-+1.7.9.5
-+
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_autom=
-ake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete=
-_automake_macros.patch
-new file mode 100644
-index 0000000..1068f24
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_automake_
-+++ macros.patch
-@@ -0,0 +1,14 @@
-+Upstream-Status: Backport
-+
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com> diff -Nurd=20
-+bluez-4.101/configure.ac bluez-4.101/configure.ac
-+--- bluez-4.101/configure.ac	2012-06-22 19:36:49.000000000 +0300
-++++ bluez-4.101/configure.ac	2013-01-07 06:13:18.385888966 +0200
-+@@ -2,7 +2,7 @@
-+ AC_INIT(bluez, 4.101)
-+
-+ AM_INIT_AUTOMAKE([foreign subdir-objects color-tests])
-+-AM_CONFIG_HEADER(config.h)
-++AC_CONFIG_HEADERS(config.h)
-+
-+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch =
-b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
-new file mode 100644
-index 0000000..98fab45
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
-@@ -0,0 +1,24 @@
-+on x86 and x86_64 gcc 4.7 complains
-+
-+sbc/sbc_primitives_mmx.c: In function 'sbc_calc_scalefactors_mmx':
-+sbc/sbc_primitives_mmx.c:294:4: warning: asm operand 2 probably doesn't=20
-+match constraints [enabled by default]
-+sbc/sbc_primitives_mmx.c:294:4: error: impossible constraint in 'asm'
-+
-+This patch is taken from=20
-+https://bugs.launchpad.net/ubuntu/+source/bluez/+bug/911871
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Pending
-+Index: bluez-4.98/sbc/sbc_primitives_mmx.c
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- bluez-4.98.orig/sbc/sbc_primitives_mmx.c	2011-12-21 14:53:54.000000000=
- -0800
-++++ bluez-4.98/sbc/sbc_primitives_mmx.c	2012-02-24 10:07:03.422073800 -080=
-0
-+@@ -318,7 +318,7 @@
-+ 				"movl          %k0, 4(%3)\n"
-+ 			: "+r" (blk)
-+ 			: "r" (&sb_sample_f[0][ch][sb]),
-+-				"i" ((char *) &sb_sample_f[1][0][0] -
-++				"r" ((char *) &sb_sample_f[1][0][0] -
-+ 					(char *) &sb_sample_f[0][0][0]),
-+ 				"r" (&scale_factor[ch][sb]),
-+ 				"r" (&consts),
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pyg=
-object-instead-ofgobject-introspection.patch b/meta-oe/recipes-connectivity=
-/bluez/bluez4-4.101/use-legacy-pygobject-instead-ofgobject-introspection.pa=
-tch
-new file mode 100644
-index 0000000..37037f5
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pygobje
-+++ ct-instead-ofgobject-introspection.patch
-@@ -0,0 +1,27 @@
-+Upstream-Status: Inappropriate
-+
-+use legacy pygobject instead of gobject-introspection
-+
-+Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com>
-+---
-+diff -Nurd bluez-4.101.orig/test/simple-agent bluez-4.101/test/simple-agen=
-t
-+--- bluez-4.101.orig/test/simple-agent	2013-11-13 17:14:08.138118159 +0800
-++++ bluez-4.101/test/simple-agent	2013-11-13 17:14:29.034118107 +0800
-+@@ -2,7 +2,7 @@
-+=20
-+ from __future__ import absolute_import, print_function,=20
-+ unicode_literals
-+=20
-+-from gi.repository import GObject
-++import gobject
-+=20
-+ import sys
-+ import dbus
-+@@ -122,7 +122,7 @@
-+ 	path =3D "/test/agent"
-+ 	agent =3D Agent(bus, path)
-+=20
-+-	mainloop =3D GObject.MainLoop()
-++	mainloop =3D gobject.MainLoop()
-+=20
-+ 	if len(args) > 1:
-+ 		if len(args) > 2:
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4.inc b/meta-oe/recipe=
-s-connectivity/bluez/bluez4.inc
-new file mode 100644
-index 0000000..27e1381
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4.inc
-@@ -0,0 +1,44 @@
-+SUMMARY =3D "Linux Bluetooth Stack Userland V4"
-+DESCRIPTION =3D "Linux Bluetooth stack V4 userland components.  These incl=
-ude a system configurations, daemons, tools and system libraries."
-+HOMEPAGE =3D "http://www.bluez.org"
-+SECTION =3D "libs"
-+LICENSE =3D "GPLv2+ & LGPLv2.1+"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D12f884d2ae1ff87c09e5b7ccc2c4ca7=
-e \
-+                    file://COPYING.LIB;md5=3Dfb504b67c50331fc78734fed90fb0=
-e09 \
-+                    file://src/main.c;beginline=3D1;endline=3D24;md5=3D9bc=
-54b93cd7e17bf03f52513f39f926e \
-+                    file://sbc/sbc.c;beginline=3D1;endline=3D25;md5=3D1a40=
-781ed30d50d8639323a184aeb191"
-+DEPENDS =3D "udev libusb dbus-glib glib-2.0 libcheck readline libsndfile1"
-+RDEPENDS_${PN}-dev =3D "bluez-hcidump"
-+
-+PACKAGECONFIG ??=3D "\
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)}\
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'pie', 'pie', '', d)}\ "
-+PACKAGECONFIG[alsa] =3D "--enable-alsa,--disable-alsa,alsa-lib"
-+PACKAGECONFIG[pie] =3D "--enable-pie,--disable-pie,"
-+
-+ASNEEDED =3D ""
-+
-+SRC_URI =3D "${KERNELORG_MIRROR}/linux/bluetooth/bluez-${PV}.tar.gz"
-+S =3D "${WORKDIR}/bluez-${PV}"
-+
-+inherit autotools-brokensep pkgconfig
-+
-+EXTRA_OECONF =3D "\
-+    --disable-gstreamer \
-+    --enable-usb \
-+    --enable-tools \
-+    --enable-bccmd \
-+    --enable-hid2hci \
-+    --enable-dfutool \
-+    --disable-hidd \
-+    --disable-pand \
-+    --disable-dund \
-+    --disable-cups \
-+    --enable-test \
-+    --enable-datafiles \
-+    --with-udevdir=3D`pkg-config --variable=3Dudevdir udev` \
-+    --with-udevrulesdir=3D`pkg-config --variable=3Dudevdir udev`/rules.d \=
-=20
-+"
-+
-+EXCLUDE_FROM_WORLD =3D "1"
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb b/meta-oe/r=
-ecipes-connectivity/bluez/bluez4_4.101.bb
-new file mode 100644
-index 0000000..01560b3
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
-@@ -0,0 +1,46 @@
-+require bluez4.inc
-+
-+PR =3D "r11"
-+
-+SRC_URI +=3D "file://bluetooth.conf \
-+            file://sbc_mmx.patch \
-+            file://fix-udev-paths.patch \
-+            file://obsolete_automake_macros.patch \
-+            file://network-fix-network-Connect-method-parameters.patch \
-+            file://install-test-script.patch \
-+           =20
-+file://use-legacy-pygobject-instead-ofgobject-introspection.patch \ "
-+
-+SRC_URI[md5sum] =3D "fb42cb7038c380eb0e2fa208987c96ad"
-+SRC_URI[sha256sum] =3D "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4ad=
-75fe52846f7487"
-+
-+RCONFLICTS_${PN} =3D "bluez5"
-+
-+do_install_append() {
-+    install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
-+    install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetooth=
-/
-+    install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
-+    # at_console doesn't really work with the current state of OE, so punc=
-h some more holes so people can actually use BT
-+    install -m 0644 ${WORKDIR}/bluetooth.conf=20
-+${D}/${sysconfdir}/dbus-1/system.d/
-+}
-+
-+RDEPENDS_${PN}-dev =3D "bluez-hcidump"
-+RDEPENDS_${PN}-testtools +=3D "python python-dbus python-pygobject"
-+
-+ALLOW_EMPTY_libasound-module-bluez =3D "1"
-+PACKAGES =3D+ "libasound-module-bluez ${PN}-testtools"
-+
-+FILES_libasound-module-bluez =3D "${libdir}/alsa-lib/lib*.so ${datadir}/al=
-sa"
-+FILES_${PN} +=3D "${libdir}/bluetooth/plugins ${libdir}/bluetooth/plugins/=
-*.so ${base_libdir}/udev/ ${nonarch_base_libdir}/udev/ ${systemd_unitdir}/ =
-${datadir}/dbus-1"
-+FILES_${PN}-dev +=3D "\
-+    ${libdir}/bluetooth/plugins/*.la \
-+    ${libdir}/alsa-lib/*.la \
-+"
-+
-+FILES_${PN}-testtools =3D "${libdir}/bluez4/test/*"
-+
-+FILES_${PN}-dbg +=3D "\
-+    ${libdir}/bluetooth/plugins/.debug \
-+    ${libdir}/*/.debug \
-+    */udev/.debug \
-+"
-diff --git a/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.=
-bb b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
-new file mode 100644
-index 0000000..6a16520
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
-@@ -0,0 +1,39 @@
-+require bluez4.inc
-+require recipes-multimedia/gstreamer/gst-plugins-package.inc
-+
-+PR =3D "r1"
-+
-+SRC_URI[md5sum] =3D "fb42cb7038c380eb0e2fa208987c96ad"
-+SRC_URI[sha256sum] =3D "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4ad=
-75fe52846f7487"
-+
-+DEPENDS =3D "bluez4 gst-plugins-base"
-+
-+EXTRA_OECONF =3D "\
-+    --enable-gstreamer \
-+"
-+
-+# clean unwanted files
-+do_install_append() {
-+    rm -rf ${D}${bindir}
-+    rm -rf ${D}${sbindir}
-+    rm -f  ${D}${libdir}/lib*
-+    rm -rf ${D}${libdir}/pkgconfig
-+    rm -rf ${D}${sysconfdir}
-+    rm -rf ${D}${base_libdir}
-+    rm -rf ${D}${libdir}/bluetooth
-+    rm -rf ${D}${localstatedir}
-+    rm -rf ${D}${libdir}/alsa-lib
-+    rm -rf ${D}${datadir}
-+    rm -rf ${D}${includedir}
-+    rm -rf ${D}${nonarch_base_libdir}
-+}
-+
-+FILES_${PN} =3D "${libdir}/gstreamer-0.10/lib*.so"
-+FILES_${PN}-dev +=3D "\
-+    ${libdir}/gstreamer-0.10/*.la \
-+"
-+
-+FILES_${PN}-dbg +=3D "\
-+    ${libdir}/*/.debug \
-+"
-+
---
-2.1.0
+Best regards,
+Martin
+
 
 
