@@ -1,38 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 8158D73D24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 12:45:38 +0000 (UTC)
-Received: by wgin8 with SMTP id n8so86880536wgi.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Apr 2015 05:45:39 -0700 (PDT)
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D36673D30;
+	Wed,  8 Apr 2015 12:51:26 +0000 (UTC)
+Received: by wgin8 with SMTP id n8so87055058wgi.0;
+	Wed, 08 Apr 2015 05:51:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=rdGHa8jHOJF4tBNo44RCEO9lV9pPi3LVhCebJ3Rp+vc=;
-	b=Oh+9D1vWCwU0Prc9v5IgaKKWXzHmPnpViC9IS4DH8uzCypiQJhYZKLS0dpO+eoayGN
-	oq2ZVcFBcOcQygwHGx+ZhB9cy4ohU0M1oQRmd+F3m4PEgX+8bSKDkXP7sBCwMrxuucGl
-	bGQlZjxjXEIS0HSceDu8BYb5uu0FNdk23Op4r6dD3l6nIBXnHEb+PTBB37tiNprmFsZG
-	nsHWI4Ey294PM1QZYDdaJXvzhdIjDaUSj9bHJnA66yZBglN+YQBg0llP9dy3gxkTxs4t
-	gI/ZV6WGDhgTSFb5z1LYqtAR7QZAvN6ug4Tg9wQkp2FfAVCWbKrdJhguWWjs4+ab/l/3
-	M/Sg==
-X-Received: by 10.180.74.230 with SMTP id x6mr14070900wiv.58.1428497139768;
-	Wed, 08 Apr 2015 05:45:39 -0700 (PDT)
+	bh=bnIXLIqX8UsvL1Blx4KZ3jb0HVf1l6QjjPYSnaQ7em8=;
+	b=HwJHy99Lzc9tlqdiV0RF5bJR0+V5Wku4if0jRjpmO/mfxkKIaQSrtsoHuzzQD8IUAR
+	vWeksFUHbHs1FONc10eLqr2JfpcJnKZn87YwzhQgRE47iebLO6YTKrnpNKGBki0Q5j9A
+	4WUU8Q3XVH8IZ4A6JxZlApPqdn64bC1x8jbbiujB5uMIYjWjxc0l/PbF3p3GtMZ+IDuj
+	/7h6fOgpgtxbLDFIhFiA6Cim8rNqrL7fTUszq2q7TbyXg+ELOdcXzYnH5VgC18s5t0SF
+	grkx957qnbi0o1SXdtCqN26O71u0Jy8eWDGfKmYez4sYvUgzfgHRhZ9gkigiNTWYxrYI
+	U7FA==
+X-Received: by 10.194.94.164 with SMTP id dd4mr50649999wjb.56.1428497484828;
+	Wed, 08 Apr 2015 05:51:24 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id m4sm15478467wjb.25.2015.04.08.05.45.38
-	for <openembedded-devel@lists.openembedded.org>
+	by mx.google.com with ESMTPSA id
+	xy2sm15507596wjc.14.2015.04.08.05.51.23
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Apr 2015 05:45:39 -0700 (PDT)
+	Wed, 08 Apr 2015 05:51:24 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 8 Apr 2015 14:45:42 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150408124542.GF2337@jama>
-References: <cover.1428164164.git.akuster808@gmail.com>
+Date: Wed, 8 Apr 2015 14:51:27 +0200
+To: openembedded-devel@lists.openembedded.org,
+	Joe MacDonald <joe_macdonald@mentor.com>,
+	Bian Naimeng <biannm@cn.fujitsu.com>
+Message-ID: <20150408125127.GG2337@jama>
+References: <20150223190317.823C42014@opal.openembedded.org>
 MIME-Version: 1.0
-In-Reply-To: <cover.1428164164.git.akuster808@gmail.com>
+In-Reply-To: <20150223190317.823C42014@opal.openembedded.org>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH 0/2] update ruby package
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] Bian Naimeng : ipsec-tools: add systemd supported
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,104 +47,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 12:45:39 -0000
-X-Groupsio-MsgNum: 55010
+X-List-Received-Date: Wed, 08 Apr 2015 12:51:29 -0000
+X-Groupsio-MsgNum: 55011
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PWfwoUCx3AFJRUBq"
+	protocol="application/pgp-signature"; boundary="pMCBjikF2xGw87uL"
 Content-Disposition: inline
 
---PWfwoUCx3AFJRUBq
+--pMCBjikF2xGw87uL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Apr 04, 2015 at 09:24:10AM -0700, Armin Kuster wrote:
-> This is an major update for the Ruby package. For those interested in it,=
- please try it out and provide feedback on testing.
+On Mon, Feb 23, 2015 at 07:03:17PM +0000, git@git.openembedded.org wrote:
+> Module: meta-openembedded.git
+> Branch: master
+> Commit: 1eb5a644459f16219410ee53f47b7d2d082e17a1
+> URL:    http://git.openembedded.org/?p=3Dmeta-openembedded.git&a=3Dcommit=
+;h=3D1eb5a644459f16219410ee53f47b7d2d082e17a1
 >=20
-> The following changes since commit df6c7b1279790d27ebfd58fbdfbac89bde5782=
-ec:
+> Author: Bian Naimeng <biannm@cn.fujitsu.com>
+> Date:   Mon Feb 16 11:14:35 2015 +0800
 >=20
->   python-pyopenssl: Upgrade to 0.14 (2015-03-21 16:42:30 +0100)
+> ipsec-tools: add systemd supported
 >=20
-> are available in the git repository at:
+> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 >=20
->   git://github.com/akuster/meta-openembedded.git akuster/ruby_update
->   https://github.com//tree/akuster/ruby_update
+> ---
 >=20
-> Armin Kuster (2):
->   ruby: package update to verison 2.2.1
->   README: update maintainer
+>  .../recipes-support/ipsec-tools/ipsec-tools/racoon.conf   |  8 ++++++++
+>  .../ipsec-tools/ipsec-tools/racoon.service                | 11 +++++++++=
+++
+>  .../recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb      | 15 +++++++++=
++++++-
+>  3 files changed, 33 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/raco=
+on.conf b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.co=
+nf
+> new file mode 100644
+> index 0000000..6b50750
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.conf
+> @@ -0,0 +1,8 @@
+> +# Defaults for racoon service
+> +# sourced by racoon.service
+> +# installed at /etc/default/racoon by the maintainer scripts
+> +#
+> +# This is a POSIX shell fragment
+> +#
+> +# Arguments to pass to racoon
+> +RACOON_ARGS=3D""
+> diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/raco=
+on.service b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon=
+=2Eservice
+> new file mode 100644
+> index 0000000..a10e770
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/racoon.serv=
+ice
+> @@ -0,0 +1,11 @@
+> +[Unit]
+> +Description=3DRacoon IKEv1 key management daemon for IPSEC
+> +After=3Dsyslog.target network.target
+> +
+> +[Service]
+> +Type=3Dforking
+> +EnvironmentFile=3D-@SYSCONFDIR@/default/racoon
+> +ExecStart=3D@SBINDIR@/racoon $RACOON_ARGS
+> +
+> +[Install]
+> +WantedBy=3Dmulti-user.target
+> diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.=
+2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+> index 7519d83..9704b13 100644
+> --- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+> +++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+> @@ -16,11 +16,13 @@ SRC_URI =3D "ftp://ftp.netbsd.org/pub/NetBSD/misc/ips=
+ec-tools/0.8/ipsec-tools-${PV
+>             file://glibc-2.20.patch \
+>             file://racoon-Resend-UPDATE-message-when-received-EINTR-messa=
+ge.patch \
+>             file://racoon.conf.sample \
+> +           file://racoon.conf \
+> +           file://racoon.service \
+>            "
+>  SRC_URI[md5sum] =3D "d53ec14a0a3ece64e09e5e34b3350b41"
+>  SRC_URI[sha256sum] =3D "8eb6b38716e2f3a8a72f1f549c9444c2bc28d52c95367926=
+90564c74fe722f2d"
+> =20
+> -inherit autotools
+> +inherit autotools systemd
 
-This seems to be causing new QA warning from one ruby recipe:
+SYSTEMD_SERVICE variable isn't set, so this racoon isn't enabled and
+packaged, how was this change tested?
 
-bundler-1.6.2: bundler: Files/directories were installed but not shipped
-  /usr/lib/ruby/gems/2.2.0/build_info
-  /usr/lib/ruby/gems/2.2.0/extensions [installed-vs-shipped]
+Also causes QA warning:
+ipsec-tools-0.8.2: ipsec-tools: Files/directories were installed but not
+shipped
+  /lib
+  /lib/systemd
+  /lib/systemd/system
+  /lib/systemd/system/racoon.service [installed-vs-shipped]
 
-can you check that?
-
->=20
->  meta-ruby/README                                   |   2 +-
->  meta-ruby/recipes-devtools/ruby/ruby.inc           |   8 +-
->  ...onf-hardcode-wide-getaddr-info-test-outco.patch |  26 --
->  .../ruby/ruby/remove-the-dependency-on-dir.patch   |  37 ---
->  .../ruby/ruby/ruby-1.9.3-always-use-i386.patch     |  11 -
->  .../ruby/ruby-1.9.3-custom-rubygems-location.patch |  86 ------
->  .../ruby/ruby-1.9.3-disable-versioned-paths.patch  | 149 -----------
->  .../ruby/ruby/ruby-1.9.3-install-cross.patch       |  16 --
->  .../ruby/ruby/ruby-1.9.3-mkmf-verbose.patch        |  11 -
->  .../ruby-1.9.3-rubygems-1.8.11-uninstaller.patch   |  76 ------
->  ...kmf.rb-fix-race-conditions-at-install-ext.patch |  31 ---
->  .../ruby/rubygems-1.8.11-binary-extensions.patch   | 296 ---------------=
-------
->  .../ruby/{ruby_1.9.3-p547.bb =3D> ruby_2.2.1.bb}     |  23 +-
->  13 files changed, 10 insertions(+), 762 deletions(-)
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/0001-socket-extc=
-onf-hardcode-wide-getaddr-info-test-outco.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/remove-the-depen=
-dency-on-dir.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-alway=
-s-use-i386.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-custo=
-m-rubygems-location.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-disab=
-le-versioned-paths.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-insta=
-ll-cross.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-mkmf-=
-verbose.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-rubyg=
-ems-1.8.11-uninstaller.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-mkmf.rb-fix=
--race-conditions-at-install-ext.patch
->  delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/rubygems-1.8.11-=
-binary-extensions.patch
->  rename meta-ruby/recipes-devtools/ruby/{ruby_1.9.3-p547.bb =3D> ruby_2.2=
-=2E1.bb} (52%)
->=20
-> --=20
-> 2.3.5
+>  # Options:
+>  #  --enable-adminport      enable admin port
+> @@ -68,4 +70,15 @@ PACKAGECONFIG[selinux] =3D "--enable-security-context,=
+--disable-security-context,l
+>  do_install_append() {
+>      install -d ${D}${sysconfdir}/racoon
+>      install -m 0644 ${WORKDIR}/racoon.conf.sample ${D}${sysconfdir}/raco=
+on/racoon.conf
+> +
+> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false=
+', d)}; then
+> +        install -d ${D}${systemd_unitdir}/system
+> +        install -m 0644 ${WORKDIR}/racoon.service ${D}${systemd_unitdir}=
+/system
+> +
+> +        sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir=
+}/system/racoon.service
+> +        sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/syst=
+em/racoon.service
+> +
+> +        install -d ${D}${sysconfdir}/default/
+> +        install -m 0644 ${WORKDIR}/racoon.conf ${D}${sysconfdir}/default=
+/racoon
+> +    fi
+>  }
 >=20
 > --=20
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---PWfwoUCx3AFJRUBq
+--pMCBjikF2xGw87uL
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlUlIvYACgkQN1Ujt2V2gBwYdgCgu3jevrDjXAWJc3PHSOgYXux0
-K6wAniRsuZIUbdPDqEi/2w/CwOfgzT5F
-=Q+f2
+iEYEARECAAYFAlUlJE8ACgkQN1Ujt2V2gBwB1gCgvAExELUWDraaDRoGShaW/ic9
+GioAoIi8+6IiuEtkg/cuYNoPUV8n78nz
+=ybI/
 -----END PGP SIGNATURE-----
 
---PWfwoUCx3AFJRUBq--
+--pMCBjikF2xGw87uL--
