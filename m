@@ -1,56 +1,32 @@
-Return-Path: <neena.busireddy@freescale.com>
-X-Greylist: delayed 4135 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 08 Apr 2015 19:38:49 UTC
-Received: from na01-by2-obe.outbound.protection.outlook.com
-	(mail-by2on0116.outbound.protection.outlook.com [207.46.100.116])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DC9660097
+Return-Path: <denis@denix.org>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 488EA737F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 19:38:49 +0000 (UTC)
-Received: from BLUPR03MB471.namprd03.prod.outlook.com (10.141.78.145) by
-	BLUPR03MB181.namprd03.prod.outlook.com (10.255.212.146) with Microsoft
-	SMTP Server (TLS) id 15.1.136.17; Wed, 8 Apr 2015 19:38:49 +0000
-Received: from BLUPR03MB471.namprd03.prod.outlook.com (10.141.78.145) by
-	BLUPR03MB471.namprd03.prod.outlook.com (10.141.78.145) with Microsoft
-	SMTP Server (TLS) id 15.1.136.17; Wed, 8 Apr 2015 19:38:48 +0000
-Received: from BLUPR03MB471.namprd03.prod.outlook.com ([10.141.78.145]) by
-	BLUPR03MB471.namprd03.prod.outlook.com ([10.141.78.145]) with mapi id
-	15.01.0136.014; Wed, 8 Apr 2015 19:38:48 +0000
-From: Neena Busireddy <neena.busireddy@freescale.com>
-To: Otavio Salvador <otavio@ossystems.com.br>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-qt5][PATCH] qt5nmapper: Fix compatibility issue
-Thread-Index: AQHQcioDBZa7njxRG06z67fFr3UTgJ1DgZoAgAAAoFA=
-Date: Wed, 8 Apr 2015 19:38:48 +0000
-Message-ID: <BLUPR03MB4713F89812901BF3F393852F5FC0@BLUPR03MB471.namprd03.prod.outlook.com>
-References: <1428517786-17717-1-git-send-email-neena.busireddy@freescale.com>
-	<CAP9ODKo-Tj103XpkUVTrodpgkXdHDXOA4+ZZHtx3jQyv2a+xUg@mail.gmail.com>
-In-Reply-To: <CAP9ODKo-Tj103XpkUVTrodpgkXdHDXOA4+ZZHtx3jQyv2a+xUg@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: ossystems.com.br; dkim=none (message not signed)
-	header.d=none;
-x-originating-ip: [192.88.168.50]
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0; RULEID:; SRVR:BLUPR03MB471;
-	UriScan:; BCL:0; PCL:0; RULEID:; SRVR:BLUPR03MB181; 
-x-forefront-antispam-report: BMV:1; SFV:NSPM;
-	SFS:(10019020)(6009001)(51704005)(377454003)(51914003)(24454002)(102836002)(15975445007)(92566002)(74316001)(99286002)(2656002)(87936001)(50986999)(54356999)(77096005)(122556002)(62966003)(2900100001)(2950100001)(40100003)(77156002)(46102003)(19580405001)(15395725005)(33656002)(16601075003)(575784001)(76176999)(66066001)(76576001)(107886001)(86362001)(19580395003)(106116001)(32563001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR03MB471;
-	H:BLUPR03MB471.namprd03.prod.outlook.com; FPR:; SPF:None;
-	MLV:sfv; LANG:en; 
-x-microsoft-antispam-prvs: <BLUPR03MB471E4389E6D002C6BBE25ABF5FC0@BLUPR03MB471.namprd03.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:;
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(601004)(5002010)(5005006); SRVR:BLUPR03MB471; BCL:0;
-	PCL:0; RULEID:; SRVR:BLUPR03MB471; 
-x-forefront-prvs: 0540846A1D
-MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2015 19:38:48.5760 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLUPR03MB471
-X-OriginatorOrg: freescale.com
-Subject: Re: [meta-qt5][PATCH] qt5nmapper: Fix compatibility issue
+	Wed,  8 Apr 2015 19:43:17 +0000 (UTC)
+Received: from gandalf.denix.org ([108.28.31.169]) by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NMI00GBN3ZL7P60@vms173021.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	08 Apr 2015 13:43:07 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=KaRlarcG c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=e9J7MTPGsLIA:10
+	a=sozttTNsAAAA:8 a=pGLkceISAAAA:8	a=t7CeM3EgAAAA:8 a=HihYlcsHAAAA:8
+	a=rksKdP4n3Swv4fL_r9oA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id BC38D2016F;	Wed,
+	8 Apr 2015 14:42:57 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 08 Apr 2015 14:42:56 -0400
+Message-id: <1428518576-11800-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+In-reply-to: <1428518576-11800-1-git-send-email-denis@denix.org>
+References: <1428518576-11800-1-git-send-email-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH 2/2] ltp-ddt: bump to version 1.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,40 +40,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 19:38:49 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 08 Apr 2015 19:43:21 -0000
 
-SGkgT3RhdmlvLA0KDQpPbiBXZWQsIEFwciA4LCAyMDE1IGF0IDM6MjkgUE0sIE5lZW5hIEJ1c2ly
-ZWRkeSA8bmVlbmEuYnVzaXJlZGR5QGZyZWVzY2FsZS5jb20+IHdyb3RlOg0KPiBxdDVubWFwcGVy
-IGFwcCBmYWlscyB0byBydW4gd2l0aCB0aGUgZm9sbG93aW5nIGVycm9yOg0KPg0KPiBmaWxlOi8v
-L3Vzci9zaGFyZS9xdDVubWFwcGVyLTEuMC9RdDVfTk1hcHBlci5xbWw6MzQ6NTogVHlwZSBQYW5l
-bCB1bmF2YWlsYWJsZQ0KPiAgICAgICAgICBQYW5lbCB7DQo+ICAgICAgICAgIF4NCj4gZmlsZTov
-Ly91c3Ivc2hhcmUvcXQ1bm1hcHBlci0xLjAvY29udGVudC9QYW5lbC5xbWw6MTE4Ojk6IFR5cGUg
-U3dpdGNoIHVuYXZhaWxhYmxlDQo+ICAgICAgICAgICAgICBTd2l0Y2ggew0KPiAgICAgICAgICAg
-ICAgXg0KPiBmaWxlOi8vL3Vzci9zaGFyZS9xdDVubWFwcGVyLTEuMC9jb250ZW50L1N3aXRjaC5x
-bWw6ODoyMTogQ2Fubm90IGFzc2lnbiBhIHZhbHVlIHRvIGEgc2lnbmFsIChleHBlY3RpbmcgYSBz
-Y3JpcHQgdG8gYmUgcnVuKQ0KPiAgICAgICAgICBwcm9wZXJ0eSBzdHJpbmcgb25UZXh0OiAiT24i
-DQo+DQo+IFRoaXMgcGF0Y2ggY2hhbmdlcyB0aGUgc3RyaW5nIGZyb20gb25UZXh0IHRvIG9uVGV4
-dHN0cmluZyB3aGljaCB3YXMgDQo+IGludHJvZHVjZWQgd2l0aCBRdCA1LjMNCj4NCj4gU2lnbmVk
-LW9mZi1ieTogTmVlbmEgQnVzaXJlZGR5IDxuZWVuYS5idXNpcmVkZHlAZnJlZXNjYWxlLmNvbT4N
-Ci4uLg0KDQpUaGUgcGF0Y2ggZmlsZSBuZWVkcyB0byBoYXZlIHRoZSBVcHN0cmVhbS1TdGF0dXMg
-ZmllbGQuIEkgdGhpbmsgaXQgd291bGQgYmUgUGVuZGluZy4NCg0KQWdyZWVkLg0KDQouLi4NCj4g
-LS0tIGEvcmVjaXBlcy1xdC9leGFtcGxlcy9xdDVubWFwcGVyXzEuMC5iYg0KPiArKysgYi9yZWNp
-cGVzLXF0L2V4YW1wbGVzL3F0NW5tYXBwZXJfMS4wLmJiDQo+IEBAIC02LDcgKzYsOCBAQCBMSUNf
-RklMRVNfQ0hLU1VNID0gDQo+ICJmaWxlOi8vUkVBRE1FO2JlZ2lubGluZT00NztlbmRsaW5lPTU4
-O21kNT05ZmI1YmY3NmQ1NjRiYzUzODENCj4NCj4gIERFUEVORFMgPSAicXRkZWNsYXJhdGl2ZSBx
-dGdyYXBoaWNhbGVmZmVjdHMiDQo+DQo+IC1TUkNfVVJJID0gImh0dHA6Ly9xdWl0Y29kaW5nLmNv
-bS9kb3dubG9hZC9RdDVfTk1hcHBlcl8xLjAudGd6Ig0KPiArU1JDX1VSSSA9ICJodHRwOi8vcXVp
-dGNvZGluZy5jb20vZG93bmxvYWQvUXQ1X05NYXBwZXJfMS4wLnRneiBcDQo+ICsgICAgICAgICAg
-IGZpbGU6Ly9jaGFuZ2UtcHJvcGVydHktc3RyaW5nLnBhdGNoIg0KPiAgU1JDX1VSSVttZDVzdW1d
-ID0gImRhZmM0MjUyODAxNDRkOGUyODY3ODhlNzVhMGRiYTBmIg0KPiAgU1JDX1VSSVtzaGEyNTZz
-dW1dID0gIjYwN2ZiZjRjNDQ4ZjAwZDNjNTYzZjllZjhhNTgyYmNiNmU4ZmU1NTBlODBiNTZiZjhk
-OTEyN2E0MTdmYWE1M2IiDQoNCk90aGVyIHRoYW4gdGhlIC5wYXRjaCBtaXNzaW5nIGZpZWxkLCBp
-dCBpcyBmaW5lLg0KDQpUaGFua3MgZm9yIHRoZSBmZWVkYmFjayBhbmQgVjIgdmVyc2lvbiBpcyBv
-biB0aGUgd2F5Lg0KDQotLSANCk90YXZpbyBTYWx2YWRvciAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgTy5TLiBTeXN0ZW1zDQpodHRwOi8vd3d3Lm9zc3lzdGVtcy5jb20uYnIgICAgICAgIGh0
-dHA6Ly9jb2RlLm9zc3lzdGVtcy5jb20uYnINCk1vYmlsZTogKzU1ICg1MykgOTk4MS03ODU0ICAg
-ICAgICAgICAgTW9iaWxlOiArMSAoMzQ3KSA5MDMtOTc1MA0K
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ...ite-Make-sure-to-include-generated-header.patch | 34 ----------------------
+ .../ltp-ddt/ltp-Do-not-link-against-libfl.patch    | 31 ++++++++++++++++++++
+ .../ltp-ddt/{ltp-ddt_0.0.5.bb => ltp-ddt_1.0.0.bb} | 34 +++++++++++++---------
+ 3 files changed, 52 insertions(+), 47 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch
+ create mode 100644 meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch
+ rename meta-oe/recipes-devtools/ltp-ddt/{ltp-ddt_0.0.5.bb => ltp-ddt_1.0.0.bb} (68%)
+
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch
+deleted file mode 100644
+index 56b0333..0000000
+--- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 4a8f24892514cd5e4d11b9105c843db49eea921b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 19 Feb 2014 19:41:33 -0800
+-Subject: [PATCH] wdt_test_suite: Make sure to include generated headers
+-
+-This makes sure that its using the generated headers
+-and not the raw headers from kernel, generated headers
+-are built for the given machine already when kernel is
+-built and are available in configured/compiled kernel tree
+-already
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- testcases/ddt/wdt_test_suite/Makefile | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/testcases/ddt/wdt_test_suite/Makefile b/testcases/ddt/wdt_test_suite/Makefile
+-index 90a6a90..22a1cfd 100644
+---- a/testcases/ddt/wdt_test_suite/Makefile
+-+++ b/testcases/ddt/wdt_test_suite/Makefile
+-@@ -20,8 +20,8 @@ INCLUDES        = -I $(KERNEL_INC) -I src/interface/common -I ../utils/user
+- INCLUDES        = -I src/parser \
+-                   -I src/interface/common \
+-                   -I ../utils/user \
+--                  -I $(KERNEL_INC)/include \
+--                  -I $(KERNEL_INC)/arch/arm/include
+-+                  -I $(KERNEL_INC)/include/generated \
+-+                  -I $(KERNEL_INC)/arch/arm/include/generated \
+- 
+- #List of source files- Update this on adding a new C file
+- SOURCES := \
+--- 
+-1.9.0
+-
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch
+new file mode 100644
+index 0000000..3e4aa73
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch
+@@ -0,0 +1,31 @@
++From 5bda9c0af56869c6ff2c25d38ea087179c946bc6 Mon Sep 17 00:00:00 2001
++From: Chong Lu <Chong.Lu@windriver.com>
++Date: Tue, 11 Mar 2014 14:47:22 +0800
++Subject: [PATCH] ltp: Don't link against libfl
++
++We have already defined yywrap function in scan.l file. After this, we no longer need to
++link against libfl and so no longer get errors about undefined references to yylex.
++
++Upstream-status: Pending
++
++Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
++---
++ pan/Makefile |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/pan/Makefile b/pan/Makefile
++index 4cc6466..a4b575b 100644
++--- a/pan/Makefile
+++++ b/pan/Makefile
++@@ -31,7 +31,7 @@ CPPFLAGS		+= -Wno-error
++ 
++ CPPFLAGS		+= -I$(abs_srcdir)
++ 
++-LDLIBS			+= -lm $(LEXLIB)
+++LDLIBS			+= -lm
++ 
++ LFLAGS			+= -l
++ 
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
+similarity index 68%
+rename from meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
+rename to meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
+index db62ac6..d028e88 100644
+--- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
++++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
+@@ -7,18 +7,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ PROVIDES += "ltp"
+ DEPENDS += "zip-native virtual/kernel alsa-lib"
+ 
+-RDEPENDS_${PN} += "pm-qa"
++RDEPENDS_${PN} += "pm-qa serialcheck"
+ 
+-inherit autotools-brokensep module-base kernel-module-split
++inherit autotools module-base kernel-module-split
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "903f70a11eb77cbad62d7ecbe7dcbaf61be8ff99"
++SRCREV = "f086bed6cc88bf102eaad0e96cb7ebe79944a8ad"
+ BRANCH ?= "master"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
+-           file://0001-wdt_test_suite-Make-sure-to-include-generated-header.patch \
+-          "
++    file://ltp-Do-not-link-against-libfl.patch \
++"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -58,16 +58,26 @@ FILES_${PN}-dbg += " \
+ FILES_${PN}-staticdev += "${LTPROOT}/lib"
+ FILES_${PN} += "${LTPROOT}/*"
+ 
+-do_configure() {
+-    cp ${S}/include/config.h.default ${S}/include/config.h
+-    cp ${S}/include/mk/config.mk.default ${S}/include/mk/config.mk
+-    cp ${S}/include/mk/features.mk.default ${S}/include/mk/features.mk
+-    echo "${TAG}" > ${S}/ChangeLog
+-}
++KERNEL_MODULES_META_PACKAGE = "${PN}"
+ 
+ kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
+ 
++# ltp doesn't regenerate ffsb-6.0-rc2 configure and hardcode configure call.
++# we explicitly force regeneration of that directory and pass configure options.
++do_configure_append() {
++    (cd utils/ffsb-6.0-rc2; autoreconf -fvi; ./configure ${CONFIGUREOPTS})
++}
++
++# The makefiles make excessive use of make -C and several include testcases.mk
++# which triggers a build of the syscall header. To reproduce, build ltp,
++# then delete the header, then "make -j XX" and watch regen.sh run multiple
++# times. Its easier to generate this once here instead.
++do_compile_prepend () {
++    ( make -C ${B}/testcases/kernel include/linux_syscall_numbers.h )
++}
++
+ do_compile_append () {
++    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
+     oe_runmake modules
+ }
+ 
+@@ -75,8 +85,6 @@ do_install() {
+     oe_runmake install
+     install -d ${D}${datadir}
+     install -d ${D}${kmoddir}
+-    cp -a ${D}${LTPROOT}/share/* ${D}${datadir}
+-    rm -rf ${D}${LTPROOT}/share/
+     mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
+ }
+ 
+-- 
+2.2.0
+
 
