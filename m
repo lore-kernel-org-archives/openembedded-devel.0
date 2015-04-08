@@ -1,53 +1,41 @@
-Return-Path: <martin.beaudet@intelia.com>
-Received: from smtp-out-1.satelmail.com (smtp-out-1.satelcom.qc.ca
-	[208.77.80.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 32A2F60089
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C9F460089
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 15:18:58 +0000 (UTC)
-Received: from mta-1.satelcom.qc.ca (mta-1.satelcom.qc.ca [172.16.16.49])
-	by smtp-out-1.satelmail.com (Postfix) with ESMTP id 3390242D07
+	Wed,  8 Apr 2015 17:44:44 +0000 (UTC)
+Received: by pdbqa5 with SMTP id qa5so65562580pdb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 11:19:00 -0400 (EDT)
-Received: from assp-db2.satelcom.qc.ca (unknown [172.16.16.118])
-	by mta-1.satelcom.qc.ca (Postfix) with ESMTPS id 291B141FE3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 11:19:00 -0400 (EDT)
-Received: from smtp-1.satelcom.qc.ca (localhost [127.0.0.1])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by assp-db2.satelcom.qc.ca (Postfix) with ESMTPS id E427237BBC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 11:20:16 -0400 (EDT)
-Received: from smtp-1.satelcom.qc.ca ([172.16.16.54]
-	helo=smtp-1.satelcom.qc.ca)
-	by assp-db.satelcom.qc.ca with SMTP (2.4.3); 8 Apr 2015 11:20:16 -0400
-Received: from remote.intelia.com (unknown [204.80.6.198])
-	by smtp-1.satelcom.qc.ca (Postfix) with ESMTPS id DAAFE41E3F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 11:18:58 -0400 (EDT)
-Received: from CT-SERVEUR.ctaq.local ([fe80::7895:8268:18d2:9278]) by
-	CT-SERVEUR.ctaq.local ([fe80::7895:8268:18d2:9278%10]) with mapi;
-	Wed, 8 Apr 2015 11:18:59 -0400
-From: Martin Beaudet <martin.beaudet@intelia.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Apr 2015 11:18:58 -0400
-Thread-Topic: Yocto Dizzy + Beaglebone + Qt5 (Internal compiler error)
-Thread-Index: AdByD1EW9gmKf7wTR3+n39tIwVdQJw==
-Message-ID: <muid.55403ae0f2.00FFF1D896D3FF4482179DF8C27DEFAFA329F13E86@CT-SERVEUR.ctaq.local>
-Accept-Language: fr-FR, fr-CA
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: fr-FR, fr-CA
+	Wed, 08 Apr 2015 10:44:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=WvAAD40Uu/72+hnztVWnvsIKj/y7Er7agY1VRnc9OA0=;
+	b=A2TKaLnhZwcHiHzbga/LJ/84nOYdcuIMEs2CNyZKgDpJJI3AOfwqhjkA7V8rTx1Wnp
+	CtO5ViJIvNJZIU3A31paZtl7JhszZe09MRYGAF5/jQKEjX9VTw6Ky0OnBl96R1SYDSxc
+	QRieVcOS2AYvcK1WpSAgTiTXR/b/mXAyADJ1uKGDGmEhMSNU0tcsvuhDQ2jO7b6gwK8Y
+	va3hjm3+Fcd/MkEXUmBpX5MmFf5lCjHPLwppaqJdCtVX+fuuF0u1xjJNZPacyiWztCY3
+	a3mOSCUVnEZV4eOHCvkp4CcY5g25c+LpOnR2smF6SZxZ1KZNqw0tv1O7yOkkz9YEqaJD
+	W/hQ==
+X-Received: by 10.70.129.202 with SMTP id ny10mr38069036pdb.107.1428515085375; 
+	Wed, 08 Apr 2015 10:44:45 -0700 (PDT)
+Received: from ?IPv6:2601:c:a700:3ba7:74c6:c485:64d0:55bf?
+	([2601:c:a700:3ba7:74c6:c485:64d0:55bf])
+	by mx.google.com with ESMTPSA id p5sm11939753pdi.2.2015.04.08.10.44.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 08 Apr 2015 10:44:44 -0700 (PDT)
+Message-ID: <55256909.9050304@gmail.com>
+Date: Wed, 08 Apr 2015 10:44:41 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-X-Assp-Version: 2.4.3(15059) on assp-db.satelcom.qc.ca
-X-Assp-ID: assp-db.satelcom.qc.ca a119-06416-12012
-X-Assp-Session: B2CCFBB0 (mail 1)
-X-Assp-Envelope-From: martin.beaudet@intelia.com
-X-Assp-Intended-For: openembedded-devel@lists.openembedded.org
-X-Assp-Server-TLS: yes
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Yocto Dizzy + Beaglebone + Qt5 (Internal compiler error)
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1428164164.git.akuster808@gmail.com>
+	<20150408124542.GF2337@jama>
+In-Reply-To: <20150408124542.GF2337@jama>
+Subject: Re: [PATCH 0/2] update ruby package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,104 +49,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 15:18:59 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-I'm building an image for the beaglebone. I would like to use (at least) th=
-e version 5.4 or more of QT with elgfs platform.
-Also the hardware accelerated support on Beaglebone Black.
-
-Here is what I've done yet :
-# SHELL COMMAND :
-$ mkdir poky
-$ git clone -b dizzy git://git.yoctoproject.org/poky
-$ cd poky
-$ git clone git://git.yoctoproject.org/meta-ti
-$ git clone -b dizzy git://github.com/meta-qt5/meta-qt5.git
-$ git clone -b dizzy git://git.openembedded.org/meta-openembedded
-$ git clone -b daisy https://bitbucket.org/embarcados/meta-embarcados.git
-$ source oe-init-build-env beaglebone
-# FILE : poky/beaglebone/conf/local.conf
-DISTRO_FEATURES_remove =3D "x11 wayland"
- # FILE : poky/beaglebone/conf/bblayers.conf
-BBLAYERS ?=3D \
-  ${TOPDIR}/../meta \
-  ${TOPDIR}/../meta-yocto \
-  ${TOPDIR}/../meta-openembedded/meta-oe \
-  ${TOPDIR}/../meta-ti \
-  ${TOPDIR}/../meta-qt5 \
-  ${TOPDIR}/../meta-embarcados \
-  ${TOPDIR}/../meta-embarcados/meta-bbb \
-# SHELL COMMAND :
-$ bitbake qt5-image-demo
-Now I'm getting a compiler error :
-/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
-i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
- In function 'bool loadPO(Translator&, QIODevice&, ConversionData&)':
-/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
-i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
-717:1: internal compiler error: in add_stores, at var-tracking.c:6000
-}
-^
-Please submit a full bug report,
-with preprocessed source if appropriate.
-See <http://gcc.gnu.org/bugs.html> for instructions.
-Makefile:934: recipe for target '.obj/po.o' failed
-make[3]: *** [.obj/po.o] Error 1
-make[3]: Leaving directory '/home/test/poky/beaglebone/tmp/work/cortexa8t2h=
-f-vfp-neon-poky-linux-gnueabi/qttools/5.3.2-r0/build/src/linguist/lupdate'
-Makefile:66: recipe for target 'sub-lupdate-make_first' failed
-make[2]: *** [sub-lupdate-make_first] Error 2
-make[2]: *** Waiting for unfinished jobs....
-compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
-nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
-ed/po.cpp
-compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
-nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
-ed/ts.cpp
-compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
-nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
-ed/ts.cpp
-/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
-i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
- In function 'bool loadPO(Translator&, QIODevice&, ConversionData&)':
-/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
-i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
-717:1: internal compiler error: in add_stores, at var-tracking.c:6000
-}
-^
-Please submit a full bug report,
-with preprocessed source if appropriate.
-See <http://gcc.gnu.org/bugs.html> for instructions.
-Makefile:1022: recipe for target '.obj/po.o' failed
-make[3]: *** [.obj/po.o] Error 1
-make[3]: *** Waiting for unfinished jobs....
-compiling /home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-li=
-nux-gnueabi/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shar=
-ed/ts.cpp
-/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
-i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
- In function 'bool loadPO(Translator&, QIODevice&, ConversionData&)':
-/home/test/poky/beaglebone/tmp/work/cortexa8t2hf-vfp-neon-poky-linux-gnueab=
-i/qttools/5.3.2-r0/qttools-opensource-src-5.3.2/src/linguist/shared/po.cpp:=
-717:1: internal compiler error: in add_stores, at var-tracking.c:6000
-}
-^
+X-List-Received-Date: Wed, 08 Apr 2015 17:44:44 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-I read about similar error here (https://bugs.launchpad.net/gcc-linaro/+bug=
-/1312931) but they seem to indicate that this error has been fixed in new r=
-elease of GCC and they are talking about 4.8 so I supposed it has been fixe=
-d in 4.9 ?
 
-I hope you can help me out this compiler error because I'm out of idea :(
+On 04/08/2015 05:45 AM, Martin Jansa wrote:
+> On Sat, Apr 04, 2015 at 09:24:10AM -0700, Armin Kuster wrote:
+>> This is an major update for the Ruby package. For those interested in it, please try it out and provide feedback on testing.
+>>
+>> The following changes since commit df6c7b1279790d27ebfd58fbdfbac89bde5782ec:
+>>
+>>    python-pyopenssl: Upgrade to 0.14 (2015-03-21 16:42:30 +0100)
+>>
+>> are available in the git repository at:
+>>
+>>    git://github.com/akuster/meta-openembedded.git akuster/ruby_update
+>>    https://github.com//tree/akuster/ruby_update
+>>
+>> Armin Kuster (2):
+>>    ruby: package update to verison 2.2.1
+>>    README: update maintainer
+>
+> This seems to be causing new QA warning from one ruby recipe:
+>
+> bundler-1.6.2: bundler: Files/directories were installed but not shipped
+>    /usr/lib/ruby/gems/2.2.0/build_info
+>    /usr/lib/ruby/gems/2.2.0/extensions [installed-vs-shipped]
+>
+> can you check that?
 
-Best regards,
-Martin
+sure.  what arch did you build for?
 
-
+- armin
+>
+>>
+>>   meta-ruby/README                                   |   2 +-
+>>   meta-ruby/recipes-devtools/ruby/ruby.inc           |   8 +-
+>>   ...onf-hardcode-wide-getaddr-info-test-outco.patch |  26 --
+>>   .../ruby/ruby/remove-the-dependency-on-dir.patch   |  37 ---
+>>   .../ruby/ruby/ruby-1.9.3-always-use-i386.patch     |  11 -
+>>   .../ruby/ruby-1.9.3-custom-rubygems-location.patch |  86 ------
+>>   .../ruby/ruby-1.9.3-disable-versioned-paths.patch  | 149 -----------
+>>   .../ruby/ruby/ruby-1.9.3-install-cross.patch       |  16 --
+>>   .../ruby/ruby/ruby-1.9.3-mkmf-verbose.patch        |  11 -
+>>   .../ruby-1.9.3-rubygems-1.8.11-uninstaller.patch   |  76 ------
+>>   ...kmf.rb-fix-race-conditions-at-install-ext.patch |  31 ---
+>>   .../ruby/rubygems-1.8.11-binary-extensions.patch   | 296 ---------------------
+>>   .../ruby/{ruby_1.9.3-p547.bb => ruby_2.2.1.bb}     |  23 +-
+>>   13 files changed, 10 insertions(+), 762 deletions(-)
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/0001-socket-extconf-hardcode-wide-getaddr-info-test-outco.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/remove-the-dependency-on-dir.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-always-use-i386.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-custom-rubygems-location.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-disable-versioned-paths.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-install-cross.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-mkmf-verbose.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-1.9.3-rubygems-1.8.11-uninstaller.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/ruby-mkmf.rb-fix-race-conditions-at-install-ext.patch
+>>   delete mode 100644 meta-ruby/recipes-devtools/ruby/ruby/rubygems-1.8.11-binary-extensions.patch
+>>   rename meta-ruby/recipes-devtools/ruby/{ruby_1.9.3-p547.bb => ruby_2.2.1.bb} (52%)
+>>
+>> --
+>> 2.3.5
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>
 
