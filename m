@@ -1,33 +1,41 @@
-Return-Path: <denis@denix.org>
-Received: from vms173025pub.verizon.net (vms173025pub.verizon.net
-	[206.46.173.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 91A0960043
+Return-Path: <rafael.carre@gmail.com>
+Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
+	[209.85.212.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E536606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Apr 2015 01:30:11 +0000 (UTC)
-Received: from gandalf.denix.org ([108.28.31.169]) by vms173025.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NMI001PIMUBMOO0@vms173025.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	08 Apr 2015 20:30:12 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=A7bb5BSD c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
-	a=jLWw55sr_RoA:10 a=kj9zAlcOel0A:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
-	a=-9mUelKeXuEA:10 a=e9J7MTPGsLIA:10	a=sozttTNsAAAA:8
-	a=zQAzSviqVL2dFWNcUesA:9 a=CjuIK1q_8ugA:10
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B219C2016F; Wed,
-	8 Apr 2015 21:30:11 -0400 (EDT)
-Date: Wed, 08 Apr 2015 21:30:11 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu,  9 Apr 2015 07:58:15 +0000 (UTC)
+Received: by wiaa2 with SMTP id a2so87881579wia.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Apr 2015 00:58:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:message-id:date:from:user-agent:mime-version:to:subject
+	:references:in-reply-to:content-type:content-transfer-encoding;
+	bh=FcLc/rLiWXQs3sLw2ZHZUrQGZt2is7WGS4ZxeQGHplo=;
+	b=d5Ke2+p8VgpL7cgRZSLxrHi1XvHzy+ZGpemTE0QiSZnrnp3s5uoEWuJqkaQDHC86Nn
+	hrkQcL3UAerJ3Nj6dLZWlFnf6gOIfakU+zLxizXmhMU3gDfi36Jjdaph2FoJ7zdjScz2
+	NG/Gimvf4Q7Jgy+epHkZDuKevYEGU7jfBdbwj4qkmZ87WCU+EYZNiPlgPyVtxaHhQwfU
+	JhJ4zv+3+qm10y+Gc6G8yeAkZBpf8Tp8ysuI7TZPFfnqxaDUyW2D5ZlUJtl+44DYwJ1y
+	w99wv7FknWfK+1uODPD8mtQ6/2D39DGyU09jJoB5Nzl3KfIsu6KmcRkK+NmOtbDOt8qJ
+	FaPA==
+X-Received: by 10.180.77.199 with SMTP id u7mr3960760wiw.42.1428566296740;
+	Thu, 09 Apr 2015 00:58:16 -0700 (PDT)
+Received: from [192.168.0.10] (lns-bzn-49f-62-147-165-143.adsl.proxad.net.
+	[62.147.165.143])
+	by mx.google.com with ESMTPSA id df1sm1231292wib.12.2015.04.09.00.58.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 Apr 2015 00:58:15 -0700 (PDT)
+Sender: =?UTF-8?B?UmFmYcOrbCBDYXJyw6k=?= <rafael.carre@gmail.com>
+Message-ID: <55263114.9010204@videolan.org>
+Date: Thu, 09 Apr 2015 09:58:12 +0200
+From: =?windows-1252?Q?Rafa=EBl_Carr=E9?= <funman@videolan.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20150409013011.GP6952@denix.org>
-References: <1428518576-11800-1-git-send-email-denis@denix.org>
-	<CAP9ODKqy+EVbMrYG44jfQbCSHcca8qB6CKQdZJutm-YQjtUp=Q@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <CAP9ODKqy+EVbMrYG44jfQbCSHcca8qB6CKQdZJutm-YQjtUp=Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [PATCH 1/2] serialcheck: add version 1.0.0
+References: <5525A029.2000804@mlbassoc.com>
+In-Reply-To: <5525A029.2000804@mlbassoc.com>
+Subject: Re: vlc runtime issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,29 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Apr 2015 01:30:11 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 09 Apr 2015 07:58:17 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On Wed, Apr 08, 2015 at 06:34:45PM -0300, Otavio Salvador wrote:
-> Hello Denys,
-> 
-> On Wed, Apr 8, 2015 at 3:42 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > From: Denys Dmytriyenko <denys@ti.com>
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> 
-> There are some things I see as possible improvements:
-> 
->  - a long commit log which says what is the use case for the tool
->  - fix homepage to the right cgit URL
->  - add Upstream-Status field in the two included patches (btw, it
-> would be good to send them for inclusion)
->  - add nativesdk support as it is useful for SDK deployment so it can
-> be used for board test
+Hello,
 
-Thanks, please see the updated v2 of the patchset.
+On 04/08/2015 11:39 PM, Gary Thomas wrote:
+> Now that I've finally built vlc for my embedded target (i.MX6),
+> I've run into some issues.
+> 
+> First are missing codecs:
+> [0xb5c25e78] main decoder error: no suitable decoder module for fourcc `h264'. VLC probably does not support this sound or video format.
+> [0xb5c25e78] main decoder error: no suitable decoder module for fourcc `mp4a'. VLC probably does not support this sound or video format.
+> 
+> Are these something that can be enabled via PACKAGECONFIG?
 
--- 
-Denys
+You should get them by enabling libva in PACKAGECONFIG
+
+> I'm not sure these are important:
+> [0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/fmc.luac: /usr/lib/vlc/lua/sd/fmc.luac: incompatible precompiled chunk
+> [0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/icecast.luac: /usr/lib/vlc/lua/sd/icecast.luac: incompatible precompiled chunk
+> [0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/jamendo.luac: /usr/lib/vlc/lua/sd/jamendo.luac: incompatible precompiled chunk
+> [0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/metachannels.luac: /usr/lib/vlc/lua/sd/metachannels.luac: incompatible precompiled chunk
+> 
+> These probably happen because of cross compiling from x86_64 -> ARM/Cortex-A9
+
+Yes, luac doesn't support cross compilation
+The .lua files should be installed rather than the .luac
+
+> Any ideas?  I'm mostly keen on getting the codecs I need.  I already
+> have them working using mplayer, but I'd like vlc as well.
+> 
+> Thanks
+> 
 
