@@ -1,37 +1,32 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E47765C98;
-	Thu,  9 Apr 2015 00:55:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="90391097"
-Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Apr 2015 08:51:39 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t390sIIe003826;
-	Thu, 9 Apr 2015 08:54:18 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0181.006; Thu, 9 Apr 2015 08:55:25 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: Martin Jansa <martin.jansa@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, Joe MacDonald
-	<joe_macdonald@mentor.com>
-Thread-Topic: [oe-commits] Bian Naimeng : ipsec-tools: add systemd supported
-Thread-Index: AQHQcfrufus76b99H0KPrbENJIvA1J1D2zmg
-Date: Thu, 9 Apr 2015 00:55:24 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73DFFEC7@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <20150223190317.823C42014@opal.openembedded.org>
-	<20150408125127.GG2337@jama>
-In-Reply-To: <20150408125127.GG2337@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
-MIME-Version: 1.0
-Cc: "openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Subject: Re: [oe-commits] Bian Naimeng : ipsec-tools: add systemd supported
+Return-Path: <denis@denix.org>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B46D60043
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Apr 2015 01:28:49 +0000 (UTC)
+Received: from gandalf.denix.org ([108.28.31.169]) by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NMI00CW9MS2KB40@vms173021.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	08 Apr 2015 20:28:51 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=NqFmqHZM c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8	a=-9mUelKeXuEA:10 a=e9J7MTPGsLIA:10
+	a=sozttTNsAAAA:8 a=pGLkceISAAAA:8	a=t7CeM3EgAAAA:8 a=HihYlcsHAAAA:8
+	a=rksKdP4n3Swv4fL_r9oA:9
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 2CDA62016F;	Wed,
+	8 Apr 2015 21:28:50 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 08 Apr 2015 21:28:45 -0400
+Message-id: <1428542925-15985-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+In-reply-to: <1428542925-15985-1-git-send-email-denis@denix.org>
+References: <1428542925-15985-1-git-send-email-denis@denix.org>
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH 2/2] ltp-ddt: bump to version 1.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,99 +40,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Apr 2015 00:55:32 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 09 Apr 2015 01:28:51 -0000
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBNYXJ0aW4gSmFuc2EgW21haWx0
-bzptYXJ0aW4uamFuc2FAZ21haWwuY29tXQ0KPiBTZW50OiBXZWRuZXNkYXksIEFwcmlsIDA4LCAy
-MDE1IDg6NTEgUE0NCj4gQ2M6IG9wZW5lbWJlZGRlZC1jb21taXRzQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZS1jb21taXRzXSBCaWFuIE5haW1lbmcgOiBpcHNlYy10
-b29sczogYWRkIHN5c3RlbWQgc3VwcG9ydGVkDQo+IA0KPiBPbiBNb24sIEZlYiAyMywgMjAxNSBh
-dCAwNzowMzoxN1BNICswMDAwLCBnaXRAZ2l0Lm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6DQo+ID4g
-TW9kdWxlOiBtZXRhLW9wZW5lbWJlZGRlZC5naXQNCj4gPiBCcmFuY2g6IG1hc3Rlcg0KPiA+IENv
-bW1pdDogMWViNWE2NDQ0NTlmMTYyMTk0MTBlZTUzZjQ3YjdkMmQwODJlMTdhMQ0KPiA+IFVSTDoN
-Cj4gaHR0cDovL2dpdC5vcGVuZW1iZWRkZWQub3JnLz9wPW1ldGEtb3BlbmVtYmVkZGVkLmdpdCZh
-PWNvbW1pdDtoPTFlYjVhNjQ0NDUNCj4gOWYxNjIxOTQxMGVlNTNmNDdiN2QyZDA4MmUxN2ExDQo+
-ID4NCj4gPiBBdXRob3I6IEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+
-IERhdGU6ICAgTW9uIEZlYiAxNiAxMToxNDozNSAyMDE1ICswODAwDQo+ID4NCj4gPiBpcHNlYy10
-b29sczogYWRkIHN5c3RlbWQgc3VwcG9ydGVkDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBCaWFu
-IE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBNYXJ0
-aW4gSmFuc2EgPE1hcnRpbi5KYW5zYUBnbWFpbC5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTogSm9l
-IE1hY0RvbmFsZCA8am9lX21hY2RvbmFsZEBtZW50b3IuY29tPg0KPiA+DQo+ID4gLS0tDQo+ID4N
-Cj4gPiAgLi4uL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29scy9yYWNvb24u
-Y29uZiAgIHwgIDggKysrKysrKysNCj4gPiAgLi4uL2lwc2VjLXRvb2xzL2lwc2VjLXRvb2xzL3Jh
-Y29vbi5zZXJ2aWNlICAgICAgICAgICAgICAgIHwgMTENCj4gKysrKysrKysrKysNCj4gPiAgLi4u
-L3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29sc18wLjguMi5iYiAgICAgIHwg
-MTUNCj4gKysrKysrKysrKysrKystDQo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgMzMgaW5zZXJ0aW9u
-cygrKSwgMSBkZWxldGlvbigtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1uZXR3
-b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29scy9yYWNvb24uY29u
-Zg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNl
-Yy10b29scy9yYWNvb24uY29uZg0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXgg
-MDAwMDAwMC4uNmI1MDc1MA0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdv
-cmtpbmcvcmVjaXBlcy1zdXBwb3J0L2lwc2VjLXRvb2xzL2lwc2VjLXRvb2xzL3JhY29vbi5jDQo+
-ID4gKysrIG9uZg0KPiA+IEBAIC0wLDAgKzEsOCBAQA0KPiA+ICsjIERlZmF1bHRzIGZvciByYWNv
-b24gc2VydmljZQ0KPiA+ICsjIHNvdXJjZWQgYnkgcmFjb29uLnNlcnZpY2UNCj4gPiArIyBpbnN0
-YWxsZWQgYXQgL2V0Yy9kZWZhdWx0L3JhY29vbiBieSB0aGUgbWFpbnRhaW5lciBzY3JpcHRzICMg
-IyBUaGlzDQo+ID4gK2lzIGEgUE9TSVggc2hlbGwgZnJhZ21lbnQgIyAjIEFyZ3VtZW50cyB0byBw
-YXNzIHRvIHJhY29vbg0KPiA+ICtSQUNPT05fQVJHUz0iIg0KPiA+IGRpZmYgLS1naXQNCj4gPiBh
-L21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvaXBzZWMtdG9vbHMvaXBzZWMtdG9vbHMv
-cmFjb29uLnNlcnZpDQo+ID4gY2UNCj4gPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBv
-cnQvaXBzZWMtdG9vbHMvaXBzZWMtdG9vbHMvcmFjb29uLnNlcnZpDQo+ID4gY2UNCj4gPiBuZXcg
-ZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLmExMGU3NzANCj4gPiAtLS0gL2Rl
-di9udWxsDQo+ID4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10
-b29scy9pcHNlYy10b29scy9yYWNvb24ucw0KPiA+ICsrKyBlcnZpY2UNCj4gPiBAQCAtMCwwICsx
-LDExIEBADQo+ID4gK1tVbml0XQ0KPiA+ICtEZXNjcmlwdGlvbj1SYWNvb24gSUtFdjEga2V5IG1h
-bmFnZW1lbnQgZGFlbW9uIGZvciBJUFNFQw0KPiA+ICtBZnRlcj1zeXNsb2cudGFyZ2V0IG5ldHdv
-cmsudGFyZ2V0DQo+ID4gKw0KPiA+ICtbU2VydmljZV0NCj4gPiArVHlwZT1mb3JraW5nDQo+ID4g
-K0Vudmlyb25tZW50RmlsZT0tQFNZU0NPTkZESVJAL2RlZmF1bHQvcmFjb29uDQo+ID4gK0V4ZWNT
-dGFydD1AU0JJTkRJUkAvcmFjb29uICRSQUNPT05fQVJHUw0KPiA+ICsNCj4gPiArW0luc3RhbGxd
-DQo+ID4gK1dhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0DQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEv
-bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29sc18w
-LjguMi5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29s
-cy9pcHNlYy10b29sc18wLjguMi5iYg0KPiA+IGluZGV4IDc1MTlkODMuLjk3MDRiMTMgMTAwNjQ0
-DQo+ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9p
-cHNlYy10b29sc18wLjguMi5iYg0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1
-cHBvcnQvaXBzZWMtdG9vbHMvaXBzZWMtdG9vbHNfMC44LjIuYmINCj4gPiBAQCAtMTYsMTEgKzE2
-LDEzIEBAIFNSQ19VUkkgPQ0KPiAiZnRwOi8vZnRwLm5ldGJzZC5vcmcvcHViL05ldEJTRC9taXNj
-L2lwc2VjLXRvb2xzLzAuOC9pcHNlYy10b29scy0ke1BWDQo+ID4gICAgICAgICAgICAgZmlsZTov
-L2dsaWJjLTIuMjAucGF0Y2ggXA0KPiA+DQo+IGZpbGU6Ly9yYWNvb24tUmVzZW5kLVVQREFURS1t
-ZXNzYWdlLXdoZW4tcmVjZWl2ZWQtRUlOVFItbWVzc2FnZS5wYXRjaCBcDQo+ID4gICAgICAgICAg
-ICAgZmlsZTovL3JhY29vbi5jb25mLnNhbXBsZSBcDQo+ID4gKyAgICAgICAgICAgZmlsZTovL3Jh
-Y29vbi5jb25mIFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vcmFjb29uLnNlcnZpY2UgXA0KPiA+
-ICAgICAgICAgICAgIg0KPiA+ICBTUkNfVVJJW21kNXN1bV0gPSAiZDUzZWMxNGEwYTNlY2U2NGUw
-OWU1ZTM0YjMzNTBiNDEiDQo+ID4gIFNSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICI4ZWI2YjM4NzE2
-ZTJmM2E4YTcyZjFmNTQ5Yzk0NDRjMmJjMjhkNTJjOTUzNjc5MjY5MDU2NGM3NGZlNzIyZjJkIg0K
-PiA+DQo+ID4gLWluaGVyaXQgYXV0b3Rvb2xzDQo+ID4gK2luaGVyaXQgYXV0b3Rvb2xzIHN5c3Rl
-bWQNCj4gDQo+IFNZU1RFTURfU0VSVklDRSB2YXJpYWJsZSBpc24ndCBzZXQsIHNvIHRoaXMgcmFj
-b29uIGlzbid0IGVuYWJsZWQgYW5kIHBhY2thZ2VkLA0KPiBob3cgd2FzIHRoaXMgY2hhbmdlIHRl
-c3RlZD8NCj4gDQo+IEFsc28gY2F1c2VzIFFBIHdhcm5pbmc6DQo+IGlwc2VjLXRvb2xzLTAuOC4y
-OiBpcHNlYy10b29sczogRmlsZXMvZGlyZWN0b3JpZXMgd2VyZSBpbnN0YWxsZWQgYnV0IG5vdA0K
-PiBzaGlwcGVkDQo+ICAgL2xpYg0KPiAgIC9saWIvc3lzdGVtZA0KPiAgIC9saWIvc3lzdGVtZC9z
-eXN0ZW0NCj4gICAvbGliL3N5c3RlbWQvc3lzdGVtL3JhY29vbi5zZXJ2aWNlIFtpbnN0YWxsZWQt
-dnMtc2hpcHBlZF0NCj4gDQoNClNvcnJ5IGZvciB0aGF0LiBJIHdpbGwgc2VuZCBhIHBhdGNoIHRv
-IGZpeCB0aGlzLg0KDQpUaGFua3MNCiBCaWFuDQoNCj4gPiAgIyBPcHRpb25zOg0KPiA+ICAjICAt
-LWVuYWJsZS1hZG1pbnBvcnQgICAgICBlbmFibGUgYWRtaW4gcG9ydA0KPiA+IEBAIC02OCw0ICs3
-MCwxNSBAQCBQQUNLQUdFQ09ORklHW3NlbGludXhdID0NCj4gPiAiLS1lbmFibGUtc2VjdXJpdHkt
-Y29udGV4dCwtLWRpc2FibGUtc2VjdXJpdHktY29udGV4dCxsDQo+ID4gIGRvX2luc3RhbGxfYXBw
-ZW5kKCkgew0KPiA+ICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9yYWNvb24NCj4g
-PiAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L3JhY29vbi5jb25mLnNhbXBsZQ0KPiA+
-ICR7RH0ke3N5c2NvbmZkaXJ9L3JhY29vbi9yYWNvb24uY29uZg0KPiA+ICsNCj4gPiArICAgIGlm
-ICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAnc3lzdGVtZCcsICd0cnVl
-JywgJ2ZhbHNlJywNCj4gZCl9OyB0aGVuDQo+ID4gKyAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtz
-eXN0ZW1kX3VuaXRkaXJ9L3N5c3RlbQ0KPiA+ICsgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dP
-UktESVJ9L3JhY29vbi5zZXJ2aWNlDQo+ID4gKyAke0R9JHtzeXN0ZW1kX3VuaXRkaXJ9L3N5c3Rl
-bQ0KPiA+ICsNCj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MjQFNZU0NPTkZESVJAIyR7c3lzY29u
-ZmRpcn0jZycNCj4gJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0vcmFjb29uLnNlcnZpY2UN
-Cj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MjQFNCSU5ESVJAIyR7c2JpbmRpcn0jZycNCj4gPiAr
-ICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtL3JhY29vbi5zZXJ2aWNlDQo+ID4gKw0KPiA+
-ICsgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVsdC8NCj4gPiArICAg
-ICAgICBpbnN0YWxsIC1tIDA2NDQgJHtXT1JLRElSfS9yYWNvb24uY29uZg0KPiAke0R9JHtzeXNj
-b25mZGlyfS9kZWZhdWx0L3JhY29vbg0KPiA+ICsgICAgZmkNCj4gPiAgfQ0KPiA+DQo+ID4gLS0N
-Cj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+
-IE9wZW5lbWJlZGRlZC1jb21taXRzIG1haWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1jb21t
-aXRzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1jb21taXRzDQo+IA0KPiAtLQ0KPiBN
-YXJ0aW4gJ0phTWEnIEphbnNhICAgICBqYWJiZXI6IE1hcnRpbi5KYW5zYUBnbWFpbC5jb20NCg==
+From: Denys Dmytriyenko <denys@ti.com>
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ ...ite-Make-sure-to-include-generated-header.patch | 34 ----------------------
+ .../ltp-ddt/ltp-Do-not-link-against-libfl.patch    | 31 ++++++++++++++++++++
+ .../ltp-ddt/{ltp-ddt_0.0.5.bb => ltp-ddt_1.0.0.bb} | 34 +++++++++++++---------
+ 3 files changed, 52 insertions(+), 47 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch
+ create mode 100644 meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch
+ rename meta-oe/recipes-devtools/ltp-ddt/{ltp-ddt_0.0.5.bb => ltp-ddt_1.0.0.bb} (68%)
+
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch
+deleted file mode 100644
+index 56b0333..0000000
+--- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/0001-wdt_test_suite-Make-sure-to-include-generated-header.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 4a8f24892514cd5e4d11b9105c843db49eea921b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 19 Feb 2014 19:41:33 -0800
+-Subject: [PATCH] wdt_test_suite: Make sure to include generated headers
+-
+-This makes sure that its using the generated headers
+-and not the raw headers from kernel, generated headers
+-are built for the given machine already when kernel is
+-built and are available in configured/compiled kernel tree
+-already
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- testcases/ddt/wdt_test_suite/Makefile | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/testcases/ddt/wdt_test_suite/Makefile b/testcases/ddt/wdt_test_suite/Makefile
+-index 90a6a90..22a1cfd 100644
+---- a/testcases/ddt/wdt_test_suite/Makefile
+-+++ b/testcases/ddt/wdt_test_suite/Makefile
+-@@ -20,8 +20,8 @@ INCLUDES        = -I $(KERNEL_INC) -I src/interface/common -I ../utils/user
+- INCLUDES        = -I src/parser \
+-                   -I src/interface/common \
+-                   -I ../utils/user \
+--                  -I $(KERNEL_INC)/include \
+--                  -I $(KERNEL_INC)/arch/arm/include
+-+                  -I $(KERNEL_INC)/include/generated \
+-+                  -I $(KERNEL_INC)/arch/arm/include/generated \
+- 
+- #List of source files- Update this on adding a new C file
+- SOURCES := \
+--- 
+-1.9.0
+-
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch
+new file mode 100644
+index 0000000..3e4aa73
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt/ltp-Do-not-link-against-libfl.patch
+@@ -0,0 +1,31 @@
++From 5bda9c0af56869c6ff2c25d38ea087179c946bc6 Mon Sep 17 00:00:00 2001
++From: Chong Lu <Chong.Lu@windriver.com>
++Date: Tue, 11 Mar 2014 14:47:22 +0800
++Subject: [PATCH] ltp: Don't link against libfl
++
++We have already defined yywrap function in scan.l file. After this, we no longer need to
++link against libfl and so no longer get errors about undefined references to yylex.
++
++Upstream-status: Pending
++
++Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
++---
++ pan/Makefile |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/pan/Makefile b/pan/Makefile
++index 4cc6466..a4b575b 100644
++--- a/pan/Makefile
+++++ b/pan/Makefile
++@@ -31,7 +31,7 @@ CPPFLAGS		+= -Wno-error
++ 
++ CPPFLAGS		+= -I$(abs_srcdir)
++ 
++-LDLIBS			+= -lm $(LEXLIB)
+++LDLIBS			+= -lm
++ 
++ LFLAGS			+= -l
++ 
++-- 
++1.7.9.5
++
+diff --git a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
+similarity index 68%
+rename from meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
+rename to meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
+index db62ac6..d028e88 100644
+--- a/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_0.0.5.bb
++++ b/meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb
+@@ -7,18 +7,18 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ PROVIDES += "ltp"
+ DEPENDS += "zip-native virtual/kernel alsa-lib"
+ 
+-RDEPENDS_${PN} += "pm-qa"
++RDEPENDS_${PN} += "pm-qa serialcheck"
+ 
+-inherit autotools-brokensep module-base kernel-module-split
++inherit autotools module-base kernel-module-split
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-SRCREV = "903f70a11eb77cbad62d7ecbe7dcbaf61be8ff99"
++SRCREV = "f086bed6cc88bf102eaad0e96cb7ebe79944a8ad"
+ BRANCH ?= "master"
+ 
+ SRC_URI = "git://arago-project.org/git/projects/test-automation/ltp-ddt.git;branch=${BRANCH} \
+-           file://0001-wdt_test_suite-Make-sure-to-include-generated-header.patch \
+-          "
++    file://ltp-Do-not-link-against-libfl.patch \
++"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -58,16 +58,26 @@ FILES_${PN}-dbg += " \
+ FILES_${PN}-staticdev += "${LTPROOT}/lib"
+ FILES_${PN} += "${LTPROOT}/*"
+ 
+-do_configure() {
+-    cp ${S}/include/config.h.default ${S}/include/config.h
+-    cp ${S}/include/mk/config.mk.default ${S}/include/mk/config.mk
+-    cp ${S}/include/mk/features.mk.default ${S}/include/mk/features.mk
+-    echo "${TAG}" > ${S}/ChangeLog
+-}
++KERNEL_MODULES_META_PACKAGE = "${PN}"
+ 
+ kmoddir = "/lib/modules/${KERNEL_VERSION}/kernel/drivers/ddt"
+ 
++# ltp doesn't regenerate ffsb-6.0-rc2 configure and hardcode configure call.
++# we explicitly force regeneration of that directory and pass configure options.
++do_configure_append() {
++    (cd utils/ffsb-6.0-rc2; autoreconf -fvi; ./configure ${CONFIGUREOPTS})
++}
++
++# The makefiles make excessive use of make -C and several include testcases.mk
++# which triggers a build of the syscall header. To reproduce, build ltp,
++# then delete the header, then "make -j XX" and watch regen.sh run multiple
++# times. Its easier to generate this once here instead.
++do_compile_prepend () {
++    ( make -C ${B}/testcases/kernel include/linux_syscall_numbers.h )
++}
++
+ do_compile_append () {
++    unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
+     oe_runmake modules
+ }
+ 
+@@ -75,8 +85,6 @@ do_install() {
+     oe_runmake install
+     install -d ${D}${datadir}
+     install -d ${D}${kmoddir}
+-    cp -a ${D}${LTPROOT}/share/* ${D}${datadir}
+-    rm -rf ${D}${LTPROOT}/share/
+     mv ${D}${LTPROOT}/testcases/bin/ddt/*.ko ${D}${kmoddir}
+ }
+ 
+-- 
+2.2.0
+
 
