@@ -1,26 +1,37 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 13F6360089
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Apr 2015 21:39:37 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 85685F811E2; Wed,  8 Apr 2015 15:39:38 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 18B08F811E0;
-	Wed,  8 Apr 2015 15:39:38 -0600 (MDT)
-Message-ID: <5525A029.2000804@mlbassoc.com>
-Date: Wed, 08 Apr 2015 15:39:53 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E47765C98;
+	Thu,  9 Apr 2015 00:55:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="90391097"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Apr 2015 08:51:39 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t390sIIe003826;
+	Thu, 9 Apr 2015 08:54:18 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Thu, 9 Apr 2015 08:55:25 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: Martin Jansa <martin.jansa@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Joe MacDonald
+	<joe_macdonald@mentor.com>
+Thread-Topic: [oe-commits] Bian Naimeng : ipsec-tools: add systemd supported
+Thread-Index: AQHQcfrufus76b99H0KPrbENJIvA1J1D2zmg
+Date: Thu, 9 Apr 2015 00:55:24 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73DFFEC7@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <20150223190317.823C42014@opal.openembedded.org>
+	<20150408125127.GG2337@jama>
+In-Reply-To: <20150408125127.GG2337@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: vlc runtime issues
+Cc: "openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
+Subject: Re: [oe-commits] Bian Naimeng : ipsec-tools: add systemd supported
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,35 +45,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Apr 2015 21:39:38 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Apr 2015 00:55:32 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-Now that I've finally built vlc for my embedded target (i.MX6),
-I've run into some issues.
-
-First are missing codecs:
-[0xb5c25e78] main decoder error: no suitable decoder module for fourcc `h264'. VLC probably does not support this sound or video format.
-[0xb5c25e78] main decoder error: no suitable decoder module for fourcc `mp4a'. VLC probably does not support this sound or video format.
-
-Are these something that can be enabled via PACKAGECONFIG?
-
-I'm not sure these are important:
-[0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/fmc.luac: /usr/lib/vlc/lua/sd/fmc.luac: incompatible precompiled chunk
-[0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/icecast.luac: /usr/lib/vlc/lua/sd/icecast.luac: incompatible precompiled chunk
-[0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/jamendo.luac: /usr/lib/vlc/lua/sd/jamendo.luac: incompatible precompiled chunk
-[0xb454e458] lua probe error: Error loading script /usr/lib/vlc/lua/sd/metachannels.luac: /usr/lib/vlc/lua/sd/metachannels.luac: incompatible precompiled chunk
-
-These probably happen because of cross compiling from x86_64 -> ARM/Cortex-A9
-
-Any ideas?  I'm mostly keen on getting the codecs I need.  I already
-have them working using mplayer, but I'd like vlc as well.
-
-Thanks
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBNYXJ0aW4gSmFuc2EgW21haWx0
+bzptYXJ0aW4uamFuc2FAZ21haWwuY29tXQ0KPiBTZW50OiBXZWRuZXNkYXksIEFwcmlsIDA4LCAy
+MDE1IDg6NTEgUE0NCj4gQ2M6IG9wZW5lbWJlZGRlZC1jb21taXRzQGxpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZS1jb21taXRzXSBCaWFuIE5haW1lbmcgOiBpcHNlYy10
+b29sczogYWRkIHN5c3RlbWQgc3VwcG9ydGVkDQo+IA0KPiBPbiBNb24sIEZlYiAyMywgMjAxNSBh
+dCAwNzowMzoxN1BNICswMDAwLCBnaXRAZ2l0Lm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6DQo+ID4g
+TW9kdWxlOiBtZXRhLW9wZW5lbWJlZGRlZC5naXQNCj4gPiBCcmFuY2g6IG1hc3Rlcg0KPiA+IENv
+bW1pdDogMWViNWE2NDQ0NTlmMTYyMTk0MTBlZTUzZjQ3YjdkMmQwODJlMTdhMQ0KPiA+IFVSTDoN
+Cj4gaHR0cDovL2dpdC5vcGVuZW1iZWRkZWQub3JnLz9wPW1ldGEtb3BlbmVtYmVkZGVkLmdpdCZh
+PWNvbW1pdDtoPTFlYjVhNjQ0NDUNCj4gOWYxNjIxOTQxMGVlNTNmNDdiN2QyZDA4MmUxN2ExDQo+
+ID4NCj4gPiBBdXRob3I6IEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+
+IERhdGU6ICAgTW9uIEZlYiAxNiAxMToxNDozNSAyMDE1ICswODAwDQo+ID4NCj4gPiBpcHNlYy10
+b29sczogYWRkIHN5c3RlbWQgc3VwcG9ydGVkDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBCaWFu
+IE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBNYXJ0
+aW4gSmFuc2EgPE1hcnRpbi5KYW5zYUBnbWFpbC5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTogSm9l
+IE1hY0RvbmFsZCA8am9lX21hY2RvbmFsZEBtZW50b3IuY29tPg0KPiA+DQo+ID4gLS0tDQo+ID4N
+Cj4gPiAgLi4uL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29scy9yYWNvb24u
+Y29uZiAgIHwgIDggKysrKysrKysNCj4gPiAgLi4uL2lwc2VjLXRvb2xzL2lwc2VjLXRvb2xzL3Jh
+Y29vbi5zZXJ2aWNlICAgICAgICAgICAgICAgIHwgMTENCj4gKysrKysrKysrKysNCj4gPiAgLi4u
+L3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29sc18wLjguMi5iYiAgICAgIHwg
+MTUNCj4gKysrKysrKysrKysrKystDQo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgMzMgaW5zZXJ0aW9u
+cygrKSwgMSBkZWxldGlvbigtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1uZXR3
+b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29scy9yYWNvb24uY29u
+Zg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNl
+Yy10b29scy9yYWNvb24uY29uZg0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXgg
+MDAwMDAwMC4uNmI1MDc1MA0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdv
+cmtpbmcvcmVjaXBlcy1zdXBwb3J0L2lwc2VjLXRvb2xzL2lwc2VjLXRvb2xzL3JhY29vbi5jDQo+
+ID4gKysrIG9uZg0KPiA+IEBAIC0wLDAgKzEsOCBAQA0KPiA+ICsjIERlZmF1bHRzIGZvciByYWNv
+b24gc2VydmljZQ0KPiA+ICsjIHNvdXJjZWQgYnkgcmFjb29uLnNlcnZpY2UNCj4gPiArIyBpbnN0
+YWxsZWQgYXQgL2V0Yy9kZWZhdWx0L3JhY29vbiBieSB0aGUgbWFpbnRhaW5lciBzY3JpcHRzICMg
+IyBUaGlzDQo+ID4gK2lzIGEgUE9TSVggc2hlbGwgZnJhZ21lbnQgIyAjIEFyZ3VtZW50cyB0byBw
+YXNzIHRvIHJhY29vbg0KPiA+ICtSQUNPT05fQVJHUz0iIg0KPiA+IGRpZmYgLS1naXQNCj4gPiBh
+L21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvaXBzZWMtdG9vbHMvaXBzZWMtdG9vbHMv
+cmFjb29uLnNlcnZpDQo+ID4gY2UNCj4gPiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBv
+cnQvaXBzZWMtdG9vbHMvaXBzZWMtdG9vbHMvcmFjb29uLnNlcnZpDQo+ID4gY2UNCj4gPiBuZXcg
+ZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLmExMGU3NzANCj4gPiAtLS0gL2Rl
+di9udWxsDQo+ID4gKysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10
+b29scy9pcHNlYy10b29scy9yYWNvb24ucw0KPiA+ICsrKyBlcnZpY2UNCj4gPiBAQCAtMCwwICsx
+LDExIEBADQo+ID4gK1tVbml0XQ0KPiA+ICtEZXNjcmlwdGlvbj1SYWNvb24gSUtFdjEga2V5IG1h
+bmFnZW1lbnQgZGFlbW9uIGZvciBJUFNFQw0KPiA+ICtBZnRlcj1zeXNsb2cudGFyZ2V0IG5ldHdv
+cmsudGFyZ2V0DQo+ID4gKw0KPiA+ICtbU2VydmljZV0NCj4gPiArVHlwZT1mb3JraW5nDQo+ID4g
+K0Vudmlyb25tZW50RmlsZT0tQFNZU0NPTkZESVJAL2RlZmF1bHQvcmFjb29uDQo+ID4gK0V4ZWNT
+dGFydD1AU0JJTkRJUkAvcmFjb29uICRSQUNPT05fQVJHUw0KPiA+ICsNCj4gPiArW0luc3RhbGxd
+DQo+ID4gK1dhbnRlZEJ5PW11bHRpLXVzZXIudGFyZ2V0DQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEv
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9pcHNlYy10b29sc18w
+LjguMi5iYg0KPiA+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29s
+cy9pcHNlYy10b29sc18wLjguMi5iYg0KPiA+IGluZGV4IDc1MTlkODMuLjk3MDRiMTMgMTAwNjQ0
+DQo+ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9pcHNlYy10b29scy9p
+cHNlYy10b29sc18wLjguMi5iYg0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1
+cHBvcnQvaXBzZWMtdG9vbHMvaXBzZWMtdG9vbHNfMC44LjIuYmINCj4gPiBAQCAtMTYsMTEgKzE2
+LDEzIEBAIFNSQ19VUkkgPQ0KPiAiZnRwOi8vZnRwLm5ldGJzZC5vcmcvcHViL05ldEJTRC9taXNj
+L2lwc2VjLXRvb2xzLzAuOC9pcHNlYy10b29scy0ke1BWDQo+ID4gICAgICAgICAgICAgZmlsZTov
+L2dsaWJjLTIuMjAucGF0Y2ggXA0KPiA+DQo+IGZpbGU6Ly9yYWNvb24tUmVzZW5kLVVQREFURS1t
+ZXNzYWdlLXdoZW4tcmVjZWl2ZWQtRUlOVFItbWVzc2FnZS5wYXRjaCBcDQo+ID4gICAgICAgICAg
+ICAgZmlsZTovL3JhY29vbi5jb25mLnNhbXBsZSBcDQo+ID4gKyAgICAgICAgICAgZmlsZTovL3Jh
+Y29vbi5jb25mIFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vcmFjb29uLnNlcnZpY2UgXA0KPiA+
+ICAgICAgICAgICAgIg0KPiA+ICBTUkNfVVJJW21kNXN1bV0gPSAiZDUzZWMxNGEwYTNlY2U2NGUw
+OWU1ZTM0YjMzNTBiNDEiDQo+ID4gIFNSQ19VUklbc2hhMjU2c3VtXSA9DQo+ICI4ZWI2YjM4NzE2
+ZTJmM2E4YTcyZjFmNTQ5Yzk0NDRjMmJjMjhkNTJjOTUzNjc5MjY5MDU2NGM3NGZlNzIyZjJkIg0K
+PiA+DQo+ID4gLWluaGVyaXQgYXV0b3Rvb2xzDQo+ID4gK2luaGVyaXQgYXV0b3Rvb2xzIHN5c3Rl
+bWQNCj4gDQo+IFNZU1RFTURfU0VSVklDRSB2YXJpYWJsZSBpc24ndCBzZXQsIHNvIHRoaXMgcmFj
+b29uIGlzbid0IGVuYWJsZWQgYW5kIHBhY2thZ2VkLA0KPiBob3cgd2FzIHRoaXMgY2hhbmdlIHRl
+c3RlZD8NCj4gDQo+IEFsc28gY2F1c2VzIFFBIHdhcm5pbmc6DQo+IGlwc2VjLXRvb2xzLTAuOC4y
+OiBpcHNlYy10b29sczogRmlsZXMvZGlyZWN0b3JpZXMgd2VyZSBpbnN0YWxsZWQgYnV0IG5vdA0K
+PiBzaGlwcGVkDQo+ICAgL2xpYg0KPiAgIC9saWIvc3lzdGVtZA0KPiAgIC9saWIvc3lzdGVtZC9z
+eXN0ZW0NCj4gICAvbGliL3N5c3RlbWQvc3lzdGVtL3JhY29vbi5zZXJ2aWNlIFtpbnN0YWxsZWQt
+dnMtc2hpcHBlZF0NCj4gDQoNClNvcnJ5IGZvciB0aGF0LiBJIHdpbGwgc2VuZCBhIHBhdGNoIHRv
+IGZpeCB0aGlzLg0KDQpUaGFua3MNCiBCaWFuDQoNCj4gPiAgIyBPcHRpb25zOg0KPiA+ICAjICAt
+LWVuYWJsZS1hZG1pbnBvcnQgICAgICBlbmFibGUgYWRtaW4gcG9ydA0KPiA+IEBAIC02OCw0ICs3
+MCwxNSBAQCBQQUNLQUdFQ09ORklHW3NlbGludXhdID0NCj4gPiAiLS1lbmFibGUtc2VjdXJpdHkt
+Y29udGV4dCwtLWRpc2FibGUtc2VjdXJpdHktY29udGV4dCxsDQo+ID4gIGRvX2luc3RhbGxfYXBw
+ZW5kKCkgew0KPiA+ICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9yYWNvb24NCj4g
+PiAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dPUktESVJ9L3JhY29vbi5jb25mLnNhbXBsZQ0KPiA+
+ICR7RH0ke3N5c2NvbmZkaXJ9L3JhY29vbi9yYWNvb24uY29uZg0KPiA+ICsNCj4gPiArICAgIGlm
+ICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAnc3lzdGVtZCcsICd0cnVl
+JywgJ2ZhbHNlJywNCj4gZCl9OyB0aGVuDQo+ID4gKyAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtz
+eXN0ZW1kX3VuaXRkaXJ9L3N5c3RlbQ0KPiA+ICsgICAgICAgIGluc3RhbGwgLW0gMDY0NCAke1dP
+UktESVJ9L3JhY29vbi5zZXJ2aWNlDQo+ID4gKyAke0R9JHtzeXN0ZW1kX3VuaXRkaXJ9L3N5c3Rl
+bQ0KPiA+ICsNCj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MjQFNZU0NPTkZESVJAIyR7c3lzY29u
+ZmRpcn0jZycNCj4gJHtEfSR7c3lzdGVtZF91bml0ZGlyfS9zeXN0ZW0vcmFjb29uLnNlcnZpY2UN
+Cj4gPiArICAgICAgICBzZWQgLWkgLWUgJ3MjQFNCSU5ESVJAIyR7c2JpbmRpcn0jZycNCj4gPiAr
+ICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtL3JhY29vbi5zZXJ2aWNlDQo+ID4gKw0KPiA+
+ICsgICAgICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVsdC8NCj4gPiArICAg
+ICAgICBpbnN0YWxsIC1tIDA2NDQgJHtXT1JLRElSfS9yYWNvb24uY29uZg0KPiAke0R9JHtzeXNj
+b25mZGlyfS9kZWZhdWx0L3JhY29vbg0KPiA+ICsgICAgZmkNCj4gPiAgfQ0KPiA+DQo+ID4gLS0N
+Cj4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+
+IE9wZW5lbWJlZGRlZC1jb21taXRzIG1haWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1jb21t
+aXRzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1jb21taXRzDQo+IA0KPiAtLQ0KPiBN
+YXJ0aW4gJ0phTWEnIEphbnNhICAgICBqYWJiZXI6IE1hcnRpbi5KYW5zYUBnbWFpbC5jb20NCg==
 
