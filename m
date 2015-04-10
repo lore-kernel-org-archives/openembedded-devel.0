@@ -1,24 +1,34 @@
-Return-Path: <Dmitry_Eremin@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 77F206E268
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id D181F729F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Apr 2015 20:03:54 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-03.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1YgIg7-0001NQ-Ht from Dmitry_Eremin@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Apr 2015 13:03:55 -0700
-Received: from fangorn.rup.mentorg.com (137.202.0.76) by
-	SVR-IES-FEM-03.mgc.mentorg.com (137.202.0.108) with Microsoft SMTP
-	Server (TLS) id 14.3.224.2; Thu, 9 Apr 2015 21:03:54 +0100
-From: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Apr 2015 23:03:53 +0300
-Message-ID: <1428609833-15774-1-git-send-email-dmitry_eremin@mentor.com>
-X-Mailer: git-send-email 2.1.4
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mozjs: disable methodjit for armv4
+	Fri, 10 Apr 2015 00:02:32 +0000 (UTC)
+Received: by pabsx10 with SMTP id sx10so3496376pab.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Apr 2015 17:02:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=iqyamQiMkTVQv7D+ixCpJY0lZtMhiRW/cplgBJhT5lU=;
+	b=w8FY4MS1qTtstbdICulg9uK+bo+SouZRJDEsYwfnEFa8bon1TbAe0zc/NPXtm1fGhY
+	PwP/w87xYRPPPm3pxqStN92Q3fxwVj/dS7hezFqoci5Vu8R3EXJLzE817y+k/oUWGk5g
+	QpRqZvSwBIDt7wRQViVkhm/XRUoSZaTOI3N+BY6yGiCk0vIxfup8HTXMw6UVdwu38rUB
+	iDtKnK6Ux7k1KVSYvFUDaEG3+FSAM4C+I3DT+0gXNIwcZtLGVlKY8O0s1Nhw6EfScT9u
+	s61NWqseucE7P/c3PLnO0o0jPgAmGS3dWB2NbKGecrRvT2ypBYA6CRVQnagxxT1eCIQc
+	+M/g==
+X-Received: by 10.69.12.133 with SMTP id eq5mr60012324pbd.158.1428624153731;
+	Thu, 09 Apr 2015 17:02:33 -0700 (PDT)
+Received: from Pahoa2.mvista.com (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
+	by mx.google.com with ESMTPSA id mt11sm179543pbc.20.2015.04.09.17.02.31
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 09 Apr 2015 17:02:32 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 Apr 2015 17:02:30 -0700
+Message-Id: <1428624150-7753-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-ruby][PATCH] bundler: Fix QA new Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Apr 2015 20:03:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 10 Apr 2015 00:02:32 -0000
 
-methodjit uses assembler instructions which are not available on armv4
-architecture. Disable methodjit for it.
+ERROR: QA Issue: bundler: Files/directories were installed but not shipped
+  /usr/lib/ruby/gems/2.2.0/build_info
+  /usr/lib/ruby/gems/2.2.0/extensions [installed-vs-shipped]
 
-Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-ruby/recipes-devtools/ruby/bundler_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-index 91ee9a2..263e940 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-@@ -33,6 +33,9 @@ EXTRA_OECONF = " \
-     --enable-threadsafe \
-     --disable-static \
- "
-+EXTRA_OECONF_append_armv4 += " \
-+    --disable-methodjit \
-+"
+diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+index 2adde4d..27ef7b2 100644
+--- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
++++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+@@ -26,4 +26,6 @@ SRC_URI = " \
  
- # mozjs requires autoreconf 2.13
- do_configure() {
+ inherit ruby
+ 
++FILES_${PN} += "${libdir}/ruby/gems/2.2.0"
++
+ BBCLASSEXTEND = "native"
 -- 
-2.1.4
+2.3.5
 
 
