@@ -1,40 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id EF9B4729F1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D9516ABF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Apr 2015 01:52:44 +0000 (UTC)
-Received: by pabsx10 with SMTP id sx10so5990561pab.3
+	Fri, 10 Apr 2015 10:17:19 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so122843631wiz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Apr 2015 18:52:45 -0700 (PDT)
+	Fri, 10 Apr 2015 03:17:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=Cdb5zKqXz1fB/JfqARaVrd0nUPyJBnzCe3v2FWTNEMk=;
-	b=WpY7+2VVp9DA3kwG7a7s/wvIfcvsm86PIdrwyTcnnSa4zyLH3pMng0qcf1uaSjfqFr
-	i9dN6SDrZZHQ2DD/VL/F3oUBHsGitP8HThC3JyF74or6UPYcno7kQyYsi0pRTv8ucDjI
-	HV+5+w749lB8vNZubDv4yE/oiNXqJZTjkfJoLfMOpGahHJukkzznIbcpiRS7U5EkNjEG
-	e7t6gBqfPn28OaCfSml7X/6DZ26lXmZys1u3dG+UtqjGITG8B6w/JbBrRMCTq/36FFcF
-	I1hGlaCWa5dxurxh/S0jCoqD8oLHM+jdlDEYIa/oUQxoiDukliq1wYO55tAjRa85qTeS
-	ssIQ==
-X-Received: by 10.67.14.73 with SMTP id fe9mr60965577pad.10.1428630764977;
-	Thu, 09 Apr 2015 18:52:44 -0700 (PDT)
-Received: from [10.22.11.71] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by mx.google.com with ESMTPSA id sm7sm316989pac.45.2015.04.09.18.52.43
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=xu/5OUO2J7LeqKetohsj6O7VgjNNQshMJyt4i3rPPH0=;
+	b=ew3CVk6GuZhQ/rJU/Nc+X1xhGmWx3YzQySwOf89wZorPHgtZ9EXiOQZO8I4I8hSvgK
+	2KhuI81b5IAkU5HAElSUJpexhF76iE7ryoCHq9EZNcBZKgu7pikhsZ1mn69gRhZ2MPJK
+	gFL5eaYXeIlHZZD8V4bvSDHJ3x0g2Ya7IUAurn6VBqDJrJc9mk4lXkMej05nBRKOEkMs
+	Mg2DAw/Pj54JFsVWFy96gWBqZeXrddHCaErApnXN5tYiBDZfOg45pnFuxTAw5KlC6h8B
+	3y3rhr0qvlv+SvzUk41v0sxr4YsWMfwCWpP5j0CRZxVGJw/GvCH6TsiOBlLzXSBeibwj
+	gLnw==
+X-Received: by 10.194.90.15 with SMTP id bs15mr1787736wjb.22.1428661040956;
+	Fri, 10 Apr 2015 03:17:20 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id u6sm2254435wjy.13.2015.04.10.03.17.19
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 Apr 2015 18:52:43 -0700 (PDT)
-Message-ID: <55272CE9.6020303@gmail.com>
-Date: Thu, 09 Apr 2015 18:52:41 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
+	Fri, 10 Apr 2015 03:17:20 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1428624150-7753-1-git-send-email-akuster808@gmail.com>
-	<7F311B04-E1D6-4FA8-8218-A754DB918102@gmail.com>
-In-Reply-To: <7F311B04-E1D6-4FA8-8218-A754DB918102@gmail.com>
-Subject: Re: [meta-ruby][PATCH] bundler: Fix QA new Error
+Date: Fri, 10 Apr 2015 12:17:30 +0200
+Message-Id: <1428661050-3931-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-oe][PATCH] ltrace: fix build with -Os
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,24 +42,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 01:52:46 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 10 Apr 2015 10:17:20 -0000
 
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...n-Linux-backend-initialize-linkmap-struct.patch | 31 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
 
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
+new file mode 100644
+index 0000000..13609c1
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-In-Linux-backend-initialize-linkmap-struct.patch
+@@ -0,0 +1,31 @@
++From efd12cfb10ccd2c612838c0e22069554ce60637c Mon Sep 17 00:00:00 2001
++From: Petr Machata <pmachata@redhat.com>
++Date: Wed, 2 Jan 2013 16:01:43 +0100
++Subject: [PATCH] In Linux backend, initialize linkmap struct
++
++GCC 4.7.2 -m32 -Os gives the following (spurious) warning:
++proc.c: In function 'crawl_linkmap':
++proc.c:544:25: error: 'rlm.l_addr' may be used uninitialized in this
++
++Upstream-Status: Backport
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++---
++ sysdeps/linux-gnu/proc.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/sysdeps/linux-gnu/proc.c b/sysdeps/linux-gnu/proc.c
++index 6e01d28..d69c985 100644
++--- a/sysdeps/linux-gnu/proc.c
+++++ b/sysdeps/linux-gnu/proc.c
++@@ -484,7 +484,7 @@ crawl_linkmap(struct process *proc, struct lt_r_debug_64 *dbg)
++ 	arch_addr_t addr = (arch_addr_t)(uintptr_t)dbg->r_map;
++ 
++ 	while (addr != 0) {
++-		struct lt_link_map_64 rlm;
+++		struct lt_link_map_64 rlm = {};
++ 		if (lm_fetcher(proc)(proc, addr, &rlm) < 0) {
++ 			debug(2, "Unable to read link map");
++ 			return;
++-- 
++2.3.5
++
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index 6984848..f9f1684 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -18,6 +18,7 @@ RDEPENDS_${PN} = "elfutils"
+ SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git \
+            file://ltrace-0.7.2-unused-typedef.patch \
+            file://configure-allow-to-disable-selinux-support.patch \
++           file://0001-In-Linux-backend-initialize-linkmap-struct.patch \
+           "
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.3.5
 
-On 04/09/2015 05:30 PM, Khem Raj wrote:
->
->> On Apr 9, 2015, at 5:02 PM, Armin Kuster <akuster808@gmail.com> wrote:
->>
->> +FILES_${PN} += "${libdir}/ruby/gems/2.2.0"
->
-> 2.2.0 could we use something else so we don’t have to revisit it when git recipe moves to say 2.3.0
->
-
-most likely.. could just drop the version entirely.
-
-thanks,
-
--armin
 
