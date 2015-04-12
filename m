@@ -1,35 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
-	[209.85.220.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 969216E277
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 26B1572D74
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Apr 2015 16:58:57 +0000 (UTC)
-Received: by pabtp1 with SMTP id tp1so26939000pab.2
+	Sun, 12 Apr 2015 21:59:51 +0000 (UTC)
+Received: by wgyo15 with SMTP id o15so63265204wgy.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Apr 2015 09:58:58 -0700 (PDT)
+	Sun, 12 Apr 2015 14:59:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=qSk/0ID8sXrxaVVeg+QbtpL4GAxTosYAgJ7YsnB3y6A=;
-	b=R/vEihSpO2pATwkc2bwnhjb5PO4kA/UMl0scGx4qZOqfnV2roUVS2bPua8c68UPYLd
-	otTdYZAEYaTFGKEURoZp46wRubUI+bFoqB5KbZiy+ATlXrpPpGjqNLz9yc8K1asK47ns
-	y/OotXOt/m0sbYvnEOSRCitXpE7+xUaZfyjrfEQZGtMywvBsBjJn1sbObPsG8AJmZ9qj
-	rWQV/AYLoRQ5FfqAkl7cQtbPt8yJDOindkbbD7T2qBy9Dw7Y8fKe3AlBEXxJrb9s7bp0
-	WP2VeV7vVlAuFAaGjzYVD9YCaC9+y2o9c+EAyV6aVzm6tbH0EIDXHUyKd/gTzLKAbfKR
-	ac3Q==
-X-Received: by 10.68.113.131 with SMTP id iy3mr4332610pbb.40.1428685138264;
-	Fri, 10 Apr 2015 09:58:58 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id kq3sm2781581pbc.74.2015.04.10.09.58.55
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=HJA3meOqR6eZtXrY24DpJbje3dqzCfFrHG2dS1MZgKQ=;
+	b=BrRQm/wo/ACsKZMZ3r2xFCD5HZ1UNMNPt6vwx2DocrrDHaeM0ViFV7O9iHkhmB1RK4
+	LE2kQv+Hbm1qib7mFkEP+FjEfMKAIYplx5LMFwRsoshSpyt1hEEdf8QuWY6s9bAu8ULS
+	FC3jfrjZbsBGyX/gWHkKdI4B/VlpliqFX20cGvKD9+hJMug2Enhl/FUQq+O70g0mxD0n
+	ZwEsL9DdG2jp1oUltz8ILIzweON2YttJl0d/P9sE7qut8GtqnERS305H3mXh4mNJKzfu
+	+HQO0/zTw3SwQ6P1S72lzKRXh+2X+Roi0qRWHZ93Gzr6URZnpFhkaFBApUcoNtVpCnsq
+	6wUg==
+X-Received: by 10.194.184.10 with SMTP id eq10mr22330542wjc.147.1428875992586; 
+	Sun, 12 Apr 2015 14:59:52 -0700 (PDT)
+Received: from T520.homenet.telecomitalia.it
+	(host185-253-dynamic.48-82-r.retail.telecomitalia.it.
+	[82.48.253.185])
+	by mx.google.com with ESMTPSA id u6sm8654409wjy.13.2015.04.12.14.59.46
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 10 Apr 2015 09:58:56 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+	Sun, 12 Apr 2015 14:59:50 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Apr 2015 09:58:45 -0700
-Message-Id: <1428685125-20255-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-ruby][PATCH] v2 bundler: Fix QA new Error
+Date: Sun, 12 Apr 2015 23:59:26 +0200
+Message-Id: <1428875966-26178-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-initramfs][PATCH] kexecboot-cfg: maintenance update to v. 0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,31 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Apr 2015 16:58:57 -0000
+X-List-Received-Date: Sun, 12 Apr 2015 21:59:52 -0000
 
-V2: drop version value in file path
+This configuration file is only suitable for kexecboot > 0.5.9.
+With the upcoming release of linux_4.0 based kexecboot kernels it is preferable
+to clearly distinguish old and new versions.
 
-ERROR: QA Issue: bundler: Files/directories were installed but not shipped
-  /usr/lib/ruby/gems/2.2.0/build_info
-  /usr/lib/ruby/gems/2.2.0/extensions [installed-vs-shipped]
+Fix WARNING: ... kexecboot-cfg-0.1 ('S') doesn't exist, please set 'S' to a proper value
+Remove PR
+Increase PV
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-ruby/recipes-devtools/ruby/bundler_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../kexecboot/{kexecboot-cfg_0.1.bb => kexecboot-cfg_0.2.bb}           | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ rename meta-initramfs/recipes-bsp/kexecboot/{kexecboot-cfg_0.1.bb => kexecboot-cfg_0.2.bb} (98%)
 
-diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-index 2adde4d..fc73001 100644
---- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-+++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-@@ -26,4 +26,6 @@ SRC_URI = " \
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
+similarity index 98%
+rename from meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb
+rename to meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
+index ec476f8..bd861f3 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.1.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
+@@ -3,10 +3,11 @@ DESCRIPTION = "Default icon and boot.cfg for kexecboot linux-as-bootloader."
+ SECTION = "base"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
+-PR = "r14"
  
- inherit ruby
+ SRC_URI = "file://icon.xpm"
  
-+FILES_${PN} += "${libdir}/ruby/gems"
++S = "${WORKDIR}/${BP}"
 +
- BBCLASSEXTEND = "native"
+ do_configure_prepend () {
+     install -m 0644 ${WORKDIR}/icon.xpm ${S}
+ }
 -- 
-2.3.5
+1.9.1
 
 
