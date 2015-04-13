@@ -1,36 +1,40 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
-	[209.85.213.182])
-	by mail.openembedded.org (Postfix) with ESMTP id A59B073D68
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 2293473D73
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Apr 2015 20:33:49 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so34551465igb.0
+	Mon, 13 Apr 2015 20:35:09 +0000 (UTC)
+Received: by igbqf9 with SMTP id qf9so54545207igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Apr 2015 13:33:51 -0700 (PDT)
+	Mon, 13 Apr 2015 13:35:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=IHv9UP8DF7EMEzePqiVdmewxEo1oAindPE5UZR+9ySk=;
-	b=gMaYCO8TK5Aqzo2sKs4s3iZA2pI1J+g79I0RX8nnze7Lygs28FxJGcJIib2NpFVMEp
-	Br6FPu5+OaVokdcuNGx/pDFCTlqH1A5KtP4OP8GrJHT3QHCbrST/0EFIZmlZgJZnXNRb
-	ZHNDM2+Eg/eFIf+xadrqYv1gqSP1rZKDuYw6FLEcogAb3rH2MBl52naA/PIIC7wkGxer
-	axzJRj2Q10+V/06F+C8lxgEwn+pe85GUbf6TgT/v3eQXigE30FQkK7gV4j2UCeIXu0Uw
-	R7/9Q2IuTVQYba5XXCN83GRx5DUxHZ+wm0wOYPGdHSxzK6lFXdOANaNfKfke04emFCzi
-	lE6A==
+	:content-type; bh=0l+Byf6dBJ0g2xzgc8jP43BDVeG0CyUEzoUWZ0ABwKY=;
+	b=DQj/XZ9zbYqXw1MGNcV42Bgefz32qLBvu0w42BUG4/U+/GtOTkLQsfCSenIjUMmpGw
+	ezJpgMoJuOHNJU95to5aN801S7ALXGtr+V+fDU/5EA0J4j/4cwmy7eWjI7Rgy3HoMGKo
+	MMQkT/6BafA8BwJed9Dq+7DMhOye4dfWoT23yFsPywaVQ/HFjN7Z12/hybxL8AvFFWtS
+	itiW7xYIv4I558kTC3HrcOp0M3ChVHxWC2fSg/63pl++IWGVJV4qhqkf7LTdgisM6IrQ
+	TWHK1v4dUya8PaQrrcJ6WjgBd0bwYgFFjqapM0Hcln7Mzsi0O3ADpAYPYXP57atK+ARr
+	eTRw==
 MIME-Version: 1.0
-X-Received: by 10.50.23.105 with SMTP id l9mr19592054igf.13.1428957230923;
-	Mon, 13 Apr 2015 13:33:50 -0700 (PDT)
-Received: by 10.50.117.7 with HTTP; Mon, 13 Apr 2015 13:33:50 -0700 (PDT)
-Received: by 10.50.117.7 with HTTP; Mon, 13 Apr 2015 13:33:50 -0700 (PDT)
-In-Reply-To: <1428910057-23647-3-git-send-email-sven.ebenfeld@gmail.com>
+X-Received: by 10.107.18.170 with SMTP id 42mr24705869ios.38.1428957310967;
+	Mon, 13 Apr 2015 13:35:10 -0700 (PDT)
+Received: by 10.50.117.7 with HTTP; Mon, 13 Apr 2015 13:35:10 -0700 (PDT)
+Received: by 10.50.117.7 with HTTP; Mon, 13 Apr 2015 13:35:10 -0700 (PDT)
+In-Reply-To: <1428910057-23647-7-git-send-email-sven.ebenfeld@gmail.com>
 References: <1428910057-23647-1-git-send-email-sven.ebenfeld@gmail.com>
 	<1428910057-23647-2-git-send-email-sven.ebenfeld@gmail.com>
 	<1428910057-23647-3-git-send-email-sven.ebenfeld@gmail.com>
-Date: Mon, 13 Apr 2015 13:33:50 -0700
-Message-ID: <CAMKF1sq4OhOhTXD6fefKM=npk_dz+2JRibLd+uSu6L723rJtwA@mail.gmail.com>
+	<1428910057-23647-4-git-send-email-sven.ebenfeld@gmail.com>
+	<1428910057-23647-5-git-send-email-sven.ebenfeld@gmail.com>
+	<1428910057-23647-6-git-send-email-sven.ebenfeld@gmail.com>
+	<1428910057-23647-7-git-send-email-sven.ebenfeld@gmail.com>
+Date: Mon, 13 Apr 2015 13:35:10 -0700
+Message-ID: <CAMKF1sqApQR=XJtxKO-CWgK8O9xPTQUi909KEB5Lto8igtqzvQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java][PATCH v2 2/7] icedtea7-native: fix build with gcc 4.9
+Subject: Re: [meta-java][PATCH v2 6/7] java-test-image: Add openjdk-7 ZeroVM and remove busybox-hwclock
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,86 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Apr 2015 20:33:53 -0000
+X-List-Received-Date: Mon, 13 Apr 2015 20:35:14 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On Apr 13, 2015 12:29 AM, "Sven Ebenfeld" <sven.ebenfeld@gmail.com> wrote:
 >
-> The stabs debug format is not supported by our toolchain. It works if we
-> use gdb debug format.
+> busybox-hwclock could not be installed for me and I guess we don't really
+need it.
+> I wanted to test OpenJDK 7 ZeroVM so we need to install it.
 
-Why ggdb should -g be enough?
+May they should be two separate commits. They seem quite unrelated
+
 >
 > Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 > ---
->  .../icedtea-change-to-gdb-debug-format.patch       | 29
-++++++++++++++++++++++
->  recipes-core/icedtea/openjdk-7-release-03b147.inc  |  2 ++
->  2 files changed, 31 insertions(+)
->  create mode 100644
-recipes-core/icedtea/openjdk-7-03b147/icedtea-change-to-gdb-debug-format.patch
+>  recipes-images/images/java-test-image.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git
-a/recipes-core/icedtea/openjdk-7-03b147/icedtea-change-to-gdb-debug-format.patch
-b/recipes-core/icedtea/openjdk-7-03b147/icedtea-change-to-gdb-debug-format.patch
-> new file mode 100644
-> index 0000000..c0a3c9f
-> --- /dev/null
-> +++
-b/recipes-core/icedtea/openjdk-7-03b147/icedtea-change-to-gdb-debug-format.patch
-> @@ -0,0 +1,29 @@
-> +--- openjdk/hotspot/make/linux/makefiles/gcc.make      2015-04-02
-08:02:31.301728214 +0200
-> ++++ openjdk/hotspot/make/linux/makefiles/gcc.make.new  2015-04-02
-08:19:55.502171268 +0200
-> +@@ -233,7 +233,7 @@
-> + DEBUG_CFLAGS/ppc   = -g
-> + DEBUG_CFLAGS += $(DEBUG_CFLAGS/$(BUILDARCH))
-> + ifeq ($(DEBUG_CFLAGS/$(BUILDARCH)),)
-> +-DEBUG_CFLAGS += -gstabs
-> ++DEBUG_CFLAGS += -ggdb
-> + endif
-> +
-> + ifneq ($(OBJCOPY),)
-> +@@ -244,7 +244,7 @@
-> +   FASTDEBUG_CFLAGS/zero  = -g
-> +   FASTDEBUG_CFLAGS += $(DEBUG_CFLAGS/$(BUILDARCH))
-> +   ifeq ($(FASTDEBUG_CFLAGS/$(BUILDARCH)),)
-> +-    FASTDEBUG_CFLAGS += -gstabs
-> ++    FASTDEBUG_CFLAGS += -ggdb
-> +   endif
-> +
-> +   OPT_CFLAGS/ia64  = -g
-> +@@ -254,7 +254,7 @@
-> +   OPT_CFLAGS/zero  = -g
-> +   OPT_CFLAGS += $(OPT_CFLAGS/$(BUILDARCH))
-> +   ifeq ($(OPT_CFLAGS/$(BUILDARCH)),)
-> +-    OPT_CFLAGS += -gstabs
-> ++    OPT_CFLAGS += -ggdb
-> +   endif
-> + endif
-> +
-> diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-> index 47813cd..01e7a3d 100644
-> --- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-> +++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-> @@ -81,6 +81,7 @@ OPENJDK_PATCHES = " \
->          file://icedtea-jdk-sane-x86-arch.patch;apply=no \
->         file://icedtea-flags.patch;apply=no \
+> diff --git a/recipes-images/images/java-test-image.bb
+b/recipes-images/images/java-test-image.bb
+> index 4807858..22c7bdf 100644
+> --- a/recipes-images/images/java-test-image.bb
+> +++ b/recipes-images/images/java-test-image.bb
+> @@ -5,9 +5,9 @@ inherit core-image
+>  IMAGE_LINGUAS = " "
 >
-file://icedtea-openjdk-remove-currency-data-generation-expi.patch;apply=no \
-> +       file://icedtea-change-to-gdb-debug-format.patch;apply=no \
->          "
 >
->  export DISTRIBUTION_PATCHES = " \
-> @@ -91,4 +92,5 @@ export DISTRIBUTION_PATCHES = " \
->          patches/icedtea-jdk-sane-x86-arch.patch \
->         patches/icedtea-flags.patch \
->
-patches/icedtea-openjdk-remove-currency-data-generation-expi.patch \
-> +       patches/icedtea-change-to-gdb-debug-format.patch \
->          "
+> -IMAGE_INSTALL = "busybox modutils-initscripts initscripts opkg udev
+sysvinit netbase base-files base-passwd busybox-hwclock \
+> +IMAGE_INSTALL = "busybox modutils-initscripts initscripts opkg udev
+sysvinit netbase base-files base-passwd \
+>                   ${ROOTFS_PKGMANAGE_BOOTSTRAP}
+${CORE_IMAGE_EXTRA_INSTALL} \
+> -                 openjdk-7-jre openjdk-7-vm-jamvm openjdk-7-vm-cacao \
+> +                 openjdk-7-jre openjdk-7-vm-zero openjdk-7-vm-jamvm
+openjdk-7-vm-cacao \
+>                   openjdk-6-jre openjdk-6-vm-zero openjdk-6-vm-jamvm
+openjdk-6-vm-cacao \
+>                   strace dropbear binutils \
+>                   classpath \
 > --
 > 1.8.1.rc3
 >
