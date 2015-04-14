@@ -1,34 +1,33 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A35E73501
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 427686E268
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Apr 2015 16:15:15 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga102.fm.intel.com with ESMTP; 14 Apr 2015 09:15:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,576,1422950400"; d="scan'208";a="695133001"
-Received: from irsmsx102.ger.corp.intel.com ([163.33.3.155])
-	by fmsmga001.fm.intel.com with ESMTP; 14 Apr 2015 09:15:16 -0700
-Received: from irsmsx105.ger.corp.intel.com ([169.254.7.2]) by
-	IRSMSX102.ger.corp.intel.com ([169.254.2.2]) with mapi id
-	14.03.0224.002; Tue, 14 Apr 2015 17:15:15 +0100
-From: "Iorga, Cristian" <cristian.iorga@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH V2] bluez collection: add (moved from
-	oe-core)
-Thread-Index: AQHQcghB684HbCjXZkee8agQuUh3451MuETw
-Date: Tue, 14 Apr 2015 16:15:14 +0000
-Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F49AFEA@irsmsx105.ger.corp.intel.com>
-References: <1428503190-20210-1-git-send-email-cristian.iorga@intel.com>
-	<969F26A8BAB325438E7EB80D3C3134FB2F497624@irsmsx105.ger.corp.intel.com>
-In-Reply-To: <969F26A8BAB325438E7EB80D3C3134FB2F497624@irsmsx105.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.182]
-MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH V2] bluez collection: add (moved from	oe-core)
+	Tue, 14 Apr 2015 16:32:19 +0000 (UTC)
+Received: by wgyo15 with SMTP id o15so18368214wgy.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Apr 2015 09:32:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=5uaKt6otYrQkRYgWKkqqeQTV3HvZXQoCfscs33txZbA=;
+	b=a6MjY1feT7LPTpp2zbExHstJPLPAMMQr7Et5LIyo1e/WE7sr2G2vDPWQfjaffE7SIf
+	+bvHBHD3dcbMpQjrkBsb7goO2uWrs7fTbHwKA65MUbYvur5etC5sTPulD8AwwfKsHaap
+	FFCGaBlh/2bb6e+q0yzx2z0RE4+W/d5sTaz/YO7yhMKkHjNZCwlz2Hkr+96XqyKaJJEn
+	XqjA4pzX3OxPMsiMAuaXS896wtpPSepGuLPLKKUzDnmX/Bd91eEk983pxCyqfUdozuEy
+	PBM3NNZk/nFEZ2Mam020JU32mzJacvcCQiFwCza2kC9Kzb69rCMe2QYjXvgd6CtfuJWN
+	m/GQ==
+X-Received: by 10.180.14.67 with SMTP id n3mr33023542wic.92.1429029140737;
+	Tue, 14 Apr 2015 09:32:20 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id uo6sm2220811wjc.49.2015.04.14.09.32.19
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 Apr 2015 09:32:19 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Apr 2015 18:32:26 +0200
+Message-Id: <1429029146-6290-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-qt5][PATCH] qtwebkit: Fix build with newer glib-2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,553 +41,272 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2015 16:15:16 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 Apr 2015 16:32:22 -0000
 
-Ping.
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Iorga, Cristian
-Sent: Wednesday, April 8, 2015 5:28 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-oe][PATCH V2] bluez collection: add (moved from oe-=
-core)
-
-For V2:
-1. Commit message corrected (clearer).
-2. Respect OE styling
-
-Thanks,
-Cristian
-
------Original Message-----
-From: Iorga, Cristian
-Sent: Wednesday, April 8, 2015 5:27 PM
-To: openembedded-devel@lists.openembedded.org
-Cc: Iorga, Cristian
-Subject: [meta-oe][PATCH V2] bluez collection: add (moved from oe-core)
-
-BlueZ 4.x Bluetooth stack has been removed from oe-core.
-However, it is still supported, so add it to meta-oe connectivity layer.
-
-In order to use it in oe-core/poky/YP 'bluez4' needs to be added to distro =
-features. 'bluetooth' distro feature needs to be present also.
-
-Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../obsolete_automake_macros.patch                 | 14 +++++++
- .../bluez/bluez-hcidump_2.5.bb                     | 22 +++++++++++
- .../bluez/bluez4-4.101/bluetooth.conf              | 16 ++++++++
- .../bluez/bluez4-4.101/fix-udev-paths.patch        | 37 +++++++++++++++++
- .../bluez/bluez4-4.101/install-test-script.patch   | 26 ++++++++++++
- ...ork-fix-network-Connect-method-parameters.patch | 30 ++++++++++++++
- .../bluez4-4.101/obsolete_automake_macros.patch    | 14 +++++++
- .../bluez/bluez4-4.101/sbc_mmx.patch               | 24 +++++++++++
- ...pygobject-instead-ofgobject-introspection.patch | 27 +++++++++++++
- meta-oe/recipes-connectivity/bluez/bluez4.inc      | 44 ++++++++++++++++++=
-+++
- meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb | 46 ++++++++++++++++++=
-++++
- .../bluez/gst-plugin-bluetooth_4.101.bb            | 39 ++++++++++++++++++
- 12 files changed, 339 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/ob=
-solete_automake_macros.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetoo=
-th.conf
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-ude=
-v-paths.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/install=
--test-script.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/network=
--fix-network-Connect-method-parameters.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolet=
-e_automake_macros.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx=
-.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-leg=
-acy-pygobject-instead-ofgobject-introspection.patch
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4.inc
- create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
- create mode 100644 meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth=
-_4.101.bb
+ recipes-qt/qt5/qtwebkit.inc                        |   1 +
+ .../0003-Fix-building-with-glib-2.43.patch         | 238 +++++++++++++++++++++
+ 2 files changed, 239 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtwebkit/0003-Fix-building-with-glib-2.43.patch
 
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_=
-automake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.=
-5/obsolete_automake_macros.patch
+diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
+index a575d86..88df4c8 100644
+--- a/recipes-qt/qt5/qtwebkit.inc
++++ b/recipes-qt/qt5/qtwebkit.inc
+@@ -11,6 +11,7 @@ DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt leveld
+ SRC_URI += "\
+     file://0001-qtwebkit-fix-QA-issue-bad-RPATH.patch \
+     file://0002-Remove-TEXTREL-tag-in-x86.patch \
++    file://0003-Fix-building-with-glib-2.43.patch \
+ "
+ 
+ PACKAGECONFIG ??= "gstreamer qtlocation qtmultimedia qtsensors qtwebchannel"
+diff --git a/recipes-qt/qt5/qtwebkit/0003-Fix-building-with-glib-2.43.patch b/recipes-qt/qt5/qtwebkit/0003-Fix-building-with-glib-2.43.patch
 new file mode 100644
-index 0000000..0c77f1a
+index 0000000..1203470
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_auto
-+++ make_macros.patch
-@@ -0,0 +1,14 @@
-+Upstream-Status: Pending [package obsolete/not maintained by upstream]
++++ b/recipes-qt/qt5/qtwebkit/0003-Fix-building-with-glib-2.43.patch
+@@ -0,0 +1,238 @@
++From ef94c178a7ba0bd43a677ec90fde334ce2c90810 Mon Sep 17 00:00:00 2001
++From: Allan Sandfeld Jensen <allan.jensen@theqtcompany.com>
++Date: Fri, 27 Feb 2015 14:14:44 +0100
++Subject: [PATCH 3/3] Fix building with glib 2.43+
 +
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com> diff -Nurd=20
-+bluez-hcidump-2.5/configure.ac bluez-hcidump-2.5/configure.ac
-+--- bluez-hcidump-2.5/configure.ac	2012-11-30 10:29:41.000000000 +0200
-++++ bluez-hcidump-2.5/configure.ac	2013-01-12 10:02:10.609511463 +0200
-+@@ -2,7 +2,7 @@
-+ AC_INIT(bluez-hcidump, 2.5)
++The newest version of glib have introduced their own GMutexLocker
++conflicting with the one defined in WebCore.
 +
-+ AM_INIT_AUTOMAKE([foreign subdir-objects])
-+-AM_CONFIG_HEADER(config.h)
-++AC_CONFIG_HEADERS(config.h)
-+
-+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb b/meta=
--oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
-new file mode 100644
-index 0000000..3950630
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
-@@ -0,0 +1,22 @@
-+SUMMARY =3D "Linux Bluetooth Stack HCI Debugger Tool"
-+DESCRIPTION =3D "The hcidump tool reads raw HCI data coming from and=20
-+going to a Bluetooth device \ and displays the commands, events and data i=
-n a human-readable form."
-+
-+SECTION =3D "console"
-+# hcidump was integrated into bluez5
-+DEPENDS =3D "bluez4"
-+RCONFLICTS_${PN} =3D "bluez5"
-+LICENSE =3D "GPLv2+"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Deb723b61539feef013de476e68b5c50=
-a \
-+                    file://src/hcidump.c;beginline=3D1;endline=3D23;md5=3D=
-3bee3a162dff43a5be7470710b99fbcf"
-+PR =3D "r1"
-+
-+SRC_URI =3D "http://www.kernel.org/pub/linux/bluetooth/bluez-hcidump-${PV}=
-.tar.gz \
-+           file://obsolete_automake_macros.patch \ "
-+
-+SRC_URI[md5sum] =3D "2eab54bbd2b59a2ed4274ebb9390cf18"
-+SRC_URI[sha256sum] =3D "9b7c52b375081883738cf049ecabc103b97d094b19c6544fb2=
-41267905d88881"
-+S =3D "${WORKDIR}/bluez-hcidump-${PV}"
-+
-+inherit autotools
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf=
- b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
-new file mode 100644
-index 0000000..ca5e9e4
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
-@@ -0,0 +1,16 @@
-+<!-- This configuration file specifies the required security policies
-+     for Bluetooth core daemon to work. -->
-+
-+<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.=
-0//EN"
-+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
-+<busconfig>
-+
-+  <!-- ../system.conf have denied everything, so we just punch some=20
-+ holes -->
-+
-+  <policy context=3D"default">
-+    <allow own=3D"org.bluez"/>
-+    <allow send_destination=3D"org.bluez"/>
-+    <allow send_interface=3D"org.bluez.Agent"/>
-+  </policy>
-+
-+</busconfig>
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths=
-.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.pat=
-ch
-new file mode 100644
-index 0000000..8089914
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.pat
-+++ ch
-@@ -0,0 +1,37 @@
-+Add udevdir/udevrulesdir options
-+
-+Upstream-Status: Inappropriate [configuration]
-+Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
-+
-+Index: bluez-4.101/Makefile.am
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- bluez-4.101.orig/Makefile.am
-++++ bluez-4.101/Makefile.am
-+@@ -395,7 +395,7 @@ EXTRA_DIST +=3D audio/bluetooth.conf  include=20
-+Makefile.tools
-+=20
-+ if DATAFILES
-+-rulesdir =3D @UDEV_DIR@/rules.d
-++rulesdir =3D @UDEV_RULES_DIR@
-+=20
-+ udev_files =3D
-+=20
-+Index: bluez-4.101/configure.ac
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- bluez-4.101.orig/configure.ac
-++++ bluez-4.101/configure.ac
-+@@ -61,4 +61,14 @@ if (test -n "${path_systemdunit}"); then  fi=20
-+AM_CONDITIONAL(SYSTEMD, test -n "${path_systemdunit}")
-+=20
-++AC_ARG_WITH([udevdir],
-++    AS_HELP_STRING([--with-udevdir=3DDIR], [udev directory]),
-++    [], [with_udevdir=3D/lib/udev/])
-++AC_SUBST([UDEV_DIR], [$with_udevdir])
-++
-++AC_ARG_WITH([udevrulesdir],
-++    AS_HELP_STRING([--with-udevrulesdir=3DDIR], [udev rules directory]),
-++    [], [with_udevrulesdir=3D/lib/udev/rules.d])
-++AC_SUBST([UDEV_RULES_DIR], [$with_udevrulesdir])
-++
-+ AC_OUTPUT(Makefile doc/version.xml src/bluetoothd.8=20
-+ src/bluetooth.service bluez.pc)
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-s=
-cript.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-=
-script.patch
-new file mode 100644
-index 0000000..23f7d99
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-scrip
-+++ t.patch
-@@ -0,0 +1,26 @@
-+Upstream-Status: Inappropriate
-+
-+Install the bluez's test scripts
-+
-+Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com> diff -Nurd=20
-+bluez-4.101.orig/Makefile.tools bluez-4.101/Makefile.tools
-+--- bluez-4.101.orig/Makefile.tools	2013-11-19 15:49:07.688838000 +0800
-++++ bluez-4.101/Makefile.tools	2013-11-19 15:50:09.256837848 +0800
-+@@ -227,6 +227,17 @@
-+ 		test/service-spp.xml test/service-opp.xml test/service-ftp.xml \
-+ 		test/simple-player test/test-nap
-+=20
-++bluez4_testdir =3D $(libdir)/bluez4/test/ dist_bluez4_test_SCRIPTS =3D=20
-++test/sap-client test/hsplay test/hsmicro \
-++		test/monitor-bluetooth test/list-devices \
-++		test/test-discovery test/test-manager test/test-adapter \
-++		test/test-device test/test-service test/test-serial \
-++		test/test-telephony test/test-network test/simple-agent \
-++		test/simple-service test/simple-endpoint test/test-audio \
-++		test/test-input test/test-sap-server test/test-oob \
-++		test/test-attrib test/test-proximity test/test-thermometer \
-++		test/test-serial-proxy test/test-health test/test-health-sink \
-++		test/simple-player test/test-nap
-+ if HIDD
-+ bin_PROGRAMS +=3D compat/hidd
-+=20
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-ne=
-twork-Connect-method-parameters.patch b/meta-oe/recipes-connectivity/bluez/=
-bluez4-4.101/network-fix-network-Connect-method-parameters.patch
-new file mode 100644
-index 0000000..37f9199
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-networ
-+++ k-Connect-method-parameters.patch
-@@ -0,0 +1,30 @@
-+Upstream-Status: Backport
-+Signed-off-by: Peter A. Bigot <pab@pabigot.com>
-+
-+From 57170b311f1468330f4a9961dc0b3ac45f97bc13 Mon Sep 17 00:00:00 2001
-+From: Gustavo Padovan <gustavo.padovan@collabora.co.uk>
-+Date: Sat, 30 Jun 2012 00:39:05 -0300
-+Subject: [PATCH] network: fix network Connect() method parameters
-+
++Task-number: QTBUG-44714
++Change-Id: Ibdd1646e129eaed84c65dc0d96bebe80f2a61f4b
++Reviewed-by: Andras Becsi <andras.becsi@theqtcompany.com>
 +---
-+ network/connection.c |    4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
++ .../gstreamer/WebKitWebSourceGStreamer.cpp         | 48 +++++++++++-----------
++ 1 file changed, 24 insertions(+), 24 deletions(-)
 +
-+diff --git a/network/connection.c b/network/connection.c index
-+544ec3a..59423a9 100644
-+--- a/network/connection.c
-++++ b/network/connection.c
-+@@ -554,7 +554,9 @@ static void path_unregister(void *data)
-+=20
-+ static const GDBusMethodTable connection_methods[] =3D {
-+ 	{ GDBUS_ASYNC_METHOD("Connect",
-+-			NULL, NULL, connection_connect) },
-++				GDBUS_ARGS({"uuid", "s"}),
-++				GDBUS_ARGS({"interface", "s"}),
-++				connection_connect) },
-+ 	{ GDBUS_METHOD("Disconnect",
-+ 			NULL, NULL, connection_disconnect) },
-+ 	{ GDBUS_METHOD("GetProperties",
-+--
-+1.7.9.5
++diff --git a/Source/WebCore/platform/graphics/gstreamer/WebKitWebSourceGStreamer.cpp b/Source/WebCore/platform/graphics/gstreamer/WebKitWebSourceGStreamer.cpp
++index 5625873..a6d961f 100644
++--- a/Source/WebCore/platform/graphics/gstreamer/WebKitWebSourceGStreamer.cpp
+++++ b/Source/WebCore/platform/graphics/gstreamer/WebKitWebSourceGStreamer.cpp
++@@ -354,7 +354,7 @@ static void webKitWebSrcSetProperty(GObject* object, guint propID, const GValue*
++ 
++     switch (propID) {
++     case PROP_IRADIO_MODE: {
++-        GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++        WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++         priv->iradioMode = g_value_get_boolean(value);
++         break;
++     }
++@@ -376,7 +376,7 @@ static void webKitWebSrcGetProperty(GObject* object, guint propID, GValue* value
++     WebKitWebSrc* src = WEBKIT_WEB_SRC(object);
++     WebKitWebSrcPrivate* priv = src->priv;
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     switch (propID) {
++     case PROP_IRADIO_MODE:
++         g_value_set_boolean(value, priv->iradioMode);
++@@ -429,7 +429,7 @@ static gboolean webKitWebSrcStop(WebKitWebSrc* src)
++ 
++     ASSERT(isMainThread());
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++ 
++     bool seeking = priv->seekID;
++ 
++@@ -493,7 +493,7 @@ static gboolean webKitWebSrcStart(WebKitWebSrc* src)
++ 
++     ASSERT(isMainThread());
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++ 
++     priv->startID = 0;
++ 
++@@ -584,7 +584,7 @@ static GstStateChangeReturn webKitWebSrcChangeState(GstElement* element, GstStat
++         return ret;
++     }
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     switch (transition) {
++     case GST_STATE_CHANGE_READY_TO_PAUSED:
++         GST_DEBUG_OBJECT(src, "READY->PAUSED");
++@@ -615,7 +615,7 @@ static gboolean webKitWebSrcQueryWithParent(GstPad* pad, GstObject* parent, GstQ
++         gst_query_parse_duration(query, &format, NULL);
++ 
++         GST_DEBUG_OBJECT(src, "duration query in format %s", gst_format_get_name(format));
++-        GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++        WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++         if (format == GST_FORMAT_BYTES && src->priv->size > 0) {
++             gst_query_set_duration(query, format, src->priv->size);
++             result = TRUE;
++@@ -623,7 +623,7 @@ static gboolean webKitWebSrcQueryWithParent(GstPad* pad, GstObject* parent, GstQ
++         break;
++     }
++     case GST_QUERY_URI: {
++-        GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++        WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++         gst_query_set_uri(query, src->priv->uri);
++         result = TRUE;
++         break;
++@@ -668,7 +668,7 @@ static gchar* webKitWebSrcGetUri(GstURIHandler* handler)
++     WebKitWebSrc* src = WEBKIT_WEB_SRC(handler);
++     gchar* ret;
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     ret = g_strdup(src->priv->uri);
++     return ret;
++ }
++@@ -683,7 +683,7 @@ static gboolean webKitWebSrcSetUri(GstURIHandler* handler, const gchar* uri, GEr
++         return FALSE;
++     }
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++ 
++     g_free(priv->uri);
++     priv->uri = 0;
++@@ -719,7 +719,7 @@ static const gchar* webKitWebSrcGetUri(GstURIHandler* handler)
++     WebKitWebSrc* src = WEBKIT_WEB_SRC(handler);
++     gchar* ret;
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     ret = g_strdup(src->priv->uri);
++     return ret;
++ }
++@@ -734,7 +734,7 @@ static gboolean webKitWebSrcSetUri(GstURIHandler* handler, const gchar* uri)
++         return FALSE;
++     }
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++ 
++     g_free(priv->uri);
++     priv->uri = 0;
++@@ -772,7 +772,7 @@ static gboolean webKitWebSrcNeedDataMainCb(WebKitWebSrc* src)
++ 
++     ASSERT(isMainThread());
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     // already stopped
++     if (!priv->needDataID)
++         return FALSE;
++@@ -793,7 +793,7 @@ static void webKitWebSrcNeedDataCb(GstAppSrc*, guint length, gpointer userData)
++ 
++     GST_DEBUG_OBJECT(src, "Need more data: %u", length);
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     if (priv->needDataID || !priv->paused) {
++         return;
++     }
++@@ -807,7 +807,7 @@ static gboolean webKitWebSrcEnoughDataMainCb(WebKitWebSrc* src)
++ 
++     ASSERT(isMainThread());
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     // already stopped
++     if (!priv->enoughDataID)
++         return FALSE;
++@@ -828,7 +828,7 @@ static void webKitWebSrcEnoughDataCb(GstAppSrc*, gpointer userData)
++ 
++     GST_DEBUG_OBJECT(src, "Have enough data");
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     if (priv->enoughDataID || priv->paused) {
++         return;
++     }
++@@ -842,7 +842,7 @@ static gboolean webKitWebSrcSeekMainCb(WebKitWebSrc* src)
++ 
++     ASSERT(isMainThread());
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     // already stopped
++     if (!priv->seekID)
++         return FALSE;
++@@ -860,7 +860,7 @@ static gboolean webKitWebSrcSeekDataCb(GstAppSrc*, guint64 offset, gpointer user
++     WebKitWebSrcPrivate* priv = src->priv;
++ 
++     GST_DEBUG_OBJECT(src, "Seeking to offset: %" G_GUINT64_FORMAT, offset);
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     if (offset == priv->offset && priv->requestedOffset == priv->offset)
++         return TRUE;
++ 
++@@ -879,7 +879,7 @@ static gboolean webKitWebSrcSeekDataCb(GstAppSrc*, guint64 offset, gpointer user
++ void webKitWebSrcSetMediaPlayer(WebKitWebSrc* src, WebCore::MediaPlayer* player)
++ {
++     ASSERT(player);
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     src->priv->player = player;
++     s_cachedResourceLoader = player->cachedResourceLoader();
++ }
++@@ -906,7 +906,7 @@ char* StreamingClient::createReadBuffer(size_t requestedSize, size_t& actualSize
++     mapGstBuffer(buffer);
++ #endif
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     priv->buffer = adoptGRef(buffer);
++     locker.unlock();
++ 
++@@ -921,7 +921,7 @@ void StreamingClient::handleResponseReceived(const ResourceResponse& response)
++ 
++     GST_DEBUG_OBJECT(src, "Received response: %d", response.httpStatusCode());
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++ 
++     // If we seeked we need 206 == PARTIAL_CONTENT
++     if (priv->requestedOffset && response.httpStatusCode() != 206) {
++@@ -1020,7 +1020,7 @@ void StreamingClient::handleDataReceived(const char* data, int length)
++     WebKitWebSrc* src = WEBKIT_WEB_SRC(m_src.get());
++     WebKitWebSrcPrivate* priv = src->priv;
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++ 
++     GST_LOG_OBJECT(src, "Have %d bytes of data", priv->buffer ? getGstBufferSize(priv->buffer.get()) : length);
++ 
++@@ -1074,7 +1074,7 @@ void StreamingClient::handleNotifyFinished()
++ 
++     GST_DEBUG_OBJECT(src, "Have EOS");
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     if (!priv->seekID) {
++         locker.unlock();
++         gst_app_src_end_of_stream(priv->appsrc);
++@@ -1210,7 +1210,7 @@ void ResourceHandleStreamingClient::wasBlocked(ResourceHandle*)
++ 
++     GST_ERROR_OBJECT(src, "Request was blocked");
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     uri.set(g_strdup(src->priv->uri));
++     locker.unlock();
++ 
++@@ -1224,7 +1224,7 @@ void ResourceHandleStreamingClient::cannotShowURL(ResourceHandle*)
++ 
++     GST_ERROR_OBJECT(src, "Cannot show URL");
++ 
++-    GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
+++    WebCore::GMutexLocker locker(GST_OBJECT_GET_LOCK(src));
++     uri.set(g_strdup(src->priv->uri));
++     locker.unlock();
++ 
++-- 
++2.3.5
 +
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_autom=
-ake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete=
-_automake_macros.patch
-new file mode 100644
-index 0000000..1068f24
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_automake_
-+++ macros.patch
-@@ -0,0 +1,14 @@
-+Upstream-Status: Backport
-+
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com> diff -Nurd=20
-+bluez-4.101/configure.ac bluez-4.101/configure.ac
-+--- bluez-4.101/configure.ac	2012-06-22 19:36:49.000000000 +0300
-++++ bluez-4.101/configure.ac	2013-01-07 06:13:18.385888966 +0200
-+@@ -2,7 +2,7 @@
-+ AC_INIT(bluez, 4.101)
-+
-+ AM_INIT_AUTOMAKE([foreign subdir-objects color-tests])
-+-AM_CONFIG_HEADER(config.h)
-++AC_CONFIG_HEADERS(config.h)
-+
-+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch =
-b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
-new file mode 100644
-index 0000000..98fab45
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
-@@ -0,0 +1,24 @@
-+on x86 and x86_64 gcc 4.7 complains
-+
-+sbc/sbc_primitives_mmx.c: In function 'sbc_calc_scalefactors_mmx':
-+sbc/sbc_primitives_mmx.c:294:4: warning: asm operand 2 probably doesn't=20
-+match constraints [enabled by default]
-+sbc/sbc_primitives_mmx.c:294:4: error: impossible constraint in 'asm'
-+
-+This patch is taken from
-+https://bugs.launchpad.net/ubuntu/+source/bluez/+bug/911871
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Upstream-Status: Pending
-+Index: bluez-4.98/sbc/sbc_primitives_mmx.c
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- bluez-4.98.orig/sbc/sbc_primitives_mmx.c	2011-12-21 14:53:54.000000000=
- -0800
-++++ bluez-4.98/sbc/sbc_primitives_mmx.c	2012-02-24 10:07:03.422073800 -080=
-0
-+@@ -318,7 +318,7 @@
-+ 				"movl          %k0, 4(%3)\n"
-+ 			: "+r" (blk)
-+ 			: "r" (&sb_sample_f[0][ch][sb]),
-+-				"i" ((char *) &sb_sample_f[1][0][0] -
-++				"r" ((char *) &sb_sample_f[1][0][0] -
-+ 					(char *) &sb_sample_f[0][0][0]),
-+ 				"r" (&scale_factor[ch][sb]),
-+ 				"r" (&consts),
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pyg=
-object-instead-ofgobject-introspection.patch b/meta-oe/recipes-connectivity=
-/bluez/bluez4-4.101/use-legacy-pygobject-instead-ofgobject-introspection.pa=
-tch
-new file mode 100644
-index 0000000..37037f5
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pygobje
-+++ ct-instead-ofgobject-introspection.patch
-@@ -0,0 +1,27 @@
-+Upstream-Status: Inappropriate
-+
-+use legacy pygobject instead of gobject-introspection
-+
-+Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com>
-+---
-+diff -Nurd bluez-4.101.orig/test/simple-agent bluez-4.101/test/simple-agen=
-t
-+--- bluez-4.101.orig/test/simple-agent	2013-11-13 17:14:08.138118159 +0800
-++++ bluez-4.101/test/simple-agent	2013-11-13 17:14:29.034118107 +0800
-+@@ -2,7 +2,7 @@
-+=20
-+ from __future__ import absolute_import, print_function,=20
-+ unicode_literals
-+=20
-+-from gi.repository import GObject
-++import gobject
-+=20
-+ import sys
-+ import dbus
-+@@ -122,7 +122,7 @@
-+ 	path =3D "/test/agent"
-+ 	agent =3D Agent(bus, path)
-+=20
-+-	mainloop =3D GObject.MainLoop()
-++	mainloop =3D gobject.MainLoop()
-+=20
-+ 	if len(args) > 1:
-+ 		if len(args) > 2:
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4.inc b/meta-oe/recipe=
-s-connectivity/bluez/bluez4.inc
-new file mode 100644
-index 0000000..27e1381
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4.inc
-@@ -0,0 +1,44 @@
-+SUMMARY =3D "Linux Bluetooth Stack Userland V4"
-+DESCRIPTION =3D "Linux Bluetooth stack V4 userland components.  These incl=
-ude a system configurations, daemons, tools and system libraries."
-+HOMEPAGE =3D "http://www.bluez.org"
-+SECTION =3D "libs"
-+LICENSE =3D "GPLv2+ & LGPLv2.1+"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D12f884d2ae1ff87c09e5b7ccc2c4ca7=
-e \
-+                    file://COPYING.LIB;md5=3Dfb504b67c50331fc78734fed90fb0=
-e09 \
-+                    file://src/main.c;beginline=3D1;endline=3D24;md5=3D9bc=
-54b93cd7e17bf03f52513f39f926e \
-+                    file://sbc/sbc.c;beginline=3D1;endline=3D25;md5=3D1a40=
-781ed30d50d8639323a184aeb191"
-+DEPENDS =3D "udev libusb dbus-glib glib-2.0 libcheck readline libsndfile1"
-+RDEPENDS_${PN}-dev =3D "bluez-hcidump"
-+
-+PACKAGECONFIG ??=3D "\
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)}\
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'pie', 'pie', '', d)}\ "
-+PACKAGECONFIG[alsa] =3D "--enable-alsa,--disable-alsa,alsa-lib"
-+PACKAGECONFIG[pie] =3D "--enable-pie,--disable-pie,"
-+
-+ASNEEDED =3D ""
-+
-+SRC_URI =3D "${KERNELORG_MIRROR}/linux/bluetooth/bluez-${PV}.tar.gz"
-+S =3D "${WORKDIR}/bluez-${PV}"
-+
-+inherit autotools-brokensep pkgconfig
-+
-+EXTRA_OECONF =3D "\
-+    --disable-gstreamer \
-+    --enable-usb \
-+    --enable-tools \
-+    --enable-bccmd \
-+    --enable-hid2hci \
-+    --enable-dfutool \
-+    --disable-hidd \
-+    --disable-pand \
-+    --disable-dund \
-+    --disable-cups \
-+    --enable-test \
-+    --enable-datafiles \
-+    --with-udevdir=3D`pkg-config --variable=3Dudevdir udev` \
-+    --with-udevrulesdir=3D`pkg-config --variable=3Dudevdir udev`/rules.d \=
-=20
-+"
-+
-+EXCLUDE_FROM_WORLD =3D "1"
-diff --git a/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb b/meta-oe/r=
-ecipes-connectivity/bluez/bluez4_4.101.bb
-new file mode 100644
-index 0000000..01560b3
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
-@@ -0,0 +1,46 @@
-+require bluez4.inc
-+
-+PR =3D "r11"
-+
-+SRC_URI +=3D "file://bluetooth.conf \
-+            file://sbc_mmx.patch \
-+            file://fix-udev-paths.patch \
-+            file://obsolete_automake_macros.patch \
-+            file://network-fix-network-Connect-method-parameters.patch \
-+            file://install-test-script.patch \
-+           =20
-+file://use-legacy-pygobject-instead-ofgobject-introspection.patch \ "
-+
-+SRC_URI[md5sum] =3D "fb42cb7038c380eb0e2fa208987c96ad"
-+SRC_URI[sha256sum] =3D "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4ad=
-75fe52846f7487"
-+
-+RCONFLICTS_${PN} =3D "bluez5"
-+
-+do_install_append() {
-+    install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
-+    install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetooth=
-/
-+    install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
-+    # at_console doesn't really work with the current state of OE, so punc=
-h some more holes so people can actually use BT
-+    install -m 0644 ${WORKDIR}/bluetooth.conf=20
-+${D}/${sysconfdir}/dbus-1/system.d/
-+}
-+
-+RDEPENDS_${PN}-dev =3D "bluez-hcidump"
-+RDEPENDS_${PN}-testtools +=3D "python python-dbus python-pygobject"
-+
-+ALLOW_EMPTY_libasound-module-bluez =3D "1"
-+PACKAGES =3D+ "libasound-module-bluez ${PN}-testtools"
-+
-+FILES_libasound-module-bluez =3D "${libdir}/alsa-lib/lib*.so ${datadir}/al=
-sa"
-+FILES_${PN} +=3D "${libdir}/bluetooth/plugins ${libdir}/bluetooth/plugins/=
-*.so ${base_libdir}/udev/ ${nonarch_base_libdir}/udev/ ${systemd_unitdir}/ =
-${datadir}/dbus-1"
-+FILES_${PN}-dev +=3D "\
-+    ${libdir}/bluetooth/plugins/*.la \
-+    ${libdir}/alsa-lib/*.la \
-+"
-+
-+FILES_${PN}-testtools =3D "${libdir}/bluez4/test/*"
-+
-+FILES_${PN}-dbg +=3D "\
-+    ${libdir}/bluetooth/plugins/.debug \
-+    ${libdir}/*/.debug \
-+    */udev/.debug \
-+"
-diff --git a/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.=
-bb b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
-new file mode 100644
-index 0000000..6a16520
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
-@@ -0,0 +1,39 @@
-+require bluez4.inc
-+require recipes-multimedia/gstreamer/gst-plugins-package.inc
-+
-+PR =3D "r1"
-+
-+SRC_URI[md5sum] =3D "fb42cb7038c380eb0e2fa208987c96ad"
-+SRC_URI[sha256sum] =3D "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4ad=
-75fe52846f7487"
-+
-+DEPENDS =3D "bluez4 gst-plugins-base"
-+
-+EXTRA_OECONF =3D "\
-+    --enable-gstreamer \
-+"
-+
-+# clean unwanted files
-+do_install_append() {
-+    rm -rf ${D}${bindir}
-+    rm -rf ${D}${sbindir}
-+    rm -f  ${D}${libdir}/lib*
-+    rm -rf ${D}${libdir}/pkgconfig
-+    rm -rf ${D}${sysconfdir}
-+    rm -rf ${D}${base_libdir}
-+    rm -rf ${D}${libdir}/bluetooth
-+    rm -rf ${D}${localstatedir}
-+    rm -rf ${D}${libdir}/alsa-lib
-+    rm -rf ${D}${datadir}
-+    rm -rf ${D}${includedir}
-+    rm -rf ${D}${nonarch_base_libdir}
-+}
-+
-+FILES_${PN} =3D "${libdir}/gstreamer-0.10/lib*.so"
-+FILES_${PN}-dev +=3D "\
-+    ${libdir}/gstreamer-0.10/*.la \
-+"
-+
-+FILES_${PN}-dbg +=3D "\
-+    ${libdir}/*/.debug \
-+"
-+
---
-2.1.0
+-- 
+2.3.5
 
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
