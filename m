@@ -1,37 +1,35 @@
-Return-Path: <stephen.k.jolley@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DD9965C9C;
-	Wed, 15 Apr 2015 20:17:19 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga103.fm.intel.com with ESMTP; 15 Apr 2015 13:17:20 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,583,1422950400"; 
-	d="scan'208,217";a="714275738"
-Received: from orsmsx108.amr.corp.intel.com ([10.22.240.6])
-	by orsmga002.jf.intel.com with ESMTP; 15 Apr 2015 13:17:20 -0700
-Received: from fmsmsx115.amr.corp.intel.com (10.18.116.19) by
-	ORSMSX108.amr.corp.intel.com (10.22.240.6) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Wed, 15 Apr 2015 13:17:19 -0700
-Received: from fmsmsx111.amr.corp.intel.com ([169.254.12.17]) by
-	fmsmsx115.amr.corp.intel.com ([169.254.4.233]) with mapi id
-	14.03.0224.002; Wed, 15 Apr 2015 13:17:18 -0700
-From: "Jolley, Stephen K" <stephen.k.jolley@intel.com>
-To: "openembedded-core@lists.openembedded.org"
-	<openembedded-core@lists.openembedded.org>, "yocto@yoctoproject.org"
-	<yocto@yoctoproject.org>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "'poky@yotcoproject.org'"
-	<poky@yotcoproject.org>
-Thread-Topic: YP 1.8 Release Survey/Retrospective
-Thread-Index: AdB3uSsXsuDlF7DrTgehN+PDqw6s/Q==
-Date: Wed, 15 Apr 2015 20:17:17 +0000
-Message-ID: <9ADD3FDE8B189B4AA2F8A3C711F8155E5546B517@fmsmsx111.amr.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.200.107]
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id E67FD6ABF7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Apr 2015 20:40:32 +0000 (UTC)
+Received: by iedfl3 with SMTP id fl3so41688893ied.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Apr 2015 13:40:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=wKr+cCcIMov/3j8IPoWsRff8HW+NTgMcMLnft/dH2Iw=;
+	b=ab91sIQS2gmAQyj/SwMUcfhPmF1XVKOjBy4wou0m077H6d9e6rXTRFto3T2Ctnh/uH
+	abTh6D1yE6Og5PVRLr/XwvpAnw98HWVtuXlQiikG66URf3yO62OnTSQB/0oYIVBl+x83
+	o+XmP3AxjqnUi1gensQgvM/nzWYNh122XOiHnno/CjVNE9zG+xr0QOGRoUV0Lct7buMK
+	YyhZyQTyjdbiw4DstO496NUQ78L/NX4TJAE3Vd+OwAUXHZUaVrIbvViXLGyj2rVtUJmJ
+	ts9uW6T1g5lnGmg1RtjD0QwtTPvkM3xRvlhD7yXF3kVS15vU4/iZY7fk58916lv2XEtZ
+	5S6Q==
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: YP 1.8 Release Survey/Retrospective
+X-Received: by 10.50.30.130 with SMTP id s2mr939048igh.11.1429130433215; Wed,
+	15 Apr 2015 13:40:33 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.107.23.197 with HTTP; Wed, 15 Apr 2015 13:40:33 -0700 (PDT)
+In-Reply-To: <1428525047-18093-1-git-send-email-neena.busireddy@freescale.com>
+References: <1428525047-18093-1-git-send-email-neena.busireddy@freescale.com>
+Date: Wed, 15 Apr 2015 17:40:33 -0300
+X-Google-Sender-Auth: Y2hXSZq-VWmfPTFmptCmZHUapPc
+Message-ID: <CAP9ODKoerFB9-9a3aYB5=SBZ76MSEckkSrzj0tGzj=4TYpDBwg@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH V2] qt5nmapper: Fix compatibility issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,31 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2015 20:17:20 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 15 Apr 2015 20:40:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-All,
+On Wed, Apr 8, 2015 at 5:30 PM, Neena Busireddy
+<neena.busireddy@freescale.com> wrote:
+> qt5nmapper app fails to run with the following error:
+>
+> file:///usr/share/qt5nmapper-1.0/Qt5_NMapper.qml:34:5: Type Panel unavailable
+>          Panel {
+>          ^
+> file:///usr/share/qt5nmapper-1.0/content/Panel.qml:118:9: Type Switch unavailable
+>              Switch {
+>              ^
+> file:///usr/share/qt5nmapper-1.0/content/Switch.qml:8:21: Cannot assign a value to a signal (expecting a script to be run)
+>          property string onText: "On"
+>
+> This patch changes the string from onText to onTextstring which was introduced with Qt 5.3
+>
+> Signed-off-by: Neena Busireddy <neena.busireddy@freescale.com>
 
-Yocto Project 1.8 will be releasing this week!   YP provides a major releas=
-e every six months, and as an open source project we are always working to =
-improve our processes.  This survey is for the Yocto Project community to p=
-rovide feedback into the development process.  We would greatly appreciate =
-your participation, especially if you have participated in the development =
-process for 1.8 by writing code, submitting bugs, patches, documentation, c=
-ontributing to the wiki, or actively participating on the mailing lists or =
-IRC channels.
+I applied this but I fixed the "Upstream-Status" field which was
+lacking the '-' on it.
 
-https://www.surveymonkey.com/r/SFV7VPH
-
-Thanks for being an important part of the Yocto Project community!
-
-Stephen K. Jolley
-Yocto Project Program Manager
-INTEL, MS JF1-255, 2111 N.E. 25th Avenue, Hillsboro, OR 97124
-*   Work Telephone:          (503) 712-0534
-*    Cell:                                                (208) 244-4460
-* Email:                             stephen.k.jolley@intel.com
-
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
