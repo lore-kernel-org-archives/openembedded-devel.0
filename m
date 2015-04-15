@@ -1,33 +1,41 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id B7D646AC1E
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id DAC786AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2015 17:14:17 +0000 (UTC)
-Received: by wgsk9 with SMTP id k9so54055651wgs.3
+	Wed, 15 Apr 2015 17:16:40 +0000 (UTC)
+Received: by wgso17 with SMTP id o17so54410261wgs.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2015 10:14:18 -0700 (PDT)
+	Wed, 15 Apr 2015 10:16:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Lmp4E/VHaaD78KAI8ht6Zobk5JV+fiko4MwXaZATAK8=;
-	b=RdbuwuAnxYEExq0eyTnR2BWfeJ1KjXns6/+4Ib69sJRZ7dAsbgw4ZEnXXOPexz3q6V
-	8NXQbmP+bb+RwlyrUeJir1wBPXdtb0Zd3jKaqj8tqfBM0glIOZ32U5vhs8LSbIp0ax8A
-	sXhnA9HVMVz4AgLOm9zyQneJvCTJ/24AgeJ4C7rgqeYSRZeMp4d6wAzCOrByldp/Lv1S
-	DWfl0YVB4jryyU/saQCrYOP7MrkwtK1iiPoIkyzZuj0JZJ+UifAJpsyF2CjpVPKhx/Om
-	Q+LpB36S0VdZK9HKliAnn0Qls6+mJ4rG8lD0/MZ1q2TZ6g7uYTHcAnaEOUS1LmjxyJHj
-	0PpA==
-X-Received: by 10.194.121.68 with SMTP id li4mr49640939wjb.84.1429118058033;
-	Wed, 15 Apr 2015 10:14:18 -0700 (PDT)
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=cJHnlyGM17l+sKZLmqPASBQlwFUIKzA2AzTjMgTnZXM=;
+	b=00VtJcBQnUqo12xab14keeO0mxrZ4GcH9gMfcFxav977P9yfbTFC/1ZQbOw4/m1AmX
+	vZtPdrfeia25pT63QQfFsHNVLpcrV2Kp0tQZtwgbDS2pOsyDY6V2xWDgW6LbGyntrCsF
+	9rFSsAG2NDyTMx0Odq4ywdGhIeLGvUj3I7fOqvRTT1KG0V5s543Lwoy09/HFlO1vvHpW
+	BI8iBfaIY+BPqjbpetLv0mnO0pE4W/yGrHf4qn5KKvkYf7uhR7HXMhZeT7TxZKiM3Ylw
+	z9w1yU1lHeN0YXug1bWs3unlt0n2ISesS1qENqbJPf6rU4nlX1bYLOXBLXZRyvhGseR3
+	OIkQ==
+X-Received: by 10.194.158.234 with SMTP id wx10mr52810540wjb.23.1429118201451; 
+	Wed, 15 Apr 2015 10:16:41 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id e2sm2937524wix.15.2015.04.15.10.14.16
+	by mx.google.com with ESMTPSA id
+	df1sm22464431wib.12.2015.04.15.10.16.40
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Apr 2015 10:14:16 -0700 (PDT)
+	Wed, 15 Apr 2015 10:16:40 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Apr 2015 19:14:25 +0200
-Message-Id: <1429118065-17597-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-oe][PATCH] packagegroup-sdk-target: drop libltdl-dev dependency
+Date: Wed, 15 Apr 2015 19:16:53 +0200
+To: "Gary S. Robertson" <gary.robertson@linaro.org>
+Message-ID: <20150415171653.GB2338@jama>
+References: <20150413134540.GG2330@jama>
+	<1428985140-4170-1-git-send-email-gary.robertson@linaro.org>
+MIME-Version: 1.0
+In-Reply-To: <1428985140-4170-1-git-send-email-gary.robertson@linaro.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libhugetlbfs: x86 - don't link against host libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,35 +49,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Apr 2015 17:14:18 -0000
+X-List-Received-Date: Wed, 15 Apr 2015 17:16:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* it was removed from libtool recipe in oe-core commit:
-  commit 5e40bcd93d9ea64f1a6d75e62aabda3dcb33fc01
-  Author: Robert Yang <liezhi.yang@windriver.com>
-  Date:   Fri Apr 10 02:30:02 2015 -0700
-  Subject: libtool: remove libltdl-dev libltdl-dbg libltdl-staticdev from PACKAGES
+On Mon, Apr 13, 2015 at 11:18:59PM -0500, Gary S. Robertson wrote:
+> The x86 build linker scripts were still searching hard-coded paths on the
+> build host for libraries.  As it happens, the libraries needed for
+> linking the failing executable are present on my build host, so the build
+> succeeds here despite the erroneous linker paths.  Consequently I had
+> stupidly assumed the resulting QA warning was a fairly benign error
+> until your test build in a pristine environment demonstrated otherwise.
+>=20
+> I'm unclear as to the exact behavior shown by your log of the failed buil=
+d,
+> but since it is a linker error I am for now assuming it is precipitated
+> somehow by the flawed library search paths.  In any case with the
+> hard-coded host paths commented out I get a clean build without the QA
+> warning and see no similar logs in my local builds - so I hope this will
+> also fix the build failures on your end.
 
-    There should be only one dev and dbg package
+Thanks for quick response, but this doesn't seem to be enough:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/i586-oe-linux/gcc/i586-oe-linux/4.9.2/ld: Attempt to open /home/jenkins/=
+oe/world/shr-core/tmp-glibc/sysroots/qemux86/lib/libgcc_s.so succeeded
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -I.. -O2 -Wall -g -o obj32/zero_filesize_segment.o -c zero_filesize=
+_segment.c
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,noexecstack -=
+ldl -L../obj32 -o obj32/zero_filesize_segment -Lobj32 zero_filesize_segment=
+=2Eld obj32/zero_filesize_segment.o obj32/testutils.o -Wl,--no-as-needed -l=
+pthread -ldl -lhugetlbfs_privutils || cp bad-toolchain.sh obj32/zero_filesi=
+ze_segment
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/i586-oe-linux/gcc/i586-oe-linux/4.9.2/ld: error: zero_filesize_segment.l=
+d: SECTIONS seen after other input files; try -T/--script
+| /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libex=
+ec/i586-oe-linux/gcc/i586-oe-linux/4.9.2/ld: internal error in input_sectio=
+ns_begin, at /home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-oe-linux=
+/binutils-cross-i586/2.25-r0/git/gold/merge.h:269
+| collect2: error: ld returned 1 exit status
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -I.. -O2 -Wall -g -o obj32/linkhuge.o -c linkhuge.c
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,noexecstack -=
+ldl -L../obj32 -o obj32/linkhuge obj32/linkhuge.o obj32/testutils.o -Wl,--n=
+o-as-needed -lpthread -ldl -lhugetlbfs_privutils
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -I.. -O2 -Wall -g -o obj32/linkhuge_nofd.o -c linkhuge_nofd.c
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,noexecstack -=
+ldl -L../obj32 -o obj32/linkhuge_nofd obj32/linkhuge_nofd.o obj32/testutils=
+=2Eo -Wl,--no-as-needed -lpthread -ldl -lhugetlbfs_privutils
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -I.. -O2 -Wall -g -o obj32/linkshare.o -c linkshare.c
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,noexecstack -=
+ldl -L../obj32 -o obj32/linkshare obj32/linkshare.o obj32/testutils.o -Wl,-=
+-no-as-needed -lpthread -ldl -lhugetlbfs_privutils
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -I.. -O2 -Wall -g -o obj32/linkhuge_rw.o -c linkhuge_rw.c
+| i586-oe-linux-gcc  -m32 -march=3Di586 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,=
+--as-needed --sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/=
+qemux86 -B./obj32 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,noe=
+xecstack -ldl -L../obj32 -o obj32/linkhuge_rw -Wl,--no-as-needed -lpthread =
+-ldl -lhugetlbfs_privutils -Wl,--hugetlbfs-align obj32/linkhuge_rw.o obj32/=
+testutils.o
+| i586-oe-linux-ld: internal error in do_write, at /home/jenkins/oe/world/s=
+hr-core/tmp-glibc/work/x86_64-oe-linux/binutils-cross-i586/2.25-r0/git/gold=
+/output.cc:464
+| collect2: error: ld returned 1 exit status
 
-diff --git a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-index aafe63a..14e75dc 100644
---- a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-+++ b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
-@@ -21,7 +21,7 @@ RDEPENDS_${PN} = "gcc-symlinks g++-symlinks cpp cpp-symlinks \
-                   make \
-                   patch diffstat diffutils \
-                   libstdc++-dev \
--                  libtool libtool-dev libltdl-dev \
-+                  libtool libtool-dev \
-                   pkgconfig"
- 
- # usefull, but not in oe-core/meta-oe yet: patchutils
--- 
-2.3.5
+Please try to build qemux86 with gold (ld-is-gold in DISTRO_FEATURES) to se=
+e if you reproduce this issue.
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
