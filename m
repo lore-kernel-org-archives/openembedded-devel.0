@@ -1,54 +1,35 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 024906ABF7
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 510746ABF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Apr 2015 19:57:32 +0000 (UTC)
-Received: by widdi4 with SMTP id di4so35368431wid.0
+	Wed, 15 Apr 2015 00:46:39 +0000 (UTC)
+Received: by pabsx10 with SMTP id sx10so30441590pab.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Apr 2015 12:57:33 -0700 (PDT)
+	Tue, 14 Apr 2015 17:46:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=zgwmAjBlg/kLilKjb/OVXs9kBQ1xZduRM7mTPFhujdY=;
-	b=vQa6APJY88ww1feZS4rtdsAlrnoJK5YzBju2U3TKAEicEvXn+nCtk1h+rZt9Rb3iAY
-	4a+7u5ZGn7LesnPaN9r8GQ+q+sNPBPalOKu1ccRVIzGMNWyYr1UVsC/qhn0j87M8zR8T
-	EL9XY92Ggu12Ox4KTkhZ1UX17x/4kDzWh8s95fis6/MhedY8259zvspqqbMOJGTWtRjv
-	+85x8jztNJdFyICTAS2Gz0NyzatnXc3YMxEbCqUpdls/gQ6XPfgba9zApGWyQ3enWIC1
-	iR8BQftLfKKm5XTKMozKMzJOul8niAkFFgp2raWZQWv1HTXbHFDVqN9UEPAtHaJ5LLSc
-	r1Aw==
-X-Received: by 10.194.93.195 with SMTP id cw3mr11734615wjb.150.1429041453270; 
-	Tue, 14 Apr 2015 12:57:33 -0700 (PDT)
-Received: from [192.168.50.199] (ip-84-119-99-153.unity-media.net.
-	[84.119.99.153])
-	by mx.google.com with ESMTPSA id l3sm4151502wik.16.2015.04.14.12.57.31
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 14 Apr 2015 12:57:32 -0700 (PDT)
-Message-ID: <552D7132.6020006@gmail.com>
-Date: Tue, 14 Apr 2015 21:57:38 +0200
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>, Otavio Salvador <otavio@ossystems.com.br>
-References: <CAD0=qkK3-x3CXStZkOVqOwfZioaLq+A9XwXehVT+HdLRzGPanw@mail.gmail.com>
-	<CAEHkU3VM9sWOcBVynfQhesMXsXo5kQDabQuZLypxembQzfdePA@mail.gmail.com>
-	<551C4F35.7020001@gmail.com>
-	<CAEHkU3Xg=NSPw2gc1rmPLy3RD68BRNK5hczmS5e6tTE9gEBk+A@mail.gmail.com>
-	<551DA5BA.3050505@gmail.com>
-	<CAP9ODKqazzhOMQtsdKaGhA-1pNQOHNRQ2vvp_uXDtq+gce2gqg@mail.gmail.com>
-	<551E4A44.7050708@gmail.com>
-	<CAP9ODKr4Xz8_OLD+DKqZ1wxx4c0Rc6bdSDwqLecFnhZa2x5kVg@mail.gmail.com>
-	<CAD0=qk+2f1qORQLQzD_r8p_VaF0+mAkVu+E=yz5-zzipf7RHXQ@mail.gmail.com>
-	<CAP9ODKqgAQqCxNg=fWMC6iW1Ks3HDd4c-YroMVOgJ=doTmsWLQ@mail.gmail.com>
-	<CAD0=qkKX-6afKD8H+sD+MrVp3LRspmuieJC8T=R57ktcnJauxw@mail.gmail.com>
-	<CAP9ODKq_yN=M8-+Hbjk_NHyTGQ=oVEs=tEEQwkGWghR_LBHLfA@mail.gmail.com>
-	<CAD0=qkJNOMx5Ubn25Ugrn3fg02cq3kLjNbeV5ZBKsfWtuUXbgA@mail.gmail.com>
-	<CAP9ODKpSHPyybmcGgm36-d_s88_vuzPzWqErrLknPEFFw2Mu_w@mail.gmail.com>
-	<F0B85CB3-E0B0-40B8-9F1C-66DD05C826D6@gmail.com>
-In-Reply-To: <F0B85CB3-E0B0-40B8-9F1C-66DD05C826D6@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] Trying to update openjdk-7 to icedtea 2.5.4 and jdk75b13
+	h=from:to:subject:date:message-id;
+	bh=UsVvxu0Q2admmL5GjmhLWg1+cG5QjXgdwOgqom5rbJI=;
+	b=nxrtksuTiSOWzN46Luj2JcPXksfafLKBn/ZAyMHTP8d9tHSTQskSTPJx7UNINRRfPV
+	6jdZpFkyK9wGMmKPwdRA0+HhyVxOZZlCYO78sMKoH6oER8k1zpg1T4AonvR3UZPppLIK
+	E9+G3rbbS+HaLlK2Ydzl3Op7Ileo63ARqSzJsY1q9KRI33fwQaBVlkDgsfNrsZxPfNlW
+	ZXJXrX8lSbg+4DR/ZF5tB/zuT8aMAFsGWLz6AyMkWLc911M1uUlPEWhp+rElzF4KQXmi
+	EkRYhUEN62Ike5FnEWtnugvIcskgEKW4HkEkyQZiCUZFsYACkCJSc1CnKI77LmkTqbcz
+	7ybA==
+X-Received: by 10.67.4.138 with SMTP id ce10mr41433925pad.102.1429058801186;
+	Tue, 14 Apr 2015 17:46:41 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id x1sm2283355pdp.1.2015.04.14.17.46.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 14 Apr 2015 17:46:40 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Apr 2015 17:46:36 -0700
+Message-Id: <1429058796-30801-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-ruby][PATCH] ruby: Update to 2.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,66 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Apr 2015 19:57:38 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 15 Apr 2015 00:46:42 -0000
 
-Hi Khem,
+Includes among other things: CVE-2015-1855: Ruby OpenSSL Hostname Verification
 
-Am 14.04.2015 um 05:46 schrieb Khem Raj:
-> 
->> On Apr 13, 2015, at 8:27 AM, Otavio Salvador <otavio@ossystems.com.br> wrote:
->>
->> Hello Sven,
->>
->> I really appreciate your work. Thanks for all the hard work on this :)
->>
->> On Mon, Apr 13, 2015 at 4:38 AM, Sven Ebenfeld <sven.ebenfeld@gmail.com> wrote:
->>> After a week of testing these recipes, I fixed some issues in the new
->>> recipes. Therefore I just submitted new versions of the patchset.
->>> I removed the patches for uclibc as I'm unable to test it at the
->>> moment. While trying to build it with uclibc, I always got errors with
->>> compiling curl. Unfortunately I don't have the time to fix these
+for more info see:
+http://svn.ruby-lang.org/repos/ruby/tags/v2_2_2/ChangeLog
 
-Sry, it was not curl, it was cups that leads to errors.
+also, fixed runtime error.
+only include "enable-wide-getaddrinfo" if IVP6 is enabled in disto feature
+otherwise 'gem install rails' throws an error for the missing symbol 'getipnodebyname'.
 
->>> errors at the moment as we use glibc. If one uses uclibc, it may not
->>> work atm.
->>
->> Khem, I have put those patches into master-next branch. Is it possible
->> for you to take a look on the uClibC thing?
->>
-> 
-> I don’t have uclibc setup either right now. post your errors in detail and may be there can be help
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-ruby/recipes-devtools/ruby/{ruby_2.2.1.bb => ruby_2.2.2.bb} | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-ruby/recipes-devtools/ruby/{ruby_2.2.1.bb => ruby_2.2.2.bb} (77%)
 
-I've tried to build java-test-image for qemuarm machine and get the
-following error during do_compile of cups:
+diff --git a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb b/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
+similarity index 77%
+rename from meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
+rename to meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
+index 29f2291..c463525 100644
+--- a/meta-ruby/recipes-devtools/ruby/ruby_2.2.1.bb
++++ b/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
+@@ -1,7 +1,7 @@
+ require ruby.inc
+ 
+-SRC_URI[md5sum] = "b49fc67a834e4f77249eb73eecffb1c9"
+-SRC_URI[sha256sum] = "5a4de38068eca8919cb087d338c0c2e3d72c9382c804fb27ab746e6c7819ab28"
++SRC_URI[md5sum] = "326e99ddc75381c7b50c85f7089f3260"
++SRC_URI[sha256sum] = "5ffc0f317e429e6b29d4a98ac521c3ce65481bfd22a8cf845fa02a7b113d9b44"
+ 
+ # it's unknown to configure script, but then passed to extconf.rb
+ # maybe it's not really needed as we're hardcoding the result with
+@@ -9,11 +9,13 @@ SRC_URI[sha256sum] = "5a4de38068eca8919cb087d338c0c2e3d72c9382c804fb27ab746e6c78
+ UNKNOWN_CONFIGURE_WHITELIST += "--enable-wide-getaddrinfo"
+ 
+ PACKAGECONFIG ??= ""
++PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
++
+ PACKAGECONFIG[valgrind] = "--with-valgrind=yes, --with-valgrind=no, valgrind"
+ PACKAGECONFIG[gpm] = "--with-gmp=yes, --with-gmp=no, gmp"
++PACKAGECONFIG[ipv6] = ",--enable-wide-getaddrinfo,"
+ 
+ EXTRA_OECONF = "\
+-    --enable-wide-getaddrinfo \
+     --disable-versioned-paths \
+     --disable-rpath \
+     --enable-shared \
+-- 
+2.3.5
 
-|
-/home/esven/openembedded/oe-core/build-java/tmp-uclibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-uclibceabi/gcc/arm-oe-linux-uclibceabi/4.9.2/ld:
-process.o: undefined reference to symbol 'posix_spawn_file_actions_addopen'
-|
-/home/esven/openembedded/oe-core/build-java/tmp-uclibc/sysroots/qemuarm/lib/librt.so.0:
-error adding symbols: DSO missing from command line
-| collect2: error: ld returned 1 exit status
-| make[1]: *** [cupsd] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-|
-/home/esven/openembedded/oe-core/build-java/tmp-uclibc/sysroots/qemuarm/usr/lib/libssp.so:
-warning: the 'gets' function is dangerous and should not be used.
-| ../cups/libcups.so: warning: gethostbyname is obsolescent, use
-getnameinfo() instead.
-| make: *** [all] Error 1
-| ERROR: oe_runmake failed
-| WARNING:
-/home/esven/openembedded/oe-core/build-java/tmp-uclibc/work/armv5e-oe-linux-uclibceabi/cups/2.0.2-r0/temp/run.do_compile.16053:1
-exit 1 from
-|   exit 1
-| ERROR: Function failed: do_compile (log file is located at
-/home/esven/openembedded/oe-core/build-java/tmp-uclibc/work/armv5e-oe-linux-uclibceabi/cups/2.0.2-r0/temp/log.do_compile.16053)
-ERROR: Task 1001
-(/home/esven/openembedded/oe-core/meta/recipes-extended/cups/cups_2.0.2.bb,
-do_compile) failed with exit code '1'
-
-Do you have any idea what is causing this issue?
 
