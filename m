@@ -1,35 +1,37 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-yh0-f48.google.com (mail-yh0-f48.google.com
-	[209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id C946A73D0B
+Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 87A6873D0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 15:17:44 +0000 (UTC)
-Received: by yhcb70 with SMTP id b70so4514817yhc.0
+	Thu, 16 Apr 2015 15:18:03 +0000 (UTC)
+Received: by yhda23 with SMTP id a23so4520810yhd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 08:17:45 -0700 (PDT)
+	Thu, 16 Apr 2015 08:18:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=+G4jBclJVW66dotQTZHN2HJs2MvJz4tZLhWpMYTlL4A=;
-	b=HnjLx37nNLC/3UEsSWVI7Vyga6E0dAIxdjM8IPzyuNd+HhBRNJyRVe+rRWvENjmXe1
-	WeYerrvifjFsJKXmJvkD4QKTF6M7Vk/NYMwVryLiJlels/peTfWRIVLVHRjhQb9topQV
-	Gi7kU18rFfOZn1hsJyRD+kBf2DVEb3fuD8VLwFT2SXMW0C/oa6S/VmVmm4NPjQEsxmbA
-	UwD4SQUFEYBsAEUXYDeOZ/UrnyYgnp4mb/0W926H9dhj29vJq5CWE8Tamh1wmODLBza/
-	7JKV/2OTU8jploi3Tyh6PtlcnrVmW5juZ8wrNBH9bKkl7ealRmuzREDTcsMOD/mNIepA
-	G4CQ==
-X-Received: by 10.170.94.2 with SMTP id l2mr18312434yka.45.1429197465548;
-	Thu, 16 Apr 2015 08:17:45 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=7zt3WfpGYXj9AOOU1NBJ1CJN2Y9v4MlIeDG6KFQrncc=;
+	b=gJ3SYaQl/2NfJoQzmBNmq2hEaqSfif/fKchhc9vytJlLtbUwHSmuYsKh30GSUh62vM
+	NVrbe0UIdg/HuaszVetsuttCVdgH6GN3C7JoVLzFd/aNlzGlQ7OFXIRzkXX8li3t/GE1
+	xMda6LvjiqYy/P3NrM/tdPyicCGN11rtX4UBFcbBEEdZ5l7+9TLT6tJXbSqeEW7J5Pie
+	n8V3vlE4YrSx/u0x4hxyMEd681IlXf9R1Jd7+WPz+0I1pJdeKtTNpig6UQXTPWZ+atUu
+	ASeEyXGSuPDY1kNAmsoCM3Ru5y2KHSGthziMCr/I8XeykG+83NnVe0nU8CuR8jL/odc+
+	9vdw==
+X-Received: by 10.170.95.85 with SMTP id m82mr28484379yka.55.1429197485352;
+	Thu, 16 Apr 2015 08:18:05 -0700 (PDT)
 Received: from localhost.localdomain.localdomain
 	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by mx.google.com with ESMTPSA id f68sm5836059yhc.54.2015.04.16.08.17.41
+	by mx.google.com with ESMTPSA id f47sm5838584yho.52.2015.04.16.08.18.04
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 16 Apr 2015 08:17:44 -0700 (PDT)
+	Thu, 16 Apr 2015 08:18:04 -0700 (PDT)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Apr 2015 08:16:29 -0700
-Message-Id: <cover.1429196681.git.TicoTimo@gmail.com>
+Date: Thu, 16 Apr 2015 08:17:39 -0700
+Message-Id: <b15c2e1bffe74ad299c7b6f88943313d527bb4fe.1429196681.git.TicoTimo@gmail.com>
 X-Mailer: git-send-email 2.1.0
-Subject: [meta-python][PATCH 0/7] python-cryptography support
+In-Reply-To: <cover.1429196681.git.TicoTimo@gmail.com>
+References: <cover.1429196681.git.TicoTimo@gmail.com>
+Subject: [meta-python][PATCH 1/7] python-cffi/python-pycparser: enable native build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,56 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2015 15:17:44 -0000
+X-List-Received-Date: Thu, 16 Apr 2015 15:18:04 -0000
 
-Since 0.14, python-pyopenssl requires python-cryptography.
-This series of patches provides support for python-cryptography
-and ptest for python-cryptography.
+Signed-off-by: Tim Orling <TicoTimo@gmail.com>
+---
+ meta-python/recipes-devtools/python/python-cffi_0.9.2.bb     | 2 ++
+ meta-python/recipes-devtools/python/python-pycparser_2.10.bb | 2 ++
+ 2 files changed, 4 insertions(+)
 
-Requires fractions module, provided for python 2.7.x by:
-http://git.openembedded.org/openembedded-core/commit/?id=ac09a1830fffb6aded499ade55c039e35202867e
-
-python3 patch is in oe-core master-next:
-http://git.openembedded.org/openembedded-core/commit/?h=master-next&id=d8482c74d2a7bb68ca9cc1623973e6778d714430
-
-The following changes since commit 415a90c67f296f8816acd4d933298b101f8e830c:
-
-  postfix: add LSB init infos (2015-04-15 22:43:37 -0400)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib timo/python-cryptography
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=timo/python-cryptography
-
-Tim Orling (7):
-  python-cffi/python-pycparser: enable native build
-  python-py: add 1.4.26
-  python-pytest: add 2.7.0
-  python-iso8601: add 0.1.10
-  python-pretend: add 0.8.1
-  python-pyasn1: add 0.1.7
-  python-cryptography,-vectors: add 0.8.1
-
- .../recipes-devtools/python/python-cffi_0.9.2.bb   |  2 +
- .../python/python-cryptography-vectors_0.8.1.bb    | 14 +++++++
- .../python/python-cryptography/run-ptest           |  2 +
- .../python/python-cryptography_0.8.1.bb            | 46 ++++++++++++++++++++++
- .../python/python-iso8601_0.1.10.bb                |  8 ++++
- .../python/python-pretend_1.0.8.bb                 |  8 ++++
- .../recipes-devtools/python/python-py_1.4.26.bb    |  8 ++++
- .../recipes-devtools/python/python-pyasn1_0.1.7.bb | 16 ++++++++
- .../python/python-pycparser_2.10.bb                |  2 +
- .../recipes-devtools/python/python-pytest_2.7.0.bb | 10 +++++
- 10 files changed, 116 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-cryptography-vectors_0.8.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-cryptography/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-iso8601_0.1.10.bb
- create mode 100644 meta-python/recipes-devtools/python/python-pretend_1.0.8.bb
- create mode 100644 meta-python/recipes-devtools/python/python-py_1.4.26.bb
- create mode 100644 meta-python/recipes-devtools/python/python-pyasn1_0.1.7.bb
- create mode 100644 meta-python/recipes-devtools/python/python-pytest_2.7.0.bb
-
+diff --git a/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb b/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
+index 6c34b67..90d8099 100644
+--- a/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
++++ b/meta-python/recipes-devtools/python/python-cffi_0.9.2.bb
+@@ -7,3 +7,5 @@ SRC_URI[md5sum] = "b1bf4625ae07a8a932f2f1a2eb200c54"
+ SRC_URI[sha256sum] = "1988ce7ff9c64ecd5077776175e90fd8f0a8c827cb241a23647175ce08126bb2"
+ 
+ inherit pypi
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-pycparser_2.10.bb b/meta-python/recipes-devtools/python/python-pycparser_2.10.bb
+index bee4052..fbb6486 100644
+--- a/meta-python/recipes-devtools/python/python-pycparser_2.10.bb
++++ b/meta-python/recipes-devtools/python/python-pycparser_2.10.bb
+@@ -6,3 +6,5 @@ SRC_URI[md5sum] = "d87aed98c8a9f386aa56d365fe4d515f"
+ SRC_URI[sha256sum] = "957d98b661c0b64b580ab6f94b125e09b6714154ee51de40bca16d3f0076b86c"
+ 
+ inherit pypi
++
++BBCLASSEXTEND = "native"
 -- 
 2.1.0
 
