@@ -1,38 +1,41 @@
-Return-Path: <eric@eukrea.com>
-X-Greylist: delayed 28798 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 16 Apr 2015 00:42:53 UTC
-Received: from 13.mo1.mail-out.ovh.net (13.mo1.mail-out.ovh.net
-	[178.33.253.128])
-	by mail.openembedded.org (Postfix) with ESMTP id 728C16AC1E
+Return-Path: <joe@deserted.net>
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 06B0B73D17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 00:42:53 +0000 (UTC)
-Received: from mail183.ha.ovh.net (b6.ovh.net [213.186.33.56])
-	by mo1.mail-out.ovh.net (Postfix) with SMTP id ED2FBFFA97E
+	Thu, 16 Apr 2015 04:12:58 +0000 (UTC)
+Received: by iejt8 with SMTP id t8so43176009iej.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2015 18:24:16 +0200 (CEST)
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 15 Apr 2015 18:24:16 +0200
-Received: from pac33-3-88-170-243-169.fbx.proxad.net (HELO
-	e6520eb.localdomain) (eric%eukrea.com@88.170.243.169)
-	by ns0.ovh.net with SMTP; 15 Apr 2015 18:24:14 +0200
-Date: Wed, 15 Apr 2015 18:24:13 +0200
-From: Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>
-To: martin.jansa@gmail.com, koen@dominion.thruhere.net
-Message-ID: <20150415182413.4eb934a3@e6520eb.localdomain>
-Organization: =?UTF-8?B?RXVrcsOpYQ==?= Electromatique
-X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.27; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 10424988712885202249
-X-Ovh-Remote: 88.170.243.169 (pac33-3-88-170-243-169.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-OVH-SPAMSTATE: OK
-X-OVH-SPAMSCORE: 0
-X-OVH-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeektddrgeehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeektddrgeehucetufdoteggodetrfcurfhrohhfihhlvgemucfqggfjnecuuegrihhlohhuthemuceftddtnecu
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [dora] request to cherry-pick
+	Wed, 15 Apr 2015 21:13:00 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:subject:date:message-id
+	:in-reply-to:references;
+	bh=VZFQp0uXM6w6nJFr5picevH8i6otgOaUkwszFkam3cw=;
+	b=ZUUoHYAuIrGXFRMjN+dlZv5PS9obsb4k7PHzEej6h+PPkUSFpn+PxvA8KN6euNu7mC
+	vx94FuVdbISIFE8yRiFKrzJugmuULIwjPvkFBAren0JPH9h6FebfDSJHDBsX6L2YCtT9
+	KM3SFZzrt7yATC9QfxoxjzeE1XFWF5BtFVAJ1ey0Q2s3lgpCiJgxKlPzgXPIDbZ2oRNx
+	AdvOeNlzBTc0jTyTXvtZ8wX7VNyxIYsWk9M9ZPF8rt3o/BP0r+/my3yXE4jai+QkRlZK
+	yUjoH6YrpftCpOGbVsec9iSPxYZBep+t2RBl5Miq8q4pYtT2qen/wQT8uap3wV21A6eG
+	ipZQ==
+X-Gm-Message-State: ALoCoQmgoZELOfELnRk9AAXWSfoSYrvH1/M9MROb+K17kDHbaaWx+n0xAdKkeMni+bA+N4tyoFYe
+X-Received: by 10.50.61.175 with SMTP id q15mr2885682igr.34.1429157580016;
+	Wed, 15 Apr 2015 21:13:00 -0700 (PDT)
+Received: from mir.deserted.net (24-246-4-250.cable.teksavvy.com.
+	[24.246.4.250])
+	by mx.google.com with ESMTPSA id w33sm3777380ioi.17.2015.04.15.21.12.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 15 Apr 2015 21:12:59 -0700 (PDT)
+Sender: Joe MacDonald <joe@deserted.net>
+From: Joe MacDonald <joe_macdonald@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Apr 2015 00:14:26 -0400
+Message-Id: <1429157668-4952-2-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
+References: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
+Subject: [meta-networking, for-fido][PATCH 2/4] vsftpd / init: add LSB init infos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,17 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2015 00:42:59 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Apr 2015 04:12:59 -0000
 
-Hi Martin and Koen,
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-is it please possible to cherry-pick
-9c762b824cbf7ecd9ce7f7859d22ff89c59fa28d
-"evtest: Stop using Cgit based archive"
-into dora to fix evtest fetch issue ?
+Keep compatibility with chkconfig tool.
 
-Thanks
-Eric
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
+ meta-networking/recipes-daemons/vsftpd/files/init | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/meta-networking/recipes-daemons/vsftpd/files/init b/meta-networking/recipes-daemons/vsftpd/files/init
+index d0ec010..72adf0d 100755
+--- a/meta-networking/recipes-daemons/vsftpd/files/init
++++ b/meta-networking/recipes-daemons/vsftpd/files/init
+@@ -1,4 +1,13 @@
+ #!/bin/sh
++### BEGIN INIT INFO
++# Provides: vsftpd
++# Default-Start:  2345
++# Default-Stop:   016
++# Short-Description: Very Secure Ftp Daemon
++# Description: vsftpd is a Very Secure FTP daemon. It was written completely from
++#              scratch
++### END INIT INFO
++
+ DAEMON=/usr/sbin/vsftpd
+ NAME=vsftpd
+ DESC="FTP Server"
+-- 
+1.9.1
+
 
