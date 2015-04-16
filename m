@@ -1,38 +1,41 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
-	[209.85.213.178])
-	by mail.openembedded.org (Postfix) with ESMTP id BA18673D17
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id C6C9C73D17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 04:12:57 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so2413881igb.0
+	Thu, 16 Apr 2015 04:13:00 +0000 (UTC)
+Received: by iget9 with SMTP id t9so2391755ige.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2015 21:12:58 -0700 (PDT)
+	Wed, 15 Apr 2015 21:13:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=mkSP9orzb8DqcIvjYUHufXulsubCKYcV09zgN0CfnB4=;
-	b=IoQf1MK73zRrPOzmCIqwrroCj5a8SNlyAyRbTgXHxIMc5x7ilUGmdMOZJD6mzxEbsl
-	581QPEUKjdJYWRhdsFpZ3DS/xJak6rFDy791s8ymDBx8HAwSyzBecOSTwOoKqekoUtb7
-	aX+OIJ2r1R1ABrIXpm1oT/9EjhvyL7afgegtr9XPgqAm9GO1bNysyLjrvsF1XFSmPbzB
-	qao+vFBq6OxS2alaa10lKvF2HLxkC0D5MHxNpb1YhxxOtaFyM97PMHBxx1X1+5o0lfIc
-	9EnXsgHIdDVy+Mv6Vc6CYy8JGfI4brZGNpvKY1tp5kBH3hRgk3pkmzXNYC8HCCC1qrxH
-	Kb0A==
-X-Gm-Message-State: ALoCoQnfq6L4PoICCrBMgzyD2eFLrlkF+s6EHJwf9aDil+t/fnUj7sozhnlQjsrW9gAMtPd3Bvpg
-X-Received: by 10.50.30.202 with SMTP id u10mr2870432igh.28.1429157578479;
-	Wed, 15 Apr 2015 21:12:58 -0700 (PDT)
+	h=x-gm-message-state:sender:from:to:subject:date:message-id
+	:in-reply-to:references;
+	bh=XwCC/pLHacfDBxPBmaHOIqFt8hHeSOZMEdNXFav/p1k=;
+	b=ikMZeb5DyXDitaCWmoTuXtkY5KRB0jscDqtOiA3Ltq9TrtU3iLzAAhrma0A5sRWgs4
+	nySIOSPUi83z0gybxhHUuA81ftsHqxuLepfk8DdD7fW/7TjTaWn644B8GdhEJfHGxZdb
+	2uJax1Ha/9dk32H3K8X099CmqbEBYREX3QbhV90LlUc1sWhbMkVIrL133oEBW9MJ8Cqt
+	osM8GsLPSLJIy+82rtCOJBpzLAn14vIXWHpkwOGsRHibSdVzO6Y2krUm42KVk7hGM/8i
+	PLD6du2LoMQ8H0nIuGaesWRohJRLjdWHmfQ1rNlQsIa/Aoyz2Fa3BpKSpf2sPIW6SKuI
+	aV2g==
+X-Gm-Message-State: ALoCoQnYYxtT0fil5MS09Qqk+z3dNpQfHrwdJkQRJ19K7Y0FhydKT2lirlIZnch88XXw/29PcKoX
+X-Received: by 10.50.127.232 with SMTP id nj8mr2858227igb.32.1429157581775;
+	Wed, 15 Apr 2015 21:13:01 -0700 (PDT)
 Received: from mir.deserted.net (24-246-4-250.cable.teksavvy.com.
 	[24.246.4.250])
-	by mx.google.com with ESMTPSA id w33sm3777380ioi.17.2015.04.15.21.12.56
+	by mx.google.com with ESMTPSA id w33sm3777380ioi.17.2015.04.15.21.13.00
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 15 Apr 2015 21:12:57 -0700 (PDT)
+	Wed, 15 Apr 2015 21:13:00 -0700 (PDT)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Apr 2015 00:14:25 -0400
-Message-Id: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
+Date: Thu, 16 Apr 2015 00:14:27 -0400
+Message-Id: <1429157668-4952-3-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking, for-fido][PATCH 1/4] postfix: add LSB init infos
+In-Reply-To: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
+References: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
+Subject: [meta-networking, for-fido][PATCH 3/4] vpnc: don't rdepend on kernel-module-tun
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,36 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2015 04:13:00 -0000
+X-List-Received-Date: Thu, 16 Apr 2015 04:13:01 -0000
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Andreas Oberritter <obi@opendreambox.org>
 
-Keep compatibility with chkconfig tool.
+Kernel modules may be built-in, so rrecommend it instead.
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- meta-networking/recipes-daemons/postfix/files/postfix | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/postfix b/meta-networking/recipes-daemons/postfix/files/postfix
-index 7bcc816..0ea67ef 100755
---- a/meta-networking/recipes-daemons/postfix/files/postfix
-+++ b/meta-networking/recipes-daemons/postfix/files/postfix
-@@ -1,4 +1,12 @@
- #!/bin/sh
-+### BEGIN INIT INFO
-+# Provides: postfix MTA
-+# Default-Start: 2345
-+# Default-Stop: 016
-+# Short-Description: start and stop postfix
-+# Description: Postfix is a Mail Transport Agent, which is the program
-+#              that moves mail from one machine to another.
-+### END INIT INFO
+diff --git a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+index 4efc412..151aaf9 100644
+--- a/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
++++ b/meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+@@ -25,7 +25,8 @@ do_install () {
+ }
  
- success() {
-         echo " Successful"
+ CONFFILES_${PN} = "${sysconfdir}/vpnc/default.conf"
+-RDEPENDS_${PN} = "kernel-module-tun perl-module-io-file"
++RDEPENDS_${PN} = "perl-module-io-file"
++RRECOMMENDS_${PN} = "kernel-module-tun"
+ 
+ SRC_URI = "http://www.unix-ag.uni-kl.de/~massar/vpnc/vpnc-${PV}.tar.gz \
+            file://makeman.patch \
 -- 
 1.9.1
 
