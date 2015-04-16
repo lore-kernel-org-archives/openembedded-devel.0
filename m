@@ -1,32 +1,23 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 483BC73D0B
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F1C57226D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 04:18:23 +0000 (UTC)
-Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
-	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1YibFw-0006Lk-Qv from Joe_MacDonald@mentor.com ;
-	Wed, 15 Apr 2015 21:18:24 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
-	(147.34.96.168) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 15 Apr 2015 21:18:24 -0700
-Received: by burninator (Postfix, from userid 1000)	id 6C5B7582544; Thu, 16
-	Apr 2015 00:18:39 -0400 (EDT)
-Date: Thu, 16 Apr 2015 00:18:39 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20150416041839.GA4366@mentor.com>
-References: <20150310133030.GA2340@jama>
- <20150413110235.GC2330@jama>
+	Thu, 16 Apr 2015 08:35:06 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3G8Z73e013806
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 16 Apr 2015 01:35:08 -0700 (PDT)
+Received: from lirq-OptiPlex-780.wrs.com (128.224.162.139) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.224.2; Thu, 16 Apr 2015 01:35:07 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
+Date: Thu, 16 Apr 2015 16:35:05 +0800
+Message-ID: <1429173305-443-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-In-Reply-To: <20150413110235.GC2330@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-networking pending patches
+Subject: [PATCH][meta-networking] netkit-telnet: support the cross-compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,90 +31,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2015 04:18:26 -0000
-X-Groupsio-MsgNum: 55095
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qMm9M+Fa2AknHoGS"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Apr 2015 08:35:06 -0000
+Content-Type: text/plain
 
---qMm9M+Fa2AknHoGS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Roy Li <rongqing.li@windriver.com>
 
-Hi Martin,
+when check the CC, only compile the object by CC, not run the object.
+MCONFIG file includes more configuration, we can not clear it
 
-[Re: meta-networking pending patches] On 15.04.13 (Mon 13:02) Martin Jansa =
-wrote:
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../netkit-telnet/files/cross-compile.patch        | 48 ++++++++++++++++++++++
+ .../netkit-telnet/netkit-telnet_0.17.bb            |  6 ++-
+ 2 files changed, 53 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch
 
-> On Tue, Mar 10, 2015 at 02:30:30PM +0100, Martin Jansa wrote:
-> > Hi Joe,
-> >=20
-> > can you please check pending meta-networking patches?
-> >=20
-> > my master-next shows:
-> > pick e7be331 openl2tp: add new recipe
-> > pick 64461e1 ipvsadm: Add version 1.26 (initial recipe)
-> > pick f5ba5af netkit-telnet: add new recipe
-> > pick 1e6dd99 iscsi-initiator-utils: fix SELinux label for initiatorname=
-=2Eiscsi
-> > pick 8a09ac6 vlan: install vconfig into /sbin same as Ubuntu and Fedora.
-> > pick 6fdadbe stunnel: Update to version 5.10
-> > pick e74b325 postfix: add link file /usr/lib/sendmail
-> > pick 64de50c wireshark: update to 12.4
-> > pick 4428a44 crda: move libnl, libgcrypt to DEPENDS
-> > pick 5cd9417 esmtp: update sendmail link files
-> >=20
-> > and few more are in patchwork:
-> > http://patchwork.openembedded.org/bundle/jama/meta-networking/?archive=
-=3Dboth
->=20
-> Another round pending in my master-next:
->=20
-> pick 6a89b66 ipvsadm: Add version 1.26 (initial recipe)
-> pick 5f63e35 wolfssl: change name from cyassl to wolfssl, update to versi=
-on 3.4.0
-> pick 446c0cf vpnc: don't rdepend on kernel-module-tun
-> pick e44ecd9 vsftpd / init: add LSB init infos
-> pick 5033f44 postfix: add LSB init infos
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch b/meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch
+new file mode 100644
+index 0000000..b3fe36b
+--- /dev/null
++++ b/meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch
+@@ -0,0 +1,48 @@
++To support the cross-compile
++
++Upstream-Status: Pending
++
++make the configure to support the cross-compile, by only to compile the
++target, and not to run it
++
++Roy Li <rongqing.li@windriver.com>
++Index: netkit-telnet-0.17/configure
++===================================================================
++--- netkit-telnet-0.17.orig/configure	2008-11-23 22:01:26.000000000 +0100
+++++ netkit-telnet-0.17/configure	2008-11-23 22:05:00.000000000 +0100
++@@ -94,7 +94,7 @@
++     echo -n 'Checking if C compiler works... '
++     if (
++           $CC __conftest.c -o __conftest || exit 1
++-          ./__conftest || exit 1
+++          # Idiots belong shot! ./__conftest || exit 1
++        ) >/dev/null 2>&1; then
++          echo 'yes'
++      else
++@@ -141,7 +141,7 @@
++     echo -n 'Checking if C++ compiler works... '
++     if (
++           $CXX __conftest.cc -o __conftest || exit 1
++-          ./__conftest || exit 1
+++          # Iditios belong shot! ./__conftest || exit 1
++        ) >/dev/null 2>&1; then
++          echo 'yes'
++      else
++@@ -284,7 +284,7 @@
++ else
++     if (
++           $CXX $CXXFLAGS -D__USE_BSD_SIGNAL __conftest.cc  -o __conftest || exit 1
++-          ./__conftest || exit 1
+++          # running still does not work./__conftest || exit 1
++        ) >/dev/null 2>&1; then
++         echo '-D__USE_BSD_SIGNAL'
++         CFLAGS="$CFLAGS -D__USE_BSD_SIGNAL"
++@@ -501,7 +501,7 @@
++ EOF
++ if (
++       $CXX $CXXFLAGS  __conftest.cc $LIBBSD -o __conftest || exit 1
++-      ./__conftest || exit 1
+++      # argh! morons!./__conftest || exit 1
++    ) >/dev/null 2>&1; then
++     echo 'ok'
++ else
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+index a2dc1c2..6b2e72f 100644
+--- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+@@ -8,6 +8,7 @@ SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
+     file://To-aviod-buffer-overflow-in-telnet.patch \
+     file://Warning-fix-in-the-step-of-install.patch \
+     file://telnet-xinetd \
++    file://cross-compile.patch \
+ "
+ 
+ EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
+@@ -15,7 +16,10 @@ EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
+ 
+ do_configure () {
+     ./configure --prefix=${prefix}
+-    echo "LDFLAGS=${LDFLAGS}" > MCONFIG
++    sed -e 's#^CFLAGS=\(.*\)$#CFLAGS= -D_GNU_SOURCE \1#' \
++        -e 's#^CXXFLAGS=\(.*\)$#CXXFLAGS= -D_GNU_SOURCE \1#' \
++        -e 's#^LDFLAGS=.*$#LDFLAGS= ${LDFLAGS}#' \
++        -i MCONFIG
+ }
+ 
+ do_compile () {
+-- 
+2.1.0
 
-Merged and the patches are updated in patchworks.  Most were simple, the
-ipvsadm one had been outstanding for quite a while as I'd requested
-changes in it.  I merged the patch from master-next and made the
-correction myself before pushing it, since I never did see a v4 and
-there wasn't an obvious update in patchworks.
 
->=20
-> I plan to create "fido" branch today, so all these will need to go
-> through fido maintainers if you want to merge them in fido release as
-> well.
-
-I sent out patches tagged for-fido, since I missed the window to get
-them merged prior to the branch by a few days.
-
--J.
-
->=20
-> Regards,
->=20
---=20
--Joe MacDonald.
-:wq
-
---qMm9M+Fa2AknHoGS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVLzgWAAoJEEn8ffcsOfaWt5EH/RbU6R0SqAvb2/ncfeciV890
-L1Wxir5REDHhMsClKcv+iEWGjUdQontmWWHwGmQ/XV051u9oAFy1WwYmnXH56cIl
-vuakqbpvUu8YQLXX6kzi0dKQtQe0UDs1XyT0EDJuAZ1f3YrNbfwyWOX1tWMf2OZm
-O1w41HD09HtAQFnFT36J8eSGP8lAAnAIdh2IQ34ud3yVn3a5UzvAWe9X4TAx+z18
-Qydw3N2DQhtPuzysMjWgPNDynLfZQMh/BAZAUZtXqLndn9TbNRsC5W/xgha6MY7y
-wUCySPDQO42SJctl682N/E7+n0Zl90abmp4vMqx6kwH/fAKqaGe/aufl3m4tQYU=
-=pN1q
------END PGP SIGNATURE-----
-
---qMm9M+Fa2AknHoGS--
