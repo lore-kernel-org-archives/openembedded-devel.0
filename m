@@ -1,40 +1,56 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-yh0-f43.google.com (mail-yh0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 37DED73D59
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 15:18:23 +0000 (UTC)
-Received: by yhcb70 with SMTP id b70so4517628yhc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 08:18:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=D9mG4jamKkufyn9qkXB/PYOVPyR37ijBobWqjM9tlXg=;
-	b=z2tdybJz2gTh4MFsjQ+i1/zn61/O8HivKMg3OptyHbHYBblJjufMH9ABM52htuHAWN
-	ER6OUF4j0YJ/PHZgjA/CpITIRf8QAluBHuMm9nCDLBLx/rjilR2kpxDUhKY3zV9Fkm9i
-	RWFRNPnARlpCUiNaVtOcAACOGYIgqGwe4EDCVTF+ZNmanHq/76gBuUpUEZ0URBqBt0xG
-	fITCRZnUwMd0theAndxWGkuEAiquEA60kO7ODE7idrJ7NA6IP3oSntKkRChlpeA0yY6C
-	OTwSuhFb2kFxOPU7IjTt4rNdqyijG0qxErvnuRj8+oy8cwsoMXDeI+Dp4tbeL+9Jkwi5
-	1f/Q==
-X-Received: by 10.236.229.194 with SMTP id h62mr24687776yhq.95.1429197505133; 
-	Thu, 16 Apr 2015 08:18:25 -0700 (PDT)
-Received: from localhost.localdomain.localdomain
-	(75-128-22-150.dhcp.snlo.ca.charter.com. [75.128.22.150])
-	by mx.google.com with ESMTPSA id f47sm5838584yho.52.2015.04.16.08.18.23
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 16 Apr 2015 08:18:24 -0700 (PDT)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Apr 2015 08:17:45 -0700
-Message-Id: <fe13e2ccb414ea32085520e397fcc554b062afe4.1429196681.git.TicoTimo@gmail.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <b15c2e1bffe74ad299c7b6f88943313d527bb4fe.1429196681.git.TicoTimo@gmail.com>
-References: <b15c2e1bffe74ad299c7b6f88943313d527bb4fe.1429196681.git.TicoTimo@gmail.com>
-In-Reply-To: <cover.1429196681.git.TicoTimo@gmail.com>
-References: <cover.1429196681.git.TicoTimo@gmail.com>
-Subject: [meta-python][PATCH 7/7] python-cryptography, -vectors: add 0.8.1
+Return-Path: <bevenson@melinkcorp.com>
+X-Greylist: delayed 7180 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 16 Apr 2015 18:28:11 UTC
+Received: from na01-bl2-obe.outbound.protection.outlook.com
+	(mail-bl2on0127.outbound.protection.outlook.com [65.55.169.127])
+	by mail.openembedded.org (Postfix) with ESMTP id E7CDB6ABF7
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Apr 2015 18:28:11 +0000 (UTC)
+Received: from BN3PR0501MB1092.namprd05.prod.outlook.com (25.160.113.139) by
+	BN3PR0501MB1124.namprd05.prod.outlook.com (25.160.113.146) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.136.25; Thu, 16 Apr 2015 15:55:22 +0000
+Received: from BN3PR0501MB1090.namprd05.prod.outlook.com (25.160.113.12) by
+	BN3PR0501MB1092.namprd05.prod.outlook.com (25.160.113.139) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.136.25; Thu, 16 Apr 2015 15:55:21 +0000
+Received: from BN3PR0501MB1090.namprd05.prod.outlook.com ([25.160.113.12]) by
+	BN3PR0501MB1090.namprd05.prod.outlook.com ([25.160.113.12]) with
+	mapi id 15.01.0136.026; Thu, 16 Apr 2015 15:55:21 +0000
+From: Bryan Evenson <bevenson@melinkcorp.com>
+To: "Openembedded-devel@lists.openembedded.org"
+	<Openembedded-devel@lists.openembedded.org>
+Thread-Topic: util-linux: Data file clash for lastb with sysvinit
+Thread-Index: AdB4XT1KKxtJB05wQDO9bxnPLAE+XQ==
+Date: Thu, 16 Apr 2015 15:55:21 +0000
+Message-ID: <BN3PR0501MB1090943C5B3B41A6BF6D49E8BBE40@BN3PR0501MB1090.namprd05.prod.outlook.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-vipre-scanned: 00E341C50099E400E34312
+authentication-results: lists.openembedded.org; dkim=none (message not signed)
+	header.d=none;
+x-originating-ip: [98.100.91.242]
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0; RULEID:; SRVR:BN3PR0501MB1092;
+	UriScan:; BCL:0; PCL:0; RULEID:; SRVR:BN3PR0501MB1124; 
+x-forefront-antispam-report: BMV:1; SFV:NSPM;
+	SFS:(10019020)(6009001)(33656002)(54356999)(50986999)(102836002)(66066001)(2656002)(46102003)(92566002)(87936001)(40100003)(74316001)(62966003)(86362001)(110136001)(2501003)(450100001)(229853001)(2351001)(77156002)(2900100001)(107886001)(76576001)(99286002);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BN3PR0501MB1092;
+	H:BN3PR0501MB1090.namprd05.prod.outlook.com; FPR:; SPF:None;
+	MLV:sfv; LANG:en; 
+x-microsoft-antispam-prvs: <BN3PR0501MB1092F0D75B370A76CF9D0E2DBBE40@BN3PR0501MB1092.namprd05.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:;
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(601004)(5002010)(5005006); SRVR:BN3PR0501MB1092; BCL:0;
+	PCL:0; RULEID:; SRVR:BN3PR0501MB1092; 
+x-forefront-prvs: 0548586081
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Apr 2015 15:55:21.2444 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d06db0f9-efcc-42b5-9f8c-c934a01c9bfd
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR0501MB1092
+X-OriginatorOrg: melinkcorp.com
+Subject: util-linux: Data file clash for lastb with sysvinit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,107 +64,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2015 15:18:25 -0000
+X-List-Received-Date: Thu, 16 Apr 2015 18:28:13 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-python-cryptography is required by python-pyopenssl >= 0.14
+All,
 
-Includes python-cryptography-vectors package for ptest
+I've been working through several issues in order to get a clean upgrade an=
+d I'm down to my last couple.  I found a conflict between sysvinit and util=
+-linux that I have no idea how to handle and I'm looking for some help.  I'=
+m using sysvinit for init and opkg for package management.
 
-Over 75k unit tests (100% coverage):
-	* tested on nuc (x86) and beaglebone (arm) hardware.
-	** will overload ram on default qemux86/qemuarm
+I am upgrading a system that is on poky/dylan-1.4.4 up to poky/dizzy-1.7.1.=
+  One of the errors I see during upgrade is the following:
 
-Signed-off-by: Tim Orling <TicoTimo@gmail.com>
----
- .../python/python-cryptography-vectors_0.8.1.bb    | 14 +++++++
- .../python/python-cryptography/run-ptest           |  2 +
- .../python/python-cryptography_0.8.1.bb            | 46 ++++++++++++++++++++++
- 3 files changed, 62 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-cryptography-vectors_0.8.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-cryptography/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb
+* check_data_file_clashes: Package util-linux wants to install file /usr/bi=
+n/lastb
+        But that file is already provided by package  * sysvinit
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_0.8.1.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_0.8.1.bb
-new file mode 100644
-index 0000000..a9b64ed
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-cryptography-vectors_0.8.1.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Test vectors for the cryptography package."
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0 | BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
-+DEPENDS = "python-cryptography"
-+SRCNAME = "cryptography_vectors"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/c/cryptography-vectors/${SRCNAME}-${PV}.tar.gz"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+SRC_URI[md5sum] = "04fcfcc61aee62e3b4beb1740cd120ac"
-+SRC_URI[sha256sum] = "4a69e66026bfce4b97f75e72fe262f5e8f71daddc081f6608e5b0db89e552504"
-+
-+inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python-cryptography/run-ptest b/meta-python/recipes-devtools/python/python-cryptography/run-ptest
-new file mode 100644
-index 0000000..0ba239c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-cryptography/run-ptest
-@@ -0,0 +1,2 @@
-+#!/bin/sh
-+py.test
-diff --git a/meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb b/meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb
-new file mode 100644
-index 0000000..41e4acd
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-cryptography_0.8.1.bb
-@@ -0,0 +1,46 @@
-+SUMMARY = "Provides cryptographic recipes and primitives to Python developers"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0 | BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3617db4fb6fae01f1d253ab91511e4"
-+DEPENDS += " python-cffi-native python-cffi python-enum34 python-six python-pyasn1"
-+SRCNAME = "cryptography"
-+
-+SRC_URI = "https://pypi.python.org/packages/source/c/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-+           file://run-ptest \
-+"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+SRC_URI[md5sum] = "70dde78a5515abdbfd7a3d58f15689ab"
-+SRC_URI[sha256sum] = "f4e041bc83c1be94d87116a7aa201c378b7c6581be4d83994b2da0a84499f73b"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} = "\
-+                  python-pyasn1\
-+                  python-six\
-+                  python-cffi\
-+                  python-enum34\
-+                  python-setuptools\
-+                  python-pycparser\
-+                  python-subprocess\
-+                  python-threading\
-+                  python-numbers\
-+                  python-contextlib\
-+"
-+
-+RDEPENDS_${PN}-ptest = "\
-+                       ${PN}\
-+                       python-pytest\
-+                       python-pretend\
-+                       python-iso8601\
-+                       python-cryptography-vectors\
-+"
-+
-+inherit ptest
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+    install -d ${D}${PTEST_PATH}/tests/hazmat
-+    cp -rf ${S}/tests/hazmat/* ${D}${PTEST_PATH}/tests/hazmat/
-+}
--- 
-2.1.0
+The chain I've found for the files on my system are:
+/usr/bin/lastb -> last
+/usr/bin/last -> /usr/bin/last.sysvinit
 
+When I check which package owns lastb ("opkg search /usr/bin/lastb") opkg s=
+ays util-linux has that file.  However, I don't see anything in the util-li=
+nux recipe that mentions lastb.  I don't know how this softlink is getting =
+created or how util-linux is the owner.
+
+Any ideas on how util-linux is getting ownership of lastb and how to resolv=
+e this conflict with sysvinit?
+
+Regards,
+Bryan
 
