@@ -1,41 +1,38 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
-	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 06B0B73D17
+Received: from mail-ig0-f178.google.com (mail-ig0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id BA18673D17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 04:12:58 +0000 (UTC)
-Received: by iejt8 with SMTP id t8so43176009iej.2
+	Thu, 16 Apr 2015 04:12:57 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so2413881igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Apr 2015 21:13:00 -0700 (PDT)
+	Wed, 15 Apr 2015 21:12:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id
-	:in-reply-to:references;
-	bh=VZFQp0uXM6w6nJFr5picevH8i6otgOaUkwszFkam3cw=;
-	b=ZUUoHYAuIrGXFRMjN+dlZv5PS9obsb4k7PHzEej6h+PPkUSFpn+PxvA8KN6euNu7mC
-	vx94FuVdbISIFE8yRiFKrzJugmuULIwjPvkFBAren0JPH9h6FebfDSJHDBsX6L2YCtT9
-	KM3SFZzrt7yATC9QfxoxjzeE1XFWF5BtFVAJ1ey0Q2s3lgpCiJgxKlPzgXPIDbZ2oRNx
-	AdvOeNlzBTc0jTyTXvtZ8wX7VNyxIYsWk9M9ZPF8rt3o/BP0r+/my3yXE4jai+QkRlZK
-	yUjoH6YrpftCpOGbVsec9iSPxYZBep+t2RBl5Miq8q4pYtT2qen/wQT8uap3wV21A6eG
-	ipZQ==
-X-Gm-Message-State: ALoCoQmgoZELOfELnRk9AAXWSfoSYrvH1/M9MROb+K17kDHbaaWx+n0xAdKkeMni+bA+N4tyoFYe
-X-Received: by 10.50.61.175 with SMTP id q15mr2885682igr.34.1429157580016;
-	Wed, 15 Apr 2015 21:13:00 -0700 (PDT)
+	h=x-gm-message-state:sender:from:to:subject:date:message-id;
+	bh=mkSP9orzb8DqcIvjYUHufXulsubCKYcV09zgN0CfnB4=;
+	b=IoQf1MK73zRrPOzmCIqwrroCj5a8SNlyAyRbTgXHxIMc5x7ilUGmdMOZJD6mzxEbsl
+	581QPEUKjdJYWRhdsFpZ3DS/xJak6rFDy791s8ymDBx8HAwSyzBecOSTwOoKqekoUtb7
+	aX+OIJ2r1R1ABrIXpm1oT/9EjhvyL7afgegtr9XPgqAm9GO1bNysyLjrvsF1XFSmPbzB
+	qao+vFBq6OxS2alaa10lKvF2HLxkC0D5MHxNpb1YhxxOtaFyM97PMHBxx1X1+5o0lfIc
+	9EnXsgHIdDVy+Mv6Vc6CYy8JGfI4brZGNpvKY1tp5kBH3hRgk3pkmzXNYC8HCCC1qrxH
+	Kb0A==
+X-Gm-Message-State: ALoCoQnfq6L4PoICCrBMgzyD2eFLrlkF+s6EHJwf9aDil+t/fnUj7sozhnlQjsrW9gAMtPd3Bvpg
+X-Received: by 10.50.30.202 with SMTP id u10mr2870432igh.28.1429157578479;
+	Wed, 15 Apr 2015 21:12:58 -0700 (PDT)
 Received: from mir.deserted.net (24-246-4-250.cable.teksavvy.com.
 	[24.246.4.250])
-	by mx.google.com with ESMTPSA id w33sm3777380ioi.17.2015.04.15.21.12.58
+	by mx.google.com with ESMTPSA id w33sm3777380ioi.17.2015.04.15.21.12.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 15 Apr 2015 21:12:59 -0700 (PDT)
+	Wed, 15 Apr 2015 21:12:57 -0700 (PDT)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Apr 2015 00:14:26 -0400
-Message-Id: <1429157668-4952-2-git-send-email-joe_macdonald@mentor.com>
+Date: Thu, 16 Apr 2015 00:14:25 -0400
+Message-Id: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
-References: <1429157668-4952-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking, for-fido][PATCH 2/4] vsftpd / init: add LSB init infos
+Subject: [meta-networking, for-fido][PATCH 1/4] postfix: add LSB init infos
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2015 04:12:59 -0000
+X-List-Received-Date: Thu, 16 Apr 2015 04:13:00 -0000
 
 From: Wenzong Fan <wenzong.fan@windriver.com>
 
@@ -59,27 +56,26 @@ Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- meta-networking/recipes-daemons/vsftpd/files/init | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ meta-networking/recipes-daemons/postfix/files/postfix | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/vsftpd/files/init b/meta-networking/recipes-daemons/vsftpd/files/init
-index d0ec010..72adf0d 100755
---- a/meta-networking/recipes-daemons/vsftpd/files/init
-+++ b/meta-networking/recipes-daemons/vsftpd/files/init
-@@ -1,4 +1,13 @@
+diff --git a/meta-networking/recipes-daemons/postfix/files/postfix b/meta-networking/recipes-daemons/postfix/files/postfix
+index 7bcc816..0ea67ef 100755
+--- a/meta-networking/recipes-daemons/postfix/files/postfix
++++ b/meta-networking/recipes-daemons/postfix/files/postfix
+@@ -1,4 +1,12 @@
  #!/bin/sh
 +### BEGIN INIT INFO
-+# Provides: vsftpd
-+# Default-Start:  2345
-+# Default-Stop:   016
-+# Short-Description: Very Secure Ftp Daemon
-+# Description: vsftpd is a Very Secure FTP daemon. It was written completely from
-+#              scratch
++# Provides: postfix MTA
++# Default-Start: 2345
++# Default-Stop: 016
++# Short-Description: start and stop postfix
++# Description: Postfix is a Mail Transport Agent, which is the program
++#              that moves mail from one machine to another.
 +### END INIT INFO
-+
- DAEMON=/usr/sbin/vsftpd
- NAME=vsftpd
- DESC="FTP Server"
+ 
+ success() {
+         echo " Successful"
 -- 
 1.9.1
 
