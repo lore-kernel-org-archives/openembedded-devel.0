@@ -1,23 +1,32 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F1C57226D
+Return-Path: <zboszor@pr.hu>
+X-Greylist: delayed 1449 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 16 Apr 2015 11:14:23 UTC
+Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
+	by mail.openembedded.org (Postfix) with ESMTP id C51FA6ABF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 08:35:06 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3G8Z73e013806
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 16 Apr 2015 01:35:08 -0700 (PDT)
-Received: from lirq-OptiPlex-780.wrs.com (128.224.162.139) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Thu, 16 Apr 2015 01:35:07 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
-Date: Thu, 16 Apr 2015 16:35:05 +0800
-Message-ID: <1429173305-443-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
+	Thu, 16 Apr 2015 11:14:23 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1YihN8-0007ag-CQ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Apr 2015 12:50:14 +0200
+Received: from host-87-242-63-200.prtelecom.hu ([87.242.63.200]
+	helo=localhost.localdomain)
+	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1YihN1-0004b4-72
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Apr 2015 12:50:12 +0200
+Message-ID: <552F93DC.2070206@pr.hu>
+Date: Thu, 16 Apr 2015 12:50:04 +0200
+From: Boszormenyi Zoltan <zboszor@pr.hu>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] netkit-telnet: support the cross-compile
+To: openembedded-devel@lists.openembedded.org
+X-Spam-Score: 1.1 (+)
+X-Scan-Signature: 9ff1c38e9b5eed4669b14ff547415cc5
+X-Spam-Tracer: backend.mail.pr.hu 1.1 20150416105012Z
+Subject: ERROR: Can NOT get PRAUTO from remote PR service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,100 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Apr 2015 08:35:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Apr 2015 11:14:26 -0000
+Content-Type: text/plain; charset=iso-8859-2
+Content-Transfer-Encoding: 8bit
 
-From: Roy Li <rongqing.li@windriver.com>
+Hi,
 
-when check the CC, only compile the object by CC, not run the object.
-MCONFIG file includes more configuration, we can not clear it
+I started to get this build error today in completely innocent packages.
+It's always the same two lines for every package that fail:
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../netkit-telnet/files/cross-compile.patch        | 48 ++++++++++++++++++++++
- .../netkit-telnet/netkit-telnet_0.17.bb            |  6 ++-
- 2 files changed, 53 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch
+ERROR: Can NOT get PRAUTO from remote PR service
+ERROR: Function failed: package_get_auto_pr
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch b/meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch
-new file mode 100644
-index 0000000..b3fe36b
---- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.patch
-@@ -0,0 +1,48 @@
-+To support the cross-compile
-+
-+Upstream-Status: Pending
-+
-+make the configure to support the cross-compile, by only to compile the
-+target, and not to run it
-+
-+Roy Li <rongqing.li@windriver.com>
-+Index: netkit-telnet-0.17/configure
-+===================================================================
-+--- netkit-telnet-0.17.orig/configure	2008-11-23 22:01:26.000000000 +0100
-++++ netkit-telnet-0.17/configure	2008-11-23 22:05:00.000000000 +0100
-+@@ -94,7 +94,7 @@
-+     echo -n 'Checking if C compiler works... '
-+     if (
-+           $CC __conftest.c -o __conftest || exit 1
-+-          ./__conftest || exit 1
-++          # Idiots belong shot! ./__conftest || exit 1
-+        ) >/dev/null 2>&1; then
-+          echo 'yes'
-+      else
-+@@ -141,7 +141,7 @@
-+     echo -n 'Checking if C++ compiler works... '
-+     if (
-+           $CXX __conftest.cc -o __conftest || exit 1
-+-          ./__conftest || exit 1
-++          # Iditios belong shot! ./__conftest || exit 1
-+        ) >/dev/null 2>&1; then
-+          echo 'yes'
-+      else
-+@@ -284,7 +284,7 @@
-+ else
-+     if (
-+           $CXX $CXXFLAGS -D__USE_BSD_SIGNAL __conftest.cc  -o __conftest || exit 1
-+-          ./__conftest || exit 1
-++          # running still does not work./__conftest || exit 1
-+        ) >/dev/null 2>&1; then
-+         echo '-D__USE_BSD_SIGNAL'
-+         CFLAGS="$CFLAGS -D__USE_BSD_SIGNAL"
-+@@ -501,7 +501,7 @@
-+ EOF
-+ if (
-+       $CXX $CXXFLAGS  __conftest.cc $LIBBSD -o __conftest || exit 1
-+-      ./__conftest || exit 1
-++      # argh! morons!./__conftest || exit 1
-+    ) >/dev/null 2>&1; then
-+     echo 'ok'
-+ else
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index a2dc1c2..6b2e72f 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -8,6 +8,7 @@ SRC_URI = "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/${BP}.tar.gz \
-     file://To-aviod-buffer-overflow-in-telnet.patch \
-     file://Warning-fix-in-the-step-of-install.patch \
-     file://telnet-xinetd \
-+    file://cross-compile.patch \
- "
- 
- EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
-@@ -15,7 +16,10 @@ EXTRA_OEMAKE = "INSTALLROOT=${D} SBINDIR=${sbindir} DAEMONMODE=755 \
- 
- do_configure () {
-     ./configure --prefix=${prefix}
--    echo "LDFLAGS=${LDFLAGS}" > MCONFIG
-+    sed -e 's#^CFLAGS=\(.*\)$#CFLAGS= -D_GNU_SOURCE \1#' \
-+        -e 's#^CXXFLAGS=\(.*\)$#CXXFLAGS= -D_GNU_SOURCE \1#' \
-+        -e 's#^LDFLAGS=.*$#LDFLAGS= ${LDFLAGS}#' \
-+        -i MCONFIG
- }
- 
- do_compile () {
--- 
-2.1.0
+What may be the problem? It usually goes away the second time
+I build a failed package. Should I throw away the tmp directory to fix it?
+
+Thanks in advance,
+Zoltán Böszörményi
 
 
