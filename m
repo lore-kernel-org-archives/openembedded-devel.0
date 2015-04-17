@@ -1,34 +1,20 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ob0-f180.google.com (mail-ob0-f180.google.com
-	[209.85.214.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CE3273D43
+Return-Path: <amarnath.valluri@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 357AC7226D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2015 04:23:55 +0000 (UTC)
-Received: by oblw8 with SMTP id w8so60511638obl.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Apr 2015 21:23:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=ltzikaHnRD1IbUsy1xTOEZ+wCKO8uKa+pXA5jXLHxgA=;
-	b=R4SMUI1AccAawdHIhSrZABib2eWroyYIcXkIjakiq74+72I5xq0l5oV9w2+Vjdnu8i
-	ynuC9X733KjPZrnbnlfwGHsXbA+wsv2AlKZbjACBiChH2PROsLB4qTeYh1YxA2Q8PN2S
-	qTX1dFoZj1Z2BCutLuFAPVO1ZqZCVlCJZt+s3RcHIxsZvlbpqyEk8GjTP/OFumcLyStL
-	HA+WsQZyM1wPU3ASgckTj39CeAmXPDMJiDlFyMoHWTFEYOKra9lK0UMkxo94f3QAuzaM
-	vIPxjqDdWL6HZPcul7RN+fBMhrYMWGcnPwRGrLPaVm8wVPeAGjqj76NZdEj/MAU7r4Tj
-	xarg==
-MIME-Version: 1.0
-X-Received: by 10.43.56.146 with SMTP id wc18mr1593411icb.24.1429244636176;
-	Thu, 16 Apr 2015 21:23:56 -0700 (PDT)
-Received: by 10.50.117.7 with HTTP; Thu, 16 Apr 2015 21:23:55 -0700 (PDT)
-Received: by 10.50.117.7 with HTTP; Thu, 16 Apr 2015 21:23:55 -0700 (PDT)
-In-Reply-To: <BN3PR0501MB1090943C5B3B41A6BF6D49E8BBE40@BN3PR0501MB1090.namprd05.prod.outlook.com>
-References: <BN3PR0501MB1090943C5B3B41A6BF6D49E8BBE40@BN3PR0501MB1090.namprd05.prod.outlook.com>
-Date: Fri, 17 Apr 2015 00:23:55 -0400
-Message-ID: <CAMKF1sojoXmYGEXaNkj8H1Xwk_=CULvV=Dtn2adBuydu2Xbb3g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 17 Apr 2015 12:02:24 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga102.jf.intel.com with ESMTP; 17 Apr 2015 05:02:24 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,594,1422950400"; d="scan'208";a="482183067"
+Received: from avalluri-thinkpad-x220.fi.intel.com ([10.237.72.58])
+	by FMSMGA003.fm.intel.com with ESMTP; 17 Apr 2015 05:02:23 -0700
+From: Amarnath Valluri <amarnath.valluri@intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: util-linux: Data file clash for lastb with sysvinit
+Date: Fri, 17 Apr 2015 15:02:21 +0300
+Message-Id: <1429272141-7399-1-git-send-email-amarnath.valluri@intel.com>
+X-Mailer: git-send-email 1.8.1.2
+Subject: [PATCH] toybox: Upgrade to v0.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,45 +28,246 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2015 04:23:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 17 Apr 2015 12:02:27 -0000
 
-On Apr 16, 2015 11:29 AM, "Bryan Evenson" <bevenson@melinkcorp.com> wrote:
->
-> All,
->
-> I've been working through several issues in order to get a clean upgrade
-and I'm down to my last couple.  I found a conflict between sysvinit and
-util-linux that I have no idea how to handle and I'm looking for some
-help.  I'm using sysvinit for init and opkg for package management.
->
-> I am upgrading a system that is on poky/dylan-1.4.4 up to
-poky/dizzy-1.7.1.  One of the errors I see during upgrade is the following:
->
-> * check_data_file_clashes: Package util-linux wants to install file
-/usr/bin/lastb
->         But that file is already provided by package  * sysvinit
->
-> The chain I've found for the files on my system are:
-> /usr/bin/lastb -> last
-> /usr/bin/last -> /usr/bin/last.sysvinit
->
-> When I check which package owns lastb ("opkg search /usr/bin/lastb") opkg
-says util-linux has that file.  However, I don't see anything in the
-util-linux recipe that mentions lastb.  I don't know how this softlink is
-getting created or how util-linux is the owner.
->
-> Any ideas on how util-linux is getting ownership of lastb and how to
-resolve this conflict with sysvinit?
+The patch applied to toybox is rebased onto the new release and updated.
 
-Look for this file in your build  tree it should be clear then who provides
-it.
->
-> Regards,
-> Bryan
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+---
+ .../toybox/0001-Match-paths-with-busybox.patch     | 67 ++++++++++++----------
+ .../toybox/{toybox_0.5.0.bb => toybox_0.5.2.bb}    |  6 +-
+ 2 files changed, 39 insertions(+), 34 deletions(-)
+ rename meta-oe/recipes-core/toybox/{toybox_0.5.0.bb => toybox_0.5.2.bb} (92%)
+
+diff --git a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
+index e071f22..9eb965d 100644
+--- a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
++++ b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
+@@ -1,4 +1,4 @@
+-From 27f5ca9f1e212e5ab00cde0bfc91282fc7ff5e16 Mon Sep 17 00:00:00 2001
++From 9b37b45067677563dc8daa73d73a015c20ad6222 Mon Sep 17 00:00:00 2001
+ From: Paul Barker <paul@paulbarker.me.uk>
+ Date: Mon, 18 Aug 2014 12:18:16 +0000
+ Subject: [PATCH] Match paths with busybox
+@@ -8,6 +8,9 @@ update-alternatives, the paths of the links installed by toybox should match
+ those installed by busybox. This is accomplished by changing the flags of a few
+ tools within toybox.
+ 
++v3:
++    - Forward ported from v0.5.0 to v0.5.2
++
+ v2:
+     - Forward ported from v0.4.9 to v0.5.0
+     - Move new 'mount' command
+@@ -16,6 +19,8 @@ Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+ 
+ Upstream-status: Inappropriate
+     (specific to update-alternatives use in OpenEmbedded)
++
++Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+ ---
+  toys/lsb/mount.c        | 2 +-
+  toys/lsb/pidof.c        | 2 +-
+@@ -45,7 +50,7 @@ Upstream-status: Inappropriate
+  25 files changed, 29 insertions(+), 29 deletions(-)
+ 
+ diff --git a/toys/lsb/mount.c b/toys/lsb/mount.c
+-index 01f5c32..65a5aa2 100644
++index c334681..b076ca1 100644
+ --- a/toys/lsb/mount.c
+ +++ b/toys/lsb/mount.c
+ @@ -6,7 +6,7 @@
+@@ -54,7 +59,7 @@ index 01f5c32..65a5aa2 100644
+  
+ -USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
+ +USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_BIN|TOYFLAG_STAYROOT))
+- USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
++ //USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_STAYROOT))
+  
+  config MOUNT
+ diff --git a/toys/lsb/pidof.c b/toys/lsb/pidof.c
+@@ -84,20 +89,20 @@ index 6544265..a93327f 100644
+  config CHVT
+    bool "chvt"
+ diff --git a/toys/other/ifconfig.c b/toys/other/ifconfig.c
+-index f5d4215..5e7c54c 100644
++index 8db3ff0..445799d 100644
+ --- a/toys/other/ifconfig.c
+ +++ b/toys/other/ifconfig.c
+ @@ -6,7 +6,7 @@
+   *
+   * Not in SUSv4.
+  
+--USE_IFCONFIG(NEWTOY(ifconfig, "?a", TOYFLAG_BIN))
+-+USE_IFCONFIG(NEWTOY(ifconfig, "?a", TOYFLAG_SBIN))
++-USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_BIN))
+++USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_SBIN))
+  
+  config IFCONFIG
+    bool "ifconfig"
+ diff --git a/toys/other/insmod.c b/toys/other/insmod.c
+-index 8aa959a..75fd7cd 100644
++index 81721a3..cb222a5 100644
+ --- a/toys/other/insmod.c
+ +++ b/toys/other/insmod.c
+ @@ -2,7 +2,7 @@
+@@ -123,20 +128,20 @@ index b8f5d82..4d16048 100644
+  config LSMOD
+    bool "lsmod"
+ diff --git a/toys/other/netcat.c b/toys/other/netcat.c
+-index 3c6f630..188c3d1 100644
++index d27aa88..0fd26f7 100644
+ --- a/toys/other/netcat.c
+ +++ b/toys/other/netcat.c
+ @@ -4,7 +4,7 @@
+   *
+   * TODO: udp, ipv6, genericize for telnet/microcom/tail-f
+  
+--USE_NETCAT(OLDTOY(nc, netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOYFLAG_BIN))
+-+USE_NETCAT(OLDTOY(nc, netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOYFLAG_USR|TOYFLAG_BIN))
+- USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOYFLAG_BIN))
++-USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_BIN))
+++USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_USR|TOYFLAG_BIN))
++ USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("^tlL")"w#p#s:q#f:", TOYFLAG_BIN))
+  
+  config NETCAT
+ diff --git a/toys/other/pivot_root.c b/toys/other/pivot_root.c
+-index 3e4beac..ce3d3a8 100644
++index 9a1f56c..7748032 100644
+ --- a/toys/other/pivot_root.c
+ +++ b/toys/other/pivot_root.c
+ @@ -2,7 +2,7 @@
+@@ -162,7 +167,7 @@ index 1c33362..fecd1ef 100644
+  config READLINK
+    bool "readlink"
+ diff --git a/toys/other/reboot.c b/toys/other/reboot.c
+-index 5cbc4f8..f8baafc 100644
++index 8baa4d8..a135888 100644
+ --- a/toys/other/reboot.c
+ +++ b/toys/other/reboot.c
+ @@ -2,9 +2,9 @@
+@@ -170,11 +175,11 @@ index 5cbc4f8..f8baafc 100644
+   * Copyright 2013 Elie De Brauwer <eliedebrauwer@gmail.com>
+  
+ -USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+--USE_REBOOT(OLDTOY(halt, reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+--USE_REBOOT(OLDTOY(poweroff, reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
++-USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
++-USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
+ +USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+-+USE_REBOOT(OLDTOY(halt, reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+-+USE_REBOOT(OLDTOY(poweroff, reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+++USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+++USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
+  
+  config REBOOT
+    bool "reboot"
+@@ -257,15 +262,15 @@ index 7f10c5e..1ab3ce8 100644
+  config CUT
+    bool "cut"
+ diff --git a/toys/posix/df.c b/toys/posix/df.c
+-index afb296b..6296dc9 100644
++index 141e8e5..5d37b45 100644
+ --- a/toys/posix/df.c
+ +++ b/toys/posix/df.c
+ @@ -4,7 +4,7 @@
+   *
+   * See http://opengroup.org/onlinepubs/9699919799/utilities/df.html
+  
+--USE_DF(NEWTOY(df, "Pkt*a", TOYFLAG_USR|TOYFLAG_SBIN))
+-+USE_DF(NEWTOY(df, "Pkt*a", TOYFLAG_BIN))
++-USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_USR|TOYFLAG_SBIN))
+++USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_BIN))
+  
+  config DF
+    bool "df"
+@@ -283,20 +288,20 @@ index e8517d4..3ac4373 100644
+  config HEAD
+    bool "head"
+ diff --git a/toys/posix/id.c b/toys/posix/id.c
+-index b4d9c00..df79419 100644
++index 353aa04..7ab489e 100644
+ --- a/toys/posix/id.c
+ +++ b/toys/posix/id.c
+ @@ -6,10 +6,10 @@
+   *
+   * See http://opengroup.org/onlinepubs/9699919799/utilities/id.html
+  
+--USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_BIN))
+-+USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
+- USE_GROUPS(OLDTOY(groups, id, NULL, TOYFLAG_USR|TOYFLAG_BIN))
+--USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_BIN))
+--USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_BIN))
+-+USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
+-+USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
++-USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_BIN))
+++USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
++ USE_GROUPS(NEWTOY(groups, NULL, TOYFLAG_USR|TOYFLAG_BIN))
++-USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_BIN))
++-USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_BIN))
+++USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_USR|TOYFLAG_BIN))
+++USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_USR|TOYFLAG_BIN))
+  
+  config ID
+    bool "id"
+@@ -327,7 +332,7 @@ index 8c20644..489eb13 100644
+  config RENICE
+    bool "renice"
+ diff --git a/toys/posix/tail.c b/toys/posix/tail.c
+-index e1048be..ba0a55a 100644
++index e92c044..ba1d311 100644
+ --- a/toys/posix/tail.c
+ +++ b/toys/posix/tail.c
+ @@ -4,7 +4,7 @@
+@@ -366,7 +371,7 @@ index 3cfdb94..c127cfe 100644
+  config UNIQ
+    bool "uniq"
+ diff --git a/toys/posix/who.c b/toys/posix/who.c
+-index 2c8a2e6..d5cd001 100644
++index 876a562..414cdfc 100644
+ --- a/toys/posix/who.c
+ +++ b/toys/posix/who.c
+ @@ -9,7 +9,7 @@
+@@ -379,5 +384,5 @@ index 2c8a2e6..d5cd001 100644
+  config WHO
+    bool "who"
+ -- 
+-2.1.2
++1.8.1.2
+ 
+diff --git a/meta-oe/recipes-core/toybox/toybox_0.5.0.bb b/meta-oe/recipes-core/toybox/toybox_0.5.2.bb
+similarity index 92%
+rename from meta-oe/recipes-core/toybox/toybox_0.5.0.bb
+rename to meta-oe/recipes-core/toybox/toybox_0.5.2.bb
+index 9bdba4d..bcd6a72 100644
+--- a/meta-oe/recipes-core/toybox/toybox_0.5.0.bb
++++ b/meta-oe/recipes-core/toybox/toybox_0.5.2.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "Toybox combines common utilities together into a single executable."
+ HOMEPAGE = "http://www.landley.net/toybox/"
+ 
+-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.bz2 \
++SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
+     file://0001-Match-paths-with-busybox.patch"
+-SRC_URI[md5sum] = "2cb6e8b34134038d86048e117f77765f"
+-SRC_URI[sha256sum] = "2718b42154be041435df48d5b5140f4e307767c36b1017e0c8d0da7f75b327a7"
++SRC_URI[md5sum] = "b5d1242767c411b69dcd717da1c218b2"
++SRC_URI[sha256sum] = "dec7f6433ee0e130f224fc63760b347ad0572280c4de32f1aaefbee813a79a00"
+ 
+ LICENSE = "BSD-0-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
+-- 
+1.8.1.2
+
+---------------------------------------------------------------------
+Intel Finland Oy
+Registered Address: PL 281, 00181 Helsinki 
+Business Identity Code: 0357606 - 4 
+Domiciled in Helsinki 
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
+
 
