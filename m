@@ -1,33 +1,24 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-qg0-f46.google.com (mail-qg0-f46.google.com
-	[209.85.192.46])
-	by mail.openembedded.org (Postfix) with ESMTP id D805D6AC1E
+Return-Path: <Dmitry_Eremin@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 766F973D27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Apr 2015 10:56:19 +0000 (UTC)
-Received: by qgeb100 with SMTP id b100so32845803qge.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Apr 2015 03:56:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=GkeV2nCnaU/euNNuDjbjXzjX/XPcTA85JeD8+KguDLY=;
-	b=oL/FFglgEo5+xHfVebEGE0mv61MeiOzrpAiIKHXokF+fCCuncNESyTNiYvcXh5pjTz
-	ZgNNb3tZbFOS3Nswa59xZyuZUfVLyNqbGMW/8XfupWwPU3r0t69N6zjOj1AKdkja6drz
-	IBnTKXsiBA8mZlA2w1n+hDUZkOk5JQ2iz0qs5T4q4Rp3E041MAIYvCxYxrqz8atd3Ohc
-	1AXygyazBkY2L9h5YfTWjpVVS5KqQ0sdTlUS2yKGQTUyv42ZZDg11zMZFWTm/BrTNj/8
-	HVbbohJ1GkQPeM2qUCr8hkDAPQKfKownSrCXTGL1Af9diu9XgN+vtCeY2r1VWb6SMCsx
-	sFDA==
+	Sat, 18 Apr 2015 14:59:38 +0000 (UTC)
+Received: from nat-ies.mentorg.com ([192.94.31.2]
+	helo=SVR-IES-FEM-01.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1YjUDb-00074Y-SG from Dmitry_Eremin@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Apr 2015 07:59:40 -0700
+Received: from fangorn.rup.mentorg.com (137.202.0.76) by
+	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
+	Server (TLS) id 14.3.224.2; Sat, 18 Apr 2015 15:59:38 +0100
+From: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 18 Apr 2015 17:59:37 +0300
+Message-ID: <1429369177-22295-1-git-send-email-dmitry_eremin@mentor.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-X-Received: by 10.55.43.83 with SMTP id r80mr13717365qkh.80.1429354580191;
-	Sat, 18 Apr 2015 03:56:20 -0700 (PDT)
-Received: by 10.140.22.213 with HTTP; Sat, 18 Apr 2015 03:56:20 -0700 (PDT)
-In-Reply-To: <4F9216F96E5DF9428610502835A9F49058189466@DLEE11.ent.ti.com>
-References: <4F9216F96E5DF9428610502835A9F49058189466@DLEE11.ent.ti.com>
-Date: Sat, 18 Apr 2015 12:56:20 +0200
-Message-ID: <CAEHkU3VrhMvNngrOK=9dxycuV3XkgRFrLwqKfaoAg2Bnv1ZYpg@mail.gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	sam.nelson@ti.com
-Subject: Re: [meta-java] Query on fetch issue with rhino_1.7r4.bb
+Subject: [meta-oe][PATCH v2] meta-oe: override SECURITY_CFLAGS for a set of recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,32 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Apr 2015 10:56:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 18 Apr 2015 14:59:38 -0000
+Content-Type: text/plain
 
-Hi Sam
+Some of recipes produce errors if the distro has enabled usage of
+security_flags.inc file. Fix those errors (and QA warnings) by providing
+an additional include file that is require'd from conf/layer.conf.
 
-I can correctly download rhino.
-Both with the browser and with the bitbake fetcher.
-bitbake -c cleanall rhino; bitbake -c fetch rhino
+Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+---
+ meta-oe/conf/distro/include/meta_oe_security_flags.inc | 7 +++++++
+ meta-oe/conf/layer.conf                                | 3 +++
+ 2 files changed, 10 insertions(+)
+ create mode 100644 meta-oe/conf/distro/include/meta_oe_security_flags.inc
 
-Maybe a temporary connection problem or some firewall issue with https
-on your installation?
+diff --git a/meta-oe/conf/distro/include/meta_oe_security_flags.inc b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
+new file mode 100644
+index 0000000..2565e32
+--- /dev/null
++++ b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
+@@ -0,0 +1,7 @@
++# Build errors with the pie options enabled
++SECURITY_CFLAGS_pn-lvm2 = "${SECURITY_NO_PIE_CFLAGS}"
++SECURITY_CFLAGS_pn-rrdtool = "${SECURITY_NO_PIE_CFLAGS}"
++
++# This has text reloc errors with the pie options enabled
++SECURITY_CFLAGS_pn-mozjs = "${SECURITY_NO_PIE_CFLAGS}"
++SECURITY_CFLAGS_pn-openldap = "${SECURITY_NO_PIE_CFLAGS}"
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index e2a89cd..7af9b3d 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -44,3 +44,6 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+ "
+ 
+ FREESMARTPHONE_GIT = "git://git.freesmartphone.org"
++
++# Override security flags
++require conf/distro/include/meta_oe_security_flags.inc
+-- 
+2.1.4
 
-Regards
-Max
-
-2015-04-18 5:48 GMT+02:00 Nelson, Sam <sam.nelson@ti.com>:
-> I am seeing following fetch error when trying to build  rhino_1.7r4.bb.
-> Anybody else seeing this?  Appreciate any help on this.
->
-> WARNING: Failed to fetch URL https://github.com/downloads/mozilla/rhino/rhino1_7R4.zip, attempting MIRRORS if available
-> ERROR: Fetcher failure: Fetch command failed with exit code 4, output:
-> OpenSSL: error:14077410:SSL routines:SSL23_GET_SERVER_HELLO:sslv3 alert handshake failure
-> Unable to establish SSL connection.
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
