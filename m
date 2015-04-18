@@ -1,39 +1,33 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A560605D2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2015 20:45:31 +0000 (UTC)
-Received: by pdbqa5 with SMTP id qa5so138940425pdb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Apr 2015 13:45:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=iN0fSHq+ux8cYwAUn04Ng1SDcgxQwNAC0jUHS2YHVFw=;
-	b=GdToRcc49PR9ebeN4lYDoQ8DFos2YJyNuhtNbYf6RM3D2X5lC+UTsDMDGY4GYpDc3y
-	GjQ4F0lvhjt+V1ukFGL7RkpbJDYucMIo011sVH1xPEPw+abCtXax4kN4/jCTQASpWJ7Z
-	KLqJpsJeNZvkRP4Pk+/O8E4aolHfqotuuSwNFq7A2q76+JkVlZeFZAf0j/mJ0uxlwkYq
-	CVw9LDWysGMdoucKeknxPfSpphm4XfhEBa0FA/vS/hzNgpa/CrooMZlXUURCQF8l6AiI
-	Uel71/xPmkn1WzdzW8r/YipVdnezz3DK+sYMLuJugBt9gJ811Mb/+6Kw8Uw+cyhgy9Jt
-	Jrtg==
-X-Received: by 10.70.102.11 with SMTP id fk11mr8513608pdb.144.1429303530832;
-	Fri, 17 Apr 2015 13:45:30 -0700 (PDT)
-Received: from ?IPv6:2601:c:a700:3ba7:45a2:e7e6:135c:7e84?
-	([2601:c:a700:3ba7:45a2:e7e6:135c:7e84])
-	by mx.google.com with ESMTPSA id
-	op4sm10924090pbb.77.2015.04.17.13.45.28
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 17 Apr 2015 13:45:29 -0700 (PDT)
-Message-ID: <553170E1.2010400@gmail.com>
-Date: Fri, 17 Apr 2015 13:45:21 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+Return-Path: <sam.nelson@ti.com>
+Received: from devils.ext.ti.com (devils.ext.ti.com [198.47.26.153])
+	by mail.openembedded.org (Postfix) with ESMTP id BC3327226D
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Apr 2015 03:48:47 +0000 (UTC)
+Received: from dlelxv90.itg.ti.com ([172.17.2.17])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id t3I3mmCB025192
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2015 22:48:48 -0500
+Received: from DLEE70.ent.ti.com (dlee70.ent.ti.com [157.170.170.113])
+	by dlelxv90.itg.ti.com (8.14.3/8.13.8) with ESMTP id t3I3mlZZ014020
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Apr 2015 22:48:47 -0500
+Received: from DLEE11.ent.ti.com ([fe80::40fa:b936:da7c:d113]) by
+	DLEE70.ent.ti.com ([fe80::c4c6:f618:54e7:ad11%28]) with mapi id
+	14.03.0224.002; Fri, 17 Apr 2015 22:48:47 -0500
+From: "Nelson, Sam" <sam.nelson@ti.com>
+To: "Openembedded-devel@lists.openembedded.org"
+	<Openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-java] Query on fetch issue with rhino_1.7r4.bb
+Thread-Index: AdB5io2a7ndSETd1Qdmi/tJZD8orTA==
+Date: Sat, 18 Apr 2015 03:48:47 +0000
+Message-ID: <4F9216F96E5DF9428610502835A9F49058189466@DLEE11.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.247.5.50]
 MIME-Version: 1.0
-To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: meta-qemu-bsps
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-java] Query on fetch issue with rhino_1.7r4.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,18 +41,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Apr 2015 20:45:35 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Apr 2015 03:48:49 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hello all,
+I am seeing following fetch error when trying to build  rhino_1.7r4.bb.
+Anybody else seeing this?  Appreciate any help on this.
 
-I just put together a layer to warehouse miscellaneous qemu machine 
-support. ppc64 is the there now, working on more. Contributions are welcome.
-
-https://github.com/akuster/meta-qemu-bsps
-
-enjoy,
-
-Armin
+WARNING: Failed to fetch URL https://github.com/downloads/mozilla/rhino/rhi=
+no1_7R4.zip, attempting MIRRORS if available
+ERROR: Fetcher failure: Fetch command failed with exit code 4, output:
+OpenSSL: error:14077410:SSL routines:SSL23_GET_SERVER_HELLO:sslv3 alert han=
+dshake failure
+Unable to establish SSL connection.
 
