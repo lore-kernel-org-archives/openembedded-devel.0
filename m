@@ -1,26 +1,41 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id DCA4173D5A
+Return-Path: <sven.ebenfeld@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 0FAE473D5E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Apr 2015 15:49:26 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga102.fm.intel.com with ESMTP; 20 Apr 2015 08:49:27 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,609,1422950400"; d="scan'208";a="483211366"
-Received: from unknown (HELO peggleto-mobl.ger.corp.intel.com) ([10.252.5.75])
-	by FMSMGA003.fm.intel.com with ESMTP; 20 Apr 2015 08:49:26 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: "Iorga, Cristian" <cristian.iorga@intel.com>
-Date: Mon, 20 Apr 2015 16:49:25 +0100
-Message-ID: <2012859.l34ETrnxa2@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.4 (Linux/3.18.9-200.fc21.x86_64; KDE/4.14.6; x86_64; ; )
-In-Reply-To: <969F26A8BAB325438E7EB80D3C3134FB2F49D799@irsmsx105.ger.corp.intel.com>
-References: <1429543129-2598-1-git-send-email-cristian.iorga@intel.com>
-	<969F26A8BAB325438E7EB80D3C3134FB2F49D799@irsmsx105.ger.corp.intel.com>
+	Tue, 21 Apr 2015 06:34:44 +0000 (UTC)
+Received: by widdi4 with SMTP id di4so126271621wid.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Apr 2015 23:34:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=Kj7NPd34IATmCVex0OKdrwpm6B80ldLbYmdb3xGXc9s=;
+	b=ChQmzQzCaS/k2kOFWiksdjzp72Lc05de332Znmy4l33CL1nY4f9RpL6Jc0qdyRZT9O
+	AxxCv2BEOyPahuZIfmXa5j8Qo7BvXFAUUtav68qtt/5PKzrPH4PV0l0V4nnmwXC0cPW1
+	dtRLM/f5EbIVoGoz6A1JUdRsQd2ZoYaq/NvBF4pSDWGdgnvkrM4vziVRw33ThpGWpikz
+	tFpWNK7doH5zUsAmo/CFBQJyTEY4s9OGHnvXlgmxxT6j/Fix3VEsJzpFwhejuL+zEDph
+	Q4DNwNE93M7z1j66bMLy9pq37MDHQRd06cT8qh8AtxNJmSiubjaFLwmZTj3u0Cogq4+F
+	RcYQ==
+X-Received: by 10.180.74.37 with SMTP id q5mr2753994wiv.59.1429598085464;
+	Mon, 20 Apr 2015 23:34:45 -0700 (PDT)
+Received: from [192.168.50.199] (ip-84-119-99-153.unity-media.net.
+	[84.119.99.153])
+	by mx.google.com with ESMTPSA id dl2sm18234994wib.2.2015.04.20.23.34.44
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 20 Apr 2015 23:34:44 -0700 (PDT)
+Message-ID: <5535EF8A.4070100@gmail.com>
+Date: Tue, 21 Apr 2015 08:34:50 +0200
+From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH V4] bluez collection: add (moved from oe-core)
+To: Otavio Salvador <otavio@ossystems.com.br>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <1428910057-23647-1-git-send-email-sven.ebenfeld@gmail.com>
+	<CAP9ODKoV+SZYEaSEYWL2=8Pz49VrUjaRbMHsAb0-Y8v3H_8+NQ@mail.gmail.com>
+In-Reply-To: <CAP9ODKoV+SZYEaSEYWL2=8Pz49VrUjaRbMHsAb0-Y8v3H_8+NQ@mail.gmail.com>
+Subject: Re: [meta-java][PATCH v2 0/7] Update OpenJDK7 to IcedTea 2.5.4 und OpenJDK 7u75b13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,31 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Apr 2015 15:49:28 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 21 Apr 2015 06:34:46 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-On Monday 20 April 2015 15:19:43 Iorga, Cristian wrote:
-> In v4, corrected the commit message.
+Hi Otavio,
+
+Am 20.04.2015 um 16:58 schrieb Otavio Salvador:
+> Hello Sven,
 > 
-> -----Original Message-----
-> From: Iorga, Cristian
-> Sent: Monday, April 20, 2015 6:19 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Iorga, Cristian
-> Subject: [meta-oe][PATCH V4] bluez collection: add (moved from oe-core)
+> On Mon, Apr 13, 2015 at 4:27 AM, Sven Ebenfeld <sven.ebenfeld@gmail.com> wrote:
+>> There were some mistakes in my former recipes. This version fixes them.
+>> OpenJDK-7 did not depend on krb5 but excluded it in OECONF. Now I changed to
+>> depending on krb5 and not excluding it. I've tested building and running it
+>> against dizzy and master branches of oe-core, bitbake and meta-openembedded.
+>> Built with qemux86 and qemuarm. This release switches the HotSpot-Release to a
+>> newer one because of a segfault bug in the ARM Thumb2 JIT.
 > 
-> BlueZ 4.x Bluetooth stack has been removed from oe-core.
-> However, it is still supported, so add it to meta-oe connectivity layer.
+> Did you see Khem comments about the patchset?
+> 
 
-Being somewhat pedantic, but I'm afraid this is still not quite right - it 
-should say "add it to recipes-connectivity in meta-oe".
+Yes, I saw those comments. I was thinking, that there will come more
+comments, so I waited to create a new patchset.
 
-Cheers,
-Paul
+> It would be interesting to get a new version addressing those so we
+> can merge it into master branch (currently it is hold in master-next).
+> 
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+If you want to merge it, I will fix the issues and send a new patchset.
 
