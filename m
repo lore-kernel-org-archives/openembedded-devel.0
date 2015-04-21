@@ -1,35 +1,23 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 2641873D77
+Return-Path: <etienne.cordonnier@streamunlimited.com>
+X-Greylist: delayed 314 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 21 Apr 2015 07:54:28 UTC
+Received: from bsmtp4.bon.at (bsmtp8.bon.at [213.33.87.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B0867226D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2015 06:45:31 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga103.jf.intel.com with ESMTP; 20 Apr 2015 23:45:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,614,1422950400"; d="scan'208";a="483541270"
-Received: from irsmsx101.ger.corp.intel.com ([163.33.3.153])
-	by FMSMGA003.fm.intel.com with ESMTP; 20 Apr 2015 23:45:31 -0700
-Received: from irsmsx155.ger.corp.intel.com (163.33.192.3) by
-	IRSMSX101.ger.corp.intel.com (163.33.3.153) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Tue, 21 Apr 2015 07:45:30 +0100
-Received: from irsmsx110.ger.corp.intel.com ([169.254.15.83]) by
-	irsmsx155.ger.corp.intel.com ([169.254.14.178]) with mapi id
-	14.03.0224.002; Tue, 21 Apr 2015 07:45:30 +0100
-From: "Valluri, Amarnath" <amarnath.valluri@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] toybox: Upgrade to v0.5.2
-Thread-Index: AQHQezudwTMOdqOMpUeEvT6nulrnVp1XBs0i
-Date: Tue, 21 Apr 2015 06:45:29 +0000
-Message-ID: <D3C33C4430ACA6488F343D1125FCCECC3444BB72@irsmsx110.ger.corp.intel.com>
-References: <D3C33C4430ACA6488F343D1125FCCECC3444BA6D@irsmsx110.ger.corp.intel.com>
-In-Reply-To: <D3C33C4430ACA6488F343D1125FCCECC3444BA6D@irsmsx110.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.3.86.139]
-MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] toybox: Upgrade to v0.5.2
+	Tue, 21 Apr 2015 07:54:28 +0000 (UTC)
+Received: from bsmtp.bon.at (unknown [192.168.181.108])
+	by bsmtp4.bon.at (Postfix) with ESMTPS id 3lWH8s4k7Vz5wK0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Apr 2015 09:49:17 +0200 (CEST)
+Received: from etienne-pc.sue.net (vpn.streamunlimited.com [91.114.0.140])
+	by bsmtp.bon.at (Postfix) with ESMTPSA id 3lWH8p6Jlwz5tlC;
+	Tue, 21 Apr 2015 09:49:14 +0200 (CEST)
+From: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Apr 2015 09:48:42 +0200
+Message-Id: <1429602522-22676-1-git-send-email-etienne.cordonnier@streamunlimited.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-multimedia][PATCH] cdparanoia: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,300 +31,739 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2015 06:45:32 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Apr 2015 07:54:30 -0000
 
-This is gentle reminder, can someone review and accept the patch.
+This library is required by the gstreamer plugin cdparanoia.
 
-- Amarnath
-________________________________________
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] on behalf of Valluri, Amarnath [amarnath.v=
-alluri@intel.com]
-Sent: Monday, April 20, 2015 10:28 AM
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe] [meta-oe][PATCH] toybox: Upgrade to v0.5.2
-
-The patch applied to toybox is rebased onto the new release and updated.
-
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+Signed-off-by: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
 ---
- .../toybox/0001-Match-paths-with-busybox.patch     | 67 ++++++++++++------=
-----
- .../toybox/{toybox_0.5.0.bb =3D> toybox_0.5.2.bb}    |  6 +-
- 2 files changed, 39 insertions(+), 34 deletions(-)
- rename meta-oe/recipes-core/toybox/{toybox_0.5.0.bb =3D> toybox_0.5.2.bb} =
-(92%)
+ .../recipes-support/cdparanoia/cdparanoia_10.2.bb  |  25 +
+ ...0001-Use-DESTDIR-in-install-Makefile-rule.patch |  70 +++
+ .../0002-interface-remove-C-reserved-keyword.patch | 605 +++++++++++++++++++++
+ 3 files changed, 700 insertions(+)
+ create mode 100644 meta-multimedia/recipes-support/cdparanoia/cdparanoia_10.2.bb
+ create mode 100644 meta-multimedia/recipes-support/cdparanoia/files/0001-Use-DESTDIR-in-install-Makefile-rule.patch
+ create mode 100644 meta-multimedia/recipes-support/cdparanoia/files/0002-interface-remove-C-reserved-keyword.patch
 
-diff --git a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busyb=
-ox.patch b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox=
-.patch
-index e071f22..9eb965d 100644
---- a/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
-+++ b/meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
-@@ -1,4 +1,4 @@
--From 27f5ca9f1e212e5ab00cde0bfc91282fc7ff5e16 Mon Sep 17 00:00:00 2001
-+From 9b37b45067677563dc8daa73d73a015c20ad6222 Mon Sep 17 00:00:00 2001
- From: Paul Barker <paul@paulbarker.me.uk>
- Date: Mon, 18 Aug 2014 12:18:16 +0000
- Subject: [PATCH] Match paths with busybox
-@@ -8,6 +8,9 @@ update-alternatives, the paths of the links installed by to=
-ybox should match
- those installed by busybox. This is accomplished by changing the flags of =
-a few
- tools within toybox.
-
-+v3:
-+    - Forward ported from v0.5.0 to v0.5.2
+diff --git a/meta-multimedia/recipes-support/cdparanoia/cdparanoia_10.2.bb b/meta-multimedia/recipes-support/cdparanoia/cdparanoia_10.2.bb
+new file mode 100644
+index 0000000..27321ac
+--- /dev/null
++++ b/meta-multimedia/recipes-support/cdparanoia/cdparanoia_10.2.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "cdparanoia library"
++DESCRIPTION = "library used to read audio CDs, which is able to perform \
++error corrections, hence the name paranoia."
++HOMEPAGE = "https://www.xiph.org/"
++SECTION = "libs"
++LICENSE = "LGPL2.1"
++LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=d370feaa1c9edcdbd29ca27ea3d2304d"
 +
- v2:
-     - Forward ported from v0.4.9 to v0.5.0
-     - Move new 'mount' command
-@@ -16,6 +19,8 @@ Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
-
- Upstream-status: Inappropriate
-     (specific to update-alternatives use in OpenEmbedded)
++SRC_URI = "http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-${PV}.src.tgz \
++			file://0001-Use-DESTDIR-in-install-Makefile-rule.patch \
++			file://0002-interface-remove-C-reserved-keyword.patch \
++"
++SRC_URI[md5sum] = "b304bbe8ab63373924a744eac9ebc652"
++SRC_URI[sha256sum] = "005db45ef4ee017f5c32ec124f913a0546e77014266c6a1c50df902a55fe64df"
 +
-+Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
- ---
-  toys/lsb/mount.c        | 2 +-
-  toys/lsb/pidof.c        | 2 +-
-@@ -45,7 +50,7 @@ Upstream-status: Inappropriate
-  25 files changed, 29 insertions(+), 29 deletions(-)
-
- diff --git a/toys/lsb/mount.c b/toys/lsb/mount.c
--index 01f5c32..65a5aa2 100644
-+index c334681..b076ca1 100644
- --- a/toys/lsb/mount.c
- +++ b/toys/lsb/mount.c
- @@ -6,7 +6,7 @@
-@@ -54,7 +59,7 @@ index 01f5c32..65a5aa2 100644
-
- -USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_USR|TOYFLAG_BIN|TOY=
-FLAG_STAYROOT))
- +USE_MOUNT(NEWTOY(mount, "?O:afnrvwt:o*[-rw]", TOYFLAG_BIN|TOYFLAG_STAYROO=
-T))
-- USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_ST=
-AYROOT))
-+ //USE_NFSMOUNT(NEWTOY(nfsmount, "?<2>2", TOYFLAG_USR|TOYFLAG_BIN|TOYFLAG_=
-STAYROOT))
-
-  config MOUNT
- diff --git a/toys/lsb/pidof.c b/toys/lsb/pidof.c
-@@ -84,20 +89,20 @@ index 6544265..a93327f 100644
-  config CHVT
-    bool "chvt"
- diff --git a/toys/other/ifconfig.c b/toys/other/ifconfig.c
--index f5d4215..5e7c54c 100644
-+index 8db3ff0..445799d 100644
- --- a/toys/other/ifconfig.c
- +++ b/toys/other/ifconfig.c
- @@ -6,7 +6,7 @@
-   *
-   * Not in SUSv4.
-
---USE_IFCONFIG(NEWTOY(ifconfig, "?a", TOYFLAG_BIN))
--+USE_IFCONFIG(NEWTOY(ifconfig, "?a", TOYFLAG_SBIN))
-+-USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_BIN))
-++USE_IFCONFIG(NEWTOY(ifconfig, "^?a", TOYFLAG_SBIN))
-
-  config IFCONFIG
-    bool "ifconfig"
- diff --git a/toys/other/insmod.c b/toys/other/insmod.c
--index 8aa959a..75fd7cd 100644
-+index 81721a3..cb222a5 100644
- --- a/toys/other/insmod.c
- +++ b/toys/other/insmod.c
- @@ -2,7 +2,7 @@
-@@ -123,20 +128,20 @@ index b8f5d82..4d16048 100644
-  config LSMOD
-    bool "lsmod"
- diff --git a/toys/other/netcat.c b/toys/other/netcat.c
--index 3c6f630..188c3d1 100644
-+index d27aa88..0fd26f7 100644
- --- a/toys/other/netcat.c
- +++ b/toys/other/netcat.c
- @@ -4,7 +4,7 @@
-   *
-   * TODO: udp, ipv6, genericize for telnet/microcom/tail-f
-
---USE_NETCAT(OLDTOY(nc, netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOY=
-FLAG_BIN))
--+USE_NETCAT(OLDTOY(nc, netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOY=
-FLAG_USR|TOYFLAG_BIN))
-- USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("tl^L^")"w#p#s:q#f:", TOYFLAG=
-_BIN))
-+-USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_BIN))
-++USE_NETCAT(OLDTOY(nc, netcat, TOYFLAG_USR|TOYFLAG_BIN))
-+ USE_NETCAT(NEWTOY(netcat, USE_NETCAT_LISTEN("^tlL")"w#p#s:q#f:", TOYFLAG_=
-BIN))
-
-  config NETCAT
- diff --git a/toys/other/pivot_root.c b/toys/other/pivot_root.c
--index 3e4beac..ce3d3a8 100644
-+index 9a1f56c..7748032 100644
- --- a/toys/other/pivot_root.c
- +++ b/toys/other/pivot_root.c
- @@ -2,7 +2,7 @@
-@@ -162,7 +167,7 @@ index 1c33362..fecd1ef 100644
-  config READLINK
-    bool "readlink"
- diff --git a/toys/other/reboot.c b/toys/other/reboot.c
--index 5cbc4f8..f8baafc 100644
-+index 8baa4d8..a135888 100644
- --- a/toys/other/reboot.c
- +++ b/toys/other/reboot.c
- @@ -2,9 +2,9 @@
-@@ -170,11 +175,11 @@ index 5cbc4f8..f8baafc 100644
-   * Copyright 2013 Elie De Brauwer <eliedebrauwer@gmail.com>
-
- -USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
---USE_REBOOT(OLDTOY(halt, reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
---USE_REBOOT(OLDTOY(poweroff, reboot, "n", TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-+-USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
-+-USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_BIN|TOYFLAG_NEEDROOT))
- +USE_REBOOT(NEWTOY(reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
--+USE_REBOOT(OLDTOY(halt, reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
--+USE_REBOOT(OLDTOY(poweroff, reboot, "n", TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-++USE_REBOOT(OLDTOY(halt, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-++USE_REBOOT(OLDTOY(poweroff, reboot, TOYFLAG_SBIN|TOYFLAG_NEEDROOT))
-
-  config REBOOT
-    bool "reboot"
-@@ -257,15 +262,15 @@ index 7f10c5e..1ab3ce8 100644
-  config CUT
-    bool "cut"
- diff --git a/toys/posix/df.c b/toys/posix/df.c
--index afb296b..6296dc9 100644
-+index 141e8e5..5d37b45 100644
- --- a/toys/posix/df.c
- +++ b/toys/posix/df.c
- @@ -4,7 +4,7 @@
-   *
-   * See http://opengroup.org/onlinepubs/9699919799/utilities/df.html
-
---USE_DF(NEWTOY(df, "Pkt*a", TOYFLAG_USR|TOYFLAG_SBIN))
--+USE_DF(NEWTOY(df, "Pkt*a", TOYFLAG_BIN))
-+-USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_USR|TOYFLAG_SBIN))
-++USE_DF(NEWTOY(df, "Pkt*a[-Pk]", TOYFLAG_BIN))
-
-  config DF
-    bool "df"
-@@ -283,20 +288,20 @@ index e8517d4..3ac4373 100644
-  config HEAD
-    bool "head"
- diff --git a/toys/posix/id.c b/toys/posix/id.c
--index b4d9c00..df79419 100644
-+index 353aa04..7ab489e 100644
- --- a/toys/posix/id.c
- +++ b/toys/posix/id.c
- @@ -6,10 +6,10 @@
-   *
-   * See http://opengroup.org/onlinepubs/9699919799/utilities/id.html
-
---USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_BIN))
--+USE_ID(NEWTOY(id, ">1nGgru[!Ggu]", TOYFLAG_USR|TOYFLAG_BIN))
-- USE_GROUPS(OLDTOY(groups, id, NULL, TOYFLAG_USR|TOYFLAG_BIN))
---USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_BIN))
---USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_BIN))
--+USE_LOGNAME(OLDTOY(logname, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
--+USE_LOGNAME(OLDTOY(whoami, id, ">0", TOYFLAG_USR|TOYFLAG_BIN))
-+-USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu=
-]", TOYFLAG_BIN))
-++USE_ID(NEWTOY(id, ">1"USE_ID_SELINUX("Z")"nGgru[!"USE_ID_SELINUX("Z")"Ggu=
-]", TOYFLAG_USR|TOYFLAG_BIN))
-+ USE_GROUPS(NEWTOY(groups, NULL, TOYFLAG_USR|TOYFLAG_BIN))
-+-USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_BIN))
-+-USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_BIN))
-++USE_LOGNAME(NEWTOY(logname, ">0", TOYFLAG_USR|TOYFLAG_BIN))
-++USE_WHOAMI(OLDTOY(whoami, logname, TOYFLAG_USR|TOYFLAG_BIN))
-
-  config ID
-    bool "id"
-@@ -327,7 +332,7 @@ index 8c20644..489eb13 100644
-  config RENICE
-    bool "renice"
- diff --git a/toys/posix/tail.c b/toys/posix/tail.c
--index e1048be..ba0a55a 100644
-+index e92c044..ba1d311 100644
- --- a/toys/posix/tail.c
- +++ b/toys/posix/tail.c
- @@ -4,7 +4,7 @@
-@@ -366,7 +371,7 @@ index 3cfdb94..c127cfe 100644
-  config UNIQ
-    bool "uniq"
- diff --git a/toys/posix/who.c b/toys/posix/who.c
--index 2c8a2e6..d5cd001 100644
-+index 876a562..414cdfc 100644
- --- a/toys/posix/who.c
- +++ b/toys/posix/who.c
- @@ -9,7 +9,7 @@
-@@ -379,5 +384,5 @@ index 2c8a2e6..d5cd001 100644
-  config WHO
-    bool "who"
- --
--2.1.2
-+1.8.1.2
-
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.5.0.bb b/meta-oe/recipes-=
-core/toybox/toybox_0.5.2.bb
-similarity index 92%
-rename from meta-oe/recipes-core/toybox/toybox_0.5.0.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.5.2.bb
-index 9bdba4d..bcd6a72 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.5.0.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.5.2.bb
-@@ -1,10 +1,10 @@
- SUMMARY =3D "Toybox combines common utilities together into a single execu=
-table."
- HOMEPAGE =3D "http://www.landley.net/toybox/"
-
--SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.bz2 \
-+SRC_URI =3D "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-     file://0001-Match-paths-with-busybox.patch"
--SRC_URI[md5sum] =3D "2cb6e8b34134038d86048e117f77765f"
--SRC_URI[sha256sum] =3D "2718b42154be041435df48d5b5140f4e307767c36b1017e0c8=
-d0da7f75b327a7"
-+SRC_URI[md5sum] =3D "b5d1242767c411b69dcd717da1c218b2"
-+SRC_URI[sha256sum] =3D "dec7f6433ee0e130f224fc63760b347ad0572280c4de32f1aa=
-efbee813a79a00"
-
- LICENSE =3D "BSD-0-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Df0b8b3dd6431bcaa245da0a08bd0d51=
-1"
---
-1.8.1.2
-
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki
-Business Identity Code: 0357606 - 4
-Domiciled in Helsinki
-
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
-
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki =
-
-Business Identity Code: 0357606 - 4 =
-
-Domiciled in Helsinki =
-
-
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
++# Uppercase letters are not allowed in the recipe name, thus the recipe can not be named cdparanoia-III and
++# we need to add the path to the extracted sources explicitely:
++S = "${WORKDIR}/cdparanoia-III-${PV}"
++
++# cdparanoia Makefile can not be used with several threads (because the static library target and the shared
++# library target use object files which are compiled in the same directory, the object files are just removed
++# between the compilation of those two targets)
++PARALLEL_MAKE = ""
++
++inherit autotools
+diff --git a/meta-multimedia/recipes-support/cdparanoia/files/0001-Use-DESTDIR-in-install-Makefile-rule.patch b/meta-multimedia/recipes-support/cdparanoia/files/0001-Use-DESTDIR-in-install-Makefile-rule.patch
+new file mode 100644
+index 0000000..7b08300
+--- /dev/null
++++ b/meta-multimedia/recipes-support/cdparanoia/files/0001-Use-DESTDIR-in-install-Makefile-rule.patch
+@@ -0,0 +1,70 @@
++From 97c06ae955b270851f4fd2396c715f9c76591f37 Mon Sep 17 00:00:00 2001
++From: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
++Date: Thu, 2 Apr 2015 10:15:08 +0200
++Subject: [PATCH] Use DESTDIR in "install" Makefile rule
++
++This change allows to perform installations in a sysroot folder, which is required e.g. by
++the recipes inheriting yocto autotool class, and is an autotool standard:
++make install DESTDIR=~/mysysroot
++
++Upstream-Status: Inappropriate (the upstream project is dead)
++
++Signed-off-by: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
++---
++ Makefile.in | 36 ++++++++++++++++++------------------
++ 1 file changed, 18 insertions(+), 18 deletions(-)
++
++diff --git a/Makefile.in b/Makefile.in
++index 3d235ad..df544c7 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -63,28 +63,28 @@ slib:
++ 	cd paranoia && $(MAKE) slib
++ 
++ install:
++-	$(INSTALL) -d -m 0755 $(BINDIR)
++-	$(INSTALL) -m 755 $(srcdir)/cdparanoia $(BINDIR)
++-	$(INSTALL) -d -m 0755 $(MANDIR)
++-	$(INSTALL) -d -m 0755 $(MANDIR)/man1
++-	$(INSTALL) -m 0644 $(srcdir)/cdparanoia.1 $(MANDIR)/man1
++-	$(INSTALL) -d -m 0755 $(INCLUDEDIR)
++-	$(INSTALL) -m 0644 $(srcdir)/paranoia/cdda_paranoia.h $(INCLUDEDIR)
++-	$(INSTALL) -d -m 0755 $(LIBDIR)
++-	$(INSTALL) -m 0644 $(srcdir)/paranoia/libcdda_paranoia.so.0.$(VERSION) $(LIBDIR)
++-	$(INSTALL) -m 0644 $(srcdir)/paranoia/libcdda_paranoia.a $(LIBDIR)
++-	$(INSTALL) -m 0644 $(srcdir)/interface/cdda_interface.h $(INCLUDEDIR)
++-	$(INSTALL) -m 0644 $(srcdir)/interface/libcdda_interface.so.0.$(VERSION) $(LIBDIR)
++-	$(INSTALL) -m 0644 $(srcdir)/interface/libcdda_interface.a $(LIBDIR)
++-	$(INSTALL) -m 0644 $(srcdir)/utils.h $(INCLUDEDIR)
+++	$(INSTALL) -d -m 0755 $(DESTDIR)$(BINDIR)
+++	$(INSTALL) -m 755 $(srcdir)/cdparanoia $(DESTDIR)$(BINDIR)
+++	$(INSTALL) -d -m 0755 $(DESTDIR)$(MANDIR)
+++	$(INSTALL) -d -m 0755 $(DESTDIR)$(MANDIR)/man1
+++	$(INSTALL) -m 0644 $(srcdir)/cdparanoia.1 $(DESTDIR)$(MANDIR)/man1
+++	$(INSTALL) -d -m 0755 $(DESTDIR)$(INCLUDEDIR)
+++	$(INSTALL) -m 0644 $(srcdir)/paranoia/cdda_paranoia.h $(DESTDIR)$(INCLUDEDIR)
+++	$(INSTALL) -d -m 0755 $(DESTDIR)$(LIBDIR)
+++	$(INSTALL) -m 0644 $(srcdir)/paranoia/libcdda_paranoia.so.0.$(VERSION) $(DESTDIR)$(LIBDIR)
+++	$(INSTALL) -m 0644 $(srcdir)/paranoia/libcdda_paranoia.a $(DESTDIR)$(LIBDIR)
+++	$(INSTALL) -m 0644 $(srcdir)/interface/cdda_interface.h $(DESTDIR)$(INCLUDEDIR)
+++	$(INSTALL) -m 0644 $(srcdir)/interface/libcdda_interface.so.0.$(VERSION) $(DESTDIR)$(LIBDIR)
+++	$(INSTALL) -m 0644 $(srcdir)/interface/libcdda_interface.a $(DESTDIR)$(LIBDIR)
+++	$(INSTALL) -m 0644 $(srcdir)/utils.h $(DESTDIR)$(INCLUDEDIR)
++ 	ln -fs libcdda_interface.so.0.$(VERSION) \
++-		$(LIBDIR)/libcdda_interface.so.0
+++		$(DESTDIR)$(LIBDIR)/libcdda_interface.so.0
++ 	ln -fs libcdda_interface.so.0.$(VERSION) \
++-		$(LIBDIR)/libcdda_interface.so
+++		$(DESTDIR)$(LIBDIR)/libcdda_interface.so
++ 	ln -fs libcdda_paranoia.so.0.$(VERSION) \
++-		$(LIBDIR)/libcdda_paranoia.so.0
+++		$(DESTDIR)$(LIBDIR)/libcdda_paranoia.so.0
++ 	ln -fs libcdda_paranoia.so.0.$(VERSION) \
++-		$(LIBDIR)/libcdda_paranoia.so
+++		$(DESTDIR)$(LIBDIR)/libcdda_paranoia.so
++ 
++ cdparanoia:	$(OFILES) $(LIBDEP)
++ 		$(LD) $(CFLAGS) $(LDFLAGS) $(OFILES) \
++-- 
++1.9.1
++
+diff --git a/meta-multimedia/recipes-support/cdparanoia/files/0002-interface-remove-C-reserved-keyword.patch b/meta-multimedia/recipes-support/cdparanoia/files/0002-interface-remove-C-reserved-keyword.patch
+new file mode 100644
+index 0000000..a5600a1
+--- /dev/null
++++ b/meta-multimedia/recipes-support/cdparanoia/files/0002-interface-remove-C-reserved-keyword.patch
+@@ -0,0 +1,605 @@
++From 12ea28398f8e5d4a4a23c62d511fc4f53584e51d Mon Sep 17 00:00:00 2001
++From: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
++Date: Tue, 7 Apr 2015 11:07:56 +0200
++Subject: [PATCH] interface: remove C++ reserved keyword
++
++Because "private" was used in cdda_interface.h, this header file could not be
++compiled in C++.
++
++Upstream-Status: Inappropriate (the upstream project is dead)
++
++Signed-off-by: Etienne Cordonnier <etienne.cordonnier@streamunlimited.com>
++---
++ interface/cdda_interface.h   |   2 +-
++ interface/cooked_interface.c |   8 +--
++ interface/interface.c        |   8 +--
++ interface/scan_devices.c     |  22 ++++----
++ interface/scsi_interface.c   | 128 +++++++++++++++++++++----------------------
++ interface/test_interface.c   |   4 +-
++ 6 files changed, 86 insertions(+), 86 deletions(-)
++
++diff --git a/interface/cdda_interface.h b/interface/cdda_interface.h
++index 8487cb7..b738825 100644
++--- a/interface/cdda_interface.h
+++++ b/interface/cdda_interface.h
++@@ -84,7 +84,7 @@ typedef struct cdrom_drive{
++   int is_atapi;
++   int is_mmc;
++ 
++-  cdda_private_data_t *private;
+++  cdda_private_data_t *priv; /* private is a C++ reserved keyword */
++   void         *reserved;
++   unsigned char inqbytes[4];
++ 
++diff --git a/interface/cooked_interface.c b/interface/cooked_interface.c
++index de29055..ea9d0fc 100644
++--- a/interface/cooked_interface.c
+++++ b/interface/cooked_interface.c
++@@ -13,13 +13,13 @@
++ static int timed_ioctl(cdrom_drive *d, int fd, int command, void *arg){
++   struct timespec tv1;
++   struct timespec tv2;
++-  int ret1=clock_gettime(d->private->clock,&tv1);
+++  int ret1=clock_gettime(d->priv->clock,&tv1);
++   int ret2=ioctl(fd, command,arg);
++-  int ret3=clock_gettime(d->private->clock,&tv2);
+++  int ret3=clock_gettime(d->priv->clock,&tv2);
++   if(ret1<0 || ret3<0){
++-    d->private->last_milliseconds=-1;
+++    d->priv->last_milliseconds=-1;
++   }else{
++-    d->private->last_milliseconds = (tv2.tv_sec-tv1.tv_sec)*1000. + (tv2.tv_nsec-tv1.tv_nsec)/1000000.;
+++    d->priv->last_milliseconds = (tv2.tv_sec-tv1.tv_sec)*1000. + (tv2.tv_nsec-tv1.tv_nsec)/1000000.;
++   }
++   return ret2;
++ }
++diff --git a/interface/interface.c b/interface/interface.c
++index e8a90cd..526c2a9 100644
++--- a/interface/interface.c
+++++ b/interface/interface.c
++@@ -39,9 +39,9 @@ int cdda_close(cdrom_drive *d){
++     if(d->drive_model)free(d->drive_model);
++     if(d->cdda_fd!=-1)close(d->cdda_fd);
++     if(d->ioctl_fd!=-1 && d->ioctl_fd!=d->cdda_fd)close(d->ioctl_fd);
++-    if(d->private){
++-      if(d->private->sg_hd)free(d->private->sg_hd);
++-      free(d->private);
+++    if(d->priv){
+++      if(d->priv->sg_hd)free(d->priv->sg_hd);
+++      free(d->priv);
++     }
++ 
++     free(d);
++@@ -127,7 +127,7 @@ long cdda_read_timed(cdrom_drive *d, void *buffer, long beginsector, long sector
++ 	}
++       }	
++     }
++-    if(ms)*ms=d->private->last_milliseconds;
+++    if(ms)*ms=d->priv->last_milliseconds;
++     return(sectors);
++   }
++   
++diff --git a/interface/scan_devices.c b/interface/scan_devices.c
++index fc58110..5f6c4e3 100644
++--- a/interface/scan_devices.c
+++++ b/interface/scan_devices.c
++@@ -264,11 +264,11 @@ cdrom_drive *cdda_identify_cooked(const char *dev, int messagedest,
++   d->interface=COOKED_IOCTL;
++   d->bigendianp=-1; /* We don't know yet... */
++   d->nsectors=-1;
++-  d->private=calloc(1,sizeof(*d->private));
+++  d->priv=calloc(1,sizeof(*d->priv));
++   {
++     /* goddamnit */
++     struct timespec tv;
++-    d->private->clock=(clock_gettime(CLOCK_MONOTONIC,&tv)<0?CLOCK_REALTIME:CLOCK_MONOTONIC);
+++    d->priv->clock=(clock_gettime(CLOCK_MONOTONIC,&tv)<0?CLOCK_REALTIME:CLOCK_MONOTONIC);
++   }
++   idmessage(messagedest,messages,"\t\tCDROM sensed: %s\n",description);
++   return(d);
++@@ -674,15 +674,15 @@ cdrom_drive *cdda_identify_scsi(const char *generic_device,
++   d->bigendianp=-1; /* We don't know yet... */
++   d->nsectors=-1;
++   d->messagedest = messagedest;
++-  d->private=calloc(1,sizeof(*d->private));
+++  d->priv=calloc(1,sizeof(*d->priv));
++   {
++     /* goddamnit */
++     struct timespec tv;
++-    d->private->clock=(clock_gettime(CLOCK_MONOTONIC,&tv)<0?CLOCK_REALTIME:CLOCK_MONOTONIC);
+++    d->priv->clock=(clock_gettime(CLOCK_MONOTONIC,&tv)<0?CLOCK_REALTIME:CLOCK_MONOTONIC);
++   }
++   if(use_sgio){
++     d->interface=SGIO_SCSI;
++-    d->private->sg_buffer=(unsigned char *)(d->private->sg_hd=malloc(MAX_BIG_BUFF_SIZE));
+++    d->priv->sg_buffer=(unsigned char *)(d->priv->sg_hd=malloc(MAX_BIG_BUFF_SIZE));
++     g_fd=d->cdda_fd=dup(d->ioctl_fd);
++   }else{
++     version=verify_SG_version(d,messagedest,messages);
++@@ -696,8 +696,8 @@ cdrom_drive *cdda_identify_scsi(const char *generic_device,
++     }
++ 
++     /* malloc our big buffer for scsi commands */
++-    d->private->sg_hd=malloc(MAX_BIG_BUFF_SIZE);
++-    d->private->sg_buffer=((unsigned char *)d->private->sg_hd)+SG_OFF;
+++    d->priv->sg_hd=malloc(MAX_BIG_BUFF_SIZE);
+++    d->priv->sg_buffer=((unsigned char *)d->priv->sg_hd)+SG_OFF;
++   }
++ 
++   {
++@@ -772,9 +772,9 @@ cdda_identify_scsi_fail:
++   if(i_fd!=-1)close(i_fd);
++   if(g_fd!=-1)close(g_fd);
++   if(d){
++-    if(d->private){
++-      if(d->private->sg_hd)free(d->private->sg_hd);
++-      free(d->private);
+++    if(d->priv){
+++      if(d->priv->sg_hd)free(d->priv->sg_hd);
+++      free(d->priv);
++     }
++     free(d);
++   }
++@@ -821,7 +821,7 @@ cdrom_drive *cdda_identify_test(const char *filename, int messagedest,
++   d->interface=TEST_INTERFACE;
++   d->bigendianp=-1; /* We don't know yet... */
++   d->nsectors=-1;
++-  d->private=calloc(1,sizeof(*d->private));
+++  d->priv=calloc(1,sizeof(*d->priv));
++   d->drive_model=copystring("File based test interface");
++   idmessage(messagedest,messages,"\t\tCDROM sensed: %s\n",d->drive_model);
++   
++diff --git a/interface/scsi_interface.c b/interface/scsi_interface.c
++index adbb9bf..75d90d4 100644
++--- a/interface/scsi_interface.c
+++++ b/interface/scsi_interface.c
++@@ -15,13 +15,13 @@
++ static int timed_ioctl(cdrom_drive *d, int fd, int command, void *arg){
++   struct timespec tv1;
++   struct timespec tv2;
++-  int ret1=clock_gettime(d->private->clock,&tv1);
+++  int ret1=clock_gettime(d->priv->clock,&tv1);
++   int ret2=ioctl(fd, command,arg);
++-  int ret3=clock_gettime(d->private->clock,&tv2);
+++  int ret3=clock_gettime(d->priv->clock,&tv2);
++   if(ret1<0 || ret3<0){
++-    d->private->last_milliseconds=-1;
+++    d->priv->last_milliseconds=-1;
++   }else{
++-    d->private->last_milliseconds = (tv2.tv_sec-tv1.tv_sec)*1000. + (tv2.tv_nsec-tv1.tv_nsec)/1000000.;
+++    d->priv->last_milliseconds = (tv2.tv_sec-tv1.tv_sec)*1000. + (tv2.tv_nsec-tv1.tv_nsec)/1000000.;
++   }
++   return ret2;
++ }
++@@ -96,7 +96,7 @@ static void tweak_SG_buffer(cdrom_drive *d) {
++ static void clear_garbage(cdrom_drive *d){
++   fd_set fdset;
++   struct timeval tv;
++-  struct sg_header *sg_hd=d->private->sg_hd;
+++  struct sg_header *sg_hd=d->priv->sg_hd;
++   int flag=0;
++ 
++   /* clear out any possibly preexisting garbage */
++@@ -185,7 +185,7 @@ static int sg2_handle_scsi_cmd(cdrom_drive *d,
++   struct timespec tv2;
++   int tret1,tret2;
++   int status = 0;
++-  struct sg_header *sg_hd=d->private->sg_hd;
+++  struct sg_header *sg_hd=d->priv->sg_hd;
++   long writebytes=SG_OFF+cmd_len+in_size;
++ 
++   /* generic scsi device services */
++@@ -195,7 +195,7 @@ static int sg2_handle_scsi_cmd(cdrom_drive *d,
++ 
++   memset(sg_hd,0,sizeof(sg_hd)); 
++   memset(sense_buffer,0,SG_MAX_SENSE); 
++-  memcpy(d->private->sg_buffer,cmd,cmd_len+in_size);
+++  memcpy(d->priv->sg_buffer,cmd,cmd_len+in_size);
++   sg_hd->twelve_byte = cmd_len == 12;
++   sg_hd->result = 0;
++   sg_hd->reply_len = SG_OFF + out_size;
++@@ -209,7 +209,7 @@ static int sg2_handle_scsi_cmd(cdrom_drive *d,
++      tell if the command failed.  Scared yet? */
++ 
++   if(bytecheck && out_size>in_size){
++-    memset(d->private->sg_buffer+cmd_len+in_size,bytefill,out_size-in_size); 
+++    memset(d->priv->sg_buffer+cmd_len+in_size,bytefill,out_size-in_size); 
++     /* the size does not remove cmd_len due to the way the kernel
++        driver copies buffers */
++     writebytes+=(out_size-in_size);
++@@ -243,7 +243,7 @@ static int sg2_handle_scsi_cmd(cdrom_drive *d,
++   }
++ 
++   sigprocmask (SIG_BLOCK, &(d->sigset), NULL );
++-  tret1=clock_gettime(d->private->clock,&tv1);  
+++  tret1=clock_gettime(d->priv->clock,&tv1);  
++   errno=0;
++   status = write(d->cdda_fd, sg_hd, writebytes );
++ 
++@@ -289,7 +289,7 @@ static int sg2_handle_scsi_cmd(cdrom_drive *d,
++     }
++   }
++ 
++-  tret2=clock_gettime(d->private->clock,&tv2);  
+++  tret2=clock_gettime(d->priv->clock,&tv2);  
++   errno=0;
++   status = read(d->cdda_fd, sg_hd, SG_OFF + out_size);
++   sigprocmask ( SIG_UNBLOCK, &(d->sigset), NULL );
++@@ -313,7 +313,7 @@ static int sg2_handle_scsi_cmd(cdrom_drive *d,
++   if(bytecheck && in_size+cmd_len<out_size){
++     long i,flag=0;
++     for(i=in_size;i<out_size;i++)
++-      if(d->private->sg_buffer[i]!=bytefill){
+++      if(d->priv->sg_buffer[i]!=bytefill){
++ 	flag=1;
++ 	break;
++       }
++@@ -326,9 +326,9 @@ static int sg2_handle_scsi_cmd(cdrom_drive *d,
++ 
++   errno=0;
++   if(tret1<0 || tret2<0){
++-    d->private->last_milliseconds=-1;
+++    d->priv->last_milliseconds=-1;
++   }else{
++-    d->private->last_milliseconds = (tv2.tv_sec-tv1.tv_sec)*1000 + (tv2.tv_nsec-tv1.tv_nsec)/1000000;
+++    d->priv->last_milliseconds = (tv2.tv_sec-tv1.tv_sec)*1000 + (tv2.tv_nsec-tv1.tv_nsec)/1000000;
++   }
++   return(0);
++ }
++@@ -347,7 +347,7 @@ static int sgio_handle_scsi_cmd(cdrom_drive *d,
++ 
++   memset(&hdr,0,sizeof(hdr));
++   memset(sense,0,sizeof(sense));
++-  memcpy(d->private->sg_buffer,cmd+cmd_len,in_size);
+++  memcpy(d->priv->sg_buffer,cmd+cmd_len,in_size);
++ 
++   hdr.cmdp = cmd;
++   hdr.cmd_len = cmd_len;
++@@ -355,7 +355,7 @@ static int sgio_handle_scsi_cmd(cdrom_drive *d,
++   hdr.mx_sb_len = SG_MAX_SENSE;
++   hdr.timeout = 50000;
++   hdr.interface_id = 'S';
++-  hdr.dxferp =  d->private->sg_buffer;
+++  hdr.dxferp =  d->priv->sg_buffer;
++   hdr.flags = SG_FLAG_DIRECT_IO;  /* direct IO if we can get it */
++ 
++   /* scary buffer fill hack */
++@@ -400,7 +400,7 @@ static int sgio_handle_scsi_cmd(cdrom_drive *d,
++   if(bytecheck && in_size<out_size){
++     long i,flag=0;
++     for(i=in_size;i<out_size;i++)
++-      if(d->private->sg_buffer[i]!=bytefill){
+++      if(d->priv->sg_buffer[i]!=bytefill){
++ 	flag=1;
++ 	break;
++       }
++@@ -412,7 +412,7 @@ static int sgio_handle_scsi_cmd(cdrom_drive *d,
++   }
++ 
++   /* Can't rely on .duration because we can't be certain kernel has HZ set to something useful */
++-  /* d->private->last_milliseconds = hdr.duration; */
+++  /* d->priv->last_milliseconds = hdr.duration; */
++ 
++   errno = 0;
++   return 0;
++@@ -445,9 +445,9 @@ static int test_unit_ready(cdrom_drive *d){
++ 
++   handle_scsi_cmd(d, cmd, 6, 0, 56, 0,0, sense);
++ 
++-  key = d->private->sg_buffer[2] & 0xf;
++-  ASC = d->private->sg_buffer[12];
++-  ASCQ = d->private->sg_buffer[13];
+++  key = d->priv->sg_buffer[2] & 0xf;
+++  ASC = d->priv->sg_buffer[12];
+++  ASCQ = d->priv->sg_buffer[13];
++   
++   if(key == 2 && ASC == 4 && ASCQ == 1) return 0;
++   return 1;
++@@ -492,7 +492,7 @@ static int mode_sense_atapi(cdrom_drive *d,int size,int page){
++   if (handle_scsi_cmd (d, cmd, 10, 0, size+4,'\377',1,sense)) return(1);
++ 
++   {
++-    unsigned char *b=d->private->sg_buffer;
+++    unsigned char *b=d->priv->sg_buffer;
++     if(b[0])return(1); /* Handles only up to 256 bytes */
++     if(b[6])return(1); /* Handles only up to 256 bytes */
++ 
++@@ -604,8 +604,8 @@ static int mode_select(cdrom_drive *d,int density,int secsize){
++ static unsigned int get_orig_sectorsize(cdrom_drive *d){
++   if(mode_sense(d,12,0x01))return(-1);
++ 
++-  d->orgdens = d->private->sg_buffer[4];
++-  return(d->orgsize = ((int)(d->private->sg_buffer[10])<<8)+d->private->sg_buffer[11]);
+++  d->orgdens = d->priv->sg_buffer[4];
+++  return(d->orgsize = ((int)(d->priv->sg_buffer[10])<<8)+d->priv->sg_buffer[11]);
++ }
++ 
++ /* switch CDROM scsi drives to given sector size  */
++@@ -664,8 +664,8 @@ static int scsi_read_toc (cdrom_drive *d){
++     return(-4);
++   }
++ 
++-  first=d->private->sg_buffer[2];
++-  last=d->private->sg_buffer[3];
+++  first=d->priv->sg_buffer[2];
+++  last=d->priv->sg_buffer[3];
++   tracks=last-first+1;
++ 
++   if (last > MAXTRK || first > MAXTRK || last<0 || first<0) {
++@@ -683,7 +683,7 @@ static int scsi_read_toc (cdrom_drive *d){
++       return(-5);
++     }
++     {
++-      scsi_TOC *toc=(scsi_TOC *)(d->private->sg_buffer+4);
+++      scsi_TOC *toc=(scsi_TOC *)(d->priv->sg_buffer+4);
++ 
++       d->disc_toc[i-first].bFlags=toc->bFlags;
++       d->disc_toc[i-first].bTrack=i;
++@@ -704,7 +704,7 @@ static int scsi_read_toc (cdrom_drive *d){
++     return(-2);
++   }
++   {
++-    scsi_TOC *toc=(scsi_TOC *)(d->private->sg_buffer+4);
+++    scsi_TOC *toc=(scsi_TOC *)(d->priv->sg_buffer+4);
++     
++     d->disc_toc[i-first].bFlags=toc->bFlags;
++     d->disc_toc[i-first].bTrack=0xAA;
++@@ -738,7 +738,7 @@ static int scsi_read_toc2 (cdrom_drive *d){
++   }
++ 
++   /* copy to our structure and convert start sector */
++-  tracks = d->private->sg_buffer[1];
+++  tracks = d->priv->sg_buffer[1];
++   if (tracks > MAXTRK) {
++     cderror(d,"003: CDROM reporting illegal number of tracks\n");
++     return(-3);
++@@ -754,33 +754,33 @@ static int scsi_read_toc2 (cdrom_drive *d){
++       return(-5);
++     }
++     
++-    d->disc_toc[i].bFlags = d->private->sg_buffer[10];
+++    d->disc_toc[i].bFlags = d->priv->sg_buffer[10];
++     d->disc_toc[i].bTrack = i + 1;
++ 
++     d->disc_toc[i].dwStartSector= d->adjust_ssize * 
++-	(((signed char)(d->private->sg_buffer[2])<<24) | 
++-	 (d->private->sg_buffer[3]<<16)|
++-	 (d->private->sg_buffer[4]<<8)|
++-	 (d->private->sg_buffer[5]));
+++	(((signed char)(d->priv->sg_buffer[2])<<24) | 
+++	 (d->priv->sg_buffer[3]<<16)|
+++	 (d->priv->sg_buffer[4]<<8)|
+++	 (d->priv->sg_buffer[5]));
++   }
++ 
++   d->disc_toc[i].bFlags = 0;
++   d->disc_toc[i].bTrack = i + 1;
++-  memcpy (&foo, d->private->sg_buffer+2, 4);
++-  memcpy (&bar, d->private->sg_buffer+6, 4);
+++  memcpy (&foo, d->priv->sg_buffer+2, 4);
+++  memcpy (&bar, d->priv->sg_buffer+6, 4);
++   d->disc_toc[i].dwStartSector = d->adjust_ssize * (be32_to_cpu(foo) +
++ 						    be32_to_cpu(bar));
++ 
++   d->disc_toc[i].dwStartSector= d->adjust_ssize * 
++-    ((((signed char)(d->private->sg_buffer[2])<<24) | 
++-      (d->private->sg_buffer[3]<<16)|
++-      (d->private->sg_buffer[4]<<8)|
++-      (d->private->sg_buffer[5]))+
+++    ((((signed char)(d->priv->sg_buffer[2])<<24) | 
+++      (d->priv->sg_buffer[3]<<16)|
+++      (d->priv->sg_buffer[4]<<8)|
+++      (d->priv->sg_buffer[5]))+
++      
++-     ((((signed char)(d->private->sg_buffer[6])<<24) | 
++-       (d->private->sg_buffer[7]<<16)|
++-       (d->private->sg_buffer[8]<<8)|
++-       (d->private->sg_buffer[9]))));
+++     ((((signed char)(d->priv->sg_buffer[6])<<24) | 
+++       (d->priv->sg_buffer[7]<<16)|
+++       (d->priv->sg_buffer[8]<<8)|
+++       (d->priv->sg_buffer[9]))));
++ 
++ 
++   d->cd_extra = FixupTOC(d,tracks+1);
++@@ -817,7 +817,7 @@ static int i_read_28 (cdrom_drive *d, void *p, long begin, long sectors, unsigne
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,10,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -836,7 +836,7 @@ static int i_read_A8 (cdrom_drive *d, void *p, long begin, long sectors, unsigne
++   cmd[9] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -854,7 +854,7 @@ static int i_read_D4_10 (cdrom_drive *d, void *p, long begin, long sectors, unsi
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,10,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -872,7 +872,7 @@ static int i_read_D4_12 (cdrom_drive *d, void *p, long begin, long sectors, unsi
++   cmd[9] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -890,7 +890,7 @@ static int i_read_D5 (cdrom_drive *d, void *p, long begin, long sectors, unsigne
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,10,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -908,7 +908,7 @@ static int i_read_D8 (cdrom_drive *d, void *p, long begin, long sectors, unsigne
++   cmd[9] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -922,7 +922,7 @@ static int i_read_mmc (cdrom_drive *d, void *p, long begin, long sectors, unsign
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -936,7 +936,7 @@ static int i_read_mmcB (cdrom_drive *d, void *p, long begin, long sectors, unsig
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -950,7 +950,7 @@ static int i_read_mmc2 (cdrom_drive *d, void *p, long begin, long sectors, unsig
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -964,7 +964,7 @@ static int i_read_mmc2B (cdrom_drive *d, void *p, long begin, long sectors, unsi
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -978,7 +978,7 @@ static int i_read_mmc3 (cdrom_drive *d, void *p, long begin, long sectors, unsig
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -992,7 +992,7 @@ static int i_read_mmc3B (cdrom_drive *d, void *p, long begin, long sectors, unsi
++   cmd[8] = sectors;
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -1026,7 +1026,7 @@ static int i_read_msf (cdrom_drive *d, void *p, long begin, long sectors, unsign
++ 
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -1039,7 +1039,7 @@ static int i_read_msf2 (cdrom_drive *d, void *p, long begin, long sectors, unsig
++ 
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -1052,7 +1052,7 @@ static int i_read_msf3 (cdrom_drive *d, void *p, long begin, long sectors, unsig
++   
++   if((ret=handle_scsi_cmd(d,cmd,12,0,sectors * CD_FRAMESIZE_RAW,'\177',1,sense)))
++     return(ret);
++-  if(p)memcpy(p,d->private->sg_buffer,sectors*CD_FRAMESIZE_RAW);
+++  if(p)memcpy(p,d->priv->sg_buffer,sectors*CD_FRAMESIZE_RAW);
++   return(0);
++ }
++ 
++@@ -1275,7 +1275,7 @@ long scsi_read_msf3 (cdrom_drive *d, void *p, long begin,
++ static int count_2352_bytes(cdrom_drive *d){
++   long i;
++   for(i=2351;i>=0;i--)
++-    if(d->private->sg_buffer[i]!=(unsigned char)'\177')
+++    if(d->priv->sg_buffer[i]!=(unsigned char)'\177')
++       return(((i+3)>>2)<<2);
++ 
++   return(0);
++@@ -1284,7 +1284,7 @@ static int count_2352_bytes(cdrom_drive *d){
++ static int verify_nonzero(cdrom_drive *d){
++   long i,flag=0;
++   for(i=0;i<2352;i++)
++-    if(d->private->sg_buffer[i]!=0){
+++    if(d->priv->sg_buffer[i]!=0){
++       flag=1;
++       break;
++     }
++@@ -1625,7 +1625,7 @@ static int check_mmc(cdrom_drive *d){
++   d->is_mmc=0;
++   if(mode_sense(d,22,0x2A)==0){
++   
++-    b=d->private->sg_buffer;
+++    b=d->priv->sg_buffer;
++     b+=b[3]+4;
++     
++     if((b[0]&0x3F)==0x2A){
++@@ -1673,7 +1673,7 @@ unsigned char *scsi_inquiry(cdrom_drive *d){
++     cderror(d,"008: Unable to identify CDROM model\n");
++     return(NULL);
++   }
++-  return (d->private->sg_buffer);
+++  return (d->priv->sg_buffer);
++ }
++ 
++ int scsi_init_drive(cdrom_drive *d){
++@@ -1742,8 +1742,8 @@ int scsi_init_drive(cdrom_drive *d){
++   check_cache(d);
++ 
++   d->error_retry=1;
++-  d->private->sg_hd=realloc(d->private->sg_hd,d->nsectors*CD_FRAMESIZE_RAW + SG_OFF + 128);
++-  d->private->sg_buffer=((unsigned char *)d->private->sg_hd)+SG_OFF;
+++  d->priv->sg_hd=realloc(d->priv->sg_hd,d->nsectors*CD_FRAMESIZE_RAW + SG_OFF + 128);
+++  d->priv->sg_buffer=((unsigned char *)d->priv->sg_hd)+SG_OFF;
++   d->report_all=1;
++   return(0);
++ }
++diff --git a/interface/test_interface.c b/interface/test_interface.c
++index 11bec25..e1cefaa 100644
++--- a/interface/test_interface.c
+++++ b/interface/test_interface.c
++@@ -66,9 +66,9 @@ static long test_read(cdrom_drive *d, void *p, long begin, long sectors){
++   if(!fd)fd=fdopen(d->cdda_fd,"r");
++ 
++   if(begin<lastread)
++-    d->private->last_milliseconds=20;
+++    d->priv->last_milliseconds=20;
++   else
++-    d->private->last_milliseconds=sectors;
+++    d->priv->last_milliseconds=sectors;
++ 
++ #ifdef CDDA_TEST_UNDERRUN
++   sectors-=1;
++-- 
++1.9.1
++
+-- 
+1.9.1
 
 
