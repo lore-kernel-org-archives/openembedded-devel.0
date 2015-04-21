@@ -1,37 +1,34 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BBDF65CF5
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BABC60167
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2015 11:00:29 +0000 (UTC)
-Received: by widdi4 with SMTP id di4so16970097wid.0
+	Tue, 21 Apr 2015 13:27:35 +0000 (UTC)
+Received: by widdi4 with SMTP id di4so139123045wid.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2015 04:00:30 -0700 (PDT)
+	Tue, 21 Apr 2015 06:27:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	bh=g2+dwkaBvrfo8MFfzv5FnpIDBKN+RFdXz1a7LSZy7ZA=;
-	b=SDBjhNrkJlinmnT2rJdq0k1GYH6qu+guRBbqkIuffnIK/sO6tN6QmE4xjkgz9I1jOe
-	4f3cEOZZWNe1KfEyMk+laXIdfOO9vdkke9/PULjGqdvZQOq27N3R6qhJlitdABHtaLjl
-	r8BnGQuzJah5h6DaipT2YLJdNv8wGlT/MmqX9w237lNu77KL6nVGuMqBHqwpxTI7YO9B
-	5sTl4lAgBbpKtVLOlBbYT8Yi8P3vPHG7W1tYxWIeVk4LCZRcnxRdV43gN8YfVlePXo0Q
-	yzW5BIXCfizUABId0LQOSLNocj3b+X5n8V5T2oHIFxG67atrKOnWGGMtBh7REbPyOw5Y
-	MgNA==
-X-Received: by 10.180.107.70 with SMTP id ha6mr4690252wib.20.1429614030102;
-	Tue, 21 Apr 2015 04:00:30 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=4ODYc6pH/Kq/o87T+/ubTUtR4uRTitbMCPZ+rYHRiEg=;
+	b=0LvUAwz4sxxa21DyZHSfozZekoRRUkL0FSkE1YQb6G+IYRxKxwBbWxby5Dl9/dVviN
+	WOnRrA2Xr7vV9X4sdKavhAOw0+u5vu4Pu3c6hj/dDOZuI4Veq19vQRY2wK7o8U4davBk
+	M3PNJzMru8R9dRO871B13w/om7DQrvYT9m4K7usdAT4UyPbxo+EksjD3rVo3lJvehvyB
+	DhHItULzHeKEIjATlLT9imHbDuUfxHz4HsX5ludGSdiImaGDdzJE5EUtlE14gN5di9iG
+	nhFdZ/6EGySIpFojMgxUiNx75mhJVN7i8M5WZmXSbcCTJjLm+14TCUGK3P50j+13v6eS
+	bFMA==
+X-Received: by 10.194.121.38 with SMTP id lh6mr40853986wjb.2.1429622856751;
+	Tue, 21 Apr 2015 06:27:36 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id jq3sm2101189wjc.22.2015.04.21.04.00.29
+	by mx.google.com with ESMTPSA id m4sm2658521wjb.25.2015.04.21.06.27.34
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 Apr 2015 04:00:29 -0700 (PDT)
+	Tue, 21 Apr 2015 06:27:35 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 21 Apr 2015 13:00:33 +0200
-To: openembedded-devel@lists.openembedded.org,
-	Richard Bevan <rbevan@restdeveloper.com>
-Message-ID: <20150421110033.GA2725@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [rbevan@restdeveloper.com: meta-ruby / compiling gems on the target machine]
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Apr 2015 15:27:25 +0200
+Message-Id: <1429622845-32029-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-oe][PATCH] dialog-static: blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,55 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2015 11:00:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Apr 2015 13:27:38 -0000
 
-I'm not a ruby expert forwarding to ML where it belongs.
+* broken at least since 2015-04-12
 
------ Forwarded message from Richard Bevan <rbevan@restdeveloper.com> -----
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-Date: Tue, 21 Apr 2015 11:06:35 +0100
-Subject: meta-ruby / compiling gems on the target machine
-From: Richard Bevan <rbevan@restdeveloper.com>
-To: Martin.Jansa@gmail.com
-
-Hello Martin,
-
-Sorry for the direct email.
-
-Thanks for your work on meta-ruby. I have found a small problem and also
-have a suggestion but don't know how to fix it in the .bb file.
-
-The --sysroot=/ is set to the host path, when using ruby on a target
-machine.
-
-This only becomes a problem with compiling native support using gems.
-
-eg.....
-
-gem install thin
-
-The makefile will fail when run on the target machine. I have been running
-the below command to sort the --sysroot out on my target machine before
-running gem install.
-
-/bin/sed -i "s/sysroot=[0-9a-z\/\-]*/sysroot=\//g"
-/usr/lib/ruby/*/*/rbconfig.rb
-
-The above replaces --sysroot=/path/on/my/host/machine/ to --sysroot=/ in
-the rbconfig.rb file.
-
-Then gem install with native supports works after running the above.
-
-Can we add this into the .bb file?
-
-Thanks,
-
-Richard
-
------ End forwarded message -----
-
+diff --git a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
+index 595f323..76c21f1 100644
+--- a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
++++ b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
+@@ -1,5 +1,6 @@
+ require dialog.inc
+ 
++PNBLACKLIST[dialog-static] ?= "BROKEN: dialog.c:1378: error: undefined reference to 'COLS'"
+ LDFLAGS += "-static"
+ 
+ SRC_URI[md5sum] = "2e538305977178eb085a9859511c299d"
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+2.3.5
+
 
