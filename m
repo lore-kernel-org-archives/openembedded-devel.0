@@ -1,40 +1,20 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id CE82E605D2
+Return-Path: <josep.puigdemont@enea.com>
+Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
+	by mail.openembedded.org (Postfix) with SMTP id 1780071EC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2015 16:14:34 +0000 (UTC)
-Received: by pdbqd1 with SMTP id qd1so246468148pdb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2015 09:14:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=NcFAs5l8Wo04gQWBceygTtAE+4RZMZ8nXTRHtobpux0=;
-	b=0nh8soU+HJJxNQmNo6EpGFg29zxowZewaCYuFVpTZeCtPHlziSyDLw16P7+QjllR8s
-	HLNrF3WVIHjjqtQ2V3FxG/CztMVN+4HYjBaJtnWGIZq7datnL74pbk25xt6VOS+5qo1I
-	bS8V62nCufw4BBD839Gc6gWJ4E3EMTiMdnY9R3boBuUXFOtRBg3us8TvwH6yqqC0xHzy
-	eT9Vl/0w+yLDRK7LS+f6KCY+RDxjkMfeZ6+3uqWrpXZkt2oB4WzBE+JGcJ2NCBZ+iyRf
-	zQeghtRrn/toyJ1b2hUIbdNWRFDNXM0bpu7VXPxwruN4Lyto8KWnuTUYOn+O8GS4rdps
-	V5FA==
-X-Received: by 10.70.33.67 with SMTP id p3mr38828066pdi.126.1429632875561;
-	Tue, 21 Apr 2015 09:14:35 -0700 (PDT)
-Received: from ?IPv6:2600:1012:b114:8e66:486e:a716:4db6:7b1a?
-	([2600:1012:b114:8e66:486e:a716:4db6:7b1a])
-	by mx.google.com with ESMTPSA id a12sm2450381pbu.21.2015.04.21.09.14.33
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 21 Apr 2015 09:14:34 -0700 (PDT)
-Mime-Version: 1.0 (1.0)
-From: Akuster808 <akuster808@gmail.com>
-X-Mailer: iPhone Mail (12F70)
-In-Reply-To: <20150421110033.GA2725@jama>
-Date: Tue, 21 Apr 2015 09:14:31 -0700
-Message-Id: <132AC2E0-2BED-4731-8100-3089DA189B09@gmail.com>
-References: <20150421110033.GA2725@jama>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: Richard Bevan <rbevan@restdeveloper.com>
-Subject: Re: [rbevan@restdeveloper.com: meta-ruby / compiling gems on the target machine]
+	Tue, 21 Apr 2015 19:55:03 +0000 (UTC)
+Received: from iapetus.enea.se (172.16.140.40) by smtp.enea.com (172.21.1.209)
+	with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 21 Apr 2015 21:55:01 +0200
+From: Josep Puigdemont <josep.puigdemont@enea.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 21 Apr 2015 21:55:02 +0200
+Message-ID: <1429646102-11227-1-git-send-email-josep.puigdemont@enea.com>
+X-Mailer: git-send-email 2.1.0
+MIME-Version: 1.0
+Received-SPF: None (SESTOEX03.enea.se: josep.puigdemont@enea.com does not
+	designate permitted sender hosts)
+Subject: [meta-python][PATCH] psutil: update to newer version (2.2.1)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,75 +28,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2015 16:14:37 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Apr 2015 19:55:04 -0000
+Content-Type: text/plain
 
-Richard,
+Convert to pypi recipe.
+Account for dependency on python-subprocess.
 
-Thanks for the fix. I will take a look into later when time permits ( on hol=
-iday).
+Signed-off-by: Josep Puigdemont <josep.puigdemont@enea.com>
+---
+ meta-python/recipes-devtools/python/python-psutil_0.6.1.bb | 14 --------------
+ meta-python/recipes-devtools/python/python-psutil_2.2.1.bb | 12 ++++++++++++
+ 2 files changed, 12 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
 
-armin
-
-
-
-> On Apr 21, 2015, at 04:00, Martin Jansa <martin.jansa@gmail.com> wrote:
->=20
-> I'm not a ruby expert forwarding to ML where it belongs.
->=20
-> ----- Forwarded message from Richard Bevan <rbevan@restdeveloper.com> ----=
+diff --git a/meta-python/recipes-devtools/python/python-psutil_0.6.1.bb b/meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
+deleted file mode 100644
+index ff113d0..0000000
+--- a/meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "A cross-platform process and system utilities module for Python"
+-SECTION = "devel/python"
+-HOMEPAGE = "http://code.google.com/p/psutil"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
 -
->=20
-> Date: Tue, 21 Apr 2015 11:06:35 +0100
-> Subject: meta-ruby / compiling gems on the target machine
-> From: Richard Bevan <rbevan@restdeveloper.com>
-> To: Martin.Jansa@gmail.com
->=20
-> Hello Martin,
->=20
-> Sorry for the direct email.
->=20
-> Thanks for your work on meta-ruby. I have found a small problem and also
-> have a suggestion but don't know how to fix it in the .bb file.
->=20
-> The --sysroot=3D/ is set to the host path, when using ruby on a target
-> machine.
->=20
-> This only becomes a problem with compiling native support using gems.
->=20
-> eg.....
->=20
-> gem install thin
->=20
-> The makefile will fail when run on the target machine. I have been running=
+-SRC_URI = "http://psutil.googlecode.com/files/psutil-${PV}.tar.gz"
+-SRC_URI[md5sum] = "3cfcbfb8525f6e4c70110e44a85e907e"
+-SRC_URI[sha256sum] = "d665a4cc58c9a5d207fb0dc9869fc0ee10f4f66ad885e84886ef6339ccce0a6f"
+-
+-S = "${WORKDIR}/psutil-${PV}"
+-
+-inherit setuptools
+-
+diff --git a/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb b/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
+new file mode 100644
+index 0000000..326d668
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "A cross-platform process and system utilities module for Python"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
++
++SRC_URI[md5sum] = "1a2b58cd9e3a53528bb6148f0c4d5244"
++SRC_URI[sha256sum] = "a0e9b96f1946975064724e242ac159f3260db24ffa591c3da0a355361a3a337f"
++
++RDEPENDS_${PN} += " \
++    python-subprocess \
++    "
++
++inherit pypi
+-- 
+2.1.0
 
-> the below command to sort the --sysroot out on my target machine before
-> running gem install.
->=20
-> /bin/sed -i "s/sysroot=3D[0-9a-z\/\-]*/sysroot=3D\//g"
-> /usr/lib/ruby/*/*/rbconfig.rb
->=20
-> The above replaces --sysroot=3D/path/on/my/host/machine/ to --sysroot=3D/ i=
-n
-> the rbconfig.rb file.
->=20
-> Then gem install with native supports works after running the above.
->=20
-> Can we add this into the .bb file?
->=20
-> Thanks,
->=20
-> Richard
->=20
-> ----- End forwarded message -----
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
