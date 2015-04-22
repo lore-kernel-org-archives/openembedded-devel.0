@@ -1,20 +1,40 @@
-Return-Path: <josep.puigdemont@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 1780071EC3
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 2208560167
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Apr 2015 19:55:03 +0000 (UTC)
-Received: from iapetus.enea.se (172.16.140.40) by smtp.enea.com (172.21.1.209)
-	with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 21 Apr 2015 21:55:01 +0200
-From: Josep Puigdemont <josep.puigdemont@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Apr 2015 21:55:02 +0200
-Message-ID: <1429646102-11227-1-git-send-email-josep.puigdemont@enea.com>
-X-Mailer: git-send-email 2.1.0
-MIME-Version: 1.0
-Received-SPF: None (SESTOEX03.enea.se: josep.puigdemont@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-python][PATCH] psutil: update to newer version (2.2.1)
+	Wed, 22 Apr 2015 01:48:46 +0000 (UTC)
+Received: by pdbqa5 with SMTP id qa5so258758572pdb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Apr 2015 18:48:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date
+	:content-transfer-encoding:message-id:references:to;
+	bh=7qU19NFNs/NCOi3MsIu7btI4zc2s+Thhmzbn0pVjRuo=;
+	b=yRb1qmL6HYCzCHBFIhx7PWE6KF3rrJ2/J0VoV7c5RJ/mOonlxrV6oIzrG5pM5TQVwk
+	jXVZDWOHSFAU1Xl2eIBPacX6+1lbYBA4YkoQK6PQ2DwHtc2C2MsE6HYqi+f6W9yfHI6A
+	bTpucVjhu4kW6tVSBQe2+ByzwS1VdULff4cW6cZ4w5Ay3rxYxJ/G5LDrNE6tg6CMryGW
+	JxEUlC2kZmbHbdrZiGKTCwUA94FFn9KFiVHF/zcyK778fJ6Ls88oKRPHZgab/oCjC7HH
+	02hJs3h/U5Nuj09T2TCePX8Sqz/JmhcO2ADt0L+dWKaq2hVsMGNxANak7jLT9knzbSat
+	b0+Q==
+X-Received: by 10.70.133.170 with SMTP id pd10mr42469037pdb.127.1429667328119; 
+	Tue, 21 Apr 2015 18:48:48 -0700 (PDT)
+Received: from ?IPv6:2601:9:3580:84c:d437:6da1:248:2a1a?
+	([2601:9:3580:84c:d437:6da1:248:2a1a])
+	by mx.google.com with ESMTPSA id
+	og11sm3275986pdb.91.2015.04.21.18.48.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 21 Apr 2015 18:48:47 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1429622845-32029-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 21 Apr 2015 18:48:46 -0700
+Message-Id: <4A562261-AC0D-4171-8334-F4B02A823B50@gmail.com>
+References: <1429622845-32029-1-git-send-email-Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2098)
+Subject: Re: [meta-oe][PATCH] dialog-static: blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,59 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Apr 2015 19:55:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 22 Apr 2015 01:48:47 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Convert to pypi recipe.
-Account for dependency on python-subprocess.
 
-Signed-off-by: Josep Puigdemont <josep.puigdemont@enea.com>
----
- meta-python/recipes-devtools/python/python-psutil_0.6.1.bb | 14 --------------
- meta-python/recipes-devtools/python/python-psutil_2.2.1.bb | 12 ++++++++++++
- 2 files changed, 12 insertions(+), 14 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
+> On Apr 21, 2015, at 6:27 AM, Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+>=20
+> +PNBLACKLIST[dialog-static] ?=3D "BROKEN: dialog.c:1378: error: =
+undefined reference to 'COLS'"
+> LDFLAGS +=3D "-static"
 
-diff --git a/meta-python/recipes-devtools/python/python-psutil_0.6.1.bb b/meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
-deleted file mode 100644
-index ff113d0..0000000
---- a/meta-python/recipes-devtools/python/python-psutil_0.6.1.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "A cross-platform process and system utilities module for Python"
--SECTION = "devel/python"
--HOMEPAGE = "http://code.google.com/p/psutil"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
--
--SRC_URI = "http://psutil.googlecode.com/files/psutil-${PV}.tar.gz"
--SRC_URI[md5sum] = "3cfcbfb8525f6e4c70110e44a85e907e"
--SRC_URI[sha256sum] = "d665a4cc58c9a5d207fb0dc9869fc0ee10f4f66ad885e84886ef6339ccce0a6f"
--
--S = "${WORKDIR}/psutil-${PV}"
--
--inherit setuptools
--
-diff --git a/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb b/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
-new file mode 100644
-index 0000000..326d668
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-psutil_2.2.1.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "A cross-platform process and system utilities module for Python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
-+
-+SRC_URI[md5sum] = "1a2b58cd9e3a53528bb6148f0c4d5244"
-+SRC_URI[sha256sum] = "a0e9b96f1946975064724e242ac159f3260db24ffa591c3da0a355361a3a337f"
-+
-+RDEPENDS_${PN} += " \
-+    python-subprocess \
-+    "
-+
-+inherit pypi
--- 
-2.1.0
+Why don=E2=80=99t we add
 
+LDFLAGS +=3D "-lcurses -ltinfo -static=E2=80=9D and fix it instead=
 
