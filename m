@@ -1,42 +1,41 @@
-Return-Path: <sven.ebenfeld@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C95060167
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Apr 2015 14:51:32 +0000 (UTC)
-Received: by wizk4 with SMTP id k4so181207266wiz.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Apr 2015 07:51:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=uB3QXj+c2YXuh+SITII3psWE8Rn8QTLIt4CO4DNWvCo=;
-	b=nHqEmIBBWyq70Os1FYRklZIgrX3ltsV72tLQAW6Cnn4F1RY4b47QbUur4w5tHl6Nt9
-	isEecbbONY8aqG3xzxA/zdDAhDcBZqytiJ1/28DjIWETly69kmV4P5EQXWcl6WustURt
-	RWrZTeOKfOb+nTch5MrVnfcYeMFKQFj9ysJltADv+E7vnAgLJAKrHhOvglqXdWzgi4+U
-	vymrIlfAp0jZqqpZzELn0ZdP1eaSaXp0q+mTNYvrU9cox3Amy19BdElAVIGQebUH4NWw
-	yY3d+GLAqIBT9y2zYMtLDqlKD4of0AmLitDTvKfsmojda4SpGU5e0OwBZBmxxpqtOkEh
-	P0YQ==
-X-Received: by 10.194.133.102 with SMTP id pb6mr50753536wjb.97.1429714293716; 
-	Wed, 22 Apr 2015 07:51:33 -0700 (PDT)
-Received: from [192.168.50.199] (ip-84-119-99-153.unity-media.net.
-	[84.119.99.153])
-	by mx.google.com with ESMTPSA id ln8sm7677577wjc.18.2015.04.22.07.51.32
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Apr 2015 07:51:32 -0700 (PDT)
-Message-ID: <5537B57D.4090903@gmail.com>
-Date: Wed, 22 Apr 2015 16:51:41 +0200
-From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+Return-Path: <stephen.k.jolley@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D944605D2;
+	Wed, 22 Apr 2015 18:05:38 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 22 Apr 2015 11:05:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,624,1422950400"; 
+	d="scan'208,217";a="699307389"
+Received: from orsmsx109.amr.corp.intel.com ([10.22.240.7])
+	by fmsmga001.fm.intel.com with ESMTP; 22 Apr 2015 11:05:22 -0700
+Received: from orsmsx152.amr.corp.intel.com (10.22.226.39) by
+	ORSMSX109.amr.corp.intel.com (10.22.240.7) with Microsoft SMTP Server
+	(TLS) id 14.3.224.2; Wed, 22 Apr 2015 11:05:22 -0700
+Received: from fmsmsx118.amr.corp.intel.com (10.18.116.18) by
+	ORSMSX152.amr.corp.intel.com (10.22.226.39) with Microsoft SMTP Server
+	(TLS) id 14.3.224.2; Wed, 22 Apr 2015 11:05:21 -0700
+Received: from fmsmsx111.amr.corp.intel.com ([169.254.12.204]) by
+	fmsmsx118.amr.corp.intel.com ([169.254.1.251]) with mapi id
+	14.03.0224.002; Wed, 22 Apr 2015 11:05:19 -0700
+From: "Jolley, Stephen K" <stephen.k.jolley@intel.com>
+To: "openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>, "yocto@yoctoproject.org"
+	<yocto@yoctoproject.org>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, "'poky@yotcoproject.org'"
+	<poky@yotcoproject.org>
+Thread-Topic: YP 1.8 Release Survey/Retrospective - REMINDER
+Thread-Index: AdB9Jr2uhV1lDDCvRYODububDmwh4A==
+Date: Wed, 22 Apr 2015 18:05:19 +0000
+Message-ID: <9ADD3FDE8B189B4AA2F8A3C711F8155E55482273@fmsmsx111.amr.corp.intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-Auto-Response-Suppress: DR, OOF, AutoReply
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.200.108]
 MIME-Version: 1.0
-To: Otavio Salvador <otavio@ossystems.com.br>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-References: <1428910057-23647-1-git-send-email-sven.ebenfeld@gmail.com>
-	<CAP9ODKoV+SZYEaSEYWL2=8Pz49VrUjaRbMHsAb0-Y8v3H_8+NQ@mail.gmail.com>
-	<5535EF8A.4070100@gmail.com>
-In-Reply-To: <5535EF8A.4070100@gmail.com>
-Subject: Re: [meta-java][PATCH v2 0/7] Update OpenJDK7 to IcedTea 2.5.4 und OpenJDK 7u75b13
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: YP 1.8 Release Survey/Retrospective - REMINDER
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,36 +49,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2015 14:51:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Apr 2015 18:05:40 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Am 21.04.2015 um 08:34 schrieb Sven Ebenfeld:
-> Hi Otavio,
-> 
-> Am 20.04.2015 um 16:58 schrieb Otavio Salvador:
->> Hello Sven,
->>
->> On Mon, Apr 13, 2015 at 4:27 AM, Sven Ebenfeld <sven.ebenfeld@gmail.com> wrote:
->>> There were some mistakes in my former recipes. This version fixes them.
->>> OpenJDK-7 did not depend on krb5 but excluded it in OECONF. Now I changed to
->>> depending on krb5 and not excluding it. I've tested building and running it
->>> against dizzy and master branches of oe-core, bitbake and meta-openembedded.
->>> Built with qemux86 and qemuarm. This release switches the HotSpot-Release to a
->>> newer one because of a segfault bug in the ARM Thumb2 JIT.
->>
->> Did you see Khem comments about the patchset?
->>
-> 
-> Yes, I saw those comments. I was thinking, that there will come more
-> comments, so I waited to create a new patchset.
-> 
->> It would be interesting to get a new version addressing those so we
->> can merge it into master branch (currently it is hold in master-next).
->>
-> 
-> If you want to merge it, I will fix the issues and send a new patchset.
-> 
+All,
 
-I will create and send the new patchset within the next weekend.
+Yocto Project 1.8 will be releasing this week!   YP provides a major releas=
+e every six months, and as an open source project we are always working to =
+improve our processes.  This survey is for the Yocto Project community to p=
+rovide feedback into the development process.  We would greatly appreciate =
+your participation, especially if you have participated in the development =
+process for 1.8 by writing code, submitting bugs, patches, documentation, c=
+ontributing to the wiki, or actively participating on the mailing lists or =
+IRC channels.
+
+https://www.surveymonkey.com/r/SFV7VPH
+
+Thanks for being an important part of the Yocto Project community!
+
+Stephen K. Jolley
+Yocto Project Program Manager
+INTEL, MS JF1-255, 2111 N.E. 25th Avenue, Hillsboro, OR 97124
+*   Work Telephone:          (503) 712-0534
+*    Cell:                                                (208) 244-4460
+* Email:                             stephen.k.jolley@intel.com
+
 
