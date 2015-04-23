@@ -1,26 +1,24 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 79EC76AC24
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 573596AC24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 09:30:45 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga103.jf.intel.com with ESMTP; 23 Apr 2015 02:30:47 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,629,1422950400"; d="scan'208";a="684432607"
-Received: from kreynold-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.25.159])
-	by orsmga001.jf.intel.com with ESMTP; 23 Apr 2015 02:30:46 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: rongqing.li@windriver.com
-Date: Thu, 23 Apr 2015 10:30:45 +0100
-Message-ID: <1686725.W7nVKc29pL@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.4 (Linux/3.18.9-200.fc21.x86_64; KDE/4.14.6; x86_64; ; )
-In-Reply-To: <1429759273-32045-1-git-send-email-rongqing.li@windriver.com>
-References: <1429759273-32045-1-git-send-email-rongqing.li@windriver.com>
+	Thu, 23 Apr 2015 09:51:28 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3N9pTKt016584
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Apr 2015 02:51:29 -0700 (PDT)
+Received: from lirq-OptiPlex-780.wrs.com (128.224.162.139) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.224.2; Thu, 23 Apr 2015 02:51:28 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 23 Apr 2015 17:51:27 +0800
+Message-ID: <1429782687-4755-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-oe] php: uprev it to 5.5.24
+Subject: [PATCH][meta-oe][v2] php: upgrade to 5.5.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,30 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2015 09:30:46 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 23 Apr 2015 09:51:31 -0000
+Content-Type: text/plain
 
-Hi Roy,
+From: Roy Li <rongqing.li@windriver.com>
 
-On Thursday 23 April 2015 11:21:13 rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
-> 
-> 5.5.24 has lots of CVE fixes
+5.5.24 has several CVE fixes, like CVE-2015-1351, CVE-2015-1352
+5.5.23 has fixes for CVE-2015-2787, CVE-2015-2348 etc.
 
-I know it's a bit of a pain, but could you please list all of the CVEs in the 
-commit message? Hopefully it should just be a matter of copying them from the 
-release notes for the releases since 5.5.21.
+Update the LICENSE checksum, since the date in LICENSE is updated to 2015
 
-Also, I see you've changed LIC_FILES_CHKSUM, please add a note to the commit 
-message explaining exactly what changed in the license text to cause this 
-(even if it's just a copyright year change as it often is).
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-oe/recipes-devtools/php/{php_5.5.21.bb => php_5.5.24.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_5.5.21.bb => php_5.5.24.bb} (97%)
 
-Cheers,
-Paul
-
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.21.bb b/meta-oe/recipes-devtools/php/php_5.5.24.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/php/php_5.5.21.bb
+rename to meta-oe/recipes-devtools/php/php_5.5.24.bb
+index 4ad198a..76185fb 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.21.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.24.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.php.net"
+ SECTION = "console/network"
+ 
+ LICENSE = "PHP-3.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+ 
+ BBCLASSEXTEND = "native"
+ DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native \
+@@ -29,8 +29,8 @@ SRC_URI_append_class-target += " \
+             file://70_mod_php5.conf \
+           "
+ 
+-SRC_URI[md5sum] = "8fe631ac52a3df9d6429faad81cf2562"
+-SRC_URI[sha256sum] = "62e9429975c4ca5d7067a5052d5388fbf2ac8c51eeee581d59b04cc5a8da83fe"
++SRC_URI[md5sum] = "f9a8f3e4bb88b33b087bd63732b1402a"
++SRC_URI[sha256sum] = "801b5cf2e0c01b07314d4ac3c8a7c28d524bdd8263ebdd0e33a99008251316a2"
+ 
+ S = "${WORKDIR}/php-${PV}"
+ 
 -- 
+2.1.0
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
