@@ -1,35 +1,36 @@
-Return-Path: <ruisebastiao@gmail.com>
-Received: from mail-ob0-f177.google.com (mail-ob0-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 79C90605D2
+Return-Path: <mario.goulart@gmail.com>
+Received: from mail-qc0-f182.google.com (mail-qc0-f182.google.com
+	[209.85.216.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B188605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 18:27:42 +0000 (UTC)
-Received: by oblw8 with SMTP id w8so20365240obl.0
+	Thu, 23 Apr 2015 18:58:30 +0000 (UTC)
+Received: by qcpm10 with SMTP id m10so14237245qcp.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 11:27:43 -0700 (PDT)
+	Thu, 23 Apr 2015 11:58:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=QXEcpxwX8yEkl7xYz8WE5kZtgBYLyR86SnZtJpzvE5w=;
-	b=xehrIVythJ1SDzRKxBDJn2YM1VjKMZIdtTa0+E1ToTkxaA8ZvfWQ4SUjMnYZRkQ5xk
-	BBT85NxUomYhw3EVWLaNbMR5QWdaCiZglxiaYVHY7ZgOWA9WhzyTC4m+lwXX3+OFATJ5
-	i2VI7lYEdwr8xS5nOiHBTC3aL3L3ppao5iyLyEMIfDQvot+0cbz64SoRWfdoxM1qfR7Y
-	26NLUF6ezM5W2FRv0SA3EFLEugeQdjY/sbDgQNV8EoNqSscHWFTTMkZd6zuND9Gv/jH7
-	EhHb9f3wi9aTDKLq4AlM5EBCYwfGThEvoMDOOAeaHI29ahtPMXoyA1KS3dFO7yoar3/S
-	rGdQ==
-MIME-Version: 1.0
-X-Received: by 10.60.33.74 with SMTP id p10mr1211866oei.62.1429813663792; Thu,
-	23 Apr 2015 11:27:43 -0700 (PDT)
-Received: by 10.202.205.213 with HTTP; Thu, 23 Apr 2015 11:27:43 -0700 (PDT)
-In-Reply-To: <20150423143737.GA2336@jama>
-References: <1429791892-30865-1-git-send-email-ruisebastiao@gmail.com>
-	<CALbNGRRaX7RQLm__tDFv4=Ms1GEg4BVwdKAiJp7qMwb+CQ84EQ@mail.gmail.com>
-	<20150423143737.GA2336@jama>
-Date: Thu, 23 Apr 2015 19:27:43 +0100
-Message-ID: <CAOEe98G146QthX6McHKseP3s0M39BNFPvopgRGK0_XhC516pDw@mail.gmail.com>
-From: Rui Sebastiao <ruisebastiao@gmail.com>
+	h=sender:from:to:cc:subject:date:message-id:user-agent:mime-version
+	:content-type; bh=ux5LCG8YJATN7ljjOXb/eXhWbTWLQ/jDgdi8NimrLlo=;
+	b=BVc0TriaVpBMB88uLsIMTPhrMBrYiXrrp7JabgTkROQkbDQCOgaAIU4xPvypivJPDq
+	wtpucHaCAZL+Hqt9DImC0JxBNivhijZc8Ltl0VFPD9em60AGXRpI9E8yobVXKsKUZ61w
+	eUzU+wzag7rRamyRTbe30o/dCjGEA/WDnixAUelGDp2i1efny9QKPDFlKUZN7mHBtq07
+	UaPFMM5JxScktk+f8T1lHG9+XrFsQe+/7geNQkDQY6LNqJfARHWSnT+e6ae8r00ZEI7g
+	/P3/ao9mtTOyMjg1ydAd119xkljyTDl05hQuJ8JpyI64sb8h/3yYywBuQJwEvrcu527Y
+	cMcw==
+X-Received: by 10.140.43.100 with SMTP id d91mr4911209qga.77.1429815512083;
+	Thu, 23 Apr 2015 11:58:32 -0700 (PDT)
+Received: from email.parenteses.org.gmail.com (email.parenteses.org.
+	[198.199.72.94])
+	by mx.google.com with ESMTPSA id 200sm69186qhr.13.2015.04.23.11.58.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 23 Apr 2015 11:58:31 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH]] qtwebchannel md5 error
+Date: Thu, 23 Apr 2015 18:58:29 +0000
+Message-ID: <87pp6u4qp6.fsf@email.parenteses.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/24.4 (gnu/linux)
+MIME-Version: 1.0
+Subject: Building openjdk without X11 dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,66 +44,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2015 18:27:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 Apr 2015 18:58:33 -0000
+Content-Type: text/plain
 
-Hello,
+Hi,
 
-I didn't test the git recipe. I will test asap.
+I'm under the impression building openjdk without X11 is not feasible.
+As far as I understand, the headless package is (or should be) generated
+by building openjdk with the X11 dependencies, then selecting the
+components which are not linked against X11 libraries and putthing them
+into a separate package.  Does that sound correct?
 
-2015-04-23 15:37 GMT+01:00 Martin Jansa <martin.jansa@gmail.com>:
-> On Thu, Apr 23, 2015 at 04:03:49PM +0200, Andreas M=C3=BCller wrote:
->> On Thu, Apr 23, 2015 at 2:24 PM, Rui Sebastiao <ruisebastiao@gmail.com> =
-wrote:
->> > ---
->> >  recipes-qt/qt5/qtwebchannel.inc | 5 ++++-
->> >  1 file changed, 4 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/recipes-qt/qt5/qtwebchannel.inc b/recipes-qt/qt5/qtwebcha=
-nnel.inc
->> > index 3cd22cf..3ed5808 100644
->> > --- a/recipes-qt/qt5/qtwebchannel.inc
->> > +++ b/recipes-qt/qt5/qtwebchannel.inc
->> > @@ -4,4 +4,7 @@ DEPENDS +=3D "qtdeclarative qtwebsockets"
->> >
->> >  # There are no LGPLv3-only licensed files in this component.
->> >  # There are no GPLv2 licensed files in this component.
->> > -LIC_FILES_CHKSUM +=3D "file://LICENSE.GPLv2;md5=3De782f55badfa137e5e5=
-9c330f12cc8ed"
->> > +LIC_FILES_CHKSUM =3D "file://LICENSE.GPLv2;md5=3De782f55badfa137e5e59=
-c330f12cc8ed \
->> > +                    file://LICENSE.LGPLv21;md5=3Dcff17b12416c896e10ae=
-2c17a64252e7 \
->> > +                    file://LICENSE.LGPLv3;md5=3Dc1939be5579666be94737=
-1bc8120425f \
->> > +                   "
->> > --
->> > 1.9.1
->> >
->> > --
->> * Missing signed off
->> * subject contains ']]'
->
-> Did you test this with 5.4.1 as well as git recipe? I wonder if it
-> should be only in 5.4.1.bb.
->
-> Right now I'm testing it with newer git revision (for 5.4.2) and I'm
-> sorry for introducing this issue last week, thanks for the patch.
->
->>
->> Andreas
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Is it possible to build openjdk without X11 dependencies?
+
+Best wishes.
+Mario
+-- 
+http://www.ossystems.com.br
 
