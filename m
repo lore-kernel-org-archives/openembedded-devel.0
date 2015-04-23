@@ -1,23 +1,26 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 68DC76AC24
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 79EC76AC24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 08:45:09 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t3N8jBIk025887
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 23 Apr 2015 01:45:11 -0700 (PDT)
-Received: from lirq-OptiPlex-780.wrs.com (128.224.162.139) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Thu, 23 Apr 2015 01:45:10 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
-Date: Thu, 23 Apr 2015 16:45:09 +0800
-Message-ID: <1429778709-4188-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
+	Thu, 23 Apr 2015 09:30:45 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga103.jf.intel.com with ESMTP; 23 Apr 2015 02:30:47 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,629,1422950400"; d="scan'208";a="684432607"
+Received: from kreynold-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.25.159])
+	by orsmga001.jf.intel.com with ESMTP; 23 Apr 2015 02:30:46 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: rongqing.li@windriver.com
+Date: Thu, 23 Apr 2015 10:30:45 +0100
+Message-ID: <1686725.W7nVKc29pL@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.4 (Linux/3.18.9-200.fc21.x86_64; KDE/4.14.6; x86_64; ; )
+In-Reply-To: <1429759273-32045-1-git-send-email-rongqing.li@windriver.com>
+References: <1429759273-32045-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] strongswan: upgrade to 5.3.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][meta-oe] php: uprev it to 5.5.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,36 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2015 08:45:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 23 Apr 2015 09:30:46 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-From: Roy Li <rongqing.li@windriver.com>
+Hi Roy,
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../strongswan/{strongswan_5.2.1.bb => strongswan_5.3.0.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/strongswan/{strongswan_5.2.1.bb => strongswan_5.3.0.bb} (92%)
+On Thursday 23 April 2015 11:21:13 rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+> 
+> 5.5.24 has lots of CVE fixes
 
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-similarity index 92%
-rename from meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
-rename to meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-index 6b91319..0b45ab6 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-@@ -11,8 +11,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-         file://fix-funtion-parameter.patch \
- "
- 
--SRC_URI[md5sum] = "dd3717c0aa59ab4591ca1812941ebb82"
--SRC_URI[sha256sum] = "ea51ab33b5bb39fecaf10668833a9936583b42145948ae9da1ab98f74e939215"
-+SRC_URI[md5sum] = "c52d4228231c2025d9c320d0e9990327"
-+SRC_URI[sha256sum] = "824da31a1ff89ac2500d56705e6f9ce06fe5260f9caaeb1da35ea13a8691d284"
- 
- EXTRA_OECONF = "--enable-gmp \
-         --enable-openssl \
+I know it's a bit of a pain, but could you please list all of the CVEs in the 
+commit message? Hopefully it should just be a matter of copying them from the 
+release notes for the releases since 5.5.21.
+
+Also, I see you've changed LIC_FILES_CHKSUM, please add a note to the commit 
+message explaining exactly what changed in the license text to cause this 
+(even if it's just a copyright year change as it often is).
+
+Cheers,
+Paul
+
 -- 
-2.1.0
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
