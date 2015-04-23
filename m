@@ -1,24 +1,34 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 573596AC24
+Return-Path: <ruisebastiao@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 75F046AC24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 09:51:28 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3N9pTKt016584
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 23 Apr 2015 12:24:56 +0000 (UTC)
+Received: by widdi4 with SMTP id di4so213619357wid.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 02:51:29 -0700 (PDT)
-Received: from lirq-OptiPlex-780.wrs.com (128.224.162.139) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Thu, 23 Apr 2015 02:51:28 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 23 Apr 2015 17:51:27 +0800
-Message-ID: <1429782687-4755-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
-MIME-Version: 1.0
-Subject: [PATCH][meta-oe][v2] php: upgrade to 5.5.24
+	Thu, 23 Apr 2015 05:24:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=rCInw5Rdg6wo1AaJmocxx0wMBYPdmyvk//OhsvGBvCk=;
+	b=Aem3W26ruPdlTIqPgSQPQMpI8f/DL9l/fnbGhLw07Kwo5qP11hCmdNNJmCPB9QfVL/
+	1TO3LMYYx7WkkT1+cPw1lbAtrJEOBPJNJVl8y3/afusDHXytfNrgjTeAwqFQH9JBd/b7
+	khwjIFe23BtZXg0KYnUzJFeK30kpeNcEHJR8dN/pRqXGq6zH/0u17twkgOZ3Y1+Z2ZNY
+	/PyKioo+LkIjrfrJvZZ22hT5ieiRNQvQps6QnIXXRKm5xP3WtD6uXDMKSbz73N8nhI2S
+	fQeyRJezmcqbkzdmFy/lnVJfbgkahjz2Jbp6P7PDafooiSPfmUifWTRasF1xKO0UIvc6
+	bB/g==
+X-Received: by 10.180.80.38 with SMTP id o6mr14482003wix.80.1429791897940;
+	Thu, 23 Apr 2015 05:24:57 -0700 (PDT)
+Received: from localhost.localdomain (pt.smtp.keyplastics.com. [62.28.172.42])
+	by mx.google.com with ESMTPSA id
+	e18sm11905149wjz.27.2015.04.23.05.24.56
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 23 Apr 2015 05:24:57 -0700 (PDT)
+From: Rui Sebastiao <ruisebastiao@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Apr 2015 13:24:52 +0100
+Message-Id: <1429791892-30865-1-git-send-email-ruisebastiao@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-qt5][PATCH]] qtwebchannel md5 error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,50 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2015 09:51:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 23 Apr 2015 12:24:57 -0000
 
-From: Roy Li <rongqing.li@windriver.com>
-
-5.5.24 has several CVE fixes, like CVE-2015-1351, CVE-2015-1352
-5.5.23 has fixes for CVE-2015-2787, CVE-2015-2348 etc.
-
-Update the LICENSE checksum, since the date in LICENSE is updated to 2015
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-oe/recipes-devtools/php/{php_5.5.21.bb => php_5.5.24.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_5.5.21.bb => php_5.5.24.bb} (97%)
+ recipes-qt/qt5/qtwebchannel.inc | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.21.bb b/meta-oe/recipes-devtools/php/php_5.5.24.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/php/php_5.5.21.bb
-rename to meta-oe/recipes-devtools/php/php_5.5.24.bb
-index 4ad198a..76185fb 100644
---- a/meta-oe/recipes-devtools/php/php_5.5.21.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.5.24.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.php.net"
- SECTION = "console/network"
+diff --git a/recipes-qt/qt5/qtwebchannel.inc b/recipes-qt/qt5/qtwebchannel.inc
+index 3cd22cf..3ed5808 100644
+--- a/recipes-qt/qt5/qtwebchannel.inc
++++ b/recipes-qt/qt5/qtwebchannel.inc
+@@ -4,4 +4,7 @@ DEPENDS += "qtdeclarative qtwebsockets"
  
- LICENSE = "PHP-3.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
- 
- BBCLASSEXTEND = "native"
- DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native \
-@@ -29,8 +29,8 @@ SRC_URI_append_class-target += " \
-             file://70_mod_php5.conf \
-           "
- 
--SRC_URI[md5sum] = "8fe631ac52a3df9d6429faad81cf2562"
--SRC_URI[sha256sum] = "62e9429975c4ca5d7067a5052d5388fbf2ac8c51eeee581d59b04cc5a8da83fe"
-+SRC_URI[md5sum] = "f9a8f3e4bb88b33b087bd63732b1402a"
-+SRC_URI[sha256sum] = "801b5cf2e0c01b07314d4ac3c8a7c28d524bdd8263ebdd0e33a99008251316a2"
- 
- S = "${WORKDIR}/php-${PV}"
- 
+ # There are no LGPLv3-only licensed files in this component.
+ # There are no GPLv2 licensed files in this component.
+-LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
++LIC_FILES_CHKSUM = "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++                    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++		    "
 -- 
-2.1.0
+1.9.1
 
 
