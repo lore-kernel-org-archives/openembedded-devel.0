@@ -1,41 +1,24 @@
-Return-Path: <stephen.k.jolley@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D944605D2;
-	Wed, 22 Apr 2015 18:05:38 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 22 Apr 2015 11:05:22 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,624,1422950400"; 
-	d="scan'208,217";a="699307389"
-Received: from orsmsx109.amr.corp.intel.com ([10.22.240.7])
-	by fmsmga001.fm.intel.com with ESMTP; 22 Apr 2015 11:05:22 -0700
-Received: from orsmsx152.amr.corp.intel.com (10.22.226.39) by
-	ORSMSX109.amr.corp.intel.com (10.22.240.7) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Wed, 22 Apr 2015 11:05:22 -0700
-Received: from fmsmsx118.amr.corp.intel.com (10.18.116.18) by
-	ORSMSX152.amr.corp.intel.com (10.22.226.39) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Wed, 22 Apr 2015 11:05:21 -0700
-Received: from fmsmsx111.amr.corp.intel.com ([169.254.12.204]) by
-	fmsmsx118.amr.corp.intel.com ([169.254.1.251]) with mapi id
-	14.03.0224.002; Wed, 22 Apr 2015 11:05:19 -0700
-From: "Jolley, Stephen K" <stephen.k.jolley@intel.com>
-To: "openembedded-core@lists.openembedded.org"
-	<openembedded-core@lists.openembedded.org>, "yocto@yoctoproject.org"
-	<yocto@yoctoproject.org>, "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "'poky@yotcoproject.org'"
-	<poky@yotcoproject.org>
-Thread-Topic: YP 1.8 Release Survey/Retrospective - REMINDER
-Thread-Index: AdB9Jr2uhV1lDDCvRYODububDmwh4A==
-Date: Wed, 22 Apr 2015 18:05:19 +0000
-Message-ID: <9ADD3FDE8B189B4AA2F8A3C711F8155E55482273@fmsmsx111.amr.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-Auto-Response-Suppress: DR, OOF, AutoReply
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.200.108]
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DC0416E268
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Apr 2015 03:21:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t3N3LFwi024040
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Apr 2015 20:21:15 -0700 (PDT)
+Received: from lirq-OptiPlex-780.wrs.com (128.224.162.139) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Wed, 22 Apr 2015 20:21:14 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 23 Apr 2015 11:21:13 +0800
+Message-ID: <1429759273-32045-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: YP 1.8 Release Survey/Retrospective - REMINDER
+Subject: [PATCH][meta-oe] php: uprev it to 5.5.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,31 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Apr 2015 18:05:40 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 23 Apr 2015 03:21:24 -0000
+Content-Type: text/plain
 
-All,
+From: Roy Li <rongqing.li@windriver.com>
 
-Yocto Project 1.8 will be releasing this week!   YP provides a major releas=
-e every six months, and as an open source project we are always working to =
-improve our processes.  This survey is for the Yocto Project community to p=
-rovide feedback into the development process.  We would greatly appreciate =
-your participation, especially if you have participated in the development =
-process for 1.8 by writing code, submitting bugs, patches, documentation, c=
-ontributing to the wiki, or actively participating on the mailing lists or =
-IRC channels.
+5.5.24 has lots of CVE fixes
 
-https://www.surveymonkey.com/r/SFV7VPH
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-oe/recipes-devtools/php/{php_5.5.21.bb => php_5.5.24.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_5.5.21.bb => php_5.5.24.bb} (97%)
 
-Thanks for being an important part of the Yocto Project community!
-
-Stephen K. Jolley
-Yocto Project Program Manager
-INTEL, MS JF1-255, 2111 N.E. 25th Avenue, Hillsboro, OR 97124
-*   Work Telephone:          (503) 712-0534
-*    Cell:                                                (208) 244-4460
-* Email:                             stephen.k.jolley@intel.com
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.21.bb b/meta-oe/recipes-devtools/php/php_5.5.24.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/php/php_5.5.21.bb
+rename to meta-oe/recipes-devtools/php/php_5.5.24.bb
+index 4ad198a..76185fb 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.21.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.24.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.php.net"
+ SECTION = "console/network"
+ 
+ LICENSE = "PHP-3.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=52dd90569008fee5bcdbb22d945b1108"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+ 
+ BBCLASSEXTEND = "native"
+ DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native \
+@@ -29,8 +29,8 @@ SRC_URI_append_class-target += " \
+             file://70_mod_php5.conf \
+           "
+ 
+-SRC_URI[md5sum] = "8fe631ac52a3df9d6429faad81cf2562"
+-SRC_URI[sha256sum] = "62e9429975c4ca5d7067a5052d5388fbf2ac8c51eeee581d59b04cc5a8da83fe"
++SRC_URI[md5sum] = "f9a8f3e4bb88b33b087bd63732b1402a"
++SRC_URI[sha256sum] = "801b5cf2e0c01b07314d4ac3c8a7c28d524bdd8263ebdd0e33a99008251316a2"
+ 
+ S = "${WORKDIR}/php-${PV}"
+ 
+-- 
+2.1.0
 
 
