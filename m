@@ -1,35 +1,24 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B92E605D2
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id A7634605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 19:01:55 +0000 (UTC)
-Received: by iejt8 with SMTP id t8so68056029iej.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 12:01:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=SASN2YT0TGCF/FMSl4vHRzaY6TDETISbo8VUNIbD7Ss=;
-	b=Z0rVavUQg8DopVbcNWBb61Si70G6FLZwjhIS9znbQsAWfb1NLXZxQNAp3zyfTp24JF
-	ccU+SxrGJibRN+NeIX5uFTTdwEZu94NTKo2G+FFjHXUFUadLrcTsas49ktc5DLRSrJfF
-	Q9arDohHot8G/tiOpjrzxN+ED4o0vFsh2ohAdnLElFZLZOy/HvCcqoBSZHGlhWlnL5H7
-	iGtA/k13e5potTcT880K9tC2jctIfk/cu79xtL0HFd8iZLIwUWDkJEkgXxX3HD1DIK2f
-	9K0X6N/BiQhKhVAkmGquOkIKJPua3xjCRQfMyQS50erMuxbtNeSDdeyw36W24SU8GIXu
-	v34A==
+	Thu, 23 Apr 2015 21:52:27 +0000 (UTC)
+Received: (qmail 13179 invoked by uid 1003); 23 Apr 2015 21:52:27 -0000
+Received: from unknown (HELO ?192.168.11.121?)
+	(philip@opensdr.com@108.44.121.228)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	23 Apr 2015 21:52:27 -0000
+Message-ID: <5539699A.8060203@balister.org>
+Date: Thu, 23 Apr 2015 17:52:26 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-X-Received: by 10.50.35.195 with SMTP id k3mr14207355igj.11.1429815716377;
-	Thu, 23 Apr 2015 12:01:56 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.107.23.197 with HTTP; Thu, 23 Apr 2015 12:01:56 -0700 (PDT)
-In-Reply-To: <87pp6u4qp6.fsf@email.parenteses.org>
-References: <87pp6u4qp6.fsf@email.parenteses.org>
-Date: Thu, 23 Apr 2015 16:01:56 -0300
-X-Google-Sender-Auth: r3DmW1iN-tcY6rzTgz8LEnZlNfE
-Message-ID: <CAP9ODKoZmUHFPE8RyQ53a2c5ANz3-hB+oNc=R3b=ukoVCpUngg@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Building openjdk without X11 dependencies
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	Yocto Project <yocto@yoctoproject.org>
+Subject: Jobs page on Openembedded.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,26 +32,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2015 19:01:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 23 Apr 2015 21:52:30 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Hello Mario,
+I've made a page on OpenEmbedded.org for people to link to jobs they
+know about. The job posting hsould have some OpenEmbedded/Yocto Project
+content:
 
-I am adding Max and Sven on Cc as they've been active on the packaging.
+http://openembedded.org/wiki/Jobs
 
-On Thu, Apr 23, 2015 at 3:58 PM, Mario Domenech Goulart
-<mario@ossystems.com.br> wrote:
-> I'm under the impression building openjdk without X11 is not feasible.
-> As far as I understand, the headless package is (or should be) generated
-> by building openjdk with the X11 dependencies, then selecting the
-> components which are not linked against X11 libraries and putthing them
-> into a separate package.  Does that sound correct?
->
-> Is it possible to build openjdk without X11 dependencies?
+I know you can search places like Linkedin for OpenEmbedded and get lots
+of hits, but I'd like this to be community driven. Let's see how it
+develops. Try and keep the jobs organized by the month they are listed
+so we can easily prune stale postings.
 
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Philip
 
