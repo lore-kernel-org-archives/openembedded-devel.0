@@ -1,38 +1,35 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id B679F73D38
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id C1A457382F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 22:27:16 +0000 (UTC)
-Received: by iebrs15 with SMTP id rs15so71840918ieb.3
+	Thu, 23 Apr 2015 22:44:22 +0000 (UTC)
+Received: by wicmx19 with SMTP id mx19so22633731wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Apr 2015 15:27:18 -0700 (PDT)
+	Thu, 23 Apr 2015 15:44:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=jLfBSpyLgFkg2SB/p11uXfSr19x3Y3do0rQutaoGv3c=;
-	b=l55Zsbv6wo5qGt0EvGUOBunaVqB+6xthnrX0IIAt1MuID8tv5UpuW+z+mF3e+jm+/f
-	nQ/R1Vg3socvYT+1a8XZLUHSyxPTVcR18GTehVpnItf9271ZqVH6NofaelaNIhynfTOZ
-	7rbdnWOXvWI3LTEDLa+BJtTuZkjr5hgTYVXr4MmpaARSr0nx8UqkJKK6PaCkSzELPU+3
-	g7C0hpBcsrXClq1zv5dJysdxDvw6Uy2hUaHdZpq8owKxh9uWsMYooF05KQ19uDSBC8uG
-	QImgr07F/uXCmdw9Uv23V+edixpSuPXtbavZHGEHv3fbXBko0fvVchL+ISieEIiWeu4E
-	Id6g==
-MIME-Version: 1.0
-X-Received: by 10.50.35.195 with SMTP id k3mr762720igj.11.1429828038300; Thu,
-	23 Apr 2015 15:27:18 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.107.23.197 with HTTP; Thu, 23 Apr 2015 15:27:18 -0700 (PDT)
-In-Reply-To: <1429827090.3418.18.camel@Saturn.local.all>
-References: <87pp6u4qp6.fsf@email.parenteses.org>
-	<CAP9ODKoZmUHFPE8RyQ53a2c5ANz3-hB+oNc=R3b=ukoVCpUngg@mail.gmail.com>
-	<1429827090.3418.18.camel@Saturn.local.all>
-Date: Thu, 23 Apr 2015 19:27:18 -0300
-X-Google-Sender-Auth: 7_Z3_tAGNNMTBVHMS7BjtAVL7rM
-Message-ID: <CAP9ODKpU-PBCpf=3aK9QA96WBgprqg-ACoARA58iUee5JXZF_A@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Max Krummenacher <max.oss.09@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Building openjdk without X11 dependencies
+	h=from:to:cc:subject:date:message-id;
+	bh=PtxzRImEYwyFuM8vmfNYCqrK60vPaQk6qLpNlRWIV9w=;
+	b=EJltVza7BCrqDjivA18u/nZy1WbOHRcHCHT6hRewLcuK+NxrOZ+zbm/0b6rXCaaVkI
+	K2wn6wsTSQrWSHDcbpM4TPRbSPmjEsWXv7+oVBdiQ4rEzh6RQf+QlTy/7mV3O3OaVOwZ
+	VyaC/bJvb1Oyd6gHiU/DeE0DsBCxIc1nH5ke+ZVW1VC95O/xoaA1Yy7FcNvRHbDfg7lV
+	UXIXdAv981fxww3g5VmA6ETYa4g8BAhygHNNF9Bo/J0/C1IDqERbanshemEuiTaaZqz+
+	76zSGIAFYFi9Lqx7Mo92tAqQIYRwOat5MDoCELFWtHMDIx4vmqzHBI46j4nORdc3nQwD
+	uz3A==
+X-Received: by 10.194.122.105 with SMTP id lr9mr10014598wjb.153.1429829063261; 
+	Thu, 23 Apr 2015 15:44:23 -0700 (PDT)
+Received: from T520.homenet.telecomitalia.it
+	(host220-62-dynamic.24-79-r.retail.telecomitalia.it. [79.24.62.220])
+	by mx.google.com with ESMTPSA id
+	cf12sm14189005wjb.10.2015.04.23.15.44.21
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 23 Apr 2015 15:44:22 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Apr 2015 00:44:14 +0200
+Message-Id: <1429829054-20925-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-initramfs][PATCH] kexecboot-cfg: fix for real ('S') doesn't exist warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,51 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Apr 2015 22:27:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 23 Apr 2015 22:44:26 -0000
 
-Hello Max,
+Remove unneeded do_configure_prepend and set S = "${WORKDIR}"
 
-On Thu, Apr 23, 2015 at 7:11 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
->> <mario@ossystems.com.br> wrote:
->> > I'm under the impression building openjdk without X11 is not feasible.
->> > As far as I understand, the headless package is (or should be) generated
->> > by building openjdk with the X11 dependencies, then selecting the
->> > components which are not linked against X11 libraries and putthing them
->> > into a separate package.  Does that sound correct?
->> >
->> > Is it possible to build openjdk without X11 dependencies?
->
-> My interests actually went into the other direction. Adding a
-> packageconfig which re-enables xawt.
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-I see.
-
-> While looking at it I tried to remove the DEPENDS on X11/GTK+ and came
-> to the conclusion that you would need to heavily change the source
-> tree / Makefiles to leave all the sources which include X11 (or GTK+)
-> headers out of the way.
-
-It seems like it will be necessary. More below...
-
-> The sources react to the symbol BUILD_HEADLESS_ONLY which promised to
-> keep the X11 dependencies out. However that is either broken in the
-> current versions of OpenJDK or never worked at all.
-> Some mailinglist post underlined that. e.g.
-> http://mail.openjdk.java.net/pipermail/build-dev/2012-March/005700.html
->
-> Maybe one could split openjdk-7-common and openjdk7-jre into packages
-> without X11 dependencies and the rest as Mario proposes. However I don't
-> know if that would lead to a working headless java installation.
-
-The packaging splitting does not work for this case as we need to
-build in a framebuffer only environment. So the build dependencies are
-not available.
-
-Regards,
-
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
+index bd861f3..2ffa3be 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot-cfg_0.2.bb
+@@ -6,11 +6,13 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
+ 
+ SRC_URI = "file://icon.xpm"
+ 
+-S = "${WORKDIR}/${BP}"
++#S = "${WORKDIR}/${BP}"
++S = "${WORKDIR}"
++
++#do_configure_prepend () {
++#    install -m 0644 ${WORKDIR}/icon.xpm ${S}
++#}
+ 
+-do_configure_prepend () {
+-    install -m 0644 ${WORKDIR}/icon.xpm ${S}
+-}
+ do_install_prepend () {
+ echo '# /boot/boot.cfg - KEXECBOOT configuration file.
+ #
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+1.9.1
+
 
