@@ -1,24 +1,37 @@
-Return-Path: <Dmitry_Eremin@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 46883605D2
+Return-Path: <dbaryshkov@gmail.com>
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 73D37605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2015 19:58:31 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-02.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1Yljk8-0003sz-4L from Dmitry_Eremin@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 24 Apr 2015 12:58:32 -0700
-Received: from fangorn.rup.mentorg.com (137.202.0.76) by
-	SVR-IES-FEM-02.mgc.mentorg.com (137.202.0.106) with Microsoft SMTP
-	Server (TLS) id 14.3.224.2; Fri, 24 Apr 2015 20:58:31 +0100
+	Fri, 24 Apr 2015 20:59:33 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so35696473wiz.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Apr 2015 13:59:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:subject:date:message-id:in-reply-to:references;
+	bh=jgK7Fqssi48IaETRQA8wZxI+xGKo78SmA9CR5htgFGo=;
+	b=Zwfr7647/LLLezb0sJB+47ND8JoI4f6s0qWAZRW2awh/EcIulDzVgz5//18En3iPzE
+	/z+mGDeLH9azQIFG7QrAE9R4vGnqf83KnJt2cRxUmFNDrYcgfIV480ee5m3/WZgz6xta
+	D+fWIfylEJAapbLSEe/lcw9OctJCv5j18uckMDTHw5Y+Cqs+b8aFQWfvZYe7Xs0PGqTR
+	sdl6amOhwOWIGM5uIO43p347+B4r0WDDjcdPkbCdPyy1yRmUl983pi3UPzLPl1WrA9MQ
+	PvsHNwcoInjm/cMUnNH1xaGREUHWL5QNi+sZVO1UX3HCjoL4mmTVhibebKS1FhFHJ+Ns
+	nl+w==
+X-Received: by 10.180.76.231 with SMTP id n7mr1481162wiw.44.1429909174857;
+	Fri, 24 Apr 2015 13:59:34 -0700 (PDT)
+Received: from fangorn.rup.mentorg.com (nat-min.mentorg.com. [139.181.32.34])
+	by mx.google.com with ESMTPSA id e2sm643447wij.5.2015.04.24.13.59.33
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 24 Apr 2015 13:59:34 -0700 (PDT)
+Sender: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 From: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 24 Apr 2015 22:58:30 +0300
-Message-ID: <1429905510-23474-1-git-send-email-dmitry_eremin@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Apr 2015 23:59:16 +0300
+Message-Id: <1429909159-8425-2-git-send-email-dmitry_eremin@mentor.com>
 X-Mailer: git-send-email 2.1.4
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] syslog-ng: add util-linux to DEPENDS list
+In-Reply-To: <1429909159-8425-1-git-send-email-dmitry_eremin@mentor.com>
+References: <1429909159-8425-1-git-send-email-dmitry_eremin@mentor.com>
+Subject: [meta-opie][PATCH 2/5] kaffe: fix LICENSE information
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2015 19:58:36 -0000
-Content-Type: text/plain
-
-Add util-linux to the DEPENDS list to get rid of the following QA
-warning:
-
-syslog-ng-3.5.4.1: syslog-ng-libs rdepends on util-linux-libuuid, but it isn't a build dependency? [build-deps]
+X-List-Received-Date: Fri, 24 Apr 2015 20:59:35 -0000
 
 Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
 ---
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ recipes-qtopia/kaffe/kaffe.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 4aead31..b9ca880 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -12,7 +12,8 @@ HOMEPAGE = "http://www.balabit.com/network-security/syslog-ng/opensource-logging
- LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e0e8658d9be248f01b7933df24dc1408"
+diff --git a/recipes-qtopia/kaffe/kaffe.inc b/recipes-qtopia/kaffe/kaffe.inc
+index 605e1c0..2479fdb 100644
+--- a/recipes-qtopia/kaffe/kaffe.inc
++++ b/recipes-qtopia/kaffe/kaffe.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Kaffe is a clean room implementation of the Java Virtual Machine"
+ HOMEPAGE = "http://www.kaffe.org/"
+-LICENSE  = "GPL LGPL W3C Classpath BSD"
++LICENSE  = "GPLv2 & LGPLv2 & W3C & Classpath & BSD"
  
--DEPENDS = "flex eventlog glib-2.0"
-+# util-linux added to get libuuid
-+DEPENDS = "flex eventlog glib-2.0 util-linux"
- 
- SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source/${BPN}_${PV}.tar.gz \
-            file://syslog-ng.conf \
+ DEPENDS = "virtual/javac-native fastjar-native libffi zip-native libart-lgpl"
+ RDEPENDS_${PN} = "${PN}-common (>= ${PV})"
 -- 
 2.1.4
 
