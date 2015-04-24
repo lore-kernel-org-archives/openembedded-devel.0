@@ -1,35 +1,37 @@
 Return-Path: <dbaryshkov@gmail.com>
 Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
 	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 74DB06E268
+	by mail.openembedded.org (Postfix) with ESMTP id 4ECAA605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2015 20:59:32 +0000 (UTC)
-Received: by wizk4 with SMTP id k4so35696025wiz.1
+	Fri, 24 Apr 2015 20:59:35 +0000 (UTC)
+Received: by wiun10 with SMTP id n10so32952562wiu.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2015 13:59:33 -0700 (PDT)
+	Fri, 24 Apr 2015 13:59:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:subject:date:message-id;
-	bh=3YH/guSuWs5/PdozJ20SZhmex3GAe7uWURXsyh2/WT4=;
-	b=tUEVrfOcKtPTa5JZEnAefC+nopHk1JvYUciB4IIHdISAUarp7OSxd9Am5Rp2J4FiyG
-	JKlzhjr15uEPZBg8VUtSYJXq3mkALRVqX+45sMo2Fg1ar2JNpXcGLXhBCstDQGf4KaPb
-	butsbb3j+Kn0Q7um06ElzQLmR2LV/gtr1jt+wlYnGZBtnymxVLfEZQiD0h7a7dboKa0L
-	VIpVSs2jQWVD5IuAY29cuqqTqitmK0y+rlequyaSLMU4m2vZ4/mdE33pda/jGLfLeXyT
-	m7hFSetLNxDv8KYMhuIWwuKSQmHGmkbSO+27slOJlWT4XEAEXyXkJEmpdVmS69RycXyg
-	QtJw==
-X-Received: by 10.194.237.34 with SMTP id uz2mr404826wjc.157.1429909173533;
-	Fri, 24 Apr 2015 13:59:33 -0700 (PDT)
+	h=sender:from:to:subject:date:message-id:in-reply-to:references;
+	bh=xrm2pirMXOk66rS+tS4cEGEWQbpX8DhMftb51Ae8Vdc=;
+	b=YazQOoqtIEmV6nCBiWqz+ZZi/iN6yMELoVPI2elLsj8MSUVZ7ge0QencIwRbh3bhTj
+	8e6hH6SdT9m87oW44zisZYdm02QXWU68A2SEZUxAl3hzHCLzHht7MBY6PBITsDI+ncZO
+	hvEWv1vymMsHHSAFotXHgY8HfDops5hJQef1fkLgwM/nArtIYZu97sZjFsnK9DkiGYiO
+	bnfWPM3zfuEe+xxydCUKxNN8gH27L2XsVXIFlBpVg+QN3mvvjWsFOFJDaBLtguoP9qTp
+	UffuHxETq/FuODsssnVynXg74L78MOpg11Hd3eZVBlHDg532BlK70uoiwT/JK8rkXjGH
+	bZ6A==
+X-Received: by 10.181.11.137 with SMTP id ei9mr1464426wid.48.1429909176089;
+	Fri, 24 Apr 2015 13:59:36 -0700 (PDT)
 Received: from fangorn.rup.mentorg.com (nat-min.mentorg.com. [139.181.32.34])
-	by mx.google.com with ESMTPSA id e2sm643447wij.5.2015.04.24.13.59.32
+	by mx.google.com with ESMTPSA id e2sm643447wij.5.2015.04.24.13.59.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 24 Apr 2015 13:59:32 -0700 (PDT)
+	Fri, 24 Apr 2015 13:59:35 -0700 (PDT)
 Sender: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 From: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Apr 2015 23:59:15 +0300
-Message-Id: <1429909159-8425-1-git-send-email-dmitry_eremin@mentor.com>
+Date: Fri, 24 Apr 2015 23:59:17 +0300
+Message-Id: <1429909159-8425-3-git-send-email-dmitry_eremin@mentor.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-opie][PATCH 1/5] layer.conf: add layer dependencies
+In-Reply-To: <1429909159-8425-1-git-send-email-dmitry_eremin@mentor.com>
+References: <1429909159-8425-1-git-send-email-dmitry_eremin@mentor.com>
+Subject: [meta-opie][PATCH 3/5] konqueror-embedded: fix LICENSE information
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +47,52 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 24 Apr 2015 20:59:35 -0000
 
-opie layer depends on oe-core, meta-oe and meta-networking. Add
-respecive dependencies via LAYERDEPENDS.
-
 Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
 ---
- conf/layer.conf | 4 ++++
- 1 file changed, 4 insertions(+)
+ recipes-qtopia/konqueror/konqueror-embedded_20030705.bb | 2 +-
+ recipes-qtopia/konqueror/konqueror-embedded_20060404.bb | 2 +-
+ recipes-qtopia/konqueror/konqueror-embedded_20070316.bb | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 0040434..f765ece 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -11,6 +11,10 @@ BBFILE_COLLECTIONS += "meta-opie"
- BBFILE_PATTERN_meta-opie := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-opie = "8"
+diff --git a/recipes-qtopia/konqueror/konqueror-embedded_20030705.bb b/recipes-qtopia/konqueror/konqueror-embedded_20030705.bb
+index aec037e..7de3cda 100644
+--- a/recipes-qtopia/konqueror/konqueror-embedded_20030705.bb
++++ b/recipes-qtopia/konqueror/konqueror-embedded_20030705.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "KDE Web Browser Konqueror, QtE based Palmtop Environments Edition
+ HOMEPAGE = "http://www.konqueror.org/embedded"
+ SECTION = "opie/applications"
+ DEPENDS = "libqpe-opie openssl libpcre"
+-LICENSE = "LGPL GPL"
++LICENSE = "LGPLv2+ & GPLv2+"
+ PR = "r5"
  
-+LAYERDEPENDS_meta-opie = "core"
-+LAYERDEPENDS_meta-opie += "openembedded-layer"
-+LAYERDEPENDS_meta-opie += "networking-layer"
-+
- # Some basic definitions
- OPIE_GIT = "git://gitorious.org/opie/opie.git"
+ # Note if this .bb files fails with the error:
+diff --git a/recipes-qtopia/konqueror/konqueror-embedded_20060404.bb b/recipes-qtopia/konqueror/konqueror-embedded_20060404.bb
+index f64b93f..ff29e6a 100644
+--- a/recipes-qtopia/konqueror/konqueror-embedded_20060404.bb
++++ b/recipes-qtopia/konqueror/konqueror-embedded_20060404.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "KDE Web Browser Konqueror, QtE based Palmtop Environments Edition
+ SECTION = "opie/applications"
+ HOMEPAGE = "http://www.konqueror.org/"
+ DEPENDS = "openssl libpcre virtual/libqte2 dcopidl-native dcopidl2cpp-native"
+-LICENSE = "LGPL GPL"
++LICENSE = "LGPLv2+ & GPLv2+"
+ PR = "r3"
  
+ # this Konqueror needs the KDEDIR set and the font helvetica installed on the target
+diff --git a/recipes-qtopia/konqueror/konqueror-embedded_20070316.bb b/recipes-qtopia/konqueror/konqueror-embedded_20070316.bb
+index 69824c2..b70efc4 100644
+--- a/recipes-qtopia/konqueror/konqueror-embedded_20070316.bb
++++ b/recipes-qtopia/konqueror/konqueror-embedded_20070316.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "KDE Web Browser Konqueror, QtE based Palmtop Environments Edition
+ SECTION = "opie/applications"
+ HOMEPAGE = "http://www.konqueror.org/"
+ DEPENDS = "openssl libpcre virtual/libqte2 dcopidl-native dcopidl2cpp-native"
+-LICENSE = "LGPL GPL"
++LICENSE = "LGPLv2+ & GPLv2+"
+ PR = "r7"
+ 
+ # this Konqueror needs the KDEDIR set and the font helvetica installed on the target
 -- 
 2.1.4
 
