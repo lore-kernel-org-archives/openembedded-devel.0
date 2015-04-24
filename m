@@ -1,20 +1,33 @@
 Return-Path: <cristian.iorga@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id CAEAC605D2
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 23EA773D53
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2015 12:22:08 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga103.fm.intel.com with ESMTP; 24 Apr 2015 05:22:10 -0700
+	Fri, 24 Apr 2015 12:22:56 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga102.fm.intel.com with ESMTP; 24 Apr 2015 05:22:58 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,639,1422950400"; d="scan'208";a="718650881"
-Received: from sentry.rb.intel.com ([10.237.105.37])
-	by orsmga002.jf.intel.com with ESMTP; 24 Apr 2015 05:22:08 -0700
-From: Cristian Iorga <cristian.iorga@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Apr 2015 15:22:02 +0300
-Message-Id: <1429878122-23715-1-git-send-email-cristian.iorga@intel.com>
-X-Mailer: git-send-email 2.1.0
-Subject: [meta-systemd][PATCH V2] bluez4_4.101.bbappend: update according to bluez4
+X-IronPort-AV: E=Sophos;i="5.11,639,1422950400"; d="scan'208";a="485121191"
+Received: from irsmsx101.ger.corp.intel.com ([163.33.3.153])
+	by FMSMGA003.fm.intel.com with ESMTP; 24 Apr 2015 05:22:58 -0700
+Received: from irsmsx105.ger.corp.intel.com ([169.254.7.178]) by
+	IRSMSX101.ger.corp.intel.com ([163.33.3.153]) with mapi id
+	14.03.0224.002; Fri, 24 Apr 2015 13:22:57 +0100
+From: "Iorga, Cristian" <cristian.iorga@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-systemd][PATCH V2] bluez4_4.101.bbappend: update
+	according to bluez4
+Thread-Index: AQHQfolLx4LYZnGrZU2W1b6J28ZdyZ1cFY7g
+Date: Fri, 24 Apr 2015 12:22:57 +0000
+Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F4B569E@irsmsx105.ger.corp.intel.com>
+References: <1429878122-23715-1-git-send-email-cristian.iorga@intel.com>
+In-Reply-To: <1429878122-23715-1-git-send-email-cristian.iorga@intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [163.33.239.180]
+MIME-Version: 1.0
+Subject: Re: [meta-systemd][PATCH V2] bluez4_4.101.bbappend: update according to bluez4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,36 +41,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2015 12:22:13 -0000
+X-List-Received-Date: Fri, 24 Apr 2015 12:22:58 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-bluez4 recipe has been updated with proper systemd
-support, so update meta-systemd append accordingly.
+In V2, changed the append path.
+Thanks,
+Cristian
+
+-----Original Message-----
+From: Iorga, Cristian=20
+Sent: Friday, April 24, 2015 3:22 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Iorga, Cristian
+Subject: [meta-systemd][PATCH V2] bluez4_4.101.bbappend: update according t=
+o bluez4
+
+bluez4 recipe has been updated with proper systemd support, so update meta-=
+systemd append accordingly.
 Also update to the right directory structure.
 
 Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
 ---
- .../recipes-connectivity/bluez/bluez4_4.101.bbappend                 | 5 -----
+ .../recipes-connectivity/bluez/bluez4_4.101.bbappend                 | 5 -=
+----
  1 file changed, 5 deletions(-)
- rename meta-systemd/{oe-core => meta-oe}/recipes-connectivity/bluez/bluez4_4.101.bbappend (51%)
+ rename meta-systemd/{oe-core =3D> meta-oe}/recipes-connectivity/bluez/blue=
+z4_4.101.bbappend (51%)
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
+diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.b=
+bappend b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbap=
+pend
 similarity index 51%
-rename from meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
-rename to meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
+rename from meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bb=
+append
+rename to meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbap=
+pend
 index da01b05..260c02e 100644
 --- a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
-+++ b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbappend
++++ b/meta-systemd/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bbapp
++++ end
 @@ -1,9 +1,4 @@
 -inherit systemd
 -
--EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
+-EXTRA_OECONF +=3D "--with-systemdunitdir=3D${systemd_unitdir}/system/"
 -
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
--SYSTEMD_SERVICE_${PN} = "bluetooth.service"
- SYSTEMD_AUTO_ENABLE = "disable"
--- 
+ RPROVIDES_${PN} +=3D "${PN}-systemd"
+ RREPLACES_${PN} +=3D "${PN}-systemd"
+ RCONFLICTS_${PN} +=3D "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} =3D "bluetooth.service"
+ SYSTEMD_AUTO_ENABLE =3D "disable"
+--
 2.1.0
 
 
