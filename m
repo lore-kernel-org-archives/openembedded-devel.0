@@ -1,41 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 41ECD738EB
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 53412605D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2015 16:12:50 +0000 (UTC)
-Received: by wizk4 with SMTP id k4so27917876wiz.1
+	Fri, 24 Apr 2015 18:57:50 +0000 (UTC)
+Received: by pdbnk13 with SMTP id nk13so56296696pdb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Apr 2015 09:12:51 -0700 (PDT)
+	Fri, 24 Apr 2015 11:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=czrxmQb/msgfJIPM2orUdAhVC1J0NQyHnL1AjXZ5KC0=;
-	b=EyJ7TXaRBWFf5ytRU7C6yAIfJ/w1NR1fLcUjNRBrdO+f8HCqIuheQKcnmOZTIX9xJ7
-	Xyc/HrV/tgz1aBpKgvNdSIOR62dCwXBhZIPuGg6V98WCzKZoZydd8Xipn4ivEUdAOA+R
-	l0BrVU8lmT27qtJXAOx6UjErasxF2lEYoyHR+NfYH5vdGdeNUJ51xSjjwxzIS+8q9dUw
-	ysRMR7XztVfpCN7VMsidDC22LmQ/g3JxWGadOdCJgu1GBikB6BcMZIRW4xUgzjwncdFc
-	x8wdwJ1gX2tIcItU6L1TP82LDWWiBZwDKQaLppm/HkbOk2oBQ23bu/d0mRgOj88pJ9hw
-	JbfA==
-X-Received: by 10.194.81.104 with SMTP id z8mr16933952wjx.45.1429891971568;
-	Fri, 24 Apr 2015 09:12:51 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id e2sm4188399wix.15.2015.04.24.09.12.50
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=wy3uSFlcDV5vF//RLRvU2xIPPC/CefcnASIxRhPXkQY=;
+	b=NRBaM3qI0oJhs3mW+1hyT1NE7ACvW/XpyolCCQlH5vEBcAZOKQtzJ1nFQHuwwFVfqf
+	1TbKPVXk7L8g34gltmA4XNRoUhrcm/j2CYuqXL2wZsUGcAWJ7fZETLNNbprxLLV6Pcmg
+	9botmSe8pqbX8MyD2UBsfKYfds63j8MbdHBy1RbqMSf2kqTqN/PUzcqosnE6a1kBRp6d
+	jtN+nxnV7vWygrw4bUtcA7thoV8wDYjL4CvK2R/A8XUWJHhm1w//StraFX64OcmDhI8n
+	0mJHlABFr+a9RIr3eETKqkx9hfxYB/1jLbQQGKSqi14VbieOK/OUok40CmZ2T+/lVm0Q
+	W+bg==
+X-Received: by 10.68.137.70 with SMTP id qg6mr17368850pbb.125.1429901872142;
+	Fri, 24 Apr 2015 11:57:52 -0700 (PDT)
+Received: from ?IPv6:2601:c:a700:3ba7:415d:13b2:afc9:74fd?
+	([2601:c:a700:3ba7:415d:13b2:afc9:74fd])
+	by mx.google.com with ESMTPSA id
+	cd10sm11911778pac.7.2015.04.24.11.57.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 24 Apr 2015 09:12:50 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 24 Apr 2015 18:13:25 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150424161325.GD2353@jama>
-References: <1429890232-20762-1-git-send-email-cristian.iorga@intel.com>
-	<1429890232-20762-2-git-send-email-cristian.iorga@intel.com>
+	Fri, 24 Apr 2015 11:57:50 -0700 (PDT)
+Message-ID: <553A922C.6030106@gmail.com>
+Date: Fri, 24 Apr 2015 11:57:48 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-In-Reply-To: <1429890232-20762-2-git-send-email-cristian.iorga@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][meta-systemd][PATCH V3 2/2] layer.conf: add detection of meta-oe layer.
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <cover.1428334829.git.akuster808@gmail.com>
+In-Reply-To: <cover.1428334829.git.akuster808@gmail.com>
+Subject: Re: [PATCH 00/33 v2][master] meta-oe misc build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,43 +49,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Apr 2015 16:12:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 24 Apr 2015 18:57:53 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 24, 2015 at 06:43:52PM +0300, Cristian Iorga wrote:
-> bluez append has been moved to meta-oe,
-> so add detection for that layer.
+ping or did I miss a comment somewhere?
 
-This isn't "detection" :)
+- armin
 
-> Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
-> ---
->  meta-systemd/conf/layer.conf | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta-systemd/conf/layer.conf b/meta-systemd/conf/layer.conf
-> index 0563f44..06c2ff1 100644
-> --- a/meta-systemd/conf/layer.conf
-> +++ b/meta-systemd/conf/layer.conf
-> @@ -15,6 +15,7 @@ BBPATH .=3D ":${LAYERDIR}"
->  BBFILES +=3D "\
->    ${LAYERDIR}/recipes-*/*/*.bb \
->    ${LAYERDIR}/oe-core/recipes-*/*/*.bbappend \
-> +  ${LAYERDIR}/meta-oe/recipes-*/*/*.bbappend \
->  "
-> =20
->  BBFILE_COLLECTIONS +=3D "systemd-layer"
-> --=20
-> 2.1.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+On 04/06/2015 08:46 AM, Armin Kuster wrote:
+> V2: downgrade fingerterm back to original 1.0.2, 1.1.14 required qt5.
+>
+> please consider these misc build fixes for meta-oe. I hope there are not too many dups in the pipe line. I could not tell.
+>
+> Also I have moved a few recipes out of meta-oe as they have depends on other layers.
+>
+> The following changes since commit df6c7b1279790d27ebfd58fbdfbac89bde5782ec:
+>
+>    python-pyopenssl: Upgrade to 0.14 (2015-03-21 16:42:30 +0100)
+>
+> are available in the git repository at:
+>
+>    git://github.com/akuster/meta-openembedded.git akuster/build_fixes
+>    https://github.com//tree/akuster/build_fixes
+>
+> Armin Kuster (33):
+>    daq: move recipe to meta-networking
+>    opencv: build issue
+>    collectd: fix world build issue
+>    libgxim: fix world build issues
+>    networkmanger: meta-oe world build failes
+>    fingerterm: update SRC_URI
+>    protbuf: update update and build fix
+>    serial-forward: fix fetch error
+>    dialog: update SRC_URI
+>    xterm: fix issue with SRC_URI
+>    ckermit: update SRC_URI
+>    lirc: fix QA warnings
+>    hplib: fix QA warnings
+>    udisks: fix QA warnings
+>    lio-utils: fix QA warnings
+>    pm-qa: Fix QA warnings
+>    gateone: Fix QA warnings
+>    rarpd: Fix QA warnings
+>    syslog-ng: Fix QA warnings
+>    pscs-lite: Fix QA warnings
+>    fbida: Fix QA warnings
+>    qt-creator: Fix QA warnings
+>    fio: Fix QA warnings
+>    foxtrotgps: Fix QA warnings
+>    usbpath: Fix QA warnings
+>    wvstreams: Fix QA warnings
+>    pksc11-helper: Fix QA warnings
+>    lmsensors-config: Fix QA warnings
+>    libutempter: update SRC_URI
+>    gammu: Fix QA warnings
+>    mosh: Fix QA warnings
+>    numactl: Fix QA warnings
+>    packagekit: Fix QA warnings
+>
+>   .../recipes-connectivity/daq/daq_2.0.2.bb          |  0
+>   ...le-run-test-program-while-cross-compiling.patch |  0
+>   ...c-Check-only-for-libsystemd-not-libsystem.patch |  0
+>   ...o-run-sbin-dhclient-to-get-the-version-nu.patch |  0
+>   .../networkmanager/networkmanager_0.9.8.10.bb      |  0
+>   meta-oe/recipes-benchmark/fio/fio_2.2.6.bb         |  2 +-
+>   meta-oe/recipes-connectivity/gammu/gammu_1.32.0.bb |  3 ++
+>   .../recipes-connectivity/gateone/gateone_git.bb    |  1 +
+>   meta-oe/recipes-connectivity/lirc/lirc.inc         |  2 +-
+>   meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb    |  1 +
+>   meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb    |  2 +-
+>   .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |  1 +
+>   .../packagekit/packagekit_0.5.6.bb                 |  9 +++---
+>   meta-oe/recipes-devtools/pm-qa/pm-qa_git.bb        |  1 +
+>   .../{protobuf_2.5.0.bb => protobuf_2.6.1.bb}       | 13 +++++----
+>   .../recipes-extended/collectd/collectd_5.4.1.bb    |  3 +-
+>   meta-oe/recipes-extended/dialog/dialog.inc         |  2 +-
+>   meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |  3 +-
+>   meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb   |  2 ++
+>   meta-oe/recipes-graphics/fbida/fbida_git.bb        |  2 +-
+>   meta-oe/recipes-graphics/xorg-app/xterm_303.bb     |  2 +-
+>   .../foxtrotgps/foxtrotgps_1.1.1.bb                 |  1 +
+>   .../{fingerterm_1.0.2.bb => fingerterm.bb}         | 34 ++++++++++------------
+>   meta-oe/recipes-qt/qt-creator/qt-creator_2.8.1.bb  |  2 ++
+>   meta-oe/recipes-support/ckermit/ckermit_302.bb     |  4 +--
+>   .../{libutempter_1.1.6.bb => libutempter.bb}       | 11 ++++---
+>   meta-oe/recipes-support/lio-utils/lio-utils_4.1.bb |  3 +-
+>   .../lm_sensors/lmsensors-config_1.0.bb             |  2 +-
+>   meta-oe/recipes-support/numactl/numactl_2.0.9.bb   |  2 ++
+>   .../recipes-support/opencv/opencv-samples_2.4.bb   |  3 ++
+>   meta-oe/recipes-support/opencv/opencv_2.4.bb       |  2 ++
+>   .../recipes-support/pcsc-lite/pcsc-lite_1.8.6.bb   |  1 +
+>   .../pkcs11-helper/pkcs11-helper_1.11.bb            |  2 +-
+>   .../serial-utils/serial-forward_git.bb             |  2 +-
+>   meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |  2 +-
+>   meta-oe/recipes-support/udisks/udisks_1.0.4.bb     |  2 +-
+>   meta-oe/recipes-support/usbpath/usbpath_svn.bb     |  2 ++
+>   ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch |  0
+>   .../recipes-extended/libgxim/libgxim_0.5.0.bb      |  0
+>   39 files changed, 75 insertions(+), 49 deletions(-)
+>   rename {meta-oe => meta-networking}/recipes-connectivity/daq/daq_2.0.2.bb (100%)
+>   rename {meta-oe => meta-networking}/recipes-connectivity/daq/files/disable-run-test-program-while-cross-compiling.patch (100%)
+>   rename {meta-oe => meta-networking}/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch (100%)
+>   rename {meta-oe => meta-networking}/recipes-connectivity/networkmanager/networkmanager/0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch (100%)
+>   rename {meta-oe => meta-networking}/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb (100%)
+>   rename meta-oe/recipes-devtools/protobuf/{protobuf_2.5.0.bb => protobuf_2.6.1.bb} (56%)
+>   rename meta-oe/recipes-qt/fingerterm/{fingerterm_1.0.2.bb => fingerterm.bb} (56%)
+>   rename meta-oe/recipes-support/libutempter/{libutempter_1.1.6.bb => libutempter.bb} (79%)
+>   rename {meta-oe => meta-ruby}/recipes-extended/libgxim/libgxim/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch (100%)
+>   rename {meta-oe => meta-ruby}/recipes-extended/libgxim/libgxim_0.5.0.bb (100%)
+>
 
