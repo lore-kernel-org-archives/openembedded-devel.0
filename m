@@ -1,35 +1,33 @@
 Return-Path: <sven.ebenfeld@gmail.com>
 Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id E654D65CAC
+	by mail.openembedded.org (Postfix) with ESMTP id E7319727E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 20:13:13 +0000 (UTC)
-Received: by wgen6 with SMTP id n6so128248154wge.3
+	Mon, 27 Apr 2015 20:13:11 +0000 (UTC)
+Received: by wgyo15 with SMTP id o15so128406820wgy.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 13:13:14 -0700 (PDT)
+	Mon, 27 Apr 2015 13:13:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=p3k2YzGAEBJPt2crQlU84y/frrzOT0S9WaiequHfn00=;
-	b=CjNVKUBxEKhwJijePxLBqR57nJmB5YuT85qXDmwsRc7WMQjxlyJhebN6rLvQd8XQqM
-	HSvkJ7i8AriKxfCwA/I+/e3fnfOGIAc4llYNKrpPdKnCCiIkhRuKf5LqWR8pNhRu10pa
-	qqwXILq794i4xosUOcggrAOV8sdcr3GZV3kxF1pr68ANROwD1uvQGDyrgn5d7X4lt1Zo
-	hyWGX1x3FBu29+AFjzcrHxuY8ciXt00F7MfBc7gqvskVB+XM1d06zIyqz8H9UvBwuhdX
-	sb9tViMhXWBFkMS7Pp/fQkCjIWBs5316kWcE3QhDhEFil/hEykQ6rwhWlUc1Itc02JNF
-	WCYw==
-X-Received: by 10.194.60.4 with SMTP id d4mr26123993wjr.72.1430165593946;
-	Mon, 27 Apr 2015 13:13:13 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=hfdM22bGNnc+F2kvLXjd2tA0hkvTJTtQYTApGAVfMnU=;
+	b=GBxFYfUkQfqI3BCjm8sJJO7VwUegrQXU4d+07xsRKBLbAJ33ZywDBT0/Oi6P9Yex5i
+	rQQcIIRFUNWsW4fOLEMntc5X5YuM9xp+O1AvAm2Rz4WKIPH8RyysUVZYwIIjpW83KDgX
+	yLA1x33NvhBAmDQBhHV05qYhVSL+sZBQzh+w8bPwHCy0Hx7u+7jfE253asCDe6XIOw/8
+	94Oa4P+Nw6j2qKoscyu9JVp80m/3Aaye0IZ4ecOqZGCEs5CAd/JjmejOK1N38VnQImzs
+	YpHkhhnn5l4enWXItPx6P1Nntj9Di987Xu0bwqwEjcincudF3VbvXM6ECz0MteWJ/bLq
+	KS3g==
+X-Received: by 10.180.231.41 with SMTP id td9mr23713188wic.69.1430165592545;
+	Mon, 27 Apr 2015 13:13:12 -0700 (PDT)
 Received: from ubuntu.ebenfeld.local (ip-84-119-99-153.unity-media.net.
 	[84.119.99.153]) by mx.google.com with ESMTPSA id
-	cf12sm30848805wjb.10.2015.04.27.13.13.12
+	cf12sm30848805wjb.10.2015.04.27.13.13.10
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 27 Apr 2015 13:13:13 -0700 (PDT)
+	Mon, 27 Apr 2015 13:13:11 -0700 (PDT)
 From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Apr 2015 22:12:56 +0200
-Message-Id: <1430165584-5634-2-git-send-email-sven.ebenfeld@gmail.com>
+Date: Mon, 27 Apr 2015 22:12:55 +0200
+Message-Id: <1430165584-5634-1-git-send-email-sven.ebenfeld@gmail.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1430165584-5634-1-git-send-email-sven.ebenfeld@gmail.com>
-References: <1430165584-5634-1-git-send-email-sven.ebenfeld@gmail.com>
-Subject: [meta-java][PATCH v3 01/10] icedtea7-native: Add attr-native and libxslt-native as dependency
+Subject: [meta-java][PATCH v3 00/10] Update OpenJDK7 to IcedTea 2.5.4 und OpenJDK 7u75b13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,24 +43,147 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 27 Apr 2015 20:13:14 -0000
 
-Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
----
- recipes-core/icedtea/icedtea7-native.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The new patchset with the comments of Khem fixed. -gstabs
+is not anymore replaced by -ggdb but only by -g. And the
+changes to java-test-image have been split into two commits
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index 1f193e1..b29fd34 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -4,7 +4,7 @@ LICENSE  = "GPL-2.0-with-classpath-exception"
- INC_PR = "r1"
- 
- DEPENDS = "virtual/javac-native virtual/java-native classpath-native \
--           rhino-native ant-native \
-+           rhino-native ant-native libxslt-native attr-native \
-            libx11-native xproto-native libxt-native libxext-native libxrender-native \
-            giflib-native jpeg-native libpng-native \
-            glib-2.0-native freetype-native zlib-native \
+Sven Ebenfeld (10):
+  icedtea7-native: Add attr-native and libxslt-native as dependency
+  icedtea7-native: fix build with gcc 4.9
+  icedtea7-native: remove unused patch
+  openjdk-7: Add IcedTea 2.5.4 OpenJDK 7u75b13
+  openjdk-7: use icedtea7-native as dependency instead of icedtea6
+  openjdk-7: Add libxslt-native and krb5 as dependency
+  openjdk-7: remove IcedTea 2.3.12, OpenJDK 7u25b30
+  java-test-image: Add openjdk-7-vm-zero package
+  java-test-image: remove busybox-hwclock
+  README: Update PREFERRED_VERSION to new OpenJDK-7 version 75b13-2.5.4
+
+ README                                             |   2 +-
+ recipes-core/icedtea/icedtea7-native.inc           |   2 +-
+ .../icedtea-change-to-gdb-debug-format.patch       |  29 ++
+ .../icedtea-disable-desktop-dirs.patch             |  91 ------
+ recipes-core/icedtea/openjdk-7-release-03b147.inc  |   2 +
+ .../openjdk/openjdk-7-25b30/build-hacks.patch      |  60 ----
+ .../openjdk-7-25b30/cacao-arm-ucontext.patch       |  24 --
+ .../openjdk/openjdk-7-25b30/cacao-libtoolize.patch |  12 -
+ .../openjdk-7-25b30/cacao-loadavg-makefile.patch   |  13 -
+ .../openjdk/openjdk-7-25b30/cacao-loadavg.patch    |  27 --
+ .../openjdk/openjdk-7-25b30/cacao-update.patch     |  63 ----
+ .../openjdk/openjdk-7-25b30/fix-checksums.patch    |  13 -
+ .../openjdk-7-25b30/fix_hotspot_crosscompile.patch |  51 ---
+ ...cedtea-add-usr-lib-jni-to-DEFAULT_LIBPATH.patch |  19 --
+ .../icedtea-corba-parallel-make.patch              |  31 --
+ .../openjdk-7-25b30/icedtea-crosscompile-fix.patch | 363 ---------------------
+ .../openjdk-7-25b30/icedtea-fix-xrender.patch      |  13 -
+ .../icedtea-hotspot-dlvsym-uclibc.patch            |  16 -
+ .../icedtea-hotspot-glibc-version.patch            |  23 --
+ .../openjdk-7-25b30/icedtea-hotspot-isfinte.patch  |  15 -
+ .../openjdk-7-25b30/icedtea-hotspot-isnanf.patch   |  13 -
+ .../openjdk-7-25b30/icedtea-hotspot-loadavg.patch  |  28 --
+ .../openjdk-7-25b30/icedtea-jdk-iconv-uclibc.patch |  39 ---
+ .../icedtea-jdk-nio-use-host-cc.patch              |  73 -----
+ .../icedtea-jdk-powerpc-atomic64.patch             |  65 ----
+ .../icedtea-jdk-ppc64-jvm-cfg.patch                |  41 ---
+ .../icedtea-jdk-remove-unused-backtrace.patch      |  41 ---
+ .../icedtea-jdk-unpack-uclibc.patch                |  10 -
+ .../openjdk-7-25b30/icedtea-launcher-stdc++.patch  |  13 -
+ .../openjdk-7-25b30/icedtea-libnet-renaming.patch  | 188 -----------
+ ...njdk-remove-currency-data-generation-expi.patch |  25 --
+ .../openjdk-7-25b30/icedtea-remove_werror.patch    |  16 -
+ .../icedtea-shark-arm-linux-cpu-detection.patch    | 113 -------
+ .../openjdk-7-25b30/icedtea-unbreak-float.patch    |  18 -
+ ...edtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch |  13 -
+ .../openjdk-7-25b30/icedtea-zero-hotspotfix.patch  |  37 ---
+ recipes-core/openjdk/openjdk-7-25b30/jvm.cfg       |  43 ---
+ .../remove-sun.misc.Perf-debug-code.patch          |  47 ---
+ .../openjdk/openjdk-7-75b13/build-hacks.patch      |  71 ++++
+ .../openjdk-7-75b13/cacao-arm-ucontext.patch       |  24 ++
+ .../openjdk/openjdk-7-75b13/cacao-libtoolize.patch |  12 +
+ .../openjdk-7-75b13/cacao-loadavg-makefile.patch   |  13 +
+ .../openjdk/openjdk-7-75b13/cacao-loadavg.patch    |  27 ++
+ .../openjdk/openjdk-7-75b13/fix-checksums.patch    |  28 ++
+ .../openjdk-7-75b13/fix_hotspot_crosscompile.patch |  52 +++
+ ...cedtea-add-usr-lib-jni-to-DEFAULT_LIBPATH.patch |  19 ++
+ .../openjdk-7-75b13/icedtea-crosscompile-fix.patch | 355 ++++++++++++++++++++
+ .../icedtea-jdk-nio-use-host-cc.patch              |  74 +++++
+ .../icedtea-jdk-rmi-crosscompile.patch             |  13 +
+ .../openjdk-7-75b13/icedtea-libnet-renaming.patch  | 236 ++++++++++++++
+ ...njdk-remove-currency-data-generation-expi.patch |  25 ++
+ .../openjdk-7-75b13/icedtea-remove_werror.patch    |  16 +
+ .../icedtea-shark-arm-linux-cpu-detection.patch    | 113 +++++++
+ .../openjdk-7-75b13/icedtea-unbreak-float.patch    |  18 +
+ ...edtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch |  13 +
+ .../openjdk-7-75b13/icedtea-zero-hotspotfix.patch  |  36 ++
+ recipes-core/openjdk/openjdk-7-75b13/jvm.cfg       |  43 +++
+ .../remove-sun.misc.Perf-debug-code.patch          |  47 +++
+ recipes-core/openjdk/openjdk-7-common.inc          |   9 +-
+ recipes-core/openjdk/openjdk-7-release-25b30.inc   | 137 --------
+ recipes-core/openjdk/openjdk-7-release-75b13.inc   | 102 ++++++
+ recipes-core/openjdk/openjdk-7_25b30-2.3.12.bb     |  36 --
+ recipes-core/openjdk/openjdk-7_75b13-2.5.4.bb      |  36 ++
+ recipes-images/images/java-test-image.bb           |   4 +-
+ 64 files changed, 1413 insertions(+), 1838 deletions(-)
+ create mode 100644 recipes-core/icedtea/openjdk-7-03b147/icedtea-change-to-gdb-debug-format.patch
+ delete mode 100644 recipes-core/icedtea/openjdk-7-03b147/icedtea-disable-desktop-dirs.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/build-hacks.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/cacao-arm-ucontext.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/cacao-libtoolize.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/cacao-loadavg-makefile.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/cacao-loadavg.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/cacao-update.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/fix-checksums.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/fix_hotspot_crosscompile.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-add-usr-lib-jni-to-DEFAULT_LIBPATH.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-corba-parallel-make.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-crosscompile-fix.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-fix-xrender.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-hotspot-dlvsym-uclibc.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-hotspot-glibc-version.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-hotspot-isfinte.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-hotspot-isnanf.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-hotspot-loadavg.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-iconv-uclibc.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-nio-use-host-cc.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-powerpc-atomic64.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-ppc64-jvm-cfg.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-remove-unused-backtrace.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-jdk-unpack-uclibc.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-launcher-stdc++.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-libnet-renaming.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-openjdk-remove-currency-data-generation-expi.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-remove_werror.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-shark-arm-linux-cpu-detection.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-unbreak-float.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/icedtea-zero-hotspotfix.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/jvm.cfg
+ delete mode 100644 recipes-core/openjdk/openjdk-7-25b30/remove-sun.misc.Perf-debug-code.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/build-hacks.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-arm-ucontext.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-libtoolize.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-loadavg-makefile.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/cacao-loadavg.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/fix-checksums.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/fix_hotspot_crosscompile.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-add-usr-lib-jni-to-DEFAULT_LIBPATH.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-rmi-crosscompile.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-libnet-renaming.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-openjdk-remove-currency-data-generation-expi.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-remove_werror.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-shark-arm-linux-cpu-detection.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-unbreak-float.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-unset-NIO_PLATFORM_CLASSES_ROOT_DIR.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/icedtea-zero-hotspotfix.patch
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/jvm.cfg
+ create mode 100644 recipes-core/openjdk/openjdk-7-75b13/remove-sun.misc.Perf-debug-code.patch
+ delete mode 100644 recipes-core/openjdk/openjdk-7-release-25b30.inc
+ create mode 100644 recipes-core/openjdk/openjdk-7-release-75b13.inc
+ delete mode 100644 recipes-core/openjdk/openjdk-7_25b30-2.3.12.bb
+ create mode 100644 recipes-core/openjdk/openjdk-7_75b13-2.5.4.bb
+
 -- 
 1.9.1
 
