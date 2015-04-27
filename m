@@ -1,35 +1,37 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 8070973D41
+Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
+	[209.85.212.178])
+	by mail.openembedded.org (Postfix) with ESMTP id AAFA773C48
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 18:44:50 +0000 (UTC)
-Received: by wgso17 with SMTP id o17so126187062wgs.1
+	Mon, 27 Apr 2015 18:44:52 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so111078365wiz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 11:44:51 -0700 (PDT)
+	Mon, 27 Apr 2015 11:44:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UAkbfkC76XhoUYtg1cNbK/RrmwtnfAccHnHwLTJvCqM=;
-	b=l64D5kArqrDrIe20Cm/opL/4Poy+tY4QoMeMjO4vnwEZzQXd6VVRmPpUoui4c3X/4x
-	9Qvy00CAnkD3cx17EapUlJytkQ1+Wm6fUuyCIZzqf6q1fpSbUN8xE/O7wErsJkgrQobL
-	6mhcoZPBiOlRN7p8IOGQFaOsSxUWjlbhufRONrE21Mo50ysnhfIHYK6/Elo00BC8HPiX
-	T2tfjFnPSEL3mUgI8ljRFIXPGfVt/7v+Ed8E/YGrxbf0WIX5hru40X/EdfSBFTFA1MJg
-	VK0Rzx4EcU2FSO0xz1u6Sp28LnxpG0/F43aJTqPm/VAgkmjTzTmrYdqNH9tkE3QKBLN8
-	iiLA==
-X-Received: by 10.180.75.102 with SMTP id b6mr23045119wiw.75.1430160291790;
-	Mon, 27 Apr 2015 11:44:51 -0700 (PDT)
+	bh=aYH9Y2hhyyX6knypR+KgtTkOhnaQ0bmZlngNbKSFkO0=;
+	b=DAesnl37SPB0k2hh3uRVWqmJXfhhMcL2TXjQMcehjEISYFAcjvTRC69a+Hum/Q1HLo
+	W0+GT9wN+f9Irny+UloiaMyHwpJs/Aj1ZsZH3VoyMQcErNMo+Jel3+X5hyeycG5iqNmb
+	WUC31zpDcc2dqNRYZeVaTyoB75lP64C1s2H5Y9eevlumM/d+FTbqk6KvVsK+prIWO6ue
+	pX1lQ+8vVAvSDVYr1jQSwKA02tNfTJVLjqV33jnXFiMJA6N4Kr+JWNKfc//8OpdomBUl
+	FwNLJbQykWwaGD38rnPGLutxvVjBAc7qr7CfqfFEeQ8Yb3FMUwmaYTD51M0dgceTcUE6
+	ad+A==
+X-Received: by 10.180.99.231 with SMTP id et7mr23195947wib.23.1430160293291;
+	Mon, 27 Apr 2015 11:44:53 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id o5sm12918159wia.0.2015.04.27.11.44.50
+	by mx.google.com with ESMTPSA id
+	mc20sm12771211wic.15.2015.04.27.11.44.52
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 Apr 2015 11:44:51 -0700 (PDT)
+	Mon, 27 Apr 2015 11:44:52 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Apr 2015 20:45:42 +0200
-Message-Id: <1430160343-2781-3-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 27 Apr 2015 20:45:43 +0200
+Message-Id: <1430160343-2781-4-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.3.5
 In-Reply-To: <1430160343-2781-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1430160343-2781-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/4] gsoap-native: add missing dependency on flex-native
+Subject: [meta-oe][PATCH 4/4] gsoap: fold .inc and -native into one recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +45,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2015 18:44:51 -0000
+X-List-Received-Date: Mon, 27 Apr 2015 18:44:53 -0000
 
-* otherwise fails with:
-| gcc  -DHAVE_CONFIG_H -I. -I/work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/gsoap/src -I../..   -isystem/sysroots/x86_64-linux/usr/include -DWITH_BISON -DWITH_LEX  -DSOAPCPP_IMPORT_PATH="\"/sysroots/x86_64-linux/usr/share/gsoap/import\"" -DLINUX -isystem/sysroots/x86_64-linux/usr/include -O2 -pipe -c -o soapcpp2-soapcpp2_yacc.o `test -f 'soapcpp2_yacc.c' || echo '/work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/gsoap/src/'`soapcpp2_yacc.c
-| /bin/bash /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/ylwrap /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/gsoap/src/soapcpp2_lex.l .c soapcpp2_lex.c -- /bin/bash /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/missing flex
-| /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/missing: line 81: flex: command not found
-| WARNING: 'flex' is missing on your system.
-|          You should only need it if you modified a '.l' file.
-|          You may want to install the Fast Lexical Analyzer package:
-|          <http://flex.sourceforge.net/>
-| make[4]: *** [soapcpp2_lex.c] Error 127
-| make[4]: Leaving directory `/work/x86_64-linux/gsoap-native/2.8.12-r1/build/gsoap/src'
-| make[3]: *** [all-recursive] Error 1
+* use BBCLASSEXTEND instead of separate recipe
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/gsoap/gsoap-native_2.8.12.bb   | 14 ---------
+ meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb      | 35 ++++++++++++++++++----
+ meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc     | 23 --------------
+ 3 files changed, 30 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
+ delete mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
 
 diff --git a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-index 46fabbb..ac90155 100644
+deleted file mode 100644
+index ac90155..0000000
 --- a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-+++ b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-@@ -1,6 +1,6 @@
- require gsoap_${PV}.inc
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require gsoap_${PV}.inc
+-
+-DEPENDS = "flex-native"
+-EXTRA_OEMAKE = ""
+-
+-inherit native
+-
+-do_install() {
+-    oe_runmake DESTDIR=${D} BINDIR=${D}${bindir} install
+-}
+-
+-
+-SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
+-SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
+diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
+index b85db05..b5c3995 100644
+--- a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
++++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
+@@ -1,6 +1,27 @@
+-require gsoap_${PV}.inc
++DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
++for the development of SOAP Web Services and clients."
++SECTION = "devel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b338b08b1b61e028e0f399a4de25e58f"
  
--DEPENDS = ""
-+DEPENDS = "flex-native"
- EXTRA_OEMAKE = ""
+-DEPENDS = "gsoap-native openssl zlib"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip"
++SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
++SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
++
++inherit autotools
++
++BBCLASSEXTEND = "native"
++
++PR = "r1"
++
++S = "${WORKDIR}/${BPN}-2.8"
++
++PARALLEL_MAKE = ""
++
++EXTRA_OEMAKE_class-target = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
++
++DEPENDS_class-target = "gsoap-native openssl zlib"
++DEPENDS_class-native = "flex-native"
  
- inherit native
+ do_install_append() {
+     install -d ${D}${libdir}
+@@ -10,8 +31,12 @@ do_install_append() {
+     done
+ }
+ 
++do_install_class-native() {
++    oe_runmake DESTDIR=${D} BINDIR=${D}${bindir} install
++}
++
+ FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
+ FILES_${PN} += "${datadir}"
+-
+-SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
+-SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
++FILES_${PN}-staticdev = "${libdir}"
++FILES_${PN}-dev = "${includedir}"
++RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
+diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
+deleted file mode 100644
+index 9e2a782..0000000
+--- a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
+-for the development of SOAP Web Services and clients."
+-SECTION = "devel"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b338b08b1b61e028e0f399a4de25e58f"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.zip \
+-"
+-
+-inherit autotools
+-
+-PR = "r1"
+-
+-S = "${WORKDIR}/gsoap-2.8"
+-
+-FILES_${PN}-dev = "${includedir}"
+-RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
+-
+-FILES_${PN}-staticdev = "${libdir}"
+-
+-PARALLEL_MAKE = ""
+-
+-EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
 -- 
 2.3.5
 
