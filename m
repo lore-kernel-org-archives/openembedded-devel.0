@@ -1,36 +1,39 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 5ADFC73D9B
+Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D83673D9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 16:53:28 +0000 (UTC)
-Received: by igblo3 with SMTP id lo3so66389869igb.0
+	Mon, 27 Apr 2015 16:57:09 +0000 (UTC)
+Received: by iedfl3 with SMTP id fl3so148180802ied.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 09:53:29 -0700 (PDT)
+	Mon, 27 Apr 2015 09:57:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=pCy/EavlHlKXCPAHDzM3ll9BojMeqnEwIkjS9QpR5X4=;
-	b=oWf61UuiDqsc03dhoU6DP1HypFM/wX4y86w0s9FLXqxIAAN+C4Bhz1pA4BNlq1zt7V
-	00cmsTOucjbPIDzT5RXbsv2RqGRO0D+PBHFgYmW9uaswrXIEE6wrZM40tJmaDRgiyZJX
-	Pczf5QII0GHFrefU3qvKpRdCcCvcY08DvZUIYJuCibrhVJIBHRL3g3NKD4uymat3aFiF
-	Tx0M+8gRuqxG3X8DmiJW6bh2Pw08pikHiSO8s8F+u0aTETEGEwhj/gFveTPzbSxjx6GN
-	mxzOLS75RlXLBIvBgpbK+iKa7Ei40ZAXmgRhB+hXZ0kmXCy++P8li1UGw4RWTwZNus7l
-	JAzQ==
+	:from:to:cc:content-type;
+	bh=SY0O+kN5HHxDW5ZSqXp2nZrMTkDwGS3hw0bJiSv6J3Q=;
+	b=zLwdRI5++2z1hoTwWX84kU13+K6wmh45yoODvNEWDTgJWkMnfgEaKoqwCE9kV5l4Ct
+	++qj8NDGf38WmAnC6vKw/uvRhA1P9GefAlRoNXY7dUwbO6eHEejMBXb7ZPBJqbnejDlN
+	UN8Ec8yUSq5Dwc6juNI56VyQVHLy9hmQq+1LiYOhdIU2a+YDtQGy9BjtQGTFzN8ijHUL
+	nuinv+gOLochN21xMRAjoaSC6J4vqKT5yuh7/yEnPQywIqvssMZCjfsLsMfY28DXdYnl
+	QMIjVblIu0R4rfcHHbLwmacALdrdy2fZaIK3uQUYySU61GCGfzNT2Kf/jrjP/5+Q9cxf
+	A20w==
 MIME-Version: 1.0
-X-Received: by 10.107.134.206 with SMTP id q75mr14810257ioi.27.1430153609255; 
-	Mon, 27 Apr 2015 09:53:29 -0700 (PDT)
+X-Received: by 10.107.130.165 with SMTP id m37mr14646576ioi.62.1430153831192; 
+	Mon, 27 Apr 2015 09:57:11 -0700 (PDT)
 Sender: otavio.salvador@gmail.com
-Received: by 10.107.23.197 with HTTP; Mon, 27 Apr 2015 09:53:29 -0700 (PDT)
-In-Reply-To: <1430153054-1252-2-git-send-email-raj.khem@gmail.com>
+Received: by 10.107.23.197 with HTTP; Mon, 27 Apr 2015 09:57:11 -0700 (PDT)
+In-Reply-To: <1430153054-1252-1-git-send-email-raj.khem@gmail.com>
 References: <1430153054-1252-1-git-send-email-raj.khem@gmail.com>
-	<1430153054-1252-2-git-send-email-raj.khem@gmail.com>
-Date: Mon, 27 Apr 2015 13:53:29 -0300
-X-Google-Sender-Auth: Jiuigfz489A77EZZOWOjxey9Rqk
-Message-ID: <CAP9ODKpOaUqG+jFvraPe+aru=yPdDLZ_U6mqqxN7JnnmS4vSAw@mail.gmail.com>
+Date: Mon, 27 Apr 2015 13:57:11 -0300
+X-Google-Sender-Auth: -Z4Qa44zA6k2a9PaKE_oMLIrXWA
+Message-ID: <CAP9ODKrO9G9nNyADvRpXG3hhQQDC-=B4okpsL93VLMx7M0i06g@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH 2/2] chromium: Remove use of deprecated udev logging API
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Carlos Rafael Giani <dv@pseudoterminal.org>
+Cc: pnandyala <Pavan.Nandyala@lnttechservices.com>,
+	Zoltan Kuscsik <zoltan.kuscsik@linaro.org>,
+	knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
+Subject: Re: [meta-browser][PATCH 1/2 V4] cef3: Add recipe for Chromium Embedded Framework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,18 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2015 16:53:30 -0000
+X-List-Received-Date: Mon, 27 Apr 2015 16:57:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On Mon, Apr 27, 2015 at 1:44 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> in systemd >= 218 libudev deprecated support for udev_set_log_fn
-> see
-> https://github.com/systemd/systemd/commit/25e773eeb4f853804e1bf0dbd9a184f23e9b2a97
+> CEF is a framework to embed chromium based browsers into other
+> applications
 >
-> Change-Id: If6e3742bd2a70685f2521f134d5965bf2d1f8f72
+> Change-Id: Ieabae43042101331f67cf6e673391f6fe320561f
+> Signed-off-by: pnandyala <Pavan.Nandyala@LntTechservices.com>
+> Signed-off-by: knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
+> Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Agreed. Please add proper patch header and prepare a v2 please.
+This patch is way closer to what I consider ready for merging. For
+merging I would like:
+
+ - Carlos feedback - he is the one who did most of this work and so
+should be consulted about his thoughts on this
+ - proper patch headers
 
 -- 
 Otavio Salvador                             O.S. Systems
