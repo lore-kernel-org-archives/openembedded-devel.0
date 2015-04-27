@@ -1,24 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 08E3773D0F
+	by mail.openembedded.org (Postfix) with ESMTP id DB814738EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 05:22:21 +0000 (UTC)
+	Mon, 27 Apr 2015 05:50:47 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3R5MMLr005028
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3R5om7g007773
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Apr 2015 22:22:22 -0700 (PDT)
+	Sun, 26 Apr 2015 22:50:48 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Sun, 26 Apr 2015 22:22:21 -0700
+	14.3.224.2; Sun, 26 Apr 2015 22:50:47 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Apr 2015 13:22:20 +0800
-Message-ID: <1430112140-6453-1-git-send-email-rongqing.li@windriver.com>
+Date: Mon, 27 Apr 2015 13:50:46 +0800
+Message-ID: <1430113846-7107-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] tcpdump: upgrade to 4.7.4
+Subject: [PATCH][meta-oe] krb5: upgrade to 1.13.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,138 +32,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2015 05:22:23 -0000
+X-List-Received-Date: Mon, 27 Apr 2015 05:50:49 -0000
 Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
 
-Remove two unneeded patches, configure.patch and tcpdump-cross-getaddrinfo.patch
+Remove a CVE patch which krb5 1.13.1 has merged.
+Update the checksum, include License file checksum, since
+the date in it is updated
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
-Resend, since I did not see it in patchwork
+ ...rn-only-new-keys-in-randkey-CVE-2014-5351.patch | 92 ----------------------
+ .../krb5/{krb5_1.12.2.bb => krb5_1.13.1.bb}        |  7 +-
+ 2 files changed, 3 insertions(+), 96 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
+ rename meta-oe/recipes-connectivity/krb5/{krb5_1.12.2.bb => krb5_1.13.1.bb} (90%)
 
- .../tcpdump/tcpdump-4.6.1/configure.patch          | 29 ----------------------
- .../tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch  | 23 -----------------
- .../{tcpdump-4.6.1 => tcpdump}/add-ptest.patch     |  0
- .../tcpdump/{tcpdump-4.6.1 => tcpdump}/run-ptest   |  0
- .../tcpdump-configure-dlpi.patch                   |  0
- .../unnecessary-to-check-libpcap.patch             |  0
- .../tcpdump/{tcpdump_4.6.1.bb => tcpdump_4.7.4.bb} |  6 ++---
- 7 files changed, 2 insertions(+), 56 deletions(-)
- delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch
- delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch
- rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/add-ptest.patch (100%)
- rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/run-ptest (100%)
- rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/tcpdump-configure-dlpi.patch (100%)
- rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/unnecessary-to-check-libpcap.patch (100%)
- rename meta-networking/recipes-support/tcpdump/{tcpdump_4.6.1.bb => tcpdump_4.7.4.bb} (85%)
-
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
 deleted file mode 100644
-index 3697420..0000000
---- a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch
+index 0852661..0000000
+--- a/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
 +++ /dev/null
-@@ -1,29 +0,0 @@
+@@ -1,92 +0,0 @@
+-From af0ed4df4dfae762ab5fb605f5a0c8f59cb4f6ca Mon Sep 17 00:00:00 2001
+-From: Greg Hudson <ghudson@mit.edu>
+-Date: Thu, 21 Aug 2014 13:52:07 -0400
+-Subject: [PATCH] Return only new keys in randkey [CVE-2014-5351]
+-
+-In kadmind's randkey operation, if a client specifies the keepold
+-flag, do not include the preserved old keys in the response.
+-
+-CVE-2014-5351:
+-
+-An authenticated remote attacker can retrieve the current keys for a
+-service principal when generating a new set of keys for that
+-principal.  The attacker needs to be authenticated as a user who has
+-the elevated privilege for randomizing the keys of other principals.
+-
+-Normally, when a Kerberos administrator randomizes the keys of a
+-service principal, kadmind returns only the new keys.  This prevents
+-an administrator who lacks legitimate privileged access to a service
+-from forging tickets to authenticate to that service.  If the
+-"keepold" flag to the kadmin randkey RPC operation is true, kadmind
+-retains the old keys in the KDC database as intended, but also
+-unexpectedly returns the old keys to the client, which exposes the
+-service to ticket forgery attacks from the administrator.
+-
+-A mitigating factor is that legitimate clients of the affected service
+-will start failing to authenticate to the service once they begin to
+-receive service tickets encrypted in the new keys.  The affected
+-service will be unable to decrypt the newly issued tickets, possibly
+-alerting the legitimate administrator of the affected service.
+-
+-CVSSv2: AV:N/AC:H/Au:S/C:P/I:N/A:N/E:POC/RL:OF/RC:C
+-
+-[tlyu@mit.edu: CVE description and CVSS score]
+-
+-ticket: 8018 (new)
+-target_version: 1.13
+-tags: pullup
+-
+-Upstream-Status: Backport
 ----
-- aclocal.m4   |    1 -
-- configure.in |    1 +
-- 2 files changed, 1 insertions(+), 1 deletions(-)
+- src/lib/kadm5/srv/svr_principal.c |   21 ++++++++++++++++++---
+- 1 files changed, 18 insertions(+), 3 deletions(-)
 -
--diff --git a/aclocal.m4 b/aclocal.m4
--index 40b5866..0c662b0 100644
----- a/aclocal.m4
--+++ b/aclocal.m4
--@@ -40,7 +40,6 @@ dnl
-- AC_DEFUN(AC_LBL_C_INIT_BEFORE_CC,
--     [AC_PREREQ(2.50)
--     AC_BEFORE([$0], [AC_LBL_C_INIT])
---    AC_BEFORE([$0], [AC_PROG_CC])
--     AC_BEFORE([$0], [AC_LBL_FIXINCLUDES])
--     AC_BEFORE([$0], [AC_LBL_DEVEL])
--     AC_ARG_WITH(gcc, [  --without-gcc           don't use gcc])
--diff --git a/configure.in b/configure.in
--index 11257c9..7f9591c 100644
----- a/configure.in
--+++ b/configure.in
--@@ -19,6 +19,7 @@ AC_REVISION($Revision: 1.204 $)
-- AC_PREREQ(2.50)
-- AC_INIT(tcpdump.c)
+-diff --git a/lib/kadm5/srv/svr_principal.c b/lib/kadm5/srv/svr_principal.c
+-index 5d358bd..d4e74cc 100644
+---- a/lib/kadm5/srv/svr_principal.c
+-+++ b/lib/kadm5/srv/svr_principal.c
+-@@ -344,6 +344,20 @@ check_1_6_dummy(kadm5_principal_ent_t entry, long mask,
+-     *passptr = NULL;
+- }
 - 
--+AC_PROG_CC
-- AC_CANONICAL_HOST
+-+/* Return the number of keys with the newest kvno.  Assumes that all key data
+-+ * with the newest kvno are at the front of the key data array. */
+-+static int
+-+count_new_keys(int n_key_data, krb5_key_data *key_data)
+-+{
+-+    int n;
+-+
+-+    for (n = 1; n < n_key_data; n++) {
+-+        if (key_data[n - 1].key_data_kvno != key_data[n].key_data_kvno)
+-+            return n;
+-+    }
+-+    return n_key_data;
+-+}
+-+
+- kadm5_ret_t
+- kadm5_create_principal(void *server_handle,
+-                        kadm5_principal_ent_t entry, long mask,
+-@@ -1593,7 +1607,7 @@ kadm5_randkey_principal_3(void *server_handle,
+-     osa_princ_ent_rec           adb;
+-     krb5_int32                  now;
+-     kadm5_policy_ent_rec        pol;
+--    int                         ret, last_pwd;
+-+    int                         ret, last_pwd, n_new_keys;
+-     krb5_boolean                have_pol = FALSE;
+-     kadm5_server_handle_t       handle = server_handle;
+-     krb5_keyblock               *act_mkey;
+-@@ -1686,8 +1700,9 @@ kadm5_randkey_principal_3(void *server_handle,
+-     kdb->fail_auth_count = 0;
 - 
-- AC_LBL_C_INIT_BEFORE_CC(V_CCOPT, V_INCLS)
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch
-deleted file mode 100644
-index b414b72..0000000
---- a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--Fix getaddinfo check when cross compiling
+-     if (keyblocks) {
+--        ret = decrypt_key_data(handle->context,
+--                               kdb->n_key_data, kdb->key_data,
+-+        /* Return only the new keys added by krb5_dbe_crk. */
+-+        n_new_keys = count_new_keys(kdb->n_key_data, kdb->key_data);
+-+        ret = decrypt_key_data(handle->context, n_new_keys, kdb->key_data,
+-                                keyblocks, n_keys);
+-         if (ret)
+-             goto done;
+--- 
+-1.7.4.1
 -
--Upstream-Status: Pending.
--
--AC_TRY_RUN defaults to td_cv_buggygetaddrinfo=yes when
--cross-compiling. So this change indicates that we
--are cross-compiling.
--
--Signed-of-by: Aws Ismail <aws.ismail@windriver.com>
--
--diff --git a/configure.in b/configure.in
--index ca277c0..283035e 100644
----- a/configure.in
--+++ b/configure.in
--@@ -434,7 +434,7 @@ main()
-- ],
-- 	td_cv_buggygetaddrinfo=no,
-- 	td_cv_buggygetaddrinfo=yes,
---	td_cv_buggygetaddrinfo=yes)])
--+	td_cv_buggygetaddrinfo=cross)])
-- 	if test "$td_cv_buggygetaddrinfo" = no; then
-- 		AC_MSG_RESULT(good)
-- 	else
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-similarity index 100%
-rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest b/meta-networking/recipes-support/tcpdump/tcpdump/run-ptest
-similarity index 100%
-rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
-rename to meta-networking/recipes-support/tcpdump/tcpdump/run-ptest
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-configure-dlpi.patch b/meta-networking/recipes-support/tcpdump/tcpdump/tcpdump-configure-dlpi.patch
-similarity index 100%
-rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-configure-dlpi.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump/tcpdump-configure-dlpi.patch
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/unnecessary-to-check-libpcap.patch b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-similarity index 100%
-rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/unnecessary-to-check-libpcap.patch
-rename to meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-similarity index 85%
-rename from meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
-rename to meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-index 1fdaf30..e01f5fb 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
-@@ -7,15 +7,13 @@ DEPENDS = "libpcap"
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.1.bb
+similarity index 90%
+rename from meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
+rename to meta-oe/recipes-connectivity/krb5/krb5_1.13.1.bb
+index c492496..b266450 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.1.bb
+@@ -14,7 +14,7 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
+ HOMEPAGE = "http://web.mit.edu/Kerberos/"
+ SECTION = "console/network"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=450c80c6258ce03387bd09df37638ebc"
++LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=f64248328d2d9928e1f04158b5243e7f"
+ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
  
- SRC_URI = " \
-     http://www.tcpdump.org/release/${BP}.tar.gz \
--    file://configure.patch \
-     file://unnecessary-to-check-libpcap.patch \
-     file://tcpdump-configure-dlpi.patch \
--    file://tcpdump-cross-getaddrinfo.patch \
-     file://add-ptest.patch \
-     file://run-ptest \
+ inherit autotools-brokensep binconfig perlnative
+@@ -22,7 +22,6 @@ inherit autotools-brokensep binconfig perlnative
+ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
+            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
+-           file://0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch \
+            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
+            file://crosscompile_nm.patch \
+            file://etc/init.d/krb5-kdc \
+@@ -30,8 +29,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
+            file://etc/default/krb5-kdc \
+            file://etc/default/krb5-admin-server \
  "
--SRC_URI[md5sum] = "dab267ec30216a069747d10314079ec7"
--SRC_URI[sha256sum] = "4c88c2a9aeb4047074f344fc9b2b6577b219972d359e192f6d12ccf983a13fd7"
-+SRC_URI[md5sum] = "58af728de36f499341918fc4b8e827c3"
-+SRC_URI[sha256sum] = "6be520269a89036f99c0b2126713a60965953eab921002b07608ccfc0c47d9af"
- export LIBS=" -lpcap"
+-SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
+-SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
++SRC_URI[md5sum] = "567586cdf02aa8c842c2fab7a94f3c1f"
++SRC_URI[sha256sum] = "4df629fdf97f362cf81edbf38d613b32b492dd88c876cf3aa1c66562f296663e"
  
- inherit autotools-brokensep ptest
+ S = "${WORKDIR}/${BP}/src/"
+ 
 -- 
 2.1.0
 
