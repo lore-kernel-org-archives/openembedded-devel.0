@@ -1,40 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id CA0A565CAC
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 61FD173DB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 13:53:10 +0000 (UTC)
-Received: by wgen6 with SMTP id n6so116617946wge.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 06:53:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=DL13yDpNbbidHs9tu9YdYNiRqqdvO22qrBbS8GJKGxM=;
-	b=P8VUWACmmO39AgulYntEaSL0mH9KTyvYm77ms6bUCjyQmt/hnPzMTPNhE7jioOmIfa
-	21XSu4TwUKPv7q/PP1dmUa+YtBbt3jT73S6Bh+mUPN1iIgPC0oV7ovg4GduLXwV7T951
-	LsqOGm6YgC1O7+aqK6TGq2PqyUgj46PGuRMSg3gfvSTl9tejcIlbodVY5ZDoLdojNpHV
-	5J7375JZDPgznK/NWvXFdffA3cTAyqTbgShT4hBRYgZi2Fq/Q+iWkAeOhd0e1wztjIxE
-	kiQbIENT30I3Gml8VRrqzsIPA/wRS4ukPHQOyFg6PTlX3OLIT1CGXTFm7VaSaT8jpBAH
-	Jrzg==
-X-Received: by 10.194.235.71 with SMTP id uk7mr22864524wjc.13.1430142791832;
-	Mon, 27 Apr 2015 06:53:11 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	xy2sm29520134wjc.14.2015.04.27.06.53.10
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 Apr 2015 06:53:10 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 27 Apr 2015 15:54:07 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150427135407.GG2379@jama>
-References: <1430139840-5154-1-git-send-email-cristian.iorga@intel.com>
+	Mon, 27 Apr 2015 15:42:44 +0000 (UTC)
+Received: (qmail 27271 invoked by uid 1003); 27 Apr 2015 15:42:45 -0000
+Received: from unknown (HELO ?192.168.11.121?)
+	(philip@opensdr.com@108.44.118.217)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	27 Apr 2015 15:42:45 -0000
+Message-ID: <553E58F4.9050703@balister.org>
+Date: Mon, 27 Apr 2015 11:42:44 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-In-Reply-To: <1430139840-5154-1-git-send-email-cristian.iorga@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH V6] bluez collection: add (moved from oe-core)
+To: openembedded-devel@lists.openembedded.org
+References: <1429807713-14290-1-git-send-email-philip@balister.org>
+	<20150425063615.GA2357@jama>
+In-Reply-To: <20150425063615.GA2357@jama>
+Subject: Re: [meta-oe][PATCH] gpsd: Update to 3.14.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,711 +33,312 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2015 13:53:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 27 Apr 2015 15:42:45 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On Mon, Apr 27, 2015 at 04:04:00PM +0300, Cristian Iorga wrote:
-> BlueZ 4.x Bluetooth stack has been removed from oe-core.
-> However, it is still supported, so add it to
-> recipes-connectivity in meta-oe.
->=20
-> meta-systemd layer bluez4 bbappend has been integrated
-> into bluez4 recipe.
->=20
-> In order to use it in oe-core/poky/YP, 'bluez5' backfill
-> distro feature needs to be disabled via:
-> DISTRO_FEATURES_BACKFILL_CONSIDERED =3D "bluez5" .
-> 'bluetooth' distro feature needs to be present also.
->=20
-> Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
-> ---
->  .../obsolete_automake_macros.patch                 |  14 +++
->  .../bluez/bluez-hcidump_2.5.bb                     |  22 +++++
->  .../bluez/bluez4-4.101/bluetooth.conf              |  16 +++
->  .../bluez/bluez4-4.101/fix-udev-paths.patch        |  37 +++++++
->  .../bluez/bluez4-4.101/fix_encrypt_collision.patch | 110 +++++++++++++++=
-++++++
->  .../bluez/bluez4-4.101/install-test-script.patch   |  26 +++++
->  ...ork-fix-network-Connect-method-parameters.patch |  30 ++++++
->  .../bluez4-4.101/obsolete_automake_macros.patch    |  14 +++
->  .../bluez/bluez4-4.101/sbc_mmx.patch               |  24 +++++
->  ...pygobject-instead-ofgobject-introspection.patch |  27 +++++
->  meta-oe/recipes-connectivity/bluez/bluez4.inc      |  54 ++++++++++
->  meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb |  47 +++++++++
->  .../bluez/gst-plugin-bluetooth_4.101.bb            |  39 ++++++++
->  .../bluez/bluez4_4.101.bbappend                    |   9 --
->  14 files changed, 460 insertions(+), 9 deletions(-)
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/=
-obsolete_automake_macros.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.=
-bb
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluet=
-ooth.conf
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-u=
-dev-paths.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_e=
-ncrypt_collision.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/insta=
-ll-test-script.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/netwo=
-rk-fix-network-Connect-method-parameters.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsol=
-ete_automake_macros.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_m=
-mx.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-l=
-egacy-pygobject-instead-ofgobject-introspection.patch
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4.inc
->  create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
->  create mode 100644 meta-oe/recipes-connectivity/bluez/gst-plugin-bluetoo=
-th_4.101.bb
->  delete mode 100644 meta-systemd/oe-core/recipes-connectivity/bluez/bluez=
-4_4.101.bbappend
->=20
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolet=
-e_automake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-=
-2.5/obsolete_automake_macros.patch
-> new file mode 100644
-> index 0000000..0c77f1a
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_autom=
-ake_macros.patch
-> @@ -0,0 +1,14 @@
-> +Upstream-Status: Pending [package obsolete/not maintained by upstream]
-> +
-> +Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-> +diff -Nurd bluez-hcidump-2.5/configure.ac bluez-hcidump-2.5/configure.ac
-> +--- bluez-hcidump-2.5/configure.ac	2012-11-30 10:29:41.000000000 +0200
-> ++++ bluez-hcidump-2.5/configure.ac	2013-01-12 10:02:10.609511463 +0200
-> +@@ -2,7 +2,7 @@
-> + AC_INIT(bluez-hcidump, 2.5)
-> +
-> + AM_INIT_AUTOMAKE([foreign subdir-objects])
-> +-AM_CONFIG_HEADER(config.h)
-> ++AC_CONFIG_HEADERS(config.h)
-> +
-> + m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb b/me=
-ta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
-> new file mode 100644
-> index 0000000..3950630
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "Linux Bluetooth Stack HCI Debugger Tool"
-> +DESCRIPTION =3D "The hcidump tool reads raw HCI data coming from and goi=
-ng to a Bluetooth device \
-> +and displays the commands, events and data in a human-readable form."
-> +
-> +SECTION =3D "console"
-> +# hcidump was integrated into bluez5
-> +DEPENDS =3D "bluez4"
-> +RCONFLICTS_${PN} =3D "bluez5"
-> +LICENSE =3D "GPLv2+"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Deb723b61539feef013de476e68b5c=
-50a \
-> +                    file://src/hcidump.c;beginline=3D1;endline=3D23;md5=
-=3D3bee3a162dff43a5be7470710b99fbcf"
-> +PR =3D "r1"
-> +
-> +SRC_URI =3D "http://www.kernel.org/pub/linux/bluetooth/bluez-hcidump-${P=
-V}.tar.gz \
-> +           file://obsolete_automake_macros.patch \
-> +"
-> +
-> +SRC_URI[md5sum] =3D "2eab54bbd2b59a2ed4274ebb9390cf18"
-> +SRC_URI[sha256sum] =3D "9b7c52b375081883738cf049ecabc103b97d094b19c6544f=
-b241267905d88881"
-> +S =3D "${WORKDIR}/bluez-hcidump-${PV}"
-> +
-> +inherit autotools
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.co=
-nf b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
-> new file mode 100644
-> index 0000000..ca5e9e4
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
-> @@ -0,0 +1,16 @@
-> +<!-- This configuration file specifies the required security policies
-> +     for Bluetooth core daemon to work. -->
-> +
-> +<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration =
-1.0//EN"
-> + "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
-> +<busconfig>
-> +
-> +  <!-- ../system.conf have denied everything, so we just punch some hole=
-s -->
-> +
-> +  <policy context=3D"default">
-> +    <allow own=3D"org.bluez"/>
-> +    <allow send_destination=3D"org.bluez"/>
-> +    <allow send_interface=3D"org.bluez.Agent"/>
-> +  </policy>
-> +
-> +</busconfig>
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-pat=
-hs.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.p=
-atch
-> new file mode 100644
-> index 0000000..8089914
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.patch
-> @@ -0,0 +1,37 @@
-> +Add udevdir/udevrulesdir options
-> +
-> +Upstream-Status: Inappropriate [configuration]
-> +Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
-> +
-> +Index: bluez-4.101/Makefile.am
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- bluez-4.101.orig/Makefile.am
-> ++++ bluez-4.101/Makefile.am
-> +@@ -395,7 +395,7 @@ EXTRA_DIST +=3D audio/bluetooth.conf
-> + include Makefile.tools
-> +=20
-> + if DATAFILES
-> +-rulesdir =3D @UDEV_DIR@/rules.d
-> ++rulesdir =3D @UDEV_RULES_DIR@
-> +=20
-> + udev_files =3D
-> +=20
-> +Index: bluez-4.101/configure.ac
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- bluez-4.101.orig/configure.ac
-> ++++ bluez-4.101/configure.ac
-> +@@ -61,4 +61,14 @@ if (test -n "${path_systemdunit}"); then
-> + fi
-> + AM_CONDITIONAL(SYSTEMD, test -n "${path_systemdunit}")
-> +=20
-> ++AC_ARG_WITH([udevdir],
-> ++    AS_HELP_STRING([--with-udevdir=3DDIR], [udev directory]),
-> ++    [], [with_udevdir=3D/lib/udev/])
-> ++AC_SUBST([UDEV_DIR], [$with_udevdir])
-> ++
-> ++AC_ARG_WITH([udevrulesdir],
-> ++    AS_HELP_STRING([--with-udevrulesdir=3DDIR], [udev rules directory]),
-> ++    [], [with_udevrulesdir=3D/lib/udev/rules.d])
-> ++AC_SUBST([UDEV_RULES_DIR], [$with_udevrulesdir])
-> ++
-> + AC_OUTPUT(Makefile doc/version.xml src/bluetoothd.8 src/bluetooth.servi=
-ce bluez.pc)
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_encrypt_=
-collision.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_encry=
-pt_collision.patch
-> new file mode 100644
-> index 0000000..1bc390f
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_encrypt_collisi=
-on.patch
-> @@ -0,0 +1,110 @@
-> +Avoid namepspace collision with encrypt function from libc
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +Index: bluez-4.101/test/l2test.c
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- bluez-4.101.orig/test/l2test.c
-> ++++ bluez-4.101/test/l2test.c
-> +@@ -107,7 +107,7 @@ static char *filename =3D NULL;
-> + static int rfcmode =3D 0;
-> + static int master =3D 0;
-> + static int auth =3D 0;
-> +-static int encrypt =3D 0;
-> ++static int encryption_request =3D 0;
-> + static int secure =3D 0;
-> + static int socktype =3D SOCK_SEQPACKET;
-> + static int linger =3D 0;
-> +@@ -340,7 +340,7 @@ static int do_connect(char *svr)
-> + 		opt |=3D L2CAP_LM_MASTER;
-> + 	if (auth)
-> + 		opt |=3D L2CAP_LM_AUTH;
-> +-	if (encrypt)
-> ++	if (encryption_request)
-> + 		opt |=3D L2CAP_LM_ENCRYPT;
-> + 	if (secure)
-> + 		opt |=3D L2CAP_LM_SECURE;
-> +@@ -475,7 +475,7 @@ static void do_listen(void (*handler)(in
-> + 		opt |=3D L2CAP_LM_MASTER;
-> + 	if (auth)
-> + 		opt |=3D L2CAP_LM_AUTH;
-> +-	if (encrypt)
-> ++	if (encryption_request)
-> + 		opt |=3D L2CAP_LM_ENCRYPT;
-> + 	if (secure)
-> + 		opt |=3D L2CAP_LM_SECURE;
-> +@@ -1407,7 +1407,7 @@ int main(int argc, char *argv[])
-> + 			break;
-> +=20
-> + 		case 'E':
-> +-			encrypt =3D 1;
-> ++			encryption_request =3D 1;
-> + 			break;
-> +=20
-> + 		case 'S':
-> +Index: bluez-4.101/test/rctest.c
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- bluez-4.101.orig/test/rctest.c
-> ++++ bluez-4.101/test/rctest.c
-> +@@ -79,7 +79,7 @@ static char *filename =3D NULL;
-> +=20
-> + static int master =3D 0;
-> + static int auth =3D 0;
-> +-static int encrypt =3D 0;
-> ++static int encryption_request =3D 0;
-> + static int secure =3D 0;
-> + static int socktype =3D SOCK_STREAM;
-> + static int linger =3D 0;
-> +@@ -200,7 +200,7 @@ static int do_connect(const char *svr)
-> + 		opt |=3D RFCOMM_LM_MASTER;
-> + 	if (auth)
-> + 		opt |=3D RFCOMM_LM_AUTH;
-> +-	if (encrypt)
-> ++	if (encryption_request)
-> + 		opt |=3D RFCOMM_LM_ENCRYPT;
-> + 	if (secure)
-> + 		opt |=3D RFCOMM_LM_SECURE;
-> +@@ -291,7 +291,7 @@ static void do_listen(void (*handler)(in
-> + 		opt |=3D RFCOMM_LM_MASTER;
-> + 	if (auth)
-> + 		opt |=3D RFCOMM_LM_AUTH;
-> +-	if (encrypt)
-> ++	if (encryption_request)
-> + 		opt |=3D RFCOMM_LM_ENCRYPT;
-> + 	if (secure)
-> + 		opt |=3D RFCOMM_LM_SECURE;
-> +@@ -701,7 +701,7 @@ int main(int argc, char *argv[])
-> + 			break;
-> +=20
-> + 		case 'E':
-> +-			encrypt =3D 1;
-> ++			encryption_request =3D 1;
-> + 			break;
-> +=20
-> + 		case 'S':
-> +Index: bluez-4.101/src/textfile.h
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- bluez-4.101.orig/src/textfile.h
-> ++++ bluez-4.101/src/textfile.h
-> +@@ -24,6 +24,8 @@
-> + #ifndef __TEXTFILE_H
-> + #define __TEXTFILE_H
-> +=20
-> ++#include <sys/types.h>
-> ++
-> + int create_dirs(const char *filename, const mode_t mode);
-> + int create_file(const char *filename, const mode_t mode);
-> + int create_name(char *buf, size_t size, const char *path,
-> +Index: bluez-4.101/test/attest.c
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- bluez-4.101.orig/test/attest.c
-> ++++ bluez-4.101/test/attest.c
-> +@@ -34,6 +34,7 @@
-> + #include <termios.h>
-> + #include <sys/ioctl.h>
-> + #include <sys/socket.h>
-> ++#include <sys/select.h>
-> +=20
-> + #include <bluetooth/bluetooth.h>
-> + #include <bluetooth/rfcomm.h>
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test=
--script.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-tes=
-t-script.patch
-> new file mode 100644
-> index 0000000..23f7d99
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-script=
-=2Epatch
-> @@ -0,0 +1,26 @@
-> +Upstream-Status: Inappropriate
-> +
-> +Install the bluez's test scripts
-> +
-> +Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com>
-> +diff -Nurd bluez-4.101.orig/Makefile.tools bluez-4.101/Makefile.tools
-> +--- bluez-4.101.orig/Makefile.tools	2013-11-19 15:49:07.688838000 +0800
-> ++++ bluez-4.101/Makefile.tools	2013-11-19 15:50:09.256837848 +0800
-> +@@ -227,6 +227,17 @@
-> + 		test/service-spp.xml test/service-opp.xml test/service-ftp.xml \
-> + 		test/simple-player test/test-nap
-> +=20
-> ++bluez4_testdir =3D $(libdir)/bluez4/test/
-> ++dist_bluez4_test_SCRIPTS =3D test/sap-client test/hsplay test/hsmicro \
-> ++		test/monitor-bluetooth test/list-devices \
-> ++		test/test-discovery test/test-manager test/test-adapter \
-> ++		test/test-device test/test-service test/test-serial \
-> ++		test/test-telephony test/test-network test/simple-agent \
-> ++		test/simple-service test/simple-endpoint test/test-audio \
-> ++		test/test-input test/test-sap-server test/test-oob \
-> ++		test/test-attrib test/test-proximity test/test-thermometer \
-> ++		test/test-serial-proxy test/test-health test/test-health-sink \
-> ++		test/simple-player test/test-nap
-> + if HIDD
-> + bin_PROGRAMS +=3D compat/hidd
-> +=20
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-=
-network-Connect-method-parameters.patch b/meta-oe/recipes-connectivity/blue=
-z/bluez4-4.101/network-fix-network-Connect-method-parameters.patch
-> new file mode 100644
-> index 0000000..37f9199
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-network=
--Connect-method-parameters.patch
-> @@ -0,0 +1,30 @@
-> +Upstream-Status: Backport
-> +Signed-off-by: Peter A. Bigot <pab@pabigot.com>
-> +
-> +From 57170b311f1468330f4a9961dc0b3ac45f97bc13 Mon Sep 17 00:00:00 2001
-> +From: Gustavo Padovan <gustavo.padovan@collabora.co.uk>
-> +Date: Sat, 30 Jun 2012 00:39:05 -0300
-> +Subject: [PATCH] network: fix network Connect() method parameters
-> +
-> +---
-> + network/connection.c |    4 +++-
-> + 1 file changed, 3 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/network/connection.c b/network/connection.c
-> +index 544ec3a..59423a9 100644
-> +--- a/network/connection.c
-> ++++ b/network/connection.c
-> +@@ -554,7 +554,9 @@ static void path_unregister(void *data)
-> +=20
-> + static const GDBusMethodTable connection_methods[] =3D {
-> + 	{ GDBUS_ASYNC_METHOD("Connect",
-> +-			NULL, NULL, connection_connect) },
-> ++				GDBUS_ARGS({"uuid", "s"}),
-> ++				GDBUS_ARGS({"interface", "s"}),
-> ++				connection_connect) },
-> + 	{ GDBUS_METHOD("Disconnect",
-> + 			NULL, NULL, connection_disconnect) },
-> + 	{ GDBUS_METHOD("GetProperties",
-> +--=20
-> +1.7.9.5
-> +
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_aut=
-omake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsole=
-te_automake_macros.patch
-> new file mode 100644
-> index 0000000..1068f24
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_automake_m=
-acros.patch
-> @@ -0,0 +1,14 @@
-> +Upstream-Status: Backport
-> +
-> +Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-> +diff -Nurd bluez-4.101/configure.ac bluez-4.101/configure.ac
-> +--- bluez-4.101/configure.ac	2012-06-22 19:36:49.000000000 +0300
-> ++++ bluez-4.101/configure.ac	2013-01-07 06:13:18.385888966 +0200
-> +@@ -2,7 +2,7 @@
-> + AC_INIT(bluez, 4.101)
-> +
-> + AM_INIT_AUTOMAKE([foreign subdir-objects color-tests])
-> +-AM_CONFIG_HEADER(config.h)
-> ++AC_CONFIG_HEADERS(config.h)
-> +
-> + m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patc=
-h b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
-> new file mode 100644
-> index 0000000..98fab45
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
-> @@ -0,0 +1,24 @@
-> +on x86 and x86_64 gcc 4.7 complains
-> +
-> +sbc/sbc_primitives_mmx.c: In function 'sbc_calc_scalefactors_mmx':
-> +sbc/sbc_primitives_mmx.c:294:4: warning: asm operand 2 probably doesn't =
-match constraints [enabled by default]
-> +sbc/sbc_primitives_mmx.c:294:4: error: impossible constraint in 'asm'
-> +
-> +This patch is taken from https://bugs.launchpad.net/ubuntu/+source/bluez=
-/+bug/911871
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +
-> +Upstream-Status: Pending
-> +Index: bluez-4.98/sbc/sbc_primitives_mmx.c
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- bluez-4.98.orig/sbc/sbc_primitives_mmx.c	2011-12-21 14:53:54.0000000=
-00 -0800
-> ++++ bluez-4.98/sbc/sbc_primitives_mmx.c	2012-02-24 10:07:03.422073800 -0=
-800
-> +@@ -318,7 +318,7 @@
-> + 				"movl          %k0, 4(%3)\n"
-> + 			: "+r" (blk)
-> + 			: "r" (&sb_sample_f[0][ch][sb]),
-> +-				"i" ((char *) &sb_sample_f[1][0][0] -
-> ++				"r" ((char *) &sb_sample_f[1][0][0] -
-> + 					(char *) &sb_sample_f[0][0][0]),
-> + 				"r" (&scale_factor[ch][sb]),
-> + 				"r" (&consts),
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-p=
-ygobject-instead-ofgobject-introspection.patch b/meta-oe/recipes-connectivi=
-ty/bluez/bluez4-4.101/use-legacy-pygobject-instead-ofgobject-introspection.=
-patch
-> new file mode 100644
-> index 0000000..37037f5
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pygobjec=
-t-instead-ofgobject-introspection.patch
-> @@ -0,0 +1,27 @@
-> +Upstream-Status: Inappropriate
-> +
-> +use legacy pygobject instead of gobject-introspection
-> +
-> +Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com>
-> +---
-> +diff -Nurd bluez-4.101.orig/test/simple-agent bluez-4.101/test/simple-ag=
-ent
-> +--- bluez-4.101.orig/test/simple-agent	2013-11-13 17:14:08.138118159 +08=
-00
-> ++++ bluez-4.101/test/simple-agent	2013-11-13 17:14:29.034118107 +0800
-> +@@ -2,7 +2,7 @@
-> +=20
-> + from __future__ import absolute_import, print_function, unicode_literals
-> +=20
-> +-from gi.repository import GObject
-> ++import gobject
-> +=20
-> + import sys
-> + import dbus
-> +@@ -122,7 +122,7 @@
-> + 	path =3D "/test/agent"
-> + 	agent =3D Agent(bus, path)
-> +=20
-> +-	mainloop =3D GObject.MainLoop()
-> ++	mainloop =3D gobject.MainLoop()
-> +=20
-> + 	if len(args) > 1:
-> + 		if len(args) > 2:
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4.inc b/meta-oe/reci=
-pes-connectivity/bluez/bluez4.inc
-> new file mode 100644
-> index 0000000..4fa4122
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4.inc
-> @@ -0,0 +1,54 @@
-> +SUMMARY =3D "Linux Bluetooth Stack Userland V4"
-> +DESCRIPTION =3D "Linux Bluetooth stack V4 userland components.  These in=
-clude a system configurations, daemons, tools and system libraries."
-> +HOMEPAGE =3D "http://www.bluez.org"
-> +SECTION =3D "libs"
-> +LICENSE =3D "GPLv2+ & LGPLv2.1+"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D12f884d2ae1ff87c09e5b7ccc2c4c=
-a7e \
-> +                    file://COPYING.LIB;md5=3Dfb504b67c50331fc78734fed90f=
-b0e09 \
-> +                    file://src/main.c;beginline=3D1;endline=3D24;md5=3D9=
-bc54b93cd7e17bf03f52513f39f926e \
-> +                    file://sbc/sbc.c;beginline=3D1;endline=3D25;md5=3D1a=
-40781ed30d50d8639323a184aeb191"
-> +
-> +RPROVIDES_${PN} +=3D "${PN}-systemd"
-> +RREPLACES_${PN} +=3D "${PN}-systemd"
-> +RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> +
-> +DEPENDS =3D "udev libusb dbus-glib glib-2.0 libcheck readline libsndfile=
-1"
-> +RDEPENDS_${PN}-dev =3D "bluez-hcidump"
-> +
-> +PACKAGECONFIG ??=3D "\
-> +    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)}\
-> +    ${@bb.utils.contains('DISTRO_FEATURES', 'pie', 'pie', '', d)}\
-> +    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','systemd', '', d)}=
- \
-> +"
-> +PACKAGECONFIG[alsa] =3D "--enable-alsa,--disable-alsa,alsa-lib"
-> +PACKAGECONFIG[pie] =3D "--enable-pie,--disable-pie,"
-> +PACKAGECONFIG[systemd] =3D "--with-systemdunitdir=3D${systemd_unitdir}/s=
-ystem/,--with-systemdunitdir=3D"
-> +
-> +ASNEEDED =3D ""
-> +
-> +SRC_URI =3D "${KERNELORG_MIRROR}/linux/bluetooth/bluez-${PV}.tar.gz"
-> +S =3D "${WORKDIR}/bluez-${PV}"
-> +
-> +inherit autotools-brokensep pkgconfig systemd
-> +
-> +EXTRA_OECONF =3D "\
-> +    --disable-gstreamer \
-> +    --enable-usb \
-> +    --enable-tools \
-> +    --enable-bccmd \
-> +    --enable-hid2hci \
-> +    --enable-dfutool \
-> +    --disable-hidd \
-> +    --disable-pand \
-> +    --disable-dund \
-> +    --disable-cups \
-> +    --enable-test \
-> +    --enable-datafiles \
-> +    --with-udevdir=3D`pkg-config --variable=3Dudevdir udev` \
-> +    --with-udevrulesdir=3D`pkg-config --variable=3Dudevdir udev`/rules.d=
- \
-> +"
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "bluetooth.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
+On 04/25/2015 02:36 AM, Martin Jansa wrote:
+> On Thu, Apr 23, 2015 at 12:48:33PM -0400, Philip Balister wrote:
+>>  * _NO_ATOMICS patches are from upstream
+>>  * Update the SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch
+>>  * Fix some QA warnings
+>>  * Add PACKAGECONFIG for qt support
+> 
+> This breaks navit:
+> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5e-oe-linux-gnueabi/navit/1_0.2.0+svnr5310-r11.3/navit/navit/vehicle/gpsd/vehicle_gpsd.c: In function 'vehicle_gpsd_callback':
+> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5e-oe-linux-gnueabi/navit/1_0.2.0+svnr5310-r11.3/navit/navit/vehicle/gpsd/vehicle_gpsd.c:130:40: error: 'struct gps_data_t' has no member named 'ss'
+> |                                 if (data->ss[i] > 0)
+> |                                         ^
+> can you check if upgrading navit fixes the issue?
 
-This doesn't work well with gst-plugin-bluetooth (more info in e-mail I've
-sent to the oe-core change).
+I can't get it to fail. Maybe something else in your build causes the
+problem?
 
-> +
-> +EXCLUDE_FROM_WORLD =3D "1"
-> diff --git a/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb b/meta-oe=
-/recipes-connectivity/bluez/bluez4_4.101.bb
-> new file mode 100644
-> index 0000000..07740e1
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
-> @@ -0,0 +1,47 @@
-> +require bluez4.inc
-> +
-> +PR =3D "r11"
-> +
-> +SRC_URI +=3D "file://bluetooth.conf \
-> +            file://sbc_mmx.patch \
-> +            file://fix-udev-paths.patch \
-> +            file://obsolete_automake_macros.patch \
-> +            file://network-fix-network-Connect-method-parameters.patch \
-> +            file://install-test-script.patch \
-> +            file://use-legacy-pygobject-instead-ofgobject-introspection.=
-patch \
-> +            file://fix_encrypt_collision.patch \
-> +"
-> +
-> +SRC_URI[md5sum] =3D "fb42cb7038c380eb0e2fa208987c96ad"
-> +SRC_URI[sha256sum] =3D "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4=
-ad75fe52846f7487"
-> +
-> +RCONFLICTS_${PN} =3D "bluez5"
-> +
-> +do_install_append() {
-> +    install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
-> +    install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetoo=
-th/
-> +    install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
-> +    # at_console doesn't really work with the current state of OE, so pu=
-nch some more holes so people can actually use BT
-> +    install -m 0644 ${WORKDIR}/bluetooth.conf ${D}/${sysconfdir}/dbus-1/=
-system.d/
-> +}
-> +
-> +RDEPENDS_${PN}-dev =3D "bluez-hcidump"
-> +RDEPENDS_${PN}-testtools +=3D "python python-dbus python-pygobject"
-> +
-> +ALLOW_EMPTY_libasound-module-bluez =3D "1"
-> +PACKAGES =3D+ "libasound-module-bluez ${PN}-testtools"
-> +
-> +FILES_libasound-module-bluez =3D "${libdir}/alsa-lib/lib*.so ${datadir}/=
-alsa"
-> +FILES_${PN} +=3D "${libdir}/bluetooth/plugins ${libdir}/bluetooth/plugin=
-s/*.so ${base_libdir}/udev/ ${nonarch_base_libdir}/udev/ ${systemd_unitdir}=
-/ ${datadir}/dbus-1"
-> +FILES_${PN}-dev +=3D "\
-> +    ${libdir}/bluetooth/plugins/*.la \
-> +    ${libdir}/alsa-lib/*.la \
-> +"
-> +
-> +FILES_${PN}-testtools =3D "${libdir}/bluez4/test/*"
-> +
-> +FILES_${PN}-dbg +=3D "\
-> +    ${libdir}/bluetooth/plugins/.debug \
-> +    ${libdir}/*/.debug \
-> +    */udev/.debug \
-> +"
-> diff --git a/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.10=
-1.bb b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
-> new file mode 100644
-> index 0000000..6a16520
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
-> @@ -0,0 +1,39 @@
-> +require bluez4.inc
-> +require recipes-multimedia/gstreamer/gst-plugins-package.inc
-> +
-> +PR =3D "r1"
-> +
-> +SRC_URI[md5sum] =3D "fb42cb7038c380eb0e2fa208987c96ad"
-> +SRC_URI[sha256sum] =3D "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4=
-ad75fe52846f7487"
-> +
-> +DEPENDS =3D "bluez4 gst-plugins-base"
-> +
-> +EXTRA_OECONF =3D "\
-> +    --enable-gstreamer \
-> +"
-> +
-> +# clean unwanted files
-> +do_install_append() {
-> +    rm -rf ${D}${bindir}
-> +    rm -rf ${D}${sbindir}
-> +    rm -f  ${D}${libdir}/lib*
-> +    rm -rf ${D}${libdir}/pkgconfig
-> +    rm -rf ${D}${sysconfdir}
-> +    rm -rf ${D}${base_libdir}
-> +    rm -rf ${D}${libdir}/bluetooth
-> +    rm -rf ${D}${localstatedir}
-> +    rm -rf ${D}${libdir}/alsa-lib
-> +    rm -rf ${D}${datadir}
-> +    rm -rf ${D}${includedir}
-> +    rm -rf ${D}${nonarch_base_libdir}
-> +}
-> +
-> +FILES_${PN} =3D "${libdir}/gstreamer-0.10/lib*.so"
-> +FILES_${PN}-dev +=3D "\
-> +    ${libdir}/gstreamer-0.10/*.la \
-> +"
-> +
-> +FILES_${PN}-dbg +=3D "\
-> +    ${libdir}/*/.debug \
-> +"
-> +
-> diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101=
-=2Ebbappend b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.=
-bbappend
-> deleted file mode 100644
-> index da01b05..0000000
-> --- a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappe=
-nd
-> +++ /dev/null
-> @@ -1,9 +0,0 @@
-> -inherit systemd
-> -
-> -EXTRA_OECONF +=3D "--with-systemdunitdir=3D${systemd_unitdir}/system/"
-> -
-> -RPROVIDES_${PN} +=3D "${PN}-systemd"
-> -RREPLACES_${PN} +=3D "${PN}-systemd"
-> -RCONFLICTS_${PN} +=3D "${PN}-systemd"
-> -SYSTEMD_SERVICE_${PN} =3D "bluetooth.service"
-> -SYSTEMD_AUTO_ENABLE =3D "disable"
-> --=20
-> 2.1.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Philip
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+> 
+>>
+>> Signed-off-by: Philip Balister <philip@balister.org>
+>> ---
+>>  ..._STDC_NO_ATOMICS__-before-using-stdatomic.patch | 25 ++++++++++
+>>  ...refix-includepy-with-sysroot-and-drop-sy.patch} | 18 +++----
+>>  ...struct-respect-sysroot-also-in-SPLINTOPTS.patch |  0
+>>  ...for-C11-and-check-we-have-C11-before-usin.patch | 57 ++++++++++++++++++++++
+>>  .../0002-SConstruct-remove-rpath.patch             |  0
+>>  ...k-for-C11-not-for-not-C11-in-stdatomic.h-.patch | 26 ++++++++++
+>>  ...disable-html-and-man-docs-building-becaus.patch |  0
+>>  .../gpsd/{gpsd_3.10.bb => gpsd_3.14.bb}            | 17 ++++---
+>>  8 files changed, 128 insertions(+), 15 deletions(-)
+>>  create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch
+>>  rename meta-oe/recipes-navigation/gpsd/{gpsd-3.10/0003-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch => gpsd-3.14/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch} (86%)
+>>  rename meta-oe/recipes-navigation/gpsd/{gpsd-3.10 => gpsd-3.14}/0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch (100%)
+>>  create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch
+>>  rename meta-oe/recipes-navigation/gpsd/{gpsd-3.10 => gpsd-3.14}/0002-SConstruct-remove-rpath.patch (100%)
+>>  create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch
+>>  rename meta-oe/recipes-navigation/gpsd/{gpsd-3.10 => gpsd-3.14}/0004-SConstruct-disable-html-and-man-docs-building-becaus.patch (100%)
+>>  rename meta-oe/recipes-navigation/gpsd/{gpsd_3.10.bb => gpsd_3.14.bb} (87%)
+>>
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch
+>> new file mode 100644
+>> index 0000000..82ac5aa
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch
+>> @@ -0,0 +1,25 @@
+>> +From c30716be9e615513fe66993fd3cdc818c3d70410 Mon Sep 17 00:00:00 2001
+>> +From: "Gary E. Miller" <gem@rellim.com>
+>> +Date: Sun, 15 Mar 2015 11:51:45 -0700
+>> +Subject: [PATCH 1/3] Check for __STDC_NO_ATOMICS__ before using stdatomic.h
+>> +
+>> +---
+>> + SConstruct | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> +
+>> +diff --git a/SConstruct b/SConstruct
+>> +index adf473d..566c14a 100644
+>> +--- a/SConstruct
+>> ++++ b/SConstruct
+>> +@@ -633,7 +633,7 @@ else:
+>> +         announce("You do not have kernel CANbus available.")
+>> +         env["nmea2000"] = False
+>> + 
+>> +-    if config.CheckHeader("stdatomic.h"):
+>> ++    if not config.CheckCompilerDefines("__STDC_NO_ATOMICS__") and config.CheckHeader("stdatomic.h"):
+>> +         confdefs.append("#define HAVE_STDATOMIC_H 1\n")
+>> +     else:
+>> + 	confdefs.append("/* #undef HAVE_STDATOMIC_H */\n")
+>> +-- 
+>> +2.1.0
+>> +
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.10/0003-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+>> similarity index 86%
+>> rename from meta-oe/recipes-navigation/gpsd/gpsd-3.10/0003-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+>> rename to meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+>> index 1d8c14b..2ea3226 100644
+>> --- a/meta-oe/recipes-navigation/gpsd/gpsd-3.10/0003-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+>> +++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch
+>> @@ -1,8 +1,8 @@
+>> -From ad7b06d375730b30f181c5efb3bf21418f296f73 Mon Sep 17 00:00:00 2001
+>> +From 1e2cea8945bc2183fbe1a012dcd633a352125952 Mon Sep 17 00:00:00 2001
+>>  From: Martin Jansa <Martin.Jansa@gmail.com>
+>>  Date: Tue, 24 Apr 2012 18:45:14 +0200
+>> -Subject: [PATCH 3/4] SConstruct: prefix includepy with sysroot and drop
+>> - sysroot from python_lib_dir
+>> +Subject: [PATCH] SConstruct: prefix includepy with sysroot and drop sysroot
+>> + from python_lib_dir
+>>  
+>>  * without PYTHONPATH, distutil's sysconfig returns INCLUDEPY without sysroot prefix
+>>    and with PYTHONPATH from OE it's pointing to native python dir
+>> @@ -39,10 +39,10 @@ Signed-off-by: Peter A. Bigot <pab@pabigot.com>
+>>   1 file changed, 9 insertions(+)
+>>  
+>>  diff --git a/SConstruct b/SConstruct
+>> -index ff46713..0e518e7 100644
+>> +index 6c93311..cde8b3d 100644
+>>  --- a/SConstruct
+>>  +++ b/SConstruct
+>> -@@ -1089,6 +1089,12 @@ else:
+>> +@@ -1148,6 +1148,12 @@ else:
+>>           basecflags += ' -coverage'
+>>           ldflags += ' -coverage'
+>>           ldshared += ' -coverage'
+>> @@ -55,15 +55,15 @@ index ff46713..0e518e7 100644
+>>       # in case CC/CXX was set to the scan-build wrapper,
+>>       # ensure that we build the python modules with scan-build, too
+>>       if env['CC'] is None or env['CC'].find('scan-build') < 0:
+>> -@@ -1353,11 +1359,14 @@ if not env['python']:
+>> +@@ -1408,11 +1414,14 @@ if not env['python']:
+>>       python_install = []
+>>   else:
+>> -     python_lib_dir = sysconfig.get_python_lib(plat_specific=1)
+>> +     python_lib_dir = env['python_libdir']
+>>  +    python_lib_dir = python_lib_dir.replace(env['sysroot'], '')
+>>       python_module_dir = python_lib_dir + os.sep + 'gps'
+>>       python_extensions_install = python_env.Install( DESTDIR + python_module_dir,
+>>                                                       python_built_extensions)
+>> -     if not env['debug'] and not env['profiling'] and env['strip']:
+>> +     if not env['debug'] and not env['profiling'] and not env['nostrip'] and not sys.platform.startswith('darwin'):
+>>           python_env.AddPostAction(python_extensions_install, '$STRIP $TARGET')
+>>  +    env.AddPostAction(python_extensions_install, '$CHRPATH -r "%s" "$TARGET"' \
+>>  +                     % (python_lib_dir, ))
+>> @@ -71,5 +71,5 @@ index ff46713..0e518e7 100644
+>>       python_modules_install = python_env.Install( DESTDIR + python_module_dir,
+>>                                                   python_modules)
+>>  -- 
+>> -1.8.5.5
+>> +2.1.0
+>>  
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.10/0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch
+>> similarity index 100%
+>> rename from meta-oe/recipes-navigation/gpsd/gpsd-3.10/0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch
+>> rename to meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch
+>> new file mode 100644
+>> index 0000000..22ee1bd
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch
+>> @@ -0,0 +1,57 @@
+>> +From 99444b3d2c4a4f7fd7128e60461005780d0c5c83 Mon Sep 17 00:00:00 2001
+>> +From: "Gary E. Miller" <gem@rellim.com>
+>> +Date: Sun, 15 Mar 2015 12:05:15 -0700
+>> +Subject: [PATCH 2/3] Add a test for C11 and check we have C11 before using
+>> + stdatomic.h
+>> +
+>> +---
+>> + SConstruct | 19 ++++++++++++++++++-
+>> + 1 file changed, 18 insertions(+), 1 deletion(-)
+>> +
+>> +diff --git a/SConstruct b/SConstruct
+>> +index 566c14a..faa8651 100644
+>> +--- a/SConstruct
+>> ++++ b/SConstruct
+>> +@@ -473,6 +473,20 @@ def CheckCompilerDefines(context, define):
+>> +     context.Result(ret)
+>> +     return ret
+>> + 
+>> ++# Check if this compiler is C11 or better
+>> ++def CheckC11(context):
+>> ++    context.Message( 'Checking if compiler is C11 ...' )
+>> ++    ret = context.TryLink("""
+>> ++	#if (__STDC_VERSION__ < 201112L) 
+>> ++        #error Not C11
+>> ++        #endif
+>> ++        int main(int argc, char **argv) {
+>> ++            return 0;
+>> ++        }
+>> ++    """,'.c')
+>> ++    context.Result(ret)
+>> ++    return ret
+>> ++
+>> + def GetLoadPath(context):
+>> +     context.Message("Getting system load path ...")
+>> + 
+>> +@@ -491,6 +505,7 @@ else:
+>> +                                              'CheckXsltproc' : CheckXsltproc,
+>> +                                              'CheckCompilerOption' : CheckCompilerOption,
+>> +                                              'CheckCompilerDefines' : CheckCompilerDefines,
+>> ++                                             'CheckC11' : CheckC11,
+>> +                                              'CheckHeaderDefines' : CheckHeaderDefines})
+>> + 
+>> + 
+>> +@@ -633,7 +648,9 @@ else:
+>> +         announce("You do not have kernel CANbus available.")
+>> +         env["nmea2000"] = False
+>> + 
+>> +-    if not config.CheckCompilerDefines("__STDC_NO_ATOMICS__") and config.CheckHeader("stdatomic.h"):
+>> ++    # check for C11 or better, and __STDC__NO_ATOMICS__ is no defined
+>> ++    # before looking for stdatomic.h
+>> ++    if not config.CheckC11() and  not config.CheckCompilerDefines("__STDC_NO_ATOMICS__") and config.CheckHeader("stdatomic.h"):
+>> +         confdefs.append("#define HAVE_STDATOMIC_H 1\n")
+>> +     else:
+>> + 	confdefs.append("/* #undef HAVE_STDATOMIC_H */\n")
+>> +-- 
+>> +2.1.0
+>> +
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.10/0002-SConstruct-remove-rpath.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0002-SConstruct-remove-rpath.patch
+>> similarity index 100%
+>> rename from meta-oe/recipes-navigation/gpsd/gpsd-3.10/0002-SConstruct-remove-rpath.patch
+>> rename to meta-oe/recipes-navigation/gpsd/gpsd-3.14/0002-SConstruct-remove-rpath.patch
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch
+>> new file mode 100644
+>> index 0000000..8bb0928
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch
+>> @@ -0,0 +1,26 @@
+>> +From 674c50ee54fd7cd304e8b3c4b33d3ff1272ed191 Mon Sep 17 00:00:00 2001
+>> +From: "Gary E. Miller" <gem@rellim.com>
+>> +Date: Sun, 15 Mar 2015 12:17:51 -0700
+>> +Subject: [PATCH 3/3] Whoops, check for C11, not for not C11 in stdatomic.h
+>> + test.
+>> +
+>> +---
+>> + SConstruct | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
+>> +
+>> +diff --git a/SConstruct b/SConstruct
+>> +index faa8651..f4ea145 100644
+>> +--- a/SConstruct
+>> ++++ b/SConstruct
+>> +@@ -650,7 +650,7 @@ else:
+>> + 
+>> +     # check for C11 or better, and __STDC__NO_ATOMICS__ is no defined
+>> +     # before looking for stdatomic.h
+>> +-    if not config.CheckC11() and  not config.CheckCompilerDefines("__STDC_NO_ATOMICS__") and config.CheckHeader("stdatomic.h"):
+>> ++    if config.CheckC11() and  not config.CheckCompilerDefines("__STDC_NO_ATOMICS__") and config.CheckHeader("stdatomic.h"):
+>> +         confdefs.append("#define HAVE_STDATOMIC_H 1\n")
+>> +     else:
+>> + 	confdefs.append("/* #undef HAVE_STDATOMIC_H */\n")
+>> +-- 
+>> +2.1.0
+>> +
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.10/0004-SConstruct-disable-html-and-man-docs-building-becaus.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0004-SConstruct-disable-html-and-man-docs-building-becaus.patch
+>> similarity index 100%
+>> rename from meta-oe/recipes-navigation/gpsd/gpsd-3.10/0004-SConstruct-disable-html-and-man-docs-building-becaus.patch
+>> rename to meta-oe/recipes-navigation/gpsd/gpsd-3.14/0004-SConstruct-disable-html-and-man-docs-building-becaus.patch
+>> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+>> similarity index 87%
+>> rename from meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+>> rename to meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+>> index 93cf1ae..f92d132 100644
+>> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+>> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+>> @@ -10,15 +10,18 @@ EXTRANATIVEPATH += "chrpath-native"
+>>  SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+>>      file://0001-SConstruct-respect-sysroot-also-in-SPLINTOPTS.patch \
+>>      file://0002-SConstruct-remove-rpath.patch \
+>> -    file://0003-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+>> +    file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
+>>      file://0004-SConstruct-disable-html-and-man-docs-building-becaus.patch \
+>> +    file://0001-Check-for-__STDC_NO_ATOMICS__-before-using-stdatomic.patch \
+>> +    file://0002-Add-a-test-for-C11-and-check-we-have-C11-before-usin.patch \
+>> +    file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
+>>      file://gpsd-default \
+>>      file://gpsd \
+>>      file://60-gpsd.rules \
+>>      file://gpsd.service \
+>>  "
+>> -SRC_URI[md5sum] = "fc5b03aae38b9b5b6880b31924d0ace3"
+>> -SRC_URI[sha256sum] = "706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320"
+>> +SRC_URI[md5sum] = "bc7467009b99e07ba461377b5da6c039"
+>> +SRC_URI[sha256sum] = "504fc812f3c1525a1a48e04bf4d77f9a8066c201448d98089df89d58ef53a8cb"
+>>  
+>>  inherit scons update-rc.d python-dir pythonnative systemd bluetooth
+>>  
+>> @@ -30,14 +33,15 @@ SYSTEMD_OESCONS = "${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false
+>>  export STAGING_INCDIR
+>>  export STAGING_LIBDIR
+>>  
+>> -PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
+>> +PACKAGECONFIG ??= "qt ${@base_contains('DISTRO_FEATURES', 'bluetooth', '${BLUEZ}', '', d)}"
+>>  PACKAGECONFIG[bluez4] = "bluez='true',bluez='false',bluez4"
+>> -
+>> +PACKAGECONFIG[qt] = "qt='yes',qt='no',qt4-x11-free"
+>>  EXTRA_OESCONS = " \
+>>      sysroot=${STAGING_DIR_TARGET} \
+>>      libQgpsmm='false' \
+>>      debug='true' \
+>>      strip='false' \
+>> +    chrpath='yes' \
+>>      systemd='${SYSTEMD_OESCONS}' \
+>>      ${EXTRA_OECONF} \
+>>  "
+>> @@ -99,7 +103,8 @@ pkg_postrm_${PN}-conf() {
+>>  
+>>  PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
+>>  
+>> -FILES_${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc"
+>> +FILES_${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc \
+>> +                    ${libdir}/libQgpsmm.prl"
+>>  
+>>  FILES_python-pygps-dbg += " ${libdir}/python*/site-packages/gps/.debug"
+>>  
+>> -- 
+>> 2.1.0
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
 
