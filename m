@@ -1,35 +1,35 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D973C73D9B
+Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
+	[209.85.212.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 88F3573C48
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 18:45:15 +0000 (UTC)
-Received: by wgen6 with SMTP id n6so125845799wge.3
+	Mon, 27 Apr 2015 18:46:03 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so111116026wiz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 11:45:16 -0700 (PDT)
+	Mon, 27 Apr 2015 11:46:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UAkbfkC76XhoUYtg1cNbK/RrmwtnfAccHnHwLTJvCqM=;
-	b=ATeoBoeNSJxJjyDXELI7zTZR2bWNUMQGxuHLiqqjkR1Je4ygugMjB55BKqqRQTy/Os
-	19w43t7h9hQH/kiPkaB6Ua5jEeitT3e5WKLaPamXEBentm9XlttHiNqLfc613dZip5C4
-	UqaNkfZY9aE5Fazsi0fA/h83Z1UEbJC4m/m9zWC4LLJ8duiHThZTJtjWVp8/WjIT8MA8
-	Rj7cE6ZDbqfi06464bafV+ReYWQfsAzuAntHz0ZTII8xuoENnAGB6xpJiJMxSEtZ+dli
-	3E/nu5MSbxSz5qK/gwojuFHn/Ne5BlJWbcCyjAPJeZSq6y/tfVojkF6JEXmOraNIDk0y
-	nJoQ==
-X-Received: by 10.194.7.97 with SMTP id i1mr25592464wja.107.1430160316416;
-	Mon, 27 Apr 2015 11:45:16 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id;
+	bh=GAPcJitSHkta3D/r14HB/bpeKafrFUfY8BV5cZD4IB4=;
+	b=aNfS+nj5cV4X8k0LQZrbLeA+O6S1mi5O3Uyz9TDVnKvZYCBJgLO66hPQhbhud+7M1R
+	vdX0j/Bpq8CJV1nOY70Yv/sIaernXEOMlNKsK+x6xpHEn98B8xS5oWhUQChY+ghlRgrl
+	YiKmT21JC2A5T4FDFrKtaU/egh2cvzzYzhXbY5ylAI7Sb0wbrymVeCyKFML6HzV14GHB
+	cIT2G0OTvQR0y43z9mQGPmyiFeUqNXl7uI6lx2RzRCvzkV/Me9N+IQnv0EaTKaw4uXYd
+	1J01DQOaNVmquizjaMr7UxwzFSEE/Sj/T3Gom+kvZDL8aXHF9g+dQgPGU0BsFA/mPS1B
+	WxAw==
+X-Received: by 10.180.78.65 with SMTP id z1mr23115904wiw.14.1430160365058;
+	Mon, 27 Apr 2015 11:46:05 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id u6sm30558164wjy.13.2015.04.27.11.45.15
+	by mx.google.com with ESMTPSA id
+	z12sm30585770wjw.39.2015.04.27.11.46.04
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 27 Apr 2015 11:45:15 -0700 (PDT)
+	Mon, 27 Apr 2015 11:46:04 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Apr 2015 20:46:08 +0200
-Message-Id: <1430160369-3099-3-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 27 Apr 2015 20:46:35 +0200
+Message-Id: <1430160397-3334-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.3.5
-In-Reply-To: <1430160369-3099-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1430160369-3099-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-oe][dizzy][PATCH 3/4] gsoap-native: add missing dependency on flex-native
+Subject: [meta-oe][fido][PATCH 1/3] libsecret: add missing dependency on intltool-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2015 18:45:18 -0000
+X-List-Received-Date: Mon, 27 Apr 2015 18:46:04 -0000
 
-* otherwise fails with:
-| gcc  -DHAVE_CONFIG_H -I. -I/work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/gsoap/src -I../..   -isystem/sysroots/x86_64-linux/usr/include -DWITH_BISON -DWITH_LEX  -DSOAPCPP_IMPORT_PATH="\"/sysroots/x86_64-linux/usr/share/gsoap/import\"" -DLINUX -isystem/sysroots/x86_64-linux/usr/include -O2 -pipe -c -o soapcpp2-soapcpp2_yacc.o `test -f 'soapcpp2_yacc.c' || echo '/work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/gsoap/src/'`soapcpp2_yacc.c
-| /bin/bash /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/ylwrap /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/gsoap/src/soapcpp2_lex.l .c soapcpp2_lex.c -- /bin/bash /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/missing flex
-| /work/x86_64-linux/gsoap-native/2.8.12-r1/gsoap-2.8/missing: line 81: flex: command not found
-| WARNING: 'flex' is missing on your system.
-|          You should only need it if you modified a '.l' file.
-|          You may want to install the Fast Lexical Analyzer package:
-|          <http://flex.sourceforge.net/>
-| make[4]: *** [soapcpp2_lex.c] Error 127
-| make[4]: Leaving directory `/work/x86_64-linux/gsoap-native/2.8.12-r1/build/gsoap/src'
-| make[3]: *** [all-recursive] Error 1
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb | 2 +-
+ meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-index 46fabbb..ac90155 100644
---- a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-+++ b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-@@ -1,6 +1,6 @@
- require gsoap_${PV}.inc
+diff --git a/meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb b/meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb
+index dca3350..06e94bd 100644
+--- a/meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb
++++ b/meta-gnome/recipes-gnome/libsecret/libsecret_0.18.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=23c2a5e0106b99d75238986559bb5fc6"
  
--DEPENDS = ""
-+DEPENDS = "flex-native"
- EXTRA_OEMAKE = ""
+ inherit gnomebase gtk-doc
  
- inherit native
+-DEPENDS = "glib-2.0 libgcrypt"
++DEPENDS = "glib-2.0 libgcrypt intltool-native"
+ 
+ GNOME_COMPRESS_TYPE = "xz"
+ 
 -- 
 2.3.5
 
