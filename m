@@ -1,48 +1,24 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-la0-f51.google.com (mail-la0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 0031C73D5A
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 08E3773D0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 04:53:22 +0000 (UTC)
-Received: by labbd9 with SMTP id bd9so71223541lab.2
+	Mon, 27 Apr 2015 05:22:21 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3R5MMLr005028
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Apr 2015 21:53:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-type:content-disposition
-	:in-reply-to:organization:user-agent;
-	bh=BkU/QVWGdijN+Lw3EXP95A6mrg5IElzj1TCUUOz6dDs=;
-	b=T4vZ8szgb+2XcbDHoWHYMEEYma0DUu9c4aXYNMHCOr5oRLuIQvYofQHi2hT7SdJI4d
-	/BssXUE0xgymGKId9/XIZlJYTgVKJEDJfiXuYyjXDyiwEqVlrOXbZqFmF1QkhfAXd9dS
-	m5FTqKiWjd46+veLgLImlc0VuygvZz4eIVh6CUaAy2ONUtK+Ud9Q6sVunQ4Glzpf8Jjh
-	PGhaSly8sH6RYnqasgP/scX9OYXDfNkrm17GwRFwLKKlN+tYnMYzeORYHhz/qqhKoaC1
-	TXqRNMP75ea7iFoICtc6hGeQ73CACwxsrRfiCnsIHw0NhNCgDGh8RKcckl5hhm0OFo1C
-	SBbg==
-X-Gm-Message-State: ALoCoQkvxc0PHGpvPwb10Ti5YMmg6tbrI1mKgRl6wWLzXoumetqFBWzXIqpNqFOs0ctf4FSOnVp6
-X-Received: by 10.152.43.74 with SMTP id u10mr8474428lal.90.1430110402421;
-	Sun, 26 Apr 2015 21:53:22 -0700 (PDT)
-Received: from ad.chargestorm.se (c-89-160-69-55.cust.bredband2.com.
-	[89.160.69.55])
-	by mx.google.com with ESMTPSA id zf3sm4486302lbb.2.2015.04.26.21.53.21
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 26 Apr 2015 21:53:21 -0700 (PDT)
-Date: Mon, 27 Apr 2015 06:53:19 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150427045319.GA6712@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1429890232-20762-1-git-send-email-cristian.iorga@intel.com>
+	Sun, 26 Apr 2015 22:22:22 -0700 (PDT)
+Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Sun, 26 Apr 2015 22:22:21 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 27 Apr 2015 13:22:20 +0800
+Message-ID: <1430112140-6453-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-In-Reply-To: <1429890232-20762-1-git-send-email-cristian.iorga@intel.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][meta-systemd][PATCH V3 1/2] bluez4_4.101.bbappend: update according to bluez4
+Subject: [PATCH][meta-networking] tcpdump: upgrade to 4.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +32,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2015 04:53:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 27 Apr 2015 05:22:23 -0000
+Content-Type: text/plain
 
-* Cristian Iorga <cristian.iorga@intel.com> [150424 17:45]:
+From: Roy Li <rongqing.li@windriver.com>
 
-> bluez4 recipe has been updated with proper systemd
-> support, so update meta-systemd append accordingly.
-> Also update to the right directory structure.
+Remove two unneeded patches, configure.patch and tcpdump-cross-getaddrinfo.patch
 
-> Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
-> ---
->  .../recipes-connectivity/bluez/bluez4_4.101.bbappend                 | 5 -----
->  1 file changed, 5 deletions(-)
->  rename meta-systemd/{oe-core => meta-oe}/recipes-connectivity/bluez/bluez4_4.101.bbappend (51%)
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+Resend, since I did not see it in patchwork
 
-Like Martin asked on you V2, why do you keep this as a bbappend, instead
-of adding this directly to the recipe?
+ .../tcpdump/tcpdump-4.6.1/configure.patch          | 29 ----------------------
+ .../tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch  | 23 -----------------
+ .../{tcpdump-4.6.1 => tcpdump}/add-ptest.patch     |  0
+ .../tcpdump/{tcpdump-4.6.1 => tcpdump}/run-ptest   |  0
+ .../tcpdump-configure-dlpi.patch                   |  0
+ .../unnecessary-to-check-libpcap.patch             |  0
+ .../tcpdump/{tcpdump_4.6.1.bb => tcpdump_4.7.4.bb} |  6 ++---
+ 7 files changed, 2 insertions(+), 56 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch
+ delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch
+ rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/add-ptest.patch (100%)
+ rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/run-ptest (100%)
+ rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/tcpdump-configure-dlpi.patch (100%)
+ rename meta-networking/recipes-support/tcpdump/{tcpdump-4.6.1 => tcpdump}/unnecessary-to-check-libpcap.patch (100%)
+ rename meta-networking/recipes-support/tcpdump/{tcpdump_4.6.1.bb => tcpdump_4.7.4.bb} (85%)
 
-If you look at meta-systemd today, you'll see that there's only a minor
-number of recipes from oe-core, that's being appended. All the other
-recipes that previously where appended to from meta-systemd, has got
-their systemd support directly in their own recipes.
-
-Cheers,
-Anders
-
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch
+deleted file mode 100644
+index 3697420..0000000
+--- a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/configure.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+----
+- aclocal.m4   |    1 -
+- configure.in |    1 +
+- 2 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/aclocal.m4 b/aclocal.m4
+-index 40b5866..0c662b0 100644
+---- a/aclocal.m4
+-+++ b/aclocal.m4
+-@@ -40,7 +40,6 @@ dnl
+- AC_DEFUN(AC_LBL_C_INIT_BEFORE_CC,
+-     [AC_PREREQ(2.50)
+-     AC_BEFORE([$0], [AC_LBL_C_INIT])
+--    AC_BEFORE([$0], [AC_PROG_CC])
+-     AC_BEFORE([$0], [AC_LBL_FIXINCLUDES])
+-     AC_BEFORE([$0], [AC_LBL_DEVEL])
+-     AC_ARG_WITH(gcc, [  --without-gcc           don't use gcc])
+-diff --git a/configure.in b/configure.in
+-index 11257c9..7f9591c 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -19,6 +19,7 @@ AC_REVISION($Revision: 1.204 $)
+- AC_PREREQ(2.50)
+- AC_INIT(tcpdump.c)
+- 
+-+AC_PROG_CC
+- AC_CANONICAL_HOST
+- 
+- AC_LBL_C_INIT_BEFORE_CC(V_CCOPT, V_INCLS)
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch b/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch
+deleted file mode 100644
+index b414b72..0000000
+--- a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-cross-getaddrinfo.patch
++++ /dev/null
+@@ -1,23 +0,0 @@
+-Fix getaddinfo check when cross compiling
+-
+-Upstream-Status: Pending.
+-
+-AC_TRY_RUN defaults to td_cv_buggygetaddrinfo=yes when
+-cross-compiling. So this change indicates that we
+-are cross-compiling.
+-
+-Signed-of-by: Aws Ismail <aws.ismail@windriver.com>
+-
+-diff --git a/configure.in b/configure.in
+-index ca277c0..283035e 100644
+---- a/configure.in
+-+++ b/configure.in
+-@@ -434,7 +434,7 @@ main()
+- ],
+- 	td_cv_buggygetaddrinfo=no,
+- 	td_cv_buggygetaddrinfo=yes,
+--	td_cv_buggygetaddrinfo=yes)])
+-+	td_cv_buggygetaddrinfo=cross)])
+- 	if test "$td_cv_buggygetaddrinfo" = no; then
+- 		AC_MSG_RESULT(good)
+- 	else
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
+similarity index 100%
+rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/add-ptest.patch
+rename to meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest b/meta-networking/recipes-support/tcpdump/tcpdump/run-ptest
+similarity index 100%
+rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/run-ptest
+rename to meta-networking/recipes-support/tcpdump/tcpdump/run-ptest
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-configure-dlpi.patch b/meta-networking/recipes-support/tcpdump/tcpdump/tcpdump-configure-dlpi.patch
+similarity index 100%
+rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/tcpdump-configure-dlpi.patch
+rename to meta-networking/recipes-support/tcpdump/tcpdump/tcpdump-configure-dlpi.patch
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/unnecessary-to-check-libpcap.patch b/meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
+similarity index 100%
+rename from meta-networking/recipes-support/tcpdump/tcpdump-4.6.1/unnecessary-to-check-libpcap.patch
+rename to meta-networking/recipes-support/tcpdump/tcpdump/unnecessary-to-check-libpcap.patch
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
+similarity index 85%
+rename from meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
+rename to meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
+index 1fdaf30..e01f5fb 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
+@@ -7,15 +7,13 @@ DEPENDS = "libpcap"
+ 
+ SRC_URI = " \
+     http://www.tcpdump.org/release/${BP}.tar.gz \
+-    file://configure.patch \
+     file://unnecessary-to-check-libpcap.patch \
+     file://tcpdump-configure-dlpi.patch \
+-    file://tcpdump-cross-getaddrinfo.patch \
+     file://add-ptest.patch \
+     file://run-ptest \
+ "
+-SRC_URI[md5sum] = "dab267ec30216a069747d10314079ec7"
+-SRC_URI[sha256sum] = "4c88c2a9aeb4047074f344fc9b2b6577b219972d359e192f6d12ccf983a13fd7"
++SRC_URI[md5sum] = "58af728de36f499341918fc4b8e827c3"
++SRC_URI[sha256sum] = "6be520269a89036f99c0b2126713a60965953eab921002b07608ccfc0c47d9af"
+ export LIBS=" -lpcap"
+ 
+ inherit autotools-brokensep ptest
 -- 
-Anders Darander
-ChargeStorm AB / eStorm AB
+2.1.0
+
 
