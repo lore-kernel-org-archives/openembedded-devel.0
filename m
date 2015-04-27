@@ -1,35 +1,38 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D83673D9D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 21B3C73D9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 16:57:09 +0000 (UTC)
-Received: by iedfl3 with SMTP id fl3so148180802ied.1
+	Mon, 27 Apr 2015 17:12:13 +0000 (UTC)
+Received: by pacyx8 with SMTP id yx8so135636501pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 09:57:11 -0700 (PDT)
+	Mon, 27 Apr 2015 10:12:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=SY0O+kN5HHxDW5ZSqXp2nZrMTkDwGS3hw0bJiSv6J3Q=;
-	b=zLwdRI5++2z1hoTwWX84kU13+K6wmh45yoODvNEWDTgJWkMnfgEaKoqwCE9kV5l4Ct
-	++qj8NDGf38WmAnC6vKw/uvRhA1P9GefAlRoNXY7dUwbO6eHEejMBXb7ZPBJqbnejDlN
-	UN8Ec8yUSq5Dwc6juNI56VyQVHLy9hmQq+1LiYOhdIU2a+YDtQGy9BjtQGTFzN8ijHUL
-	nuinv+gOLochN21xMRAjoaSC6J4vqKT5yuh7/yEnPQywIqvssMZCjfsLsMfY28DXdYnl
-	QMIjVblIu0R4rfcHHbLwmacALdrdy2fZaIK3uQUYySU61GCGfzNT2Kf/jrjP/5+Q9cxf
-	A20w==
-MIME-Version: 1.0
-X-Received: by 10.107.130.165 with SMTP id m37mr14646576ioi.62.1430153831192; 
-	Mon, 27 Apr 2015 09:57:11 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.107.23.197 with HTTP; Mon, 27 Apr 2015 09:57:11 -0700 (PDT)
-In-Reply-To: <1430153054-1252-1-git-send-email-raj.khem@gmail.com>
+	h=content-type:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=bBqt3SOdTdmhEtIgzzRPUNzVdkmPBLW0NeRhUXnhUPc=;
+	b=ue/RRiQdwV1mb+gIBd5H009rItv7ZQpVGXA/qnSG7f0Lj/iJxP/qf0/CrHW7LrbzMq
+	8K9fcw1K45euJjEdgC5Nek1j3gy1tNmIJeydHmt64VLX61u3TER8Wjw5v3t/Pl8wONcG
+	lbbnlqPFPLWsTApzfBrWvjQpLLXjuE3gYcfPNksBDi+qrhkcriuHGTrqJqGkFRrJQSLu
+	xTEU5BbpAu7P5c8B5AmlCaLziwT3ZqfLLjd/VyOdXVnyQvYLnvuuIFAU/9ZJ4+xlGOWc
+	7u6+AXE/eG8RrOV14CDqjGKVGorOpDVqMwT2Yb3snpyymupG3m8F9xcZ78/QNnwl2Rji
+	1feA==
+X-Received: by 10.67.24.33 with SMTP id if1mr23825116pad.24.1430154734877;
+	Mon, 27 Apr 2015 10:12:14 -0700 (PDT)
+Received: from [192.168.0.13] (c-76-103-142-85.hsd1.ca.comcast.net.
+	[76.103.142.85]) by mx.google.com with ESMTPSA id
+	gj9sm16428253pbc.77.2015.04.27.10.12.13
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 27 Apr 2015 10:12:13 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAP9ODKrO9G9nNyADvRpXG3hhQQDC-=B4okpsL93VLMx7M0i06g@mail.gmail.com>
+Date: Mon, 27 Apr 2015 10:12:12 -0700
+Message-Id: <3EA16728-34D3-4FBF-B45B-175AA746104C@gmail.com>
 References: <1430153054-1252-1-git-send-email-raj.khem@gmail.com>
-Date: Mon, 27 Apr 2015 13:57:11 -0300
-X-Google-Sender-Auth: -Z4Qa44zA6k2a9PaKE_oMLIrXWA
-Message-ID: <CAP9ODKrO9G9nNyADvRpXG3hhQQDC-=B4okpsL93VLMx7M0i06g@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Carlos Rafael Giani <dv@pseudoterminal.org>
+	<CAP9ODKrO9G9nNyADvRpXG3hhQQDC-=B4okpsL93VLMx7M0i06g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2098)
 Cc: pnandyala <Pavan.Nandyala@lnttechservices.com>,
 	Zoltan Kuscsik <zoltan.kuscsik@linaro.org>,
 	knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
@@ -47,28 +50,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Apr 2015 16:57:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Apr 2015 17:12:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 27, 2015 at 1:44 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> CEF is a framework to embed chromium based browsers into other
-> applications
->
-> Change-Id: Ieabae43042101331f67cf6e673391f6fe320561f
-> Signed-off-by: pnandyala <Pavan.Nandyala@LntTechservices.com>
-> Signed-off-by: knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>
-> Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-This patch is way closer to what I consider ready for merging. For
-merging I would like:
+> On Apr 27, 2015, at 9:57 AM, Otavio Salvador <otavio@ossystems.com.br> =
+wrote:
+>=20
+> - proper patch headers
 
- - Carlos feedback - he is the one who did most of this work and so
-should be consulted about his thoughts on this
- - proper patch headers
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+can you point to patch header guidelines for meta-browser ?=
 
