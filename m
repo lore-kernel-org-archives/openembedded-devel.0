@@ -1,36 +1,58 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F49673BB9
+Return-Path: <B40290@freescale.com>
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1bn0106.outbound.protection.outlook.com [157.56.110.106])
+	by mail.openembedded.org (Postfix) with ESMTP id 559A3716CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 04:10:01 +0000 (UTC)
-Received: by igbhj9 with SMTP id hj9so11201126igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 21:10:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=BJ/59d3SEAod/mmvTMfAjhsXo7wRcO3CBpGQpxZhHjI=;
-	b=WOQ1sJP5+Tvx1mjUP9zzcix1ucYflHcKe16NeVqKuOecDXBwhJcEhypxWc0idCXsHw
-	8vC+3bS77SvL52g90X00E2gchDMyVFpqaV0cJJZKBE8nV9XJ+O8OB8FkVjcm+lfGubWO
-	rHMwWeLfmod+RHHc5HR0YHq8SIPTgduaGqB5lHnQoceAF90Lqi6BMBUZ8lrP2kbcTRNa
-	C1FMkyQnlXvmmqV5+D83UbMXMkS3p67SzsOZrS426Fmxx6VInpJp+dHd8MypH93RHpuo
-	zKq5hmSMGiEg8KLWmzlyD6K5dcEv1T4ky26XNs+r+Zxcu+9psFbJiu4zfx4SRy9oNEP/
-	yB8g==
-X-Received: by 10.50.141.164 with SMTP id rp4mr17876445igb.2.1430194202826;
-	Mon, 27 Apr 2015 21:10:02 -0700 (PDT)
-Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
-	[96.119.89.79])
-	by mx.google.com with ESMTPSA id w2sm6521727igl.22.2015.04.27.21.10.02
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 27 Apr 2015 21:10:02 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Apr 2015 04:09:54 +0000
-Message-Id: <1430194195-1325-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1430194195-1325-1-git-send-email-raj.khem@gmail.com>
-References: <1430194195-1325-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-browser][PATCH 2/3 V3] chromium: Remove use of deprecated udev logging API
+	Tue, 28 Apr 2015 05:25:30 +0000 (UTC)
+Received: from BLUPR0301CA0026.namprd03.prod.outlook.com (25.162.113.164) by
+	BN3PR03MB1365.namprd03.prod.outlook.com (25.163.34.151) with Microsoft
+	SMTP Server (TLS) id 15.1.148.16; Tue, 28 Apr 2015 05:25:30 +0000
+Received: from BL2FFO11FD042.protection.gbl (2a01:111:f400:7c09::167) by
+	BLUPR0301CA0026.outlook.office365.com (2a01:111:e400:5259::36) with
+	Microsoft SMTP Server (TLS) id 15.1.130.23 via Frontend Transport;
+	Tue, 28 Apr 2015 05:25:30 +0000
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=freescale.com; freescale.mail.onmicrosoft.com; dkim=none
+	(message not signed) header.d=none;
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.158.2 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BL2FFO11FD042.mail.protection.outlook.com (10.173.161.138) with
+	Microsoft SMTP Server (TLS) id 15.1.154.14 via Frontend Transport;
+	Tue, 28 Apr 2015 05:25:29 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t3S5PP5w001507;
+	Mon, 27 Apr 2015 22:25:26 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Apr 2015 13:25:23 +0800
+Message-ID: <1430198723-7927-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI; BMV:1;
+	SFV:NSPM;
+	SFS:(10019020)(6009001)(339900001)(189002)(199003)(104016003)(106466001)(105606002)(229853001)(2351001)(450100001)(110136001)(62966003)(77156002)(46102003)(77096005)(92566002)(50226001)(86362001)(50986999)(19580395003)(48376002)(36756003)(47776003)(85426001)(19580405001)(87936001)(6806004)(50466002)(86152002)(33646002)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BN3PR03MB1365;
+	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; MX:1; A:1;
+	LANG:en; 
+MIME-Version: 1.0
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:BN3PR03MB1365;
+X-Microsoft-Antispam-PRVS: <BN3PR03MB136525760C0265C9A6B3C66C84E80@BN3PR03MB1365.namprd03.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(5002010)(5005006)(3002001); SRVR:BN3PR03MB1365;
+	BCL:0; PCL:0; RULEID:; SRVR:BN3PR03MB1365; 
+X-Forefront-PRVS: 0560A2214D
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2015 05:25:29.5021 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2];
+	Helo=[az84smr01.freescale.net]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR03MB1365
+Subject: [meta-networking][fido][PATCH] lmsensors-config: fix a warning about not existant S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,78 +66,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 04:10:02 -0000
+X-List-Received-Date: Tue, 28 Apr 2015 05:25:31 -0000
+Content-Type: text/plain
 
-in systemd >= 218 libudev deprecated support for udev_set_log_fn
-see
-https://github.com/systemd/systemd/commit/25e773eeb4f853804e1bf0dbd9a184f23e9b2a97
+From: Chunrong Guo <B40290@freescale.com>
 
-Change-Id: If6e3742bd2a70685f2521f134d5965bf2d1f8f72
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  Set the S variable to $WORKDIR to remove the warning about S being not existant
+  (which is true for this package, since there are no original sources for it).
+
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
- .../chromium/chromium-40/0010-systemd-218.patch    | 39 ++++++++++++++++++++++
- recipes-browser/chromium/chromium_40.0.2214.91.bb  |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
+ meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch b/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
-new file mode 100644
-index 0000000..3aec8d0
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
-@@ -0,0 +1,39 @@
-+Remove use of udev_set_log_priority API its gone in systemd >= 218
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Index: chromium-40.0.2214.91/ui/events/ozone/device/udev/device_manager_udev.cc
-+===================================================================
-+--- chromium-40.0.2214.91.orig/ui/events/ozone/device/udev/device_manager_udev.cc
-++++ chromium-40.0.2214.91/ui/events/ozone/device/udev/device_manager_udev.cc
-+@@ -33,29 +33,9 @@ enum {
-+   SYS_LOG_DEBUG = 7,
-+ };
-+ 
-+-// Log handler for messages generated from libudev.
-+-void UdevLog(struct udev* udev,
-+-             int priority,
-+-             const char* file,
-+-             int line,
-+-             const char* fn,
-+-             const char* format,
-+-             va_list args) {
-+-  if (priority <= SYS_LOG_ERR)
-+-    LOG(ERROR) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
-+-  else if (priority <= SYS_LOG_INFO)
-+-    VLOG(1) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
-+-  else  // SYS_LOG_DEBUG
-+-    VLOG(2) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
-+-}
-+-
-+ // Create libudev context.
-+ device::ScopedUdevPtr UdevCreate() {
-+   struct udev* udev = udev_new();
-+-  if (udev) {
-+-    udev_set_log_fn(udev, UdevLog);
-+-    udev_set_log_priority(udev, SYS_LOG_DEBUG);
-+-  }
-+   return device::ScopedUdevPtr(udev);
-+ }
-+ 
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-index 3a5108e..53af755 100644
---- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
-+++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -91,6 +91,7 @@ SRC_URI[sha256sum] = "f72fda9ff1ea256ab911610ee532eadf8303137d431f2481d01d3d60e5
- 
- OZONE_WAYLAND_EXTRA_PATCHES += " \
-         file://chromium-40/0005-Remove-X-libraries-from-GYP-files.patch \
-+        file://chromium-40/0010-systemd-218.patch \
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
+index 343971f..fe2f499 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors-config_1.0.bb
+@@ -11,6 +11,7 @@ SRC_URI = "file://fancontrol \
+            file://sensord.conf \
+            file://sensors.conf \
  "
- OZONE_WAYLAND_GIT_BRANCH = "Milestone-ThanksGiving"
- OZONE_WAYLAND_GIT_SRCREV = "5d7baa9bc3b8c88e9b7e476e3d6bc8cd44a887fe"
++S = "${WORKDIR}"
+ 
+ RDEPENDS_${PN}-dev = ""
+ 
 -- 
-2.1.4
+1.9.2
 
 
