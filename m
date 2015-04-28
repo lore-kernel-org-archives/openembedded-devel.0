@@ -1,36 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
-	[209.85.212.174])
-	by mail.openembedded.org (Postfix) with ESMTP id ABCD372491
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 515357382F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 22:03:33 +0000 (UTC)
-Received: by wizk4 with SMTP id k4so157792954wiz.1
+	Tue, 28 Apr 2015 22:03:34 +0000 (UTC)
+Received: by wgin8 with SMTP id n8so9244543wgi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 15:03:34 -0700 (PDT)
+	Tue, 28 Apr 2015 15:03:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=HplLg6pubQmTrzlXMLpOOrxUCxjPurwDY9J70ClqnBw=;
-	b=zA75WaRfR56p51zOTZzt1zfMhZKpzpU0J5Jjqh/198Ve32w3+PX2/tmshBx6lEkQNI
-	fkakvHnYN+mPb7UlwgFJx+ehFgvnywOo+cvo5yJpdMnD/GW2ezvTmCT0uh8mGsMmE62c
-	CL3po6bQtJEAubA27vvbTVm2U2uMaC5EGpZmsFPpkA6LKup3q3zsVaODrzl+HVB/8UOx
-	1DNmeQVdmHZg1kq4BAp1vPvoODrWBaJR1R51bwaZ9aQ1eTr8o2Wc4ytqj4upjbAmHyVU
-	Q2rx4Ilr/+0P6eP8U/6JSA2QLCbrRKFog0XNCKLIsspnxSh+OXkPpXxVUqVDuSQ+cKtE
-	l7eQ==
-X-Received: by 10.180.82.135 with SMTP id i7mr3099144wiy.68.1430258614137;
-	Tue, 28 Apr 2015 15:03:34 -0700 (PDT)
+	bh=c0XPTrS2V9D1oj36rYqsFvyGnNLdvdhmOWJio3S37cI=;
+	b=rCQLu4zKtUEEfHOBcHuU/V68QhsVhz01ZnmLcaCEXJQuFOe1SXoqTOTUC9J8/5Bgmi
+	KL8RPeNatqrKSj5WS80b1yKysm+AlNIv7i2c3C0Rn+GlIpaX9JveJXd+u7jgngF4jLDQ
+	rG5py06Wvgj3cTi7HRZlOlqtD2W7V506JbKH8uPx3fwcO4JIBJBtckYGT5ZKba+6ydXy
+	WY3N06vctd6siiFT36mYgMpOdCNNBf1qusMhZfQ9ypee3REyu0Uj4b8fGixC3to6dDdM
+	TKzCqonwFPX9V98Y0iMc8gplPfypAWVLZYA8tDdh+uvWlryvykzTppoIDia2HfF+wphr
+	48rA==
+X-Received: by 10.194.60.43 with SMTP id e11mr37360308wjr.36.1430258615688;
+	Tue, 28 Apr 2015 15:03:35 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id o5sm18410958wia.0.2015.04.28.15.03.32
+	by mx.google.com with ESMTPSA id
+	mc20sm18317740wic.15.2015.04.28.15.03.34
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 28 Apr 2015 15:03:32 -0700 (PDT)
+	Tue, 28 Apr 2015 15:03:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Apr 2015 00:03:25 +0200
-Message-Id: <1430258606-26895-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 29 Apr 2015 00:03:26 +0200
+Message-Id: <1430258606-26895-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.3.5
 In-Reply-To: <1430258606-26895-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1430258606-26895-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-qt5][PATCH 2/3] qtsystems: add packageconfig for bluez4 and disable it by default
+Subject: [meta-qt5][PATCH 3/3] qtbase: remove 2nd BSD from LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 22:03:35 -0000
+X-List-Received-Date: Tue, 28 Apr 2015 22:03:36 -0000
 
-* bluez5 is now enabled by default and conflicts with bluez4
+* BSD is now in default LICENSE variable:
+  recipes-qt/qt5/qt5-5.4.1.inc:LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+  recipes-qt/qt5/qt5-git.inc:LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtsystems.inc | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ recipes-qt/qt5/qtbase.inc | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/recipes-qt/qt5/qtsystems.inc b/recipes-qt/qt5/qtsystems.inc
-index cd2438f..e9b14ae 100644
---- a/recipes-qt/qt5/qtsystems.inc
-+++ b/recipes-qt/qt5/qtsystems.inc
-@@ -1,6 +1,15 @@
- require qt5.inc
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index a5687ea..50cb505 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -22,9 +22,7 @@ SRC_URI += "\
  
--DEPENDS += "qtbase qtdeclarative udev bluez4 gconf"
-+DEPENDS += "qtbase qtdeclarative udev gconf"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[bluez4] = "OE_BLUEZ_ENABLED,,bluez4"
-+
-+do_configure_prepend() {
-+    export QMAKE_CACHE_EVAL="CONFIG+=${EXTRA_OECONF}"
-+    # disable bluez test if it isn't enabled by PACKAGECONFIG
-+    sed -i 's/^    qtCompileTest(bluez)/    OE_BLUEZ_ENABLED:qtCompileTest(bluez)/g' ${S}/qtsystems.pro
-+}
+ DEPENDS += "qtbase-native"
  
- do_install_append() {
-     # Remove example.pro file as it is useless
+-# Used for examples and tests
+ # LGPL-3.0 is used only in src/plugins/platforms/android/extract.cpp
+-LICENSE += "& BSD"
+ 
+ # for syncqt
+ RDEPENDS_${PN}-tools += "perl"
 -- 
 2.3.5
 
