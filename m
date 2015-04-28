@@ -1,24 +1,26 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E3B40716CE
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B715716CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 06:05:01 +0000 (UTC)
+	Tue, 28 Apr 2015 06:05:02 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3S652JL000799
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t3S653nK025554
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 23:05:02 -0700 (PDT)
+	Mon, 27 Apr 2015 23:05:03 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 27 Apr 2015 23:05:01 -0700
+	14.3.224.2; Mon, 27 Apr 2015 23:05:02 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Apr 2015 14:04:58 +0800
-Message-ID: <1430201100-15248-1-git-send-email-rongqing.li@windriver.com>
+Date: Tue, 28 Apr 2015 14:04:59 +0800
+Message-ID: <1430201100-15248-2-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 2.1.0
+In-Reply-To: <1430201100-15248-1-git-send-email-rongqing.li@windriver.com>
+References: <1430201100-15248-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3][meta-networking] opensaf: install opensafd.service
+Subject: [PATCH 2/3][meta-networking] opensaf: RDEPENDS on python and bash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,26 +39,37 @@ Content-Type: text/plain
 
 From: Robert Yang <liezhi.yang@windriver.com>
 
-Fixed when systemd:
-ERROR: Function failed: SYSTEMD_SERVICE_opensaf value opensafd.service does not exist
+python:
+opensaf/usr/share/opensaf/samples/immsv/immom_python/immom.py
+
+bash:
+opensaf/usr/share/opensaf/immxml/verify.sh
+opensaf/usr/share/opensaf/immxml/immxml-modify-config
+opensaf/usr/share/opensaf/immxml/immxml-configure
+opensaf/usr/share/opensaf/immxml/immxml-clustersize
+opensaf/usr/share/opensaf/immxml/immxml-nodegen
+opensaf/usr/share/opensaf/samples/INSTALL
+opensaf/usr/share/opensaf/samples/smfsv/campaigns/smf-verify
+opensaf/usr/lib/opensaf/configure_tipc
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-index 5b42def..5fe929c 100644
+index 5fe929c..6d31b1c 100644
 --- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
 +++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-@@ -39,4 +39,7 @@ do_install_append() {
-     rm -fr "${D}${localstatedir}/lock"
-     rm -fr "${D}${localstatedir}/run"
-     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
-+        ${D}${systemd_unitdir}/system
- }
+@@ -33,6 +33,8 @@ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+ FILES_${PN} += "${localstatedir}/run"
+ 
++RDEPENDS_${PN} += "bash python"
++
+ INSANE_SKIP_${PN} = "dev-so"
+ 
+ do_install_append() {
 -- 
 2.1.0
 
