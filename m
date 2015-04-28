@@ -1,26 +1,27 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CE54716CE
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 33CEE73D66
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 06:05:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3S6540a000826
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 28 Apr 2015 07:04:15 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.04,848,1406563200"; d="scan'208";a="91339609"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 28 Apr 2015 15:00:22 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t3S72x6w000649
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 23:05:04 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 27 Apr 2015 23:05:04 -0700
-From: <rongqing.li@windriver.com>
+	Tue, 28 Apr 2015 15:02:59 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 28 Apr 2015 15:04:16 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Apr 2015 14:05:00 +0800
-Message-ID: <1430201100-15248-3-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1430201100-15248-1-git-send-email-rongqing.li@windriver.com>
-References: <1430201100-15248-1-git-send-email-rongqing.li@windriver.com>
+Date: Tue, 28 Apr 2015 14:57:11 +0800
+Message-ID: <1430204231-15700-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH 3/3][meta-networking] opensaf: create the node_name configuration file after install pkg
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-networking][PATCH] ipsec-tools: set SYSTEMD_SERVICE correctly to avoid building warning.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,87 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 06:05:03 -0000
+X-List-Received-Date: Tue, 28 Apr 2015 07:04:16 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+ ipsec-tools-0.8.2: ipsec-tools: Files/directories were installed but not shipped
+   /lib
+   /lib/systemd
+   /lib/systemd/system
+   /lib/systemd/system/racoon.service [installed-vs-shipped]
 
-not create the node_name file when building by calling "hostname -s",
-and create it after install pkg, since it works on cross-compile
-environment
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- .../opensaf/0001-not-install-node_name.patch       | 30 ++++++++++++++++++++++
- .../recipes-daemons/opensaf/opensaf_4.5.0.bb       | 13 +++++++++-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-not-install-node_name.patch
+ meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-not-install-node_name.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-not-install-node_name.patch
-new file mode 100644
-index 0000000..d152de0
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-not-install-node_name.patch
-@@ -0,0 +1,30 @@
-+[PATCH] not install node_name
-+
-+Upstream-Status: Inappropriate [cross compiling specific]
-+
-+when cross-compile, the compile host name is written into node_name file,
-+but target host name should be written, so not install node_name, and create
-+it when pkg-install
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ osaf/services/saf/clmsv/config/Makefile.am | 6 ------
-+ 1 file changed, 6 deletions(-)
-+
-+diff --git a/osaf/services/saf/clmsv/config/Makefile.am b/osaf/services/saf/clmsv/config/Makefile.am
-+index 15b8702..88c8d24 100644
-+--- a/osaf/services/saf/clmsv/config/Makefile.am
-++++ b/osaf/services/saf/clmsv/config/Makefile.am
-+@@ -39,9 +39,3 @@ dist_pkgimmxml_svc_DATA += \
-+ endif
-+ 
-+ endif
-+-
-+-install-data-hook:
-+-	hostname -s > $(DESTDIR)$(pkgsysconfdir)/node_name
-+-
-+-uninstall-hook:
-+-	rm -f $(DESTDIR)$(pkgsysconfdir)/node_name
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-index 6d31b1c..fc77f2f 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-@@ -14,7 +14,9 @@ HOMEPAGE = "http://www.opensaf.org"
- inherit autotools useradd systemd pkgconfig
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+index 9704b13..67b70d0 100644
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+@@ -67,6 +67,8 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[pam] = "--with-libpam,--without-libpam,libpam,"
+ PACKAGECONFIG[selinux] = "--enable-security-context,--disable-security-context,libselinux,"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
--           file://install-samples-from-srcdir.patch"
-+           file://install-samples-from-srcdir.patch \
-+           file://0001-not-install-node_name.patch \
-+"
- 
- SRC_URI[md5sum] = "534c0a99438a62c4c8dda56cfa67300c"
- SRC_URI[sha256sum] = "2f5ba57fe67e94099c0df82d0a0dd207b5c583c93030035ba354c97b5471b590"
-@@ -45,3 +47,12 @@ do_install_append() {
-     install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
-         ${D}${systemd_unitdir}/system
++SYSTEMD_SERVICE_${PN} = "racoon.service"
++
+ do_install_append() {
+     install -d ${D}${sysconfdir}/racoon
+     install -m 0644 ${WORKDIR}/racoon.conf.sample ${D}${sysconfdir}/racoon/racoon.conf
+@@ -82,3 +84,6 @@ do_install_append() {
+         install -m 0644 ${WORKDIR}/racoon.conf ${D}${sysconfdir}/default/racoon
+     fi
  }
 +
-+pkg_postinst_${PN} () {
-+    if [ "x$D" != "x" ]; then
-+        exit 1
-+    fi
-+
-+    hostname -s > /etc/opensaf/node_name
-+}
-+
++FILES_${PN} += "${sysconfdir}/racoon/racoon.conf \
++                ${sysconfdir}/default/racoon"
 -- 
-2.1.0
+1.9.1
 
 
