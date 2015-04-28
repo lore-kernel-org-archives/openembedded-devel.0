@@ -1,23 +1,60 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 69D7965CD0
+Return-Path: <B40290@freescale.com>
+X-Greylist: delayed 951 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 28 Apr 2015 03:28:13 UTC
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2on0133.outbound.protection.outlook.com [207.46.100.133])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F9A2727E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 03:27:16 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3S3RHnc020240
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 27 Apr 2015 20:27:17 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 27 Apr 2015 20:27:16 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
-Date: Tue, 28 Apr 2015 11:27:15 +0800
-Message-ID: <1430191635-13438-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
+	Tue, 28 Apr 2015 03:28:13 +0000 (UTC)
+Received: from BLUPR0301CA0026.namprd03.prod.outlook.com (25.162.113.164) by
+	BY2PR03MB443.namprd03.prod.outlook.com (10.141.141.152) with Microsoft
+	SMTP Server (TLS) id 15.1.148.15; Tue, 28 Apr 2015 03:12:21 +0000
+Received: from BY2FFO11FD047.protection.gbl (2a01:111:f400:7c0c::161) by
+	BLUPR0301CA0026.outlook.office365.com (2a01:111:e400:5259::36) with
+	Microsoft SMTP Server (TLS) id 15.1.130.23 via Frontend Transport;
+	Tue, 28 Apr 2015 03:12:20 +0000
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=freescale.com; freescale.mail.onmicrosoft.com; dkim=none
+	(message not signed) header.d=none;
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.158.2 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BY2FFO11FD047.mail.protection.outlook.com (10.1.15.175) with Microsoft
+	SMTP Server (TLS) id 15.1.154.14 via Frontend Transport;
+	Tue, 28 Apr 2015 03:12:19 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t3S3CGu4018702;
+	Mon, 27 Apr 2015 20:12:17 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Apr 2015 11:12:12 +0800
+Message-ID: <1430190732-31890-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI; BMV:1;
+	SFV:NSPM;
+	SFS:(10019020)(6009001)(339900001)(189002)(199003)(104016003)(15975445007)(106466001)(19580405001)(50226001)(229853001)(16601075003)(77156002)(36756003)(450100001)(77096005)(62966003)(92566002)(33646002)(105606002)(19580395003)(87936001)(110136001)(2351001)(85426001)(50466002)(50986999)(86152002)(48376002)(6806004)(86362001)(46102003)(47776003)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BY2PR03MB443;
+	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; MX:1; A:1;
+	LANG:en; 
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] dialog: upgrade to 1.2-20150225
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:BY2PR03MB443;
+X-Microsoft-Antispam-PRVS: <BY2PR03MB4434A900CD26DE659106FAC84E80@BY2PR03MB443.namprd03.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(5002010)(5005006)(3002001); SRVR:BY2PR03MB443;
+	BCL:0; PCL:0; RULEID:; SRVR:BY2PR03MB443; 
+X-Forefront-PRVS: 0560A2214D
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Apr 2015 03:12:19.8589 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2];
+	Helo=[az84smr01.freescale.net]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR03MB443
+Subject: [meta-networking][PATCH ] netcat-openbsd: add LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,185 +68,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 03:27:17 -0000
+X-List-Received-Date: Tue, 28 Apr 2015 03:28:14 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+From: Chunrong Guo <B40290@freescale.com>
 
-1. upgrade it to 1.2-20150225
-2. update the use-pkg-config-for-ncurses-detection.patch, use it only for
-dialog
-3. dialog-static uses use-pkg-config-for-static-ncurses-detection.patch
-which outputs libraries suitable for static linking
-
-The difference between with --static and without --static is below:
-   $pkg-config --libs "ncurse"
-    -L${SYSROOT}/usr/lib64 -lncurses
-   $pkg-config --static --libs "ncurse"
-    -L${SYSROOT}/usr/lib64 -lncurses -ltinfo
-   $
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
- .../dialog/dialog-static_1.1-20120706.bb           |  6 ----
- .../dialog/dialog-static_1.2-20150225.bb           |  6 ++++
- meta-oe/recipes-extended/dialog/dialog.inc         |  1 -
- .../recipes-extended/dialog/dialog_1.1-20120706.bb |  4 ---
- .../recipes-extended/dialog/dialog_1.2-20150225.bb |  6 ++++
- .../use-pkg-config-for-ncurses-detection.patch     | 28 +++++++------------
- ...e-pkg-config-for-static-ncurses-detection.patch | 32 ++++++++++++++++++++++
- 7 files changed, 54 insertions(+), 29 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
- create mode 100644 meta-oe/recipes-extended/dialog/dialog-static_1.2-20150225.bb
- delete mode 100644 meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
- create mode 100644 meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
- create mode 100644 meta-oe/recipes-extended/dialog/files/use-pkg-config-for-static-ncurses-detection.patch
+ meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
-deleted file mode 100644
-index 595f323..0000000
---- a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require dialog.inc
--
--LDFLAGS += "-static"
--
--SRC_URI[md5sum] = "2e538305977178eb085a9859511c299d"
--SRC_URI[sha256sum] = "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b44d079cb87cf0ce2f5"
-diff --git a/meta-oe/recipes-extended/dialog/dialog-static_1.2-20150225.bb b/meta-oe/recipes-extended/dialog/dialog-static_1.2-20150225.bb
-new file mode 100644
-index 0000000..77d8841
---- /dev/null
-+++ b/meta-oe/recipes-extended/dialog/dialog-static_1.2-20150225.bb
-@@ -0,0 +1,6 @@
-+require dialog.inc
-+
-+LDFLAGS += "-static"
-+SRC_URI +="file://use-pkg-config-for-static-ncurses-detection.patch"
-+SRC_URI[md5sum] = "38ef59a7daa5459119cb06777c735e4b"
-+SRC_URI[sha256sum] = "6844b13a7a1fea568a8d5bb3004e1af90888cd4a5e8c2ded2c38f34fcc7397ff"
-diff --git a/meta-oe/recipes-extended/dialog/dialog.inc b/meta-oe/recipes-extended/dialog/dialog.inc
-index 995d6c0..1a6e8c5 100644
---- a/meta-oe/recipes-extended/dialog/dialog.inc
-+++ b/meta-oe/recipes-extended/dialog/dialog.inc
-@@ -9,7 +9,6 @@ LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
+index 4237dc4..12409d4 100644
+--- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
++++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
+@@ -2,6 +2,7 @@ require netcat.inc
+ SUMMARY = "OpenBSD Netcat"
+ HOMEPAGE = "http://ftp.debian.org"
+ LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://../debian/copyright;md5=ee6bbaacb5db5f2973818f0902c3ae6f"
  
- SRC_URI = "ftp://invisible-island.net/dialog/dialog-${PV}.tgz \
--           file://use-pkg-config-for-ncurses-detection.patch \
-           "
+ DEPENDS += "glib-2.0 libbsd"
  
- # hardcoded here for use in dialog-static recipe
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb b/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
-deleted file mode 100644
-index c87fb61..0000000
---- a/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require dialog.inc
--
--SRC_URI[md5sum] = "2e538305977178eb085a9859511c299d"
--SRC_URI[sha256sum] = "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b44d079cb87cf0ce2f5"
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb b/meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
-new file mode 100644
-index 0000000..477be73
---- /dev/null
-+++ b/meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
-@@ -0,0 +1,6 @@
-+require dialog.inc
-+
-+SRC_URI +="file://use-pkg-config-for-ncurses-detection.patch"
-+
-+SRC_URI[md5sum] = "38ef59a7daa5459119cb06777c735e4b"
-+SRC_URI[sha256sum] = "6844b13a7a1fea568a8d5bb3004e1af90888cd4a5e8c2ded2c38f34fcc7397ff"
-diff --git a/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch b/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-index a2354ad..0a25a7f 100644
---- a/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-+++ b/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-@@ -8,33 +8,25 @@ file, and autoconf can not work, make a workaround in configure file.
- 
- Signed-off-by: Roy Li <rongqing.li@windriver.com>
- ---
-- configure |    6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
-+ configure | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
- 
- diff --git a/configure b/configure
--index 24e28c1..c78735d 100755
-+index 8afe3d7..a54bcc1 100755
- --- a/configure
- +++ b/configure
--@@ -9976,8 +9976,8 @@ fi
-+@@ -11567,9 +11567,8 @@ fi
-  
-  if test "$NCURSES_CONFIG" != none ; then
-  
- -CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
---LIBS="`$NCURSES_CONFIG --libs` $LIBS"
-+-
-+-cf_add_libs="`$NCURSES_CONFIG --libs`"
- +CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>/dev/null`"
--+LIBS="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
-- 
-- # even with config script, some packages use no-override for curses.h
-- 
--@@ -10096,7 +10096,7 @@ cat >>confdefs.h <<EOF
-- #define $cf_nculib_ROOT 1
-- EOF
-- 
---cf_cv_ncurses_version=`$NCURSES_CONFIG --version`
--+cf_cv_ncurses_version=`pkg-config --short-errors --print-errors --modversion "ncurses"`
-- 
-- else
-- 
-++cf_add_libs="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
-+ # Filter out duplicates - this happens with badly-designed ".pc" files...
-+ for cf_add_1lib in $LIBS
-+ do
- -- 
- 1.7.10.4
- 
-diff --git a/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-static-ncurses-detection.patch b/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-static-ncurses-detection.patch
-new file mode 100644
-index 0000000..3ed174c
---- /dev/null
-+++ b/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-static-ncurses-detection.patch
-@@ -0,0 +1,32 @@
-+Subject: [PATCH] use pkg-config for ncurses detection.
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+This is a workaround to make dialog be able to build after ncurses-config
-+does not work, since the configure file is called directly in dialog bb
-+file, and autoconf can not work, make a workaround in configure file.
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ configure | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
-+
-+diff --git a/configure b/configure
-+index 8afe3d7..a54bcc1 100755
-+--- a/configure
-++++ b/configure
-+@@ -11567,9 +11567,8 @@ fi
-+ 
-+ if test "$NCURSES_CONFIG" != none ; then
-+ 
-+-CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
-+-
-+-cf_add_libs="`$NCURSES_CONFIG --libs`"
-++CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>/dev/null`"
-++cf_add_libs="`pkg-config --short-errors --print-errors --static --libs "ncurses" 2>/dev/null` $LIBS"
-+ # Filter out duplicates - this happens with badly-designed ".pc" files...
-+ for cf_add_1lib in $LIBS
-+ do
-+-- 
-+1.7.10.4
-+
 -- 
-2.1.0
+1.9.2
 
 
