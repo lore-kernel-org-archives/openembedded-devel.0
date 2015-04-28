@@ -1,23 +1,23 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
 	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CE52727E8
+	by mail.openembedded.org (Postfix) with ESMTP id 0F49673BB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 04:10:02 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so81244476igb.0
+	Tue, 28 Apr 2015 04:10:01 +0000 (UTC)
+Received: by igbhj9 with SMTP id hj9so11201126igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Apr 2015 21:10:03 -0700 (PDT)
+	Mon, 27 Apr 2015 21:10:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=YC8XoEUmdu7iHalHeNvN9e00ARObIWAeUNzEtSXy9hc=;
-	b=B8NoOPiW8UKgYThYa7BTrMNG45lDxHS8sw6rL7meppcLijXsdIQCFvPZM3lVad+cBB
-	GPaqR07nA1/A8pMIr8gqkulvlCjKqQrVGL8ELjQFXBr+WIZJU3dh9HA1oj7q1v6tC3U9
-	YG1SenJ1qoDCz/GPQZhc8XiNamFGuX8sRBTULNG+QERTygyLyxQ/Xoq1fg4NCPtHkxCG
-	ElXbhtiAplKVgB62w6MAceC5b4dPW7ETHflrCAgBEKo8MXmcNoGnmEsLBDRtEI4ZMXvg
-	tgLKqqa7c5YdQGJm4pE3sQm8aY5zyf97AuAAjZ+aY+8Nql3aFlC/5DL3ja5q4RImxmAV
-	jvww==
-X-Received: by 10.50.35.195 with SMTP id k3mr17803473igj.11.1430194203313;
-	Mon, 27 Apr 2015 21:10:03 -0700 (PDT)
+	bh=BJ/59d3SEAod/mmvTMfAjhsXo7wRcO3CBpGQpxZhHjI=;
+	b=WOQ1sJP5+Tvx1mjUP9zzcix1ucYflHcKe16NeVqKuOecDXBwhJcEhypxWc0idCXsHw
+	8vC+3bS77SvL52g90X00E2gchDMyVFpqaV0cJJZKBE8nV9XJ+O8OB8FkVjcm+lfGubWO
+	rHMwWeLfmod+RHHc5HR0YHq8SIPTgduaGqB5lHnQoceAF90Lqi6BMBUZ8lrP2kbcTRNa
+	C1FMkyQnlXvmmqV5+D83UbMXMkS3p67SzsOZrS426Fmxx6VInpJp+dHd8MypH93RHpuo
+	zKq5hmSMGiEg8KLWmzlyD6K5dcEv1T4ky26XNs+r+Zxcu+9psFbJiu4zfx4SRy9oNEP/
+	yB8g==
+X-Received: by 10.50.141.164 with SMTP id rp4mr17876445igb.2.1430194202826;
+	Mon, 27 Apr 2015 21:10:02 -0700 (PDT)
 Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
 	[96.119.89.79])
 	by mx.google.com with ESMTPSA id w2sm6521727igl.22.2015.04.27.21.10.02
@@ -25,12 +25,12 @@ Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
 	Mon, 27 Apr 2015 21:10:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Apr 2015 04:09:55 +0000
-Message-Id: <1430194195-1325-3-git-send-email-raj.khem@gmail.com>
+Date: Tue, 28 Apr 2015 04:09:54 +0000
+Message-Id: <1430194195-1325-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.1.4
 In-Reply-To: <1430194195-1325-1-git-send-email-raj.khem@gmail.com>
 References: <1430194195-1325-1-git-send-email-raj.khem@gmail.com>
-Subject: [meta-browser][PATCH 3/3] chromium, cef: Package codecs separately
+Subject: [meta-browser][PATCH 2/3 V3] chromium: Remove use of deprecated udev logging API
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,82 +46,75 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 28 Apr 2015 04:10:02 -0000
 
-chromium does not use versioned shared objects so deal with it
-Remove the band-aid to pretend to have versioning shared objects
-put the ffmpeg plugins in directory of its own in /usr/lib to
-avoid namespace conflict with same .so coming from other codec packages
+in systemd >= 218 libudev deprecated support for udev_set_log_fn
+see
+https://github.com/systemd/systemd/commit/25e773eeb4f853804e1bf0dbd9a184f23e9b2a97
 
-Change-Id: Ia9dceaa84844086fe8918246eb864d91ab4ec6aa
+Change-Id: If6e3742bd2a70685f2521f134d5965bf2d1f8f72
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-browser/chromium/chromium.inc | 30 +++++++++++-------------------
- 1 file changed, 11 insertions(+), 19 deletions(-)
+ .../chromium/chromium-40/0010-systemd-218.patch    | 39 ++++++++++++++++++++++
+ recipes-browser/chromium/chromium_40.0.2214.91.bb  |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 655cf65..9c34a68 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -46,14 +46,17 @@ do_install() {
- 		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}
- 	fi
- 	install -d ${D}${libdir}
--        if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libcef.so" ]; then
-+        if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
- 		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${libdir}
-         fi
-+	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libpdf.so" ]; then
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libpdf.so ${D}${libdir}/chrome/libpdf.so
-+	fi
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so" ]; then
--		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so ${D}${libdir}
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so ${D}${libdir}/chrome/libosmesa.so
- 	fi
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so" ]; then
--		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so ${D}${libdir}
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so ${D}${libdir}/chrome/libffmpegsumo.so
- 	fi
- 	install -d ${D}${bindir}/chrome
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome" ]; then
-@@ -95,22 +98,12 @@ do_install() {
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox" ]; then
- 		install -m 4755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
- 	fi
--
--	# take care of yocto-way libraries naming (versions)
--	cd ${D}${libdir}
--	for library in $(find -type f -name '*.so'); do
--		startDir="$(pwd)"
--		cd "$(dirname "$library")"
--		rm -f "$library.0.0.1"
--		mv "$library" "$library.0.0.1"
--		ln -sf "$library.0.0.1" "$library.0.0"
--		ln -sf "$library.0.0" "$library.0"
--		ln -sf "$library.0" "$library"
--		cd "$startDir"
--	done
--
- }
- 
-+PACKAGES =+ "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
+diff --git a/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch b/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
+new file mode 100644
+index 0000000..3aec8d0
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium-40/0010-systemd-218.patch
+@@ -0,0 +1,39 @@
++Remove use of udev_set_log_priority API its gone in systemd >= 218
 +
-+FILES_${PN}-codecs-ffmpeg = "${libdir}/chrome/libffmpegsumo.so"
-+FILES_${PN}-plugin-pdf = "${libdir}/chrome/libpdf.so"
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Index: chromium-40.0.2214.91/ui/events/ozone/device/udev/device_manager_udev.cc
++===================================================================
++--- chromium-40.0.2214.91.orig/ui/events/ozone/device/udev/device_manager_udev.cc
+++++ chromium-40.0.2214.91/ui/events/ozone/device/udev/device_manager_udev.cc
++@@ -33,29 +33,9 @@ enum {
++   SYS_LOG_DEBUG = 7,
++ };
++ 
++-// Log handler for messages generated from libudev.
++-void UdevLog(struct udev* udev,
++-             int priority,
++-             const char* file,
++-             int line,
++-             const char* fn,
++-             const char* format,
++-             va_list args) {
++-  if (priority <= SYS_LOG_ERR)
++-    LOG(ERROR) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
++-  else if (priority <= SYS_LOG_INFO)
++-    VLOG(1) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
++-  else  // SYS_LOG_DEBUG
++-    VLOG(2) << "libudev: " << fn << ": " << base::StringPrintV(format, args);
++-}
++-
++ // Create libudev context.
++ device::ScopedUdevPtr UdevCreate() {
++   struct udev* udev = udev_new();
++-  if (udev) {
++-    udev_set_log_fn(udev, UdevLog);
++-    udev_set_log_priority(udev, SYS_LOG_DEBUG);
++-  }
++   return device::ScopedUdevPtr(udev);
++ }
++ 
+diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+index 3a5108e..53af755 100644
+--- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
++++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+@@ -91,6 +91,7 @@ SRC_URI[sha256sum] = "f72fda9ff1ea256ab911610ee532eadf8303137d431f2481d01d3d60e5
  
- FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
- FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
-@@ -118,11 +111,10 @@ FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
- PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
- 
- INSANE_SKIP_${PN} = "ldflags"
-+SOLIBS = ".so"
- FILES_SOLIBSDEV = ""
- FILES_${PN} += "${bindir} ${bindir}/chrome/ ${libdir}"
- FILES_${PN} += "${bindir}/chrome/*.pak"
- FILES_${PN} += "${bindir}/chrome/locales/*.pak"
- FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/.debug/"
- 
--
--
+ OZONE_WAYLAND_EXTRA_PATCHES += " \
+         file://chromium-40/0005-Remove-X-libraries-from-GYP-files.patch \
++        file://chromium-40/0010-systemd-218.patch \
+ "
+ OZONE_WAYLAND_GIT_BRANCH = "Milestone-ThanksGiving"
+ OZONE_WAYLAND_GIT_SRCREV = "5d7baa9bc3b8c88e9b7e476e3d6bc8cd44a887fe"
 -- 
 2.1.4
 
