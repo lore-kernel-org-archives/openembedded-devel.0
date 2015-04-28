@@ -1,25 +1,20 @@
-Return-Path: <Li.Zhou@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6006A73D53
+Return-Path: <cristian.iorga@intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id BE85D716CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 08:03:19 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t3S83J7m026500
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 01:03:20 -0700 (PDT)
-Received: from pek-lzhou2-d1.corp.ad.wrs.com (128.224.162.243) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Tue, 28 Apr 2015 01:03:19 -0700
-From: Li Zhou <li.zhou@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Apr 2015 16:03:09 +0800
-Message-ID: <1430208189-4312-1-git-send-email-li.zhou@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.243]
-Subject: [meta-oe][PATCH] rsyslogd: Backport upstream commits to fix rsyslog segmentation fault when heavy load
+	Tue, 28 Apr 2015 09:17:59 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga102.jf.intel.com with ESMTP; 28 Apr 2015 02:18:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,662,1422950400"; d="scan'208";a="716979773"
+Received: from sentry.rb.intel.com ([10.237.105.37])
+	by fmsmga002.fm.intel.com with ESMTP; 28 Apr 2015 02:17:59 -0700
+From: Cristian Iorga <cristian.iorga@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Apr 2015 12:17:55 +0300
+Message-Id: <1430212675-14919-1-git-send-email-cristian.iorga@intel.com>
+X-Mailer: git-send-email 2.1.0
+Subject: [meta-oe][PATCH V7] bluez collection: add (moved from oe-core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,245 +28,607 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 08:03:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 28 Apr 2015 09:18:05 -0000
 
-Backport <commit 9a775051f7373176c6e54bee1110965342dd41ad> and
-<commit 17e1ee2539cea6bac16832b488afd52b20a348ac> from rsyslog
-upstream <https://github.com/rsyslog/rsyslog> to solve issue:
-rsyslog segmentation fault when heavy load.
-Solve the race condition in GenerateLocalHostNameProperty between the
-prop.Destruct(&propLocalHostName) and prop.Construct(&propLocalHostName).
+BlueZ 4.x Bluetooth stack has been removed from oe-core.
+However, it is still supported, so add it to
+recipes-connectivity in meta-oe.
 
-Signed-off-by: Li Zhou <li.zhou@windriver.com>
+meta-systemd layer bluez4 bbappend has been integrated
+into bluez4 recipe.
+
+In order to use it in oe-core/poky/YP, 'bluez5' backfill
+distro feature needs to be disabled via:
+DISTRO_FEATURES_BACKFILL_CONSIDERED = "bluez5" .
+'bluetooth' distro feature needs to be present also.
+
+Signed-off-by: Cristian Iorga <cristian.iorga@intel.com>
 ---
- .../0001-bugfix-potential-abort-during-HUP.patch   |   91 +++++++++++++++++
- ...eak-introduced-by-GenerateLocalHostName-H.patch |  103 ++++++++++++++++++++
- meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb  |    2 +
- 3 files changed, 196 insertions(+)
- create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-bugfix-potential-abort-during-HUP.patch
- create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-remove-memleak-introduced-by-GenerateLocalHostName-H.patch
+ .../obsolete_automake_macros.patch                 |  14 +++
+ .../bluez/bluez-hcidump_2.5.bb                     |  22 +++++
+ .../bluez/bluez4-4.101/bluetooth.conf              |  16 +++
+ .../bluez/bluez4-4.101/fix-udev-paths.patch        |  37 +++++++
+ .../bluez/bluez4-4.101/fix_encrypt_collision.patch | 110 +++++++++++++++++++++
+ .../bluez/bluez4-4.101/install-test-script.patch   |  26 +++++
+ ...ork-fix-network-Connect-method-parameters.patch |  30 ++++++
+ .../bluez4-4.101/obsolete_automake_macros.patch    |  14 +++
+ .../bluez/bluez4-4.101/sbc_mmx.patch               |  24 +++++
+ ...pygobject-instead-ofgobject-introspection.patch |  27 +++++
+ meta-oe/recipes-connectivity/bluez/bluez4.inc      |  51 ++++++++++
+ meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb |  50 ++++++++++
+ .../bluez/gst-plugin-bluetooth_4.101.bb            |  39 ++++++++
+ .../bluez/bluez4_4.101.bbappend                    |   9 --
+ 14 files changed, 460 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_automake_macros.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_encrypt_collision.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-script.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-network-Connect-method-parameters.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_automake_macros.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pygobject-instead-ofgobject-introspection.patch
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4.inc
+ create mode 100644 meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
+ create mode 100644 meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
+ delete mode 100644 meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-bugfix-potential-abort-during-HUP.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-bugfix-potential-abort-during-HUP.patch
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_automake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_automake_macros.patch
 new file mode 100644
-index 0000000..14e8b3f
+index 0000000..0c77f1a
 --- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-bugfix-potential-abort-during-HUP.patch
-@@ -0,0 +1,91 @@
-+From 9a775051f7373176c6e54bee1110965342dd41ad Mon Sep 17 00:00:00 2001
-+From: Rainer Gerhards <rgerhards@adiscon.com>
-+Date: Mon, 28 Oct 2013 12:56:02 +0100
-+Subject: [PATCH] bugfix: potential abort during HUP
++++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump-2.5/obsolete_automake_macros.patch
+@@ -0,0 +1,14 @@
++Upstream-Status: Pending [package obsolete/not maintained by upstream]
 +
-+This could happen when one of imklog, imzmq3, imkmsg, impstats,
-+imjournal, or imuxsock were under heavy load during a HUP.
-+closes: http://bugzilla.adiscon.com/show_bug.cgi?id=489
-+Thanks to Guy Rozendorn for reporting the problem and Peval Levhshin for
-+his analysis.
++Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
++diff -Nurd bluez-hcidump-2.5/configure.ac bluez-hcidump-2.5/configure.ac
++--- bluez-hcidump-2.5/configure.ac	2012-11-30 10:29:41.000000000 +0200
+++++ bluez-hcidump-2.5/configure.ac	2013-01-12 10:02:10.609511463 +0200
++@@ -2,7 +2,7 @@
++ AC_INIT(bluez-hcidump, 2.5)
 +
-+Upstream-Status: backport
++ AM_INIT_AUTOMAKE([foreign subdir-objects])
++-AM_CONFIG_HEADER(config.h)
+++AC_CONFIG_HEADERS(config.h)
 +
-+Signed-off-by: Li Zhou <li.zhou@windriver.com>
-+---
-+ ChangeLog      |    6 ++++++
-+ runtime/glbl.c |   25 ++++++++++++++++++-------
-+ 2 files changed, 24 insertions(+), 7 deletions(-)
-+
-+Index: rsyslog-7.4.4/ChangeLog
-+===================================================================
-+--- rsyslog-7.4.4.orig/ChangeLog
-++++ rsyslog-7.4.4/ChangeLog
-+@@ -1,5 +1,11 @@
-+ ---------------------------------------------------------------------------
-+ Version 7.4.4  [v7.4-stable] 2013-09-03
-++- bugfix: potential abort during HUP
-++  This could happen when one of imklog, imzmq3, imkmsg, impstats,
-++  imjournal, or imuxsock were under heavy load during a HUP.
-++  closes: http://bugzilla.adiscon.com/show_bug.cgi?id=489
-++  Thanks to Guy Rozendorn for reporting the problem and Peval Levhshin for
-++  his analysis.
-+ - better error messages in GuardTime signature provider
-+   Thanks to Ahto Truu for providing the patch.
-+ - make rsyslog use the new json-c pkgconfig file if available
-+Index: rsyslog-7.4.4/runtime/glbl.c
-+===================================================================
-+--- rsyslog-7.4.4.orig/runtime/glbl.c
-++++ rsyslog-7.4.4/runtime/glbl.c
-+@@ -32,6 +32,7 @@
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+ #include <unistd.h>
-++#include <pthread.h>
-+ #include <assert.h>
-+ 
-+ #include "rsyslog.h"
-+@@ -379,17 +380,24 @@ GetLocalDomain(void)
-+ /* generate the local hostname property. This must be done after the hostname info
-+  * has been set as well as PreserveFQDN.
-+  * rgerhards, 2009-06-30
-++ * NOTE: This function DELIBERATELY introduces a small memory leak in order to gain
-++ * speed. Each time it is called when a property name already exists, a new one is
-++ * allocated but the previous one is NOT freed. This is so that current readers can
-++ * continue to use the previous name. Otherwise, we would need to use read/write locks
-++ * to protect the update process. As this function is called extremely infrequently and
-++ * the memory leak is very small, this is totally accessible. Think that otherwise we
-++ * would need to place a read look each time the property is read, which is much more
-++ * frequent (once per message for the modules that use this local hostname!).
-++ * rgerhards, 2013-10-28
-+  */
-+ static rsRetVal
-+ GenerateLocalHostNameProperty(void)
-+ {
-+-	DEFiRet;
-++	prop_t *hostnameNew;
-+ 	uchar *pszName;
-++	DEFiRet;
-+ 
-+-	if(propLocalHostName != NULL)
-+-		prop.Destruct(&propLocalHostName);
-+-
-+-	CHKiRet(prop.Construct(&propLocalHostName));
-++	CHKiRet(prop.Construct(&hostnameNew));
-+ 	if(LocalHostNameOverride == NULL) {
-+ 		if(LocalHostName == NULL)
-+ 			pszName = (uchar*) "[localhost]";
-+@@ -403,8 +411,11 @@ GenerateLocalHostNameProperty(void)
-+ 		pszName = LocalHostNameOverride;
-+ 	}
-+ 	DBGPRINTF("GenerateLocalHostName uses '%s'\n", pszName);
-+-	CHKiRet(prop.SetString(propLocalHostName, pszName, ustrlen(pszName)));
-+-	CHKiRet(prop.ConstructFinalize(propLocalHostName));
-++	CHKiRet(prop.SetString(hostnameNew, pszName, ustrlen(pszName)));
-++	CHKiRet(prop.ConstructFinalize(hostnameNew));
-++
-++	propLocalHostName = hostnameNew;
-++	/* inititional MEM LEAK for old value -- see function hdr comment! */
-+ 
-+ finalize_it:
-+ 	RETiRet;
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-remove-memleak-introduced-by-GenerateLocalHostName-H.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-remove-memleak-introduced-by-GenerateLocalHostName-H.patch
++ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb b/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
 new file mode 100644
-index 0000000..fcc5d8e
+index 0000000..3950630
 --- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-remove-memleak-introduced-by-GenerateLocalHostName-H.patch
-@@ -0,0 +1,103 @@
-+From 17e1ee2539cea6bac16832b488afd52b20a348ac Mon Sep 17 00:00:00 2001
-+From: Rainer Gerhards <rgerhards@adiscon.com>
-+Date: Mon, 28 Oct 2013 14:17:56 +0100
-+Subject: [PATCH] remove memleak introduced by GenerateLocalHostName HUP
-+ bugfix
++++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Linux Bluetooth Stack HCI Debugger Tool"
++DESCRIPTION = "The hcidump tool reads raw HCI data coming from and going to a Bluetooth device \
++and displays the commands, events and data in a human-readable form."
 +
-+Upstream-Status: backport
++SECTION = "console"
++# hcidump was integrated into bluez5
++DEPENDS = "bluez4"
++RCONFLICTS_${PN} = "bluez5"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
++                    file://src/hcidump.c;beginline=1;endline=23;md5=3bee3a162dff43a5be7470710b99fbcf"
++PR = "r1"
 +
-+Signed-off-by: Li Zhou <li.zhou@windriver.com>
++SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/bluez-hcidump-${PV}.tar.gz \
++           file://obsolete_automake_macros.patch \
++"
++
++SRC_URI[md5sum] = "2eab54bbd2b59a2ed4274ebb9390cf18"
++SRC_URI[sha256sum] = "9b7c52b375081883738cf049ecabc103b97d094b19c6544fb241267905d88881"
++S = "${WORKDIR}/bluez-hcidump-${PV}"
++
++inherit autotools
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
+new file mode 100644
+index 0000000..ca5e9e4
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/bluetooth.conf
+@@ -0,0 +1,16 @@
++<!-- This configuration file specifies the required security policies
++     for Bluetooth core daemon to work. -->
++
++<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
++ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
++<busconfig>
++
++  <!-- ../system.conf have denied everything, so we just punch some holes -->
++
++  <policy context="default">
++    <allow own="org.bluez"/>
++    <allow send_destination="org.bluez"/>
++    <allow send_interface="org.bluez.Agent"/>
++  </policy>
++
++</busconfig>
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.patch
+new file mode 100644
+index 0000000..8089914
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix-udev-paths.patch
+@@ -0,0 +1,37 @@
++Add udevdir/udevrulesdir options
++
++Upstream-Status: Inappropriate [configuration]
++Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
++
++Index: bluez-4.101/Makefile.am
++===================================================================
++--- bluez-4.101.orig/Makefile.am
+++++ bluez-4.101/Makefile.am
++@@ -395,7 +395,7 @@ EXTRA_DIST += audio/bluetooth.conf
++ include Makefile.tools
++ 
++ if DATAFILES
++-rulesdir = @UDEV_DIR@/rules.d
+++rulesdir = @UDEV_RULES_DIR@
++ 
++ udev_files =
++ 
++Index: bluez-4.101/configure.ac
++===================================================================
++--- bluez-4.101.orig/configure.ac
+++++ bluez-4.101/configure.ac
++@@ -61,4 +61,14 @@ if (test -n "${path_systemdunit}"); then
++ fi
++ AM_CONDITIONAL(SYSTEMD, test -n "${path_systemdunit}")
++ 
+++AC_ARG_WITH([udevdir],
+++    AS_HELP_STRING([--with-udevdir=DIR], [udev directory]),
+++    [], [with_udevdir=/lib/udev/])
+++AC_SUBST([UDEV_DIR], [$with_udevdir])
+++
+++AC_ARG_WITH([udevrulesdir],
+++    AS_HELP_STRING([--with-udevrulesdir=DIR], [udev rules directory]),
+++    [], [with_udevrulesdir=/lib/udev/rules.d])
+++AC_SUBST([UDEV_RULES_DIR], [$with_udevrulesdir])
+++
++ AC_OUTPUT(Makefile doc/version.xml src/bluetoothd.8 src/bluetooth.service bluez.pc)
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_encrypt_collision.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_encrypt_collision.patch
+new file mode 100644
+index 0000000..1bc390f
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/fix_encrypt_collision.patch
+@@ -0,0 +1,110 @@
++Avoid namepspace collision with encrypt function from libc
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Index: bluez-4.101/test/l2test.c
++===================================================================
++--- bluez-4.101.orig/test/l2test.c
+++++ bluez-4.101/test/l2test.c
++@@ -107,7 +107,7 @@ static char *filename = NULL;
++ static int rfcmode = 0;
++ static int master = 0;
++ static int auth = 0;
++-static int encrypt = 0;
+++static int encryption_request = 0;
++ static int secure = 0;
++ static int socktype = SOCK_SEQPACKET;
++ static int linger = 0;
++@@ -340,7 +340,7 @@ static int do_connect(char *svr)
++ 		opt |= L2CAP_LM_MASTER;
++ 	if (auth)
++ 		opt |= L2CAP_LM_AUTH;
++-	if (encrypt)
+++	if (encryption_request)
++ 		opt |= L2CAP_LM_ENCRYPT;
++ 	if (secure)
++ 		opt |= L2CAP_LM_SECURE;
++@@ -475,7 +475,7 @@ static void do_listen(void (*handler)(in
++ 		opt |= L2CAP_LM_MASTER;
++ 	if (auth)
++ 		opt |= L2CAP_LM_AUTH;
++-	if (encrypt)
+++	if (encryption_request)
++ 		opt |= L2CAP_LM_ENCRYPT;
++ 	if (secure)
++ 		opt |= L2CAP_LM_SECURE;
++@@ -1407,7 +1407,7 @@ int main(int argc, char *argv[])
++ 			break;
++ 
++ 		case 'E':
++-			encrypt = 1;
+++			encryption_request = 1;
++ 			break;
++ 
++ 		case 'S':
++Index: bluez-4.101/test/rctest.c
++===================================================================
++--- bluez-4.101.orig/test/rctest.c
+++++ bluez-4.101/test/rctest.c
++@@ -79,7 +79,7 @@ static char *filename = NULL;
++ 
++ static int master = 0;
++ static int auth = 0;
++-static int encrypt = 0;
+++static int encryption_request = 0;
++ static int secure = 0;
++ static int socktype = SOCK_STREAM;
++ static int linger = 0;
++@@ -200,7 +200,7 @@ static int do_connect(const char *svr)
++ 		opt |= RFCOMM_LM_MASTER;
++ 	if (auth)
++ 		opt |= RFCOMM_LM_AUTH;
++-	if (encrypt)
+++	if (encryption_request)
++ 		opt |= RFCOMM_LM_ENCRYPT;
++ 	if (secure)
++ 		opt |= RFCOMM_LM_SECURE;
++@@ -291,7 +291,7 @@ static void do_listen(void (*handler)(in
++ 		opt |= RFCOMM_LM_MASTER;
++ 	if (auth)
++ 		opt |= RFCOMM_LM_AUTH;
++-	if (encrypt)
+++	if (encryption_request)
++ 		opt |= RFCOMM_LM_ENCRYPT;
++ 	if (secure)
++ 		opt |= RFCOMM_LM_SECURE;
++@@ -701,7 +701,7 @@ int main(int argc, char *argv[])
++ 			break;
++ 
++ 		case 'E':
++-			encrypt = 1;
+++			encryption_request = 1;
++ 			break;
++ 
++ 		case 'S':
++Index: bluez-4.101/src/textfile.h
++===================================================================
++--- bluez-4.101.orig/src/textfile.h
+++++ bluez-4.101/src/textfile.h
++@@ -24,6 +24,8 @@
++ #ifndef __TEXTFILE_H
++ #define __TEXTFILE_H
++ 
+++#include <sys/types.h>
+++
++ int create_dirs(const char *filename, const mode_t mode);
++ int create_file(const char *filename, const mode_t mode);
++ int create_name(char *buf, size_t size, const char *path,
++Index: bluez-4.101/test/attest.c
++===================================================================
++--- bluez-4.101.orig/test/attest.c
+++++ bluez-4.101/test/attest.c
++@@ -34,6 +34,7 @@
++ #include <termios.h>
++ #include <sys/ioctl.h>
++ #include <sys/socket.h>
+++#include <sys/select.h>
++ 
++ #include <bluetooth/bluetooth.h>
++ #include <bluetooth/rfcomm.h>
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-script.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-script.patch
+new file mode 100644
+index 0000000..23f7d99
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/install-test-script.patch
+@@ -0,0 +1,26 @@
++Upstream-Status: Inappropriate
++
++Install the bluez's test scripts
++
++Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com>
++diff -Nurd bluez-4.101.orig/Makefile.tools bluez-4.101/Makefile.tools
++--- bluez-4.101.orig/Makefile.tools	2013-11-19 15:49:07.688838000 +0800
+++++ bluez-4.101/Makefile.tools	2013-11-19 15:50:09.256837848 +0800
++@@ -227,6 +227,17 @@
++ 		test/service-spp.xml test/service-opp.xml test/service-ftp.xml \
++ 		test/simple-player test/test-nap
++ 
+++bluez4_testdir = $(libdir)/bluez4/test/
+++dist_bluez4_test_SCRIPTS = test/sap-client test/hsplay test/hsmicro \
+++		test/monitor-bluetooth test/list-devices \
+++		test/test-discovery test/test-manager test/test-adapter \
+++		test/test-device test/test-service test/test-serial \
+++		test/test-telephony test/test-network test/simple-agent \
+++		test/simple-service test/simple-endpoint test/test-audio \
+++		test/test-input test/test-sap-server test/test-oob \
+++		test/test-attrib test/test-proximity test/test-thermometer \
+++		test/test-serial-proxy test/test-health test/test-health-sink \
+++		test/simple-player test/test-nap
++ if HIDD
++ bin_PROGRAMS += compat/hidd
++ 
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-network-Connect-method-parameters.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-network-Connect-method-parameters.patch
+new file mode 100644
+index 0000000..37f9199
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/network-fix-network-Connect-method-parameters.patch
+@@ -0,0 +1,30 @@
++Upstream-Status: Backport
++Signed-off-by: Peter A. Bigot <pab@pabigot.com>
++
++From 57170b311f1468330f4a9961dc0b3ac45f97bc13 Mon Sep 17 00:00:00 2001
++From: Gustavo Padovan <gustavo.padovan@collabora.co.uk>
++Date: Sat, 30 Jun 2012 00:39:05 -0300
++Subject: [PATCH] network: fix network Connect() method parameters
++
 +---
-+ runtime/glbl.c |   45 ++++++++++++++++++++++++++++++++-------------
-+ 1 file changed, 32 insertions(+), 13 deletions(-)
++ network/connection.c |    4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
 +
-+diff --git a/runtime/glbl.c b/runtime/glbl.c
-+index bcb3795..41d56c2 100644
-+--- a/runtime/glbl.c
-++++ b/runtime/glbl.c
-+@@ -72,6 +72,7 @@ static int option_DisallowWarning = 1;	/* complain if message from disallowed se
-+ static int bDisableDNS = 0; /* don't look up IP addresses of remote messages */
-+ static prop_t *propLocalIPIF = NULL;/* IP address to report for the local host (default is 127.0.0.1) */
-+ static prop_t *propLocalHostName = NULL;/* our hostname as FQDN - read-only after startup */
-++static prop_t *propLocalHostNameToDelete = NULL;/* see GenerateLocalHostName function hdr comment! */
-+ static uchar *LocalHostName = NULL;/* our hostname  - read-only after startup, except HUP */
-+ static uchar *LocalHostNameOverride = NULL;/* user-overridden hostname - read-only after startup */
-+ static uchar *LocalFQDNName = NULL;/* our hostname as FQDN - read-only after startup, except HUP */
-+@@ -380,24 +381,31 @@ GetLocalDomain(void)
-+ /* generate the local hostname property. This must be done after the hostname info
-+  * has been set as well as PreserveFQDN.
-+  * rgerhards, 2009-06-30
-+- * NOTE: This function DELIBERATELY introduces a small memory leak in order to gain
-+- * speed. Each time it is called when a property name already exists, a new one is
-+- * allocated but the previous one is NOT freed. This is so that current readers can
-+- * continue to use the previous name. Otherwise, we would need to use read/write locks
-+- * to protect the update process. As this function is called extremely infrequently and
-+- * the memory leak is very small, this is totally accessible. Think that otherwise we
-+- * would need to place a read look each time the property is read, which is much more
-+- * frequent (once per message for the modules that use this local hostname!).
-++ * NOTE: This function tries to avoid locking by not destructing the previous value
-++ * immediately. This is so that current readers can  continue to use the previous name.
-++ * Otherwise, we would need to use read/write locks to protect the update process.
-++ * In order to do so, we save the previous value and delete it when we are called again
-++ * the next time. Note that this in theory is racy and can lead to a double-free.
-++ * In practice, however, the window of exposure to trigger this is extremely short
-++ * and as this functions is very infrequently being called (on HUP), the trigger
-++ * condition for this bug is so highly unlikely that it never occurs in practice.
-++ * Probably if you HUP rsyslog every few milliseconds, but who does that...
-++ * To further reduce risk potential, we do only update the property when there
-++ * actually is a hostname change, which makes it even less likely.
-+  * rgerhards, 2013-10-28
-+  */
-+ static rsRetVal
-+ GenerateLocalHostNameProperty(void)
-+ {
-++	uchar *pszPrev;
-++	int lenPrev;
-+ 	prop_t *hostnameNew;
-+ 	uchar *pszName;
-+ 	DEFiRet;
++diff --git a/network/connection.c b/network/connection.c
++index 544ec3a..59423a9 100644
++--- a/network/connection.c
+++++ b/network/connection.c
++@@ -554,7 +554,9 @@ static void path_unregister(void *data)
 + 
-+-	CHKiRet(prop.Construct(&hostnameNew));
-++	if(propLocalHostNameToDelete != NULL)
-++		prop.Destruct(&propLocalHostNameToDelete);
-++
-+ 	if(LocalHostNameOverride == NULL) {
-+ 		if(LocalHostName == NULL)
-+ 			pszName = (uchar*) "[localhost]";
-+@@ -411,11 +419,20 @@ GenerateLocalHostNameProperty(void)
-+ 		pszName = LocalHostNameOverride;
-+ 	}
-+ 	DBGPRINTF("GenerateLocalHostName uses '%s'\n", pszName);
-+-	CHKiRet(prop.SetString(hostnameNew, pszName, ustrlen(pszName)));
-+-	CHKiRet(prop.ConstructFinalize(hostnameNew));
-+ 
-+-	propLocalHostName = hostnameNew;
-+-	/* inititional MEM LEAK for old value -- see function hdr comment! */
-++	if(propLocalHostName == NULL)
-++		pszPrev = (uchar*)""; /* make sure strcmp() below does not match */
-++	else
-++		prop.GetString(propLocalHostName, &pszPrev, &lenPrev);
-++
-++	if(ustrcmp(pszPrev, pszName)) {
-++		/* we need to update */
-++		CHKiRet(prop.Construct(&hostnameNew));
-++		CHKiRet(prop.SetString(hostnameNew, pszName, ustrlen(pszName)));
-++		CHKiRet(prop.ConstructFinalize(hostnameNew));
-++		propLocalHostNameToDelete = propLocalHostName;
-++		propLocalHostName = hostnameNew;
-++	}
-+ 
-+ finalize_it:
-+ 	RETiRet;
-+@@ -678,6 +695,8 @@ BEGINObjClassExit(glbl, OBJ_IS_CORE_MODULE) /* class, version */
-+ 	free(LocalHostNameOverride);
-+ 	free(LocalFQDNName);
-+ 	objRelease(prop, CORE_COMPONENT);
-++	if(propLocalHostNameToDelete != NULL)
-++		prop.Destruct(&propLocalHostNameToDelete);
-+ 	DESTROY_ATOMIC_HELPER_MUT(mutTerminateInputs);
-+ ENDObjClassExit(glbl)
-+ 
++ static const GDBusMethodTable connection_methods[] = {
++ 	{ GDBUS_ASYNC_METHOD("Connect",
++-			NULL, NULL, connection_connect) },
+++				GDBUS_ARGS({"uuid", "s"}),
+++				GDBUS_ARGS({"interface", "s"}),
+++				connection_connect) },
++ 	{ GDBUS_METHOD("Disconnect",
++ 			NULL, NULL, connection_disconnect) },
++ 	{ GDBUS_METHOD("GetProperties",
 +-- 
 +1.7.9.5
 +
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-index 5ab6a30..e1dee59 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.4.4.bb
-@@ -26,6 +26,8 @@ SRC_URI = "http://www.rsyslog.com/files/download/rsyslog/${BPN}-${PV}.tar.gz \
-            file://rsyslog-fix-ptest-not-finish.patch \
-            file://rsyslog-use-serial-tests-config-needed-by-ptest.patch \
-            file://json-0.12-fix.patch \
-+           file://0001-bugfix-potential-abort-during-HUP.patch \
-+           file://0001-remove-memleak-introduced-by-GenerateLocalHostName-H.patch \
- "
- 
- SRC_URI[md5sum] = "ebcc010a6205c28eb505c0fe862f32c6"
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_automake_macros.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_automake_macros.patch
+new file mode 100644
+index 0000000..1068f24
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/obsolete_automake_macros.patch
+@@ -0,0 +1,14 @@
++Upstream-Status: Backport
++
++Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
++diff -Nurd bluez-4.101/configure.ac bluez-4.101/configure.ac
++--- bluez-4.101/configure.ac	2012-06-22 19:36:49.000000000 +0300
+++++ bluez-4.101/configure.ac	2013-01-07 06:13:18.385888966 +0200
++@@ -2,7 +2,7 @@
++ AC_INIT(bluez, 4.101)
++
++ AM_INIT_AUTOMAKE([foreign subdir-objects color-tests])
++-AM_CONFIG_HEADER(config.h)
+++AC_CONFIG_HEADERS(config.h)
++
++ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
+new file mode 100644
+index 0000000..98fab45
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/sbc_mmx.patch
+@@ -0,0 +1,24 @@
++on x86 and x86_64 gcc 4.7 complains
++
++sbc/sbc_primitives_mmx.c: In function 'sbc_calc_scalefactors_mmx':
++sbc/sbc_primitives_mmx.c:294:4: warning: asm operand 2 probably doesn't match constraints [enabled by default]
++sbc/sbc_primitives_mmx.c:294:4: error: impossible constraint in 'asm'
++
++This patch is taken from https://bugs.launchpad.net/ubuntu/+source/bluez/+bug/911871
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Upstream-Status: Pending
++Index: bluez-4.98/sbc/sbc_primitives_mmx.c
++===================================================================
++--- bluez-4.98.orig/sbc/sbc_primitives_mmx.c	2011-12-21 14:53:54.000000000 -0800
+++++ bluez-4.98/sbc/sbc_primitives_mmx.c	2012-02-24 10:07:03.422073800 -0800
++@@ -318,7 +318,7 @@
++ 				"movl          %k0, 4(%3)\n"
++ 			: "+r" (blk)
++ 			: "r" (&sb_sample_f[0][ch][sb]),
++-				"i" ((char *) &sb_sample_f[1][0][0] -
+++				"r" ((char *) &sb_sample_f[1][0][0] -
++ 					(char *) &sb_sample_f[0][0][0]),
++ 				"r" (&scale_factor[ch][sb]),
++ 				"r" (&consts),
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pygobject-instead-ofgobject-introspection.patch b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pygobject-instead-ofgobject-introspection.patch
+new file mode 100644
+index 0000000..37037f5
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4-4.101/use-legacy-pygobject-instead-ofgobject-introspection.patch
+@@ -0,0 +1,27 @@
++Upstream-Status: Inappropriate
++
++use legacy pygobject instead of gobject-introspection
++
++Signed-off-by: Zhong Hongbo <hongbo.zhong@windriver.com>
++---
++diff -Nurd bluez-4.101.orig/test/simple-agent bluez-4.101/test/simple-agent
++--- bluez-4.101.orig/test/simple-agent	2013-11-13 17:14:08.138118159 +0800
+++++ bluez-4.101/test/simple-agent	2013-11-13 17:14:29.034118107 +0800
++@@ -2,7 +2,7 @@
++ 
++ from __future__ import absolute_import, print_function, unicode_literals
++ 
++-from gi.repository import GObject
+++import gobject
++ 
++ import sys
++ import dbus
++@@ -122,7 +122,7 @@
++ 	path = "/test/agent"
++ 	agent = Agent(bus, path)
++ 
++-	mainloop = GObject.MainLoop()
+++	mainloop = gobject.MainLoop()
++ 
++ 	if len(args) > 1:
++ 		if len(args) > 2:
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4.inc b/meta-oe/recipes-connectivity/bluez/bluez4.inc
+new file mode 100644
+index 0000000..59c35e4
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4.inc
+@@ -0,0 +1,51 @@
++SUMMARY = "Linux Bluetooth Stack Userland V4"
++DESCRIPTION = "Linux Bluetooth stack V4 userland components.  These include a system configurations, daemons, tools and system libraries."
++HOMEPAGE = "http://www.bluez.org"
++SECTION = "libs"
++LICENSE = "GPLv2+ & LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e \
++                    file://COPYING.LIB;md5=fb504b67c50331fc78734fed90fb0e09 \
++                    file://src/main.c;beginline=1;endline=24;md5=9bc54b93cd7e17bf03f52513f39f926e \
++                    file://sbc/sbc.c;beginline=1;endline=25;md5=1a40781ed30d50d8639323a184aeb191"
++
++RPROVIDES_${PN} += "${PN}-systemd"
++RREPLACES_${PN} += "${PN}-systemd"
++RCONFLICTS_${PN} += "${PN}-systemd"
++
++DEPENDS = "udev libusb dbus-glib glib-2.0 libcheck readline libsndfile1"
++RDEPENDS_${PN}-dev = "bluez-hcidump"
++
++PACKAGECONFIG ??= "\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)}\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'pie', 'pie', '', d)}\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd','systemd', '', d)} \
++"
++PACKAGECONFIG[alsa] = "--enable-alsa,--disable-alsa,alsa-lib"
++PACKAGECONFIG[pie] = "--enable-pie,--disable-pie,"
++PACKAGECONFIG[systemd] = "--with-systemdunitdir=${systemd_unitdir}/system/,--with-systemdunitdir="
++
++ASNEEDED = ""
++
++SRC_URI = "${KERNELORG_MIRROR}/linux/bluetooth/bluez-${PV}.tar.gz"
++S = "${WORKDIR}/bluez-${PV}"
++
++inherit autotools-brokensep pkgconfig systemd
++
++EXTRA_OECONF = "\
++    --disable-gstreamer \
++    --enable-usb \
++    --enable-tools \
++    --enable-bccmd \
++    --enable-hid2hci \
++    --enable-dfutool \
++    --disable-hidd \
++    --disable-pand \
++    --disable-dund \
++    --disable-cups \
++    --enable-test \
++    --enable-datafiles \
++    --with-udevdir=`pkg-config --variable=udevdir udev` \
++    --with-udevrulesdir=`pkg-config --variable=udevdir udev`/rules.d \
++"
++
++EXCLUDE_FROM_WORLD = "1"
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb b/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
+new file mode 100644
+index 0000000..96ce0f6
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
+@@ -0,0 +1,50 @@
++require bluez4.inc
++
++PR = "r11"
++
++SRC_URI += "file://bluetooth.conf \
++            file://sbc_mmx.patch \
++            file://fix-udev-paths.patch \
++            file://obsolete_automake_macros.patch \
++            file://network-fix-network-Connect-method-parameters.patch \
++            file://install-test-script.patch \
++            file://use-legacy-pygobject-instead-ofgobject-introspection.patch \
++            file://fix_encrypt_collision.patch \
++"
++
++SRC_URI[md5sum] = "fb42cb7038c380eb0e2fa208987c96ad"
++SRC_URI[sha256sum] = "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4ad75fe52846f7487"
++
++RCONFLICTS_${PN} = "bluez5"
++
++do_install_append() {
++    install -m 0644 ${S}/audio/audio.conf ${D}/${sysconfdir}/bluetooth/
++    install -m 0644 ${S}/network/network.conf ${D}/${sysconfdir}/bluetooth/
++    install -m 0644 ${S}/input/input.conf ${D}/${sysconfdir}/bluetooth/
++    # at_console doesn't really work with the current state of OE, so punch some more holes so people can actually use BT
++    install -m 0644 ${WORKDIR}/bluetooth.conf ${D}/${sysconfdir}/dbus-1/system.d/
++}
++
++RDEPENDS_${PN}-dev = "bluez-hcidump"
++RDEPENDS_${PN}-testtools += "python python-dbus python-pygobject"
++
++ALLOW_EMPTY_libasound-module-bluez = "1"
++PACKAGES =+ "libasound-module-bluez ${PN}-testtools"
++
++FILES_libasound-module-bluez = "${libdir}/alsa-lib/lib*.so ${datadir}/alsa"
++FILES_${PN} += "${libdir}/bluetooth/plugins ${libdir}/bluetooth/plugins/*.so ${base_libdir}/udev/ ${nonarch_base_libdir}/udev/ ${systemd_unitdir}/ ${datadir}/dbus-1"
++FILES_${PN}-dev += "\
++    ${libdir}/bluetooth/plugins/*.la \
++    ${libdir}/alsa-lib/*.la \
++"
++
++FILES_${PN}-testtools = "${libdir}/bluez4/test/*"
++
++FILES_${PN}-dbg += "\
++    ${libdir}/bluetooth/plugins/.debug \
++    ${libdir}/*/.debug \
++    */udev/.debug \
++"
++
++SYSTEMD_SERVICE_${PN} = "bluetooth.service"
++SYSTEMD_AUTO_ENABLE = "disable"
+\ No newline at end of file
+diff --git a/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
+new file mode 100644
+index 0000000..6a16520
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
+@@ -0,0 +1,39 @@
++require bluez4.inc
++require recipes-multimedia/gstreamer/gst-plugins-package.inc
++
++PR = "r1"
++
++SRC_URI[md5sum] = "fb42cb7038c380eb0e2fa208987c96ad"
++SRC_URI[sha256sum] = "59738410ade9f0e61a13c0f77d9aaffaafe49ba9418107e4ad75fe52846f7487"
++
++DEPENDS = "bluez4 gst-plugins-base"
++
++EXTRA_OECONF = "\
++    --enable-gstreamer \
++"
++
++# clean unwanted files
++do_install_append() {
++    rm -rf ${D}${bindir}
++    rm -rf ${D}${sbindir}
++    rm -f  ${D}${libdir}/lib*
++    rm -rf ${D}${libdir}/pkgconfig
++    rm -rf ${D}${sysconfdir}
++    rm -rf ${D}${base_libdir}
++    rm -rf ${D}${libdir}/bluetooth
++    rm -rf ${D}${localstatedir}
++    rm -rf ${D}${libdir}/alsa-lib
++    rm -rf ${D}${datadir}
++    rm -rf ${D}${includedir}
++    rm -rf ${D}${nonarch_base_libdir}
++}
++
++FILES_${PN} = "${libdir}/gstreamer-0.10/lib*.so"
++FILES_${PN}-dev += "\
++    ${libdir}/gstreamer-0.10/*.la \
++"
++
++FILES_${PN}-dbg += "\
++    ${libdir}/*/.debug \
++"
++
+diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
+deleted file mode 100644
+index da01b05..0000000
+--- a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
++++ /dev/null
+@@ -1,9 +0,0 @@
+-inherit systemd
+-
+-EXTRA_OECONF += "--with-systemdunitdir=${systemd_unitdir}/system/"
+-
+-RPROVIDES_${PN} += "${PN}-systemd"
+-RREPLACES_${PN} += "${PN}-systemd"
+-RCONFLICTS_${PN} += "${PN}-systemd"
+-SYSTEMD_SERVICE_${PN} = "bluetooth.service"
+-SYSTEMD_AUTO_ENABLE = "disable"
 -- 
-1.7.9.5
+2.1.0
 
 
