@@ -1,33 +1,34 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 9060572491
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 14F2772491
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 20:25:06 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t3SKP6BY024293 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 21:25:06 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id EFsWzYWH2rj5
+	Tue, 28 Apr 2015 22:03:31 +0000 (UTC)
+Received: by wgin8 with SMTP id n8so9243387wgi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 21:25:06 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t3SKOqsZ024279
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 21:25:03 +0100
-Message-ID: <1430252692.13022.246.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
+	Tue, 28 Apr 2015 15:03:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=Uy/8VeRD5Is/8ApGqNks9rHe0E87uxQhYXIZTxDLXyI=;
+	b=WlmVCH/FklpNVeEe7qP7EDqkfGoFhQp5iUM0cZCUUqOv9SGiLRGyDLHhkshPIX12h3
+	4P9AE/pT6xbZk8ZUGBTmdlwyzGChIdXh5IQaDYqW3jxqLLBrweOy3Hs0NI4SCr5P6Y4n
+	hpVALItHrDmkxWIBTeP4TuDAq44+hA33Al5wCXBhJX8M3z6oyQO65kkItXKTATzNc12P
+	tZoItZWFgpD0yUDOatmrGRKfDkq01JqrZ5OxPP/edkQmOa+yUa4sDMCsMTvFUxFwbRVt
+	f9IN66an5fWS54whj2cIKOktcqy8DPzDr1Al7Vn1XpOCa5nWn3frbNWkpQtmuSrPjmzu
+	gtzg==
+X-Received: by 10.194.157.40 with SMTP id wj8mr33478272wjb.25.1430258612427;
+	Tue, 28 Apr 2015 15:03:32 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id
+	fa8sm18322376wib.14.2015.04.28.15.03.31
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 28 Apr 2015 15:03:31 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Apr 2015 21:24:52 +0100
-In-Reply-To: <1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
-References: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
-	<1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
-X-Mailer: Evolution 3.12.10-0ubuntu1~14.10.1 
-Mime-Version: 1.0
-Subject: Re: [oe-classic][PATCH 1/1] README: update for current status of OE-Classic
+Date: Wed, 29 Apr 2015 00:03:24 +0200
+Message-Id: <1430258606-26895-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-qt5][PATCH 1/3] qtconnectivity: improve PACKAGECONFIG handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,87 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 20:25:12 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Apr 2015 22:03:35 -0000
 
-On Thu, 2015-04-23 at 15:59 +0100, Paul Eggleton wrote:
-> OE-Classic is no longer maintained, so update README and MAINTAINERS
-> accordingly, and just in case someone might miss reading those, add a
-> file clearly spelling it out.
-> 
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtconnectivity.inc | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-
-> ---
->  MAINTAINERS               | 16 +++-------------
->  README                    | 19 +++++++++++++++++--
->  THIS_REPO_IS_OBSOLETE.txt |  1 +
->  3 files changed, 21 insertions(+), 15 deletions(-)
->  create mode 100644 THIS_REPO_IS_OBSOLETE.txt
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 2f12832..e88d14b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1,18 +1,8 @@
->  OpenEmbedded Maintainers List
->  
-> -Please put you full name and email-address here for the areas of OE you want to support.
-> -
-> -Note: For the hard of thinking, this list is meant to remain in alphabetical
-> -order. If you could add yourselves to it in alphabetical order that would be
-> -so much easier (sort by firstname). Thank you!
-> -
-> -Person:     Real name
-> -Mail:       Mail patches to
-> -Website:    Web-page
-> -Interests:  Areas of interest (e.g. subsystems)
-> -Distros:    Maintained distros
-> -Machines:   Maintained machines
-> -Recipes:    Maintained recipes (should match package names, can include wildcards)
-> +WARNING: this repository has been superseded and is no longer maintained -
-> +please see README for details. The maintainers list below remains for
-> +historical purposes only.
->  
->  -----------------------------------------------------------------------------
->  
-> diff --git a/README b/README
-> index 1264ca6..778efd9 100644
-> --- a/README
-> +++ b/README
-> @@ -1,3 +1,18 @@
-> -This is the OpenEmbedded packages metadata repository.
-> +This is the OpenEmbedded Classic (OE-Classic) metadata repository.
-> +
-> +WARNING: This version of OpenEmbedded is no longer supported or actively
-> +developed - it has been replaced by a new model based upon
-> +OpenEmbedded-Core (OE-Core). Users are strongly encouraged to migrate
-> +to OE-Core as there will be no further updates to OE-Classic as part of
-> +the OpenEmbedded project.
-> +
-> +The OE-Core repository is available at:
-> +
-> +  http://cgit.openembedded.org/openembedded-core/
-> +  git://git.openembedded.org/openembedded-core
-> +
-> +For further details on the differences between OE-Classic and OE-Core,
-> +please see:
-> +
-> +  http://openembedded.org/wiki/OpenEmbedded-Core
->  
-> -See http://openembedded.org
-> diff --git a/THIS_REPO_IS_OBSOLETE.txt b/THIS_REPO_IS_OBSOLETE.txt
-> new file mode 100644
-> index 0000000..a283c1b
-> --- /dev/null
-> +++ b/THIS_REPO_IS_OBSOLETE.txt
-> @@ -0,0 +1 @@
-> +Superseded by openembedded-core - please see the README file for details.
-> -- 
-> 2.1.0
-> 
-
+diff --git a/recipes-qt/qt5/qtconnectivity.inc b/recipes-qt/qt5/qtconnectivity.inc
+index 10dcc22..ab8d31e 100644
+--- a/recipes-qt/qt5/qtconnectivity.inc
++++ b/recipes-qt/qt5/qtconnectivity.inc
+@@ -3,14 +3,13 @@ require qt5.inc
+ DEPENDS += "qtbase qtdeclarative"
+ 
+ PACKAGECONFIG ??= ""
+-PACKAGECONFIG[bluez4] = ",,bluez4"
++PACKAGECONFIG[bluez4] = "OE_BLUEZ_ENABLED,,bluez4"
+ 
+ do_configure_prepend() {
++    export QMAKE_CACHE_EVAL="CONFIG+=${EXTRA_OECONF}"
+     # disable bluez test if it isn't enabled by PACKAGECONFIG
+     sed -i 's/^qtCompileTest(bluez)/OE_BLUEZ_ENABLED:qtCompileTest(bluez)/g' ${S}/qtconnectivity.pro
+ }
+ 
+-EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'bluez4', 'CONFIG+=OE_BLUEZ_ENABLED', '', d)}"
+-
+ LICENSE += "| GPL-2.0"
+ LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
+-- 
+2.3.5
 
 
