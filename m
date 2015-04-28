@@ -1,36 +1,33 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qc0-f177.google.com (mail-qc0-f177.google.com
-	[209.85.216.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E62EE72491
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 9060572491
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 19:55:18 +0000 (UTC)
-Received: by qcrf4 with SMTP id f4so3178613qcr.0
+	Tue, 28 Apr 2015 20:25:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t3SKP6BY024293 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Apr 2015 21:25:06 +0100
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id EFsWzYWH2rj5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 12:55:19 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=FktqHUENdK0GU4ofGedF2vOZCksbVHNCFMJrZnDc5Ic=;
-	b=JIbVoUqPNWrBYP3wKKw2EQ1BZ8KAdCgsjbgYzYpKPuTIMSq40Y5eIYQPJ+lkXGc4+5
-	mkTKbkig2wNVMkx6UnFukMosQ0t6cPn1g7UcxpgzZAAivulB4TaIjaHONttVARcv4zih
-	Uq5m9MgkyaB1KJpb5EHKRU5IJenJ7gwg7HD75PIo/PwGUH7RbTJ+IVA1Hn3A2NeVZR8M
-	1wHhz89U6IDWy7cCrK5MUg1iS8hXx+894oK1MH6j/jakWlh3oxzIecR/6sfffK0PjAAf
-	nz384cmU5PcseiH3QQJ12SPq7wCjbqSnlmHMCxiyywHnen5KiKWOS3eE3mEI9WFcNu4f
-	18ZA==
-X-Gm-Message-State: ALoCoQluov7lWlKhDZVqzKW3PaXl1Dx7qX3SnM2gvJpTF9F2atCMObvWNfwcRZHe6KG2Ts4N4QhL
-X-Received: by 10.55.23.16 with SMTP id i16mr22534890qkh.14.1430250919459;
-	Tue, 28 Apr 2015 12:55:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.102.231 with HTTP; Tue, 28 Apr 2015 12:54:58 -0700 (PDT)
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 28 Apr 2015 20:54:58 +0100
-Message-ID: <CAJTo0LbHVrLM=Wt++3ue-VQ3KFB42tGaJUwFRW_UHfBDXuqc_w@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Moving GStreamer 0.10 to meta-multimedia
+	Tue, 28 Apr 2015 21:25:06 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t3SKOqsZ024279
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Apr 2015 21:25:03 +0100
+Message-ID: <1430252692.13022.246.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Apr 2015 21:24:52 +0100
+In-Reply-To: <1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+References: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
+	<1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+X-Mailer: Evolution 3.12.10-0ubuntu1~14.10.1 
+Mime-Version: 1.0
+Subject: Re: [oe-classic][PATCH 1/1] README: update for current status of OE-Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,30 +41,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 19:55:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 28 Apr 2015 20:25:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+On Thu, 2015-04-23 at 15:59 +0100, Paul Eggleton wrote:
+> OE-Classic is no longer maintained, so update README and MAINTAINERS
+> accordingly, and just in case someone might miss reading those, add a
+> file clearly spelling it out.
+> 
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
-This is basically a heads-up that we're working on moving GStreamer 0.10
-out of oe-core[1] and into meta-multimedia, where anyone who still needs
-0.10 can use and maintain them.
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-In case anyone out there using GStreamer 0.10 isn't aware, it's been
-unmaintained since March 2013[2] and upstream there really mean that:
+> ---
+>  MAINTAINERS               | 16 +++-------------
+>  README                    | 19 +++++++++++++++++--
+>  THIS_REPO_IS_OBSOLETE.txt |  1 +
+>  3 files changed, 21 insertions(+), 15 deletions(-)
+>  create mode 100644 THIS_REPO_IS_OBSOLETE.txt
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 2f12832..e88d14b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1,18 +1,8 @@
+>  OpenEmbedded Maintainers List
+>  
+> -Please put you full name and email-address here for the areas of OE you want to support.
+> -
+> -Note: For the hard of thinking, this list is meant to remain in alphabetical
+> -order. If you could add yourselves to it in alphabetical order that would be
+> -so much easier (sort by firstname). Thank you!
+> -
+> -Person:     Real name
+> -Mail:       Mail patches to
+> -Website:    Web-page
+> -Interests:  Areas of interest (e.g. subsystems)
+> -Distros:    Maintained distros
+> -Machines:   Maintained machines
+> -Recipes:    Maintained recipes (should match package names, can include wildcards)
+> +WARNING: this repository has been superseded and is no longer maintained -
+> +please see README for details. The maintainers list below remains for
+> +historical purposes only.
+>  
+>  -----------------------------------------------------------------------------
+>  
+> diff --git a/README b/README
+> index 1264ca6..778efd9 100644
+> --- a/README
+> +++ b/README
+> @@ -1,3 +1,18 @@
+> -This is the OpenEmbedded packages metadata repository.
+> +This is the OpenEmbedded Classic (OE-Classic) metadata repository.
+> +
+> +WARNING: This version of OpenEmbedded is no longer supported or actively
+> +developed - it has been replaced by a new model based upon
+> +OpenEmbedded-Core (OE-Core). Users are strongly encouraged to migrate
+> +to OE-Core as there will be no further updates to OE-Classic as part of
+> +the OpenEmbedded project.
+> +
+> +The OE-Core repository is available at:
+> +
+> +  http://cgit.openembedded.org/openembedded-core/
+> +  git://git.openembedded.org/openembedded-core
+> +
+> +For further details on the differences between OE-Classic and OE-Core,
+> +please see:
+> +
+> +  http://openembedded.org/wiki/OpenEmbedded-Core
+>  
+> -See http://openembedded.org
+> diff --git a/THIS_REPO_IS_OBSOLETE.txt b/THIS_REPO_IS_OBSOLETE.txt
+> new file mode 100644
+> index 0000000..a283c1b
+> --- /dev/null
+> +++ b/THIS_REPO_IS_OBSOLETE.txt
+> @@ -0,0 +1 @@
+> +Superseded by openembedded-core - please see the README file for details.
+> -- 
+> 2.1.0
+> 
 
-Last gstreamer commit on 0.10 branch: September 2013
-gst-plugins-base: May 2013
-gst-plugins-good: August 2013
-gst-plugins-bad: August 2013
-gst-plugins-ugly: July 2013
 
-If your BSP vendor only ships GStreamer 0.10 plugins now is the time to
-harass them about upgrading.
-
-Ross
-
-[1] https://bugzilla.yoctoproject.org/show_bug.cgi?id=6294
-[2]
-http://lists.freedesktop.org/archives/gstreamer-announce/2013-March/000273.html
 
