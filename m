@@ -1,24 +1,26 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FE217169F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 09:25:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t3T9P3lV017429
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 02:25:03 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Wed, 29 Apr 2015 02:25:03 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 29 Apr 2015 17:25:02 +0800
-Message-ID: <1430299502-26023-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 31587716CE;
+	Wed, 29 Apr 2015 09:38:18 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga103.fm.intel.com with ESMTP; 29 Apr 2015 02:38:21 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,670,1422950400"; d="scan'208";a="702600154"
+Received: from pkcletus-mobl1.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.20.230])
+	by fmsmga001.fm.intel.com with ESMTP; 29 Apr 2015 02:38:19 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Jan-Simon =?ISO-8859-1?Q?M=F6ller?= <dl9pf@gmx.de>
+Date: Wed, 29 Apr 2015 10:38:18 +0100
+Message-ID: <5242032.yZR8PR0vAI@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.6 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.6; x86_64; ; )
+In-Reply-To: <3303347.WRWmiSbDbc@samweis.auenland.lan>
+References: <3303347.WRWmiSbDbc@samweis.auenland.lan>
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] samba: upgrade to 3.6.25
+Cc: bitbake-devel@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: Bug in cooker - networked PR_SERV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,183 +34,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2015 09:25:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 29 Apr 2015 09:38:19 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-From: Roy Li <rongqing.li@windriver.com>
+Hi Jan-Simon,
 
-upgrade to fix a CVE defect: CVE-2015-0240
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-0240
+On Thursday 26 March 2015 19:48:52 Jan-Simon M=F6ller wrote:
+> I found a bug in cooker that shows up when I try to enable the networ=
+ked
+> PRSERV. bitbake will crash (and still run at 100% after CTRL-C) until=
+ kill
+> -9.
+>=20
+> I tracked it down to bitbake/lib/bb/cooker.py line 169:
+>         if self.state !=3D state.initial:
+>             raise Exception("Illegal state for feature set change")
+>=20
+> self.state seems to be 6 at this stage and state.initial is 0 .
+>=20
+> Hack: If I comment out this check, it seems to continue, but I see no=
+ size-
+> increase in the prserv sqlite and also nothing printed for loglevel=3D=
+DEBUG in
+> the log.
+>=20
+>=20
+> Here are the details:
+>=20
+> My setup is:
+> Build Configuration:
+> BB_VERSION        =3D "1.24.0"
+> BUILD_SYS         =3D "x86_64-linux"
+> NATIVELSBSTRING   =3D "openSUSE-project-13.2"
+> TARGET_SYS        =3D "i586-poky-linux"
+> MACHINE           =3D "qemux86"
+> DISTRO            =3D "poky"
+> DISTRO_VERSION    =3D "1.7.1"
+> TUNE_FEATURES     =3D "m32 i586"
+> TARGET_FPU        =3D ""
+> meta
+> meta-yocto
+> meta-yocto-bsp    =3D "<unknown>:<unknown>"
+>=20
+> ####### Only changes to conf/local.conf:
+> PRSERV_HOST=3D"127.0.0.1:5555"
+> (an a prserv started in a separate terminal)
+>=20
+> ####### Crash
+>=20
+> x86> bitbake core-image-minimal
+> Traceback (most recent call last):
+>   File "/home/dl9pf/test1/script/4.1/poky-dizzy-12.0.1/bitbake/bin/bi=
+tbake",
+> line 382, in <module>
+>     ret =3D main()
+>   File "/home/dl9pf/test1/script/4.1/poky-dizzy-12.0.1/bitbake/bin/bi=
+tbake",
+> line 347, in main
+>     server_connection =3D server.establishConnection(featureset)
+>   File "/home/dl9pf/test1/script/4.1/poky-
+> dizzy-12.0.1/bitbake/lib/bb/server/process.py", line 247, in
+> establishConnection
+>     raise BaseException(error)
+> BaseException: Traceback (most recent call last):
+>   File "/home/dl9pf/test1/script/4.1/poky-
+> dizzy-12.0.1/bitbake/lib/bb/command.py", line 71, in runCommand
+>     result =3D command_method(self, commandline)
+>   File "/home/dl9pf/test1/script/4.1/poky-
+> dizzy-12.0.1/bitbake/lib/bb/command.py", line 268, in setFeatures
+>     command.cooker.setFeatures(features)
+>   File "/home/dl9pf/test1/script/4.1/poky-
+> dizzy-12.0.1/bitbake/lib/bb/cooker.py", line 169, in setFeatures
+>     raise Exception("Illegal state for feature set change")
+> Exception: Illegal state for feature set change
+>=20
+> ERROR: Unable to set the cooker to the correct featureset: Traceback =
+(most
+> recent call last):
+>   File "/home/dl9pf/test1/script/4.1/poky-
+> dizzy-12.0.1/bitbake/lib/bb/command.py", line 71, in runCommand
+>     result =3D command_method(self, commandline)
+>   File "/home/dl9pf/test1/script/4.1/poky-
+> dizzy-12.0.1/bitbake/lib/bb/command.py", line 268, in setFeatures
+>     command.cooker.setFeatures(features)
+>   File "/home/dl9pf/test1/script/4.1/poky-
+> dizzy-12.0.1/bitbake/lib/bb/cooker.py", line 169, in setFeatures
+>     raise Exception("Illegal state for feature set change")
+> Exception: Illegal state for feature set change
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../bug_221618_precise-64bit-prototype.patch                          | 0
- ...ug_387266_upstream_4104_mention-kerberos-in-smbspool-manpage.patch | 0
- .../bug_598313_upstream_7499-nss_wins-dont-clobber-daemons-logs.patch | 0
- .../bug_601406_fix-perl-path-in-example.patch                         | 0
- .../bug_604768_upstream_7826_drop-using-samba-link.patch              | 0
- .../bug_604768_upstream_7826_fix-WHATSNEW-link.patch                  | 0
- .../configure-disable-core_pattern-cross-check.patch                  | 0
- .../configure-disable-getaddrinfo-cross.patch                         | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/configure-libunwind.patch    | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/documentation.patch          | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/documentation2.patch         | 0
- .../{samba-3.6.24 => samba-3.6.25}/dont-build-VFS-examples.patch      | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/fhs-filespaths.patch         | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/installswat.sh.patch         | 0
- .../{samba-3.6.24 => samba-3.6.25}/libutil_drop_AI_ADDRCONFIG.patch   | 0
- .../{samba-3.6.24 => samba-3.6.25}/only_export_public_symbols.patch   | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/pam-examples.patch           | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/shadow_copy2_backport.patch  | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/smbclient-pager.patch        | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/smbtar-bashism.patch         | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/smbtorture-manpage.patch     | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/undefined-symbols.patch      | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/usershare.patch              | 0
- .../samba/{samba-3.6.24 => samba-3.6.25}/waf-as-source.patch          | 0
- .../recipes-connectivity/samba/{samba_3.6.24.bb => samba_3.6.25.bb}   | 4 ++--
- 25 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/bug_221618_precise-64bit-prototype.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/bug_387266_upstream_4104_mention-kerberos-in-smbspool-manpage.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/bug_598313_upstream_7499-nss_wins-dont-clobber-daemons-logs.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/bug_601406_fix-perl-path-in-example.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/bug_604768_upstream_7826_drop-using-samba-link.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/bug_604768_upstream_7826_fix-WHATSNEW-link.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/configure-disable-core_pattern-cross-check.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/configure-disable-getaddrinfo-cross.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/configure-libunwind.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/documentation.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/documentation2.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/dont-build-VFS-examples.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/fhs-filespaths.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/installswat.sh.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/libutil_drop_AI_ADDRCONFIG.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/only_export_public_symbols.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/pam-examples.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/shadow_copy2_backport.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/smbclient-pager.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/smbtar-bashism.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/smbtorture-manpage.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/undefined-symbols.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/usershare.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba-3.6.24 => samba-3.6.25}/waf-as-source.patch (100%)
- rename meta-oe/recipes-connectivity/samba/{samba_3.6.24.bb => samba_3.6.25.bb} (94%)
+Sorry it's taken a while to get back to you. Are you still seeing this=20=
 
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_221618_precise-64bit-prototype.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_221618_precise-64bit-prototype.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_221618_precise-64bit-prototype.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_221618_precise-64bit-prototype.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_387266_upstream_4104_mention-kerberos-in-smbspool-manpage.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_387266_upstream_4104_mention-kerberos-in-smbspool-manpage.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_387266_upstream_4104_mention-kerberos-in-smbspool-manpage.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_387266_upstream_4104_mention-kerberos-in-smbspool-manpage.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_598313_upstream_7499-nss_wins-dont-clobber-daemons-logs.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_598313_upstream_7499-nss_wins-dont-clobber-daemons-logs.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_598313_upstream_7499-nss_wins-dont-clobber-daemons-logs.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_598313_upstream_7499-nss_wins-dont-clobber-daemons-logs.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_601406_fix-perl-path-in-example.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_601406_fix-perl-path-in-example.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_601406_fix-perl-path-in-example.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_601406_fix-perl-path-in-example.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_604768_upstream_7826_drop-using-samba-link.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_604768_upstream_7826_drop-using-samba-link.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_604768_upstream_7826_drop-using-samba-link.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_604768_upstream_7826_drop-using-samba-link.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_604768_upstream_7826_fix-WHATSNEW-link.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_604768_upstream_7826_fix-WHATSNEW-link.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/bug_604768_upstream_7826_fix-WHATSNEW-link.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/bug_604768_upstream_7826_fix-WHATSNEW-link.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-disable-core_pattern-cross-check.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/configure-disable-core_pattern-cross-check.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-disable-core_pattern-cross-check.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/configure-disable-core_pattern-cross-check.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-disable-getaddrinfo-cross.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/configure-disable-getaddrinfo-cross.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-disable-getaddrinfo-cross.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/configure-disable-getaddrinfo-cross.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-libunwind.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/configure-libunwind.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/configure-libunwind.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/configure-libunwind.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/documentation.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/documentation.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/documentation.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/documentation.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/documentation2.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/documentation2.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/documentation2.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/documentation2.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/dont-build-VFS-examples.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/dont-build-VFS-examples.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/dont-build-VFS-examples.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/dont-build-VFS-examples.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/fhs-filespaths.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/fhs-filespaths.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/fhs-filespaths.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/fhs-filespaths.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/installswat.sh.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/installswat.sh.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/installswat.sh.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/installswat.sh.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/libutil_drop_AI_ADDRCONFIG.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/libutil_drop_AI_ADDRCONFIG.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/libutil_drop_AI_ADDRCONFIG.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/libutil_drop_AI_ADDRCONFIG.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/only_export_public_symbols.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/only_export_public_symbols.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/only_export_public_symbols.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/only_export_public_symbols.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/pam-examples.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/pam-examples.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/pam-examples.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/pam-examples.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/shadow_copy2_backport.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/shadow_copy2_backport.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/shadow_copy2_backport.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/shadow_copy2_backport.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/smbclient-pager.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/smbclient-pager.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/smbclient-pager.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/smbclient-pager.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/smbtar-bashism.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/smbtar-bashism.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/smbtar-bashism.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/smbtar-bashism.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/smbtorture-manpage.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/smbtorture-manpage.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/smbtorture-manpage.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/smbtorture-manpage.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/undefined-symbols.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/undefined-symbols.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/undefined-symbols.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/undefined-symbols.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/usershare.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/usershare.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/usershare.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/usershare.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba-3.6.24/waf-as-source.patch b/meta-oe/recipes-connectivity/samba/samba-3.6.25/waf-as-source.patch
-similarity index 100%
-rename from meta-oe/recipes-connectivity/samba/samba-3.6.24/waf-as-source.patch
-rename to meta-oe/recipes-connectivity/samba/samba-3.6.25/waf-as-source.patch
-diff --git a/meta-oe/recipes-connectivity/samba/samba_3.6.24.bb b/meta-oe/recipes-connectivity/samba/samba_3.6.25.bb
-similarity index 94%
-rename from meta-oe/recipes-connectivity/samba/samba_3.6.24.bb
-rename to meta-oe/recipes-connectivity/samba/samba_3.6.25.bb
-index 8860da0..01861fb 100644
---- a/meta-oe/recipes-connectivity/samba/samba_3.6.24.bb
-+++ b/meta-oe/recipes-connectivity/samba/samba_3.6.25.bb
-@@ -29,8 +29,8 @@ SRC_URI += "\
-     file://configure-disable-core_pattern-cross-check.patch;patchdir=.. \
-     file://configure-libunwind.patch;patchdir=.. \
- "
--SRC_URI[md5sum] = "d98425c0c2b73e08f048d31ffc727fb0"
--SRC_URI[sha256sum] = "11d0bd04b734731970259efc6692b8e749ff671a9b56d8cc5fa98c192ab234a7"
-+SRC_URI[md5sum] = "76da2fa64edd94a0188531e7ecb27c4e"
-+SRC_URI[sha256sum] = "8f2c8a7f2bd89b0dfd228ed917815852f7c625b2bc0936304ac3ed63aaf83751"
- 
- S = "${WORKDIR}/samba-${PV}/source3"
- 
--- 
-2.1.0
+problem?
 
+(FYI, this would probably have been better sent to the bitbake or OE-Co=
+re=20
+mailing lists; I've added the bitbake list to CC.)
+
+Cheers,
+Paul
+
+--=20
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
