@@ -1,34 +1,41 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id E726C72A78
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id BF56B72A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 10:40:08 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1YnPPN-0000zj-O0 for openembedded-devel@lists.openembedded.org;
-	Wed, 29 Apr 2015 12:40:01 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 12:40:01 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 29 Apr 2015 14:27:11 +0000 (UTC)
+Received: by wgin8 with SMTP id n8so30352071wgi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 12:40:01 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 29 Apr 2015 07:27:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=nY/2uYqr2SwsnSW0yuDt7N2A6igXTtLRn0LL+DwlIVI=;
+	b=GbDvUHLlpkWbxkL9o/FE9paMLebC0zSeUH52GBgNRSBgiPLk6FYWjC8w7YBn2LsX0c
+	5QVcdfTKrVaq4cOwJzPx2S5DxSKTQzwPT9ttzd/tUIWWPfm5v/UnBCdGtv6nZUI3OlGe
+	4Z6T9iPXGf/Jlp/VfoXi0bD8xjsisVBBMU9PhstptcOkcrfQ2YjRqkJ5jzFIfzzet1Sb
+	ey485rN64nGyV/MK75ybijJN/E3smJd5rGV+6y6U+kX/iFzJZXoZr5o/5oa4EIN+fTTZ
+	EfKV25L9jkuT5drXkK0SfMQf73LaTM7lPzBwaPW5S9VTBwyDkUOt/01WSSIcLGscmtFq
+	hqTA==
+X-Received: by 10.194.235.71 with SMTP id uk7mr43090132wjc.13.1430317631770;
+	Wed, 29 Apr 2015 07:27:11 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id
+	ei4sm21422821wib.22.2015.04.29.07.27.09
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 29 Apr 2015 07:27:10 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 29 Apr 2015 16:27:18 +0200
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Wed, 29 Apr 2015 12:39:50 +0200
-Message-ID: <mhqcdm$gr9$1@ger.gmane.org>
-References: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
-	<1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-In-Reply-To: <1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
-Subject: Re: [oe-classic][PATCH 1/1] README: update for current status of OE-Classic
+Message-ID: <20150429142718.GA2369@jama>
+References: <1620830615.3767281.1430230294080.JavaMail.root@openwide.fr>
+	<1242158112.3767308.1430230347909.JavaMail.root@openwide.fr>
+MIME-Version: 1.0
+In-Reply-To: <1242158112.3767308.1430230347909.JavaMail.root@openwide.fr>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-qt5][PATCH] qmake5_base.bbclass: fix typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,73 +49,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2015 10:40:11 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Apr 2015 14:27:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, Apr 28, 2015 at 04:12:27PM +0200, Alexis Cellier wrote:
+> In the qt.conf file created, fix typo on "TargetSpec" (was "TartgetSpec").
 
-Paul Eggleton schreef op 23-04-15 om 16:59:
-> OE-Classic is no longer maintained, so update README and MAINTAINERS 
-> accordingly, and just in case someone might miss reading those, add a 
-> file clearly spelling it out.
-> 
-> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+How was this tested before sending?
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+In my builds it causes:
+| Cannot read /OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.4.1+g=
+itAUTOINC+f58e882b75-r0/build/mkspecs/linux-oe-g++/qmake.conf: No such file=
+ or directory
+| Could not read qmake configuration file /OE/build/oe-core/tmp-glibc/work/=
+i586-oe-linux/qtbase/5.4.1+gitAUTOINC+f58e882b75-r0/build/mkspecs/linux-oe-=
+g++/qmake.conf.
 
+So I agree it's a typo, but if we cannot make it work, then we should
+remove the line completely.
 
-> --- MAINTAINERS               | 16 +++------------- README
-> | 19 +++++++++++++++++-- THIS_REPO_IS_OBSOLETE.txt |  1 + 3 files
-> changed, 21 insertions(+), 15 deletions(-) create mode 100644
-> THIS_REPO_IS_OBSOLETE.txt
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS index 2f12832..e88d14b 100644 ---
-> a/MAINTAINERS +++ b/MAINTAINERS @@ -1,18 +1,8 @@ OpenEmbedded Maintainers
-> List
-> 
-> -Please put you full name and email-address here for the areas of OE you
-> want to support. - -Note: For the hard of thinking, this list is meant to
-> remain in alphabetical -order. If you could add yourselves to it in
-> alphabetical order that would be -so much easier (sort by firstname).
-> Thank you! - -Person:     Real name -Mail:       Mail patches to 
-> -Website:    Web-page -Interests:  Areas of interest (e.g. subsystems) 
-> -Distros:    Maintained distros -Machines:   Maintained machines 
-> -Recipes:    Maintained recipes (should match package names, can include
-> wildcards) +WARNING: this repository has been superseded and is no longer
-> maintained - +please see README for details. The maintainers list below
-> remains for +historical purposes only.
-> 
-> ----------------------------------------------------------------------------
-- -
->
->  diff --git a/README b/README index 1264ca6..778efd9 100644 --- a/README 
-> +++ b/README @@ -1,3 +1,18 @@ -This is the OpenEmbedded packages metadata
-> repository. +This is the OpenEmbedded Classic (OE-Classic) metadata
-> repository. + +WARNING: This version of OpenEmbedded is no longer
-> supported or actively +developed - it has been replaced by a new model
-> based upon +OpenEmbedded-Core (OE-Core). Users are strongly encouraged to
-> migrate +to OE-Core as there will be no further updates to OE-Classic as
-> part of +the OpenEmbedded project. + +The OE-Core repository is available
-> at: + +  http://cgit.openembedded.org/openembedded-core/ +
-> git://git.openembedded.org/openembedded-core + +For further details on
-> the differences between OE-Classic and OE-Core, +please see: + +
-> http://openembedded.org/wiki/OpenEmbedded-Core
-> 
-> -See http://openembedded.org diff --git a/THIS_REPO_IS_OBSOLETE.txt
-> b/THIS_REPO_IS_OBSOLETE.txt new file mode 100644 index 0000000..a283c1b 
-> --- /dev/null +++ b/THIS_REPO_IS_OBSOLETE.txt @@ -0,0 +1 @@ +Superseded
-> by openembedded-core - please see the README file for details.
-> 
+>=20
+> Signed-off-by: Alexis Cellier <alexis.cellier@openwide.fr>
+> ---
+>  classes/qmake5_base.bbclass | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+> index 44575c4..dbdaf78 100644
+> --- a/classes/qmake5_base.bbclass
+> +++ b/classes/qmake5_base.bbclass
+> @@ -79,7 +79,7 @@ HostBinaries =3D ${OE_QMAKE_PATH_HOST_BINS}
+>  HostData =3D ${OE_QMAKE_PATH_HOST_DATA}
+>  HostLibraries =3D ${OE_QMAKE_PATH_HOST_LIBS}
+>  HostSpec =3D ${OE_QMAKESPEC}
+> -TartgetSpec =3D ${OE_XQMAKESPEC}
+> +TargetSpec =3D ${OE_XQMAKESPEC}
+>  ExternalHostBinaries =3D ${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}
+>  Sysroot =3D ${STAGING_DIR_TARGET}
+>  EOF
+> --=20
+> 2.3.5
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFVQLT2MkyGM64RGpERAsrUAJ4wozsDYG8ErP2WpJHzl2myyN6mQACfbiPY
-OgxcjzMaLwbEiV2sFW43UeE=
-=5UIC
------END PGP SIGNATURE-----
-
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
