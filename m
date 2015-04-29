@@ -1,36 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 515357382F
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id A37927382F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 22:03:34 +0000 (UTC)
-Received: by wgin8 with SMTP id n8so9244543wgi.0
+	Wed, 29 Apr 2015 06:59:30 +0000 (UTC)
+Received: by igblo3 with SMTP id lo3so109351567igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Apr 2015 15:03:35 -0700 (PDT)
+	Tue, 28 Apr 2015 23:59:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=c0XPTrS2V9D1oj36rYqsFvyGnNLdvdhmOWJio3S37cI=;
-	b=rCQLu4zKtUEEfHOBcHuU/V68QhsVhz01ZnmLcaCEXJQuFOe1SXoqTOTUC9J8/5Bgmi
-	KL8RPeNatqrKSj5WS80b1yKysm+AlNIv7i2c3C0Rn+GlIpaX9JveJXd+u7jgngF4jLDQ
-	rG5py06Wvgj3cTi7HRZlOlqtD2W7V506JbKH8uPx3fwcO4JIBJBtckYGT5ZKba+6ydXy
-	WY3N06vctd6siiFT36mYgMpOdCNNBf1qusMhZfQ9ypee3REyu0Uj4b8fGixC3to6dDdM
-	TKzCqonwFPX9V98Y0iMc8gplPfypAWVLZYA8tDdh+uvWlryvykzTppoIDia2HfF+wphr
-	48rA==
-X-Received: by 10.194.60.43 with SMTP id e11mr37360308wjr.36.1430258615688;
-	Tue, 28 Apr 2015 15:03:35 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	mc20sm18317740wic.15.2015.04.28.15.03.34
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 28 Apr 2015 15:03:34 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Apr 2015 00:03:26 +0200
-Message-Id: <1430258606-26895-3-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.3.5
-In-Reply-To: <1430258606-26895-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1430258606-26895-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [meta-qt5][PATCH 3/3] qtbase: remove 2nd BSD from LICENSE
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=C3bNNaYAxQynf2rI8kHehxlq3Ash3cr05WQlUpalfqg=;
+	b=IsqEDRLfDxPajZZ34mkOEFyuUJxfae7BkGKqQ4hD8SU5Of7oNugYY2hXMQkG1P5GVu
+	17guXojRqBgG5t3wjxoBWlsS6LMloYSob180h0GBhPMVEicMFxKVDSscWsUCI0f2kI4k
+	PY8aRkqwNdgJKyrPWr+WL+ow2GrmeLCEXsbisvo6YCjyzyauh6kyfRV+sUesaXyGrka6
+	DSZBEWBomWG8iDUNsKi9aYFtGDea5B32BNEafkwL90ta2rq6UNtHNWMNQ6TSJGv565JS
+	WcWyD1FHDItxoyJfdAhveHENevh5ktydUEF8M7LG3moqWh/SjTOnQVV5fZBMTzoMuVJO
+	ZZDQ==
+MIME-Version: 1.0
+X-Received: by 10.50.25.225 with SMTP id f1mr2203204igg.29.1430290771061; Tue,
+	28 Apr 2015 23:59:31 -0700 (PDT)
+Received: by 10.36.70.9 with HTTP; Tue, 28 Apr 2015 23:59:31 -0700 (PDT)
+In-Reply-To: <1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+References: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
+	<1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+Date: Wed, 29 Apr 2015 08:59:31 +0200
+Message-ID: <CAAQYJAsMEx1k6y-ouUYvprY-MGy_spGd9T7qK9xj0SOhzHbj3A@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [oe-classic][PATCH 1/1] README: update for current status of OE-Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +42,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Apr 2015 22:03:36 -0000
+X-List-Received-Date: Wed, 29 Apr 2015 06:59:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* BSD is now in default LICENSE variable:
-  recipes-qt/qt5/qt5-5.4.1.inc:LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-  recipes-qt/qt5/qt5-git.inc:LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+On Thu, Apr 23, 2015 at 4:59 PM, Paul Eggleton <
+paul.eggleton@linux.intel.com> wrote:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtbase.inc | 2 --
- 1 file changed, 2 deletions(-)
+> OE-Classic is no longer maintained, so update README and MAINTAINERS
+> accordingly, and just in case someone might miss reading those, add a
+> file clearly spelling it out.
+>
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+>
 
-diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
-index a5687ea..50cb505 100644
---- a/recipes-qt/qt5/qtbase.inc
-+++ b/recipes-qt/qt5/qtbase.inc
-@@ -22,9 +22,7 @@ SRC_URI += "\
- 
- DEPENDS += "qtbase-native"
- 
--# Used for examples and tests
- # LGPL-3.0 is used only in src/plugins/platforms/android/extract.cpp
--LICENSE += "& BSD"
- 
- # for syncqt
- RDEPENDS_${PN}-tools += "perl"
--- 
-2.3.5
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 
+
+> ---
+>  MAINTAINERS               | 16 +++-------------
+>  README                    | 19 +++++++++++++++++--
+>  THIS_REPO_IS_OBSOLETE.txt |  1 +
+>  3 files changed, 21 insertions(+), 15 deletions(-)
+>  create mode 100644 THIS_REPO_IS_OBSOLETE.txt
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 2f12832..e88d14b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1,18 +1,8 @@
+>  OpenEmbedded Maintainers List
+>
+> -Please put you full name and email-address here for the areas of OE you
+> want to support.
+> -
+> -Note: For the hard of thinking, this list is meant to remain in
+> alphabetical
+> -order. If you could add yourselves to it in alphabetical order that would
+> be
+> -so much easier (sort by firstname). Thank you!
+> -
+> -Person:     Real name
+> -Mail:       Mail patches to
+> -Website:    Web-page
+> -Interests:  Areas of interest (e.g. subsystems)
+> -Distros:    Maintained distros
+> -Machines:   Maintained machines
+> -Recipes:    Maintained recipes (should match package names, can include
+> wildcards)
+> +WARNING: this repository has been superseded and is no longer maintained -
+> +please see README for details. The maintainers list below remains for
+> +historical purposes only.
+>
+>
+>  -----------------------------------------------------------------------------
+>
+> diff --git a/README b/README
+> index 1264ca6..778efd9 100644
+> --- a/README
+> +++ b/README
+> @@ -1,3 +1,18 @@
+> -This is the OpenEmbedded packages metadata repository.
+> +This is the OpenEmbedded Classic (OE-Classic) metadata repository.
+> +
+> +WARNING: This version of OpenEmbedded is no longer supported or actively
+> +developed - it has been replaced by a new model based upon
+> +OpenEmbedded-Core (OE-Core). Users are strongly encouraged to migrate
+> +to OE-Core as there will be no further updates to OE-Classic as part of
+> +the OpenEmbedded project.
+> +
+> +The OE-Core repository is available at:
+> +
+> +  http://cgit.openembedded.org/openembedded-core/
+> +  git://git.openembedded.org/openembedded-core
+> +
+> +For further details on the differences between OE-Classic and OE-Core,
+> +please see:
+> +
+> +  http://openembedded.org/wiki/OpenEmbedded-Core
+>
+> -See http://openembedded.org
+> diff --git a/THIS_REPO_IS_OBSOLETE.txt b/THIS_REPO_IS_OBSOLETE.txt
+> new file mode 100644
+> index 0000000..a283c1b
+> --- /dev/null
+> +++ b/THIS_REPO_IS_OBSOLETE.txt
+> @@ -0,0 +1 @@
+> +Superseded by openembedded-core - please see the README file for details.
+> --
+> 2.1.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
