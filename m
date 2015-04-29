@@ -1,25 +1,23 @@
 Return-Path: <dominic.sacre@gmx.de>
-X-Greylist: delayed 302 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 29 Apr 2015 09:46:57 UTC
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 5508473D5C
+	by mail.openembedded.org (Postfix) with ESMTP id 94D2273C48
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 09:46:57 +0000 (UTC)
-Received: from dastp.fritz.box ([79.253.128.72]) by mail.gmx.com (mrgmx103)
-	with ESMTPSA (Nemesis) id 0MFLmC-1Z1fi33yxI-00EQ8t;
-	Wed, 29 Apr 2015 11:41:56 +0200
+	Wed, 29 Apr 2015 09:47:57 +0000 (UTC)
+Received: from dastp.fritz.box ([79.253.128.72]) by mail.gmx.com (mrgmx101)
+	with ESMTPSA (Nemesis) id 0Ls8Qd-1ZHobh0vKp-013zWL;
+	Wed, 29 Apr 2015 11:42:54 +0200
 From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Apr 2015 11:41:18 +0200
-Message-Id: <1430300478-20198-1-git-send-email-dominic.sacre@gmx.de>
+Date: Wed, 29 Apr 2015 11:42:43 +0200
+Message-Id: <1430300563-20254-1-git-send-email-dominic.sacre@gmx.de>
 X-Mailer: git-send-email 2.3.6
 MIME-Version: 1.0
-X-Provags-ID: V03:K0:C7l+iT3EIelsnCAz0LljPPhd0fcmKZ3nghmNJM7Zkp5I1ufEbWo
-	CQlxppyhGnsL1Jwl9Ky2bk1JZJBMTTmYqAZCnacYBLWbvMdhF3uXOUqCIXIY4VD3rbliVcb
-	xgBxLXX6aEzkD/pOSlsNcHq5cpvK+g+3EsD+LTH75fbKL7A4JgI8ccy26B4DuXK6n71upXD
-	3ZZ939SzUenopkWQz1/jA==
+X-Provags-ID: V03:K0:qKGZbPxuFSUeD4I6cjPaa8UjUG958H8wlLkELY1FquEzVLBBofR
+	lInsOdqbFnPkHmmERiSC/Xw80SB0QIuTaTcMesWnQKQ76q5/d/twKiZOJwYGALkzqoX1L4l
+	x55JANfO1xX5cFIkbIRGEy64BD7ElvzmpErTRn7IqPebgqfTVesWv6RQRM/hM0L/yZ9Ir+C
+	PrBwNrA4yZHTxptZx2MPw==
 X-UI-Out-Filterresults: notjunk:1;
-Subject: [meta-oe][PATCH] fio: add missing build dependency on zlib
+Subject: [meta-oe][fido][PATCH] fio: add missing build dependency on zlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2015 09:47:00 -0000
+X-List-Received-Date: Wed, 29 Apr 2015 09:47:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
