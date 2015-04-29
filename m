@@ -1,26 +1,25 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 31587716CE;
-	Wed, 29 Apr 2015 09:38:18 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga103.fm.intel.com with ESMTP; 29 Apr 2015 02:38:21 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.11,670,1422950400"; d="scan'208";a="702600154"
-Received: from pkcletus-mobl1.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.20.230])
-	by fmsmga001.fm.intel.com with ESMTP; 29 Apr 2015 02:38:19 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Jan-Simon =?ISO-8859-1?Q?M=F6ller?= <dl9pf@gmx.de>
-Date: Wed, 29 Apr 2015 10:38:18 +0100
-Message-ID: <5242032.yZR8PR0vAI@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.6 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.6; x86_64; ; )
-In-Reply-To: <3303347.WRWmiSbDbc@samweis.auenland.lan>
-References: <3303347.WRWmiSbDbc@samweis.auenland.lan>
+Return-Path: <dominic.sacre@gmx.de>
+X-Greylist: delayed 302 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 29 Apr 2015 09:46:57 UTC
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 5508473D5C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2015 09:46:57 +0000 (UTC)
+Received: from dastp.fritz.box ([79.253.128.72]) by mail.gmx.com (mrgmx103)
+	with ESMTPSA (Nemesis) id 0MFLmC-1Z1fi33yxI-00EQ8t;
+	Wed, 29 Apr 2015 11:41:56 +0200
+From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Apr 2015 11:41:18 +0200
+Message-Id: <1430300478-20198-1-git-send-email-dominic.sacre@gmx.de>
+X-Mailer: git-send-email 2.3.6
 MIME-Version: 1.0
-Cc: bitbake-devel@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: Bug in cooker - networked PR_SERV
+X-Provags-ID: V03:K0:C7l+iT3EIelsnCAz0LljPPhd0fcmKZ3nghmNJM7Zkp5I1ufEbWo
+	CQlxppyhGnsL1Jwl9Ky2bk1JZJBMTTmYqAZCnacYBLWbvMdhF3uXOUqCIXIY4VD3rbliVcb
+	xgBxLXX6aEzkD/pOSlsNcHq5cpvK+g+3EsD+LTH75fbKL7A4JgI8ccy26B4DuXK6n71upXD
+	3ZZ939SzUenopkWQz1/jA==
+X-UI-Out-Filterresults: notjunk:1;
+Subject: [meta-oe][PATCH] fio: add missing build dependency on zlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,108 +33,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2015 09:38:19 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 29 Apr 2015 09:47:00 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Jan-Simon,
+Fixes:
+| WARNING: QA Issue: fio rdepends on zlib, but it isn't a build dependency? [build-deps]
 
-On Thursday 26 March 2015 19:48:52 Jan-Simon M=F6ller wrote:
-> I found a bug in cooker that shows up when I try to enable the networ=
-ked
-> PRSERV. bitbake will crash (and still run at 100% after CTRL-C) until=
- kill
-> -9.
->=20
-> I tracked it down to bitbake/lib/bb/cooker.py line 169:
->         if self.state !=3D state.initial:
->             raise Exception("Illegal state for feature set change")
->=20
-> self.state seems to be 6 at this stage and state.initial is 0 .
->=20
-> Hack: If I comment out this check, it seems to continue, but I see no=
- size-
-> increase in the prserv sqlite and also nothing printed for loglevel=3D=
-DEBUG in
-> the log.
->=20
->=20
-> Here are the details:
->=20
-> My setup is:
-> Build Configuration:
-> BB_VERSION        =3D "1.24.0"
-> BUILD_SYS         =3D "x86_64-linux"
-> NATIVELSBSTRING   =3D "openSUSE-project-13.2"
-> TARGET_SYS        =3D "i586-poky-linux"
-> MACHINE           =3D "qemux86"
-> DISTRO            =3D "poky"
-> DISTRO_VERSION    =3D "1.7.1"
-> TUNE_FEATURES     =3D "m32 i586"
-> TARGET_FPU        =3D ""
-> meta
-> meta-yocto
-> meta-yocto-bsp    =3D "<unknown>:<unknown>"
->=20
-> ####### Only changes to conf/local.conf:
-> PRSERV_HOST=3D"127.0.0.1:5555"
-> (an a prserv started in a separate terminal)
->=20
-> ####### Crash
->=20
-> x86> bitbake core-image-minimal
-> Traceback (most recent call last):
->   File "/home/dl9pf/test1/script/4.1/poky-dizzy-12.0.1/bitbake/bin/bi=
-tbake",
-> line 382, in <module>
->     ret =3D main()
->   File "/home/dl9pf/test1/script/4.1/poky-dizzy-12.0.1/bitbake/bin/bi=
-tbake",
-> line 347, in main
->     server_connection =3D server.establishConnection(featureset)
->   File "/home/dl9pf/test1/script/4.1/poky-
-> dizzy-12.0.1/bitbake/lib/bb/server/process.py", line 247, in
-> establishConnection
->     raise BaseException(error)
-> BaseException: Traceback (most recent call last):
->   File "/home/dl9pf/test1/script/4.1/poky-
-> dizzy-12.0.1/bitbake/lib/bb/command.py", line 71, in runCommand
->     result =3D command_method(self, commandline)
->   File "/home/dl9pf/test1/script/4.1/poky-
-> dizzy-12.0.1/bitbake/lib/bb/command.py", line 268, in setFeatures
->     command.cooker.setFeatures(features)
->   File "/home/dl9pf/test1/script/4.1/poky-
-> dizzy-12.0.1/bitbake/lib/bb/cooker.py", line 169, in setFeatures
->     raise Exception("Illegal state for feature set change")
-> Exception: Illegal state for feature set change
->=20
-> ERROR: Unable to set the cooker to the correct featureset: Traceback =
-(most
-> recent call last):
->   File "/home/dl9pf/test1/script/4.1/poky-
-> dizzy-12.0.1/bitbake/lib/bb/command.py", line 71, in runCommand
->     result =3D command_method(self, commandline)
->   File "/home/dl9pf/test1/script/4.1/poky-
-> dizzy-12.0.1/bitbake/lib/bb/command.py", line 268, in setFeatures
->     command.cooker.setFeatures(features)
->   File "/home/dl9pf/test1/script/4.1/poky-
-> dizzy-12.0.1/bitbake/lib/bb/cooker.py", line 169, in setFeatures
->     raise Exception("Illegal state for feature set change")
-> Exception: Illegal state for feature set change
+Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
+---
+ meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Sorry it's taken a while to get back to you. Are you still seeing this=20=
+diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+index 016b1f2..13534cc 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+@@ -10,7 +10,7 @@ SECTION = "console/tests"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+ 
+-DEPENDS = "libaio"
++DEPENDS = "libaio zlib"
+ 
+ # rev for v2.2.6
+ SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
+-- 
+2.3.6
 
-problem?
-
-(FYI, this would probably have been better sent to the bitbake or OE-Co=
-re=20
-mailing lists; I've added the bitbake list to CC.)
-
-Cheers,
-Paul
-
---=20
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
