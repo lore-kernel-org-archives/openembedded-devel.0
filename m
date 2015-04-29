@@ -1,23 +1,34 @@
-Return-Path: <dominic.sacre@gmx.de>
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 94D2273C48
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id E726C72A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 09:47:57 +0000 (UTC)
-Received: from dastp.fritz.box ([79.253.128.72]) by mail.gmx.com (mrgmx101)
-	with ESMTPSA (Nemesis) id 0Ls8Qd-1ZHobh0vKp-013zWL;
-	Wed, 29 Apr 2015 11:42:54 +0200
-From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
+	Wed, 29 Apr 2015 10:40:08 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1YnPPN-0000zj-O0 for openembedded-devel@lists.openembedded.org;
+	Wed, 29 Apr 2015 12:40:01 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2015 12:40:01 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Apr 2015 12:40:01 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Apr 2015 11:42:43 +0200
-Message-Id: <1430300563-20254-1-git-send-email-dominic.sacre@gmx.de>
-X-Mailer: git-send-email 2.3.6
-MIME-Version: 1.0
-X-Provags-ID: V03:K0:qKGZbPxuFSUeD4I6cjPaa8UjUG958H8wlLkELY1FquEzVLBBofR
-	lInsOdqbFnPkHmmERiSC/Xw80SB0QIuTaTcMesWnQKQ76q5/d/twKiZOJwYGALkzqoX1L4l
-	x55JANfO1xX5cFIkbIRGEy64BD7ElvzmpErTRn7IqPebgqfTVesWv6RQRM/hM0L/yZ9Ir+C
-	PrBwNrA4yZHTxptZx2MPw==
-X-UI-Out-Filterresults: notjunk:1;
-Subject: [meta-oe][fido][PATCH] fio: add missing build dependency on zlib
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 29 Apr 2015 12:39:50 +0200
+Message-ID: <mhqcdm$gr9$1@ger.gmane.org>
+References: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
+	<1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+In-Reply-To: <1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+Subject: Re: [oe-classic][PATCH 1/1] README: update for current status of OE-Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +42,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Apr 2015 09:47:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 29 Apr 2015 10:40:11 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Fixes:
-| WARNING: QA Issue: fio rdepends on zlib, but it isn't a build dependency? [build-deps]
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
----
- meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Paul Eggleton schreef op 23-04-15 om 16:59:
+> OE-Classic is no longer maintained, so update README and MAINTAINERS 
+> accordingly, and just in case someone might miss reading those, add a 
+> file clearly spelling it out.
+> 
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
 
-diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-index 016b1f2..13534cc 100644
---- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-@@ -10,7 +10,7 @@ SECTION = "console/tests"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
- 
--DEPENDS = "libaio"
-+DEPENDS = "libaio zlib"
- 
- # rev for v2.2.6
- SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
--- 
-2.3.6
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+
+
+> --- MAINTAINERS               | 16 +++------------- README
+> | 19 +++++++++++++++++-- THIS_REPO_IS_OBSOLETE.txt |  1 + 3 files
+> changed, 21 insertions(+), 15 deletions(-) create mode 100644
+> THIS_REPO_IS_OBSOLETE.txt
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS index 2f12832..e88d14b 100644 ---
+> a/MAINTAINERS +++ b/MAINTAINERS @@ -1,18 +1,8 @@ OpenEmbedded Maintainers
+> List
+> 
+> -Please put you full name and email-address here for the areas of OE you
+> want to support. - -Note: For the hard of thinking, this list is meant to
+> remain in alphabetical -order. If you could add yourselves to it in
+> alphabetical order that would be -so much easier (sort by firstname).
+> Thank you! - -Person:     Real name -Mail:       Mail patches to 
+> -Website:    Web-page -Interests:  Areas of interest (e.g. subsystems) 
+> -Distros:    Maintained distros -Machines:   Maintained machines 
+> -Recipes:    Maintained recipes (should match package names, can include
+> wildcards) +WARNING: this repository has been superseded and is no longer
+> maintained - +please see README for details. The maintainers list below
+> remains for +historical purposes only.
+> 
+> ----------------------------------------------------------------------------
+- -
+>
+>  diff --git a/README b/README index 1264ca6..778efd9 100644 --- a/README 
+> +++ b/README @@ -1,3 +1,18 @@ -This is the OpenEmbedded packages metadata
+> repository. +This is the OpenEmbedded Classic (OE-Classic) metadata
+> repository. + +WARNING: This version of OpenEmbedded is no longer
+> supported or actively +developed - it has been replaced by a new model
+> based upon +OpenEmbedded-Core (OE-Core). Users are strongly encouraged to
+> migrate +to OE-Core as there will be no further updates to OE-Classic as
+> part of +the OpenEmbedded project. + +The OE-Core repository is available
+> at: + +  http://cgit.openembedded.org/openembedded-core/ +
+> git://git.openembedded.org/openembedded-core + +For further details on
+> the differences between OE-Classic and OE-Core, +please see: + +
+> http://openembedded.org/wiki/OpenEmbedded-Core
+> 
+> -See http://openembedded.org diff --git a/THIS_REPO_IS_OBSOLETE.txt
+> b/THIS_REPO_IS_OBSOLETE.txt new file mode 100644 index 0000000..a283c1b 
+> --- /dev/null +++ b/THIS_REPO_IS_OBSOLETE.txt @@ -0,0 +1 @@ +Superseded
+> by openembedded-core - please see the README file for details.
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
+
+iD8DBQFVQLT2MkyGM64RGpERAsrUAJ4wozsDYG8ErP2WpJHzl2myyN6mQACfbiPY
+OgxcjzMaLwbEiV2sFW43UeE=
+=5UIC
+-----END PGP SIGNATURE-----
 
 
