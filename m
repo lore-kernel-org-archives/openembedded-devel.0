@@ -1,35 +1,27 @@
-Return-Path: <switesh.fulpagare@mindastoneridge.com>
-Received: from mail-vn0-f50.google.com (mail-vn0-f50.google.com
-	[209.85.216.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BE00072A85
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 6379C65CD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Apr 2015 06:18:10 +0000 (UTC)
-Received: by vnbf1 with SMTP id f1so6203926vnb.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Apr 2015 23:18:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to:cc
-	:content-type;
-	bh=3LJYGsQi5n3rodpalzi/FfQ4df7hPupgB+vPANPOzoA=;
-	b=dJ1r6cMFTiH0cOAEh3xijXarqvNA+0fIUuG+ZiAz1LlH3cmOllUgRGHberl+PYyL4M
-	3L8vKAAyREIb925S5OkWz43/ylMRVdJvynDDXyCmdhYW5e7E2gz29c9K6RRr+PYVl4NH
-	Dgr4srDl44WLG2/QbWH1t6tD7c2decxX/omyK9dZDcJKZEiXY/KMY3AyNfXMksCXO8cR
-	RAXmbSgUCHLIU6h/um1GjYkg7m832TPNC7+tsADNcgGmgotmQKjIPXSP/glK4UCgbzin
-	Bq6O+aad1nI5Ma75H/BWSeVfLzQGrqDRD4z+KHzx46d013UzdI+VlFuxqFhUlWjUlQg0
-	jNog==
-X-Gm-Message-State: ALoCoQloCSyjnjrZ5cr+89imycGw8/6MA58Em+19ToLdtqrMRZlBjxG4qhc5jnCFxoTOshRI+1cx
-MIME-Version: 1.0
-X-Received: by 10.53.0.226 with SMTP id bb2mr4656471vdd.66.1430374691701; Wed,
-	29 Apr 2015 23:18:11 -0700 (PDT)
-Received: by 10.52.227.131 with HTTP; Wed, 29 Apr 2015 23:18:11 -0700 (PDT)
-Date: Thu, 30 Apr 2015 11:48:11 +0530
-Message-ID: <CALRGHr9GkKB59wiw8Csqiic2gAE+CVxr_AXAXREF5jUbKGVotA@mail.gmail.com>
-From: Switesh Fulpagare <switesh.fulpagare@mindastoneridge.com>
+	Thu, 30 Apr 2015 08:40:44 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga102.fm.intel.com with ESMTP; 30 Apr 2015 01:40:46 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.11,675,1422950400"; d="scan'208";a="687907763"
+Received: from pkcletus-mobl1.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.20.230])
+	by orsmga001.jf.intel.com with ESMTP; 30 Apr 2015 01:40:45 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Sandeep Gound <sandeepg@mindastoneridge.com>
-Subject: Gstreamer error for Qt camera code
+Date: Thu, 30 Apr 2015 09:40:44 +0100
+Message-ID: <7818681.j9iWecntyi@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.6 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.6; x86_64; ; )
+In-Reply-To: <1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+References: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
+	<1429801172-30602-2-git-send-email-paul.eggleton@linux.intel.com>
+MIME-Version: 1.0
+Cc: marcin@juszkiewicz.com.pl
+Subject: Re: [oe-classic][PATCH 1/1] README: update for current status of OE-Classic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,15 +35,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2015 06:18:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 30 Apr 2015 08:40:46 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi ,
+On Thursday 23 April 2015 15:59:32 Paul Eggleton wrote:
+> OE-Classic is no longer maintained, so update README and MAINTAINERS
+> accordingly, and just in case someone might miss reading those, add a
+> file clearly spelling it out.
+> 
+> Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+> ---
+>  MAINTAINERS               | 16 +++-------------
+>  README                    | 19 +++++++++++++++++--
+>  THIS_REPO_IS_OBSOLETE.txt |  1 +
+>  3 files changed, 21 insertions(+), 15 deletions(-)
+>  create mode 100644 THIS_REPO_IS_OBSOLETE.txt
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 2f12832..e88d14b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1,18 +1,8 @@
+>  OpenEmbedded Maintainers List
+> 
+> -Please put you full name and email-address here for the areas of OE you
+> want to support. -
+> -Note: For the hard of thinking, this list is meant to remain in
+> alphabetical -order. If you could add yourselves to it in alphabetical
+> order that would be -so much easier (sort by firstname). Thank you!
+> -
+> -Person:     Real name
+> -Mail:       Mail patches to
+> -Website:    Web-page
+> -Interests:  Areas of interest (e.g. subsystems)
+> -Distros:    Maintained distros
+> -Machines:   Maintained machines
+> -Recipes:    Maintained recipes (should match package names, can include
+> wildcards) +WARNING: this repository has been superseded and is no longer
+> maintained - +please see README for details. The maintainers list below
+> remains for +historical purposes only.
+> 
+>  ---------------------------------------------------------------------------
+> --
+> 
+> diff --git a/README b/README
+> index 1264ca6..778efd9 100644
+> --- a/README
+> +++ b/README
+> @@ -1,3 +1,18 @@
+> -This is the OpenEmbedded packages metadata repository.
+> +This is the OpenEmbedded Classic (OE-Classic) metadata repository.
+> +
+> +WARNING: This version of OpenEmbedded is no longer supported or actively
+> +developed - it has been replaced by a new model based upon
+> +OpenEmbedded-Core (OE-Core). Users are strongly encouraged to migrate
+> +to OE-Core as there will be no further updates to OE-Classic as part of
+> +the OpenEmbedded project.
+> +
+> +The OE-Core repository is available at:
+> +
+> +  http://cgit.openembedded.org/openembedded-core/
+> +  git://git.openembedded.org/openembedded-core
+> +
+> +For further details on the differences between OE-Classic and OE-Core,
+> +please see:
+> +
+> +  http://openembedded.org/wiki/OpenEmbedded-Core
+> 
+> -See http://openembedded.org
+> diff --git a/THIS_REPO_IS_OBSOLETE.txt b/THIS_REPO_IS_OBSOLETE.txt
+> new file mode 100644
+> index 0000000..a283c1b
+> --- /dev/null
+> +++ b/THIS_REPO_IS_OBSOLETE.txt
+> @@ -0,0 +1 @@
+> +Superseded by openembedded-core - please see the README file for details.
 
-I  ran into error while testing qtcamera example code on Qt 5.2.1
-http://pastebin.com/WbenK54H. I'm using yocto daisy-1.6.1 .
+From http://logs.nslu2-linux.org/livelogs/oe/oe.20150430.txt :
 
-Am I missing something in .conf file?
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-- Switesh F.
+If I don't hear any objections I guess I can merge this tomorrow?
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
