@@ -1,33 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id B6ACA73DD9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F1E373E1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 May 2015 12:30:26 +0000 (UTC)
-Received: by wgin8 with SMTP id n8so89500187wgi.0
+	Fri,  1 May 2015 15:48:24 +0000 (UTC)
+Received: by iget9 with SMTP id t9so30035479ige.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 May 2015 05:30:27 -0700 (PDT)
+	Fri, 01 May 2015 08:48:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=14AyhyXWmv1TSWoq2ucJZS0XuVZijOSVazFaalF90Ss=;
-	b=W4UhEzSeMRqNWldcpUP/7NISHiwtyV5ausHDSulN4bBoc1AUFO2hLw5GyVbAJELzKN
-	G5szVIMw8hztro/OZhkxSRCDCy1mZrkn/sAC27z0Wrk0aupD8GyWI+rxYCo5+6c8P1sM
-	u9Ugo7gq8EpGo+YdbTEGsmPkP3nvWYwcnvHaGRXQeA53OpsrMCx6VarziP9w2IDvyNQH
-	F/qTGD+s3h/LxqL38oCaHssUCRejZkO4VyW+pTThTNiuUKQN8/Y6yXe7dyasu8/FkUEh
-	kh1AdRSfJwnn0GHKO96s4GZW1DvzK58CE3ULd3P/K/xC3ZXtLan75kcp4uYo0enVJ6ac
-	YocQ==
-X-Received: by 10.194.62.83 with SMTP id w19mr18092718wjr.40.1430483427371;
-	Fri, 01 May 2015 05:30:27 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id e2sm6593828wij.5.2015.05.01.05.30.26
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 May 2015 05:30:26 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 May 2015 14:30:41 +0200
-Message-Id: <1430483441-4566-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-ruby][PATCH] ruby: explicitly disable dtrace support
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=cmob+1SoHkh84m73zIjR7nnO2h9QLeYp2A3vCXerR7s=;
+	b=0ibga9+75Wqe8+oyl6jR1qHV0lNL0uspglCZc5+tt2qfUEf3AUAAXXff4H3NTniUt/
+	RbFdPneusBDPJjNDUct3o/BPJufpo2rbK2Ru5msAnhwCl49UNqc10W16IF3kDwmtqvwR
+	1Yk8Vkb6SvixsrjDSW9IOhGglw+YeG6tIpxS0M+QSMHOPO8v5UrqucdD3nlICHNXpYUq
+	MfCnTegVNlXckJyakhRS81rnuONRR0cxTybcgww5En+2A+mbRDCicaQxUrNikcp49NLP
+	ciWT71buJs5k0QGwYbG9a45vO28g3jjTShafo5Xu7umDqIjg92U3+ctkoC1W8FBoaHji
+	Q8oA==
+X-Received: by 10.107.30.10 with SMTP id e10mr13182614ioe.72.1430495305956;
+	Fri, 01 May 2015 08:48:25 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.50.230.178 with HTTP; Fri, 1 May 2015 08:47:55 -0700 (PDT)
+In-Reply-To: <CAMKF1spGC+4unddLJeqCuynaBeP7h62raW2RN==EeNu=SzeYfA@mail.gmail.com>
+References: <1430153054-1252-1-git-send-email-raj.khem@gmail.com>
+	<CAJ86T=Witf+y68y_r-HtcR5FZvHGMOzOrxOYzWhLPFQd9zbdMg@mail.gmail.com>
+	<DCD4D1D9-2F13-449B-9A49-43E95C4255C5@gmail.com>
+	<CAP9ODKrGu5sJo9WO--7U511hOeOJKcK-W8e8vE1K2RiFkJ2fvQ@mail.gmail.com>
+	<5541157E.2080807@pseudoterminal.org>
+	<CAMKF1spGC+4unddLJeqCuynaBeP7h62raW2RN==EeNu=SzeYfA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 May 2015 08:47:55 -0700
+Message-ID: <CAMKF1sqNa832Bjw9fQkO=G1Xqyqc7X7uZMhyBG6xG0RquqA+UA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: pnandyala <Pavan.Nandyala@lnttechservices.com>,
+	Zoltan Kuscsik <zoltan.kuscsik@linaro.org>,
+	knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-browser][PATCH 1/2 V4] cef3: Add recipe for Chromium Embedded Framework
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,35 +50,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2015 12:30:26 -0000
+X-List-Received-Date: Fri, 01 May 2015 15:48:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-both 2.2.1 and 2.2.2 are failing on some hosts native builds with:
-| linking miniruby
-| load.o: In function `rb_f_load':
-| load.c:(.text+0x3af): undefined reference to `RUBY_DTRACE_LOAD_ENTRY_ENABLED'
-| load.c:(.text+0x428): undefined reference to `RUBY_DTRACE_LOAD_RETURN_ENABLED'
-| load.c:(.text+0x452): undefined reference to `RUBY_DTRACE_LOAD_RETURN'
-| load.c:(.text+0x492): undefined reference to `RUBY_DTRACE_LOAD_ENTRY'
-| load.o: In function `rb_require_internal':
+ping. Can this now be merged ?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb b/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
-index c463525..78c943c 100644
---- a/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
-+++ b/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
-@@ -18,6 +18,7 @@ PACKAGECONFIG[ipv6] = ",--enable-wide-getaddrinfo,"
- EXTRA_OECONF = "\
-     --disable-versioned-paths \
-     --disable-rpath \
-+    --disable-dtrace \
-     --enable-shared \
-     --enable-load-relative \
- "
--- 
-2.3.5
-
+On Wed, Apr 29, 2015 at 10:54 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Apr 29, 2015 10:37 AM, "Carlos Rafael Giani" <dv@pseudoterminal.org>
+> wrote:
+>>
+>> The latest one (V8) seems good to me. I was initially skeptical about the
+>> heavy chromium.inc refactoring, but these days we don't have multiple
+>> chromium versions in meta-browser, so it is okay.
+>> The shared object versioning bandaid wasn't done by me, I modified other
+>> parts, but I agree with the patch. The way it is done now is cleaner.
+>> Have you come across a case where there were codec package conflicts?
+>>
+>
+> Not yet but this makes it future proof. Since I know there are packages with
+> same .so
+>>
+>>
+>> Am 2015-04-27 um 23:40 schrieb Otavio Salvador:
+>>>
+>>> On Mon, Apr 27, 2015 at 6:37 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>>>>
+>>>>> On Apr 27, 2015, at 1:33 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
+>>>>>
+>>>>> Looks like some regressions may have crept back relative previous
+>>>>> versions of the patch?
+>>>>>
+>>>>>   - dubious indent in do_install()
+>>>>>   - .pak files being installed as executables
+>>>>>   - dev-so INSANE_SKIP shouldn't be requied
+>>>>>
+>>>> Thanks for bringing it up. I will send a followup to fix it
+>>>> incrementally.
+>>>
+>>> Please wait for Carlos comments and send a new pathc revision. This is
+>>> not yet merged so fixes are still possible.
+>>>
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
