@@ -1,58 +1,34 @@
-Return-Path: <B40290@freescale.com>
-Received: from na01-bn1-obe.outbound.protection.outlook.com
-	(mail-bn1on0118.outbound.protection.outlook.com [157.56.110.118])
-	by mail.openembedded.org (Postfix) with ESMTP id 67D7565CD0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id EA90273DB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Apr 2015 08:45:29 +0000 (UTC)
-Received: from CO2PR03CA0040.namprd03.prod.outlook.com (10.141.194.167) by
-	BY1PR03MB1370.namprd03.prod.outlook.com (25.162.109.28) with Microsoft
-	SMTP Server (TLS) id 15.1.154.19; Thu, 30 Apr 2015 08:29:56 +0000
-Received: from BN1AFFO11FD052.protection.gbl (2a01:111:f400:7c10::193) by
-	CO2PR03CA0040.outlook.office365.com (2a01:111:e400:1414::39) with
-	Microsoft SMTP Server (TLS) id 15.1.125.19 via Frontend Transport;
-	Thu, 30 Apr 2015 08:29:56 +0000
-Authentication-Results: spf=fail (sender IP is 192.88.158.2)
-	smtp.mailfrom=freescale.com; freescale.mail.onmicrosoft.com; dkim=none
-	(message not signed) header.d=none;
-Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
-	designate 192.88.158.2 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
-Received: from az84smr01.freescale.net (192.88.158.2) by
-	BN1AFFO11FD052.mail.protection.outlook.com (10.58.53.67) with Microsoft
-	SMTP Server (TLS) id 15.1.154.14 via Frontend Transport;
-	Thu, 30 Apr 2015 08:29:54 +0000
-Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
-	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t3U8ToOm014822;
-	Thu, 30 Apr 2015 01:29:51 -0700
-From: <b40290@freescale.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Apr 2015 16:29:48 +0800
-Message-ID: <1430382588-11298-1-git-send-email-b40290@freescale.com>
-X-Mailer: git-send-email 1.9.2
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10019020)(6009001)(339900001)(189002)(199003)(77096005)(450100001)(50466002)(46102003)(47776003)(50986999)(92566002)(86362001)(107886002)(110136002)(50226001)(36756003)(77156002)(104016003)(62966003)(229853001)(19580405001)(2351001)(105606002)(106466001)(85426001)(6806004)(87936001)(86152002)(48376002)(33646002)(19580395003)(5001960100002)(4001430100001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BY1PR03MB1370;
-	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; MX:1; A:1;
-	LANG:en; 
-MIME-Version: 1.0
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:BY1PR03MB1370;
-X-Microsoft-Antispam-PRVS: <BY1PR03MB137002EEED0040FB88E1824684D60@BY1PR03MB1370.namprd03.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(5005006)(3002001); SRVR:BY1PR03MB1370; BCL:0;
-	PCL:0; RULEID:; SRVR:BY1PR03MB1370; 
-X-Forefront-PRVS: 056297E276
-X-OriginatorOrg: freescale.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2015 08:29:54.8846 (UTC)
-X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2];
-	Helo=[az84smr01.freescale.net]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY1PR03MB1370
-Subject: [meta-browser][PATCH] firefox_10.0.11esr: ${PN} usage in SRC_URI Should use ${BPN} instead to avoid breaking multilib
+	Fri,  1 May 2015 10:16:47 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so48503051wiz.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 May 2015 03:16:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=kRzEHdvfT1jvG8+135G0H8bbYTQMeCawogCaTcarVsg=;
+	b=yrVis+RLdiV3E2YKepZsuwqb54ru1v4VXmiDvUty//rIY0YyPMsT1STHaYiSOb7Cc3
+	VexL94ZzQXbSrvQpm9rIaCwmkOs55nI9TE1LNvxRWmhGjlkVQr8Uj5T48KM7DQZNeWya
+	6ob+Z1KMo5lV2Ksd3hOOLHBDw9WrBwhH3J131IlT2SZXebA4y92y3/Fb90Jz0wy2I4cg
+	ym9DaKfNJocR3iMUVCCCH1oguWGXh0ZcpNuonrkOMlkQOz2wsc6ajTlMWpmXntX4mDgO
+	oGgTMHHTrz3I5n4n6EwUhW+qWmcNgqEC2GNyR5Ah98h61syHbFzd91BqG7slTyDaiCf0
+	mIjA==
+X-Received: by 10.194.190.49 with SMTP id gn17mr17102295wjc.11.1430475408681; 
+	Fri, 01 May 2015 03:16:48 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id l3sm7048871wjy.3.2015.05.01.03.16.47
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 01 May 2015 03:16:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 May 2015 12:17:01 +0200
+Message-Id: <1430475421-31701-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-oe][RFC][PATCH] *obex*, foxtrotgps, gypsy, bluez-hcidump, bluez4, gst-plugin-bluetooth, gnome-bluetooth: blacklist bluez4 only recipes when bluez5 is in DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,36 +42,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Apr 2015 08:45:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 May 2015 10:16:52 -0000
 
-From: Chunrong Guo <B40290@freescale.com>
-
-    fix the following warning:
-    |WARNING: Unable to get checksum for lib32-firefox SRC_URI entry mozilla-lib32-firefox.png: file could not be found
-    |WARNING: Unable to get checksum for lib32-firefox SRC_URI entry mozilla-lib32-firefox.desktop: file could not be found
-
-Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
- recipes-mozilla/firefox/firefox_10.0.11esr.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-connectivity/obex/obexd_0.48.bb                 | 1 +
+ meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb | 2 ++
+ meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb            | 2 ++
+ meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb                 | 4 +++-
+ meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb   | 2 ++
+ meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb        | 2 ++
+ meta-oe/recipes-connectivity/obex/openobex_1.5.bb                  | 2 ++
+ meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb          | 2 ++
+ meta-oe/recipes-navigation/gypsy/gypsy.inc                         | 2 ++
+ 9 files changed, 18 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-mozilla/firefox/firefox_10.0.11esr.bb b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-index cd303ff..f89da58 100644
---- a/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-+++ b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-@@ -8,8 +8,8 @@ LICENSE = "MPLv1 | GPLv2+ | LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://toolkit/content/license.html;endline=39;md5=9cb02f27e77e702043b827c9418bfbf8"
+diff --git a/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb b/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
+index f28f77b..6058b04 100644
+--- a/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
++++ b/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
+@@ -6,6 +6,7 @@ RCONFLICTS_${PN} = "bluez5"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
  
- SRC_URI = "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${PV}/source/firefox-${PV}.source.tar.bz2;name=archive \
--           file://mozilla-${PN}.png \
--           file://mozilla-${PN}.desktop \
-+           file://mozilla-${BPN}.png \
-+           file://mozilla-${BPN}.desktop \
-            file://fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch \
-            file://fixes/Avoid-spurious-Run-items-in-application-handlers-con.patch \
-            file://fixes/Properly-launch-applications-set-in-HOME-.mailcap.patch \
++PNBLACKLIST[obexd] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+ 
+ SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz \
+            file://ssize_t_definition.patch \
+diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
+index 8711b8a..9a63b38 100644
+--- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
+@@ -9,6 +9,8 @@ PR = "r1"
+ SECTION = "x11/gnome"
+ DEPENDS = "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbus-glib libunique libnotify bluez4 gnome-keyring virtual/libx11 libxi intltool-native"
+ 
++PNBLACKLIST[gnome-bluetooth] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ inherit gnomebase gtk-icon-cache
+ 
+ SRC_URI += " \
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb b/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
+index 3950630..3a15d64 100644
+--- a/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
++++ b/meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb
+@@ -11,6 +11,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
+                     file://src/hcidump.c;beginline=1;endline=23;md5=3bee3a162dff43a5be7470710b99fbcf"
+ PR = "r1"
+ 
++PNBLACKLIST[bluez-hcidump] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/bluez-hcidump-${PV}.tar.gz \
+            file://obsolete_automake_macros.patch \
+ "
+diff --git a/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb b/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
+index 96ce0f6..e97b22e 100644
+--- a/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
++++ b/meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb
+@@ -1,5 +1,7 @@
+ require bluez4.inc
+ 
++PNBLACKLIST[bluez4] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ PR = "r11"
+ 
+ SRC_URI += "file://bluetooth.conf \
+@@ -47,4 +49,4 @@ FILES_${PN}-dbg += "\
+ "
+ 
+ SYSTEMD_SERVICE_${PN} = "bluetooth.service"
+-SYSTEMD_AUTO_ENABLE = "disable"
+\ No newline at end of file
++SYSTEMD_AUTO_ENABLE = "disable"
+diff --git a/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
+index 6a16520..822aec4 100644
+--- a/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
++++ b/meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb
+@@ -1,6 +1,8 @@
+ require bluez4.inc
+ require recipes-multimedia/gstreamer/gst-plugins-package.inc
+ 
++PNBLACKLIST[gst-plugin-bluetooth] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ PR = "r1"
+ 
+ SRC_URI[md5sum] = "fb42cb7038c380eb0e2fa208987c96ad"
+diff --git a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
+index afe6106..99448d0 100644
+--- a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
++++ b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
+@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ DEPENDS = "gtk+ bluez4 dbus-glib imagemagick openobex"
+ RCONFLICTS_${PN} = "bluez5"
+ 
++PNBLACKLIST[obex-data-server] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ SRC_URI = "http://tadas.dailyda.com/software/obex-data-server-${PV}.tar.gz"
+ SRC_URI[md5sum] = "961ca5db6fe9c97024e133cc6203cc4d"
+ SRC_URI[sha256sum] = "b399465ddbd6d0217abedd9411d9d74a820effa0a6a142adc448268d3920094f"
+diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
+index b07779d..ed3d6b2 100644
+--- a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
++++ b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
+@@ -8,6 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
+                     file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
+ "
+ 
++PNBLACKLIST[openobex] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/openobex-${PV}.tar.gz \
+            file://disable-cable-test.patch \
+            file://libusb_crosscompile_check.patch \
+diff --git a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
+index def3451..d91cbcb 100644
+--- a/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
++++ b/meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb
+@@ -6,6 +6,8 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ DEPENDS = "curl gtk+ libglade sqlite3 libexif gpsd bluez4 intltool-native"
+ 
++PNBLACKLIST[foxtrotgps] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ SRC_URI = "http://www.foxtrotgps.org/releases/${BP}.tar.gz"
+ SRC_URI[md5sum] = "6777d448ee9d3ba195f9d26ea90e3163"
+ SRC_URI[sha256sum] = "ae9706285510554cc0813ac92522e0d1672b0ddb065307bfacfcff3c328f6adb"
+diff --git a/meta-oe/recipes-navigation/gypsy/gypsy.inc b/meta-oe/recipes-navigation/gypsy/gypsy.inc
+index 7c93d0a..9efd356 100644
+--- a/meta-oe/recipes-navigation/gypsy/gypsy.inc
++++ b/meta-oe/recipes-navigation/gypsy/gypsy.inc
+@@ -8,6 +8,8 @@ LICENSE = "GPLv2.0 & LGPLv2.1"
+ SECTION = "console/network"
+ DEPENDS = "glib-2.0 dbus bluez4 dbus-glib libxslt-native libxslt"
+ 
++PNBLACKLIST[gypsy] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
++
+ inherit autotools pkgconfig gtk-doc
+ PACKAGES += "libgypsy"
+ 
 -- 
-1.9.2
+2.3.5
 
 
