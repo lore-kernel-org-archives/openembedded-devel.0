@@ -1,42 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F1E373E1E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 May 2015 15:48:24 +0000 (UTC)
-Received: by iget9 with SMTP id t9so30035479ige.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 May 2015 08:48:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=cmob+1SoHkh84m73zIjR7nnO2h9QLeYp2A3vCXerR7s=;
-	b=0ibga9+75Wqe8+oyl6jR1qHV0lNL0uspglCZc5+tt2qfUEf3AUAAXXff4H3NTniUt/
-	RbFdPneusBDPJjNDUct3o/BPJufpo2rbK2Ru5msAnhwCl49UNqc10W16IF3kDwmtqvwR
-	1Yk8Vkb6SvixsrjDSW9IOhGglw+YeG6tIpxS0M+QSMHOPO8v5UrqucdD3nlICHNXpYUq
-	MfCnTegVNlXckJyakhRS81rnuONRR0cxTybcgww5En+2A+mbRDCicaQxUrNikcp49NLP
-	ciWT71buJs5k0QGwYbG9a45vO28g3jjTShafo5Xu7umDqIjg92U3+ctkoC1W8FBoaHji
-	Q8oA==
-X-Received: by 10.107.30.10 with SMTP id e10mr13182614ioe.72.1430495305956;
-	Fri, 01 May 2015 08:48:25 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.50.230.178 with HTTP; Fri, 1 May 2015 08:47:55 -0700 (PDT)
-In-Reply-To: <CAMKF1spGC+4unddLJeqCuynaBeP7h62raW2RN==EeNu=SzeYfA@mail.gmail.com>
-References: <1430153054-1252-1-git-send-email-raj.khem@gmail.com>
-	<CAJ86T=Witf+y68y_r-HtcR5FZvHGMOzOrxOYzWhLPFQd9zbdMg@mail.gmail.com>
-	<DCD4D1D9-2F13-449B-9A49-43E95C4255C5@gmail.com>
-	<CAP9ODKrGu5sJo9WO--7U511hOeOJKcK-W8e8vE1K2RiFkJ2fvQ@mail.gmail.com>
-	<5541157E.2080807@pseudoterminal.org>
-	<CAMKF1spGC+4unddLJeqCuynaBeP7h62raW2RN==EeNu=SzeYfA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 May 2015 08:47:55 -0700
-Message-ID: <CAMKF1sqNa832Bjw9fQkO=G1Xqyqc7X7uZMhyBG6xG0RquqA+UA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: pnandyala <Pavan.Nandyala@lnttechservices.com>,
-	Zoltan Kuscsik <zoltan.kuscsik@linaro.org>,
-	knagabhirava <kalyankumar.nagabhirava@lnttechservices.com>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-browser][PATCH 1/2 V4] cef3: Add recipe for Chromium Embedded Framework
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3604 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 01 May 2015 17:06:27 UTC
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 2EE3D73E14;
+	Fri,  1 May 2015 17:06:27 +0000 (UTC)
+Received: from gandalf.denix.org ([108.28.31.169]) by vms173023.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NNO006I9I23TN70@vms173023.mailsrvcs.net>; Fri,
+	01 May 2015 11:06:16 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=JbALdvP9 c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+	a=jLWw55sr_RoA:10 a=kj9zAlcOel0A:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
+	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10	a=S7esbjWVKTV4GOUmln0A:9
+	a=CjuIK1q_8ugA:10
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 39EC4200DD; Fri,
+	1 May 2015 12:06:03 -0400 (EDT)
+Date: Fri, 01 May 2015 12:06:02 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-core@lists.openembedded.org
+Message-id: <20150501160602.GA5885@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,51 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 May 2015 15:48:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 01 May 2015 17:06:28 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-ping. Can this now be merged ?
+Hi,
 
-On Wed, Apr 29, 2015 at 10:54 AM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Apr 29, 2015 10:37 AM, "Carlos Rafael Giani" <dv@pseudoterminal.org>
-> wrote:
->>
->> The latest one (V8) seems good to me. I was initially skeptical about the
->> heavy chromium.inc refactoring, but these days we don't have multiple
->> chromium versions in meta-browser, so it is okay.
->> The shared object versioning bandaid wasn't done by me, I modified other
->> parts, but I agree with the patch. The way it is done now is cleaner.
->> Have you come across a case where there were codec package conflicts?
->>
->
-> Not yet but this makes it future proof. Since I know there are packages with
-> same .so
->>
->>
->> Am 2015-04-27 um 23:40 schrieb Otavio Salvador:
->>>
->>> On Mon, Apr 27, 2015 at 6:37 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>>>>
->>>>> On Apr 27, 2015, at 1:33 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
->>>>>
->>>>> Looks like some regressions may have crept back relative previous
->>>>> versions of the patch?
->>>>>
->>>>>   - dubious indent in do_install()
->>>>>   - .pak files being installed as executables
->>>>>   - dev-so INSANE_SKIP shouldn't be requied
->>>>>
->>>> Thanks for bringing it up. I will send a followup to fix it
->>>> incrementally.
->>>
->>> Please wait for Carlos comments and send a new pathc revision. This is
->>> not yet merged so fixes are still possible.
->>>
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Has anyone ever seen this message during <image>.do_rootfs task?
+
+Collected errors:
+ * opkg_install_pkg: Package <package> md5sum mismatch. Either the opkg or the package index are corrupt. Try 'opkg update'.
+ * opkg_install_cmd: Cannot install package <package>.
+
+We started seeing it on random packages inside the <image> few weeks ago on 
+different machines. At the time we had switched to bitbake 1.26. But even 
+trying different bitbake versions still occasionally caused the same error, so 
+the culprit is still unknwon. Using oe-core/daisy for now.
+
+Any comments or suggestions to where start looking would be appreciated! 
+Thanks.
+
+-- 
+Denys
 
