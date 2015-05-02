@@ -1,35 +1,33 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
-	[209.85.192.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EF0160024
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 May 2015 16:56:54 +0000 (UTC)
-Received: by pdbqa5 with SMTP id qa5so122531841pdb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 May 2015 09:56:55 -0700 (PDT)
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 47BCC6AC56;
+	Sat,  2 May 2015 21:55:25 +0000 (UTC)
+Received: by igblo3 with SMTP id lo3so59559642igb.0;
+	Sat, 02 May 2015 14:55:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=6NyAkZrGGkVit91WGlSsmGkOMW20ef8JrreYPsrPDfw=;
-	b=s2E7PVnxKR2Otjgxlwu/h1VoY+RXyrfAic7szsgVy5Z+Xc8zxkEGAwhLVosu/zeE3t
-	W6yYrcEednVtSIzsJYB16JKYuv56cXHxTnt/KfVr20RkmD6wyu6Cp2tkk3oTR1c5fbUS
-	tko1ZX3e1B1eOlqW4lXaZTNxfJi5UZEyzoSGD6SKjBPe9jDGDPOYRH0tEtc0RWJ5HTFf
-	fAQq1/kPuUuOBm/6CZrUtlDLZq0h4EezID6GCruOvqRV717ZoZPBbauJnRw4+uDqVYmo
-	3CZSrNHC+XRXT0Vd2DzI2o+dghUGgr0Yiduww4qvJZPsYaLqd2welDxiF1S1dkaRV+7q
-	JQ7A==
-X-Received: by 10.66.230.130 with SMTP id sy2mr12741618pac.157.1430585815761; 
-	Sat, 02 May 2015 09:56:55 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id k8sm8063032pbq.51.2015.05.02.09.56.53
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 02 May 2015 09:56:54 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	schnitzeltony@googlemail.com
-Date: Sat,  2 May 2015 09:56:50 -0700
-Message-Id: <1430585810-19488-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-xfce][PATCH] meta-xfce: add layer depends
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=+VH2Lx+9GfqjkZoCiGB7/qEbMJSgeZt62nXc2GqGAF4=;
+	b=qGoGE90Qx7l7lBmiDftx/AajiMXnoNAFQFUaNACChOcmqaGPshKgpRffT7grO9JOWH
+	9dhIbpGWAXIYxqGHHIqb4L+v5xqKnhhwkmxiKcTDc/L8gRN9HQgNstzHaFffjJo39UOu
+	Sr7tYaf/oNLYCIZiNOVWAn54NwDLCjG0OzMje5TLk/3yfhmVn058RLe7MMzyA48bTA3x
+	nzcWPiW3Fg9rcjdQkzFJpeComrBRY7+gqJGTyr2kblX9H84o6Ck0cijoFN+o37Q9i7KH
+	a5KedlmXA/UireP4Jh3EzXSI02jLITWlG+XQ0H0qdPRv92HXTPQ/WzT61jYPHGwzRwrf
+	uwLQ==
+MIME-Version: 1.0
+X-Received: by 10.107.164.209 with SMTP id d78mr20000237ioj.73.1430603726608; 
+	Sat, 02 May 2015 14:55:26 -0700 (PDT)
+Received: by 10.36.3.206 with HTTP; Sat, 2 May 2015 14:55:26 -0700 (PDT)
+In-Reply-To: <20150501160602.GA5885@denix.org>
+References: <20150501160602.GA5885@denix.org>
+Date: Sat, 2 May 2015 23:55:26 +0200
+Message-ID: <CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 May 2015 16:56:57 -0000
+X-List-Received-Date: Sat, 02 May 2015 21:55:27 -0000
+Content-Type: text/plain; charset=UTF-8
 
-depends on gnome if an image includes packagegroup-xfce-base.
-depends on meta-networking if an image includes packagegroup-xfce-base-extended.
+On Fri, May 1, 2015 at 6:06 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> Hi,
+>
+> Has anyone ever seen this message during <image>.do_rootfs task?
+>
+> Collected errors:
+>  * opkg_install_pkg: Package <package> md5sum mismatch. Either the opkg or the package index are corrupt. Try 'opkg update'.
+>  * opkg_install_cmd: Cannot install package <package>.
+>
+> We started seeing it on random packages inside the <image> few weeks ago on
+> different machines. At the time we had switched to bitbake 1.26. But even
+> trying different bitbake versions still occasionally caused the same error, so
+> the culprit is still unknwon. Using oe-core/daisy for now.
+>
+> Any comments or suggestions to where start looking would be appreciated!
+> Thanks.
+>
+> --
+> Denys
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-xfce/conf/layer.conf | 10 ++++++++++
- 1 file changed, 10 insertions(+)
 
-diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
-index d669e4e..55bcef6 100644
---- a/meta-xfce/conf/layer.conf
-+++ b/meta-xfce/conf/layer.conf
-@@ -7,3 +7,13 @@ BBFILES += "${LAYERDIR}/recipes-*/*/*.bb ${LAYERDIR}/recipes-*/*/*.bbappend"
- BBFILE_COLLECTIONS += "xfce-layer"
- BBFILE_PATTERN_xfce-layer := "^${LAYERDIR}/"
- BBFILE_PRIORITY_xfce-layer = "7"
-+
-+# This should only be incremented on significant changes that will
-+# cause compatibility issues with other layers
-+LAYERVERSION_xfce-layer = "1"
-+
-+LAYERDEPENDS_xfce-layer = "core"
-+LAYERDEPENDS_xfce-layer += "openembedded-layer"
-+LAYERDEPENDS_xfce-layer += "gnome-layer"
-+LAYERDEPENDS_xfce-layer += "openembedded-layer"
-+LAYERDEPENDS_xfce-layer += "meta-python"
--- 
-2.3.5
+Hi,
+yes, I have seen this during multimachine builds.
+My TMPDIR is on tmpfs in ram so everytime I reboot it is re-populated
+from sstate.
 
+Configuring packagegroup-base.
+Collected errors:
+  * opkg_install_pkg: Package update-rc.d md5sum mismatch. Either the
+opkg or the package index are corrupt. Try 'opkg update'.
+ * opkg_install_cmd: Cannot install package psplash.
+ * opkg_install_pkg: Package update-rc.d md5sum mismatch. Either the
+opkg or the package index are corrupt. Try 'opkg update'.
+ * opkg_install_cmd: Cannot install package packagegroup-base-extended.
+ * opkg_install_pkg: Package run-postinsts md5sum mismatch. Either the
+opkg or the package index are corrupt. Try 'opkg update'.
+ * opkg_install_cmd: Cannot install package run-postinsts.
+ * opkg_install_pkg: Package update-rc.d md5sum mismatch. Either the
+opkg or the package index are corrupt. Try 'opkg update'.
+ * opkg_install_cmd: Cannot install package packagegroup-core-boot.
+ERROR: Function failed: do_rootfs
+
+I retried right now after reboot (clean tmpdir) but this time it didn't happen.
+Once/if I find the way to reproduce it I'll open a bug.
+
+Cheers
+
+Andrea
 
