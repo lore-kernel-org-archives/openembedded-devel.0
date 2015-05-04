@@ -1,29 +1,34 @@
-Return-Path: <zhengjunling@huawei.com>
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [119.145.14.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D38A0601DC
+Return-Path: <k4230r6@gmail.com>
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id A133972C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 May 2015 03:27:11 +0000 (UTC)
-Received: from 172.24.2.119 (EHLO szxeml432-hub.china.huawei.com)
-	([172.24.2.119])
-	by szxrg03-dlp.huawei.com (MOS 4.4.3-GA FastPath queued)
-	with ESMTP id BFL92335; Mon, 04 May 2015 11:27:09 +0800 (CST)
-Received: from Patch-Test.huawei (10.107.197.245) by
-	szxeml432-hub.china.huawei.com (10.82.67.209) with Microsoft SMTP
-	Server id 14.3.158.1; Mon, 4 May 2015 11:25:56 +0800
-From: Junling Zheng <zhengjunling@huawei.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 May 2015 03:22:26 +0000
-Message-ID: <1430709746-18082-1-git-send-email-zhengjunling@huawei.com>
-X-Mailer: git-send-email 1.8.3.4
-MIME-Version: 1.0
-X-Originating-IP: [10.107.197.245]
-X-CFilter-Loop: Reflected
-X-Mirapoint-Virus-RAPID-Raw: score=unknown(0),
-	refid=str=0001.0A020204.5546E70D.008F, ss=1, re=0.000, recu=0.000,
-	reip=0.000, cl=1, cld=1, fgs=0, ip=0.0.0.0,
-	so=2013-05-26 15:14:31, dmn=2013-03-21 17:37:32
-X-Mirapoint-Loop-Id: 173fa05414505da3cad8144a6ae2ed12
-Subject: [meta-networking][PATCH v2] net-snmp: fix CVE-2014-2285
+	Mon,  4 May 2015 04:22:30 +0000 (UTC)
+Received: by wgso17 with SMTP id o17so138290575wgs.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 May 2015 21:22:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=yQs9Et1XFc1n5v3lcB6w9cFYbTGPhULbuwq3Njh9kHY=;
+	b=D632eraBrFWJDEKaHgBUAEpRW7dRaeLlo+gR9227cpvSw5V6apE0pkzAKpuxTU/FIb
+	Ng6tTnVi9bqplTqsPfozh+1gECW2GYfB+Jg3WsdViKNym3hsDQRE3hOvNkbR+6j3rJCN
+	eeAWU1KVEwSX15qm4lmhZdi28p2aYiwQY6QF4JpDL9aS54+dMveXkhAmy7l5xMTF0qcx
+	gLQMQKDoSQWoDrk9x1fM/wLMso0L5vs5Avp5eFiNthbqOi/d9hTIYdF8GyFfATmLgBIk
+	wvd6lccJIUjhUg5MrJehN1h1V+L6WCKIKnA/VUu9gJnFzs73q3GMokTB1zSCUahsGYTQ
+	29RQ==
+X-Received: by 10.180.100.101 with SMTP id ex5mr16355124wib.13.1430713351896; 
+	Sun, 03 May 2015 21:22:31 -0700 (PDT)
+Received: from quadros.fritz.box
+	(HSI-KBW-46-223-216-155.hsi.kabel-badenwuerttemberg.de.
+	[46.223.216.155])
+	by mx.google.com with ESMTPSA id di9sm9216004wib.16.2015.05.03.21.22.30
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 03 May 2015 21:22:31 -0700 (PDT)
+From: Christian Ege <k4230r6@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 May 2015 06:22:19 +0200
+Message-Id: <1430713339-4879-1-git-send-email-k4230r6@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [PATCH] Fixed path of rng-tools default configuration file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,92 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2015 03:27:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 04 May 2015 04:22:34 -0000
 
-The perl_trapd_handler function in perl/TrapReceiver/TrapReceiver.xs in
-Net-SNMP 5.7.3.pre3 and earlier, when using certain Perl versions, allows
-remote attackers to cause a denial of service (snmptrapd crash) via an
-empty community string in an SNMP trap, which triggers a NULL pointer
-dereference within the newSVpv function in Perl.
+The initscript expects the config file in the folder /etc/default/
+but the recipe copied it to /etc. The recipe already created the folder
+/etc/default/ put it there.
 
-Refer to: https://bugzilla.redhat.com/show_bug.cgi?id=1072044
-
-Signed-off-by: Junling Zheng <zhengjunling@huawei.com>
+Signed-off-by: Christian Ege <k4230r6@gmail.com>
 ---
- .../net-snmp/net-snmp/0001-Fix-CVE-2014-2285.patch | 49 ++++++++++++++++++++++
- .../recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Fix-CVE-2014-2285.patch
+ meta-oe/recipes-support/rng-tools/rng-tools_4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Fix-CVE-2014-2285.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Fix-CVE-2014-2285.patch
-new file mode 100644
-index 0000000..b1514b9
---- /dev/null
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Fix-CVE-2014-2285.patch
-@@ -0,0 +1,49 @@
-+From 87a0d27102ceffb92e5c1d6fbbd24972a9dd33ac Mon Sep 17 00:00:00 2001
-+From: Junling Zheng <zhengjunling@huawei.com>
-+Date: Mon, 20 Apr 2015 10:23:08 +0000
-+Subject: [PATCH] Fix CVE-2014-2285
-+
-+Sending SNMP trap with empty community string crashes snmptrapd if Perl
-+handler is enabled.
-+
-+Refer to:
-+https://bugzilla.redhat.com/show_bug.cgi?id=1072044
-+
-+Upstream Status: Backported
-+
-+Signed-off-by: Junling Zheng <zhengjunling@huawei.com>
-+---
-+ perl/TrapReceiver/TrapReceiver.xs | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/perl/TrapReceiver/TrapReceiver.xs b/perl/TrapReceiver/TrapReceiver.xs
-+index 531bfa4..ac94370 100644
-+--- a/perl/TrapReceiver/TrapReceiver.xs
-++++ b/perl/TrapReceiver/TrapReceiver.xs
-+@@ -81,18 +81,18 @@ int   perl_trapd_handler( netsnmp_pdu           *pdu,
-+         STOREPDUi("securitymodel", pdu->securityModel);
-+         STOREPDUi("securitylevel", pdu->securityLevel);
-+         STOREPDU("contextName",
-+-                 newSVpv(pdu->contextName, pdu->contextNameLen));
-++                 newSVpv(pdu->contextName ? pdu->contextName : "", pdu->contextNameLen));
-+         STOREPDU("contextEngineID",
-+-                 newSVpv((char *) pdu->contextEngineID,
-++                 newSVpv((char *)(pdu->contextEngineID ? pdu->contextEngineID : ""),
-+                                     pdu->contextEngineIDLen));
-+         STOREPDU("securityEngineID",
-+-                 newSVpv((char *) pdu->securityEngineID,
-++                 newSVpv((char *)(pdu->securityEngineID ? pdu->securityEngineID : ""),
-+                                     pdu->securityEngineIDLen));
-+         STOREPDU("securityName",
-+-                 newSVpv((char *) pdu->securityName, pdu->securityNameLen));
-++                 newSVpv((char *)(pdu->securityName ? pdu->securityName : ""), pdu->securityNameLen));
-+     } else {
-+         STOREPDU("community",
-+-                 newSVpv((char *) pdu->community, pdu->community_len));
-++                 newSVpv((char *)(pdu->community ? pdu->community : ""), pdu->community_len));
-+     }
-+ 
-+     if (transport && transport->f_fmtaddr) {
-+-- 
-+1.8.3.4
-+
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-index 1baf101..c9a692d 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb
-@@ -19,6 +19,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
-         file://fix-libtool-finish.patch \
-         file://net-snmp-testing-add-the-output-format-for-ptest.patch \
-         file://run-ptest \
-+        file://0001-Fix-CVE-2014-2285.patch \
- "
+diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+index b3d880f..34a3f95 100644
+--- a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
++++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
+@@ -28,7 +28,7 @@ do_install_append() {
+             ${D}${sysconfdir}/init.d/rng-tools
  
- SRC_URI[md5sum] = "a2c83518648b0f2a5d378625e45c0e18"
+         install -d "${D}${sysconfdir}/default"
+-        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
++        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/rng-tools
+     fi
+ }
+ 
 -- 
-1.8.3.4
+2.1.4
 
 
