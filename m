@@ -1,34 +1,62 @@
-Return-Path: <k4230r6@gmail.com>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id A133972C04
+Return-Path: <B40290@freescale.com>
+X-Greylist: delayed 384 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 04 May 2015 09:54:28 UTC
+Received: from na01-bl2-obe.outbound.protection.outlook.com
+	(mail-bl2on0117.outbound.protection.outlook.com [65.55.169.117])
+	by mail.openembedded.org (Postfix) with ESMTP id 94ADB72120
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 May 2015 04:22:30 +0000 (UTC)
-Received: by wgso17 with SMTP id o17so138290575wgs.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 May 2015 21:22:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=yQs9Et1XFc1n5v3lcB6w9cFYbTGPhULbuwq3Njh9kHY=;
-	b=D632eraBrFWJDEKaHgBUAEpRW7dRaeLlo+gR9227cpvSw5V6apE0pkzAKpuxTU/FIb
-	Ng6tTnVi9bqplTqsPfozh+1gECW2GYfB+Jg3WsdViKNym3hsDQRE3hOvNkbR+6j3rJCN
-	eeAWU1KVEwSX15qm4lmhZdi28p2aYiwQY6QF4JpDL9aS54+dMveXkhAmy7l5xMTF0qcx
-	gLQMQKDoSQWoDrk9x1fM/wLMso0L5vs5Avp5eFiNthbqOi/d9hTIYdF8GyFfATmLgBIk
-	wvd6lccJIUjhUg5MrJehN1h1V+L6WCKIKnA/VUu9gJnFzs73q3GMokTB1zSCUahsGYTQ
-	29RQ==
-X-Received: by 10.180.100.101 with SMTP id ex5mr16355124wib.13.1430713351896; 
-	Sun, 03 May 2015 21:22:31 -0700 (PDT)
-Received: from quadros.fritz.box
-	(HSI-KBW-46-223-216-155.hsi.kabel-badenwuerttemberg.de.
-	[46.223.216.155])
-	by mx.google.com with ESMTPSA id di9sm9216004wib.16.2015.05.03.21.22.30
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 03 May 2015 21:22:31 -0700 (PDT)
-From: Christian Ege <k4230r6@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 May 2015 06:22:19 +0200
-Message-Id: <1430713339-4879-1-git-send-email-k4230r6@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [PATCH] Fixed path of rng-tools default configuration file
+	Mon,  4 May 2015 09:54:28 +0000 (UTC)
+Received: from BY2PR03CA068.namprd03.prod.outlook.com (10.141.249.41) by
+	DM2PR03MB446.namprd03.prod.outlook.com (10.141.85.17) with Microsoft
+	SMTP Server (TLS) id 15.1.160.10; Mon, 4 May 2015 09:54:28 +0000
+Received: from BL2FFO11FD046.protection.gbl (2a01:111:f400:7c09::138) by
+	BY2PR03CA068.outlook.office365.com (2a01:111:e400:2c5d::41) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.154.19 via Frontend Transport; Mon, 4 May 2015
+	09:54:27 +0000
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=freescale.com; freescale.mail.onmicrosoft.com; dkim=none
+	(message not signed) header.d=none;
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.158.2 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BL2FFO11FD046.mail.protection.outlook.com (10.173.161.208) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.160.8 via Frontend Transport; Mon, 4 May 2015
+	09:54:27 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t449sOoO008346;
+	Mon, 4 May 2015 02:54:25 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 4 May 2015 17:53:45 +0800
+Message-ID: <1430733225-30477-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10019020)(6009001)(339900001)(199003)(189002)(50466002)(85426001)(87936001)(6806004)(5001960100002)(19580395003)(86152002)(48376002)(33646002)(575784001)(450100001)(2351001)(105606002)(77096005)(92566002)(46102003)(36756003)(50226001)(19580405001)(47776003)(106466001)(86362001)(104016003)(77156002)(50986999)(15975445007)(107886002)(229853001)(62966003)(110136002)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DM2PR03MB446;
+	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; A:1; MX:1;
+	LANG:en; 
+MIME-Version: 1.0
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DM2PR03MB446;
+X-Microsoft-Antispam-PRVS: <DM2PR03MB4463D591F5D864A69C8FABA84D20@DM2PR03MB446.namprd03.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(5005006)(3002001); SRVR:DM2PR03MB446; BCL:0;
+	PCL:0; RULEID:; SRVR:DM2PR03MB446; 
+X-Forefront-PRVS: 05669A7924
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2015 09:54:27.5750 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2];
+	Helo=[az84smr01.freescale.net]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM2PR03MB446
+Subject: [meta-oe][fido][PATCH] polkit: do not hardcode the libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,31 +70,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2015 04:22:34 -0000
+X-List-Received-Date: Mon, 04 May 2015 09:54:31 -0000
+Content-Type: text/plain
 
-The initscript expects the config file in the folder /etc/default/
-but the recipe copied it to /etc. The recipe already created the folder
-/etc/default/ put it there.
+From: Chunrong Guo <B40290@freescale.com>
 
-Signed-off-by: Christian Ege <k4230r6@gmail.com>
+  libdir is defined as ${prefix}/lib/, but we want it to support multilib path
+
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
- meta-oe/recipes-support/rng-tools/rng-tools_4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../polkit/0001-do-not-hardcoded-libdir.patch      | 44 ++++++++++++++++++++++
+ meta-oe/recipes-extended/polkit/polkit_0.112.bb    |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
 
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-index b3d880f..34a3f95 100644
---- a/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-+++ b/meta-oe/recipes-support/rng-tools/rng-tools_4.bb
-@@ -28,7 +28,7 @@ do_install_append() {
-             ${D}${sysconfdir}/init.d/rng-tools
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
+new file mode 100644
+index 0000000..3ccedcd
+--- /dev/null
++++ b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
+@@ -0,0 +1,44 @@
++From c9e09d9b101109832b1dcb050f0c8b588e276686 Mon Sep 17 00:00:00 2001
++From: Zhenhua Luo <zhenhua.luo@freescale.com>
++Date: Mon, 4 May 2015 04:11:27 -0500
++Subject: [PATCH] do not hardcoded libdir
++
++Upstream-Status: Pending
++
++libdir is hardcoded to ${prefix}/lib, but we want it to support multilib
++
++Signed-off-by: Chunrong Guo <B40290@freescale.com>
++---
++ polkitagent/Makefile.am   | 2 +-
++ polkitbackend/Makefile.am | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/polkitagent/Makefile.am b/src/polkitagent/Makefile.am
++index 3bc364e..7d1ac0e 100644
++--- a/src/polkitagent/Makefile.am
+++++ b/src/polkitagent/Makefile.am
++@@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =                               		\
++ 
++ libpolkit_agent_1_la_LDFLAGS = -export-symbols-regex '(^polkit_.*)'
++ 
++-libprivdir = $(prefix)/lib/polkit-1
+++libprivdir = $(prefix)/${base_libdir}/polkit-1
++ libpriv_PROGRAMS = polkit-agent-helper-1
++ 
++ polkit_agent_helper_1_SOURCES = 					\
++diff --git a/src/polkitbackend/Makefile.am b/src/polkitbackend/Makefile.am
++index 9f430d0..1f7610b 100644
++--- a/src/polkitbackend/Makefile.am
+++++ b/src/polkitbackend/Makefile.am
++@@ -67,7 +67,7 @@ rules_DATA = 50-default.rules
++ 
++ # ----------------------------------------------------------------------------------------------------
++ 
++-libprivdir = $(prefix)/lib/polkit-1
+++libprivdir = $(prefix)/${base_libdir}/polkit-1
++ libpriv_PROGRAMS = polkitd
++ 
++ polkitd_SOURCES = 							\
++-- 
++2.3.3
++
+diff --git a/meta-oe/recipes-extended/polkit/polkit_0.112.bb b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
+index 72b182b..f20e1a4 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_0.112.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
+@@ -21,6 +21,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
+ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+            ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
+            file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
++           file://0001-do-not-hardcoded-libdir.patch \
+ "
  
-         install -d "${D}${sysconfdir}/default"
--        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/rng-tools
-+        install -m 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/rng-tools
-     fi
- }
- 
+ SRC_URI[md5sum] = "b0f2fa00a55f47c6a5d88e9b73f80127"
 -- 
-2.1.4
+1.9.2
 
 
