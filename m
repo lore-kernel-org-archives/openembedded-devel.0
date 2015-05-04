@@ -1,32 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 3045F7169F
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 May 2015 20:22:01 +0000 (UTC)
-Received: by igbhj9 with SMTP id hj9so93689591igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 May 2015 13:22:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=ojNY2nQdZzfbjyOpPG2MCOReUQsAa3TgByfNl68gtEk=;
-	b=TDXrN4gxBo9uBIKmveybS5FZbIw+brl/DLjhtkRohxLt+EDjd1y/Lx15zb7vdZMiam
-	eMJe9AAO1TlXMu67KHFhjKgaDVj3fXT1/9gbzlSBqBwYKc4ujts5UlGGDv09vKp/OSC/
-	SrjR0o1ZybeuQ17oIJDsFt1lfhbYn/o1PRV42Red53y3cyUgQ9s8/6D83j4ezeu407Cp
-	ab79Dd67KoyZX2s+OSYGqqKPPkSH+ib1SjzN5pVUJSWDXot5i8+JpSTXSWuj23qu62hP
-	kvGN9/zp7l+fGMMhVPO6a1sBA9+6yoDNc9kCKvQv24HImmZJI6ppi/3Dk0hg9PnHSEP8
-	a5Qw==
-X-Received: by 10.50.117.35 with SMTP id kb3mr452603igb.13.1430770922465; Mon,
-	04 May 2015 13:22:02 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.50.230.178 with HTTP; Mon, 4 May 2015 13:21:32 -0700 (PDT)
-In-Reply-To: <1430732876-15399-1-git-send-email-b40290@freescale.com>
-References: <1430732876-15399-1-git-send-email-b40290@freescale.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 May 2015 13:21:32 -0700
-Message-ID: <CAMKF1so7KpzaY8Yog-s7hkgG1ujDxvgZL1wiPivTVmccF6=2-A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] polkit: do not hardcode the libdir
+Return-Path: <denis@denix.org>
+Received: from vms173019pub.verizon.net (vms173019pub.verizon.net
+	[206.46.173.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 864A772120;
+	Mon,  4 May 2015 22:27:11 +0000 (UTC)
+Received: from gandalf.denix.org ([108.28.31.169]) by vms173019.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NNU001UYJPCZMA0@vms173019.mailsrvcs.net>; Mon,
+	04 May 2015 17:27:13 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=PIC4Ikvq c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+	a=jLWw55sr_RoA:10 a=8nJEP1OIZ-IA:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
+	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10	a=HOI7-lVZ4g_ahJtD6ZgA:9
+	a=wPNLvfGTeEIA:10
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 81D66200EF; Mon,
+	4 May 2015 18:27:11 -0400 (EDT)
+Date: Mon, 04 May 2015 18:27:11 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-members@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-id: <20150504222711.GD5885@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: OpenEmbedded e.V. membership status announcement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,12 +37,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2015 20:22:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 May 2015 22:27:13 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-disposition: inline
+Content-transfer-encoding: 8bit
 
-On Mon, May 4, 2015 at 2:47 AM,  <b40290@freescale.com> wrote:
-> +-libprivdir = $(prefix)/lib/polkit-1
-> ++libprivdir = $(prefix)/${base_libdir}/polkit-1
+All,
 
-who defines base_libdir ?
+In accordance with OpenEmbedded e.V. statutes, members that were absent from 
+two or more consecutive annual General Assembly meetings and didn't have 
+anyone representing them by proxy, forfeit their active membership status and 
+can no longer vote in any OE e.V. election. Thus, the current up-to-date 
+membership roster is one of the blocking items for any election process.
+
+After collating the attendance records and all gathered proxy forms from past 
+years GA meetings, the Board of Directors came up with the following list of 
+inactive members - see below.
+
+Realizing, that some people may still be active in other capacities in the 
+OpenEmbedded e.V. organization, or just wish to renew their active status, the 
+Board of Directors would like to open up a two-week period for inactive 
+members to state their intent to become active, after which we should be able 
+to vote for reinstating them back.
+
+The Board will make an effort to contact inactive members directly by email, 
+or please feel free to reply to this announcement with your intent. Thanks.
+
+The list of e.V. members to become inactive, based on GA attendance:
+
+===========================
+Alessandro Gardich
+Andreas Oberritter
+Andrei Gherzan
+Chris Larson
+Cliff Brake
+Daniel Willmann
+Dirk Hohndel
+Dirk Opfer
+Dmitry Eremin­Solenikov
+Esben Haabendal
+Florian Boor
+Frans Meulenbrooks
+Graham Gower
+Holger Freyther
+Jan Lübbe
+Jason Kridner
+John Willis
+Joshua Lock
+Ken Gilmer
+Liam Girdwood
+Marcin Juszkiewicz
+Mark Brown
+Michael Lauer
+Michael Smith
+Philip Blundell
+Phillip Zabel
+Robert Schuster
+Roman I Khimov
+Steve Sakoman
+Tom King
+Tom Rini
+Yu Ke
+Yury Bushmelev
+===========================
+
+Please let us know of any concerns or comments. Thanks.
+
+-- 
+Denys Dmytriyenko
+OpenEmbedded e.V. Board of Directors
 
