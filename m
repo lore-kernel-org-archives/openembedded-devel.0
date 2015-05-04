@@ -1,19 +1,17 @@
 Return-Path: <B40290@freescale.com>
-X-Greylist: delayed 384 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 04 May 2015 09:54:28 UTC
-Received: from na01-bl2-obe.outbound.protection.outlook.com
-	(mail-bl2on0117.outbound.protection.outlook.com [65.55.169.117])
-	by mail.openembedded.org (Postfix) with ESMTP id 94ADB72120
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2on0119.outbound.protection.outlook.com [207.46.100.119])
+	by mail.openembedded.org (Postfix) with ESMTP id E9E35601DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 May 2015 09:54:28 +0000 (UTC)
-Received: from BY2PR03CA068.namprd03.prod.outlook.com (10.141.249.41) by
-	DM2PR03MB446.namprd03.prod.outlook.com (10.141.85.17) with Microsoft
-	SMTP Server (TLS) id 15.1.160.10; Mon, 4 May 2015 09:54:28 +0000
-Received: from BL2FFO11FD046.protection.gbl (2a01:111:f400:7c09::138) by
-	BY2PR03CA068.outlook.office365.com (2a01:111:e400:2c5d::41) with
+	Mon,  4 May 2015 10:03:58 +0000 (UTC)
+Received: from DM2PR03CA0001.namprd03.prod.outlook.com (10.141.96.11) by
+	DM2PR03MB447.namprd03.prod.outlook.com (10.141.85.18) with Microsoft
+	SMTP Server (TLS) id 15.1.160.10; Mon, 4 May 2015 09:48:05 +0000
+Received: from BY2FFO11FD037.protection.gbl (2a01:111:f400:7c0c::159) by
+	DM2PR03CA0001.outlook.office365.com (2a01:111:e400:2428::11) with
 	Microsoft
 	SMTP Server (TLS) id 15.1.154.19 via Frontend Transport; Mon, 4 May 2015
-	09:54:27 +0000
+	09:48:04 +0000
 Authentication-Results: spf=fail (sender IP is 192.88.158.2)
 	smtp.mailfrom=freescale.com; freescale.mail.onmicrosoft.com; dkim=none
 	(message not signed) header.d=none;
@@ -22,41 +20,40 @@ Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
 	receiver=protection.outlook.com; 
 	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
 Received: from az84smr01.freescale.net (192.88.158.2) by
-	BL2FFO11FD046.mail.protection.outlook.com (10.173.161.208) with
-	Microsoft
-	SMTP Server (TLS) id 15.1.160.8 via Frontend Transport; Mon, 4 May 2015
-	09:54:27 +0000
+	BY2FFO11FD037.mail.protection.outlook.com (10.1.14.222) with Microsoft
+	SMTP Server (TLS) id 15.1.160.8 via Frontend Transport;
+	Mon, 4 May 2015 09:48:03 +0000
 Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
-	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t449sOoO008346;
-	Mon, 4 May 2015 02:54:25 -0700
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t449m13S001113;
+	Mon, 4 May 2015 02:48:02 -0700
 From: <b40290@freescale.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 May 2015 17:53:45 +0800
-Message-ID: <1430733225-30477-1-git-send-email-b40290@freescale.com>
+Date: Mon, 4 May 2015 17:47:56 +0800
+Message-ID: <1430732876-15399-1-git-send-email-b40290@freescale.com>
 X-Mailer: git-send-email 1.9.2
 X-EOPAttributedMessage: 0
 X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
 	SFV:NSPM;
-	SFS:(10019020)(6009001)(339900001)(199003)(189002)(50466002)(85426001)(87936001)(6806004)(5001960100002)(19580395003)(86152002)(48376002)(33646002)(575784001)(450100001)(2351001)(105606002)(77096005)(92566002)(46102003)(36756003)(50226001)(19580405001)(47776003)(106466001)(86362001)(104016003)(77156002)(50986999)(15975445007)(107886002)(229853001)(62966003)(110136002)(4001430100001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DM2PR03MB446;
-	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; A:1; MX:1;
+	SFS:(10019020)(6009001)(339900001)(189002)(199003)(47776003)(86152002)(575784001)(77096005)(104016003)(33646002)(5001960100002)(48376002)(77156002)(86362001)(2351001)(92566002)(19580405001)(106466001)(19580395003)(6806004)(46102003)(62966003)(229853001)(5001920100001)(50226001)(50466002)(50986999)(110136002)(450100001)(15975445007)(85426001)(105606002)(87936001)(107886002)(36756003)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DM2PR03MB447;
+	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; MX:1; A:1;
 	LANG:en; 
 MIME-Version: 1.0
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DM2PR03MB446;
-X-Microsoft-Antispam-PRVS: <DM2PR03MB4463D591F5D864A69C8FABA84D20@DM2PR03MB446.namprd03.prod.outlook.com>
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DM2PR03MB447;
+X-Microsoft-Antispam-PRVS: <DM2PR03MB447FB418629DCC5A3072EE084D20@DM2PR03MB447.namprd03.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(5005006)(3002001); SRVR:DM2PR03MB446; BCL:0;
-	PCL:0; RULEID:; SRVR:DM2PR03MB446; 
+	RULEID:(601004)(5005006)(3002001); SRVR:DM2PR03MB447; BCL:0;
+	PCL:0; RULEID:; SRVR:DM2PR03MB447; 
 X-Forefront-PRVS: 05669A7924
 X-OriginatorOrg: freescale.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2015 09:54:27.5750 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2015 09:48:03.9025 (UTC)
 X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2];
 	Helo=[az84smr01.freescale.net]
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM2PR03MB446
-Subject: [meta-oe][fido][PATCH] polkit: do not hardcode the libdir
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM2PR03MB447
+Subject: [meta-oe][PATCH] polkit: do not hardcode the libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,12 +67,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 May 2015 09:54:31 -0000
+X-List-Received-Date: Mon, 04 May 2015 10:04:00 -0000
 Content-Type: text/plain
 
 From: Chunrong Guo <B40290@freescale.com>
 
-  libdir is defined as ${prefix}/lib/, but we want it to support multilib path
+ libdir is defined as ${prefix}/lib/, but we want it to support multilib path
 
 Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
