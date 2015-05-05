@@ -1,33 +1,35 @@
-Return-Path: <denis@denix.org>
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by mail.openembedded.org (Postfix) with ESMTP id DB79D60557;
-	Tue,  5 May 2015 00:23:16 +0000 (UTC)
-Received: from gandalf.denix.org ([108.28.31.169]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NNU00DOEP2MAXJ0@vms173021.mailsrvcs.net>; Mon,
-	04 May 2015 19:23:15 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=B/MOC1ok c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
-	a=jLWw55sr_RoA:10 a=8nJEP1OIZ-IA:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
-	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10	a=8cDcK6jg2Wr3C1WO5CkA:9
-	a=wPNLvfGTeEIA:10
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 29B28200EF; Mon,
-	4 May 2015 20:23:09 -0400 (EDT)
-Date: Mon, 04 May 2015 20:23:09 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Andreas Oberritter <obi@opendreambox.org>
-Message-id: <20150505002309.GE5885@denix.org>
-References: <20150504222711.GD5885@denix.org>
-	<554800F1.9050309@opendreambox.org>
-MIME-version: 1.0
-In-reply-to: <554800F1.9050309@opendreambox.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-members@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] OpenEmbedded e.V. membership status announcement
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
+	[209.85.220.48])
+	by mail.openembedded.org (Postfix) with ESMTP id D31FF7169F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  5 May 2015 03:18:26 +0000 (UTC)
+Received: by pacwv17 with SMTP id wv17so178609142pac.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 May 2015 20:18:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=vJoEjmQ3nlzGc7KAS/dQx9xfos5ETGjgMbux1S1jtus=;
+	b=nT3ZuGkh3CNBFy2/UpbGV9aXc38rHuX74JJcCwM9AKMK2DCjhYetdmWGZjFN6tQyCx
+	mYVCuQVhAsvrQ7Ce8XcJyihaxxRcDch1c9Wt16NsIOqPfjgQy5ZM7mXrcqUl3W2QcMMC
+	FHi+Mv24xWyIxQ94BkzH4agJbydE0aQ1IRCEWy6kV0snf+KAkEVqEvlmViukcZoTH5m0
+	6M70xQQ2csy2y70aGfDOHiKc1hQtd9AGhdAdfc4rgoIt7+g1xSTNOmTNkeJOAAT8Vtnz
+	XTtGeo49dYIS8y1dXBgX/NDs/nJKItpyBKHY97EtgE8Jkp5Rdt4ANF7TXweqHPbS9yg9
+	TPGw==
+X-Received: by 10.70.131.132 with SMTP id om4mr47298814pdb.30.1430795907681;
+	Mon, 04 May 2015 20:18:27 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by mx.google.com with ESMTPSA id
+	pm1sm14200619pdb.89.2015.05.04.20.18.25
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 04 May 2015 20:18:26 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	joe_macdonald@mentor.com
+Date: Mon,  4 May 2015 20:18:20 -0700
+Message-Id: <1430795900-25986-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-networking][PATCH] networkingmanager: QA warning for rdepends on polkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,101 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2015 00:23:17 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-disposition: inline
-Content-transfer-encoding: 8bit
+X-List-Received-Date: Tue, 05 May 2015 03:18:27 -0000
 
-Hi, Andreas,
+WARNING: QA Issue: networkmanager rdepends on polkit, but it isn't a build dependency? [build-deps]
 
-Thank you for replying back and letting us know that you are still active - 
-I'll add you to the list of people to get reinstated.
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb     | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-We do realize that current e.V. statutes may be a bit unfair in this regard, 
-that is why the Board of Directors has been working towards proposing a new 
-structure for the organization and drafting new bylaws. Though, major items 
-like this is what GA meetings are for...
-
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
+index 8d37c98..36a4a7e 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
+@@ -37,11 +37,12 @@ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','systemd','systemd','conso
+ PACKAGECONFIG[systemd] = " \
+     --with-systemdsystemunitdir=${systemd_unitdir}/system --with-session-tracking=systemd --enable-polkit, \
+     --without-systemdsystemunitdir, \
+-    polkit \
++    polkit, polkit \
+ "
+ # consolekit is not picked by shlibs, so add it to RDEPENDS too
+ PACKAGECONFIG[consolekit] = "--with-session-tracking=consolekit,,consolekit,consolekit"
+ PACKAGECONFIG[concheck] = "--enable-concheck,--disable-concheck,libsoup-2.4"
++PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, , polkit"
+ 
+ # Work around dbus permission problems since we lack a proper at_console
+ do_install_prepend() {
 -- 
-Denys
+2.3.5
 
-
-On Tue, May 05, 2015 at 01:29:53AM +0200, Andreas Oberritter wrote:
-> Hi Denys, everybody,
-> 
-> I guess I'm still active in a way or another, but didn't feel like
-> showing up at random places around the globe or filling out a form for
-> votes about topics I don't know about in advance once a year. When I
-> read the wiki page of the GA 2014, I can't even figure out what I could
-> have voted for, aside from new members, after it took place. So the
-> proxying doesn't really work, at least for me.
-> 
-> Regards,
-> Andreas
-> 
-> 
-> 
-> On 05.05.2015 00:27, Denys Dmytriyenko wrote:
-> > All,
-> > 
-> > In accordance with OpenEmbedded e.V. statutes, members that were absent from 
-> > two or more consecutive annual General Assembly meetings and didn't have 
-> > anyone representing them by proxy, forfeit their active membership status and 
-> > can no longer vote in any OE e.V. election. Thus, the current up-to-date 
-> > membership roster is one of the blocking items for any election process.
-> > 
-> > After collating the attendance records and all gathered proxy forms from past 
-> > years GA meetings, the Board of Directors came up with the following list of 
-> > inactive members - see below.
-> > 
-> > Realizing, that some people may still be active in other capacities in the 
-> > OpenEmbedded e.V. organization, or just wish to renew their active status, the 
-> > Board of Directors would like to open up a two-week period for inactive 
-> > members to state their intent to become active, after which we should be able 
-> > to vote for reinstating them back.
-> > 
-> > The Board will make an effort to contact inactive members directly by email, 
-> > or please feel free to reply to this announcement with your intent. Thanks.
-> > 
-> > The list of e.V. members to become inactive, based on GA attendance:
-> > 
-> > ===========================
-> > Alessandro Gardich
-> > Andreas Oberritter
-> > Andrei Gherzan
-> > Chris Larson
-> > Cliff Brake
-> > Daniel Willmann
-> > Dirk Hohndel
-> > Dirk Opfer
-> > Dmitry Eremin­Solenikov
-> > Esben Haabendal
-> > Florian Boor
-> > Frans Meulenbrooks
-> > Graham Gower
-> > Holger Freyther
-> > Jan Lübbe
-> > Jason Kridner
-> > John Willis
-> > Joshua Lock
-> > Ken Gilmer
-> > Liam Girdwood
-> > Marcin Juszkiewicz
-> > Mark Brown
-> > Michael Lauer
-> > Michael Smith
-> > Philip Blundell
-> > Phillip Zabel
-> > Robert Schuster
-> > Roman I Khimov
-> > Steve Sakoman
-> > Tom King
-> > Tom Rini
-> > Yu Ke
-> > Yury Bushmelev
-> > ===========================
-> > 
-> > Please let us know of any concerns or comments. Thanks.
-> > 
-> 
 
