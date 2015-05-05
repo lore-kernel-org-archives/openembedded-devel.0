@@ -1,47 +1,35 @@
-Return-Path: <jbriance@cisco.com>
-X-Greylist: delayed 572 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 05 May 2015 14:30:40 UTC
-Received: from alln-iport-8.cisco.com (alln-iport-8.cisco.com [173.37.142.95])
-	by mail.openembedded.org (Postfix) with ESMTP id D58FB6AC3E
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f52.google.com (mail-pa0-f52.google.com
+	[209.85.220.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 80E9560557
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 May 2015 14:30:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-	d=cisco.com; i=@cisco.com; l=1095; q=dns/txt; s=iport;
-	t=1430836242; x=1432045842;
-	h=from:to:cc:subject:date:message-id:references:
-	in-reply-to:content-transfer-encoding:mime-version;
-	bh=FhzjKWjFlJ4EiWeH9Pvn/Pzd6OIhwiZ5PArD8VIYWPs=;
-	b=hhkmI45WhCA2MuSQMlqMJPuhoCrDwxDv1kJrzBgX6hW9aepiwQrhW5W1
-	6RkhV6oH/+pyNBu93HpwaH9i62gOVQ24pVHQK5khKdz+GNvivPPOVi03x
-	J74boPq4QwP/c6C6gfH7+eu/d8Jlk+cc8B/+WT9skKstEWiRj1vlGEJZ4 k=;
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A0BVBADm0EhV/5NdJa1cgwyBLwXFFWYJh1sCgTU4FAEBAQEBAQGBCoQhAQEEOj8QAgEqFBAyJQIEDgUIiCTEcgEBAQEBAQEBAQEBAQEBAQEBAQEBARePWTQxB4MXgRYFkh2hBSNggxRvgQJCgQEBAQE
-X-IronPort-AV: E=Sophos;i="5.13,372,1427760000"; d="scan'208";a="147142469"
-Received: from rcdn-core-11.cisco.com ([173.37.93.147])
-	by alln-iport-8.cisco.com with ESMTP; 05 May 2015 14:21:09 +0000
-Received: from xhc-aln-x08.cisco.com (xhc-aln-x08.cisco.com [173.36.12.82])
-	by rcdn-core-11.cisco.com (8.14.5/8.14.5) with ESMTP id t45EL90W001066
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  5 May 2015 15:11:33 +0000 (UTC)
+Received: by pacyx8 with SMTP id yx8so195935880pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 5 May 2015 14:21:09 GMT
-Received: from xmb-aln-x12.cisco.com ([169.254.7.13]) by xhc-aln-x08.cisco.com
-	([173.36.12.82]) with mapi id 14.03.0195.001;
-	Tue, 5 May 2015 09:21:09 -0500
-From: "Julien Brianceau (jbriance)" <jbriance@cisco.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5][PATCH] qtbase-native: speed up configure task
-Thread-Index: AQHQhz3Vm8SQ3oFrgUW5T9CIW/e7OZ1tbV2Q
-Date: Tue, 5 May 2015 14:20:56 +0000
-Message-ID: <5940D1D9F240BA44AEF939055CF1358D059B7464@xmb-aln-x12.cisco.com>
-References: <1430835231-25126-1-git-send-email-jbriance@cisco.com>
-In-Reply-To: <1430835231-25126-1-git-send-email-jbriance@cisco.com>
-Accept-Language: fr-FR, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.60.62.156]
-MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qtbase-native: speed up configure task
+	Tue, 05 May 2015 08:11:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=ZCL64979LNXBgPQMyYmw/X6zWu2TAEMb2xhoN5/H7tQ=;
+	b=SZBOrRYnI/1rDed9o5zWO8u96Oic2+YAOCxCEh3R7OcSRZMBGLCeEQn8Fil4LKEVbA
+	3E1M07suwKWz1+amUpLWeXQ8T1N4txM/l0qLnRjF8OiYokJbSnnnEmiC2kmFu2APzFMD
+	ioBOpOY3f4BZJZnXaEB71n2F2xX0QBfZFmBgLDhCDOaf9V74uyICjFdviyrhMNJLgeqN
+	PNd/sKWmMYXJxUAO6v8LCNhniX8z6prdqPpYsdmxa51I1Rs13VK3Tk5pOmqg1YxKl8sc
+	bJcumuqwKRFp0KLP8rJ10A64nVMJtmTha6s48KaH7LSibJRweGwwAUWAALONYKlzoBu1
+	VAbA==
+X-Received: by 10.66.224.109 with SMTP id rb13mr32926966pac.133.1430838678942; 
+	Tue, 05 May 2015 08:11:18 -0700 (PDT)
+Received: from Pahoa2.hsd1.ca.comcast.net (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id af5sm6955772pbc.90.2015.05.05.08.11.16
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 05 May 2015 08:11:17 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	hongxu.jia@windriver.com
+Date: Tue,  5 May 2015 08:11:11 -0700
+Message-Id: <1430838671-21289-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-perl][PATCH] libnet-ssleay-perl: fix QA warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,39 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2015 14:30:41 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 May 2015 15:11:35 -0000
 
-* Use parallel make to speed up build of qmake during configure task
-* Take the opportunity to use clean configure parameters to use
-  opensource license instead of "(echo o; echo yes) |" trick.
+WARNING: QA Issue: /usr/lib/libnet-ssleay-perl/ptest/t/local/38@underscore@priv-key.t_libnet-ssleay-perl-ptest contained in package libnet-ssleay-perl-ptest requires /usr/bin/perl, but no providers found in its RDEPENDS [file-rdeps]
 
-Signed-off-by: Julien Brianceau <jbriance@cisco.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- recipes-qt/qt5/qtbase-native.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-qt/qt5/qtbase-native.inc b/recipes-qt/qt5/qtbase-nativ=
-e.inc
-index 7b44fb7..b6c868d 100644
---- a/recipes-qt/qt5/qtbase-native.inc
-+++ b/recipes-qt/qt5/qtbase-native.inc
-@@ -83,7 +83,7 @@ export OE_QMAKE_AR
- export OE_QMAKE_STRIP
-=20
- do_configure_prepend() {
--    (echo o; echo yes) | ${S}/configure ${EXTRA_OECONF} || die "Configurin=
-g qt failed. EXTRA_OECONF was ${EXTRA_OECONF}"
-+    MAKEFLAGS=3D"${PARALLEL_MAKE}" ${S}/configure -opensource -confirm-lic=
-ense ${EXTRA_OECONF} || die "Configuring qt failed. EXTRA_OECONF was ${EXTR=
-A_OECONF}"
-     bin/qmake ${OE_QMAKE_DEBUG_OUTPUT} ${S} -o Makefile || die "Configurin=
-g qt with qmake failed. EXTRA_OECONF was ${EXTRA_OECONF}"
- }
-=20
---=20
-1.9.5
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+index f6c4b8b..b289151 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+@@ -45,3 +45,5 @@ do_install_ptest() {
+ BBCLASSEXTEND = "native"
+ 
+ FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/Net/SSLeay/.debug/"
++
++RDEPENDS_${PN}-ptest = " perl"
+-- 
+2.3.5
 
 
