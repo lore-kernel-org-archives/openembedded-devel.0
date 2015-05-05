@@ -1,39 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
-	[209.85.220.53])
-	by mail.openembedded.org (Postfix) with ESMTP id CA3F960557
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id EEB707169F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 May 2015 03:56:05 +0000 (UTC)
-Received: by pacyx8 with SMTP id yx8so179211739pac.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 May 2015 20:56:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=c6b5FwwJbONwoA5xb0wlWTyoq18kwEcG33XqykMyHW0=;
-	b=0qCnRu19vVQHPQlM6Sp/XA5mpq9rY8fW/pB4YkK+YheHvBxiSs+O1mV3mOkO9VIU7r
-	8iX96OSyrsHu5vrNj0S/2IDzwUYlfKK/u6Mvaq152gmTh22nW5nbclf4fOZ5hYKf3K5E
-	FDJnWonb29ccGAtVi5L9iYd0hjcqXlRHMVxaKgHlyl/MWv/t7YEDKYs+3PM1RdY03Tid
-	J+jTj7a7V+uBFxYdzv1k2rmTjngBeVNdPt0fK25NiAB3LXo0CYUABsN1yPI6J4x80fce
-	K/fKdK1v2Zt0D641sHHnM+eBpwDcIk5wZfPcu/ol6HL2DGpNP1OZUu3ZIqlI6PcCV97i
-	nzOA==
-X-Received: by 10.66.179.81 with SMTP id de17mr47861205pac.59.1430798166675;
-	Mon, 04 May 2015 20:56:06 -0700 (PDT)
-Received: from ?IPv6:2601:c:a700:3ba7:84a:4937:3a73:d745?
-	([2601:c:a700:3ba7:84a:4937:3a73:d745])
-	by mx.google.com with ESMTPSA id
-	xo3sm14197998pbb.74.2015.05.04.20.56.04
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 May 2015 20:56:05 -0700 (PDT)
-Message-ID: <55483F50.5020803@gmail.com>
-Date: Mon, 04 May 2015 20:56:00 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	Tue,  5 May 2015 08:46:36 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga103.fm.intel.com with ESMTP; 05 May 2015 01:46:37 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,371,1427785200"; d="scan'208";a="566421518"
+Received: from unknown (HELO peggleto-mobl.ger.corp.intel.com) ([10.252.6.217])
+	by orsmga003.jf.intel.com with ESMTP; 05 May 2015 01:46:36 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 05 May 2015 09:46:35 +0100
+Message-ID: <2940409.DjZotmO9pp@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.6 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.6; x86_64; ; )
+In-Reply-To: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
+References: <1429801172-30602-1-git-send-email-paul.eggleton@linux.intel.com>
 MIME-Version: 1.0
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-Subject: Odroid-xu3 support
+Subject: Re: [oe-classic][PATCH 0/1] Add a notice to OE-Classic pointing to OE-Core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,16 +32,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2015 03:56:05 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 05 May 2015 08:46:37 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hello,
+On Thursday 23 April 2015 15:59:31 Paul Eggleton wrote:
+> As discussed at OEDAM, it's about time we added something to the
+> OE-Classic repo pointing people over to OE-Core, as OE-Classic really is
+> dead by now.
+> 
+> If some folks who contributed to OE-Classic could reply with their
+> Signed-off-by so we can add them to the commit message (or request
+> changes to the notices if you would like any) then that would be great.
 
-I have added support for the Odroid XU3 board. This layer can be found 
-at  https://github.com/akuster/meta-odroid. It supports XFCE graphics 
-and has sdcard image support.
+Thanks all, this is now pushed.
 
-enjoy,
-Armin
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
