@@ -1,35 +1,40 @@
-Return-Path: <vomegaz@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id F14126AC56
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 04AA06AC3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 May 2015 11:18:39 +0000 (UTC)
-Received: by widdi4 with SMTP id di4so156045398wid.0
+	Tue,  5 May 2015 12:01:27 +0000 (UTC)
+Received: by wiun10 with SMTP id n10so143267245wiu.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 May 2015 04:18:39 -0700 (PDT)
+	Tue, 05 May 2015 05:01:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=NRhALUqBH/sWotWFKppX6+j13adbqcsfWw0ensseFM0=;
-	b=gk5Ju5OyQUN+/+izAJ3CKw3z56suCyVm/9th+Lh4PmJM4SiJpsdbZllnHhP76XWGjg
-	TVLZ6KmZM0t9gyHgYTc2YJvzwhLCYdX5jnr/MMh6gCGkgQSzd0KWlrly/uObVgBFuzV6
-	KFSP4r3Fnw2rD+2mk0mwPKnmFPHRQ+lPOYNnjcSXtmZhCbArYXxzMrwwkFvgwWhhYcji
-	lSOIXTfGlTIjAGYuA1uYS8B/4tiL92Aw6AFt9YePKeAOkTsyqVPlKWLriXlqTd/tb8lA
-	9OZDzi1aDmjXxA918tpkb/xJRykWDyzu1ZudfRAuksTKhwrneW7BN6MWEjBHnr61Qjt1
-	7I8A==
-X-Received: by 10.194.89.70 with SMTP id bm6mr48062447wjb.146.1430824719600;
-	Tue, 05 May 2015 04:18:39 -0700 (PDT)
-Received: from X220.tupi.fr ([37.160.142.199]) by mx.google.com with ESMTPSA id
-	fs9sm25064683wjc.34.2015.05.05.04.18.37
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=NFDHxSd95Wwzb18dYrrpWtWyDHsb3zKs8SpcxWK0xCM=;
+	b=YgopL94E62ZCc7yBHGVSUu2Bs5V3ax2WfvN/+oNu6ZD66yGrgB7hq4EQeV9mIM8Sk8
+	8m1oCN3r7ARw18b27IsX2inSKVuNqMh9SFxdSm7vqtGVGae25NE56xVbez5ysYFMMjob
+	ubBFahuzAAIO0Z1Lo8ZOljsKD4nyVxWjWlccaMLvabmsdkUAgUCR27PWFCZLfaW9IUu+
+	rfrOIXLKekn6GAYeJfz2VsRd3lQ45BAMQwZ9wrwfGULwAqFQOodCz3lEEh6CyvWLjj4K
+	PnJ37M3vDB58lfL+Z1HxCOLqE0cy+qqckuA5t8gV+yYnLV+AP1Jkny1zHsAoLMfGebPz
+	tvxQ==
+X-Received: by 10.194.236.66 with SMTP id us2mr51763213wjc.54.1430827287955;
+	Tue, 05 May 2015 05:01:27 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id qt2sm25262261wjc.7.2015.05.05.05.01.27
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 May 2015 04:18:38 -0700 (PDT)
-Sender: Thomas PERROT <vomegaz@gmail.com>
-From: Thomas Perrot <thomas.perrot@tupi.fr>
+	Tue, 05 May 2015 05:01:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 5 May 2015 14:01:32 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 May 2015 13:18:29 +0200
-Message-Id: <1430824709-22286-1-git-send-email-thomas.perrot@tupi.fr>
-X-Mailer: git-send-email 1.7.10.4
+Message-ID: <20150505120132.GB2378@jama>
+References: <1430824709-22286-1-git-send-email-thomas.perrot@tupi.fr>
+MIME-Version: 1.0
+In-Reply-To: <1430824709-22286-1-git-send-email-thomas.perrot@tupi.fr>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: tprrt <tprrt@tupi.fr>
-Subject: [meta-systemd][PATCH] Rename bluez4_4.101.bbappend to bluez5_5.29.bbappend, to fix build issue below: ERROR: No recipes available for: /home/tprrt/dev/oe-build-easy/combination/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
+Subject: Re: [meta-systemd][PATCH] Rename bluez4_4.101.bbappend to bluez5_5.29.bbappend, to fix build issue below: ERROR: No recipes available for: /home/tprrt/dev/oe-build-easy/combination/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,21 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2015 11:18:42 -0000
+X-List-Received-Date: Tue, 05 May 2015 12:01:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-From: tprrt <tprrt@tupi.fr>
+On Tue, May 05, 2015 at 01:18:29PM +0200, Thomas Perrot wrote:
+> From: tprrt <tprrt@tupi.fr>
 
-Signed-off-by: tprrt <tprrt@tupi.fr>
----
- .../bluez/{bluez4_4.101.bbappend => bluez5_5.29.bbappend}              |    0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-systemd/oe-core/recipes-connectivity/bluez/{bluez4_4.101.bbappend => bluez5_5.29.bbappend} (100%)
+NAK, see pending patches for bluez4 (I plan to merge them as soon as
+builds stop failing completely).
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.bbappend
-similarity index 100%
-rename from meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
-rename to meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.bbappend
--- 
-1.7.10.4
+> Signed-off-by: tprrt <tprrt@tupi.fr>
+> ---
+>  .../bluez/{bluez4_4.101.bbappend =3D> bluez5_5.29.bbappend}             =
+ |    0
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-systemd/oe-core/recipes-connectivity/bluez/{bluez4_4.101.bba=
+ppend =3D> bluez5_5.29.bbappend} (100%)
+>=20
+> diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101=
+=2Ebbappend b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.b=
+bappend
+> similarity index 100%
+> rename from meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.=
+bbappend
+> rename to meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.bba=
+ppend
+> --=20
+> 1.7.10.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
