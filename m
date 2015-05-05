@@ -1,40 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
-	[209.85.212.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 04AA06AC3E
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
+	[209.85.212.177])
+	by mail.openembedded.org (Postfix) with ESMTP id CEEFB72376
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 May 2015 12:01:27 +0000 (UTC)
-Received: by wiun10 with SMTP id n10so143267245wiu.1
+	Tue,  5 May 2015 12:12:27 +0000 (UTC)
+Received: by widdi4 with SMTP id di4so143637747wid.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 May 2015 05:01:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=NFDHxSd95Wwzb18dYrrpWtWyDHsb3zKs8SpcxWK0xCM=;
-	b=YgopL94E62ZCc7yBHGVSUu2Bs5V3ax2WfvN/+oNu6ZD66yGrgB7hq4EQeV9mIM8Sk8
-	8m1oCN3r7ARw18b27IsX2inSKVuNqMh9SFxdSm7vqtGVGae25NE56xVbez5ysYFMMjob
-	ubBFahuzAAIO0Z1Lo8ZOljsKD4nyVxWjWlccaMLvabmsdkUAgUCR27PWFCZLfaW9IUu+
-	rfrOIXLKekn6GAYeJfz2VsRd3lQ45BAMQwZ9wrwfGULwAqFQOodCz3lEEh6CyvWLjj4K
-	PnJ37M3vDB58lfL+Z1HxCOLqE0cy+qqckuA5t8gV+yYnLV+AP1Jkny1zHsAoLMfGebPz
-	tvxQ==
-X-Received: by 10.194.236.66 with SMTP id us2mr51763213wjc.54.1430827287955;
-	Tue, 05 May 2015 05:01:27 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id qt2sm25262261wjc.7.2015.05.05.05.01.27
+	Tue, 05 May 2015 05:12:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=55BdLg4McaVNJvdoKDgEfUsyu2Gr82PupQZyMsGNRLg=;
+	b=jyzmXuugz5vmwsxHlDK0vAaklhda1v0QhrErtf0yrZwzH1l9TE05UxRDzWUqr/ke0Z
+	AE3pDEnpDTuxAoJwW+Z0h2RAs0bohmJo+na4HIqpa4LM2mB/qomEuQwpKcIkUD9fP6Fx
+	je81z9DhggJ45m2k+ZJR8QUUT25zjYu4eXUPWRkc/FSUJoCPpU7r6fPIm2WLGi2G+p4F
+	1416O3GLrJ0Ua5GwB4IkNSRFAgzYrEcq6XSirJ8H/54p6B7ai1dTqILYGUr1HtixHuRj
+	1Jtmydr7eV27nt0oPHPxHgMYUjDONrg8Hn+KZweImYiphQeUmr7YKGafvx6I2SDvZnXx
+	XOOg==
+X-Gm-Message-State: ALoCoQkMWFgtpV+dhkpFPowY6UseDC54RWT6SfECDBXLUnguGS7afaW5shTAgAwUtcaZQ3Di+NDI
+X-Received: by 10.180.8.34 with SMTP id o2mr3538827wia.18.1430827948135;
+	Tue, 05 May 2015 05:12:28 -0700 (PDT)
+Received: from mobil-400-586.internal.dresearch-fe.de
+	(pd95cbf07.dip0.t-ipconnect.de. [217.92.191.7])
+	by mx.google.com with ESMTPSA id
+	vz8sm25287261wjc.27.2015.05.05.05.12.26
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 05 May 2015 05:01:27 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 5 May 2015 14:01:32 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150505120132.GB2378@jama>
-References: <1430824709-22286-1-git-send-email-thomas.perrot@tupi.fr>
+	Tue, 05 May 2015 05:12:27 -0700 (PDT)
+Message-ID: <5548B3A9.40301@dresearch-fe.de>
+Date: Tue, 05 May 2015 14:12:25 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-In-Reply-To: <1430824709-22286-1-git-send-email-thomas.perrot@tupi.fr>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: tprrt <tprrt@tupi.fr>
-Subject: Re: [meta-systemd][PATCH] Rename bluez4_4.101.bbappend to bluez5_5.29.bbappend, to fix build issue below: ERROR: No recipes available for: /home/tprrt/dev/oe-build-easy/combination/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
+To: openembedded-devel@lists.openembedded.org, 
+	Armin Kuster <akuster808@gmail.com>,
+	Otavio Salvador <otavio@ossystems.com.br>
+References: <1430483441-4566-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1430483441-4566-1-git-send-email-Martin.Jansa@gmail.com>
+Subject: Re: [meta-ruby][PATCH] ruby: explicitly disable dtrace support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,42 +53,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2015 12:01:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 May 2015 12:12:29 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, May 05, 2015 at 01:18:29PM +0200, Thomas Perrot wrote:
-> From: tprrt <tprrt@tupi.fr>
+On 01.05.2015 14:30, Martin Jansa wrote:
+> both 2.2.1 and 2.2.2 are failing on some hosts native builds with:
+> ...
 
-NAK, see pending patches for bluez4 (I plan to merge them as soon as
-builds stop failing completely).
+It would be really great if this patch could make it to the fido branch!
 
-> Signed-off-by: tprrt <tprrt@tupi.fr>
-> ---
->  .../bluez/{bluez4_4.101.bbappend =3D> bluez5_5.29.bbappend}             =
- |    0
->  1 file changed, 0 insertions(+), 0 deletions(-)
->  rename meta-systemd/oe-core/recipes-connectivity/bluez/{bluez4_4.101.bba=
-ppend =3D> bluez5_5.29.bbappend} (100%)
->=20
-> diff --git a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101=
-=2Ebbappend b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.b=
-bappend
-> similarity index 100%
-> rename from meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.=
-bbappend
-> rename to meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.bba=
-ppend
-> --=20
-> 1.7.10.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+We are some of the mourners and cannot build fido at the moment. :(
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+-- 
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
