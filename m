@@ -1,37 +1,43 @@
-Return-Path: <cristian.iorga@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B5EB60557
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FA8471144
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 May 2015 15:14:32 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 05 May 2015 08:13:57 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,373,1427785200"; d="scan'208";a="724036706"
-Received: from irsmsx153.ger.corp.intel.com ([163.33.192.75])
-	by orsmga002.jf.intel.com with ESMTP; 05 May 2015 08:13:55 -0700
-Received: from irsmsx105.ger.corp.intel.com ([169.254.7.178]) by
-	IRSMSX153.ger.corp.intel.com ([169.254.9.6]) with mapi id
-	14.03.0224.002; Tue, 5 May 2015 16:13:54 +0100
-From: "Iorga, Cristian" <cristian.iorga@intel.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-systemd][PATCH] Rename bluez4_4.101.bbappend to
-	bluez5_5.29.bbappend,
-	to fix build issue below: ERROR: No recipes available for:
-	/home/tprrt/dev/oe-build-easy/combination/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
-Thread-Index: AQHQhyuPenUd3g4zQU+5R0pPYwxzGZ1te2eQ
-Date: Tue, 5 May 2015 15:13:53 +0000
-Message-ID: <969F26A8BAB325438E7EB80D3C3134FB2F4BBCDC@irsmsx105.ger.corp.intel.com>
-References: <1430824709-22286-1-git-send-email-thomas.perrot@tupi.fr>
-	<20150505120132.GB2378@jama>
-In-Reply-To: <20150505120132.GB2378@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [163.33.239.181]
+	Tue,  5 May 2015 15:25:47 +0000 (UTC)
+Received: by pabsx10 with SMTP id sx10so196590183pab.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 May 2015 08:25:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=otp88G1Ev7VpNH3Yf2aBQLSX59+VLjOzyZoN2JWMqV8=;
+	b=mN2HJBFRC++zcgDGNU+BaB2Wn+mgRsSsmnMXQMSSkj7359YuBEeuO2WqqTbYPK11E0
+	9xEGV4uvIyrJyom64JN7i7r1KFejONjhAOBtRyePNDjI/3bfYhtKQuR/hcOfNbYare1f
+	jVIs31x6U8NqU4a4s0ELMeLQ1g9v9SyoERemkGdOe9udxAzPxwQWLqpu/lnJjU4KEcFZ
+	mLCJxYcxIexZJoAYXSJw/4a9j6YtUhhb21d0MLmEcLKK+28mE3gf2IxVwIoSGGQS9opt
+	nOKxt69UlajuqWStktQ/MYWYhN4ZcbWcmaT8i3+dqC+GJQNRVDeAhELW0/gKlao+tUFR
+	usRA==
+X-Received: by 10.70.134.133 with SMTP id pk5mr52673687pdb.133.1430839529871; 
+	Tue, 05 May 2015 08:25:29 -0700 (PDT)
+Received: from ?IPv6:2601:c:a700:3ba7:84a:4937:3a73:d745?
+	([2601:c:a700:3ba7:84a:4937:3a73:d745])
+	by mx.google.com with ESMTPSA id
+	ca2sm16307613pdb.25.2015.05.05.08.25.27
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 05 May 2015 08:25:28 -0700 (PDT)
+Message-ID: <5548E0E3.1020704@gmail.com>
+Date: Tue, 05 May 2015 08:25:23 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-Cc: tprrt <tprrt@tupi.fr>
-Subject: Re: [meta-systemd][PATCH] Rename bluez4_4.101.bbappend to bluez5_5.29.bbappend, to fix build issue below: ERROR: No recipes available for: /home/tprrt/dev/oe-build-easy/combination/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
+To: Steffen Sledz <sledz@dresearch-fe.de>, 
+	openembedded-devel@lists.openembedded.org, 
+	Otavio Salvador <otavio@ossystems.com.br>
+References: <1430483441-4566-1-git-send-email-Martin.Jansa@gmail.com>
+	<5548B3A9.40301@dresearch-fe.de>
+In-Reply-To: <5548B3A9.40301@dresearch-fe.de>
+Subject: Re: [meta-ruby][PATCH] ruby: explicitly disable dtrace support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,63 +51,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 May 2015 15:14:35 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 05 May 2015 15:25:47 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Martin, can I help with the aforementioned build failures?
-Also, NACK for the original patch.
-/Cristian
+on my list.
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-Sent: Tuesday, May 5, 2015 3:02 PM
-To: openembedded-devel@lists.openembedded.org
-Cc: tprrt
-Subject: Re: [oe] [meta-systemd][PATCH] Rename bluez4_4.101.bbappend to blu=
-ez5_5.29.bbappend, to fix build issue below: ERROR: No recipes available fo=
-r: /home/tprrt/dev/oe-build-easy/combination/meta-systemd/oe-core/recipes-c=
-onnectivity/bluez/bluez4_4.101.bbappend
+thanks
 
-On Tue, May 05, 2015 at 01:18:29PM +0200, Thomas Perrot wrote:
-> From: tprrt <tprrt@tupi.fr>
-
-NAK, see pending patches for bluez4 (I plan to merge them as soon as builds=
- stop failing completely).
-
-> Signed-off-by: tprrt <tprrt@tupi.fr>
-> ---
->  .../bluez/{bluez4_4.101.bbappend =3D> bluez5_5.29.bbappend}             =
- |    0
->  1 file changed, 0 insertions(+), 0 deletions(-)  rename=20
-> meta-systemd/oe-core/recipes-connectivity/bluez/{bluez4_4.101.bbappend=20
-> =3D> bluez5_5.29.bbappend} (100%)
->=20
-> diff --git=20
-> a/meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappen
-> d=20
-> b/meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.bbappend
-> similarity index 100%
-> rename from=20
-> meta-systemd/oe-core/recipes-connectivity/bluez/bluez4_4.101.bbappend
-> rename to=20
-> meta-systemd/oe-core/recipes-connectivity/bluez/bluez5_5.29.bbappend
-> --
-> 1.7.10.4
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On 05/05/2015 05:12 AM, Steffen Sledz wrote:
+> On 01.05.2015 14:30, Martin Jansa wrote:
+>> both 2.2.1 and 2.2.2 are failing on some hosts native builds with:
+>> ...
+>
+> It would be really great if this patch could make it to the fido branch!
+>
+> We are some of the mourners and cannot build fido at the moment. :(
+>
 
