@@ -1,24 +1,28 @@
-Return-Path: <Rongqing.Li@windriver.com>
+Return-Path: <Randy.MacLeod@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 42B7A73D48
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2015 06:25:34 +0000 (UTC)
+	by mail.openembedded.org (Postfix) with ESMTP id 7E17F73C8C;
+	Wed,  6 May 2015 15:43:19 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t466PZo6022502
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 5 May 2015 23:25:35 -0700 (PDT)
-Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Tue, 5 May 2015 23:25:34 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 May 2015 14:25:33 +0800
-Message-ID: <1430893533-29093-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 2.1.0
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t46FhLje005017
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 6 May 2015 08:43:21 -0700 (PDT)
+Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 6 May 2015 08:43:20 -0700
+Message-ID: <554A3697.5050208@windriver.com>
+Date: Wed, 6 May 2015 11:43:19 -0400
+From: Randy MacLeod <randy.macleod@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] cifs-utils: upgrade to 6.4
+To: <rongqing.li@windriver.com>, <openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, <Mark.Hatle@windriver.com>
+References: <1430810046-27021-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1430810046-27021-1-git-send-email-rongqing.li@windriver.com>
+X-Originating-IP: [172.25.44.4]
+Subject: Re: [OE-core] [PATCH 1/1] apt: upgrade to 1.0.9.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,40 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 06:25:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 06 May 2015 15:43:20 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Roy Li <rongqing.li@windriver.com>
+On 2015-05-05 03:14 AM, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+>
+> Upgrade to fix the several CVEs: CVE-2014-0488, CVE-2014-0490
+> Remove apt-0.9.9.4-CVE-2014-0478.patch, which was backport.
+> Romve no-ko-translation.patch, apt-1.0.9.9 has ko translation
+s/Romve/Remove/
+> Update use-host.patch no-curl.patch db_linking_hack.patch and
+> noconfigure.patch
+> Not build the test cases since it requires gtest
 
-6.4 fixed a CVE defect:
-http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-2830
-Stack-based buffer overflow in cifskey.c or cifscreds.c in cifs-utils
-before 6.4, as used in pam_cifscreds, allows remote attackers to have
-unspecified impact via unknown vectors.
+meta-oe has gtest:
+    http://layers.openembedded.org/layerindex/recipe/31721/
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- meta-networking/recipes-support/cifs/cifs-utils_git.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+Is there any reason not to move it and gmock to oe-core?
+It has no dependencies and it's used by:
+    llvm, google-protocol buffers, opencv, google-chrome
+and probably other packages.
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
-index 2b7a0dd..66ec7b8 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_git.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
-@@ -4,10 +4,9 @@ HOMEPAGE = "http://wiki.samba.org/index.php/LinuxCIFS_utils"
- LICENSE = "GPLv3 & LGPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--PV = "5.9"
--PR = "r1"
-+PV = "6.4"
- 
--SRCREV = "353d491dcb5d69d31434abeb962c8e9a49c36867"
-+SRCREV = "487f46da737291877867cbd3acb40fea087d3863"
- SRC_URI = "git://git.samba.org/cifs-utils.git"
- 
- S = "${WORKDIR}/git"
+I think Mark mentioned that llvm might move to oe-core as
+well so that would be two recipes that benefit from moving gtest.
+
 -- 
-2.1.0
-
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
