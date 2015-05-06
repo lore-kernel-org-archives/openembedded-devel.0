@@ -1,24 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7075D60138
+	by mail.openembedded.org (Postfix) with ESMTP id 02D376AC3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2015 02:23:53 +0000 (UTC)
+	Wed,  6 May 2015 03:05:40 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t462NsY6000723
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t4635g9T003169
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 5 May 2015 19:23:54 -0700 (PDT)
+	Tue, 5 May 2015 20:05:42 -0700 (PDT)
 Received: from lirq-OptiPlex-780.corp.ad.wrs.com (128.224.162.142) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Tue, 5 May 2015 19:23:54 -0700
+	14.3.224.2; Tue, 5 May 2015 20:05:41 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 May 2015 10:23:52 +0800
-Message-ID: <1430879032-26800-1-git-send-email-rongqing.li@windriver.com>
+Date: Wed, 6 May 2015 11:05:40 +0800
+Message-ID: <1430881540-27483-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe][v2] dialog: upgrade to 1.2-20150225
+Subject: [PATCH 1/1] mariadb: upgrade to 5.5.43
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,114 +32,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 02:23:55 -0000
+X-List-Received-Date: Wed, 06 May 2015 03:05:42 -0000
 Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
 
-1. upgrade it to 1.2-20150225
-2. update the use-pkg-config-for-ncurses-detection.patch
-3. remove dialog-static recipe file, since dialog will generate the static
-library.
-
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../dialog/dialog-static_1.1-20120706.bb           |  6 -----
- .../recipes-extended/dialog/dialog_1.1-20120706.bb |  4 ----
- .../dialog/{dialog.inc => dialog_1.2-20150225.bb}  |  3 +++
- .../use-pkg-config-for-ncurses-detection.patch     | 28 ++++++++--------------
- 4 files changed, 13 insertions(+), 28 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
- delete mode 100644 meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
- rename meta-oe/recipes-extended/dialog/{dialog.inc => dialog_1.2-20150225.bb} (86%)
+ ...b-native_5.5.41.bb => mariadb-native_5.5.43.bb} |  0
+ meta-oe/recipes-support/mysql/mariadb.inc          |  5 ++--
+ .../mysql/mariadb/fix-a-building-failure.patch     | 31 ++++++++++++++++++++++
+ .../mysql/{mariadb_5.5.41.bb => mariadb_5.5.43.bb} |  0
+ 4 files changed, 34 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.41.bb => mariadb-native_5.5.43.bb} (100%)
+ create mode 100644 meta-oe/recipes-support/mysql/mariadb/fix-a-building-failure.patch
+ rename meta-oe/recipes-support/mysql/{mariadb_5.5.41.bb => mariadb_5.5.43.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb b/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
-deleted file mode 100644
-index 595f323..0000000
---- a/meta-oe/recipes-extended/dialog/dialog-static_1.1-20120706.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require dialog.inc
--
--LDFLAGS += "-static"
--
--SRC_URI[md5sum] = "2e538305977178eb085a9859511c299d"
--SRC_URI[sha256sum] = "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b44d079cb87cf0ce2f5"
-diff --git a/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb b/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
-deleted file mode 100644
-index c87fb61..0000000
---- a/meta-oe/recipes-extended/dialog/dialog_1.1-20120706.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require dialog.inc
--
--SRC_URI[md5sum] = "2e538305977178eb085a9859511c299d"
--SRC_URI[sha256sum] = "305aa1000680aa87bb2148a725f9107ef4cd29dcd6185b44d079cb87cf0ce2f5"
-diff --git a/meta-oe/recipes-extended/dialog/dialog.inc b/meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
-similarity index 86%
-rename from meta-oe/recipes-extended/dialog/dialog.inc
-rename to meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
-index 995d6c0..88af59f 100644
---- a/meta-oe/recipes-extended/dialog/dialog.inc
-+++ b/meta-oe/recipes-extended/dialog/dialog_1.2-20150225.bb
-@@ -8,6 +8,9 @@ DEPENDS = "ncurses"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
- 
-+SRC_URI[md5sum] = "38ef59a7daa5459119cb06777c735e4b"
-+SRC_URI[sha256sum] = "6844b13a7a1fea568a8d5bb3004e1af90888cd4a5e8c2ded2c38f34fcc7397ff"
-+
- SRC_URI = "ftp://invisible-island.net/dialog/dialog-${PV}.tgz \
-            file://use-pkg-config-for-ncurses-detection.patch \
+diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.41.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.43.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.41.bb
+rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.43.bb
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index f385bfc..00fa965 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -11,10 +11,11 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
+            file://my.cnf \
+            file://mysqld.service \
+            file://configure.cmake-fix-valgrind.patch \
++           file://fix-a-building-failure.patch \
            "
-diff --git a/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch b/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-index a2354ad..0a25a7f 100644
---- a/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-+++ b/meta-oe/recipes-extended/dialog/files/use-pkg-config-for-ncurses-detection.patch
-@@ -8,33 +8,25 @@ file, and autoconf can not work, make a workaround in configure file.
  
- Signed-off-by: Roy Li <rongqing.li@windriver.com>
- ---
-- configure |    6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
-+ configure | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
+-SRC_URI[md5sum] = "d2415efc6a6d73d7a58f3c79bb42f2e8"
+-SRC_URI[sha256sum] = "a16dc62e4bcabecd5c483f2f8b657483a8c51934e7be5ad4ab21b8baea1f5332"
++SRC_URI[md5sum] = "c8760d6b5890fc1de76c07af48092c88"
++SRC_URI[sha256sum] = "a0709997140549154edb87c9dfab564cd4755b238251acbf42369118f9bb4d01"
  
- diff --git a/configure b/configure
--index 24e28c1..c78735d 100755
-+index 8afe3d7..a54bcc1 100755
- --- a/configure
- +++ b/configure
--@@ -9976,8 +9976,8 @@ fi
-+@@ -11567,9 +11567,8 @@ fi
-  
-  if test "$NCURSES_CONFIG" != none ; then
-  
- -CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
---LIBS="`$NCURSES_CONFIG --libs` $LIBS"
+ S = "${WORKDIR}/mariadb-${PV}"
+ 
+diff --git a/meta-oe/recipes-support/mysql/mariadb/fix-a-building-failure.patch b/meta-oe/recipes-support/mysql/mariadb/fix-a-building-failure.patch
+new file mode 100644
+index 0000000..0c4e102
+--- /dev/null
++++ b/meta-oe/recipes-support/mysql/mariadb/fix-a-building-failure.patch
+@@ -0,0 +1,31 @@
++[PATCH] fix a building failure
++
++Upstream-Status: Inappropriate [configuration]
++
++building failed since native does not generate import_executables.cmake
++In fact, our building system will export the needed commands
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ CMakeLists.txt | 5 -----
++ 1 file changed, 5 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index c1ce1c5..83b3a7e 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -350,11 +350,6 @@ MYSQL_CHECK_READLINE()
++ 
++ CHECK_JEMALLOC()
++ 
++-IF(CMAKE_CROSSCOMPILING)
++-  SET(IMPORT_EXECUTABLES "IMPORTFILE-NOTFOUND" CACHE FILEPATH "Path to import_executables.cmake from a native build")
++-  INCLUDE(${IMPORT_EXECUTABLES})
++-ENDIF()
 +-
-+-cf_add_libs="`$NCURSES_CONFIG --libs`"
- +CPPFLAGS="$CPPFLAGS `pkg-config --short-errors --print-errors --cflags "ncurses" 2>/dev/null`"
--+LIBS="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
-- 
-- # even with config script, some packages use no-override for curses.h
-- 
--@@ -10096,7 +10096,7 @@ cat >>confdefs.h <<EOF
-- #define $cf_nculib_ROOT 1
-- EOF
-- 
---cf_cv_ncurses_version=`$NCURSES_CONFIG --version`
--+cf_cv_ncurses_version=`pkg-config --short-errors --print-errors --modversion "ncurses"`
-- 
-- else
-- 
-++cf_add_libs="`pkg-config --short-errors --print-errors --libs "ncurses" 2>/dev/null` $LIBS"
-+ # Filter out duplicates - this happens with badly-designed ".pc" files...
-+ for cf_add_1lib in $LIBS
-+ do
- -- 
- 1.7.10.4
- 
++ #
++ # Setup maintainer mode options by the end. Platform checks are
++ # not run with the warning options as to not perturb fragile checks
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.41.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.43.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb_5.5.41.bb
+rename to meta-oe/recipes-support/mysql/mariadb_5.5.43.bb
 -- 
 2.1.0
 
