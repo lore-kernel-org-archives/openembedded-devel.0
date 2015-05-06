@@ -1,40 +1,44 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id EB04973D90
+Return-Path: <sledz@dresearch-fe.de>
+Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 60B8D73EED
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2015 16:11:29 +0000 (UTC)
-Received: by wiun10 with SMTP id n10so28429105wiu.1
+	Wed,  6 May 2015 19:12:45 +0000 (UTC)
+Received: by wgso17 with SMTP id o17so22032331wgs.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 May 2015 09:11:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=NKf0hroCf2Gwhs4rYGdtC0TXOS7Sp6L5hWtp3ASamPk=;
-	b=eJPB39UQW0/To89Mlyn2HlTiGw1vSp6qgsbg4ukYSLjgc8MYYq0DM5QQQPL4CPOciD
-	mewF3kLKLt/sUjCsubEYz1PiFoR+GPDEj5afsN6ZOt5ehTcQNJ6Q2b+VzVKG6uy0hffx
-	DkLVsZ/Y3ekRIN38rjBeUDZ0wIz9KpeM3QOFhNGWTTWW+2H2UQ0Ey+zqHgZRE4GvaeAN
-	C7UHo/0ukX6VI1PfIpq33Hrn5Oi2QIbBYh0ZSc4veLRtMoZ/n558DGb2La/Zdmzf6pKV
-	mWN6tw7xFAHi4L3F7h8CvF/2miidxprRWh2j+jlxV2Ax/TZfB2X/X1YxpBb0HgZtz3KF
-	EEbQ==
-X-Received: by 10.194.185.8 with SMTP id ey8mr3735231wjc.118.1430928690676;
-	Wed, 06 May 2015 09:11:30 -0700 (PDT)
-Received: from localhost.localdomain
-	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
-	by mx.google.com with ESMTPSA id k9sm2846567wia.6.2015.05.06.09.11.28
-	for <openembedded-devel@lists.openembedded.org>
+	Wed, 06 May 2015 12:12:46 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
+	:cc:subject:references:in-reply-to:content-type
+	:content-transfer-encoding;
+	bh=hLPetjrks3RX8Q5fXBNzPD+WdK+2H/0Ua6Ik1QmYEwc=;
+	b=Yvo6LquWEwkxqyr3hDQcayDCAcOF8FaQVKyZtAaa81Yi8cyS9OpNJcnyy20yQhemxy
+	FpmKC7hX65an3Zx+G86lS1l9IMN2vT8AOuFAVMVHPtNp8nkOdLtpQJg57r0uxNnzEcXx
+	8r4zSTBOmoJFZ2iP6JDiO3WoGh39KJK2UAt3O10iRe/l9ERkNgss5Q0CUE6982xSSos/
+	BSgcRBM7v1jvaW3JvLGdXqD+MVlBtoPKeIHHOcUN5TqJGFE2y4JVpoKZrP5Dvlg6Aqj/
+	jMo20SLET2y3SNqc7nZfcrAPadIPE50/gi03hoK8/j2BYV9zWeC8vXyrmfNgCaYOhIBy
+	GUOw==
+X-Gm-Message-State: ALoCoQl4W1fw16zz8ENngd4+yWd3nas4lExuoByJx3M1yWA4oJGgqVPFHRXtIGcMVNXECfDojbn2
+X-Received: by 10.194.63.9 with SMTP id c9mr303986wjs.143.1430939566686;
+	Wed, 06 May 2015 12:12:46 -0700 (PDT)
+Received: from ?IPv6:2001:bf0:c080:401::2? (wiki.deck1.zone42.org.
+	[2001:bf0:c080:401::2])
+	by mx.google.com with ESMTPSA id dl2sm3546036wib.2.2015.05.06.12.12.44
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 May 2015 09:11:29 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 May 2015 18:10:46 +0200
-Message-Id: <1430928646-2007-9-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.9.3
-In-Reply-To: <1430928646-2007-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1430928646-2007-1-git-send-email-schnitzeltony@googlemail.com>
+	Wed, 06 May 2015 12:12:45 -0700 (PDT)
+Message-ID: <554A67AB.1000800@dresearch-fe.de>
+Date: Wed, 06 May 2015 21:12:43 +0200
+From: Steffen Sledz <sledz@dresearch-fe.de>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-Subject: [PATCH 8/8] add udisks2 2.1.5
+To: Andrea Adami <andrea.adami@gmail.com>, Denys Dmytriyenko <denis@denix.org>
+References: <20150501160602.GA5885@denix.org>
+	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
+In-Reply-To: <CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,59 +52,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 16:11:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 May 2015 19:12:49 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 8bit
 
-tests:
+Am 02.05.2015 um 23:55 schrieb Andrea Adami:
+> On Fri, May 1, 2015 at 6:06 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+>> Has anyone ever seen this message during <image>.do_rootfs task?
+>>
+>> Collected errors:
+>>  * opkg_install_pkg: Package <package> md5sum mismatch. Either the opkg or the package index are corrupt. Try 'opkg update'.
+>>  * opkg_install_cmd: Cannot install package <package>.
+>>
+>> We started seeing it on random packages inside the <image> few weeks ago on
+>> different machines. At the time we had switched to bitbake 1.26. But even
+>> trying different bitbake versions still occasionally caused the same error, so
+>> the culprit is still unknwon. Using oe-core/daisy for now.
+>>
+>> Any comments or suggestions to where start looking would be appreciated!
+> 
+> yes, I have seen this during multimachine builds.
+> My TMPDIR is on tmpfs in ram so everytime I reboot it is re-populated
+> from sstate.
+> ...
 
-* Build & run along with udisks on xfce based image
-* Tested automount on kde plasma desktop
+We have the same problem here. Also with packages from the "all" feed in a multimachine build environment. But it does not seem related to packagegroups.
 
-Signed-off-by: Andreas MÃ¼ller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-support/udisks/udisks2_2.1.5.bb | 31 +++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
+I've a hypothesis but was not able to validate or falsify it till now: Given a recipe which does only use file:// type SRC_URI. If i change something in these sources and do not update PR the prserv/hashing mechanism detects the changes a builds a new package. But this package has the same version info as the one before. So for opkg there's no need to update it's "package database".
 
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-new file mode 100644
-index 0000000..2de2061
---- /dev/null
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "udisks provides dbus interfaces for disks and storage devices"
-+LICENSE = "GPLv2+ & LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=dd79f6dbbffdbc8e86b086a8f0c0ef43"
-+
-+DEPENDS = "libatasmart polkit udev dbus-glib glib-2.0 intltool-native gnome-common-native"
-+
-+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+
-+SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "73632501002e6de8244f831e38b2b98e"
-+SRC_URI[sha256sum] = "2cfcf560447ea44cba2a683342c7062aaaf35e4eb554bed64ac2dd55a70a5fb6"
-+
-+inherit autotools systemd gtk-doc
-+
-+S = "${WORKDIR}/udisks-${PV}"
-+
-+EXTRA_OECONF = "--disable-introspection"
-+
-+FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
-+                ${datadir}/dbus-1/ \
-+                ${datadir}/polkit-1 \
-+                ${base_libdir}/udev/* \
-+"
-+
-+PACKAGES =+ "${PN}-libs"
-+
-+FILES_${PN} += "${datadir}/bash-completion"
-+FILES_${PN}-libs = "${libdir}/lib*${SOLIBS}"
-+
-+SYSTEMD_SERVICE_${PN} = "${BPN}.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
+As said before this is just a hypothesis.
+
+Steffen
+
 -- 
-1.9.3
-
+DResearch Fahrzeugelektronik GmbH
+Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
+Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
+Fax: +49 30 515932-299
+Geschäftsführer: Dr. Michael Weber, Werner Mögle;
+Amtsgericht Berlin Charlottenburg; HRB 130120 B;
+Ust.-IDNr. DE273952058
 
