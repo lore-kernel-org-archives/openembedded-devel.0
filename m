@@ -1,41 +1,33 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 44C7773EC7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2015 21:43:57 +0000 (UTC)
-Received: by pdbqa5 with SMTP id qa5so21403420pdb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 May 2015 14:43:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=FP4Zj67kz07UQL0DzTADjwqkGmijHBVxq8vUwUAE7Oc=;
-	b=EGVpu6Jgljj9bNskgPVmjDoSnnX39NrI6H0bEMGVvhdqhYLqyRsZjpqAE4lKM9yhqo
-	5YVE24rRBwpjKSeJXV9Zj+eap9HYExeSb0OXKAeDrqqRIm172mz9Y8NE3xYor1gWa8DZ
-	YAB80nHpOkIW1vOfC+pBRnbfXviEliM2bi6QVlMWMiWTlrXxAsJrwfZtv1fJyMe3epCm
-	ddcDB9KuK3b18WLQrWHfNjaaQ+ho5c3x+dzLziESVQzOq1yJ4EDI9eoTNWr6vmDTPRvv
-	R0/TjFh3Oj2XjxQp7lwLjJBusZtxvSDuFWjJh7k+l8LEFyGekoRoiMLpKlp5IPpYLIp2
-	RjFw==
-X-Received: by 10.68.94.225 with SMTP id df1mr1223470pbb.89.1430948639153;
-	Wed, 06 May 2015 14:43:59 -0700 (PDT)
-Received: from [10.22.11.251] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by mx.google.com with ESMTPSA id da3sm34516pdb.8.2015.05.06.14.43.57
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 May 2015 14:43:58 -0700 (PDT)
-Message-ID: <554A8B1B.3060503@gmail.com>
-Date: Wed, 06 May 2015 14:43:55 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-References: <55483F50.5020803@gmail.com>
-	<554A76F1.8050407@gmail.com>	<554A7893.3060701@gmail.com>
-	<554A8A7A.6030404@gmail.com>
-In-Reply-To: <554A8A7A.6030404@gmail.com>
-Subject: Re: Odroid-xu3 support
+Return-Path: <denis@denix.org>
+Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
+	[206.46.173.21])
+	by mail.openembedded.org (Postfix) with ESMTP id BA4B273755;
+	Wed,  6 May 2015 23:31:37 +0000 (UTC)
+Received: from gandalf.denix.org ([108.28.31.169]) by vms173021.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
+	16 2014))
+	with ESMTPSA id <0NNY00IUXC0P2KB0@vms173021.mailsrvcs.net>; Wed,
+	06 May 2015 18:31:38 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=XqdN4uAV c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
+	a=jLWw55sr_RoA:10 a=kj9zAlcOel0A:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
+	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10	a=9vyuS5XHqrACNZIUJTwA:9
+	a=CjuIK1q_8ugA:10
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id BA383200EF; Wed,
+	6 May 2015 19:31:37 -0400 (EDT)
+Date: Wed, 06 May 2015 19:31:37 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Message-id: <20150506233137.GH5885@denix.org>
+References: <20150501160602.GA5885@denix.org>
+	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
+	<554A67AB.1000800@dresearch-fe.de>
+MIME-version: 1.0
+In-reply-to: <554A67AB.1000800@dresearch-fe.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,29 +41,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 21:43:58 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 May 2015 23:31:39 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
+On Wed, May 06, 2015 at 09:12:43PM +0200, Steffen Sledz wrote:
+> Am 02.05.2015 um 23:55 schrieb Andrea Adami:
+> > On Fri, May 1, 2015 at 6:06 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> >> Has anyone ever seen this message during <image>.do_rootfs task?
+> >>
+> >> Collected errors:
+> >>  * opkg_install_pkg: Package <package> md5sum mismatch. Either the opkg or the package index are corrupt. Try 'opkg update'.
+> >>  * opkg_install_cmd: Cannot install package <package>.
+> >>
+> >> We started seeing it on random packages inside the <image> few weeks ago on
+> >> different machines. At the time we had switched to bitbake 1.26. But even
+> >> trying different bitbake versions still occasionally caused the same error, so
+> >> the culprit is still unknwon. Using oe-core/daisy for now.
+> >>
+> >> Any comments or suggestions to where start looking would be appreciated!
+> > 
+> > yes, I have seen this during multimachine builds.
+> > My TMPDIR is on tmpfs in ram so everytime I reboot it is re-populated
+> > from sstate.
+> > ...
+> 
+> We have the same problem here. Also with packages from the "all" feed in a 
+> multimachine build environment. But it does not seem related to 
+> packagegroups.
+> 
+> I've a hypothesis but was not able to validate or falsify it till now: Given 
+> a recipe which does only use file:// type SRC_URI. If i change something in 
+> these sources and do not update PR the prserv/hashing mechanism detects the 
+> changes a builds a new package. But this package has the same version info 
+> as the one before. So for opkg there's no need to update it's "package 
+> database".
 
+After fixing few of our own goofs in packagegroups, I still saw this issue 
+with some real packages like weston-init. It went away after it got rebuilt 
+due to the dependencies, but I'll keep an eye on it and report if it comes 
+back...
 
-
-On 05/06/2015 02:41 PM, Trevor Woerner wrote:
-> On 05/06/15 16:24, akuster808 wrote:
->> On 05/06/2015 01:17 PM, Trevor Woerner wrote:
->>> It'd be nice if someone could put together one "meta-odroid" that would
->>> support them all ;-)
->>
->> Yep. looking into that.
->
-> That's great to hear :-D Which device(s) do you have, just the -xu3?
-
-I just got -W so just the two. nothing else.
-
-- armin
-
-My
-> -c1 arrived yesterday so I can help with testing that device if you
-> don't have one.
->
+-- 
+Denys
 
