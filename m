@@ -1,44 +1,39 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wg0-f49.google.com (mail-wg0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 60B8D73EED
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EA8673755
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2015 19:12:45 +0000 (UTC)
-Received: by wgso17 with SMTP id o17so22032331wgs.1
+	Wed,  6 May 2015 20:17:56 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so5104081igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 May 2015 12:12:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:date:from:user-agent:mime-version:to
-	:cc:subject:references:in-reply-to:content-type
-	:content-transfer-encoding;
-	bh=hLPetjrks3RX8Q5fXBNzPD+WdK+2H/0Ua6Ik1QmYEwc=;
-	b=Yvo6LquWEwkxqyr3hDQcayDCAcOF8FaQVKyZtAaa81Yi8cyS9OpNJcnyy20yQhemxy
-	FpmKC7hX65an3Zx+G86lS1l9IMN2vT8AOuFAVMVHPtNp8nkOdLtpQJg57r0uxNnzEcXx
-	8r4zSTBOmoJFZ2iP6JDiO3WoGh39KJK2UAt3O10iRe/l9ERkNgss5Q0CUE6982xSSos/
-	BSgcRBM7v1jvaW3JvLGdXqD+MVlBtoPKeIHHOcUN5TqJGFE2y4JVpoKZrP5Dvlg6Aqj/
-	jMo20SLET2y3SNqc7nZfcrAPadIPE50/gi03hoK8/j2BYV9zWeC8vXyrmfNgCaYOhIBy
-	GUOw==
-X-Gm-Message-State: ALoCoQl4W1fw16zz8ENngd4+yWd3nas4lExuoByJx3M1yWA4oJGgqVPFHRXtIGcMVNXECfDojbn2
-X-Received: by 10.194.63.9 with SMTP id c9mr303986wjs.143.1430939566686;
-	Wed, 06 May 2015 12:12:46 -0700 (PDT)
-Received: from ?IPv6:2001:bf0:c080:401::2? (wiki.deck1.zone42.org.
-	[2001:bf0:c080:401::2])
-	by mx.google.com with ESMTPSA id dl2sm3546036wib.2.2015.05.06.12.12.44
+	Wed, 06 May 2015 13:17:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=YWmIy1kIrl9IIcOuNiD0avEvDgEqRKkUknQZPYCJPQ4=;
+	b=SQY1I6gkkkdtVcWqXKXUVKSWccc6uAisM47qwHbh2j+za0O+NdExzZTq0oeg+fnDqM
+	DDon6O0+Gp5grpczeEn9PRQsMbOqQrG+k5dGe1ANxjCIdDpBm27sf7LlHEtKs7yczAHd
+	0adBz9PusOjn67+wZBu42lPmu1eJoCcCE18lTP0ZOvi4vWn4PxrPY5Bad6RAyXvPyBLn
+	DUmBW11E6x/NHv1uVTeY/DUSiWXQzixUWXTi9bJ/5LGWkU68ymKvMVwEi4Uxb+j6QvrY
+	S/b5BV5YGVeIw+6doMxBarUfQZ+MmLyReb7EI9cD17gRYtlxaaHjZsBunIbbvqk3mokv
+	AImg==
+X-Received: by 10.50.62.148 with SMTP id y20mr10316443igr.17.1430943477442;
+	Wed, 06 May 2015 13:17:57 -0700 (PDT)
+Received: from [192.168.141.85] ([66.49.234.10])
+	by mx.google.com with ESMTPSA id pg7sm1502081igb.6.2015.05.06.13.17.56
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 May 2015 12:12:45 -0700 (PDT)
-Message-ID: <554A67AB.1000800@dresearch-fe.de>
-Date: Wed, 06 May 2015 21:12:43 +0200
-From: Steffen Sledz <sledz@dresearch-fe.de>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
+	Wed, 06 May 2015 13:17:56 -0700 (PDT)
+Message-ID: <554A76F1.8050407@gmail.com>
+Date: Wed, 06 May 2015 16:17:53 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-To: Andrea Adami <andrea.adami@gmail.com>, Denys Dmytriyenko <denis@denix.org>
-References: <20150501160602.GA5885@denix.org>
-	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
-In-Reply-To: <CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
+To: openembedded-devel@lists.openembedded.org, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+References: <55483F50.5020803@gmail.com>
+In-Reply-To: <55483F50.5020803@gmail.com>
+Subject: Re: Odroid-xu3 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,44 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 19:12:49 -0000
+X-List-Received-Date: Wed, 06 May 2015 20:17:57 -0000
 Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-Am 02.05.2015 um 23:55 schrieb Andrea Adami:
-> On Fri, May 1, 2015 at 6:06 PM, Denys Dmytriyenko <denis@denix.org> wrote:
->> Has anyone ever seen this message during <image>.do_rootfs task?
->>
->> Collected errors:
->>  * opkg_install_pkg: Package <package> md5sum mismatch. Either the opkg or the package index are corrupt. Try 'opkg update'.
->>  * opkg_install_cmd: Cannot install package <package>.
->>
->> We started seeing it on random packages inside the <image> few weeks ago on
->> different machines. At the time we had switched to bitbake 1.26. But even
->> trying different bitbake versions still occasionally caused the same error, so
->> the culprit is still unknwon. Using oe-core/daisy for now.
->>
->> Any comments or suggestions to where start looking would be appreciated!
-> 
-> yes, I have seen this during multimachine builds.
-> My TMPDIR is on tmpfs in ram so everytime I reboot it is re-populated
-> from sstate.
-> ...
+On 05/04/15 23:56, akuster808 wrote:
+> I have added support for the Odroid XU3 board. This layer can be found
+> at  https://github.com/akuster/meta-odroid. It supports XFCE graphics
+> and has sdcard image support.
 
-We have the same problem here. Also with packages from the "all" feed in a multimachine build environment. But it does not seem related to packagegroups.
+Sounds great!
 
-I've a hypothesis but was not able to validate or falsify it till now: Given a recipe which does only use file:// type SRC_URI. If i change something in these sources and do not update PR the prserv/hashing mechanism detects the changes a builds a new package. But this package has the same version info as the one before. So for opkg there's no need to update it's "package database".
+In addition to your meta-odroid there are also:
+https://github.com/stoupa-cz/meta-odroid
+https://github.com/MarkusEich/meta-odroid
 
-As said before this is just a hypothesis.
+Yours supports: odroid-xu3
+stoupa-cz supports: odroid-c1, odroid-u2, odroid-xu
+MarkusEich supports: odroid-u2, odroid-xu
 
-Steffen
-
--- 
-DResearch Fahrzeugelektronik GmbH
-Otto-Schmirgal-Str. 3, 10319 Berlin, Germany
-Tel: +49 30 515932-237 mailto:sledz@dresearch-fe.de
-Fax: +49 30 515932-299
-Geschäftsführer: Dr. Michael Weber, Werner Mögle;
-Amtsgericht Berlin Charlottenburg; HRB 130120 B;
-Ust.-IDNr. DE273952058
+It'd be nice if someone could put together one "meta-odroid" that would
+support them all ;-) Or at least it'd be nice if at least one of them
+was found via the layer index ;-)
 
