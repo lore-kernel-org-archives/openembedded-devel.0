@@ -1,39 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id D55FB73C8C
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
+	[209.85.212.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D3EF73BB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 May 2015 20:24:53 +0000 (UTC)
-Received: by pdbqa5 with SMTP id qa5so19738565pdb.1
+	Wed,  6 May 2015 21:31:52 +0000 (UTC)
+Received: by wief7 with SMTP id f7so134888680wie.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 May 2015 13:24:54 -0700 (PDT)
+	Wed, 06 May 2015 14:31:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=sRPO5wZH7dvc2ZJ+ZbOQiQWD25yweEzFnD4kI6fwwMw=;
-	b=n8UsuKBAuf6USOk8xoDwhkgnM2MVfGrubFio3Os85AxLEncymuNimSzi/E+ibq8c2a
-	vCgnCopkIszr3kPbwWTbwU3BxWF37iTDXMc+2DpuKOa6dKjBENIoLTKt2hd6qeCCU++j
-	wllYQ8RmNpVFOpmgRMdQk1I6FA20I01sap1pzHGqVDZVC1RhBmgrlxWay9na/8D0FYU7
-	mKwOkS3IzC2tXg+9JRXjB712rvO+XoFIV4n6XFT3B/1B5nUl8lEwz5bzH3+14/PRy8mN
-	tYSFOBcBRrm3wCbDub2EL4kDS9hAeillO3c41NmBZCucKvKpAEe0VQLuMrOXij1OC3WH
-	4f4g==
-X-Received: by 10.66.150.196 with SMTP id uk4mr912025pab.54.1430943894688;
-	Wed, 06 May 2015 13:24:54 -0700 (PDT)
-Received: from [10.22.11.251] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by mx.google.com with ESMTPSA id as1sm2670444pbc.39.2015.05.06.13.24.52
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 May 2015 13:24:53 -0700 (PDT)
-Message-ID: <554A7893.3060701@gmail.com>
-Date: Wed, 06 May 2015 13:24:51 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-References: <55483F50.5020803@gmail.com> <554A76F1.8050407@gmail.com>
-In-Reply-To: <554A76F1.8050407@gmail.com>
-Subject: Re: Odroid-xu3 support
+	h=from:to:cc:subject:date:message-id;
+	bh=lEhJ96mt746RQ0y7QE/mXq7rv8mEH8kUy2Anu8GHRfE=;
+	b=LiPKJFEsZnQ/6gEbZWkDEBfCOp4NrM9sRY9znckIuCwZcjk7eIK2nvA+0MyU8BTBn1
+	CXgWVbVwSPLgrzoLFlnzoWIfix9U0eL3brGfeoSDGiteNOMn4n5qMqZ8OtFKSujR+slq
+	u0HYPSH6dr/OMoGO3FzeGM7bOTdSlpp5n0g7Snw+WVB11WtH6BnabWgdXbENfG48XDW8
+	Ph/ZMCxPIk69VaTlzX5WxIVS0KkF1BQw92xTyqPFvn+WzbjqOmKjdI8Q4JUQ960fzioc
+	Zg5Sm3JOVynST6IH051XR2XVksVQeFL7GEXhp1nUbqi91QBqwxNw+v0+ijRioTnHdTBf
+	aVNg==
+X-Received: by 10.180.160.169 with SMTP id xl9mr854722wib.42.1430947913921;
+	Wed, 06 May 2015 14:31:53 -0700 (PDT)
+Received: from T520.homenet.telecomitalia.it
+	(host2-44-dynamic.54-79-r.retail.telecomitalia.it. [79.54.44.2])
+	by mx.google.com with ESMTPSA id gs7sm4026762wib.10.2015.05.06.14.31.52
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 06 May 2015 14:31:53 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 May 2015 23:31:46 +0200
+Message-Id: <1430947906-17527-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-handheld][PATCH] ipaq-boot-params: fix warning about S not existing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,41 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 20:24:54 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 May 2015 21:31:53 -0000
 
+Default S = "${WORKDIR}/${BP}" leads to the warning.
+Fix it by setting S = "${WORKDIR}"
 
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ recipes-bsp/ipaq-boot-params/ipaq-boot-params.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On 05/06/2015 01:17 PM, Trevor Woerner wrote:
-> On 05/04/15 23:56, akuster808 wrote:
->> I have added support for the Odroid XU3 board. This layer can be found
->> at  https://github.com/akuster/meta-odroid. It supports XFCE graphics
->> and has sdcard image support.
->
-> Sounds great!
->
-Thanks.
+diff --git a/recipes-bsp/ipaq-boot-params/ipaq-boot-params.bb b/recipes-bsp/ipaq-boot-params/ipaq-boot-params.bb
+index 74ebe6e..5696e9b 100644
+--- a/recipes-bsp/ipaq-boot-params/ipaq-boot-params.bb
++++ b/recipes-bsp/ipaq-boot-params/ipaq-boot-params.bb
+@@ -6,6 +6,8 @@ COMPATIBLE_MACHINE = "h3600"
+ 
+ SRC_URI = "file://params"
+ 
++S = "${WORKDIR}"
++
+ do_install() {
+         install -d ${D}/boot
+         install -m 0644 ${WORKDIR}/params ${D}/boot/
+-- 
+1.9.1
 
-> In addition to your meta-odroid there are also:
-> https://github.com/stoupa-cz/meta-odroid
-> https://github.com/MarkusEich/meta-odroid
->
-> Yours supports: odroid-xu3
-> stoupa-cz supports: odroid-c1, odroid-u2, odroid-xu
-> MarkusEich supports: odroid-u2, odroid-xu
->
-> It'd be nice if someone could put together one "meta-odroid" that would
-> support them all ;-)
-
-Yep. looking into that.
-
-Or at least it'd be nice if at least one of them
-> was found via the layer index ;-)
-
-that is the goal.
-
-regards,
-Armin
->
 
