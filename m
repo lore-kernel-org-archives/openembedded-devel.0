@@ -1,28 +1,38 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E17F73C8C;
-	Wed,  6 May 2015 15:43:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t46FhLje005017
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 6 May 2015 08:43:21 -0700 (PDT)
-Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 6 May 2015 08:43:20 -0700
-Message-ID: <554A3697.5050208@windriver.com>
-Date: Wed, 6 May 2015 11:43:19 -0400
-From: Randy MacLeod <randy.macleod@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 79B3873755
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  6 May 2015 16:11:16 +0000 (UTC)
+Received: by widdi4 with SMTP id di4so208439362wid.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 May 2015 09:11:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=QQMIUVxLkFoegxiNjycvxF/T/K1xvqntQhhdo3duH4s=;
+	b=Ik6b1YvYrDLsg2xUwTNo+jIgE4t3ldD0SgsXBtjtupRYd1LsTuwcKMXoNaXOMgtBAJ
+	TvYOIY4xk7D8M8c2/Ad2aeCsV1bCGS2IQCIz0A4k3AragMruOQbwLhSETVyiBwfMtORg
+	f26kJM8cR98XNwoCOTv6SRyDtBb0+0qPA0ymvWvyn1BrqFW5evp3zpRwXv4Gxnl/qKpc
+	/NroDP4miwuoFgYj91vOjYlz5pk09nYse9UpbMRd3tQC6ESamp2zMvICWe6loEJ4lynB
+	Qm/eQBwRMJHd9Q9YAHj8A30KWCZmDr2e/QjzqzQHORtzn6ZFAXSGVXHIDE9kYfW2gegT
+	GgLw==
+X-Received: by 10.180.93.7 with SMTP id cq7mr6558860wib.24.1430928677105;
+	Wed, 06 May 2015 09:11:17 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
+	by mx.google.com with ESMTPSA id k9sm2846567wia.6.2015.05.06.09.11.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 May 2015 09:11:15 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 May 2015 18:10:38 +0200
+Message-Id: <1430928646-2007-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
 MIME-Version: 1.0
-To: <rongqing.li@windriver.com>, <openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, <Mark.Hatle@windriver.com>
-References: <1430810046-27021-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1430810046-27021-1-git-send-email-rongqing.li@windriver.com>
-X-Originating-IP: [172.25.44.4]
-Subject: Re: [OE-core] [PATCH 1/1] apt: upgrade to 1.0.9.9
+Subject: [PATCH 0/8] xfce updates + udisks2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,34 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 15:43:20 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 06 May 2015 16:11:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 2015-05-05 03:14 AM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> Upgrade to fix the several CVEs: CVE-2014-0488, CVE-2014-0490
-> Remove apt-0.9.9.4-CVE-2014-0478.patch, which was backport.
-> Romve no-ko-translation.patch, apt-1.0.9.9 has ko translation
-s/Romve/Remove/
-> Update use-host.patch no-curl.patch db_linking_hack.patch and
-> noconfigure.patch
-> Not build the test cases since it requires gtest
+The following changes since commit 2080f15e86d3d8e1e1f65e16b014545fe538114c:
 
-meta-oe has gtest:
-    http://layers.openembedded.org/layerindex/recipe/31721/
+  pcsc-lite_1.8.6: Modified the license for libpcscspy. (2015-04-24 15:11:37 +0200)
 
-Is there any reason not to move it and gmock to oe-core?
-It has no dependencies and it's used by:
-    llvm, google-protocol buffers, opencv, google-chrome
-and probably other packages.
+are available in the git repository at:
 
-I think Mark mentioned that llvm might move to oe-core as
-well so that would be two recipes that benefit from moving gtest.
+  git@github.com:schnitzeltony/meta-openembedded.git patches
+
+for you to fetch changes up to bf435e1c21ce2522e335c905a18f2175824daa73:
+
+  add udisks2 2.1.5 (2015-05-06 18:04:45 +0200)
+
+----------------------------------------------------------------
+Andreas Müller (8):
+      exo: update to 0.10.4
+      xfce4-session: update to 4.12.1
+      xfce4-power-manager: update to 1.4.4
+      xfce4-time-out-plugin: update to 1.0.2
+      xfce4-smartbookmark-plugin: initial add 0.4.6
+      packagegroup-xfce-extended: add xfce4-smartbookmark-plugin
+      thunar: update to 1.6.8
+      add udisks2 2.1.5
+
+ meta-oe/recipes-support/udisks/udisks2_2.1.5.bb                                                             | 31 +++++++++++++++++++++++++++++++
+ meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.4.6.bb                           |  9 +++++++++
+ meta-xfce/recipes-panel-plugins/time-out/{xfce4-time-out-plugin_1.0.1.bb => xfce4-time-out-plugin_1.0.2.bb} |  4 ++--
+ meta-xfce/recipes-xfce/exo/{exo_0.10.3.bb => exo_0.10.4.bb}                                                 |  4 ++--
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb                                          |  1 +
+ meta-xfce/recipes-xfce/thunar/{thunar_1.6.6.bb => thunar_1.6.8.bb}                                          |  4 ++--
+ meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.4.3.bb => xfce4-power-manager_1.4.4.bb}   |  4 ++--
+ meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.12.0.bb => xfce4-session_4.12.1.bb}                   |  4 ++--
+ 8 files changed, 51 insertions(+), 10 deletions(-)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
+ create mode 100644 meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.4.6.bb
+ rename meta-xfce/recipes-panel-plugins/time-out/{xfce4-time-out-plugin_1.0.1.bb => xfce4-time-out-plugin_1.0.2.bb} (67%)
+ rename meta-xfce/recipes-xfce/exo/{exo_0.10.3.bb => exo_0.10.4.bb} (87%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.6.6.bb => thunar_1.6.8.bb} (87%)
+ rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.4.3.bb => xfce4-power-manager_1.4.4.bb} (89%)
+ rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.12.0.bb => xfce4-session_4.12.1.bb} (85%)
 
 -- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
-Canada, K2K 2W5
+1.9.3
+
 
