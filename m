@@ -1,8 +1,6 @@
 Return-Path: <igor.santos@aker.com.br>
-X-Greylist: delayed 606 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 07 May 2015 21:55:08 UTC
 Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id 3E3E473F7B
+	by mail.openembedded.org (Postfix) with SMTP id 3B66C73F69
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  7 May 2015 21:55:08 +0000 (UTC)
 Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
@@ -10,18 +8,18 @@ Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
 	(envelope-from igor.santos@aker.com.br)
 Received: from igor.santos.devel.com.br (10.4.59.1) by mail.aker.com.br
 	(10.0.0.20) with Microsoft SMTP Server id 8.3.342.0;
-	Thu, 7 May 2015 18:44:59 -0300
+	Thu, 7 May 2015 18:44:58 -0300
 From: Igor Santos <igor.santos@aker.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 7 May 2015 18:44:48 -0300
-Message-ID: <1431035088-24968-4-git-send-email-igor.santos@aker.com.br>
+Date: Thu, 7 May 2015 18:44:46 -0300
+Message-ID: <1431035088-24968-2-git-send-email-igor.santos@aker.com.br>
 X-Mailer: git-send-email 2.1.0
 In-Reply-To: <1431035088-24968-1-git-send-email-igor.santos@aker.com.br>
 References: <1431035088-24968-1-git-send-email-igor.santos@aker.com.br>
 MIME-Version: 1.0
 X-AkerSMTPGW-ServerID: a5fc2d2b506f49fc2bd6d1c7ad2f56ee346d5d27
-X-AkerSMTPGW-MessageID: 2f8eeb4b356e02a78519751f698ec6f4253259e0-15o
-Subject: [meta-oe][PATCH] gsoap: fold .inc and -native into one recipe
+X-AkerSMTPGW-MessageID: 4e34b29445c30d23d8dfbfe470a0f4495d7d15b3-15o
+Subject: [meta-oe][PATCH 1/2] ctags: add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,118 +36,49 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Thu, 07 May 2015 21:55:11 -0000
 Content-Type: text/plain
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+Ctags generates an index (or tag) file of language objects found in
+source files that allows these items to be quickly and easily located by
+a text editor or other utility. A tag signifies a language object for
+which an index entry is available (or, alternatively, the index entry
+created for that object).
 
-* use BBCLASSEXTEND instead of separate recipe
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Igor Santos <igor.santos@aker.com.br>
 ---
- .../recipes-support/gsoap/gsoap-native_2.8.12.bb   | 14 ---------
- meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb      | 35 ++++++++++++++++++----
- meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc     | 23 --------------
- 3 files changed, 30 insertions(+), 42 deletions(-)
- delete mode 100644 meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
- delete mode 100644 meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
+ meta-oe/recipes-devtools/ctags/ctags_5.8.bb | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ctags/ctags_5.8.bb
 
-diff --git a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-deleted file mode 100644
-index ac90155..0000000
---- a/meta-oe/recipes-support/gsoap/gsoap-native_2.8.12.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--require gsoap_${PV}.inc
--
--DEPENDS = "flex-native"
--EXTRA_OEMAKE = ""
--
--inherit native
--
--do_install() {
--    oe_runmake DESTDIR=${D} BINDIR=${D}${bindir} install
--}
--
--
--SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
--SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
-diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
-index b85db05..b5c3995 100644
---- a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
-+++ b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.bb
-@@ -1,6 +1,27 @@
--require gsoap_${PV}.inc
-+DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
-+for the development of SOAP Web Services and clients."
-+SECTION = "devel"
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.8.bb b/meta-oe/recipes-devtools/ctags/ctags_5.8.bb
+new file mode 100644
+index 0000000..6fc3912
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ctags/ctags_5.8.bb
+@@ -0,0 +1,25 @@
++# Copyright (C) 2015 Igor Santos <igor.santos@aker.com.br>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "Exuberant Ctags"
++DESCRIPTION = "Exuberant Ctags is a multilanguage reimplementation of the \
++               Unix ctags utility. Ctags generates an index of source code \
++               definitions which is used by numerous editors and utilities \
++               to instantly locate the definitions."
++
++HOMEPAGE = "http://ctags.sourceforge.net/"
++
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b338b08b1b61e028e0f399a4de25e58f"
- 
--DEPENDS = "gsoap-native openssl zlib"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}2/${BPN}_${PV}.zip"
-+SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
-+SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
 +
-+inherit autotools
++inherit autotools-brokensep
 +
-+BBCLASSEXTEND = "native"
++SRC_URI = "http://prdownloads.sourceforge.net/${PN}/${PN}-${PV}.tar.gz"
 +
-+PR = "r1"
++SRC_URI[md5sum] = "c00f82ecdcc357434731913e5b48630d"
++SRC_URI[sha256sum] = "0e44b45dcabe969e0bbbb11e30c246f81abe5d32012db37395eb57d66e9e99c7"
 +
-+S = "${WORKDIR}/${BPN}-2.8"
-+
-+PARALLEL_MAKE = ""
-+
-+EXTRA_OEMAKE_class-target = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
-+
-+DEPENDS_class-target = "gsoap-native openssl zlib"
-+DEPENDS_class-native = "flex-native"
- 
- do_install_append() {
-     install -d ${D}${libdir}
-@@ -10,8 +31,12 @@ do_install_append() {
-     done
- }
- 
-+do_install_class-native() {
-+    oe_runmake DESTDIR=${D} BINDIR=${D}${bindir} install
++do_install() {
++    install -Dm 755 ${B}/ctags ${D}${bindir}/ctags
++    install -Dm 644 ${B}/ctags.1 ${D}${mandir}/man1/ctags.1
 +}
-+
- FILES_${PN} = "${bindir}/wsdl2h ${bindir}/soapcpp2"
- FILES_${PN} += "${datadir}"
--
--SRC_URI[md5sum] = "5700d26fc6fe3073d038349e19c3640d"
--SRC_URI[sha256sum] = "51eef118544fa846f4d2dea2eedf91c84c46a1abeafc5eee3dcff783f4015a00"
-+FILES_${PN}-staticdev = "${libdir}"
-+FILES_${PN}-dev = "${includedir}"
-+RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
-diff --git a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc b/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
-deleted file mode 100644
-index 9e2a782..0000000
---- a/meta-oe/recipes-support/gsoap/gsoap_2.8.12.inc
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "The gSOAP toolkit provides a unique SOAP-to-C/C++ language binding \
--for the development of SOAP Web Services and clients."
--SECTION = "devel"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b338b08b1b61e028e0f399a4de25e58f"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/gsoap2/gsoap_${PV}.zip \
--"
--
--inherit autotools
--
--PR = "r1"
--
--S = "${WORKDIR}/gsoap-2.8"
--
--FILES_${PN}-dev = "${includedir}"
--RRECOMMENDS_${PN}-dev = "${PN}-staticdev"
--
--FILES_${PN}-staticdev = "${libdir}"
--
--PARALLEL_MAKE = ""
--
--EXTRA_OEMAKE = "SOAP=${STAGING_BINDIR_NATIVE}/soapcpp2"
 -- 
 2.1.0
 
