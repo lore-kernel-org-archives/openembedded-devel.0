@@ -1,33 +1,33 @@
-Return-Path: <denis@denix.org>
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by mail.openembedded.org (Postfix) with ESMTP id BA4B273755;
-	Wed,  6 May 2015 23:31:37 +0000 (UTC)
-Received: from gandalf.denix.org ([108.28.31.169]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NNY00IUXC0P2KB0@vms173021.mailsrvcs.net>; Wed,
-	06 May 2015 18:31:38 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=XqdN4uAV c=1 sm=1 tr=0	a=fMO+sUsoiA3cqMJ/JkSOnA==:117
-	a=jLWw55sr_RoA:10 a=kj9zAlcOel0A:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
-	a=-9mUelKeXuEA:10 a=h1PgugrvaO0A:10	a=9vyuS5XHqrACNZIUJTwA:9
-	a=CjuIK1q_8ugA:10
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BA383200EF; Wed,
-	6 May 2015 19:31:37 -0400 (EDT)
-Date: Wed, 06 May 2015 19:31:37 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Message-id: <20150506233137.GH5885@denix.org>
-References: <20150501160602.GA5885@denix.org>
-	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
-	<554A67AB.1000800@dresearch-fe.de>
-MIME-version: 1.0
-In-reply-to: <554A67AB.1000800@dresearch-fe.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
+Return-Path: <johannes.pointner@gmail.com>
+Received: from mail-qg0-f47.google.com (mail-qg0-f47.google.com
+	[209.85.192.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 33FF073D59
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 May 2015 06:33:08 +0000 (UTC)
+Received: by qgdy78 with SMTP id y78so16393300qgd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 May 2015 23:33:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=gDVG4gPm6kMBiXEFjMMeLD9VC9GunIOhuk7fsdev9CY=;
+	b=faqymfkhtboq+AG4mzGZrClCu1x6jR3BgQ1XlqwBLtqKJGjU8VSsQpytyn2+1NsJYy
+	KAsovFobGAzflik6HIbkfheq3IBNV1kkERbJo8PELPyGG+1lbyiwGekWJk4diWZjfHPS
+	zkjg3hXd3f0Bwv2g17xIwUtrVsPA4ucIq4UJI3fRu8gOAtR2e1PhwJ80ASY2q8kHncoN
+	zC6dsAp4MEx1+hQwyjiH1AsXm2orjS4MyFO+LHKKS55LaDUZgK4HP4OzgEjTogxg1tQU
+	TDPCdpCyF9F65GyKyI/UM9dF5y58rnXJkkyqFb0xLzikC7OU3aWL9LjNIGb5uoE7cUi2
+	u1TQ==
+MIME-Version: 1.0
+X-Received: by 10.140.38.167 with SMTP id t36mr2981440qgt.69.1430980389965;
+	Wed, 06 May 2015 23:33:09 -0700 (PDT)
+Received: by 10.140.42.48 with HTTP; Wed, 6 May 2015 23:33:09 -0700 (PDT)
+Date: Thu, 7 May 2015 08:33:09 +0200
+Message-ID: <CAJKbBDArH-fotyKehWv5zOPJsZgCAAYb7Gi+fDFzMVY5gDUFqg@mail.gmail.com>
+From: Johannes Pointner <johannes.pointner@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-oe] build error using read-only-rootfs with samba
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,47 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 May 2015 23:31:39 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 07 May 2015 06:33:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, May 06, 2015 at 09:12:43PM +0200, Steffen Sledz wrote:
-> Am 02.05.2015 um 23:55 schrieb Andrea Adami:
-> > On Fri, May 1, 2015 at 6:06 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> >> Has anyone ever seen this message during <image>.do_rootfs task?
-> >>
-> >> Collected errors:
-> >>  * opkg_install_pkg: Package <package> md5sum mismatch. Either the opkg or the package index are corrupt. Try 'opkg update'.
-> >>  * opkg_install_cmd: Cannot install package <package>.
-> >>
-> >> We started seeing it on random packages inside the <image> few weeks ago on
-> >> different machines. At the time we had switched to bitbake 1.26. But even
-> >> trying different bitbake versions still occasionally caused the same error, so
-> >> the culprit is still unknwon. Using oe-core/daisy for now.
-> >>
-> >> Any comments or suggestions to where start looking would be appreciated!
-> > 
-> > yes, I have seen this during multimachine builds.
-> > My TMPDIR is on tmpfs in ram so everytime I reboot it is re-populated
-> > from sstate.
-> > ...
-> 
-> We have the same problem here. Also with packages from the "all" feed in a 
-> multimachine build environment. But it does not seem related to 
-> packagegroups.
-> 
-> I've a hypothesis but was not able to validate or falsify it till now: Given 
-> a recipe which does only use file:// type SRC_URI. If i change something in 
-> these sources and do not update PR the prserv/hashing mechanism detects the 
-> changes a builds a new package. But this package has the same version info 
-> as the one before. So for opkg there's no need to update it's "package 
-> database".
+Hello,
 
-After fixing few of our own goofs in packagegroups, I still saw this issue 
-with some real packages like weston-init. It went away after it got rebuilt 
-due to the dependencies, but I'll keep an eye on it and report if it comes 
-back...
+I recently upgraded to fido and tried to build core-image-x11 but I get the
+following error if I include the samba package:
 
--- 
-Denys
+Collected errors:
+* extract_archive: Cannot create symlink from ./var/log to 'volatile/log':
+File exists.
+
+I think I was able to find the cause of the problem, it seems that samba
+package is trying to install /var/volatile/log/samba as well as samba-base
+package by using the volatile script.
+
+But I'm not sure, why the samba package is creating /var/volatile/log/samba.
+
+Thx,
+Hannes
 
