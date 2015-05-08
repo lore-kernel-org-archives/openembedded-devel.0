@@ -1,34 +1,58 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 18E3D73F88
+Return-Path: <B40290@freescale.com>
+Received: from na01-by2-obe.outbound.protection.outlook.com
+	(mail-by2on0137.outbound.protection.outlook.com [207.46.100.137])
+	by mail.openembedded.org (Postfix) with ESMTP id BF43773F84
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 02:27:50 +0000 (UTC)
-Received: by iecnq11 with SMTP id nq11so54038361iec.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 May 2015 19:27:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=3eOHp4qxUu/XapPJ9/OG2W98ldWbok8bQpDW7Ylq93s=;
-	b=dhlu3bb0oBy5YEtxtJz6mtBOLSt/ihnKiQREQJTRcYcaFE/YARJbikXH+OvDBsXE1I
-	CemfvfPJRjdN/0TERykKUEowxn0pWtHQCSWT+dzWcLHO2kPfLYzoJXzwW/OP8aiteGfw
-	ydHlsR4ldrxOy/l7kIGZ8ERDAKz0exOKrERBR8PxSIpv/1Y1IP/bqx2KKFsy7w9rg9d/
-	eITeXnan7PkBy1ru37usPxBm8YXOo6jpbrKs4oOAaU/ZCLf0cG1VLz53E4nZd2ES3UzF
-	e46CBbUwl1ZdPJxGs3bbzoUYn+b2cVMwVXK8AgFbSHjv6ud7mMl9KqrFzCJJ8NiqAL8e
-	ABjg==
-X-Received: by 10.42.103.196 with SMTP id n4mr1751027ico.31.1431052071594;
-	Thu, 07 May 2015 19:27:51 -0700 (PDT)
-Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
-	[96.119.89.79])
-	by mx.google.com with ESMTPSA id b2sm2870894igf.10.2015.05.07.19.27.50
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 07 May 2015 19:27:51 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 May 2015 19:27:45 -0700
-Message-Id: <1431052065-17113-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-browser][PATCH] chromium/cef: Fix chromium installation regressions
+	Fri,  8 May 2015 02:49:30 +0000 (UTC)
+Received: from BY2PR03CA001.namprd03.prod.outlook.com (10.255.93.18) by
+	BLUPR03MB437.namprd03.prod.outlook.com (10.141.78.147) with Microsoft
+	SMTP Server (TLS) id 15.1.160.10; Fri, 8 May 2015 02:49:30 +0000
+Received: from BN1AFFO11FD045.protection.gbl (10.255.93.4) by
+	BY2PR03CA001.outlook.office365.com (10.255.93.18) with Microsoft SMTP
+	Server (TLS) id 15.1.160.19 via Frontend Transport;
+	Fri, 8 May 2015 02:49:30 +0000
+Authentication-Results: spf=fail (sender IP is 192.88.158.2)
+	smtp.mailfrom=freescale.com; freescale.mail.onmicrosoft.com; dkim=none
+	(message not signed) header.d=none;
+Received-SPF: Fail (protection.outlook.com: domain of freescale.com does not
+	designate 192.88.158.2 as permitted sender)
+	receiver=protection.outlook.com; 
+	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
+Received: from az84smr01.freescale.net (192.88.158.2) by
+	BN1AFFO11FD045.mail.protection.outlook.com (10.58.53.60) with Microsoft
+	SMTP Server (TLS) id 15.1.160.8 via Frontend Transport;
+	Fri, 8 May 2015 02:49:29 +0000
+Received: from sun.ap.freescale.net (sun.ap.freescale.net [10.192.208.75])
+	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id t482nOQA012444;
+	Thu, 7 May 2015 19:49:25 -0700
+From: <b40290@freescale.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 8 May 2015 10:49:20 +0800
+Message-ID: <1431053360-29280-1-git-send-email-b40290@freescale.com>
+X-Mailer: git-send-email 1.9.2
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:192.88.158.2; CTRY:US; IPV:NLI; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10019020)(6009001)(339900001)(189002)(199003)(46102003)(92566002)(86152002)(86362001)(106466001)(229853001)(47776003)(36756003)(575784001)(50466002)(189998001)(48376002)(15975445007)(107886002)(5001960100002)(450100001)(5001920100001)(50986999)(77156002)(87936001)(77096005)(62966003)(33646002)(6806004)(104016003)(105606002)(85426001)(19580405001)(2351001)(19580395003)(50226001)(4001430100001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:BLUPR03MB437;
+	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; MX:1; A:1;
+	LANG:en; 
+MIME-Version: 1.0
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:BLUPR03MB437;
+X-Microsoft-Antispam-PRVS: <BLUPR03MB437AD9AE2A6DDEC5DB5153284DE0@BLUPR03MB437.namprd03.prod.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(5005006)(3002001); SRVR:BLUPR03MB437; BCL:0;
+	PCL:0; RULEID:; SRVR:BLUPR03MB437; 
+X-Forefront-PRVS: 0570F1F193
+X-OriginatorOrg: freescale.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 May 2015 02:49:29.9927 (UTC)
+X-MS-Exchange-CrossTenant-Id: 710a03f5-10f6-4d38-9ff4-a80b81da590d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=710a03f5-10f6-4d38-9ff4-a80b81da590d; Ip=[192.88.158.2];
+	Helo=[az84smr01.freescale.net]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLUPR03MB437
+Subject: [meta-oe][PATCH v2] polkit: do not hardcode the libdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,128 +66,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 02:27:52 -0000
+X-List-Received-Date: Fri, 08 May 2015 02:49:34 -0000
+Content-Type: text/plain
 
-CEF rework caused few problems where we missed packaging needed resource
-files and misplaced some icu data files
+From: Chunrong Guo <B40290@freescale.com>
 
-Use loops to install similar files
+ libdir is defined as ${prefix}/lib/, but we want it to support multilib path
 
-Tested on x86 emulator making sure google-chrome starts up
-properly
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Chunrong Guo <B40290@freescale.com>
 ---
- recipes-browser/chromium/chromium.inc | 86 ++++++++++++-----------------------
- 1 file changed, 28 insertions(+), 58 deletions(-)
+ .../polkit/0001-do-not-hardcoded-libdir.patch      | 44 ++++++++++++++++++++++
+ meta-oe/recipes-extended/polkit/polkit_0.112.bb    |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 9c34a68..a9e9b8a 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -31,73 +31,43 @@ do_configure() {
- }
- 
- do_install() {
--	install -d ${D}${bindir}
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple" ]; then
--		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}
--	fi
- 	if [ -f "${WORKDIR}/google-chrome" ]; then
--		install -m 0755 ${WORKDIR}/google-chrome ${D}${bindir}/
--	fi
--	install -d ${D}${datadir}/applications
--	if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
--		install -m 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/
--	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}
-+		install -Dm 0755 ${WORKDIR}/google-chrome ${D}${bindir}/google-chrome
- 	fi
--	install -d ${D}${libdir}
--        if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
--		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${libdir}
--        fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libpdf.so" ]; then
--		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libpdf.so ${D}${libdir}/chrome/libpdf.so
-+	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox" ]; then
-+		install -Dm 4755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
- 	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so" ]; then
--		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so ${D}${libdir}/chrome/libosmesa.so
-+	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple" ]; then
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}/cefsimple
- 	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so" ]; then
--		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so ${D}${libdir}/chrome/libffmpegsumo.so
-+	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${bindir}/lib/libcef.so
- 	fi
--	install -d ${D}${bindir}/chrome
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome" ]; then
--		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/chrome/chrome
--	fi
--	#Chromium *.pak files
--
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/content_resources.pak" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/content_resources.pak ${D}${bindir}/chrome
--	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/keyboard_resources.pak" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/keyboard_resources.pak ${D}${bindir}/chrome
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/chrome/chrome
- 	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_100_percent.pak" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_100_percent.pak ${D}${bindir}/chrome
--	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png" ]; then
--		install -m 0644 ${S}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png ${D}${bindir}/chrome/
--    	fi
--
--    	# CEF *.pak files
--
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_100_percent.pak" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_100_percent.pak ${D}${bindir}/chrome
--	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_200_percent.pak" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_200_percent.pak ${D}${bindir}/chrome
--	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_resources.pak" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_resources.pak ${D}${bindir}/chrome
--	fi
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef.pak" ]; then
--		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef.pak ${D}${bindir}/chrome
-+	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat" ]; then
-+		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}/chrome/icudtl.dat
- 	fi
--	install -d ${D}${bindir}/chrome/locales
--	install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/locales/en-US.pak ${D}${bindir}/chrome/locales
-+	if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
-+		install -Dm 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/google-chrome.desktop
-+	fi
-+	#Chromium plugins libs
-+	for f in libpdf.so libosmesa.so libffmpegsumo.so; do
-+		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
-+			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/chrome/$f
-+		fi
-+	done
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
+new file mode 100644
+index 0000000..3ccedcd
+--- /dev/null
++++ b/meta-oe/recipes-extended/polkit/polkit/0001-do-not-hardcoded-libdir.patch
+@@ -0,0 +1,44 @@
++From c9e09d9b101109832b1dcb050f0c8b588e276686 Mon Sep 17 00:00:00 2001
++From: Zhenhua Luo <zhenhua.luo@freescale.com>
++Date: Mon, 4 May 2015 04:11:27 -0500
++Subject: [PATCH] do not hardcoded libdir
 +
-+	#Chromium *.pak files and CEF pak files ( prefixed with cef_
-+	for f in content_resources.pak keyboard_resources.pak chrome_100_percent.pak product_logo_48.png resources.pak \
-+	         cef_100_percent.pak cef_200_percent.pak cef_resources.pak cef.pak \
-+		 locales/en-US.pak; do
-+		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
-+			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/chrome/$f
-+		fi
-+	done
++Upstream-Status: Pending
++
++libdir is hardcoded to ${prefix}/lib, but we want it to support multilib
++
++Signed-off-by: Chunrong Guo <B40290@freescale.com>
++---
++ polkitagent/Makefile.am   | 2 +-
++ polkitbackend/Makefile.am | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/polkitagent/Makefile.am b/src/polkitagent/Makefile.am
++index 3bc364e..7d1ac0e 100644
++--- a/src/polkitagent/Makefile.am
+++++ b/src/polkitagent/Makefile.am
++@@ -78,7 +78,7 @@ libpolkit_agent_1_la_LIBADD =                               		\
++ 
++ libpolkit_agent_1_la_LDFLAGS = -export-symbols-regex '(^polkit_.*)'
++ 
++-libprivdir = $(prefix)/lib/polkit-1
+++libprivdir = $(libdir)/polkit-1
++ libpriv_PROGRAMS = polkit-agent-helper-1
++ 
++ polkit_agent_helper_1_SOURCES = 					\
++diff --git a/src/polkitbackend/Makefile.am b/src/polkitbackend/Makefile.am
++index 9f430d0..1f7610b 100644
++--- a/src/polkitbackend/Makefile.am
+++++ b/src/polkitbackend/Makefile.am
++@@ -67,7 +67,7 @@ rules_DATA = 50-default.rules
++ 
++ # ----------------------------------------------------------------------------------------------------
++ 
++-libprivdir = $(prefix)/lib/polkit-1
+++libprivdir = $(libdir)/polkit-1
++ libpriv_PROGRAMS = polkitd
++ 
++ polkitd_SOURCES = 							\
++-- 
++2.3.3
++
+diff --git a/meta-oe/recipes-extended/polkit/polkit_0.112.bb b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
+index 72b182b..f20e1a4 100644
+--- a/meta-oe/recipes-extended/polkit/polkit_0.112.bb
++++ b/meta-oe/recipes-extended/polkit/polkit_0.112.bb
+@@ -21,6 +21,7 @@ PAM_SRC_URI = "file://polkit-1_pam.patch"
+ SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+            ${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
+            file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
++           file://0001-do-not-hardcoded-libdir.patch \
+ "
  
--	install -d ${D}${sbindir}
--	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox" ]; then
--		install -m 4755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
--	fi
- }
- 
- PACKAGES =+ "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
+ SRC_URI[md5sum] = "b0f2fa00a55f47c6a5d88e9b73f80127"
 -- 
-2.1.4
+1.9.2
 
 
