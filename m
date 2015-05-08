@@ -1,25 +1,30 @@
-Return-Path: <igor.santos@aker.com.br>
-Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id 29AD172B1E
+Return-Path: <haris.okanovic@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id DCA0F60034
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 18:09:45 +0000 (UTC)
-Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
-	by asmg.aker.com.br [10.0.1.3]; Fri, 8 May 2015 15:09:43 -0300
-	(envelope-from igor.santos@aker.com.br)
-Received: from igor.santos.devel.com.br (10.4.59.1) by mail.aker.com.br
-	(10.0.0.20) with Microsoft SMTP Server id 8.3.342.0;
-	Fri, 8 May 2015 15:06:43 -0300
-From: Igor Santos <igor.santos@aker.com.br>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 May 2015 15:06:07 -0300
-Message-ID: <1431108368-20646-2-git-send-email-igor.santos@aker.com.br>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1431108368-20646-1-git-send-email-igor.santos@aker.com.br>
-References: <1431108368-20646-1-git-send-email-igor.santos@aker.com.br>
-MIME-Version: 1.0
-X-AkerSMTPGW-ServerID: a5fc2d2b506f49fc2bd6d1c7ad2f56ee346d5d27
-X-AkerSMTPGW-MessageID: 77c84ae8ddd3a9ee4492ec1c8aa63b37140bbaeb-15o
-Subject: [meta-oe][PATCH 1/2] ctags: add
+	Fri,  8 May 2015 19:14:59 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t48JF0sh011448 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 8 May 2015 14:15:00 -0500
+Received: from harisdt.amer.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
+	with ESMTP id 2015050814150047-1121765 ;
+	Fri, 8 May 2015 14:15:00 -0500 
+From: Haris Okanovic <haris.okanovic@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 8 May 2015 14:14:46 -0500
+Message-Id: <1431112486-23487-1-git-send-email-haris.okanovic@ni.com>
+X-Mailer: git-send-email 2.2.2
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 05/08/2015 02:15:00 PM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 05/08/2015 02:15:00 PM,
+	Serialize complete at 05/08/2015 02:15:00 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-05-08_07:, , signatures=0
+Subject: [PATCH] dpkg start-stop-daemon: Fix RCONFLICTS typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,54 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 18:09:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 08 May 2015 19:15:00 -0000
 
-Ctags generates an index (or tag) file of language objects found in
-source files that allows these items to be quickly and easily located by
-a text editor or other utility. A tag signifies a language object for
-which an index entry is available (or, alternatively, the index entry
-created for that object).
-
-Signed-off-by: Igor Santos <igor.santos@aker.com.br>
+Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
+Reviewed-by: Ben Shelton <ben.shelton@ni.com>
+Acked-by: Brad Mouring <brad.mouring@ni.com>
 ---
- meta-oe/recipes-devtools/ctags/ctags_5.8.bb | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/ctags/ctags_5.8.bb
+ meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/ctags/ctags_5.8.bb b/meta-oe/recipes-devtools/ctags/ctags_5.8.bb
-new file mode 100644
-index 0000000..6fc3912
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ctags/ctags_5.8.bb
-@@ -0,0 +1,25 @@
-+# Copyright (C) 2015 Igor Santos <igor.santos@aker.com.br>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "Exuberant Ctags"
-+DESCRIPTION = "Exuberant Ctags is a multilanguage reimplementation of the \
-+               Unix ctags utility. Ctags generates an index of source code \
-+               definitions which is used by numerous editors and utilities \
-+               to instantly locate the definitions."
-+
-+HOMEPAGE = "http://ctags.sourceforge.net/"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+
-+inherit autotools-brokensep
-+
-+SRC_URI = "http://prdownloads.sourceforge.net/${PN}/${PN}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "c00f82ecdcc357434731913e5b48630d"
-+SRC_URI[sha256sum] = "0e44b45dcabe969e0bbbb11e30c246f81abe5d32012db37395eb57d66e9e99c7"
-+
-+do_install() {
-+    install -Dm 755 ${B}/ctags ${D}${bindir}/ctags
-+    install -Dm 644 ${B}/ctags.1 ${D}${mandir}/man1/ctags.1
-+}
+diff --git a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.2.bb b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.2.bb
+index c8d88b7..efdd6b7 100644
+--- a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.2.bb
++++ b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.2.bb
+@@ -4,7 +4,7 @@ LICENSE = "PD"
+ LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;md5=a963623e4588f70122865aaa7a370ce4"
+ # start-stop-daemon is usually shipped by dpkg
+ DEPENDS = "ncurses"
+-RCONFLICS_${PN} = "dpkg" 
++RCONFLICTS_${PN} = "dpkg"
+ 
+ PNBLACKLIST[start-stop-daemon] ?= "BROKEN: fails because of gettext, partial fix is available here http://patchwork.openembedded.org/patch/89867/"
+ 
 -- 
-2.1.0
-
+2.2.2
 
 
