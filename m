@@ -1,31 +1,30 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id F1B3360034
+	by mail.openembedded.org (Postfix) with ESMTP id CF0E160034
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 16:16:02 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
+	Fri,  8 May 2015 16:25:41 +0000 (UTC)
+Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
 	by relay1.mentorg.com with esmtp 
-	id 1YqkwV-0002uv-3f from Joe_MacDonald@mentor.com ;
-	Fri, 08 May 2015 09:16:03 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
-	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2; Fri, 8 May 2015
-	09:16:02 -0700
-Received: by burninator (Postfix, from userid 1000)	id F2AC45806FD; Fri,  8
-	May 2015 12:16:06 -0400 (EDT)
-Date: Fri, 8 May 2015 12:16:06 -0400
+	id 1Yql5r-00071F-F4 from Joe_MacDonald@mentor.com ;
+	Fri, 08 May 2015 09:25:43 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2; Fri, 8 May 2015
+	09:25:43 -0700
+Received: by burninator (Postfix, from userid 1000)	id ABAEF5806FD; Fri,  8
+	May 2015 12:25:47 -0400 (EDT)
+Date: Fri, 8 May 2015 12:25:47 -0400
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: <rongqing.li@windriver.com>
-Message-ID: <20150508161606.GB7280@mentor.com>
-References: <1430201100-15248-1-git-send-email-rongqing.li@windriver.com>
-	<1430201100-15248-3-git-send-email-rongqing.li@windriver.com>
+Message-ID: <20150508162547.GC7280@mentor.com>
+References: <1429173305-443-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1430201100-15248-3-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1429173305-443-1-git-send-email-rongqing.li@windriver.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 3/3][meta-networking] opensaf: create the node_name configuration file after install pkg
+Subject: Re: [PATCH][meta-networking] netkit-telnet: support the cross-compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,138 +38,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 16:16:06 -0000
-X-Groupsio-MsgNum: 55405
+X-List-Received-Date: Fri, 08 May 2015 16:25:42 -0000
+X-Groupsio-MsgNum: 55406
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mxv5cy4qt+RJ9ypb"
+	protocol="application/pgp-signature"; boundary="+xNpyl7Qekk2NvDX"
 Content-Disposition: inline
 
---mxv5cy4qt+RJ9ypb
+--+xNpyl7Qekk2NvDX
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi Roy,
 
-[[oe] [PATCH 3/3][meta-networking] opensaf: create the node_name configurat=
-ion file after install pkg] On 15.04.28 (Tue 14:05) rongqing.li@windriver.c=
-om wrote:
+[[PATCH][meta-networking] netkit-telnet: support the cross-compile] On 15.0=
+4.16 (Thu 16:35) rongqing.li@windriver.com wrote:
 
 > From: Roy Li <rongqing.li@windriver.com>
 >=20
-> not create the node_name file when building by calling "hostname -s",
-> and create it after install pkg, since it works on cross-compile
-> environment
+> when check the CC, only compile the object by CC, not run the object.
+> MCONFIG file includes more configuration, we can not clear it
 >=20
 > Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  .../opensaf/0001-not-install-node_name.patch       | 30 ++++++++++++++++=
+>  .../netkit-telnet/files/cross-compile.patch        | 48 ++++++++++++++++=
 ++++++
->  .../recipes-daemons/opensaf/opensaf_4.5.0.bb       | 13 +++++++++-
->  2 files changed, 42 insertions(+), 1 deletion(-)
->  create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-=
-not-install-node_name.patch
+>  .../netkit-telnet/netkit-telnet_0.17.bb            |  6 ++-
+>  2 files changed, 53 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/cr=
+oss-compile.patch
 >=20
-> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-not-ins=
-tall-node_name.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001=
--not-install-node_name.patch
+> diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/cross-com=
+pile.patch b/meta-networking/recipes-netkit/netkit-telnet/files/cross-compi=
+le.patch
 > new file mode 100644
-> index 0000000..d152de0
+> index 0000000..b3fe36b
 > --- /dev/null
-> +++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-not-install-no=
-de_name.patch
-> @@ -0,0 +1,30 @@
-> +[PATCH] not install node_name
+> +++ b/meta-networking/recipes-netkit/netkit-telnet/files/cross-compile.pa=
+tch
+> @@ -0,0 +1,48 @@
+> +To support the cross-compile
 > +
-> +Upstream-Status: Inappropriate [cross compiling specific]
+> +Upstream-Status: Pending
 > +
-> +when cross-compile, the compile host name is written into node_name file,
-> +but target host name should be written, so not install node_name, and cr=
-eate
-> +it when pkg-install
+> +make the configure to support the cross-compile, by only to compile the
+> +target, and not to run it
 > +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> +---
-> + osaf/services/saf/clmsv/config/Makefile.am | 6 ------
-> + 1 file changed, 6 deletions(-)
-> +
-> +diff --git a/osaf/services/saf/clmsv/config/Makefile.am b/osaf/services/=
-saf/clmsv/config/Makefile.am
-> +index 15b8702..88c8d24 100644
-> +--- a/osaf/services/saf/clmsv/config/Makefile.am
-> ++++ b/osaf/services/saf/clmsv/config/Makefile.am
-> +@@ -39,9 +39,3 @@ dist_pkgimmxml_svc_DATA +=3D \
-> + endif
-> +=20
-> + endif
-> +-
-> +-install-data-hook:
-> +-	hostname -s > $(DESTDIR)$(pkgsysconfdir)/node_name
-> +-
-> +-uninstall-hook:
-> +-	rm -f $(DESTDIR)$(pkgsysconfdir)/node_name
-> +--=20
-> +1.9.1
-> +
-> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/m=
-eta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-> index 6d31b1c..fc77f2f 100644
-> --- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-> +++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-> @@ -14,7 +14,9 @@ HOMEPAGE =3D "http://www.opensaf.org"
->  inherit autotools useradd systemd pkgconfig
+> +Roy Li <rongqing.li@windriver.com>
+
+I guess you meant to make this a signed-off-by line.
+
+Also, this looks like a re-submission of the patch initially from Li Xin
+at Fujitsu last November.  It was dropped in the v2 of the recipe and I
+didn't ask any more after it, but can you follow-up on the requests I
+had regarding it at the time?
+
+http://lists.openembedded.org/pipermail/openembedded-devel/2014-November/09=
+8982.html
+
+-J.
+
+> +Index: netkit-telnet-0.17/configure
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- netkit-telnet-0.17.orig/configure	2008-11-23 22:01:26.000000000 +0100
+> ++++ netkit-telnet-0.17/configure	2008-11-23 22:05:00.000000000 +0100
+> +@@ -94,7 +94,7 @@
+> +     echo -n 'Checking if C compiler works... '
+> +     if (
+> +           $CC __conftest.c -o __conftest || exit 1
+> +-          ./__conftest || exit 1
+> ++          # Idiots belong shot! ./__conftest || exit 1
+> +        ) >/dev/null 2>&1; then
+> +          echo 'yes'
+> +      else
+> +@@ -141,7 +141,7 @@
+> +     echo -n 'Checking if C++ compiler works... '
+> +     if (
+> +           $CXX __conftest.cc -o __conftest || exit 1
+> +-          ./__conftest || exit 1
+> ++          # Iditios belong shot! ./__conftest || exit 1
+> +        ) >/dev/null 2>&1; then
+> +          echo 'yes'
+> +      else
+> +@@ -284,7 +284,7 @@
+> + else
+> +     if (
+> +           $CXX $CXXFLAGS -D__USE_BSD_SIGNAL __conftest.cc  -o __conftes=
+t || exit 1
+> +-          ./__conftest || exit 1
+> ++          # running still does not work./__conftest || exit 1
+> +        ) >/dev/null 2>&1; then
+> +         echo '-D__USE_BSD_SIGNAL'
+> +         CFLAGS=3D"$CFLAGS -D__USE_BSD_SIGNAL"
+> +@@ -501,7 +501,7 @@
+> + EOF
+> + if (
+> +       $CXX $CXXFLAGS  __conftest.cc $LIBBSD -o __conftest || exit 1
+> +-      ./__conftest || exit 1
+> ++      # argh! morons!./__conftest || exit 1
+> +    ) >/dev/null 2>&1; then
+> +     echo 'ok'
+> + else
+> diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0=
+=2E17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.=
+bb
+> index a2dc1c2..6b2e72f 100644
+> --- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+> +++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+> @@ -8,6 +8,7 @@ SRC_URI =3D "ftp://ftp.uk.linux.org/pub/linux/Networking/=
+netkit/${BP}.tar.gz \
+>      file://To-aviod-buffer-overflow-in-telnet.patch \
+>      file://Warning-fix-in-the-step-of-install.patch \
+>      file://telnet-xinetd \
+> +    file://cross-compile.patch \
+>  "
 > =20
->  SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-> -           file://install-samples-from-srcdir.patch"
-> +           file://install-samples-from-srcdir.patch \
-> +           file://0001-not-install-node_name.patch \
-> +"
+>  EXTRA_OEMAKE =3D "INSTALLROOT=3D${D} SBINDIR=3D${sbindir} DAEMONMODE=3D7=
+55 \
+> @@ -15,7 +16,10 @@ EXTRA_OEMAKE =3D "INSTALLROOT=3D${D} SBINDIR=3D${sbind=
+ir} DAEMONMODE=3D755 \
 > =20
->  SRC_URI[md5sum] =3D "534c0a99438a62c4c8dda56cfa67300c"
->  SRC_URI[sha256sum] =3D "2f5ba57fe67e94099c0df82d0a0dd207b5c583c93030035b=
-a354c97b5471b590"
-> @@ -45,3 +47,12 @@ do_install_append() {
->      install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensaf=
-d.service \
->          ${D}${systemd_unitdir}/system
+>  do_configure () {
+>      ./configure --prefix=3D${prefix}
+> -    echo "LDFLAGS=3D${LDFLAGS}" > MCONFIG
+> +    sed -e 's#^CFLAGS=3D\(.*\)$#CFLAGS=3D -D_GNU_SOURCE \1#' \
+> +        -e 's#^CXXFLAGS=3D\(.*\)$#CXXFLAGS=3D -D_GNU_SOURCE \1#' \
+> +        -e 's#^LDFLAGS=3D.*$#LDFLAGS=3D ${LDFLAGS}#' \
+> +        -i MCONFIG
 >  }
-> +
-> +pkg_postinst_${PN} () {
-> +    if [ "x$D" !=3D "x" ]; then
-> +        exit 1
-> +    fi
-> +
-> +    hostname -s > /etc/opensaf/node_name
-> +}
-> +
-
-Can you convert this to 'if [ -n "$D" ]; then ... fi' logic and check
-for the existence of node_name before over-writing it, since this could
-also run on a package upgrade?
-
-For that matter, if you need a node_name and it's always going to be
-hostname, couldn't you just dump ${hostname} into
-${D}${sysconfdir}/node_name in the do_install_append() that's already
-there and then there's no need for a postinst step?
-
+> =20
+>  do_compile () {
 --=20
 -Joe MacDonald.
 :wq
 
---mxv5cy4qt+RJ9ypb
+--+xNpyl7Qekk2NvDX
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQEcBAEBAgAGBQJVTOFGAAoJEEn8ffcsOfaWrXIH/A4slxwkDKdGKWMGbrOENTl5
-hZcN8PmnmKm3qSt/DUJaYKnWvS5pYITQqAmlNFKVFuhAlZNR8XLWCevmmevo9gx+
-clfpAJDOY4+niOyyu5YUCGB1X5QLJch3ifwss1Pm18OAIAoHD9s0BR0JwFqcXr5W
-lEuADTEhNXvTKF01vZFGDPbT06yaexpB3pCnafY7B98hdU9neJOSLW3ng1uD7AvY
-fSI/fHkEVKYuHmMJlgottzj8Mym7rVtdJr4x71TXs/FgImeAym6/7tdwqQYfzmYg
-Wgdiiiz9p3tGuV3rsGeMkxTVSomgh72D8D/y/ZK2xFDM87GVbzOpKdkw49FRf7s=
-=VV4S
+iQEcBAEBAgAGBQJVTOOLAAoJEEn8ffcsOfaWV8oH/1kg3t+Nv7WukFoymlR1Zzei
+8gnpgEA+TCGz5W19l1X2/BHhV/o+2Q0HZSkaTfSEjiXBqTEPlhZRUOb1qDjC20iB
++frCqaJBVH1gMsu61RmTG23XcsvRriGhaKoiZdKXSgdHX8khkQBSC/M9VNUwLZE+
+isng9+tIPiVCM1588PdKZ2Ihb9ROMQERq2Lkjz3FDlf5xp+Cxs/vzCGCvqJJJd9A
+2uUQ9CsDfM8US/VI1sXil1ymHpkmHlwjmhv7a7+5nISNM9xCufg0yYIvNqhfq1N7
+R9RVrZV8yhYU3YmMCK8FdV5v4e4cGRi6UE7VDdB4Lf+fG3//Nts06KL/tbjYZQ4=
+=nQBw
 -----END PGP SIGNATURE-----
 
---mxv5cy4qt+RJ9ypb--
+--+xNpyl7Qekk2NvDX--
