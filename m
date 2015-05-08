@@ -1,40 +1,34 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 8011B73F85
+Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 18E3D73F88
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 02:19:08 +0000 (UTC)
-Received: by pdbqa5 with SMTP id qa5so57513764pdb.1
+	Fri,  8 May 2015 02:27:50 +0000 (UTC)
+Received: by iecnq11 with SMTP id nq11so54038361iec.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 May 2015 19:19:09 -0700 (PDT)
+	Thu, 07 May 2015 19:27:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
-	:references:to;
-	bh=uJEcWwBBspSlu1kab9+u0+ktSuDJZdlB29h/K4usdLc=;
-	b=L0VXV1LPCHZebp34gwe5cKz8g1fiyvnOwwaeSNJPeOlszpQSiPYKMVBN0xWzN/Hfnq
-	K9875n6wFWfEX0xpcxosbI8cp7HVTzuHWT2RdTb+X/Ve/5On3kO9aAZePH+a7nSYfmaj
-	/9dp8Ep0kNUqnFXaQyjYiWmqGuWILnkX5u5M4AHQ7T+2Izty6Mfkn49Fms00497ZFb+H
-	vYIAz1BxHzrNpB9iSzkCmlOFJvUsVAuP3DOkkKZUPQp/CjL+HSg0lJUGx+TygvWbnKkl
-	Kk2GTVx5hEM9ieoAA6IYU4W6FaLxT12ZZJSjzibWH5YkEwODA4zovIeX2caoV6DUZo2L
-	1e+A==
-X-Received: by 10.70.138.8 with SMTP id qm8mr2654069pdb.96.1431051549787;
-	Thu, 07 May 2015 19:19:09 -0700 (PDT)
-Received: from ?IPv6:2601:9:3580:84c:6d9c:46fd:9111:cff8?
-	([2601:9:3580:84c:6d9c:46fd:9111:cff8])
-	by mx.google.com with ESMTPSA id q4sm3423753pdo.42.2015.05.07.19.19.08
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Thu, 07 May 2015 19:19:09 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
-X-Pgp-Agent: GPGMail 2.5b6
+	h=from:to:cc:subject:date:message-id;
+	bh=3eOHp4qxUu/XapPJ9/OG2W98ldWbok8bQpDW7Ylq93s=;
+	b=dhlu3bb0oBy5YEtxtJz6mtBOLSt/ihnKiQREQJTRcYcaFE/YARJbikXH+OvDBsXE1I
+	CemfvfPJRjdN/0TERykKUEowxn0pWtHQCSWT+dzWcLHO2kPfLYzoJXzwW/OP8aiteGfw
+	ydHlsR4ldrxOy/l7kIGZ8ERDAKz0exOKrERBR8PxSIpv/1Y1IP/bqx2KKFsy7w9rg9d/
+	eITeXnan7PkBy1ru37usPxBm8YXOo6jpbrKs4oOAaU/ZCLf0cG1VLz53E4nZd2ES3UzF
+	e46CBbUwl1ZdPJxGs3bbzoUYn+b2cVMwVXK8AgFbSHjv6ud7mMl9KqrFzCJJ8NiqAL8e
+	ABjg==
+X-Received: by 10.42.103.196 with SMTP id n4mr1751027ico.31.1431052071594;
+	Thu, 07 May 2015 19:27:51 -0700 (PDT)
+Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
+	[96.119.89.79])
+	by mx.google.com with ESMTPSA id b2sm2870894igf.10.2015.05.07.19.27.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 07 May 2015 19:27:51 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1430382588-11298-1-git-send-email-b40290@freescale.com>
-Date: Thu, 7 May 2015 19:19:01 -0700
-Message-Id: <9E717424-BA4E-4597-A8A6-DFB38A731D3F@gmail.com>
-References: <1430382588-11298-1-git-send-email-b40290@freescale.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.2098)
-Subject: Re: [meta-browser][PATCH] firefox_10.0.11esr: ${PN} usage in SRC_URI Should use ${BPN} instead to avoid breaking multilib
+Date: Thu,  7 May 2015 19:27:45 -0700
+Message-Id: <1431052065-17113-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-browser][PATCH] chromium/cef: Fix chromium installation regressions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,85 +42,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 02:19:09 -0000
-X-Groupsio-MsgNum: 55376
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Fri, 08 May 2015 02:27:52 -0000
 
---Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+CEF rework caused few problems where we missed packaging needed resource
+files and misplaced some icu data files
+
+Use loops to install similar files
+
+Tested on x86 emulator making sure google-chrome starts up
+properly
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-browser/chromium/chromium.inc | 86 ++++++++++++-----------------------
+ 1 file changed, 28 insertions(+), 58 deletions(-)
+
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+index 9c34a68..a9e9b8a 100644
+--- a/recipes-browser/chromium/chromium.inc
++++ b/recipes-browser/chromium/chromium.inc
+@@ -31,73 +31,43 @@ do_configure() {
+ }
+ 
+ do_install() {
+-	install -d ${D}${bindir}
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple" ]; then
+-		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}
+-	fi
+ 	if [ -f "${WORKDIR}/google-chrome" ]; then
+-		install -m 0755 ${WORKDIR}/google-chrome ${D}${bindir}/
+-	fi
+-	install -d ${D}${datadir}/applications
+-	if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
+-		install -m 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/
+-	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}
++		install -Dm 0755 ${WORKDIR}/google-chrome ${D}${bindir}/google-chrome
+ 	fi
+-	install -d ${D}${libdir}
+-        if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
+-		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${libdir}
+-        fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libpdf.so" ]; then
+-		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libpdf.so ${D}${libdir}/chrome/libpdf.so
++	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox" ]; then
++		install -Dm 4755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
+ 	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so" ]; then
+-		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libosmesa.so ${D}${libdir}/chrome/libosmesa.so
++	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple" ]; then
++		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}/cefsimple
+ 	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so" ]; then
+-		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/libffmpegsumo.so ${D}${libdir}/chrome/libffmpegsumo.so
++	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
++		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${bindir}/lib/libcef.so
+ 	fi
+-	install -d ${D}${bindir}/chrome
+ 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome" ]; then
+-		install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/chrome/chrome
+-	fi
+-	#Chromium *.pak files
+-
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/content_resources.pak" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/content_resources.pak ${D}${bindir}/chrome
+-	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/keyboard_resources.pak" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/keyboard_resources.pak ${D}${bindir}/chrome
++		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/chrome/chrome
+ 	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_100_percent.pak" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_100_percent.pak ${D}${bindir}/chrome
+-	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png" ]; then
+-		install -m 0644 ${S}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png ${D}${bindir}/chrome/
+-    	fi
+-
+-    	# CEF *.pak files
+-
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_100_percent.pak" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_100_percent.pak ${D}${bindir}/chrome
+-	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_200_percent.pak" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_200_percent.pak ${D}${bindir}/chrome
+-	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef_resources.pak" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef_resources.pak ${D}${bindir}/chrome
+-	fi
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cef.pak" ]; then
+-		install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/cef.pak ${D}${bindir}/chrome
++	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat" ]; then
++		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}/chrome/icudtl.dat
+ 	fi
+-	install -d ${D}${bindir}/chrome/locales
+-	install -m 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/locales/en-US.pak ${D}${bindir}/chrome/locales
++	if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
++		install -Dm 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/google-chrome.desktop
++	fi
++	#Chromium plugins libs
++	for f in libpdf.so libosmesa.so libffmpegsumo.so; do
++		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
++			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/chrome/$f
++		fi
++	done
++
++	#Chromium *.pak files and CEF pak files ( prefixed with cef_
++	for f in content_resources.pak keyboard_resources.pak chrome_100_percent.pak product_logo_48.png resources.pak \
++	         cef_100_percent.pak cef_200_percent.pak cef_resources.pak cef.pak \
++		 locales/en-US.pak; do
++		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
++			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/chrome/$f
++		fi
++	done
+ 
+-	install -d ${D}${sbindir}
+-	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox" ]; then
+-		install -m 4755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
+-	fi
+ }
+ 
+ PACKAGES =+ "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
+-- 
+2.1.4
 
 
-> On Apr 30, 2015, at 1:29 AM, B40290@freescale.com wrote:
->=20
-> From: Chunrong Guo <B40290@freescale.com>
->=20
->    fix the following warning:
->    |WARNING: Unable to get checksum for lib32-firefox SRC_URI entry =
-mozilla-lib32-firefox.png: file could not be found
->    |WARNING: Unable to get checksum for lib32-firefox SRC_URI entry =
-mozilla-lib32-firefox.desktop: file could not be found
->=20
-
-Looks good to me.
-
-> Signed-off-by: Chunrong Guo <B40290@freescale.com>
-> ---
-> recipes-mozilla/firefox/firefox_10.0.11esr.bb | 4 ++--
-> 1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes-mozilla/firefox/firefox_10.0.11esr.bb =
-b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-> index cd303ff..f89da58 100644
-> --- a/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-> +++ b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
-> @@ -8,8 +8,8 @@ LICENSE =3D "MPLv1 | GPLv2+ | LGPLv2.1+"
-> LIC_FILES_CHKSUM =3D =
-"file://toolkit/content/license.html;endline=3D39;md5=3D9cb02f27e77e702043=
-b827c9418bfbf8"
->=20
-> SRC_URI =3D =
-"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${PV}/source/firef=
-ox-${PV}.source.tar.bz2;name=3Darchive \
-> -           file://mozilla-${PN}.png \
-> -           file://mozilla-${PN}.desktop \
-> +           file://mozilla-${BPN}.png \
-> +           file://mozilla-${BPN}.desktop \
->            =
-file://fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch =
-\
->            =
-file://fixes/Avoid-spurious-Run-items-in-application-handlers-con.patch =
-\
->            =
-file://fixes/Properly-launch-applications-set-in-HOME-.mailcap.patch \
-> --
-> 1.9.2
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlVMHRwACgkQuwUzVZGdMxSGqwCdGY0Fu5A8e9/OGDLHX0+vTN4b
-FMYAn3SAgWpj3mDE5xyncS8WcjXmhFvF
-=fh42
------END PGP SIGNATURE-----
-
---Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846--
