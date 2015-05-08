@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 339A372A2D
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 485886AC3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 07:43:16 +0000 (UTC)
+	Fri,  8 May 2015 07:43:19 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t487hHu9021237
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t487hKqQ002290
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 8 May 2015 00:43:17 -0700 (PDT)
+	Fri, 8 May 2015 00:43:20 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 8 May 2015 00:43:16 -0700
+	Fri, 8 May 2015 00:43:20 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 May 2015 15:42:28 +0800
-Message-ID: <1431070955-7100-13-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 8 May 2015 15:42:29 +0800
+Message-ID: <1431070955-7100-14-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 13/20] openct: fix PN -> BPN for multilib
+Subject: [meta-oe][PATCH 14/20] picocom: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,27 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 07:43:16 -0000
+X-List-Received-Date: Fri, 08 May 2015 07:43:19 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-support/openct/openct_0.6.20.bb |    2 +-
+ meta-oe/recipes-support/picocom/picocom_1.7.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-index 70c73fd..3197845 100644
---- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
-+++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-@@ -10,7 +10,7 @@ readers to remote machines via TCP/IP."
- DEPENDS += "libtool pcsc-lite libusb-compat"
+diff --git a/meta-oe/recipes-support/picocom/picocom_1.7.bb b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+index 8141106..dbee656 100644
+--- a/meta-oe/recipes-support/picocom/picocom_1.7.bb
++++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+@@ -13,6 +13,6 @@ CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DH
  
- SRC_URI = " \
--    ${DEBIAN_MIRROR}/main/o/${PN}/${PN}_${PV}.orig.tar.gz \
-+    ${DEBIAN_MIRROR}/main/o/${BPN}/${BPN}_${PV}.orig.tar.gz \
-     file://etc-openct.udev.in-disablePROGRAM.patch \
-     file://etc-openct_usb.in-modify-UDEVINFO.patch \
-     file://openct.init \
+ do_install () {
+     install -d ${D}${bindir}
+-    install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
++    install -m 0755 ${BPN} pcasc pcxm pcym pczm ${D}${bindir}/
+ }
+ 
 -- 
 1.7.9.5
 
