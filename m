@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C24273C7E
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D035A73C7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 07:42:43 +0000 (UTC)
+	Fri,  8 May 2015 07:42:46 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t487gin6021148
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t487gmsu002273
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 8 May 2015 00:42:44 -0700 (PDT)
+	Fri, 8 May 2015 00:42:48 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 8 May 2015 00:42:43 -0700
+	Fri, 8 May 2015 00:42:47 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 May 2015 15:42:18 +0800
-Message-ID: <1431070955-7100-3-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 8 May 2015 15:42:19 +0800
+Message-ID: <1431070955-7100-4-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 03/20] p7zip: fix PN -> BPN for multilib
+Subject: [meta-oe][PATCH 04/20] fbgrab: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,27 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 07:42:44 -0000
+X-List-Received-Date: Fri, 08 May 2015 07:42:46 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb |    2 +-
+ meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-index 8905ae9..be706e1 100644
---- a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-+++ b/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
-@@ -9,7 +9,7 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
- SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
- SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
+diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
+index 2ff331c..1d87b86 100644
+--- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
++++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
+@@ -8,7 +8,7 @@ SRC_URI = "http://fbgrab.monells.se/${BP}.tar.gz"
  
--S = "${WORKDIR}/${PN}_${PV}"
-+S = "${WORKDIR}/${BPN}_${PV}"
+ inherit autotools-brokensep
  
- do_install() {
-     install -d ${D}${bindir}
+-S = "${WORKDIR}/${PN}"
++S = "${WORKDIR}/${BPN}"
+ 
+ SRC_URI[md5sum] = "15b432735d6efd0373722bb96577b945"
+ SRC_URI[sha256sum] = "61e0772ad6ea744ee597ae478398ddd0ba6fceee2cf343859bebde2c15bafb91"
 -- 
 1.7.9.5
 
