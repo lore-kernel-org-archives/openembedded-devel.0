@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 485886AC3E
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D0FD6AC3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 07:43:19 +0000 (UTC)
+	Fri,  8 May 2015 07:43:22 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t487hKqQ002290
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t487hNDF021248
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 8 May 2015 00:43:20 -0700 (PDT)
+	Fri, 8 May 2015 00:43:23 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 8 May 2015 00:43:20 -0700
+	Fri, 8 May 2015 00:43:23 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 May 2015 15:42:29 +0800
-Message-ID: <1431070955-7100-14-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 8 May 2015 15:42:30 +0800
+Message-ID: <1431070955-7100-15-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 14/20] picocom: fix PN -> BPN for multilib
+Subject: [meta-oe][PATCH 15/20] soci: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,26 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 07:43:19 -0000
+X-List-Received-Date: Fri, 08 May 2015 07:43:22 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-support/picocom/picocom_1.7.bb |    2 +-
+ meta-oe/recipes-support/soci/soci_3.2.2.bb |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/picocom/picocom_1.7.bb b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-index 8141106..dbee656 100644
---- a/meta-oe/recipes-support/picocom/picocom_1.7.bb
-+++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-@@ -13,6 +13,6 @@ CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DH
+diff --git a/meta-oe/recipes-support/soci/soci_3.2.2.bb b/meta-oe/recipes-support/soci/soci_3.2.2.bb
+index 887f5a2..d1964eb 100644
+--- a/meta-oe/recipes-support/soci/soci_3.2.2.bb
++++ b/meta-oe/recipes-support/soci/soci_3.2.2.bb
+@@ -9,7 +9,7 @@ SECTION = "libs"
+ DEPENDS = "boost"
  
- do_install () {
-     install -d ${D}${bindir}
--    install -m 0755 ${PN} pcasc pcxm pcym pczm ${D}${bindir}/
-+    install -m 0755 ${BPN} pcasc pcxm pcym pczm ${D}${bindir}/
- }
  
+-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${P}/${P}.tar.gz \
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BP}/${BP}.tar.gz \
+            file://soci_libdir.patch \
+           "
+ SRC_URI[md5sum] = "bc3c35f6cd3f80a1be19fe30b3c111bf"
 -- 
 1.7.9.5
 
