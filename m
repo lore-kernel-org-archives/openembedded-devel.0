@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D035A73C7E
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F5956081A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 07:42:46 +0000 (UTC)
+	Fri,  8 May 2015 07:42:50 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t487gmsu002273
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t487gpAr021162
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 8 May 2015 00:42:48 -0700 (PDT)
+	Fri, 8 May 2015 00:42:51 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 8 May 2015 00:42:47 -0700
+	Fri, 8 May 2015 00:42:50 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 May 2015 15:42:19 +0800
-Message-ID: <1431070955-7100-4-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 8 May 2015 15:42:20 +0800
+Message-ID: <1431070955-7100-5-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 04/20] fbgrab: fix PN -> BPN for multilib
+Subject: [meta-oe][PATCH 05/20] takao-fonts: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,27 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 07:42:46 -0000
+X-List-Received-Date: Fri, 08 May 2015 07:42:50 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb |    2 +-
+ .../takao-fonts/takao-fonts_003.02.01.bb           |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
-index 2ff331c..1d87b86 100644
---- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
-+++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
-@@ -8,7 +8,7 @@ SRC_URI = "http://fbgrab.monells.se/${BP}.tar.gz"
+diff --git a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.02.01.bb b/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.02.01.bb
+index 0a0f6d1..ed875fa 100644
+--- a/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.02.01.bb
++++ b/meta-oe/recipes-graphics/takao-fonts/takao-fonts_003.02.01.bb
+@@ -11,7 +11,7 @@ SRC_URI = "http://launchpad.net/takao-fonts/003.02/${PV}/+download/takao-fonts-t
+ SRC_URI[md5sum] = "ca480e5edb9f26d871bf6df6cb910306"
+ SRC_URI[sha256sum] = "2f526a16c7931958f560697d494d8304949b3ce0aef246fb0c727fbbcc39089e"
  
- inherit autotools-brokensep
+-S = "${WORKDIR}/${PN}-ttf-${PV}"
++S = "${WORKDIR}/${BPN}-ttf-${PV}"
  
--S = "${WORKDIR}/${PN}"
-+S = "${WORKDIR}/${BPN}"
- 
- SRC_URI[md5sum] = "15b432735d6efd0373722bb96577b945"
- SRC_URI[sha256sum] = "61e0772ad6ea744ee597ae478398ddd0ba6fceee2cf343859bebde2c15bafb91"
+ do_install() {
+     install -m 0755 -d ${D}/${datadir}/fonts
 -- 
 1.7.9.5
 
