@@ -1,43 +1,40 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A80373F84
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 8011B73F85
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 00:41:09 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so21510656igb.0
+	Fri,  8 May 2015 02:19:08 +0000 (UTC)
+Received: by pdbqa5 with SMTP id qa5so57513764pdb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 May 2015 17:41:10 -0700 (PDT)
+	Thu, 07 May 2015 19:19:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=jM848z7JnWvB3A170d+iIaM2PZhYjM/S3rFNBBx04ag=;
-	b=tXg1coYM1g5KsYoJs9NwCOhggkQfUf3lkNydOYOgacBNazx9aC3+PuhNUUNpA9c/sc
-	vY2DiX5fol0/ir7Qj4MpjmOFB3u24zLtGABOM2XV7tzqdrfM1UXvwB+v6hy3qEFQm4ZQ
-	474qeJZMPN2VwClZrzgBk8hOf582Ch7f9fYUQ/WZqMstkqJxqlrU1/iMRJAkWpI9YcvP
-	JewpI25CSTesz8SoKiecvGo5A06gYqjJOk7f9SnHQ8+g6GW3BNRmmmoMp+accJbaOMVE
-	pU892C0JNiXtjYrNAsPdWLDAFYwwUDBkleDlfz08+MiIHR6nbnygd/FhyZlqC+n59oMO
-	id0Q==
-X-Received: by 10.43.96.10 with SMTP id ce10mr1328650icc.59.1431045670421;
-	Thu, 07 May 2015 17:41:10 -0700 (PDT)
-Received: from [192.168.141.83] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by mx.google.com with ESMTPSA id
-	69sm2422579ioz.10.2015.05.07.17.41.09
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 May 2015 17:41:10 -0700 (PDT)
-Message-ID: <554C0625.9000304@gmail.com>
-Date: Thu, 07 May 2015 20:41:09 -0400
-From: Trevor Woerner <twoerner@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-References: <55483F50.5020803@gmail.com>
-	<554A76F1.8050407@gmail.com>	<554A7893.3060701@gmail.com>
-	<554A8A7A.6030404@gmail.com>
-	<CAALGJZaMCx0-daBCjkP_NrmnheTJQYLW2hU2bSpTW1ij0pMb8w@mail.gmail.com>
-In-Reply-To: <CAALGJZaMCx0-daBCjkP_NrmnheTJQYLW2hU2bSpTW1ij0pMb8w@mail.gmail.com>
-Subject: Re: Odroid-xu3 support
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=uJEcWwBBspSlu1kab9+u0+ktSuDJZdlB29h/K4usdLc=;
+	b=L0VXV1LPCHZebp34gwe5cKz8g1fiyvnOwwaeSNJPeOlszpQSiPYKMVBN0xWzN/Hfnq
+	K9875n6wFWfEX0xpcxosbI8cp7HVTzuHWT2RdTb+X/Ve/5On3kO9aAZePH+a7nSYfmaj
+	/9dp8Ep0kNUqnFXaQyjYiWmqGuWILnkX5u5M4AHQ7T+2Izty6Mfkn49Fms00497ZFb+H
+	vYIAz1BxHzrNpB9iSzkCmlOFJvUsVAuP3DOkkKZUPQp/CjL+HSg0lJUGx+TygvWbnKkl
+	Kk2GTVx5hEM9ieoAA6IYU4W6FaLxT12ZZJSjzibWH5YkEwODA4zovIeX2caoV6DUZo2L
+	1e+A==
+X-Received: by 10.70.138.8 with SMTP id qm8mr2654069pdb.96.1431051549787;
+	Thu, 07 May 2015 19:19:09 -0700 (PDT)
+Received: from ?IPv6:2601:9:3580:84c:6d9c:46fd:9111:cff8?
+	([2601:9:3580:84c:6d9c:46fd:9111:cff8])
+	by mx.google.com with ESMTPSA id q4sm3423753pdo.42.2015.05.07.19.19.08
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Thu, 07 May 2015 19:19:09 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
+X-Pgp-Agent: GPGMail 2.5b6
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1430382588-11298-1-git-send-email-b40290@freescale.com>
+Date: Thu, 7 May 2015 19:19:01 -0700
+Message-Id: <9E717424-BA4E-4597-A8A6-DFB38A731D3F@gmail.com>
+References: <1430382588-11298-1-git-send-email-b40290@freescale.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2098)
+Subject: Re: [meta-browser][PATCH] firefox_10.0.11esr: ${PN} usage in SRC_URI Should use ${BPN} instead to avoid breaking multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,24 +48,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 00:41:10 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
+X-List-Received-Date: Fri, 08 May 2015 02:19:09 -0000
+X-Groupsio-MsgNum: 55376
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+> On Apr 30, 2015, at 1:29 AM, B40290@freescale.com wrote:
+>=20
+> From: Chunrong Guo <B40290@freescale.com>
+>=20
+>    fix the following warning:
+>    |WARNING: Unable to get checksum for lib32-firefox SRC_URI entry =
+mozilla-lib32-firefox.png: file could not be found
+>    |WARNING: Unable to get checksum for lib32-firefox SRC_URI entry =
+mozilla-lib32-firefox.desktop: file could not be found
+>=20
+
+Looks good to me.
+
+> Signed-off-by: Chunrong Guo <B40290@freescale.com>
+> ---
+> recipes-mozilla/firefox/firefox_10.0.11esr.bb | 4 ++--
+> 1 file changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes-mozilla/firefox/firefox_10.0.11esr.bb =
+b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
+> index cd303ff..f89da58 100644
+> --- a/recipes-mozilla/firefox/firefox_10.0.11esr.bb
+> +++ b/recipes-mozilla/firefox/firefox_10.0.11esr.bb
+> @@ -8,8 +8,8 @@ LICENSE =3D "MPLv1 | GPLv2+ | LGPLv2.1+"
+> LIC_FILES_CHKSUM =3D =
+"file://toolkit/content/license.html;endline=3D39;md5=3D9cb02f27e77e702043=
+b827c9418bfbf8"
+>=20
+> SRC_URI =3D =
+"ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/${PV}/source/firef=
+ox-${PV}.source.tar.bz2;name=3Darchive \
+> -           file://mozilla-${PN}.png \
+> -           file://mozilla-${PN}.desktop \
+> +           file://mozilla-${BPN}.png \
+> +           file://mozilla-${BPN}.desktop \
+>            =
+file://fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch =
+\
+>            =
+file://fixes/Avoid-spurious-Run-items-in-application-handlers-con.patch =
+\
+>            =
+file://fixes/Properly-launch-applications-set-in-HOME-.mailcap.patch \
+> --
+> 1.9.2
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846
 Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
-On 15-05-07 02:56 AM, Christian Ege wrote:
->  From the ODROID family I do only own a ODROID-C1. If there will be a
-> combined Layer for all odroid devices I will  port my recipes to this
-> and can help on supporting it.
-> I am mostly interested in Multimedia stuff and I do plan to setup a
-> separate layer for Kodi/XBMC on amlogic based devices.
->
-> So how should we proceed with the layer jungle?
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
-Ideally meta-amlogic provides things specific to the chip itself (vendor 
-kernel? vendor u-boot?) and meta-odroid contains things related to the 
-various boards themselves (tweaks specific to each board).
+iEYEARECAAYFAlVMHRwACgkQuwUzVZGdMxSGqwCdGY0Fu5A8e9/OGDLHX0+vTN4b
+FMYAn3SAgWpj3mDE5xyncS8WcjXmhFvF
+=fh42
+-----END PGP SIGNATURE-----
 
-Maybe the beaglebone provides a good example to follow? (meta-ti, 
-meta-beagleboard) Although I'm not sure how clean the separation is in 
-those layers.
-
+--Apple-Mail=_A194C763-751E-4E13-916B-25922AF63846--
