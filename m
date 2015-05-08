@@ -1,31 +1,23 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id C8B1360034
+Return-Path: <igor.santos@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id B051760034
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 17:18:44 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1YqlvB-00068I-NT from Joe_MacDonald@mentor.com ;
-	Fri, 08 May 2015 10:18:45 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2; Fri, 8 May 2015
-	10:18:44 -0700
-Received: by burninator (Postfix, from userid 1000)	id 1AF555806FD; Fri,  8
-	May 2015 13:18:49 -0400 (EDT)
-Date: Fri, 8 May 2015 13:18:49 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20150508171848.GD7280@mentor.com>
-References: <1430795900-25986-1-git-send-email-akuster808@gmail.com>
-	<20150508151207.GA7280@mentor.com> <554CEC31.3000809@gmail.com>
+	Fri,  8 May 2015 18:06:40 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Fri, 8 May 2015 15:06:39 -0300
+	(envelope-from igor.santos@aker.com.br)
+Received: from igor.santos.devel.com.br (10.4.59.1) by mail.aker.com.br
+	(10.0.0.20) with Microsoft SMTP Server id 8.3.342.0;
+	Fri, 8 May 2015 15:06:37 -0300
+From: Igor Santos <igor.santos@aker.com.br>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 8 May 2015 15:06:06 -0300
+Message-ID: <1431108368-20646-1-git-send-email-igor.santos@aker.com.br>
+X-Mailer: git-send-email 2.1.0
 MIME-Version: 1.0
-In-Reply-To: <554CEC31.3000809@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] networkingmanager: QA warning for rdepends on polkit
+X-AkerSMTPGW-ServerID: a5fc2d2b506f49fc2bd6d1c7ad2f56ee346d5d27
+X-AkerSMTPGW-MessageID: d0de5b77e3fa2ce33a770c42d6536e605bacec22-15o
+Subject: [meta-oe][PATCH 0/2] Add ctags and cscope
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,126 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 17:18:46 -0000
-X-Groupsio-MsgNum: 55408
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9UV9rz0O2dU/yYYn"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 08 May 2015 18:06:43 -0000
+Content-Type: text/plain
 
---9UV9rz0O2dU/yYYn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi, these series add ctags and cscope to the devtools.
+It's interesting to add these tools to the stable branches.
 
-[Re: [meta-networking][PATCH] networkingmanager: QA warning for rdepends on=
- polkit] On 15.05.08 (Fri 10:02) akuster808 wrote:
+Igor Santos (2):
+  ctags: add
+  cscope: add
 
-> Joe,
->=20
->=20
-> On 05/08/2015 08:12 AM, Joe MacDonald wrote:
-> >Hi Armin,
-> >
-> >I don't know if you've noticed, but it looks like this caused an issue
-> >with the current world build:
->=20
-> You mean the Galaxy build Martin does? no I have not.
+ meta-oe/recipes-devtools/cscope/cscope_15.8b.bb | 24 ++++++++++++++++++++++++
+ meta-oe/recipes-devtools/ctags/ctags_5.8.bb     | 25 +++++++++++++++++++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
+ create mode 100644 meta-oe/recipes-devtools/ctags/ctags_5.8.bb
 
-I noticed it because the commit log was updated when I was cherry
-picking out of master-next, that's how I found it.  :)
+-- 
+2.1.0
 
-> >commit 00ea492451d221fcc4af5613732035184b8ee43a
-> >Author: Armin Kuster <akuster808@gmail.com>
-> >Date:   Sat Apr 4 14:52:03 2015 -0700
-> >
-> >     networkmanger: meta-oe world build failes
-> >
-> >     ERROR: Nothing RPROVIDES 'dnsmasq' (but /home/akuster/oss/clean/met=
-a-openembedded/meta-oe/recipes-connectivity/networkmanager/networkmanager_0=
-=2E9.8.10.bb RDEPENDS on or otherwise requires it)
-> >     NOTE: Runtime target 'dnsmasq' is unbuildable, removing...
-> >     Missing or unbuildable dependency chain was: ['dnsmasq']
-> >     ERROR: Required build target 'networkmanager' has no buildable prov=
-iders.
-> >     Missing or unbuildable dependency chain was: ['networkmanager', 'dn=
-smasq']
-> >
-> >     move networkmanager from meta-oe to meta-networking.
-> >
-> >     Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> >
-> >I'll see if I can reproduce it, it's not obvious to me on the surface
-> >why this would be an issue with your patch.
->=20
-> maybe it prefers to live in meta-oe ; )
 
-Maybe it's freaked out being moved closer to dnsmasq or something.
-We'll see.
 
--J.
-
-> thanks.
-> >
-> >-J.
-> >
-> >[[meta-networking][PATCH] networkingmanager: QA warning for rdepends on =
-polkit] On 15.05.04 (Mon 20:18) Armin Kuster wrote:
-> >
-> >>WARNING: QA Issue: networkmanager rdepends on polkit, but it isn't a bu=
-ild dependency? [build-deps]
-> >>
-> >>Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> >>---
-> >>  .../recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb   =
-  | 3 ++-
-> >>  1 file changed, 2 insertions(+), 1 deletion(-)
-> >>
-> >>diff --git a/meta-networking/recipes-connectivity/networkmanager/networ=
-kmanager_0.9.8.10.bb b/meta-networking/recipes-connectivity/networkmanager/=
-networkmanager_0.9.8.10.bb
-> >>index 8d37c98..36a4a7e 100644
-> >>--- a/meta-networking/recipes-connectivity/networkmanager/networkmanage=
-r_0.9.8.10.bb
-> >>+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanage=
-r_0.9.8.10.bb
-> >>@@ -37,11 +37,12 @@ PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATU=
-RES','systemd','systemd','conso
-> >>  PACKAGECONFIG[systemd] =3D " \
-> >>      --with-systemdsystemunitdir=3D${systemd_unitdir}/system --with-se=
-ssion-tracking=3Dsystemd --enable-polkit, \
-> >>      --without-systemdsystemunitdir, \
-> >>-    polkit \
-> >>+    polkit, polkit \
-> >>  "
-> >>  # consolekit is not picked by shlibs, so add it to RDEPENDS too
-> >>  PACKAGECONFIG[consolekit] =3D "--with-session-tracking=3Dconsolekit,,=
-consolekit,consolekit"
-> >>  PACKAGECONFIG[concheck] =3D "--enable-concheck,--disable-concheck,lib=
-soup-2.4"
-> >>+PACKAGECONFIG[polkit] =3D "--enable-polkit, --disable-polkit, , polkit"
-> >>
-> >>  # Work around dbus permission problems since we lack a proper at_cons=
-ole
-> >>  do_install_prepend() {
-
---=20
--Joe MacDonald.
-:wq
-
---9UV9rz0O2dU/yYYn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVTO/4AAoJEEn8ffcsOfaWAzcIALwRR+1gRVTtsnBafuV3Gfpi
-rjmepdx2gNoGpY6F9HT5I0Md2ovqUUMl3CEmClAKzXGwjICXyog5q/ZubjzL6jur
-vYzVk3F43M7czhZeQgQMemJ9Ex4KtSUnrG9b51TyYCdzd/TWgmUBRPmOkNeFDT45
-lGpra+jqbwebH7cT6nIrjlc8gb48bGClbL3bOtzmjkwddNBnb22F19qrTIRQIceY
-1sfkZu144HWQSsq8MYtia/XStcLjZRmjyq6j7GVuAaJMPPsmfSzJRsA8kxRi4lEn
-cRSS1NErooiaYgHd+sWs+n5mevUrouUezSqO3taP/5iaLk7LjkemFmyZ8FtqRCY=
-=XefH
------END PGP SIGNATURE-----
-
---9UV9rz0O2dU/yYYn--
