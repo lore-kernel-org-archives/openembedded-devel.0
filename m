@@ -1,25 +1,43 @@
-Return-Path: <igor.santos@aker.com.br>
-Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id 3D64B73F78
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A80373F84
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 May 2015 21:55:08 +0000 (UTC)
-Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
-	by asmg.aker.com.br [10.0.1.3]; Thu, 7 May 2015 18:55:08 -0300
-	(envelope-from igor.santos@aker.com.br)
-Received: from igor.santos.devel.com.br (10.4.59.1) by mail.aker.com.br
-	(10.0.0.20) with Microsoft SMTP Server id 8.3.342.0;
-	Thu, 7 May 2015 18:44:59 -0300
-From: Igor Santos <igor.santos@aker.com.br>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 May 2015 18:44:47 -0300
-Message-ID: <1431035088-24968-3-git-send-email-igor.santos@aker.com.br>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1431035088-24968-1-git-send-email-igor.santos@aker.com.br>
-References: <1431035088-24968-1-git-send-email-igor.santos@aker.com.br>
+	Fri,  8 May 2015 00:41:09 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so21510656igb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 May 2015 17:41:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=jM848z7JnWvB3A170d+iIaM2PZhYjM/S3rFNBBx04ag=;
+	b=tXg1coYM1g5KsYoJs9NwCOhggkQfUf3lkNydOYOgacBNazx9aC3+PuhNUUNpA9c/sc
+	vY2DiX5fol0/ir7Qj4MpjmOFB3u24zLtGABOM2XV7tzqdrfM1UXvwB+v6hy3qEFQm4ZQ
+	474qeJZMPN2VwClZrzgBk8hOf582Ch7f9fYUQ/WZqMstkqJxqlrU1/iMRJAkWpI9YcvP
+	JewpI25CSTesz8SoKiecvGo5A06gYqjJOk7f9SnHQ8+g6GW3BNRmmmoMp+accJbaOMVE
+	pU892C0JNiXtjYrNAsPdWLDAFYwwUDBkleDlfz08+MiIHR6nbnygd/FhyZlqC+n59oMO
+	id0Q==
+X-Received: by 10.43.96.10 with SMTP id ce10mr1328650icc.59.1431045670421;
+	Thu, 07 May 2015 17:41:10 -0700 (PDT)
+Received: from [192.168.141.83] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by mx.google.com with ESMTPSA id
+	69sm2422579ioz.10.2015.05.07.17.41.09
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 07 May 2015 17:41:10 -0700 (PDT)
+Message-ID: <554C0625.9000304@gmail.com>
+Date: Thu, 07 May 2015 20:41:09 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-X-AkerSMTPGW-ServerID: a5fc2d2b506f49fc2bd6d1c7ad2f56ee346d5d27
-X-AkerSMTPGW-MessageID: 2426d536829e0068c1959cd40aa5dbefb4833944-15o
-Subject: [meta-oe][PATCH 2/2] cscope: add
+To: openembedded-devel@lists.openembedded.org, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+References: <55483F50.5020803@gmail.com>
+	<554A76F1.8050407@gmail.com>	<554A7893.3060701@gmail.com>
+	<554A8A7A.6030404@gmail.com>
+	<CAALGJZaMCx0-daBCjkP_NrmnheTJQYLW2hU2bSpTW1ij0pMb8w@mail.gmail.com>
+In-Reply-To: <CAALGJZaMCx0-daBCjkP_NrmnheTJQYLW2hU2bSpTW1ij0pMb8w@mail.gmail.com>
+Subject: Re: Odroid-xu3 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,50 +51,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 May 2015 21:55:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 08 May 2015 00:41:10 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Cscope is an interactive, screen-oriented tool that allows the user to
-browse through C source files for specified elements of code.
+On 15-05-07 02:56 AM, Christian Ege wrote:
+>  From the ODROID family I do only own a ODROID-C1. If there will be a
+> combined Layer for all odroid devices I will  port my recipes to this
+> and can help on supporting it.
+> I am mostly interested in Multimedia stuff and I do plan to setup a
+> separate layer for Kodi/XBMC on amlogic based devices.
+>
+> So how should we proceed with the layer jungle?
 
-Signed-off-by: Igor Santos <igor.santos@aker.com.br>
----
- meta-oe/recipes-devtools/cscope/cscope_15.8b.bb | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
+Ideally meta-amlogic provides things specific to the chip itself (vendor 
+kernel? vendor u-boot?) and meta-odroid contains things related to the 
+various boards themselves (tweaks specific to each board).
 
-diff --git a/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb b/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
-new file mode 100644
-index 0000000..ecf7e6c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
-@@ -0,0 +1,24 @@
-+# Copyright (C) 2015 Igor Santos <igor.santos@aker.com.br>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "Cscope is a text screen based source browser"
-+DESCRIPTION = "Cscope is a developer's tool for browsing source code. \
-+               It has an impeccable Unix pedigree, having been originally \
-+               developed at Bell Labs back in the days of the PDP-11. \
-+               Cscope was part of the official AT&T Unix distribution for \
-+               many years, and has been used to manage projects involving 20 \
-+               million lines of code!"
-+
-+HOMEPAGE = "http://cscope.sourceforge.net/"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d4667b67b483823043fcffa489ea343b"
-+
-+inherit autotools
-+
-+DEPENDS += "ncurses"
-+
-+SRC_URI = "http://downloads.sourceforge.net/project/cscope/cscope/${PV}/${PN}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "8f9409a238ee313a96f9f87fe0f3b176"
-+SRC_URI[sha256sum] = "4889d091f05aa0845384b1e4965aa31d2b20911fb2c001b2cdcffbcb7212d3af"
--- 
-2.1.0
-
-
+Maybe the beaglebone provides a good example to follow? (meta-ti, 
+meta-beagleboard) Although I'm not sure how clean the separation is in 
+those layers.
 
