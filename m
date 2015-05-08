@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 43CF76081A
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BE4C96081A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 07:42:53 +0000 (UTC)
+	Fri,  8 May 2015 07:42:56 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t487gsCA002276
+	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t487gwr0021179
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 8 May 2015 00:42:54 -0700 (PDT)
+	Fri, 8 May 2015 00:42:58 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 8 May 2015 00:42:54 -0700
+	Fri, 8 May 2015 00:42:57 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 May 2015 15:42:21 +0800
-Message-ID: <1431070955-7100-6-git-send-email-yi.zhao@windriver.com>
+Date: Fri, 8 May 2015 15:42:22 +0800
+Message-ID: <1431070955-7100-7-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 06/20] xbitmaps: fix PN -> BPN for multilib
+Subject: [meta-oe][PATCH 07/20] gpsd: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,27 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 07:42:53 -0000
+X-List-Received-Date: Fri, 08 May 2015 07:42:56 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../xorg-data/xorg-data-common.inc                 |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/xorg-data/xorg-data-common.inc b/meta-oe/recipes-graphics/xorg-data/xorg-data-common.inc
-index 1bcfd5a..b230962 100644
---- a/meta-oe/recipes-graphics/xorg-data/xorg-data-common.inc
-+++ b/meta-oe/recipes-graphics/xorg-data/xorg-data-common.inc
-@@ -2,7 +2,7 @@ HOMEPAGE = "http://www.x.org"
- SECTION = "x11/data"
- LICENSE = "MIT-X"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+index 93cf1ae..b37fc15 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
+@@ -85,8 +85,8 @@ do_install_append() {
  
--XORG_PN = "${PN}"
-+XORG_PN = "${BPN}"
+     #support for systemd
+     install -d ${D}${systemd_unitdir}/system/
+-    install -m 0644 ${WORKDIR}/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
+-    install -m 0644 ${S}/systemd/${PN}.socket ${D}${systemd_unitdir}/system/${PN}.socket
++    install -m 0644 ${WORKDIR}/${BPN}.service ${D}${systemd_unitdir}/system/${BPN}.service
++    install -m 0644 ${S}/systemd/${BPN}.socket ${D}${systemd_unitdir}/system/${BPN}.socket
+ }
  
- SRC_URI = "${XORG_MIRROR}/individual/data/${BP}.tar.bz2"
- S = "${WORKDIR}/${XORG_PN}-${PV}"
+ pkg_postinst_${PN}-conf() {
 -- 
 1.7.9.5
 
