@@ -1,42 +1,34 @@
-Return-Path: <k4230r6@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E608360034
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E2F2B6017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 May 2015 22:02:59 +0000 (UTC)
-Received: by widdi4 with SMTP id di4so41508172wid.0
+	Sat,  9 May 2015 00:50:05 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so34248061igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 May 2015 15:03:00 -0700 (PDT)
+	Fri, 08 May 2015 17:50:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=MxJhQ8aFt08JnL29vmUdDIXAW9C6bYeUxgMt0PKBV0M=;
-	b=dkIT/1Xu5isQm/kpd6lxND2+zCASjSBPCe9PytAyrCr4+gQBwtzbeVyg4YU7MMCMsn
-	nNN/IxiQPIKyhb3B74rTik6UPnvkVc8P7oHAym8SVekAp7wD0mTn4t60akS/iPuJD7CI
-	ZAbNlP+TUQmruAxssUwcHGeANN2MUORTYpiJ70q7nVQR8IrIZQElgtgHytEhI7HPEW4q
-	JuGQoAe48YTW3e5Z+IzFu1dsQbvIIiFHCcvlIUte2+r+OA18aYVTbCvvqCqQDhgJztny
-	1iTdFfueyAIHqYBHVquIqjlvFeTMPtjH5RowktTBwIcoDU7oHCipAYP0Y0JmG9i4hE8j
-	27TQ==
-X-Received: by 10.194.3.77 with SMTP id a13mr232758wja.104.1431122580671;
-	Fri, 08 May 2015 15:03:00 -0700 (PDT)
-Received: from [192.168.23.113]
-	(HSI-KBW-46-223-216-155.hsi.kabel-badenwuerttemberg.de.
-	[46.223.216.155])
-	by mx.google.com with ESMTPSA id fa8sm740914wib.14.2015.05.08.15.02.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 May 2015 15:02:59 -0700 (PDT)
-Message-ID: <554D3293.2090503@gmail.com>
-Date: Sat, 09 May 2015 00:02:59 +0200
-From: Christian Ege <k4230r6@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=CLtbxnU0ybZEifvF99tGZkIr0pkt8nuiv4xsAvsLLHE=;
+	b=kFhJrW7gNGGa55zV84S6MKl4M/lOdAnntAdt2V1U/a9Nvbw5zqIYUocUFy7VMgA+yI
+	hKXpBxJrZIMBZiFdfVsWez/dTHf0A4pr7OcIHeM5w6LWo+CqcgDwFEe6GKjbDbyxQUaO
+	itUNSI9htM6wTGhVg6HVseByoIFuN3UmrzQdONj3L2MkGk6imnsxwBwuf0Jut897NDSi
+	sIQ7giPYeXFH62yG/GuvttDUZ54fKMAtyd1ioBERQHmOUv+MOEUXIDbDvi012RRfcVoM
+	5vHreF+ezSQv32JieJL/ldHUt3XoHrEdlDsFu5tT2elPZD/QaZJY19XP7+WxbLc5DJ6z
+	AEOQ==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <55483F50.5020803@gmail.com>	<554A76F1.8050407@gmail.com>	<554A7893.3060701@gmail.com>	<554A8A7A.6030404@gmail.com>	<CAALGJZaMCx0-daBCjkP_NrmnheTJQYLW2hU2bSpTW1ij0pMb8w@mail.gmail.com>
-	<554C0625.9000304@gmail.com>
-In-Reply-To: <554C0625.9000304@gmail.com>
-Subject: Re: Odroid-xu3 support
+X-Received: by 10.50.43.137 with SMTP id w9mr2222648igl.30.1431132606365; Fri,
+	08 May 2015 17:50:06 -0700 (PDT)
+Received: by 10.50.112.34 with HTTP; Fri, 8 May 2015 17:50:06 -0700 (PDT)
+In-Reply-To: <1431112486-23487-1-git-send-email-haris.okanovic@ni.com>
+References: <1431112486-23487-1-git-send-email-haris.okanovic@ni.com>
+Date: Fri, 8 May 2015 17:50:06 -0700
+Message-ID: <CAMKF1sr+DV-sA23dwzhAocJiACp=1+WNk8VWh3eGreDQ1Xh25A@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] dpkg start-stop-daemon: Fix RCONFLICTS typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,40 +42,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 May 2015 22:03:01 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 09 May 2015 00:50:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
-On 08.05.2015 02:41, Trevor Woerner wrote:
-> On 15-05-07 02:56 AM, Christian Ege wrote:
->>  From the ODROID family I do only own a ODROID-C1. If there will be a
->> combined Layer for all odroid devices I will  port my recipes to this
->> and can help on supporting it.
->> I am mostly interested in Multimedia stuff and I do plan to setup a
->> separate layer for Kodi/XBMC on amlogic based devices.
->>
->> So how should we proceed with the layer jungle?
-> 
-> Ideally meta-amlogic provides things specific to the chip itself (vendor
-> kernel? vendor u-boot?) and meta-odroid contains things related to the
-> various boards themselves (tweaks specific to each board).
-This would be in an ideal world. In the real world each vendor like
-hardkernel or wetek is maintaining their own kernel tree derived from
-Amlogic.
+On Friday, May 8, 2015, Haris Okanovic <haris.okanovic@ni.com> wrote:
 
-Amlogic itself maintains a buildroot based BSP for their
-boards. My Idea was at least merging u-Boot and Kernel of both vendors
-into one tree.
+> Signed-off-by: Haris Okanovic <haris.okanovic@ni.com <javascript:;>>
+> Reviewed-by: Ben Shelton <ben.shelton@ni.com <javascript:;>>
+> Acked-by: Brad Mouring <brad.mouring@ni.com <javascript:;>>
+> ---
+>  meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.16.0.2.bb
+> | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/start-stop-daemon/
+> start-stop-daemon_1.16.0.2.bb b/meta-oe/recipes-support/start-stop-daemon/
+> start-stop-daemon_1.16.0.2.bb
+> index c8d88b7..efdd6b7 100644
+> --- a/meta-oe/recipes-support/start-stop-daemon/
+> start-stop-daemon_1.16.0.2.bb
+> +++ b/meta-oe/recipes-support/start-stop-daemon/
+> start-stop-daemon_1.16.0.2.bb
+> @@ -4,7 +4,7 @@ LICENSE = "PD"
+>  LIC_FILES_CHKSUM =
+> "file://utils/start-stop-daemon.c;md5=a963623e4588f70122865aaa7a370ce4"
+>  # start-stop-daemon is usually shipped by dpkg
+>  DEPENDS = "ncurses"
+> -RCONFLICS_${PN} = "dpkg"
+> +RCONFLICTS_${PN} = "dpkg"
 
-> Maybe the beaglebone provides a good example to follow? (meta-ti,
-> meta-beagleboard) Although I'm not sure how clean the separation is in
-> those layers.
 
-Yes this is the way to go, the manufacturer maintains its own layer. I
-can try to get in contact with Amlogic if they are interested in
-creating such a layer or at least supporting it.
 
-regards,
-Christian
+It is blacklisted so how did you test it. I'd it's working fine then may be
+you should white list it too
+
+>
+>  PNBLACKLIST[start-stop-daemon] ?= "BROKEN: fails because of gettext,
+> partial fix is available here
+> http://patchwork.openembedded.org/patch/89867/"
+>
+> --
+> 2.2.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org <javascript:;>
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
