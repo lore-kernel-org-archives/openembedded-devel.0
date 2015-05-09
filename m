@@ -1,34 +1,32 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f182.google.com (mail-ig0-f182.google.com
-	[209.85.213.182])
-	by mail.openembedded.org (Postfix) with ESMTP id BACBA6017E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 May 2015 00:53:04 +0000 (UTC)
-Received: by igbsb11 with SMTP id sb11so34957204igb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 May 2015 17:53:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=fk5AGqV2giCKPBhiZ6FpdsMgLiSkDQSvb87M6JwA0h0=;
-	b=JBIkQAC6+B7L87AQ7x6S12RzJ2tnuZM3Pxl2HJ8EHIJy65M9Oco9RNzRNxpKiC4qlc
-	I/EyEpYnY7doLZrNQ8JK/jWMVoqg3xYLNEVTBmEC6z4BSUK1Pr9QoiuA8QDBMw0t+2pI
-	icHCCRslTJ57vKAEw8weFWrNoaXVq6po3eKGm926y1Yz8U9SA2QWn66+wiHu6WOQVsFG
-	35ksGUNLi56kgbnvCFdSzImv29v0cfi9e6u9/2G+ow/rxP+GDnl/ZaefMVVnlAxD6opK
-	2m8eD1+wBl30q6as+eLt+iVjWlDbSJz1MFdqNVN4A1J6Tbq0/flZsGLD4ARgwqmCGchL
-	qGkg==
-X-Received: by 10.50.72.8 with SMTP id z8mr961144igu.36.1431132785112;
-	Fri, 08 May 2015 17:53:05 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id l128sm4695153iol.1.2015.05.08.17.53.03
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 08 May 2015 17:53:04 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 May 2015 17:52:58 -0700
-Message-Id: <1431132778-29191-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [PATCH][meta-networking] ntp: control refclock driver support via PACKAGECONFIG
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 60E1573CDC;
+	Sat,  9 May 2015 08:36:21 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t498aH9s019255; Sat, 9 May 2015 09:36:17 +0100
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 38CK0b9ELNxO; Sat,  9 May 2015 09:36:17 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t498a1Y6019250
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Sat, 9 May 2015 09:36:13 +0100
+Message-ID: <1431160561.8074.345.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Denys Dmytriyenko <denis@denix.org>
+Date: Sat, 09 May 2015 09:36:01 +0100
+In-Reply-To: <20150508210907.GK5885@denix.org>
+References: <20150501160602.GA5885@denix.org>
+	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
+	<554A67AB.1000800@dresearch-fe.de> <20150506233137.GH5885@denix.org>
+	<20150508192852.GJ5885@denix.org> <20150508210907.GK5885@denix.org>
+X-Mailer: Evolution 3.12.10-0ubuntu1~14.10.1 
+Mime-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,50 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2015 00:53:04 -0000
+X-List-Received-Date: Sat, 09 May 2015 08:36:22 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-The default configuration of ntp includes a large number of reference
-clock drivers. Provide a PACKAGECONFIG to allow control over whether
-or not these refclock drivers are built. Leave enabled by default.
+On Fri, 2015-05-08 at 17:09 -0400, Denys Dmytriyenko wrote:
+> weston-init RDEPENDS on weston and kbd.
+> 
+> $ bitbake-diffsigs 1.0-r0.do_package_write_ipk.sigdata.eb3921bfc9623056f7ffaef4be8549ab 1.0-r0.do_package_write_ipk.sigdata.90c2978497847912cd64f66039927f7d 
+> Hash for dependent task waylandweston_1.6.0.bb.do_packagedata changed from 551b3b5ac7b3c41bfced58b88db2d824 to f3eb9cd1861c186382e47f90e82e3295
+> Hash for dependent task kbdkbd_2.0.1.bb.do_packagedata changed from 53a5dc88b80dc5ab559fbecd14277650 to 950fbc7fe3c33564e781743f2c260670
+> 
+> Then, comparing signatures for weston, for exaple, gives all the changes 
+> caused by different DEFAULTTUNEs, TUNE_FEATURES and ARMPKGARCH - obviously, 
+> since one machine is cortexa8, while another is cortexa9.
+> 
+> But why would an allarch package even care about machine tunes in dependant 
+> packages, when it only RDEPENDS on them?
 
-  http://doc.ntp.org/4.2.8/refclock.html
+If A DEPENDS on B and B changes, the package name may change (thanks to
+debian.bbclass) so A has to repackage. Very very annoying but
+technically correct :/.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+> And how should I fix this? Thanks.
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-index 693bdbb..811ec2e 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-@@ -8,7 +8,7 @@ SECTION = "console/network"
- LICENSE = "NTP"
- LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f41fedb22dffefcbfafecc85b0f79cfa"
- 
--DEPENDS = "pps-tools libevent"
-+DEPENDS = "libevent"
- 
- SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.gz \
-            file://ntp-4.2.4_p6-nano.patch \
-@@ -45,7 +45,7 @@ USERADD_PARAM_${PN} = "--system --home-dir ${NTP_USER_HOME} \
-                        --shell /bin/false --user-group ntp"
- 
- # NB: debug is default-enabled by NTP; keep it default-enabled here.
--PACKAGECONFIG ??= "cap debug"
-+PACKAGECONFIG ??= "cap debug refclocks"
- PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
-                           --with-openssl-incdir=${STAGING_INCDIR} \
-                           --with-crypto, \
-@@ -53,6 +53,7 @@ PACKAGECONFIG[openssl] = "--with-openssl-libdir=${STAGING_LIBDIR} \
-                           openssl"
- PACKAGECONFIG[cap] = "--enable-linuxcaps,--disable-linuxcaps,libcap"
- PACKAGECONFIG[readline] = "--with-lineeditlibs,--without-lineeditlibs,readline"
-+PACKAGECONFIG[refclocks] = "--enable-all-clocks,--disable-all-clocks,pps-tools"
- PACKAGECONFIG[debug] = "--enable-debugging,--disable-debugging"
- 
- do_install_append() {
--- 
-1.9.1
+See SIGGEN_EXCLUDERECIPES_ABISAFE in layer.conf of OE-Core. You probably
+need to add weston-init to the list.
+
+Cheers,
+
+Richard
+
 
 
