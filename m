@@ -1,32 +1,21 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 60E1573CDC;
-	Sat,  9 May 2015 08:36:21 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t498aH9s019255; Sat, 9 May 2015 09:36:17 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 38CK0b9ELNxO; Sat,  9 May 2015 09:36:17 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	t498a1Y6019250
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Sat, 9 May 2015 09:36:13 +0100
-Message-ID: <1431160561.8074.345.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Denys Dmytriyenko <denis@denix.org>
-Date: Sat, 09 May 2015 09:36:01 +0100
-In-Reply-To: <20150508210907.GK5885@denix.org>
-References: <20150501160602.GA5885@denix.org>
-	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
-	<554A67AB.1000800@dresearch-fe.de> <20150506233137.GH5885@denix.org>
-	<20150508192852.GJ5885@denix.org> <20150508210907.GK5885@denix.org>
-X-Mailer: Evolution 3.12.10-0ubuntu1~14.10.1 
-Mime-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
+Return-Path: <victor.rodriguez.bahena@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id ABFD960043
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 May 2015 06:27:43 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga101.fm.intel.com with ESMTP; 09 May 2015 23:27:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,400,1427785200"; d="scan'208";a="569005270"
+Received: from amackay-mobl2.amr.corp.intel.com (HELO
+	vrodri3-mobl.amr.corp.intel.com) ([10.254.128.102])
+	by orsmga003.jf.intel.com with ESMTP; 09 May 2015 23:27:43 -0700
+From: Victor Rodriguez <victor.rodriguez.bahena@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 10 May 2015 01:27:39 -0500
+Message-Id: <1431239259-21577-1-git-send-email-victor.rodriguez.bahena@intel.com>
+X-Mailer: git-send-email 1.9.3
+Subject: [PATCH] mpich: added BASH_SHELL to CACHED_CONFIGUREVARS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,36 +29,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 May 2015 08:36:22 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 10 May 2015 06:27:45 -0000
 
-On Fri, 2015-05-08 at 17:09 -0400, Denys Dmytriyenko wrote:
-> weston-init RDEPENDS on weston and kbd.
-> 
-> $ bitbake-diffsigs 1.0-r0.do_package_write_ipk.sigdata.eb3921bfc9623056f7ffaef4be8549ab 1.0-r0.do_package_write_ipk.sigdata.90c2978497847912cd64f66039927f7d 
-> Hash for dependent task waylandweston_1.6.0.bb.do_packagedata changed from 551b3b5ac7b3c41bfced58b88db2d824 to f3eb9cd1861c186382e47f90e82e3295
-> Hash for dependent task kbdkbd_2.0.1.bb.do_packagedata changed from 53a5dc88b80dc5ab559fbecd14277650 to 950fbc7fe3c33564e781743f2c260670
-> 
-> Then, comparing signatures for weston, for exaple, gives all the changes 
-> caused by different DEFAULTTUNEs, TUNE_FEATURES and ARMPKGARCH - obviously, 
-> since one machine is cortexa8, while another is cortexa9.
-> 
-> But why would an allarch package even care about machine tunes in dependant 
-> packages, when it only RDEPENDS on them?
+On Fedora 17, bash has moved to /usr/bin/bash and the configure process finds
+it on the host machine there, this ensures that it is set correctly for the
+target.
 
-If A DEPENDS on B and B changes, the package name may change (thanks to
-debian.bbclass) so A has to repackage. Very very annoying but
-technically correct :/.
+Signed-off-by: Victor Rodriguez <victor.rodriguez.bahena@intel.com>
+---
+ meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> And how should I fix this? Thanks.
-
-See SIGGEN_EXCLUDERECIPES_ABISAFE in layer.conf of OE-Core. You probably
-need to add weston-init to the list.
-
-Cheers,
-
-Richard
-
+diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
+index 0225cee..eb6ceba 100644
+--- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
++++ b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
+@@ -12,6 +12,8 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
+ SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
+ 
++CACHED_CONFIGUREVARS += "BASH_SHELL=${base_bindir}/bash"
++
+ RDEPENDS_${PN} += "bash perl libxml2"
+ S = "${WORKDIR}/${PN}-${PV}"
+ 
+-- 
+1.9.3
 
 
