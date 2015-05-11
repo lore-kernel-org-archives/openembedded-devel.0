@@ -1,40 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E1AA6013D
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id E18AE6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 09:16:11 +0000 (UTC)
-Received: by wgic8 with SMTP id c8so95351725wgi.1
+	Mon, 11 May 2015 09:26:32 +0000 (UTC)
+Received: by wiun10 with SMTP id n10so88898122wiu.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 02:16:12 -0700 (PDT)
+	Mon, 11 May 2015 02:26:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:content-transfer-encoding
 	:in-reply-to:user-agent;
-	bh=qmfmhs/NRVtbPAfDuaDt4VtGBN+rBiQr+KiAja7ZYWM=;
-	b=EmUbMgO/wBH/VLACDhXCEtHSn22U5KMfLy7ofhSCkmpkqgpirFWLJXFZIMEiLcxnb6
-	YjY4FkiuV71MTGZWJY1mYcRqAdWVS5rAYMtEkP+pJZLY6DKsNuqrwK9cPgy4LCZy/Rbz
-	tXNtBGLjkO6l6uB08EnW9i70NTJK32dt2mIHuXMpYAhZUC7KsOWg7z3XHwD3JtlabZBw
-	xL/BTsXx6dC9M6nHJnGFAC0Gt6bqyA/nyZcsGJKqIbj4LtKtJEb2TrNoC2mZez+Ky2RY
-	gQO7KQu3e9x64Wf1/DCf91+6JNuG3ebiJUscSVvw7NNeuAEu+KBeiR3B+NZlIa1eUhz1
-	Qk7w==
-X-Received: by 10.194.77.44 with SMTP id p12mr18730735wjw.1.1431335772591;
-	Mon, 11 May 2015 02:16:12 -0700 (PDT)
+	bh=gerH4cA5jGVUNzyuwXdJGteaaW5koJYhwfrC8i9H1JE=;
+	b=z83U19aB/ly0UJLbXJFcoFUndWycg3/ejOHZ1qyqrDRTlnCU/EFSQjKlqGwiisy10Q
+	VuaIvAs2uTqAoAyr0LGFrJcHupOetJRv/6MftAPBJGJTo0LzgtgaunP75IMI0wYzOJ3X
+	XarcmLzVhBpo/h5XrxDuNmsAr+IrljjhGs4SDgdKp46+CWN1Y8TsH3SzPBRXMM2hlG6Q
+	OZRvDbt83sajv/Q6kLYXxPhmpzvvkk5H9C2eF13+2+sHgfQHP3SDXHbyz+IisnCChiJX
+	VWZOfYuyoDB0n9gA6rkLKFq53YhDf1f1NDGpYKtQe97tZc5nH/N5MtHlds+62+EeZgEN
+	q4YA==
+X-Received: by 10.180.74.144 with SMTP id t16mr17540997wiv.33.1431336393534;
+	Mon, 11 May 2015 02:26:33 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id dg8sm21827095wjc.9.2015.05.11.02.16.11
+	by mx.google.com with ESMTPSA id k2sm12336291wix.4.2015.05.11.02.26.32
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 May 2015 02:16:11 -0700 (PDT)
+	Mon, 11 May 2015 02:26:32 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 11 May 2015 11:16:43 +0200
+Date: Mon, 11 May 2015 11:27:04 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150511091643.GG2400@jama>
-References: <1430852951-18707-1-git-send-email-raj.khem@gmail.com>
-	<1430852951-18707-7-git-send-email-raj.khem@gmail.com>
+Message-ID: <20150511092704.GH2400@jama>
+References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1430852951-18707-7-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][meta-gnome][PATCH 7/7] obex, gnome-bluetooth: Depend on bluez5
+Subject: Re: [meta-oe][PATCH 01/20] smstools: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,100 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2015 09:16:15 -0000
+X-List-Received-Date: Mon, 11 May 2015 09:26:35 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 05, 2015 at 12:09:11PM -0700, Khem Raj wrote:
-> bluez4 is removed from oe-core
-> this needs runtime testing
+On Fri, May 08, 2015 at 03:42:16PM +0800, Yi Zhao wrote:
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 
-Please send v2 with PNBLACKLISTs removal once the runtime testing is
-done.
+Changes 03, 18, 20 didn't make it to patchwork, because they were marked
+as Spam by gmail, please try to resend or send cover letter with repo
+url where I can cherry-pick them.
 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  meta-gnome/recipes-connectivity/obex/obexd_0.48.bb                 | 4 +=
-+--
->  meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb | 2 +-
->  meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb        | 3 +=
---
->  meta-oe/recipes-connectivity/obex/openobex_1.5.bb                  | 2 +-
->  4 files changed, 5 insertions(+), 6 deletions(-)
+>  .../smstools3/smstools3_3.1.15.bb                  |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb b/meta-gn=
-ome/recipes-connectivity/obex/obexd_0.48.bb
-> index f28f77b..02b364e 100644
-> --- a/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
-> +++ b/meta-gnome/recipes-connectivity/obex/obexd_0.48.bb
-> @@ -1,7 +1,7 @@
->  SUMMARY =3D "OBEX Server and Client"
->  # obexd was integrated into bluez5
-> -DEPENDS =3D "glib-2.0 dbus bluez4 libical"
-> -RCONFLICTS_${PN} =3D "bluez5"
-> +DEPENDS =3D "glib-2.0 dbus bluez5 libical"
-> +#RCONFLICTS_${PN} =3D "bluez5"
+> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb b=
+/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> index 7a72a1e..c4b6b60 100644
+> --- a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
+> @@ -12,7 +12,7 @@ SRC_URI[md5sum] =3D "0241ef60e646fac1a06254a848e61ed7"
+>  SRC_URI[sha256sum] =3D "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea0=
+2f5bf05234814d59"
 > =20
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D12f884d2ae1ff87c09e5b7ccc2c4c=
-a7e"
-> diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.3=
-2.0.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-> index 8711b8a..ddc78e6 100644
-> --- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_2.32.0.bb
-> @@ -7,7 +7,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Deb723b61539fee=
-f013de476e68b5c50a \
->  PR =3D "r1"
 > =20
->  SECTION =3D "x11/gnome"
-> -DEPENDS =3D "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbu=
-s-glib libunique libnotify bluez4 gnome-keyring virtual/libx11 libxi intlto=
-ol-native"
-> +DEPENDS =3D "obexd gnome-doc-utils-native gnome-doc-utils gconf gtk+ dbu=
-s-glib libunique libnotify bluez5 gnome-keyring virtual/libx11 libxi intlto=
-ol-native"
+> -S =3D "${WORKDIR}/${PN}"
+> +S =3D "${WORKDIR}/${BPN}"
 > =20
->  inherit gnomebase gtk-icon-cache
-> =20
-> diff --git a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb =
-b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-> index afe6106..8bb5374 100644
-> --- a/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-> +++ b/meta-oe/recipes-connectivity/obex/obex-data-server_0.4.6.bb
-> @@ -2,8 +2,7 @@ DESCRIPTION =3D "obex-data-server is a D-Bus service prov=
-iding high-level OBEX cli
->  LICENSE =3D "GPLv2"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-> =20
-> -DEPENDS =3D "gtk+ bluez4 dbus-glib imagemagick openobex"
-> -RCONFLICTS_${PN} =3D "bluez5"
-> +DEPENDS =3D "gtk+ bluez5 dbus-glib imagemagick openobex"
-> =20
->  SRC_URI =3D "http://tadas.dailyda.com/software/obex-data-server-${PV}.ta=
-r.gz"
->  SRC_URI[md5sum] =3D "961ca5db6fe9c97024e133cc6203cc4d"
-> diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb b/meta-oe/=
-recipes-connectivity/obex/openobex_1.5.bb
-> index b07779d..f4744c0 100644
-> --- a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> +++ b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "The Openobex project is an open source i=
-mplementation of the \
->  Object Exchange (OBEX) protocol."
->  HOMEPAGE =3D "http://openobex.triq.net"
->  SECTION =3D "libs"
-> -DEPENDS =3D "virtual/libusb0 bluez4"
-> +DEPENDS =3D "virtual/libusb0 bluez5"
->  LICENSE =3D "GPLv2 & LGPLv2.1"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Deb723b61539feef013de476e68b5c=
-50a \
->                      file://COPYING.LIB;md5=3Da6f89e2100d9b6cdffcea4f398e=
-37343 \
+>  RDEPENDS_${PN} =3D "bash"
+>  INITSCRIPT_NAME =3D "sms3"
 > --=20
-> 2.1.4
+> 1.7.9.5
 >=20
 > --=20
 > _______________________________________________
