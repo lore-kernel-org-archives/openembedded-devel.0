@@ -1,21 +1,41 @@
-Return-Path: <victor.rodriguez.bahena@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id ABFD960043
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 May 2015 06:27:43 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga101.fm.intel.com with ESMTP; 09 May 2015 23:27:44 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,400,1427785200"; d="scan'208";a="569005270"
-Received: from amackay-mobl2.amr.corp.intel.com (HELO
-	vrodri3-mobl.amr.corp.intel.com) ([10.254.128.102])
-	by orsmga003.jf.intel.com with ESMTP; 09 May 2015 23:27:43 -0700
-From: Victor Rodriguez <victor.rodriguez.bahena@intel.com>
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 8DB686013D;
+	Mon, 11 May 2015 06:21:51 +0000 (UTC)
+Received: by wgbhc8 with SMTP id hc8so17760489wgb.2;
+	Sun, 10 May 2015 23:21:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=oFX5IYj7mgdYsQkL9+zZ6VXcoA5cYbese2tkkMvUROA=;
+	b=X8tL5pjkMHMbbze0DsOIg/N0NnL7Dc6WlXTDOTYUFkwFDX08qpDBxUNgq/Zm8g8Hy8
+	b0uAPPJxQ+SxzXLnFll0QpDH620PrPjsGMe+irSeYjCDqY6vulNlcGtZxLJGl3ICpkMx
+	Ua1hsRvNMNwOQy2USp9RdtF9LX1sFT7pIZJfN7b+i8HzteFzvg4e3wBHwwUNRhbpDnRk
+	CnpBBtFaGOyAoZtZ6KIE42RAosAfVhrclwfqo0yZjdpuIW8B6nI8HDmpji5VMc5yhTmx
+	hfzh5GxWZgGzffNKMzWF4XzgwHtTllBKCuRO8DUydNWkaqcxMXTDB7wAdbYKpWay338x
+	pRhQ==
+X-Received: by 10.194.48.101 with SMTP id k5mr16956568wjn.79.1431325312696;
+	Sun, 10 May 2015 23:21:52 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id
+	d14sm21119114wjn.30.2015.05.10.23.21.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 10 May 2015 23:21:51 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 11 May 2015 08:22:22 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 May 2015 01:27:39 -0500
-Message-Id: <1431239259-21577-1-git-send-email-victor.rodriguez.bahena@intel.com>
-X-Mailer: git-send-email 1.9.3
-Subject: [PATCH] mpich: added BASH_SHELL to CACHED_CONFIGUREVARS
+Message-ID: <20150511062222.GD2400@jama>
+References: <20150501160602.GA5885@denix.org>
+	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
+	<554A67AB.1000800@dresearch-fe.de>
+	<20150506233137.GH5885@denix.org> <20150508192852.GJ5885@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20150508192852.GJ5885@denix.org>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,31 +49,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 May 2015 06:27:45 -0000
+X-List-Received-Date: Mon, 11 May 2015 06:21:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fedora 17, bash has moved to /usr/bin/bash and the configure process finds
-it on the host machine there, this ensures that it is set correctly for the
-target.
+On Fri, May 08, 2015 at 03:28:52PM -0400, Denys Dmytriyenko wrote:
+> On Wed, May 06, 2015 at 07:31:37PM -0400, Denys Dmytriyenko wrote:
+> > On Wed, May 06, 2015 at 09:12:43PM +0200, Steffen Sledz wrote:
+> > > Am 02.05.2015 um 23:55 schrieb Andrea Adami:
+> > > > On Fri, May 1, 2015 at 6:06 PM, Denys Dmytriyenko <denis@denix.org>=
+ wrote:
+> > > >> Has anyone ever seen this message during <image>.do_rootfs task?
+> > > >>
+> > > >> Collected errors:
+> > > >>  * opkg_install_pkg: Package <package> md5sum mismatch. Either the=
+ opkg or the package index are corrupt. Try 'opkg update'.
+> > > >>  * opkg_install_cmd: Cannot install package <package>.
+> > > >>
+> > > >> We started seeing it on random packages inside the <image> few wee=
+ks ago on
+> > > >> different machines. At the time we had switched to bitbake 1.26. B=
+ut even
+> > > >> trying different bitbake versions still occasionally caused the sa=
+me error, so
+> > > >> the culprit is still unknwon. Using oe-core/daisy for now.
+> > > >>
+> > > >> Any comments or suggestions to where start looking would be apprec=
+iated!
+> > > >=20
+> > > > yes, I have seen this during multimachine builds.
+> > > > My TMPDIR is on tmpfs in ram so everytime I reboot it is re-populat=
+ed
+> > > > from sstate.
+> > > > ...
+> > >=20
+> > > We have the same problem here. Also with packages from the "all" feed=
+ in a=20
+> > > multimachine build environment. But it does not seem related to=20
+> > > packagegroups.
+> > >=20
+> > > I've a hypothesis but was not able to validate or falsify it till now=
+: Given=20
+> > > a recipe which does only use file:// type SRC_URI. If i change someth=
+ing in=20
+> > > these sources and do not update PR the prserv/hashing mechanism detec=
+ts the=20
+> > > changes a builds a new package. But this package has the same version=
+ info=20
+> > > as the one before. So for opkg there's no need to update it's "packag=
+e=20
+> > > database".
+> >=20
+> > After fixing few of our own goofs in packagegroups, I still saw this is=
+sue=20
+> > with some real packages like weston-init. It went away after it got reb=
+uilt=20
+> > due to the dependencies, but I'll keep an eye on it and report if it co=
+mes=20
+> > back...
+>=20
+> Ok, so on the second day it failed again on weston-init and couple of our=
+ own=20
+> packages. They are all marked as allarch, but it seems they get re-packag=
+ed=20
+> for some reason for different machines in multi-machine build - the times=
+tamp=20
+> of the ipk package changed, while nothing else in the recipe or its data =
+has=20
+> changed. There's nothing obvious in weston-init I can see that would trig=
+ger=20
+> it. And in the logs I see that do_package_write_ipk_setscene being trigge=
+red -=20
+> I'm trying to figure out why... Any pointers?
 
-Signed-off-by: Victor Rodriguez <victor.rodriguez.bahena@intel.com>
----
- meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+There are many recipes with incorrect PACKAGE_ARCH, see latest report
+=66rom world build:
+http://lists.openembedded.org/pipermail/openembedded-core/2015-January/1007=
+34.html
 
-diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-index 0225cee..eb6ceba 100644
---- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-+++ b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-@@ -12,6 +12,8 @@ SRC_URI = " \
- SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
- SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
- 
-+CACHED_CONFIGUREVARS += "BASH_SHELL=${base_bindir}/bash"
-+
- RDEPENDS_${PN} += "bash perl libxml2"
- S = "${WORKDIR}/${PN}-${PV}"
- 
--- 
-1.9.3
+weston-init is one of recipes where I've sent change to drop allarch
+long time ago:
+http://patchwork.openembedded.org/patch/74133/
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
