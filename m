@@ -1,42 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 179846013D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f172.google.com (mail-ie0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 08AFC6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 11:51:55 +0000 (UTC)
-Received: by wgiu9 with SMTP id u9so125586263wgi.3
+	Mon, 11 May 2015 16:07:04 +0000 (UTC)
+Received: by iecmd7 with SMTP id md7so34059897iec.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 04:51:56 -0700 (PDT)
+	Mon, 11 May 2015 09:07:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=KXTFmrREEy+8EDcW6g1msvwsFywYcGarfPk9HSRPb8E=;
-	b=yP0/mAA8dRTrHnG/ahtemhTnAJjAcLxKHi9WEyzwKZM+0dx2+niqE8HYqyXPvaQJnx
-	mN+YRGl2EcvoIhZD97QO/nMbw6mS1v1EioWywCYaRWaDXIc6O3Y8k5c2GrW3e2mZLaYF
-	baXRc8c1GEwNMPE6DopNlMDaRDT4Hp9EPwKihcfalQ1e2N6BI7fktK6+lTwCVpqIZga5
-	pN8Uqhf9fbpUwurHM+TW9zHXFWkSQggG81RkiSmCxJY9xo2WWMwteR6uB4fOaX03Ptem
-	9BmED1MF5JWw8z/CPkQckUR7M+m9QDDC0GJqtnIUJtEy0inKk7jG8NODBjOzPZ8ywvsD
-	Homw==
-X-Received: by 10.194.189.148 with SMTP id gi20mr20054665wjc.22.1431345116445; 
-	Mon, 11 May 2015 04:51:56 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	fb3sm10037601wib.21.2015.05.11.04.51.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 May 2015 04:51:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 11 May 2015 13:52:27 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150511115227.GI2400@jama>
-References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
-	<1431070955-7100-7-git-send-email-yi.zhao@windriver.com>
-	<5550972A.7000709@balister.org>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=Tp12t+xzOFgWzQa5PJSPDwtOnkBvKVfg0hrBqObN+gw=;
+	b=r5H9bstiG2Y5qsCgTbVlpT90PGQR4gCRh4aIqoz3d/rlbctlOkqyLA+6BRY3/b4Qpd
+	M46lLNX/vgsNP5FoWzzF6WppC1UFkDkO/LFt89LJqbpuuAx92nTC5YJv/h9E785qGP7R
+	KSRBtmG2FZ12G9Y8SvAn/1D0yYJLvhvG1RroYRBTpPNllSkaGYKEzxl0SeVjtQEzXbal
+	K3C2xIvejIDd9vMdb1pyBbmhs2RN6n+LJ9XbCq0CVC74pZRM2dvuZhqVEx7MiQNL6bI1
+	HnZf1fcWx74d1713ZtJoFdWhv2FUcJqanS6A7uFjW2WWqqPI5za3gELx30WgMGp3cKxi
+	QgvQ==
+X-Received: by 10.43.56.146 with SMTP id wc18mr11649686icb.24.1431360424239;
+	Mon, 11 May 2015 09:07:04 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <5550972A.7000709@balister.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 07/20] gpsd: fix PN -> BPN for multilib
+Received: by 10.50.112.34 with HTTP; Mon, 11 May 2015 09:06:33 -0700 (PDT)
+In-Reply-To: <20150511091643.GG2400@jama>
+References: <1430852951-18707-1-git-send-email-raj.khem@gmail.com>
+	<1430852951-18707-7-git-send-email-raj.khem@gmail.com>
+	<20150511091643.GG2400@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 May 2015 09:06:33 -0700
+Message-ID: <CAMKF1spGXt=mNhu94Q72Le-uLY4yDLTDR6qLMMTinS9X6uJdng@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][meta-gnome][PATCH 7/7] obex, gnome-bluetooth: Depend on bluez5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,57 +42,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2015 11:51:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 May 2015 16:07:07 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, May 11, 2015 at 07:48:58AM -0400, Philip Balister wrote:
-> I've alos got an update in flight for gpsd. We are having trouble with
-> it, because the update brkoe navit. Now the bluez4 - 5 updte broke
-> another of the packages navit needs.
->=20
-> Martin, any chance we can combine this patch with my update and
-> blacklist navit?
+On Mon, May 11, 2015 at 2:16 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Please send v2 with PNBLACKLISTs removal once the runtime testing is
+> done.
 
-Yes, I've already did that in master-next.
-
->=20
-> Philip
->=20
-> On 05/08/2015 03:42 AM, Yi Zhao wrote:
-> > Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> > ---
-> >  meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb |    4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb b/meta-oe/rec=
-ipes-navigation/gpsd/gpsd_3.10.bb
-> > index 93cf1ae..b37fc15 100644
-> > --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
-> > +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.10.bb
-> > @@ -85,8 +85,8 @@ do_install_append() {
-> > =20
-> >      #support for systemd
-> >      install -d ${D}${systemd_unitdir}/system/
-> > -    install -m 0644 ${WORKDIR}/${PN}.service ${D}${systemd_unitdir}/sy=
-stem/${PN}.service
-> > -    install -m 0644 ${S}/systemd/${PN}.socket ${D}${systemd_unitdir}/s=
-ystem/${PN}.socket
-> > +    install -m 0644 ${WORKDIR}/${BPN}.service ${D}${systemd_unitdir}/s=
-ystem/${BPN}.service
-> > +    install -m 0644 ${S}/systemd/${BPN}.socket ${D}${systemd_unitdir}/=
-system/${BPN}.socket
-> >  }
-> > =20
-> >  pkg_postinst_${PN}-conf() {
-> >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+it worked ok runtime in my case. but which recipes are you referring
+to wrt blacklisting
 
