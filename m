@@ -1,36 +1,36 @@
-Return-Path: <dbaryshkov@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 57C1E73FFF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f169.google.com (mail-ig0-f169.google.com
+	[209.85.213.169])
+	by mail.openembedded.org (Postfix) with ESMTP id ACF956013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 19:38:34 +0000 (UTC)
-Received: by wgbhc8 with SMTP id hc8so39140852wgb.2
+	Mon, 11 May 2015 19:39:15 +0000 (UTC)
+Received: by igbhj9 with SMTP id hj9so81223993igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 12:38:35 -0700 (PDT)
+	Mon, 11 May 2015 12:39:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Bm+6p0ve6aa67nyIfx2iaEcx1c9r8GU0NkewMhfMnOo=;
-	b=CCt5XSREWEdLtS2agrVl8mhUDv0n6oENijLWWqxWDDlBvErR7xuyKmitcvVwI1LHA4
-	bKiPGo4DAe8hQtoDGUt5Hqa9jb0kq0NO81fz4W4jhJb8bge8EtGGpFiHyCTVyqBhU70Z
-	jnUCYX6Q1VOBzkJyAN8667stc/rXqiOmP9vV4aRegCPzLvWuo45F9JnVh7DQ8KNNkEPo
-	9OR3EDj7oTaxG0wmwTdYUkK5pKqVyZPKg8k6xLTMFfRRytsr5cJKroNuUHLrAl0Pe2FP
-	Q3HBzexK5RB6st60guW6N4HhZ0S1lxNofM2rMypmJkyFvxbeGfT/zvcgVZXt0gMlC/oh
-	zAOg==
-X-Received: by 10.180.216.103 with SMTP id op7mr23093108wic.90.1431373115939; 
-	Mon, 11 May 2015 12:38:35 -0700 (PDT)
-Received: from fangorn.rup.mentorg.com (nat-min.mentorg.com. [139.181.32.34])
-	by mx.google.com with ESMTPSA id
-	vz8sm24253522wjc.27.2015.05.11.12.38.34
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 11 May 2015 12:38:35 -0700 (PDT)
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 May 2015 22:38:26 +0300
-Message-Id: <1431373106-7016-3-git-send-email-dbaryshkov@gmail.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1431373106-7016-1-git-send-email-dbaryshkov@gmail.com>
-References: <1431373106-7016-1-git-send-email-dbaryshkov@gmail.com>
-Subject: [meta-opie][PATCH 3/3] obexpush: fix compilation error
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=aYx59ZLHznyisjQT5tyFEGbBV/Sy9yjAUP5NCyb2nZI=;
+	b=U7C9ktE7z+qMVy/yaE6c3+3frpEinj3+sVi8torLZDiuQ6cbctvLKUScuvK+31plo1
+	CQCmGs863DOTRML5Mka0o6l74ixsDCzfrKd5ynvK19tqE38apEiT8hgwPj04ddK050o1
+	KNWVMRgzxuj4vVqG4JMp7+VNsrc4Qz8LwWXLq+EdHv2hN+IfEmoWbCimSAwU7ewQPhst
+	zGomjc2vqo3B/LgVAZTb4DwgTqzQgRcGNZUUtNSswIjQcG6Tl/yXXMiYgOU07wJmSbSJ
+	gQ6F3wfaQnSgYw2Z5Djm2m4F5Akee92MKBnFlR3evOb8rYbQgU+fNAV8mt+bEdZxhApK
+	+CJA==
+X-Received: by 10.107.18.170 with SMTP id 42mr15362726ios.38.1431373156183;
+	Mon, 11 May 2015 12:39:16 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.50.112.34 with HTTP; Mon, 11 May 2015 12:38:45 -0700 (PDT)
+In-Reply-To: <20150511185853.GJ2400@jama>
+References: <1430852951-18707-1-git-send-email-raj.khem@gmail.com>
+	<1430852951-18707-7-git-send-email-raj.khem@gmail.com>
+	<20150511091643.GG2400@jama>
+	<CAMKF1spGXt=mNhu94Q72Le-uLY4yDLTDR6qLMMTinS9X6uJdng@mail.gmail.com>
+	<20150511185853.GJ2400@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 May 2015 12:38:45 -0700
+Message-ID: <CAMKF1srd2tGki0OTSMT7U3SiQX0CB-2ZhLOXejaQ2qR=fSbQgg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][meta-gnome][PATCH 7/7] obex, gnome-bluetooth: Depend on bluez5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,56 +44,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2015 19:38:37 -0000
+X-List-Received-Date: Mon, 11 May 2015 19:39:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Newer glibc is strict on passing mode argument to open() call if O_CREAT
-has been specified. Provide reasonable mode argument to fix compilation
-error.
+On Mon, May 11, 2015 at 11:58 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> http://git.openembedded.org/meta-openembedded/commit/?id=73ba7cd70f75a898bf4c3f8ae38c9904fc3e4724
 
-Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
----
- recipes-support/obexpush/files/fix-open.patch | 18 ++++++++++++++++++
- recipes-support/obexpush/obexpush_1.0.0.bb    |  1 +
- 2 files changed, 19 insertions(+)
- create mode 100644 recipes-support/obexpush/files/fix-open.patch
-
-diff --git a/recipes-support/obexpush/files/fix-open.patch b/recipes-support/obexpush/files/fix-open.patch
-new file mode 100644
-index 0000000..1280daf
---- /dev/null
-+++ b/recipes-support/obexpush/files/fix-open.patch
-@@ -0,0 +1,18 @@
-+Index: obexpush/opd/main.c
-+===================================================================
-+--- obexpush.orig/opd/main.c
-++++ obexpush/opd/main.c
-+@@ -562,11 +562,11 @@ int main(int argc, char **argv,char *env
-+ 			dup2(fd, 0);
-+ 			close(fd);
-+ 
-+-			fd = open("_opd_msgs.txt", O_RDWR | O_CREAT);
-++			fd = open("_opd_msgs.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-+ 			dup2(fd, 1);
-+ 			close(fd);
-+ 
-+-			fd = open("_opd_errs.txt", O_RDWR | O_CREAT);
-++			fd = open("_opd_errs.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-+ 			dup2(fd, 2);
-+ 			close(fd);
-+ 
-diff --git a/recipes-support/obexpush/obexpush_1.0.0.bb b/recipes-support/obexpush/obexpush_1.0.0.bb
-index 5018728..0cb18cd 100644
---- a/recipes-support/obexpush/obexpush_1.0.0.bb
-+++ b/recipes-support/obexpush/obexpush_1.0.0.bb
-@@ -8,6 +8,7 @@ PR = "r7"
- 
- SRC_URI = "http://www.caside.lancs.ac.uk/bt/obexpush.tar.gz \
-            file://add-obextool.patch \
-+           file://fix-open.patch \
-            file://init \
-            file://opd_args"
- S = "${WORKDIR}/obexpush"
--- 
-2.1.4
-
+this patch was pushed after I have submitted the changes thats why I
+did not see it.
 
