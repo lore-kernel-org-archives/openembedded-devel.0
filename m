@@ -1,41 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f52.google.com (mail-wg0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DB6A60043
+Return-Path: <haris.okanovic@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id A70D860043
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 18:59:55 +0000 (UTC)
-Received: by wgin8 with SMTP id n8so138280877wgi.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 11:59:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=6BdDC/V+c8BB7KnFH+fNODIGV7d198qWK5M+DFXyyIM=;
-	b=FGhC2JCyTP/JzTq+UEf5mJx3LNNfKon+79/lnZmmDOSxzDZX3k2PczUB+Ky160kwXM
-	sa+M0kP0ci056zNERQl8GiJyE3f9ktc00vSMbPFTp5px74KnZdxoeRzp1DFxQUTvjeJG
-	H4VDe7UsW7bzuHZIWLQ5vVRmQQyWNQYPY05wOZYKtj5Vl8NHs9TQWJXL3KYCLT5teXaZ
-	/30kPcjB6k4HP9PMBV8voFxixs29nN0JTkMWSHnAwOriwDVRLLlt7vLd4J85iKCnzenv
-	LmqY1Yel6n0Mr571LkRJXBdMxNXVTpsaL61UCdqJcVxE0jQB/7+UhQRoQbBLuZ0LLAax
-	gIrA==
-X-Received: by 10.180.188.193 with SMTP id gc1mr22907615wic.7.1431370796295;
-	Mon, 11 May 2015 11:59:56 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id a4sm1097433wic.1.2015.05.11.11.59.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 May 2015 11:59:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 11 May 2015 21:00:27 +0200
+	Mon, 11 May 2015 19:24:47 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t4BJOk7b024768 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 May 2015 14:24:48 -0500
+Received: from us-aus-mail3.amer.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
+	with ESMTP id 2015051114160700-1260689 ;
+	Mon, 11 May 2015 14:16:07 -0500 
+In-Reply-To: <CAMKF1sr+DV-sA23dwzhAocJiACp=1+WNk8VWh3eGreDQ1Xh25A@mail.gmail.com>
+References: <1431112486-23487-1-git-send-email-haris.okanovic@ni.com>
+	<CAMKF1sr+DV-sA23dwzhAocJiACp=1+WNk8VWh3eGreDQ1Xh25A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150511190027.GK2400@jama>
-References: <1430795900-25986-1-git-send-email-akuster808@gmail.com>
-	<20150511090952.GF2400@jama>
-	<CAMKF1sp5Vg3U6kWfRfJgCZki-EKpmSmYCJiizS6K5GnkzSKb5g@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sp5Vg3U6kWfRfJgCZki-EKpmSmYCJiizS6K5GnkzSKb5g@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH] networkingmanager: QA warning for rdepends on polkit
+X-KeepSent: A1E75F3A:8D299EDB-86257E42:0069B047;
+	type=4; flags=0; name=$KeepSent
+X-Mailer: Lotus Notes Release 8.5.3FP3 November 16, 2012
+From: Haris Okanovic <haris.okanovic@ni.com>
+Message-ID: <OFA1E75F3A.8D299EDB-ON86257E42.0069B047-86257E42.0069D8F9@ni.com>
+Date: Mon, 11 May 2015 14:16:06 -0500
+X-MIMETrack: Serialize by Router on US-AUS-MAIL3/AUS/M/NIC(Release
+	8.5.3FP6|November 21, 2013) at 05/11/2015 02:16:07 PM,
+	Serialize complete at 05/11/2015 02:16:07 PM,
+	Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 05/11/2015 02:16:07 PM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6|November 21, 2013) at 05/11/2015 02:24:48 PM,
+	Serialize complete at 05/11/2015 02:24:48 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-05-11_04:, , signatures=0
+Subject: Re: [PATCH] dpkg start-stop-daemon: Fix RCONFLICTS typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,28 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2015 18:59:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 May 2015 19:24:50 -0000
+Content-Type: text/plain; charset="US-ASCII"
 
-On Mon, May 11, 2015 at 11:44:11AM -0700, Khem Raj wrote:
-> On Mon, May 11, 2015 at 2:09 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> >> +PACKAGECONFIG[polkit] =3D "--enable-polkit, --disable-polkit, , polki=
-t"
-> >
-> > Shouldn't it have polkit as build time dependency (3rd argument, not 4t=
-h)
->=20
-> if something is added to RDEPENDS it automatically gets added to DEPENDS =
-too
+> It is blacklisted so how did you test it.
 
-No that's not true.
+I tested Dizzy, which doesn't include Martin Jansa's blacklist change 
+(a76a8cb6),
+and verified `Conflicts: dpkg` got added to the ipk control file for 
+qemux86.
 
-RDEPENDS adds dependency only between do_package tasks for build time
-dependency you need do_configure depending on do_populate_sysroot
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> [If] it's working fine then may be
+> you should white list it too
+
+I don't fully understand the problem Martin worked around, so I'm hesitant 
+about
+undoing his change right now. I'll have to take a closer look at this at 
+some point,
+if no one else does, because NI will eventually upgrade from Dizzy and we 
+would
+like to keep using dpkg start-stop-daemon.
+
+
+Regards,
+Haris
+
 
