@@ -1,42 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 057B56013D;
-	Mon, 11 May 2015 06:25:43 +0000 (UTC)
-Received: by wgbhc8 with SMTP id hc8so17825887wgb.2;
-	Sun, 10 May 2015 23:25:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=P87Vuu2+N2YaWtmnAtkbwwwokOiU8c+DF9v9asizjhw=;
-	b=pttQmMHoY0H2r2iHuOgEYSNRf3rWtHAJIkfK82BnIq6Aw56oYeQ+GkMsNfPz0AxbHu
-	2H0vxLBqLLlH77/rNC5T31VXFT5EgszPCN3sgpIeRRHGGYaNQM6hL9zvhwJeV7PVkJ4P
-	LnxpXE93ow1sEa0NPUn23n87ei5BsW4D3VoqO1NvvpI4eYUKLiBAUTfXGeLmHJWCtGRi
-	UGbbo7hwgsUWRlOk2MeAgFCLVui3zdA9ViYdIs3pEojDoyMDDqZYG/5zEJAGk+bsGHvJ
-	1AQjisDCI78+8MMRZxx8HegoIXvu+6gRazApfvYs1BRPZQj2Iwp1G00c6QEej8kmXUb9
-	Rnbg==
-X-Received: by 10.194.23.197 with SMTP id o5mr17463990wjf.75.1431325544607;
-	Sun, 10 May 2015 23:25:44 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	di9sm11590888wib.16.2015.05.10.23.25.43
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 10 May 2015 23:25:43 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 11 May 2015 08:26:15 +0200
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Message-ID: <20150511062615.GE2400@jama>
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id A846B6013D;
+	Mon, 11 May 2015 07:23:09 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t4B7N9fK031262; Mon, 11 May 2015 08:23:09 +0100
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id vPC5owPmfGQY; Mon, 11 May 2015 08:23:09 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	t4B7Moio031255
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Mon, 11 May 2015 08:23:05 +0100
+Message-ID: <1431328970.30971.27.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 11 May 2015 08:22:50 +0100
+In-Reply-To: <20150511062222.GD2400@jama>
 References: <20150501160602.GA5885@denix.org>
 	<CAAQYJAvpGUdZyAzOay+VuDz+tdZF72ny0bgDfkTFomCFbVrMhQ@mail.gmail.com>
-	<554A67AB.1000800@dresearch-fe.de>
-	<20150506233137.GH5885@denix.org> <20150508192852.GJ5885@denix.org>
-	<20150508210907.GK5885@denix.org>
-	<1431160561.8074.345.camel@linuxfoundation.org>
-MIME-Version: 1.0
-In-Reply-To: <1431160561.8074.345.camel@linuxfoundation.org>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	<554A67AB.1000800@dresearch-fe.de> <20150506233137.GH5885@denix.org>
+	<20150508192852.GJ5885@denix.org> <20150511062222.GD2400@jama>
+X-Mailer: Evolution 3.12.10-0ubuntu1~14.10.1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
 	openembedded-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] opkg_install_pkg: Package <name> md5sum mismatch. Either the opkg or the package index are corrupt.
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -52,53 +40,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2015 06:25:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 May 2015 07:23:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Sat, May 09, 2015 at 09:36:01AM +0100, Richard Purdie wrote:
-> On Fri, 2015-05-08 at 17:09 -0400, Denys Dmytriyenko wrote:
-> > weston-init RDEPENDS on weston and kbd.
-> >=20
-> > $ bitbake-diffsigs 1.0-r0.do_package_write_ipk.sigdata.eb3921bfc9623056=
-f7ffaef4be8549ab 1.0-r0.do_package_write_ipk.sigdata.90c2978497847912cd64f6=
-6039927f7d=20
-> > Hash for dependent task waylandweston_1.6.0.bb.do_packagedata changed f=
-rom 551b3b5ac7b3c41bfced58b88db2d824 to f3eb9cd1861c186382e47f90e82e3295
-> > Hash for dependent task kbdkbd_2.0.1.bb.do_packagedata changed from 53a=
-5dc88b80dc5ab559fbecd14277650 to 950fbc7fe3c33564e781743f2c260670
-> >=20
-> > Then, comparing signatures for weston, for exaple, gives all the change=
-s=20
-> > caused by different DEFAULTTUNEs, TUNE_FEATURES and ARMPKGARCH - obviou=
-sly,=20
-> > since one machine is cortexa8, while another is cortexa9.
-> >=20
-> > But why would an allarch package even care about machine tunes in depen=
-dant=20
-> > packages, when it only RDEPENDS on them?
->=20
-> If A DEPENDS on B and B changes, the package name may change (thanks to
-> debian.bbclass) so A has to repackage. Very very annoying but
-> technically correct :/.
->=20
-> > And how should I fix this? Thanks.
->=20
-> See SIGGEN_EXCLUDERECIPES_ABISAFE in layer.conf of OE-Core. You probably
-> need to add weston-init to the list.
+On Mon, 2015-05-11 at 08:22 +0200, Martin Jansa wrote:
+> On Fri, May 08, 2015 at 03:28:52PM -0400, Denys Dmytriyenko wrote:
+> > On Wed, May 06, 2015 at 07:31:37PM -0400, Denys Dmytriyenko wrote:
+> > > On Wed, May 06, 2015 at 09:12:43PM +0200, Steffen Sledz wrote:
+> > > > Am 02.05.2015 um 23:55 schrieb Andrea Adami:
+> > > > > On Fri, May 1, 2015 at 6:06 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> > > > >> Has anyone ever seen this message during <image>.do_rootfs task?
+> > > > >>
+> > > > >> Collected errors:
+> > > > >>  * opkg_install_pkg: Package <package> md5sum mismatch. Either the opkg or the package index are corrupt. Try 'opkg update'.
+> > > > >>  * opkg_install_cmd: Cannot install package <package>.
+> > > > >>
+> > > > >> We started seeing it on random packages inside the <image> few weeks ago on
+> > > > >> different machines. At the time we had switched to bitbake 1.26. But even
+> > > > >> trying different bitbake versions still occasionally caused the same error, so
+> > > > >> the culprit is still unknwon. Using oe-core/daisy for now.
+> > > > >>
+> > > > >> Any comments or suggestions to where start looking would be appreciated!
+> > > > > 
+> > > > > yes, I have seen this during multimachine builds.
+> > > > > My TMPDIR is on tmpfs in ram so everytime I reboot it is re-populated
+> > > > > from sstate.
+> > > > > ...
+> > > > 
+> > > > We have the same problem here. Also with packages from the "all" feed in a 
+> > > > multimachine build environment. But it does not seem related to 
+> > > > packagegroups.
+> > > > 
+> > > > I've a hypothesis but was not able to validate or falsify it till now: Given 
+> > > > a recipe which does only use file:// type SRC_URI. If i change something in 
+> > > > these sources and do not update PR the prserv/hashing mechanism detects the 
+> > > > changes a builds a new package. But this package has the same version info 
+> > > > as the one before. So for opkg there's no need to update it's "package 
+> > > > database".
+> > > 
+> > > After fixing few of our own goofs in packagegroups, I still saw this issue 
+> > > with some real packages like weston-init. It went away after it got rebuilt 
+> > > due to the dependencies, but I'll keep an eye on it and report if it comes 
+> > > back...
+> > 
+> > Ok, so on the second day it failed again on weston-init and couple of our own 
+> > packages. They are all marked as allarch, but it seems they get re-packaged 
+> > for some reason for different machines in multi-machine build - the timestamp 
+> > of the ipk package changed, while nothing else in the recipe or its data has 
+> > changed. There's nothing obvious in weston-init I can see that would trigger 
+> > it. And in the logs I see that do_package_write_ipk_setscene being triggered - 
+> > I'm trying to figure out why... Any pointers?
+> 
+> There are many recipes with incorrect PACKAGE_ARCH, see latest report
+> from world build:
+> http://lists.openembedded.org/pipermail/openembedded-core/2015-January/100734.html
+> 
+> weston-init is one of recipes where I've sent change to drop allarch
+> long time ago:
+> http://patchwork.openembedded.org/patch/74133/
 
-IIRC this won't help, he would need to add weston and kbd to
-SIGGEN_EXCLUDERECIPES_ABISAFE which will exclude it from signature of
-all other recipes as well.
+One thing we didn't discuss in that thread but which might help would be
+whitelisting update-rc.d as a dependency? If that is the cause of many
+of the problems, that would help. In this case it does look like the
+weston RDEPENDS is the problem and  and the ABISAFE variable is the
+better way to fix it though.
 
-Maybe you meant SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+Cheers,
 
-SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS +=3D "\
-  weston-init->weston \
-  weston-init->kbd \
-"
+Richard
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
 
