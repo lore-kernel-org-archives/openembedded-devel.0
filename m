@@ -1,39 +1,24 @@
-Return-Path: <haris.okanovic@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id A70D860043
+Return-Path: <Dmitry_Eremin@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D65773F60
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 19:24:47 +0000 (UTC)
-Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
-	[130.164.19.135])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
-	t4BJOk7b024768 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 May 2015 14:24:48 -0500
-Received: from us-aus-mail3.amer.corp.natinst.com ([130.164.14.198])
-	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6)
-	with ESMTP id 2015051114160700-1260689 ;
-	Mon, 11 May 2015 14:16:07 -0500 
-In-Reply-To: <CAMKF1sr+DV-sA23dwzhAocJiACp=1+WNk8VWh3eGreDQ1Xh25A@mail.gmail.com>
-References: <1431112486-23487-1-git-send-email-haris.okanovic@ni.com>
-	<CAMKF1sr+DV-sA23dwzhAocJiACp=1+WNk8VWh3eGreDQ1Xh25A@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+	Mon, 11 May 2015 19:35:49 +0000 (UTC)
+Received: from nat-ies.mentorg.com ([192.94.31.2]
+	helo=SVR-IES-FEM-01.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1YrtUU-0001T5-O6 from Dmitry_Eremin@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 May 2015 12:35:50 -0700
+Received: from fangorn.rup.mentorg.com (137.202.0.76) by
+	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
+	Server (TLS) id 14.3.224.2; Mon, 11 May 2015 20:35:49 +0100
+From: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 May 2015 22:35:45 +0300
+Message-ID: <1431372946-26514-1-git-send-email-dmitry_eremin@mentor.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-X-KeepSent: A1E75F3A:8D299EDB-86257E42:0069B047;
-	type=4; flags=0; name=$KeepSent
-X-Mailer: Lotus Notes Release 8.5.3FP3 November 16, 2012
-From: Haris Okanovic <haris.okanovic@ni.com>
-Message-ID: <OFA1E75F3A.8D299EDB-ON86257E42.0069B047-86257E42.0069D8F9@ni.com>
-Date: Mon, 11 May 2015 14:16:06 -0500
-X-MIMETrack: Serialize by Router on US-AUS-MAIL3/AUS/M/NIC(Release
-	8.5.3FP6|November 21, 2013) at 05/11/2015 02:16:07 PM,
-	Serialize complete at 05/11/2015 02:16:07 PM,
-	Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 05/11/2015 02:16:07 PM,
-	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release
-	8.5.3FP6|November 21, 2013) at 05/11/2015 02:24:48 PM,
-	Serialize complete at 05/11/2015 02:24:48 PM
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2015-05-11_04:, , signatures=0
-Subject: Re: [PATCH] dpkg start-stop-daemon: Fix RCONFLICTS typo
+Subject: [meta-oe][PATCH 1/2] openobex: make it compatbile with bluez5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,30 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 May 2015 19:24:50 -0000
-Content-Type: text/plain; charset="US-ASCII"
+X-List-Received-Date: Mon, 11 May 2015 19:35:53 -0000
+Content-Type: text/plain
 
-> It is blacklisted so how did you test it.
+The package per se is compatible with bluez5. Update dependencies to select bluez4 or bluez5 and drop
+PNBLACKLIST setting.
 
-I tested Dizzy, which doesn't include Martin Jansa's blacklist change 
-(a76a8cb6),
-and verified `Conflicts: dpkg` got added to the ipk control file for 
-qemux86.
+Signed-off-by: Dmitry Eremin-Solenikov <dmitry_eremin@mentor.com>
+---
+ meta-oe/recipes-connectivity/obex/openobex_1.5.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-
-> [If] it's working fine then may be
-> you should white list it too
-
-I don't fully understand the problem Martin worked around, so I'm hesitant 
-about
-undoing his change right now. I'll have to take a closer look at this at 
-some point,
-if no one else does, because NI will eventually upgrade from Dizzy and we 
-would
-like to keep using dpkg start-stop-daemon.
-
-
-Regards,
-Haris
+diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
+index ed3d6b2..0d378e7 100644
+--- a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
++++ b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
+@@ -2,14 +2,13 @@ DESCRIPTION = "The Openobex project is an open source implementation of the \
+ Object Exchange (OBEX) protocol."
+ HOMEPAGE = "http://openobex.triq.net"
+ SECTION = "libs"
+-DEPENDS = "virtual/libusb0 bluez4"
++DEPENDS = "virtual/libusb0"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
+ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
+                     file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
+ "
+ 
+-PNBLACKLIST[openobex] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+-
+ SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/openobex-${PV}.tar.gz \
+            file://disable-cable-test.patch \
+            file://libusb_crosscompile_check.patch \
+-- 
+2.1.4
 
 
