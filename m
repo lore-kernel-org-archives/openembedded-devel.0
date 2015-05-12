@@ -1,40 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 35F7974030
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 8542173FF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 21:18:17 +0000 (UTC)
-Received: by wicnf17 with SMTP id nf17so32086373wic.1
+	Tue, 12 May 2015 21:44:52 +0000 (UTC)
+Received: by iepk2 with SMTP id k2so13412195iep.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 14:18:18 -0700 (PDT)
+	Tue, 12 May 2015 14:44:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=ig0OCsTKwqkpzeT01/giJw7N5CYdSj1nZ0MxmzWlvMI=;
-	b=BYuAZY28X/behGYkqkgmXYGSU6Im+Nyy/Yh3YbZPwPJLVKJZMCTlrzA35PmIi3ZTtW
-	CYvTviDYA7wmh1dYXvL2/mlgug/cMgpsrgU3YBa0gpg5QfGlpsPh7+aXurOU1wbcFdDm
-	oBZCdAL5dBBQqTUpGc6dDJekELSXt0fm05NNoaiu3QXPXRjXZ/miPrFeKvq5ZpqYtl2q
-	CP54/otWjeiVBIeP6hbL6pZVARLpwCzhvB0ElNnZXUtfXre4eJqwnYFaLsrk+QGG4WYO
-	CwiLTs2lwrtN2MEKHJ+u122mO9c5bnL0+T1fCMLoEwpaFHl5KsxhjXs6rGFMEoivRe1U
-	1bpA==
-X-Received: by 10.194.205.37 with SMTP id ld5mr34516110wjc.14.1431465498663;
-	Tue, 12 May 2015 14:18:18 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	l20sm29566315wjw.42.2015.05.12.14.18.17
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 May 2015 14:18:17 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 12 May 2015 23:18:22 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150512211822.GE2714@jama>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=Q7wUhZe4Coc+3toAovqLNjSfq5riKpj72RtDvJRUEns=;
+	b=xx+k+FD3PO+U6Voajz9ovYi8z0YHqqr1wgKfolidY1+ycOYY+NiIOojlD/kdzgiNm/
+	jsCVayjhAc5mo8MwwvtCeUXR5cgnIj96b8FrnjRlnmivZccmIFhiYBGB+rPhC1+1oZlk
+	4OzZG8M9KFsu2d0PUzaV/Q59xH9HWSh4RaNrc866w4xo2WCYMBBw1ZosW1LKzBi6But9
+	pgaADfYe6JLX1bwYwvkQRbAytTIalA6cLucDmdJvLKR/5gFQgi26N190iQj6gLUo3sfI
+	5yIVCyJZsRQSGXfFQRpzeDhOZSgxyoiOSFbBCwzdsGGfB2WENcoOVCFS/NaYzI3/HV38
+	QScg==
+X-Received: by 10.50.23.105 with SMTP id l9mr24334288igf.13.1431467093994;
+	Tue, 12 May 2015 14:44:53 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.50.112.34 with HTTP; Tue, 12 May 2015 14:44:23 -0700 (PDT)
+In-Reply-To: <20150512211822.GE2714@jama>
 References: <1430194195-1325-1-git-send-email-raj.khem@gmail.com>
 	<1430194195-1325-3-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1430194195-1325-3-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+	<20150512211822.GE2714@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 12 May 2015 14:44:23 -0700
+Message-ID: <CAMKF1sqkaDNwVLe1TjZp1vs2jer7hZRjy3Bx+GKSgYcC2yCKLw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-browser][PATCH 3/3] chromium, cef: Package codecs separately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -49,28 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 21:18:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 May 2015 21:44:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, Apr 28, 2015 at 04:09:55AM +0000, Khem Raj wrote:
-> chromium does not use versioned shared objects so deal with it
-> Remove the band-aid to pretend to have versioning shared objects
-> put the ffmpeg plugins in directory of its own in /usr/lib to
-> avoid namespace conflict with same .so coming from other codec packages
+On Tue, May 12, 2015 at 2:18 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> There is still some overlap between chromium and cef recipes:
+>
+> ERROR: The recipe cef3 is trying to install files into a shared area
+> when those files already exist. Those files and their manifest location
+> are:
+>    /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/lib/chrome/libpdf.so
+>  Matched in manifest-qemux86-chromium.populate_sysroot
+>  /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/lib/chrome/libffmpegsumo.so
+>  Matched in manifest-qemux86-chromium.populate_sysroot
+> Please verify which recipe should provide the above files.
+>
+> Can we please disable staging these 2 libraries in one of them?
 
-There is still some overlap between chromium and cef recipes:
-
-ERROR: The recipe cef3 is trying to install files into a shared area
-when those files already exist. Those files and their manifest location
-are:
-   /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/lib/chrome/libpdf.so
- Matched in manifest-qemux86-chromium.populate_sysroot
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/lib/chrome/libffmpegsumo.so
- Matched in manifest-qemux86-chromium.populate_sysroot
-Please verify which recipe should provide the above files.
-
-Can we please disable staging these 2 libraries in one of them?
-
-Regards,
+actually cef should put it under /usr/lib/cef/ then they can live happily
 
