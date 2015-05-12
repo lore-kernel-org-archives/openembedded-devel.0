@@ -1,42 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id DD7E473FC8
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id C155A73FDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 16:09:13 +0000 (UTC)
-Received: by pacyx8 with SMTP id yx8so17543464pac.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 09:09:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:content-type:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=Ziea2AvISv1agjQQtcMbNui6/+faCmaoxMCD7IIpcYQ=;
-	b=S2eNEns5gMc059UaktT5yPDYZ3mFyGa1m9I8ZlC24s3H3QUtfx0htyEW/8TCuVro5E
-	eRUtpl7FJqhUN3cQM1uG38N9XkfX0zpYVPbuBnFR030cfC/L817ajvpI89chXmWhNKXs
-	k82p7EcKGR2uxQUZZ5aWZg0OoD9tzcu+2V/RVsLOS+HR7euf9FD2iruWcrkGJFOFeQeS
-	nrGryRLbF3/2vZCUkIjfqFdPpzcReKsk4C7JFop0MmMFlk7tA1U4Bbk/Y173lyqM4UH1
-	1jh5/5OoxqHU52m1RXob+qCeQtqwhnh9WQKjQGcp0JuitKcicvHgTGg37EmQUNa8l3NU
-	FYhg==
-X-Received: by 10.68.244.73 with SMTP id xe9mr29145863pbc.98.1431446955524;
-	Tue, 12 May 2015 09:09:15 -0700 (PDT)
-Received: from ?IPv6:2601:9:3580:84c:ccd0:4222:99ed:8bcf?
-	([2601:9:3580:84c:ccd0:4222:99ed:8bcf])
-	by mx.google.com with ESMTPSA id
-	id2sm16645903pbb.56.2015.05.12.09.09.14
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 12 May 2015 09:09:14 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
-X-Pgp-Agent: GPGMail 2.5b6
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <2318833.dUhIBv86bq@peggleto-mobl.ger.corp.intel.com>
-Date: Tue, 12 May 2015 09:09:13 -0700
-Message-Id: <1DD47E4E-8968-44C6-BEEF-0A1704D9225A@gmail.com>
+	Tue, 12 May 2015 16:15:47 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 12 May 2015 09:15:48 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,416,1427785200"; d="scan'208";a="709061220"
+Received: from dpassaue-mobl3.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.14.139])
+	by fmsmga001.fm.intel.com with ESMTP; 12 May 2015 09:15:47 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 12 May 2015 17:15:46 +0100
+Message-ID: <13256726.2GaiCtjn8S@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.7 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
+In-Reply-To: <1DD47E4E-8968-44C6-BEEF-0A1704D9225A@gmail.com>
 References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
-	<10765250.9tBgYfV1HJ@peggleto-mobl.ger.corp.intel.com>
-	<20150512144510.GC2714@jama>
 	<2318833.dUhIBv86bq@peggleto-mobl.ger.corp.intel.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Mailer: Apple Mail (2.2098)
+	<1DD47E4E-8968-44C6-BEEF-0A1704D9225A@gmail.com>
+MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 01/20] smstools: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -52,45 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 16:09:15 -0000
-X-Groupsio-MsgNum: 55470
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_598AD9A0-9611-4A6C-A21E-408723E4AD1A";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 12 May 2015 16:15:47 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
---Apple-Mail=_598AD9A0-9611-4A6C-A21E-408723E4AD1A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+On Tuesday 12 May 2015 09:09:13 Khem Raj wrote:
+> > On May 12, 2015, at 7:50 AM, Paul Eggleton <paul.eggleton@linux.intel.com>
+> > wrote:
+> > 
+> > Ouch - if so that's news to me, and seems very much sub-optimal. It may
+> > explain why patches keep on going missing from time to time. Khem/Tom, can
+> > we switch to a local solution?
+> 
+> we rely on google spam filter. Local solution would require higher
+> maintenance and spam you can never defeat on your own
 
+I'm not quite following - spam doesn't tend to be a problem on our mailing 
+lists since you have to be subscribed to post. In any case patchwork only 
+cares about messages that are patches or pull requests - anything else is 
+ignored.
 
-> On May 12, 2015, at 7:50 AM, Paul Eggleton =
-<paul.eggleton@linux.intel.com> wrote:
->=20
-> Ouch - if so that's news to me, and seems very much sub-optimal. It =
-may
-> explain why patches keep on going missing from time to time. Khem/Tom, =
-can we
-> switch to a local solution?
+Cheers,
+Paul
 
-we rely on google spam filter. Local solution would require higher =
-maintenance and spam
-you can never defeat on your own
+-- 
 
---Apple-Mail=_598AD9A0-9611-4A6C-A21E-408723E4AD1A
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
+Paul Eggleton
+Intel Open Source Technology Centre
 
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlVSJakACgkQuwUzVZGdMxQ3XQCdGVifFlFvl8HKHAE7YNwz6GQU
-0aUAoJNBEetZVKaE4FkdLn4Eg3AuLHRI
-=9uCw
------END PGP SIGNATURE-----
-
---Apple-Mail=_598AD9A0-9611-4A6C-A21E-408723E4AD1A--
