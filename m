@@ -1,31 +1,42 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id E213E73FDA
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
+	[209.85.212.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CDE66013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 12:56:24 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1Ys9jV-0000Kl-7H from Joe_MacDonald@mentor.com ;
-	Tue, 12 May 2015 05:56:25 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 12 May 2015 05:56:24 -0700
-Received: by burninator (Postfix, from userid 1000)	id DF457580439; Tue, 12
-	May 2015 08:56:29 -0400 (EDT)
-Date: Tue, 12 May 2015 08:56:29 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Rongqing Li <rongqing.li@windriver.com>
-Message-ID: <20150512125629.GA5914@mentor.com>
-References: <1429778709-4188-1-git-send-email-rongqing.li@windriver.com>
-	<5551BB03.1070204@windriver.com>
+	Tue, 12 May 2015 14:45:06 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so157364553wiz.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 May 2015 07:45:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=VYVavdy/iCVtAbuuGQJw3++bh1CzG/Wnx3fBhXjJ5pM=;
+	b=dF8jhDhF91HQYGv3KNr43IqKBxHpxqf4LBU/Tg+7rTwZXripL0O5e4LwJySQ/e1XgO
+	E16khNxxBbYpWQxesbmUjI7Qtuz3bSm7tchO8mU/YPJnsuT42E6Khyy7rQFOOTq3DDaL
+	wB3pEjWGN3zd1PeOaOEbk0LWrkh7Zkrsb6Rm47kFBmrsRGlvtpTGtnbvvXWzMfMLaFYn
+	PxHKQjzgO71Eo6MHNAiniFdvRyW/smuV/qoOlj4RdgDlVOpbcMg5umhSFfH51rYuLfjN
+	A9284fr9FTDK0pNwuYMFVrj7BZcORgzU0rcDgzwwBE8496RvVxBCnp1NjNvUqsHxnXtE
+	ZhPg==
+X-Received: by 10.194.87.38 with SMTP id u6mr31665902wjz.24.1431441907279;
+	Tue, 12 May 2015 07:45:07 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id be3sm3194521wib.21.2015.05.12.07.45.06
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 May 2015 07:45:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 12 May 2015 16:45:11 +0200
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20150512144510.GC2714@jama>
+References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
+	<20150511092704.GH2400@jama>
+	<10765250.9tBgYfV1HJ@peggleto-mobl.ger.corp.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <5551BB03.1070204@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
+In-Reply-To: <10765250.9tBgYfV1HJ@peggleto-mobl.ger.corp.intel.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] strongswan: upgrade to 5.3.0
+Subject: Re: [meta-oe][PATCH 01/20] smstools: fix PN -> BPN for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,87 +50,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 12:56:25 -0000
-X-Groupsio-MsgNum: 55467
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fdj2RfSjLxBAspz7"
-Content-Disposition: inline
-
---fdj2RfSjLxBAspz7
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Tue, 12 May 2015 14:45:09 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[Re: [oe] [PATCH][meta-networking] strongswan: upgrade to 5.3.0] On 15.05.1=
-2 (Tue 16:34) Rongqing Li wrote:
-
-> ping
-
-I'll get a look at these soon.  I don't know why, but some of your
-patches are not being picked up by patchwork.
-
--J.
-
+On Tue, May 12, 2015 at 01:43:19PM +0100, Paul Eggleton wrote:
+> On Monday 11 May 2015 11:27:04 Martin Jansa wrote:
+> > On Fri, May 08, 2015 at 03:42:16PM +0800, Yi Zhao wrote:
+> > > Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> >=20
+> > Changes 03, 18, 20 didn't make it to patchwork, because they were marked
+> > as Spam by gmail
 >=20
-> Thanks
->=20
-> -Roy
->=20
-> =E5=9C=A8 2015=E5=B9=B404=E6=9C=8823=E6=97=A5 16:45, rongqing.li@windrive=
-r.com =E5=86=99=E9=81=93:
-> >From: Roy Li <rongqing.li@windriver.com>
-> >
-> >Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> >---
-> >  .../strongswan/{strongswan_5.2.1.bb =3D> strongswan_5.3.0.bb}         =
-  | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >  rename meta-networking/recipes-support/strongswan/{strongswan_5.2.1.bb=
- =3D> strongswan_5.3.0.bb} (92%)
-> >
-> >diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.2.1=
-=2Ebb b/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-> >similarity index 92%
-> >rename from meta-networking/recipes-support/strongswan/strongswan_5.2.1.=
-bb
-> >rename to meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-> >index 6b91319..0b45ab6 100644
-> >--- a/meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
-> >+++ b/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-> >@@ -11,8 +11,8 @@ SRC_URI =3D "http://download.strongswan.org/strongswan=
--${PV}.tar.bz2 \
-> >          file://fix-funtion-parameter.patch \
-> >  "
-> >
-> >-SRC_URI[md5sum] =3D "dd3717c0aa59ab4591ca1812941ebb82"
-> >-SRC_URI[sha256sum] =3D "ea51ab33b5bb39fecaf10668833a9936583b42145948ae9=
-da1ab98f74e939215"
-> >+SRC_URI[md5sum] =3D "c52d4228231c2025d9c320d0e9990327"
-> >+SRC_URI[sha256sum] =3D "824da31a1ff89ac2500d56705e6f9ce06fe5260f9caaeb1=
-da35ea13a8691d284"
-> >
-> >  EXTRA_OECONF =3D "--enable-gmp \
-> >          --enable-openssl \
-> >
->=20
+> Hang on, I'm confused. Why should the patches being marked as spam in gma=
+il=20
+> have any bearing on whether they should show up in patchwork? Surely gmai=
+l=20
+> shouldn't be involved in the sending part, only subsequently when the mai=
+l is=20
+> sent from the mailing list to you (since you use gmail)?
+
+Isn't patchwork reading some gmail account over imap?
+
+The list of patches not appearing in patchwork is exactly matching with
+patches marked as spam in my inbox, so I believe that the same is
+happening in patchwork's gmail account.
+
+Regards,
+
 --=20
--Joe MacDonald.
-:wq
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---fdj2RfSjLxBAspz7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVUfh9AAoJEEn8ffcsOfaWP/MH/206SLmiWAZcuIxWz/7JVOhS
-/RNO/McXrkE9mZ9i15PzwBbpjJkNJTKwzBJgstsrmXULn0TF3fI7hnGZ41zV1B93
-B8DRlEA9z5MX9d5FVsOGC0uyVoDgY0+0F+4x8+hXxK4p81qyv7JFstwU53OS7/M0
-WgShmLe+yrguM0jDjqAVdrKg/qyl5S95Y5rNGwpRdG3Ah1vNXl132Y1XgHUSWg/A
-Z59JSxrA1LTSt9QqIJFLgh5TH9aOLum6GJ+mnrYL6IAH6Ri0JpbLxV1smP/iQfEh
-PEBbw5jDH84RR6J6+Q0AftgoPdvykTUrGORk5UV3FgVreZ9nhBcWMwmPPlQlm2w=
-=mtvc
------END PGP SIGNATURE-----
-
---fdj2RfSjLxBAspz7--
