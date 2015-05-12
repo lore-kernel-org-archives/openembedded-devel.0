@@ -1,28 +1,40 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id F164D73F5B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 5278273F4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 08:53:38 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga101.fm.intel.com with ESMTP; 12 May 2015 01:53:40 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,413,1427785200"; d="scan'208";a="569978638"
-Received: from dpassaue-mobl3.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.14.139])
-	by orsmga003.jf.intel.com with ESMTP; 12 May 2015 01:53:36 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 12 May 2015 09:53:34 +0100
-Message-ID: <1718915.ksCZF7gNNA@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.7 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
-In-Reply-To: <20150511195200.GM2400@jama>
-References: <1430795900-25986-1-git-send-email-akuster808@gmail.com>
-	<CAMKF1srdavBqMeeuu-FThmD27WsA-Xiirf8KGi24rCMA-J1vgw@mail.gmail.com>
-	<20150511195200.GM2400@jama>
+	Tue, 12 May 2015 10:37:15 +0000 (UTC)
+Received: by wgin8 with SMTP id n8so4217972wgi.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 May 2015 03:37:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=49gMkcjY/FJe0Tw62DN9150+BQs3nJmf/AC1aoUV2J8=;
+	b=xqFTld45tUZ2dN2rbFVJCheWKeY+n44gX28TXGMsKNtR/heinuKg5o5nTSrSgGwGnp
+	sjxNM4oZHrV5mz5mLPS5h26T2UtPmNOt2UdLCDmup/D7xw3ml/O2+1mm1r0HLK/0pgtK
+	Lj7c//8rE+ejLZjhQdraApVeuNw5od2HB+jMf1nRUGujZmLQA1odgg07DmuUSHXfkhH8
+	FKb2Or0vQJNVYFCMiCro1DMVN+SENr+/U//hGEh3RUMdd2/ia1bzTvCd8UljCUpdowTG
+	xUrafq7vHzouPrC1Yeimmku7yOfvtV0S/5KqE9cI1mDa1e+ID6+LOvsndhHY0Jax7rzM
+	7B9w==
+X-Received: by 10.181.13.44 with SMTP id ev12mr3926101wid.17.1431427036644;
+	Tue, 12 May 2015 03:37:16 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id
+	be6sm27074435wjb.14.2015.05.12.03.37.15
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 12 May 2015 03:37:15 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 12 May 2015 12:37:19 +0200
+To: Yi Zhao <yi.zhao@windriver.com>
+Message-ID: <20150512103719.GA2714@jama>
+References: <1431414672-1832-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
+In-Reply-To: <1431414672-1832-1-git-send-email-yi.zhao@windriver.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] networkingmanager: QA warning for rdepends on polkit
+Subject: Re: [meta-oe][PATCH 0/3] Resend 3 patches for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,88 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 08:53:42 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 12 May 2015 10:37:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Monday 11 May 2015 21:52:00 Martin Jansa wrote:
-> On Mon, May 11, 2015 at 12:43:41PM -0700, Khem Raj wrote:
-> > On Mon, May 11, 2015 at 12:00 PM, Martin Jansa <martin.jansa@gmail.com> 
-wrote:
-> > > RDEPENDS adds dependency only between do_package tasks for build time
-> > > dependency you need do_configure depending on do_populate_sysroot
-> > 
-> > its do_build which will depend on do_package_write task in case of
-> > RDEPENDS
-> > and do_package_write task will then recurse further to build it.
-> 
->         <section id='build-dependencies'>
->             <title>Build Dependencies</title>
-> 
->             <para>
->                 BitBake uses the
->                 <link
-> linkend='var-DEPENDS'><filename>DEPENDS</filename></link> variable to
-> manage build time dependencies.
->                 The "deptask" varflag for tasks signifies the task of each
->                 item listed in <filename>DEPENDS</filename> that must
->                 complete before that task can be executed.
->                 Here is an example:
->                 <literallayout class='monospaced'>
->      do_configure[deptask] = "do_populate_sysroot"
->                 </literallayout>
->                 In this example, the
-> <filename>do_populate_sysroot</filename> task of each item in
-> <filename>DEPENDS</filename> must complete before
-> <filename>do_configure</filename> can execute.
->             </para>
->         </section>
-> 
-> 
->         <section id='runtime-dependencies'>
->             <title>Runtime Dependencies</title>
-> 
->             <para>
->                 BitBake uses the
->                 <link
-> linkend='var-PACKAGES'><filename>PACKAGES</filename></link>, <link
-> linkend='var-RDEPENDS'><filename>RDEPENDS</filename></link>, and <link
-> linkend='var-RRECOMMENDS'><filename>RRECOMMENDS</filename></link> variables
-> to manage runtime dependencies.
->             </para>
-> 
->             <para>
->                 The <filename>PACKAGES</filename> variable lists runtime
->                 packages.
->                 Each of those packages can have
-> <filename>RDEPENDS</filename> and <filename>RRECOMMENDS</filename> runtime
-> dependencies. The "rdeptask" flag for tasks is used to signify the task of
-> each item runtime dependency which must have completed before that task can
-> be executed.
->                 <literallayout class='monospaced'>
->      do_package_qa[rdeptask] = "do_packagedata"
->                 </literallayout>
->                 In the previous example, the
-> <filename>do_packagedata</filename> task of each item in
-> <filename>RDEPENDS</filename> must have completed before
-> <filename>do_package_qa</filename> can execute. </para>
->         </section>
-> 
-> 
-> so again, RDEPENDS isn't good enough for build time dependencies
+On Tue, May 12, 2015 at 03:11:09PM +0800, Yi Zhao wrote:
+>    Resend these 3 patches which marked as spam in previous email.
 
-This is correct. Even an explicit RDEPENDS within the recipe does not add any 
-dependency from do_configure on do_populate_sysroot, so if there is a build 
-time dependency you definitely need DEPENDS as well.
+It still didn't make it to patchwork :/
 
-I do agree though that the warning message needs improvement in order to be as 
-clear as possible.
+>=20
+> Yi Zhao (3):
+>   p7zip: fix PN -> BPN for multilib
+>   mpich: fix ${PN}-${PV} -> ${BP} for multilib
+>   sylpheed: remove do_install_append
+>=20
+>  meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb     |    2 +-
+>  meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb    |    2 +-
+>  meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb |   10 +---------
+>  3 files changed, 3 insertions(+), 11 deletions(-)
+>=20
+> --=20
+> 1.7.9.5
+>=20
 
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
