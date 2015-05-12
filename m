@@ -1,42 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id C364E73F5C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A37E73D16
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 22:28:05 +0000 (UTC)
-Received: by wggj6 with SMTP id j6so25227227wgg.3
+	Tue, 12 May 2015 22:55:32 +0000 (UTC)
+Received: by pdbqd1 with SMTP id qd1so29787444pdb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 15:28:06 -0700 (PDT)
+	Tue, 12 May 2015 15:55:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=UWHVt90OcMYm3aeHfdNyxMym4EGHRXoSi09TlmlZD0I=;
-	b=sHTb0zhqoskUs3Hvi8cbv2ivP4tql7xcLNyIlI8gzRZWj08sN+ZSNNSSB5NZ3CBFFn
-	9r5ZjfIQ76F4MK74DZ/6n6ggcZ9dfPbjoOWllfHlMmGPjsBFM+DypyJz8gxUnrAA6/1A
-	vJSZb1Ir1KO/RsM62jEOloOiSteb7qO1HP5q5gNrqq478gIL9s+MtF5ZWlSjV8tNZIw2
-	rutkA9UJ6ckzVnwd2yl8bJ6glHxsEaBXq4iwVpDYC3uoByqLWC2ArnEG5rLQ2ijl04LV
-	t/XWQEN71eHM+34MW/QREnRUwohSxcgnOttMna6Cm3ssMoB1tEQLbrGQNQ/4SaKeeP7B
-	CBIw==
-X-Received: by 10.194.59.46 with SMTP id w14mr34488386wjq.106.1431469686281;
-	Tue, 12 May 2015 15:28:06 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id f8sm4921216wiy.7.2015.05.12.15.28.04
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=wWQ32p0ftQyLpqVeo8A9NE/tv4RBxxSpJO2+FG3U9DQ=;
+	b=n3/jnJ/1ifS5kmOECaEm3am5B2aDAtDdiiRra0ZQyVd/9GiLbzsDs+ofPkb/fgGQDi
+	JYgydtflzS3Dq63jcJ/4Xes5/9SznWNNvqLKeGS7Rj61luw0vvbdCl/7kj5wHp1MNqJs
+	27BOyJAMyu6QXURePPXmyXykDiJR6RgcIqOut+jdbJy8v7yy7ewlYyhFEOl6f4zW2zv8
+	D5Uyndq3kj8JgAtRLUxTx/AiXjVAgTn82fPXqHkCNRTf1IxZTzEARMREUIthshlnPB1f
+	feNXg9wKtPvZzcmHD4/Oc98qmG3iQ6ha4Q6PhA/kir8i7gnTlQ58VJifsWfIa6rZd8ks
+	yYhg==
+X-Received: by 10.70.46.161 with SMTP id w1mr32624870pdm.16.1431471333909;
+	Tue, 12 May 2015 15:55:33 -0700 (PDT)
+Received: from ?IPv6:2601:9:3580:84c:ccd0:4222:99ed:8bcf?
+	([2601:9:3580:84c:ccd0:4222:99ed:8bcf])
+	by mx.google.com with ESMTPSA id
+	nq2sm17264960pdb.70.2015.05.12.15.55.32
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 May 2015 15:28:05 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 13 May 2015 00:28:10 +0200
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Tue, 12 May 2015 15:55:33 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
+X-Pgp-Agent: GPGMail 2.5b6
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1431458743-25856-1-git-send-email-picmaster@mail.bg>
+Date: Tue, 12 May 2015 15:55:18 -0700
+Message-Id: <99E5B291-EE3A-42A8-8F69-C0A905CE0626@gmail.com>
+References: <1431458743-25856-1-git-send-email-picmaster@mail.bg>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150512222810.GF2714@jama>
-References: <1431070955-7100-1-git-send-email-yi.zhao@windriver.com>
-	<20150511092704.GH2400@jama>
-	<10765250.9tBgYfV1HJ@peggleto-mobl.ger.corp.intel.com>
-	<20150512144510.GC2714@jama> <55527C5A.4010900@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <55527C5A.4010900@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 01/20] smstools: fix PN -> BPN for multilib
+X-Mailer: Apple Mail (2.2098)
+Subject: Re: [meta-browser][PATCH] chromium: Use bitbake variable instead of shell variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,41 +49,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 22:28:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 May 2015 22:55:35 -0000
+X-Groupsio-MsgNum: 55483
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_3B7936EF-B196-4B16-AD74-EBB60A6E68E1";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_3B7936EF-B196-4B16-AD74-EBB60A6E68E1
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Tue, May 12, 2015 at 06:19:06PM -0400, Trevor Woerner wrote:
-> On 05/12/15 10:45, Martin Jansa wrote:
-> > On Tue, May 12, 2015 at 01:43:19PM +0100, Paul Eggleton wrote:
-> >> On Monday 11 May 2015 11:27:04 Martin Jansa wrote:
-> >>> On Fri, May 08, 2015 at 03:42:16PM +0800, Yi Zhao wrote:
-> >>>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> >>> Changes 03, 18, 20 didn't make it to patchwork, because they were mar=
-ked
-> >>> as Spam by gmail
-> >> Hang on, I'm confused. Why should the patches being marked as spam in =
-gmail=20
-> >> have any bearing on whether they should show up in patchwork? Surely g=
-mail=20
-> >> shouldn't be involved in the sending part, only subsequently when the =
-mail is=20
-> >> sent from the mailing list to you (since you use gmail)?
-> > Isn't patchwork reading some gmail account over imap?
-> >
-> > The list of patches not appearing in patchwork is exactly matching with
-> > patches marked as spam in my inbox, so I believe that the same is
-> > happening in patchwork's gmail account.
+
+> On May 12, 2015, at 12:25 PM, Nikolay Dimitrov <picmaster@mail.bg> =
+wrote:
 >=20
-> Does anyone know if it helps when I notice them in "Spam" and mark them
-> as "Not Spam"?
+> Change CHROMIUM_BUILD_TYPE to Bitbake variable, otherwise Chromium =
+files are
+> not installed in the holding area, and Chromium fails to start on the =
+target.
+>=20
+> Signed-off-by: Nikolay Dimitrov <picmaster@mail.bg>
 
-It helps in my gmail account (some patches probably still marked as spam
-in patchwork weren't marked as spam in my gmail folder), but maybe it
-needs more time to propagate into other account or it needs more people
-to mark it as such.
+this is ok.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> ---
+> recipes-browser/chromium/chromium.inc |    2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/recipes-browser/chromium/chromium.inc =
+b/recipes-browser/chromium/chromium.inc
+> index a9e9b8a..72a649d 100644
+> --- a/recipes-browser/chromium/chromium.inc
+> +++ b/recipes-browser/chromium/chromium.inc
+> @@ -7,7 +7,7 @@ COMPATIBLE_MACHINE_x86-64 =3D "(.*)"
+> COMPATIBLE_MACHINE_armv6 =3D "(.*)"
+> COMPATIBLE_MACHINE_armv7a =3D "(.*)"
+>=20
+> -export CHROMIUM_BUILD_TYPE=3D"Release"
+> +CHROMIUM_BUILD_TYPE =3D "Release"
+>=20
+> inherit gettext
+>=20
+> --
+> 1.7.10.4
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+
+--Apple-Mail=_3B7936EF-B196-4B16-AD74-EBB60A6E68E1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlVShOQACgkQuwUzVZGdMxQu1ACfSyQ6y6s9WEisbW0c71q2o4ol
+gcwAnRqh2+bCj0snDs4ekGydaZGemAuI
+=lK52
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_3B7936EF-B196-4B16-AD74-EBB60A6E68E1--
