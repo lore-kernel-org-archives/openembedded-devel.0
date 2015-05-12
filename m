@@ -1,27 +1,39 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id E242F73F4E
+Return-Path: <mario.goulart@gmail.com>
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 98A3674030
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 20:59:48 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 12 May 2015 13:59:50 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,417,1427785200"; d="scan'208";a="728115618"
-Received: from ssandhu2-mobl1.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.6.22])
-	by orsmga002.jf.intel.com with ESMTP; 12 May 2015 13:59:49 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-Date: Tue, 12 May 2015 21:59:48 +0100
-Message-ID: <2776563.0u6SiCUegV@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.7 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
-In-Reply-To: <20150512125629.GA5914@mentor.com>
-References: <1429778709-4188-1-git-send-email-rongqing.li@windriver.com>
-	<5551BB03.1070204@windriver.com> <20150512125629.GA5914@mentor.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] strongswan: upgrade to 5.3.0
+	Tue, 12 May 2015 20:59:49 +0000 (UTC)
+Received: by qkx62 with SMTP id 62so15136889qkx.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 May 2015 13:59:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+	:organization; bh=S0dCmlt5l+immEe87DBPmPIHHuNG+BTKTjjFhoiWHn8=;
+	b=usXvfOKKH+azP3wIPrxP2mntonuhCVbrvy9NfBjcEbGtwWj0PVT3/lbseyuu7B/Ot+
+	YPnjpBjVUmxeYqG0EulJNmh8jmJ8ASgMoKMMCO6RrkUmB3fSPcFxBswX/39p8woZjVYp
+	Xo7jXPyYQyEtu6TTmsLUXTbqDEYdkJpSqbx6fk6V5ELhWZpx8gs38KG5pEqQz8BUhaN8
+	aNI4aUNLymYaDCLk34luhHBzZ/IH57g2zF2hzRMYCn74GgUXsc3Phyuq0AsYB2h7RCR6
+	GQekDyFOJINVsTDcWNJkH+DUUb1r3l9tPU4pDqwI29YCAztXDAOoTu3NuaNkcIBVtAAp
+	0IFA==
+X-Received: by 10.140.23.35 with SMTP id 32mr22535099qgo.106.1431464390798;
+	Tue, 12 May 2015 13:59:50 -0700 (PDT)
+Received: from centrium.lab.ossystems.com.br ([177.100.224.72])
+	by mx.google.com with ESMTPSA id
+	s91sm14195551qge.44.2015.05.12.13.59.49
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 12 May 2015 13:59:50 -0700 (PDT)
+Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
+From: Mario Domenech Goulart <mario@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 May 2015 18:01:08 -0300
+Message-Id: <1431464468-20750-3-git-send-email-mario@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1431464468-20750-1-git-send-email-mario@ossystems.com.br>
+References: <1431464468-20750-1-git-send-email-mario@ossystems.com.br>
+Organization: O.S. Systems Software LTDA.
+Cc: Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: [meta-java][PATCH 3/3] rxtx: drop dependency on fastjar-native; depend on virtual/javac-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,20 +48,27 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 12 May 2015 20:59:49 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
 
-On Tuesday 12 May 2015 08:56:29 Joe MacDonald wrote:
-> I don't know why, but some of your patches are not being picked up by
-> patchwork.
+fastjar-native must be provided by either virtual/javac-native itself
+or by a recipe virtual/javac-native depends on.
 
-FYI, this problem is being worked on as we speak.
+Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+---
+ recipes-extended/rxtx/rxtx_2.2.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Cheers,
-Paul
-
+diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
+index b9b3027..564df32 100644
+--- a/recipes-extended/rxtx/rxtx_2.2.0.bb
++++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Full Java CommAPI implementation"
+-DEPENDS = "fastjar-native"
++DEPENDS = "virtual/javac-native"
+ LICENSE = "RXTXv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=32303a23463f90b12a7d1dafb8deabf4"
+ PR = "r2"
 -- 
+2.1.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
