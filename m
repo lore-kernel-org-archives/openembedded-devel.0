@@ -1,37 +1,27 @@
-Return-Path: <mario.goulart@gmail.com>
-Received: from mail-qg0-f54.google.com (mail-qg0-f54.google.com
-	[209.85.192.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 549D973F4E
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id E242F73F4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 20:59:45 +0000 (UTC)
-Received: by qgeb100 with SMTP id b100so11346281qge.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 13:59:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=vYzpwz1lPy8vxyvzRcuHJPvudvHWz9DJUlhW4vsQFCQ=;
-	b=xV42hLgsbMrYv7kkrlzDn5cBwg5z4PYiKzC4fZHxnLqdgWGTrY+y/qjoNq8Vk/Lt5W
-	FzsbyXj+4cg3ud1wx4Bs/2zPzUeU6Oc1rnf2fXHbj67FWSXrg7Q+eaRo6EuRzHlUDDDJ
-	yQnBLGPtAq7i0z7DxxNwlpLUprdUBBQY5U8Wlgn90NDEy7eH6ZhIsW4R1Xghx7ZGGYQV
-	W9RQ/PgkT8caX6kn+uJEkFMIbsKRM0QaWP8hxPZdGMgOKSIODXZry43u656m+jM8VWIl
-	6BiouS81uxETQy4n8a48khWgFN8JWmJtMVhvlYP7YConIjvDV/A5/3TQreW9RVY/PoOk
-	Irfw==
-X-Received: by 10.140.201.4 with SMTP id w4mr23657416qha.11.1431464387156;
-	Tue, 12 May 2015 13:59:47 -0700 (PDT)
-Received: from centrium.lab.ossystems.com.br ([177.100.224.72])
-	by mx.google.com with ESMTPSA id
-	s91sm14195551qge.44.2015.05.12.13.59.45
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 12 May 2015 13:59:46 -0700 (PDT)
-Sender: Mario Domenech Goulart <mario.goulart@gmail.com>
-From: Mario Domenech Goulart <mario@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 May 2015 18:01:06 -0300
-Message-Id: <1431464468-20750-1-git-send-email-mario@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Organization: O.S. Systems Software LTDA.
-Cc: Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: [meta-java][PATCH 1/3] Don't depend on a hardcoded compiler
+	Tue, 12 May 2015 20:59:48 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 12 May 2015 13:59:50 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,417,1427785200"; d="scan'208";a="728115618"
+Received: from ssandhu2-mobl1.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.6.22])
+	by orsmga002.jf.intel.com with ESMTP; 12 May 2015 13:59:49 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Date: Tue, 12 May 2015 21:59:48 +0100
+Message-ID: <2776563.0u6SiCUegV@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.7 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
+In-Reply-To: <20150512125629.GA5914@mentor.com>
+References: <1429778709-4188-1-git-send-email-rongqing.li@windriver.com>
+	<5551BB03.1070204@windriver.com> <20150512125629.GA5914@mentor.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][meta-networking] strongswan: upgrade to 5.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,63 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 20:59:48 -0000
+X-List-Received-Date: Tue, 12 May 2015 20:59:49 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The recipes below depended on a hardcoded native compile
-(ecj-initial-native).  Since we may use another native compiler to
-build them, we set the dependency in virtual/javac-native instead.
+On Tuesday 12 May 2015 08:56:29 Joe MacDonald wrote:
+> I don't know why, but some of your patches are not being picked up by
+> patchwork.
 
-* cacao
-* classpath-native
-* jamvm
+FYI, this problem is being worked on as we speak.
 
-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
----
- recipes-core/cacao/cacao_1.6.1.bb               | 2 +-
- recipes-core/classpath/classpath-native_0.99.bb | 2 +-
- recipes-core/jamvm/jamvm.inc                    | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+Cheers,
+Paul
 
-diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
-index 65aaf93..14ff019 100644
---- a/recipes-core/cacao/cacao_1.6.1.bb
-+++ b/recipes-core/cacao/cacao_1.6.1.bb
-@@ -4,7 +4,7 @@ LICENSE  = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- SECTION  = "interpreters"
- 
--DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
-+DEPENDS_class-native = "zlib-native libtool-native virtual/javac-native fastjar-native classpath-native bdwgc-native"
- PROVIDES_class-native = "virtual/java-native"
- 
- DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
-diff --git a/recipes-core/classpath/classpath-native_0.99.bb b/recipes-core/classpath/classpath-native_0.99.bb
-index 02951b9..cf297d9 100644
---- a/recipes-core/classpath/classpath-native_0.99.bb
-+++ b/recipes-core/classpath/classpath-native_0.99.bb
-@@ -1,7 +1,7 @@
- require classpath-native.inc
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
--DEPENDS += "ecj-initial-native"
-+DEPENDS += "virtual/javac-native"
- 
- PR = "${INC_PR}.0"
- 
-diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
-index 5893cbc..bed1c5d 100644
---- a/recipes-core/jamvm/jamvm.inc
-+++ b/recipes-core/jamvm/jamvm.inc
-@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
- DEPENDS = "zlib classpath virtual/javac-native libffi"
--DEPENDS_virtclass-native = "zlib-native classpath-native ecj-initial-native libffi-native"
-+DEPENDS_virtclass-native = "zlib-native classpath-native virtual/javac-native libffi-native"
- 
- RDEPENDS_${PN} = "classpath"
- RDEPENDS_${PN}_virtclass-native = ""
 -- 
-2.1.4
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
