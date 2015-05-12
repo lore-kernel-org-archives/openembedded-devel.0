@@ -1,26 +1,26 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7702773FE4
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6284773FE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 07:11:21 +0000 (UTC)
+	Tue, 12 May 2015 07:11:24 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t4C7BL4L020340
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t4C7BO2Y020061
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 12 May 2015 00:11:21 -0700 (PDT)
+	Tue, 12 May 2015 00:11:24 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Tue, 12 May 2015 00:11:20 -0700
+	Tue, 12 May 2015 00:11:24 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 12 May 2015 15:11:11 +0800
-Message-ID: <1431414672-1832-3-git-send-email-yi.zhao@windriver.com>
+Date: Tue, 12 May 2015 15:11:12 +0800
+Message-ID: <1431414672-1832-4-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <1431414672-1832-1-git-send-email-yi.zhao@windriver.com>
 References: <1431414672-1832-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 2/3] mpich: fix ${PN}-${PV} -> ${BP} for multilib
+Subject: [meta-oe][PATCH 3/3] sylpheed: remove do_install_append
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,27 +34,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 07:11:23 -0000
+X-List-Received-Date: Tue, 12 May 2015 07:11:24 -0000
 Content-Type: text/plain
+
+The .desktop and .png files alreay install by make install.
+So remove the do_install_append
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb |   10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-index 0225cee..19167b4 100644
---- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-+++ b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-@@ -13,7 +13,7 @@ SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
- SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
+diff --git a/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb b/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
+index 1b010a5..304b654 100644
+--- a/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
++++ b/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
+@@ -7,8 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
  
- RDEPENDS_${PN} += "bash perl libxml2"
--S = "${WORKDIR}/${PN}-${PV}"
-+S = "${WORKDIR}/${BP}"
+ PR = "r2"
  
- EXTRA_OECONF = "--enable-debuginfo \
-                 --enable-fast \
+-PNBLACKLIST[sylpheed] ?= "BROKEN: Doesn't work with B!=S"
+-
+ SRC_URI = "http://sylpheed.sraoss.jp/sylpheed/v2.7/sylpheed-${PV}.tar.bz2 \
+     file://glib-2.32.patch \
+ "
+@@ -18,7 +16,7 @@ SRC_URI[sha256sum] = "8bb6457db4e2eea1877b487d9ac8513546372db9a6a2e4271d11229f4a
+ FILES_${PN} += "${datadir}/pixmaps ${datadir}/applications"
+ FILES_${PN}-doc += "${datadir}"
+ 
+-EXTRA_OECONF = "--disable-ssl --enable-gnutls"
++EXTRA_OECONF = "--disable-ssl"
+ 
+ CFLAGS += "-D_GNU_SOURCE"
+ 
+@@ -31,9 +29,3 @@ do_configure_prepend() {
+ 
+ inherit autotools pkgconfig
+ 
+-do_install_append() {
+-    install -d ${D}${datadir}/applications
+-    install -m 0644 sylpheed.desktop ${D}${datadir}/applications/
+-    install -d ${D}${datadir}/pixmaps
+-    install -m 0644 sylpheed.png ${D}${datadir}/pixmaps/
+-}
 -- 
 1.7.9.5
 
