@@ -1,26 +1,28 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BE7137402E
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id F164D73F5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 08:34:12 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t4C8YDtC005119
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 12 May 2015 01:34:13 -0700 (PDT)
-Received: from [128.224.162.136] (128.224.162.136) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Tue, 12 May 2015 01:34:13 -0700
-Message-ID: <5551BB03.1070204@windriver.com>
-Date: Tue, 12 May 2015 16:34:11 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	Tue, 12 May 2015 08:53:38 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga101.fm.intel.com with ESMTP; 12 May 2015 01:53:40 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,413,1427785200"; d="scan'208";a="569978638"
+Received: from dpassaue-mobl3.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.14.139])
+	by orsmga003.jf.intel.com with ESMTP; 12 May 2015 01:53:36 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 12 May 2015 09:53:34 +0100
+Message-ID: <1718915.ksCZF7gNNA@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.7 (Linux/3.19.5-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
+In-Reply-To: <20150511195200.GM2400@jama>
+References: <1430795900-25986-1-git-send-email-akuster808@gmail.com>
+	<CAMKF1srdavBqMeeuu-FThmD27WsA-Xiirf8KGi24rCMA-J1vgw@mail.gmail.com>
+	<20150511195200.GM2400@jama>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
-References: <1429778709-4188-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1429778709-4188-1-git-send-email-rongqing.li@windriver.com>
-Subject: Re: [PATCH][meta-networking] strongswan: upgrade to 5.3.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] networkingmanager: QA warning for rdepends on polkit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,46 +36,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 08:34:12 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 12 May 2015 08:53:42 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-ping
+On Monday 11 May 2015 21:52:00 Martin Jansa wrote:
+> On Mon, May 11, 2015 at 12:43:41PM -0700, Khem Raj wrote:
+> > On Mon, May 11, 2015 at 12:00 PM, Martin Jansa <martin.jansa@gmail.com> 
+wrote:
+> > > RDEPENDS adds dependency only between do_package tasks for build time
+> > > dependency you need do_configure depending on do_populate_sysroot
+> > 
+> > its do_build which will depend on do_package_write task in case of
+> > RDEPENDS
+> > and do_package_write task will then recurse further to build it.
+> 
+>         <section id='build-dependencies'>
+>             <title>Build Dependencies</title>
+> 
+>             <para>
+>                 BitBake uses the
+>                 <link
+> linkend='var-DEPENDS'><filename>DEPENDS</filename></link> variable to
+> manage build time dependencies.
+>                 The "deptask" varflag for tasks signifies the task of each
+>                 item listed in <filename>DEPENDS</filename> that must
+>                 complete before that task can be executed.
+>                 Here is an example:
+>                 <literallayout class='monospaced'>
+>      do_configure[deptask] = "do_populate_sysroot"
+>                 </literallayout>
+>                 In this example, the
+> <filename>do_populate_sysroot</filename> task of each item in
+> <filename>DEPENDS</filename> must complete before
+> <filename>do_configure</filename> can execute.
+>             </para>
+>         </section>
+> 
+> 
+>         <section id='runtime-dependencies'>
+>             <title>Runtime Dependencies</title>
+> 
+>             <para>
+>                 BitBake uses the
+>                 <link
+> linkend='var-PACKAGES'><filename>PACKAGES</filename></link>, <link
+> linkend='var-RDEPENDS'><filename>RDEPENDS</filename></link>, and <link
+> linkend='var-RRECOMMENDS'><filename>RRECOMMENDS</filename></link> variables
+> to manage runtime dependencies.
+>             </para>
+> 
+>             <para>
+>                 The <filename>PACKAGES</filename> variable lists runtime
+>                 packages.
+>                 Each of those packages can have
+> <filename>RDEPENDS</filename> and <filename>RRECOMMENDS</filename> runtime
+> dependencies. The "rdeptask" flag for tasks is used to signify the task of
+> each item runtime dependency which must have completed before that task can
+> be executed.
+>                 <literallayout class='monospaced'>
+>      do_package_qa[rdeptask] = "do_packagedata"
+>                 </literallayout>
+>                 In the previous example, the
+> <filename>do_packagedata</filename> task of each item in
+> <filename>RDEPENDS</filename> must have completed before
+> <filename>do_package_qa</filename> can execute. </para>
+>         </section>
+> 
+> 
+> so again, RDEPENDS isn't good enough for build time dependencies
 
-Thanks
+This is correct. Even an explicit RDEPENDS within the recipe does not add any 
+dependency from do_configure on do_populate_sysroot, so if there is a build 
+time dependency you definitely need DEPENDS as well.
 
--Roy
+I do agree though that the warning message needs improvement in order to be as 
+clear as possible.
 
-在 2015年04月23日 16:45, rongqing.li@windriver.com 写道:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->   .../strongswan/{strongswan_5.2.1.bb => strongswan_5.3.0.bb}           | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-networking/recipes-support/strongswan/{strongswan_5.2.1.bb => strongswan_5.3.0.bb} (92%)
->
-> diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-> similarity index 92%
-> rename from meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
-> rename to meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-> index 6b91319..0b45ab6 100644
-> --- a/meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb
-> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.3.0.bb
-> @@ -11,8 +11,8 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
->           file://fix-funtion-parameter.patch \
->   "
->
-> -SRC_URI[md5sum] = "dd3717c0aa59ab4591ca1812941ebb82"
-> -SRC_URI[sha256sum] = "ea51ab33b5bb39fecaf10668833a9936583b42145948ae9da1ab98f74e939215"
-> +SRC_URI[md5sum] = "c52d4228231c2025d9c320d0e9990327"
-> +SRC_URI[sha256sum] = "824da31a1ff89ac2500d56705e6f9ce06fe5260f9caaeb1da35ea13a8691d284"
->
->   EXTRA_OECONF = "--enable-gmp \
->           --enable-openssl \
->
+Cheers,
+Paul
 
 -- 
-Best Reagrds,
-Roy | RongQing Li
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
