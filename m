@@ -1,36 +1,32 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id EA74373FC8
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 497527402B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 23:03:22 +0000 (UTC)
-Received: by pabtp1 with SMTP id tp1so29306132pab.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 16:03:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=3NMCFYbPs7KQFPece92/6WARrKxcq64RybIpC0VCAPM=;
-	b=VERuEaHqNUV5h7wyRBZSQg3kDSq3gNtjaVhja9V94HRvrKKHx6lCgkOKM+LunG2yY6
-	FWaXGu2pKHfzuJmd6+k6xBEU/O0DoJljxjVPj9y/lJdU2qAPQY1dDRypKWyI/VggMlAp
-	x8cDKgjR8uzVVhroYPAc3Dbg/LfLtUbOCRJOpq8gFERxkiI/0RtSgoSMl7feTlHFVQel
-	5oFmYb6JtPJo1QpF7OgHDMYqLbE1QLjUySnMma1Y6dI51g9pHzAuH18CsPq6UndClAPl
-	+3gxc2Ysc9F2DkQpngsfMXGly+pXUzMZHOMoxgpd1/XyzpKX9tn5u3UqUk9NB148X+xo
-	crUQ==
+	Wed, 13 May 2015 00:34:52 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1YsKdQ-00006e-TY from Joe_MacDonald@mentor.com ;
+	Tue, 12 May 2015 17:34:52 -0700
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 12 May 2015 17:34:48 -0700
+Received: by burninator (Postfix, from userid 1000)	id 8A3445805A0; Tue, 12
+	May 2015 20:34:53 -0400 (EDT)
+Date: Tue, 12 May 2015 20:34:53 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20150513003453.GB5914@mentor.com>
+References: <1429778709-4188-1-git-send-email-rongqing.li@windriver.com>
+	<5551BB03.1070204@windriver.com> <20150512125629.GA5914@mentor.com>
+	<2776563.0u6SiCUegV@peggleto-mobl.ger.corp.intel.com>
 MIME-Version: 1.0
-X-Received: by 10.70.100.168 with SMTP id ez8mr31962043pdb.129.1431471804117; 
-	Tue, 12 May 2015 16:03:24 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.70.34.109 with HTTP; Tue, 12 May 2015 16:03:24 -0700 (PDT)
-In-Reply-To: <99E5B291-EE3A-42A8-8F69-C0A905CE0626@gmail.com>
-References: <1431458743-25856-1-git-send-email-picmaster@mail.bg>
-	<99E5B291-EE3A-42A8-8F69-C0A905CE0626@gmail.com>
-Date: Tue, 12 May 2015 20:03:24 -0300
-X-Google-Sender-Auth: jUew6iuwsB4WpLLRTXHN6RAVyr8
-Message-ID: <CAP9ODKoVnHAytWbq1nk3_G3rm9U9HKO_p2qZtuVv8rD2hh6WTQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] chromium: Use bitbake variable instead of shell variable
+In-Reply-To: <2776563.0u6SiCUegV@peggleto-mobl.ger.corp.intel.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][meta-networking] strongswan: upgrade to 5.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,23 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 May 2015 23:03:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 13 May 2015 00:34:54 -0000
+X-Groupsio-MsgNum: 55485
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="0eh6TmSyL6TZE2Uz"
+Content-Disposition: inline
 
-On Tue, May 12, 2015 at 7:55 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> On May 12, 2015, at 12:25 PM, Nikolay Dimitrov <picmaster@mail.bg> wrote:
->>
->> Change CHROMIUM_BUILD_TYPE to Bitbake variable, otherwise Chromium files are
->> not installed in the holding area, and Chromium fails to start on the target.
->>
->> Signed-off-by: Nikolay Dimitrov <picmaster@mail.bg>
->
-> this is ok.
+--0eh6TmSyL6TZE2Uz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Khem, please push it :)
+[Re: [oe] [PATCH][meta-networking] strongswan: upgrade to 5.3.0] On 15.05.1=
+2 (Tue 21:59) Paul Eggleton wrote:
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> On Tuesday 12 May 2015 08:56:29 Joe MacDonald wrote:
+> > I don't know why, but some of your patches are not being picked up by
+> > patchwork.
+>=20
+> FYI, this problem is being worked on as we speak.
 
+Thanks, Paul.  I did notice the other thread since I was trying to
+understand this myself.
+
+--=20
+-Joe MacDonald.
+:wq
+
+--0eh6TmSyL6TZE2Uz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJVUpwpAAoJEEn8ffcsOfaW5bgIAMJCf8bijTKs5RaNJARjlPrP
+PvUDLPaI4XfofrYdSPB1cLvE+UxVblg76jT8OsNLHV7XohHZ1kO6xED+dw3cObHp
+exlFYfm0oTzC2i4DS1ncUC85rj2m14mv8+XQAmJCf1ST+xON2fvY0RWnY+b8K2Ga
+i1xT7Zz5wcsoNCxdguHJXQznKLsOBVFkZXGgZVVnZWGw6tl+qbbyXuZ2ELl1Pys2
+giPurlQhEndAgrtw7/9akX5X4wM1dQsbgvT2dEKIIdube20dh+uDXLH7x62fbRNo
+PowEuFZVlHilldM/+u5a7jX10XCpNkQ1q1m5l1hBjXeH8/3uJ5ujqZmRnaTbNsQ=
+=3bsC
+-----END PGP SIGNATURE-----
+
+--0eh6TmSyL6TZE2Uz--
