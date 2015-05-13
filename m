@@ -1,31 +1,34 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 7885774034
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
+	[209.85.212.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 7382474064
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 May 2015 14:10:13 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1YsXMU-0000XK-Cq from Joe_MacDonald@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 May 2015 07:10:14 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 13 May 2015 07:10:13 -0700
-Received: by burninator (Postfix, from userid 1000)	id 9D318580191; Wed, 13
-	May 2015 10:10:17 -0400 (EDT)
-Date: Wed, 13 May 2015 10:10:17 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20150513141017.GB3362@mentor.com>
-References: <cover.1431376904.git.joe_macdonald@mentor.com>
-	<5552E09A.10603@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <5552E09A.10603@gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-networking][PATCH 0/1][RFC] Standardize SECTION values
+	Wed, 13 May 2015 15:33:59 +0000 (UTC)
+Received: by wicnf17 with SMTP id nf17so60889917wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 May 2015 08:34:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=ayaDFm3H1ww/CF2OpltppJaRfWKj2CAVQL4JUp9+2jw=;
+	b=IsYbVNL5lY7PyW0MEUnspxvjVIm0pCYiwcmlip2Vs3GInxaDYmJdFsezG69s/LRxPh
+	SPmaz4hq9O7jDrAbp14CVTCZEco8k945YWBsgse+fczoMs+kJ6TLMOCagxpOV2nJGZdd
+	q2nSEbKK9sjTJv2Rj+tc+s+UQ1SY9nznFaXIi4qsxQj70hbGz03Dffowu9SBWptpmg3R
+	LQqHTo4zmkYJwtlMoz8kgCZcBJsgQPreg+5d/wi9OPLM8wl7znQq5iDyWUyhXozZJr50
+	IZ2f3zVL0tNNE8ZTyRIkCbdaASfhniJ65xRvMMpgGFSbnONcSIT6bDnPAhRHEpCjbklT
+	RIMQ==
+X-Received: by 10.180.88.72 with SMTP id be8mr40394796wib.45.1431531239971;
+	Wed, 13 May 2015 08:33:59 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id i13sm8644386wic.13.2015.05.13.08.33.58
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 May 2015 08:33:58 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 May 2015 17:34:04 +0200
+Message-Id: <1431531246-27655-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.4.0
+Subject: [meta-efl][PATCH 1/3] efl, elementary, emotion-generic-players, evas-generic-loaders: upgrade to 1.14.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,305 +42,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2015 14:10:14 -0000
-X-Groupsio-MsgNum: 55500
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="b5gNqxB1S1yM7hjW"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 May 2015 15:34:02 -0000
 
---b5gNqxB1S1yM7hjW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* announcement:
+  https://phab.enlightenment.org/phame/live/3/post/enlightenment_foundation_libraries_1_14_and_friends_are_out/
 
-[Re: [oe] [meta-networking][PATCH 0/1][RFC] Standardize SECTION values] On =
-15.05.12 (Tue 22:26) akuster808 wrote:
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/efl/efl.inc                             | 12 +++++++-----
+ meta-efl/recipes-efl/efl/{efl_1.13.2.bb => efl_1.14.0.bb}    |  4 ++--
+ .../efl/{elementary_1.13.2.bb => elementary_1.14.0.bb}       |  4 ++--
+ meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb   |  8 --------
+ meta-efl/recipes-efl/efl/emotion-generic-players_1.14.0.bb   |  8 ++++++++
+ meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.2.bb      |  8 --------
+ meta-efl/recipes-efl/efl/evas-generic-loaders_1.14.0.bb      |  8 ++++++++
+ 7 files changed, 27 insertions(+), 25 deletions(-)
+ rename meta-efl/recipes-efl/efl/{efl_1.13.2.bb => efl_1.14.0.bb} (92%)
+ rename meta-efl/recipes-efl/efl/{elementary_1.13.2.bb => elementary_1.14.0.bb} (79%)
+ delete mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb
+ create mode 100644 meta-efl/recipes-efl/efl/emotion-generic-players_1.14.0.bb
+ delete mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.2.bb
+ create mode 100644 meta-efl/recipes-efl/efl/evas-generic-loaders_1.14.0.bb
 
->=20
->=20
-> On 05/11/2015 01:59 PM, Joe MacDonald wrote:
-> >As I mentioned back in January[1], I've taken a pass through the recipes=
- in
-> >meta-networking with the goal of unifying the usage of the SECTION varia=
-bles.
-> >At the time I was tending toward the Fedora / RH approach (eg. console/n=
-etwork)
-> >but I've instead gone with the Debian conventions because I think they a=
-ctually
-> >lead to less confusion when you get into edge cases like 'wireshark' whe=
-re the
-> >main usage is via the GUI but we build the command-line-only tools as we=
-ll, but
-> >it's always a 'network' tool, regardless of how you use it.
->=20
-> Oh sure. pick on Wireshark ; )
+diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
+index ba993af..f2d83c1 100644
+--- a/meta-efl/recipes-efl/efl/efl.inc
++++ b/meta-efl/recipes-efl/efl/efl.inc
+@@ -1,6 +1,6 @@
+ SUMMARY = "EFL"
+ LICENSE = "MIT & BSD & LGPL-2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a1809a807e39dd48ddcf7be98477d130"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5cb19adb5be911811c7a4e05152548e8"
+ 
+ DEPENDS_class-native = "freetype-native libxext-native libpng-native jpeg-native tiff-native libfribidi-native glib-2.0-native dbus-native"
+ DEPENDS = "virtual/libiconv tslib curl glib-2.0 gnutls pkgconfig zlib jpeg openssl libsndfile1 dbus libexif librsvg freetype libpng tiff libxext virtual/libx11 libxdamage libxrender fontconfig libfribidi giflib udev libxcursor libxcomposite libxinerama libxrandr libxtst libxscrnsaver efl-native util-linux"
+@@ -33,6 +33,7 @@ EXTRA_OECONF_append_class-native = " \
+     --disable-physics \
+     --disable-multisense \
+     --disable-cserve \
++    --disable-libeeze \
+     --with-x11=none \
+     --disable-image-loader-bmp \
+     --disable-image-loader-eet \
+@@ -70,10 +71,10 @@ PACKAGECONFIG[avahi] = "--enable-avahi,--disable-avahi,avahi"
+ # currently we don't provide doxygen-native
+ PACKAGECONFIG[doc] = "--enable-doc,--disable-doc,doxygen-native"
+ 
+-# new efl doesn't have option to disable eeze build and we don't want to provide udev-native just to build eeze-native we don't need
+-do_configure_prepend_class-native() {
+-    sed -i 's/EFL_LIB_START_OPTIONAL(\[Eeze\], \[test "${have_linux}" = "yes"\])/EFL_LIB_START_OPTIONAL([Eeze], [test "${no-we-really-dont-want-native-eeze}" = "yes"])/g' ${S}/configure.ac
+-}
++## new efl doesn't have option to disable eeze build and we don't want to provide udev-native just to build eeze-native we don't need
++#do_configure_prepend_class-native() {
++#    sed -i 's/EFL_LIB_START_OPTIONAL(\[Eeze\], \[test "${have_linux}" = "yes"\])/EFL_LIB_START_OPTIONAL([Eeze], [test "${no-we-really-dont-want-native-eeze}" = "yes"])/g' ${S}/configure.ac
++#}
+ 
+ do_install_append() {
+     # don't ship precompiled lua files
+@@ -201,6 +202,7 @@ FILES_efreet = " \
+ "
+ FILES_eet = " \
+     ${bindir}/eet \
++    ${bindir}/eetpack \
+     ${bindir}/vieet \
+     ${bindir}/diffeet \
+     ${libdir}/libeet${SOLIBS} \
+diff --git a/meta-efl/recipes-efl/efl/efl_1.13.2.bb b/meta-efl/recipes-efl/efl/efl_1.14.0.bb
+similarity index 92%
+rename from meta-efl/recipes-efl/efl/efl_1.13.2.bb
+rename to meta-efl/recipes-efl/efl/efl_1.14.0.bb
+index 176f58a..c891f0d 100644
+--- a/meta-efl/recipes-efl/efl/efl_1.13.2.bb
++++ b/meta-efl/recipes-efl/efl/efl_1.14.0.bb
+@@ -6,8 +6,8 @@ SRC_URI = "\
+     file://0002-evas_3d-Add-Eet.h-includes.patch \
+ "
+ 
+-SRC_URI[md5sum] = "dd779050ccc4ad8d7ae71f2dc8c85855"
+-SRC_URI[sha256sum] = "98404d8de63eea318f748c25708ec989628f025adf12cd54697e5de2fe48c2a4"
++SRC_URI[md5sum] = "b0813fe92cb6eaf861e3c179a19d8e41"
++SRC_URI[sha256sum] = "30a8a239449e0d068a39787b5a4769dd26ddf0476f58f094c85e65b108086269"
+ 
+ # Temporary disable until error like the one following are fixed
+ # efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
+diff --git a/meta-efl/recipes-efl/efl/elementary_1.13.2.bb b/meta-efl/recipes-efl/efl/elementary_1.14.0.bb
+similarity index 79%
+rename from meta-efl/recipes-efl/efl/elementary_1.13.2.bb
+rename to meta-efl/recipes-efl/efl/elementary_1.14.0.bb
+index db6afde..99d58e6 100644
+--- a/meta-efl/recipes-efl/efl/elementary_1.13.2.bb
++++ b/meta-efl/recipes-efl/efl/elementary_1.14.0.bb
+@@ -8,8 +8,8 @@ SRC_URI = "\
+ # these paths aren't passed in -native build
+ SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
+ 
+-SRC_URI[md5sum] = "0d32d241af1c96c06da6d130020275f0"
+-SRC_URI[sha256sum] = "312dd63f3c82c9076f0cfe5125990e650d7767a776186631455911a980f91039"
++SRC_URI[md5sum] = "e77075b8a80e9a931b91388d608c211c"
++SRC_URI[sha256sum] = "aa06ca1b332b3cd29ffd136c1f10edf08a06906b3532785ce7e390c1cad6090e"
+ 
+ # autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
+ # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
+diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb
+deleted file mode 100644
+index e42c516..0000000
+--- a/meta-efl/recipes-efl/efl/emotion-generic-players_1.13.0.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "36e5fc6a2bc83b1ab90c5c72b344f00e"
+-SRC_URI[sha256sum] = "23a3966d38cafece2c39d1e9904f26da11b9b282676f2d1fd8e54807251b363e"
+diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.14.0.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.14.0.bb
+new file mode 100644
+index 0000000..6a7b904
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/emotion-generic-players_1.14.0.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "9713c54888c355b5f29d1dc099138b49"
++SRC_URI[sha256sum] = "8345c7d8c3cdf062b5df4500c0d4c557b6109c67667ac2e5431699c8852d2ad8"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.2.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.2.bb
+deleted file mode 100644
+index 162a85b..0000000
+--- a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.13.2.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require ${BPN}.inc
+-
+-SRC_URI = "\
+-    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
+-"
+-
+-SRC_URI[md5sum] = "b1e3401429b7dadbf70e9472d25c9986"
+-SRC_URI[sha256sum] = "8455f10b8dd418eaa4d64d3eb6446814d893d96ff083646afbdbdf8626baa81a"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.14.0.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.14.0.bb
+new file mode 100644
+index 0000000..c43f637
+--- /dev/null
++++ b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.14.0.bb
+@@ -0,0 +1,8 @@
++require ${BPN}.inc
++
++SRC_URI = "\
++    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
++"
++
++SRC_URI[md5sum] = "507f28ef012344d1befa6a86cf39304f"
++SRC_URI[sha256sum] = "943b25427c4e77a3aeae72811557a0b1b7ec4c61aa53922a4c4faf17b3dea812"
+-- 
+2.4.0
 
-Most of meta-networking tends toward the console end of things,
-understandably, so just about any scheme would work for >90% of the
-packages there.  But wireshark is one of the tools I've used reasonably
-regularly and I'm aware has a GUI but that I'd be hard pressed to
-identify a screenshot for.  :-)
 
-> >I'm calling this an RFC since I expect it'll generate some discussion an=
-d while
-> >I was working through this it did occur to me that maybe the right thing=
- is to
-> >ditch SECTION variables entirely since they obviously aren't providing a=
- lot of
-> >value today, but I think being consistent with their usage may actually =
-cause
-> >them to be more than just cosmetic.
->=20
-> SECTION seems to be used in the various packaging classes.
-
-Good point.  It still looks like it's mainly informational (eg. filling
-out the appropriate fields for rpms/debs/etc.) but I'll take another
-look around to ensure I'm not causing any unintended side-effects.
-
--J.
-
->=20
-> - armin
-> >
-> >    1.  http://lists.openembedded.org/pipermail/openembedded-devel/2015-=
-January/099669.html
-> >
-> >The following changes since commit c0cb9ac6a71b0cca54ddfe38d2867c30c61c1=
-e9c:
-> >
-> >   meta-networking: standardize SECTION values (2015-05-11 16:22:56 -040=
-0)
-> >
-> >are available in the git repository at:
-> >
-> >   git://git.openembedded.org/meta-openembedded-contrib joeythesaint/mas=
-ter
-> >   http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?=
-h=3Dmaster
-> >
-> >Joe MacDonald (1):
-> >   meta-networking: standardize SECTION values
-> >
-> >  meta-networking/recipes-connectivity/crda/crda_3.13.bb                =
- | 2 +-
-> >  meta-networking/recipes-connectivity/daq/daq_2.0.2.bb                 =
- | 1 +
-> >  meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb     =
- | 2 +-
-> >  meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb          =
- | 1 +
-> >  meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb       =
- | 2 +-
-> >  meta-networking/recipes-connectivity/sethdlc/sethdlc.bb               =
- | 1 +
-> >  meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb           =
- | 1 +
-> >  meta-networking/recipes-connectivity/ufw/ufw_0.33.bb                  =
- | 1 +
-> >  meta-networking/recipes-connectivity/vlan/vlan_1.9.bb                 =
- | 1 +
-> >  meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb               =
- | 2 +-
-> >  meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb         =
- | 2 +-
-> >  meta-networking/recipes-daemons/atftp/atftp_git.bb                    =
- | 2 +-
-> >  meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb                =
- | 2 +-
-> >  meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb       =
- | 2 +-
-> >  meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb                   =
- | 2 +-
-> >  .../iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb            =
- | 2 +-
-> >  meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb               =
- | 2 +-
-> >  meta-networking/recipes-daemons/ncftp/ncftp_3.2.5.bb                  =
- | 2 +-
-> >  meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb              =
- | 1 +
-> >  meta-networking/recipes-daemons/postfix/postfix.inc                   =
- | 2 +-
-> >  meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb              =
- | 2 +-
-> >  meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb                =
- | 2 +-
-> >  meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb         =
- | 1 +
-> >  meta-networking/recipes-daemons/radvd/radvd.inc                       =
- | 2 +-
-> >  meta-networking/recipes-daemons/squid/squid_3.4.7.bb                  =
- | 2 +-
-> >  meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb              =
- | 2 +-
-> >  meta-networking/recipes-daemons/vblade/vblade_20.bb                   =
- | 2 +-
-> >  meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb                =
- | 2 +-
-> >  .../recipes-filter/conntrack-tools/conntrack-tools_1.4.0.bb           =
- | 2 +-
-> >  meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb          =
- | 2 +-
-> >  meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb                 =
- | 1 +
-> >  .../recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.2.bb       =
- | 1 +
-> >  .../recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.0.bb        =
- | 1 +
-> >  .../recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.0.bb       =
- | 1 +
-> >  meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb =
- | 1 +
-> >  .../recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb           =
- | 1 +
-> >  meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb     =
- | 2 +-
-> >  meta-networking/recipes-irc/znc/znc_git.bb                            =
- | 1 +
-> >  meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb          =
- | 2 +-
-> >  meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb          =
- | 2 +-
-> >  meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb          =
- | 2 +-
-> >  meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb    =
- | 2 +-
-> >  meta-networking/recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb        =
- | 2 +-
-> >  meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb    =
- | 2 +-
-> >  meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb        =
- | 2 +-
-> >  meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb          =
- | 1 +
-> >  meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb        =
- | 1 +
-> >  meta-networking/recipes-protocols/openflow/openflow.inc               =
- | 2 +-
-> >  meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb            =
- | 2 +-
-> >  meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.7.2.bb      =
- | 2 +-
-> >  meta-networking/recipes-protocols/quagga/quagga.inc                   =
- | 2 +-
-> >  .../recipes-protocols/radiusclient-ng/radiusclient-ng_0.5.6.bb        =
- | 2 +-
-> >  meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb            =
- | 2 +-
-> >  meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc                   =
- | 2 +-
-> >  meta-networking/recipes-support/aoetools/aoetools_36.bb               =
- | 2 +-
-> >  meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb        =
- | 2 +-
-> >  meta-networking/recipes-support/bridge-utils/bridge-utils.inc         =
- | 2 +-
-> >  meta-networking/recipes-support/cifs/cifs-utils_git.bb                =
- | 2 +-
-> >  meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb  =
- | 2 ++
-> >  meta-networking/recipes-support/cim-schema/cim-schema.inc             =
- | 2 +-
-> >  meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb                =
- | 2 +-
-> >  meta-networking/recipes-support/dnsmasq/dnsmasq.inc                   =
- | 2 +-
-> >  meta-networking/recipes-support/dnssec-conf/dnssec-conf_2.02.bb       =
- | 2 +-
-> >  meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb             =
- | 2 +-
-> >  meta-networking/recipes-support/drbd/drbd_8.4.4.bb                    =
- | 2 +-
-> >  meta-networking/recipes-support/esmtp/esmtp_1.2.bb                    =
- | 2 +-
-> >  meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb         =
- | 2 +-
-> >  meta-networking/recipes-support/fping/fping_3.5.bb                    =
- | 1 +
-> >  meta-networking/recipes-support/geoip/geoip-perl_1.45.bb              =
- | 2 +-
-> >  meta-networking/recipes-support/geoip/geoip_1.6.0.bb                  =
- | 2 +-
-> >  meta-networking/recipes-support/geoip/geoipupdate_2.1.0.bb            =
- | 2 +-
-> >  meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb          =
- | 2 +-
-> >  meta-networking/recipes-support/iftop/iftop_1.0pre2.bb                =
- | 2 +-
-> >  meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb      =
- | 2 +-
-> >  meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb               =
- | 2 +-
-> >  meta-networking/recipes-support/libesmtp/libesmtp_1.0.6.bb            =
- | 2 +-
-> >  meta-networking/recipes-support/libmemcached/libmemcached.inc         =
- | 1 +
-> >  meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb   =
- | 2 +-
-> >  meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb      =
- | 2 +-
-> >  meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb        =
- | 2 +-
-> >  meta-networking/recipes-support/memcached/memcached_1.4.17.bb         =
- | 2 +-
-> >  meta-networking/recipes-support/mtr/mtr_0.86.bb                       =
- | 1 +
-> >  meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb                =
- | 3 +--
-> >  meta-networking/recipes-support/netcat/netcat.inc                     =
- | 2 +-
-> >  meta-networking/recipes-support/netcf/gnulib_git.bb                   =
- | 2 +-
-> >  meta-networking/recipes-support/netcf/netcf_git.bb                    =
- | 2 +-
-> >  meta-networking/recipes-support/netperf/netperf_2.6.0.bb              =
- | 2 +-
-> >  meta-networking/recipes-support/nis/nis.inc                           =
- | 2 +-
-> >  meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb                    =
- | 2 +-
-> >  meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb              =
- | 2 +-
-> >  meta-networking/recipes-support/pimd/pimd_2.1.8.bb                    =
- | 1 +
-> >  meta-networking/recipes-support/smcroute/smcroute_2.0.0.bb            =
- | 2 +-
-> >  meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb              =
- | 1 +
-> >  meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb        =
- | 2 +-
-> >  meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb              =
- | 2 +-
-> >  meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb             =
- | 2 +-
-> >  meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb          =
- | 2 +-
-> >  meta-networking/recipes-support/tnftp/tnftp_20130505.bb               =
- | 2 +-
-> >  meta-networking/recipes-support/traceroute/traceroute_2.0.21.bb       =
- | 2 +-
-> >  meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb         =
- | 2 +-
-> >  100 files changed, 101 insertions(+), 78 deletions(-)
-> >
---=20
--Joe MacDonald.
-:wq
-
---b5gNqxB1S1yM7hjW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVU1tJAAoJEEn8ffcsOfaWnm8H/3jcQLu/wDnjILmzgN3QQYbC
-J696V47bV198Ko1sz6+fjlMWpa2BF78agoQR7nMJj6FWrbsIUzMYWhFYbIq1tNMS
-eG1TobLFlapXd0WAs2fuvSFgb4EFXQ5U8Nd7bX9fhpApxzKSzwG0NwfFa5BkotHg
-eQXJumkJM+WqMrEPR9Yt+T2581nmQn4E0jh5LwkWdcE0cG0lajEjHSg2CblRKce7
-iy17QrmM4uehDQxro+knfiGi/og6dFCoii2cHcT5byEhStBkptvsSMJNL4RYwDXa
-C56MhnHtI4IgxPu4iLzspZHHO/jtwqwRLROkfbDQLiW0itf0z2ex1u+AGMNCLSs=
-=vKTH
------END PGP SIGNATURE-----
-
---b5gNqxB1S1yM7hjW--
