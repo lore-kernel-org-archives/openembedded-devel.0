@@ -1,41 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
-	[209.85.220.46])
-	by mail.openembedded.org (Postfix) with ESMTP id E772D60138
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B9E0773F4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 May 2015 05:26:54 +0000 (UTC)
-Received: by pabtp1 with SMTP id tp1so38927552pab.2
+	Wed, 13 May 2015 06:19:23 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t4D6JO3P005329
+	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 22:26:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=27GHQsFYbzi1zoI7aWZrBwFwCuRnGpd+wXBjFGPncRk=;
-	b=IsKuEjNywIOtNast5bG9pXFQxjHTLkwP+z7u5D6bD4wrrNJ6OAMd0oB0ADf1XnXgZ/
-	ji8GM/jwmaqlL7CSSh5yfBkzhAEp7/QoKktuKhdN6w+nu37wr3On/VNDQd0k65t/4m+C
-	73kYEhj2NRYLKfpftmZP9v8nXe1uecxXQ17l85AHYLT2CX+7rFJBbIIxzaFYaMVNJTGx
-	1HwF3NTzOIsRgfw945H1dhuaf73aPk9nddmniDcsCjPdFFtJgfEehCFlC7YjCl79mow3
-	zsIU94zNep/M9hosfqHXHRz/pegoiHxEP6vvlTxmTBRie+sCCGTwBCl99uAketFSSs8k
-	1WVw==
-X-Received: by 10.68.210.46 with SMTP id mr14mr34218737pbc.73.1431494815461;
-	Tue, 12 May 2015 22:26:55 -0700 (PDT)
-Received: from ?IPv6:2601:c:a700:3ba7:7c79:332d:8dea:73b5?
-	([2601:c:a700:3ba7:7c79:332d:8dea:73b5])
-	by mx.google.com with ESMTPSA id
-	mx5sm17915398pdb.75.2015.05.12.22.26.53
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 12 May 2015 22:26:54 -0700 (PDT)
-Message-ID: <5552E09A.10603@gmail.com>
-Date: Tue, 12 May 2015 22:26:50 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	Tue, 12 May 2015 23:19:25 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.224.2; Tue, 12 May 2015 23:19:24 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 13 May 2015 14:14:48 +0800
+Message-ID: <1431497688-10005-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <cover.1431376904.git.joe_macdonald@mentor.com>
-In-Reply-To: <cover.1431376904.git.joe_macdonald@mentor.com>
-Subject: Re: [meta-networking][PATCH 0/1][RFC] Standardize SECTION values
+Subject: [PATCH][meta-oe] krb5: upgrade to 1.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,147 +32,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2015 05:26:57 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 May 2015 06:19:24 -0000
+Content-Type: text/plain
 
+From: Roy Li <rongqing.li@windriver.com>
 
+Upgrade to include the CVE fixes: [CVE-2014-5354] [CVE-2014-5353]...
+Remove the 0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
+Regenerate the /var/run/krb5kdc dir
 
-On 05/11/2015 01:59 PM, Joe MacDonald wrote:
-> As I mentioned back in January[1], I've taken a pass through the recipes in
-> meta-networking with the goal of unifying the usage of the SECTION variables.
-> At the time I was tending toward the Fedora / RH approach (eg. console/network)
-> but I've instead gone with the Debian conventions because I think they actually
-> lead to less confusion when you get into edge cases like 'wireshark' where the
-> main usage is via the GUI but we build the command-line-only tools as well, but
-> it's always a 'network' tool, regardless of how you use it.
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ ...rn-only-new-keys-in-randkey-CVE-2014-5351.patch | 92 ----------------------
+ .../krb5/{krb5_1.12.2.bb => krb5_1.13.2.bb}        | 28 ++++++-
+ 2 files changed, 24 insertions(+), 96 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
+ rename meta-oe/recipes-connectivity/krb5/{krb5_1.12.2.bb => krb5_1.13.2.bb} (75%)
 
-Oh sure. pick on Wireshark ; )
->
-> I'm calling this an RFC since I expect it'll generate some discussion and while
-> I was working through this it did occur to me that maybe the right thing is to
-> ditch SECTION variables entirely since they obviously aren't providing a lot of
-> value today, but I think being consistent with their usage may actually cause
-> them to be more than just cosmetic.
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
+deleted file mode 100644
+index 0852661..0000000
+--- a/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
++++ /dev/null
+@@ -1,92 +0,0 @@
+-From af0ed4df4dfae762ab5fb605f5a0c8f59cb4f6ca Mon Sep 17 00:00:00 2001
+-From: Greg Hudson <ghudson@mit.edu>
+-Date: Thu, 21 Aug 2014 13:52:07 -0400
+-Subject: [PATCH] Return only new keys in randkey [CVE-2014-5351]
+-
+-In kadmind's randkey operation, if a client specifies the keepold
+-flag, do not include the preserved old keys in the response.
+-
+-CVE-2014-5351:
+-
+-An authenticated remote attacker can retrieve the current keys for a
+-service principal when generating a new set of keys for that
+-principal.  The attacker needs to be authenticated as a user who has
+-the elevated privilege for randomizing the keys of other principals.
+-
+-Normally, when a Kerberos administrator randomizes the keys of a
+-service principal, kadmind returns only the new keys.  This prevents
+-an administrator who lacks legitimate privileged access to a service
+-from forging tickets to authenticate to that service.  If the
+-"keepold" flag to the kadmin randkey RPC operation is true, kadmind
+-retains the old keys in the KDC database as intended, but also
+-unexpectedly returns the old keys to the client, which exposes the
+-service to ticket forgery attacks from the administrator.
+-
+-A mitigating factor is that legitimate clients of the affected service
+-will start failing to authenticate to the service once they begin to
+-receive service tickets encrypted in the new keys.  The affected
+-service will be unable to decrypt the newly issued tickets, possibly
+-alerting the legitimate administrator of the affected service.
+-
+-CVSSv2: AV:N/AC:H/Au:S/C:P/I:N/A:N/E:POC/RL:OF/RC:C
+-
+-[tlyu@mit.edu: CVE description and CVSS score]
+-
+-ticket: 8018 (new)
+-target_version: 1.13
+-tags: pullup
+-
+-Upstream-Status: Backport
+----
+- src/lib/kadm5/srv/svr_principal.c |   21 ++++++++++++++++++---
+- 1 files changed, 18 insertions(+), 3 deletions(-)
+-
+-diff --git a/lib/kadm5/srv/svr_principal.c b/lib/kadm5/srv/svr_principal.c
+-index 5d358bd..d4e74cc 100644
+---- a/lib/kadm5/srv/svr_principal.c
+-+++ b/lib/kadm5/srv/svr_principal.c
+-@@ -344,6 +344,20 @@ check_1_6_dummy(kadm5_principal_ent_t entry, long mask,
+-     *passptr = NULL;
+- }
+- 
+-+/* Return the number of keys with the newest kvno.  Assumes that all key data
+-+ * with the newest kvno are at the front of the key data array. */
+-+static int
+-+count_new_keys(int n_key_data, krb5_key_data *key_data)
+-+{
+-+    int n;
+-+
+-+    for (n = 1; n < n_key_data; n++) {
+-+        if (key_data[n - 1].key_data_kvno != key_data[n].key_data_kvno)
+-+            return n;
+-+    }
+-+    return n_key_data;
+-+}
+-+
+- kadm5_ret_t
+- kadm5_create_principal(void *server_handle,
+-                        kadm5_principal_ent_t entry, long mask,
+-@@ -1593,7 +1607,7 @@ kadm5_randkey_principal_3(void *server_handle,
+-     osa_princ_ent_rec           adb;
+-     krb5_int32                  now;
+-     kadm5_policy_ent_rec        pol;
+--    int                         ret, last_pwd;
+-+    int                         ret, last_pwd, n_new_keys;
+-     krb5_boolean                have_pol = FALSE;
+-     kadm5_server_handle_t       handle = server_handle;
+-     krb5_keyblock               *act_mkey;
+-@@ -1686,8 +1700,9 @@ kadm5_randkey_principal_3(void *server_handle,
+-     kdb->fail_auth_count = 0;
+- 
+-     if (keyblocks) {
+--        ret = decrypt_key_data(handle->context,
+--                               kdb->n_key_data, kdb->key_data,
+-+        /* Return only the new keys added by krb5_dbe_crk. */
+-+        n_new_keys = count_new_keys(kdb->n_key_data, kdb->key_data);
+-+        ret = decrypt_key_data(handle->context, n_new_keys, kdb->key_data,
+-                                keyblocks, n_keys);
+-         if (ret)
+-             goto done;
+--- 
+-1.7.4.1
+-
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+similarity index 75%
+rename from meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
+rename to meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+index c492496..ec88296 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+@@ -14,7 +14,7 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
+ HOMEPAGE = "http://web.mit.edu/Kerberos/"
+ SECTION = "console/network"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=450c80c6258ce03387bd09df37638ebc"
++LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=f64248328d2d9928e1f04158b5243e7f"
+ DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+ 
+ inherit autotools-brokensep binconfig perlnative
+@@ -22,7 +22,6 @@ inherit autotools-brokensep binconfig perlnative
+ SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
+            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
+-           file://0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch \
+            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
+            file://crosscompile_nm.patch \
+            file://etc/init.d/krb5-kdc \
+@@ -30,8 +29,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
+            file://etc/default/krb5-kdc \
+            file://etc/default/krb5-admin-server \
+ "
+-SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
+-SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
++SRC_URI[md5sum] = "f7ebfa6c99c10b16979ebf9a98343189"
++SRC_URI[sha256sum] = "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3ff6de1"
+ 
+ S = "${WORKDIR}/${BP}/src/"
+ 
+@@ -77,4 +76,25 @@ do_install_append() {
+     mkdir -p ${D}/etc/init.d ${D}/etc/default
+     install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/etc/init.d
+     install -m 0644 ${WORKDIR}/etc/default/* ${D}/etc/default
++
++    rm -rf ${D}/var/run
++    mkdir -p ${D}/etc/default/volatiles
++    echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
++           > ${D}${sysconfdir}/default/volatiles/87_krb5
++    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/tmpfiles.d
++        echo "d /run/krb5kdc - - - -" \
++              > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
++    fi
++
++}
++
++pkg_postinst_${PN} () {
++    if [ -z "$D" ]; then
++        if command -v systemd-tmpfiles >/dev/null; then
++            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/krb5.conf
++        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
++            ${sysconfdir}/init.d/populate-volatile.sh update
++        fi
++    fi
+ }
+-- 
+1.9.1
 
-SECTION seems to be used in the various packaging classes.
-
-- armin
->
->     1.  http://lists.openembedded.org/pipermail/openembedded-devel/2015-January/099669.html
->
-> The following changes since commit c0cb9ac6a71b0cca54ddfe38d2867c30c61c1e9c:
->
->    meta-networking: standardize SECTION values (2015-05-11 16:22:56 -0400)
->
-> are available in the git repository at:
->
->    git://git.openembedded.org/meta-openembedded-contrib joeythesaint/master
->    http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=master
->
-> Joe MacDonald (1):
->    meta-networking: standardize SECTION values
->
->   meta-networking/recipes-connectivity/crda/crda_3.13.bb                 | 2 +-
->   meta-networking/recipes-connectivity/daq/daq_2.0.2.bb                  | 1 +
->   meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb      | 2 +-
->   meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb           | 1 +
->   meta-networking/recipes-connectivity/polarssl/polarssl_1.3.8.bb        | 2 +-
->   meta-networking/recipes-connectivity/sethdlc/sethdlc.bb                | 1 +
->   meta-networking/recipes-connectivity/snort/snort_2.9.6.0.bb            | 1 +
->   meta-networking/recipes-connectivity/ufw/ufw_0.33.bb                   | 1 +
->   meta-networking/recipes-connectivity/vlan/vlan_1.9.bb                  | 1 +
->   meta-networking/recipes-connectivity/vpnc/vpnc_0.5.3.bb                | 2 +-
->   meta-networking/recipes-connectivity/wolfssl/wolfssl_3.4.0.bb          | 2 +-
->   meta-networking/recipes-daemons/atftp/atftp_git.bb                     | 2 +-
->   meta-networking/recipes-daemons/autofs/autofs_5.1.0.bb                 | 2 +-
->   meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb        | 2 +-
->   meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb                    | 2 +-
->   .../iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb             | 2 +-
->   meta-networking/recipes-daemons/lldpad/lldpad_0.9.46.bb                | 2 +-
->   meta-networking/recipes-daemons/ncftp/ncftp_3.2.5.bb                   | 2 +-
->   meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb               | 1 +
->   meta-networking/recipes-daemons/postfix/postfix.inc                    | 2 +-
->   meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb               | 2 +-
->   meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb                 | 2 +-
->   meta-networking/recipes-daemons/pure-ftpd/pure-ftpd_1.0.36.bb          | 1 +
->   meta-networking/recipes-daemons/radvd/radvd.inc                        | 2 +-
->   meta-networking/recipes-daemons/squid/squid_3.4.7.bb                   | 2 +-
->   meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb               | 2 +-
->   meta-networking/recipes-daemons/vblade/vblade_20.bb                    | 2 +-
->   meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.2.bb                 | 2 +-
->   .../recipes-filter/conntrack-tools/conntrack-tools_1.4.0.bb            | 2 +-
->   meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb           | 2 +-
->   meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb                  | 1 +
->   .../recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.2.bb        | 1 +
->   .../recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.0.bb         | 1 +
->   .../recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.0.bb        | 1 +
->   meta-networking/recipes-filter/libnetfilter/libnetfilter-log_1.0.1.bb  | 1 +
->   .../recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb            | 1 +
->   meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb      | 2 +-
->   meta-networking/recipes-irc/znc/znc_git.bb                             | 1 +
->   meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb           | 2 +-
->   meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb           | 2 +-
->   meta-networking/recipes-netkit/netkit-rsh/netkit-rsh_0.17.bb           | 2 +-
->   meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb     | 2 +-
->   meta-networking/recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb         | 2 +-
->   meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb     | 2 +-
->   meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb         | 2 +-
->   meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb           | 1 +
->   meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.2.1.bb         | 1 +
->   meta-networking/recipes-protocols/openflow/openflow.inc                | 2 +-
->   meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb             | 2 +-
->   meta-networking/recipes-protocols/pptp-linux/pptp-linux_1.7.2.bb       | 2 +-
->   meta-networking/recipes-protocols/quagga/quagga.inc                    | 2 +-
->   .../recipes-protocols/radiusclient-ng/radiusclient-ng_0.5.6.bb         | 2 +-
->   meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.8.bb             | 2 +-
->   meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc                    | 2 +-
->   meta-networking/recipes-support/aoetools/aoetools_36.bb                | 2 +-
->   meta-networking/recipes-support/arptables/arptables_0.0.3-4.bb         | 2 +-
->   meta-networking/recipes-support/bridge-utils/bridge-utils.inc          | 2 +-
->   meta-networking/recipes-support/cifs/cifs-utils_git.bb                 | 2 +-
->   meta-networking/recipes-support/cim-schema/cim-schema-docs_2.40.0.bb   | 2 ++
->   meta-networking/recipes-support/cim-schema/cim-schema.inc              | 2 +-
->   meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb                 | 2 +-
->   meta-networking/recipes-support/dnsmasq/dnsmasq.inc                    | 2 +-
->   meta-networking/recipes-support/dnssec-conf/dnssec-conf_2.02.bb        | 2 +-
->   meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb              | 2 +-
->   meta-networking/recipes-support/drbd/drbd_8.4.4.bb                     | 2 +-
->   meta-networking/recipes-support/esmtp/esmtp_1.2.bb                     | 2 +-
->   meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb          | 2 +-
->   meta-networking/recipes-support/fping/fping_3.5.bb                     | 1 +
->   meta-networking/recipes-support/geoip/geoip-perl_1.45.bb               | 2 +-
->   meta-networking/recipes-support/geoip/geoip_1.6.0.bb                   | 2 +-
->   meta-networking/recipes-support/geoip/geoipupdate_2.1.0.bb             | 2 +-
->   meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb           | 2 +-
->   meta-networking/recipes-support/iftop/iftop_1.0pre2.bb                 | 2 +-
->   meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb       | 2 +-
->   meta-networking/recipes-support/ipvsadm/ipvsadm_1.26.bb                | 2 +-
->   meta-networking/recipes-support/libesmtp/libesmtp_1.0.6.bb             | 2 +-
->   meta-networking/recipes-support/libmemcached/libmemcached.inc          | 1 +
->   meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb    | 2 +-
->   meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb       | 2 +-
->   meta-networking/recipes-support/macchanger/macchanger_1.5.0.bb         | 2 +-
->   meta-networking/recipes-support/memcached/memcached_1.4.17.bb          | 2 +-
->   meta-networking/recipes-support/mtr/mtr_0.86.bb                        | 1 +
->   meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb                 | 3 +--
->   meta-networking/recipes-support/netcat/netcat.inc                      | 2 +-
->   meta-networking/recipes-support/netcf/gnulib_git.bb                    | 2 +-
->   meta-networking/recipes-support/netcf/netcf_git.bb                     | 2 +-
->   meta-networking/recipes-support/netperf/netperf_2.6.0.bb               | 2 +-
->   meta-networking/recipes-support/nis/nis.inc                            | 2 +-
->   meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb                     | 2 +-
->   meta-networking/recipes-support/openvpn/openvpn_2.3.6.bb               | 2 +-
->   meta-networking/recipes-support/pimd/pimd_2.1.8.bb                     | 1 +
->   meta-networking/recipes-support/smcroute/smcroute_2.0.0.bb             | 2 +-
->   meta-networking/recipes-support/ssmping/ssmping_0.9.1.bb               | 1 +
->   meta-networking/recipes-support/strongswan/strongswan_5.2.1.bb         | 2 +-
->   meta-networking/recipes-support/tcpdump/tcpdump_4.6.1.bb               | 2 +-
->   meta-networking/recipes-support/tcpdump/tcpslice_1.2a3.bb              | 2 +-
->   meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb           | 2 +-
->   meta-networking/recipes-support/tnftp/tnftp_20130505.bb                | 2 +-
->   meta-networking/recipes-support/traceroute/traceroute_2.0.21.bb        | 2 +-
->   meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb          | 2 +-
->   100 files changed, 101 insertions(+), 78 deletions(-)
->
 
