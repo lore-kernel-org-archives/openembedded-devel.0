@@ -1,24 +1,41 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B9E0773F4A
+Return-Path: <andrey.rusalin@gmail.com>
+Received: from mail-la0-f54.google.com (mail-la0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id D03CC7402C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 May 2015 06:19:23 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t4D6JO3P005329
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 13 May 2015 11:42:34 +0000 (UTC)
+Received: by layy10 with SMTP id y10so27223370lay.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 May 2015 23:19:25 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Tue, 12 May 2015 23:19:24 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 May 2015 14:14:48 +0800
-Message-ID: <1431497688-10005-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 13 May 2015 04:42:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type;
+	bh=vkQPwJbGSuPRSO1urs/pK1bBIu3kPhuh4Ij2lWzV8Rg=;
+	b=dOD5vpe3aZHRop4Iz6TzW/gqNKrtGhI8rJEScqyVQeyjk8Uap7+ykFI22yJMnN4w9z
+	Zye9D1l924rGJIqpiSt3n6SUb0jJcVsEdB8yu7BZx+e4h4mzjL/LdUedsz8vr70C6v+z
+	rRWmkwfoqu3GsyBmsRmlYRlPxT5BUT6eYgUMtzH7XflmAIY4tBP2vbE4CTvZNwoxAqGw
+	7PWsn3U5zPiIaq3YSFjMQrIom0WtQXrQGZuEOqEpfKMwsBUDSCevnRyTLAsbNou/Bqps
+	KBxScW7bVNN5RMW/RNSqbwH0K3NNLZwx0kK3xcdmngsZ0RpMsKAJVJvvxAltfMJlWP3y
+	uAyg==
+X-Received: by 10.112.161.197 with SMTP id xu5mr15502073lbb.69.1431517354081; 
+	Wed, 13 May 2015 04:42:34 -0700 (PDT)
+Received: from [192.168.14.119] (mail.dev.rtsoft.ru. [213.79.90.226])
+	by mx.google.com with ESMTPSA id f2sm4892691lah.39.2015.05.13.04.42.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 May 2015 04:42:33 -0700 (PDT)
+Message-ID: <555338B0.5060401@gmail.com>
+Date: Wed, 13 May 2015 14:42:40 +0300
+From: Andrey Rusalin <andrey.rusalin@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] krb5: upgrade to 1.13.2
+To: openembedded-devel@lists.openembedded.org
+References: <55532B2B.8050209@dev.rtsoft.ru>
+In-Reply-To: <55532B2B.8050209@dev.rtsoft.ru>
+X-Forwarded-Message-Id: <55532B2B.8050209@dev.rtsoft.ru>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5][PATCH]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,183 +49,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 May 2015 06:19:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 13 May 2015 11:42:35 -0000
+X-Groupsio-MsgNum: 55494
+Content-Type: multipart/mixed; boundary="------------040900080100050506010509"
 
-From: Roy Li <rongqing.li@windriver.com>
+--------------040900080100050506010509
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Upgrade to include the CVE fixes: [CVE-2014-5354] [CVE-2014-5353]...
-Remove the 0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
-Regenerate the /var/run/krb5kdc dir
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+
+
+-------- Forwarded Message --------
+Subject: 	[meta-qt5][PATCH]
+Date: 	Wed, 13 May 2015 13:44:59 +0300
+From: 	arusalin <arusalin@dev.rtsoft.ru>
+To: 	openembedded-devel@lists.openembedded.org
+
+
+
+-- 
+Best Regards,
+Andrey Rusalin.
+
+
+
+
+
+--------------040900080100050506010509
+Content-Type: text/x-patch;
+ name="0001-Fixed-dependency-for-sql-mysql-option-of-qtbase-pack.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0001-Fixed-dependency-for-sql-mysql-option-of-qtbase-pack.pa";
+ filename*1="tch"
+
+From 7040c6382af3d99f53b3f9fa45336cb911438923 Mon Sep 17 00:00:00 2001
+From: Andrey Rusalin <arusalin@dev.rtsoft.ru>
+Date: Wed, 13 May 2015 14:25:42 +0400
+Subject: [PATCH] Fixed dependency for sql-mysql option of qtbase package
+
 ---
- ...rn-only-new-keys-in-randkey-CVE-2014-5351.patch | 92 ----------------------
- .../krb5/{krb5_1.12.2.bb => krb5_1.13.2.bb}        | 28 ++++++-
- 2 files changed, 24 insertions(+), 96 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
- rename meta-oe/recipes-connectivity/krb5/{krb5_1.12.2.bb => krb5_1.13.2.bb} (75%)
+ recipes-qt/qt5/qtbase.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
-deleted file mode 100644
-index 0852661..0000000
---- a/meta-oe/recipes-connectivity/krb5/krb5/0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch
-+++ /dev/null
-@@ -1,92 +0,0 @@
--From af0ed4df4dfae762ab5fb605f5a0c8f59cb4f6ca Mon Sep 17 00:00:00 2001
--From: Greg Hudson <ghudson@mit.edu>
--Date: Thu, 21 Aug 2014 13:52:07 -0400
--Subject: [PATCH] Return only new keys in randkey [CVE-2014-5351]
--
--In kadmind's randkey operation, if a client specifies the keepold
--flag, do not include the preserved old keys in the response.
--
--CVE-2014-5351:
--
--An authenticated remote attacker can retrieve the current keys for a
--service principal when generating a new set of keys for that
--principal.  The attacker needs to be authenticated as a user who has
--the elevated privilege for randomizing the keys of other principals.
--
--Normally, when a Kerberos administrator randomizes the keys of a
--service principal, kadmind returns only the new keys.  This prevents
--an administrator who lacks legitimate privileged access to a service
--from forging tickets to authenticate to that service.  If the
--"keepold" flag to the kadmin randkey RPC operation is true, kadmind
--retains the old keys in the KDC database as intended, but also
--unexpectedly returns the old keys to the client, which exposes the
--service to ticket forgery attacks from the administrator.
--
--A mitigating factor is that legitimate clients of the affected service
--will start failing to authenticate to the service once they begin to
--receive service tickets encrypted in the new keys.  The affected
--service will be unable to decrypt the newly issued tickets, possibly
--alerting the legitimate administrator of the affected service.
--
--CVSSv2: AV:N/AC:H/Au:S/C:P/I:N/A:N/E:POC/RL:OF/RC:C
--
--[tlyu@mit.edu: CVE description and CVSS score]
--
--ticket: 8018 (new)
--target_version: 1.13
--tags: pullup
--
--Upstream-Status: Backport
-----
-- src/lib/kadm5/srv/svr_principal.c |   21 ++++++++++++++++++---
-- 1 files changed, 18 insertions(+), 3 deletions(-)
--
--diff --git a/lib/kadm5/srv/svr_principal.c b/lib/kadm5/srv/svr_principal.c
--index 5d358bd..d4e74cc 100644
----- a/lib/kadm5/srv/svr_principal.c
--+++ b/lib/kadm5/srv/svr_principal.c
--@@ -344,6 +344,20 @@ check_1_6_dummy(kadm5_principal_ent_t entry, long mask,
--     *passptr = NULL;
-- }
-- 
--+/* Return the number of keys with the newest kvno.  Assumes that all key data
--+ * with the newest kvno are at the front of the key data array. */
--+static int
--+count_new_keys(int n_key_data, krb5_key_data *key_data)
--+{
--+    int n;
--+
--+    for (n = 1; n < n_key_data; n++) {
--+        if (key_data[n - 1].key_data_kvno != key_data[n].key_data_kvno)
--+            return n;
--+    }
--+    return n_key_data;
--+}
--+
-- kadm5_ret_t
-- kadm5_create_principal(void *server_handle,
--                        kadm5_principal_ent_t entry, long mask,
--@@ -1593,7 +1607,7 @@ kadm5_randkey_principal_3(void *server_handle,
--     osa_princ_ent_rec           adb;
--     krb5_int32                  now;
--     kadm5_policy_ent_rec        pol;
---    int                         ret, last_pwd;
--+    int                         ret, last_pwd, n_new_keys;
--     krb5_boolean                have_pol = FALSE;
--     kadm5_server_handle_t       handle = server_handle;
--     krb5_keyblock               *act_mkey;
--@@ -1686,8 +1700,9 @@ kadm5_randkey_principal_3(void *server_handle,
--     kdb->fail_auth_count = 0;
-- 
--     if (keyblocks) {
---        ret = decrypt_key_data(handle->context,
---                               kdb->n_key_data, kdb->key_data,
--+        /* Return only the new keys added by krb5_dbe_crk. */
--+        n_new_keys = count_new_keys(kdb->n_key_data, kdb->key_data);
--+        ret = decrypt_key_data(handle->context, n_new_keys, kdb->key_data,
--                                keyblocks, n_keys);
--         if (ret)
--             goto done;
---- 
--1.7.4.1
--
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-similarity index 75%
-rename from meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-rename to meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-index c492496..ec88296 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.12.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-@@ -14,7 +14,7 @@ DESCRIPTION = "Kerberos is a system for authenticating users and services on a n
- HOMEPAGE = "http://web.mit.edu/Kerberos/"
- SECTION = "console/network"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=450c80c6258ce03387bd09df37638ebc"
-+LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=f64248328d2d9928e1f04158b5243e7f"
- DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
- 
- inherit autotools-brokensep binconfig perlnative
-@@ -22,7 +22,6 @@ inherit autotools-brokensep binconfig perlnative
- SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
- SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
-            file://0001-aclocal-Add-parameter-to-disable-keyutils-detection.patch \
--           file://0001-Return-only-new-keys-in-randkey-CVE-2014-5351.patch \
-            file://debian-suppress-usr-lib-in-krb5-config.patch;striplevel=2 \
-            file://crosscompile_nm.patch \
-            file://etc/init.d/krb5-kdc \
-@@ -30,8 +29,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
-            file://etc/default/krb5-kdc \
-            file://etc/default/krb5-admin-server \
- "
--SRC_URI[md5sum] = "357f1312b7720a0a591e22db0f7829fe"
--SRC_URI[sha256sum] = "09bd180107b5c2b3b7378c57c023fb02a103d4cac39d6f2dd600275d7a4f3744"
-+SRC_URI[md5sum] = "f7ebfa6c99c10b16979ebf9a98343189"
-+SRC_URI[sha256sum] = "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3ff6de1"
- 
- S = "${WORKDIR}/${BP}/src/"
- 
-@@ -77,4 +76,25 @@ do_install_append() {
-     mkdir -p ${D}/etc/init.d ${D}/etc/default
-     install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/etc/init.d
-     install -m 0644 ${WORKDIR}/etc/default/* ${D}/etc/default
-+
-+    rm -rf ${D}/var/run
-+    mkdir -p ${D}/etc/default/volatiles
-+    echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
-+           > ${D}${sysconfdir}/default/volatiles/87_krb5
-+    if ${@base_contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/tmpfiles.d
-+        echo "d /run/krb5kdc - - - -" \
-+              > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
-+    fi
-+
-+}
-+
-+pkg_postinst_${PN} () {
-+    if [ -z "$D" ]; then
-+        if command -v systemd-tmpfiles >/dev/null; then
-+            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/krb5.conf
-+        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-+            ${sysconfdir}/init.d/populate-volatile.sh update
-+        fi
-+    fi
- }
+diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
+index 50cb505..d2654ef 100644
+--- a/recipes-qt/qt5/qtbase.inc
++++ b/recipes-qt/qt5/qtbase.inc
+@@ -84,7 +84,7 @@ PACKAGECONFIG[cups] = "-cups,-no-cups,cups"
+ PACKAGECONFIG[dbus] = "-dbus,-no-dbus,dbus"
+ PACKAGECONFIG[xcb] = "-xcb -xcb-xlib -system-xcb,-no-xcb,libxcb xcb-util-wm xcb-util-image xcb-util-keysyms xcb-util-renderutil"
+ PACKAGECONFIG[sql-ibase] = "-sql-ibase,-no-sql-ibase"
+-PACKAGECONFIG[sql-mysql] = "-sql-mysql,-no-sql-mysql,mysql"
++PACKAGECONFIG[sql-mysql] = "-sql-mysql,-no-sql-mysql,mysql5"
+ PACKAGECONFIG[sql-psql] = "-sql-psql,-no-sql-psql,postgresql"
+ PACKAGECONFIG[sql-odbc] = "-sql-odbc,-no-sql-odbc"
+ PACKAGECONFIG[sql-oci] = "-sql-oci,-no-sql-oci"
 -- 
 1.9.1
 
 
+
+--------------040900080100050506010509--
