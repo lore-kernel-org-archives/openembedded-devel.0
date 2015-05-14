@@ -1,39 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f196.google.com (mail-pd0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A49B46013D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
+	[209.85.213.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 1346772CFD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2015 20:53:30 +0000 (UTC)
-Received: by pdjp10 with SMTP id p10so13458142pdj.1
+	Thu, 14 May 2015 23:57:41 +0000 (UTC)
+Received: by igbhj9 with SMTP id hj9so88158882igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2015 13:53:31 -0700 (PDT)
+	Thu, 14 May 2015 16:57:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type;
-	bh=ewKTSJV8JxYywQKtIV5jyGuGO+Vn0WcLTl6kIXAOXI8=;
-	b=Y5ermHmpvI+9SbEK1Www2QVUybtQLEGIbP52dsGaKjSID4vrtJoQEuhkEfzWOuefIa
-	Gc0/N2TXnrtsieL6dMNhAQpICHtxclVDbQSBuQhiMToYo8YZkXx+mozUigUgs6jU+mON
-	EO78fMRtOVcN74Mu+zaXrr+1Duk2sVDGMygYQlkbuy1+vnxapK20XVEaw3qmYxyAaxWU
-	4L4k2jWilvX4GjyD8XsL2eM2n+EmytuPMPgHUavZU19GAHDdy/bBEKAJgQR5JZcIQgUU
-	/xkvj6oFhBful4Fu4hxAXEEQvjineuUAh09J4VCnU09S/esZifcx/SygGQ8nltyIsolv
-	HtMQ==
-X-Received: by 10.70.89.138 with SMTP id bo10mr11859838pdb.146.1431636811566; 
-	Thu, 14 May 2015 13:53:31 -0700 (PDT)
-Received: from [10.43.100.29] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by mx.google.com with ESMTPSA id t9sm97927pas.3.2015.05.14.13.53.29
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 May 2015 13:53:30 -0700 (PDT)
-Message-ID: <55550B48.6050505@gmail.com>
-Date: Thu, 14 May 2015 13:53:28 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
-To: eduardo@monkey.io
-References: <CAEaCVQjMD+ZV3m5tv4M6B2eFTvceemTs7nOBgKAh_XDUt3O9jQ@mail.gmail.com>
-In-Reply-To: <CAEaCVQjMD+ZV3m5tv4M6B2eFTvceemTs7nOBgKAh_XDUt3O9jQ@mail.gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-ruby] problems building Gem that contains C code
+	h=from:to:cc:subject:date:message-id;
+	bh=w7ohntl+Cy2++51XFpoHQIvWQI4br9CnsLzAzJkydgM=;
+	b=y9Go2VL5lv1KBuIo/WGX2oWXaGH+MerGKzU05cxLNX0HZhvX/CKQ6sPI/pIAs9YClJ
+	IXiLSRGA44W+IcYRSwGzahuwt1iPhwnsZpGh3NkVAsZcIyUCOTrubV6GJzhFzZJrn6il
+	m25g2JxGBP/7le6IFwF9H0VVzIt16vD+Zg43/IUJfWDoUSu92yIJvGiGu9IgTgZQ9vC7
+	jB9P+qbn/ANP3tdJhZZZjd4TlbigmFuKL7eqH8P26VonODac2y4DUAEWeALdN0JIOyZ5
+	E6ac0Jz1p7VPhhTgOmblrmnfAIJRu7MXUtbDf6Ex9gPG+DAHn3FvXE6EZM4EjGGsippi
+	ZTKw==
+X-Received: by 10.42.187.65 with SMTP id cv1mr18142140icb.87.1431647863023;
+	Thu, 14 May 2015 16:57:43 -0700 (PDT)
+Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
+	[96.119.89.79])
+	by mx.google.com with ESMTPSA id m143sm394559ioe.4.2015.05.14.16.57.41
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 14 May 2015 16:57:41 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 14 May 2015 16:57:26 -0700
+Message-Id: <1431647846-2409-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-browser][PATCH] cef,chromium: Separate out installs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,112 +42,180 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2015 20:53:30 -0000
-X-Groupsio-MsgNum: 55515
-Content-Type: multipart/mixed; boundary="------------040804070806050709050109"
+X-List-Received-Date: Thu, 14 May 2015 23:57:43 -0000
 
---------------040804070806050709050109
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+Use specific domains for installation, so they can be built and
+installed in a single build
 
-Eduardo,
-
-I think one issue is --sysroot is using the host path that might be 
-contributing to the Arch mismatch message. I have a patch that I have 
-not submitted, yet.
-
-Regarding the .debug, you might need to add
-
-FILE_${PN}-dbg += 
-"/usr/lib/ruby/gems/2.2.0/gems/msgpack-0.5.11/lib/msgpack/.debug"
-
-
-It you could try the patch I have attached and let me know if it helps.
-
-regards,
-Armin
-
-On 05/14/2015 06:25 AM, Eduardo Silva wrote:
-> Hi,
->
-> I am packaging a Ruby gem that also contains C code:
->
->    http://github.com/msgpack/msgpack-ruby
->
-> but when building it raise many QA issues about linking to 64 bits version,
-> my target is "i586-poky-linux":
->
-> ERROR: QA Issue: Architecture did not match (3 to 62) on
-> /work/i586-poky-linux/ruby-msgpack/0.5.11-r0/packages-split/ruby-msgpack-dbg/usr/lib/ruby/gems/2.2.0/gems/msgpack-0.5.11/lib/msgpack/.debug/msgpack.so
-> [arch]
-> ERROR: QA Issue: non debug package contains .debug directory: ruby-msgpack
-> path
-> /work/i586-poky-linux/ruby-msgpack/0.5.11-r0/packages-split/ruby-msgpack/usr/lib/ruby/gems/2.2.0/extensions/x86_64-linux/2.2.0/msgpack-0.5.11/msgpack/.debug/msgpack.so
-> [debug-files]
-> ERROR: QA Issue: Architecture did not match (3 to 62) on
-> /work/i586-poky-linux/ruby-msgpack/0.5.11-r0/packages-split/ruby-msgpack/usr/lib/ruby/gems/2.2.0/gems/msgpack-0.5.11/lib/msgpack/msgpack.so
-> [arch]
-> WARNING: QA Issue: ruby-msgpack requires libruby.so.2.2()(64bit),
-> libc.so.6(GLIBC_2.14)(64bit), libc.so.6(GLIBC_2.4)(64bit),
-> libc.so.6()(64bit), libc.so.6(GLIBC_2.2.5)(64bit), but no providers in its
-> RDEPENDS [file-rdeps]
-> ERROR: QA run found fatal errors. Please consider fixing them.
-> ERROR: Function failed: do_package_qa
-> ERROR: Logfile of failure stored in:
-> /home/edsiper/coding/poky/build/tmp/work/i586-poky-linux/ruby-msgpack/0.5.11-r0/temp/log.do_package_qa.7603
-> ERROR: Task 9
-> (/home/edsiper/coding/poky/meta-fluentd/recipes-core/ruby-msgpack/
-> ruby-msgpack_git.bb, do_package_qa) failed with exit code '1'
->
-> would you please advice if some specific flag/setup is required to build
-> Ruby gems that contains C code ?
->
-> thanks,
->
-
---------------040804070806050709050109
-Content-Type: text/x-patch;
- name="0001-ruby-fix-sysroot-issue.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="0001-ruby-fix-sysroot-issue.patch"
-
-From 7c2ccc0218c08751b143b5167ab83a83b985d034 Mon Sep 17 00:00:00 2001
-From: Armin Kuster <akuster808@gmail.com>
-Date: Thu, 14 May 2015 13:02:35 -0700
-Subject: [PATCH] ruby: fix  sysroot issue
-
-The --sysroot=/ is set to the host path, when using ruby on a target
-machine.
-
-This only becomes a problem with compiling native support using gems.
-
-thanks to Robert Bevan
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../{chromium/google-chrome => cef3/cef-simple}    |  6 ++---
+ recipes-browser/chromium/cef3_280796.bb            |  1 +
+ recipes-browser/chromium/chromium.inc              | 30 ++++++++++++----------
+ recipes-browser/chromium/chromium/google-chrome    |  4 +--
+ .../chromium/chromium/google-chrome.desktop        |  2 +-
+ recipes-browser/chromium/chromium_40.0.2214.91.bb  |  4 +--
+ 6 files changed, 25 insertions(+), 22 deletions(-)
+ copy recipes-browser/chromium/{chromium/google-chrome => cef3/cef-simple} (66%)
 
-diff --git a/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb b/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
-index 78c943c..2bf0a00 100644
---- a/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
-+++ b/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
-@@ -31,6 +31,12 @@ do_install() {
-     oe_runmake 'DESTDIR=${D}' install
- }
+diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/cef3/cef-simple
+similarity index 66%
+copy from recipes-browser/chromium/chromium/google-chrome
+copy to recipes-browser/chromium/cef3/cef-simple
+index 78f4a29..ce377e1 100644
+--- a/recipes-browser/chromium/chromium/google-chrome
++++ b/recipes-browser/chromium/cef3/cef-simple
+@@ -1,11 +1,11 @@
+ #!/bin/sh
  
-+do_install_append () {
-+if [ "${PN}" != "ruby-native" ]; then
-+    sed -i "s/sysroot=[0-9a-z\/\-]*/sysroot=\//g" ${D}/usr/lib/ruby/*/*/rbconfig.rb
-+fi
-+}
+ export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
+-export LD_LIBRARY_PATH=/usr/lib/chrome
++export LD_LIBRARY_PATH=/usr/lib/cef3
+ 
+ CHROME_EXTRA_ARGS=""
+ if [ "${USER}" = "root" ] ; then
+-	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=${HOME}/.chromium/"
++	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=${HOME}/.cef3/"
+ fi
+ 
+-/usr/bin/chrome/chrome ${CHROME_EXTRA_ARGS} $@
++/usr/bin/cef3/cefsimple ${CHROME_EXTRA_ARGS} $@
+diff --git a/recipes-browser/chromium/cef3_280796.bb b/recipes-browser/chromium/cef3_280796.bb
+index 9ca5810..9a9efe5 100644
+--- a/recipes-browser/chromium/cef3_280796.bb
++++ b/recipes-browser/chromium/cef3_280796.bb
+@@ -14,6 +14,7 @@ SRC_URI = "http://people.linaro.org/~zoltan.kuscsik/chromium-browser/chromium_re
+            git://github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=src/ui/ozone/platform/egl;branch=master;name=egl \
+            git://chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools \
+            file://01_get_svn_version_from_LASTCHANGE.patch \
++	   file://cef-simple \
+ 	  "
+ SRC_URI[md5sum] = "9efbb50283b731042e62b9bd5e312b2f"
+ SRC_URI[sha256sum] = "f608e97dadf6ea4d885b24fd876896d46840fa39bf743ea2025075aee9fb348d"
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+index 72a649d..377e685 100644
+--- a/recipes-browser/chromium/chromium.inc
++++ b/recipes-browser/chromium/chromium.inc
+@@ -34,20 +34,23 @@ do_install() {
+ 	if [ -f "${WORKDIR}/google-chrome" ]; then
+ 		install -Dm 0755 ${WORKDIR}/google-chrome ${D}${bindir}/google-chrome
+ 	fi
++	if [ -f "${WORKDIR}/cef-simple" ]; then
++		install -Dm 0755 ${WORKDIR}/cef-simple ${D}${bindir}/cef-simple
++	fi
+ 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox" ]; then
+ 		install -Dm 4755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
+ 	fi
+ 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple" ]; then
+-		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}/cefsimple
++		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}/${BPN}/cefsimple
+ 	fi
+ 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
+ 		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${bindir}/lib/libcef.so
+ 	fi
+ 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome" ]; then
+-		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/chrome/chrome
++		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/${BPN}/chrome
+ 	fi
+ 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat" ]; then
+-		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}/chrome/icudtl.dat
++		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}/${BPN}/icudtl.dat
+ 	fi
+ 	if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
+ 		install -Dm 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/google-chrome.desktop
+@@ -55,7 +58,7 @@ do_install() {
+ 	#Chromium plugins libs
+ 	for f in libpdf.so libosmesa.so libffmpegsumo.so; do
+ 		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
+-			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/chrome/$f
++			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/${BPN}/$f
+ 		fi
+ 	done
+ 
+@@ -64,7 +67,7 @@ do_install() {
+ 	         cef_100_percent.pak cef_200_percent.pak cef_resources.pak cef.pak \
+ 		 locales/en-US.pak; do
+ 		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
+-			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/chrome/$f
++			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/${BPN}/$f
+ 		fi
+ 	done
+ 
+@@ -72,19 +75,18 @@ do_install() {
+ 
+ PACKAGES =+ "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
+ 
+-FILES_${PN}-codecs-ffmpeg = "${libdir}/chrome/libffmpegsumo.so"
+-FILES_${PN}-plugin-pdf = "${libdir}/chrome/libpdf.so"
++FILES_${PN}-codecs-ffmpeg = "${libdir}/${BPN}/libffmpegsumo.so"
++FILES_${PN}-plugin-pdf = "${libdir}/${BPN}/libpdf.so"
 +
- FILES_${PN} += "${datadir}/rubygems \
-                 ${datadir}/ri"
++FILES_${PN} = "${bindir}/${BPN} ${datadir}/applications ${sbindir}/ ${libdir}/${BPN}/"
++FILES_${PN} += "${bindir} ${libdir}"
++FILES_${PN} += "${bindir}/${BPN}/*.pak"
++FILES_${PN} += "${bindir}/${BPN}/locales/*.pak"
  
+-FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
+-FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
++FILES_${PN}-dbg += "${bindir}/${BPN}/.debug/ ${libdir}/${BPN}/.debug/ ${libdir}/.debug/"
+ 
+ PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
+ 
+ INSANE_SKIP_${PN} = "ldflags"
+ SOLIBS = ".so"
+ FILES_SOLIBSDEV = ""
+-FILES_${PN} += "${bindir} ${bindir}/chrome/ ${libdir}"
+-FILES_${PN} += "${bindir}/chrome/*.pak"
+-FILES_${PN} += "${bindir}/chrome/locales/*.pak"
+-FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/.debug/"
+-
+diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/chromium/google-chrome
+index 78f4a29..b1ec288 100644
+--- a/recipes-browser/chromium/chromium/google-chrome
++++ b/recipes-browser/chromium/chromium/google-chrome
+@@ -1,11 +1,11 @@
+ #!/bin/sh
+ 
+ export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
+-export LD_LIBRARY_PATH=/usr/lib/chrome
++export LD_LIBRARY_PATH=/usr/lib/chromium
+ 
+ CHROME_EXTRA_ARGS=""
+ if [ "${USER}" = "root" ] ; then
+ 	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=${HOME}/.chromium/"
+ fi
+ 
+-/usr/bin/chrome/chrome ${CHROME_EXTRA_ARGS} $@
++/usr/bin/chromium/chrome ${CHROME_EXTRA_ARGS} $@
+diff --git a/recipes-browser/chromium/chromium/google-chrome.desktop b/recipes-browser/chromium/chromium/google-chrome.desktop
+index 76a2533..094bd82 100644
+--- a/recipes-browser/chromium/chromium/google-chrome.desktop
++++ b/recipes-browser/chromium/chromium/google-chrome.desktop
+@@ -107,7 +107,7 @@ Comment[zh_HK]=???????
+ Comment[zh_TW]=???????
+ Exec=/usr/bin/google-chrome %U
+ Terminal=false
+-Icon=/usr/bin/chrome/product_logo_48.png
++Icon=/usr/bin/chromium/product_logo_48.png
+ Type=Application
+ Categories=Network;WebBrowser;
+ MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
+diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+index 53af755..0a73f1e 100644
+--- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
++++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
+@@ -189,8 +189,8 @@ do_install_append() {
+ 
+ 	# Always adding this libdir (not just with component builds), because the
+         # LD_LIBRARY_PATH line in the google-chromium script refers to it
+-        install -d ${D}${libdir}/chrome/
++        install -d ${D}${libdir}/${BPN}/
+         if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
+-                install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/*.so ${D}${libdir}/chrome/
++                install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/*.so ${D}${libdir}/${BPN}/
+         fi
+ }
 -- 
-2.3.5
+2.1.4
 
 
---------------040804070806050709050109--
