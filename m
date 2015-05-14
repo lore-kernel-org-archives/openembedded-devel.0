@@ -1,26 +1,23 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 63F4B732F2
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 8BE3974118
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2015 07:14:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t4E7EW9D021764
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 14 May 2015 00:14:32 -0700 (PDT)
-Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Thu, 14 May 2015 00:14:32 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 May 2015 15:14:20 +0800
-Message-ID: <e68dccc9144fe4275e0130202bb65311c4a19c3e.1431587286.git.yi.zhao@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1431587286.git.yi.zhao@windriver.com>
-References: <cover.1431587286.git.yi.zhao@windriver.com>
+	Thu, 14 May 2015 12:31:56 +0000 (UTC)
+Received: (qmail 14580 invoked by uid 1003); 14 May 2015 12:31:57 -0000
+Received: from unknown (HELO ?192.168.11.121?)
+	(philip@opensdr.com@108.44.122.151)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	14 May 2015 12:31:57 -0000
+Message-ID: <555495BC.402@balister.org>
+Date: Thu, 14 May 2015 08:31:56 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
-X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 3/3] sylpheed: remove do_install_append
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: meta-oe and oe-core mirror repos going away at the end of June
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,50 +31,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2015 07:14:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 14 May 2015 12:31:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-The .desktop and .png files alreay install by make install.
-So remove the do_install_append
+For several "years", we have maintained two copies of the
+openembedded-core and meta-openembedded repositories on github. At OEDAM
+we decided it is time to go ahead and remove the repos with the old
+names oe-core and meta-oe to lower the confusion level about what is in
+these repos.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb |   10 +---------
- 1 file changed, 1 insertion(+), 9 deletions(-)
+Please update build scripts and git config files with the current names,
+openemebdded-core and meta-openembedded.
 
-diff --git a/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb b/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
-index 1b010a5..304b654 100644
---- a/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
-+++ b/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
-@@ -7,8 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4 \
- 
- PR = "r2"
- 
--PNBLACKLIST[sylpheed] ?= "BROKEN: Doesn't work with B!=S"
--
- SRC_URI = "http://sylpheed.sraoss.jp/sylpheed/v2.7/sylpheed-${PV}.tar.bz2 \
-     file://glib-2.32.patch \
- "
-@@ -18,7 +16,7 @@ SRC_URI[sha256sum] = "8bb6457db4e2eea1877b487d9ac8513546372db9a6a2e4271d11229f4a
- FILES_${PN} += "${datadir}/pixmaps ${datadir}/applications"
- FILES_${PN}-doc += "${datadir}"
- 
--EXTRA_OECONF = "--disable-ssl --enable-gnutls"
-+EXTRA_OECONF = "--disable-ssl"
- 
- CFLAGS += "-D_GNU_SOURCE"
- 
-@@ -31,9 +29,3 @@ do_configure_prepend() {
- 
- inherit autotools pkgconfig
- 
--do_install_append() {
--    install -d ${D}${datadir}/applications
--    install -m 0644 sylpheed.desktop ${D}${datadir}/applications/
--    install -d ${D}${datadir}/pixmaps
--    install -m 0644 sylpheed.png ${D}${datadir}/pixmaps/
--}
--- 
-1.7.9.5
+Thanks,
 
+Philip
 
