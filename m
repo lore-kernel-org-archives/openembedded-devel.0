@@ -1,41 +1,37 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C80774182
+Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
+	[209.85.213.170])
+	by mail.openembedded.org (Postfix) with ESMTP id EFAE37403A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2015 18:59:28 +0000 (UTC)
-Received: by igbyr2 with SMTP id yr2so862885igb.0
+	Fri, 15 May 2015 20:27:23 +0000 (UTC)
+Received: by igbsb11 with SMTP id sb11so5198474igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2015 11:59:29 -0700 (PDT)
+	Fri, 15 May 2015 13:27:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:cc:subject
-	:references:in-reply-to:content-type:content-transfer-encoding;
-	bh=p0U8PiMiZ87qmmP4A5kg6qAuo/x/iwPebZSCpxxraOk=;
-	b=GWRhRLRXd2ncM2XbMl8pnXpH1Dml+4g+BxYWjK1xqka8nJV6c379TN+NamVb9OYhwz
-	+GMwMNxbeF6R59FEOBE6UR1QgZESSTOXagtymV3Da7BWpSByEqEGokelhWn0eBlRX0GC
-	Hk9LHR9B2A7OhlXZGk/kdi654RPeVB+PXM6F34f0HoScfRRjCJlX+nJ2NZhNmUe/DE9c
-	ZHHCDOMdiuIFrc6IShgsCmeNgtkCmwKclKxsWyspYNfdj1kp/s9UixvuZBJDES078mtB
-	1Ec7N6Tt1nRbANBGTcPBW7PrmFrgrRsIlWNDFgcgF3QXbwXDmVUzQ9uv3wVh3SwOUBB9
-	3t3A==
-X-Received: by 10.68.205.33 with SMTP id ld1mr21316661pbc.22.1431716361715;
-	Fri, 15 May 2015 11:59:21 -0700 (PDT)
-Received: from ?IPv6:2601:c:a700:3ba7:f0a2:acf0:8681:7abc?
-	([2601:c:a700:3ba7:f0a2:acf0:8681:7abc])
-	by mx.google.com with ESMTPSA id jt2sm2592638pbc.21.2015.05.15.11.59.19
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 May 2015 11:59:20 -0700 (PDT)
-Message-ID: <55564206.8080500@gmail.com>
-Date: Fri, 15 May 2015 11:59:18 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=CLvzwe/rA+lCLh8UnnRP+KQh583bl/OHwBVZK/LHYls=;
+	b=M4rtjEOZoGQyg1VJBNTeRD0OCJNk1mNiVmuF1VGzZSzHjtCgEsBFNu3BGaNqF6EyV4
+	w3xPtWH2bSyANW7y1j2ZeT6d9UlU3WqX+i9CUJbH3BI3H/Ej/Z9hF9NVau7uxjVtvsrI
+	DwubqoJFu2oJnb8mVY+l8llJnSqnZ8DM4E+h7gMI6BfX0a3igDxVJAf6HcNCLBiJigrU
+	YhkiimAijRyo2mA8jbIz4REaNLBJkp6Gyvar3uQAFYzwt2VUUcgexM56qd/+lXSTf+Nd
+	z+5jFMZiKLObxmDi5Bkcd/jebqIKWfdFIbk4T13XQo1SFWI2LzqtkAn3dXJKATLe9j2O
+	oQXg==
+X-Received: by 10.68.137.138 with SMTP id qi10mr21127904pbb.75.1431721644845; 
+	Fri, 15 May 2015 13:27:24 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id rx6sm943599pbc.54.2015.05.15.13.27.22
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 15 May 2015 13:27:23 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	joe_macdonald@mentor.com
+Date: Fri, 15 May 2015 13:27:20 -0700
+Message-Id: <1431721640-6515-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
 MIME-Version: 1.0
-To: Eduardo Silva <eduardo@monkey.io>
-References: <CAEaCVQjMD+ZV3m5tv4M6B2eFTvceemTs7nOBgKAh_XDUt3O9jQ@mail.gmail.com>	<55550B48.6050505@gmail.com>
-	<CAEaCVQi3f723PmbkobAdwJRRQiAthMDTiS=LpThoAFxy0qhiLw@mail.gmail.com>
-In-Reply-To: <CAEaCVQi3f723PmbkobAdwJRRQiAthMDTiS=LpThoAFxy0qhiLw@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-ruby] problems building Gem that contains C code
+Subject: [meta-networking][PATCH] whireshark: update to 12.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,117 +45,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2015 18:59:31 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 May 2015 20:27:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+fixed broken url and cleaned up the PACKAGECONFIG
+removed patch as it is included in this release
+update SECTION name
 
+The following vulnerabilities have been fixed.
+* [1]wnpa-sec-2015-12
+The LBMR dissector could go into an infinite loop. ([2]Bug 11036)
+[3]CVE-2015-3808 [4]CVE-2015-3809
 
-On 05/15/2015 06:38 AM, Eduardo Silva wrote:
-> Hi,
->
-> thanks for the update. If I try that patch I get the following error
-> when building Ruby:
->
-> ERROR: Function failed: do_install (log file is located at
-> /home/edsiper/coding/poky/build/tmp/work/x86_64-linux/ruby-native/2.2.2-r0/temp/log.do_install.10344)
-> ERROR: Logfile of failure stored in:
-> /home/edsiper/coding/poky/build/tmp/work/x86_64-linux/ruby-native/2.2.2-r0/temp/log.do_install.10344
-> Log data follows:
-> | DEBUG: Executing shell function do_install
-> | NOTE: make -j 4 LIBRUBYARG=-lruby-static
-> DESTDIR=/home/edsiper/coding/poky/build/tmp/work/x86_64-linux/ruby-native/2.2.2-r0/image
-> install
-> | make: *** No rule to make target 'install'.  Stop.
-> | ERROR: oe_runmake failed
-> | WARNING:
-> /home/edsiper/coding/poky/build/tmp/work/x86_64-linux/ruby-native/2.2.2-r0/temp/run.do_install.10344:1
-> exit 1 from
-> |   exit 1
-> | ERROR: Function failed: do_install (log file is located at
-> /home/edsiper/coding/poky/build/tmp/work/x86_64-linux/ruby-native/2.2.2-r0/temp/log.do_install.10344)
-> ERROR: Task 111
-> (virtual:native:/home/edsiper/coding/meta-openembedded/meta-ruby/recipes-devtools/ruby/ruby_2.2.2.bb
-> <http://ruby_2.2.2.bb>, do_install) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 672 tasks of which 671 didn't need to be
-> rerun and 1 failed.
-> No currently running tasks (565 of 682)
+* [5]wnpa-sec-2015-13
+The WebSocket dissector could recurse excessively. ([6]Bug 10989)
+[7]CVE-2015-3810
 
-Hmm, weird.  let me poke at it.
+* [8]wnpa-sec-2015-14
+The WCP dissector could crash while decompressing data. ([9]Bug
+10978) [10]CVE-2015-3811
 
-- armin
->
-> regards,
->
->
-> On Thu, May 14, 2015 at 2:53 PM, akuster808 <akuster808@gmail.com
-> <mailto:akuster808@gmail.com>> wrote:
->
->     Eduardo,
->
->     I think one issue is --sysroot is using the host path that might be
->     contributing to the Arch mismatch message. I have a patch that I
->     have not submitted, yet.
->
->     Regarding the .debug, you might need to add
->
->     FILE_${PN}-dbg +=
->     "/usr/lib/ruby/gems/2.2.0/gems/msgpack-0.5.11/lib/msgpack/.debug"
->
->
->     It you could try the patch I have attached and let me know if it helps.
->
->     regards,
->     Armin
->
->
->     On 05/14/2015 06:25 AM, Eduardo Silva wrote:
->
->         Hi,
->
->         I am packaging a Ruby gem that also contains C code:
->
->         http://github.com/msgpack/msgpack-ruby
->
->         but when building it raise many QA issues about linking to 64
->         bits version,
->         my target is "i586-poky-linux":
->
->         ERROR: QA Issue: Architecture did not match (3 to 62) on
->         /work/i586-poky-linux/ruby-msgpack/0.5.11-r0/packages-split/ruby-msgpack-dbg/usr/lib/ruby/gems/2.2.0/gems/msgpack-0.5.11/lib/msgpack/.debug/msgpack.so
->         [arch]
->         ERROR: QA Issue: non debug package contains .debug directory:
->         ruby-msgpack
->         path
->         /work/i586-poky-linux/ruby-msgpack/0.5.11-r0/packages-split/ruby-msgpack/usr/lib/ruby/gems/2.2.0/extensions/x86_64-linux/2.2.0/msgpack-0.5.11/msgpack/.debug/msgpack.so
->         [debug-files]
->         ERROR: QA Issue: Architecture did not match (3 to 62) on
->         /work/i586-poky-linux/ruby-msgpack/0.5.11-r0/packages-split/ruby-msgpack/usr/lib/ruby/gems/2.2.0/gems/msgpack-0.5.11/lib/msgpack/msgpack.so
->         [arch]
->         WARNING: QA Issue: ruby-msgpack requires libruby.so.2.2()(64bit),
->         libc.so.6(GLIBC_2.14)(64bit), libc.so.6(GLIBC_2.4)(64bit),
->         libc.so.6()(64bit), libc.so.6(GLIBC_2.2.5)(64bit), but no
->         providers in its
->         RDEPENDS [file-rdeps]
->         ERROR: QA run found fatal errors. Please consider fixing them.
->         ERROR: Function failed: do_package_qa
->         ERROR: Logfile of failure stored in:
->         /home/edsiper/coding/poky/build/tmp/work/i586-poky-linux/ruby-msgpack/0.5.11-r0/temp/log.do_package_qa.7603
->         ERROR: Task 9
->         (/home/edsiper/coding/poky/meta-fluentd/recipes-core/ruby-msgpack/
->         ruby-msgpack_git.bb <http://ruby-msgpack_git.bb>, do_package_qa)
->         failed with exit code '1'
->
->         would you please advice if some specific flag/setup is required
->         to build
->         Ruby gems that contains C code ?
->
->         thanks,
->
->
->
->
-> --
-> Eduardo Silva
-> Monkey Software
+* [11]wnpa-sec-2015-15
+The X11 dissector could leak memory. ([12]Bug 11088)
+[13]CVE-2015-3812
+
+* [14]wnpa-sec-2015-16
+The packet reassembly code could leak memory. ([15]Bug 11129)
+[16]CVE-2015-3813
+
+* [17]wnpa-sec-2015-17
+The IEEE 802.11 dissector could go into an infinite loop. ([18]Bug
+11110) [19]CVE-2015-3814
+
+* [20]wnpa-sec-2015-18
+The Android Logcat file parser could crash. Discovered by Hanno
+Böck. ([21]Bug 11188) [22]CVE-2015-3815
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../{wireshark_1.12.4.bb => wireshark_1.12.5.bb}   | 26 ++++++++++------------
+ 1 file changed, 12 insertions(+), 14 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_1.12.4.bb => wireshark_1.12.5.bb} (65%)
+
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.5.bb
+similarity index 65%
+rename from meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_1.12.5.bb
+index 6833216..21a7ce9 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_1.12.4.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.5.bb
+@@ -1,20 +1,17 @@
+ DESCRIPTION = "wireshark - a popular network protocol analyzer"
+ HOMEPAGE = "http://www.wireshark.org"
+-SECTION = "network"
++SECTION = "net"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
+ 
+ DEPENDS = "perl-native pcre expat glib-2.0 sbc"
+ 
+-SRC_URI = " \
+-    http://wiresharkdownloads.riverbed.com/wireshark/src/wireshark-${PV}.tar.bz2 \
+-    file://Do-not-set-CC_FOR_BUILD-flags.patch \
+-"
++SRC_URI = "https://2.na.dl.wireshark.org/src/wireshark-${PV}.tar.bz2"
+ 
+ PE = "1"
+ 
+-SRC_URI[md5sum] = "acfa156fd35cb66c867b1ace992e4b5b"
+-SRC_URI[sha256sum] = "de804e98e252e4b795d28d6ac2d48d7f5aacd9b046ee44d44266983795ebc312"
++SRC_URI[md5sum] = "9ee199dde4f36a3d71f7b81dd6764e93"
++SRC_URI[sha256sum] = "d0f177b2ef49e4deae4ff7d3299bdd295ba558a3934ce8ae489b2f13927cbd82"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -23,14 +20,15 @@ ARM_INSTRUCTION_SET = "arm"
+ # Works with either gtk+ or gtk3.
+ WHICH_GTK = "gtk3"
+ 
+-PACKAGECONFIG ??= "libcap gnutls libnl"
++PACKAGECONFIG ?= "libpcap gnutls libnl libcap"
+ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${WHICH_GTK}  graphics", "", d)}"
+ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
+ 
+-PACKAGECONFIG[libcap] = "--with-libcap=${STAGING_DIR_HOST}, --with-libcap=no, libcap"
+-PACKAGECONFIG[libsmi] = "--with-libsmi=yes, --with-libsmi=no, libsmi"
+-PACKAGECONFIG[libnl] = "--with-libnl=yes, --with-libnl=no, libnl"
+-PACKAGECONFIG[portaudio] = "--with-portaudio=yes, --with-portaudio=no, portaudio-v19"
++PACKAGECONFIG[libcap] = " --with-libcap=${STAGING_LIBDIR}, --with-libcap=no --enable-pcap-ng-default , libcap"
++PACKAGECONFIG[libpcap] = " --with-pcap=${STAGING_LIBDIR} --with-pcap-remote, --with-pcap=no --enable-pcap-ng-default  , libpcap"
++PACKAGECONFIG[libsmi] = " --with-libsmi=yes, --with-libsmi=no, libsmi"
++PACKAGECONFIG[libnl] = " --with-libnl=yes, --with-libnl=no, libnl"
++PACKAGECONFIG[portaudio] = " --with-portaudio=yes, --with-portaudio=no, portaudio-v19"
+ PACKAGECONFIG[gtk2] = "--with-gtk2=yes, --with-gtk2=no, gtk+"
+ PACKAGECONFIG[gtk3] = "--with-gtk3=yes, --with-gtk3=no, gtk+3"
+ PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
+@@ -39,14 +37,14 @@ PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
+ PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
+ PACKAGECONFIG[krb5] = "--with-krb5=yes, --with-krb5=no, krb5"
+ PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
+-PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
++PACKAGECONFIG[zlib] = " -with-zlib=yes, --with-zlib=no, zlib"
+ PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
+ 
+ # these next two options require addional layers
+ PACKAGECONFIG[adns] = "--with-adns=yes, --with-adns=no, adns"
+ PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
+ 
+-EXTRA_OECONF += "--with-qt=no --enable-usr-local=no --enable-tshark --with-pcap=no --enable-pcap-ng-default"
++EXTRA_OECONF += "--with-qt=no --enable-usr-local=no --enable-tshark --enable-rawshark"
+ 
+ do_configure_prepend() {
+     # force to use fallback 
+-- 
+2.3.5
+
 
