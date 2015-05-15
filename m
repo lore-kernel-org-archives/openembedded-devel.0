@@ -1,23 +1,35 @@
-Return-Path: <alejandro.hernandez@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FF317414B
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id F12D073DA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 May 2015 06:46:09 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga101.jf.intel.com with ESMTP; 14 May 2015 23:46:10 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,432,1427785200"; d="scan'208";a="710558668"
-Received: from unknown (HELO aehernan-DevStation.lar.corp.intel.com)
-	([10.252.250.49])
-	by fmsmga001.fm.intel.com with ESMTP; 14 May 2015 23:46:10 -0700
-From: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 May 2015 01:46:09 -0500
-Message-Id: <1431672369-15915-2-git-send-email-alejandro.hernandez@linux.intel.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1431672369-15915-1-git-send-email-alejandro.hernandez@linux.intel.com>
-References: <1431672369-15915-1-git-send-email-alejandro.hernandez@linux.intel.com>
-Subject: [meta-webserver][PATCH] php-fpm: Add support for systemd
+	Fri, 15 May 2015 12:43:38 +0000 (UTC)
+Received: by padbw4 with SMTP id bw4so12027947pad.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 May 2015 05:43:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=ShcaqPFCsnLtE9ifcse1/uKNtK8fZLYVPmNg/yDFqiU=;
+	b=OZx5IdKRyptH/zxBdxnFaXpCX9Nn4CVEG8KtXzrSpDg82BzMqeRlqmslQEIxfL2ila
+	ciGbjfIgfiIWa8Oy4WW9i1WKU1Ltn46LPAoQVGaV1ekSzTSuITO98SJtkzxV6zblPOIB
+	1ikyzNSSNWzuw7ZyEzWVJ0UGlwO2JTDwu/0Tp/kmwuAeO9DhaIt93tHgaW2GZ2ZE2FYd
+	iV7LsYflQdyta5Cix7+Npzoru+SH9T7PGiWPU0kJOxZzgACEl70Wz69/N2zJWtSCkq6t
+	l+7iXLKPaxYgJfBSzgtMKJ8bGVvt+O08/LSSmr0qf7uXlkdZbT+YJoRMeXi6lwx2RPaE
+	rqgg==
+MIME-Version: 1.0
+X-Received: by 10.70.96.194 with SMTP id du2mr18229902pdb.108.1431693819316;
+	Fri, 15 May 2015 05:43:39 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.70.34.109 with HTTP; Fri, 15 May 2015 05:43:39 -0700 (PDT)
+In-Reply-To: <1431647846-2409-1-git-send-email-raj.khem@gmail.com>
+References: <1431647846-2409-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 15 May 2015 09:43:39 -0300
+X-Google-Sender-Auth: Th7myW8-AGC2kz_wGvzCAs3esu0
+Message-ID: <CAP9ODKrBRj12Uq1YD8eu27WPnJYXrK=PtS8NoyOGGgPN6OAvCw@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH] cef,chromium: Separate out installs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,72 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 May 2015 06:46:09 -0000
+X-List-Received-Date: Fri, 15 May 2015 12:43:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Adds suport for systemd, creates a service for php-fpm and installs it if required
+On Thu, May 14, 2015 at 8:57 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Use specific domains for installation, so they can be built and
+> installed in a single build
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Signed-off-by: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
----
- meta-oe/recipes-devtools/php/php/php-fpm.service | 10 ++++++++++
- meta-oe/recipes-devtools/php/php_5.5.24.bb       | 13 ++++++++++++-
- 2 files changed, 22 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/php/php/php-fpm.service
+Thanks for addressing it.
 
-diff --git a/meta-oe/recipes-devtools/php/php/php-fpm.service b/meta-oe/recipes-devtools/php/php/php-fpm.service
-new file mode 100644
-index 0000000..ac79dc9
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/php-fpm.service
-@@ -0,0 +1,10 @@
-+[Unit]
-+Description=PHP-FPM
-+After=network.target
-+[Service]
-+Type=forking
-+PIDFile=@LOCALSTATEDIR@/run/php-fpm.pid
-+ExecStart=@SYSCONFDIR@/init.d/php-fpm start
-+ExecStop=@SYSCONFDIR@/init.d/php-fpm stop
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.24.bb b/meta-oe/recipes-devtools/php/php_5.5.24.bb
-index 76185fb..3e656af 100644
---- a/meta-oe/recipes-devtools/php/php_5.5.24.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.5.24.bb
-@@ -27,6 +27,7 @@ SRC_URI_append_class-target += " \
-             file://configure.patch \
-             file://pthread-check-threads-m4.patch \
-             file://70_mod_php5.conf \
-+            file://php-fpm.service \
-           "
- 
- SRC_URI[md5sum] = "f9a8f3e4bb88b33b087bd63732b1402a"
-@@ -156,6 +157,16 @@ do_install_append_class-target() {
-     sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
-     sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
-     install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
-+    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/php-fpm.service ${D}${systemd_unitdir}/system/
-+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
-+            -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
-+            ${D}${systemd_unitdir}/system/php-fpm.service
-+    fi
-+
-     TMP=`dirname ${D}/${TMPDIR}`
-     while test ${TMP} != ${D}; do
-         rmdir ${TMP}
-@@ -206,7 +217,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
- FILES_${PN}-cli = "${bindir}/php"
- FILES_${PN}-phar = "${bindir}/phar*"
- FILES_${PN}-cgi = "${bindir}/php-cgi"
--FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm"
-+FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
- FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
- CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
- CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
 -- 
-1.9.1
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
