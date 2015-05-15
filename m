@@ -1,21 +1,23 @@
 Return-Path: <alejandro.hernandez@linux.intel.com>
 Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id DC9D373779
+	by mail.openembedded.org (Postfix) with ESMTP id 048FD73D9A
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 15 May 2015 06:45:02 +0000 (UTC)
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 14 May 2015 23:45:03 -0700
+	by fmsmga101.fm.intel.com with ESMTP; 14 May 2015 23:45:04 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,432,1427785200"; d="scan'208";a="710558287"
+X-IronPort-AV: E=Sophos;i="5.13,432,1427785200"; d="scan'208";a="710558294"
 Received: from unknown (HELO aehernan-DevStation.lar.corp.intel.com)
 	([10.252.250.49])
-	by fmsmga001.fm.intel.com with ESMTP; 14 May 2015 23:45:02 -0700
+	by fmsmga001.fm.intel.com with ESMTP; 14 May 2015 23:45:03 -0700
 From: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 May 2015 01:45:01 -0500
-Message-Id: <1431672302-15816-1-git-send-email-alejandro.hernandez@linux.intel.com>
+Date: Fri, 15 May 2015 01:45:02 -0500
+Message-Id: <1431672302-15816-2-git-send-email-alejandro.hernandez@linux.intel.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [PATCH] php-fpm: Add support for systemd
+In-Reply-To: <1431672302-15816-1-git-send-email-alejandro.hernandez@linux.intel.com>
+References: <1431672302-15816-1-git-send-email-alejandro.hernandez@linux.intel.com>
+Subject: [meta-oe][PATCH] php-fpm: Add support for systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
