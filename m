@@ -1,34 +1,21 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 1346772CFD
+Return-Path: <alejandro.hernandez@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id DC9D373779
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2015 23:57:41 +0000 (UTC)
-Received: by igbhj9 with SMTP id hj9so88158882igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 May 2015 16:57:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=w7ohntl+Cy2++51XFpoHQIvWQI4br9CnsLzAzJkydgM=;
-	b=y9Go2VL5lv1KBuIo/WGX2oWXaGH+MerGKzU05cxLNX0HZhvX/CKQ6sPI/pIAs9YClJ
-	IXiLSRGA44W+IcYRSwGzahuwt1iPhwnsZpGh3NkVAsZcIyUCOTrubV6GJzhFzZJrn6il
-	m25g2JxGBP/7le6IFwF9H0VVzIt16vD+Zg43/IUJfWDoUSu92yIJvGiGu9IgTgZQ9vC7
-	jB9P+qbn/ANP3tdJhZZZjd4TlbigmFuKL7eqH8P26VonODac2y4DUAEWeALdN0JIOyZ5
-	E6ac0Jz1p7VPhhTgOmblrmnfAIJRu7MXUtbDf6Ex9gPG+DAHn3FvXE6EZM4EjGGsippi
-	ZTKw==
-X-Received: by 10.42.187.65 with SMTP id cv1mr18142140icb.87.1431647863023;
-	Thu, 14 May 2015 16:57:43 -0700 (PDT)
-Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
-	[96.119.89.79])
-	by mx.google.com with ESMTPSA id m143sm394559ioe.4.2015.05.14.16.57.41
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 14 May 2015 16:57:41 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 15 May 2015 06:45:02 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 14 May 2015 23:45:03 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,432,1427785200"; d="scan'208";a="710558287"
+Received: from unknown (HELO aehernan-DevStation.lar.corp.intel.com)
+	([10.252.250.49])
+	by fmsmga001.fm.intel.com with ESMTP; 14 May 2015 23:45:02 -0700
+From: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 May 2015 16:57:26 -0700
-Message-Id: <1431647846-2409-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-browser][PATCH] cef,chromium: Separate out installs
+Date: Fri, 15 May 2015 01:45:01 -0500
+Message-Id: <1431672302-15816-1-git-send-email-alejandro.hernandez@linux.intel.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] php-fpm: Add support for systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,180 +29,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 May 2015 23:57:43 -0000
+X-List-Received-Date: Fri, 15 May 2015 06:45:03 -0000
 
-Use specific domains for installation, so they can be built and
-installed in a single build
+Adds suport for systemd, creates a service for php-fpm and installs it if required
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
 ---
- .../{chromium/google-chrome => cef3/cef-simple}    |  6 ++---
- recipes-browser/chromium/cef3_280796.bb            |  1 +
- recipes-browser/chromium/chromium.inc              | 30 ++++++++++++----------
- recipes-browser/chromium/chromium/google-chrome    |  4 +--
- .../chromium/chromium/google-chrome.desktop        |  2 +-
- recipes-browser/chromium/chromium_40.0.2214.91.bb  |  4 +--
- 6 files changed, 25 insertions(+), 22 deletions(-)
- copy recipes-browser/chromium/{chromium/google-chrome => cef3/cef-simple} (66%)
+ meta-oe/recipes-devtools/php/php/php-fpm.service | 10 ++++++++++
+ meta-oe/recipes-devtools/php/php_5.5.24.bb       | 13 ++++++++++++-
+ 2 files changed, 22 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php/php-fpm.service
 
-diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/cef3/cef-simple
-similarity index 66%
-copy from recipes-browser/chromium/chromium/google-chrome
-copy to recipes-browser/chromium/cef3/cef-simple
-index 78f4a29..ce377e1 100644
---- a/recipes-browser/chromium/chromium/google-chrome
-+++ b/recipes-browser/chromium/cef3/cef-simple
-@@ -1,11 +1,11 @@
- #!/bin/sh
+diff --git a/meta-oe/recipes-devtools/php/php/php-fpm.service b/meta-oe/recipes-devtools/php/php/php-fpm.service
+new file mode 100644
+index 0000000..ac79dc9
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/php-fpm.service
+@@ -0,0 +1,10 @@
++[Unit]
++Description=PHP-FPM
++After=network.target
++[Service]
++Type=forking
++PIDFile=@LOCALSTATEDIR@/run/php-fpm.pid
++ExecStart=@SYSCONFDIR@/init.d/php-fpm start
++ExecStop=@SYSCONFDIR@/init.d/php-fpm stop
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.24.bb b/meta-oe/recipes-devtools/php/php_5.5.24.bb
+index 76185fb..3e656af 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.24.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.24.bb
+@@ -27,6 +27,7 @@ SRC_URI_append_class-target += " \
+             file://configure.patch \
+             file://pthread-check-threads-m4.patch \
+             file://70_mod_php5.conf \
++            file://php-fpm.service \
+           "
  
- export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
--export LD_LIBRARY_PATH=/usr/lib/chrome
-+export LD_LIBRARY_PATH=/usr/lib/cef3
- 
- CHROME_EXTRA_ARGS=""
- if [ "${USER}" = "root" ] ; then
--	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=${HOME}/.chromium/"
-+	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=${HOME}/.cef3/"
- fi
- 
--/usr/bin/chrome/chrome ${CHROME_EXTRA_ARGS} $@
-+/usr/bin/cef3/cefsimple ${CHROME_EXTRA_ARGS} $@
-diff --git a/recipes-browser/chromium/cef3_280796.bb b/recipes-browser/chromium/cef3_280796.bb
-index 9ca5810..9a9efe5 100644
---- a/recipes-browser/chromium/cef3_280796.bb
-+++ b/recipes-browser/chromium/cef3_280796.bb
-@@ -14,6 +14,7 @@ SRC_URI = "http://people.linaro.org/~zoltan.kuscsik/chromium-browser/chromium_re
-            git://github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=src/ui/ozone/platform/egl;branch=master;name=egl \
-            git://chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools \
-            file://01_get_svn_version_from_LASTCHANGE.patch \
-+	   file://cef-simple \
- 	  "
- SRC_URI[md5sum] = "9efbb50283b731042e62b9bd5e312b2f"
- SRC_URI[sha256sum] = "f608e97dadf6ea4d885b24fd876896d46840fa39bf743ea2025075aee9fb348d"
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 72a649d..377e685 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -34,20 +34,23 @@ do_install() {
- 	if [ -f "${WORKDIR}/google-chrome" ]; then
- 		install -Dm 0755 ${WORKDIR}/google-chrome ${D}${bindir}/google-chrome
- 	fi
-+	if [ -f "${WORKDIR}/cef-simple" ]; then
-+		install -Dm 0755 ${WORKDIR}/cef-simple ${D}${bindir}/cef-simple
-+	fi
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox" ]; then
- 		install -Dm 4755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome_sandbox ${D}${sbindir}/chrome-devel-sandbox
- 	fi
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple" ]; then
--		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}/cefsimple
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple ${D}${bindir}/${BPN}/cefsimple
- 	fi
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
- 		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so ${D}${bindir}/lib/libcef.so
- 	fi
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome" ]; then
--		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/chrome/chrome
-+		install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome ${D}${bindir}/${BPN}/chrome
- 	fi
- 	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat" ]; then
--		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}/chrome/icudtl.dat
-+		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/icudtl.dat ${D}${bindir}/${BPN}/icudtl.dat
- 	fi
- 	if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
- 		install -Dm 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/google-chrome.desktop
-@@ -55,7 +58,7 @@ do_install() {
- 	#Chromium plugins libs
- 	for f in libpdf.so libosmesa.so libffmpegsumo.so; do
- 		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
--			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/chrome/$f
-+			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/${BPN}/$f
- 		fi
- 	done
- 
-@@ -64,7 +67,7 @@ do_install() {
- 	         cef_100_percent.pak cef_200_percent.pak cef_resources.pak cef.pak \
- 		 locales/en-US.pak; do
- 		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
--			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/chrome/$f
-+			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/${BPN}/$f
- 		fi
- 	done
- 
-@@ -72,19 +75,18 @@ do_install() {
- 
- PACKAGES =+ "${PN}-codecs-ffmpeg ${PN}-plugin-pdf"
- 
--FILES_${PN}-codecs-ffmpeg = "${libdir}/chrome/libffmpegsumo.so"
--FILES_${PN}-plugin-pdf = "${libdir}/chrome/libpdf.so"
-+FILES_${PN}-codecs-ffmpeg = "${libdir}/${BPN}/libffmpegsumo.so"
-+FILES_${PN}-plugin-pdf = "${libdir}/${BPN}/libpdf.so"
+ SRC_URI[md5sum] = "f9a8f3e4bb88b33b087bd63732b1402a"
+@@ -156,6 +157,16 @@ do_install_append_class-target() {
+     sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
+     sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
+     install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
++    install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
 +
-+FILES_${PN} = "${bindir}/${BPN} ${datadir}/applications ${sbindir}/ ${libdir}/${BPN}/"
-+FILES_${PN} += "${bindir} ${libdir}"
-+FILES_${PN} += "${bindir}/${BPN}/*.pak"
-+FILES_${PN} += "${bindir}/${BPN}/locales/*.pak"
- 
--FILES_${PN} = "${bindir}/chrome/ ${bindir}/google-chrome ${datadir}/applications ${sbindir}/ ${libdir}/chrome/"
--FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/chrome/.debug/"
-+FILES_${PN}-dbg += "${bindir}/${BPN}/.debug/ ${libdir}/${BPN}/.debug/ ${libdir}/.debug/"
- 
- PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
- 
- INSANE_SKIP_${PN} = "ldflags"
- SOLIBS = ".so"
- FILES_SOLIBSDEV = ""
--FILES_${PN} += "${bindir} ${bindir}/chrome/ ${libdir}"
--FILES_${PN} += "${bindir}/chrome/*.pak"
--FILES_${PN} += "${bindir}/chrome/locales/*.pak"
--FILES_${PN}-dbg += "${bindir}/chrome/.debug/ ${libdir}/.debug/"
--
-diff --git a/recipes-browser/chromium/chromium/google-chrome b/recipes-browser/chromium/chromium/google-chrome
-index 78f4a29..b1ec288 100644
---- a/recipes-browser/chromium/chromium/google-chrome
-+++ b/recipes-browser/chromium/chromium/google-chrome
-@@ -1,11 +1,11 @@
- #!/bin/sh
- 
- export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
--export LD_LIBRARY_PATH=/usr/lib/chrome
-+export LD_LIBRARY_PATH=/usr/lib/chromium
- 
- CHROME_EXTRA_ARGS=""
- if [ "${USER}" = "root" ] ; then
- 	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=${HOME}/.chromium/"
- fi
- 
--/usr/bin/chrome/chrome ${CHROME_EXTRA_ARGS} $@
-+/usr/bin/chromium/chrome ${CHROME_EXTRA_ARGS} $@
-diff --git a/recipes-browser/chromium/chromium/google-chrome.desktop b/recipes-browser/chromium/chromium/google-chrome.desktop
-index 76a2533..094bd82 100644
---- a/recipes-browser/chromium/chromium/google-chrome.desktop
-+++ b/recipes-browser/chromium/chromium/google-chrome.desktop
-@@ -107,7 +107,7 @@ Comment[zh_HK]=???????
- Comment[zh_TW]=???????
- Exec=/usr/bin/google-chrome %U
- Terminal=false
--Icon=/usr/bin/chrome/product_logo_48.png
-+Icon=/usr/bin/chromium/product_logo_48.png
- Type=Application
- Categories=Network;WebBrowser;
- MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-index 53af755..0a73f1e 100644
---- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
-+++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -189,8 +189,8 @@ do_install_append() {
- 
- 	# Always adding this libdir (not just with component builds), because the
-         # LD_LIBRARY_PATH line in the google-chromium script refers to it
--        install -d ${D}${libdir}/chrome/
-+        install -d ${D}${libdir}/${BPN}/
-         if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
--                install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/*.so ${D}${libdir}/chrome/
-+                install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/*.so ${D}${libdir}/${BPN}/
-         fi
- }
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/php-fpm.service ${D}${systemd_unitdir}/system/
++        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++            -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
++            ${D}${systemd_unitdir}/system/php-fpm.service
++    fi
++
+     TMP=`dirname ${D}/${TMPDIR}`
+     while test ${TMP} != ${D}; do
+         rmdir ${TMP}
+@@ -206,7 +217,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
+ FILES_${PN}-cli = "${bindir}/php"
+ FILES_${PN}-phar = "${bindir}/phar*"
+ FILES_${PN}-cgi = "${bindir}/php-cgi"
+-FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm"
++FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
+ FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+ CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+ CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
 -- 
-2.1.4
+1.9.1
 
 
