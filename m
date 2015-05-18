@@ -1,26 +1,38 @@
-Return-Path: <stevend@limotec.be>
-Received: from mailrelay112.isp.belgacom.be (mailrelay112.isp.belgacom.be
-	[195.238.20.139])
-	by mail.openembedded.org (Postfix) with ESMTP id A4CBF72207
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 69674609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 May 2015 14:39:36 +0000 (UTC)
-X-Cloudmark-SP-Filtered: true
-X-Cloudmark-SP-Result: v=1.1 cv=U3bOsIs4jTLKnNjizNqmwgH4x/ZVWD6r1e7q5IgUJPc=
-	c=1 sm=2
-	a=IkcTkHD0fZMA:10 a=VAS9EktPU-wGvt9GZ4QA:9 a=QEXdDO2ut3YA:10
-	a=DYtS7lmHX44A:10 a=_qu8OrzqZu8A:10
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2BSCwD++FlV/3wytdVcgj+FIcsrAQEBAQEBhVeBCwImAokdBqRDj1ekSoEhjzuCUoFFBbRrI2FmDIIngzMBAQE
-Received: from 124.50-181-213.adsl-static.isp.belgacom.be (HELO
-	[123.123.100.26]) ([213.181.50.124])
-	by relay.skynet.be with ESMTP; 18 May 2015 16:39:36 +0200
-Message-ID: <1431959981.7345.2.camel@pco026>
-From: Steven Descheemaeker <stevend@limotec.be>
+	Mon, 18 May 2015 16:58:50 +0000 (UTC)
+Received: by qkgw4 with SMTP id w4so73072575qkg.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 May 2015 09:58:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=ZFDiFW+JJadn+Dh+lWP8/FcKcaITe9212SZ1LSMLCmQ=;
+	b=TXivYPnYTTjJiG+xI6WZe24Ws/OHCPLJt3pw+TU+3ty029ldDmx/K1mY49HIYut+pP
+	w/SfsjkeNXXD/9+ZLJikOK6panjqZtT0kgth688Hekj3IisKcS/UaRRzGz7Sd7AFJIDW
+	sLQgBteYiEN/sP82I1c9Qp6i/j93LroDXbOOzSXIs3sfpUWf8lbJNzjr8+2D4+8P3byA
+	X5hkBNjOc+RviitiCK8cYa3rk7hQM19Bm/cFzO+4ejoa5DVErFu3/eW7cAhF7rJFwOpK
+	nODDa6Lwq91HK0nG80MvMchsjvzqARDsy9bDK3Vl3zrkt6NZPzUUWVbVM7Nvt/oS03Wq
+	ffew==
+X-Gm-Message-State: ALoCoQm09m9SMpfXk2gf7xAwUVICMNRS8kVjZ+Nglw3khdbFjvK/SwH+72LHCaho+8EUDJ2IUEuo
+X-Received: by 10.140.43.228 with SMTP id e91mr29522681qga.80.1431968331093;
+	Mon, 18 May 2015 09:58:51 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.102.231 with HTTP; Mon, 18 May 2015 09:58:30 -0700 (PDT)
+In-Reply-To: <5559F424.3060607@pseudoterminal.org>
+References: <1431958369-14668-1-git-send-email-alexander.kanavin@linux.intel.com>
+	<1431958369-14668-5-git-send-email-alexander.kanavin@linux.intel.com>
+	<5559F424.3060607@pseudoterminal.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 18 May 2015 17:58:30 +0100
+Message-ID: <CAJTo0La2VPoDJCoOZoH2Zvmv8b9=fnq7NqBdUHe3tW3q9deTBg@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 May 2015 16:39:41 +0200
-X-Mailer: Evolution 3.4.4-3 
-Mime-Version: 1.0
-Subject: CUPS ppd drivers
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 4/4] Rename gstreamer directory to gstreamer-0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,25 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 14:39:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 May 2015 16:58:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On 18 May 2015 at 15:16, Carlos Rafael Giani <dv@pseudoterminal.org> wrote:
 
-I'm trying to add printer support to my embedded board. I'm able to
-build cups but there aren't any driver packages. 
+> Would it be possible to rename the recipes to match the naming convention
+> of the 1.0 ones?
+> For example, instead of "gst-plugins-bad", it would be
+> "gstreamer0.10-plugins-bad".
+> Is such a backwards compatibility break tolerable between major OE
+> releases?
+>
 
-Are there any recent packages for printer drivers? I already tried to
-build gutenprint/foomatic myself but I'm relatively new to yocto so I'm
-not that good in writing recipes my own. 
+I agree with Alex - renaming the recipes is massively invasive and you'd
+need to set up a lot of RPROVIDES/RCONFLICTS to provide a migration path
+for very little gain.
 
-Anyone can help me out with this ?
--- 
-Steven Descheemaeker
-Software developer
-Limotec BVBA
-Bosstraat 21
-8570 Vichte
-
+Ross
 
