@@ -1,38 +1,34 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 69674609B2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 May 2015 16:58:50 +0000 (UTC)
-Received: by qkgw4 with SMTP id w4so73072575qkg.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 May 2015 09:58:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=ZFDiFW+JJadn+Dh+lWP8/FcKcaITe9212SZ1LSMLCmQ=;
-	b=TXivYPnYTTjJiG+xI6WZe24Ws/OHCPLJt3pw+TU+3ty029ldDmx/K1mY49HIYut+pP
-	w/SfsjkeNXXD/9+ZLJikOK6panjqZtT0kgth688Hekj3IisKcS/UaRRzGz7Sd7AFJIDW
-	sLQgBteYiEN/sP82I1c9Qp6i/j93LroDXbOOzSXIs3sfpUWf8lbJNzjr8+2D4+8P3byA
-	X5hkBNjOc+RviitiCK8cYa3rk7hQM19Bm/cFzO+4ejoa5DVErFu3/eW7cAhF7rJFwOpK
-	nODDa6Lwq91HK0nG80MvMchsjvzqARDsy9bDK3Vl3zrkt6NZPzUUWVbVM7Nvt/oS03Wq
-	ffew==
-X-Gm-Message-State: ALoCoQm09m9SMpfXk2gf7xAwUVICMNRS8kVjZ+Nglw3khdbFjvK/SwH+72LHCaho+8EUDJ2IUEuo
-X-Received: by 10.140.43.228 with SMTP id e91mr29522681qga.80.1431968331093;
-	Mon, 18 May 2015 09:58:51 -0700 (PDT)
+Return-Path: <dbaryshkov@gmail.com>
+Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 763E260125;
+	Mon, 18 May 2015 21:57:32 +0000 (UTC)
+Received: by igbhj9 with SMTP id hj9so18546853igb.1;
+	Mon, 18 May 2015 14:57:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=pUuT8UAGoMR+OrBFyWJLOq9lFarexc/HPPasToaW8qc=;
+	b=km9caFDguvAyz3DmDqo56wxuDVTEkBYW74bgOTzchrA7raLyFSEGLLiY5Pxpy+eQAQ
+	OltrD6LwAQG8JHVhwvepG6e/h5mLdtqh1D1XNyvcpnAdrF6UvnEf0rmRhTs6Mc4EdmMM
+	MDCbYDWxT1VuCTZNlzpsNadktVfs87f7JjPHyLUJx33OXY1h0GOL6wrroeqk4f8Qzbmb
+	QfUCuz3iQOVM//IAgQmul4k4ztwEGbtP8hEp/kYNYjd75oUfYpO9gn49lkTLEPaVWHC2
+	a3c5bgRr862dB/sbD5AX2jDuA7+Zd9BV2b3a9rhD8B4h6Ko7JjE4N7W3fOvcEQIGR2Tg
+	+H+g==
 MIME-Version: 1.0
-Received: by 10.140.102.231 with HTTP; Mon, 18 May 2015 09:58:30 -0700 (PDT)
-In-Reply-To: <5559F424.3060607@pseudoterminal.org>
-References: <1431958369-14668-1-git-send-email-alexander.kanavin@linux.intel.com>
-	<1431958369-14668-5-git-send-email-alexander.kanavin@linux.intel.com>
-	<5559F424.3060607@pseudoterminal.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 18 May 2015 17:58:30 +0100
-Message-ID: <CAJTo0La2VPoDJCoOZoH2Zvmv8b9=fnq7NqBdUHe3tW3q9deTBg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 4/4] Rename gstreamer directory to gstreamer-0.10
+X-Received: by 10.43.59.80 with SMTP id wn16mr278689icb.40.1431986254052; Mon,
+	18 May 2015 14:57:34 -0700 (PDT)
+Received: by 10.64.233.66 with HTTP; Mon, 18 May 2015 14:57:33 -0700 (PDT)
+In-Reply-To: <20150504222711.GD5885@denix.org>
+References: <20150504222711.GD5885@denix.org>
+Date: Tue, 19 May 2015 00:57:33 +0300
+Message-ID: <CALT56yOCD5Qp4PmqsR_K9zOXSeMbQ5mo8K2FSVvdUvhNFVJ5mA@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: openembedded-members <openembedded-members@lists.openembedded.org>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: OpenEmbedded e.V. membership status announcement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,22 +42,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 16:58:50 -0000
+X-List-Received-Date: Mon, 18 May 2015 21:57:33 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 18 May 2015 at 15:16, Carlos Rafael Giani <dv@pseudoterminal.org> wrote:
+Hello,
 
-> Would it be possible to rename the recipes to match the naming convention
-> of the 1.0 ones?
-> For example, instead of "gst-plugins-bad", it would be
-> "gstreamer0.10-plugins-bad".
-> Is such a backwards compatibility break tolerable between major OE
-> releases?
+2015-05-05 1:27 GMT+03:00 Denys Dmytriyenko <denis@denix.org>:
+> All,
 >
+> In accordance with OpenEmbedded e.V. statutes, members that were absent from
+> two or more consecutive annual General Assembly meetings and didn't have
+> anyone representing them by proxy, forfeit their active membership status and
+> can no longer vote in any OE e.V. election. Thus, the current up-to-date
+> membership roster is one of the blocking items for any election process.
+>
+> After collating the attendance records and all gathered proxy forms from past
+> years GA meetings, the Board of Directors came up with the following list of
+> inactive members - see below.
+>
+> Realizing, that some people may still be active in other capacities in the
+> OpenEmbedded e.V. organization, or just wish to renew their active status, the
+> Board of Directors would like to open up a two-week period for inactive
+> members to state their intent to become active, after which we should be able
+> to vote for reinstating them back.
+>
+> The Board will make an effort to contact inactive members directly by email,
+> or please feel free to reply to this announcement with your intent. Thanks.
+>
+> The list of e.V. members to become inactive, based on GA attendance:
 
-I agree with Alex - renaming the recipes is massively invasive and you'd
-need to set up a lot of RPROVIDES/RCONFLICTS to provide a migration path
-for very little gain.
+[skipped a list with my name in it]
 
-Ross
+While I'm an active user and sporadically active contributor to OE,
+I'm not a frequent visitor to the conferences, where GA take place :(
+I tried using proxies for GA attendance, but it did not work for
+various reasons. So I'm OK with being listed as an 'inactive' member.
+Hoping that I will be able to become formally 'active' again, if I
+become active wrt. e.V in real life.
+
+-- 
+With best wishes
+Dmitry
 
