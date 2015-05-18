@@ -1,27 +1,26 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 86C1165C9C
+Return-Path: <stevend@limotec.be>
+Received: from mailrelay112.isp.belgacom.be (mailrelay112.isp.belgacom.be
+	[195.238.20.139])
+	by mail.openembedded.org (Postfix) with ESMTP id A4CBF72207
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 May 2015 14:24:18 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 18 May 2015 07:24:14 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,453,1427785200"; 
-	d="scan'208,217";a="731161932"
-Received: from linux-8hqz.fi.intel.com (HELO linux-8hqz.site) ([10.237.68.142])
-	by orsmga002.jf.intel.com with ESMTP; 18 May 2015 07:24:13 -0700
-Message-ID: <5559F629.2010602@linux.intel.com>
-Date: Mon, 18 May 2015 17:24:41 +0300
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
+	Mon, 18 May 2015 14:39:36 +0000 (UTC)
+X-Cloudmark-SP-Filtered: true
+X-Cloudmark-SP-Result: v=1.1 cv=U3bOsIs4jTLKnNjizNqmwgH4x/ZVWD6r1e7q5IgUJPc=
+	c=1 sm=2
+	a=IkcTkHD0fZMA:10 a=VAS9EktPU-wGvt9GZ4QA:9 a=QEXdDO2ut3YA:10
+	a=DYtS7lmHX44A:10 a=_qu8OrzqZu8A:10
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2BSCwD++FlV/3wytdVcgj+FIcsrAQEBAQEBhVeBCwImAokdBqRDj1ekSoEhjzuCUoFFBbRrI2FmDIIngzMBAQE
+Received: from 124.50-181-213.adsl-static.isp.belgacom.be (HELO
+	[123.123.100.26]) ([213.181.50.124])
+	by relay.skynet.be with ESMTP; 18 May 2015 16:39:36 +0200
+Message-ID: <1431959981.7345.2.camel@pco026>
+From: Steven Descheemaeker <stevend@limotec.be>
 To: openembedded-devel@lists.openembedded.org
-References: <1431958369-14668-1-git-send-email-alexander.kanavin@linux.intel.com>	<1431958369-14668-5-git-send-email-alexander.kanavin@linux.intel.com>
-	<5559F424.3060607@pseudoterminal.org>
-In-Reply-To: <5559F424.3060607@pseudoterminal.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 4/4] Rename gstreamer directory to gstreamer-0.10
+Date: Mon, 18 May 2015 16:39:41 +0200
+X-Mailer: Evolution 3.4.4-3 
+Mime-Version: 1.0
+Subject: CUPS ppd drivers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,26 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 14:24:23 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Mon, 18 May 2015 14:39:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 05/18/2015 05:16 PM, Carlos Rafael Giani wrote:
-> Would it be possible to rename  the recipes to match the naming
- > convention of the 1.0 ones? For example, instead of
- > "gst-plugins-bad", it would be "gstreamer0.10-plugins-bad". Is such
- > a backwards compatibility break tolerable between major OE releases?
- >
+Hello,
 
-Uhm, I wouldn't want to do it:
+I'm trying to add printer support to my embedded board. I'm able to
+build cups but there aren't any driver packages. 
 
-1) The rename would break all the 3rd party BSP/application recipes.
+Are there any recent packages for printer drivers? I already tried to
+build gutenprint/foomatic myself but I'm relatively new to yocto so I'm
+not that good in writing recipes my own. 
 
-2) GStreamer 0.10 is explicitly obsolete and unsupported, and as of 
-today, provided only to ease the transition to 1.0. The 0.10 recipes 
-won't be updated anymore, unless someone in the community wants to do it.
-
-
-Alex
+Anyone can help me out with this ?
+-- 
+Steven Descheemaeker
+Software developer
+Limotec BVBA
+Bosstraat 21
+8570 Vichte
 
 
