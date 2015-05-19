@@ -1,34 +1,33 @@
-Return-Path: <dbaryshkov@gmail.com>
-Received: from mail-ig0-f176.google.com (mail-ig0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 763E260125;
-	Mon, 18 May 2015 21:57:32 +0000 (UTC)
-Received: by igbhj9 with SMTP id hj9so18546853igb.1;
-	Mon, 18 May 2015 14:57:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=pUuT8UAGoMR+OrBFyWJLOq9lFarexc/HPPasToaW8qc=;
-	b=km9caFDguvAyz3DmDqo56wxuDVTEkBYW74bgOTzchrA7raLyFSEGLLiY5Pxpy+eQAQ
-	OltrD6LwAQG8JHVhwvepG6e/h5mLdtqh1D1XNyvcpnAdrF6UvnEf0rmRhTs6Mc4EdmMM
-	MDCbYDWxT1VuCTZNlzpsNadktVfs87f7JjPHyLUJx33OXY1h0GOL6wrroeqk4f8Qzbmb
-	QfUCuz3iQOVM//IAgQmul4k4ztwEGbtP8hEp/kYNYjd75oUfYpO9gn49lkTLEPaVWHC2
-	a3c5bgRr862dB/sbD5AX2jDuA7+Zd9BV2b3a9rhD8B4h6Ko7JjE4N7W3fOvcEQIGR2Tg
-	+H+g==
+Return-Path: <marc@cpdesign.com.au>
+X-Greylist: delayed 1058 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 19 May 2015 01:06:27 UTC
+Received: from s36.web-servers.com.au (s36.web-servers.com.au [118.127.46.63])
+	by mail.openembedded.org (Postfix) with ESMTP id E626760962
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 May 2015 01:06:27 +0000 (UTC)
+Received: from ppp59-167-120-30.static.internode.on.net ([59.167.120.30]:50424
+	helo=dev2.localnet) by s36.web-servers.com.au with esmtpsa
+	(TLSv1.2:DHE-RSA-AES256-GCM-SHA384:256) (Exim 4.85)
+	(envelope-from <marc@cpdesign.com.au>)
+	id 1YuViC-000vDn-Ok; Tue, 19 May 2015 10:48:48 +1000
+From: Marc Reilly <marc@cpdesign.com.au>
+To: Steven Descheemaeker <stevend@limotec.be>
+Date: Tue, 19 May 2015 10:42:10 +1000
+Message-ID: <2040476.ASQcAD4fVn@dev2>
+User-Agent: KMail/4.11.5 (Linux/3.11.10-29-desktop; KDE/4.11.5; x86_64; ; )
+In-Reply-To: <1431959981.7345.2.camel@pco026>
+References: <1431959981.7345.2.camel@pco026>
 MIME-Version: 1.0
-X-Received: by 10.43.59.80 with SMTP id wn16mr278689icb.40.1431986254052; Mon,
-	18 May 2015 14:57:34 -0700 (PDT)
-Received: by 10.64.233.66 with HTTP; Mon, 18 May 2015 14:57:33 -0700 (PDT)
-In-Reply-To: <20150504222711.GD5885@denix.org>
-References: <20150504222711.GD5885@denix.org>
-Date: Tue, 19 May 2015 00:57:33 +0300
-Message-ID: <CALT56yOCD5Qp4PmqsR_K9zOXSeMbQ5mo8K2FSVvdUvhNFVJ5mA@mail.gmail.com>
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-To: openembedded-members <openembedded-members@lists.openembedded.org>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: OpenEmbedded e.V. membership status announcement
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - s36.web-servers.com.au
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - cpdesign.com.au
+X-Get-Message-Sender-Via: s36.web-servers.com.au: authenticated_id:
+	marc@cpdesign.com.au
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: CUPS ppd drivers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,45 +41,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 May 2015 21:57:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 19 May 2015 01:06:28 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hello,
+Hi Steven,
 
-2015-05-05 1:27 GMT+03:00 Denys Dmytriyenko <denis@denix.org>:
-> All,
->
-> In accordance with OpenEmbedded e.V. statutes, members that were absent from
-> two or more consecutive annual General Assembly meetings and didn't have
-> anyone representing them by proxy, forfeit their active membership status and
-> can no longer vote in any OE e.V. election. Thus, the current up-to-date
-> membership roster is one of the blocking items for any election process.
->
-> After collating the attendance records and all gathered proxy forms from past
-> years GA meetings, the Board of Directors came up with the following list of
-> inactive members - see below.
->
-> Realizing, that some people may still be active in other capacities in the
-> OpenEmbedded e.V. organization, or just wish to renew their active status, the
-> Board of Directors would like to open up a two-week period for inactive
-> members to state their intent to become active, after which we should be able
-> to vote for reinstating them back.
->
-> The Board will make an effort to contact inactive members directly by email,
-> or please feel free to reply to this announcement with your intent. Thanks.
->
-> The list of e.V. members to become inactive, based on GA attendance:
 
-[skipped a list with my name in it]
+I got printing going a couple of years ago for HP printers, (the only type we 
+needed to support). I haven't been keeping track since, so I'm not sure what 
+the current state of recipes in yocto is.
 
-While I'm an active user and sporadically active contributor to OE,
-I'm not a frequent visitor to the conferences, where GA take place :(
-I tried using proxies for GA attendance, but it did not work for
-various reasons. So I'm OK with being listed as an 'inactive' member.
-Hoping that I will be able to become formally 'active' again, if I
-become active wrt. e.V in real life.
+We only need to be able to print pdfs. It's not fast, but it works.
 
--- 
-With best wishes
-Dmitry
+On Monday, May 18, 2015 04:39:41 PM Steven Descheemaeker wrote:
+> Hello,
+> 
+> I'm trying to add printer support to my embedded board. I'm able to
+> build cups but there aren't any driver packages.
+> 
+> Are there any recent packages for printer drivers? I already tried to
+> build gutenprint/foomatic myself but I'm relatively new to yocto so I'm
+> not that good in writing recipes my own.
+> 
+> Anyone can help me out with this ?
+
+
+What type of printer are you using?
+
+For HP printers, use the hplip drivers. There is a detect/add printer script 
+which is handy for adding USB printers. 
+For other brands, I'm not sure. I think there were some recipes for canon and 
+epson printers.
+
+Below is a list of the packages in the image related to printing, the python 
+packages are for the hplip add scripts, and the perl is (i think) for the 
+foomatic filters.
+
+Cheers,
+Marc
+
+
+
+IMAGE_PRINTING_INSTALL = " \
+	ghostscript \
+	ghostscript-cups \
+	cups \
+	cups-doc \
+	cups-lib \
+	cups-libimage \
+	foomatic-filters \
+	poppler \
+	poppler-data \
+	hplip \
+	hplip-ppd \
+	hplip-cups \
+	hplip-backend \
+	hplip-filter \
+	python-syslog \ 
+	python-pprint \
+	python-compression \
+	python-shell \
+	python-xml \
+	python-unixadmin \
+	python-html \
+	python-resource \
+	python-terminal \
+	python-lang \
+	python-stringold \
+	python-netclient \
+	python-fcntl \
+	"
+
+PRINTPERL = " \
+	perl-module-strict \
+	perl-module-posix \
+	perl-module-fcntl  \
+	perl-module-exporter-heavy \
+	perl-module-cwd \
+	perl-module-sigtrap \
+	perl-module-io-handle \
+	perl-module-data-dumper \
+	perl-module-bytes \
+	"
+
+
+
+
 
