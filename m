@@ -1,24 +1,26 @@
 Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 10D4073222
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 12C6F73223
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2015 03:28:43 +0000 (UTC)
+	Tue, 19 May 2015 03:28:44 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t4J3SicQ029428
+	by mail1.windriver.com (8.14.9/8.14.9) with ESMTP id t4J3SkUG022766
 	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 May 2015 20:28:44 -0700 (PDT)
+	Mon, 18 May 2015 20:28:46 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 18 May 2015 20:28:44 -0700
+	14.3.224.2; Mon, 18 May 2015 20:28:45 -0700
 From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 19 May 2015 11:26:33 +0800
-Message-ID: <1432005994-32642-1-git-send-email-wenzong.fan@windriver.com>
+Date: Tue, 19 May 2015 11:26:34 +0800
+Message-ID: <1432005994-32642-2-git-send-email-wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1432005994-32642-1-git-send-email-wenzong.fan@windriver.com>
+References: <1432005994-32642-1-git-send-email-wenzong.fan@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2][meta-oe] libyaml: update from 0.1.5 to 0.1.6
+Subject: [PATCH 2/2][meta-oe] libyaml: Security Advisory - libyaml - CVE-2014-9130
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,122 +37,73 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 19 May 2015 03:28:45 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Yue Tao <Yue.Tao@windriver.com>
 
-removed patch:
-- libyaml-CVE-2014-2525.patch (included by 0.1.6)
+https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-9130
 
+The patch comes from:
+https://bitbucket.org/xi/libyaml/commits/2b9156756423e967cfd09a61d125d883fca6f4f2
+
+Removed invalid simple key assertion (thank to Jonathan Gray)
+
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- .../libyaml/files/libyaml-CVE-2014-2525.patch      | 42 ----------------------
- meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb   | 21 -----------
- meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb   | 20 +++++++++++
- 3 files changed, 20 insertions(+), 63 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch
- delete mode 100644 meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
- create mode 100644 meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb
+ .../libyaml/files/libyaml-CVE-2014-9130.patch      | 32 ++++++++++++++++++++++
+ meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb   |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-9130.patch
 
-diff --git a/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch b/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch
-deleted file mode 100644
-index 2fdcba3..0000000
---- a/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-2525.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--Heap-based buffer overflow in the yaml_parser_scan_uri_escapes function
--in LibYAML before 0.1.6 allows context-dependent attackers to execute
--arbitrary code via a long sequence of percent-encoded characters in a
--URI in a YAML file.
--
--Upstream-Status: Backport
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
--diff --git a/src/scanner.c.old b/src/scanner.c
--index a2e8619..c6cde3b 100644
----- a/src/scanner.c.old
--+++ b/src/scanner.c
--@@ -2619,6 +2619,9 @@ yaml_parser_scan_tag_uri(yaml_parser_t *parser, int directive,
--         /* Check if it is a URI-escape sequence. */
-- 
--         if (CHECK(parser->buffer, '%')) {
--+            if (!STRING_EXTEND(parser, string))
--+                goto error;
--+
--             if (!yaml_parser_scan_uri_escapes(parser,
--                         directive, start_mark, &string)) goto error;
--         }
--diff --git a/src/yaml_private.h.old b/src/yaml_private.h
--index ed5ea66..d72acb4 100644
----- a/src/yaml_private.h.old
--+++ b/src/yaml_private.h
--@@ -132,9 +132,12 @@ yaml_string_join(
--      (string).start = (string).pointer = (string).end = 0)
-- 
-- #define STRING_EXTEND(context,string)                                           \
---    (((string).pointer+5 < (string).end)                                        \
--+    ((((string).pointer+5 < (string).end)                                       \
--         || yaml_string_extend(&(string).start,                                  \
---            &(string).pointer, &(string).end))
--+            &(string).pointer, &(string).end)) ?                                \
--+         1 :                                                                    \
--+        ((context)->error = YAML_MEMORY_ERROR,                                  \
--+         0))
-- 
-- #define CLEAR(context,string)                                                   \
--     ((string).pointer = (string).start,                                         \
-diff --git a/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb b/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
-deleted file mode 100644
-index 1279541..0000000
---- a/meta-oe/recipes-support/libyaml/libyaml_0.1.5.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--SUMMARY = "LibYAML is a YAML 1.1 parser and emitter written in C."
--DESCRIPTION = "LibYAML is a C library for parsing and emitting data in YAML 1.1, \
--a human-readable data serialization format. "
--HOMEPAGE = "http://pyyaml.org/wiki/LibYAML"
--SECTION = "libs/devel"
--
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
--
--SRC_URI = "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz \
--           file://libyaml-CVE-2014-2525.patch \
--          "
--
--SRC_URI[md5sum] = "24f6093c1e840ca5df2eb09291a1dbf1"
--SRC_URI[sha256sum] = "fa87ee8fb7b936ec04457bc044cd561155e1000a4d25029867752e543c2d3bef"
--
--S = "${WORKDIR}/yaml-${PV}"
--
--inherit autotools
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb b/meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb
+diff --git a/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-9130.patch b/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-9130.patch
 new file mode 100644
-index 0000000..8a624f7
+index 0000000..3c4a00e
 --- /dev/null
++++ b/meta-oe/recipes-support/libyaml/files/libyaml-CVE-2014-9130.patch
+@@ -0,0 +1,32 @@
++# HG changeset patch
++# User Kirill Simonov <xi@resolvent.net>
++# Date 1417197312 21600
++# Node ID 2b9156756423e967cfd09a61d125d883fca6f4f2
++# Parent  053f53a381ff6adbbc93a31ab7fdee06a16c8a33
++Removed invalid simple key assertion (thank to Jonathan Gray).
++
++The patch comes from 
++
++https://bitbucket.org/xi/libyaml/commits/2b9156756423e967cfd09a61d125d883fca6f4f2
++
++Upstream-Status: Backport
++
++Signed-off-by: Yue Tao <yue.tao@windriver.com>
++
++diff -r 053f53a381ff -r 2b9156756423 src/scanner.c
++--- a/src/scanner.c	Wed Mar 26 13:55:54 2014 -0500
+++++ b/src/scanner.c	Fri Nov 28 11:55:12 2014 -0600
++@@ -1106,13 +1106,6 @@
++             && parser->indent == (ptrdiff_t)parser->mark.column);
++ 
++     /*
++-     * A simple key is required only when it is the first token in the current
++-     * line.  Therefore it is always allowed.  But we add a check anyway.
++-     */
++-
++-    assert(parser->simple_key_allowed || !required);    /* Impossible. */
++-
++-    /*
++      * If the current position may start a simple key, save it.
++      */
++ 
+diff --git a/meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb b/meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb
+index 8a624f7..b015577 100644
+--- a/meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb
 +++ b/meta-oe/recipes-support/libyaml/libyaml_0.1.6.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "LibYAML is a YAML 1.1 parser and emitter written in C."
-+DESCRIPTION = "LibYAML is a C library for parsing and emitting data in YAML 1.1, \
-+a human-readable data serialization format. "
-+HOMEPAGE = "http://pyyaml.org/wiki/LibYAML"
-+SECTION = "libs/devel"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
-+
-+SRC_URI = "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz \
-+          "
-+
-+SRC_URI[md5sum] = "5fe00cda18ca5daeb43762b80c38e06e"
-+SRC_URI[sha256sum] = "7da6971b4bd08a986dd2a61353bc422362bd0edcc67d7ebaac68c95f74182749"
-+
-+S = "${WORKDIR}/yaml-${PV}"
-+
-+inherit autotools
-+
-+BBCLASSEXTEND = "native"
+@@ -8,6 +8,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
+ 
+ SRC_URI = "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz \
++           file://libyaml-CVE-2014-9130.patch \
+           "
+ 
+ SRC_URI[md5sum] = "5fe00cda18ca5daeb43762b80c38e06e"
 -- 
 1.9.1
 
