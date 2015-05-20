@@ -1,39 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id BB39060168
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id D7FBF6AC15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2015 20:09:23 +0000 (UTC)
-Received: by pabts4 with SMTP id ts4so38059631pab.3
+	Wed, 20 May 2015 06:04:41 +0000 (UTC)
+Received: by iebgx4 with SMTP id gx4so31491926ieb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2015 13:09:25 -0700 (PDT)
+	Tue, 19 May 2015 23:04:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	bh=S3SxwDYhghcbQzzQTLb6AORtF8TN1SpN/BVo/1JQm1o=;
-	b=AH0kyzvbjt+JuzpM/Ge+ryi70ULJlDIpxtMGQLpmF5hQ32oJUdcjTM2YM0NfAX/F4/
-	ePWFkMTPoXpaPLmPbOuNGUTjgGK0dV/lB6B75nVBI86k6AXJmRP0hgP58LZSob8g4E/D
-	zoxV1ttcZLxK5FXVoiW7U8S9a7wvDmfbwaC1wNs12Ej7EyHkwiwyJVIlDXp5qlh2avyQ
-	tVyIwSbQLfaKOAFYAedtwkGMZmGrsH5B+BBdWffLwJGwdYm0KXNOTrPaw9NA4s6MhyV3
-	ZrjDOGez4DLc1rRZr7U3Aoo8TKysKJV98JfGkWL/TcvEDTBjyoqbMl+flcAuTgFbmJis
-	2enA==
-X-Received: by 10.70.51.67 with SMTP id i3mr57372712pdo.145.1432066164995;
-	Tue, 19 May 2015 13:09:24 -0700 (PDT)
-Received: from [10.43.100.29] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
-	by mx.google.com with ESMTPSA id v4sm13460342pbs.0.2015.05.19.13.09.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 May 2015 13:09:23 -0700 (PDT)
-Message-ID: <555B9872.50301@gmail.com>
-Date: Tue, 19 May 2015 13:09:22 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-MIME-Version: 1.0
+	h=from:to:cc:subject:date:message-id;
+	bh=6X/ZMBoHSD+YSUjvO44cCnfahT0AOIWhatffDm7jGbc=;
+	b=e81jBLcYfVYcxh1rxlMFr3u5X02YpJAVNUJnxdh56EWwWyMtNTejtMlpytzMFMlsEb
+	CkZwiTq1AnIphIXi1okDOVbslHXm6QARvPQcGRVnmrYNWaiKnG1kU0fB28x9fL1+X39N
+	Pl70B1dRHgCH7xM6DBrfzahSQpn29xJhUc6/QSLyRdyhxlbqmMqYvyo4oB8wzde5crQs
+	vSZv2hCps9mWojQFbu0cnUi+5BNi0Mod3ia+oqxbHvltuSPDxEuC2Y5nRqQTQlPs2+Ev
+	0KQgAODADCdQetGc9UJ+5dGFXx7oriAj+5hBhIWHw2ZmsH52Gz/qBQllMn3AzEQZgaZy
+	EzpA==
+X-Received: by 10.50.73.169 with SMTP id m9mr26037591igv.37.1432101882581;
+	Tue, 19 May 2015 23:04:42 -0700 (PDT)
+Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
+	[96.119.89.79])
+	by mx.google.com with ESMTPSA id qh1sm930772igb.17.2015.05.19.23.04.41
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 19 May 2015 23:04:41 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <555B59D4.80304@linux.intel.com>
-In-Reply-To: <555B59D4.80304@linux.intel.com>
-Subject: Re: [meta-ruby] proposal: moving ruby to oe-core
+Date: Tue, 19 May 2015 23:04:33 -0700
+Message-Id: <1432101873-25954-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] lirc: Make X support to be a packageconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,30 +42,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 May 2015 20:09:28 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 May 2015 06:04:42 -0000
 
+When we dont have x11 in distro features it fails to build
+since libx11 dependency is not satisfied
 
+Change-Id: I6774a83f965551a41afe12b1304e44e73fc789c0
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-connectivity/lirc/lirc.inc      | 2 +-
+ meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb | 6 ++++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-On 05/19/2015 08:42 AM, Alexander Kanavin wrote:
-> Hello meta-ruby maintainers,
->
-> I am trying to update webkit-gtk in oe-core to latest upstream version
-> (it's fallen badly out of date), and that requires having ruby during
-> build time. So I would like to propose that ruby recipes are moved to
-> oe-core, and you keep maintaining them there. How does it sound to you?
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc.inc b/meta-oe/recipes-connectivity/lirc/lirc.inc
+index 77b6c28..429bc45 100644
+--- a/meta-oe/recipes-connectivity/lirc/lirc.inc
++++ b/meta-oe/recipes-connectivity/lirc/lirc.inc
+@@ -6,7 +6,7 @@ DESCRIPTION_append_lirc-nslu2example = " This package contains a working config
+ HOMEPAGE = "http://www.lirc.org"
+ SECTION = "console/network"
+ LICENSE = "GPLv2"
+-DEPENDS = "alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19 libx11"
++DEPENDS = "alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19"
+ PRIORITY = "optional"
+ 
+ SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2"
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
+index c3e61c4..7d93757 100644
+--- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
++++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
+@@ -19,9 +19,11 @@ SYSTEMD_AUTO_ENABLE_lirc = "enable"
+ 
+ inherit autotools pkgconfig systemd pythonnative
+ 
+-PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir"
++PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd"
++PACKAGECONFIG[x11] = "--with-x,--with-x=no,libx11,"
+ 
+-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
++PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
++PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)}"
+ 
+ #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
+ do_install_append() {
+-- 
+2.1.4
 
-I don't have an issue with that. Do you need both Ruby and bundler? I 
-believe there is value in having additional ruby packages outside core, 
-like python is structured.
-
-I think it might be more of issue for OE-core folks.
-My concern is core is getting bloated.
-
-regards and thanks for asking.
-Armin
->
-> Regards,
-> Alexander
 
