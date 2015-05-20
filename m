@@ -1,34 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f170.google.com (mail-ie0-f170.google.com
-	[209.85.223.170])
-	by mail.openembedded.org (Postfix) with ESMTP id D7FBF6AC15
+Return-Path: <stefan@agner.ch>
+X-Greylist: delayed 506 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 20 May 2015 07:00:37 UTC
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A790607BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 May 2015 06:04:41 +0000 (UTC)
-Received: by iebgx4 with SMTP id gx4so31491926ieb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 May 2015 23:04:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=6X/ZMBoHSD+YSUjvO44cCnfahT0AOIWhatffDm7jGbc=;
-	b=e81jBLcYfVYcxh1rxlMFr3u5X02YpJAVNUJnxdh56EWwWyMtNTejtMlpytzMFMlsEb
-	CkZwiTq1AnIphIXi1okDOVbslHXm6QARvPQcGRVnmrYNWaiKnG1kU0fB28x9fL1+X39N
-	Pl70B1dRHgCH7xM6DBrfzahSQpn29xJhUc6/QSLyRdyhxlbqmMqYvyo4oB8wzde5crQs
-	vSZv2hCps9mWojQFbu0cnUi+5BNi0Mod3ia+oqxbHvltuSPDxEuC2Y5nRqQTQlPs2+Ev
-	0KQgAODADCdQetGc9UJ+5dGFXx7oriAj+5hBhIWHw2ZmsH52Gz/qBQllMn3AzEQZgaZy
-	EzpA==
-X-Received: by 10.50.73.169 with SMTP id m9mr26037591igv.37.1432101882581;
-	Tue, 19 May 2015 23:04:42 -0700 (PDT)
-Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
-	[96.119.89.79])
-	by mx.google.com with ESMTPSA id qh1sm930772igb.17.2015.05.19.23.04.41
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 May 2015 23:04:41 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 May 2015 23:04:33 -0700
-Message-Id: <1432101873-25954-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] lirc: Make X support to be a packageconfig
+	Wed, 20 May 2015 07:00:37 +0000 (UTC)
+Received: from trochilidae.toradex.int (unknown [46.140.72.82])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id D7F135C0FC6;
+	Wed, 20 May 2015 08:50:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=agner.ch; s=dkim;
+	t=1432104620; bh=1Vm5qaJ4l8TJdiPI37siSnEpH/uaYjDteGP5pkUYCCA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=wRpBh5/syWke+jLFlRK6ZnB/R+qgycZvqoFxYYWcMDfMRTcy4oSZ8hVKp4dKFG9zo
+	TSpqTboFEGHD6mg8SXDiSOywTyYtLTp2oEqegFqhXo6tuPGRqKjpFUmJgdjfX9klIb
+	g3OT1vbbCASF+XxcflxxdFLY0qZo3djaI+DsobIs=
+From: Stefan Agner <stefan@agner.ch>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 20 May 2015 08:52:08 +0200
+Message-Id: <1432104728-18440-1-git-send-email-stefan@agner.ch>
+X-Mailer: git-send-email 2.4.1
+Subject: [meta-oe][dizzy][PATCH] ptpd: disable libpcap detection via pcap-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,50 +34,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 May 2015 06:04:42 -0000
+X-List-Received-Date: Wed, 20 May 2015 07:00:37 -0000
 
-When we dont have x11 in distro features it fails to build
-since libx11 dependency is not satisfied
+When the host system provides pcap-config, the configure scripts
+detect that and add a bogous CPPFLAG:
 
-Change-Id: I6774a83f965551a41afe12b1304e44e73fc789c0
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+checking for pcap-config... /usr/bin/pcap-config
+checking if we want to build with libpcap support... yes, pcap-config
+...
+PCAP_CPPFLAGS =  -I/usr/include
+
+Which down the line can lead to compile errors due to wrong headers
+being included. Fix this issue by using --with-pcap-config=no which
+prevents detection using pcap-config but does "guessing", which works
+fine for OE.
+
+Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---
- meta-oe/recipes-connectivity/lirc/lirc.inc      | 2 +-
- meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb | 6 ++++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
+If the host has libpcap development packages installed (which provide
+pcap-config), this lead to compile errors like:
+cc1: warning: include location "/usr/include" is unsafe for cross-compilation
+[-Wpoison-system-directories]
+cc1: warning: include location "/usr/include" is unsafe for cross-compilation
+[-Wpoison-system-directories]
+cc1: warning: include location "/usr/include" is unsafe for cross-compilation
+[-Wpoison-system-directories]
+In file included from /usr/include/bits/byteswap.h:35:0,
+                 from /usr/include/endian.h:60,
+                 from /usr/include/bits/waitstatus.h:64,
+                 from /usr/include/stdlib.h:42,
+                 from
+/home/cceylan01/mywork/pdu/toradex/oe-core/build/out-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/ptpd/2.3.1-rc2-r0/ptpd-2.3.1-rc2/src/ptpd.h:40,
+                 from
+/home/cceylan01/mywork/pdu/toradex/oe-core/build/out-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/ptpd/2.3.1-rc2-r0/ptpd-2.3.1-rc2/src/bmc.c:54:
+/home/cceylan01/mywork/pdu/toradex/oe-core/build/out-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/ptpd/2.3.1-rc2-r0/ptpd-2.3.1-rc2/src/bmc.c:
+In function 'initData':
+/usr/include/bits/byteswap-16.h:31:5: error: invalid 'asm': invalid operand for
+code 'w'
+     __asm__ ("rorw $8, %w0"           \
+     ^
+/usr/include/netinet/in.h:403:21: note: in expansion of macro '__bswap_16'
+ #   define htons(x) __bswap_16 (x)
 
-diff --git a/meta-oe/recipes-connectivity/lirc/lirc.inc b/meta-oe/recipes-connectivity/lirc/lirc.inc
-index 77b6c28..429bc45 100644
---- a/meta-oe/recipes-connectivity/lirc/lirc.inc
-+++ b/meta-oe/recipes-connectivity/lirc/lirc.inc
-@@ -6,7 +6,7 @@ DESCRIPTION_append_lirc-nslu2example = " This package contains a working config
- HOMEPAGE = "http://www.lirc.org"
- SECTION = "console/network"
- LICENSE = "GPLv2"
--DEPENDS = "alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19 libx11"
-+DEPENDS = "alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19"
- PRIORITY = "optional"
+This problem is already solved in fido/master due to the change to
+pkgconfig by Joe MacDonald...
+
+ meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
+index db74e44..b6abfee 100644
+--- a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
++++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
+@@ -8,7 +8,7 @@ SECTION = "network"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
  
- SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2"
-diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-index c3e61c4..7d93757 100644
---- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-+++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-@@ -19,9 +19,11 @@ SYSTEMD_AUTO_ENABLE_lirc = "enable"
+-DEPENDS = "libpcap"
++DEPENDS = "linux-libc-headers libpcap"
  
- inherit autotools pkgconfig systemd pythonnative
+ inherit autotools
  
--PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir"
-+PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd"
-+PACKAGECONFIG[x11] = "--with-x,--with-x=no,libx11,"
+@@ -30,7 +30,7 @@ S = "${WORKDIR}/ptpd-${PV}"
  
--PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
-+PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
-+PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)}"
+ EXTRA_OEMAKE = ""
  
- #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
- do_install_append() {
+-EXTRA_OECONF += "--disable-snmp"
++EXTRA_OECONF += "--disable-snmp --with-pcap-config=no"
+ 
+ do_install() {
+     install -d ${D}${bindir} ${D}${mandir}/man8
 -- 
-2.1.4
+2.4.1
 
 
