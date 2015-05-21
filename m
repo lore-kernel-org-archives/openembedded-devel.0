@@ -1,38 +1,40 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
-	[209.85.220.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 29913609B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CA6C72D64
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2015 10:43:14 +0000 (UTC)
-Received: by qkgx75 with SMTP id x75so50053135qkg.1
+	Thu, 21 May 2015 11:06:23 +0000 (UTC)
+Received: by wgbgq6 with SMTP id gq6so81858244wgb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2015 03:43:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=isqqHbMhXLIxlHGPpFZNK1quBnft2cW+YSP8pQWe3QQ=;
-	b=dCwUbUhIGSXpWChmrNW6BoXxnQ2vyCwOKlmalPaZUILt4/H8CwQVwtrO2HsmY8FoWj
-	PXfngWXt9oBqUzkhr1sYa6EAjAAe2gGK9nGz+4gU/5SkI8UJvCE9PX3UXsKFVKRCpXVD
-	/fanKGNm0EbzyU89+MRm950EFG1/VDZiNPEOP86NhoiGR0btFTvAbgvporBlQn252lcC
-	FVMnMB8iyqHf4KPEAyk4B1t19fkYKAKSZXCqiSB5McyvmnvHshV4rUOHkiyOvWh9sIv8
-	DQAdRZKyTKw24hck7FphORnwAdfAujorCOdg3GWQUkd98Jr+yapC8OEbP+OJYkF3yr7H
-	eQeg==
-X-Gm-Message-State: ALoCoQlaGB/IJuUM5LiCaPG9V2CLwdMWUDl+jJkSYX0gqqg3fB1OG1SB/MnK54J+8u0v9fOmP0UU
-X-Received: by 10.140.89.104 with SMTP id u95mr2574109qgd.15.1432204995814;
-	Thu, 21 May 2015 03:43:15 -0700 (PDT)
+	Thu, 21 May 2015 04:06:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=lmU/IA+PyeRTB6PqOf7pXpEMggnppinVsxyOzRGPKtk=;
+	b=nSNX3qsa/mAWqtKddmc5xH2o38e+g09JjM1LJ0oKt6lgBv82zkte+DMs7uAOjLf2fa
+	pecdfZDPO5mkKctLW+rMLDedF4LTe/qf9NDgffl0XcMyXzI9uJekuf6Wh5XFgq+Kjcre
+	UGmhku5zG89lD9/6GBTRmMOv0oxYkGQDT8eU6rD6nMmo15Im2ulin0forkr15P2GTW//
+	ts1nGio2G4LIWqeyQXewA4H55wJXUpx0cj+y1qqY7tWu8IXU3H8H9PB0TzJjw4Ddv/gQ
+	MEI2ZUEjZx8kmtSyFmFq1VghBNiG+8cdtfVoLcSjPqUymDfRDwPFtyzSQAr2d8UsvGc/
+	TXMw==
+X-Received: by 10.180.100.74 with SMTP id ew10mr52081846wib.12.1432206383694; 
+	Thu, 21 May 2015 04:06:23 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id
+	pz6sm31577338wjc.43.2015.05.21.04.06.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 21 May 2015 04:06:21 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 21 May 2015 13:06:38 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150521110638.GB2377@jama>
+References: <1431958369-14668-1-git-send-email-alexander.kanavin@linux.intel.com>
 MIME-Version: 1.0
-Received: by 10.140.102.231 with HTTP; Thu, 21 May 2015 03:42:55 -0700 (PDT)
-In-Reply-To: <CAJTo0LbHVrLM=Wt++3ue-VQ3KFB42tGaJUwFRW_UHfBDXuqc_w@mail.gmail.com>
-References: <CAJTo0LbHVrLM=Wt++3ue-VQ3KFB42tGaJUwFRW_UHfBDXuqc_w@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 21 May 2015 11:42:55 +0100
-Message-ID: <CAJTo0Lbwf9KYYTxtAJCNbQ9=YU-PdBoYShg32ThL_GgkoGMobg@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Moving GStreamer 0.10 to meta-multimedia
+In-Reply-To: <1431958369-14668-1-git-send-email-alexander.kanavin@linux.intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH 0/4] Add GStreamer 0.10 and things that depend on it from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,17 +48,323 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2015 10:43:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 May 2015 11:06:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 28 April 2015 at 20:54, Burton, Ross <ross.burton@intel.com> wrote:
+On Mon, May 18, 2015 at 05:12:44PM +0300, Alexander Kanavin wrote:
+> These patches add GStreamer 0.10, and things that depend on it from oe-co=
+re
+>=20
+> GStreamer 0.10 is now being removed from oe-core, but we would still like=
+ to
+> provide it through meta-openembedded.
+>=20
+> See: https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D6294
 
-> This is basically a heads-up that we're working on moving GStreamer 0.10
-> out of oe-core[1] and into meta-multimedia, where anyone who still needs
-> 0.10 can use and maintain them.
->
+How was this tested? Are you just throwing recipes unwanted in oe-core
+to meta-oe without testing?
 
-FYI, they've now been removed from oe-core.
+ERROR: ParseError at
+/OE/build/shr-core/meta-openembedded/meta-multimedia/recipes-multimedia/gst=
+reamer/gst-plugins.inc:17:
+Could not include required file gst-plugins-package.inc
 
-Ross
+:(
+
+> Alexander Kanavin (4):
+>   python-gst: move it from oe-core to meta-multimedia
+>   recipes-qt: move qt-mobility from oe-core to meta-oe
+>   recipes-multimedia: add gstreamer-0.10 recipes
+>   Rename gstreamer directory to gstreamer-0.10
+>=20
+>  .../0001-aacdec-check-channel-count.patch          |   34 +
+>  .../0001-alac-fix-nb_samples-order-case.patch      |   30 +
+>  .../0001-alsdec-check-block-length.patch           |   61 +
+>  ...ac3dec-Check-coding-mode-against-channels.patch |   37 +
+>  ...util-fix-signedness-in-sizeof-comparissio.patch |   40 +
+>  ...le-use-av_image_get_linesize-to-calculate.patch |   50 +
+>  ...c-parser-reset-indexes-on-realloc-failure.patch |   50 +
+>  ...a-Perform-pointer-advance-and-checks-befo.patch |   81 +
+>  .../0001-avcodec-smc-fix-off-by-1-error.patch      |   32 +
+>  ...egtsenc-Check-data-array-size-in-mpegts_w.patch |   69 +
+>  .../0001-eamad-fix-out-of-array-accesses.patch     |   29 +
+>  ...-error-concealment-initialize-block-index.patch |   29 +
+>  ...alment-Check-that-the-picture-is-not-in-a.patch |   37 +
+>  .../0001-ffserver-set-oformat.patch                |   36 +
+>  ...t-ref-count-check-and-limit-fix-out-of-ar.patch |   29 +
+>  ...t-parameters-from-SPS-whenever-it-changes.patch |  145 +
+>  ...rror-concealment-when-SPS-and-slices-are-.patch |   33 +
+>  .../0001-h264_sei-Fix-infinite-loop.patch          |   39 +
+>  ...01-huffyuvdec-Check-init_vlc-return-codes.patch |   87 +
+>  .../0001-huffyuvdec-Skip-len-0-cases.patch         |   61 +
+>  ...f-compute-probe-buffer-size-more-reliably.patch |   45 +
+>  .../0001-mjpegdec-check-SE.patch                   |   32 +
+>  ...heck-RLE-size-before-copying.-Fix-out-of-.patch |   34 +
+>  ...er-dont-access-out-of-array-elements-at-t.patch |   44 +
+>  ...array-index-before-use-fix-out-of-array-a.patch |   30 +
+>  .../0001-qdm2dec-fix-buffer-overflow.patch         |   58 +
+>  ...001-roqvideodec-check-dimensions-validity.patch |   36 +
+>  ...Check-that-the-last-indexes-are-within-th.patch |   32 +
+>  ...-vp3-Copy-all-3-frames-for-thread-updates.patch |   32 +
+>  ...-read-for-negative-tokens-and-memleaks-on.patch |  183 +
+>  ...o-check-chunk-sizes-before-reading-chunks.patch |   51 +
+>  ...egdec-check-bits-per-pixel-for-changes-si.patch |   68 +
+>  .../gst-ffmpeg-0.10.13/configure-fix.patch         |   22 +
+>  .../gst-ffmpeg-CVE-2013-0855.patch                 |  100 +
+>  .../gst-ffmpeg-CVE-2013-3674.patch                 |   26 +
+>  .../gst-ffmpeg-0.10.13/h264_qpel_mmx.patch         |   57 +
+>  .../gst-ffmpeg-0.10.13/libav-9.patch               | 9304 ++++++++++++++=
+++++++
+>  .../gst-ffmpeg-0.10.13/libav_e500mc.patch          |   21 +
+>  .../gst-ffmpeg-0.10.13/libav_e5500.patch           |   19 +
+>  .../gst-ffmpeg-0.10.13/lower-rank.diff             |   16 +
+>  .../gstreamer-0.10/gst-ffmpeg_0.10.13.bb           |   90 +
+>  .../gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb      |   14 +
+>  .../gst-fluendo-mpegdemux_0.10.85.bb               |   12 +
+>  .../gstreamer-0.10/gst-fluendo.inc                 |   14 +
+>  .../gstreamer-0.10/gst-meta-base_0.10.bb           |   73 +
+>  .../gstreamer-0.10/gst-openmax/gcc_4.6.patch       |   18 +
+>  .../gstreamer-0.10/gst-openmax/ptr-array.patch     |   46 +
+>  .../gstreamer-0.10/gst-openmax_0.10.1.bb           |   35 +
+>  .../gstreamer-0.10/gst-plugins-bad_0.10.23.bb      |   50 +
+>  ...le-Fix-build-on-x86-if-emmintrin.h-is-ava.patch |   37 +
+>  .../configure.ac-fix-subparse-plugin.patch         |   27 +
+>  .../gst-plugins-base-tremor.patch                  |   20 +
+>  .../gstreamer-0.10/gst-plugins-base_0.10.36.bb     |   39 +
+>  ...-conditional-gl-framebuffer-undefined-use.patch |   35 +
+>  .../gstreamer-0.10/gst-plugins-gl_0.10.3.bb        |   25 +
+>  ...ild-with-recent-kernels-the-v4l2_buffer-i.patch |   33 +
+>  ...define-V4L2_CID_HCENTER-and-V4L2_CID_VCEN.patch |   45 +
+>  .../0407-mulawdec-fix-integer-overrun.patch        |   47 +
+>  .../gstreamer-0.10/gst-plugins-good_0.10.31.bb     |   47 +
+>  .../gstreamer-0.10/gst-plugins-ugly_0.10.19.bb     |   29 +
+>  .../gstreamer-0.10/gst-plugins.inc                 |   28 +
+>  ...ecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch |   34 +
+>  .../gstreamer-0.10/gst-rtsp_0.10.8.bb              |   16 +
+>  ...ix-self-comparison-always-evaluates-to-tr.patch |   32 +
+>  .../gstreamer-0.10.36/check_fix.patch              |   19 +
+>  .../gst-inspect-check-error.patch                  |   16 +
+>  ...mer-change-priv_gst_parse_yylex-arguments.patch |   33 +
+>  .../gstreamer-0.10.36/gstregistrybinary.c          |  487 +
+>  .../gstreamer-0.10.36/gstregistrybinary.h          |  194 +
+>  .../gstreamer-0.10/gstreamer_0.10.36.bb            |   51 +
+>  .../gstreamer-0.10/python-gst/python-path.patch    |   28 +
+>  .../gstreamer-0.10/python-gst_0.10.22.bb           |   29 +
+>  ...ecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch |   34 -
+>  .../gstreamer/gst-rtsp_0.10.8.bb                   |   16 -
+>  ...embedded-usage-doesn-t-work-outside-of-Qt.patch |   73 +
+>  ...stvideoconnector-fixed-buffers-allocation.patch |   34 +
+>  ...nnecessary-rpaths-from-qml_device-example.patch |   28 +
+>  .../fix-compile-error-no-bluez.patch               |  338 +
+>  .../fix_metaobjectbuilder_build_err.patch          | 4707 ++++++++++
+>  .../qt-mobility/qt-mobility-1.2.0/gcc-scope.patch  |   48 +
+>  .../qt-mobility-1.2.0/qt-mobility-configure.patch  |   17 +
+>  .../qt-mobility-1.2.0/qt-mobility-no-opengl.patch  |   38 +
+>  .../qt-mobility-1.2.0/qt-mobility-no-xvideo.patch  |   26 +
+>  .../qt-mobility/qt-mobility-embedded_1.2.0.bb      |   11 +
+>  .../qt-mobility/qt-mobility-x11_1.2.0.bb           |   10 +
+>  .../recipes-qt/qt-mobility/qt-mobility_1.2.0.inc   |  112 +
+>  86 files changed, 18364 insertions(+), 50 deletions(-)
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-aacdec-check-channel-count.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-alac-fix-nb_samples-order-case.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-alsdec-check-block-length.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-atrac3dec-Check-coding-mode-against-channels.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-avcodec-dsputil-fix-signedness-in-sizeof-comparissio.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-avcodec-msrle-use-av_image_get_linesize-to-calculate.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-avcodec-parser-reset-indexes-on-realloc-failure.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-avcodec-rpza-Perform-pointer-advance-and-checks-befo.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-avcodec-smc-fix-off-by-1-error.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-avformat-mpegtsenc-Check-data-array-size-in-mpegts_w.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-eamad-fix-out-of-array-accesses.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-error-concealment-initialize-block-index.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-error_concealment-Check-that-the-picture-is-not-in-a.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-ffserver-set-oformat.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-h264-correct-ref-count-check-and-limit-fix-out-of-ar.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-h264-set-parameters-from-SPS-whenever-it-changes.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-h264-skip-error-concealment-when-SPS-and-slices-are-.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-h264_sei-Fix-infinite-loop.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-huffyuvdec-Check-init_vlc-return-codes.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-huffyuvdec-Skip-len-0-cases.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-lavf-compute-probe-buffer-size-more-reliably.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-mjpegdec-check-SE.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-pgssubdec-check-RLE-size-before-copying.-Fix-out-of-.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-pngdec-filter-dont-access-out-of-array-elements-at-t.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-qdm2-check-array-index-before-use-fix-out-of-array-a.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-qdm2dec-fix-buffer-overflow.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-roqvideodec-check-dimensions-validity.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-smackerdec-Check-that-the-last-indexes-are-within-th.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-vp3-Copy-all-3-frames-for-thread-updates.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-vp3-fix-oob-read-for-negative-tokens-and-memleaks-on.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0001-vqavideo-check-chunk-sizes-before-reading-chunks.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/0002-avcodec-mjpegdec-check-bits-per-pixel-for-changes-si.p=
+atch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/configure-fix.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/gst-ffmpeg-CVE-2013-0855.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/gst-ffmpeg-CVE-2013-3674.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/h264_qpel_mmx.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/libav-9.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/libav_e500mc.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/libav_e5500.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg-0.10.13/lower-rank.diff
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-ffmpeg_0.10.13.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-fluendo-mp3_0.10.31.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-fluendo-mpegdemux_0.10.85.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-fluendo.inc
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-meta-base_0.10.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-openmax/gcc_4.6.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-openmax/ptr-array.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-openmax_0.10.1.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-bad_0.10.23.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-base-0.10.36/audioresample-Fix-build-on-x86-if-emmintrin.h-is-ava.=
+patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-base-0.10.36/configure.ac-fix-subparse-plugin.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-base-0.10.36/gst-plugins-base-tremor.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-base_0.10.36.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-gl/0001-conditional-gl-framebuffer-undefined-use.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-gl_0.10.3.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-good-0.10.31/0001-v4l2-fix-build-with-recent-kernels-the-v4l2_buff=
+er-i.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-good-0.10.31/0001-v4l2_calls-define-V4L2_CID_HCENTER-and-V4L2_CID_=
+VCEN.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-good-0.10.31/0407-mulawdec-fix-integer-overrun.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-good_0.10.31.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins-ugly_0.10.19.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-plugins.inc
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-rtsp/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+-rtsp_0.10.8.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/0001-baseparse-Fix-self-comparison-always-evaluates-to-tr.pa=
+tch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/check_fix.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/gst-inspect-check-error.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/gstreamer-change-priv_gst_parse_yylex-arguments.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/gstregistrybinary.c
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/gstregistrybinary.h
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer_0.10.36.bb
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/pyt=
+hon-gst/python-path.patch
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/pyt=
+hon-gst_0.10.22.bb
+>  delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp=
+/0001-change-deprecated-INCLUDES-to-AM_CPPFLAGS-for-automa.patch
+>  delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer/gst-rtsp=
+_0.10.8.bb
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/0001=
+-fix-embedded-usage-doesn-t-work-outside-of-Qt.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/0001=
+-gstvideoconnector-fixed-buffers-allocation.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/0002=
+-Remove-unnecessary-rpaths-from-qml_device-example.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/fix-=
+compile-error-no-bluez.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/fix_=
+metaobjectbuilder_build_err.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/gcc-=
+scope.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/qt-m=
+obility-configure.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/qt-m=
+obility-no-opengl.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-1.2.0/qt-m=
+obility-no-xvideo.patch
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-embedded_1=
+=2E2.0.bb
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility-x11_1.2.0.=
+bb
+>  create mode 100644 meta-oe/recipes-qt/qt-mobility/qt-mobility_1.2.0.inc
+>=20
+> --=20
+> 2.1.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
