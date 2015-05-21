@@ -1,32 +1,25 @@
-Return-Path: <zboszor@pr.hu>
-Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CB30600B3
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 15261607BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2015 11:08:17 +0000 (UTC)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1YvOBY-0001Qh-OZ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2015 12:58:44 +0200
-Received: from host-87-242-63-200.prtelecom.hu ([87.242.63.200]
-	helo=localhost.localdomain)
-	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1YvOKg-0001IL-VQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 May 2015 13:08:16 +0200
-Message-ID: <555DBC98.4030506@pr.hu>
-Date: Thu, 21 May 2015 13:08:08 +0200
-From: Boszormenyi Zoltan <zboszor@pr.hu>
+	Thu, 21 May 2015 12:55:34 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga103.jf.intel.com with ESMTP; 21 May 2015 05:55:36 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,468,1427785200"; d="scan'208";a="574830605"
+Received: from linux-8hqz.fi.intel.com (HELO linux-8hqz.site) ([10.237.68.142])
+	by orsmga003.jf.intel.com with ESMTP; 21 May 2015 05:55:34 -0700
+Message-ID: <555DD5E9.4040403@linux.intel.com>
+Date: Thu, 21 May 2015 15:56:09 +0300
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <555C7731.40605@pr.hu> <20150520124134.GA2386@jama>
-In-Reply-To: <20150520124134.GA2386@jama>
-X-Spam-Score: 0.3 (/)
-X-Scan-Signature: 9c5e05eb7b369c1b31c27083e129340a
-X-Spam-Tracer: backend.mail.pr.hu 0.3 20150521110816Z
-Subject: Re: How can I disable automatic subpackage naming
+References: <555B59D4.80304@linux.intel.com>	<555B9872.50301@gmail.com>	<CAJTo0Lbn8OnaONPtHSm+cxOwQBgefJyAR+yPP1Q2ubmudUAMCA@mail.gmail.com>	<555CA7FF.4050702@linux.intel.com>
+	<555CC1EE.7090501@gmail.com>
+In-Reply-To: <555CC1EE.7090501@gmail.com>
+Subject: Re: [meta-ruby] proposal: moving ruby to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,34 +33,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2015 11:08:17 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 21 May 2015 12:55:37 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2015-05-20 14:41 keltezéssel, Martin Jansa írta:
-> On Wed, May 20, 2015 at 01:59:45PM +0200, Boszormenyi Zoltan wrote:
->> Hi,
->>
->> it seems that if bitbake finds a subpackage in the PACKAGES
->> variable that contain a single library, a new, automatic
->> subpackage gets created that will have the name "libxxxxN"
->> with libxxxx being the library name and N being the SO version.
->> With this, bitbake overrides my set of subpackages.
->>
->> How can I disable this in Daisy, i.e. bitbake 1.22.0, so I get the
->> explicit package name I added to PACKAGES?
-> Remove "debian" from INHERIT variable.
+On 05/20/2015 08:18 PM, akuster808 wrote:
+> I have some ruby class changes but I will wait for this transition to 
+> complete.
 
-Thanks!
+I didn't copy the class to oe-core, because it's not needed for building 
+webkit. I copied only the recipe for the ruby runtime. Is that ok?
 
->
->> Thanks in advance,
->> Zoltán Böszörményi
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+Alex
 
