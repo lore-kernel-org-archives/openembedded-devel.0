@@ -1,26 +1,38 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id DE320607BB
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 29913609B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2015 08:36:22 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP; 21 May 2015 01:36:24 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,467,1427785200"; d="scan'208";a="698209058"
-Received: from lpobrien-mobl.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.1.32])
-	by orsmga001.jf.intel.com with ESMTP; 21 May 2015 01:36:23 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Boszormenyi Zoltan <zboszor@pr.hu>
-Date: Thu, 21 May 2015 09:36:22 +0100
-Message-ID: <7272346.ToWr0aoBxb@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.7 (Linux/3.19.7-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
-In-Reply-To: <20150520124134.GA2386@jama>
-References: <555C7731.40605@pr.hu> <20150520124134.GA2386@jama>
+	Thu, 21 May 2015 10:43:14 +0000 (UTC)
+Received: by qkgx75 with SMTP id x75so50053135qkg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 May 2015 03:43:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=isqqHbMhXLIxlHGPpFZNK1quBnft2cW+YSP8pQWe3QQ=;
+	b=dCwUbUhIGSXpWChmrNW6BoXxnQ2vyCwOKlmalPaZUILt4/H8CwQVwtrO2HsmY8FoWj
+	PXfngWXt9oBqUzkhr1sYa6EAjAAe2gGK9nGz+4gU/5SkI8UJvCE9PX3UXsKFVKRCpXVD
+	/fanKGNm0EbzyU89+MRm950EFG1/VDZiNPEOP86NhoiGR0btFTvAbgvporBlQn252lcC
+	FVMnMB8iyqHf4KPEAyk4B1t19fkYKAKSZXCqiSB5McyvmnvHshV4rUOHkiyOvWh9sIv8
+	DQAdRZKyTKw24hck7FphORnwAdfAujorCOdg3GWQUkd98Jr+yapC8OEbP+OJYkF3yr7H
+	eQeg==
+X-Gm-Message-State: ALoCoQlaGB/IJuUM5LiCaPG9V2CLwdMWUDl+jJkSYX0gqqg3fB1OG1SB/MnK54J+8u0v9fOmP0UU
+X-Received: by 10.140.89.104 with SMTP id u95mr2574109qgd.15.1432204995814;
+	Thu, 21 May 2015 03:43:15 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: How can I disable automatic subpackage naming
+Received: by 10.140.102.231 with HTTP; Thu, 21 May 2015 03:42:55 -0700 (PDT)
+In-Reply-To: <CAJTo0LbHVrLM=Wt++3ue-VQ3KFB42tGaJUwFRW_UHfBDXuqc_w@mail.gmail.com>
+References: <CAJTo0LbHVrLM=Wt++3ue-VQ3KFB42tGaJUwFRW_UHfBDXuqc_w@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 21 May 2015 11:42:55 +0100
+Message-ID: <CAJTo0Lbwf9KYYTxtAJCNbQ9=YU-PdBoYShg32ThL_GgkoGMobg@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Moving GStreamer 0.10 to meta-multimedia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +46,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2015 08:36:25 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 21 May 2015 10:43:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wednesday 20 May 2015 14:41:34 Martin Jansa wrote:
-> On Wed, May 20, 2015 at 01:59:45PM +0200, Boszormenyi Zoltan wrote:
-> > it seems that if bitbake finds a subpackage in the PACKAGES
-> > variable that contain a single library, a new, automatic
-> > subpackage gets created that will have the name "libxxxxN"
-> > with libxxxx being the library name and N being the SO version.
-> > With this, bitbake overrides my set of subpackages.
-> > 
-> > How can I disable this in Daisy, i.e. bitbake 1.22.0, so I get the
-> > explicit package name I added to PACKAGES?
-> 
-> Remove "debian" from INHERIT variable.
+On 28 April 2015 at 20:54, Burton, Ross <ross.burton@intel.com> wrote:
 
-To be a little more specific, by default it gets added to INHERIT_DISTRO in 
-meta/conf/distro/defaultsetup.conf; you can set this to your own preferred 
-value in your configuration if you like.
+> This is basically a heads-up that we're working on moving GStreamer 0.10
+> out of oe-core[1] and into meta-multimedia, where anyone who still needs
+> 0.10 can use and maintain them.
+>
 
-Cheers,
-Paul
+FYI, they've now been removed from oe-core.
 
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ross
 
