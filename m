@@ -1,27 +1,26 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D3A396AB99
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id DE320607BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2015 08:01:04 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.14.9/8.14.9) with ESMTP id t4L816xn012240
-	(version=TLSv1/SSLv3 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 May 2015 01:01:06 -0700 (PDT)
-Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Thu, 21 May 2015 01:01:05 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 May 2015 16:00:51 +0800
-Message-ID: <0d9e175e558bdd1a2abde9c32f4c22fe44b1277c.1432194921.git.yi.zhao@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1432194921.git.yi.zhao@windriver.com>
-References: <cover.1432194921.git.yi.zhao@windriver.com>
+	Thu, 21 May 2015 08:36:22 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP; 21 May 2015 01:36:24 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,467,1427785200"; d="scan'208";a="698209058"
+Received: from lpobrien-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.1.32])
+	by orsmga001.jf.intel.com with ESMTP; 21 May 2015 01:36:23 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Boszormenyi Zoltan <zboszor@pr.hu>
+Date: Thu, 21 May 2015 09:36:22 +0100
+Message-ID: <7272346.ToWr0aoBxb@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.7 (Linux/3.19.7-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
+In-Reply-To: <20150520124134.GA2386@jama>
+References: <555C7731.40605@pr.hu> <20150520124134.GA2386@jama>
 MIME-Version: 1.0
-X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 4/4] cscope: fix ${PN}-${PV} -> ${BP} for multilib
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: How can I disable automatic subpackage naming
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,28 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 May 2015 08:01:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 May 2015 08:36:25 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- meta-oe/recipes-devtools/cscope/cscope_15.8b.bb |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wednesday 20 May 2015 14:41:34 Martin Jansa wrote:
+> On Wed, May 20, 2015 at 01:59:45PM +0200, Boszormenyi Zoltan wrote:
+> > it seems that if bitbake finds a subpackage in the PACKAGES
+> > variable that contain a single library, a new, automatic
+> > subpackage gets created that will have the name "libxxxxN"
+> > with libxxxx being the library name and N being the SO version.
+> > With this, bitbake overrides my set of subpackages.
+> > 
+> > How can I disable this in Daisy, i.e. bitbake 1.22.0, so I get the
+> > explicit package name I added to PACKAGES?
+> 
+> Remove "debian" from INHERIT variable.
 
-diff --git a/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb b/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
-index ecf7e6c..8aa5947 100644
---- a/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
-+++ b/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
-@@ -18,7 +18,7 @@ inherit autotools
- 
- DEPENDS += "ncurses"
- 
--SRC_URI = "http://downloads.sourceforge.net/project/cscope/cscope/${PV}/${PN}-${PV}.tar.gz"
-+SRC_URI = "http://downloads.sourceforge.net/project/cscope/cscope/${PV}/${BP}.tar.gz"
- 
- SRC_URI[md5sum] = "8f9409a238ee313a96f9f87fe0f3b176"
- SRC_URI[sha256sum] = "4889d091f05aa0845384b1e4965aa31d2b20911fb2c001b2cdcffbcb7212d3af"
+To be a little more specific, by default it gets added to INHERIT_DISTRO in 
+meta/conf/distro/defaultsetup.conf; you can set this to your own preferred 
+value in your configuration if you like.
+
+Cheers,
+Paul
+
 -- 
-1.7.9.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
