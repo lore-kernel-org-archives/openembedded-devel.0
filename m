@@ -1,34 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 202C4755CF
+Return-Path: <twoerner@gmail.com>
+Received: from mail-ig0-f181.google.com (mail-ig0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B93D741CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 May 2015 22:41:06 +0000 (UTC)
-Received: by iebgx4 with SMTP id gx4so41077745ieb.0
+	Fri, 22 May 2015 23:15:39 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so1694790igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 May 2015 15:41:07 -0700 (PDT)
+	Fri, 22 May 2015 16:15:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=yY/fzavVtn1+xJjTSDG/uX6OxG570AQjh3g2VPqe92U=;
-	b=ghqNZUCoud0zW2M3XOTTTkpTRQlJjb2T1efTPfrmHvECRcnJAEvAI+pv0amqZ6x+7N
-	uHDqdoA+eC3D2hF3iZQrGJpXyyOaeoYFW6kIsMzCHDOP5fOmkEUYtvUZsVJ/Yp9JMpPm
-	i8P+i/OWaiVu0IN5q3iiNga8Z6W+yVIgSKe1Dc52NUy3ZQxavVmFHa0ElS3YNXkvykk9
-	lOA6dXL/oHD8Dsgdwhf885jFSRoyVmxaxsJBIBvFbZ6gOIHgsFY2OJoJnl9pAX2ey+Sz
-	DmiBr0H6E7bj8W7VyYJbcV/haqZyTHHJ42hn+5Yk92iiSkJoKghvv3zAFzrsQrrhLnc5
-	eNcA==
-X-Received: by 10.50.43.137 with SMTP id w9mr489036igl.30.1432334467511; Fri,
-	22 May 2015 15:41:07 -0700 (PDT)
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=/jqtJQvqrmihEkLU29HAaLu5bZuwhXIPyhmZYqxWYm4=;
+	b=V5EVCGNMFULMPBjUonqhOk/+MEMtoyITRbJ+LHSh0gklwEk7ChffIEjmdy3/zd6Kbm
+	tQnBjkasYn+/wq1gNB3mrGX6xclQ2WMjff+s2uZmRotuGQMnu2s284IEQuF/hyWzlXEr
+	NMy66b+7lnoaI2Pp3uCO1I+GZIKiUIhWOmNXOwOVPwDLdCn2xaBD0G4+kEwPq7KxjzAZ
+	KkMp67R83uYlETNYQPMZs4qZh47Zrbt7qB6V8oTLgZEAVQNSMWWqsFtM//7OMUP+uqfY
+	2fN40KaXReJX0mZJXV7goJtjzOV/4YJGfyCN5g4dZ8pDaFIhIXQ9PGJ3d5sG7vUpE8PZ
+	87EA==
+X-Received: by 10.50.36.72 with SMTP id o8mr5221209igj.16.1432336540315;
+	Fri, 22 May 2015 16:15:40 -0700 (PDT)
+Received: from [192.168.141.85] (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by mx.google.com with ESMTPSA id qt1sm237882igb.5.2015.05.22.16.15.39
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 22 May 2015 16:15:39 -0700 (PDT)
+Message-ID: <555FB899.9040301@gmail.com>
+Date: Fri, 22 May 2015 19:15:37 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-Received: by 10.50.112.34 with HTTP; Fri, 22 May 2015 15:40:37 -0700 (PDT)
-In-Reply-To: <1431408883-7222-3-git-send-email-raj.khem@gmail.com>
-References: <1431408883-7222-1-git-send-email-raj.khem@gmail.com>
-	<1431408883-7222-3-git-send-email-raj.khem@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 22 May 2015 15:40:37 -0700
-Message-ID: <CAMKF1sq=yuf3eMKcU3xaqR6c0TZjXCEvt8zO7a35=KWpDuS2GA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH 9/9 V2] gnome-panel: Fix build with gcc-5
+To: openembedded-devel@lists.openembedded.org
+References: <5548E485.6080505@gmail.com> <555E2359.3080509@gmail.com>
+	<8824256D-28B9-48F4-8155-2185F236B4F2@gmail.com>
+In-Reply-To: <8824256D-28B9-48F4-8155-2185F236B4F2@gmail.com>
+Subject: Re: ODROID-C1 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,93 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 May 2015 22:41:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 22 May 2015 23:15:39 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-ping
+On 05/21/15 17:18, Khem Raj wrote:
+>> On May 21, 2015, at 11:26 AM, Trevor Woerner <twoerner@gmail.com> wrote:
+>>
+>>
+>> Why would someone include your layer and not build for odroidc1 or
+>> wetekplay? Sometimes that's what people do ;-) (look at Angstrom, for
+>> example). Besides, a BSP layer should be able to play nicely with other
+>> layers even when its machines aren't being used :-)
+> This is very much desirable, in todays times. In angstrom e.g. we want to generalize feeds across
+> many machines for arm especially, so we can share common feeds across multiple armv7a machines
+> so BSP maintainers have to start thinking that their BSP layer will be put along with other BSP layers
+> and they not change common components mindlessly to fit for just one given machine.
+>
+> secondly more and more end users especially big companies have more than 1 machine tied into their useless
+> so its desirable for them to use one distro across all the product lines and hence a requirement to have
+> BSP layers play well with each others.
 
-On Mon, May 11, 2015 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../gnome-panel/0001-Fix-build-with-gcc-5.patch    | 35 ++++++++++++++++++++++
->  .../gnome-panel/gnome-panel_2.32.1.bb              | 13 +++++---
->  2 files changed, 44 insertions(+), 4 deletions(-)
->  create mode 100644 meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch
->
-> diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch
-> new file mode 100644
-> index 0000000..6b7fc5b
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch
-> @@ -0,0 +1,35 @@
-> +From 20810fcf329c6e0b48b8e7602565ccc70c7ce62b Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Sun, 10 May 2015 02:10:59 -0700
-> +Subject: [PATCH] Fix build with gcc 5
-> +
-> +cc1: error: ../../gnome-panel/libpanel-applets-private: No such file or
-> +directory [-Werror=missing-include-dirs]
-> +cc1: error: ../../gnome-panel/libpanel-applets-private: No such file or
-> +directory [-Werror=missing-include-dirs]
-> +cc1: error: ../../gnome-panel/libpanel-applets-private: No such file or
-> +directory [-Werror=missing-include-dirs]
-> +cc1: some warnings being treated as errors
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> +Upstream-Status: Pending
-> +
-> + gnome-panel/libpanel-applet-private/Makefile.am | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/gnome-panel/libpanel-applet-private/Makefile.am b/gnome-panel/libpanel-applet-private/Makefile.am
-> +index f12dee8..d556f12 100644
-> +--- a/gnome-panel/libpanel-applet-private/Makefile.am
-> ++++ b/gnome-panel/libpanel-applet-private/Makefile.am
-> +@@ -8,7 +8,6 @@ AM_CPPFLAGS =                                                  \
-> +       -I$(srcdir)                                             \
-> +       -I$(top_srcdir)/gnome-panel                             \
-> +       -I$(top_builddir)/gnome-panel                           \
-> +-      -I$(top_builddir)/gnome-panel/libpanel-applets-private  \
-> +       -I$(top_builddir)/gnome-panel/libpanel-util             \
-> +       -DDATADIR=\""$(datadir)"\"                              \
-> +       -DPANEL_APPLETS_DIR=\"$(appletsdir)\"                   \
-> +--
-> +2.1.4
-> +
-> diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-> index 4957a99..3a413bd 100644
-> --- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "GNOME panel"
-> -LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
-> +LICENSE = "GPL-2.0 & LGPL-2.0 & GFDL-1.1"
->
->  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
->                      file://COPYING-DOCS;md5=c9211dab3ae61e580f48432020784324 \
-> @@ -9,12 +9,17 @@ SECTION = "x11/gnome"
->
->  PR = "r7"
->
-> -DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra"
-> +DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ \
-> +           pango libwnck gnome-menus cairo libgweather dbus-glib \
-> +          librsvg libcanberra"
-> +RDEPENDS_${PN} = "python"
->
->  inherit gtk-doc gnome autotools-brokensep gettext pkgconfig gconf
->
-> -SRCREV = "6a364b6a4a9beed3da9ca6f5b0dac81eb99dea2a"
-> -SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32"
-> +SRCREV = "8292bd2b8a36df7eed3c760899400790cde68590"
-> +SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32 \
-> +           file://0001-Fix-build-with-gcc-5.patch \
-> +         "
->
->  S = "${WORKDIR}/git"
->
-> --
-> 2.1.4
->
+Shouldn't this be true of distro layers as well?
+
+Simply included meta-angstrom in conf/bblayers.conf causes one's DISTRO
+to be set to angstrom, even if they select poky in conf/local.conf.
 
