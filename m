@@ -1,40 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C63A7564E
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C0C265C7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2015 21:14:43 +0000 (UTC)
-Received: by wicmx19 with SMTP id mx19so57875854wic.0
+	Mon, 25 May 2015 21:14:44 +0000 (UTC)
+Received: by wicmx19 with SMTP id mx19so48673695wic.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2015 14:14:44 -0700 (PDT)
+	Mon, 25 May 2015 14:14:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=ymYmwK0/u8cZ9TXCClJZDjEZEUqn+q3sXzaaRzwJMsc=;
-	b=H7YuRMKmlZE2I1vA5o55hL28x6YdEbDTn4as/Ec8Qkasyqc3SyDnGA3jP98Mjx7CEj
-	vr4Pb+yvx0wB4omYJPT1BltZRDX6t6UcV/wq80zt0HApf7R9sXT7g6hwHjqsxwuvxTu8
-	oa23lsGkSK5TgH0ZugFtkVQyB5JUiDZIeBnbZV2Dv6IDyP7POz9z+pJPnzTnMU+Pe+Rj
-	HDLb5U2+Y1JExIXDlFBoTR1Ml3wi37czj7CQ/e39Zx2iWLe88GbGtOBOIdrh2qgdS5EA
-	PSHlmaxcRDTjnZ+8g7Qa7t6GxPdPEyi6AowSDg+Z117s0txiaPolU4VVHl8dZbNMWzVV
-	0V0A==
-X-Received: by 10.180.215.8 with SMTP id oe8mr14374785wic.0.1432588484495;
-	Mon, 25 May 2015 14:14:44 -0700 (PDT)
+	bh=n3Td9s2hnXkAiusFFo2iCMj6now0ItR9E+2gqd0byuk=;
+	b=HDIhUvBMxk81LK0HrlkOZAMXWe4lvWaBrZW7ZVakvi40SV5MHnIIMk9Fd+xyiNDaRm
+	7ysLu2ShkcKEQtw2oJTqhRmlNJXZ3H1pkhQKAgnmTj3uLeYuUMy7H+nwVgWlJgUdCsNT
+	jKxuQfbT2e3BnJRlWmsPzaa2cXH+IEwoTsljIKRsRgRPLgwdcZ0pQeao5INSMVdfwiOT
+	Qm4lfdE/tCo7oIWocEQOTxPk5QLcMmD4SzjiAbbaXyHB7jTU54/Xdlo5vTeQhcC9yXlP
+	0LJDF1oGQz2BtY9NcRGlXjgDLobvUt3hi4dpLNFsoGacub0aeFWdfHbBrp9TwrJxQOE/
+	kCNw==
+X-Received: by 10.194.23.197 with SMTP id o5mr43366125wjf.75.1432588486017;
+	Mon, 25 May 2015 14:14:46 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A35C6.dip0.t-ipconnect.de.
 	[91.10.53.198])
-	by mx.google.com with ESMTPSA id 16sm18515406wjs.41.2015.05.25.14.14.42
+	by mx.google.com with ESMTPSA id 16sm18515406wjs.41.2015.05.25.14.14.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 25 May 2015 14:14:43 -0700 (PDT)
+	Mon, 25 May 2015 14:14:45 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 May 2015 23:14:08 +0200
-Message-Id: <1432588449-31413-12-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 25 May 2015 23:14:09 +0200
+Message-Id: <1432588449-31413-13-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1432588449-31413-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1432588449-31413-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 11/12] exo: update to 0.10.6
+Subject: [PATCH 12/12] imagemagick: update to 6.9.1.3 / add packageconfig for openjpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,34 +48,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2015 21:14:43 -0000
+X-List-Received-Date: Mon, 25 May 2015 21:14:45 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+* openjpeg is new and auto detected by configure
+* choose tar.xz for download as the size is ~1/5 less
+* checked LICENSE: only one year was changed 2014->2015
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/exo/{exo_0.10.4.bb => exo_0.10.6.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/exo/{exo_0.10.4.bb => exo_0.10.6.bb} (87%)
+ .../{imagemagick_6.8.9.bb => imagemagick_6.9.1.bb}            | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_6.8.9.bb => imagemagick_6.9.1.bb} (83%)
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo_0.10.4.bb b/meta-xfce/recipes-xfce/exo/exo_0.10.6.bb
-similarity index 87%
-rename from meta-xfce/recipes-xfce/exo/exo_0.10.4.bb
-rename to meta-xfce/recipes-xfce/exo/exo_0.10.6.bb
-index eeb2e75..f1b5ae5 100644
---- a/meta-xfce/recipes-xfce/exo/exo_0.10.4.bb
-+++ b/meta-xfce/recipes-xfce/exo/exo_0.10.6.bb
-@@ -17,8 +17,8 @@ SRC_URI_append_class-native = " \
-     file://reduce-build-to-exo-csource-only.patch \
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+similarity index 83%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+index accbbed..e54135b 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.8.9.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+@@ -1,15 +1,15 @@
+ SUMMARY = "ImageMagick is an image convertion tools"
+ SECTION = "console/utils"
+ LICENSE = "ImageMagick"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=5d84c6ddd4028aa53d028b4c50f9361e"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
+ # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
+ 
+-PATCHSET = "10"
+-SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.bz2 \
++PATCHSET = "3"
++SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
  "
+-SRC_URI[md5sum] = "c4f70046420db9b22d9dfd1c3d179b55"
+-SRC_URI[sha256sum] = "4e702c1c3b4632fde2a93af33dcd3d013a9ebfa598060aca11f06d80676ecbf4"
++SRC_URI[md5sum] = "1171a6837defe10be288ab44869cc3a0"
++SRC_URI[sha256sum] = "5fd180603e60c624c05c644a8340f4f4e92c19dc3c41d374d38f76c69cd48ba3"
  
--SRC_URI[md5sum] = "fe54dad8b897af36628da46b33844f95"
--SRC_URI[sha256sum] = "cced5fdbc0b61a5d976210ff71ecdd81b89fcd15e5860a44f50da7b83fb2deaa"
-+SRC_URI[md5sum] = "895e4f38d2cfe58d69679e2902a335a5"
-+SRC_URI[sha256sum] = "1cc0e5a432e050a5e5aa64d126b988f4440da4f27474aaf42a4d8e13651d0752"
+ S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
  
- PACKAGES =+ "exo-csource"
- 
+@@ -23,6 +23,7 @@ CACHED_CONFIGUREVARS = "ac_cv_sys_file_offset_bits=yes"
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[jp2] = "--with-jp2,,jasper"
+ PACKAGECONFIG[lzma] = "--with-lzma,--without-lzma,xz"
++PACKAGECONFIG[openjpeg] = "--with-openjp2,--without-openjp2,openjpeg"
+ PACKAGECONFIG[pango] = "--with-pango,--without-pango,pango cairo"
+ PACKAGECONFIG[webp] = "--with-webp,--without-webp,libwebp"
+ PACKAGECONFIG[wmf] = "--with-wmf,--without-wmf,libwmf"
 -- 
 1.9.3
 
