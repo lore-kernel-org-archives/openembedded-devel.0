@@ -1,32 +1,43 @@
-Return-Path: <vm.rod25@gmail.com>
-Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id EFD536AC15
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EC0965C78
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2015 16:27:46 +0000 (UTC)
-Received: by iesa3 with SMTP id a3so75389057ies.2
+	Mon, 25 May 2015 16:39:19 +0000 (UTC)
+Received: by paza2 with SMTP id a2so64817928paz.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 May 2015 09:27:47 -0700 (PDT)
+	Mon, 25 May 2015 09:39:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=O+OzpgJ3trt37PFCYUeUL5F/kCkrqLyqGH9wO+wReqo=;
-	b=Fsp+YYbkdbEVR74JGsrxHHODPmRgONC9X7xcVQy4izCyM/8Q6vYwzAdzdN3J5bQ6s7
-	bLJih3kQgs9UnP5wwO3l/EJLBH1Hw/jH+6D0HAJ2ADzd22ofOglWSmjtsNfWqUnp7H7V
-	IPWvH/w6K/SV60gQeA/+gzNM1ZfOIDa4VXOJTNyZZJAm+eOYaoX+okrfUVjx8U/fFORo
-	ohJSghV54CqLeamAdFXJ9Bz9C6Mhlt+SI3ltnwDAXRDHEtJbulhXqSYP2H5Sl6sQdmXC
-	9lOI3gxiLjr3OdK1njlocDim6Wy+NO5fn+yhQ897Kyne7oGgs2x+qbGk/EJGaKVj1zuK
-	ncXw==
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=5rRBjRUattkp3C8FiZYquW/u+WIoLuV/yp8nrWuUETM=;
+	b=vVdcI43tRfW2r8giFCPp5x/VhN70R5F6Tb6MzWrSrHaNwVYPMnRAdwvnDtUxGYSQS1
+	uYpws8guGl4+hTUWt3ngA/sjBjMnwqnsAQD0U95TWpvFDm4YjYvhfFizCCbext+3hG37
+	FS4s7itRAkNtXUPRDhlYG5bTOnARhHZDdIIn+XQRWYlTml3/m+t85IaXeiy9ij2WRk28
+	TXg1vj52ksl34/Gg9UialX5SapoSZlAjSY8Xd0dFnU9vu+WR6xf6S7cmvAwcy2hOtNcY
+	XBScUN6XSWlA2sTbVs26GDBm/y9xoL8bgEDRLRtLKebRMuHGMPqySh3O2PWLl9xHRevB
+	DKKA==
+X-Received: by 10.66.149.8 with SMTP id tw8mr41608522pab.69.1432571961217;
+	Mon, 25 May 2015 09:39:21 -0700 (PDT)
+Received: from ?IPv6:2601:c:a700:3ba7:a938:95af:d43b:b8e4?
+	([2601:c:a700:3ba7:a938:95af:d43b:b8e4])
+	by mx.google.com with ESMTPSA id
+	c16sm10533245pdl.61.2015.05.25.09.39.19
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 25 May 2015 09:39:19 -0700 (PDT)
+Message-ID: <55635034.9010702@gmail.com>
+Date: Mon, 25 May 2015 09:39:16 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-X-Received: by 10.107.136.42 with SMTP id k42mr28019340iod.63.1432571267141;
-	Mon, 25 May 2015 09:27:47 -0700 (PDT)
-Received: by 10.50.141.228 with HTTP; Mon, 25 May 2015 09:27:47 -0700 (PDT)
-In-Reply-To: <1431239259-21577-1-git-send-email-victor.rodriguez.bahena@intel.com>
-References: <1431239259-21577-1-git-send-email-victor.rodriguez.bahena@intel.com>
-Date: Mon, 25 May 2015 11:27:47 -0500
-Message-ID: <CAK5mtew-f34qhf+nJdcAN3sjn=KM+WmzEfE5UDAoQdNa5TOxFw@mail.gmail.com>
-From: Victor Rodriguez <vm.rod25@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] mpich: added BASH_SHELL to CACHED_CONFIGUREVARS
+References: <1431958369-14668-1-git-send-email-alexander.kanavin@linux.intel.com>	<20150521110638.GB2377@jama>
+	<555F5517.5000100@gmail.com>
+	<CAJTo0LahDus8tjxEvwZUtyjBjtLO6tsYokx=iMH=WegL9ix46g@mail.gmail.com>
+In-Reply-To: <CAJTo0LahDus8tjxEvwZUtyjBjtLO6tsYokx=iMH=WegL9ix46g@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Add GStreamer 0.10 and things that depend on it from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,50 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 May 2015 16:27:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 25 May 2015 16:39:22 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, May 10, 2015 at 1:27 AM, Victor Rodriguez
-<victor.rodriguez.bahena@intel.com> wrote:
-> On Fedora 17, bash has moved to /usr/bin/bash and the configure process finds
-> it on the host machine there, this ensures that it is set correctly for the
-> target.
+
+
+On 05/22/2015 09:30 AM, Burton, Ross wrote:
+> On 22 May 2015 at 17:11, akuster808 <akuster808@gmail.com> wrote:
 >
-> Signed-off-by: Victor Rodriguez <victor.rodriguez.bahena@intel.com>
-> ---
->  meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb | 2 ++
->  1 file changed, 2 insertions(+)
+>> I have noticed some breakages when building xfce, (libcanberra DEPENDS =
+>> 'gstreamer') now needs to be "gstream1.0". I suspect some of it is do to
+>> gstreamer transitioning. I will give a few days to settle before sending
+>> patches.
+>>
 >
-> diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-> index 0225cee..eb6ceba 100644
-> --- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-> +++ b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-> @@ -12,6 +12,8 @@ SRC_URI = " \
->  SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
->  SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
+> libcanberra 0.29 only supports GStreamer 0.10, libcanberra 0.30 depends on
+> 1.0.
+
+ok, I will look into that.
 >
-> +CACHED_CONFIGUREVARS += "BASH_SHELL=${base_bindir}/bash"
-> +
->  RDEPENDS_${PN} += "bash perl libxml2"
->  S = "${WORKDIR}/${PN}-${PV}"
+> I suspect the problem you're hitting is that libcanberra 0.29 depends on
+> gstreamer which isn't in oe-core anymore, but switching gstreamer to
+> gstreamer1.0 whilst letting the build run will mean libcanberra doesn't
+> actually support GStreamer...
 >
-> --
-> 1.9.3
+> Either xfce should keep with GStreamer 0.10 and so depend on
+> meta-multimedia, or xfce and related recipes migrate to GStreamer 1.x.
+
+This is less of an xfce issue as meta-oe world wont build do to the 
+above mentioned depends. Maybe we may want to move the failing packages 
+to a more appropriate location, upgrade or fix the depends.
+
+failing packages:
+farsight2, pidgin, licnice, libcanberra  and qt-mobility
+
+would creating a virtual/gstreamer help?
+
+- armin
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
-Hi team .. this patch is important otherwise we can not create an
-image with mpich in Fedora
-
-If there is other way or is already fixed I am more than happy to know
-to apply that
-
-Thanks and regards
-
-Victor Rodriguez
+> Ross
+>
 
