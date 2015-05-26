@@ -1,38 +1,31 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wi0-f195.google.com (mail-wi0-f195.google.com
-	[209.85.212.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8043C75650
+Return-Path: <connor.smith@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id C2EE07564A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2015 17:28:12 +0000 (UTC)
-Received: by wibbw19 with SMTP id bw19so8685694wib.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2015 10:28:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:content-type:mime-version:content-transfer-encoding;
-	bh=SFICXn7bxxLaAvwDNE503H43/aHqj6SO6YxHavxYYso=;
-	b=VvUjgx6ltnFQyFybbk3M8CMJR+E/lytxonHo+9iNi0vRzUHg0PP2ZQ6am640RsIRXj
-	sMxnUa0KnJxtjWdQFf2l8W5aAIapvvS2jXwNiWxsJCGrpnFsz6eyHNAFqXAC9L+Awocy
-	L1aUVN4SQ44HaiDwucvnm+FWmwMByUE1YPX7VhjFC/6j9ztJmHUOGlQBQpeE26KumlNy
-	enfFPWudWIYlWWr/122Z3/6dcZAYkCxG2h28Nnh1hNff6oFFTzQT/uhDuAbehWJ38hzn
-	5J6tqbVd6VQygPNHKpxPfYpCwMzwo0oLwfSrtr14C/VNtjqzumb4GV03MHVtBE7Q/r7e
-	SwNA==
-X-Received: by 10.194.232.5 with SMTP id tk5mr41171471wjc.158.1432661293186;
-	Tue, 26 May 2015 10:28:13 -0700 (PDT)
-Received: from [192.168.0.7] (212-41-82-38.adsl.solnet.ch. [212.41.82.38])
-	by mx.google.com with ESMTPSA id
-	fs9sm22757055wjc.34.2015.05.26.10.28.11
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Tue, 26 May 2015 10:28:12 -0700 (PDT)
-Message-ID: <1432661286.2291.4.camel@Saturn.local.all>
-From: Max Krummenacher <max.oss.09@gmail.com>
+	Tue, 26 May 2015 21:00:56 +0000 (UTC)
+Received: from us-aus-mgwout2.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	t4QL0vUM022501 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 May 2015 16:00:57 -0500
+Received: from connor-ubuntu.natinst.com ([130.164.14.198])
+	by us-aus-mgwout2.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2015052616005728-618313 ;
+	Tue, 26 May 2015 16:00:57 -0500 
+From: Connor Smith <connor.smith@ni.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 May 2015 19:28:06 +0200
-In-Reply-To: <1431771255-20841-1-git-send-email-max.oss.09@gmail.com>
-References: <1431771255-20841-1-git-send-email-max.oss.09@gmail.com>
-X-Mailer: Evolution 3.10.4 
-Mime-Version: 1.0
-Subject: Re: [meta-gnome][PATCH] florence: use ${SOURCEFORGE_MIRROR} in SRC_URI
+Date: Tue, 26 May 2015 16:00:49 -0500
+Message-Id: <1432674049-23781-1-git-send-email-connor.smith@ni.com>
+X-Mailer: git-send-email 1.9.1
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut2/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 05/26/2015 04:00:57 PM,
+	Serialize by Router on US-AUS-MGWOut2/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 05/26/2015 04:00:57 PM,
+	Serialize complete at 05/26/2015 04:00:57 PM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2015-05-26_04:, , signatures=0
+Cc: Connor Smith <connor.smith@ni.com>
+Subject: [meta-oe][PATCH] tree: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,41 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2015 17:28:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 26 May 2015 21:01:02 -0000
 
-Hi all
+Tree is a recursive directory listing command that is useful for viewing
+directory contents in a tree-like format.
 
-Ping.
+Signed-off-by: Connor Smith <connor.smith@ni.com>
+---
+ meta-oe/recipes-support/tree/tree_1.7.0.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/recipes-support/tree/tree_1.7.0.bb
 
-florence do_fetch currently fails because the server can't be found.
-
-Regards
-Max
-
-Am Samstag, den 16.05.2015, 12:14 +0200 schrieb Max Krummenacher:
-> http://switch.dl.sourceforge.net has been down for some time.
-> Use the OE provided mirror variable instead.
-> 
-> Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-> ---
->  meta-gnome/recipes-support/florence/florence_0.5.1.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/meta-gnome/recipes-support/florence/florence_0.5.1.bb b/meta-gnome/recipes-support/florence/florence_0.5.1.bb
-> index 9eab385..71014f0 100644
-> --- a/meta-gnome/recipes-support/florence/florence_0.5.1.bb
-> +++ b/meta-gnome/recipes-support/florence/florence_0.5.1.bb
-> @@ -10,7 +10,7 @@ PR = "r1"
->  
->  DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-native gnome-doc-utils libnotify"
->  
-> -SRC_URI = "http://switch.dl.sourceforge.net/project/florence/florence/0.5.1/florence-0.5.1.tar.bz2 \
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/florence/florence/${PV}/florence-${PV}.tar.bz2 \
->             file://0001-Fix-glib-includes.patch"
->  SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
->  SRC_URI[sha256sum] = "7b06ed84ef2b7b22d8d2cf0c7d013a05409bd82028240ac8719a68b192d5bc62"
-
+diff --git a/meta-oe/recipes-support/tree/tree_1.7.0.bb b/meta-oe/recipes-support/tree/tree_1.7.0.bb
+new file mode 100644
+index 0000000..507b12a
+--- /dev/null
++++ b/meta-oe/recipes-support/tree/tree_1.7.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "a recursive directory listing command"
++HOMEPAGE = "http://mama.indstate.edu/users/ice/tree/"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
++
++SRC_URI = "ftp://mama.indstate.edu/linux/${BPN}/${BP}.tgz"
++SRC_URI[md5sum] = "abe3e03e469c542d8e157cdd93f4d8a6"
++SRC_URI[sha256sum] = "6957c20e82561ac4231638996e74f4cfa4e6faabc5a2f511f0b4e3940e8f7b12"
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/${BPN} ${D}${bindir}/${BPN}
++}
+-- 
+1.9.1
 
 
