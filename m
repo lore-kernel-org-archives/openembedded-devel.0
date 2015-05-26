@@ -1,36 +1,33 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-vn0-f47.google.com (mail-vn0-f47.google.com
-	[209.85.216.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FDE96AC12
+Return-Path: <h4nn35.work@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id E065E65D6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2015 12:45:03 +0000 (UTC)
-Received: by vnbg129 with SMTP id g129so7022645vnb.11
+	Tue, 26 May 2015 13:59:45 +0000 (UTC)
+Received: by wifw1 with SMTP id w1so32063604wif.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2015 05:45:04 -0700 (PDT)
+	Tue, 26 May 2015 06:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id:organization;
-	bh=0XrA+daQOruesCFxy2DEMkWT6WzmXmfXezwguPn6jrg=;
-	b=qPgUuliuL2rskmiXsFpE1M4+ycJ/qC7Wl3IVJacZFqgKdog0otaZgmF0jjIhjrszeJ
-	EEVA216eiSERJgdwsIUU6xo6hN9dNxseWkZ8F7YGooA9dOBWbJmd8xF546XiD8o+QZ3q
-	//rLiP+nk2Bo8leQjrzcPIoTFNXCMHtzi5MFpzX74mthy8pYljYtEG/rDCdegWMVV4aa
-	A6G3JpjUoVhn9wDAUdTwYJN2PFhrtnlRuX9Mpq56f3cQb6+xo8ExhCVGYfDFxPUsE3it
-	cy2SrRTDRvRsfEgc/OnIF6gmVoDrAPQnFVlj/r33/iSQmFnrHeGHPYZq/AGEmCHhlmkZ
-	vNbw==
-X-Received: by 10.52.181.196 with SMTP id dy4mr30853139vdc.67.1432644304747;
-	Tue, 26 May 2015 05:45:04 -0700 (PDT)
-Received: from centrium.lab.ossystems.com.br ([177.100.224.72])
-	by mx.google.com with ESMTPSA id eo7sm2215300vdc.18.2015.05.26.05.45.01
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 26 May 2015 05:45:03 -0700 (PDT)
-Sender: Otavio Salvador <otavio.salvador@gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=99L2R4YxeVzGozqO/yqkUBsbDJFH2sJ7wA6pPLnoZnM=;
+	b=gcqd/75oQ+ZzDiLGV0372OlfQyZD4QydfPuA2Acb9w/7TzjoGfYbF2MGQ0wsHs+5h2
+	N8dCeRIBr4QoMMaEmJ+vBXaJL/xr5Jd0T/4n7Oj3+YFCdaBVd6Ydd5fn9e0QScdt3CiH
+	wXHpoNFBkb4pH7zaq6EIN932DrxDbw8YvYpBfTZuZa6D/eoBrduNthS7uURNNnCJCGff
+	0QRzxQFPHVtKPaYiki+qthQ2JX1LD4OWwPo6GyKVaOonxn5TSKOcFP0kqaVdZxHkojp/
+	AHkB6Si7NpmHz3xhaIadmFNuB884OQr2zch1vAxc77O06PFdEPZvNza6Ptaaw8lzx48L
+	t9fw==
+MIME-Version: 1.0
+X-Received: by 10.195.11.202 with SMTP id ek10mr48432161wjd.12.1432648786125; 
+	Tue, 26 May 2015 06:59:46 -0700 (PDT)
+Received: by 10.27.128.68 with HTTP; Tue, 26 May 2015 06:59:46 -0700 (PDT)
+In-Reply-To: <1432639251-12249-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1432639251-12249-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 26 May 2015 15:59:46 +0200
+Message-ID: <CAHvQdo3++AkZcmVeMdcbYNxT=G3g5HuMeWwCNT2uhhpTjtzgAg@mail.gmail.com>
+From: Johannes Pointner <h4nn35.work@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 May 2015 09:46:46 -0300
-Message-Id: <1432644406-4468-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-clang][PATCH] clang: Remove nativesdk-binutils dependency
+Subject: Re: [PATCH] poppler follow up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,28 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2015 12:45:05 -0000
+X-List-Received-Date: Tue, 26 May 2015 13:59:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The dependency is not necessary for building of the nativesdk package.
+The patch works fine for me. It builds the qt5 poppler libs without
+errors/warnings.
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- recipes-devtools/clang/clang_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+Thank you!
 
-diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/clang_git.bb
-index d197908..52352f2 100644
---- a/recipes-devtools/clang/clang_git.bb
-+++ b/recipes-devtools/clang/clang_git.bb
-@@ -74,6 +74,7 @@ EXTRA_OECMAKE_append_class-target = "\
- EXTRA_OEMAKE += "REQUIRES_RTTI=1 VERBOSE=1"
- 
- DEPENDS = "zlib libffi libxml2 binutils"
-+DEPENDS_remove_class-nativesdk = "nativesdk-binutils"
- 
- do_configure_prepend() {
-         # Remove RPATHs
--- 
-2.1.4
-
+2015-05-26 13:20 GMT+02:00 Andreas M=C3=BCller <schnitzeltony@googlemail.co=
+m>:
+> was pushed ontop of
+>
+> https://github.com/schnitzeltony/meta-openembedded.git patches
+>
+> @Johannes: feedback welcome
+>
+> Andreas M=C3=BCller (1):
+>   poppler: fix configure by pointing on moc
+>
+>  ...dd-manadatory-options-to-find-qt4-qt5-moc.patch | 91 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-support/poppler/poppler_0.33.0.bb  |  3 +-
+>  2 files changed, 93 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-add-mana=
+datory-options-to-find-qt4-qt5-moc.patch
+>
+> --
+> 1.9.3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
