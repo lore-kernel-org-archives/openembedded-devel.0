@@ -1,37 +1,37 @@
-Return-Path: <h4nn35.work@gmail.com>
-Received: from mail-wg0-f43.google.com (mail-wg0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 41F3D65D6E
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E56065C78
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2015 10:16:27 +0000 (UTC)
-Received: by wgme6 with SMTP id e6so24044174wgm.2
+	Tue, 26 May 2015 11:21:22 +0000 (UTC)
+Received: by wgme6 with SMTP id e6so25523152wgm.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2015 03:16:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=EIOZUdwVunlYCLBn+p7P00GB+bXdb9FggziseRdrDC4=;
-	b=XylkVHrOG6k3X1MXqCRqXY+brVKmB2WvsS92s1bjVDnQy7aoRN8x5YQKMSDeLVQqZ7
-	kEDagnXl00glyt3Sv0RC4DdxwhF4MJDVR9lAYcrxDKXOxMqrS/9hNRUmUMoFkIvoLofO
-	EsPk66dRQhKhxTH+vPQEKPu0qFddKNQINkDi1LeiluY3hJm09bv4q0NmnMeBsL+hkLsm
-	xmzlgrbFvpKKnh5iRp+gRAzuMikJbfQPx1SNxjy28p45KByAs+/teWR/CbgdyjSLZoU6
-	niBATdzo1fZLH2PMz2SY69Y9MymagLcnt3jRFI+ZAItvBjhB1+V0KzeTBfUWO4aj0e5z
-	ODSA==
-MIME-Version: 1.0
-X-Received: by 10.180.102.227 with SMTP id fr3mr7222066wib.19.1432635388589;
-	Tue, 26 May 2015 03:16:28 -0700 (PDT)
-Received: by 10.27.128.68 with HTTP; Tue, 26 May 2015 03:16:28 -0700 (PDT)
-In-Reply-To: <CALbNGRS24NTjxiQrmj5MJ9cvJkNaVKizSFvBjgE13FVE2dGUQg@mail.gmail.com>
-References: <1432588449-31413-1-git-send-email-schnitzeltony@googlemail.com>
-	<1432588449-31413-4-git-send-email-schnitzeltony@googlemail.com>
-	<CAHvQdo2+r3yjapSU2f=dCaOipuaLViCZ5EXNmDt=xVrLfGdZcw@mail.gmail.com>
-	<CALbNGRRwf5wWYR9fwNQ0emgawgGMbOohVMWvZsSGwJ9hicoQpg@mail.gmail.com>
-	<CALbNGRR5rxuRkWoDduChQGfgpVPB34xxq9zQXXJgSHpw-9s+bQ@mail.gmail.com>
-	<CALbNGRS24NTjxiQrmj5MJ9cvJkNaVKizSFvBjgE13FVE2dGUQg@mail.gmail.com>
-Date: Tue, 26 May 2015 12:16:28 +0200
-Message-ID: <CAHvQdo3M4rWaoQUKEko7=rT+dVFNcs-LZe-kM4mW_zf_0Z+D0w@mail.gmail.com>
-From: Johannes Pointner <h4nn35.work@gmail.com>
+	Tue, 26 May 2015 04:21:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=tkwGthLUHPhXi+m8oISyoyVAN8lmyMKsIkpaL1FALq8=;
+	b=qdCdRAMW8JI2NIXT3cCeHP0kqcLDoCVVG/wRuXazCufSn54/LDDGinLU1jq6KrPhwX
+	yaTVeSvq2tkKifLh8tf+0QXtxCADWFUpV3iCYhxnx2TTh6ZQgFhyAoTWIIgWALNHjLRh
+	hMZTdObgTnZW8Hbh8FsphQX2CBt6X2SGInbcpfAiTQfhegu2gB4cZUgMpA/2Exm8HTuQ
+	Pvk1ZrW3hGiJLUMlOLwx+6I6Elk43/OEXpUZWhqNIITU05gaSaWYicIOSNrXOPrAQft1
+	G+EWJlEV48LIibn2hlOp0NMx3QZayz2IVEEA8NiFO1+rgJ13Q1I7O7HKRes2zkKmztIe
+	+dDQ==
+X-Received: by 10.180.72.198 with SMTP id f6mr39047698wiv.21.1432639283087;
+	Tue, 26 May 2015 04:21:23 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
+	by mx.google.com with ESMTPSA id 16sm21245212wjs.41.2015.05.26.04.21.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 26 May 2015 04:21:22 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 03/12] poppler: update 0.33.0 to and enhance packageconfigs
+Date: Tue, 26 May 2015 13:20:50 +0200
+Message-Id: <1432639251-12249-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
+MIME-Version: 1.0
+Subject: [PATCH] poppler follow up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,76 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2015 10:16:29 -0000
+X-List-Received-Date: Tue, 26 May 2015 11:21:24 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Thank you for your fast replies/solution.
+was pushed ontop of
 
-2015-05-26 11:37 GMT+02:00 Andreas M=C3=BCller <schnitzeltony@googlemail.co=
-m>:
-> On Tue, May 26, 2015 at 11:30 AM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
->> On Tue, May 26, 2015 at 11:16 AM, Andreas M=C3=BCller
->> <schnitzeltony@googlemail.com> wrote:
->>> On Tue, May 26, 2015 at 11:02 AM, Johannes Pointner
->>> <h4nn35.work@gmail.com> wrote:
->>>> Hello,
->>>>
->>>> I tried your patch but wasn't able to build poppler-qt5.
->>>> The do_configure gives me following log(only part of the log):
->>>> ...
->>>> checking for CAIRO... yes
->>>> checking for PDFTOCAIRO... yes
->>>> checking for fcntl.h... (cached) yes
->>>> checking for sys/mman.h... (cached) yes
->>>> checking for sys/stat.h... (cached) yes
->>>> checking for POPPLER_GLIB... yes
->>>> checking for gobject-introspection... no
->>>> checking for glib-mkenums...
->>>> /mnt/workspace/yocto_env/poky_fido/poky_ppt30/build/tmp/sysroots/x86_6=
-4-linux/usr/bin/glib-mkenums
->>>> checking for gtkdoc-check... no
->>>> checking for gtkdoc-rebase... no
->>>> checking for gtkdoc-mkpdf... no
->>>> checking whether to build gtk-doc documentation... no
->>>> checking for POPPLER_QT4... no
->>>> checking for POPPLER_QT5... yes
->>>> checking for POPPLER_QT5_TEST... yes
->>>> checking for arm-poky-linux-gnueabi-moc... no
->>>> checking for moc... moc
->>>> checking for Qt5 moc... no
->>>> checking for arm-poky-linux-gnueabi-moc-qt5... no
->>>> checking for moc-qt5... no
->>>> checking for Qt5 moc-qt5... checking for arm-poky-linux-gnueabi-qtchoo=
-ser... no
->>>> checking for qtchooser... qtchooser
->>>> checking for qtchooser... qtchooser: could not find a Qt installation =
-of 'qt5'
->>>> not found
->>>> ...
->>>>
->>>> Have I missed something?
->>>> Other qt5 applications build without a problem.
->>>>
->>>> Thx,
->>>> Hannes
->>>>
->>> Will check what my configure says - maybe there are some missing
->>> dependencies caught by my environment
->>>
->> Guess we have some host pollution. Let me guess: you have qtchooser
->> installed on your host - as I haven't and my configure does not ask
->> for qtchooser.
->>
-> Think I found it: poppler's configure has some customized way to find
-> moc. This finds host's moc - there is no moc-qt5 in qtbase native.
-> Hope to send out V2 soon.
->
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+https://github.com/schnitzeltony/meta-openembedded.git patches
+
+@Johannes: feedback welcome
+
+Andreas Müller (1):
+  poppler: fix configure by pointing on moc
+
+ ...dd-manadatory-options-to-find-qt4-qt5-moc.patch | 91 ++++++++++++++++++++++
+ meta-oe/recipes-support/poppler/poppler_0.33.0.bb  |  3 +-
+ 2 files changed, 93 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-add-manadatory-options-to-find-qt4-qt5-moc.patch
+
+-- 
+1.9.3
+
 
