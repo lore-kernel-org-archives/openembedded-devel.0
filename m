@@ -1,34 +1,34 @@
-Return-Path: <hroussille@adeneo-embedded.com>
-Received: from smtp.adetelgroup.com (smtp.adetelgroup.com [94.247.26.71])
-	by mail.openembedded.org (Postfix) with ESMTP id 097DE600B3
+Return-Path: <zoltan.kuscsik@linaro.org>
+Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
+	[209.85.213.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 53AC672D64
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 11:41:29 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.adetelgroup.com (Postfix) with ESMTP id 3F7E941DF5
+	Wed, 27 May 2015 17:35:43 +0000 (UTC)
+Received: by igbsb11 with SMTP id sb11so19769370igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 13:41:30 +0200 (CEST)
-Received: from smtp.adetelgroup.com ([127.0.0.1])
-	by localhost (hbg-pa71.hmc-pa.adm [127.0.0.1]) (amavisd-new, port 10026)
-	with ESMTP id 6KPfp_jL10kt
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 13:41:30 +0200 (CEST)
-Received: from hbg-pa74.hmc-pa.adm (unknown [10.210.21.3])
-	by smtp.adetelgroup.com (Postfix) with ESMTP id 29ADD41DF1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 13:41:30 +0200 (CEST)
-Date: Wed, 27 May 2015 13:41:30 +0200 (CEST)
-From: ROUSSILLE Hector <hroussille@adeneo-embedded.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <746866001.144064.1432726890076.JavaMail.zimbra@adeneo-embedded.com>
-In-Reply-To: <5565AC43.6070406@mlbassoc.com>
-References: <1432725212-14933-1-git-send-email-hroussille@adeneo-embedded.com>
-	<5565AC43.6070406@mlbassoc.com>
+	Wed, 27 May 2015 10:35:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-type;
+	bh=Wq9el0m/wl1PI9cUWO3ajwNJOiKLpDQ5sXxkSTPWzB8=;
+	b=j6YblbAWYFWXsA2niW9RkNxWHrTP7ohJfdKF6K8Sp7ZARQSWwg8V2Po5OpRkDaAco1
+	HluzZSstjIDMCOuUYKXw5motUxua2lEDq/EujJ32BXeRkIwH6AyejbcJMdW+mu8WQw6j
+	zYRwj+l0YNyP0i8plhwMlDkwquLZrqQGVs0F0OktN7Dch218aPVa/cDTkYw32W/UmrkK
+	aLCPOYlMz90cfFSARfOE+8LZP0D0x3f1nLhNozEL6lMnw+6TPG7ny673hPRLRJmozaH9
+	esT2oNoKvmkJ92EIKpdl3+1ZFOi5feTwbO1we/IvGDkWNlgVWwDaLOMqTflPpUXpWh5P
+	97Cw==
+X-Gm-Message-State: ALoCoQmUQ6/nM2ISLyVzN7/Zt4c42zGyAxhnhuzezMMr5OY+KNYr7U+yEtZk1FGakf7WSDObW7Rp
+X-Received: by 10.107.6.136 with SMTP id f8mr34378803ioi.61.1432748144365;
+	Wed, 27 May 2015 10:35:44 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: Zimbra 8.6.0_GA_1169 (ZimbraWebClient - FF37 (Linux)/8.6.0_GA_1169)
-Thread-Topic: Adding support for directFB to mplayer2 recipe
-Thread-Index: usIyzd37f3wNNp2tP48WkOYBarr8fQ==
+Received: by 10.79.20.5 with HTTP; Wed, 27 May 2015 10:35:24 -0700 (PDT)
+From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+Date: Wed, 27 May 2015 19:35:24 +0200
+Message-ID: <CAAzKXng3U9JtMBvooi72wNr-aNWxbEXMX13YmVK9Htx5jXLcdQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] Adding support for directFB to mplayer2 recipe
+Subject: [meta-browser] [PATCH 2/2] chromium, cef: fetch chromium source from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,65 +42,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2015 11:41:30 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 May 2015 17:35:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-I Thought the PACKAGECONFIG option was enough, well that's the answer i had=
- on the IRC=20
+Updated recipe to fetch Chromium from git.
+LASTCHANGE file is now created using the proper
+gclient hook.
 
+Change-Id: Ie1790abec002a0dd39c8d0aae3d03f5ebe6f46aa
+Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+---
+ .../cef3/01_get_svn_version_from_LASTCHANGE.patch  | 32 ------------
+ recipes-browser/chromium/cef3_280796.bb            | 57
+++++++++++++++++------
+ 2 files changed, 43 insertions(+), 46 deletions(-)
+ delete mode 100644
+recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
 
-De: "Gary Thomas" <gary@mlbassoc.com>=20
-=C3=80: openembedded-devel@lists.openembedded.org=20
-Envoy=C3=A9: Mercredi 27 Mai 2015 13:36:35=20
-Objet: Re: [oe] [PATCH] Adding support for directFB to mplayer2 recipe=20
+diff --git
+a/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
+b/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
+deleted file mode 100644
+index 9b14429..0000000
+--- a/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-Fetch the revision from LASTCHANGE file programmatically
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+-diff --git a/cef/tools/make_version_header.py
+b/cef/tools/make_version_header.py
+-index 84d49f5..395c2cf 100644
+---- a/cef/tools/make_version_header.py
+-+++ b/cef/tools/make_version_header.py
+-@@ -64,6 +64,8 @@ def write_svn_header(header, chrome_version,
+cef_version, cpp_header_dir):
+-       revision = svn.get_revision()
+-     elif git.is_checkout('.'):
+-       revision = git.get_svn_revision()
+-+    elif os.path.isfile("../build/util/LASTCHANGE"):
+-+      revision =
+open("../build/util/LASTCHANGE").read().split("=")[1].strip()
+-     else:
+-       raise Exception('Not a valid checkout')
+-
+-diff --git a/cef/tools/revision.py b/cef/tools/revision.py
+-index 1d94602..eb89e3b 100644
+---- a/cef/tools/revision.py
+-+++ b/cef/tools/revision.py
+-@@ -16,6 +16,8 @@ if os.path.exists(os.path.join('.', '.svn')):
+-   sys.stdout.write(svn.get_revision())
+- elif os.path.exists(os.path.join('.', '.git')):
+-   sys.stdout.write(git.get_svn_revision())
+-+elif os.path.isfile("../build/util/LASTCHANGE"):
+-+  revision = open("../build/util/LASTCHANGE").read().split("=")[1].strip()
+- else:
+-   raise Exception('Not a valid checkout')
+diff --git a/recipes-browser/chromium/cef3_280796.bb
+b/recipes-browser/chromium/cef3_280796.bb
+index 9a9efe5..806a4ac 100644
+--- a/recipes-browser/chromium/cef3_280796.bb
++++ b/recipes-browser/chromium/cef3_280796.bb
+@@ -7,21 +7,22 @@ RDEPENDS_${PN} += "pango cairo fontconfig pciutils
+pulseaudio freetype fontconfi
+ SRCREV_tools = "99bcb0e676eb396bcf8e1af3903aa4b578aeeee0"
+ SRCREV_cef = "bbad53dfca9f98dddcb31a590410fece0a4f0234"
+ SRCREV_egl = "a5b81b7617ba6757802b9b5f8c950034d5f961ec"
+-SRCREV_FORMAT = "cef_egl_tools"
++SRCREV_FORMAT = "cef_egl"
 
-On 2015-05-27 05:13, Hector Roussille wrote:=20
-> Signed-off-by: Hector Roussille <hroussille@adeneo-embedded.com>=20
-> ---=20
-> meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 3 ++-=20
-> 1 file changed, 2 insertions(+), 1 deletion(-)=20
->=20
-> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe=
-/recipes-multimedia/mplayer/mplayer2_git.bb=20
-> index 5b0e1de..b208144 100644=20
-> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb=20
-> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb=20
-> @@ -121,6 +121,7 @@ PACKAGECONFIG[postproc] =3D ",--disable-libpostproc,l=
-ibpostproc"=20
-> PACKAGECONFIG[vorbis] =3D ",--disable-libvorbis,libvorbis"=20
-> PACKAGECONFIG[portaudio] =3D ",--disable-portaudio,portaudio-v19"=20
-> PACKAGECONFIG[mpg123] =3D ",--disable-mpg123,mpg123"=20
-> +PACKAGECONFIG[directfb] =3D "--enable-directfb,--disable-directfb,direct=
-fb"=20
->=20
-> FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-pointer -fr=
-ename-registers -O4 -ffast-math"=20
-> BUILD_OPTIMIZATION =3D "${FULL_OPTIMIZATION}"=20
-> @@ -134,7 +135,7 @@ do_configure() {=20
-> sed -i 's|/usr/\S*lib[\w/]*||g' ${S}/configure=20
-> sed -i 's|_install_strip=3D"-s"|_install_strip=3D""|g' ${S}/configure=20
-> sed -i 's|HOST_CC|BUILD_CC|' ${S}/Makefile=20
-> -=20
-> + sed -i 's|extra_cflags=3D"-I. $extra_cflags"|extra_cflags=3D"-I. -I${ST=
-AGING_INCDIR}/directfb $extra_cflags"|g' ${S}/configure=20
-> export SIMPLE_TARGET_SYS=3D"$(echo ${TARGET_SYS} | sed s:${TARGET_VENDOR}=
-::g)"=20
-> ./configure ${EXTRA_OECONF}=20
->=20
+-SRC_URI = "
+http://people.linaro.org/~zoltan.kuscsik/chromium-browser/chromium_rev_${PV}.tar.xz
+\
+-           git://
+github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=src/cef;branch=aura;name=cef
+\
+-           git://
+github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=src/ui/ozone/platform/egl;branch=master;name=egl
+\
+-           git://
+chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools
+\
+-           file://01_get_svn_version_from_LASTCHANGE.patch \
+-          file://cef-simple \
+-         "
+-SRC_URI[md5sum] = "9efbb50283b731042e62b9bd5e312b2f"
+-SRC_URI[sha256sum] =
+"f608e97dadf6ea4d885b24fd876896d46840fa39bf743ea2025075aee9fb348d"
++SRC_URI = "git://
+chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools
+\
++           git://
+github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=${S}/src/cef;branch=aura;name=cef
+<http://github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=$%7BS%7D/src/cef;branch=aura;name=cef>
+\
++           git://
+github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=${S}/src/ui/ozone/platform/egl;branch=master;name=egl\
+<http://github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=$%7BS%7D/src/ui/ozone/platform/egl;branch=master;name=egl%5C>
++           file://cef-simple\
++  "
 
-Shouldn't this at least be conditional on directfb support in=20
-DISTRO_FEATURES? It won't do much good to enable it in this=20
-recipe if the rest of the system isn't using directfb as well.=20
+-S = "${WORKDIR}/chromium_rev_${PV}"
++export CHROMIUM_SRC_GIT_URL="https://chromium.googlesource.com/chromium/src
+"
++export CHROMIUM_SRC_GIT_COMMIT="e800fe7470fa87dc1ca5b148a7c2c41f603fdcbd"
 
---=20
-------------------------------------------------------------=20
-Gary Thomas | Consulting for the=20
-MLB Associates | Embedded world=20
-------------------------------------------------------------=20
---=20
-_______________________________________________=20
-Openembedded-devel mailing list=20
-Openembedded-devel@lists.openembedded.org=20
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel=20
+-do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl SRCREV_tools"
++S = "${WORKDIR}/chromium_rev_${PV}/"
++
++B = "${S}/src/"
++
++do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl"
+
+ GYP_ARCH_DEFINES_armv7a = " target_arch=arm arm_float_abi=hard"
+ GYP_ARCH_DEFINES_i586 = " target_arch=ia32"
+@@ -30,14 +31,41 @@ export GYP_GENERATORS="ninja"
+ export BUILD_TARGET_ARCH="${TARGET_ARCH}"
+ export GYP_DEFINES="${GYP_ARCH_DEFINES}
+release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+
++do_fetch_chromium_source_from_git() {
++  cd ${S}
++  export PATH=${WORKDIR}/depot_tools:"$PATH"
++
++  # Note: --deps-file needs to set to .DEPS.git for syncing to old
++  # chromium versions
++  gclient config ${CHROMIUM_SRC_GIT_URL} --deps-file=".DEPS.git"
++
++  # Runhooks is disabled. Running the hooks will trigger the
++  # gyp_chromium command replaced with cef_create_projects.sh by
++  # cef3.
++
++  gclient sync -f --nohooks --revision src@${CHROMIUM_SRC_GIT_COMMIT}
++
++  # We need the lastchange hook to generate the LASTCHANGE revision info
++  # file.
++
++  python src/build/util/lastchange.py -o src/build/util/LASTCHANGE
++}
++
++addtask fetch_chromium_source_from_git after do_patch before do_configure
++
+ do_configure_append() {
+        export PATH=${WORKDIR}/depot_tools:"$PATH"
+        # End of LD Workaround
+        #-----------------------
+        # Configure cef
+        #------------------------
+-       cd cef
+-       ./cef_create_projects.sh -I ${BUILD_TARGET_ARCH}_ozone.gypi --depth
+../
++       cd ${S}/src/cef
++
++  # Fatal linker warnings need to be disalbed to avoid linker issu
++  # with GCC 4.9:
++  #
+http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095947.html
++
++       ./cef_create_projects.sh -I ${BUILD_TARGET_ARCH}_ozone.gypi --depth
+../ -Ddisable_fatal_linker_warnings=
+        cd -
+ }
+
+@@ -47,5 +75,6 @@ do_qa_configure() {
+ }
+
+ do_compile() {
++ cd ${S}/src
+        ninja -C out/${CHROMIUM_BUILD_TYPE} cefsimple
+ }
+--
+1.9.1
 
