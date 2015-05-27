@@ -1,21 +1,38 @@
-Return-Path: <prvs=58117e38b=brandon.carpenter@pnnl.gov>
-X-Greylist: delayed 3605 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 26 May 2015 21:06:34 UTC
-Received: from Emailgw01.pnnl.gov (emailgw01.pnnl.gov [192.101.109.61])
-	by mail.openembedded.org (Postfix) with ESMTP id 161857566F
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 12FD265D6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 May 2015 21:06:34 +0000 (UTC)
-Received: from deluxe.pnl.gov (HELO [130.20.187.155]) ([130.20.187.155])
-	by Emailgw01.pnnl.gov with ESMTP; 26 May 2015 13:06:15 -0700
-Message-ID: <5564D236.3070702@pnnl.gov>
-Date: Tue, 26 May 2015 13:06:14 -0700
-From: Brandon Carpenter <brandon.carpenter@pnnl.gov>
-Organization: Pacific Northwest National Laboratory
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	Wed, 27 May 2015 06:25:39 +0000 (UTC)
+Received: by pdbki1 with SMTP id ki1so596281pdb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 May 2015 23:25:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=FVvAhyBqMC4zo0Y1Wb/AxQoGgP1lifaTeV+oSady0UU=;
+	b=Pv+H23MLEGDu/QxEKXekBs7Y9Tu9i5fTYRT7Ji8MmVI7XpTYIuy1lw5suDyNMKG62c
+	Veqh4LKH88bvlHijbh2VhICD3fBANdolMh4AbY+5ZuyaM30Bsd2c/F7D0WI/dl76hsU/
+	vOH+7TC6CECaFxzQtx7yt31yvYhhi0pelp6FZH6b0/ffNTVWafrGveCjnzjn2ntq9gRx
+	O/SNdaCbxuN4dlULump+RMOhCCqoMZ1PSin22HbTe0W2p9cY6mGp0KMzz2DpJsLTCPh+
+	QJ/iKfv5SCKHngzuyFmWXl5XOGO0iV2KuEAj00TQXh1yzcDLt44iioStLTb/8Vx6ZKK9
+	EAmg==
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python] sitecustomize module breaks non-interactive scripts
+X-Received: by 10.70.88.145 with SMTP id bg17mr31406297pdb.167.1432707940535; 
+	Tue, 26 May 2015 23:25:40 -0700 (PDT)
+Received: by 10.70.54.3 with HTTP; Tue, 26 May 2015 23:25:40 -0700 (PDT)
+In-Reply-To: <CAMKF1so3YuLs49Ng1e08+WK4kOp4Ocpb60gGPVn3LZUOMGQaDw@mail.gmail.com>
+References: <1432588449-31413-1-git-send-email-schnitzeltony@googlemail.com>
+	<1432588449-31413-3-git-send-email-schnitzeltony@googlemail.com>
+	<CAMKF1so3YuLs49Ng1e08+WK4kOp4Ocpb60gGPVn3LZUOMGQaDw@mail.gmail.com>
+Date: Wed, 27 May 2015 08:25:40 +0200
+Message-ID: <CALbNGRRCTv8EBGdz9UEHfvvL3wRUjrfct36KUR-zED9MDe7Frw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, stephen.arnold42@gmail.com, 
+	Khem Raj <raj.khem@gmail.com>
+Subject: Re: [PATCH 02/12] openjpeg: initial add 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,163 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 May 2015 21:06:40 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 27 May 2015 06:25:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
-
-I'm helping someone setup a BeagleBone Black with Angstrom Linux based 
-on OpemEmbedded and we've run into an issue executing virtualenv with 
-Python 2.7. I've narrowed the problem down to 
-/usr/lib/python2.7/sitecustomize.py. This script, which is executed 
-during early Python initialization, imports the readline module and, in 
-the process, prints some escape characters to stdout. When the output of 
-a script is piped to another process, those unexpected escape characters 
-are the first to be read.
-
-As an example, executing
-
-     python2 -c 'pass' | python2 -c 'print 
-repr(__import__("sys").stdin.read())'
-
-prints '\x1b[?1034h' when '' (the empty string) is expected.
-
-For virtualenv, you end up with the following error when it tries to 
-pipe sys.prefix from one python instance to another:
-
-> New python executable in env/bin/python
-> ERROR: The executable env/bin/python is not functioning
-> ERROR: It thinks sys.prefix is 
-> u'/home/user/volttron/\x1b[?1034h/home/user/volttron/testenv' (should 
-> be u'/home/user/volttron/testenv')
-> ERROR: virtualenv is not compatible with this system or executable
-
-I have thought of a few solutions to the issue I wanted to bring to the 
-developers attention:
-
-1. Move sitecustomize.py to sitesetup.py (or something else) and add 
-/etc/profile.d/pythonsetup.sh to set the PYTHONSETUP environment 
-variable to that script.
-
-This, IMHO, is probably the best solution as the PYTHONSETUP script is 
-only executed in interactive mode. It also makes it trivial users to 
-disable, by unsetting the environment variable, or override/extend, by 
-setting the environment variable to their desired script.
-
-2. Provide an environment variable, like DISABLE_SITE_READLINE, to 
-prevent readline configuration in sitecustomize.py.
-
-This is my least favorite solution because Python remains broken by 
-default and someone has to know about the environment variable to fix it.
-
-3. Use some magic in the sitecustomize script to make it all work as 
-expected.
-
-This would be a good compromise as it moves the readline configuration 
-to the PYTHONSETUP execution phase, while still implementing it in 
-sitecustomize.py and allowing user PYTHONSETUP scripts. Here is the 
-suggested sitecustomize.py:
-
-> # OpenEmbedded sitecustomize.py (C) 2002-2008 Michael 'Mickey' Lauer 
-> <mlauer@vanille-media.de>
-> # GPLv2 or later
-> # Version: 20081123
-> # Features:
-> # * set proper default encoding
-> # * enable readline completion in the interactive interpreter
-> # * load command line history on startup
-> # * save command line history on exit
+On Tue, May 26, 2015 at 6:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> there is a recipe available here
+> http://layers.openembedded.org/layerindex/recipe/25686/
+> may be you want to coordinate with that layer to migrate it into meta-oe =
+?
 >
->
-> '''Use readline to make the interactive interpreter more friendly.
->
-> The readline module should only be imported in interactive mode because
-> it has side-effects which may interfere with the output of scripts. But
-> because sitecustomize is executed at such an early stage of Python
-> initialization it cannot determine if Python is executed interactively.
-> Therefore, this script injects itself as the PYTHONSETUP script where
-> interactivity can be determined. The PYTHONSETUP environment is first
-> saved in the environment so it can later be restored. Then, PYTHONSETUP
-> is set to this script. After executing this script as the PYTHONSETUP
-> script, the original PYTHONSETUP, script is restored and, if set, is
-> exectuted.
-> '''
->
->
-> def main():
->     '''This function wraps up the script to keep the environment clean.'''
->
->     import os
->
->     def __exithandler():
->         try:
->             readline.write_history_file( "%s/.python-history" % 
-> os.getenv( "HOME", "/tmp" ) )
->         except IOError:
->             pass
->
->     def __registerExitHandler():
->         import atexit
->         atexit.register( __exithandler )
->
->     def __enableReadlineSupport():
->         readline.set_history_length( 1000 )
->         readline.parse_and_bind( "tab: complete" )
->         try:
->             readline.read_history_file( "%s/.python-history" % 
-> os.getenv( "HOME", "/tmp" ) )
->         except IOError:
->             pass
->
->     def __enableDefaultEncoding():
->         import sys
->         try:
->             sys.setdefaultencoding( "utf8" )
->         except LookupError:
->             pass
->
->     def __execPythonStartup():
->         try:
->             filename = os.environ.pop('__PYTHONSTARTUP__')
->         except KeyError:
->             os.environ.pop('PYTHONSTARTUP', None)
->         else:
->             os.environ['PYTHONSTARTUP'] = filename
->             if filename:
->                 execfile(filename)
->
->     def __savePythonStartup():
->         try:
->             os.environ['__PYTHONSTARTUP__'] = os.environ['PYTHONSTARTUP']
->         except KeyError:
->             pass
->         os.environ['PYTHONSTARTUP'] = __file__
->
->
->     if __name__ == '__main__':
->         # Executing as PYTHONSETUP script
->         try:
->             import rlcompleter, readline
->         except ImportError:
->             pass
->         else:
->             __registerExitHandler()
->             __enableReadlineSupport()
->         __execPythonStartup()
->     else:
->         # Executing as sitecustomize
->         __enableDefaultEncoding()
->         __savePythonStartup()
->
-> main()
-> del main
+> On Mon, May 25, 2015 at 2:13 PM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>> ---
+>>  meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb | 18 ++++++++++++++=
+++++
+>>  1 file changed, 18 insertions(+)
+>>  create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb
+>>
+>> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb b/meta-=
+oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb
+>> new file mode 100644
+>> index 0000000..9f6dd57
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb
+>> @@ -0,0 +1,18 @@
+>> +DESCRIPTION =3D "OpenJPEG library is an open-source JPEG 2000 codec"
+>> +HOMEPAGE =3D "http://www.openjpeg.org/index.php?menu=3Dmain"
+>> +
+>> +LICENSE =3D "BSD"
+>> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc648878b4840d7babaade1303e7f=
+108c"
+>> +
+>> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}.mirror/${PV}/${BPN}-$=
+{PV}.tar.gz"
+>> +SRC_URI[md5sum] =3D "f6419fcc233df84f9a81eb36633c6db6"
+>> +SRC_URI[sha256sum] =3D "1232bb814fd88d8ed314c94f0bfebb03de8559583a33abb=
+e8c64ef3fc0a8ff03"
+>> +
+>> +inherit cmake
+>> +
+>> +DEPENDS =3D "libpng tiff lcms"
+>> +
+>> +# standard path for *.cmake
+>> +EXTRA_OECMAKE +=3D "-DOPENJPEG_INSTALL_PACKAGE_DIR=3D${baselib}/cmake"
+>> +
+>> +FILES_${PN}-dev +=3D "${libdir}/cmake/*.cmake"
+>> --
+>> 1.9.3
+I checked: That layer uses openjpeg only native. Suggestion: Will try
+to extend openjpeg for native / build mupdf from
+meta-alt-desktop-extras and send a follow up. OK?
 
-I can post the above script as a patch, if desired.
-
-Are there other suggestions/solutions?
-
-Thank you,
-
-Brandon
+Andreas
 
