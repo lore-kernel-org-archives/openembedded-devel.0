@@ -1,41 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f175.google.com (mail-wi0-f175.google.com
-	[209.85.212.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A961D72D64
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id B5DEF737F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 10:33:33 +0000 (UTC)
-Received: by wicmx19 with SMTP id mx19so106190480wic.0
+	Wed, 27 May 2015 10:35:15 +0000 (UTC)
+Received: by wicmc15 with SMTP id mc15so89388759wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 03:33:34 -0700 (PDT)
+	Wed, 27 May 2015 03:35:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:content-transfer-encoding
 	:in-reply-to:user-agent;
-	bh=upK6953LKlOI+/xHzIJ6HaUcH+TIGfFizSWe/LKR9DI=;
-	b=kAS8ISc6lXn580YXttvCDOhy07STNMgLofv0bmnASFSrQciyCQMEd2/RQ2G5iHR610
-	6nKKRCHsoopX26WaNt1geEuCui3SllwKojF1GVHAokZcHRE/UZO8FVJO5zErbzwV+AAQ
-	Zy6ulKdd6VeVM8caQl0LWnAiXjqIKRF1etjG8ZGvmZXPM6ZgfY4JbbRO3oGp/2vs72QP
-	h+IKBGK35PQ3Ur27gss9/J/6y/1mZ9wiEWXa0Q0RrOM7Gsp9f9+nRGEFxzGZi5PzahAd
-	MS0ro15IRdlHBDwVikV/E4dSnPrMn9pKeObg42XlSARraUA0OKlG7zRvSghC+ZWqdE1M
-	QdrQ==
-X-Received: by 10.194.95.2 with SMTP id dg2mr58384178wjb.53.1432722814324;
-	Wed, 27 May 2015 03:33:34 -0700 (PDT)
+	bh=DrzJtwg+bfBYjMjLAtR6olysBGtlUBoifEyICgloczw=;
+	b=0g2NUVPwT3FNdAywCtYrSb2WEDsLbOV25rDA4KKrdcX/azLCbhaZ19wcvv2u+NwFTD
+	E3fI782KELDeZV+YmaDjY2rVmhNqcbKs9nemnmfyHgU67c04uLj65j0cqNG8FF14dtfu
+	RPh232tuSZbkzM9JkfNxOWZg/3CnMIG7miQ1enkbzzaUharq0PrsC0qdnMCuWUcDM6jZ
+	wunRFJuTT70RVazd7p5T3hO3BXZ8rJhy4LlNFZcC/bSX9ABA79mdMI3aHLC6DoG5HfBZ
+	LbZzEfN+0F/VSLOsSdbA77+toztxK5S2E4n4OIKpd1WLTTUkugx5JoNjF7coh4F5ZoJF
+	FeIg==
+X-Received: by 10.194.22.131 with SMTP id d3mr332096wjf.111.1432722916354;
+	Wed, 27 May 2015 03:35:16 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id l3sm2938119wik.16.2015.05.27.03.33.32
+	by mx.google.com with ESMTPSA id z9sm2964753wiv.9.2015.05.27.03.35.15
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 27 May 2015 03:33:33 -0700 (PDT)
+	Wed, 27 May 2015 03:35:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 27 May 2015 12:33:49 +0200
-To: Max Krummenacher <max.oss.09@gmail.com>
-Message-ID: <20150527103349.GA3683@jama>
-References: <1431771255-20841-1-git-send-email-max.oss.09@gmail.com>
-	<1432661286.2291.4.camel@Saturn.local.all>
+Date: Wed, 27 May 2015 12:35:31 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150527103531.GB3683@jama>
+References: <1432715647-13207-1-git-send-email-hroussille@adeneo-embedded.com>
 MIME-Version: 1.0
-In-Reply-To: <1432661286.2291.4.camel@Saturn.local.all>
+In-Reply-To: <1432715647-13207-1-git-send-email-hroussille@adeneo-embedded.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-gnome][PATCH] florence: use ${SOURCEFORGE_MIRROR} in SRC_URI
+Subject: Re: [PATCH] Adding support for directFB to mplayer2 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,56 +48,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2015 10:33:34 -0000
+X-List-Received-Date: Wed, 27 May 2015 10:35:18 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 26, 2015 at 07:28:06PM +0200, Max Krummenacher wrote:
-> Hi all
->=20
-> Ping.
+On Wed, May 27, 2015 at 10:34:06AM +0200, Hector Roussille wrote:
+> ---
 
-Sorry, wasn't noticed, because patchwork didn't pick it:
-http://patchwork.openembedded.org/project/oe/list/?state=3D*&q=3Dflorence&a=
-rchive=3Dboth
+I've fixed commit message format when cherry-picking to master-next, but
+please confirm that it's OK to add you SOB line or re-send.
 
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D7657
-
-> florence do_fetch currently fails because the server can't be found.
+>  meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 >=20
-> Regards
-> Max
+> diff --git a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb b/meta-oe=
+/recipes-multimedia/mplayer/mplayer2_git.bb
+> index 5b0e1de..b208144 100644
+> --- a/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+> +++ b/meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb
+> @@ -121,6 +121,7 @@ PACKAGECONFIG[postproc] =3D ",--disable-libpostproc,l=
+ibpostproc"
+>  PACKAGECONFIG[vorbis] =3D ",--disable-libvorbis,libvorbis"
+>  PACKAGECONFIG[portaudio] =3D ",--disable-portaudio,portaudio-v19"
+>  PACKAGECONFIG[mpg123] =3D ",--disable-mpg123,mpg123"
+> +PACKAGECONFIG[directfb] =3D "--enable-directfb,--disable-directfb,direct=
+fb"
+> =20
+>  FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-pointer -f=
+rename-registers -O4 -ffast-math"
+>  BUILD_OPTIMIZATION =3D "${FULL_OPTIMIZATION}"
+> @@ -134,7 +135,7 @@ do_configure() {
+>      sed -i 's|/usr/\S*lib[\w/]*||g' ${S}/configure
+>      sed -i 's|_install_strip=3D"-s"|_install_strip=3D""|g' ${S}/configure
+>      sed -i 's|HOST_CC|BUILD_CC|' ${S}/Makefile
+> -
+> +    sed -i 's|extra_cflags=3D"-I. $extra_cflags"|extra_cflags=3D"-I. -I$=
+{STAGING_INCDIR}/directfb $extra_cflags"|g' ${S}/configure
+>      export SIMPLE_TARGET_SYS=3D"$(echo ${TARGET_SYS} | sed s:${TARGET_VE=
+NDOR}::g)"
+>      ./configure ${EXTRA_OECONF}
+>     =20
+> --=20
+> 2.1.0
 >=20
-> Am Samstag, den 16.05.2015, 12:14 +0200 schrieb Max Krummenacher:
-> > http://switch.dl.sourceforge.net has been down for some time.
-> > Use the OE provided mirror variable instead.
-> >=20
-> > Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
-> > ---
-> >  meta-gnome/recipes-support/florence/florence_0.5.1.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/meta-gnome/recipes-support/florence/florence_0.5.1.bb b/me=
-ta-gnome/recipes-support/florence/florence_0.5.1.bb
-> > index 9eab385..71014f0 100644
-> > --- a/meta-gnome/recipes-support/florence/florence_0.5.1.bb
-> > +++ b/meta-gnome/recipes-support/florence/florence_0.5.1.bb
-> > @@ -10,7 +10,7 @@ PR =3D "r1"
-> > =20
-> >  DEPENDS =3D "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltoo=
-l-native gnome-doc-utils libnotify"
-> > =20
-> > -SRC_URI =3D "http://switch.dl.sourceforge.net/project/florence/florenc=
-e/0.5.1/florence-0.5.1.tar.bz2 \
-> > +SRC_URI =3D "${SOURCEFORGE_MIRROR}/florence/florence/${PV}/florence-${=
-PV}.tar.bz2 \
-> >             file://0001-Fix-glib-includes.patch"
-> >  SRC_URI[md5sum] =3D "56d12e5b47c100d9df172aa5ddc0f609"
-> >  SRC_URI[sha256sum] =3D "7b06ed84ef2b7b22d8d2cf0c7d013a05409bd82028240a=
-c8719a68b192d5bc62"
->=20
->=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
