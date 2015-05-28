@@ -1,35 +1,27 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 604EA737F4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 May 2015 11:11:16 +0000 (UTC)
-Received: by paza2 with SMTP id a2so21273919paz.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 May 2015 04:11:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type;
-	bh=JxT6Shz4bPdpN21E+YOPFAdQVXe+Fnxzwfu+G4ngkuM=;
-	b=wMgOG5fmaVc4seS5ODDXTI7WsbtREoObuCJ9fqaaG52IoIfiK/RgJBM+blszomh9bs
-	tkDdDll73TzxMGJYNXmwv1UwkIvBnPk1lrrZ606pYbmWrAG5yxxSq9cY5019S4Fmh661
-	N+v4PHDIKYpCHUK264TU/ANHp3f3CsZ0J9q0m/hDFqZ2vq996EEqyNTZBGsYVVXLERVQ
-	49hV0SF2nhwODVxabJcajPBoPFAjHwu5g14sENhooUJ3AjT8zk9EkbICsoOSMHb01M/H
-	99dpIEO3Fv+cJCLOY+7LVyIj58bx6GracTCYE/hdbs90SUGxtD1oYBKz3hSoZ1wSwfiJ
-	KJUw==
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E11D6E5D0;
+	Thu, 28 May 2015 13:16:46 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga101.jf.intel.com with ESMTP; 28 May 2015 06:15:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,513,1427785200"; d="scan'208";a="733097705"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.72.87])
+	([10.237.72.87])
+	by fmsmga002.fm.intel.com with ESMTP; 28 May 2015 06:15:55 -0700
+Message-ID: <5566B28E.9080502@linux.intel.com>
+Date: Thu, 28 May 2015 09:15:42 +0300
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.7.0
 MIME-Version: 1.0
-X-Received: by 10.68.108.65 with SMTP id hi1mr4350283pbb.129.1432811477275;
-	Thu, 28 May 2015 04:11:17 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.70.34.109 with HTTP; Thu, 28 May 2015 04:11:17 -0700 (PDT)
-In-Reply-To: <20150528103631.GF2383@jama>
-References: <20150528103631.GF2383@jama>
-Date: Thu, 28 May 2015 08:11:17 -0300
-X-Google-Sender-Auth: vEvRTZmaaw5fPGWFnWDF7KF4wvQ
-Message-ID: <CAP9ODKq55T9jjeTjSmu16cbqfAERFy7CxvMtB-R=rM=B8T6DmA@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] Dropping tarball recipes from meta-qt5
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <20150528084536.GB2383@jama>
+	<1978636.L3ktc4a7s3@peggleto-mobl.ger.corp.intel.com>
+In-Reply-To: <1978636.L3ktc4a7s3@peggleto-mobl.ger.corp.intel.com>
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-05-27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +35,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2015 11:11:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 28 May 2015 13:16:46 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 28, 2015 at 7:36 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> I'm still working on finishing 5.5-beta1 recipes for qt5, I'm getting
-> tired of maintaining 2 sets of patches and 2 versions of recipes in the
-> same layer branch.
+On 05/28/2015 01:04 PM, Paul Eggleton wrote:
+
 >
-> 1) Would people mind dropping 5.4 support in master branch (who wants to
-> use 5.4 can continue to use "fido" branch of meta-qt5, there are patches
-> for 5.4.2 git recipes as well).
-
-I second the drop of 5.4 ones. I also think we could move to the beta
-recipes as soon as possible so we can iron out issues. People desiring
-stable releases can use Fido instead as master is our way for 1.9.
-
-> 2) Would people mind having only git recipes? It will be easier to
-> update them. Only disadvantages I can think of are the need to clone
-> from git and not being aligned with exact release for long time (git
-> recipes usually track newer revisions in e.g. 5.4 branch than 5.4.0 or
-> 5.4.1 tarbal recipes.
+> This seems to be related to gstreamer 0.10 removal; though it's QtWebkit that's
+> failing rather than Phonon:
 >
-> If we all use the same version from the same recipes then we can test it
-> better and it will be much easier to maintain.
+> | cd WebKit/qt/tests/ && /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/qmake2 -after              INCPATH+=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/freetype2 LIBS+=-L/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/lib /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-free/4.8.6-r0/qt-everywhere-opensource-src-4.8.6/src/3rdparty/webkit/Source/WebKit/qt/tests/tests.pro -spec /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-free/4.8.6-r0/qt-everywhere-opensource-src-4.8.6/mkspecs/linux-g++ -after  INCPATH+=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/freetype2 LIBS+=-L/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/lib -o Makefile.WebKit
+> | WARNING: (internal):1: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):3: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):1: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):3: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):1: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):3: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):1: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):3: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):1: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | WARNING: (internal):3: Variable INCPATH is deprecated; use INCLUDEPATH instead.
+> | Project ERROR: Package gstreamer-app-0.10 not found
+> | make[1]: *** [WebCore/Makefile.WebKit] Error 2
+> | make[1]: *** Waiting for unfinished jobs....
+> | Project ERROR: Package gstreamer-app-0.10 not found
+> | make[1]: *** [WebKit/qt/Makefile.WebKit.QtWebKit] Error 2
+> | make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-free/4.8.6-r0/qt-everywhere-opensource-src-4.8.6/src/3rdparty/webkit/Source'
+> | make: *** [sub-webkit-make_default-ordered] Error 2
+> | ERROR: oe_runmake failed
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_compile (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-free/4.8.6-r0/temp/log.do_compile.14903)
+>
+> Alex, can you take a look at this?
 
-I second the git use as well.
+I already did; it should be fixed by this patch:
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+http://lists.openembedded.org/pipermail/openembedded-core/2015-May/105413.html
+
+Regards,
+Alex
+
 
