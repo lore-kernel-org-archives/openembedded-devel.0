@@ -1,38 +1,36 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id DAD9E75713
+Received: from mail-wi0-f174.google.com (mail-wi0-f174.google.com
+	[209.85.212.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D34173D97
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 May 2015 13:22:42 +0000 (UTC)
-Received: by wizo1 with SMTP id o1so62018309wiz.1
+	Thu, 28 May 2015 19:17:00 +0000 (UTC)
+Received: by wizk4 with SMTP id k4so157794445wiz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 May 2015 06:22:42 -0700 (PDT)
+	Thu, 28 May 2015 12:17:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Fibfj+7w0YK2XOf10nCGI0p9MYm3AhDGT81QM0hQSlY=;
-	b=b58VrOrlvkRLClZtD7vH8v0NtlqnvW12hxr3cvjlGGAR7X4/FJRMl8Yrhh5uadfrVs
-	ddkDTa5Q8sOeADeiK7LC9nO99YJTEj1ay3XR0Sg9koi8eygOM8E5tBwvLga591yqwLeD
-	b9li6wjVK8jRq+qAqxzzzfczGOfczjGbjltLaqvy03pUmgMXDJqGyukhy4v47b6IjuPS
-	MK7Oqx5R+OgodyRX8MgCQVKLi1BWjqwHOwm1VV6SlETE2JXIka9a4rSfy7Mzp/dz5jnk
-	NyhVDTvYfJ7zKu7rsW3jkQmVPmfLBSwx43P0wQb+DyFKYRun7eRxZNpTVMObo2rHec5P
-	7VSA==
-X-Received: by 10.194.23.234 with SMTP id p10mr5392871wjf.52.1432819362694;
-	Thu, 28 May 2015 06:22:42 -0700 (PDT)
+	bh=PXcHTi/MjF4zmNDXWeqGINWgwxVc8x8xULxH54eQt2U=;
+	b=Bj5W8E6i6fLSf8X5Yhs2i4prOMdKgu7LLvSp8ijksGqXWv11zvw/TofM4nwwFuhdET
+	4wqFJVp3H4v4k6fAJjXhONCGd88+XxpZLwwnl5gtgZHBdEHwm5wzIobl160E4DjD/flX
+	6nmpzPabSSDHMOAi72qRiHnfwcpuI39zk5cBRTfcN7vwLkaSJMv70tdmu7Mo+/gxq2If
+	A5nV8V79sb2oYelkNEXTWxD6a5yLuSkvd2SoS2gFe/Ksi2kEDR2uV3irQs9bCCr9Pkyk
+	WPTjkHGi9GMyHfItUI0P6I0ivJTBuUcu9ysSHYvRkZhpmdtJBrqQ4Jm4ya/Cqbdg4INq
+	TM8w==
+X-Received: by 10.180.99.2 with SMTP id em2mr55854722wib.59.1432840620540;
+	Thu, 28 May 2015 12:17:00 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	gt10sm3983840wib.20.2015.05.28.06.22.41
+	by mx.google.com with ESMTPSA id n6sm4341759wic.16.2015.05.28.12.16.58
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 28 May 2015 06:22:41 -0700 (PDT)
+	Thu, 28 May 2015 12:16:58 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 May 2015 15:22:55 +0200
-Message-Id: <1432819376-24340-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 28 May 2015 21:17:18 +0200
+Message-Id: <1432840638-26579-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.4.1
-In-Reply-To: <1432819376-24340-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <20150528132002.GG2383@jama>
 References: <20150528132002.GG2383@jama>
-	<1432819376-24340-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [WIP][meta-qt5][PATCH 4/5] qt5: merge .inc and _git.bb files
+Subject: [WIP][meta-qt5][PATCHv2] qt5: merge .inc and _git.bb files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,73 +44,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2015 13:22:43 -0000
+X-List-Received-Date: Thu, 28 May 2015 19:17:03 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
  recipes-qt/qt5/nativesdk-qtbase.inc      | 272 -------------------------------
- recipes-qt/qt5/nativesdk-qtbase_git.bb   | 248 +++++++++++++++++++++++++++-
+ recipes-qt/qt5/nativesdk-qtbase_git.bb   | 258 ++++++++++++++++++++++++++++-
  recipes-qt/qt5/nativesdk-qttools.inc     |  34 ----
- recipes-qt/qt5/nativesdk-qttools_git.bb  |  36 +++-
+ recipes-qt/qt5/nativesdk-qttools_git.bb  |  48 +++++-
  recipes-qt/qt5/qt3d.inc                  |  16 --
- recipes-qt/qt5/qt3d_git.bb               |  17 +-
+ recipes-qt/qt5/qt3d_git.bb               |  18 +-
+ recipes-qt/qt5/qt5-git.inc               |  10 +-
+ recipes-qt/qt5/qt5.inc                   |   1 -
  recipes-qt/qt5/qtbase-native.inc         | 109 -------------
- recipes-qt/qt5/qtbase-native_git.bb      |  96 ++++++++++-
+ recipes-qt/qt5/qtbase-native_git.bb      | 107 ++++++++++--
  recipes-qt/qt5/qtbase.inc                | 261 -----------------------------
- recipes-qt/qt5/qtbase_git.bb             | 249 +++++++++++++++++++++++++++-
+ recipes-qt/qt5/qtbase_git.bb             | 255 ++++++++++++++++++++++++++++-
  recipes-qt/qt5/qtconnectivity.inc        |  15 --
- recipes-qt/qt5/qtconnectivity_git.bb     |  17 +-
+ recipes-qt/qt5/qtconnectivity_git.bb     |  22 ++-
  recipes-qt/qt5/qtdeclarative.inc         |  20 ---
- recipes-qt/qt5/qtdeclarative_git.bb      |  22 ++-
+ recipes-qt/qt5/qtdeclarative_git.bb      |  28 +++-
  recipes-qt/qt5/qtenginio.inc             |   8 -
- recipes-qt/qt5/qtenginio_git.bb          |  10 +-
+ recipes-qt/qt5/qtenginio_git.bb          |  11 +-
  recipes-qt/qt5/qtgraphicaleffects.inc    |   9 -
- recipes-qt/qt5/qtgraphicaleffects_git.bb |  11 +-
+ recipes-qt/qt5/qtgraphicaleffects_git.bb |  17 +-
  recipes-qt/qt5/qtimageformats.inc        |  21 ---
- recipes-qt/qt5/qtimageformats_git.bb     |  23 ++-
+ recipes-qt/qt5/qtimageformats_git.bb     |  28 +++-
  recipes-qt/qt5/qtlocation.inc            |  23 ---
- recipes-qt/qt5/qtlocation_git.bb         |  25 ++-
+ recipes-qt/qt5/qtlocation_git.bb         |  30 +++-
  recipes-qt/qt5/qtmultimedia.inc          |  27 ---
- recipes-qt/qt5/qtmultimedia_git.bb       |  29 +++-
+ recipes-qt/qt5/qtmultimedia_git.bb       |  35 +++-
  recipes-qt/qt5/qtquick1.inc              |   9 -
- recipes-qt/qt5/qtquick1_git.bb           |  11 +-
+ recipes-qt/qt5/qtquick1_git.bb           |  17 +-
  recipes-qt/qt5/qtquickcontrols.inc       |   8 -
- recipes-qt/qt5/qtquickcontrols_git.bb    |  10 +-
+ recipes-qt/qt5/qtquickcontrols_git.bb    |  15 +-
  recipes-qt/qt5/qtscript.inc              |  17 --
- recipes-qt/qt5/qtscript_git.bb           |  19 ++-
+ recipes-qt/qt5/qtscript_git.bb           |  26 ++-
  recipes-qt/qt5/qtsensors.inc             |   7 -
- recipes-qt/qt5/qtsensors_git.bb          |   9 +-
+ recipes-qt/qt5/qtsensors_git.bb          |  15 +-
  recipes-qt/qt5/qtserialport.inc          |  15 --
- recipes-qt/qt5/qtserialport_git.bb       |  17 +-
+ recipes-qt/qt5/qtserialport_git.bb       |  19 ++-
  recipes-qt/qt5/qtsvg.inc                 |   4 -
- recipes-qt/qt5/qtsvg_git.bb              |   6 +-
+ recipes-qt/qt5/qtsvg_git.bb              |  13 +-
  recipes-qt/qt5/qtsystems.inc             |  23 ---
- recipes-qt/qt5/qtsystems_git.bb          |  25 ++-
+ recipes-qt/qt5/qtsystems_git.bb          |  26 ++-
  recipes-qt/qt5/qttools-native.inc        |  15 --
- recipes-qt/qt5/qttools-native_git.bb     |  17 +-
+ recipes-qt/qt5/qttools-native_git.bb     |  29 +++-
  recipes-qt/qt5/qttools.inc               |  16 --
- recipes-qt/qt5/qttools_git.bb            |  18 +-
+ recipes-qt/qt5/qttools_git.bb            |  30 +++-
  recipes-qt/qt5/qttranslations.inc        |  91 -----------
- recipes-qt/qt5/qttranslations_git.bb     |  93 ++++++++++-
+ recipes-qt/qt5/qttranslations_git.bb     |  94 ++++++++++-
  recipes-qt/qt5/qtwayland-native.inc      |  24 ---
- recipes-qt/qt5/qtwayland-native_git.bb   |  26 ++-
+ recipes-qt/qt5/qtwayland-native_git.bb   |  27 ++-
  recipes-qt/qt5/qtwayland.inc             |  31 ----
- recipes-qt/qt5/qtwayland_git.bb          |  33 +++-
+ recipes-qt/qt5/qtwayland_git.bb          |  36 +++-
  recipes-qt/qt5/qtwebchannel.inc          |  11 --
- recipes-qt/qt5/qtwebchannel_git.bb       |  13 +-
+ recipes-qt/qt5/qtwebchannel_git.bb       |  14 +-
  recipes-qt/qt5/qtwebengine.inc           |  69 --------
- recipes-qt/qt5/qtwebengine_git.bb        |  71 +++++++-
+ recipes-qt/qt5/qtwebengine_git.bb        |  72 +++++++-
  recipes-qt/qt5/qtwebkit-examples.inc     |  17 --
- recipes-qt/qt5/qtwebkit-examples_git.bb  |  19 ++-
+ recipes-qt/qt5/qtwebkit-examples_git.bb  |  21 ++-
  recipes-qt/qt5/qtwebkit.inc              |  61 -------
- recipes-qt/qt5/qtwebkit_git.bb           |  63 ++++++-
+ recipes-qt/qt5/qtwebkit_git.bb           |  64 +++++++-
  recipes-qt/qt5/qtwebsockets.inc          |  10 --
  recipes-qt/qt5/qtwebsockets_git.bb       |  12 +-
  recipes-qt/qt5/qtx11extras.inc           |   6 -
- recipes-qt/qt5/qtx11extras_git.bb        |   8 +-
+ recipes-qt/qt5/qtx11extras_git.bb        |  13 +-
  recipes-qt/qt5/qtxmlpatterns.inc         |   4 -
- recipes-qt/qt5/qtxmlpatterns_git.bb      |   6 +-
- 62 files changed, 1214 insertions(+), 1298 deletions(-)
+ recipes-qt/qt5/qtxmlpatterns_git.bb      |  13 +-
+ 64 files changed, 1342 insertions(+), 1335 deletions(-)
  delete mode 100644 recipes-qt/qt5/nativesdk-qtbase.inc
  delete mode 100644 recipes-qt/qt5/nativesdk-qttools.inc
  delete mode 100644 recipes-qt/qt5/qt3d.inc
@@ -424,10 +424,10 @@ index 35953bb..0000000
 -
 -addtask generate_qt_environment_file after do_install before do_package
 diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 1b566c2..2d9d280 100644
+index 1b566c2..6506928 100644
 --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
 +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -1,9 +1,14 @@
+@@ -1,10 +1,24 @@
 -require qt5-git.inc
 -require ${PN}.inc
 +DESCRIPTION = "SDK version of Qt/[X11|Mac|Embedded]"
@@ -437,20 +437,30 @@ index 1b566c2..2d9d280 100644
  
 -SRC_URI = "\
 -    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
--"
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
+ 
 +QT_MODULE = "qtbase"
 +
 +require nativesdk-qt5.inc
++require qt5-git.inc
 +
 +# it's already included with newer oe-core, but include it here for dylan
 +FILESEXTRAPATHS =. "${FILE_DIRNAME}/qtbase:"
- 
++
  # common for qtbase-native, qtbase-nativesdk and qtbase
  SRC_URI += "\
-@@ -35,6 +40,239 @@ SRC_URI += " \
+     file://0001-Add-linux-oe-g-platform.patch \
+@@ -35,9 +49,235 @@ SRC_URI += " \
      file://OEQt5Toolchain.cmake \
  "
  
+-SRCREV = "f58e882b7594c59b6050d3c87562fcf836d10f60"
 +PACKAGES = "${PN}-tools-dbg ${PN}-tools-dev ${PN}-tools-staticdev ${PN}-tools"
 +
 +PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
@@ -526,7 +536,11 @@ index 1b566c2..2d9d280 100644
 +
 +do_generate_qt_config_file_append() {
 +    cat >> ${QT_CONF_PATH} <<EOF
-+
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-                    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 +[EffectivePaths]
 +Prefix=..
 +EOF
@@ -682,11 +696,7 @@ index 1b566c2..2d9d280 100644
 +
 +addtask generate_qt_environment_file after do_install before do_package
 +
-+require qt5-git.inc
-+
- SRCREV = "f58e882b7594c59b6050d3c87562fcf836d10f60"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++SRCREV = "f58e882b7594c59b6050d3c87562fcf836d10f60"
 diff --git a/recipes-qt/qt5/nativesdk-qttools.inc b/recipes-qt/qt5/nativesdk-qttools.inc
 deleted file mode 100644
 index c67f9cd..0000000
@@ -728,16 +738,27 @@ index c67f9cd..0000000
 -    rm -rf ${D}${libdir}
 -}
 diff --git a/recipes-qt/qt5/nativesdk-qttools_git.bb b/recipes-qt/qt5/nativesdk-qttools_git.bb
-index bbaafc5..67ad54b 100644
+index bbaafc5..7380a4e 100644
 --- a/recipes-qt/qt5/nativesdk-qttools_git.bb
 +++ b/recipes-qt/qt5/nativesdk-qttools_git.bb
-@@ -1,5 +1,39 @@
-+DEPENDS = "nativesdk-qtbase qtbase-native"
+@@ -1,9 +1,45 @@
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +QT_MODULE = "qttools"
 +
-+require nativesdk-qt5.inc
++DEPENDS = "nativesdk-qtbase qtbase-native"
 +
++require nativesdk-qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
+ 
+-SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
 +# it's already included with newer oe-core, but include it here for dylan
 +FILESEXTRAPATHS =. "${FILE_DIRNAME}/qttools:"
 +
@@ -748,7 +769,11 @@ index bbaafc5..67ad54b 100644
 +FILES_${PN}-dbg = " \
 +    ${OE_QMAKE_PATH_BINS}/.debug \
 +"
-+
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-                    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 +FILES_${PN} = " \
 +    ${OE_QMAKE_PATH_BINS}/* \
 +"
@@ -767,11 +792,7 @@ index bbaafc5..67ad54b 100644
 +    rm -rf ${D}${libdir}
 +}
 +
- require qt5-git.inc
--require ${PN}.inc
- 
- SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
- 
++SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
 diff --git a/recipes-qt/qt5/qt3d.inc b/recipes-qt/qt5/qt3d.inc
 deleted file mode 100644
 index 74c4cad..0000000
@@ -795,31 +816,68 @@ index 74c4cad..0000000
 -    ${OE_QMAKE_PATH_QML}/*/*/*.obj \
 -"
 diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
-index c6f970e..7b417a7 100644
+index c6f970e..3bebcb5 100644
 --- a/recipes-qt/qt5/qt3d_git.bb
 +++ b/recipes-qt/qt5/qt3d_git.bb
-@@ -1,5 +1,20 @@
+@@ -1,5 +1,21 @@
 +require qt5.inc
-+
-+DEPENDS += "qtdeclarative"
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +LICENSE = "GFDL-1.3 & LGPL-2.1 & DIGIA-TPLA-2.4 | GPL-3.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
-+                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
-+                    file://LICENSE.PREVIEW.COMMERCIAL;md5=9d94dadfab8b246782ffea02082ee13a \
-+                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
-+                    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.PREVIEW.COMMERCIAL;md5=9d94dadfab8b246782ffea02082ee13a \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
 +"
++
++DEPENDS = "nativesdk-qtbase qtbase-native qtdeclarative"
 +
 +FILES_${PN}-qmlplugins += " \
 +    ${OE_QMAKE_PATH_QML}/*/*/*.bez \
 +    ${OE_QMAKE_PATH_QML}/*/*/*.obj \
 +"
- require qt5-git.inc
--require ${PN}.inc
  
  QT_MODULE_BRANCH = "dev"
  
+diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
+index f25de9b..2e77d45 100644
+--- a/recipes-qt/qt5/qt5-git.inc
++++ b/recipes-qt/qt5/qt5-git.inc
+@@ -4,18 +4,10 @@
+ QT_MODULE_BRANCH ?= "5.4"
+ 
+ # each module needs to define valid SRCREV
+-SRC_URI += " \
++SRC_URI = " \
+     ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
+ "
+ 
+ S = "${WORKDIR}/git"
+ 
+ PV = "5.4.1+git${SRCPV}"
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
+-                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index 0d7269c..2fc5367 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -32,7 +32,6 @@ python __anonymous() {
+             d.setVar("PACKAGE_ARCH", tarch)
+ }
+ 
+-
+ # Regenerate header files when they are included in source tarball
+ # Otherwise cmake files don't set PRIVATE_HEADERS correctly
+ do_configure_prepend() {
 diff --git a/recipes-qt/qt5/qtbase-native.inc b/recipes-qt/qt5/qtbase-native.inc
 deleted file mode 100644
 index 4af0c0a..0000000
@@ -936,27 +994,36 @@ index 4af0c0a..0000000
 -    fi
 -}
 diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 8ba9170..7d0e963 100644
+index 8ba9170..8163bd2 100644
 --- a/recipes-qt/qt5/qtbase-native_git.bb
 +++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -1,9 +1,11 @@
+@@ -1,10 +1,20 @@
 -require qt5-git.inc
 -require ${PN}.inc
+-
+-SRC_URI = "\    
+-    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
 +DESCRIPTION = "Native version of Qt/[X11|Mac|Embedded]"
 +DEPENDS = "zlib-native dbus-native"
 +SECTION = "libs"
 +HOMEPAGE = "http://qt-project.org"
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
  
--SRC_URI = "\    
--    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
--"
 +QT_MODULE = "qtbase"
 +
 +require qt5-native.inc
- 
++require qt5-git.inc
++
  # common for qtbase-native, qtbase-nativesdk and qtbase
  SRC_URI += "\
-@@ -25,12 +27,94 @@ SRC_URI += " \
+     file://0001-Add-linux-oe-g-platform.patch \
+@@ -25,15 +35,90 @@ SRC_URI += " \
      file://0012-Add-external-hostbindir-option-for-native-sdk.patch \
  "
  
@@ -1047,11 +1114,12 @@ index 8ba9170..7d0e963 100644
      ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
  }
  
-+require qt5-git.inc
-+
  SRCREV = "f58e882b7594c59b6050d3c87562fcf836d10f60"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-                    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 diff --git a/recipes-qt/qt5/qtbase.inc b/recipes-qt/qt5/qtbase.inc
 deleted file mode 100644
 index d2654ef..0000000
@@ -1320,24 +1388,30 @@ index d2654ef..0000000
 -    rm -rf $to${OE_QMAKE_PATH_LIBS}/fonts
 -}
 diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index ed6878c..0b07c60 100644
+index ed6878c..44295a0 100644
 --- a/recipes-qt/qt5/qtbase_git.bb
 +++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -1,9 +1,4 @@
--require qt5-git.inc
+@@ -1,8 +1,12 @@
++require qt5.inc
+ require qt5-git.inc
 -require ${PN}.inc
--
+ 
 -SRC_URI = "\
 -    ${QT_GIT}/qt/${QT_MODULE}.git;branch=${QT_MODULE_BRANCH} \
--"
-+require qt5.inc
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
  
  # common for qtbase-native, qtbase-nativesdk and qtbase
- SRC_URI += "\
-@@ -25,6 +20,248 @@ SRC_URI += "\
+@@ -25,9 +29,244 @@ SRC_URI += "\
      file://0012-Set-paths-for-target-properly.patch \
  "
  
+-SRCREV = "f58e882b7594c59b6050d3c87562fcf836d10f60"
 +DEPENDS += "qtbase-native"
 +
 +# LGPL-3.0 is used only in src/plugins/platforms/android/extract.cpp
@@ -1484,7 +1558,11 @@ index ed6878c..0b07c60 100644
 +        mkdir ${B}/bin
 +        ln -sf ${OE_QMAKE_QMAKE_ORIG} ${B}/bin/qmake
 +    fi
-+
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-                    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 +    ${S}/configure -v \
 +        -opensource -confirm-license \
 +        -sysroot ${STAGING_DIR_TARGET} \
@@ -1578,11 +1656,7 @@ index ed6878c..0b07c60 100644
 +    rm -rf $to${OE_QMAKE_PATH_LIBS}/fonts
 +}
 +
-+require qt5-git.inc
-+
- SRCREV = "f58e882b7594c59b6050d3c87562fcf836d10f60"
- 
- LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++SRCREV = "f58e882b7594c59b6050d3c87562fcf836d10f60"
 diff --git a/recipes-qt/qt5/qtconnectivity.inc b/recipes-qt/qt5/qtconnectivity.inc
 deleted file mode 100644
 index ab8d31e..0000000
@@ -1605,11 +1679,22 @@ index ab8d31e..0000000
 -LICENSE += "| GPL-2.0"
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-index 0e62a23..619349e 100644
+index 0e62a23..8ed64fb 100644
 --- a/recipes-qt/qt5/qtconnectivity_git.bb
 +++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -1,4 +1,19 @@
+@@ -1,4 +1,24 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${BPN}.inc
++
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
 +
 +DEPENDS += "qtbase qtdeclarative"
 +
@@ -1621,12 +1706,6 @@ index 0e62a23..619349e 100644
 +    # disable bluez test if it isn't enabled by PACKAGECONFIG
 +    sed -i 's/^qtCompileTest(bluez)/OE_BLUEZ_ENABLED:qtCompileTest(bluez)/g' ${S}/qtconnectivity.pro
 +}
-+
-+LICENSE += "| GPL-2.0"
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
-+
- require qt5-git.inc
--require ${BPN}.inc
  
  SRCREV = "b4bf23453e65995bdd8827b6e146edd5cafeddc3"
 diff --git a/recipes-qt/qt5/qtdeclarative.inc b/recipes-qt/qt5/qtdeclarative.inc
@@ -1656,19 +1735,28 @@ index 10487ca..0000000
 -
 -EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
 diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
-index caa851a..fc7a056 100644
+index caa851a..5f628c2 100644
 --- a/recipes-qt/qt5/qtdeclarative_git.bb
 +++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -1,4 +1,24 @@
+@@ -1,4 +1,30 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++# There are no LGPLv3-only licensed files in this component.
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
++
++DEPENDS += "qtbase"
 +
 +SRC_URI += " \
 +    file://0001-qmltestexample-fix-link.patch \
 +"
-+
-+# There are no LGPLv3-only licensed files in this component.
-+
-+DEPENDS += "qtbase"
 +
 +PACKAGECONFIG ??= "qtxmlpatterns"
 +PACKAGECONFIG[qtxmlpatterns] = ",,qtxmlpatterns"
@@ -1680,9 +1768,6 @@ index caa851a..fc7a056 100644
 +}
 +
 +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "2b3c2339616680537145a9cc2e7567575add1abb"
 diff --git a/recipes-qt/qt5/qtenginio.inc b/recipes-qt/qt5/qtenginio.inc
@@ -1700,21 +1785,22 @@ index 687b414..0000000
 -                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6"
 -LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
 diff --git a/recipes-qt/qt5/qtenginio_git.bb b/recipes-qt/qt5/qtenginio_git.bb
-index 9e2c703..d8db981 100644
+index 9e2c703..2f13a2b 100644
 --- a/recipes-qt/qt5/qtenginio_git.bb
 +++ b/recipes-qt/qt5/qtenginio_git.bb
-@@ -1,5 +1,13 @@
+@@ -1,5 +1,14 @@
 +require qt5.inc
-+
-+DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
-+                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
-+                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6"
-+LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+
  require qt5-git.inc
 -require ${PN}.inc
++
++LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++"
++
++DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
  
  QT_MODULE_BRANCH = "1.1"
  SRCREV = "30ee95cd19f9a435ce337b4f651175ed2e8ba2e5"
@@ -1734,22 +1820,28 @@ index 9b862cf..0000000
 -# There are no GPLv2 licensed files in this component.
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtgraphicaleffects_git.bb b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-index cf2498b..0f44cd5 100644
+index cf2498b..d7f0e87 100644
 --- a/recipes-qt/qt5/qtgraphicaleffects_git.bb
 +++ b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-@@ -1,4 +1,13 @@
+@@ -1,4 +1,19 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++# There are no LGPLv3-only licensed files in this component.
++# There are no GPLv2 licensed files in this component.
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
 +
 +DEPENDS += "qtdeclarative"
 +
 +RDEPENDS_${PN}-dev = ""
-+
-+# There are no LGPLv3-only licensed files in this component.
-+# There are no GPLv2 licensed files in this component.
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "6eef4b5fa1836c9cb7ebc5dcb269a8d3114eb6c3"
 diff --git a/recipes-qt/qt5/qtimageformats.inc b/recipes-qt/qt5/qtimageformats.inc
@@ -1780,11 +1872,22 @@ index 94c3a9d..0000000
 -LICENSE += "| GPL-2.0"
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtimageformats_git.bb b/recipes-qt/qt5/qtimageformats_git.bb
-index 149148e..0108839 100644
+index 149148e..bd2f893 100644
 --- a/recipes-qt/qt5/qtimageformats_git.bb
 +++ b/recipes-qt/qt5/qtimageformats_git.bb
-@@ -1,4 +1,25 @@
+@@ -1,4 +1,30 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
 +
 +DEPENDS += "qtbase"
 +ALLOW_EMPTY_${PN} = "1"
@@ -1802,12 +1905,6 @@ index 149148e..0108839 100644
 +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'jasper', 'CONFIG+=OE_JASPER_ENABLED', '', d)}"
 +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'libtiff', 'CONFIG+=OE_LIBTIFF_ENABLED', '', d)}"
 +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'libwebp', 'CONFIG+=OE_LIBWEBP_ENABLED', '', d)}"
-+
-+LICENSE += "| GPL-2.0"
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "98f83553e9fe2aa5fc54b32513af6ba3aa60a07b"
 diff --git a/recipes-qt/qt5/qtlocation.inc b/recipes-qt/qt5/qtlocation.inc
@@ -1840,11 +1937,22 @@ index 7941240..0000000
 -LICENSE += "| GPL-2.0"
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_git.bb
-index 75b4f72..c7fa4e4 100644
+index 75b4f72..7ff4c3d 100644
 --- a/recipes-qt/qt5/qtlocation_git.bb
 +++ b/recipes-qt/qt5/qtlocation_git.bb
-@@ -1,4 +1,27 @@
+@@ -1,4 +1,32 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
 +
 +DEPENDS += "qtbase qt3d"
 +# qtsystems qtmultimedia
@@ -1864,12 +1972,6 @@ index 75b4f72..c7fa4e4 100644
 +
 +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'geoclue', 'CONFIG+=OE_GEOCLUE_ENABLED', '', d)}"
 +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'gypsy', 'CONFIG+=OE_GYPSY_ENABLED', '', d)}"
-+
-+LICENSE += "| GPL-2.0"
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "b13fec3c7ed08b7d0e79c08312a3c3285eb20ef3"
 diff --git a/recipes-qt/qt5/qtmultimedia.inc b/recipes-qt/qt5/qtmultimedia.inc
@@ -1906,13 +2008,22 @@ index bb53b9c..0000000
 -    file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
 -"
 diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
-index 1795169..70d31b1 100644
+index 1795169..66bba54 100644
 --- a/recipes-qt/qt5/qtmultimedia_git.bb
 +++ b/recipes-qt/qt5/qtmultimedia_git.bb
-@@ -1,4 +1,31 @@
+@@ -1,4 +1,37 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +# There are no LGPLv3-only licensed files in this component.
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +DEPENDS += "qtdeclarative"
 +
@@ -1937,9 +2048,6 @@ index 1795169..70d31b1 100644
 +SRC_URI += "\
 +    file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
 +"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "6fe3061c1f6b7438d20c7bfb92c7652cedc5b049"
 diff --git a/recipes-qt/qt5/qtquick1.inc b/recipes-qt/qt5/qtquick1.inc
@@ -1958,22 +2066,28 @@ index c3ae7cf..0000000
 -# Note that some files are LGPL-2.1 only without Digia-Qt-LGPL-Exception-1.1.
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.bb
-index 7cc23d5..e141afb 100644
+index 7cc23d5..a90d2e3 100644
 --- a/recipes-qt/qt5/qtquick1_git.bb
 +++ b/recipes-qt/qt5/qtquick1_git.bb
-@@ -1,4 +1,13 @@
+@@ -1,4 +1,19 @@
 +require qt5.inc
-+
-+DEPENDS += "qtscript qtsvg qtxmlpatterns qtwebkit"
-+# qttools
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +# There are no LGPLv3-only licensed files in this component.
 +# There are no GPLv2 licensed files in this component.
 +# Note that some files are LGPL-2.1 only without Digia-Qt-LGPL-Exception-1.1.
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
 +
- require qt5-git.inc
--require ${PN}.inc
++DEPENDS += "qtscript qtsvg qtxmlpatterns qtwebkit"
++# qttools
  
  SRCREV = "c78f720de6de9340492f8395109252919283a955"
 diff --git a/recipes-qt/qt5/qtquickcontrols.inc b/recipes-qt/qt5/qtquickcontrols.inc
@@ -1991,21 +2105,26 @@ index 89bda5e..0000000
 -LICENSE += "| GPL-2.0"
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtquickcontrols_git.bb b/recipes-qt/qt5/qtquickcontrols_git.bb
-index ddc4ccf..d9faf67 100644
+index ddc4ccf..5afb31a 100644
 --- a/recipes-qt/qt5/qtquickcontrols_git.bb
 +++ b/recipes-qt/qt5/qtquickcontrols_git.bb
-@@ -1,4 +1,12 @@
+@@ -1,4 +1,17 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
 +
 +DEPENDS += "qtdeclarative"
 +
 +RDEPENDS_${PN}-dev = ""
-+
-+LICENSE += "| GPL-2.0"
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "de9145dcd904068256e28e130fdfda2e8014efe8"
 diff --git a/recipes-qt/qt5/qtscript.inc b/recipes-qt/qt5/qtscript.inc
@@ -2032,11 +2151,23 @@ index 5a534f0..0000000
 -# Note that some files are LGPL-2.1 only without Digia-Qt-LGPL-Exception-1.1.
 -DEPENDS += "qtbase"
 diff --git a/recipes-qt/qt5/qtscript_git.bb b/recipes-qt/qt5/qtscript_git.bb
-index 4b99e38..dd7575f 100644
+index 4b99e38..489be2e 100644
 --- a/recipes-qt/qt5/qtscript_git.bb
 +++ b/recipes-qt/qt5/qtscript_git.bb
-@@ -1,4 +1,21 @@
+@@ -1,4 +1,28 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++# There are no LGPLv3-only licensed files in this component.
++# Note that some files are LGPL-2.1 only without Digia-Qt-LGPL-Exception-1.1.
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +# qemuarm build fails with:
 +# /OE/build/oe-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/qtscript/5.4.1+gitAUTOINC+822df36f25-r0/git/src/3rdparty/javascriptcore/JavaScriptCore/assembler/AssemblerBuffer.h: In member function 'void QTJSC::AssemblerBuffer::putInt64Unchecked(int64_t)':
@@ -2050,12 +2181,7 @@ index 4b99e38..dd7575f 100644
 +#{standard input}:43: Error: lo register required -- `ldmia sp!,{r4-r8,lr}'
 +ARM_INSTRUCTION_SET = "arm"
 +
-+# There are no LGPLv3-only licensed files in this component.
-+# Note that some files are LGPL-2.1 only without Digia-Qt-LGPL-Exception-1.1.
 +DEPENDS += "qtbase"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "822df36f252c5a16cdf82f5666f36e7011df46c4"
 diff --git a/recipes-qt/qt5/qtsensors.inc b/recipes-qt/qt5/qtsensors.inc
@@ -2072,20 +2198,26 @@ index 88c5e78..0000000
 -# There are no GPLv2 licensed files in this component.
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtsensors_git.bb b/recipes-qt/qt5/qtsensors_git.bb
-index 982b2f7..d5b8877 100644
+index 982b2f7..31131d8 100644
 --- a/recipes-qt/qt5/qtsensors_git.bb
 +++ b/recipes-qt/qt5/qtsensors_git.bb
-@@ -1,4 +1,11 @@
+@@ -1,4 +1,17 @@
 +require qt5.inc
-+
-+DEPENDS += "qtbase qtdeclarative"
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +# There are no LGPLv3-only licensed files in this component.
 +# There are no GPLv2 licensed files in this component.
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
 +
- require qt5-git.inc
--require ${PN}.inc
++DEPENDS += "qtbase qtdeclarative"
  
  SRCREV = "26c99a8f7832a5549d315ad434e038ae3964e224"
 diff --git a/recipes-qt/qt5/qtserialport.inc b/recipes-qt/qt5/qtserialport.inc
@@ -2110,28 +2242,30 @@ index c9877c6..0000000
 -                    file://LGPL_EXCEPTION.txt;md5=eb6c371255e1262c55ae9b652a90b528 \
 -                    file://LICENSE.FDL;md5=3801d7932fdc07fd9efe89f9854a6caa"
 diff --git a/recipes-qt/qt5/qtserialport_git.bb b/recipes-qt/qt5/qtserialport_git.bb
-index a4e471b..86b6a41 100644
+index a4e471b..e95d564 100644
 --- a/recipes-qt/qt5/qtserialport_git.bb
 +++ b/recipes-qt/qt5/qtserialport_git.bb
-@@ -1,4 +1,19 @@
+@@ -1,4 +1,21 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++# text of LGPL_EXCEPTION.txt and LICENSE.FDL is slightly different than what
++# other qt* components use :/
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=eb6c371255e1262c55ae9b652a90b528 \
++    file://LICENSE.FDL;md5=3801d7932fdc07fd9efe89f9854a6caa \
++"
 +
 +SRC_URI += " \
 +    file://0001-Unix-Clear-serial_struct-instances.patch \
 +"
 +
 +DEPENDS += "qtbase"
-+
-+# text of LGPL_EXCEPTION.txt and LICENSE.FDL is slightly different than what
-+# other qt* components use :/
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
-+                    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
-+                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
-+                    file://LGPL_EXCEPTION.txt;md5=eb6c371255e1262c55ae9b652a90b528 \
-+                    file://LICENSE.FDL;md5=3801d7932fdc07fd9efe89f9854a6caa"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "b84fe7eb3d6d977a347bfbb82da724409b2eda69"
 diff --git a/recipes-qt/qt5/qtsvg.inc b/recipes-qt/qt5/qtsvg.inc
@@ -2145,17 +2279,24 @@ index ce2eee4..0000000
 -# There are no LGPLv3-only licensed files in this component.
 -DEPENDS += "qtbase"
 diff --git a/recipes-qt/qt5/qtsvg_git.bb b/recipes-qt/qt5/qtsvg_git.bb
-index b9e57f5..35b7c30 100644
+index b9e57f5..89f0815 100644
 --- a/recipes-qt/qt5/qtsvg_git.bb
 +++ b/recipes-qt/qt5/qtsvg_git.bb
-@@ -1,4 +1,8 @@
+@@ -1,4 +1,15 @@
 +require qt5.inc
-+
-+# There are no LGPLv3-only licensed files in this component.
-+DEPENDS += "qtbase"
-+
  require qt5-git.inc
 -require ${PN}.inc
++
++# There are no LGPLv3-only licensed files in this component.
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
++
++DEPENDS += "qtbase"
  
  SRCREV = "1fb79c9f2b50294b989cf2bdd8bfaaf0a458e2a8"
 diff --git a/recipes-qt/qt5/qtsystems.inc b/recipes-qt/qt5/qtsystems.inc
@@ -2188,11 +2329,21 @@ index e9b14ae..0000000
 -                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
 -                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
-index ea253d6..1b71f51 100644
+index ea253d6..edc0360 100644
 --- a/recipes-qt/qt5/qtsystems_git.bb
 +++ b/recipes-qt/qt5/qtsystems_git.bb
-@@ -1,5 +1,28 @@
+@@ -1,5 +1,29 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++LICENSE = "GFDL-1.3 & LGPL-2.1 | GPL-3.0"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
++    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +DEPENDS += "qtbase qtdeclarative udev gconf"
 +
@@ -2209,15 +2360,6 @@ index ea253d6..1b71f51 100644
 +    # Remove example.pro file as it is useless
 +    rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro	
 +}
-+
-+LICENSE = "GFDL-1.3 & LGPL-2.1 | GPL-3.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
-+                    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
-+                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  QT_MODULE_BRANCH = "dev"
  
@@ -2243,18 +2385,33 @@ index 03b88cd..0000000
 -    oe_runmake install INSTALL_ROOT=${D}
 -}
 diff --git a/recipes-qt/qt5/qttools-native_git.bb b/recipes-qt/qt5/qttools-native_git.bb
-index bbaafc5..9b44384 100644
+index bbaafc5..219fc2e 100644
 --- a/recipes-qt/qt5/qttools-native_git.bb
 +++ b/recipes-qt/qt5/qttools-native_git.bb
-@@ -1,5 +1,20 @@
+@@ -1,9 +1,26 @@
 +DEPENDS = "qtbase-native"
++
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +QT_MODULE = "qttools"
 +
 +require qt5-native.inc
-+
+ require qt5-git.inc
+-require ${PN}.inc
+ 
+-SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
 +SRC_URI += "file://0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch"
-+
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-                    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 +do_configure() {
 +    ${OE_QMAKE_QMAKE} ${OE_QMAKE_DEBUG_OUTPUT} -r ${S} CONFIG+=linguistonly
 +}
@@ -2263,11 +2420,7 @@ index bbaafc5..9b44384 100644
 +    oe_runmake install INSTALL_ROOT=${D}
 +}
 +
- require qt5-git.inc
--require ${PN}.inc
- 
- SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
- 
++SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
 diff --git a/recipes-qt/qt5/qttools.inc b/recipes-qt/qt5/qttools.inc
 deleted file mode 100644
 index 97717ae..0000000
@@ -2291,11 +2444,22 @@ index 97717ae..0000000
 -
 -EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtwebkit', '', 'CONFIG+=noqtwebkit', d)}"
 diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-index bbaafc5..ac1d183 100644
+index bbaafc5..4ba2b8a 100644
 --- a/recipes-qt/qt5/qttools_git.bb
 +++ b/recipes-qt/qt5/qttools_git.bb
-@@ -1,5 +1,21 @@
+@@ -1,9 +1,27 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
+ 
+-SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
++    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
 +
@@ -2306,17 +2470,17 @@ index bbaafc5..ac1d183 100644
 +
 +FILES_${PN}-tools += "${datadir}/${QT_DIR_NAME}/phrasebooks"
 +FILES_${PN}-examples = "${datadir}/${QT_DIR_NAME}/examples"
-+
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=d87ae0d200af76dca730d911474cbe5b \
+-                    file://LICENSE.LGPLv3;md5=ffcfac38a32c9ebdb8ff768fa1702478 \
+-                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
+-                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 +PACKAGECONFIG ??= ""
 +PACKAGECONFIG[qtwebkit] = ",,qtwebkit"
 +
 +EXTRA_QMAKEVARS_PRE += "${@base_contains('PACKAGECONFIG', 'qtwebkit', '', 'CONFIG+=noqtwebkit', d)}"
 +
- require qt5-git.inc
--require ${PN}.inc
- 
- SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
- 
++SRCREV = "7f5b11a4a6357d2969e5b24bfb25c47aeb3d99f5"
 diff --git a/recipes-qt/qt5/qttranslations.inc b/recipes-qt/qt5/qttranslations.inc
 deleted file mode 100644
 index 45f7609..0000000
@@ -2415,18 +2579,22 @@ index 45f7609..0000000
 -    ${OE_QMAKE_PATH_TRANSLATIONS}/qt_*.qm \
 -"
 diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
-index a16b6ff..670b727 100644
+index a16b6ff..b5fd345 100644
 --- a/recipes-qt/qt5/qttranslations_git.bb
 +++ b/recipes-qt/qt5/qttranslations_git.bb
-@@ -1,4 +1,95 @@
+@@ -1,4 +1,96 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++LICENSE = "(LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++"
 +
 +DEPENDS += "qtbase qttools-native"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
-+                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
-+                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6"
-+LICENSE = "(LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
 +
 +PACKAGES =. " \
 +    ${PN}-assistant \
@@ -2510,9 +2678,6 @@ index a16b6ff..670b727 100644
 +FILES_${PN}-qt = " \
 +    ${OE_QMAKE_PATH_TRANSLATIONS}/qt_*.qm \
 +"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "1224b6890e0b0971e5eeea9f52d806f1890de0ed"
 diff --git a/recipes-qt/qt5/qtwayland-native.inc b/recipes-qt/qt5/qtwayland-native.inc
@@ -2546,11 +2711,22 @@ index b6af19e..0000000
 -                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
 -                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
-index 3be3e51..3c02cc4 100644
+index 3be3e51..3ae35b4 100644
 --- a/recipes-qt/qt5/qtwayland-native_git.bb
 +++ b/recipes-qt/qt5/qtwayland-native_git.bb
-@@ -1,4 +1,28 @@
+@@ -1,4 +1,29 @@
 +require qt5-native.inc
+ require qt5-git.inc
+-require ${PN}.inc
++
++# There are no LGPLv3-only licensed files in this component.
++LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
++    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +QT_MODULE = "${BPN}"
 +
@@ -2567,16 +2743,6 @@ index 3be3e51..3c02cc4 100644
 +do_install() {
 +    oe_runmake install INSTALL_ROOT=${D}
 +}
-+
-+# There are no LGPLv3-only licensed files in this component.
-+LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
-+                    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
-+                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "d5e7965a87d81e2d7157c785403b0aba681de62a"
 diff --git a/recipes-qt/qt5/qtwayland.inc b/recipes-qt/qt5/qtwayland.inc
@@ -2617,11 +2783,23 @@ index d126b04..0000000
 -                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
 -                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
 diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index 93ef54a..1fccff0 100644
+index 93ef54a..7f1388d 100644
 --- a/recipes-qt/qt5/qtwayland_git.bb
 +++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -1,5 +1,36 @@
+@@ -1,7 +1,37 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
+ 
+-SRCREV = "d5e7965a87d81e2d7157c785403b0aba681de62a"
++# There are no LGPLv3-only licensed files in this component.
++LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
++    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
 +
 +# wayland-native is already in wayland DEPENDS, but add it here
 +# explicitly, because it's native wayland-scanner we're looking for
@@ -2645,19 +2823,15 @@ index 93ef54a..1fccff0 100644
 +FILES_${PN}-plugins-dbg += " \
 +    ${OE_QMAKE_PATH_PLUGINS}/*/*/.debug/* \
 +"
-+
-+# There are no LGPLv3-only licensed files in this component.
-+LICENSE = "BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
-+                    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
-+                    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e"
-+
- require qt5-git.inc
--require ${PN}.inc
  
- SRCREV = "d5e7965a87d81e2d7157c785403b0aba681de62a"
- 
+ SRC_URI += " \
+     file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
+@@ -14,3 +44,5 @@ do_install_append() {
+     install ${B}/include/QtCompositor/${QT_VERSION}/QtCompositor/private/qwayland-server-*.h ${D}${OE_QMAKE_PATH_QT_HEADERS}/QtCompositor/${QT_VERSION}/QtCompositor/private
+     install ${B}/include/QtCompositor/${QT_VERSION}/QtCompositor/private/*protocol*.h ${D}${OE_QMAKE_PATH_QT_HEADERS}/QtCompositor/${QT_VERSION}/QtCompositor/private
+ }
++
++SRCREV = "d5e7965a87d81e2d7157c785403b0aba681de62a"
 diff --git a/recipes-qt/qt5/qtwebchannel.inc b/recipes-qt/qt5/qtwebchannel.inc
 deleted file mode 100644
 index f31a4b9..0000000
@@ -2676,24 +2850,25 @@ index f31a4b9..0000000
 -                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
 -"
 diff --git a/recipes-qt/qt5/qtwebchannel_git.bb b/recipes-qt/qt5/qtwebchannel_git.bb
-index 30fcde8..1a12433 100644
+index 30fcde8..a800883 100644
 --- a/recipes-qt/qt5/qtwebchannel_git.bb
 +++ b/recipes-qt/qt5/qtwebchannel_git.bb
-@@ -1,4 +1,15 @@
+@@ -1,4 +1,16 @@
 +require qt5.inc
-+
-+DEPENDS += "qtdeclarative qtwebsockets"
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +# There are no LGPLv3-only licensed files in this component.
 +# There are no GPLv2 licensed files in this component.
-+LIC_FILES_CHKSUM = "file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
-+                    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
-+                    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
-+                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
 +"
 +
- require qt5-git.inc
--require ${PN}.inc
++DEPENDS += "qtdeclarative qtwebsockets"
  
  SRCREV = "358e5acba3154a8ab4b53b22797c2c1eae4707dc"
 diff --git a/recipes-qt/qt5/qtwebengine.inc b/recipes-qt/qt5/qtwebengine.inc
@@ -2772,17 +2947,19 @@ index 4a5b0e8..0000000
 -    qtdeclarative-qmlplugins \
 -"
 diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 81c5333..f23c88d 100644
+index 81c5333..c14a556 100644
 --- a/recipes-qt/qt5/qtwebengine_git.bb
 +++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -1,5 +1,74 @@
+@@ -1,5 +1,75 @@
 +SUMMARY = "QtWebEngine combines the power of Chromium and Qt"
++
 +LICENSE = "LGPL-3.0 & BSD"
 +LIC_FILES_CHKSUM = " \
 +    file://src/core/browser_context_qt.cpp;md5=91895ac1852e1b07202d9716194e8dd8;beginline=1;endline=35 \
 +    file://src/3rdparty/chromium/LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5 \
 +    file://LICENSE.LGPLv3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +"
++
 +DEPENDS += " \
 +    ninja-native \
 +    qtbase qtdeclarative qtxmlpatterns qtquickcontrols \
@@ -2801,7 +2978,9 @@ index 81c5333..f23c88d 100644
 +inherit pythonnative
 +inherit perlnative
 +
-+require recipes-qt/qt5/qt5.inc
++require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +# To avoid trouble start with not separated build directory
 +SEPB = "${S}"
@@ -2845,9 +3024,6 @@ index 81c5333..f23c88d 100644
 +    qtquickcontrols-qmlplugins \
 +    qtdeclarative-qmlplugins \
 +"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  QT_MODULE_BRANCH = "5.4"
  QT_MODULE_BRANCH_CHROMIUM = "37.0.2062-based"
@@ -2875,19 +3051,24 @@ index 317fabb..0000000
 -RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
 -RDEPENDS_${PN}-examples += "${@base_contains('PACKAGECONFIG_OPENSSL', 'openssl', 'ca-certificates', '', d)}"
 diff --git a/recipes-qt/qt5/qtwebkit-examples_git.bb b/recipes-qt/qt5/qtwebkit-examples_git.bb
-index 7225ae5..0940c96 100644
+index 7225ae5..7ae9fc7 100644
 --- a/recipes-qt/qt5/qtwebkit-examples_git.bb
 +++ b/recipes-qt/qt5/qtwebkit-examples_git.bb
-@@ -1,4 +1,21 @@
+@@ -1,4 +1,23 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +# There are no LGPLv3-only licensed files in this component.
 +# There are no GPLv2 licensed files in this component.
-+LIC_FILES_CHKSUM = "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
-+                    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
-+                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
-+                    file://examples/webkitwidgets/scroller/wheel/main.cpp;endline=112;md5=6f92d041824c63426993c8ce3ae0eb77 \
-+                    file://examples/webkitwidgets/imageanalyzer/imageanalyzer.cpp;endline=223;md5=13ffb472fefe4bdf6464954a22251f35"
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://examples/webkitwidgets/scroller/wheel/main.cpp;endline=112;md5=6f92d041824c63426993c8ce3ae0eb77 \
++    file://examples/webkitwidgets/imageanalyzer/imageanalyzer.cpp;endline=223;md5=13ffb472fefe4bdf6464954a22251f35 \
++"
 +
 +SRC_URI += " \
 +    file://0001-qtwebkit-examples-enable-building-examples-by-defaul.patch \
@@ -2896,9 +3077,6 @@ index 7225ae5..0940c96 100644
 +DEPENDS += "qtwebkit"
 +RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
 +RDEPENDS_${PN}-examples += "${@base_contains('PACKAGECONFIG_OPENSSL', 'openssl', 'ca-certificates', '', d)}"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "734663277730bc20dacf0a6b07427002a53cc107"
 diff --git a/recipes-qt/qt5/qtwebkit.inc b/recipes-qt/qt5/qtwebkit.inc
@@ -2969,17 +3147,21 @@ index 38f2b2b..0000000
 -RUBY_SYS = "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586', 'i386').replace('i686', 'i386') }"
 -export RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
 diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index 3d39178..1b89347 100644
+index 3d39178..085f35d 100644
 --- a/recipes-qt/qt5/qtwebkit_git.bb
 +++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -1,4 +1,65 @@
+@@ -1,4 +1,66 @@
 +require qt5.inc
+ require qt5-git.inc
+-require ${PN}.inc
 +
 +LICENSE = "BSD & LGPLv2+ | GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
-+                    file://Source/WebCore/rendering/RenderApplet.h;endline=22;md5=fb9694013ad71b78f8913af7a5959680 \
-+                    file://Source/WebKit/gtk/webkit/webkit.h;endline=21;md5=b4fbe9f4a944f1d071dba1d2c76b3351 \
-+                    file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++    file://Source/WebCore/rendering/RenderApplet.h;endline=22;md5=fb9694013ad71b78f8913af7a5959680 \
++    file://Source/WebKit/gtk/webkit/webkit.h;endline=21;md5=b4fbe9f4a944f1d071dba1d2c76b3351 \
++    file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee \
++"
 +
 +DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt leveldb"
 +
@@ -3034,9 +3216,6 @@ index 3d39178..1b89347 100644
 +# we need to replace it too (a bit longer version without importing re)
 +RUBY_SYS = "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586', 'i386').replace('i686', 'i386') }"
 +export RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
-+
- require qt5-git.inc
--require ${PN}.inc
  
  SRCREV = "738ad7e37c66f2afdbc7a77aff3ab7fa510361a2"
 diff --git a/recipes-qt/qt5/qtwebsockets.inc b/recipes-qt/qt5/qtwebsockets.inc
@@ -3056,23 +3235,23 @@ index 5fb149a..0000000
 -                    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
 -"
 diff --git a/recipes-qt/qt5/qtwebsockets_git.bb b/recipes-qt/qt5/qtwebsockets_git.bb
-index 4c96e25..52b06af 100644
+index 4c96e25..9cd69b1 100644
 --- a/recipes-qt/qt5/qtwebsockets_git.bb
 +++ b/recipes-qt/qt5/qtwebsockets_git.bb
 @@ -1,4 +1,14 @@
 +require qt5.inc
-+
-+DEPENDS += "qtbase qtdeclarative"
-+
-+LICENSE = "GFDL-1.3 & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
-+                    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
-+                    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
-+                    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
-+"
-+
  require qt5-git.inc
 -require ${PN}.inc
++
++LICENSE = "GFDL-1.3 & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE;md5=4fbd65380cdd255951079008b364516c \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++"
++
++DEPENDS += "qtbase qtdeclarative"
  
  SRCREV = "5b469aa3c4d6b9c68feb9cf92d03614077518894"
 diff --git a/recipes-qt/qt5/qtx11extras.inc b/recipes-qt/qt5/qtx11extras.inc
@@ -3088,19 +3267,24 @@ index 40e1d5c..0000000
 -LICENSE += "| GPL-2.0"
 -LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
 diff --git a/recipes-qt/qt5/qtx11extras_git.bb b/recipes-qt/qt5/qtx11extras_git.bb
-index 63ccdcb..d61bda9 100644
+index 63ccdcb..d286570 100644
 --- a/recipes-qt/qt5/qtx11extras_git.bb
 +++ b/recipes-qt/qt5/qtx11extras_git.bb
-@@ -1,4 +1,10 @@
+@@ -1,4 +1,15 @@
 +require qt5.inc
-+
-+DEPENDS += "qtbase"
-+
-+LICENSE += "| GPL-2.0"
-+LIC_FILES_CHKSUM += "file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed"
-+
  require qt5-git.inc
 -require ${PN}.inc
++
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPLv2;md5=e782f55badfa137e5e59c330f12cc8ed \
++"
++
++DEPENDS += "qtbase"
  
  SRCREV = "bcc86311359e138ecc3a8fc1ce6eee1cda2ec0f5"
 diff --git a/recipes-qt/qt5/qtxmlpatterns.inc b/recipes-qt/qt5/qtxmlpatterns.inc
@@ -3114,17 +3298,24 @@ index ce2eee4..0000000
 -# There are no LGPLv3-only licensed files in this component.
 -DEPENDS += "qtbase"
 diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
-index 3bdbbdc..cf4e7cf 100644
+index 3bdbbdc..8b58c5a 100644
 --- a/recipes-qt/qt5/qtxmlpatterns_git.bb
 +++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
-@@ -1,4 +1,8 @@
+@@ -1,4 +1,15 @@
 +require qt5.inc
-+
-+# There are no LGPLv3-only licensed files in this component.
-+DEPENDS += "qtbase"
-+
  require qt5-git.inc
 -require ${PN}.inc
++
++# There are no LGPLv3-only licensed files in this component.
++LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv21;md5=cff17b12416c896e10ae2c17a64252e7 \
++    file://LICENSE.LGPLv3;md5=c1939be5579666be947371bc8120425f \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++"
++
++DEPENDS += "qtbase"
  
  SRCREV = "db784fb1c01ca2a0e7ada2c407cd1aab3aa98fee"
 -- 
