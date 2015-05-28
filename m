@@ -1,37 +1,37 @@
 Return-Path: <dbaryshkov@gmail.com>
-Received: from mail-la0-f50.google.com (mail-la0-f50.google.com
-	[209.85.215.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C10375669
+Received: from mail-lb0-f169.google.com (mail-lb0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 79C787573B
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 28 May 2015 20:22:35 +0000 (UTC)
-Received: by labko7 with SMTP id ko7so37241086lab.2
+Received: by lbbuc2 with SMTP id uc2so36000811lbb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 May 2015 13:22:35 -0700 (PDT)
+	Thu, 28 May 2015 13:22:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=ZYialg0zIjh0myRGXCeW9nnnG3ISvAWpybYbXrxb4kk=;
-	b=XpJ5qZPHXodH8pGQhiOn5NA5oDU5M/I8CQRvbSLzjXu9XrwfY/z6yKFAQgwh9lkyHJ
-	P+Mv8OteLbBlKTSsWupWBpFTalipQhGWR/zyP9MhEDs2owhA+vKJOqn6TJZzYuw4+XOG
-	DUAAaUNyRyMZwRSAhJOZGfCii8InZAN9BuY4CFDADe+2Et7G7xu1+ijIypLFL4TFq+I8
-	2h8wHR8D8IRFFBc/PRZc5pvYK851XB0u4P47YhPUWuigQPmY6Y0kevdiHogQjCB5V6X5
-	fZeg1NAFBvmZgxKVcIjveqN3t1Srwiu7xw06AtOj6iC2cwtZX8ueyiS4+pYnCGIZPxo4
-	4McA==
-X-Received: by 10.112.168.165 with SMTP id zx5mr4486062lbb.111.1432844555245; 
-	Thu, 28 May 2015 13:22:35 -0700 (PDT)
+	bh=6qYeQIhIUse0JPO7KuWwRBBz1A7JNt8b+8uNPYyfexs=;
+	b=nMRV2uo45JmIiMHN8uNt/BlBh/b/semH30b3Q784HagKf0VS5zZHT9e41F+hy+ppaF
+	9cI0iuHuRzu6vhUg9FKwt6fw0Vvg66SFejHc7MLNrYF33REfVYkXoXm3SM1kmJQWdoCz
+	lfnm9luiXVQ/RFFSpoaD0jOP57OW2RPMCtwDXUeC1RatRZYrVJuCVtfPakC4YfVVjINa
+	uPG942K/va+KGctGJd7z+EFH2nXrWWAU2GV5yK+OVDhqOsvBbx3a2nXXf4582TNxy0Ai
+	GSz617WUI9xYUmm5bi6wiFjvFJbeY0S4VaMh7lN0fn2P6sMs+crLIk3RR3Ju5uo0QgHl
+	ukjw==
+X-Received: by 10.152.37.201 with SMTP id a9mr4448199lak.120.1432844556773;
+	Thu, 28 May 2015 13:22:36 -0700 (PDT)
 Received: from angmar.lumag.rup.mentorg.com
 	(ppp89-110-9-6.pppoe.avangarddsl.ru. [89.110.9.6])
-	by mx.google.com with ESMTPSA id q1sm817389lah.27.2015.05.28.13.22.32
+	by mx.google.com with ESMTPSA id q1sm817389lah.27.2015.05.28.13.22.35
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 28 May 2015 13:22:34 -0700 (PDT)
+	Thu, 28 May 2015 13:22:35 -0700 (PDT)
 From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 May 2015 23:22:21 +0300
-Message-Id: <1432844543-4452-2-git-send-email-dbaryshkov@gmail.com>
+Date: Thu, 28 May 2015 23:22:22 +0300
+Message-Id: <1432844543-4452-3-git-send-email-dbaryshkov@gmail.com>
 X-Mailer: git-send-email 2.1.4
 In-Reply-To: <1432844543-4452-1-git-send-email-dbaryshkov@gmail.com>
 References: <1432844543-4452-1-git-send-email-dbaryshkov@gmail.com>
-Subject: [meta-opie][PATCH 2/4] opie-init: fix warning about nonexistant ${S} directory
+Subject: [meta-opie][PATCH 3/4] opie-keytabs: fix warning about nonexistant ${S} directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,28 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2015 20:22:35 -0000
+X-List-Received-Date: Thu, 28 May 2015 20:22:37 -0000
 
-Point ${S} to ${WORKDIR} to fix the warning.
+Point ${S} to ${WORKDIR}/etc to fix the warning.
 
 Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
 ---
- recipes-opie/opie-init/opie-init.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-opie/opie-keytabs/opie-keytabs.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-opie/opie-init/opie-init.inc b/recipes-opie/opie-init/opie-init.inc
-index 99ebbe0..844cc14 100644
---- a/recipes-opie/opie-init/opie-init.inc
-+++ b/recipes-opie/opie-init/opie-init.inc
-@@ -5,7 +5,7 @@ LICENSE = "GPLv2"
+diff --git a/recipes-opie/opie-keytabs/opie-keytabs.inc b/recipes-opie/opie-keytabs/opie-keytabs.inc
+index 05962a2..ae86c98 100644
+--- a/recipes-opie/opie-keytabs/opie-keytabs.inc
++++ b/recipes-opie/opie-keytabs/opie-keytabs.inc
+@@ -4,6 +4,8 @@ LICENSE = "GPLv2"
+ # FIXME stopgap until split archives have license files included
  LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
- #APPNAME = "qpe"
  
--#S = "${WORKDIR}/launcher"
-+S = "${WORKDIR}"
++S = "${WORKDIR}/etc"
++
+ inherit palmtop-defs
  
- inherit palmtop-defs update-rc.d
- 
+ do_install() {
 -- 
 2.1.4
 
