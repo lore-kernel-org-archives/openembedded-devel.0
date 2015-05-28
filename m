@@ -1,28 +1,35 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id D62846E5D0;
-	Thu, 28 May 2015 13:21:56 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP; 28 May 2015 06:21:35 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,513,1427785200"; d="scan'208";a="499413708"
-Received: from ecurley-mobl2.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.28.106])
-	by FMSMGA003.fm.intel.com with ESMTP; 28 May 2015 06:21:36 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Date: Thu, 28 May 2015 14:21:33 +0100
-Message-ID: <1670358.VVDPcXkW2z@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.7 (Linux/3.19.7-200.fc21.x86_64; KDE/4.14.7; x86_64; ; )
-In-Reply-To: <5566B28E.9080502@linux.intel.com>
-References: <20150528084536.GB2383@jama>
-	<1978636.L3ktc4a7s3@peggleto-mobl.ger.corp.intel.com>
-	<5566B28E.9080502@linux.intel.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-05-27
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id F23817567D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 May 2015 13:22:36 +0000 (UTC)
+Received: by wgme6 with SMTP id e6so36280026wgm.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 May 2015 06:22:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=pFLJfAc7xfJvTBpbXmFp1xagq3jbCqCdPd0H+VUOOFA=;
+	b=asO+mRS4QjP6985fxCjdCoWsbcZFCjmkMYaBXpPkBg4fqxdEFqWS/mP3G3VD7Da9X1
+	rpujkgRLcWe2cCwjz0U/f8/ALbsSb7VpyOZ1tIyyp7Cyp999dXndxbv/2pUDsSl0ZHfe
+	ysfr7LBzgpcDwqA3ZTo3na8C/SuotoxCuGjPsJoC+tRAAFCC0wwLYNcircliRLDWkT0T
+	PnIT9nOgToWBkK4WRm2So8GeVgNGNWJN9qRW436NRQkhAXRLSpjWdQnnM/2gKf6cDkUl
+	7fXzvhzPyTy24ZUqX3ns7qpT5G3m2NT4kKn8sBaIqoxsYkEyFpMTzJnBHtuohwvL4qy/
+	QZww==
+X-Received: by 10.194.3.77 with SMTP id a13mr5394182wja.104.1432819356766;
+	Thu, 28 May 2015 06:22:36 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id bh7sm3367924wjb.8.2015.05.28.06.22.35
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 28 May 2015 06:22:35 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 28 May 2015 15:22:52 +0200
+Message-Id: <1432819376-24340-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.4.1
+In-Reply-To: <20150528132002.GG2383@jama>
+References: <20150528132002.GG2383@jama>
+Subject: [WIP][meta-qt5][PATCH 1/5] qtbase-native: add CLEANBROKEN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,71 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 May 2015 13:21:57 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 28 May 2015 13:22:37 -0000
 
-On Thursday 28 May 2015 09:15:42 Alexander Kanavin wrote:
-> On 05/28/2015 01:04 PM, Paul Eggleton wrote:
-> > This seems to be related to gstreamer 0.10 removal; though it's QtWebkit
-> > that's> 
-> > failing rather than Phonon:
-> > | cd WebKit/qt/tests/ &&
-> > | /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin
-> > | /qmake2 -after             
-> > | INCPATH+=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr
-> > | /include/freetype2
-> > | LIBS+=-L/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/
-> > | lib
-> > | /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-fr
-> > | ee/4.8.6-r0/qt-everywhere-opensource-src-4.8.6/src/3rdparty/webkit/Sourc
-> > | e/WebKit/qt/tests/tests.pro -spec
-> > | /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-fr
-> > | ee/4.8.6-r0/qt-everywhere-opensource-src-4.8.6/mkspecs/linux-g++ -after 
-> > | INCPATH+=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr
-> > | /include/freetype2
-> > | LIBS+=-L/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/
-> > | lib -o Makefile.WebKit WARNING: (internal):1: Variable INCPATH is
-> > | deprecated; use INCLUDEPATH instead. WARNING: (internal):3: Variable
-> > | INCPATH is deprecated; use INCLUDEPATH instead. WARNING: (internal):1:
-> > | Variable INCPATH is deprecated; use INCLUDEPATH instead. WARNING:
-> > | (internal):3: Variable INCPATH is deprecated; use INCLUDEPATH instead.
-> > | WARNING: (internal):1: Variable INCPATH is deprecated; use INCLUDEPATH
-> > | instead. WARNING: (internal):3: Variable INCPATH is deprecated; use
-> > | INCLUDEPATH instead. WARNING: (internal):1: Variable INCPATH is
-> > | deprecated; use INCLUDEPATH instead. WARNING: (internal):3: Variable
-> > | INCPATH is deprecated; use INCLUDEPATH instead. WARNING: (internal):1:
-> > | Variable INCPATH is deprecated; use INCLUDEPATH instead. WARNING:
-> > | (internal):3: Variable INCPATH is deprecated; use INCLUDEPATH instead.
-> > | Project ERROR: Package gstreamer-app-0.10 not found
-> > | make[1]: *** [WebCore/Makefile.WebKit] Error 2
-> > | make[1]: *** Waiting for unfinished jobs....
-> > | Project ERROR: Package gstreamer-app-0.10 not found
-> > | make[1]: *** [WebKit/qt/Makefile.WebKit.QtWebKit] Error 2
-> > | make[1]: Leaving directory
-> > | `/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-f
-> > | ree/4.8.6-r0/qt-everywhere-opensource-src-4.8.6/src/3rdparty/webkit/Sour
-> > | ce' make: *** [sub-webkit-make_default-ordered] Error 2
-> > | ERROR: oe_runmake failed
-> > | WARNING: exit code 1 from a shell command.
-> > | ERROR: Function failed: do_compile (log file is located at
-> > | /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/qt4-x11-fr
-> > | ee/4.8.6-r0/temp/log.do_compile.14903)> 
-> > Alex, can you take a look at this?
-> 
-> I already did; it should be fixed by this patch:
-> 
-> http://lists.openembedded.org/pipermail/openembedded-core/2015-May/105413.ht
-> ml
+* otherwise do_configure fails with:
+  make[2]: *** No rule to make target 'cmake-clean', needed by 'sub-installed_cmake-clean'.  Stop.
+  make[2]: *** Waiting for unfinished jobs....
+  hidden very far in log.do_configure
 
-Ah right, I missed that sorry. I guess it should be resolved once that patch 
-gets merged.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtbase-native.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks,
-Paul
-
+diff --git a/recipes-qt/qt5/qtbase-native.inc b/recipes-qt/qt5/qtbase-native.inc
+index b6c868d..4af0c0a 100644
+--- a/recipes-qt/qt5/qtbase-native.inc
++++ b/recipes-qt/qt5/qtbase-native.inc
+@@ -27,6 +27,8 @@ SRC_URI += " \
+     file://0012-Add-external-hostbindir-option-for-native-sdk.patch \
+ "
+ 
++CLEANBROKEN = "1"
++
+ QT_CONF_PATH = "${B}/qt.conf"
+ 
+ do_generate_qt_config_file() {
 -- 
+2.4.1
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
