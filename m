@@ -1,34 +1,40 @@
-Return-Path: <zoltan.kuscsik@linaro.org>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 56D9B756C5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 14C9565D6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 17:38:07 +0000 (UTC)
-Received: by igbhj9 with SMTP id hj9so93411176igb.1
+	Thu, 28 May 2015 00:53:04 +0000 (UTC)
+Received: by pdea3 with SMTP id a3so28844165pde.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 May 2015 10:38:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-type;
-	bh=M1V6259T9sOEiRNrTC1SmVa2w/jTKO8sYpFr0SQYY9c=;
-	b=QBjSYTLDsWpIW+uqDpDvjuJABP4MdNeg57TKQnWGv6y1HxRs9wmJ/Vocpi3kAC35Uw
-	SlT5DCls4EdbjVmZNGmb2rKWMllNESlYHxTkFb+EZ7f0GGazZGeN9P6BZxzhnMJQtfvq
-	YHhVq9AoDmBSa2fVIXQYS5AaUDEGIC8tlqLY5c0KDiWr2zif/25fgWO5ZQobipDSfHVn
-	ih/S+F2Whz9eCP0lkIWmzOMlNySU+oisryz6cmB4FMoa/JHIP4/i4/ytu7Mp7uSzUPfA
-	gX8zcY0V9z/+iILEDsThPKnxP1IhxsrVzapHwV16xaNRvQ35F4xq0B9u8jnEdU0AM6Qp
-	KA6g==
-X-Gm-Message-State: ALoCoQkq5RCD2pvEBNDD2NbBlAnK2ZsPg40w1YemXIlUvP8Ewl6Xm/un1x0MgyOKTTGE3iQuLJqz
-X-Received: by 10.107.6.30 with SMTP id 30mr39056260iog.35.1432748289080; Wed,
-	27 May 2015 10:38:09 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.79.20.5 with HTTP; Wed, 27 May 2015 10:37:48 -0700 (PDT)
-From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
-Date: Wed, 27 May 2015 19:37:48 +0200
-Message-ID: <CAAzKXngGv=tmUgOnBvAaz37mdc5R8k6YPjaQNc2pYWJF+qAD=Q@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-browser] [PATCH 2/2] chromium, cef: fetch chromium source from git
+	Wed, 27 May 2015 17:53:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=content-type:mime-version:subject:from:in-reply-to:date:message-id
+	:references:to;
+	bh=RCngjZPtpWe3fy7a5QeuA3rHv+SdBlgAywxh46MtmYw=;
+	b=JfUbej1MBHblyCvVMxJko5bwUCB7+4zdw3xCLh3Cb55viWs7iZycTXMBFIpNzcxhwg
+	IhTpjwbyPGxBVjPWsgBfGtwQCkgABG8ZdcI3fUybRmzsvHHYXoVhk4n6BauNS2YB5zdM
+	85MTZ89ko24PhRtZdKQXCvT3Cagf2JxBlUY/xu94mFVtvSUvQL+mtwaYZ4MxuU+Rstcz
+	c3i2pLDlofmbSRjH1x3dkm9NFPcEFOVsvbmcvB1ueMd3DTBi1yLdZzc1oQimxkipqSdV
+	h8/In160NX0AXh6B/bWd6WbALKzPr7HooHOjmQqut/16aYnND+x7QPjpQgujLwHJDCf/
+	zAKg==
+X-Received: by 10.66.101.9 with SMTP id fc9mr227248pab.37.1432774385813;
+	Wed, 27 May 2015 17:53:05 -0700 (PDT)
+Received: from ?IPv6:2601:9:3580:84c:90eb:a06b:3186:ca08?
+	([2601:9:3580:84c:90eb:a06b:3186:ca08])
+	by mx.google.com with ESMTPSA id pr5sm359873pbc.63.2015.05.27.17.53.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Wed, 27 May 2015 17:53:05 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
+X-Pgp-Agent: GPGMail 2.5b6
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAAzKXnhRDirDffx7krgxbCjgjWV2pORdB8g2c7csohzkjp_hqQ@mail.gmail.com>
+Date: Wed, 27 May 2015 17:53:00 -0700
+Message-Id: <79A6FDE8-B52C-4A3F-9F26-7CF27EE17568@gmail.com>
+References: <CAAzKXnhRDirDffx7krgxbCjgjWV2pORdB8g2c7csohzkjp_hqQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.2098)
+Subject: Re: [meta-browser] [PATCH 1/2] chromium, cef: Fix install path for cef library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,177 +48,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 May 2015 17:38:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 28 May 2015 00:53:05 -0000
+X-Groupsio-MsgNum: 55671
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_EDF963FB-E932-40C6-9523-A0776552DA19";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Updated recipe to fetch Chromium from git.
-LASTCHANGE file is now created using the proper
-gclient hook.
+--Apple-Mail=_EDF963FB-E932-40C6-9523-A0776552DA19
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-Change-Id: Ie1790abec002a0dd39c8d0aae3d03f5ebe6f46aa
-Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
----
- .../cef3/01_get_svn_version_from_LASTCHANGE.patch  | 32 ------------
- recipes-browser/chromium/cef3_280796.bb            | 57
-++++++++++++++++------
- 2 files changed, 43 insertions(+), 46 deletions(-)
- delete mode 100644
-recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
+this change is ok
 
-diff --git
-a/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
-b/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
-deleted file mode 100644
-index 9b14429..0000000
---- a/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--Fetch the revision from LASTCHANGE file programmatically
--
--Upstream-Status: Pending
--
--Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--diff --git a/cef/tools/make_version_header.py
-b/cef/tools/make_version_header.py
--index 84d49f5..395c2cf 100644
----- a/cef/tools/make_version_header.py
--+++ b/cef/tools/make_version_header.py
--@@ -64,6 +64,8 @@ def write_svn_header(header, chrome_version,
-cef_version, cpp_header_dir):
--       revision = svn.get_revision()
--     elif git.is_checkout('.'):
--       revision = git.get_svn_revision()
--+    elif os.path.isfile("../build/util/LASTCHANGE"):
--+      revision =
-open("../build/util/LASTCHANGE").read().split("=")[1].strip()
--     else:
--       raise Exception('Not a valid checkout')
--
--diff --git a/cef/tools/revision.py b/cef/tools/revision.py
--index 1d94602..eb89e3b 100644
----- a/cef/tools/revision.py
--+++ b/cef/tools/revision.py
--@@ -16,6 +16,8 @@ if os.path.exists(os.path.join('.', '.svn')):
--   sys.stdout.write(svn.get_revision())
-- elif os.path.exists(os.path.join('.', '.git')):
--   sys.stdout.write(git.get_svn_revision())
--+elif os.path.isfile("../build/util/LASTCHANGE"):
--+  revision = open("../build/util/LASTCHANGE").read().split("=")[1].strip()
-- else:
--   raise Exception('Not a valid checkout')
-diff --git a/recipes-browser/chromium/cef3_280796.bb
-b/recipes-browser/chromium/cef3_280796.bb
-index 9a9efe5..806a4ac 100644
---- a/recipes-browser/chromium/cef3_280796.bb
-+++ b/recipes-browser/chromium/cef3_280796.bb
-@@ -7,21 +7,22 @@ RDEPENDS_${PN} += "pango cairo fontconfig pciutils
-pulseaudio freetype fontconfi
- SRCREV_tools = "99bcb0e676eb396bcf8e1af3903aa4b578aeeee0"
- SRCREV_cef = "bbad53dfca9f98dddcb31a590410fece0a4f0234"
- SRCREV_egl = "a5b81b7617ba6757802b9b5f8c950034d5f961ec"
--SRCREV_FORMAT = "cef_egl_tools"
-+SRCREV_FORMAT = "cef_egl"
+> On May 27, 2015, at 10:36 AM, Zoltan Kuscsik =
+<zoltan.kuscsik@linaro.org> wrote:
+>=20
+> Wrong location of cef caused QA errors.
+>=20
+> Change-Id: I56743864f9e7d47e7c87fb26c478cd812d5d6961
+> Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+> ---
+> recipes-browser/chromium/chromium.inc | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/recipes-browser/chromium/chromium.inc
+> b/recipes-browser/chromium/chromium.inc
+> index 377e685..cd8bfb5 100644
+> --- a/recipes-browser/chromium/chromium.inc
+> +++ b/recipes-browser/chromium/chromium.inc
+> @@ -44,7 +44,7 @@ do_install() {
+>                install -Dm 0755 =
+${B}/out/${CHROMIUM_BUILD_TYPE}/cefsimple
+> ${D}${bindir}/${BPN}/cefsimple
+>        fi
+>        if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so" ]; then
+> -               install -Dm 0755
+> ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so =
+${D}${bindir}/lib/libcef.so
+> +               install -Dm 0755
+> ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/libcef.so =
+${D}${libdir}/${BPN}/libcef.so
+>        fi
+>        if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/chrome" ]; then
+>                install -Dm 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/chrome
+> ${D}${bindir}/${BPN}/chrome
+> --
+> 1.9.1
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
--SRC_URI = "
-http://people.linaro.org/~zoltan.kuscsik/chromium-browser/chromium_rev_${PV}.tar.xz
-\
--           git://
-github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=src/cef;branch=aura;name=cef
-\
--           git://
-github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=src/ui/ozone/platform/egl;branch=master;name=egl
-\
--           git://
-chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools
-\
--           file://01_get_svn_version_from_LASTCHANGE.patch \
--          file://cef-simple \
--         "
--SRC_URI[md5sum] = "9efbb50283b731042e62b9bd5e312b2f"
--SRC_URI[sha256sum] =
-"f608e97dadf6ea4d885b24fd876896d46840fa39bf743ea2025075aee9fb348d"
-+SRC_URI = "git://
-chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools
-\
-+           git://
-github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=${S}/src/cef;branch=aura;name=cef
-\
-+           git://
-github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=${S}/src/ui/ozone/platform/egl;branch=master;name=egl\
-+           file://cef-simple\
-+  "
 
--S = "${WORKDIR}/chromium_rev_${PV}"
-+export CHROMIUM_SRC_GIT_URL="https://chromium.googlesource.com/chromium/src
-"
-+export CHROMIUM_SRC_GIT_COMMIT="e800fe7470fa87dc1ca5b148a7c2c41f603fdcbd"
+--Apple-Mail=_EDF963FB-E932-40C6-9523-A0776552DA19
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
--do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl SRCREV_tools"
-+S = "${WORKDIR}/chromium_rev_${PV}/"
-+
-+B = "${S}/src/"
-+
-+do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl"
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
- GYP_ARCH_DEFINES_armv7a = " target_arch=arm arm_float_abi=hard"
- GYP_ARCH_DEFINES_i586 = " target_arch=ia32"
-@@ -30,14 +31,41 @@ export GYP_GENERATORS="ninja"
- export BUILD_TARGET_ARCH="${TARGET_ARCH}"
- export GYP_DEFINES="${GYP_ARCH_DEFINES}
-release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+iEYEARECAAYFAlVmZu8ACgkQuwUzVZGdMxSo2QCfYT9k8w2fGdTs68rfwftWMHPs
+iXwAnjQQFYb/nFzaxRqJYWNgcd/V3F44
+=LLS3
+-----END PGP SIGNATURE-----
 
-+do_fetch_chromium_source_from_git() {
-+  cd ${S}
-+  export PATH=${WORKDIR}/depot_tools:"$PATH"
-+
-+  # Note: --deps-file needs to set to .DEPS.git for syncing to old
-+  # chromium versions
-+  gclient config ${CHROMIUM_SRC_GIT_URL} --deps-file=".DEPS.git"
-+
-+  # Runhooks is disabled. Running the hooks will trigger the
-+  # gyp_chromium command replaced with cef_create_projects.sh by
-+  # cef3.
-+
-+  gclient sync -f --nohooks --revision src@${CHROMIUM_SRC_GIT_COMMIT}
-+
-+  # We need the lastchange hook to generate the LASTCHANGE revision info
-+  # file.
-+
-+  python src/build/util/lastchange.py -o src/build/util/LASTCHANGE
-+}
-+
-+addtask fetch_chromium_source_from_git after do_patch before do_configure
-+
- do_configure_append() {
-        export PATH=${WORKDIR}/depot_tools:"$PATH"
-        # End of LD Workaround
-        #-----------------------
-        # Configure cef
-        #------------------------
--       cd cef
--       ./cef_create_projects.sh -I ${BUILD_TARGET_ARCH}_ozone.gypi --depth
-../
-+       cd ${S}/src/cef
-+
-+  # Fatal linker warnings need to be disalbed to avoid linker issu
-+  # with GCC 4.9:
-+  #
-http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095947.html
-+
-+       ./cef_create_projects.sh -I ${BUILD_TARGET_ARCH}_ozone.gypi --depth
-../ -Ddisable_fatal_linker_warnings=
-        cd -
- }
-
-@@ -47,5 +75,6 @@ do_qa_configure() {
- }
-
- do_compile() {
-+ cd ${S}/src
-        ninja -C out/${CHROMIUM_BUILD_TYPE} cefsimple
- }
---
-1.9.1
-
+--Apple-Mail=_EDF963FB-E932-40C6-9523-A0776552DA19--
