@@ -1,35 +1,36 @@
-Return-Path: <naresh.bhat@linaro.org>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FF9873236
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 May 2015 09:17:08 +0000 (UTC)
-Received: by pacrp13 with SMTP id rp13so4687925pac.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 May 2015 02:17:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6KZ/15pTBu3giV3LlSlqexr6GDNg119ZR8gzPR9BuT8=;
-	b=ZkayeHcLC3lQlZhSaN4fhxKlRB8Rygy/EdUAYEtv78Z1h9bqS/GAk14/m1Mdgx1LY7
-	8ViLZLPwRF+OSbQXVcSFUMv/NlsJuzwH7ByF+ItHO+1FzVDce5qOHN0rHvRRu6IFVh7l
-	P8tiv0U6XjUHt2HtEBnl5SCk2mNViGma8KWd+BtSdhWlEgqvlzEXLKmItAgLYV+yMCNW
-	dWf4yqWIfR//+UClVFt9JMegnGmGEtIOxhZZU5GGay73gw27s8iT8Tb/eL84kj2aejEA
-	FKy5EV5dQbjEBNh+bWrMaLKNlXkD00SmogWwT0vOnk2WCqauIZGslKajXQG3cNoH1u6H
-	YHdw==
-X-Gm-Message-State: ALoCoQk5OqxIMGmfBnRhufdI0fe4ZD9Me2w3HJ14/oGAhoM90f+GlOSgQbt121/d/Kep+nPxPZe4
-X-Received: by 10.70.42.13 with SMTP id j13mr13446621pdl.90.1432891029288;
-	Fri, 29 May 2015 02:17:09 -0700 (PDT)
-Received: from Latitude-E6430.caveonetworks.com ([111.93.218.67])
-	by mx.google.com with ESMTPSA id fd9sm4924474pab.16.2015.05.29.02.17.07
-	(version=TLSv1.1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Fri, 29 May 2015 02:17:08 -0700 (PDT)
-From: Naresh Bhat <naresh.bhat@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 May 2015 14:46:57 +0530
-Message-Id: <1432891017-8483-1-git-send-email-naresh.bhat@linaro.org>
-X-Mailer: git-send-email 1.7.9.5
-Subject: [meta-filesystems][PATCH] xorriso: Add xorriso v1.4.0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id C71EE7574D;
+	Fri, 29 May 2015 09:18:08 +0000 (UTC)
+Received: by wgme6 with SMTP id e6so57221280wgm.2;
+	Fri, 29 May 2015 02:18:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=fRDSQqDXz3KpDQbVuihnJ4YHt0QcqlNbt8kMxaXOA0I=;
+	b=OMLy4OJlq9SgsdudJ+FhwJC8XROhYwy6wPLpftldHrdU3/0RgrPR643OjR0COXv6tY
+	aNBV7h0GGKkW5BcMVq16oB26Osl+B61T2KDdAQNlrLEr2FGj75r7Dn4LVCdYjrvwEG0e
+	Qzc7RQNmtMpO/liaFxEhDRcqBaPb/UwwELoMHQjNw7XIutkvInldXvMmgsgW2WcNJ8EN
+	DIsro+yu/ElhI47062vlA6hr2abeycB2sqzBGdjZmVNgWgVUL9sI3KSLkOTtI4OuXbZR
+	1E46Z0Xo8CIeTGIkxAz7bhAZMhnhlc0SGxc91KO8Lzk25gTv2gOopHORyTQ/lDQm5XE+
+	cb6Q==
+MIME-Version: 1.0
+X-Received: by 10.194.90.100 with SMTP id bv4mr12988617wjb.143.1432891088548; 
+	Fri, 29 May 2015 02:18:08 -0700 (PDT)
+Received: by 10.28.167.73 with HTTP; Fri, 29 May 2015 02:18:08 -0700 (PDT)
+In-Reply-To: <CAK8F28mc2C=r4n42xFmNaxNveectuB8esrkt4M2BkSknH-mFxw@mail.gmail.com>
+References: <20150427105100.GB2379@jama>
+	<1432309170-5575-1-git-send-email-ashcharles@gmail.com>
+	<5567C5B1.7010901@windriver.com>
+	<CAK8F28mc2C=r4n42xFmNaxNveectuB8esrkt4M2BkSknH-mFxw@mail.gmail.com>
+Date: Fri, 29 May 2015 11:18:08 +0200
+Message-ID: <CA+chaQe_T9zPjckAm+NZrZpdw5BO81eL-vxrAA-2kYymMRbd1w@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Ash Charles <ashcharles@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: bitbake-devel <bitbake-devel@lists.openembedded.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [bitbake-devel] [PATCH] fetch/hg: Disable checksums for archived downloads
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,60 +44,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 May 2015 09:17:08 -0000
+X-List-Received-Date: Fri, 29 May 2015 09:18:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Add xorriso v1.4.0 based on the discussions
-http://patchwork.openembedded.org/patch/91143/
-http://lists.openembedded.org/pipermail/openembedded-devel/2015-April/100981.html
+FWIW: I see vim unpack failing now in world builds:
 
-Signed-off-by: Naresh Bhat <naresh.bhat@linaro.org>
-Signed-off-by: Gaurang Shastri <gshastri@juniper.net>
----
- .../recipes-utils/xorriso/xorriso_1.4.0.bb         |   34 ++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
+NOTE: recipe vim-7.4.481-r0: task do_unpack: Started
+ERROR: Function failed: Fetcher failure: Fetch command failed with
+exit code 255, output:
+abort: repository
+/home/jenkins/oe/world/shr-core/downloads/hg/vim.googlecode.com/hg/vim
+not found!
 
-diff --git a/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb b/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
-new file mode 100644
-index 0000000..1ae325b
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
-@@ -0,0 +1,34 @@
-+DESCRIPTIONS = "xorriso copies file objects from POSIX compliant filesystems into Rock Ridge enhanced ISO 9660 filesystems and allows session-wise manipulation of such filesystems"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+# with, without, depends, rdepends
-+#
-+PACKAGECONFIG ??= "acl attr zlib bzip2 readline"
-+PACKAGECONFIG[acl] = "--enable-libacl,--disable-libacl,acl,"
-+PACKAGECONFIG[attr] = "--enable-xattr,--disable-xattr,attr,"
-+PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib,"
-+PACKAGECONFIG[bzip2] = "--enable-libbz2,--disable-libbz2,bzip2,"
-+PACKAGECONFIG[readline] = "--enable-libreadline,--disable-libreadline,readline,"
-+
-+RDEPENDS_${PN} = "tk"
-+
-+inherit autotools
-+
-+SRC_URI = "http://www.gnu.org/software/${BPN}/${BPN}-${PV}.tar.gz"
-+
-+do_configure () {
-+    touch NEWS
-+    libtoolize --force
-+    aclocal
-+    autoheader
-+    automake --force-missing --add-missing
-+    autoconf
-+    oe_runconf
-+}
-+
-+BBCLASSEXTEND = "native"
-+
-+SRC_URI[md5sum] = "ec79fd2736b8da76e7a870e27cadf6fa"
-+SRC_URI[sha256sum] = "0bd1e085015b28c24f57697d6def2fe84517967dc417554c0c3ccf1685ed0e56"
--- 
-1.7.9.5
+ERROR: Logfile of failure stored in:
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vim=
+/7.4.481-r0/temp/log.do_unpack.28505
+Log data follows:
+| DEBUG: Executing python function do_unpack
+| DEBUG: Executing python function base_do_unpack
+| DEBUG: Unpack: creating new hg repository in
+'/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vi=
+m/7.4.481-r0/vim'
+| DEBUG: Running export
+PATH=3D"/home/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jen=
+kins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/arm-oe-linux=
+-gnueabi:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/bin=
+/crossscripts:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-lin=
+ux/usr/sbin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux=
+/usr/bin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/sb=
+in:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/bin:/hom=
+e/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jenkins/oe/worl=
+d/shr-core/bitbake/bin:/home/jenkins/bin:/usr/local/sbin:/usr/local/bin:/us=
+r/sbin:/usr/bin:/sbin:/bin:/usr/games";
+export HOME=3D"/home/jenkins"; /usr/bin/env hg init
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vim=
+/7.4.481-r0/vim
+| DEBUG: Unpack: updating source in
+'/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vi=
+m/7.4.481-r0/vim'
+| DEBUG: Running export
+PATH=3D"/home/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jen=
+kins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/arm-oe-linux=
+-gnueabi:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/bin=
+/crossscripts:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-lin=
+ux/usr/sbin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux=
+/usr/bin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/sb=
+in:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/bin:/hom=
+e/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jenkins/oe/worl=
+d/shr-core/bitbake/bin:/home/jenkins/bin:/usr/local/sbin:/usr/local/bin:/us=
+r/sbin:/usr/bin:/sbin:/bin:/usr/games";
+export HOME=3D"/home/jenkins"; /usr/bin/env hg pull
+/home/jenkins/oe/world/shr-core/downloads/hg/vim.googlecode.com/hg/vim
+| DEBUG: Python function base_do_unpack finished
+| DEBUG: Python function do_unpack finished
+| ERROR: Function failed: Fetcher failure: Fetch command failed with
+exit code 255, output:
+| abort: repository
+/home/jenkins/oe/world/shr-core/downloads/hg/vim.googlecode.com/hg/vim
+not found!
+|
+NOTE: recipe vim-7.4.481-r0: task do_unpack: Failed
+ERROR: Task 5789
+(/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-support/=
+vim/vim_7.4.481.bb,
+do_unpack) failed with exit code '1'
 
+
+
+On Fri, May 29, 2015 at 7:46 AM, Ash Charles <ashcharles@gmail.com> wrote:
+
+> > I wonder how did you test the patch, please ? Did you revert the patch:
+> >  fetch/hg: support submodules ?
+> Hi Robert,
+> I tested the patch in a Yocto environment which had a prepopulated
+> downloads directory. In particular, I had seen the failure described [1]
+> for vim.
+> My version of bitbake was slightly older so the submodule patch that was
+> breaking the mirroring hadn't yet been applied.
+>
+> [1]
+> https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/ms=
+g41328.html
+>
+> --Ash
+>
+> --
+> _______________________________________________
+> bitbake-devel mailing list
+> bitbake-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/bitbake-devel
+>
+>
 
