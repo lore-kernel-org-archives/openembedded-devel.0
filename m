@@ -1,36 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f47.google.com (mail-wg0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id C71EE7574D;
-	Fri, 29 May 2015 09:18:08 +0000 (UTC)
-Received: by wgme6 with SMTP id e6so57221280wgm.2;
-	Fri, 29 May 2015 02:18:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=fRDSQqDXz3KpDQbVuihnJ4YHt0QcqlNbt8kMxaXOA0I=;
-	b=OMLy4OJlq9SgsdudJ+FhwJC8XROhYwy6wPLpftldHrdU3/0RgrPR643OjR0COXv6tY
-	aNBV7h0GGKkW5BcMVq16oB26Osl+B61T2KDdAQNlrLEr2FGj75r7Dn4LVCdYjrvwEG0e
-	Qzc7RQNmtMpO/liaFxEhDRcqBaPb/UwwELoMHQjNw7XIutkvInldXvMmgsgW2WcNJ8EN
-	DIsro+yu/ElhI47062vlA6hr2abeycB2sqzBGdjZmVNgWgVUL9sI3KSLkOTtI4OuXbZR
-	1E46Z0Xo8CIeTGIkxAz7bhAZMhnhlc0SGxc91KO8Lzk25gTv2gOopHORyTQ/lDQm5XE+
-	cb6Q==
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 104D2607BB
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 May 2015 11:32:19 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 2DBFB5C0FDF;
+	Fri, 29 May 2015 13:30:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=agner.ch; s=dkim;
+	t=1432899015; bh=4hXy7I5+h7n/Fl4/X/dY5P00RFfBnjWTkQYVyVwQRRk=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=YTJK0DaodDlcBKqcQPltQHWLmKV7vwNagiEEgRuLndzVKC1RjRg5S0uqrvxGjoeji
+	4lBiWvRIM8BmCQltcVW+nQXZdSSjnNyCgaFiA3LQOHZh1uSCQ5S88kBz19dkD/sB80
+	WwgfjwhUzxkjOM6qH9w3Pt6MSztoUVtidQleoG0k=
 MIME-Version: 1.0
-X-Received: by 10.194.90.100 with SMTP id bv4mr12988617wjb.143.1432891088548; 
-	Fri, 29 May 2015 02:18:08 -0700 (PDT)
-Received: by 10.28.167.73 with HTTP; Fri, 29 May 2015 02:18:08 -0700 (PDT)
-In-Reply-To: <CAK8F28mc2C=r4n42xFmNaxNveectuB8esrkt4M2BkSknH-mFxw@mail.gmail.com>
-References: <20150427105100.GB2379@jama>
-	<1432309170-5575-1-git-send-email-ashcharles@gmail.com>
-	<5567C5B1.7010901@windriver.com>
-	<CAK8F28mc2C=r4n42xFmNaxNveectuB8esrkt4M2BkSknH-mFxw@mail.gmail.com>
-Date: Fri, 29 May 2015 11:18:08 +0200
-Message-ID: <CA+chaQe_T9zPjckAm+NZrZpdw5BO81eL-vxrAA-2kYymMRbd1w@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Ash Charles <ashcharles@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: bitbake-devel <bitbake-devel@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [bitbake-devel] [PATCH] fetch/hg: Disable checksums for archived downloads
+Date: Fri, 29 May 2015 13:30:24 +0200
+From: Stefan Agner <stefan@agner.ch>
+To: akuster808@gmail.com, martin.jansa@gmail.com
+In-Reply-To: <1432104728-18440-1-git-send-email-stefan@agner.ch>
+References: <1432104728-18440-1-git-send-email-stefan@agner.ch>
+Message-ID: <ffcf3d20cec25b5bf79f0a18976e4939@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][dizzy][PATCH] ptpd: disable libpcap detection via pcap-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,96 +36,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 May 2015 09:18:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 29 May 2015 11:32:23 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-FWIW: I see vim unpack failing now in world builds:
+Ping...
 
-NOTE: recipe vim-7.4.481-r0: task do_unpack: Started
-ERROR: Function failed: Fetcher failure: Fetch command failed with
-exit code 255, output:
-abort: repository
-/home/jenkins/oe/world/shr-core/downloads/hg/vim.googlecode.com/hg/vim
-not found!
+--
+Stefan
 
-ERROR: Logfile of failure stored in:
-/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vim=
-/7.4.481-r0/temp/log.do_unpack.28505
-Log data follows:
-| DEBUG: Executing python function do_unpack
-| DEBUG: Executing python function base_do_unpack
-| DEBUG: Unpack: creating new hg repository in
-'/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vi=
-m/7.4.481-r0/vim'
-| DEBUG: Running export
-PATH=3D"/home/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jen=
-kins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/arm-oe-linux=
--gnueabi:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/bin=
-/crossscripts:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-lin=
-ux/usr/sbin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux=
-/usr/bin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/sb=
-in:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/bin:/hom=
-e/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jenkins/oe/worl=
-d/shr-core/bitbake/bin:/home/jenkins/bin:/usr/local/sbin:/usr/local/bin:/us=
-r/sbin:/usr/bin:/sbin:/bin:/usr/games";
-export HOME=3D"/home/jenkins"; /usr/bin/env hg init
-/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vim=
-/7.4.481-r0/vim
-| DEBUG: Unpack: updating source in
-'/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/vi=
-m/7.4.481-r0/vim'
-| DEBUG: Running export
-PATH=3D"/home/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jen=
-kins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin/arm-oe-linux=
--gnueabi:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/bin=
-/crossscripts:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-lin=
-ux/usr/sbin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux=
-/usr/bin:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/sb=
-in:/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/bin:/hom=
-e/jenkins/oe/world/shr-core/openembedded-core/scripts:/home/jenkins/oe/worl=
-d/shr-core/bitbake/bin:/home/jenkins/bin:/usr/local/sbin:/usr/local/bin:/us=
-r/sbin:/usr/bin:/sbin:/bin:/usr/games";
-export HOME=3D"/home/jenkins"; /usr/bin/env hg pull
-/home/jenkins/oe/world/shr-core/downloads/hg/vim.googlecode.com/hg/vim
-| DEBUG: Python function base_do_unpack finished
-| DEBUG: Python function do_unpack finished
-| ERROR: Function failed: Fetcher failure: Fetch command failed with
-exit code 255, output:
-| abort: repository
-/home/jenkins/oe/world/shr-core/downloads/hg/vim.googlecode.com/hg/vim
-not found!
-|
-NOTE: recipe vim-7.4.481-r0: task do_unpack: Failed
-ERROR: Task 5789
-(/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-support/=
-vim/vim_7.4.481.bb,
-do_unpack) failed with exit code '1'
+On 2015-05-20 08:52, Stefan Agner wrote:
+> When the host system provides pcap-config, the configure scripts
+> detect that and add a bogous CPPFLAG:
+> 
+> checking for pcap-config... /usr/bin/pcap-config
+> checking if we want to build with libpcap support... yes, pcap-config
+> ...
+> PCAP_CPPFLAGS =  -I/usr/include
+> 
+> Which down the line can lead to compile errors due to wrong headers
+> being included. Fix this issue by using --with-pcap-config=no which
+> prevents detection using pcap-config but does "guessing", which works
+> fine for OE.
+> 
+> Signed-off-by: Stefan Agner <stefan@agner.ch>
+> ---
+> If the host has libpcap development packages installed (which provide
+> pcap-config), this lead to compile errors like:
+> cc1: warning: include location "/usr/include" is unsafe for cross-compilation
+> [-Wpoison-system-directories]
+> cc1: warning: include location "/usr/include" is unsafe for cross-compilation
+> [-Wpoison-system-directories]
+> cc1: warning: include location "/usr/include" is unsafe for cross-compilation
+> [-Wpoison-system-directories]
+> In file included from /usr/include/bits/byteswap.h:35:0,
+>                  from /usr/include/endian.h:60,
+>                  from /usr/include/bits/waitstatus.h:64,
+>                  from /usr/include/stdlib.h:42,
+>                  from
+> /home/cceylan01/mywork/pdu/toradex/oe-core/build/out-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/ptpd/2.3.1-rc2-r0/ptpd-2.3.1-rc2/src/ptpd.h:40,
+>                  from
+> /home/cceylan01/mywork/pdu/toradex/oe-core/build/out-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/ptpd/2.3.1-rc2-r0/ptpd-2.3.1-rc2/src/bmc.c:54:
+> /home/cceylan01/mywork/pdu/toradex/oe-core/build/out-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/ptpd/2.3.1-rc2-r0/ptpd-2.3.1-rc2/src/bmc.c:
+> In function 'initData':
+> /usr/include/bits/byteswap-16.h:31:5: error: invalid 'asm': invalid operand for
+> code 'w'
+>      __asm__ ("rorw $8, %w0"           \
+>      ^
+> /usr/include/netinet/in.h:403:21: note: in expansion of macro '__bswap_16'
+>  #   define htons(x) __bswap_16 (x)
+> 
+> This problem is already solved in fido/master due to the change to
+> pkgconfig by Joe MacDonald...
+> 
+>  meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
+> b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
+> index db74e44..b6abfee 100644
+> --- a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
+> +++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1-rc2.bb
+> @@ -8,7 +8,7 @@ SECTION = "network"
+>  LICENSE = "BSD"
+>  LIC_FILES_CHKSUM = "file://README;md5=2452033fe374283f29579898663b1aa8"
+>  
+> -DEPENDS = "libpcap"
+> +DEPENDS = "linux-libc-headers libpcap"
+>  
+>  inherit autotools
+>  
+> @@ -30,7 +30,7 @@ S = "${WORKDIR}/ptpd-${PV}"
+>  
+>  EXTRA_OEMAKE = ""
+>  
+> -EXTRA_OECONF += "--disable-snmp"
+> +EXTRA_OECONF += "--disable-snmp --with-pcap-config=no"
+>  
+>  do_install() {
+>      install -d ${D}${bindir} ${D}${mandir}/man8
 
-
-
-On Fri, May 29, 2015 at 7:46 AM, Ash Charles <ashcharles@gmail.com> wrote:
-
-> > I wonder how did you test the patch, please ? Did you revert the patch:
-> >  fetch/hg: support submodules ?
-> Hi Robert,
-> I tested the patch in a Yocto environment which had a prepopulated
-> downloads directory. In particular, I had seen the failure described [1]
-> for vim.
-> My version of bitbake was slightly older so the submodule patch that was
-> breaking the mirroring hadn't yet been applied.
->
-> [1]
-> https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/ms=
-g41328.html
->
-> --Ash
->
-> --
-> _______________________________________________
-> bitbake-devel mailing list
-> bitbake-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/bitbake-devel
->
->
 
