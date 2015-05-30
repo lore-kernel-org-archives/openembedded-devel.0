@@ -1,38 +1,34 @@
-Return-Path: <naresh.bhat@linaro.org>
-Received: from mail-yk0-f170.google.com (mail-yk0-f170.google.com
-	[209.85.160.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 64C4975768
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
+	[209.85.223.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 13F797566C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 May 2015 20:37:50 +0000 (UTC)
-Received: by ykfr66 with SMTP id r66so25750688ykf.0
+	Sat, 30 May 2015 04:33:13 +0000 (UTC)
+Received: by iesa3 with SMTP id a3so76968967ies.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 May 2015 13:37:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=5Eq8fdGy8bmYgzsVtG+UU9Vvan/pcLs7KgHHK4u18Gc=;
-	b=nIEUyioV98WY3l0yr8/gP/2eV466V3z3JHxWYjw1T3RKqzNhr2rokQpvs0RLXhB9uh
-	3/aL0PHrYMdzmUAunl47VjayqP+UxBAHl/RO5i9FRhi4FEP6nuEn+peWd7TDciw5hXq5
-	/QdSQh0hBimcRaWr8QlunZ20X++XaF5hzmYkk1nUqxm44f21VJGp5VbK52c5p7CFaRMT
-	1qrSXVPZbadlI0kt1l1+n/p+OYSEDNhF6QVQtkPvwXMOHy+E39imMXGxXREluEPJdnOd
-	u645RTEaUdCB1rqA7Qbm8m+bp4HcTwme4HbyUWlMA3leMyrX3lqj/vRx5b28uWAQyfYS
-	VwVg==
-X-Gm-Message-State: ALoCoQmlxPmoyx62yay6LzksCXWQkB3FtKx0s8kIpm/E6/LUfPay5Pr08JqEdTFMUL8EsjL+m0FO
-MIME-Version: 1.0
-X-Received: by 10.170.202.66 with SMTP id t63mr11654184yke.75.1432931871034;
-	Fri, 29 May 2015 13:37:51 -0700 (PDT)
-Received: by 10.129.56.6 with HTTP; Fri, 29 May 2015 13:37:51 -0700 (PDT)
-In-Reply-To: <CAMKF1spr+JyN-wngYn9JgxvGtNny+EL_QrZe2EF2DLkFFEFG=w@mail.gmail.com>
-References: <1432891017-8483-1-git-send-email-naresh.bhat@linaro.org>
-	<CAMKF1spr+JyN-wngYn9JgxvGtNny+EL_QrZe2EF2DLkFFEFG=w@mail.gmail.com>
-Date: Sat, 30 May 2015 02:07:51 +0530
-Message-ID: <CAFoFrHY-GheypE_xv9jw4L9J+ge2GS0dSUn9Nbpu_5g8fQDr9A@mail.gmail.com>
-From: Naresh Bhat <naresh.bhat@linaro.org>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-filesystems][PATCH] xorriso: Add xorriso v1.4.0
+	Fri, 29 May 2015 21:33:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=qTCMap69GgIHwiSlvjDGKWkPplJ1QxfrnLTdxJFwL1g=;
+	b=JnKWKM7pMpaAURn2pnx3jU5sDG9yNj3iX8t4uKRHS+SK32sXybWPZWMR1N26OtBWmx
+	TabH5OU4i4LmWKQrfpI7mQT7HMsXjgms5Jgro9vTfipJL1PgjmZZd6sr22SXpzw9QUmE
+	dupL6JPehfp0/+9uO+OMEepFDxUCguRWgHjae0/Fr9MSfuokANOF4T+hsLi/TPm7FwCR
+	3JAVncr8XfBRHt2P4Ceo1+SfPFuz9gR+7qHkWxa7Ah/Nz72K/CTqilgo0VvFG+yQ8GyK
+	tSAC+Ab+y9YKfX93fjeqfuh0IUm9/cLVqBWqRo09pK44TDZv6837KuWtp/TdWwOoFiqm
+	60cg==
+X-Received: by 10.43.5.74 with SMTP id of10mr18574470icb.67.1432960395155;
+	Fri, 29 May 2015 21:33:15 -0700 (PDT)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by mx.google.com with ESMTPSA id ot6sm3034533igb.11.2015.05.29.21.33.13
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 29 May 2015 21:33:14 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 29 May 2015 21:33:03 -0700
+Message-Id: <1432960383-16116-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-qt5][PATCH] qtwebkit-examples: fix missing qtxmlpatterns dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,37 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 May 2015 20:37:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 30 May 2015 04:33:18 -0000
 
-Hi Khem Raj
+The webkitwidgets/xmlpatterns examples depend on qtxmlpatterns.
 
-On Saturday, May 30, 2015, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ recipes-qt/qt5/qtwebkit-examples_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On Fri, May 29, 2015 at 2:16 AM, Naresh Bhat <naresh.bhat@linaro.org
-> <javascript:;>> wrote:
-> > +do_configure () {
-> > +    touch NEWS
-> > +    libtoolize --force
-> > +    aclocal
-> > +    autoheader
-> > +    automake --force-missing --add-missing
-> > +    autoconf
-> > +    oe_runconf
-> > +}
-> > +
->
-> couldnt this be done via some do_confgure_prepend () ?
-> --
-
-It should be possible. I will try it.
-Thanks
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org <javascript:;>
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-
-
+diff --git a/recipes-qt/qt5/qtwebkit-examples_git.bb b/recipes-qt/qt5/qtwebkit-examples_git.bb
+index 7ae9fc7..9ee659f 100644
+--- a/recipes-qt/qt5/qtwebkit-examples_git.bb
++++ b/recipes-qt/qt5/qtwebkit-examples_git.bb
+@@ -16,7 +16,7 @@ SRC_URI += " \
+     file://0001-qtwebkit-examples-enable-building-examples-by-defaul.patch \
+ "
+ 
+-DEPENDS += "qtwebkit"
++DEPENDS += "qtwebkit qtxmlpatterns"
+ RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
+ RDEPENDS_${PN}-examples += "${@base_contains('PACKAGECONFIG_OPENSSL', 'openssl', 'ca-certificates', '', d)}"
+ 
 -- 
+1.9.1
+
+
