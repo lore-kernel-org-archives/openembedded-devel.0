@@ -1,34 +1,28 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ie0-f176.google.com (mail-ie0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 13F797566C
+Return-Path: <gyurco@freemail.hu>
+X-Greylist: delayed 1039 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 30 May 2015 13:02:25 UTC
+Received: from smarthost05.digicable.hu (smarthost05.digicable.hu
+	[94.21.128.15])
+	by mail.openembedded.org (Postfix) with ESMTP id 267C46AC36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2015 04:33:13 +0000 (UTC)
-Received: by iesa3 with SMTP id a3so76968967ies.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 May 2015 21:33:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=qTCMap69GgIHwiSlvjDGKWkPplJ1QxfrnLTdxJFwL1g=;
-	b=JnKWKM7pMpaAURn2pnx3jU5sDG9yNj3iX8t4uKRHS+SK32sXybWPZWMR1N26OtBWmx
-	TabH5OU4i4LmWKQrfpI7mQT7HMsXjgms5Jgro9vTfipJL1PgjmZZd6sr22SXpzw9QUmE
-	dupL6JPehfp0/+9uO+OMEepFDxUCguRWgHjae0/Fr9MSfuokANOF4T+hsLi/TPm7FwCR
-	3JAVncr8XfBRHt2P4Ceo1+SfPFuz9gR+7qHkWxa7Ah/Nz72K/CTqilgo0VvFG+yQ8GyK
-	tSAC+Ab+y9YKfX93fjeqfuh0IUm9/cLVqBWqRo09pK44TDZv6837KuWtp/TdWwOoFiqm
-	60cg==
-X-Received: by 10.43.5.74 with SMTP id of10mr18574470icb.67.1432960395155;
-	Fri, 29 May 2015 21:33:15 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id ot6sm3034533igb.11.2015.05.29.21.33.13
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 May 2015 21:33:14 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
+	Sat, 30 May 2015 13:02:25 +0000 (UTC)
+Received: from [92.249.128.188] (helo=relay02.digicable.hu)
+	by smarthost05.digicable.hu with esmtp
+	id 1Yyg8O-0003jO-Qq for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 May 2015 14:45:04 +0200
+Received: from [78.131.10.118] (helo=gyurco.localdomain)
+	by relay02.digicable.hu with esmtpa
+	id 1Yyg8O-0002CK-NP for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 May 2015 14:45:04 +0200
+From: Szombathelyi =?ISO-8859-1?Q?Gy=F6rgy?= <gyurco@freemail.hu>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 May 2015 21:33:03 -0700
-Message-Id: <1432960383-16116-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-qt5][PATCH] qtwebkit-examples: fix missing qtxmlpatterns dependency
+Date: Sat, 30 May 2015 14:45:04 +0200
+Message-ID: <1808222.ViaJgov4XC@gyurco.localdomain>
+User-Agent: KMail/4.14.7 (Linux/4.0.2-300.fc22.x86_64; KDE/4.14.7; x86_64; ; )
+MIME-Version: 1.0
+X-Original: 78.131.10.118
+X-Original: 92.249.128.188
+Subject: [meta-networking]Fix postfix-native on Linux 4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,29 +36,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2015 04:33:18 -0000
+X-List-Received-Date: Sat, 30 May 2015 13:02:28 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-The webkitwidgets/xmlpatterns examples depend on qtxmlpatterns.
+    
+    Make postfix compilable on 4.0 kernel.
+    
+    Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+diff --git a/meta-networking/recipes-daemons/postfix/files/makedefs.patch 
+b/meta-networking/recipes-daemons/postfix/files/makedefs.patch
+index 32c31b0..ea1e994 100644
+--- a/meta-networking/recipes-daemons/postfix/files/makedefs.patch
++++ b/meta-networking/recipes-daemons/postfix/files/makedefs.patch
+@@ -10,14 +10,11 @@ for Linux2 and Linux3 systems.
+ Upstreamstatus: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+----
+- makedefs |   27 +++++++++++----------------
+- 1 files changed, 11 insertions(+), 16 deletions(-)
+ 
+-diff --git a/makedefs b/makedefs
+-index dd5f256..e6fb795 100644
+---- a/makedefs
+-+++ b/makedefs
++5)add Linux 4.0 support
++
++--- a/makedefs	2015-05-30 13:38:50.346033228 +0200
+++++ b/makedefs	2015-05-30 13:40:19.375364795 +0200
+ @@ -87,9 +87,6 @@
+ 
+  # Defaults for most sane systems
+@@ -68,7 +65,7 @@ index dd5f256..e6fb795 100644
+  		       then
+  			   echo CCARGS="$CCARGS -DNO_EPOLL"
+  		       else
+-@@ -356,8 +353,6 @@ int     main(int argc, char **argv)
++@@ -356,22 +353,20 @@
+  }
+  EOF
+  			   ${CC-gcc} -o makedefs.test makedefs.test.c || exit 1
+@@ -77,7 +74,9 @@ index dd5f256..e6fb795 100644
+  			   rm -f makedefs.test makedefs.test.[co]
+  		       fi;;
+  		esac
+-@@ -366,12 +361,12 @@ EOF
++ 		;;
++-    Linux.3*)	SYSTYPE=LINUX3
+++    Linux.3*|Linux.4*)	SYSTYPE=LINUX3
+  		case "$CCARGS" in
+  		 *-DNO_DB*) ;;
+  		 *-DHAS_DB*) ;;
+@@ -111,6 +110,3 @@ index dd5f256..e6fb795 100644
+  		    do
+  			test -e $lib/lib$name.a -o -e $lib/lib$name.so && {
+  			    SYSLIBS="$SYSLIBS -l$name"
 ---
- recipes-qt/qt5/qtwebkit-examples_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-qt/qt5/qtwebkit-examples_git.bb b/recipes-qt/qt5/qtwebkit-examples_git.bb
-index 7ae9fc7..9ee659f 100644
---- a/recipes-qt/qt5/qtwebkit-examples_git.bb
-+++ b/recipes-qt/qt5/qtwebkit-examples_git.bb
-@@ -16,7 +16,7 @@ SRC_URI += " \
-     file://0001-qtwebkit-examples-enable-building-examples-by-defaul.patch \
- "
- 
--DEPENDS += "qtwebkit"
-+DEPENDS += "qtwebkit qtxmlpatterns"
- RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
- RDEPENDS_${PN}-examples += "${@base_contains('PACKAGECONFIG_OPENSSL', 'openssl', 'ca-certificates', '', d)}"
- 
--- 
-1.9.1
-
+-1.7.1
+-
 
