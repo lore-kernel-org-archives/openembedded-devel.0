@@ -1,28 +1,33 @@
-Return-Path: <gyurco@freemail.hu>
-X-Greylist: delayed 1039 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 30 May 2015 13:02:25 UTC
-Received: from smarthost05.digicable.hu (smarthost05.digicable.hu
-	[94.21.128.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 267C46AC36
+Return-Path: <kergoth@gmail.com>
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id BD632756C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2015 13:02:25 +0000 (UTC)
-Received: from [92.249.128.188] (helo=relay02.digicable.hu)
-	by smarthost05.digicable.hu with esmtp
-	id 1Yyg8O-0003jO-Qq for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2015 14:45:04 +0200
-Received: from [78.131.10.118] (helo=gyurco.localdomain)
-	by relay02.digicable.hu with esmtpa
-	id 1Yyg8O-0002CK-NP for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 May 2015 14:45:04 +0200
-From: Szombathelyi =?ISO-8859-1?Q?Gy=F6rgy?= <gyurco@freemail.hu>
+	Sun, 31 May 2015 00:32:36 +0000 (UTC)
+Received: by wgv5 with SMTP id 5so88352513wgv.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 May 2015 17:32:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=Y+Itw0/OrmOcfkyJ2rg4g9OGRd3yE+UbMqBIbxwn5AI=;
+	b=YXJhy9UD3ewGrbF6wp7LPGDLS96DGU05HhlZnyt8ewC56YSJVpP69MHgHcvs5iIuU0
+	FgC9YmzQejJswDWrOP1J+Zlg9m4qHAczjVzFZT20HnLTNfVmOolLvpXFV3NIT/LSVUlt
+	om7dVpcjch9XInOPaOMtCfFd7QTqX0iHoEA3Mi3BQc4YTWcs+vZo79sAjTiO/LmTXfZn
+	d1gDotU/BQsxej72bG2CndSy/JOpzVnRi1xJrkaDBKyzoEckxKxcZ6pBNLlsdNFkqOtp
+	Rd/bKNkzAxzAsijeg/s5XrnxJtAgenyyT7d0E+0v579s2rDT5MbMxeBj5X+3erhq+2l0
+	IK2w==
+X-Received: by 10.194.172.72 with SMTP id ba8mr28164902wjc.136.1433032356626; 
+	Sat, 30 May 2015 17:32:36 -0700 (PDT)
+Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by mx.google.com with ESMTPSA id u6sm14863313wja.40.2015.05.30.17.32.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 30 May 2015 17:32:35 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 May 2015 14:45:04 +0200
-Message-ID: <1808222.ViaJgov4XC@gyurco.localdomain>
-User-Agent: KMail/4.14.7 (Linux/4.0.2-300.fc22.x86_64; KDE/4.14.7; x86_64; ; )
-MIME-Version: 1.0
-X-Original: 78.131.10.118
-X-Original: 92.249.128.188
-Subject: [meta-networking]Fix postfix-native on Linux 4.0
+Date: Sat, 30 May 2015 17:31:59 -0700
+Message-Id: <1433032319-13061-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 2.2.1
+Subject: [PATCH] ntimed: add recipe to meta-networking (git version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,64 +41,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 May 2015 13:02:28 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sun, 31 May 2015 00:32:39 -0000
 
-    
-    Make postfix compilable on 4.0 kernel.
-    
-    Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
+Ntimed is an unreleased ntpd replacement being sponsored by the Linux
+Foundation. Currently it only includes a work-in-progress client, but for
+future use this recipe emits an ntimed-client package and an ntimed meta
+package which will pull in client and server.
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/makedefs.patch 
-b/meta-networking/recipes-daemons/postfix/files/makedefs.patch
-index 32c31b0..ea1e994 100644
---- a/meta-networking/recipes-daemons/postfix/files/makedefs.patch
-+++ b/meta-networking/recipes-daemons/postfix/files/makedefs.patch
-@@ -10,14 +10,11 @@ for Linux2 and Linux3 systems.
- Upstreamstatus: Inappropriate [embedded specific]
- 
- Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-----
-- makedefs |   27 +++++++++++----------------
-- 1 files changed, 11 insertions(+), 16 deletions(-)
- 
--diff --git a/makedefs b/makedefs
--index dd5f256..e6fb795 100644
----- a/makedefs
--+++ b/makedefs
-+5)add Linux 4.0 support
-+
-+--- a/makedefs	2015-05-30 13:38:50.346033228 +0200
-++++ b/makedefs	2015-05-30 13:40:19.375364795 +0200
- @@ -87,9 +87,6 @@
- 
-  # Defaults for most sane systems
-@@ -68,7 +65,7 @@ index dd5f256..e6fb795 100644
-  		       then
-  			   echo CCARGS="$CCARGS -DNO_EPOLL"
-  		       else
--@@ -356,8 +353,6 @@ int     main(int argc, char **argv)
-+@@ -356,22 +353,20 @@
-  }
-  EOF
-  			   ${CC-gcc} -o makedefs.test makedefs.test.c || exit 1
-@@ -77,7 +74,9 @@ index dd5f256..e6fb795 100644
-  			   rm -f makedefs.test makedefs.test.[co]
-  		       fi;;
-  		esac
--@@ -366,12 +361,12 @@ EOF
-+ 		;;
-+-    Linux.3*)	SYSTYPE=LINUX3
-++    Linux.3*|Linux.4*)	SYSTYPE=LINUX3
-  		case "$CCARGS" in
-  		 *-DNO_DB*) ;;
-  		 *-DHAS_DB*) ;;
-@@ -111,6 +110,3 @@ index dd5f256..e6fb795 100644
-  		    do
-  			test -e $lib/lib$name.a -o -e $lib/lib$name.so && {
-  			    SYSLIBS="$SYSLIBS -l$name"
+Signed-off-by: Christopher Larson <kergoth@gmail.com>
 ---
--1.7.1
--
+ .../ntimed/ntimed/use-ldflags.patch                | 16 +++++++++
+ .../recipes-support/ntimed/ntimed_git.bb           | 41 ++++++++++++++++++++++
+ 2 files changed, 57 insertions(+)
+ create mode 100644 meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch
+ create mode 100644 meta-networking/recipes-support/ntimed/ntimed_git.bb
+
+diff --git a/meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch b/meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch
+new file mode 100644
+index 0000000..87a7778
+--- /dev/null
++++ b/meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch
+@@ -0,0 +1,16 @@
++Obey LDFLAGS.
++
++Signed-off-by: Christopher Larson <kergoth@gmail.com>
++Upstream-Status: Pending
++
++--- Ntimed.orig/configure	2015-05-30 11:57:59.927796993 -0700
+++++ Ntimed/configure	2015-05-30 11:58:26.143948894 -0700
++@@ -142,7 +142,7 @@
++ 
++ 	echo
++ 	echo "ntimed-client:	${l}"
++-	echo "	\${CC} \${CFLAGS} -o ntimed-client ${l} -lm"
+++	echo "	\${CC} \${CFLAGS} -o ntimed-client ${l} \${LDFLAGS} -lm"
++ 	echo
++ 	echo "clean:"
++ 	echo "	rm -f ${l} ntimed-client"
+diff --git a/meta-networking/recipes-support/ntimed/ntimed_git.bb b/meta-networking/recipes-support/ntimed/ntimed_git.bb
+new file mode 100644
+index 0000000..0990541
+--- /dev/null
++++ b/meta-networking/recipes-support/ntimed/ntimed_git.bb
+@@ -0,0 +1,41 @@
++SUMMARY = "Network time synchronization software, NTPD replacement"
++DESCRIPTION = "This is a preview/early-access/alpha/buzzword-of-the-times \
++release of a new FOSS project written to gradually take over the world of \
++networked timekeeping."
++HOMEPAGE = "https://github.com/bsdphk/Ntimed"
++SECTION = "console/network"
++
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://main.c;startline=2;endline=24;md5=eda11d21005319bb76cbb6f911f0f66d"
++
++SRC_URI = "git://github.com/bsdphk/Ntimed \
++           file://use-ldflags.patch"
++
++PV = "0.0+git${SRCPV}"
++SRCREV = "db0abbb4c80f2ecef6bc5d9639bca5bea28532a2"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "\
++    'CC=${CC}' \
++    'CFLAGS=${CFLAGS}' \
++    'LDFLAGS=${LDFLAGS}' \
++"
++
++do_configure () {
++    sh ./configure
++}
++
++do_compile () {
++    oe_runmake
++}
++
++do_install () {
++    install -D -m 0755 ntimed-client ${D}${sbindir}/ntimed-client
++}
++
++ALLOW_EMPTY_${PN} = "1"
++RDEPENDS_${PN} += "ntimed-client"
++
++PACKAGE_BEFORE_PN += "ntimed-client"
++FILES_ntimed-client = "${sbindir}/ntimed-client"
+-- 
+2.2.1
+
 
