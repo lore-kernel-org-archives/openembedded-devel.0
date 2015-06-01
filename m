@@ -1,24 +1,34 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 97DB5734DA
+Return-Path: <aguirre.nicolas@gmail.com>
+Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
+	[209.85.212.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AFAD6AC43
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jun 2015 06:23:53 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t516Nt8A028770
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  1 Jun 2015 06:41:15 +0000 (UTC)
+Received: by wizo1 with SMTP id o1so91546127wiz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 May 2015 23:23:55 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Sun, 31 May 2015 23:23:54 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 1 Jun 2015 14:17:56 +0800
-Message-ID: <1433139476-13265-1-git-send-email-rongqing.li@windriver.com>
+	Sun, 31 May 2015 23:41:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=snZ63zNUNJSNX9gPomfdH8cA7QVSlWiHvd7glrlp3P4=;
+	b=PmleYc5ZUQ7fPmSaC1RyAA/5N9MBoNqxbIJEUeuJm5XAF/Xyl8vbxUGKoeUzGiFGTY
+	5Oy+8KIUfNWcypN2jG372vPmMoprVg3bHpd2uRWFzup7KUUvFWFvhLNw/5eX6KSiUW1y
+	24pEipqRXB48MdOW3mrUyNlDk7m6dLFooDvXH7vmZRLOb+tDWPwOuEeTpHDbrGHElbp9
+	zGWDKaFC11A4Rvc6VIRceF/AKipi3k5uPki2Yjf3CgorWepNHunAEgYC0dfB3GZUJtwT
+	HACKZVnkZlAAqStbaq8UIgyAhq1mNUdCbIeu6GSsOx1i3xmYkxacBscPR0IuJQwLRwjN
+	ZirA==
+X-Received: by 10.180.215.101 with SMTP id oh5mr18304308wic.6.1433140875310;
+	Sun, 31 May 2015 23:41:15 -0700 (PDT)
+Received: from localhost.localdomain (74.243.118.80.rev.sfr.net.
+	[80.118.243.74])
+	by mx.google.com with ESMTPSA id c3sm13388993wja.3.2015.05.31.23.41.14
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 31 May 2015 23:41:14 -0700 (PDT)
+From: Nicolas Aguirre <aguirre.nicolas@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 Jun 2015 08:41:06 +0200
+Message-Id: <1433140867-1089-1-git-send-email-aguirre.nicolas@gmail.com>
 X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [PATCH][meta-networking] znc: upgrade to 1.6.0
+Subject: [meta-oe][PATCH 1/2] mm-common: bump version to 0.9.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,119 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 06:23:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 01 Jun 2015 06:41:16 -0000
 
-From: Roy Li <rongqing.li@windriver.com>
-
-1. upgrade to 1.6.0 to fix CVE-2014-9403
-2. Remove the backup patch
-3. not git version, otherwise it requires "git submodule" command,
-since Csocket is moved into git submodule
-4. update the checksum of LICENSE, since the date in it was changed
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- ...-Fix-NULL-pointer-dereference-in-webadmin.patch | 58 ----------------------
- .../recipes-irc/znc/{znc_git.bb => znc_1.6.0.bb}   | 14 ++----
- 2 files changed, 5 insertions(+), 67 deletions(-)
- delete mode 100644 meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
- rename meta-networking/recipes-irc/znc/{znc_git.bb => znc_1.6.0.bb} (47%)
+ .../recipes-core/mm-common/{mm-common_0.9.6.bb => mm-common_0.9.7.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-core/mm-common/{mm-common_0.9.6.bb => mm-common_0.9.7.bb} (51%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch b/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
-deleted file mode 100644
-index 68e4414..0000000
---- a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--Subject: [PATCH] Fix NULL pointer dereference in webadmin.
--
--Upstream-Status: Backport
--
--commit 2bd410ee5570cea127233f1133ea22f25174eb28 upstream
--
--Triggerable by any non-admin, if webadmin is loaded.
--
--The only affected version is 1.0
--
--Thanks to ChauffeR (Simone Esposito) for reporting this.
-----
-- modules/webadmin.cpp | 8 ++++----
-- 1 file changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/modules/webadmin.cpp b/modules/webadmin.cpp
--index b793c02..816f217 100644
----- a/modules/webadmin.cpp
--+++ b/modules/webadmin.cpp
--@@ -419,7 +419,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -448,7 +448,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -472,7 +472,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -486,7 +486,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
---- 
--1.8.5.2.233.g932f7e4
--
-diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_1.6.0.bb
-similarity index 47%
-rename from meta-networking/recipes-irc/znc/znc_git.bb
-rename to meta-networking/recipes-irc/znc/znc_1.6.0.bb
-index 77db25b..ca3c606 100644
---- a/meta-networking/recipes-irc/znc/znc_git.bb
-+++ b/meta-networking/recipes-irc/znc/znc_1.6.0.bb
-@@ -1,17 +1,13 @@
- SUMMARY = "ZNC, an advanced IRC bouncer"
+diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.7.bb
+similarity index 51%
+rename from meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
+rename to meta-oe/recipes-core/mm-common/mm-common_0.9.7.bb
+index f7e2507..8a75cd2 100644
+--- a/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
++++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.7.bb
+@@ -2,8 +2,8 @@ inherit gnomebase
+ 
+ GNOME_COMPRESS_TYPE="xz"
+ 
+-SRC_URI[archive.md5sum] = "3b23749ab39441c392c016ce74632678"
+-SRC_URI[archive.sha256sum] = "7c37158a1f37604705a9b9305d3b335fb8256f5de701c8801269dde4e2ce7dde"
++SRC_URI[archive.md5sum] = "a8b7c11db81a72168bf38d88d97df686"
++SRC_URI[archive.sha256sum] = "78f47336f3bdf034a384c59a39cc9f0d566e69e36aa7c9ee3ec0bb6a94bf8b3e"
+ 
  LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--DEPENDS = "openssl"
-+DEPENDS = "openssl zlib"
- 
--PV = "1.0+git"
--
--SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
--SRC_URI = "git://github.com/znc/znc.git \
--           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
-+SRC_URI = "http://znc.in/releases/${BP}.tar.gz \
-           "
--
--S = "${WORKDIR}/git"
-+SRC_URI[md5sum]="674d8c1277752dcc627b96e33a63376e"
-+SRC_URI[sha256sum]="df622aeae34d26193c738dff6499e56ad669ec654484e19623738d84cc80aba7"
- 
- inherit autotools-brokensep pkgconfig
- 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 -- 
 1.9.1
 
