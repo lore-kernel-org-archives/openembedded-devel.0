@@ -1,34 +1,35 @@
 Return-Path: <aguirre.nicolas@gmail.com>
-Received: from mail-wi0-f173.google.com (mail-wi0-f173.google.com
-	[209.85.212.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AFAD6AC43
+Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id AEF4D7579E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jun 2015 06:41:15 +0000 (UTC)
-Received: by wizo1 with SMTP id o1so91546127wiz.1
+	Mon,  1 Jun 2015 06:41:16 +0000 (UTC)
+Received: by wgbgq6 with SMTP id gq6so105528606wgb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 May 2015 23:41:15 -0700 (PDT)
+	Sun, 31 May 2015 23:41:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=snZ63zNUNJSNX9gPomfdH8cA7QVSlWiHvd7glrlp3P4=;
-	b=PmleYc5ZUQ7fPmSaC1RyAA/5N9MBoNqxbIJEUeuJm5XAF/Xyl8vbxUGKoeUzGiFGTY
-	5Oy+8KIUfNWcypN2jG372vPmMoprVg3bHpd2uRWFzup7KUUvFWFvhLNw/5eX6KSiUW1y
-	24pEipqRXB48MdOW3mrUyNlDk7m6dLFooDvXH7vmZRLOb+tDWPwOuEeTpHDbrGHElbp9
-	zGWDKaFC11A4Rvc6VIRceF/AKipi3k5uPki2Yjf3CgorWepNHunAEgYC0dfB3GZUJtwT
-	HACKZVnkZlAAqStbaq8UIgyAhq1mNUdCbIeu6GSsOx1i3xmYkxacBscPR0IuJQwLRwjN
-	ZirA==
-X-Received: by 10.180.215.101 with SMTP id oh5mr18304308wic.6.1433140875310;
-	Sun, 31 May 2015 23:41:15 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=CDEW/xvyplz7NKHSlDoyrvWN6xLyerTcSWfvuEYBFqw=;
+	b=W974ohEhexLSRH4+BjkFFY3LuTeKfDkzS2+TCnvBO058gLglNcfPjduOzE/Ea9pDNY
+	A+f+YvMAtQYgKumSRb518MjeNiM99mmdZGNxB5aV6Qpgi2m1XpEU+nPQEZePfwQv8n3u
+	yJO9yD+Ug2Mtwn2p3pGlDwFgkPu2HrN+IaZnrbZ81ydYmY/wG+vt8NDR1hIHZxApQ75a
+	44IF9rBN2ELbGoEQzk3BLtOjii3aE9IGaY3t7qe1p2ygy1SRkm3MkUcBB9AGohgTKNqh
+	irUD+nDabd2qNrbuHPK15njjnL6je2Vh6bQ1nyaQi46VDTt/JOTnX5t3HGuV5Jh9aH3l
+	WMaQ==
+X-Received: by 10.180.88.169 with SMTP id bh9mr18298442wib.6.1433140876436;
+	Sun, 31 May 2015 23:41:16 -0700 (PDT)
 Received: from localhost.localdomain (74.243.118.80.rev.sfr.net.
 	[80.118.243.74])
-	by mx.google.com with ESMTPSA id c3sm13388993wja.3.2015.05.31.23.41.14
+	by mx.google.com with ESMTPSA id c3sm13388993wja.3.2015.05.31.23.41.15
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 31 May 2015 23:41:14 -0700 (PDT)
+	Sun, 31 May 2015 23:41:15 -0700 (PDT)
 From: Nicolas Aguirre <aguirre.nicolas@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Jun 2015 08:41:06 +0200
-Message-Id: <1433140867-1089-1-git-send-email-aguirre.nicolas@gmail.com>
+Date: Mon,  1 Jun 2015 08:41:07 +0200
+Message-Id: <1433140867-1089-2-git-send-email-aguirre.nicolas@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH 1/2] mm-common: bump version to 0.9.7
+In-Reply-To: <1433140867-1089-1-git-send-email-aguirre.nicolas@gmail.com>
+References: <1433140867-1089-1-git-send-email-aguirre.nicolas@gmail.com>
+Subject: [meta-oe][PATCH 2/2] libsic++-2.0: bump version to 2.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,28 +46,30 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Mon, 01 Jun 2015 06:41:16 -0000
 
 ---
- .../recipes-core/mm-common/{mm-common_0.9.6.bb => mm-common_0.9.7.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-core/mm-common/{mm-common_0.9.6.bb => mm-common_0.9.7.bb} (51%)
+ .../{libsigc++-2.0_2.2.11.bb => libsigc++-2.0_2.4.1.bb}             | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-core/libsigc++-2.0/{libsigc++-2.0_2.2.11.bb => libsigc++-2.0_2.4.1.bb} (67%)
 
-diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.7.bb
-similarity index 51%
-rename from meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
-rename to meta-oe/recipes-core/mm-common/mm-common_0.9.7.bb
-index f7e2507..8a75cd2 100644
---- a/meta-oe/recipes-core/mm-common/mm-common_0.9.6.bb
-+++ b/meta-oe/recipes-core/mm-common/mm-common_0.9.7.bb
-@@ -2,8 +2,8 @@ inherit gnomebase
+diff --git a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.2.11.bb b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.4.1.bb
+similarity index 67%
+rename from meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.2.11.bb
+rename to meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.4.1.bb
+index 546305f..b3e0e60 100644
+--- a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.2.11.bb
++++ b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.4.1.bb
+@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
  
- GNOME_COMPRESS_TYPE="xz"
+ DEPENDS = "mm-common"
  
--SRC_URI[archive.md5sum] = "3b23749ab39441c392c016ce74632678"
--SRC_URI[archive.sha256sum] = "7c37158a1f37604705a9b9305d3b335fb8256f5de701c8801269dde4e2ce7dde"
-+SRC_URI[archive.md5sum] = "a8b7c11db81a72168bf38d88d97df686"
-+SRC_URI[archive.sha256sum] = "78f47336f3bdf034a384c59a39cc9f0d566e69e36aa7c9ee3ec0bb6a94bf8b3e"
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.2/libsigc++-${PV}.tar.xz"
+-SRC_URI[md5sum] = "815d0c6d61601f51bbcaeef6826606b0"
+-SRC_URI[sha256sum] = "9834045f74f56752c2c6b3cdc195c30ab8314ad22dc8e626d6f67f940f1e4957"
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.4/libsigc++-${PV}.tar.xz"
++SRC_URI[md5sum] = "55945ba6e1652f89999e910f6b52047c"
++SRC_URI[sha256sum] = "540443492a68e77e30db8d425f3c0b1299c825bf974d9bfc31ae7efafedc19ec"
  
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ S = "${WORKDIR}/libsigc++-${PV}"
+ 
 -- 
 1.9.1
 
