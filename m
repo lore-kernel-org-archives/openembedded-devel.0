@@ -1,35 +1,24 @@
-Return-Path: <aguirre.nicolas@gmail.com>
-Received: from mail-wg0-f50.google.com (mail-wg0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id AEF4D7579E
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D94F734A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jun 2015 06:41:16 +0000 (UTC)
-Received: by wgbgq6 with SMTP id gq6so105528606wgb.3
+	Mon,  1 Jun 2015 06:44:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t516itJ5017655
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 May 2015 23:41:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=CDEW/xvyplz7NKHSlDoyrvWN6xLyerTcSWfvuEYBFqw=;
-	b=W974ohEhexLSRH4+BjkFFY3LuTeKfDkzS2+TCnvBO058gLglNcfPjduOzE/Ea9pDNY
-	A+f+YvMAtQYgKumSRb518MjeNiM99mmdZGNxB5aV6Qpgi2m1XpEU+nPQEZePfwQv8n3u
-	yJO9yD+Ug2Mtwn2p3pGlDwFgkPu2HrN+IaZnrbZ81ydYmY/wG+vt8NDR1hIHZxApQ75a
-	44IF9rBN2ELbGoEQzk3BLtOjii3aE9IGaY3t7qe1p2ygy1SRkm3MkUcBB9AGohgTKNqh
-	irUD+nDabd2qNrbuHPK15njjnL6je2Vh6bQ1nyaQi46VDTt/JOTnX5t3HGuV5Jh9aH3l
-	WMaQ==
-X-Received: by 10.180.88.169 with SMTP id bh9mr18298442wib.6.1433140876436;
-	Sun, 31 May 2015 23:41:16 -0700 (PDT)
-Received: from localhost.localdomain (74.243.118.80.rev.sfr.net.
-	[80.118.243.74])
-	by mx.google.com with ESMTPSA id c3sm13388993wja.3.2015.05.31.23.41.15
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 31 May 2015 23:41:15 -0700 (PDT)
-From: Nicolas Aguirre <aguirre.nicolas@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Jun 2015 08:41:07 +0200
-Message-Id: <1433140867-1089-2-git-send-email-aguirre.nicolas@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1433140867-1089-1-git-send-email-aguirre.nicolas@gmail.com>
-References: <1433140867-1089-1-git-send-email-aguirre.nicolas@gmail.com>
-Subject: [meta-oe][PATCH 2/2] libsic++-2.0: bump version to 2.4.1
+	Sun, 31 May 2015 23:44:55 -0700 (PDT)
+Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
+	Sun, 31 May 2015 23:44:54 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 31 May 2015 23:44:54 -0700
+Message-ID: <1433141094-29776-1-git-send-email-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+Subject: [meta-oe] [PATCH] imagemagick: update patchset from 3 to 4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 06:41:16 -0000
+X-List-Received-Date: Mon, 01 Jun 2015 06:44:58 -0000
+Content-Type: text/plain
 
+The ImageMagick-6.9.1-3.tar.xz is gone on the download server, there is
+ImageMagick-6.9.1-4.tar.xz now.
+
+(LOCAL REV: NOT UPSTREAM) -- Sent to oe-devel on 20150602
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../{libsigc++-2.0_2.2.11.bb => libsigc++-2.0_2.4.1.bb}             | 6 +++---
+ .../imagemagick/imagemagick_6.9.1.bb               |    6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-core/libsigc++-2.0/{libsigc++-2.0_2.2.11.bb => libsigc++-2.0_2.4.1.bb} (67%)
 
-diff --git a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.2.11.bb b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.4.1.bb
-similarity index 67%
-rename from meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.2.11.bb
-rename to meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.4.1.bb
-index 546305f..b3e0e60 100644
---- a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.2.11.bb
-+++ b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.4.1.bb
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+index e54135b..6ee3724 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
+ # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
  
- DEPENDS = "mm-common"
+-PATCHSET = "3"
++PATCHSET = "4"
+ SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
+ "
+-SRC_URI[md5sum] = "1171a6837defe10be288ab44869cc3a0"
+-SRC_URI[sha256sum] = "5fd180603e60c624c05c644a8340f4f4e92c19dc3c41d374d38f76c69cd48ba3"
++SRC_URI[md5sum] = "b5929717d848a386f2674aeb31257c42"
++SRC_URI[sha256sum] = "74973478058069ce44040ff76b61df713d70adcadfd207836cc0622cadf1e4bf"
  
--SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.2/libsigc++-${PV}.tar.xz"
--SRC_URI[md5sum] = "815d0c6d61601f51bbcaeef6826606b0"
--SRC_URI[sha256sum] = "9834045f74f56752c2c6b3cdc195c30ab8314ad22dc8e626d6f67f940f1e4957"
-+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.4/libsigc++-${PV}.tar.xz"
-+SRC_URI[md5sum] = "55945ba6e1652f89999e910f6b52047c"
-+SRC_URI[sha256sum] = "540443492a68e77e30db8d425f3c0b1299c825bf974d9bfc31ae7efafedc19ec"
- 
- S = "${WORKDIR}/libsigc++-${PV}"
+ S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
  
 -- 
-1.9.1
+1.7.9.5
 
 
