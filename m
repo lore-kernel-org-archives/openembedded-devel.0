@@ -1,24 +1,24 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B06A6AD0D
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A19F875713
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jun 2015 06:51:42 +0000 (UTC)
+	Mon,  1 Jun 2015 08:10:14 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t516phbD017717
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t518AF4j010864
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 May 2015 23:51:43 -0700 (PDT)
-Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Sun, 31 May 2015 23:51:43 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
+	Mon, 1 Jun 2015 01:10:15 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Mon, 1 Jun 2015 01:10:15 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 31 May 2015 23:51:43 -0700
-Message-ID: <1433141503-34322-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Mon, 1 Jun 2015 16:04:16 +0800
+Message-ID: <1433145856-23231-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH V2] imagemagick: update patchset from 3 to 4
+Subject: [PATCH][meta-oe] mariadb: Security Advisory -CVE-2015-2305
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,37 +32,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 06:51:42 -0000
+X-List-Received-Date: Mon, 01 Jun 2015 08:10:14 -0000
 Content-Type: text/plain
 
-The ImageMagick-6.9.1-3.tar.xz is gone on the download server, there is
-ImageMagick-6.9.1-4.tar.xz now.
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2305
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- .../imagemagick/imagemagick_6.9.1.bb               |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/mysql/mariadb.inc          |  1 +
+ .../mysql/mariadb/fix-CVE-2015-2305.patch          | 43 ++++++++++++++++++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
-index e54135b..6ee3724 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
-@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
- # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
- DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index 00fa965..540b159 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -12,6 +12,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
+            file://mysqld.service \
+            file://configure.cmake-fix-valgrind.patch \
+            file://fix-a-building-failure.patch \
++           file://fix-CVE-2015-2305.patch \
+           "
  
--PATCHSET = "3"
-+PATCHSET = "4"
- SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
- "
--SRC_URI[md5sum] = "1171a6837defe10be288ab44869cc3a0"
--SRC_URI[sha256sum] = "5fd180603e60c624c05c644a8340f4f4e92c19dc3c41d374d38f76c69cd48ba3"
-+SRC_URI[md5sum] = "b5929717d848a386f2674aeb31257c42"
-+SRC_URI[sha256sum] = "74973478058069ce44040ff76b61df713d70adcadfd207836cc0622cadf1e4bf"
- 
- S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
- 
+ SRC_URI[md5sum] = "c8760d6b5890fc1de76c07af48092c88"
+diff --git a/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch b/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
+new file mode 100644
+index 0000000..2d1b467
+--- /dev/null
++++ b/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
+@@ -0,0 +1,43 @@
++From f5c1d00a9ceb61acfe038dcf2ec0236c2939328c Mon Sep 17 00:00:00 2001
++From: Roy Li <rongqing.li@windriver.com>
++Date: Mon, 1 Jun 2015 15:31:48 +0800
++Subject: [PATCH] From 70bc2965604b6b8aaf260049e64c708dddf85334 Mon Sep 17
++ 00:00:00 2001 From: Gary Houston <ghouston@arglist.com> Date: Wed, 25 Feb
++ 2015 13:29:03 +1100 Subject: [PATCH] Bug fix for integer overflow in regcomp
++ for excessively long  pattern strings. CERT Vulnerability Note VU#695940.
++ Found by Guido Vranken.
++
++Upsteam-Status: Backport
++
++https://bugzilla.suse.com/attachment.cgi?id=627001
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ regex/regcomp.c | 11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
++
++diff --git a/regex/regcomp.c b/regex/regcomp.c
++index abc1817..31e57c1 100644
++--- a/regex/regcomp.c
+++++ b/regex/regcomp.c
++@@ -138,7 +138,16 @@ struct cclass cclasses[CCLASS_LAST+1]= {
++ 							(NC-1)*sizeof(cat_t));
++ 	if (g == NULL)
++ 		return(REG_ESPACE);
++-	p->ssize = (long) (len/(size_t)2*(size_t)3 + (size_t)1); /* ugh */
+++	{
+++	  /* Patched for CERT Vulnerability Note VU#695940, Feb 2015. */
+++	  size_t new_ssize = len/(size_t)2*(size_t)3 + (size_t)1; /* ugh */
+++	  if (new_ssize < len || new_ssize > LONG_MAX / sizeof(sop)) {
+++	    free((char *) g);
+++	    return REG_INVARG;
+++	  }
+++	  p->ssize = new_ssize;
+++	}
+++
++ 	p->strip = (sop *)malloc(p->ssize * sizeof(sop));
++ 	p->slen = 0;
++ 	if (p->strip == NULL) {
++-- 
++1.9.1
++
 -- 
-1.7.9.5
+1.9.1
 
 
