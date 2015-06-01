@@ -1,33 +1,31 @@
-Return-Path: <pespin.shar@gmail.com>
-Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D018757AA
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 8620175688
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jun 2015 15:18:54 +0000 (UTC)
-Received: by qkx62 with SMTP id 62so85449352qkx.3
+	Mon,  1 Jun 2015 16:28:26 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1YzSZd-0004VZ-Ql for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Jun 2015 18:28:25 +0200
+Received: from 80-218-32-173.dclient.hispeed.ch ([80.218.32.173])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Jun 2015 18:28:25 +0200
+Received: from auslands-kv by 80-218-32-173.dclient.hispeed.ch with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Jun 2015 08:18:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=Y12teOeKgqgOIDdu7Gqs4tmn5tSO/mM4OfdgZLkzm38=;
-	b=hlfd7klahaf7aYr5t753K9hCyNG+Wg7fiWU+rrlXrEMUNjHEaayVo/Tsay2cELWW1Q
-	6r/E60xz+dozT84rNQO+eN2iAZLfNtY3M/njQisnW+BRFFbGe2eRej+ViagkuKDlHsol
-	DbSZeO5kl+HXpNHn4SEmrAufeXQqv5AGekrhzLFwjTF9svOfauLHOfTiixgZ6OQmgm0X
-	laTuoma7z2tgdVmncAu6C2TZbgA3U/EfvvQvmUtA00ry2KoIVCfrrR8gXQ3BXatyqpbm
-	Xr6iJGOZsismFVwBFc5a8R0QB2c4utJS/EuA6HCfRRkIe8/ObGja2TlL5tMQyunsugew
-	cqMA==
-MIME-Version: 1.0
-X-Received: by 10.140.47.71 with SMTP id l65mr7963085qga.5.1433171935696; Mon,
-	01 Jun 2015 08:18:55 -0700 (PDT)
-Received: by 10.229.32.194 with HTTP; Mon, 1 Jun 2015 08:18:55 -0700 (PDT)
-In-Reply-To: <CAEGpDuaRwhORjBP3AJHZiXHA8f0upHajJagumpoY46dkyA-yXw@mail.gmail.com>
-References: <CAEGpDuaRwhORjBP3AJHZiXHA8f0upHajJagumpoY46dkyA-yXw@mail.gmail.com>
-Date: Mon, 1 Jun 2015 17:18:55 +0200
-Message-ID: <CAEGpDuavSYYn0RXty-5g3xvPy6F3=TDkES+aVg+2gQrxNJD0JA@mail.gmail.com>
-From: Pau Espin Pedrol <pespin.shar@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Improving systemd.bbclass to support systemd user services
+	Mon, 01 Jun 2015 18:28:25 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Neuer User <auslands-kv@gmx.de>
+Date: Mon, 01 Jun 2015 18:28:16 +0200
+Message-ID: <mki170$14s$2@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: 80-218-32-173.dclient.hispeed.ch
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+Subject: yocto fido: Strange configure error (???)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,256 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 15:18:55 -0000
-X-Groupsio-MsgNum: 55721
-Content-Type: multipart/mixed; boundary=001a11c147c6215210051776585b
+X-List-Received-Date: Mon, 01 Jun 2015 16:28:28 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
---001a11c147c6215210051776585b
-Content-Type: text/plain; charset=UTF-8
+Hi
 
-Hi everybody,
+I'm currently moving from Dora to Fido. I moved all my recipes to a new
+yocto installation and are modifying the recipes where necessary.
 
-A few days ago I started playing with systemd user sessions[1] for a
-distribution I'm setting up. I noticed that for system services
-everything is setup correctly by using "inherit systemd", but there's
-currently no much support for systemd user session services to be
-installed easily.
+I have a very strange error when configuring a kernel recipe
+(linux-cubox-i). Actually, there is no error when using the defaut
+recipe included in fido. Only if I add the following bbappend file in
+order to change the kernel configuration, I get the error:
 
-As far as I understood and tested in my old (yocto-1.6) env, those
-services files are supposed to be installed in /usr/lib/systemd/user/
-instead of /lib/systemd/system/. Also, to enable or disable them with
-systemctl one must explicitly declare so by using "--global"
-parameter.
+FILESEXTRAPATHS_prepend := "${THISDIR}/linux-cubox-i:"
 
-That means both FILES and postinst/prerm parts should be updated to
-have that into account. After doing some tests, I arrived to the
-conclusion that the best way to do that would be defining another env
-var called SYSTEMD_USER_SERVICE used in recipes which does the same as
-SYSTEMD_SERVICE, but meant to be used for user session systemd
-services.
+SRC_URI = "file://defconfig \
+           file://videoin.cfg \
+           file://networking.cfg \
+           file://wlan.cfg \
+           file://dm-crypt.cfg \
+           file://no-caam.cfg \
+           file://leds.cfg \
+           file://mod-to-builtin.cfg \
+           file://watchdog-nowayout.cfg \
+"
 
-I did all the changes which should be needed and tested it with
-pulseaudio, which is supposed to be used as a user session service. In
-order to do that, I also needed to enable systemd support on the
-recipe, which was not there.
-
-I attach two patches implementing those changes, based on master-next.
-Those patches are still not perfect though, and I need some advise on
-that. It seems there's a problem currently with systemctl failing when
-run with both "--root" and "--global" parameters at the same time. It
-looks like usually the postinst script is run inside the OE env while
-building, so the --root=$D is used, and so systemctl fails with
-Invalid Argument. If I try to install the generated package once the
-system is running, it works fine, because --root is not used.
-
-I tried asking for help on #systemd IRC channel but I got no response so far.
-
-I also opened a bug report in yocto related to this problem [2][3].
-
-Any comments on this would be welcome.
-
-By the way, if you try to run pulseaudio as user session you will
-probably need also a session service to create a dbus session, as well
-as some more black magic. If someone needs help on that please ask.
-You may also want to check [1].
-
-[1] https://wiki.archlinux.org/index.php/Systemd/User
-[2] https://bugzilla.yoctoproject.org/show_bug.cgi?id=7800
-[3] https://bugzilla.yoctoproject.org/show_bug.cgi?id=7801
+KERNEL_IMAGETYPE_cubox-i = "zImage"
 
 
-Pau Espin Pedrol
+Error:
 
---001a11c147c6215210051776585b
-Content-Type: text/x-patch; charset=US-ASCII; 
-	name="0001-systemd.bbclass-Add-code-to-enable-user-systemd-serv.patch"
-Content-Disposition: attachment; 
-	filename="0001-systemd.bbclass-Add-code-to-enable-user-systemd-serv.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_iae17csp0
+| DEBUG: Executing python function sysroot_cleansstate
+| DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: Executing shell function do_configure
+| WARNING: exit code 128 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at
+/home/ubuntu/yocto1.8/build/tmp/work/cubox_i-poky-linux-gnueabi/linux-cubox-i/3.14.14-r0/temp/log.do_configure.29043)
 
-RnJvbSAxYjIyM2M4NmI4OGQyOWNlNDEwYzNmNzIyMGE5ZTRiNmU3ZTZiZGU2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBQYXUgRXNwaW4gUGVkcm9sIDxwYXUuZXNwaW5AZXNzZW5zaXVt
-LmNvbT4KRGF0ZTogVGh1LCAyMSBNYXkgMjAxNSAxMzo1MDoyNCArMDIwMApTdWJqZWN0OiBbUEFU
-Q0ggMS8yXSBzeXN0ZW1kLmJiY2xhc3M6IEFkZCBjb2RlIHRvIGVuYWJsZSB1c2VyIHN5c3RlbWQg
-c2VydmljZXMKCiogU29tZSBwcm9qZWN0cyBzdWNoIGFzIGJsdWV6L29iZXggYW5kIHB1bHNlYXVk
-aW8gaW5zdGFsbCB1c2VyIHNlc3Npb24gc2VydmljZXMgaW4gKC91c3IpL2xpYi9zeXN0ZW1kL3Vz
-ZXIvLgoKKiBJdCBzdGlsbCBkb2Vzbid0IHdvcmsgY29tcGxldGVsbHksIGJlY2F1c2UgaXQgc2Vl
-bXMgc3lzdGVtY3RsIHJldHVybnMgIk9wZXJhdGlvbiBmYWlsZWQ6IE5vIHN1Y2ggZmlsZSIgd2hl
-biB1c2luZyAtLWdsb2JhbCBhbmQgLS1yb290IHBhcmFtcyBhdCB0aGUgc2FtZSB0aW1lCgpTaWdu
-ZWQtb2ZmLWJ5OiBQYXUgRXNwaW4gUGVkcm9sIDxwYXUuZXNwaW5AZXNzZW5zaXVtLmNvbT4KCkNv
-bmZsaWN0czoKCW1ldGEvY2xhc3Nlcy9zeXN0ZW1kLmJiY2xhc3MKLS0tCiBtZXRhL2NsYXNzZXMv
-c3lzdGVtZC5iYmNsYXNzIHwgOTggKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0t
-LS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA3MSBpbnNlcnRpb25zKCspLCAyNyBkZWxldGlvbnMo
-LSkKCmRpZmYgLS1naXQgYS9tZXRhL2NsYXNzZXMvc3lzdGVtZC5iYmNsYXNzIGIvbWV0YS9jbGFz
-c2VzL3N5c3RlbWQuYmJjbGFzcwppbmRleCBjZmUxZWI1Li45OTI4NjliIDEwMDY0NAotLS0gYS9t
-ZXRhL2NsYXNzZXMvc3lzdGVtZC5iYmNsYXNzCisrKyBiL21ldGEvY2xhc3Nlcy9zeXN0ZW1kLmJi
-Y2xhc3MKQEAgLTEsNiArMSw3IEBACiAjIFRoZSBsaXN0IG9mIHBhY2thZ2VzIHRoYXQgc2hvdWxk
-IGhhdmUgc3lzdGVtZCBwYWNrYWdpbmcgc2NyaXB0cyBhZGRlZC4gIEZvcgogIyBlYWNoIGVudHJ5
-LCBvcHRpb25hbGx5IGhhdmUgYSBTWVNURU1EX1NFUlZJQ0VfW3BhY2thZ2VdIHRoYXQgbGlzdHMg
-dGhlIHNlcnZpY2UKLSMgZmlsZXMgaW4gdGhpcyBwYWNrYWdlLiAgSWYgdGhpcyB2YXJpYWJsZSBp
-c24ndCBzZXQsIFtwYWNrYWdlXS5zZXJ2aWNlIGlzIHVzZWQuCisjIGZpbGVzIGluIHRoaXMgcGFj
-a2FnZS4gU2FtZSBzdGFuZHMgZm9yIFNZU1RFTURfVVNFUl9TRVJWSUNFX1twYWNrYWdlXSBmb3IK
-KyMgc3lzdGVtZCB1c2VyIHNlc3Npb24gc2VydmljZXMuICBJZiB0aGlzIHZhcmlhYmxlIGlzbid0
-IHNldCwgW3BhY2thZ2VdLnNlcnZpY2UgaXMgdXNlZC4KIFNZU1RFTURfUEFDS0FHRVMgPz0gIiR7
-UE59IgogU1lTVEVNRF9QQUNLQUdFU19jbGFzcy1uYXRpdmUgPz0gIiIKIFNZU1RFTURfUEFDS0FH
-RVNfY2xhc3MtbmF0aXZlc2RrID89ICIiCkBAIC0yOSwxMSArMzAsMTEgQEAgaWYgWyAtbiAiJEQi
-IF07IHRoZW4KIGZpCiAKIGlmIHR5cGUgc3lzdGVtY3RsID4vZGV2L251bGwgMj4vZGV2L251bGw7
-IHRoZW4KLQlzeXN0ZW1jdGwgJE9QVFMgJHtTWVNURU1EX0FVVE9fRU5BQkxFfSAke1NZU1RFTURf
-U0VSVklDRX0KKyAgICBzeXN0ZW1jdGwgJE9QVFMgJHtTWVNURU1EX0FVVE9fRU5BQkxFfSAke1NZ
-U1RFTURfU0VSVklDRX0KIAotCWlmIFsgLXogIiREIiAtYSAiJHtTWVNURU1EX0FVVE9fRU5BQkxF
-fSIgPSAiZW5hYmxlIiBdOyB0aGVuCi0JCXN5c3RlbWN0bCByZXN0YXJ0ICR7U1lTVEVNRF9TRVJW
-SUNFfQotCWZpCisgICAgaWYgWyAteiAiJEQiIC1hICIke1NZU1RFTURfQVVUT19FTkFCTEV9IiA9
-ICJlbmFibGUiIF07IHRoZW4KKyAgICAgICAgc3lzdGVtY3RsIHJlc3RhcnQgJHtTWVNURU1EX1NF
-UlZJQ0V9CisgICAgZmkKIGZpCiB9CiAKQEAgLTQ1LDE4ICs0Niw0OCBAQCBpZiBbIC1uICIkRCIg
-XTsgdGhlbgogZmkKIAogaWYgdHlwZSBzeXN0ZW1jdGwgPi9kZXYvbnVsbCAyPi9kZXYvbnVsbDsg
-dGhlbgotCWlmIFsgLXogIiREIiBdOyB0aGVuCi0JCXN5c3RlbWN0bCBzdG9wICR7U1lTVEVNRF9T
-RVJWSUNFfQotCWZpCisgICAgaWYgWyAteiAiJEQiIF07IHRoZW4KKyAgICAgICAgc3lzdGVtY3Rs
-IHN0b3AgJHtTWVNURU1EX1NFUlZJQ0V9CisgICAgZmkKIAotCXN5c3RlbWN0bCAkT1BUUyBkaXNh
-YmxlICR7U1lTVEVNRF9TRVJWSUNFfQorICAgIHN5c3RlbWN0bCAkT1BUUyBkaXNhYmxlICR7U1lT
-VEVNRF9TRVJWSUNFfQogZmkKIH0KIAorc3lzdGVtZF91c2VyX3Bvc3RpbnN0KCkgeworT1BUUz0i
-IgogCi1zeXN0ZW1kX3BvcHVsYXRlX3BhY2thZ2VzW3ZhcmRlcHNdICs9ICJzeXN0ZW1kX3ByZXJt
-IHN5c3RlbWRfcG9zdGluc3QiCi1zeXN0ZW1kX3BvcHVsYXRlX3BhY2thZ2VzW3ZhcmRlcHNleGNs
-dWRlXSArPSAiT1ZFUlJJREVTIgoraWYgWyAtbiAiJEQiIF07IHRoZW4KKyAgICBPUFRTPSItLXJv
-b3Q9JEQiCitmaQorCitpZiB0eXBlIHN5c3RlbWN0bCA+L2Rldi9udWxsIDI+L2Rldi9udWxsOyB0
-aGVuCisgICAgc3lzdGVtY3RsIC0tZ2xvYmFsICRPUFRTICR7U1lTVEVNRF9BVVRPX0VOQUJMRX0g
-JHtTWVNURU1EX1VTRVJfU0VSVklDRX0KKworICAgIGlmIFsgLXogIiREIiAtYSAiJHtTWVNURU1E
-X0FVVE9fRU5BQkxFfSIgPSAiZW5hYmxlIiBdOyB0aGVuCisgICAgICAgIHN5c3RlbWN0bCAtLXVz
-ZXIgcmVzdGFydCAke1NZU1RFTURfVVNFUl9TRVJWSUNFfQorICAgIGZpCitmaQorfQogCitzeXN0
-ZW1kX3VzZXJfcHJlcm0oKSB7CitPUFRTPSIiCisKK2lmIFsgLW4gIiREIiBdOyB0aGVuCisgICAg
-T1BUUz0iLS1yb290PSREIgorZmkKKworaWYgdHlwZSBzeXN0ZW1jdGwgPi9kZXYvbnVsbCAyPi9k
-ZXYvbnVsbDsgdGhlbgorICAgIGlmIFsgLXogIiREIiBdOyB0aGVuCisgICAgICAgIHN5c3RlbWN0
-bCAtLXVzZXIgc3RvcCAke1NZU1RFTURfVVNFUl9TRVJWSUNFfQorICAgIGZpCisKKyAgICBzeXN0
-ZW1jdGwgLS1nbG9iYWwgJE9QVFMgZGlzYWJsZSAke1NZU1RFTURfVVNFUl9TRVJWSUNFfQorZmkK
-K30KKworc3lzdGVtZF9wb3B1bGF0ZV9wYWNrYWdlc1t2YXJkZXBzXSArPSAic3lzdGVtZF9wcmVy
-bSBzeXN0ZW1kX3Bvc3RpbnN0IHN5c3RlbWRfdXNlcl9wcmVybSBzeXN0ZW1kX3VzZXJfcG9zdGlu
-c3QiCitzeXN0ZW1kX3BvcHVsYXRlX3BhY2thZ2VzW3ZhcmRlcHNleGNsdWRlXSArPSAiT1ZFUlJJ
-REVTIgogCiBweXRob24gc3lzdGVtZF9wb3B1bGF0ZV9wYWNrYWdlcygpIHsKICAgICBpZiBub3Qg
-YmIudXRpbHMuY29udGFpbnMoJ0RJU1RST19GRUFUVVJFUycsICdzeXN0ZW1kJywgVHJ1ZSwgRmFs
-c2UsIGQpOgpAQCAtNzUsMTEgKzEwNiwxMCBAQCBweXRob24gc3lzdGVtZF9wb3B1bGF0ZV9wYWNr
-YWdlcygpIHsKICAgICAgICAgICAgIGJiLmVycm9yKCclcyBkb2VzIG5vdCBhcHBlYXIgaW4gcGFj
-a2FnZSBsaXN0LCBwbGVhc2UgYWRkIGl0JyAlIHBrZ19zeXN0ZW1kKQogCiAKLSAgICBkZWYgc3lz
-dGVtZF9nZW5lcmF0ZV9wYWNrYWdlX3NjcmlwdHMocGtnKToKLSAgICAgICAgYmIuZGVidWcoMSwg
-J2FkZGluZyBzeXN0ZW1kIGNhbGxzIHRvIHBvc3RpbnN0L3Bvc3RybSBmb3IgJXMnICUgcGtnKQot
-CisgICAgZGVmIHN5c3RlbWRfZ2VuZXJhdGVfcGFja2FnZV9zY3JpcHRzKHBrZywgc2VydmljZV90
-eXBlKToKKyAgICAgICAgYmIuZGVidWcoMSwgJ2FkZGluZyBzeXN0ZW1kICVzIGNhbGxzIHRvIHBv
-c3RpbnN0L3ByZXJtIGZvciAlcycgJSAoc2VydmljZV90eXBlLCBwa2cpKQogICAgICAgICAjIEFk
-ZCBwa2cgdG8gdGhlIG92ZXJyaWRlcyBzbyB0aGF0IGl0IGZpbmRzIHRoZSBTWVNURU1EX1NFUlZJ
-Q0VfcGtnCi0gICAgICAgICMgdmFyaWFibGUuCisgICAgICAgICMgYW5kIFNZU1RFTURfVVNFUl9T
-RVJWSUNFX3BrZyB2YXJpYWJsZXMuCiAgICAgICAgIGxvY2FsZGF0YSA9IGQuY3JlYXRlQ29weSgp
-CiAgICAgICAgIGxvY2FsZGF0YS5wcmVwZW5kVmFyKCJPVkVSUklERVMiLCBwa2cgKyAiOiIpCiAg
-ICAgICAgIGJiLmRhdGEudXBkYXRlX2RhdGEobG9jYWxkYXRhKQpAQCAtODcsMTMgKzExNywxOSBA
-QCBweXRob24gc3lzdGVtZF9wb3B1bGF0ZV9wYWNrYWdlcygpIHsKICAgICAgICAgcG9zdGluc3Qg
-PSBkLmdldFZhcigncGtnX3Bvc3RpbnN0XyVzJyAlIHBrZywgVHJ1ZSkKICAgICAgICAgaWYgbm90
-IHBvc3RpbnN0OgogICAgICAgICAgICAgcG9zdGluc3QgPSAnIyEvYmluL3NoXG4nCi0gICAgICAg
-IHBvc3RpbnN0ICs9IGxvY2FsZGF0YS5nZXRWYXIoJ3N5c3RlbWRfcG9zdGluc3QnLCBUcnVlKQor
-ICAgICAgICBpZiBzZXJ2aWNlX3R5cGUgPT0gJ3N5c3RlbSc6CisgICAgICAgICAgICBwb3N0aW5z
-dCArPSBsb2NhbGRhdGEuZ2V0VmFyKCdzeXN0ZW1kX3Bvc3RpbnN0JywgVHJ1ZSkKKyAgICAgICAg
-ZWxpZiBzZXJ2aWNlX3R5cGUgPT0gJ3VzZXInOgorICAgICAgICAgICAgcG9zdGluc3QgKz0gbG9j
-YWxkYXRhLmdldFZhcignc3lzdGVtZF91c2VyX3Bvc3RpbnN0JywgVHJ1ZSkKICAgICAgICAgZC5z
-ZXRWYXIoJ3BrZ19wb3N0aW5zdF8lcycgJSBwa2csIHBvc3RpbnN0KQogCiAgICAgICAgIHByZXJt
-ID0gZC5nZXRWYXIoJ3BrZ19wcmVybV8lcycgJSBwa2csIFRydWUpCiAgICAgICAgIGlmIG5vdCBw
-cmVybToKICAgICAgICAgICAgIHByZXJtID0gJyMhL2Jpbi9zaFxuJwotICAgICAgICBwcmVybSAr
-PSBsb2NhbGRhdGEuZ2V0VmFyKCdzeXN0ZW1kX3ByZXJtJywgVHJ1ZSkKKyAgICAgICAgaWYgc2Vy
-dmljZV90eXBlID09ICdzeXN0ZW0nOgorICAgICAgICAgICAgcHJlcm0gKz0gbG9jYWxkYXRhLmdl
-dFZhcignc3lzdGVtZF9wcmVybScsIFRydWUpCisgICAgICAgIGVsaWYgc2VydmljZV90eXBlID09
-ICd1c2VyJzoKKyAgICAgICAgICAgIHByZXJtICs9IGxvY2FsZGF0YS5nZXRWYXIoJ3N5c3RlbWRf
-dXNlcl9wcmVybScsIFRydWUpCiAgICAgICAgIGQuc2V0VmFyKCdwa2dfcHJlcm1fJXMnICUgcGtn
-LCBwcmVybSkKIAogCkBAIC0xMzQsMTYgKzE3MCwyMSBAQCBweXRob24gc3lzdGVtZF9wb3B1bGF0
-ZV9wYWNrYWdlcygpIHsKICAgICAgICAgICAgICAgICBwaXBlLmNsb3NlKCkKIAogICAgICMgQ2hl
-Y2sgc2VydmljZS1maWxlcyBhbmQgY2FsbCBzeXN0ZW1kX2FkZF9maWxlc19hbmRfcGFyc2UgZm9y
-IGVhY2ggZW50cnkKLSAgICBkZWYgc3lzdGVtZF9jaGVja19zZXJ2aWNlcygpOgotICAgICAgICBz
-ZWFyY2hwYXRocyA9IFtvZS5wYXRoLmpvaW4oZC5nZXRWYXIoInN5c2NvbmZkaXIiLCBUcnVlKSwg
-InN5c3RlbWQiLCAic3lzdGVtIiksXQotICAgICAgICBzZWFyY2hwYXRocy5hcHBlbmQob2UucGF0
-aC5qb2luKGQuZ2V0VmFyKCJub25hcmNoX2Jhc2VfbGliZGlyIiwgVHJ1ZSksICJzeXN0ZW1kIiwg
-InN5c3RlbSIpKQotICAgICAgICBzZWFyY2hwYXRocy5hcHBlbmQob2UucGF0aC5qb2luKGQuZ2V0
-VmFyKCJleGVjX3ByZWZpeCIsIFRydWUpLCBkLmdldFZhcigibm9uYXJjaF9iYXNlX2xpYmRpciIs
-IFRydWUpLCAic3lzdGVtZCIsICJzeXN0ZW0iKSkKKyAgICBkZWYgc3lzdGVtZF9jaGVja19zZXJ2
-aWNlcyhzZXJ2aWNlX3R5cGUpOgorICAgICAgICBpZiBzZXJ2aWNlX3R5cGUgPT0gJ3N5c3RlbSc6
-CisgICAgICAgICAgICBzZXJ2aWNlX2VudnZhciA9ICdTWVNURU1EX1NFUlZJQ0UnCisgICAgICAg
-IGVsaWYgc2VydmljZV90eXBlID09ICd1c2VyJzoKKyAgICAgICAgICAgIHNlcnZpY2VfZW52dmFy
-ID0gJ1NZU1RFTURfVVNFUl9TRVJWSUNFJworCisgICAgICAgIHNlYXJjaHBhdGhzID0gW29lLnBh
-dGguam9pbihkLmdldFZhcigic3lzY29uZmRpciIsIFRydWUpLCAic3lzdGVtZCIsIHNlcnZpY2Vf
-dHlwZSksXQorICAgICAgICBzZWFyY2hwYXRocy5hcHBlbmQob2UucGF0aC5qb2luKGQuZ2V0VmFy
-KCJub25hcmNoX2Jhc2VfbGliZGlyIiwgVHJ1ZSksICJzeXN0ZW1kIiwgc2VydmljZV90eXBlKSkK
-KyAgICAgICAgc2VhcmNocGF0aHMuYXBwZW5kKG9lLnBhdGguam9pbihkLmdldFZhcigiZXhlY19w
-cmVmaXgiLCBUcnVlKSwgZC5nZXRWYXIoIm5vbmFyY2hfYmFzZV9saWJkaXIiLCBUcnVlKSwgInN5
-c3RlbWQiLCBzZXJ2aWNlX3R5cGUpKQogICAgICAgICBzeXN0ZW1kX3BhY2thZ2VzID0gZC5nZXRW
-YXIoJ1NZU1RFTURfUEFDS0FHRVMnLCBUcnVlKQogCiAgICAgICAgIGtleXMgPSAnQWxzbycKLSAg
-ICAgICAgIyBzY2FuIGZvciBhbGwgaW4gU1lTVEVNRF9TRVJWSUNFW10KKyAgICAgICAgIyBzY2Fu
-IGZvciBhbGwgaW4gU1lTVEVNRF9TRVJWSUNFW10gLyBTWVNURU1EX1VTRVJfU0VSVklDRVtdCiAg
-ICAgICAgIGZvciBwa2dfc3lzdGVtZCBpbiBzeXN0ZW1kX3BhY2thZ2VzLnNwbGl0KCk6Ci0gICAg
-ICAgICAgICBmb3Igc2VydmljZSBpbiBnZXRfcGFja2FnZV92YXIoZCwgJ1NZU1RFTURfU0VSVklD
-RScsIHBrZ19zeXN0ZW1kKS5zcGxpdCgpOgorICAgICAgICAgICAgZm9yIHNlcnZpY2UgaW4gZ2V0
-X3BhY2thZ2VfdmFyKGQsIHNlcnZpY2VfZW52dmFyLCBwa2dfc3lzdGVtZCkuc3BsaXQoKToKICAg
-ICAgICAgICAgICAgICBwYXRoX2ZvdW5kID0gJycKICAgICAgICAgICAgICAgICBmb3IgcGF0aCBp
-biBzZWFyY2hwYXRoczoKICAgICAgICAgICAgICAgICAgICAgaWYgb3MucGF0aC5leGlzdHMob2Uu
-cGF0aC5qb2luKGQuZ2V0VmFyKCJEIiwgVHJ1ZSksIHBhdGgsIHNlcnZpY2UpKToKQEAgLTE1Miwx
-NiArMTkzLDE5IEBAIHB5dGhvbiBzeXN0ZW1kX3BvcHVsYXRlX3BhY2thZ2VzKCkgewogICAgICAg
-ICAgICAgICAgIGlmIHBhdGhfZm91bmQgIT0gJyc6CiAgICAgICAgICAgICAgICAgICAgIHN5c3Rl
-bWRfYWRkX2ZpbGVzX2FuZF9wYXJzZShwa2dfc3lzdGVtZCwgcGF0aF9mb3VuZCwgc2VydmljZSwg
-a2V5cykKICAgICAgICAgICAgICAgICBlbHNlOgotICAgICAgICAgICAgICAgICAgICByYWlzZSBi
-Yi5idWlsZC5GdW5jRmFpbGVkKCJTWVNURU1EX1NFUlZJQ0VfJXMgdmFsdWUgJXMgZG9lcyBub3Qg
-ZXhpc3QiICUgXAotICAgICAgICAgICAgICAgICAgICAgICAgKHBrZ19zeXN0ZW1kLCBzZXJ2aWNl
-KSkKKyAgICAgICAgICAgICAgICAgICAgcmFpc2UgYmIuYnVpbGQuRnVuY0ZhaWxlZCgiJXNfJXMg
-dmFsdWUgJXMgZG9lcyBub3QgZXhpc3QiICUgXAorICAgICAgICAgICAgICAgICAgICAgICAgKHNl
-cnZpY2VfZW52dmFyLCBwa2dfc3lzdGVtZCwgc2VydmljZSkpCiAKICAgICAjIFJ1biBhbGwgbW9k
-aWZpY2F0aW9ucyBvbmNlIHdoZW4gY3JlYXRpbmcgcGFja2FnZQogICAgIGlmIG9zLnBhdGguZXhp
-c3RzKGQuZ2V0VmFyKCJEIiwgVHJ1ZSkpOgogICAgICAgICBmb3IgcGtnIGluIGQuZ2V0VmFyKCdT
-WVNURU1EX1BBQ0tBR0VTJywgVHJ1ZSkuc3BsaXQoKToKICAgICAgICAgICAgIHN5c3RlbWRfY2hl
-Y2tfcGFja2FnZShwa2cpCiAgICAgICAgICAgICBpZiBkLmdldFZhcignU1lTVEVNRF9TRVJWSUNF
-XycgKyBwa2csIFRydWUpOgotICAgICAgICAgICAgICAgIHN5c3RlbWRfZ2VuZXJhdGVfcGFja2Fn
-ZV9zY3JpcHRzKHBrZykKLSAgICAgICAgc3lzdGVtZF9jaGVja19zZXJ2aWNlcygpCisgICAgICAg
-ICAgICAgICAgc3lzdGVtZF9nZW5lcmF0ZV9wYWNrYWdlX3NjcmlwdHMocGtnLCAnc3lzdGVtJykK
-KyAgICAgICAgICAgIGlmIGQuZ2V0VmFyKCdTWVNURU1EX1VTRVJfU0VSVklDRV8nICsgcGtnLCBU
-cnVlKToKKyAgICAgICAgICAgICAgICBzeXN0ZW1kX2dlbmVyYXRlX3BhY2thZ2Vfc2NyaXB0cyhw
-a2csICd1c2VyJykKKyAgICAgICAgc3lzdGVtZF9jaGVja19zZXJ2aWNlcygnc3lzdGVtJykKKyAg
-ICAgICAgc3lzdGVtZF9jaGVja19zZXJ2aWNlcygndXNlcicpCiB9CiAKIFBBQ0tBR0VTUExJVEZV
-TkNTX3ByZXBlbmQgPSAic3lzdGVtZF9wb3B1bGF0ZV9wYWNrYWdlcyAiCi0tIAoxLjkuMQoK
 
---001a11c147c6215210051776585b
-Content-Type: text/x-patch; charset=US-ASCII; 
-	name="0002-pulseaudio.inc-enable-systemd-support-if-set-in-DIST.patch"
-Content-Disposition: attachment; 
-	filename="0002-pulseaudio.inc-enable-systemd-support-if-set-in-DIST.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_iae17ctc1
+Nothing more in the configure log.
 
-RnJvbSBmMzA0ZjQxNjJhNzkwNDBmYTgxM2VlZDkwMDI4YjBmZWUxMGVmNmZhIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBQYXUgRXNwaW4gUGVkcm9sIDxwYXUuZXNwaW5AYXdldXJvcGUu
-YmU+CkRhdGU6IFRodSwgMjEgTWF5IDIwMTUgMTQ6MDk6MDUgKzAyMDAKU3ViamVjdDogW1BBVENI
-IDIvMl0gcHVsc2VhdWRpby5pbmM6IGVuYWJsZSBzeXN0ZW1kIHN1cHBvcnQgaWYgc2V0IGluCiBE
-SVNUUk9fRkVBVFVSRVMKClNpZ25lZC1vZmYtYnk6IFBhdSBFc3BpbiBQZWRyb2wgPHBhdS5lc3Bp
-bkBlc3NlbnNpdW0uY29tPgotLS0KIG1ldGEvcmVjaXBlcy1tdWx0aW1lZGlhL3B1bHNlYXVkaW8v
-cHVsc2VhdWRpby5pbmMgfCA4ICsrKysrLS0tCiAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25z
-KCspLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL21ldGEvcmVjaXBlcy1tdWx0aW1lZGlh
-L3B1bHNlYXVkaW8vcHVsc2VhdWRpby5pbmMgYi9tZXRhL3JlY2lwZXMtbXVsdGltZWRpYS9wdWxz
-ZWF1ZGlvL3B1bHNlYXVkaW8uaW5jCmluZGV4IDMwZmUyMjEuLjEyYzhiNTggMTAwNjQ0Ci0tLSBh
-L21ldGEvcmVjaXBlcy1tdWx0aW1lZGlhL3B1bHNlYXVkaW8vcHVsc2VhdWRpby5pbmMKKysrIGIv
-bWV0YS9yZWNpcGVzLW11bHRpbWVkaWEvcHVsc2VhdWRpby9wdWxzZWF1ZGlvLmluYwpAQCAtMzUs
-NyArMzUsOSBAQCBFWFRSQV9PRUNPTkYgPSAiXAogUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0
-aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAnYmx1ZXRvb3RoJywgJyR7QkxVRVp9Jywg
-JycsIGQpfSBcCiAgICAgICAgICAgICAgICAgICAgJHtAYmIudXRpbHMuY29udGFpbnMoJ0RJU1RS
-T19GRUFUVVJFUycsICd6ZXJvY29uZicsICdhdmFoaScsICcnLCBkKX0gXAogICAgICAgICAgICAg
-ICAgICAgICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAneDExJywgJ3gx
-MScsICcnLCBkKX0gXAotICAgICAgICAgICAgICAgICAgICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdE
-SVNUUk9fRkVBVFVSRVMnLCAnM2cnLCAnb2Zvbm8nLCAnJywgZCl9IgorICAgICAgICAgICAgICAg
-ICAgICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAnM2cnLCAnb2Zvbm8n
-LCAnJywgZCl9IFwKKyAgICAgICAgICAgICAgICAgICAke0BiYi51dGlscy5jb250YWlucygnRElT
-VFJPX0ZFQVRVUkVTJywgJ3N5c3RlbWQnLCAnc3lzdGVtZCcsICcnLCBkKX0gXAorICAgICAgICAg
-ICAgICAgICAgICIKIFBBQ0tBR0VDT05GSUdbYmx1ZXo0XSA9ICItLWVuYWJsZS1ibHVlejQsLS1k
-aXNhYmxlLWJsdWV6NCxibHVlejQgc2JjIgogUEFDS0FHRUNPTkZJR1tibHVlejVdID0gIi0tZW5h
-YmxlLWJsdWV6NSwtLWRpc2FibGUtYmx1ZXo1LGJsdWV6NSBzYmMiCiBQQUNLQUdFQ09ORklHW29m
-b25vXSA9ICItLWVuYWJsZS1ibHVlejUtb2Zvbm8taGVhZHNldCwtLWRpc2FibGUtYmx1ZXo1LW9m
-b25vLWhlYWRzZXQsb2Zvbm8iCkBAIC05Niw4ICs5OCw4IEBAIEZJTEVTXyR7UE59LWNvbmYgPSAi
-JHtzeXNjb25mZGlyfSIKIEZJTEVTXyR7UE59LWJpbiArPSAiJHtzeXNjb25mZGlyfS9kZWZhdWx0
-L3ZvbGF0aWxlcy92b2xhdGlsZXMuMDRfcHVsc2UiCiBGSUxFU18ke1BOfS1zZXJ2ZXIgPSAiJHti
-aW5kaXJ9L3B1bHNlYXVkaW8gJHtiaW5kaXJ9L3N0YXJ0LSogJHtzeXNjb25mZGlyfSAke2JpbmRp
-cn0vcGFjdGwgKi91ZGV2L3J1bGVzLmQvKi5ydWxlcyIKIAotI1NZU1RFTURfUEFDS0FHRVMgPSAi
-JHtQTn0tc2VydmVyIgotU1lTVEVNRF9TRVJWSUNFXyR7UE59LXNlcnZlciA9ICJwdWxzZWF1ZGlv
-LnNlcnZpY2UiCitTWVNURU1EX1BBQ0tBR0VTID0gIiR7UE59LXNlcnZlciIKK1NZU1RFTURfVVNF
-Ul9TRVJWSUNFXyR7UE59LXNlcnZlciA9ICJwdWxzZWF1ZGlvLnNvY2tldCIKIAogRklMRVNfJHtQ
-Tn0tbWlzYyA9ICIke2JpbmRpcn0vKiAke2xpYmRpcn0vcHVsc2VhdWRpby9saWJwdWxzZWRzcC5z
-byIKIAotLSAKMS45LjEKCg==
+Any idea, what is wrong? In general I just want to use a diffent kernel
+config. Actually a kernel config that worked before without problems on
+dora. I really have no idea, why this isn't working or even what the
+error means.
 
---001a11c147c6215210051776585b--
+Thanks for any help
+
+Michael
+
+
