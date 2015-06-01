@@ -1,32 +1,34 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BF8B7576E
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BA4E755F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Jun 2015 18:06:07 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so68002972igb.1
+	Mon,  1 Jun 2015 18:10:56 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so68106100igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Jun 2015 11:06:08 -0700 (PDT)
+	Mon, 01 Jun 2015 11:10:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=8GXb46zHHRJ32uIWx4P97pkjbYe6ekdTQBvkKwrYNJI=;
-	b=C47Jqr8PtkV+AGz+OnMU2xPZIn49qPCLBbzDCNsYZS+EeT8/H72KYTJUNUJw/2huHD
-	VLlWVX+B0J2czAxL74obxMSIJ/D1YUbRC6TJEVsffc4VOVv02Hc2gdU2L++QGTaONruI
-	8ERjeEfC7Y2z+95uWcAETD/9bI9UDWpPkziQseyA/+71BD0AuOovgZtAnrJ9VdsuON3z
-	C+9Q+LAX85g9jw5Owmg6tyNEb+KAyOKyFDgFRGy4UBcuJbOfikNbM4ZiDU7p3U3W3GDX
-	kWe5DkkAhBRtAkmjGGohn/QWxyF/0Dw1kXfSB7ry/mpX1JwFDeUP/GhZplEREPqQJzZM
-	N+6w==
-X-Received: by 10.50.136.197 with SMTP id qc5mr3028696igb.6.1433181968262;
-	Mon, 01 Jun 2015 11:06:08 -0700 (PDT)
+	:cc:content-type;
+	bh=b7tPffPVXglX6QxdCp0luIYwvaCZvzqZHIofKUSictw=;
+	b=Fdw+BpBhEvdTulpLnESCmilo2smsYZONS83ODe8V5UpS3rOj/iIxKZEv0j11oEujDO
+	Im0HW9winR2RXqoY0lpQpmoaMAcK+eq+jhXtunq4pyF78rS6PBFAH9PEg7hW9zG+OhWK
+	HiUOVbuzSuuO2epeKcLTSjICBBoinb1IfUNp0dMNP9c37+b9pLXhiuLsmLfvzlwDBvqr
+	U9e69q8IMCntBdQnxC5eyjYl2q1M9vGJ17qKsvIJ9NVGzN2mBiGudSsBDwx+oFWT/nAr
+	mVyzPaqaIxYm732JsWFAJMr/spS7+MscqhFzKcabLLktFHNMOjPmiqoejDssAgBKDei/
+	aGdQ==
+X-Received: by 10.42.83.212 with SMTP id i20mr30122038icl.91.1433182257795;
+	Mon, 01 Jun 2015 11:10:57 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.3.166 with HTTP; Mon, 1 Jun 2015 11:05:37 -0700 (PDT)
-In-Reply-To: <1433032319-13061-1-git-send-email-kergoth@gmail.com>
-References: <1433032319-13061-1-git-send-email-kergoth@gmail.com>
+Received: by 10.107.3.166 with HTTP; Mon, 1 Jun 2015 11:10:27 -0700 (PDT)
+In-Reply-To: <1433170089-9030-1-git-send-email-naresh.bhat@linaro.org>
+References: <1433170089-9030-1-git-send-email-naresh.bhat@linaro.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 1 Jun 2015 11:05:37 -0700
-Message-ID: <CAMKF1srmP=02oMEvuNMPbsdd5u3vvc6fv_QmOtL07ydUTuDC0Q@mail.gmail.com>
+Date: Mon, 1 Jun 2015 11:10:27 -0700
+Message-ID: <CAMKF1spR8ScXYM2pViEaY1=7DcXLcdKTxCKfQw_P-QETpgsWOw@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] ntimed: add recipe to meta-networking (git version)
+Cc: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+Subject: Re: [meta-filesystems][PATCH] xorriso: Add xorriso v1.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,97 +42,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Jun 2015 18:06:08 -0000
+X-List-Received-Date: Mon, 01 Jun 2015 18:10:59 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, May 30, 2015 at 5:31 PM, Christopher Larson <kergoth@gmail.com> wrote:
-> Ntimed is an unreleased ntpd replacement being sponsored by the Linux
-> Foundation. Currently it only includes a work-in-progress client, but for
-> future use this recipe emits an ntimed-client package and an ntimed meta
-> package which will pull in client and server.
+On Mon, Jun 1, 2015 at 7:48 AM, Naresh Bhat <naresh.bhat@linaro.org> wrote:
+> Add xorriso v1.4.0 based on the discussions
+> http://patchwork.openembedded.org/patch/91143/
+> http://lists.openembedded.org/pipermail/openembedded-devel/2015-April/100981.html
+> We have tested this package with
+> Montavista CGE product - http://www.mvista.com/ and
+> luvOS distribution - https://01.org/linux-uefi-validation build.
+> Inherit the pkgconfig to avoid the below error,
+> ..
+> ...
+> | disabled use of O_DIRECT with input of -as cdrskin
+> | luv-yocto/build/tmp/work/aarch64-oe-linux/xorriso/1.4.0-r0/xorriso-1.4.0/
+> configure: line 14352: syntax error near unexpected token `LIBCDIO,'
+> | luv-yocto/build/tmp/work/aarch64-oe-linux/xorriso/1.4.0-r0/xorriso-1.4.0/
+> configure: line 14352: `    PKG_CHECK_MODULES(LIBCDIO, libcdio >= $LIBCDIO_REQUIRED)'
+> ...
+> ....
 >
-
-should it have RCONFLICTS with ntp ?
-
-> Signed-off-by: Christopher Larson <kergoth@gmail.com>
+> Signed-off-by: Naresh Bhat <naresh.bhat@linaro.org>
+> Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+> Signed-off-by: Gaurang Shastri <gshastri@juniper.net>
 > ---
->  .../ntimed/ntimed/use-ldflags.patch                | 16 +++++++++
->  .../recipes-support/ntimed/ntimed_git.bb           | 41 ++++++++++++++++++++++
->  2 files changed, 57 insertions(+)
->  create mode 100644 meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch
->  create mode 100644 meta-networking/recipes-support/ntimed/ntimed_git.bb
+>  .../recipes-utils/xorriso/xorriso_1.4.0.bb         |   30 ++++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+>  create mode 100644 meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
 >
-> diff --git a/meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch b/meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch
+> diff --git a/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb b/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
 > new file mode 100644
-> index 0000000..87a7778
+> index 0000000..2f81f0d
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/ntimed/ntimed/use-ldflags.patch
-> @@ -0,0 +1,16 @@
-> +Obey LDFLAGS.
+> +++ b/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
+> @@ -0,0 +1,30 @@
+> +DESCRIPTIONS = "xorriso copies file objects from POSIX compliant filesystems \
+> +into Rock Ridge enhanced ISO 9660 filesystems and allows session-wise \
+> +manipulation of such filesystems"
 > +
-> +Signed-off-by: Christopher Larson <kergoth@gmail.com>
-> +Upstream-Status: Pending
+> +LICENSE = "GPLv3"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 > +
-> +--- Ntimed.orig/configure      2015-05-30 11:57:59.927796993 -0700
-> ++++ Ntimed/configure   2015-05-30 11:58:26.143948894 -0700
-> +@@ -142,7 +142,7 @@
+> +# with, without, depends, rdepends
+> +#
+> +PACKAGECONFIG ??= "acl attr zlib bzip2 readline"
+> +PACKAGECONFIG[acl] = "--enable-libacl,--disable-libacl,acl,"
+> +PACKAGECONFIG[attr] = "--enable-xattr,--disable-xattr,attr,"
+> +PACKAGECONFIG[zlib] = "--enable-zlib,--disable-zlib,zlib,"
+> +PACKAGECONFIG[bzip2] = "--enable-libbz2,--disable-libbz2,bzip2,"
+> +PACKAGECONFIG[readline] = "--enable-libreadline,--disable-libreadline,readline,"
 > +
-> +       echo
-> +       echo "ntimed-client:    ${l}"
-> +-      echo "  \${CC} \${CFLAGS} -o ntimed-client ${l} -lm"
-> ++      echo "  \${CC} \${CFLAGS} -o ntimed-client ${l} \${LDFLAGS} -lm"
-> +       echo
-> +       echo "clean:"
-> +       echo "  rm -f ${l} ntimed-client"
-> diff --git a/meta-networking/recipes-support/ntimed/ntimed_git.bb b/meta-networking/recipes-support/ntimed/ntimed_git.bb
-> new file mode 100644
-> index 0000000..0990541
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ntimed/ntimed_git.bb
-> @@ -0,0 +1,41 @@
-> +SUMMARY = "Network time synchronization software, NTPD replacement"
-> +DESCRIPTION = "This is a preview/early-access/alpha/buzzword-of-the-times \
-> +release of a new FOSS project written to gradually take over the world of \
-> +networked timekeeping."
-> +HOMEPAGE = "https://github.com/bsdphk/Ntimed"
-> +SECTION = "console/network"
+> +RDEPENDS_${PN} = "tk"
 > +
-> +LICENSE = "BSD-2-Clause"
-> +LIC_FILES_CHKSUM = "file://main.c;startline=2;endline=24;md5=eda11d21005319bb76cbb6f911f0f66d"
+> +inherit autotools-brokensep pkgconfig
+
+would be good if it did not need brokensep but probably its ok to have
+it done as a follow up.
+
 > +
-> +SRC_URI = "git://github.com/bsdphk/Ntimed \
-> +           file://use-ldflags.patch"
+> +SRC_URI = "http://www.gnu.org/software/${BPN}/${BPN}-${PV}.tar.gz"
 > +
-> +PV = "0.0+git${SRCPV}"
-> +SRCREV = "db0abbb4c80f2ecef6bc5d9639bca5bea28532a2"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +EXTRA_OEMAKE = "\
-> +    'CC=${CC}' \
-> +    'CFLAGS=${CFLAGS}' \
-> +    'LDFLAGS=${LDFLAGS}' \
-> +"
-> +
-> +do_configure () {
-> +    sh ./configure
+> +do_configure_prepend () {
+> +    touch NEWS
 > +}
 > +
-> +do_compile () {
-> +    oe_runmake
-> +}
+> +BBCLASSEXTEND = "native"
 > +
-> +do_install () {
-> +    install -D -m 0755 ntimed-client ${D}${sbindir}/ntimed-client
-> +}
-> +
-> +ALLOW_EMPTY_${PN} = "1"
-> +RDEPENDS_${PN} += "ntimed-client"
-> +
-> +PACKAGE_BEFORE_PN += "ntimed-client"
-> +FILES_ntimed-client = "${sbindir}/ntimed-client"
+> +SRC_URI[md5sum] = "ec79fd2736b8da76e7a870e27cadf6fa"
+> +SRC_URI[sha256sum] = "0bd1e085015b28c24f57697d6def2fe84517967dc417554c0c3ccf1685ed0e56"
 > --
-> 2.2.1
+> 1.7.9.5
 >
 > --
 > _______________________________________________
