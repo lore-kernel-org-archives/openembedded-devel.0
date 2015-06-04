@@ -1,36 +1,35 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id C2EFB601F7
+Return-Path: <akuster808@gmail.com>
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id DF75D734DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 20:57:42 +0000 (UTC)
-Received: by pdjn11 with SMTP id n11so464511pdj.0
+	Thu,  4 Jun 2015 23:11:28 +0000 (UTC)
+Received: by qkx62 with SMTP id 62so32128214qkx.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jun 2015 13:57:43 -0700 (PDT)
+	Thu, 04 Jun 2015 16:11:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ajddk1lY+QBXjg4ZfGidgk2LDPOE6m9GAijgQwhZf8Y=;
-	b=n131CYFQidlhWsKabiO5RAWn5xle+q+r2mEk3zbKuPegTSb6Vc1zOHnuldBVvbCFZt
-	os44MPO8yWCBNxlKt/Xyn2Rld9wCMwJu+LeB+fsJumELcxSNDFB7W/9zfQXukQ6pRZNu
-	ix/O3MTupn2SzEuvY48626Y+9Ral8juHFA14lDTOQmq/jGBOrWJefe7D+JtS9e2JnWHV
-	6kPx+tl/3XQCkG4xFQH7nhvRSR5Bky2wTl2kOVaCdrcIfJOLkZMm37ao+r7EhtQLuA+/
-	siW3HVhtLWBOY4BRhWWm1ieZqwIDOtWHbjdTVKVqGsg7h2cRYTHKifxA7NOPRPILlroJ
-	18Vg==
-X-Received: by 10.68.68.203 with SMTP id y11mr4313138pbt.34.1433451463375;
-	Thu, 04 Jun 2015 13:57:43 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id ku10sm4754171pab.3.2015.06.04.13.57.41
+	h=from:to:subject:date:message-id;
+	bh=6aecumoGy58FoNIWcAbOFqK6GWM1f5Mg/mdwwRl2+Mo=;
+	b=zCLDovo5lSKpGN4vKTDCZVWBK75d2Dih8cl2pXmThGi1Q/dQtWGBNrstzJXTJeGZhT
+	YgqP0McsQRuj1JTA/C+cAPY1Kmfu1/yOUfPQY1mOnKGcVa4rZbxxLG8j6lA428aqI4e2
+	XgS1H2zaohrwrfBKvdfyZg8pe1Z89qHTCQTqj0fC8jnhtt5mP8oBVW7b3qwIumBPDr+m
+	qm7PZV5FWNfOuC36dtbbgahhGr9hAYAlsZglCj+ncBRz9iAV5E+0LLDsOxxlM/wRLgCa
+	Rq2DQjL5zFIli+8gdIMyEvVgdj5QwjGOk33NLYFHUCztFnnfw/QxuHLAptr+FLyvr+ON
+	pnaA==
+X-Received: by 10.140.38.167 with SMTP id t36mr510093qgt.69.1433459490003;
+	Thu, 04 Jun 2015 16:11:30 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by mx.google.com with ESMTPSA id a102sm3170427qka.0.2015.06.04.16.11.27
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jun 2015 13:57:42 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
+	Thu, 04 Jun 2015 16:11:28 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jun 2015 13:57:31 -0700
-Message-Id: <1433451451-8465-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <CAMKF1srvUs9pVeS7T0zd8QpCAwCjTTR-uryJxRNmuPGNFh2sSQ@mail.gmail.com>
-References: <CAMKF1srvUs9pVeS7T0zd8QpCAwCjTTR-uryJxRNmuPGNFh2sSQ@mail.gmail.com>
-Subject: [meta-oe][PATCH v2 3/7] klibc.inc: use x86 over-ride instead of i486/i586/i686/pentium
+Date: Thu,  4 Jun 2015 16:11:24 -0700
+Message-Id: <1433459484-6308-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-ruby][PATCH] bundler: update to 1.9.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 20:57:52 -0000
+X-List-Received-Date: Thu, 04 Jun 2015 23:11:32 -0000
 
-32bit x86 is covered by the x86 over-ride, so duplicate over-rides for
-i486/i586/i686/pentium are not required.
+add depends for git.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 4 ----
- 1 file changed, 4 deletions(-)
+ meta-ruby/recipes-devtools/ruby/bundler_git.bb | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 9f445e1..a707ed5 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -44,10 +44,6 @@ KLIBC_ARCH_armeb = "arm"
- KLIBC_ARCH_mipsel = "mips"
- KLIBC_ARCH_x86 = "i386"
- KLIBC_ARCH_x86-64 = "x86_64"
--KLIBC_ARCH_i486 = "i386"
--KLIBC_ARCH_i586 = "i386"
--KLIBC_ARCH_i686 = "i386"
--KLIBC_ARCH_pentium = "i386"
- KLIBC_ARCH_powerpc = "ppc"
- KLIBC_ARCH_powerpc64 = "ppc64"
- THIS_LIBKLIBC = "libklibc (= ${PV})"
+diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+index fc73001..7d79544 100644
+--- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
++++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+@@ -13,19 +13,21 @@ been installed, so that others can install the exact same gems."
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=196bb963e601609817d7e9ac9a64a867"
+ 
+-PR = "r0"
++SRCREV = "06dc8472b9142fd6aaefff780d6d252c20dc2a04"
+ 
+-PV = "1.6.2"
+-SRCREV = "06e3647c117da210ffd15a174624497830addd7b"
++BRANCH = "1-9-stable"
++PV = "1.9.4"
+ 
+ S = "${WORKDIR}/git"
+ 
+ SRC_URI = " \
+-    git://github.com/bundler/bundler.git \
++    git://github.com/bundler/bundler.git;branch=${BRANCH} \
+     "
+ 
+ inherit ruby
+ 
+ FILES_${PN} += "${libdir}/ruby/gems"
+ 
++RDEPENDS_${PN} = "git"
++
+ BBCLASSEXTEND = "native"
 -- 
-1.9.1
+2.3.5
 
 
