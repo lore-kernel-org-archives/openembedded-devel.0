@@ -1,37 +1,37 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 43C6B757ED
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 057B2757ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 19:21:30 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so145655524igb.1
+	Thu,  4 Jun 2015 19:21:33 +0000 (UTC)
+Received: by iesa3 with SMTP id a3so43200703ies.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jun 2015 12:21:31 -0700 (PDT)
+	Thu, 04 Jun 2015 12:21:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Y282riFanRUQYwzonk9nYL0xmif5pFOGPQdFr4Tx8w0=;
-	b=V4K1+Pdzax8ixp6qC1+9hdAjYSQtpJFJP129nI4K3xZx63dej47KDZ5q/0HUn8x4g9
-	8F9RQJQt+YzrbFv63EJRpPADVlHSbkikb0S9gCUoWs7BPuos+q161BZuNMllxwIR/9C9
-	skMt9k2xrf2kAJ6+y4uZ9TNm1bfCIxr3wnHbK3QCu0CYgzY7cKcqR+fswwbLevNaYO8+
-	wRZ5baE1MX9aVEK6NRJZwyienCBWcwMnGdTkxIzMCqlDpj+bT4zqbumS3+UGoMXReMGQ
-	1xsCyrwEKxBFAcV0V9Wp4rKTbZx+/SZLAqzNVU8MRYFJiB/tE4veyezbQa2Lgv+x31Ru
-	e0ZA==
-X-Received: by 10.50.25.162 with SMTP id d2mr7367180igg.11.1433445691540;
-	Thu, 04 Jun 2015 12:21:31 -0700 (PDT)
+	bh=/JSG2pYEvfxgQf8VaRruHZxvl38IY+gIyY5R+XZJjFA=;
+	b=IQqLiyMBxDpt1crSpNUkFYp5FFEim96YioeTfCI7QCF+kptqik664NnkviFk1NdlgR
+	uRX+chxiSDwZG/KkztqeTQQXtMCYpNmeKEKt0KoAfMnCQ0JbUlEzIqYJ3DkQGzacEkZS
+	vWQXslLpsQ/sC86JJTI+x785A+FNTRpFjzCeMQJUHBF3E0d97wZJVhg7ZMKWPE3+ABCw
+	rL7F1Z1eKdL3YUwhquYqGl0asjHFPav1WE+NjImTB3R2Kt1Ixw8f0daI94UNnhVJju2f
+	Qh584zc+St5z8bseyHOaGNBJQK94Y60X9ugkCNKI1EPAhFexv7xMtaqHh2Z9l160V/tM
+	9BJg==
+X-Received: by 10.50.59.180 with SMTP id a20mr35984092igr.23.1433445695170;
+	Thu, 04 Jun 2015 12:21:35 -0700 (PDT)
 Received: from e6520.cablelabs.com
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
 	by mx.google.com with ESMTPSA id
-	je10sm9950529igb.15.2015.06.04.12.21.29
+	je10sm9950529igb.15.2015.06.04.12.21.33
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jun 2015 12:21:30 -0700 (PDT)
+	Thu, 04 Jun 2015 12:21:33 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jun 2015 12:21:02 -0700
-Message-Id: <1433445666-7207-3-git-send-email-armccurdy@gmail.com>
+Date: Thu,  4 Jun 2015 12:21:03 -0700
+Message-Id: <1433445666-7207-4-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1433445666-7207-1-git-send-email-armccurdy@gmail.com>
 References: <1433445666-7207-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 3/7] klibc.inc: use x86 over-ride instead of i486/i586/i686
+Subject: [meta-oe][PATCH 4/7] gst-plugins-base: use x86 over-ride instead of i586
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 19:21:33 -0000
+X-List-Received-Date: Thu, 04 Jun 2015 19:21:34 -0000
 
-32bit x86 is covered by the x86 over-ride, so duplicate over-rides for
-i486/i586/i686 are not required.
+Support i686 without needing to duplicate the i586 over-ride.
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 3 ---
- 1 file changed, 3 deletions(-)
+ .../recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 9f445e1..41b0b29 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -44,9 +44,6 @@ KLIBC_ARCH_armeb = "arm"
- KLIBC_ARCH_mipsel = "mips"
- KLIBC_ARCH_x86 = "i386"
- KLIBC_ARCH_x86-64 = "x86_64"
--KLIBC_ARCH_i486 = "i386"
--KLIBC_ARCH_i586 = "i386"
--KLIBC_ARCH_i686 = "i386"
- KLIBC_ARCH_pentium = "i386"
- KLIBC_ARCH_powerpc = "ppc"
- KLIBC_ARCH_powerpc64 = "ppc64"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+index c8a9499..0bcb659 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+@@ -36,4 +36,4 @@ do_configure_prepend() {
+ 
+ FILES_${PN} += "${datadir}/${BPN}"
+ 
+-CACHED_CONFIGUREVARS_append_i586 = " ac_cv_header_emmintrin_h=no ac_cv_header_xmmintrin_h=no"
++CACHED_CONFIGUREVARS_append_x86 = " ac_cv_header_emmintrin_h=no ac_cv_header_xmmintrin_h=no"
 -- 
 1.9.1
 
