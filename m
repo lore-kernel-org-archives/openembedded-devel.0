@@ -1,20 +1,34 @@
-Return-Path: <josep.puigdemont@enea.com>
-Received: from mx-3.enea.com (sestofw01.enea.se [192.36.1.252])
-	by mail.openembedded.org (Postfix) with SMTP id 61A9C734DA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id A456B734DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 12:37:27 +0000 (UTC)
-Received: from iapetus.enea.se (172.16.140.15) by smtp.enea.com (172.21.1.208)
-	with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 4 Jun 2015 14:37:26 +0200
-From: Josep Puigdemont <josep.puigdemont@enea.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Jun 2015 14:36:52 +0200
-Message-ID: <1433421412-2498-1-git-send-email-josep.puigdemont@enea.com>
-X-Mailer: git-send-email 2.1.0
-MIME-Version: 1.0
-Received-SPF: None (SESTOEX08.enea.se: josep.puigdemont@enea.com does not
-	designate permitted sender hosts)
-Subject: [meta-oe][PATCH] libhugetlbfs: project moved to github
+	Thu,  4 Jun 2015 19:09:49 +0000 (UTC)
+Received: by iebmu5 with SMTP id mu5so7885203ieb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Jun 2015 12:09:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=SAwNZas8XE4bVIYbmYvZIgFu+JTku1zDlcxGlqk10N0=;
+	b=VZMka+Z79obSJLKNXS6btsxRCnmh9MBXXamQ13MuBVkRgE2Yh3sD+FxOVmyeGe5pNY
+	BVcaDxlwsueEfnk4uGraNKjraTtfRXszB36f3sL3p9Xt7uYxCM6oWuwEcoHGwO2dwUZW
+	LFUjZjHL+cCGAj3UjNPLaMLhatAhZfV1H+HC99KQju1tJOb831wYfMcpBZMWnuEwPgZ7
+	w5BL22u2QoxLw/xn00WOfAmkc3bQ06YlsCJd9hDWKpoLA3sqbKjO92kBKxNobv+kg8PR
+	GClqAk0csYQuegSvVNDJmfW2WWzpHnKQyLIR7zb/zVoNsINbeNliyJSj1u5PIrLzsb/0
+	IwUQ==
+X-Received: by 10.107.150.73 with SMTP id y70mr33810425iod.21.1433444990889;
+	Thu, 04 Jun 2015 12:09:50 -0700 (PDT)
+Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
+	[96.119.89.79])
+	by mx.google.com with ESMTPSA id s5sm3159456igh.6.2015.06.04.12.09.50
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 04 Jun 2015 12:09:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  4 Jun 2015 12:09:42 -0700
+Message-Id: <1433444982-25590-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-qt5][PATCH] qtwayland: Bump QT_VERSION to "5.4.3"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,35 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 12:37:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 04 Jun 2015 19:09:51 -0000
 
-Signed-off-by: Josep Puigdemont <josep.puigdemont@enea.com>
+We pin the recipe at 182488129c3f6a67a7e781fdb7c0147777191991
+and upstream changed the MODULE_VERSION = 5.4.3 in that commit
+
+Fixes
+| install: cannot stat
+'/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/q
+twayland/5.4.2+gitAUTOINC+182488129c-r0/build/include/QtCompositor/5.4.2/QtCompositor/private/qwayland-server-*.h':
+No such fil
+e or directory
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ recipes-qt/qt5/qtwayland_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index 4ce6a19..ce0c6af 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -1,4 +1,5 @@
- SUMMARY = "A library which provides easy access to huge pages of memory"
-+HOMEPAGE = "https://github.com/libhugetlbfs/libhugetlbfs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index 065bc3c..0be7afe 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -37,7 +37,7 @@ SRC_URI += " \
+     file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
+ "
  
-@@ -10,7 +11,8 @@ PV = "2.18"
- PE = "1"
+-QT_VERSION ?= "5.4.2"
++QT_VERSION ?= "5.4.3"
  
- SRCREV = "ea3f6b273f535aab38cefae30030774457bbbfe6"
--SRC_URI = "git://git.code.sf.net/p/libhugetlbfs/code \
-+SRC_URI = " \
-+    git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
-     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
-     file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
-     file://tests-Makefile-install-static-4G-edge-testcases.patch \
+ do_install_append() {
+     # do install files created by qtwaylandscanner
 -- 
-2.1.0
+2.1.4
 
 
