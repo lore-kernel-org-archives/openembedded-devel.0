@@ -1,33 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 775EE734DA
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pd0-f174.google.com (mail-pd0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id C2EFB601F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 20:15:39 +0000 (UTC)
-Received: by wibut5 with SMTP id ut5so587341wib.1
+	Thu,  4 Jun 2015 20:57:42 +0000 (UTC)
+Received: by pdjn11 with SMTP id n11so464511pdj.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jun 2015 13:15:40 -0700 (PDT)
+	Thu, 04 Jun 2015 13:57:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=pUUw5+DHKIj7YRlEeB0FyGDPTcbttOD/gt5zOO7K2Yg=;
-	b=oLSXNmGplW0lu4pXJRWGmfXq0oTZBFsdb3I4vcUjwnwoTqPWVrF5N6uvgMXDdW6dju
-	UCww/Tjr67nCrg+MLz3JSRQI7ZGsFto8FUAsjPuhv7mccBfs90HoZRQzcMBHVNMI3NgB
-	yjNJf66GDej7WUGI88DywQW3QCksokcqNZ8k/ewoQgIn+fBwsRNpx7IlZLnqo7Eurs/L
-	ppCb9/CLg5I98FZcT7QTpgyYjGesNNvrSz7GGIgA+Mgow/ijaxGfsUNVJ0UaiMZSRmoJ
-	P/9opCI9f/Bw3LkxbDpgz3raQ8kJM/6zSGnKiT/8Im8AHfudycAvnvM51ns+BAg5isTk
-	eWRA==
-MIME-Version: 1.0
-X-Received: by 10.180.99.2 with SMTP id em2mr55600730wib.59.1433448940468;
-	Thu, 04 Jun 2015 13:15:40 -0700 (PDT)
-Received: by 10.28.167.73 with HTTP; Thu, 4 Jun 2015 13:15:40 -0700 (PDT)
-In-Reply-To: <1433444982-25590-1-git-send-email-raj.khem@gmail.com>
-References: <1433444982-25590-1-git-send-email-raj.khem@gmail.com>
-Date: Thu, 4 Jun 2015 22:15:40 +0200
-Message-ID: <CA+chaQe=V5grchwHfUVNQVqVXUCQ3okdLsCB1V9FnJK7hC_uHQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH] qtwayland: Bump QT_VERSION to "5.4.3"
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=ajddk1lY+QBXjg4ZfGidgk2LDPOE6m9GAijgQwhZf8Y=;
+	b=n131CYFQidlhWsKabiO5RAWn5xle+q+r2mEk3zbKuPegTSb6Vc1zOHnuldBVvbCFZt
+	os44MPO8yWCBNxlKt/Xyn2Rld9wCMwJu+LeB+fsJumELcxSNDFB7W/9zfQXukQ6pRZNu
+	ix/O3MTupn2SzEuvY48626Y+9Ral8juHFA14lDTOQmq/jGBOrWJefe7D+JtS9e2JnWHV
+	6kPx+tl/3XQCkG4xFQH7nhvRSR5Bky2wTl2kOVaCdrcIfJOLkZMm37ao+r7EhtQLuA+/
+	siW3HVhtLWBOY4BRhWWm1ieZqwIDOtWHbjdTVKVqGsg7h2cRYTHKifxA7NOPRPILlroJ
+	18Vg==
+X-Received: by 10.68.68.203 with SMTP id y11mr4313138pbt.34.1433451463375;
+	Thu, 04 Jun 2015 13:57:43 -0700 (PDT)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by mx.google.com with ESMTPSA id ku10sm4754171pab.3.2015.06.04.13.57.41
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 04 Jun 2015 13:57:42 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  4 Jun 2015 13:57:31 -0700
+Message-Id: <1433451451-8465-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <CAMKF1srvUs9pVeS7T0zd8QpCAwCjTTR-uryJxRNmuPGNFh2sSQ@mail.gmail.com>
+References: <CAMKF1srvUs9pVeS7T0zd8QpCAwCjTTR-uryJxRNmuPGNFh2sSQ@mail.gmail.com>
+Subject: [meta-oe][PATCH v2 3/7] klibc.inc: use x86 over-ride instead of i486/i586/i686/pentium
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,55 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 20:15:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 04 Jun 2015 20:57:52 -0000
 
-UPS, I'll double check how this could be missed in my tests (I know that in
-my world builds there is bbappend with qtwayland SRCREV+SRC_URI
-modification from meta-luneui), but my local builds were without
-meta-luneui).
+32bit x86 is covered by the x86 over-ride, so duplicate over-rides for
+i486/i586/i686/pentium are not required.
 
-On Thu, Jun 4, 2015 at 9:09 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ meta-initramfs/recipes-devtools/klibc/klibc.inc | 4 ----
+ 1 file changed, 4 deletions(-)
 
-> We pin the recipe at 182488129c3f6a67a7e781fdb7c0147777191991
-> and upstream changed the MODULE_VERSION = 5.4.3 in that commit
->
-> Fixes
-> | install: cannot stat
->
-> '/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/q
->
-> twayland/5.4.2+gitAUTOINC+182488129c-r0/build/include/QtCompositor/5.4.2/QtCompositor/private/qwayland-server-*.h':
-> No such fil
-> e or directory
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes-qt/qt5/qtwayland_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/
-> qtwayland_git.bb
-> index 065bc3c..0be7afe 100644
-> --- a/recipes-qt/qt5/qtwayland_git.bb
-> +++ b/recipes-qt/qt5/qtwayland_git.bb
-> @@ -37,7 +37,7 @@ SRC_URI += " \
->
->  file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
->  "
->
-> -QT_VERSION ?= "5.4.2"
-> +QT_VERSION ?= "5.4.3"
->
->  do_install_append() {
->      # do install files created by qtwaylandscanner
-> --
-> 2.1.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 9f445e1..a707ed5 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -44,10 +44,6 @@ KLIBC_ARCH_armeb = "arm"
+ KLIBC_ARCH_mipsel = "mips"
+ KLIBC_ARCH_x86 = "i386"
+ KLIBC_ARCH_x86-64 = "x86_64"
+-KLIBC_ARCH_i486 = "i386"
+-KLIBC_ARCH_i586 = "i386"
+-KLIBC_ARCH_i686 = "i386"
+-KLIBC_ARCH_pentium = "i386"
+ KLIBC_ARCH_powerpc = "ppc"
+ KLIBC_ARCH_powerpc64 = "ppc64"
+ THIS_LIBKLIBC = "libklibc (= ${PV})"
+-- 
+1.9.1
+
 
