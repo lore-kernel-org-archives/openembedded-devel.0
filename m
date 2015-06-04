@@ -1,34 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f169.google.com (mail-ie0-f169.google.com
-	[209.85.223.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A456B734DA
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id D1584734DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 19:09:49 +0000 (UTC)
-Received: by iebmu5 with SMTP id mu5so7885203ieb.1
+	Thu,  4 Jun 2015 19:21:15 +0000 (UTC)
+Received: by igbzc4 with SMTP id zc4so16533803igb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jun 2015 12:09:50 -0700 (PDT)
+	Thu, 04 Jun 2015 12:21:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=SAwNZas8XE4bVIYbmYvZIgFu+JTku1zDlcxGlqk10N0=;
-	b=VZMka+Z79obSJLKNXS6btsxRCnmh9MBXXamQ13MuBVkRgE2Yh3sD+FxOVmyeGe5pNY
-	BVcaDxlwsueEfnk4uGraNKjraTtfRXszB36f3sL3p9Xt7uYxCM6oWuwEcoHGwO2dwUZW
-	LFUjZjHL+cCGAj3UjNPLaMLhatAhZfV1H+HC99KQju1tJOb831wYfMcpBZMWnuEwPgZ7
-	w5BL22u2QoxLw/xn00WOfAmkc3bQ06YlsCJd9hDWKpoLA3sqbKjO92kBKxNobv+kg8PR
-	GClqAk0csYQuegSvVNDJmfW2WWzpHnKQyLIR7zb/zVoNsINbeNliyJSj1u5PIrLzsb/0
-	IwUQ==
-X-Received: by 10.107.150.73 with SMTP id y70mr33810425iod.21.1433444990889;
-	Thu, 04 Jun 2015 12:09:50 -0700 (PDT)
-Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
-	[96.119.89.79])
-	by mx.google.com with ESMTPSA id s5sm3159456igh.6.2015.06.04.12.09.50
+	bh=CD4S3SHg/KiXtkpOMy94TiA5R+GTg1jtESLu5MGiT5E=;
+	b=QY4fnecpEaRVkJbW2M6VcMNVXFd8s/DjSoBRxhkFBlWXuL9o1JxMw0VY6BcZPLAlcs
+	o2kB9bjDodJ+cUBbm9PeZq1Edcnt21/DxMJxFJShP5y0ze4Lnl3nqw9kAF1xtPGgG5NV
+	Uwb2jTdDeny6WYTueweJs2/IZak460/+WTfJCFc1xSub0TgsiASFpgB/X2DdWIcFHNY5
+	so5CJzY+iyUGVNp7fX26OmcSKzUJ7bWYawx90MBCLZ6QkjImvPA70fYyOJXK0ZQJL4cz
+	yn7rTch4WY6cPmLPSJJaEtDXvOO3dxj169YgPo3owEod5q61Nk6oLF8xyqacQYPgshiL
+	bacQ==
+X-Received: by 10.42.178.7 with SMTP id bk7mr6062817icb.79.1433445676200;
+	Thu, 04 Jun 2015 12:21:16 -0700 (PDT)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by mx.google.com with ESMTPSA id
+	je10sm9950529igb.15.2015.06.04.12.21.13
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jun 2015 12:09:50 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 04 Jun 2015 12:21:14 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jun 2015 12:09:42 -0700
-Message-Id: <1433444982-25590-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-qt5][PATCH] qtwayland: Bump QT_VERSION to "5.4.3"
+Date: Thu,  4 Jun 2015 12:21:00 -0700
+Message-Id: <1433445666-7207-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH 1/7] elbow: use x86 over-ride instead of i586
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,37 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 19:09:51 -0000
+X-List-Received-Date: Thu, 04 Jun 2015 19:21:16 -0000
 
-We pin the recipe at 182488129c3f6a67a7e781fdb7c0147777191991
-and upstream changed the MODULE_VERSION = 5.4.3 in that commit
+Support i686 without needing to duplicate the i586 over-ride.
 
-Fixes
-| install: cannot stat
-'/mnt/home/kraj/work/angstrom/build/tmp-angstrom-glibc/work/armv7at2hf-vfp-neon-angstrom-linux-gnueabi/q
-twayland/5.4.2+gitAUTOINC+182488129c-r0/build/include/QtCompositor/5.4.2/QtCompositor/private/qwayland-server-*.h':
-No such fil
-e or directory
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- recipes-qt/qt5/qtwayland_git.bb | 2 +-
+ meta-efl/recipes-efl/e17/elbow_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index 065bc3c..0be7afe 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -37,7 +37,7 @@ SRC_URI += " \
-     file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
- "
+diff --git a/meta-efl/recipes-efl/e17/elbow_git.bb b/meta-efl/recipes-efl/e17/elbow_git.bb
+index 16664f9..064b794 100644
+--- a/meta-efl/recipes-efl/e17/elbow_git.bb
++++ b/meta-efl/recipes-efl/e17/elbow_git.bb
+@@ -8,7 +8,7 @@ SRCREV = "b41fd0bc9514ff61bb2a50d957efe4155fa3e6a8"
  
--QT_VERSION ?= "5.4.2"
-+QT_VERSION ?= "5.4.3"
+ # webkit-efl isn't available for < armv7a
+ COMPATIBLE_MACHINE = "(-)"
+-COMPATIBLE_MACHINE_i586 = "(.*)"
++COMPATIBLE_MACHINE_x86 = "(.*)"
+ COMPATIBLE_MACHINE_x86-64 = "(.*)"
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
  
- do_install_append() {
-     # do install files created by qtwaylandscanner
 -- 
-2.1.4
+1.9.1
 
 
