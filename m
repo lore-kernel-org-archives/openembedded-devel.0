@@ -1,37 +1,37 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C38A75811
+Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
+	[209.85.213.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 43C6B757ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 19:21:23 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so23014128igb.0
+	Thu,  4 Jun 2015 19:21:30 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so145655524igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jun 2015 12:21:24 -0700 (PDT)
+	Thu, 04 Jun 2015 12:21:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=unt2DIsMCqZhYNCD6LLM0HhAd5xwu5a4RJbQmRuwpyk=;
-	b=ldzY/lFcNGFifLrTQy+dmL6itbF1H/VHubrWAHmYhE150/otYVwJJPb96BPWO9mMjH
-	YkLZ//LZN/KGfMelKtYfMUZ9GUawiazs0fuvJhRtmXtXKe+yQORcLwxPWQvGN8LA9fYm
-	mNcAYH5Jsrg2DmrllW49kLhF0oD11fl4hhbTAIy2W5U9QePc/6KqPIwTMb3vUdsS9JjO
-	2zmuI3AAUWtKPzWiwacFrBa7mceGl3MdYMar+dp+qDRsjjmZY83XvzG3W7HU5SkXq0c0
-	ciHfFfB+V7mhQXPIzvNzFbcnbiE0o6aHrzrxrC2LLh4itC9IqBUN4eTgThEk323mkIOY
-	D+8w==
-X-Received: by 10.50.112.73 with SMTP id io9mr36651513igb.18.1433445684078;
-	Thu, 04 Jun 2015 12:21:24 -0700 (PDT)
+	bh=Y282riFanRUQYwzonk9nYL0xmif5pFOGPQdFr4Tx8w0=;
+	b=V4K1+Pdzax8ixp6qC1+9hdAjYSQtpJFJP129nI4K3xZx63dej47KDZ5q/0HUn8x4g9
+	8F9RQJQt+YzrbFv63EJRpPADVlHSbkikb0S9gCUoWs7BPuos+q161BZuNMllxwIR/9C9
+	skMt9k2xrf2kAJ6+y4uZ9TNm1bfCIxr3wnHbK3QCu0CYgzY7cKcqR+fswwbLevNaYO8+
+	wRZ5baE1MX9aVEK6NRJZwyienCBWcwMnGdTkxIzMCqlDpj+bT4zqbumS3+UGoMXReMGQ
+	1xsCyrwEKxBFAcV0V9Wp4rKTbZx+/SZLAqzNVU8MRYFJiB/tE4veyezbQa2Lgv+x31Ru
+	e0ZA==
+X-Received: by 10.50.25.162 with SMTP id d2mr7367180igg.11.1433445691540;
+	Thu, 04 Jun 2015 12:21:31 -0700 (PDT)
 Received: from e6520.cablelabs.com
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
 	by mx.google.com with ESMTPSA id
-	je10sm9950529igb.15.2015.06.04.12.21.22
+	je10sm9950529igb.15.2015.06.04.12.21.29
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jun 2015 12:21:22 -0700 (PDT)
+	Thu, 04 Jun 2015 12:21:30 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jun 2015 12:21:01 -0700
-Message-Id: <1433445666-7207-2-git-send-email-armccurdy@gmail.com>
+Date: Thu,  4 Jun 2015 12:21:02 -0700
+Message-Id: <1433445666-7207-3-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1433445666-7207-1-git-send-email-armccurdy@gmail.com>
 References: <1433445666-7207-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 2/7] webkit-efl.inc: use x86 over-ride instead of i586
+Subject: [meta-oe][PATCH 3/7] klibc.inc: use x86 over-ride instead of i486/i586/i686
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,28 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 19:21:23 -0000
+X-List-Received-Date: Thu, 04 Jun 2015 19:21:33 -0000
 
-Support i686 without needing to duplicate the i586 over-ride.
+32bit x86 is covered by the x86 over-ride, so duplicate over-rides for
+i486/i586/i686 are not required.
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-efl/recipes-efl/webkit/webkit-efl.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-initramfs/recipes-devtools/klibc/klibc.inc | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-efl/recipes-efl/webkit/webkit-efl.inc b/meta-efl/recipes-efl/webkit/webkit-efl.inc
-index cf919ec..aa91572 100644
---- a/meta-efl/recipes-efl/webkit/webkit-efl.inc
-+++ b/meta-efl/recipes-efl/webkit/webkit-efl.inc
-@@ -52,7 +52,7 @@ do_configure_prepend_armv5() {
- 
- # and disabled LLINT currently isn't supported, so restrict to armv7a and x86*
- COMPATIBLE_MACHINE = "(-)"
--COMPATIBLE_MACHINE_i586 = "(.*)"
-+COMPATIBLE_MACHINE_x86 = "(.*)"
- COMPATIBLE_MACHINE_x86-64 = "(.*)"
- COMPATIBLE_MACHINE_armv7a = "(.*)"
- 
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 9f445e1..41b0b29 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -44,9 +44,6 @@ KLIBC_ARCH_armeb = "arm"
+ KLIBC_ARCH_mipsel = "mips"
+ KLIBC_ARCH_x86 = "i386"
+ KLIBC_ARCH_x86-64 = "x86_64"
+-KLIBC_ARCH_i486 = "i386"
+-KLIBC_ARCH_i586 = "i386"
+-KLIBC_ARCH_i686 = "i386"
+ KLIBC_ARCH_pentium = "i386"
+ KLIBC_ARCH_powerpc = "ppc"
+ KLIBC_ARCH_powerpc64 = "ppc64"
 -- 
 1.9.1
 
