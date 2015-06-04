@@ -1,27 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
+Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B38E875742
+	by mail.openembedded.org (Postfix) with ESMTP id 51B1C7562E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 07:48:23 +0000 (UTC)
+	Thu,  4 Jun 2015 09:42:39 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t547mPr4005399
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t549geUN006343
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Jun 2015 00:48:25 -0700 (PDT)
-Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Thu, 4 Jun 2015 00:48:25 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Thu, 4 Jun 2015 02:42:41 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Thu, 4 Jun 2015 02:42:39 -0700
+From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Jun 2015 15:48:13 +0800
-Message-ID: <fadb64c6fa4d33d4ccd562a1bef5eca5bf9f8139.1433403866.git.yi.zhao@windriver.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <cover.1433403866.git.yi.zhao@windriver.com>
-References: <cover.1433403866.git.yi.zhao@windriver.com>
+Date: Thu, 4 Jun 2015 17:36:27 +0800
+Message-ID: <1433410587-20478-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 3/3] llvm: fix libdir for multilib
+Subject: [PATCH][meta-networking] proftpd: upgrade to 1.3.5a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,51 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 07:48:23 -0000
+X-List-Received-Date: Thu, 04 Jun 2015 09:42:40 -0000
 Content-Type: text/plain
 
-Fix the hardcoded libdir in llvm-config and Makefile.config
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+1.3.5a includes the fix for CVE-2015-3306:
+https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3306
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-oe/recipes-core/llvm/llvm.inc |    9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ .../recipes-daemons/proftpd/{proftpd_1.3.5.bb => proftpd_1.3.5a.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.5.bb => proftpd_1.3.5a.bb} (96%)
 
-diff --git a/meta-oe/recipes-core/llvm/llvm.inc b/meta-oe/recipes-core/llvm/llvm.inc
-index 26bac33..0597be1 100644
---- a/meta-oe/recipes-core/llvm/llvm.inc
-+++ b/meta-oe/recipes-core/llvm/llvm.inc
-@@ -60,6 +60,9 @@ do_configure_prepend() {
-     sed -i "s|sys::path::parent_path(CurrentPath))\.str()|sys::path::parent_path(sys::path::parent_path(CurrentPath))).str()|g" ${S}/tools/llvm-config/llvm-config.cpp
-     sed -ri "s#/(bin|include|lib)(/?\")#/\1/${LLVM_DIR}\2#g" ${S}/tools/llvm-config/llvm-config.cpp
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+similarity index 96%
+rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+index 13c9410..9a1852c 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+@@ -14,8 +14,8 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+            file://proftpd.service \
+            "
  
-+    # Fix the hardcoded libdir in llvm-config
-+    sed -i 's:/lib\>:${base_libdir}:g' ${S}/tools/llvm-config/llvm-config.cpp
-+
-     # Fails to build unless using separate directory from source
-     mkdir -p ${LLVM_BUILD_DIR}
-     cd ${LLVM_BUILD_DIR}
-@@ -67,6 +70,10 @@ do_configure_prepend() {
+-SRC_URI[md5sum] = "aff1bff40e675244d72c4667f203e5bb"
+-SRC_URI[sha256sum] = "c10316fb003bd25eccbc08c77dd9057e053693e6527ffa2ea2cc4e08ccb87715"
++SRC_URI[md5sum] = "b9d3092411478415b31d435f8e26d173"
++SRC_URI[sha256sum] = "a1f48df8539c414ec56e0cea63dcf4b8e16e606c05f10156f030a4a67fae5696"
  
- do_compile() {
-     cd ${LLVM_BUILD_DIR}
-+
-+    # Fix libdir for multilib
-+    sed -i 's:(PROJ_prefix)/lib:(PROJ_prefix)${base_libdir}:g' Makefile.config
-+
-     oe_runmake \
-         AR="${BUILD_AR}" \
-         CC="${BUILD_CC}" \
-@@ -127,7 +134,7 @@ FILES_${PN}-dev = "${bindir}/${LLVM_DIR} \
+ inherit autotools-brokensep useradd update-rc.d systemd
  
- PACKAGES_DYNAMIC = "^libllvm-.*$"
- 
--INSANE_SKIP_libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
-+INSANE_SKIP_${MLPREFIX}libllvm${LLVM_RELEASE}-llvm-${LLVM_RELEASE} += "dev-so"
- 
- python llvm_populate_packages() {
-     libdir = bb.data.expand('${libdir}', d)
 -- 
-1.7.9.5
+1.9.1
 
 
