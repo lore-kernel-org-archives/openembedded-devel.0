@@ -1,28 +1,24 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7182475734
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 85700606E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jun 2015 08:49:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.01,1,1399996800"; 
-   d="scan'208";a="96510291"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Jun 2015 16:53:49 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t558lwW9002492
+	Fri,  5 Jun 2015 09:26:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t559QkQf021942
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 5 Jun 2015 16:47:58 +0800
-Received: from localhost.localdomain (10.167.226.47) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 5 Jun 2015 16:49:29 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
+	Fri, 5 Jun 2015 02:26:46 -0700 (PDT)
+Received: from pek-kkang-d2.wrs.com (128.224.163.135) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Fri, 5 Jun 2015 02:26:46 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Jun 2015 16:49:26 +0800
-Message-ID: <1433494166-1991-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Fri, 5 Jun 2015 17:26:48 +0800
+Message-ID: <1433496408-24477-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.47]
-Subject: [meta-networking][PATCH] dovecot: add systemd support and add user dovecot dovenull which is need to start dovecot service.
+Subject: [meta-oe][PATCH] libcanberra: upgrade and add packageconfig for gstreamer and gtk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,108 +32,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2015 08:49:29 -0000
+X-List-Received-Date: Fri, 05 Jun 2015 09:26:51 -0000
 Content-Type: text/plain
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- .../dovecot/dovecot/dovecot.service                | 14 ++++++++++++
- .../recipes-support/dovecot/dovecot/dovecot.socket | 14 ++++++++++++
- .../recipes-support/dovecot/dovecot_2.2.10.bb      | 26 +++++++++++++++++++---
- 3 files changed, 51 insertions(+), 3 deletions(-)
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/dovecot.service
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/dovecot.socket
+From: Jackie Huang <jackie.huang@windriver.com>
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/dovecot.service b/meta-networking/recipes-support/dovecot/dovecot/dovecot.service
-new file mode 100644
-index 0000000..ca250ea
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/dovecot.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Dovecot IMAP/POP3 email server
-+After=local-fs.target network.target
-+
-+[Service]
-+Type=simple
-+EnvironmentFile=-@SYSCONFDIR@/sysconfig/dovecot
-+ExecStart=@SBINDIR@/dovecot -F
-+ExecReload=/bin/kill -HUP $MAINPID
-+NonBlocking=yes
-+
-+[Install]
-+WantedBy=multi-user.target
-+
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/dovecot.socket b/meta-networking/recipes-support/dovecot/dovecot/dovecot.socket
-new file mode 100644
-index 0000000..556e1a8
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/dovecot.socket
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Dovecot IMAP/POP3 email server activation socket
-+
-+[Socket]
-+#dovecot expects separate IPv4 and IPv6 sockets
-+BindIPv6Only=ipv6-only
-+ListenStream=0.0.0.0:143
-+ListenStream=[::]:143
-+ListenStream=0.0.0.0:993
-+ListenStream=[::]:993
-+KeepAlive=true
-+
-+[Install]
-+WantedBy=sockets.target
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
-index f733a78..82225b0 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.10.bb
-@@ -7,13 +7,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a981379bd0f1c362f8d1d21515e5b30b"
- SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
-            file://0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch \
-            file://building-rquota_xdr.c-depend-on-rquota.h.patch \
--          "
-+           file://dovecot.service \
-+           file://dovecot.socket"
-+
- SRC_URI[md5sum] = "037e9c9e07d9dbff54dcff09f280fc8c"
- SRC_URI[sha256sum] = "75592483d40dc4f76cc3b41af40caa4be80478946a699d46846d5d03e4d2e09b"
+- GStreamer 0.10 has been removed meta-openembedded/meta-multimedia
+  and 1.0 left in oe-core, so upgrade libcanberra to the version
+  that support GStreamer 1.0
+
+- GStreamer and gtk support for libcanberra are optional, add
+  PACKAGECONFIG for them and use DISTRO_FEATURES to decide if
+  they are needed.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../{libcanberra_0.29.bb => libcanberra_0.30.bb}           | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-support/libcanberra/{libcanberra_0.29.bb => libcanberra_0.30.bb} (80%)
+
+diff --git a/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb b/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb
+similarity index 80%
+rename from meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
+rename to meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb
+index 0f00b20..959b88f 100644
+--- a/meta-oe/recipes-support/libcanberra/libcanberra_0.29.bb
++++ b/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb
+@@ -4,7 +4,7 @@ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1 \
+                     file://src/canberra.h;beginline=7;endline=24;md5=c616c687cf8da540a14f917e0d23ab03"
  
- DEPENDS = "openssl xz zlib bzip2 libcap"
+-DEPENDS = "gstreamer gtk+ gtk+3 libtool libvorbis"
++DEPENDS = "libtool libvorbis"
  
--inherit autotools pkgconfig
-+inherit autotools pkgconfig systemd useradd
+ inherit autotools gtk-doc
  
- PACKAGECONFIG ??= " \
-                    ${@base_contains('DISTRO_FEATURES', 'ldap', 'ldap', '', d)} \
-@@ -37,7 +39,25 @@ CACHED_CONFIGUREVARS += "i_cv_signed_size_t=no \
+@@ -12,24 +12,26 @@ SRC_URI = " \
+     http://0pointer.de/lennart/projects/${BPN}/${BPN}-${PV}.tar.xz \
+     file://0001-build-gtk-and-gtk3-version-for-canberra_gtk_play.patch \
+ "
+-SRC_URI[md5sum] = "2594093a5d61047bd9cc87e955f86df8"
+-SRC_URI[sha256sum] = "127a5ef07805856d63758e5180ebfb241d1f80094fd301c287591a15b8cfcd72"
++SRC_URI[md5sum] = "34cb7e4430afaf6f447c4ebdb9b42072"
++SRC_URI[sha256sum] = "c2b671e67e0c288a69fc33dc1b6f1b534d07882c2aceed37004bf48c601afa72"
  
- # hardcode epoll() to avoid running unsafe tests
- # BSD needs kqueue and uclibc poll()
--EXTRA_OECONF = " --with-ioloop=epoll"
-+EXTRA_OECONF = " --with-ioloop=epoll \
-+                 --with-systemdsystemunitdir=${systemd_unitdir}/system"
-+
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE_${PN} = "dovecot.service dovecot.socket"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+do_install_append () {
-+    install -d 755 ${D}/etc/dovecot
-+    touch 644 ${D}/etc/dovecot/dovecot.conf
-+    install -m 0644 ${WORKDIR}/dovecot.service ${D}${systemd_unitdir}/system
-+    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/system/dovecot.service
-+    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/dovecot.service
-+}
-+
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "-r -d ${libexecdir} -M -s ${base_sbindir}/nologin -g dovecot dovecot; \
-+                      -r -d ${libexecdir} -M -s ${base_sbindir}/nologin -g dovenull dovenull"
-+GROUPADD_PARAM_${PN} = "-f -r dovecot;-f -r dovenull"
+ EXTRA_OECONF = "\
+     --enable-null \
+-    --enable-gstreamer \
+     --disable-oss \
+-    --enable-gtk \
+-    --enable-gtk3 \
+     --disable-tdb \
+     --disable-lynx \
+ "
  
- FILES_${PN}-staticdev += "${libdir}/dovecot/*/*.a"
- FILES_${PN}-dev += "${libdir}/dovecot/*.so"
+ PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES','alsa','alsa','',d)} \
+                    ${@base_contains('DISTRO_FEATURES','pulseaudio','pulseaudio','',d)} \
++                   ${@base_contains('DISTRO_FEATURES','x11','gtk gtk3','',d)} \
++                   ${@base_contains('DISTRO_FEATURES','gstreamer','gstreamer','',d)} \
+ "
+ PACKAGECONFIG[alsa] = "--enable-alsa, --disable-alsa, alsa-lib"
+ PACKAGECONFIG[pulseaudio] = "--enable-pulse, --disable-pulse, pulseaudio"
++PACKAGECONFIG[gstreamer] = "--enable-gstreamer, --disable-gstreamer, gstreamer1.0"
++PACKAGECONFIG[gtk] = "--enable-gtk, --disable-gtk, gtk+"
++PACKAGECONFIG[gtk3] = "--enable-gtk3, --disable-gtk3, gtk+3"
+ 
+ python populate_packages_prepend() {
+     plugindir = d.expand('${libdir}/${BPN}-${PV}/')
 -- 
-1.8.4.2
+1.9.1
 
 
