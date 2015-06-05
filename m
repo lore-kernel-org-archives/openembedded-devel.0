@@ -1,34 +1,30 @@
-Return-Path: <ashcharles@gmail.com>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id AF37773BBE
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 078B172491
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jun 2015 15:55:01 +0000 (UTC)
-Received: by igblz2 with SMTP id lz2so17782242igb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jun 2015 08:55:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=HBab2djpLUcaV7QcTz2mkmXDk9tc2UZKILJuBLJCN7M=;
-	b=0YW6ORQUlugqd1lRhFQSOS1NTNtOixNZYx0CUp/t9lDneKgHuxZxofWCemBWrT8RLZ
-	25l1oLhFn+UaK1A7Zx50UB9G6HnDXY000WKJZxcqBjLSJn0sG/m8dMHni8WlRPw+85KN
-	libPyRctsbgg2I1s7aEs+HhrQo+UE3hVF4IN0kLD674iGvJuzgmsU4lFqYZlYGDxfhvZ
-	Xtt07TcVry/uoFWRjCHoax5rSRtCauhm4f8PSdvJsHyDmu3/xMR40rNiGmvaToswXTYs
-	M8JJSPwV5bMWcNPMspmr96sRV0w6zpBz/hYmvlAOQ5dNmscd5mcZ7m1NqVke9Pq2lddT
-	fgWA==
-X-Received: by 10.50.138.74 with SMTP id qo10mr13295000igb.39.1433519702541;
-	Fri, 05 Jun 2015 08:55:02 -0700 (PDT)
+	Fri,  5 Jun 2015 23:13:06 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1Z10nT-0000U5-HM from Joe_MacDonald@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Jun 2015 16:13:07 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2; Fri, 5 Jun 2015
+	16:13:07 -0700
+Received: by burninator (Postfix, from userid 1000)	id D893158256C; Fri,  5
+	Jun 2015 19:12:58 -0400 (EDT)
+Date: Fri, 5 Jun 2015 19:12:58 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20150605231258.GB27123@mentor.com>
+References: <1433410587-20478-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-Received: by 10.107.138.134 with HTTP; Fri, 5 Jun 2015 08:54:32 -0700 (PDT)
-In-Reply-To: <1430883943-30031-1-git-send-email-raj.khem@gmail.com>
-References: <1430883943-30031-1-git-send-email-raj.khem@gmail.com>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Fri, 5 Jun 2015 08:54:32 -0700
-Message-ID: <CAK8F28m=ZQLXUgNHZ8P8Fm6Bt55KApbO8YETf2AjyQzafcHnTQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	Armin Kuster <akuster808@gmail.com>, otavio@ossystems.com.br
-Subject: Re: [meta-oe][PATCH V2 2/8] polkit-gnome: Upgrade 0.102 -> 0.105
+In-Reply-To: <1433410587-20478-1-git-send-email-rongqing.li@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [PATCH][meta-networking] proftpd: upgrade to 1.3.5a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,97 +38,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2015 15:55:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 05 Jun 2015 23:13:08 -0000
+X-Groupsio-MsgNum: 55805
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="eAbsdosE1cNLO4uF"
+Content-Disposition: inline
 
-Hi,
+--eAbsdosE1cNLO4uF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Can this patch and "gdm: Whitelist it" be applied to the fido branch?
+Hi Roy,
 
-Meta-question: Is this an appropriate request? What patches are
-considered for backport?  In this case, I'm updating the
-meta-gumstix-extras layer to Fido which depends on meta-openembedded
-and, as it happens, these two patches.  I can readily carry such fixes
-as updated recipes/bbappends in my layer until I next up-rev if these
-aren't suitable for backporting---just looking to understand the
-process :).
+I'm seeing this when I merge this submission:
 
-Thanks,
-Ash
+ERROR: QA Issue: package proftpd contains bad RPATH /home/jjm/external/yoct=
+o-networking/build-qemux86-64/tmp/sysroots/qemux86-64/lib in file /home/jjm=
+/external/yocto-networking/build-qemux86-64/tmp/work/core2-64-poky-linux/pr=
+oftpd/1.3.5a-r0/packages-split/proftpd/usr/sbin/proftpd [rpaths]
+ERROR: QA run found fatal errors. Please consider fixing them.
+ERROR: Function failed: do_package_qa
+ERROR: Logfile of failure stored in: /home/jjm/external/yocto-networking/bu=
+ild-qemux86-64/tmp/work/core2-64-poky-linux/proftpd/1.3.5a-r0/temp/log.do_p=
+ackage_qa.18006
+ERROR: Task 48 (/home/jjm/external/yocto-networking/meta-openembedded/meta-=
+networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb, do_package_qa) failed=
+ with exit code '1'
 
-On Tue, May 5, 2015 at 8:45 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> add missing dep on gtk+3
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Can you take another look at it to make sure there aren't RPATH issues?
+
+-J.
+
+[[oe] [PATCH][meta-networking] proftpd: upgrade to 1.3.5a] On 15.06.04 (Thu=
+ 17:36) rongqing.li@windriver.com wrote:
+
+> From: Roy Li <rongqing.li@windriver.com>
+>=20
+> 1.3.5a includes the fix for CVE-2015-3306:
+> https://web.nvd.nist.gov/view/vuln/detail?vulnId=3DCVE-2015-3306
+>=20
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  meta-oe/recipes-extended/polkit/files/gtk-doc-check.patch  | 12 ++++++++++++
->  .../{polkit-gnome_0.102.bb => polkit-gnome_0.105.bb}       | 14 ++++++++------
->  2 files changed, 20 insertions(+), 6 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/polkit/files/gtk-doc-check.patch
->  rename meta-oe/recipes-extended/polkit/{polkit-gnome_0.102.bb => polkit-gnome_0.105.bb} (62%)
->
-> diff --git a/meta-oe/recipes-extended/polkit/files/gtk-doc-check.patch b/meta-oe/recipes-extended/polkit/files/gtk-doc-check.patch
-> new file mode 100644
-> index 0000000..4b6ad75
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/polkit/files/gtk-doc-check.patch
-> @@ -0,0 +1,12 @@
-> +--- polkit-gnome-0.105/configure.ac.org        2015-05-04 22:33:03.925977953 -0700
-> ++++ polkit-gnome-0.105/configure.ac    2015-05-04 22:33:16.862288030 -0700
-> +@@ -120,6 +120,9 @@
-> + # Check for required packages
-> + # ***************************
-> +
-> ++# check for gtk-doc
-> ++GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
-> ++
-> + POLKIT_AGENT_REQUIRED=0.97
-> + POLKIT_GOBJECT_REQUIRED=0.97
-> + GTK_REQUIRED=3.0.0
-> diff --git a/meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb b/meta-oe/recipes-extended/polkit/polkit-gnome_0.105.bb
-> similarity index 62%
-> rename from meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb
-> rename to meta-oe/recipes-extended/polkit/polkit-gnome_0.105.bb
-> index f5480e7..be33908 100644
-> --- a/meta-oe/recipes-extended/polkit/polkit-gnome_0.102.bb
-> +++ b/meta-oe/recipes-extended/polkit/polkit-gnome_0.105.bb
-> @@ -7,22 +7,24 @@ LICENSE = "LGPLv2+"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=74579fab173e4c5e12aac0cd83ee98ec \
->                      file://src/main.c;beginline=1;endline=20;md5=aba145d1802f2329ba561e3e48ecb795"
->
-> -SRC_URI = "http://hal.freedesktop.org/releases/polkit-gnome-${PV}.tar.bz2 \
-> +SRC_URI = "https://download.gnome.org/sources/polkit-gnome/${PV}/polkit-gnome-${PV}.tar.xz \
-> +           file://gtk-doc-check.patch \
->  "
-> +SRC_URI[md5sum] = "50ecad37c8342fb4a52f590db7530621"
-> +SRC_URI[sha256sum] = "1784494963b8bf9a00eedc6cd3a2868fb123b8a5e516e66c5eda48df17ab9369"
->
-> -PNBLACKLIST[polkit-gnome] ?= "Fails to build, m4:configure.ac:125: recursion limit of 1024 exceeded, use -L<N> to change it"
-> -
-> -PR = "r2"
-> +#PNBLACKLIST[polkit-gnome] ?= "Fails to build, m4:configure.ac:125: recursion limit of 1024 exceeded, use -L<N> to change it"
->
->  EXTRA_OECONF = "\
->      --disable-examples \
->      --disable-introspection \
-> +    --disable-static \
->  "
->
-> +DEPENDS += "gtk+3"
-> +
->  inherit autotools gtk-doc pkgconfig
->
->  FILES_${PN} += " ${datadir}/dbus-1 \
->                   ${datadir}/PolicyKit \
->  "
-> -SRC_URI[md5sum] = "f6b485ffd7bd605af815fd2747180481"
-> -SRC_URI[sha256sum] = "81caa6972e651e90ef4ac31d7ed41bc79543d46b850dbd5b14b40f8ef7107d11"
-> --
-> 2.1.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>  .../recipes-daemons/proftpd/{proftpd_1.3.5.bb =3D> proftpd_1.3.5a.bb}   =
+| 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.5.bb =3D> pr=
+oftpd_1.3.5a.bb} (96%)
+>=20
+> diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb b/m=
+eta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+> similarity index 96%
+> rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+> index 13c9410..9a1852c 100644
+> --- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+> +++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+> @@ -14,8 +14,8 @@ SRC_URI =3D "ftp://ftp.proftpd.org/distrib/source/${BPN=
+}-${PV}.tar.gz \
+>             file://proftpd.service \
+>             "
+> =20
+> -SRC_URI[md5sum] =3D "aff1bff40e675244d72c4667f203e5bb"
+> -SRC_URI[sha256sum] =3D "c10316fb003bd25eccbc08c77dd9057e053693e6527ffa2e=
+a2cc4e08ccb87715"
+> +SRC_URI[md5sum] =3D "b9d3092411478415b31d435f8e26d173"
+> +SRC_URI[sha256sum] =3D "a1f48df8539c414ec56e0cea63dcf4b8e16e606c05f10156=
+f030a4a67fae5696"
+> =20
+>  inherit autotools-brokensep useradd update-rc.d systemd
+> =20
+> --=20
+> 1.9.1
+>=20
+--=20
+-Joe MacDonald.
+:wq
 
+--eAbsdosE1cNLO4uF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJVciz6AAoJEEn8ffcsOfaWldUH/0Mon8IrWbukjEAEeQp7oyJd
+khjADebvKiR5ANPYJwlQCqUxMhIpSbBayIiA+UAAwoE0thicgUWdQ1Cd5ig7PI4V
+IVejcO8uDx3vUkubmsi6lb8XCds39njlIbFP3utKpmEE78mmsCH4zIfVDFaiCZAA
+oZsn8u18fsNb/xGOYGF9Zxe+Tfv7e2YIq2rPtbiPG7wuPcB8JWitjIUMcarW24Qj
+BwBnwZcVZDcm2+E2j4Db66EhyTTXtgx0738RUMNdFusPYvjMvpK+gFK7NKUEPAbF
+GsmFHX08k88YBHiSA1hXYA23MNhYHMUfr1Zum9Alr4BDb5YNGEDBxlqcDFNV7ok=
+=TldN
+-----END PGP SIGNATURE-----
+
+--eAbsdosE1cNLO4uF--
