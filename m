@@ -1,36 +1,35 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id B7F5F72491
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C21F6E648
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jun 2015 09:48:12 +0000 (UTC)
-Received: by qkx62 with SMTP id 62so37694978qkx.3
+	Fri,  5 Jun 2015 11:10:00 +0000 (UTC)
+Received: by wgv5 with SMTP id 5so54138723wgv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jun 2015 02:48:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=uqSUBOFJTXVNR8qPL4nVoKIWkH6jAEMtMo8/wP2wu1E=;
-	b=ewJm4cQCc3EReNUToFYNeUSozMNnEAicc9wjZPbELLgQxAZ1lGNdydLtvE/NRVGdIw
-	wA0uiLjv1G/LBmfMvJXcs5QErID2yb+MjPRRTdJGW4sGQS7spuh1X0lGKlis0efdmque
-	Rzwf+LRuGDlnM4C7RI8a4oBEitUc6VnUqXep4FTGqmB/MYCGgTnko58D84lSWNWT/1Qx
-	09R7YLXpfsvLVdlCLoMKKjpkrg8p35JJK8eAd83PgTDp83kRQj+SariCu4Du28TGbOCE
-	3V7KJZBKnrzkCA9yj2KA+DKgTCoaO4MW4i4o9irwhXo661rL+IWcXxyPkUG7SCJ54DDX
-	koGg==
-X-Gm-Message-State: ALoCoQmGd0ZSW9swJ33vq8cpuQKZ0UpmRM9oKzuin+M+q2yzoaHoDDChuvVr10RjESXdnuZ0uBtC
-X-Received: by 10.140.133.199 with SMTP id 190mr3092153qhf.17.1433497693428;
-	Fri, 05 Jun 2015 02:48:13 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.102.231 with HTTP; Fri, 5 Jun 2015 02:47:53 -0700 (PDT)
-In-Reply-To: <1433496408-24477-1-git-send-email-jackie.huang@windriver.com>
-References: <1433496408-24477-1-git-send-email-jackie.huang@windriver.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 5 Jun 2015 10:47:53 +0100
-Message-ID: <CAJTo0LZLPgpeY+SfvUDAqc4efsRW3L8TS-vROj0FKqWKAz5C=w@mail.gmail.com>
+	Fri, 05 Jun 2015 04:10:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=pRu7Ar2XOE77Nt/CwrVi3z9zg3MCCiluRb9f3t4o//M=;
+	b=WMqaCrIqIv9Mk6K2DbcpoVdpPZCgTYG+XUo+kqknIiJhQ4LkKJ6jrnBxMjaoP5kPf7
+	Sua1QRsnRbD0e4F0BQA60gzKnUNyJ0uASL4M/k4IlrvO5s31apP2WSq1fks9pKo91DJK
+	uRx43PvyIKJt5jNFhpW/sAVp4HQN+PJirbFrpAKEV990DcH/S4ytP0SYtYn6NmSsJi0n
+	5ptjCdZkMWiWIU2ypovkooaQA0/JHqMoAlB97Iu465hN8d6Jl77GzeR8ndiz4khR6hBF
+	g3p9Cn70Y/QQlq++ktvRGblihq+9yXXCNovGoujrVoCub1kLyZ7RHWV15QT0B4LPwvKC
+	knkg==
+X-Received: by 10.180.206.229 with SMTP id lr5mr61972211wic.86.1433502601464; 
+	Fri, 05 Jun 2015 04:10:01 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id a19sm2907201wiv.2.2015.06.05.04.10.00
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 05 Jun 2015 04:10:00 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] libcanberra: upgrade and add packageconfig for gstreamer and gtk
+Date: Fri,  5 Jun 2015 13:10:26 +0200
+Message-Id: <1433502626-4154-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.4.2
+In-Reply-To: <CALbNGRQ9CdHqJJzLB1ojkuVBPXfXcK4iwGttMC591y4=aFziFw@mail.gmail.com>
+References: <CALbNGRQ9CdHqJJzLB1ojkuVBPXfXcK4iwGttMC591y4=aFziFw@mail.gmail.com>
+Subject: [meta-qt5][PATCH] qt3d: fix DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,16 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2015 09:48:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 05 Jun 2015 11:10:03 -0000
 
-On 5 June 2015 at 10:26, <jackie.huang@windriver.com> wrote:
+* nativesdk dependencies were incorrectly introduced in:
+  commit 48ee17af942ac9860e834c8dec049370e7802a56
+  Author: Martin Jansa <Martin.Jansa@gmail.com>
+  Date:   Thu May 28 14:58:06 2015 +0200
+  Subject: qt5: merge .inc and _git.bb files
 
-> +
->  ${@base_contains('DISTRO_FEATURES','gstreamer','gstreamer','',d)} \
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qt3d_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Lets not invent distro features for no reason.
+diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
+index 3bebcb5..62f17e1 100644
+--- a/recipes-qt/qt5/qt3d_git.bb
++++ b/recipes-qt/qt5/qt3d_git.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
+ "
+ 
+-DEPENDS = "nativesdk-qtbase qtbase-native qtdeclarative"
++DEPENDS = "qtdeclarative"
+ 
+ FILES_${PN}-qmlplugins += " \
+     ${OE_QMAKE_PATH_QML}/*/*/*.bez \
+-- 
+2.4.2
 
-Ross
 
