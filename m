@@ -1,24 +1,24 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 56F74757F1
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 69B8771144
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jun 2015 05:29:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t555TiXF019894
+	Fri,  5 Jun 2015 06:38:15 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t556cG3b000768
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Jun 2015 22:29:44 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Thu, 4 Jun 2015 22:29:44 -0700
-From: <rongqing.li@windriver.com>
+	Thu, 4 Jun 2015 23:38:16 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.224.2; Thu, 4 Jun 2015 23:38:15 -0700
+From: <wenzong.fan@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Jun 2015 13:23:28 +0800
-Message-ID: <1433481808-3205-1-git-send-email-rongqing.li@windriver.com>
+Date: Fri, 5 Jun 2015 14:34:58 +0800
+Message-ID: <1433486098-9766-1-git-send-email-wenzong.fan@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] ipsec-tools: Security Advisory - CVE-2015-4047
+Subject: [PATCH][meta-oe] mercurial-native: update from 3.0.1 to 3.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,75 +32,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2015 05:29:48 -0000
+X-List-Received-Date: Fri, 05 Jun 2015 06:38:24 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-This fixed the CVE-2015-4047:
-https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-4047
+Update mercurial to fix CVE-2014-9462:
+  http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9462
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- .../ipsec-tools/fix-CVE-2015-4047.patch            | 36 ++++++++++++++++++++++
- .../ipsec-tools/ipsec-tools_0.8.2.bb               |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
+ .../mercurial/mercurial-native_3.0.1.bb            | 26 ----------------------
+ .../mercurial/mercurial-native_3.4.1.bb            | 26 ++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 26 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
+ create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
 
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
+deleted file mode 100644
+index 9a5eebe..0000000
+--- a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-SUMMARY = "The Mercurial distributed SCM"
+-HOMEPAGE = "http://mercurial.selenic.com/"
+-SECTION = "console/utils"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-DEPENDS = "python-native"
+-
+-SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
+-SRC_URI[md5sum] = "15de301a673b77f839325dba10ed4fc0"
+-SRC_URI[sha256sum] = "36e48b59a84ef5a222d06596971e955ac8217e56b076dfb94c8ce5a0c29fd705"
+-
+-S = "${WORKDIR}/mercurial-${PV}"
+-
+-inherit native
+-
+-EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
+-    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
+-
+-do_configure_append () {
+-    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
+-}
+-
+-do_install () {
+-    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
+-}
+-
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
 new file mode 100644
-index 0000000..5286376
+index 0000000..303a032
 --- /dev/null
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools/fix-CVE-2015-4047.patch
-@@ -0,0 +1,36 @@
-+[PATCH] fix CVE-2015-4047
++++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "The Mercurial distributed SCM"
++HOMEPAGE = "http://mercurial.selenic.com/"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++DEPENDS = "python-native"
 +
-+Upstream-Status: Backport
++SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
++SRC_URI[md5sum] = "65783a60aefb46a11296b587e9403537"
++SRC_URI[sha256sum] = "7a8acf7329beda38ceea29c689212574d9a6bfffe24cf565015ea0066f7cee3f"
 +
-+http://www.openwall.com/lists/oss-security/2015/05/20/1
++S = "${WORKDIR}/mercurial-${PV}"
 +
-+racoon/gssapi.c in IPsec-Tools 0.8.2 allows remote attackers to cause
-+a denial of service (NULL pointer dereference and IKE daemon crash) via
-+a series of crafted UDP requests.
++inherit native
 +
-+https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-4047
++EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
++    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
 +
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ src/racoon/gssapi.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
++do_configure_append () {
++    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
++}
 +
-+diff --git a/src/racoon/gssapi.c b/src/racoon/gssapi.c
-+index e64b201..1ad3b42 100644
-+--- a/src/racoon/gssapi.c
-++++ b/src/racoon/gssapi.c
-+@@ -192,6 +192,11 @@ gssapi_init(struct ph1handle *iph1)
-+ 	gss_name_t princ, canon_princ;
-+ 	OM_uint32 maj_stat, min_stat;
-+ 
-++	if (iph1->rmconf == NULL) {
-++	        plog(LLV_ERROR, LOCATION, NULL, "no remote config\n");
-++	        return -1;
-++	}
-++
-+ 	gps = racoon_calloc(1, sizeof (struct gssapi_ph1_state));
-+ 	if (gps == NULL) {
-+ 		plog(LLV_ERROR, LOCATION, NULL, "racoon_calloc failed\n");
-+-- 
-+1.9.1
++do_install () {
++    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
++}
 +
-diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
-index 67b70d0..bb6fe84 100644
---- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
-+++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
-@@ -18,6 +18,7 @@ SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV
-            file://racoon.conf.sample \
-            file://racoon.conf \
-            file://racoon.service \
-+           file://fix-CVE-2015-4047.patch \
-           "
- SRC_URI[md5sum] = "d53ec14a0a3ece64e09e5e34b3350b41"
- SRC_URI[sha256sum] = "8eb6b38716e2f3a8a72f1f549c9444c2bc28d52c9536792690564c74fe722f2d"
 -- 
 1.9.1
 
