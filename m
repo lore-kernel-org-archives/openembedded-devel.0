@@ -1,24 +1,32 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 69B8771144
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A144075716
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jun 2015 06:38:15 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t556cG3b000768
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  5 Jun 2015 07:54:38 +0000 (UTC)
+Received: by payr10 with SMTP id r10so45976840pay.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Jun 2015 23:38:16 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Thu, 4 Jun 2015 23:38:15 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Jun 2015 14:34:58 +0800
-Message-ID: <1433486098-9766-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 05 Jun 2015 00:54:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=+ge7zT06jY0cBtWfPOXSwqlV6VDQPL5yFHJ4DnryBMI=;
+	b=ZE+x3Bk+DPAg1IYqh5iJCjLzV9W9CvS1XxS1Vv6MM+RUrfKp/ILL0b79c6mVSjzPSL
+	FGE91nlObUhIehATWJ5ahawfclPrByMVJTDVfbaByUuwaHCf9oYx16da78dqXeyYmMIq
+	wpdTsJ+X8pBoh3GBiLQLcZjFBGRTe+9coJyThp8Cq4qR9JrOcXWRsoKdBgA6rc+0sN+I
+	jYKHzv1VDIHA2t5jz3C02rsrbWjQQHXpdr/HwV67ZxgBlrkKZELfLeSbYxkGrBBXnmQp
+	nHKEgxEQJ1Lk+c+PUwrQIDAFExdhWFuuC3bIVCtqDUAZ0rJZE1hTah7lDtutIcNw8DTq
+	1zQQ==
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] mercurial-native: update from 3.0.1 to 3.4.1
+X-Received: by 10.68.205.67 with SMTP id le3mr4032776pbc.94.1433490880190;
+	Fri, 05 Jun 2015 00:54:40 -0700 (PDT)
+Received: by 10.70.44.41 with HTTP; Fri, 5 Jun 2015 00:54:40 -0700 (PDT)
+Date: Fri, 5 Jun 2015 09:54:40 +0200
+Message-ID: <CALbNGRQ9CdHqJJzLB1ojkuVBPXfXcK4iwGttMC591y4=aFziFw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-qt5] 5.4.2-git builds nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,87 +40,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jun 2015 06:38:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 05 Jun 2015 07:54:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+Hi,
 
-Update mercurial to fix CVE-2014-9462:
-  http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9462
+have updated meta-qt5 and am running a build with 5.4.2 / git. One
+thing I noticed is that I get a bunch of nativesdk builds now. From
+what I saw it is caused by qt3d_git depending on nativesdk-qtbase. Is
+this really neccessary?
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../mercurial/mercurial-native_3.0.1.bb            | 26 ----------------------
- .../mercurial/mercurial-native_3.4.1.bb            | 26 ++++++++++++++++++++++
- 2 files changed, 26 insertions(+), 26 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
- create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
-
-diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
-deleted file mode 100644
-index 9a5eebe..0000000
---- a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.0.1.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "The Mercurial distributed SCM"
--HOMEPAGE = "http://mercurial.selenic.com/"
--SECTION = "console/utils"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--DEPENDS = "python-native"
--
--SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
--SRC_URI[md5sum] = "15de301a673b77f839325dba10ed4fc0"
--SRC_URI[sha256sum] = "36e48b59a84ef5a222d06596971e955ac8217e56b076dfb94c8ce5a0c29fd705"
--
--S = "${WORKDIR}/mercurial-${PV}"
--
--inherit native
--
--EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
--    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
--
--do_configure_append () {
--    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
--}
--
--do_install () {
--    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
--}
--
-diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
-new file mode 100644
-index 0000000..303a032
---- /dev/null
-+++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "The Mercurial distributed SCM"
-+HOMEPAGE = "http://mercurial.selenic.com/"
-+SECTION = "console/utils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+DEPENDS = "python-native"
-+
-+SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
-+SRC_URI[md5sum] = "65783a60aefb46a11296b587e9403537"
-+SRC_URI[sha256sum] = "7a8acf7329beda38ceea29c689212574d9a6bfffe24cf565015ea0066f7cee3f"
-+
-+S = "${WORKDIR}/mercurial-${PV}"
-+
-+inherit native
-+
-+EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
-+    BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${prefix}"
-+
-+do_configure_append () {
-+    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
-+}
-+
-+do_install () {
-+    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
-+}
-+
--- 
-1.9.1
-
+Andreas
 
