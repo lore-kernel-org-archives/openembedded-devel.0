@@ -1,35 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id DF75D734DA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f182.google.com (mail-ie0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F1B1757A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jun 2015 23:11:28 +0000 (UTC)
-Received: by qkx62 with SMTP id 62so32128214qkx.3
+	Fri,  5 Jun 2015 01:44:05 +0000 (UTC)
+Received: by iebgx4 with SMTP id gx4so48327785ieb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jun 2015 16:11:30 -0700 (PDT)
+	Thu, 04 Jun 2015 18:44:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=6aecumoGy58FoNIWcAbOFqK6GWM1f5Mg/mdwwRl2+Mo=;
-	b=zCLDovo5lSKpGN4vKTDCZVWBK75d2Dih8cl2pXmThGi1Q/dQtWGBNrstzJXTJeGZhT
-	YgqP0McsQRuj1JTA/C+cAPY1Kmfu1/yOUfPQY1mOnKGcVa4rZbxxLG8j6lA428aqI4e2
-	XgS1H2zaohrwrfBKvdfyZg8pe1Z89qHTCQTqj0fC8jnhtt5mP8oBVW7b3qwIumBPDr+m
-	qm7PZV5FWNfOuC36dtbbgahhGr9hAYAlsZglCj+ncBRz9iAV5E+0LLDsOxxlM/wRLgCa
-	Rq2DQjL5zFIli+8gdIMyEvVgdj5QwjGOk33NLYFHUCztFnnfw/QxuHLAptr+FLyvr+ON
-	pnaA==
-X-Received: by 10.140.38.167 with SMTP id t36mr510093qgt.69.1433459490003;
-	Thu, 04 Jun 2015 16:11:30 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id a102sm3170427qka.0.2015.06.04.16.11.27
-	for <openembedded-devel@lists.openembedded.org>
+	h=from:to:cc:subject:date:message-id;
+	bh=/3rcQCK7RVJ+8tF32lvwcaFfcuudGRrNqWXomevCEgM=;
+	b=KP1Om7HV3LeykErUp2mz3S4U5kPXhzjQphmyjEno8asWHEho5ERZFDu9Zh2Oe8TGIc
+	SJQxQ2mquz7tnASGxzq3E2s6VQpTfYuRPBodLmsedVj5PAg57xb178TX7oNFx678pYX/
+	2wJK5z6CC2520nlOE/ibXhG3pmU3nAAEviGBm+vnU9NOstJ+1Xm6Toc+/JUb9oUdRyhF
+	E0FYJFOCc4Ihv37xj6YaUKZfmx16lPXuPBYA0hYCWx/IeCF+Ja9FlOlcPidnR+16zb3J
+	rj4yMegm4Wjl57SZAlUKbjJNU9XebmZVhRbDJI7tb/nQll1u2Ftphq0q+r2zIqSMXUhb
+	CkOA==
+X-Received: by 10.50.102.68 with SMTP id fm4mr9128164igb.25.1433468646648;
+	Thu, 04 Jun 2015 18:44:06 -0700 (PDT)
+Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
+	[96.119.89.79])
+	by mx.google.com with ESMTPSA id n14sm2347521ion.5.2015.06.04.18.44.05
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jun 2015 16:11:28 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
+	Thu, 04 Jun 2015 18:44:05 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jun 2015 16:11:24 -0700
-Message-Id: <1433459484-6308-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-ruby][PATCH] bundler: update to 1.9.4
+Date: Thu,  4 Jun 2015 18:44:01 -0700
+Message-Id: <1433468641-18841-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] cpufrequtils: Create proper symlinks to versioned library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,46 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jun 2015 23:11:32 -0000
+X-List-Received-Date: Fri, 05 Jun 2015 01:44:10 -0000
 
-add depends for git.
+Currently it produces duplicated .so files for .so.0 and .so.0.0.0
+this is also noticed by opkg upgrade
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Configuring libxcb-randr0.
+/sbin/ldconfig: /usr/lib/libcpufreq.so.0 is not a symbolic link
+
+Additionally helps in some code size savings
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-ruby/recipes-devtools/ruby/bundler_git.bb | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-index fc73001..7d79544 100644
---- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-+++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-@@ -13,19 +13,21 @@ been installed, so that others can install the exact same gems."
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=196bb963e601609817d7e9ac9a64a867"
+diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+index e3b4de1..88fcc02 100644
+--- a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
++++ b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
+@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/emagii/cpufrequtils.git \
+            file://0001-dont-unset-cflags.patch \
+ "
  
--PR = "r0"
-+SRCREV = "06dc8472b9142fd6aaefff780d6d252c20dc2a04"
+-CFLAGS_append_libc-uclibc = " ${@['-DNLS', '-UNLS']['${USE_NLS}' == 'no']} "
++EXTRA_OEMAKE_append = " ${@['', 'NLS=false']['${USE_NLS}' == 'no']} "
  
--PV = "1.6.2"
--SRCREV = "06e3647c117da210ffd15a174624497830addd7b"
-+BRANCH = "1-9-stable"
-+PV = "1.9.4"
+ PR = "r5"
  
- S = "${WORKDIR}/git"
+@@ -30,5 +30,8 @@ do_compile() {
  
- SRC_URI = " \
--    git://github.com/bundler/bundler.git \
-+    git://github.com/bundler/bundler.git;branch=${BRANCH} \
-     "
+ do_install() {
+     oe_runmake -e install DESTDIR=${D}
++    rm -f ${D}${libdir}/libcpufreq.so.0 ${D}${libdir}/libcpufreq.so
++    ln -s libcpufreq.so.0.0.0 ${D}${libdir}/libcpufreq.so.0
++    ln -s libcpufreq.so.0.0.0 ${D}${libdir}/libcpufreq.so
+ }
  
- inherit ruby
- 
- FILES_${PN} += "${libdir}/ruby/gems"
- 
-+RDEPENDS_${PN} = "git"
-+
- BBCLASSEXTEND = "native"
 -- 
-2.3.5
+2.1.4
 
 
