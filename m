@@ -1,33 +1,24 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FCEE71144
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D04E73F7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jun 2015 08:16:48 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Z1sEg-0000mj-BA for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Jun 2015 10:16:46 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jun 2015 10:16:46 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon,  8 Jun 2015 08:22:46 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t588MlnK022386
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jun 2015 10:16:46 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 08 Jun 2015 10:16:34 +0200
-Message-ID: <ml3j12$nio$1@ger.gmane.org>
-References: <1433468641-18841-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
-	rv:31.0) Gecko/20100101 Thunderbird/31.6.0
-In-Reply-To: <1433468641-18841-1-git-send-email-raj.khem@gmail.com>
-Subject: Re: [meta-oe][PATCH] cpufrequtils: Create proper symlinks to versioned library
+	Mon, 8 Jun 2015 01:22:47 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Mon, 8 Jun 2015 01:22:45 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 8 Jun 2015 16:16:16 +0800
+Message-ID: <1433751376-4812-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [PATCH][meta-networking][v2] proftpd: upgrade to 1.3.5a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,47 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2015 08:16:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Jun 2015 08:22:47 -0000
+Content-Type: text/plain
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+From: Roy Li <rongqing.li@windriver.com>
 
-Khem Raj schreef op 05-06-15 om 03:44:
-> Currently it produces duplicated .so files for .so.0 and .so.0.0.0 this
-> is also noticed by opkg upgrade
-> 
-> Configuring libxcb-randr0. /sbin/ldconfig: /usr/lib/libcpufreq.so.0 is
-> not a symbolic link
-> 
-> Additionally helps in some code size savings
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com> --- 
-> meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb | 5 ++++- 1 file
-> changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb
-> b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb index
-> e3b4de1..88fcc02 100644 ---
-> a/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb +++
-> b/meta-oe/recipes-support/cpufrequtils/cpufrequtils_008.bb @@ -14,7 +14,7
-> @@ SRC_URI = "git://github.com/emagii/cpufrequtils.git \ 
-> file://0001-dont-unset-cflags.patch \ "
-> 
-> -CFLAGS_append_libc-uclibc = " ${@['-DNLS', '-UNLS']['${USE_NLS}' ==
-> 'no']} " +EXTRA_OEMAKE_append = " ${@['', 'NLS=false']['${USE_NLS}' ==
-> 'no']} "
+1. 1.3.5a includes the fix for CVE-2015-3306:
+https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-3306
+2. replace the proftpd generated libtool with the native libtool
+which support the sysroot
 
-That's not mentioned in the commit message
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ .../recipes-daemons/proftpd/{proftpd_1.3.5.bb => proftpd_1.3.5a.bb}  | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.5.bb => proftpd_1.3.5a.bb} (95%)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFVdU9iMkyGM64RGpERAhnwAJ4v/Ds0cnWWGkmkG4XHDS8PTalfZQCfe8FM
-M3MbPGfQb3mnso7vaHNpGN4=
-=K71s
------END PGP SIGNATURE-----
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+similarity index 95%
+rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
+rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+index 00291c6..5bed85b 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+@@ -14,8 +14,8 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+            file://proftpd.service \
+            "
+ 
+-SRC_URI[md5sum] = "aff1bff40e675244d72c4667f203e5bb"
+-SRC_URI[sha256sum] = "c10316fb003bd25eccbc08c77dd9057e053693e6527ffa2ea2cc4e08ccb87715"
++SRC_URI[md5sum] = "b9d3092411478415b31d435f8e26d173"
++SRC_URI[sha256sum] = "a1f48df8539c414ec56e0cea63dcf4b8e16e606c05f10156f030a4a67fae5696"
+ 
+ inherit autotools-brokensep useradd update-rc.d systemd
+ 
+@@ -64,6 +64,7 @@ PACKAGECONFIG[auth] = "--enable-auth-file, --disable-auth-file"
+ # autotools.bbclass a pain...
+ do_configure () {
+     oe_runconf
++    cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}/libtool
+ }
+ 
+ FTPUSER = "ftp"
+-- 
+1.9.1
 
 
