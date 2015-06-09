@@ -1,28 +1,37 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B931A65C9D
+Return-Path: <kergoth@gmail.com>
+Received: from mail-qc0-f170.google.com (mail-qc0-f170.google.com
+	[209.85.216.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 914E4758AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jun 2015 01:12:09 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.01,1,1399996800"; 
-   d="scan'208";a="96690679"
-Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Jun 2015 09:16:25 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t591Aag2022628
+	Tue,  9 Jun 2015 02:38:57 +0000 (UTC)
+Received: by qcnj1 with SMTP id j1so1953027qcn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 Jun 2015 09:10:36 +0800
-Received: from localhost.localdomain (10.167.226.47) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Tue, 9 Jun 2015 09:12:11 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 Jun 2015 09:12:00 +0800
-Message-ID: <1433812320-1835-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+	Mon, 08 Jun 2015 19:38:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:content-type;
+	bh=VmetsYbtPFRxVeNKNI+LwAbasE6IbldNJ8NqSukXoxo=;
+	b=y/qQ/ecmk34zA430o9Wz/bA7hxH1U1yeeQunstv6UOt+I5bJvHXePkZ/Qo+jVtkMdk
+	0pyYWfWLt9cqV8SWn7Dw9ZGouCzNhy7jdCAPGyrdYMFUDbS1V+pkqGIg1V625FV+KfSX
+	lR/RX6rmPetiiJUTpUuE+9tL4crJpSOcNLTVfihPO9I1pPffSDemKEwoLmAmsLUz6FNY
+	1k/ZAvh4giQBUADUfuticCN5zTgdfIhGoswCamVwhGRTLJzrVapu1gQ2MMjpJ7fFmMoz
+	6I4QHusIKzvFPXEXHu2am6LqMiQ6uCU3y2PBFkDzHZmKXiqL8kBmcylUCSojRqcX4/uu
+	0Xxw==
+X-Received: by 10.140.43.228 with SMTP id e91mr22651595qga.80.1433817538400;
+	Mon, 08 Jun 2015 19:38:58 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.47]
-Subject: [meta-oe][PATCH] lvm2: add systemd support
+Sender: kergoth@gmail.com
+Received: by 10.140.108.73 with HTTP; Mon, 8 Jun 2015 19:38:38 -0700 (PDT)
+In-Reply-To: <CAMKF1srmP=02oMEvuNMPbsdd5u3vvc6fv_QmOtL07ydUTuDC0Q@mail.gmail.com>
+References: <1433032319-13061-1-git-send-email-kergoth@gmail.com>
+	<CAMKF1srmP=02oMEvuNMPbsdd5u3vvc6fv_QmOtL07ydUTuDC0Q@mail.gmail.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Mon, 8 Jun 2015 21:38:38 -0500
+X-Google-Sender-Auth: As5n87sNXGDhEEkesJGWZEyo08M
+Message-ID: <CABcZANnBy7iruPexD8Skf7zXxCHhNg0s4Nru89AniW=uvO-fhA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] ntimed: add recipe to meta-networking (git version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,42 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jun 2015 01:12:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 Jun 2015 02:38:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/lvm2/lvm2.inc | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+On Mon, Jun 1, 2015 at 1:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index e116629..34fec99 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -36,13 +36,21 @@ PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '',
- 
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
- 
--inherit autotools pkgconfig
-+inherit autotools pkgconfig systemd
- 
- do_install_append() {
-     # Install machine specific configuration file
-     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${B}/scripts/lvm2_monitoring_systemd_red_hat.service ${D}${systemd_unitdir}/system/lvm2-monitor.service
-+    install -m 0644 ${B}/scripts/dm_event_systemd_red_hat.socket ${D}${systemd_unitdir}/system/dm-event.socket
-+    install -m 0644 ${B}/scripts/dm_event_systemd_red_hat.service ${D}${systemd_unitdir}/system/dm-event.service
- }
- 
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE_${PN} = "lvm2-monitor.service dm-event.socket dm-event.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
- FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
--- 
-1.8.4.2
+> On Sat, May 30, 2015 at 5:31 PM, Christopher Larson <kergoth@gmail.com>
+> wrote:
+> > Ntimed is an unreleased ntpd replacement being sponsored by the Linux
+> > Foundation. Currently it only includes a work-in-progress client, but f=
+or
+> > future use this recipe emits an ntimed-client package and an ntimed met=
+a
+> > package which will pull in client and server.
+> >
+>
+> should it have RCONFLICTS with ntp ?
 
+
+Probably, I=E2=80=99ll look into that as well as see about adding a service=
+ file &
+startup script, and re-submit after testing that. Thanks.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
