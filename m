@@ -1,34 +1,28 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E4CD73BBE
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B931A65C9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jun 2015 23:15:51 +0000 (UTC)
-Received: by pdbnf5 with SMTP id nf5so1475383pdb.2
+	Tue,  9 Jun 2015 01:12:09 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.01,1,1399996800"; 
+   d="scan'208";a="96690679"
+Received: from localhost (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Jun 2015 09:16:25 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t591Aag2022628
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jun 2015 16:15:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=mnUXGeJGWvql9RrTdoUHJ58ymSQkpF0ZScvUefWAKNs=;
-	b=gGHevOxXObf/cQZpJ2o63vkOLZXB9ZdaVCjHXzL5O3Wchl5d3B5F6YTA+SQiPQzTVY
-	iNGc9sz+wb3ztR6aQM+NZQ6cjDToAV6MdYJmZn8xVfVOglpiOrSIDwhTydSq7l0q9mIY
-	d4INVgoCtDeFbYSvSDAyzk6zxPjI35FBlARqHZOTXLVE+J8VfdpG49HnidQMVzDxrqfy
-	DrZd0268M2ayiAWk23y8T72XBcTxnNb5oACsLrbo8J/214btUPxFdyKzMWt+NjiAbQJm
-	tRAkdXJVaJ91u0otehfbM5YFqHzqg81fxO4WchwnC+ICSRcYazIJBj4REEKCHyw93lnS
-	FZyg==
-X-Received: by 10.70.43.169 with SMTP id x9mr26831045pdl.52.1433805352896;
-	Mon, 08 Jun 2015 16:15:52 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id fp3sm3576579pdb.52.2015.06.08.16.15.51
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 08 Jun 2015 16:15:52 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jun 2015 16:15:44 -0700
-Message-Id: <1433805344-17530-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] minini: add initial recipe, minIni v1.2.b
+	Tue, 9 Jun 2015 09:10:36 +0800
+Received: from localhost.localdomain (10.167.226.47) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 9 Jun 2015 09:12:11 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 9 Jun 2015 09:12:00 +0800
+Message-ID: <1433812320-1835-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.47]
+Subject: [meta-oe][PATCH] lvm2: add systemd support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,59 +36,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jun 2015 23:15:52 -0000
+X-List-Received-Date: Tue, 09 Jun 2015 01:12:12 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-support/minini/minini_1.2.b.bb | 38 ++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/minini/minini_1.2.b.bb
+ meta-oe/recipes-support/lvm2/lvm2.inc | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/minini/minini_1.2.b.bb b/meta-oe/recipes-support/minini/minini_1.2.b.bb
-new file mode 100644
-index 0000000..e739498
---- /dev/null
-+++ b/meta-oe/recipes-support/minini/minini_1.2.b.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "A minimal INI file parser"
-+DESCRIPTION = "minIni is a programmer's library to read and write INI files in \
-+embedded systems. minIni takes little resources, has a deterministic memory \
-+footprint and can be configured for various kinds of file I/O libraries. minIni \
-+provides functionality for reading, writing and deleting keys from an INI file, \
-+all in 830 lines of (commented) source code (version 1.2) in C (the code also \
-+compiles in C++ and comes with a wrapper class)."
-+HOMEPAGE = "https://code.google.com/p/minini/"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index e116629..34fec99 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -36,13 +36,21 @@ PACKAGECONFIG += "${@base_contains('DISTRO_FEATURES', 'selinux', 'selinux', '',
+ 
+ PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux,"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig systemd
+ 
+ do_install_append() {
+     # Install machine specific configuration file
+     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${B}/scripts/lvm2_monitoring_systemd_red_hat.service ${D}${systemd_unitdir}/system/lvm2-monitor.service
++    install -m 0644 ${B}/scripts/dm_event_systemd_red_hat.socket ${D}${systemd_unitdir}/system/dm-event.socket
++    install -m 0644 ${B}/scripts/dm_event_systemd_red_hat.service ${D}${systemd_unitdir}/system/dm-event.service
+ }
+ 
++SYSTEMD_PACKAGES = "${PN}"
++SYSTEMD_SERVICE_${PN} = "lvm2-monitor.service dm-event.socket dm-event.service"
++SYSTEMD_AUTO_ENABLE = "disable"
 +
-+# License is Apache 2.0 with an exception to allow object code built from
-+# unmodified original sources to be distributed more freely. See LICENSE
-+# file for details.
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=eb21481ad45c5578ae8c8d37b8c8d76d"
-+
-+SRC_URI = "http://minini.googlecode.com/files/minIni_12b.zip;subdir=${BP}"
-+
-+SRC_URI[md5sum] = "32740621098e3f0a321c7c23f4bcbc5d"
-+SRC_URI[sha256sum] = "b08839af74acb36061fb76e1123bf56711bc5cf7a08b32e189b0ad78a2e888e2"
-+
-+do_configure[noexec] = "1"
-+
-+do_compile() {
-+    ${CC} minIni.c -shared -fPIC -o libminini.so.0.0 -Wl,-soname,libminini.so.0 ${CFLAGS} ${LDFLAGS}
-+}
-+
-+do_install () {
-+
-+    install -d ${D}${libdir}
-+    install -m 0644 libminini.so.0.0 ${D}${libdir}/
-+    ln -s libminini.so.0.0 ${D}${libdir}/libminini.so
-+    ln -s libminini.so.0.0 ${D}${libdir}/libminini.so.0
-+
-+    install -d ${D}${includedir}/minini
-+    install -m 0644 minIni.h ${D}${includedir}/minini/
-+    install -m 0644 minGlue-stdio.h ${D}${includedir}/minini/minGlue.h
-+}
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
+ FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
 -- 
-1.9.1
+1.8.4.2
 
 
