@@ -1,24 +1,29 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CE106732B1
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B7C957573C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jun 2015 08:51:21 +0000 (UTC)
+	Wed, 10 Jun 2015 13:21:21 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5A8pMVl024819
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jun 2015 01:51:22 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Wed, 10 Jun 2015 01:51:22 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 10 Jun 2015 16:44:44 +0800
-Message-ID: <1433925884-25750-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5ADLMSN021521
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 10 Jun 2015 06:21:22 -0700 (PDT)
+Received: from [128.224.56.84] (128.224.56.84) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 10 Jun 2015 06:21:22 -0700
+Message-ID: <557839D1.20700@windriver.com>
+Date: Wed, 10 Jun 2015 09:21:21 -0400
+From: Randy MacLeod <randy.macleod@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] php: fix native php when it is from sstate
+To: <openembedded-devel@lists.openembedded.org>, "Huang, Jie (Jackie)"
+	<Jackie.Huang@windriver.com>, "Burton, Ross" <ross.burton@intel.com>
+References: <1433496408-24477-1-git-send-email-jackie.huang@windriver.com>	<CAJTo0LZLPgpeY+SfvUDAqc4efsRW3L8TS-vROj0FKqWKAz5C=w@mail.gmail.com>
+	<1B858668EC6A94408DCA5225FDFA85AAF11CFD41@ALA-MBB.corp.ad.wrs.com>
+In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AAF11CFD41@ALA-MBB.corp.ad.wrs.com>
+X-Originating-IP: [128.224.56.84]
+Subject: Re: [meta-oe][PATCH] libcanberra: upgrade and add packageconfig for gstreamer and gtk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,51 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jun 2015 08:51:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Jun 2015 13:21:25 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Roy Li <rongqing.li@windriver.com>
+On 2015-06-07 09:49 PM, Huang, Jie (Jackie) wrote:
+>
+>
+>> -----Original Message-----
+>> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-
+>> bounces@lists.openembedded.org] On Behalf Of Burton, Ross
+>> Sent: Friday, June 05, 2015 5:48 PM
+>> To: openembedded-devel@lists.openembedded.org
+>> Subject: Re: [oe] [meta-oe][PATCH] libcanberra: upgrade and add packageconfig for gstreamer and
+>> gtk
+>>
+>> On 5 June 2015 at 10:26, <jackie.huang@windriver.com> wrote:
+>>
+>>> +
+>>>   ${@base_contains('DISTRO_FEATURES','gstreamer','gstreamer','',d)} \
+>>>
+>>
+>> Lets not invent distro features for no reason.
+>
+> Ok, so I will remove this and left gstreamer not enabled by default, someone can enable it
+> when needed, does that make sense?
+>
+> Thanks,
+> Jackie
 
-the native php is used to install the target pear, and native php
-has hard-code path, so make wrapper to override the hard-code path
+I think Ross is saying that you can just add a PACKAGECONFIG
+for gstreamer itself rather than make gstreamer a DISTRO_FEATURE.
+For example see: meta-efl/recipes-efl/efl/efl.inc
 
-the configuration format of pear.conf for native php is like:
-"type:path length:path", path will be replaced when populate sysroot
-setscene, but the path length is not changed, and make php unable to
-work, add a task to SSTATEPOSTINSTFUNCS to fix the path length
+../Randy
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- meta-oe/recipes-devtools/php/php_5.5.24.bb | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+>
+>>
+>> Ross
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.24.bb b/meta-oe/recipes-devtools/php/php_5.5.24.bb
-index 3e656af..ced3904 100644
---- a/meta-oe/recipes-devtools/php/php_5.5.24.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.5.24.bb
-@@ -245,3 +245,21 @@ MODPHP_OLDPACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'modphp',
- RPROVIDES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
- RREPLACES_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
- RCONFLICTS_${PN}-modphp = "${MODPHP_OLDPACKAGE}"
-+
-+do_install_append_virtclass-native() {
-+    create_wrapper ${D}${bindir}/php \
-+        PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
-+}
-+
-+SSTATEPOSTINSTFUNCS_append_virtclass-native += " php_sstate_postinst"
-+
-+php_sstate_postinst() {
-+    if [ "${BB_CURRENTTASK}" = "populate_sysroot_setscene" ]
-+    then
-+        head -n1 ${sysconfdir}/pear.conf > ${sysconfdir}/pear.tmp.conf
-+        for p in `tail -n1  ${sysconfdir}/pear.conf | sed -s 's/;/ /g'`; do
-+            echo $p | awk -F: 'BEGIN {OFS = ":"; ORS = ";"}{if(NF==3){print $1, length($3)-2*match($3, /^"/), $3} else {print $0}}';
-+        done >> ${sysconfdir}/pear.tmp.conf
-+        mv -f ${sysconfdir}/pear.tmp.conf ${sysconfdir}/pear.conf
-+    fi
-+}
+
 -- 
-1.9.1
-
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
