@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A79373E36
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F49B73E36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2015 09:17:19 +0000 (UTC)
+	Thu, 11 Jun 2015 09:17:22 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5B9HKkm010669
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5B9HNn9014248
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2015 02:17:20 -0700 (PDT)
+	Thu, 11 Jun 2015 02:17:23 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Thu, 11 Jun 2015 02:17:20 -0700
+	Thu, 11 Jun 2015 02:17:23 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Jun 2015 17:16:54 +0800
-Message-ID: <f642f40f569a507360138e8aae0bf0ce6255a9f3.1434013953.git.yi.zhao@windriver.com>
+Date: Thu, 11 Jun 2015 17:16:55 +0800
+Message-ID: <43b1730c834c25745826a1b87a11af639ff5ebab.1434013953.git.yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1434013953.git.yi.zhao@windriver.com>
 References: <cover.1434013953.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 7/9] openjpeg: pass correct libdir to cmake
+Subject: [meta-oe][PATCH 8/9] xdotool: pass correct libdir to make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,42 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2015 09:17:19 -0000
+X-List-Received-Date: Thu, 11 Jun 2015 09:17:22 -0000
 Content-Type: text/plain
 
 When MACHINE=qemux86-64 and enable multilib:
-ERROR: QA Issue: openjpeg: Files/directories were installed but not
-shipped in any package:
+ERROR: QA Issue: xdotool: Files/directories were installed but not shipped in any package:
   /usr/lib
-  /usr/lib/libopenjp2.so
-  /usr/lib/libopenjp2.so.2.1.0
-  /usr/lib/libopenjp2.so.7
+  /usr/lib/libxdo.so
+  /usr/lib/libxdo.so.1
   /usr/lib/.debug
-  /usr/lib/pkgconfig
-  /usr/lib/.debug/libopenjp2.so.2.1.0
-  /usr/lib/pkgconfig/libopenjp2.pc
+  /usr/lib/.debug/libxdo.so.1
 Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install. [installed-vs-shipped]
 
-Pass the correct libdir configuration option to cmake.
+Pass the correct libdir to make, otherwise it assumes $prefix/lib even
+on multilib.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../recipes-graphics/openjpeg/openjpeg_2.1.0.bb    |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../xdotool/xdotool_1.20100416.2809.bb             |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb
-index 9f6dd57..d28a865 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.0.bb
-@@ -13,6 +13,7 @@ inherit cmake
- DEPENDS = "libpng tiff lcms"
+diff --git a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
+index 43e6fda..474d298 100644
+--- a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
++++ b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
+@@ -15,7 +15,7 @@ SRC_URI = "http://semicomplete.googlecode.com/files/xdotool-${PV}.tar.gz"
+ SRC_URI[md5sum] = "1d5be641e512c343abfe5f78b39e6f19"
+ SRC_URI[sha256sum] = "42d7271fbc796e53db71bb221f311b9ff3c51d90a71c9487a9bd3101ca39894f"
  
- # standard path for *.cmake
--EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_PACKAGE_DIR=${baselib}/cmake"
-+EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_PACKAGE_DIR=${baselib}/cmake \
-+                  -DOPENJPEG_INSTALL_LIB_DIR:PATH=${libdir}"
+-EXTRA_OEMAKE = "PREFIX=${prefix} INSTALLMAN=${mandir}"
++EXTRA_OEMAKE = "PREFIX=${prefix} INSTALLLIB=${libdir} INSTALLMAN=${mandir}"
  
- FILES_${PN}-dev += "${libdir}/cmake/*.cmake"
+ do_install() {
+     oe_runmake -e install DESTDIR=${D} PREFIX=${prefix}
 -- 
 1.7.9.5
 
