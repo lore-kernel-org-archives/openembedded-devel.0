@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F49B73E36
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 126C773E36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2015 09:17:22 +0000 (UTC)
+	Thu, 11 Jun 2015 09:17:25 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5B9HNn9014248
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5B9HQY3010672
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2015 02:17:23 -0700 (PDT)
+	Thu, 11 Jun 2015 02:17:26 -0700 (PDT)
 Received: from localhost (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Thu, 11 Jun 2015 02:17:23 -0700
+	Thu, 11 Jun 2015 02:17:26 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Jun 2015 17:16:55 +0800
-Message-ID: <43b1730c834c25745826a1b87a11af639ff5ebab.1434013953.git.yi.zhao@windriver.com>
+Date: Thu, 11 Jun 2015 17:16:56 +0800
+Message-ID: <d91dc6b8dc38ba342cb29cc8f67871b18eb1054b.1434013953.git.yi.zhao@windriver.com>
 X-Mailer: git-send-email 1.7.9.5
 In-Reply-To: <cover.1434013953.git.yi.zhao@windriver.com>
 References: <cover.1434013953.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.163.137]
-Subject: [meta-oe][PATCH 8/9] xdotool: pass correct libdir to make
+Subject: [meta-oe][PATCH 9/9] tesseract-lang.inc: set ${S} to fix the QA warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,39 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2015 09:17:22 -0000
+X-List-Received-Date: Thu, 11 Jun 2015 09:17:25 -0000
 Content-Type: text/plain
 
-When MACHINE=qemux86-64 and enable multilib:
-ERROR: QA Issue: xdotool: Files/directories were installed but not shipped in any package:
-  /usr/lib
-  /usr/lib/libxdo.so
-  /usr/lib/libxdo.so.1
-  /usr/lib/.debug
-  /usr/lib/.debug/libxdo.so.1
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install. [installed-vs-shipped]
-
-Pass the correct libdir to make, otherwise it assumes $prefix/lib even
-on multilib.
+The ${S} is not set in the recipe cause the QA warning:
+WARNING: tesseract-lang-eng: the directory ${WORKDIR}/${BP}
+(/buildarea2/build/tmp/work/all-poky-linux/tesseract-lang-eng/3.02-r0/tesseract-lang-eng-3.02)
+pointed to by the S variable doesn't exist - please set S within the recipe to point to where the source has been unpacked to
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../xdotool/xdotool_1.20100416.2809.bb             |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-graphics/tesseract/tesseract-lang.inc  |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-index 43e6fda..474d298 100644
---- a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-+++ b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-@@ -15,7 +15,7 @@ SRC_URI = "http://semicomplete.googlecode.com/files/xdotool-${PV}.tar.gz"
- SRC_URI[md5sum] = "1d5be641e512c343abfe5f78b39e6f19"
- SRC_URI[sha256sum] = "42d7271fbc796e53db71bb221f311b9ff3c51d90a71c9487a9bd3101ca39894f"
+diff --git a/meta-oe/recipes-graphics/tesseract/tesseract-lang.inc b/meta-oe/recipes-graphics/tesseract/tesseract-lang.inc
+index 7f69eb1..c40c71d 100644
+--- a/meta-oe/recipes-graphics/tesseract/tesseract-lang.inc
++++ b/meta-oe/recipes-graphics/tesseract/tesseract-lang.inc
+@@ -3,11 +3,13 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5
  
--EXTRA_OEMAKE = "PREFIX=${prefix} INSTALLMAN=${mandir}"
-+EXTRA_OEMAKE = "PREFIX=${prefix} INSTALLLIB=${libdir} INSTALLMAN=${mandir}"
+ SRC_URI = "https://tesseract-ocr.googlecode.com/files/tesseract-ocr-${PV}.${TESSERACT_LANG}.tar.gz"
+ 
++S = "${WORKDIR}/tesseract-ocr"
++
+ inherit allarch
  
  do_install() {
-     oe_runmake -e install DESTDIR=${D} PREFIX=${prefix}
+     install -d ${D}${datadir}/tessdata
+-    cp ${WORKDIR}/tesseract-ocr/tessdata/${TESSERACT_LANG}.traineddata ${D}${datadir}/tessdata
++    cp ${S}/tessdata/${TESSERACT_LANG}.traineddata ${D}${datadir}/tessdata
+ }
+ 
+ FILES_${PN} += "${datadir}/tessdata"
 -- 
 1.7.9.5
 
