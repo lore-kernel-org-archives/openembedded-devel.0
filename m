@@ -1,28 +1,21 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 57851757C4
+Return-Path: <bigeasy@linutronix.de>
+Received: from Galois.linutronix.de (www.linutronix.de [62.245.132.108])
+	by mail.openembedded.org (Postfix) with ESMTP id 68E5E60962
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2015 16:08:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5CG8Hp9002697
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2015 09:08:17 -0700 (PDT)
-Received: from [128.224.56.84] (128.224.56.84) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 12 Jun 2015 09:08:17 -0700
-Message-ID: <557B03F0.7080306@windriver.com>
-Date: Fri, 12 Jun 2015 12:08:16 -0400
-From: Randy MacLeod <randy.macleod@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	Fri, 12 Jun 2015 18:51:16 +0000 (UTC)
+Received: from bigeasy by Galois.linutronix.de with local (Exim 4.80)
+	(envelope-from <bigeasy@linutronix.de>) id 1Z3U2v-0001dT-I5
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 12 Jun 2015 20:51:17 +0200
+Date: Fri, 12 Jun 2015 20:51:17 +0200
+From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150612185117.GA5348@linutronix.de>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1433145856-23231-1-git-send-email-rongqing.li@windriver.com>
-In-Reply-To: <1433145856-23231-1-git-send-email-rongqing.li@windriver.com>
-X-Originating-IP: [128.224.56.84]
-Subject: Re: [PATCH][meta-oe] mariadb: Security Advisory -CVE-2015-2305
+X-Key-Id: 2A8CF5D1
+X-Key-Fingerprint: 6425 4695 FFF0 AA44 66CC  19E6 7B96 E816 2A8C F5D1
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [meta-java] Trying to build icedtea7 fails currently
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,101 +29,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jun 2015 16:08:18 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Jun 2015 18:51:18 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2015-06-01 04:04 AM, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->
-> https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2305
+building icedtea7-native fails currently if the host runs linux v4.0+.
+Duh. I tried to add a patch to "openjdk-7-release-03b147.inc" but it
+didn't get applied=E2=80=A6
 
-That's fine for now.
+Upstream fixed it
+  https://bugs.openjdk.java.net/browse/JDK-8074312
+  https://bugs.openjdk.java.net/secure/attachment/25832/JDK-8074312-hotspot=
+=2Epatch
 
-(GA) releases are: 10.0.19 and 5.5.44
-and we have 5.5.43.
+I workaround it with linux64 --uname-2.6. It helped but failed later
+with various errors such as:
+| collect2: error: ld returned 1 exit status
+| /home/angstrom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x86_64=
+-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/ jdk/mak=
+e/common/internal/NativeCompileRules.gmk:74: recipe for target '/home/angst=
+rom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x8 6_64-linux/icedt=
+ea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/tmp/sun/sun.aw=
+t/headless/obj64/awt_Font.o' failed
+| make[6]: *** [/home/angstrom-distribution/build/tmp-angstrom_v2014_12-gli=
+bc/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build /openjd=
+k.build-boot/tmp/sun/sun.awt/headless/obj64/awt_Font.o] Error 1
+| make[6]: *** Waiting for unfinished jobs....
+| jdk/make/sun/headless/../../../src/solaris/native/sun/awt/fontpath.c:910:=
+ undefined reference to `FcFontSetDestroy'
+| /home/angstrom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x86_64=
+-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/ jdk/mak=
+e/sun/headless/../../../src/solaris/native/sun/awt/fontpath.c:878: undefine=
+d reference to `FcPatternDestroy'
+| /tmp/cczs6cdu.o: In function `Java_sun_font_FontConfigManager_getFontConf=
+igVersion':
+| /home/angstrom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x86_64=
+-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/ jdk/mak=
+e/sun/headless/../../../src/solaris/native/sun/awt/fontpath.c:740: undefine=
+d reference to `FcGetVersion'
+| collect2: error: ld returned 1 exit status
 
-Should we update to 5.5.44 or replace it with 10.0 or wait for
-10.1 to turn into 10.2 ? If anyone knows the approximate timeline
-for 10.2, that would be helpful.
+Does someone have an idea?
 
-../Randy
-
-
->
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->   meta-oe/recipes-support/mysql/mariadb.inc          |  1 +
->   .../mysql/mariadb/fix-CVE-2015-2305.patch          | 43 ++++++++++++++++++++++
->   2 files changed, 44 insertions(+)
->   create mode 100644 meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
->
-> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-> index 00fa965..540b159 100644
-> --- a/meta-oe/recipes-support/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
-> @@ -12,6 +12,7 @@ SRC_URI = "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
->              file://mysqld.service \
->              file://configure.cmake-fix-valgrind.patch \
->              file://fix-a-building-failure.patch \
-> +           file://fix-CVE-2015-2305.patch \
->             "
->
->   SRC_URI[md5sum] = "c8760d6b5890fc1de76c07af48092c88"
-> diff --git a/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch b/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
-> new file mode 100644
-> index 0000000..2d1b467
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
-> @@ -0,0 +1,43 @@
-> +From f5c1d00a9ceb61acfe038dcf2ec0236c2939328c Mon Sep 17 00:00:00 2001
-> +From: Roy Li <rongqing.li@windriver.com>
-> +Date: Mon, 1 Jun 2015 15:31:48 +0800
-> +Subject: [PATCH] From 70bc2965604b6b8aaf260049e64c708dddf85334 Mon Sep 17
-> + 00:00:00 2001 From: Gary Houston <ghouston@arglist.com> Date: Wed, 25 Feb
-> + 2015 13:29:03 +1100 Subject: [PATCH] Bug fix for integer overflow in regcomp
-> + for excessively long  pattern strings. CERT Vulnerability Note VU#695940.
-> + Found by Guido Vranken.
-> +
-> +Upsteam-Status: Backport
-> +
-> +https://bugzilla.suse.com/attachment.cgi?id=627001
-> +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> +---
-> + regex/regcomp.c | 11 ++++++++++-
-> + 1 file changed, 10 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/regex/regcomp.c b/regex/regcomp.c
-> +index abc1817..31e57c1 100644
-> +--- a/regex/regcomp.c
-> ++++ b/regex/regcomp.c
-> +@@ -138,7 +138,16 @@ struct cclass cclasses[CCLASS_LAST+1]= {
-> + 							(NC-1)*sizeof(cat_t));
-> + 	if (g == NULL)
-> + 		return(REG_ESPACE);
-> +-	p->ssize = (long) (len/(size_t)2*(size_t)3 + (size_t)1); /* ugh */
-> ++	{
-> ++	  /* Patched for CERT Vulnerability Note VU#695940, Feb 2015. */
-> ++	  size_t new_ssize = len/(size_t)2*(size_t)3 + (size_t)1; /* ugh */
-> ++	  if (new_ssize < len || new_ssize > LONG_MAX / sizeof(sop)) {
-> ++	    free((char *) g);
-> ++	    return REG_INVARG;
-> ++	  }
-> ++	  p->ssize = new_ssize;
-> ++	}
-> ++
-> + 	p->strip = (sop *)malloc(p->ssize * sizeof(sop));
-> + 	p->slen = 0;
-> + 	if (p->strip == NULL) {
-> +--
-> +1.9.1
-> +
->
-
-
--- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
-Canada, K2K 2W5
+Sebastian
 
