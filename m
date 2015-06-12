@@ -1,30 +1,24 @@
-Return-Path: <zboszor@pr.hu>
-Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
-	by mail.openembedded.org (Postfix) with ESMTP id 710B17324E
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 16A7773FF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2015 15:35:46 +0000 (UTC)
-Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
-	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1Z34WB-0005Sx-3q
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jun 2015 17:35:47 +0200
-Received: from host-87-242-63-200.prtelecom.hu ([87.242.63.200]
-	helo=s002.sicom.com)
-	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
-	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1Z34W3-0007uV-Ut
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Jun 2015 17:35:45 +0200
-Message-ID: <5579AAC9.8090508@pr.hu>
-Date: Thu, 11 Jun 2015 17:35:37 +0200
-From: Boszormenyi Zoltan <zboszor@pr.hu>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	Fri, 12 Jun 2015 01:06:09 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5C16A1K023764
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Jun 2015 18:06:10 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.224.2; Thu, 11 Jun 2015 18:06:10 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 12 Jun 2015 08:59:25 +0800
+Message-ID: <1434070765-3165-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Spam-Score: 0.3 (/)
-X-Scan-Signature: dda648b1d3e643e91fd1a0320e0a0c7d
-X-Spam-Tracer: backend.mail.pr.hu 0.3 20150611153545Z
-Subject: Bitbake 1.22 GIT fetcher problem with tags
+Subject: [PATCH][mete-oe] mariadb: fix floating dependency on krb5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,44 +32,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jun 2015 15:35:49 -0000
-X-Groupsio-MsgNum: 55858
-Content-Type: multipart/mixed; boundary="------------060907030102030902090403"
+X-List-Received-Date: Fri, 12 Jun 2015 01:06:12 -0000
+Content-Type: text/plain
 
---------------060907030102030902090403
-Content-Type: text/plain; charset=iso-8859-2
-Content-Transfer-Encoding: 8bit
+From: Roy Li <rongqing.li@windriver.com>
 
-Hi,
+Mariadb depends on openssl, openssl conditionally depends on krb5 by
+checking if OPENSSL_NO_KRB5 is defined, but cmake can not handle "ifndef"
+and always ask krb5.h if krb5.h exist when cmake make_depend;
 
-when fetching a git:// source using SRCREV="tag_name", do_fetch often fails.
-The attached patch solves it. We still use a Yocto 1.6 based system and it is a necessity.
-Can you get this or the patch from bitbake's master branch backported into old bitbake
-branches?
+Faking a kssl.h if krb5 is not in PACKAGECONF, which does not include
+krb5 related declaration, install the faked kssl.h into build dir to
+be searched firstly
 
-Thanks in advance and best regards,
-Zoltán Böszörményi
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ meta-oe/recipes-support/mysql/mariadb.inc | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-
---------------060907030102030902090403
-Content-Type: text/x-patch;
- name="bitbake-1.22-git-tag-fix.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="bitbake-1.22-git-tag-fix.patch"
-
-diff --git a/lib/bb/fetch2/git.py b/lib/bb/fetch2/git.py
-index 5d1a358..3897172 100644
---- a/lib/bb/fetch2/git.py
-+++ b/lib/bb/fetch2/git.py
-@@ -339,7 +339,7 @@ class Git(FetchMethod):
-         """
-         Compute the HEAD revision for the url
-         """
--        search = "refs/heads/%s refs/tags/%s^{}" % (ud.unresolvedrev[name], ud.unresolvedrev[name])
-+        search = "refs/heads/%s refs/tags/%s refs/tags/%s^{}" % (ud.unresolvedrev[name], ud.unresolvedrev[name], ud.unresolvedrev[name])
-         output = self._lsremote(ud, d, search)
-         return output.split()[0]
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index 00fa965..ddc0644 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -42,6 +42,7 @@ PACKAGECONFIG_class-native = ""
+ PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
+ PACKAGECONFIG[valgrind] = "-DWITH_VALGRIND=TRUE,-DWITHOUT_VALGRIND=TRUE,valgrind"
+ PACKAGECONFIG[libedit] = "-DLIBEDIT_INTERFACE=TRUE,-DLIBEDIT_INTERFACE=FALSE,libedit"
++PACKAGECONFIG[krb5] = ", ,krb5"
  
+ # MariaDB doesn't link properly with gold
+ # https://mariadb.atlassian.net/browse/MDEV-5982
+@@ -84,6 +85,14 @@ do_compile_prepend_class-target () {
+     # and since we're cross-compiling that is disabled
+     cp ${STAGING_BINDIR_NATIVE}/comp_err ${S}/extra
+     cp ${STAGING_BINDIR_NATIVE}/comp_sql ${S}/scripts
++
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'krb5', 'yes', 'no', d)}" = "no" ]; then
++        mkdir ${B}/include/openssl
++        echo "#ifndef KSSL_H" >${B}/include/openssl/kssl.h
++        echo "#define KSSL_H" >>${B}/include/openssl/kssl.h
++        echo "#include <openssl/opensslconf.h>">>${B}/include/openssl/kssl.h
++        echo "#endif" >>${B}/include/openssl/kssl.h
++    fi
+ }
+ 
+ SYSROOT_PREPROCESS_FUNCS += "mariadb_sysroot_preprocess"
+-- 
+1.9.1
 
---------------060907030102030902090403--
+
