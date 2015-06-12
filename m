@@ -1,28 +1,31 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A8397324E
+Return-Path: <matti.kaasinen@gmail.com>
+Received: from mail-ig0-f174.google.com (mail-ig0-f174.google.com
+	[209.85.213.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 72C887324E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2015 08:14:40 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5C8Ed0g007007
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 12 Jun 2015 01:14:39 -0700 (PDT)
-Received: from [128.224.163.137] (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Fri, 12 Jun 2015 01:14:39 -0700
-Message-ID: <557A94EB.6090908@windriver.com>
-Date: Fri, 12 Jun 2015 16:14:35 +0800
-From: Yi Zhao <yi.zhao@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	Fri, 12 Jun 2015 08:16:16 +0000 (UTC)
+Received: by igbsb11 with SMTP id sb11so6553446igb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Jun 2015 01:16:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=wrhe5o+jMrpSposjVgxVvnLvxlZkmYhJhZo8ZFk4hsE=;
+	b=GQHLEyaqc48ehHSh+l9O5vFzhdV5Y1wvkHo8YQ+ZL//eYQA8L5WbzPCHZL7WeOwtW4
+	oCrvmkIUDc4nDyvmkkPgJ2jIX/o0LdJ7XDHS+ZL8oNUpLmZaCE4jkOSmzbBo2Jmk+rBv
+	SK54lytNjfoSEJ3FgYcApjF8jC7c8moYyQZKs/fKiQk7UqdV96HqS4Ap1nPBXi8J3H/7
+	Gs5jgP4Koo84dmDSyNl9uO43TCa//ZeQXvd6xSfXNEIf+PYVd+yWUWsGxt9tC48puNGF
+	HeIbVtfwvwMg904lQdFbv95JN9u8sZD8EJSAIptxXVmVswl/fZ6YV0Cj7oZnfqRkIU0R
+	JYvA==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>, <martin.jansa@gmail.com>
-References: <cover.1433403866.git.yi.zhao@windriver.com>	<a55cd1ca790ecc6a173648bc60bf3b37f98a82b0.1433403866.git.yi.zhao@windriver.com>
-	<20150611103956.GA2394@jama>
-In-Reply-To: <20150611103956.GA2394@jama>
-X-Originating-IP: [128.224.163.137]
-Subject: Re: [meta-oe][PATCH 1/3] luajit: fix build failure for multilib
+X-Received: by 10.50.80.19 with SMTP id n19mr2802566igx.30.1434096977419; Fri,
+	12 Jun 2015 01:16:17 -0700 (PDT)
+Received: by 10.36.1.197 with HTTP; Fri, 12 Jun 2015 01:16:17 -0700 (PDT)
+Date: Fri, 12 Jun 2015 11:16:17 +0300
+Message-ID: <CADnUhn1U1vmKZH2QcV_t9e1X9HC=BLZceB73G=zYxqpCBdFZSA@mail.gmail.com>
+From: matti kaasinen <matti.kaasinen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: klibc_2.0.4.bb crashes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,59 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jun 2015 08:14:43 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 12 Jun 2015 08:16:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Hi!
 
+klibc_2.0.4.bb recipe linking crashes with following error messages.
+arm-poky-linux-gnueabi-ld: error:
+.../sysroots/am335x-evm/usr/lib/arm-poky-linux-gnueabi/4.9.2/libgcc.a(bpabi.o)
+uses VFP register arguments, usr/klibc/libc.so does not
+arm-poky-linux-gnueabi-ld: failed to merge target specific data of file
+.../sysroots/am335x-evm/usr/lib/arm-poky-linux-gnueabi/4.9.2/libgcc.a(bpabi.o)
 
-在 2015年06月11日 18:39, Martin Jansa 写道:
-> On Thu, Jun 04, 2015 at 03:48:11PM +0800, Yi Zhao wrote:
->> Fix libdir in Makefile
->>
->> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->> ---
->>   meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb |    4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
->> index 48137e3..f3235c9 100644
->> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
->> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
->> @@ -16,8 +16,8 @@ inherit pkgconfig binconfig
->>   BBCLASSEXTEND = "native"
->>   
->>   do_configure_prepend() {
->> -    sed -i -e s:/usr/local:${prefix}:g ${S}/Makefile
->> -    sed -i -e s:/lib$:${base_libdir}:g ${S}/Makefile
->> +    sed -i 's:PREFIX= /usr/local:PREFIX= ${prefix}:g' ${S}/Makefile
->> +    sed -i 's:MULTILIB= lib:MULTILIB= ${base_libdir}:g' ${S}/Makefile
->>   }
-> This seems to break qemux86 build
->
-> | ==== Successfully installed LuaJIT 2.0.3 to /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr ====
-> | rmdir: failed to remove `/home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-linux/luajit-native/2.0.3-r0/image/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/lib/lua/5.*': No such file or directory
-> | rmdir: failed to remove `/home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-linux/luajit-native/2.0.3-r0/image/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/lib/lua': No such file or directory
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Function failed: do_install (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-linux/luajit-native/2.0.3-r0/temp/log.do_install.31954)
-> NOTE: recipe luajit-native-2.0.3-r0: task do_install: Failed
-> ERROR: Task 31965 (virtual:native:/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb, do_install) failed with exit code '1'
->
+I'm checked out fido branch of meta-openembedded.
 
-Thanks, Martin. I can reproduce it. A patch will be sent later.
+Any help warmly appreciated!
 
-Yi
-
-
->>   
->>   EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
->> -- 
->> 1.7.9.5
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+Thanks,
+Matti
 
