@@ -1,37 +1,28 @@
-Return-Path: <zoltan.kuscsik@linaro.org>
-Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FB5760670
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A8397324E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2015 06:58:14 +0000 (UTC)
-Received: by iebgx4 with SMTP id gx4so18871248ieb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2015 23:58:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=scEtfHLRyvNn6+afHwSQWc+YHeaCYUWjM6LIGix0Hyk=;
-	b=SsN3enU1Pd0uA5ySwLYcF6lKctWecj0TF/+CrMIA6D9+IRRGtJMBUi8ExCiUUZmtML
-	ymwtkBrIUNycq0webUWu3OXITHSdgbhKrOjBOtgVed1A+26YkzTHKtxBBefPS1WWn4Id
-	z1zInDNZfsylDIHUQohZiMwzY1B1oaigTnalbZTuC615uZlqKvPHInG2+9H9nm6DEJAv
-	M2Q7kUQqPtAJAf29g2ZKGXaNRu3Ci2ZfYKPaTUhJhj0yI0CIZaP4k0Rui+y8+MUW9ROo
-	1eIUdONFU6Q6DeY9Gl4SoietRPQaJt25Zq/4HmWDi78SINUwgUpVcvYh2FRPMbIkAYPb
-	oVPQ==
-X-Gm-Message-State: ALoCoQl0hS2IEbPc+z5F9qAQr5ZUUT7NevEQ1gCqfPIFPbCzXSnfiBhubyYzzveaSQtQANx2ZMqd
-X-Received: by 10.107.6.136 with SMTP id f8mr15674232ioi.61.1434092295897;
-	Thu, 11 Jun 2015 23:58:15 -0700 (PDT)
+	Fri, 12 Jun 2015 08:14:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5C8Ed0g007007
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 12 Jun 2015 01:14:39 -0700 (PDT)
+Received: from [128.224.163.137] (128.224.163.137) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.224.2;
+	Fri, 12 Jun 2015 01:14:39 -0700
+Message-ID: <557A94EB.6090908@windriver.com>
+Date: Fri, 12 Jun 2015 16:14:35 +0800
+From: Yi Zhao <yi.zhao@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-Received: by 10.79.109.129 with HTTP; Thu, 11 Jun 2015 23:57:55 -0700 (PDT)
-In-Reply-To: <557A817E.7070709@mail.bg>
-References: <5579F20D.5040900@mail.bg> <557A817E.7070709@mail.bg>
-From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
-Date: Fri, 12 Jun 2015 08:57:55 +0200
-Message-ID: <CAAzKXnhLePQYW43RdumMTtB4zO6FSRMzptFGGi4V8_F1gCmywQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: meta-freescale@yoctoproject.org
-Subject: Re: [meta-freescale] Chromium crashes on HTML5 video tag
+To: <openembedded-devel@lists.openembedded.org>, <martin.jansa@gmail.com>
+References: <cover.1433403866.git.yi.zhao@windriver.com>	<a55cd1ca790ecc6a173648bc60bf3b37f98a82b0.1433403866.git.yi.zhao@windriver.com>
+	<20150611103956.GA2394@jama>
+In-Reply-To: <20150611103956.GA2394@jama>
+X-Originating-IP: [128.224.163.137]
+Subject: Re: [meta-oe][PATCH 1/3] luajit: fix build failure for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,54 +36,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jun 2015 06:58:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 12 Jun 2015 08:14:43 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Do you have a crash log? If not, you should change your build from Release
-to Debug and
-get some backtraces.
 
-Zoltan
 
-On 12 June 2015 at 08:51, Nikolay Dimitrov <picmaster@mail.bg> wrote:
-
-> Adding openembedded guys in the loop.
+在 2015年06月11日 18:39, Martin Jansa 写道:
+> On Thu, Jun 04, 2015 at 03:48:11PM +0800, Yi Zhao wrote:
+>> Fix libdir in Makefile
+>>
+>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>> ---
+>>   meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb |    4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
+>> index 48137e3..f3235c9 100644
+>> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
+>> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb
+>> @@ -16,8 +16,8 @@ inherit pkgconfig binconfig
+>>   BBCLASSEXTEND = "native"
+>>   
+>>   do_configure_prepend() {
+>> -    sed -i -e s:/usr/local:${prefix}:g ${S}/Makefile
+>> -    sed -i -e s:/lib$:${base_libdir}:g ${S}/Makefile
+>> +    sed -i 's:PREFIX= /usr/local:PREFIX= ${prefix}:g' ${S}/Makefile
+>> +    sed -i 's:MULTILIB= lib:MULTILIB= ${base_libdir}:g' ${S}/Makefile
+>>   }
+> This seems to break qemux86 build
 >
->
-> On 06/11/2015 11:39 PM, Nikolay Dimitrov wrote:
->
->> Hi gang,
->>
->> Chromium tabs are crashing when they see an HTML5 <video> tag, like
->> this one:
->>
->> <video width="320" height="240" controls>
->>    <source src="movie.mp4" type="video/mp4">
->> </video>
->>
->> (Code is from http://www.w3schools.com/html/html5_video.asp)
->>
->> I'm pretty sure that this worked fine some weeks ago, so it's a recent
->> regression on Fido, 100% reproducible on imx6q sabresd. At this moment
->> I still can't point to a specific commit in meta-fsl-arm or
->> meta-browser.
->>
->> Thanks in advance for any ideas. Regards,
->> Nikolay
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> | ==== Successfully installed LuaJIT 2.0.3 to /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr ====
+> | rmdir: failed to remove `/home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-linux/luajit-native/2.0.3-r0/image/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/lib/lua/5.*': No such file or directory
+> | rmdir: failed to remove `/home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-linux/luajit-native/2.0.3-r0/image/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/lib/lua': No such file or directory
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_install (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-linux/luajit-native/2.0.3-r0/temp/log.do_install.31954)
+> NOTE: recipe luajit-native-2.0.3-r0: task do_install: Failed
+> ERROR: Task 31965 (virtual:native:/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-devtools/luajit/luajit_2.0.3.bb, do_install) failed with exit code '1'
 >
 
+Thanks, Martin. I can reproduce it. A patch will be sent later.
+
+Yi
 
 
--- 
-Zoltan Kuscsik
+>>   
+>>   EXTRA_OEMAKE = 'CROSS=${HOST_PREFIX} \
+>> -- 
+>> 1.7.9.5
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Senior Software Developer, Linaro Digital Home Group
-email: zoltan.kuscsik@linaro.org
-IRC: zoli_ on irc.linaro.org
 
