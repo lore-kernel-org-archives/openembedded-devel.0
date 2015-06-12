@@ -1,29 +1,35 @@
-Return-Path: <picmaster@mail.bg>
-Received: from mx3.mail.bg (mx3.mail.bg [193.201.172.119])
-	by mail.openembedded.org (Postfix) with ESMTP id D9621758D9
+Return-Path: <zoltan.kuscsik@linaro.org>
+Received: from mail-ie0-f181.google.com (mail-ie0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FB5760670
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2015 06:51:42 +0000 (UTC)
-Received: from [192.168.0.62] (unknown [93.152.143.60])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mx3.mail.bg (Postfix) with ESMTPSA id D519C20336EC;
-	Fri, 12 Jun 2015 09:51:42 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=mail.bg; s=default;
-	t=1434091902; bh=2k6R3QTl79sfCOvGpiT8JUwIwpfLJiPx0prn3r+tU7E=;
-	h=Message-ID:Date:From:MIME-Version:To:CC:Subject:References:
-	In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	b=Xngdk/oAigjGNR/Sbc2RBXbf2Zpt4GxQlVpuTgsxIyb145E+PmKzJe7QssfuZqDYS
-	mWzDL+Q8wxkUGoqM0QcWBoObjAlg1vAgXdkA9E7th1Hx5aVFzfNWhNiLgjcwUPqS/v
-	+MNYS5HkQtkONjlTeXiYhvoguGF/5cjl1ptSQAy0=
-Message-ID: <557A817E.7070709@mail.bg>
-Date: Fri, 12 Jun 2015 09:51:42 +0300
-From: Nikolay Dimitrov <picmaster@mail.bg>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.7.0
+	Fri, 12 Jun 2015 06:58:14 +0000 (UTC)
+Received: by iebgx4 with SMTP id gx4so18871248ieb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Jun 2015 23:58:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=scEtfHLRyvNn6+afHwSQWc+YHeaCYUWjM6LIGix0Hyk=;
+	b=SsN3enU1Pd0uA5ySwLYcF6lKctWecj0TF/+CrMIA6D9+IRRGtJMBUi8ExCiUUZmtML
+	ymwtkBrIUNycq0webUWu3OXITHSdgbhKrOjBOtgVed1A+26YkzTHKtxBBefPS1WWn4Id
+	z1zInDNZfsylDIHUQohZiMwzY1B1oaigTnalbZTuC615uZlqKvPHInG2+9H9nm6DEJAv
+	M2Q7kUQqPtAJAf29g2ZKGXaNRu3Ci2ZfYKPaTUhJhj0yI0CIZaP4k0Rui+y8+MUW9ROo
+	1eIUdONFU6Q6DeY9Gl4SoietRPQaJt25Zq/4HmWDi78SINUwgUpVcvYh2FRPMbIkAYPb
+	oVPQ==
+X-Gm-Message-State: ALoCoQl0hS2IEbPc+z5F9qAQr5ZUUT7NevEQ1gCqfPIFPbCzXSnfiBhubyYzzveaSQtQANx2ZMqd
+X-Received: by 10.107.6.136 with SMTP id f8mr15674232ioi.61.1434092295897;
+	Thu, 11 Jun 2015 23:58:15 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <5579F20D.5040900@mail.bg>
-In-Reply-To: <5579F20D.5040900@mail.bg>
+Received: by 10.79.109.129 with HTTP; Thu, 11 Jun 2015 23:57:55 -0700 (PDT)
+In-Reply-To: <557A817E.7070709@mail.bg>
+References: <5579F20D.5040900@mail.bg> <557A817E.7070709@mail.bg>
+From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+Date: Fri, 12 Jun 2015 08:57:55 +0200
+Message-ID: <CAAzKXnhLePQYW43RdumMTtB4zO6FSRMzptFGGi4V8_F1gCmywQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: meta-freescale@yoctoproject.org
 Subject: Re: [meta-freescale] Chromium crashes on HTML5 video tag
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -39,30 +45,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jun 2015 06:51:44 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 12 Jun 2015 06:58:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Adding openembedded guys in the loop.
+Do you have a crash log? If not, you should change your build from Release
+to Debug and
+get some backtraces.
+
+Zoltan
+
+On 12 June 2015 at 08:51, Nikolay Dimitrov <picmaster@mail.bg> wrote:
+
+> Adding openembedded guys in the loop.
+>
+>
+> On 06/11/2015 11:39 PM, Nikolay Dimitrov wrote:
+>
+>> Hi gang,
+>>
+>> Chromium tabs are crashing when they see an HTML5 <video> tag, like
+>> this one:
+>>
+>> <video width="320" height="240" controls>
+>>    <source src="movie.mp4" type="video/mp4">
+>> </video>
+>>
+>> (Code is from http://www.w3schools.com/html/html5_video.asp)
+>>
+>> I'm pretty sure that this worked fine some weeks ago, so it's a recent
+>> regression on Fido, 100% reproducible on imx6q sabresd. At this moment
+>> I still can't point to a specific commit in meta-fsl-arm or
+>> meta-browser.
+>>
+>> Thanks in advance for any ideas. Regards,
+>> Nikolay
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
 
-On 06/11/2015 11:39 PM, Nikolay Dimitrov wrote:
-> Hi gang,
->
-> Chromium tabs are crashing when they see an HTML5 <video> tag, like
-> this one:
->
-> <video width="320" height="240" controls>
->    <source src="movie.mp4" type="video/mp4">
-> </video>
->
-> (Code is from http://www.w3schools.com/html/html5_video.asp)
->
-> I'm pretty sure that this worked fine some weeks ago, so it's a recent
-> regression on Fido, 100% reproducible on imx6q sabresd. At this moment
-> I still can't point to a specific commit in meta-fsl-arm or
-> meta-browser.
->
-> Thanks in advance for any ideas. Regards,
-> Nikolay
+
+-- 
+Zoltan Kuscsik
+
+Senior Software Developer, Linaro Digital Home Group
+email: zoltan.kuscsik@linaro.org
+IRC: zoli_ on irc.linaro.org
 
