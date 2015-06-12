@@ -1,24 +1,31 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 16A7773FF2
+Return-Path: <picmaster@mail.bg>
+Received: from mx3.mail.bg (mx3.mail.bg [193.201.172.119])
+	by mail.openembedded.org (Postfix) with ESMTP id D9621758D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2015 01:06:09 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5C16A1K023764
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jun 2015 18:06:10 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Thu, 11 Jun 2015 18:06:10 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Jun 2015 08:59:25 +0800
-Message-ID: <1434070765-3165-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 12 Jun 2015 06:51:42 +0000 (UTC)
+Received: from [192.168.0.62] (unknown [93.152.143.60])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mx3.mail.bg (Postfix) with ESMTPSA id D519C20336EC;
+	Fri, 12 Jun 2015 09:51:42 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=mail.bg; s=default;
+	t=1434091902; bh=2k6R3QTl79sfCOvGpiT8JUwIwpfLJiPx0prn3r+tU7E=;
+	h=Message-ID:Date:From:MIME-Version:To:CC:Subject:References:
+	In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	b=Xngdk/oAigjGNR/Sbc2RBXbf2Zpt4GxQlVpuTgsxIyb145E+PmKzJe7QssfuZqDYS
+	mWzDL+Q8wxkUGoqM0QcWBoObjAlg1vAgXdkA9E7th1Hx5aVFzfNWhNiLgjcwUPqS/v
+	+MNYS5HkQtkONjlTeXiYhvoguGF/5cjl1ptSQAy0=
+Message-ID: <557A817E.7070709@mail.bg>
+Date: Fri, 12 Jun 2015 09:51:42 +0300
+From: Nikolay Dimitrov <picmaster@mail.bg>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.7.0
 MIME-Version: 1.0
-Subject: [PATCH][mete-oe] mariadb: fix floating dependency on krb5
+To: openembedded-devel@lists.openembedded.org
+References: <5579F20D.5040900@mail.bg>
+In-Reply-To: <5579F20D.5040900@mail.bg>
+Cc: meta-freescale@yoctoproject.org
+Subject: Re: [meta-freescale] Chromium crashes on HTML5 video tag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,52 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jun 2015 01:06:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 12 Jun 2015 06:51:44 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Roy Li <rongqing.li@windriver.com>
+Adding openembedded guys in the loop.
 
-Mariadb depends on openssl, openssl conditionally depends on krb5 by
-checking if OPENSSL_NO_KRB5 is defined, but cmake can not handle "ifndef"
-and always ask krb5.h if krb5.h exist when cmake make_depend;
 
-Faking a kssl.h if krb5 is not in PACKAGECONF, which does not include
-krb5 related declaration, install the faked kssl.h into build dir to
-be searched firstly
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- meta-oe/recipes-support/mysql/mariadb.inc | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index 00fa965..ddc0644 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -42,6 +42,7 @@ PACKAGECONFIG_class-native = ""
- PACKAGECONFIG[pam] = ",-DWITHOUT_AUTH_PAM=TRUE,libpam"
- PACKAGECONFIG[valgrind] = "-DWITH_VALGRIND=TRUE,-DWITHOUT_VALGRIND=TRUE,valgrind"
- PACKAGECONFIG[libedit] = "-DLIBEDIT_INTERFACE=TRUE,-DLIBEDIT_INTERFACE=FALSE,libedit"
-+PACKAGECONFIG[krb5] = ", ,krb5"
- 
- # MariaDB doesn't link properly with gold
- # https://mariadb.atlassian.net/browse/MDEV-5982
-@@ -84,6 +85,14 @@ do_compile_prepend_class-target () {
-     # and since we're cross-compiling that is disabled
-     cp ${STAGING_BINDIR_NATIVE}/comp_err ${S}/extra
-     cp ${STAGING_BINDIR_NATIVE}/comp_sql ${S}/scripts
-+
-+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'krb5', 'yes', 'no', d)}" = "no" ]; then
-+        mkdir ${B}/include/openssl
-+        echo "#ifndef KSSL_H" >${B}/include/openssl/kssl.h
-+        echo "#define KSSL_H" >>${B}/include/openssl/kssl.h
-+        echo "#include <openssl/opensslconf.h>">>${B}/include/openssl/kssl.h
-+        echo "#endif" >>${B}/include/openssl/kssl.h
-+    fi
- }
- 
- SYSROOT_PREPROCESS_FUNCS += "mariadb_sysroot_preprocess"
--- 
-1.9.1
-
+On 06/11/2015 11:39 PM, Nikolay Dimitrov wrote:
+> Hi gang,
+>
+> Chromium tabs are crashing when they see an HTML5 <video> tag, like
+> this one:
+>
+> <video width="320" height="240" controls>
+>    <source src="movie.mp4" type="video/mp4">
+> </video>
+>
+> (Code is from http://www.w3schools.com/html/html5_video.asp)
+>
+> I'm pretty sure that this worked fine some weeks ago, so it's a recent
+> regression on Fido, 100% reproducible on imx6q sabresd. At this moment
+> I still can't point to a specific commit in meta-fsl-arm or
+> meta-browser.
+>
+> Thanks in advance for any ideas. Regards,
+> Nikolay
 
