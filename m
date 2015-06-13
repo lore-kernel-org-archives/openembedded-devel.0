@@ -1,34 +1,37 @@
-Return-Path: <matti.kaasinen@gmail.com>
-Received: from mail-ig0-f170.google.com (mail-ig0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id A9EC67599A
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 2406D7598B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jun 2015 05:22:35 +0000 (UTC)
-Received: by igbpi8 with SMTP id pi8so23654518igb.1
+	Sat, 13 Jun 2015 07:03:08 +0000 (UTC)
+Received: by wgez8 with SMTP id z8so36166973wge.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jun 2015 22:22:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=319QRsfJgiNV4W72SVoscFou73MYUBSwxBABi0zfz70=;
-	b=AvEP86n19TyhGHVQFMercqJWPRtUI7kZs5nDnLH4plgrjPdtlMA0y1p34X4Li61YP1
-	OCl9JgTN5LafwkV2JGGUBiy56GFPS3G34wW/Icjp2YQIj2hxo8PCmfyqOiVYY5CHUVJP
-	/RPqAvgVDpD3Xxljj4nWez5+bpzFoERiC4jBysgjulkBgjmAO+iy/fot6IlBflDUimox
-	AWHA7ixmhKGUxrDiW75/hqMhMA7/RiucXJBfS+1o5OzS5Yv/XJDPfwxy8aDxftn43+4g
-	hULgGjnkD5ycquEeTCYV6IWYkzJr4GAtSsaTGpiLAiYWiu3rYsquWoxVDayOO9OeIuPb
-	DxxQ==
-MIME-Version: 1.0
-X-Received: by 10.42.213.136 with SMTP id gw8mr19812871icb.95.1434172956488;
-	Fri, 12 Jun 2015 22:22:36 -0700 (PDT)
-Received: by 10.36.1.197 with HTTP; Fri, 12 Jun 2015 22:22:36 -0700 (PDT)
-In-Reply-To: <CAMKF1sqS-dpJbFtkZwB4qVyDsCGrLROkXYPiLQ-6ugaJ+A2Hxg@mail.gmail.com>
-References: <CADnUhn1U1vmKZH2QcV_t9e1X9HC=BLZceB73G=zYxqpCBdFZSA@mail.gmail.com>
-	<CAMKF1sqS-dpJbFtkZwB4qVyDsCGrLROkXYPiLQ-6ugaJ+A2Hxg@mail.gmail.com>
-Date: Sat, 13 Jun 2015 08:22:36 +0300
-Message-ID: <CADnUhn3yR_282cEf415zCdRK2HWNBXgqHOg1DG5KO6tCTJH2VA@mail.gmail.com>
-From: matti kaasinen <matti.kaasinen@gmail.com>
+	Sat, 13 Jun 2015 00:03:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=54gfAOCqjFAZtxpinA3yCx3RDEANpONFGnmKDNG5DLA=;
+	b=zfOP5aEDFiWimgLvSwVPQ0zDUe/dcE3j+/tg/fEjwHK1rQIOt5/ggAAyxoS+Eb3YQk
+	cXxNkyZ0STdEfB5c6wFR9Rl3gttEeiqXBePuyz+URkUl/2dfUYUpBppfptIz74pDzues
+	UTUPXWnfiLFYbcI6tz7xGXYVF5Kksd+uus8+c0TXwR8zvDZSrP4QvEkeusZjq5NzyMnD
+	V2DcPQkH0Fx00+o+qn8KQOmz46sUTUvgdw1UIo/n5CPpBh0AzV1Yfl+RwGhFQcDSQ0sR
+	8FSPKOv3kQKYhjZk8D2IfRSAOZBLhU3dpzCefOHZNduoYJ3xGSQZS2UKUGh7bkaJnj7i
+	yDOQ==
+X-Received: by 10.181.13.172 with SMTP id ez12mr13170635wid.91.1434178989344; 
+	Sat, 13 Jun 2015 00:03:09 -0700 (PDT)
+Received: from localhost.localdomain (p4FDF1D76.dip0.t-ipconnect.de.
+	[79.223.29.118])
+	by mx.google.com with ESMTPSA id n6sm5950669wic.16.2015.06.13.00.03.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 13 Jun 2015 00:03:08 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: klibc_2.0.4.bb crashes
+Date: Sat, 13 Jun 2015 09:02:55 +0200
+Message-Id: <1434178975-21236-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
+MIME-Version: 1.0
+Subject: [meta-qt5][PATCH] qt5-opengles2-test: update to last commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,42 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jun 2015 05:22:40 -0000
+X-List-Received-Date: Sat, 13 Jun 2015 07:03:09 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-So, do you mean that this is not a layer problem but distro problem?
-Considering Yocto/Poky based distro like Silica/ArchiTech or Ti/Arago:
-should I contact Arago or ArchiTech community or Poky community? Who should
-define these parameters "umbrella" distro or sub-distro? I suppose I should
-contact myself (or Poky), as I started from plain Yocto/Poky and copied
-some layers from Arago distribution (meta-ti and layers it required).
+* don't segfault in case qtsensors does not find accelerometer values
 
-2015-06-12 17:51 GMT+03:00 Khem Raj <raj.khem@gmail.com>:
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-qt/examples/qt5-opengles2-test_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> On Fri, Jun 12, 2015 at 4:16 AM, matti kaasinen
-> <matti.kaasinen@gmail.com> wrote:
-> >
-> > klibc_2.0.4.bb recipe linking crashes with following error messages.
-> > arm-poky-linux-gnueabi-ld: error:
-> >
-> .../sysroots/am335x-evm/usr/lib/arm-poky-linux-gnueabi/4.9.2/libgcc.a(bpabi.o)
-> > uses VFP register arguments, usr/klibc/libc.so does not
-> > arm-poky-linux-gnueabi-ld: failed to merge target specific data of file
-> >
-> .../sysroots/am335x-evm/usr/lib/arm-poky-linux-gnueabi/4.9.2/libgcc.a(bpabi.o)
-> >
-> > I'm checked out fido branch of meta-openembedded.
->
-> It means that TOOLCHAIN_OPTIONS is not passed via CFLAGS when building
-> klibc, we have a diversion
-> in expectation where we do not configure toolchain to hardfp unless we
-> specify it via cmdline to compiler. Once you
-> fix that, next thing might be that klibc is not good with hardfp
-> itself which could be a bigger problem.
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes-qt/examples/qt5-opengles2-test_git.bb b/recipes-qt/examples/qt5-opengles2-test_git.bb
+index f763912..10c0aed 100644
+--- a/recipes-qt/examples/qt5-opengles2-test_git.bb
++++ b/recipes-qt/examples/qt5-opengles2-test_git.bb
+@@ -13,7 +13,7 @@ DEPENDS = "qtbase qtsensors"
+ EXCLUDE_FROM_WORLD = "1"
+ 
+ SRC_URI = "git://github.com/thp/qt5-opengles2-test.git"
+-SRCREV = "3fa3789c28658b6f0bbddc3105f575f1074e87f2"
++SRCREV = "938390507054ed1258345f70ed55770d2fe56176"
+ S = "${WORKDIR}/git"
+ 
+ inherit qmake5
+-- 
+1.9.3
+
 
