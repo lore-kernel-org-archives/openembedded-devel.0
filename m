@@ -1,37 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 2406D7598B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 581B9758F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jun 2015 07:03:08 +0000 (UTC)
-Received: by wgez8 with SMTP id z8so36166973wge.0
+	Sat, 13 Jun 2015 15:03:55 +0000 (UTC)
+Received: by igbpi8 with SMTP id pi8so28484210igb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jun 2015 00:03:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=54gfAOCqjFAZtxpinA3yCx3RDEANpONFGnmKDNG5DLA=;
-	b=zfOP5aEDFiWimgLvSwVPQ0zDUe/dcE3j+/tg/fEjwHK1rQIOt5/ggAAyxoS+Eb3YQk
-	cXxNkyZ0STdEfB5c6wFR9Rl3gttEeiqXBePuyz+URkUl/2dfUYUpBppfptIz74pDzues
-	UTUPXWnfiLFYbcI6tz7xGXYVF5Kksd+uus8+c0TXwR8zvDZSrP4QvEkeusZjq5NzyMnD
-	V2DcPQkH0Fx00+o+qn8KQOmz46sUTUvgdw1UIo/n5CPpBh0AzV1Yfl+RwGhFQcDSQ0sR
-	8FSPKOv3kQKYhjZk8D2IfRSAOZBLhU3dpzCefOHZNduoYJ3xGSQZS2UKUGh7bkaJnj7i
-	yDOQ==
-X-Received: by 10.181.13.172 with SMTP id ez12mr13170635wid.91.1434178989344; 
-	Sat, 13 Jun 2015 00:03:09 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF1D76.dip0.t-ipconnect.de.
-	[79.223.29.118])
-	by mx.google.com with ESMTPSA id n6sm5950669wic.16.2015.06.13.00.03.07
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 13 Jun 2015 00:03:08 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Jun 2015 09:02:55 +0200
-Message-Id: <1434178975-21236-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.9.3
+	Sat, 13 Jun 2015 08:03:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=thIvQvFJUUWPoQBW/+Ok3k0QB87J8SkdcB6/vB8y6a4=;
+	b=YItBR7cX3rwwcfhm7WO7EUg5tJJJRfLFA/68k8Bc5yVMee3axqzyMIVDWu8An8KRBq
+	MujF4hINTCtcoS3ng0mQfq/gZcDZZa45GgRuWcobbNroby24dL4gnngSNs4Uhy2fkJJY
+	+G13LB6dPMaSXfluZi5eP0CcUu5UYY8emB8sHT2WEwKjuuLwqNj173evJ9m7lOhlbLYp
+	EPJ1rzlCRbKe5itX3y6ZsQosZ955ZCDho+ljaroYcWTqAatPN1DrIu+eJ/TwHjxm0yH5
+	XjXbN/BPDzf4+meTtWwZjUbgu97PaNF2RzjzUlB5qXcom64lHua1HixZ+PQDMSWZA71z
+	AGEg==
+X-Received: by 10.42.83.212 with SMTP id i20mr21610173icl.91.1434207837172;
+	Sat, 13 Jun 2015 08:03:57 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qt5-opengles2-test: update to last commit
+Received: by 10.107.20.83 with HTTP; Sat, 13 Jun 2015 08:03:26 -0700 (PDT)
+In-Reply-To: <1434178975-21236-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1434178975-21236-1-git-send-email-schnitzeltony@googlemail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 13 Jun 2015 11:03:26 -0400
+Message-ID: <CAMKF1sqveso9QHJQTAj6ia_CWwKsuy6zYcCQqKyU3QyhXwEDPw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qt5-opengles2-test: update to last commit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,31 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jun 2015 07:03:09 -0000
+X-List-Received-Date: Sat, 13 Jun 2015 15:03:59 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-* don't segfault in case qtsensors does not find accelerometer values
+On Sat, Jun 13, 2015 at 3:02 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> * don't segfault in case qtsensors does not find accelerometer values
+>
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- recipes-qt/examples/qt5-opengles2-test_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+looks ok
 
-diff --git a/recipes-qt/examples/qt5-opengles2-test_git.bb b/recipes-qt/examples/qt5-opengles2-test_git.bb
-index f763912..10c0aed 100644
---- a/recipes-qt/examples/qt5-opengles2-test_git.bb
-+++ b/recipes-qt/examples/qt5-opengles2-test_git.bb
-@@ -13,7 +13,7 @@ DEPENDS = "qtbase qtsensors"
- EXCLUDE_FROM_WORLD = "1"
- 
- SRC_URI = "git://github.com/thp/qt5-opengles2-test.git"
--SRCREV = "3fa3789c28658b6f0bbddc3105f575f1074e87f2"
-+SRCREV = "938390507054ed1258345f70ed55770d2fe56176"
- S = "${WORKDIR}/git"
- 
- inherit qmake5
--- 
-1.9.3
-
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  recipes-qt/examples/qt5-opengles2-test_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-qt/examples/qt5-opengles2-test_git.bb b/recipes-qt/e=
+xamples/qt5-opengles2-test_git.bb
+> index f763912..10c0aed 100644
+> --- a/recipes-qt/examples/qt5-opengles2-test_git.bb
+> +++ b/recipes-qt/examples/qt5-opengles2-test_git.bb
+> @@ -13,7 +13,7 @@ DEPENDS =3D "qtbase qtsensors"
+>  EXCLUDE_FROM_WORLD =3D "1"
+>
+>  SRC_URI =3D "git://github.com/thp/qt5-opengles2-test.git"
+> -SRCREV =3D "3fa3789c28658b6f0bbddc3105f575f1074e87f2"
+> +SRCREV =3D "938390507054ed1258345f70ed55770d2fe56176"
+>  S =3D "${WORKDIR}/git"
+>
+>  inherit qmake5
+> --
+> 1.9.3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
