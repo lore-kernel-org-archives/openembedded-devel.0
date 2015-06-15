@@ -1,24 +1,23 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EA0275902
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 09:39:40 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5F9dgdC026841
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 02:39:42 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 15 Jun 2015 02:39:41 -0700
-From: <rongqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jun 2015 17:32:42 +0800
-Message-ID: <1434360762-18275-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 68D307589F;
+	Mon, 15 Jun 2015 09:46:33 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by orsmga101.jf.intel.com with ESMTP; 15 Jun 2015 02:46:32 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,618,1427785200"; d="scan'208";a="727524284"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.143])
+	([10.237.68.143])
+	by fmsmga001.fm.intel.com with ESMTP; 15 Jun 2015 02:46:30 -0700
+Message-ID: <557E9EFE.1030703@linux.intel.com>
+Date: Mon, 15 Jun 2015 12:46:38 +0300
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.7.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-webserver] phpmyadmin: upgrade 4.4.9
+To: openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org, yocto@yoctoproject.org
+Subject: Webkit-gtk will be updated to latest upstream; midori browser to be replaced with Epiphany
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,40 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 09:39:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Jun 2015 09:46:36 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Roy Li <rongqing.li@windriver.com>
+Hello everyone,
 
-upgrade to include CVE fixes:
-	CVE-2015-3903
-	CVE-2015-3902
+I've been looking into updating oe-core's aging web engine/browser 
+combo, and want to give you a heads up about what's going to happen:
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
----
- .../phpmyadmin/{phpmyadmin_4.4.4.bb => phpmyadmin_4.4.9.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.4.4.bb => phpmyadmin_4.4.9.bb} (88%)
+1) webkit-gtk engine will be updated to latest stable upstream release 
+(2.8.3 which is providing Webkit2 API and is a Gtk3 port)
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.4.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
-similarity index 88%
-rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.4.bb
-rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
-index c021c92..91a1cbf 100644
---- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.4.bb
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
- SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
-            file://apache.conf"
- 
--SRC_URI[md5sum] = "912eeb8634bf99a7538a6fb4cad9135c"
--SRC_URI[sha256sum] = "bad1583fa3ef9534bc412822f873635c4b7f90488f17567d7ab0e2ea9bbd338c"
-+SRC_URI[md5sum] = "d60d80fabe1b27023122228dcf7ee73e"
-+SRC_URI[sha256sum] = "b9a31d6ec3e7abe708160ce8dbc364c029015256766bac6f68134b84a836d766"
- 
- S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
- 
--- 
-1.9.1
+2) midori browser will be replaced with Epiphany browser from the Gnome 
+project. The reason is that the latest release of midori still defaults 
+to Webkit1 and gtk2, a new version of midori is in development, but is a 
+major rewrite with no target release date and is far from ready at the 
+moment (from looking at the list of open issues).
 
+The downside to this is extra bloat and dependencies, but I can't see 
+any other way we can provide a modern client stack for the web. Having a 
+browser is important nowadays for any kiosk-type device with a 
+touchscreen, because that's how UIs are written.
+
+Regards,
+Alex
 
