@@ -1,24 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7325F75902
+	by mail.openembedded.org (Postfix) with ESMTP id 9EA0275902
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 09:18:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5F9IKRQ026660
+	Mon, 15 Jun 2015 09:39:40 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5F9dgdC026841
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 02:18:20 -0700 (PDT)
+	Mon, 15 Jun 2015 02:39:42 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 15 Jun 2015 02:18:20 -0700
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.224.2; Mon, 15 Jun 2015 02:39:41 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jun 2015 17:11:20 +0800
-Message-ID: <1434359480-28573-1-git-send-email-rongqing.li@windriver.com>
+Date: Mon, 15 Jun 2015 17:32:42 +0800
+Message-ID: <1434360762-18275-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] znc: upgrade to 1.6.0
+Subject: [PATCH][meta-webserver] phpmyadmin: upgrade 4.4.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,111 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 09:18:24 -0000
+X-List-Received-Date: Mon, 15 Jun 2015 09:39:44 -0000
 Content-Type: text/plain
 
 From: Roy Li <rongqing.li@windriver.com>
 
-Remove backport patch
-Add CSocket submodule
+upgrade to include CVE fixes:
+	CVE-2015-3903
+	CVE-2015-3902
 
 Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- ...-Fix-NULL-pointer-dereference-in-webadmin.patch | 58 ----------------------
- meta-networking/recipes-irc/znc/znc_git.bb         | 12 ++---
- 2 files changed, 6 insertions(+), 64 deletions(-)
- delete mode 100644 meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+ .../phpmyadmin/{phpmyadmin_4.4.4.bb => phpmyadmin_4.4.9.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.4.4.bb => phpmyadmin_4.4.9.bb} (88%)
 
-diff --git a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch b/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
-deleted file mode 100644
-index 68e4414..0000000
---- a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--Subject: [PATCH] Fix NULL pointer dereference in webadmin.
--
--Upstream-Status: Backport
--
--commit 2bd410ee5570cea127233f1133ea22f25174eb28 upstream
--
--Triggerable by any non-admin, if webadmin is loaded.
--
--The only affected version is 1.0
--
--Thanks to ChauffeR (Simone Esposito) for reporting this.
-----
-- modules/webadmin.cpp | 8 ++++----
-- 1 file changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/modules/webadmin.cpp b/modules/webadmin.cpp
--index b793c02..816f217 100644
----- a/modules/webadmin.cpp
--+++ b/modules/webadmin.cpp
--@@ -419,7 +419,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -448,7 +448,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -472,7 +472,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -486,7 +486,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
---- 
--1.8.5.2.233.g932f7e4
--
-diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
-index 2e35e4d..834c3de 100644
---- a/meta-networking/recipes-irc/znc/znc_git.bb
-+++ b/meta-networking/recipes-irc/znc/znc_git.bb
-@@ -1,16 +1,16 @@
- SUMMARY = "ZNC, an advanced IRC bouncer"
- SECTION = "net"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.4.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
+similarity index 88%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.4.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
+index c021c92..91a1cbf 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.4.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.4.9.bb
+@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a \
+ SRC_URI = "${SOURCEFORGE_MIRROR}/phpmyadmin/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
+            file://apache.conf"
  
--DEPENDS = "openssl"
-+DEPENDS = "openssl zlib"
+-SRC_URI[md5sum] = "912eeb8634bf99a7538a6fb4cad9135c"
+-SRC_URI[sha256sum] = "bad1583fa3ef9534bc412822f873635c4b7f90488f17567d7ab0e2ea9bbd338c"
++SRC_URI[md5sum] = "d60d80fabe1b27023122228dcf7ee73e"
++SRC_URI[sha256sum] = "b9a31d6ec3e7abe708160ce8dbc364c029015256766bac6f68134b84a836d766"
  
--PV = "1.0+git"
-+PV = "1.6.0+git"
- 
--SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
--SRC_URI = "git://github.com/znc/znc.git \
--           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
-+SRC_URI = "git://github.com/znc/znc.git;rev=f47e8465efa4e1cd948b9caae93ac401b4355df8  \
-+           git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket \
-           "
-+SRCREV_Csocket = "07b4437396122650e5b8fb3d014e820a5decf4ee"
- 
- S = "${WORKDIR}/git"
+ S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
  
 -- 
 1.9.1
