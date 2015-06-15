@@ -1,29 +1,29 @@
 Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id EFA4D759D0
+	by mail.openembedded.org (Postfix) with ESMTP id E7F59759D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 09:01:06 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,617,1427731200"; d="scan'208";a="97058812"
+	Mon, 15 Jun 2015 09:01:08 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,617,1427731200"; d="scan'208";a="97058817"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2015 17:05:17 +0800
+	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2015 17:05:20 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5F8xVxL030495
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5F8xYio030509
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 16:59:31 +0800
+	Mon, 15 Jun 2015 16:59:34 +0800
 Received: from localhost.localdomain (10.167.226.31) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 15 Jun 2015 17:01:17 +0800
+	Server (TLS) id 14.3.181.6; Mon, 15 Jun 2015 17:01:20 +0800
 From: Bian Naimeng <biannm@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jun 2015 16:52:12 +0800
-Message-ID: <1434358336-34981-4-git-send-email-biannm@cn.fujitsu.com>
+Date: Mon, 15 Jun 2015 16:52:15 +0800
+Message-ID: <1434358336-34981-7-git-send-email-biannm@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
 References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH 3/7] ctdb: add new recipe
+Subject: [meta-oe][PATCH 6/7] libtdb: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,122 +37,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 09:01:08 -0000
+X-List-Received-Date: Mon, 15 Jun 2015 09:01:09 -0000
 Content-Type: text/plain
 
-ctdb is required by samba4
+libtdb is required by samba4
 
 Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- .../01-support-cross-compile-for-linux-os.patch    | 24 ++++++++++++
- .../ctdb/02-link-rep_snprintf-for-ltdbtool.patch   | 16 ++++++++
- meta-oe/recipes-support/ctdb/ctdb_2.5.1.bb         | 43 ++++++++++++++++++++++
- 3 files changed, 83 insertions(+)
- create mode 100644 meta-oe/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch
- create mode 100644 meta-oe/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch
- create mode 100644 meta-oe/recipes-support/ctdb/ctdb_2.5.1.bb
+ .../libtdb/do-not-check-xsltproc-manpages.patch    | 15 +++++++++++
+ meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb     | 30 ++++++++++++++++++++++
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch
+ create mode 100644 meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
 
-diff --git a/meta-oe/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch b/meta-oe/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch
+diff --git a/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch b/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch
 new file mode 100644
-index 0000000..c9195b4
+index 0000000..bcc45c9
 --- /dev/null
-+++ b/meta-oe/recipes-support/ctdb/ctdb/01-support-cross-compile-for-linux-os.patch
-@@ -0,0 +1,24 @@
-+support cross-compile for linux-os.
++++ b/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpages.patch
+@@ -0,0 +1,15 @@
++Don't check manpages for xsltproc.
 +
 +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 +
-+diff -Nurp ctdb-2.5.1.orig/configure ctdb-2.5.1/configure
-+--- ctdb-2.5.1.orig/configure	2015-05-07 16:24:28.545000238 +0900
-++++ ctdb-2.5.1/configure	2015-05-07 16:28:20.894000244 +0900
-+@@ -10692,10 +10692,16 @@ if test x"$libreplace_cv_HAVE_GETADDRINF
-+ 	# see bug 5910, use our replacements if we detect
-+ 	# a broken system.
-+ 	if test "$cross_compiling" = yes; then :
-++		case "$target_os" in
-++		*linux*)
-++			;;
-++		*)
-+   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-+ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
-+ as_fn_error $? "cannot run test program while cross compiling
-+ See \`config.log' for more details" "$LINENO" 5; }
-++			;;
-++		esac
-+ else
-+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-+ /* end confdefs.h.  */
-diff --git a/meta-oe/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch b/meta-oe/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch
-new file mode 100644
-index 0000000..1dd9b93
---- /dev/null
-+++ b/meta-oe/recipes-support/ctdb/ctdb/02-link-rep_snprintf-for-ltdbtool.patch
-@@ -0,0 +1,16 @@
-+link rep_snprintf from lib/replace/snprintf.o for ltdbtool
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp ctdb-2.5.1.orig/Makefile.in ctdb-2.5.1/Makefile.in
-+--- ctdb-2.5.1.orig/Makefile.in	2015-05-07 16:43:39.276000236 +0900
-++++ ctdb-2.5.1/Makefile.in	2015-05-07 16:44:09.627000237 +0900
-+@@ -170,7 +170,7 @@ bin/ctdb: $(CTDB_CLIENT_OBJ) tools/ctdb.
-+ 	@echo Linking $@
-+ 	$(WRAPPER) $(CC) $(CFLAGS) -o $@ tools/ctdb.o tools/ctdb_vacuum.o $(CTDB_CLIENT_OBJ) $(LIB_FLAGS)
++--- tdb-1.3.0.orig/wscript	2015-04-22 09:52:32.366000222 +0900
+++++ tdb-1.3.0/wscript	2015-04-22 09:51:57.720000205 +0900
++@@ -90,7 +90,7 @@ def configure(conf):
++         not conf.env.disable_tdb_mutex_locking):
++         conf.define('USE_TDB_MUTEX_LOCKING', 1)
 + 
-+-bin/ltdbtool: tools/ltdbtool.o $(TDB_OBJ)
-++bin/ltdbtool: tools/ltdbtool.o $(TDB_OBJ) lib/replace/snprintf.o
-+ 	@echo Linking $@
-+ 	$(WRAPPER) $(CC) $(CFLAGS) -o $@ $+ $(TDB_LIBS) $(LIB_FLAGS)
++-    conf.CHECK_XSLTPROC_MANPAGES()
+++    conf.find_program('xsltproc', var='XSLTPROC')
 + 
-diff --git a/meta-oe/recipes-support/ctdb/ctdb_2.5.1.bb b/meta-oe/recipes-support/ctdb/ctdb_2.5.1.bb
++     if not conf.env.disable_python:
++         # also disable if we don't have the python libs installed
+diff --git a/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb b/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
 new file mode 100644
-index 0000000..25d5dc9
+index 0000000..b7f3d21
 --- /dev/null
-+++ b/meta-oe/recipes-support/ctdb/ctdb_2.5.1.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "CTDB is a cluster implementation of the TDB database \
-+used by Samba and other projects to store temporary data. If an \
-+application is already using TDB for temporary data it is very easy \
-+to convert that application to be cluster aware and use CTDB instead."
-+DESCRIPTION = "CTDB is a cluster implementation of the TDB database \
-+used by Samba and other projects to store temporary data. If an \
-+application is already using TDB for temporary data it is very easy \
-+to convert that application to be cluster aware and use CTDB instead."
-+HOMEPAGE = "https://ctdb.samba.org/"
-+LICENSE = "GPL-2.0+ & LGPL-3.0+ & GPL-3.0+"
++++ b/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "The tdb library"
++SECTION = "libs"
++LICENSE = "LGPL-3.0+ & GPL-3.0+"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
-+                    file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 \
-+                    "
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
++                    file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
 +
-+SRC_URI = "https://ftp.samba.org/pub/${PN}/${BP}.tar.gz \
-+           file://01-support-cross-compile-for-linux-os.patch \
-+           file://02-link-rep_snprintf-for-ltdbtool.patch \
-+          "
++SRC_URI = "http://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
++           file://do-not-check-xsltproc-manpages.patch"
 +
-+SRC_URI[md5sum] = "d0cd91726ff4ca2229e1b21859c94717"
-+SRC_URI[sha256sum] = "d5bf3f674cae986bb6178b1db215a703ac94adc5f75fadfdcff63dcbb5e98ab5"
++SRC_URI[md5sum] = "f18cd6afc4f5670edfe58f72d2665f94"
++SRC_URI[sha256sum] = "04bee48d405ab7815810575a6e0cb364cc0eea6187b54b18c84e9c18a768ba20"
 +
-+inherit autotools-brokensep pkgconfig systemd
++S = "${WORKDIR}/tdb-${PV}"
 +
-+PARALLEL_MAKE = ""
++inherit wafsamba
 +
-+DEPENDS += "popt libtevent libtalloc"
++EXTRA_OECONF += "--disable-rpath \
++                 --bundled-libraries=NONE \
++                 --builtin-libraries=replace \
++                 --with-libiconv=${STAGING_DIR_HOST}${prefix}\
++                "
 +
-+do_configure() {
-+    oe_runconf
-+}
++PACKAGES += "tdb-tools python-tdb python-tdb-dbg"
 +
-+do_install_append() {
-+    install -d ${D}${systemd_unitdir}/system
-+    install -m 0644 ${S}/config/ctdb.service ${D}${systemd_unitdir}/system
-+    sed -i -e 's,/usr/sbin/,${sbindir}/,' ${D}${systemd_unitdir}/system/ctdb.service
-+}
-+
-+SYSTEMD_SERVICE_${PN} = "ctdb.service"
-+
-+FILES_${PN} += "/run"
++FILES_${PN} = "${libdir}/*.so.*"
++FILES_tdb-tools = "${bindir}/*"
++FILES_python-tdb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
++FILES_python-tdb-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug/*"
++RDEPENDS_python-tdb = "python"
 -- 
 1.8.4.2
 
