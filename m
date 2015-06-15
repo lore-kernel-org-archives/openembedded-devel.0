@@ -1,40 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AFEC75695
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D82F6AC43
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 12:19:22 +0000 (UTC)
-Received: by wgzl5 with SMTP id l5so42396436wgz.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 05:19:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	bh=HzNozUhnIHZbK8v8A3irbAWgprhwdXFx+ZopuHlENtU=;
-	b=CMULv9IsWpV1u8hDJj5aSyqZtZDktwCcILBX5YSV9of0bDyGQNvrGHROLBPQN2YU7H
-	7G9qXhBoRYOe0rR5dXLvvpfn+/e+3fcV3NPfLFY7DbvFp0qMJphyi2MVGopS4AL8salU
-	trXyMwzeAgwpBcMRLmMmlz/J2fgCfvh7E/kEBTe3D66TXgg9oHf+udSU6ybnCGFISYrk
-	Fe0ZLiVDaZOUpYbWOeFRcB6556kBgMdRGo4fZImFwmzEtAYDAPMr4JCRToZV0WyLlmQb
-	MoEvBbEvBv61/Vym7W62+KEfMHkGP/E5Kd0KthMSImER/m+6qsqBD3tpT3nALLclEMSO
-	BngQ==
-X-Received: by 10.180.13.171 with SMTP id i11mr12546109wic.5.1434370763796;
-	Mon, 15 Jun 2015 05:19:23 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id k2sm15597663wif.3.2015.06.15.05.19.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Jun 2015 05:19:23 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 15 Jun 2015 14:19:27 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150615121927.GB2398@jama>
+	Mon, 15 Jun 2015 12:53:23 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga102.jf.intel.com with ESMTP; 15 Jun 2015 05:53:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.13,618,1427785200"; d="scan'208";a="508515433"
+Received: from sosalmel-mobl1.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.29.110])
+	by FMSMGA003.fm.intel.com with ESMTP; 15 Jun 2015 05:53:07 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Bian Naimeng <biannm@cn.fujitsu.com>
+Date: Mon, 15 Jun 2015 13:53:06 +0100
+Message-ID: <5108170.4M7I4gz10Q@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.7 (Linux/4.0.4-202.fc21.x86_64; KDE/4.14.7; x86_64; ; )
+In-Reply-To: <1434358336-34981-2-git-send-email-biannm@cn.fujitsu.com>
 References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434358336-34981-6-git-send-email-biannm@cn.fujitsu.com>
+	<1434358336-34981-2-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1434358336-34981-6-git-send-email-biannm@cn.fujitsu.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 5/7] libtalloc: add new recipe
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/7] wafsamba: add class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,90 +35,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 12:19:26 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 15 Jun 2015 12:53:29 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Mon, Jun 15, 2015 at 04:52:14PM +0800, Bian Naimeng wrote:
-> libtalloc >=3D 2.0.8 is required by samba4
+Hi Bian,
 
-We already have
-=2E/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
-so you should just upgrade it.
-
->=20
+On Monday 15 June 2015 16:52:10 Bian Naimeng wrote:
+> wafsamba is a build system used by samba related software
+> 
 > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 > ---
->  .../recipes-support/libtalloc/libtalloc_2.1.1.bb   | 42 ++++++++++++++++=
-++++++
->  1 file changed, 42 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libtalloc/libtalloc_2.1.1.bb
->=20
-> diff --git a/meta-oe/recipes-support/libtalloc/libtalloc_2.1.1.bb b/meta-=
-oe/recipes-support/libtalloc/libtalloc_2.1.1.bb
-> new file mode 100644
-> index 0000000..6285a3c
+>  meta-oe/classes/wafsamba.bbclass | 55
+> ++++++++++++++++++++++++++++++++++++++++ 1 file changed, 55 insertions(+)
+>  create mode 100644 meta-oe/classes/wafsamba.bbclass
+> 
+> diff --git a/meta-oe/classes/wafsamba.bbclass
+> b/meta-oe/classes/wafsamba.bbclass new file mode 100644
+> index 0000000..764b530
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/libtalloc/libtalloc_2.1.1.bb
-> @@ -0,0 +1,42 @@
-> +SUMMARY =3D "Hierarchical, reference counted memory pool system with des=
-tructors"
-> +HOMEPAGE =3D "http://talloc.samba.org"
-> +SECTION =3D "libs"
-> +LICENSE =3D "LGPL-3.0+ & GPL-3.0+"
+> +++ b/meta-oe/classes/wafsamba.bbclass
+
+This should really be named waf-samba.bbclass. I'm also wondering how this 
+relates to waf.bbclass that we have in OE-Core - they do look quite different 
+though.
+
+> @@ -0,0 +1,55 @@
+> +# waf is a build system which is used by samba related project.
+> +# Obtain details from https://wiki.samba.org/index.php/Waf
+> +#
+> +inherit qemu pythonnative
 > +
-> +SRC_URI =3D "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
-> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/LGPL=
--3.0;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
-> +                    file://${COREBASE}/meta/files/common-licenses/GPL-3.=
-0;md5=3Dc79ff39f19dfec6d293b95dea7b07891"
+> +DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native
+> python" 
 > +
-> +SRC_URI[md5sum] =3D "5dffb86414218a91864ed4453ba9be07"
-> +SRC_URI[sha256sum] =3D "3e29ce6c3ba3c4f7c2d57ce8cf0fbc24c86618c519f2b2fb=
-6a459025488b6174"
-> +
-> +inherit wafsamba
-> +
-> +S =3D "${WORKDIR}/talloc-${PV}"
-> +
-> +EXTRA_OECONF +=3D "--disable-rpath \
-> +                 --disable-rpath-install \
-> +                 --bundled-libraries=3DNONE \
-> +                 --builtin-libraries=3Dreplace \
-> +                 --disable-silent-rules \
-> +                 --with-libiconv=3D${STAGING_DIR_HOST}${prefix}\
+> +CONFIGUREOPTS = " --prefix=${prefix} \
+> +                  --bindir=${bindir} \
+> +                  --sbindir=${sbindir} \
+> +                  --libexecdir=${libexecdir} \
+> +                  --datadir=${datadir} \
+> +                  --sysconfdir=${sysconfdir} \
+> +                  --sharedstatedir=${sharedstatedir} \
+> +                  --localstatedir=${localstatedir} \
+> +                  --libdir=${libdir} \
+> +                  --includedir=${includedir} \
+> +                  --oldincludedir=${oldincludedir} \
+> +                  --infodir=${infodir} \
+> +                  --mandir=${mandir} \
 > +                "
 > +
-> +PACKAGES +=3D "pytalloc pytalloc-dbg pytalloc-dev"
+> +do_configure() {
+> +    qemu_binary="${@qemu_target_binary(d)}"
+> +    if [ ${qemu_binary} == "qemu-allarch" ]; then
+> +        qemu_binary="qemuwrapper"
+> +    fi
 > +
-> +FILE_${PN} =3D "${libdir}/libtalloc.so.2 \
-> +                   ${libdir}/libtalloc.so.2.1.1"
-> +FILES_${PN}-dbg =3D "/usr/src/debug/ \
-> +                       ${libdir}/.debug/libtalloc.so.2.1.1"
-> +FILES_${PN}-dev =3D "${includedir}/ \
-> +                       ${libdir}/libtalloc.so \
-> +                       ${libdir}/pkgconfig/"
+> +    libdir_qemu="${STAGING_DIR_HOST}/${libdir}"
+> +    base_libdir_qemu="${STAGING_DIR_HOST}/${base_libdir}"
+> +    oldest_kernel_qemu=${OLDEST_KERNEL}
 > +
-> +FILES_pytalloc =3D "${libdir}/python${PYTHON_BASEVERSION}/site-packages/=
-* \
-> +                  ${libdir}/libpytalloc-util.so.2 \
-> +                  ${libdir}/libpytalloc-util.so.2.1.1 \
-> +                 "
-> +FILES_pytalloc-dbg =3D "${libdir}/python${PYTHON_BASEVERSION}/site-packa=
-ges/.debug \
-> +                      ${libdir}/.debug/libpytalloc-util.so.2.1.1"
-> +FILES_pytalloc-dev =3D "${libdir}/libpytalloc-util.so"
-> +RDEPENDS_pytalloc =3D "python"
-> --=20
-> 1.8.4.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> +    CROSS_EXEC="${qemu_binary} \
+> +                -r ${oldest_kernel_qemu} \
+> +                -L ${STAGING_DIR_HOST} \
+> +                -E LD_LIBRARY_PATH=${libdir_qemu}:${base_libdir_qemu}"
+> +
+> +    export BUILD_SYS=${BUILD_SYS}
+> +    export HOST_SYS=${HOST_SYS}
+> +    export BUILD_ARCH=${BUILD_ARCH}
+> +    export HOST_ARCH=${HOST_ARCH}
+> +    export STAGING_LIBDIR=${STAGING_LIBDIR}
+> +    export STAGING_INCDIR=${STAGING_INCDIR}
+> +    export PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
+> +
+> +    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile
+> --cross-execute="${CROSS_EXEC}" +}
+> +
+> +do_compile () {
+> +    base_do_compile
+> +}
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Is this do_compile really needed? AFAICT this isn't doing anything because 
+base_do_compile will already be being run by way of EXPORT_FUNCTIONS.
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
