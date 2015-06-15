@@ -1,39 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 37C2E73306
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AFEC75695
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 12:08:51 +0000 (UTC)
-Received: by wgez8 with SMTP id z8so67111561wge.0
+	Mon, 15 Jun 2015 12:19:22 +0000 (UTC)
+Received: by wgzl5 with SMTP id l5so42396436wgz.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 05:08:52 -0700 (PDT)
+	Mon, 15 Jun 2015 05:19:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:content-transfer-encoding
 	:in-reply-to:user-agent;
-	bh=rJCFjm4+oa6dj3MB3HkbBYAZCCO7Mb9GszUslhN3CVY=;
-	b=COdRRN2jMqtpTntdGF0mU05zP1WfCkzBZgK+rk7NWCxSyLPWuvNT0b4bolsII+DegF
-	OLrpq8fAD6e2rX2o/TE3d7xMWL4KUFfGKwtfCk6mq+U+cDhWcPZjaDSPcSozB2rP1Xe/
-	j8EC7eQPUpIt6FbulYJRR/MUTiaHnWtVT+UCo1vYDBjefkQU1QQ2bCACsbc0w+ba2wbO
-	9cy3d6psxl8JiFI3UHg1Ipx80WteSDWM6/PydHllHcujeog5Lj6+H+uqXyclCIVZcCTp
-	hrdojDHiKtZKt1AxsF7W6Wa4zYjvcZuyWw34N6EKgN+pqFOVjYWUZ1jBNILJ7PMLflf3
-	xRHA==
-X-Received: by 10.180.11.200 with SMTP id s8mr10747823wib.17.1434370132534;
-	Mon, 15 Jun 2015 05:08:52 -0700 (PDT)
+	bh=HzNozUhnIHZbK8v8A3irbAWgprhwdXFx+ZopuHlENtU=;
+	b=CMULv9IsWpV1u8hDJj5aSyqZtZDktwCcILBX5YSV9of0bDyGQNvrGHROLBPQN2YU7H
+	7G9qXhBoRYOe0rR5dXLvvpfn+/e+3fcV3NPfLFY7DbvFp0qMJphyi2MVGopS4AL8salU
+	trXyMwzeAgwpBcMRLmMmlz/J2fgCfvh7E/kEBTe3D66TXgg9oHf+udSU6ybnCGFISYrk
+	Fe0ZLiVDaZOUpYbWOeFRcB6556kBgMdRGo4fZImFwmzEtAYDAPMr4JCRToZV0WyLlmQb
+	MoEvBbEvBv61/Vym7W62+KEfMHkGP/E5Kd0KthMSImER/m+6qsqBD3tpT3nALLclEMSO
+	BngQ==
+X-Received: by 10.180.13.171 with SMTP id i11mr12546109wic.5.1434370763796;
+	Mon, 15 Jun 2015 05:19:23 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id q4sm18660481wja.24.2015.06.15.05.08.51
+	by mx.google.com with ESMTPSA id k2sm15597663wif.3.2015.06.15.05.19.23
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Jun 2015 05:08:51 -0700 (PDT)
+	Mon, 15 Jun 2015 05:19:23 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 15 Jun 2015 14:08:55 +0200
+Date: Mon, 15 Jun 2015 14:19:27 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150615120855.GA2398@jama>
-References: <1433925884-25750-1-git-send-email-rongqing.li@windriver.com>
+Message-ID: <20150615121927.GB2398@jama>
+References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
+	<1434358336-34981-6-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1433925884-25750-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1434358336-34981-6-git-send-email-biannm@cn.fujitsu.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH][meta-oe] php: fix native php when it is from sstate
+Subject: Re: [meta-oe][PATCH 5/7] libtalloc: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,62 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 12:08:53 -0000
+X-List-Received-Date: Mon, 15 Jun 2015 12:19:26 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 10, 2015 at 04:44:44PM +0800, rongqing.li@windriver.com wrote:
-> From: Roy Li <rongqing.li@windriver.com>
->=20
-> the native php is used to install the target pear, and native php
-> has hard-code path, so make wrapper to override the hard-code path
->=20
-> the configuration format of pear.conf for native php is like:
-> "type:path length:path", path will be replaced when populate sysroot
-> setscene, but the path length is not changed, and make php unable to
-> work, add a task to SSTATEPOSTINSTFUNCS to fix the path length
+On Mon, Jun 15, 2015 at 04:52:14PM +0800, Bian Naimeng wrote:
+> libtalloc >=3D 2.0.8 is required by samba4
 
-Use "class-native" instead of deprecated "virtclass-native".
+We already have
+=2E/meta-oe/recipes-support/talloc/talloc_2.0.1.bb
+so you should just upgrade it.
 
 >=20
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 > ---
->  meta-oe/recipes-devtools/php/php_5.5.24.bb | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
+>  .../recipes-support/libtalloc/libtalloc_2.1.1.bb   | 42 ++++++++++++++++=
+++++++
+>  1 file changed, 42 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libtalloc/libtalloc_2.1.1.bb
 >=20
-> diff --git a/meta-oe/recipes-devtools/php/php_5.5.24.bb b/meta-oe/recipes=
--devtools/php/php_5.5.24.bb
-> index 3e656af..ced3904 100644
-> --- a/meta-oe/recipes-devtools/php/php_5.5.24.bb
-> +++ b/meta-oe/recipes-devtools/php/php_5.5.24.bb
-> @@ -245,3 +245,21 @@ MODPHP_OLDPACKAGE =3D "${@bb.utils.contains('PACKAGE=
-CONFIG', 'apache2', 'modphp',
->  RPROVIDES_${PN}-modphp =3D "${MODPHP_OLDPACKAGE}"
->  RREPLACES_${PN}-modphp =3D "${MODPHP_OLDPACKAGE}"
->  RCONFLICTS_${PN}-modphp =3D "${MODPHP_OLDPACKAGE}"
+> diff --git a/meta-oe/recipes-support/libtalloc/libtalloc_2.1.1.bb b/meta-=
+oe/recipes-support/libtalloc/libtalloc_2.1.1.bb
+> new file mode 100644
+> index 0000000..6285a3c
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libtalloc/libtalloc_2.1.1.bb
+> @@ -0,0 +1,42 @@
+> +SUMMARY =3D "Hierarchical, reference counted memory pool system with des=
+tructors"
+> +HOMEPAGE =3D "http://talloc.samba.org"
+> +SECTION =3D "libs"
+> +LICENSE =3D "LGPL-3.0+ & GPL-3.0+"
 > +
-> +do_install_append_virtclass-native() {
-> +    create_wrapper ${D}${bindir}/php \
-> +        PHP_PEAR_SYSCONF_DIR=3D${sysconfdir}/
-> +}
+> +SRC_URI =3D "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
+> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/LGPL=
+-3.0;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
+> +                    file://${COREBASE}/meta/files/common-licenses/GPL-3.=
+0;md5=3Dc79ff39f19dfec6d293b95dea7b07891"
 > +
-> +SSTATEPOSTINSTFUNCS_append_virtclass-native +=3D " php_sstate_postinst"
+> +SRC_URI[md5sum] =3D "5dffb86414218a91864ed4453ba9be07"
+> +SRC_URI[sha256sum] =3D "3e29ce6c3ba3c4f7c2d57ce8cf0fbc24c86618c519f2b2fb=
+6a459025488b6174"
 > +
-> +php_sstate_postinst() {
-> +    if [ "${BB_CURRENTTASK}" =3D "populate_sysroot_setscene" ]
-> +    then
-> +        head -n1 ${sysconfdir}/pear.conf > ${sysconfdir}/pear.tmp.conf
-> +        for p in `tail -n1  ${sysconfdir}/pear.conf | sed -s 's/;/ /g'`;=
- do
-> +            echo $p | awk -F: 'BEGIN {OFS =3D ":"; ORS =3D ";"}{if(NF=3D=
-=3D3){print $1, length($3)-2*match($3, /^"/), $3} else {print $0}}';
-> +        done >> ${sysconfdir}/pear.tmp.conf
-> +        mv -f ${sysconfdir}/pear.tmp.conf ${sysconfdir}/pear.conf
-> +    fi
-> +}
+> +inherit wafsamba
+> +
+> +S =3D "${WORKDIR}/talloc-${PV}"
+> +
+> +EXTRA_OECONF +=3D "--disable-rpath \
+> +                 --disable-rpath-install \
+> +                 --bundled-libraries=3DNONE \
+> +                 --builtin-libraries=3Dreplace \
+> +                 --disable-silent-rules \
+> +                 --with-libiconv=3D${STAGING_DIR_HOST}${prefix}\
+> +                "
+> +
+> +PACKAGES +=3D "pytalloc pytalloc-dbg pytalloc-dev"
+> +
+> +FILE_${PN} =3D "${libdir}/libtalloc.so.2 \
+> +                   ${libdir}/libtalloc.so.2.1.1"
+> +FILES_${PN}-dbg =3D "/usr/src/debug/ \
+> +                       ${libdir}/.debug/libtalloc.so.2.1.1"
+> +FILES_${PN}-dev =3D "${includedir}/ \
+> +                       ${libdir}/libtalloc.so \
+> +                       ${libdir}/pkgconfig/"
+> +
+> +FILES_pytalloc =3D "${libdir}/python${PYTHON_BASEVERSION}/site-packages/=
+* \
+> +                  ${libdir}/libpytalloc-util.so.2 \
+> +                  ${libdir}/libpytalloc-util.so.2.1.1 \
+> +                 "
+> +FILES_pytalloc-dbg =3D "${libdir}/python${PYTHON_BASEVERSION}/site-packa=
+ges/.debug \
+> +                      ${libdir}/.debug/libpytalloc-util.so.2.1.1"
+> +FILES_pytalloc-dev =3D "${libdir}/libpytalloc-util.so"
+> +RDEPENDS_pytalloc =3D "python"
 > --=20
-> 1.9.1
+> 1.8.4.2
 >=20
 > --=20
 > _______________________________________________
