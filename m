@@ -1,35 +1,24 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 382017413A
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C33C07599C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 03:15:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.01,1,1399996800"; 
-   d="scan'208";a="97039560"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2015 11:19:47 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5F3E0Dv009440;
-	Mon, 15 Jun 2015 11:14:00 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Mon, 15 Jun 2015 11:15:46 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] lvm2: add systemd support
-Thread-Index: AQHQprk6c0L26+57VkqgY8W3Jxo6hZ2s4NdQ
-Date: Mon, 15 Jun 2015 03:15:37 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E87390803E@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1433812320-1835-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<CAMKF1so8YC7TsmBUcoqoXKJoOj7cE=JdTXq9jPxLRkiSV24cSw@mail.gmail.com>
-In-Reply-To: <CAMKF1so8YC7TsmBUcoqoXKJoOj7cE=JdTXq9jPxLRkiSV24cSw@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.85]
+	Mon, 15 Jun 2015 08:17:55 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t5F8Ht7b026061
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Jun 2015 01:17:55 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.224.2; Mon, 15 Jun 2015 01:17:54 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 15 Jun 2015 16:10:55 +0800
+Message-ID: <1434355855-769-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] lvm2: add systemd support
+Subject: [PATCH][meta-networking] squid: upgrade to 3.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,39 +32,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 03:15:35 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="iso-2022-jp"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 15 Jun 2015 08:17:59 -0000
+Content-Type: text/plain
 
+From: Roy Li <rongqing.li@windriver.com>
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Khem Raj
-> Sent: Sunday, June 14, 2015 11:45 PM
-> To: openembeded-devel
-> Subject: Re: [oe] [meta-oe][PATCH] lvm2: add systemd support
->=20
-> On Mon, Jun 8, 2015 at 9:12 PM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
-> > +SYSTEMD_AUTO_ENABLE =3D "disable"
->=20
-> why is it disabled by default.
+remove the squid-change-ksh-referen*.patch which is not needed,
+since 3.5.5 did not use ksh by default.
+update the checksum of COPYING,since the date in it has been changed.
 
-In my experience, if I set a service enable, the service may not start succ=
-essfully and automatically.
-This is because some service may rely on hardware devices and also it is ne=
-eded to set the
-Configuration files to start the service successfully.
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
+ .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       |  8 ++---
+ 2 files changed, 4 insertions(+), 43 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+ rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (88%)
 
-So I set the service disabled.
+diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+deleted file mode 100644
+index 8e03860..0000000
+--- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-squid: change ksh reference in krb ldap helper to sh
+-
+-Very simple cert_tool script with no ksh specifics.
+-Change it to use sh so a package dependency doesn't
+-get created to ksh.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+----
+- helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
+-index 9f14959..8c4ea11 100644
+---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
+-+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
+-@@ -1,4 +1,4 @@
+--#!/bin/ksh
+-+#!/bin/sh
+- #
+- #  -----------------------------------------------------------------------------
+- # 
+-@@ -64,9 +64,9 @@ QUIT
+- # Create database for Sun ldap and pem file for Openldap 
+- #
+- rm ${server}_[0-9]*.pem 2>/dev/null
+--let i=0
+-+i=0
+-  ls ${server}_[0-9]*.cert | while read file; do
+-- let i=i+1
+-+ i=`expr $i + 1`
+-  cat  $file  >> ${server}_$i.pem
+-  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
+-  if [ -n "$CA" ]; then
+--- 
+-1.9.1
+-
+diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+similarity index 88%
+rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+index 7b00dfc..1f445e5 100644
+--- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
++++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+@@ -16,17 +16,16 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
+            file://Set-up-for-cross-compilation.patch \
+            file://Skip-AC_RUN_IFELSE-tests.patch \
+            file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
+-           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
+            file://squid-use-serial-tests-config-needed-by-ptest.patch \
+            file://run-ptest \
+            file://volatiles.03_squid \
+ "
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
+-                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
++                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
+                    "
+-SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
+-SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
++SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
++SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
+ 
+ DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+ 
+@@ -38,6 +37,7 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+ EXTRA_OECONF += "--with-default-user=squid"
++CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=no"
+ 
+ TESTDIR = "test-suite"
+ do_compile_ptest() {
+-- 
+1.9.1
 
-Thanks
-
-Li xin
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
