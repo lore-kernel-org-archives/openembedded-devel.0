@@ -1,29 +1,29 @@
 Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 70F8C759DD
+	by mail.openembedded.org (Postfix) with ESMTP id 91A65759E5
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 15 Jun 2015 09:01:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,617,1427731200"; d="scan'208";a="97058815"
+X-IronPort-AV: E=Sophos;i="5.13,617,1427731200"; d="scan'208";a="97058818"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2015 17:05:18 +0800
+	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2015 17:05:21 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5F8xWhi030500
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5F8xZLJ030513
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 16:59:32 +0800
+	Mon, 15 Jun 2015 16:59:35 +0800
 Received: from localhost.localdomain (10.167.226.31) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 15 Jun 2015 17:01:18 +0800
+	Server (TLS) id 14.3.181.6; Mon, 15 Jun 2015 17:01:21 +0800
 From: Bian Naimeng <biannm@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jun 2015 16:52:13 +0800
-Message-ID: <1434358336-34981-5-git-send-email-biannm@cn.fujitsu.com>
+Date: Mon, 15 Jun 2015 16:52:16 +0800
+Message-ID: <1434358336-34981-8-git-send-email-biannm@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
 References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH 4/7] libldb: add new recipe
+Subject: [meta-oe][PATCH 7/7] libtevent: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,108 +37,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 09:01:10 -0000
+X-List-Received-Date: Mon, 15 Jun 2015 09:01:11 -0000
 Content-Type: text/plain
 
-libldb is required by samba4
+libtevent is required by samba4
 
 Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- .../do-not-import-target-module-in-configure.patch | 32 +++++++++++++++
- meta-oe/recipes-support/libldb/libldb_1.1.17.bb    | 45 ++++++++++++++++++++++
- 2 files changed, 77 insertions(+)
- create mode 100644 meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in-configure.patch
- create mode 100644 meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+ .../libtevent/do-not-check-xsltproc-manpages.patch | 16 ++++++++++++
+ .../recipes-support/libtevent/libtevent_0.9.21.bb  | 30 ++++++++++++++++++++++
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libtevent/libtevent/do-not-check-xsltproc-manpages.patch
+ create mode 100644 meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
 
-diff --git a/meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in-configure.patch b/meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in-configure.patch
+diff --git a/meta-oe/recipes-support/libtevent/libtevent/do-not-check-xsltproc-manpages.patch b/meta-oe/recipes-support/libtevent/libtevent/do-not-check-xsltproc-manpages.patch
 new file mode 100644
-index 0000000..b4d522a
+index 0000000..1ce4dda
 --- /dev/null
-+++ b/meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in-configure.patch
-@@ -0,0 +1,32 @@
-+Some module can be loaded while cross compile, we jst check whether the module exist
++++ b/meta-oe/recipes-support/libtevent/libtevent/do-not-check-xsltproc-manpages.patch
+@@ -0,0 +1,16 @@
++Don't check manpages for xsltproc.
 +
 +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 +
-+--- ldb-1.1.17.orig/buildtools/wafsamba/samba_bundled.py	2014-05-05 17:00:41.000000000 +0900
-++++ ldb-1.1.17/buildtools/wafsamba/samba_bundled.py	2015-06-15 10:09:50.210000217 +0900
-+@@ -1,7 +1,7 @@
-+ # functions to support bundled libraries
++diff -Nurp tevent-0.9.21.orig/lib/talloc/wscript tevent-0.9.21/lib/talloc/wscript
++--- tevent-0.9.21.orig/lib/talloc/wscript	2013-09-08 21:24:14.000000000 +0900
+++++ tevent-0.9.21/lib/talloc/wscript	2015-04-24 16:28:04.085000230 +0900
++@@ -55,7 +55,7 @@ def configure(conf):
++     if conf.env.standalone_talloc:
++         conf.env.TALLOC_COMPAT1 = Options.options.TALLOC_COMPAT1
 + 
-+ from Configure import conf
-+-import sys, Logs
-++import sys, Logs, imp
-+ from samba_utils import *
++-    conf.CHECK_XSLTPROC_MANPAGES()
+++    conf.find_program('xsltproc', var='XSLTPROC')
 + 
-+ def PRIVATE_NAME(bld, name, private_extension, private_library):
-+@@ -222,6 +222,16 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, li
-+         m = __import__(modulename)
-+     except ImportError:
-+         found = False
-++
-++        build_arch = os.environ["BUILD_ARCH"]
-++        host_arch = os.environ["HOST_ARCH"]
-++        if build_arch != host_arch:
-++            # Some modules maybe can not be imported while cross compile
-++            # We just check whether the module exist
-++            stuff = imp.find_module(modulename, [os.environ["PYTHONPATH"]])
-++            if stuff != None:
-++                Logs.warn('Cross module[%s] has been found, but can not be loaded.' % (stuff[1]))
-++                found = True
-+     else:
-+         try:
-+             version = m.__version__
-diff --git a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
++     if not conf.env.disable_python:
++         # also disable if we don't have the python libs installed
+diff --git a/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb b/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
 new file mode 100644
-index 0000000..4b351d9
+index 0000000..959e3d0
 --- /dev/null
-+++ b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-@@ -0,0 +1,45 @@
++++ b/meta-oe/recipes-support/libtevent/libtevent_0.9.21.bb
+@@ -0,0 +1,30 @@
 +SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
-+HOMEPAGE = "http://ldb.samba.org"
++HOMEPAGE = "http://tevent.samba.org"
 +SECTION = "libs"
-+LICENSE = "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
++LICENSE = "LGPLv3+"
 +
-+DEPENDS += "libtdb libtalloc libtevent libtdb"
-+RDEPENDS_${PN} += "libtevent popt libtalloc"
-+RDEPENDS_pyldb += "python libtdb libtalloc"
++DEPENDS += "libtalloc"
++RDEPENDS_${PN} += "libtalloc"
++RDEPENDS_python-tevent = "python"
 +
-+SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
-+           file://do-not-import-target-module-in-configure.patch"
++SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b"
 +
-+LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
-+                    file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780 \
-+                    file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
-+
-+SRC_URI[md5sum] = "7c2ab4e3f2a4186493aa06eabbc61cc0"
-+SRC_URI[sha256sum] = "b9a312aad19e9463716d257d8f2529fd7fc1a5ef24f6dcdc0c4a1930d7bdb6e6"
++SRC_URI[md5sum] = "3d5a76c0a1b5f724842d785fd055633f"
++SRC_URI[sha256sum] = "f2be7463573dab2d8210cb57fe7e7e2aeb323274cbdc865a6e29ddcfb977f0f4"
 +
 +inherit wafsamba
 +
-+S = "${WORKDIR}/ldb-${PV}"
++S = "${WORKDIR}/tevent-${PV}"
 +
 +EXTRA_OECONF += "--disable-rpath \
-+                 --disable-rpath-install \
 +                 --bundled-libraries=NONE \
 +                 --builtin-libraries=replace \
-+                 --with-modulesdir=${libdir}/ldb/modules \
-+                 --with-privatelibdir=${libdir}/ldb \
 +                 --with-libiconv=${STAGING_DIR_HOST}${prefix}\
++                 --without-gettext \
 +                "
 +
-+PACKAGES += "pyldb pyldb-dbg pyldb-dev"
++PACKAGES += "python-tevent python-tevent-dbg"
 +
-+FILES_${PN} += "${libdir}/ldb/*"
-+FILES_${PN}-dbg += "${libdir}/ldb/.debug/* \
-+                    ${libdir}/ldb/modules/ldb/.debug/*"
-+
-+FILES_pyldb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
-+               ${libdir}/libpyldb-util.so.1 \
-+               ${libdir}/libpyldb-util.so.1.1.17 \
-+              "
-+FILES_pyldb-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
-+                   ${libdir}/.debug/libpyldb-util.so.1.1.17"
-+FILES_pyldb-dev = "${libdir}/libpyldb-util.so"
++FILES_python-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
++FILES_python-tevent-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
 -- 
 1.8.4.2
 
