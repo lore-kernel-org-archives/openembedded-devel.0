@@ -1,27 +1,42 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D82F6AC43
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qg0-f48.google.com (mail-qg0-f48.google.com
+	[209.85.192.48])
+	by mail.openembedded.org (Postfix) with ESMTP id B76667568B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 12:53:23 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP; 15 Jun 2015 05:53:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,618,1427785200"; d="scan'208";a="508515433"
-Received: from sosalmel-mobl1.ger.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.252.29.110])
-	by FMSMGA003.fm.intel.com with ESMTP; 15 Jun 2015 05:53:07 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Bian Naimeng <biannm@cn.fujitsu.com>
-Date: Mon, 15 Jun 2015 13:53:06 +0100
-Message-ID: <5108170.4M7I4gz10Q@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.7 (Linux/4.0.4-202.fc21.x86_64; KDE/4.14.7; x86_64; ; )
-In-Reply-To: <1434358336-34981-2-git-send-email-biannm@cn.fujitsu.com>
-References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434358336-34981-2-git-send-email-biannm@cn.fujitsu.com>
+	Mon, 15 Jun 2015 14:25:09 +0000 (UTC)
+Received: by qgeu36 with SMTP id u36so2925536qge.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Jun 2015 07:25:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=vcG311h/6vchBfnqY5OORslfphhsSCm0x3hgS5sriDs=;
+	b=XESFoPr15U6rfAIwHpebYyKAm4MIlcqurd3PRRYO3tiVr07KVLMq/ORSjGyz/kbSva
+	Y3PDgTVYUlY8g0c089ajRSG7+FsOCzeYtD30nXPBYJFTfG3zrQmGBewTVnQIMHjaY9Cm
+	/Gp6V8qbq60YalRN5Iu9fUOMvXg4bIMmtcLKrk9i2tH5NiEWXrSiWr16t9Y8Ql0yC78L
+	+vGFaeyKukWFUVjxPX0xj/ze+XUK7TTsXvAWoJFkx1MEya9o49FKEJs3VHHlsaSzDP1e
+	4w1XEfHi+0CIcz3uyMc9LBS0mnLqmOrrXbJzlpp0dngvaLeL9Fn93+90c/tStK9anGgL
+	Uo7A==
+X-Gm-Message-State: ALoCoQkfclo7Z+M72g1MzCAAIDehbC18LLAdGFAsFCSMJNpEJjhfD9TgV4xDiYt8C3L3z/RHpZ/Y
+X-Received: by 10.55.18.144 with SMTP id 16mr58195938qks.17.1434378310095;
+	Mon, 15 Jun 2015 07:25:10 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/7] wafsamba: add class
+Received: by 10.140.102.231 with HTTP; Mon, 15 Jun 2015 07:24:49 -0700 (PDT)
+In-Reply-To: <CALbNGRS9UWjVQQh8POPc5zVYOeYa9VaeC7dEfzH3AMs4k9Mjzw@mail.gmail.com>
+References: <557E9EFE.1030703@linux.intel.com>
+	<CALbNGRS9UWjVQQh8POPc5zVYOeYa9VaeC7dEfzH3AMs4k9Mjzw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 15 Jun 2015 15:24:49 +0100
+Message-ID: <CAJTo0LbRVqw3h_3igs59=DTnaz6nf4w=A5ZpXepmh6xiKtVdPA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Webkit-gtk will be updated to latest upstream; midori browser to be replaced with Epiphany
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,93 +50,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 12:53:29 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 15 Jun 2015 14:25:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Bian,
+On 15 June 2015 at 12:53, Andreas M=C3=BCller <schnitzeltony@googlemail.com=
+>
+wrote:
 
-On Monday 15 June 2015 16:52:10 Bian Naimeng wrote:
-> wafsamba is a build system used by samba related software
-> 
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> ---
->  meta-oe/classes/wafsamba.bbclass | 55
-> ++++++++++++++++++++++++++++++++++++++++ 1 file changed, 55 insertions(+)
->  create mode 100644 meta-oe/classes/wafsamba.bbclass
-> 
-> diff --git a/meta-oe/classes/wafsamba.bbclass
-> b/meta-oe/classes/wafsamba.bbclass new file mode 100644
-> index 0000000..764b530
-> --- /dev/null
-> +++ b/meta-oe/classes/wafsamba.bbclass
+> So we are loosing last working browser around - what get's better
+> except later is greater?
+>
 
-This should really be named waf-samba.bbclass. I'm also wondering how this 
-relates to waf.bbclass that we have in OE-Core - they do look quite different 
-though.
+If you actually compare the build dependencies, you'll see that Midori and
+Epiphany are actually almost identical.
 
-> @@ -0,0 +1,55 @@
-> +# waf is a build system which is used by samba related project.
-> +# Obtain details from https://wiki.samba.org/index.php/Waf
-> +#
-> +inherit qemu pythonnative
-> +
-> +DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native
-> python" 
-> +
-> +CONFIGUREOPTS = " --prefix=${prefix} \
-> +                  --bindir=${bindir} \
-> +                  --sbindir=${sbindir} \
-> +                  --libexecdir=${libexecdir} \
-> +                  --datadir=${datadir} \
-> +                  --sysconfdir=${sysconfdir} \
-> +                  --sharedstatedir=${sharedstatedir} \
-> +                  --localstatedir=${localstatedir} \
-> +                  --libdir=${libdir} \
-> +                  --includedir=${includedir} \
-> +                  --oldincludedir=${oldincludedir} \
-> +                  --infodir=${infodir} \
-> +                  --mandir=${mandir} \
-> +                "
-> +
-> +do_configure() {
-> +    qemu_binary="${@qemu_target_binary(d)}"
-> +    if [ ${qemu_binary} == "qemu-allarch" ]; then
-> +        qemu_binary="qemuwrapper"
-> +    fi
-> +
-> +    libdir_qemu="${STAGING_DIR_HOST}/${libdir}"
-> +    base_libdir_qemu="${STAGING_DIR_HOST}/${base_libdir}"
-> +    oldest_kernel_qemu=${OLDEST_KERNEL}
-> +
-> +    CROSS_EXEC="${qemu_binary} \
-> +                -r ${oldest_kernel_qemu} \
-> +                -L ${STAGING_DIR_HOST} \
-> +                -E LD_LIBRARY_PATH=${libdir_qemu}:${base_libdir_qemu}"
-> +
-> +    export BUILD_SYS=${BUILD_SYS}
-> +    export HOST_SYS=${HOST_SYS}
-> +    export BUILD_ARCH=${BUILD_ARCH}
-> +    export HOST_ARCH=${HOST_ARCH}
-> +    export STAGING_LIBDIR=${STAGING_LIBDIR}
-> +    export STAGING_INCDIR=${STAGING_INCDIR}
-> +    export PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
-> +
-> +    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile
-> --cross-execute="${CROSS_EXEC}" +}
-> +
-> +do_compile () {
-> +    base_do_compile
-> +}
+We need to upgrade WebKit as the release we're shipping has known security
+flaws and is very old - and the community is rightly moaning about that.
+However Midori doesn't build with a recent WebKit... if you have an
+alternative solution then your thoughts are welcome.
 
-Is this do_compile really needed? AFAICT this isn't doing anything because 
-base_do_compile will already be being run by way of EXPORT_FUNCTIONS.
-
-Cheers,
-Paul
-
--- 
-
-Paul Eggleton
-Intel Open Source Technology Centre
+Ross
 
