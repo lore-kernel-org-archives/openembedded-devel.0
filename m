@@ -1,25 +1,35 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ADBD975967
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 382017413A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jun 2015 02:55:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5F2tmEs013527
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Jun 2015 19:55:48 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.224.2; Sun, 14 Jun 2015 19:55:48 -0700
-From: Kai Kang <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jun 2015 10:48:43 +0800
-Message-ID: <1434336523-13505-1-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 15 Jun 2015 03:15:34 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.01,1,1399996800"; 
+   d="scan'208";a="97039560"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2015 11:19:47 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5F3E0Dv009440;
+	Mon, 15 Jun 2015 11:14:00 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Mon, 15 Jun 2015 11:15:46 +0800
+From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] lvm2: add systemd support
+Thread-Index: AQHQprk6c0L26+57VkqgY8W3Jxo6hZ2s4NdQ
+Date: Mon, 15 Jun 2015 03:15:37 +0000
+Message-ID: <A8FC939F80655644A89BB21CCD3741E87390803E@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1433812320-1835-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<CAMKF1so8YC7TsmBUcoqoXKJoOj7cE=JdTXq9jPxLRkiSV24cSw@mail.gmail.com>
+In-Reply-To: <CAMKF1so8YC7TsmBUcoqoXKJoOj7cE=JdTXq9jPxLRkiSV24cSw@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.85]
 MIME-Version: 1.0
-X-Originating-IP: [128.224.153.152]
-Subject: [PATCH][meta-multimedia] gst-plugins-bad: fix CVE-2015-0797
+Subject: Re: [meta-oe][PATCH] lvm2: add systemd support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,77 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jun 2015 02:55:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Jun 2015 03:15:35 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-Backport patch from debian to fix CVE-2015-0797.
 
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=784220
-https://sources.debian.net/data/main/g/gst-plugins-bad0.10/0.10.23-7.1+deb7u2/debian/patches/buffer-overflow-mp4.patch
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Khem Raj
+> Sent: Sunday, June 14, 2015 11:45 PM
+> To: openembeded-devel
+> Subject: Re: [oe] [meta-oe][PATCH] lvm2: add systemd support
+>=20
+> On Mon, Jun 8, 2015 at 9:12 PM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
+> > +SYSTEMD_AUTO_ENABLE =3D "disable"
+>=20
+> why is it disabled by default.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../gst-plugins-bad/buffer-overflow-mp4.patch      | 36 ++++++++++++++++++++++
- .../gstreamer-0.10/gst-plugins-bad_0.10.23.bb      |  2 ++
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad/buffer-overflow-mp4.patch
+In my experience, if I set a service enable, the service may not start succ=
+essfully and automatically.
+This is because some service may rely on hardware devices and also it is ne=
+eded to set the
+Configuration files to start the service successfully.
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad/buffer-overflow-mp4.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad/buffer-overflow-mp4.patch
-new file mode 100644
-index 0000000..235acda
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad/buffer-overflow-mp4.patch
-@@ -0,0 +1,36 @@
-+Description: Fix buffer overflow in mp4 parsing
-+Author: Ralph Giles <giles@mozilla.com>
-+---
-+Backport patch from debian to fix CVE-2015-0797.
-+https://sources.debian.net/data/main/g/gst-plugins-bad0.10/0.10.23-7.1+deb7u2/debian/patches/buffer-overflow-mp4.patch
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+--- gst-plugins-bad0.10-0.10.23.orig/gst/videoparsers/gsth264parse.c
-++++ gst-plugins-bad0.10-0.10.23/gst/videoparsers/gsth264parse.c
-+@@ -384,6 +384,11 @@ gst_h264_parse_wrap_nal (GstH264Parse *
-+ 
-+   GST_DEBUG_OBJECT (h264parse, "nal length %d", size);
-+ 
-++  if (size > G_MAXUINT32 - nl) {
-++    GST_ELEMENT_ERROR (h264parse, STREAM, FAILED, (NULL),
-++        ("overflow in nal size"));
-++    return NULL;
-++  }
-+   buf = gst_buffer_new_and_alloc (size + nl + 4);
-+   if (format == GST_H264_PARSE_FORMAT_AVC) {
-+     GST_WRITE_UINT32_BE (GST_BUFFER_DATA (buf), size << (32 - 8 * nl));
-+@@ -452,6 +457,11 @@ gst_h264_parse_process_nal (GstH264Parse
-+     GST_DEBUG_OBJECT (h264parse, "not processing nal size %u", nalu->size);
-+     return;
-+   }
-++  if (G_UNLIKELY (nalu->size > 20 * 1024 * 1024)) {
-++    GST_DEBUG_OBJECT (h264parse, "not processing nal size %u (too big)",
-++        nalu->size);
-++    return;
-++  }
-+ 
-+   /* we have a peek as well */
-+   nal_type = nalu->type;
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb
-index 0f64871..4d94483 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb
-@@ -10,6 +10,8 @@ DEPENDS += "gst-plugins-base"
- 
- PR = "r4"
- 
-+SRC_URI += "file://buffer-overflow-mp4.patch"
-+
- inherit gettext gsettings
- 
- EXTRA_OECONF += "--disable-experimental \
--- 
-1.9.1
+So I set the service disabled.
 
+Thanks
+
+Li xin
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
