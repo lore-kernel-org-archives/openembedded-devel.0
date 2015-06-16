@@ -1,36 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id EF86A601F7;
-	Tue, 16 Jun 2015 14:40:06 +0000 (UTC)
-Received: by wgv5 with SMTP id 5so13953539wgv.1;
-	Tue, 16 Jun 2015 07:40:04 -0700 (PDT)
+Return-Path: <adam.yh.lee@gmail.com>
+Received: from mail-pd0-f175.google.com (mail-pd0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id E9DC365C78
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Jun 2015 17:51:55 +0000 (UTC)
+Received: by pdbki1 with SMTP id ki1so19258719pdb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Jun 2015 10:51:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=3g+5qgT+Qb7OCSrUS2FTPcp0HLrxcuVBvsnUQNXWP4g=;
-	b=p90ns+IkOYh3SvaHo3/W+NkAPKKC8CrjRZFks7/D+BXjIdtvK3o4j7jNj3xXEndR5n
-	eUwmxacUbJINFn9vVk8KRez7SLZBeHsrJWy767xq4pSnv+7yYXlQ/yaieezdmoUJ7ozs
-	r405LgdiK+FYQiwvrJCbfFLzxRl69ebsvjTQCNnGZxSkp+16BgmgU8E9tjjyr2ODKA4u
-	pDIee16kfktUlBvIRBFo45sVZP0VJ4xOOnhXSv2krrnStu3rj/LUjXj1OouhlT3Q/Ykd
-	6f9WWE9Nhk1dJH5GqlbMQ4lEKv63B5DmyQTHBcM8ska91xU4CSmU2tmebQcYTnTncvua
-	76Jw==
-X-Received: by 10.180.20.12 with SMTP id j12mr43056226wie.4.1434465604912;
-	Tue, 16 Jun 2015 07:40:04 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id yz3sm1967586wjc.19.2015.06.16.07.40.03
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 16 Jun 2015 07:40:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 16 Jun 2015 16:40:13 +0200
+	h=from:to:cc:subject:date:message-id;
+	bh=z/9ZASnQPVG0dGr0pmsREPkmkWVnssQC1PF0obReLrQ=;
+	b=O6iqePicR0WUqt7SYzf5I6zdh9Ajz/iQJITWTo5/1ON9/AOk2gkKsGfF373JDUzZHw
+	s7TxnR/bPV89nxkZlbj6jZP9HmyxIiUnLQ50QdzaW724OLqRTArbs1+SZb/0jFO5LGqL
+	hoHYeqgczyC5nkbpXYT2EEu+N3PoSXY8W1ZXN8aigCbdD8XMslTXSPVs4idhnrfKsLA7
+	f3uQkzu6nlHuu/dMbXmldmEEBe6CKet/VJkTgJT1gHOkjjragaBwyKjyXwgmWkiqEfZ+
+	euMrpwoWb1A26YLk7oxdv/wXenoaiUCkKvRO/CIm5isieqVx859bIabtUkITBageW90n
+	0qWg==
+X-Received: by 10.68.224.35 with SMTP id qz3mr2607013pbc.165.1434477116692;
+	Tue, 16 Jun 2015 10:51:56 -0700 (PDT)
+Received: from localhost.localdomain (s206-116-3-180.bc.hsia.telus.net.
+	[206.116.3.180])
+	by mx.google.com with ESMTPSA id kk6sm2042161pdb.94.2015.06.16.10.51.55
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 16 Jun 2015 10:51:56 -0700 (PDT)
+From: Adam YH Lee <adam.yh.lee@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150616144013.GC17938@jama>
-References: <55802EE1.6040703@dresearch-fe.de>
-MIME-Version: 1.0
-In-Reply-To: <55802EE1.6040703@dresearch-fe.de>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: multiple git repos vs. AUTOREV?
+Date: Tue, 16 Jun 2015 10:51:46 -0700
+Message-Id: <1434477106-25870-1-git-send-email-adam.yh.lee@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [[meta-oe][PATCH]] nm-applet: Install glib schema
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,61 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2015 14:40:10 -0000
-X-Groupsio-MsgNum: 55924
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="+nBD6E3TurpgldQp"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Jun 2015 17:51:58 -0000
 
---+nBD6E3TurpgldQp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Unless we inherit gsettings class, glib schema does not get installed and
+users cannot launch nm-applet:
 
-On Tue, Jun 16, 2015 at 04:12:49PM +0200, Steffen Sledz wrote:
-> For development purposes we use this method to build always from the HEAD=
- revision of a git repository.
->=20
-> -------------> snip <--------------
-> SRCREV=3D"${AUTOREV}"
-> PV =3D "gitr${SRCPV}"
->=20
-> SRC_URI =3D "git://git@bitbucket.org/.../foo.git;protocol=3Dssh"
-> -------------> snap <--------------
->=20
-> Now we like to do the same in one recipe which uses sources from two git =
-repos.
->=20
-> Our first try was this one. But if failed..
->=20
-> -------------> snip <--------------
-> SRCREV_foo=3D"${AUTOREV_foo}"
-> SRCREV_bar=3D"${AUTOREV_bar}"
-> PV =3D "gitr${SRCPV_foo}+${SRCPV_bar}"
->=20
-> SRC_URI =3D " \
-> 	git://git@bitbucket.org/.../foo.git;protocol=3Dssh,name=3Dfoo \
-> 	git://git@bitbucket.org/.../bar.git;protocol=3Dssh,name=3Dbar \
-> "
-> -------------> snap <--------------
->=20
-> Is it possible to do what we want? And what's the right way to do it?
+	GLib-GIO-ERROR **: Settings schema 'org.gnome.nm-applet' is not
+installed
 
-You need to set SRCREV_FORMAT variable.
+Signed-off-by: Adam YH Lee <adam.yh.lee@gmail.com>
+---
+ .../network-manager-applet/network-manager-applet_0.9.8.10.bb           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
+index 00cea74..72c9ae6 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+ DEPENDS = "libnotify libsecret networkmanager dbus-glib gconf gnome-keyring libgnome-keyring iso-codes"
+ 
+-inherit gnomebase gtk-icon-cache
++inherit gnomebase gsettings gtk-icon-cache
+ 
+ GNOME_COMPRESS_TYPE = "xz"
+ 
+-- 
+2.1.4
 
---+nBD6E3TurpgldQp
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlWANU0ACgkQN1Ujt2V2gBwWlwCfWE7OgBkljhULTw49TjXXH0uM
-/wgAn0vIoe3bsctOaFW9asZ2d1HTfKN6
-=C8Y+
------END PGP SIGNATURE-----
-
---+nBD6E3TurpgldQp--
