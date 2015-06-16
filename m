@@ -1,37 +1,41 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-la0-f46.google.com (mail-la0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id C6A27601DF;
-	Tue, 16 Jun 2015 08:46:03 +0000 (UTC)
-Received: by labbc20 with SMTP id bc20so6370842lab.1;
-	Tue, 16 Jun 2015 01:46:04 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E0B474051
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Jun 2015 11:44:11 +0000 (UTC)
+Received: by wigg3 with SMTP id g3so106076123wig.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Jun 2015 04:44:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=eFyebD481cEnRENMtfZQIJVQICAZZENd5km2ajrYdEA=;
-	b=gFOr256oOQhKQlSAoyEciPUGRBrr+JGYtqHtMHG77zISUDE7nNlxGuEIv3M3a5KpH6
-	4iVbEsaUzrBtByrKcP93gM45zdqryO4h4HDSaPyDK+j+Khhm7YjCW8pRB9TbJAKoB3e2
-	leK7bfH8w5dtAcgT9KLo9odr6yKlSyQ1zz7xhbA/NNzu1fyuHm8NHB5+kbRohqBhc+UL
-	fMBwSZj2wfc6eDxTheZsiDIpY9ierEc30BPAI8DiT5ZQHx+OYOc3itezUo2vDa+bZpn3
-	kUyU2H1UezX5LWm88ho9a4p/90cBzEWs0kKIHCRYhedVf7pvKNs8u3KAPEE5RA5azRaI
-	MtQQ==
-X-Received: by 10.152.8.168 with SMTP id s8mr32233337laa.116.1434444364480;
-	Tue, 16 Jun 2015 01:46:04 -0700 (PDT)
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=bBuMR1qa4RedABGA8rvWHoRv7MAhcu6oriJ9iEIjOUI=;
+	b=GJ8QXKaFZL+ViKmgPWn1mAW9quXSEMn+wFeJcf/mSClhNVXZg+Qa1h2P3/vg1/nQU7
+	y/52AcpWDavmvJALtlOnRM7tcCmYanhwLwK5Ww9w317+XYCRAeiTfLA8qQiHtByXK3EP
+	gc8PxWlpJPrFGVvKsfK//riXb97iMrJjHHEKnWY5pgA0nOprY1gqFVBpbcud90g1w9QY
+	lITpi9OrVQUXtvi4ShN0BkIWUa3rTpkQBZSLKXY66qO1o61GB3qkcaohwHUIHPQBtpry
+	azXNeZB9TO+QE+YgD7yYMvq+rmqENMgSs+fTVgf4jVgwjFJKFmb9GYMtAyFMLhc7rhRp
+	D+KA==
+X-Received: by 10.181.25.234 with SMTP id it10mr42923183wid.41.1434455052583; 
+	Tue, 16 Jun 2015 04:44:12 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id gj7sm20372136wib.4.2015.06.16.04.44.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 16 Jun 2015 04:44:11 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 16 Jun 2015 13:44:21 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150616114421.GA2395@jama>
+References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
+	<1434358336-34981-7-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-Received: by 10.25.27.71 with HTTP; Tue, 16 Jun 2015 01:45:44 -0700 (PDT)
-In-Reply-To: <CAMKF1spnp0qX9Fczd8+Y0BOyZ9jDiYnHobyjFe5KU2LtCU=eEg@mail.gmail.com>
-References: <1433858847-31079-1-git-send-email-ricardo.ribalda@gmail.com>
-	<CAMKF1spnp0qX9Fczd8+Y0BOyZ9jDiYnHobyjFe5KU2LtCU=eEg@mail.gmail.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Tue, 16 Jun 2015 10:45:44 +0200
-Message-ID: <CAPybu_020CO0Hn4bRy=ZgqLtrMLdR=q6-3Dfnb2P4iGYsfQG0Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [PATCH v2] [meta-oe] opencv: Add OpenCV 3.0
+In-Reply-To: <1434358336-34981-7-git-send-email-biannm@cn.fujitsu.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH 6/7] libtdb: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,220 +49,196 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2015 08:46:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 16 Jun 2015 11:44:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hello Khem
+On Mon, Jun 15, 2015 at 04:52:15PM +0800, Bian Naimeng wrote:
+> libtdb is required by samba4
 
-Unfortunately It uses the same header file names :(
+It conflicts with samba3, should we just replace samba_3* with samba_4?
 
-Regards!
+NOTE: recipe libtdb-1.3.0-r0: task do_populate_sysroot: Started
+ERROR: The recipe libtdb is trying to install files into a shared area when=
+ those files already exist. Those files and their manifest location are:
+   /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runti=
+me-rprovides/libtdb/libtdb
+ Matched in manifest-qemuarm-samba.packagedata
+ /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runtime=
+-reverse/libtdb1
+ Matched in manifest-qemuarm-samba.packagedata
+ /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runtime=
+/libtdb.packaged
+ Matched in manifest-qemuarm-samba.packagedata
+ /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runtime=
+/libtdb
+ Matched in manifest-qemuarm-samba.packagedata
+ /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/shlibs2=
+/libtdb.list
+ Matched in manifest-qemuarm-samba.packagedata
+Please verify which recipe should provide the above files.
+The build has stopped as continuing in this scenario WILL break things, if =
+not now, possibly in the future (we've seen builds fail several months late=
+r). If the system knew how to recover from this automatically it would howe=
+ver there are several different scenarios which can result in this and we d=
+on't know which one this is. It may be you have switched providers of somet=
+hing like virtual/kernel (e.g. from linux-yocto to linux-yocto-dev), in tha=
+t case you need to execute the clean task for both recipes and it will reso=
+lve this error. It may be you changed DISTRO_FEATURES from systemd to udev =
+or vice versa. Cleaning those recipes should again resolve this error howev=
+er switching DISTRO_FEATURES on an existing build directory is not supporte=
+d, you should really clean out tmp and rebuild (reusing sstate should be sa=
+fe). It could be the overlapping files detected are harmless in which case =
+adding them to SSTATE_DUPWHITELIST may be the correct solution. It could al=
+so be your build is including two different conflicting versions of things =
+(e.g. bluez 4 and bluez 5 and the correct solution for that would be to res=
+olve the conflict. If in doubt, please ask on the mailing list, sharing the=
+ error and filelist above.
+ERROR: If the above message is too much, the simpler version is you're advi=
+sed to wipe out tmp and rebuild (reusing sstate is fine). That will likely =
+fix things in most (but not all) cases.
+ERROR: Function failed: sstate_task_postfunc
+ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
+ibc/work/armv5te-oe-linux-gnueabi/libtdb/1.3.0-r0/temp/log.do_packagedata.2=
+7608
+NOTE: recipe libtdb-1.3.0-r0: task do_packagedata: Failed
+ERROR: Task 27734 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
+e/recipes-support/libtdb/libtdb_1.3.0.bb, do_packagedata) failed with exit =
+code '1'
+NOTE: Running task 20344 of 31972 (ID: 27663, /home/jenkins/oe/world/shr-co=
+re/meta-openembedded/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb, do_p=
+ackage)
+ERROR: The recipe libtdb is trying to install files into a shared area when=
+ those files already exist. Those files and their manifest location are:
+   /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/libtd=
+b.so.1
+ Matched in manifest-qemuarm-samba.populate_sysroot
+ /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/libtdb.=
+so
+ Matched in manifest-qemuarm-samba.populate_sysroot
+ /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/pkgconf=
+ig/tdb.pc
+ Matched in manifest-qemuarm-samba.populate_sysroot
+ /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/tdb=
+=2Eh
+ Matched in manifest-qemuarm-samba.populate_sysroot
+Please verify which recipe should provide the above files.
+The build has stopped as continuing in this scenario WILL break things, if =
+not now, possibly in the future (we've seen builds fail several months late=
+r). If the system knew how to recover from this automatically it would howe=
+ver there are several different scenarios which can result in this and we d=
+on't know which one this is. It may be you have switched providers of somet=
+hing like virtual/kernel (e.g. from linux-yocto to linux-yocto-dev), in tha=
+t case you need to execute the clean task for both recipes and it will reso=
+lve this error. It may be you changed DISTRO_FEATURES from systemd to udev =
+or vice versa. Cleaning those recipes should again resolve this error howev=
+er switching DISTRO_FEATURES on an existing build directory is not supporte=
+d, you should really clean out tmp and rebuild (reusing sstate should be sa=
+fe). It could be the overlapping files detected are harmless in which case =
+adding them to SSTATE_DUPWHITELIST may be the correct solution. It could al=
+so be your build is including two different conflicting versions of things =
+(e.g. bluez 4 and bluez 5 and the correct solution for that would be to res=
+olve the conflict. If in doubt, please ask on the mailing list, sharing the=
+ error and filelist above.
+ERROR: If the above message is too much, the simpler version is you're advi=
+sed to wipe out tmp and rebuild (reusing sstate is fine). That will likely =
+fix things in most (but not all) cases.
+ERROR: Function failed: sstate_task_postfunc
+ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
+ibc/work/armv5te-oe-linux-gnueabi/libtdb/1.3.0-r0/temp/log.do_populate_sysr=
+oot.27647
+NOTE: recipe libtdb-1.3.0-r0: task do_populate_sysroot: Failed
+ERROR: Task 27729 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
+e/recipes-support/libtdb/libtdb_1.3.0.bb, do_populate_sysroot) failed with =
+exit code '1'
 
-
-
-On Sun, Jun 14, 2015 at 5:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, Jun 9, 2015 at 10:07 AM, Ricardo Ribalda Delgado
-> <ricardo.ribalda@gmail.com> wrote:
->> -Support for new PACKAGECONFIGS
->> -Merge with opencv-samples
->>
->> Since it is not backward compatible with 2.x and cannot be installed in
->> parallel it has a DEFAULT_PREFERENCE of -1.
->
-> I would have thought that ABI breakages like this should be parallel
-> installable to facilitate migration path. Are you sure it can not live
-> together with opencv2 ?
-> if it could I would have suggested to call the recipe opencv3_xx.bb
->
->>
->> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
->> ---
->>  meta-oe/recipes-support/opencv/opencv_3.0.bb | 127 ++++++++++++++++++++=
-+++++++
->>  1 file changed, 127 insertions(+)
->>  create mode 100644 meta-oe/recipes-support/opencv/opencv_3.0.bb
->>
->> diff --git a/meta-oe/recipes-support/opencv/opencv_3.0.bb b/meta-oe/reci=
-pes-support/opencv/opencv_3.0.bb
->> new file mode 100644
->> index 000000000000..60a96af1fe68
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/opencv/opencv_3.0.bb
->> @@ -0,0 +1,127 @@
->> +SUMMARY =3D "Opencv : The Open Computer Vision Library"
->> +HOMEPAGE =3D "http://opencv.willowgarage.com/wiki/"
->> +SECTION =3D "libs"
->> +
->> +LICENSE =3D "BSD"
->> +LIC_FILES_CHKSUM =3D "file://include/opencv2/opencv.hpp;endline=3D41;md=
-5=3D6d690d8488a6fca7a2c192932466bb14"
->> +
->> +ARM_INSTRUCTION_SET =3D "arm"
->> +
->> +DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib gl=
-ib-2.0 oracle-jse-jdk ant"
->> +
->> +DEFAULT_PREFERENCE =3D "-1"
->> +
->> +SRCREV_opencv =3D "424c2bddb39dae97dc4639a24eaa0e0c8fbb8e69"
->> +SRCREV_contrib =3D "844c30e8b2f2f4b34b96a169fafe9beea3c45e87"
->> +SRCREV_FORMAT =3D "opencv"
->> +SRC_URI =3D "git://github.com/Itseez/opencv.git;nobranch=3D1;name=3Dope=
-ncv \
->> +          git://github.com/Itseez/opencv_contrib.git;nobranch=3D1;dests=
-uffix=3Dcontrib;name=3Dcontrib"
->> +
->> +PV =3D "3.0+git${SRCPV}"
->> +
->> +S =3D "${WORKDIR}/git"
->> +
->> +EXTRA_OECMAKE =3D "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=3D${STAGING_LIBDIR=
-}/${PYTHON_DIR}/site-packages/numpy/core/include \
->> +                -DOPENCV_EXTRA_MODULES_PATH=3D${WORKDIR}/contrib/module=
-s \
->> +                 -DWITH_1394=3DOFF \
->> +                 -DCMAKE_SKIP_RPATH=3DON \
->> +                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DEN=
-ABLE_SSE=3D1 -DENABLE_SSE2=3D1 -DENABLE_SSE3=3D1 -DENABLE_SSSE3=3D1", "", d=
-)} \
->> +                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUF=
-FIX=3D64", "", d)} \
->> +                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUF=
-FIX=3D32", "", d)} \
->> +"
->> +
->> +PACKAGECONFIG ??=3D "eigen jpeg libav png tiff v4l tbb samples\
->> +                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk"=
-, "", d)}"
->> +PACKAGECONFIG[eigen] =3D "-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeigen=
-,"
->> +PACKAGECONFIG[gtk] =3D "-DWITH_GTK=3DON,-DWITH_GTK=3DOFF,gtk+3,"
->> +PACKAGECONFIG[jpeg] =3D "-DWITH_JPEG=3DON,-DWITH_JPEG=3DOFF,jpeg,"
->> +PACKAGECONFIG[libav] =3D "-DWITH_FFMPEG=3DON,-DWITH_FFMPEG=3DOFF,libav,=
-"
->> +PACKAGECONFIG[png] =3D "-DWITH_PNG=3DON,-DWITH_PNG=3DOFF,libpng,"
->> +PACKAGECONFIG[tiff] =3D "-DWITH_TIFF=3DON,-DWITH_TIFF=3DOFF,tiff,"
->> +PACKAGECONFIG[v4l] =3D "-DWITH_V4L=3DON,-DWITH_V4L=3DOFF,v4l-utils,"
->> +PACKAGECONFIG[jasper] =3D "-DWITH_JASPER=3DON,-DWITH_JASPER=3DOFF,jaspe=
-r,"
->> +PACKAGECONFIG[amdblas] =3D "-DWITH_OPENCLAMDBLAS=3DON,-DWITH_OPENCLAMDB=
-LAS=3DOFF,libclamdblas,"
->> +PACKAGECONFIG[amdfft] =3D "-DWITH_OPENCLAMDFFT=3DON,-DWITH_OPENCLAMDFFT=
-=3DOFF,libclamdfft,"
->> +PACKAGECONFIG[opencl] =3D "-DWITH_OPENCL=3DON,-DWITH_OPENCL=3DOFF,openc=
-l-headers,"
->> +PACKAGECONFIG[gstreamer] =3D "-DWITH_GSTREAMER=3DON,-DWITH_GSTREAMER=3D=
-OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
->> +PACKAGECONFIG[oracle-java-amd64] =3D "-DJAVA_INCLUDE_PATH=3D${JAVA_HOME=
-}/include -DJAVA_INCLUDE_PATH2=3D${JAVA_HOME}/include/linux -DJAVA_AWT_INCL=
-UDE_PATH=3D${JAVA_HOME}/include -DJAVA_AWT_LIBRARY=3D${JAVA_HOME}/lib/amd64=
-/libjawt.so -DJAVA_JVM_LIBRARY=3D${JAVA_HOME}/lib/amd64/server/libjvm.so,,o=
-racle-jse-jdk ant,"
->> +PACKAGECONFIG[samples] =3D "-DBUILD_EXAMPLES=3DON -DINSTALL_PYTHON_EXAM=
-PLES=3DON,-DBUILD_EXAMPLES=3DOFF,,"
->> +PACKAGECONFIG[tbb] =3D "-DWITH_TBB=3DON,-DWITH_TBB=3DOFF,tbb,"
->> +
->> +inherit distutils-base pkgconfig cmake
->> +
->> +export BUILD_SYS
->> +export HOST_SYS
->> +export PYTHON_CSPEC=3D"-I${STAGING_INCDIR}/${PYTHON_DIR}"
->> +export PYTHON=3D"${STAGING_BINDIR_NATIVE}/python"
->> +export JAVA_HOME=3D"${STAGING_DIR_TARGET}/usr/share/java/"
->> +export ANT_DIR=3D"${STAGING_DIR_TARGET}/usr/share/ant/"
->> +
->> +TARGET_CC_ARCH +=3D "-I${S}/include "
->> +
->> +PACKAGES +=3D "${PN}-java-dbg ${PN}-java ${PN}-samples-dbg ${PN}-sample=
-s ${PN}-apps python-opencv"
->> +
->> +python populate_packages_prepend () {
->> +    cv_libdir =3D d.expand('${libdir}')
->> +    cv_libdir_dbg =3D d.expand('${libdir}/.debug')
->> +    do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'Open=
-CV %s development package', extra_depends=3D'${PN}-dev', allow_links=3DTrue=
-)
->> +    do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'Open=
-CV %s development package', extra_depends=3D'${PN}-dev')
->> +    do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenC=
-V %s development package', extra_depends=3D'${PN}-dev')
->> +    do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV=
- %s library', extra_depends=3D'', allow_links=3DTrue)
->> +
->> +    pn =3D d.getVar('PN', 1)
->> +    metapkg =3D  pn + '-dev'
->> +    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
->> +    blacklist =3D [ metapkg ]
->> +    metapkg_rdepends =3D [ ]
->> +    packages =3D d.getVar('PACKAGES', 1).split()
->> +    for pkg in packages[1:]:
->> +        if not pkg in blacklist and not pkg in metapkg_rdepends and pkg=
-.endswith('-dev'):
->> +            metapkg_rdepends.append(pkg)
->> +    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
->> +
->> +    blacklist =3D [ metapkg ]
->> +    metapkg_rdepends =3D [ ]
->> +    for pkg in packages[1:]:
->> +        if not pkg in blacklist and not pkg in metapkg_rdepends and not=
- pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-d=
-oc') :
->> +            metapkg_rdepends.append(pkg)
->> +    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d=
-)
->> +
->> +}
->> +
->> +PACKAGES_DYNAMIC +=3D "^libopencv-.*"
->> +
->> +FILES_${PN} =3D ""
->> +FILES_${PN}-apps =3D "${bindir}/* ${datadir}/OpenCV"
->> +FILES_${PN}-dbg +=3D "${libdir}/.debug"
->> +FILES_${PN}-dev =3D "${includedir} ${libdir}/pkgconfig"
->> +FILES_${PN}-doc =3D "${datadir}/OpenCV/doc"
->> +FILES_${PN}-java =3D "${datadir}/OpenCV/java"
->> +FILES_${PN}-java-dbg =3D "${datadir}/OpenCV/java/.debug/"
->> +FILES_${PN}-samples =3D "${datadir}/OpenCV/samples/"
->> +FILES_${PN}-samples-dbg =3D "${datadir}/OpenCV/samples/bin/.debug"
->> +
->> +INSANE_SKIP_${PN}-apps =3D "staticdev"
->> +INSANE_SKIP_${PN}-java =3D "libdir"
->> +INSANE_SKIP_${PN}-java-dbg =3D "libdir"
->> +
->> +ALLOW_EMPTY_${PN} =3D "1"
->> +
->> +INSANE_SKIP_python-opencv =3D "True"
->> +SUMMARY_python-opencv =3D "Python bindings to opencv"
->> +FILES_python-opencv =3D "${PYTHON_SITEPACKAGES_DIR}/*"
->> +RDEPENDS_python-opencv =3D "python-core python-numpy"
->> +
->> +do_install_append() {
->> +    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
->> +    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
->> +
->> +    # Move Python files into correct library folder (for multilib build=
-)
->> +    if [ "$libdir" !=3D "/usr/lib" ]; then
->> +        mv ${D}/usr/lib/* ${D}/${libdir}/
->> +        rm -rf ${D}/usr/lib
->> +    fi
->> +
->> +    install -d ${D}${datadir}/OpenCV/samples/bin/
->> +    cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/sample=
-s/bin/
->> +}
->> --
->> 2.1.4
->>
->> --
->> _______________________________________________
->> Openembedded-core mailing list
->> Openembedded-core@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-core
-
-
+>=20
+> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> ---
+>  .../libtdb/do-not-check-xsltproc-manpages.patch    | 15 +++++++++++
+>  meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb     | 30 ++++++++++++++++=
+++++++
+>  2 files changed, 45 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libtdb/libtdb/do-not-check-xs=
+ltproc-manpages.patch
+>  create mode 100644 meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+>=20
+> diff --git a/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-=
+manpages.patch b/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltpro=
+c-manpages.patch
+> new file mode 100644
+> index 0000000..bcc45c9
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpage=
+s.patch
+> @@ -0,0 +1,15 @@
+> +Don't check manpages for xsltproc.
+> +
+> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> +
+> +--- tdb-1.3.0.orig/wscript	2015-04-22 09:52:32.366000222 +0900
+> ++++ tdb-1.3.0/wscript	2015-04-22 09:51:57.720000205 +0900
+> +@@ -90,7 +90,7 @@ def configure(conf):
+> +         not conf.env.disable_tdb_mutex_locking):
+> +         conf.define('USE_TDB_MUTEX_LOCKING', 1)
+> +=20
+> +-    conf.CHECK_XSLTPROC_MANPAGES()
+> ++    conf.find_program('xsltproc', var=3D'XSLTPROC')
+> +=20
+> +     if not conf.env.disable_python:
+> +         # also disable if we don't have the python libs installed
+> diff --git a/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb b/meta-oe/rec=
+ipes-support/libtdb/libtdb_1.3.0.bb
+> new file mode 100644
+> index 0000000..b7f3d21
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+> @@ -0,0 +1,30 @@
+> +SUMMARY =3D "The tdb library"
+> +SECTION =3D "libs"
+> +LICENSE =3D "LGPL-3.0+ & GPL-3.0+"
+> +
+> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/LGPL=
+-3.0;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
+> +                    file://${COREBASE}/meta/files/common-licenses/GPL-3.=
+0;md5=3Dc79ff39f19dfec6d293b95dea7b07891"
+> +
+> +SRC_URI =3D "http://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+> +           file://do-not-check-xsltproc-manpages.patch"
+> +
+> +SRC_URI[md5sum] =3D "f18cd6afc4f5670edfe58f72d2665f94"
+> +SRC_URI[sha256sum] =3D "04bee48d405ab7815810575a6e0cb364cc0eea6187b54b18=
+c84e9c18a768ba20"
+> +
+> +S =3D "${WORKDIR}/tdb-${PV}"
+> +
+> +inherit wafsamba
+> +
+> +EXTRA_OECONF +=3D "--disable-rpath \
+> +                 --bundled-libraries=3DNONE \
+> +                 --builtin-libraries=3Dreplace \
+> +                 --with-libiconv=3D${STAGING_DIR_HOST}${prefix}\
+> +                "
+> +
+> +PACKAGES +=3D "tdb-tools python-tdb python-tdb-dbg"
+> +
+> +FILES_${PN} =3D "${libdir}/*.so.*"
+> +FILES_tdb-tools =3D "${bindir}/*"
+> +FILES_python-tdb =3D "${libdir}/python${PYTHON_BASEVERSION}/site-package=
+s/*"
+> +FILES_python-tdb-dbg =3D "${libdir}/python${PYTHON_BASEVERSION}/site-pac=
+kages/.debug/*"
+> +RDEPENDS_python-tdb =3D "python"
+> --=20
+> 1.8.4.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
-Ricardo Ribalda
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
