@@ -1,41 +1,40 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E0B474051
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 57BC260670
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jun 2015 11:44:11 +0000 (UTC)
-Received: by wigg3 with SMTP id g3so106076123wig.1
+	Tue, 16 Jun 2015 11:47:16 +0000 (UTC)
+Received: by wiga1 with SMTP id a1so106279318wig.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jun 2015 04:44:12 -0700 (PDT)
+	Tue, 16 Jun 2015 04:47:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:content-transfer-encoding
 	:in-reply-to:user-agent;
-	bh=bBuMR1qa4RedABGA8rvWHoRv7MAhcu6oriJ9iEIjOUI=;
-	b=GJ8QXKaFZL+ViKmgPWn1mAW9quXSEMn+wFeJcf/mSClhNVXZg+Qa1h2P3/vg1/nQU7
-	y/52AcpWDavmvJALtlOnRM7tcCmYanhwLwK5Ww9w317+XYCRAeiTfLA8qQiHtByXK3EP
-	gc8PxWlpJPrFGVvKsfK//riXb97iMrJjHHEKnWY5pgA0nOprY1gqFVBpbcud90g1w9QY
-	lITpi9OrVQUXtvi4ShN0BkIWUa3rTpkQBZSLKXY66qO1o61GB3qkcaohwHUIHPQBtpry
-	azXNeZB9TO+QE+YgD7yYMvq+rmqENMgSs+fTVgf4jVgwjFJKFmb9GYMtAyFMLhc7rhRp
-	D+KA==
-X-Received: by 10.181.25.234 with SMTP id it10mr42923183wid.41.1434455052583; 
-	Tue, 16 Jun 2015 04:44:12 -0700 (PDT)
+	bh=5eP9Gpzt2isaKL3EhCvG0mu88gUaF9prEBHMnSy7fmQ=;
+	b=mJu9jyKKctm4n8ao7iG5xpVraXvHbHTK6cPL/UEsb7NqlDveeXCXXd3JtpwJY4KmJa
+	yyyRX+gOTE3A1gh5ThyA9HKldgegbDBJRpS9+uxdWNbZWBpjVUkl7UowhHCjKdsMeKbZ
+	4LQhE66rPsslgcZFvkFA35c1vw5HbsQPuau0JyqcoiTO6IUkYoOHLZvpjtnQY5j9YSKr
+	Ab37I1EY21qjYJBESLQox0j3D4YScmFbwbCviV80C8iyEtGa1cnBT2CpSkNcU25M+yx6
+	1RPAy9wEXXkB3TPIq5g5BsBmOIjfB3B+2uq5l3CyCC1wLVlD+CCnSMQ4SWzf2ZyYDhtb
+	fH6A==
+X-Received: by 10.180.106.6 with SMTP id gq6mr6022365wib.39.1434455235767;
+	Tue, 16 Jun 2015 04:47:15 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id gj7sm20372136wib.4.2015.06.16.04.44.11
+	by mx.google.com with ESMTPSA id o6sm20411265wiz.24.2015.06.16.04.47.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 16 Jun 2015 04:44:11 -0700 (PDT)
+	Tue, 16 Jun 2015 04:47:15 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 16 Jun 2015 13:44:21 +0200
+Date: Tue, 16 Jun 2015 13:47:24 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150616114421.GA2395@jama>
-References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434358336-34981-7-git-send-email-biannm@cn.fujitsu.com>
+Message-ID: <20150616114724.GB2395@jama>
+References: <1434355855-769-1-git-send-email-rongqing.li@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1434358336-34981-7-git-send-email-biannm@cn.fujitsu.com>
+In-Reply-To: <1434355855-769-1-git-send-email-rongqing.li@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH 6/7] libtdb: add new recipe
+Subject: Re: [PATCH][meta-networking] squid: upgrade to 3.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,189 +48,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2015 11:44:13 -0000
+X-List-Received-Date: Tue, 16 Jun 2015 11:47:17 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 15, 2015 at 04:52:15PM +0800, Bian Naimeng wrote:
-> libtdb is required by samba4
+On Mon, Jun 15, 2015 at 04:10:55PM +0800, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+>=20
+> remove the squid-change-ksh-referen*.patch which is not needed,
+> since 3.5.5 did not use ksh by default.
+> update the checksum of COPYING,since the date in it has been changed.
 
-It conflicts with samba3, should we just replace samba_3* with samba_4?
+fails to build in world:
 
-NOTE: recipe libtdb-1.3.0-r0: task do_populate_sysroot: Started
-ERROR: The recipe libtdb is trying to install files into a shared area when=
- those files already exist. Those files and their manifest location are:
-   /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runti=
-me-rprovides/libtdb/libtdb
- Matched in manifest-qemuarm-samba.packagedata
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runtime=
--reverse/libtdb1
- Matched in manifest-qemuarm-samba.packagedata
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runtime=
-/libtdb.packaged
- Matched in manifest-qemuarm-samba.packagedata
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/runtime=
-/libtdb
- Matched in manifest-qemuarm-samba.packagedata
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/pkgdata/shlibs2=
-/libtdb.list
- Matched in manifest-qemuarm-samba.packagedata
-Please verify which recipe should provide the above files.
-The build has stopped as continuing in this scenario WILL break things, if =
-not now, possibly in the future (we've seen builds fail several months late=
-r). If the system knew how to recover from this automatically it would howe=
-ver there are several different scenarios which can result in this and we d=
-on't know which one this is. It may be you have switched providers of somet=
-hing like virtual/kernel (e.g. from linux-yocto to linux-yocto-dev), in tha=
-t case you need to execute the clean task for both recipes and it will reso=
-lve this error. It may be you changed DISTRO_FEATURES from systemd to udev =
-or vice versa. Cleaning those recipes should again resolve this error howev=
-er switching DISTRO_FEATURES on an existing build directory is not supporte=
-d, you should really clean out tmp and rebuild (reusing sstate should be sa=
-fe). It could be the overlapping files detected are harmless in which case =
-adding them to SSTATE_DUPWHITELIST may be the correct solution. It could al=
-so be your build is including two different conflicting versions of things =
-(e.g. bluez 4 and bluez 5 and the correct solution for that would be to res=
-olve the conflict. If in doubt, please ask on the mailing list, sharing the=
- error and filelist above.
-ERROR: If the above message is too much, the simpler version is you're advi=
-sed to wipe out tmp and rebuild (reusing sstate is fine). That will likely =
-fix things in most (but not all) cases.
-ERROR: Function failed: sstate_task_postfunc
-ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
-ibc/work/armv5te-oe-linux-gnueabi/libtdb/1.3.0-r0/temp/log.do_packagedata.2=
-7608
-NOTE: recipe libtdb-1.3.0-r0: task do_packagedata: Failed
-ERROR: Task 27734 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
-e/recipes-support/libtdb/libtdb_1.3.0.bb, do_packagedata) failed with exit =
-code '1'
-NOTE: Running task 20344 of 31972 (ID: 27663, /home/jenkins/oe/world/shr-co=
-re/meta-openembedded/meta-gnome/recipes-gnome/evince/evince_2.32.0.bb, do_p=
-ackage)
-ERROR: The recipe libtdb is trying to install files into a shared area when=
- those files already exist. Those files and their manifest location are:
-   /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/libtd=
-b.so.1
- Matched in manifest-qemuarm-samba.populate_sysroot
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/libtdb.=
-so
- Matched in manifest-qemuarm-samba.populate_sysroot
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/lib/pkgconf=
-ig/tdb.pc
- Matched in manifest-qemuarm-samba.populate_sysroot
- /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm/usr/include/tdb=
-=2Eh
- Matched in manifest-qemuarm-samba.populate_sysroot
-Please verify which recipe should provide the above files.
-The build has stopped as continuing in this scenario WILL break things, if =
-not now, possibly in the future (we've seen builds fail several months late=
-r). If the system knew how to recover from this automatically it would howe=
-ver there are several different scenarios which can result in this and we d=
-on't know which one this is. It may be you have switched providers of somet=
-hing like virtual/kernel (e.g. from linux-yocto to linux-yocto-dev), in tha=
-t case you need to execute the clean task for both recipes and it will reso=
-lve this error. It may be you changed DISTRO_FEATURES from systemd to udev =
-or vice versa. Cleaning those recipes should again resolve this error howev=
-er switching DISTRO_FEATURES on an existing build directory is not supporte=
-d, you should really clean out tmp and rebuild (reusing sstate should be sa=
-fe). It could be the overlapping files detected are harmless in which case =
-adding them to SSTATE_DUPWHITELIST may be the correct solution. It could al=
-so be your build is including two different conflicting versions of things =
-(e.g. bluez 4 and bluez 5 and the correct solution for that would be to res=
-olve the conflict. If in doubt, please ask on the mailing list, sharing the=
- error and filelist above.
-ERROR: If the above message is too much, the simpler version is you're advi=
-sed to wipe out tmp and rebuild (reusing sstate is fine). That will likely =
-fix things in most (but not all) cases.
-ERROR: Function failed: sstate_task_postfunc
-ERROR: Logfile of failure stored in: /home/jenkins/oe/world/shr-core/tmp-gl=
-ibc/work/armv5te-oe-linux-gnueabi/libtdb/1.3.0-r0/temp/log.do_populate_sysr=
-oot.27647
-NOTE: recipe libtdb-1.3.0-r0: task do_populate_sysroot: Failed
-ERROR: Task 27729 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-o=
-e/recipes-support/libtdb/libtdb_1.3.0.bb, do_populate_sysroot) failed with =
-exit code '1'
+| g++  -O2 -pipe -g -feliminate-unused-debug-types -fvisibility-inlines-hid=
+den -std=3Dc++11 -o cf_gen /home/jenkins/oe/world/shr-core/tmp-glibc/work/a=
+rmv5te-oe-linux-gnueabi/squid/3.5.5-r0/squid-3.5.5/src/cf_gen.cc -I/home/je=
+nkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/squid/3.5.5=
+-r0/squid-3.5.5/src -I../include/ -I../src
+| cc1plus: error: unrecognized command line option '-std=3Dc++11'
+| make[1]: *** [cf_gen] Error 1
+| make[1]: *** Waiting for unfinished jobs....
+| make[1]: Leaving directory `/home/jenkins/oe/world/shr-core/tmp-glibc/wor=
+k/armv5te-oe-linux-gnueabi/squid/3.5.5-r0/build/src'
+| make: *** [all-recursive] Error 1
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/jenkins/=
+oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/squid/3.5.5-r0/te=
+mp/log.do_compile.18374)
+NOTE: recipe squid-3.5.5-r0: task do_compile: Failed
+ERROR: Task 27024 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-n=
+etworking/recipes-daemons/squid/squid_3.5.5.bb, do_compile) failed with exi=
+t code '1'
+
 
 >=20
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->  .../libtdb/do-not-check-xsltproc-manpages.patch    | 15 +++++++++++
->  meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb     | 30 ++++++++++++++++=
-++++++
->  2 files changed, 45 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libtdb/libtdb/do-not-check-xs=
-ltproc-manpages.patch
->  create mode 100644 meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
+>  ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------=
+------
+>  .../squid/{squid_3.4.7.bb =3D> squid_3.5.5.bb}       |  8 ++---
+>  2 files changed, 4 insertions(+), 43 deletions(-)
+>  delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-cha=
+nge-ksh-reference-in-krb-ldap-helper-to-sh.patch
+>  rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb =3D> squid_=
+3.5.5.bb} (88%)
 >=20
-> diff --git a/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-=
-manpages.patch b/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltpro=
-c-manpages.patch
-> new file mode 100644
-> index 0000000..bcc45c9
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libtdb/libtdb/do-not-check-xsltproc-manpage=
-s.patch
-> @@ -0,0 +1,15 @@
-> +Don't check manpages for xsltproc.
-> +
-> +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> +
-> +--- tdb-1.3.0.orig/wscript	2015-04-22 09:52:32.366000222 +0900
-> ++++ tdb-1.3.0/wscript	2015-04-22 09:51:57.720000205 +0900
-> +@@ -90,7 +90,7 @@ def configure(conf):
-> +         not conf.env.disable_tdb_mutex_locking):
-> +         conf.define('USE_TDB_MUTEX_LOCKING', 1)
-> +=20
-> +-    conf.CHECK_XSLTPROC_MANPAGES()
-> ++    conf.find_program('xsltproc', var=3D'XSLTPROC')
-> +=20
-> +     if not conf.env.disable_python:
-> +         # also disable if we don't have the python libs installed
-> diff --git a/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb b/meta-oe/rec=
-ipes-support/libtdb/libtdb_1.3.0.bb
-> new file mode 100644
-> index 0000000..b7f3d21
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libtdb/libtdb_1.3.0.bb
-> @@ -0,0 +1,30 @@
-> +SUMMARY =3D "The tdb library"
-> +SECTION =3D "libs"
-> +LICENSE =3D "LGPL-3.0+ & GPL-3.0+"
-> +
-> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/LGPL=
--3.0;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
-> +                    file://${COREBASE}/meta/files/common-licenses/GPL-3.=
-0;md5=3Dc79ff39f19dfec6d293b95dea7b07891"
-> +
-> +SRC_URI =3D "http://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-> +           file://do-not-check-xsltproc-manpages.patch"
-> +
-> +SRC_URI[md5sum] =3D "f18cd6afc4f5670edfe58f72d2665f94"
-> +SRC_URI[sha256sum] =3D "04bee48d405ab7815810575a6e0cb364cc0eea6187b54b18=
-c84e9c18a768ba20"
-> +
-> +S =3D "${WORKDIR}/tdb-${PV}"
-> +
-> +inherit wafsamba
-> +
-> +EXTRA_OECONF +=3D "--disable-rpath \
-> +                 --bundled-libraries=3DNONE \
-> +                 --builtin-libraries=3Dreplace \
-> +                 --with-libiconv=3D${STAGING_DIR_HOST}${prefix}\
-> +                "
-> +
-> +PACKAGES +=3D "tdb-tools python-tdb python-tdb-dbg"
-> +
-> +FILES_${PN} =3D "${libdir}/*.so.*"
-> +FILES_tdb-tools =3D "${bindir}/*"
-> +FILES_python-tdb =3D "${libdir}/python${PYTHON_BASEVERSION}/site-package=
-s/*"
-> +FILES_python-tdb-dbg =3D "${libdir}/python${PYTHON_BASEVERSION}/site-pac=
-kages/.debug/*"
-> +RDEPENDS_python-tdb =3D "python"
+> diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh=
+-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons=
+/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+> deleted file mode 100644
+> index 8e03860..0000000
+> --- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-refere=
+nce-in-krb-ldap-helper-to-sh.patch
+> +++ /dev/null
+> @@ -1,39 +0,0 @@
+> -squid: change ksh reference in krb ldap helper to sh
+> -
+> -Very simple cert_tool script with no ksh specifics.
+> -Change it to use sh so a package dependency doesn't
+> -get created to ksh.
+> -
+> -Upstream-Status: Pending
+> -
+> -Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+> ----
+> - helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
+> - 1 file changed, 3 insertions(+), 3 deletions(-)
+> -
+> -diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helper=
+s/external_acl/kerberos_ldap_group/cert_tool
+> -index 9f14959..8c4ea11 100644
+> ---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
+> -+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
+> -@@ -1,4 +1,4 @@
+> --#!/bin/ksh
+> -+#!/bin/sh
+> - #
+> - #  --------------------------------------------------------------------=
+---------
+> - #=20
+> -@@ -64,9 +64,9 @@ QUIT
+> - # Create database for Sun ldap and pem file for Openldap=20
+> - #
+> - rm ${server}_[0-9]*.pem 2>/dev/null
+> --let i=3D0
+> -+i=3D0
+> -  ls ${server}_[0-9]*.cert | while read file; do
+> -- let i=3Di+1
+> -+ i=3D`expr $i + 1`
+> -  cat  $file  >> ${server}_$i.pem
+> -  CA=3D`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*=
+true"`
+> -  if [ -n "$CA" ]; then
+> ---=20
+> -1.9.1
+> -
+> diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-=
+networking/recipes-daemons/squid/squid_3.5.5.bb
+> similarity index 88%
+> rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+> rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+> index 7b00dfc..1f445e5 100644
+> --- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+> @@ -16,17 +16,16 @@ SRC_URI =3D "http://www.squid-cache.org/Versions/v${M=
+AJ_VER}/${MIN_VER}/${BPN}-${P
+>             file://Set-up-for-cross-compilation.patch \
+>             file://Skip-AC_RUN_IFELSE-tests.patch \
+>             file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
+> -           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.pa=
+tch \
+>             file://squid-use-serial-tests-config-needed-by-ptest.patch \
+>             file://run-ptest \
+>             file://volatiles.03_squid \
+>  "
+> =20
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc492e2d6d32ec5c1aad0e0609a141=
+ce9 \
+> -                    file://COPYRIGHT;md5=3D2900f50789c498be8e9f1eb23b55c=
+be9 \
+> +                    file://errors/COPYRIGHT;md5=3D0fed8f1462f6fdbc62bb43=
+1bcb618f46 \
+>                     "
+> -SRC_URI[md5sum] =3D "9951034b10f7ee0f45a95cfae61c57c2"
+> -SRC_URI[sha256sum] =3D "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268=
+cb7a8c97c61af2b6"
+> +SRC_URI[md5sum] =3D "6aac5c2e9cbbeabcbf2e9e49a178a931"
+> +SRC_URI[sha256sum] =3D "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165ea=
+e5def5e4d11e6a0d"
+> =20
+>  DEPENDS =3D "libtool krb5 openldap db cyrus-sasl"
+> =20
+> @@ -38,6 +37,7 @@ USERADD_PARAM_${PN} =3D "--system --no-create-home --ho=
+me-dir /var/run/squid --she
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[libnetfilter-conntrack] =3D "--with-netfilter-conntrack=3D=
+${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+>  EXTRA_OECONF +=3D "--with-default-user=3Dsquid"
+> +CACHED_CONFIGUREVARS +=3D "squid_cv_gnu_atomics=3Dno"
+> =20
+>  TESTDIR =3D "test-suite"
+>  do_compile_ptest() {
 > --=20
-> 1.8.4.2
+> 1.9.1
 >=20
 > --=20
 > _______________________________________________
