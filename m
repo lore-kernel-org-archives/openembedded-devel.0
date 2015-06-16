@@ -1,40 +1,37 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 983C174051;
-	Tue, 16 Jun 2015 06:50:49 +0000 (UTC)
-Received: by pdbki1 with SMTP id ki1so7650849pdb.1;
-	Mon, 15 Jun 2015 23:50:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=TCUs/TqQXq+RPOjI8f7bMNAq0Aku+29Mw8y9aeeZSkY=;
-	b=nKt7YaiV+u6P615j8SjtRneDgRxNvCtdjI4QDO9wIa6vGx5sXQ+gRYNJH/QcRAKG8+
-	+6hScH6rlvV2KOOJJSGf316cItsQNO3S1YyoedcEZmQomt24WUPB+Mzk0b+mUvOt/p+J
-	QhX2Me2TYQmUfig1rjIkK7LbJcceoefXT82BTh1Xa/OSuWvHpWTgHXaA7O4jcHOtMZKi
-	np7rmMUQzpaYF+f51zU6y+xwhmXDR0GZVj+tjx52D+jv0T/xGJ/ps9rA4Ag65xGo3j4A
-	LDqSyBd+yWs2OpUa8IQpe7dmKahZaQs6lHbZjkGrPrMpwxhDEEWi/fzS9DxKnwFXQL+I
-	cVVA==
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-la0-f46.google.com (mail-la0-f46.google.com
+	[209.85.215.46])
+	by mail.openembedded.org (Postfix) with ESMTP id C6A27601DF;
+	Tue, 16 Jun 2015 08:46:03 +0000 (UTC)
+Received: by labbc20 with SMTP id bc20so6370842lab.1;
+	Tue, 16 Jun 2015 01:46:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	bh=eFyebD481cEnRENMtfZQIJVQICAZZENd5km2ajrYdEA=;
+	b=gFOr256oOQhKQlSAoyEciPUGRBrr+JGYtqHtMHG77zISUDE7nNlxGuEIv3M3a5KpH6
+	4iVbEsaUzrBtByrKcP93gM45zdqryO4h4HDSaPyDK+j+Khhm7YjCW8pRB9TbJAKoB3e2
+	leK7bfH8w5dtAcgT9KLo9odr6yKlSyQ1zz7xhbA/NNzu1fyuHm8NHB5+kbRohqBhc+UL
+	fMBwSZj2wfc6eDxTheZsiDIpY9ierEc30BPAI8DiT5ZQHx+OYOc3itezUo2vDa+bZpn3
+	kUyU2H1UezX5LWm88ho9a4p/90cBzEWs0kKIHCRYhedVf7pvKNs8u3KAPEE5RA5azRaI
+	MtQQ==
+X-Received: by 10.152.8.168 with SMTP id s8mr32233337laa.116.1434444364480;
+	Tue, 16 Jun 2015 01:46:04 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.68.57.170 with SMTP id j10mr56048769pbq.150.1434437450552;
-	Mon, 15 Jun 2015 23:50:50 -0700 (PDT)
-Received: by 10.70.44.41 with HTTP; Mon, 15 Jun 2015 23:50:50 -0700 (PDT)
-In-Reply-To: <557EE4C2.501@linux.intel.com>
-References: <557E9EFE.1030703@linux.intel.com>
-	<CALbNGRS9UWjVQQh8POPc5zVYOeYa9VaeC7dEfzH3AMs4k9Mjzw@mail.gmail.com>
-	<CAJTo0LbRVqw3h_3igs59=DTnaz6nf4w=A5ZpXepmh6xiKtVdPA@mail.gmail.com>
-	<557EE4C2.501@linux.intel.com>
-Date: Tue, 16 Jun 2015 08:50:50 +0200
-Message-ID: <CALbNGRS-xR52wapA2viFa0oZJ6kotFdjhXpb6kyOtpRyn--5=A@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Cc: Yocto Project <yocto@yoctoproject.org>,
+Received: by 10.25.27.71 with HTTP; Tue, 16 Jun 2015 01:45:44 -0700 (PDT)
+In-Reply-To: <CAMKF1spnp0qX9Fczd8+Y0BOyZ9jDiYnHobyjFe5KU2LtCU=eEg@mail.gmail.com>
+References: <1433858847-31079-1-git-send-email-ricardo.ribalda@gmail.com>
+	<CAMKF1spnp0qX9Fczd8+Y0BOyZ9jDiYnHobyjFe5KU2LtCU=eEg@mail.gmail.com>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Tue, 16 Jun 2015 10:45:44 +0200
+Message-ID: <CAPybu_020CO0Hn4bRy=ZgqLtrMLdR=q6-3Dfnb2P4iGYsfQG0Q@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	Paul Eggleton <paul.eggleton@linux.intel.com>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] Webkit-gtk will be updated to latest upstream; midori browser to be replaced with Epiphany
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] [PATCH v2] [meta-oe] opencv: Add OpenCV 3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,38 +45,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2015 06:50:50 -0000
+X-List-Received-Date: Tue, 16 Jun 2015 08:46:06 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 15, 2015 at 4:44 PM, Alexander Kanavin
-<alexander.kanavin@linux.intel.com> wrote:
-> On 06/15/2015 05:24 PM, Burton, Ross wrote:
->
->> If you actually compare the build dependencies, you'll see that Midori
->> and Epiphany are actually almost identical.
+Hello Khem
+
+Unfortunately It uses the same header file names :(
+
+Regards!
+
+
+
+On Sun, Jun 14, 2015 at 5:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tue, Jun 9, 2015 at 10:07 AM, Ricardo Ribalda Delgado
+> <ricardo.ribalda@gmail.com> wrote:
+>> -Support for new PACKAGECONFIGS
+>> -Merge with opencv-samples
 >>
->> We need to upgrade WebKit as the release we're shipping has known
->> security flaws and is very old - and the community is rightly moaning
->> about that.  However Midori doesn't build with a recent WebKit... if you
->> have an alternative solution then your thoughts are welcome.
+>> Since it is not backward compatible with 2.x and cannot be installed in
+>> parallel it has a DEFAULT_PREFERENCE of -1.
 >
+> I would have thought that ABI breakages like this should be parallel
+> installable to facilitate migration path. Are you sure it can not live
+> together with opencv2 ?
+> if it could I would have suggested to call the recipe opencv3_xx.bb
 >
-> Also, Webkit2 itself ships with a tiny browser wrapper called MiniBrowser:
->
-> http://blogs.igalia.com/carlosgc/2011/11/04/webkit2-gtk-minibrowser-ported-to-gtk-api/
->
-> That may be enough for many people's needs, and they can simply not include
-> Epiphany into their images if it's too big and bloated or whatever.
->
->
-How about doing same as others do e.g fedora [1-2]: Keep two version
-of webkit-gtk based on same recent code:
+>>
+>> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+>> ---
+>>  meta-oe/recipes-support/opencv/opencv_3.0.bb | 127 ++++++++++++++++++++=
++++++++
+>>  1 file changed, 127 insertions(+)
+>>  create mode 100644 meta-oe/recipes-support/opencv/opencv_3.0.bb
+>>
+>> diff --git a/meta-oe/recipes-support/opencv/opencv_3.0.bb b/meta-oe/reci=
+pes-support/opencv/opencv_3.0.bb
+>> new file mode 100644
+>> index 000000000000..60a96af1fe68
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/opencv/opencv_3.0.bb
+>> @@ -0,0 +1,127 @@
+>> +SUMMARY =3D "Opencv : The Open Computer Vision Library"
+>> +HOMEPAGE =3D "http://opencv.willowgarage.com/wiki/"
+>> +SECTION =3D "libs"
+>> +
+>> +LICENSE =3D "BSD"
+>> +LIC_FILES_CHKSUM =3D "file://include/opencv2/opencv.hpp;endline=3D41;md=
+5=3D6d690d8488a6fca7a2c192932466bb14"
+>> +
+>> +ARM_INSTRUCTION_SET =3D "arm"
+>> +
+>> +DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib gl=
+ib-2.0 oracle-jse-jdk ant"
+>> +
+>> +DEFAULT_PREFERENCE =3D "-1"
+>> +
+>> +SRCREV_opencv =3D "424c2bddb39dae97dc4639a24eaa0e0c8fbb8e69"
+>> +SRCREV_contrib =3D "844c30e8b2f2f4b34b96a169fafe9beea3c45e87"
+>> +SRCREV_FORMAT =3D "opencv"
+>> +SRC_URI =3D "git://github.com/Itseez/opencv.git;nobranch=3D1;name=3Dope=
+ncv \
+>> +          git://github.com/Itseez/opencv_contrib.git;nobranch=3D1;dests=
+uffix=3Dcontrib;name=3Dcontrib"
+>> +
+>> +PV =3D "3.0+git${SRCPV}"
+>> +
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +EXTRA_OECMAKE =3D "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=3D${STAGING_LIBDIR=
+}/${PYTHON_DIR}/site-packages/numpy/core/include \
+>> +                -DOPENCV_EXTRA_MODULES_PATH=3D${WORKDIR}/contrib/module=
+s \
+>> +                 -DWITH_1394=3DOFF \
+>> +                 -DCMAKE_SKIP_RPATH=3DON \
+>> +                 ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DEN=
+ABLE_SSE=3D1 -DENABLE_SSE2=3D1 -DENABLE_SSE3=3D1 -DENABLE_SSSE3=3D1", "", d=
+)} \
+>> +                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUF=
+FIX=3D64", "", d)} \
+>> +                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUF=
+FIX=3D32", "", d)} \
+>> +"
+>> +
+>> +PACKAGECONFIG ??=3D "eigen jpeg libav png tiff v4l tbb samples\
+>> +                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk"=
+, "", d)}"
+>> +PACKAGECONFIG[eigen] =3D "-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeigen=
+,"
+>> +PACKAGECONFIG[gtk] =3D "-DWITH_GTK=3DON,-DWITH_GTK=3DOFF,gtk+3,"
+>> +PACKAGECONFIG[jpeg] =3D "-DWITH_JPEG=3DON,-DWITH_JPEG=3DOFF,jpeg,"
+>> +PACKAGECONFIG[libav] =3D "-DWITH_FFMPEG=3DON,-DWITH_FFMPEG=3DOFF,libav,=
+"
+>> +PACKAGECONFIG[png] =3D "-DWITH_PNG=3DON,-DWITH_PNG=3DOFF,libpng,"
+>> +PACKAGECONFIG[tiff] =3D "-DWITH_TIFF=3DON,-DWITH_TIFF=3DOFF,tiff,"
+>> +PACKAGECONFIG[v4l] =3D "-DWITH_V4L=3DON,-DWITH_V4L=3DOFF,v4l-utils,"
+>> +PACKAGECONFIG[jasper] =3D "-DWITH_JASPER=3DON,-DWITH_JASPER=3DOFF,jaspe=
+r,"
+>> +PACKAGECONFIG[amdblas] =3D "-DWITH_OPENCLAMDBLAS=3DON,-DWITH_OPENCLAMDB=
+LAS=3DOFF,libclamdblas,"
+>> +PACKAGECONFIG[amdfft] =3D "-DWITH_OPENCLAMDFFT=3DON,-DWITH_OPENCLAMDFFT=
+=3DOFF,libclamdfft,"
+>> +PACKAGECONFIG[opencl] =3D "-DWITH_OPENCL=3DON,-DWITH_OPENCL=3DOFF,openc=
+l-headers,"
+>> +PACKAGECONFIG[gstreamer] =3D "-DWITH_GSTREAMER=3DON,-DWITH_GSTREAMER=3D=
+OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
+>> +PACKAGECONFIG[oracle-java-amd64] =3D "-DJAVA_INCLUDE_PATH=3D${JAVA_HOME=
+}/include -DJAVA_INCLUDE_PATH2=3D${JAVA_HOME}/include/linux -DJAVA_AWT_INCL=
+UDE_PATH=3D${JAVA_HOME}/include -DJAVA_AWT_LIBRARY=3D${JAVA_HOME}/lib/amd64=
+/libjawt.so -DJAVA_JVM_LIBRARY=3D${JAVA_HOME}/lib/amd64/server/libjvm.so,,o=
+racle-jse-jdk ant,"
+>> +PACKAGECONFIG[samples] =3D "-DBUILD_EXAMPLES=3DON -DINSTALL_PYTHON_EXAM=
+PLES=3DON,-DBUILD_EXAMPLES=3DOFF,,"
+>> +PACKAGECONFIG[tbb] =3D "-DWITH_TBB=3DON,-DWITH_TBB=3DOFF,tbb,"
+>> +
+>> +inherit distutils-base pkgconfig cmake
+>> +
+>> +export BUILD_SYS
+>> +export HOST_SYS
+>> +export PYTHON_CSPEC=3D"-I${STAGING_INCDIR}/${PYTHON_DIR}"
+>> +export PYTHON=3D"${STAGING_BINDIR_NATIVE}/python"
+>> +export JAVA_HOME=3D"${STAGING_DIR_TARGET}/usr/share/java/"
+>> +export ANT_DIR=3D"${STAGING_DIR_TARGET}/usr/share/ant/"
+>> +
+>> +TARGET_CC_ARCH +=3D "-I${S}/include "
+>> +
+>> +PACKAGES +=3D "${PN}-java-dbg ${PN}-java ${PN}-samples-dbg ${PN}-sample=
+s ${PN}-apps python-opencv"
+>> +
+>> +python populate_packages_prepend () {
+>> +    cv_libdir =3D d.expand('${libdir}')
+>> +    cv_libdir_dbg =3D d.expand('${libdir}/.debug')
+>> +    do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'Open=
+CV %s development package', extra_depends=3D'${PN}-dev', allow_links=3DTrue=
+)
+>> +    do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'Open=
+CV %s development package', extra_depends=3D'${PN}-dev')
+>> +    do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenC=
+V %s development package', extra_depends=3D'${PN}-dev')
+>> +    do_split_packages(d, cv_libdir, '^lib(.*)\.so\.*', 'lib%s', 'OpenCV=
+ %s library', extra_depends=3D'', allow_links=3DTrue)
+>> +
+>> +    pn =3D d.getVar('PN', 1)
+>> +    metapkg =3D  pn + '-dev'
+>> +    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
+>> +    blacklist =3D [ metapkg ]
+>> +    metapkg_rdepends =3D [ ]
+>> +    packages =3D d.getVar('PACKAGES', 1).split()
+>> +    for pkg in packages[1:]:
+>> +        if not pkg in blacklist and not pkg in metapkg_rdepends and pkg=
+.endswith('-dev'):
+>> +            metapkg_rdepends.append(pkg)
+>> +    d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
+>> +
+>> +    blacklist =3D [ metapkg ]
+>> +    metapkg_rdepends =3D [ ]
+>> +    for pkg in packages[1:]:
+>> +        if not pkg in blacklist and not pkg in metapkg_rdepends and not=
+ pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-d=
+oc') :
+>> +            metapkg_rdepends.append(pkg)
+>> +    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d=
+)
+>> +
+>> +}
+>> +
+>> +PACKAGES_DYNAMIC +=3D "^libopencv-.*"
+>> +
+>> +FILES_${PN} =3D ""
+>> +FILES_${PN}-apps =3D "${bindir}/* ${datadir}/OpenCV"
+>> +FILES_${PN}-dbg +=3D "${libdir}/.debug"
+>> +FILES_${PN}-dev =3D "${includedir} ${libdir}/pkgconfig"
+>> +FILES_${PN}-doc =3D "${datadir}/OpenCV/doc"
+>> +FILES_${PN}-java =3D "${datadir}/OpenCV/java"
+>> +FILES_${PN}-java-dbg =3D "${datadir}/OpenCV/java/.debug/"
+>> +FILES_${PN}-samples =3D "${datadir}/OpenCV/samples/"
+>> +FILES_${PN}-samples-dbg =3D "${datadir}/OpenCV/samples/bin/.debug"
+>> +
+>> +INSANE_SKIP_${PN}-apps =3D "staticdev"
+>> +INSANE_SKIP_${PN}-java =3D "libdir"
+>> +INSANE_SKIP_${PN}-java-dbg =3D "libdir"
+>> +
+>> +ALLOW_EMPTY_${PN} =3D "1"
+>> +
+>> +INSANE_SKIP_python-opencv =3D "True"
+>> +SUMMARY_python-opencv =3D "Python bindings to opencv"
+>> +FILES_python-opencv =3D "${PYTHON_SITEPACKAGES_DIR}/*"
+>> +RDEPENDS_python-opencv =3D "python-core python-numpy"
+>> +
+>> +do_install_append() {
+>> +    cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
+>> +    sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
+>> +
+>> +    # Move Python files into correct library folder (for multilib build=
+)
+>> +    if [ "$libdir" !=3D "/usr/lib" ]; then
+>> +        mv ${D}/usr/lib/* ${D}/${libdir}/
+>> +        rm -rf ${D}/usr/lib
+>> +    fi
+>> +
+>> +    install -d ${D}${datadir}/OpenCV/samples/bin/
+>> +    cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/sample=
+s/bin/
+>> +}
+>> --
+>> 2.1.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
-* gtk2/webkit1
-* gtk3/webkit2
 
-Andreas
 
-[1] http://pkgs.fedoraproject.org/cgit/webkitgtk.git/tree/webkitgtk.spec
-[2] http://pkgs.fedoraproject.org/cgit/webkitgtk3.git/tree/webkitgtk3.spec
+--=20
+Ricardo Ribalda
 
