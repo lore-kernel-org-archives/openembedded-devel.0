@@ -1,36 +1,40 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 600D97413A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jun 2015 02:12:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,617,1427731200"; d="scan'208";a="97105718"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Jun 2015 10:16:50 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5G2B4ht031060;
-	Tue, 16 Jun 2015 10:11:05 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Tue, 16 Jun 2015 10:12:52 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-Thread-Topic: [oe] [meta-oe][PATCH 1/7] wafsamba: add class
-Thread-Index: AQHQp0nTUyGZja6Xu0i2Ui6popKBe52s/8IAgAFgrKA=
-Date: Tue, 16 Jun 2015 02:12:42 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73E0F73A@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434358336-34981-2-git-send-email-biannm@cn.fujitsu.com>
-	<5108170.4M7I4gz10Q@peggleto-mobl.ger.corp.intel.com>
-In-Reply-To: <5108170.4M7I4gz10Q@peggleto-mobl.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pd0-f179.google.com (mail-pd0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 983C174051;
+	Tue, 16 Jun 2015 06:50:49 +0000 (UTC)
+Received: by pdbki1 with SMTP id ki1so7650849pdb.1;
+	Mon, 15 Jun 2015 23:50:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=TCUs/TqQXq+RPOjI8f7bMNAq0Aku+29Mw8y9aeeZSkY=;
+	b=nKt7YaiV+u6P615j8SjtRneDgRxNvCtdjI4QDO9wIa6vGx5sXQ+gRYNJH/QcRAKG8+
+	+6hScH6rlvV2KOOJJSGf316cItsQNO3S1YyoedcEZmQomt24WUPB+Mzk0b+mUvOt/p+J
+	QhX2Me2TYQmUfig1rjIkK7LbJcceoefXT82BTh1Xa/OSuWvHpWTgHXaA7O4jcHOtMZKi
+	np7rmMUQzpaYF+f51zU6y+xwhmXDR0GZVj+tjx52D+jv0T/xGJ/ps9rA4Ag65xGo3j4A
+	LDqSyBd+yWs2OpUa8IQpe7dmKahZaQs6lHbZjkGrPrMpwxhDEEWi/fzS9DxKnwFXQL+I
+	cVVA==
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
+X-Received: by 10.68.57.170 with SMTP id j10mr56048769pbq.150.1434437450552;
+	Mon, 15 Jun 2015 23:50:50 -0700 (PDT)
+Received: by 10.70.44.41 with HTTP; Mon, 15 Jun 2015 23:50:50 -0700 (PDT)
+In-Reply-To: <557EE4C2.501@linux.intel.com>
+References: <557E9EFE.1030703@linux.intel.com>
+	<CALbNGRS9UWjVQQh8POPc5zVYOeYa9VaeC7dEfzH3AMs4k9Mjzw@mail.gmail.com>
+	<CAJTo0LbRVqw3h_3igs59=DTnaz6nf4w=A5ZpXepmh6xiKtVdPA@mail.gmail.com>
+	<557EE4C2.501@linux.intel.com>
+Date: Tue, 16 Jun 2015 08:50:50 +0200
+Message-ID: <CALbNGRS-xR52wapA2viFa0oZJ6kotFdjhXpb6kyOtpRyn--5=A@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/7] wafsamba: add class
+Subject: Re: [OE-core] Webkit-gtk will be updated to latest upstream; midori browser to be replaced with Epiphany
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,78 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Jun 2015 02:12:41 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 16 Jun 2015 06:50:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-SGkgUGF1bA0KDQpUaGFua3MgZm9yIHlvdXIgY29tbWVudHMuDQoNCj4gLS0tLS1PcmlnaW5hbCBN
-ZXNzYWdlLS0tLS0NCj4gRnJvbTogUGF1bCBFZ2dsZXRvbiBbbWFpbHRvOnBhdWwuZWdnbGV0b25A
-bGludXguaW50ZWwuY29tXQ0KPiBTZW50OiBNb25kYXksIEp1bmUgMTUsIDIwMTUgODo1MyBQTQ0K
-PiBUbzogQmlhbiwgTmFpbWVuZy+ZxCCUVJbSDQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlz
-dHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0gg
-MS83XSB3YWZzYW1iYTogYWRkIGNsYXNzDQo+IA0KPiBIaSBCaWFuLA0KPiANCj4gT24gTW9uZGF5
-IDE1IEp1bmUgMjAxNSAxNjo1MjoxMCBCaWFuIE5haW1lbmcgd3JvdGU6DQo+ID4gd2Fmc2FtYmEg
-aXMgYSBidWlsZCBzeXN0ZW0gdXNlZCBieSBzYW1iYSByZWxhdGVkIHNvZnR3YXJlDQo+ID4NCj4g
-PiBTaWduZWQtb2ZmLWJ5OiBCaWFuIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4NCj4g
-PiAtLS0NCj4gPiAgbWV0YS1vZS9jbGFzc2VzL3dhZnNhbWJhLmJiY2xhc3MgfCA1NQ0KPiA+ICsr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysgMSBmaWxlIGNoYW5nZWQsIDU1
-DQo+ID4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKyBpbnNlcnRpb25z
-KCspDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL2NsYXNzZXMvd2Fmc2FtYmEuYmJj
-bGFzcw0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL21ldGEtb2UvY2xhc3Nlcy93YWZzYW1iYS5iYmNs
-YXNzDQo+ID4gYi9tZXRhLW9lL2NsYXNzZXMvd2Fmc2FtYmEuYmJjbGFzcyBuZXcgZmlsZSBtb2Rl
-IDEwMDY0NCBpbmRleA0KPiA+IDAwMDAwMDAuLjc2NGI1MzANCj4gPiAtLS0gL2Rldi9udWxsDQo+
-ID4gKysrIGIvbWV0YS1vZS9jbGFzc2VzL3dhZnNhbWJhLmJiY2xhc3MNCj4gDQo+IFRoaXMgc2hv
-dWxkIHJlYWxseSBiZSBuYW1lZCB3YWYtc2FtYmEuYmJjbGFzcy4gSSdtIGFsc28gd29uZGVyaW5n
-IGhvdyB0aGlzDQo+IHJlbGF0ZXMgdG8gd2FmLmJiY2xhc3MgdGhhdCB3ZSBoYXZlIGluIE9FLUNv
-cmUgLSB0aGV5IGRvIGxvb2sgcXVpdGUgZGlmZmVyZW50DQo+IHRob3VnaC4NCj4gDQoNCkkgd2ls
-bCByZW5hbWUgaXQgdG8gd2FmLXNhbWJhLmJiY2xhc3MuDQoNCkkgZG9uJ3Qga25vdyB3aGF0J3Mg
-dGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHdhZi5iYmNsYXNzIGFuZCB3YWYtc2FtYmEuYmJjbGFz
-cyBjbGVhcmx5LA0Kd2FmLmJiY2xhc3MgaXMgYSBiYXNpYyBjbGFzcyBmb3Igd2FmIGJ1aWxkIHN5
-c3RlbSwgYnV0IGl0IGRvZXMgbm90IHdvcmsgZm9yIHNhbWJhNCBkaXJlY3RseS4NCg0KSSBqdXN0
-IGNyZWF0ZSB3YWYtc2FtYmEuYmJjbGFzcyBhY2NvcmRpbmcgdG8gaHR0cHM6Ly93aWtpLnNhbWJh
-Lm9yZy9pbmRleC5waHAvV2FmLA0KZXNwZWNpYWxseSB0aGUgc2VjdGlvbiAnY3Jvc3MtY29tcGls
-aW5nJy4NCg0KPiA+IEBAIC0wLDAgKzEsNTUgQEANCj4gPiArIyB3YWYgaXMgYSBidWlsZCBzeXN0
-ZW0gd2hpY2ggaXMgdXNlZCBieSBzYW1iYSByZWxhdGVkIHByb2plY3QuDQo+ID4gKyMgT2J0YWlu
-IGRldGFpbHMgZnJvbSBodHRwczovL3dpa2kuc2FtYmEub3JnL2luZGV4LnBocC9XYWYNCj4gPiAr
-Iw0KPiA+ICtpbmhlcml0IHFlbXUgcHl0aG9ubmF0aXZlDQo+ID4gKw0KPiA+ICtERVBFTkRTICs9
-ICJxZW11LW5hdGl2ZSBsaWJ4c2x0LW5hdGl2ZSBkb2Nib29rLXhzbC1zdHlsZXNoZWV0cy1uYXRp
-dmUNCj4gPiBweXRob24iDQo+ID4gKw0KPiA+ICtDT05GSUdVUkVPUFRTID0gIiAtLXByZWZpeD0k
-e3ByZWZpeH0gXA0KPiA+ICsgICAgICAgICAgICAgICAgICAtLWJpbmRpcj0ke2JpbmRpcn0gXA0K
-PiA+ICsgICAgICAgICAgICAgICAgICAtLXNiaW5kaXI9JHtzYmluZGlyfSBcDQo+ID4gKyAgICAg
-ICAgICAgICAgICAgIC0tbGliZXhlY2Rpcj0ke2xpYmV4ZWNkaXJ9IFwNCj4gPiArICAgICAgICAg
-ICAgICAgICAgLS1kYXRhZGlyPSR7ZGF0YWRpcn0gXA0KPiA+ICsgICAgICAgICAgICAgICAgICAt
-LXN5c2NvbmZkaXI9JHtzeXNjb25mZGlyfSBcDQo+ID4gKyAgICAgICAgICAgICAgICAgIC0tc2hh
-cmVkc3RhdGVkaXI9JHtzaGFyZWRzdGF0ZWRpcn0gXA0KPiA+ICsgICAgICAgICAgICAgICAgICAt
-LWxvY2Fsc3RhdGVkaXI9JHtsb2NhbHN0YXRlZGlyfSBcDQo+ID4gKyAgICAgICAgICAgICAgICAg
-IC0tbGliZGlyPSR7bGliZGlyfSBcDQo+ID4gKyAgICAgICAgICAgICAgICAgIC0taW5jbHVkZWRp
-cj0ke2luY2x1ZGVkaXJ9IFwNCj4gPiArICAgICAgICAgICAgICAgICAgLS1vbGRpbmNsdWRlZGly
-PSR7b2xkaW5jbHVkZWRpcn0gXA0KPiA+ICsgICAgICAgICAgICAgICAgICAtLWluZm9kaXI9JHtp
-bmZvZGlyfSBcDQo+ID4gKyAgICAgICAgICAgICAgICAgIC0tbWFuZGlyPSR7bWFuZGlyfSBcDQo+
-ID4gKyAgICAgICAgICAgICAgICAiDQo+ID4gKw0KPiA+ICtkb19jb25maWd1cmUoKSB7DQo+ID4g
-KyAgICBxZW11X2JpbmFyeT0iJHtAcWVtdV90YXJnZXRfYmluYXJ5KGQpfSINCj4gPiArICAgIGlm
-IFsgJHtxZW11X2JpbmFyeX0gPT0gInFlbXUtYWxsYXJjaCIgXTsgdGhlbg0KPiA+ICsgICAgICAg
-IHFlbXVfYmluYXJ5PSJxZW11d3JhcHBlciINCj4gPiArICAgIGZpDQo+ID4gKw0KPiA+ICsgICAg
-bGliZGlyX3FlbXU9IiR7U1RBR0lOR19ESVJfSE9TVH0vJHtsaWJkaXJ9Ig0KPiA+ICsgICAgYmFz
-ZV9saWJkaXJfcWVtdT0iJHtTVEFHSU5HX0RJUl9IT1NUfS8ke2Jhc2VfbGliZGlyfSINCj4gPiAr
-ICAgIG9sZGVzdF9rZXJuZWxfcWVtdT0ke09MREVTVF9LRVJORUx9DQo+ID4gKw0KPiA+ICsgICAg
-Q1JPU1NfRVhFQz0iJHtxZW11X2JpbmFyeX0gXA0KPiA+ICsgICAgICAgICAgICAgICAgLXIgJHtv
-bGRlc3Rfa2VybmVsX3FlbXV9IFwNCj4gPiArICAgICAgICAgICAgICAgIC1MICR7U1RBR0lOR19E
-SVJfSE9TVH0gXA0KPiA+ICsgICAgICAgICAgICAgICAgLUUgTERfTElCUkFSWV9QQVRIPSR7bGli
-ZGlyX3FlbXV9OiR7YmFzZV9saWJkaXJfcWVtdX0iDQo+ID4gKw0KPiA+ICsgICAgZXhwb3J0IEJV
-SUxEX1NZUz0ke0JVSUxEX1NZU30NCj4gPiArICAgIGV4cG9ydCBIT1NUX1NZUz0ke0hPU1RfU1lT
-fQ0KPiA+ICsgICAgZXhwb3J0IEJVSUxEX0FSQ0g9JHtCVUlMRF9BUkNIfQ0KPiA+ICsgICAgZXhw
-b3J0IEhPU1RfQVJDSD0ke0hPU1RfQVJDSH0NCj4gPiArICAgIGV4cG9ydCBTVEFHSU5HX0xJQkRJ
-Uj0ke1NUQUdJTkdfTElCRElSfQ0KPiA+ICsgICAgZXhwb3J0IFNUQUdJTkdfSU5DRElSPSR7U1RB
-R0lOR19JTkNESVJ9DQo+ID4gKyAgICBleHBvcnQgUFlUSE9OUEFUSD0ke1NUQUdJTkdfRElSX0hP
-U1R9JHtQWVRIT05fU0lURVBBQ0tBR0VTX0RJUn0NCj4gPiArDQo+ID4gKyAgICAuL2NvbmZpZ3Vy
-ZSAke0NPTkZJR1VSRU9QVFN9ICR7RVhUUkFfT0VDT05GfSAtLWNyb3NzLWNvbXBpbGUNCj4gPiAt
-LWNyb3NzLWV4ZWN1dGU9IiR7Q1JPU1NfRVhFQ30iICt9DQo+ID4gKw0KPiA+ICtkb19jb21waWxl
-ICgpIHsNCj4gPiArICAgIGJhc2VfZG9fY29tcGlsZQ0KPiA+ICt9DQo+IA0KPiBJcyB0aGlzIGRv
-X2NvbXBpbGUgcmVhbGx5IG5lZWRlZD8gQUZBSUNUIHRoaXMgaXNuJ3QgZG9pbmcgYW55dGhpbmcg
-YmVjYXVzZQ0KPiBiYXNlX2RvX2NvbXBpbGUgd2lsbCBhbHJlYWR5IGJlIGJlaW5nIHJ1biBieSB3
-YXkgb2YgRVhQT1JUX0ZVTkNUSU9OUy4NCj4gDQoNClllcywgaXQncyByaWdodCwgSSB3aWxsIHJl
-bW92ZSBpdCBpbiB0aGUgVjIgcGF0Y2guDQoNClRoYW5rcw0KIEJpYW4NCg0KPiBDaGVlcnMsDQo+
-IFBhdWwNCj4gDQo+IC0tDQo+IA0KPiBQYXVsIEVnZ2xldG9uDQo+IEludGVsIE9wZW4gU291cmNl
-IFRlY2hub2xvZ3kgQ2VudHJlDQo=
+On Mon, Jun 15, 2015 at 4:44 PM, Alexander Kanavin
+<alexander.kanavin@linux.intel.com> wrote:
+> On 06/15/2015 05:24 PM, Burton, Ross wrote:
+>
+>> If you actually compare the build dependencies, you'll see that Midori
+>> and Epiphany are actually almost identical.
+>>
+>> We need to upgrade WebKit as the release we're shipping has known
+>> security flaws and is very old - and the community is rightly moaning
+>> about that.  However Midori doesn't build with a recent WebKit... if you
+>> have an alternative solution then your thoughts are welcome.
+>
+>
+> Also, Webkit2 itself ships with a tiny browser wrapper called MiniBrowser:
+>
+> http://blogs.igalia.com/carlosgc/2011/11/04/webkit2-gtk-minibrowser-ported-to-gtk-api/
+>
+> That may be enough for many people's needs, and they can simply not include
+> Epiphany into their images if it's too big and bloated or whatever.
+>
+>
+How about doing same as others do e.g fedora [1-2]: Keep two version
+of webkit-gtk based on same recent code:
+
+* gtk2/webkit1
+* gtk3/webkit2
+
+Andreas
+
+[1] http://pkgs.fedoraproject.org/cgit/webkitgtk.git/tree/webkitgtk.spec
+[2] http://pkgs.fedoraproject.org/cgit/webkitgtk3.git/tree/webkitgtk3.spec
 
