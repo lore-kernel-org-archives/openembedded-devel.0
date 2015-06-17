@@ -1,31 +1,29 @@
-Return-Path: <matti.kaasinen@gmail.com>
-Received: from mail-ie0-f177.google.com (mail-ie0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 55B9072491
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 36C4572491
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 07:49:38 +0000 (UTC)
-Received: by iesa3 with SMTP id a3so28651997ies.2
+	Wed, 17 Jun 2015 07:58:04 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97190613"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 17 Jun 2015 16:02:15 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5H7uTCF016488
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 00:49:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=QmK8vA6buewXATmyoziM3QeMz88jWtXHWuBJBtkW908=;
-	b=IRHRoQYrHcZwJ3TKVFEutG4zvOGfzY+2ctVp8zBPkNwzfh+jHITLDuhEocU1QVOQJo
-	/gc9/qfreKW8pzF8NgeJpMjC80+SwYQcL6MTX+gGKM0VAYvI51p5EjMJuWKzwY2z9S3h
-	8BzQ808sa3SRt8Z6N8swTNWEhhH60LxW2ZKhICx6gQWs2k1hyogz3IIa/ueCPAJ6wk4Y
-	9/BKSIQBX4Myvez/PfZJ6YG7UmwWyaKtu/UShaBpC6jyCESwDlE2wC/Z5yfD+yk2S+rG
-	2xIKGeJyuZfcvxLd2SYHwKHFMEItxse0DM/egl/UQN34Vrhrr1SNXIPz+5UTHl60cX0p
-	pUYQ==
+	Wed, 17 Jun 2015 15:56:29 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 17 Jun 2015 15:58:18 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Jun 2015 15:49:07 +0800
+Message-ID: <1434527353-47017-2-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
+References: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Received: by 10.50.132.3 with SMTP id oq3mr8746958igb.21.1434527379832; Wed,
-	17 Jun 2015 00:49:39 -0700 (PDT)
-Received: by 10.36.1.197 with HTTP; Wed, 17 Jun 2015 00:49:39 -0700 (PDT)
-Date: Wed, 17 Jun 2015 10:49:39 +0300
-Message-ID: <CADnUhn0tx=iLncmcAXGNcRwtO=A5xZ_YaA0-2aZVoTGY0PBKvQ@mail.gmail.com>
-From: matti kaasinen <matti.kaasinen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: daemontools
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-oe][PATCH v2 1/7] waf-samba: add new class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,34 +37,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 07:49:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Jun 2015 07:58:05 -0000
+Content-Type: text/plain
 
-Hi!
-As Arago distribution does not support systemd or upstart (which is kind of
-dying), I'm looking for other decent service manager. I found daemontools
-from openembedded/fido branch. It bakes fine. I would have few comments
-regarding daemontools (svscanboot) starter  script and daemontools install
-package.
+waf-samba is a build system used by samba related software
 
-Daemontools tend to install it's own commands to /command folder. However,
-daemontools_0.76.bb does not install /command folder and instead, installs
-binaries to Linux standard place ${D}/${bindir}. Also standard position for
-daemontools service scripts is /service folder that is not installed at
-all. I'm not sure how much daemontools commands rely on these standard
-positions, but at least this svscanboot seems unpatched having these
-default folders.
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ meta-oe/classes/waf-samba.bbclass | 51 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 51 insertions(+)
+ create mode 100644 meta-oe/classes/waf-samba.bbclass
 
-So, at least /command should be removed from svscanboot script:
-/command/svc -dx /service/* /service/*/log
-=>
-svc -dx /service/* /service/*/log
+diff --git a/meta-oe/classes/waf-samba.bbclass b/meta-oe/classes/waf-samba.bbclass
+new file mode 100644
+index 0000000..23c5556
+--- /dev/null
++++ b/meta-oe/classes/waf-samba.bbclass
+@@ -0,0 +1,51 @@
++# waf is a build system which is used by samba related project.
++# Obtain details from https://wiki.samba.org/index.php/Waf
++# 
++inherit qemu pythonnative
++
++DEPENDS += "qemu-native libxslt-native docbook-xsl-stylesheets-native python"
++
++CONFIGUREOPTS = " --prefix=${prefix} \
++                  --bindir=${bindir} \
++                  --sbindir=${sbindir} \
++                  --libexecdir=${libexecdir} \
++                  --datadir=${datadir} \
++                  --sysconfdir=${sysconfdir} \
++                  --sharedstatedir=${sharedstatedir} \
++                  --localstatedir=${localstatedir} \
++                  --libdir=${libdir} \
++                  --includedir=${includedir} \
++                  --oldincludedir=${oldincludedir} \
++                  --infodir=${infodir} \
++                  --mandir=${mandir} \
++                "
++
++do_configure() {
++    qemu_binary="${@qemu_target_binary(d)}"
++    if [ ${qemu_binary} == "qemu-allarch" ]; then
++        qemu_binary="qemuwrapper"
++    fi
++
++    libdir_qemu="${STAGING_DIR_HOST}/${libdir}"
++    base_libdir_qemu="${STAGING_DIR_HOST}/${base_libdir}"
++    oldest_kernel_qemu=${OLDEST_KERNEL}
++
++    CROSS_EXEC="${qemu_binary} \
++                -r ${oldest_kernel_qemu} \
++                -L ${STAGING_DIR_HOST} \
++                -E LD_LIBRARY_PATH=${libdir_qemu}:${base_libdir_qemu}"
++
++    export BUILD_SYS=${BUILD_SYS}
++    export HOST_SYS=${HOST_SYS}
++    export BUILD_ARCH=${BUILD_ARCH}
++    export HOST_ARCH=${HOST_ARCH}
++    export STAGING_LIBDIR=${STAGING_LIBDIR}
++    export STAGING_INCDIR=${STAGING_INCDIR}
++    export PYTHONPATH=${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR}
++
++    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF} --cross-compile --cross-execute="${CROSS_EXEC}"
++}
++
++do_install() {
++    oe_runmake install DESTDIR=${D}
++}
+-- 
+1.9.1
 
-Also I suppose service directory should also be installed somewhere. For
-instance /etc/service (Ubuntu way) or /service to make things compatible
-with examples or perhaps /etc/daemontools.
-
-In any case, I'll try patching this on my own layer to check out if there
-are built in dependencies.
--Matti
 
