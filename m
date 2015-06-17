@@ -1,38 +1,40 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
-	[209.85.220.54])
-	by mail.openembedded.org (Postfix) with ESMTP id AA70874056
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
+	[209.85.212.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 43012758F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 20:23:18 +0000 (UTC)
-Received: by pacyx8 with SMTP id yx8so43969598pac.2
+	Wed, 17 Jun 2015 20:36:16 +0000 (UTC)
+Received: by wiwd19 with SMTP id d19so3403864wiw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 13:23:20 -0700 (PDT)
+	Wed, 17 Jun 2015 13:36:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:cc:content-type;
-	bh=X7cjnDht++zheGDnhbp6mC7RauETiy+xXVCwDA5s15o=;
-	b=nF/6RZq3nw3dEEIvcd8EopWjxKaXiETfxgrGpd7ZGyLH7nFPDr/Hr+wWGGIcPIlhrI
-	PMg5GZaMJ/3YqaP43xmi+2nfhnHmXxex45LSmWlH7JCtVnwY9N4kfdK+e2VEJdO6ti1y
-	sj5+2TqnLCM9VYIp2P7r+s5J56HBCAbGmfKUxTYLsqYUJajxZL9xiEGfWRS4xXGW2Wkb
-	Jukf+pwjqeIl4y2QFLVScVGY6olq8S8Ot66q2GqZptF9dl0MVe4Ma2f6TEh9n/2L2h5L
-	Z9vC9wyTwah7G638hLQBCbnFBp1GHoP9tPJxuFdDIX58S/qQHbarf3eR0u4oqaQGvjJG
-	9kvw==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=y7EYwvRrYh5Il3wwunkziPhS6YQsTmQpYD58eszRRz0=;
+	b=jYM2zcOueynSYtX9zMyqihcap9xpq9eRF7xsYWt4jKosEXUOAp8Cw8mNfXF9YZ9X2y
+	ZeaKkyLm8LiGF04GS95nlqv45tmFyVUSjy/o4SxGVDe45ME3BeBPK0Lf4iTyMCAns0yY
+	rSqpevpwqNMl92aCLKcSa+v9KPdYr56yuNTJ/iHBFEWzaueZMVMa17dSpKm4a/L7mG5G
+	9cB+6+u43ajcsaqojLVN1U1Ja4lskPDAgVuVWRHokL/wqJdh6dmAhF/Ej2aC92th5xID
+	MXv61klWcjTRJhyjQph1UzSbDh9PEFtOCN5NLjHIa5l9ea2egIrm2x01JE5jCfBi/cCc
+	Lwjg==
+X-Received: by 10.180.108.142 with SMTP id hk14mr21095168wib.5.1434573377590; 
+	Wed, 17 Jun 2015 13:36:17 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id k2sm9487860wif.3.2015.06.17.13.36.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 17 Jun 2015 13:36:16 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 17 Jun 2015 22:36:32 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20150617203632.GA2390@jama>
+References: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
+	<1434527353-47017-8-git-send-email-biannm@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Received: by 10.68.108.65 with SMTP id hi1mr14132504pbb.129.1434572600306;
-	Wed, 17 Jun 2015 13:23:20 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.70.34.109 with HTTP; Wed, 17 Jun 2015 13:23:20 -0700 (PDT)
-In-Reply-To: <1434572301.2944.16.camel@Saturn.local.all>
-References: <CALbNGRSo5g0ndeQTmrKYppX6g6-KTB2CrnDjJCs=d84PxnpQPQ@mail.gmail.com>
-	<55818938.3090405@mlbassoc.com>
-	<1434572301.2944.16.camel@Saturn.local.all>
-Date: Wed, 17 Jun 2015 17:23:20 -0300
-X-Google-Sender-Auth: KOKzjbzapCzVjcjV63L5fLxHbTs
-Message-ID: <CAP9ODKpE1AAOQoFNk6StdHGpvtJrzOoVX-3xju7c-wzD602WkQ@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: Re: [meta-browser] firefox not working for me (only)
+In-Reply-To: <1434527353-47017-8-git-send-email-biannm@cn.fujitsu.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH v2 7/7] samba: upgrade to 4.1.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,64 +48,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 20:23:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Jun 2015 20:36:19 -0000
+X-Groupsio-MsgNum: 55955
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="W/nzBZO5zC0uMSeA"
+Content-Disposition: inline
 
-On Wed, Jun 17, 2015 at 5:18 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
->> > * firefox fails with illeagal ARM instruction
->
-> That sounds familiar, I thought then that it was specific to our setup
-> with the binary Tegra X driver and the armv7a without neon setup, that's
-> why I did not upstream my patches.
->
->> > On Wed, Jun 17, 2015 at 3:32 PM, Gary Thomas <gary@mlbassoc.com> wrote:
->> >>> Hmm - I was wondering why nobody took care.
->> >>>
->> >>> All my plattforms fail:
->> >>> * i.MX6 base
->> >>> * gumstix
->> >>> * raspberry Pi2
->> >>>
->> >>> I'll put this browser issue on my TODO currently I have no further
->> >>> time to take care.
->> >>
->> >>
->> >> BTW, I just tested both chromium and firefox on the i.MX6Q and RPi2
->> >> and they worked just fine.  Built from meta-browser:0cc0419a
->> >>
->> > Thanks for information. Let's focus on firefox's illegal ARM
->> > instruction crasher:
->> >
->> > * Last time I felt the only one facing a specific error it was caused
->> > by angstrom enabling thumb(2) for ARM (long story @meta-fsl-arm).
->> > Gary: I assume, you don't have thumb enabled - right?
->> > * firefox doesn't crash with "--safe-mode"
->>
->> I am not using thumb - off the shelf configurations for RaspberryPi2 and
->> BoundaryDevices nitrogen6x built with $DISTRO=poky are the ones I've tested.
->>
-> Actually I use Angstrom with the instruction set defaulting to ARM.
->
->> >
->> > Looking into meta-browser I saw that firefox pins ARM_INSTRUCTION_SET
->> > = "arm" but firefox-l10n does not. When having some time left over
->> > (=never) I will test with thumb disabled for firefox-l10n and
->> > chromium.
->> >
->> > Andreas
->
-> Have a look at
-> http://git.toradex.com/cgit/meta-toradex.git/tree/recipes-mozilla/firefox?h=V2.4-next
->
-> alignment.patch,
-> Prevent-SIGILL-crashes-on-ARMv6-builds-built-with-the-NDK_10.0esr.patch .
->
-> If usefull I could send a patch for meta-browser.
+--W/nzBZO5zC0uMSeA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-An upgraded version would be awesome :-)
+On Wed, Jun 17, 2015 at 03:49:13PM +0800, Bian Naimeng wrote:
+> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+>=20
+> git send-email will catch error as below
+>  fatal: 0002-samba-upgrade-to-4.1.12.patch: 965: patch contains a line lo=
+nger than 998 characters
+>=20
+> So, please get patch from
+> https://github.com/bendaaron/meta-oe-dev/commit/47678ed346a1ce347a64705c7=
+6df09d4fa537b0e
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+I've cherry-picked first 6 patches from here, but this last one fails to
+apply, because you're removing samba 3.6.24, but in master we have 3.6.25
+since this commit merged more than month ago:
 
+commit 9ac5713b2fcb5ce03693edd40636d8fce3e014d0
+Author:     Roy Li <rongqing.li@windriver.com>
+AuthorDate: Wed Apr 29 17:25:02 2015 +0800
+Commit:     Martin Jansa <Martin.Jansa@gmail.com>
+CommitDate: Mon May 11 10:27:28 2015 +0200
+
+    samba: upgrade to 3.6.25
+
+Also this patch only removes 3.6.24, but doesn't add 4.1.12.
+
+Please rebase to latest master and fix the last commit.
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--W/nzBZO5zC0uMSeA
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlWB2k8ACgkQN1Ujt2V2gBzZ/ACgkPgaKhzdbMyEoYFW0c0JZ2zo
+LJUAoLdFfOIF5VxsMt7bOYLzdfcobofp
+=YJxf
+-----END PGP SIGNATURE-----
+
+--W/nzBZO5zC0uMSeA--
