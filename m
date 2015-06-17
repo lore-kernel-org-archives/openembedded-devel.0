@@ -1,30 +1,36 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id C543F606BF
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-pa0-f46.google.com (mail-pa0-f46.google.com
+	[209.85.220.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 221BD757CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 14:50:12 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id BCA2DF811E3; Wed, 17 Jun 2015 08:50:13 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from [192.168.1.114] (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 35639F811D8;
-	Wed, 17 Jun 2015 08:50:12 -0600 (MDT)
-Message-ID: <55818938.3090405@mlbassoc.com>
-Date: Wed, 17 Jun 2015 08:50:32 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+	Wed, 17 Jun 2015 15:02:50 +0000 (UTC)
+Received: by pacyx8 with SMTP id yx8so37961995pac.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Jun 2015 08:02:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=Ylp3dZMuPggF6Uk+YZfUiqw6fZjP0BOssFYSX6oTvEU=;
+	b=NtWxTzisBmm7cAlkMTYcEnbYQ7AptzvJ8c9lTTmEOA5gKNi56nbOqAHKsj0fgGgY9c
+	Pqo8UNDToYUJWf7Ku8llNJ73g23BaU77oYPIAcS2Wa2D4EbiGB+pH1sl0Rl28OyI/TL1
+	6JyIz+31FYKXlNh1/bTlxQ4cmL1ymJE9aU5tv/oGkNEM/QNuIJHjrZGCheEvDmjYFElV
+	zA7wW1eV72ahvCTuwrBNbEvXAc5ghnIRhSWJqIia+9i9/L0KXdZ4TxU+uq996TvxsErz
+	qDPuDoCQPqtWlyYHfik5ewIXIQ0q34/zIDq9Prkg8+oQ8m9PnR3SLS9ZXWv1WF002AoR
+	KIEQ==
 MIME-Version: 1.0
-To: =?UTF-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@googlemail.com>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <CALbNGRSo5g0ndeQTmrKYppX6g6-KTB2CrnDjJCs=d84PxnpQPQ@mail.gmail.com>
-In-Reply-To: <CALbNGRSo5g0ndeQTmrKYppX6g6-KTB2CrnDjJCs=d84PxnpQPQ@mail.gmail.com>
-Subject: Re: [meta-browser] firefox not working for me (only)
+X-Received: by 10.68.225.97 with SMTP id rj1mr11993662pbc.108.1434553372087;
+	Wed, 17 Jun 2015 08:02:52 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.70.34.109 with HTTP; Wed, 17 Jun 2015 08:02:52 -0700 (PDT)
+In-Reply-To: <1434486209-463-1-git-send-email-gary@mlbassoc.com>
+References: <1434486209-463-1-git-send-email-gary@mlbassoc.com>
+Date: Wed, 17 Jun 2015 12:02:52 -0300
+X-Google-Sender-Auth: TwJ8lJzHxnaZKBYFYsx71vbqM8I
+Message-ID: <CAP9ODKqL8mN7vhZRqp7dm1XTP5vsKEqLKhUe82Ms6T8ygym2kQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: Re: [meta-browser][PATCH] chromium: Fix potential configuration issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,62 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 14:50:14 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 17 Jun 2015 15:02:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 2015-06-17 08:36, Andreas Müller wrote:
-> Hi Gary,
+On Tue, Jun 16, 2015 at 5:23 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> This recipe should be using the python interpreter as built by bitbake,
+> rather than relying on the host python.  In some cases, the host python
+> may be incomplete or just plain old, yielding errors during the configure
+> step such as:
+>   |     from sgmllib import SGMLParser, SGMLParseError
+>   | ImportError: No module named sgmllib
+>   | ninja: build stopped: subcommand failed.
 >
-> Turned off-topic so I opened a new thread. For those who missed the
-> old thread [1] in short:
+> Adding 'inherit pythonnative' solves this problem on all build hosts.
 >
-> for me
->
-> * firefox fails with illeagal ARM instruction
-> * chromium fails during start - details I can't reproduce currently
->
->
-> On Wed, Jun 17, 2015 at 3:32 PM, Gary Thomas <gary@mlbassoc.com> wrote:
->>> Hmm - I was wondering why nobody took care.
->>>
->>> All my plattforms fail:
->>> * i.MX6 base
->>> * gumstix
->>> * raspberry Pi2
->>>
->>> I'll put this browser issue on my TODO currently I have no further
->>> time to take care.
->>
->>
->> BTW, I just tested both chromium and firefox on the i.MX6Q and RPi2
->> and they worked just fine.  Built from meta-browser:0cc0419a
->>
-> Thanks for information. Let's focus on firefox's illegal ARM
-> instruction crasher:
->
-> * Last time I felt the only one facing a specific error it was caused
-> by angstrom enabling thumb(2) for ARM (long story @meta-fsl-arm).
-> Gary: I assume, you don't have thumb enabled - right?
-> * firefox doesn't crash with "--safe-mode"
+> Signed-off-by: Gary Thomas <gary@mlbassoc.com>
 
-I am not using thumb - off the shelf configurations for RaspberryPi2 and
-BoundaryDevices nitrogen6x built with $DISTRO=poky are the ones I've tested.
+Applied to master; thanks.
 
->
-> Looking into meta-browser I saw that firefox pins ARM_INSTRUCTION_SET
-> = "arm" but firefox-l10n does not. When having some time left over
-> (=never) I will test with thumb disabled for firefox-l10n and
-> chromium.
->
-> Andreas
->
-> [1] http://lists.openembedded.org/pipermail/openembedded-core/2015-June/106229.html
->
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
