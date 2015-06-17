@@ -1,36 +1,24 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FA3D6AC1E
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 490496AC1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 01:13:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97170770"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Jun 2015 09:17:47 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5H1C19f021838
+	Wed, 17 Jun 2015 03:10:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5H3Aabn019631
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 09:12:02 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0181.006; Wed, 17 Jun 2015 09:13:41 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH 6/7] libtdb: add new recipe
-Thread-Index: AQHQp0nYQCZkpgxE1U6KXCCciNuw3J2ufuGAgAFiMcA=
-Date: Wed, 17 Jun 2015 01:13:40 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73E0FAEF@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1434358336-34981-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434358336-34981-7-git-send-email-biannm@cn.fujitsu.com>
-	<20150616114421.GA2395@jama>
-In-Reply-To: <20150616114421.GA2395@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+	Tue, 16 Jun 2015 20:10:36 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Tue, 16 Jun 2015 20:10:36 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Jun 2015 11:03:29 +0800
+Message-ID: <1434510209-22324-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH 6/7] libtdb: add new recipe
+Subject: [PATCH][v2] squid: upgrade to 3.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,186 +32,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 01:13:39 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 17 Jun 2015 03:10:38 -0000
+Content-Type: text/plain
 
-VGhhbmtzIGZvciB5b3VyIHRlc3QuDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4g
-RnJvbTogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0K
-PiBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmddIE9uIEJlaGFsZiBPZg0KPiBNYXJ0aW4gSmFuc2ENCj4gU2VudDogVHVlc2RheSwgSnVuZSAx
-NiwgMjAxNSA3OjQ0IFBNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
-ZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0ggNi83XSBsaWJ0ZGI6
-IGFkZCBuZXcgcmVjaXBlDQo+IA0KPiBPbiBNb24sIEp1biAxNSwgMjAxNSBhdCAwNDo1MjoxNVBN
-ICswODAwLCBCaWFuIE5haW1lbmcgd3JvdGU6DQo+ID4gbGlidGRiIGlzIHJlcXVpcmVkIGJ5IHNh
-bWJhNA0KPiANCj4gSXQgY29uZmxpY3RzIHdpdGggc2FtYmEzLCBzaG91bGQgd2UganVzdCByZXBs
-YWNlIHNhbWJhXzMqIHdpdGggc2FtYmFfND8NCj4gDQoNClJlcGxhY2luZyBzYW1iYV8zKiB3aXRo
-IHNhbWJhXzQgaXMgZ29vZCB0byBtZS4NCg0KVGhhbmtzDQogQmlhbg0KDQo+IE5PVEU6IHJlY2lw
-ZSBsaWJ0ZGItMS4zLjAtcjA6IHRhc2sgZG9fcG9wdWxhdGVfc3lzcm9vdDogU3RhcnRlZA0KPiBF
-UlJPUjogVGhlIHJlY2lwZSBsaWJ0ZGIgaXMgdHJ5aW5nIHRvIGluc3RhbGwgZmlsZXMgaW50byBh
-IHNoYXJlZCBhcmVhIHdoZW4NCj4gdGhvc2UgZmlsZXMgYWxyZWFkeSBleGlzdC4gVGhvc2UgZmls
-ZXMgYW5kIHRoZWlyIG1hbmlmZXN0IGxvY2F0aW9uIGFyZToNCj4gDQo+IC9ob21lL2plbmtpbnMv
-b2Uvd29ybGQvc2hyLWNvcmUvdG1wLWdsaWJjL3N5c3Jvb3RzL3FlbXVhcm0vcGtnZGF0YS9ydW50
-aW1lDQo+IC1ycHJvdmlkZXMvbGlidGRiL2xpYnRkYg0KPiAgTWF0Y2hlZCBpbiBtYW5pZmVzdC1x
-ZW11YXJtLXNhbWJhLnBhY2thZ2VkYXRhDQo+IA0KPiAvaG9tZS9qZW5raW5zL29lL3dvcmxkL3No
-ci1jb3JlL3RtcC1nbGliYy9zeXNyb290cy9xZW11YXJtL3BrZ2RhdGEvcnVudGltZQ0KPiAtcmV2
-ZXJzZS9saWJ0ZGIxDQo+ICBNYXRjaGVkIGluIG1hbmlmZXN0LXFlbXVhcm0tc2FtYmEucGFja2Fn
-ZWRhdGENCj4gDQo+IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNvcmUvdG1wLWdsaWJjL3N5
-c3Jvb3RzL3FlbXVhcm0vcGtnZGF0YS9ydW50aW1lDQo+IC9saWJ0ZGIucGFja2FnZWQNCj4gIE1h
-dGNoZWQgaW4gbWFuaWZlc3QtcWVtdWFybS1zYW1iYS5wYWNrYWdlZGF0YQ0KPiANCj4gL2hvbWUv
-amVua2lucy9vZS93b3JsZC9zaHItY29yZS90bXAtZ2xpYmMvc3lzcm9vdHMvcWVtdWFybS9wa2dk
-YXRhL3J1bnRpbWUNCj4gL2xpYnRkYg0KPiAgTWF0Y2hlZCBpbiBtYW5pZmVzdC1xZW11YXJtLXNh
-bWJhLnBhY2thZ2VkYXRhDQo+IA0KPiAvaG9tZS9qZW5raW5zL29lL3dvcmxkL3Noci1jb3JlL3Rt
-cC1nbGliYy9zeXNyb290cy9xZW11YXJtL3BrZ2RhdGEvc2hsaWJzMg0KPiAvbGlidGRiLmxpc3QN
-Cj4gIE1hdGNoZWQgaW4gbWFuaWZlc3QtcWVtdWFybS1zYW1iYS5wYWNrYWdlZGF0YQ0KPiBQbGVh
-c2UgdmVyaWZ5IHdoaWNoIHJlY2lwZSBzaG91bGQgcHJvdmlkZSB0aGUgYWJvdmUgZmlsZXMuDQo+
-IFRoZSBidWlsZCBoYXMgc3RvcHBlZCBhcyBjb250aW51aW5nIGluIHRoaXMgc2NlbmFyaW8gV0lM
-TCBicmVhayB0aGluZ3MsIGlmIG5vdA0KPiBub3csIHBvc3NpYmx5IGluIHRoZSBmdXR1cmUgKHdl
-J3ZlIHNlZW4gYnVpbGRzIGZhaWwgc2V2ZXJhbCBtb250aHMgbGF0ZXIpLiBJZg0KPiB0aGUgc3lz
-dGVtIGtuZXcgaG93IHRvIHJlY292ZXIgZnJvbSB0aGlzIGF1dG9tYXRpY2FsbHkgaXQgd291bGQg
-aG93ZXZlciB0aGVyZQ0KPiBhcmUgc2V2ZXJhbCBkaWZmZXJlbnQgc2NlbmFyaW9zIHdoaWNoIGNh
-biByZXN1bHQgaW4gdGhpcyBhbmQgd2UgZG9uJ3Qga25vdyB3aGljaA0KPiBvbmUgdGhpcyBpcy4g
-SXQgbWF5IGJlIHlvdSBoYXZlIHN3aXRjaGVkIHByb3ZpZGVycyBvZiBzb21ldGhpbmcgbGlrZQ0K
-PiB2aXJ0dWFsL2tlcm5lbCAoZS5nLiBmcm9tIGxpbnV4LXlvY3RvIHRvIGxpbnV4LXlvY3RvLWRl
-diksIGluIHRoYXQgY2FzZSB5b3UNCj4gbmVlZCB0byBleGVjdXRlIHRoZSBjbGVhbiB0YXNrIGZv
-ciBib3RoIHJlY2lwZXMgYW5kIGl0IHdpbGwgcmVzb2x2ZSB0aGlzIGVycm9yLg0KPiBJdCBtYXkg
-YmUgeW91IGNoYW5nZWQgRElTVFJPX0ZFQVRVUkVTIGZyb20gc3lzdGVtZCB0byB1ZGV2IG9yIHZp
-Y2UgdmVyc2EuDQo+IENsZWFuaW5nIHRob3NlIHJlY2lwZXMgc2hvdWxkIGFnYWluIHJlc29sdmUg
-dGhpcyBlcnJvciBob3dldmVyIHN3aXRjaGluZw0KPiBESVNUUk9fRkVBVFVSRVMgb24gYW4gZXhp
-c3RpbmcgYnVpbGQgZGlyZWN0b3J5IGlzIG5vdCBzdXBwb3J0ZWQsIHlvdSBzaG91bGQNCj4gcmVh
-bGx5IGNsZWFuIG91dCB0bXAgYW5kIHJlYnVpbGQgKHJldXNpbmcgc3N0YXRlIHNob3VsZCBiZSBz
-YWZlKS4gSXQgY291bGQgYmUNCj4gdGhlIG92ZXJsYXBwaW5nIGZpbGVzIGRldGVjdGVkIGFyZSBo
-YXJtbGVzcyBpbiB3aGljaCBjYXNlIGFkZGluZyB0aGVtIHRvDQo+IFNTVEFURV9EVVBXSElURUxJ
-U1QgbWF5IGJlIHRoZSBjb3JyZWN0IHNvbHV0aW9uLiBJdCBjb3VsZCBhbHNvIGJlIHlvdXIgYnVp
-bA0KPiBkIGlzIGluY2x1ZGluZyB0d28gZGlmZmVyZW50IGNvbmZsaWN0aW5nIHZlcnNpb25zIG9m
-IHRoaW5ncyAoZS5nLiBibHVleiA0IGFuZA0KPiBibHVleiA1IGFuZCB0aGUgY29ycmVjdCBzb2x1
-dGlvbiBmb3IgdGhhdCB3b3VsZCBiZSB0byByZXNvbHZlIHRoZSBjb25mbGljdC4NCj4gSWYgaW4g
-ZG91YnQsIHBsZWFzZSBhc2sgb24gdGhlIG1haWxpbmcgbGlzdCwgc2hhcmluZyB0aGUgZXJyb3Ig
-YW5kIGZpbGVsaXN0DQo+IGFib3ZlLg0KPiBFUlJPUjogSWYgdGhlIGFib3ZlIG1lc3NhZ2UgaXMg
-dG9vIG11Y2gsIHRoZSBzaW1wbGVyIHZlcnNpb24gaXMgeW91J3JlIGFkdmlzZWQNCj4gdG8gd2lw
-ZSBvdXQgdG1wIGFuZCByZWJ1aWxkIChyZXVzaW5nIHNzdGF0ZSBpcyBmaW5lKS4gVGhhdCB3aWxs
-IGxpa2VseSBmaXggdGhpbmdzDQo+IGluIG1vc3QgKGJ1dCBub3QgYWxsKSBjYXNlcy4NCj4gRVJS
-T1I6IEZ1bmN0aW9uIGZhaWxlZDogc3N0YXRlX3Rhc2tfcG9zdGZ1bmMNCj4gRVJST1I6IExvZ2Zp
-bGUgb2YgZmFpbHVyZSBzdG9yZWQgaW46DQo+IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNv
-cmUvdG1wLWdsaWJjL3dvcmsvYXJtdjV0ZS1vZS1saW51eC1nbnVlYWJpL2xpDQo+IGJ0ZGIvMS4z
-LjAtcjAvdGVtcC9sb2cuZG9fcGFja2FnZWRhdGEuMjc2MDgNCj4gTk9URTogcmVjaXBlIGxpYnRk
-Yi0xLjMuMC1yMDogdGFzayBkb19wYWNrYWdlZGF0YTogRmFpbGVkDQo+IEVSUk9SOiBUYXNrIDI3
-NzM0DQo+ICgvaG9tZS9qZW5raW5zL29lL3dvcmxkL3Noci1jb3JlL21ldGEtb3BlbmVtYmVkZGVk
-L21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0DQo+IC9saWJ0ZGIvbGlidGRiXzEuMy4wLmJiLCBkb19w
-YWNrYWdlZGF0YSkgZmFpbGVkIHdpdGggZXhpdCBjb2RlICcxJw0KPiBOT1RFOiBSdW5uaW5nIHRh
-c2sgMjAzNDQgb2YgMzE5NzIgKElEOiAyNzY2MywNCj4gL2hvbWUvamVua2lucy9vZS93b3JsZC9z
-aHItY29yZS9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLWdub21lL3JlY2lwZXMtZ25vbWUNCj4gL2V2
-aW5jZS9ldmluY2VfMi4zMi4wLmJiLCBkb19wYWNrYWdlKQ0KPiBFUlJPUjogVGhlIHJlY2lwZSBs
-aWJ0ZGIgaXMgdHJ5aW5nIHRvIGluc3RhbGwgZmlsZXMgaW50byBhIHNoYXJlZCBhcmVhIHdoZW4N
-Cj4gdGhvc2UgZmlsZXMgYWxyZWFkeSBleGlzdC4gVGhvc2UgZmlsZXMgYW5kIHRoZWlyIG1hbmlm
-ZXN0IGxvY2F0aW9uIGFyZToNCj4gDQo+IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNvcmUv
-dG1wLWdsaWJjL3N5c3Jvb3RzL3FlbXVhcm0vdXNyL2xpYi9saWJ0ZGIuDQo+IHNvLjENCj4gIE1h
-dGNoZWQgaW4gbWFuaWZlc3QtcWVtdWFybS1zYW1iYS5wb3B1bGF0ZV9zeXNyb290DQo+IA0KPiAv
-aG9tZS9qZW5raW5zL29lL3dvcmxkL3Noci1jb3JlL3RtcC1nbGliYy9zeXNyb290cy9xZW11YXJt
-L3Vzci9saWIvbGlidGRiLg0KPiBzbw0KPiAgTWF0Y2hlZCBpbiBtYW5pZmVzdC1xZW11YXJtLXNh
-bWJhLnBvcHVsYXRlX3N5c3Jvb3QNCj4gDQo+IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNv
-cmUvdG1wLWdsaWJjL3N5c3Jvb3RzL3FlbXVhcm0vdXNyL2xpYi9wa2djb25mDQo+IGlnL3RkYi5w
-Yw0KPiAgTWF0Y2hlZCBpbiBtYW5pZmVzdC1xZW11YXJtLXNhbWJhLnBvcHVsYXRlX3N5c3Jvb3QN
-Cj4gDQo+IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNvcmUvdG1wLWdsaWJjL3N5c3Jvb3Rz
-L3FlbXVhcm0vdXNyL2luY2x1ZGUvdGRiDQo+IC5oDQo+ICBNYXRjaGVkIGluIG1hbmlmZXN0LXFl
-bXVhcm0tc2FtYmEucG9wdWxhdGVfc3lzcm9vdA0KPiBQbGVhc2UgdmVyaWZ5IHdoaWNoIHJlY2lw
-ZSBzaG91bGQgcHJvdmlkZSB0aGUgYWJvdmUgZmlsZXMuDQo+IFRoZSBidWlsZCBoYXMgc3RvcHBl
-ZCBhcyBjb250aW51aW5nIGluIHRoaXMgc2NlbmFyaW8gV0lMTCBicmVhayB0aGluZ3MsIGlmIG5v
-dA0KPiBub3csIHBvc3NpYmx5IGluIHRoZSBmdXR1cmUgKHdlJ3ZlIHNlZW4gYnVpbGRzIGZhaWwg
-c2V2ZXJhbCBtb250aHMgbGF0ZXIpLiBJZg0KPiB0aGUgc3lzdGVtIGtuZXcgaG93IHRvIHJlY292
-ZXIgZnJvbSB0aGlzIGF1dG9tYXRpY2FsbHkgaXQgd291bGQgaG93ZXZlciB0aGVyZQ0KPiBhcmUg
-c2V2ZXJhbCBkaWZmZXJlbnQgc2NlbmFyaW9zIHdoaWNoIGNhbiByZXN1bHQgaW4gdGhpcyBhbmQg
-d2UgZG9uJ3Qga25vdyB3aGljaA0KPiBvbmUgdGhpcyBpcy4gSXQgbWF5IGJlIHlvdSBoYXZlIHN3
-aXRjaGVkIHByb3ZpZGVycyBvZiBzb21ldGhpbmcgbGlrZQ0KPiB2aXJ0dWFsL2tlcm5lbCAoZS5n
-LiBmcm9tIGxpbnV4LXlvY3RvIHRvIGxpbnV4LXlvY3RvLWRldiksIGluIHRoYXQgY2FzZSB5b3UN
-Cj4gbmVlZCB0byBleGVjdXRlIHRoZSBjbGVhbiB0YXNrIGZvciBib3RoIHJlY2lwZXMgYW5kIGl0
-IHdpbGwgcmVzb2x2ZSB0aGlzIGVycm9yLg0KPiBJdCBtYXkgYmUgeW91IGNoYW5nZWQgRElTVFJP
-X0ZFQVRVUkVTIGZyb20gc3lzdGVtZCB0byB1ZGV2IG9yIHZpY2UgdmVyc2EuDQo+IENsZWFuaW5n
-IHRob3NlIHJlY2lwZXMgc2hvdWxkIGFnYWluIHJlc29sdmUgdGhpcyBlcnJvciBob3dldmVyIHN3
-aXRjaGluZw0KPiBESVNUUk9fRkVBVFVSRVMgb24gYW4gZXhpc3RpbmcgYnVpbGQgZGlyZWN0b3J5
-IGlzIG5vdCBzdXBwb3J0ZWQsIHlvdSBzaG91bGQNCj4gcmVhbGx5IGNsZWFuIG91dCB0bXAgYW5k
-IHJlYnVpbGQgKHJldXNpbmcgc3N0YXRlIHNob3VsZCBiZSBzYWZlKS4gSXQgY291bGQgYmUNCj4g
-dGhlIG92ZXJsYXBwaW5nIGZpbGVzIGRldGVjdGVkIGFyZSBoYXJtbGVzcyBpbiB3aGljaCBjYXNl
-IGFkZGluZyB0aGVtIHRvDQo+IFNTVEFURV9EVVBXSElURUxJU1QgbWF5IGJlIHRoZSBjb3JyZWN0
-IHNvbHV0aW9uLiBJdCBjb3VsZCBhbHNvIGJlIHlvdXIgYnVpbA0KPiBkIGlzIGluY2x1ZGluZyB0
-d28gZGlmZmVyZW50IGNvbmZsaWN0aW5nIHZlcnNpb25zIG9mIHRoaW5ncyAoZS5nLiBibHVleiA0
-IGFuZA0KPiBibHVleiA1IGFuZCB0aGUgY29ycmVjdCBzb2x1dGlvbiBmb3IgdGhhdCB3b3VsZCBi
-ZSB0byByZXNvbHZlIHRoZSBjb25mbGljdC4NCj4gSWYgaW4gZG91YnQsIHBsZWFzZSBhc2sgb24g
-dGhlIG1haWxpbmcgbGlzdCwgc2hhcmluZyB0aGUgZXJyb3IgYW5kIGZpbGVsaXN0DQo+IGFib3Zl
-Lg0KPiBFUlJPUjogSWYgdGhlIGFib3ZlIG1lc3NhZ2UgaXMgdG9vIG11Y2gsIHRoZSBzaW1wbGVy
-IHZlcnNpb24gaXMgeW91J3JlIGFkdmlzZWQNCj4gdG8gd2lwZSBvdXQgdG1wIGFuZCByZWJ1aWxk
-IChyZXVzaW5nIHNzdGF0ZSBpcyBmaW5lKS4gVGhhdCB3aWxsIGxpa2VseSBmaXggdGhpbmdzDQo+
-IGluIG1vc3QgKGJ1dCBub3QgYWxsKSBjYXNlcy4NCj4gRVJST1I6IEZ1bmN0aW9uIGZhaWxlZDog
-c3N0YXRlX3Rhc2tfcG9zdGZ1bmMNCj4gRVJST1I6IExvZ2ZpbGUgb2YgZmFpbHVyZSBzdG9yZWQg
-aW46DQo+IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNvcmUvdG1wLWdsaWJjL3dvcmsvYXJt
-djV0ZS1vZS1saW51eC1nbnVlYWJpL2xpDQo+IGJ0ZGIvMS4zLjAtcjAvdGVtcC9sb2cuZG9fcG9w
-dWxhdGVfc3lzcm9vdC4yNzY0Nw0KPiBOT1RFOiByZWNpcGUgbGlidGRiLTEuMy4wLXIwOiB0YXNr
-IGRvX3BvcHVsYXRlX3N5c3Jvb3Q6IEZhaWxlZA0KPiBFUlJPUjogVGFzayAyNzcyOQ0KPiAoL2hv
-bWUvamVua2lucy9vZS93b3JsZC9zaHItY29yZS9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLW9lL3Jl
-Y2lwZXMtc3VwcG9ydA0KPiAvbGlidGRiL2xpYnRkYl8xLjMuMC5iYiwgZG9fcG9wdWxhdGVfc3lz
-cm9vdCkgZmFpbGVkIHdpdGggZXhpdCBjb2RlICcxJw0KPiANCj4gPg0KPiA+IFNpZ25lZC1vZmYt
-Ynk6IEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAu
-Li4vbGlidGRiL2RvLW5vdC1jaGVjay14c2x0cHJvYy1tYW5wYWdlcy5wYXRjaCAgICB8IDE1ICsr
-KysrKysrKysrDQo+ID4gIG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYnRkYi9saWJ0ZGJfMS4z
-LjAuYmIgICAgIHwgMzANCj4gKysrKysrKysrKysrKysrKysrKysrKw0KPiA+ICAyIGZpbGVzIGNo
-YW5nZWQsIDQ1IGluc2VydGlvbnMoKykNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gbWV0
-YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlidGRiL2xpYnRkYi9kby1ub3QtY2hlY2steHNsdHByb2Mt
-bWFucGFnZXMucA0KPiA+IGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L2xpYnRkYi9saWJ0ZGJfMS4zLjAuYmINCj4gPg0KPiA+IGRpZmYgLS1naXQN
-Cj4gPiBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYnRkYi9saWJ0ZGIvZG8tbm90LWNoZWNr
-LXhzbHRwcm9jLW1hbnBhZ2VzDQo+ID4gLnBhdGNoDQo+ID4gYi9tZXRhLW9lL3JlY2lwZXMtc3Vw
-cG9ydC9saWJ0ZGIvbGlidGRiL2RvLW5vdC1jaGVjay14c2x0cHJvYy1tYW5wYWdlcw0KPiA+IC5w
-YXRjaA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMC4uYmNjNDVj
-OQ0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9s
-aWJ0ZGIvbGlidGRiL2RvLW5vdC1jaGVjay14c2x0cHJvYy1tYW5wDQo+ID4gKysrIGFnZXMucGF0
-Y2gNCj4gPiBAQCAtMCwwICsxLDE1IEBADQo+ID4gK0Rvbid0IGNoZWNrIG1hbnBhZ2VzIGZvciB4
-c2x0cHJvYy4NCj4gPiArDQo+ID4gK1NpZ25lZC1vZmYtYnk6IEJpYW4gTmFpbWVuZyA8Ymlhbm5t
-QGNuLmZ1aml0c3UuY29tPg0KPiA+ICsNCj4gPiArLS0tIHRkYi0xLjMuMC5vcmlnL3dzY3JpcHQJ
-MjAxNS0wNC0yMiAwOTo1MjozMi4zNjYwMDAyMjIgKzA5MDANCj4gPiArKysrIHRkYi0xLjMuMC93
-c2NyaXB0CTIwMTUtMDQtMjIgMDk6NTE6NTcuNzIwMDAwMjA1ICswOTAwDQo+ID4gK0BAIC05MCw3
-ICs5MCw3IEBAIGRlZiBjb25maWd1cmUoY29uZik6DQo+ID4gKyAgICAgICAgIG5vdCBjb25mLmVu
-di5kaXNhYmxlX3RkYl9tdXRleF9sb2NraW5nKToNCj4gPiArICAgICAgICAgY29uZi5kZWZpbmUo
-J1VTRV9UREJfTVVURVhfTE9DS0lORycsIDEpDQo+ID4gKw0KPiA+ICstICAgIGNvbmYuQ0hFQ0tf
-WFNMVFBST0NfTUFOUEFHRVMoKQ0KPiA+ICsrICAgIGNvbmYuZmluZF9wcm9ncmFtKCd4c2x0cHJv
-YycsIHZhcj0nWFNMVFBST0MnKQ0KPiA+ICsNCj4gPiArICAgICBpZiBub3QgY29uZi5lbnYuZGlz
-YWJsZV9weXRob246DQo+ID4gKyAgICAgICAgICMgYWxzbyBkaXNhYmxlIGlmIHdlIGRvbid0IGhh
-dmUgdGhlIHB5dGhvbiBsaWJzIGluc3RhbGxlZA0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3Jl
-Y2lwZXMtc3VwcG9ydC9saWJ0ZGIvbGlidGRiXzEuMy4wLmJiDQo+ID4gYi9tZXRhLW9lL3JlY2lw
-ZXMtc3VwcG9ydC9saWJ0ZGIvbGlidGRiXzEuMy4wLmJiDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2
-NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5iN2YzZDIxDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsr
-KyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYnRkYi9saWJ0ZGJfMS4zLjAuYmINCj4gPiBA
-QCAtMCwwICsxLDMwIEBADQo+ID4gK1NVTU1BUlkgPSAiVGhlIHRkYiBsaWJyYXJ5Ig0KPiA+ICtT
-RUNUSU9OID0gImxpYnMiDQo+ID4gK0xJQ0VOU0UgPSAiTEdQTC0zLjArICYgR1BMLTMuMCsiDQo+
-ID4gKw0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRh
-L2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9MR1BMLTMuMDttZDU9YmZjY2ZlOTUyMjY5ZmYNCj4gZjJi
-NDA3ZGQxMWYyZjMwODNiIFwNCj4gPiArDQo+IGZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVz
-L2NvbW1vbi1saWNlbnNlcy9HUEwtMy4wO21kNT1jNzlmZjM5ZjE5ZGZlYzZkDQo+IDI5M2I5NWRl
-YTdiMDc4OTEiDQo+ID4gKw0KPiA+ICtTUkNfVVJJID0gImh0dHA6Ly9zYW1iYS5vcmcvZnRwL3Rk
-Yi90ZGItJHtQVn0udGFyLmd6IFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vZG8tbm90LWNoZWNr
-LXhzbHRwcm9jLW1hbnBhZ2VzLnBhdGNoIg0KPiA+ICsNCj4gPiArU1JDX1VSSVttZDVzdW1dID0g
-ImYxOGNkNmFmYzRmNTY3MGVkZmU1OGY3MmQyNjY1Zjk0Ig0KPiA+ICtTUkNfVVJJW3NoYTI1NnN1
-bV0gPQ0KPiAiMDRiZWU0OGQ0MDVhYjc4MTU4MTA1NzVhNmUwY2IzNjRjYzBlZWE2MTg3YjU0YjE4
-Yzg0ZTljMThhNzY4YmEyMCINCj4gPiArDQo+ID4gK1MgPSAiJHtXT1JLRElSfS90ZGItJHtQVn0i
-DQo+ID4gKw0KPiA+ICtpbmhlcml0IHdhZnNhbWJhDQo+ID4gKw0KPiA+ICtFWFRSQV9PRUNPTkYg
-Kz0gIi0tZGlzYWJsZS1ycGF0aCBcDQo+ID4gKyAgICAgICAgICAgICAgICAgLS1idW5kbGVkLWxp
-YnJhcmllcz1OT05FIFwNCj4gPiArICAgICAgICAgICAgICAgICAtLWJ1aWx0aW4tbGlicmFyaWVz
-PXJlcGxhY2UgXA0KPiA+ICsgICAgICAgICAgICAgICAgIC0td2l0aC1saWJpY29udj0ke1NUQUdJ
-TkdfRElSX0hPU1R9JHtwcmVmaXh9XA0KPiA+ICsgICAgICAgICAgICAgICAgIg0KPiA+ICsNCj4g
-PiArUEFDS0FHRVMgKz0gInRkYi10b29scyBweXRob24tdGRiIHB5dGhvbi10ZGItZGJnIg0KPiA+
-ICsNCj4gPiArRklMRVNfJHtQTn0gPSAiJHtsaWJkaXJ9Lyouc28uKiINCj4gPiArRklMRVNfdGRi
-LXRvb2xzID0gIiR7YmluZGlyfS8qIg0KPiA+ICtGSUxFU19weXRob24tdGRiID0NCj4gIiR7bGli
-ZGlyfS9weXRob24ke1BZVEhPTl9CQVNFVkVSU0lPTn0vc2l0ZS1wYWNrYWdlcy8qIg0KPiA+ICtG
-SUxFU19weXRob24tdGRiLWRiZyA9DQo+ICIke2xpYmRpcn0vcHl0aG9uJHtQWVRIT05fQkFTRVZF
-UlNJT059L3NpdGUtcGFja2FnZXMvLmRlYnVnLyoiDQo+ID4gK1JERVBFTkRTX3B5dGhvbi10ZGIg
-PSAicHl0aG9uIg0KPiA+IC0tDQo+ID4gMS44LjQuMg0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+IE9wZW5lbWJlZGRl
-ZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVt
-YmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlz
-dGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo+IA0KPiAtLQ0KPiBNYXJ0aW4gJ0phTWEnIEphbnNh
-ICAgICBqYWJiZXI6IE1hcnRpbi5KYW5zYUBnbWFpbC5jb20NCj4gLS0NCj4gX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gT3BlbmVtYmVkZGVkLWRldmVs
-IG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9y
-Zw0KPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5l
-bWJlZGRlZC1kZXZlbA0K
+From: Roy Li <rongqing.li@windriver.com>
+
+1. Remove the squid-change-ksh-referen*.patch which is not needed, since
+   3.5.5 did not use ksh by default.
+2. Update the checksum of COPYING,since the date in it has been changed.
+3. Define BUILDCXXFLAGS, otherwise the target gcc options -std=c++11 will
+   add into it, and lead to building failure since host gcc maybe not
+   support "-std=c++11"
+4. Assume to support GNU atomic operations by default, the running check
+   on cross-compile setup does not work
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+---
+ ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
+ .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       |  9 ++---
+ 2 files changed, 5 insertions(+), 43 deletions(-)
+ delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+ rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (88%)
+
+diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+deleted file mode 100644
+index 8e03860..0000000
+--- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-squid: change ksh reference in krb ldap helper to sh
+-
+-Very simple cert_tool script with no ksh specifics.
+-Change it to use sh so a package dependency doesn't
+-get created to ksh.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+-Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
+----
+- helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
+-index 9f14959..8c4ea11 100644
+---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
+-+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
+-@@ -1,4 +1,4 @@
+--#!/bin/ksh
+-+#!/bin/sh
+- #
+- #  -----------------------------------------------------------------------------
+- # 
+-@@ -64,9 +64,9 @@ QUIT
+- # Create database for Sun ldap and pem file for Openldap 
+- #
+- rm ${server}_[0-9]*.pem 2>/dev/null
+--let i=0
+-+i=0
+-  ls ${server}_[0-9]*.cert | while read file; do
+-- let i=i+1
+-+ i=`expr $i + 1`
+-  cat  $file  >> ${server}_$i.pem
+-  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
+-  if [ -n "$CA" ]; then
+--- 
+-1.9.1
+-
+diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+similarity index 88%
+rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+index 7b00dfc..ac18e0f 100644
+--- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
++++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+@@ -16,17 +16,16 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
+            file://Set-up-for-cross-compilation.patch \
+            file://Skip-AC_RUN_IFELSE-tests.patch \
+            file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
+-           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
+            file://squid-use-serial-tests-config-needed-by-ptest.patch \
+            file://run-ptest \
+            file://volatiles.03_squid \
+ "
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
+-                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
++                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
+                    "
+-SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
+-SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
++SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
++SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
+ 
+ DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+ 
+@@ -38,6 +37,8 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+ EXTRA_OECONF += "--with-default-user=squid"
++export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
++CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
+ 
+ TESTDIR = "test-suite"
+ do_compile_ptest() {
+-- 
+1.9.1
+
 
