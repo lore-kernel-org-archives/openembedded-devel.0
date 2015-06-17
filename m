@@ -1,35 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 1303573E3B
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-pa0-f54.google.com (mail-pa0-f54.google.com
+	[209.85.220.54])
+	by mail.openembedded.org (Postfix) with ESMTP id AA70874056
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 20:22:52 +0000 (UTC)
-Received: by wiwd19 with SMTP id d19so3078418wiw.0
+	Wed, 17 Jun 2015 20:23:18 +0000 (UTC)
+Received: by pacyx8 with SMTP id yx8so43969598pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 13:22:53 -0700 (PDT)
+	Wed, 17 Jun 2015 13:23:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=sx9niNcXBpIXIUDRBAO99NhnjUmHkviES9BGViaWtcg=;
-	b=nDoskbQphlkiNs5dLP1KA1kM6KbHFYkdvtzL2mHk1FB03ByiXMomLmOhAxhn6/Uu5Y
-	3I+xY6gLYq8W0btUjUmzKDz27jsdRqV0k460tbDAJl4Dl5CyNmcQMeQ1Fig+q1uRGj/R
-	VJMsmrpgumtTNuRnOO4vef1SXCrTswhqvNjudj/o9HOXpHjj9Mu7kC5mv4tEC+acSPbu
-	xxUvqkTDhp8GBjqwhe8u8GIq2ZNtnNCsxJz8isIms0f4WYC2HScX0mslUfI15eCgopGa
-	IUnXQqF/d1JfU8CBVAea6gv3lcenVnkkm+uWWvch4YDnXwdnhWhxD9sbd3eSTXMrXHG/
-	NjzA==
-X-Received: by 10.180.102.227 with SMTP id fr3mr56638035wib.19.1434572573000; 
-	Wed, 17 Jun 2015 13:22:53 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	ft12sm9444985wic.11.2015.06.17.13.22.51
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Jun 2015 13:22:51 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Jun 2015 22:23:06 +0200
-Message-Id: <1434572586-30883-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.4.3
-Subject: [meta-efl][PATCH] efl, elementary: upgrade to 1.14.1
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=X7cjnDht++zheGDnhbp6mC7RauETiy+xXVCwDA5s15o=;
+	b=nF/6RZq3nw3dEEIvcd8EopWjxKaXiETfxgrGpd7ZGyLH7nFPDr/Hr+wWGGIcPIlhrI
+	PMg5GZaMJ/3YqaP43xmi+2nfhnHmXxex45LSmWlH7JCtVnwY9N4kfdK+e2VEJdO6ti1y
+	sj5+2TqnLCM9VYIp2P7r+s5J56HBCAbGmfKUxTYLsqYUJajxZL9xiEGfWRS4xXGW2Wkb
+	Jukf+pwjqeIl4y2QFLVScVGY6olq8S8Ot66q2GqZptF9dl0MVe4Ma2f6TEh9n/2L2h5L
+	Z9vC9wyTwah7G638hLQBCbnFBp1GHoP9tPJxuFdDIX58S/qQHbarf3eR0u4oqaQGvjJG
+	9kvw==
+MIME-Version: 1.0
+X-Received: by 10.68.108.65 with SMTP id hi1mr14132504pbb.129.1434572600306;
+	Wed, 17 Jun 2015 13:23:20 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.70.34.109 with HTTP; Wed, 17 Jun 2015 13:23:20 -0700 (PDT)
+In-Reply-To: <1434572301.2944.16.camel@Saturn.local.all>
+References: <CALbNGRSo5g0ndeQTmrKYppX6g6-KTB2CrnDjJCs=d84PxnpQPQ@mail.gmail.com>
+	<55818938.3090405@mlbassoc.com>
+	<1434572301.2944.16.camel@Saturn.local.all>
+Date: Wed, 17 Jun 2015 17:23:20 -0300
+X-Google-Sender-Auth: KOKzjbzapCzVjcjV63L5fLxHbTs
+Message-ID: <CAP9ODKpE1AAOQoFNk6StdHGpvtJrzOoVX-3xju7c-wzD602WkQ@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: Re: [meta-browser] firefox not working for me (only)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,130 +46,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 20:22:56 -0000
+X-List-Received-Date: Wed, 17 Jun 2015 20:23:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* announcement:
-  https://phab.enlightenment.org/phame/live/3/post/efl_and_elementary_1_14_1_release/
+On Wed, Jun 17, 2015 at 5:18 PM, Max Krummenacher <max.oss.09@gmail.com> wrote:
+>> > * firefox fails with illeagal ARM instruction
+>
+> That sounds familiar, I thought then that it was specific to our setup
+> with the binary Tegra X driver and the armv7a without neon setup, that's
+> why I did not upstream my patches.
+>
+>> > On Wed, Jun 17, 2015 at 3:32 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+>> >>> Hmm - I was wondering why nobody took care.
+>> >>>
+>> >>> All my plattforms fail:
+>> >>> * i.MX6 base
+>> >>> * gumstix
+>> >>> * raspberry Pi2
+>> >>>
+>> >>> I'll put this browser issue on my TODO currently I have no further
+>> >>> time to take care.
+>> >>
+>> >>
+>> >> BTW, I just tested both chromium and firefox on the i.MX6Q and RPi2
+>> >> and they worked just fine.  Built from meta-browser:0cc0419a
+>> >>
+>> > Thanks for information. Let's focus on firefox's illegal ARM
+>> > instruction crasher:
+>> >
+>> > * Last time I felt the only one facing a specific error it was caused
+>> > by angstrom enabling thumb(2) for ARM (long story @meta-fsl-arm).
+>> > Gary: I assume, you don't have thumb enabled - right?
+>> > * firefox doesn't crash with "--safe-mode"
+>>
+>> I am not using thumb - off the shelf configurations for RaspberryPi2 and
+>> BoundaryDevices nitrogen6x built with $DISTRO=poky are the ones I've tested.
+>>
+> Actually I use Angstrom with the instruction set defaulting to ARM.
+>
+>> >
+>> > Looking into meta-browser I saw that firefox pins ARM_INSTRUCTION_SET
+>> > = "arm" but firefox-l10n does not. When having some time left over
+>> > (=never) I will test with thumb disabled for firefox-l10n and
+>> > chromium.
+>> >
+>> > Andreas
+>
+> Have a look at
+> http://git.toradex.com/cgit/meta-toradex.git/tree/recipes-mozilla/firefox?h=V2.4-next
+>
+> alignment.patch,
+> Prevent-SIGILL-crashes-on-ARMv6-builds-built-with-the-NDK_10.0esr.patch .
+>
+> If usefull I could send a patch for meta-browser.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/efl/efl_1.14.0.bb        | 25 -------------------------
- meta-efl/recipes-efl/efl/efl_1.14.1.bb        | 25 +++++++++++++++++++++++++
- meta-efl/recipes-efl/efl/elementary_1.14.0.bb | 16 ----------------
- meta-efl/recipes-efl/efl/elementary_1.14.1.bb | 16 ++++++++++++++++
- 4 files changed, 41 insertions(+), 41 deletions(-)
- delete mode 100644 meta-efl/recipes-efl/efl/efl_1.14.0.bb
- create mode 100644 meta-efl/recipes-efl/efl/efl_1.14.1.bb
- delete mode 100644 meta-efl/recipes-efl/efl/elementary_1.14.0.bb
- create mode 100644 meta-efl/recipes-efl/efl/elementary_1.14.1.bb
+An upgraded version would be awesome :-)
 
-diff --git a/meta-efl/recipes-efl/efl/efl_1.14.0.bb b/meta-efl/recipes-efl/efl/efl_1.14.0.bb
-deleted file mode 100644
-index c891f0d..0000000
---- a/meta-efl/recipes-efl/efl/efl_1.14.0.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--require ${BPN}.inc
--
--SRC_URI = "\
--    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
--    file://0001-configure.ac-Don-t-check-for-Xprint-extension.patch \
--    file://0002-evas_3d-Add-Eet.h-includes.patch \
--"
--
--SRC_URI[md5sum] = "b0813fe92cb6eaf861e3c179a19d8e41"
--SRC_URI[sha256sum] = "30a8a239449e0d068a39787b5a4769dd26ddf0476f58f094c85e65b108086269"
--
--# Temporary disable until error like the one following are fixed
--# efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
--# collect2: error: ld returned 1 exit status
--# x86_64-linux-libtool: install: error: relink `modules/evas/savers/tiff/module.la' with the above command before installing it
--# Makefile:11031: recipe for target 'install-savertiffpkgLTLIBRARIES' failed
--PARALLEL_MAKE_class-native = ""
--
--#EFL_RUN_IN_TREE=1 ../src/bin/eolian/eolian_gen --eo --legacy -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/eo -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/evas/canvas -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/edje -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/ecore_audio --gc -o lib/evas/canvas/evas_line.eo.c /OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/evas/canvas/evas_line.eo
--#ERR<32439>:eolian_gen /OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/bin/eolian/main.c:103 _generate_c_file() Couldnt open file lib/evas/canvas/evas_line.eo.c for writing
--#Makefile:30738: recipe for target 'lib/evas/canvas/evas_line.eo.c' failed
--#make[2]: *** [lib/evas/canvas/evas_line.eo.c] Error 1
--#Makefile:2163: recipe for target 'all-recursive' failed
--# autotools-brokensep
--B = "${S}"
-diff --git a/meta-efl/recipes-efl/efl/efl_1.14.1.bb b/meta-efl/recipes-efl/efl/efl_1.14.1.bb
-new file mode 100644
-index 0000000..a17a685
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/efl_1.14.1.bb
-@@ -0,0 +1,25 @@
-+require ${BPN}.inc
-+
-+SRC_URI = "\
-+    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
-+    file://0001-configure.ac-Don-t-check-for-Xprint-extension.patch \
-+    file://0002-evas_3d-Add-Eet.h-includes.patch \
-+"
-+
-+SRC_URI[md5sum] = "e0668a93a67be2d59fb40cf71369d82d"
-+SRC_URI[sha256sum] = "4e7e69c52c4fa6801e271f30bb4fb41fd62abfe1c9a874f502ca077e2d26329b"
-+
-+# Temporary disable until error like the one following are fixed
-+# efl-native/2_1.8.4-r0/efl-1.8.4/src/lib/eet/.libs/libeet.so: file not recognized: File truncated
-+# collect2: error: ld returned 1 exit status
-+# x86_64-linux-libtool: install: error: relink `modules/evas/savers/tiff/module.la' with the above command before installing it
-+# Makefile:11031: recipe for target 'install-savertiffpkgLTLIBRARIES' failed
-+PARALLEL_MAKE_class-native = ""
-+
-+#EFL_RUN_IN_TREE=1 ../src/bin/eolian/eolian_gen --eo --legacy -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/eo -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/evas/canvas -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/edje -I/OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/ecore_audio --gc -o lib/evas/canvas/evas_line.eo.c /OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/lib/evas/canvas/evas_line.eo
-+#ERR<32439>:eolian_gen /OE/build/shr-core/tmp-eglibc/work/x86_64-linux/efl-native/2_1.10.0-r0/efl-1.10.0/src/bin/eolian/main.c:103 _generate_c_file() Couldnt open file lib/evas/canvas/evas_line.eo.c for writing
-+#Makefile:30738: recipe for target 'lib/evas/canvas/evas_line.eo.c' failed
-+#make[2]: *** [lib/evas/canvas/evas_line.eo.c] Error 1
-+#Makefile:2163: recipe for target 'all-recursive' failed
-+# autotools-brokensep
-+B = "${S}"
-diff --git a/meta-efl/recipes-efl/efl/elementary_1.14.0.bb b/meta-efl/recipes-efl/efl/elementary_1.14.0.bb
-deleted file mode 100644
-index 99d58e6..0000000
---- a/meta-efl/recipes-efl/efl/elementary_1.14.0.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require ${BPN}.inc
--
--SRC_URI = "\
--    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
--"
--
--# only for target, because configure doesn't default to sane default when
--# these paths aren't passed in -native build
--SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
--
--SRC_URI[md5sum] = "e77075b8a80e9a931b91388d608c211c"
--SRC_URI[sha256sum] = "aa06ca1b332b3cd29ffd136c1f10edf08a06906b3532785ce7e390c1cad6090e"
--
--# autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
--# which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
--B = "${S}"
-diff --git a/meta-efl/recipes-efl/efl/elementary_1.14.1.bb b/meta-efl/recipes-efl/efl/elementary_1.14.1.bb
-new file mode 100644
-index 0000000..ecb147a
---- /dev/null
-+++ b/meta-efl/recipes-efl/efl/elementary_1.14.1.bb
-@@ -0,0 +1,16 @@
-+require ${BPN}.inc
-+
-+SRC_URI = "\
-+    ${E_RELEASES}/libs/${SRCNAME}/${SRCNAME}-${SRCVER}.tar.gz \
-+"
-+
-+# only for target, because configure doesn't default to sane default when
-+# these paths aren't passed in -native build
-+SRC_URI_append_class-target = " file://0001-Makefile-Use-elementary_codegen-defined-in-configure.patch"
-+
-+SRC_URI[md5sum] = "704adee92de4010b88b89b329d1faaff"
-+SRC_URI[sha256sum] = "e182d7079100edead934d6d2e9a6ff67ce7d7106f59387d9b7ed146cf8770b80"
-+
-+# autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
-+# which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
-+B = "${S}"
 -- 
-2.4.3
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
