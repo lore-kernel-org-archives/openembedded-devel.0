@@ -1,24 +1,27 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 490496AC1E
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1756373306
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 03:10:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5H3Aabn019631
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 17 Jun 2015 03:53:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97179542"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 17 Jun 2015 11:57:40 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5H3ps2G001423
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jun 2015 20:10:36 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Tue, 16 Jun 2015 20:10:36 -0700
-From: <rongqing.li@windriver.com>
+	Wed, 17 Jun 2015 11:51:55 +0800
+Received: from localhost.localdomain (10.167.226.85) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 17 Jun 2015 11:53:39 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Jun 2015 11:03:29 +0800
-Message-ID: <1434510209-22324-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 17 Jun 2015 11:53:05 +0800
+Message-ID: <1434513185-1604-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH][v2] squid: upgrade to 3.5.5
+X-Originating-IP: [10.167.226.85]
+Subject: [meta-networking][PATCH] quagga: bug fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,111 +35,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 03:10:38 -0000
+X-List-Received-Date: Wed, 17 Jun 2015 03:53:31 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+The bug is: after the service stopped,the pid file still exists.
+So modidy the service files.
 
-1. Remove the squid-change-ksh-referen*.patch which is not needed, since
-   3.5.5 did not use ksh by default.
-2. Update the checksum of COPYING,since the date in it has been changed.
-3. Define BUILDCXXFLAGS, otherwise the target gcc options -std=c++11 will
-   add into it, and lead to building failure since host gcc maybe not
-   support "-std=c++11"
-4. Assume to support GNU atomic operations by default, the running check
-   on cross-compile setup does not work
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
- .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       |  9 ++---
- 2 files changed, 5 insertions(+), 43 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
- rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (88%)
+ meta-networking/recipes-protocols/quagga/files/bgpd.service   | 4 +++-
+ meta-networking/recipes-protocols/quagga/files/ospf6d.service | 4 +++-
+ meta-networking/recipes-protocols/quagga/files/ospfd.service  | 4 +++-
+ meta-networking/recipes-protocols/quagga/files/ripd.service   | 4 +++-
+ meta-networking/recipes-protocols/quagga/files/ripngd.service | 4 +++-
+ meta-networking/recipes-protocols/quagga/files/zebra.service  | 4 +++-
+ meta-networking/recipes-protocols/quagga/quagga.inc           | 2 ++
+ 7 files changed, 20 insertions(+), 6 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
-deleted file mode 100644
-index 8e03860..0000000
---- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--squid: change ksh reference in krb ldap helper to sh
--
--Very simple cert_tool script with no ksh specifics.
--Change it to use sh so a package dependency doesn't
--get created to ksh.
--
--Upstream-Status: Pending
--
--Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
--Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
-----
-- helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
--index 9f14959..8c4ea11 100644
----- a/helpers/external_acl/kerberos_ldap_group/cert_tool
--+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
--@@ -1,4 +1,4 @@
---#!/bin/ksh
--+#!/bin/sh
-- #
-- #  -----------------------------------------------------------------------------
-- # 
--@@ -64,9 +64,9 @@ QUIT
-- # Create database for Sun ldap and pem file for Openldap 
-- #
-- rm ${server}_[0-9]*.pem 2>/dev/null
---let i=0
--+i=0
--  ls ${server}_[0-9]*.cert | while read file; do
--- let i=i+1
--+ i=`expr $i + 1`
--  cat  $file  >> ${server}_$i.pem
--  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
--  if [ -n "$CA" ]; then
---- 
--1.9.1
--
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
-similarity index 88%
-rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
-rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
-index 7b00dfc..ac18e0f 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
-@@ -16,17 +16,16 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
-            file://Set-up-for-cross-compilation.patch \
-            file://Skip-AC_RUN_IFELSE-tests.patch \
-            file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
--           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
-            file://squid-use-serial-tests-config-needed-by-ptest.patch \
-            file://run-ptest \
-            file://volatiles.03_squid \
- "
+diff --git a/meta-networking/recipes-protocols/quagga/files/bgpd.service b/meta-networking/recipes-protocols/quagga/files/bgpd.service
+index 164c817..76f9f61 100644
+--- a/meta-networking/recipes-protocols/quagga/files/bgpd.service
++++ b/meta-networking/recipes-protocols/quagga/files/bgpd.service
+@@ -7,7 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/bgpd.conf
+ [Service]
+ Type=forking
+ EnvironmentFile=-@SYSCONFDIR@/default/quagga
+-ExecStart=@SBINDIR@/bgpd -d $bgpd_options -f /etc/quagga/bgpd.conf
++PIDFile=@localstatedir@/run/quagga/bgpd.pid
++ExecStart=@SBINDIR@/bgpd -d $bgpd_options -f @SYSCONFDIR@/quagga/bgpd.conf
++ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/bgpd.pid
+ Restart=on-abort
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
--                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
-+                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
-                    "
--SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
--SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
-+SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
-+SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
+ [Install]
+diff --git a/meta-networking/recipes-protocols/quagga/files/ospf6d.service b/meta-networking/recipes-protocols/quagga/files/ospf6d.service
+index 4b8ebf8..a2e493b 100644
+--- a/meta-networking/recipes-protocols/quagga/files/ospf6d.service
++++ b/meta-networking/recipes-protocols/quagga/files/ospf6d.service
+@@ -7,7 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ospf6d.conf
+ [Service]
+ Type=forking
+ EnvironmentFile=-@SYSCONFDIR@/default/quagga
+-ExecStart=@SBINDIR@/ospf6d -d $ospf6d_options -f /etc/quagga/ospf6d.conf
++PIDFile=@localstatedir@/run/quagga/ospf6d.pid
++ExecStart=@SBINDIR@/ospf6d -d $ospf6d_options -f @SYSCONFDIR@/quagga/ospf6d.conf
++ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ospf6d.pid
+ Restart=on-abort
  
- DEPENDS = "libtool krb5 openldap db cyrus-sasl"
+ [Install]
+diff --git a/meta-networking/recipes-protocols/quagga/files/ospfd.service b/meta-networking/recipes-protocols/quagga/files/ospfd.service
+index f9f5031..0c62cbc 100644
+--- a/meta-networking/recipes-protocols/quagga/files/ospfd.service
++++ b/meta-networking/recipes-protocols/quagga/files/ospfd.service
+@@ -7,7 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ospfd.conf
+ [Service]
+ Type=forking
+ EnvironmentFile=-@SYSCONFDIR@/default/quagga
+-ExecStart=@SBINDIR@/ospfd -d $ospfd_options -f /etc/quagga/ospfd.conf
++PIDFile=@localstatedir@/run/quagga/ospfd.pid
++ExecStart=@SBINDIR@/ospfd -d $ospfd_options -f @SYSCONFDIR@/quagga/ospfd.conf
++ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ospfd.pid
+ Restart=on-abort
  
-@@ -38,6 +37,8 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
- EXTRA_OECONF += "--with-default-user=squid"
-+export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
-+CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
+ [Install]
+diff --git a/meta-networking/recipes-protocols/quagga/files/ripd.service b/meta-networking/recipes-protocols/quagga/files/ripd.service
+index 5dfd28b..1d20389 100644
+--- a/meta-networking/recipes-protocols/quagga/files/ripd.service
++++ b/meta-networking/recipes-protocols/quagga/files/ripd.service
+@@ -7,7 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ripd.conf
+ [Service]
+ Type=forking
+ EnvironmentFile=-@SYSCONFDIR@/default/quagga
+-ExecStart=@SBINDIR@/ripd -d $ripd_options -f /etc/quagga/ripd.conf
++PIDFile=@localstatedir@/run/quagga/ripd.pid
++ExecStart=@SBINDIR@/ripd -d $ripd_options -f @SYSCONFDIR@/quagga/ripd.conf
++ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ripd.pid
+ Restart=on-abort
  
- TESTDIR = "test-suite"
- do_compile_ptest() {
+ [Install]
+diff --git a/meta-networking/recipes-protocols/quagga/files/ripngd.service b/meta-networking/recipes-protocols/quagga/files/ripngd.service
+index 72562d5..0355ad1 100644
+--- a/meta-networking/recipes-protocols/quagga/files/ripngd.service
++++ b/meta-networking/recipes-protocols/quagga/files/ripngd.service
+@@ -7,7 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ripngd.conf
+ [Service]
+ Type=forking
+ EnvironmentFile=-@SYSCONFDIR@/default/quagga
+-ExecStart=@SBINDIR@/ripngd -d $ripngd_options -f /etc/quagga/ripngd.conf
++PIDFile=@localstatedir@/run/quagga/ripngd.pid
++ExecStart=@SBINDIR@/ripngd -d $ripngd_options -f @SYSCONFDIR@/quagga/ripngd.conf
++ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ripngd.pid
+ Restart=on-abort
+ 
+ [Install]
+diff --git a/meta-networking/recipes-protocols/quagga/files/zebra.service b/meta-networking/recipes-protocols/quagga/files/zebra.service
+index afdd9e5..e4fb6c8 100644
+--- a/meta-networking/recipes-protocols/quagga/files/zebra.service
++++ b/meta-networking/recipes-protocols/quagga/files/zebra.service
+@@ -7,8 +7,10 @@ ConditionPathExists=@SYSCONFDIR@/quagga/zebra.conf
+ [Service]
+ Type=forking
+ EnvironmentFile=-@SYSCONFDIR@/default/quagga
++PIDFile=@localstatedir@/run/quagga/zebra.pid
+ ExecStartPre=@BASE_SBINDIR@/ip route flush proto zebra
+-ExecStart=@SBINDIR@/zebra -d $zebra_options -f /etc/quagga/zebra.conf
++ExecStart=@SBINDIR@/zebra -d $zebra_options -f @SYSCONFDIR@/quagga/zebra.conf
++ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/zebra.pid
+ Restart=on-abort
+ 
+ [Install]
+diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
+index 071e8d4..2f0b515 100644
+--- a/meta-networking/recipes-protocols/quagga/quagga.inc
++++ b/meta-networking/recipes-protocols/quagga/quagga.inc
+@@ -145,6 +145,8 @@ do_install () {
+     sed -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
+         -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+         -e 's,@SBINDIR@,${sbindir},g' \
++        -e 's,@base_bindir@,${base_bindir},g' \
++        -e 's,@localstatedir@,${localstatedir},g' \
+         -i ${D}${systemd_unitdir}/system/*.service
+ }
+ 
 -- 
-1.9.1
+1.8.4.2
 
 
