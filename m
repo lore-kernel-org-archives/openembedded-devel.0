@@ -1,40 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f171.google.com (mail-wi0-f171.google.com
-	[209.85.212.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 43012758F7
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D6A273E3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 20:36:16 +0000 (UTC)
-Received: by wiwd19 with SMTP id d19so3403864wiw.0
+	Wed, 17 Jun 2015 22:15:39 +0000 (UTC)
+Received: by wibdq8 with SMTP id dq8so68762150wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 13:36:17 -0700 (PDT)
+	Wed, 17 Jun 2015 15:15:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=y7EYwvRrYh5Il3wwunkziPhS6YQsTmQpYD58eszRRz0=;
-	b=jYM2zcOueynSYtX9zMyqihcap9xpq9eRF7xsYWt4jKosEXUOAp8Cw8mNfXF9YZ9X2y
-	ZeaKkyLm8LiGF04GS95nlqv45tmFyVUSjy/o4SxGVDe45ME3BeBPK0Lf4iTyMCAns0yY
-	rSqpevpwqNMl92aCLKcSa+v9KPdYr56yuNTJ/iHBFEWzaueZMVMa17dSpKm4a/L7mG5G
-	9cB+6+u43ajcsaqojLVN1U1Ja4lskPDAgVuVWRHokL/wqJdh6dmAhF/Ej2aC92th5xID
-	MXv61klWcjTRJhyjQph1UzSbDh9PEFtOCN5NLjHIa5l9ea2egIrm2x01JE5jCfBi/cCc
-	Lwjg==
-X-Received: by 10.180.108.142 with SMTP id hk14mr21095168wib.5.1434573377590; 
-	Wed, 17 Jun 2015 13:36:17 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id k2sm9487860wif.3.2015.06.17.13.36.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 17 Jun 2015 13:36:16 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 17 Jun 2015 22:36:32 +0200
+	h=from:to:cc:subject:date:message-id;
+	bh=7tSGHoWfHbfXVqfSXx6QB0JkK2E8sSspyFZJRXmLZag=;
+	b=ZksVH/Br5v3NfUf+mfOd8nBX9L/PzTYcj1YFgEj9L42T3Q62YmZnpYXfspedj1gZHM
+	K35K6IqJM8BBmQrI8AVTZhouDnLZB5X/BhSvzjod/UYvrCfHdM2bkQXG+1TBV6Kpk7W7
+	Cqg7wnBhnc+VJOsFOOCjdWnLR5+9/WJ2bqMfhBCuSA1EYRlVrNq+bDmI6FpoQZ0Z9L9D
+	DUwv/3Kocz4O8vQqU2MLSk8WOsbsdkeh+a3ENAFwQwmvA8GOakag4t94YbGD0wQgynPg
+	oK9kcsxgSurjJaTvZLz9ZXwcJAfHTDX62B5o++ol+9hYjf82zd5SF2uDfaWmQ57DhNZ5
+	xieQ==
+X-Received: by 10.194.77.179 with SMTP id t19mr9605939wjw.30.1434579340278;
+	Wed, 17 Jun 2015 15:15:40 -0700 (PDT)
+Received: from T520.homenet.telecomitalia.it ([95.236.248.246])
+	by mx.google.com with ESMTPSA id hv8sm9004567wjb.33.2015.06.17.15.15.38
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 17 Jun 2015 15:15:39 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150617203632.GA2390@jama>
-References: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434527353-47017-8-git-send-email-biannm@cn.fujitsu.com>
-MIME-Version: 1.0
-In-Reply-To: <1434527353-47017-8-git-send-email-biannm@cn.fujitsu.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2 7/7] samba: upgrade to 4.1.12
+Date: Thu, 18 Jun 2015 00:15:35 +0200
+Message-Id: <1434579335-3994-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] utash_1.9.7: move recipe to its respective directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,57 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 20:36:19 -0000
-X-Groupsio-MsgNum: 55955
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="W/nzBZO5zC0uMSeA"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 17 Jun 2015 22:15:41 -0000
 
---W/nzBZO5zC0uMSeA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The recipe was originally placed under /recipes-support by
+commit: 9b05b3eb6d036eb661911e5e660447468fe4bc9d
 
-On Wed, Jun 17, 2015 at 03:49:13PM +0800, Bian Naimeng wrote:
-> Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
->=20
-> git send-email will catch error as below
->  fatal: 0002-samba-upgrade-to-4.1.12.patch: 965: patch contains a line lo=
-nger than 998 characters
->=20
-> So, please get patch from
-> https://github.com/bendaaron/meta-oe-dev/commit/47678ed346a1ce347a64705c7=
-6df09d4fa537b0e
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ meta-oe/recipes-support/{ => uthash}/uthash_1.9.7.bb | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-support/{ => uthash}/uthash_1.9.7.bb (100%)
 
-I've cherry-picked first 6 patches from here, but this last one fails to
-apply, because you're removing samba 3.6.24, but in master we have 3.6.25
-since this commit merged more than month ago:
+diff --git a/meta-oe/recipes-support/uthash_1.9.7.bb b/meta-oe/recipes-support/uthash/uthash_1.9.7.bb
+similarity index 100%
+rename from meta-oe/recipes-support/uthash_1.9.7.bb
+rename to meta-oe/recipes-support/uthash/uthash_1.9.7.bb
+-- 
+1.9.1
 
-commit 9ac5713b2fcb5ce03693edd40636d8fce3e014d0
-Author:     Roy Li <rongqing.li@windriver.com>
-AuthorDate: Wed Apr 29 17:25:02 2015 +0800
-Commit:     Martin Jansa <Martin.Jansa@gmail.com>
-CommitDate: Mon May 11 10:27:28 2015 +0200
 
-    samba: upgrade to 3.6.25
-
-Also this patch only removes 3.6.24, but doesn't add 4.1.12.
-
-Please rebase to latest master and fix the last commit.
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---W/nzBZO5zC0uMSeA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlWB2k8ACgkQN1Ujt2V2gBzZ/ACgkPgaKhzdbMyEoYFW0c0JZ2zo
-LJUAoLdFfOIF5VxsMt7bOYLzdfcobofp
-=YJxf
------END PGP SIGNATURE-----
-
---W/nzBZO5zC0uMSeA--
