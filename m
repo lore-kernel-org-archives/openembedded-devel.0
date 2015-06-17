@@ -1,29 +1,38 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B06F73E44
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id EFE3F73E3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 19:42:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5HJgZUb009458
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 17 Jun 2015 20:18:22 +0000 (UTC)
+Received: by wgbhy7 with SMTP id hy7so46261887wgb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 12:42:35 -0700 (PDT)
-Received: from [128.224.56.84] (128.224.56.84) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 17 Jun 2015 12:42:35 -0700
-Message-ID: <5581CDAA.6030405@windriver.com>
-Date: Wed, 17 Jun 2015 15:42:34 -0400
-From: Randy MacLeod <randy.macleod@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1433145856-23231-1-git-send-email-rongqing.li@windriver.com>
-	<557B03F0.7080306@windriver.com>
-In-Reply-To: <557B03F0.7080306@windriver.com>
-X-Originating-IP: [128.224.56.84]
-Subject: Re: [PATCH][meta-oe] mariadb: Security Advisory -CVE-2015-2305
+	Wed, 17 Jun 2015 13:18:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:content-type:mime-version:content-transfer-encoding;
+	bh=8PBeb4ZsHKBTdsuFOPVJAfFTJoivAB23hoOgUb84SzY=;
+	b=AbpDR8oSxCnz68gZvtlubDbjU6XEPTU6vmnO79bmbn3bGWARtF91KYHu3Xyj9F3T82
+	DxZloFZgVV8I1Tqe3CfWZXUFfFWmgp8rgNgcPhI5siWVkdpxtDxfiRFcOxDMdxfbT9IO
+	Z0jfGs29zdq+IXJItTlY8/9HN/SbV9NTUKgNgKC5cv0FJFKNVYo1fv3ta9fAOCyhM2ah
+	447C9EZ38u2c37XGyXjS1jXQtBLZgGePcnwsHb93c8IbahCgq8g1+GXvepzQF2VAtL1h
+	eeKRCvtmC9qE38nn/incnUB6Qkm6C+R11zNAt8zw5tmVpPf31Omlx+e+gi9wdt2EzM56
+	hwEQ==
+X-Received: by 10.180.186.99 with SMTP id fj3mr58852610wic.10.1434572303634;
+	Wed, 17 Jun 2015 13:18:23 -0700 (PDT)
+Received: from [192.168.0.7] (212-41-67-159.adsl.solnet.ch. [212.41.67.159])
+	by mx.google.com with ESMTPSA id m2sm27680132wiy.7.2015.06.17.13.18.22
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
+	Wed, 17 Jun 2015 13:18:22 -0700 (PDT)
+Message-ID: <1434572301.2944.16.camel@Saturn.local.all>
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Jun 2015 22:18:21 +0200
+In-Reply-To: <55818938.3090405@mlbassoc.com>
+References: <CALbNGRSo5g0ndeQTmrKYppX6g6-KTB2CrnDjJCs=d84PxnpQPQ@mail.gmail.com>
+	<55818938.3090405@mlbassoc.com>
+X-Mailer: Evolution 3.10.4 
+Mime-Version: 1.0
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: Re: [meta-browser] firefox not working for me (only)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,131 +46,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 19:42:34 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
+X-List-Received-Date: Wed, 17 Jun 2015 20:18:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 2015-06-12 12:08 PM, Randy MacLeod wrote:
-> On 2015-06-01 04:04 AM, rongqing.li@windriver.com wrote:
->> From: Roy Li <rongqing.li@windriver.com>
->>
->> https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-2305
->
-> That's fine for now.
->
-> (GA) releases are: 10.0.19 and 5.5.44
-> and we have 5.5.43.
->
-> Should we update to 5.5.44 or replace it with 10.0 or wait for
-> 10.1 to turn into 10.2 ? If anyone knows the approximate timeline
-> for 10.2, that would be helpful.
+> > * firefox fails with illeagal ARM instruction
 
-I found a MariaDB, Jira page that tracks defects/features:
+That sounds familiar, I thought then that it was specific to our setup
+with the binary Tegra X driver and the armv7a without neon setup, that's
+why I did not upstream my patches.
 
-https://mariadb.atlassian.net/projects/MDEV?selectedItem=com.atlassian.jira.jira-projects-plugin:release-page
+> > On Wed, Jun 17, 2015 at 3:32 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> >>> Hmm - I was wondering why nobody took care.
+> >>>
+> >>> All my plattforms fail:
+> >>> * i.MX6 base
+> >>> * gumstix
+> >>> * raspberry Pi2
+> >>>
+> >>> I'll put this browser issue on my TODO currently I have no further
+> >>> time to take care.
+> >>
+> >>
+> >> BTW, I just tested both chromium and firefox on the i.MX6Q and RPi2
+> >> and they worked just fine.  Built from meta-browser:0cc0419a
+> >>
+> > Thanks for information. Let's focus on firefox's illegal ARM
+> > instruction crasher:
+> >
+> > * Last time I felt the only one facing a specific error it was caused
+> > by angstrom enabling thumb(2) for ARM (long story @meta-fsl-arm).
+> > Gary: I assume, you don't have thumb enabled - right?
+> > * firefox doesn't crash with "--safe-mode"
+> 
+> I am not using thumb - off the shelf configurations for RaspberryPi2 and
+> BoundaryDevices nitrogen6x built with $DISTRO=poky are the ones I've tested.
+> 
+Actually I use Angstrom with the instruction set defaulting to ARM.
 
-Today (June 17) 10.2 has the following stats:
-    4 - done
-   11 - in progress
-  134 - to do
+> >
+> > Looking into meta-browser I saw that firefox pins ARM_INSTRUCTION_SET
+> > = "arm" but firefox-l10n does not. When having some time left over
+> > (=never) I will test with thumb disabled for firefox-l10n and
+> > chromium.
+> >
+> > Andreas
 
-so it looks like the 10.2 release is not just around the corner.
+Have a look at
+http://git.toradex.com/cgit/meta-toradex.git/tree/recipes-mozilla/firefox?h=V2.4-next
 
-If anyone wants to add 10.0 that would be useful. I'll probably
-check back in a month to see how 10.2 is going...
+alignment.patch,
+Prevent-SIGILL-crashes-on-ARMv6-builds-built-with-the-NDK_10.0esr.patch .
 
-../Randy
+If usefull I could send a patch for meta-browser.
 
->
-> ../Randy
->
->
->>
->> Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> ---
->>   meta-oe/recipes-support/mysql/mariadb.inc          |  1 +
->>   .../mysql/mariadb/fix-CVE-2015-2305.patch          | 43
->> ++++++++++++++++++++++
->>   2 files changed, 44 insertions(+)
->>   create mode 100644
->> meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
->>
->> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
->> b/meta-oe/recipes-support/mysql/mariadb.inc
->> index 00fa965..540b159 100644
->> --- a/meta-oe/recipes-support/mysql/mariadb.inc
->> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
->> @@ -12,6 +12,7 @@ SRC_URI =
->> "http://mirror.stshosting.co.uk/mariadb/mariadb-${PV}/source/mariadb-$
->>              file://mysqld.service \
->>              file://configure.cmake-fix-valgrind.patch \
->>              file://fix-a-building-failure.patch \
->> +           file://fix-CVE-2015-2305.patch \
->>             "
->>
->>   SRC_URI[md5sum] = "c8760d6b5890fc1de76c07af48092c88"
->> diff --git
->> a/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
->> b/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
->> new file mode 100644
->> index 0000000..2d1b467
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/mysql/mariadb/fix-CVE-2015-2305.patch
->> @@ -0,0 +1,43 @@
->> +From f5c1d00a9ceb61acfe038dcf2ec0236c2939328c Mon Sep 17 00:00:00 2001
->> +From: Roy Li <rongqing.li@windriver.com>
->> +Date: Mon, 1 Jun 2015 15:31:48 +0800
->> +Subject: [PATCH] From 70bc2965604b6b8aaf260049e64c708dddf85334 Mon
->> Sep 17
->> + 00:00:00 2001 From: Gary Houston <ghouston@arglist.com> Date: Wed,
->> 25 Feb
->> + 2015 13:29:03 +1100 Subject: [PATCH] Bug fix for integer overflow in
->> regcomp
->> + for excessively long  pattern strings. CERT Vulnerability Note
->> VU#695940.
->> + Found by Guido Vranken.
->> +
->> +Upsteam-Status: Backport
->> +
->> +https://bugzilla.suse.com/attachment.cgi?id=627001
->> +
->> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
->> +---
->> + regex/regcomp.c | 11 ++++++++++-
->> + 1 file changed, 10 insertions(+), 1 deletion(-)
->> +
->> +diff --git a/regex/regcomp.c b/regex/regcomp.c
->> +index abc1817..31e57c1 100644
->> +--- a/regex/regcomp.c
->> ++++ b/regex/regcomp.c
->> +@@ -138,7 +138,16 @@ struct cclass cclasses[CCLASS_LAST+1]= {
->> +                             (NC-1)*sizeof(cat_t));
->> +     if (g == NULL)
->> +         return(REG_ESPACE);
->> +-    p->ssize = (long) (len/(size_t)2*(size_t)3 + (size_t)1); /* ugh */
->> ++    {
->> ++      /* Patched for CERT Vulnerability Note VU#695940, Feb 2015. */
->> ++      size_t new_ssize = len/(size_t)2*(size_t)3 + (size_t)1; /* ugh */
->> ++      if (new_ssize < len || new_ssize > LONG_MAX / sizeof(sop)) {
->> ++        free((char *) g);
->> ++        return REG_INVARG;
->> ++      }
->> ++      p->ssize = new_ssize;
->> ++    }
->> ++
->> +     p->strip = (sop *)malloc(p->ssize * sizeof(sop));
->> +     p->slen = 0;
->> +     if (p->strip == NULL) {
->> +--
->> +1.9.1
->> +
->>
->
->
+Regards,
+Max
 
-
--- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
-Canada, K2K 2W5
 
