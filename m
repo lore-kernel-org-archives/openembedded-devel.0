@@ -1,36 +1,38 @@
 Return-Path: <ashcharles@gmail.com>
-Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 973CF73CF5
+Received: from mail-ie0-f173.google.com (mail-ie0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 10EB87573C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 00:11:38 +0000 (UTC)
-Received: by pdjn11 with SMTP id n11so25113971pdj.0
+	Wed, 17 Jun 2015 00:12:30 +0000 (UTC)
+Received: by iebmu5 with SMTP id mu5so23738069ieb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Jun 2015 17:11:40 -0700 (PDT)
+	Tue, 16 Jun 2015 17:12:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=dgg+qUifJs8K5Gc5MnzghYAYx5cu+TGWlgBhrofb7+U=;
-	b=Ka+UTdhix+VGMVFWs2V1zuaYj7mqJZ4bgh3S99PZDcq+PCQ2eYa/acRgSj/LaZOJy4
-	ZdT+2uAa4dhLYtOQ9u/FSBYNBP0qhhTTEdmHyYt3eTGGFaBjIE/uqGO23yodG/Ark5b5
-	jb+Fcvo2tmz8+DBFUkwwwbfZCG5JMDBjmt09iM/I2AtM3zHaXyk47M/+9550L94HJwEG
-	u7ei9828K6YZyN3ajBEv2eVZMNwLFpp+x5j89YaJuSMAEaoKDf0ipGHiKqGogFkGqrvc
-	QFO+bsGB4JGref25ZeDv45UAmh4L2NaAeyyZAdyU+yzdt/WzI6Ndea4pXmciE0cKg0LF
-	Oz0A==
-X-Received: by 10.68.205.33 with SMTP id ld1mr5414222pbc.22.1434499900456;
-	Tue, 16 Jun 2015 17:11:40 -0700 (PDT)
-Received: from gumstux.mystix.com (s206-116-3-180.bc.hsia.telus.net.
-	[206.116.3.180]) by mx.google.com with ESMTPSA id
-	fe10sm2575165pdb.59.2015.06.16.17.11.39
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 16 Jun 2015 17:11:39 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type;
+	bh=40q2dhSsh2t517ZNaKPYHpLDtLyxg6pYfaThXw/ul2w=;
+	b=MZI2DiypOk1tNMbIbV16lmfLjasHnUyQf66uynZJnRWBJTMd4MFlVu8ozwriw/NPUV
+	4RJ8polY5u6/5q+w9uBb4+wyma29QPJHUwGMCKJdAKHcKNftZ6PZHHaalpGfWU3PXo0m
+	MCj8EJnInnmiVV+qzo/k6MQHup9zZOGkVUifjT0t2AziQie+9EmrweAyXO5VyglVhidm
+	oTbFiyms11CX2LMiIKBT6o2MBHPpRIteWT13LTpiHLGIAF+Ng8mztLxCBAGv0N+zH24F
+	kg9W3a+AWpIeoPVmGiVHM3NIev9pY5rPZ8KQZ+cxLZbgkUFcNdRCWxnyWCzY7zkSj1B9
+	VpJg==
+X-Received: by 10.107.31.134 with SMTP id f128mr4012456iof.19.1434499951758;
+	Tue, 16 Jun 2015 17:12:31 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.141.78 with HTTP; Tue, 16 Jun 2015 17:12:01 -0700 (PDT)
+In-Reply-To: <CAMKF1sqOe8AN3f1ELc2sdiYTqWscpLx3k62Vv8Hek+vJoPZiKw@mail.gmail.com>
+References: <1430883943-30031-1-git-send-email-raj.khem@gmail.com>
+	<CAK8F28m=ZQLXUgNHZ8P8Fm6Bt55KApbO8YETf2AjyQzafcHnTQ@mail.gmail.com>
+	<CAK8F28=gpkoBJcwdPjwyG8VfSsMt60q5VGdFses+HNbVmv40JA@mail.gmail.com>
+	<CAMKF1sqOe8AN3f1ELc2sdiYTqWscpLx3k62Vv8Hek+vJoPZiKw@mail.gmail.com>
 From: Ash Charles <ashcharles@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Jun 2015 17:11:37 -0700
-Message-Id: <1434499897-20805-2-git-send-email-ashcharles@gmail.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1434499897-20805-1-git-send-email-ashcharles@gmail.com>
-References: <1434499897-20805-1-git-send-email-ashcharles@gmail.com>
-Subject: [fido][PATCH 2/2] gdm: Whitelist it
+Date: Tue, 16 Jun 2015 17:12:01 -0700
+Message-ID: <CAK8F28mqMb2xvYmLC02c-h5vHgHdoUzgs7yS2ofJq53G9VaHgQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH V2 2/8] polkit-gnome: Upgrade 0.102 -> 0.105
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +46,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Jun 2015 00:11:39 -0000
+X-List-Received-Date: Wed, 17 Jun 2015 00:12:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Khem Raj <raj.khem@gmail.com>
+On Fri, Jun 12, 2015 at 3:23 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Its really case by case. If you give a good enough reason and even
+> better propose a tested backported patch for appropriate branch
+> then send it with [branchname] in subject. It will happen quicker.
+Cool---thanks for the explanation!  I've cherry-picked these two
+patches to my fido checkout, tested and sent out the patch mail so
+hopefully this is all in order.
 
-polkit-gnome has been fixed to build
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-index fcd51ff..723eee8 100644
---- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-@@ -6,8 +6,6 @@ DEPENDS = "xinput gnome-panel tcp-wrappers libcanberra libxklavier grep consolek
- 
- PR = "r18"
- 
--PNBLACKLIST[gdm] ?= "Depends on broken polkit-gnome"
--
- inherit gnome update-rc.d systemd useradd
- 
- SRC_URI += " \
--- 
-2.1.4
-
+--Ash
 
