@@ -1,22 +1,33 @@
-Return-Path: <prvs=604e35b7f=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 36F83606BF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E46973306
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jun 2015 06:38:34 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2CpBAAlZoJV/0oKEKxchEMGuTiMEQKBfwEBAQEBAYELhCMBAQRuChELDQsJFg8JAwIBAgFFBg0GAgKIMMUSAQEIIosXLoRTOhaEFQEEhn2Mc4x+hAqCahaPZoEJgxhtgUaBAgEBAQ
-X-IPAS-Result: A2CpBAAlZoJV/0oKEKxchEMGuTiMEQKBfwEBAQEBAYELhCMBAQRuChELDQsJFg8JAwIBAgFFBg0GAgKIMMUSAQEIIosXLoRTOhaEFQEEhn2Mc4x+hAqCahaPZoEJgxhtgUaBAgEBAQ
-Message-ID: <55826760.5050403@skidata.com>
-Date: Thu, 18 Jun 2015 08:38:24 +0200
-From: Richard Leitner <richard.leitner@skidata.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.7.0
+	Thu, 18 Jun 2015 09:26:18 +0000 (UTC)
+Received: by wiwd19 with SMTP id d19so16689091wiw.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Jun 2015 02:26:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=JtqGFjHUtdcg677sleZ5zgMyuxQci3mVQhHBYp8MDd8=;
+	b=HUpdGbt0OTgPdwxELGukK5HlaRWN/CO7ZxTIRF5MafmScIDpScrUqXc1FPacPj0djs
+	Ky/EkEyDXPKzZFw7C7Ry3wJtH713nWWnXeHjrVJ3xo3f1yhxx36QRbKm4ohgsRFVqaVx
+	J8dCgCqu+xQ5cUTKIanTUrX92Mio851AGj8cIebc67MuBiM4PlHZKWCMxfVLDKpAXxTu
+	ALb8AjrgSGPqd5dVtYnUK16+AyqN6NDqdiYWmgqgLm81TEnMuQ5ALJz0kp+QB56JrvPT
+	NzHIwuN8tbmqf0Jx+boTsDebyJq/G+GT8F4JfX19tiHhBaIbWeL1sltRzTeDQRZy8MiG
+	0gYw==
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <556EA59A.8010007@skidata.com>
-In-Reply-To: <556EA59A.8010007@skidata.com>
-X-Originating-IP: [172.16.60.30]
-Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
+X-Received: by 10.194.71.226 with SMTP id y2mr13685720wju.34.1434619579374;
+	Thu, 18 Jun 2015 02:26:19 -0700 (PDT)
+Received: by 10.28.167.2 with HTTP; Thu, 18 Jun 2015 02:26:19 -0700 (PDT)
+In-Reply-To: <CAJ86T=VZuuxxBJtRHzMQHtFXGZz6yoUjoPaqU6Mp2NnH7EAdsA@mail.gmail.com>
+References: <CAJ86T=VZuuxxBJtRHzMQHtFXGZz6yoUjoPaqU6Mp2NnH7EAdsA@mail.gmail.com>
+Date: Thu, 18 Jun 2015 11:26:19 +0200
+Message-ID: <CA+chaQdtM6a6HShP0B+VvKVAQtk1tX8QxN8rdk93NAzvGPu9Sg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: qtwebkit doesn't use system leveldb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,71 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2015 06:38:35 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Jun 2015 09:26:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi,
-any test results, comments or ideas for improvement on this?
+I don't know what exactly memenv library is, but if it means that we just
+need to upgrade leveldb in meta-oe, then I would prefer this solution.
 
-regards,
-Richard
+On Thu, Jun 18, 2015 at 7:18 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
 
-On 06/03/2015 08:58 AM, Richard Leitner wrote:
-> The icedtea-jdk-nio-use-host-cc.patch disabled the build of xawt.
-> Therefore all awt based java application which were run on X11 failed
-> starting the GUI with an java.awt.HeadlessException.
-> 
-> This patch enables xawt again by adapting
-> icedtea-jdk-nio-use-host-cc.patch.
-> 
-> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> ---
-> This patch was only tested with yocto-1.6.3 (daisy) on an armv7a
-> cortexa9 with vfpv3d16. Please test it on further platforms!
-> 
-> This is my first patch to this mailinglist so hopefully I got everything
-> right. If not please give me some feedback on what to improve for the
-> next one ;-)
-> ---
->  .../icedtea-jdk-nio-use-host-cc.patch              | 22
-> ----------------------
->  1 file changed, 22 deletions(-)
-> 
-> diff --git
-> a/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
-> b/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
-> index f966093..db2fc87 100644
-> --- a/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
-> +++ b/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
-> @@ -49,26 +49,4 @@ Index: openjdk/jdk/make/java/nio/Makefile
->  -endif
-> 
->   .PHONY: sources
-> -Index: openjdk/jdk/make/sun/Makefile
-> -===================================================================
-> ---- openjdk/jdk/make/sun/Makefile	2013-07-25 09:10:09.000000000 -0700
-> -+++ openjdk/jdk/make/sun/Makefile	2013-10-01 21:32:01.625839149 -0700
-> -@@ -55,7 +55,7 @@
-> -     endif
-> -   endif
-> -   HEADLESS_SUBDIR = headless
-> --  XAWT_SUBDIR     = xawt gtk
-> -+  XAWT_SUBDIR     =
-> - endif
-> 
-> - ifeq ($(PLATFORM), macosx)
-> -@@ -87,7 +87,7 @@
-> - endif
-> - SUBDIRS_desktop    = audio $(RENDER_SUBDIR) image \
-> -                      $(LWAWT_PRE_SUBDIR) $(DISPLAY_LIBS) $(DGA_SUBDIR)
-> $(LWAWT_SUBDIR) \
-> --                     jawt font jpeg cmm $(DISPLAY_TOOLS) beans
-> -+                     font jpeg cmm $(DISPLAY_TOOLS) beans
-> - SUBDIRS_management = management
-> - SUBDIRS_misc       = $(ORG_SUBDIR) rmi $(JDBC_SUBDIR) tracing
-> - SUBDIRS_tools      = native2ascii serialver tools jconsole
-> -
-> \ No newline at end of file
-> 
+> Hi all,
+>
+> The qtwebkit configure test for leveldb tries to include
+> <helpers/memenv/memenv.h> and link with -lmemenv, however the current
+> meta-oe leveldb package doesn't provide them and so qtwebkit always
+> falls back to using it's internal copy of leveldb.
+>
+> I can work on a patch, but I'm not sure what the best approach is -
+> either rework leveldb so that it builds and installs a memenv library
+> + memenv.h or just remove the leveldb dependency from qtwebkit and let
+> qtwebkit continue to always rely on it's internal leveldb?
+>
+> Andre
+> --
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
