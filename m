@@ -1,27 +1,22 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 661A2606BF
+Return-Path: <prvs=604e35b7f=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 36F83606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jun 2015 06:36:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97249755"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Jun 2015 14:40:20 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5I6YZlV008772
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jun 2015 14:34:35 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 18 Jun 2015 14:36:25 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 Jun 2015 14:27:24 +0800
-Message-ID: <1434608844-51731-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 18 Jun 2015 06:38:34 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2CpBAAlZoJV/0oKEKxchEMGuTiMEQKBfwEBAQEBAYELhCMBAQRuChELDQsJFg8JAwIBAgFFBg0GAgKIMMUSAQEIIosXLoRTOhaEFQEEhn2Mc4x+hAqCahaPZoEJgxhtgUaBAgEBAQ
+X-IPAS-Result: A2CpBAAlZoJV/0oKEKxchEMGuTiMEQKBfwEBAQEBAYELhCMBAQRuChELDQsJFg8JAwIBAgFFBg0GAgKIMMUSAQEIIosXLoRTOhaEFQEEhn2Mc4x+hAqCahaPZoEJgxhtgUaBAgEBAQ
+Message-ID: <55826760.5050403@skidata.com>
+Date: Thu, 18 Jun 2015 08:38:24 +0200
+From: Richard Leitner <richard.leitner@skidata.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Icedove/31.7.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-ruby][PATCH] imsettings: add new recipe
+To: <openembedded-devel@lists.openembedded.org>
+References: <556EA59A.8010007@skidata.com>
+In-Reply-To: <556EA59A.8010007@skidata.com>
+X-Originating-IP: [172.16.60.30]
+Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,79 +30,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2015 06:36:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 Jun 2015 06:38:35 -0000
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: 7bit
 
-imsettings is a delivery framework for general input-method configuration
+Hi,
+any test results, comments or ideas for improvement on this?
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- .../imsettings/gtk-is-required-by-notify.patch     | 18 ++++++++++++++
- .../imsettings/imsettings_1.6.8.bb                 | 29 ++++++++++++++++++++++
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
- create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
+regards,
+Richard
 
-diff --git a/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch b/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-new file mode 100644
-index 0000000..d42358d
---- /dev/null
-+++ b/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-@@ -0,0 +1,18 @@
-+gtk+ is required by linnotify. So make sure gtk be linked before libnotify
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp imsettings-1.6.7.orig/configure.ac imsettings-1.6.7/configure.ac
-+--- imsettings-1.6.7.orig/configure.ac	2013-11-26 16:09:09.000000000 +0800
-++++ imsettings-1.6.7/configure.ac	2014-12-30 11:27:44.370003209 +0800
-+@@ -93,8 +93,8 @@ PKG_CHECK_MODULES(LIBNOTIFY, libnotify,
-+ 		has_old_libnotify=yes
-+ 		PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED)
-+ 		AC_DEFINE(HAS_OLD_LIBNOTIFY,, [Using older libnotify])
-+-		IMDAEMON_CFLAGS="$GTK_CFLAGS $LIBNOTIFY_OLD_CFLAGS"
-+-		IMDAEMON_LIBS="$GTK_LIBS $LIBNOTIFY_OLD_LIBS"],[
-++		IMDAEMON_CFLAGS="$LIBNOTIFY_OLD_CFLAGS $GTK_CFLAGS"
-++		IMDAEMON_LIBS="$LIBNOTIFY_OLD_LIBS $GTK_LIBS"],[
-+ 		has_old_libnotify=no
-+ 		IMDAEMON_CFLAGS="$LIBNOTIFY_CFLAGS"
-+ 		IMDAEMON_LIBS="$LIBNOTIFY_LIBS"])
-diff --git a/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-new file mode 100644
-index 0000000..91443d7
---- /dev/null
-+++ b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "Delivery framework for general Input Method configuration"
-+DESCRIPTION = "IMSettings is a framework that delivers Input Method \
-+settings and applies the changes so they take effect \
-+immediately without any need to restart applications \
-+or the desktop. \
-+This package contains the core DBus services and some utilities."
-+HOMEPAGE = "http://code.google.com/p/imsettings/"
-+SECTION = "Applications/System"
-+
-+inherit autotools gtk-doc
-+
-+SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
-+           file://gtk-is-required-by-notify.patch"
-+
-+SRC_URI[md5sum] = "c31429f1d60e36d7f811f871c75b6c41"
-+SRC_URI[sha256sum] = "2620ffbf9a6dc842dbf994b4773d4fe355eb77076ccf33f726ba63f16c0d08ba"
-+
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+
-+EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
-+                --disable-static \
-+               "
-+
-+DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim"
-+
-+RDEPENDS_${PN} += "bash"
-+
-+FILES_${PN} += "${datadir}/dbus-1/*"
--- 
-1.8.4.2
-
+On 06/03/2015 08:58 AM, Richard Leitner wrote:
+> The icedtea-jdk-nio-use-host-cc.patch disabled the build of xawt.
+> Therefore all awt based java application which were run on X11 failed
+> starting the GUI with an java.awt.HeadlessException.
+> 
+> This patch enables xawt again by adapting
+> icedtea-jdk-nio-use-host-cc.patch.
+> 
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> ---
+> This patch was only tested with yocto-1.6.3 (daisy) on an armv7a
+> cortexa9 with vfpv3d16. Please test it on further platforms!
+> 
+> This is my first patch to this mailinglist so hopefully I got everything
+> right. If not please give me some feedback on what to improve for the
+> next one ;-)
+> ---
+>  .../icedtea-jdk-nio-use-host-cc.patch              | 22
+> ----------------------
+>  1 file changed, 22 deletions(-)
+> 
+> diff --git
+> a/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
+> b/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
+> index f966093..db2fc87 100644
+> --- a/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
+> +++ b/recipes-core/openjdk/openjdk-7-75b13/icedtea-jdk-nio-use-host-cc.patch
+> @@ -49,26 +49,4 @@ Index: openjdk/jdk/make/java/nio/Makefile
+>  -endif
+> 
+>   .PHONY: sources
+> -Index: openjdk/jdk/make/sun/Makefile
+> -===================================================================
+> ---- openjdk/jdk/make/sun/Makefile	2013-07-25 09:10:09.000000000 -0700
+> -+++ openjdk/jdk/make/sun/Makefile	2013-10-01 21:32:01.625839149 -0700
+> -@@ -55,7 +55,7 @@
+> -     endif
+> -   endif
+> -   HEADLESS_SUBDIR = headless
+> --  XAWT_SUBDIR     = xawt gtk
+> -+  XAWT_SUBDIR     =
+> - endif
+> 
+> - ifeq ($(PLATFORM), macosx)
+> -@@ -87,7 +87,7 @@
+> - endif
+> - SUBDIRS_desktop    = audio $(RENDER_SUBDIR) image \
+> -                      $(LWAWT_PRE_SUBDIR) $(DISPLAY_LIBS) $(DGA_SUBDIR)
+> $(LWAWT_SUBDIR) \
+> --                     jawt font jpeg cmm $(DISPLAY_TOOLS) beans
+> -+                     font jpeg cmm $(DISPLAY_TOOLS) beans
+> - SUBDIRS_management = management
+> - SUBDIRS_misc       = $(ORG_SUBDIR) rmi $(JDBC_SUBDIR) tracing
+> - SUBDIRS_tools      = native2ascii serialver tools jconsole
+> -
+> \ No newline at end of file
+> 
 
