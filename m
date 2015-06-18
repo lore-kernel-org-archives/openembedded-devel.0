@@ -1,35 +1,27 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EFD773306
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 6522573306
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jun 2015 05:27:16 +0000 (UTC)
-Received: by pdbnf5 with SMTP id nf5so58319682pdb.2
+	Thu, 18 Jun 2015 05:55:30 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97247928"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Jun 2015 13:59:39 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5I5rsHt006370
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Jun 2015 22:27:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=s4u6Iikz0qhCU1egrupQg6OOS7XWcWrYgGLaVT/rXZA=;
-	b=IqDxqLhWaWL2wal8DcpnoaO+Ld3ca71TU0rM/tg6P7uF9vMwxO248/WKjZA+8Vls6Q
-	C4pXoHbftvWz9eQ1ZLLlnIcjE8gVS8RfeXum1kCsKTZhZJrAr/bDyi9TX8MGb4UbHms+
-	yOrxmw00zctYAFNItBotFz1oAzNWAoDB1D9ANpMnwPkRE3MHYYNrRmajgdLm5tumb6mc
-	d3eDc1RC0discs8JDywMPsz+Z7E32QuweBSX+NFjc7vv4BTYQfUNy2GVN//bcr/JTqOn
-	tKDztbpghrO0F6NBMWRS6IRjxR69fKnMuB+gibSJg2yOT/tG4bGcHapnsgHd9oI2/qpn
-	E2tQ==
-X-Received: by 10.68.204.133 with SMTP id ky5mr17788093pbc.67.1434605237342;
-	Wed, 17 Jun 2015 22:27:17 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by mx.google.com with ESMTPSA id oo3sm6618229pac.31.2015.06.17.22.27.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 17 Jun 2015 22:27:16 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Jun 2015 22:27:12 -0700
-Message-Id: <1434605232-4375-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-networking][PATCH] wireshark: update to 1.12.6
+	Thu, 18 Jun 2015 13:53:55 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 18 Jun 2015 13:55:44 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 Jun 2015 13:46:33 +0800
+Message-ID: <1434606393-51485-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-oe][PATCH] dmraid: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +35,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2015 05:27:19 -0000
+X-List-Received-Date: Thu, 18 Jun 2015 05:55:33 -0000
+Content-Type: text/plain
 
-include a security fixes but no CVE #
+Device-mapper RAID tool and library.
+It is provided by lots of distro such as RHEL and Ubuntu.
 
-The following vulnerabilities have been fixed.
-  * [1]wnpa-sec-2015-19
-  WCCP dissector crash. ([2]Bug 11153)
-  * [3]wnpa-sec-2015-20
-  GSM DTAP dissector crash. ([4]Bug 11201)
+There are some weird line endings in this patch, so please cherry-pick it from
+ https://github.com/bendaaron/meta-oe-dev/commit/bcf7dd2b46ec4948b5d03945d13909302cce99bc
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../wireshark/{wireshark_1.12.5.bb => wireshark_1.12.6.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_1.12.5.bb => wireshark_1.12.6.bb} (94%)
-
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_1.12.5.bb b/meta-networking/recipes-support/wireshark/wireshark_1.12.6.bb
-similarity index 94%
-rename from meta-networking/recipes-support/wireshark/wireshark_1.12.5.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_1.12.6.bb
-index 32d0ab9..936ad62 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_1.12.5.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_1.12.6.bb
-@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/wireshark-${PV}.tar.bz2"
- 
- PE = "1"
- 
--SRC_URI[md5sum] = "9ee199dde4f36a3d71f7b81dd6764e93"
--SRC_URI[sha256sum] = "d0f177b2ef49e4deae4ff7d3299bdd295ba558a3934ce8ae489b2f13927cbd82"
-+SRC_URI[md5sum] = "25ad2bc1c2a21396827c238fcff51bf3"
-+SRC_URI[sha256sum] = "22ac0cc872f12cef9bb2cacfe0720eed8533dc5cea102d21de511620606cb3b6"
- 
- inherit autotools pkgconfig
- 
--- 
-2.3.5
-
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 
