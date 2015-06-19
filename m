@@ -1,38 +1,27 @@
 Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B889D759C9
+	by mail.openembedded.org (Postfix) with ESMTP id 41C72759F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jun 2015 03:16:18 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97305841"
+	Fri, 19 Jun 2015 03:16:55 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97305866"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Jun 2015 11:20:24 +0800
+	by heian.cn.fujitsu.com with ESMTP; 19 Jun 2015 11:21:05 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5J3EeJ4026667
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5J3FK7T026705
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Jun 2015 11:14:40 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Fri, 19 Jun 2015 11:16:31 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v2 7/7] samba: upgrade to 4.1.12
-Thread-Index: AQHQqNNk5vhEumrz40qzb17j8PPGI52wotQAgADNZ1CAAG+dgIABSjHg
-Date: Fri, 19 Jun 2015 03:16:15 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73E104EB@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434527353-47017-8-git-send-email-biannm@cn.fujitsu.com>
-	<20150617203632.GA2390@jama>
-	<30DC4EDFD798C94083F3E083754532CC73E10096@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<20150618153111.GC2451@jama>
-In-Reply-To: <20150618153111.GC2451@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
+	Fri, 19 Jun 2015 11:15:20 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Fri, 19 Jun 2015 11:17:12 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Jun 2015 11:08:08 +0800
+Message-ID: <1434683288-56691-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH v2 7/7] samba: upgrade to 4.1.12
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-filesystems][PATCH] smbnetfs: using PKG_CHECK_MODULES to found headers and libraries for smbclient
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,87 +35,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Jun 2015 03:16:20 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 19 Jun 2015 03:16:56 -0000
+Content-Type: text/plain
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IE1hcnRp
-biBKYW5zYQ0KPiBTZW50OiBUaHVyc2RheSwgSnVuZSAxOCwgMjAxNSAxMTozMSBQTQ0KPiBUbzog
-b3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6
-IFtvZV0gW21ldGEtb2VdW1BBVENIIHYyIDcvN10gc2FtYmE6IHVwZ3JhZGUgdG8gNC4xLjEyDQo+
-IA0KPiBPbiBUaHUsIEp1biAxOCwgMjAxNSBhdCAxMjo1OTozNUFNICswMDAwLCBCaWFuLCBOYWlt
-ZW5nIHdyb3RlOg0KPiA+DQo+ID4NCj4gPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+
-ID4gPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnDQo+ID4gPiBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmddIE9uIEJlaGFsZg0KPiA+ID4gT2YgTWFydGluIEphbnNhDQo+ID4gPiBTZW50
-OiBUaHVyc2RheSwgSnVuZSAxOCwgMjAxNSA0OjM3IEFNDQo+ID4gPiBUbzogb3BlbmVtYmVkZGVk
-LWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiA+IFN1YmplY3Q6IFJlOiBbb2VdIFtt
-ZXRhLW9lXVtQQVRDSCB2MiA3LzddIHNhbWJhOiB1cGdyYWRlIHRvIDQuMS4xMg0KPiA+ID4NCj4g
-PiA+IE9uIFdlZCwgSnVuIDE3LCAyMDE1IGF0IDAzOjQ5OjEzUE0gKzA4MDAsIEJpYW4gTmFpbWVu
-ZyB3cm90ZToNCj4gPiA+ID4gU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24u
-ZnVqaXRzdS5jb20+DQo+ID4gPiA+DQo+ID4gPiA+IGdpdCBzZW5kLWVtYWlsIHdpbGwgY2F0Y2gg
-ZXJyb3IgYXMgYmVsb3cNCj4gPiA+ID4gIGZhdGFsOiAwMDAyLXNhbWJhLXVwZ3JhZGUtdG8tNC4x
-LjEyLnBhdGNoOiA5NjU6IHBhdGNoIGNvbnRhaW5zIGENCj4gPiA+ID4gbGluZSBsb25nZXIgdGhh
-biA5OTggY2hhcmFjdGVycw0KPiA+ID4gPg0KPiA+ID4gPiBTbywgcGxlYXNlIGdldCBwYXRjaCBm
-cm9tDQo+ID4gPiA+IGh0dHBzOi8vZ2l0aHViLmNvbS9iZW5kYWFyb24vbWV0YS1vZS1kZXYvY29t
-bWl0LzQ3Njc4ZWQzNDZhMWNlMzQ3YQ0KPiA+ID4gPiA2NDcwDQo+ID4gPiA+IDVjNzZkZjA5ZDRm
-YTUzN2IwZQ0KPiA+ID4NCj4gPiA+IEkndmUgY2hlcnJ5LXBpY2tlZCBmaXJzdCA2IHBhdGNoZXMg
-ZnJvbSBoZXJlLCBidXQgdGhpcyBsYXN0IG9uZQ0KPiA+ID4gZmFpbHMgdG8gYXBwbHksIGJlY2F1
-c2UgeW91J3JlIHJlbW92aW5nIHNhbWJhIDMuNi4yNCwgYnV0IGluIG1hc3Rlcg0KPiA+ID4gd2Ug
-aGF2ZSAzLjYuMjUgc2luY2UgdGhpcyBjb21taXQgbWVyZ2VkIG1vcmUgdGhhbiBtb250aCBhZ286
-DQo+ID4gPg0KPiA+ID4gY29tbWl0IDlhYzU3MTNiMmZjYjVjZTAzNjkzZWRkNDA2MzZkOGZjZTNl
-MDE0ZDANCj4gPiA+IEF1dGhvcjogICAgIFJveSBMaSA8cm9uZ3FpbmcubGlAd2luZHJpdmVyLmNv
-bT4NCj4gPiA+IEF1dGhvckRhdGU6IFdlZCBBcHIgMjkgMTc6MjU6MDIgMjAxNSArMDgwMA0KPiA+
-ID4gQ29tbWl0OiAgICAgTWFydGluIEphbnNhIDxNYXJ0aW4uSmFuc2FAZ21haWwuY29tPg0KPiA+
-ID4gQ29tbWl0RGF0ZTogTW9uIE1heSAxMSAxMDoyNzoyOCAyMDE1ICswMjAwDQo+ID4gPg0KPiA+
-ID4gICAgIHNhbWJhOiB1cGdyYWRlIHRvIDMuNi4yNQ0KPiA+ID4NCj4gPiA+IEFsc28gdGhpcyBw
-YXRjaCBvbmx5IHJlbW92ZXMgMy42LjI0LCBidXQgZG9lc24ndCBhZGQgNC4xLjEyLg0KPiA+ID4N
-Cj4gPiA+IFBsZWFzZSByZWJhc2UgdG8gbGF0ZXN0IG1hc3RlciBhbmQgZml4IHRoZSBsYXN0IGNv
-bW1pdC4NCj4gPiA+DQo+ID4NCj4gPiBUaGFuayB5b3UgdmVyeSBtdWNoLg0KPiA+DQo+ID4gUGxl
-YXNlIGNoZXJyeS1waWNrIHRoZSBuZXcgb25lIGZyb20gaGVyZQ0KPiA+IGh0dHBzOi8vZ2l0aHVi
-LmNvbS9iZW5kYWFyb24vbWV0YS1vZS1kZXYvY29tbWl0LzI5OWZjNmQ2N2M2ZTc1NTQ1MGMzYTEN
-Cj4gPiBlOGNmMGJhMDQ2ZWI3ZmE4YjcNCj4gDQo+IFRoYW5rcywgaXQgYXBwbGllcyBhbmQgYnVp
-bGRzIG5vdy4NCj4gDQo+IExhc3QgcmVtYWluaW5nIGlzc3VlIGlzIHNtYm5ldGZzIGZhaWxpbmcg
-dG8gYnVpbGQgd2l0aCBzYW1iYSA0Og0KPiANCj4gfCBhcm0tb2UtbGludXgtZ251ZWFiaS1nY2Mg
-IC1tYXJjaD1hcm12NXRlIC1tdGh1bWIgIC1tdGh1bWItaW50ZXJ3b3JrDQo+IC0tc3lzcm9vdD0v
-aG9tZS9qZW5raW5zL29lL3dvcmxkL3Noci1jb3JlL3RtcC1nbGliYy9zeXNyb290cy9xZW11YXJt
-DQo+IC1ESEFWRV9DT05GSUdfSCAtSS4NCj4gLUkvaG9tZS9qZW5raW5zL29lL3dvcmxkL3Noci1j
-b3JlL3RtcC1nbGliYy93b3JrL2FybXY1dGUtb2UtbGludXgtZ251ZWFiaS8NCj4gc21ibmV0ZnMv
-Z2l0LXIwL2dpdC9zcmMgICAgIC1PMiAtcGlwZSAtZyAtZmVsaW1pbmF0ZS11bnVzZWQtZGVidWct
-dHlwZXMNCj4gLVdhbGwgLVcgLURfUkVFTlRSQU5UIC1EX0dOVV9TT1VSQ0UgLURGVVNFX1VTRV9W
-RVJTSU9OPTI2DQo+IC1EX0ZJTEVfT0ZGU0VUX0JJVFM9NjQNCj4gLUkvaG9tZS9qZW5raW5zL29l
-L3dvcmxkL3Noci1jb3JlL3RtcC1nbGliYy9zeXNyb290cy9xZW11YXJtL3Vzci9pbmNsdWRlL2YN
-Cj4gdXNlIC1jIC1vIHNhbWJhLm8NCj4gL2hvbWUvamVua2lucy9vZS93b3JsZC9zaHItY29yZS90
-bXAtZ2xpYmMvd29yay9hcm12NXRlLW9lLWxpbnV4LWdudWVhYmkvc20NCj4gYm5ldGZzL2dpdC1y
-MC9naXQvc3JjL3NhbWJhLmMNCj4gfCAvaG9tZS9qZW5raW5zL29lL3dvcmxkL3Noci1jb3JlL3Rt
-cC1nbGliYy93b3JrL2FybXY1dGUtb2UtbGludXgtZ251ZWFiDQo+IHwgaS9zbWJuZXRmcy9naXQt
-cjAvZ2l0L3NyYy9zbWJfY29ubl9zcnYuYzoxMjoyNjogZmF0YWwgZXJyb3I6DQo+IGxpYnNtYmNs
-aWVudC5oOiBObyBzdWNoIGZpbGUgb3IgZGlyZWN0b3J5ICAjaW5jbHVkZSA8bGlic21iY2xpZW50
-Lmg+DQo+IHwgICAgICAgICAgICAgICAgICAgICAgICAgICBeDQo+IHwgY29tcGlsYXRpb24gdGVy
-bWluYXRlZC4NCj4gfCBtYWtlWzJdOiAqKiogW3NtYl9jb25uX3Nydi5vXSBFcnJvciAxDQo+IHwg
-bWFrZVsyXTogKioqIFdhaXRpbmcgZm9yIHVuZmluaXNoZWQgam9icy4uLi4NCj4gfCBtYWtlWzJd
-OiBMZWF2aW5nIGRpcmVjdG9yeQ0KPiBgL2hvbWUvamVua2lucy9vZS93b3JsZC9zaHItY29yZS90
-bXAtZ2xpYmMvd29yay9hcm12NXRlLW9lLWxpbnV4LWdudWVhYmkvcw0KPiBtYm5ldGZzL2dpdC1y
-MC9idWlsZC9zcmMnDQo+IHwgbWFrZVsxXTogKioqIFthbGxdIEVycm9yIDINCj4gfCBtYWtlWzFd
-OiBMZWF2aW5nIGRpcmVjdG9yeQ0KPiBgL2hvbWUvamVua2lucy9vZS93b3JsZC9zaHItY29yZS90
-bXAtZ2xpYmMvd29yay9hcm12NXRlLW9lLWxpbnV4LWdudWVhYmkvcw0KPiBtYm5ldGZzL2dpdC1y
-MC9idWlsZC9zcmMnDQo+IHwgbWFrZTogKioqIFthbGwtcmVjdXJzaXZlXSBFcnJvciAxDQo+IHwg
-RVJST1I6IG9lX3J1bm1ha2UgZmFpbGVkDQo+IHwgV0FSTklORzogZXhpdCBjb2RlIDEgZnJvbSBh
-IHNoZWxsIGNvbW1hbmQuDQo+IHwgRVJST1I6IEZ1bmN0aW9uIGZhaWxlZDogZG9fY29tcGlsZSAo
-bG9nIGZpbGUgaXMgbG9jYXRlZCBhdA0KPiB8IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNv
-cmUvdG1wLWdsaWJjL3dvcmsvYXJtdjV0ZS1vZS1saW51eC1nbnVlYWINCj4gfCBpL3NtYm5ldGZz
-L2dpdC1yMC90ZW1wL2xvZy5kb19jb21waWxlLjExODg1KQ0KPiBOT1RFOiByZWNpcGUgc21ibmV0
-ZnMtZ2l0LXIwOiB0YXNrIGRvX2NvbXBpbGU6IEZhaWxlZA0KPiBFUlJPUjogVGFzayAxMzgzMA0K
-PiAoL2hvbWUvamVua2lucy9vZS93b3JsZC9zaHItY29yZS9tZXRhLW9wZW5lbWJlZGRlZC9tZXRh
-LWZpbGVzeXN0ZW1zL3JlY2lwZQ0KPiBzLWZpbGVzeXN0ZW1zL3NtYm5ldGZzL3NtYm5ldGZzX2dp
-dC5iYiwgZG9fY29tcGlsZSkgZmFpbGVkIHdpdGggZXhpdCBjb2RlICcxJw0KPiANCj4gQ2FuIHlv
-dSBjaGVjayBpdD8NCg0KVGhhbmtzIGZvciB5b3VyIHRlc3QuDQoNCmxpYnNtYmNsaWVudC5oIHdp
-bGwgYmUgaW5zdGFsbGVkIGludG8gaW5jbHVkZS9zYW1iYS00LjAgYWZ0ZXIgdXBncmFkaW5nIHNh
-bWJhIHRvIDQueC4NClNvLCBJTU8sIHNtYm5ldGZzIHNob3VsZCBmb3VuZCBoZWFkZXJzIGFuZCBs
-aWJyYXJpZXMgYnkgdXNpbmcgcGtnY29uZmlnLg0KDQpJIHdpbGwgc2VuZCBhIHBhdGNoIGZvciBz
-bWJuZXRmcyB0byBmaXggaXQuDQoNClRoYW5rcw0KIEJpYW4NCg0KPiANCj4gLS0NCj4gTWFydGlu
-ICdKYU1hJyBKYW5zYSAgICAgamFiYmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwuY29tDQo=
+After samba was upgraded to 4.x, headers of smbclient were installed into include/samba-4.0/,
+so we should using PKG_CHECK_MODULES to found headers and libraries for smbclient to avoid
+error as below.
+
+ ${WORKDIR}/git/src/samba.c
+   | smbnetfs/git-r0/git/src/smb_conn_srv.c:12:26: fatal error: libsmbclient.h: No such file or directory  #include <libsmbclient.h>
+   |                           ^
+   | compilation terminated.
+   | make[2]: *** [smb_conn_srv.o] Error 1
+   | make[2]: *** Waiting for unfinished jobs....
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ ...CK_MODULES-to-found-headers-and-libraries.patch | 42 ++++++++++++++++++++++
+ .../recipes-filesystems/smbnetfs/smbnetfs_git.bb   |  3 +-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
+
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
+new file mode 100644
+index 0000000..f05f09f
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
+@@ -0,0 +1,42 @@
++From 7a524d49b3d4459280f18942df2980603400ec52 Mon Sep 17 00:00:00 2001
++From: Bian Naimeng <biannm@cn.fujitsu.com>
++Date: Fri, 19 Jun 2015 11:54:44 +0900
++Subject: [PATCH] Using PKG_CHECK_MODULES to found headers and libraries of
++ smbclient
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++---
++ configure.in    | 5 +++++
++ src/Makefile.am | 3 +++
++ 2 files changed, 8 insertions(+)
++
++diff --git a/configure.in b/configure.in
++index ce21aef..ecd7119 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -125,6 +125,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUserData,
++     )]
++ )
++ 
+++dnl *****************************************************************
+++dnl *** Check libsmbclient by pkgconfig to get cflags and ldflags ***
+++dnl *****************************************************************
+++PKG_CHECK_MODULES(SMBCLIENT, smbclient)
+++
++ dnl ******************
++ dnl *** Final step ***
++ dnl ******************
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 41519d8..9fc97e9 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -16,3 +16,6 @@ smbnetfs_SOURCES = \
++ 	event.c			event.h			\
++ 	reconfigure.c		reconfigure.h		\
++ 	main.c
+++
+++smbnetfs_CFLAGS=${SMBCLIENT_CFLAGS}
+++smbnetfs_LDFLAGS=${SMBCLIENT_LDFLAGS}
++-- 
++1.8.4.2
++
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+index a0eddbc..f1420fb 100644
+--- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+@@ -17,7 +17,8 @@ PKGV = "${GITPKGVTAG}"
+ SRCREV = "ace1c519d45fe488b9b7e6cc77a2bcadb6c83464"
+ 
+ SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
+-           file://configure.patch"
++           file://configure.patch \
++           file://Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
+-- 
+1.8.4.2
+
 
