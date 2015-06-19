@@ -1,34 +1,25 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FB0875A02
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1863F759F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jun 2015 22:49:01 +0000 (UTC)
-Received: by igbiq7 with SMTP id iq7so2332364igb.1
+	Fri, 19 Jun 2015 02:22:26 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5J2MRZu025477
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Jun 2015 15:49:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=O0J8lI/040GCGzYxIcP9Oz2mYAqQ1oDKi+heiZfff14=;
-	b=dv+2Z9vVIb1I9nCfoftCk/X3gDy0jcPOF6+lU29llFVg5bMgeB+RMal7z61P2AL8Zn
-	kzVZ1kMTpRJfFWKmPvvPMaZIpLy3GsDhTGG+w2ndazxolmVTGwA4DjmQijLg7hnvo1gM
-	p4S4VR+5FouJdS6ORrN1olGmYkj7a9JqpI81PkHj1nKHdv1LXEl/tZcrPxNMRSWpCgWK
-	9xrXJoLULj2rzNu2I3wgkdu6LjC/4CDk/LynAslalxH/siGBrc94G/xdyyMIeA5Yqrns
-	Of0h8nu0JvEPzhJamXvgHmZpO1c0d8XPepYGXV62aw5cUSfkn7DeG563qL5AgBq0vCmp
-	Jfzg==
-X-Received: by 10.107.136.42 with SMTP id k42mr1548617iod.63.1434667742494;
-	Thu, 18 Jun 2015 15:49:02 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id x3sm465991igl.2.2015.06.18.15.49.01
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 18 Jun 2015 15:49:01 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Jun 2015 15:48:46 -0700
-Message-Id: <1434667726-15581-1-git-send-email-armccurdy@gmail.com>
+	Thu, 18 Jun 2015 19:22:27 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.224.2; Thu, 18 Jun 2015 19:22:27 -0700
+From: Kai Kang <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Jun 2015 10:15:03 +0800
+Message-ID: <1434680103-17233-1-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] minini: fix build when SECURITY_CFLAGS includes -pie -fpie
+MIME-Version: 1.0
+X-Originating-IP: [128.224.153.152]
+Subject: [meta-oe][PATCH] php: upgrade from 5.5.24 to 5.5.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,34 +33,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Jun 2015 22:49:04 -0000
+X-List-Received-Date: Fri, 19 Jun 2015 02:22:27 -0000
+Content-Type: text/plain
 
-Separating compile and link steps avoids build errors when
-security_flags.inc is used:
+Upgrade php from 5.5.24 to 5.5.26. Remove part 2 of phar-makefile.patch
+which is useless.
 
-  | DEBUG: Executing shell function do_compile
-  | ../sysdeps/i386/start.S:98: error: undefined reference to 'main'
-  | collect2: error: ld returned 1 exit status
-
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-support/minini/minini_1.2.b.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/php/php/phar-makefile.patch          | 9 ---------
+ meta-oe/recipes-devtools/php/{php_5.5.24.bb => php_5.5.26.bb} | 4 ++--
+ 2 files changed, 2 insertions(+), 11 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php_5.5.24.bb => php_5.5.26.bb} (98%)
 
-diff --git a/meta-oe/recipes-support/minini/minini_1.2.b.bb b/meta-oe/recipes-support/minini/minini_1.2.b.bb
-index e739498..6607dd8 100644
---- a/meta-oe/recipes-support/minini/minini_1.2.b.bb
-+++ b/meta-oe/recipes-support/minini/minini_1.2.b.bb
-@@ -22,7 +22,8 @@ SRC_URI[sha256sum] = "b08839af74acb36061fb76e1123bf56711bc5cf7a08b32e189b0ad78a2
- do_configure[noexec] = "1"
+diff --git a/meta-oe/recipes-devtools/php/php/phar-makefile.patch b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+index 2851b0f..2f7fe34 100644
+--- a/meta-oe/recipes-devtools/php/php/phar-makefile.patch
++++ b/meta-oe/recipes-devtools/php/php/phar-makefile.patch
+@@ -33,12 +33,3 @@ index 6516ddf..36e6cf4 100644
+  
+  $(builddir)/phar/phar.inc: $(srcdir)/phar/phar.inc
+  	-@test -d $(builddir)/phar || mkdir $(builddir)/phar
+-@@ -39,7 +28,7 @@ install-pharcmd: pharcmd
+- 	-@$(mkinstalldirs) $(INSTALL_ROOT)$(bindir)
+- 	$(INSTALL) $(builddir)/phar.phar $(INSTALL_ROOT)$(bindir)
+- 	-@rm -f $(INSTALL_ROOT)$(bindir)/phar
+--	$(LN_S) -f $(INSTALL_ROOT)$(bindir)/phar.phar $(INSTALL_ROOT)$(bindir)/phar
+-+	$(LN_S) -f $(bindir)/phar.phar $(INSTALL_ROOT)$(bindir)/phar
+- 	@$(mkinstalldirs) $(INSTALL_ROOT)$(mandir)/man1
+- 	@$(INSTALL_DATA) $(builddir)/phar.1 $(INSTALL_ROOT)$(mandir)/man1/phar.1
+- 	@$(INSTALL_DATA) $(builddir)/phar.phar.1 $(INSTALL_ROOT)$(mandir)/man1/phar.phar.1
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.24.bb b/meta-oe/recipes-devtools/php/php_5.5.26.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/php/php_5.5.24.bb
+rename to meta-oe/recipes-devtools/php/php_5.5.26.bb
+index f8419af..8b64b2b 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.24.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.26.bb
+@@ -30,8 +30,8 @@ SRC_URI_append_class-target += " \
+             file://php-fpm.service \
+           "
  
- do_compile() {
--    ${CC} minIni.c -shared -fPIC -o libminini.so.0.0 -Wl,-soname,libminini.so.0 ${CFLAGS} ${LDFLAGS}
-+    ${CC} ${CFLAGS} -fPIC -c minIni.c -o minIni.o
-+    ${CC} ${LDFLAGS} -shared -Wl,-soname,libminini.so.0 minIni.o -o libminini.so.0.0
- }
+-SRC_URI[md5sum] = "f9a8f3e4bb88b33b087bd63732b1402a"
+-SRC_URI[sha256sum] = "801b5cf2e0c01b07314d4ac3c8a7c28d524bdd8263ebdd0e33a99008251316a2"
++SRC_URI[md5sum] = "383a4b35327809afd2822e1e5efc8ee1"
++SRC_URI[sha256sum] = "816afffdb03ff4c542bc172a2f77f9c69b817df82d60cce05c1b4f578c2c926e"
  
- do_install () {
+ S = "${WORKDIR}/php-${PV}"
+ 
 -- 
 1.9.1
 
