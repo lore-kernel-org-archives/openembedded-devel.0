@@ -1,27 +1,39 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id D3F5075A0E;
-	Mon, 22 Jun 2015 12:22:20 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga101.fm.intel.com with ESMTP; 22 Jun 2015 05:22:21 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.13,659,1427785200"; d="scan'208";a="592493731"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.143])
-	([10.237.68.143])
-	by orsmga003.jf.intel.com with ESMTP; 22 Jun 2015 05:22:21 -0700
-Message-ID: <5587FE0C.5040705@linux.intel.com>
-Date: Mon, 22 Jun 2015 15:22:36 +0300
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Icedove/31.7.0
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
+	[209.85.212.170])
+	by mail.openembedded.org (Postfix) with ESMTP id DA94E60125
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jun 2015 14:13:28 +0000 (UTC)
+Received: by wicnd19 with SMTP id nd19so78028220wic.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Jun 2015 07:13:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=/AlRVeynBAWb0FuFk9YaeBMHieW8XUUzAAbx22AQyRA=;
+	b=oeK0RTc+2JFRNwT55xercSWJq9u0tSZClP8M5a/6GnSmFtjZq1f1YSsRWvIgV9rCLC
+	0ARKWYm22T4+Faq8ANy9u2ZbuHtG+IUEju20Do4nlqe5pWbD0RzE+fEjhCQWAyKqDgIV
+	zNcXllcPLB6KUm4LZOLMJEoaNw/F+Q2ghBaxx59+4JNu1ytNn9cUiLFDTCI4SZjl/Qmo
+	j/Xm1Ij4QnGWet2oWPoj5B5r4Y4pBPIGijKF1UTFHeFt6T6uVxAYqv65UdyGfG1Px4cB
+	8G6ux6AIseblUXOJcMd6e2ougsMZe5MXsL4Nftbf/2LE1MIxxJYvCKSA0rIjGs64UrkY
+	6l4Q==
+X-Received: by 10.194.250.98 with SMTP id zb2mr52397344wjc.90.1434982408664;
+	Mon, 22 Jun 2015 07:13:28 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
+	by mx.google.com with ESMTPSA id
+	pd7sm30782435wjb.27.2015.06.22.07.13.21
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 22 Jun 2015 07:13:21 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org,
+	ashcharles@gmail.com
+Date: Mon, 22 Jun 2015 16:12:53 +0200
+Message-Id: <1434982373-23401-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-References: <20150619165245.GB2398@jama>
-	<CAJTo0LZBZJdUbqPWNDsJ6SmgPHmpio0JwVE=xfsen-2OoB0RnQ@mail.gmail.com>
-In-Reply-To: <CAJTo0LZBZJdUbqPWNDsJ6SmgPHmpio0JwVE=xfsen-2OoB0RnQ@mail.gmail.com>
-Subject: Re: State of bitbake world, Failed tasks 2015-06-19
+Subject: [meta-xfce][PATCH] xfce4-session: ensure ip for machine is found by adding to hosts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,23 +47,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2015 12:22:27 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 22 Jun 2015 14:13:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 06/22/2015 02:07 PM, Burton, Ross wrote:
+This fixes very ugly behaviour: Starting applications e.g xfce4-terminal
+can delay for minutes in case network is connected.
 
-> I've just filed a bug for this chunk, looks like we missed something when
-> disabling GStreamer 0.10 in Qt.
+There was a similar approach implemented for xfce4-session but this was removed
+in
 
-Not really; the recipes for qt-mobility were moved from oe-core to 
-meta-oe as they were, without any modifications.
+commit f54d3a506fef603d8d0c538d1d69a6597152c169
+Author: Ash Charles <ashcharles@gmail.com>
+Date:   Mon Feb 23 08:40:53 2015 -0800
 
-This looks like a simple missing dependency issue, but I don't know why 
-it wasn't reported earlier. Note that there are also missing 
-dependencies for libxv and qt-creator, so it's not gstreamer-specific
+    xfce4-session: Remove unneeded pkg_postinst
 
+    The pkg_postinst inherited from previous versions of this recipe no
+    longer seems necessary; no error message seen at runtime in a quick
+    test.  As it made the generated packages unnecessarily
+    machine-specific, remove this post-install step. Based on the ensuring
+    discussion, this supersedes the original patch [1].
 
-Alex
+    [1] http://lists.openembedded.org/pipermail/openembedded-devel/2015-February/100454.html
+
+    Signed-off-by: Ash Charles <ashcharles@gmail.com>
+    Tested-by: Andreas Müller <schnitzeltony@googlemail.com>
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+Unfortuantely my tests for that patch only checked for the messagebox:
+
+| Could not look up internet address for <hostname>
+| This will prevent Xfce from operating correctly.
+| It may be possible to correct the problem by adding
+| <hostname> to the file /etc/hosts on your system.
+
+For unknown reasons this messagebox is not created but the hint is still
+extremely valid.
+
+To avoid making 'xfce4-session' machine specific an extra meta-recipe
+'machine-host' was created on which 'xfce4-session' rdepends.
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/recipes-xfce/xfce4-session/machine-host.bb    | 17 +++++++++++++++++
+ .../recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb  |  2 ++
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
+
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb b/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
+new file mode 100644
+index 0000000..03bd205
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Meta package adding machine name to known hosts"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
++
++ALLOW_EMPTY_${PN} = "1"
++
++LOCALHOSTMACHINE = "127.0.0.1    ${MACHINE}"
++
++# on some machines starting applications as xfce4-terminal take ages without
++# machine name in hosts
++pkg_postinst_${PN} () {
++if ! grep -q '${LOCALHOSTMACHINE}' $D/etc/hosts ; then
++    echo '${LOCALHOSTMACHINE}' >> $D/etc/hosts
++fi
++}
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
+index 81c56cc..215aec3 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
+@@ -26,3 +26,5 @@ FILES_${PN} += " \
+ "
+ 
+ FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
++
++RDEPENDS_${PN} += "machine-host"
+-- 
+1.9.3
 
 
