@@ -1,39 +1,38 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f170.google.com (mail-wi0-f170.google.com
-	[209.85.212.170])
-	by mail.openembedded.org (Postfix) with ESMTP id DA94E60125
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jun 2015 14:13:28 +0000 (UTC)
-Received: by wicnd19 with SMTP id nd19so78028220wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Jun 2015 07:13:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding;
-	bh=/AlRVeynBAWb0FuFk9YaeBMHieW8XUUzAAbx22AQyRA=;
-	b=oeK0RTc+2JFRNwT55xercSWJq9u0tSZClP8M5a/6GnSmFtjZq1f1YSsRWvIgV9rCLC
-	0ARKWYm22T4+Faq8ANy9u2ZbuHtG+IUEju20Do4nlqe5pWbD0RzE+fEjhCQWAyKqDgIV
-	zNcXllcPLB6KUm4LZOLMJEoaNw/F+Q2ghBaxx59+4JNu1ytNn9cUiLFDTCI4SZjl/Qmo
-	j/Xm1Ij4QnGWet2oWPoj5B5r4Y4pBPIGijKF1UTFHeFt6T6uVxAYqv65UdyGfG1Px4cB
-	8G6ux6AIseblUXOJcMd6e2ougsMZe5MXsL4Nftbf/2LE1MIxxJYvCKSA0rIjGs64UrkY
-	6l4Q==
-X-Received: by 10.194.250.98 with SMTP id zb2mr52397344wjc.90.1434982408664;
-	Mon, 22 Jun 2015 07:13:28 -0700 (PDT)
-Received: from localhost.localdomain
-	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
-	by mx.google.com with ESMTPSA id
-	pd7sm30782435wjb.27.2015.06.22.07.13.21
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 22 Jun 2015 07:13:21 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org,
-	ashcharles@gmail.com
-Date: Mon, 22 Jun 2015 16:12:53 +0200
-Message-Id: <1434982373-23401-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 1.9.3
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-pa0-f50.google.com (mail-pa0-f50.google.com
+	[209.85.220.50])
+	by mail.openembedded.org (Postfix) with ESMTP id CC5E273D2F;
+	Mon, 22 Jun 2015 14:27:29 +0000 (UTC)
+Received: by pacyo7 with SMTP id yo7so31997605pac.2;
+	Mon, 22 Jun 2015 07:27:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc:content-type;
+	bh=/GvLysZPpNtbh/8HS6pYc3e3Mw9gQTlGeORRO6/C9cU=;
+	b=a8NHH586RWtCAJVCQ+t8FfomEZSxSXFvCLNCaa+QkoZ7kRDtkzJP7OmZ/3k/9FieEm
+	IY/EqHqin4m0fHkE2j4woJduZ14Gc6RPirhUrtGrL8jpa87yR68WdzMv9BnpceUP1jgH
+	onl6obqK+TIGUi6Rj5/fI/qa6VTmZVB3a0F3U/OTUY+eH9RkntdF81YFavH8RdZ9VMz9
+	UNdvi2lN1O0DQoK70SCLnbLR2Lj4kn93jzMhSPuDIw5T9bMyhVsdj+ZaUVvrslcfJiPM
+	la0llqPi/KaKGSpyQLHbGjIrzWY0/CmVkgws0dHiXM+v0+9tEZTXr8nHWP6cnmULvZnv
+	pIcg==
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] xfce4-session: ensure ip for machine is found by adding to hosts
+X-Received: by 10.66.62.231 with SMTP id b7mr53078827pas.80.1434983250745;
+	Mon, 22 Jun 2015 07:27:30 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.70.34.109 with HTTP; Mon, 22 Jun 2015 07:27:30 -0700 (PDT)
+Received: by 10.70.34.109 with HTTP; Mon, 22 Jun 2015 07:27:30 -0700 (PDT)
+In-Reply-To: <CAJTo0LaKEvtznsdfz8gLWFSLyb6Rx2XsgbYG_cfOrAm+W2UfEg@mail.gmail.com>
+References: <CAJTo0LaKEvtznsdfz8gLWFSLyb6Rx2XsgbYG_cfOrAm+W2UfEg@mail.gmail.com>
+Date: Mon, 22 Jun 2015 11:27:30 -0300
+X-Google-Sender-Auth: 5e3vSjFXbrkN5k2-1YXTG9VxKoY
+Message-ID: <CAP9ODKq5Gg5-fv=ibhmeh_peXyL_z81q3RQd29Uh8iKrtOiw2Q@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Ross Burton <ross.burton@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Future of Qt4 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,88 +46,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2015 14:13:29 -0000
+X-List-Received-Date: Mon, 22 Jun 2015 14:27:32 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-This fixes very ugly behaviour: Starting applications e.g xfce4-terminal
-can delay for minutes in case network is connected.
+I vote for 2 as well.
+Em 22/06/2015 07:44, "Burton, Ross" <ross.burton@intel.com> escreveu:
 
-There was a similar approach implemented for xfce4-session but this was removed
-in
-
-commit f54d3a506fef603d8d0c538d1d69a6597152c169
-Author: Ash Charles <ashcharles@gmail.com>
-Date:   Mon Feb 23 08:40:53 2015 -0800
-
-    xfce4-session: Remove unneeded pkg_postinst
-
-    The pkg_postinst inherited from previous versions of this recipe no
-    longer seems necessary; no error message seen at runtime in a quick
-    test.  As it made the generated packages unnecessarily
-    machine-specific, remove this post-install step. Based on the ensuring
-    discussion, this supersedes the original patch [1].
-
-    [1] http://lists.openembedded.org/pipermail/openembedded-devel/2015-February/100454.html
-
-    Signed-off-by: Ash Charles <ashcharles@gmail.com>
-    Tested-by: Andreas Müller <schnitzeltony@googlemail.com>
-    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-Unfortuantely my tests for that patch only checked for the messagebox:
-
-| Could not look up internet address for <hostname>
-| This will prevent Xfce from operating correctly.
-| It may be possible to correct the problem by adding
-| <hostname> to the file /etc/hosts on your system.
-
-For unknown reasons this messagebox is not created but the hint is still
-extremely valid.
-
-To avoid making 'xfce4-session' machine specific an extra meta-recipe
-'machine-host' was created on which 'xfce4-session' rdepends.
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-xfce/xfce4-session/machine-host.bb    | 17 +++++++++++++++++
- .../recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb  |  2 ++
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
-
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb b/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
-new file mode 100644
-index 0000000..03bd205
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Meta package adding machine name to known hosts"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
-+
-+ALLOW_EMPTY_${PN} = "1"
-+
-+LOCALHOSTMACHINE = "127.0.0.1    ${MACHINE}"
-+
-+# on some machines starting applications as xfce4-terminal take ages without
-+# machine name in hosts
-+pkg_postinst_${PN} () {
-+if ! grep -q '${LOCALHOSTMACHINE}' $D/etc/hosts ; then
-+    echo '${LOCALHOSTMACHINE}' >> $D/etc/hosts
-+fi
-+}
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
-index 81c56cc..215aec3 100644
---- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
-@@ -26,3 +26,5 @@ FILES_${PN} += " \
- "
- 
- FILES_${PN}-dbg += "${libdir}/xfce4/*/*/.debug"
-+
-+RDEPENDS_${PN} += "machine-host"
--- 
-1.9.3
-
+> Hi,
+>
+> So, Qt 4.8.7 was released last month[1].  Support for Qt4 stops at the end
+> of 2015, and 4.8.7 is planned to be the last ever release of Qt4. It's
+> still mandated by the long-awaited LSB 5 but I think it's fair to say that
+> the majority of developers have moved to Qt5. So, what should we do with
+> Qt4 moving forward?[2]  I see several options:
+>
+> 1) There's still lots of people using Qt4 in production, please keep it in
+> oe-core!  (and revisit in six months time)
+> 2) Move Qt4 recipes and classes to a meta-qt4 layer now so that oe-core
+> 1.9 ships without Qt4, and anyone wanting full LSB compliance or Qt4 will
+> need to add that layer to their distro.
+>
+> Personally, I vote for (2).  Any other comments?
+>
+> Ross
+>
+> [1] https://blog.qt.io/blog/2015/05/26/qt-4-8-7-released/
+> [2] https://bugzilla.yoctoproject.org/show_bug.cgi?id=7812
+>
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>
+>
 
