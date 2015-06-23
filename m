@@ -1,33 +1,36 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3600 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 22 Jun 2015 23:28:38 UTC
-Received: from vms173021pub.verizon.net (vms173021pub.verizon.net
-	[206.46.173.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 33A6E72491;
-	Mon, 22 Jun 2015 23:28:38 +0000 (UTC)
-Received: from gandalf.denix.org ([108.51.169.48]) by vms173021.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul
-	16 2014))
-	with ESMTPSA id <0NQD00II2AFQRL10@vms173021.mailsrvcs.net>; Mon,
-	22 Jun 2015 17:28:39 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=KZwvylsD c=1 sm=1 tr=0	a=x3PDphkivVtATbYodTxRAw==:117
-	a=jLWw55sr_RoA:10 a=8nJEP1OIZ-IA:10	a=0gcC27t9AAAA:8 a=oR5dmqMzAAAA:8
-	a=-9mUelKeXuEA:10 a=XAFQembCKUMA:10	a=Q4-j1AaZAAAA:8
-	a=etzRbmcrs3KgnPDfePQA:9 a=wPNLvfGTeEIA:10
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C3D0A161ABD; Mon,
-	22 Jun 2015 18:28:38 -0400 (EDT)
-Date: Mon, 22 Jun 2015 18:28:38 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-members@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-id: <20150622222838.GN2465@denix.org>
-References: <20150504222711.GD5885@denix.org>
-MIME-version: 1.0
-In-reply-to: <20150504222711.GD5885@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: OpenEmbedded e.V. membership status announcement
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D90A605B3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jun 2015 05:47:37 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97637841"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Jun 2015 13:51:41 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5N5jxE0008311
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jun 2015 13:45:59 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Tue, 23 Jun 2015 13:47:56 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v2 3/7] libldb: add new recipe
+Thread-Index: AQHQqNNhtgn2m2YIe0KcCmmoAE81cZ2zeUiAgAYc2UA=
+Date: Tue, 23 Jun 2015 05:47:39 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73E10A6B@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
+	<1434527353-47017-4-git-send-email-biannm@cn.fujitsu.com>
+	<20150619155637.GA2398@jama>
+In-Reply-To: <20150619155637.GA2398@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH v2 3/7] libldb: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,99 +44,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Jun 2015 23:28:39 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-disposition: inline
-Content-transfer-encoding: 8bit
+X-List-Received-Date: Tue, 23 Jun 2015 05:47:43 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-Sorry for the delay. The Board of Directors has finally finalized the 
-membership list and would like to announce the following individuals have 
-been reinstated as active members of OpenEmbedded e.V. with voting rights:
-
-===========================
-Andreas Oberritter
-Andrei Gherzan
-Chris Larson
-Cliff Brake
-Joshua Lock
-Michael Lauer
-Tom King
-Tom Rini
-===========================
-
--- 
-Denys Dmytriyenko
-OpenEmbedded e.V. Board of Directors
-
-
-On Mon, May 04, 2015 at 06:27:11PM -0400, Denys Dmytriyenko wrote:
-> All,
-> 
-> In accordance with OpenEmbedded e.V. statutes, members that were absent from 
-> two or more consecutive annual General Assembly meetings and didn't have 
-> anyone representing them by proxy, forfeit their active membership status and 
-> can no longer vote in any OE e.V. election. Thus, the current up-to-date 
-> membership roster is one of the blocking items for any election process.
-> 
-> After collating the attendance records and all gathered proxy forms from past 
-> years GA meetings, the Board of Directors came up with the following list of 
-> inactive members - see below.
-> 
-> Realizing, that some people may still be active in other capacities in the 
-> OpenEmbedded e.V. organization, or just wish to renew their active status, the 
-> Board of Directors would like to open up a two-week period for inactive 
-> members to state their intent to become active, after which we should be able 
-> to vote for reinstating them back.
-> 
-> The Board will make an effort to contact inactive members directly by email, 
-> or please feel free to reply to this announcement with your intent. Thanks.
-> 
-> The list of e.V. members to become inactive, based on GA attendance:
-> 
-> ===========================
-> Alessandro Gardich
-> Andreas Oberritter
-> Andrei Gherzan
-> Chris Larson
-> Cliff Brake
-> Daniel Willmann
-> Dirk Hohndel
-> Dirk Opfer
-> Dmitry Eremin­Solenikov
-> Esben Haabendal
-> Florian Boor
-> Frans Meulenbrooks
-> Graham Gower
-> Holger Freyther
-> Jan Lübbe
-> Jason Kridner
-> John Willis
-> Joshua Lock
-> Ken Gilmer
-> Liam Girdwood
-> Marcin Juszkiewicz
-> Mark Brown
-> Michael Lauer
-> Michael Smith
-> Philip Blundell
-> Phillip Zabel
-> Robert Schuster
-> Roman I Khimov
-> Steve Sakoman
-> Tom King
-> Tom Rini
-> Yu Ke
-> Yury Bushmelev
-> ===========================
-> 
-> Please let us know of any concerns or comments. Thanks.
-> 
-> -- 
-> Denys Dmytriyenko
-> OpenEmbedded e.V. Board of Directors
-> -- 
-> _______________________________________________
-> Openembedded-members mailing list
-> Openembedded-members@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-members
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IE1hcnRp
+biBKYW5zYQ0KPiBTZW50OiBGcmlkYXksIEp1bmUgMTksIDIwMTUgMTE6NTcgUE0NCj4gVG86IG9w
+ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBb
+b2VdIFttZXRhLW9lXVtQQVRDSCB2MiAzLzddIGxpYmxkYjogYWRkIG5ldyByZWNpcGUNCj4gDQo+
+IE9uIFdlZCwgSnVuIDE3LCAyMDE1IGF0IDAzOjQ5OjA5UE0gKzA4MDAsIEJpYW4gTmFpbWVuZyB3
+cm90ZToNCj4gPiBsaWJsZGIgaXMgcmVxdWlyZWQgYnkgc2FtYmE0DQo+ID4NCj4gPiBTaWduZWQt
+b2ZmLWJ5OiBCaWFuIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4NCj4gPiAtLS0NCj4g
+PiAgLi4uL2RvLW5vdC1pbXBvcnQtdGFyZ2V0LW1vZHVsZS1pbi1jb25maWd1cmUucGF0Y2ggfCAz
+MiArKysrKysrKysrKysrKysNCj4gPiAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibGRiL2xp
+YmxkYl8xLjEuMTcuYmIgICAgfCA0NQ0KPiArKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIDIg
+ZmlsZXMgY2hhbmdlZCwgNzcgaW5zZXJ0aW9ucygrKQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQN
+Cj4gPiBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJsZGIvbGlibGRiL2RvLW5vdC1pbXBvcnQt
+dGFyZ2V0LW1vZHVsZS1pbi1jDQo+ID4gb25maWd1cmUucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0
+NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9saWJsZGJfMS4xLjE3LmJiDQo+
+IA0KPiBGYWlscyB0byBidWlsZCBpbiBiaXRiYWtlIHdvcmxkOg0KPiANCj4gfCBDaGVja2luZyBm
+b3Igc3lzdGVtIHRkYiA+PQ0KPiAxLjIuMTMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgOiB5ZXMNCj4gfCBFUlJPUjogUHl0aG9uIG1vZHVsZSBweXRkYiBv
+ZiB2ZXJzaW9uIDEuMi4xMyBub3QgZm91bmQsIGFuZCBidW5kbGluZw0KPiB8IGRpc2FibGVkDQo+
+IHwgV0FSTklORzogZXhpdCBjb2RlIDEgZnJvbSBhIHNoZWxsIGNvbW1hbmQuDQo+IHwgRVJST1I6
+IEZ1bmN0aW9uIGZhaWxlZDogZG9fY29uZmlndXJlIChsb2cgZmlsZSBpcyBsb2NhdGVkIGF0DQo+
+IHwgL2hvbWUvamVua2lucy9vZS93b3JsZC9zaHItY29yZS90bXAtZ2xpYmMvd29yay9jb3JlMi02
+NC1vZS1saW51eC9saWJsZA0KPiB8IGIvMS4xLjE3LXIwL3RlbXAvbG9nLmRvX2NvbmZpZ3VyZS4y
+MjY5NykNCj4gTk9URTogcmVjaXBlIGxpYmxkYi0xLjEuMTctcjA6IHRhc2sgZG9fY29uZmlndXJl
+OiBGYWlsZWQNCj4gRVJST1I6IFRhc2sgMjU1MDUNCj4gKC9ob21lL2plbmtpbnMvb2Uvd29ybGQv
+c2hyLWNvcmUvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQNCj4gL2xp
+YmxkYi9saWJsZGJfMS4xLjE3LmJiLCBkb19jb25maWd1cmUpIGZhaWxlZCB3aXRoIGV4aXQgY29k
+ZSAnMScNCj4gDQoNCnRkYi5zbyBpcyBwcm92aWRlZCBieSBsaWJ0ZGIgd2hpY2ggaXMgREVQRU5E
+LWVkIGJ5IGxpYmxkYiwgSSB0aGluayBpdCBzaG91bGQgYmUgaW5zdGFsbGVkIGludG8NClNUQUdJ
+TkdfRElSX0hPU1QvUFlUSE9OX1NJVEVQQUNLQUdFU19ESVIuDQoNCkJlY2F1c2UgSSBjb3VsZCBu
+b3QgcmVwcm9kdWNlIGl0IGluIG15IGJ1aWxkaW5nLCB3b3VsZCB5b3UgbWluZCB0ZWxsaW5nIG1l
+IHdoZXRoZXIgZG9lcyB0ZGIuc28gZXhpc3QgDQppbiBTVEFHSU5HX0RJUl9IT1NUL1BZVEhPTl9T
+SVRFUEFDS0FHRVNfRElSLyB3aGlsZSB0aGlzIGVycm9yIHdhcyBjYXVnaHQuDQoNClRoYW5rcw0K
+IEJpYW4NCg0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xp
+YmxkYi9saWJsZGIvZG8tbm90LWltcG9ydC10YXJnZXQtbW9kdWxlLWluDQo+ID4gLWNvbmZpZ3Vy
+ZS5wYXRjaA0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibGRiL2xpYmxkYi9kby1u
+b3QtaW1wb3J0LXRhcmdldC1tb2R1bGUtaW4NCj4gPiAtY29uZmlndXJlLnBhdGNoDQo+ID4gbmV3
+IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5iNGQ1MjJhDQo+ID4gLS0tIC9k
+ZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9saWJsZGIv
+ZG8tbm90LWltcG9ydC10YXJnZXQtbW9kdWwNCj4gPiArKysgZS1pbi1jb25maWd1cmUucGF0Y2gN
+Cj4gPiBAQCAtMCwwICsxLDMyIEBADQo+ID4gK1NvbWUgbW9kdWxlIGNhbiBiZSBsb2FkZWQgd2hp
+bGUgY3Jvc3MgY29tcGlsZSwgd2UganN0IGNoZWNrIHdoZXRoZXINCj4gPiArdGhlIG1vZHVsZSBl
+eGlzdA0KPiA+ICsNCj4gPiArU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24u
+ZnVqaXRzdS5jb20+DQo+ID4gKw0KPiA+ICstLS0gbGRiLTEuMS4xNy5vcmlnL2J1aWxkdG9vbHMv
+d2Fmc2FtYmEvc2FtYmFfYnVuZGxlZC5weQkyMDE0LTA1LTA1DQo+IDE3OjAwOjQxLjAwMDAwMDAw
+MCArMDkwMA0KPiA+ICsrKysgbGRiLTEuMS4xNy9idWlsZHRvb2xzL3dhZnNhbWJhL3NhbWJhX2J1
+bmRsZWQucHkJMjAxNS0wNi0xNQ0KPiAxMDowOTo1MC4yMTAwMDAyMTcgKzA5MDANCj4gPiArQEAg
+LTEsNyArMSw3IEBADQo+ID4gKyAjIGZ1bmN0aW9ucyB0byBzdXBwb3J0IGJ1bmRsZWQgbGlicmFy
+aWVzDQo+ID4gKw0KPiA+ICsgZnJvbSBDb25maWd1cmUgaW1wb3J0IGNvbmYNCj4gPiArLWltcG9y
+dCBzeXMsIExvZ3MNCj4gPiArK2ltcG9ydCBzeXMsIExvZ3MsIGltcA0KPiA+ICsgZnJvbSBzYW1i
+YV91dGlscyBpbXBvcnQgKg0KPiA+ICsNCj4gPiArIGRlZiBQUklWQVRFX05BTUUoYmxkLCBuYW1l
+LCBwcml2YXRlX2V4dGVuc2lvbiwgcHJpdmF0ZV9saWJyYXJ5KToNCj4gPiArQEAgLTIyMiw2ICsy
+MjIsMTYgQEAgZGVmIENIRUNLX0JVTkRMRURfU1lTVEVNX1BZVEhPTihjb25mLCBsaQ0KPiA+ICsg
+ICAgICAgICBtID0gX19pbXBvcnRfXyhtb2R1bGVuYW1lKQ0KPiA+ICsgICAgIGV4Y2VwdCBJbXBv
+cnRFcnJvcjoNCj4gPiArICAgICAgICAgZm91bmQgPSBGYWxzZQ0KPiA+ICsrDQo+ID4gKysgICAg
+ICAgIGJ1aWxkX2FyY2ggPSBvcy5lbnZpcm9uWyJCVUlMRF9BUkNIIl0NCj4gPiArKyAgICAgICAg
+aG9zdF9hcmNoID0gb3MuZW52aXJvblsiSE9TVF9BUkNIIl0NCj4gPiArKyAgICAgICAgaWYgYnVp
+bGRfYXJjaCAhPSBob3N0X2FyY2g6DQo+ID4gKysgICAgICAgICAgICAjIFNvbWUgbW9kdWxlcyBt
+YXliZSBjYW4gbm90IGJlIGltcG9ydGVkIHdoaWxlIGNyb3NzIGNvbXBpbGUNCj4gPiArKyAgICAg
+ICAgICAgICMgV2UganVzdCBjaGVjayB3aGV0aGVyIHRoZSBtb2R1bGUgZXhpc3QNCj4gPiArKyAg
+ICAgICAgICAgIHN0dWZmID0gaW1wLmZpbmRfbW9kdWxlKG1vZHVsZW5hbWUsDQo+IFtvcy5lbnZp
+cm9uWyJQWVRIT05QQVRIIl1dKQ0KPiA+ICsrICAgICAgICAgICAgaWYgc3R1ZmYgIT0gTm9uZToN
+Cj4gPiArKyAgICAgICAgICAgICAgICBMb2dzLndhcm4oJ0Nyb3NzIG1vZHVsZVslc10gaGFzIGJl
+ZW4gZm91bmQsIGJ1dCBjYW4gbm90DQo+IGJlIGxvYWRlZC4nICUgKHN0dWZmWzFdKSkNCj4gPiAr
+KyAgICAgICAgICAgICAgICBmb3VuZCA9IFRydWUNCj4gPiArICAgICBlbHNlOg0KPiA+ICsgICAg
+ICAgICB0cnk6DQo+ID4gKyAgICAgICAgICAgICB2ZXJzaW9uID0gbS5fX3ZlcnNpb25fXw0KPiA+
+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJsZGIvbGlibGRiXzEuMS4x
+Ny5iYg0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibGRiL2xpYmxkYl8xLjEuMTcu
+YmINCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLjE3NjA3ZjcN
+Cj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGli
+bGRiL2xpYmxkYl8xLjEuMTcuYmINCj4gPiBAQCAtMCwwICsxLDQ1IEBADQo+ID4gK1NVTU1BUlkg
+PSAiSGllcmFyY2hpY2FsLCByZWZlcmVuY2UgY291bnRlZCBtZW1vcnkgcG9vbCBzeXN0ZW0gd2l0
+aA0KPiBkZXN0cnVjdG9ycyINCj4gPiArSE9NRVBBR0UgPSAiaHR0cDovL2xkYi5zYW1iYS5vcmci
+DQo+ID4gK1NFQ1RJT04gPSAibGlicyINCj4gPiArTElDRU5TRSA9ICJMR1BMLTMuMCsgJiBMR1BM
+LTIuMSsgJiBHUEwtMy4wKyINCj4gPiArDQo+ID4gK0RFUEVORFMgKz0gImxpYnRkYiB0YWxsb2Mg
+bGlidGV2ZW50IGxpYnRkYiINCj4gPiArUkRFUEVORFNfJHtQTn0gKz0gImxpYnRldmVudCBwb3B0
+IGxpYnRhbGxvYyINCj4gPiArUkRFUEVORFNfcHlsZGIgKz0gInB5dGhvbiBsaWJ0ZGIgbGlidGFs
+bG9jIg0KPiA+ICsNCj4gPiArU1JDX1VSSSA9ICJodHRwOi8vc2FtYmEub3JnL2Z0cC9sZGIvbGRi
+LSR7UFZ9LnRhci5neiBcDQo+ID4gKyAgICAgICAgICAgZmlsZTovL2RvLW5vdC1pbXBvcnQtdGFy
+Z2V0LW1vZHVsZS1pbi1jb25maWd1cmUucGF0Y2giDQo+ID4gKw0KPiA+ICtMSUNfRklMRVNfQ0hL
+U1VNID0NCj4gImZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9M
+R1BMLTMuMDttZDU9YmZjY2ZlOTUyMjY5ZmYNCj4gZjJiNDA3ZGQxMWYyZjMwODNiIFwNCj4gPiAr
+DQo+IGZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9MR1BMLTIu
+MTttZDU9MWE2ZDI2OGZkMjE4Njc1DQo+IGZmZWE4YmU1NTY3ODhiNzgwIFwNCj4gPiArDQo+IGZp
+bGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9HUEwtMy4wO21kNT1j
+NzlmZjM5ZjE5ZGZlYzZkDQo+IDI5M2I5NWRlYTdiMDc4OTEiDQo+ID4gKw0KPiA+ICtTUkNfVVJJ
+W21kNXN1bV0gPSAiN2MyYWI0ZTNmMmE0MTg2NDkzYWEwNmVhYmJjNjFjYzAiDQo+ID4gK1NSQ19V
+Uklbc2hhMjU2c3VtXSA9DQo+ICJiOWEzMTJhYWQxOWU5NDYzNzE2ZDI1N2Q4ZjI1MjlmZDdmYzFh
+NWVmMjRmNmRjZGMwYzRhMTkzMGQ3YmRiNmU2Ig0KPiA+ICsNCj4gPiAraW5oZXJpdCB3YWYtc2Ft
+YmENCj4gPiArDQo+ID4gK1MgPSAiJHtXT1JLRElSfS9sZGItJHtQVn0iDQo+ID4gKw0KPiA+ICtF
+WFRSQV9PRUNPTkYgKz0gIi0tZGlzYWJsZS1ycGF0aCBcDQo+ID4gKyAgICAgICAgICAgICAgICAg
+LS1kaXNhYmxlLXJwYXRoLWluc3RhbGwgXA0KPiA+ICsgICAgICAgICAgICAgICAgIC0tYnVuZGxl
+ZC1saWJyYXJpZXM9Tk9ORSBcDQo+ID4gKyAgICAgICAgICAgICAgICAgLS1idWlsdGluLWxpYnJh
+cmllcz1yZXBsYWNlIFwNCj4gPiArICAgICAgICAgICAgICAgICAtLXdpdGgtbW9kdWxlc2Rpcj0k
+e2xpYmRpcn0vbGRiL21vZHVsZXMgXA0KPiA+ICsgICAgICAgICAgICAgICAgIC0td2l0aC1wcml2
+YXRlbGliZGlyPSR7bGliZGlyfS9sZGIgXA0KPiA+ICsgICAgICAgICAgICAgICAgIC0td2l0aC1s
+aWJpY29udj0ke1NUQUdJTkdfRElSX0hPU1R9JHtwcmVmaXh9XA0KPiA+ICsgICAgICAgICAgICAg
+ICAgIg0KPiA+ICsNCj4gPiArUEFDS0FHRVMgKz0gInB5bGRiIHB5bGRiLWRiZyBweWxkYi1kZXYi
+DQo+ID4gKw0KPiA+ICtGSUxFU18ke1BOfSArPSAiJHtsaWJkaXJ9L2xkYi8qIg0KPiA+ICtGSUxF
+U18ke1BOfS1kYmcgKz0gIiR7bGliZGlyfS9sZGIvLmRlYnVnLyogXA0KPiA+ICsgICAgICAgICAg
+ICAgICAgICAgICR7bGliZGlyfS9sZGIvbW9kdWxlcy9sZGIvLmRlYnVnLyoiDQo+ID4gKw0KPiA+
+ICtGSUxFU19weWxkYiA9ICIke2xpYmRpcn0vcHl0aG9uJHtQWVRIT05fQkFTRVZFUlNJT059L3Np
+dGUtcGFja2FnZXMvKiBcDQo+ID4gKyAgICAgICAgICAgICAgICR7bGliZGlyfS9saWJweWxkYi11
+dGlsLnNvLjEgXA0KPiA+ICsgICAgICAgICAgICAgICAke2xpYmRpcn0vbGlicHlsZGItdXRpbC5z
+by4xLjEuMTcgXA0KPiA+ICsgICAgICAgICAgICAgICINCj4gPiArRklMRVNfcHlsZGItZGJnID0N
+Cj4gIiR7bGliZGlyfS9weXRob24ke1BZVEhPTl9CQVNFVkVSU0lPTn0vc2l0ZS1wYWNrYWdlcy8u
+ZGVidWcgXA0KPiA+ICsgICAgICAgICAgICAgICAgICAgJHtsaWJkaXJ9Ly5kZWJ1Zy9saWJweWxk
+Yi11dGlsLnNvLjEuMS4xNyINCj4gPiArRklMRVNfcHlsZGItZGV2ID0gIiR7bGliZGlyfS9saWJw
+eWxkYi11dGlsLnNvIg0KPiA+IC0tDQo+ID4gMS45LjENCj4gPg0KPiA+IC0tDQo+ID4gX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRk
+ZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
+bWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gTWFydGluICdKYU1hJyBKYW5z
+YSAgICAgamFiYmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwuY29tDQo=
 
