@@ -1,22 +1,37 @@
-Return-Path: <amy.fong@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6457A6AC37
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
+	[209.85.220.180])
+	by mail.openembedded.org (Postfix) with ESMTP id D347074056
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 14:29:46 +0000 (UTC)
-Received: from yow-dellw-af (yow-dellw-af.wrs.com [128.224.56.22])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5NETlPM005204
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128 verify=NO);
-	Tue, 23 Jun 2015 07:29:47 -0700 (PDT)
-Received: from afong by yow-dellw-af with local (Exim 4.85)
-	(envelope-from <amy.fong@windriver.com>)
-	id 1Z7PCW-0000Ur-Hq; Tue, 23 Jun 2015 10:29:24 -0400
-Date: Tue, 23 Jun 2015 10:29:24 -0400
-From: Amy Fong <amy.fong@windriver.com>
-To: openembedded-devel@lists.openembedded.org, amy.fong@windriver.com
-Message-ID: <20150623142924.GA1887@windriver.com>
+	Tue, 23 Jun 2015 14:47:43 +0000 (UTC)
+Received: by qkeo142 with SMTP id o142so5992760qke.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Jun 2015 07:47:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=QfeYwDoyezlYsquCIZlR07sVVUc3BDuKioFOyxvU+Kg=;
+	b=OXu8JVxkRLI3rNFQhVmXXjGvi9eSuvcZMkDVbTQWc4HGPiwsB18Q/5/ewRleWRdxc/
+	uf1PXPdrmqkkhd88iH5DrWK2Aa5oX/g6mH/Rou04RRLHSFE5tkBgZnn3HE7r5hT1j79W
+	u0Yas+iWmhipQL9bscX7x/Douzd8b2K7aWxmDIG2DSaDcFse1ZxC0dazyvMkQM0miMtw
+	vJ56ib+F6TQ6a1Vp3vekii06WIqu/LNkNR2eok58IDxIHISAKRsbm9T6HpKMMkBPhDL1
+	hB4jG78lP6+C9GM0hjHJCVpAEvLkb14EbP6A9VFdya8Xt1B5tPPu1NibPnE5rkYJulrT
+	FEpQ==
+X-Gm-Message-State: ALoCoQloN5DnidTD9CP1Pc56YfKTCyDML3AbfFckVzR8wknC8HlSX7FRK51aDunPbX6fVVrjg5/4
+X-Received: by 10.140.43.199 with SMTP id e65mr10616019qga.80.1435070863989;
+	Tue, 23 Jun 2015 07:47:43 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-java][PATCH] openjdk-7: fix icedtea-crosscompile-fix.patch
+Received: by 10.140.102.231 with HTTP; Tue, 23 Jun 2015 07:47:23 -0700 (PDT)
+In-Reply-To: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
+References: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 23 Jun 2015 15:47:23 +0100
+Message-ID: <CAJTo0LYpcKWFAgDHcQ3FFsFypdHp6J8FBYkUGo3aQoJ6yRy4ng@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [RFC] Move libexecdir to $prefix/libexec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,36 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2015 14:29:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Jun 2015 14:47:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From ed2cca0045c597a28ce4ea3f9ce220c97a2a05fe Mon Sep 17 00:00:00 2001
-From: Amy Fong <amy.fong@windriver.com>
-Date: Mon, 22 Jun 2015 14:50:20 -0400
-Subject: [PATCH] openjdk-7: fix patch
+Forgot to cross-post oe-devel...
 
-Fixing what looks like a hand edited patch error
+On 23 June 2015 at 15:30, Ross Burton <ross.burton@intel.com> wrote:
 
-Signed-off-by: Amy Fong <amy.fong@windriver.com>
----
- recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch b/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
-index 250f8a4..5e8e479 100644
---- a/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
-+++ b/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
-@@ -139,7 +139,7 @@ index 69e1177..dc7f8e6 100644
-  CFLAGS_REQUIRED_hppa    +=
-  CFLAGS_REQUIRED_i586    += -fno-omit-frame-pointer -D_LITTLE_ENDIAN
-  CFLAGS_REQUIRED_ia64    += -fno-omit-frame-pointer -D_LITTLE_ENDIAN
-- @@ -359,7 +337,7 @@ LDFLAGS_COMMON  += $(LDFLAGS_DEFS_OPTION)
-+@@ -359,7 +337,7 @@ LDFLAGS_COMMON  += $(LDFLAGS_DEFS_OPTION)
-  #
-  # -L paths for finding and -ljava
-  #
--- 
-2.1.4
-
+> Hi,
+>
+> Yes, I'm bringing this up again. :)
+>
+> Our default of libexecdir=$libdir/$BPN is contrary to both the FHS[1] and
+> GNU
+> Coding Standards[2], mainly because the key point is that libexecdir
+> should be
+> global and not change per-recipe.  The new FHS allows /usr/libexec so this
+> series changes the default to that, and fixes up the recipes which need
+> fixing.
+>
+> Several of the recipe fixes are unrelated to the change and will be
+> submitted to
+> master shortly, but others (eg sudo) are intimately tied to the change.
+>
+> I've done basic multilib-enabled builds but more testing welcome.  I'd say
+> that
+> in general multilib problems this exposes are in fact problems with the
+> recipe:
+> for example GConf should install the binaries once and libraries in each
+> libdir.
+>
+> Ross
+>
+> [1] http://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04s07.html
+> [2] https://www.gnu.org/prep/standards/html_node/Directory-Variables.html
+>
+>
 
