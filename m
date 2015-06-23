@@ -1,36 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 13430601E0
+Return-Path: <amy.fong@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6457A6AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 12:54:50 +0000 (UTC)
-Received: by wicnd19 with SMTP id nd19so105026491wic.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 05:54:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=vULJak5ORyJayODkQOETZp9dyq1kdTMAOmXfPRqZuI0=;
-	b=Yo+04yVwMfNNGKg+bzT+u4rzzAz5fU75XZbNb1tSuhJ6h07dkkfgtOOjvXZ3KZTnnk
-	BE7KI91PqckCr5vPzJ6e4sTLE70XbyeOXAAOUOjN9weov9pNwTOHpAStaThIlBhpannE
-	pSIxIzdPwQ/I7B2kxapFTjNZKtwCx/s0Rbu3hrrwXX4Jdjzr4zhsZj2S6KzdJLhC5vgw
-	Qo1WVq/RNBaIb+kqiuhn9iXVuzurynJaEPmb42D2/kVq0jeqNVNUKkC6W0u6IxncavXd
-	6QGKhRN/ZQV2lZyHKdsMYsSuz1zvwmc7RnyampC6j5k9bxXWuh1PbQTBs7fb5Y53orym
-	lu4w==
-X-Received: by 10.180.11.225 with SMTP id t1mr3220545wib.94.1435064090773;
-	Tue, 23 Jun 2015 05:54:50 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id
-	gw7sm22299389wib.15.2015.06.23.05.54.49
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Jun 2015 05:54:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Jun 2015 14:54:54 +0200
-Message-Id: <1435064094-19617-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.4.4
-Cc: Martin Jansa <martin.jansa@lge.com>
-Subject: [meta-oe][master][fido][PATCH] nodejs: fix no-registry option
+	Tue, 23 Jun 2015 14:29:46 +0000 (UTC)
+Received: from yow-dellw-af (yow-dellw-af.wrs.com [128.224.56.22])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5NETlPM005204
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128 verify=NO);
+	Tue, 23 Jun 2015 07:29:47 -0700 (PDT)
+Received: from afong by yow-dellw-af with local (Exim 4.85)
+	(envelope-from <amy.fong@windriver.com>)
+	id 1Z7PCW-0000Ur-Hq; Tue, 23 Jun 2015 10:29:24 -0400
+Date: Tue, 23 Jun 2015 10:29:24 -0400
+From: Amy Fong <amy.fong@windriver.com>
+To: openembedded-devel@lists.openembedded.org, amy.fong@windriver.com
+Message-ID: <20150623142924.GA1887@windriver.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: [meta-java][PATCH] openjdk-7: fix icedtea-crosscompile-fix.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,98 +30,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2015 12:54:53 -0000
+X-List-Received-Date: Tue, 23 Jun 2015 14:29:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Martin Jansa <martin.jansa@lge.com>
+From ed2cca0045c597a28ce4ea3f9ce220c97a2a05fe Mon Sep 17 00:00:00 2001
+From: Amy Fong <amy.fong@windriver.com>
+Date: Mon, 22 Jun 2015 14:50:20 -0400
+Subject: [PATCH] openjdk-7: fix patch
 
-* https://github.com/npm/npm/issues/3691
-* https://github.com/npm/npm/issues/5509
+Fixing what looks like a hand edited patch error
 
-Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+Signed-off-by: Amy Fong <amy.fong@windriver.com>
 ---
- .../nodejs/nodejs/no-registry.patch                | 59 ++++++++++++++++++++++
- meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb   |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch
+ recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch b/meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch
-new file mode 100644
-index 0000000..ed24738
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/no-registry.patch
-@@ -0,0 +1,59 @@
-+Bugfix for --no-registry in nodejs-v0.12.2
-+
-+diff -u -r node-v0.12.2_def/deps/npm/lib/cache/caching-client.js node-v0.12.2/deps/npm/lib/cache/caching-client.js
-+--- node-v0.12.2_def/deps/npm/lib/cache/caching-client.js	2015-04-01 01:13:01.000000000 +0300
-++++ node-v0.12.2/deps/npm/lib/cache/caching-client.js	2015-05-18 00:47:10.738599686 +0300
-+@@ -67,6 +67,22 @@
-+   var cacheBase = cacheFile(npm.config.get("cache"))(uri)
-+   var cachePath = path.join(cacheBase, ".cache.json")
-+ 
-++  if (parsed.host === "noregistry") (function() {
-++    var stat = null
-++    var file = npm.config.get("cache") + parsed.pathname + "/.cache.json"
-++    try {
-++      stat = fs.statSync(cachePath)
-++    } catch (ex) {}
-++    if (!stat) try {
-++      stat = fs.statSync(file) 
-++      cachePath = file
-++    } catch (ex) {
-++      stat = "Registry not defined and registry files not found: \"" +
-++             cachePath + "\", \"" + file + "\"."
-++      throw new Error(stat)
-++    }
-++  })()
-++
-+   // If the GET is part of a write operation (PUT or DELETE), then
-+   // skip past the cache entirely, but still save the results.
-+   if (uri.match(/\?write=true$/)) {
-+@@ -83,12 +99,17 @@
-+         }
-+         catch (ex) {
-+           data = null
-++          if (parsed.host === "noregistry")
-++            throw new Error("File \"" + cachePath+"\"" + " corrupted.")
-+         }
-+ 
-+         params.stat = stat
-+         params.data = data
-+ 
-+-        get_.call(client, uri, cachePath, params, cb)
-++        if (parsed.host === "noregistry")
-++          cb(null, data, JSON.stringify(data), { statusCode : 304 })
-++        else
-++          get_.call(client, uri, cachePath, params, cb)
-+       })
-+     }
-+     else {
-+diff -u -r node-v0.12.2_def/deps/npm/lib/utils/map-to-registry.js node-v0.12.2/deps/npm/lib/utils/map-to-registry.js
-+--- node-v0.12.2_def/deps/npm/lib/utils/map-to-registry.js	2015-04-01 01:13:01.000000000 +0300
-++++ node-v0.12.2/deps/npm/lib/utils/map-to-registry.js	2015-05-18 01:15:10.030569613 +0300
-+@@ -45,6 +45,8 @@
-+ 
-+   log.silly("mapToRegistry", "registry", registry)
-+ 
-++  if (!registry) return cb(null, "http://noregistry/" + name, {})
-++
-+   var auth = config.getCredentialsByURI(registry)
-+ 
-+   // normalize registry URL so resolution doesn't drop a piece of registry URL
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb
-index 81b8c0d..cc4a5ce 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb
-@@ -7,6 +7,7 @@ DEPENDS = "openssl"
- 
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
-     file://enable-armv5e-build.patch \
-+    file://no-registry.patch \
- "
- SRC_URI[md5sum] = "c2b4deea212c0b7c2f86368c65fab312"
- SRC_URI[sha256sum] = "3298d0997613a04ac64343e8316da134d04588132554ae402eb344e3369ec912"
+diff --git a/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch b/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
+index 250f8a4..5e8e479 100644
+--- a/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
++++ b/recipes-core/openjdk/openjdk-7-75b13/icedtea-crosscompile-fix.patch
+@@ -139,7 +139,7 @@ index 69e1177..dc7f8e6 100644
+  CFLAGS_REQUIRED_hppa    +=
+  CFLAGS_REQUIRED_i586    += -fno-omit-frame-pointer -D_LITTLE_ENDIAN
+  CFLAGS_REQUIRED_ia64    += -fno-omit-frame-pointer -D_LITTLE_ENDIAN
+- @@ -359,7 +337,7 @@ LDFLAGS_COMMON  += $(LDFLAGS_DEFS_OPTION)
++@@ -359,7 +337,7 @@ LDFLAGS_COMMON  += $(LDFLAGS_DEFS_OPTION)
+  #
+  # -L paths for finding and -ljava
+  #
 -- 
-2.4.4
+2.1.4
 
 
