@@ -1,35 +1,34 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D90A605B3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D84373772
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 05:47:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,625,1427731200"; d="scan'208";a="97637841"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Jun 2015 13:51:41 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5N5jxE0008311
+	Tue, 23 Jun 2015 08:05:28 +0000 (UTC)
+Received: by wguu7 with SMTP id u7so2242453wgu.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 13:45:59 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0181.006; Tue, 23 Jun 2015 13:47:56 +0800
-From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH v2 3/7] libldb: add new recipe
-Thread-Index: AQHQqNNhtgn2m2YIe0KcCmmoAE81cZ2zeUiAgAYc2UA=
-Date: Tue, 23 Jun 2015 05:47:39 +0000
-Message-ID: <30DC4EDFD798C94083F3E083754532CC73E10A6B@G08CNEXMBPEKD02.g08.fujitsu.local>
+	Tue, 23 Jun 2015 01:05:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type; bh=6R74K1XFJq0DUMQeBuypV5Gr5ylKQKpZX4nT8OjgwNw=;
+	b=QUZ8mIOAzQYabmTqax8MV7suRw355jhm4tQIvF80+4LFj6EXfkVRuDcjS+U8M4k6ez
+	vlAKSVWg0i0uWJrQH5CgdIXNPWOhJ8jGGvPXyWPifeEl3plPzq5Enns8K4mgWcNvYpJY
+	VjQm18Oo05XBqzgg33/OTB2Pt987o2/uAVEcTB1bfX8wJQl2WubBfj8I7n2afhFRlQMz
+	iIRDT2pZIf1EXHnHRQPZml0yQNxigivX1AKS/YRmO+yMVUFphuRS86301zdRwxb/BJBy
+	56O8RocEZe0+X+jU+BFDbUI0/5a5x/EnGXEqDh4JXM4QekxcJ6L29Gu4M1E2AHY+1suv
+	bgvQ==
+MIME-Version: 1.0
+X-Received: by 10.180.7.199 with SMTP id l7mr1097664wia.28.1435046728577; Tue,
+	23 Jun 2015 01:05:28 -0700 (PDT)
+Received: by 10.28.167.2 with HTTP; Tue, 23 Jun 2015 01:05:28 -0700 (PDT)
+In-Reply-To: <30DC4EDFD798C94083F3E083754532CC73E10A6B@G08CNEXMBPEKD02.g08.fujitsu.local>
 References: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
 	<1434527353-47017-4-git-send-email-biannm@cn.fujitsu.com>
 	<20150619155637.GA2398@jama>
-In-Reply-To: <20150619155637.GA2398@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.31]
-MIME-Version: 1.0
+	<30DC4EDFD798C94083F3E083754532CC73E10A6B@G08CNEXMBPEKD02.g08.fujitsu.local>
+Date: Tue, 23 Jun 2015 10:05:28 +0200
+Message-ID: <CA+chaQcK+DoksMSVKpFRQzze58CLihk1LEnH0Pn+J-n3rY_DUw@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-oe][PATCH v2 3/7] libldb: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -44,124 +43,200 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2015 05:47:43 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 23 Jun 2015 08:05:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IE1hcnRp
-biBKYW5zYQ0KPiBTZW50OiBGcmlkYXksIEp1bmUgMTksIDIwMTUgMTE6NTcgUE0NCj4gVG86IG9w
-ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBb
-b2VdIFttZXRhLW9lXVtQQVRDSCB2MiAzLzddIGxpYmxkYjogYWRkIG5ldyByZWNpcGUNCj4gDQo+
-IE9uIFdlZCwgSnVuIDE3LCAyMDE1IGF0IDAzOjQ5OjA5UE0gKzA4MDAsIEJpYW4gTmFpbWVuZyB3
-cm90ZToNCj4gPiBsaWJsZGIgaXMgcmVxdWlyZWQgYnkgc2FtYmE0DQo+ID4NCj4gPiBTaWduZWQt
-b2ZmLWJ5OiBCaWFuIE5haW1lbmcgPGJpYW5ubUBjbi5mdWppdHN1LmNvbT4NCj4gPiAtLS0NCj4g
-PiAgLi4uL2RvLW5vdC1pbXBvcnQtdGFyZ2V0LW1vZHVsZS1pbi1jb25maWd1cmUucGF0Y2ggfCAz
-MiArKysrKysrKysrKysrKysNCj4gPiAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibGRiL2xp
-YmxkYl8xLjEuMTcuYmIgICAgfCA0NQ0KPiArKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIDIg
-ZmlsZXMgY2hhbmdlZCwgNzcgaW5zZXJ0aW9ucygrKQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQN
-Cj4gPiBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJsZGIvbGlibGRiL2RvLW5vdC1pbXBvcnQt
-dGFyZ2V0LW1vZHVsZS1pbi1jDQo+ID4gb25maWd1cmUucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0
-NA0KPiA+IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9saWJsZGJfMS4xLjE3LmJiDQo+
-IA0KPiBGYWlscyB0byBidWlsZCBpbiBiaXRiYWtlIHdvcmxkOg0KPiANCj4gfCBDaGVja2luZyBm
-b3Igc3lzdGVtIHRkYiA+PQ0KPiAxLjIuMTMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgOiB5ZXMNCj4gfCBFUlJPUjogUHl0aG9uIG1vZHVsZSBweXRkYiBv
-ZiB2ZXJzaW9uIDEuMi4xMyBub3QgZm91bmQsIGFuZCBidW5kbGluZw0KPiB8IGRpc2FibGVkDQo+
-IHwgV0FSTklORzogZXhpdCBjb2RlIDEgZnJvbSBhIHNoZWxsIGNvbW1hbmQuDQo+IHwgRVJST1I6
-IEZ1bmN0aW9uIGZhaWxlZDogZG9fY29uZmlndXJlIChsb2cgZmlsZSBpcyBsb2NhdGVkIGF0DQo+
-IHwgL2hvbWUvamVua2lucy9vZS93b3JsZC9zaHItY29yZS90bXAtZ2xpYmMvd29yay9jb3JlMi02
-NC1vZS1saW51eC9saWJsZA0KPiB8IGIvMS4xLjE3LXIwL3RlbXAvbG9nLmRvX2NvbmZpZ3VyZS4y
-MjY5NykNCj4gTk9URTogcmVjaXBlIGxpYmxkYi0xLjEuMTctcjA6IHRhc2sgZG9fY29uZmlndXJl
-OiBGYWlsZWQNCj4gRVJST1I6IFRhc2sgMjU1MDUNCj4gKC9ob21lL2plbmtpbnMvb2Uvd29ybGQv
-c2hyLWNvcmUvbWV0YS1vcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQNCj4gL2xp
-YmxkYi9saWJsZGJfMS4xLjE3LmJiLCBkb19jb25maWd1cmUpIGZhaWxlZCB3aXRoIGV4aXQgY29k
-ZSAnMScNCj4gDQoNCnRkYi5zbyBpcyBwcm92aWRlZCBieSBsaWJ0ZGIgd2hpY2ggaXMgREVQRU5E
-LWVkIGJ5IGxpYmxkYiwgSSB0aGluayBpdCBzaG91bGQgYmUgaW5zdGFsbGVkIGludG8NClNUQUdJ
-TkdfRElSX0hPU1QvUFlUSE9OX1NJVEVQQUNLQUdFU19ESVIuDQoNCkJlY2F1c2UgSSBjb3VsZCBu
-b3QgcmVwcm9kdWNlIGl0IGluIG15IGJ1aWxkaW5nLCB3b3VsZCB5b3UgbWluZCB0ZWxsaW5nIG1l
-IHdoZXRoZXIgZG9lcyB0ZGIuc28gZXhpc3QgDQppbiBTVEFHSU5HX0RJUl9IT1NUL1BZVEhPTl9T
-SVRFUEFDS0FHRVNfRElSLyB3aGlsZSB0aGlzIGVycm9yIHdhcyBjYXVnaHQuDQoNClRoYW5rcw0K
-IEJpYW4NCg0KPiA+IGRpZmYgLS1naXQNCj4gPiBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xp
-YmxkYi9saWJsZGIvZG8tbm90LWltcG9ydC10YXJnZXQtbW9kdWxlLWluDQo+ID4gLWNvbmZpZ3Vy
-ZS5wYXRjaA0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibGRiL2xpYmxkYi9kby1u
-b3QtaW1wb3J0LXRhcmdldC1tb2R1bGUtaW4NCj4gPiAtY29uZmlndXJlLnBhdGNoDQo+ID4gbmV3
-IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5iNGQ1MjJhDQo+ID4gLS0tIC9k
-ZXYvbnVsbA0KPiA+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9saWJsZGIv
-ZG8tbm90LWltcG9ydC10YXJnZXQtbW9kdWwNCj4gPiArKysgZS1pbi1jb25maWd1cmUucGF0Y2gN
-Cj4gPiBAQCAtMCwwICsxLDMyIEBADQo+ID4gK1NvbWUgbW9kdWxlIGNhbiBiZSBsb2FkZWQgd2hp
-bGUgY3Jvc3MgY29tcGlsZSwgd2UganN0IGNoZWNrIHdoZXRoZXINCj4gPiArdGhlIG1vZHVsZSBl
-eGlzdA0KPiA+ICsNCj4gPiArU2lnbmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24u
-ZnVqaXRzdS5jb20+DQo+ID4gKw0KPiA+ICstLS0gbGRiLTEuMS4xNy5vcmlnL2J1aWxkdG9vbHMv
-d2Fmc2FtYmEvc2FtYmFfYnVuZGxlZC5weQkyMDE0LTA1LTA1DQo+IDE3OjAwOjQxLjAwMDAwMDAw
-MCArMDkwMA0KPiA+ICsrKysgbGRiLTEuMS4xNy9idWlsZHRvb2xzL3dhZnNhbWJhL3NhbWJhX2J1
-bmRsZWQucHkJMjAxNS0wNi0xNQ0KPiAxMDowOTo1MC4yMTAwMDAyMTcgKzA5MDANCj4gPiArQEAg
-LTEsNyArMSw3IEBADQo+ID4gKyAjIGZ1bmN0aW9ucyB0byBzdXBwb3J0IGJ1bmRsZWQgbGlicmFy
-aWVzDQo+ID4gKw0KPiA+ICsgZnJvbSBDb25maWd1cmUgaW1wb3J0IGNvbmYNCj4gPiArLWltcG9y
-dCBzeXMsIExvZ3MNCj4gPiArK2ltcG9ydCBzeXMsIExvZ3MsIGltcA0KPiA+ICsgZnJvbSBzYW1i
-YV91dGlscyBpbXBvcnQgKg0KPiA+ICsNCj4gPiArIGRlZiBQUklWQVRFX05BTUUoYmxkLCBuYW1l
-LCBwcml2YXRlX2V4dGVuc2lvbiwgcHJpdmF0ZV9saWJyYXJ5KToNCj4gPiArQEAgLTIyMiw2ICsy
-MjIsMTYgQEAgZGVmIENIRUNLX0JVTkRMRURfU1lTVEVNX1BZVEhPTihjb25mLCBsaQ0KPiA+ICsg
-ICAgICAgICBtID0gX19pbXBvcnRfXyhtb2R1bGVuYW1lKQ0KPiA+ICsgICAgIGV4Y2VwdCBJbXBv
-cnRFcnJvcjoNCj4gPiArICAgICAgICAgZm91bmQgPSBGYWxzZQ0KPiA+ICsrDQo+ID4gKysgICAg
-ICAgIGJ1aWxkX2FyY2ggPSBvcy5lbnZpcm9uWyJCVUlMRF9BUkNIIl0NCj4gPiArKyAgICAgICAg
-aG9zdF9hcmNoID0gb3MuZW52aXJvblsiSE9TVF9BUkNIIl0NCj4gPiArKyAgICAgICAgaWYgYnVp
-bGRfYXJjaCAhPSBob3N0X2FyY2g6DQo+ID4gKysgICAgICAgICAgICAjIFNvbWUgbW9kdWxlcyBt
-YXliZSBjYW4gbm90IGJlIGltcG9ydGVkIHdoaWxlIGNyb3NzIGNvbXBpbGUNCj4gPiArKyAgICAg
-ICAgICAgICMgV2UganVzdCBjaGVjayB3aGV0aGVyIHRoZSBtb2R1bGUgZXhpc3QNCj4gPiArKyAg
-ICAgICAgICAgIHN0dWZmID0gaW1wLmZpbmRfbW9kdWxlKG1vZHVsZW5hbWUsDQo+IFtvcy5lbnZp
-cm9uWyJQWVRIT05QQVRIIl1dKQ0KPiA+ICsrICAgICAgICAgICAgaWYgc3R1ZmYgIT0gTm9uZToN
-Cj4gPiArKyAgICAgICAgICAgICAgICBMb2dzLndhcm4oJ0Nyb3NzIG1vZHVsZVslc10gaGFzIGJl
-ZW4gZm91bmQsIGJ1dCBjYW4gbm90DQo+IGJlIGxvYWRlZC4nICUgKHN0dWZmWzFdKSkNCj4gPiAr
-KyAgICAgICAgICAgICAgICBmb3VuZCA9IFRydWUNCj4gPiArICAgICBlbHNlOg0KPiA+ICsgICAg
-ICAgICB0cnk6DQo+ID4gKyAgICAgICAgICAgICB2ZXJzaW9uID0gbS5fX3ZlcnNpb25fXw0KPiA+
-IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJsZGIvbGlibGRiXzEuMS4x
-Ny5iYg0KPiA+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibGRiL2xpYmxkYl8xLjEuMTcu
-YmINCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAuLjE3NjA3ZjcN
-Cj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGli
-bGRiL2xpYmxkYl8xLjEuMTcuYmINCj4gPiBAQCAtMCwwICsxLDQ1IEBADQo+ID4gK1NVTU1BUlkg
-PSAiSGllcmFyY2hpY2FsLCByZWZlcmVuY2UgY291bnRlZCBtZW1vcnkgcG9vbCBzeXN0ZW0gd2l0
-aA0KPiBkZXN0cnVjdG9ycyINCj4gPiArSE9NRVBBR0UgPSAiaHR0cDovL2xkYi5zYW1iYS5vcmci
-DQo+ID4gK1NFQ1RJT04gPSAibGlicyINCj4gPiArTElDRU5TRSA9ICJMR1BMLTMuMCsgJiBMR1BM
-LTIuMSsgJiBHUEwtMy4wKyINCj4gPiArDQo+ID4gK0RFUEVORFMgKz0gImxpYnRkYiB0YWxsb2Mg
-bGlidGV2ZW50IGxpYnRkYiINCj4gPiArUkRFUEVORFNfJHtQTn0gKz0gImxpYnRldmVudCBwb3B0
-IGxpYnRhbGxvYyINCj4gPiArUkRFUEVORFNfcHlsZGIgKz0gInB5dGhvbiBsaWJ0ZGIgbGlidGFs
-bG9jIg0KPiA+ICsNCj4gPiArU1JDX1VSSSA9ICJodHRwOi8vc2FtYmEub3JnL2Z0cC9sZGIvbGRi
-LSR7UFZ9LnRhci5neiBcDQo+ID4gKyAgICAgICAgICAgZmlsZTovL2RvLW5vdC1pbXBvcnQtdGFy
-Z2V0LW1vZHVsZS1pbi1jb25maWd1cmUucGF0Y2giDQo+ID4gKw0KPiA+ICtMSUNfRklMRVNfQ0hL
-U1VNID0NCj4gImZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9M
-R1BMLTMuMDttZDU9YmZjY2ZlOTUyMjY5ZmYNCj4gZjJiNDA3ZGQxMWYyZjMwODNiIFwNCj4gPiAr
-DQo+IGZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9MR1BMLTIu
-MTttZDU9MWE2ZDI2OGZkMjE4Njc1DQo+IGZmZWE4YmU1NTY3ODhiNzgwIFwNCj4gPiArDQo+IGZp
-bGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9HUEwtMy4wO21kNT1j
-NzlmZjM5ZjE5ZGZlYzZkDQo+IDI5M2I5NWRlYTdiMDc4OTEiDQo+ID4gKw0KPiA+ICtTUkNfVVJJ
-W21kNXN1bV0gPSAiN2MyYWI0ZTNmMmE0MTg2NDkzYWEwNmVhYmJjNjFjYzAiDQo+ID4gK1NSQ19V
-Uklbc2hhMjU2c3VtXSA9DQo+ICJiOWEzMTJhYWQxOWU5NDYzNzE2ZDI1N2Q4ZjI1MjlmZDdmYzFh
-NWVmMjRmNmRjZGMwYzRhMTkzMGQ3YmRiNmU2Ig0KPiA+ICsNCj4gPiAraW5oZXJpdCB3YWYtc2Ft
-YmENCj4gPiArDQo+ID4gK1MgPSAiJHtXT1JLRElSfS9sZGItJHtQVn0iDQo+ID4gKw0KPiA+ICtF
-WFRSQV9PRUNPTkYgKz0gIi0tZGlzYWJsZS1ycGF0aCBcDQo+ID4gKyAgICAgICAgICAgICAgICAg
-LS1kaXNhYmxlLXJwYXRoLWluc3RhbGwgXA0KPiA+ICsgICAgICAgICAgICAgICAgIC0tYnVuZGxl
-ZC1saWJyYXJpZXM9Tk9ORSBcDQo+ID4gKyAgICAgICAgICAgICAgICAgLS1idWlsdGluLWxpYnJh
-cmllcz1yZXBsYWNlIFwNCj4gPiArICAgICAgICAgICAgICAgICAtLXdpdGgtbW9kdWxlc2Rpcj0k
-e2xpYmRpcn0vbGRiL21vZHVsZXMgXA0KPiA+ICsgICAgICAgICAgICAgICAgIC0td2l0aC1wcml2
-YXRlbGliZGlyPSR7bGliZGlyfS9sZGIgXA0KPiA+ICsgICAgICAgICAgICAgICAgIC0td2l0aC1s
-aWJpY29udj0ke1NUQUdJTkdfRElSX0hPU1R9JHtwcmVmaXh9XA0KPiA+ICsgICAgICAgICAgICAg
-ICAgIg0KPiA+ICsNCj4gPiArUEFDS0FHRVMgKz0gInB5bGRiIHB5bGRiLWRiZyBweWxkYi1kZXYi
-DQo+ID4gKw0KPiA+ICtGSUxFU18ke1BOfSArPSAiJHtsaWJkaXJ9L2xkYi8qIg0KPiA+ICtGSUxF
-U18ke1BOfS1kYmcgKz0gIiR7bGliZGlyfS9sZGIvLmRlYnVnLyogXA0KPiA+ICsgICAgICAgICAg
-ICAgICAgICAgICR7bGliZGlyfS9sZGIvbW9kdWxlcy9sZGIvLmRlYnVnLyoiDQo+ID4gKw0KPiA+
-ICtGSUxFU19weWxkYiA9ICIke2xpYmRpcn0vcHl0aG9uJHtQWVRIT05fQkFTRVZFUlNJT059L3Np
-dGUtcGFja2FnZXMvKiBcDQo+ID4gKyAgICAgICAgICAgICAgICR7bGliZGlyfS9saWJweWxkYi11
-dGlsLnNvLjEgXA0KPiA+ICsgICAgICAgICAgICAgICAke2xpYmRpcn0vbGlicHlsZGItdXRpbC5z
-by4xLjEuMTcgXA0KPiA+ICsgICAgICAgICAgICAgICINCj4gPiArRklMRVNfcHlsZGItZGJnID0N
-Cj4gIiR7bGliZGlyfS9weXRob24ke1BZVEhPTl9CQVNFVkVSU0lPTn0vc2l0ZS1wYWNrYWdlcy8u
-ZGVidWcgXA0KPiA+ICsgICAgICAgICAgICAgICAgICAgJHtsaWJkaXJ9Ly5kZWJ1Zy9saWJweWxk
-Yi11dGlsLnNvLjEuMS4xNyINCj4gPiArRklMRVNfcHlsZGItZGV2ID0gIiR7bGliZGlyfS9saWJw
-eWxkYi11dGlsLnNvIg0KPiA+IC0tDQo+ID4gMS45LjENCj4gPg0KPiA+IC0tDQo+ID4gX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1iZWRk
-ZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gTWFydGluICdKYU1hJyBKYW5z
-YSAgICAgamFiYmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwuY29tDQo=
+I don't have access to that build anymore (because it's jenkins job using
+tmpfs for TMPDIR, so after the build the TMPDIR is gone), but it's failing
+only in qemux86-64 builds, so I assume that it's finding host tdb or python
+directories, because it's running on 12.04 Ubuntu x86-64.
+
+Try to install tdb on your build host if it allows you to reproduce the
+issue, otherwise I'll try to reproduce it again in some next jenkins build.
+
+On Tue, Jun 23, 2015 at 7:47 AM, Bian, Naimeng <biannm@cn.fujitsu.com>
+wrote:
+
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org
+> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> > Martin Jansa
+> > Sent: Friday, June 19, 2015 11:57 PM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] [meta-oe][PATCH v2 3/7] libldb: add new recipe
+> >
+> > On Wed, Jun 17, 2015 at 03:49:09PM +0800, Bian Naimeng wrote:
+> > > libldb is required by samba4
+> > >
+> > > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> > > ---
+> > >  .../do-not-import-target-module-in-configure.patch | 32
+> +++++++++++++++
+> > >  meta-oe/recipes-support/libldb/libldb_1.1.17.bb    | 45
+> > ++++++++++++++++++++++
+> > >  2 files changed, 77 insertions(+)
+> > >  create mode 100644
+> > > meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in-c
+> > > onfigure.patch  create mode 100644
+> > > meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+> >
+> > Fails to build in bitbake world:
+> >
+> > | Checking for system tdb >=
+> > 1.2.13                                                 : yes
+> > | ERROR: Python module pytdb of version 1.2.13 not found, and bundling
+> > | disabled
+> > | WARNING: exit code 1 from a shell command.
+> > | ERROR: Function failed: do_configure (log file is located at
+> > | /home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/libld
+> > | b/1.1.17-r0/temp/log.do_configure.22697)
+> > NOTE: recipe libldb-1.1.17-r0: task do_configure: Failed
+> > ERROR: Task 25505
+> >
+> (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-support
+> > /libldb/libldb_1.1.17.bb, do_configure) failed with exit code '1'
+> >
+>
+> tdb.so is provided by libtdb which is DEPEND-ed by libldb, I think it
+> should be installed into
+> STAGING_DIR_HOST/PYTHON_SITEPACKAGES_DIR.
+>
+> Because I could not reproduce it in my building, would you mind telling me
+> whether does tdb.so exist
+> in STAGING_DIR_HOST/PYTHON_SITEPACKAGES_DIR/ while this error was caught.
+>
+> Thanks
+>  Bian
+>
+> > > diff --git
+> > > a/meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in
+> > > -configure.patch
+> > > b/meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in
+> > > -configure.patch
+> > > new file mode 100644
+> > > index 0000000..b4d522a
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-support/libldb/libldb/do-not-import-target-modul
+> > > +++ e-in-configure.patch
+> > > @@ -0,0 +1,32 @@
+> > > +Some module can be loaded while cross compile, we jst check whether
+> > > +the module exist
+> > > +
+> > > +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+> > > +
+> > > +--- ldb-1.1.17.orig/buildtools/wafsamba/samba_bundled.py   2014-05-05
+> > 17:00:41.000000000 +0900
+> > > ++++ ldb-1.1.17/buildtools/wafsamba/samba_bundled.py        2015-06-15
+> > 10:09:50.210000217 +0900
+> > > +@@ -1,7 +1,7 @@
+> > > + # functions to support bundled libraries
+> > > +
+> > > + from Configure import conf
+> > > +-import sys, Logs
+> > > ++import sys, Logs, imp
+> > > + from samba_utils import *
+> > > +
+> > > + def PRIVATE_NAME(bld, name, private_extension, private_library):
+> > > +@@ -222,6 +222,16 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, li
+> > > +         m = __import__(modulename)
+> > > +     except ImportError:
+> > > +         found = False
+> > > ++
+> > > ++        build_arch = os.environ["BUILD_ARCH"]
+> > > ++        host_arch = os.environ["HOST_ARCH"]
+> > > ++        if build_arch != host_arch:
+> > > ++            # Some modules maybe can not be imported while cross
+> compile
+> > > ++            # We just check whether the module exist
+> > > ++            stuff = imp.find_module(modulename,
+> > [os.environ["PYTHONPATH"]])
+> > > ++            if stuff != None:
+> > > ++                Logs.warn('Cross module[%s] has been found, but can
+> not
+> > be loaded.' % (stuff[1]))
+> > > ++                found = True
+> > > +     else:
+> > > +         try:
+> > > +             version = m.__version__
+> > > diff --git a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+> > > b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+> > > new file mode 100644
+> > > index 0000000..17607f7
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
+> > > @@ -0,0 +1,45 @@
+> > > +SUMMARY = "Hierarchical, reference counted memory pool system with
+> > destructors"
+> > > +HOMEPAGE = "http://ldb.samba.org"
+> > > +SECTION = "libs"
+> > > +LICENSE = "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
+> > > +
+> > > +DEPENDS += "libtdb talloc libtevent libtdb"
+> > > +RDEPENDS_${PN} += "libtevent popt libtalloc"
+> > > +RDEPENDS_pyldb += "python libtdb libtalloc"
+> > > +
+> > > +SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
+> > > +           file://do-not-import-target-module-in-configure.patch"
+> > > +
+> > > +LIC_FILES_CHKSUM =
+> >
+> "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269ff
+> > f2b407dd11f2f3083b \
+> > > +
+> >
+> file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=1a6d268fd218675
+> > ffea8be556788b780 \
+> > > +
+> >
+> file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d
+> > 293b95dea7b07891"
+> > > +
+> > > +SRC_URI[md5sum] = "7c2ab4e3f2a4186493aa06eabbc61cc0"
+> > > +SRC_URI[sha256sum] =
+> > "b9a312aad19e9463716d257d8f2529fd7fc1a5ef24f6dcdc0c4a1930d7bdb6e6"
+> > > +
+> > > +inherit waf-samba
+> > > +
+> > > +S = "${WORKDIR}/ldb-${PV}"
+> > > +
+> > > +EXTRA_OECONF += "--disable-rpath \
+> > > +                 --disable-rpath-install \
+> > > +                 --bundled-libraries=NONE \
+> > > +                 --builtin-libraries=replace \
+> > > +                 --with-modulesdir=${libdir}/ldb/modules \
+> > > +                 --with-privatelibdir=${libdir}/ldb \
+> > > +                 --with-libiconv=${STAGING_DIR_HOST}${prefix}\
+> > > +                "
+> > > +
+> > > +PACKAGES += "pyldb pyldb-dbg pyldb-dev"
+> > > +
+> > > +FILES_${PN} += "${libdir}/ldb/*"
+> > > +FILES_${PN}-dbg += "${libdir}/ldb/.debug/* \
+> > > +                    ${libdir}/ldb/modules/ldb/.debug/*"
+> > > +
+> > > +FILES_pyldb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
+> > > +               ${libdir}/libpyldb-util.so.1 \
+> > > +               ${libdir}/libpyldb-util.so.1.1.17 \
+> > > +              "
+> > > +FILES_pyldb-dbg =
+> > "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
+> > > +                   ${libdir}/.debug/libpyldb-util.so.1.1.17"
+> > > +FILES_pyldb-dev = "${libdir}/libpyldb-util.so"
+> > > --
+> > > 1.9.1
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
