@@ -1,35 +1,33 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D84373772
+Received: from mail-wg0-f53.google.com (mail-wg0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 34932756C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 08:05:28 +0000 (UTC)
-Received: by wguu7 with SMTP id u7so2242453wgu.3
+	Tue, 23 Jun 2015 11:35:39 +0000 (UTC)
+Received: by wgck11 with SMTP id k11so7062924wgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 01:05:28 -0700 (PDT)
+	Tue, 23 Jun 2015 04:35:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type; bh=6R74K1XFJq0DUMQeBuypV5Gr5ylKQKpZX4nT8OjgwNw=;
-	b=QUZ8mIOAzQYabmTqax8MV7suRw355jhm4tQIvF80+4LFj6EXfkVRuDcjS+U8M4k6ez
-	vlAKSVWg0i0uWJrQH5CgdIXNPWOhJ8jGGvPXyWPifeEl3plPzq5Enns8K4mgWcNvYpJY
-	VjQm18Oo05XBqzgg33/OTB2Pt987o2/uAVEcTB1bfX8wJQl2WubBfj8I7n2afhFRlQMz
-	iIRDT2pZIf1EXHnHRQPZml0yQNxigivX1AKS/YRmO+yMVUFphuRS86301zdRwxb/BJBy
-	56O8RocEZe0+X+jU+BFDbUI0/5a5x/EnGXEqDh4JXM4QekxcJ6L29Gu4M1E2AHY+1suv
-	bgvQ==
-MIME-Version: 1.0
-X-Received: by 10.180.7.199 with SMTP id l7mr1097664wia.28.1435046728577; Tue,
-	23 Jun 2015 01:05:28 -0700 (PDT)
-Received: by 10.28.167.2 with HTTP; Tue, 23 Jun 2015 01:05:28 -0700 (PDT)
-In-Reply-To: <30DC4EDFD798C94083F3E083754532CC73E10A6B@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1434527353-47017-1-git-send-email-biannm@cn.fujitsu.com>
-	<1434527353-47017-4-git-send-email-biannm@cn.fujitsu.com>
-	<20150619155637.GA2398@jama>
-	<30DC4EDFD798C94083F3E083754532CC73E10A6B@G08CNEXMBPEKD02.g08.fujitsu.local>
-Date: Tue, 23 Jun 2015 10:05:28 +0200
-Message-ID: <CA+chaQcK+DoksMSVKpFRQzze58CLihk1LEnH0Pn+J-n3rY_DUw@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id;
+	bh=z+QKpi7q/jeouqIS/ljtkZm+9iEZtrd+C7AoUlHn2/0=;
+	b=m8zBDB3HgQtdhuaLKQqx+01afLtTkXCf2u++ye3VaGBA1mMhf6tpXuHCb3oq67Gx6h
+	Ib6YQzSvsasraEmhvQwfAFZ+0SZlCIpXZFzxDS6NoVFnu5otzs3XcRWL5lkTxpKo7pNo
+	4esdwH8b9XkWBvj53Ofbw9VyoxH7V7vo55fLH4CwOjomX+V2IFTukUSJp22NGbIRg+fj
+	LvVW/PXU1fFyIsVnKQW+S5fLZBy0k2mKxjil4yljEDyRR0njrd6u88K+mt7r4rvKU5dg
+	yCJOU6YbBY8Fov2T81QfZAhB/WklviVTN++CmB4z4nGqxgQ0toxFEr+bM1BLgxT061lF
+	TVVg==
+X-Received: by 10.180.78.136 with SMTP id b8mr2520608wix.89.1435059338930;
+	Tue, 23 Jun 2015 04:35:38 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id m2sm21967532wiy.7.2015.06.23.04.35.37
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 23 Jun 2015 04:35:37 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2 3/7] libldb: add new recipe
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Jun 2015 13:35:41 +0200
+Message-Id: <1435059341-19973-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.4.4
+Subject: [meta-oe][fido][PATCH] nodejs: fix qemuarm build without thumb and drop unused patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,200 +41,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2015 08:05:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Jun 2015 11:35:45 -0000
 
-I don't have access to that build anymore (because it's jenkins job using
-tmpfs for TMPDIR, so after the build the TMPDIR is gone), but it's failing
-only in qemux86-64 builds, so I assume that it's finding host tdb or python
-directories, because it's running on 12.04 Ubuntu x86-64.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ ...uiltin-define-to-denote-hard-abi-when-in-.patch | 60 ----------------------
+ .../nodejs/nodejs/enable-armv5e-build.patch        | 22 ++++++++
+ meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb   |  4 +-
+ 3 files changed, 25 insertions(+), 61 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch
 
-Try to install tdb on your build host if it allows you to reproduce the
-issue, otherwise I'll try to reproduce it again in some next jenkins build.
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch
+deleted file mode 100644
+index 6268d69..0000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0001-gcc-has-a-builtin-define-to-denote-hard-abi-when-in-.patch
++++ /dev/null
+@@ -1,60 +0,0 @@
+-From bf701e7cb3616631a354ed9ecbed6dd16f60c60d Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Wed, 30 Jan 2013 10:43:47 +0100
+-Subject: [PATCH] gcc has a builtin define to denote hard abi when in use, e.g.
+- when using -mfloat-abi=hard it will define __ARM_PCS_VFP to 1 and therefore
+- we should check that to determine which calling convention is in use and not
+- __VFP_FP__ which merely indicates presence of VFP unit
+-
+-The fix has been provided by Khem Raj <raj.khem@gmail.com>
+-
+-Upstream-Status: Forwarded
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+----
+- deps/v8/src/arm/assembler-arm.cc | 4 ++--
+- deps/v8/src/platform-linux.cc    | 4 ++--
+- 2 files changed, 4 insertions(+), 4 deletions(-)
+-
+-diff --git a/deps/v8/src/arm/assembler-arm.cc b/deps/v8/src/arm/assembler-arm.cc
+-index 1787d15..c64ef58 100644
+---- a/deps/v8/src/arm/assembler-arm.cc
+-+++ b/deps/v8/src/arm/assembler-arm.cc
+-@@ -71,10 +71,10 @@ static unsigned CpuFeaturesImpliedByCompiler() {
+-   // If the compiler is allowed to use VFP then we can use VFP too in our code
+-   // generation even when generating snapshots. ARMv7 and hardware floating
+-   // point support implies VFPv3, see ARM DDI 0406B, page A1-6.
+--#if defined(CAN_USE_ARMV7_INSTRUCTIONS) && defined(__VFP_FP__) \
+-+#if defined(CAN_USE_ARMV7_INSTRUCTIONS) && defined(__ARM_PCS_VFP) \
+-     && !defined(__SOFTFP__)
+-   answer |= 1u << VFP3 | 1u << ARMv7 | 1u << VFP2;
+--#endif  // defined(CAN_USE_ARMV7_INSTRUCTIONS) && defined(__VFP_FP__)
+-+#endif  // defined(CAN_USE_ARMV7_INSTRUCTIONS) && defined(__ARM_PCS_VFP)
+-         // && !defined(__SOFTFP__)
+- #endif  // _arm__
+- 
+-diff --git a/deps/v8/src/platform-linux.cc b/deps/v8/src/platform-linux.cc
+-index ed9eb79..10d1879 100644
+---- a/deps/v8/src/platform-linux.cc
+-+++ b/deps/v8/src/platform-linux.cc
+-@@ -170,7 +170,7 @@ bool OS::ArmCpuHasFeature(CpuFeature feature) {
+- // calling this will return 1.0 and otherwise 0.0.
+- static void ArmUsingHardFloatHelper() {
+-   asm("mov r0, #0":::"r0");
+--#if defined(__VFP_FP__) && !defined(__SOFTFP__)
+-+#if defined(__ARM_PCS_VFP) && !defined(__SOFTFP__)
+-   // Load 0x3ff00000 into r1 using instructions available in both ARM
+-   // and Thumb mode.
+-   asm("mov r1, #3":::"r1");
+-@@ -195,7 +195,7 @@ static void ArmUsingHardFloatHelper() {
+- #else
+-   asm("vmov d0, r0, r1");
+- #endif  // __thumb__
+--#endif  // defined(__VFP_FP__) && !defined(__SOFTFP__)
+-+#endif  // defined(__ARM_PCS_VFP) && !defined(__SOFTFP__)
+-   asm("mov r1, #0":::"r1");
+- }
+- 
+--- 
+-1.8.1
+-
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch b/meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch
+new file mode 100644
+index 0000000..cc7c9ab
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/enable-armv5e-build.patch
+@@ -0,0 +1,22 @@
++Building for qemuarm without thumb enabled is using -march=armv5e which isn't
++recognized here. Fix it by adding __ARM_ARCH_5E__.
++
++v0.12.2 branch of node doesn't seem to be affected, because it's using
++different version of v8
++
++Upstream-Status: Pending
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++
++diff -uNr node-v0.12.2/deps/v8/src/base/atomicops_internals_arm_gcc.h node-v0.12.2-fix/deps/v8/src/base/atomicops_internals_arm_gcc.h
++--- node-v0.12.2/deps/v8/src/base/atomicops_internals_arm_gcc.h	2015-04-01 00:13:01.000000000 +0200
+++++ node-v0.12.2-fix/deps/v8/src/base/atomicops_internals_arm_gcc.h	2015-04-28 14:30:43.119509207 +0200
++@@ -156,7 +156,7 @@
++ 
++ // This tests against any known ARMv5 variant.
++ #elif defined(__ARM_ARCH_5__) || defined(__ARM_ARCH_5T__) || \
++-      defined(__ARM_ARCH_5TE__) || defined(__ARM_ARCH_5TEJ__)
+++      defined(__ARM_ARCH_5E__) || defined(__ARM_ARCH_5TE__) || defined(__ARM_ARCH_5TEJ__)
++ 
++ // The kernel also provides a helper function to perform an atomic
++ // compare-and-swap operation at the hard-wired address 0xffff0fc0.
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb
+index 945d9b4..0e789f9 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.2.bb
+@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=14115ff11211df04b031ec7d40b6d31b"
+ 
+ DEPENDS = "openssl"
+ 
+-SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz"
++SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
++    file://enable-armv5e-build.patch \
++"
+ SRC_URI[md5sum] = "b7f4a9f2e361a7026789a7d6c45a6d30"
+ SRC_URI[sha256sum] = "ac7e78ade93e633e7ed628532bb8e650caba0c9c33af33581957f3382e2a772d"
+ 
+-- 
+2.4.4
 
-On Tue, Jun 23, 2015 at 7:47 AM, Bian, Naimeng <biannm@cn.fujitsu.com>
-wrote:
-
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Martin Jansa
-> > Sent: Friday, June 19, 2015 11:57 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH v2 3/7] libldb: add new recipe
-> >
-> > On Wed, Jun 17, 2015 at 03:49:09PM +0800, Bian Naimeng wrote:
-> > > libldb is required by samba4
-> > >
-> > > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> > > ---
-> > >  .../do-not-import-target-module-in-configure.patch | 32
-> +++++++++++++++
-> > >  meta-oe/recipes-support/libldb/libldb_1.1.17.bb    | 45
-> > ++++++++++++++++++++++
-> > >  2 files changed, 77 insertions(+)
-> > >  create mode 100644
-> > > meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in-c
-> > > onfigure.patch  create mode 100644
-> > > meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> >
-> > Fails to build in bitbake world:
-> >
-> > | Checking for system tdb >=
-> > 1.2.13                                                 : yes
-> > | ERROR: Python module pytdb of version 1.2.13 not found, and bundling
-> > | disabled
-> > | WARNING: exit code 1 from a shell command.
-> > | ERROR: Function failed: do_configure (log file is located at
-> > | /home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/libld
-> > | b/1.1.17-r0/temp/log.do_configure.22697)
-> > NOTE: recipe libldb-1.1.17-r0: task do_configure: Failed
-> > ERROR: Task 25505
-> >
-> (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-support
-> > /libldb/libldb_1.1.17.bb, do_configure) failed with exit code '1'
-> >
->
-> tdb.so is provided by libtdb which is DEPEND-ed by libldb, I think it
-> should be installed into
-> STAGING_DIR_HOST/PYTHON_SITEPACKAGES_DIR.
->
-> Because I could not reproduce it in my building, would you mind telling me
-> whether does tdb.so exist
-> in STAGING_DIR_HOST/PYTHON_SITEPACKAGES_DIR/ while this error was caught.
->
-> Thanks
->  Bian
->
-> > > diff --git
-> > > a/meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in
-> > > -configure.patch
-> > > b/meta-oe/recipes-support/libldb/libldb/do-not-import-target-module-in
-> > > -configure.patch
-> > > new file mode 100644
-> > > index 0000000..b4d522a
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/libldb/libldb/do-not-import-target-modul
-> > > +++ e-in-configure.patch
-> > > @@ -0,0 +1,32 @@
-> > > +Some module can be loaded while cross compile, we jst check whether
-> > > +the module exist
-> > > +
-> > > +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> > > +
-> > > +--- ldb-1.1.17.orig/buildtools/wafsamba/samba_bundled.py   2014-05-05
-> > 17:00:41.000000000 +0900
-> > > ++++ ldb-1.1.17/buildtools/wafsamba/samba_bundled.py        2015-06-15
-> > 10:09:50.210000217 +0900
-> > > +@@ -1,7 +1,7 @@
-> > > + # functions to support bundled libraries
-> > > +
-> > > + from Configure import conf
-> > > +-import sys, Logs
-> > > ++import sys, Logs, imp
-> > > + from samba_utils import *
-> > > +
-> > > + def PRIVATE_NAME(bld, name, private_extension, private_library):
-> > > +@@ -222,6 +222,16 @@ def CHECK_BUNDLED_SYSTEM_PYTHON(conf, li
-> > > +         m = __import__(modulename)
-> > > +     except ImportError:
-> > > +         found = False
-> > > ++
-> > > ++        build_arch = os.environ["BUILD_ARCH"]
-> > > ++        host_arch = os.environ["HOST_ARCH"]
-> > > ++        if build_arch != host_arch:
-> > > ++            # Some modules maybe can not be imported while cross
-> compile
-> > > ++            # We just check whether the module exist
-> > > ++            stuff = imp.find_module(modulename,
-> > [os.environ["PYTHONPATH"]])
-> > > ++            if stuff != None:
-> > > ++                Logs.warn('Cross module[%s] has been found, but can
-> not
-> > be loaded.' % (stuff[1]))
-> > > ++                found = True
-> > > +     else:
-> > > +         try:
-> > > +             version = m.__version__
-> > > diff --git a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> > > b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> > > new file mode 100644
-> > > index 0000000..17607f7
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> > > @@ -0,0 +1,45 @@
-> > > +SUMMARY = "Hierarchical, reference counted memory pool system with
-> > destructors"
-> > > +HOMEPAGE = "http://ldb.samba.org"
-> > > +SECTION = "libs"
-> > > +LICENSE = "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
-> > > +
-> > > +DEPENDS += "libtdb talloc libtevent libtdb"
-> > > +RDEPENDS_${PN} += "libtevent popt libtalloc"
-> > > +RDEPENDS_pyldb += "python libtdb libtalloc"
-> > > +
-> > > +SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
-> > > +           file://do-not-import-target-module-in-configure.patch"
-> > > +
-> > > +LIC_FILES_CHKSUM =
-> >
-> "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269ff
-> > f2b407dd11f2f3083b \
-> > > +
-> >
-> file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=1a6d268fd218675
-> > ffea8be556788b780 \
-> > > +
-> >
-> file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d
-> > 293b95dea7b07891"
-> > > +
-> > > +SRC_URI[md5sum] = "7c2ab4e3f2a4186493aa06eabbc61cc0"
-> > > +SRC_URI[sha256sum] =
-> > "b9a312aad19e9463716d257d8f2529fd7fc1a5ef24f6dcdc0c4a1930d7bdb6e6"
-> > > +
-> > > +inherit waf-samba
-> > > +
-> > > +S = "${WORKDIR}/ldb-${PV}"
-> > > +
-> > > +EXTRA_OECONF += "--disable-rpath \
-> > > +                 --disable-rpath-install \
-> > > +                 --bundled-libraries=NONE \
-> > > +                 --builtin-libraries=replace \
-> > > +                 --with-modulesdir=${libdir}/ldb/modules \
-> > > +                 --with-privatelibdir=${libdir}/ldb \
-> > > +                 --with-libiconv=${STAGING_DIR_HOST}${prefix}\
-> > > +                "
-> > > +
-> > > +PACKAGES += "pyldb pyldb-dbg pyldb-dev"
-> > > +
-> > > +FILES_${PN} += "${libdir}/ldb/*"
-> > > +FILES_${PN}-dbg += "${libdir}/ldb/.debug/* \
-> > > +                    ${libdir}/ldb/modules/ldb/.debug/*"
-> > > +
-> > > +FILES_pyldb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
-> > > +               ${libdir}/libpyldb-util.so.1 \
-> > > +               ${libdir}/libpyldb-util.so.1.1.17 \
-> > > +              "
-> > > +FILES_pyldb-dbg =
-> > "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
-> > > +                   ${libdir}/.debug/libpyldb-util.so.1.1.17"
-> > > +FILES_pyldb-dev = "${libdir}/libpyldb-util.so"
-> > > --
-> > > 1.9.1
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
