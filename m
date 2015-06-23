@@ -1,37 +1,25 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
-	[209.85.220.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D347074056
+Return-Path: <hugo.saldanha@aker.com.br>
+X-Greylist: delayed 602 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 23 Jun 2015 16:07:52 UTC
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id D6DF660557
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 14:47:43 +0000 (UTC)
-Received: by qkeo142 with SMTP id o142so5992760qke.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 07:47:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=QfeYwDoyezlYsquCIZlR07sVVUc3BDuKioFOyxvU+Kg=;
-	b=OXu8JVxkRLI3rNFQhVmXXjGvi9eSuvcZMkDVbTQWc4HGPiwsB18Q/5/ewRleWRdxc/
-	uf1PXPdrmqkkhd88iH5DrWK2Aa5oX/g6mH/Rou04RRLHSFE5tkBgZnn3HE7r5hT1j79W
-	u0Yas+iWmhipQL9bscX7x/Douzd8b2K7aWxmDIG2DSaDcFse1ZxC0dazyvMkQM0miMtw
-	vJ56ib+F6TQ6a1Vp3vekii06WIqu/LNkNR2eok58IDxIHISAKRsbm9T6HpKMMkBPhDL1
-	hB4jG78lP6+C9GM0hjHJCVpAEvLkb14EbP6A9VFdya8Xt1B5tPPu1NibPnE5rkYJulrT
-	FEpQ==
-X-Gm-Message-State: ALoCoQloN5DnidTD9CP1Pc56YfKTCyDML3AbfFckVzR8wknC8HlSX7FRK51aDunPbX6fVVrjg5/4
-X-Received: by 10.140.43.199 with SMTP id e65mr10616019qga.80.1435070863989;
-	Tue, 23 Jun 2015 07:47:43 -0700 (PDT)
+	Tue, 23 Jun 2015 16:07:52 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Tue, 23 Jun 2015 13:07:48 -0300
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from saldanha.aker.com.br (10.4.3.1) by mail.aker.com.br (10.0.0.20)
+	with Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Tue, 23 Jun 2015 12:57:48 -0300
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 23 Jun 2015 13:02:04 -0300
+Message-ID: <1435075324-12895-1-git-send-email-hugo.saldanha@aker.com.br>
+X-Mailer: git-send-email 2.4.4
 MIME-Version: 1.0
-Received: by 10.140.102.231 with HTTP; Tue, 23 Jun 2015 07:47:23 -0700 (PDT)
-In-Reply-To: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
-References: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 23 Jun 2015 15:47:23 +0100
-Message-ID: <CAJTo0LYpcKWFAgDHcQ3FFsFypdHp6J8FBYkUGo3aQoJ6yRy4ng@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [RFC] Move libexecdir to $prefix/libexec
+X-AkerSMTPGW-ServerID: efa1de5243ffebe9bf836ee14063171c1764dbbe
+X-AkerSMTPGW-MessageID: 8e21eb6a1f86be0e1725e6863904848ac00b3bbd-10o
+Subject: [meta-oe][master/fido/dizzy][PATCH] libssh2: upgrade to v1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2015 14:47:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Jun 2015 16:07:56 -0000
+Content-Type: text/plain
 
-Forgot to cross-post oe-devel...
+Besides new features and improvements, this fixes CVE-2015-1782.
 
-On 23 June 2015 at 15:30, Ross Burton <ross.burton@intel.com> wrote:
+License's md5 changed because of a modified copyright.
 
-> Hi,
->
-> Yes, I'm bringing this up again. :)
->
-> Our default of libexecdir=$libdir/$BPN is contrary to both the FHS[1] and
-> GNU
-> Coding Standards[2], mainly because the key point is that libexecdir
-> should be
-> global and not change per-recipe.  The new FHS allows /usr/libexec so this
-> series changes the default to that, and fixes up the recipes which need
-> fixing.
->
-> Several of the recipe fixes are unrelated to the change and will be
-> submitted to
-> master shortly, but others (eg sudo) are intimately tied to the change.
->
-> I've done basic multilib-enabled builds but more testing welcome.  I'd say
-> that
-> in general multilib problems this exposes are in fact problems with the
-> recipe:
-> for example GConf should install the binaries once and libraries in each
-> libdir.
->
-> Ross
->
-> [1] http://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch04s07.html
-> [2] https://www.gnu.org/prep/standards/html_node/Directory-Variables.html
->
->
+Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+---
+ .../recipes-support/libssh2/{libssh2_1.4.3.bb => libssh2_1.6.0.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/libssh2/{libssh2_1.4.3.bb => libssh2_1.6.0.bb} (60%)
+
+diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
+similarity index 60%
+rename from meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb
+rename to meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
+index b537663..022482c 100644
+--- a/meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb
++++ b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
+@@ -5,11 +5,11 @@ SECTION = "libs"
+ DEPENDS = "zlib openssl"
+ 
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d00afe44f336a79a2ca7e1681ce14509"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca"
+ 
+ SRC_URI = "http://www.libssh2.org/download/${BP}.tar.gz"
+-SRC_URI[md5sum] = "071004c60c5d6f90354ad1b701013a0b"
+-SRC_URI[sha256sum] = "eac6f85f9df9db2e6386906a6227eb2cd7b3245739561cad7d6dc1d5d021b96d"
++SRC_URI[md5sum] = "00aabd6e714a5f42a4fb82ace20db1dd"
++SRC_URI[sha256sum] = "5a202943a34a1d82a1c31f74094f2453c207bf9936093867f41414968c8e8215"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+2.4.4
+
+
 
