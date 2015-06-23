@@ -1,25 +1,39 @@
-Return-Path: <hugo.saldanha@aker.com.br>
-X-Greylist: delayed 602 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 23 Jun 2015 16:07:52 UTC
-Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
-	by mail.openembedded.org (Postfix) with SMTP id D6DF660557
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Jun 2015 16:07:52 +0000 (UTC)
-Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
-	by asmg.aker.com.br [10.0.1.3]; Tue, 23 Jun 2015 13:07:48 -0300
-	(envelope-from hugo.saldanha@aker.com.br)
-Received: from saldanha.aker.com.br (10.4.3.1) by mail.aker.com.br (10.0.0.20)
-	with Microsoft SMTP Server (TLS) id 8.3.342.0;
-	Tue, 23 Jun 2015 12:57:48 -0300
-From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 23 Jun 2015 13:02:04 -0300
-Message-ID: <1435075324-12895-1-git-send-email-hugo.saldanha@aker.com.br>
-X-Mailer: git-send-email 2.4.4
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f172.google.com (mail-pd0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 15F3B759D0;
+	Tue, 23 Jun 2015 23:13:15 +0000 (UTC)
+Received: by pdbki1 with SMTP id ki1so16731710pdb.1;
+	Tue, 23 Jun 2015 16:13:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=VlSuu8r312h+so5zgSNYM577U1i7drVtEKwcqrSN/2U=;
+	b=e3BN3olu4wMXOAEJMeKqPnWsJy67cRocam2pzlMP0ODPPLkTL7w8JurXwfh+YKbH5v
+	eEXREtQEsYJW6eeHrim83Wak62NxhWmwWogeLupJ2h+zzOaS1kiuJnAK9ZalmdvDVnJR
+	dyQ4iuLhOZ28I+55kFtzfQr8tO3uTKxUw+R6sDpo7HkyTeV91XukcpXMShPKM/pABZYO
+	BAw14aIr2l5GZioCqtxBN0nnPLPiRvqsGlypYfsCxD3nHEOwMo64NZE/ckOV0RWwbeCS
+	ds4+ECbVkJMKGYdnkyogCwCBkfCMNL0HHchA6tBqcCTvYhOUb7IxUWCLzTvDRVu+mRCQ
+	1Raw==
+X-Received: by 10.66.155.36 with SMTP id vt4mr75090966pab.32.1435101196777;
+	Tue, 23 Jun 2015 16:13:16 -0700 (PDT)
+Received: from [10.43.100.29] (64.2.3.194.ptr.us.xo.net. [64.2.3.194])
+	by mx.google.com with ESMTPSA id
+	ks7sm24410076pbc.34.2015.06.23.16.13.14
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 23 Jun 2015 16:13:15 -0700 (PDT)
+Message-ID: <5589E809.8060000@gmail.com>
+Date: Tue, 23 Jun 2015 16:13:13 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-X-AkerSMTPGW-ServerID: efa1de5243ffebe9bf836ee14063171c1764dbbe
-X-AkerSMTPGW-MessageID: 8e21eb6a1f86be0e1725e6863904848ac00b3bbd-10o
-Subject: [meta-oe][master/fido/dizzy][PATCH] libssh2: upgrade to v1.6.0
+To: "Burton, Ross" <ross.burton@intel.com>, 
+	OE-core <openembedded-core@lists.openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+References: <CAJTo0LaKEvtznsdfz8gLWFSLyb6Rx2XsgbYG_cfOrAm+W2UfEg@mail.gmail.com>
+In-Reply-To: <CAJTo0LaKEvtznsdfz8gLWFSLyb6Rx2XsgbYG_cfOrAm+W2UfEg@mail.gmail.com>
+Subject: Re: [OE-core] Future of Qt4 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Jun 2015 16:07:56 -0000
-Content-Type: text/plain
-
-Besides new features and improvements, this fixes CVE-2015-1782.
-
-License's md5 changed because of a modified copyright.
-
-Signed-off-by: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
----
- .../recipes-support/libssh2/{libssh2_1.4.3.bb => libssh2_1.6.0.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/libssh2/{libssh2_1.4.3.bb => libssh2_1.6.0.bb} (60%)
-
-diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-similarity index 60%
-rename from meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb
-rename to meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-index b537663..022482c 100644
---- a/meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb
-+++ b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-@@ -5,11 +5,11 @@ SECTION = "libs"
- DEPENDS = "zlib openssl"
- 
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d00afe44f336a79a2ca7e1681ce14509"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c5cf34fc0acb44b082ef50ef5e4354ca"
- 
- SRC_URI = "http://www.libssh2.org/download/${BP}.tar.gz"
--SRC_URI[md5sum] = "071004c60c5d6f90354ad1b701013a0b"
--SRC_URI[sha256sum] = "eac6f85f9df9db2e6386906a6227eb2cd7b3245739561cad7d6dc1d5d021b96d"
-+SRC_URI[md5sum] = "00aabd6e714a5f42a4fb82ace20db1dd"
-+SRC_URI[sha256sum] = "5a202943a34a1d82a1c31f74094f2453c207bf9936093867f41414968c8e8215"
- 
- inherit autotools pkgconfig
- 
--- 
-2.4.4
+X-List-Received-Date: Tue, 23 Jun 2015 23:13:16 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
+
+On 06/22/2015 03:43 AM, Burton, Ross wrote:
+> Hi,
+>
+> So, Qt 4.8.7 was released last month[1].  Support for Qt4 stops at the
+> end of 2015, and 4.8.7 is planned to be the last ever release of Qt4.
+> It's still mandated by the long-awaited LSB 5 but I think it's fair to
+> say that the majority of developers have moved to Qt5. So, what should
+> we do with Qt4 moving forward?[2]  I see several options:
+>
+> 1) There's still lots of people using Qt4 in production, please keep it
+> in oe-core!  (and revisit in six months time)
+> 2) Move Qt4 recipes and classes to a meta-qt4 layer now so that oe-core
+> 1.9 ships without Qt4, and anyone wanting full LSB compliance or Qt4
+> will need to add that layer to their distro.
+>
+> Personally, I vote for (2).  Any other comments?
+
+#2 sounds fine.
+
+would recipes-lsb move out to its own layer too?
+
+- Armin
+>
+> Ross
+>
+> [1] https://blog.qt.io/blog/2015/05/26/qt-4-8-7-released/
+> [2] https://bugzilla.yoctoproject.org/show_bug.cgi?id=7812
+>
+>
 
