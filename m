@@ -1,27 +1,35 @@
 Return-Path: <biannm@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EEFF75A3E
+	by mail.openembedded.org (Postfix) with ESMTP id 6D75D75AF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2015 05:38:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97685051"
+	Wed, 24 Jun 2015 05:39:06 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97685080"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Jun 2015 13:42:22 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 24 Jun 2015 13:43:11 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5O5adkX005349
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5O5bTdX005399
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2015 13:36:40 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 24 Jun 2015 13:38:38 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Jun 2015 13:29:03 +0800
-Message-ID: <1435123743-14401-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 24 Jun 2015 13:37:29 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0181.006; Wed, 24 Jun 2015 13:39:11 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-ruby][PATCH] imsettings: add new recipe
+Thread-Index: AQHQqZEZ8B0OnkoZDEiiKHGrMBIqc525eVoAgAGzb1A=
+Date: Wed, 24 Jun 2015 05:39:11 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73E10E94@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1434608844-51731-1-git-send-email-biannm@cn.fujitsu.com>
+	<20150623113944.GA18920@jama>
+In-Reply-To: <20150623113944.GA18920@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-ruby][PATCH v2] imsettings: add new recipe
+Subject: Re: [meta-ruby][PATCH] imsettings: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,109 +43,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jun 2015 05:38:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 24 Jun 2015 05:39:08 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-imsettings is a delivery framework for general input-method configuration
-
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- .../imsettings/gtk-is-required-by-notify.patch     | 18 +++++++++++++
- ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 21 +++++++++++++++
- .../imsettings/imsettings_1.6.8.bb                 | 30 ++++++++++++++++++++++
- 3 files changed, 69 insertions(+)
- create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
- create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
- create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-
-diff --git a/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch b/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-new file mode 100644
-index 0000000..d42358d
---- /dev/null
-+++ b/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-@@ -0,0 +1,18 @@
-+gtk+ is required by linnotify. So make sure gtk be linked before libnotify
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp imsettings-1.6.7.orig/configure.ac imsettings-1.6.7/configure.ac
-+--- imsettings-1.6.7.orig/configure.ac	2013-11-26 16:09:09.000000000 +0800
-++++ imsettings-1.6.7/configure.ac	2014-12-30 11:27:44.370003209 +0800
-+@@ -93,8 +93,8 @@ PKG_CHECK_MODULES(LIBNOTIFY, libnotify,
-+ 		has_old_libnotify=yes
-+ 		PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED)
-+ 		AC_DEFINE(HAS_OLD_LIBNOTIFY,, [Using older libnotify])
-+-		IMDAEMON_CFLAGS="$GTK_CFLAGS $LIBNOTIFY_OLD_CFLAGS"
-+-		IMDAEMON_LIBS="$GTK_LIBS $LIBNOTIFY_OLD_LIBS"],[
-++		IMDAEMON_CFLAGS="$LIBNOTIFY_OLD_CFLAGS $GTK_CFLAGS"
-++		IMDAEMON_LIBS="$LIBNOTIFY_OLD_LIBS $GTK_LIBS"],[
-+ 		has_old_libnotify=no
-+ 		IMDAEMON_CFLAGS="$LIBNOTIFY_CFLAGS"
-+ 		IMDAEMON_LIBS="$LIBNOTIFY_LIBS"])
-diff --git a/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-new file mode 100644
-index 0000000..9e31847
---- /dev/null
-+++ b/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-@@ -0,0 +1,21 @@
-+multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf.
-+It will cause configure error as follow.
-+
-+  aclocal: error: non-option arguments are not accepted: '\'.
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp imsettings-1.6.8.orig/Makefile.am imsettings-1.6.8/Makefile.am
-+--- imsettings-1.6.8.orig/Makefile.am	2013-02-08 11:33:59.000000000 +0900
-++++ imsettings-1.6.8/Makefile.am	2015-06-24 14:15:32.070000007 +0900
-+@@ -1,9 +1,7 @@
-+ NULL =
-+ SUBDIRS = data imsettings imsettings-daemon backends utils po tests docs
-+ 
-+-ACLOCAL_AMFLAGS =			\
-+-	-I m4macros			\
-+-	$(NULL)
-++ACLOCAL_AMFLAGS = -I m4macros $(NULL)
-+ 
-+ CONFIGURE_DEPENDENCIES =		\
-+ 	requires			\
-diff --git a/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-new file mode 100644
-index 0000000..64a229b
---- /dev/null
-+++ b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "Delivery framework for general Input Method configuration"
-+DESCRIPTION = "IMSettings is a framework that delivers Input Method \
-+settings and applies the changes so they take effect \
-+immediately without any need to restart applications \
-+or the desktop. \
-+This package contains the core DBus services and some utilities."
-+HOMEPAGE = "http://code.google.com/p/imsettings/"
-+SECTION = "Applications/System"
-+
-+inherit autotools gtk-doc
-+
-+SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
-+           file://gtk-is-required-by-notify.patch \
-+           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
-+
-+SRC_URI[md5sum] = "c31429f1d60e36d7f811f871c75b6c41"
-+SRC_URI[sha256sum] = "2620ffbf9a6dc842dbf994b4773d4fe355eb77076ccf33f726ba63f16c0d08ba"
-+
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+
-+EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
-+                --disable-static \
-+               "
-+
-+DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim"
-+
-+RDEPENDS_${PN} += "bash"
-+
-+FILES_${PN} += "${datadir}/dbus-1/*"
--- 
-1.8.4.2
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBbbWFpbHRvOm9wZW5lbWJlZGRl
+ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddIE9uIEJlaGFsZiBPZg0KPiBN
+YXJ0aW4gSmFuc2ENCj4gU2VudDogVHVlc2RheSwgSnVuZSAyMywgMjAxNSA3OjQwIFBNDQo+IFRv
+OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBS
+ZTogW29lXSBbbWV0YS1ydWJ5XVtQQVRDSF0gaW1zZXR0aW5nczogYWRkIG5ldyByZWNpcGUNCj4g
+DQo+IE9uIFRodSwgSnVuIDE4LCAyMDE1IGF0IDAyOjI3OjI0UE0gKzA4MDAsIEJpYW4gTmFpbWVu
+ZyB3cm90ZToNCj4gPiBpbXNldHRpbmdzIGlzIGEgZGVsaXZlcnkgZnJhbWV3b3JrIGZvciBnZW5l
+cmFsIGlucHV0LW1ldGhvZA0KPiA+IGNvbmZpZ3VyYXRpb24NCj4gPg0KPiA+IFNpZ25lZC1vZmYt
+Ynk6IEJpYW4gTmFpbWVuZyA8Ymlhbm5tQGNuLmZ1aml0c3UuY29tPg0KPiA+IC0tLQ0KPiA+ICAu
+Li4vaW1zZXR0aW5ncy9ndGstaXMtcmVxdWlyZWQtYnktbm90aWZ5LnBhdGNoICAgICB8IDE4ICsr
+KysrKysrKysrKysrDQo+ID4gIC4uLi9pbXNldHRpbmdzL2ltc2V0dGluZ3NfMS42LjguYmIgICAg
+ICAgICAgICAgICAgIHwgMjkNCj4gKysrKysrKysrKysrKysrKysrKysrKw0KPiA+ICAyIGZpbGVz
+IGNoYW5nZWQsIDQ3IGluc2VydGlvbnMoKykNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4g
+bWV0YS1ydWJ5L3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9pbXNldHRpbmdzL2d0ay1pcy1y
+ZXF1aXJlZC1ieS1ubw0KPiA+IHRpZnkucGF0Y2ggIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IG1l
+dGEtcnVieS9yZWNpcGVzLWV4dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5nc18xLjYuOC5iYg0K
+PiA+DQo+ID4gZGlmZiAtLWdpdA0KPiA+IGEvbWV0YS1ydWJ5L3JlY2lwZXMtZXh0ZW5kZWQvaW1z
+ZXR0aW5ncy9pbXNldHRpbmdzL2d0ay1pcy1yZXF1aXJlZC1ieS0NCj4gPiBub3RpZnkucGF0Y2gN
+Cj4gPiBiL21ldGEtcnVieS9yZWNpcGVzLWV4dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5ncy9n
+dGstaXMtcmVxdWlyZWQtYnktDQo+ID4gbm90aWZ5LnBhdGNoDQo+ID4gbmV3IGZpbGUgbW9kZSAx
+MDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwLi5kNDIzNThkDQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+
+ICsrKyBiL21ldGEtcnVieS9yZWNpcGVzLWV4dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5ncy9n
+dGstaXMtcmVxdWlyZWQNCj4gPiArKysgLWJ5LW5vdGlmeS5wYXRjaA0KPiA+IEBAIC0wLDAgKzEs
+MTggQEANCj4gPiArZ3RrKyBpcyByZXF1aXJlZCBieSBsaW5ub3RpZnkuIFNvIG1ha2Ugc3VyZSBn
+dGsgYmUgbGlua2VkIGJlZm9yZQ0KPiA+ICtndGsrIGxpYm5vdGlmeQ0KPiA+ICsNCj4gPiArU2ln
+bmVkLW9mZi1ieTogQmlhbiBOYWltZW5nIDxiaWFubm1AY24uZnVqaXRzdS5jb20+DQo+ID4gKw0K
+PiA+ICtkaWZmIC1OdXJwIGltc2V0dGluZ3MtMS42Ljcub3JpZy9jb25maWd1cmUuYWMNCj4gaW1z
+ZXR0aW5ncy0xLjYuNy9jb25maWd1cmUuYWMNCj4gPiArLS0tIGltc2V0dGluZ3MtMS42Ljcub3Jp
+Zy9jb25maWd1cmUuYWMJMjAxMy0xMS0yNg0KPiAxNjowOTowOS4wMDAwMDAwMDAgKzA4MDANCj4g
+PiArKysrIGltc2V0dGluZ3MtMS42LjcvY29uZmlndXJlLmFjCTIwMTQtMTItMzAgMTE6Mjc6NDQu
+MzcwMDAzMjA5ICswODAwDQo+ID4gK0BAIC05Myw4ICs5Myw4IEBAIFBLR19DSEVDS19NT0RVTEVT
+KExJQk5PVElGWSwgbGlibm90aWZ5LA0KPiA+ICsgCQloYXNfb2xkX2xpYm5vdGlmeT15ZXMNCj4g
+PiArIAkJUEtHX0NIRUNLX01PRFVMRVMoR1RLLCBndGsrLTIuMCA+PSAkR1RLX1JFUVVJUkVEKQ0K
+PiA+ICsgCQlBQ19ERUZJTkUoSEFTX09MRF9MSUJOT1RJRlksLCBbVXNpbmcgb2xkZXIgbGlibm90
+aWZ5XSkNCj4gPiArLQkJSU1EQUVNT05fQ0ZMQUdTPSIkR1RLX0NGTEFHUyAkTElCTk9USUZZX09M
+RF9DRkxBR1MiDQo+ID4gKy0JCUlNREFFTU9OX0xJQlM9IiRHVEtfTElCUyAkTElCTk9USUZZX09M
+RF9MSUJTIl0sWw0KPiA+ICsrCQlJTURBRU1PTl9DRkxBR1M9IiRMSUJOT1RJRllfT0xEX0NGTEFH
+UyAkR1RLX0NGTEFHUyINCj4gPiArKwkJSU1EQUVNT05fTElCUz0iJExJQk5PVElGWV9PTERfTElC
+UyAkR1RLX0xJQlMiXSxbDQo+ID4gKyAJCWhhc19vbGRfbGlibm90aWZ5PW5vDQo+ID4gKyAJCUlN
+REFFTU9OX0NGTEFHUz0iJExJQk5PVElGWV9DRkxBR1MiDQo+ID4gKyAJCUlNREFFTU9OX0xJQlM9
+IiRMSUJOT1RJRllfTElCUyJdKQ0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLXJ1YnkvcmVjaXBlcy1l
+eHRlbmRlZC9pbXNldHRpbmdzL2ltc2V0dGluZ3NfMS42LjguYmINCj4gPiBiL21ldGEtcnVieS9y
+ZWNpcGVzLWV4dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5nc18xLjYuOC5iYg0KPiA+IG5ldyBm
+aWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMC4uOTE0NDNkNw0KPiA+IC0tLSAvZGV2
+L251bGwNCj4gPiArKysgYi9tZXRhLXJ1YnkvcmVjaXBlcy1leHRlbmRlZC9pbXNldHRpbmdzL2lt
+c2V0dGluZ3NfMS42LjguYmINCj4gPiBAQCAtMCwwICsxLDI5IEBADQo+ID4gK1NVTU1BUlkgPSAi
+RGVsaXZlcnkgZnJhbWV3b3JrIGZvciBnZW5lcmFsIElucHV0IE1ldGhvZCBjb25maWd1cmF0aW9u
+Ig0KPiA+ICtERVNDUklQVElPTiA9ICJJTVNldHRpbmdzIGlzIGEgZnJhbWV3b3JrIHRoYXQgZGVs
+aXZlcnMgSW5wdXQgTWV0aG9kIFwNCj4gPiArc2V0dGluZ3MgYW5kIGFwcGxpZXMgdGhlIGNoYW5n
+ZXMgc28gdGhleSB0YWtlIGVmZmVjdCBcIGltbWVkaWF0ZWx5DQo+ID4gK3dpdGhvdXQgYW55IG5l
+ZWQgdG8gcmVzdGFydCBhcHBsaWNhdGlvbnMgXCBvciB0aGUgZGVza3RvcC4gXCBUaGlzDQo+ID4g
+K3BhY2thZ2UgY29udGFpbnMgdGhlIGNvcmUgREJ1cyBzZXJ2aWNlcyBhbmQgc29tZSB1dGlsaXRp
+ZXMuIg0KPiA+ICtIT01FUEFHRSA9ICJodHRwOi8vY29kZS5nb29nbGUuY29tL3AvaW1zZXR0aW5n
+cy8iDQo+ID4gK1NFQ1RJT04gPSAiQXBwbGljYXRpb25zL1N5c3RlbSINCj4gPiArDQo+ID4gK2lu
+aGVyaXQgYXV0b3Rvb2xzIGd0ay1kb2MNCj4gPiArDQo+ID4gK1NSQ19VUkkgPQ0KPiAiaHR0cHM6
+Ly9iaXRidWNrZXQub3JnL3RhZ29oL2ltc2V0dGluZ3MvZG93bmxvYWRzLyR7QlBOfS0ke1BWfS50
+YXIuYnoyIFwNCj4gPiArICAgICAgICAgICBmaWxlOi8vZ3RrLWlzLXJlcXVpcmVkLWJ5LW5vdGlm
+eS5wYXRjaCINCj4gPiArDQo+ID4gK1NSQ19VUklbbWQ1c3VtXSA9ICJjMzE0MjlmMWQ2MGUzNmQ3
+ZjgxMWY4NzFjNzViNmM0MSINCj4gPiArU1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gIjI2MjBmZmJm
+OWE2ZGM4NDJkYmY5OTRiNDc3M2Q0ZmUzNTVlYjc3MDc2Y2NmMzNmNzI2YmE2M2YxNmMwZDA4YmEi
+DQo+ID4gKw0KPiA+ICtMSUNFTlNFID0gIkxHUEx2MisiDQo+ID4gK0xJQ19GSUxFU19DSEtTVU0g
+PSAiZmlsZTovL0NPUFlJTkc7bWQ1PTJkNTAyNWQ0YWEzNDk1YmVmZWY4ZjE3MjA2YTViMGExIg0K
+PiA+ICsNCj4gPiArRVhUUkFfT0VDT05GID0gIi0td2l0aC14aW5wdXRzaD01MC14aW5wdXQuc2gg
+XA0KPiA+ICsgICAgICAgICAgICAgICAgLS1kaXNhYmxlLXN0YXRpYyBcDQo+ID4gKyAgICAgICAg
+ICAgICAgICINCj4gPiArDQo+ID4gK0RFUEVORFMgPSAiZ3RrKyBnY29uZiBsaWJub3RpZnkgZGJ1
+cy1nbGliIGxpYmd4aW0iDQo+ID4gKw0KPiA+ICtSREVQRU5EU18ke1BOfSArPSAiYmFzaCINCj4g
+PiArDQo+ID4gK0ZJTEVTXyR7UE59ICs9ICIke2RhdGFkaXJ9L2RidXMtMS8qIg0KPiANCj4gRmFp
+bHMgdG8gYnVpbGQ6DQo+IHwgTk9URTogRXhlY3V0aW5nIGludGx0b29saXplIC0tY29weSAtLWZv
+cmNlIC0tYXV0b21ha2UNCj4gfCBOT1RFOiBFeGVjdXRpbmcgQUNMT0NBTD0iYWNsb2NhbA0KPiB8
+IC0tc3lzdGVtLWFjZGlyPS9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNvcmUvdG1wLWdsaWJj
+L3dvcmsvYXJtdjV0ZS0NCj4gfCBvZS1saW51eC1nbnVlYWJpL2ltc2V0dGluZ3MvMS42LjgtcjAv
+YnVpbGQvYWNsb2NhbC1jb3B5LyIgYXV0b3JlY29uZg0KPiB8IC0tdmVyYm9zZSAtLWluc3RhbGwg
+LS1mb3JjZSAtLWV4Y2x1ZGU9YXV0b3BvaW50IC1JDQo+IHwgL2hvbWUvamVua2lucy9vZS93b3Js
+ZC9zaHItY29yZS90bXAtZ2xpYmMvd29yay9hcm12NXRlLW9lLWxpbnV4LWdudWVhYg0KPiB8IGkv
+aW1zZXR0aW5ncy8xLjYuOC1yMC9pbXNldHRpbmdzLTEuNi44L200bWFjcm9zLw0KPiB8IGF1dG9y
+ZWNvbmY6IEVudGVyaW5nIGRpcmVjdG9yeSBgLicNCj4gfCBhdXRvcmVjb25mOiBjb25maWd1cmUu
+YWM6IG5vdCB1c2luZyBHZXR0ZXh0DQo+IHwgYXV0b3JlY29uZjogcnVubmluZzogYWNsb2NhbA0K
+PiB8IC0tc3lzdGVtLWFjZGlyPS9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNvcmUvdG1wLWds
+aWJjL3dvcmsvYXJtdjV0ZS0NCj4gfCBvZS1saW51eC1nbnVlYWJpL2ltc2V0dGluZ3MvMS42Ljgt
+cjAvYnVpbGQvYWNsb2NhbC1jb3B5LyAtSQ0KPiB8IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hy
+LWNvcmUvdG1wLWdsaWJjL3dvcmsvYXJtdjV0ZS1vZS1saW51eC1nbnVlYWINCj4gfCBpL2ltc2V0
+dGluZ3MvMS42LjgtcjAvaW1zZXR0aW5ncy0xLjYuOC9tNG1hY3Jvcy8gLUkNCj4gfCAvaG9tZS9q
+ZW5raW5zL29lL3dvcmxkL3Noci1jb3JlL3RtcC1nbGliYy93b3JrL2FybXY1dGUtb2UtbGludXgt
+Z251ZWFiDQo+IHwgaS9pbXNldHRpbmdzLzEuNi44LXIwL2ltc2V0dGluZ3MtMS42LjgvbTRtYWNy
+b3MvIC0tZm9yY2UgXA0KPiB8IGFjbG9jYWw6IGVycm9yOiBub24tb3B0aW9uIGFyZ3VtZW50cyBh
+cmUgbm90IGFjY2VwdGVkOiAnXCcuDQo+IHwgYWNsb2NhbDogVHJ5DQo+ICcvaG9tZS9qZW5raW5z
+L29lL3dvcmxkL3Noci1jb3JlL3RtcC1nbGliYy9zeXNyb290cy94ODZfNjQtbGludXgvdXNyL2Jp
+bi9hDQo+IGNsb2NhbCAtLWhlbHAnIGZvciBtb3JlIGluZm9ybWF0aW9uLg0KPiB8IGF1dG9yZWNv
+bmY6IGFjbG9jYWwgZmFpbGVkIHdpdGggZXhpdCBzdGF0dXM6IDENCj4gfCBFUlJPUjogYXV0b3Jl
+Y29uZiBleGVjdXRpb24gZmFpbGVkLg0KPiB8IFdBUk5JTkc6IGV4aXQgY29kZSAxIGZyb20gYSBz
+aGVsbCBjb21tYW5kLg0KPiB8IEVSUk9SOiBGdW5jdGlvbiBmYWlsZWQ6IGRvX2NvbmZpZ3VyZSAo
+bG9nIGZpbGUgaXMgbG9jYXRlZCBhdA0KPiB8IC9ob21lL2plbmtpbnMvb2Uvd29ybGQvc2hyLWNv
+cmUvdG1wLWdsaWJjL3dvcmsvYXJtdjV0ZS1vZS1saW51eC1nbnVlYWINCj4gfCBpL2ltc2V0dGlu
+Z3MvMS42LjgtcjAvdGVtcC9sb2cuZG9fY29uZmlndXJlLjYxNTgpDQo+IE5PVEU6IHJlY2lwZSBp
+bXNldHRpbmdzLTEuNi44LXIwOiB0YXNrIGRvX2NvbmZpZ3VyZTogRmFpbGVkDQo+IEVSUk9SOiBU
+YXNrIDExMzQ3DQo+ICgvaG9tZS9qZW5raW5zL29lL3dvcmxkL3Noci1jb3JlL21ldGEtb3BlbmVt
+YmVkZGVkL21ldGEtcnVieS9yZWNpcGVzLWV4dGVuDQo+IGRlZC9pbXNldHRpbmdzL2ltc2V0dGlu
+Z3NfMS42LjguYmIsIGRvX2NvbmZpZ3VyZSkgZmFpbGVkIHdpdGggZXhpdCBjb2RlICcxJw0KPiAN
+Cg0KVGhhbmtzIGZvciB5b3VyIHRlc3QuDQpJdCBoYXMgYmVlbiBmaXhlZCBpbiB0aGUgVjIgcGF0
+Y2guIA0KDQpUaGFua3MNCiBCaWFuDQoNCj4gPiAtLQ0KPiA+IDEuOC40LjINCj4gPg0KPiA+IC0t
+DQo+ID4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4g
+PiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVs
+QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gTWFydGlu
+ICdKYU1hJyBKYW5zYSAgICAgamFiYmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwuY29tDQo=
 
