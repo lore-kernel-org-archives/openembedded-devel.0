@@ -1,35 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f172.google.com (mail-wi0-f172.google.com
-	[209.85.212.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 9708E757CE;
-	Wed, 24 Jun 2015 00:26:22 +0000 (UTC)
-Received: by wibdq8 with SMTP id dq8so31630905wib.1;
-	Tue, 23 Jun 2015 17:26:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	bh=UoRAnGaAsa30P8mlijburg252bmSpQDr7TexLCARL+4=;
-	b=UTAul+zBaP6a6akOTRPIq1m5R/MhQtpYM17D5MiDwAH4x+ElpXypj7Rn6FL2y97Smg
-	U59ZbDCj/pP6ZP3gCkojIssEsI3qyLfoW5lPOu0DcKtyE/X6GULTsFtQq2ghXlCTCEZL
-	N8jbH7ci30xu3yhHrXjsuHAK3liY4pa8GEJXEQU2ifJ0A85TH2TJuE177MQA2O5q/9uV
-	Peq3t2Xqu4OOdPJAnvumLWbosykrtZsc4yvM4N0y3/4N/spaghcA2zuG+/ib2i/ovHsa
-	M0Ji1AJ1dh4+E+T7nWmp2cvCorv9DLPkg5l3Ixd3fIKwpyu5vxju+C5uaLy8GgnPBplb
-	NyXw==
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EEFF75A3E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Jun 2015 05:38:19 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97685051"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Jun 2015 13:42:22 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5O5adkX005349
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Jun 2015 13:36:40 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Wed, 24 Jun 2015 13:38:38 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 24 Jun 2015 13:29:03 +0800
+Message-ID: <1435123743-14401-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.194.187.51 with SMTP id fp19mr51080371wjc.67.1435105583235; 
-	Tue, 23 Jun 2015 17:26:23 -0700 (PDT)
-Received: by 10.28.167.2 with HTTP; Tue, 23 Jun 2015 17:26:23 -0700 (PDT)
-In-Reply-To: <5589E809.8060000@gmail.com>
-References: <CAJTo0LaKEvtznsdfz8gLWFSLyb6Rx2XsgbYG_cfOrAm+W2UfEg@mail.gmail.com>
-	<5589E809.8060000@gmail.com>
-Date: Wed, 24 Jun 2015 02:26:23 +0200
-Message-ID: <CA+chaQecQh-oXVvFgqNOrUFEwoJBxuL1wCv7Jw7OKALm9VW4TQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Future of Qt4 recipes
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-ruby][PATCH v2] imsettings: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,54 +35,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jun 2015 00:26:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 24 Jun 2015 05:38:21 -0000
+Content-Type: text/plain
 
-I agree with #2.
+imsettings is a delivery framework for general input-method configuration
 
-Argument that it's still used by many projects shouldn't be used against
-layers :).
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ .../imsettings/gtk-is-required-by-notify.patch     | 18 +++++++++++++
+ ...CAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 21 +++++++++++++++
+ .../imsettings/imsettings_1.6.8.bb                 | 30 ++++++++++++++++++++++
+ 3 files changed, 69 insertions(+)
+ create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
+ create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+ create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
 
-On Wed, Jun 24, 2015 at 1:13 AM, akuster808 <akuster808@gmail.com> wrote:
+diff --git a/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch b/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
+new file mode 100644
+index 0000000..d42358d
+--- /dev/null
++++ b/meta-ruby/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
+@@ -0,0 +1,18 @@
++gtk+ is required by linnotify. So make sure gtk be linked before libnotify
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++diff -Nurp imsettings-1.6.7.orig/configure.ac imsettings-1.6.7/configure.ac
++--- imsettings-1.6.7.orig/configure.ac	2013-11-26 16:09:09.000000000 +0800
+++++ imsettings-1.6.7/configure.ac	2014-12-30 11:27:44.370003209 +0800
++@@ -93,8 +93,8 @@ PKG_CHECK_MODULES(LIBNOTIFY, libnotify,
++ 		has_old_libnotify=yes
++ 		PKG_CHECK_MODULES(GTK, gtk+-2.0 >= $GTK_REQUIRED)
++ 		AC_DEFINE(HAS_OLD_LIBNOTIFY,, [Using older libnotify])
++-		IMDAEMON_CFLAGS="$GTK_CFLAGS $LIBNOTIFY_OLD_CFLAGS"
++-		IMDAEMON_LIBS="$GTK_LIBS $LIBNOTIFY_OLD_LIBS"],[
+++		IMDAEMON_CFLAGS="$LIBNOTIFY_OLD_CFLAGS $GTK_CFLAGS"
+++		IMDAEMON_LIBS="$LIBNOTIFY_OLD_LIBS $GTK_LIBS"],[
++ 		has_old_libnotify=no
++ 		IMDAEMON_CFLAGS="$LIBNOTIFY_CFLAGS"
++ 		IMDAEMON_LIBS="$LIBNOTIFY_LIBS"])
+diff --git a/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+new file mode 100644
+index 0000000..9e31847
+--- /dev/null
++++ b/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+@@ -0,0 +1,21 @@
++multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf.
++It will cause configure error as follow.
++
++  aclocal: error: non-option arguments are not accepted: '\'.
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++diff -Nurp imsettings-1.6.8.orig/Makefile.am imsettings-1.6.8/Makefile.am
++--- imsettings-1.6.8.orig/Makefile.am	2013-02-08 11:33:59.000000000 +0900
+++++ imsettings-1.6.8/Makefile.am	2015-06-24 14:15:32.070000007 +0900
++@@ -1,9 +1,7 @@
++ NULL =
++ SUBDIRS = data imsettings imsettings-daemon backends utils po tests docs
++ 
++-ACLOCAL_AMFLAGS =			\
++-	-I m4macros			\
++-	$(NULL)
+++ACLOCAL_AMFLAGS = -I m4macros $(NULL)
++ 
++ CONFIGURE_DEPENDENCIES =		\
++ 	requires			\
+diff --git a/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
+new file mode 100644
+index 0000000..64a229b
+--- /dev/null
++++ b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Delivery framework for general Input Method configuration"
++DESCRIPTION = "IMSettings is a framework that delivers Input Method \
++settings and applies the changes so they take effect \
++immediately without any need to restart applications \
++or the desktop. \
++This package contains the core DBus services and some utilities."
++HOMEPAGE = "http://code.google.com/p/imsettings/"
++SECTION = "Applications/System"
++
++inherit autotools gtk-doc
++
++SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
++           file://gtk-is-required-by-notify.patch \
++           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
++
++SRC_URI[md5sum] = "c31429f1d60e36d7f811f871c75b6c41"
++SRC_URI[sha256sum] = "2620ffbf9a6dc842dbf994b4773d4fe355eb77076ccf33f726ba63f16c0d08ba"
++
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
++
++EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
++                --disable-static \
++               "
++
++DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim"
++
++RDEPENDS_${PN} += "bash"
++
++FILES_${PN} += "${datadir}/dbus-1/*"
+-- 
+1.8.4.2
 
->
->
-> On 06/22/2015 03:43 AM, Burton, Ross wrote:
->
->> Hi,
->>
->> So, Qt 4.8.7 was released last month[1].  Support for Qt4 stops at the
->> end of 2015, and 4.8.7 is planned to be the last ever release of Qt4.
->> It's still mandated by the long-awaited LSB 5 but I think it's fair to
->> say that the majority of developers have moved to Qt5. So, what should
->> we do with Qt4 moving forward?[2]  I see several options:
->>
->> 1) There's still lots of people using Qt4 in production, please keep it
->> in oe-core!  (and revisit in six months time)
->> 2) Move Qt4 recipes and classes to a meta-qt4 layer now so that oe-core
->> 1.9 ships without Qt4, and anyone wanting full LSB compliance or Qt4
->> will need to add that layer to their distro.
->>
->> Personally, I vote for (2).  Any other comments?
->>
->
-> #2 sounds fine.
->
-> would recipes-lsb move out to its own layer too?
->
-> - Armin
->
->>
->> Ross
->>
->> [1] https://blog.qt.io/blog/2015/05/26/qt-4-8-7-released/
->> [2] https://bugzilla.yoctoproject.org/show_bug.cgi?id=7812
->>
->>
->>  --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
 
