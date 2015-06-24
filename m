@@ -1,27 +1,37 @@
-Return-Path: <biannm@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D90475A2C
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 1570D75A17
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2015 08:35:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97692322"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Jun 2015 16:39:41 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5O8XxH9023291
+	Wed, 24 Jun 2015 12:33:42 +0000 (UTC)
+Received: by wgqq4 with SMTP id q4so35055097wgq.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2015 16:33:59 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Wed, 24 Jun 2015 16:35:58 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Jun 2015 16:26:34 +0800
-Message-ID: <1435134394-15393-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 24 Jun 2015 05:33:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=GPMydSaypKMuM/cYZVPSlVi8uqw6JMGc8CYXebZLgwM=;
+	b=rHA1ZwLeHqIcYQNct3rK/pfSdWKlRmm5RPbhU0is5FD3xDbiW5HOCJvxuwgXY2eSdG
+	PIUllo1sedohxOmy7eO3UI0VO3UTRdzJze4IYyz7PT/gpsOvjOGiVVGiX5xEUmRPDHUC
+	oKEe2tHsQIrjHzoDUCySrmIQGElviaDHUwhFAc8QpKhBduxJj8fpmRIv3HfU1VX+kKSH
+	eOLTHHc/OLVrbLa90tINMKeW2AILM+OC36iPvU9wPDNCr7WIjcldjcytFt6Axr9jaDPC
+	Ii02pw3ReXQY3xWsGIqJlALcHiGTGjXunfHLy6NsF25LmFEn/OhyPpEVioMmtrhqjEfX
+	0XqQ==
+X-Received: by 10.194.203.3 with SMTP id km3mr65770690wjc.114.1435149222661;
+	Wed, 24 Jun 2015 05:33:42 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
+	by mx.google.com with ESMTPSA id df1sm2368018wib.12.2015.06.24.05.33.40
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 24 Jun 2015 05:33:41 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 24 Jun 2015 14:33:13 +0200
+Message-Id: <1435149193-5487-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-ruby][PATCH] imsettings: fix build error.
+Subject: [meta-qt5][PATCH] qt5-creator: add missing RRECOMMENDS for instant usage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,63 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jun 2015 08:35:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 24 Jun 2015 12:33:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf, otherwise
-a configure error as follow will be caught.
-
-  aclocal: error: non-option arguments are not accepted: '\'.
-
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...OCAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 21 +++++++++++++++++++++
- .../recipes-extended/imsettings/imsettings_1.6.8.bb |  3 ++-
- 2 files changed, 23 insertions(+), 1 deletion(-)
- create mode 100644 meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+ recipes-qt/qt5/qt5-creator_3.3.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-new file mode 100644
-index 0000000..9e31847
---- /dev/null
-+++ b/meta-ruby/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-@@ -0,0 +1,21 @@
-+multi-line ACLOCAL_AMFLAGS isn't supported by autoreconf.
-+It will cause configure error as follow.
-+
-+  aclocal: error: non-option arguments are not accepted: '\'.
-+
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-+
-+diff -Nurp imsettings-1.6.8.orig/Makefile.am imsettings-1.6.8/Makefile.am
-+--- imsettings-1.6.8.orig/Makefile.am	2013-02-08 11:33:59.000000000 +0900
-++++ imsettings-1.6.8/Makefile.am	2015-06-24 14:15:32.070000007 +0900
-+@@ -1,9 +1,7 @@
-+ NULL =
-+ SUBDIRS = data imsettings imsettings-daemon backends utils po tests docs
-+ 
-+-ACLOCAL_AMFLAGS =			\
-+-	-I m4macros			\
-+-	$(NULL)
-++ACLOCAL_AMFLAGS = -I m4macros $(NULL)
-+ 
-+ CONFIGURE_DEPENDENCIES =		\
-+ 	requires			\
-diff --git a/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-index 91443d7..64a229b 100644
---- a/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-+++ b/meta-ruby/recipes-extended/imsettings/imsettings_1.6.8.bb
-@@ -10,7 +10,8 @@ SECTION = "Applications/System"
- inherit autotools gtk-doc
- 
- SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2 \
--           file://gtk-is-required-by-notify.patch"
-+           file://gtk-is-required-by-notify.patch \
-+           file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
- 
- SRC_URI[md5sum] = "c31429f1d60e36d7f811f871c75b6c41"
- SRC_URI[sha256sum] = "2620ffbf9a6dc842dbf994b4773d4fe355eb77076ccf33f726ba63f16c0d08ba"
+diff --git a/recipes-qt/qt5/qt5-creator_3.3.1.bb b/recipes-qt/qt5/qt5-creator_3.3.1.bb
+index 8f993ca..97ca450 100644
+--- a/recipes-qt/qt5/qt5-creator_3.3.1.bb
++++ b/recipes-qt/qt5/qt5-creator_3.3.1.bb
+@@ -82,6 +82,7 @@ RRECOMMENDS_${PN} += " \
+     packagegroup-qt5-toolchain-target \
+     binutils \
+     ccache \
+-    gcc-symlinks \
++    make \
++    gcc-symlinks g++-symlinks cpp-symlinks \
+     gdb \
+ "
 -- 
-1.9.1
+1.9.3
 
 
