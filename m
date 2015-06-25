@@ -1,40 +1,37 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
-	[209.85.212.176])
-	by mail.openembedded.org (Postfix) with ESMTP id A706B737A3
+Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 11E1A601E0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 07:35:44 +0000 (UTC)
-Received: by wicnd19 with SMTP id nd19so9448162wic.1
+	Thu, 25 Jun 2015 07:35:42 +0000 (UTC)
+Received: by wgck11 with SMTP id k11so54975122wgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 00:35:45 -0700 (PDT)
+	Thu, 25 Jun 2015 00:35:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-type:content-transfer-encoding;
-	bh=MFTB/9TjRNWy81D549gZXd/WalnkVMQcOBscHmOCiqY=;
-	b=f7Zv/4n4QjyoCikDTnZeMjnyhsuDKkTo8qsA9sGQI7niiC22nCc4DMgRebw+TkkNd/
-	R/Oxd9pj5YVY1cfbywhRJ9YhdDeWsssbk3G9GMISegcI0s3kOcxNBNfkEEOyGx4izhZq
-	3W+1/ihDvwsTNUbVN3yVB4JJQQzreloz/O0kOeLT9smUZMlXUFZGBpwOb0oUpsBBFQZz
-	mdI+BbJQ4cbtP2CrX5QFwZzEiSaRUVACqzapS+Qd0fYcGSm2c4h0MiIGNXxQxLKpqQPS
-	hJSserQ6QVZ7EhqQLy+wcpTD7xmy3g8IsYZNRYcQOv5mmf+ZWRarHd3EizvHwa1Z4jM2
-	LBrA==
-X-Received: by 10.180.182.33 with SMTP id eb1mr3152753wic.8.1435217745219;
-	Thu, 25 Jun 2015 00:35:45 -0700 (PDT)
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=SA2nEPkq/MMZ/pknTwg38cjSuSEydQOnF4bF7/jftak=;
+	b=mkUQQcmMgTyt2gRdQAkzNsCyi2igXlR/Sl4zgmBBrjCf/ze+Iv4H2YrG3Pyo/azg4Y
+	n7sOKJv+LrbW1FzR5vmi+v4WkuwxV+9Wk/0HFJsp/NTt/HdNE0kda/45fn9h7Y1OVvCB
+	wjsgMPKJofHbSSaXlMwxPKjvIHMPAhSWuHFvU4bUxkbG0Ys4Hvb07W9OOkcHFk8c4m8+
+	+zeEgaEr9JYoogW15gPFEQxWACKn4Vqnio4hx8Ccerocoqs7p6HRqaqIZoUSadczG+GT
+	ogpqtIsUmhNB+7txFwr/nPKwR6iAhP9QZXIAzsupBSFTzMSF30935QV3qCt2zOzfs4X9
+	9q4g==
+X-Received: by 10.180.88.201 with SMTP id bi9mr3148353wib.58.1435217743261;
+	Thu, 25 Jun 2015 00:35:43 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
-	by mx.google.com with ESMTPSA id wx9sm44250156wjb.6.2015.06.25.00.35.43
+	by mx.google.com with ESMTPSA id wx9sm44250156wjb.6.2015.06.25.00.35.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 25 Jun 2015 00:35:44 -0700 (PDT)
+	Thu, 25 Jun 2015 00:35:41 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Jun 2015 09:35:12 +0200
-Message-Id: <1435217714-20564-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 25 Jun 2015 09:35:11 +0200
+Message-Id: <1435217714-20564-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
-In-Reply-To: <1435217714-20564-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1435217714-20564-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] libndp: initial add 1.5
+Subject: [PATCH 0/3] networkmanager update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,30 +49,39 @@ X-List-Received-Date: Thu, 25 Jun 2015 07:35:46 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-it is required for later networkmanager
+A similar patch patch was sent but I like this more:
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-connectivity/libndp/libndp_1.5.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+* it loads libndp from release tarball
+* networkmanager is not disabled by default / add more packageconfig / cleanup at_console support quirks
+* network-manager-applet is updated
+
+I have these patches under test for some time and tested successfully:
+
+* wired DHCP/staticIP
+* wireless
+* wireless AP
+
+Andreas Müller (3):
+  libndp: initial add 1.5
+  networkmanager: update to 1.0.2
+  network-manager-applet: update to 1.0.2
+
+ ...ort-for-AP-mode-setting-for-wifi-sharing.patch} |  0
+ ...ses-and-properties-which-are-not-supporte.patch | 41 ----------------------
+ ...or-network-sharing-if-device-supports-it.patch} |  2 +-
+ ...0.9.8.10.bb => network-manager-applet_1.0.2.bb} | 16 +++------
+ meta-oe/recipes-connectivity/libndp/libndp_1.5.bb  | 10 ++++++
+ ...c-Check-only-for-libsystemd-not-libsystem.patch | 30 ----------------
+ ...manager_0.9.8.10.bb => networkmanager_1.0.2.bb} | 41 +++++-----------------
+ 7 files changed, 24 insertions(+), 116 deletions(-)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/files/{0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch => 0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch} (100%)
+ delete mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
+ rename meta-gnome/recipes-connectivity/network-manager-applet/files/{0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch => 0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch} (97%)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_0.9.8.10.bb => network-manager-applet_1.0.2.bb} (67%)
  create mode 100644 meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+ delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch
+ rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_0.9.8.10.bb => networkmanager_1.0.2.bb} (59%)
 
-diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
-new file mode 100644
-index 0000000..8f1d1ff
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "Library for IPv6 Neighbor Discovery Protocol"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-+
-+SRC_URI = "http://libndp.org/files/${BPN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "beb82e8d75d8382d1b7c0bb0f68be429"
-+SRC_URI[sha256sum] = "faf116ab70ce9514ec4e8573556025debea08f606e7f38b616de1f26e120c795"
-+
-+inherit autotools
 -- 
 1.9.3
 
