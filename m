@@ -1,35 +1,27 @@
-Return-Path: <ashcharles@gmail.com>
-Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
-	[209.85.213.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 127696AC15
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 3156C605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2015 23:55:01 +0000 (UTC)
-Received: by igin14 with SMTP id n14so44822382igi.1
+	Thu, 25 Jun 2015 02:00:32 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97724506"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Jun 2015 10:04:36 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5P1wsrt024985
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2015 16:55:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	bh=BTkY6ydQv+SnEqzhO3dtdWpTDn1VfF/xj96yElmE3zM=;
-	b=mP57+Nu78V35jPq+wA/AfsL9QcRHZtaAhZDrZUcUJ0Bp5jH8nr/c6hxG17wbi/xNNG
-	orhnpVH0uqL8QIvXngtUMOkjynBz14v1MVPzhi/A/ZnC/b1Tdq1OL2sumJF9Y8/lGuY5
-	y80nUDPvF8btsNVzmk+b/C0uD9vHAep5DngQ5EB6HMtaPc/AWku/v2reVw1zpVTRkYxw
-	vDKIq+SgSQf/0vAXA/AZ5Pky1a5eZa+oE+Pm+5tzcHLb5yQBxinbDO1K8V+veD8SEHsv
-	iJwPcyd5XYy624jUojyPSpu9IVg6ddGCRg9t/2Fo9YBwYGkk1/SO9EjYg14g90HUjUvs
-	EaCQ==
-X-Received: by 10.107.128.227 with SMTP id k96mr8021701ioi.7.1435190102933;
-	Wed, 24 Jun 2015 16:55:02 -0700 (PDT)
+	Thu, 25 Jun 2015 09:58:55 +0800
+Received: from localhost.localdomain (10.167.226.85) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 25 Jun 2015 10:00:32 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Jun 2015 10:00:16 +0800
+Message-ID: <1435197618-1621-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Received: by 10.107.141.78 with HTTP; Wed, 24 Jun 2015 16:54:33 -0700 (PDT)
-In-Reply-To: <1434982373-23401-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1434982373-23401-1-git-send-email-schnitzeltony@googlemail.com>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Wed, 24 Jun 2015 16:54:33 -0700
-Message-ID: <CAK8F28mMAiCFLv3S_WNF-osWSX98kEw=YaB6aeisbnnPXQNx5Q@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH] xfce4-session: ensure ip for machine is found by adding to hosts
+X-Originating-IP: [10.167.226.85]
+Subject: [meta-oe][PATCH 0/2] upgrade networkmanager and add new depends.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,103 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Jun 2015 23:55:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Jun 2015 02:00:34 -0000
+Content-Type: text/plain
 
-On Mon, Jun 22, 2015 at 7:12 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> This fixes very ugly behaviour: Starting applications e.g xfce4-terminal
-> can delay for minutes in case network is connected.
->
-> There was a similar approach implemented for xfce4-session but this was r=
-emoved
-> in
->
-> commit f54d3a506fef603d8d0c538d1d69a6597152c169
-> Author: Ash Charles <ashcharles@gmail.com>
-> Date:   Mon Feb 23 08:40:53 2015 -0800
->
->     xfce4-session: Remove unneeded pkg_postinst
->
->     The pkg_postinst inherited from previous versions of this recipe no
->     longer seems necessary; no error message seen at runtime in a quick
->     test.  As it made the generated packages unnecessarily
->     machine-specific, remove this post-install step. Based on the ensurin=
-g
->     discussion, this supersedes the original patch [1].
->
->     [1] http://lists.openembedded.org/pipermail/openembedded-devel/2015-F=
-ebruary/100454.html
->
->     Signed-off-by: Ash Charles <ashcharles@gmail.com>
->     Tested-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->
-> Unfortuantely my tests for that patch only checked for the messagebox:
->
-> | Could not look up internet address for <hostname>
-> | This will prevent Xfce from operating correctly.
-> | It may be possible to correct the problem by adding
-> | <hostname> to the file /etc/hosts on your system.
->
-> For unknown reasons this messagebox is not created but the hint is still
-> extremely valid.
->
-> To avoid making 'xfce4-session' machine specific an extra meta-recipe
-> 'machine-host' was created on which 'xfce4-session' rdepends.
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
->  meta-xfce/recipes-xfce/xfce4-session/machine-host.bb    | 17 +++++++++++=
-++++++
->  .../recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb  |  2 ++
->  2 files changed, 19 insertions(+)
->  create mode 100644 meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
->
-> diff --git a/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb b/meta-=
-xfce/recipes-xfce/xfce4-session/machine-host.bb
-> new file mode 100644
-> index 0000000..03bd205
-> --- /dev/null
-> +++ b/meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY =3D "Meta package adding machine name to known hosts"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://${COREBASE}/LICENSE;md5=3D4d92cd373abda3937=
-c2bc47fbc49d690"
-> +
-> +ALLOW_EMPTY_${PN} =3D "1"
-> +
-> +LOCALHOSTMACHINE =3D "127.0.0.1    ${MACHINE}"
-> +
-> +# on some machines starting applications as xfce4-terminal take ages wit=
-hout
-> +# machine name in hosts
-> +pkg_postinst_${PN} () {
-> +if ! grep -q '${LOCALHOSTMACHINE}' $D/etc/hosts ; then
-> +    echo '${LOCALHOSTMACHINE}' >> $D/etc/hosts
-> +fi
-> +}
-> +
-> +PACKAGE_ARCH =3D "${MACHINE_ARCH}"
-> diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb=
- b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
-> index 81c56cc..215aec3 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
-> +++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb
-> @@ -26,3 +26,5 @@ FILES_${PN} +=3D " \
->  "
->
->  FILES_${PN}-dbg +=3D "${libdir}/xfce4/*/*/.debug"
-> +
-> +RDEPENDS_${PN} +=3D "machine-host"
-> --
-> 1.9.3
->
-Thanks Andreas.  I gave this a try and the patch work for me.  That
-said, I don't see a long hang in any case---likely because
-systemd-hostnamed is taking care of providing this resolution.  In any
-case:
-Acked-by: Ash Charles <ashcharles@gmail.com>
+The newer networkmanager depends on libndp,so add it.
+
+Li xin (2):
+  networkmanager: upgrade from 0.9.8.10 to 1.0.2
+  libndp: add new recipe
+
+ meta-oe/recipes-connectivity/libndp/libndp_1.5.bb  | 12 +++++++++
+ ...c-Check-only-for-libsystemd-not-libsystem.patch | 30 ----------------------
+ ...manager_0.9.8.10.bb => networkmanager_1.0.2.bb} | 16 +++++-------
+ 3 files changed, 19 insertions(+), 39 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+ delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch
+ rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_0.9.8.10.bb => networkmanager_1.0.2.bb} (87%)
+
+-- 
+1.8.4.2
+
 
