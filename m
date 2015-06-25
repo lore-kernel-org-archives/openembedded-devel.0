@@ -1,41 +1,40 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 32A7771633
+Received: from mail-wi0-f176.google.com (mail-wi0-f176.google.com
+	[209.85.212.176])
+	by mail.openembedded.org (Postfix) with ESMTP id A706B737A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 07:22:34 +0000 (UTC)
-Received: by pdcu2 with SMTP id u2so47663888pdc.3
+	Thu, 25 Jun 2015 07:35:44 +0000 (UTC)
+Received: by wicnd19 with SMTP id nd19so9448162wic.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 00:22:35 -0700 (PDT)
+	Thu, 25 Jun 2015 00:35:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	bh=8ORzzAhq9T66RljgUp96Tjvfcq0lolDnbH4Y4kDlY+c=;
-	b=Ssq9rvHApZttb0ktxEnUMEMcCR94NVpr8akGj0Wd+yMs6QewzZYV93nZRf/i5OSVCq
-	6SPVeSWCUuYlsFkhj4g4eX0ivKok5++BMP5SUAUCHzeLkNmmKtBDT3/zVP41H1WE1+mu
-	Eyh0rocG6OacnBm4ScQbA567nCmSsM5cR53CWVGkGZR69euVixcS5X707IxRdln8RiB5
-	NarvlDvhBkJ10nwJv1TyLXxAFE0u0Z0VHqTkpeERsk9jWVbohl1MpV7J0h59VKOCq7VH
-	/S8URwO7frYaPlMDuPp6SXya0gNj9UpOF/U44GeXPCBzUdaWONbFi4dG0ytdG+uF1XDQ
-	So7Q==
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-type:content-transfer-encoding;
+	bh=MFTB/9TjRNWy81D549gZXd/WalnkVMQcOBscHmOCiqY=;
+	b=f7Zv/4n4QjyoCikDTnZeMjnyhsuDKkTo8qsA9sGQI7niiC22nCc4DMgRebw+TkkNd/
+	R/Oxd9pj5YVY1cfbywhRJ9YhdDeWsssbk3G9GMISegcI0s3kOcxNBNfkEEOyGx4izhZq
+	3W+1/ihDvwsTNUbVN3yVB4JJQQzreloz/O0kOeLT9smUZMlXUFZGBpwOb0oUpsBBFQZz
+	mdI+BbJQ4cbtP2CrX5QFwZzEiSaRUVACqzapS+Qd0fYcGSm2c4h0MiIGNXxQxLKpqQPS
+	hJSserQ6QVZ7EhqQLy+wcpTD7xmy3g8IsYZNRYcQOv5mmf+ZWRarHd3EizvHwa1Z4jM2
+	LBrA==
+X-Received: by 10.180.182.33 with SMTP id eb1mr3152753wic.8.1435217745219;
+	Thu, 25 Jun 2015 00:35:45 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
+	by mx.google.com with ESMTPSA id wx9sm44250156wjb.6.2015.06.25.00.35.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 25 Jun 2015 00:35:44 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 25 Jun 2015 09:35:12 +0200
+Message-Id: <1435217714-20564-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1435217714-20564-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1435217714-20564-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-X-Received: by 10.70.47.9 with SMTP id z9mr88933724pdm.69.1435216955506; Thu,
-	25 Jun 2015 00:22:35 -0700 (PDT)
-Received: by 10.70.44.41 with HTTP; Thu, 25 Jun 2015 00:22:35 -0700 (PDT)
-In-Reply-To: <A8FC939F80655644A89BB21CCD3741E87390AF90@G08CNEXMBPEKD02.g08.fujitsu.local>
-References: <1435197618-1621-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<1435197618-1621-2-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<CALbNGRQU9+M1aQMWRtW8p02esF8K9COy=LPM6R8=wSZB4xY_dA@mail.gmail.com>
-	<A8FC939F80655644A89BB21CCD3741E87390AF66@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<CALbNGRR_yo9RC0TTvoK8SjLKowvQm12FD+_xE1r+shm+M2iWKA@mail.gmail.com>
-	<A8FC939F80655644A89BB21CCD3741E87390AF90@G08CNEXMBPEKD02.g08.fujitsu.local>
-Date: Thu, 25 Jun 2015 09:22:35 +0200
-Message-ID: <CALbNGRQUVopNa07ri0XqXGtcYH2JDqjnN64r+-Ljmuq_RQzePA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] networkmanager: upgrade from 0.9.8.10 to 1.0.2
+Subject: [PATCH 1/3] libndp: initial add 1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,47 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2015 07:22:41 -0000
+X-List-Received-Date: Thu, 25 Jun 2015 07:35:46 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jun 25, 2015 at 9:09 AM, Li, Xin <lixin.fnst@cn.fujitsu.com> wrote:
->
->> -----Original Message-----
->> From: Andreas M=C3=BCller [mailto:schnitzeltony@googlemail.com]
->> Sent: Thursday, June 25, 2015 2:37 PM
->> To: Li, Xin/=E6=9D=8E =E6=AC=A3
->> Cc: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] [meta-oe][PATCH 1/2] networkmanager: upgrade from 0.9.=
-8.10 to
->> 1.0.2
->>
->> On Thu, Jun 25, 2015 at 8:34 AM, Li, Xin <lixin.fnst@cn.fujitsu.com> wro=
-te:
->> >> >
->> >> >  SYSTEMD_SERVICE_${PN} =3D "NetworkManager.service"
->> >> > +SYSTEMD_AUTO_ENABLE =3D "disable"
->> >> What is this for?
->> >>
->> >> Otherwise: Have same her under test for a while and am fine with it.
->> >>
->> > Thanks for your reply.
->> >
->> > After setting "SYSTEMD_AUTO_ENABLE =3D "disable"", the
->> > NetworkManager.service will not Be started when the system starts.
->> > And we did test about this.
->> Yes and how is it started?
->
-> The systemd is enabled in our system.
-> So, In the process of starting the system, it will check all of the servi=
-ce which is enabled and start them .
-> For example, if we set NetworkManager.service enable, it will be started =
-automatically when the system is starting.
->
-People install networkmanager to take care for all types of
-connections out of the box. So this default is not what most people
-want installing networkmanager so NAK - you can add that in a
-bbappend.
+it is required for later networkmanager
 
-Andreas
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-connectivity/libndp/libndp_1.5.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+
+diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+new file mode 100644
+index 0000000..8f1d1ff
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Library for IPv6 Neighbor Discovery Protocol"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++SRC_URI = "http://libndp.org/files/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "beb82e8d75d8382d1b7c0bb0f68be429"
++SRC_URI[sha256sum] = "faf116ab70ce9514ec4e8573556025debea08f606e7f38b616de1f26e120c795"
++
++inherit autotools
+-- 
+1.9.3
+
 
