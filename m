@@ -1,39 +1,39 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wg0-f42.google.com (mail-wg0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 99654737AF
+Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id D4E35737A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 07:35:46 +0000 (UTC)
-Received: by wguu7 with SMTP id u7so54839516wgu.3
+	Thu, 25 Jun 2015 07:35:49 +0000 (UTC)
+Received: by wguu7 with SMTP id u7so54840364wgu.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 00:35:47 -0700 (PDT)
+	Thu, 25 Jun 2015 00:35:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=O/XTrpm4oIMt1M5YImH5Vy9wCgUIf5dGGXmGcLLipps=;
-	b=bOa1CAfo99rWHx1zsQbBFzN68O1Wu+Ln7gDeNngOgDptZzuvR6MZBgBK6IbqOyO8JS
-	Ji2Gye5+SSGvgW02iS3ZZPdQwb9OVVjWrPF/g9z4FtY1OQ6RxoFVY1NhdXpZwVB+Rd0e
-	l0z9MXVVeUFM09GxWQC5nDM/Duzf965MThDJQb0jCeMInzQgje8N5fZbPF/FyVz67c3l
-	skKkdSHL4AazfhO0+Tk+6dxuRr131qCyXamvbB5RfxrkPCVxCwCkpc0Aqo3dUWu3rsUM
-	wwespyRhp2Zy4MH2/NqbomT0FfcKqU4RNFdlhf/74+PhKHCfHLlyzOYmrYj2dP4or3L/
-	llzA==
-X-Received: by 10.180.77.136 with SMTP id s8mr3072442wiw.7.1435217747647;
-	Thu, 25 Jun 2015 00:35:47 -0700 (PDT)
+	bh=WU7O7RQOKn4lr7Y4rxw1SFlSLO4EiNJ6cFggbcxlK+s=;
+	b=bxrCe4NVKyQ/AHHTP+zj8bGFvavwLZ06kS/U89i2dJOZYE7EOjIa4OXl6Vr/0e9JYt
+	VVjVdjcz5iroxFKF4W0rzLz0SBmerfC0jNgLe+S+yneVA812RtdvFVLvT578zZuBdWXz
+	EeQkiVjFQxJXKRjGI/UYZFGH8xmZcL9Wm1gw0W37w0HuPmKEGD4UwZrnyFZmZaDSoAjg
+	h0RO8pA+GjO0TSI3YH0cW+n6aEWkXiP8vE8UzKRDGpcNiKM1dVMvz8/t7siTx0Zck1uP
+	FGGokjvnSR3ir1qdZd+LZ+BxvzqjD40V+g3VNDqts5r3X3aOoiWTvnAsAz1HIq2O5YH5
+	2SQQ==
+X-Received: by 10.194.83.70 with SMTP id o6mr77641079wjy.44.1435217750252;
+	Thu, 25 Jun 2015 00:35:50 -0700 (PDT)
 Received: from localhost.localdomain
 	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
-	by mx.google.com with ESMTPSA id wx9sm44250156wjb.6.2015.06.25.00.35.45
+	by mx.google.com with ESMTPSA id wx9sm44250156wjb.6.2015.06.25.00.35.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 25 Jun 2015 00:35:46 -0700 (PDT)
+	Thu, 25 Jun 2015 00:35:49 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Jun 2015 09:35:13 +0200
-Message-Id: <1435217714-20564-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 25 Jun 2015 09:35:14 +0200
+Message-Id: <1435217714-20564-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 1.9.3
 In-Reply-To: <1435217714-20564-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1435217714-20564-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/3] networkmanager: update to 1.0.2
+Subject: [PATCH 3/3] network-manager-applet: update to 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,153 +47,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2015 07:35:46 -0000
+X-List-Received-Date: Thu, 25 Jun 2015 07:35:50 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* at_console support is gone
-* add PACKAGECONFIG for bluez5/modemmanager/ppp and disable them by default
+note that 1.x only supports gtk3
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...c-Check-only-for-libsystemd-not-libsystem.patch | 30 ----------------
- ...manager_0.9.8.10.bb => networkmanager_1.0.2.bb} | 41 +++++-----------------
- 2 files changed, 8 insertions(+), 63 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch
- rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_0.9.8.10.bb => networkmanager_1.0.2.bb} (59%)
+ ...ort-for-AP-mode-setting-for-wifi-sharing.patch} |  0
+ ...ses-and-properties-which-are-not-supporte.patch | 41 ----------------------
+ ...or-network-sharing-if-device-supports-it.patch} |  2 +-
+ ...0.9.8.10.bb => network-manager-applet_1.0.2.bb} | 16 +++------
+ 4 files changed, 6 insertions(+), 53 deletions(-)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/files/{0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch => 0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch} (100%)
+ delete mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
+ rename meta-gnome/recipes-connectivity/network-manager-applet/files/{0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch => 0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch} (97%)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_0.9.8.10.bb => network-manager-applet_1.0.2.bb} (67%)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch b/meta-gnome/recipes-connectivity/network-manager-applet/files/0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch
+similarity index 100%
+rename from meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch
+rename to meta-gnome/recipes-connectivity/network-manager-applet/files/0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch b/meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
 deleted file mode 100644
-index e356e9b..0000000
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch
+index 4bd0e4f..0000000
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
 +++ /dev/null
-@@ -1,30 +0,0 @@
--From 10427a19302e871daeeb245581e930dc58195492 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Thu, 27 Feb 2014 12:59:03 +0100
--Subject: [PATCH] configure.ac: Check only for libsystemd not libsystemd-login
+@@ -1,41 +0,0 @@
+-From c7d75ce38fa392c04c39a75e7b7e068666a7b1e7 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+-Date: Tue, 8 Apr 2014 15:22:54 +0200
+-Subject: [PATCH] remove classes and properties which are not supported by gtk+
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
 -
--* they were merged into libsystemd in systemd-209
+-unsupported classes caused nm-connection editor to crash
 -
--Upstream-Status: Pending (it would need to be conditional on systemd version for upstream to accept this)
+-Upstream-Status: Inappropriate [configuration]
 -
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ----
-- configure.ac | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- src/connection-editor/ce-page-general.ui | 3 ---
+- 1 file changed, 3 deletions(-)
 -
--diff --git a/configure.ac b/configure.ac
--index cc66e9b..3fe958e 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -283,7 +283,7 @@ AS_IF([! (echo "$with_session_tracking" | grep -q -E "^(systemd|consolekit|no)$"
-- AM_CONDITIONAL(SESSION_TRACKING_CK, test "$with_session_tracking" = "consolekit")
-- AM_CONDITIONAL(SESSION_TRACKING_SYSTEMD, test "xwith_session_tracking" = "systemd")
-- if test "$with_session_tracking" = "systemd"; then
---	PKG_CHECK_MODULES(SYSTEMD_LOGIN, [libsystemd-login])
--+	PKG_CHECK_MODULES(SYSTEMD_LOGIN, [libsystemd])
-- 	AC_SUBST(SYSTEMD_LOGIN_CFLAGS)
-- 	AC_SUBST(SYSTEMD_LOGIN_LIBS)
-- fi
+-diff --git a/src/connection-editor/ce-page-general.ui b/src/connection-editor/ce-page-general.ui
+-index b05f0df..049432b 100644
+---- a/src/connection-editor/ce-page-general.ui
+-+++ b/src/connection-editor/ce-page-general.ui
+-@@ -37,8 +37,6 @@
+-       <object class="GtkComboBox" id="dependent_vpn_combo">
+-         <property name="visible">True</property>
+-         <property name="can_focus">False</property>
+--        <property name="margin_left">26</property>
+--        <property name="margin_bottom">12</property>
+-         <property name="model">dependent_vpn_model</property>
+-         <child>
+-           <object class="GtkCellRendererText" id="renderer1"/>
+-@@ -59,7 +57,6 @@
+-         <property name="visible">True</property>
+-         <property name="can_focus">True</property>
+-         <property name="receives_default">False</property>
+--        <property name="margin_bottom">12</property>
+-         <property name="use_underline">True</property>
+-         <property name="xalign">0</property>
+-         <property name="draw_indicator">True</property>
 --- 
--1.9.0
+-1.8.3.1
 -
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.2.bb
-similarity index 59%
-rename from meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
-rename to meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.2.bb
-index 8d37c98..324d165 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.2.bb
-@@ -4,18 +4,16 @@ SECTION = "net/misc"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b"
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/files/0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch b/meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
+similarity index 97%
+rename from meta-gnome/recipes-connectivity/network-manager-applet/files/0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
+rename to meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
+index e215646..4e3d7e2 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/files/0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/files/0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch
+@@ -28,7 +28,7 @@ index 3532caa..ca72c96 100644
+ +			g_object_unref (*device);
+ +		}
+ +
+- 		if (priv->adhoc_create) {
++ 		if (priv->operation == OP_CREATE_ADHOC) {
+  			NMSettingIP4Config *s_ip4;
+  
+ -			g_object_set (s_wireless, NM_SETTING_WIRELESS_MODE, "adhoc", NULL);
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.0.2.bb
+similarity index 67%
+rename from meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
+rename to meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.0.2.bb
+index 72c9ae6..210b5b2 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_0.9.8.10.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.0.2.bb
+@@ -2,24 +2,18 @@ SUMMARY = "GTK+ applet for NetworkManager"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
--DEPENDS = "libnl dbus dbus-glib udev wireless-tools nss util-linux ppp"
-+DEPENDS = "libnl dbus dbus-glib udev wireless-tools nss util-linux libndp"
+-DEPENDS = "libnotify libsecret networkmanager dbus-glib gconf gnome-keyring libgnome-keyring iso-codes"
++DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib gconf gnome-keyring libgnome-keyring iso-codes"
  
- inherit gnome gettext systemd
+ inherit gnomebase gsettings gtk-icon-cache
  
- SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
--    file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch \
- "
--SRC_URI[md5sum] = "aad2558887e25417c52eb2deaade2f85"
--SRC_URI[sha256sum] = "064d27223d3824859df12e1fb25b787fec1c68bbc864dc52a0289b9211c4c972"
+ GNOME_COMPRESS_TYPE = "xz"
+ 
+ SRC_URI += " \
+-    file://0001-remove-classes-and-properties-which-are-not-supporte.patch \
+-    file://0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch \
+-    file://0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch \
+-"
+-SRC_URI[archive.md5sum] = "5148348c139229c6a753f815f3f11e1c"
+-SRC_URI[archive.sha256sum] = "46fee9a1e667d1826e6a94bb6bd2e6bdbde535fc995e534542f5f7e8b8dae0cb"
 -
-+SRC_URI[md5sum] = "5a4899f89edcbdd1ac46d2d947e8d6eb"
-+SRC_URI[sha256sum] = "359385707494bedbb48cfe0992ccfbcc4ac147dae1f7a47055c71e96439508ff"
- 
- S = "${WORKDIR}/NetworkManager-${PV}"
- 
-@@ -40,30 +38,11 @@ PACKAGECONFIG[systemd] = " \
-     polkit \
+-# GTK2.x mode
+-EXTRA_OECONF += " \
+-    --with-gtkver=2 \
++    file://0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch \
++    file://0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch \
  "
- # consolekit is not picked by shlibs, so add it to RDEPENDS too
-+PACKAGECONFIG[bluez5] = "--enable-bluez5-dun,--disable-bluez5-dun,bluez5"
- PACKAGECONFIG[consolekit] = "--with-session-tracking=consolekit,,consolekit,consolekit"
--PACKAGECONFIG[concheck] = "--enable-concheck,--disable-concheck,libsoup-2.4"
--
--# Work around dbus permission problems since we lack a proper at_console
--do_install_prepend() {
--    sed -i 's:deny send_destination:allow send_destination:g' ${S}/src/org.freedesktop.NetworkManager.conf
--    sed -i 's:deny send_destination:allow send_destination:g' ${S}/callouts/nm-dispatcher.conf
--    sed -i 's:deny send_destination:allow send_destination:g' ${S}/callouts/nm-dhcp-client.conf
--    sed -i 's:deny send_destination:allow send_destination:g' ${S}/callouts/nm-avahi-autoipd.conf
--}
--
--do_install_append () {
--    install -d ${D}${sysconfdir}/dbus-1/event.d
--    # Additional test binaries
--    install -d ${D}${bindir}
--    install -m 0755 ${B}/test/.libs/libnm* ${D}${bindir}
--
--    # Install an empty VPN folder as nm-connection-editor will happily segfault without it :o.
--    # With or without VPN support built in ;).
--    install -d ${D}${sysconfdir}/NetworkManager/VPN
--
--    rm -rf "${D}${localstatedir}/run"
--    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
--}
-+PACKAGECONFIG[concheck] = "--with-libsoup=yes,--with-libsoup=no,libsoup-2.4"
-+PACKAGECONFIG[modemmanager] = "--with-modem-manager-1=yes,--with-modem-manager-1=no,modemmanager"
-+PACKAGECONFIG[ppp] = "--enable-ppp,--disable-ppp,ppp"
++SRC_URI[archive.md5sum] = "5b2a8baa6b038b3e55e5444ff321e80d"
++SRC_URI[archive.sha256sum] = "760af85b43fa5bcf74b96f899a6d4c1d5e9445e5eb63088c49e5164bbf88d9a9"
  
- PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests ${PN}-bash-completion"
- 
-@@ -78,7 +57,7 @@ FILES_${PN} += " \
-     ${datadir}/polkit-1 \
-     ${datadir}/dbus-1 \
-     ${base_libdir}/udev/* \
--    ${systemd_unitdir}/system/NetworkManager-wait-online.service \
-+    ${systemd_unitdir}/system \
- "
- 
- RRECOMMENDS_${PN} += "iptables dnsmasq"
-@@ -86,7 +65,6 @@ RCONFLICTS_${PN} = "connman"
- RDEPENDS_${PN} = " \
-     wpa-supplicant \
-     dhcp-client \
--    ${@base_contains('COMBINED_FEATURES', '3gmodem', 'ppp', '', d)} \
- "
- 
- FILES_${PN}-dbg += " \
-@@ -95,14 +73,11 @@ FILES_${PN}-dbg += " \
- "
- 
- FILES_${PN}-dev += " \
--    ${datadir}/NetworkManager/gdb-cmd \
-     ${libdir}/pppd/*/*.la \
-     ${libdir}/NetworkManager/*.la \
- "
- 
- FILES_${PN}-tests = " \
--    ${bindir}/nm-tool \
--    ${bindir}/libnm-glib-test \
-     ${bindir}/nm-online \
- "
- 
+ PACKAGECONFIG[bluetooth] = "--with-bluetooth,--without-bluetooth,gnome-bluetooth,gnome-bluetooth"
+ PACKAGECONFIG[modemmanager] = "--with-modem-manager-1,--without-modem-manager-1,modemmanager"
 -- 
 1.9.3
 
