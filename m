@@ -1,38 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f178.google.com (mail-wi0-f178.google.com
-	[209.85.212.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 62926601E0;
-	Thu, 25 Jun 2015 10:58:46 +0000 (UTC)
-Received: by wibdq8 with SMTP id dq8so72091936wib.1;
-	Thu, 25 Jun 2015 03:58:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=O5N6bmYrHmoWDNxNoT898I9opBmkV2JJwxubbEN3f1o=;
-	b=ls0+xIE+u1a5nIDZOtKJplkYX5WmOy4R8pZL6pNZmx4Vwcyx1lq7mJzEd4aYpEmWys
-	KRmXnteVI81cZhOM7vv6RYh+BuxBPYzCiQ4JVKFKcWpu74vQnZv7Rje363iGMH3+TgvG
-	wx1Si/XAN8rTmvzXW79qauPScNaiOMqU97T6WNZz7Z8qsxKKvEDatcebXmjPOa1h5sHJ
-	8aaw0z3kOzFJVY8pLRfnZWEeRBucM4AKUT3Cn62uWqzRtwBPQ1IHT2RuX9BQgR94Q+Y8
-	ddMhonaymAFNDxV2DeAJGgHb2HUG5VC3+NnDEj7izSX58cH5iu/ujLy6731P7Ud7fP6P
-	B5Hw==
-X-Received: by 10.194.109.229 with SMTP id hv5mr81000950wjb.119.1435229927312; 
-	Thu, 25 Jun 2015 03:58:47 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id p2sm7010555wix.11.2015.06.25.03.58.46
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wg0-f46.google.com (mail-wg0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id C97E7605D2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Jun 2015 12:36:24 +0000 (UTC)
+Received: by wgck11 with SMTP id k11so61484870wgc.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Jun 2015 05:36:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version:content-type
+	:content-transfer-encoding;
+	bh=gDdM4B77OG1rQcPrmLslAflavuw1p4aJclyFvBAYs6g=;
+	b=U+m0QpKFPLj+xWOy5X4BqFBHfKJNZLRR+CUDOdDYjRtbFZokDDqec98UiZOX8NdZi1
+	jC1caG0ysDk4lIgwuzw37igyalA0ePDdwEDYgYODf7gUHtCZ3T/Lwk+zLhmaFey8ZPW5
+	d2Hou0x4sE0ze6VIJ3Xjx32+QpNB/EgyLq4ZMPdVlz6j0aR8X0JDKDmNuL8wo2Kk/FtX
+	E2bgnuCxAa6T4BFXAfuf6wny0VrZ1hA/184ZlaW0bbX9kP6sMGd0/ZPtnD8IdzqMkFXM
+	9HKV6lewxYurxY4yGiiK54JvB2O0w/DiKQh0v/ZWQw5VZ3xV648DU5WutcFdIhV+gjgL
+	jX0w==
+X-Received: by 10.181.27.131 with SMTP id jg3mr5232835wid.89.1435235785302;
+	Thu, 25 Jun 2015 05:36:25 -0700 (PDT)
+Received: from localhost.localdomain
+	(ip-95-222-156-55.hsi15.unitymediagroup.de. [95.222.156.55])
+	by mx.google.com with ESMTPSA id
+	pg1sm45655780wjb.39.2015.06.25.05.36.23
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 25 Jun 2015 03:58:46 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 25 Jun 2015 12:59:06 +0200
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20150625105906.GA2394@jama>
-References: <558B6EE7.5090107@gmail.com>
+	Thu, 25 Jun 2015 05:36:23 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 25 Jun 2015 14:35:47 +0200
+Message-Id: <1435235754-7339-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 1.9.3
 MIME-Version: 1.0
-In-Reply-To: <558B6EE7.5090107@gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] google mercurial repo issues
+Subject: [PATCH 0/7] here and there / some resend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,64 +46,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2015 10:58:49 -0000
-X-Groupsio-MsgNum: 56020
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="liOOAslEiF7prFVr"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 25 Jun 2015 12:36:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---liOOAslEiF7prFVr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I saw that my last patches [1-3][5] did not make it into patchwork 
+(german umlaut?) so I resend them as pull request:
 
-On Wed, Jun 24, 2015 at 08:00:55PM -0700, akuster808 wrote:
-> Hello all,
->=20
-> I have run into an issue trying to build vim.
+The following changes since commit 34dcefb1bfbbac33a771b4b68748e0d9d877365e:
 
-That's broken for a while (see world reports), because bitbake mercurial
-fetcher is broken.
+  lvm2: add systemd support (2015-06-23 12:43:12 +0200)
 
-> /usr/bin/env hg pull=20
-> /home/akuster/oss/downloads/hg/vim.googlecode.com/hg/vim
-> | DEBUG: Python function base_do_unpack finished
-> | DEBUG: Python function do_unpack finished
-> | ERROR: Function failed: Fetcher failure: Fetch command failed with=20
-> exit code 255, output:
-> | abort: repository=20
-> /home/akuster/oss/downloads/hg/vim.googlecode.com/hg/vim not found!
->=20
->=20
-> there is a note on google regarding their hg repos: "We have some known=
-=20
-> issues with hg repositories."
-> =09
-> https://groups.google.com/forum/#!topic/google-code-hosting/Gh3kl9MrzY4
->=20
->=20
-> is anyone else seeing this?
->=20
-> - armin
-> --=20
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+are available in the git repository at:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  https://github.com/schnitzeltony/meta-openembedded.git patches
 
---liOOAslEiF7prFVr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+for you to fetch changes up to 4f22e684e6950301816602fe17b4d06bc0a08078:
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+  gnome-settings-daemon: fix PACKAGECONFIG (2015-06-25 14:20:59 +0200)
 
-iEYEARECAAYFAlWL3vkACgkQN1Ujt2V2gBzLCgCgnM10P3S9EWXlVR+XiU6Nsgoy
-qW4AoJsytsDWrIq0DAyqG+KLUEHYuiEa
-=DLC8
------END PGP SIGNATURE-----
+----------------------------------------------------------------
+Andreas Müller (7):
+      libndp: initial add 1.5
+      networkmanager: update to 1.0.2
+      network-manager-applet: update to 1.0.2
+      libxfce4ui: build gtk3 libs and pack gtk2/gtk3 libs in separate packages
+      xfce4-session: ensure ip for machine is found by adding to hosts
+      xfdesktop: fix settings for monitors containing white spaces
+      gnome-settings-daemon: fix PACKAGECONFIG
 
---liOOAslEiF7prFVr--
+ ...ort-for-AP-mode-setting-for-wifi-sharing.patch => 0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch} |   0
+ .../network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch                  |  41 -----------------
+ ...twork-sharing-if-device-supports-it.patch => 0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch} |   2 +-
+ .../network-manager-applet/{network-manager-applet_0.9.8.10.bb => network-manager-applet_1.0.2.bb}                |  16 +++----
+ meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb                                    |   2 +-
+ meta-oe/recipes-connectivity/libndp/libndp_1.5.bb                                                                 |  10 +++++
+ .../networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch                 |  30 -------------
+ meta-oe/recipes-connectivity/networkmanager/{networkmanager_0.9.8.10.bb => networkmanager_1.0.2.bb}               |  41 ++++-------------
+ meta-xfce/recipes-xfce/libxfce4ui/files/0002-configure.ac-remove-optional-gtk3-support.patch                      |  37 ----------------
+ meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb                                                            |   7 ++-
+ meta-xfce/recipes-xfce/xfce4-session/machine-host.bb                                                              |  17 ++++++++
+ meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.12.1.bb                                                      |   2 +
+ meta-xfce/recipes-xfce/xfdesktop/files/0001-Remove-whitespaces-from-monitor-name-when-accessing-.patch            | 138 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.12.2.bb                                                              |   1 +
+ 14 files changed, 188 insertions(+), 156 deletions(-)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/files/{0002-Add-support-for-AP-mode-setting-for-wifi-sharing.patch => 0001-Add-support-for-AP-mode-setting-for-wifi-sharing.patch} (100%)
+ delete mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/files/0001-remove-classes-and-properties-which-are-not-supporte.patch
+ rename meta-gnome/recipes-connectivity/network-manager-applet/files/{0003-Use-AP-mode-for-network-sharing-if-device-supports-it.patch => 0002-Use-AP-mode-for-network-sharing-if-device-supports-it.patch} (97%)
+ rename meta-gnome/recipes-connectivity/network-manager-applet/{network-manager-applet_0.9.8.10.bb => network-manager-applet_1.0.2.bb} (67%)
+ create mode 100644 meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+ delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch
+ rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_0.9.8.10.bb => networkmanager_1.0.2.bb} (59%)
+ delete mode 100644 meta-xfce/recipes-xfce/libxfce4ui/files/0002-configure.ac-remove-optional-gtk3-support.patch
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-session/machine-host.bb
+ create mode 100644 meta-xfce/recipes-xfce/xfdesktop/files/0001-Remove-whitespaces-from-monitor-name-when-accessing-.patch
+
+-- 
+1.9.3
+
+
