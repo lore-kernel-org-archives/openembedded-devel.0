@@ -1,36 +1,25 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
-	[209.85.220.47])
-	by mail.openembedded.org (Postfix) with ESMTP id F13406E6CC
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BDE360167
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 05:32:04 +0000 (UTC)
-Received: by pactm7 with SMTP id tm7so42845824pac.2
+	Thu, 25 Jun 2015 06:01:45 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t5P61kJ1020828
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Jun 2015 22:32:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=z4jw266ThX5DQGu37LFcwWE4fmvgmxbaV4YKcRVCcnQ=;
-	b=MNx+kH5lJENzLxOybZkAHGMw61+E/5hh3nscrZJcq/iUmVUKfVGMS+Iyw56nwJTywL
-	JE5LjIPZnEGz5Ikq1NgjwRE/Haq28k/46pKT0c3M36q4e8SInINjYYEogrJLWhPjN64X
-	qtHtWw25oiaiX33TTmhfWlOxm3FyDlZzSCxz8E6k/oSPsAprNSTLtKsPsm9XecAUEDd4
-	32dsoqFA/nmNmEALTPkVylmv+O7OLTMe/djiFokimVPESTUXFiqYhx80j9ElInJZdpus
-	ZRvzntyjZQx6t9Oa5XMoQ2gefJMahsK6bkHz8ZgO9v8YkeZct79qfByc8a8UrRF9OZIE
-	kBMA==
+	Wed, 24 Jun 2015 23:01:46 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.224.2; Wed, 24 Jun 2015 23:01:46 -0700
+From: Kai Kang <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Jun 2015 13:53:57 +0800
+Message-ID: <1435211637-1514-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Received: by 10.66.222.103 with SMTP id ql7mr86071491pac.144.1435210325798; 
-	Wed, 24 Jun 2015 22:32:05 -0700 (PDT)
-Received: by 10.70.44.41 with HTTP; Wed, 24 Jun 2015 22:32:05 -0700 (PDT)
-In-Reply-To: <1435197618-1621-2-git-send-email-lixin.fnst@cn.fujitsu.com>
-References: <1435197618-1621-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-	<1435197618-1621-2-git-send-email-lixin.fnst@cn.fujitsu.com>
-Date: Thu, 25 Jun 2015 07:32:05 +0200
-Message-ID: <CALbNGRQU9+M1aQMWRtW8p02esF8K9COy=LPM6R8=wSZB4xY_dA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] networkmanager: upgrade from 0.9.8.10 to 1.0.2
+X-Originating-IP: [128.224.153.152]
+Subject: [meta-networking][PATCH] postfix: update daemon_directory in main.cf_2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,168 +33,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2015 05:32:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Jun 2015 06:01:49 -0000
+Content-Type: text/plain
 
-On Thu, Jun 25, 2015 at 4:00 AM, Li xin <lixin.fnst@cn.fujitsu.com> wrote:
-> 1) remove 0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch=
-,
-> it is not needed any more.
->
-> 2) set NetworkManager.service auto disable,otherwise,the Root file system
-> using the method of NFS mount can't boot successfully.
->
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> ---
->  ...c-Check-only-for-libsystemd-not-libsystem.patch | 30 ----------------=
-------
->  ...manager_0.9.8.10.bb =3D> networkmanager_1.0.2.bb} | 16 +++++-------
->  2 files changed, 7 insertions(+), 39 deletions(-)
->  delete mode 100644 meta-oe/recipes-connectivity/networkmanager/networkma=
-nager/0001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch
->  rename meta-oe/recipes-connectivity/networkmanager/{networkmanager_0.9.8=
-.10.bb =3D> networkmanager_1.0.2.bb} (87%)
->
-> diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0=
-001-configure.ac-Check-only-for-libsystemd-not-libsystem.patch b/meta-oe/re=
-cipes-connectivity/networkmanager/networkmanager/0001-configure.ac-Check-on=
-ly-for-libsystemd-not-libsystem.patch
-> deleted file mode 100644
-> index e356e9b..0000000
-> --- a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-con=
-figure.ac-Check-only-for-libsystemd-not-libsystem.patch
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -From 10427a19302e871daeeb245581e930dc58195492 Mon Sep 17 00:00:00 2001
-> -From: Martin Jansa <Martin.Jansa@gmail.com>
-> -Date: Thu, 27 Feb 2014 12:59:03 +0100
-> -Subject: [PATCH] configure.ac: Check only for libsystemd not libsystemd-=
-login
-> -
-> -* they were merged into libsystemd in systemd-209
-> -
-> -Upstream-Status: Pending (it would need to be conditional on systemd ver=
-sion for upstream to accept this)
-> -
-> -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ----
-> - configure.ac | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/configure.ac b/configure.ac
-> -index cc66e9b..3fe958e 100644
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -283,7 +283,7 @@ AS_IF([! (echo "$with_session_tracking" | grep -q -E=
- "^(systemd|consolekit|no)$"
-> - AM_CONDITIONAL(SESSION_TRACKING_CK, test "$with_session_tracking" =3D "=
-consolekit")
-> - AM_CONDITIONAL(SESSION_TRACKING_SYSTEMD, test "xwith_session_tracking" =
-=3D "systemd")
-> - if test "$with_session_tracking" =3D "systemd"; then
-> --      PKG_CHECK_MODULES(SYSTEMD_LOGIN, [libsystemd-login])
-> -+      PKG_CHECK_MODULES(SYSTEMD_LOGIN, [libsystemd])
-> -       AC_SUBST(SYSTEMD_LOGIN_CFLAGS)
-> -       AC_SUBST(SYSTEMD_LOGIN_LIBS)
-> - fi
-> ---
-> -1.9.0
-> -
-> diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0=
-.9.8.10.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0=
-.2.bb
-> similarity index 87%
-> rename from meta-oe/recipes-connectivity/networkmanager/networkmanager_0.=
-9.8.10.bb
-> rename to meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.=
-2.bb
-> index 8d37c98..fb8efaf 100644
-> --- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_0.9.8.10=
-.bb
-> +++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.2.bb
-> @@ -4,18 +4,16 @@ SECTION =3D "net/misc"
->  LICENSE =3D "GPLv2+"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dcbbffd568227ada506640fe950a48=
-23b"
->
-> -DEPENDS =3D "libnl dbus dbus-glib udev wireless-tools nss util-linux ppp=
-"
-> +DEPENDS =3D "libnl dbus dbus-glib udev wireless-tools nss util-linux ppp=
- libndp"
->
->  inherit gnome gettext systemd
->
->  SRC_URI =3D " \
->      ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkMana=
-ger-${PV}.tar.xz \
->      file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.pat=
-ch \
-> -    file://0001-configure.ac-Check-only-for-libsystemd-not-libsystem.pat=
-ch \
->  "
-> -SRC_URI[md5sum] =3D "aad2558887e25417c52eb2deaade2f85"
-> -SRC_URI[sha256sum] =3D "064d27223d3824859df12e1fb25b787fec1c68bbc864dc52=
-a0289b9211c4c972"
-> -
-> +SRC_URI[md5sum] =3D "5a4899f89edcbdd1ac46d2d947e8d6eb"
-> +SRC_URI[sha256sum] =3D "359385707494bedbb48cfe0992ccfbcc4ac147dae1f7a470=
-55c71e96439508ff"
->
->  S =3D "${WORKDIR}/NetworkManager-${PV}"
->
-> @@ -47,7 +45,6 @@ PACKAGECONFIG[concheck] =3D "--enable-concheck,--disabl=
-e-concheck,libsoup-2.4"
->  do_install_prepend() {
->      sed -i 's:deny send_destination:allow send_destination:g' ${S}/src/o=
-rg.freedesktop.NetworkManager.conf
->      sed -i 's:deny send_destination:allow send_destination:g' ${S}/callo=
-uts/nm-dispatcher.conf
-> -    sed -i 's:deny send_destination:allow send_destination:g' ${S}/callo=
-uts/nm-dhcp-client.conf
->      sed -i 's:deny send_destination:allow send_destination:g' ${S}/callo=
-uts/nm-avahi-autoipd.conf
->  }
->
-> @@ -55,8 +52,7 @@ do_install_append () {
->      install -d ${D}${sysconfdir}/dbus-1/event.d
->      # Additional test binaries
->      install -d ${D}${bindir}
-> -    install -m 0755 ${B}/test/.libs/libnm* ${D}${bindir}
-> -
-> +    install -m 0755 ${B}/libnm-glib/libnm-glib-test ${D}${bindir}
->      # Install an empty VPN folder as nm-connection-editor will happily s=
-egfault without it :o.
->      # With or without VPN support built in ;).
->      install -d ${D}${sysconfdir}/NetworkManager/VPN
-> @@ -78,7 +74,7 @@ FILES_${PN} +=3D " \
->      ${datadir}/polkit-1 \
->      ${datadir}/dbus-1 \
->      ${base_libdir}/udev/* \
-> -    ${systemd_unitdir}/system/NetworkManager-wait-online.service \
-> +    ${systemd_unitdir}/system/* \
->  "
->
->  RRECOMMENDS_${PN} +=3D "iptables dnsmasq"
-> @@ -87,6 +83,7 @@ RDEPENDS_${PN} =3D " \
->      wpa-supplicant \
->      dhcp-client \
->      ${@base_contains('COMBINED_FEATURES', '3gmodem', 'ppp', '', d)} \
-> +    libndp \
->  "
->
->  FILES_${PN}-dbg +=3D " \
-> @@ -109,3 +106,4 @@ FILES_${PN}-tests =3D " \
->  FILES_${PN}-bash-completion =3D "${datadir}/bash-completion"
->
->  SYSTEMD_SERVICE_${PN} =3D "NetworkManager.service"
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
-What is this for?
+daemon_directory is set to /usr/lib/postfix which causes daemon postfix
+fails to start on 64 bits target if enable multilib. Set daemon_directory
+with libexecdir to fix it.
 
-Otherwise: Have same her under test for a while and am fine with it.
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-networking/recipes-daemons/postfix/files/main.cf_2.0 | 2 +-
+ meta-networking/recipes-daemons/postfix/postfix.inc       | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-Have you an update for networkmanager applet - if not I can send out
-the patch for it
+diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0 b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
+index 9e1077f..dc7feb5 100644
+--- a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
++++ b/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
+@@ -30,7 +30,7 @@ queue_directory = /var/spool/postfix
+ mail_spool_directory = /var/spool/mail
+ readme_directory = no
+ command_directory = /usr/sbin
+-daemon_directory = /usr/lib/postfix
++daemon_directory = @LIBEXECDIR@
+ mail_owner = postfix
+ setgid_group = postdrop
+ unknown_local_recipient_reject_code = 450
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index 72bc936..fa75a78 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -142,6 +142,8 @@ do_install () {
+     mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sample-main.cf
+     install -d ${D}${sysconfdir}/init.d
+     install -m 644 ${WORKDIR}/main.cf_2.0 ${D}${sysconfdir}/postfix/main.cf
++    sed -i 's#@LIBEXECDIR@#${libexecdir}#' ${D}${sysconfdir}/postfix/main.cf
++
+     install -m 755 ${WORKDIR}/postfix ${D}${sysconfdir}/init.d/postfix
+     install -m 644 ${WORKDIR}/internal_recipient ${D}${sysconfdir}/postfix/internal_recipient
+ 
+-- 
+1.9.1
 
-Andreas
 
