@@ -1,34 +1,27 @@
-Return-Path: <kirgene@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 23A7E60132
+Return-Path: <hugo.saldanha@aker.com.br>
+Received: from asmg.aker.com.br (asmg.aker.com.br [177.159.144.67])
+	by mail.openembedded.org (Postfix) with SMTP id 1D26C75A06
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 16:36:12 +0000 (UTC)
-Received: by lbbpo10 with SMTP id po10so49030733lbb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 09:36:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=mDfe+xJ/qgsoZqJExwQzsIQ/5pcU7XYBtutUFY8fyqk=;
-	b=Mklb+QTQqdR5xC8doLL2HF/+RQBbw08DO38tYat2U8+XMdQXAp86rlj66pe3msKHXF
-	XjEkmZfWMw2PWLAMxj9dvZlX66okUSn54L4gfjJ5PXU5HQIaUkaIl0SFyXefQrmp1S2S
-	fT89d8n0rtAaWBSK2Hc00Ze84DWJMWexaOWKlXL4HP89JYXKM0VJraK9lSWjVznM5BHe
-	paNmXN6NBQyNdfFQiTstYeqdmj+LrOcGeEvaa1BdIPaJaEZmIkjYU3V0jkZDPxSx3ut2
-	+6w2NKEq9pwIrRnWudf0QcNapcMVmrJVlxlZw6QETV1si6XoJy1RE7YvOEAsf81tr4Yz
-	J9CQ==
-X-Received: by 10.112.131.98 with SMTP id ol2mr46647331lbb.56.1435250172867;
-	Thu, 25 Jun 2015 09:36:12 -0700 (PDT)
-Received: from localhost.localdomain ([194.44.84.130])
-	by mx.google.com with ESMTPSA id x10sm3302472laa.32.2015.06.25.09.36.11
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 25 Jun 2015 09:36:11 -0700 (PDT)
-From: Yevhen Kyriukha <kirgene@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Jun 2015 19:36:08 +0300
-Message-Id: <1435250168-14195-1-git-send-email-kirgene@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Cc: Yevhen Kyriukha <kirgene@gmail.com>
-Subject: [meta-oe][PATCH v2] rabbitmq-c: update to v0.7.0.
+	Thu, 25 Jun 2015 18:22:00 +0000 (UTC)
+Received: from mail.aker.com.br (bat.bsb.aker.com.br [10.0.0.20])
+	by asmg.aker.com.br [10.0.1.3]; Thu, 25 Jun 2015 15:21:54 -0300
+	(envelope-from hugo.saldanha@aker.com.br)
+Received: from localhost (10.4.3.1) by mail.aker.com.br (10.0.0.20) with
+	Microsoft SMTP Server (TLS) id 8.3.342.0;
+	Thu, 25 Jun 2015 15:21:59 -0300
+Date: Thu, 25 Jun 2015 15:26:17 -0300
+From: Hugo Vasconcelos Saldanha <hugo.saldanha@aker.com.br>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <20150625182617.GM1706@saldanha.aker.com.br>
+References: <1435075324-12895-1-git-send-email-hugo.saldanha@aker.com.br>
+	<20150625144827.GD2394@jama>
+MIME-Version: 1.0
+In-Reply-To: <20150625144827.GD2394@jama>
+User-Agent: Mutt/1.5.23+89 (0255b37be491) (2014-03-12)
+X-AkerSMTPGW-ServerID: efa1de5243ffebe9bf836ee14063171c1764dbbe
+X-AkerSMTPGW-MessageID: 89f1ae7cda9c52aa86a88c717d7e1c6be5275620-10o
+Subject: Re: [meta-oe][master/fido/dizzy][PATCH] libssh2: upgrade to v1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +35,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2015 16:36:13 -0000
+X-List-Received-Date: Thu, 25 Jun 2015 18:22:01 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Signed-off-by: Yevhen Kyriukha <kirgene@gmail.com>
----
- .../rabbitmq-c/{rabbitmq-c_0.6.0.bb => rabbitmq-c_0.7.0.bb}        | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/rabbitmq-c/{rabbitmq-c_0.6.0.bb => rabbitmq-c_0.7.0.bb} (65%)
+On Thu, Jun 25, 2015 at 11:48:27AM -0300, Martin Jansa wrote:
+> On Tue, Jun 23, 2015 at 01:02:04PM -0300, Hugo Vasconcelos Saldanha wrote:
+> > Besides new features and improvements, this fixes CVE-2015-1782.
+> 
+> Release branches aren't getting new features, new versions unless there
+> is very good reason to do so.
+> 
+> I'll include this in master-next, but for release branches you should
+> just add patch for CVE-2015-1782 without the upgrade. (release
+> maintainers call)
+> 
 
-diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.6.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.7.0.bb
-similarity index 65%
-rename from meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.6.0.bb
-rename to meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.7.0.bb
-index cd68ba4..e9846fd 100644
---- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.6.0.bb
-+++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.7.0.bb
-@@ -3,9 +3,10 @@ HOMEPAGE = "https://github.com/alanxz/rabbitmq-c"
- LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=6b7424f9db80cfb11fdd5c980b583f53"
- LICENSE = "MIT"
- 
--SRC_URI = "https://github.com/alanxz/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
--SRC_URI[md5sum] = "80b350ce0de3f44cbd7b501bbbd8daf3"
--SRC_URI[sha256sum] = "3a89349880582c24d81d52ee42a93a0633dc366a4cc96174512af88c32509dc2"
-+SRC_URI = "git://github.com/alanxz/rabbitmq-c.git"
-+SRCREV = "4dde30ce8d984edda540349f57eb7995a87ba9de"
-+
-+S = "${WORKDIR}/git"
- 
- DEPENDS = "popt openssl"
- 
+No problem. I'll send another patch for fido/dizzy with the fix applied
+to debian.
+
 -- 
-1.9.1
+		Hugo
 
 
