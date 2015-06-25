@@ -1,29 +1,37 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A34F6E6CC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 02:00:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97724521"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Jun 2015 10:04:50 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5P1x8o1025010
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 09:59:08 +0800
-Received: from localhost.localdomain (10.167.226.85) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 25 Jun 2015 10:00:45 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 Jun 2015 10:00:18 +0800
-Message-ID: <1435197618-1621-3-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <1435197618-1621-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-References: <1435197618-1621-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 1677E605B3;
+	Thu, 25 Jun 2015 03:00:58 +0000 (UTC)
+Received: by pdcu2 with SMTP id u2so43330214pdc.3;
+	Wed, 24 Jun 2015 20:00:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=HcKkLTIUojdDJN68a1F5nz8aWtFrq0DQwZ8N58VAmR4=;
+	b=VAJ/hmrRG88bKQ6MABInc0DIIf5YfmJoYL5eeVmbsYEmzWK8eeWEAN9+SqN75feE7k
+	ZN0b0A2tDoZwzBoDPzeJklRwEcfXd3oL6/xYLkU2ILSnm0F8icDL0De4VvV2wjuOdTrV
+	81hrtAI65abdXQ7R/IIgwlkBDL92MB4xQU+RZDyrKcNnv19MaYP+fcSVhZyy1MIO6Lfc
+	PZCQH98RYN8SWOg4EqM6kcF72M0vFQ4D5xynYTYwLPt9YPwFP77jJuwbCPr6w2dQhoc+
+	2jkJMVKYF5JnvQoq3ABfvmJZCC1y10SAWwKhsKDYiVkeOIGxZJ+cFTO9Bno8iluPSI9Y
+	L4yA==
+X-Received: by 10.66.101.9 with SMTP id fc9mr14352491pab.37.1435201259437;
+	Wed, 24 Jun 2015 20:00:59 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1239:64c5:89fd:13b4:1d00?
+	([2601:202:4000:1239:64c5:89fd:13b4:1d00])
+	by mx.google.com with ESMTPSA id
+	qs8sm28169329pbc.38.2015.06.24.20.00.56
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 24 Jun 2015 20:00:58 -0700 (PDT)
+Message-ID: <558B6EE7.5090107@gmail.com>
+Date: Wed, 24 Jun 2015 20:00:55 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.85]
-Subject: [meta-oe][PATCH 2/2] libndp: add new recipe
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: google mercurial repo issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2015 02:00:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Jun 2015 03:01:02 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Library for Neighbor Discovery Protocol.
+Hello all,
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-connectivity/libndp/libndp_1.5.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+I have run into an issue trying to build vim.
 
-diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
-new file mode 100644
-index 0000000..355cd75
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "Library for Neighbor Discovery Protocol"
-+HOMEPAGE = "http://libndp.org/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-+
-+SRC_URI = "git://github.com/jpirko/libndp.git"
-+S = "${WORKDIR}/git"
-+SRCREV = "5c348445478b0b022a4276eff1d625224f2dd32c"
-+SRC_URI[md5sum] = "d591dc6bec5bf6d23ced2f5041046cff"
-+SRC_URI[sha256sum] = "1be25cabf84d16279a1bcbb300f463fd8933db787fb73e3e406b8bff31210967"
-+
-+inherit autotools
--- 
-1.8.4.2
+/usr/bin/env hg pull 
+/home/akuster/oss/downloads/hg/vim.googlecode.com/hg/vim
+| DEBUG: Python function base_do_unpack finished
+| DEBUG: Python function do_unpack finished
+| ERROR: Function failed: Fetcher failure: Fetch command failed with 
+exit code 255, output:
+| abort: repository 
+/home/akuster/oss/downloads/hg/vim.googlecode.com/hg/vim not found!
 
+
+there is a note on google regarding their hg repos: "We have some known 
+issues with hg repositories."
+	
+https://groups.google.com/forum/#!topic/google-code-hosting/Gh3kl9MrzY4
+
+
+is anyone else seeing this?
+
+- armin
 
