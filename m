@@ -1,36 +1,38 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BC424605D2
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pd0-f181.google.com (mail-pd0-f181.google.com
+	[209.85.192.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 32A7771633
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Jun 2015 07:09:31 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97736197"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Jun 2015 15:13:30 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5P77nYp012416;
-	Thu, 25 Jun 2015 15:07:49 +0800
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0181.006; Thu, 25 Jun 2015 15:09:26 +0800
-From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
-To: =?utf-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@googlemail.com>
-Thread-Topic: [oe] [meta-oe][PATCH 1/2] networkmanager: upgrade from
-	0.9.8.10 to 1.0.2
-Thread-Index: AQHQrwhLbOLv9YwpikGCGv0Z+qS6JZ28wAjg//9+coCAAIqlQA==
-Date: Thu, 25 Jun 2015 07:09:26 +0000
-Message-ID: <A8FC939F80655644A89BB21CCD3741E87390AF90@G08CNEXMBPEKD02.g08.fujitsu.local>
+	Thu, 25 Jun 2015 07:22:34 +0000 (UTC)
+Received: by pdcu2 with SMTP id u2so47663888pdc.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Jun 2015 00:22:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	bh=8ORzzAhq9T66RljgUp96Tjvfcq0lolDnbH4Y4kDlY+c=;
+	b=Ssq9rvHApZttb0ktxEnUMEMcCR94NVpr8akGj0Wd+yMs6QewzZYV93nZRf/i5OSVCq
+	6SPVeSWCUuYlsFkhj4g4eX0ivKok5++BMP5SUAUCHzeLkNmmKtBDT3/zVP41H1WE1+mu
+	Eyh0rocG6OacnBm4ScQbA567nCmSsM5cR53CWVGkGZR69euVixcS5X707IxRdln8RiB5
+	NarvlDvhBkJ10nwJv1TyLXxAFE0u0Z0VHqTkpeERsk9jWVbohl1MpV7J0h59VKOCq7VH
+	/S8URwO7frYaPlMDuPp6SXya0gNj9UpOF/U44GeXPCBzUdaWONbFi4dG0ytdG+uF1XDQ
+	So7Q==
+MIME-Version: 1.0
+X-Received: by 10.70.47.9 with SMTP id z9mr88933724pdm.69.1435216955506; Thu,
+	25 Jun 2015 00:22:35 -0700 (PDT)
+Received: by 10.70.44.41 with HTTP; Thu, 25 Jun 2015 00:22:35 -0700 (PDT)
+In-Reply-To: <A8FC939F80655644A89BB21CCD3741E87390AF90@G08CNEXMBPEKD02.g08.fujitsu.local>
 References: <1435197618-1621-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 	<1435197618-1621-2-git-send-email-lixin.fnst@cn.fujitsu.com>
 	<CALbNGRQU9+M1aQMWRtW8p02esF8K9COy=LPM6R8=wSZB4xY_dA@mail.gmail.com>
 	<A8FC939F80655644A89BB21CCD3741E87390AF66@G08CNEXMBPEKD02.g08.fujitsu.local>
 	<CALbNGRR_yo9RC0TTvoK8SjLKowvQm12FD+_xE1r+shm+M2iWKA@mail.gmail.com>
-In-Reply-To: <CALbNGRR_yo9RC0TTvoK8SjLKowvQm12FD+_xE1r+shm+M2iWKA@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.85]
-MIME-Version: 1.0
+	<A8FC939F80655644A89BB21CCD3741E87390AF90@G08CNEXMBPEKD02.g08.fujitsu.local>
+Date: Thu, 25 Jun 2015 09:22:35 +0200
+Message-ID: <CALbNGRQUVopNa07ri0XqXGtcYH2JDqjnN64r+-Ljmuq_RQzePA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 1/2] networkmanager: upgrade from 0.9.8.10 to 1.0.2
@@ -47,29 +49,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Jun 2015 07:09:33 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 25 Jun 2015 07:22:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEFuZHJlYXMgTcO8bGxlciBb
-bWFpbHRvOnNjaG5pdHplbHRvbnlAZ29vZ2xlbWFpbC5jb21dDQo+IFNlbnQ6IFRodXJzZGF5LCBK
-dW5lIDI1LCAyMDE1IDI6MzcgUE0NCj4gVG86IExpLCBYaW4v5p2OIOasow0KPiBDYzogb3BlbmVt
-YmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0g
-W21ldGEtb2VdW1BBVENIIDEvMl0gbmV0d29ya21hbmFnZXI6IHVwZ3JhZGUgZnJvbSAwLjkuOC4x
-MCB0bw0KPiAxLjAuMg0KPiANCj4gT24gVGh1LCBKdW4gMjUsIDIwMTUgYXQgODozNCBBTSwgTGks
-IFhpbiA8bGl4aW4uZm5zdEBjbi5mdWppdHN1LmNvbT4gd3JvdGU6DQo+ID4+ID4NCj4gPj4gPiAg
-U1lTVEVNRF9TRVJWSUNFXyR7UE59ID0gIk5ldHdvcmtNYW5hZ2VyLnNlcnZpY2UiDQo+ID4+ID4g
-K1NZU1RFTURfQVVUT19FTkFCTEUgPSAiZGlzYWJsZSINCj4gPj4gV2hhdCBpcyB0aGlzIGZvcj8N
-Cj4gPj4NCj4gPj4gT3RoZXJ3aXNlOiBIYXZlIHNhbWUgaGVyIHVuZGVyIHRlc3QgZm9yIGEgd2hp
-bGUgYW5kIGFtIGZpbmUgd2l0aCBpdC4NCj4gPj4NCj4gPiBUaGFua3MgZm9yIHlvdXIgcmVwbHku
-DQo+ID4NCj4gPiBBZnRlciBzZXR0aW5nICJTWVNURU1EX0FVVE9fRU5BQkxFID0gImRpc2FibGUi
-IiwgdGhlDQo+ID4gTmV0d29ya01hbmFnZXIuc2VydmljZSB3aWxsIG5vdCBCZSBzdGFydGVkIHdo
-ZW4gdGhlIHN5c3RlbSBzdGFydHMuDQo+ID4gQW5kIHdlIGRpZCB0ZXN0IGFib3V0IHRoaXMuDQo+
-IFllcyBhbmQgaG93IGlzIGl0IHN0YXJ0ZWQ/DQoNClRoZSBzeXN0ZW1kIGlzIGVuYWJsZWQgaW4g
-b3VyIHN5c3RlbS4NClNvLCBJbiB0aGUgcHJvY2VzcyBvZiBzdGFydGluZyB0aGUgc3lzdGVtLCBp
-dCB3aWxsIGNoZWNrIGFsbCBvZiB0aGUgc2VydmljZSB3aGljaCBpcyBlbmFibGVkIGFuZCBzdGFy
-dCB0aGVtIC4NCkZvciBleGFtcGxlLCBpZiB3ZSBzZXQgTmV0d29ya01hbmFnZXIuc2VydmljZSBl
-bmFibGUsIGl0IHdpbGwgYmUgc3RhcnRlZCBhdXRvbWF0aWNhbGx5IHdoZW4gdGhlIHN5c3RlbSBp
-cyBzdGFydGluZy4NCg0KUmVnYXJkcywNCkxpDQoNCg==
+On Thu, Jun 25, 2015 at 9:09 AM, Li, Xin <lixin.fnst@cn.fujitsu.com> wrote:
+>
+>> -----Original Message-----
+>> From: Andreas M=C3=BCller [mailto:schnitzeltony@googlemail.com]
+>> Sent: Thursday, June 25, 2015 2:37 PM
+>> To: Li, Xin/=E6=9D=8E =E6=AC=A3
+>> Cc: openembedded-devel@lists.openembedded.org
+>> Subject: Re: [oe] [meta-oe][PATCH 1/2] networkmanager: upgrade from 0.9.=
+8.10 to
+>> 1.0.2
+>>
+>> On Thu, Jun 25, 2015 at 8:34 AM, Li, Xin <lixin.fnst@cn.fujitsu.com> wro=
+te:
+>> >> >
+>> >> >  SYSTEMD_SERVICE_${PN} =3D "NetworkManager.service"
+>> >> > +SYSTEMD_AUTO_ENABLE =3D "disable"
+>> >> What is this for?
+>> >>
+>> >> Otherwise: Have same her under test for a while and am fine with it.
+>> >>
+>> > Thanks for your reply.
+>> >
+>> > After setting "SYSTEMD_AUTO_ENABLE =3D "disable"", the
+>> > NetworkManager.service will not Be started when the system starts.
+>> > And we did test about this.
+>> Yes and how is it started?
+>
+> The systemd is enabled in our system.
+> So, In the process of starting the system, it will check all of the servi=
+ce which is enabled and start them .
+> For example, if we set NetworkManager.service enable, it will be started =
+automatically when the system is starting.
+>
+People install networkmanager to take care for all types of
+connections out of the box. So this default is not what most people
+want installing networkmanager so NAK - you can add that in a
+bbappend.
+
+Andreas
 
