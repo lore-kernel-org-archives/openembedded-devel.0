@@ -1,27 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 44372601E0
+	by mail.openembedded.org (Postfix) with ESMTP id EC8487588F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 08:23:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97782664"
+	Fri, 26 Jun 2015 08:23:25 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97782667"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Jun 2015 16:27:23 +0800
+	by heian.cn.fujitsu.com with ESMTP; 26 Jun 2015 16:27:29 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5Q8Lfjx009221
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5Q8LmCh009231
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 16:21:42 +0800
+	Fri, 26 Jun 2015 16:21:48 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 26 Jun 2015 16:23:20 +0800
+	Server (TLS) id 14.3.181.6; Fri, 26 Jun 2015 16:23:26 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Jun 2015 16:23:22 +0800
-Message-ID: <1435307010-34957-1-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Fri, 26 Jun 2015 16:23:23 +0800
+Message-ID: <1435307010-34957-2-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1435307010-34957-1-git-send-email-leimaohui@cn.fujitsu.com>
+References: <1435307010-34957-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH 0/8] add openlmi and it's depends
+Subject: [meta-oe][PATCH 1/8] openlmi: add new recipe openlmi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,80 +37,219 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2015 08:23:24 -0000
+X-List-Received-Date: Fri, 26 Jun 2015 08:23:27 -0000
 Content-Type: text/plain
 
 OpenLMI  = Open Linux Management Infrastructure.
 OpenLMI is open-source project aiming to improve management of Linux systems using WBEM standards.
 
-Lei Maohui (8):
-  openlmi: add new recipe openlmi
-  cim-schema-exper: add new recipe for openlmi
-  cmpi-bindings: add new recipe for openlmi
-  konkretcmpi:add new recipe for openlmi
-  sblim-sfcb: add new recipe for openlmi
-  sblim-sfcCommon: add new recipe
-  sblim-cmpi-devel: add new recipe
-  cim-schema_2.40.0.bb: delete
-
- .../cim-schema/cim-schema-exper_2.39.0.bb          | 26 +++++++
- .../cim-schema/cim-schema-final_2.40.0.bb          | 31 +++++++++
- .../cim-schema/cim-schema/files/LICENSE            | 34 +++++++++
- .../cim-schema/cim-schema_2.40.0.bb                | 31 ---------
- .../cmpi-bindings/0001-Fix-error.patch             | 26 +++++++
- .../cmpi-bindings/0001-Modify-cmakelist.patch      | 41 +++++++++++
- .../cmpi-bindings-0.4.17-no-ruby-perl.patch        | 44 ++++++++++++
- .../cmpi-bindings-0.4.17-sblim-sigsegv.patch       | 22 ++++++
- .../cmpi-bindings-0.9.5-python-lib-dir.patch       | 17 +++++
- .../cmpi-bindings/cmpi-bindings_git.bb             | 31 +++++++++
- ...-0.9.2-fix-returning-instance-from-method.patch | 38 ++++++++++
- .../konkretcmpi/konkretcmpi_0.9.2.bb               | 33 +++++++++
- .../openlmi/openlmi-networking_0.3.1.bb            | 29 ++++++++
- .../openlmi/openlmi-providers/0001-fix-error.patch | 26 +++++++
- .../openlmi/openlmi-providers_0.6.0.bb             | 54 +++++++++++++++
- .../openlmi/openlmi-storage_0.8.1.bb               | 31 +++++++++
- .../openlmi/openlmi-tools_0.10.5.bb                | 23 +++++++
- .../sblim-cmpi-devel-2.0.3-docdir.patch            | 17 +++++
- .../sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb     | 18 +++++
- .../sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb       | 23 +++++++
- .../recipes-extended/sblim-sfcb/files/sfcb.service | 11 +++
- .../sblim-sfcb-1.3.15-fix-provider-debugging.patch | 12 ++++
- .../sblim-sfcb-1.3.16-maxMsgLen.patch              | 14 ++++
- .../sblim-sfcb-1.3.16-multilib-man-cfg.patch       | 41 +++++++++++
- ...blim-sfcb-1.3.9-sfcbrepos-schema-location.patch | 42 ++++++++++++
- .../sblim-sfcb-1.4.5-service.patch                 | 27 ++++++++
- .../sblim-sfcb-1.4.8-default-ecdh-curve-name.patch | 26 +++++++
- .../sblim-sfcb/sblim-sfcb_1.4.8.bb                 | 80 ++++++++++++++++++++++
- 28 files changed, 817 insertions(+), 31 deletions(-)
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
- create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
- delete mode 100644 meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Fix-error.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Modify-cmakelist.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-no-ruby-perl.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.4.17-sblim-sigsegv.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/cmpi-bindings-0.9.5-python-lib-dir.patch
- create mode 100644 meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_git.bb
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../openlmi/openlmi-networking_0.3.1.bb            | 29 ++++++++++++
+ .../openlmi/openlmi-providers/0001-fix-error.patch | 26 +++++++++++
+ .../openlmi/openlmi-providers_0.6.0.bb             | 54 ++++++++++++++++++++++
+ .../openlmi/openlmi-storage_0.8.1.bb               | 31 +++++++++++++
+ .../openlmi/openlmi-tools_0.10.5.bb                | 23 +++++++++
+ 5 files changed, 163 insertions(+)
  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
  create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
- create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel/sblim-cmpi-devel-2.0.3-docdir.patch
- create mode 100644 meta-oe/recipes-extended/sblim-cmpi-devel/sblim-cmpi-devel_2.0.3.bb
- create mode 100644 meta-oe/recipes-extended/sblim-sfcCommon/sblim-sfcCommon_1.0.1.bb
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/files/sfcb.service
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.15-fix-provider-debugging.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-maxMsgLen.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.16-multilib-man-cfg.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.5-service.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.8/sblim-sfcb-1.4.8-default-ecdh-curve-name.patch
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.8.bb
 
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb b/meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
+new file mode 100644
+index 0000000..0bb4890
+--- /dev/null
++++ b/meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "CIM providers for network management"
++DESCRIPTION = "\
++openlmi-networking is set of CMPI providers for network management using \
++Common Information Model (CIM)."
++HOMEPAGE = "http://www.openlmi.org/"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
++SECTION = "System/Management"
++DEPENDS = "openlmi-providers konkretcmpi sblim-cmpi-devel cim-schema-exper networkmanager dbus libcheck glib-2.0"
++
++SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
++          "
++SRC_URI[md5sum] = "f20de8c76fb6a80001b14c1eb035953e"
++SRC_URI[sha256sum] = "578eaa5c65fe924b5d7aeb635509dd46443166cd6a88b019bc42646e3518a460"
++
++inherit cmake
++
++do_configure_prepend() {
++    export STAGING_DATADIR="${STAGING_DATADIR}"
++}
++
++do_install_append() {
++    if [ -d ${D}${prefix}/lib64 ]; then
++        mv ${D}${prefix}/lib64 ${D}${libdir}
++    fi
++}
++
++FILES_${PN} =+ "${libdir}/cmpi/libcmpiLMI_Networking.so ${prefix}/libexec*"
++FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug*"
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch b/meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
+new file mode 100644
+index 0000000..85dfd55
+--- /dev/null
++++ b/meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
+@@ -0,0 +1,26 @@
++From 764171866b84e0198b67538f63022abde3e628ad Mon Sep 17 00:00:00 2001
++From: Qian Lei <qianl.fnst@cn.fujitsu.com>
++Date: Fri, 16 Jan 2015 14:15:25 +0800
++Subject: [PATCH] fix error
++
++Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
++---
++ cmake/modules/OpenLMIMacros.cmake | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/cmake/modules/OpenLMIMacros.cmake b/cmake/modules/OpenLMIMacros.cmake
++index d55f983..dbc32ec 100644
++--- a/cmake/modules/OpenLMIMacros.cmake
+++++ b/cmake/modules/OpenLMIMacros.cmake
++@@ -89,7 +89,7 @@ macro(konkretcmpi_generate MOFS CIM_PROVIDERS CIM_HEADERS CIM_CLASSES)
++         endforeach(CLASS ${CIM_CLASS_NAMES})
++ 
++         # Generate headers for CIM classes
++-        set(ENV{KONKRET_SCHEMA_DIR} "/usr/share/mof/cim-current")
+++        set(ENV{KONKRET_SCHEMA_DIR} "$ENV{STAGING_DATADIR}/mof/cim-current")
++         execute_process(COMMAND ${KONKRETCMPI_KONKRET}
++                                 ${KONKRET_MOF_FILES}
++                                 ${GENERATE_PROVIDERS}
++-- 
++1.8.3.1
++
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb b/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
+new file mode 100644
+index 0000000..c1fdfe2
+--- /dev/null
++++ b/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
+@@ -0,0 +1,54 @@
++SUMMARY = "Set of basic CIM providers"
++DESCRIPTION = "\
++openlmi-providers is set of (usually) small CMPI providers (agents) for \
++basic monitoring and management of host system using Common Information \
++Model (CIM)."
++HOMEPAGE = "http://www.openlmi.org/"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
++SECTION = "System/Management"
++DEPENDS = "konkretcmpi-native konkretcmpi sblim-sfcb sblim-cmpi-devel cim-schema-exper lmsensors libuser swig swig-native dbus udev systemd-systemctl-native"
++
++SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
++           file://0001-fix-error.patch"
++SRC_URI[md5sum] = "5904f23cf494946237cfbbdbe644a3cd"
++SRC_URI[sha256sum] = "e2b2fbeaec45a83905d0da3b87da83904d9cd94c1b86312f844587b3fff11f56"
++
++inherit cmake
++
++EXTRA_OECMAKE = " \
++                 -DWITH-DEVASSISTANT=OFF \
++                 -DWITH-JOURNALD=OFF \
++                 -DWITH-SERVICE=OFF \
++                 -DWITH-SERVICE-LEGACY=ON \
++                 -DWITH-ACCOUNT=OFF \
++                 -DWITH-PCP=OFF \
++                 -DWITH-REALMD=OFF \
++                 -DWITH-FAN=OFF \
++                 -DWITH-LOCALE=OFF \
++                 -DWITH-INDSENDER=OFF \
++                 -DWITH-JOBMANAGER=OFF \
++                 -DWITH-SSSD=OFF \
++                 -DWITH-SELINUX=OFF \
++                 -DWITH-SOFTWARE-DBUS=ON \
++               "
++
++do_configure_prepend() {
++    export STAGING_DATADIR="${STAGING_DATADIR}"
++}
++
++do_install_append() {
++    if [ -d ${D}${prefix}/lib64 ]; then
++        mv ${D}${prefix}/lib64 ${D}${libdir}
++    fi
++
++    if [ -d ${D}${prefix}${sysconfidr} ]; then
++        mv ${D}${prefix}${sysconfdir} ${D}${sysconfdir}
++    fi
++}
++
++FILES_${PN} =+ "${libdir}/cmpi/libcmpiLMI* ${prefix}/libexec*"
++FILES_${PN}-dev =+ "${datadir}/cmake*"
++FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug*"
++
++RDEPENDS_${PN} = "python"
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb b/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
+new file mode 100644
+index 0000000..6d351c6
+--- /dev/null
++++ b/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "CIM providers for storage management"
++DESCRIPTION = "\
++The openlmi-storage package contains CMPI providers for management of storage \
++using Common Information Managemen (CIM) protocol. \
++\
++The providers can be registered in any CMPI-aware CIMOM, both OpenPegasus and \
++SFCB were tested."
++HOMEPAGE = "http://www.openlmi.org/"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++SECTION = "System/Management"
++DEPENDS = "openlmi-providers pywbem cmpi-bindings"
++
++SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz"
++SRC_URI[md5sum] = "898cf0d8c03b8ad6b45d65f335ddee0d"
++SRC_URI[sha256sum] = "4a1ba9957750f94ea58a89cea28985564f38d7cc9aa00fcae20c51e7b32bd0a8"
++
++inherit setuptools
++
++do_install_append() {
++    install -m 755 -d ${D}${datadir}/${BPN}
++    install -m 644 ${S}/mof/* ${D}${datadir}/${BPN}/
++
++    install -m 755 -d ${D}${sysconfdir}/openlmi/storage
++    install -m 644 storage.conf ${D}${sysconfdir}/openlmi/storage/storage.conf
++
++    install -m 755 -d ${D}${libexecdir}/pegasus
++    install -m 755 pycmpiLMI_Storage-cimprovagt ${D}${libexecdir}/pegasus/
++}
++
++FILES_${PN} =+ "${sysconfdir}/openlmi/storage/storage.conf ${datadir}/${BPN}/*"
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+new file mode 100644
+index 0000000..b23869d
+--- /dev/null
++++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Set of CLI tools for Openlmi providers"
++DESCRIPTION = "openlmi-tools is a set of command line tools for Openlmi providers."
++HOMEPAGE = "http://www.openlmi.org/"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
++SECTION = "System/Management"
++
++inherit setuptools
++
++DEPENDS = "python-native pywbem-native python-m2crypto pywbem"
++
++SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
++          "
++SRC_URI[md5sum] = "e156246cb7b49753db82f4ddf7f03e50"
++SRC_URI[sha256sum] = "292b8f5f2250655a4add8183c529b73358bc980bd4f23cfa484a940953fce9e4"
++
++do_compile_prepend() {
++    cd cli
++    sed 's/@@VERSION@@/$(VERSION)/g' setup.py.skel >setup.py
++}
++do_install_prepend() {
++    cd cli
++}
 -- 
 1.8.4.2
 
