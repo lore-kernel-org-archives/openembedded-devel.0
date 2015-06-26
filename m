@@ -1,29 +1,35 @@
-Return-Path: <h4nn35.work@gmail.com>
-Received: from mail-wg0-f51.google.com (mail-wg0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 494A1607BB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wi0-f181.google.com (mail-wi0-f181.google.com
+	[209.85.212.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BE3260167
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 08:55:06 +0000 (UTC)
-Received: by wgjx7 with SMTP id x7so9497604wgj.2
+	Fri, 26 Jun 2015 10:19:03 +0000 (UTC)
+Received: by wibdq8 with SMTP id dq8so13475868wib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 01:55:07 -0700 (PDT)
+	Fri, 26 Jun 2015 03:19:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=C9QdGKJmZK+Cj4xbW97H65hVe1yazl5u/mX9VOJ+BnY=;
-	b=k0VCHOAth9KqtHD6NLva1BpDOkZi/RpdzGdSapC18eCbhwq7cjxujh8Xz2vBxfI02l
-	u/kSFIGGT2gQboS/oWy+kGLNizTl5pOPOSVkaJ+JkKXAlQfRlm0+OkiQDVmMlUvys/mm
-	tWlKalGBojXSIGhGTsqPiscUZDZMH4tjdnoYY2zKZJAOw4zN91bqwrmMfWC3Y1nhO8jb
-	xjECJpqivhp/VmMzICyzzbNZI3xHSq5b1I4O/GupC+cHie8I6luEX0NIWDSqHMwo0rCY
-	20RILcNHoY1yS/qPDGNQud6B8nFxZdU1hjcMIQo6d63Ck97zNSf6vlbN1qDgrx2O2dYH
-	Witw==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=ea5QPNQnIcOesnJH6cQmAMzMc4SvwKdkXWG6R3iO65k=;
+	b=bQnvNE7fA7uVEVE/OBmDCLtiLQkW3tKhcEg/dB0HG6eDer7dUGIAe9p62/AiTjcqeE
+	jaCJoEc6CsiXgWpY7PfFdFllSu937m4WttXsEhGe6r+p7Eg6+nIfVFHHkBxdRVZvGO34
+	VBkiR/ARNnLrtaQl0fWEmBWOcfkmzFE+NzaXR1rxVzI8Xv0Muzxw6opnpB/R+k7nM8Gu
+	paYBc/qc+yxysJko42Yvl5qFE6/478+ihouZMaL7ybyQwW2DVV8qVUCNLF1lT96mYoG8
+	w7Uq3Rn4mZCf/ERz/PJ4r6gvptn2OZo9ozGr0GmbvHzaTOJ0+/Vsbjcdm6v/LcEiC9Jv
+	I0qg==
 MIME-Version: 1.0
-X-Received: by 10.194.93.198 with SMTP id cw6mr1006829wjb.113.1435308907296;
-	Fri, 26 Jun 2015 01:55:07 -0700 (PDT)
-Received: by 10.27.128.68 with HTTP; Fri, 26 Jun 2015 01:55:07 -0700 (PDT)
-Date: Fri, 26 Jun 2015 10:55:07 +0200
-Message-ID: <CAHvQdo0+mDR0Gq8DuuMgCp3j40ALA3T5xOd=6E=85uXUWZtaaQ@mail.gmail.com>
-From: Johannes Pointner <h4nn35.work@gmail.com>
-To: martin.jansa@gmail.com, openembedded-devel@lists.openembedded.org
-Subject: [meta-qt5] qt5.5 test with branch jansa/master-5.5
+X-Received: by 10.180.218.227 with SMTP id pj3mr3483590wic.59.1435313944016;
+	Fri, 26 Jun 2015 03:19:04 -0700 (PDT)
+Received: by 10.28.167.2 with HTTP; Fri, 26 Jun 2015 03:19:03 -0700 (PDT)
+In-Reply-To: <CAHvQdo0+mDR0Gq8DuuMgCp3j40ALA3T5xOd=6E=85uXUWZtaaQ@mail.gmail.com>
+References: <CAHvQdo0+mDR0Gq8DuuMgCp3j40ALA3T5xOd=6E=85uXUWZtaaQ@mail.gmail.com>
+Date: Fri, 26 Jun 2015 12:19:03 +0200
+Message-ID: <CA+chaQdXT-dmhjoi+UtwKvjFnzAUpjGo2YwW3yGJixu8PEy7GQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Johannes Pointner <h4nn35.work@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] qt5.5 test with branch jansa/master-5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,14 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2015 08:55:07 -0000
+X-List-Received-Date: Fri, 26 Jun 2015 10:19:04 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hello Martin,
+Not yet, it's just WIP (I've sent the same patch to ML a while ago, but
+didn't have time to finish it yet).
 
-I discovered our qt5.5 branch and I am curious if it's useable to test
-qt 5.5 rc?
+On Fri, Jun 26, 2015 at 10:55 AM, Johannes Pointner <h4nn35.work@gmail.com>
+wrote:
 
-Thx,
-Hannes
+> Hello Martin,
+>
+> I discovered our qt5.5 branch and I am curious if it's useable to test
+> qt 5.5 rc?
+>
+> Thx,
+> Hannes
+>
 
