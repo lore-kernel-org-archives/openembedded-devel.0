@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id EC8487588F
+	by mail.openembedded.org (Postfix) with ESMTP id B45A17568C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 08:23:25 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97782667"
+	Fri, 26 Jun 2015 08:23:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97782668"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Jun 2015 16:27:29 +0800
+	by heian.cn.fujitsu.com with ESMTP; 26 Jun 2015 16:27:31 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5Q8LmCh009231
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5Q8Lowu009237
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 16:21:48 +0800
+	Fri, 26 Jun 2015 16:21:50 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 26 Jun 2015 16:23:26 +0800
+	Server (TLS) id 14.3.181.6; Fri, 26 Jun 2015 16:23:28 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Jun 2015 16:23:23 +0800
-Message-ID: <1435307010-34957-2-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Fri, 26 Jun 2015 16:23:24 +0800
+Message-ID: <1435307010-34957-3-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1435307010-34957-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1435307010-34957-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH 1/8] openlmi: add new recipe openlmi
+Subject: [meta-oe][PATCH 2/8] cim-schema-exper: add new recipe for openlmi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,219 +37,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2015 08:23:27 -0000
+X-List-Received-Date: Fri, 26 Jun 2015 08:23:28 -0000
 Content-Type: text/plain
 
-OpenLMI  = Open Linux Management Infrastructure.
-OpenLMI is open-source project aiming to improve management of Linux systems using WBEM standards.
+cim-schema(Experimental-MOFs) is dependence of openlmi.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../openlmi/openlmi-networking_0.3.1.bb            | 29 ++++++++++++
- .../openlmi/openlmi-providers/0001-fix-error.patch | 26 +++++++++++
- .../openlmi/openlmi-providers_0.6.0.bb             | 54 ++++++++++++++++++++++
- .../openlmi/openlmi-storage_0.8.1.bb               | 31 +++++++++++++
- .../openlmi/openlmi-tools_0.10.5.bb                | 23 +++++++++
- 5 files changed, 163 insertions(+)
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
- create mode 100644 meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+ .../cim-schema/cim-schema-exper_2.39.0.bb          | 26 +++++++++++++++++
+ .../cim-schema/cim-schema-final_2.40.0.bb          | 31 ++++++++++++++++++++
+ .../cim-schema/cim-schema/files/LICENSE            | 34 ++++++++++++++++++++++
+ 3 files changed, 91 insertions(+)
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+ create mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
 
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb b/meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
 new file mode 100644
-index 0000000..0bb4890
+index 0000000..3b973bf
 --- /dev/null
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-networking_0.3.1.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "CIM providers for network management"
-+DESCRIPTION = "\
-+openlmi-networking is set of CMPI providers for network management using \
-+Common Information Model (CIM)."
-+HOMEPAGE = "http://www.openlmi.org/"
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
-+SECTION = "System/Management"
-+DEPENDS = "openlmi-providers konkretcmpi sblim-cmpi-devel cim-schema-exper networkmanager dbus libcheck glib-2.0"
-+
-+SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
-+          "
-+SRC_URI[md5sum] = "f20de8c76fb6a80001b14c1eb035953e"
-+SRC_URI[sha256sum] = "578eaa5c65fe924b5d7aeb635509dd46443166cd6a88b019bc42646e3518a460"
-+
-+inherit cmake
-+
-+do_configure_prepend() {
-+    export STAGING_DATADIR="${STAGING_DATADIR}"
-+}
-+
-+do_install_append() {
-+    if [ -d ${D}${prefix}/lib64 ]; then
-+        mv ${D}${prefix}/lib64 ${D}${libdir}
-+    fi
-+}
-+
-+FILES_${PN} =+ "${libdir}/cmpi/libcmpiLMI_Networking.so ${prefix}/libexec*"
-+FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug*"
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch b/meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
-new file mode 100644
-index 0000000..85dfd55
---- /dev/null
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-providers/0001-fix-error.patch
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-exper_2.39.0.bb
 @@ -0,0 +1,26 @@
-+From 764171866b84e0198b67538f63022abde3e628ad Mon Sep 17 00:00:00 2001
-+From: Qian Lei <qianl.fnst@cn.fujitsu.com>
-+Date: Fri, 16 Jan 2015 14:15:25 +0800
-+Subject: [PATCH] fix error
++require cim-schema.inc
 +
-+Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
-+---
-+ cmake/modules/OpenLMIMacros.cmake | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++LICENSE = "DMTF"
 +
-+diff --git a/cmake/modules/OpenLMIMacros.cmake b/cmake/modules/OpenLMIMacros.cmake
-+index d55f983..dbc32ec 100644
-+--- a/cmake/modules/OpenLMIMacros.cmake
-++++ b/cmake/modules/OpenLMIMacros.cmake
-+@@ -89,7 +89,7 @@ macro(konkretcmpi_generate MOFS CIM_PROVIDERS CIM_HEADERS CIM_CLASSES)
-+         endforeach(CLASS ${CIM_CLASS_NAMES})
-+ 
-+         # Generate headers for CIM classes
-+-        set(ENV{KONKRET_SCHEMA_DIR} "/usr/share/mof/cim-current")
-++        set(ENV{KONKRET_SCHEMA_DIR} "$ENV{STAGING_DATADIR}/mof/cim-current")
-+         execute_process(COMMAND ${KONKRETCMPI_KONKRET}
-+                                 ${KONKRET_MOF_FILES}
-+                                 ${GENERATE_PROVIDERS}
-+-- 
-+1.8.3.1
-+
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb b/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
-new file mode 100644
-index 0000000..c1fdfe2
---- /dev/null
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-providers_0.6.0.bb
-@@ -0,0 +1,54 @@
-+SUMMARY = "Set of basic CIM providers"
-+DESCRIPTION = "\
-+openlmi-providers is set of (usually) small CMPI providers (agents) for \
-+basic monitoring and management of host system using Common Information \
-+Model (CIM)."
-+HOMEPAGE = "http://www.openlmi.org/"
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
-+SECTION = "System/Management"
-+DEPENDS = "konkretcmpi-native konkretcmpi sblim-sfcb sblim-cmpi-devel cim-schema-exper lmsensors libuser swig swig-native dbus udev systemd-systemctl-native"
-+
-+SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
-+           file://0001-fix-error.patch"
-+SRC_URI[md5sum] = "5904f23cf494946237cfbbdbe644a3cd"
-+SRC_URI[sha256sum] = "e2b2fbeaec45a83905d0da3b87da83904d9cd94c1b86312f844587b3fff11f56"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE = " \
-+                 -DWITH-DEVASSISTANT=OFF \
-+                 -DWITH-JOURNALD=OFF \
-+                 -DWITH-SERVICE=OFF \
-+                 -DWITH-SERVICE-LEGACY=ON \
-+                 -DWITH-ACCOUNT=OFF \
-+                 -DWITH-PCP=OFF \
-+                 -DWITH-REALMD=OFF \
-+                 -DWITH-FAN=OFF \
-+                 -DWITH-LOCALE=OFF \
-+                 -DWITH-INDSENDER=OFF \
-+                 -DWITH-JOBMANAGER=OFF \
-+                 -DWITH-SSSD=OFF \
-+                 -DWITH-SELINUX=OFF \
-+                 -DWITH-SOFTWARE-DBUS=ON \
-+               "
-+
-+do_configure_prepend() {
-+    export STAGING_DATADIR="${STAGING_DATADIR}"
-+}
-+
-+do_install_append() {
-+    if [ -d ${D}${prefix}/lib64 ]; then
-+        mv ${D}${prefix}/lib64 ${D}${libdir}
-+    fi
-+
-+    if [ -d ${D}${prefix}${sysconfidr} ]; then
-+        mv ${D}${prefix}${sysconfdir} ${D}${sysconfdir}
-+    fi
-+}
-+
-+FILES_${PN} =+ "${libdir}/cmpi/libcmpiLMI* ${prefix}/libexec*"
-+FILES_${PN}-dev =+ "${datadir}/cmake*"
-+FILES_${PN}-dbg =+ "${libdir}/cmpi/.debug*"
-+
-+RDEPENDS_${PN} = "python"
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb b/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
-new file mode 100644
-index 0000000..6d351c6
---- /dev/null
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "CIM providers for storage management"
-+DESCRIPTION = "\
-+The openlmi-storage package contains CMPI providers for management of storage \
-+using Common Information Managemen (CIM) protocol. \
-+\
-+The providers can be registered in any CMPI-aware CIMOM, both OpenPegasus and \
-+SFCB were tested."
-+HOMEPAGE = "http://www.openlmi.org/"
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-+SECTION = "System/Management"
-+DEPENDS = "openlmi-providers pywbem cmpi-bindings"
-+
-+SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz"
-+SRC_URI[md5sum] = "898cf0d8c03b8ad6b45d65f335ddee0d"
-+SRC_URI[sha256sum] = "4a1ba9957750f94ea58a89cea28985564f38d7cc9aa00fcae20c51e7b32bd0a8"
-+
-+inherit setuptools
-+
-+do_install_append() {
-+    install -m 755 -d ${D}${datadir}/${BPN}
-+    install -m 644 ${S}/mof/* ${D}${datadir}/${BPN}/
-+
-+    install -m 755 -d ${D}${sysconfdir}/openlmi/storage
-+    install -m 644 storage.conf ${D}${sysconfdir}/openlmi/storage/storage.conf
-+
-+    install -m 755 -d ${D}${libexecdir}/pegasus
-+    install -m 755 pycmpiLMI_Storage-cimprovagt ${D}${libexecdir}/pegasus/
-+}
-+
-+FILES_${PN} =+ "${sysconfdir}/openlmi/storage/storage.conf ${datadir}/${BPN}/*"
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-new file mode 100644
-index 0000000..b23869d
---- /dev/null
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Set of CLI tools for Openlmi providers"
-+DESCRIPTION = "openlmi-tools is a set of command line tools for Openlmi providers."
-+HOMEPAGE = "http://www.openlmi.org/"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
-+SECTION = "System/Management"
-+
-+inherit setuptools
-+
-+DEPENDS = "python-native pywbem-native python-m2crypto pywbem"
-+
-+SRC_URI = "http://fedorahosted.org/released/${BPN}/${BP}.tar.gz \
++SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2390/cim_schema_${PV}Experimental-MOFs.zip;subdir=${BPN}-${PV} \
++           file://LICENSE \
 +          "
-+SRC_URI[md5sum] = "e156246cb7b49753db82f4ddf7f03e50"
-+SRC_URI[sha256sum] = "292b8f5f2250655a4add8183c529b73358bc980bd4f23cfa484a940953fce9e4"
++SRC_URI[md5sum] = "b82b31c609c6bcc69521829409f58ccc"
++SRC_URI[sha256sum] = "ed2096ef1ea25d189a02bbc6603fed7a48297f2987f254265763a6eecb7fc870"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
 +
-+do_compile_prepend() {
-+    cd cli
-+    sed 's/@@VERSION@@/$(VERSION)/g' setup.py.skel >setup.py
++do_install() {
++        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
++        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
++        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
++
++        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
++                sed -i -e 's/\r//g' $i
++        done
++        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
++        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
 +}
-+do_install_prepend() {
-+    cd cli
++
++FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
++FILES_${PN}-doc = ""
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+new file mode 100644
+index 0000000..ff6c29d
+--- /dev/null
++++ b/meta-networking/recipes-support/cim-schema/cim-schema-final_2.40.0.bb
+@@ -0,0 +1,31 @@
++require cim-schema.inc
++
++LICENSE = "DMTF"
++
++SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-MOFs.zip \
++           file://LICENSE \
++          "
++SRC_URI[md5sum] = "a9bdf17c7374e3b5b7adeaac4842c4ad"
++SRC_URI[sha256sum] = "dbfa3064ea427acd71a4bebbc172ca2dc44b0b09a6d83b0945b9ffa988a9058a"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
++
++do_unpack() {
++        unzip -q ${DL_DIR}/cim_schema_${PV}Final-MOFs.zip -d ${S}
++        cp -f ${FILE_DIRNAME}/files/LICENSE ${WORKDIR}/
 +}
++
++do_install() {
++        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
++        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
++        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
++
++        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
++        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
++                sed -i -e 's/\r//g' $i
++        done
++        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
++        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
++}
++
++FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
++FILES_${PN}-doc = ""
+diff --git a/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+new file mode 100644
+index 0000000..54a2812
+--- /dev/null
++++ b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+@@ -0,0 +1,34 @@
++// Copyright 1998-2008 Distributed Management Task Force, Inc. (DMTF).
++// All rights reserved.
++// DMTF is a not-for-profit association of industry members dedicated
++// to promoting enterprise and systems management and interoperability.
++// DMTF specifications and documents may be reproduced by
++// members and non-members, provided that correct attribution is given.
++// As DMTF specifications may be revised from time to time,
++// the particular version and release date should always be noted.
++// 
++// Implementation of certain elements of this standard or proposed
++// standard may be subject to third party patent rights, including
++// provisional patent rights (herein "patent rights"). DMTF makes
++// no representations to users of the standard as to the existence
++// of such rights, and is not responsible to recognize, disclose, or
++// identify any or all such third party patent right, owners or
++// claimants, nor for any incomplete or inaccurate identification or
++// disclosure of such rights, owners or claimants. DMTF shall have no
++// liability to any party, in any manner or circumstance, under any
++// legal theory whatsoever, for failure to recognize, disclose, or
++// identify any such third party patent rights, or for such party's
++// reliance on the standard or incorporation thereof in its product,
++// protocols or testing procedures. DMTF shall have no liability to
++// any party implementing such standard, whether such implementation
++// is foreseeable or not, nor to any patent owner or claimant, and shall
++// have no liability or responsibility for costs or losses incurred if
++// a standard is withdrawn or modified after publication, and shall be
++// indemnified and held harmless by any party implementing the
++// standard from any and all claims of infringement by a patent owner
++// for such implementations.
++// 
++// For information about patents held by third-parties which have
++// notified the DMTF that, in their opinion, such patent may relate to
++// or impact implementations of DMTF standards, visit
++// http://www.dmtf.org/about/policies/disclosures.php.
 -- 
 1.8.4.2
 
