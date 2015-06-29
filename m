@@ -1,27 +1,35 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2EE716AB99
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f53.google.com (mail-pa0-f53.google.com
+	[209.85.220.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 437D060670
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 07:37:06 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97854926"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 15:41:06 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T7ZQAI016189
+	Mon, 29 Jun 2015 08:24:52 +0000 (UTC)
+Received: by pactm7 with SMTP id tm7so101501925pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 15:35:26 +0800
-Received: from localhost.localdomain (10.167.226.85) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 15:37:05 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Jun 2015 15:36:49 +0800
-Message-ID: <1435563409-1616-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.85]
-Subject: [meta-oe][PATCH] sg3-utils: 1.38 -> 1.40
+	Mon, 29 Jun 2015 01:24:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=3hNgkINLG4buPUVB3oPfAffjBrOTVq7HUsM9/1q15fs=;
+	b=gG2GJ2q6qsZCQm8yp8nZ6t/5ERrMMB5+pHG/u7u5oN2TUaKmKcJG6BA8LBi+wJX56+
+	lv2U9ayjkaexwdW+i+1Yami4af5xKTPR8nfYDb6OhmVEc4tuukPZUMbvXdcezISSrote
+	kKGXY3T4kzZQLt/3GQxIUbhkAMtIGDoOkRXfregQeIphkh3e4mNplrquy4hND3G6sVx2
+	j6O0tdsJiF8NzqMq5hHVWCwPHGr/WAKWt3VKfuvnWC6R+cJr7uf+EtSMCIUFa6m+y5EC
+	2JAJ9WtDMt0I3l0O3OEDv/UyC97MZDyKK9qJa2R3UQQH1R2jCLodGTKDL+fY/kMUdUTd
+	1Erg==
+X-Received: by 10.70.54.196 with SMTP id l4mr29248256pdp.2.1435566293436;
+	Mon, 29 Jun 2015 01:24:53 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by mx.google.com with ESMTPSA id
+	db1sm41384474pdb.50.2015.06.29.01.24.52
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 29 Jun 2015 01:24:52 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Jun 2015 18:24:27 +1000
+Message-Id: <1435566267-5070-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.4.4
+Subject: [meta-oe][PATCH] nodejs: update to 0.12.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,35 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jun 2015 07:37:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 29 Jun 2015 08:24:54 -0000
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- .../sg3-utils/{sg3-utils_1.38.bb => sg3-utils_1.40.bb}               | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.38.bb => sg3-utils_1.40.bb} (77%)
+ .../recipes-devtools/nodejs/{nodejs_0.12.4.bb => nodejs_0.12.5.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.4.bb => nodejs_0.12.5.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.40.bb
-similarity index 77%
-rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
-rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.40.bb
-index 5ce11b6..754e03f 100644
---- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
-+++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.40.bb
-@@ -9,8 +9,9 @@ LICENSE = "GPLv2+ & BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb
+index 81b8c0d..9bcec08 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.4.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb
+@@ -8,8 +8,8 @@ DEPENDS = "openssl"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+     file://enable-armv5e-build.patch \
+ "
+-SRC_URI[md5sum] = "c2b4deea212c0b7c2f86368c65fab312"
+-SRC_URI[sha256sum] = "3298d0997613a04ac64343e8316da134d04588132554ae402eb344e3369ec912"
++SRC_URI[md5sum] = "aa6d22762e70b4f46293a17373788291"
++SRC_URI[sha256sum] = "4bc1e25f4c62ac65324d3cf4aa9de2d801cd708757c3567b6ad2ced7df30cdd2"
  
- SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
--SRC_URI[md5sum] = "e532a3d6648c422347f6d84cac469263"
--SRC_URI[sha256sum] = "d7d3a8b4b698e2c17c8f16bb876946720260d4d659d471c5d7c12ce652ba38f1"
-+
-+SRC_URI[md5sum] = "4a74ed491b0891fc60cd91d2b5d68331"
-+SRC_URI[sha256sum] = "44a9ecfd3af018fa9f3586067a8fa5f4874451c3d773d74436d262a7e530ee83"
- 
- inherit autotools-brokensep
+ S = "${WORKDIR}/node-v${PV}"
  
 -- 
-1.8.4.2
+2.4.4
 
 
