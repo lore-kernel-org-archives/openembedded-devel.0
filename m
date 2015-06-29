@@ -1,34 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 4581E60089
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 002D46AB99
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 18:33:04 +0000 (UTC)
-Received: by iebmu5 with SMTP id mu5so80922197ieb.1
+	Mon, 29 Jun 2015 06:43:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97852506"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 14:47:34 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T6fsTB012279
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Jun 2015 11:33:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=orluP7qbQGPZGFjpX9nf1bxW/l0R/20pLb5wP4n8Hxc=;
-	b=ULgoJ3G4w8Qgw7mzT4M38fjuEzDoE/WKQ3AVv7F4z7DSn6t/uvmA1aKEW9f8e32VcE
-	U79sfpYmU+c0nLqDNHs7gMuqpIIWaClzjwWIDYfonT/Xb3uHa+5A6FXwMzzaIO+TZ/UK
-	qLkAavDWuQFXORO66kzFbDRaopBOdi8C8ZWRl7SD9/AHJl8svuaZ9I+CeTbRSWsuxTda
-	gS8BqY0t/lYLiIlWo7Z1Adelm8QpFDomcgfKxzYIO1Ek17SzfMOpb83fhR5h+5fqxMei
-	5JxceH+iCLyrjC4vm14n2qSpzhyD/nlf1z19O2qctZ0W0wfG/aGAZLAbsKjt0GEf+1mE
-	gTbQ==
-X-Received: by 10.43.5.73 with SMTP id of9mr5020256icb.92.1435343585681;
-	Fri, 26 Jun 2015 11:33:05 -0700 (PDT)
-Received: from dvm-ch2e-038.sys.comcast.net (a-96-119-89-79.sys.comcast.net.
-	[96.119.89.79]) by mx.google.com with ESMTPSA id
-	k74sm22126030iok.30.2015.06.26.11.33.05
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 26 Jun 2015 11:33:05 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Jun 2015 11:33:00 -0700
-Message-Id: <1435343580-15066-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-gnome][PATCH] gnome-panel: Fix build with gcc-5
+	Mon, 29 Jun 2015 14:41:54 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 14:43:33 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 29 Jun 2015 14:34:07 +0800
+Message-ID: <1435559647-37696-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-oe][PATCH] sysdig: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,89 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Jun 2015 18:33:10 -0000
+X-List-Received-Date: Mon, 29 Jun 2015 06:43:36 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+sysdig is a tool for system-level exploration and troubleshooting
+
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 ---
- .../gnome-panel/0001-Fix-build-with-gcc-5.patch    | 35 ++++++++++++++++++++++
- .../gnome-panel/gnome-panel_2.32.1.bb              | 13 +++++---
- 2 files changed, 44 insertions(+), 4 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch
+ meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb | 32 +++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
 new file mode 100644
-index 0000000..6b7fc5b
+index 0000000..72a0386
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Fix-build-with-gcc-5.patch
-@@ -0,0 +1,35 @@
-+From 20810fcf329c6e0b48b8e7602565ccc70c7ce62b Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 10 May 2015 02:10:59 -0700
-+Subject: [PATCH] Fix build with gcc 5
++++ b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
++DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
++system state and activity from a running Linux instance, then save, \
++filter and analyze."
++HOMEPAGE = "http://www.sysdig.org/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+cc1: error: ../../gnome-panel/libpanel-applets-private: No such file or
-+directory [-Werror=missing-include-dirs]
-+cc1: error: ../../gnome-panel/libpanel-applets-private: No such file or
-+directory [-Werror=missing-include-dirs]
-+cc1: error: ../../gnome-panel/libpanel-applets-private: No such file or
-+directory [-Werror=missing-include-dirs]
-+cc1: some warnings being treated as errors
++inherit cmake pkgconfig
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Pending
++DEPENDS = "luajit zlib ncurses"
++RDEPENDS_${PN} = "bash"
 +
-+ gnome-panel/libpanel-applet-private/Makefile.am | 1 -
-+ 1 file changed, 1 deletion(-)
 +
-+diff --git a/gnome-panel/libpanel-applet-private/Makefile.am b/gnome-panel/libpanel-applet-private/Makefile.am
-+index f12dee8..d556f12 100644
-+--- a/gnome-panel/libpanel-applet-private/Makefile.am
-++++ b/gnome-panel/libpanel-applet-private/Makefile.am
-+@@ -8,7 +8,6 @@ AM_CPPFLAGS =							\
-+ 	-I$(srcdir)						\
-+ 	-I$(top_srcdir)/gnome-panel				\
-+ 	-I$(top_builddir)/gnome-panel				\
-+-	-I$(top_builddir)/gnome-panel/libpanel-applets-private	\
-+ 	-I$(top_builddir)/gnome-panel/libpanel-util		\
-+ 	-DDATADIR=\""$(datadir)"\"				\
-+ 	-DPANEL_APPLETS_DIR=\"$(appletsdir)\"			\
-+-- 
-+2.1.4
++SRC_URI = "https://github.com/draios/sysdig/archive/${PV}.tar.gz"
 +
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-index 4957a99..3a413bd 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "GNOME panel"
--LICENSE = "GPLv2 & LGPLv2 & GFDLv1.1"
-+LICENSE = "GPL-2.0 & LGPL-2.0 & GFDL-1.1"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://COPYING-DOCS;md5=c9211dab3ae61e580f48432020784324 \
-@@ -9,12 +9,17 @@ SECTION = "x11/gnome"
- 
- PR = "r7"
- 
--DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ pango libwnck gnome-menus cairo libgweather dbus-glib librsvg libcanberra" 
-+DEPENDS = "gnome-doc-utils-native gconf glib-2.0 gnome-desktop gtk+ \
-+           pango libwnck gnome-menus cairo libgweather dbus-glib \
-+	   librsvg libcanberra"
-+RDEPENDS_${PN} = "python"
- 
- inherit gtk-doc gnome autotools-brokensep gettext pkgconfig gconf
- 
--SRCREV = "6a364b6a4a9beed3da9ca6f5b0dac81eb99dea2a"
--SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32"
-+SRCREV = "8292bd2b8a36df7eed3c760899400790cde68590"
-+SRC_URI = "git://git.gnome.org/gnome-panel;branch=gnome-2-32 \
-+           file://0001-Fix-build-with-gcc-5.patch \
-+	  "
- 
- S = "${WORKDIR}/git"
- 
++SRC_URI[md5sum] = "5fe96a3a0fd98b2157a40cb29af41afc"
++SRC_URI[sha256sum] = "6995e39be565514901b5cb587689ee2efbf8359293e4e597362382cccf0e9db6"
++
++DIR_ETC="/etc"
++EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
++                  -DUSE_BUNDLED_ZLIB="OFF" \
++                  -DBUILD_DRIVER="OFF" \
++                  -DUSE_BUNDLED_NCURSES="OFF" \
++                  -DDIR_ETC="${DIR_ETC}" \
++                '
++
++FILES_${PN} += " \
++    ${DIR_ETC}/* \
++    ${datadir}/zsh/* \ 
++    ${prefix}/src/*  \
++"
 -- 
-2.1.4
+1.8.4.2
 
 
