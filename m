@@ -1,27 +1,37 @@
-Return-Path: <biannm@cn.fujitsu.com>
+Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8910A65CF5
+	by mail.openembedded.org (Postfix) with ESMTP id 42D6C65CF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 08:49:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97858264"
+	Mon, 29 Jun 2015 09:32:37 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97860742"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 16:53:19 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 17:36:37 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T8ldT1021229
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T9UvSk024692
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 16:47:39 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 16:49:18 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Jun 2015 16:39:54 +0800
-Message-ID: <1435567194-38256-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 29 Jun 2015 17:30:57 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Mon, 29 Jun 2015 17:32:37 +0800
+From: "Li, Xin" <lixin.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v3] sgpio: add new recipe
+Thread-Index: AQHQNrdnqKlrTgTj00WgZ4zE+lXa7ZzU3dKAgAIClOCA7UzMwA==
+Date: Mon, 29 Jun 2015 09:32:36 +0000
+Message-ID: <A8FC939F80655644A89BB21CCD3741E87390B70C@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <20150122151631.GB2456@jama>
+	<1421981390-3786-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+	<20150128105343.GF2477@jama>
+	<A8FC939F80655644A89BB21CCD3741E8738F1C4B@G08CNEXMBPEKD02.g08.fujitsu.local>
+In-Reply-To: <A8FC939F80655644A89BB21CCD3741E8738F1C4B@G08CNEXMBPEKD02.g08.fujitsu.local>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.85]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH] sblim-sfcc: add new recipe
+Subject: Re: [meta-oe][PATCH v3] sgpio: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,39 +45,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jun 2015 08:49:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 29 Jun 2015 09:32:39 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 
-sblim-sfcc is a Small Footprint CIM Client library.
+Hello Martin,
 
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
----
- meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
+Sorry, I did not reply this mail immediately.
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-new file mode 100644
-index 0000000..1ec9940
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcc/sblim-sfcc_2.2.8.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Small Footprint CIM Client Library"
-+DESCRIPTION = "Small Footprint CIM Client Library Runtime Libraries"
-+HOMEPAGE = "http://www.sblim.org"
-+
-+SRC_URI = "http://netcologne.dl.sourceforge.net/project/sblim/${BPN}/${BPN}-${PV}.tar.bz2"
-+
-+SRC_URI[md5sum] = "0bac0dec19f17ec065b6c332a56d7bae"
-+SRC_URI[sha256sum] = "1b8f187583bc6c6b0a63aae0165ca37892a2a3bd4bb0682cd76b56268b42c3d6"
-+
-+LICENSE = "EPL-1.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
-+
-+DEPENDS = "curl"
-+
-+inherit autotools
--- 
-1.8.4.2
+The error can't be reproduced on my build host, so please cherry-pick it fr=
+om=20
+https://github.com/lixinfnst/meta-openembedded/commit/64dee8773e82741179f41=
+28daae71bfac625910e
 
+Thx,
+Li
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of L=
+i,
+> Xin
+>=20
+> > ERROR: Command Error: exit status: 1  Output:
+> > Applying patch Makefile-error-fix.patch patching file Makefile Hunk #1
+> > FAILED at 1.
+> > 1 out of 1 hunk FAILED -- rejects in file Makefile Patch
+> > Makefile-error-fix.patch does not apply (enforce with -f)
+> > ERROR: Function failed: patch_do_patch
+> > NOTE: Running task 24080 of 31430 (ID: 15862,
+> > /home/jenkins/oe/world/shr-core/meta-openembedded/meta-gnome/recipes-g
+> > no me/libwnck/libwnck3_3.0.2.bb, do_rm_work_all)
+> > ERROR: Logfile of failure stored in:
+> > /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueab
+> > i/sgpio/
+> > 1.2.0.10-r0/temp/log.do_patch.22993
+> > NOTE: recipe sgpio-1.2.0.10-r0: task do_patch: Failed
+> > ERROR: Task 15924
+> > (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-ext
+> > ende d/sgpio/sgpio_1.2.0.10.bb, do_patch) failed with exit code '1'
+> >
+> I will rebuild it on my Ubuntu host, and resent the patch.
+>=20
+> Best regards,
+> Li xin
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
