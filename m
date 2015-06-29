@@ -1,27 +1,27 @@
-Return-Path: <biannm@cn.fujitsu.com>
+Return-Path: <lixin.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 002D46AB99
+	by mail.openembedded.org (Postfix) with ESMTP id 2EE716AB99
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 06:43:35 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97852506"
+	Mon, 29 Jun 2015 07:37:06 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97854926"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 14:47:34 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 15:41:06 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T6fsTB012279
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T7ZQAI016189
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 14:41:54 +0800
-Received: from localhost.localdomain (10.167.226.31) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 14:43:33 +0800
-From: Bian Naimeng <biannm@cn.fujitsu.com>
+	Mon, 29 Jun 2015 15:35:26 +0800
+Received: from localhost.localdomain (10.167.226.85) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 15:37:05 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Jun 2015 14:34:07 +0800
-Message-ID: <1435559647-37696-1-git-send-email-biannm@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Mon, 29 Jun 2015 15:36:49 +0800
+Message-ID: <1435563409-1616-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.31]
-Subject: [meta-oe][PATCH] sysdig: add new recipe
+X-Originating-IP: [10.167.226.85]
+Subject: [meta-oe][PATCH] sg3-utils: 1.38 -> 1.40
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,55 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jun 2015 06:43:36 -0000
+X-List-Received-Date: Mon, 29 Jun 2015 07:37:08 -0000
 Content-Type: text/plain
 
-sysdig is a tool for system-level exploration and troubleshooting
-
-Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb | 32 +++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+ .../sg3-utils/{sg3-utils_1.38.bb => sg3-utils_1.40.bb}               | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.38.bb => sg3-utils_1.40.bb} (77%)
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
-new file mode 100644
-index 0000000..72a0386
---- /dev/null
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
-+DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
-+system state and activity from a running Linux instance, then save, \
-+filter and analyze."
-+HOMEPAGE = "http://www.sysdig.org/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.40.bb
+similarity index 77%
+rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
+rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.40.bb
+index 5ce11b6..754e03f 100644
+--- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.38.bb
++++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.40.bb
+@@ -9,8 +9,9 @@ LICENSE = "GPLv2+ & BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f90da7fc52172599dbf082d7620f18ca"
+ 
+ SRC_URI = "http://sg.danny.cz/sg/p/sg3_utils-${PV}.tgz"
+-SRC_URI[md5sum] = "e532a3d6648c422347f6d84cac469263"
+-SRC_URI[sha256sum] = "d7d3a8b4b698e2c17c8f16bb876946720260d4d659d471c5d7c12ce652ba38f1"
 +
-+inherit cmake pkgconfig
-+
-+DEPENDS = "luajit zlib ncurses"
-+RDEPENDS_${PN} = "bash"
-+
-+
-+SRC_URI = "https://github.com/draios/sysdig/archive/${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "5fe96a3a0fd98b2157a40cb29af41afc"
-+SRC_URI[sha256sum] = "6995e39be565514901b5cb587689ee2efbf8359293e4e597362382cccf0e9db6"
-+
-+DIR_ETC="/etc"
-+EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
-+                  -DUSE_BUNDLED_ZLIB="OFF" \
-+                  -DBUILD_DRIVER="OFF" \
-+                  -DUSE_BUNDLED_NCURSES="OFF" \
-+                  -DDIR_ETC="${DIR_ETC}" \
-+                '
-+
-+FILES_${PN} += " \
-+    ${DIR_ETC}/* \
-+    ${datadir}/zsh/* \ 
-+    ${prefix}/src/*  \
-+"
++SRC_URI[md5sum] = "4a74ed491b0891fc60cd91d2b5d68331"
++SRC_URI[sha256sum] = "44a9ecfd3af018fa9f3586067a8fa5f4874451c3d773d74436d262a7e530ee83"
+ 
+ inherit autotools-brokensep
+ 
 -- 
 1.8.4.2
 
