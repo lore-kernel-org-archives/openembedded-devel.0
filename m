@@ -1,29 +1,35 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1295B75620
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F91665CF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 09:57:17 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97861799"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 18:01:18 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T9tdCs026207
+	Mon, 29 Jun 2015 10:17:51 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 6AAC03156FA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 17:55:39 +0800
-Received: from localhost.localdomain (10.167.226.26) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 17:57:18 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Jun 2015 17:57:35 +0800
-Message-ID: <1435571855-62168-10-git-send-email-leimaohui@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
-References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+	Mon, 29 Jun 2015 12:17:51 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id i7T7G_5V_ach
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jun 2015 12:17:49 +0200 (CEST)
+Received: from [172.22.22.61] (55d452b7.access.ecotel.net [85.212.82.183])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id B1C483156F95
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jun 2015 12:17:49 +0200 (CEST)
+Message-ID: <55911B4D.7090303@opendreambox.org>
+Date: Mon, 29 Jun 2015 12:17:49 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v2 9/9] pywbem: add new recipe
+To: openembedded-devel@lists.openembedded.org
+References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+In-Reply-To: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+Subject: Re: [meta-oe][PATCH v2 0/9] add openlmi and it's depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,60 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Jun 2015 09:57:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 29 Jun 2015 10:17:55 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-pywbem is dependence of openlmi.
+Hello Lei,
 
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
----
- meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb | 36 +++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+On 29.06.2015 11:57, Lei Maohui wrote:
+> OpenLMI  = Open Linux Management Infrastructure.
+> OpenLMI is open-source project aiming to improve management of Linux systems using WBEM standards.
+> 
+> Lei Maohui (9):
+>   openlmi: add new recipe openlmi
+>   cim-schema-exper: add new recipe for openlmi
+>   cmpi-bindings: add new recipe for openlmi
+>   konkretcmpi:add new recipe for openlmi
+>   sblim-sfcb: add new recipe for openlmi
+>   sblim-sfcCommon: add new recipe
+>   sblim-cmpi-devel: add new recipe
+>   cim-schema_2.40.0.bb: delete
+>   pywbem: add new recipe
 
-diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-new file mode 100644
-index 0000000..2f9a5bd
---- /dev/null
-+++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Python WBEM Client and Provider Interface"
-+DESCRIPTION = "\
-+A Python library for making CIM (Common Information Model) operations over \
-+HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
-+WBEM client should be easy to use and not necessarily require a large amount \
-+of programming knowledge. It is suitable for a large range of tasks from \
-+simply poking around to writing web and GUI applications. \
-+\
-+WBEM, or Web Based Enterprise Management is a manageability protocol, like \
-+SNMP, standardised by the Distributed Management Task Force (DMTF) available \
-+at http://www.dmtf.org/standards/wbem. \
-+\
-+It also provides a Python provider interface, and is the fastest and easiest \
-+way to write providers on the planet."
-+HOMEPAGE = "http://pywbem.sf.net/"
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
-+SECTION = "Development/Libraries"
-+DEPENDS = "python-m2crypto-native"
-+SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
-+SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
-+SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
-+
-+S = "${WORKDIR}/${BP}-dev"
-+
-+inherit setuptools python-dir
-+
-+do_install_append() {
-+    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
-+    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
-+
-+    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
-+    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
-+}
-+
-+BBCLASSEXTEND = "native"
--- 
-1.8.4.2
+you should order your patches in a way that doesn't break git bisect,
+i.e. dependencies should come first.
 
+Regards,
+Andreas
 
