@@ -1,29 +1,29 @@
 Return-Path: <leimaohui@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id DF52175C1C
+	by mail.openembedded.org (Postfix) with ESMTP id 1295B75620
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 29 Jun 2015 09:57:17 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97861797"
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97861799"
 Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
 	by heian.cn.fujitsu.com with ESMTP; 29 Jun 2015 18:01:18 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
 	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T9tcir026204
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5T9tdCs026207
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 17:55:38 +0800
+	Mon, 29 Jun 2015 17:55:39 +0800
 Received: from localhost.localdomain (10.167.226.26) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 17:57:17 +0800
+	Server (TLS) id 14.3.181.6; Mon, 29 Jun 2015 17:57:18 +0800
 From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Jun 2015 17:57:34 +0800
-Message-ID: <1435571855-62168-9-git-send-email-leimaohui@cn.fujitsu.com>
+Date: Mon, 29 Jun 2015 17:57:35 +0800
+Message-ID: <1435571855-62168-10-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
 References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v2 8/9] cim-schema_2.40.0.bb: delete
+Subject: [meta-oe][PATCH v2 9/9] pywbem: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,51 +40,56 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Mon, 29 Jun 2015 09:57:18 -0000
 Content-Type: text/plain
 
-Cim-schema_2.40.0.bb has been renamed to cim-schema-final_2.40.0.bb,so,delete.
+pywbem is dependence of openlmi.
 
 Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../cim-schema/cim-schema_2.40.0.bb                | 31 ----------------------
- 1 file changed, 31 deletions(-)
- delete mode 100644 meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
+ meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb | 36 +++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
 
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb b/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
-deleted file mode 100644
-index ff6c29d..0000000
---- a/meta-networking/recipes-support/cim-schema/cim-schema_2.40.0.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--require cim-schema.inc
--
--LICENSE = "DMTF"
--
--SRC_URI = "http://dmtf.org/sites/default/files/cim/cim_schema_v2400/cim_schema_${PV}Final-MOFs.zip \
--           file://LICENSE \
--          "
--SRC_URI[md5sum] = "a9bdf17c7374e3b5b7adeaac4842c4ad"
--SRC_URI[sha256sum] = "dbfa3064ea427acd71a4bebbc172ca2dc44b0b09a6d83b0945b9ffa988a9058a"
--LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=eecc6f71a56ff3caf17f15bf7aeac7b4"
--
--do_unpack() {
--        unzip -q ${DL_DIR}/cim_schema_${PV}Final-MOFs.zip -d ${S}
--        cp -f ${FILE_DIRNAME}/files/LICENSE ${WORKDIR}/
--}
--
--do_install() {
--        install -d -m 0755 ${D}${datadir}/mof/cimv${PV}/
--        install -d -m 0755 ${D}${datadir}/doc/cim-schema-${PV}
--        install -m 644 ${WORKDIR}/LICENSE ${D}${datadir}/doc/cim-schema-${PV}
--
--        cp -a ${S}/* ${D}${datadir}/mof/cimv${PV}/	
--        for i in `find ${D}${datadir}/mof/cimv${PV} -name "*.mof"`; do
--                sed -i -e 's/\r//g' $i
--        done
--        ln -s cimv${PV} ${D}${datadir}/mof/cim-current
--        ln -s cim_schema_${PV}.mof ${D}${datadir}/mof/cim-current/CIM_Schema.mof
--}
--
--FILES_${PN} = "${datadir}/mof/* ${datadir}/doc/*"
--FILES_${PN}-doc = ""
+diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+new file mode 100644
+index 0000000..2f9a5bd
+--- /dev/null
++++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Python WBEM Client and Provider Interface"
++DESCRIPTION = "\
++A Python library for making CIM (Common Information Model) operations over \
++HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
++WBEM client should be easy to use and not necessarily require a large amount \
++of programming knowledge. It is suitable for a large range of tasks from \
++simply poking around to writing web and GUI applications. \
++\
++WBEM, or Web Based Enterprise Management is a manageability protocol, like \
++SNMP, standardised by the Distributed Management Task Force (DMTF) available \
++at http://www.dmtf.org/standards/wbem. \
++\
++It also provides a Python provider interface, and is the fastest and easiest \
++way to write providers on the planet."
++HOMEPAGE = "http://pywbem.sf.net/"
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
++SECTION = "Development/Libraries"
++DEPENDS = "python-m2crypto-native"
++SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
++SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
++SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
++
++S = "${WORKDIR}/${BP}-dev"
++
++inherit setuptools python-dir
++
++do_install_append() {
++    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
++    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
++
++    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
++    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
++}
++
++BBCLASSEXTEND = "native"
 -- 
 1.8.4.2
 
