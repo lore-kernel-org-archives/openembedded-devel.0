@@ -1,34 +1,39 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 8237775C0C
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 49F9375C0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 10:05:03 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Z9sPW-0003xH-Qc for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Jun 2015 12:05:02 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 12:05:02 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 30 Jun 2015 10:16:10 +0000 (UTC)
+Received: by qkhu186 with SMTP id u186so2650160qkh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 12:05:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Tue, 30 Jun 2015 12:00:26 +0200
-Message-ID: <mmtpbq$67d$2@ger.gmane.org>
+	Tue, 30 Jun 2015 03:16:11 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-type;
+	bh=9/AimJyFTD3vsdbsP7+eEwlR/ye9qpbEzEeIOfrXI/Q=;
+	b=HYSe6zrY3JXdErkNuKQi0r2A0isz65B0vQk7GwUf6fqbP3CnRltwLfOv/XKFOfWN+H
+	xSb6NKpvT01CaS1pS7J5HbBgg9dlcXqlYxpbTBcsNumj7ii3bj+O6xnxemFk/MiiINAn
+	ZR1yWH52LY4AxVGPoZTwj6oyo6Wnhiq3Q3pQ09Qf9FpZuUutdAGYq/My5PzNg+46qp8B
+	98nNXURZBXfrdlQ6MuIzJUcy10PBu/mlVVq0+xQvqwTFjyeX3iLH236gZ3x3s+Or2znJ
+	v8cql6t08DYBr6t/WDNLhOJp+pqPDzxsX8pn7+eO7OY2JM7tVJ+xCz4w08y38PlSMg6L
+	f3WA==
+X-Gm-Message-State: ALoCoQlF0Sp/9jPaacGGZqTzswBcSR93d+mXbI7sEN+5VuLiM1xMnac84HYRDZHukw2cSB8k1mgv
+X-Received: by 10.55.18.197 with SMTP id 66mr22941607qks.13.1435659371616;
+	Tue, 30 Jun 2015 03:16:11 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.102.231 with HTTP; Tue, 30 Jun 2015 03:15:52 -0700 (PDT)
+In-Reply-To: <mmtpa9$67d$1@ger.gmane.org>
 References: <5591E548.8090706@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-In-Reply-To: <5591E548.8090706@gmail.com>
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: cmake update broke mariadb
+	<CAJTo0LbVgo+rn3rPPbj=ho-aDc6WuHTq83UcR8Y=HNAique81w@mail.gmail.com>
+	<mmtpa9$67d$1@ger.gmane.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 30 Jun 2015 11:15:52 +0100
+Message-ID: <CAJTo0LaUtsGYH99Dqr2zyWB38HeM5w-K6Jw0q2VFUQMrwFC6rQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] cmake update broke mariadb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,37 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 10:05:03 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Jun 2015 10:16:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 30 June 2015 at 10:59, Koen Kooi <koen@dominion.thruhere.net> wrote:
 
-akuster808 schreef op 30-06-15 om 02:39:
-> 
-> Hello,
-> 
-> eo-core commit f8661aa "cmake: Upgrade 2.8.12.2 -> 3.2.2" broke mariadb
-> in meta-oe.
-> 
-> DOes  the person who updated cmake need to fix this or the person who is 
-> feeling the pain will be fixing it ?
+> CMake Error at CMakeLists.txt:86 (PROJECT):
+> |   The CMAKE_C_COMPILER:
+> |
+> |     gcc
+> |
+> |   is not a full path and was not found in the PATH.
+>
 
-I've been looking at this mariadb error and I've made no progress beyond
-upgrading it to the latest 5.5.x, which shows the same cmake problem
+I'm definitely not the cmake maintainer and barely understand cmake files,
+but the new release needs that to be a full path and not a filename.  The
+recipe/class does this (as demonstrated by it working in
+oe-core/meta-multimedia) so does the mariadb recipe do something else or
+use a different class?
 
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFVkmi6MkyGM64RGpERAmrsAJ0bCkH5omgOzpnB0dT8A6amMrYH6gCfU50x
-ZObEl6kQHbI+QDeiui3GxfU=
-=E2ZF
------END PGP SIGNATURE-----
-
+Ross
 
