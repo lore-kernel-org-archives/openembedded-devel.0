@@ -1,34 +1,35 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
-	[209.85.192.173])
-	by mail.openembedded.org (Postfix) with ESMTP id AF3427320D
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id CD23675C3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 01:45:32 +0000 (UTC)
-Received: by pdbci14 with SMTP id ci14so126251844pdb.2
+	Tue, 30 Jun 2015 07:26:18 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97899399"
+Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 30 Jun 2015 15:30:16 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t5U7OaqG010150
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Jun 2015 18:45:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=8tQFY4tuO7jGwA4rfj2H1Jdy8A1AqOOsQQVGX8f5kLc=;
-	b=phjlHw+2Yd4Ab666qpc+wJ8mmBq4a91i50XwNkHZhDHJyj4t4rC1d/ZXvWvbIk4hNx
-	3P0xw9xS432zIpVLbZkuvMEbQiIQxYh909/lgTJ2juMwDUTREAN8EOuCXhfKipghjEuD
-	ebMsN2YtPLkSD138ijPlBm0YlmZXuH3sjjWSm2Ve7KJyDvT7g33O36Vb7HoD8Dis9SnC
-	L0qUvjs/zDqC76cTmoJfq972ZP7v0tLx7KIAbuqewz7Jal92LXECFQz5WDMQPz36sd41
-	X9tM8IMAUhvncopMuqIJDcx57PsZcBo0pC1X1jaTao5RUU5zw/BoHl0jeSEvsvw7RB9+
-	tajA==
-X-Received: by 10.68.135.233 with SMTP id pv9mr38517418pbb.115.1435628733838; 
-	Mon, 29 Jun 2015 18:45:33 -0700 (PDT)
-Received: from e6520.cablelabs.com
-	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by mx.google.com with ESMTPSA id o7sm43621617pdi.16.2015.06.29.18.45.32
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 29 Jun 2015 18:45:32 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Jun 2015 18:45:27 -0700
-Message-Id: <1435628727-3417-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-qt5][fido][PATCH] qtwebkit: remove false dependency on leveldb
+	Tue, 30 Jun 2015 15:24:37 +0800
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0181.006; Tue, 30 Jun 2015 15:26:16 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v2 0/9] add openlmi and it's depends
+Thread-Index: AQHQslTofCu+D2NQdUyUY/ZYaIWqhp3Czk4AgAHX/HA=
+Date: Tue, 30 Jun 2015 07:26:16 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDB2874D@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<55911B4D.7090303@opendreambox.org> <20150629111252.GA2393@jama>
+In-Reply-To: <20150629111252.GA2393@jama>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.26]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH v2 0/9] add openlmi and it's depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 01:45:33 -0000
+X-List-Received-Date: Tue, 30 Jun 2015 07:26:20 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-The qtwebkit configure test never succeeds in finding system leveldb
-(ie qtwebkit internal copy of leveldb is always used) so leveldb is a
-false dependency.
-
-This change allows qtwebkit to be built in a disto which enables
-security_flags.inc (it's otherwise blocked since the leveldb recipe
-fails to build when security_flags.inc is used).
-
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- recipes-qt/qt5/qtwebkit_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index 77568af..759a81d 100644
---- a/recipes-qt/qt5/qtwebkit_git.bb
-+++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
-     file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee \
- "
- 
--DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt leveldb"
-+DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt"
- 
- # qemuarm build fails with:
- # | {standard input}: Assembler messages:
--- 
-1.9.1
-
+SGkgTWFydGluLCBBbmRyZWFzDQoNCg0KPiA+ID4gTGVpIE1hb2h1aSAoOSk6DQo+ID4gPiAgIG9w
+ZW5sbWk6IGFkZCBuZXcgcmVjaXBlIG9wZW5sbWkNCj4gPiA+ICAgY2ltLXNjaGVtYS1leHBlcjog
+YWRkIG5ldyByZWNpcGUgZm9yIG9wZW5sbWkNCj4gPiA+ICAgY21waS1iaW5kaW5nczogYWRkIG5l
+dyByZWNpcGUgZm9yIG9wZW5sbWkNCj4gPiA+ICAga29ua3JldGNtcGk6YWRkIG5ldyByZWNpcGUg
+Zm9yIG9wZW5sbWkNCj4gPiA+ICAgc2JsaW0tc2ZjYjogYWRkIG5ldyByZWNpcGUgZm9yIG9wZW5s
+bWkNCj4gPiA+ICAgc2JsaW0tc2ZjQ29tbW9uOiBhZGQgbmV3IHJlY2lwZQ0KPiA+ID4gICBzYmxp
+bS1jbXBpLWRldmVsOiBhZGQgbmV3IHJlY2lwZQ0KPiA+ID4gICBjaW0tc2NoZW1hXzIuNDAuMC5i
+YjogZGVsZXRlDQo+ID4gPiAgIHB5d2JlbTogYWRkIG5ldyByZWNpcGUNCj4gPg0KPiA+IHlvdSBz
+aG91bGQgb3JkZXIgeW91ciBwYXRjaGVzIGluIGEgd2F5IHRoYXQgZG9lc24ndCBicmVhayBnaXQg
+YmlzZWN0LA0KPiA+IGkuZS4gZGVwZW5kZW5jaWVzIHNob3VsZCBjb21lIGZpcnN0Lg0KDQpJIGdv
+dCBpdC4gVGhhbmsgeW91Lg0KDQo+IA0KPiBJIGFncmVlLCBJJ3ZlIHRyaWVkIHRvIHJlLW9yZGVy
+IHRoZW0gcXVpY2tseSB3aGVuIGNoZXJyeS1waWNraW5nIHRvIG1hc3Rlci1uZXh0Lg0KDQpUaGFu
+ayB5b3UgdmVyeSBtdWNoIQ0KDQoNClJlZ2FyZHMNCg0KTGVpDQoNCg==
 
