@@ -1,26 +1,40 @@
-Return-Path: <stefan@herbrechtsmeier.net>
-X-Greylist: delayed 474 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 30 Jun 2015 10:43:26 UTC
-Received: from dd5638.kasserver.com (dd5638.kasserver.com [85.13.130.155])
-	by mail.openembedded.org (Postfix) with ESMTP id BB2A175C8C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wg0-f48.google.com (mail-wg0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id DF63B75C8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 10:43:26 +0000 (UTC)
-Received: from [129.70.144.65] (astra.TechFak.Uni-Bielefeld.DE [129.70.144.65])
-	by dd5638.kasserver.com (Postfix) with ESMTPSA id 312EC56012C4;
-	Tue, 30 Jun 2015 12:35:32 +0200 (CEST)
+	Tue, 30 Jun 2015 11:40:11 +0000 (UTC)
+Received: by wgjx7 with SMTP id x7so7148522wgj.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jun 2015 04:40:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	bh=GpVYhPExHnVOki9yPM2JVyfXfa/nxIxrfUFtKDZuu5w=;
+	b=ElJnV3ARl62gmhJ4BuS+9l5LpUcD9WUlaJenzAoWAWOuU8gG55CMcKRvwLYQZv/wex
+	Bsk4CVyyMEC1rEJe4jmn19lkMk4AHiNoe/Q/LN8lxrcy+F/V8KKjdOsMLJ8wESoJRGkt
+	sk50r3ChrPet1H53pzLDndtRDSnn8mSqTKYAZAR+vvIx53Q7tInaJSMg6N6vFBtNYJMd
+	wBubyby0r6wYCcZpKgHqpLOoVeyTp4x2qlrtS/uB6mwC371GoiMiWY3gM0voACWUzWqR
+	qIsT86VKWywd11L/2o2YrAfUsHK8KNrIaRAXKQMBK70ekl5DPRFVobTF3b3U6dBeUhec
+	Tiaw==
+X-Received: by 10.180.23.8 with SMTP id i8mr33385955wif.39.1435664412320;
+	Tue, 30 Jun 2015 04:40:12 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by mx.google.com with ESMTPSA id q3sm68599261wjr.38.2015.06.30.04.40.10
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 30 Jun 2015 04:40:10 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 30 Jun 2015 13:40:22 +0200
 To: openembedded-devel@lists.openembedded.org
-References: <5591E548.8090706@gmail.com>
-	<CAJTo0LbVgo+rn3rPPbj=ho-aDc6WuHTq83UcR8Y=HNAique81w@mail.gmail.com>
-	<mmtpa9$67d$1@ger.gmane.org>
-From: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-Message-ID: <55927020.3010605@herbrechtsmeier.net>
-Date: Tue, 30 Jun 2015 12:32:00 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
-	Thunderbird/38.0.1
+Message-ID: <20150630114022.GA2396@jama>
+References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<55911B4D.7090303@opendreambox.org> <20150629111252.GA2393@jama>
+	<1B56A49860EB2D45ADE3731B15C959FDB2874D@G08CNEXMBPEKD01.g08.fujitsu.local>
 MIME-Version: 1.0
-In-Reply-To: <mmtpa9$67d$1@ger.gmane.org>
-Cc: openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] cmake update broke mariadb
+In-Reply-To: <1B56A49860EB2D45ADE3731B15C959FDB2874D@G08CNEXMBPEKD01.g08.fujitsu.local>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-oe][PATCH v2 0/9] add openlmi and it's depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,74 +48,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 10:43:29 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Jun 2015 11:40:12 -0000
+X-Groupsio-MsgNum: 56085
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="qMm9M+Fa2AknHoGS"
+Content-Disposition: inline
 
-Am 30.06.2015 um 11:59 schrieb Koen Kooi:
-> Burton, Ross schreef op 30-06-15 om 11:44:
->> On 30 June 2015 at 01:39, akuster808 <akuster808@gmail.com> wrote:
->>
->>> eo-core commit f8661aa "cmake: Upgrade 2.8.12.2 -> 3.2.2" broke mariadb
->>> in meta-oe.
->>>
->>> DOes  the person who updated cmake need to fix this or the person who
->>> is feeling the pain will be fixing it ?
->>>
->> Depends on what the breakage is really.  Can you provide build logs?
-> ERROR: Function failed: do_configure (log file is located at
-> /build/linaro/build/build/tmp-glibc/work/x86_64-linux/mariadb-native/5.5.44-r0/temp/log.do_configure.25603)
-> ERROR: Logfile of failure stored in:
-> /build/linaro/build/build/tmp-glibc/work/x86_64-linux/mariadb-native/5.5.44-r0/temp/log.do_configure.25603
-> Log data follows:
-> | DEBUG: Executing python function sysroot_cleansstate
-> | DEBUG: Python function sysroot_cleansstate finished
-> | DEBUG: Executing shell function autotools_preconfigure
-> | DEBUG: Shell function autotools_preconfigure finished
-> | DEBUG: Executing python function autotools_copy_aclocals
-> | DEBUG: Python function autotools_copy_aclocals finished
-> | DEBUG: Executing shell function do_configure
-> | -- Running cmake version 3.2.2
-> | -- The C compiler identification is GNU 4.8.3
-> | -- The CXX compiler identification is GNU 4.8.3
-> | CMake Error at CMakeLists.txt:86 (PROJECT):
-> |   The CMAKE_C_COMPILER:
-> |
-> |     gcc
-> |
-> |   is not a full path and was not found in the PATH.
-> |
-> |   Tell CMake where to find the compiler by setting either the environment
-> |   variable "CC" or the CMake cache entry CMAKE_C_COMPILER to the full path to
-> |   the compiler, or to the compiler name if it is in the PATH.
-> |
-> |
-> | CMake Error at CMakeLists.txt:86 (PROJECT):
-> |   The CMAKE_CXX_COMPILER:
-> |
-> |     g++
-> |
-> |   is not a full path and was not found in the PATH.
-> |
-> |   Tell CMake where to find the compiler by setting either the environment
-> |   variable "CXX" or the CMake cache entry CMAKE_CXX_COMPILER to the full path
-> |   to the compiler, or to the compiler name if it is in the PATH.
-> |
-> |
-> | -- Configuring incomplete, errors occurred!
-The problem should be the usage of cmake for a native package.
+--qMm9M+Fa2AknHoGS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The cmake.bbclass disables the host path and thereby CMake could not 
-find the gcc binary.
+On Tue, Jun 30, 2015 at 07:26:16AM +0000, Lei, Maohui wrote:
+> Hi Martin, Andreas
+>=20
+>=20
+> > > > Lei Maohui (9):
+> > > >   openlmi: add new recipe openlmi
+> > > >   cim-schema-exper: add new recipe for openlmi
+> > > >   cmpi-bindings: add new recipe for openlmi
+> > > >   konkretcmpi:add new recipe for openlmi
+> > > >   sblim-sfcb: add new recipe for openlmi
+> > > >   sblim-sfcCommon: add new recipe
+> > > >   sblim-cmpi-devel: add new recipe
+> > > >   cim-schema_2.40.0.bb: delete
+> > > >   pywbem: add new recipe
+> > >
+> > > you should order your patches in a way that doesn't break git bisect,
+> > > i.e. dependencies should come first.
+>=20
+> I got it. Thank you.
+>=20
+> >=20
+> > I agree, I've tried to re-order them quickly when cherry-picking to mas=
+ter-next.
+>=20
+> Thank you very much!
 
-I think the cmake.bbclass need to distinguish between cross and native 
-build and set the following for native build:
-set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH )
-set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH )
-set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH )
+=46rom last batch from fujitsu following recipes fail to build in world bui=
+lds:
+konkretcmpi, sblim-sfcb, cmpi-bindings, openwsman, sysdig
+and libldb (still pending from samba patchset)
 
-This allows CMake to search the binaries, libraries and includes first 
-in the CMAKE_FIND_ROOT_PATH, then in the CMAKE_SYSROOT and then in the 
-non-rooted directories.
+build logs in:
+http://errors.yoctoproject.org/Errors/Build/6836/
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--qMm9M+Fa2AknHoGS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlWSgCUACgkQN1Ujt2V2gBzEfQCdEO+RyHV5wP50AhQdQI1trpkG
+ySgAn0/vydHrmRJBNAcRu9/TObla3GjX
+=bEWD
+-----END PGP SIGNATURE-----
+
+--qMm9M+Fa2AknHoGS--
