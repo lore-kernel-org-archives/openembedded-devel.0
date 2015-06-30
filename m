@@ -1,44 +1,26 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 3708A75BFC
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
+	by mail.openembedded.org (Postfix) with ESMTP id 267CD75C82
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 12:53:32 +0000 (UTC)
-Received: by wiar9 with SMTP id r9so35310751wia.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 05:53:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:content-type:mime-version:subject:from
-	:in-reply-to:date:cc:content-transfer-encoding:message-id:references
-	:to; bh=+pYSVZeCfLUn2HFfW2FvXOuvsUe5hF5nhtpMpjZHYRU=;
-	b=jyUkdxKfDakzAPVqPwLRlclhHINUBDNkpSP2l5y132x0TeU10yXhzsAq+sPJV8jt0L
-	MlbsqJ17ccS+snCIrWXjoHe5hU8qTbFr55vNvMCj+HmZCx/L2XyxD/8IyhnOvJ3bNI6r
-	rSO9+bHuAJz8b26mZ4X5m9Fl3ySHCVud6AdmBkrY7sWUh+bEILti44dJRMBQgQI/vm2o
-	6mYcRUI+TIxoC0IMXTWkqaTwcIl+bMBncYj0jLDOcO7EWiSfYmrMzVz/xjneZ0qg8orp
-	W/UyWCGKi0zIBQnK9143iR1l2PgnAzxqMsIWV6FezUuBBvC7XkKy/sxS4iyRwAgCxN99
-	Nlxw==
-X-Gm-Message-State: ALoCoQnhK7y9mcUsbpQxR6J8wiEmTgf7vcenWWbH0HEvyP36BCbB1qN6mTA7QaFWh73IBIKf5Ucf
-X-Received: by 10.180.106.195 with SMTP id gw3mr33674559wib.25.1435668813173; 
-	Tue, 30 Jun 2015 05:53:33 -0700 (PDT)
-Received: from ?IPv6:2001:610:612::7943:57f:5004:cee1?
-	([2001:610:612:0:7943:57f:5004:cee1])
-	by mx.google.com with ESMTPSA id e2sm43403687wjw.12.2015.06.30.05.53.31
-	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
-	Tue, 30 Jun 2015 05:53:32 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2098\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <55927020.3010605@herbrechtsmeier.net>
-Date: Tue, 30 Jun 2015 14:53:29 +0200
-Message-Id: <00D88AEB-7B18-4906-8FD3-11B46A01BC11@dominion.thruhere.net>
-References: <5591E548.8090706@gmail.com>
-	<CAJTo0LbVgo+rn3rPPbj=ho-aDc6WuHTq83UcR8Y=HNAique81w@mail.gmail.com>
-	<mmtpa9$67d$1@ger.gmane.org> <55927020.3010605@herbrechtsmeier.net>
-To: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-X-Mailer: Apple Mail (2.2098)
-Cc: openembedded-devel@lists.openembedded.org,
-	openembedded-core@lists.openembedded.org
-Subject: Re: [OE-core] cmake update broke mariadb
+	Tue, 30 Jun 2015 15:08:36 +0000 (UTC)
+Received: by mail.chez-thomas.org (Postfix, from userid 1998)
+	id 79E42F811DB; Tue, 30 Jun 2015 09:08:37 -0600 (MDT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	hermes.chez-thomas.org
+X-Spam-Level: 
+X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from [192.168.1.114] (zeus [192.168.1.114])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 25EEDF811DB;
+	Tue, 30 Jun 2015 09:08:37 -0600 (MDT)
+Message-ID: <5592B122.4020208@mlbassoc.com>
+Date: Tue, 30 Jun 2015 09:09:22 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-browser] New chromium warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,122 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 12:53:35 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Jun 2015 15:08:37 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
+I'm now seeing these warnings with the latest OE-core:
+   WARNING: chromium: invalid PACKAGECONFIG: component-build
+   WARNING: chromium: invalid PACKAGECONFIG: use-gl
+   WARNING: chromium: invalid PACKAGECONFIG: ignore-lost-context
 
-> Op 30 jun. 2015, om 12:32 heeft Stefan Herbrechtsmeier =
-<stefan@herbrechtsmeier.net> het volgende geschreven:
->=20
-> Am 30.06.2015 um 11:59 schrieb Koen Kooi:
->> Burton, Ross schreef op 30-06-15 om 11:44:
->>> On 30 June 2015 at 01:39, akuster808 <akuster808@gmail.com> wrote:
->>>=20
->>>> eo-core commit f8661aa "cmake: Upgrade 2.8.12.2 -> 3.2.2" broke =
-mariadb
->>>> in meta-oe.
->>>>=20
->>>> DOes  the person who updated cmake need to fix this or the person =
-who
->>>> is feeling the pain will be fixing it ?
->>>>=20
->>> Depends on what the breakage is really.  Can you provide build logs?
->> ERROR: Function failed: do_configure (log file is located at
->> =
-/build/linaro/build/build/tmp-glibc/work/x86_64-linux/mariadb-native/5.5.4=
-4-r0/temp/log.do_configure.25603)
->> ERROR: Logfile of failure stored in:
->> =
-/build/linaro/build/build/tmp-glibc/work/x86_64-linux/mariadb-native/5.5.4=
-4-r0/temp/log.do_configure.25603
->> Log data follows:
->> | DEBUG: Executing python function sysroot_cleansstate
->> | DEBUG: Python function sysroot_cleansstate finished
->> | DEBUG: Executing shell function autotools_preconfigure
->> | DEBUG: Shell function autotools_preconfigure finished
->> | DEBUG: Executing python function autotools_copy_aclocals
->> | DEBUG: Python function autotools_copy_aclocals finished
->> | DEBUG: Executing shell function do_configure
->> | -- Running cmake version 3.2.2
->> | -- The C compiler identification is GNU 4.8.3
->> | -- The CXX compiler identification is GNU 4.8.3
->> | CMake Error at CMakeLists.txt:86 (PROJECT):
->> |   The CMAKE_C_COMPILER:
->> |
->> |     gcc
->> |
->> |   is not a full path and was not found in the PATH.
->> |
->> |   Tell CMake where to find the compiler by setting either the =
-environment
->> |   variable "CC" or the CMake cache entry CMAKE_C_COMPILER to the =
-full path to
->> |   the compiler, or to the compiler name if it is in the PATH.
->> |
->> |
->> | CMake Error at CMakeLists.txt:86 (PROJECT):
->> |   The CMAKE_CXX_COMPILER:
->> |
->> |     g++
->> |
->> |   is not a full path and was not found in the PATH.
->> |
->> |   Tell CMake where to find the compiler by setting either the =
-environment
->> |   variable "CXX" or the CMake cache entry CMAKE_CXX_COMPILER to the =
-full path
->> |   to the compiler, or to the compiler name if it is in the PATH.
->> |
->> |
->> | -- Configuring incomplete, errors occurred!
-> The problem should be the usage of cmake for a native package.
->=20
-> The cmake.bbclass disables the host path and thereby CMake could not =
-find the gcc binary.
->=20
-> I think the cmake.bbclass need to distinguish between cross and native =
-build and set the following for native build:
-> set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH )
-> set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH )
-> set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH )
->=20
-> This allows CMake to search the binaries, libraries and includes first =
-in the CMAKE_FIND_ROOT_PATH, then in the CMAKE_SYSROOT and then in the =
-non-rooted directories.
+I looked at the recipes and those config strings are not mentioned
+in the PACKAGECONFIG setup which is what is triggering the error.
 
-THanks for the hint, I=E2=80=99m going to test something like this:
-
-[koen@thinkpad classes]$ git diff
-diff --git a/meta/classes/cmake.bbclass b/meta/classes/cmake.bbclass
-index b0a3972..ead4a26 100644
---- a/meta/classes/cmake.bbclass
-+++ b/meta/classes/cmake.bbclass
-@@ -27,6 +27,13 @@ OECMAKE_RPATH ?=3D ""
- OECMAKE_PERLNATIVE_DIR ??=3D ""
- OECMAKE_EXTRA_ROOT_PATH ?=3D ""
-=20
-+OECMAKE_PATHS ?=3D ""
-+OECMAKE_PATHS_class-native =3D " \
-+set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH ) \
-+set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH ) \
-+set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH ) \
-+"
-+
- cmake_do_generate_toolchain_file() {
-        cat > ${WORKDIR}/toolchain.cmake <<EOF
- # CMake system name must be something like "Linux".
-@@ -67,7 +74,10 @@ list(APPEND CMAKE_MODULE_PATH =
-"${STAGING_DATADIR}/cmake/Modules/")
- # add for non /usr/lib libdir, e.g. /usr/lib64
- set( CMAKE_LIBRARY_PATH ${libdir} ${base_libdir})
-=20
-+${OECMAKE_PATHS}
-+
- EOF
-+
- }
-=20
- addtask generate_toolchain_file after do_patch before do_configure
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
