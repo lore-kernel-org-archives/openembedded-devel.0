@@ -1,36 +1,34 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
-	[209.85.192.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 23C876E645;
-	Tue, 30 Jun 2015 00:39:42 +0000 (UTC)
-Received: by pdjd13 with SMTP id d13so492760pdj.0;
-	Mon, 29 Jun 2015 17:39:43 -0700 (PDT)
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id AF3427320D
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jun 2015 01:45:32 +0000 (UTC)
+Received: by pdbci14 with SMTP id ci14so126251844pdb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Jun 2015 18:45:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	bh=lfEu3jld2DHfxuN7CkpcnaKAaHNuM7lBkbDEtse9rHw=;
-	b=vl/k9+w8FLOf9/APoQsENiXubjufppB243e7z+13KJzzVa52ay47S3jel4famkH4Zg
-	ePHtJgaXf28V5yVqqvpHeVz5q1qtBT493vHqKVZSppF2zSnO1R/angd68BdsjxTckPhU
-	22U8XpoHV1h67A8dbHM9hDjPt9SXCP0ujix+pyNNWrwJpyMM3KyVxAUuX8qXEq63wJAz
-	74rVH/ci7CNfmASQ0qnl8vc40WObPxdm3/Dyc3dDsIU6ZR45F3Z9+plzwcEikdUnzUhA
-	lXVPWKCQPYOWJ+3sM0nuTylT6TA9RLHJkbW0Ki2GIyw5lhfNVNfz28JYWjifGOax+LLr
-	osBA==
-X-Received: by 10.69.27.33 with SMTP id jd1mr37309739pbd.34.1435624783404;
-	Mon, 29 Jun 2015 17:39:43 -0700 (PDT)
-Received: from ?IPv6:2601:202:4000:1239:b8d5:58:2bde:8361?
-	([2601:202:4000:1239:b8d5:58:2bde:8361])
-	by mx.google.com with ESMTPSA id m3sm40805270pdd.29.2015.06.29.17.39.41
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Jun 2015 17:39:42 -0700 (PDT)
-Message-ID: <5591E548.8090706@gmail.com>
-Date: Mon, 29 Jun 2015 17:39:36 -0700
-From: akuster808 <akuster808@gmail.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-MIME-Version: 1.0
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: cmake update broke mariadb
+	h=from:to:cc:subject:date:message-id;
+	bh=8tQFY4tuO7jGwA4rfj2H1Jdy8A1AqOOsQQVGX8f5kLc=;
+	b=phjlHw+2Yd4Ab666qpc+wJ8mmBq4a91i50XwNkHZhDHJyj4t4rC1d/ZXvWvbIk4hNx
+	3P0xw9xS432zIpVLbZkuvMEbQiIQxYh909/lgTJ2juMwDUTREAN8EOuCXhfKipghjEuD
+	ebMsN2YtPLkSD138ijPlBm0YlmZXuH3sjjWSm2Ve7KJyDvT7g33O36Vb7HoD8Dis9SnC
+	L0qUvjs/zDqC76cTmoJfq972ZP7v0tLx7KIAbuqewz7Jal92LXECFQz5WDMQPz36sd41
+	X9tM8IMAUhvncopMuqIJDcx57PsZcBo0pC1X1jaTao5RUU5zw/BoHl0jeSEvsvw7RB9+
+	tajA==
+X-Received: by 10.68.135.233 with SMTP id pv9mr38517418pbb.115.1435628733838; 
+	Mon, 29 Jun 2015 18:45:33 -0700 (PDT)
+Received: from e6520.cablelabs.com
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by mx.google.com with ESMTPSA id o7sm43621617pdi.16.2015.06.29.18.45.32
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 29 Jun 2015 18:45:32 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Jun 2015 18:45:27 -0700
+Message-Id: <1435628727-3417-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-qt5][fido][PATCH] qtwebkit: remove false dependency on leveldb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,18 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 00:39:43 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Jun 2015 01:45:33 -0000
 
+The qtwebkit configure test never succeeds in finding system leveldb
+(ie qtwebkit internal copy of leveldb is always used) so leveldb is a
+false dependency.
 
-Hello,
+This change allows qtwebkit to be built in a disto which enables
+security_flags.inc (it's otherwise blocked since the leveldb recipe
+fails to build when security_flags.inc is used).
 
-eo-core commit f8661aa "cmake: Upgrade 2.8.12.2 -> 3.2.2" broke mariadb 
-in meta-oe.
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ recipes-qt/qt5/qtwebkit_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-DOes  the person who updated cmake need to fix this or the person who is 
-feeling the pain will be fixing it ?
+diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
+index 77568af..759a81d 100644
+--- a/recipes-qt/qt5/qtwebkit_git.bb
++++ b/recipes-qt/qt5/qtwebkit_git.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
+     file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee \
+ "
+ 
+-DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt leveldb"
++DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt"
+ 
+ # qemuarm build fails with:
+ # | {standard input}: Assembler messages:
+-- 
+1.9.1
 
-- armin
 
