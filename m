@@ -1,34 +1,34 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AD5760017
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 085CE60017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jul 2015 06:40:53 +0000 (UTC)
-Received: by pdcu2 with SMTP id u2so20501458pdc.3
+	Wed,  1 Jul 2015 06:44:41 +0000 (UTC)
+Received: by pactm7 with SMTP id tm7so18110722pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 23:40:53 -0700 (PDT)
+	Tue, 30 Jun 2015 23:44:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=21pXIaDKNit/JDPzLryYJF5OxFnBdNiwcM663HJzv0s=;
-	b=qo/S+2aLt2uRcqYMkc00HBqsmEvZMEXeXsEVT6ejz077bC6GPcvlw5oyHNkh9fRLCj
-	AJARs7yZ9u95cOb1TSHn6zJq093aigExTQELH7ddXHaM1ATzgP0krmgYmF0777nHp37U
-	7vV0lrrkHB+9/nPPcfHiFYtNeAayhKb2vHhuePWd1ycYT5Ya5G9tXuyJm3qHP8xJWCjr
-	HrupPGGPpCcrl5NB20R1TxImKbvocIgw8AjexEhZdZbFYzRG+yd7Fm2CbKFpRiBww12V
-	4VDcLpcLXd3/8jsH7lqrJHhOG/Tn9+tRqwUxoFxlEF0EiF8KLlFhTQlK/8ao5fxnf4tj
-	NACg==
-X-Received: by 10.66.236.70 with SMTP id us6mr51645867pac.39.1435732853787;
-	Tue, 30 Jun 2015 23:40:53 -0700 (PDT)
+	bh=C9CIq9t+iHpC19kRAMFQehL9M5CXgAAgWbKoIpYC9do=;
+	b=0tVXydKdsHx5cg6/v42/tB975XLb9PrGK24fv4T4paA99Tk4Uz6hSt52fFtiXszQeH
+	O3KBSpMGnLPLiNSFAPlXfkQ4RweHtMg0fQf0fiD6RNPEJ7LvcqWSneqetKPc4PvpSxyk
+	zHdBU+3VMNDVKgdZnlpwkqg+DxfL+ZdWp3wHdwfvkkO38nKSp8D0eq7m9aSQyzOPzs3Y
+	qJo7lM/rJexmYMKFjm5H+Kpc5EIFdF0i8UKb9szUPKiVGG4jY3ctMawjzK3pJDYtxxq8
+	KAwHn/yLlUs2YUx+milQCd8Ut6bUFwtF8cg+wgF6yRCEtelBUDC0fLnFFs2XB8t8wdjx
+	p4FA==
+X-Received: by 10.68.241.230 with SMTP id wl6mr51639793pbc.90.1435733082039;
+	Tue, 30 Jun 2015 23:44:42 -0700 (PDT)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id jt2sm979501pbc.21.2015.06.30.23.40.52
+	by mx.google.com with ESMTPSA id fp3sm988073pdb.52.2015.06.30.23.44.41
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Jun 2015 23:40:53 -0700 (PDT)
+	Tue, 30 Jun 2015 23:44:41 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jul 2015 16:40:29 +1000
-Message-Id: <1435732829-23696-1-git-send-email-net147@gmail.com>
+Date: Wed,  1 Jul 2015 16:43:30 +1000
+Message-Id: <1435733010-23864-1-git-send-email-net147@gmail.com>
 X-Mailer: git-send-email 2.4.4
-Subject: [meta-oe][PATCH] ttf-tlwg: new recipe
+Subject: [meta-oe][PATCH] ttf-wqy-zenhei: update to 0.9.45
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,207 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2015 06:40:56 -0000
+X-List-Received-Date: Wed, 01 Jul 2015 06:44:44 -0000
 
 Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-oe/licenses/TLWG                              | 150 +++++++++++++++++++++
- .../recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb   |  29 ++++
- 2 files changed, 179 insertions(+)
- create mode 100644 meta-oe/licenses/TLWG
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
+ ...y-zenhei_0.6.26.bb => ttf-wqy-zenhei_0.9.45.bb} | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-graphics/ttf-fonts/{ttf-wqy-zenhei_0.6.26.bb => ttf-wqy-zenhei_0.9.45.bb} (42%)
 
-diff --git a/meta-oe/licenses/TLWG b/meta-oe/licenses/TLWG
-new file mode 100644
-index 0000000..a124184
---- /dev/null
-+++ b/meta-oe/licenses/TLWG
-@@ -0,0 +1,150 @@
-+This package collects Thai scalable fonts available in free licenses, and
-+maintains and distributes them under GNU General Public License with
-+original authors' permissions.
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
+similarity index 42%
+rename from meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
+rename to meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
+index 30ad91a..1207a61 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
+@@ -2,24 +2,26 @@ require ttf.inc
+ 
+ SUMMARY = "WenQuanYi Zen Hei - A Hei-Ti Style Chinese font"
+ AUTHOR = "Qianqian Fang and The WenQuanYi Project Contributors"
+-HOMEPAGE = "http://wqy.sourceforge.net/en/"
++HOMEPAGE = "http://wenq.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cf540fc7d35b5777e36051280b3a911c"
+-PR = "r4"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}-0.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}.tar.gz"
++SRC_URI[md5sum] = "4c6c3f4e902dd5ee0a121e8c41d040bd"
++SRC_URI[sha256sum] = "e4b7e306475bf9427d1757578f0e4528930c84c44eaa3f167d4c42f110ee75d6"
 +
-+Some fonts cannot be GPL, because they are based on fonts with different
-+licenses. See the list of such fonts at the end of this file.
-+
-+Copyright:
-+
-+	- Kinnari:
-+
-+	Copyright (C) 1999 Db Type. All Rights Reserved.
-+	Copyright (C) 2007 National Electronics and Computer Technology Center.
-+	All Rights Reserved.
-+
-+	- Garuda:
-+
-+	Generated by NECTEC for Public Domain.
-+	Modified under GNU General Public License by TLWG.
-+
-+	- Norasi:
-+
-+	Copyright (C) 1999, The National Font Project (v.beta). 
-+	Yannis Haralambous, Virach Sornlertlamvanich and Anutara Tantraporn.
-+	All rights reserved.
-+	Modified under GNU General Public License, with creators' permission,
-+	by Thai Linux Working Group (TLWG).
-+
-+	- Loma:
-+
-+	Copyright (C) 2003, NECTEC. All rights reserved.
-+
-+	- TlwgMono:
-+
-+	Copyright (C) 2003 Poonlap Veerathanabutr <poonlap@linux.thai.net>
-+
-+	- Tlwg Typewriter:
-+
-+	Copyright (C) 2003, 2004 Poonlap Veerathanabutr <poonlap@linux.thai.net>
-+
-+	- Tlwg Typist:
-+
-+	Tlwg Typist, based on Poonlap Veerathanabutr's Tlwg Typewriter.
-+
-+	Copyright (C) 2005-2006 Theppitak Karoonboonyanan. Tlwg Typewriter,
-+	Free Thai Pseudo Monospace outline font.
-+
-+	Copyright (C) 2003, 2004 Poonlap Veerathanabutr <poonlap@linux.thai.net>
-+
-+	- Purisa:
-+
-+	Copyright (C) 2003, 2004 Poonlap Veerathanabutr 
-+	<poonlap@linux.thai.net>, GPL license
-+
-+	- Sawasdee:
-+
-+	Copyright (C) 2007 Pol Udomwittayanukul <webnaipol@gmail.com>.
-+	All rights reserved.
-+
-+	- Umpush:
-+
-+	Copyright (C) 2003 NECTEC. All rights reserved.
-+	Copyright (c) 2007 Widhaya Trisarnwadhana <widhaya3@gmail.com>.
-+	All rights reserved.
-+
-+License:
-+
-+	This font is free software; you can redistribute it and/or modify it
-+	under the terms of the GNU General Public License as published by the
-+	Free Software Foundation; either version 2 of the License, or (at your
-+	option) any later version.
-+
-+	This font is distributed in the hope that it will be useful, but
-+	WITHOUT ANY WARRANTY; without even the implied warranty of
-+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+	General Public License for more details.
-+
-+	You should have received a copy of the GNU General Public License
-+	along with this font; if not, write to the Free Software Foundation,
-+	Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-+
-+	As a special exception, if you create a document which uses this font,
-+	and embed this font or unaltered portions of this font into the
-+	document, this font does not by itself cause the resulting document
-+	to be covered by the GNU General Public License. This exception does
-+	not however invalidate any other reasons why the document might be
-+	covered by the GNU General Public License. If you modify this font,
-+	you may extend this exception to your version of the font, but you
-+	are not obligated to do so. If you do not wish to do so, delete this
-+	exception statement from your version.
-+
-+See included GPL file for the GNU General Public License (GPL) terms.
-+
-+
-+* Non-GPL Fonts:
-+
-+- Waree:
-+
-+Copyright:
-+
-+	Copyright (C) 2003 by Bitstream, Inc. All Rights Reserved.
-+	TLWG changes are in public domain.
-+
-+	Bitstream Vera is a trademark of Bitstream, Inc.
-+
-+License:
-+
-+	Permission is hereby granted, free of charge, to any person obtaining
-+	a copy of the fonts accompanying this license ("Fonts") and associated
-+	documentation files (the "Font Software"), to reproduce and distribute
-+	the Font Software, including without limitation the rights to use,
-+	copy, merge, publish, distribute, and/or sell copies of the Font
-+	Software, and to permit persons to whom the Font Software is furnished
-+	to do so, subject to the following conditions:
-+
-+	The above copyright and trademark notices and this permission notice
-+	shall be included in all copies of one or more of the Font Software
-+	typefaces.
-+
-+	The Font Software may be modified, altered, or added to, and in
-+	particular the designs of glyphs or characters in the Fonts may be
-+	modified and additional glyphs or characters may be added to the
-+	Fonts, only if the fonts are renamed to names not containing either
-+	the words "Bitstream" or the word "Vera".
-+
-+	This License becomes null and void to the extent applicable to Fonts
-+	or Font Software that has been modified and is distributed under the
-+	"Bitstream Vera" names.
-+
-+	The Font Software may be sold as part of a larger software package
-+	but no copy of one or more of the Font Software typefaces may be sold
-+	by itself.
-+
-+	THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-+	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
-+	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
-+	OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL
-+	BITSTREAM OR THE GNOME FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR
-+	OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL,
-+	OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-+	OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT
-+	SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
-+
-+	Except as contained in this notice, the names of Gnome, the Gnome
-+	Foundation, and Bitstream Inc., shall not be used in advertising or
-+	otherwise to promote the sale, use or other dealings in this Font
-+	Software without prior written authorization from the Gnome Foundation
-+	or Bitstream Inc., respectively. For further information, contact:
-+	fonts at gnome dot org. 
-+
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
-new file mode 100644
-index 0000000..a9b52ed
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
-@@ -0,0 +1,29 @@
-+require ttf.inc
-+
-+SUMMARY = "Thai Linux Working Group Fonts"
-+AUTHOR = "Thai Linux Working Group"
-+HOMEPAGE = "http://linux.thai.net/projects/fonts-tlwg"
-+LICENSE = "GPLv2 & TLWG"
-+LIC_FILES_CHKSUM = "file://../fonts-tlwg-${PV}/COPYING;md5=3d20cd7eadf4afd5460c0adb32e387fd"
-+
-+SRC_URI = "http://linux.thai.net/pub/ThaiLinux/software/fonts-tlwg/fonts-tlwg-${PV}.tar.xz;name=source \
-+           http://linux.thai.net/pub/ThaiLinux/software/ttf-tlwg/ttf-tlwg-${PV}.tar.xz;name=ttf"
-+SRC_URI[source.md5sum] = "5ea5bc964d992df0428f2e0b85f48400"
-+SRC_URI[source.sha256sum] = "77fb9832221fde60c9f683ac3fdce7d45ab6e9c0d83df83da969a3fe9faba537"
-+SRC_URI[ttf.md5sum] = "1bc51f45a7b661404a944fab6911261c"
-+SRC_URI[ttf.sha256sum] = "aa9cd68969b6f704df3e5b1a2e11204c47f118c8ab052f04c111bd5f299f77c8"
-+
-+S = "${WORKDIR}/${BPN}-${PV}"
-+
+ S = "${WORKDIR}/wqy-zenhei"
+ 
+-do_install_append () { 
+-    install -d ${D}${sysconfdir}/fonts/conf.d/
+-    install -m 0644 ${S}/44-wqy-zenhei.conf ${D}${sysconfdir}/fonts/conf.d/
+-    install -m 0644 ${S}/66-wqy-zenhei-sharp.conf ${D}${sysconfdir}/fonts/conf.d/
 +do_install_append () {
++    sed -i -e '/<string>[^W]/d' ${S}/44-wqy-zenhei.conf
 +    install -d ${D}${sysconfdir}/fonts/conf.d
 +
-+    for x in ${S}/etc/fonts/conf.avail/*.conf; do
++    for x in ${S}/*.conf; do
 +        install -m 0644 $x ${D}${sysconfdir}/fonts/conf.d/
 +    done
-+}
-+
-+PACKAGES = "${PN}"
-+FONT_PACKAGES = "${PN}"
-+
-+FILES_${PN} = "${datadir}/fonts ${sysconfdir}"
+ }
+ 
+ PACKAGES = "${PN}"
+ FONT_PACKAGES = "${PN}"
+ 
+ FILES_${PN} = "${datadir}/fonts ${sysconfdir}"
+-
+-SRC_URI[md5sum] = "bf2c1cb512606d995873bada27c777da"
+-SRC_URI[sha256sum] = "47355b6ec84bb309614b6d657ddfda993b96ed0be569264f82e523b254f945b2"
 -- 
 2.4.4
 
