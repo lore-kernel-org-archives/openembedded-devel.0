@@ -1,34 +1,37 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
-	[209.85.220.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 085CE60017
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F32760017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jul 2015 06:44:41 +0000 (UTC)
-Received: by pactm7 with SMTP id tm7so18110722pac.2
+	Wed,  1 Jul 2015 07:04:32 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97941626"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 01 Jul 2015 15:08:30 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6172p9w005644
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 23:44:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=C9CIq9t+iHpC19kRAMFQehL9M5CXgAAgWbKoIpYC9do=;
-	b=0tVXydKdsHx5cg6/v42/tB975XLb9PrGK24fv4T4paA99Tk4Uz6hSt52fFtiXszQeH
-	O3KBSpMGnLPLiNSFAPlXfkQ4RweHtMg0fQf0fiD6RNPEJ7LvcqWSneqetKPc4PvpSxyk
-	zHdBU+3VMNDVKgdZnlpwkqg+DxfL+ZdWp3wHdwfvkkO38nKSp8D0eq7m9aSQyzOPzs3Y
-	qJo7lM/rJexmYMKFjm5H+Kpc5EIFdF0i8UKb9szUPKiVGG4jY3ctMawjzK3pJDYtxxq8
-	KAwHn/yLlUs2YUx+milQCd8Ut6bUFwtF8cg+wgF6yRCEtelBUDC0fLnFFs2XB8t8wdjx
-	p4FA==
-X-Received: by 10.68.241.230 with SMTP id wl6mr51639793pbc.90.1435733082039;
-	Tue, 30 Jun 2015 23:44:42 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id fp3sm988073pdb.52.2015.06.30.23.44.41
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Jun 2015 23:44:41 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jul 2015 16:43:30 +1000
-Message-Id: <1435733010-23864-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.4.4
-Subject: [meta-oe][PATCH] ttf-wqy-zenhei: update to 0.9.45
+	Wed, 1 Jul 2015 15:02:51 +0800
+Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0181.006; Wed, 1 Jul 2015 15:04:31 +0800
+From: "Bian, Naimeng" <biannm@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH v2 0/9] add openlmi and it's depends
+Thread-Index: AQHQslIEksvzxZgckUSxOersI9vzap3CvvKAgAAPYgCAAVMFAIAARv4AgAHFB+A=
+Date: Wed, 1 Jul 2015 07:04:31 +0000
+Message-ID: <30DC4EDFD798C94083F3E083754532CC73E16BF6@G08CNEXMBPEKD02.g08.fujitsu.local>
+References: <1435571855-62168-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<55911B4D.7090303@opendreambox.org> <20150629111252.GA2393@jama>
+	<1B56A49860EB2D45ADE3731B15C959FDB2874D@G08CNEXMBPEKD01.g08.fujitsu.local>
+	<20150630114022.GA2396@jama>
+In-Reply-To: <20150630114022.GA2396@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.31]
+MIME-Version: 1.0
+Subject: Re: [meta-oe][PATCH v2 0/9] add openlmi and it's depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,59 +45,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2015 06:44:44 -0000
+X-List-Received-Date: Wed, 01 Jul 2015 07:04:34 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- ...y-zenhei_0.6.26.bb => ttf-wqy-zenhei_0.9.45.bb} | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
- rename meta-oe/recipes-graphics/ttf-fonts/{ttf-wqy-zenhei_0.6.26.bb => ttf-wqy-zenhei_0.9.45.bb} (42%)
-
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
-similarity index 42%
-rename from meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
-index 30ad91a..1207a61 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.6.26.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-wqy-zenhei_0.9.45.bb
-@@ -2,24 +2,26 @@ require ttf.inc
- 
- SUMMARY = "WenQuanYi Zen Hei - A Hei-Ti Style Chinese font"
- AUTHOR = "Qianqian Fang and The WenQuanYi Project Contributors"
--HOMEPAGE = "http://wqy.sourceforge.net/en/"
-+HOMEPAGE = "http://wenq.org/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cf540fc7d35b5777e36051280b3a911c"
--PR = "r4"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}-0.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/wqy/wqy-zenhei-${PV}.tar.gz"
-+SRC_URI[md5sum] = "4c6c3f4e902dd5ee0a121e8c41d040bd"
-+SRC_URI[sha256sum] = "e4b7e306475bf9427d1757578f0e4528930c84c44eaa3f167d4c42f110ee75d6"
-+
- S = "${WORKDIR}/wqy-zenhei"
- 
--do_install_append () { 
--    install -d ${D}${sysconfdir}/fonts/conf.d/
--    install -m 0644 ${S}/44-wqy-zenhei.conf ${D}${sysconfdir}/fonts/conf.d/
--    install -m 0644 ${S}/66-wqy-zenhei-sharp.conf ${D}${sysconfdir}/fonts/conf.d/
-+do_install_append () {
-+    sed -i -e '/<string>[^W]/d' ${S}/44-wqy-zenhei.conf
-+    install -d ${D}${sysconfdir}/fonts/conf.d
-+
-+    for x in ${S}/*.conf; do
-+        install -m 0644 $x ${D}${sysconfdir}/fonts/conf.d/
-+    done
- }
- 
- PACKAGES = "${PN}"
- FONT_PACKAGES = "${PN}"
- 
- FILES_${PN} = "${datadir}/fonts ${sysconfdir}"
--
--SRC_URI[md5sum] = "bf2c1cb512606d995873bada27c777da"
--SRC_URI[sha256sum] = "47355b6ec84bb309614b6d657ddfda993b96ed0be569264f82e523b254f945b2"
--- 
-2.4.4
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IE1hcnRp
+biBKYW5zYQ0KPiBTZW50OiBUdWVzZGF5LCBKdW5lIDMwLCAyMDE1IDc6NDAgUE0NCj4gVG86IG9w
+ZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBb
+b2VdIFttZXRhLW9lXVtQQVRDSCB2MiAwLzldIGFkZCBvcGVubG1pIGFuZCBpdCdzIGRlcGVuZHMN
+Cj4gDQo+IE9uIFR1ZSwgSnVuIDMwLCAyMDE1IGF0IDA3OjI2OjE2QU0gKzAwMDAsIExlaSwgTWFv
+aHVpIHdyb3RlOg0KPiA+IEhpIE1hcnRpbiwgQW5kcmVhcw0KPiA+DQo+ID4NCj4gPiA+ID4gPiBM
+ZWkgTWFvaHVpICg5KToNCj4gPiA+ID4gPiAgIG9wZW5sbWk6IGFkZCBuZXcgcmVjaXBlIG9wZW5s
+bWkNCj4gPiA+ID4gPiAgIGNpbS1zY2hlbWEtZXhwZXI6IGFkZCBuZXcgcmVjaXBlIGZvciBvcGVu
+bG1pDQo+ID4gPiA+ID4gICBjbXBpLWJpbmRpbmdzOiBhZGQgbmV3IHJlY2lwZSBmb3Igb3Blbmxt
+aQ0KPiA+ID4gPiA+ICAga29ua3JldGNtcGk6YWRkIG5ldyByZWNpcGUgZm9yIG9wZW5sbWkNCj4g
+PiA+ID4gPiAgIHNibGltLXNmY2I6IGFkZCBuZXcgcmVjaXBlIGZvciBvcGVubG1pDQo+ID4gPiA+
+ID4gICBzYmxpbS1zZmNDb21tb246IGFkZCBuZXcgcmVjaXBlDQo+ID4gPiA+ID4gICBzYmxpbS1j
+bXBpLWRldmVsOiBhZGQgbmV3IHJlY2lwZQ0KPiA+ID4gPiA+ICAgY2ltLXNjaGVtYV8yLjQwLjAu
+YmI6IGRlbGV0ZQ0KPiA+ID4gPiA+ICAgcHl3YmVtOiBhZGQgbmV3IHJlY2lwZQ0KPiA+ID4gPg0K
+PiA+ID4gPiB5b3Ugc2hvdWxkIG9yZGVyIHlvdXIgcGF0Y2hlcyBpbiBhIHdheSB0aGF0IGRvZXNu
+J3QgYnJlYWsgZ2l0DQo+ID4gPiA+IGJpc2VjdCwgaS5lLiBkZXBlbmRlbmNpZXMgc2hvdWxkIGNv
+bWUgZmlyc3QuDQo+ID4NCj4gPiBJIGdvdCBpdC4gVGhhbmsgeW91Lg0KPiA+DQo+ID4gPg0KPiA+
+ID4gSSBhZ3JlZSwgSSd2ZSB0cmllZCB0byByZS1vcmRlciB0aGVtIHF1aWNrbHkgd2hlbiBjaGVy
+cnktcGlja2luZyB0bw0KPiBtYXN0ZXItbmV4dC4NCj4gPg0KPiA+IFRoYW5rIHlvdSB2ZXJ5IG11
+Y2ghDQo+IA0KPiBGcm9tIGxhc3QgYmF0Y2ggZnJvbSBmdWppdHN1IGZvbGxvd2luZyByZWNpcGVz
+IGZhaWwgdG8gYnVpbGQgaW4gd29ybGQgYnVpbGRzOg0KPiBrb25rcmV0Y21waSwgc2JsaW0tc2Zj
+YiwgY21waS1iaW5kaW5ncywgb3BlbndzbWFuLCBzeXNkaWcgYW5kIGxpYmxkYiAoc3RpbGwNCj4g
+cGVuZGluZyBmcm9tIHNhbWJhIHBhdGNoc2V0KQ0KPiANCj4gYnVpbGQgbG9ncyBpbjoNCj4gaHR0
+cDovL2Vycm9ycy55b2N0b3Byb2plY3Qub3JnL0Vycm9ycy9CdWlsZC82ODM2Lw0KPiANCg0KVGhh
+bmtzIGZvciB5b3VyIHRlc3QuDQpBbHRob3VnaCBtYXliZSByZXByb2R1Y2luZyBpdCBpcyBkaWZm
+aWN1bHQsIHdlIHdpbGwgdHJ5IHRvIGZpeCBpdC4NCg0KVGhhbmtzDQogQmlhbg0KDQo+IC0tDQo+
+IE1hcnRpbiAnSmFNYScgSmFuc2EgICAgIGphYmJlcjogTWFydGluLkphbnNhQGdtYWlsLmNvbQ0K
 
