@@ -1,34 +1,34 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f169.google.com (mail-pd0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 90C9F65C5F
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AD5760017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jul 2015 06:34:34 +0000 (UTC)
-Received: by pdjd13 with SMTP id d13so20175306pdj.0
+	Wed,  1 Jul 2015 06:40:53 +0000 (UTC)
+Received: by pdcu2 with SMTP id u2so20501458pdc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 23:34:34 -0700 (PDT)
+	Tue, 30 Jun 2015 23:40:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=gb6OmKva8J2gTW5svsQWOlh4yv542Sy+5F4wnMclJDA=;
-	b=j24sFNHs9Hjte3gjVhL+HTz9sPkOX2puJaR1V+DZoy4feiio/GgyjT7ZnPANRkylmQ
-	wCtEavgXcCC8c6nkHfDjrbJL8FeJ5SJxMLo0jsRGgcs/5YB8l12pbYQGk9J9LX7GWsdh
-	7cwzn8nS4BvlK4vS5n+9CADtQz5H1op8Zbmv7BITsyayiqf8A+8WCyX2KL7rMnk/5eIQ
-	pYRY6KNx6Ap9DIG0fNDG7KMgxWQVe3/MQIdDRRL+0fatbTVFYliFPkz6fM6Z10YJMOjK
-	KRh7ut6L4ZPU3YqQxSlnILUnbTsFWFBCTY2DwMyiNpYb/c869IujFyTBAssj6gM4uWku
-	0Q+Q==
-X-Received: by 10.70.125.230 with SMTP id mt6mr51982917pdb.55.1435732474809;
-	Tue, 30 Jun 2015 23:34:34 -0700 (PDT)
+	bh=21pXIaDKNit/JDPzLryYJF5OxFnBdNiwcM663HJzv0s=;
+	b=qo/S+2aLt2uRcqYMkc00HBqsmEvZMEXeXsEVT6ejz077bC6GPcvlw5oyHNkh9fRLCj
+	AJARs7yZ9u95cOb1TSHn6zJq093aigExTQELH7ddXHaM1ATzgP0krmgYmF0777nHp37U
+	7vV0lrrkHB+9/nPPcfHiFYtNeAayhKb2vHhuePWd1ycYT5Ya5G9tXuyJm3qHP8xJWCjr
+	HrupPGGPpCcrl5NB20R1TxImKbvocIgw8AjexEhZdZbFYzRG+yd7Fm2CbKFpRiBww12V
+	4VDcLpcLXd3/8jsH7lqrJHhOG/Tn9+tRqwUxoFxlEF0EiF8KLlFhTQlK/8ao5fxnf4tj
+	NACg==
+X-Received: by 10.66.236.70 with SMTP id us6mr51645867pac.39.1435732853787;
+	Tue, 30 Jun 2015 23:40:53 -0700 (PDT)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by mx.google.com with ESMTPSA id ud3sm958989pbc.10.2015.06.30.23.34.33
+	by mx.google.com with ESMTPSA id jt2sm979501pbc.21.2015.06.30.23.40.52
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 30 Jun 2015 23:34:34 -0700 (PDT)
+	Tue, 30 Jun 2015 23:40:53 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jul 2015 16:33:31 +1000
-Message-Id: <1435732411-23079-1-git-send-email-net147@gmail.com>
+Date: Wed,  1 Jul 2015 16:40:29 +1000
+Message-Id: <1435732829-23696-1-git-send-email-net147@gmail.com>
 X-Mailer: git-send-email 2.4.4
-Subject: [meta-oe][PATCH] qrencode: new recipe
+Subject: [meta-oe][PATCH] ttf-tlwg: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +42,207 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2015 06:34:34 -0000
+X-List-Received-Date: Wed, 01 Jul 2015 06:40:56 -0000
 
 Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-oe/recipes-graphics/qrencode/qrencode_git.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/qrencode/qrencode_git.bb
+ meta-oe/licenses/TLWG                              | 150 +++++++++++++++++++++
+ .../recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb   |  29 ++++
+ 2 files changed, 179 insertions(+)
+ create mode 100644 meta-oe/licenses/TLWG
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
 
-diff --git a/meta-oe/recipes-graphics/qrencode/qrencode_git.bb b/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
+diff --git a/meta-oe/licenses/TLWG b/meta-oe/licenses/TLWG
 new file mode 100644
-index 0000000..fc7b020
+index 0000000..a124184
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/qrencode/qrencode_git.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "C library for encoding data in a QR Code symbol"
-+AUTHOR = "Kentaro Fukuchi"
-+HOMEPAGE = "http://fukuchi.org/works/qrencode/"
-+SECTION = "libs"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+PV = "3.4.4+git${SRCPV}"
++++ b/meta-oe/licenses/TLWG
+@@ -0,0 +1,150 @@
++This package collects Thai scalable fonts available in free licenses, and
++maintains and distributes them under GNU General Public License with
++original authors' permissions.
 +
-+SRCREV = "1b565c7b599029818fc596e7da4371a3083da36c"
-+SRC_URI = "git://github.com/fukuchi/libqrencode.git;protocol=git"
++Some fonts cannot be GPL, because they are based on fonts with different
++licenses. See the list of such fonts at the end of this file.
 +
-+S = "${WORKDIR}/git"
++Copyright:
 +
-+inherit autotools pkgconfig
++	- Kinnari:
 +
-+EXTRA_OECONF += "--without-tools --without-tests"
++	Copyright (C) 1999 Db Type. All Rights Reserved.
++	Copyright (C) 2007 National Electronics and Computer Technology Center.
++	All Rights Reserved.
++
++	- Garuda:
++
++	Generated by NECTEC for Public Domain.
++	Modified under GNU General Public License by TLWG.
++
++	- Norasi:
++
++	Copyright (C) 1999, The National Font Project (v.beta). 
++	Yannis Haralambous, Virach Sornlertlamvanich and Anutara Tantraporn.
++	All rights reserved.
++	Modified under GNU General Public License, with creators' permission,
++	by Thai Linux Working Group (TLWG).
++
++	- Loma:
++
++	Copyright (C) 2003, NECTEC. All rights reserved.
++
++	- TlwgMono:
++
++	Copyright (C) 2003 Poonlap Veerathanabutr <poonlap@linux.thai.net>
++
++	- Tlwg Typewriter:
++
++	Copyright (C) 2003, 2004 Poonlap Veerathanabutr <poonlap@linux.thai.net>
++
++	- Tlwg Typist:
++
++	Tlwg Typist, based on Poonlap Veerathanabutr's Tlwg Typewriter.
++
++	Copyright (C) 2005-2006 Theppitak Karoonboonyanan. Tlwg Typewriter,
++	Free Thai Pseudo Monospace outline font.
++
++	Copyright (C) 2003, 2004 Poonlap Veerathanabutr <poonlap@linux.thai.net>
++
++	- Purisa:
++
++	Copyright (C) 2003, 2004 Poonlap Veerathanabutr 
++	<poonlap@linux.thai.net>, GPL license
++
++	- Sawasdee:
++
++	Copyright (C) 2007 Pol Udomwittayanukul <webnaipol@gmail.com>.
++	All rights reserved.
++
++	- Umpush:
++
++	Copyright (C) 2003 NECTEC. All rights reserved.
++	Copyright (c) 2007 Widhaya Trisarnwadhana <widhaya3@gmail.com>.
++	All rights reserved.
++
++License:
++
++	This font is free software; you can redistribute it and/or modify it
++	under the terms of the GNU General Public License as published by the
++	Free Software Foundation; either version 2 of the License, or (at your
++	option) any later version.
++
++	This font is distributed in the hope that it will be useful, but
++	WITHOUT ANY WARRANTY; without even the implied warranty of
++	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++	General Public License for more details.
++
++	You should have received a copy of the GNU General Public License
++	along with this font; if not, write to the Free Software Foundation,
++	Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
++
++	As a special exception, if you create a document which uses this font,
++	and embed this font or unaltered portions of this font into the
++	document, this font does not by itself cause the resulting document
++	to be covered by the GNU General Public License. This exception does
++	not however invalidate any other reasons why the document might be
++	covered by the GNU General Public License. If you modify this font,
++	you may extend this exception to your version of the font, but you
++	are not obligated to do so. If you do not wish to do so, delete this
++	exception statement from your version.
++
++See included GPL file for the GNU General Public License (GPL) terms.
++
++
++* Non-GPL Fonts:
++
++- Waree:
++
++Copyright:
++
++	Copyright (C) 2003 by Bitstream, Inc. All Rights Reserved.
++	TLWG changes are in public domain.
++
++	Bitstream Vera is a trademark of Bitstream, Inc.
++
++License:
++
++	Permission is hereby granted, free of charge, to any person obtaining
++	a copy of the fonts accompanying this license ("Fonts") and associated
++	documentation files (the "Font Software"), to reproduce and distribute
++	the Font Software, including without limitation the rights to use,
++	copy, merge, publish, distribute, and/or sell copies of the Font
++	Software, and to permit persons to whom the Font Software is furnished
++	to do so, subject to the following conditions:
++
++	The above copyright and trademark notices and this permission notice
++	shall be included in all copies of one or more of the Font Software
++	typefaces.
++
++	The Font Software may be modified, altered, or added to, and in
++	particular the designs of glyphs or characters in the Fonts may be
++	modified and additional glyphs or characters may be added to the
++	Fonts, only if the fonts are renamed to names not containing either
++	the words "Bitstream" or the word "Vera".
++
++	This License becomes null and void to the extent applicable to Fonts
++	or Font Software that has been modified and is distributed under the
++	"Bitstream Vera" names.
++
++	The Font Software may be sold as part of a larger software package
++	but no copy of one or more of the Font Software typefaces may be sold
++	by itself.
++
++	THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
++	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
++	OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL
++	BITSTREAM OR THE GNOME FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR
++	OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL,
++	OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR
++	OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT
++	SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
++
++	Except as contained in this notice, the names of Gnome, the Gnome
++	Foundation, and Bitstream Inc., shall not be used in advertising or
++	otherwise to promote the sale, use or other dealings in this Font
++	Software without prior written authorization from the Gnome Foundation
++	or Bitstream Inc., respectively. For further information, contact:
++	fonts at gnome dot org. 
++
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
+new file mode 100644
+index 0000000..a9b52ed
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
+@@ -0,0 +1,29 @@
++require ttf.inc
++
++SUMMARY = "Thai Linux Working Group Fonts"
++AUTHOR = "Thai Linux Working Group"
++HOMEPAGE = "http://linux.thai.net/projects/fonts-tlwg"
++LICENSE = "GPLv2 & TLWG"
++LIC_FILES_CHKSUM = "file://../fonts-tlwg-${PV}/COPYING;md5=3d20cd7eadf4afd5460c0adb32e387fd"
++
++SRC_URI = "http://linux.thai.net/pub/ThaiLinux/software/fonts-tlwg/fonts-tlwg-${PV}.tar.xz;name=source \
++           http://linux.thai.net/pub/ThaiLinux/software/ttf-tlwg/ttf-tlwg-${PV}.tar.xz;name=ttf"
++SRC_URI[source.md5sum] = "5ea5bc964d992df0428f2e0b85f48400"
++SRC_URI[source.sha256sum] = "77fb9832221fde60c9f683ac3fdce7d45ab6e9c0d83df83da969a3fe9faba537"
++SRC_URI[ttf.md5sum] = "1bc51f45a7b661404a944fab6911261c"
++SRC_URI[ttf.sha256sum] = "aa9cd68969b6f704df3e5b1a2e11204c47f118c8ab052f04c111bd5f299f77c8"
++
++S = "${WORKDIR}/${BPN}-${PV}"
++
++do_install_append () {
++    install -d ${D}${sysconfdir}/fonts/conf.d
++
++    for x in ${S}/etc/fonts/conf.avail/*.conf; do
++        install -m 0644 $x ${D}${sysconfdir}/fonts/conf.d/
++    done
++}
++
++PACKAGES = "${PN}"
++FONT_PACKAGES = "${PN}"
++
++FILES_${PN} = "${datadir}/fonts ${sysconfdir}"
 -- 
 2.4.4
 
