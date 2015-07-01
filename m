@@ -1,39 +1,39 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f179.google.com (mail-wi0-f179.google.com
-	[209.85.212.179])
-	by mail.openembedded.org (Postfix) with ESMTP id B571B6E5F5
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 724CA6E5F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jul 2015 13:15:50 +0000 (UTC)
-Received: by widjy10 with SMTP id jy10so57452235wid.1
+	Wed,  1 Jul 2015 13:16:56 +0000 (UTC)
+Received: by wgjx7 with SMTP id x7so36537811wgj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jul 2015 06:15:50 -0700 (PDT)
+	Wed, 01 Jul 2015 06:16:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=wcipoFt6l8e5Dlxerocut1MG86qyQzJFUegqsydgrKo=;
-	b=RBRFXGdrRXR/faU7z55GdLQnk2eYlvtTDydjgIDpqxGeisLKQOlShUiyydao4PLRZm
-	WWW1i9wVRfnMX3dovetlTjaZY3sMMUqiaDA12eh8xXslpZiJew2GYSG04yVI62VBMugW
-	NlwFhkakCyQk+71tNP29z/DtJtZ+p30CTZcZiUVc3qzvTAch4EZKD6FagjEFG1EIUFO/
-	jtckE3z9a072hPzqJKPHVuW8YPoMFHc6I/FuHcsAEs8jcGC2DTbF1PN/FOnbzY1s6294
-	XDkpD40RVcfDgbTAdXbSPAwov+uf/zsuztLCCxwDRj06tJr6KDZcirMLi46uCecYA1oT
-	quYw==
-X-Received: by 10.194.120.198 with SMTP id le6mr49290742wjb.133.1435756550570; 
-	Wed, 01 Jul 2015 06:15:50 -0700 (PDT)
+	bh=nftMvUCVebwGDfce+LKgaG97aLFHNcV9/zsaSmpx7uQ=;
+	b=X9K6eveGajPn0fl/U8YqD5zJb/PAn5Gh+5TWM/ECRgtwNlZQn/2BwQDC34Yiywmx2K
+	fIgYBK6XscFHepfpNdOC5RKJVKtvAJ8Sua3YyGnYYc/I/GaXoxcQ55ncSdg0LBZjCmWr
+	brR55ivhZp3KPAjfoQb3J+U9S05Qo01R0Qh7QBp645Vk/IBIL0Zv/PrLaINotcNv0MJO
+	VqMv1IvOJD4FrudlSaLtRJAEGzX2EKCjuv5FWeWKHSgQyi6wdTnNj+Jljji3bsHFk+NH
+	7/FLkOvbHo2/Pj/D25H4OSoOO7D7WEGheX+6geJ9kpwkA9vWOj3CmvOoa8bnNEUHHi+f
+	GxWQ==
+X-Received: by 10.194.88.69 with SMTP id be5mr1673199wjb.149.1435756616300;
+	Wed, 01 Jul 2015 06:16:56 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by mx.google.com with ESMTPSA id u6sm2880231wja.40.2015.07.01.06.15.49
+	by mx.google.com with ESMTPSA id
+	ho10sm2887485wjb.39.2015.07.01.06.16.55
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Jul 2015 06:15:49 -0700 (PDT)
+	Wed, 01 Jul 2015 06:16:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 1 Jul 2015 15:16:12 +0200
+Date: Wed, 1 Jul 2015 15:17:18 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150701131612.GF2409@jama>
-References: <1435732829-23696-1-git-send-email-net147@gmail.com>
+Message-ID: <20150701131718.GG2409@jama>
+References: <1435735750-26252-1-git-send-email-net147@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1435732829-23696-1-git-send-email-net147@gmail.com>
+In-Reply-To: <1435735750-26252-1-git-send-email-net147@gmail.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] ttf-tlwg: new recipe
+Subject: Re: [meta-qt5][PATCH] quazip: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,227 +47,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2015 13:15:51 -0000
-X-Groupsio-MsgNum: 56109
+X-List-Received-Date: Wed, 01 Jul 2015 13:16:57 -0000
+X-Groupsio-MsgNum: 56110
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hAW+M2+FUO+onfmf"
+	protocol="application/pgp-signature"; boundary="r4QXMf6/kyF/FvJJ"
 Content-Disposition: inline
 
---hAW+M2+FUO+onfmf
+--r4QXMf6/kyF/FvJJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 01, 2015 at 04:40:29PM +1000, Jonathan Liu wrote:
+On Wed, Jul 01, 2015 at 05:29:10PM +1000, Jonathan Liu wrote:
 > Signed-off-by: Jonathan Liu <net147@gmail.com>
 > ---
->  meta-oe/licenses/TLWG                              | 150 +++++++++++++++=
-++++++
->  .../recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb   |  29 ++++
->  2 files changed, 179 insertions(+)
->  create mode 100644 meta-oe/licenses/TLWG
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
+>  recipes-qt/quazip/quazip_0.7.1.bb | 15 +++++++++++++++
+>  1 file changed, 15 insertions(+)
+>  create mode 100644 recipes-qt/quazip/quazip_0.7.1.bb
 >=20
-> diff --git a/meta-oe/licenses/TLWG b/meta-oe/licenses/TLWG
+> diff --git a/recipes-qt/quazip/quazip_0.7.1.bb b/recipes-qt/quazip/quazip=
+_0.7.1.bb
 > new file mode 100644
-> index 0000000..a124184
+> index 0000000..97a6e4f
 > --- /dev/null
-> +++ b/meta-oe/licenses/TLWG
-> @@ -0,0 +1,150 @@
-> +This package collects Thai scalable fonts available in free licenses, and
-> +maintains and distributes them under GNU General Public License with
-> +original authors' permissions.
+> +++ b/recipes-qt/quazip/quazip_0.7.1.bb
+> @@ -0,0 +1,15 @@
+> +SUMMARY =3D "Qt/C++ wrapper for ZIP/UNZIP package"
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D27818cd7fd83877a8e3ef82b82798=
+ef4"
+> +DEPENDS =3D "qtbase"
 > +
-> +Some fonts cannot be GPL, because they are based on fonts with different
-> +licenses. See the list of such fonts at the end of this file.
-> +
-> +Copyright:
-> +
-> +	- Kinnari:
-> +
-> +	Copyright (C) 1999 Db Type. All Rights Reserved.
-> +	Copyright (C) 2007 National Electronics and Computer Technology Center.
-> +	All Rights Reserved.
-> +
-> +	- Garuda:
-> +
-> +	Generated by NECTEC for Public Domain.
-> +	Modified under GNU General Public License by TLWG.
-> +
-> +	- Norasi:
-> +
-> +	Copyright (C) 1999, The National Font Project (v.beta).=20
-> +	Yannis Haralambous, Virach Sornlertlamvanich and Anutara Tantraporn.
-> +	All rights reserved.
-> +	Modified under GNU General Public License, with creators' permission,
-> +	by Thai Linux Working Group (TLWG).
-> +
-> +	- Loma:
-> +
-> +	Copyright (C) 2003, NECTEC. All rights reserved.
-> +
-> +	- TlwgMono:
-> +
-> +	Copyright (C) 2003 Poonlap Veerathanabutr <poonlap@linux.thai.net>
-> +
-> +	- Tlwg Typewriter:
-> +
-> +	Copyright (C) 2003, 2004 Poonlap Veerathanabutr <poonlap@linux.thai.net>
-> +
-> +	- Tlwg Typist:
-> +
-> +	Tlwg Typist, based on Poonlap Veerathanabutr's Tlwg Typewriter.
-> +
-> +	Copyright (C) 2005-2006 Theppitak Karoonboonyanan. Tlwg Typewriter,
-> +	Free Thai Pseudo Monospace outline font.
-> +
-> +	Copyright (C) 2003, 2004 Poonlap Veerathanabutr <poonlap@linux.thai.net>
-> +
-> +	- Purisa:
-> +
-> +	Copyright (C) 2003, 2004 Poonlap Veerathanabutr=20
-> +	<poonlap@linux.thai.net>, GPL license
-> +
-> +	- Sawasdee:
-> +
-> +	Copyright (C) 2007 Pol Udomwittayanukul <webnaipol@gmail.com>.
-> +	All rights reserved.
-> +
-> +	- Umpush:
-> +
-> +	Copyright (C) 2003 NECTEC. All rights reserved.
-> +	Copyright (c) 2007 Widhaya Trisarnwadhana <widhaya3@gmail.com>.
-> +	All rights reserved.
-> +
-> +License:
-> +
-> +	This font is free software; you can redistribute it and/or modify it
-> +	under the terms of the GNU General Public License as published by the
-> +	Free Software Foundation; either version 2 of the License, or (at your
-> +	option) any later version.
-> +
-> +	This font is distributed in the hope that it will be useful, but
-> +	WITHOUT ANY WARRANTY; without even the implied warranty of
-> +	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-> +	General Public License for more details.
-> +
-> +	You should have received a copy of the GNU General Public License
-> +	along with this font; if not, write to the Free Software Foundation,
-> +	Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-> +
-> +	As a special exception, if you create a document which uses this font,
-> +	and embed this font or unaltered portions of this font into the
-> +	document, this font does not by itself cause the resulting document
-> +	to be covered by the GNU General Public License. This exception does
-> +	not however invalidate any other reasons why the document might be
-> +	covered by the GNU General Public License. If you modify this font,
-> +	you may extend this exception to your version of the font, but you
-> +	are not obligated to do so. If you do not wish to do so, delete this
-> +	exception statement from your version.
-> +
-> +See included GPL file for the GNU General Public License (GPL) terms.
-> +
-> +
-> +* Non-GPL Fonts:
-> +
-> +- Waree:
-> +
-> +Copyright:
-> +
-> +	Copyright (C) 2003 by Bitstream, Inc. All Rights Reserved.
-> +	TLWG changes are in public domain.
-> +
-> +	Bitstream Vera is a trademark of Bitstream, Inc.
-> +
-> +License:
-> +
-> +	Permission is hereby granted, free of charge, to any person obtaining
-> +	a copy of the fonts accompanying this license ("Fonts") and associated
-> +	documentation files (the "Font Software"), to reproduce and distribute
-> +	the Font Software, including without limitation the rights to use,
-> +	copy, merge, publish, distribute, and/or sell copies of the Font
-> +	Software, and to permit persons to whom the Font Software is furnished
-> +	to do so, subject to the following conditions:
-> +
-> +	The above copyright and trademark notices and this permission notice
-> +	shall be included in all copies of one or more of the Font Software
-> +	typefaces.
-> +
-> +	The Font Software may be modified, altered, or added to, and in
-> +	particular the designs of glyphs or characters in the Fonts may be
-> +	modified and additional glyphs or characters may be added to the
-> +	Fonts, only if the fonts are renamed to names not containing either
-> +	the words "Bitstream" or the word "Vera".
-> +
-> +	This License becomes null and void to the extent applicable to Fonts
-> +	or Font Software that has been modified and is distributed under the
-> +	"Bitstream Vera" names.
-> +
-> +	The Font Software may be sold as part of a larger software package
-> +	but no copy of one or more of the Font Software typefaces may be sold
-> +	by itself.
-> +
-> +	THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-> +	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
-> +	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
-> +	OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL
-> +	BITSTREAM OR THE GNOME FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR
-> +	OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL,
-> +	OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-> +	OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT
-> +	SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
-> +
-> +	Except as contained in this notice, the names of Gnome, the Gnome
-> +	Foundation, and Bitstream Inc., shall not be used in advertising or
-> +	otherwise to promote the sale, use or other dealings in this Font
-> +	Software without prior written authorization from the Gnome Foundation
-> +	or Bitstream Inc., respectively. For further information, contact:
-> +	fonts at gnome dot org.=20
-> +
-> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb b/meta-=
-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
-> new file mode 100644
-> index 0000000..a9b52ed
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-tlwg_0.6.1.bb
-> @@ -0,0 +1,29 @@
-> +require ttf.inc
-> +
-> +SUMMARY =3D "Thai Linux Working Group Fonts"
-> +AUTHOR =3D "Thai Linux Working Group"
-> +HOMEPAGE =3D "http://linux.thai.net/projects/fonts-tlwg"
-> +LICENSE =3D "GPLv2 & TLWG"
-> +LIC_FILES_CHKSUM =3D "file://../fonts-tlwg-${PV}/COPYING;md5=3D3d20cd7ea=
-df4afd5460c0adb32e387fd"
-> +
-> +SRC_URI =3D "http://linux.thai.net/pub/ThaiLinux/software/fonts-tlwg/fon=
-ts-tlwg-${PV}.tar.xz;name=3Dsource \
-> +           http://linux.thai.net/pub/ThaiLinux/software/ttf-tlwg/ttf-tlw=
-g-${PV}.tar.xz;name=3Dttf"
-> +SRC_URI[source.md5sum] =3D "5ea5bc964d992df0428f2e0b85f48400"
-> +SRC_URI[source.sha256sum] =3D "77fb9832221fde60c9f683ac3fdce7d45ab6e9c0d=
-83df83da969a3fe9faba537"
-> +SRC_URI[ttf.md5sum] =3D "1bc51f45a7b661404a944fab6911261c"
-> +SRC_URI[ttf.sha256sum] =3D "aa9cd68969b6f704df3e5b1a2e11204c47f118c8ab05=
-2f04c111bd5f299f77c8"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
+
+${BPN}-${PV} -> ${BP}
+
+> +SRC_URI[md5sum] =3D "3b99effb2a9417707d463e6f19cf2629"
+> +SRC_URI[sha256sum] =3D "78c984103555c51e6f7ef52e3a2128e2beb9896871b2cc4d=
+4dbd4d64bff132de"
 > +
 > +S =3D "${WORKDIR}/${BPN}-${PV}"
 
-This looks like default ${PB}, can you drop whole S assignment?
+This looks like default ${BP}, can you drop it?
 
 > +
-> +do_install_append () {
-> +    install -d ${D}${sysconfdir}/fonts/conf.d
+> +inherit qmake5
 > +
-> +    for x in ${S}/etc/fonts/conf.avail/*.conf; do
-> +        install -m 0644 $x ${D}${sysconfdir}/fonts/conf.d/
-> +    done
-> +}
-> +
-> +PACKAGES =3D "${PN}"
-> +FONT_PACKAGES =3D "${PN}"
-> +
-> +FILES_${PN} =3D "${datadir}/fonts ${sysconfdir}"
+> +EXTRA_QMAKEVARS_PRE +=3D "PREFIX=3D${prefix}"
+> +EXTRA_QMAKEVARS_POST +=3D "SUBDIRS=3D${BPN}"
 > --=20
 > 2.4.4
 >=20
@@ -280,16 +107,16 @@ This looks like default ${PB}, can you drop whole S assignment?
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---hAW+M2+FUO+onfmf
+--r4QXMf6/kyF/FvJJ
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlWT6BsACgkQN1Ujt2V2gByrHACgl3sn7B/0QNsf0xR0vXq/35y3
-auoAn0ySXtGBAghiOQ9TTp1jZYtUV0pF
-=TnGd
+iEYEARECAAYFAlWT6F0ACgkQN1Ujt2V2gBzYXwCdEJItE8vifAZujDctbHdda/jZ
+6mMAnRMKWOtIflyQFwsVfyGdKlDB3XYB
+=LQJx
 -----END PGP SIGNATURE-----
 
---hAW+M2+FUO+onfmf--
+--r4QXMf6/kyF/FvJJ--
