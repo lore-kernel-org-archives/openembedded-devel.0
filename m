@@ -1,25 +1,24 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.chez-thomas.org (mail.mlbassoc.com [65.100.170.105])
-	by mail.openembedded.org (Postfix) with ESMTP id 423C360053
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DD7D60088
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Jun 2015 20:54:48 +0000 (UTC)
-Received: by mail.chez-thomas.org (Postfix, from userid 1998)
-	id 14B03F8119A; Tue, 30 Jun 2015 14:54:46 -0600 (MDT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	hermes.chez-thomas.org
-X-Spam-Level: 
-X-Spam-Status: No, score=0.8 required=10.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from Zeus.chez-thomas.org (zeus [192.168.1.114])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 8CA3DF8119A;
-	Tue, 30 Jun 2015 14:54:46 -0600 (MDT)
-From: Gary Thomas <gary@mlbassoc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Jun 2015 14:55:30 -0600
-Message-Id: <1435697730-12800-1-git-send-email-gary@mlbassoc.com>
+	Wed,  1 Jul 2015 01:24:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t611OlUo028350
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Jun 2015 18:24:47 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Tue, 30 Jun 2015 18:24:47 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 1 Jul 2015 09:24:26 +0800
+Message-ID: <1435713866-2884-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: [meta-browser][PATCH v2] chromium: List all PACKAGECONFIG settings to avoid warning
+MIME-Version: 1.0
+Subject: [PATCH] php: fix a building failure on aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,36 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Jun 2015 20:54:55 -0000
+X-List-Received-Date: Wed, 01 Jul 2015 01:24:48 -0000
+Content-Type: text/plain
 
-OE-core now warns if PACKAGECONFIG is used to set an option that
-does not have a corresponding PACKAGECONFIG[option]="xxx" line.
-This recipe makes use of many such options & this patch suppresses
-those warnings by listing the options.
+From: Roy Li <rongqing.li@windriver.com>
 
-Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+When -O0 of gcc is used to compile the macro ZEND_SIGNED_MULTIPLY_LONG
+in Zend/zend_multiply.h, the compiling will fail with the below error:
+  : Assembler messages:
+  :3113: Error: operand 2 should be an integer register -- `mul x1,[x29,200],[x29,192]'
+  :3114: Error: operand 2 should be an integer register -- `smulh x0,[x29,200],[x29,192]'
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- recipes-browser/chromium/chromium.inc | 7 +++++++
- 1 file changed, 7 insertions(+)
+ meta-oe/recipes-devtools/php/php_5.5.26.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 8e83f6a..973d1c9 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -17,6 +17,13 @@ PACKAGECONFIG ??= "use-egl"
- # automatically and silently fall back to GLX
- PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.26.bb b/meta-oe/recipes-devtools/php/php_5.5.26.bb
+index 8b64b2b..85fdccb 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.26.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.26.bb
+@@ -101,6 +101,7 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
+ export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
+ export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
+ CFLAGS += " -D_GNU_SOURCE -g -DPTYS_ARE_GETPT -DPTYS_ARE_SEARCHED -I${STAGING_INCDIR}/apache2"
++CFLAGS_append_aarch64 = " -O2"
  
-+# Additional PACKAGECONFIG options - listed here to avoid warnings
-+PACKAGECONFIG[component-build] = ""
-+PACKAGECONFIG[disable-api-keys-info-bar] = ""
-+PACKAGECONFIG[ignore-lost-context] = ""
-+PACKAGECONFIG[impl-side-painting] = ""
-+PACKAGECONFIG[use-gl] = ""
-+
- GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+ EXTRA_OEMAKE = "INSTALL_ROOT=${D}"
  
- do_configure() {
 -- 
 1.9.1
 
