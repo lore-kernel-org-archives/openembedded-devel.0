@@ -1,40 +1,27 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wg0-f54.google.com (mail-wg0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F4D660017
+Return-Path: <biannm@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 157AC65C89
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jul 2015 19:36:10 +0000 (UTC)
-Received: by wguu7 with SMTP id u7so45234788wgu.3
+	Thu,  2 Jul 2015 01:58:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="97977140"
+Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Jul 2015 10:02:48 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t621vAPW022783
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jul 2015 12:36:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:subject:from:to:date:in-reply-to:references:content-type
-	:mime-version:content-transfer-encoding;
-	bh=MDsjvV+fHE/zvbLfEceyMUvcEosJ2SnNhBa6CQ5xqrg=;
-	b=1FUDfiVS6JPqC0nLzJokm1DAvw9pJjopEqjKKyNg1vlKs1CFLQmeUCwmBq198FcTD2
-	TcS9Z75i1Xn+NK7tTk/Auln5DAQdQ1iwAcAGoMy9Uu+EQHkNo0BjPbC/N0vlX+3iYLu/
-	xm1QqROYdp9IlIak9L0SUdh/QT7bFNcztyWFWd4k27vGAGBDOZD8W9m21BUGw0qjknkO
-	MfOrj3JJsNEN7rVJlaT0c1aL+IkCphXzi+aPx3WzpZjYHv2WOBsweucQQdDU3WVdPc65
-	dKiCNpOtDi0UqJectitVYj4V+4zNTuu49dkKc3gMxnmAw6ryaaBBqIyQYNwYqqIQJiUa
-	ckMg==
-X-Received: by 10.194.2.161 with SMTP id 1mr50210790wjv.143.1435779370424;
-	Wed, 01 Jul 2015 12:36:10 -0700 (PDT)
-Received: from [192.168.0.7] (212-41-115-180.adsl.solnet.ch. [212.41.115.180])
-	by mx.google.com with ESMTPSA id
-	ul1sm4321116wjc.30.2015.07.01.12.36.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Jul 2015 12:36:09 -0700 (PDT)
-Message-ID: <1435779368.3007.16.camel@Saturn.local.all>
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 01 Jul 2015 21:36:08 +0200
-In-Reply-To: <CAJTo0LZVwcE2JHe5CAaaXHHKKMPJdWqC2Tw_OTQfaza_2DTcCQ@mail.gmail.com>
-References: <1435697730-12800-1-git-send-email-gary@mlbassoc.com>
-	<5593A340.8030507@windriver.com> <5593F569.2080008@mlbassoc.com>
-	<CAJTo0LZVwcE2JHe5CAaaXHHKKMPJdWqC2Tw_OTQfaza_2DTcCQ@mail.gmail.com>
-X-Mailer: Evolution 3.10.4 
-Mime-Version: 1.0
-Subject: Re: [meta-browser][PATCH v2] chromium: List all PACKAGECONFIG settings to avoid warning
+	Thu, 2 Jul 2015 09:57:10 +0800
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 2 Jul 2015 09:58:48 +0800
+From: Bian Naimeng <biannm@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Jul 2015 09:49:19 +0800
+Message-ID: <1435801759-10209-1-git-send-email-biannm@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.31]
+Subject: [meta-oe][PATCH v2] sysdig: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,57 +35,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jul 2015 19:36:11 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jul 2015 01:58:54 -0000
+Content-Type: text/plain
 
-Hi
+sysdig is a tool for system-level exploration and troubleshooting
 
-Am Mittwoch, den 01.07.2015, 16:47 +0100 schrieb Burton, Ross:
-> On 1 July 2015 at 15:12, Gary Thomas <gary@mlbassoc.com> wrote:
-> 
-> > No, it's much better to use the standard mechanism (PACKAGECONFIG) rather
-> > than making up something special for this recipe.  The patch is needed only
-> > to suppress warnings about how it's being used.
-> >
-> 
-> I kinda of agree with Robert here - the standard method isn't being used,
-> but the variable is being used.
-> 
-> As the chromium recipe doesn't inherit autotools EXTRA_OECONF will only be
-> set by the PACKAGECONFIG handler, so it would be an improvement if the
-> enable/disable arguments were specified as usual in the flags and then
-> EXTRA_OEGYP just included EXTRA_OECONF.  (untested but might work, cmake
-> recipes certainly did this)
-> 
-> Ross
+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+---
+ .../01-donot-set-default-value-to-va_list.patch    | 22 ++++++++++++++
+ meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb  | 34 ++++++++++++++++++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
+ create mode 100644 meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
 
-I think that this view is guided by an inside view on PACKAGECONFIG.
-
-For the guys wanting to influencing the build of a package they want to
-set a list of options and then forget about it.
-So having to write in your bbappend something like
-
-PACKAGECONFIG += "use-egl"
-PACKAGECONFIG_NON_CONFIGOPTION += "component-build"
-
-instead of
-PACKAGECONFIG += "use-egl component-build"
-
-is sort of unintutive. 
-
-I guess the warning which now pops up when not setting a value in
-PACKAGECONFIG which does not have a corresponding PACKAGECONFIG[value]
-is meant to warn of a typo in setting PACKAGECONFIG.
-Gary's solution would even provide the same warning mechanism for free
-while when moving to a PACKAGECONFIG_NON_CONFIGOPTION one would have to
-implement another test to get a warning when providing a non supported
-value to PACKAGECONFIG_NON_CONFIGOPTION.
-
-Just my two cents.
-
-Regards
-Max
-
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch b/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
+new file mode 100644
+index 0000000..9cb6378
+--- /dev/null
++++ b/meta-oe/recipes-extended/sysdig/sysdig/01-donot-set-default-value-to-va_list.patch
+@@ -0,0 +1,22 @@
++fix build error as following.
++
++  sysdig-0.1.101/userspace/libsinsp/ctext.h:376:50: error: could not convert '0' from 'int' to 'va_list {aka __va_list}'
++  |    int8_t vprintf(const char*format, va_list ap = 0);
++  |                                                   ^
++  | make[2]: *** [userspace/libsinsp/CMakeFiles/sinsp.dir/ctext.cpp.o] Error 1
++
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++
++diff -Nurp sysdig-0.1.101.orig/userspace/libsinsp/ctext.h sysdig-0.1.101/userspace/libsinsp/ctext.h
++--- sysdig-0.1.101.orig/userspace/libsinsp/ctext.h	2015-06-04 02:58:51.000000000 +0800
+++++ sysdig-0.1.101/userspace/libsinsp/ctext.h	2015-07-02 09:18:14.154627357 +0800
++@@ -373,7 +373,7 @@ class ctext
++ 		// application to this library seamlessly.
++ 		//
++ 		int8_t printf(const char*format, ...);
++-		int8_t vprintf(const char*format, va_list ap = 0);
+++		int8_t vprintf(const char*format, va_list ap);
++ 
++ 		//
++ 		// nprintf is identical to the printf above EXCEPT for
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+new file mode 100644
+index 0000000..789fd47
+--- /dev/null
++++ b/meta-oe/recipes-extended/sysdig/sysdig_0.1.101.bb
+@@ -0,0 +1,34 @@
++SUMMARY = "A New System Troubleshooting Tool Built for the Way You Work"
++DESCRIPTION = "Sysdig is open source, system-level exploration: capture \
++system state and activity from a running Linux instance, then save, \
++filter and analyze."
++HOMEPAGE = "http://www.sysdig.org/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++inherit cmake pkgconfig
++
++DEPENDS = "luajit zlib ncurses"
++RDEPENDS_${PN} = "bash"
++
++
++SRC_URI = "https://github.com/draios/sysdig/archive/${PV}.tar.gz \
++           file://01-donot-set-default-value-to-va_list.patch \
++          "
++
++SRC_URI[md5sum] = "5fe96a3a0fd98b2157a40cb29af41afc"
++SRC_URI[sha256sum] = "6995e39be565514901b5cb587689ee2efbf8359293e4e597362382cccf0e9db6"
++
++DIR_ETC="/etc"
++EXTRA_OECMAKE = ' -DUSE_BUNDLED_LUAJIT="OFF" \
++                  -DUSE_BUNDLED_ZLIB="OFF" \
++                  -DBUILD_DRIVER="OFF" \
++                  -DUSE_BUNDLED_NCURSES="OFF" \
++                  -DDIR_ETC="${DIR_ETC}" \
++                '
++
++FILES_${PN} += " \
++    ${DIR_ETC}/* \
++    ${datadir}/zsh/* \ 
++    ${prefix}/src/*  \
++"
+-- 
+1.9.1
 
 
