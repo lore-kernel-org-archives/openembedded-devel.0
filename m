@@ -1,35 +1,40 @@
-Return-Path: <eu@felipetonello.com>
-Received: from mail-ob0-f177.google.com (mail-ob0-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 89661607BB
+Return-Path: <mik.hargreaves@gmail.com>
+Received: from mail-pd0-f182.google.com (mail-pd0-f182.google.com
+	[209.85.192.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 686F0607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jul 2015 11:50:43 +0000 (UTC)
-Received: by obpn3 with SMTP id n3so47649035obp.0
+	Thu,  2 Jul 2015 13:11:08 +0000 (UTC)
+Received: by pdbep18 with SMTP id ep18so45197006pdb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jul 2015 04:50:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-type;
-	bh=Md24h72bG4kcka7pG/RcK09vl70HAbAMz+IkI/6J5yQ=;
-	b=Cw5+b4Oun2MeVHFWB3A2JBy08HYiiU0QjxRsdBok03kxuqaGJDb3rlTJj4IeEtUcou
-	GxIe9jbXkezRLavCdo7IfAT+xgh+i7SW2yCm3ZeND3cqm292zEJ/AruQSOBtxwOWTrMp
-	OB7wfjB4VGlnthp3dZgNbGOfNWELVz5/0BxaHv/v2RnSk8jnevakJYDMKhBrxTlFKjCv
-	ef9J8FegR5n4/ogYfNG+oiIwpR/PPQn3l1AEq1xxB1NNwq59o/9N5hc9BDk7iULdqDNg
-	q4E75KsPd00adhcgrCLiGk9vX+IymFLOMR5vRclFFpy5fI0TGJsX0OdzzHuEsH0tkSAm
-	QO5Q==
-X-Gm-Message-State: ALoCoQkgOmIj2Xy3Yb3IKRSLrWQCLzgXPDZ1cuktDbsuf0PmJZHnV/QPSdCJDoMrcHMqjFUwbh1/
+	Thu, 02 Jul 2015 06:11:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=KLSlGLSdgCRpBYwOuf/uzjKeu2+58Aw5v0680mJgoAs=;
+	b=I6lKxlLr++skqC04e8SGGJ8GwDNV2dnj4VWCqM6H/bhsEfvB7ICudardzOUe6W8yZz
+	NazWAylOnT3zYqxv76VmubwFhqKiLKBDD6uCA3B6ioKu14xStxBI4qs14Qxfz3FLCYnz
+	lfp2t+dFhM0jbd2DSd43Zc3QVSsZhZF2bNpn9rqVy8uHp/bKCcwrQTH7HiGAohFYSHJq
+	vl8hkGgPEjBTRpt/VK2SkfN0WtjtdP4BEu6uRFJky6GAuLvPthpmHScbODa/s+Ay83aD
+	UEIpsR54qzS9oFkgxv/v4+aDp+jKUtBiI51SMdasaP127ByVPLUL/wbDDf6nSeND9MV6
+	6FBw==
+X-Received: by 10.66.139.41 with SMTP id qv9mr66148023pab.35.1435842668956;
+	Thu, 02 Jul 2015 06:11:08 -0700 (PDT)
+Received: from [192.168.0.6] (124-150-90-170.dyn.iinet.net.au.
+	[124.150.90.170])
+	by mx.google.com with ESMTPSA id y2sm5700389pdc.91.2015.07.02.06.11.06
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 02 Jul 2015 06:11:07 -0700 (PDT)
+Message-ID: <55953861.2050506@gmail.com>
+Date: Thu, 02 Jul 2015 23:10:57 +1000
+From: Michael Hargreaves <mik.hargreaves@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-X-Received: by 10.60.142.170 with SMTP id rx10mr29408095oeb.28.1435837844135; 
-	Thu, 02 Jul 2015 04:50:44 -0700 (PDT)
-Received: by 10.76.147.66 with HTTP; Thu, 2 Jul 2015 04:50:43 -0700 (PDT)
-In-Reply-To: <NQIOPE$74E68916C0FDE19AC281546DF48A547B@phoenixsoftware.it>
-References: <NQIOPE$74E68916C0FDE19AC281546DF48A547B@phoenixsoftware.it>
-Date: Thu, 2 Jul 2015 12:50:43 +0100
-Message-ID: <CAGrhNMzd7jYPqePHODpd46GBqhD4R34DiWNzUTHj89x0S7cZMQ@mail.gmail.com>
-From: Felipe Tonello <eu@felipetonello.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5] fido meta-toolchain-qt5
+References: <mailman.5.1435838401.9446.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.5.1435838401.9446.openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-freescale] Chromium crashes on HTML5 video tag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,34 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2015 11:50:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Jul 2015 13:11:12 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Pierluigi,
+Hi Nikolay,
 
-On Thu, Jun 25, 2015 at 9:24 PM, Pierluigi Passaro
-<pierluigi.passaro@phoenixsoftware.it> wrote:
-> On 25/06/2015 21:53, Khem Raj wrote:
->> On Mon, Jun 22, 2015 at 1:54 AM, Pierluigi Passaro
->> <pierluigi.passaro@phoenixsoftware.it> wrote:
->>> Hi all,
->>> I've compiled a QT5 filesystem for imx28evk machine and QT5 apps runs fine.
->>> I've also compiled and installed QT5 SDK, however if I try to debug
->>> applications I get the following error:
->>>
->>> Debugging starts
->>> Listening on port 10000
->>> Remote debugging from host 192.168.2.173
->>> Process /root/MyQt5App created; pid = 1181
->>> /root/MyQt5App: error while loading shared libraries: unexpected PLT reloc
->>
->>
->> you probably have different dynamic linker on target and in cross SDK,
->> make sure they are same.
-> thanks for the reply, but how can I check them?
-> I've just checked the .so generated by yocto and seem the same...
-
-Have you configured QtCreator to use the SDK environment?
-
-Felipe
+On 2/07/2015 10:00 PM, openembedded-devel-request@lists.openembedded.org 
+wrote:
+> Hi Zoltan, On 06/12/2015 09:57 AM, Zoltan Kuscsik wrote:
+>> >Do you have a crash log? If not, you should change your build from Release
+>> >to Debug and
+>> >get some backtraces.
+> The chromium debug binary is 3.1GiB, there's no way to run this on my
+> ARM target. If you have other suggestions how to extract trace/debug
+> info, I would be glad to try them.
+>
+> Regards,
+> Nikolay
+I hit a similar issue on intel platform since updating meta-browser. It 
+wasn't crashing, but was getting the 'Aw, Snap' chromium page on any 
+html5 video or audio.
+It turned out to be because the ffmpeg codecs have been separated into 
+their own split package.
+Adding both 'chromium' and 'chromium-codecs-ffmpeg' to the IMAGE_INSTALL 
+resolved the issue for me.
+Possibly not the same issue, but sounds similar.
+Cheers,
+Mik.
 
