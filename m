@@ -1,27 +1,35 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with SMTP id 80B9A75C71
+Return-Path: <net147@gmail.com>
+Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 8932C73231
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jul 2015 13:50:28 +0000 (UTC)
-Received: (qmail 22995 invoked by uid 1003); 2 Jul 2015 13:50:28 -0000
-Received: from unknown (HELO ?192.168.11.121?)
-	(philip@opensdr.com@108.44.116.52)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	2 Jul 2015 13:50:28 -0000
-Message-ID: <559541A3.70901@balister.org>
-Date: Thu, 02 Jul 2015 09:50:27 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-MIME-Version: 1.0
+	Thu,  2 Jul 2015 15:18:35 +0000 (UTC)
+Received: by qkeo142 with SMTP id o142so54092482qke.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jul 2015 08:18:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=references:from:mime-version:in-reply-to:date:message-id:subject:to
+	:content-type; bh=T06K3VfbYlW+TSkwcCouZqY/Zxvg/Fj9XEkyNobZ7Fc=;
+	b=NJIBMYXunUzimg05gvHJhMvSP2irLntNfFgT9K1cGQIhsvVgRWnq7XYllD2Fo7ZXfU
+	S53HNBY6Fr/9n5Cof+gc+5qO6BG7NSNrgKHzUwdjC6ZMNeOvE/RujRgVgLT9Rx/NMAUA
+	fJ4GD6ehazbcQ+ty9ESpaSgBS/qUzYXJZZ6B8+YMFTCVIwccRdoaZyLx1H7eblYZnw8X
+	I+ZrjYcw2t8+EMZvVf3MXAGv3K5aae98vtoVu2Un3sazC+viNAXSbM/jCi3irtqxl5/m
+	T4zJTaA02nYFCXoecQBMoqlSGCAFXBsQVid7aUrEx/YJlpcpfoLnt/29WCjLs4qNygKw
+	J6DQ==
+X-Received: by 10.140.129.130 with SMTP id 124mr22373593qhb.28.1435850315837; 
+	Thu, 02 Jul 2015 08:18:35 -0700 (PDT)
+References: <1435741531-30306-1-git-send-email-net147@gmail.com>
+	<5593B688.4070304@opendreambox.org> <20150701131955.GH2409@jama>
+	<5593EFFF.4060502@gmail.com>
+	<CAGrhNMzBoRf=bpSk4nerdBHemCET8bVgMYtc6SLR5fGOdKUHWQ@mail.gmail.com>
+From: Jonathan Liu <net147@gmail.com>
+Mime-Version: 1.0 (1.0)
+In-Reply-To: <CAGrhNMzBoRf=bpSk4nerdBHemCET8bVgMYtc6SLR5fGOdKUHWQ@mail.gmail.com>
+Date: Fri, 3 Jul 2015 01:18:39 +1000
+Message-ID: <-3219499316589280773@unknownmsgid>
 To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>
-References: <555495BC.402@balister.org>
-In-Reply-To: <555495BC.402@balister.org>
-X-Forwarded-Message-Id: <555495BC.402@balister.org>
-Subject: REMINDER! Fwd: meta-oe and oe-core mirror repos going away at the end of June
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] libconnman-qt5: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,36 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jul 2015 13:50:32 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jul 2015 15:18:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The short name repos will go away very very soon. Please check your
-scripts and add remotes to the proper repo names.
+Hi Felipe,
 
-Philip
+> On 2 Jul 2015, at 9:46 pm, Felipe Tonello <eu@felipetonello.com> wrote:
+>
+> Hi Jonathan,
+>
+> On Wed, Jul 1, 2015 at 2:49 PM, Jonathan Liu <net147@gmail.com> wrote:
+>
+> [...]
+>
+>>
+>> I have successfully tested building the recipe with an application that
+>> depends on libconnman-qt5 using both the C++ and QML bindings and using it
+>> on the target device.
+>
+> Did the SDK worked as well?
 
+Yes. I tested building application using SDK on another machine as well.
 
--------- Forwarded Message --------
-Subject: meta-oe and oe-core mirror repos going away at the end of June
-Date: Thu, 14 May 2015 08:31:56 -0400
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-<openembedded-devel@lists.openembedded.org>, openembedded-core
-<openembedded-core@lists.openembedded.org>
-
-For several "years", we have maintained two copies of the
-openembedded-core and meta-openembedded repositories on github. At OEDAM
-we decided it is time to go ahead and remove the repos with the old
-names oe-core and meta-oe to lower the confusion level about what is in
-these repos.
-
-Please update build scripts and git config files with the current names,
-openemebdded-core and meta-openembedded.
-
-Thanks,
-
-Philip
-
-
+Regards,
+Jonathan
 
