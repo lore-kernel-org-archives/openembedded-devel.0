@@ -1,24 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F5A5739BE
+	by mail.openembedded.org (Postfix) with ESMTP id 41C166AB9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jul 2015 08:56:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t668uoDY023041
+	Mon,  6 Jul 2015 09:08:50 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t6698pOU023143
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Jul 2015 01:56:50 -0700 (PDT)
+	Mon, 6 Jul 2015 02:08:51 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 6 Jul 2015 01:56:49 -0700
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.224.2; Mon, 6 Jul 2015 02:08:50 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 Jul 2015 16:56:07 +0800
-Message-ID: <1436172967-1489-1-git-send-email-rongqing.li@windriver.com>
+Date: Mon, 6 Jul 2015 17:08:08 +0800
+Message-ID: <1436173688-7567-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] inetutils: fix tcpd path of rlogin rsh and rexec
+Subject: [PATCH][meta-networking] inetutils: move daemon servers from bin to sbin directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,67 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jul 2015 08:56:51 -0000
+X-List-Received-Date: Mon, 06 Jul 2015 09:08:53 -0000
 Content-Type: text/plain
 
-From: Jian Liu <jian.liu@windriver.com>
+From: Li Wang <li.wang@windriver.com>
 
-rlogin, rsh and rexec xinet.d script, a wrong path is
-being referenced under the server section.
+move daemon servers from bin to sbin directory:
+tftpd, telnetd, rshd, rexecd and rlogind
 
-server = /usr/bin/tcpd
-instead of
-server = /usr/sbin/tcpd
-
-tcpd is provided by tcp-wrappers
-
-Written-by: Herve.Patriarche <herve.patriarche@windriver.com>
-Signed-off-by: Jian Liu <jian.liu@windriver.com>
+Signed-off-by: Li Wang <li.wang@windriver.com>
 ---
- .../inetutils/inetutils-1.9.2/rexec.xinetd.inetutils                    | 2 +-
- .../inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils                   | 2 +-
- .../recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ .../recipes-connectivity/inetutils/inetutils_1.9.2.bb          | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
-index 80aed36..7354360 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
-@@ -14,7 +14,7 @@ service exec
- 	group		= root
- 	log_on_success	+= USERID
- 	log_on_failure	+= USERID
--	server		= /usr/bin/tcpd
-+	server		= /usr/sbin/tcpd
- 	server_args	= /usr/sbin/in.rexecd
- 	disable		= yes
- }
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
-index 00dbf93..70493e6 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
-@@ -14,7 +14,7 @@ service login
- 	group		= root
- 	log_on_success	+= USERID
- 	log_on_failure	+= USERID
--	server		= /usr/bin/tcpd
-+	server		= /usr/sbin/tcpd
- 	server_args	= /usr/sbin/in.rlogind -a
- 	disable		= yes
- }
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
-index ad59b62..a842eb9 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
-@@ -15,7 +15,7 @@ service shell
- 	group		= root
- 	log_on_success	+= USERID
- 	log_on_failure	+= USERID
--	server		= /usr/bin/tcpd
-+	server		= /usr/sbin/tcpd
- 	server_args	= /usr/sbin/in.rshd -aL
- 	disable		= yes
- }
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
+index cd7b425..9bb9fe8 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
+@@ -97,21 +97,21 @@ ALTERNATIVE_${PN}-ftp = "ftp"
+ ALTERNATIVE_${PN}-ftpd = "ftpd"
+ ALTERNATIVE_${PN}-tftp = "tftp"
+ ALTERNATIVE_${PN}-tftpd = "tftpd"
+-ALTERNATIVE_LINK_NAME[tftpd] = "${bindir}/tftpd"
++ALTERNATIVE_LINK_NAME[tftpd] = "${sbindir}/tftpd"
+ ALTERNATIVE_TARGET[tftpd]  = "${sbindir}/in.tftpd"
+ 
+ ALTERNATIVE_${PN}-telnet = "telnet"
+ ALTERNATIVE_${PN}-telnetd = "telnetd"
+-ALTERNATIVE_LINK_NAME[telnetd] = "${bindir}/telnetd"
++ALTERNATIVE_LINK_NAME[telnetd] = "${sbindir}/telnetd"
+ ALTERNATIVE_TARGET[telnetd] = "${sbindir}/in.telnetd"
+ 
+ ALTERNATIVE_${PN}-rsh = "rcp rexec rlogin rsh"
+ ALTERNATIVE_${PN}-rshd = "rshd rexecd rlogind"
+-ALTERNATIVE_LINK_NAME[rshd] = "${bindir}/rshd"
++ALTERNATIVE_LINK_NAME[rshd] = "${sbindir}/rshd"
+ ALTERNATIVE_TARGET[rshd] = "${sbindir}/in.rshd"
+-ALTERNATIVE_LINK_NAME[rexecd] = "${bindir}/rexecd"
++ALTERNATIVE_LINK_NAME[rexecd] = "${sbindir}/rexecd"
+ ALTERNATIVE_TARGET[rexecd] = "${sbindir}/in.rexecd"
+-ALTERNATIVE_LINK_NAME[rlogind] = "${bindir}/rlogind"
++ALTERNATIVE_LINK_NAME[rlogind] = "${sbindir}/rlogind"
+ ALTERNATIVE_TARGET[rlogind] = "${sbindir}/in.rlogind"
+ 
+ ALTERNATIVE_${PN}-inetd= "inetd"
 -- 
 1.9.1
 
