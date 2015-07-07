@@ -1,24 +1,27 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 64BEB734B8
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 791D273BB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jul 2015 02:29:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t672T5Ti004749
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  7 Jul 2015 02:51:53 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98150360"
+Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Jul 2015 10:55:44 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t672o8A3017673
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Jul 2015 19:29:06 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 6 Jul 2015 19:29:05 -0700
-From: <rongqing.li@windriver.com>
+	Tue, 7 Jul 2015 10:50:08 +0800
+Received: from localhost.localdomain (10.167.226.92) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Tue, 7 Jul 2015 10:51:49 +0800
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Jul 2015 10:28:19 +0800
-Message-ID: <1436236099-31819-1-git-send-email-rongqing.li@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Tue, 7 Jul 2015 10:51:38 +0800
+Message-ID: <1436237498-1610-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking] ntp: get parameters from dhcp
+X-Originating-IP: [10.167.226.92]
+Subject: [meta-oe][PATCH] multipath-tools: bug fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,118 +35,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 02:29:09 -0000
+X-List-Received-Date: Tue, 07 Jul 2015 02:52:01 -0000
 Content-Type: text/plain
 
-From: Li Wang <li.wang@windriver.com>
+Modify multipathd.service,otherwise it can't be started successfully.
 
-the script ntp.sh is called by dhcp client,
-it can get some parameters from dhcp.
-
-Signed-off-by: Li Wang <li.wang@windriver.com>
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-support/ntp/files/ntp.sh   | 59 ++++++++++++++++++++++
- meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb |  5 ++
- 2 files changed, 64 insertions(+)
- create mode 100755 meta-networking/recipes-support/ntp/files/ntp.sh
+ .../files/0001-multipathd.service-Error-fix.patch  | 36 ++++++++++++++++++++++
+ .../multipath-tools/multipath-tools_git.bb         |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch
 
-diff --git a/meta-networking/recipes-support/ntp/files/ntp.sh b/meta-networking/recipes-support/ntp/files/ntp.sh
-new file mode 100755
-index 0000000..fc109b5
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch b/meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch
+new file mode 100644
+index 0000000..1e48e1c
 --- /dev/null
-+++ b/meta-networking/recipes-support/ntp/files/ntp.sh
-@@ -0,0 +1,59 @@
-+#!/bin/bash
-+#
-+# ntp.sh: dhclient-script plugin for NTP settings,
-+#         place in /etc/dhcp/dhclient.d and 'chmod +x ntp.sh' to enable
-+#
-+# Copyright (C) 2008 Red Hat, Inc.
-+#
-+# This program is free software; you can redistribute it and/or modify
-+# it under the terms of the GNU General Public License as published by
-+# the Free Software Foundation; either version 2 of the License, or
-+# (at your option) any later version.
-+#
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU General Public License for more details.
-+#
-+# You should have received a copy of the GNU General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+#
-+# Author(s): David Cantrell <dcantrell@redhat.com>
-+#            Miroslav Lichvar <mlichvar@redhat.com>
-+#
++++ b/meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch
+@@ -0,0 +1,36 @@
++From 74ff5e1cf8ef83dabcf6e6b92f87d6761f7f4d51 Mon Sep 17 00:00:00 2001
++From: Li xin <lixin.fnst@cn.fujitsu.com>
++Date: Tue, 7 Jul 2015 11:34:36 +0900
++Subject: [PATCH] multipathd.service: Error fix
 +
-+CONF=/etc/ntp.conf
-+SAVECONF=${SAVEDIR}/${CONF##*/}.predhclient.${interface}
++Failed to start Device-Mapper Multipath Device Controller.
 +
-+ntp_replace_conf() {
-+        echo "$1" | diff -q ${CONF} - > /dev/null 2>&1
-+        if [ $? -eq 1 ]; then
-+            echo "$1" > ${CONF}
-+#            restorecon ${CONF} >/dev/null 2>&1
-+            service ntpd restart >/dev/null 2>&1
-+        fi
-+}
++Upstream-Status: pending
 +
-+ntp_config() {
-+    if [ ! "${PEERNTP}" = "no" ] && [ -n "${new_ntp_servers}" ] &&
-+        [ -e ${CONF} ] && [ -d ${SAVEDIR} ]; then
-+        local conf=$(grep -v '^server .*  # added by /sbin/dhclient-script$' < ${CONF})
++Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++---
++ multipathd/multipathd.service | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
 +
-+        conf=$(echo "$conf"
-+            for s in ${new_ntp_servers}; do
-+                echo "server ${s} ${NTPSERVERARGS}  # added by /sbin/dhclient-script"
-+            done)
++diff --git a/multipathd/multipathd.service b/multipathd/multipathd.service
++index be3ba3f..b8d3ecd 100644
++--- a/multipathd/multipathd.service
+++++ b/multipathd/multipathd.service
++@@ -6,11 +6,12 @@ DefaultDependencies=no
++ Conflicts=shutdown.target
++ 
++ [Service]
++-Type=notify
+++Type=forking
++ NotifyAccess=main
++ LimitCORE=infinity
+++PIDFile=/var/run/multipathd.pid
++ ExecStartPre=/sbin/modprobe dm-multipath
++-ExecStart=/sbin/multipathd -d -s
+++ExecStart=/sbin/multipathd
++ ExecReload=/sbin/multipathd reconfigure
++ 
++ [Install]
++-- 
++1.8.4.2
 +
-+        [ -f ${SAVECONF} ] || touch ${SAVECONF}
-+        ntp_replace_conf "$conf"
-+    fi
-+}
-+
-+ntp_restore() {
-+    if [ -e ${CONF} ] && [ -f ${SAVECONF} ]; then
-+        local conf=$(grep -v '^server .*  # added by /sbin/dhclient-script$' < ${CONF})
-+
-+        ntp_replace_conf "$conf"
-+        rm -f ${SAVECONF}
-+    fi
-+}
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-index c54da43..b963584 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-@@ -21,6 +21,7 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://sntp.service \
-            file://sntp \
-            file://ntpd.list \
-+           file://ntp.sh \
- "
- 
- SRC_URI[md5sum] = "fa37049383316322d060ec9061ac23a9"
-@@ -93,6 +94,9 @@ do_install_append() {
- 
-     install -d ${D}${systemd_unitdir}/ntp-units.d
-     install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-units.d/60-ntpd.list
-+
-+    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
-+    install -m 755 ${WORKDIR}/ntp.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
- }
- 
- PACKAGES += "ntpdate sntp ${PN}-tickadj ${PN}-utils"
-@@ -124,6 +128,7 @@ RSUGGESTS_${PN} = "iana-etc"
- FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
-     ${NTP_USER_HOME} \
-     ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
-+    ${sysconfdir}/dhcp/dhclient.d/ntp.sh \
- "
- FILES_${PN}-tickadj = "${sbindir}/tickadj"
- FILES_${PN}-utils = "${sbindir} ${datadir}/ntp/lib"
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+index f35cc3b..bb4e15c 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+@@ -10,6 +10,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
+            file://always-use-libdevmapper.patch \
+            file://always-use-libdevmapper-kpartx.patch \
+            file://do-not-link-libmpathpersist-to-TMPDIR.patch \
++           file://0001-multipathd.service-Error-fix.patch \
+            "
+ # 0.5.0
+ #
 -- 
-1.9.1
+1.8.4.2
 
 
