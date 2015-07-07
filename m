@@ -1,28 +1,28 @@
 Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 16213734B8
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C234475C0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jul 2015 00:47:31 +0000 (UTC)
+	Tue,  7 Jul 2015 00:47:54 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t670lVhI001585
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t670lrSI004128
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Jul 2015 17:47:31 -0700 (PDT)
+	Mon, 6 Jul 2015 17:47:53 -0700 (PDT)
 Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 6 Jul 2015 17:47:30 -0700
-Message-ID: <559B21A1.6000500@windriver.com>
-Date: Tue, 7 Jul 2015 08:47:29 +0800
+	Mon, 6 Jul 2015 17:47:53 -0700
+Message-ID: <559B21B8.1020300@windriver.com>
+Date: Tue, 7 Jul 2015 08:47:52 +0800
 From: Rongqing Li <rongqing.li@windriver.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
 To: <openembedded-devel@lists.openembedded.org>
-References: <1434359480-28573-1-git-send-email-rongqing.li@windriver.com>
-	<CANBf+V3n2FpHkqHNBRHhxQCjxH_CKOouaWFeQw+WWAiTf2--yQ@mail.gmail.com>
-In-Reply-To: <CANBf+V3n2FpHkqHNBRHhxQCjxH_CKOouaWFeQw+WWAiTf2--yQ@mail.gmail.com>
-Subject: Re: [PATCH][meta-networking] znc: upgrade to 1.6.0
+References: <1434510209-22324-1-git-send-email-rongqing.li@windriver.com>
+	<CANBf+V2=eO4XoktBeG5fmniNoDMosLKfeXboN71eYW0SUhM8-w@mail.gmail.com>
+In-Reply-To: <CANBf+V2=eO4XoktBeG5fmniNoDMosLKfeXboN71eYW0SUhM8-w@mail.gmail.com>
+Subject: Re: [PATCH][v2] squid: upgrade to 3.5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,133 +36,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 00:47:32 -0000
+X-List-Received-Date: Tue, 07 Jul 2015 00:47:55 -0000
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
 
 
-On 2015年07月07日 03:24, Joe MacDonald wrote:
-> Hi Roy,
+On 2015年07月07日 03:26, Joe MacDonald wrote:
+> Looks okay, but there's this in Martin's logs:
 >
-> This seems to have also brought in a build-dep warning:
->
-> znc-1.6.0+git: znc rdepends on libicuuc, but it isn't a build
+> squid-3.5.5: squid rdepends on libpam, but it isn't a build
 > dependency? [build-deps]
 >
-> See Martin's logs.  Can you check on that please?
+> Can you update the recipe for that?
 >
-> -J.
->
+
+
 
 Ok, I will see it
 
 -Roy
 
-> On Mon, Jun 15, 2015 at 5:11 AM,  <rongqing.li@windriver.com> wrote:
+
+> -J.
+>
+> On Tue, Jun 16, 2015 at 11:03 PM,  <rongqing.li@windriver.com> wrote:
 >> From: Roy Li <rongqing.li@windriver.com>
 >>
->> Remove backport patch
->> Add CSocket submodule
+>> 1. Remove the squid-change-ksh-referen*.patch which is not needed, since
+>>     3.5.5 did not use ksh by default.
+>> 2. Update the checksum of COPYING,since the date in it has been changed.
+>> 3. Define BUILDCXXFLAGS, otherwise the target gcc options -std=c++11 will
+>>     add into it, and lead to building failure since host gcc maybe not
+>>     support "-std=c++11"
+>> 4. Assume to support GNU atomic operations by default, the running check
+>>     on cross-compile setup does not work
 >>
 >> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 >> ---
->>   ...-Fix-NULL-pointer-dereference-in-webadmin.patch | 58 ----------------------
->>   meta-networking/recipes-irc/znc/znc_git.bb         | 12 ++---
->>   2 files changed, 6 insertions(+), 64 deletions(-)
->>   delete mode 100644 meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+>>   ...ge-ksh-reference-in-krb-ldap-helper-to-sh.patch | 39 ----------------------
+>>   .../squid/{squid_3.4.7.bb => squid_3.5.5.bb}       |  9 ++---
+>>   2 files changed, 5 insertions(+), 43 deletions(-)
+>>   delete mode 100644 meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
+>>   rename meta-networking/recipes-daemons/squid/{squid_3.4.7.bb => squid_3.5.5.bb} (88%)
 >>
->> diff --git a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch b/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+>> diff --git a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch b/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
 >> deleted file mode 100644
->> index 68e4414..0000000
->> --- a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+>> index 8e03860..0000000
+>> --- a/meta-networking/recipes-daemons/squid/files/squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch
 >> +++ /dev/null
->> @@ -1,58 +0,0 @@
->> -Subject: [PATCH] Fix NULL pointer dereference in webadmin.
+>> @@ -1,39 +0,0 @@
+>> -squid: change ksh reference in krb ldap helper to sh
 >> -
->> -Upstream-Status: Backport
+>> -Very simple cert_tool script with no ksh specifics.
+>> -Change it to use sh so a package dependency doesn't
+>> -get created to ksh.
 >> -
->> -commit 2bd410ee5570cea127233f1133ea22f25174eb28 upstream
+>> -Upstream-Status: Pending
 >> -
->> -Triggerable by any non-admin, if webadmin is loaded.
->> -
->> -The only affected version is 1.0
->> -
->> -Thanks to ChauffeR (Simone Esposito) for reporting this.
+>> -Signed-off-by: Jim Somerville <Jim.Somerville@windriver.com>
+>> -Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
 >> ----
->> - modules/webadmin.cpp | 8 ++++----
->> - 1 file changed, 4 insertions(+), 4 deletions(-)
+>> - helpers/external_acl/kerberos_ldap_group/cert_tool | 6 +++---
+>> - 1 file changed, 3 insertions(+), 3 deletions(-)
 >> -
->> -diff --git a/modules/webadmin.cpp b/modules/webadmin.cpp
->> -index b793c02..816f217 100644
->> ---- a/modules/webadmin.cpp
->> -+++ b/modules/webadmin.cpp
->> -@@ -419,7 +419,7 @@ public:
->> -                       CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
->> -
->> -                       // Admin||Self Check
->> --                      if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
->> -+                      if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
->> -                               return false;
->> -                       }
->> -
->> -@@ -448,7 +448,7 @@ public:
->> -                       CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
->> -
->> -                       // Admin||Self Check
->> --                      if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
->> -+                      if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
->> -                               return false;
->> -                       }
->> -
->> -@@ -472,7 +472,7 @@ public:
->> -                       CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
->> -
->> -                       // Admin||Self Check
->> --                      if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
->> -+                      if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
->> -                               return false;
->> -                       }
->> -
->> -@@ -486,7 +486,7 @@ public:
->> -                       CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
->> -
->> -                       // Admin||Self Check
->> --                      if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
->> -+                      if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
->> -                               return false;
->> -                       }
->> -
+>> -diff --git a/helpers/external_acl/kerberos_ldap_group/cert_tool b/helpers/external_acl/kerberos_ldap_group/cert_tool
+>> -index 9f14959..8c4ea11 100644
+>> ---- a/helpers/external_acl/kerberos_ldap_group/cert_tool
+>> -+++ b/helpers/external_acl/kerberos_ldap_group/cert_tool
+>> -@@ -1,4 +1,4 @@
+>> --#!/bin/ksh
+>> -+#!/bin/sh
+>> - #
+>> - #  -----------------------------------------------------------------------------
+>> - #
+>> -@@ -64,9 +64,9 @@ QUIT
+>> - # Create database for Sun ldap and pem file for Openldap
+>> - #
+>> - rm ${server}_[0-9]*.pem 2>/dev/null
+>> --let i=0
+>> -+i=0
+>> -  ls ${server}_[0-9]*.cert | while read file; do
+>> -- let i=i+1
+>> -+ i=`expr $i + 1`
+>> -  cat  $file  >> ${server}_$i.pem
+>> -  CA=`openssl x509 -noout -text -in  ${server}_$i.pem | grep -i "CA:.*true"`
+>> -  if [ -n "$CA" ]; then
 >> ---
->> -1.8.5.2.233.g932f7e4
+>> -1.9.1
 >> -
->> diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
->> index 2e35e4d..834c3de 100644
->> --- a/meta-networking/recipes-irc/znc/znc_git.bb
->> +++ b/meta-networking/recipes-irc/znc/znc_git.bb
->> @@ -1,16 +1,16 @@
->>   SUMMARY = "ZNC, an advanced IRC bouncer"
->>   SECTION = "net"
->>   LICENSE = "GPLv2"
->> -LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+>> diff --git a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+>> similarity index 88%
+>> rename from meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+>> rename to meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+>> index 7b00dfc..ac18e0f 100644
+>> --- a/meta-networking/recipes-daemons/squid/squid_3.4.7.bb
+>> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.5.bb
+>> @@ -16,17 +16,16 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
+>>              file://Set-up-for-cross-compilation.patch \
+>>              file://Skip-AC_RUN_IFELSE-tests.patch \
+>>              file://Fix-flawed-dynamic-ldb-link-test-in-configure.patch \
+>> -           file://squid-change-ksh-reference-in-krb-ldap-helper-to-sh.patch \
+>>              file://squid-use-serial-tests-config-needed-by-ptest.patch \
+>>              file://run-ptest \
+>>              file://volatiles.03_squid \
+>>   "
 >>
->> -DEPENDS = "openssl"
->> +DEPENDS = "openssl zlib"
+>>   LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
+>> -                    file://COPYRIGHT;md5=2900f50789c498be8e9f1eb23b55cbe9 \
+>> +                    file://errors/COPYRIGHT;md5=0fed8f1462f6fdbc62bb431bcb618f46 \
+>>                      "
+>> -SRC_URI[md5sum] = "9951034b10f7ee0f45a95cfae61c57c2"
+>> -SRC_URI[sha256sum] = "7b423f3d3495a317503ca559ea535f80445fd7c4e3c3e268cb7a8c97c61af2b6"
+>> +SRC_URI[md5sum] = "6aac5c2e9cbbeabcbf2e9e49a178a931"
+>> +SRC_URI[sha256sum] = "741c24a307c50f0d845d53cabb66b36d91ce9a73c8a165eae5def5e4d11e6a0d"
 >>
->> -PV = "1.0+git"
->> +PV = "1.6.0+git"
+>>   DEPENDS = "libtool krb5 openldap db cyrus-sasl"
 >>
->> -SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
->> -SRC_URI = "git://github.com/znc/znc.git \
->> -           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
->> +SRC_URI = "git://github.com/znc/znc.git;rev=f47e8465efa4e1cd948b9caae93ac401b4355df8  \
->> +           git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket \
->>             "
->> +SRCREV_Csocket = "07b4437396122650e5b8fb3d014e820a5decf4ee"
+>> @@ -38,6 +37,8 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
+>>   PACKAGECONFIG ??= ""
+>>   PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
+>>   EXTRA_OECONF += "--with-default-user=squid"
+>> +export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
+>> +CACHED_CONFIGUREVARS += "squid_cv_gnu_atomics=yes"
 >>
->>   S = "${WORKDIR}/git"
->>
+>>   TESTDIR = "test-suite"
+>>   do_compile_ptest() {
 >> --
 >> 1.9.1
 >>
