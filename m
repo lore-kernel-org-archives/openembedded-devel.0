@@ -1,38 +1,35 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id C49526FA45
+Received: from mail-ig0-f179.google.com (mail-ig0-f179.google.com
+	[209.85.213.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DC5773BB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jul 2015 13:49:08 +0000 (UTC)
-Received: by qkbp125 with SMTP id p125so139787474qkb.2
+	Tue,  7 Jul 2015 13:57:38 +0000 (UTC)
+Received: by igh16 with SMTP id 16so52801927igh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jul 2015 06:49:08 -0700 (PDT)
+	Tue, 07 Jul 2015 06:57:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent:mime-version
-	:content-type; bh=T1fJ90jSGjZXhCDnFt6npC6CjcT3S56/VB1aTBPmcV8=;
-	b=w9uI9DbfYBzsWZN0F8iy48kX44wI98EL3ogbTtO0miqfgvdV2KtcUvtfPSflOkFplU
-	/jrcNHvRfcRi9PIj/cg3k5SaBT34YnHV3gaKMspk+mDqyFz9uH9dqeoML8h5moQRs0J9
-	qfBUYBHZEN4lIfexlPMEKe6+PF7ac7i9ARUUZPLWGQ977ENUxaPf3EAAx4iV0jLK7H7n
-	Fqf1/vjAd8ZaPldV2ns47pxz/Z0fK8eKPJOCdyyWe2SXRMkXysJ7Tq9F/BD3QjXGGBmj
-	NDCmlUdTUhjwrGc6htO0v2Fo0sSnCdTOQ5weAX3a9zYImJkWjZPz0Nn9eFQql15ldnfm
-	PEXQ==
-X-Received: by 10.140.86.212 with SMTP id p78mr2783259qgd.49.1436276948315;
-	Tue, 07 Jul 2015 06:49:08 -0700 (PDT)
-Received: from localhost ([177.100.226.57])
-	by mx.google.com with ESMTPSA id e63sm9870824qga.39.2015.07.07.06.49.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 Jul 2015 06:49:07 -0700 (PDT)
-Message-ID: <559bd8d3.c52b8c0a.f864b.378f@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Tue, 07 Jul 2015 10:49:02 -0300
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Tue, 07 Jul 2015 10:49:02 -0300
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.2
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:content-type;
+	bh=WNrEjPKW7bo3Cv5Qvx+wgCbZ0rWY1u8LL72f+FfUP+Y=;
+	b=JK2GUVwUmbm96cCTVheLdZr2Qhjmmy/ic/Za5uodR4FFWh8GA1FKxDe/sFeVXQIe+K
+	p5sDAHho+m4+Dt8v+1MqLqc98A0v9iLd1M5jMVZtel1OozEkbV5Y/Rm5Nmyxv29GlaVl
+	1cyZifAPLMnx/DvH14ogSaLKejZe0LibavIz1ndn/98jQ/34SwMzj7qjsWGN3JtkFrXu
+	rX/TAeD8kotVzMll7FwO8lM1ULwfS25+wDUUePZM4NQagSr8W9W9Fzj545twMmUPGeUk
+	57/hZ19rqTRzuJD6ElWubiK5Y/VkCb+r/8K6JtD/PkG6py0fsmcpkHM00plBAyE4zbMP
+	WbcQ==
 MIME-Version: 1.0
-Subject: Updates to meta-java (master) in 2015-07-07
+X-Received: by 10.43.40.130 with SMTP id tq2mr43841120icb.46.1436277458715;
+	Tue, 07 Jul 2015 06:57:38 -0700 (PDT)
+Sender: otavio.salvador@gmail.com
+Received: by 10.36.218.7 with HTTP; Tue, 7 Jul 2015 06:57:38 -0700 (PDT)
+In-Reply-To: <556EA59A.8010007@skidata.com>
+References: <556EA59A.8010007@skidata.com>
+Date: Tue, 7 Jul 2015 10:57:38 -0300
+X-Google-Sender-Auth: khI0Q45oW0UR9rScDgWhBPc-Nxo
+Message-ID: <CAP9ODKpB0A9JZbWdS80Dq2bNX1VG5e3PKTpSpCvdvCrwD4965g@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] openjdk-7: 75b13-2.5.4: fix xawt build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,32 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 13:49:08 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 07 Jul 2015 13:57:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On Wed, Jun 3, 2015 at 3:58 AM, Richard Leitner
+<richard.leitner@skidata.com> wrote:
+> The icedtea-jdk-nio-use-host-cc.patch disabled the build of xawt.
+> Therefore all awt based java application which were run on X11 failed
+> starting the GUI with an java.awt.HeadlessException.
+>
+> This patch enables xawt again by adapting
+> icedtea-jdk-nio-use-host-cc.patch.
+>
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> ---
+> This patch was only tested with yocto-1.6.3 (daisy) on an armv7a
+> cortexa9 with vfpv3d16. Please test it on further platforms!
+>
+> This is my first patch to this mailinglist so hopefully I got everything
+> right. If not please give me some feedback on what to improve for the
+> next one ;-)
+> ---
 
-I pushed following updates:
+Sorry for the long time to get to this patch. I would like to ask if
+you could run a test in master so we avoid surprises. If you confirm
+it works I am fine in commiting it.
 
-commit 66c97ae7461f4c1a13917131787bb76dc34e6b6f (HEAD -> pending, origin/master, origin/HEAD)
-Author: Otavio Salvador <otavio@ossystems.com.br>
-Date:   Fri Jun 19 12:30:25 2015 -0300
-
-    Add explict getVar param for (non) expansion
-    
-    Rather than just use d.getVar(X), use the more explict d.getVar(X, False)
-    since at some point in the future, having the default of expansion would
-    be nice. This is the first step towards that.
-    
-    This patch was mostly made using the command:
-    
-    sed -e 's:\(getVar([^,()]*\)\s*):\1, False):g' -i `grep -ril getVar *`
-    
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Regards,
-
---
+-- 
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
