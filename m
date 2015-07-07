@@ -1,34 +1,36 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-ie0-f178.google.com (mail-ie0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 703396E5F5
+Received: from mail-ig0-f172.google.com (mail-ig0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 102236E5F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jul 2015 19:45:17 +0000 (UTC)
-Received: by iecvh10 with SMTP id vh10so141848239iec.3
+	Tue,  7 Jul 2015 19:45:22 +0000 (UTC)
+Received: by iggp10 with SMTP id p10so5559645igg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jul 2015 12:45:17 -0700 (PDT)
+	Tue, 07 Jul 2015 12:45:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=nxqEuzsDxYILR/4ViNrTKRqkBlBoxD3q9iIEC6hJlxg=;
-	b=gsFWk4kA8L095i504MecGqpCnMSgtJ7k+dg/sd4FCfU39B0CU3BmkX6XnCHKYv5U2r
-	pIoXGGJPe2GVyOnKg8q1yEGRTeA2G2NP+oRQdPIa0LFcBlodLFaW8qd7L6kIMvplT3LM
-	4P49zJa41OMhJLsJVolA+mf0Mt8YKnDc+7Q8fRtyJWihiR7aURrhB5IlEKm7IPzS2DN7
-	AP38MO67FGo+Fi7GTtjvBEDdkoEweOD8sFIHm7Q9FDPWJXJ94t6vMnlL2mInNXFnpByA
-	QrziFs3GauVODON6UvTBRPpvSmlYLXByKTJB/t0wKrJjGumpiMIuFSTJLKLaYAMcancJ
-	ebvQ==
-X-Received: by 10.107.38.129 with SMTP id m123mr3189508iom.22.1436298317542;
-	Tue, 07 Jul 2015 12:45:17 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=B8iK8c925hOI/G/oCanLuZNNJFVTPCUfadWr1TBDnOM=;
+	b=GMm/WLCEXVSav1KWYFqRcudu6a9WjvOEd79Lwv9DMnEB9+6OHOBjr5dm/HN9qIAW2H
+	vl0O8Socr9jYH4lPU7H5M9uY0e7SV+VpXfFUoqZhLss9qvVsyHKQ9FeDKE0PKiH8Ykcr
+	BEhfyu4tIKXsbeUFRiS/lw5T/FV90MorLaYd4otQorxA6X3VrEmc6xSOgK06p95BOD8S
+	7R3ga9ONt9gM8rfR9cydqdju1NqRixjhoHYNMdQhXWpaoAjadZE780sFpKVlJxRoX2a4
+	vkG9JZjn79m27G2AAmj+x2icdCEqqovOE7usrxdWtiNKfqGmWZg6m2/+R77r4ZQwK4V2
+	I7Kw==
+X-Received: by 10.107.162.147 with SMTP id l141mr9719246ioe.77.1436298322972; 
+	Tue, 07 Jul 2015 12:45:22 -0700 (PDT)
 Received: from e6520.cablelabs.com
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
-	by smtp.gmail.com with ESMTPSA id h7sm12506352igt.3.2015.07.07.12.45.16
+	by smtp.gmail.com with ESMTPSA id h7sm12506352igt.3.2015.07.07.12.45.22
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 07 Jul 2015 12:45:16 -0700 (PDT)
+	Tue, 07 Jul 2015 12:45:22 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jul 2015 12:45:06 -0700
-Message-Id: <1436298307-1194-1-git-send-email-armccurdy@gmail.com>
+Date: Tue,  7 Jul 2015 12:45:07 -0700
+Message-Id: <1436298307-1194-2-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-browser][PATCH 1/2] chromium.inc: use x86 over-ride instead of i586
+In-Reply-To: <1436298307-1194-1-git-send-email-armccurdy@gmail.com>
+References: <1436298307-1194-1-git-send-email-armccurdy@gmail.com>
+Subject: [meta-browser][PATCH 2/2] cef3: use x86 over-ride instead of i586
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,28 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 19:45:23 -0000
+X-List-Received-Date: Tue, 07 Jul 2015 19:45:24 -0000
 
 Support i686 without needing to duplicate the i586 over-ride.
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- recipes-browser/chromium/chromium.inc | 2 +-
+ recipes-browser/chromium/cef3_280796.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 973d1c9..8221779 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -2,7 +2,7 @@ LICENSE = "BSD"
- DEPENDS = "xz-native pciutils pulseaudio cairo nss zlib-native libav cups ninja-native gconf libexif pango libdrm"
+diff --git a/recipes-browser/chromium/cef3_280796.bb b/recipes-browser/chromium/cef3_280796.bb
+index 9a9efe5..ddb6a77 100644
+--- a/recipes-browser/chromium/cef3_280796.bb
++++ b/recipes-browser/chromium/cef3_280796.bb
+@@ -23,8 +23,8 @@ S = "${WORKDIR}/chromium_rev_${PV}"
  
- COMPATIBLE_MACHINE = "(-)"
--COMPATIBLE_MACHINE_i586 = "(.*)"
-+COMPATIBLE_MACHINE_x86 = "(.*)"
- COMPATIBLE_MACHINE_x86-64 = "(.*)"
- COMPATIBLE_MACHINE_armv6 = "(.*)"
- COMPATIBLE_MACHINE_armv7a = "(.*)"
+ do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl SRCREV_tools"
+ 
++GYP_ARCH_DEFINES_x86 = " target_arch=ia32"
+ GYP_ARCH_DEFINES_armv7a = " target_arch=arm arm_float_abi=hard"
+-GYP_ARCH_DEFINES_i586 = " target_arch=ia32"
+ 
+ export GYP_GENERATORS="ninja"
+ export BUILD_TARGET_ARCH="${TARGET_ARCH}"
 -- 
 1.9.1
 
