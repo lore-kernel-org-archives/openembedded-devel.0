@@ -1,24 +1,24 @@
 Return-Path: <Rongqing.Li@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CD2873BB4
+	by mail.openembedded.org (Postfix) with ESMTP id AAFED734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jul 2015 01:56:38 +0000 (UTC)
+	Tue,  7 Jul 2015 02:28:57 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t671uc27008183
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t672SwKQ010169
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Jul 2015 18:56:38 -0700 (PDT)
+	Mon, 6 Jul 2015 19:28:58 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.224.2; Mon, 6 Jul 2015 18:56:38 -0700
+	14.3.224.2; Mon, 6 Jul 2015 19:28:57 -0700
 From: <rongqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Jul 2015 09:55:52 +0800
-Message-ID: <1436234152-4937-1-git-send-email-rongqing.li@windriver.com>
+Date: Tue, 7 Jul 2015 10:28:11 +0800
+Message-ID: <1436236091-31779-1-git-send-email-rongqing.li@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking][v2] znc: upgrade to 1.6.0
+Subject: [PATCH][meta-networking] ypbind-mt: get parameters from dhcp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,112 +32,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 01:56:38 -0000
+X-List-Received-Date: Tue, 07 Jul 2015 02:28:59 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+From: Li Wang <li.wang@windriver.com>
 
-Remove backport patch
-Add CSocket submodule
-Add the dependency on icu
+the script nis.sh is called by dhcp client,
+it can get some parameters from dhcp.
 
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Li Wang <li.wang@windriver.com>
 ---
- ...-Fix-NULL-pointer-dereference-in-webadmin.patch | 58 ----------------------
- meta-networking/recipes-irc/znc/znc_git.bb         | 12 ++---
- 2 files changed, 6 insertions(+), 64 deletions(-)
- delete mode 100644 meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+ .../recipes-support/nis/ypbind-mt/nis.sh           | 41 ++++++++++++++++++++++
+ .../recipes-support/nis/ypbind-mt/yp.conf          |  1 +
+ .../recipes-support/nis/ypbind-mt_1.38.bb          |  6 ++++
+ 3 files changed, 48 insertions(+)
+ create mode 100755 meta-networking/recipes-support/nis/ypbind-mt/nis.sh
+ create mode 100644 meta-networking/recipes-support/nis/ypbind-mt/yp.conf
 
-diff --git a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch b/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
-deleted file mode 100644
-index 68e4414..0000000
---- a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
-+++ /dev/null
-@@ -1,58 +0,0 @@
--Subject: [PATCH] Fix NULL pointer dereference in webadmin.
--
--Upstream-Status: Backport
--
--commit 2bd410ee5570cea127233f1133ea22f25174eb28 upstream
--
--Triggerable by any non-admin, if webadmin is loaded.
--
--The only affected version is 1.0
--
--Thanks to ChauffeR (Simone Esposito) for reporting this.
-----
-- modules/webadmin.cpp | 8 ++++----
-- 1 file changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/modules/webadmin.cpp b/modules/webadmin.cpp
--index b793c02..816f217 100644
----- a/modules/webadmin.cpp
--+++ b/modules/webadmin.cpp
--@@ -419,7 +419,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -448,7 +448,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -472,7 +472,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
--@@ -486,7 +486,7 @@ public:
-- 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
-- 
-- 			// Admin||Self Check
---			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
--+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
-- 				return false;
-- 			}
-- 
---- 
--1.8.5.2.233.g932f7e4
--
-diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
-index 2e35e4d..f5bed08 100644
---- a/meta-networking/recipes-irc/znc/znc_git.bb
-+++ b/meta-networking/recipes-irc/znc/znc_git.bb
-@@ -1,16 +1,16 @@
- SUMMARY = "ZNC, an advanced IRC bouncer"
- SECTION = "net"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt/nis.sh b/meta-networking/recipes-support/nis/ypbind-mt/nis.sh
+new file mode 100755
+index 0000000..a06a977
+--- /dev/null
++++ b/meta-networking/recipes-support/nis/ypbind-mt/nis.sh
+@@ -0,0 +1,41 @@
++#!/bin/bash
++#
++# nis.sh: dhclient-script plugin for NIS settings,
++#         place in /etc/dhcp/dhclient.d and 'chmod +x nis.sh' to enable
++#
++
++CONF=/etc/yp.conf
++SAVECONF=${SAVEDIR}/${CONF##*/}.predhclient.${interface}
++
++nis_replace_conf() {
++        echo "$1" | diff -q ${CONF} - > /dev/null 2>&1
++        if [ $? -eq 1 ]; then
++            echo "$1" > ${CONF}
++#            restorecon ${CONF} >/dev/null 2>&1
++            service ypbind restart >/dev/null 2>&1
++        fi
++}
++
++nis_config() {
++    if [ -n "${new_nis_domain}" ] && [ -n "${new_nis_servers}" ] &&
++        [ -e ${CONF} ] && [ -d ${SAVEDIR} ]; then
++        local conf=$(grep -v '^domain .*  # added by /sbin/dhclient-script$' < ${CONF})
++
++        conf=$(echo "$conf"
++            for s in ${new_nis_servers}; do
++                echo "domain ${new_nis_domain} server ${s}  # added by /sbin/dhclient-script"
++            done)
++
++        [ -f ${SAVECONF} ] || touch ${SAVECONF}
++        nis_replace_conf "$conf"
++    fi
++}
++
++nis_restore() {
++    if [ -e ${CONF} ] && [ -f ${SAVECONF} ]; then
++        local conf=$(grep -v '^domain .*  # added by /sbin/dhclient-script$' < ${CONF})
++
++        nis_replace_conf "$conf"
++        rm -f ${SAVECONF}
++    fi
++}
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt/yp.conf b/meta-networking/recipes-support/nis/ypbind-mt/yp.conf
+new file mode 100644
+index 0000000..792d600
+--- /dev/null
++++ b/meta-networking/recipes-support/nis/ypbind-mt/yp.conf
+@@ -0,0 +1 @@
++#
+diff --git a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+index d25ef5c..f0c1cea 100644
+--- a/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
++++ b/meta-networking/recipes-support/nis/ypbind-mt_1.38.bb
+@@ -28,6 +28,8 @@ PROVIDES += "ypbind"
+ SRC_URI = "http://www.linux-nis.org/download/ypbind-mt/${BP}.tar.bz2 \
+            file://ypbind-yocto.init \
+            file://ypbind.service \
++           file://yp.conf \
++           file://nis.sh \
+ "
+ SRC_URI[md5sum] = "094088c0e282fa7f3b3dd6cc51d0a4e1"
+ SRC_URI[sha256sum] = "1930ce19f6ccfe10400f3497b31867f71690d2bcd3f5b575199fa915559b7746"
+@@ -44,10 +46,14 @@ do_install_append () {
+     install -d ${D}${sysconfdir}/init.d
+     install -d ${D}${sysconfdir}/rcS.d
  
--DEPENDS = "openssl"
-+DEPENDS = "openssl zlib icu"
++    install -m 0744 ${WORKDIR}/yp.conf ${D}${sysconfdir}/
+     install -m 0755 ${WORKDIR}/ypbind-yocto.init ${D}${sysconfdir}/init.d/ypbind
  
--PV = "1.0+git"
-+PV = "1.6.0+git"
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/ypbind.service ${D}${systemd_unitdir}/system
++
++    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
++    install -m 755 ${WORKDIR}/nis.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
+ }
  
--SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
--SRC_URI = "git://github.com/znc/znc.git \
--           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
-+SRC_URI = "git://github.com/znc/znc.git;rev=f47e8465efa4e1cd948b9caae93ac401b4355df8  \
-+           git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket \
-           "
-+SRCREV_Csocket = "07b4437396122650e5b8fb3d014e820a5decf4ee"
- 
- S = "${WORKDIR}/git"
  
 -- 
 1.9.1
