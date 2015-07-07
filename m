@@ -1,35 +1,36 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-ig0-f173.google.com (mail-ig0-f173.google.com
-	[209.85.213.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 60EA275D26
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jul 2015 15:19:44 +0000 (UTC)
-Received: by igrv9 with SMTP id v9so143320567igr.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jul 2015 08:19:44 -0700 (PDT)
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-ig0-f175.google.com (mail-ig0-f175.google.com
+	[209.85.213.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C5B075D37;
+	Tue,  7 Jul 2015 16:58:52 +0000 (UTC)
+Received: by igcsj18 with SMTP id sj18so266637721igc.1;
+	Tue, 07 Jul 2015 09:58:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=2sPFC9cJuR3KwPGWO+m5Dz/iwMvUNjDDOnSibtShDOA=;
-	b=uoazipTptQ1yWmv0sJehp6/a037m5MgDeF/r3fz9sANcZA+Xn9T47bQ19RcuP5ATXX
-	nmjS26qWVrhQsIIEf4yiKwt5v6jw64R3GV1+zblgDS22zNsqZniyBJQa45eDq6/xSuMM
-	+hN3xGTZoBs0DfuDKSyQ5B8kpBNXagmJne1RMjlmWRz51aWpA5X7omWphmezMLaqqrwW
-	fEnjD3sYCw6ytTj9i/OhfXZIhfRBBrVM9S8HuDAq01NnNQKj8azt/8YsgwEXiBRtzM5i
-	LkSuQXBl8vO3lTWUCNO36z1ZKfvhbcqDfdtWsSbiuUjsUTg81ApCvpwMCzm2qSDamDDl
-	BjFg==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	bh=p6lJY3fp/H3j16P2SilniyOglR4BgH/Q2QgaYJOaEwU=;
+	b=gAx9Mr9mTqbki8TUaqYSjvV7PmCJRZSB5xsGkZeld1fcV3gs54lJ+kE6fCOfV2+yAa
+	YgyCC915+xUCxfQ9QYSdj/qtcMZJ+Noqa+E943ofRqcQOgOV3H8uaM9FBXuGfqdEu8dE
+	EJqksh8YDNwc9qexWirHjARCJEuS4JVQiHzcEkfYTgnFOycmueJg563CI4eEqveS6u7R
+	2Nk068jKRC9w9M9SKpUryErNzlQ0Ra8e2f3eGEiHgpixe2utfcnuq8FpOAbcPwR9qobn
+	nd1VlEKPtRjCybmwrWS4d8vWBJMIy8kZuckTqQYSDCrK+TEIR8Mfxbyh7qiJ7U2Gr6is
+	n4FA==
 MIME-Version: 1.0
-X-Received: by 10.50.142.9 with SMTP id rs9mr49438213igb.17.1436282384690;
-	Tue, 07 Jul 2015 08:19:44 -0700 (PDT)
-Sender: otavio.salvador@gmail.com
-Received: by 10.36.218.7 with HTTP; Tue, 7 Jul 2015 08:19:44 -0700 (PDT)
-In-Reply-To: <20150612185117.GA5348@linutronix.de>
-References: <20150612185117.GA5348@linutronix.de>
-Date: Tue, 7 Jul 2015 12:19:44 -0300
-X-Google-Sender-Auth: 3fTSXP44AudorXdcjCP7krCSc1s
-Message-ID: <CAP9ODKoYyh638rwaOU++7TpQXFzsX6-9FMJFsBAwDJCmb2jYvw@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] Trying to build icedtea7 fails currently
+X-Received: by 10.50.2.3 with SMTP id 3mr79885480igq.34.1436288332718; Tue, 07
+	Jul 2015 09:58:52 -0700 (PDT)
+Received: by 10.36.215.129 with HTTP; Tue, 7 Jul 2015 09:58:52 -0700 (PDT)
+In-Reply-To: <20150707105449.GA2397@jama>
+References: <20150707105449.GA2397@jama>
+Date: Tue, 7 Jul 2015 09:58:52 -0700
+Message-ID: <CANx9H-AHXXY_FQ9FSVs2Wg-H7mhSGFPw5EyeUm53aEBgdMPeCA@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2015-07-04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,55 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jul 2015 15:19:49 -0000
+X-List-Received-Date: Tue, 07 Jul 2015 16:58:53 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 12, 2015 at 3:51 PM, Sebastian Andrzej Siewior
-<bigeasy@linutronix.de> wrote:
-> building icedtea7-native fails currently if the host runs linux v4.0+.
-> Duh. I tried to add a patch to "openjdk-7-release-03b147.inc" but it
-> didn't get applied=E2=80=A6
->
-> Upstream fixed it
->   https://bugs.openjdk.java.net/browse/JDK-8074312
->   https://bugs.openjdk.java.net/secure/attachment/25832/JDK-8074312-hotsp=
-ot.patch
->
-> I workaround it with linux64 --uname-2.6. It helped but failed later
-> with various errors such as:
-> | collect2: error: ld returned 1 exit status
-> | /home/angstrom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x86_=
-64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/ jdk/m=
-ake/common/internal/NativeCompileRules.gmk:74: recipe for target '/home/ang=
-strom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x8 6_64-linux/ice=
-dtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/tmp/sun/sun.=
-awt/headless/obj64/awt_Font.o' failed
-> | make[6]: *** [/home/angstrom-distribution/build/tmp-angstrom_v2014_12-g=
-libc/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build /open=
-jdk.build-boot/tmp/sun/sun.awt/headless/obj64/awt_Font.o] Error 1
-> | make[6]: *** Waiting for unfinished jobs....
-> | jdk/make/sun/headless/../../../src/solaris/native/sun/awt/fontpath.c:91=
-0: undefined reference to `FcFontSetDestroy'
-> | /home/angstrom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x86_=
-64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/ jdk/m=
-ake/sun/headless/../../../src/solaris/native/sun/awt/fontpath.c:878: undefi=
-ned reference to `FcPatternDestroy'
-> | /tmp/cczs6cdu.o: In function `Java_sun_font_FontConfigManager_getFontCo=
-nfigVersion':
-> | /home/angstrom-distribution/build/tmp-angstrom_v2014_12-glibc/work/x86_=
-64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/ jdk/m=
-ake/sun/headless/../../../src/solaris/native/sun/awt/fontpath.c:740: undefi=
-ned reference to `FcGetVersion'
-> | collect2: error: ld returned 1 exit status
->
-> Does someone have an idea?
+On Tue, Jul 7, 2015 at 3:54 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-The patch needs to be ported or icedtea to be upgraded; Can you take a
-look at this?
+> http://www.openembedded.org/wiki/Bitbake_World_Status
+>
+> <snip>
+>
+> == Failed tasks 2015-07-04 ==
+>
+> INFO: jenkins-job.sh-1.3.1 Complete log available at
+> http://logs.nslu2-linux.org/buildlogs/oe/world/log.report.20150705_101525.log
+>
+> === common (9) ===
+>     * /meta-openembedded/meta-efl/recipes-efl/efl/epdf_svn.bb, do_compile
+>     * /meta-openembedded/meta-multimedia/recipes-mkv/mkvtoolnix/
+> mkvtoolnix_git.bb, do_compile
+>     * /meta-openembedded/meta-oe/recipes-extended/cmpi-bindings/
+> cmpi-bindings_git.bb, do_compile
+>     * /meta-openembedded/meta-oe/recipes-extended/openwsman/
+> openwsman_2.6.0.bb, do_compile
+>     * /meta-openembedded/meta-oe/recipes-extended/polkit/polkit_0.112.bb,
+> do_configure
+>     * /meta-openembedded/meta-oe/recipes-extended/sblim-sfcb/
+> sblim-sfcb_1.4.8.bb, do_compile
+>     * /meta-openembedded/meta-perl/recipes-perl/libextutils/
+> libextutils-cppguess-perl_0.07.bb, do_configure
+>     * /meta-openembedded/meta-perl/recipes-perl/libmodule/
+> libmodule-pluggable-perl_5.1.bb, do_configure
+>     * /meta-openembedded/meta-perl/recipes-perl/libmodule/
+> libmodule-runtime-perl_0.014.bb, do_configure
+>
+> <snip>
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+
+The three perl modules are failing because libmodule-build-perl is no
+longer included in perl 5.22 upgrade and this commit:
+http://git.openembedded.org/openembedded-core/commit/?id=80afd9650328de2eb17ba0e104ee2c76a7fb983e
+
+Rather than cripple cpan-build.bbclass, a recipe for libmodule-build-perl
+direct from CPAN is needed and will need to be added to oe-core, unless we
+want cpan-build.bbclass to do nothing useful.
+
+I am working on it after hours, but it may take a few days.
+
+--Tim
 
