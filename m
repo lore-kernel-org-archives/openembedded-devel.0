@@ -1,41 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
-	[209.85.220.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 9838D75E05
+Received: from mail-pd0-f177.google.com (mail-pd0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 62DD573E36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jul 2015 15:30:36 +0000 (UTC)
-Received: by pactm7 with SMTP id tm7so133536741pac.2
+	Wed,  8 Jul 2015 15:37:31 +0000 (UTC)
+Received: by pdrg1 with SMTP id g1so16152556pdr.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jul 2015 08:30:37 -0700 (PDT)
+	Wed, 08 Jul 2015 08:37:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	bh=B8zZ/V4LZCXJ9b6wxNBnGR/eP3psY7KqKu4JB2aPz5I=;
-	b=jIuoMgq0IO/cpkeC2X5PdEB9D+2jIk5IU740ArtkpTRWjTfR4br6OtGvubLiwURvB8
-	NhanLC4hOyu0AV7LI4Si9qf1YSTSx6IS5aS1PCZd+hQN9dFo/BJgrGYrSsH9ymll6jG/
-	vY8kLgMJAX5Q77HrhaWkWK2iTuW1HbvDZA/iiLxRCi4EYnwNOxR+ByWTikthyNVHuA3h
-	m/1MyexSQ7v09xQYbOjM2+E+rpgSTblr97X7kdIIKh3XvMqEu5QvYsuA3cwZKw1HOU5a
-	Gm/Pzsz3iOyXpZPgiB59feQy5F1Ie7auOGJGhmdYDUAjOxDA6e0IuS+fWYrJbbPO9+en
-	WWEw==
-X-Received: by 10.68.90.225 with SMTP id bz1mr22022121pbb.6.1436369436942;
-	Wed, 08 Jul 2015 08:30:36 -0700 (PDT)
+	bh=9pf0y4zGJ0cGg/Kr3TYd6d9gF6p049KIey49EaTR0NU=;
+	b=wNs5Se2Knzc7XPsCkPPelUoKEsh9ckygiGBYES3cvbyrFOsfCwbc024snXGjsG6ha0
+	fplEl6u65J0V7jFxOI4Ibq9BGEv+Muj/4qGPJ0N3s5OzFK7cK7janh6AwcLUjuHtKOlz
+	ONIuoUvszWEC+KuTBnXaiyehvAOyyq+hBeiLGUbH60uyzej1F29v0DMvjIwh7Q4WFgif
+	Svu7pXKj6VYHnaFFTn26nrs69DW/4myKKwqhAuvcchkgbpq7khCsKQmVIow8Tezr8Wvs
+	Y4oGwW5eW0ZA77bbPDZ6yedu9i95J0tK/NEoSuArhH/402xGArZWwbXR1LcfTYU2MG7M
+	x1Tg==
+X-Received: by 10.70.129.143 with SMTP id nw15mr21513866pdb.101.1436369852114; 
+	Wed, 08 Jul 2015 08:37:32 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1239:202d:ddf7:682b:65c6?
 	([2601:202:4000:1239:202d:ddf7:682b:65c6])
 	by smtp.googlemail.com with ESMTPSA id
-	ly7sm2900937pdb.17.2015.07.08.08.30.35
+	fy5sm2890016pdb.93.2015.07.08.08.37.30
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Jul 2015 08:30:35 -0700 (PDT)
-Message-ID: <559D4219.10505@gmail.com>
-Date: Wed, 08 Jul 2015 08:30:33 -0700
+	Wed, 08 Jul 2015 08:37:31 -0700 (PDT)
+Message-ID: <559D43B9.2060908@gmail.com>
+Date: Wed, 08 Jul 2015 08:37:29 -0700
 From: akuster808 <akuster808@gmail.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1436254986-18539-1-git-send-email-net147@gmail.com>
-In-Reply-To: <1436254986-18539-1-git-send-email-net147@gmail.com>
-Subject: Re: [meta-oe][PATCH] nodejs: update to 0.12.6
+References: <1436234152-4937-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1436234152-4937-1-git-send-email-rongqing.li@windriver.com>
+Subject: Re: [PATCH][meta-networking][v2] znc: upgrade to 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,38 +49,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jul 2015 15:30:37 -0000
+X-List-Received-Date: Wed, 08 Jul 2015 15:37:34 -0000
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
-this update includes a security fix. No CVE assigned yet.
 
+if it is possible, can the security fix be noted?
 
+1.4:
+CVE-2014-9403
 
-On 07/07/2015 12:43 AM, Jonathan Liu wrote:
-> Signed-off-by: Jonathan Liu <net147@gmail.com>
+On 07/06/2015 06:55 PM, rongqing.li@windriver.com wrote:
+> From: Roy Li <rongqing.li@windriver.com>
+>
+> Remove backport patch
+> Add CSocket submodule
+> Add the dependency on icu
+>
+> Signed-off-by: Roy Li <rongqing.li@windriver.com>
 > ---
->   .../recipes-devtools/nodejs/{nodejs_0.12.5.bb => nodejs_0.12.6.bb}    | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.5.bb => nodejs_0.12.6.bb} (95%)
+>   ...-Fix-NULL-pointer-dereference-in-webadmin.patch | 58 ----------------------
+>   meta-networking/recipes-irc/znc/znc_git.bb         | 12 ++---
+>   2 files changed, 6 insertions(+), 64 deletions(-)
+>   delete mode 100644 meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
 >
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.6.bb
-> similarity index 95%
-> rename from meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb
-> rename to meta-oe/recipes-devtools/nodejs/nodejs_0.12.6.bb
-> index 5685721..73c0557 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.6.bb
-> @@ -9,8 +9,8 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
->       file://enable-armv5e-build.patch \
->       file://no-registry.patch \
->   "
-> -SRC_URI[md5sum] = "aa6d22762e70b4f46293a17373788291"
-> -SRC_URI[sha256sum] = "4bc1e25f4c62ac65324d3cf4aa9de2d801cd708757c3567b6ad2ced7df30cdd2"
-> +SRC_URI[md5sum] = "698ebd8ecd5c9c61091875bbd54401f4"
-> +SRC_URI[sha256sum] = "7a3b5ac351973a9dee8edbf0684bc8d0dea44b231e42274ffb008141ffa19ad2"
+> diff --git a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch b/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+> deleted file mode 100644
+> index 68e4414..0000000
+> --- a/meta-networking/recipes-irc/znc/znc/0001-Fix-NULL-pointer-dereference-in-webadmin.patch
+> +++ /dev/null
+> @@ -1,58 +0,0 @@
+> -Subject: [PATCH] Fix NULL pointer dereference in webadmin.
+> -
+> -Upstream-Status: Backport
+> -
+> -commit 2bd410ee5570cea127233f1133ea22f25174eb28 upstream
+> -
+> -Triggerable by any non-admin, if webadmin is loaded.
+> -
+> -The only affected version is 1.0
+> -
+> -Thanks to ChauffeR (Simone Esposito) for reporting this.
+> ----
+> - modules/webadmin.cpp | 8 ++++----
+> - 1 file changed, 4 insertions(+), 4 deletions(-)
+> -
+> -diff --git a/modules/webadmin.cpp b/modules/webadmin.cpp
+> -index b793c02..816f217 100644
+> ---- a/modules/webadmin.cpp
+> -+++ b/modules/webadmin.cpp
+> -@@ -419,7 +419,7 @@ public:
+> - 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+> -
+> - 			// Admin||Self Check
+> --			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+> -+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+> - 				return false;
+> - 			}
+> -
+> -@@ -448,7 +448,7 @@ public:
+> - 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+> -
+> - 			// Admin||Self Check
+> --			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+> -+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+> - 				return false;
+> - 			}
+> -
+> -@@ -472,7 +472,7 @@ public:
+> - 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+> -
+> - 			// Admin||Self Check
+> --			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+> -+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+> - 				return false;
+> - 			}
+> -
+> -@@ -486,7 +486,7 @@ public:
+> - 			CIRCNetwork* pNetwork = SafeGetNetworkFromParam(WebSock);
+> -
+> - 			// Admin||Self Check
+> --			if (!spSession->IsAdmin() && (!spSession->GetUser() || spSession->GetUser() != pNetwork->GetUser())) {
+> -+			if (!spSession->IsAdmin() && (!spSession->GetUser() || !pNetwork || spSession->GetUser() != pNetwork->GetUser())) {
+> - 				return false;
+> - 			}
+> -
+> ---
+> -1.8.5.2.233.g932f7e4
+> -
+> diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
+> index 2e35e4d..f5bed08 100644
+> --- a/meta-networking/recipes-irc/znc/znc_git.bb
+> +++ b/meta-networking/recipes-irc/znc/znc_git.bb
+> @@ -1,16 +1,16 @@
+>   SUMMARY = "ZNC, an advanced IRC bouncer"
+>   SECTION = "net"
+>   LICENSE = "GPLv2"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 >
->   S = "${WORKDIR}/node-v${PV}"
+> -DEPENDS = "openssl"
+> +DEPENDS = "openssl zlib icu"
+>
+> -PV = "1.0+git"
+> +PV = "1.6.0+git"
+>
+> -SRCREV = "ef59c23068547c132cb678092fba9a21317fd5f2"
+> -SRC_URI = "git://github.com/znc/znc.git \
+> -           file://0001-Fix-NULL-pointer-dereference-in-webadmin.patch \
+> +SRC_URI = "git://github.com/znc/znc.git;rev=f47e8465efa4e1cd948b9caae93ac401b4355df8  \
+> +           git://github.com/jimloco/Csocket.git;destsuffix=git/third_party/Csocket;name=Csocket \
+>             "
+> +SRCREV_Csocket = "07b4437396122650e5b8fb3d014e820a5decf4ee"
+>
+>   S = "${WORKDIR}/git"
 >
 >
 
