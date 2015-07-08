@@ -1,39 +1,38 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f177.google.com (mail-wi0-f177.google.com
-	[209.85.212.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F27975D76
+Received: from mail-wg0-f44.google.com (mail-wg0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 02A3175D7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jul 2015 10:43:06 +0000 (UTC)
-Received: by wifm2 with SMTP id m2so85297749wif.1
+	Wed,  8 Jul 2015 10:43:19 +0000 (UTC)
+Received: by wgjx7 with SMTP id x7so191824512wgj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jul 2015 03:43:07 -0700 (PDT)
+	Wed, 08 Jul 2015 03:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=rpWYtjPRr86lv4ilG34EXmQhFXTKZC4tdxTYvdhP4P8=;
-	b=gNm3OoiemTZ9ru/fwSm7ttZ3eOzrujnakA1c/5SVnLyU9ufo0QEZAkoonzhcraywAt
-	QKDxvGG5QPJWIr6xlDVHLnw89XEDluBoDxnFGbQXmojEbDhroIjh/S6hW7SkLB36V6nP
-	qGFYIugeLUXljTGojqfbZinsr0LIMU3oRVTnTqh18K2MBBvFq3HnAvTbyMwDS7BzP9Gb
-	MFEbdxFGK4aHRQH4Hc7hAQoYD0IcipFNJFiQ/wKuPiG3XsPmG8Lszx6voTbiU5Yckdvb
-	8XpawUHgaBHNaWZKemHOA5eJdKZp7zxfrkHCgoebiI5uBGlg7thP0L0F0uK5GNZ6AjKH
-	Sz+Q==
-X-Received: by 10.194.5.4 with SMTP id o4mr19595883wjo.51.1436352186898;
-	Wed, 08 Jul 2015 03:43:06 -0700 (PDT)
+	bh=6IQQMY2qDLz5UjvHS6f9hRE+u6Ju+M3oDzSF98jM/e8=;
+	b=Eunt05M3+l1nJJwzsJ5U+ks8FTjOALfuHQo3myGIRPc8qVfjSaz8YUHMzw/Bzd2JR7
+	cGe1+klpCj4uYidqgNX4lla2Da+WIPPhnpnb1JRF9n1VuSW1VRzoHfjKKNSS+Oz9552X
+	z7JjUtodozc46Gq/uiufcqpFBIGHpooxO7giRNEghQSwZzgcZe5qvoy1ayE1frbU2u9u
+	GnfikRzA69Ao2XF/YaKN07oB/vELSOsjahI1Pf1chJvX/rUVsfsNleIf19fNuJG2BXDC
+	eGJR3HrLTBRph5C4zcqlTyug+0wLQJPJtTa1z55BktVJ/be4409tIT6zKQ/GlnEbNmcd
+	3m0A==
+X-Received: by 10.180.9.111 with SMTP id y15mr70984434wia.18.1436352199386;
+	Wed, 08 Jul 2015 03:43:19 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id lu5sm2782888wjb.9.2015.07.08.03.43.06
+	by smtp.gmail.com with ESMTPSA id e7sm2209138wib.22.2015.07.08.03.43.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Jul 2015 03:43:06 -0700 (PDT)
+	Wed, 08 Jul 2015 03:43:18 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 8 Jul 2015 12:43:16 +0200
+Date: Wed, 8 Jul 2015 12:43:28 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150708104316.GC2398@jama>
-References: <1436341215-1648-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+Message-ID: <20150708104328.GD2398@jama>
+References: <1436325795-22322-1-git-send-email-jian.liu@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1436341215-1648-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+In-Reply-To: <1436325795-22322-1-git-send-email-jian.liu@windriver.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH] libssh2: upgrade 1.4.3 -> 1.6.0
+Subject: Re: [PATCH][meta-networking] systemd.bbclass: delete dangling symblink
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,60 +46,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jul 2015 10:43:07 -0000
-X-Groupsio-MsgNum: 56187
+X-List-Received-Date: Wed, 08 Jul 2015 10:43:20 -0000
+X-Groupsio-MsgNum: 56188
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xesSdrSSBC0PokLI"
+	protocol="application/pgp-signature"; boundary="RhUH2Ysw6aD5utA4"
 Content-Disposition: inline
 
---xesSdrSSBC0PokLI
+--RhUH2Ysw6aD5utA4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 08, 2015 at 03:40:15PM +0800, Li xin wrote:
-> Update the checksum of COPYING,since the date in it has been changed,
-> but the LICENSE has not been changed.
+On Wed, Jul 08, 2015 at 11:23:15AM +0800, Jian Liu wrote:
+> If only systemd is enabled, scripts of sysvinit under "/etc/init.d/"
+> will be deleted. But there may be some symblinks /etc/rc*/ that
+> points to the files under "/etc/init.d/". We need to delete them.
 
-There already is patch for this on ML and in master-next.
+Wrong ML
 
-> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> Signed-off-by: Jian Liu <jian.liu@windriver.com>
 > ---
->  .../recipes-support/libssh2/{libssh2_1.4.3.bb =3D> libssh2_1.6.0.bb}  | =
-6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-support/libssh2/{libssh2_1.4.3.bb =3D> libssh2_1.=
-6.0.bb} (60%)
+>  meta/classes/systemd.bbclass | 29 +++++++++++++++++++++++++++++
+>  1 file changed, 29 insertions(+)
 >=20
-> diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb b/meta-oe/r=
-ecipes-support/libssh2/libssh2_1.6.0.bb
-> similarity index 60%
-> rename from meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb
-> rename to meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-> index b537663..022482c 100644
-> --- a/meta-oe/recipes-support/libssh2/libssh2_1.4.3.bb
-> +++ b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
-> @@ -5,11 +5,11 @@ SECTION =3D "libs"
->  DEPENDS =3D "zlib openssl"
+> diff --git a/meta/classes/systemd.bbclass b/meta/classes/systemd.bbclass
+> index c34884b..ff3e0f8 100644
+> --- a/meta/classes/systemd.bbclass
+> +++ b/meta/classes/systemd.bbclass
+> @@ -184,6 +184,31 @@ do_install[postfuncs] +=3D "rm_systemd_unitdir "
+>  python rm_sysvinit_initddir (){
+>      import shutil
+>      sysv_initddir =3D oe.path.join(d.getVar("D", True), (d.getVar('INIT_=
+D_DIR', True) or "/etc/init.d"))
+> +    sysv_rcdirs =3D []
+> +    cpath =3D oe.cachedpath.CachedPath()
+> +
+> +    def check_dangling_sym(file,inst_root):
+> +        if not cpath.islink(file):
+> +            return False
+> +
+> +        rtarget =3D cpath.realpath(file, inst_root, True, assume_dir =3D=
+ True)
+> +        if not cpath.lexists(rtarget):
+> +            return True
+> +
+> +        return False
+> +
+> +    # delete dangling symblink under rc*
+> +    def rm_sysv_rcdirs():
+> +        dest =3D d.getVar("D", True)
+> +        rcdirs =3D "rc.d rc0.d rc1.d rc2.d rc3.d rc4.d rc5.d rc6.d rcS.d"
+> +
+> +        for rcdir in rcdirs.split():
+> +            path =3D dest + "/etc/" + rcdir
+> +            for walk_root, walk_dirs, walk_files in cpath.walk(path):
+> +                for file in walk_files:
+> +                    file =3D walk_root + "/" + file
+> +                    if check_dangling_sym(file, walk_root):
+> +                        sysv_rcdirs.append(file)
 > =20
->  LICENSE =3D "BSD"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd00afe44f336a79a2ca7e1681ce14=
-509"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc5cf34fc0acb44b082ef50ef5e435=
-4ca"
-> =20
->  SRC_URI =3D "http://www.libssh2.org/download/${BP}.tar.gz"
-> -SRC_URI[md5sum] =3D "071004c60c5d6f90354ad1b701013a0b"
-> -SRC_URI[sha256sum] =3D "eac6f85f9df9db2e6386906a6227eb2cd7b3245739561cad=
-7d6dc1d5d021b96d"
-> +SRC_URI[md5sum] =3D "00aabd6e714a5f42a4fb82ace20db1dd"
-> +SRC_URI[sha256sum] =3D "5a202943a34a1d82a1c31f74094f2453c207bf9936093867=
-f41414968c8e8215"
-> =20
->  inherit autotools pkgconfig
-> =20
+>      if bb.utils.contains('DISTRO_FEATURES', 'systemd', True, False, d) a=
+nd \
+>          not bb.utils.contains('DISTRO_FEATURES', 'sysvinit', True, False=
+, d) and \
+> @@ -193,5 +218,9 @@ python rm_sysvinit_initddir (){
+>          # If systemd_unitdir contains anything, delete sysv_initddir
+>          if (os.path.exists(systemd_unitdir) and os.listdir(systemd_unitd=
+ir)):
+>              shutil.rmtree(sysv_initddir)
+> +
+> +            rm_sysv_rcdirs()
+> +            for rcdir in sysv_rcdirs:
+> +                os.remove(rcdir)
+>  }
+>  do_install[postfuncs] +=3D "rm_sysvinit_initddir "
 > --=20
-> 1.8.4.2
+> 1.8.5.2.233.g932f7e4
 >=20
 > --=20
 > _______________________________________________
@@ -111,16 +132,16 @@ f41414968c8e8215"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---xesSdrSSBC0PokLI
+--RhUH2Ysw6aD5utA4
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAlWc/sMACgkQN1Ujt2V2gBwUEACfXU4Uq0SNYGl0xnnQXJ31i202
-2h0AoIYOwC39QDk6jA8aWFwWPVboYG0p
-=idOG
+iEYEARECAAYFAlWc/s8ACgkQN1Ujt2V2gBx1/wCdHQt1sS4RmMz8bcU9gC4bePLu
+S8UAn2tChcf90TX4J5DJSQRQ5BtxDmHV
+=Q2Va
 -----END PGP SIGNATURE-----
 
---xesSdrSSBC0PokLI--
+--RhUH2Ysw6aD5utA4--
