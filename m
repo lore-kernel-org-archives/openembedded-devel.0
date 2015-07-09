@@ -1,40 +1,41 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
-	[209.85.192.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 785C460557;
-	Thu,  9 Jul 2015 14:57:12 +0000 (UTC)
-Received: by pdbep18 with SMTP id ep18so166474866pdb.1;
-	Thu, 09 Jul 2015 07:57:12 -0700 (PDT)
+Received: from mail-pd0-f170.google.com (mail-pd0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 01F9665CBD
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Jul 2015 14:58:42 +0000 (UTC)
+Received: by pdbep18 with SMTP id ep18so166495453pdb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Jul 2015 07:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=message-id:date:from:user-agent:mime-version:to:subject:references
 	:in-reply-to:content-type:content-transfer-encoding;
-	bh=ESNRoYT5EzxMV28IJ19OdWxGVuAzc0CBoHIuU2kLBIk=;
-	b=C+DJzfsQHtsYbcABe1LyhcZOFcwLnlhfECpADP0RuufmC/eC3eySyAiCMMKLb679Ic
-	cAxiVjxtouBirEVm4swPuwdjwJlnN9eX5/Dt6YzMjQlHCztad+qrmc2wOXieRqusQL4Z
-	+szDNg5ksOgfCA2m9S/Iucv5k5Ui1XT8DFD/9h/FjBSZ/k4Fxrha0pUUp3ITgJHoB3WS
-	bnzbVvaI8fhQjZvnPqpnorQpXwVdg6BVnuH8BpCn/falHxJPPNNQAnjnRPvpV2vCB8U6
-	ZxzrPvyQTQo7Z5h8Ewb74qhrQTKSE7V1nQWLLKx8pvVXUMlzN2NmKp6SYkagd9+T9Ne1
-	+xjA==
-X-Received: by 10.67.4.4 with SMTP id ca4mr32040833pad.80.1436453832461;
-	Thu, 09 Jul 2015 07:57:12 -0700 (PDT)
+	bh=ab9bXPNVMrQLnrPiy4nsyFWrjmtPs82nnWTjYNuPU0c=;
+	b=JUwMQPKY1DmMyHOsu3AZo8ftuYmJvIyrzwgVBx1WuMYPs6kDY0XFFb/vOQdeOsIrMw
+	k3hRWhBPppXdJhIXNXJyxVGkuhJwnzGq82c/6eaLcQ463fyMk3o/k5Pk/da5n3267Cg7
+	+kyqAOWiwF8lam/EuYISmnFwO4Ma6mRdmBLFbS9ponx3M/utqm++Y1XmRFgf36Lak9Zb
+	MUG4PXZZp5o11phbMfFfRUAI9jjPGT4wAhcUrq6QWEWpBF4YGnmjy6IknhD8cmD+IgSq
+	0W3h8dT+4oXGFiyL4JNMsP5qy+o2mP+ZIprj0cICQSrrb4x9akBCQU9I7lv88f53SGCS
+	dioQ==
+X-Received: by 10.68.142.42 with SMTP id rt10mr32121855pbb.27.1436453922893;
+	Thu, 09 Jul 2015 07:58:42 -0700 (PDT)
 Received: from ?IPv6:2601:202:4000:1239:1f1:f366:7a5c:28ff?
 	([2601:202:4000:1239:1f1:f366:7a5c:28ff])
 	by smtp.googlemail.com with ESMTPSA id
-	qp10sm6241740pbc.88.2015.07.09.07.57.10
+	oo3sm6296832pac.31.2015.07.09.07.58.40
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 Jul 2015 07:57:11 -0700 (PDT)
-Message-ID: <559E8BC3.2060300@gmail.com>
-Date: Thu, 09 Jul 2015 07:57:07 -0700
+	Thu, 09 Jul 2015 07:58:41 -0700 (PDT)
+Message-ID: <559E8C1E.9060607@gmail.com>
+Date: Thu, 09 Jul 2015 07:58:38 -0700
 From: akuster808 <akuster808@gmail.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64;
 	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-To: Paul Eggleton <paul.eggleton@linux.intel.com>, 
-	openembedded-core@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
-References: <2219152.1ss8pFxefq@peggleto-mobl.ger.corp.intel.com>
-In-Reply-To: <2219152.1ss8pFxefq@peggleto-mobl.ger.corp.intel.com>
-Subject: Re: [OE-core] RFC: libav vs. ffmpeg, redux
+To: openembedded-devel@lists.openembedded.org
+References: <1436254986-18539-1-git-send-email-net147@gmail.com>
+In-Reply-To: <1436254986-18539-1-git-send-email-net147@gmail.com>
+Subject: Re: [meta-oe][PATCH] nodejs: update to 0.12.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,38 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2015 14:57:13 -0000
+X-List-Received-Date: Thu, 09 Jul 2015 14:58:44 -0000
 Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
+fyi:
 
+CVE-2015-5380
 
-On 07/09/2015 03:24 AM, Paul Eggleton wrote:
-> Hi all,
+On 07/07/2015 12:43 AM, Jonathan Liu wrote:
+> Signed-off-by: Jonathan Liu <net147@gmail.com>
+> ---
+>   .../recipes-devtools/nodejs/{nodejs_0.12.5.bb => nodejs_0.12.6.bb}    | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-oe/recipes-devtools/nodejs/{nodejs_0.12.5.bb => nodejs_0.12.6.bb} (95%)
 >
-> A few years ago we made the switch from ffmpeg to libav (a mostly drop-in
-> compatible fork), with fairly good justification at the time. However, it looks
-> like Debian has just made the switch back to ffmpeg, citing a number of reasons
-> - most notably more responsive security issue patching in recent history.
-> Here's a page with their full reasoning:
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.6.bb
+> similarity index 95%
+> rename from meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb
+> rename to meta-oe/recipes-devtools/nodejs/nodejs_0.12.6.bb
+> index 5685721..73c0557 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_0.12.5.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_0.12.6.bb
+> @@ -9,8 +9,8 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz \
+>       file://enable-armv5e-build.patch \
+>       file://no-registry.patch \
+>   "
+> -SRC_URI[md5sum] = "aa6d22762e70b4f46293a17373788291"
+> -SRC_URI[sha256sum] = "4bc1e25f4c62ac65324d3cf4aa9de2d801cd708757c3567b6ad2ced7df30cdd2"
+> +SRC_URI[md5sum] = "698ebd8ecd5c9c61091875bbd54401f4"
+> +SRC_URI[sha256sum] = "7a3b5ac351973a9dee8edbf0684bc8d0dea44b231e42274ffb008141ffa19ad2"
 >
->    https://wiki.debian.org/Debate/libav-provider/ffmpeg
+>   S = "${WORKDIR}/node-v${PV}"
 >
-> Gstreamer (gst-libav, specifically) has also just recently made the switch back
-> for its internal copy:
->
->    https://bugzilla.gnome.org/show_bug.cgi?id=751607
->
-> What do people think? Should we be looking to make the switch back in OE as
-> well?
->
-
-That make sense to me. Also libav has LICENSE_FLAGS = "commercial" so 
-the change which will simplify things too.
-
-- armin
-
-> Cheers,
-> Paul
 >
 
