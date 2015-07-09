@@ -1,40 +1,40 @@
-Return-Path: <dev@codyps.com>
-Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id CDE736017E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jul 2015 14:48:03 +0000 (UTC)
-Received: by igcqs7 with SMTP id qs7so81533676igc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jul 2015 07:48:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codyps.com; s=google;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=6cEFE32XWV37B3zigodIYPjmVk0YIkMe7hcJjKs64iA=;
-	b=FoAklvnQem29paQ8t/CBRmvOIPvAf2SIrDB5Us8akYYdopKXoUOls9FUPbCkCh3y2h
-	6agjhH6z+A/zA08WNNK6Mk9P0VuEtZSj1ywmUVEkPqVcPjIpn2lGxDxmGpXdnswBqTic
-	pyrDK+wd9SI3p65yH/AN2ffHLLO8cevdJo54o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
-	:content-type;
-	bh=6cEFE32XWV37B3zigodIYPjmVk0YIkMe7hcJjKs64iA=;
-	b=itEn5NR587undcn73QE2OYBDZWUF+8Vqb7KXRn0uEAYga/WVL2o/r+dPyvbDgID2nz
-	5F6BIX4RYShfIdOZ49XFXGc5yoO4Lb08geSlxtTIBf+6pTJhOqLiIgw8ejxs+sPuC8Vp
-	HYXpp+MgXDjrofN+jHvU4/o0OKFPu3yZgRctHx4Thhc/3k5+Sds0GVW/Wch6qtv6uwnA
-	iD/pxC8C9CC9PEbVq4wn+Y65SrB97/BR3AOFJkDnPvJQjMTkj8nhQJe/gNa2iRjMQcXx
-	7Bm/6OxGf0Nu9wVfttcJswnE28Y2Qe/QzlkiHrpP2/qKOF/j0Wv//4mmWiCLGvuszs5c
-	7ZaA==
-X-Gm-Message-State: ALoCoQmysraP8WBIMgeyX+C/Bg6HjcXK9Hn1j6ItihON5/NPZHTbGQixF+9jchqK6y6PsrAox2BC
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pd0-f173.google.com (mail-pd0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 785C460557;
+	Thu,  9 Jul 2015 14:57:12 +0000 (UTC)
+Received: by pdbep18 with SMTP id ep18so166474866pdb.1;
+	Thu, 09 Jul 2015 07:57:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	bh=ESNRoYT5EzxMV28IJ19OdWxGVuAzc0CBoHIuU2kLBIk=;
+	b=C+DJzfsQHtsYbcABe1LyhcZOFcwLnlhfECpADP0RuufmC/eC3eySyAiCMMKLb679Ic
+	cAxiVjxtouBirEVm4swPuwdjwJlnN9eX5/Dt6YzMjQlHCztad+qrmc2wOXieRqusQL4Z
+	+szDNg5ksOgfCA2m9S/Iucv5k5Ui1XT8DFD/9h/FjBSZ/k4Fxrha0pUUp3ITgJHoB3WS
+	bnzbVvaI8fhQjZvnPqpnorQpXwVdg6BVnuH8BpCn/falHxJPPNNQAnjnRPvpV2vCB8U6
+	ZxzrPvyQTQo7Z5h8Ewb74qhrQTKSE7V1nQWLLKx8pvVXUMlzN2NmKp6SYkagd9+T9Ne1
+	+xjA==
+X-Received: by 10.67.4.4 with SMTP id ca4mr32040833pad.80.1436453832461;
+	Thu, 09 Jul 2015 07:57:12 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1239:1f1:f366:7a5c:28ff?
+	([2601:202:4000:1239:1f1:f366:7a5c:28ff])
+	by smtp.googlemail.com with ESMTPSA id
+	qp10sm6241740pbc.88.2015.07.09.07.57.10
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 Jul 2015 07:57:11 -0700 (PDT)
+Message-ID: <559E8BC3.2060300@gmail.com>
+Date: Thu, 09 Jul 2015 07:57:07 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-X-Received: by 10.107.16.169 with SMTP id 41mr95812ioq.117.1436453283274; Thu,
-	09 Jul 2015 07:48:03 -0700 (PDT)
-Received: by 10.36.197.195 with HTTP; Thu, 9 Jul 2015 07:48:03 -0700 (PDT)
-X-Originating-IP: [96.237.165.28]
-Date: Thu, 9 Jul 2015 10:48:03 -0400
-Message-ID: <CAPoQQ-23uuo-Y17DhWnUvnaV=ZRaFZB42h=iUauGgANbJrx17Q@mail.gmail.com>
-From: Cody P Schafer <dev@codyps.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-qt5] package using cmake_qt5 that uses translations fails in cmake due to not being able to find lrlease
+To: Paul Eggleton <paul.eggleton@linux.intel.com>, 
+	openembedded-core@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+References: <2219152.1ss8pFxefq@peggleto-mobl.ger.corp.intel.com>
+In-Reply-To: <2219152.1ss8pFxefq@peggleto-mobl.ger.corp.intel.com>
+Subject: Re: [OE-core] RFC: libav vs. ffmpeg, redux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,39 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2015 14:48:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Jul 2015 14:57:13 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-It seems like some of Qt5's cmake machinery verifies that lrelease and
-lupdate exist at fixed paths that aren't correct when we're
-cross-compiling.
 
-Actual error:
 
-| CMake Error at
-/home/cody/obj/y/tmp/sysroots/beaglebone/usr/lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfig.cmake:22
-(message):
-|   The package "Qt5LinguistTools" references the file
-|
-|      "/usr/bin/qt5/lrelease"
-|
-|   but this file does not exist.  Possible reasons include:
-|
-|   * The file was deleted, renamed, or moved to another location.
-|
-|   * An install or uninstall procedure did not complete successfully.
-|
-|   * The installation package was faulty and contained
-|
-|      "/home/cody/obj/y/tmp/sysroots/beaglebone/usr/lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfig.cmake"
-|
-|   but not all the files it references.
-|
-| Call Stack (most recent call first):
-|   /home/cody/obj/y/tmp/sysroots/beaglebone/usr/lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfig.cmake:38
-(_qt5_LinguistTools_check_file_exists)
-|   CMakeLists.txt:61 (find_package)
-|
-|
-| -- Configuring incomplete, errors occurred!
+On 07/09/2015 03:24 AM, Paul Eggleton wrote:
+> Hi all,
+>
+> A few years ago we made the switch from ffmpeg to libav (a mostly drop-in
+> compatible fork), with fairly good justification at the time. However, it looks
+> like Debian has just made the switch back to ffmpeg, citing a number of reasons
+> - most notably more responsive security issue patching in recent history.
+> Here's a page with their full reasoning:
+>
+>    https://wiki.debian.org/Debate/libav-provider/ffmpeg
+>
+> Gstreamer (gst-libav, specifically) has also just recently made the switch back
+> for its internal copy:
+>
+>    https://bugzilla.gnome.org/show_bug.cgi?id=751607
+>
+> What do people think? Should we be looking to make the switch back in OE as
+> well?
+>
+
+That make sense to me. Also libav has LICENSE_FLAGS = "commercial" so 
+the change which will simplify things too.
+
+- armin
+
+> Cheers,
+> Paul
+>
 
