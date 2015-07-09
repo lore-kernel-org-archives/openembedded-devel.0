@@ -1,28 +1,23 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E93CD60034
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jul 2015 02:35:15 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t692ZFYv005304
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Jul 2015 19:35:16 -0700 (PDT)
-Received: from [128.224.162.158] (128.224.162.158) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 8 Jul 2015 19:35:15 -0700
-Message-ID: <559DDDE2.6060801@windriver.com>
-Date: Thu, 9 Jul 2015 10:35:14 +0800
-From: Rongqing Li <rongqing.li@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux x86_64;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 20B7F60557;
+	Thu,  9 Jul 2015 10:24:31 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga101.jf.intel.com with ESMTP; 09 Jul 2015 03:24:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.15,439,1432623600"; d="scan'208";a="758980149"
+Received: from lkpandey-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.4.112])
+	by fmsmga002.fm.intel.com with ESMTP; 09 Jul 2015 03:24:32 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 09 Jul 2015 11:24:26 +0100
+Message-ID: <2219152.1ss8pFxefq@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.9 (Linux/4.0.6-200.fc21.x86_64; KDE/4.14.9; x86_64; ; )
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <1436234152-4937-1-git-send-email-rongqing.li@windriver.com>	<mnfurd$pvc$1@ger.gmane.org>	<559B8063.7010906@windriver.com>
-	<mnir45$f4q$1@ger.gmane.org>
-In-Reply-To: <mnir45$f4q$1@ger.gmane.org>
-Subject: Re: [PATCH][meta-networking][v2] znc: upgrade to 1.6.0
+Subject: RFC: libav vs. ffmpeg, redux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,19 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2015 02:35:16 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 09 Jul 2015 10:24:34 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
+Hi all,
 
+A few years ago we made the switch from ffmpeg to libav (a mostly drop-in 
+compatible fork), with fairly good justification at the time. However, it looks 
+like Debian has just made the switch back to ffmpeg, citing a number of reasons 
+- most notably more responsive security issue patching in recent history. 
+Here's a page with their full reasoning:
 
-On 2015年07月08日 17:39, Koen Kooi wrote:
-> That's not a reason to use 2 different notations. Either put both in SRC_URI
-> or use two SRCREV_foo statements.
+  https://wiki.debian.org/Debate/libav-provider/ffmpeg
 
+Gstreamer (gst-libav, specifically) has also just recently made the switch back 
+for its internal copy:
 
+  https://bugzilla.gnome.org/show_bug.cgi?id=751607
 
-it is better if you can revised this patch, and submit.
+What do people think? Should we be looking to make the switch back in OE as 
+well?
 
--R
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
