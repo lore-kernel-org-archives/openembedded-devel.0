@@ -1,39 +1,40 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CD606E648
+Return-Path: <dev@codyps.com>
+Received: from mail-ig0-f177.google.com (mail-ig0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id CDE736017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jul 2015 11:42:18 +0000 (UTC)
-Received: by qkbp125 with SMTP id p125so183597914qkb.2
+	Thu,  9 Jul 2015 14:48:03 +0000 (UTC)
+Received: by igcqs7 with SMTP id qs7so81533676igc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jul 2015 04:42:19 -0700 (PDT)
+	Thu, 09 Jul 2015 07:48:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codyps.com; s=google;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	bh=6cEFE32XWV37B3zigodIYPjmVk0YIkMe7hcJjKs64iA=;
+	b=FoAklvnQem29paQ8t/CBRmvOIPvAf2SIrDB5Us8akYYdopKXoUOls9FUPbCkCh3y2h
+	6agjhH6z+A/zA08WNNK6Mk9P0VuEtZSj1ywmUVEkPqVcPjIpn2lGxDxmGpXdnswBqTic
+	pyrDK+wd9SI3p65yH/AN2ffHLLO8cevdJo54o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-type;
-	bh=vWaHqUtFIfvSv/qbr5Y5R/JACoBzW7Lf+UHTLGDk15E=;
-	b=br13Zygcfk0z521LKHmfo3g+X/eN8DhSmFea1khqb3HCRTZ/w/uL+xS5C2wtNEzRUV
-	L88HNiZiuQAXA56wrLftU020ddPV7KkFfrUDN75dNl5LqH5INUUiKhfcAm3UJOPOTKT5
-	qYx2BfkRIVIDwme2KoTiSoyGrlr4xC+OchvgvonnSYOtuFcbDxdv9Sebo8xf19wV4eLr
-	AxDXMhEQTSoAVfCVpigeF3UIyj85c/QQFOepemZHSX7/JAtceEdJg9BztzmHofDP0lR6
-	/ZL2fsvgjTvQzJdsF63DfVr5Rp78V97uTtFofOg7wYj835KxzmQCMUiRwr/v5kw5jcXS
-	aJDQ==
-X-Gm-Message-State: ALoCoQnMs7CWnND6Ls6N8Q+z+KbNQeKeoDPjylsRBhMsdZf6MuU6UfhPW4O7mDoH2MCbQXAN1W8u
-X-Received: by 10.140.231.19 with SMTP id b19mr23953204qhc.22.1436442139000;
-	Thu, 09 Jul 2015 04:42:19 -0700 (PDT)
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=6cEFE32XWV37B3zigodIYPjmVk0YIkMe7hcJjKs64iA=;
+	b=itEn5NR587undcn73QE2OYBDZWUF+8Vqb7KXRn0uEAYga/WVL2o/r+dPyvbDgID2nz
+	5F6BIX4RYShfIdOZ49XFXGc5yoO4Lb08geSlxtTIBf+6pTJhOqLiIgw8ejxs+sPuC8Vp
+	HYXpp+MgXDjrofN+jHvU4/o0OKFPu3yZgRctHx4Thhc/3k5+Sds0GVW/Wch6qtv6uwnA
+	iD/pxC8C9CC9PEbVq4wn+Y65SrB97/BR3AOFJkDnPvJQjMTkj8nhQJe/gNa2iRjMQcXx
+	7Bm/6OxGf0Nu9wVfttcJswnE28Y2Qe/QzlkiHrpP2/qKOF/j0Wv//4mmWiCLGvuszs5c
+	7ZaA==
+X-Gm-Message-State: ALoCoQmysraP8WBIMgeyX+C/Bg6HjcXK9Hn1j6ItihON5/NPZHTbGQixF+9jchqK6y6PsrAox2BC
 MIME-Version: 1.0
-Received: by 10.140.102.231 with HTTP; Thu, 9 Jul 2015 04:41:59 -0700 (PDT)
-In-Reply-To: <CAALGJZbmg2kqahBp5jFL4mk2N6upacQpmi9bpd3jSf5A-c4T8A@mail.gmail.com>
-References: <2219152.1ss8pFxefq@peggleto-mobl.ger.corp.intel.com>
-	<CAJTo0La0qFDC36msPioX=-=xsdWrhGSUrKC-9DokxV9Htx003Q@mail.gmail.com>
-	<CAALGJZbmg2kqahBp5jFL4mk2N6upacQpmi9bpd3jSf5A-c4T8A@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 9 Jul 2015 12:41:59 +0100
-Message-ID: <CAJTo0LaQR12MZP05tOSABbaRCAL=tA2boNdjKGJT54oLjAsG4w@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] RFC: libav vs. ffmpeg, redux
+X-Received: by 10.107.16.169 with SMTP id 41mr95812ioq.117.1436453283274; Thu,
+	09 Jul 2015 07:48:03 -0700 (PDT)
+Received: by 10.36.197.195 with HTTP; Thu, 9 Jul 2015 07:48:03 -0700 (PDT)
+X-Originating-IP: [96.237.165.28]
+Date: Thu, 9 Jul 2015 10:48:03 -0400
+Message-ID: <CAPoQQ-23uuo-Y17DhWnUvnaV=ZRaFZB42h=iUauGgANbJrx17Q@mail.gmail.com>
+From: Cody P Schafer <dev@codyps.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-qt5] package using cmake_qt5 that uses translations fails in cmake due to not being able to find lrlease
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,16 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jul 2015 11:42:19 -0000
+X-List-Received-Date: Thu, 09 Jul 2015 14:48:04 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 9 July 2015 at 11:35, Christian Ege <k4230r6@gmail.com> wrote:
+It seems like some of Qt5's cmake machinery verifies that lrelease and
+lupdate exist at fixed paths that aren't correct when we're
+cross-compiling.
 
-> Another option could be supporting both.
->
+Actual error:
 
-I totally endorse having a layer that has the one that isn't in oe-core,
-but oe-core should pick one and support it properly.
-
-Ross
+| CMake Error at
+/home/cody/obj/y/tmp/sysroots/beaglebone/usr/lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfig.cmake:22
+(message):
+|   The package "Qt5LinguistTools" references the file
+|
+|      "/usr/bin/qt5/lrelease"
+|
+|   but this file does not exist.  Possible reasons include:
+|
+|   * The file was deleted, renamed, or moved to another location.
+|
+|   * An install or uninstall procedure did not complete successfully.
+|
+|   * The installation package was faulty and contained
+|
+|      "/home/cody/obj/y/tmp/sysroots/beaglebone/usr/lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfig.cmake"
+|
+|   but not all the files it references.
+|
+| Call Stack (most recent call first):
+|   /home/cody/obj/y/tmp/sysroots/beaglebone/usr/lib/cmake/Qt5LinguistTools/Qt5LinguistToolsConfig.cmake:38
+(_qt5_LinguistTools_check_file_exists)
+|   CMakeLists.txt:61 (find_package)
+|
+|
+| -- Configuring incomplete, errors occurred!
 
