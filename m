@@ -1,24 +1,24 @@
-Return-Path: <Wenzong.Fan@windriver.com>
+Return-Path: <xiao.zhang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C69B6017E
+	by mail.openembedded.org (Postfix) with ESMTP id 43DBC6AC3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 09:40:04 +0000 (UTC)
+	Fri, 10 Jul 2015 09:44:02 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6A9e5h7008603
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6A9i3wl009283
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 02:40:05 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	Fri, 10 Jul 2015 02:44:03 -0700 (PDT)
+Received: from localhost.localdomain (128.224.163.132) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.224.2; Fri, 10 Jul 2015 02:40:05 -0700
-From: <wenzong.fan@windriver.com>
+	14.3.224.2; Fri, 10 Jul 2015 02:44:02 -0700
+From: Zhang Xiao <xiao.zhang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 10 Jul 2015 17:34:26 +0800
-Message-ID: <1436520866-18584-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 10 Jul 2015 17:45:59 +0800
+Message-ID: <1436521559-10612-1-git-send-email-xiao.zhang@windriver.com>
+X-Mailer: git-send-email 1.7.0.4
 MIME-Version: 1.0
-Subject: [PATCH][meta-perl] libxml-libxml-perl: update from 2.0116 to 2.0121
+Subject: [oe-core][PATCH] libtool: remove the hostname on which libtool was build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,126 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2015 09:40:05 -0000
+X-List-Received-Date: Fri, 10 Jul 2015 09:44:03 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+Upstream-Status: pending
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
 ---
- .../libxml/libxml-libxml-perl_2.0116.bb            | 47 ----------------------
- .../libxml/libxml-libxml-perl_2.0121.bb            | 47 ++++++++++++++++++++++
- 2 files changed, 47 insertions(+), 47 deletions(-)
- delete mode 100644 meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
- create mode 100644 meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
+ meta/recipes-devtools/libtool/libtool_2.4.6.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
-deleted file mode 100644
-index 2a6dbc2..0000000
---- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
-+++ /dev/null
-@@ -1,47 +0,0 @@
--SUMMARY = "Perl interface to the libxml2 library"
--DESCRIPTION = "This module is an interface to libxml2, providing XML and HTML parsers \ 
--with DOM, SAX and XMLReader interfaces, a large subset of DOM Layer 3 \
--interface and a XML::XPath-like interface to XPath API of libxml2. \
--The module is split into several packages which are not described in this \
--section; unless stated otherwise, you only need to use XML::LibXML; in \
--your programs."
--
--HOMEPAGE = "http://search.cpan.org/dist/XML-LibXML-1.99/"
--SECTION = "libs"
--LICENSE = "Artistic-1.0|GPLv1+"
--DEPENDS += "libxml2 \
--        libxml-sax-perl-native \
--        zlib \
--"
--RDEPENDS_${PN} += "libxml2 \
--        libxml-sax-perl \
--        libxml-sax-base-perl \
--        zlib \
--"
--
--SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.tar.gz;name=libxml \
--	file://disable-libxml2-check.patch \
--	file://fix-CATALOG-conditional-compile.patch \
--	file://using-DOCB-conditional.patch \
--"
--LIC_FILES_CHKSUM = "file://debian/copyright;md5=75e021e35a906347f46c9ff163653e2a \
--			file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446"
--SRC_URI[libxml.md5sum] = "a53a743bf053a0cb4afb41513fb8a684"
--SRC_URI[libxml.sha256sum] = "b154f2dad3033b30d22ac81b8985b69ad35450b0c552db394cd03bb36845812a"
--
--S = "${WORKDIR}/XML-LibXML-${PV}"
--
--inherit cpan
--
--EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR}/libxml2 LIBS=-L${STAGING_LIBDIR}"
--
--BBCLASSEXTEND = "native"
--
--CFLAGS += " -D_GNU_SOURCE "
--BUILD_CFLAGS += " -D_GNU_SOURCE "
--
--do_configure_prepend() {
--	rm -rf ${S}/.pc/*
--}
--
--FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/XML/LibXML/.debug/"
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
-new file mode 100644
-index 0000000..9066000
---- /dev/null
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
-@@ -0,0 +1,47 @@
-+SUMMARY = "Perl interface to the libxml2 library"
-+DESCRIPTION = "This module is an interface to libxml2, providing XML and HTML parsers \ 
-+with DOM, SAX and XMLReader interfaces, a large subset of DOM Layer 3 \
-+interface and a XML::XPath-like interface to XPath API of libxml2. \
-+The module is split into several packages which are not described in this \
-+section; unless stated otherwise, you only need to use XML::LibXML; in \
-+your programs."
-+
-+HOMEPAGE = "http://search.cpan.org/dist/XML-LibXML-1.99/"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0|GPLv1+"
-+DEPENDS += "libxml2 \
-+        libxml-sax-perl-native \
-+        zlib \
-+"
-+RDEPENDS_${PN} += "libxml2 \
-+        libxml-sax-perl \
-+        libxml-sax-base-perl \
-+        zlib \
-+"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.tar.gz;name=libxml \
-+	file://disable-libxml2-check.patch \
-+	file://fix-CATALOG-conditional-compile.patch \
-+	file://using-DOCB-conditional.patch \
-+"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=75e021e35a906347f46c9ff163653e2a \
-+			file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446"
-+SRC_URI[libxml.md5sum] = "1544ab9ac110f5da296015346561ce02"
-+SRC_URI[libxml.sha256sum] = "ec431011cb37a04640fd2316f64d0405a274eece2c6f3847f7fbd336eb1c0dc9"
-+
-+S = "${WORKDIR}/XML-LibXML-${PV}"
-+
-+inherit cpan
-+
-+EXTRA_CPANFLAGS = "INC=-I${STAGING_INCDIR}/libxml2 LIBS=-L${STAGING_LIBDIR}"
-+
-+BBCLASSEXTEND = "native"
-+
-+CFLAGS += " -D_GNU_SOURCE "
-+BUILD_CFLAGS += " -D_GNU_SOURCE "
-+
-+do_configure_prepend() {
-+	rm -rf ${S}/.pc/*
-+}
-+
-+FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/XML/LibXML/.debug/"
+diff --git a/meta/recipes-devtools/libtool/libtool_2.4.6.bb b/meta/recipes-devtools/libtool/libtool_2.4.6.bb
+index 45f1b2f..65972b0 100644
+--- a/meta/recipes-devtools/libtool/libtool_2.4.6.bb
++++ b/meta/recipes-devtools/libtool/libtool_2.4.6.bb
+@@ -15,6 +15,7 @@ do_install_append () {
+             -e 's@^\(compiler_lib_search_path="\).*@\1${libdir} ${base_libdir}"@' \
+             -e 's@^\(predep_objects="\).*@\1"@' \
+             -e 's@^\(postdep_objects="\).*@\1"@' \
++            -e 's/configured on host.*/configured on buildserver/' \
+             -i ${D}${bindir}/libtool
+ }
+ 
 -- 
-1.9.1
+1.8.5.2.233.g932f7e4
 
 
