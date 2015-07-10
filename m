@@ -1,40 +1,34 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f182.google.com (mail-wi0-f182.google.com
-	[209.85.212.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 517216017E
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id C13F965C60
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 11:03:04 +0000 (UTC)
-Received: by wicmv11 with SMTP id mv11so11059162wic.1
+	Fri, 10 Jul 2015 14:25:05 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ZDZEe-0008Hf-Rt for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Jul 2015 16:25:05 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jul 2015 16:25:04 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 04:03:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=4bQJsNgD82bLd6B7vwktJfy5Uka2ZJDHfvrw5a5gujk=;
-	b=ZuFrkL8XuJybp2GOwCbJmmtLCtm0ZyGaOOgLClh3eTHSWYmbVUiGlU9Ki9S0UqGu29
-	jJgOwcijA74XmaPT3jaLAoRKN5Uw5ihkqt5V4KDJWfvfZ4SXqAKMP80kD3IFToTP6Y7F
-	N/5ElWzug8BVYjZrNR7EIq4JQs/MwFtiarlSfbPpdv0Y2mX0UeWeuhNOn5/IoBWuUvHb
-	2e6sP5XHUqkvdVSMrR4No5oVk8MEfCvNvtVSth5+OFCjsATE8BpAwtb8NV7RKJ3XV9TH
-	t+UmC06q6rj8aW+MQutPiljO3uImLxgLS79wLA252nX6Np1KPi+x9qdSKo/YNo6J++dD
-	PH2w==
-X-Received: by 10.181.13.134 with SMTP id ey6mr5190273wid.88.1436526184118;
-	Fri, 10 Jul 2015 04:03:04 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	gb16sm2405176wic.5.2015.07.10.04.03.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Jul 2015 04:03:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 10 Jul 2015 13:03:24 +0200
+	Fri, 10 Jul 2015 16:25:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150710110324.GB2397@jama>
-References: <1436521559-10612-1-git-send-email-xiao.zhang@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1436521559-10612-1-git-send-email-xiao.zhang@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [oe-core][PATCH] libtool: remove the hostname on which libtool was build
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Fri, 10 Jul 2015 16:21:49 +0200
+Message-ID: <mnokdt$fuc$2@ger.gmane.org>
+References: <1436234152-4937-1-git-send-email-rongqing.li@windriver.com>	<mnfurd$pvc$1@ger.gmane.org>	<559B8063.7010906@windriver.com>	<mnir45$f4q$1@ger.gmane.org>
+	<559DCDF7.3020003@windriver.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
+In-Reply-To: <559DCDF7.3020003@windriver.com>
+Subject: Re: [PATCH][meta-networking][v2] znc: upgrade to 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,64 +42,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2015 11:03:07 -0000
-X-Groupsio-MsgNum: 56220
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="XF85m9dhOBO43t/C"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 10 Jul 2015 14:25:06 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
---XF85m9dhOBO43t/C
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Fri, Jul 10, 2015 at 05:45:59PM +0800, Zhang Xiao wrote:
-> Upstream-Status: pending
+Rongqing Li schreef op 09-07-15 om 03:27:
+> 
+> 
+> On 2015年07月08日 17:39, Koen Kooi wrote: Rongqing Li schreef op 07-07-15 om
+> 09:31:
+>>>> 
+>>>> 
+>>>> On 2015年07月07日 15:24, Koen Kooi wrote: rongqing.li@windriver.com
+>>>> schreef op 07-07-15 om 03:55:
+>>>>>>> From: Roy Li <rongqing.li@windriver.com>
+>>>>>>> 
+>>>>>>> Remove backport patch Add CSocket submodule Add the
+>>>>>>> dependency on icu
+>>>>>>> 
+>>>>>>> Signed-off-by: Roy Li <rongqing.li@windriver.com> ---
+>>>> 
+>>>>>>> diff --git a/meta-networking/recipes-irc/znc/znc_git.bb 
+>>>>>>> b/meta-networking/recipes-irc/znc/znc_git.bb index 
+>>>>>>> 2e35e4d..f5bed08 100644 --- 
+>>>>>>> a/meta-networking/recipes-irc/znc/znc_git.bb +++ 
+>>>>>>> b/meta-networking/recipes-irc/znc/znc_git.bb @@ -1,16 +1,16
+>>>>>>> @@ SUMMARY = "ZNC, an advanced IRC bouncer" SECTION = "net"
+>>>>>>> LICENSE = "GPLv2" -LIC_FILES_CHKSUM = 
+>>>>>>> "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe" 
+>>>>>>> +LIC_FILES_CHKSUM = 
+>>>>>>> "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+>>>>>>> 
+>>>>>>> -DEPENDS = "openssl" +DEPENDS = "openssl zlib icu"
+>>>>>>> 
+>>>>>>> -PV = "1.0+git" +PV = "1.6.0+git"
+>>>> 
+>>>> If it's the 1.6 release, just call it '1.6.0'
+>>>> 
+>>>> 
+>>>>> grep oe-core
+>>>> 
+>>>>> ./meta/recipes-graphics/mesa/mesa_git.bb:PV =
+>>>>> "10.5.4+git${SRCPV}" 
+>>>>> ./meta/recipes-graphics/fstests/fstests_git.bb:PV =
+>>>>> "0.1+git${SRCPV}" ./meta/recipes-graphics/mx/mx-1.0_1.4.7.bb:PV =
+>>>>> "1.4.7+git${SRCPV}" ./meta/recipes-graphics/drm/libdrm_git.bb:PV
+>>>>> = "2.4.40+git${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xorg-lib/libxcb_git.bb:PV = 
+>>>>> "1.1.90.1+gitr${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xorg-lib/libxext_git.bb:PV = 
+>>>>> "1.0.99.1+gitr${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xorg-lib/libxcalibrate_git.bb:PV = 
+>>>>> "0.0+git${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xorg-driver/xf86-input-keyboard_git.bb:PV
+>>>>> = "1.3.2+git${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xorg-driver/xf86-input-mouse_git.bb:PV = 
+>>>>> "1.3.0+git${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xorg-driver/xf86-input-synaptics_git.bb:PV
+>>>>> = "0.15.2+git${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb:PV
+>>>>> = "0.1.1+gitr${SRCPV}" 
+>>>>> ./meta/recipes-graphics/libepoxy/libepoxy_git.bb:PV = 
+>>>>> "1.2+git${SRCPV}" 
+>>>>> ./meta/recipes-graphics/xvideo-tests/xvideo-tests_git.bb:PV = 
+>>>>> "0.1+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/sgmlspl/sgmlspl-native_git.bb:PV = 
+>>>>> "1.1+git${SRCPV}" ./meta/recipes-devtools/qemu/qemu_git.bb:PV = 
+>>>>> "1.3.0+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/swabber/swabber-native_git.bb:PV = 
+>>>>> "0.0+git${SRCPV}" ./meta/recipes-devtools/remake/remake_git.bb:PV
+>>>>> = "3.82+dbg-0.9+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/mtd/mtd-utils_git.bb:PV =
+>>>>> "1.5.1+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/opkg-utils/opkg-utils_git.bb:PV = 
+>>>>> "0.1.8+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/bootchart2/bootchart2_git.bb:PV = 
+>>>>> "0.14.6+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/mkelfimage/mkelfimage_git.bb:PV = 
+>>>>> "4.0+git${SRCPV}" ./meta/recipes-devtools/mmc/mmc-utils_git.bb:PV
+>>>>> = "0.1" ./meta/recipes-devtools/pseudo/pseudo_git.bb:PV = 
+>>>>> "1.6.5+git${SRCPV}"
+>>>>> ./meta/recipes-devtools/prelink/prelink_git.bb:PV = 
+>>>>> "1.0+git${SRCPV}"
+>>>>> ./meta/recipes-devtools/pkgconfig/pkgconfig.inc:PV = 
+>>>>> "0.28+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/btrfs-tools/btrfs-tools_git.bb:PV = 
+>>>>> "4.0.1+git${SRCPV}" 
+>>>>> ./meta/recipes-devtools/gnu-config/gnu-config_git.bb:PV = 
+>>>>> "1.0+git${SRCPV}"
+>>>>> ./meta/recipes-devtools/tcf-agent/tcf-agent_git.bb:PV =
+>>>>> "0.4.0+git${SRCPV}"
+>>>>> ./meta/recipes-devtools/fdisk/gptfdisk_git.bb:PV =
+>>>>> "0.8.10+git${SRCPV}"
+>>>>> ./meta/recipes-multimedia/x264/x264_git.bb:PV = 
+>>>>> "r2491+git${SRCPV}" 
+>>>>> ./meta/recipes-multimedia/libav/libpostproc_git.bb:PV = 
+>>>>> "52.3.0+git${SRCPV}"
+> 
+> Your point being?
+> 
+>> lots of recipes under oe-core is using this style { PV=version+git}
 
-Wrong ML
-
->=20
-> Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
-> ---
->  meta/recipes-devtools/libtool/libtool_2.4.6.bb | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/meta/recipes-devtools/libtool/libtool_2.4.6.bb b/meta/recipe=
-s-devtools/libtool/libtool_2.4.6.bb
-> index 45f1b2f..65972b0 100644
-> --- a/meta/recipes-devtools/libtool/libtool_2.4.6.bb
-> +++ b/meta/recipes-devtools/libtool/libtool_2.4.6.bb
-> @@ -15,6 +15,7 @@ do_install_append () {
->              -e 's@^\(compiler_lib_search_path=3D"\).*@\1${libdir} ${base=
-_libdir}"@' \
->              -e 's@^\(predep_objects=3D"\).*@\1"@' \
->              -e 's@^\(postdep_objects=3D"\).*@\1"@' \
-> +            -e 's/configured on host.*/configured on buildserver/' \
->              -i ${D}${bindir}/libtool
->  }
-> =20
-> --=20
-> 1.8.5.2.233.g932f7e4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---XF85m9dhOBO43t/C
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
+Like lemmings of a cliff...
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Version: GnuPG v1.4.5 (Darwin)
+Comment: GPGTools - http://gpgtools.org
 
-iEYEARECAAYFAlWfpnsACgkQN1Ujt2V2gBwV3gCfX/GT/5lHym3vuS6JtQ7Io2fg
-8KsAn1ZwAQH1CRWafDvZ7WarHJNhJVmA
-=KmNO
+iD8DBQFVn9T9MkyGM64RGpERAqViAJ9+8Ad3sQQE1bvAvPfYbnxXvLZgIgCbBR1P
+y8Z1GLTedpVErGs9YPLUkg4=
+=0qW2
 -----END PGP SIGNATURE-----
 
---XF85m9dhOBO43t/C--
+
