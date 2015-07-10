@@ -1,34 +1,23 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id C13F965C60
+Return-Path: <maciej.borzecki@open-rnd.pl>
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 709DA6017E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 14:25:05 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ZDZEe-0008Hf-Rt for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Jul 2015 16:25:05 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 16:25:04 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 16:25:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 10 Jul 2015 16:21:49 +0200
-Message-ID: <mnokdt$fuc$2@ger.gmane.org>
-References: <1436234152-4937-1-git-send-email-rongqing.li@windriver.com>	<mnfurd$pvc$1@ger.gmane.org>	<559B8063.7010906@windriver.com>	<mnir45$f4q$1@ger.gmane.org>
-	<559DCDF7.3020003@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-In-Reply-To: <559DCDF7.3020003@windriver.com>
-Subject: Re: [PATCH][meta-networking][v2] znc: upgrade to 1.6.0
+	Fri, 10 Jul 2015 14:30:08 +0000 (UTC)
+Received: from localhost.localdomain (unknown [31.182.60.238])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id C9A81427261;
+	Fri, 10 Jul 2015 16:18:02 +0200 (CEST)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: Tim Orling <TicoTimo@gmail.com>,
+	Paul Eggleton <paul.eggleton@linux.intel.com>,
+	Brendan Le Foll <brendan.le.foll@intel.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Jul 2015 16:17:53 +0200
+Message-Id: <1436537875-665-2-git-send-email-maciej.borzecki@open-rnd.pl>
+X-Mailer: git-send-email 1.9.3
+In-Reply-To: <1436537875-665-1-git-send-email-maciej.borzecki@open-rnd.pl>
+References: <1436537875-665-1-git-send-email-maciej.borzecki@open-rnd.pl>
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: [meta-python][PATCH 1/3] python-daemonize: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,118 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2015 14:25:06 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 10 Jul 2015 14:30:10 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Adding recipe for python-daemonize, a library that enables running the
+Python a daemon process on Unix-like systems.
 
-Rongqing Li schreef op 09-07-15 om 03:27:
-> 
-> 
-> On 2015年07月08日 17:39, Koen Kooi wrote: Rongqing Li schreef op 07-07-15 om
-> 09:31:
->>>> 
->>>> 
->>>> On 2015年07月07日 15:24, Koen Kooi wrote: rongqing.li@windriver.com
->>>> schreef op 07-07-15 om 03:55:
->>>>>>> From: Roy Li <rongqing.li@windriver.com>
->>>>>>> 
->>>>>>> Remove backport patch Add CSocket submodule Add the
->>>>>>> dependency on icu
->>>>>>> 
->>>>>>> Signed-off-by: Roy Li <rongqing.li@windriver.com> ---
->>>> 
->>>>>>> diff --git a/meta-networking/recipes-irc/znc/znc_git.bb 
->>>>>>> b/meta-networking/recipes-irc/znc/znc_git.bb index 
->>>>>>> 2e35e4d..f5bed08 100644 --- 
->>>>>>> a/meta-networking/recipes-irc/znc/znc_git.bb +++ 
->>>>>>> b/meta-networking/recipes-irc/znc/znc_git.bb @@ -1,16 +1,16
->>>>>>> @@ SUMMARY = "ZNC, an advanced IRC bouncer" SECTION = "net"
->>>>>>> LICENSE = "GPLv2" -LIC_FILES_CHKSUM = 
->>>>>>> "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe" 
->>>>>>> +LIC_FILES_CHKSUM = 
->>>>>>> "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
->>>>>>> 
->>>>>>> -DEPENDS = "openssl" +DEPENDS = "openssl zlib icu"
->>>>>>> 
->>>>>>> -PV = "1.0+git" +PV = "1.6.0+git"
->>>> 
->>>> If it's the 1.6 release, just call it '1.6.0'
->>>> 
->>>> 
->>>>> grep oe-core
->>>> 
->>>>> ./meta/recipes-graphics/mesa/mesa_git.bb:PV =
->>>>> "10.5.4+git${SRCPV}" 
->>>>> ./meta/recipes-graphics/fstests/fstests_git.bb:PV =
->>>>> "0.1+git${SRCPV}" ./meta/recipes-graphics/mx/mx-1.0_1.4.7.bb:PV =
->>>>> "1.4.7+git${SRCPV}" ./meta/recipes-graphics/drm/libdrm_git.bb:PV
->>>>> = "2.4.40+git${SRCPV}" 
->>>>> ./meta/recipes-graphics/xorg-lib/libxcb_git.bb:PV = 
->>>>> "1.1.90.1+gitr${SRCPV}" 
->>>>> ./meta/recipes-graphics/xorg-lib/libxext_git.bb:PV = 
->>>>> "1.0.99.1+gitr${SRCPV}" 
->>>>> ./meta/recipes-graphics/xorg-lib/libxcalibrate_git.bb:PV = 
->>>>> "0.0+git${SRCPV}" 
->>>>> ./meta/recipes-graphics/xorg-driver/xf86-input-keyboard_git.bb:PV
->>>>> = "1.3.2+git${SRCPV}" 
->>>>> ./meta/recipes-graphics/xorg-driver/xf86-input-mouse_git.bb:PV = 
->>>>> "1.3.0+git${SRCPV}" 
->>>>> ./meta/recipes-graphics/xorg-driver/xf86-input-synaptics_git.bb:PV
->>>>> = "0.15.2+git${SRCPV}" 
->>>>> ./meta/recipes-graphics/xorg-driver/xf86-video-omapfb_git.bb:PV
->>>>> = "0.1.1+gitr${SRCPV}" 
->>>>> ./meta/recipes-graphics/libepoxy/libepoxy_git.bb:PV = 
->>>>> "1.2+git${SRCPV}" 
->>>>> ./meta/recipes-graphics/xvideo-tests/xvideo-tests_git.bb:PV = 
->>>>> "0.1+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/sgmlspl/sgmlspl-native_git.bb:PV = 
->>>>> "1.1+git${SRCPV}" ./meta/recipes-devtools/qemu/qemu_git.bb:PV = 
->>>>> "1.3.0+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/swabber/swabber-native_git.bb:PV = 
->>>>> "0.0+git${SRCPV}" ./meta/recipes-devtools/remake/remake_git.bb:PV
->>>>> = "3.82+dbg-0.9+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/mtd/mtd-utils_git.bb:PV =
->>>>> "1.5.1+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/opkg-utils/opkg-utils_git.bb:PV = 
->>>>> "0.1.8+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/bootchart2/bootchart2_git.bb:PV = 
->>>>> "0.14.6+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/mkelfimage/mkelfimage_git.bb:PV = 
->>>>> "4.0+git${SRCPV}" ./meta/recipes-devtools/mmc/mmc-utils_git.bb:PV
->>>>> = "0.1" ./meta/recipes-devtools/pseudo/pseudo_git.bb:PV = 
->>>>> "1.6.5+git${SRCPV}"
->>>>> ./meta/recipes-devtools/prelink/prelink_git.bb:PV = 
->>>>> "1.0+git${SRCPV}"
->>>>> ./meta/recipes-devtools/pkgconfig/pkgconfig.inc:PV = 
->>>>> "0.28+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/btrfs-tools/btrfs-tools_git.bb:PV = 
->>>>> "4.0.1+git${SRCPV}" 
->>>>> ./meta/recipes-devtools/gnu-config/gnu-config_git.bb:PV = 
->>>>> "1.0+git${SRCPV}"
->>>>> ./meta/recipes-devtools/tcf-agent/tcf-agent_git.bb:PV =
->>>>> "0.4.0+git${SRCPV}"
->>>>> ./meta/recipes-devtools/fdisk/gptfdisk_git.bb:PV =
->>>>> "0.8.10+git${SRCPV}"
->>>>> ./meta/recipes-multimedia/x264/x264_git.bb:PV = 
->>>>> "r2491+git${SRCPV}" 
->>>>> ./meta/recipes-multimedia/libav/libpostproc_git.bb:PV = 
->>>>> "52.3.0+git${SRCPV}"
-> 
-> Your point being?
-> 
->> lots of recipes under oe-core is using this style { PV=version+git}
+Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+---
+ .../recipes-devtools/python/python-daemonize_2.3.1.bb    | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb
 
-Like lemmings of a cliff...
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFVn9T9MkyGM64RGpERAqViAJ9+8Ad3sQQE1bvAvPfYbnxXvLZgIgCbBR1P
-y8Z1GLTedpVErGs9YPLUkg4=
-=0qW2
------END PGP SIGNATURE-----
+diff --git a/meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb b/meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb
+new file mode 100644
+index 0000000000000000000000000000000000000000..2fc9e633a2934db00d0b216e3f2cac59a89ae26e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "Library to enable your code run as a daemon process on Unix-like systems"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=13e982bf1b7b164b9d6d1665dac83873"
++SRCNAME = "daemonize"
++
++inherit pypi
++
++RDEPENDS_${PN} = "\
++               python-fcntl \
++               python-unixadmin \
++               python-logging \
++               python-resource \
++"
++
++SRC_URI[md5sum] = "f0d401a0a501ba9d36e516ea89146eb2"
++SRC_URI[sha256sum] = "6fa43b56c293ff8bb180008fe47ed49f7d006cdeb0eaa84f157249800d3194d4"
+-- 
+1.9.3
 
 
