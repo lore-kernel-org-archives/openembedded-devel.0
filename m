@@ -1,21 +1,35 @@
-Return-Path: <maciej.borzecki@open-rnd.pl>
-Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
-	by mail.openembedded.org (Postfix) with ESMTP id 43FB275CE8
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f42.google.com (mail-pa0-f42.google.com
+	[209.85.220.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A12B607BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jul 2015 14:30:17 +0000 (UTC)
-Received: from localhost.localdomain (unknown [31.182.60.238])
-	by open-rnd.nazwa.pl (Postfix) with ESMTP id 9DE44426BD8;
-	Fri, 10 Jul 2015 16:18:02 +0200 (CEST)
-From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
-To: Tim Orling <TicoTimo@gmail.com>,
-	Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Brendan Le Foll <brendan.le.foll@intel.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Jul 2015 16:17:52 +0200
-Message-Id: <1436537875-665-1-git-send-email-maciej.borzecki@open-rnd.pl>
-X-Mailer: git-send-email 1.9.3
-Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
-Subject: [meta-python][PATCH 0/3] new recipes
+	Sat, 11 Jul 2015 03:49:47 +0000 (UTC)
+Received: by padck2 with SMTP id ck2so12956766pad.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jul 2015 20:49:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=gT5P8RaOTgum3Z11CwwwWnL0mGPtbBnODr5I3eQrT+A=;
+	b=ak4i7z+8HvfSenK6lrtI7O1+S+lpZO+ceNH4Py2ugyZRSaSBrHQyzKm9YS6afMWTVu
+	wKCZZAgPwBzJTcqe9/+oD25w95DhEPRgcm3tTUTgKXNf12tDtQZrJNg13EKoyqVCXxBO
+	At2nRo+hnYEjbgelPgItyp0wMGW9oNByIczjbFBxf858yt5oaHBi5fGHVe+yWfxF3k/Y
+	WXRcs5lg6bxBxMy6Y16CHE8K7iQnbyvAX0ee1sfnqJok5T1rkL0zQfYoPvUU1MqEPPrG
+	H2FcALyh00Rn/4tbaKobG9BxEWyyp+B9R+3GlutUdJM29djtMxikVjuQ9HRIkxlrxFG+
+	M7zg==
+X-Received: by 10.68.111.37 with SMTP id if5mr48469447pbb.94.1436586587601;
+	Fri, 10 Jul 2015 20:49:47 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	h12sm11161740pdk.77.2015.07.10.20.49.44
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 10 Jul 2015 20:49:45 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Jul 2015 20:49:41 -0700
+Message-Id: <1436586581-30085-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-oe][PATCH] mozjs: fix lib soname issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,37 +43,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jul 2015 14:30:17 -0000
+X-List-Received-Date: Sat, 11 Jul 2015 03:49:51 -0000
 
-Adding a couple of new recipes for meta-python.
+polkit failed to build do to missing mozjs libs. The libs created are:
+libmozjs-..a   libmozjs-..so
 
-Sparts is a library for rapid prototyping, integrating thrift,
-twisted, tornado and dbus. I specifically did not put any of these in
-RDEPEDNDS nor RRECOMMENDS as the modules are not needed unless one
-uses them in an application. And once they are used in application,
-one would have them in application's RDEPENDS anyway.
+this was caused by a perl script error
+Can't use 'defined(@array)' (Maybe you should just omit the defined()?) at config/milestone.pl line 58.
 
-Daemonize is a direct dependency for sparts that has not been packaged yet.
+this script is use to determine the major and minor lib versions. I believe this
+issue is do to the recent perl update.
 
-Paho MQTT is a Python client library for MQTT 3.1. That's why I've put
-Brendan Le Foll, who is listed as maintainer of
-meta-intel-iot-middleware, in CC in case he'd be willing to pick this
-package for his layer.
+this fixes the lib creation error and polkit build error.
 
-Maciej Borzecki (3):
-  python-daemonize: add recipe
-  python-sparts: add recipe
-  python-paho-mqtt: add recipe
+I am not a perl person so this may not be the idea fix.
 
- .../python/python-daemonize_2.3.1.bb               | 16 ++++++++++++++
- .../python/python-paho-mqtt_1.1.bb                 | 15 +++++++++++++
- .../recipes-devtools/python/python-sparts_0.7.2.bb | 25 ++++++++++++++++++++++
- 3 files changed, 56 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-daemonize_2.3.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-paho-mqtt_1.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-sparts_0.7.2.bb
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../mozjs/mozjs/fix_milestone_compile_issue.patch    | 20 ++++++++++++++++++++
+ meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb       |  1 +
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch
 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch b/meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch
+new file mode 100644
+index 0000000..abde01b
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs/fix_milestone_compile_issue.patch
+@@ -0,0 +1,20 @@
++fix the compile error do to perl update
++
++Upstream-status: Inappropriate
++
++
++Signed-of-by: Armin Kuster <akuster808@gmail.com>
++
++Index: src/config/milestone.pl
++===================================================================
++--- src.orig/config/milestone.pl
+++++ src/config/milestone.pl
++@@ -55,7 +55,7 @@ $MILESTONE_FILE  = "$TOPSRCDIR/config/mi
++ #
++ my $milestone = Moz::Milestone::getOfficialMilestone($MILESTONE_FILE);
++ 
++-if (defined(@TEMPLATE_FILE)) {
+++if (@TEMPLATE_FILE) {
++   my $TFILE;
++ 
++   foreach $TFILE (@TEMPLATE_FILE) {
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+index 10028a0..5582069 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+@@ -12,6 +12,7 @@ SRC_URI = " \
+     file://0005-aarch64-64k-page.patch;patchdir=../../ \
+     file://0001-regenerate-configure.patch;patchdir=../../ \ 
+     file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
++    file://fix_milestone_compile_issue.patch \
+   "
+ 
+ SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
 -- 
-1.9.3
+2.3.5
 
 
