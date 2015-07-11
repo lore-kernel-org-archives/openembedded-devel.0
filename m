@@ -1,35 +1,39 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f179.google.com (mail-ie0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 11B5D6017E;
-	Sat, 11 Jul 2015 05:47:06 +0000 (UTC)
-Received: by ietj16 with SMTP id j16so35149181iet.0;
-	Fri, 10 Jul 2015 22:47:06 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
+	[209.85.220.43])
+	by mail.openembedded.org (Postfix) with ESMTP id B611E6017E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Jul 2015 14:56:17 +0000 (UTC)
+Received: by pabvl15 with SMTP id vl15so182700653pab.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Jul 2015 07:56:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	bh=dWjaulvSBs0oX22z9HbEkBI2oi1U+5QPAOMPoDIpsQY=;
-	b=TnWR3AM0ln55xE7BS/nze5bzMfqBVC/F5PWS1zWadv8KmaDXjbNWi9Swprbt5DjdMM
-	/8JE+xgkota1JLDUCZ1rJRW+s8bQKmcZ5k/ew2DHQU1R07hpnwts/P70pQ0t3qZXw8lA
-	mvvfzbUtwQNTpHwBPszr1JRy2hGe1Z7OW2DF+CZK10UbSFSXj5W1Zi4DVSupgWUxINz5
-	q0t+CF4DpIm5wHgDUYDoVzPvZUIHvqtV+mVw3vqON+l+xqqtms8m6OTQHhVK3BQWEfyF
-	ugoFXt/sBSfJfX2KZ4zl83Bbp+dtzKTZEYBWCwhnncPh3QZf3IgzcZYKl0YtQLTShZS3
-	US0A==
-X-Received: by 10.107.132.215 with SMTP id o84mr7031254ioi.36.1436593626515;
-	Fri, 10 Jul 2015 22:47:06 -0700 (PDT)
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	bh=MpDFTX39Op4eDXTzWijWR/m7EknWEkhd75rsr6S4rXI=;
+	b=FBVOa4AVj1VAOXwuuvi65w7DXm7tX4Hh1JtOMRBgesKVrZwy3QCT67tLE8EjVnenee
+	bjjNsjdLZreLicjVmcCaHgAhysTRuc57VBksIVHqHRQhx9k9gOAv7kPtaL4HZyLEuZIQ
+	BBZSir8hQLcESkjRtxQG5ixadvXOXuLc4IhRIh263KxnQjFQFUnS+SLYI3+l8czzfuPp
+	a8+DHFFibL14g2f3SfKbg1ix8Kyg68ay7LdtDrMi9Z+Ks/1fjltG/y9qWsA/UwkwOWSj
+	W66mJ68dRg/dkPaD1+zerw5ONdPy/OWfYd2pekEpIEM6yW8xNQU5QdNgSwViCGvAz/Pw
+	SrQw==
+X-Received: by 10.70.23.196 with SMTP id o4mr52859701pdf.164.1436626578122;
+	Sat, 11 Jul 2015 07:56:18 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1239:10bb:84b8:7d8:8f7f?
+	([2601:202:4000:1239:10bb:84b8:7d8:8f7f])
+	by smtp.googlemail.com with ESMTPSA id
+	db1sm13147043pdb.50.2015.07.11.07.56.15
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 11 Jul 2015 07:56:16 -0700 (PDT)
+Message-ID: <55A12E84.5000407@gmail.com>
+Date: Sat, 11 Jul 2015 07:56:04 -0700
+From: akuster808 <akuster808@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64;
+	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
 MIME-Version: 1.0
-Received: by 10.107.20.83 with HTTP; Fri, 10 Jul 2015 22:46:37 -0700 (PDT)
-In-Reply-To: <CAJTo0Lbgx2chtAA+AuHgsTBvrV50wRgdqsJCZxG7tW=6ZBMPyQ@mail.gmail.com>
-References: <2219152.1ss8pFxefq@peggleto-mobl.ger.corp.intel.com>
-	<559E8BC3.2060300@gmail.com>
-	<CAJTo0Lbgx2chtAA+AuHgsTBvrV50wRgdqsJCZxG7tW=6ZBMPyQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 10 Jul 2015 22:46:37 -0700
-Message-ID: <CAMKF1squWxP004gwX0_7K126+Pq9v7Sf03hoeAHwHXzUMd4E5g@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] RFC: libav vs. ffmpeg, redux
+To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: meta-kali
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,22 +47,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2015 05:47:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 11 Jul 2015 14:56:21 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 9, 2015 at 8:02 AM, Burton, Ross <ross.burton@intel.com> wrote:
-> On 9 July 2015 at 15:57, akuster808 <akuster808@gmail.com> wrote:
->
->> That make sense to me. Also libav has LICENSE_FLAGS = "commercial" so the
->> change which will simplify things too.
->>
->
-> Why isn't that the case for ffmpeg too?
 
-it remains same, commercial is for the folks who ship the code to be
-aware that there might be algorithms implemented in the code
-which are governed by patents, so if you start making money on that
-code then they might want a share of it. So you have to have agreement
-with patent folks as ffmpeg code is not available under commercial
-license.
+Hello,
+
+I have put together a layer that is based off of the Kali Linux 
+(http://tools.kali.org/).  It contains penetration test tools.
+
+git://github.com/akuster/meta-kali
+
+- armin
 
