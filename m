@@ -1,48 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wi0-f169.google.com (mail-wi0-f169.google.com
-	[209.85.212.169])
-	by mail.openembedded.org (Postfix) with ESMTP id C2A14739BE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jul 2015 16:17:24 +0000 (UTC)
-Received: by widjy10 with SMTP id jy10so74384754wid.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jul 2015 09:17:24 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pd0-f176.google.com (mail-pd0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id EED1C739BE;
+	Mon, 13 Jul 2015 17:37:29 +0000 (UTC)
+Received: by pdrg1 with SMTP id g1so95584180pdr.2;
+	Mon, 13 Jul 2015 10:37:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	bh=+r7LHLwU3O1jjJllcLO1ZzunikZOb4MnBkJeuPC2fNc=;
-	b=YCyU1E8VrHX31/fWQ8cTFzrzZp3tUcX+xR16noYc6Iu+An6lAR/l0/hwOc8GCIMv+5
-	qSpnIM4N4ojF6BjQUfVEht/E6AIEt8FKhaTCj/P/b9wivlBA04JKQKLa5VOx5T7qEgX0
-	L+07SD9Z2L9gn/fGaU4AELjsm3+T0L3soCdRvumqQHdPqiDnTVneKj0ZDsG5aGSaIp2J
-	DSopcawb5igA7wztHzhdxxqhEyFGc9n54Rp3WrUXFT8QjMDlyy/Au+kcb+scDe7nWkLw
-	evgB43SyQu+y0/GV4taQ5hN9L4p5mIsx2G+CemDNtH5xO6j36FF3WiN2GxgmGwlZbTLr
-	PE2g==
-X-Received: by 10.194.192.72 with SMTP id he8mr69409104wjc.11.1436804244329;
-	Mon, 13 Jul 2015 09:17:24 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	h=from:content-type:subject:date:message-id:to:mime-version;
+	bh=WV90vRhDSEr0G6zdISz5trb1N/4j/lvh/ikyYbHOE9c=;
+	b=Nc30UISpyHNjjB4sN0rXD0aUmK7Vq+ZSC0UHo3HxWcpQKkytOUdeA4NUjSiODCqC6N
+	LBzgRAe6roCFfFZ+RLQQaM+IC6fV9fefTp+gfEamkE8fNWLQLclqZNtLsp9upXnOy3c6
+	umPmfrL86oBrC0A0z9hHiC60wKYzdiZm1CV3mUEsiPxm0cLNqlPac88BijOKz0v/XMry
+	EmT+YBiJQv05u8J8uE50vgN32Iy/qc++XdAoPmf/zmcON8TU1orhQlhA7yNwJh1T9i9Q
+	rB+2LPSBcg8lxFcTHMDRQwMbgaHDl90ZOUykf5K+n2QaO5AnAEWmkJ+ev2/sXN+jcacm
+	1gsg==
+X-Received: by 10.66.62.202 with SMTP id a10mr5715115pas.42.1436809049203;
+	Mon, 13 Jul 2015 10:37:29 -0700 (PDT)
+Received: from ?IPv6:2601:646:8601:4580:2911:52b8:984e:c65b?
+	([2601:646:8601:4580:2911:52b8:984e:c65b])
 	by smtp.gmail.com with ESMTPSA id
-	m4sm30014394wjb.37.2015.07.13.09.17.22
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Jul 2015 09:17:22 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 13 Jul 2015 18:17:27 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20150713161727.GA2407@jama>
-References: <20150619155637.GA2398@jama>
-	<30DC4EDFD798C94083F3E083754532CC73E10A6B@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<CA+chaQcK+DoksMSVKpFRQzze58CLihk1LEnH0Pn+J-n3rY_DUw@mail.gmail.com>
-	<30DC4EDFD798C94083F3E083754532CC73E10EF8@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<30DC4EDFD798C94083F3E083754532CC73E16FB7@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<20150708103237.GA2398@jama> <20150708115915.GF2398@jama>
-	<30DC4EDFD798C94083F3E083754532CC73E188EA@G08CNEXMBPEKD02.g08.fujitsu.local>
-	<20150709155406.GD2446@jama>
-	<30DC4EDFD798C94083F3E083754532CC73E18F05@G08CNEXMBPEKD02.g08.fujitsu.local>
-MIME-Version: 1.0
-In-Reply-To: <30DC4EDFD798C94083F3E083754532CC73E18F05@G08CNEXMBPEKD02.g08.fujitsu.local>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-oe][PATCH v2 3/7] libldb: add new recipe
+	do3sm19160866pbb.5.2015.07.13.10.37.28
+	(version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+	Mon, 13 Jul 2015 10:37:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Pgp-Agent: GPGMail 2.5
+Date: Mon, 13 Jul 2015 10:37:23 -0700
+Message-Id: <261F5389-C495-4B05-B79E-309AE0E0F0CA@gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Yocto discussion list <yocto@yoctoproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 8.2 \(2102\))
+X-Mailer: Apple Mail (2.2102)
+Subject: glibc 2.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,499 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jul 2015 16:17:27 -0000
-X-Groupsio-MsgNum: 56237
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9jxsPFA5p3P2qPhR"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 13 Jul 2015 17:37:30 -0000
+X-Groupsio-MsgNum: 56238
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_65805941-0605-4404-B39B-FBE83868203D";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---9jxsPFA5p3P2qPhR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--Apple-Mail=_65805941-0605-4404-B39B-FBE83868203D
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Fri, Jul 10, 2015 at 03:49:02AM +0000, Bian, Naimeng wrote:
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Martin Jansa
-> > Sent: Thursday, July 09, 2015 11:54 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH v2 3/7] libldb: add new recipe
-> >=20
-> > On Thu, Jul 09, 2015 at 12:30:42AM +0000, Bian, Naimeng wrote:
-> > > > -----Original Message-----
-> > > > From: openembedded-devel-bounces@lists.openembedded.org
-> > > > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf
-> > > > Of Martin Jansa
-> > > > Sent: Wednesday, July 08, 2015 7:59 PM
-> > > > To: openembedded-devel@lists.openembedded.org
-> > > > Subject: Re: [oe] [meta-oe][PATCH v2 3/7] libldb: add new recipe
-> > > >
-> > > > On Wed, Jul 08, 2015 at 12:32:37PM +0200, Martin Jansa wrote:
-> > > > > On Thu, Jul 02, 2015 at 09:01:14AM +0000, Bian, Naimeng wrote:
-> > > > > > Hi Martin,
-> > > > > >
-> > > > > > I think I have fixed them and pushed them to github, please
-> > > > > > cherry-pick
-> > > > them.
-> > > > > >
-> > > > > > - libldb
-> > > > > >
-> > > > > > https://github.com/bendaaron/meta-oe-dev/commit/c6cade4236226646
-> > > > > > fde9
-> > > > > > 9611c20fe3fcc6612e7a
-> > > > >
-> > > > > Hi Bian,
-> > > > >
-> > > > > it's still failing with this patch. I'll try to build it manually
-> > > > > and provide more details.
-> > > >
-> > > > find /usr/lib/python* -name \*tdb\*
-> > > > =3Dnothing=3D
-> > > >
-> > > > ldb and tdb workdirs are here:
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/world/libldb.tar.bz2
-> > > > http://logs.nslu2-linux.org/buildlogs/oe/world/libtdb.tar.bz2
-> > > >
-> > >
-> > > Thank you very much.
-> > > I confirmed that tdb.so is exists in ${D}/usr/lib/python2.7/site-pack=
-ages
-> > of libtdb.
-> > >
-> > > Would you helping me check whether does tdb.so exist in
-> > > ${STAGING_DIR_HOST}/${PYTHON_SITEPACKAGES_DIR}
-> > > after building libtdb.
-> > > # find
-> > > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/
-> > > python2.7/site-packages -name \*tdb\*
-> >=20
-> > that server is already buiding domething else and tmpfs is gone, but in=
- the
-> > archive I've sent you we can see that it's in sysroot-destdir directory=
- so I
-> > believe it was also in
-> > /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/lib/p=
-yth
-> > on2.7/site-packages
-> >=20
-> > jenkins@aruba:~/oe/world/shr-core$ find libtdb/ -name tdb.so
-> > libtdb/1.3.0-r0/image/usr/lib/python2.7/site-packages/tdb.so
-> > libtdb/1.3.0-r0/package/usr/lib/python2.7/site-packages/.debug/tdb.so
-> > libtdb/1.3.0-r0/package/usr/lib/python2.7/site-packages/tdb.so
-> > libtdb/1.3.0-r0/packages-split/python-tdb/usr/lib/python2.7/site-packag=
-es/
-> > tdb.so
-> > libtdb/1.3.0-r0/packages-split/python-tdb-dbg/usr/lib/python2.7/site-pa=
-cka
-> > ges/.debug/tdb.so
-> > libtdb/1.3.0-r0/sysroot-destdir/usr/lib/python2.7/site-packages/tdb.so
-> > libtdb/1.3.0-r0/tdb-1.3.0/bin/python/tdb.so
-> >=20
->=20
-> Thanks for your time.
->=20
-> I'm sorry for that, but would you mind to apply this patch which is based=
- on master-next,=20
-> and then build libldb again to catch more information for me.
-> https://github.com/bendaaron/meta-oe-dev/commit/e1f5e847e197cf0abad578e74=
-d9f7b8f1c3ff951
+Hi All
 
-| Checking for getgrouplist                                                =
-         : ok
-| Checking for system tdb >=3D 1.2.13                                      =
-           : yes
-| module[/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-64/usr/=
-lib/python2.7/site-packages/tdb.so] exists in [/home/jenkins/oe/world/shr-c=
-ore/tmp-glibc/sysroots/qemux86-64/usr/lib/python2.7/site-packages]
-| Cross module[/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-6=
-4/usr/lib/python2.7/site-packages/tdb.so] can not be loaded.
-| Close module[/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86-6=
-4/usr/lib/python2.7/site-packages/tdb.so]. Note: maybe some exception was c=
-aught!
-| ERROR: Python module pytdb of version 1.2.13 not found, and bundling disa=
-bled
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_configure (log file is located at /home/jenkin=
-s/oe/world/shr-core/tmp-glibc/work/core2-64-oe-linux/libldb/1.1.17-r0/temp/=
-log.do_configure.15453)
-NOTE: recipe libldb-1.1.17-r0: task do_configure: Failed
+glibc 2.22 will release end of this month. For some time I have put =
+together the update here
 
->=20
-> Thanks
->  Bian
->=20
-> > >
-> > > Thanks
-> > >  Bian
-> > >
-> > > > > > - samba
-> > > > > >
-> > > > > > https://github.com/bendaaron/meta-oe-dev/commit/25430ee92bbb2820
-> > > > > > 294c
-> > > > > > b9ce239d9d4dccc492ea
-> > > > > >
-> > > > > > Thanks
-> > > > > >  Bian
-> > > > > >
-> > > > > > > -----Original Message-----
-> > > > > > > From: openembedded-devel-bounces@lists.openembedded.org
-> > > > > > > [mailto:openembedded-devel-bounces@lists.openembedded.org] On
-> > > > > > > Behalf Of Bian, Naimeng
-> > > > > > > Sent: Wednesday, June 24, 2015 3:05 PM
-> > > > > > > To: openembedded-devel@lists.openembedded.org
-> > > > > > > Subject: Re: [oe] [meta-oe][PATCH v2 3/7] libldb: add new
-> > > > > > > recipe
-> > > > > > >
-> > > > > > > > -----Original Message-----
-> > > > > > > > From: openembedded-devel-bounces@lists.openembedded.org
-> > > > > > > > [mailto:openembedded-devel-bounces@lists.openembedded.org]
-> > > > > > > > On Behalf Of Martin Jansa
-> > > > > > > > Sent: Tuesday, June 23, 2015 4:05 PM
-> > > > > > > > To: openembedded-devel
-> > > > > > > > Subject: Re: [oe] [meta-oe][PATCH v2 3/7] libldb: add new
-> > > > > > > > recipe
-> > > > > > > >
-> > > > > > > > I don't have access to that build anymore (because it's
-> > > > > > > > jenkins job using tmpfs for TMPDIR, so after the build the
-> > > > > > > > TMPDIR is gone), but it's failing only in
-> > > > > > > > qemux86-64 builds, so I assume that it's finding host tdb or
-> > > > > > > > python directories, because it's running on 12.04 Ubuntu x8=
-6-64.
-> > > > > > > >
-> > > > > > > > Try to install tdb on your build host if it allows you to
-> > > > > > > > reproduce the issue, otherwise I'll try to reproduce it
-> > > > > > > > again in some
-> > > > next jenkins build.
-> > > > > > > >
-> > > > > > >
-> > > > > > > My host is CentOS6.5 x86-64, and although I installed tdb.so
-> > > > > > > into my host, i still cannot reproduce it.
-> > > > > > >
-> > > > > > > And, I have exported
-> > > > > > > PYTHONPATH=3D${STAGING_DIR_HOST}${PYTHON_SITEPACKAGES_DIR} in
-> > > > > > > waf-samba.bbclasss which is inherited by libldb. IMO, it
-> > > > > > > should find modules in PYTHONPATH firstly.
-> > > > > > >
-> > > > > > > Thanks
-> > > > > > >  Bian
-> > > > > > >
-> > > > > > >
-> > > > > > > > On Tue, Jun 23, 2015 at 7:47 AM, Bian, Naimeng
-> > > > > > > > <biannm@cn.fujitsu.com>
-> > > > > > > > wrote:
-> > > > > > > >
-> > > > > > > > > > -----Original Message-----
-> > > > > > > > > > From: openembedded-devel-bounces@lists.openembedded.org
-> > > > > > > > > > [mailto:openembedded-devel-bounces@lists.openembedded.or
-> > > > > > > > > > g] On Behalf Of Martin Jansa
-> > > > > > > > > > Sent: Friday, June 19, 2015 11:57 PM
-> > > > > > > > > > To: openembedded-devel@lists.openembedded.org
-> > > > > > > > > > Subject: Re: [oe] [meta-oe][PATCH v2 3/7] libldb: add
-> > > > > > > > > > new recipe
-> > > > > > > > > >
-> > > > > > > > > > On Wed, Jun 17, 2015 at 03:49:09PM +0800, Bian Naimeng =
-wrote:
-> > > > > > > > > > > libldb is required by samba4
-> > > > > > > > > > >
-> > > > > > > > > > > Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> > > > > > > > > > > ---
-> > > > > > > > > > >  .../do-not-import-target-module-in-configure.patch |
-> > > > > > > > > > > 32
-> > > > > > > > > +++++++++++++++
-> > > > > > > > > > >  meta-oe/recipes-support/libldb/libldb_1.1.17.bb    |=
- 45
-> > > > > > > > > > ++++++++++++++++++++++
-> > > > > > > > > > >  2 files changed, 77 insertions(+)  create mode 100644
-> > > > > > > > > > > meta-oe/recipes-support/libldb/libldb/do-not-import-ta
-> > > > > > > > > > > rget
-> > > > > > > > > > > -modul
-> > > > > > > > > > > e- in-c onfigure.patch  create mode 100644
-> > > > > > > > > > > meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> > > > > > > > > >
-> > > > > > > > > > Fails to build in bitbake world:
-> > > > > > > > > >
-> > > > > > > > > > | Checking for system tdb >=3D
-> > > > > > > > > > 1.2.13                                                 =
-: yes
-> > > > > > > > > > | ERROR: Python module pytdb of version 1.2.13 not
-> > > > > > > > > > | found, and bundling disabled
-> > > > > > > > > > | WARNING: exit code 1 from a shell command.
-> > > > > > > > > > | ERROR: Function failed: do_configure (log file is
-> > > > > > > > > > | located at
-> > > > > > > > > > | /home/jenkins/oe/world/shr-core/tmp-glibc/work/core2-6
-> > > > > > > > > > | 4-oe
-> > > > > > > > > > | -linux
-> > > > > > > > > > | /l
-> > > > > > > > > > | ibld
-> > > > > > > > > > | b/1.1.17-r0/temp/log.do_configure.22697)
-> > > > > > > > > > NOTE: recipe libldb-1.1.17-r0: task do_configure: Failed
-> > > > > > > > > > ERROR: Task 25505
-> > > > > > > > > >
-> > > > > > > > > (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe
-> > > > > > > > > /rec
-> > > > > > > > > ipes-s
-> > > > > > > > > up
-> > > > > > > > > port
-> > > > > > > > > > /libldb/libldb_1.1.17.bb, do_configure) failed with exi=
-t code
-> > '1'
-> > > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > tdb.so is provided by libtdb which is DEPEND-ed by libldb,
-> > > > > > > > > I think it should be installed into
-> > > > STAGING_DIR_HOST/PYTHON_SITEPACKAGES_DIR.
-> > > > > > > > >
-> > > > > > > > > Because I could not reproduce it in my building, would you
-> > > > > > > > > mind telling me whether does tdb.so exist in
-> > > > > > > > > STAGING_DIR_HOST/PYTHON_SITEPACKAGES_DIR/ while this erro=
-r was
-> > caught.
-> > > > > > > > >
-> > > > > > > > > Thanks
-> > > > > > > > >  Bian
-> > > > > > > > >
-> > > > > > > > > > > diff --git
-> > > > > > > > > > > a/meta-oe/recipes-support/libldb/libldb/do-not-import-
-> > > > > > > > > > > targ
-> > > > > > > > > > > et-mod
-> > > > > > > > > > > ul
-> > > > > > > > > > > e-in
-> > > > > > > > > > > -configure.patch
-> > > > > > > > > > > b/meta-oe/recipes-support/libldb/libldb/do-not-import-
-> > > > > > > > > > > targ
-> > > > > > > > > > > et-mod
-> > > > > > > > > > > ul
-> > > > > > > > > > > e-in
-> > > > > > > > > > > -configure.patch
-> > > > > > > > > > > new file mode 100644
-> > > > > > > > > > > index 0000000..b4d522a
-> > > > > > > > > > > --- /dev/null
-> > > > > > > > > > > +++ b/meta-oe/recipes-support/libldb/libldb/do-not-imp
-> > > > > > > > > > > +++ ort-
-> > > > > > > > > > > +++ target
-> > > > > > > > > > > +++ -m
-> > > > > > > > > > > +++ odul
-> > > > > > > > > > > +++ e-in-configure.patch
-> > > > > > > > > > > @@ -0,0 +1,32 @@
-> > > > > > > > > > > +Some module can be loaded while cross compile, we jst
-> > > > > > > > > > > +check whether the module exist
-> > > > > > > > > > > +
-> > > > > > > > > > > +Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-> > > > > > > > > > > +
-> > > > > > > > > > > +---
-> > > > > > > > > > > +ldb-1.1.17.orig/buildtools/wafsamba/samba_bundled.py
-> > > > > > > 2014-05-05
-> > > > > > > > > > 17:00:41.000000000 +0900
-> > > > > > > > > > > ++++ ldb-1.1.17/buildtools/wafsamba/samba_bundled.py
-> > > > > > > 2015-06-15
-> > > > > > > > > > 10:09:50.210000217 +0900
-> > > > > > > > > > > +@@ -1,7 +1,7 @@
-> > > > > > > > > > > + # functions to support bundled libraries
-> > > > > > > > > > > +
-> > > > > > > > > > > + from Configure import conf -import sys, Logs
-> > > > > > > > > > > ++import sys, Logs, imp
-> > > > > > > > > > > + from samba_utils import *
-> > > > > > > > > > > +
-> > > > > > > > > > > + def PRIVATE_NAME(bld, name, private_extension,
-> > private_library):
-> > > > > > > > > > > +@@ -222,6 +222,16 @@ def CHECK_BUNDLED_SYSTEM_PYTHON=
-(conf,
-> > li
-> > > > > > > > > > > +         m =3D __import__(modulename)
-> > > > > > > > > > > +     except ImportError:
-> > > > > > > > > > > +         found =3D False
-> > > > > > > > > > > ++
-> > > > > > > > > > > ++        build_arch =3D os.environ["BUILD_ARCH"]
-> > > > > > > > > > > ++        host_arch =3D os.environ["HOST_ARCH"]
-> > > > > > > > > > > ++        if build_arch !=3D host_arch:
-> > > > > > > > > > > ++            # Some modules maybe can not be imported
-> > > > > > > > > > > ++ while cross
-> > > > > > > > > compile
-> > > > > > > > > > > ++            # We just check whether the module exist
-> > > > > > > > > > > ++            stuff =3D imp.find_module(modulename,
-> > > > > > > > > > [os.environ["PYTHONPATH"]])
-> > > > > > > > > > > ++            if stuff !=3D None:
-> > > > > > > > > > > ++                Logs.warn('Cross module[%s] has been
-> > > > > > > > > > > ++ found, but can
-> > > > > > > > > not
-> > > > > > > > > > be loaded.' % (stuff[1]))
-> > > > > > > > > > > ++                found =3D True
-> > > > > > > > > > > +     else:
-> > > > > > > > > > > +         try:
-> > > > > > > > > > > +             version =3D m.__version__
-> > > > > > > > > > > diff --git
-> > > > > > > > > > > a/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> > > > > > > > > > > b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> > > > > > > > > > > new file mode 100644
-> > > > > > > > > > > index 0000000..17607f7
-> > > > > > > > > > > --- /dev/null
-> > > > > > > > > > > +++ b/meta-oe/recipes-support/libldb/libldb_1.1.17.bb
-> > > > > > > > > > > @@ -0,0 +1,45 @@
-> > > > > > > > > > > +SUMMARY =3D "Hierarchical, reference counted memory
-> > > > > > > > > > > +pool system with
-> > > > > > > > > > destructors"
-> > > > > > > > > > > +HOMEPAGE =3D "http://ldb.samba.org"
-> > > > > > > > > > > +SECTION =3D "libs"
-> > > > > > > > > > > +LICENSE =3D "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
-> > > > > > > > > > > +
-> > > > > > > > > > > +DEPENDS +=3D "libtdb talloc libtevent libtdb"
-> > > > > > > > > > > +RDEPENDS_${PN} +=3D "libtevent popt libtalloc"
-> > > > > > > > > > > +RDEPENDS_pyldb +=3D "python libtdb libtalloc"
-> > > > > > > > > > > +
-> > > > > > > > > > > +SRC_URI =3D "http://samba.org/ftp/ldb/ldb-${PV}.tar.=
-gz
-> > > > > > > > > > > +\
-> > > > > > > > > > > +
-> > > > file://do-not-import-target-module-in-configure.patch"
-> > > > > > > > > > > +
-> > > > > > > > > > > +LIC_FILES_CHKSUM =3D
-> > > > > > > > > >
-> > > > > > > > > "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md
-> > > > > > > > > 5=3Dbf
-> > > > > > > > > ccfe95
-> > > > > > > > > 22
-> > > > > > > > > 69ff
-> > > > > > > > > > f2b407dd11f2f3083b \
-> > > > > > > > > > > +
-> > > > > > > > > >
-> > > > > > > > > file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5
-> > > > > > > > > =3D1a6
-> > > > > > > > > d268fd
-> > > > > > > > > 21
-> > > > > > > > > 8675
-> > > > > > > > > > ffea8be556788b780 \
-> > > > > > > > > > > +
-> > > > > > > > > >
-> > > > > > > > > file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=
-=3D
-> > > > > > > > > c79f
-> > > > > > > > > f39f19
-> > > > > > > > > df
-> > > > > > > > > ec6d
-> > > > > > > > > > 293b95dea7b07891"
-> > > > > > > > > > > +
-> > > > > > > > > > > +SRC_URI[md5sum] =3D "7c2ab4e3f2a4186493aa06eabbc61cc=
-0"
-> > > > > > > > > > > +SRC_URI[sha256sum] =3D
-> > > > > > > > > >
-> > > > "b9a312aad19e9463716d257d8f2529fd7fc1a5ef24f6dcdc0c4a1930d7bdb6e6"
-> > > > > > > > > > > +
-> > > > > > > > > > > +inherit waf-samba
-> > > > > > > > > > > +
-> > > > > > > > > > > +S =3D "${WORKDIR}/ldb-${PV}"
-> > > > > > > > > > > +
-> > > > > > > > > > > +EXTRA_OECONF +=3D "--disable-rpath \
-> > > > > > > > > > > +                 --disable-rpath-install \
-> > > > > > > > > > > +                 --bundled-libraries=3DNONE \
-> > > > > > > > > > > +                 --builtin-libraries=3Dreplace \
-> > > > > > > > > > > +                 --with-modulesdir=3D${libdir}/ldb/m=
-odules
-> > \
-> > > > > > > > > > > +                 --with-privatelibdir=3D${libdir}/ld=
-b \
-> > > > > > > > > > > +
-> > --with-libiconv=3D${STAGING_DIR_HOST}${prefix}\
-> > > > > > > > > > > +                "
-> > > > > > > > > > > +
-> > > > > > > > > > > +PACKAGES +=3D "pyldb pyldb-dbg pyldb-dev"
-> > > > > > > > > > > +
-> > > > > > > > > > > +FILES_${PN} +=3D "${libdir}/ldb/*"
-> > > > > > > > > > > +FILES_${PN}-dbg +=3D "${libdir}/ldb/.debug/* \
-> > > > > > > > > > > +                    ${libdir}/ldb/modules/ldb/.debug=
-/*"
-> > > > > > > > > > > +
-> > > > > > > > > > > +FILES_pyldb =3D
-> > > > > > > > > > > +"${libdir}/python${PYTHON_BASEVERSION}/site-packages/
-> > > > > > > > > > > +*
-> > > > > > > > \
-> > > > > > > > > > > +               ${libdir}/libpyldb-util.so.1 \
-> > > > > > > > > > > +               ${libdir}/libpyldb-util.so.1.1.17 \
-> > > > > > > > > > > +              "
-> > > > > > > > > > > +FILES_pyldb-dbg =3D
-> > > > > > > > > > "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.de
-> > > > > > > > > > bug
-> > > > > > > > > > \
-> > > > > > > > > > > +                   ${libdir}/.debug/libpyldb-util.so=
-=2E1.1.17"
-> > > > > > > > > > > +FILES_pyldb-dev =3D "${libdir}/libpyldb-util.so"
-> > > > > > > > > > > --
-> > > > > > > > > > > 1.9.1
-> > > > > > > > > > >
-> > > > > > > > > > > --
-> > > > > > > > > > > _______________________________________________
-> > > > > > > > > > > Openembedded-devel mailing list
-> > > > > > > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > > > > > > http://lists.openembedded.org/mailman/listinfo/openemb
-> > > > > > > > > > > edde
-> > > > > > > > > > > d-deve
-> > > > > > > > > > > l
-> > > > > > > > > >
-> > > > > > > > > > --
-> > > > > > > > > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > > > > > > > > --
-> > > > > > > > > _______________________________________________
-> > > > > > > > > Openembedded-devel mailing list
-> > > > > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > > > > http://lists.openembedded.org/mailman/listinfo/openembedde
-> > > > > > > > > d-de
-> > > > > > > > > vel
-> > > > > > > > >
-> > > > > > > > --
-> > > > > > > > _______________________________________________
-> > > > > > > > Openembedded-devel mailing list
-> > > > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-
-> > > > > > > > deve
-> > > > > > > > l
-> > > > > > > --
-> > > > > > > _______________________________________________
-> > > > > > > Openembedded-devel mailing list
-> > > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-de
-> > > > > > > vel
-> > > > > > --
-> > > > > > _______________________________________________
-> > > > > > Openembedded-devel mailing list
-> > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-deve
-> > > > > > l
-> > > > >
-> > > > > --
-> > > > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > > >
-> > > >
-> > > >
-> > > > --
-> > > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >=20
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+=
+http://git.openembedded.org/openembedded-core-contrib/commit/?h=3Dkraj/mas=
+ter&id=3D02e73ea526d94f21c7ef82eb96b062eff8ebb825
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+It works pretty well for machines I have tested it on ( arm/x86 ) but =
+would be interested if more wider trial could be carried
+out and issues reported between now and release can be addressed.
 
---9jxsPFA5p3P2qPhR
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Please give it a try if you have spare cycles
+
+Thanks
+-Khem
+
+
+
+--Apple-Mail=_65805941-0605-4404-B39B-FBE83868203D
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlWj5JYACgkQN1Ujt2V2gBxwGQCfcLf/eLMrCS8CO9eXl00Qb6mH
-43UAoKerhq3OpZzN9Ey0LUpAC/sV8SFV
-=Yyjf
+iEYEARECAAYFAlWj91cACgkQuwUzVZGdMxRA+gCgkSzUeaeubUSKZHM5rUY2Re1z
+5wEAn2OPj0sFYt4er8ptomzLr33zTaXZ
+=/J8r
 -----END PGP SIGNATURE-----
 
---9jxsPFA5p3P2qPhR--
+--Apple-Mail=_65805941-0605-4404-B39B-FBE83868203D--
