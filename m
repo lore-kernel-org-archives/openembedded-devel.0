@@ -1,32 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ie0-f175.google.com (mail-ie0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F43B6017E
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DC16741CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jul 2015 23:43:30 +0000 (UTC)
-Received: by ietj16 with SMTP id j16so42796767iet.0
+	Mon, 13 Jul 2015 06:48:54 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6D6msWf003265
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jul 2015 16:43:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type; bh=4Sm47ddvg1Ruy5An+DEhJg8DmjogyEoD/LyzLWepgCo=;
-	b=wBEop0hmfgasUeXdnNrU3lPwSVq19deQYPEzaALZcB+OuOv8N1iqWAscxH+WQtZhd9
-	KCzR56XURl1guvaaGjN/yPb3jk1Dn5CBjFfF135I1FGmP5cSzSTSvNb8hmlzPhNodSJ2
-	9Rc66bJR76QDeYEG7bEacGeZ5fzX7ctxPg6Dv2KUk4Vav35Qd9pux0WhmhxHR486F7gM
-	BeIutEijA98a5xBDUYU7OOz03hie8YySnJQdEWLDAKus+XWAsnnnd1EHGaJ7ee5J6ylq
-	RKBxOQftO7W/ASf88oEu3ks1oVRrrsQH5lBNMyYnUMLcmccDbA7jQqw9KMyMA+pyZdX9
-	yKJQ==
-X-Received: by 10.107.157.4 with SMTP id g4mr38923775ioe.66.1436658211051;
-	Sat, 11 Jul 2015 16:43:31 -0700 (PDT)
+	Sun, 12 Jul 2015 23:48:54 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.235.1; Sun, 12 Jul 2015 23:48:53 -0700
+From: <wenzong.fan@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 13 Jul 2015 14:43:03 +0800
+Message-ID: <1436769783-20950-1-git-send-email-wenzong.fan@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.107.20.83 with HTTP; Sat, 11 Jul 2015 16:43:01 -0700 (PDT)
-In-Reply-To: <1436520866-18584-1-git-send-email-wenzong.fan@windriver.com>
-References: <1436520866-18584-1-git-send-email-wenzong.fan@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 11 Jul 2015 16:43:01 -0700
-Message-ID: <CAMKF1srTMRj=YHJWH99AvySmbbEDOdEVzopsu74ry_PFd_jmjg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-perl] libxml-libxml-perl: update from 2.0116 to 2.0121
+Subject: [PATCH v2] libxml-libxml-perl: update from 2.0116 to 2.0121
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,15 +32,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jul 2015 23:43:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 13 Jul 2015 06:48:56 -0000
+Content-Type: text/plain
 
-On Fri, Jul 10, 2015 at 2:34 AM,  <wenzong.fan@windriver.com> wrote:
-> +do_configure_prepend() {
-> +       rm -rf ${S}/.pc/*
-> +}
-> +
+From: Wenzong Fan <wenzong.fan@windriver.com>
 
-why is this needed. And please use -M -C option with git format-patch
-in future so git can detect renames.
+update to 2.0121 and clean unused logic:
+
+  - do_configure_prepend() {
+  -        rm -rf ${S}/.pc/*
+  - }
+
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ ...{libxml-libxml-perl_2.0116.bb => libxml-libxml-perl_2.0121.bb} | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+ rename meta-perl/recipes-perl/libxml/{libxml-libxml-perl_2.0116.bb => libxml-libxml-perl_2.0121.bb} (87%)
+
+diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
+similarity index 87%
+rename from meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
+rename to meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
+index 2a6dbc2..8997a04 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0116.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
+@@ -26,8 +26,8 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.
+ "
+ LIC_FILES_CHKSUM = "file://debian/copyright;md5=75e021e35a906347f46c9ff163653e2a \
+ 			file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446"
+-SRC_URI[libxml.md5sum] = "a53a743bf053a0cb4afb41513fb8a684"
+-SRC_URI[libxml.sha256sum] = "b154f2dad3033b30d22ac81b8985b69ad35450b0c552db394cd03bb36845812a"
++SRC_URI[libxml.md5sum] = "1544ab9ac110f5da296015346561ce02"
++SRC_URI[libxml.sha256sum] = "ec431011cb37a04640fd2316f64d0405a274eece2c6f3847f7fbd336eb1c0dc9"
+ 
+ S = "${WORKDIR}/XML-LibXML-${PV}"
+ 
+@@ -40,8 +40,4 @@ BBCLASSEXTEND = "native"
+ CFLAGS += " -D_GNU_SOURCE "
+ BUILD_CFLAGS += " -D_GNU_SOURCE "
+ 
+-do_configure_prepend() {
+-	rm -rf ${S}/.pc/*
+-}
+-
+ FILES_${PN}-dbg =+ "${libdir}/perl/vendor_perl/*/auto/XML/LibXML/.debug/"
+-- 
+1.9.1
+
 
