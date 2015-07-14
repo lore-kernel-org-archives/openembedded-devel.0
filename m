@@ -1,28 +1,20 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B16FE65C98;
-	Tue, 14 Jul 2015 05:57:22 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t6E5vIuE007861
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 13 Jul 2015 22:57:18 -0700 (PDT)
-Received: from [128.224.162.200] (128.224.162.200) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.235.1;
-	Mon, 13 Jul 2015 22:57:17 -0700
-Message-ID: <55A4A4BB.5070502@windriver.com>
-Date: Tue, 14 Jul 2015 13:57:15 +0800
-From: Robert Yang <liezhi.yang@windriver.com>
-User-Agent: Mozilla/5.0 (X11; Linux i686;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-MIME-Version: 1.0
-To: Khem Raj <raj.khem@gmail.com>, Patches and discussions about the oe-core
-	layer <openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>, Yocto discussion list
-	<yocto@yoctoproject.org>
-References: <261F5389-C495-4B05-B79E-309AE0E0F0CA@gmail.com>
-In-Reply-To: <261F5389-C495-4B05-B79E-309AE0E0F0CA@gmail.com>
-Subject: Re: [OE-core] glibc 2.22
+Return-Path: <maciej.borzecki@open-rnd.pl>
+Received: from akt59.rev.netart.pl (akt59.rev.netart.pl [85.128.150.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 9833375EC8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jul 2015 11:04:17 +0000 (UTC)
+Received: from localhost.localdomain (unknown [31.182.60.238])
+	by open-rnd.nazwa.pl (Postfix) with ESMTP id B0FCE401126;
+	Tue, 14 Jul 2015 13:04:14 +0200 (CEST)
+From: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+To: Tim Orling <TicoTimo@gmail.com>,
+	Paul Eggleton <paul.eggleton@linux.intel.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Jul 2015 13:03:55 +0200
+Message-Id: <1436871835-1144-1-git-send-email-maciej.borzecki@open-rnd.pl>
+X-Mailer: git-send-email 1.9.3
+Cc: Maciek Borzecki <maciek.borzecki@gmail.com>
+Subject: [meta-python][PATCH] python-pyudev: add missing dependency on python-contextlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +28,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jul 2015 05:57:23 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Jul 2015 11:04:23 -0000
 
+Signed-off-by: Maciej Borzecki <maciej.borzecki@open-rnd.pl>
+---
+ meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-I will try this, and something is wrong with mips when upgraded gcc
-from 4.9.2 to 4.9.3:
-please see my reply to "[OE-core] [PATCH 1/3] gcc-4.9: Upgrade to 4.9.3"
+diff --git a/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb b/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
+index 964b5f92b59656f5dfdddfafe3506ef7b316083e..9c77f83af9b3e7f0b4b83bbced4e6b80ff108198 100644
+--- a/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
++++ b/meta-python/recipes-devtools/python/python-pyudev_0.16.1.bb
+@@ -22,4 +22,5 @@ RDEPENDS_${PN} = "\
+     python-ctypes \
+     python-subprocess \
+     python-misc \
++    python-contextlib \
+ "
+-- 
+1.9.3
 
-// Robert
-
-On 07/14/2015 01:37 AM, Khem Raj wrote:
-> Hi All
->
-> glibc 2.22 will release end of this month. For some time I have put together the update here
->
-> http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/master&id=02e73ea526d94f21c7ef82eb96b062eff8ebb825
->
-> It works pretty well for machines I have tested it on ( arm/x86 ) but would be interested if more wider trial could be carried
-> out and issues reported between now and release can be addressed.
->
-> Please give it a try if you have spare cycles
->
-> Thanks
-> -Khem
->
->
->
->
 
