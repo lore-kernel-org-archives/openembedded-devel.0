@@ -1,30 +1,35 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FD79734B8
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f47.google.com (mail-pa0-f47.google.com
+	[209.85.220.47])
+	by mail.openembedded.org (Postfix) with ESMTP id C8C3A607A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 14:36:49 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1ZFNnl-0006hf-8Q from Joe_MacDonald@mentor.com ;
-	Wed, 15 Jul 2015 07:36:49 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 15 Jul 2015 07:36:48 -0700
-Received: by burninator (Postfix, from userid 1000)	id 54BA6582D36; Wed, 15
-	Jul 2015 10:36:27 -0400 (EDT)
-Date: Wed, 15 Jul 2015 10:36:27 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <rongqing.li@windriver.com>
-Message-ID: <20150715143626.GB29923@mentor.com>
-References: <1436172967-1489-1-git-send-email-rongqing.li@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1436172967-1489-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] inetutils: fix tcpd path of rlogin rsh and rexec
+	Wed, 15 Jul 2015 15:11:56 +0000 (UTC)
+Received: by padck2 with SMTP id ck2so25591327pad.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2015 08:11:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=CTBmbIIepLnqXB6HIfQCYdEqywclkKBYtkjV8Jy+D4c=;
+	b=Rb09lwgGB4pAMxaM94RjmT/9F/zh+jvnnJq7H5LlMx4nTca6DQ3kzYPIsleLZsdlay
+	sZN0K/oCIOP7FsMSvCSL8DtAnnmMJL88waLq07jTSzSx07Mxc3rGaWxBOqae0Bxjc7mL
+	KUa7ZV5as6GX2RxXyFFXV7R6LsmEt12K/Bdff+m+KmiIL2+cC4R31PN+VXaf0g+axXXQ
+	sH+pLU/+vOKfzLKMzc7x7sktb0a4QU/KJVEHxZKNp8d5c29IhjRdcWIj/0U3MnyMOMB0
+	NHL2iw8sTBZZ3JltPbTXMFf2lAnc7zg39MsUk1FmBru5BJ9YI2DxjZho/FUQg8tlU9nW
+	W8AA==
+X-Received: by 10.66.248.2 with SMTP id yi2mr8885437pac.149.1436973116781;
+	Wed, 15 Jul 2015 08:11:56 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	pj4sm5010249pbb.29.2015.07.15.08.11.54
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 15 Jul 2015 08:11:55 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Jul 2015 08:11:52 -0700
+Message-Id: <1436973112-10720-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-gnome][PATCH] libxklavier: fix compile error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,132 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2015 14:36:51 -0000
-X-Groupsio-MsgNum: 56249
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="W/nzBZO5zC0uMSeA"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 15 Jul 2015 15:12:00 -0000
 
---W/nzBZO5zC0uMSeA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+make[3]: *** No rule to make target `Xkl-1.0.typelib', needed by `all-am'.  Stop.
 
-[[oe] [PATCH][meta-networking] inetutils: fix tcpd path of rlogin rsh and r=
-exec] On 15.07.06 (Mon 16:56) rongqing.li@windriver.com wrote:
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> From: Jian Liu <jian.liu@windriver.com>
->=20
-> rlogin, rsh and rexec xinet.d script, a wrong path is
-> being referenced under the server section.
+diff --git a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
+index e93c378..5e1d125 100644
+--- a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
++++ b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
+@@ -11,6 +11,8 @@ SRC_URI[archive.md5sum] = "290ea2a8abc40f78a3a16bdae6f02808"
+ SRC_URI[archive.sha256sum] = "ebec3bc54b5652838502b96223152fb1cd8fcb14ace5cb02d718fc3276bbd404"
+ 
+ EXTRA_OECONF = "--with-xkb-bin-base=${bindir}"
++PACKAGECONFIG ??=""
++PACKAGECONFIG[introspection] = "--enable-introspection=yes, --enable-introspection=no, libgirepository"
+ 
+ do_configure_append() {
+     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+-- 
+2.3.5
 
-This seems like a sensible update, but rather than just shifting this
-around, can you update this patch to do something a bit more robust?
-I'm thinking along the lines of what the other servers do (and what's
-being done everywhere for systemd now):
 
- 73 do_install () {
- [...]
- 95     sed -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
- 96         -e 's,@SYSCONFDIR@,${sysconfdir},g' \
- 97         -e 's,@SBINDIR@,${sbindir},g' \
- 98         -i ${D}${systemd_unitdir}/system/*.service
-
-(source: meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb, etc.)
-
-So sed in the proper values of $(sbindir) (since that's where tcpd is
-installed by the tcp-wrappers recipe) after installing a template xinetd
-file.
-
--J.
-
->=20
-> server =3D /usr/bin/tcpd
-> instead of
-> server =3D /usr/sbin/tcpd
->=20
-> tcpd is provided by tcp-wrappers
->=20
-> Written-by: Herve.Patriarche <herve.patriarche@windriver.com>
-> Signed-off-by: Jian Liu <jian.liu@windriver.com>
-> ---
->  .../inetutils/inetutils-1.9.2/rexec.xinetd.inetutils                    =
-| 2 +-
->  .../inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils                   =
-| 2 +-
->  .../recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils =
-| 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutil=
-s/inetutils-1.9.2/rexec.xinetd.inetutils
-> index 80aed36..7354360 100644
-> --- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexe=
-c.xinetd.inetutils
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexe=
-c.xinetd.inetutils
-> @@ -14,7 +14,7 @@ service exec
->  	group		=3D root
->  	log_on_success	+=3D USERID
->  	log_on_failure	+=3D USERID
-> -	server		=3D /usr/bin/tcpd
-> +	server		=3D /usr/sbin/tcpd
->  	server_args	=3D /usr/sbin/in.rexecd
->  	disable		=3D yes
->  }
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetuti=
-ls/inetutils-1.9.2/rlogin.xinetd.inetutils
-> index 00dbf93..70493e6 100644
-> --- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlog=
-in.xinetd.inetutils
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlog=
-in.xinetd.inetutils
-> @@ -14,7 +14,7 @@ service login
->  	group		=3D root
->  	log_on_success	+=3D USERID
->  	log_on_failure	+=3D USERID
-> -	server		=3D /usr/bin/tcpd
-> +	server		=3D /usr/sbin/tcpd
->  	server_args	=3D /usr/sbin/in.rlogind -a
->  	disable		=3D yes
->  }
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/=
-inetutils-1.9.2/rsh.xinetd.inetutils
-> index ad59b62..a842eb9 100644
-> --- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.=
-xinetd.inetutils
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.=
-xinetd.inetutils
-> @@ -15,7 +15,7 @@ service shell
->  	group		=3D root
->  	log_on_success	+=3D USERID
->  	log_on_failure	+=3D USERID
-> -	server		=3D /usr/bin/tcpd
-> +	server		=3D /usr/sbin/tcpd
->  	server_args	=3D /usr/sbin/in.rshd -aL
->  	disable		=3D yes
->  }
---=20
--Joe MacDonald.
-:wq
-
---W/nzBZO5zC0uMSeA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVpm/nAAoJEEn8ffcsOfaWPGAH/22CmXDlAsABSNh6T9xUgpDk
-YxW880wfR+X6pWfIz7myOWpcHMveba0ZxRsSbIDjNuBZyzZjySkoPpaSVTd64xaw
-kHcjb2vLggXV2xlqlpArKqIQJUWDxG4Ll8LHuCJ3uqBRbIOmsOIn6YpuTsPrCJ2Y
-6VldbI8zTS+QvmXy6CgR6qR0MlThvICgSKqIArxAQxhhqL5UQBs0G4N/JBxOebK9
-JjGQ7ff+60Y3t4qa0dKVup3V7mQQvp4C3mDiqMsVtKX9nYgck4f+TQ/amEcpLvmi
-XtEpGB2C12s4nDPEGXT6CRRjZqgT9ikkPeaRHpHZWk5gSEf23P/YVEiYz1nZHLE=
-=tf7u
------END PGP SIGNATURE-----
-
---W/nzBZO5zC0uMSeA--
