@@ -1,31 +1,34 @@
-Return-Path: <keshavpeswani@gmail.com>
-Received: from mail-yk0-f170.google.com (mail-yk0-f170.google.com
-	[209.85.160.170])
-	by mail.openembedded.org (Postfix) with ESMTP id C6BB165CBD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ie0-f171.google.com (mail-ie0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 716827391D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 01:29:49 +0000 (UTC)
-Received: by ykay190 with SMTP id y190so23960433yka.3
+	Wed, 15 Jul 2015 05:45:25 +0000 (UTC)
+Received: by ietj16 with SMTP id j16so26441939iet.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jul 2015 18:29:50 -0700 (PDT)
+	Tue, 14 Jul 2015 22:45:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	bh=t7USjWR0SJZ6vv9wHy10auCub0YoTPS2KZN4JGKo2pE=;
-	b=VUOxBQ8v2Eytgh9y59QT1mX+0ztnqdX0UW1GHLaJo2fvw0gwbj9s7GfQrClcXWXCDC
-	rxWro1BfVedeYITStjep2+PP8FmfIy9aUvd0y5hy1Ty+3PyEoAc6NfgZJvtclX8J9Xa7
-	vtDbV3ommXMxtotZ0sHAWvbil+jWt9IFrWham/gPfghEcjF001YSuEiv4gVtCBytHFvZ
-	dvGbczO3bDtZxdOM6FtqOUhEcP7IYcxPmEYlU6Jo7DasznAWzVJ1+jrglzS00Y+Oy+g/
-	kEbOFGJZ9aGouC/XxlUNK4gWz1mOApDvoE3acmPCeCGjOXxuxg6789ZQzWHasPIvJ2tq
-	X6SA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type; bh=BMITaK1+1LUBl0ONxhea6bJIaLfTgCysHGQoh0WF7to=;
+	b=P2C97hErMd7Li8dH3okPPSiZKOvGIyHHdLxlJgSe/0S/dbL/MAS/Y5vGJ7nSuCOK2J
+	sea+J3LrGKcrZMkP+MZOY8VTEZAHPxuiPpq7JpIdO/4lQ7d9iQhZy5KwftFdRjdDHM/5
+	J5h5KIN59pLHcpVsi6UztQ398NbGe6n2z6fRgE2SnKMpj/I2cdqNUxXSx8q8xZxf1Zcb
+	piqQC6eh52e890+a3FmkHHOId7PjWPrXEPsx+vb3hKNW8qqq0dZdQx7c8Yzeqawqet75
+	AoKk6NjpQ+4hKQ7xszxjkwwtQ6xJ8gf9tiUjBBHaYkjuozVN9Ze7w0D6lhj6Ln3nfHUX
+	fupw==
+X-Received: by 10.50.225.35 with SMTP id rh3mr24048009igc.29.1436939125957;
+	Tue, 14 Jul 2015 22:45:25 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.170.37.14 with SMTP id 14mr1566279ykf.129.1436923789975;
-	Tue, 14 Jul 2015 18:29:49 -0700 (PDT)
-Received: by 10.129.42.194 with HTTP; Tue, 14 Jul 2015 18:29:49 -0700 (PDT)
-Date: Wed, 15 Jul 2015 06:59:49 +0530
-Message-ID: <CAJJ_cjRPvVa9Uu=0jT3OCgPMKizq4+5s3r8q0izgnQm7eY=bNg@mail.gmail.com>
-From: Keshav Peswani <keshavpeswani@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-gnome] Suggestion username and password in the login screen
+Received: by 10.107.20.83 with HTTP; Tue, 14 Jul 2015 22:44:56 -0700 (PDT)
+In-Reply-To: <55A36046.6030508@windriver.com>
+References: <1436520866-18584-1-git-send-email-wenzong.fan@windriver.com>
+	<CAMKF1srTMRj=YHJWH99AvySmbbEDOdEVzopsu74ry_PFd_jmjg@mail.gmail.com>
+	<55A36046.6030508@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 14 Jul 2015 22:44:56 -0700
+Message-ID: <CAMKF1sqpyTgjw66K==ohfXYgTAG88+tBBix8-vETLiEcgw1HjA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-perl] libxml-libxml-perl: update from 2.0116 to 2.0121
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,49 +42,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2015 01:29:51 -0000
+X-List-Received-Date: Wed, 15 Jul 2015 05:45:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi ,
+On Sun, Jul 12, 2015 at 11:52 PM, wenzong fan <wenzong.fan@windriver.com> wrote:
+> This logic is from the old recipe file. I cleaned it and run a test build,
+> there's not any issue.
+>
 
-While creating a customized distro for raspiberrypi 2 with meta-gnome
-layer, the login screen username in the gdm_2.32.2.bb in
-the USERADD_PARAM_${PN} (line number 89) is gdm but no password is
-specified. Hence, when we are unable to login as /etc/shadow file has an
-entry '!' instead of '*' as password for user 'gdm'.
-To have a workaround for this, I created an encrypted password for 'root'
-and added the same. Please go through the patch :
+I understand that. however while you are doing it. Its good if you
+could see if this is needed still.
+most of the times such opportunities should be availed during updates.
 
-*keshav@L-41WKG32:~/workspace/yocto/meta-openembedded$ git diff
-meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb <http://gdm_2.32.2.bb>*
-*diff --git a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-<http://gdm_2.32.2.bb> b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb
-<http://gdm_2.32.2.bb>*
-*index 723eee8..f6b9315 100644*
-*--- a/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb <http://gdm_2.32.2.bb>*
-*+++ b/meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb <http://gdm_2.32.2.bb>*
-*@@ -89,7 +89,7 @@ INITSCRIPT_NAME = "gdm"*
-* INITSCRIPT_PARAMS = "start 99 5 . stop 20 0 1 2 3 6 ."*
-
-* USERADD_PACKAGES = "${PN}"*
-*-USERADD_PARAM_${PN} = "--system --no-create-home --home
-${localstatedir}/lib/gdm --user-group gdm"*
-*+USERADD_PARAM_${PN} = "-p ZUVZbV/4Ia06k --system --no-create-home --home
-${localstatedir}/lib/gdm --user-group gdm"*
-
-* pkg_postinst_${PN} () {*
-* # Register up as default dm*
-
-
-Here, I have two suggestions :
-
-1. The username could be more specific such as 'gnome' or something
-2. The password could be specified such as 'root' or an entry in the
-gdm.conf file for a passwordless login for that user.
-
-Kindly suggest.
-Also, I am very new to this so can I send a patch for this. Please suggest.
-
-Thanks
-Keshav
+> Please refer to:
+>
+> [oe] [PATCH v2] libxml-libxml-perl: update from 2.0116 to 2.0121
 
