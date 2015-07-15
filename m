@@ -1,30 +1,37 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id E07EE607A5
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B8FC737A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 16:06:55 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1ZFPCw-0002MB-Fq from Joe_MacDonald@mentor.com ;
-	Wed, 15 Jul 2015 09:06:54 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 15 Jul 2015 09:06:53 -0700
-Received: by burninator (Postfix, from userid 1000)	id 4FEB3581B5C; Wed, 15
-	Jul 2015 12:06:32 -0400 (EDT)
-Date: Wed, 15 Jul 2015 12:06:32 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <rongqing.li@windriver.com>
-Message-ID: <20150715160631.GC29923@mentor.com>
-References: <1436174216-14196-1-git-send-email-rongqing.li@windriver.com>
+	Wed, 15 Jul 2015 20:40:21 +0000 (UTC)
+Received: by pdrg1 with SMTP id g1so30825302pdr.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Jul 2015 13:40:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=bGaSjCq5C8zzIFYI9RrG3WP0h+k1SaaPSO0SwGmL6/E=;
+	b=HejltiJTJACcvAQOXbQvNMPprGiA0fCfzHsg/6NevClCU8B2FYXwumb1FKEfZ2mzzI
+	VPKaeyNu/Me9j1QxsGtX+f9/DN6Me3MW0tcbHMSaxhsOkUWLrySjwacBvHlCVePpTmnh
+	MVTMgQkTuWz5KRf39kzkgloNFGkukQEZisFWGbrOx+4yeqlB7WhLAwIClr+fd9eekFYH
+	NeLt14DYbzfLYRSXyG18mO/eEoXrfyro+5Xg3EaLUGBchh/Csqz2RvDLGVhFvJI4s4q9
+	2C6gCjH4etQhGeESzOg8eixi/qfh5oEHiWpJnJK+38fJcNnqXKfUaO+GTMdMiTMhAikb
+	e5yw==
 MIME-Version: 1.0
-In-Reply-To: <1436174216-14196-1-git-send-email-rongqing.li@windriver.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] inetutils: Fix deadlock in telnetd when cleanup
+X-Received: by 10.66.222.103 with SMTP id ql7mr11474043pac.144.1436992821117; 
+	Wed, 15 Jul 2015 13:40:21 -0700 (PDT)
+Received: by 10.70.65.4 with HTTP; Wed, 15 Jul 2015 13:40:21 -0700 (PDT)
+In-Reply-To: <20150629125024.GF2393@jama>
+References: <1435235754-7339-1-git-send-email-schnitzeltony@googlemail.com>
+	<1435235754-7339-3-git-send-email-schnitzeltony@googlemail.com>
+	<20150629125024.GF2393@jama>
+Date: Wed, 15 Jul 2015 22:40:21 +0200
+Message-ID: <CALbNGRT8V_4Y+yTEp_=RDVVMfG6FXvf61_PCTXWppCHyw7UjtQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/7] networkmanager: update to 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,233 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2015 16:06:56 -0000
-X-Groupsio-MsgNum: 56252
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="MfFXiAuoTsnnDAfZ"
-Content-Disposition: inline
-
---MfFXiAuoTsnnDAfZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 15 Jul 2015 20:40:22 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Is this fix even relevant?  Has anyone seen this or able to trigger it
-(maybe by using the script in the first link?  I wasn't.)  If someone
-thinks this is still required, I'll merge it, but on the surface it's a
-five year old patch for a different piece of software (netkit-telnet vs.
-inetutils) that causes a deadlock on a much older version of a libc
-library and a five-and-a-half-year-old kernel.
+On Mon, Jun 29, 2015 at 2:50 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Thu, Jun 25, 2015 at 02:35:49PM +0200, Andreas M=C3=BCller wrote:
+>> * at_console support is gone
+>> * add PACKAGECONFIG for bluez5/modemmanager/ppp and disable them by defa=
+ult
+>
+> world build shows:
+> networkmanager-1.0.2: networkmanager: Files/directories were installed
+> but not shipped in any package:
+>   /run
+>   /run/NetworkManager
+> Please set FILES such that these items are packaged. Alternatively if
+> they are unneeded, avoid installing them or delete them within
+> do_install. [installed-vs-shipped]
+>
+> can you please check it?
+>
+I cannot reproduce this here. Is there some place I can find logs
+causing this message? I would be interested in  log.do_configure /
+log.do_compile / log.do_install to see what's different to my build.
 
--J.
+Andreas
 
-[[oe] [PATCH][meta-networking] inetutils: Fix deadlock in telnetd when clea=
-nup] On 15.07.06 (Mon 17:16) rongqing.li@windriver.com wrote:
-
-> From: Li Wang <li.wang@windriver.com>
->=20
-> the patch comes from:
-> https://bugs.launchpad.net/ubuntu/+source/netkit-telnet/+bug/507455
-> https://launchpadlibrarian.net/37882973/0001-telnetd-Fix-deadlock-on-clea=
-nup.patch
->=20
-> The cleanup function in telnetd is called both directly and on SIGCHLD
-> signals. This, unfortunately, triggered a deadlock in eglibc 2.9 while
-> running on a 2.6.31.11 kernel.
->=20
-> What we were seeing is hangs like these:
->=20
->   (gdb) bt
->   #0  0xb7702424 in __kernel_vsyscall ()
->   #1  0xb7658e61 in __lll_lock_wait_private () from ./lib/libc.so.6
->   #2  0xb767e7b5 in _L_lock_15 () from ./lib/libc.so.6
->   #3  0xb767e6e0 in utmpname () from ./lib/libc.so.6
->   #4  0xb76bcde7 in logout () from ./lib/libutil.so.1
->   #5  0x0804c827 in cleanup ()
->   #6  <signal handler called>
->   #7  0xb7702424 in __kernel_vsyscall ()
->   #8  0xb7641003 in __fcntl_nocancel () from ./lib/libc.so.6
->   #9  0xb767e0c3 in getutline_r_file () from ./lib/libc.so.6
->   #10 0xb767d675 in getutline_r () from ./lib/libc.so.6
->   #11 0xb76bce42 in logout () from ./lib/libutil.so.1
->   #12 0x0804c827 in cleanup ()
->   #13 0x0804a0b5 in telnet ()
->   #14 0x0804a9c3 in main ()
->=20
-> and what has happened here is that the user closes the telnet session
-> via the escape character. This causes telnetd to call cleanup in frame
-> the SIGCHLD signal is delivered while telnetd is executing cleanup.
->=20
-> Telnetd then calls the signal handler for SIGCHLD, which is cleanup().
-> Ouch. The actual deadlock is in libc. getutline_r in frame #10 gets the
-> __libc_utmp_lock lock, and utmpname above does the same thing in frame
->=20
-> The fix registers the SIGCHLD handler as cleanup_sighandler, and makes
-> cleanup disable the SIGCHLD signal before calling cleanup_sighandler.
->=20
-> Signed-off-by: Simon Kagstrom <simon.kagstrom@netinsight.net>
-> Signed-off-by: Li Wang <li.wang@windriver.com>
-> ---
->  .../telnetd-Fix-deadlock-on-cleanup.patch          | 108 +++++++++++++++=
-++++++
->  .../inetutils/inetutils_1.9.2.bb                   |   1 +
->  2 files changed, 109 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/inetutils/inetut=
-ils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch
->=20
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9=
-=2E2/telnetd-Fix-deadlock-on-cleanup.patch b/meta-networking/recipes-connec=
-tivity/inetutils/inetutils-1.9.2/telnetd-Fix-deadlock-on-cleanup.patch
-> new file mode 100644
-> index 0000000..3ec7613
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/teln=
-etd-Fix-deadlock-on-cleanup.patch
-> @@ -0,0 +1,108 @@
-> +telnetd: Fix deadlock on cleanup
-> +
-> +the patch comes from:
-> +https://bugs.launchpad.net/ubuntu/+source/netkit-telnet/+bug/507455
-> +https://launchpadlibrarian.net/37882973/0001-telnetd-Fix-deadlock-on-cle=
-anup.patch
-> +
-> +The cleanup function in telnetd is called both directly and on SIGCHLD
-> +signals. This, unfortunately, triggered a deadlock in eglibc 2.9 while
-> +running on a 2.6.31.11 kernel.
-> +
-> +What we were seeing is hangs like these:
-> +
-> +  (gdb) bt
-> +  #0  0xb7702424 in __kernel_vsyscall ()
-> +  #1  0xb7658e61 in __lll_lock_wait_private () from ./lib/libc.so.6
-> +  #2  0xb767e7b5 in _L_lock_15 () from ./lib/libc.so.6
-> +  #3  0xb767e6e0 in utmpname () from ./lib/libc.so.6
-> +  #4  0xb76bcde7 in logout () from ./lib/libutil.so.1
-> +  #5  0x0804c827 in cleanup ()
-> +  #6  <signal handler called>
-> +  #7  0xb7702424 in __kernel_vsyscall ()
-> +  #8  0xb7641003 in __fcntl_nocancel () from ./lib/libc.so.6
-> +  #9  0xb767e0c3 in getutline_r_file () from ./lib/libc.so.6
-> +  #10 0xb767d675 in getutline_r () from ./lib/libc.so.6
-> +  #11 0xb76bce42 in logout () from ./lib/libutil.so.1
-> +  #12 0x0804c827 in cleanup ()
-> +  #13 0x0804a0b5 in telnet ()
-> +  #14 0x0804a9c3 in main ()
-> +
-> +and what has happened here is that the user closes the telnet session
-> +via the escape character. This causes telnetd to call cleanup in frame
-> +the SIGCHLD signal is delivered while telnetd is executing cleanup.
-> +
-> +Telnetd then calls the signal handler for SIGCHLD, which is cleanup().
-> +Ouch. The actual deadlock is in libc. getutline_r in frame #10 gets the
-> +__libc_utmp_lock lock, and utmpname above does the same thing in frame
-> +
-> +The fix registers the SIGCHLD handler as cleanup_sighandler, and makes
-> +cleanup disable the SIGCHLD signal before calling cleanup_sighandler.
-> +
-> +Signed-off-by: Simon Kagstrom <simon.kagstrom@netinsight.net>
-> +Signed-off-by: Li Wang <li.wang@windriver.com>
-> +---
-> + telnetd/pty.c     |   17 ++++++++++++++++-
-> + telnetd/telnetd.c |    2 +-
-> + telnetd/telnetd.h |    1 +
-> + 3 files changed, 18 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/telnetd/pty.c b/telnetd/pty.c
-> +index 21b0b69..22a17c5 100644
-> +--- a/telnetd/pty.c
-> ++++ b/telnetd/pty.c
-> +@@ -145,7 +145,7 @@ start_login (char *host, int autologin, char *name)
-> +  * reported exit code.
-> +  */
-> + void
-> +-cleanup (int sig)
-> ++cleanup_sighandler (int sig)
-> + {
-> +   int status =3D EXIT_FAILURE;
-> +   char *p;
-> +@@ -168,3 +168,18 @@ cleanup (int sig)
-> +   shutdown (net, 2);
-> +   exit (status);
-> + }
-> ++
-> ++void cleanup(int sig) {
-> ++    sigset_t mask, oldmask;
-> ++
-> ++    /* Set up the mask of signals to temporarily block. */
-> ++    sigemptyset (&mask);
-> ++    sigaddset (&mask, SIGCHLD);
-> ++
-> ++    /* Block SIGCHLD while running cleanup */
-> ++    sigprocmask (SIG_BLOCK, &mask, &oldmask);
-> ++
-> ++    cleanup_sighandler(sig);
-> ++    /* Technically not needed since cleanup_sighandler exits */
-> ++    sigprocmask (SIG_UNBLOCK, &mask, NULL);
-> ++}
-> +diff --git a/telnetd/telnetd.c b/telnetd/telnetd.c
-> +index cf7ce0f..4fe95b5 100644
-> +--- a/telnetd/telnetd.c
-> ++++ b/telnetd/telnetd.c
-> +@@ -527,7 +527,7 @@ telnetd_setup (int fd)
-> +   signal (SIGTTOU, SIG_IGN);
-> + #endif
-> +=20
-> +-  signal (SIGCHLD, cleanup);
-> ++  signal (SIGCHLD, cleanup_sighandler);
-> + }
-> +=20
-> + int
-> +diff --git a/telnetd/telnetd.h b/telnetd/telnetd.h
-> +index ce90fbc..8bac120 100644
-> +--- a/telnetd/telnetd.h
-> ++++ b/telnetd/telnetd.h
-> +@@ -326,6 +326,7 @@ extern void add_slc (char func, char flag, cc_t val);
-> + extern void check_slc (void);
-> + extern void change_slc (char func, char flag, cc_t val);
-> +=20
-> ++extern void cleanup_sighandler (int);
-> + extern void cleanup (int);
-> + extern void clientstat (int, int, int);
-> + extern void copy_termbuf ();
-> +--=20
-> +1.7.9.5
-> +
-> diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9=
-=2E2.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
-> index 9bb9fe8..5c5699a 100644
-> --- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
-> +++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
-> @@ -18,6 +18,7 @@ SRC_URI =3D "${GNU_MIRROR}/inetutils/inetutils-${PV}.ta=
-r.gz \
->             file://telnet.xinetd.inetutils \
->             file://tftpd.xinetd.inetutils \
->             file://inetutils-1.9-PATH_PROCNET_DEV.patch \
-> +           file://telnetd-Fix-deadlock-on-cleanup.patch \
->  "
-> =20
->  SRC_URI[md5sum] =3D "aa1a9a132259db83e66c1f3265065ba2"
-> --=20
-> 1.9.1
->=20
---=20
--Joe MacDonald.
-:wq
-
---MfFXiAuoTsnnDAfZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJVpoUHAAoJEEn8ffcsOfaWiVYIAInzkBi0o91ZsU22PNg3ZKy0
-frF6i15OBKAZQoizwuukN1tKP5xc1ztn1wSYPf507vSy2R2HAL+sr7U+MPla5VWQ
-YaGS8qRmNX4doE0FXybpYpVQ7k4vrONiX10rpuItW+ESnJtx81cBGbEPbPI4c9pk
-yrT9q0lez0cqRGjOkPjMary5y0Lf0gQM/vnPuDzktcBFDzjh8QF9KUnaIeRaqYY5
-oqidgxmJE+fv/GajCwB6htak1/turdKu0TuZcpl/D8L4sUhLc6cK+u0M7SVCU24l
-bfvON2QgaC+sJWFpEfklO6pp+mP6P/PteveTqSVZWqGkycSoTBEEyGh4YSlcwug=
-=ckLl
------END PGP SIGNATURE-----
-
---MfFXiAuoTsnnDAfZ--
