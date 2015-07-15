@@ -1,37 +1,37 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-pd0-f178.google.com (mail-pd0-f178.google.com
-	[209.85.192.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B8FC737A3
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
+	[209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id DA34C75F15
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 20:40:21 +0000 (UTC)
-Received: by pdrg1 with SMTP id g1so30825302pdr.2
+	Wed, 15 Jul 2015 20:49:50 +0000 (UTC)
+Received: by qkdv3 with SMTP id v3so37242846qkd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 13:40:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=bGaSjCq5C8zzIFYI9RrG3WP0h+k1SaaPSO0SwGmL6/E=;
-	b=HejltiJTJACcvAQOXbQvNMPprGiA0fCfzHsg/6NevClCU8B2FYXwumb1FKEfZ2mzzI
-	VPKaeyNu/Me9j1QxsGtX+f9/DN6Me3MW0tcbHMSaxhsOkUWLrySjwacBvHlCVePpTmnh
-	MVTMgQkTuWz5KRf39kzkgloNFGkukQEZisFWGbrOx+4yeqlB7WhLAwIClr+fd9eekFYH
-	NeLt14DYbzfLYRSXyG18mO/eEoXrfyro+5Xg3EaLUGBchh/Csqz2RvDLGVhFvJI4s4q9
-	2C6gCjH4etQhGeESzOg8eixi/qfh5oEHiWpJnJK+38fJcNnqXKfUaO+GTMdMiTMhAikb
-	e5yw==
+	Wed, 15 Jul 2015 13:49:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-type;
+	bh=EJrqHB9SyVVm10AafVWEaXzHBerV/zVps1nodib2D/I=;
+	b=SoGx7QQywVacD8gJzh7bCy35a5slVoxPeNlzuHIrmQJJ+wbBc4nbere06iseVfb6/7
+	AviXNyj+dPxQBhSG3vDJk0q1ieZzezzRkjOKB6q7pgZmmPauin3/eEjSRYG4FzyYhZjw
+	NSYl2MI3QXL23P0jXw9SpH1Wb+gtaOa+FHojjv+MpII+TcB+CE/YkU5Pbe2JdXID5W0I
+	JQA6lVMsAntDgsByvwDFZJTtU9PgN13/bcmZyLacW60jy0NvIqzdy6Q52wBI89oygpZK
+	rC2F3qBgfj3Q9N2M5qUL8s/W2eUif8aIm8TaKtf7O/MkensUnd46thfxJeVwd9x6Ox/F
+	1kHw==
+X-Gm-Message-State: ALoCoQnSnj6790VhO77TyR8tFD5MCYPSnfoz+S63k1d5onBSVcn5eiuNh2WRNRO2w7RJGUbSSL9g
+X-Received: by 10.140.88.80 with SMTP id s74mr11463247qgd.59.1436993391184;
+	Wed, 15 Jul 2015 13:49:51 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.66.222.103 with SMTP id ql7mr11474043pac.144.1436992821117; 
-	Wed, 15 Jul 2015 13:40:21 -0700 (PDT)
-Received: by 10.70.65.4 with HTTP; Wed, 15 Jul 2015 13:40:21 -0700 (PDT)
-In-Reply-To: <20150629125024.GF2393@jama>
-References: <1435235754-7339-1-git-send-email-schnitzeltony@googlemail.com>
-	<1435235754-7339-3-git-send-email-schnitzeltony@googlemail.com>
-	<20150629125024.GF2393@jama>
-Date: Wed, 15 Jul 2015 22:40:21 +0200
-Message-ID: <CALbNGRT8V_4Y+yTEp_=RDVVMfG6FXvf61_PCTXWppCHyw7UjtQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/7] networkmanager: update to 1.0.2
+Received: by 10.140.102.231 with HTTP; Wed, 15 Jul 2015 13:49:31 -0700 (PDT)
+In-Reply-To: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
+References: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 15 Jul 2015 21:49:31 +0100
+Message-ID: <CAJTo0LZHj+BW7ox-whZy1+6as3Xugm-Q9xKQPpxT6C=uFs7gOQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [RFC] Move libexecdir to $prefix/libexec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,31 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2015 20:40:22 -0000
+X-List-Received-Date: Wed, 15 Jul 2015 20:49:54 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 29, 2015 at 2:50 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Thu, Jun 25, 2015 at 02:35:49PM +0200, Andreas M=C3=BCller wrote:
->> * at_console support is gone
->> * add PACKAGECONFIG for bluez5/modemmanager/ppp and disable them by defa=
-ult
->
-> world build shows:
-> networkmanager-1.0.2: networkmanager: Files/directories were installed
-> but not shipped in any package:
->   /run
->   /run/NetworkManager
-> Please set FILES such that these items are packaged. Alternatively if
-> they are unneeded, avoid installing them or delete them within
-> do_install. [installed-vs-shipped]
->
-> can you please check it?
->
-I cannot reproduce this here. Is there some place I can find logs
-causing this message? I would be interested in  log.do_configure /
-log.do_compile / log.do_install to see what's different to my build.
+On 23 June 2015 at 15:30, Ross Burton <ross.burton@intel.com> wrote:
 
-Andreas
+> Our default of libexecdir=$libdir/$BPN is contrary to both the FHS[1] and
+> GNU
+> Coding Standards[2], mainly because the key point is that libexecdir
+> should be
+> global and not change per-recipe.  The new FHS allows /usr/libexec so this
+> series changes the default to that, and fixes up the recipes which need
+> fixing.
+>
+
+Unless anyone speaks up with a good argument I'd really like to see this
+land the moment the current milestone release is actually made...
+
+Ross
 
