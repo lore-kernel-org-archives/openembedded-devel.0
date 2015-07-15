@@ -1,37 +1,35 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
-	[209.85.220.181])
-	by mail.openembedded.org (Postfix) with ESMTP id DA34C75F15
+Return-Path: <dominic.sacre@gmx.de>
+X-Greylist: delayed 304 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 15 Jul 2015 23:05:46 UTC
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+	by mail.openembedded.org (Postfix) with ESMTP id D261475E6A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 20:49:50 +0000 (UTC)
-Received: by qkdv3 with SMTP id v3so37242846qkd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 13:49:51 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-type;
-	bh=EJrqHB9SyVVm10AafVWEaXzHBerV/zVps1nodib2D/I=;
-	b=SoGx7QQywVacD8gJzh7bCy35a5slVoxPeNlzuHIrmQJJ+wbBc4nbere06iseVfb6/7
-	AviXNyj+dPxQBhSG3vDJk0q1ieZzezzRkjOKB6q7pgZmmPauin3/eEjSRYG4FzyYhZjw
-	NSYl2MI3QXL23P0jXw9SpH1Wb+gtaOa+FHojjv+MpII+TcB+CE/YkU5Pbe2JdXID5W0I
-	JQA6lVMsAntDgsByvwDFZJTtU9PgN13/bcmZyLacW60jy0NvIqzdy6Q52wBI89oygpZK
-	rC2F3qBgfj3Q9N2M5qUL8s/W2eUif8aIm8TaKtf7O/MkensUnd46thfxJeVwd9x6Ox/F
-	1kHw==
-X-Gm-Message-State: ALoCoQnSnj6790VhO77TyR8tFD5MCYPSnfoz+S63k1d5onBSVcn5eiuNh2WRNRO2w7RJGUbSSL9g
-X-Received: by 10.140.88.80 with SMTP id s74mr11463247qgd.59.1436993391184;
-	Wed, 15 Jul 2015 13:49:51 -0700 (PDT)
+	Wed, 15 Jul 2015 23:05:46 +0000 (UTC)
+Received: from dastp.lan ([37.24.103.185]) by mail.gmx.com (mrgmx001) with
+	ESMTPSA (Nemesis) id 0MNqfr-1ZLrJi1w55-007WfL; Thu, 16 Jul 2015 01:00:41
+	+0200
+From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Jul 2015 01:00:19 +0200
+Message-Id: <1437001219-5383-1-git-send-email-dominic.sacre@gmx.de>
+X-Mailer: git-send-email 2.4.5
 MIME-Version: 1.0
-Received: by 10.140.102.231 with HTTP; Wed, 15 Jul 2015 13:49:31 -0700 (PDT)
-In-Reply-To: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
-References: <1435069807-13557-1-git-send-email-ross.burton@intel.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 15 Jul 2015 21:49:31 +0100
-Message-ID: <CAJTo0LZHj+BW7ox-whZy1+6as3Xugm-Q9xKQPpxT6C=uFs7gOQ@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [RFC] Move libexecdir to $prefix/libexec
+X-Provags-ID: V03:K0:uuGbpv/5cbPWuJbap9speOeD5zwZJFd4YIbtioY7DtpegYEgRAJ
+	gCtYejUvwD0+6Uh+4wEF5rxIsxg7OdwdTy7Fn3OvlUI6co+Hxs+khAFcHOWZoPcoITQW4P1
+	A3VG5MgZ8uumYadKzn7hCCGs7EOhEY+RazQWCd2bpcrv0Gk2hIQ4BkZ1HrJns3OV75AnZqc
+	seXmPwnuvZ66oEqwLXGng==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:ERDdbf4iwNQ=:Op2jEFmzvvXxgDA7hk+7Mh
+	QYVSPPZTOwzKYASHqVuHGiU3GkvSeemRDpSX9oIoV5rhYakDSVhvlMhvgEjw0vPijUSCiZxXN
+	7AYOF8AXD9NCn/oBj53Cp1chi0htP8eaJUFq2LLp3bCl5d3GxjMeENxZC4sjVG3cB/moBnG0Y
+	HXkLTDhPXwTsUADGb4XN/yI8PR2T4eLjSqND+w+X94mfmkWFsRwgSF2L+7PSGFwQxLVqDcBAI
+	kd55bTq33gz+2d+PlKc9o+y3hnpxECYlvfLKspv126uRarccOcOSSViqxnrtOhwQTf0C9ALc/
+	mEQdZ0stSQ7a240DlyP3TGEq7fzIaaY3AJzO03X0rLb1ksBO6t8NvlHJ/2cKHlyOS2zZ3UCk8
+	0r19fUdqKCWLAN7Qk6uGdCuDK/O03cc/RwWz00H9M1buLy4i9WrCDu8oQ70sb6DCtQOexyH4d
+	3wvf8ou4+GSmQOzOPfw53Pj9Xj7d+LfQwa20PEDmNzgm22drk9Zzr010WintTpuqazz4at/SB
+	+voqrRiY4RL0A1qY0qXJb6GSqznaoGLSy0IqTeJnKwtiwwQcmLNzi91+JI9gnQ9til9B8btaW
+	L3ZmM3xdsrRzsnNFjja4zGUWJfg3wuuTOB+7uSbN6O698Pm5lzzdY6vuarpN4F6G3mYHlonHB
+	jaBqUvz5GvaYOaNTnrA/RqV3GLBAVYDrLAVfA6mRzlpewkNgGaYLjrKaYGrKiz+J1+3k=
+Subject: [meta-oe][PATCH] fio: re-enable building for ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,22 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jul 2015 20:49:54 -0000
+X-List-Received-Date: Wed, 15 Jul 2015 23:05:50 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 23 June 2015 at 15:30, Ross Burton <ross.burton@intel.com> wrote:
+fio's use of libnuma/numactl is optional, and the availability of
+the library is detected during configure.
 
-> Our default of libexecdir=$libdir/$BPN is contrary to both the FHS[1] and
-> GNU
-> Coding Standards[2], mainly because the key point is that libexecdir
-> should be
-> global and not change per-recipe.  The new FHS allows /usr/libexec so this
-> series changes the default to that, and fixes up the recipes which need
-> fixing.
->
+This patch allows fio to build for ARM again, by conditionally
+removing the dependency on numactl (which does not support ARM).
 
-Unless anyone speaks up with a good argument I'd really like to see this
-land the moment the current milestone release is actually made...
+Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
+---
+ meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Ross
+diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+index 82f9cd4..fe41020 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+ DEPENDS = "libaio zlib numactl"
+ 
+ # ARM does not currently support NUMA
+-COMPATIBLE_HOST = "^((?!arm).*)$"
++DEPENDS_remove_arm = "numactl"
+ 
+ # rev for v2.2.6
+ SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
+-- 
+2.4.5
+
 
