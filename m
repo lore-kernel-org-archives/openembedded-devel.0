@@ -1,24 +1,27 @@
-Return-Path: <Rongqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9655775669
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 98C317415A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2015 03:15:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6G3Fq6D025391
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 16 Jul 2015 05:32:54 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98507117"
+Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 16 Jul 2015 13:36:40 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
+	[127.0.0.1])
+	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6G5V8oH007953
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jul 2015 20:15:52 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.235.1; Wed, 15 Jul 2015 20:15:51 -0700
-From: <rongqing.li@windriver.com>
+	Thu, 16 Jul 2015 13:31:08 +0800
+Received: from localhost.localdomain (10.167.226.26) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.181.6; Thu, 16 Jul 2015 13:32:53 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Jul 2015 11:14:26 +0800
-Message-ID: <1437016466-30851-1-git-send-email-rongqing.li@windriver.com>
+Date: Thu, 16 Jul 2015 13:32:47 +0800
+Message-ID: <1437024767-3022-1-git-send-email-leimaohui@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH][meta-networking][v2] inetutils: fix tcpd path in xinetd configuration file
+X-Originating-IP: [10.167.226.26]
+Subject: [meta-oe][PATCH v2] openwsman: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,107 +35,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2015 03:15:53 -0000
+X-List-Received-Date: Thu, 16 Jul 2015 05:32:58 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+Openwsman is an open source implementation of WS-Management; enabling the in-band management of Linux/uni*/Windows platforms.
 
-tcpd from tcp-wrapper is installed into /usr/sbin/, not /usr/bin/
-using sed to dynamical update the path to add the robust
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
 ---
- .../inetutils/inetutils-1.9.2/rexec.xinetd.inetutils                  | 4 ++--
- .../inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils                 | 4 ++--
- .../inetutils/inetutils-1.9.2/rsh.xinetd.inetutils                    | 4 ++--
- .../inetutils/inetutils-1.9.2/telnet.xinetd.inetutils                 | 2 +-
- .../inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils                  | 2 +-
- meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb     | 3 +++
- 6 files changed, 11 insertions(+), 8 deletions(-)
+ .../libssl-is-required-if-eventint-supported.patch | 17 ++++++
+ .../openwsman/openwsman/openwsmand.service         | 12 ++++
+ .../recipes-extended/openwsman/openwsman_2.6.0.bb  | 65 ++++++++++++++++++++++
+ 3 files changed, 94 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
+ create mode 100644 meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service
+ create mode 100644 meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
-index 80aed36..30e81ef 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rexec.xinetd.inetutils
-@@ -14,7 +14,7 @@ service exec
- 	group		= root
- 	log_on_success	+= USERID
- 	log_on_failure	+= USERID
--	server		= /usr/bin/tcpd
--	server_args	= /usr/sbin/in.rexecd
-+	server		= @SBINDIR@/tcpd
-+	server_args	= @SBINDIR@/in.rexecd
- 	disable		= yes
- }
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
-index 00dbf93..21b55da 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rlogin.xinetd.inetutils
-@@ -14,8 +14,8 @@ service login
- 	group		= root
- 	log_on_success	+= USERID
- 	log_on_failure	+= USERID
--	server		= /usr/bin/tcpd
--	server_args	= /usr/sbin/in.rlogind -a
-+	server		= @SBINDIR@/tcpd
-+	server_args	= @SBINDIR@/in.rlogind -a
- 	disable		= yes
- }
- 							
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
-index ad59b62..2b894a7 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/rsh.xinetd.inetutils
-@@ -15,7 +15,7 @@ service shell
- 	group		= root
- 	log_on_success	+= USERID
- 	log_on_failure	+= USERID
--	server		= /usr/bin/tcpd
--	server_args	= /usr/sbin/in.rshd -aL
-+	server		= @SBINDIR@/tcpd
-+	server_args	= @SBINDIR@/in.rshd -aL
- 	disable		= yes
- }
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
-index 2a2a12e..2d9a040 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/telnet.xinetd.inetutils
-@@ -8,6 +8,6 @@ service telnet
- 	socket_type	= stream
- 	wait		= no
- 	user		= root
--	server		= /usr/sbin/in.telnetd
-+	server		= @SBINDIR@/in.telnetd
- 	log_on_failure	+= USERID
- }
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
-index f549163..67b44c4 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils-1.9.2/tftpd.xinetd.inetutils
-@@ -13,7 +13,7 @@ service tftp
-         wait            = yes
-         user            = root
-         group           = root
--        server          = /usr/sbin/in.tftpd
-+        server          = @SBINDIR@/in.tftpd
-         server_args     = /tftpboot
- }
- 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
-index cd7b425..73c90d6 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.2.bb
-@@ -68,6 +68,9 @@ do_install_append () {
-     cp ${WORKDIR}/rsh.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/rsh
-     cp ${WORKDIR}/telnet.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/telnet
-     cp ${WORKDIR}/tftpd.xinetd.inetutils  ${D}/${sysconfdir}/xinetd.d/tftpd
+diff --git a/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch b/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
+new file mode 100644
+index 0000000..bd540e3
+--- /dev/null
++++ b/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
+@@ -0,0 +1,17 @@
++libssl is required by wsman_client_transport if ENABLE_EVENTING_SUPPORT enabled.
 +
-+    sed -e 's,@SBINDIR@,${sbindir},g' -i ${D}/${sysconfdir}/xinetd.d/*
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
 +
-     rm -rf ${D}${libexecdir}/
-     # remove usr/lib if empty
-     rmdir ${D}${libdir}
++diff -Nurp openwsman-2.4.12.orig/src/lib/CMakeLists.txt openwsman-2.4.12/src/lib/CMakeLists.txt
++--- openwsman-2.4.12.orig/src/lib/CMakeLists.txt	2014-10-28 23:04:47.000000000 +0800
+++++ openwsman-2.4.12/src/lib/CMakeLists.txt	2014-12-31 11:09:20.340428523 +0800
++@@ -56,6 +56,9 @@ TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TR
++ SET_TARGET_PROPERTIES( ${WSMAN_CLIENT_TRANSPORT_PKG} PROPERTIES VERSION 1.0.0 SOVERSION 1)
++ INSTALL(TARGETS ${WSMAN_CLIENT_TRANSPORT_PKG} DESTINATION ${LIB_INSTALL_DIR})
++ 
+++IF( ENABLE_EVENTING_SUPPORT )
+++TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TRANSPORT_PKG} ${OPENSSL_LIBRARIES} )
+++ENDIF( ENABLE_EVENTING_SUPPORT )
++ 
++ ############### wsman_client ###############
++ 
+diff --git a/meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service b/meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service
+new file mode 100644
+index 0000000..154f3cd
+--- /dev/null
++++ b/meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service
+@@ -0,0 +1,12 @@
++[Unit]
++Description=Openwsman WS-Management Service
++After=syslog.target
++
++[Service]
++Type=forking
++ExecStart=@SBINDIR@/openwsmand
++ExecStartPre=@SYSCONFDIR@/openwsman/owsmangencert.sh
++PIDFile=@LOCALSTATEDIR@/run/wsmand.pid
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
+new file mode 100644
+index 0000000..67cd618
+--- /dev/null
++++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
+@@ -0,0 +1,65 @@
++SUMMARY = "Opensource Implementation of WS-Management"
++DESCRIPTION = "Openwsman is a project intended to provide an open-source \
++implementation of the Web Services Management specipication \
++(WS-Management) and to expose system management information on the \
++Linux operating system using the WS-Management protocol. WS-Management \
++is based on a suite of web services specifications and usage \
++requirements that exposes a set of operations focused on and covers \
++all system management aspects. \
++Openwsman Server and service libraries"
++HOMEPAGE = "http://www.openwsman.org/"
++SECTION = "Applications/System"
++
++DEPENDS = "curl libxml2 openssl libpam"
++
++SRC_URI = "https://github.com/Openwsman/openwsman/archive/v${PV}.tar.gz \
++           file://libssl-is-required-if-eventint-supported.patch \
++           file://openwsmand.service"
++
++SRC_URI[md5sum] = "824834a86040b98b03f3fc0f7f62e853"
++SRC_URI[sha256sum] = "449b4972dc7700918f8f674047f0a1a9c19eeee3f4ce82f47890dddfa56e823f"
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
++
++inherit systemd cmake pkgconfig pythonnative perlnative
++
++SYSTEMD_SERVICE_${PN} = "openwsmand.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', " -fuse-ld=bfd ", '', d)}"
++
++EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO \
++                 -DBUILD_LIBCIM=NO \
++                 -DBUILD_PERL=YES \
++                 -DCMAKE_INSTALL_PREFIX=${prefix} \
++                 -DLIB=lib \
++                "
++
++do_configure_prepend() {
++    export HOST_SYS=${HOST_SYS}
++    export BUILD_SYS=${BUILD_SYS}
++    export STAGING_INCDIR=${STAGING_INCDIR}
++    export STAGING_LIBDIR=${STAGING_LIBDIR}
++}
++
++do_install_append() {
++    install -d ${D}/${sysconfdir}/init.d
++    install -m 755 ${B}/etc/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
++    ln -sf ${sysconfdir}/init.d/openwsmand ${D}/${sbindir}/rcopenwsmand
++    chmod 755 ${D}/${sysconfdir}/openwsman/owsmangencert.sh
++    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}/${systemd_unitdir}/system
++        install -m 644 ${WORKDIR}/openwsmand.service ${D}/${systemd_unitdir}/system
++
++        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/openwsmand.service
++        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/openwsmand.service
++        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/openwsmand.service
++    fi
++}
++
++FILES_${PN}-dbg += "${libdir}/openwsman/plugins/.debug/ \
++                    ${libdir}/openwsman/authenticators/.debug/ \
++                   "
++
++INSANE_SKIP_${PN} = "dev-so"
 -- 
-1.9.1
+1.8.4.2
 
 
