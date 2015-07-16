@@ -1,27 +1,36 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 98C317415A
+Return-Path: <zoltan.kuscsik@linaro.org>
+Received: from mail-wg0-f41.google.com (mail-wg0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 82E8E737A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2015 05:32:54 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98507117"
-Received: from bogon (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Jul 2015 13:36:40 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6G5V8oH007953
+	Thu, 16 Jul 2015 11:52:14 +0000 (UTC)
+Received: by wgmn9 with SMTP id n9so56424724wgm.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2015 13:31:08 +0800
-Received: from localhost.localdomain (10.167.226.26) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Thu, 16 Jul 2015 13:32:53 +0800
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Jul 2015 13:32:47 +0800
-Message-ID: <1437024767-3022-1-git-send-email-leimaohui@cn.fujitsu.com>
+	Thu, 16 Jul 2015 04:52:14 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ZZN1AnKmVcmuT8z5z9VEeGwLzx9FF8zoe65QLY5rYcc=;
+	b=WK9MXa6hOa6juU5obwVp1LNtI3CW6xVYErcRvidOpjqIX+vs1s2S6PD5LWfUYIf5XY
+	vlA3ff1vIDuhtZhhx7FJinxxSMU++g1SffS9vesHVVff/gjSUhT4QGQ8BINQXYQp8r0W
+	fBJ9VcdqX6YpSB7XoxS4ezM2ioMM3x8MUKY58KS86AwkZNQBmyutyDGXoq+S4UkExYzJ
+	pQtBcjCI8nTglJ21B1+qRzV64Nszm7dlq0w9jMw9Ijd3fqqOZnpajI1M3G9Y/4k7ZpHn
+	/GQF8OKmXzIc+hvQFJBV61cB4rg7Cua2B9KuWba1n2iH0bJVeQGYvmm5FWvcRZ+3XKL/
+	Wx6A==
+X-Gm-Message-State: ALoCoQm9h/fannQmwWrz5Mva3TQ5dokCaBve9R4Ol5fA66jyKu1Ce/AFjhWcNB2Uss80t1Tb8WCI
+X-Received: by 10.180.10.200 with SMTP id k8mr4559304wib.52.1437047534005;
+	Thu, 16 Jul 2015 04:52:14 -0700 (PDT)
+Received: from static.71.106.40.188.clients.your-server.de
+	(static.71.106.40.188.clients.your-server.de. [188.40.106.71])
+	by smtp.gmail.com with ESMTPSA id
+	ma15sm2745273wic.20.2015.07.16.04.52.12
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 16 Jul 2015 04:52:13 -0700 (PDT)
+From: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Jul 2015 13:51:40 +0200
+Message-Id: <1437047500-18689-1-git-send-email-zoltan.kuscsik@linaro.org>
 X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.26]
-Subject: [meta-oe][PATCH v2] openwsman: add new recipe
+Subject: [meta-browser][PATCH] chromium, cef: fetch chromium source from git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,134 +44,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2015 05:32:58 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Jul 2015 11:52:20 -0000
 
-Openwsman is an open source implementation of WS-Management; enabling the in-band management of Linux/uni*/Windows platforms.
-
-Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+Updated recipe to fetch Chromium from git.
+LASTCHANGE file is now created using the proper
+gclient hook.
 ---
- .../libssl-is-required-if-eventint-supported.patch | 17 ++++++
- .../openwsman/openwsman/openwsmand.service         | 12 ++++
- .../recipes-extended/openwsman/openwsman_2.6.0.bb  | 65 ++++++++++++++++++++++
- 3 files changed, 94 insertions(+)
- create mode 100644 meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
- create mode 100644 meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service
- create mode 100644 meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
+ .../cef3/01_get_svn_version_from_LASTCHANGE.patch  | 32 ----------
+ recipes-browser/chromium/cef3_280796.bb            | 73 +++++++++++++++-------
+ 2 files changed, 51 insertions(+), 54 deletions(-)
+ delete mode 100644 recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch b/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
-new file mode 100644
-index 0000000..bd540e3
---- /dev/null
-+++ b/meta-oe/recipes-extended/openwsman/openwsman/libssl-is-required-if-eventint-supported.patch
-@@ -0,0 +1,17 @@
-+libssl is required by wsman_client_transport if ENABLE_EVENTING_SUPPORT enabled.
+diff --git a/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch b/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
+deleted file mode 100644
+index 9b14429..0000000
+--- a/recipes-browser/chromium/cef3/01_get_svn_version_from_LASTCHANGE.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-Fetch the revision from LASTCHANGE file programmatically
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Zoltan Kuscsik <zoltan.kuscsik@linaro.org>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-
+-diff --git a/cef/tools/make_version_header.py b/cef/tools/make_version_header.py
+-index 84d49f5..395c2cf 100644
+---- a/cef/tools/make_version_header.py
+-+++ b/cef/tools/make_version_header.py
+-@@ -64,6 +64,8 @@ def write_svn_header(header, chrome_version, cef_version, cpp_header_dir):
+-       revision = svn.get_revision()
+-     elif git.is_checkout('.'):
+-       revision = git.get_svn_revision()
+-+    elif os.path.isfile("../build/util/LASTCHANGE"):
+-+      revision = open("../build/util/LASTCHANGE").read().split("=")[1].strip()
+-     else:
+-       raise Exception('Not a valid checkout')
+-
+-diff --git a/cef/tools/revision.py b/cef/tools/revision.py
+-index 1d94602..eb89e3b 100644
+---- a/cef/tools/revision.py
+-+++ b/cef/tools/revision.py
+-@@ -16,6 +16,8 @@ if os.path.exists(os.path.join('.', '.svn')):
+-   sys.stdout.write(svn.get_revision())
+- elif os.path.exists(os.path.join('.', '.git')):
+-   sys.stdout.write(git.get_svn_revision())
+-+elif os.path.isfile("../build/util/LASTCHANGE"):
+-+  revision = open("../build/util/LASTCHANGE").read().split("=")[1].strip()
+- else:
+-   raise Exception('Not a valid checkout')
+diff --git a/recipes-browser/chromium/cef3_280796.bb b/recipes-browser/chromium/cef3_280796.bb
+index 9a9efe5..398992d 100644
+--- a/recipes-browser/chromium/cef3_280796.bb
++++ b/recipes-browser/chromium/cef3_280796.bb
+@@ -7,21 +7,22 @@ RDEPENDS_${PN} += "pango cairo fontconfig pciutils pulseaudio freetype fontconfi
+ SRCREV_tools = "99bcb0e676eb396bcf8e1af3903aa4b578aeeee0"
+ SRCREV_cef = "bbad53dfca9f98dddcb31a590410fece0a4f0234"
+ SRCREV_egl = "a5b81b7617ba6757802b9b5f8c950034d5f961ec"
+-SRCREV_FORMAT = "cef_egl_tools"
++SRCREV_FORMAT = "cef_egl"
+ 
+-SRC_URI = "http://people.linaro.org/~zoltan.kuscsik/chromium-browser/chromium_rev_${PV}.tar.xz \
+-           git://github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=src/cef;branch=aura;name=cef \
+-           git://github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=src/ui/ozone/platform/egl;branch=master;name=egl \
+-           git://chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools \
+-           file://01_get_svn_version_from_LASTCHANGE.patch \
+-	   file://cef-simple \
+-	  "
+-SRC_URI[md5sum] = "9efbb50283b731042e62b9bd5e312b2f"
+-SRC_URI[sha256sum] = "f608e97dadf6ea4d885b24fd876896d46840fa39bf743ea2025075aee9fb348d"
++SRC_URI = "git://chromium.googlesource.com/chromium/tools/depot_tools.git;protocol=https;destsuffix=depot_tools;branch=master;name=tools \
++           git://github.com/kuscsik/chromiumembedded.git;protocol=https;destsuffix=${S}/src/cef;branch=aura;name=cef \
++           git://github.com/kuscsik/ozone-egl.git;protocol=https;destsuffix=${S}/src/ui/ozone/platform/egl;branch=master;name=egl\
++           file://cef-simple\
++  "
+ 
+-S = "${WORKDIR}/chromium_rev_${PV}"
++export CHROMIUM_SRC_GIT_URL="https://chromium.googlesource.com/chromium/src"
++export CHROMIUM_SRC_GIT_COMMIT="e800fe7470fa87dc1ca5b148a7c2c41f603fdcbd"
+ 
+-do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl SRCREV_tools"
++S = "${WORKDIR}/chromium_rev_${PV}/"
 +
-+Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++B = "${S}/src/"
 +
-+diff -Nurp openwsman-2.4.12.orig/src/lib/CMakeLists.txt openwsman-2.4.12/src/lib/CMakeLists.txt
-+--- openwsman-2.4.12.orig/src/lib/CMakeLists.txt	2014-10-28 23:04:47.000000000 +0800
-++++ openwsman-2.4.12/src/lib/CMakeLists.txt	2014-12-31 11:09:20.340428523 +0800
-+@@ -56,6 +56,9 @@ TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TR
-+ SET_TARGET_PROPERTIES( ${WSMAN_CLIENT_TRANSPORT_PKG} PROPERTIES VERSION 1.0.0 SOVERSION 1)
-+ INSTALL(TARGETS ${WSMAN_CLIENT_TRANSPORT_PKG} DESTINATION ${LIB_INSTALL_DIR})
-+ 
-++IF( ENABLE_EVENTING_SUPPORT )
-++TARGET_LINK_LIBRARIES( ${WSMAN_CLIENT_TRANSPORT_PKG} ${OPENSSL_LIBRARIES} )
-++ENDIF( ENABLE_EVENTING_SUPPORT )
-+ 
-+ ############### wsman_client ###############
-+ 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service b/meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service
-new file mode 100644
-index 0000000..154f3cd
---- /dev/null
-+++ b/meta-oe/recipes-extended/openwsman/openwsman/openwsmand.service
-@@ -0,0 +1,12 @@
-+[Unit]
-+Description=Openwsman WS-Management Service
-+After=syslog.target
++do_fetch[vardeps] += "SRCREV_FORMAT SRCREV_cef SRCREV_egl"
+ 
+ GYP_ARCH_DEFINES_armv7a = " target_arch=arm arm_float_abi=hard"
+ GYP_ARCH_DEFINES_i586 = " target_arch=ia32"
+@@ -30,22 +31,50 @@ export GYP_GENERATORS="ninja"
+ export BUILD_TARGET_ARCH="${TARGET_ARCH}"
+ export GYP_DEFINES="${GYP_ARCH_DEFINES} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+ 
++do_fetch_chromium_source_from_git() {
++		cd ${S}
++		export PATH=${WORKDIR}/depot_tools:"$PATH"
 +
-+[Service]
-+Type=forking
-+ExecStart=@SBINDIR@/openwsmand
-+ExecStartPre=@SYSCONFDIR@/openwsman/owsmangencert.sh
-+PIDFile=@LOCALSTATEDIR@/run/wsmand.pid
++		# Note: --deps-file needs to set to .DEPS.git for syncing to old
++		# chromium versions
++		gclient config ${CHROMIUM_SRC_GIT_URL} --deps-file=".DEPS.git"
 +
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
-new file mode 100644
-index 0000000..67cd618
---- /dev/null
-+++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.0.bb
-@@ -0,0 +1,65 @@
-+SUMMARY = "Opensource Implementation of WS-Management"
-+DESCRIPTION = "Openwsman is a project intended to provide an open-source \
-+implementation of the Web Services Management specipication \
-+(WS-Management) and to expose system management information on the \
-+Linux operating system using the WS-Management protocol. WS-Management \
-+is based on a suite of web services specifications and usage \
-+requirements that exposes a set of operations focused on and covers \
-+all system management aspects. \
-+Openwsman Server and service libraries"
-+HOMEPAGE = "http://www.openwsman.org/"
-+SECTION = "Applications/System"
++		# Runhooks is disabled. Running the hooks will trigger the
++		# gyp_chromium command replaced with cef_create_projects.sh by
++		# cef3.
 +
-+DEPENDS = "curl libxml2 openssl libpam"
++		gclient sync -f --nohooks --revision src@${CHROMIUM_SRC_GIT_COMMIT}
 +
-+SRC_URI = "https://github.com/Openwsman/openwsman/archive/v${PV}.tar.gz \
-+           file://libssl-is-required-if-eventint-supported.patch \
-+           file://openwsmand.service"
++		# We need the lastchange hook to generate the LASTCHANGE revision info
++		# file.
 +
-+SRC_URI[md5sum] = "824834a86040b98b03f3fc0f7f62e853"
-+SRC_URI[sha256sum] = "449b4972dc7700918f8f674047f0a1a9c19eeee3f4ce82f47890dddfa56e823f"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d4f53d4c6cf73b9d43186ce3be6dd0ba"
-+
-+inherit systemd cmake pkgconfig pythonnative perlnative
-+
-+SYSTEMD_SERVICE_${PN} = "openwsmand.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+LDFLAGS_append = "${@base_contains('DISTRO_FEATURES', 'ld-is-gold', " -fuse-ld=bfd ", '', d)}"
-+
-+EXTRA_OECMAKE = "-DBUILD_BINDINGS=NO \
-+                 -DBUILD_LIBCIM=NO \
-+                 -DBUILD_PERL=YES \
-+                 -DCMAKE_INSTALL_PREFIX=${prefix} \
-+                 -DLIB=lib \
-+                "
-+
-+do_configure_prepend() {
-+    export HOST_SYS=${HOST_SYS}
-+    export BUILD_SYS=${BUILD_SYS}
-+    export STAGING_INCDIR=${STAGING_INCDIR}
-+    export STAGING_LIBDIR=${STAGING_LIBDIR}
++		python src/build/util/lastchange.py -o src/build/util/LASTCHANGE
 +}
 +
-+do_install_append() {
-+    install -d ${D}/${sysconfdir}/init.d
-+    install -m 755 ${B}/etc/init/openwsmand.sh ${D}/${sysconfdir}/init.d/openwsmand
-+    ln -sf ${sysconfdir}/init.d/openwsmand ${D}/${sbindir}/rcopenwsmand
-+    chmod 755 ${D}/${sysconfdir}/openwsman/owsmangencert.sh
-+    if ${@base_contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}/${systemd_unitdir}/system
-+        install -m 644 ${WORKDIR}/openwsmand.service ${D}/${systemd_unitdir}/system
++addtask fetch_chromium_source_from_git after do_patch before do_configure
 +
-+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_unitdir}/system/openwsmand.service
-+    fi
-+}
+ do_configure_append() {
+-	export PATH=${WORKDIR}/depot_tools:"$PATH"
+-	# End of LD Workaround
+-	#-----------------------
+-	# Configure cef
+-	#------------------------
+-	cd cef
+-	./cef_create_projects.sh -I ${BUILD_TARGET_ARCH}_ozone.gypi --depth ../
+-	cd -
++		export PATH=${WORKDIR}/depot_tools:"$PATH"
++		# End of LD Workaround
++		#-----------------------
++		# Configure cef
++		#------------------------
++		cd ${S}/src/cef
 +
-+FILES_${PN}-dbg += "${libdir}/openwsman/plugins/.debug/ \
-+                    ${libdir}/openwsman/authenticators/.debug/ \
-+                   "
++		# Fatal linker warnings need to be disalbed to avoid linker issu
++		# with GCC 4.9:
++		# http://lists.openembedded.org/pipermail/openembedded-core/2014-August/095947.html
 +
-+INSANE_SKIP_${PN} = "dev-so"
++		./cef_create_projects.sh -I ${BUILD_TARGET_ARCH}_ozone.gypi --depth ../ -Ddisable_fatal_linker_warnings=
++		cd -
+ }
+ 
+ # Workaround to disable qa_configure
+ do_qa_configure() {
+-	echo "do_qa_configure"
++		echo "do_qa_configure"
+ }
+ 
+ do_compile() {
+-	ninja -C out/${CHROMIUM_BUILD_TYPE} cefsimple
++		cd ${S}/src
++		ninja -C out/${CHROMIUM_BUILD_TYPE} cefsimple
+ }
 -- 
-1.8.4.2
+1.9.1
 
 
