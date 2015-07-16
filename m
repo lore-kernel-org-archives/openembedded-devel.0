@@ -1,30 +1,30 @@
 Return-Path: <Joe_MacDonald@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 720EE6013D
+	by mail.openembedded.org (Postfix) with ESMTP id 8357873BB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2015 15:07:05 +0000 (UTC)
-Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
+	Thu, 16 Jul 2015 18:52:45 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
 	by relay1.mentorg.com with esmtp 
-	id 1ZFkkb-0000lt-Bt from Joe_MacDonald@mentor.com ;
-	Thu, 16 Jul 2015 08:07:05 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 16 Jul 2015 08:07:04 -0700
-Received: by burninator (Postfix, from userid 1000)	id 939E55835B3; Thu, 16
-	Jul 2015 11:06:39 -0400 (EDT)
-Date: Thu, 16 Jul 2015 11:06:39 -0400
+	id 1ZFoGz-0004ex-HN from Joe_MacDonald@mentor.com ;
+	Thu, 16 Jul 2015 11:52:45 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 16 Jul 2015 11:52:44 -0700
+Received: by burninator (Postfix, from userid 1000)	id EBA675835B3; Thu, 16
+	Jul 2015 14:52:19 -0400 (EDT)
+Date: Thu, 16 Jul 2015 14:52:19 -0400
 From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: <rongqing.li@windriver.com>
-Message-ID: <20150716150639.GC4432@mentor.com>
-References: <1436236099-31819-1-git-send-email-rongqing.li@windriver.com>
+To: Li xin <lixin.fnst@cn.fujitsu.com>
+Message-ID: <20150716185219.GD4432@mentor.com>
+References: <1435202618-1610-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <1436236099-31819-1-git-send-email-rongqing.li@windriver.com>
+In-Reply-To: <1435202618-1610-1-git-send-email-lixin.fnst@cn.fujitsu.com>
 X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
 X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
 X-Editor: Vim-704 http://www.vim.org
 User-Agent: Mutt/1.5.23 (2014-03-12)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-networking] ntp: get parameters from dhcp
+Subject: Re: [meta-networking][PATCH] opensaf: Fix warning and add systemd service files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,168 +38,237 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2015 15:07:07 -0000
-X-Groupsio-MsgNum: 56266
+X-List-Received-Date: Thu, 16 Jul 2015 18:52:48 -0000
+X-Groupsio-MsgNum: 56267
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="t0UkRYy7tHLRMCai"
+	protocol="application/pgp-signature"; boundary="sXc4Kmr5FA7axrvy"
 Content-Disposition: inline
 
---t0UkRYy7tHLRMCai
+--sXc4Kmr5FA7axrvy
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-[[oe] [PATCH][meta-networking] ntp: get parameters from dhcp] On 15.07.07 (=
-Tue 10:28) rongqing.li@windriver.com wrote:
-
-> From: Li Wang <li.wang@windriver.com>
->=20
-> the script ntp.sh is called by dhcp client,
-> it can get some parameters from dhcp.
->=20
-> Signed-off-by: Li Wang <li.wang@windriver.com>
-> Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> ---
->  meta-networking/recipes-support/ntp/files/ntp.sh   | 59 ++++++++++++++++=
-++++++
->  meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb |  5 ++
->  2 files changed, 64 insertions(+)
->  create mode 100755 meta-networking/recipes-support/ntp/files/ntp.sh
->=20
-> diff --git a/meta-networking/recipes-support/ntp/files/ntp.sh b/meta-netw=
-orking/recipes-support/ntp/files/ntp.sh
-> new file mode 100755
-> index 0000000..fc109b5
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ntp/files/ntp.sh
-> @@ -0,0 +1,59 @@
-> +#!/bin/bash
-
-As with the other one, I couldn't find any bashisms in this, so if
-we're going to have our own and not harvest it from the package, maybe
-change this to /bin/sh.
-
-> +#
-> +# ntp.sh: dhclient-script plugin for NTP settings,
-> +#         place in /etc/dhcp/dhclient.d and 'chmod +x ntp.sh' to enable
-> +#
-> +# Copyright (C) 2008 Red Hat, Inc.
-> +#
-> +# This program is free software; you can redistribute it and/or modify
-> +# it under the terms of the GNU General Public License as published by
-> +# the Free Software Foundation; either version 2 of the License, or
-> +# (at your option) any later version.
-> +#
-> +# This program is distributed in the hope that it will be useful,
-> +# but WITHOUT ANY WARRANTY; without even the implied warranty of
-> +# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> +# GNU General Public License for more details.
-> +#
-> +# You should have received a copy of the GNU General Public License
-> +# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-> +#
-> +# Author(s): David Cantrell <dcantrell@redhat.com>
-> +#            Miroslav Lichvar <mlichvar@redhat.com>
-> +#
-> +
-> +CONF=3D/etc/ntp.conf
-> +SAVECONF=3D${SAVEDIR}/${CONF##*/}.predhclient.${interface}
-> +
-> +ntp_replace_conf() {
-> +        echo "$1" | diff -q ${CONF} - > /dev/null 2>&1
-> +        if [ $? -eq 1 ]; then
-> +            echo "$1" > ${CONF}
-> +#            restorecon ${CONF} >/dev/null 2>&1
-
-Please do something about this, too.
+All but the openhpi dependency seems to be good on this, so I merged a
+modified version of the patch that dropped the AIS/HPI dependency.  I'm
+putting together a quick patch now that would bring that back in as an
+option and disabled by default, as Martin suggested.
 
 -J.
 
-> +            service ntpd restart >/dev/null 2>&1
-> +        fi
-> +}
+[[oe] [meta-networking][PATCH] opensaf: Fix warning and add systemd service=
+ files.] On 15.06.25 (Thu 11:23) Li xin wrote:
+
+> 1) WARNING: The recipe opensaf is trying to install files into a
+> shared area when those files already exist,so set
+> --libdir=3D${libdir}/opensaf
+>=20
+> 2) Add systemd service file plmcboot.service and plmcd.service.
+>=20
+> 3) opensaf depends on openhpi,so add it.
+>=20
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> ---
+>  .../opensaf/opensaf/0001-plmcd-error-fix.patch     | 43 ++++++++++++++++=
+++++++
+>  .../opensaf/opensaf/plmcboot.service               | 13 +++++++
+>  .../recipes-daemons/opensaf/opensaf/plmcd.service  | 15 ++++++++
+>  .../recipes-daemons/opensaf/opensaf_4.5.0.bb       | 29 +++++++++++++--
+>  4 files changed, 97 insertions(+), 3 deletions(-)
+>  create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-=
+plmcd-error-fix.patch
+>  create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcb=
+oot.service
+>  create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/plmcd=
+=2Eservice
+>=20
+> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-plmcd-e=
+rror-fix.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-plmcd=
+-error-fix.patch
+> new file mode 100644
+> index 0000000..624cd2d
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-plmcd-error-fi=
+x.patch
+> @@ -0,0 +1,43 @@
+> +From f1813af4c154fb1d3950abbdf678c3a5a67222fc Mon Sep 17 00:00:00 2001
+> +From: Li xin <lixin.fnst@cn.fujitsu.com>
+> +Date: Thu, 25 Jun 2015 11:44:27 +0900
+> +Subject: [PATCH] plmcd: error fix
 > +
-> +ntp_config() {
-> +    if [ ! "${PEERNTP}" =3D "no" ] && [ -n "${new_ntp_servers}" ] &&
-> +        [ -e ${CONF} ] && [ -d ${SAVEDIR} ]; then
-> +        local conf=3D$(grep -v '^server .*  # added by /sbin/dhclient-sc=
-ript$' < ${CONF})
+> +ld: cannot find -lsystemd-daemon
+> +collect2: error: ld returned 1 exit status
 > +
-> +        conf=3D$(echo "$conf"
-> +            for s in ${new_ntp_servers}; do
-> +                echo "server ${s} ${NTPSERVERARGS}  # added by /sbin/dhc=
-lient-script"
-> +            done)
+> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> +---
+> + contrib/plmc/plmcd/Makefile.am | 2 +-
+> + contrib/plmc/plmcd/Makefile.in | 2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
 > +
-> +        [ -f ${SAVECONF} ] || touch ${SAVECONF}
-> +        ntp_replace_conf "$conf"
-> +    fi
-> +}
+> +diff --git a/contrib/plmc/plmcd/Makefile.am b/contrib/plmc/plmcd/Makefil=
+e.am
+> +index 8d847f2..dd7913a 100644
+> +--- a/contrib/plmc/plmcd/Makefile.am
+> ++++ b/contrib/plmc/plmcd/Makefile.am
+> +@@ -32,7 +32,7 @@ plmcd_SOURCES =3D \
+> + plmcd_LDFLAGS =3D -lpthread
+> +=20
+> + if ENABLE_SYSTEMD
+> +-plmcd_LDFLAGS +=3D -lsystemd-daemon
+> ++plmcd_LDFLAGS +=3D -lsystemd
+> + endif
+> +=20
+> + plmcd_LDADD =3D \
+> +diff --git a/contrib/plmc/plmcd/Makefile.in b/contrib/plmc/plmcd/Makefil=
+e.in
+> +index 0185dc4..e40513a 100644
+> +--- a/contrib/plmc/plmcd/Makefile.in
+> ++++ b/contrib/plmc/plmcd/Makefile.in
+> +@@ -106,7 +106,7 @@ build_triplet =3D @build@
+> + host_triplet =3D @host@
+> + target_triplet =3D @target@
+> + sbin_PROGRAMS =3D plmcd$(EXEEXT)
+> +-@ENABLE_SYSTEMD_TRUE@am__append_1 =3D -lsystemd-daemon
+> ++@ENABLE_SYSTEMD_TRUE@am__append_1 =3D -lsystemd
+> + subdir =3D plmcd
+> + ACLOCAL_M4 =3D $(top_srcdir)/aclocal.m4
+> + am__aclocal_m4_deps =3D $(top_srcdir)/configure.ac
+> +--=20
+> +1.8.4.2
 > +
-> +ntp_restore() {
-> +    if [ -e ${CONF} ] && [ -f ${SAVECONF} ]; then
-> +        local conf=3D$(grep -v '^server .*  # added by /sbin/dhclient-sc=
-ript$' < ${CONF})
+> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.ser=
+vice b/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
+> new file mode 100644
+> index 0000000..76ec73a
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/opensaf/opensaf/plmcboot.service
+> @@ -0,0 +1,13 @@
+> +[Unit]
+> +Description=3DPLMCBOOT Program
+> +After=3Dnetwork.target
+> +ConditionPathExists=3D@SYSCONFDIR@/plmcd.conf
 > +
-> +        ntp_replace_conf "$conf"
-> +        rm -f ${SAVECONF}
-> +    fi
-> +}
-> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb b/meta-ne=
-tworking/recipes-support/ntp/ntp_4.2.8p2.bb
-> index c54da43..b963584 100644
-> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p2.bb
-> @@ -21,6 +21,7 @@ SRC_URI =3D "http://www.eecis.udel.edu/~ntp/ntp_spool/n=
-tp4/ntp-4.2/ntp-${PV}.tar.g
->             file://sntp.service \
->             file://sntp \
->             file://ntpd.list \
-> +           file://ntp.sh \
->  "
+> +[Service]
+> +Type=3Doneshot
+> +ExecStart=3D@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -s
+> +ExecStop=3D@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf -x
+> +RemainAfterExit=3Dyes
+> +
+> +[Install]
+> +WantedBy=3Dmulti-user.target
+> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.servic=
+e b/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
+> new file mode 100644
+> index 0000000..1d48e77
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/opensaf/opensaf/plmcd.service
+> @@ -0,0 +1,15 @@
+> +[Unit]
+> +Description=3DPlmcd Daemon
+> +Requires=3Dplmcboot.service
+> +After=3Dnetwork.target plmcboot.service
+> +ConditionPathExists=3D@SYSCONFDIR@/plmcd.conf
+> +
+> +[Service]
+> +Type=3Dforking
+> +ExecStart=3D@SBINDIR@/plmcd -c @SYSCONFDIR@/plmcd.conf
+> +ExecStartPost=3D/bin/touch /var/lock/subsys/plmcd
+> +ExecStopPost=3D/bin/rm -rf /var/lock/subsys/plmcd
+> +PIDFile=3D/var/run/plmcd.pid
+> +
+> +[Install]
+> +WantedBy=3Dmulti-user.target
+> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/m=
+eta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+> index 5895b46..0c236f0 100644
+> --- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+> +++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+> @@ -14,7 +14,11 @@ HOMEPAGE =3D "http://www.opensaf.org"
+>  inherit autotools useradd systemd pkgconfig
 > =20
->  SRC_URI[md5sum] =3D "fa37049383316322d060ec9061ac23a9"
-> @@ -93,6 +94,9 @@ do_install_append() {
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+> -           file://install-samples-from-srcdir.patch"
+> +           file://install-samples-from-srcdir.patch \
+> +           file://plmcd.service \
+> +           file://plmcboot.service \
+> +           file://0001-plmcd-error-fix.patch \
+> +           "
 > =20
->      install -d ${D}${systemd_unitdir}/ntp-units.d
->      install -m 0644 ${WORKDIR}/ntpd.list ${D}${systemd_unitdir}/ntp-unit=
-s.d/60-ntpd.list
+>  SRC_URI[md5sum] =3D "534c0a99438a62c4c8dda56cfa67300c"
+>  SRC_URI[sha256sum] =3D "2f5ba57fe67e94099c0df82d0a0dd207b5c583c93030035b=
+a354c97b5471b590"
+> @@ -23,17 +27,32 @@ SECTION =3D "admin"
+>  LICENSE =3D "LGPLv2.1"
+>  LIC_FILES_CHKSUM =3D "file://COPYING.LIB;md5=3Da916467b91076e631dd8edb74=
+24769c7"
+> =20
+> -DEPENDS =3D "libxml2 python"
+> +DEPENDS =3D "libxml2 python openhpi"
+> =20
+>  USERADD_PACKAGES =3D "${PN}"
+>  GROUPADD_PARAM_${PN} =3D "-f -r opensaf"
+>  USERADD_PARAM_${PN} =3D  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbin=
+dir}/nologin -c \"OpenSAF\" opensaf"
+> =20
+> -SYSTEMD_SERVICE_${PN} +=3D "opensafd.service"
+> +SYSTEMD_SERVICE_${PN} +=3D "opensafd.service plmcboot.service plmcd.serv=
+ice"
+>  SYSTEMD_AUTO_ENABLE =3D "disable"
+> =20
+> +PACKAGECONFIG[systemd] =3D "--enable-systemd-daemon"
 > +
-> +    install -d ${D}/${sysconfdir}/dhcp/dhclient.d
-> +    install -m 755 ${WORKDIR}/ntp.sh ${D}/${sysconfdir}/dhcp/dhclient.d/
+> +do_configure_prepend () {
+> +        ( cd ${S}; autoreconf -f -i -s )
+> +}
+> +
+> +EXTRA_OECONF +=3D ' --with-hpi-interface=3DB03 \
+> +                  --libdir=3D${libdir}/opensaf \
+> +                  --enable-ais-plm '
+> +EXTRA_OEMAKE +=3D " -Wl,-rpath,${libdir}/opensaf "
+> +
+> +PKGLIBDIR=3D"${libdir}/opensaf/opensaf"
+> +
+>  FILES_${PN} +=3D "${localstatedir}/run"
+> =20
+> +FILES_${PN}-staticdev +=3D "${PKGLIBDIR}/*.a"
+> +
+>  RDEPENDS_${PN} +=3D "bash python"
+> =20
+>  INSANE_SKIP_${PN} =3D "dev-so"
+> @@ -45,4 +64,8 @@ do_install_append() {
+>      install -d ${D}${systemd_unitdir}/system
+>      install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensaf=
+d.service \
+>          ${D}${systemd_unitdir}/system
+> +    install -m 644 ${WORKDIR}/plmc*.service ${D}/${systemd_unitdir}/syst=
+em
+> +    sed -i -e 's#@SYSCONFDIR@#${sysconfdir}#g' ${D}${systemd_unitdir}/sy=
+stem/plmc*.service
+> +    sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/p=
+lmc*.service
+> +
 >  }
-> =20
->  PACKAGES +=3D "ntpdate sntp ${PN}-tickadj ${PN}-utils"
-> @@ -124,6 +128,7 @@ RSUGGESTS_${PN} =3D "iana-etc"
->  FILES_${PN} =3D "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/in=
-it.d/ntpd ${libdir} \
->      ${NTP_USER_HOME} \
->      ${systemd_unitdir}/ntp-units.d/60-ntpd.list \
-> +    ${sysconfdir}/dhcp/dhclient.d/ntp.sh \
->  "
->  FILES_${PN}-tickadj =3D "${sbindir}/tickadj"
->  FILES_${PN}-utils =3D "${sbindir} ${datadir}/ntp/lib"
 > --=20
-> 1.9.1
+> 1.8.4.2
 >=20
 --=20
 -Joe MacDonald.
 :wq
 
---t0UkRYy7tHLRMCai
+--sXc4Kmr5FA7axrvy
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQEcBAEBAgAGBQJVp8h/AAoJEEn8ffcsOfaWRgUIAIzh7z2HwHOZxGYq/0qmt+5H
-9rpV6XuoL0JQT8kAI04iqX2dGJDEyrI8vOs3LXXWKmG7BrMVc66jnuuiKs1LFz83
-E0xCcN56f2YddmIjbzJHFWqDMv0m8kJGM8AbLhTZGzVfBzuSpEpqmMhyN7kHkQDm
-BcGHHJFAXrutLsFswQhea8x09qDZuzc7sLkL9KJCBdgKdOExiXJggr6mp/1nl3sh
-M33ZgZ73A21Dq47RXtvYh/3YE0pyUr65kh+LSqawk3lbm+T/y1uYNKZv1GLK60Cq
-79pKSFjh2UHj9bNWhr+RLD7CVr4GDCVg2fxfBj/dNplCsZGunIoRYYi6wCsJtk8=
-=y6Da
+iQEcBAEBAgAGBQJVp/1jAAoJEEn8ffcsOfaWy9gIAMABOdVv7KHPZlgOsnQ4Awrh
+ZjiGbb7ZLvCLDgPJcTXHzVI8a62KhcqdCFW5/PgTHgAnSczlN5RNKB6J1toi+q7O
+7CFzcJHkKFRvDak9PfJN7C+BClc6io5i9A44RK+j+ICJc1yzlUwq7N0IC8rjX4UE
+Uu0zt601FoCWYRJ73zoBGIx6R1SJgkMXPSrcVQlLfwC1d4grj/czoW0bsdiIpH7L
+s8hVyuGcTs2HzXyFsbOlVJgc9oGjKNhLFZ6jSZihKD1hFRvTYUjXuiSmq11Js5bC
+MmSmJGpf9kRWkb34CZsqSIW0ZboerdDBpZTTyzQ93w5/QO/hTEfTcfqRCBTmrp8=
+=3BiZ
 -----END PGP SIGNATURE-----
 
---t0UkRYy7tHLRMCai--
+--sXc4Kmr5FA7axrvy--
