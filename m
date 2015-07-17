@@ -1,39 +1,33 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
-	[209.85.192.49])
-	by mail.openembedded.org (Postfix) with ESMTP id A2221607A5
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
+	[209.85.218.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E5C9673E3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2015 21:36:50 +0000 (UTC)
-Received: by qgy5 with SMTP id 5so39164298qgy.3
+	Fri, 17 Jul 2015 00:46:32 +0000 (UTC)
+Received: by oiho132 with SMTP id o132so3927412oih.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2015 14:36:50 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=from:to:cc:subject:date:message-id:organization;
-	bh=dOnXUANI3Xsw0vNE12O8VBqDT05xyjp55wKgfWAPNBo=;
-	b=Qv9NWjn8o1NeYZrWwue+FXHA980pzx/ynX2ZpqXHhWZXfyPrKKOQWHNmcYNncvTOMd
-	ofhGN6UWaLG7M/ZRhDSM5LTbDgpmXMtxGsKNT+BVs/T6Lw+hT+NR8GsO9didpm21mawi
-	d42RtcuIvzzNcDEQzv/tJI3VgpoZBsjkDWx/hbD87YM+cOLRd22h6aRwmYD0ORrvJgIK
-	yVJUnftc3jpxs5Ui4hWHUF5Hf6nobWsz226mL757kpxf8chFpYGbYHcFYYWY5kMraZEm
-	GAMGOZXsQvJMo1U5LpcW+jl1WQ31XsIy2OrnnV61h2zzHxRD866ZtejMnqju2gP9ng7v
-	z2cQ==
-X-Received: by 10.140.145.207 with SMTP id 198mr14715886qhr.45.1437082610737; 
-	Thu, 16 Jul 2015 14:36:50 -0700 (PDT)
-Received: from localhost ([179.105.243.19]) by smtp.gmail.com with ESMTPSA id
-	n107sm4745106qgn.13.2015.07.16.14.36.47
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 16 Jul 2015 14:36:49 -0700 (PDT)
-Received: by localhost (sSMTP sendmail emulation);
-	Thu, 16 Jul 2015 18:36:45 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Jul 2015 18:36:42 -0300
-Message-Id: <1437082602-14375-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.4.6
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] opencv: Only enable 'libav' support if commercial license is whitelisted
+	Thu, 16 Jul 2015 17:46:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=kfJ8hURgyxGXgtoIFyyyc6/hkNbKuT3bp3Np+GeW7/E=;
+	b=znOxizrHY+QsnNHLOjw05ji2vFLgceStGq8bXa/KQOZMMI6tvV2Gi2y1WWrsK5NJAS
+	7FK8Su9O9KeZKPlUzRYIr2CvWPcimbH/KljUeTo9RXj5NfmnmIkywnC/5gNNRJS7scv9
+	jqD5PhPIWgncBRuThArRJ/eKMqeAl/hAljmlfIuIyIsTNgatWag1O3sKpLHdYKimhLTL
+	+25ROlVDa6uVuvnYog65MNx+JqJDkIegkE/LXKzK4m4q/1L9JXRswbJQ9O3MPHq4botX
+	Co5FM/m8Ht2TGXuri1vKHfpQ1mCw8mbd928fVon7VaRJNbjRU+s0GJqicKhxUoIOmePs
+	WApg==
+MIME-Version: 1.0
+X-Received: by 10.202.4.7 with SMTP id 7mr10821418oie.93.1437093992938; Thu,
+	16 Jul 2015 17:46:32 -0700 (PDT)
+Received: by 10.202.64.130 with HTTP; Thu, 16 Jul 2015 17:46:32 -0700 (PDT)
+In-Reply-To: <1437050752-12663-1-git-send-email-dominic.sacre@gmx.de>
+References: <1437050752-12663-1-git-send-email-dominic.sacre@gmx.de>
+Date: Thu, 16 Jul 2015 17:46:32 -0700
+Message-ID: <CAJ86T=XoRKBHyH0HmDv9thHr8qSievRt-WwT=qddsUkuyg5qpA@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] fio: Add PACKAGECONFIG for numa, re-enable ARM build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,34 +41,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jul 2015 21:36:51 -0000
+X-List-Received-Date: Fri, 17 Jul 2015 00:46:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The libav support requires the commercial license to be
-whitelist. This makes opencv to work in non-commercial setups without
-needing to change the PACKAGECONFIG settings manually.
+Hi Dominic,
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/opencv/opencv_2.4.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+On Thu, Jul 16, 2015 at 5:45 AM, Dominic Sacr=C3=A9 <dominic.sacre@gmx.de> =
+wrote:
+> Make fio's NUMA support optional via PACKAGECONFIG.
+> Enable this feature by default, except on ARM where libnuma/numactl
+> is not available.
+>
+> Signed-off-by: Dominic Sacr=C3=A9 <dominic.sacre@gmx.de>
+> ---
+>  meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes=
+-benchmark/fio/fio_2.2.6.bb
+> index 82f9cd4..1255441 100644
+> --- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+> +++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+> @@ -10,10 +10,13 @@ SECTION =3D "console/tests"
+>  LICENSE =3D "GPLv2"
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D393a5ca445f6965873eca0259a17f=
+833"
+>
+> -DEPENDS =3D "libaio zlib numactl"
+> +DEPENDS =3D "libaio zlib"
+> +
+> +PACKAGECONFIG ??=3D "numa"
+> +PACKAGECONFIG[numa] =3D ",--disable-numa,numactl"
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index 2754616..f8946f4 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -30,8 +30,9 @@ EXTRA_OECMAKE = "-DPYTHON_NUMPY_INCLUDE_DIR:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}
-                  ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
- "
- 
--PACKAGECONFIG ??= "eigen jpeg libav png tiff v4l \
--                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)}"
-+PACKAGECONFIG ??= "eigen jpeg png tiff v4l \
-+                   ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
-+                   ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
- PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
- PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+,"
- PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
--- 
-2.4.6
+I don't think this change will work.
 
+The fio recipe doesn't use autotools, so the --disable-numa option set
+via PACKAGECONFIG isn't going to have any effect unless you also
+manually pass EXTRA_OECONF into the build somehow.
+
+>  # ARM does not currently support NUMA
+> -COMPATIBLE_HOST =3D "^((?!arm).*)$"
+> +PACKAGECONFIG_remove_arm =3D "numa"
+
+In general, it would be better to use something like:
+
+  PACKAGECONFIG_NUMA =3D "numa"
+  PACKAGECONFIG_NUMA_arm =3D ""
+
+  PACKAGECONFIG ??=3D "${PACKAGECONFIG_NUMA}"
+
+_remove can be a little difficult to 'over-ride', so makes things
+harder if someone did, one day, want to experiment with enabling that
+option from local.conf or a .bbappend.
+
+>  # rev for v2.2.6
+>  SRCREV =3D "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
+> --
+> 2.4.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
