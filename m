@@ -1,39 +1,31 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A84865CBD
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 3997565CBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 12:04:45 +0000 (UTC)
-Received: by qkdv3 with SMTP id v3so68038664qkd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 05:04:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=from:to:cc:subject:date:message-id:organization;
-	bh=m9hkxvOnyjRmq62y3EaeJ7oBMRxmzdAb30MVXg8EuaA=;
-	b=M6oHEWihLxEN8vjUjQE82JQ6BxeKvsgITlG4fqSWmzygG6za5pSEDU44u5mWeN2x4T
-	KNsMSY80dA3F88yP0k3q3nBlbDkDboMcyMlRnmaNBiilsBoMIpiB7lI8NtADiPL0TbEU
-	vSh3a9D9UUpnWNE9VDnNXBHhhPOgey/m8eTSemp9LE4oC+KhUCC4k3Wy8SsmQuy5bBxf
-	eIzb9n5pom64FUT4ruwSsw+2ZaQo4Ax1E49QqsOS/lcKypijhqPBQPT/riy1RrjBT9jn
-	L12tcz8Bbzjc3YEEdE0DJI5KTqW3EtHvOkCADWUtRnObQEPV8ox9+jc+hRf6I9wvcqZE
-	jK0Q==
-X-Received: by 10.55.43.95 with SMTP id r92mr24331020qkh.67.1437134685401;
-	Fri, 17 Jul 2015 05:04:45 -0700 (PDT)
-Received: from localhost ([179.105.243.19])
-	by smtp.gmail.com with ESMTPSA id p15sm679064qkh.10.2015.07.17.05.04.41
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 17 Jul 2015 05:04:44 -0700 (PDT)
-Received: by localhost (sSMTP sendmail emulation);
-	Fri, 17 Jul 2015 09:04:38 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Jul 2015 09:04:37 -0300
-Message-Id: <1437134677-27263-1-git-send-email-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.4.6
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-oe][PATCH] opencv: The 'v4l' PACKAGECONFIG should disable libv4l as well
+	Fri, 17 Jul 2015 14:15:53 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1ZG6Qa-0002nd-JO from Joe_MacDonald@mentor.com ;
+	Fri, 17 Jul 2015 07:15:52 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 17 Jul 2015 07:15:52 -0700
+Received: by burninator (Postfix, from userid 1000)	id 932CB580AB6; Fri, 17
+	Jul 2015 10:15:26 -0400 (EDT)
+Date: Fri, 17 Jul 2015 10:15:26 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Li xin <lixin.fnst@cn.fujitsu.com>
+Message-ID: <20150717141526.GA3901@mentor.com>
+References: <20150716185219.GD4432@mentor.com>
+	<1437101120-1624-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+MIME-Version: 1.0
+In-Reply-To: <1437101120-1624-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] opensaf: Add PACKAGECONFIG for openhpi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,30 +39,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jul 2015 12:04:47 -0000
+X-List-Received-Date: Fri, 17 Jul 2015 14:15:57 -0000
+X-Groupsio-MsgNum: 56283
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="VbJkn9YxBvnuCH5J"
+Content-Disposition: inline
 
-When disabling the Video 4 Linux support, the libv4l should be
-disabled as well.
+--VbJkn9YxBvnuCH5J
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- meta-oe/recipes-support/opencv/opencv_2.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi Li,
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-index f8946f4..3ef49da 100644
---- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
-@@ -39,7 +39,7 @@ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
- PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
- PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
- PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
--PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
-+PACKAGECONFIG[v4l] = "-DWITH_V4L=ON -DWITH_LIBV4L=ON,-DWITH_V4L=OFF -DWITH_LIBV4L=OFF,v4l-utils,"
- PACKAGECONFIG[jasper] = "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
- 
- inherit distutils-base pkgconfig cmake
--- 
-2.4.6
+[[oe] [meta-networking][PATCH] opensaf: Add PACKAGECONFIG for openhpi] On 1=
+5.07.17 (Fri 10:45) Li xin wrote:
 
+> opensaf support for the HPI, So provide a PACKAGECONFIG option for openhpi
+>=20
+> Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+> ---
+>  meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/m=
+eta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+> index 3d0175e..6ad8a3d 100644
+> --- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+> +++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
+> @@ -36,6 +36,8 @@ USERADD_PARAM_${PN} =3D  "-r -g opensaf -d ${datadir}/o=
+pensaf/ -s ${sbindir}/nolog
+>  SYSTEMD_SERVICE_${PN} +=3D "opensafd.service plmcboot.service plmcd.serv=
+ice"
+>  SYSTEMD_AUTO_ENABLE =3D "disable"
+> =20
+> +PACKAGECONFIG ??=3D "${@base_contains('DISTRO_FEATURES', 'openhpi', 'ope=
+nhpi', '', d)}"
 
+AFAIK this won't actually add openhpi to DEPENDS properly unless you are
+explicitly defining a DISTRO_FEATURE for it.  But it will cause a bunch
+of stuff to be rebuilt since PACKAGECONFIG is getting updated and
+signatures will be invalidated.  Not a big deal, but still not quite
+what you're hoping to accomplish, I think.
+
+I was just testing a few other things on my current patch queue and have
+a patch for this already, so I'm going to drop this patch for now.
+
+Just for future reference, too, @base_contains is on the way out, you
+should use @bb.utils.contains instead.
+
+-J.
+
+> +PACKAGECONFIG[openhpi] =3D "--with-hpi-interface=3DB03 --enable-ais-plm,=
+,openhpi"
+>  PACKAGECONFIG[systemd] =3D "--enable-systemd-daemon"
+> =20
+>  do_configure_prepend () {
+> --=20
+> 1.8.4.2
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--VbJkn9YxBvnuCH5J
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJVqQ3zAAoJEEn8ffcsOfaWVdAH/2l8xghm3pgckVmjLLlZsaq8
+ARZjQ0yz3BT3h1bCkfyqs4Zhb/ABVDnr9VyeS7tMburD7Ovk2WfmnzqGjCDcFA16
+QB559QkNrqElFma38hUd8VfVonVJUVoBkcQ76/nBvP8wmc0nj7jEEj+fPDJOqyI4
+1kej+ohKmiKs5kQjVxzSoz549tPsO+d1w2QQ3ibJL0htPdzbremLb/oPH3vnm8Cm
+DfdFndo0geckCLVV6Uf7Rs3g6ljKSYxVfjCzF9qe4DRpVPVJ8EpG3eioMWCSY7tv
+mRtM9aEBFVeR9vyqy5RUb5uO04pOlpu7stIIyityWO3356kVCxPURUyXY9XgE0w=
+=dToO
+-----END PGP SIGNATURE-----
+
+--VbJkn9YxBvnuCH5J--
