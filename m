@@ -1,27 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A49AA75FB5
+	by mail.openembedded.org (Postfix) with ESMTP id E383775FB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 03:11:40 +0000 (UTC)
+	Fri, 17 Jul 2015 03:11:42 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6H3Besa020241
+	by mail.windriver.com (8.15.1/8.15.1) with ESMTPS id t6H3BhuX020248
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jul 2015 20:11:40 -0700 (PDT)
+	Thu, 16 Jul 2015 20:11:43 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.235.1; Thu, 16 Jul 2015 20:11:40 -0700
+	(TLS) id 14.3.235.1; Thu, 16 Jul 2015 20:11:42 -0700
 From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Jul 2015 11:10:00 +0800
-Message-ID: <1437102603-25983-2-git-send-email-kai.kang@windriver.com>
+Date: Fri, 17 Jul 2015 11:10:02 +0800
+Message-ID: <1437102603-25983-4-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1437102603-25983-1-git-send-email-kai.kang@windriver.com>
 References: <1437102603-25983-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.152]
-Subject: [PATCH 1/4] crash: upgrade from 7.0.9 to 7.1.2
+Subject: [PATCH 3/4] lvm2: upgrade from 2.02.97 to 2.02.125
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,335 +35,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jul 2015 03:11:42 -0000
+X-List-Received-Date: Fri, 17 Jul 2015 03:11:43 -0000
 Content-Type: text/plain
+
+Upgrade lvm2 to 2.02.125:
+
+* drop 3 backported patches
+* remove PR and INC_PR
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../0001-cross_add_configure_option.patch          | 34 ------------
- .../7001force_define_architecture.patch            | 13 -----
- .../crash/crash-7.0.9/7003cross_ranlib.patch       | 10 ----
- .../crash/crash-7.0.9/config-site.crash-7.0.9      |  1 -
- .../crash/0001-cross_add_configure_option.patch    | 34 ++++++++++++
- .../crash/7001force_define_architecture.patch      | 13 +++++
- .../crash/crash/7003cross_ranlib.patch             | 10 ++++
- .../crash/crash/config-site.crash-7.0.9            |  1 +
- meta-oe/recipes-kernel/crash/crash_7.0.9.bb        | 63 ----------------------
- meta-oe/recipes-kernel/crash/crash_7.1.2.bb        | 63 ++++++++++++++++++++++
- 10 files changed, 121 insertions(+), 121 deletions(-)
- delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/0001-cross_add_configure_option.patch
- delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/7001force_define_architecture.patch
- delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/7003cross_ranlib.patch
- delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/config-site.crash-7.0.9
- create mode 100644 meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
- create mode 100644 meta-oe/recipes-kernel/crash/crash/7001force_define_architecture.patch
- create mode 100644 meta-oe/recipes-kernel/crash/crash/7003cross_ranlib.patch
- create mode 100644 meta-oe/recipes-kernel/crash/crash/config-site.crash-7.0.9
- delete mode 100644 meta-oe/recipes-kernel/crash/crash_7.0.9.bb
- create mode 100644 meta-oe/recipes-kernel/crash/crash_7.1.2.bb
+ meta-oe/recipes-support/lvm2/lvm2.inc              |  6 +---
+ ...ace-CPPFunction-with-rl_completion_func_t.patch | 33 ----------------------
+ .../lvm2/0001-snapshot-check-snapshot-exists.patch | 29 -------------------
+ .../lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch  | 31 --------------------
+ meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb      |  4 +++
+ meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb       |  6 ----
+ 6 files changed, 5 insertions(+), 104 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-snapshot-check-snapshot-exists.patch
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch
+ create mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
 
-diff --git a/meta-oe/recipes-kernel/crash/crash-7.0.9/0001-cross_add_configure_option.patch b/meta-oe/recipes-kernel/crash/crash-7.0.9/0001-cross_add_configure_option.patch
-deleted file mode 100644
-index 229647f..0000000
---- a/meta-oe/recipes-kernel/crash/crash-7.0.9/0001-cross_add_configure_option.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From cbaaa42933bb27b1bcff4c7d71d54c913201ee88 Mon Sep 17 00:00:00 2001
--From: Lei Maohui <leimaohui@cn.fujitsu.com>
--Date: Fri, 9 Jan 2015 11:51:18 +0900
--Subject: [PATCH] cross_add_configure_option
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 34fec99..f518884 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -4,15 +4,11 @@ DEPENDS = "udev"
+ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                     file://COPYING.LIB;md5=fbc093901857fcd118f065f900982c24"
+-INC_PR = "r4"
 -
+ 
+ S = "${WORKDIR}/LVM2.${PV}"
+ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
+-           file://0001-Replace-CPPFunction-with-rl_completion_func_t.patch \
+-           file://mlock-ignore-vectors-gate_vma.patch \
+            file://lvm.conf \
+-           file://0001-snapshot-check-snapshot-exists.patch"
++          "
+ 
+ PACKAGECONFIG ??= "readline"
+ PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
+deleted file mode 100644
+index 98c21fd..0000000
+--- a/meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From e2484e179c389b98366c8b66b451d9d2ba8f35e8 Mon Sep 17 00:00:00 2001
+-From: Zhenhua Luo <zhenhua.luo@freescale.com>
+-Date: Tue, 25 Mar 2014 17:39:43 +0800
+-Subject: [PATCH] Replace CPPFunction with rl_completion_func_t
+-
+-lvm2 depends on readline, CPPFunction has been replaced by rl_completion_func_t
+-in recent readline,
+-
+-Upstream-Status: Inappropriate [configuration]
+-The change depends on the build environment, it is required by OpenEmbedded env 
+-due to readline upgrade. 
+-
+-Signed-off-by: Zhenhua Luo <zhenhua.luo@freescale.com>
 ----
-- Makefile | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
+- tools/lvm.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/Makefile b/Makefile
--index 9c44633..39bebd0 100644
----- a/Makefile
--+++ b/Makefile
--@@ -229,7 +229,7 @@ gdb_merge: force
-- 	@echo "../../${PROGRAM} ../../${PROGRAM}lib.a" > ${GDB}/gdb/mergeobj
-- 	@rm -f ${PROGRAM}
-- 	@if [ ! -f ${GDB}/config.status ]; then \
---	  (cd ${GDB}; ./configure ${GDB_CONF_FLAGS} --with-separate-debug-dir=/usr/lib/debug \
--+	  (cd ${GDB}; ./configure --host=${GDB_TARGET} --build=${GDB_HOST} --with-separate-debug-dir=/usr/lib/debug \
-- 	    --with-bugurl="" --with-expat=no --with-python=no; \
-- 	  make --no-print-directory CRASH_TARGET=${TARGET}; echo ${TARGET} > crash.target) \
-- 	else make --no-print-directory rebuild; fi
--@@ -277,7 +277,7 @@ force:
+-diff --git a/tools/lvm.c b/tools/lvm.c
+-index e002a76..5fa35d2 100644
+---- a/tools/lvm.c
+-+++ b/tools/lvm.c
+-@@ -186,7 +186,7 @@ int lvm_shell(struct cmd_context *cmd, struct cmdline_context *cmdline)
+- 	char *input = NULL, *args[MAX_ARGS], **argv;
 - 
-- make_configure: force
-- 	@rm -f configure
---	@${CC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
--+	@cc ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
+- 	rl_readline_name = "lvm";
+--	rl_attempted_completion_function = (CPPFunction *) _completion;
+-+	rl_attempted_completion_function = (rl_completion_func_t *) _completion;
 - 
-- clean: make_configure
-- 	@./configure ${CONF_TARGET_FLAG} -q -b
+- 	_read_history(cmd);
+- 
 --- 
--1.8.4.2
+-1.9.1
 -
-diff --git a/meta-oe/recipes-kernel/crash/crash-7.0.9/7001force_define_architecture.patch b/meta-oe/recipes-kernel/crash/crash-7.0.9/7001force_define_architecture.patch
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-snapshot-check-snapshot-exists.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-snapshot-check-snapshot-exists.patch
 deleted file mode 100644
-index 0d44c7f..0000000
---- a/meta-oe/recipes-kernel/crash/crash-7.0.9/7001force_define_architecture.patch
+index 8f0da79..0000000
+--- a/meta-oe/recipes-support/lvm2/lvm2/0001-snapshot-check-snapshot-exists.patch
 +++ /dev/null
-@@ -1,13 +0,0 @@
--diff -uprN crash-5.1.8.org/configure.c crash-5.1.8/configure.c
----- crash-5.1.8.org/configure.c	2011-09-17 04:01:12.000000000 +0900
--+++ crash-5.1.8/configure.c	2012-09-13 13:28:45.393344108 +0900
--@@ -391,6 +391,9 @@ get_current_configuration(struct support
-- 			arch_mismatch(sp);
-- 	}
+@@ -1,29 +0,0 @@
+-From c46d4a745dc8c5cb4cfc0c94863e555387e9af75 Mon Sep 17 00:00:00 2001
+-From: Zdenek Kabelac <zkabelac@redhat.com>
+-Date: Mon, 16 Jun 2014 12:41:30 +0200
+-Subject: [PATCH] snapshot: check snapshot exists
+-
+-Return 0 if the LV is not even snapshot.
+-
+-Upstream-Status: backport
+-Adapt the patch for backporting to an older version.
+-Signed-off-by: Li Zhou <li.zhou@windriver.com>
+----
+- lib/metadata/snapshot_manip.c |    3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-Index: LVM2.2.02.97/lib/metadata/snapshot_manip.c
+-===================================================================
+---- LVM2.2.02.97.orig/lib/metadata/snapshot_manip.c
+-+++ LVM2.2.02.97/lib/metadata/snapshot_manip.c
+-@@ -68,8 +68,9 @@ struct lv_segment *find_merging_cow(cons
+-
+- int lv_is_merging_cow(const struct logical_volume *snapshot)
+- {
+-+	struct lv_segment *snap_seg = find_cow(snapshot);
+-	/* checks lv_segment's status to see if cow is merging */
+--	return (find_cow(snapshot)->status & MERGING) ? 1 : 0;
+-+	return (snap_seg && (snap_seg->status & MERGING)) ? 1 : 0;
+- }
+-
+- /* Given a cow LV, return the snapshot lv_segment that uses it */
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch b/meta-oe/recipes-support/lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch
+deleted file mode 100644
+index 3105136..0000000
+--- a/meta-oe/recipes-support/lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-Subject: [PATCH] fix: mlock ignore [vectors] gate_vma
+-
+-Upstream-Status: Pending
+-
+-linux kernel has a new commit f9d4861f for [vectors] vma on ARM
+-"ARM: 7294/1: vectors: use gate_vma for vectors user mapping".
+-
+-mlock()/munlock() on a gate_vma would cause NOMEM error, so add
+-[vectors] to _ignore_maps[], as other gate_vmas [vdso]/[vsyscall]
+-did.
+-
+-Signed-off-by: Xin Ouyang <Xin.Ouyang@windriver.com>
+----
+- lib/mm/memlock.c |    1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/lib/mm/memlock.c b/lib/mm/memlock.c
+-index 8c631bf..a6b1955 100644
+---- a/lib/mm/memlock.c
+-+++ b/lib/mm/memlock.c
+-@@ -84,6 +84,7 @@ static int _default_priority;
+- static const char * const _ignore_maps[] = {
+-     "[vdso]",
+-     "[vsyscall]",
+-+    "[vectors]",
+- };
 - 
--+	/** Force define archtecture */
--+	target_data.target = FORCE_DEFINE_ARCH;
--+
--         if ((fp = fopen("Makefile", "r")) == NULL) {
-- 		perror("Makefile");
-- 		goto get_release;
-diff --git a/meta-oe/recipes-kernel/crash/crash-7.0.9/7003cross_ranlib.patch b/meta-oe/recipes-kernel/crash/crash-7.0.9/7003cross_ranlib.patch
+- /* default blacklist for maps */
+--- 
+-1.7.9.5
+-
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb
+new file mode 100644
+index 0000000..8e464d2
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb
+@@ -0,0 +1,4 @@
++require lvm2.inc
++
++SRC_URI[md5sum] = "2d24ba982c8a85e8c837210f087a6a51"
++SRC_URI[sha256sum] = "0e6da28465752cc2db7e7e6fc7b012a0146a98d717ac5dea1c900d4bc32bedb1"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
 deleted file mode 100644
-index d567fa0..0000000
---- a/meta-oe/recipes-kernel/crash/crash-7.0.9/7003cross_ranlib.patch
+index 2de17cf..0000000
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
 +++ /dev/null
-@@ -1,10 +0,0 @@
----- crash-5.1.8/Makefile.orig	2011-12-27 11:21:58.220652105 +0900
--+++ crash-5.1.8/Makefile	2011-12-27 11:22:29.563651593 +0900
--@@ -285,6 +285,7 @@
-- 
-- library: make_build_data ${OBJECT_FILES}
-- 	ar -rs ${PROGRAM}lib.a ${OBJECT_FILES}
--+	${RANLIB} ${PROGRAM}lib.a 
-- 
-- gdb: force
-- 	rm -f ${GDB_OFILES}
-diff --git a/meta-oe/recipes-kernel/crash/crash-7.0.9/config-site.crash-7.0.9 b/meta-oe/recipes-kernel/crash/crash-7.0.9/config-site.crash-7.0.9
-deleted file mode 100644
-index d6fc22f..0000000
---- a/meta-oe/recipes-kernel/crash/crash-7.0.9/config-site.crash-7.0.9
-+++ /dev/null
-@@ -1 +0,0 @@
--bash_cv_have_mbstate_t=yes
-diff --git a/meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch b/meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
-new file mode 100644
-index 0000000..229647f
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
-@@ -0,0 +1,34 @@
-+From cbaaa42933bb27b1bcff4c7d71d54c913201ee88 Mon Sep 17 00:00:00 2001
-+From: Lei Maohui <leimaohui@cn.fujitsu.com>
-+Date: Fri, 9 Jan 2015 11:51:18 +0900
-+Subject: [PATCH] cross_add_configure_option
-+
-+---
-+ Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 9c44633..39bebd0 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -229,7 +229,7 @@ gdb_merge: force
-+ 	@echo "../../${PROGRAM} ../../${PROGRAM}lib.a" > ${GDB}/gdb/mergeobj
-+ 	@rm -f ${PROGRAM}
-+ 	@if [ ! -f ${GDB}/config.status ]; then \
-+-	  (cd ${GDB}; ./configure ${GDB_CONF_FLAGS} --with-separate-debug-dir=/usr/lib/debug \
-++	  (cd ${GDB}; ./configure --host=${GDB_TARGET} --build=${GDB_HOST} --with-separate-debug-dir=/usr/lib/debug \
-+ 	    --with-bugurl="" --with-expat=no --with-python=no; \
-+ 	  make --no-print-directory CRASH_TARGET=${TARGET}; echo ${TARGET} > crash.target) \
-+ 	else make --no-print-directory rebuild; fi
-+@@ -277,7 +277,7 @@ force:
-+ 
-+ make_configure: force
-+ 	@rm -f configure
-+-	@${CC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
-++	@cc ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
-+ 
-+ clean: make_configure
-+ 	@./configure ${CONF_TARGET_FLAG} -q -b
-+-- 
-+1.8.4.2
-+
-diff --git a/meta-oe/recipes-kernel/crash/crash/7001force_define_architecture.patch b/meta-oe/recipes-kernel/crash/crash/7001force_define_architecture.patch
-new file mode 100644
-index 0000000..0d44c7f
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash/7001force_define_architecture.patch
-@@ -0,0 +1,13 @@
-+diff -uprN crash-5.1.8.org/configure.c crash-5.1.8/configure.c
-+--- crash-5.1.8.org/configure.c	2011-09-17 04:01:12.000000000 +0900
-++++ crash-5.1.8/configure.c	2012-09-13 13:28:45.393344108 +0900
-+@@ -391,6 +391,9 @@ get_current_configuration(struct support
-+ 			arch_mismatch(sp);
-+ 	}
-+ 
-++	/** Force define archtecture */
-++	target_data.target = FORCE_DEFINE_ARCH;
-++
-+         if ((fp = fopen("Makefile", "r")) == NULL) {
-+ 		perror("Makefile");
-+ 		goto get_release;
-diff --git a/meta-oe/recipes-kernel/crash/crash/7003cross_ranlib.patch b/meta-oe/recipes-kernel/crash/crash/7003cross_ranlib.patch
-new file mode 100644
-index 0000000..d567fa0
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash/7003cross_ranlib.patch
-@@ -0,0 +1,10 @@
-+--- crash-5.1.8/Makefile.orig	2011-12-27 11:21:58.220652105 +0900
-++++ crash-5.1.8/Makefile	2011-12-27 11:22:29.563651593 +0900
-+@@ -285,6 +285,7 @@
-+ 
-+ library: make_build_data ${OBJECT_FILES}
-+ 	ar -rs ${PROGRAM}lib.a ${OBJECT_FILES}
-++	${RANLIB} ${PROGRAM}lib.a 
-+ 
-+ gdb: force
-+ 	rm -f ${GDB_OFILES}
-diff --git a/meta-oe/recipes-kernel/crash/crash/config-site.crash-7.0.9 b/meta-oe/recipes-kernel/crash/crash/config-site.crash-7.0.9
-new file mode 100644
-index 0000000..d6fc22f
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash/config-site.crash-7.0.9
-@@ -0,0 +1 @@
-+bash_cv_have_mbstate_t=yes
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.0.9.bb b/meta-oe/recipes-kernel/crash/crash_7.0.9.bb
-deleted file mode 100644
-index 586a0ba..0000000
---- a/meta-oe/recipes-kernel/crash/crash_7.0.9.bb
-+++ /dev/null
-@@ -1,63 +0,0 @@
--SUMMARY = "Kernel analysis utility for live systems, netdump, diskdump, kdump, LKCD or mcore dumpfiles"
--DESCRIPTION = "The core analysis suite is a self-contained tool that can be used to\
--investigate either live systems, kernel core dumps created from the\
--netdump, diskdump and kdump packages from Red Hat Linux, the mcore kernel patch\
--offered by Mission Critical Linux, or the LKCD kernel patch."
+@@ -1,6 +0,0 @@
+-require lvm2.inc
 -
--HOMEPAGE = "http://people.redhat.com/anderson"
--SECTION = "devel"
+-PR = "${INC_PR}.0"
 -
--inherit gettext
--
--DEPENDS = "zlib readline"
--
--SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz \
--           file://7001force_define_architecture.patch \ 
--           file://7003cross_ranlib.patch \
--           file://0001-cross_add_configure_option.patch \
--           "
--
--SRC_URI[md5sum] = "d70ad2ed0f6d210ed11e88b8e977f5fd"
--SRC_URI[sha256sum] = "c6034c6eb6b52691c60d0b72dbdec58fac4c1b3ed1cd0697c209dc48d13a577e"
--
--LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
--
--EXTRA_OEMAKE = 'RPMPKG="${PV}" \
--                GDB_TARGET="${TARGET_SYS}" \
--                GDB_HOST="${BUILD_SYS}" \
--                '
--do_configure() {
--    :
--}
--
--do_compile_prepend() {
--   case ${TARGET_ARCH} in
--                arm*)     ARCH=ARM ;;
--                i*86*)    ARCH=X86 ;;
--                powerpc*) ARCH=PPC ;;
--                x86_64*)  ARCH=X86_64 ;;
--        esac
--
--    sed -i s/FORCE_DEFINE_ARCH/"${ARCH}"/g ${S}/configure.c
--    sed -i -e 's/#define TARGET_CFLAGS_ARM_ON_X86_64.*/#define TARGET_CFLAGS_ARM_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c
--    sed -i 's/&gt;/>/g' ${S}/Makefile
--}
--do_compile() {
--    oe_runmake ${EXTRA_OEMAKE}
--}
--
--do_install () {
--    install -d ${D}${bindir}
--    install -d ${D}/${mandir}/man8
--    install -d ${D}${includedir}/crash
--
--    oe_runmake DESTDIR=${D} install
--    install -m 0644 ${S}/crash.8 ${D}/${mandir}/man8/
--    install -m 0644 ${S}/defs.h ${D}${includedir}/crash
--}   
--RDEPENDS_${PN} += "liblzma"
--
--# Causes gcc to get stuck and eat all available memory in qemuarm builds
--# jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR="/usr/local/share/locale" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=1 eval.c -quiet -dumpbase eval.c -march=armv5te -mthumb -mthumb-interwork -mtls-dialect=gnu -auxbase-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-types -o -
--ARM_INSTRUCTION_SET = "arm"
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.1.2.bb b/meta-oe/recipes-kernel/crash/crash_7.1.2.bb
-new file mode 100644
-index 0000000..f1e02e9
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash_7.1.2.bb
-@@ -0,0 +1,63 @@
-+SUMMARY = "Kernel analysis utility for live systems, netdump, diskdump, kdump, LKCD or mcore dumpfiles"
-+DESCRIPTION = "The core analysis suite is a self-contained tool that can be used to\
-+investigate either live systems, kernel core dumps created from the\
-+netdump, diskdump and kdump packages from Red Hat Linux, the mcore kernel patch\
-+offered by Mission Critical Linux, or the LKCD kernel patch."
-+
-+HOMEPAGE = "http://people.redhat.com/anderson"
-+SECTION = "devel"
-+
-+inherit gettext
-+
-+DEPENDS = "zlib readline"
-+
-+SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz \
-+           file://7001force_define_architecture.patch \ 
-+           file://7003cross_ranlib.patch \
-+           file://0001-cross_add_configure_option.patch \
-+           "
-+
-+SRC_URI[md5sum] = "04db2dde0d5e1dacbe3b820df3957742"
-+SRC_URI[sha256sum] = "630664a00cbf5d7357f8dcdfc45e73ea62a2a517bd349ab73f0d704d10b01c55"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
-+
-+EXTRA_OEMAKE = 'RPMPKG="${PV}" \
-+                GDB_TARGET="${TARGET_SYS}" \
-+                GDB_HOST="${BUILD_SYS}" \
-+                '
-+do_configure() {
-+    :
-+}
-+
-+do_compile_prepend() {
-+   case ${TARGET_ARCH} in
-+                arm*)     ARCH=ARM ;;
-+                i*86*)    ARCH=X86 ;;
-+                powerpc*) ARCH=PPC ;;
-+                x86_64*)  ARCH=X86_64 ;;
-+        esac
-+
-+    sed -i s/FORCE_DEFINE_ARCH/"${ARCH}"/g ${S}/configure.c
-+    sed -i -e 's/#define TARGET_CFLAGS_ARM_ON_X86_64.*/#define TARGET_CFLAGS_ARM_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c
-+    sed -i 's/&gt;/>/g' ${S}/Makefile
-+}
-+do_compile() {
-+    oe_runmake ${EXTRA_OEMAKE}
-+}
-+
-+do_install () {
-+    install -d ${D}${bindir}
-+    install -d ${D}/${mandir}/man8
-+    install -d ${D}${includedir}/crash
-+
-+    oe_runmake DESTDIR=${D} install
-+    install -m 0644 ${S}/crash.8 ${D}/${mandir}/man8/
-+    install -m 0644 ${S}/defs.h ${D}${includedir}/crash
-+}   
-+RDEPENDS_${PN} += "liblzma"
-+
-+# Causes gcc to get stuck and eat all available memory in qemuarm builds
-+# jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR="/usr/local/share/locale" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=1 eval.c -quiet -dumpbase eval.c -march=armv5te -mthumb -mthumb-interwork -mtls-dialect=gnu -auxbase-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-types -o -
-+ARM_INSTRUCTION_SET = "arm"
+-SRC_URI[md5sum] = "d18bd01334309db1c422b9bf6b181057"
+-SRC_URI[sha256sum] = "edda82012e8a9e1f0b00ba5a331468d3e0201992be14c0dbea71bf564a51fc2b"
 -- 
 1.9.1
 
