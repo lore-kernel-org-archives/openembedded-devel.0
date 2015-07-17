@@ -1,35 +1,39 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id E4EBF75868
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A84865CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 08:31:05 +0000 (UTC)
-Received: by pdbbh15 with SMTP id bh15so12875802pdb.1
+	Fri, 17 Jul 2015 12:04:45 +0000 (UTC)
+Received: by qkdv3 with SMTP id v3so68038664qkd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 01:31:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=os5rpVX58orsVRN29Uucgof0F1k7CEZwstI63oiVyT0=;
-	b=L2CqGB6WB/TZaGzeMfIFdYyBmHMOuMTs7LMedrGZo9CivCdRuaiZAiKBH243btBO1z
-	wWemVdj/2lTeEs5RB/0MC+p1S9s4AfUP3alhnnhFpY11I7QPAhe6dRpyDoEp8iav/g//
-	zhI5xv9ZUbXTd9oTU4hpgBzEgJ6L8020KGqx8Tg/hH+XRFviI1kD+a4YqYXP6gQyByhI
-	YXjq6GBLU0hkx1MMJ7wOyaLis0XeZZPRRh66A39mULVQo0QHo9YeqUer6Et8MPY/3gwR
-	hWcc086CiHHoEK4nslzLdTeyI5bo9VHeW4SaJr0N0NlV6a53J5K0Q8NAqR7c1dDMJ7uo
-	83Rw==
-X-Received: by 10.66.144.2 with SMTP id si2mr27204783pab.115.1437121866067;
-	Fri, 17 Jul 2015 01:31:06 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	nl10sm10378060pdb.38.2015.07.17.01.31.04
+	Fri, 17 Jul 2015 05:04:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=m9hkxvOnyjRmq62y3EaeJ7oBMRxmzdAb30MVXg8EuaA=;
+	b=M6oHEWihLxEN8vjUjQE82JQ6BxeKvsgITlG4fqSWmzygG6za5pSEDU44u5mWeN2x4T
+	KNsMSY80dA3F88yP0k3q3nBlbDkDboMcyMlRnmaNBiilsBoMIpiB7lI8NtADiPL0TbEU
+	vSh3a9D9UUpnWNE9VDnNXBHhhPOgey/m8eTSemp9LE4oC+KhUCC4k3Wy8SsmQuy5bBxf
+	eIzb9n5pom64FUT4ruwSsw+2ZaQo4Ax1E49QqsOS/lcKypijhqPBQPT/riy1RrjBT9jn
+	L12tcz8Bbzjc3YEEdE0DJI5KTqW3EtHvOkCADWUtRnObQEPV8ox9+jc+hRf6I9wvcqZE
+	jK0Q==
+X-Received: by 10.55.43.95 with SMTP id r92mr24331020qkh.67.1437134685401;
+	Fri, 17 Jul 2015 05:04:45 -0700 (PDT)
+Received: from localhost ([179.105.243.19])
+	by smtp.gmail.com with ESMTPSA id p15sm679064qkh.10.2015.07.17.05.04.41
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 17 Jul 2015 01:31:05 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jul 2015 18:30:36 +1000
-Message-Id: <1437121836-27901-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.4.5
-Subject: [meta-qt5][PATCH] libconnman-qt5: update to 1.0.91
+	Fri, 17 Jul 2015 05:04:44 -0700 (PDT)
+Received: by localhost (sSMTP sendmail emulation);
+	Fri, 17 Jul 2015 09:04:38 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 17 Jul 2015 09:04:37 -0300
+Message-Id: <1437134677-27263-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.4.6
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe][PATCH] opencv: The 'v4l' PACKAGECONFIG should disable libv4l as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,30 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jul 2015 08:31:06 -0000
+X-List-Received-Date: Fri, 17 Jul 2015 12:04:47 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+When disabling the Video 4 Linux support, the libv4l should be
+disabled as well.
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- recipes-qt/libconnman-qt/libconnman-qt5_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/opencv/opencv_2.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-index 0ca57e2..f79dc0c 100644
---- a/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-+++ b/recipes-qt/libconnman-qt/libconnman-qt5_git.bb
-@@ -5,9 +5,9 @@ HOMEPAGE = "https://github.com/nemomobile/libconnman-qt"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
- DEPENDS += "qtbase qtdeclarative"
--PV = "1.0.89+git${SRCPV}"
-+PV = "1.0.91+git${SRCPV}"
+diff --git a/meta-oe/recipes-support/opencv/opencv_2.4.bb b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+index f8946f4..3ef49da 100644
+--- a/meta-oe/recipes-support/opencv/opencv_2.4.bb
++++ b/meta-oe/recipes-support/opencv/opencv_2.4.bb
+@@ -39,7 +39,7 @@ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
+ PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
+ PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
+-PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
++PACKAGECONFIG[v4l] = "-DWITH_V4L=ON -DWITH_LIBV4L=ON,-DWITH_V4L=OFF -DWITH_LIBV4L=OFF,v4l-utils,"
+ PACKAGECONFIG[jasper] = "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
  
--SRCREV = "79a8d10479ba55951ffa375a66797eedff230dd3"
-+SRCREV = "f9ce5eaa124fc5a1a554540c94331301bb2b1b49"
- SRC_URI = "git://github.com/nemomobile/libconnman-qt.git"
- 
- S = "${WORKDIR}/git"
+ inherit distutils-base pkgconfig cmake
 -- 
-2.4.5
+2.4.6
 
 
