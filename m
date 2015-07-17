@@ -1,29 +1,25 @@
-Return-Path: <lixin.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D5E1A73E3B
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A817A73E3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 02:45:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.13,665,1427731200"; d="scan'208";a="98544983"
-Received: from unknown (HELO edo.cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Jul 2015 10:49:24 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (localhost.localdomain
-	[127.0.0.1])
-	by edo.cn.fujitsu.com (8.14.3/8.13.1) with ESMTP id t6H2hqrx019904
+	Fri, 17 Jul 2015 03:11:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.1/8.15.1) with ESMTPS id t6H3BdIM018552
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 10:43:52 +0800
-Received: from localhost.localdomain (10.167.226.92) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.181.6; Fri, 17 Jul 2015 10:45:38 +0800
-From: Li xin <lixin.fnst@cn.fujitsu.com>
+	Thu, 16 Jul 2015 20:11:39 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.235.1; Thu, 16 Jul 2015 20:11:38 -0700
+From: Kai Kang <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Jul 2015 10:45:20 +0800
-Message-ID: <1437101120-1624-1-git-send-email-lixin.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
-In-Reply-To: <20150716185219.GD4432@mentor.com>
-References: <20150716185219.GD4432@mentor.com>
+Date: Fri, 17 Jul 2015 11:09:59 +0800
+Message-ID: <1437102603-25983-1-git-send-email-kai.kang@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.92]
-Subject: [meta-networking][PATCH] opensaf: Add PACKAGECONFIG for openhpi
+X-Originating-IP: [128.224.153.152]
+Subject: [meta-oe][PATCH 0/4] Upgrade 4 packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,30 +33,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jul 2015 02:45:41 -0000
+X-List-Received-Date: Fri, 17 Jul 2015 03:11:41 -0000
 Content-Type: text/plain
 
-opensaf support for the HPI, So provide a PACKAGECONFIG option for openhpi
 
-Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
----
- meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Kai Kang (4):
+  crash: upgrade from 7.0.9 to 7.1.2
+  liblockfile: add patch of version 1.09-6 from debian
+  lvm2: upgrade from 2.02.97 to 2.02.125
+  multipath-tools: upgrade git rev
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-index 3d0175e..6ad8a3d 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_4.5.0.bb
-@@ -36,6 +36,8 @@ USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nolog
- SYSTEMD_SERVICE_${PN} += "opensafd.service plmcboot.service plmcd.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'openhpi', 'openhpi', '', d)}"
-+PACKAGECONFIG[openhpi] = "--with-hpi-interface=B03 --enable-ais-plm,,openhpi"
- PACKAGECONFIG[systemd] = "--enable-systemd-daemon"
- 
- do_configure_prepend () {
+ .../liblockfile-fix-install-so-to-man-dir.patch    | 20 +++++++
+ .../liblockfile/liblockfile_1.09.bb                |  5 ++
+ .../0001-cross_add_configure_option.patch          | 34 ------------
+ .../7001force_define_architecture.patch            | 13 -----
+ .../crash/crash-7.0.9/7003cross_ranlib.patch       | 10 ----
+ .../crash/crash-7.0.9/config-site.crash-7.0.9      |  1 -
+ .../crash/0001-cross_add_configure_option.patch    | 34 ++++++++++++
+ .../crash/7001force_define_architecture.patch      | 13 +++++
+ .../crash/crash/7003cross_ranlib.patch             | 10 ++++
+ .../crash/crash/config-site.crash-7.0.9            |  1 +
+ meta-oe/recipes-kernel/crash/crash_7.0.9.bb        | 63 ----------------------
+ meta-oe/recipes-kernel/crash/crash_7.1.2.bb        | 63 ++++++++++++++++++++++
+ meta-oe/recipes-support/lvm2/lvm2.inc              |  6 +--
+ ...ace-CPPFunction-with-rl_completion_func_t.patch | 33 ------------
+ .../lvm2/0001-snapshot-check-snapshot-exists.patch | 29 ----------
+ .../lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch  | 31 -----------
+ meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb      |  4 ++
+ meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb       |  6 ---
+ .../multipath-tools/files/makefile_inc.patch       | 11 ++--
+ .../multipath-tools/multipath-tools_git.bb         |  8 ++-
+ 20 files changed, 164 insertions(+), 231 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/liblockfile/liblockfile-1.09/liblockfile-fix-install-so-to-man-dir.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/0001-cross_add_configure_option.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/7001force_define_architecture.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/7003cross_ranlib.patch
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash-7.0.9/config-site.crash-7.0.9
+ create mode 100644 meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
+ create mode 100644 meta-oe/recipes-kernel/crash/crash/7001force_define_architecture.patch
+ create mode 100644 meta-oe/recipes-kernel/crash/crash/7003cross_ranlib.patch
+ create mode 100644 meta-oe/recipes-kernel/crash/crash/config-site.crash-7.0.9
+ delete mode 100644 meta-oe/recipes-kernel/crash/crash_7.0.9.bb
+ create mode 100644 meta-oe/recipes-kernel/crash/crash_7.1.2.bb
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-Replace-CPPFunction-with-rl_completion_func_t.patch
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-snapshot-check-snapshot-exists.patch
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2/mlock-ignore-vectors-gate_vma.patch
+ create mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.125.bb
+ delete mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.97.bb
+
 -- 
-1.8.4.2
+1.9.1
 
 
