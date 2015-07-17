@@ -1,35 +1,35 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-ob0-f172.google.com (mail-ob0-f172.google.com
-	[209.85.214.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 82ACA65CBC
+Return-Path: <dominic.sacre@gmx.de>
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DA8A65CBC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 20:56:31 +0000 (UTC)
-Received: by obnw1 with SMTP id w1so72718285obn.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 13:56:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=1g4l74FUV9JiUUn9YoYn1+XjW6KKVAnpBehQV6OHEUY=;
-	b=tTPd/uMmUrlh2X1zWo+USRX15iYQdR6CF105XOuv+vGG+YHQaKk4TDL1gxbz0vczMA
-	QJi12LpeUk+K1ioyQmGKHcTQQ+Jcj2enXKNXf3atYi11dxa8BxNf8ss07c2Oo19kGdGr
-	FJ4VmNY7jTAu1c0E6Ws+KcD3Xox3RMQ9dtwH6OimrX2KFJBa+a5myyQ647LdmNbJoeIw
-	l/VJkZdZ3vMHOPaHjKGtyka9ZH2LDHAihMcdcaI6hQetgaKKT4YIDgn4xdu0dGMi/hSz
-	268tPc+hO1d9omRCl7G7z3OfEX3slbpYuZIlbdL0CEM/ssaHPwi+ou6txER6l1bH3zLF
-	qncA==
-MIME-Version: 1.0
-X-Received: by 10.182.246.202 with SMTP id xy10mr15262804obc.64.1437166590870; 
-	Fri, 17 Jul 2015 13:56:30 -0700 (PDT)
-Received: by 10.202.64.130 with HTTP; Fri, 17 Jul 2015 13:56:30 -0700 (PDT)
-In-Reply-To: <55A914F9.2010204@gmx.de>
-References: <1437050752-12663-1-git-send-email-dominic.sacre@gmx.de>
-	<CAJ86T=XoRKBHyH0HmDv9thHr8qSievRt-WwT=qddsUkuyg5qpA@mail.gmail.com>
-	<55A914F9.2010204@gmx.de>
-Date: Fri, 17 Jul 2015 13:56:30 -0700
-Message-ID: <CAJ86T=V63jLD9gbVF6YOU-ixQgpO79y0+JxoiDmmM=prUQrHAA@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
+	Fri, 17 Jul 2015 22:58:27 +0000 (UTC)
+Received: from dastp.lan ([37.24.103.185]) by mail.gmx.com (mrgmx103) with
+	ESMTPSA (Nemesis) id 0LwrS8-1Ys0fj0kwq-016OLy; Sat, 18 Jul 2015 00:58:27
+	+0200
+From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] fio: Add PACKAGECONFIG for numa, re-enable ARM build
+Date: Sat, 18 Jul 2015 00:57:47 +0200
+Message-Id: <1437173867-10687-1-git-send-email-dominic.sacre@gmx.de>
+X-Mailer: git-send-email 2.4.5
+In-Reply-To: <CAJ86T=V63jLD9gbVF6YOU-ixQgpO79y0+JxoiDmmM=prUQrHAA@mail.gmail.com>
+References: <CAJ86T=V63jLD9gbVF6YOU-ixQgpO79y0+JxoiDmmM=prUQrHAA@mail.gmail.com>
+MIME-Version: 1.0
+X-Provags-ID: V03:K0:9ji4u3Qwm6hxWqgAZAeGZHg6iAKOESxjX3Wq4jcH3AH1xcdX4Cq
+	IDcn4a52WuEKUe7GhALOZvOo3BafkKyhMT4tPZ3zMzQ0/J0NHHcV1Tdw/kCpzKmSi9JzAnr
+	/1eA/n+GwLxjIcQRPdB7TqIcEO4m3rNKDtWLaXsoFncfG5F4md96HRCh7WAVkVxvU9CRh3J
+	gdorAvEnbmpujuCjXO85w==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:2S/ikKZEX6E=:d+J6tmnF63pGt8INZCiC0X
+	bmDMCXC7tt02YO8n1Kjl/i5AZYSLgREqcBv7bmTe/PioHuGfgqyp09TYkFnv8R1lR5hh3FdOn
+	DshLdOIzE+2BMLh9odOzpUBJT5GOQ8Tm8gdtrao3N45dhYMOTUx14Yp3Yu26uOtfgwMG4K+ow
+	zxBX+GXW6RsynozQmHfAEMDVKXRpY8cmjujKTvN3YOK8ujtUCjQeQEZ5W817QPAWLmfza8h1W
+	R6hFy0hsEAKcIDMDiiZXfUtkqKW5R/XxTkfp5OjvoAocw56e0CMYHsHvV4QCO4MrWCo5jsUQj
+	FexAtKZu4/Pbel/aQyLKszZ3qkcBPy0PEoRGBkt8IvFccyuFGZ69hENafOkkDnNSWiR1ht744
+	Elx4Z6HtosrdckActgZN07h54DLz2tMPy9f1UGScCzLhZtdbjbEd+yHFWq3dajMywHrHqXC7J
+	B6BPJdb6sf2XS94NacuY47dKvGT0Ss3JGkV3IrGKRMZWgIzfY5zdLqg+Z+URRc2O5U1ggJXAO
+	gk22lUlDDStep7Ea1mDKoViYrWlsmprSvNE/saUwnFqhu0rHR1aFZ3/zBgYuj/ml7MIA2R+Ee
+	FJ3ux4JvALX78q8yiYFbDie6TYTA8V34ciqpxqsZPfDsfRItJ1iI/11CM58aTTyjpOF2ZpC2h
+	pC/HRzXi5CNkv4S9+KpzPrJ8+Kx6/i7sPjng0sbZ2m8lSd34DPmkgsrvyTOu2829jrLY=
+Subject: [meta-oe][PATCH v2] fio: Add PACKAGECONFIG for numa, re-enable ARM build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,62 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jul 2015 20:56:33 -0000
+X-List-Received-Date: Fri, 17 Jul 2015 22:58:29 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jul 17, 2015 at 7:45 AM, Dominic Sacr=C3=A9 <dominic.sacre@gmx.de> =
-wrote:
-> Hi Andre,
->
-> On 2015-07-17 02:46, Andre McCurdy wrote:
->>> +PACKAGECONFIG[numa] =3D ",--disable-numa,numactl"
->>
->> I don't think this change will work.
->>
->> The fio recipe doesn't use autotools, so the --disable-numa option set
->> via PACKAGECONFIG isn't going to have any effect unless you also
->> manually pass EXTRA_OECONF into the build somehow.
->
-> Ouch, you're right. The configure script is currently only called
-> indirectly (from the Makefile) and without arguments during do_compile.
->
-> How about adding this simple do_configure function?
->
-> do_configure() {
->     ${B}/configure ${EXTRA_OECONF}
-> }
+Make fio's NUMA support optional via PACKAGECONFIG.
+Enable this feature by default, except on ARM where libnuma/numactl
+is not available.
 
-Yes, that looks like the right approach. However you should use
-"./configure" instead of "${B}/configure".
+Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
+---
+ meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
 
-The configure script is in the source directory, ie ${S}, not the
-build directory, and since do_configure is run from within ${S} by
-default you don't need the full path.
+diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+index 82f9cd4..dca0e64 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
+@@ -10,10 +10,14 @@ SECTION = "console/tests"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+ 
+-DEPENDS = "libaio zlib numactl"
++DEPENDS = "libaio zlib"
+ 
++PACKAGECONFIG_NUMA = "numa"
+ # ARM does not currently support NUMA
+-COMPATIBLE_HOST = "^((?!arm).*)$"
++PACKAGECONFIG_NUMA_arm = ""
++
++PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
++PACKAGECONFIG[numa] = ",--disable-numa,numactl"
+ 
+ # rev for v2.2.6
+ SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
+@@ -23,6 +27,10 @@ S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
+ 
++do_configure() {
++    ./configure ${EXTRA_OECONF}
++}
++
+ do_install() {
+     oe_runmake install DESTDIR=${D} prefix=${prefix} mandir=${mandir}
+     install -d ${D}/${docdir}/${PN}
+-- 
+2.4.5
 
->>>  # ARM does not currently support NUMA
->>> -COMPATIBLE_HOST =3D "^((?!arm).*)$"
->>> +PACKAGECONFIG_remove_arm =3D "numa"
->>
->> In general, it would be better to use something like:
->>
->>   PACKAGECONFIG_NUMA =3D "numa"
->>   PACKAGECONFIG_NUMA_arm =3D ""
->>
->>   PACKAGECONFIG ??=3D "${PACKAGECONFIG_NUMA}"
->>
->> _remove can be a little difficult to 'over-ride', so makes things
->> harder if someone did, one day, want to experiment with enabling that
->> option from local.conf or a .bbappend.
->
-> Good point. I thought the _remove was ugly, but it didn't occur to me to
-> use an additional level of indirection like this.
->
->
-> Dominic
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
