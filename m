@@ -1,35 +1,19 @@
-Return-Path: <dominic.sacre@gmx.de>
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DA8A65CBC
+Return-Path: <sjl@dent.vctlabs.com>
+X-Greylist: delayed 384 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 18 Jul 2015 00:28:29 UTC
+Received: from dent.vctlabs.com (dent.vctlabs.com [68.183.110.161])
+	by mail.openembedded.org (Postfix) with ESMTP id CA0AA65CCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jul 2015 22:58:27 +0000 (UTC)
-Received: from dastp.lan ([37.24.103.185]) by mail.gmx.com (mrgmx103) with
-	ESMTPSA (Nemesis) id 0LwrS8-1Ys0fj0kwq-016OLy; Sat, 18 Jul 2015 00:58:27
-	+0200
-From: =?UTF-8?q?Dominic=20Sacr=C3=A9?= <dominic.sacre@gmx.de>
+	Sat, 18 Jul 2015 00:28:29 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id 76AFDC0791; Fri, 17 Jul 2015 17:38:52 -0700 (PDT)
+Date: Fri, 17 Jul 2015 17:38:52 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Jul 2015 00:57:47 +0200
-Message-Id: <1437173867-10687-1-git-send-email-dominic.sacre@gmx.de>
-X-Mailer: git-send-email 2.4.5
-In-Reply-To: <CAJ86T=V63jLD9gbVF6YOU-ixQgpO79y0+JxoiDmmM=prUQrHAA@mail.gmail.com>
-References: <CAJ86T=V63jLD9gbVF6YOU-ixQgpO79y0+JxoiDmmM=prUQrHAA@mail.gmail.com>
+Message-ID: <20150718003852.GA18486@dent.vctlabs.com>
 MIME-Version: 1.0
-X-Provags-ID: V03:K0:9ji4u3Qwm6hxWqgAZAeGZHg6iAKOESxjX3Wq4jcH3AH1xcdX4Cq
-	IDcn4a52WuEKUe7GhALOZvOo3BafkKyhMT4tPZ3zMzQ0/J0NHHcV1Tdw/kCpzKmSi9JzAnr
-	/1eA/n+GwLxjIcQRPdB7TqIcEO4m3rNKDtWLaXsoFncfG5F4md96HRCh7WAVkVxvU9CRh3J
-	gdorAvEnbmpujuCjXO85w==
-X-UI-Out-Filterresults: notjunk:1;V01:K0:2S/ikKZEX6E=:d+J6tmnF63pGt8INZCiC0X
-	bmDMCXC7tt02YO8n1Kjl/i5AZYSLgREqcBv7bmTe/PioHuGfgqyp09TYkFnv8R1lR5hh3FdOn
-	DshLdOIzE+2BMLh9odOzpUBJT5GOQ8Tm8gdtrao3N45dhYMOTUx14Yp3Yu26uOtfgwMG4K+ow
-	zxBX+GXW6RsynozQmHfAEMDVKXRpY8cmjujKTvN3YOK8ujtUCjQeQEZ5W817QPAWLmfza8h1W
-	R6hFy0hsEAKcIDMDiiZXfUtkqKW5R/XxTkfp5OjvoAocw56e0CMYHsHvV4QCO4MrWCo5jsUQj
-	FexAtKZu4/Pbel/aQyLKszZ3qkcBPy0PEoRGBkt8IvFccyuFGZ69hENafOkkDnNSWiR1ht744
-	Elx4Z6HtosrdckActgZN07h54DLz2tMPy9f1UGScCzLhZtdbjbEd+yHFWq3dajMywHrHqXC7J
-	B6BPJdb6sf2XS94NacuY47dKvGT0Ss3JGkV3IrGKRMZWgIzfY5zdLqg+Z+URRc2O5U1ggJXAO
-	gk22lUlDDStep7Ea1mDKoViYrWlsmprSvNE/saUwnFqhu0rHR1aFZ3/zBgYuj/ml7MIA2R+Ee
-	FJ3ux4JvALX78q8yiYFbDie6TYTA8V34ciqpxqsZPfDsfRItJ1iI/11CM58aTTyjpOF2ZpC2h
-	pC/HRzXi5CNkv4S9+KpzPrJ8+Kx6/i7sPjng0sbZ2m8lSd34DPmkgsrvyTOu2829jrLY=
-Subject: [meta-oe][PATCH v2] fio: Add PACKAGECONFIG for numa, re-enable ARM build
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [meta-oe][meta-filesystems][PATCH 2/2] ifuse: remove blacklist due to libimobiledevice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,52 +27,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jul 2015 22:58:29 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 18 Jul 2015 00:28:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Make fio's NUMA support optional via PACKAGECONFIG.
-Enable this feature by default, except on ARM where libnuma/numactl
-is not available.
+ifuse's libimobiledevice dependency has been fixed, so ifuse blacklist
+can be removed as well
 
-Signed-off-by: Dominic Sacré <dominic.sacre@gmx.de>
+Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
 ---
- meta-oe/recipes-benchmark/fio/fio_2.2.6.bb | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb |    1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-index 82f9cd4..dca0e64 100644
---- a/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_2.2.6.bb
-@@ -10,10 +10,14 @@ SECTION = "console/tests"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+diff --git a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
+index 42f4c87..f0b58b9 100644
+--- a/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
++++ b/meta-filesystems/recipes-filesystems/ifuse/ifuse_1.1.2.bb
+@@ -3,7 +3,6 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6ab17b41640564434dda85c06b7124f7"
+ HOMEPAGE ="http://www.libimobiledevice.org/"
  
--DEPENDS = "libaio zlib numactl"
-+DEPENDS = "libaio zlib"
+-PNBLACKLIST[ifuse] ?= "depends on blacklisted libimobiledevice"
+ DEPENDS = "fuse libimobiledevice"
  
-+PACKAGECONFIG_NUMA = "numa"
- # ARM does not currently support NUMA
--COMPATIBLE_HOST = "^((?!arm).*)$"
-+PACKAGECONFIG_NUMA_arm = ""
-+
-+PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
-+PACKAGECONFIG[numa] = ",--disable-numa,numactl"
- 
- # rev for v2.2.6
- SRCREV = "f52c9691bc8c285f3445235c69acdfd6de7f9b82"
-@@ -23,6 +27,10 @@ S = "${WORKDIR}/git"
- 
- EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}'"
- 
-+do_configure() {
-+    ./configure ${EXTRA_OECONF}
-+}
-+
- do_install() {
-     oe_runmake install DESTDIR=${D} prefix=${prefix} mandir=${mandir}
-     install -d ${D}/${docdir}/${PN}
+ SRC_URI = " \
 -- 
-2.4.5
+1.7.10.4
 
 
