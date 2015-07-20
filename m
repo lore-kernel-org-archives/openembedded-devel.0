@@ -1,33 +1,32 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 78B7F65CBD
+Return-Path: <kimmo.surakka@vincit.fi>
+Received: from mail-wg0-f45.google.com (mail-wg0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 83F2D65CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jul 2015 06:47:38 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ZH4rO-0002pc-G0 for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Jul 2015 08:47:34 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jul 2015 08:47:34 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 20 Jul 2015 09:17:55 +0000 (UTC)
+Received: by wgkl9 with SMTP id l9so125366410wgk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jul 2015 08:47:34 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 20 Jul 2015 02:17:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to
+	:content-type;
+	bh=CyoRSO4xYfZcVt+eSg+V5RZaUFuaIp7Ey8LWY+z2zIE=;
+	b=S68FPzvSPgZdZQOw/orS6UN0FjdEPBpDVevlv0xeixCyn0zVDwwReg+GKFcwbmSod3
+	iGx4mtqN6FKLa6h6ka9j3pT1FhbGb3C398XMbmm51HdHoRPk2vaOenA2YrYv30yvB01v
+	1J6zI146K4rdy1kU3fHDVibcSdn1QUZOV44asdyVbSzEYr1zjgiUId5MyKCUDKgGM0qa
+	YX6nD1TvtloixuCv1ghz1r25uSqScRJjgw6ywoUGaELEsBbusvWcZbvkPnG/SOl8Mj5d
+	UDOqyzbUOEAu4hw4RsKgSqA2jpCb/n4DecA0KG7dmLcK7WqCCfghQcX6DlzXhUNGnomV
+	MSrw==
+X-Gm-Message-State: ALoCoQnWB6pLap8JL6h0jegcrcCo7nKbyO1tC5KhZ2hggd1FeEdQcwj5bv3IBS/rbbJbH+HmGg5H
+MIME-Version: 1.0
+X-Received: by 10.194.59.98 with SMTP id y2mr55478770wjq.42.1437383874993;
+	Mon, 20 Jul 2015 02:17:54 -0700 (PDT)
+Received: by 10.194.100.1 with HTTP; Mon, 20 Jul 2015 02:17:54 -0700 (PDT)
+Date: Mon, 20 Jul 2015 12:17:54 +0300
+Message-ID: <CAPwmkWyXiyKFiCWH52JKA-gAJH9jqfpUG1Z7TrLCTdLp9HgvBg@mail.gmail.com>
+From: Kimmo Surakka <kimmo.surakka@vincit.fi>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 20 Jul 2015 08:47:22 +0200
-Message-ID: <moi5hq$ahj$1@ger.gmane.org>
-References: <1437119410-3462-1-git-send-email-kai.kang@windriver.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10;
-	rv:31.0) Gecko/20100101 Thunderbird/31.7.0
-In-Reply-To: <1437119410-3462-1-git-send-email-kai.kang@windriver.com>
-Subject: Re: [meta-oe][PATCH] dracut: upgrade from 038 to 043
+Subject: [meta-oe][PATCH] imagemagick: update patchset from 4 to 9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,104 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jul 2015 06:47:41 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Jul 2015 09:18:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The ImageMagick-6.9.1-4.tar.xz is gone on the download server, there is
+ImageMagick-6.9.1-9.tar.xz now.
 
-Kai Kang schreef op 17-07-15 om 09:50:
-> Upgrade dracut from 038 to 043. Update SRC_URI by replacing git with tar 
-> ball.
+Signed-off-by: Kimmo Surakka <kimmo.surakka@vincit.fi>
+---
+ meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Why? That makes it really hard to pull in post-release fixes :(
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+index 6ee3724..e7c5374 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.1.bb
+@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM =
+"file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
+ # FIXME: There are many more checked libraries. All should be added
+or explicitly disabled to get consistent results.
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
 
+-PATCHSET = "4"
++PATCHSET = "9"
+ SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz
+\
+ "
+-SRC_URI[md5sum] = "b5929717d848a386f2674aeb31257c42"
+-SRC_URI[sha256sum] =
+"74973478058069ce44040ff76b61df713d70adcadfd207836cc0622cadf1e4bf"
++SRC_URI[md5sum] = "5a3a60d1dae65ee7b1cc88498e3a0008"
++SRC_URI[sha256sum] =
+"83cd785caeb26a171e185b5deba2900c5b73e79c97364caa4c879d26c9f4a91b"
 
-> And update bb file name at same time.
-> 
-> Signed-off-by: Kai Kang <kai.kang@windriver.com> --- 
-> .../recipes-devtools/dracut/dracut_043.bb          | 53
-> +++++++++++++++++++++ .../recipes-devtools/dracut/dracut_git.bb
-> | 55 ---------------------- 2 files changed, 53 insertions(+), 55
-> deletions(-) create mode 100644
-> meta-initramfs/recipes-devtools/dracut/dracut_043.bb delete mode 100644
-> meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-> 
-> diff --git a/meta-initramfs/recipes-devtools/dracut/dracut_043.bb
-> b/meta-initramfs/recipes-devtools/dracut/dracut_043.bb new file mode
-> 100644 index 0000000..22c6bae --- /dev/null +++
-> b/meta-initramfs/recipes-devtools/dracut/dracut_043.bb @@ -0,0 +1,53 @@ 
-> +SUMMARY = "Initramfs generator using udev" +DESCRIPTION = "Dracut is an
-> event driven initramfs infrastructure. dracut (the tool) is used to
-> create an initramfs image by copying tools and files from an installed
-> system and combining it with the dracut framework, usually found in
-> /usr/lib/dracut/modules.d." + +LICENSE = "GPLv2" +LIC_FILES_CHKSUM =
-> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" + +PE = "1" + 
-> +SRC_URI =
-> "${KERNELORG_MIRROR}/linux/utils/boot/dracut/dracut-043.tar.xz" + 
-> +SRC_URI[md5sum] = "85de75ddf00962e7bb0ae387f05794e5" +SRC_URI[sha256sum]
-> = "1484b558ed20330125aa04dcccab84da15c5689e19068285aa011f7177889cd1" + 
-> +inherit distro_features_check +REQUIRED_DISTRO_FEATURES = "systemd" + 
-> +EXTRA_OECONF = "--prefix=${prefix} \ +                --libdir=${libdir}
-> \ +                --datadir=${datadir} \ +
-> --sysconfdir=${sysconfdir} \ +                --sbindir=${sbindir} \ +
-> --disable-documentation \ +                --bindir=${bindir} \ +
-> --includedir=${includedir} \ +
-> --localstatedir=${localstatedir} \ +
-> --systemdsystemunitdir=${systemd_unitdir}/system" + +do_configure() { +
-> ./configure ${EXTRA_OECONF} +} + +do_install() { +    oe_runmake install
-> DESTDIR=${D} +} + +PACKAGES =+ "${PN}-bash-completion" + 
-> +FILES_${PN}-bash-completion = "${datadir}/bash-completion" + 
-> +FILES_${PN} += " ${libdir}/kernel \ +                ${systemd_unitdir}
-> \ +               " +CONFFILES_${PN} += "${sysconfdir}/dracut.conf" + 
-> +RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
-> util-linux-getopt bash ldd" +RDEPENDS_${PN}-bash-completion =
-> "bash-completion" + +# This could be optimized a bit, but let's avoid
-> non-booting systems :) +RRECOMMENDS_${PN} = " \ +
-> kernel-modules \ +                     busybox \ +
-> coreutils \ +                    " diff --git
-> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb
-> b/meta-initramfs/recipes-devtools/dracut/dracut_git.bb deleted file mode
-> 100644 index 77c137c..0000000 ---
-> a/meta-initramfs/recipes-devtools/dracut/dracut_git.bb +++ /dev/null @@
-> -1,55 +0,0 @@ -SUMMARY = "Initramfs generator using udev" -DESCRIPTION =
-> "Dracut is an event driven initramfs infrastructure. dracut (the tool) is
-> used to create an initramfs image by copying tools and files from an
-> installed system and combining it with the dracut framework, usually
-> found in /usr/lib/dracut/modules.d." - -LICENSE = "GPLv2" 
-> -LIC_FILES_CHKSUM =
-> "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263" - -PE = "1" -PV =
-> "038" - -# v038 tag -SRCREV = "267a109a81715c8957f14659593deb7b6255d40e" 
-> -SRC_URI = "git://git.kernel.org/pub/scm/boot/dracut/dracut.git" - -S =
-> "${WORKDIR}/git" - -inherit distro_features_check 
-> -REQUIRED_DISTRO_FEATURES = "systemd" - -EXTRA_OECONF =
-> "--prefix=${prefix} \ -                --libdir=${libdir} \ -
-> --datadir=${datadir} \ -                --sysconfdir=${sysconfdir} \ -
-> --sbindir=${sbindir} \ -                --disable-documentation \ -
-> --bindir=${bindir} \ -                --includedir=${includedir} \ -
-> --localstatedir=${localstatedir} \ -
-> --systemdsystemunitdir=${systemd_unitdir}/system" - -do_configure() { -
-> ./configure ${EXTRA_OECONF} -} - -do_install() { -    oe_runmake install
-> DESTDIR=${D} -} - -PACKAGES =+ "${PN}-bash-completion" - 
-> -FILES_${PN}-bash-completion = "${datadir}/bash-completion" - 
-> -FILES_${PN} += " ${libdir}/kernel \ -                ${systemd_unitdir}
-> \ -               " -CONFFILES_${PN} += "${sysconfdir}/dracut.conf" - 
-> -RDEPENDS_${PN} = "systemd findutils cpio util-linux-blkid
-> util-linux-getopt bash ldd" -RDEPENDS_${PN}-bash-completion =
-> "bash-completion" - -# This could be optimized a bit, but let's avoid
-> non-booting systems :) -RRECOMMENDS_${PN} = " \ -
-> kernel-modules \ -                     busybox \ -
-> coreutils \ -                    "
-> 
+ S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFVrJl6MkyGM64RGpERAjOSAJ0eXwXMBI1/z6Gy3xLv/iGi5oMZXgCdGeGG
-VmSTSLZO3ncjQ0jfrdIFa98=
-=hnRL
------END PGP SIGNATURE-----
-
+--
+1.8.3.1
 
